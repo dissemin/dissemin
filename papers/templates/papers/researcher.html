@@ -1,0 +1,32 @@
+{% extends "dissemin/details.html" %}
+
+{% load author %}
+
+{% block headTitle %}
+{{ researcher.first_name }} {{ researcher.last_name }}
+{% endblock %}
+
+{% block bodyTitle %}
+{{ researcher.first_name }} {{ researcher.last_name }}
+{% endblock %}
+
+{% block details %}
+<p><a href="{% url 'department' researcher.department.id %}">{{ researcher.department }}</a></p>
+<p>Member of: {% for team in researcher.groups.all %} <a href="{% url 'group' team.id %}">{{ team.name }}</a> {% endfor %}</p> 
+{% endblock %}
+
+{% block lists %}
+<p>Productions:</p>
+<ul>
+     {% for author in researcher.author_set.all %}
+        <li>
+        {% for a2 in author.paper.author_set.all %}
+            {% if a2.researcher and a2.researcher.id = researcher.id %}
+                <strong>{{ a2 }}</strong>, 
+            {% else %}
+                {{ a2|authorlink }}, 
+            {% endif %}
+        {% endfor %}
+        <a href="{% url 'paper' author.paper.id %}">{{ author.paper.title }}</a></li>    
+     {% endfor %}
+{% endblock %}

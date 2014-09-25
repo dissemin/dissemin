@@ -1,0 +1,22 @@
+{% extends "dissemin/details.html" %}
+
+{% block headTitle %}
+{{ researchgroup.name }}
+{% endblock %}
+
+{% block bodyTitle %}
+{{ researchgroup.name }}
+{% endblock %}
+
+{% block details %}
+<p>Website</p>
+{% endblock %}
+
+{% block lists %}
+<p>Members:</p>
+<ul>
+    {% for person in researchgroup.researcher_set.all %}
+        <li><a href="{% url 'researcher' person.id %}">{{ person }}</li></a>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "dissemin/details.html" %}
+
+{% load author %}
+
+{% block headTitle %}
+{{ paper.title }}
+{% endblock %}
+
+{% block bodyTitle %}
+{{ paper.title }}
+{% endblock %}
+
+{% block lists %}
+<ul>
+{% for author in paper.author_set.all %}
+    <li>{{ author | authorlink }}</li>
+{% endfor %}
+</ul>
+{% endblock %}
+
+{% block details %}
+Data sources:
+<ul>
+{% for record in paper.oairecord_set.all %}
+    <li>{{ record.source }}, {{ record.identifier }}</li>
+{% endfor %}
+</ul>
+{% endblock %}

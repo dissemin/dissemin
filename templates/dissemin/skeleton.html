@@ -1,0 +1,28 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="{% static "style/style.css" %}" />
+    <title>{% block headTitle %}{% endblock %} - Dissemin</title>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="header">
+        </div>
+        <div id="title">
+            <h1>
+            {% block bodyTitle %}
+            {% endblock %}
+            </h1>
+        </div>
+        <div id="content">
+            {% block content %}
+            {% endblock %}
+        <div class="push"></div>
+        </div>
+    </div>
+    <div id="footer">
+        <p>License.</p>
+    </div>
+</body>
+

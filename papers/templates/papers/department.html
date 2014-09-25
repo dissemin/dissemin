@@ -1,0 +1,19 @@
+{% extends "dissemin/details.html" %}
+
+{% block headTitle %}{{ department.name }}{% endblock %}
+{% block bodyTitle %}{{ department.name }}{% endblock %}
+
+{% block lists %}
+<p>Members:</p>
+<ul>
+    {% for person in department.researcher_set.all %}
+    <li><a href="{% url 'researcher' person.id %}">{{ person }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}
+
+{% block details %}
+<p>Head: </p>
+<p>Website: </p>
+{% endblock %}
+
