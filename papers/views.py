@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.template import RequestContext, loader
 from django.views import generic
-from papers.tasks import fetch_items_from_source
+from papers.tasks import *
 from django.utils import timezone
 
 from papers.models import *
@@ -36,8 +36,13 @@ class SourceView(generic.DetailView):
 
 def updateSource(request, pk):
     source = get_object_or_404(OaiSource, pk=pk)
-    fetch_items_from_source.apply_async(eta=timezone.now(), kwargs={'pk':pk})
+    fetch_items_from_oai_source.apply_async(eta=timezone.now(), kwargs={'pk':pk})
     return render(request, 'papers/updateSource.html', {'source':source})
+
+def updateResearcher(request, pk):
+    source = get_object_or_404(Researcher, pk=pk)
+    fetch_dois_for_researcher.apply_async(eta=timezone.now(), kwargs={'pk':pk})
+    return render(request, 'papers/updateResearcher.html', {'researcher':source})
 
 class PaperView(generic.DetailView):
     model = Paper

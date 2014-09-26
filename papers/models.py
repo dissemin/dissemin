@@ -18,14 +18,15 @@ class Researcher(models.Model):
     last_name = models.CharField(max_length=200)
     department = models.ForeignKey(Department)
     groups = models.ManyToManyField(ResearchGroup)
+    last_doi_search = models.DateTimeField(null=True,blank=True)
 
     def __unicode__(self):
         return self.first_name+u' '+self.last_name
 
 # Papers matching one or more researchers
 class Paper(models.Model):
-    title = models.CharField(max_length=500)
-    doi = models.CharField(max_length=1024, blank=True, null=True) # in theory, there is no limit
+    title = models.CharField(max_length=1024)
+    fingerprint = models.CharField(max_length=64)
     def __unicode__(self):
         return self.title
     
@@ -36,6 +37,20 @@ class Author(models.Model):
     researcher = models.ForeignKey(Researcher, blank=True, null=True)
     def __unicode__(self):
         return self.first_name+u' '+self.last_name
+
+# Rough data extracted through dx.doi.org
+class DoiRecord(models.Model):
+    doi = models.CharField(max_length=1024, unique=True) # in theory, there is no limit
+    about = models.ForeignKey(Paper)
+    def __unicode__(self):
+        return self.doi
+
+class DoiStatement(models.Model):
+    record = models.ForeignKey(DoiRecord)
+    prop = models.CharField(max_length=128)
+    value = models.CharField(max_length=1024)
+    def __unicode__(self):
+        return prop+': '+value
 
 # Rough data extracted through OAI-PMH
 class OaiSource(models.Model):
@@ -48,7 +63,7 @@ class OaiSource(models.Model):
 class OaiRecord(models.Model):
     source = models.ForeignKey(OaiSource)
     identifier = models.CharField(max_length=512, unique=True)
-    about = models.ForeignKey(Paper, blank=True, null=True)
+    about = models.ForeignKey(Paper)
     def __unicode__(self):
         return self.identifier
 

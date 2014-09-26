@@ -13,77 +13,17 @@ from oaipmh.datestamp import tolerant_datestamp_to_datetime
 from oaipmh.error import DatestampError, NoRecordsMatchError
 
 from papers.models import *
+from papers.backend import *
+from papers.oai import *
+from papers.doi import to_doi
+from papers.crossref import fetch_papers_from_crossref_by_researcher, convert_to_name_pair
 
 logger = get_task_logger(__name__)
 
-def add_record(record, source, paper=None):
-    """ Add a record (from OAI-PMH) to the local database """
-    header = record[0]
-    identifier = header.identifier()
-
-    matching = OaiRecord.objects.filter(identifier=identifier)
-    if len(matching) > 0:
-        return # Record already saved. TODO : update if information changed
-    r = OaiRecord(source=source,identifier=identifier,about=paper)
-    r.save()
-
-    # For each field
-    for key in record[1]._map:
-        values = record[1]._map[key]
-        for v in values: 
-            kv = OaiStatement(record=r,prop=key,value=v)
-            kv.save()
-
-comma_re = re.compile(r',+')
-
-def parse_author(name):
-    """ Parse an name of the form "Last name, First name" to (first name, last name) """
-    name = comma_re.sub(',',name)
-    first_name = ''
-    last_name = name
-    idx = name.find(',')
-    if idx != -1:
-        last_name = name[:idx]
-        first_name = name[(idx+1):]
-    first_name = first_name.strip()
-    last_name = last_name.strip()
-    return (first_name,last_name)
-
-def lookup_author(author):
-    first_name = author[0]
-    last_name = author[1]
-    results = Researcher.objects.filter(first_name__iexact=first_name,last_name__iexact=last_name)
-    if len(results) > 0:
-        return results[0]
-    else:
-        return author
-
-def get_authors(metadata):
-    """ Get the authors out of a search result """
-    return map(lookup_author, map(parse_author, metadata['creator']))
-
-def get_or_create_paper(metadata, authors):
-    # TODO improve this a lot
-    title = metadata['title'][0]
-    matches = Paper.objects.filter(title__iexact=title)
-    if matches:
-        return matches[0]
-    p = Paper(title=title)
-    p.save()
-    for author in authors:
-        if type(author) == type(()):
-            a = Author(first_name=author[0],last_name=author[1],paper=paper)
-        else:
-            a = Author(first_name=author.first_name,
-                       last_name=author.last_name,
-                       paper=paper,
-                       researcher=author)
-        a.save()
-    return p
 
 @shared_task
-def fetch_items_from_source(pk):
-    source = OaiSource.objects.get(pk=pk)
+def fetch_items_from_oai_source(pk):
+    source = OaiSource.objects.get(pk=pk) # TODO catch exception here
     # Set up the OAI fetcher
     registry = MetadataRegistry()
     registry.registerReader('oai_dc', oai_dc_reader)
@@ -101,7 +41,7 @@ def fetch_items_from_source(pk):
     for record in listRecords:
         metadata = record[1]._map
         pubdate = find_latest_date(record)
-        authors = get_authors(metadata)
+        authors = get_oai_authors(metadata)
 
         # Filter the record
         if all(type(elem) == type(()) for elem in authors):
@@ -109,28 +49,37 @@ def fetch_items_from_source(pk):
         if not 'title' in metadata or metadata['title'] == []:
             continue
 
+        # Find the DOI, if any
+        doi = None
+        for identifier in metadata['identifier']:
+            if not doi:
+                doi = to_doi(identifier)
+
         logger.info('Saving record '+record[0].identifier())
-        paper = get_or_create_paper(metadata, authors)
+        paper = get_or_create_paper(metadata['title'][0], authors, doi)
 
         # Save the record
-        add_record(record, source, paper)
+        add_oai_record(record, source, paper)
    
     # Save the current date
     source.last_update = timezone.now()
     source.save()
 
+@shared_task
+def fetch_dois_for_researcher(pk):
+    researcher = Researcher.objects.get(pk=pk)
+    lst = fetch_papers_from_crossref_by_researcher(researcher)
 
-def find_latest_date(record):
-    """ Find the latest publication date (if any) in a record """
-    latest = None
-    for date in record[1]._map['date']:
-        try:
-            parsed = tolerant_datestamp_to_datetime(date)
-            if latest == None or parsed > latest:
-                latest = parsed
-        except DatestampError:
+    for metadata in lst:
+        if not 'title' in metadata:
+            print "No title, skipping"
+            continue # TODO at many continue, add warnings in logs
+        if not 'DOI' in metadata:
+            print "No DOI, skipping"
             continue
-        except ValueError:
-            continue
-    return latest
+        title = metadata['title']
+        authors = map(convert_to_name_pair, metadata['author'])
+        doi = to_doi(metadata['DOI'])
+        get_or_create_paper(title, authors, doi)
+
 
