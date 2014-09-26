@@ -27,6 +27,8 @@ class Researcher(models.Model):
 class Paper(models.Model):
     title = models.CharField(max_length=1024)
     fingerprint = models.CharField(max_length=64)
+    year = models.IntegerField()
+    last_modified = models.DateField(auto_now=True)
     def __unicode__(self):
         return self.title
     
@@ -37,6 +39,14 @@ class Author(models.Model):
     researcher = models.ForeignKey(Researcher, blank=True, null=True)
     def __unicode__(self):
         return self.first_name+u' '+self.last_name
+
+# Publication of these papers (in journals or conference proceedings)
+class Publication(models.Model):
+    paper = models.ForeignKey(Paper)
+    title = models.CharField(max_length=256)
+    issue = models.IntegerField(blank=True, null=True)
+    volume = models.IntegerField(blank=True, null=True)
+    date = models.DateField(blank=True, null=True)
 
 # Rough data extracted through dx.doi.org
 class DoiRecord(models.Model):

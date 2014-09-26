@@ -1,6 +1,7 @@
 {% extends "dissemin/details.html" %}
 
 {% load author %}
+{% load doi %}
 
 {% block headTitle %}
 {{ paper.title }}
@@ -16,6 +17,7 @@
     <li>{{ author | authorlink }}</li>
 {% endfor %}
 </ul>
+<p>{{ paper.year }}</p>
 {% endblock %}
 
 {% block details %}
@@ -23,6 +25,9 @@ Data sources:
 <ul>
 {% for record in paper.oairecord_set.all %}
     <li>{{ record.source }}, {{ record.identifier }}</li>
+{% endfor %}
+{% for record in paper.doirecord_set.all %}
+    <li>DOI: <a href="{{ record | doi_to_url }}">{{ record.doi }}</a></li>
 {% endfor %}
 </ul>
 {% endblock %}

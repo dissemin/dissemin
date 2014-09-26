@@ -13,12 +13,15 @@ def lookup_author(author):
     else:
         return author
 
-def get_or_create_paper(title, authors, doi):
+def get_or_create_paper(title, authors, year, doi):
     # If a DOI is present, first look up using it
     if doi:
         matches = DoiRecord.objects.filter(doi__exact=doi)
         if matches:
             return matches[0].about
+
+    if not title or not authors or not year:
+        raise ValueError("A title, year and authors have to be provided to create a paper.")
 
     # Otherwise look up the fingerprint
     plain_authors = map(to_plain_author, authors)
@@ -32,7 +35,7 @@ def get_or_create_paper(title, authors, doi):
             d.save()
         return p
 
-    p = Paper(title=title)
+    p = Paper(title=title,year=year,fingerprint=fp)
     p.save()
     for author in authors:
         if type(author) == type(()):

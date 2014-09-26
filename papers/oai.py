@@ -48,18 +48,17 @@ def get_oai_authors(metadata):
     """ Get the authors out of a search result """
     return map(lookup_author, map(parse_oai_author, metadata['creator']))
 
-# TODO : this is unused
-def find_latest_date(record):
+def find_earliest_oai_date(record):
     """ Find the latest publication date (if any) in a record """
-    latest = None
+    earliest = None
     for date in record[1]._map['date']:
         try:
             parsed = tolerant_datestamp_to_datetime(date)
-            if latest == None or parsed > latest:
-                latest = parsed
+            if earliest == None or parsed < earliest:
+                earliest = parsed
         except DatestampError:
             continue
         except ValueError:
             continue
-    return latest
+    return earliest
 

@@ -40,7 +40,6 @@ def fetch_items_from_oai_source(pk):
 
     for record in listRecords:
         metadata = record[1]._map
-        pubdate = find_latest_date(record)
         authors = get_oai_authors(metadata)
 
         # Filter the record
@@ -55,8 +54,16 @@ def fetch_items_from_oai_source(pk):
             if not doi:
                 doi = to_doi(identifier)
 
+        pubdate = find_earliest_oai_date(record)
+        year = None
+        if pubdate:
+            year = pubdate.year
+        else:
+            print "No publication date, skipping"
+            continue
+
         logger.info('Saving record '+record[0].identifier())
-        paper = get_or_create_paper(metadata['title'][0], authors, doi)
+        paper = get_or_create_paper(metadata['title'][0], authors, year, doi) # TODO replace with real pubdate
 
         # Save the record
         add_oai_record(record, source, paper)
@@ -71,15 +78,17 @@ def fetch_dois_for_researcher(pk):
     lst = fetch_papers_from_crossref_by_researcher(researcher)
 
     for metadata in lst:
-        if not 'title' in metadata:
+        if not 'title' in metadata or not metadata['title']:
             print "No title, skipping"
             continue # TODO at many continue, add warnings in logs
-        if not 'DOI' in metadata:
+        if not 'DOI' in metadata or not metadata['DOI']:
             print "No DOI, skipping"
             continue
+
+        
         title = metadata['title']
-        authors = map(convert_to_name_pair, metadata['author'])
+        authors = map(lookup_author, map(convert_to_name_pair, metadata['author']))
         doi = to_doi(metadata['DOI'])
-        get_or_create_paper(title, authors, doi)
+        get_or_create_paper(title, authors, timezone.now(), doi) # TODO replace with real pubdate
 
 
