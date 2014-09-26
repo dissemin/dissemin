@@ -18,13 +18,16 @@
 {% endfor %}
 </ul>
 <p>{{ paper.year }}</p>
+{% for publi in paper.publication_set.all %}
+<p>{{ publi }}</p>
+{% endfor %}
 {% endblock %}
 
 {% block details %}
 Data sources:
 <ul>
 {% for record in paper.oairecord_set.all %}
-    <li>{{ record.source }}, {{ record.identifier }}</li>
+<li>{{ record.source }}, <a href="{{ record.url }}">{{ record.identifier }}</a></li>
 {% endfor %}
 {% for record in paper.doirecord_set.all %}
     <li>DOI: <a href="{{ record | doi_to_url }}">{{ record.doi }}</a></li>

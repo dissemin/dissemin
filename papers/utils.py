@@ -11,6 +11,11 @@ def match_names(a,b):
 def ulower(s):
     return unicode(s).lower()
 
+def nstr(s):
+    if s:
+        return s
+    return ''
+
 split_re = re.compile(r'[ .,]*')
 def split_words(string):
     return filter(lambda x: x != '', split_re.split(string))
@@ -24,7 +29,6 @@ def match_first_names(a,b):
 # TODO : add support for initials ?
 # but this might include a lot of garbage
 
-
 def to_plain_author(author):
     if type(author) == type(()):
         return author
@@ -36,6 +40,7 @@ def create_paper_fingerprint(title, authors):
     title = title.lower().strip()
     title = re.sub(' ', '-', title)
     title = stripped_chars.sub('',title)
+    buf = title
 
     for author in authors:
         # Initials of the given names
@@ -48,9 +53,12 @@ def create_paper_fingerprint(title, authors):
         # Lowercase
         last_words = map(ulower, last_words)
         fp = ('-'.join(initials))+'-'+('-'.join(last_words))
-        m = hashlib.md5()
-        m.update(fp.encode('utf-8'))
-        return m.hexdigest()
+        buf += '/'+fp
+
+    m = hashlib.md5()
+    m.update(buf.encode('utf-8'))
+    print buf # TODO remove me
+    return m.hexdigest()
 
 
 

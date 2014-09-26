@@ -18,7 +18,7 @@
 {% block lists %}
 <p>Productions:</p>
 <ul>
-     {% for author in researcher.author_set.all %}
+     {% for author in researcher.papers_by_year.all %}
         <li>
         {% for a2 in author.paper.author_set.all %}
             {% if a2.researcher and a2.researcher.id = researcher.id %}

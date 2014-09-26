@@ -7,7 +7,7 @@ from oaipmh.datestamp import tolerant_datestamp_to_datetime
 from oaipmh.error import DatestampError, NoRecordsMatchError
 
 from papers.backend import *
-from papers.models import OaiRecord, OaiStatement, OaiSource
+from papers.models import OaiRecord, OaiSource
 
 import re
 
@@ -19,15 +19,17 @@ def add_oai_record(record, source, paper=None):
     matching = OaiRecord.objects.filter(identifier=identifier)
     if len(matching) > 0:
         return # Record already saved. TODO : update if information changed
-    r = OaiRecord(source=source,identifier=identifier,about=paper)
-    r.save()
 
-    # For each field
-    for key in record[1]._map:
-        values = record[1]._map[key]
-        for v in values: 
-            kv = OaiStatement(record=r,prop=key,value=v)
-            kv.save()
+    # Build the URL
+    url = ''
+    if 'identifier' in record[1]._map:
+        for iden in record[1]._map['identifier']:
+            iden = iden.strip()
+            if iden.startswith(source.prefix_identifier):
+                url = source.prefix_url+iden[len(source.prefix_identifier):]
+
+    r = OaiRecord(source=source,identifier=identifier,about=paper,url=url)
+    r.save()
 
 comma_re = re.compile(r',+')
 

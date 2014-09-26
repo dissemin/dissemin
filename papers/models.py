@@ -1,4 +1,5 @@
 from django.db import models
+from papers.utils import nstr
 
 # Information about the researchers and their groups
 class Department(models.Model):
@@ -18,10 +19,19 @@ class Researcher(models.Model):
     last_name = models.CharField(max_length=200)
     department = models.ForeignKey(Department)
     groups = models.ManyToManyField(ResearchGroup)
+
+    # DOI search
     last_doi_search = models.DateTimeField(null=True,blank=True)
+    status = models.CharField(max_length=512)
+    last_status_update = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
         return self.first_name+u' '+self.last_name
+
+    @property
+    def papers_by_year(self):
+        return self.author_set.order_by('-paper__year')
+
 
 # Papers matching one or more researchers
 class Paper(models.Model):
@@ -44,9 +54,25 @@ class Author(models.Model):
 class Publication(models.Model):
     paper = models.ForeignKey(Paper)
     title = models.CharField(max_length=256)
-    issue = models.IntegerField(blank=True, null=True)
-    volume = models.IntegerField(blank=True, null=True)
-    date = models.DateField(blank=True, null=True)
+    issue = models.CharField(max_length=64, blank=True, null=True)
+    volume = models.CharField(max_length=64, blank=True, null=True)
+    pages = models.CharField(max_length=64, blank=True, null=True)
+    date = models.CharField(max_length=128, blank=True, null=True)
+    def __unicode__(self):
+        result = self.title
+        if self.issue or self.volume or self.pages or self.date:
+            result += ', '
+        if self.issue:
+            result += self.issue
+        if self.volume:
+            result += '('+self.volume+')'
+        if self.issue or self.volume:
+            result += ', '
+        if self.pages:
+            result += self.pages+', '
+        if self.date:
+            result += self.date
+        return result
 
 # Rough data extracted through dx.doi.org
 class DoiRecord(models.Model):
@@ -55,33 +81,27 @@ class DoiRecord(models.Model):
     def __unicode__(self):
         return self.doi
 
-class DoiStatement(models.Model):
-    record = models.ForeignKey(DoiRecord)
-    prop = models.CharField(max_length=128)
-    value = models.CharField(max_length=1024)
-    def __unicode__(self):
-        return prop+': '+value
-
 # Rough data extracted through OAI-PMH
 class OaiSource(models.Model):
     url = models.CharField(max_length=300)
     name = models.CharField(max_length=100)
+    prefix_identifier = models.CharField(max_length=256)
+    prefix_url = models.CharField(max_length=256)
+
+    # Fetching properties
     last_update = models.DateTimeField()
+    last_status_update = models.DateTimeField(auto_now=True)
+    status = models.CharField(max_length=512)
     def __unicode__(self):
         return self.name
 
 class OaiRecord(models.Model):
     source = models.ForeignKey(OaiSource)
     identifier = models.CharField(max_length=512, unique=True)
+    url = models.CharField(max_length=1024)
     about = models.ForeignKey(Paper)
     def __unicode__(self):
         return self.identifier
 
-class OaiStatement(models.Model):
-    record = models.ForeignKey(OaiRecord)
-    prop = models.CharField(max_length=128)
-    value = models.CharField(max_length=8192)
-    def __unicode__(self):
-        return self.prop+u': '+self.value
 
 

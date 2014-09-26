@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from papers.utils import to_plain_author, create_paper_fingerprint
-from papers.models import Researcher, Paper, Author, DoiRecord
+from papers.models import Researcher, Paper, Author, DoiRecord, Publication
 
 def lookup_author(author):
     first_name = author[0]
@@ -52,4 +52,20 @@ def get_or_create_paper(title, authors, year, doi):
         d.save()
 
     return p
+
+# Create a Publication entry based on the DOI metadata
+def create_publication(paper, metadata):
+    if not 'container-title' in metadata or not metadata['container-title']:
+        return
+    title = metadata['container-title']
+    volume = metadata.get('volume',None)
+    pages = metadata.get('page',None)
+    issue = metadata.get('issue',None)
+    date_dict = metadata.get('issued',dict())
+    date = '-'.join(map(str,date_dict.get('date-parts',[[]])[0]))
+
+    pub = Publication(title=title, issue=issue, volume=volume, date=date, paper=paper, pages=pages)
+    pub.save()
+    return pub
+
 

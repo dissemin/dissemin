@@ -9,5 +9,6 @@ admin.site.register(Paper)
 admin.site.register(Author)
 admin.site.register(OaiSource)
 admin.site.register(OaiRecord)
-admin.site.register(OaiStatement)
+admin.site.register(DoiRecord)
+admin.site.register(Publication)
 

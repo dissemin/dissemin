@@ -4,10 +4,12 @@ from urllib2 import urlopen, URLError, HTTPError, build_opener
 from urllib import urlencode
 import json
 
+from celery import current_task
+
 from papers.errors import MetadataSourceException
 from papers.doi import to_doi
 from papers.utils import match_names
-from papers.models import DoiRecord, DoiStatement
+from papers.models import DoiRecord
 
 nb_results_per_request = 25
 crossref_timeout = 5
@@ -73,14 +75,6 @@ def save_doi_record(parsed_doi_metadata, paper):
         rec = DoiRecord(doi=doi, about=paper)
         rec.save()
 
-    # TODO Maybe this isn't really necessary.
-
-    # Add statements if no statement is present
-    # matches = DoiStatements.objects.filter(record__id__exact = rec.id)
-    # if not matches:
-    #    for key in metadata:
-            
-
 
 def convert_to_name_pair(dct):
     """ Converts a dictionary {'family':'Last','given':'First'} to ('First','Last') """
@@ -99,6 +93,7 @@ def fetch_papers_from_crossref_by_researcher(researcher):
     query = unicode(researcher)
 
     # While a valid resource where the researcher is author or editor is found
+    count = 0
     while researcher_found:
         researcher_found = False
 
@@ -123,6 +118,11 @@ def fetch_papers_from_crossref_by_researcher(researcher):
             print "Saved."
             researcher_found = True
             results.append(metadata)
+
+            count += 1
+            if count % 10 == 0:
+                current_task.update_state('FETCHING', meta={'nbRecords':count})
+
 
     return results
 
