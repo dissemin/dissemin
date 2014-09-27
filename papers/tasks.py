@@ -18,7 +18,7 @@ from papers.models import *
 from papers.backend import *
 from papers.oai import *
 from papers.doi import to_doi
-from papers.crossref import fetch_papers_from_crossref_by_researcher, convert_to_name_pair
+from papers.crossref import fetch_papers_from_crossref_by_researcher_name, convert_to_name_pair
 
 logger = get_task_logger(__name__)
 
@@ -91,48 +91,49 @@ def fetch_dois_for_researcher(pk):
         researcher.status = 'Fetching DOI list.'
         researcher.save()
 
-        lst = fetch_papers_from_crossref_by_researcher(researcher)
+        for name in researcher.name_set.all():
+            lst = fetch_papers_from_crossref_by_researcher_name(name)
 
-        researcher.status = 'Saving %d records' % len(lst)
-        researcher.save()
+            researcher.status = 'Saving %d records' % len(lst)
+            researcher.save()
 
-        for metadata in lst:
-            if not 'title' in metadata or not metadata['title']:
-                print "No title, skipping"
-                continue # TODO at many continue, add warnings in logs
-            if not 'DOI' in metadata or not metadata['DOI']:
-                print "No DOI, skipping"
-                continue
-            doi = to_doi(metadata['DOI'])
+            for metadata in lst:
+                if not 'title' in metadata or not metadata['title']:
+                    print "No title, skipping"
+                    continue # TODO at many continue, add warnings in logs
+                if not 'DOI' in metadata or not metadata['DOI']:
+                    print "No DOI, skipping"
+                    continue
+                doi = to_doi(metadata['DOI'])
 
-            try:
-                d = DoiRecord.objects.get(doi=doi)
-                paper = d.about
-            except ObjectDoesNotExist:
-                year = None
                 try:
-                    year = int(metadata['issued']['date-parts'][0][0])
-                except Exception:
-                    pass
-                if not year:
+                    d = DoiRecord.objects.get(doi=doi)
+                    paper = d.about
+                except ObjectDoesNotExist:
+                    year = None
                     try:
-                        year = int(metadata['deposited']['date-parts'][0][0])
+                        year = int(metadata['issued']['date-parts'][0][0])
                     except Exception:
                         pass
+                    if not year:
+                        try:
+                            year = int(metadata['deposited']['date-parts'][0][0])
+                        except Exception:
+                            pass
 
-                if not year:
-                    print "No year, skipping"
-                    continue
-                
-                title = metadata['title']
-                authors = map(lookup_author, map(convert_to_name_pair, metadata['author']))
-                paper = get_or_create_paper(title, authors, year, doi)
-                create_publication(paper, metadata)
+                    if not year:
+                        print "No year, skipping"
+                        continue
+                    
+                    title = metadata['title']
+                    authors = map(lookup_author, map(convert_to_name_pair, metadata['author']))
+                    paper = get_or_create_paper(title, authors, year, doi)
+                    create_publication(paper, metadata)
 
         researcher.status = 'OK, %d records processed.' % len(lst)
         researcher.save()
         # TODO remove me"
-    except Exception as e:
+    except ValueError as e:
         researcher.status = 'ERROR: %s' % unicode(e)
         researcher.save()
         raise e

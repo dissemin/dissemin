@@ -2,12 +2,12 @@
 from __future__ import unicode_literals
 
 from papers.utils import to_plain_author, create_paper_fingerprint
-from papers.models import Researcher, Paper, Author, DoiRecord, Publication
+from papers.models import *
 
 def lookup_author(author):
     first_name = author[0]
     last_name = author[1]
-    results = Researcher.objects.filter(first_name__iexact=first_name,last_name__iexact=last_name)
+    results = Name.objects.filter(first__iexact=first_name,last__iexact=last_name)
     if len(results) > 0:
         return results[0]
     else:
@@ -41,10 +41,10 @@ def get_or_create_paper(title, authors, year, doi):
         if type(author) == type(()):
             a = Author(first_name=author[0],last_name=author[1],paper=p)
         else:
-            a = Author(first_name=author.first_name,
-                       last_name=author.last_name,
+            a = Author(first_name=author.first,
+                       last_name=author.last,
                        paper=p,
-                       researcher=author)
+                       researcher=author.researcher) # TODO an author should refer to the name, not researcher
         a.save()
 
     if doi:

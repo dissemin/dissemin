@@ -15,8 +15,6 @@ class ResearchGroup(models.Model):
         return self.name
 
 class Researcher(models.Model):
-    first_name = models.CharField(max_length=200)
-    last_name = models.CharField(max_length=200)
     department = models.ForeignKey(Department)
     groups = models.ManyToManyField(ResearchGroup)
 
@@ -26,12 +24,27 @@ class Researcher(models.Model):
     last_status_update = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
-        return self.first_name+u' '+self.last_name
+        return 'ThisIsATest'
 
     @property
     def papers_by_year(self):
         return self.author_set.order_by('-paper__year')
+    @property
+    def names(self):
+        return self.name_set.order_by('id')
+    @property
+    def name(self):
+        return self.names.first()
+    @property
+    def aka(self):
+        return self.names[:2]
 
+class Name(models.Model):
+    researcher = models.ForeignKey(Researcher)
+    first = models.CharField(max_length=256)
+    last = models.CharField(max_length=256)
+    def __unicode__(self):
+        return '%s %s' % (self.first,self.last)
 
 # Papers matching one or more researchers
 class Paper(models.Model):

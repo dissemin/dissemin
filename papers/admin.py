@@ -5,6 +5,7 @@ from papers.models import *
 admin.site.register(Department)
 admin.site.register(ResearchGroup)
 admin.site.register(Researcher)
+admin.site.register(Name)
 admin.site.register(Paper)
 admin.site.register(Author)
 admin.site.register(OaiSource)

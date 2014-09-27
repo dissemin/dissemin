@@ -83,13 +83,13 @@ def convert_to_name_pair(dct):
         return ('',dct['family'])
     return None
 
-def fetch_papers_from_crossref_by_researcher(researcher):
+def fetch_papers_from_crossref_by_researcher_name(name):
     researcher_found = True
     batch_number = 1
     results = []
 
     # The search term sent to CrossRef is the name of the researcher
-    query = unicode(researcher)
+    query = unicode(name)
 
     # While a valid resource where the researcher is author or editor is found
     count = 0
@@ -111,7 +111,7 @@ def fetch_papers_from_crossref_by_researcher(researcher):
 
             for a in authors:
                 print a[0]+' '+a[1]
-            matching_authors = filter(lambda a: match_names(a,(researcher.first_name,researcher.last_name)), authors)
+            matching_authors = filter(lambda a: match_names(a,(name.first,name.last)), authors)
             if not matching_authors:
                 continue
             print "Saved."
@@ -121,7 +121,6 @@ def fetch_papers_from_crossref_by_researcher(researcher):
             count += 1
             if count % 10 == 0:
                 current_task.update_state('FETCHING', meta={'nbRecords':count})
-
 
     return results
 

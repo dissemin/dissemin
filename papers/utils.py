@@ -33,7 +33,7 @@ def to_plain_author(author):
     if type(author) == type(()):
         return author
     else:
-        return (author.first_name,author.last_name)
+        return (author.first,author.last)
 
 stripped_chars = re.compile(r'[^- a-z0-9]')
 def create_paper_fingerprint(title, authors):
