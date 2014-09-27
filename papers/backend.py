@@ -31,7 +31,7 @@ def get_or_create_paper(title, authors, year, doi):
         p = matches[0]
         # Add the DOI to the existing paper
         if doi:
-            d = DoiRecord(doi=doi, about=p) # TODO fetch this DOI ?
+            d = DoiRecord(doi=doi, about=p)
             d.save()
         return p
 
@@ -48,7 +48,7 @@ def get_or_create_paper(title, authors, year, doi):
         a.save()
 
     if doi:
-        d = DoiRecord(doi=doi, about=p) # TODO fetch this DOI ?
+        d = DoiRecord(doi=doi, about=p)
         d.save()
 
     return p

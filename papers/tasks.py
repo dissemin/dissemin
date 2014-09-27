@@ -43,7 +43,7 @@ def fetch_items_from_oai_source(pk):
         for record in listRecords:
             # Update task status
             if count % 100:
-                source.status = str(count)+' records processed' # TODO make all these strings more idiomatic
+                source.status = '%d records processed' % count
                 source.save()
 
             metadata = record[1]._map
@@ -69,14 +69,14 @@ def fetch_items_from_oai_source(pk):
                 print "No publication date, skipping"
                 continue
 
-            logger.info('Saving record '+record[0].identifier())
+            logger.info('Saving record %s' % record[0].identifier())
             paper = get_or_create_paper(metadata['title'][0], authors, year, doi) # TODO replace with real pubdate
             # Save the record
             add_oai_record(record, source, paper)
             count += 1
        
         # Save the current date
-        source.status = 'OK, '+str(count)+' records fetched.'
+        source.status = 'OK, %d records fetched.' % count
         source.last_update = timezone.now()
         source.save()
     except Exception as e:
@@ -93,7 +93,7 @@ def fetch_dois_for_researcher(pk):
 
         lst = fetch_papers_from_crossref_by_researcher(researcher)
 
-        researcher.status = 'Saving '+str(len(lst))+' records'
+        researcher.status = 'Saving %d records' % len(lst)
         researcher.save()
 
         for metadata in lst:
@@ -129,11 +129,11 @@ def fetch_dois_for_researcher(pk):
                 paper = get_or_create_paper(title, authors, year, doi)
                 create_publication(paper, metadata)
 
-        researcher.status = 'OK, '+str(len(lst))+' records processed.'
+        researcher.status = 'OK, %d records processed.' % len(lst)
         researcher.save()
-        # TODO remove me
+        # TODO remove me"
     except Exception as e:
-        researcher.status = 'ERROR: '+unicode(e)
+        researcher.status = 'ERROR: %s' % unicode(e)
         researcher.save()
         raise e
 

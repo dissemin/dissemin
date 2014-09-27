@@ -36,8 +36,7 @@ def fetch_list_of_DOIs_from_crossref(query, page, number):
         return result
     except ValueError as e:
         raise MetadataSourceException('Error while fetching metadata:\nInvalid response.\n'+
-                'URL was: '+request+'\n'+
-                'JSON parser error was: '+str(e))
+                'URL was: %s\nJSON parser error was: %s' % (request,unicode(e))) 
     except URLError as e:
         raise MetadataSourceException('Error while fetching metadata:\nUnable to open the URL: '+
                 request+'\nError was: '+str(e))
@@ -70,7 +69,7 @@ def save_doi_record(parsed_doi_metadata, paper):
     if matches:
         rec = matches[0]
         # TODO if the current paper is different from the argument
-        # MERGE THE TWO
+        # TODO MERGE THE TWO
     else:
         rec = DoiRecord(doi=doi, about=paper)
         rec.save()

@@ -35,11 +35,12 @@ def to_plain_author(author):
     else:
         return (author.first_name,author.last_name)
 
-stripped_chars = re.compile(r'[^ a-z0-9]')
+stripped_chars = re.compile(r'[^- a-z0-9]')
 def create_paper_fingerprint(title, authors):
-    title = title.lower().strip()
-    title = re.sub(' ', '-', title)
+    title = title.lower()
     title = stripped_chars.sub('',title)
+    title = title.strip()
+    title = re.sub(' ', '-', title)
     buf = title
 
     for author in authors:
