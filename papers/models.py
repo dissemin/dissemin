@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.exceptions import ObjectDoesNotExist
 from papers.utils import nstr
 
 # Information about the researchers and their groups
@@ -16,15 +17,19 @@ class ResearchGroup(models.Model):
 
 class Researcher(models.Model):
     department = models.ForeignKey(Department)
-    groups = models.ManyToManyField(ResearchGroup)
+    groups = models.ManyToManyField(ResearchGroup, blank=True)
 
     # DOI search
     last_doi_search = models.DateTimeField(null=True,blank=True)
-    status = models.CharField(max_length=512)
+    status = models.CharField(max_length=512, blank=True, null=True)
     last_status_update = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
-        return 'ThisIsATest'
+        try:
+            first_name = Name.objects.filter(researcher_id=self.id).order_by('id').first()
+            return unicode(first_name)
+        except ObjectDoesNotExist:
+            return "Anonymous researcher"
 
     @property
     def papers_by_year(self):
