@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 import re
 import hashlib
+import unicodedata
 
 def match_names(a,b):
     (firstA,lastA) = a
@@ -15,6 +16,9 @@ def nstr(s):
     if s:
         return s
     return ''
+
+def remove_diacritics(s):
+    return unicodedata.normalize('NFKD', s).encode('ASCII', 'ignore')
 
 split_re = re.compile(r'[ .,]*')
 def split_words(string):
@@ -54,8 +58,7 @@ def create_paper_fingerprint(title, authors):
         buf += '/'+fp
 
     m = hashlib.md5()
-    m.update(buf.encode('utf-8'))
-    print buf # TODO remove me
+    m.update(remove_diacritics(buf.encode('utf-8')))
     return m.hexdigest()
 
 
