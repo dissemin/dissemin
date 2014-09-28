@@ -50,7 +50,7 @@ def fetch_items_from_oai_source(pk):
             authors = get_oai_authors(metadata)
 
             # Filter the record
-            if all(type(elem) == type(()) for elem in authors):
+            if all(not elem.is_known for elem in authors):
                 continue
             if not 'title' in metadata or metadata['title'] == []:
                 continue
@@ -90,6 +90,7 @@ def fetch_dois_for_researcher(pk):
     try:
         researcher.status = 'Fetching DOI list.'
         researcher.save()
+        nb_records = 0
 
         for name in researcher.name_set.all():
             lst = fetch_papers_from_crossref_by_researcher_name(name)
@@ -126,11 +127,12 @@ def fetch_dois_for_researcher(pk):
                         continue
                     
                     title = metadata['title']
-                    authors = map(lookup_author, map(convert_to_name_pair, metadata['author']))
+                    authors = map(lookup_name, map(convert_to_name_pair, metadata['author']))
                     paper = get_or_create_paper(title, authors, year, doi)
                     create_publication(paper, metadata)
+            nb_records += len(lst)
 
-        researcher.status = 'OK, %d records processed.' % len(lst)
+        researcher.status = 'OK, %d records processed.' % nb_records
         researcher.save()
         # TODO remove me"
     except ValueError as e:

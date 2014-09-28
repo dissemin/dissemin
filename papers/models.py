@@ -25,31 +25,38 @@ class Researcher(models.Model):
     last_status_update = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
-        try:
-            first_name = Name.objects.filter(researcher_id=self.id).order_by('id').first()
+        first_name = Name.objects.filter(researcher_id=self.id).order_by('id').first()
+        if first_name:
             return unicode(first_name)
-        except ObjectDoesNotExist:
-            return "Anonymous researcher"
+        return "Anonymous researcher"
 
     @property
-    def papers_by_year(self):
-        return self.author_set.order_by('-paper__year')
+    def authors_by_year(self):
+        return Author.objects.filter(name__researcher_id=self.id).order_by('-paper__year')
     @property
     def names(self):
         return self.name_set.order_by('id')
     @property
     def name(self):
-        return self.names.first()
+        name = self.names.first()
+        if name:
+            return name
+        else:
+            return "Anonymous researcher"
     @property
     def aka(self):
         return self.names[:2]
 
 class Name(models.Model):
-    researcher = models.ForeignKey(Researcher)
+    researcher = models.ForeignKey(Researcher, blank=True, null=True)
     first = models.CharField(max_length=256)
     last = models.CharField(max_length=256)
+    unique_together = ('first','last')# TODO Two researchers with the same name is not supported
     def __unicode__(self):
         return '%s %s' % (self.first,self.last)
+    @property
+    def is_known(self):
+        return self.researcher != None
 
 # Papers matching one or more researchers
 class Paper(models.Model):
@@ -62,11 +69,9 @@ class Paper(models.Model):
     
 class Author(models.Model):
     paper = models.ForeignKey(Paper)
-    first_name = models.CharField(max_length=200)
-    last_name = models.CharField(max_length=200)
-    researcher = models.ForeignKey(Researcher, blank=True, null=True)
+    name = models.ForeignKey(Name)
     def __unicode__(self):
-        return self.first_name+u' '+self.last_name
+        return unicode(self.name)
 
 # Publication of these papers (in journals or conference proceedings)
 class Publication(models.Model):

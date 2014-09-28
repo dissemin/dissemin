@@ -29,11 +29,8 @@ def match_first_names(a,b):
 # TODO : add support for initials ?
 # but this might include a lot of garbage
 
-def to_plain_author(author):
-    if type(author) == type(()):
-        return author
-    else:
-        return (author.first,author.last)
+def to_plain_name(name):
+    return (name.first,name.last)
 
 stripped_chars = re.compile(r'[^- a-z0-9]')
 def create_paper_fingerprint(title, authors):

@@ -18,10 +18,10 @@
 {% block lists %}
 <p>Productions:</p>
 <ul>
-     {% for author in researcher.papers_by_year.all %}
+     {% for author in researcher.authors_by_year.all %}
         <li>
         {% for a2 in author.paper.author_set.all %}
-            {% if a2.researcher and a2.researcher.id = researcher.id %}
+            {% if a2.name.is_known and a2.name.researcher.id = researcher.id %}
                 <strong>{{ a2 }}</strong>, 
             {% else %}
                 {{ a2|authorlink }}, 

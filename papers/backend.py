@@ -1,31 +1,34 @@
 # -*- encoding: utf-8 -*-
 from __future__ import unicode_literals
 
-from papers.utils import to_plain_author, create_paper_fingerprint
+from django.core.exceptions import ObjectDoesNotExist
+
+from papers.utils import to_plain_name, create_paper_fingerprint
 from papers.models import *
 
-def lookup_author(author):
-    first_name = author[0]
-    last_name = author[1]
-    results = Name.objects.filter(first__iexact=first_name,last__iexact=last_name)
-    if len(results) > 0:
-        return results[0]
-    else:
-        return author
+def lookup_name(author_name):
+    first_name = author_name[0]
+    last_name = author_name[1]
+    name = Name.objects.filter(first__iexact=first_name, last__iexact=last_name).first()
+    if name:
+        return name
+    name = Name(first=first_name, last=last_name)
+    name.save()
+    return name
 
-def get_or_create_paper(title, authors, year, doi):
+def get_or_create_paper(title, author_names, year, doi):
     # If a DOI is present, first look up using it
     if doi:
         matches = DoiRecord.objects.filter(doi__exact=doi)
         if matches:
             return matches[0].about
 
-    if not title or not authors or not year:
+    if not title or not author_names or not year:
         raise ValueError("A title, year and authors have to be provided to create a paper.")
 
     # Otherwise look up the fingerprint
-    plain_authors = map(to_plain_author, authors)
-    fp = create_paper_fingerprint(title, plain_authors)
+    plain_names = map(to_plain_name, author_names)
+    fp = create_paper_fingerprint(title, plain_names)
     matches = Paper.objects.filter(fingerprint__exact=fp)
     if matches:
         p = matches[0]
@@ -37,14 +40,8 @@ def get_or_create_paper(title, authors, year, doi):
 
     p = Paper(title=title,year=year,fingerprint=fp)
     p.save()
-    for author in authors:
-        if type(author) == type(()):
-            a = Author(first_name=author[0],last_name=author[1],paper=p)
-        else:
-            a = Author(first_name=author.first,
-                       last_name=author.last,
-                       paper=p,
-                       researcher=author.researcher) # TODO an author should refer to the name, not researcher
+    for author_name in author_names:
+        a = Author(name=author_name, paper=p)
         a.save()
 
     if doi:
