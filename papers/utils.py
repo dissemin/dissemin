@@ -12,6 +12,12 @@ def match_names(a,b):
 def ulower(s):
     return unicode(s).lower()
 
+def isupper(s):
+    if type(s) == type(u''):
+        return unicode.isupper(s)
+    else:
+        return str.isupper(s)
+
 def nstr(s):
     if s:
         return s
@@ -23,6 +29,12 @@ def remove_diacritics(s):
 split_re = re.compile(r'[ .,]*')
 def split_words(string):
     return filter(lambda x: x != '', split_re.split(string))
+
+def recapitalize_words(s):
+    """ Turns every word fully capitalized into an uncapitalized word (except for the first character) """
+    words = s.split()
+    words = map(lambda w: w[0]+w[1:].lower() if all(map(isupper, w)) else w, words)
+    return ' '.join(words)
 
 def match_first_names(a,b):
     partsA = split_words(a)

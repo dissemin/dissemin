@@ -8,7 +8,7 @@ from celery import current_task
 
 from papers.errors import MetadataSourceException
 from papers.doi import to_doi
-from papers.utils import match_names
+from papers.utils import match_names, recapitalize_words
 from papers.models import DoiRecord
 
 nb_results_per_request = 25
@@ -77,11 +77,14 @@ def save_doi_record(parsed_doi_metadata, paper):
 
 def convert_to_name_pair(dct):
     """ Converts a dictionary {'family':'Last','given':'First'} to ('First','Last') """
+    result = None
     if 'family' in dct and 'given' in dct:
-        return (dct['given'],dct['family'])
-    if 'family' in dct: # The 'Arvind' case
-        return ('',dct['family'])
-    return None
+        result = (dct['given'],dct['family'])
+    elif 'family' in dct: # The 'Arvind' case
+        result = ('',dct['family'])
+    if result:
+        result = (recapitalize_words(result[0]), recapitalize_words(result[1]))
+    return result
 
 def fetch_papers_from_crossref_by_researcher_name(name):
     researcher_found = True
