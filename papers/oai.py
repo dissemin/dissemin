@@ -47,8 +47,8 @@ def parse_oai_author(name):
     return (first_name,last_name)
 
 def get_oai_authors(metadata):
-    """ Get the authors out of a search result """
-    return map(lookup_author, map(parse_oai_author, metadata['creator']))
+    """ Get the authors names out of a search result """
+    return map(lookup_name, map(parse_oai_author, metadata['creator']))
 
 def find_earliest_oai_date(record):
     """ Find the latest publication date (if any) in a record """

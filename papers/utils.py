@@ -58,7 +58,7 @@ def create_paper_fingerprint(title, authors):
         buf += '/'+fp
 
     m = hashlib.md5()
-    m.update(remove_diacritics(buf.encode('utf-8')))
+    m.update(remove_diacritics(buf))
     return m.hexdigest()
 
 

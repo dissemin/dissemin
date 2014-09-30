@@ -110,11 +110,12 @@ class OaiSource(models.Model):
     name = models.CharField(max_length=100)
     prefix_identifier = models.CharField(max_length=256)
     prefix_url = models.CharField(max_length=256)
+    restrict_set = models.CharField(max_length=256, null=True, blank=True)
 
     # Fetching properties
     last_update = models.DateTimeField()
     last_status_update = models.DateTimeField(auto_now=True)
-    status = models.CharField(max_length=512)
+    status = models.CharField(max_length=512, null=True, blank=True)
     def __unicode__(self):
         return self.name
 

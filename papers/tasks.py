@@ -33,8 +33,12 @@ def fetch_items_from_oai_source(pk):
         client.updateGranularity()
 
         start_date = source.last_update.replace(tzinfo=None)
+        restrict_set = source.restrict_set
         try:
-            listRecords = client.listRecords(metadataPrefix='oai_dc', from_= start_date, set="ENS-PARIS")
+            if restrict_set:
+                listRecords = client.listRecords(metadataPrefix='oai_dc', from_= start_date, set=restrict_set)
+            else:
+                listRecords = client.listRecords(metadataPrefix='oai_dc', from_= start_date)
             # TODO make it less naive, for instance convert to UTC beforehand
         except NoRecordsMatchError:
             listRecords = []
