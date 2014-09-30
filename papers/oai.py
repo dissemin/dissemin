@@ -8,7 +8,7 @@ from oaipmh.error import DatestampError, NoRecordsMatchError
 
 from papers.backend import *
 from papers.models import OaiRecord, OaiSource
-from papers.utils import recapitalize_words
+from papers.utils import normalize_name_words
 
 import re
 
@@ -36,7 +36,7 @@ comma_re = re.compile(r',+')
 
 def parse_oai_author(name):
     """ Parse an name of the form "Last name, First name" to (first name, last name) """
-    name = recapitalize_words(name)
+    name = normalize_name_words(name)
     name = comma_re.sub(',',name)
     first_name = ''
     last_name = name

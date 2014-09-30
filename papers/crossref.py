@@ -8,7 +8,7 @@ from celery import current_task
 
 from papers.errors import MetadataSourceException
 from papers.doi import to_doi
-from papers.utils import match_names, recapitalize_words
+from papers.utils import match_names, normalize_name_words
 from papers.models import DoiRecord
 
 nb_results_per_request = 25
@@ -83,7 +83,7 @@ def convert_to_name_pair(dct):
     elif 'family' in dct: # The 'Arvind' case
         result = ('',dct['family'])
     if result:
-        result = (recapitalize_words(result[0]), recapitalize_words(result[1]))
+        result = (normalize_name_words(result[0]), normalize_name_words(result[1]))
     return result
 
 def fetch_papers_from_crossref_by_researcher_name(name):

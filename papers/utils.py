@@ -30,11 +30,17 @@ split_re = re.compile(r'[ .,]*')
 def split_words(string):
     return filter(lambda x: x != '', split_re.split(string))
 
-def recapitalize_words(s):
-    """ Turns every word fully capitalized into an uncapitalized word (except for the first character) """
-    words = s.split()
-    words = map(lambda w: w[0]+w[1:].lower() if all(map(isupper, w)) else w, words)
+initial_re = re.compile(r'[A-Z](\.,;)*$')
+def normalize_name_words(w):
+    """ If it is an initial, ensure it is of the form "T.", and recapitalize it. """
+    words = w.split()
+    words = map(recapitalize_word, words)
+    words = map(lambda w: w[0]+'.' if initial_re.match(w) else w, words)
     return ' '.join(words)
+
+def recapitalize_word(w):
+    """ Turns every word fully capitalized into an uncapitalized word (except for the first character) """
+    return w[0]+w[1:].lower() if all(map(isupper, w)) else w
 
 def match_first_names(a,b):
     partsA = split_words(a)
