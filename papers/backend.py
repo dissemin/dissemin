@@ -5,6 +5,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from papers.utils import to_plain_name, create_paper_fingerprint
 from papers.models import *
+from papers.doi import to_doi
 
 def lookup_name(author_name):
     first_name = author_name[0]
@@ -16,12 +17,12 @@ def lookup_name(author_name):
     name.save()
     return name
 
-def get_or_create_paper(title, author_names, year, doi):
+def get_or_create_paper(title, author_names, year, doi=None):
     # If a DOI is present, first look up using it
     if doi:
-        matches = DoiRecord.objects.filter(doi__exact=doi)
+        matches = Publications.objects.filter(doi__exact=doi)
         if matches:
-            return matches[0].about
+            return matches[0].paper
 
     if not title or not author_names or not year:
         raise ValueError("A title, year and authors have to be provided to create a paper.")
@@ -33,9 +34,7 @@ def get_or_create_paper(title, author_names, year, doi):
     if matches:
         p = matches[0]
         # Add the DOI to the existing paper
-        if doi:
-            d = DoiRecord(doi=doi, about=p)
-            d.save()
+        # TODO create Publication !!!!!! TODO TODO TODO
         return p
 
     p = Paper(title=title,year=year,fingerprint=fp)
@@ -44,9 +43,8 @@ def get_or_create_paper(title, author_names, year, doi):
         a = Author(name=author_name, paper=p)
         a.save()
 
-    if doi:
-        d = DoiRecord(doi=doi, about=p)
-        d.save()
+    # if doi:
+    # TODO: create Publication !!!!! TODODDODODO TODO
 
     return p
 
@@ -60,8 +58,13 @@ def create_publication(paper, metadata):
     issue = metadata.get('issue',None)
     date_dict = metadata.get('issued',dict())
     date = '-'.join(map(str,date_dict.get('date-parts',[[]])[0]))
+    publisher = metadata.get('publisher', None)
+    doi = to_doi(metadata.get('DOI',None))
+    pubtype = 'article'
 
-    pub = Publication(title=title, issue=issue, volume=volume, date=date, paper=paper, pages=pages)
+    pub = Publication(title=title, issue=issue, volume=volume,
+            date=date, paper=paper, pages=pages,
+            doi=doi, pubtype=pubtype, publisher=publisher)
     pub.save()
     return pub
 

@@ -19,7 +19,11 @@
 </ul>
 <p>{{ paper.year }}</p>
 {% for publi in paper.publication_set.all %}
-<p>{{ publi }}</p>
+<p>{{ publi }}
+{% if publi.doi %}
+    (<a href="{{ publi | doi_to_url }}">DOI</a>)
+{% endif %}
+</p>
 {% endfor %}
 {% endblock %}
 
@@ -29,8 +33,8 @@ Data sources:
 {% for record in paper.oairecord_set.all %}
 <li>{{ record.source }}, <a href="{{ record.url }}">{{ record.identifier }}</a></li>
 {% endfor %}
-{% for record in paper.doirecord_set.all %}
-    <li>DOI: <a href="{{ record | doi_to_url }}">{{ record.doi }}</a></li>
+{% for publi in paper.publication_set.all %}
+    <li><a href="{{ publi | doi_to_url }}">{{ publi.publisher|default:"Publisher" }}</a> via DOI</li>
 {% endfor %}
 </ul>
 {% endblock %}

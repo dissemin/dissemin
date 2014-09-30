@@ -16,10 +16,6 @@ class AuthorInline(admin.TabularInline):
     model = Author
     extra = 0
 
-class DoiInline(admin.TabularInline):
-    model = DoiRecord
-    extra = 0
-
 class OaiInline(admin.TabularInline):
     model = OaiRecord
     extra = 0
@@ -30,7 +26,7 @@ class PublicationInline(admin.StackedInline):
 
 class PaperAdmin(admin.ModelAdmin):
     fields = ['title', 'year']
-    inlines = [AuthorInline, PublicationInline, DoiInline, OaiInline]
+    inlines = [AuthorInline, PublicationInline, OaiInline]
 
 admin.site.register(Department)
 admin.site.register(ResearchGroup)

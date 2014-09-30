@@ -76,11 +76,14 @@ class Author(models.Model):
 # Publication of these papers (in journals or conference proceedings)
 class Publication(models.Model):
     paper = models.ForeignKey(Paper)
+    pubtype = models.CharField(max_length=64)
     title = models.CharField(max_length=256)
     issue = models.CharField(max_length=64, blank=True, null=True)
     volume = models.CharField(max_length=64, blank=True, null=True)
     pages = models.CharField(max_length=64, blank=True, null=True)
     date = models.CharField(max_length=128, blank=True, null=True)
+    publisher = models.CharField(max_length=256, blank=True, null=True)
+    doi = models.CharField(max_length=1024, unique=True, blank=True, null=True) # in theory, there is no limit
     def __unicode__(self):
         result = self.title
         if self.issue or self.volume or self.pages or self.date:
@@ -96,13 +99,6 @@ class Publication(models.Model):
         if self.date:
             result += self.date
         return result
-
-# Rough data extracted through dx.doi.org
-class DoiRecord(models.Model):
-    doi = models.CharField(max_length=1024, unique=True) # in theory, there is no limit
-    about = models.ForeignKey(Paper)
-    def __unicode__(self):
-        return self.doi
 
 # Rough data extracted through OAI-PMH
 class OaiSource(models.Model):

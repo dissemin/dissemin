@@ -9,7 +9,7 @@ from celery import current_task
 from papers.errors import MetadataSourceException
 from papers.doi import to_doi
 from papers.utils import match_names, normalize_name_words
-from papers.models import DoiRecord
+from papers.models import Publication
 
 nb_results_per_request = 25
 crossref_timeout = 5
@@ -60,20 +60,6 @@ def fetch_metadata_by_DOI(doi):
     except ValueError as e:
         raise MetadataSourceException('Error while fetching DOI metadata:\nInvalid JSON response.\n'+
                 'Error: '+str(e))
-
-def save_doi_record(parsed_doi_metadata, paper):
-    metadata = parsed_doi_metadata
-
-    doi = to_doi(metadata['doi'])
-    matches = DoiRecord.objects.filter(doi__exact = doi)
-    if matches:
-        rec = matches[0]
-        # TODO if the current paper is different from the argument
-        # TODO MERGE THE TWO
-    else:
-        rec = DoiRecord(doi=doi, about=paper)
-        rec.save()
-
 
 def convert_to_name_pair(dct):
     """ Converts a dictionary {'family':'Last','given':'First'} to ('First','Last') """

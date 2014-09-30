@@ -88,6 +88,7 @@ def fetch_items_from_oai_source(pk):
         source.save()
         raise
 
+
 @shared_task
 def fetch_dois_for_researcher(pk):
     researcher = Researcher.objects.get(pk=pk)
@@ -112,8 +113,8 @@ def fetch_dois_for_researcher(pk):
                 doi = to_doi(metadata['DOI'])
 
                 try:
-                    d = DoiRecord.objects.get(doi=doi)
-                    paper = d.about
+                    d = Publication.objects.get(doi=doi)
+                    paper = d.paper
                 except ObjectDoesNotExist:
                     year = None
                     try:
@@ -132,7 +133,8 @@ def fetch_dois_for_researcher(pk):
                     
                     title = metadata['title']
                     authors = map(lookup_name, map(convert_to_name_pair, metadata['author']))
-                    paper = get_or_create_paper(title, authors, year, doi)
+                    paper = get_or_create_paper(title, authors, year) # don't let this function
+                    # create the publication, because it would re-fetch the metadata from CrossRef
                     create_publication(paper, metadata)
             nb_records += len(lst)
 

@@ -27,6 +27,8 @@
                 {{ a2|authorlink }}, 
             {% endif %}
         {% endfor %}
-        <a href="{% url 'paper' author.paper.id %}">{{ author.paper.title }}</a></li>    
+        <a href="{% url 'paper' author.paper.id %}">{{ author.paper.title }}</a>, {{ author.paper.year }}</li>    
+     {% empty %}
+     <p>No production found.</p>
      {% endfor %}
 {% endblock %}
