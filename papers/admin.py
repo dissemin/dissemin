@@ -35,6 +35,7 @@ class PaperAdmin(admin.ModelAdmin):
 admin.site.register(Department)
 admin.site.register(ResearchGroup)
 admin.site.register(Researcher, ResearcherAdmin)
+admin.site.register(Name)
 admin.site.register(Paper, PaperAdmin)
 admin.site.register(OaiSource)
 
