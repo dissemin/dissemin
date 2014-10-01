@@ -16,9 +16,9 @@
 {% endblock %}
 
 {% block lists %}
-<p>Productions:</p>
 <ul>
      {% for author in researcher.authors_by_year.all %}
+     {% ifchanged author.paper.year %}</ul>{{ author.paper.year }}<ul>{% endifchanged %}
         <li>
         {% for a2 in author.paper.author_set.all %}
             {% if a2.name.is_known and a2.name.researcher.id = researcher.id %}
@@ -27,7 +27,7 @@
                 {{ a2|authorlink }}, 
             {% endif %}
         {% endfor %}
-        <a href="{% url 'paper' author.paper.id %}">{{ author.paper.title }}</a>, {{ author.paper.year }}</li>    
+        <a href="{% url 'paper' author.paper.id %}">{{ author.paper.title }}</a></li>    
      {% empty %}
      <p>No production found.</p>
      {% endfor %}
