@@ -1,6 +1,7 @@
 # -*- encoding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
 import re
+from urllib2 import urlopen
 
 from celery import shared_task
 from celery.utils.log import get_task_logger
@@ -19,8 +20,22 @@ from papers.backend import *
 from papers.oai import *
 from papers.doi import to_doi
 from papers.crossref import fetch_papers_from_crossref_by_researcher_name, convert_to_name_pair
+from papers.zotero import check_full_text_availability
 
 logger = get_task_logger(__name__)
+
+@shared_task
+def check_full_text_for_publication(pk):
+    """
+    Check using Zotero's translation-server if the full text is available from the publisher.
+    """
+    publication = Publication.objects.get(pk=pk)
+    available = None # Assume we failed to check if it's available
+    if publication.doi:
+        available = check_full_text_availability('http://dx.doi.org/'+publication.doi)
+    publication.available = available
+    publication.save()
+
 
 @shared_task
 def fetch_items_from_oai_source(pk):
@@ -135,7 +150,8 @@ def fetch_dois_for_researcher(pk):
                     authors = map(lookup_name, map(convert_to_name_pair, metadata['author']))
                     paper = get_or_create_paper(title, authors, year) # don't let this function
                     # create the publication, because it would re-fetch the metadata from CrossRef
-                    create_publication(paper, metadata)
+                    pub = create_publication(paper, metadata)
+                    check_full_text_for_publication.apply_async(eta=timezone.now(), kwargs={'pk':pub.id})
             nb_records += len(lst)
 
         researcher.status = 'OK, %d records processed.' % nb_records

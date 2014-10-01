@@ -34,7 +34,7 @@ Data sources:
 <li>{{ record.source }}, <a href="{{ record.url }}">{{ record.identifier }}</a></li>
 {% endfor %}
 {% for publi in paper.publication_set.all %}
-    <li><a href="{{ publi | doi_to_url }}">{{ publi.publisher|default:"Publisher" }}</a> via DOI</li>
+    <li><a href="{{ publi | doi_to_url }}">From {{ publi.publisher|default:"the publisher" }}</a> via DOI</li>
 {% endfor %}
 </ul>
 {% endblock %}

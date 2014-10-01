@@ -44,6 +44,11 @@ def updateResearcher(request, pk):
     fetch_dois_for_researcher.apply_async(eta=timezone.now(), kwargs={'pk':pk})
     return render(request, 'papers/updateResearcher.html', {'researcher':source})
 
+def checkPublicationAvailability(request, pk):
+    publi = get_object_or_404(Publication, pk=pk)
+    check_full_text_for_publication.apply_async(eta=timezone.now(), kwargs={'pk':pk})
+    return render(request, 'papers/updatePublication.html', {'publication':publi})
+
 class PaperView(generic.DetailView):
     model = Paper
     template_name = 'papers/paper.html'
