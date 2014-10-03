@@ -10,6 +10,5 @@ urlpatterns = patterns('',
         url(r'^department/(?P<pk>\d+)/$', views.DepartmentView.as_view(), name='department'),
         url(r'^source/(?P<pk>\d+)/$', views.SourceView.as_view(), name='source'),
         url(r'^source/(?P<pk>\d+)/update/$', views.updateSource, name='updateSource'),
-        url(r'^paper/(?P<pk>\d+)/$', views.PaperView.as_view(), name='paper'),
-        url(r'^publication/(?P<pk>\d+)/update/$', views.checkPublicationAvailability, name='updatePublication')
+        url(r'^paper/(?P<pk>\d+)/$', views.PaperView.as_view(), name='paper')
 )

@@ -83,8 +83,6 @@ class Publication(models.Model):
     pages = models.CharField(max_length=64, blank=True, null=True)
     date = models.CharField(max_length=128, blank=True, null=True)
     publisher = models.CharField(max_length=256, blank=True, null=True)
-    available = models.NullBooleanField(blank=True, null=True)
-    last_update = models.DateTimeField(auto_now=True)
     doi = models.CharField(max_length=1024, unique=True, blank=True, null=True) # in theory, there is no limit
     def __unicode__(self):
         result = self.title
