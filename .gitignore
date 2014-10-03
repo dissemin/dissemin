@@ -2,3 +2,5 @@
 *.pyc
 # vim 
 .*.swp
+# API keys
+romeo_api_key
