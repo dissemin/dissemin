@@ -4,3 +4,5 @@
 .*.swp
 # API keys
 romeo_api_key
+# ENS data
+data/

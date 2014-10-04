@@ -17,7 +17,8 @@ class ResearchGroup(models.Model):
 
 class Researcher(models.Model):
     department = models.ForeignKey(Department)
-    groups = models.ManyToManyField(ResearchGroup, blank=True)
+    groups = models.ManyToManyField(ResearchGroup,blank=True,null=True)
+    email = models.EmailField(blank=True,null=True)
 
     # DOI search
     last_doi_search = models.DateTimeField(null=True,blank=True)
