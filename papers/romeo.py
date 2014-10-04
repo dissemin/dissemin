@@ -182,7 +182,39 @@ def get_or_create_publisher(romeo_xml_description):
     publisher.save()
 
     # Add the conditions, restrictions, and copyright
-    # TODO
+    for restriction in xml.findall('./preprints/prerestrictions/prerestriction'):
+        addRestriction(restriction, 'preprint', publisher)
+
+    for restriction in xml.findall('./postprints/postrestrictions/postrestriction'):
+        addRestriction(restriction, 'postprint', publisher)
+
+    for restriction in xml.findall('./pdfversion/pdfrestrictions/pdfrestriction'):
+        addRestriction(restriction, 'pdfversion', publisher)
+
+    for condition in xml.findall('./conditions/condition'):
+        if condition.text:
+            c = PublisherCondition(publisher=publisher, text=condition.text.strip())
+            c.save()
+    
+    for link in xml.findall('./copyrightlinks/copyrightlink'):
+        text = None
+        url = None
+        texts = link.findall('./copyrightlinktext')
+        if texts:
+            text = nstrip(texts[0].text)
+        urls = link.findall('./copyrightlinkurl')
+        if urls:
+            url = nstrip(urls[0].text)
+        if url and text:
+            cplink = PublisherCopyrightLink(text=text, url=url, publisher=publisher)
+            cplink.save()
 
     return publisher
+
+def addRestriction(xml, applies_to, publisher):
+    text = nstrip(xml.text)
+    if text:
+        print "Adding restriction "+text
+        r = PublisherRestrictionDetail(publisher=publisher, applies_to=applies_to, text=text)
+        r.save()
 

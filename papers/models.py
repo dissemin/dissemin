@@ -90,6 +90,15 @@ class Publisher(models.Model):
         for journal in self.journal_set.all():
             count += journal.publication_set.count()
         return count
+    @property
+    def preprint_conditions(self):
+        return self.publisherrestrictiondetail_set.filter(applies_to='preprint')
+    @property
+    def postprint_conditions(self):
+        return self.publisherrestrictiondetail_set.filter(applies_to='postprint')
+    @property
+    def pdfversion_conditions(self):
+        return self.publisherrestrictiondetail_set.filter(applies_to='pdfversion')
 
 # Journal data retrieved from RoMEO
 class Journal(models.Model):
@@ -103,15 +112,22 @@ class Journal(models.Model):
 class PublisherCondition(models.Model):
     publisher = models.ForeignKey(Publisher)
     text = models.CharField(max_length=1024)
+    def __unicode__(self):
+        return self.text
 
 class PublisherCopyrightLink(models.Model):
     publisher = models.ForeignKey(Publisher)
     text = models.CharField(max_length=256)
     url = models.URLField()
+    def __unicode__(self):
+        return self.text
 
 class PublisherRestrictionDetail(models.Model):
     publisher = models.ForeignKey(Publisher)
     text = models.CharField(max_length=256)
+    applies_to = models.CharField(max_length=32)
+    def __unicode__(self):
+        return self.text
 
 # Publication of these papers (in journals or conference proceedings)
 class Publication(models.Model):

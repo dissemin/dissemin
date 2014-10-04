@@ -19,8 +19,36 @@
 {% block lists %}
 <p>{{publisher.name }} has published {{ publisher.publi_count }} productions authored by researchers from ENS.</p>
 <p>Preprint policy: {{ publisher.preprint }}</p>
+<ul>
+{% for restriction in publisher.preprint_conditions %}
+    <li>{{ restriction }}</li>
+{% endfor %}
+</ul>
 <p>Postprint policy: {{ publisher.postprint }}</p>
+<ul>
+{% for restriction in publisher.postprint_conditions %}
+    <li>{{ restriction }}</li>
+{% endfor %}
+</ul>
 <p>PDF version policy: {{ publisher.pdfversion }}</p>
+<ul>
+{% for restriction in publisher.pdfversion_conditions %}
+    <li>{{ restriction }}</li>
+{% endfor %}
+</ul>
+<h4>Conditions</h4>
+<ul>
+{% for condition in publisher.publishercondition_set.all %}
+    <li>{{ condition }}</li>
+{% endfor %}
+</ul>
+<h4>Policy details</h4>
+<ul>
+    {% for link in publisher.publishercopyrightlink_set.all %}
+        <li><a href="{{ link.url }}">{{ link.text }}</a></li>
+    {% endfor %}
+</ul>
+<p>Source: <a href="http://www.sherpa.ac.uk/romeo">SHERPA/RoMEO</a>.</p>
 <h4>Journals in which researchers have authored papers</h4>
 <ul>
     {% for journal in publisher.journal_set.all %}
