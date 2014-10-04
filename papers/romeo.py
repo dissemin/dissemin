@@ -16,13 +16,13 @@ def find_journal_in_model(search_terms):
     if issn:
         matches = Journal.objects.filter(issn=issn)
         if matches:
-            return matches[0].paper
+            return matches[0]
 
     # By title
     if title:
         matches = Journal.objects.filter(title__iexact=title)
         if matches:
-            return matches[0].paper
+            return matches[0]
 
 
 def fetch_journal(search_terms):
@@ -135,6 +135,21 @@ def get_or_create_publisher(romeo_xml_description):
     except KeyError, IndexError:
         pass
 
+    # Check if we already have it
+    matches = None
+    if alias:
+        matches = Publisher.objects.filter(name__iexact=name,alias__iexact=alias)
+    else:
+        matches = Publisher.objects.filter(name__iexact=name)
+    if matches:
+        if alias:
+            return matches[0]
+        else:
+            for pub in matches:
+                if not pub.alias:
+                    return pub
+
+    # Otherwise, create it
     url = None
     try:
         url = nstrip(xml.findall('./homeurl')[0].text)

@@ -19,7 +19,7 @@
 </ul>
 <p>{{ paper.year }}</p>
 {% for publi in paper.publication_set.all %}
-<p>{{ publi }}
+<p>{{ publi | publicationlink }}
 {% if publi.doi %}
     (<a href="{{ publi | doi_to_url }}">DOI</a>)
 {% endif %}

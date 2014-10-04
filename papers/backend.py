@@ -6,6 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from papers.utils import to_plain_name, create_paper_fingerprint
 from papers.models import *
 from papers.doi import to_doi
+from papers.romeo import fetch_journal
 
 def lookup_name(author_name):
     first_name = author_name[0]
@@ -62,9 +63,14 @@ def create_publication(paper, metadata):
     doi = to_doi(metadata.get('DOI',None))
     pubtype = 'article'
 
+    # Lookup journal
+    journal = fetch_journal({'jtitle':title})
+    # TODO use the "publisher" info ?
+
     pub = Publication(title=title, issue=issue, volume=volume,
             date=date, paper=paper, pages=pages,
-            doi=doi, pubtype=pubtype, publisher=publisher)
+            doi=doi, pubtype=pubtype, publisher=publisher,
+            journal=journal)
     pub.save()
     return pub
 

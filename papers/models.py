@@ -125,8 +125,9 @@ class Publication(models.Model):
     date = models.CharField(max_length=128, blank=True, null=True)
     publisher = models.CharField(max_length=256, blank=True, null=True)
     doi = models.CharField(max_length=1024, unique=True, blank=True, null=True) # in theory, there is no limit
-    def __unicode__(self):
-        result = self.title
+
+    def details_to_str(self):
+        result = ''
         if self.issue or self.volume or self.pages or self.date:
             result += ', '
         if self.issue:
@@ -140,6 +141,9 @@ class Publication(models.Model):
         if self.date:
             result += self.date
         return result
+
+    def __unicode__(self):
+        return self.title+self.details_to_str()
 
 # Rough data extracted through OAI-PMH
 class OaiSource(models.Model):

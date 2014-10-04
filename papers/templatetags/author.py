@@ -14,3 +14,12 @@ def authorlink(author):
         return mark_safe('<a href="'+reverse('researcher', kwargs={'pk':author.name.researcher.id})+'">'+escape(unicode(author.name))+'</a>')
     else:
         return mark_safe(escape(unicode(author.name)))
+
+@register.filter(is_safe=True)
+def publicationlink(publication):
+    if publication.journal:
+        result = '<a href="'+reverse('journal', kwargs={'pk':publication.journal.id})+'">'+escape(unicode(publication.journal.title))+'</a>'
+        result += publication.details_to_str()
+        return mark_safe(result)
+    else:
+        return mark_safe(escape(unicode(publication)))
