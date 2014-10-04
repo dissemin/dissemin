@@ -99,7 +99,8 @@ def fetch_papers_from_crossref_by_researcher_name(name):
             authors = map(convert_to_name_pair, metadata['author'])
 
             for a in authors:
-                print a[0]+' '+a[1]
+                if a:
+                    print a[0]+' '+a[1]
             matching_authors = filter(lambda a: match_names(a,(name.first,name.last)), authors)
             if not matching_authors:
                 continue

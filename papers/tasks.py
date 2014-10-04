@@ -34,6 +34,7 @@ def fetch_items_from_oai_source(pk):
 
         start_date = source.last_update.replace(tzinfo=None)
         restrict_set = source.restrict_set
+        print "Getting list of records..."
         try:
             if restrict_set:
                 listRecords = client.listRecords(metadataPrefix='oai_dc', from_= start_date, set=restrict_set)
@@ -42,13 +43,16 @@ def fetch_items_from_oai_source(pk):
             # TODO make it less naive, for instance convert to UTC beforehand
         except NoRecordsMatchError:
             listRecords = []
+        print "Got list of records"
 
         count = 0
+        saved = 0
         for record in listRecords:
             # Update task status
-            if count % 100:
-                source.status = '%d records processed' % count
+            if count % 100 == 0:
+                source.status = '%d records processed, %d records saved' % (count,saved)
                 source.save()
+            count += 1
 
             metadata = record[1]._map
             authors = get_oai_authors(metadata)
@@ -77,7 +81,7 @@ def fetch_items_from_oai_source(pk):
             paper = get_or_create_paper(metadata['title'][0], authors, year, doi) # TODO replace with real pubdate
             # Save the record
             add_oai_record(record, source, paper)
-            count += 1
+            saved += 1
        
         # Save the current date
         source.status = 'OK, %d records fetched.' % count

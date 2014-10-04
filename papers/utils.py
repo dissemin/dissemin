@@ -5,6 +5,8 @@ import hashlib
 import unicodedata
 
 def match_names(a,b):
+    if not a or not b:
+        return False
     (firstA,lastA) = a
     (firstB,lastB) = b
     return lastA.lower() == lastB.lower() and match_first_names(firstA,firstB)
