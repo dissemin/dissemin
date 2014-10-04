@@ -23,6 +23,11 @@ def nstr(s):
         return s
     return ''
 
+def nstrip(s):
+    if s:
+        return s.strip()
+    return None
+
 def remove_diacritics(s):
     return unicodedata.normalize('NFKD', s).encode('ASCII', 'ignore')
 

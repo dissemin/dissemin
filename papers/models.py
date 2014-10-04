@@ -73,6 +73,40 @@ class Author(models.Model):
     def __unicode__(self):
         return unicode(self.name)
 
+# Publisher associated with a journal
+class Publisher(models.Model):
+    romeo_id = models.CharField(max_length=64)
+    name = models.CharField(max_length=256)
+    alias = models.CharField(max_length=256,null=True,blank=True)
+    url = models.URLField(null=True,blank=True)
+    preprint = models.CharField(max_length=32)
+    postprint = models.CharField(max_length=32)
+    pdfversion = models.CharField(max_length=32)
+    def __unicode__(self):
+        return self.name
+
+# Journal data retrieved from RoMEO
+class Journal(models.Model):
+    title = models.CharField(max_length=256)
+    last_updated = models.DateTimeField(auto_now=True)
+    issn = models.CharField(max_length=10, blank=True, null=True, unique=True)
+    publisher = models.ForeignKey(Publisher)
+    def __unicode__(self):
+        return self.title
+
+class PublisherCondition(models.Model):
+    publisher = models.ForeignKey(Publisher)
+    text = models.CharField(max_length=1024)
+
+class PublisherCopyrightLink(models.Model):
+    publisher = models.ForeignKey(Publisher)
+    text = models.CharField(max_length=256)
+    url = models.URLField()
+
+class PublisherRestrictionDetail(models.Model):
+    publisher = models.ForeignKey(Publisher)
+    text = models.CharField(max_length=256)
+
 # Publication of these papers (in journals or conference proceedings)
 class Publication(models.Model):
     paper = models.ForeignKey(Paper)
@@ -100,35 +134,6 @@ class Publication(models.Model):
         if self.date:
             result += self.date
         return result
-
-# Journal data retrieved from RoMEO
-class Journal(models.Model):
-    name = models.CharField(max_length=256)
-    last_updated = models.DateTimeField(auto_now=True)
-    issn = models.CharField(max_length=10, blank=True, null=True)
-    publisher = models.ForeignKey(Publisher)
-
-# Publisher associated with a journal
-class Publisher(models.Model):
-    romeo_id = models.CharField(max_length=64)
-    name = models.CharField(max_length=256)
-    url = models.URLField(null=True,blank=True)
-    preprint = models.CharField(max_length=32)
-    postprint = models.CharField(max_length=32)
-    pdfversion = models.CharField(max_length=32)
-
-class PublisherCondition(models.Model):
-    publisher = models.ForeignKey(Publisher)
-    text = models.CharField(max_length=1024)
-
-class PublisherCopyrightLink(models.Model):
-    publisher = models.ForeignKey(Publisher)
-    text = models.CharField(max_length=256)
-    url = models.URLField()
-
-class PublisherRestrictionDetail(models.Model):
-    publisher = models.ForeignKey(Publisher)
-    text = models.CharField(max_length=256)
 
 # Rough data extracted through OAI-PMH
 class OaiSource(models.Model):

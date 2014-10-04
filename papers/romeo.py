@@ -1,10 +1,29 @@
 # -*- encoding: utf-8 -*-
 from urllib2 import urlopen, HTTPError, URLError
+from urllib import urlencode
 from papers.models import *
 from papers.errors import MetadataSourceException
+from papers.utils import nstrip
 import xml.etree.ElementTree as ET
 
 api_key = open('romeo_api_key').read().strip()
+
+def find_journal_in_model(search_terms):
+    issn = search_terms.get('issn', None)
+    title = search_terms.get('jtitle', None)
+    # Look up the journal in the model
+    # By ISSN
+    if issn:
+        matches = Journal.objects.filter(issn=issn)
+        if matches:
+            return matches[0].paper
+
+    # By title
+    if title:
+        matches = Journal.objects.filter(title__iexact=title)
+        if matches:
+            return matches[0].paper
+
 
 def fetch_journal(search_terms):
     """
@@ -15,9 +34,14 @@ def fetch_journal(search_terms):
 
 
     # Check the arguments
-    if not all(lambda x: x in allowed_fields, key for key in search_terms):
+    if not all(map(lambda x: x in allowed_fields, (key for key in search_terms))):
         raise ValueError('The search terms have to belong to '+str(allowed_fields)+
                 'but the dictionary I got is '+str(search_terms))
+
+    # First check we don't have it already
+    journal = find_journal_in_model(search_terms)
+    if journal:
+        return journal
 
     # Prepare the query
     if api_key:
@@ -41,15 +65,16 @@ def fetch_journal(search_terms):
                 'Error is: '+str(e))
 
     # Find the matching journals (if any)
-    journals = root.iter('journal')
+    journals = list(root.findall('./journals/journal'))
     if not journals:
         return None
     if len(journals) > 1:
         print ("Warning, "+str(len(journals))+" journals match the RoMEO request, "+
                 "defaulting to the first one")
+        # TODO different behaviour: get the ISSN and try again.
     journal = journals[0]
 
-    names = journal.filter('jtitle')
+    names = list(journal.findall('./jtitle'))
     if not names:
         raise MetadataSourceException('RoMEO returned a journal without title.\n'+
                 'URL was: '+request)
@@ -60,11 +85,17 @@ def fetch_journal(search_terms):
     
     issn = None
     try:
-        issn = journal.filter('issn')[0].text
+        issn = nstrip(journal.findall('./issn')[0].text)
     except KeyError, IndexError:
         pass
 
-    publishers = journal.filter('publisher')
+    # Now we may have additional info, so it's worth trying again in the model
+    model_journal = find_journal_in_model({'issn':issn,'jtitle':name})
+    if model_journal:
+        return model_journal
+
+    # Otherwise we need to find the publisher
+    publishers = root.findall('./publishers/publisher')
     if not publishers:
         raise MetadataSourceException('RoMEO provided a journal but no publisher.\n'+
                 'URL was: '+request)
@@ -73,7 +104,6 @@ def fetch_journal(search_terms):
 
     publisher = get_or_create_publisher(publisher_desc)
 
-    # TODO lookup first to see if it already exists
     result = Journal(title=name,issn=issn,publisher=publisher)
     result.save()
     return result
@@ -84,6 +114,60 @@ def get_or_create_publisher(romeo_xml_description):
     the publisher corresponding to the <publisher> description
     from RoMEO
     """
-    # TODO TODO TODO
-    return 
+    xml = romeo_xml_description
+    romeo_id = None
+    try:
+        romeo_id = xml.attrib['id']
+    except KeyError:
+        raise MetadataSourceException('RoMEO did not provide a publisher id.\n'+
+                'URL was: '+request)
+    
+    name = None
+    try:
+        name = xml.findall('./name')[0].text.strip()
+    except (KeyError, IndexError, AttributeError):
+        raise MetadataSourceException('RoMEO did not provide the publisher\'s name.\n'+
+                'URL was: '+request)
+
+    alias = None
+    try:
+        alias = nstrip(xml.findall('./alias')[0].text)
+    except KeyError, IndexError:
+        pass
+
+    url = None
+    try:
+        url = nstrip(xml.findall('./homeurl')[0].text)
+    except KeyError, IndexError:
+        pass
+
+    preprint = None
+    try:
+        preprint = xml.findall('./preprints/prearchiving')[0].text.strip()
+    except (KeyError, IndexError, AttributeError):
+        raise MetadataSourceException('RoMEO did not provide the preprint policy.\n'+
+                'URL was: '+request)
+
+    postprint = None
+    try:
+        postprint = xml.findall('./postprints/postarchiving')[0].text.strip()
+    except (KeyError, IndexError, AttributeError):
+        raise MetadataSourceException('RoMEO did not provide the postprint policy.\n'+
+                'URL was: '+request)
+
+    pdfversion = None
+    try:
+        pdfversion = xml.findall('./pdfversion/pdfarchiving')[0].text.strip()
+    except (KeyError, IndexError, AttributeError):
+        raise MetadataSourceException('RoMEO did not provide the pdf archiving policy.\n'+
+                'URL was: '+request)
+
+    publisher = Publisher(name=name, alias=alias, url=url, preprint=preprint,
+            postprint=postprint, pdfversion=pdfversion, romeo_id=romeo_id)
+    publisher.save()
+
+    # Add the conditions, restrictions, and copyright
+    # TODO
+
+    return publisher
 

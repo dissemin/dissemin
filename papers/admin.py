@@ -34,4 +34,6 @@ admin.site.register(Researcher, ResearcherAdmin)
 admin.site.register(Name)
 admin.site.register(Paper, PaperAdmin)
 admin.site.register(OaiSource)
+admin.site.register(Journal)
+admin.site.register(Publisher)
 
