@@ -84,6 +84,12 @@ class Publisher(models.Model):
     pdfversion = models.CharField(max_length=32)
     def __unicode__(self):
         return self.name
+    @property
+    def publi_count(self):
+        count = 0
+        for journal in self.journal_set.all():
+            count += journal.publication_set.count()
+        return count
 
 # Journal data retrieved from RoMEO
 class Journal(models.Model):

@@ -48,3 +48,11 @@ class PaperView(generic.DetailView):
     model = Paper
     template_name = 'papers/paper.html'
 
+class JournalView(generic.DetailView):
+    model = Journal
+    template_name = 'papers/journal.html'
+
+class PublisherView(generic.DetailView):
+    model = Publisher
+    template_name = 'papers/publisher.html'
+

@@ -10,5 +10,7 @@ urlpatterns = patterns('',
         url(r'^department/(?P<pk>\d+)/$', views.DepartmentView.as_view(), name='department'),
         url(r'^source/(?P<pk>\d+)/$', views.SourceView.as_view(), name='source'),
         url(r'^source/(?P<pk>\d+)/update/$', views.updateSource, name='updateSource'),
-        url(r'^paper/(?P<pk>\d+)/$', views.PaperView.as_view(), name='paper')
+        url(r'^paper/(?P<pk>\d+)/$', views.PaperView.as_view(), name='paper'),
+        url(r'^journal/(?P<pk>\d+)/$', views.JournalView.as_view(), name='journal'),
+        url(r'^publisher/(?P<pk>\d+)/$', views.PublisherView.as_view(), name='publisher')
 )

@@ -1,0 +1,32 @@
+{% extends "dissemin/details.html" %}
+
+{% load author %}
+
+{% block headTitle %}
+{{ publisher.name }}
+{% endblock %}
+
+{% block bodyTitle %}
+{{ publisher.name }}
+{% endblock %}
+
+{% block details %}
+{% if publisher.url %}
+<p><a href="{{ publisher.url }}">Homepage</a></p>
+{% endif %}
+{% endblock %}
+
+{% block lists %}
+<p>{{publisher.name }} has published {{ publisher.publi_count }} productions authored by researchers from ENS.</p>
+<p>Preprint policy: {{ publisher.preprint }}</p>
+<p>Postprint policy: {{ publisher.postprint }}</p>
+<p>PDF version policy: {{ publisher.pdfversion }}</p>
+<h4>Journals in which researchers have authored papers</h4>
+<ul>
+    {% for journal in publisher.journal_set.all %}
+        <li><a href="{% url 'journal' journal.id %}">{{ journal }}</a></li>
+    {% empty %}
+        <p>None.</p>
+    {% endfor %}
+</ul>
+{% endblock %}
