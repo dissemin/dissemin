@@ -97,8 +97,7 @@ def fetch_journal(search_terms):
     # Otherwise we need to find the publisher
     publishers = root.findall('./publishers/publisher')
     if not publishers:
-        raise MetadataSourceException('RoMEO provided a journal but no publisher.\n'+
-                'URL was: '+request)
+        return None
     # TODO here we shouldn't default to the first one but look it up using the <romeopub>
     publisher_desc = publishers[0]
 

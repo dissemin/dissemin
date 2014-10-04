@@ -4,8 +4,10 @@ from __future__ import unicode_literals
 from django.core.exceptions import ObjectDoesNotExist
 
 from papers.utils import to_plain_name, create_paper_fingerprint
+from papers.errors import MetadataSourceException
 from papers.models import *
 from papers.doi import to_doi
+from papers.crossref import fetch_metadata_by_DOI
 from papers.romeo import fetch_journal
 
 def lookup_name(author_name):
@@ -21,7 +23,7 @@ def lookup_name(author_name):
 def get_or_create_paper(title, author_names, year, doi=None):
     # If a DOI is present, first look up using it
     if doi:
-        matches = Publications.objects.filter(doi__exact=doi)
+        matches = Publication.objects.filter(doi__exact=doi)
         if matches:
             return matches[0].paper
 
@@ -32,20 +34,24 @@ def get_or_create_paper(title, author_names, year, doi=None):
     plain_names = map(to_plain_name, author_names)
     fp = create_paper_fingerprint(title, plain_names)
     matches = Paper.objects.filter(fingerprint__exact=fp)
+
+    p = None
     if matches:
         p = matches[0]
-        # Add the DOI to the existing paper
-        # TODO create Publication !!!!!! TODO TODO TODO
-        return p
+    else:
+        p = Paper(title=title,year=year,fingerprint=fp)
+        p.save()
+        for author_name in author_names:
+            a = Author(name=author_name, paper=p)
+            a.save()
 
-    p = Paper(title=title,year=year,fingerprint=fp)
-    p.save()
-    for author_name in author_names:
-        a = Author(name=author_name, paper=p)
-        a.save()
-
-    # if doi:
-    # TODO: create Publication !!!!! TODODDODODO TODO
+    if doi:
+        try:
+            metadata = fetch_metadata_by_DOI(doi)
+            create_publication(p, metadata)
+        except MetadataSourceException as e:
+            print "Warning, metadata source exception while fetching DOI "+doi+":\n"+unicode(e)
+            pass
 
     return p
 
