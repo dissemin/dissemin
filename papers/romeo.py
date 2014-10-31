@@ -5,6 +5,7 @@ from papers.models import *
 from papers.errors import MetadataSourceException
 from papers.utils import nstrip
 import xml.etree.ElementTree as ET
+import unicodedata
 
 api_key = open('romeo_api_key').read().strip()
 
@@ -37,6 +38,10 @@ def fetch_journal(search_terms):
     if not all(map(lambda x: x in allowed_fields, (key for key in search_terms))):
         raise ValueError('The search terms have to belong to '+str(allowed_fields)+
                 'but the dictionary I got is '+str(search_terms))
+
+    # Remove diacritics (because it has to be sent in ASCII to ROMEO)
+    for key in search_terms:
+        search_terms[key] = unicodedata.normalize('NFKD',search_terms[key]).encode('ASCII', 'ignore')
 
     # First check we don't have it already
     journal = find_journal_in_model(search_terms)

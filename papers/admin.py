@@ -15,6 +15,7 @@ class ResearcherAdmin(admin.ModelAdmin):
 class AuthorInline(admin.TabularInline):
     model = Author
     extra = 0
+    raw_id_fields = ('paper','name')
 
 class OaiInline(admin.TabularInline):
     model = OaiRecord

@@ -106,11 +106,9 @@ def fetch_papers_from_crossref_by_researcher_name(name):
                 continue
             print "Saved."
             researcher_found = True
-            results.append(metadata)
+            yield metadata
 
             count += 1
             if count % 10 == 0:
                 current_task.update_state('FETCHING', meta={'nbRecords':count})
-
-    return results
 

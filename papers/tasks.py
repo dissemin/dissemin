@@ -96,58 +96,55 @@ def fetch_items_from_oai_source(pk):
 @shared_task
 def fetch_dois_for_researcher(pk):
     researcher = Researcher.objects.get(pk=pk)
-    try:
-        researcher.status = 'Fetching DOI list.'
+
+    researcher.status = 'Fetching DOI list.'
+    researcher.save()
+    nb_records = 0
+
+    for name in researcher.name_set.all():
+        lst = fetch_papers_from_crossref_by_researcher_name(name)
+
+        researcher.status = 'Saving records'
         researcher.save()
-        nb_records = 0
 
-        for name in researcher.name_set.all():
-            lst = fetch_papers_from_crossref_by_researcher_name(name)
+        count = 0
+        for metadata in lst:
+            if not 'title' in metadata or not metadata['title']:
+                print "No title, skipping"
+                continue # TODO at many continue, add warnings in logs
+            if not 'DOI' in metadata or not metadata['DOI']:
+                print "No DOI, skipping"
+                continue
+            doi = to_doi(metadata['DOI'])
 
-            researcher.status = 'Saving %d records' % len(lst)
-            researcher.save()
-
-            for metadata in lst:
-                if not 'title' in metadata or not metadata['title']:
-                    print "No title, skipping"
-                    continue # TODO at many continue, add warnings in logs
-                if not 'DOI' in metadata or not metadata['DOI']:
-                    print "No DOI, skipping"
-                    continue
-                doi = to_doi(metadata['DOI'])
-
+            try:
+                d = Publication.objects.get(doi=doi)
+                paper = d.paper
+            except ObjectDoesNotExist:
+                year = None
                 try:
-                    d = Publication.objects.get(doi=doi)
-                    paper = d.paper
-                except ObjectDoesNotExist:
-                    year = None
+                    year = int(metadata['issued']['date-parts'][0][0])
+                except Exception:
+                    pass
+                if not year:
                     try:
-                        year = int(metadata['issued']['date-parts'][0][0])
+                        year = int(metadata['deposited']['date-parts'][0][0])
                     except Exception:
                         pass
-                    if not year:
-                        try:
-                            year = int(metadata['deposited']['date-parts'][0][0])
-                        except Exception:
-                            pass
 
-                    if not year:
-                        print "No year, skipping"
-                        continue
-                    
-                    title = metadata['title']
-                    authors = map(lookup_name, map(convert_to_name_pair, metadata['author']))
-                    paper = get_or_create_paper(title, authors, year) # don't let this function
-                    # create the publication, because it would re-fetch the metadata from CrossRef
-                    create_publication(paper, metadata)
-            nb_records += len(lst)
+                if not year:
+                    print "No year, skipping"
+                    continue
+                
+                title = metadata['title']
+                authors = map(lookup_name, map(convert_to_name_pair, metadata['author']))
+                paper = get_or_create_paper(title, authors, year) # don't let this function
+                # create the publication, because it would re-fetch the metadata from CrossRef
+                create_publication(paper, metadata)
 
-        researcher.status = 'OK, %d records processed.' % nb_records
-        researcher.save()
-        # TODO remove me"
-    except ValueError as e:
-        researcher.status = 'ERROR: %s' % unicode(e)
-        researcher.save()
-        raise e
+                count += 1
+        nb_records += count
 
+    researcher.status = 'OK, %d records processed.' % nb_records
+    researcher.save()
 

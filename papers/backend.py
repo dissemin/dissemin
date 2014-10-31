@@ -57,6 +57,8 @@ def get_or_create_paper(title, author_names, year, doi=None):
 
 # Create a Publication entry based on the DOI metadata
 def create_publication(paper, metadata):
+    if not metadata:
+        return
     if not 'container-title' in metadata or not metadata['container-title']:
         return
     title = metadata['container-title']
