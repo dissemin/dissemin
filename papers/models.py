@@ -164,11 +164,10 @@ class Publication(models.Model):
 
 # Rough data extracted through OAI-PMH
 class OaiSource(models.Model):
-    url = models.CharField(max_length=300)
+    identifier = models.CharField(max_length=300)
     name = models.CharField(max_length=100)
     prefix_identifier = models.CharField(max_length=256)
     prefix_url = models.CharField(max_length=256)
-    restrict_set = models.CharField(max_length=256, null=True, blank=True)
 
     # Fetching properties
     last_update = models.DateTimeField()
