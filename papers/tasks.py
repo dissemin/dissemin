@@ -27,8 +27,8 @@ def process_records(listRecords, source):
     for record in listRecords:
         # Update task status
         if count % 100 == 0:
-        source.status = '%d records processed, %d records saved' % (count,saved)
-        source.save()
+            source.status = '%d records processed, %d records saved' % (count,saved)
+            source.save()
         count += 1
 
         metadata = record[1]._map
@@ -36,23 +36,23 @@ def process_records(listRecords, source):
 
         # Filter the record
         if all(not elem.is_known for elem in authors):
-        continue
+            continue
         if not 'title' in metadata or metadata['title'] == []:
-        continue
+            continue
 
         # Find the DOI, if any
         doi = None
         for identifier in metadata['identifier']:
-        if not doi:
-            doi = to_doi(identifier)
+            if not doi:
+                doi = to_doi(identifier)
 
         pubdate = find_earliest_oai_date(record)
         year = None
         if pubdate:
-        year = pubdate.year
+            year = pubdate.year
         else:
-        print "No publication date, skipping"
-        continue
+            print "No publication date, skipping"
+            continue
 
         logger.info('Saving record %s' % record[0].identifier())
         paper = get_or_create_paper(metadata['title'][0], authors, year, doi) # TODO replace with real pubdate
