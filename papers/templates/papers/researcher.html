@@ -1,6 +1,7 @@
 {% extends "dissemin/details.html" %}
 
 {% load author %}
+{% load staticfiles %}
 
 {% block headTitle %}
 {{ researcher.name }}
@@ -16,20 +17,26 @@
 {% endblock %}
 
 {% block lists %}
-<ul>
-     {% for author in researcher.authors_by_year.all %}
-     {% ifchanged author.paper.year %}</ul>{{ author.paper.year }}<ul>{% endifchanged %}
-        <li>
-        {% for a2 in author.paper.author_set.all %}
-            {% if a2.name.is_known and a2.name.researcher.id = researcher.id %}
-                <strong>{{ a2 }}</strong>, 
-            {% else %}
-                {{ a2|authorlink }}, 
-            {% endif %}
-        {% endfor %}
-        <a href="{% url 'paper' author.paper.id %}">{{ author.paper.title }}</a></li>    
-     {% empty %}
-     <p>No production found.</p>
-     {% endfor %}
-</ul>
+ {% for author in researcher.authors_by_year.all %}
+ {% ifchanged author.paper.year %}
+ {% if not forloop.first %}</ul></div>{% endif %}
+    <div id="ulContainer">
+    <div id="listYear">{{ author.paper.year }}</div><ul>
+ {% endifchanged %}
+    <li>
+        <div id="pubLogo"><p><img src="{% static "document-symbol.png" %}" alt="Document" /></p></div>
+        <div id="pubText"><span id="paperAuthors">
+    {% for a2 in author.paper.author_set.all %}{% if not forloop.first %},{% endif %}
+        {% if a2.name.is_known and a2.name.researcher.id = researcher.id %}
+        <strong>{{ a2 }}</strong>{% else %}
+        {{ a2|authorlink }}{% endif %}{% endfor %}</span><br />
+        <span id="paperTitle"><a href="{% url 'paper' author.paper.id %}">{{ author.paper.title }}</a></span><br />
+    {% for publi in author.paper.publication_set.all %}
+    <span id="pubRef">{{ publi | publication }}</span><br />
+    {% endfor %}
+        </div></li>    
+        {% if forloop.last %}</ul></div>{% endif %}
+ {% empty %}
+ <p>No production found.</p>
+ {% endfor %}
 {% endblock %}

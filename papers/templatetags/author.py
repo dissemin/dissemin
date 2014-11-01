@@ -16,10 +16,19 @@ def authorlink(author):
         return mark_safe(escape(unicode(author.name)))
 
 @register.filter(is_safe=True)
-def publicationlink(publication):
-    if publication.journal:
-        result = '<a href="'+reverse('journal', kwargs={'pk':publication.journal.id})+'">'+escape(unicode(publication.journal.title))+'</a>'
-        result += publication.details_to_str()
-        return mark_safe(result)
+def publication(publi):
+    if publi.journal:
+        result = '<a href="'+reverse('journal', kwargs={'pk':publi.journal.id})+'"><emph>'+escape(unicode(publi.journal.title))+'</emph></a>'
     else:
-        return mark_safe(escape(unicode(publication)))
+        result = escape(unicode(publi.title))
+    if publi.issue or publi.volume or publi.pages or publi.date:
+        result += ', '
+    if publi.issue:
+        result += '<strong>'+escape(unicode(publi.issue))+'</strong>'
+    if publi.volume:
+        result += '('+escape(unicode(publi.volume))+')'
+    if publi.issue or publi.volume:
+        result += ', '
+    if publi.date:
+        result += escape(unicode(publi.date))
+    return mark_safe(result)
