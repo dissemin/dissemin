@@ -59,7 +59,7 @@ def process_records(listRecords, source):
         # Save the record
         add_oai_record(record, source, paper)
         saved += 1
-   return (count,saved)
+    return (count,saved)
 
 
 @shared_task
