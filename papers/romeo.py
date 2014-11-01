@@ -181,8 +181,16 @@ def get_or_create_publisher(romeo_xml_description):
         raise MetadataSourceException('RoMEO did not provide the pdf archiving policy.\n'+
                 'URL was: '+request)
 
+    # Compute OA status of the publisher
+    status = 'UNK'
+    if preprint == 'can' or postprint == 'can' or pdfversion == 'can':
+        status = 'OK'
+    elif preprint == 'cannot' and postprint == 'cannot' and pdfversion == 'cannot':
+        status = 'NOK'
+
     publisher = Publisher(name=name, alias=alias, url=url, preprint=preprint,
-            postprint=postprint, pdfversion=pdfversion, romeo_id=romeo_id)
+            postprint=postprint, pdfversion=pdfversion, romeo_id=romeo_id,
+            oa_status=status)
     publisher.save()
 
     # Add the conditions, restrictions, and copyright

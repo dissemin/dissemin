@@ -67,12 +67,27 @@ class Paper(models.Model):
     last_modified = models.DateField(auto_now=True)
     def __unicode__(self):
         return self.title
+
+    @property
+    def oa_status(self):
+        qs = list(self.publication_set.all()[:1])
+        if qs:
+            return qs[0].oa_status()
+        else:
+            return 'UNK'
+
     
 class Author(models.Model):
     paper = models.ForeignKey(Paper)
     name = models.ForeignKey(Name)
     def __unicode__(self):
         return unicode(self.name)
+
+OA_STATUS_CHOICES = (
+        ('OK', 'Allows pre/post prints'),
+        ('NOK', 'Forbids pre/post prints'),
+        ('UNK', 'Policy unclear'),
+   )
 
 # Publisher associated with a journal
 class Publisher(models.Model):
@@ -83,6 +98,7 @@ class Publisher(models.Model):
     preprint = models.CharField(max_length=32)
     postprint = models.CharField(max_length=32)
     pdfversion = models.CharField(max_length=32)
+    oa_status = models.CharField(max_length=32, choices=OA_STATUS_CHOICES)
     def __unicode__(self):
         return self.name
     @property
@@ -142,6 +158,11 @@ class Publication(models.Model):
     date = models.CharField(max_length=128, blank=True, null=True)
     publisher = models.CharField(max_length=256, blank=True, null=True)
     doi = models.CharField(max_length=1024, unique=True, blank=True, null=True) # in theory, there is no limit
+    def oa_status(self):
+        if self.journal:
+            return self.journal.publisher.oa_status
+        else:
+            return 'UNK'
 
     def details_to_str(self):
         result = ''

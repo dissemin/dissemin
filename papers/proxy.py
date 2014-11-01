@@ -10,11 +10,12 @@ PROXY_ENDPOINT = "http://ulminfo.fr/~pintoch/proaixy/oai"
 PROXY_DAY_GRANULARITY = False
 
 PROXY_SOURCE_PREFIX = "proaixy:source:"
+PROXY_AUTHOR_PREFIX = "proaixy:author:"
 
 def get_proxy_client():
     registry = MetadataRegistry()
     registry.registerReader('oai_dc', oai_dc_reader)
-    client = Client(source.url, registry)
+    client = Client(PROXY_ENDPOINT, registry)
     client._day_granularity = PROXY_DAY_GRANULARITY
     return client
 

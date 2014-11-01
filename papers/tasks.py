@@ -17,18 +17,17 @@ from papers.backend import *
 from papers.oai import *
 from papers.doi import to_doi
 from papers.crossref import fetch_papers_from_crossref_by_researcher_name, convert_to_name_pair
-from papers.proxy import get_proxy_client
+from papers.proxy import *
+from papers.utils import name_normalization
+
+import unicodedata
 
 logger = get_task_logger(__name__)
 
-def process_records(listRecords, source):
+def process_records(listRecords):
     count = 0
     saved = 0
     for record in listRecords:
-        # Update task status
-        if count % 100 == 0:
-            source.status = '%d records processed, %d records saved' % (count,saved)
-            source.save()
         count += 1
 
         metadata = record[1]._map
@@ -39,6 +38,24 @@ def process_records(listRecords, source):
             continue
         if not 'title' in metadata or metadata['title'] == []:
             continue
+
+        # Find the source
+        sets = record[0].setSpec()
+        source_identifier = None
+        for s in sets:
+            if s.startswith(PROXY_SOURCE_PREFIX):
+                source_identifier = s[len(PROXY_SOURCE_PREFIX):]
+                break
+        source = None
+        if source_identifier:
+            try:
+                source = OaiSource.objects.get(identifier=source_identifier)
+            except ObjectDoesNotExist:
+                pass
+        if not source:
+            print "Invalid source '"+str(source_identifier)+"' from the proxy, skipping"
+            continue
+
 
         # Find the DOI, if any
         doi = None
@@ -61,38 +78,22 @@ def process_records(listRecords, source):
         saved += 1
     return (count,saved)
 
-
 @shared_task
-def fetch_items_from_oai_source(pk):
-    # TODO: make source facultative, remove restrict_set
-    source = OaiSource.objects.get(pk=pk) # this is safe because the PK is checked by the view
+def fetch_records_for_researcher(pk):
+    researcher = Researcher.objects.get(pk=pk)
+    for name in researcher.name_set.all():
+        fetch_records_for_name(name)
+
+def fetch_records_for_name(name):
+    ident = name.last + ', ' + name.first
+    ident = name_normalization(ident)
+    client = get_proxy_client()
     try:
-        # Set up the OAI fetcher
-        client = get_proxy_client()
+        listRecords = client.listRecords(metadataPrefix='oai_dc', set=PROXY_AUTHOR_PREFIX+ident)
+        process_records(listRecords)
+    except NoRecordsMatchError:
+        pass
 
-        start_date = source.last_update.replace(tzinfo=None)
-        restrict_set = source.restrict_set
-        try:
-            if restrict_set:
-                listRecords = client.listRecords(metadataPrefix='oai_dc',
-                        from_= start_date,
-                        set=PROXY_SOURCE_PREFIX+source.identifier)
-            else:
-                listRecords = client.listRecords(metadataPrefix='oai_dc', from_= start_date)
-            # TODO make it less naive, for instance convert to UTC beforehand
-        except NoRecordsMatchError:
-            listRecords = []
-        
-        (count,saved) = process_records(listRecords, source)
-
-        # Save the current date
-        source.status = 'OK, %d records fetched.' % count
-        source.last_update = timezone.now()
-        source.save()
-    except Exception as e:
-        source.status = 'ERROR: '+unicode(e)
-        source.save()
-        raise
 
 @shared_task
 def fetch_dois_for_researcher(pk):

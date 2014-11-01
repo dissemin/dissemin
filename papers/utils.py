@@ -87,6 +87,21 @@ def create_paper_fingerprint(title, authors):
     return m.hexdigest()
 
 
+#### Name normalization
+nn_separator_re = re.compile(r',+ *')
+nn_escaping_chars_re = re.compile(r'[\{\}\\]')
+nn_nontext_re = re.compile(r'[^a-z_]+')
+nn_final_nontext_re = re.compile(r'[^a-z_]+$')
+
+def name_normalization(ident):
+    ident = unicodedata.normalize('NFKD',ident).encode('ASCII', 'ignore').lower()
+    ident = ident.strip()
+    ident = nn_separator_re.sub('_',ident)
+    ident = nn_escaping_chars_re.sub('',ident)
+    ident = nn_final_nontext_re.sub('',ident)
+    ident = nn_nontext_re.sub('-',ident)
+    return ident
+
 
 
 

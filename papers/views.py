@@ -34,10 +34,10 @@ class SourceView(generic.DetailView):
     model = OaiSource
     template_name = 'papers/oaiSource.html'
 
-def updateSource(request, pk):
-    source = get_object_or_404(OaiSource, pk=pk)
-    fetch_items_from_oai_source.apply_async(eta=timezone.now(), kwargs={'pk':pk})
-    return render(request, 'papers/updateSource.html', {'source':source})
+def updateResearcherOAI(request, pk):
+    source = get_object_or_404(Researcher, pk=pk)
+    fetch_records_for_researcher.apply_async(eta=timezone.now(), kwargs={'pk':pk})
+    return render(request, 'papers/updateResearcher.html', {'source':source})
 
 def updateResearcher(request, pk):
     source = get_object_or_404(Researcher, pk=pk)

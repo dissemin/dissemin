@@ -72,10 +72,10 @@ a:hover
 
 #summaryLists ul
 {
-    padding-left: 10px;
+    padding-left: 7px;
 }
 
-#ulContainer
+.ulContainer
 {
     border-top: 1px solid rgba(192,188,206,1);
     padding-left: 5px;
@@ -83,46 +83,75 @@ a:hover
     margin-right: 15px;
 }
 
-#listYear
+.listYear
 {
     float:right;
     font-size: 2.5em;
     color: rgba(192, 188, 206, 1);
 }
 
-#pubLogo
+.pubLogo
 {
     float: left;
     vertical-align: middle;
     display: table-cell;
 }
 
-#pubText
+.pubLogoPic-UNK, .pubLogoPic-OK, .pubLogoPic-NOK
+{
+    height: 40px;
+    width: 31px;
+    background-repeat: no-repeat;
+}
+.pubLogoPic-UNK
+{
+    background-image: url('../document-symbol.png');
+    background-position: 3px 0px;
+}
+.pubLogoPic-OK
+{
+    background-position: 3px 0px;
+    background-image: url('../open-symbol.png');
+}
+.pubLogoPic-NOK
+{
+    background-position: 3px 0px;
+    background-image: url('../closed-symbol.png');
+}
+.pubLogoPic-PDF
+{
+    background-image: url('../pdf-symbol.png');
+}
+
+.pubText
 {
     margin-top: 15px;
     margin-bottom: 15px;
-    margin-left: 40px;
+    margin-left: 43px;
     padding-left: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
     border-left: 3px solid green;
+    min-height: 55px;
 }
 
-#pubRef
+.pubRef
 {
     color: #6e6e6e;
     font-size: 0.9em;
 }
 
-#paperAuthors
+.paperAuthors
 {
     font-size: 0.95em;
 }
 
-#paperTitle
+.paperTitle
 {
     font-size: 1em;
 }
+
+/* Other stuff */
 
 #footer
 {
