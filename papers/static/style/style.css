@@ -153,6 +153,11 @@ a:hover
     font-size: 0.9em;
 }
 
+.pubRef a
+{
+    color: #272743;
+}
+
 .paperAuthors
 {
     font-size: 0.95em;

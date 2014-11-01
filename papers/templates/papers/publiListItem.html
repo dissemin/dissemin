@@ -11,7 +11,13 @@
 <strong>{{ a2 }}</strong>{% else %}
 {{ a2|authorlink }}{% endif %}{% endfor %}</span><br />
 <span class="paperTitle"><a href="{% url 'paper' paper.id %}">{{ paper.title }}</a></span><br />
+<span class="pubRef">
 {% for publi in paper.publication_set.all %}
-<span class="pubRef">{{ publi | publication }}</span><br />
+{{ publi | publication }}{% if forloop.last %}.{% else %},{% endif %}</span><br />
+{% empty %}
+{% for record in paper.oairecord_set.all %}
+{{ record.source.name }}{% if forloop.last %}.{% else %},{% endif %}
 {% endfor %}
+{% endfor %}
+</span>
 </div>
