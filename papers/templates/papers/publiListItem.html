@@ -1,7 +1,7 @@
 {% load author %}
 <div class="pubLogo"><div>
-    {% if paper.first_oai_record %}
-    <div class="pubLogoPic-PDF"><a href="{{ paper.first_oai_record.url }}" class="filldiv"></a></div>
+    {% if paper.first_pdf_record %}
+    <div class="pubLogoPic-PDF"><a href="{{ paper.first_pdf_record.pdf_url }}" class="filldiv"></a></div>
     {% else %}
     <div class="pubLogoPic-{{ paper.oa_status }}"></div>
     {% endif %}</div></div>

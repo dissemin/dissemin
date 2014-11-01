@@ -76,8 +76,8 @@ class Paper(models.Model):
         else:
             return 'UNK'
     @property
-    def first_oai_record(self):
-        matches = OaiRecord.objects.filter(about=self.id)[:1]
+    def first_pdf_record(self):
+        matches = OaiRecord.objects.filter(about=self.id,pdf_url__isnull=False)[:1]
         if matches:
             return matches[0]
 
@@ -193,8 +193,7 @@ class Publication(models.Model):
 class OaiSource(models.Model):
     identifier = models.CharField(max_length=300)
     name = models.CharField(max_length=100)
-    prefix_identifier = models.CharField(max_length=256)
-    prefix_url = models.CharField(max_length=256)
+    url_extractor = models.CharField(max_length=256)
 
     # Fetching properties
     last_update = models.DateTimeField()
@@ -206,7 +205,8 @@ class OaiSource(models.Model):
 class OaiRecord(models.Model):
     source = models.ForeignKey(OaiSource)
     identifier = models.CharField(max_length=512, unique=True)
-    url = models.CharField(max_length=1024)
+    splash_url = models.URLField(max_length=1024, null=True, blank=True)
+    pdf_url = models.URLField(max_length=1024, null=True, blank=True)
     about = models.ForeignKey(Paper)
     description = models.TextField(null=True,blank=True)
     def __unicode__(self):

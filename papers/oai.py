@@ -9,8 +9,15 @@ from oaipmh.error import DatestampError, NoRecordsMatchError
 from papers.backend import *
 from papers.models import OaiRecord, OaiSource
 from papers.utils import normalize_name_words
+from papers.extractors import *
 
 import re
+
+# Reader slightly tweaked because Cairn includes a useful non-standard field
+my_oai_dc_reader = oai_dc_reader
+my_oai_dc_reader._fields['accessRights'] = ('textList', 'oai_dc:dc/dcterms:accessRights/text()')
+my_oai_dc_reader._namespaces['dcterms'] = 'http://purl.org/dc/terms/'
+
 
 def add_oai_record(record, source, paper=None):
     """ Add a record (from OAI-PMH) to the local database """
@@ -19,15 +26,8 @@ def add_oai_record(record, source, paper=None):
 
     matching = OaiRecord.objects.filter(identifier=identifier)
     if len(matching) > 0:
+        print "Record already saved"
         return # Record already saved. TODO : update if information changed
-
-    # Build the URL
-    url = ''
-    if 'identifier' in record[1]._map:
-        for iden in record[1]._map['identifier']:
-            iden = iden.strip()
-            if iden.startswith(source.prefix_identifier):
-                url = source.prefix_url+iden[len(source.prefix_identifier):]
 
     # A description is useful
     curdesc = ""
@@ -35,12 +35,25 @@ def add_oai_record(record, source, paper=None):
         if len(desc) > len(curdesc):
                 curdesc = desc
 
+    # Run extractor to find the URLs
+    pdf_url = None
+    splash_url = None
+    if source.url_extractor:
+        try:
+            extractor = REGISTERED_EXTRACTORS[source.url_extractor]
+            urls = extractor.extract(record)
+            pdf_url = urls.get('pdf')
+            splash_url = urls.get('splash')
+        except KeyError:
+            print "Warning, invalid extractor for source "+source.name
+
     r = OaiRecord(
             source=source,
             identifier=identifier,
             about=paper,
-            url=url,
-            description=curdesc)
+            description=curdesc,
+            pdf_url=pdf_url,
+            splash_url=splash_url)
     r.save()
 
 comma_re = re.compile(r',+')
