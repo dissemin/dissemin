@@ -29,7 +29,18 @@ def add_oai_record(record, source, paper=None):
             if iden.startswith(source.prefix_identifier):
                 url = source.prefix_url+iden[len(source.prefix_identifier):]
 
-    r = OaiRecord(source=source,identifier=identifier,about=paper,url=url)
+    # A description is useful
+    curdesc = ""
+    for desc in record[1]._map['description']:
+        if len(desc) > len(curdesc):
+                curdesc = desc
+
+    r = OaiRecord(
+            source=source,
+            identifier=identifier,
+            about=paper,
+            url=url,
+            description=curdesc)
     r.save()
 
 comma_re = re.compile(r',+')

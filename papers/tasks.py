@@ -54,13 +54,13 @@ def process_records(listRecords):
             print "Invalid source '"+str(source_identifier)+"' from the proxy, skipping"
             continue
 
-
         # Find the DOI, if any
         doi = None
         for identifier in metadata['identifier']:
             if not doi:
                 doi = to_doi(identifier)
 
+        # A year for the publication is necessary
         pubdate = find_earliest_oai_date(record)
         year = None
         if pubdate:
@@ -68,6 +68,7 @@ def process_records(listRecords):
         else:
             print "No publication date, skipping"
             continue
+
 
         logger.info('Saving record %s' % record[0].identifier())
         paper = get_or_create_paper(metadata['title'][0], authors, year, doi)

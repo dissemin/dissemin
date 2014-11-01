@@ -203,6 +203,7 @@ class OaiRecord(models.Model):
     identifier = models.CharField(max_length=512, unique=True)
     url = models.CharField(max_length=1024)
     about = models.ForeignKey(Paper)
+    description = models.TextField(null=True,blank=True)
     def __unicode__(self):
         return self.identifier
 

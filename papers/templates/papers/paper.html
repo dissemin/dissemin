@@ -12,9 +12,6 @@
 {% endblock %}
 
 {% block lists %}
-<div>
-{% include "papers/publiListItem.html" with paper=paper %}
-</div>
 {% for author in paper.author_set.all %}{% if not forloop.first %},{% endif %}
 {{ author | authorlink }}{% endfor %}
 {% for publi in paper.publication_set.all %}
@@ -23,6 +20,11 @@
     (<a href="{{ publi | doi_to_url }}">DOI</a>)
 {% endif %}
 </p>
+{% endfor %}
+{% for record in paper.oairecord_set.all %}
+{% if forloop.first %}
+<p>{{ record.description }}</p>
+{% endif %}
 {% endfor %}
 {% endblock %}
 
