@@ -6,3 +6,5 @@
 romeo_api_key
 # ENS data
 data/
+celerybeat-schedule
+repositories
