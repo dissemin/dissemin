@@ -11,6 +11,8 @@ from papers.doi import to_doi
 from papers.utils import match_names, normalize_name_words
 from papers.models import Publication
 
+from unidecode import unidecode
+
 nb_results_per_request = 25
 crossref_timeout = 5
 
@@ -21,7 +23,7 @@ def fetch_list_of_DOIs_from_crossref(query, page, number):
     except ValueError:
         raise ValueError("Page and number have to be integers.")
 
-    query_args = {'q':query, 'page':str(page), 'number':str(number)}
+    query_args = {'q':unidecode(query), 'page':str(page), 'number':str(number)}
     request = 'http://search.crossref.org/dois?'+urlencode(query_args)
     try:
         f = urlopen(request, timeout=crossref_timeout)
