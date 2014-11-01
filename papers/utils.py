@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 import re
 import hashlib
-import unicodedata
+from unidecode import unidecode
 
 def match_names(a,b):
     if not a or not b:
@@ -31,7 +31,7 @@ def nstrip(s):
     return None
 
 def remove_diacritics(s):
-    return unicodedata.normalize('NFKD', s).encode('ASCII', 'ignore')
+    return unidecode(s)
 
 split_re = re.compile(r'[ .,]*')
 def split_words(string):
@@ -63,13 +63,14 @@ def to_plain_name(name):
 
 stripped_chars = re.compile(r'[^- a-z0-9]')
 def create_paper_fingerprint(title, authors):
-    title = title.lower()
+    title = remove_diacritics(title).lower()
     title = stripped_chars.sub('',title)
     title = title.strip()
-    title = re.sub(' ', '-', title)
+    title = re.sub(' +', '-', title)
     buf = title
 
     for author in authors:
+        author = (remove_diacritics(author[0]),remove_diacritics(author[1]))
         # Initials of the given names
         initials = map(lambda x: x[0].lower(), split_words(author[0]))
         # Last name, without the small words such as "van", "der", "de"…
@@ -83,7 +84,8 @@ def create_paper_fingerprint(title, authors):
         buf += '/'+fp
 
     m = hashlib.md5()
-    m.update(remove_diacritics(buf))
+    m.update(buf)
+    print "Fingerprint: "+buf
     return m.hexdigest()
 
 
@@ -94,7 +96,7 @@ nn_nontext_re = re.compile(r'[^a-z_]+')
 nn_final_nontext_re = re.compile(r'[^a-z_]+$')
 
 def name_normalization(ident):
-    ident = unicodedata.normalize('NFKD',ident).encode('ASCII', 'ignore').lower()
+    ident = remove_diacritics(ident).lower()
     ident = ident.strip()
     ident = nn_separator_re.sub('_',ident)
     ident = nn_escaping_chars_re.sub('',ident)
