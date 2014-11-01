@@ -75,6 +75,11 @@ class Paper(models.Model):
             return qs[0].oa_status()
         else:
             return 'UNK'
+    @property
+    def first_oai_record(self):
+        matches = OaiRecord.objects.filter(about=self.id)[:1]
+        if matches:
+            return matches[0]
 
     
 class Author(models.Model):

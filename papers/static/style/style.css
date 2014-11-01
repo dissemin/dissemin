@@ -97,7 +97,15 @@ a:hover
     display: table-cell;
 }
 
-.pubLogoPic-UNK, .pubLogoPic-OK, .pubLogoPic-NOK
+.filldiv
+{
+    display: block;
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+}
+
+.pubLogoPic-UNK, .pubLogoPic-OK, .pubLogoPic-NOK, .pubLogoPic-OA, .pubLogoPic-PDF
 {
     height: 40px;
     width: 31px;
@@ -119,6 +127,10 @@ a:hover
     background-image: url('../closed-symbol.png');
 }
 .pubLogoPic-PDF
+{
+    background-image: url('../pdf-symbol.png');
+}
+.pubLogoPic-OA
 {
     background-image: url('../pdf-symbol.png');
 }
@@ -189,3 +201,4 @@ a:hover
     height:100%;
     border: 1px solid black;
 }
+

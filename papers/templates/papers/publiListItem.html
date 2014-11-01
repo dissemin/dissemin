@@ -1,5 +1,10 @@
 {% load author %}
-<div class="pubLogo"><p><div class="pubLogoPic-{{ paper.oa_status }}"></div></p></div>
+<div class="pubLogo"><div>
+    {% if paper.first_oai_record %}
+    <div class="pubLogoPic-PDF"><a href="{{ paper.first_oai_record.url }}" class="filldiv"></a></div>
+    {% else %}
+    <div class="pubLogoPic-{{ paper.oa_status }}"></div>
+    {% endif %}</div></div>
 <div class="pubText"><span class="paperAuthors">
 {% for a2 in paper.author_set.all %}{% if not forloop.first %},{% endif %}
 {% if a2.name.is_known and a2.name.researcher.id = researcher_id %}
