@@ -12,12 +12,11 @@
 {% endblock %}
 
 {% block lists %}
-<ul>
-{% for author in paper.author_set.all %}
-    <li>{{ author | authorlink }}</li>
-{% endfor %}
-</ul>
-<p>{{ paper.year }}</p>
+<div>
+{% include "papers/publiListItem.html" with paper=paper %}
+</div>
+{% for author in paper.author_set.all %}{% if not forloop.first %},{% endif %}
+{{ author | authorlink }}{% endfor %}
 {% for publi in paper.publication_set.all %}
 <p>{{ publi | publication }}
 {% if publi.doi %}

@@ -20,8 +20,6 @@ from papers.crossref import fetch_papers_from_crossref_by_researcher_name, conve
 from papers.proxy import *
 from papers.utils import name_normalization
 
-import unicodedata
-
 logger = get_task_logger(__name__)
 
 def process_records(listRecords):
@@ -72,7 +70,8 @@ def process_records(listRecords):
             continue
 
         logger.info('Saving record %s' % record[0].identifier())
-        paper = get_or_create_paper(metadata['title'][0], authors, year, doi) # TODO replace with real pubdate
+        paper = get_or_create_paper(metadata['title'][0], authors, year, doi)
+
         # Save the record
         add_oai_record(record, source, paper)
         saved += 1
