@@ -10,7 +10,7 @@ from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
 
 from oaipmh.datestamp import tolerant_datestamp_to_datetime
-from oaipmh.error import DatestampError, NoRecordsMatchError
+from oaipmh.error import DatestampError, NoRecordsMatchError, BadArgumentError
 
 from papers.models import *
 from papers.backend import *
@@ -92,6 +92,9 @@ def fetch_records_for_name(name):
         listRecords = client.listRecords(metadataPrefix='oai_dc', set=PROXY_AUTHOR_PREFIX+ident)
         process_records(listRecords)
     except NoRecordsMatchError:
+        pass
+    except BadArgumentError:
+        print "Author is unknown for the proxy"
         pass
 
 
