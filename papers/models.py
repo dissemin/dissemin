@@ -84,6 +84,7 @@ class Author(models.Model):
         return unicode(self.name)
 
 OA_STATUS_CHOICES = (
+        ('OA', 'Open Access'),
         ('OK', 'Allows pre/post prints'),
         ('NOK', 'Forbids pre/post prints'),
         ('UNK', 'Policy unclear'),

@@ -183,6 +183,8 @@ def get_or_create_publisher(romeo_xml_description):
 
     # Compute OA status of the publisher
     status = 'UNK'
+    if xml.attrib.get('id') == 'DOAJ':
+        status = 'OA'
     if preprint == 'can' or postprint == 'can' or pdfversion == 'can':
         status = 'OK'
     elif preprint == 'cannot' and postprint == 'cannot' and pdfversion == 'cannot':
