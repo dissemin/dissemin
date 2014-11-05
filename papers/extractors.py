@@ -70,9 +70,9 @@ arxivExtractor = RegexExtractor([
     ])
 
 halExtractor = RegexExtractor([
-    ('identifier',re.compile(r'(http://[a-z\-0-9.]*\.archives-ouvertes\.fr/[a-z0-9\-]*)'),
+    ('identifier',re.compile(r'(https?://[a-z\-0-9.]*\.archives-ouvertes\.fr/[a-z0-9\-]*)'),
         'splash', r'\1'),
-    ('identifier',re.compile(r'(http://[a-z\-0-9.]*\.archives-ouvertes\.fr/[a-z0-9\-]*/document)'),
+    ('identifier',re.compile(r'(https?://[a-z\-0-9.]*\.archives-ouvertes\.fr/[a-z0-9\-]*/document)'),
         'pdf', r'\1'),
     ])
 
