@@ -37,7 +37,7 @@ class SourceView(generic.DetailView):
 def updateResearcherOAI(request, pk):
     source = get_object_or_404(Researcher, pk=pk)
     fetch_records_for_researcher.apply_async(eta=timezone.now(), kwargs={'pk':pk})
-    return render(request, 'papers/updateResearcher.html', {'source':source})
+    return render(request, 'papers/updateResearcher.html', {'researcher':source})
 
 def updateResearcher(request, pk):
     source = get_object_or_404(Researcher, pk=pk)

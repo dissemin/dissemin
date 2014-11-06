@@ -32,7 +32,7 @@
 Data sources:
 <ul>
 {% for record in paper.oairecord_set.all %}
-<li>{{ record.source }}, <a href="{{ record.url }}">{{ record.identifier }}</a></li>
+<li>{{ record.source }}, {% if record.splash_url %}<a href="{{ record.splash_url }}">{% endif %}{{ record.identifier }}{% if record.splash_url %}</a>{% endif %} {% if record.pdf_url %}<a href="{{ record.pdf_url }}">[PDF]</a>{% endif %}</li>
 {% endfor %}
 {% for publi in paper.publication_set.all %}
     <li><a href="{{ publi | doi_to_url }}">{{ publi.publisher|default:"Publisher" }}</a> via DOI</li>
