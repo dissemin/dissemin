@@ -14,7 +14,8 @@ def index(request):
     context = {
         'nb_researchers': nb_researchers,
         'nb_groups': nb_groups,
-        'nb_departments': nb_departments
+        'nb_departments': nb_departments,
+        'departments': Department.objects.all()
         }
     return render(request, 'papers/index.html', context)
 

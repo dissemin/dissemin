@@ -11,4 +11,11 @@ Dissemin
 {% block content %}
 <p>There are currently {{ nb_researchers }} registered researchers,
 from {{ nb_departments }} departments and {{ nb_groups }} teams.</p>
+
+<p>Browse by department:</p>
+<ul>
+    {% for dept in departments %}
+    <li><a href="{% url 'department' dept.id %}">{{ dept }}</a></li>
+    {% endfor %}
+</ul>
 {% endblock %}
