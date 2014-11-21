@@ -1,11 +1,14 @@
 dissemin
 ================
 
-OAI-PMH harvester, restricting results to the employees of an institution.
-The results are exposed as a web platform.
+Web platform showing the articles written by researchers of an institution.
+It highlights the articles that are not freely available while uploading them would comply with the publisher's policy.
 
-It discovers article through CrossRef.org.
-It should include data from SHERPA/RoMEO soon.
+Data sources:
+* OAI-PMH, through a proxy
+* CrossRef.org
+* SHERPA/RoMEO
+* Soon: Bielefeld Academic Search Engine (BASE)
 
 Dependencies:
 * Python 2.7 (should work with Python 3)
