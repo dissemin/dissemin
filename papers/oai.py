@@ -56,25 +56,9 @@ def add_oai_record(record, source, paper=None):
             splash_url=splash_url)
     r.save()
 
-comma_re = re.compile(r',+')
-
-def parse_oai_author(name):
-    """ Parse an name of the form "Last name, First name" to (first name, last name) """
-    name = normalize_name_words(name)
-    name = comma_re.sub(',',name)
-    first_name = ''
-    last_name = name
-    idx = name.find(',')
-    if idx != -1:
-        last_name = name[:idx]
-        first_name = name[(idx+1):]
-    first_name = first_name.strip()
-    last_name = last_name.strip()
-    return (first_name,last_name)
-
 def get_oai_authors(metadata):
     """ Get the authors names out of a search result """
-    return map(lookup_name, map(parse_oai_author, metadata['creator']))
+    return map(lookup_name, map(parse_comma_author, metadata['creator']))
 
 def find_earliest_oai_date(record):
     """ Find the latest publication date (if any) in a record """

@@ -10,6 +10,36 @@ from papers.doi import to_doi
 from papers.crossref import fetch_metadata_by_DOI
 from papers.romeo import fetch_journal
 
+# Name managemement: heuristics to separate a name into (first,last)
+comma_re = re.compile(r',+')
+
+def parse_comma_name(name):
+    """ Parse an name of the form "Last name, First name" to (first name, last name) """
+    name = normalize_name_words(name)
+    name = comma_re.sub(',',name)
+    first_name = ''
+    last_name = name
+    idx = name.find(',')
+    if idx != -1:
+        last_name = name[:idx]
+        first_name = name[(idx+1):]
+    first_name = first_name.strip()
+    last_name = last_name.strip()
+    return (first_name,last_name)
+
+# TODO: there is probably a better way to parse names such as "Colin de la Higuera"
+# list of "particle words" such as "de, von, van, du" ?
+def parse_unknown_name(name):
+    """ Try to parse a name of the form "Jean Dupont" or "Dupont, Jean" """
+    if ',' in name:
+        return parse_comma_name(name)
+    space_re = re.compile(r' +')
+    name = space_re.sub(' ',name)
+    words = name.split(' ')
+    if not words:
+        return ('','')
+    return (words[:-1].join(' '), words[-1])
+
 def lookup_name(author_name):
     first_name = author_name[0]
     last_name = author_name[1]
