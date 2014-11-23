@@ -63,23 +63,23 @@ class CairnExtractor(RegexExtractor):
 
 
 arxivExtractor = RegexExtractor([
-    ('identifier',re.compile(r'(http://arxiv.org/abs/[^ ]*)'),
+    ('identifier',re.compile(r'(http://arxiv.org/abs/[^ ]*)$'),
         'splash',r'\1'),
-    ('identifier',re.compile(r'http://arxiv.org/abs/([^ ]*)'),
+    ('identifier',re.compile(r'http://arxiv.org/abs/([^ ]*)$'),
         'pdf',r'http://arxiv.org/pdf/\1')
     ])
 
 halExtractor = RegexExtractor([
-    ('identifier',re.compile(r'(https?://[a-z\-0-9.]*\.archives-ouvertes\.fr/[a-z0-9\-]*)'),
+    ('identifier',re.compile(r'(https?://[a-z\-0-9.]*/[a-z0-9\-]*)$'),
         'splash', r'\1'),
-    ('identifier',re.compile(r'(https?://[a-z\-0-9.]*\.archives-ouvertes\.fr/[a-z0-9\-]*/document)'),
+    ('identifier',re.compile(r'(https?://[a-z\-0-9.]*/[a-z0-9\-]*/document)$'),
         'pdf', r'\1'),
     ])
 
 cairnExtractor = CairnExtractor([
-    ('identifier',re.compile(r'(http://www\.cairn\.info/article\.php\?ID_ARTICLE=[0-9\-_a-zA-Z]*)'),
+    ('identifier',re.compile(r'(http://www\.cairn\.info/article\.php\?ID_ARTICLE=[0-9\-_a-zA-Z]*)$'),
         'splash',r'\1'),
-    ('identifier',re.compile(r'(http://www\.cairn\.info/)article(\.php\?ID_ARTICLE=[0-9\-_a-zA-Z]*)'),
+    ('identifier',re.compile(r'(http://www\.cairn\.info/)article(\.php\?ID_ARTICLE=[0-9\-_a-zA-Z]*)$'),
         'pdf',r'\1load_pdf\2'),
     ])
 
