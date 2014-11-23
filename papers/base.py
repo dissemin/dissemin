@@ -1,17 +1,20 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from papers.errors import MetadataSourceException
+from papers.backend import *
+
 from urllib2 import urlopen, URLError
 from urllib import urlencode
 import xml.etree.ElementTree as ET
 import unicodedata
 
-bielefeld_timeout = 5
+bielefeld_timeout = 10
 
 def fetch_papers_from_base_by_researcher_name(name):
     base_url = 'http://api.base-search.net/cgi-bin/BaseHttpSearchInterface.fcgi'
     
-    search_terms = 'todo'
+    search_terms = name[0]+' '+name[1]
     try:
         offset = 0
         nb_results = 1
@@ -20,7 +23,7 @@ def fetch_papers_from_base_by_researcher_name(name):
                     'offset':str(offset),
                     'query':search_terms}
             request = base_url+'?'+urlencode(query_args)
-            f = urlopen(request, timeout=bielefeld_timeout)
+            f = urlopen(request)
             response = f.read()
             root = ET.fromstring(response)
             result_list = list(root.findall('./result'))
@@ -52,12 +55,12 @@ def fetch_papers_from_base_by_researcher_name(name):
                 request+'\n'+
                 'Reason: '+str(e))
 
-def base_xml_to_dict(xml):
+def base_xml_to_dict(doc):
     dct = dict()
     strings = doc.findall('./str')
     for s in strings:
         if 'name' in s.attrib:
-            dct[s.attrib['name'] = s.text
+            dct[s.attrib['name']] = s.text
     arrays = doc.findall('./arr')
     for a in arrays:
         if 'name' in a.attrib:
@@ -87,7 +90,7 @@ def add_base_document(doc):
     except KeyError: # No dcyear attribute, let's try to extract it from the date
         try:
             date = metadata['dcdate']
-            year_re = r'[12][0-9][0-9][0-9]'
+            year_re = re.compile(r'[12][0-9][0-9][0-9]')
             match = year_re.search(date)
             if match:
                 year = int(match.group(0))
@@ -98,8 +101,21 @@ def add_base_document(doc):
                 'In document "'+title+'"')
             return
     
-    paper = get_or_create_paper(title, author_names, year)
+    # Lookup the names and check that at least one of them is known
+    model_names = []
+    researcher_found = False
+    for name in author_names:
+        mn = lookup_name(name)
+        model_names.append(mn)
+        if mn.researcher:
+            researcher_found = True
+
+    if researcher_found:
+        paper = get_or_create_paper(title, model_names, year)
 
     # TODO: create OAI record
 
+
+# TODO remove me
+fetch_papers_from_base_by_researcher_name(('Guillaume', 'Baudart'))
 

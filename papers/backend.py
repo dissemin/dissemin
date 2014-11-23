@@ -39,7 +39,7 @@ def parse_unknown_name(name):
     words = name.split(' ')
     if not words:
         return ('','')
-    return (words[:-1].join(' '), words[-1])
+    return (' '.join(words[:-1]), words[-1])
 
 def lookup_name(author_name):
     first_name = author_name[0]

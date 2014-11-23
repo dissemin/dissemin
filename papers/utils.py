@@ -31,7 +31,10 @@ def nstrip(s):
     return None
 
 def remove_diacritics(s):
-    return unidecode(s)
+    if type(s) == type(u''):
+        return unidecode(s)
+    else:
+        return s
 
 split_re = re.compile(r'[ .,]*')
 def split_words(string):
