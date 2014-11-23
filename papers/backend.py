@@ -2,8 +2,9 @@
 from __future__ import unicode_literals
 
 from django.core.exceptions import ObjectDoesNotExist
+import re
 
-from papers.utils import to_plain_name, create_paper_fingerprint
+from papers.utils import to_plain_name, create_paper_fingerprint, normalize_name_words
 from papers.errors import MetadataSourceException
 from papers.models import *
 from papers.doi import to_doi
