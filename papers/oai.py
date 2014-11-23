@@ -24,11 +24,6 @@ def add_oai_record(record, source, paper=None):
     header = record[0]
     identifier = header.identifier()
 
-    matching = OaiRecord.objects.filter(identifier=identifier)
-    if len(matching) > 0:
-        print "Record already saved"
-        return # Record already saved. TODO : update if information changed
-
     # A description is useful
     curdesc = ""
     for desc in record[1]._map['description']:
@@ -46,6 +41,19 @@ def add_oai_record(record, source, paper=None):
             splash_url = urls.get('splash')
         except KeyError:
             print "Warning, invalid extractor for source "+source.name
+
+    matching = OaiRecord.objects.filter(identifier=identifier)
+    if len(matching) > 0:
+        r = matching[0]
+        # TODO if the two papers are different, merge them.
+        r.description = curdesc
+        if pdf_url:
+            r.pdf_url = pdf_url
+        if splash_url:
+            r.splash_url = splash_url
+        r.save()
+        return
+
 
     r = OaiRecord(
             source=source,
