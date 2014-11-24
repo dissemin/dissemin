@@ -83,12 +83,19 @@ cairnExtractor = CairnExtractor([
         'pdf',r'\1load_pdf\2'),
     ])
 
+pmcExtractor = RegexExtractor([
+    ('identifier', re.compile(r'(https?://www\.ncbi\.nlm\.nih\.gov/pubmed/[0-9]+)$'),
+        'splash', r'\1'),
+    ('identifier', re.compile(r'https?://www\.ncbi\.nlm\.nih\.gov/pubmed/([0-9]+)$'),
+        'pdf', r'http://www.ncbi.nlm.nih.gov/pmc/articles/pmid/\1')
+    ])
 
 
 REGISTERED_EXTRACTORS = {
         'arxiv': arxivExtractor,
         'hal': halExtractor,
         'cairn' : cairnExtractor,
+        'pmc' : pmcExtractor,
         }
 
 
