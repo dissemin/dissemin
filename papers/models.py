@@ -6,6 +6,10 @@ from papers.utils import nstr
 class Department(models.Model):
     name = models.CharField(max_length=300)
 
+    @property
+    def sorted_researchers(self):
+        return Researcher.objects.filter(department_id=self.id).order_by('name')
+
     def __unicode__(self):
         return self.name
 
@@ -52,7 +56,12 @@ class Name(models.Model):
     researcher = models.ForeignKey(Researcher, blank=True, null=True)
     first = models.CharField(max_length=256)
     last = models.CharField(max_length=256)
+
     unique_together = ('first','last')# TODO Two researchers with the same name is not supported
+    
+    class Meta:
+        ordering = ['last','first']
+
     def __unicode__(self):
         return '%s %s' % (self.first,self.last)
     @property

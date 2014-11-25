@@ -6,7 +6,7 @@
 {% block lists %}
 <p>Members:</p>
 <ul>
-    {% for person in department.researcher_set.all %}
+    {% for person in department.sorted_researchers %}
     <li><a href="{% url 'researcher' person.id %}">{{ person }}</a></li>
     {% endfor %}
 </ul>

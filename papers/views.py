@@ -15,7 +15,7 @@ def index(request):
         'nb_researchers': nb_researchers,
         'nb_groups': nb_groups,
         'nb_departments': nb_departments,
-        'departments': Department.objects.all()
+        'departments': Department.objects.order_by('name')
         }
     return render(request, 'papers/index.html', context)
 
