@@ -7,7 +7,7 @@ import re
 # hence a quite permissive regexp, as we use it in a controlled
 # environment: fields of a metadata record and not plain text
 
-doi_re = re.compile(r'(?i) *(?:DOI *[:=])? *(?:http://dx\.doi\.org/)?([^ ]+/[^ ]+) *')
+doi_re = re.compile(r'^(?i) *(?:DOI *[:=])? *(?:http://dx\.doi\.org/)?(10\.[0-9]{4,}[^ ]*/[^ ]+) *$')
 
 # Supported formats
 #
