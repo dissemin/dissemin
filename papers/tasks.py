@@ -153,3 +153,12 @@ def fetch_dois_for_researcher(pk):
     researcher.status = 'OK, %d records processed.' % nb_records
     researcher.save()
 
+# Should only be run if something went wrong,
+# the backend is supposed to update the fields by itself
+def update_paper_statuses():
+    papers = Paper.objects.all()
+    for p in papers:
+        p.update_oa_status()
+        p.update_first_pdf_record()
+
+

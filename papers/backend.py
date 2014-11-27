@@ -111,6 +111,8 @@ def create_publication(paper, metadata):
             doi=doi, pubtype=pubtype, publisher=publisher,
             journal=journal)
     pub.save()
+    paper.update_oa_status()
+    paper.update_first_pdf_record()
     return pub
 
 

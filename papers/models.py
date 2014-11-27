@@ -74,21 +74,29 @@ class Paper(models.Model):
     fingerprint = models.CharField(max_length=64)
     year = models.IntegerField()
     last_modified = models.DateField(auto_now=True)
+
     def __unicode__(self):
         return self.title
 
-    @property
-    def oa_status(self):
+    # The two following fields need to be updated after the relevant changes
+    # using the methods below.
+    oa_status = models.CharField(max_length=32, null=True, blank=True)
+    first_pdf_record = models.ForeignKey('OaiRecord', null=True, blank=True)
+
+    def update_oa_status(self):
         qs = list(self.publication_set.all()[:1])
         if qs:
-            return qs[0].oa_status()
+            self.oa_status = qs[0].oa_status()
         else:
-            return 'UNK'
-    @property
-    def first_pdf_record(self):
+            self.oa_status = 'UNK'
+        self.save()
+
+    def update_first_pdf_record(self):
+        # declared at the end for dependencies reasons
         matches = OaiRecord.objects.filter(about=self.id,pdf_url__isnull=False)[:1]
         if matches:
-            return matches[0]
+            self.first_pdf_record = matches[0]
+        self.save()
 
     
 class Author(models.Model):
@@ -220,6 +228,5 @@ class OaiRecord(models.Model):
     description = models.TextField(null=True,blank=True)
     def __unicode__(self):
         return self.identifier
-
 
 

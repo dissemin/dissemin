@@ -64,6 +64,10 @@ def add_oai_record(record, source, paper=None):
             splash_url=splash_url)
     r.save()
 
+    if paper:
+        paper.update_oa_status()
+        paper.update_first_pdf_record()
+
 def get_oai_authors(metadata):
     """ Get the authors names out of a search result """
     return map(lookup_name, map(parse_comma_name, metadata['creator']))
