@@ -58,9 +58,16 @@ def searchView(request, **kwargs):
         queryset = queryset.filter(oa_status=args.get('status'))
         # We don't update the search description here, it will be displayed on the side
         context['status'] = args.get('status')
+    if 'pdf' in args:
+        val = args.get('pdf')
+        if val == 'OK':
+            queryset = queryset.filter(first_pdf_record__isnull=False)
+        elif val == 'NOK':
+            queryset = queryset.filter(first_pdf_record__isnull=True)
+        context['pdf'] = val
 
     if search_description == 'Papers':
-        search_description == 'All papers'
+        search_description = 'All papers'
 
     # Sort
     queryset = queryset.order_by('-year')
@@ -80,15 +87,28 @@ def searchView(request, **kwargs):
     context['nb_results'] = queryset.count()
 
     # Build the GET requests for variants of the parameters
-    oa_variants = []
-    for s in OA_STATUS_CHOICES:
-        queryargs = args.copy()
-        queryargs['status'] = s[0]
-        oa_variants.append((s[0], s[1], queryargs))
+    PDF_STATUS_CHOICES = [('OK', 'Available'),
+                          ('NOK', 'Unavailable')]
+
+    oa_variants = varyQueryArguments('status', args, OA_STATUS_CHOICES)
+    pdf_variants = varyQueryArguments('pdf', args, PDF_STATUS_CHOICES)
 
     context['oa_status_choices'] = oa_variants
+    context['pdf_status_choices'] = pdf_variants
 
     return render(request, 'papers/search.html', context)
+
+def varyQueryArguments(key, args, possibleValues):
+    variants = []
+    for s in possibleValues:
+        queryargs = args.copy()
+        if s[0] != queryargs.get(key):
+            queryargs[key] = s[0]
+        else:
+            queryargs.pop(key)
+        variants.append((s[0], s[1], queryargs))
+    return variants
+
 
 class ResearcherView(generic.DetailView):
     model = Researcher

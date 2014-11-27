@@ -25,13 +25,30 @@
 {% endif %}
 
 <p>{{ nb_results }} papers</p>
-<p>Refine by status</p>
+<h5>Publisher policy:</h5>
 <ul>
     {% for st in oa_status_choices %}
     <li>
-        {% if st.0 == status %}<strong>{% endif %}
-            <a href="{% url 'search' %}?{{ st.2.urlencode }}">{{ st.1 }}</a></li>
-        {% if st.0 == status %}</strong>{% endif %}
+        {% if st.0 == status %}
+            <strong>{{ st.1 }}</strong>
+            <a href="{% url 'search' %}?{{ st.2.urlencode }}">[x]</a>
+        {% else %}
+            <a href="{% url 'search' %}?{{ st.2.urlencode }}">{{ st.1 }}</a>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+<h5>Full text availability:</h5>
+<ul>
+    {% for st in pdf_status_choices %}
+    <li>
+        {% if st.0 == pdf %}
+            <strong>{{ st.1 }}</strong>
+            <a href="{% url 'search' %}?{{ st.2.urlencode }}">[x]</a>
+        {% else %}
+            <a href="{% url 'search' %}?{{ st.2.urlencode }}">{{ st.1 }}</a>
+        {% endif %}
+    </li>
     {% endfor %}
 </ul>
 {% endblock %}
