@@ -43,5 +43,6 @@ $('#pencilcase').hover(
 {% block details %}
 <p>Head: </p>
 <p>Website: </p>
+<p><a href="{% url 'search' %}?department={{ department.id }}">Papers authored by the members</a></p>
 {% endblock %}
 

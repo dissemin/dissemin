@@ -12,6 +12,18 @@
 {% endblock %}
 
 {% block details %}
+{% if researcher %}
+    <p><a href="{% url 'department' researcher.department.id %}">{{ researcher.department }}</a></p>
+    <p>Member of: {% for team in researcher.groups.all %}
+    <a href="{% url 'group' team.id %}">{{ team.name }}</a> {% endfor %}</p> 
+{% endif %}
+{% if journal %}
+    <p>Published by <a href="{% url 'publisher' journal.publisher.id %}">{{ journal.publisher }}</a></p>
+    {% if journal.issn %}
+    <p>ISSN: {{ journal.issn }}</p>
+    {% endif %}
+{% endif %}
+
 <p>{{ nb_results }} papers</p>
 <p>Refine by status</p>
 {% endblock %}

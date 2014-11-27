@@ -26,28 +26,34 @@ def index(request):
         }
     return render(request, 'papers/index.html', context)
 
-def searchView(request):
+def searchView(request, **kwargs):
     context = dict()
     # Build the queryset
     queryset = Paper.objects.all()
-
+    args = dict(kwargs.items()+request.GET.items())
+    print args
+    
     search_description = 'Papers'
-    if 'researcher' in request.GET:
-        researcher = get_object_or_404(Researcher, pk=request.GET.get('researcher'))
+    if 'researcher' in args:
+        researcher = get_object_or_404(Researcher, pk=args.get('researcher'))
         queryset = queryset.filter(author__name__researcher=researcher)
         search_description += ' authored by '+unicode(researcher)
-    elif 'department' in request.GET:
-        department = get_object_or_404(Department, pk=request.GET.get('department'))
+        context['researcher'] = researcher
+    elif 'department' in args:
+        department = get_object_or_404(Department, pk=args.get('department'))
         queryset = queryset.filter(author__name__researcher__department=department)
         search_description += ' authored in '+unicode(department)
-    if 'journal' in request.GET:
-        journal = get_object_or_404(Journal, pk=request.GET.get('journal'))
+        context['department'] = department
+    if 'journal' in args:
+        journal = get_object_or_404(Journal, pk=args.get('journal'))
         queryset = queryset.filter(publication__journal=journal)
         search_description += ' in '+unicode(journal)
-    elif 'publisher' in request.GET:
-        publisher = get_object_or_404(Publisher, pk=request.GET.get('publisher'))
+        context['journal'] = journal
+    elif 'publisher' in args:
+        publisher = get_object_or_404(Publisher, pk=args.get('publisher'))
         queryset = queryset.filter(publication__journal__publisher=publisher)
         seach_description += ' published by '+unicode(publisher)
+        context['publisher'] = publisher
 
     if search_description == 'Papers':
         search_description == 'All papers'
@@ -57,7 +63,7 @@ def searchView(request):
 
     # Build the paginator
     paginator = Paginator(queryset, NB_RESULTS_PER_PAGE)
-    page = request.GET.get('page')
+    page = args.get('page')
     try:
         current_papers = paginator.page(page)
     except PageNotAnInteger:
