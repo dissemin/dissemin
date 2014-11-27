@@ -30,7 +30,8 @@ def searchView(request, **kwargs):
     context = dict()
     # Build the queryset
     queryset = Paper.objects.all()
-    args = dict(kwargs.items()+request.GET.items())
+    args = request.GET.copy()
+    args.update(kwargs)
     
     search_description = 'Papers'
     if 'researcher' in args:
@@ -77,7 +78,15 @@ def searchView(request, **kwargs):
     context['search_results'] = current_papers
     context['search_description'] = search_description
     context['nb_results'] = queryset.count()
-    context['oa_status_choices'] = OA_STATUS_CHOICES
+
+    # Build the GET requests for variants of the parameters
+    oa_variants = []
+    for s in OA_STATUS_CHOICES:
+        queryargs = args.copy()
+        queryargs['status'] = s[0]
+        oa_variants.append((s[0], s[1], queryargs))
+
+    context['oa_status_choices'] = oa_variants
 
     return render(request, 'papers/search.html', context)
 
