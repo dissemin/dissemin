@@ -1,18 +1,33 @@
 {% extends "dissemin/details.html" %}
 
 {% block headTitle %}{{ department.name }}{% endblock %}
-{% block bodyTitle %}<a href="#" id="department_name" data-pk="{{ department.id }}">{{ department.name }}</a>{% endblock %}
+{% block bodyTitle %}<div id="pencilcase"><a href="#" id="department_name"
+    data-pk="{{ department.id }}"
+    data-toggle="manual">{{ department.name }}</a><span>Img</span></div>{% endblock %}
 
 {% block jsScript %}
 $(function(){
 $('#department_name').editable({
-type: 'text',
-pk: 1,
-name: 'name',
-url: 'post.php',
-title: 'Enter department name',
-mode: 'inline',
-});
+    type: 'text',
+    pk: 1,
+    name: 'name',
+    url: 'post.php',
+    title: 'Enter department name',
+    mode: 'inline',
+    });
+
+$('#pencil').click(function(e){    
+       e.stopPropagation();
+              $('#department_name').editable('toggle');
+              });
+$('#pencilcase').hover(
+    function() {
+        $( this ).find( "span:last" ).remove();
+        $( this ).append( $( "<span><a href="#" id="pencil">Edit</a></span>" ) );
+    }, function() {
+        $( this ).find( "span:last" ).remove();
+        $( this ).append( $( "<span>Img</span>" ) );
+    });
 });
 {% endblock %}
 
