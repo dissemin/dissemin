@@ -31,7 +31,6 @@ def searchView(request, **kwargs):
     # Build the queryset
     queryset = Paper.objects.all()
     args = dict(kwargs.items()+request.GET.items())
-    print args
     
     search_description = 'Papers'
     if 'researcher' in args:
@@ -52,8 +51,12 @@ def searchView(request, **kwargs):
     elif 'publisher' in args:
         publisher = get_object_or_404(Publisher, pk=args.get('publisher'))
         queryset = queryset.filter(publication__journal__publisher=publisher)
-        seach_description += ' published by '+unicode(publisher)
+        search_description += ' published by '+unicode(publisher)
         context['publisher'] = publisher
+    if 'status' in args:
+        queryset = queryset.filter(oa_status=args.get('status'))
+        # We don't update the search description here, it will be displayed on the side
+        context['status'] = args.get('status')
 
     if search_description == 'Papers':
         search_description == 'All papers'
@@ -74,6 +77,7 @@ def searchView(request, **kwargs):
     context['search_results'] = current_papers
     context['search_description'] = search_description
     context['nb_results'] = queryset.count()
+    context['oa_status_choices'] = OA_STATUS_CHOICES
 
     return render(request, 'papers/search.html', context)
 

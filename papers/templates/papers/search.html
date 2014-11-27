@@ -26,6 +26,14 @@
 
 <p>{{ nb_results }} papers</p>
 <p>Refine by status</p>
+<ul>
+    {% for st in oa_status_choices %}
+    <li>
+        {% if st.0 == status %}<strong>{% endif %}
+            <a href="{% url 'search' %}">{{ st.1 }}</a></li>
+        {% if st.0 == status %}</strong>{% endif %}
+    {% endfor %}
+</ul>
 {% endblock %}
 
 {% block lists %}
