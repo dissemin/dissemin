@@ -21,25 +21,25 @@
 <p>Preprint policy: {{ publisher.preprint }}</p>
 <ul>
 {% for restriction in publisher.preprint_conditions %}
-    <li>{{ restriction }}</li>
+    <li>{{ restriction|striptags }}</li>
 {% endfor %}
 </ul>
 <p>Postprint policy: {{ publisher.postprint }}</p>
 <ul>
 {% for restriction in publisher.postprint_conditions %}
-    <li>{{ restriction }}</li>
+    <li>{{ restriction|striptags }}</li>
 {% endfor %}
 </ul>
 <p>PDF version policy: {{ publisher.pdfversion }}</p>
 <ul>
 {% for restriction in publisher.pdfversion_conditions %}
-    <li>{{ restriction }}</li>
+    <li>{{ restriction|striptags }}</li>
 {% endfor %}
 </ul>
 <h4>Conditions</h4>
 <ul>
 {% for condition in publisher.publishercondition_set.all %}
-    <li>{{ condition }}</li>
+    <li>{{ condition|striptags }}</li>
 {% endfor %}
 </ul>
 <h4>Policy details</h4>
