@@ -1,0 +1,34 @@
+{% extends "dissemin/details.html" %}
+
+{% load staticfiles %}
+{% load bootstrap_pagination %}
+
+{% block headTitle %}
+{{ search_description }}
+{% endblock %}
+
+{% block bodyTitle %}
+{{ search_description }}
+{% endblock %}
+
+{% block details %}
+<p>{{ nb_results }} papers</p>
+<p>Refine by status</p>
+{% endblock %}
+
+{% block lists %}
+ {% bootstrap_paginate search_results range=10 %}
+ {% for paper in search_results %}
+ {% ifchanged paper.year %}
+ {% if not forloop.first %}</ul></div>{% endif %}
+    <div class="ulContainer">
+    <div class="listYear">{{ paper.year }}</div><ul>
+ {% endifchanged %}
+    <li>
+        {% include "papers/publiListItem.html" with paper=paper %}
+</li>    
+        {% if forloop.last %}</ul></div>{% endif %}
+ {% empty %}
+ <p>No production found.</p>
+ {% endfor %}
+{% endblock %}

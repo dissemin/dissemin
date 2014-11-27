@@ -4,6 +4,7 @@ from papers import views
 
 urlpatterns = patterns('',
         url(r'^$', views.index, name='index'),
+        url(r'^search', views.searchView, name='search'),
         url(r'^researcher/(?P<pk>\d+)/$', views.ResearcherView.as_view(), name='researcher'),
         url(r'^researcher/(?P<pk>\d+)/update/$', views.updateResearcher, name='updateResearcher'),
         url(r'^researcher/(?P<pk>\d+)/updateoai/$', views.updateResearcherOAI, name='updateResearcherOAI'),
