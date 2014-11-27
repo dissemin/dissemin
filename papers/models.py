@@ -169,6 +169,17 @@ class PublisherRestrictionDetail(models.Model):
     def __unicode__(self):
         return self.text
 
+class Disambiguation(models.Model):
+    publications = models.ManyToMany(Publication)
+    title = models.CharField(max_length=512)
+    issn = models.CharField(max_length=128)
+    unique_together = ('title', 'issn')
+
+class DisambiguationChoice(models.Model):
+    about = models.ForeignKey(Disambiguation)
+    title = models.CharField(max_length=512)
+    issn = models.CharField(max_length=128)
+
 # Publication of these papers (in journals or conference proceedings)
 class Publication(models.Model):
     paper = models.ForeignKey(Paper)

@@ -26,7 +26,7 @@ def find_journal_in_model(search_terms):
             return matches[0]
 
 
-def fetch_journal(search_terms):
+def fetch_journal(search_terms, matching_mode='exact'):
     """
     Fetch the journal data from RoMEO. Returns an Journal object.
     search_terms should be a dictionnary object containing at least one of these fields:
@@ -72,6 +72,10 @@ def fetch_journal(search_terms):
     # Find the matching journals (if any)
     journals = list(root.findall('./journals/journal'))
     if not journals:
+        # Retry with a less restrictive matching type
+        if matching_mode == 'exact':
+            return fetch_journal(search_terms, 'contains')
+        # TODO do it also with 'contains' but with a disambiguation notice
         return None
     if len(journals) > 1:
         print ("Warning, "+str(len(journals))+" journals match the RoMEO request, "+
