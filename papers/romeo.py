@@ -32,7 +32,7 @@ def fetch_journal(search_terms, matching_mode='exact'):
     search_terms should be a dictionnary object containing at least one of these fields:
     """
     allowed_fields = ['issn', 'jtitle']
-
+    original_search_terms = search_terms.copy()
 
     # Check the arguments
     if not all(map(lambda x: x in allowed_fields, (key for key in search_terms))):
@@ -74,7 +74,7 @@ def fetch_journal(search_terms, matching_mode='exact'):
     if not journals:
         # Retry with a less restrictive matching type
         if matching_mode == 'exact':
-            return fetch_journal(search_terms, 'contains')
+            return fetch_journal(original_search_terms, 'contains')
         # TODO do it also with 'contains' but with a disambiguation notice
         return None
     if len(journals) > 1:
