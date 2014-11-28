@@ -92,6 +92,12 @@ def create_publication(paper, metadata):
         return
     if not 'container-title' in metadata or not metadata['container-title']:
         return
+    doi = to_doi(metadata.get('DOI',None))
+    # Test first if there is no publication with this new DOI
+    matches = Publication.objects.filter(doi__exact=doi)
+    if matches:
+        return matches[0]
+
     title = metadata['container-title']
     volume = metadata.get('volume',None)
     pages = metadata.get('page',None)
@@ -99,12 +105,12 @@ def create_publication(paper, metadata):
     date_dict = metadata.get('issued',dict())
     date = '-'.join(map(str,date_dict.get('date-parts',[[]])[0]))
     publisher = metadata.get('publisher', None)
-    doi = to_doi(metadata.get('DOI',None))
     pubtype = 'article'
 
     # Lookup journal
     journal = fetch_journal({'jtitle':title})
     # TODO use the "publisher" info ?
+
 
     pub = Publication(title=title, issue=issue, volume=volume,
             date=date, paper=paper, pages=pages,
