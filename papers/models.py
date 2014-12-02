@@ -170,7 +170,7 @@ class PublisherRestrictionDetail(models.Model):
         return self.text
 
 class Disambiguation(models.Model):
-    publications = models.ManyToMany(Publication)
+    publications = models.ManyToManyField('Publication')
     title = models.CharField(max_length=512)
     issn = models.CharField(max_length=128)
     unique_together = ('title', 'issn')
