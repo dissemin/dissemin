@@ -90,8 +90,11 @@ def searchView(request, **kwargs):
     PDF_STATUS_CHOICES = [('OK', 'Available'),
                           ('NOK', 'Unavailable')]
 
-    oa_variants = varyQueryArguments('status', args, OA_STATUS_CHOICES)
-    pdf_variants = varyQueryArguments('pdf', args, PDF_STATUS_CHOICES)
+    args_without_page = args.copy()
+    if 'page' in args_without_page:
+        del args_without_page['page']
+    oa_variants = varyQueryArguments('status', args_without_page, OA_STATUS_CHOICES)
+    pdf_variants = varyQueryArguments('pdf', args_without_page, PDF_STATUS_CHOICES)
 
     context['oa_status_choices'] = oa_variants
     context['pdf_status_choices'] = pdf_variants
