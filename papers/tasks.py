@@ -93,8 +93,8 @@ def fetch_records_for_name(name):
         process_records(listRecords)
     except NoRecordsMatchError:
         pass
-    except BadArgumentError:
-        print "Author is unknown for the proxy"
+    except BadArgumentError as e:
+        print "Author is unknown for the proxy: "+unicode(e)
         pass
 
 
