@@ -72,6 +72,7 @@ def create_paper_plain_fingerprint(title, authors):
     title = re.sub(' +', '-', title)
     buf = title
 
+    author_names_list = []
     for author in authors:
         author = (remove_diacritics(author[0]),remove_diacritics(author[1]))
         # Initials of the given names
@@ -84,6 +85,10 @@ def create_paper_plain_fingerprint(title, authors):
         # Lowercase
         last_words = map(ulower, last_words)
         fp = ('-'.join(initials))+'-'+('-'.join(last_words))
+        author_names_list.append(fp)
+
+    author_names_list.sort()
+    for fp in author_names_list:
         buf += '/'+fp
 
     print "Fingerprint: "+buf
