@@ -86,6 +86,18 @@ def get_or_create_paper(title, author_names, year, doi=None):
 
     return p
 
+# Merges the second paper into the first one
+def merge_papers(first, second):
+    # TODO What if the authors are not the same?
+    # We should merge the list of authors, so that the order is preserved
+    
+    OaiRecord.objects.filter(about=second.pk).update(about=first.pk)
+    Publication.objects.filter(paper=second.pk).update(paper=first.pk)
+    second.delete()
+    first.update_oa_status()
+    first.update_first_pdf_record()
+
+
 # Create a Publication entry based on the DOI metadata
 def create_publication(paper, metadata):
     if not metadata:

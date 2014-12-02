@@ -45,13 +45,14 @@ def add_oai_record(record, source, paper=None):
     matching = OaiRecord.objects.filter(identifier=identifier)
     if len(matching) > 0:
         r = matching[0]
-        # TODO if the two papers are different, merge them.
         r.description = curdesc
         if pdf_url:
             r.pdf_url = pdf_url
         if splash_url:
             r.splash_url = splash_url
         r.save()
+        if paper and paper.pk != r.about:
+            merge_papers(paper, r.about)
         return
 
 
