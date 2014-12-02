@@ -98,7 +98,8 @@ class Paper(models.Model):
             self.first_pdf_record = matches[0]
         self.save()
 
-    
+# Researcher / Paper binary relation
+# TODO: it could be a ManyToMany field...
 class Author(models.Model):
     paper = models.ForeignKey(Paper)
     name = models.ForeignKey(Name)

@@ -83,13 +83,15 @@ def get_or_create_paper(title, author_names, year, doi=None):
         except MetadataSourceException as e:
             print "Warning, metadata source exception while fetching DOI "+doi+":\n"+unicode(e)
             pass
-
     return p
 
 # Merges the second paper into the first one
 def merge_papers(first, second):
     # TODO What if the authors are not the same?
     # We should merge the list of authors, so that the order is preserved
+
+    if first.pk == second.pk:
+        return
     
     OaiRecord.objects.filter(about=second.pk).update(about=first.pk)
     Publication.objects.filter(paper=second.pk).update(paper=first.pk)

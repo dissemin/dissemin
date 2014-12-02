@@ -51,7 +51,7 @@ def add_oai_record(record, source, paper=None):
         if splash_url:
             r.splash_url = splash_url
         r.save()
-        if paper and paper.pk != r.about:
+        if paper and paper.pk != r.about.pk:
             merge_papers(paper, r.about)
         return
 
