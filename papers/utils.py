@@ -65,7 +65,7 @@ def to_plain_name(name):
     return (name.first,name.last)
 
 stripped_chars = re.compile(r'[^- a-z0-9]')
-def create_paper_fingerprint(title, authors):
+def create_paper_plain_fingerprint(title, authors):
     title = remove_diacritics(title).lower()
     title = stripped_chars.sub('',title)
     title = title.strip()
@@ -86,9 +86,12 @@ def create_paper_fingerprint(title, authors):
         fp = ('-'.join(initials))+'-'+('-'.join(last_words))
         buf += '/'+fp
 
-    m = hashlib.md5()
-    m.update(buf)
     print "Fingerprint: "+buf
+    return buf
+
+def create_paper_fingerprint(title, authors):
+    m = hashlib.md5()
+    m.update(create_paper_plain_fingerprint(title, authors))
     return m.hexdigest()
 
 

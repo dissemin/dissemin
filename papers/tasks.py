@@ -114,9 +114,7 @@ def fetch_dois_for_researcher(pk):
 
         count = 0
         for metadata in lst:
-            if not 'title' in metadata or not metadata['title']:
-                print "No title, skipping"
-                continue # TODO at many continue, add warnings in logs
+            # the upstream function ensures that there is a non-empty title
             if not 'DOI' in metadata or not metadata['DOI']:
                 print "No DOI, skipping"
                 continue

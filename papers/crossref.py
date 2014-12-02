@@ -5,11 +5,12 @@ from urllib import urlencode
 import json
 
 from celery import current_task
+from django.core.exceptions import ObjectDoesNotExist
 
 from papers.errors import MetadataSourceException
 from papers.doi import to_doi
-from papers.utils import match_names, normalize_name_words
-from papers.models import Publication
+from papers.utils import match_names, normalize_name_words, create_paper_fingerprint
+from papers.models import Publication, Paper
 
 from unidecode import unidecode
 
@@ -74,7 +75,11 @@ def convert_to_name_pair(dct):
         result = (normalize_name_words(result[0]), normalize_name_words(result[1]))
     return result
 
-def fetch_papers_from_crossref_by_researcher_name(name):
+def fetch_papers_from_crossref_by_researcher_name(name, update=False):
+    """
+    The update parameter forces the function to download again
+    the metadata for DOIs that are already in the model
+    """
     researcher_found = True
     batch_number = 1
     results = []
@@ -92,22 +97,65 @@ def fetch_papers_from_crossref_by_researcher_name(name):
         batch_number += 1
 
         for doi in dois:
+            # First check whether the DOI is already in the model
+            if not update:
+                try:
+                    Publication.objects.get(doi=doi)
+                    print "Skipped as it is already in the model"
+                    researcher_found = True
+                    continue # The DOI already exists, skipping
+                except ObjectDoesNotExist:
+                    pass
+
+            # Fetch DOI details from CrossRef
             print "Fetching DOI "+doi
             metadata = fetch_metadata_by_DOI(doi)
+
+            # Normalize metadata
             if metadata == None:
                 continue
             if not 'author' in metadata: # TODO handle journals: not author but editor
                 continue
             authors = map(convert_to_name_pair, metadata['author'])
+            if not 'title' in metadata or not metadata['title']:
+                print "No title, skipping"
+                continue 
 
+            save_doi = False
+            
+            # First look if the paper is already known.
+            # This is useful because we might have got the full names of the authors
+            # from another source (e.g. OAI) but we might have only the initials
+            # in the CrossRef version. If the fingerprints match, we can magically
+            # expand the initials and associate the DOI to the initial paper.
+            fp = create_paper_fingerprint(metadata['title'], authors)
+            try:
+                Paper.objects.get(fingerprint=fp)
+                # If the paper is already found, then the DOI is relevant: we emit it.
+                print "Matching paper found"
+                save_doi = True
+            except ObjectDoesNotExist:
+                # Otherwise we might not have heard of it before, but it might be
+                # still relevant (i.e. involving one of the known researchers)
+                pass
+
+            # Then look if any of the authors is known
             for a in authors:
                 if a:
                     print a[0]+' '+a[1]
-            matching_authors = filter(lambda a: match_names(a,(name.first,name.last)), authors)
-            if not matching_authors:
+            if not save_doi:
+                matching_authors = filter(lambda a: match_names(a,(name.first,name.last)), authors)
+
+                # If one of them is known, we save this DOI
+                if matching_authors:
+                    save_doi = True
+
+            if not save_doi:
                 continue
-            print "Saved."
+
+            # Otherwise we save it!
             researcher_found = True
+            print "Saved."
             yield metadata
 
             count += 1
