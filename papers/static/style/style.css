@@ -46,10 +46,51 @@ a:hover
 {
     width: 1000px;
     margin: auto;
-    border-left: 1px solid rgba(192,188,206,1);
-    border-right: 1px solid rgba(192,188,206,1);
     padding: 10px;
 }
+
+#sidebar
+{
+    float: right;
+    width: 250px;
+    border-right: 1px solid rgba(192,188,206,1);
+    border-bottom: 1px solid rgba(192,188,206,1);
+
+    left: 0;
+    /* position: fixed; */
+    top: 156px;
+    padding: 15px;
+    padding-top: 7px;
+    bottom: 0px;
+}
+
+#fullPage, #summaryLists
+{
+    min-height: 200px;
+    padding-left: 20px;
+    padding-right: 10px;
+    height: auto !important;
+    height:100%;
+    border-left: 1px solid rgba(192,188,206,1);
+    border-right: 1px solid rgba(192,188,206,1);
+}
+
+#summaryLists
+{
+    margin-right: 262px; 
+}
+
+
+#wrapper
+{
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+/* Dissemin header */
 
 #rightLinks
 {
@@ -62,31 +103,9 @@ a:hover
     font-size: 1.2em;
 }
 
-#title
+#header a
 {
-    width: 100%;
-    padding-top:1px;
-    padding-bottom:1px;
-    padding-left:10px;
-    margin: 0;
-    border: 1px solid black;
-}
-
-#title h1
-{
-    font-size: 2em;
-    padding: 0px;
-    margin: 5px;
-    font-family: arial;
-}
-
-#wrapper
-{
-    min-height: 100%;
-    height: auto !important;
-    height: 100%;
-    width: 100%;
-    position: relative;
+    color: white;
 }
 
 /* List of publications */
@@ -199,7 +218,7 @@ a:hover
 #footer
 {
     width: 100%;
-    border: 1px solid black;
+    border-top: 5px solid #2A6496;
     padding-left: 30px;
     padding-right: 30px;
     font-size: 0.8em;
@@ -212,26 +231,7 @@ a:hover
     clear: both;
 }
 
-#sidebar
-{
-    float: right;
-    width: 180px;
-    border-left: 1px solid rgba(192,188,206,1);
-
-    left: 0;
-    /* position: absolute; */
-    top: 156px;
-    padding: 15px;
-    bottom: 0px;
-}
-
-#summaryLists
-{
-    margin-right: 222px; 
-    padding-left: 20px;
-    height: auto !important;
-    height:100%;
-}
+/* Content and titles */
 
 #actualContent
 {
@@ -251,5 +251,16 @@ a:hover
 .detailsContent
 {
     border-top: 2px solid #2A6496;
+}
+
+.criterion
+{
+    font-size: 1.1em;
+}
+
+/* Search pages buttons */
+.searchPages
+{
+    text-align: center;
 }
 

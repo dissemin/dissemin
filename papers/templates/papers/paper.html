@@ -12,30 +12,31 @@
 {% endblock %}
 
 {% block lists %}
+<p>
 {% for author in paper.author_set.all %}{% if not forloop.first %},{% endif %}
-{{ author | authorlink }}{% endfor %}
+{{ author | authorlink }}{% endfor %}</p>
 {% for publi in paper.publication_set.all %}
 <p>{{ publi | publication }}
 {% if publi.doi %}
-    (<a href="{{ publi | doi_to_url }}">DOI</a>)
+(DOI: <a href="{{ publi | doi_to_url }}">{{ publi.doi }}</a>)
 {% endif %}
 </p>
 {% endfor %}
 {% for record in paper.oairecord_set.all %}
 {% if forloop.first %}
-<p>{{ record.description }}</p>
+<p><strong>Abstract.</strong> {{ record.description }}</p>
 {% endif %}
 {% endfor %}
 {% endblock %}
 
 {% block details %}
-Data sources:
-<ul>
+<span class="detailsTitle">Available from</span>
+<div class="detailsContent">
 {% for record in paper.oairecord_set.all %}
-<li>{{ record.source }}, {% if record.splash_url %}<a href="{{ record.splash_url }}">{% endif %}{{ record.identifier }}{% if record.splash_url %}</a>{% endif %} {% if record.pdf_url %}<a href="{{ record.pdf_url }}">[PDF]</a>{% endif %}</li>
+<p>{{ record.source }}: {% if record.splash_url %}<a href="{{ record.splash_url }}">{% endif %}[Web page]{% if record.splash_url %}</a>{% endif %} {% if record.pdf_url %}<a href="{{ record.pdf_url }}">[PDF]</a>{% endif %}</p>
 {% endfor %}
 {% for publi in paper.publication_set.all %}
-    <li><a href="{{ publi | doi_to_url }}">{{ publi.publisher|default:"Publisher" }}</a> via DOI</li>
+    <p><a href="{{ publi | doi_to_url }}">{{ publi.publisher|default:"Publisher" }}</a> via DOI</p>
 {% endfor %}
-</ul>
+</div>
 {% endblock %}

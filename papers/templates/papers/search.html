@@ -16,8 +16,6 @@
     <span class="detailsTitle">{{ researcher }}</span>
     <div class="detailsContent">
         <p><a href="{% url 'department' researcher.department.id %}">{{ researcher.department }}</a></p>
-        <p>Member of: {% for team in researcher.groups.all %}
-        <a href="{% url 'group' team.id %}">{{ team.name }}</a> {% endfor %}</p> 
     </div>
 {% endif %}
 {% if journal %}
@@ -33,7 +31,7 @@
 <span class="detailsTitle">Refine search</span>
 <div class="detailsContent">
 <p>{{ nb_results }} papers found</p>
-<h5>Publisher policy:</h5>
+<span class="criterion">By publisher policy:</span>
 <ul>
     {% for st in oa_status_choices %}
     <li>
@@ -46,7 +44,7 @@
     </li>
     {% endfor %}
 </ul>
-<h5>Full text availability:</h5>
+<span class="criterion">By full text availability:</span>
 <ul>
     {% for st in pdf_status_choices %}
     <li>
@@ -63,7 +61,7 @@
 {% endblock %}
 
 {% block lists %}
- {% bootstrap_paginate search_results range=10 %}
+<div class="searchPages">{% bootstrap_paginate search_results range=10 %}</div>
  {% for paper in search_results %}
  {% ifchanged paper.year %}
  {% if not forloop.first %}</ul></div>{% endif %}
@@ -77,4 +75,7 @@
  {% empty %}
  <p>No production found.</p>
  {% endfor %}
+ {% if search_results.paginator.num_pages > 1 %}
+ <div class="searchPages">{% bootstrap_paginate search_results range=10 %}</div>
+ {% endif %}
 {% endblock %}
