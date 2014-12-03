@@ -87,9 +87,6 @@ def searchView(request, **kwargs):
     context['nb_results'] = queryset.count()
 
     # Build the GET requests for variants of the parameters
-    PDF_STATUS_CHOICES = [('OK', 'Available'),
-                          ('NOK', 'Unavailable')]
-
     args_without_page = args.copy()
     if 'page' in args_without_page:
         del args_without_page['page']

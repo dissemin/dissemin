@@ -113,6 +113,9 @@ OA_STATUS_CHOICES = (
         ('UNK', 'Policy unclear'),
    )
 
+PDF_STATUS_CHOICES = [('OK', 'Available'),
+                      ('NOK', 'Unavailable')]
+
 # Publisher associated with a journal
 class Publisher(models.Model):
     romeo_id = models.CharField(max_length=64)

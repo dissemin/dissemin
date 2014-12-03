@@ -18,7 +18,7 @@ def authorlink(author):
 @register.filter(is_safe=True)
 def publication(publi):
     if publi.journal:
-        result = '<a href="'+reverse('journal', kwargs={'pk':publi.journal.id})+'"><emph>'+escape(unicode(publi.journal.title))+'</emph></a>'
+        result = '<a href="'+reverse('journal', kwargs={'journal':publi.journal.id})+'"><emph>'+escape(unicode(publi.journal.title))+'</emph></a>'
     else:
         result = escape(unicode(publi.title))
     if publi.issue or publi.volume or publi.pages or publi.date:

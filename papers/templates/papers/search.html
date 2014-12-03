@@ -2,6 +2,7 @@
 
 {% load staticfiles %}
 {% load bootstrap_pagination %}
+{% load statuses %}
 
 {% block headTitle %}
 {{ search_description }}
@@ -25,12 +26,18 @@
         {% if journal.issn %}
         <p>ISSN: {{ journal.issn }}</p>
         {% endif %}
+        <div class="unselectedCriterion">
+        <div class="pubLogo"><div class="pubLogoPic-{{ journal.publisher.oa_status }}"></div></div>
+        <div class="criterionItem">{{ journal.publisher.oa_status |explain_oa_status}}</div>
+        </div>
     </div>
 {% endif %}
 
 <span class="detailsTitle">Refine search</span>
 <div class="detailsContent">
 <p>{{ nb_results }} papers found</p>
+
+{% if not journal %}
 <span class="criterion">By publisher policy:</span>
 {% for st in oa_status_choices %}
 <div class="{% if st.0 == status %}selectedCriterion{% else %}unselectedCriterion{% endif %}">
@@ -42,6 +49,8 @@
     </div>
 </div>
 {% endfor %}
+{% endif %}
+
 <span class="criterion">By full text availability:</span>
 {% for st in pdf_status_choices %}
 <div class="{% if st.0 == pdf %}selectedCriterion{% else %}unselectedCriterion{% endif %}">
