@@ -67,7 +67,7 @@ a:hover
 
 #fullPage, #summaryLists
 {
-    min-height: 320px;
+    min-height: 500px;
     padding-left: 20px;
     padding-right: 10px;
     height: auto !important;
@@ -152,13 +152,13 @@ a:hover
     text-decoration: none;
 }
 
-.pubLogoPic-UNK, .pubLogoPic-OK, .pubLogoPic-NOK, .pubLogoPic-OA, .pubLogoPic-PDF
+.pubLogoPic-UNK, .pubLogoPic-OK, .pubLogoPic-NOK, .pubLogoPic-OA, .pubLogoPic-PDF, .pubLogoPic-PDF-OK, .pubLogoPic-PDF-NOK
 {
     height: 40px;
     width: 31px;
     background-repeat: no-repeat;
 }
-.pubLogoPic-UNK
+.pubLogoPic-UNK, .pubLogoPic-PDF-NOK
 {
     background-image: url('../document-symbol.png');
     background-position: 3px 0px;
@@ -173,7 +173,7 @@ a:hover
     background-position: 3px 0px;
     background-image: url('../closed-symbol.png');
 }
-.pubLogoPic-PDF
+.pubLogoPic-PDF, .pubLogoPic-PDF-OK
 {
     background-image: url('../pdf-symbol.png');
 }
@@ -182,14 +182,18 @@ a:hover
     background-image: url('../oa-symbol.png');
 }
 
-.pubText
+.pubText, .criterionItem
 {
     margin-top: 15px;
     margin-bottom: 15px;
-    margin-left: 43px;
     padding-left: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
+}
+
+.pubText
+{
+    margin-left: 43px;
     border-left: 3px solid green;
     min-height: 55px;
 }
@@ -214,6 +218,40 @@ a:hover
 {
     font-size: 1em;
 }
+
+/* Criterions in the side bar */
+
+.criterionItem
+{
+    margin-left: 33px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.criterionCross
+{
+    /* font-size: 1.3em; */
+    float: right;
+    padding-right: 5px;
+    margin: auto;
+}
+
+.unselectedCriterion
+{
+    height: 48px;
+    padding: 2px;
+    margin: 0px;
+}
+
+.selectedCriterion
+{
+    border: 2px solid green;
+    height: 48px;
+    padding: 2px;
+    margin: 0px;
+}
+
+
 
 /* Other stuff */
 
@@ -258,6 +296,7 @@ a:hover
 .criterion
 {
     font-size: 1.1em;
+    padding-bottom: 3px;
 }
 
 /* Search pages buttons */

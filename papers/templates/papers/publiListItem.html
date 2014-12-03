@@ -1,12 +1,12 @@
 {% load author %}
-<div class="pubLogo"><div>
+<div class="pubLogo">
     {% if paper.oa_status = "OA" %}
     <div class="pubLogoPic-OA"><a href="{% url 'paper' paper.id %}" class="filldiv"></a></div>
     {% elif paper.first_pdf_record %}
     <div class="pubLogoPic-PDF"><a href="{{ paper.first_pdf_record.pdf_url }}" class="filldiv"></a></div>
     {% else %}
     <div class="pubLogoPic-{{ paper.oa_status }}"></div>
-    {% endif %}</div></div>
+    {% endif %}</div>
 <div class="pubText"><span class="paperAuthors">
 {% for a2 in paper.author_set.all %}{% if not forloop.first %},{% endif %}
 {% if a2.name.is_known and a2.name.researcher.id = researcher_id %}

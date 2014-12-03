@@ -32,31 +32,27 @@
 <div class="detailsContent">
 <p>{{ nb_results }} papers found</p>
 <span class="criterion">By publisher policy:</span>
-<ul>
-    {% for st in oa_status_choices %}
-    <li>
+{% for st in oa_status_choices %}
+<div class="{% if st.0 == status %}selectedCriterion{% else %}unselectedCriterion{% endif %}">
+    <div class="pubLogo"><div class="pubLogoPic-{{ st.0 }}"><a href="{% url 'search' %}?{{ st.2.urlencode }}" class="filldiv"></a></div></div>
+    <div class="criterionItem"><a href="{% url 'search' %}?{{ st.2.urlencode }}">{{ st.1 }}</a>
         {% if st.0 == status %}
-            <strong>{{ st.1 }}</strong>
-            <a href="{% url 'search' %}?{{ st.2.urlencode }}">[x]</a>
-        {% else %}
-            <a href="{% url 'search' %}?{{ st.2.urlencode }}">{{ st.1 }}</a>
+        <div class="criterionCross"><a href="{% url 'search' %}?{{ st.2.urlencode }}">x</a></div>
         {% endif %}
-    </li>
-    {% endfor %}
-</ul>
+    </div>
+</div>
+{% endfor %}
 <span class="criterion">By full text availability:</span>
-<ul>
-    {% for st in pdf_status_choices %}
-    <li>
+{% for st in pdf_status_choices %}
+<div class="{% if st.0 == pdf %}selectedCriterion{% else %}unselectedCriterion{% endif %}">
+     <div class="pubLogo"><div class="pubLogoPic-PDF-{{ st.0 }}"><a href="{% url 'search' %}?{{ st.2.urlencode }}" class="filldiv"></a></div></div>
+    <div class="criterionItem"><a href="{% url 'search' %}?{{ st.2.urlencode }}">{{ st.1 }}</a>
         {% if st.0 == pdf %}
-            <strong>{{ st.1 }}</strong>
-            <a href="{% url 'search' %}?{{ st.2.urlencode }}">[x]</a>
-        {% else %}
-            <a href="{% url 'search' %}?{{ st.2.urlencode }}">{{ st.1 }}</a>
+        <div class="criterionCross"><a href="{% url 'search' %}?{{ st.2.urlencode }}">x</a></div>
         {% endif %}
-    </li>
-    {% endfor %}
-</ul>
+    </div>
+</div>
+{% endfor %}
 </div>
 {% endblock %}
 
