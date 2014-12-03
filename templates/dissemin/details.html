@@ -6,7 +6,13 @@
     {% endblock %}
 </div>
 <div id="summaryLists">
+    <span id="contentTitle">
+    {% block bodyTitle %}
+    {% endblock %}
+    </span>
+    <div id="actualContent">
     {% block lists %}
     {% endblock %}
+    </div>
 </div>
 {% endblock %}

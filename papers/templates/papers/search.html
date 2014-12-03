@@ -13,18 +13,26 @@
 
 {% block details %}
 {% if researcher %}
-    <p><a href="{% url 'department' researcher.department.id %}">{{ researcher.department }}</a></p>
-    <p>Member of: {% for team in researcher.groups.all %}
-    <a href="{% url 'group' team.id %}">{{ team.name }}</a> {% endfor %}</p> 
+    <span class="detailsTitle">{{ researcher }}</span>
+    <div class="detailsContent">
+        <p><a href="{% url 'department' researcher.department.id %}">{{ researcher.department }}</a></p>
+        <p>Member of: {% for team in researcher.groups.all %}
+        <a href="{% url 'group' team.id %}">{{ team.name }}</a> {% endfor %}</p> 
+    </div>
 {% endif %}
 {% if journal %}
-    <p>Published by <a href="{% url 'publisher' journal.publisher.id %}">{{ journal.publisher }}</a></p>
-    {% if journal.issn %}
-    <p>ISSN: {{ journal.issn }}</p>
-    {% endif %}
+    <span class="detailsTitle">{{ journal }}</span>
+    <div class="detailsContent">
+        <p>Published by <a href="{% url 'publisher' journal.publisher.id %}">{{ journal.publisher }}</a></p>
+        {% if journal.issn %}
+        <p>ISSN: {{ journal.issn }}</p>
+        {% endif %}
+    </div>
 {% endif %}
 
-<p>{{ nb_results }} papers</p>
+<span class="detailsTitle">Refine search</span>
+<div class="detailsContent">
+<p>{{ nb_results }} papers found</p>
 <h5>Publisher policy:</h5>
 <ul>
     {% for st in oa_status_choices %}
@@ -51,6 +59,7 @@
     </li>
     {% endfor %}
 </ul>
+</div>
 {% endblock %}
 
 {% block lists %}

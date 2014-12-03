@@ -31,9 +31,35 @@ a:hover
 
 #header
 {
-    height: 100px;
-    width: 100%;
-    border: 1px solid black;
+    /* border: 1px solid b; */
+    background-color: #2A6496; /* #3448A2; */
+    margin: 5px;
+    border-radius: 5px;
+    padding-top: 5px;
+    padding-bottom: 7px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: white;
+}
+
+#content
+{
+    width: 1000px;
+    margin: auto;
+    border-left: 1px solid rgba(192,188,206,1);
+    border-right: 1px solid rgba(192,188,206,1);
+    padding: 10px;
+}
+
+#rightLinks
+{
+    float: right;
+    text-align: right;
+}
+
+#dissemin
+{
+    font-size: 1.2em;
 }
 
 #title
@@ -188,22 +214,42 @@ a:hover
 
 #sidebar
 {
-    float: left;
+    float: right;
     width: 180px;
-    border: 1px solid black;
+    border-left: 1px solid rgba(192,188,206,1);
+
     left: 0;
     /* position: absolute; */
     top: 156px;
-    padding: 20px;
+    padding: 15px;
     bottom: 0px;
 }
 
 #summaryLists
 {
-    margin-left: 222px;
+    margin-right: 222px; 
     padding-left: 20px;
     height: auto !important;
     height:100%;
-    border: 1px solid black;
+}
+
+#actualContent
+{
+    border-top: 3px solid #2A6496; 
+}
+
+#contentTitle
+{
+    font-size: 1.5em;
+}
+
+.detailsTitle
+{
+    font-size: 1.2em;
+}
+
+.detailsContent
+{
+    border-top: 2px solid #2A6496;
 }
 
