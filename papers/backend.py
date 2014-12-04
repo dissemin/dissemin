@@ -97,7 +97,7 @@ def merge_papers(first, second):
     Publication.objects.filter(paper=second.pk).update(paper=first.pk)
     second.delete()
     first.update_oa_status()
-    first.update_first_pdf_record()
+    first.update_pdf_url()
 
 
 # Create a Publication entry based on the DOI metadata
@@ -139,7 +139,7 @@ def create_publication(paper, metadata):
             journal=journal)
     pub.save()
     paper.update_oa_status()
-    paper.update_first_pdf_record()
+    paper.update_pdf_url()
     return pub
 
 

@@ -67,7 +67,7 @@ def add_oai_record(record, source, paper=None):
 
     if paper:
         paper.update_oa_status()
-        paper.update_first_pdf_record()
+        paper.update_pdf_url()
 
 def get_oai_authors(metadata):
     """ Get the authors names out of a search result """

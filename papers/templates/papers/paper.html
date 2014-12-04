@@ -1,6 +1,7 @@
 {% extends "dissemin/details.html" %}
 
 {% load author %}
+{% load statuses %}
 {% load doi %}
 
 {% block headTitle %}
@@ -22,6 +23,10 @@
 {% endif %}
 </p>
 {% endfor %}
+
+<p><strong>Full text:</strong> {% if paper.pdf_url %}<a href="{{ paper.pdf_url }}">Available</a>{% else %}Unavailable{% endif %}.</p>
+<p><strong>Publisher policy:</strong> {{ paper.oa_status | explain_oa_status }}.</p>
+
 {% for record in paper.oairecord_set.all %}
 {% if forloop.first %}
 <p><strong>Abstract.</strong> {{ record.description }}</p>

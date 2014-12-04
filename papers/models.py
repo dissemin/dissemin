@@ -81,7 +81,7 @@ class Paper(models.Model):
     # The two following fields need to be updated after the relevant changes
     # using the methods below.
     oa_status = models.CharField(max_length=32, null=True, blank=True)
-    first_pdf_record = models.ForeignKey('OaiRecord', null=True, blank=True)
+    pdf_url = models.URLField(max_length=2048, null=True, blank=True)
 
     def update_oa_status(self):
         qs = list(self.publication_set.all()[:1])
@@ -91,11 +91,21 @@ class Paper(models.Model):
             self.oa_status = 'UNK'
         self.save()
 
-    def update_first_pdf_record(self):
-        # declared at the end for dependencies reasons
+    def update_pdf_url(self):
+        # TODO: create an oa_status field in each publication so that we optimize queries
+        # and can deal with hybrid OA
+
+        # If it is an open access publisher, keep the publisher version
+        if self.oa_status == 'OA':
+            publications = Publication.objects.filter(journal__publisher__oa_status='OA')[:1]
+            if publications:
+                self.pdf_url = publications[0].splash_url()
+                self.save()
+                return
+        # otherwise try the OAI sources
         matches = OaiRecord.objects.filter(about=self.id,pdf_url__isnull=False)[:1]
         if matches:
-            self.first_pdf_record = matches[0]
+            self.pdf_url = matches[0].pdf_url
         self.save()
 
 # Researcher / Paper binary relation
@@ -207,6 +217,10 @@ class Publication(models.Model):
             return self.journal.publisher.oa_status
         else:
             return 'UNK'
+
+    def splash_url(self):
+        if self.doi:
+            return 'http://dx.doi.org/'+self.doi
 
     def details_to_str(self):
         result = ''

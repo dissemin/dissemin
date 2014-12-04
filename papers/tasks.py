@@ -157,6 +157,6 @@ def update_paper_statuses():
     papers = Paper.objects.all()
     for p in papers:
         p.update_oa_status()
-        p.update_first_pdf_record()
+        p.update_pdf_url()
 
 

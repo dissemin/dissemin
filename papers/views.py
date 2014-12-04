@@ -61,9 +61,9 @@ def searchView(request, **kwargs):
     if 'pdf' in args:
         val = args.get('pdf')
         if val == 'OK':
-            queryset = queryset.filter(first_pdf_record__isnull=False)
+            queryset = queryset.filter(pdf_url__isnull=False)
         elif val == 'NOK':
-            queryset = queryset.filter(first_pdf_record__isnull=True)
+            queryset = queryset.filter(pdf_url__isnull=True)
         context['pdf'] = val
 
     if search_description == 'Papers':
