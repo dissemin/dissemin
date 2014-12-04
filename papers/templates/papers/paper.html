@@ -25,7 +25,10 @@
 {% endfor %}
 
 <p><strong>Full text:</strong> {% if paper.pdf_url %}<a href="{{ paper.pdf_url }}">Available</a>{% else %}Unavailable{% endif %}.</p>
-<p><strong>Publisher policy:</strong> {{ paper.oa_status | explain_oa_status }}.</p>
+{% if paper.publication_set.first %}
+<p><strong>Publisher policy:</strong> {{ paper.oa_status | explain_oa_status }}
+(<a href="{% url 'publisher' paper.publication_set.first.journal.publisher.pk %}">details</a>)</p>
+{% endif %}
 
 {% for record in paper.oairecord_set.all %}
 {% if forloop.first %}
