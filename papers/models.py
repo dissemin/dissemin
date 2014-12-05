@@ -147,7 +147,7 @@ class Publisher(models.Model):
     def publi_count(self):
         count = 0
         for journal in self.journal_set.all():
-            count += journal.publication_set.count()
+            count += journal.publication_set.filter(paper__visibility='VISIBLE').count()
         return count
     @property
     def preprint_conditions(self):
