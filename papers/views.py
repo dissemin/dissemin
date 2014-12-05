@@ -75,6 +75,7 @@ def searchView(request, **kwargs):
         context['visibility'] = val
     else:
         queryset = queryset.filter(visibility='VISIBLE')
+        context['visibility'] = 'VISIBLE'
 
     if search_description == 'Papers':
         search_description = 'All papers'
