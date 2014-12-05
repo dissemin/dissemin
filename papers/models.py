@@ -2,6 +2,20 @@ from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
 from papers.utils import nstr
 
+OA_STATUS_CHOICES = (
+        ('OA', 'Open Access'),
+        ('OK', 'Allows pre/post prints'),
+        ('NOK', 'Forbids pre/post prints'),
+        ('UNK', 'Policy unclear'),
+   )
+
+PDF_STATUS_CHOICES = [('OK', 'Available'),
+                      ('NOK', 'Unavailable')]
+
+VISIBILITY_CHOICES = [('VISIBLE', 'Visible'),
+                      ('DELETED', 'Deleted'),
+                      ('CANDIDATE', 'Candidate')]
+
 # Information about the researchers and their groups
 class Department(models.Model):
     name = models.CharField(max_length=300)
@@ -116,16 +130,6 @@ class Author(models.Model):
     name = models.ForeignKey(Name)
     def __unicode__(self):
         return unicode(self.name)
-
-OA_STATUS_CHOICES = (
-        ('OA', 'Open Access'),
-        ('OK', 'Allows pre/post prints'),
-        ('NOK', 'Forbids pre/post prints'),
-        ('UNK', 'Policy unclear'),
-   )
-
-PDF_STATUS_CHOICES = [('OK', 'Available'),
-                      ('NOK', 'Unavailable')]
 
 # Publisher associated with a journal
 class Publisher(models.Model):

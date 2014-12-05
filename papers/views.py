@@ -32,7 +32,7 @@ def index(request):
 def searchView(request, **kwargs):
     context = dict()
     # Build the queryset
-    queryset = Paper.objects.filter(visibility='VISIBLE')
+    queryset = Paper.objects.all()
     args = request.GET.copy()
     args.update(kwargs)
     
@@ -68,6 +68,13 @@ def searchView(request, **kwargs):
         elif val == 'NOK':
             queryset = queryset.filter(pdf_url__isnull=True)
         context['pdf'] = val
+    if 'visibility' in args and is_admin(request.user):
+        val = args.get('visibility')
+        if val in [x[0] for x in VISIBILITY_CHOICES]:
+            queryset = queryset.filter(visibility=val)
+        context['visibility'] = val
+    else:
+        queryset = queryset.filter(visibility='VISIBLE')
 
     if search_description == 'Papers':
         search_description = 'All papers'
@@ -95,9 +102,11 @@ def searchView(request, **kwargs):
         del args_without_page['page']
     oa_variants = varyQueryArguments('status', args_without_page, OA_STATUS_CHOICES)
     pdf_variants = varyQueryArguments('pdf', args_without_page, PDF_STATUS_CHOICES)
+    visibility_variants = varyQueryArguments('visibility', args_without_page, VISIBILITY_CHOICES)
 
     context['oa_status_choices'] = oa_variants
     context['pdf_status_choices'] = pdf_variants
+    context['visibility_choices'] = visibility_variants
 
     return render(request, 'papers/search.html', context)
 
