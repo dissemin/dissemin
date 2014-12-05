@@ -85,8 +85,17 @@ def fetch_records_for_researcher(pk):
         fetch_records_for_name(name)
 
 def fetch_records_for_name(name):
-    ident = name.last + ', ' + name.first
-    ident = name_normalization(ident)
+    # First try with the comma-separated name
+    ident1 = name.last + ', ' + name.first
+    ident1 = name_normalization(ident)
+    fetch_records_for_normalized_name(ident1)
+    # Then try with the non-separated name
+    ident2 = name.first + ' ' + name.last
+    ident2 = name_normalization(ident2)
+    fetch_records_for_normalized_name(ident2)
+    # TODO: try with first and last swapped, added as CANDIDATEs ?
+
+def fetch_records_for_normalized_name(ident):
     client = get_proxy_client()
     try:
         listRecords = client.listRecords(metadataPrefix='oai_dc', set=PROXY_AUTHOR_PREFIX+ident)
