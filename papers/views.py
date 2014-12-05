@@ -7,10 +7,12 @@ from django.template import RequestContext, loader
 from django.views import generic
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth import logout
-from papers.tasks import *
+from django.contrib.auth.decorators import user_passes_test
 from django.utils import timezone
 
 from papers.models import *
+from papers.tasks import *
+from papers.user import is_admin
 
 # Number of papers shown on a search results page
 NB_RESULTS_PER_PAGE = 20
@@ -110,6 +112,25 @@ def varyQueryArguments(key, args, possibleValues):
         variants.append((s[0], s[1], queryargs))
     return variants
 
+def logoutView(request):
+    logout(request)
+    if 'HTTP_REFERER' in request.META:
+        return redirect(request.META['HTTP_REFERER'])
+    else:
+        return redirect('/')
+
+@user_passes_test(is_admin)
+def updateResearcherOAI(request, pk):
+    source = get_object_or_404(Researcher, pk=pk)
+    fetch_records_for_researcher.apply_async(eta=timezone.now(), kwargs={'pk':pk})
+    return render(request, 'papers/updateResearcher.html', {'researcher':source})
+
+@user_passes_test(is_admin)
+def updateResearcher(request, pk):
+    source = get_object_or_404(Researcher, pk=pk)
+    fetch_dois_for_researcher.apply_async(eta=timezone.now(), kwargs={'pk':pk})
+    return render(request, 'papers/updateResearcher.html', {'researcher':source})
+
 
 class ResearcherView(generic.DetailView):
     model = Researcher
@@ -127,16 +148,6 @@ class SourceView(generic.DetailView):
     model = OaiSource
     template_name = 'papers/oaiSource.html'
 
-def updateResearcherOAI(request, pk):
-    source = get_object_or_404(Researcher, pk=pk)
-    fetch_records_for_researcher.apply_async(eta=timezone.now(), kwargs={'pk':pk})
-    return render(request, 'papers/updateResearcher.html', {'researcher':source})
-
-def updateResearcher(request, pk):
-    source = get_object_or_404(Researcher, pk=pk)
-    fetch_dois_for_researcher.apply_async(eta=timezone.now(), kwargs={'pk':pk})
-    return render(request, 'papers/updateResearcher.html', {'researcher':source})
-
 class PaperView(generic.DetailView):
     model = Paper
     template_name = 'papers/paper.html'
@@ -149,10 +160,4 @@ class PublisherView(generic.DetailView):
     model = Publisher
     template_name = 'papers/publisher.html'
 
-def logoutView(request):
-    logout(request)
-    if 'HTTP_REFERER' in request.META:
-        return redirect(request.META['HTTP_REFERER'])
-    else:
-        return redirect('/')
 
