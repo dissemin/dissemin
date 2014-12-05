@@ -12,14 +12,16 @@
 {% if a2.name.is_known and a2.name.researcher.id = researcher_id %}
 <strong>{{ a2 }}</strong>{% else %}
 {{ a2|authorlink }}{% endif %}{% endfor %}</span><br />
-<span class="paperTitle"><a href="{% url 'paper' paper.id %}">{{ paper.title }}</a></span><br />
-<span class="pubRef">
+<span class="paperTitle"><a href="{% url 'paper' paper.id %}">{{ paper.title }}</a>
+{% if request.user.is_superuser %}
+<button type="button" class="close paperDeleteButton" id="delete-paper-{{ paper.pk }}"><span aria-hidden="true">&times;</span><span class="sr-only">Delete</span></button>
+{% endif %}
+</span><br />
 {% for publi in paper.publication_set.all %}
-{{ publi | publication }}{% if forloop.last %}.{% else %},{% endif %}</span><br />
+<span class="pubRef">{{ publi | publication }}{% if forloop.last %}.{% else %},{% endif %}</span><br />
 {% empty %}
 {% for record in paper.oairecord_set.all %}
 {{ record.source.name }}{% if forloop.last %}.{% else %},{% endif %}
 {% endfor %}
 {% endfor %}
-</span>
 </div>

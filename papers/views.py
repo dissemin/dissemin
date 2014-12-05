@@ -1,11 +1,12 @@
 # -*- encoding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.template import RequestContext, loader
 from django.views import generic
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth import logout
 from papers.tasks import *
 from django.utils import timezone
 
@@ -29,7 +30,7 @@ def index(request):
 def searchView(request, **kwargs):
     context = dict()
     # Build the queryset
-    queryset = Paper.objects.all()
+    queryset = Paper.objects.filter(visibility='VISIBLE')
     args = request.GET.copy()
     args.update(kwargs)
     
@@ -147,4 +148,11 @@ class JournalView(generic.DetailView):
 class PublisherView(generic.DetailView):
     model = Publisher
     template_name = 'papers/publisher.html'
+
+def logoutView(request):
+    logout(request)
+    if 'HTTP_REFERER' in request.META:
+        return redirect(request.META['HTTP_REFERER'])
+    else:
+        return redirect('/')
 

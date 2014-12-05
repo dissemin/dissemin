@@ -1,9 +1,16 @@
-from django.conf.urls import patterns, url
+# -*- encoding: utf-8 -*-
+from __future__ import unicode_literals
 
-from papers import views
+from django.conf.urls import patterns, url
+from django.contrib.auth.views import login
+from django.contrib.auth.views import logout
+
+from papers import views, ajax
 
 urlpatterns = patterns('',
         url(r'^$', views.index, name='index'),
+        url(r'^login/$', login, {'template_name': 'admin/login.html'}),
+        url(r'^logout/$', views.logoutView, name='logout'),
         url(r'^search', views.searchView, name='search'),
         url(r'^researcher/(?P<researcher>\d+)/$', views.searchView, name='researcher'),
         url(r'^researcher/(?P<pk>\d+)/update/$', views.updateResearcher, name='updateResearcher'),
@@ -13,5 +20,6 @@ urlpatterns = patterns('',
         url(r'^source/(?P<pk>\d+)/$', views.SourceView.as_view(), name='source'),
         url(r'^paper/(?P<pk>\d+)/$', views.PaperView.as_view(), name='paper'),
         url(r'^journal/(?P<journal>\d+)/$', views.searchView, name='journal'),
-        url(r'^publisher/(?P<pk>\d+)/$', views.PublisherView.as_view(), name='publisher')
+        url(r'^publisher/(?P<pk>\d+)/$', views.PublisherView.as_view(), name='publisher'),
+        url(r'^ajax/delete-paper-(?P<pk>\d+)$', ajax.deletePaper, name='deletePaper')
 )

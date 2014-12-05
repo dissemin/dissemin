@@ -74,6 +74,7 @@ class Paper(models.Model):
     fingerprint = models.CharField(max_length=64)
     year = models.IntegerField()
     last_modified = models.DateField(auto_now=True)
+    visibility = models.CharField(max_length=32, default='VISIBLE')
 
     def __unicode__(self):
         return self.title

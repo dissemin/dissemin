@@ -219,6 +219,14 @@ a:hover
     font-size: 1em;
 }
 
+.paperDeleteButton
+{
+/*    color: white;
+    background-color: grey;*/
+    float: none;
+
+}
+
 /* Criterions in the side bar */
 
 .criterionItem
