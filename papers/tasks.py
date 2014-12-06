@@ -87,7 +87,7 @@ def fetch_records_for_researcher(pk):
 def fetch_records_for_name(name):
     # First try with the comma-separated name
     ident1 = name.last + ', ' + name.first
-    ident1 = name_normalization(ident)
+    ident1 = name_normalization(ident1)
     fetch_records_for_normalized_name(ident1)
     # Then try with the non-separated name
     ident2 = name.first + ' ' + name.last

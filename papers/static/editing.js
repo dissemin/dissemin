@@ -5,7 +5,11 @@ $('.paperDeleteButton').click( function (evt) {
     var domElem = $(this);
     $.ajax({url:'/ajax/'+$(this).attr('id')}).done(
             function() {
-                    domElem.closest('li').remove();
+                    var li = domElem.closest('li');
+                    var ul = li.parent()
+                    li.remove();
+                    if(ul.children().length == 0)
+                        ul.parent().remove();
             }).fail(
             function() {
               alert('Error');  
