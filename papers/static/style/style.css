@@ -313,3 +313,12 @@ a:hover
     text-align: center;
 }
 
+/* Editables */
+
+.small-glyphicon
+{
+    font-size: 0.7em;
+    color: black;
+}
+
+

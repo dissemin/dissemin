@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.conf.urls import patterns, url
+from django.conf.urls import patterns, include, url
 from django.contrib.auth.views import login
 from django.contrib.auth.views import logout
 
@@ -21,5 +21,5 @@ urlpatterns = patterns('',
         url(r'^paper/(?P<pk>\d+)/$', views.PaperView.as_view(), name='paper'),
         url(r'^journal/(?P<journal>\d+)/$', views.searchView, name='journal'),
         url(r'^publisher/(?P<pk>\d+)/$', views.PublisherView.as_view(), name='publisher'),
-        url(r'^ajax/delete-paper-(?P<pk>\d+)$', ajax.deletePaper, name='deletePaper')
+        url(r'^ajax/', include('papers.ajax')),
 )

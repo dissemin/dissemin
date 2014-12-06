@@ -15,3 +15,30 @@ $('.paperDeleteButton').click( function (evt) {
 
 });
 
+var pencilElements = new Array();
+
+function makeTextEditable(domElement, ajaxUrl, pk, field) {
+    var pencilCode = '<a href="#"><span class="glyphicon glyphicon-pencil small-glyphicon" aria-hidden="true"></span></a>'; 
+    domElement.parent().append(pencilCode);
+    var pencilElem = domElement.parent().children().last();
+    var tabId = pencilElements.length;
+    pencilElements[tabId] = pencilElem;
+
+    domElement.editable({
+        type: 'text',
+        pk: pk,
+        name: field,
+        url: ajaxUrl,
+        mode: 'inline',
+        toggle: 'manual',
+    }).on('hidden', function (e,reason) {
+        domElement.parent().append(pencilElements[tabId]);
+    });
+
+    pencilElem.click(function(e){
+        pencilElements[tabId].detach();
+        e.stopPropagation();
+        domElement.editable('toggle');
+     });
+}
+

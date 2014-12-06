@@ -1,19 +1,17 @@
 {% extends "dissemin/details.html" %}
 
 {% block headTitle %}{{ department.name }}{% endblock %}
-{% block bodyTitle %}<a href="#" id="department_name" data-pk="{{ department.id }}">{{ department.name }}</a>{% endblock %}
+
+{% block bodyTitle %}<span id="department_name" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">{{ department.name }}</span>
+
+    {% endblock %}
 
 {% block jsScript %}
+{% if request.user.is_superuser %}
 $(function(){
-$('#department_name').editable({
-type: 'text',
-pk: 1,
-name: 'name',
-url: 'post.php',
-title: 'Enter department name',
-mode: 'inline',
+    makeTextEditable($('#department_name'), '/ajax/change-department', '{{ department.pk }}', 'name');
 });
-});
+{% endif %}
 {% endblock %}
 
 {% block lists %}
