@@ -32,6 +32,7 @@ function makeTextEditable(domElement, ajaxUrl, pk, field) {
         mode: 'inline',
         toggle: 'manual',
         inputclass: 'editable-long-input',
+        showbuttons: false,
     }).on('hidden', function (e,reason) {
         domElement.parent().append(pencilElements[tabId]);
     });

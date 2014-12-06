@@ -9,7 +9,15 @@
 {% endblock %}
 
 {% block bodyTitle %}
-{{ paper.title }}
+<span id="paperTitle">{{ paper.title }}</span>
+{% endblock %}
+
+{% block jsScript %}
+{% if request.user.is_superuser %}
+$(function(){
+makeTextEditable($('#paperTitle'), '/ajax/change-paper', '{{ paper.id }}', 'title');
+});
+{% endif %}
 {% endblock %}
 
 {% block lists %}
