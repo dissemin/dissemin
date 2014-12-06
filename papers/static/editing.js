@@ -31,6 +31,7 @@ function makeTextEditable(domElement, ajaxUrl, pk, field) {
         url: ajaxUrl,
         mode: 'inline',
         toggle: 'manual',
+        inputclass: 'editable-long-input',
     }).on('hidden', function (e,reason) {
         domElement.parent().append(pencilElements[tabId]);
     });
@@ -39,6 +40,7 @@ function makeTextEditable(domElement, ajaxUrl, pk, field) {
         pencilElements[tabId].detach();
         e.stopPropagation();
         domElement.editable('toggle');
+        e.preventDefault();
      });
 }
 

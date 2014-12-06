@@ -16,11 +16,9 @@ def deletePaper(request, pk):
     paper.save(update_fields=['visibility'])
     return HttpResponse('OK', content_type='text/plain')
 
-@user_passes_test(is_admin)
-def changeDepartment(request):
-    allowedFields = ['name']
+def process_ajax_change(request, model, allowedFields):
     try:
-        dept = Department.objects.get(pk=request.POST.get('pk'))
+        dept = model.objects.get(pk=request.POST.get('pk'))
         field = request.POST.get('name')
         if field in allowedFields:
             setattr(dept, field, request.POST.get('value'))
@@ -31,9 +29,20 @@ def changeDepartment(request):
     except ObjectDoesNotExist:
         return HttpResponseNotFound('NOK', content_type='text/plain')
 
+@user_passes_test(is_admin)
+def changeDepartment(request):
+    allowedFields = ['name']
+    return process_ajax_change(request, Department, allowedFields)
+
+@user_passes_test(is_admin)
+def changePaper(request):
+    allowedFields = ['title']
+    return process_ajax_change(request, Paper, allowedFields)
+
 
 urlpatterns = patterns('',
     url(r'^delete-paper-(?P<pk>\d+)$', deletePaper, name='ajax-deletePaper'),
     url(r'^change-department$', changeDepartment, name='ajax-changeDepartment'),
+    url(r'^change-paper$', changePaper, name='ajax-changePaper'),
 )
 

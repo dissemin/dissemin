@@ -13,6 +13,13 @@
 {% endblock %}
 
 {% block jsScript %}
+{% if request.user.is_superuser %}
+$(function(){
+{% for paper in search_results %}
+    makeTextEditable($('#paper-title-{{ paper.id }}'), '/ajax/change-paper', '{{ paper.id }}', 'title');
+{% endfor %}
+});
+{% endif %}
 {% endblock %}
 
 {% block details %}

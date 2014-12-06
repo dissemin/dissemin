@@ -321,4 +321,28 @@ a:hover
     color: black;
 }
 
+.editable-long-input
+{
+    width: 150px;
+}
+
+
+/* Shamelessly taken from
+ * https://github.com/vitalets/x-editable/issues/361 */
+.editable-container.editable-inline {
+    display: inline; 
+}
+
+.editable-input {
+    display: inline; 
+}
+
+.form-group {
+    display: inline;
+    width: 100%;
+}
+
+.editableform .form-control {
+    width: 100%;
+}
 
