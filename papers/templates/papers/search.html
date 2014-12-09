@@ -27,7 +27,16 @@ $(function(){
     <span class="detailsTitle">Researcher</span>
     <div class="detailsContent">
         <p>{{ researcher }}</p>
+        {% if researcher.role %}
+        <p>{{ researcher.role }}</p>
+        {% endif %}
         <p><a href="{% url 'department' researcher.department.id %}">{{ researcher.department }}</a></p>
+        {% if researcher.homepage %}
+        <p><a href="{{ researcher.homepage }}">Homepage</a></p>
+        {% endif %}
+        {% if request.user.is_superuser and researcher.email %}
+        <p>Address: {{ researcher.email }}</p>
+        {% endif %}
     </div>
 {% endif %}
 {% if department %}

@@ -38,6 +38,8 @@ class Researcher(models.Model):
     department = models.ForeignKey(Department)
     groups = models.ManyToManyField(ResearchGroup,blank=True,null=True)
     email = models.EmailField(blank=True,null=True)
+    homepage = models.URLField(blank=True, null=True)
+    role = models.CharField(max_length=128, null=True, blank=True)
 
     # DOI search
     last_doi_search = models.DateTimeField(null=True,blank=True)

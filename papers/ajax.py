@@ -47,12 +47,18 @@ def addResearcher(request):
             email = form.cleaned_data['email']
             first = form.cleaned_data['first']
             last = form.cleaned_data['last']
+            role = form.cleaned_data['role']
+            homepage = form.cleaned_data['homepage']
 
             name, created = Name.objects.get_or_create(
                     first=first, last=last)
             if not created and name.researcher != None:
                     return HttpResponseForbidden('Researcher already present', content_type='text/plain')
-            researcher = Researcher(department=dept,email=email)
+            researcher = Researcher(
+                    department=dept,
+                    email=email,
+                    role=role,
+                    homepage=homepage)
             researcher.save()
             name.researcher = researcher
             name.save(update_fields=['researcher'])
