@@ -24,8 +24,9 @@ $(function(){
 {% endblock %}
 
 {% block details %}
-<p>Head: </p>
-<p>Website: </p>
-<p><a href="{% url 'search' %}?department={{ department.id }}">Papers authored in this department</a></p>
+<span class="detailsTitle">Department</span>
+<div class="detailsContent">
+<p><a href="{% url 'search' %}?department={{ department.id }}">Papers of the members</a></p>
+</div>
 {% endblock %}
 

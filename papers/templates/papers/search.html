@@ -24,14 +24,23 @@ $(function(){
 
 {% block details %}
 {% if researcher %}
-    <span class="detailsTitle">{{ researcher }}</span>
+    <span class="detailsTitle">Researcher</span>
     <div class="detailsContent">
+        <p>{{ researcher }}</p>
         <p><a href="{% url 'department' researcher.department.id %}">{{ researcher.department }}</a></p>
     </div>
 {% endif %}
-{% if journal %}
-    <span class="detailsTitle">{{ journal }}</span>
+{% if department %}
+    <span class="detailsTitle">Department</span>
     <div class="detailsContent">
+        <p>{{ department }}</p>
+        <p><a href="{% url 'department' department.id %}">{{ department.researcher_set.count }} members</a></p>
+    </div>
+{% endif %}
+{% if journal %}
+    <span class="detailsTitle">Journal</span>
+    <div class="detailsContent">
+        <p>{{ journal }}</p>
         <p>Published by <a href="{% url 'publisher' journal.publisher.id %}">{{ journal.publisher }}</a></p>
         {% if journal.issn %}
         <p>ISSN: {{ journal.issn }}</p>

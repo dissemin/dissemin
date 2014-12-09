@@ -23,7 +23,7 @@ class Department(models.Model):
 
     @property
     def sorted_researchers(self):
-        return Researcher.objects.filter(department_id=self.id).order_by('name')
+        return self.researcher_set.order_by('name')
 
     def __unicode__(self):
         return self.name
