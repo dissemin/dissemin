@@ -40,7 +40,6 @@ def deleteResearcher(request, pk):
 # @user_passes_test(is_admin)
 @csrf_exempt
 def addResearcher(request):
-    print "processing"
     form = AddResearcherForm(request.POST)
     if form.is_valid():
         try:
@@ -49,13 +48,14 @@ def addResearcher(request):
             first = form.cleaned_data['first']
             last = form.cleaned_data['last']
 
+            name, created = Name.objects.get_or_create(
+                    first=first, last=last)
+            if not created and name.researcher != None:
+                    return HttpResponseForbidden('Researcher already present', content_type='text/plain')
             researcher = Researcher(department=dept,email=email)
             researcher.save()
-            name, created = Name.objects.get_or_create(
-                    first=first, last=last, defaults={'researcher':researcher})
-            if not created:
-                name.researcher = researcher
-                name.save(update_fields=['researcher'])
+            name.researcher = researcher
+            name.save(update_fields=['researcher'])
             return HttpResponse(json.dumps({
                 'id':researcher.id,
                 'name':first+' '+last}), content_type='application/javascript')

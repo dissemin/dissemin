@@ -14,17 +14,25 @@ $(function(){
 
 function addResearcher() {
     var data = $('#addResearcherForm').serialize();
-    $('.formErrorDiv').each(function () {
+    $('#addResearcherForm .formErrorDiv').each(function () {
         $(this).text('');
         });
 
    $.post('{% url 'ajax-addResearcher' %}', data, null, 'json').fail(function(data) {
-            error = data.responseJSON;
-            for(field in error) {
-                $('#error-'+field).text(error[field]);
+            if(!data.responseJSON)
+            {
+                $('#globalError').text(data.responseText);
+            }
+            else
+            {
+                error = data.responseJSON;
+                for(field in error) {
+                    $('#error-'+field).text(error[field]);
+                }
             }
         }).done(function(data) {
         $('#membersList').append('<li><a href="/researcher/'+data["id"]+'/">'+data['name']+'</a></li>');
+        $('#addResearcherForm .form-control').trigger("reset");
     });
 }
 {% endif %}
@@ -47,6 +55,7 @@ function addResearcher() {
 
 {% if request.user.is_superuser %}
     <form action="javascript:addResearcher();" method="post" id="addResearcherForm">
+     <div id="globalError" class="formErrorDiv"></div>
     {% csrf_token %}
     {% for field in add_form %}
        {% if field.name == 'department' %}
