@@ -9,6 +9,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import user_passes_test
 from django.utils import timezone
+from django.utils.translation import ugettext as _
 
 from papers.models import *
 from papers.tasks import *
@@ -36,26 +37,26 @@ def searchView(request, **kwargs):
     args = request.GET.copy()
     args.update(kwargs)
     
-    search_description = 'Papers'
+    search_description = _('Papers')
     if 'researcher' in args:
         researcher = get_object_or_404(Researcher, pk=args.get('researcher'))
         queryset = queryset.filter(author__name__researcher=researcher)
-        search_description += ' authored by '+unicode(researcher)
+        search_description += _(' authored by ')+unicode(researcher)
         context['researcher'] = researcher
     elif 'department' in args:
         department = get_object_or_404(Department, pk=args.get('department'))
         queryset = queryset.filter(author__name__researcher__department=department)
-        search_description += ' authored in '+unicode(department)
+        search_description += _(' authored in ')+unicode(department)
         context['department'] = department
     if 'journal' in args:
         journal = get_object_or_404(Journal, pk=args.get('journal'))
         queryset = queryset.filter(publication__journal=journal)
-        search_description += ' in '+unicode(journal)
+        search_description += _(' in ')+unicode(journal)
         context['journal'] = journal
     elif 'publisher' in args:
         publisher = get_object_or_404(Publisher, pk=args.get('publisher'))
         queryset = queryset.filter(publication__journal__publisher=publisher)
-        search_description += ' published by '+unicode(publisher)
+        search_description += _(' published by ')+unicode(publisher)
         context['publisher'] = publisher
     if 'status' in args:
         queryset = queryset.filter(oa_status=args.get('status'))
@@ -77,8 +78,8 @@ def searchView(request, **kwargs):
         queryset = queryset.filter(visibility='VISIBLE')
         context['visibility'] = 'VISIBLE'
 
-    if search_description == 'Papers':
-        search_description = 'All papers'
+    if search_description == _('Papers'):
+        search_description = _('All papers')
 
     # Sort
     queryset = queryset.order_by('-year')

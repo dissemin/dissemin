@@ -1,20 +1,21 @@
 from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
 from papers.utils import nstr
+from django.utils.translation import ugettext as _
 
 OA_STATUS_CHOICES = (
-        ('OA', 'Open Access'),
-        ('OK', 'Allows pre/post prints'),
-        ('NOK', 'Forbids pre/post prints'),
-        ('UNK', 'Policy unclear'),
+        ('OA', _('Open Access')),
+        ('OK', _('Allows pre/post prints')),
+        ('NOK', _('Forbids pre/post prints')),
+        ('UNK', _('Policy unclear')),
    )
 
-PDF_STATUS_CHOICES = [('OK', 'Available'),
-                      ('NOK', 'Unavailable')]
+PDF_STATUS_CHOICES = [('OK', _('Available')),
+                      ('NOK', _('Unavailable'))]
 
-VISIBILITY_CHOICES = [('VISIBLE', 'Visible'),
-                      ('DELETED', 'Deleted'),
-                      ('CANDIDATE', 'Candidate')]
+VISIBILITY_CHOICES = [('VISIBLE', _('Visible')),
+                      ('DELETED', _('Deleted')),
+                      ('CANDIDATE', _('Candidate'))]
 
 # Information about the researchers and their groups
 class Department(models.Model):
@@ -47,7 +48,7 @@ class Researcher(models.Model):
         first_name = Name.objects.filter(researcher_id=self.id).order_by('id').first()
         if first_name:
             return unicode(first_name)
-        return "Anonymous researcher"
+        return _("Anonymous researcher")
 
     @property
     def authors_by_year(self):
@@ -61,7 +62,7 @@ class Researcher(models.Model):
         if name:
             return name
         else:
-            return "Anonymous researcher"
+            return _("Anonymous researcher")
     @property
     def aka(self):
         return self.names[:2]
