@@ -12,6 +12,7 @@ from django.utils import timezone
 from django.utils.translation import ugettext as _
 
 from papers.models import *
+from papers.forms import *
 from papers.tasks import *
 from papers.user import is_admin
 
@@ -154,6 +155,10 @@ class GroupView(generic.DetailView):
 class DepartmentView(generic.DetailView):
     model = Department
     template_name = 'papers/department.html'
+    def get_context_data(self, **kwargs):
+        context = super(DepartmentView, self).get_context_data(**kwargs)
+        context['add_form'] = AddResearcherForm()
+        return context
 
 class SourceView(generic.DetailView):
     model = OaiSource

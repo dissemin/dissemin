@@ -11,16 +11,59 @@
 $(function(){
     makeTextEditable($('#department_name'), '/ajax/change-department', '{{ department.pk }}', 'name');
 });
+
+function addResearcher() {
+    var data = $('#addResearcherForm').serialize();
+    $('.formErrorDiv').each(function () {
+        $(this).text('');
+        });
+
+   $.post('{% url 'ajax-addResearcher' %}', data, null, 'json').fail(function(data) {
+            error = data.responseJSON;
+            for(field in error) {
+                $('#error-'+field).text(error[field]);
+            }
+        }).done(function(data) {
+        $('#membersList').append('<li><a href="/researcher/'+data["id"]+'/">'+data['name']+'</a></li>');
+    });
+}
 {% endif %}
 {% endblock %}
 
 {% block lists %}
 <p>Members:</p>
-<ul>
+<ul id="membersList">
     {% for person in department.sorted_researchers %}
-    <li><a href="{% url 'researcher' person.id %}">{{ person }}</a></li>
+    <li><a href="{% url 'researcher' person.id %}">{{ person }}</a>
+        {% if request.user.is_superuser %}
+            <button type="button" class="close researcherDeleteButton"
+                id="delete-researcher-{{ person.id }}">
+                <span aria-hidden="true">&times;</span><span class="sr-only">Delete</span>
+            </button>
+        {% endif %}
+    </li>
     {% endfor %}
 </ul>
+
+{% if request.user.is_superuser %}
+    <form action="javascript:addResearcher();" method="post" id="addResearcherForm">
+    {% csrf_token %}
+    {% for field in add_form %}
+       {% if field.name == 'department' %}
+       <input type="hidden" name="department" value="{{ department.id }}" />
+       {% else %}
+       <div class="input-group">
+           <div class="formErrorDiv" id="error-{{ field.name }}">{{ field.errors }}</div>
+           {{ field.label_tag }}
+           <input type="text" name="{{ field.name }}" id="{{ field.id }}" class="form-control" />
+        </div>
+        {% endif %}
+    {% endfor %}
+    <input type="submit" class="btn btn-default" value="Add" />
+    </form>
+{% endif %}
+
+
 {% endblock %}
 
 {% block details %}

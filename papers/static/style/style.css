@@ -219,7 +219,7 @@ a:hover
     font-size: 1em;
 }
 
-.paperDeleteButton
+.paperDeleteButton, .researcherDeleteButton
 {
 /*    color: white;
     background-color: grey;*/

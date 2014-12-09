@@ -1,7 +1,6 @@
 
-$(function(){
-
-$('.paperDeleteButton').click( function (evt) {
+function makeDeletable(elem) {
+    elem.click( function (evt) {
     var domElem = $(this);
     $.ajax({url:'/ajax/'+$(this).attr('id')}).done(
             function() {
@@ -16,7 +15,12 @@ $('.paperDeleteButton').click( function (evt) {
             });
     evt.preventDefault();
 });
+}
 
+
+$(function(){
+    makeDeletable($('.researcherDeleteButton'));
+    makeDeletable($('.paperDeleteButton'));
 });
 
 var pencilElements = new Array();

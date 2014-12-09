@@ -68,7 +68,7 @@ class Researcher(models.Model):
         return self.names[:2]
 
 class Name(models.Model):
-    researcher = models.ForeignKey(Researcher, blank=True, null=True)
+    researcher = models.ForeignKey(Researcher, blank=True, null=True, on_delete=models.SET_NULL)
     first = models.CharField(max_length=256)
     last = models.CharField(max_length=256)
 
