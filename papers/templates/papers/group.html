@@ -1,5 +1,7 @@
 {% extends "dissemin/details.html" %}
 
+{% load i18n %}
+
 {% block headTitle %}
 {{ researchgroup.name }}
 {% endblock %}
@@ -9,11 +11,11 @@
 {% endblock %}
 
 {% block details %}
-<p>Website</p>
+<p>{% trans "Website" %}</p>
 {% endblock %}
 
 {% block lists %}
-<p>Members:</p>
+<p>{% trans "Members:" %}</p>
 <ul>
     {% for person in researchgroup.researcher_set.all %}
         <li><a href="{% url 'researcher' person.id %}">{{ person }}</li></a>

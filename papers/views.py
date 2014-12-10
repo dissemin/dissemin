@@ -160,10 +160,6 @@ class DepartmentView(generic.DetailView):
         context['add_form'] = AddResearcherForm()
         return context
 
-class SourceView(generic.DetailView):
-    model = OaiSource
-    template_name = 'papers/oaiSource.html'
-
 class PaperView(generic.DetailView):
     model = Paper
     template_name = 'papers/paper.html'

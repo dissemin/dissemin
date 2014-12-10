@@ -8,3 +8,5 @@ romeo_api_key
 data/
 celerybeat-schedule
 repositories
+# Localization
+*.mo
