@@ -48,7 +48,7 @@ def lookup_name(author_name):
     name = Name.objects.filter(full=normalized).first()
     if name:
         return name
-    name = Name(first=first_name, last=last_name)
+    name = Name.create(first_name,last_name)
     name.save()
     return name
 

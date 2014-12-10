@@ -60,7 +60,7 @@ class Researcher(models.Model):
         return self.name_set.order_by('id')
     @property
     def name(self):
-        name = self.names.first()
+        name = self.names[0]
         if name:
             return name
         else:
@@ -80,11 +80,10 @@ class Name(models.Model):
     class Meta:
         ordering = ['last','first']
 
-    def __init__(self, **kwargs):
-        new_kwargs = kwargs.copy()
-        if not 'full' in kwargs:
-            new_kwargs['full'] = iunaccent(kwargs['first']+' '+kwargs['last'])
-        super(Name, self).__init__(**new_kwargs)
+    @classmethod
+    def create(cls, first, last):
+        full = iunaccent(first+' '+last)
+        return cls(first=first,last=last,full=full)
     def __unicode__(self):
         return '%s %s' % (self.first,self.last)
     @property
