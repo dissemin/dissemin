@@ -36,7 +36,7 @@ def remove_diacritics(s):
     else:
         return s
 
-split_re = re.compile(r'[ .,]*')
+split_re = re.compile(r'[ .,-]*')
 def split_words(string):
     return filter(lambda x: x != '', split_re.split(string))
 
@@ -74,6 +74,8 @@ def create_paper_plain_fingerprint(title, authors):
 
     author_names_list = []
     for author in authors:
+        if not author:
+            continue
         # TODO remove the - in "J.-W. Dupont" TODO TODO
         author = (remove_diacritics(author[0]),remove_diacritics(author[1]))
         # Initials of the given names
