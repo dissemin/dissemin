@@ -69,11 +69,12 @@ def create_paper_plain_fingerprint(title, authors):
     title = remove_diacritics(title).lower()
     title = stripped_chars.sub('',title)
     title = title.strip()
-    title = re.sub(' +', '-', title)
+    title = re.sub('[ -]+', '-', title)
     buf = title
 
     author_names_list = []
     for author in authors:
+        # TODO remove the - in "J.-W. Dupont" TODO TODO
         author = (remove_diacritics(author[0]),remove_diacritics(author[1]))
         # Initials of the given names
         initials = map(lambda x: x[0].lower(), split_words(author[0]))
