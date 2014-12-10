@@ -1,6 +1,6 @@
 from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
-from papers.utils import nstr
+from papers.utils import nstr, iunaccent
 from django.utils.translation import ugettext as _
 
 OA_STATUS_CHOICES = (
@@ -73,12 +73,18 @@ class Name(models.Model):
     researcher = models.ForeignKey(Researcher, blank=True, null=True, on_delete=models.SET_NULL)
     first = models.CharField(max_length=256)
     last = models.CharField(max_length=256)
+    full = models.CharField(max_length=513, db_index=True)
 
     unique_together = ('first','last')# TODO Two researchers with the same name is not supported
     
     class Meta:
         ordering = ['last','first']
 
+    def __init__(self, **kwargs):
+        new_kwargs = kwargs.copy()
+        if not 'full' in kwargs:
+            new_kwargs['full'] = iunaccent(kwargs['first']+' '+kwargs['last'])
+        super(Name, self).__init__(**new_kwargs)
     def __unicode__(self):
         return '%s %s' % (self.first,self.last)
     @property

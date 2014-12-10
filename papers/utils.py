@@ -36,6 +36,9 @@ def remove_diacritics(s):
     else:
         return s
 
+def iunaccent(s):
+    return remove_diacritics(s).lower()
+
 split_re = re.compile(r'[ .,-]*')
 def split_words(string):
     return filter(lambda x: x != '', split_re.split(string))

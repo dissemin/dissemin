@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 from django.core.exceptions import ObjectDoesNotExist
 import re
 
-from papers.utils import to_plain_name, create_paper_fingerprint, normalize_name_words
+from papers.utils import to_plain_name, create_paper_fingerprint, normalize_name_words, iunaccent
 from papers.errors import MetadataSourceException
 from papers.models import *
 from papers.doi import to_doi
@@ -44,7 +44,8 @@ def parse_unknown_name(name):
 def lookup_name(author_name):
     first_name = author_name[0]
     last_name = author_name[1]
-    name = Name.objects.filter(first__iexact=first_name, last__iexact=last_name).first()
+    normalized = iunaccent(first_name+' '+last_name)
+    name = Name.objects.filter(full=normalized).first()
     if name:
         return name
     name = Name(first=first_name, last=last_name)

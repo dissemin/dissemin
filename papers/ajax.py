@@ -15,6 +15,7 @@ from django.views.decorators.csrf import csrf_exempt
 from papers.models import *
 from papers.user import is_admin
 from papers.forms import AddResearcherForm
+from papers.utils import iunaccent
 
 # General function used to change a CharField in a model with ajax
 def process_ajax_change(request, model, allowedFields):
@@ -50,8 +51,8 @@ def addResearcher(request):
             role = form.cleaned_data['role']
             homepage = form.cleaned_data['homepage']
 
-            name, created = Name.objects.get_or_create(
-                    first=first, last=last)
+            name, created = Name.objects.get_or_create(full=iunaccent(first+' '+last),
+                    defaults={'first':first, 'last':last})
             if not created and name.researcher != None:
                     return HttpResponseForbidden('Researcher already present', content_type='text/plain')
             researcher = Researcher(
