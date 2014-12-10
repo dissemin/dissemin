@@ -8,12 +8,17 @@ Data sources:
 * OAI-PMH, through a proxy
 * CrossRef.org
 * SHERPA/RoMEO
-* Soon: Bielefeld Academic Search Engine (BASE)
+* Bielefeld Academic Search Engine (BASE)
+* Soon: CORE
 
 Dependencies:
 * Python 2.7 (should work with Python 3)
 * Django
+* Celery
 * PyOAI
+* unidecode
+* psycopg2
+* django-bootstrap-pagination
 
 To use the RoMEO backend, it is useful to use a free api key. Write your api key in
 the file `romeo_api_key` at the root of the repository so that dissemin can use it.
