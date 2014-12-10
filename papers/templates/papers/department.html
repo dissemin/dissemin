@@ -1,5 +1,7 @@
 {% extends "dissemin/details.html" %}
 
+{% load i18n %}
+
 {% block headTitle %}{{ department.name }}{% endblock %}
 
 {% block bodyTitle %}<span id="department_name" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">{{ department.name }}</span>
@@ -39,14 +41,14 @@ function addResearcher() {
 {% endblock %}
 
 {% block lists %}
-<p>Members:</p>
+<p>{% trans "Members:" %}</p>
 <ul id="membersList">
     {% for person in department.sorted_researchers %}
     <li><a href="{% url 'researcher' person.id %}">{{ person }}</a>
         {% if request.user.is_superuser %}
             <button type="button" class="close researcherDeleteButton"
                 id="delete-researcher-{{ person.id }}">
-                <span aria-hidden="true">&times;</span><span class="sr-only">Delete</span>
+                <span aria-hidden="true">&times;</span><span class="sr-only">{% trans "Delete" %}</span>
             </button>
         {% endif %}
     </li>
@@ -68,7 +70,7 @@ function addResearcher() {
         </div>
         {% endif %}
     {% endfor %}
-    <input type="submit" class="btn btn-default" value="Add" />
+    <input type="submit" class="btn btn-default" value="{% trans "Add" %}" />
     </form>
 {% endif %}
 
@@ -76,9 +78,9 @@ function addResearcher() {
 {% endblock %}
 
 {% block details %}
-<span class="detailsTitle">Department</span>
+<span class="detailsTitle">{% trans "Department" %}</span>
 <div class="detailsContent">
-<p><a href="{% url 'search' %}?department={{ department.id }}">Papers of the members</a></p>
+    <p><a href="{% url 'search' %}?department={{ department.id }}">{% trans "Papers of the members" %}</a></p>
 </div>
 {% endblock %}
 

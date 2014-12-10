@@ -3,6 +3,7 @@
 {% load staticfiles %}
 {% load bootstrap_pagination %}
 {% load statuses %}
+{% load i18n %}
 
 {% block headTitle %}
 {{ search_description }}
@@ -24,7 +25,7 @@ $(function(){
 
 {% block details %}
 {% if researcher %}
-    <span class="detailsTitle">Researcher</span>
+<span class="detailsTitle">{% trans "Researcher" %}</span>
     <div class="detailsContent">
         <p>{{ researcher }}</p>
         {% if researcher.role %}
@@ -35,24 +36,28 @@ $(function(){
         <p><a href="{{ researcher.homepage }}">Homepage</a></p>
         {% endif %}
         {% if request.user.is_superuser and researcher.email %}
-        <p>Address: {{ researcher.email }}</p>
+        <p>{% trans "Address:" %}{{ researcher.email }}</p>
         {% endif %}
     </div>
 {% endif %}
 {% if department %}
-    <span class="detailsTitle">Department</span>
+<span class="detailsTitle">{% trans "Department" %}</span>
     <div class="detailsContent">
         <p>{{ department }}</p>
-        <p><a href="{% url 'department' department.id %}">{{ department.researcher_set.count }} members</a></p>
+        <p><a href="{% url 'department' department.id %}">
+            {% blocktrans %}
+            {{ department.researcher_set.count }} members
+            {% endblocktrans %}
+        </a></p>
     </div>
 {% endif %}
 {% if journal %}
-    <span class="detailsTitle">Journal</span>
+<span class="detailsTitle">{% trans "Journal" %}</span>
     <div class="detailsContent">
         <p>{{ journal }}</p>
-        <p>Published by <a href="{% url 'publisher' journal.publisher.id %}">{{ journal.publisher }}</a></p>
+        <p>{% trans "Published by" %}<a href="{% url 'publisher' journal.publisher.id %}">{{ journal.publisher }}</a></p>
         {% if journal.issn %}
-        <p>ISSN: {{ journal.issn }}</p>
+        <p>{% trans "ISSN:" %} {{ journal.issn }}</p>
         {% endif %}
         <div class="unselectedCriterion">
         <div class="pubLogo"><div class="pubLogoPic-{{ journal.publisher.oa_status }}"></div></div>
@@ -61,12 +66,15 @@ $(function(){
     </div>
 {% endif %}
 
-<span class="detailsTitle">Refine search</span>
+<span class="detailsTitle">{% trans "Refine search" %}</span>
 <div class="detailsContent">
-<p>{{ nb_results }} papers found</p>
+    <p>{% blocktrans %}
+    {{ nb_results }} papers found
+    {% endblocktrans %}
+    </p>
 
 {% if not journal %}
-<span class="criterion">By publisher policy:</span>
+<span class="criterion">{% trans "By publisher policy:" %}</span>
 {% for st in oa_status_choices %}
 <div class="{% if st.0 == status %}selectedCriterion{% else %}unselectedCriterion{% endif %}">
     <div class="pubLogo"><div class="pubLogoPic-{{ st.0 }}"><a href="{% url 'search' %}?{{ st.2.urlencode }}" class="filldiv"></a></div></div>
@@ -79,7 +87,7 @@ $(function(){
 {% endfor %}
 {% endif %}
 
-<span class="criterion">By full text availability:</span>
+<span class="criterion">{% trans "By full text availability:" %}</span>
 {% for st in pdf_status_choices %}
 <div class="{% if st.0 == pdf %}selectedCriterion{% else %}unselectedCriterion{% endif %}">
      <div class="pubLogo"><div class="pubLogoPic-PDF-{{ st.0 }}"><a href="{% url 'search' %}?{{ st.2.urlencode }}" class="filldiv"></a></div></div>
@@ -92,7 +100,7 @@ $(function(){
 {% endfor %}
 
 {% if request.user.is_superuser %}
-<span class="criterion">By visibility:</span>
+<span class="criterion">{% trans "By visibility:" %}</span>
 {% for st in visibility_choices %}
    <div class="{% if st.0 == visibility %}selectedCriterion{% else %}unselectedCriterion{% endif %}">
      <div class="pubLogo"><div class="pubLogoPic-PDF-{{ st.0 }}"><a href="{% url 'search' %}?{{ st.2.urlencode }}" class="filldiv"></a></div></div>
@@ -121,7 +129,7 @@ $(function(){
 </li>    
         {% if forloop.last %}</ul></div>{% endif %}
  {% empty %}
- <p>No production found.</p>
+ <p>{% trans "No production found." %}</p>
  {% endfor %}
  {% if search_results.paginator.num_pages > 1 %}
  <div class="searchPages">{% bootstrap_paginate search_results range=10 %}</div>

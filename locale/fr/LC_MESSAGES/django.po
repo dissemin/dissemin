@@ -1,0 +1,334 @@
+# French translation for Dissemin.
+# Copyright (C) 2014 Antonin Delpeuch
+# This file is distributed under the same license as the Dissemin package.
+# Antonin Delpeuch <antonin@delpeuch.eu>, 2014.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-12-10 21:15+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: papers/forms.py:9
+msgid "First name"
+msgstr "Prénom"
+
+#: papers/forms.py:10
+msgid "Last name"
+msgstr "Nom"
+
+#: papers/forms.py:11 papers/templates/papers/department.html:79
+#: papers/templates/papers/search.html:43
+msgid "Department"
+msgstr "Département"
+
+#: papers/forms.py:12
+msgid "Email"
+msgstr "Email"
+
+#: papers/forms.py:13 papers/templates/papers/publisher.html:15
+msgid "Homepage"
+msgstr "Site web"
+
+#: papers/forms.py:14
+msgid "Role"
+msgstr "Fonction"
+
+#: papers/models.py:7
+msgid "Open Access"
+msgstr "Accès Libre"
+
+#: papers/models.py:8
+msgid "Allows pre/post prints"
+msgstr "Permet les pré/post-publications"
+
+#: papers/models.py:9
+msgid "Forbids pre/post prints"
+msgstr "Interdit les pré/post-publications"
+
+#: papers/models.py:10
+msgid "Policy unclear"
+msgstr "Politique inconnue"
+
+#: papers/models.py:13 papers/templates/papers/paper.html:36
+msgid "Available"
+msgstr "Disponible"
+
+#: papers/models.py:14 papers/templates/papers/paper.html:37
+msgid "Unavailable"
+msgstr "Non disponible"
+
+#: papers/models.py:16
+msgid "Visible"
+msgstr "Visible"
+
+#: papers/models.py:17
+msgid "Deleted"
+msgstr "Supprimé"
+
+#: papers/models.py:18
+msgid "Candidate"
+msgstr "Candidat"
+
+#: papers/models.py:53 papers/models.py:67
+msgid "Anonymous researcher"
+msgstr "Chercheur anonyme"
+
+#: papers/views.py:41 papers/views.py:82
+msgid "Papers"
+msgstr "Papiers"
+
+#: papers/views.py:45
+msgid " authored by "
+msgstr " écrits par "
+
+#: papers/views.py:50
+msgid " authored in "
+msgstr " écrits dans "
+
+#: papers/views.py:55
+msgid " in "
+msgstr " dans "
+
+#: papers/views.py:60
+msgid " published by "
+msgstr " publiés par "
+
+#: papers/views.py:83
+msgid "All papers"
+msgstr "Tous les papiers"
+
+#: papers/templates/papers/department.html:42
+#: papers/templates/papers/group.html:16
+msgid "Members:"
+msgstr "Membres:"
+
+#: papers/templates/papers/department.html:49
+#: papers/templates/papers/publiListItem.html:17
+msgid "Delete"
+msgstr "Supprimer"
+
+#: papers/templates/papers/department.html:71
+msgid "Add"
+msgstr "Ajouter"
+
+#: papers/templates/papers/department.html:81
+msgid "Papers of the members"
+msgstr "Papiers des membres"
+
+#: papers/templates/papers/group.html:12
+msgid "Website"
+msgstr "Page web"
+
+#: papers/templates/papers/index.html:10
+#, python-format
+msgid ""
+"\n"
+"    There are currently %(nb_researchers)s registered researchers,\n"
+"from %(nb_departments)s departments.\n"
+"    "
+msgstr ""
+"\n"
+"Il y a actuellement %(nb_researchers)s chercheurs inscrits,\n"
+"dans %(nb_departments)s départements.\n"
+"    "
+
+#: papers/templates/papers/index.html:16
+#, python-format
+msgid ""
+"\n"
+"    See <a href=\"%(search_url)s\">all papers</a> or browse by department:\n"
+"    "
+msgstr ""
+"\n"
+"   Consulter <a href=\"%(search_url)s\">tous les papiers</a> ou parcourir par département:\n"
+"    "
+
+#: papers/templates/papers/paper.html:35
+msgid "Full text:"
+msgstr "Texte intégral:"
+
+#: papers/templates/papers/paper.html:40
+msgid "Publisher policy:"
+msgstr "Politique de la maison d'édition"
+
+#: papers/templates/papers/paper.html:41
+msgid "details"
+msgstr "détails"
+
+#: papers/templates/papers/paper.html:47
+msgid "Abstract."
+msgstr "Résumé."
+
+#: papers/templates/papers/paper.html:54
+msgid "Available from"
+msgstr "Disponible depuis"
+
+#: papers/templates/papers/paper.html:61
+msgid "[Web page]"
+msgstr "[Page web]"
+
+#: papers/templates/papers/paper.html:64
+msgid "[PDF]"
+msgstr "[PDF]"
+
+#: papers/templates/papers/paper.html:68
+msgid "Publisher"
+msgstr "Maison d'édition"
+
+#: papers/templates/papers/paper.html:70
+msgid "via DOI"
+msgstr "via DOI"
+
+#: papers/templates/papers/publisher.html:20
+#, python-format
+msgid ""
+"\n"
+"  %(publisher.name)s has published %(publisher.publi_count)s productions "
+"authored by researchers from ENS.\n"
+"   "
+msgstr ""
+"\n"
+"  %(publisher.name)s a publié %(publisher.publi_count)s productions "
+" écrites par des chercheurs de l'ENS.\n"
+"   "
+
+#: papers/templates/papers/publisher.html:24
+#, python-format
+msgid ""
+"\n"
+"   Preprint policy: %(policy)s\n"
+"   "
+msgstr ""
+"\n"
+"   Politique de prépublication: %(policy)s\n"
+"   "
+
+#: papers/templates/papers/publisher.html:34
+#, python-format
+msgid ""
+"\n"
+"   Postprint policy: %(policy)s\n"
+"  "
+msgstr ""
+"\n"
+"   Politique de postpublication: %(policy)s\n"
+"   "
+
+#: papers/templates/papers/publisher.html:44
+#, python-format
+msgid ""
+"\n"
+"    Published version policy: %(policy)s\n"
+"   "
+msgstr ""
+"\n"
+"    Politique pour la version finale: %(policy)s\n"
+"    "
+
+#: papers/templates/papers/publisher.html:53
+msgid "Conditions"
+msgstr "Conditions"
+
+#: papers/templates/papers/publisher.html:59
+msgid "Policy details"
+msgstr "Détails de la politique"
+
+#: papers/templates/papers/publisher.html:65
+msgid "Source:"
+msgstr "Source:"
+
+#: papers/templates/papers/publisher.html:66
+msgid "Journals in which researchers have authored papers"
+msgstr "Revues dans lesquelles les chercheurs ont écrit des papiers"
+
+#: papers/templates/papers/publisher.html:71
+msgid "None."
+msgstr "Aucune."
+
+#: papers/templates/papers/search.html:27
+msgid "Researcher"
+msgstr "Chercheur"
+
+#: papers/templates/papers/search.html:38
+msgid "Address:"
+msgstr "Adresse:"
+
+#: papers/templates/papers/search.html:47
+#, python-format
+msgid ""
+"\n"
+"            %(department.researcher_set.count)s members\n"
+"            "
+msgstr ""
+"\n"
+"            %(department.researcher_set.count)s membres\n"
+"            "
+
+#: papers/templates/papers/search.html:54
+msgid "Journal"
+msgstr "Revue"
+
+#: papers/templates/papers/search.html:57
+msgid "Published by"
+msgstr "Publiée par"
+
+#: papers/templates/papers/search.html:59
+msgid "ISSN:"
+msgstr "ISSN:"
+
+#: papers/templates/papers/search.html:68
+msgid "Refine search"
+msgstr "Affiner la recherche"
+
+#: papers/templates/papers/search.html:70
+#, python-format
+msgid ""
+"\n"
+"    %(nb_results)s papers found\n"
+"    "
+msgstr ""
+"\n"
+"    %(nb_results)s papiers correspondant\n"
+"    "
+
+#: papers/templates/papers/search.html:76
+msgid "By publisher policy:"
+msgstr "Par politique de publication"
+
+#: papers/templates/papers/search.html:89
+msgid "By full text availability:"
+msgstr "Par disponibilité du texte intégral"
+
+#: papers/templates/papers/search.html:102
+msgid "By visibility:"
+msgstr "Par visibilité"
+
+#: papers/templates/papers/search.html:131
+msgid "No production found."
+msgstr "Aucune production trouvée."
+
+#: papers/templatetags/statuses.py:17
+msgid "Unknown OA status"
+msgstr "État OA inconnu"
+
+#: papers/templatetags/statuses.py:24
+msgid "Unknown PDF status"
+msgstr "État PDF inconnu"
+
+#: templates/admin/base_site.html:4
+msgid "Dissemin site admin"
+msgstr "Administration du site Dissemin"
+
+#: templates/admin/base_site.html:7
+msgid "Dissemin administration"
+msgstr "Administration de Dissemin"
