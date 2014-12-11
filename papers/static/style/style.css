@@ -44,7 +44,7 @@ a:hover
 
 #content
 {
-    width: 1000px;
+    width: 1030px;
     margin: auto;
     padding: 10px;
 }
@@ -52,7 +52,7 @@ a:hover
 #sidebar
 {
     float: right;
-    width: 250px;
+    width: 280px;
     border-right: 1px solid rgba(192,188,206,1);
     border-bottom: 1px solid rgba(192,188,206,1);
 
@@ -79,7 +79,7 @@ a:hover
 
 #summaryLists
 {
-    margin-right: 262px; 
+    margin-right: 292px; 
 }
 
 

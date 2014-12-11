@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
 from papers.utils import nstr, iunaccent
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 
 OA_STATUS_CHOICES = (
         ('OA', _('Open Access')),

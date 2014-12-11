@@ -45,8 +45,8 @@ $(function(){
     <div class="detailsContent">
         <p>{{ department }}</p>
         <p><a href="{% url 'department' department.id %}">
-            {% blocktrans %}
-            {{ department.researcher_set.count }} members
+            {% blocktrans with count=department.researcher_set.count %}
+            {{ count }} members
             {% endblocktrans %}
         </a></p>
     </div>

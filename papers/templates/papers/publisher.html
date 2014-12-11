@@ -18,8 +18,8 @@
 {% endblock %}
 
 {% block lists %}
-<p>{% blocktrans %}
-  {{publisher.name }} has published {{ publisher.publi_count }} productions authored by researchers from ENS.
+<p>{% blocktrans with name=publisher.name, count=publisher.publi_count %}
+  {{ name }} has published {{ count }} productions authored by researchers from ENS.
    {% endblocktrans %}
 </p>
 <p>{% blocktrans with policy=publisher.preprint %}

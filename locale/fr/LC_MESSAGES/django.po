@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-10 22:02+0100\n"
+"POT-Creation-Date: 2014-12-11 10:38+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,11 +49,11 @@ msgstr "Accès Libre"
 
 #: papers/models.py:8
 msgid "Allows pre/post prints"
-msgstr "Permet les pré/post-publications"
+msgstr "Pré/post-publications autorisées"
 
 #: papers/models.py:9
 msgid "Forbids pre/post prints"
-msgstr "Interdit les pré/post-publications"
+msgstr "Pré/post-publications interdites"
 
 #: papers/models.py:10
 msgid "Policy unclear"
@@ -93,7 +93,7 @@ msgstr " écrits par "
 
 #: papers/views.py:50
 msgid " authored in "
-msgstr " écrits dans "
+msgstr " écrits au "
 
 #: papers/views.py:55
 msgid " in "
@@ -191,16 +191,16 @@ msgid "via DOI"
 msgstr "via DOI"
 
 #: papers/templates/papers/publisher.html:21
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "\n"
-"  %(publisher.name)s has published %(publisher.publi_count)s productions "
-"authored by researchers from ENS.\n"
+"  %(name)s has published %(count)s productions authored by researchers from "
+"ENS.\n"
 "   "
 msgstr ""
 "\n"
-"  %(publisher.name)s a publié %(publisher.publi_count)s productions  écrites "
-"par des chercheurs de l'ENS.\n"
+"  %(name)s a publié %(count)s productions  écrites par des chercheurs de "
+"l'ENS.\n"
 "   "
 
 #: papers/templates/papers/publisher.html:25
@@ -268,11 +268,11 @@ msgstr "Adresse:"
 #, python-format
 msgid ""
 "\n"
-"            %(department.researcher_set.count)s members\n"
+"            %(count)s members\n"
 "            "
 msgstr ""
 "\n"
-"            %(department.researcher_set.count)s membres\n"
+"            %(count)s membres\n"
 "            "
 
 #: papers/templates/papers/search.html:55
@@ -299,7 +299,7 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"    %(nb_results)s papiers correspondant\n"
+"    %(nb_results)s résultats\n"
 "    "
 
 #: papers/templates/papers/search.html:77
@@ -334,29 +334,31 @@ msgstr "Administration du site Dissemin"
 msgid "Dissemin administration"
 msgstr "Administration de Dissemin"
 
-#: templates/dissemin/skeleton.html:31
+#: templates/dissemin/skeleton.html:32
 #, fuzzy
 msgid "Home"
 msgstr "Site web"
 
-#: templates/dissemin/skeleton.html:31
+#: templates/dissemin/skeleton.html:32
 msgid "About"
 msgstr "À propos"
 
-#: templates/dissemin/skeleton.html:31
+#: templates/dissemin/skeleton.html:32
 msgid "Feedback"
 msgstr "Réactions"
 
-#: templates/dissemin/skeleton.html:35
+#: templates/dissemin/skeleton.html:36
 msgid "Login"
 msgstr "Se connecter"
 
-#: templates/dissemin/skeleton.html:47
+#: templates/dissemin/skeleton.html:48
 msgid ""
 "The information provided on this website should not be relied upon for legal "
 "advice."
-msgstr "Les informations rassemblées sur ce site sont fournies à titre indicatif uniquement et sans aucune garantie."
-
-#: templates/dissemin/skeleton.html:48
-msgid "Contact:"
 msgstr ""
+"Les informations rassemblées sur ce site sont fournies à titre indicatif "
+"uniquement et sans aucune garantie."
+
+#: templates/dissemin/skeleton.html:49
+msgid "Contact:"
+msgstr "Contact:"
