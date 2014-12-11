@@ -15,7 +15,9 @@ from papers.romeo import fetch_journal
 comma_re = re.compile(r',+')
 
 def parse_comma_name(name):
-    """ Parse an name of the form "Last name, First name" to (first name, last name) """
+    """
+    Parse an name of the form "Last name, First name" to (first name, last name)
+    """
     name = normalize_name_words(name)
     name = comma_re.sub(',',name)
     first_name = ''
@@ -44,11 +46,13 @@ def parse_unknown_name(name):
 def lookup_name(author_name):
     first_name = author_name[0]
     last_name = author_name[1]
-    normalized = iunaccent(first_name+' '+last_name)
+    full_name = first_name+' '+last_name
+    full_name = full_name.strip()
+    normalized = iunaccent(full_name)
     name = Name.objects.filter(full=normalized).first()
     if name:
         return name
-    name = Name(first=first_name, last=last_name)
+    name = Name.create(first_name,last_name)
     name.save()
     return name
 

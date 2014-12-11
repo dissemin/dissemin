@@ -110,7 +110,12 @@ def fetch_papers_from_crossref_by_researcher_name(name, update=False):
 
             # Fetch DOI details from CrossRef
             print "Fetching DOI "+doi
-            metadata = fetch_metadata_by_DOI(doi)
+            try:
+                metadata = fetch_metadata_by_DOI(doi)
+            except MetadataSourceException as e:
+                print "MetadataSourceException ignored:"
+                print e
+                continue
 
             # Normalize metadata
             if metadata == None:
