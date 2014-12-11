@@ -80,7 +80,7 @@ def add_base_document(doc):
     creators = metadata['dccreator']
     if type(creators) == type(''):
         creators = [creators]
-    author_names = map(parse_unknown_name, creators)
+    author_names = map(parse_comma_name, creators)
     
     try:
         year = int(metadata['dcyear'])

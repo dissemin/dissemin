@@ -4,6 +4,7 @@
 .*.swp
 # API keys
 romeo_api_key
+core_api_key
 # ENS data
 data/
 celerybeat-schedule
