@@ -18,7 +18,7 @@
 {% endblock %}
 
 {% block lists %}
-<p>{% blocktrans with name=publisher.name, count=publisher.publi_count %}
+<p>{% blocktrans with name=publisher.name count=publisher.publi_count %}
   {{ name }} has published {{ count }} productions authored by researchers from ENS.
    {% endblocktrans %}
 </p>

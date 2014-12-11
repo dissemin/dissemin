@@ -160,7 +160,7 @@ msgstr "Texte intégral:"
 
 #: papers/templates/papers/paper.html:41
 msgid "Publisher policy:"
-msgstr "Politique de la maison d'édition"
+msgstr "Politique de la maison d'édition:"
 
 #: papers/templates/papers/paper.html:42
 msgid "details"

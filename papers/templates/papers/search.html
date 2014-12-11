@@ -55,7 +55,7 @@ $(function(){
 <span class="detailsTitle">{% trans "Journal" %}</span>
     <div class="detailsContent">
         <p>{{ journal }}</p>
-        <p>{% trans "Published by" %}<a href="{% url 'publisher' journal.publisher.id %}">{{ journal.publisher }}</a></p>
+        <p>{% trans "Published by" %} <a href="{% url 'publisher' journal.publisher.id %}">{{ journal.publisher }}</a></p>
         {% if journal.issn %}
         <p>{% trans "ISSN:" %} {{ journal.issn }}</p>
         {% endif %}
