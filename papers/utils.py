@@ -46,6 +46,7 @@ def split_words(string):
 initial_re = re.compile(r'[A-Z](\.,;)*$')
 def normalize_name_words(w):
     """ If it is an initial, ensure it is of the form "T.", and recapitalize it. """
+    w = w.strip()
     words = w.split()
     words = map(recapitalize_word, words)
     words = map(lambda w: w[0]+'.' if initial_re.match(w) else w, words)
