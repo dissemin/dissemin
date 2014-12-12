@@ -90,12 +90,28 @@ pmcExtractor = RegexExtractor([
         'pdf', r'http://www.ncbi.nlm.nih.gov/pmc/articles/pmid/\1')
     ])
 
+doajExtractor = RegexExtractor([
+    ('relation', re.compile(r'(https?://[^ ]*)'),
+        'pdf', r'\1'),
+    ('identifier', re.compile(r'(http://doaj\.org/search[^ ]*)'),
+        'splash', r'\1'),
+    ])
+
+perseeExtractor = RegexExtractor([
+    ('identifier', re.compile(r'(http://www\.persee\.fr/web/revues/home/[^ ]*)'),
+        'splash', r'\1'),
+    ('identifier', re.compile(r'(http://www\.persee\.fr/web/revues/home/[^ ]*)'),
+        'pdf', r'\1'),
+    ])
+
 
 REGISTERED_EXTRACTORS = {
         'arxiv': arxivExtractor,
         'hal': halExtractor,
         'cairn' : cairnExtractor,
         'pmc' : pmcExtractor,
+        'doaj' : doajExtractor,
+        'persee' : perseeExtractor,
         }
 
 
