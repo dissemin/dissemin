@@ -115,7 +115,7 @@ class Paper(models.Model):
         else:
             self.oa_status = 'UNK'
         # Look for automatic OA OAI sources
-        records = list(self.oairecord_set.filter(source__oa=True)[:1])
+        records = list(self.oairecord_set.filter(source__oa=True,pdf_url__isnull=False)[:1])
         if records:
             self.oa_status = 'OA'
         self.save()
