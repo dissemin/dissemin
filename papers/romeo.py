@@ -7,7 +7,7 @@ from papers.utils import nstrip
 import xml.etree.ElementTree as ET
 import unicodedata
 
-api_key = open('romeo_api_key').read().strip()
+romeo_api_key = open('romeo_api_key').read().strip()
 
 def find_journal_in_model(search_terms):
     issn = search_terms.get('issn', None)
@@ -49,8 +49,8 @@ def fetch_journal(search_terms, matching_mode='exact'):
         return journal
 
     # Prepare the query
-    if api_key:
-        search_terms['ak'] = api_key
+    if romeo_api_key:
+        search_terms['ak'] = romeo_api_key
     request = 'http://sherpa.ac.uk/romeo/api29.php?'+urlencode(search_terms)
 
     # Perform the query

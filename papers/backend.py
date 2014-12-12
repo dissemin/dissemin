@@ -4,44 +4,13 @@ from __future__ import unicode_literals
 from django.core.exceptions import ObjectDoesNotExist
 import re
 
-from papers.utils import to_plain_name, create_paper_fingerprint, normalize_name_words, iunaccent
+from papers.utils import to_plain_name, create_paper_fingerprint
 from papers.errors import MetadataSourceException
 from papers.models import *
 from papers.doi import to_doi
 from papers.crossref import fetch_metadata_by_DOI
 from papers.romeo import fetch_journal
-
-# Name managemement: heuristics to separate a name into (first,last)
-comma_re = re.compile(r',+')
-
-def parse_comma_name(name):
-    """
-    Parse an name of the form "Last name, First name" to (first name, last name)
-    """
-    name = normalize_name_words(name)
-    name = comma_re.sub(',',name)
-    first_name = ''
-    last_name = name
-    idx = name.find(',')
-    if idx != -1:
-        last_name = name[:idx]
-        first_name = name[(idx+1):]
-    first_name = first_name.strip()
-    last_name = last_name.strip()
-    return (first_name,last_name)
-
-# TODO: there is probably a better way to parse names such as "Colin de la Higuera"
-# list of "particle words" such as "de, von, van, du" ?
-def parse_unknown_name(name):
-    """ Try to parse a name of the form "Jean Dupont" or "Dupont, Jean" """
-    if ',' in name:
-        return parse_comma_name(name)
-    space_re = re.compile(r' +')
-    name = space_re.sub(' ',name)
-    words = name.split(' ')
-    if not words:
-        return ('','')
-    return (' '.join(words[:-1]), words[-1])
+from papers.name import parse_comma_name
 
 def lookup_name(author_name):
     first_name = author_name[0]
@@ -56,11 +25,15 @@ def lookup_name(author_name):
     name.save()
     return name
 
-def get_or_create_paper(title, author_names, year, doi=None):
+def get_or_create_paper(title, author_names, year, doi=None, visibility='VISIBLE'):
     # If a DOI is present, first look up using it
     if doi:
         matches = Publication.objects.filter(doi__exact=doi)
         if matches:
+            paper = matches[0].paper
+            if visibility == 'VISIBLE' and paper.visibility == 'CANDIDATE':
+                paper.visibility = 'VISIBLE'
+                paper.save(update_fields=['visibility'])
             return matches[0].paper
 
     if not title or not author_names or not year:
@@ -74,8 +47,11 @@ def get_or_create_paper(title, author_names, year, doi=None):
     p = None
     if matches:
         p = matches[0]
+        if visibility == 'VISIBLE' and p.visibility == 'CANDIDATE':
+            p.visibility = 'VISIBLE'
+            p.save(update_fields=['visibility'])
     else:
-        p = Paper(title=title,year=year,fingerprint=fp)
+        p = Paper(title=title,year=year,fingerprint=fp,visibility=visibility)
         p.save()
         for author_name in author_names:
             a = Author(name=author_name, paper=p)
@@ -97,10 +73,18 @@ def merge_papers(first, second):
 
     if first.pk == second.pk:
         return
+
+    statuses = [first.visibility,second.visibility]
+    new_status = 'DELETED'
+    for s in VISIBILITY_CHOICES:
+        if s[0] in statuses:
+            new_status = s[0]
+            break
     
     OaiRecord.objects.filter(about=second.pk).update(about=first.pk)
     Publication.objects.filter(paper=second.pk).update(paper=first.pk)
     second.delete()
+    first.visibility = new_status
     first.update_oa_status()
     first.update_pdf_url()
 
