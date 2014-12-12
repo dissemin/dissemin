@@ -4,6 +4,10 @@ import re
 import hashlib
 from unidecode import unidecode
 
+from time import sleep
+import socket
+from urllib2 import urlopen, build_opener
+
 def match_names(a,b):
     if not a or not b:
         return False
@@ -122,6 +126,28 @@ def name_normalization(ident):
     ident = nn_nontext_re.sub('-',ident)
     return ident
 
+### Open an URL with retries
 
+def urlopen_retry(url, **kwargs):# data, timeout, retries, delay, backoff):
+    data = kwargs.get('data', None)
+    timeout = kwargs.get('timeout', 10)
+    retries = kwargs.get('retries', 4)
+    delay = kwargs.get('delay', 5)
+    backoff = kwargs.get('backoff', 2)
+    opener = kwargs.get('opener', build_opener())
+    try:
+        return opener.open(url, data, timeout)
+    except socket.timeout:
+        if retries > 0:
+            print "Retrying in "+str(delay)+" seconds..."
+            sleep(delay)
+            return urlopen_retry(url,
+                    data=data,
+                    timeout=timeout,
+                    retries=retries-1,
+                    delay=delay*backoff,
+                    backoff=backoff)
+        else:
+            raise
 
 

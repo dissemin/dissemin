@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 from __future__ import unicode_literals
-from urllib2 import urlopen, URLError, HTTPError, build_opener
+from urllib2 import URLError, HTTPError
 from urllib import urlencode
 import json
 
@@ -9,7 +9,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from papers.errors import MetadataSourceException
 from papers.doi import to_doi
-from papers.utils import match_names, normalize_name_words, create_paper_fingerprint
+from papers.utils import match_names, normalize_name_words, create_paper_fingerprint, urlopen_retry
 from papers.models import Publication, Paper
 
 from unidecode import unidecode
@@ -28,7 +28,7 @@ def fetch_list_of_DOIs_from_crossref(query, page, number):
     query_args = {'q':unidecode(query), 'page':str(page), 'number':str(number)}
     request = 'http://search.crossref.org/dois?'+urlencode(query_args)
     try:
-        f = urlopen(request, timeout=crossref_timeout)
+        f = urlopen_retry(request, None, crossref_timeout, 10, 4, 2, 2)
         response = f.read()
         parsed = json.loads(response)
         result = []
@@ -50,7 +50,7 @@ def fetch_metadata_by_DOI(doi):
     opener.addheaders = [('Accept','application/citeproc+json')]
     try:
         request = 'http://dx.doi.org/'+doi
-        response = opener.open(request).read() # TODO is this unsecure ?
+        response = urlopen_retries(request, opener=opener).read() # TODO is this unsecure ?
         parsed = json.loads(response)
         return parsed
     except HTTPError as e:
