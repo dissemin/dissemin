@@ -90,7 +90,7 @@ def fetch_papers_from_crossref_by_researcher_name(name, update=False):
 
     # While a valid resource where the researcher is author or editor is found
     count = 0
-    while researcher_found and count < max_crossref_batches_per_researcher:
+    while researcher_found and batch_number < max_crossref_batches_per_researcher:
         researcher_found = False
 
         # Get the next batch of DOIs
