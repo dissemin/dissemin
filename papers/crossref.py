@@ -9,33 +9,38 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from papers.errors import MetadataSourceException
 from papers.doi import to_doi
-from papers.utils import match_names, normalize_name_words, create_paper_fingerprint, urlopen_retry
+from papers.utils import match_names, normalize_name_words, create_paper_fingerprint, urlopen_retry, iunaccent
 from papers.models import Publication, Paper
 
 from unidecode import unidecode
 
-nb_results_per_request = 25
+nb_results_per_request = 30
 crossref_timeout = 5
 max_crossref_batches_per_researcher = 40
 
-def fetch_list_of_DOIs_from_crossref(query, page, number):
+def fetch_list_of_DOIs_from_crossref(query, page, number, citationToken=None):
     try:
         page = int(page)
         number = int(number)
     except ValueError:
         raise ValueError("Page and number have to be integers.")
 
+    if citationToken:
+        citationToken = iunaccent(citationToken)
+
     query_args = {'q':unidecode(query), 'page':str(page), 'number':str(number)}
     request = 'http://search.crossref.org/dois?'+urlencode(query_args)
     try:
-        f = urlopen_retry(request, None, crossref_timeout, 10, 4, 2, 2)
+        f = urlopen_retry(request, timeout=crossref_timeout)
         response = f.read()
         parsed = json.loads(response)
         result = []
         for dct in parsed:
-            if 'doi' in dct:
+            if citationToken and not ('fullCitation' in dct and citationToken in iunaccent(dct['fullCitation'])):
+                continue
+            if 'doi' in dct and 'title' in dct:
                 parsed = to_doi(dct['doi'])
-                if parsed:
+                if parsed and dct['title']:
                     result.append(parsed)
         return result
     except ValueError as e:
@@ -94,7 +99,7 @@ def fetch_papers_from_crossref_by_researcher_name(name, update=False):
         researcher_found = False
 
         # Get the next batch of DOIs
-        dois = fetch_list_of_DOIs_from_crossref(query, batch_number, nb_results_per_request)
+        dois = fetch_list_of_DOIs_from_crossref(query, batch_number, nb_results_per_request, query)
         batch_number += 1
 
         for doi in dois:
