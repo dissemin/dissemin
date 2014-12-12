@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 from __future__ import unicode_literals
-from urllib2 import URLError, HTTPError
+from urllib2 import URLError, HTTPError, build_opener
 from urllib import urlencode
 import json
 
@@ -50,7 +50,7 @@ def fetch_metadata_by_DOI(doi):
     opener.addheaders = [('Accept','application/citeproc+json')]
     try:
         request = 'http://dx.doi.org/'+doi
-        response = urlopen_retries(request, opener=opener).read() # TODO is this unsecure ?
+        response = urlopen_retry(request, opener=opener).read() # TODO is this unsecure ?
         parsed = json.loads(response)
         return parsed
     except HTTPError as e:

@@ -34,9 +34,9 @@ def add_oai_record(record, source, paper=None):
     # Run extractor to find the URLs
     pdf_url = None
     splash_url = None
-    if source.url_extractor:
+    if source.identifier:
         try:
-            extractor = REGISTERED_EXTRACTORS[source.url_extractor]
+            extractor = REGISTERED_EXTRACTORS[source.identifier]
             urls = extractor.extract(record)
             pdf_url = urls.get('pdf')
             splash_url = urls.get('splash')

@@ -108,12 +108,19 @@ class Paper(models.Model):
     pdf_url = models.URLField(max_length=2048, null=True, blank=True)
 
     def update_oa_status(self):
+        # Look for publications
         qs = list(self.publication_set.all()[:1])
         if qs:
             self.oa_status = qs[0].oa_status()
         else:
             self.oa_status = 'UNK'
+        # Look for automatic OA OAI sources
+        records = list(self.oairecord_set.filter(source__oa=True)[:1])
+        if records:
+            self.oa_status = 'OA'
         self.save()
+
+    # TODO merge these two functions !
 
     def update_pdf_url(self):
         # TODO: create an oa_status field in each publication so that we optimize queries
@@ -259,12 +266,10 @@ class Publication(models.Model):
 class OaiSource(models.Model):
     identifier = models.CharField(max_length=300)
     name = models.CharField(max_length=100)
-    url_extractor = models.CharField(max_length=256)
+    oa = models.BooleanField(default=False)
 
     # Fetching properties
-    last_update = models.DateTimeField()
     last_status_update = models.DateTimeField(auto_now=True)
-    status = models.CharField(max_length=512, null=True, blank=True)
     def __unicode__(self):
         return self.name
 
