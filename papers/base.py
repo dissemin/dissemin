@@ -13,6 +13,7 @@ bielefeld_timeout = 10
 
 def fetch_papers_from_base_by_researcher_name(name):
     base_url = 'http://api.base-search.net/cgi-bin/BaseHttpSearchInterface.fcgi'
+    base_source, created = OaiSource.objects.get_or_create(identifier='base',name='BASE')
     
     search_terms = name[0]+' '+name[1]
     try:
@@ -41,7 +42,7 @@ def fetch_papers_from_base_by_researcher_name(name):
 
             for doc in doc_list:
                 try:
-                    add_base_document(doc)
+                    add_base_document(doc, base_source)
                 except MetadataSourceException as e:
                     raise MetadataSourceException(str(e)+'\nIn URL: '+request)
 
@@ -70,7 +71,7 @@ def base_xml_to_dict(doc):
             dct[a.attrib['name']] = lst
     return dct
 
-def add_base_document(doc):
+def add_base_document(doc, source):
     metadata = base_xml_to_dict(doc)
     if not 'dctitle' in metadata:
         return
@@ -99,7 +100,7 @@ def add_base_document(doc):
         except (KeyError,ValueError): # No dcdate either
             print("Warning, skipping document because no year or date is provided\n"+
                 'In document "'+title+'"')
-            return
+            return False
     
     # Lookup the names and check that at least one of them is known
     model_names = []
@@ -110,12 +111,44 @@ def add_base_document(doc):
         if mn.researcher:
             researcher_found = True
 
-    if researcher_found:
-        paper = get_or_create_paper(title, model_names, year)
+    if not researcher_found:
+        return False
 
-    # TODO: create OAI record
+    if not 'dcdocid' in metadata:
+        print("Warning, skipping BASE record because no DOCID is provided\n"+
+                "In document '"+title+"'")
+        return False
+
+    identifier = 'base:'+metadata['dcdocid']
+    doi = None
+    description = metadata.get('dcdescription')
+    splash_url = metadata.get('dclink')
+    pdf_url = None
+    if splash_url and splash_url.endswith('.pdf'):
+        pdf_url = splash_url
+    for url in metadata.get('dcidentifier', []):
+        if url.endswith('.pdf'):
+            pdf_url = url
+    if metadata.get('dcsource', '').endswith('.pdf'):
+        pdf_url = metadata['dcsource']
+
+    if not (pdf_url or splash_url):
+        return False
+
+    paper = get_or_create_paper(title, model_names, year, doi, 'CANDIDATE')
+    
+    record = OaiRecord(
+            source=source,
+            identifier=identifier,
+            splash_url=splash_url,
+            pdf_url=pdf_url,
+            about=paper,
+            description=description)
+    record.save()
+
+    paper.update_pdf_url()
+    return True
 
 
-# TODO remove me
-fetch_papers_from_base_by_researcher_name(('Guillaume', 'Baudart'))
+
 

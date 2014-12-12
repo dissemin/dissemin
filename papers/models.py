@@ -104,7 +104,7 @@ class Paper(models.Model):
 
     # The two following fields need to be updated after the relevant changes
     # using the methods below.
-    oa_status = models.CharField(max_length=32, null=True, blank=True)
+    oa_status = models.CharField(max_length=32, null=True, blank=True, default='UNK')
     pdf_url = models.URLField(max_length=2048, null=True, blank=True)
 
     def update_oa_status(self):
