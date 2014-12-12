@@ -128,7 +128,7 @@ class Paper(models.Model):
 
         # If it is an open access publisher, keep the publisher version
         if self.oa_status == 'OA':
-            publications = Publication.objects.filter(journal__publisher__oa_status='OA')[:1]
+            publications = self.publication_set.filter(journal__publisher__oa_status='OA')[:1]
             if publications:
                 self.pdf_url = publications[0].splash_url()
                 self.save()
