@@ -138,16 +138,15 @@ def urlopen_retry(url, **kwargs):# data, timeout, retries, delay, backoff):
     try:
         return opener.open(url, data, timeout)
     except socket.timeout:
-        if retries > 0:
-            print "Retrying in "+str(delay)+" seconds..."
-            sleep(delay)
-            return urlopen_retry(url,
-                    data=data,
-                    timeout=timeout,
-                    retries=retries-1,
-                    delay=delay*backoff,
-                    backoff=backoff)
-        else:
+        if retries <= 0:
             raise
+    print "Retrying in "+str(delay)+" seconds..."
+    sleep(delay)
+    return urlopen_retry(url,
+            data=data,
+            timeout=timeout,
+            retries=retries-1,
+            delay=delay*backoff,
+            backoff=backoff)
 
 
