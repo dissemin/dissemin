@@ -14,8 +14,9 @@ PDF_STATUS_CHOICES = [('OK', _('Available')),
                       ('NOK', _('Unavailable'))]
 
 VISIBILITY_CHOICES = [('VISIBLE', _('Visible')),
+                      ('CANDIDATE', _('Candidate')),
                       ('DELETED', _('Deleted')),
-                      ('CANDIDATE', _('Candidate'))]
+                      ]
 
 # Information about the researchers and their groups
 class Department(models.Model):
