@@ -156,9 +156,12 @@ class Publisher(models.Model):
     preprint = models.CharField(max_length=32)
     postprint = models.CharField(max_length=32)
     pdfversion = models.CharField(max_length=32)
-    oa_status = models.CharField(max_length=32, choices=OA_STATUS_CHOICES)
+    oa_status = models.CharField(max_length=32, choices=OA_STATUS_CHOICES, default='UNK')
     def __unicode__(self):
-        return self.name
+        if not self.alias:
+            return self.name
+        else:
+            return self.name+' ('+self.alias+')'
     @property
     def publi_count(self):
         count = 0

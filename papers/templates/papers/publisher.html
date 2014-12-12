@@ -2,6 +2,7 @@
 
 {% load author %}
 {% load i18n %}
+{% load statuses %}
 
 {% block headTitle %}
 {{ publisher.name }}
@@ -12,9 +13,17 @@
 {% endblock %}
 
 {% block details %}
+<span class="detailsTitle">{% trans "Publisher" %}</span>
+<div class="detailsContent">
+<p>{{ publisher.name }}</p>
 {% if publisher.url %}
 <p><a href="{{ publisher.url }}">{% trans "Homepage" %}</a></p>
 {% endif %}
+<div class="unselectedCriterion">
+    <div class="pubLogo"><div class="pubLogoPic-{{ publisher.oa_status }}"></div></div>
+    <div class="criterionItem">{{ publisher.oa_status |explain_oa_status }}</div>
+</div>
+</div>
 {% endblock %}
 
 {% block lists %}
