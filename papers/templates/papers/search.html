@@ -70,7 +70,7 @@ $(function(){
         <p>{{ publisher }}</p>
         <div class="unselectedCriterion">
         <div class="pubLogo"><div class="pubLogoPic-{{ publisher.oa_status }}"></div></div>
-        <div class="criterionItem">{{ journal.publisher.oa_status |explain_oa_status}}</div>
+        <div class="criterionItem">{{ publisher.oa_status |explain_oa_status}}</div>
         </div>
     </div>
 {% endif %}
