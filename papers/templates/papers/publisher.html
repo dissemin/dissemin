@@ -28,8 +28,9 @@
 {% endblock %}
 
 {% block lists %}
-<p>{% blocktrans with name=publisher.name count=publisher.publi_count %}
-  {{ name }} has published {{ count }} productions authored by researchers from ENS.
+{% url 'search' as search_url %}
+<p>{% blocktrans with name=publisher.name count=publisher.publi_count id=publisher.pk %}
+{{ name }} has published <a href="{{ search_url }}?publisher={{ id }}">{{ count }} productions</a> authored by researchers from ENS.
    {% endblocktrans %}
 </p>
 <p>{% blocktrans with policy=publisher.preprint %}
