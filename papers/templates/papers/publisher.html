@@ -75,7 +75,7 @@
 </ul>
 <p>{% trans "Source:" %} <a href="http://www.sherpa.ac.uk/romeo">SHERPA/RoMEO</a>.</p>
 <h4>{% trans "Journals in which researchers have authored papers" %}</h4>
-{% if search_results.paginator.num_pages > 1 %}
+{% if journals.paginator.num_pages > 1 %}
  <div class="searchPages">{% bootstrap_paginate journals range=10 %}</div>
  {% endif %}
 <ul>
