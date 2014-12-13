@@ -1,13 +1,10 @@
 {% load author %}
 {% load i18n %}
 <div class="pubLogo">
-    {% if paper.oa_status = "OA" %}
-    <div class="pubLogoPic-OA"><a href="{{ paper.pdf_url }}" class="filldiv"></a></div>
-    {% elif paper.pdf_url %}
-    <div class="pubLogoPic-PDF"><a href="{{ paper.pdf_url }}" class="filldiv"></a></div>
-    {% else %}
-    <div class="pubLogoPic-{{ paper.oa_status }}"></div>
-    {% endif %}</div>
+    <div class="pubLogoPic-{{ paper.oa_status }} {% if paper.pdf_url %}pubLogoPic-PDF{% endif %}">
+        {% if paper.pdf_url %}<a href="{{ paper.pdf_url }}" class="filldiv"></a>{% endif %}
+    </div>
+</div>
 <div class="pubText"><span class="paperAuthors">
 {% for a2 in paper.author_set.all %}{% if not forloop.first %},{% endif %}
 {% if a2.name.is_known and a2.name.researcher.id = researcher_id %}

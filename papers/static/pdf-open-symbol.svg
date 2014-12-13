@@ -15,7 +15,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.3.1 r9886"
-   sodipodi:docname="closed-symbol.svg"
+   sodipodi:docname="pdf-symbol.svg"
    inkscape:export-filename="/home/antonin/Programmation/OA/dissemin/papers/static/pdf-symbol.png"
    inkscape:export-xdpi="14.675159"
    inkscape:export-ydpi="14.675159">
@@ -51,15 +51,15 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.35"
-     inkscape:cx="394.26859"
-     inkscape:cy="839.7793"
+     inkscape:cx="831.32047"
+     inkscape:cy="405.7144"
      inkscape:document-units="px"
      inkscape:current-layer="g2989"
      showgrid="false"
      inkscape:window-width="798"
-     inkscape:window-height="439"
-     inkscape:window-x="0"
-     inkscape:window-y="459"
+     inkscape:window-height="879"
+     inkscape:window-x="800"
+     inkscape:window-y="19"
      inkscape:window-maximized="0" />
   <metadata
      id="metadata7">
@@ -79,22 +79,54 @@
      id="layer1">
     <g
        id="g2989">
-      <rect
-         style="fill:#000000;fill-opacity:1;stroke:#646464;stroke-width:0;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-         id="rect2997-3"
-         width="62.476349"
-         height="49.804241"
-         x="284.29773"
-         y="401.76996" />
       <path
-         style="fill:none;stroke:#000000;stroke-width:8.42752552;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-         d="m 296.23603,413.82188 0,-25.83315 c -0.19834,-24.59186 40.89374,-25.13658 39.9094,1.53803 l 0,23.75571"
+         sodipodi:nodetypes="cccccc"
+         inkscape:connector-curvature="0"
+         id="path2985"
+         d="m 236.3757,472.53462 165.66501,0 0,-197.9899 -40.3247,-41.41625 -125.39107,0.01 z"
+         style="fill:none;stroke:#000000;stroke-width:6;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none" />
+      <path
+         sodipodi:nodetypes="ccc"
+         inkscape:connector-curvature="0"
+         id="path2987"
+         d="m 402.43484,274.81575 -40.72178,0 0,-41.47938"
+         style="fill:none;stroke:#000000;stroke-width:6;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         style="fill:#dd0000;fill-opacity:1;stroke:#dd0000;stroke-width:24.42151642;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+         id="rect2997"
+         width="153.95099"
+         height="41.322968"
+         x="219.0105"
+         y="299.15427" />
+      <flowRoot
+         xml:space="preserve"
+         id="flowRoot2999"
+         style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:STIXIntegralsUp;-inkscape-font-specification:STIXIntegralsUp"
+         transform="matrix(1.5269219,0,0,1.6111279,-71.027891,-169.17598)"><flowRegion
+           id="flowRegion3001"><rect
+             id="rect3003"
+             width="89.90358"
+             height="40.406101"
+             x="210.11172"
+             y="283.63611"
+             style="font-size:32px;fill:#ffffff" /></flowRegion><flowPara
+           id="flowPara3005"
+           style="font-size:32px;line-height:125%;fill:#ffffff">PDF</flowPara></flowRoot>      <rect
+         style="fill:#000000;fill-opacity:1;stroke:#646464;stroke-width:0;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+         id="rect2997-4"
+         width="64.552864"
+         height="51.459576"
+         x="268.45334"
+         y="401.11575" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:8.70763016;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         d="m 320.23819,412.29565 0,-26.69176 c -0.20524,-25.40923 42.25262,-25.97204 41.23557,1.58915 l 0,14.36474"
          id="path3767"
          inkscape:connector-curvature="0"
          sodipodi:nodetypes="cccc" />
       <path
          style="fill:#ffffff;fill-opacity:1;stroke:none"
-         d="m 310.4265,436.40175 2.29871,-12.40666 c 1.08025,0.0264 3.63012,0.0291 4.5535,0 l 2.17026,12.43183 z"
+         d="m 295.45058,436.89857 2.37453,-12.81902 c 1.11643,0.0273 3.75142,0.0301 4.7051,0 l 2.24263,12.84503 z"
          id="path3769"
          inkscape:connector-curvature="0"
          sodipodi:nodetypes="ccccc" />
@@ -110,19 +142,7 @@
          sodipodi:start="0"
          sodipodi:end="6.27337"
          sodipodi:open="true"
-         transform="matrix(2.5785059,0,0,2.221991,-481.9334,-403.45373)" />
-      <path
-         sodipodi:nodetypes="cccccc"
-         inkscape:connector-curvature="0"
-         id="path2985"
-         d="m 236.3757,472.53462 165.66501,0 0,-197.9899 -40.3247,-41.41625 -125.39107,0.01 z"
-         style="fill:none;stroke:#000000;stroke-width:6;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none" />
-      <path
-         sodipodi:nodetypes="ccc"
-         inkscape:connector-curvature="0"
-         id="path2987"
-         d="m 402.43484,274.81575 -40.72178,0 0,-41.47938"
-         style="fill:none;stroke:#000000;stroke-width:6;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none" />
+         transform="matrix(2.6642072,0,0,2.2958429,-523.24513,-430.87103)" />
     </g>
   </g>
 </svg>

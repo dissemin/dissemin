@@ -161,21 +161,26 @@ a:hover
 .pubLogoPic-UNK, .pubLogoPic-PDF-NOK
 {
     background-image: url('../document-symbol.png');
-    background-position: 3px 0px;
+}
+.pubLogoPic-UNK.pubLogoPic-PDF, .pubLogoPic-PDF-OK
+{
+    background-image: url('../pdf-symbol.png');
 }
 .pubLogoPic-OK
 {
-    background-position: 3px 0px;
     background-image: url('../open-symbol.png');
+}
+.pubLogoPic-OK.pubLogoPic-PDF
+{
+    background-image: url('../pdf-open-symbol.png');
 }
 .pubLogoPic-NOK
 {
-    background-position: 3px 0px;
     background-image: url('../closed-symbol.png');
 }
-.pubLogoPic-PDF, .pubLogoPic-PDF-OK
+.pubLogoPic-NOK.pubLogoPic-PDF
 {
-    background-image: url('../pdf-symbol.png');
+    background-image: url('../pdf-closed-symbol.png');
 }
 .pubLogoPic-OA
 {

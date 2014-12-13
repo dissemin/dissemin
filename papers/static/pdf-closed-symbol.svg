@@ -15,8 +15,8 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.3.1 r9886"
-   sodipodi:docname="closed-symbol.svg"
-   inkscape:export-filename="/home/antonin/Programmation/OA/dissemin/papers/static/pdf-symbol.png"
+   sodipodi:docname="pdf-closed-symbol.svg"
+   inkscape:export-filename="/home/antonin/Programmation/OA/dissemin/papers/static/pdf-closed-symbol.png"
    inkscape:export-xdpi="14.675159"
    inkscape:export-ydpi="14.675159">
   <defs
@@ -51,15 +51,15 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.35"
-     inkscape:cx="394.26859"
-     inkscape:cy="839.7793"
+     inkscape:cx="814.34467"
+     inkscape:cy="612.12924"
      inkscape:document-units="px"
      inkscape:current-layer="g2989"
      showgrid="false"
      inkscape:window-width="798"
-     inkscape:window-height="439"
-     inkscape:window-x="0"
-     inkscape:window-y="459"
+     inkscape:window-height="879"
+     inkscape:window-x="800"
+     inkscape:window-y="19"
      inkscape:window-maximized="0" />
   <metadata
      id="metadata7">
@@ -123,6 +123,26 @@
          id="path2987"
          d="m 402.43484,274.81575 -40.72178,0 0,-41.47938"
          style="fill:none;stroke:#000000;stroke-width:6;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none" />
-    </g>
+      <rect
+         style="fill:#dd0000;fill-opacity:1;stroke:#dd0000;stroke-width:24.42151642;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+         id="rect2997"
+         width="153.95099"
+         height="41.322968"
+         x="219.0105"
+         y="299.15427" />
+      <flowRoot
+         xml:space="preserve"
+         id="flowRoot2999"
+         style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:STIXIntegralsUp;-inkscape-font-specification:STIXIntegralsUp"
+         transform="matrix(1.5269219,0,0,1.6111279,-71.027891,-169.17598)"><flowRegion
+           id="flowRegion3001"><rect
+             id="rect3003"
+             width="89.90358"
+             height="40.406101"
+             x="210.11172"
+             y="283.63611"
+             style="font-size:32px;fill:#ffffff" /></flowRegion><flowPara
+           id="flowPara3005"
+           style="font-size:32px;line-height:125%;fill:#ffffff">PDF</flowPara></flowRoot>    </g>
   </g>
 </svg>
