@@ -38,8 +38,7 @@ def deleteResearcher(request, pk):
     researcher.delete()
     return HttpResponse('OK', content_type='text/plain')
 
-# @user_passes_test(is_admin)
-@csrf_exempt
+@user_passes_test(is_admin)
 def addResearcher(request):
     form = AddResearcherForm(request.POST)
     if form.is_valid():

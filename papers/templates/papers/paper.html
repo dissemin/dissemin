@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block bodyTitle %}
-<span id="paperTitle">{{ paper.title }}</span>
+<span id="paperTitle" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">{{ paper.title }}</span>
 {% endblock %}
 
 {% block jsScript %}
