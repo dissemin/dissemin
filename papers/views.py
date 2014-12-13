@@ -18,6 +18,8 @@ from papers.user import is_admin
 
 # Number of papers shown on a search results page
 NB_RESULTS_PER_PAGE = 20
+# Number of journals per page on a Publisher page
+NB_JOURNALS_PER_PAGE = 30
 
 def index(request):
     nb_researchers = Researcher.objects.count()
@@ -93,7 +95,7 @@ def searchView(request, **kwargs):
     except PageNotAnInteger:
         current_papers = paginator.page(1)
     except EmptyPage:
-        contacts = paginator.page(paginator.num_pages)
+        current_papers = paginator.page(paginator.num_pages)
 
     context['search_results'] = current_papers
     context['search_description'] = search_description
@@ -171,5 +173,19 @@ class JournalView(generic.DetailView):
 class PublisherView(generic.DetailView):
     model = Publisher
     template_name = 'papers/publisher.html'
+    def get_context_data(self, **kwargs):
+        context = super(PublisherView, self).get_context_data(**kwargs)
+        # Build the paginator
+        publisher = context['publisher']
+        paginator = Paginator(publisher.sorted_journals, NB_JOURNALS_PER_PAGE)
+        page = self.request.GET.get('page')
+        try:
+            current_journals = paginator.page(page)
+        except PageNotAnInteger:
+            current_journals = paginator.page(1)
+        except EmptyPage:
+            current_journals = paginator.page(paginator.num_pages)
+        context['journals'] = current_journals
+        return context
 
 

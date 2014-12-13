@@ -173,10 +173,15 @@ class Publisher(models.Model):
             return self.name+' ('+self.alias+')'
     @property
     def publi_count(self):
+        # TODO compute this with aggregates
+        # and cache the number of papers for each journal
         count = 0
         for journal in self.journal_set.all():
             count += journal.publication_set.filter(paper__visibility='VISIBLE').count()
         return count
+    @property
+    def sorted_journals(self):
+        return self.journal_set.all().order_by('title')
     @property
     def preprint_conditions(self):
         return self.publisherrestrictiondetail_set.filter(applies_to='preprint')
@@ -201,6 +206,8 @@ class Journal(models.Model):
     publisher = models.ForeignKey(Publisher)
     def __unicode__(self):
         return self.title
+    class Meta:
+        ordering = ['title']
 
 class PublisherCondition(models.Model):
     publisher = models.ForeignKey(Publisher)

@@ -3,6 +3,7 @@
 {% load author %}
 {% load i18n %}
 {% load statuses %}
+{% load bootstrap_pagination %}
 
 {% block headTitle %}
 {{ publisher.name }}
@@ -74,8 +75,11 @@
 </ul>
 <p>{% trans "Source:" %} <a href="http://www.sherpa.ac.uk/romeo">SHERPA/RoMEO</a>.</p>
 <h4>{% trans "Journals in which researchers have authored papers" %}</h4>
+{% if search_results.paginator.num_pages > 1 %}
+ <div class="searchPages">{% bootstrap_paginate journals range=10 %}</div>
+ {% endif %}
 <ul>
-    {% for journal in publisher.journal_set.all %}
+    {% for journal in journals %}
         <li><a href="{% url 'journal' journal.id %}">{{ journal }}</a></li>
     {% empty %}
     <p>{% trans "None." %}</p>
