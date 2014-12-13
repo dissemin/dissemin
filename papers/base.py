@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from papers.errors import MetadataSourceException
 from papers.backend import *
+from papers.utils import iunaccent
 
 from urllib2 import urlopen, URLError
 from urllib import urlencode
@@ -10,16 +11,22 @@ import xml.etree.ElementTree as ET
 import unicodedata
 
 bielefeld_timeout = 10
+max_base_no_match = 30
+
+def fetch_papers_from_base_for_researcher(researcher):
+    for name in researcher.name_set.all():
+        fetch_papers_from_base_by_researcher_name((name.first,name.last))
 
 def fetch_papers_from_base_by_researcher_name(name):
     base_url = 'http://api.base-search.net/cgi-bin/BaseHttpSearchInterface.fcgi'
-    base_source, created = OaiSource.objects.get_or_create(identifier='base',name='BASE')
+    base_source, created = OaiSource.objects.get_or_create(identifier='base',name='BASE',priority=0)
     
-    search_terms = name[0]+' '+name[1]
+    search_terms = iunaccent(name[0]+' '+name[1])
     try:
         offset = 0
         nb_results = 1
-        while offset < nb_results:
+        no_match = 0
+        while offset < nb_results and no_match < max_base_no_match:
             query_args = {'func':'PerformSearch',
                     'offset':str(offset),
                     'query':search_terms}
@@ -42,7 +49,10 @@ def fetch_papers_from_base_by_researcher_name(name):
 
             for doc in doc_list:
                 try:
-                    add_base_document(doc, base_source)
+                    if add_base_document(doc, base_source):
+                        no_match = 0
+                    else:
+                        no_match += 1
                 except MetadataSourceException as e:
                     raise MetadataSourceException(str(e)+'\nIn URL: '+request)
 
@@ -118,8 +128,10 @@ def add_base_document(doc, source):
         print("Warning, skipping BASE record because no DOCID is provided\n"+
                 "In document '"+title+"'")
         return False
-
     identifier = 'base:'+metadata['dcdocid']
+    if OaiRecord.objects.filter(identifier=identifier).first():
+        return True
+
     doi = None
     description = metadata.get('dcdescription')
     splash_url = metadata.get('dclink')
@@ -143,7 +155,8 @@ def add_base_document(doc, source):
             splash_url=splash_url,
             pdf_url=pdf_url,
             about=paper,
-            description=description)
+            description=description,
+            priority=source.priority)
     record.save()
 
     paper.update_pdf_url()

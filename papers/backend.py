@@ -13,8 +13,8 @@ from papers.romeo import fetch_journal
 from papers.name import parse_comma_name
 
 def lookup_name(author_name):
-    first_name = author_name[0]
-    last_name = author_name[1]
+    first_name = author_name[0][:MAX_NAME_LENGTH]
+    last_name = author_name[1][:MAX_NAME_LENGTH]
     full_name = first_name+' '+last_name
     full_name = full_name.strip()
     normalized = iunaccent(full_name)

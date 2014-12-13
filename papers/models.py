@@ -70,11 +70,12 @@ class Researcher(models.Model):
     def aka(self):
         return self.names[:2]
 
+MAX_NAME_LENGTH = 256
 class Name(models.Model):
     researcher = models.ForeignKey(Researcher, blank=True, null=True, on_delete=models.SET_NULL)
-    first = models.CharField(max_length=256)
-    last = models.CharField(max_length=256)
-    full = models.CharField(max_length=513, db_index=True)
+    first = models.CharField(max_length=MAX_NAME_LENGTH)
+    last = models.CharField(max_length=MAX_NAME_LENGTH)
+    full = models.CharField(max_length=MAX_NAME_LENGTH*2+1, db_index=True)
 
     unique_together = ('first','last')# TODO Two researchers with the same name is not supported
     
