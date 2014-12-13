@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-12 19:38+0100\n"
+"POT-Creation-Date: 2014-12-13 16:41+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,7 +35,7 @@ msgstr "Département"
 msgid "Email"
 msgstr "Email"
 
-#: papers/forms.py:13 papers/templates/papers/publisher.html:20
+#: papers/forms.py:13 papers/templates/papers/publisher.html:21
 msgid "Homepage"
 msgstr "Site web"
 
@@ -59,11 +59,11 @@ msgstr "Pré/post-publications interdites"
 msgid "Policy unclear"
 msgstr "Politique inconnue"
 
-#: papers/models.py:13 papers/templates/papers/paper.html:37
+#: papers/models.py:13 papers/templates/papers/paper.html:38
 msgid "Available"
 msgstr "Disponible"
 
-#: papers/models.py:14 papers/templates/papers/paper.html:38
+#: papers/models.py:14 papers/templates/papers/paper.html:39
 msgid "Unavailable"
 msgstr "Indisponible"
 
@@ -83,27 +83,27 @@ msgstr "Supprimé"
 msgid "Anonymous researcher"
 msgstr "Chercheur anonyme"
 
-#: papers/views.py:41 papers/views.py:82
+#: papers/views.py:43 papers/views.py:84
 msgid "Papers"
 msgstr "Papiers"
 
-#: papers/views.py:45
+#: papers/views.py:47
 msgid " authored by "
 msgstr " écrits par "
 
-#: papers/views.py:50
+#: papers/views.py:52
 msgid " authored in "
 msgstr " écrits au "
 
-#: papers/views.py:55
+#: papers/views.py:57
 msgid " in "
 msgstr " dans "
 
-#: papers/views.py:60
+#: papers/views.py:62
 msgid " published by "
 msgstr " publiés par "
 
-#: papers/views.py:83
+#: papers/views.py:85
 msgid "All papers"
 msgstr "Tous les papiers"
 
@@ -113,7 +113,7 @@ msgid "Members:"
 msgstr "Membres:"
 
 #: papers/templates/papers/department.html:51
-#: papers/templates/papers/publiListItem.html:18
+#: papers/templates/papers/publiListItem.html:15
 msgid "Delete"
 msgstr "Supprimer"
 
@@ -154,57 +154,57 @@ msgstr ""
 "par département:\n"
 "    "
 
-#: papers/templates/papers/paper.html:36
+#: papers/templates/papers/paper.html:37
 msgid "Full text:"
 msgstr "Texte intégral:"
 
-#: papers/templates/papers/paper.html:41
+#: papers/templates/papers/paper.html:42
 msgid "Publisher policy:"
 msgstr "Politique de la maison d'édition:"
 
-#: papers/templates/papers/paper.html:42
+#: papers/templates/papers/paper.html:43
 msgid "details"
 msgstr "détails"
 
-#: papers/templates/papers/paper.html:48
+#: papers/templates/papers/paper.html:49
 msgid "Abstract."
 msgstr "Résumé."
 
-#: papers/templates/papers/paper.html:55
+#: papers/templates/papers/paper.html:56
 msgid "Available from"
 msgstr "Disponible depuis"
 
-#: papers/templates/papers/paper.html:62
+#: papers/templates/papers/paper.html:72
 msgid "[Web page]"
 msgstr "[Page web]"
 
-#: papers/templates/papers/paper.html:65
+#: papers/templates/papers/paper.html:75
 msgid "[PDF]"
 msgstr "[PDF]"
 
-#: papers/templates/papers/paper.html:69
-#: papers/templates/papers/publisher.html:16
+#: papers/templates/papers/paper.html:80
+#: papers/templates/papers/publisher.html:17
 msgid "Publisher"
 msgstr "Maison d'édition"
 
-#: papers/templates/papers/paper.html:71
+#: papers/templates/papers/paper.html:82
 msgid "via DOI"
 msgstr "via DOI"
 
-#: papers/templates/papers/publisher.html:30
+#: papers/templates/papers/publisher.html:32
 #, python-format
 msgid ""
 "\n"
-"  %(name)s has published %(count)s productions authored by researchers from "
-"ENS.\n"
+"%(name)s has published <a href=\"%(search_url)s?publisher=%(id)s\">%(count)s "
+"productions</a> authored by researchers from ENS.\n"
 "   "
 msgstr ""
 "\n"
-"  %(name)s a publié %(count)s productions écrites par des chercheurs de "
-"l'ENS.\n"
+"  %(name)s a publié <a href=\"%(search_url)s?publisher=%(id)s\">%(count)s "
+"productions</a> écrites par des chercheurs de l'ENS.\n"
 "   "
 
-#: papers/templates/papers/publisher.html:34
+#: papers/templates/papers/publisher.html:36
 #, python-format
 msgid ""
 "\n"
@@ -215,7 +215,7 @@ msgstr ""
 "   Politique de prépublication: %(policy)s\n"
 "   "
 
-#: papers/templates/papers/publisher.html:44
+#: papers/templates/papers/publisher.html:46
 #, python-format
 msgid ""
 "\n"
@@ -226,7 +226,7 @@ msgstr ""
 "   Politique de postpublication: %(policy)s\n"
 "   "
 
-#: papers/templates/papers/publisher.html:54
+#: papers/templates/papers/publisher.html:56
 #, python-format
 msgid ""
 "\n"
@@ -237,23 +237,23 @@ msgstr ""
 "    Politique pour la version finale: %(policy)s\n"
 "    "
 
-#: papers/templates/papers/publisher.html:63
+#: papers/templates/papers/publisher.html:65
 msgid "Conditions"
 msgstr "Conditions"
 
-#: papers/templates/papers/publisher.html:69
+#: papers/templates/papers/publisher.html:71
 msgid "Policy details"
 msgstr "Détails de la politique"
 
-#: papers/templates/papers/publisher.html:75
+#: papers/templates/papers/publisher.html:77
 msgid "Source:"
 msgstr "Source:"
 
-#: papers/templates/papers/publisher.html:76
+#: papers/templates/papers/publisher.html:78
 msgid "Journals in which researchers have authored papers"
 msgstr "Revues dans lesquelles les chercheurs ont écrit des papiers"
 
-#: papers/templates/papers/publisher.html:81
+#: papers/templates/papers/publisher.html:86
 msgid "None."
 msgstr "Aucune."
 
@@ -336,7 +336,6 @@ msgid "Dissemin administration"
 msgstr "Administration de Dissemin"
 
 #: templates/dissemin/skeleton.html:32
-#, fuzzy
 msgid "Home"
 msgstr "Site web"
 
