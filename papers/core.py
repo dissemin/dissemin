@@ -15,15 +15,19 @@ from lxml import etree
 import unicodedata
 
 core_timeout = 10
-max_no_match_before_give_up = 25
+max_no_match_before_give_up = 30
 core_api_key = open('core_api_key').read().strip()
+
+def fetch_papers_from_core_for_researcher(researcher):
+    for name in researcher.name_set.all():
+        fetch_papers_from_core_by_researcher_name((name.first,name.last))
+
 
 def fetch_papers_from_core_by_researcher_name(name):
     base_url = 'http://core.kmi.open.ac.uk/api/search/'
     core_source = OaiSource.objects.get_or_create(identifier='core',
             name='CORE',
-            url_extractor='core',
-            defaults={'last_update': timezone.now()})
+            priority=0)
     
     search_terms = 'author:'+quote_plus('('+name[0]+' '+name[1]+')')
     try:
@@ -87,8 +91,34 @@ def add_core_document(doc, source):
         return False
     if not 'title' in metadata or metadata['title'] == []:
         return False
+
+    print "########"
     print metadata['title']
     print authors_list
+    print metadata
+
+    identifier = None
+    splash_url = None
+    pdf_url = None
+    year = None
+    doi = None
+    description = None
+    
+    # TO BE CONTINUED
+
+    if False:
+        paper = get_or_create_paper(title, authors, year, doi, 'CANDIDATE')
+
+        record = OaiRecord(
+                source=source,
+                identifier=identifier,
+                splash_url=splash_url,
+                pdf_url=pdf_url,
+                description=description,
+                priority=source.priority)
+        record.save()
+        paper.update_pdf_url()
+
     return True
 
 
