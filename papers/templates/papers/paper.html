@@ -1,6 +1,7 @@
 {% extends "dissemin/details.html" %}
 
 {% load author %}
+{% load domain %}
 {% load statuses %}
 {% load doi %}
 {% load i18n %}
@@ -54,16 +55,26 @@ makeTextEditable($('#paperTitle'), '/ajax/change-paper', '{{ paper.id }}', 'titl
 {% block details %}
 <span class="detailsTitle">{% trans "Available from" %}</span>
 <div class="detailsContent">
-{% for record in paper.oairecord_set.all %}
-<p>{{ record.source }}:
+{% for record in paper.sorted_oai_records %}
+<p>
+    {% if record.priority > 0 %}
+        {{ record.source }}:
+    {% else %}
+        {% if record.splash_url %}
+            [{{ record.splash_url |domain }}]
+        {% elif record.pdf_url %}
+            [{{ record.pdf_url |domain }}]
+        {% endif %}
+    {% endif %}
     {% if record.splash_url %}
         <a href="{{ record.splash_url }}">
      {% endif %}
      {% trans "[Web page]" %}
      {% if record.splash_url %}</a>{% endif %}
      {% if record.pdf_url %}
-     <a href="{{ record.pdf_url }}">{% trans "[PDF]" %}</a>
-     {% endif %}</p>
+         <a href="{{ record.pdf_url }}">{% trans "[PDF]" %}</a>
+     {% endif %}
+</p>
 {% endfor %}
 
 {% trans "Publisher" as publisher %}

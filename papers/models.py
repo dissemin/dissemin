@@ -107,6 +107,14 @@ class Paper(models.Model):
     oa_status = models.CharField(max_length=32, null=True, blank=True, default='UNK')
     pdf_url = models.URLField(max_length=2048, null=True, blank=True)
 
+    @property
+    def prioritary_oai_records(self):
+        return self.sorted_oai_records.filter(priority__gt=0)
+
+    @property
+    def sorted_oai_records(self):
+        return self.oairecord_set.order_by('-priority')
+
     def update_oa_status(self):
         # Look for publications
         qs = list(self.publication_set.all()[:1])
@@ -270,6 +278,7 @@ class OaiSource(models.Model):
     identifier = models.CharField(max_length=300)
     name = models.CharField(max_length=100)
     oa = models.BooleanField(default=False)
+    priority = models.IntegerField(default=1)
 
     # Fetching properties
     last_status_update = models.DateTimeField(auto_now=True)
@@ -278,11 +287,20 @@ class OaiSource(models.Model):
 
 class OaiRecord(models.Model):
     source = models.ForeignKey(OaiSource)
+    about = models.ForeignKey(Paper)
+
     identifier = models.CharField(max_length=512, unique=True)
     splash_url = models.URLField(max_length=1024, null=True, blank=True)
     pdf_url = models.URLField(max_length=1024, null=True, blank=True)
-    about = models.ForeignKey(Paper)
     description = models.TextField(null=True,blank=True)
+
+    # Cached version of source.priority
+    priority = models.IntegerField(default=1)
+    def update_priority(self):
+        self.priority = self.source.priority
+        self.save(update_fields=['priority'])
+
+    last_update = models.DateTimeField(auto_now=True)
     def __unicode__(self):
         return self.identifier
 

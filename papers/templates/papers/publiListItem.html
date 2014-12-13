@@ -21,7 +21,7 @@
 {% for publi in paper.publication_set.all %}
 <span class="pubRef">{{ publi | publication }}{% if forloop.last %}.{% else %},{% endif %}</span><br />
 {% empty %}
-{% for record in paper.oairecord_set.all %}
+{% for record in paper.prioritary_oai_records %}
 {{ record.source.name }}{% if forloop.last %}.{% else %},{% endif %}
 {% endfor %}
 {% endfor %}
