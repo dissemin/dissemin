@@ -77,9 +77,9 @@ halExtractor = RegexExtractor([
     ])
 
 cairnExtractor = CairnExtractor([
-    ('identifier',re.compile(r'(http://www\.cairn\.info/article\.php\?ID_ARTICLE=[0-9\-_a-zA-Z]*)$'),
+    ('identifier',re.compile(r'(http://www\.cairn\.info/article\.php\?ID_ARTICLE=[^ ]*)$'),
         'splash',r'\1'),
-    ('identifier',re.compile(r'(http://www\.cairn\.info/)article(\.php\?ID_ARTICLE=[0-9\-_a-zA-Z]*)$'),
+    ('identifier',re.compile(r'(http://www\.cairn\.info/)article(\.php\?ID_ARTICLE=[^ ]*)$'),
         'pdf',r'\1load_pdf\2'),
     ])
 
