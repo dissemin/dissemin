@@ -86,6 +86,10 @@ class Name(models.Model):
     def create(cls, first, last):
         full = iunaccent(first+' '+last)
         return cls(first=first,last=last,full=full)
+    @classmethod
+    def get_or_create(cls, first, last):
+        full = iunaccent(first+' '+last)
+        return cls.objects.get_or_create(full=full, defaults={'first':first,'last':last})
     def __unicode__(self):
         return '%s %s' % (self.first,self.last)
     @property
