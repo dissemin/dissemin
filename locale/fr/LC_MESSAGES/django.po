@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-13 16:41+0100\n"
+"POT-Creation-Date: 2014-12-14 18:14+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -184,6 +184,7 @@ msgstr "[PDF]"
 
 #: papers/templates/papers/paper.html:80
 #: papers/templates/papers/publisher.html:17
+#: papers/templates/papers/search.html:68
 msgid "Publisher"
 msgstr "Maison d'édition"
 
@@ -261,6 +262,11 @@ msgstr "Aucune."
 msgid "Researcher"
 msgstr "Chercheur"
 
+#: papers/templates/papers/search.html:36
+msgctxt "Researcher"
+msgid "Homepage"
+msgstr "Page personnelle"
+
 #: papers/templates/papers/search.html:39
 msgid "Address:"
 msgstr "Adresse:"
@@ -288,11 +294,11 @@ msgstr "Publiée par"
 msgid "ISSN:"
 msgstr "ISSN:"
 
-#: papers/templates/papers/search.html:69
+#: papers/templates/papers/search.html:78
 msgid "Refine search"
 msgstr "Affiner la recherche"
 
-#: papers/templates/papers/search.html:71
+#: papers/templates/papers/search.html:80
 #, python-format
 msgid ""
 "\n"
@@ -303,19 +309,19 @@ msgstr ""
 "    %(nb_results)s résultats\n"
 "    "
 
-#: papers/templates/papers/search.html:77
+#: papers/templates/papers/search.html:86
 msgid "By publisher policy:"
 msgstr "Par politique de publication"
 
-#: papers/templates/papers/search.html:90
+#: papers/templates/papers/search.html:99
 msgid "By full text availability:"
 msgstr "Par disponibilité du texte intégral"
 
-#: papers/templates/papers/search.html:103
+#: papers/templates/papers/search.html:112
 msgid "By visibility:"
 msgstr "Par visibilité"
 
-#: papers/templates/papers/search.html:132
+#: papers/templates/papers/search.html:141
 msgid "No production found."
 msgstr "Aucune production trouvée."
 

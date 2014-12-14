@@ -44,7 +44,8 @@ def import_from_tsv(filename):
         if group:
             g, created = ResearchGroup.objects.get_or_create(name=group)
             n.researcher.groups.add(g)
-        n.save()
+
+        n.researcher.save()
 
 
 import_from_tsv('data/chercheurs-di-dc.tsv.csv')
