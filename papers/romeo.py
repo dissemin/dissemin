@@ -146,16 +146,11 @@ def get_or_create_publisher(romeo_xml_description):
     # Check if we already have it
     matches = None
     if alias:
-        matches = Publisher.objects.filter(name__iexact=name,alias__iexact=alias)
+        matches = Publisher.objects.filter(romeo_id=romeo_id, name__iexact=name,alias__iexact=alias)
     else:
-        matches = Publisher.objects.filter(name__iexact=name)
+        matches = Publisher.objects.filter(romeo_id=romeo_id, name__iexact=name,alias__isnull=True)
     if matches:
-        if alias:
-            return matches[0]
-        else:
-            for pub in matches:
-                if not pub.alias:
-                    return pub
+        return matches[0]
 
     # Otherwise, create it
     url = None
@@ -213,6 +208,9 @@ def get_or_create_publisher(romeo_xml_description):
         if condition.text:
             c = PublisherCondition(publisher=publisher, text=condition.text.strip())
             c.save()
+            if c.text.lower() == 'all titles are open access journals':
+                publisher.status = 'OA'
+                publisher.save(update_fields=['status'])
     
     for link in xml.findall('./copyrightlinks/copyrightlink'):
         text = None
