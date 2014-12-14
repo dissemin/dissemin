@@ -67,7 +67,7 @@ $(function(){
 {% elif publisher %}
 <span class="detailsTitle">{% trans "Publisher" %}</span>
     <div class="detailsContent">
-        <p>{{ publisher }}</p>
+        <p><a href="{% url 'publisher' publisher.pk %}">{{ publisher }}</a></p>
         <div class="unselectedCriterion">
         <div class="pubLogo"><div class="pubLogoPic-{{ publisher.oa_status }}"></div></div>
         <div class="criterionItem">{{ publisher.oa_status |explain_oa_status}}</div>
@@ -82,7 +82,7 @@ $(function(){
     {% endblocktrans %}
     </p>
 
-{% if not journal %}
+{% if not journal and not publisher %}
 <span class="criterion">{% trans "By publisher policy:" %}</span>
 {% for st in oa_status_choices %}
 <div class="{% if st.0 == status %}selectedCriterion{% else %}unselectedCriterion{% endif %}">

@@ -6,11 +6,30 @@
 {% load bootstrap_pagination %}
 
 {% block headTitle %}
-{{ publisher.name }}
+{{ publisher }}
 {% endblock %}
 
 {% block bodyTitle %}
-{{ publisher.name }}
+{{ publisher }}
+{% endblock %}
+
+{% block jsScript %}
+   {% if request.user.is_superuser %}
+   var current_status = '{{ publisher.oa_status }}';
+    function changeOaStatus(new_status) {
+       $.post('/ajax/change-publisher-status',
+       'pk={{ publisher.pk }}&amp;csrfmiddlewaretoken={{csrf_token}}&amp;status='+new_status
+       ).done( function () {
+         $('#criterion-'+current_status).toggleClass('selectedCriterion unselectedCriterion');
+         $('#criterion-'+new_status).toggleClass('selectedCriterion unselectedCriterion');
+         current_status = new_status;
+       }).fail(
+       function(message) {
+       console.log(message);
+         alert('Error: '+message);
+       });
+    }
+    {% endif %}
 {% endblock %}
 
 {% block details %}
@@ -20,10 +39,29 @@
 {% if publisher.url %}
 <p><a href="{{ publisher.url }}">{% trans "Homepage" %}</a></p>
 {% endif %}
+
+{% if request.user.is_superuser %}
+</div>
+<span class="detailsTitle">{% trans "Policy" %}</span>
+<div class="detailsContent">
+ <br />
+{% for st in oa_status_choices %}
+<div class="{% if st.0 == publisher.oa_status %}selectedCriterion{% else %}unselectedCriterion{% endif %}" id="criterion-{{ st.0 }}">
+    <div class="pubLogo"><div class="pubLogoPic-{{ st.0 }}">
+            <a href="javascript:changeOaStatus('{{ st.0 }}');" class="filldiv"></a>
+    </div></div>
+    <div class="criterionItem">
+    <a href="javascript:changeOaStatus('{{ st.0 }}');">{{ st.1 }}</a>
+    </div>
+</div>
+{% endfor %}
+
+{% else %}
 <div class="unselectedCriterion">
     <div class="pubLogo"><div class="pubLogoPic-{{ publisher.oa_status }}"></div></div>
     <div class="criterionItem">{{ publisher.oa_status |explain_oa_status }}</div>
 </div>
+{% endif %}
 </div>
 {% endblock %}
 

@@ -10,8 +10,8 @@ function makeDeletable(elem) {
                     if(ul.children().length == 0)
                         ul.parent().remove();
             }).fail(
-            function() {
-              alert('Error');  
+            function(message) {
+              alert('Error: '+message);  
             });
     evt.preventDefault();
 });

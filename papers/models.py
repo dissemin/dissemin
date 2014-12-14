@@ -196,11 +196,14 @@ class Publisher(models.Model):
     def pdfversion_conditions(self):
         return self.publisherrestrictiondetail_set.filter(applies_to='pdfversion')
     def change_oa_status(self, new_oa_status):
+        if self.oa_status == new_oa_status:
+            return
         self.oa_status = new_oa_status
         self.save()
         papers = Paper.objects.filter(publication__journal__publisher=self.pk)
         for p in papers:
             p.update_oa_status()
+            p.update_pdf_url()
 
 # Journal data retrieved from RoMEO
 class Journal(models.Model):

@@ -176,3 +176,8 @@ def update_paper_statuses():
         p.update_pdf_url()
 
 
+@shared_task
+def change_publisher_oa_status(pk, status):
+    publisher = Publisher.objects.get(pk=pk)
+    publisher.change_oa_status(status)
+
