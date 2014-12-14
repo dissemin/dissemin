@@ -29,7 +29,7 @@
     <div id="wrapper">
         <div id="header">
             <span id="dissemin"><a href="/">Dissemin</a></span>
-            <div id="rightLinks"><a href="/">{% trans "Home" %}</a> &#9679; {% trans "About" %} &#9679; {% trans "Feedback" %} &#9679;
+            <div id="rightLinks"><a href="/">{% trans "Home" context "memu bar" %}</a> &#9679; {% trans "About" %} &#9679; {% trans "Feedback" %} &#9679;
                 {% if request.user.is_authenticated %}
                 <a href="/logout/">Logout</a>
                 {% else %}

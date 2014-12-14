@@ -22,8 +22,14 @@ def lookup_name(author_name):
     if name:
         return name
     name = Name.create(first_name,last_name)
-    name.save()
+    # The name is not saved: the name has to be saved only
+    # if the paper is saved.
     return name
+
+# Used to save unsaved names after lookup
+def save_if_not_saved(obj):
+    if not obj.pk:
+        obj.save()
 
 def get_or_create_paper(title, author_names, year, doi=None, visibility='VISIBLE'):
     # If a DOI is present, first look up using it
@@ -54,6 +60,7 @@ def get_or_create_paper(title, author_names, year, doi=None, visibility='VISIBLE
         p = Paper(title=title,year=year,fingerprint=fp,visibility=visibility)
         p.save()
         for author_name in author_names:
+            save_if_not_saved(author_name)
             a = Author(name=author_name, paper=p)
             a.save()
 
