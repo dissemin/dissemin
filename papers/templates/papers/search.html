@@ -15,11 +15,14 @@
 
 {% block jsScript %}
 {% if request.user.is_superuser %}
-$(function(){
-{% for paper in search_results %}
-    makeTextEditable($('#paper-title-{{ paper.id }}'), '/ajax/change-paper', '{{ paper.id }}', 'title');
-{% endfor %}
-});
+    $(function(){
+    {% for paper in search_results %}
+        makeTextEditable($('#paper-title-{{ paper.id }}'), '/ajax/change-paper', '{{ paper.id }}', 'title');
+    {% endfor %}
+    {% if researcher %}
+        makeTextEditable($('#researcher-role'), '/ajax/change-researcher', '{{ researcher.id }}', 'role');
+    {% endif %}
+    });
 {% endif %}
 {% endblock %}
 
@@ -29,7 +32,8 @@ $(function(){
     <div class="detailsContent">
         <p>{{ researcher }}</p>
         {% if researcher.role %}
-        <p>{{ researcher.role }}</p>
+        <p id="researcher-role"
+         data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">{{ researcher.role }}</p>
         {% endif %}
         <p><a href="{% url 'department' researcher.department.id %}">{{ researcher.department }}</a></p>
         {% if researcher.homepage %}
