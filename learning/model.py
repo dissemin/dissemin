@@ -9,7 +9,7 @@ from papers.utils import iunaccent
 def tokenize(l):
     return iunaccent(l).split()
 
-class WordCount(Object):
+class WordCount:
     def __init__(self):
         self.dirichlet = 1
         self.total = 0
@@ -49,7 +49,8 @@ class WordCount(Object):
         return total
 
     def _countWord(self, w):
-        self.c[w] += 1
+        c = self.c.get(w,0)
+        self.c[w] = c+1
         self.total += 1
         self.cached = False
 
@@ -57,7 +58,7 @@ class WordCount(Object):
         self.mass = ((len(self.c) + 1)*self.dirichlet + self.total)
 
 
-class DepartmentModel(Object):
+class DepartmentModel:
     def __init__(self):
         self.wc_title = WordCount()
 
