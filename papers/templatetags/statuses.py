@@ -23,5 +23,25 @@ def explain_pdf_status(status):
             return mark_safe(s[1])
     return mark_safe(_('Unknown PDF status'))
 
+@register.filter(is_safe=True)
+def explain_policy(status, arg):
+    explanations = {
+        ("can", "preprint"): _('Preprints can be archived.'),
+        ("cannot", "preprint"): _('Preprints cannot be archived.'),
+        ("restricted", "preprint"): _('Under the restrictions below, preprints can be archived.'),
+        ("unclear", "preprint"): _('Preprints archiving policy unclear'),
+        ("unknown", "preprint"): _('Preprints archiving policy unknown'),
+        ("can", "postprint"): _('Postprints can be archived.'),
+        ("cannot", "postprint"): _('Postprints cannot be archived.'),
+        ("restricted", "postprint"): _('Under the restrictions below, postprints can be archived.'),
+        ("unclear", "postprint"): _('Postprint archiving policy unclear.'),
+        ("unknown", "postprint"): _('Postprint archiving policy unknown.'),
+        ("can", "pdfversion"): _('Final versions can be archived.'),
+        ("cannot", "pdfversion"): _('Final versions cannot be archived.'),
+        ("restricted", "pdfversion"): _('Under the restrictions below, final versions can be archived.'),
+        ("unclear", "pdfversion"): _('Final version archiving policy unclear.'),
+        ("unknown", "pdfversion"): _('Final version archiving policy unknown.'),
+        }
+    return mark_safe(explanations.get((status,arg),_("Unknown policy")))
 
 

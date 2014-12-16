@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-13 16:41+0100\n"
+"POT-Creation-Date: 2014-12-16 15:30+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -79,7 +79,27 @@ msgstr "Candidat"
 msgid "Deleted"
 msgstr "Supprimé"
 
-#: papers/models.py:54 papers/models.py:68
+#: papers/models.py:21
+msgid "Allowed"
+msgstr ""
+
+#: papers/models.py:22
+msgid "Forbidden"
+msgstr ""
+
+#: papers/models.py:23
+msgid "Restricted"
+msgstr ""
+
+#: papers/models.py:24
+msgid "Unclear"
+msgstr ""
+
+#: papers/models.py:25
+msgid "Unknown"
+msgstr ""
+
+#: papers/models.py:60 papers/models.py:74
 msgid "Anonymous researcher"
 msgstr "Chercheur anonyme"
 
@@ -184,6 +204,7 @@ msgstr "[PDF]"
 
 #: papers/templates/papers/paper.html:80
 #: papers/templates/papers/publisher.html:17
+#: papers/templates/papers/search.html:68
 msgid "Publisher"
 msgstr "Maison d'édition"
 
@@ -204,56 +225,23 @@ msgstr ""
 "productions</a> écrites par des chercheurs de l'ENS.\n"
 "   "
 
-#: papers/templates/papers/publisher.html:36
-#, python-format
-msgid ""
-"\n"
-"   Preprint policy: %(policy)s\n"
-"   "
-msgstr ""
-"\n"
-"   Politique de prépublication: %(policy)s\n"
-"   "
-
-#: papers/templates/papers/publisher.html:46
-#, python-format
-msgid ""
-"\n"
-"   Postprint policy: %(policy)s\n"
-"  "
-msgstr ""
-"\n"
-"   Politique de postpublication: %(policy)s\n"
-"   "
-
-#: papers/templates/papers/publisher.html:56
-#, python-format
-msgid ""
-"\n"
-"    Published version policy: %(policy)s\n"
-"   "
-msgstr ""
-"\n"
-"    Politique pour la version finale: %(policy)s\n"
-"    "
-
-#: papers/templates/papers/publisher.html:65
+#: papers/templates/papers/publisher.html:74
 msgid "Conditions"
 msgstr "Conditions"
 
-#: papers/templates/papers/publisher.html:71
+#: papers/templates/papers/publisher.html:80
 msgid "Policy details"
 msgstr "Détails de la politique"
 
-#: papers/templates/papers/publisher.html:77
+#: papers/templates/papers/publisher.html:86
 msgid "Source:"
 msgstr "Source:"
 
-#: papers/templates/papers/publisher.html:78
+#: papers/templates/papers/publisher.html:87
 msgid "Journals in which researchers have authored papers"
 msgstr "Revues dans lesquelles les chercheurs ont écrit des papiers"
 
-#: papers/templates/papers/publisher.html:86
+#: papers/templates/papers/publisher.html:95
 msgid "None."
 msgstr "Aucune."
 
@@ -288,11 +276,11 @@ msgstr "Publiée par"
 msgid "ISSN:"
 msgstr "ISSN:"
 
-#: papers/templates/papers/search.html:69
+#: papers/templates/papers/search.html:78
 msgid "Refine search"
 msgstr "Affiner la recherche"
 
-#: papers/templates/papers/search.html:71
+#: papers/templates/papers/search.html:80
 #, python-format
 msgid ""
 "\n"
@@ -303,19 +291,19 @@ msgstr ""
 "    %(nb_results)s résultats\n"
 "    "
 
-#: papers/templates/papers/search.html:77
+#: papers/templates/papers/search.html:86
 msgid "By publisher policy:"
 msgstr "Par politique de publication"
 
-#: papers/templates/papers/search.html:90
+#: papers/templates/papers/search.html:99
 msgid "By full text availability:"
 msgstr "Par disponibilité du texte intégral"
 
-#: papers/templates/papers/search.html:103
+#: papers/templates/papers/search.html:112
 msgid "By visibility:"
 msgstr "Par visibilité"
 
-#: papers/templates/papers/search.html:132
+#: papers/templates/papers/search.html:141
 msgid "No production found."
 msgstr "Aucune production trouvée."
 
@@ -326,6 +314,73 @@ msgstr "État OA inconnu"
 #: papers/templatetags/statuses.py:24
 msgid "Unknown PDF status"
 msgstr "État PDF inconnu"
+
+#: papers/templatetags/statuses.py:29
+msgid "Preprints can be archived."
+msgstr "Les prépublications peuvent être archivées."
+
+#: papers/templatetags/statuses.py:30
+msgid "Preprints cannot be archived."
+msgstr "Les prépublications ne peuvent pas être archivées."
+
+#: papers/templatetags/statuses.py:31
+msgid "Under the restrictions below, preprints can be archived."
+msgstr ""
+"Sous les conditions ci-dessous, les prépublications peuvent être archivées."
+
+#: papers/templatetags/statuses.py:32
+msgid "Preprints archiving policy unclear"
+msgstr "La politique concernant les prépublications est confuse."
+
+#: papers/templatetags/statuses.py:33
+msgid "Preprints archiving policy unknown"
+msgstr "La politique concernant les prépublications est inconnue."
+
+#: papers/templatetags/statuses.py:34
+msgid "Postprints can be archived."
+msgstr "Les postpublications peuvent être archivées."
+
+#: papers/templatetags/statuses.py:35
+msgid "Postprints cannot be archived."
+msgstr "Les postpublications ne peuvent pas être archivées."
+
+#: papers/templatetags/statuses.py:36
+msgid "Under the restrictions below, postprints can be archived."
+msgstr ""
+"Sous les conditions ci-dessous, les postpublications peuvent être archivées."
+
+#: papers/templatetags/statuses.py:37
+msgid "Postprint archiving policy unclear."
+msgstr "La politique concernant les postpublications est confuse."
+
+#: papers/templatetags/statuses.py:38
+msgid "Postprint archiving policy unknown."
+msgstr "La poltique concernant les postpublications est inconnue."
+
+#: papers/templatetags/statuses.py:39
+msgid "Final versions can be archived."
+msgstr "Les versions finales peuvent être archivées."
+
+#: papers/templatetags/statuses.py:40
+msgid "Final versions cannot be archived."
+msgstr "Les versions finales ne peuvent pas être archivées."
+
+#: papers/templatetags/statuses.py:41
+msgid "Under the restrictions below, final versions can be archived."
+msgstr ""
+"Sous les conditions ci-dessous, les versions finales peuvent être archivées."
+
+#: papers/templatetags/statuses.py:42
+msgid "Final version archiving policy unclear."
+msgstr "La politique concernant les versions finales est confuse."
+
+#: papers/templatetags/statuses.py:43
+msgid "Final version archiving policy unknown."
+msgstr "La politique concernant les versions finales est inconnue."
+
+#: papers/templatetags/statuses.py:45
+msgid "Unknown policy"
+msgstr "Politique inconnue"
 
 #: templates/admin/base_site.html:4
 msgid "Dissemin site admin"
@@ -362,3 +417,30 @@ msgstr ""
 #: templates/dissemin/skeleton.html:49
 msgid "Contact:"
 msgstr "Contact:"
+
+#~ msgid ""
+#~ "\n"
+#~ "   Preprint policy: %(policy)s\n"
+#~ "   "
+#~ msgstr ""
+#~ "\n"
+#~ "   Politique de prépublication: %(policy)s\n"
+#~ "   "
+
+#~ msgid ""
+#~ "\n"
+#~ "   Postprint policy: %(policy)s\n"
+#~ "  "
+#~ msgstr ""
+#~ "\n"
+#~ "   Politique de postpublication: %(policy)s\n"
+#~ "   "
+
+#~ msgid ""
+#~ "\n"
+#~ "    Published version policy: %(policy)s\n"
+#~ "   "
+#~ msgstr ""
+#~ "\n"
+#~ "    Politique pour la version finale: %(policy)s\n"
+#~ "    "

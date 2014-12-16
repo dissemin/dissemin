@@ -33,9 +33,12 @@
 {{ name }} has published <a href="{{ search_url }}?publisher={{ id }}">{{ count }} productions</a> authored by researchers from ENS.
    {% endblocktrans %}
 </p>
-<p>{% blocktrans with policy=publisher.preprint %}
-   Preprint policy: {{ policy }}
-   {% endblocktrans %}
+<p>{% with publisher.preprint as policy %}
+   <div class="policyPic policyPic-{{ policy }}"></div>
+<div class="policyText">
+   {{ policy | explain_policy:"preprint" }}
+</div>
+   {% endwith %}
 </p>
 <ul>
 {% for restriction in publisher.preprint_conditions %}
@@ -43,9 +46,12 @@
 {% endfor %}
 </ul>
 <p>
-  {% blocktrans with policy=publisher.postprint %}
-   Postprint policy: {{ policy }}
-  {% endblocktrans %}
+  {% with publisher.postprint as policy %}
+   <div class="policyPic policyPic-{{ policy }}"></div>
+   <div class="policyText">
+   {{ policy|explain_policy:"postprint" }}
+   </div>
+   {% endwith %}
 </p>
 <ul>
 {% for restriction in publisher.postprint_conditions %}
@@ -53,9 +59,12 @@
 {% endfor %}
 </ul>
 <p>
-   {% blocktrans with policy=publisher.pdfversion %}
-    Published version policy: {{ policy }}
-   {% endblocktrans %}
+   {% with publisher.pdfversion as policy %}
+   <div class="policyPic policyPic-{{ policy }}"></div>
+   <div class="policyText">
+       {{ policy | explain_policy:"pdfversion" }}
+   </div>
+   {% endwith %}
 </p>
 <ul>
 {% for restriction in publisher.pdfversion_conditions %}

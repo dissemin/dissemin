@@ -18,6 +18,12 @@ VISIBILITY_CHOICES = [('VISIBLE', _('Visible')),
                       ('DELETED', _('Deleted')),
                       ]
 
+POLICY_CHOICES = [('can', _('Allowed')),
+                  ('cannot', _('Forbidden')),
+                  ('restricted', _('Restricted')),
+                  ('unclear', _('Unclear')),
+                  ('unknown', _('Unknown'))]
+
 # Information about the researchers and their groups
 class Department(models.Model):
     name = models.CharField(max_length=300)
@@ -162,9 +168,9 @@ class Publisher(models.Model):
     name = models.CharField(max_length=256)
     alias = models.CharField(max_length=256,null=True,blank=True)
     url = models.URLField(null=True,blank=True)
-    preprint = models.CharField(max_length=32)
-    postprint = models.CharField(max_length=32)
-    pdfversion = models.CharField(max_length=32)
+    preprint = models.CharField(max_length=32, choices=POLICY_CHOICES, default='unknown')
+    postprint = models.CharField(max_length=32, choices=POLICY_CHOICES, default='unknown')
+    pdfversion = models.CharField(max_length=32, choices=POLICY_CHOICES, default='unknown')
     oa_status = models.CharField(max_length=32, choices=OA_STATUS_CHOICES, default='UNK')
     def __unicode__(self):
         if not self.alias:

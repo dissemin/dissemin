@@ -232,6 +232,37 @@ a:hover
 
 }
 
+/* Policy choices pics */
+
+.policyPic
+{
+    height: 20px;
+    width: 20px;
+    background-repeat: no-repeat;
+    float: left;
+}
+
+.policyPic-can
+{
+    background-image: url('../green-circle.png');
+}
+
+.policyPic-cannot
+{
+    background-image: url('../red-circle.png');
+}
+
+.policyPic-restricted
+{
+    background-image: url('../orange-circle.png');
+}
+
+.policyText
+{
+    margin-left: 25px;
+    min-height: 25px;
+}
+
 /* Criterions in the side bar */
 
 .criterionItem
