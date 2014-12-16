@@ -25,5 +25,8 @@ from {{ nb_departments }} departments.
     <li><a href="{% url 'department' dept.id %}">{{ dept }}</a></li>
     {% endfor %}
 </ul>
+
+{% url 'publishers' as publishers_url %}
+<p>{% blocktrans %}See also the <a href="{{ publishers_url }}">publishers list</a>.{% endblocktrans %}</p>
 </div>
 {% endblock %}

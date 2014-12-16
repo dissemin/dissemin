@@ -19,6 +19,7 @@ from papers.doi import to_doi
 from papers.crossref import fetch_papers_from_crossref_by_researcher_name, convert_to_name_pair
 from papers.proxy import *
 from papers.utils import name_normalization
+from papers.base import fetch_papers_from_base_for_researcher
 
 logger = get_task_logger(__name__)
 
@@ -77,6 +78,12 @@ def process_records(listRecords):
         add_oai_record(record, source, paper)
         saved += 1
     return (count,saved)
+
+@shared_task
+def fetch_everything_for_researcher(pk):
+    fetch_records_for_researcher(pk)
+    fetch_dois_for_researcher(pk)
+    fetch_papers_from_base_for_researcher(Researcher.objects.get(pk=pk))
 
 @shared_task
 def fetch_records_for_researcher(pk):
@@ -168,4 +175,9 @@ def update_paper_statuses():
         p.update_oa_status()
         p.update_pdf_url()
 
+
+@shared_task
+def change_publisher_oa_status(pk, status):
+    publisher = Publisher.objects.get(pk=pk)
+    publisher.change_oa_status(status)
 

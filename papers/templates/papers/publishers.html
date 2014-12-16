@@ -1,0 +1,70 @@
+{% extends "dissemin/details.html" %}
+
+{% load staticfiles %}
+{% load bootstrap_pagination %}
+{% load statuses %}
+{% load i18n %}
+
+{% block headTitle %}
+{{ search_description }}
+{% endblock %}
+
+{% block bodyTitle %}
+{{ search_description }}
+{% endblock %}
+
+{% block jsScript %}
+{% endblock %}
+
+{% block details %}
+
+<span class="detailsTitle">{% trans "Refine search" %}</span>
+<div class="detailsContent">
+    <p>{% blocktrans %}
+    {{ nb_results }} publishers found
+    {% endblocktrans %}
+    </p>
+
+{% if not journal %}
+<span class="criterion">{% trans "By publisher policy:" %}</span>
+{% for st in oa_status_choices %}
+<div class="{% if st.0 == status %}selectedCriterion{% else %}unselectedCriterion{% endif %}">
+    <div class="pubLogo"><div class="pubLogoPic-{{ st.0 }}"><a href="{% url 'publishers' %}?{{ st.2.urlencode }}" class="filldiv"></a></div></div>
+    <div class="criterionItem"><a href="{% url 'publishers' %}?{{ st.2.urlencode }}">{{ st.1 }}</a>
+        {% if st.0 == status %}
+        <div class="criterionCross"><a href="{% url 'publishers' %}?{{ st.2.urlencode }}">x</a></div>
+        {% endif %}
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+
+</div>
+{% endblock %}
+
+{% block lists %}
+<div class="searchPages">{% bootstrap_paginate search_results range=10 %}</div>
+ {% for publisher in search_results %}
+ {% if forloop.first %}<ul>{% endif %}
+    <li>
+        <div class="unselectedCriterion">
+           <div class="pubLogo">
+               <div class="pubLogoPic-{{ publisher.oa_status }}">
+               </div>
+           </div>
+           <div class="criterionItem">
+               <span class="paperTitle">
+                   <a href="{% url 'publisher' publisher.pk %}">{{ publisher }}</a>
+               </span>
+           </div>
+        </div>
+    </li>    
+        {% if forloop.last %}</ul>{% endif %}
+ {% empty %}
+ <p>{% trans "No production found." %}</p>
+ {% endfor %}
+ {% if search_results.paginator.num_pages > 1 %}
+ <div class="searchPages">{% bootstrap_paginate search_results range=10 %}</div>
+ {% endif %}
+{% endblock %}
+

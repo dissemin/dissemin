@@ -16,6 +16,7 @@ from papers.models import *
 from papers.user import is_admin
 from papers.forms import AddResearcherForm
 from papers.utils import iunaccent
+from papers.tasks import *
 
 # General function used to change a CharField in a model with ajax
 def process_ajax_change(request, model, allowedFields):
@@ -92,13 +93,36 @@ def changeDepartment(request):
     allowedFields = ['name']
     return process_ajax_change(request, Department, allowedFields)
 
+# Researcher management
+@user_passes_test(is_admin)
+def changeResearcher(request):
+    allowedFields = ['role']
+    return process_ajax_change(request, Researcher, allowedFields)
 
+# Publisher management
+@user_passes_test(is_admin)
+def changePublisherStatus(request):
+    allowedStatuses = [s[0] for s in OA_STATUS_CHOICES]
+    try:
+        pk = request.POST.get('pk')
+        publisher = Publisher.objects.get(pk=pk)
+        status = request.POST.get('status')
+        if status in allowedStatuses and status != publisher.oa_status:
+            change_publisher_oa_status.apply_async(eta=timezone.now(), kwargs={'pk':pk,'status':status})
+            return HttpResponse('OK', content_type='text/plain')
+        else:
+            raise ObjectDoesNotExist
+    except ObjectDoesNotExist:
+        return HttpResponseNotFound('NOK: '+message, content_type='text/plain')
+    
 
 urlpatterns = patterns('',
     url(r'^delete-paper-(?P<pk>\d+)$', deletePaper, name='ajax-deletePaper'),
     url(r'^delete-researcher-(?P<pk>\d+)$', deleteResearcher, name='ajax-deleteResearcher'),
     url(r'^change-department$', changeDepartment, name='ajax-changeDepartment'),
     url(r'^change-paper$', changePaper, name='ajax-changePaper'),
+    url(r'^change-researcher$', changeResearcher, name='ajax-changeResearcher'),
     url(r'^add-researcher$', addResearcher, name='ajax-addResearcher'),
+    url(r'^change-publisher-status$', changePublisherStatus, name='ajax-changePublisherStatus'),
 )
 

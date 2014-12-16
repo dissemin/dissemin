@@ -35,7 +35,7 @@ msgstr "Département"
 msgid "Email"
 msgstr "Email"
 
-#: papers/forms.py:13 papers/templates/papers/publisher.html:21
+#: papers/forms.py:13 papers/templates/papers/publisher.html:40
 msgid "Homepage"
 msgstr "Site web"
 
@@ -103,27 +103,31 @@ msgstr ""
 msgid "Anonymous researcher"
 msgstr "Chercheur anonyme"
 
-#: papers/views.py:43 papers/views.py:84
+#: papers/views.py:43
+msgid "Publishers"
+msgstr "Maisons d'édition"
+
+#: papers/views.py:80 papers/views.py:121
 msgid "Papers"
 msgstr "Papiers"
 
-#: papers/views.py:47
+#: papers/views.py:84
 msgid " authored by "
 msgstr " écrits par "
 
-#: papers/views.py:52
+#: papers/views.py:89
 msgid " authored in "
 msgstr " écrits au "
 
-#: papers/views.py:57
+#: papers/views.py:94
 msgid " in "
 msgstr " dans "
 
-#: papers/views.py:62
+#: papers/views.py:99
 msgid " published by "
 msgstr " publiés par "
 
-#: papers/views.py:85
+#: papers/views.py:122
 msgid "All papers"
 msgstr "Tous les papiers"
 
@@ -174,6 +178,11 @@ msgstr ""
 "par département:\n"
 "    "
 
+#: papers/templates/papers/index.html:30
+#, python-format
+msgid "See also the <a href=\"%(publishers_url)s\">publishers list</a>."
+msgstr "Voir aussi la <a href=\"%(publishers_url)s\">liste des maisons d'édition</a>."
+
 #: papers/templates/papers/paper.html:37
 msgid "Full text:"
 msgstr "Texte intégral:"
@@ -203,7 +212,6 @@ msgid "[PDF]"
 msgstr "[PDF]"
 
 #: papers/templates/papers/paper.html:80
-#: papers/templates/papers/publisher.html:17
 #: papers/templates/papers/search.html:68
 msgid "Publisher"
 msgstr "Maison d'édition"
@@ -212,7 +220,11 @@ msgstr "Maison d'édition"
 msgid "via DOI"
 msgstr "via DOI"
 
-#: papers/templates/papers/publisher.html:32
+#: papers/templates/papers/publisher.html:45
+msgid "Policy"
+msgstr "Politique"
+
+#: papers/templates/papers/publisher.html:70
 #, python-format
 msgid ""
 "\n"
@@ -235,7 +247,7 @@ msgstr "Détails de la politique"
 
 #: papers/templates/papers/publisher.html:86
 msgid "Source:"
-msgstr "Source:"
+msgstr "Source :"
 
 #: papers/templates/papers/publisher.html:87
 msgid "Journals in which researchers have authored papers"
@@ -245,9 +257,35 @@ msgstr "Revues dans lesquelles les chercheurs ont écrit des papiers"
 msgid "None."
 msgstr "Aucune."
 
+#: papers/templates/papers/publishers.html:21
+#: papers/templates/papers/search.html:78
+msgid "Refine search"
+msgstr "Affiner la recherche"
+
+#: papers/templates/papers/publishers.html:23
+#, python-format
+msgid ""
+"\n"
+"    %(nb_results)s publishers found\n"
+"    "
+msgstr ""
+"\n"
+"    %(nb_results)s résultats\n"
+"    "
+
+#: papers/templates/papers/publishers.html:64
+#: papers/templates/papers/search.html:141
+msgid "No production found."
+msgstr "Aucune production trouvée."
+
 #: papers/templates/papers/search.html:28
 msgid "Researcher"
-msgstr "Chercheur"
+msgstr "Personne"
+
+#: papers/templates/papers/search.html:36
+msgctxt "Researcher"
+msgid "Homepage"
+msgstr "Page personnelle"
 
 #: papers/templates/papers/search.html:39
 msgid "Address:"
@@ -276,10 +314,6 @@ msgstr "Publiée par"
 msgid "ISSN:"
 msgstr "ISSN:"
 
-#: papers/templates/papers/search.html:78
-msgid "Refine search"
-msgstr "Affiner la recherche"
-
 #: papers/templates/papers/search.html:80
 #, python-format
 msgid ""
@@ -302,10 +336,6 @@ msgstr "Par disponibilité du texte intégral"
 #: papers/templates/papers/search.html:112
 msgid "By visibility:"
 msgstr "Par visibilité"
-
-#: papers/templates/papers/search.html:141
-msgid "No production found."
-msgstr "Aucune production trouvée."
 
 #: papers/templatetags/statuses.py:17
 msgid "Unknown OA status"
@@ -391,8 +421,9 @@ msgid "Dissemin administration"
 msgstr "Administration de Dissemin"
 
 #: templates/dissemin/skeleton.html:32
+msgctxt "memu bar"
 msgid "Home"
-msgstr "Site web"
+msgstr "Accueil"
 
 #: templates/dissemin/skeleton.html:32
 msgid "About"

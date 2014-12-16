@@ -33,6 +33,43 @@ def index(request):
         }
     return render(request, 'papers/index.html', context)
 
+def publishersView(request, **kwargs):
+    context = dict()
+    # Build the queryset
+    queryset = Publisher.objects.all()
+    args = request.GET.copy()
+    args.update(kwargs)
+
+    search_description = _('Publishers')
+    if 'status' in args:
+        queryset = queryset.filter(oa_status=args.get('status'))
+        context['status'] = args.get('status')
+    queryset = queryset.order_by('name')
+
+    # Build the paginator
+    paginator = Paginator(queryset, NB_RESULTS_PER_PAGE)
+    page = args.get('page')
+    try:
+        current_publishers = paginator.page(page)
+    except PageNotAnInteger:
+        current_publishers = paginator.page(1)
+    except EmptyPage:
+        current_publishers = paginator.page(paginator.num_pages)
+
+    context['search_results'] = current_publishers
+    context['search_description'] = search_description
+    context['nb_results'] = queryset.count()
+
+    # Build the GET requests for variants of the parameters
+    args_without_page = args.copy()
+    if 'page' in args_without_page:
+        del args_without_page['page']
+    oa_variants = varyQueryArguments('status', args_without_page, OA_STATUS_CHOICES)
+
+    context['oa_status_choices'] = oa_variants
+    return render(request, 'papers/publishers.html', context)
+
+
 def searchView(request, **kwargs):
     context = dict()
     # Build the queryset
@@ -175,6 +212,7 @@ class PublisherView(generic.DetailView):
     template_name = 'papers/publisher.html'
     def get_context_data(self, **kwargs):
         context = super(PublisherView, self).get_context_data(**kwargs)
+        context['oa_status_choices'] = OA_STATUS_CHOICES
         # Build the paginator
         publisher = context['publisher']
         paginator = Paginator(publisher.sorted_journals, NB_JOURNALS_PER_PAGE)

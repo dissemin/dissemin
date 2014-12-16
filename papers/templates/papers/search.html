@@ -15,11 +15,14 @@
 
 {% block jsScript %}
 {% if request.user.is_superuser %}
-$(function(){
-{% for paper in search_results %}
-    makeTextEditable($('#paper-title-{{ paper.id }}'), '/ajax/change-paper', '{{ paper.id }}', 'title');
-{% endfor %}
-});
+    $(function(){
+    {% for paper in search_results %}
+        makeTextEditable($('#paper-title-{{ paper.id }}'), '/ajax/change-paper', '{{ paper.id }}', 'title');
+    {% endfor %}
+    {% if researcher %}
+        makeTextEditable($('#researcher-role'), '/ajax/change-researcher', '{{ researcher.id }}', 'role');
+    {% endif %}
+    });
 {% endif %}
 {% endblock %}
 
@@ -29,11 +32,12 @@ $(function(){
     <div class="detailsContent">
         <p>{{ researcher }}</p>
         {% if researcher.role %}
-        <p>{{ researcher.role }}</p>
+        <p id="researcher-role"
+         data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">{{ researcher.role }}</p>
         {% endif %}
         <p><a href="{% url 'department' researcher.department.id %}">{{ researcher.department }}</a></p>
         {% if researcher.homepage %}
-        <p><a href="{{ researcher.homepage }}">Homepage</a></p>
+        <p><a href="{{ researcher.homepage }}">{% trans "Homepage" context "Researcher" %}</a></p>
         {% endif %}
         {% if request.user.is_superuser and researcher.email %}
         <p>{% trans "Address:" %}{{ researcher.email }}</p>
@@ -67,10 +71,10 @@ $(function(){
 {% elif publisher %}
 <span class="detailsTitle">{% trans "Publisher" %}</span>
     <div class="detailsContent">
-        <p>{{ publisher }}</p>
+        <p><a href="{% url 'publisher' publisher.pk %}">{{ publisher }}</a></p>
         <div class="unselectedCriterion">
         <div class="pubLogo"><div class="pubLogoPic-{{ publisher.oa_status }}"></div></div>
-        <div class="criterionItem">{{ journal.publisher.oa_status |explain_oa_status}}</div>
+        <div class="criterionItem">{{ publisher.oa_status |explain_oa_status}}</div>
         </div>
     </div>
 {% endif %}
@@ -82,7 +86,7 @@ $(function(){
     {% endblocktrans %}
     </p>
 
-{% if not journal %}
+{% if not journal and not publisher %}
 <span class="criterion">{% trans "By publisher policy:" %}</span>
 {% for st in oa_status_choices %}
 <div class="{% if st.0 == status %}selectedCriterion{% else %}unselectedCriterion{% endif %}">
