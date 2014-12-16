@@ -1,0 +1,65 @@
+# -*- encoding: utf-8 -*-
+from __future__ import unicode_literals
+
+import math
+
+from papers.models import *
+from papers.utils import iunaccent
+
+def tokenize(l):
+    return iunaccent(l).split()
+
+class WordCount(Object):
+    def __init__(self):
+        self.dirichlet = 1
+        self.total = 0
+        self.c = dict()
+        self.stop = 0 # Unused
+        self.mass = self.dirichlet
+        self.cached = True
+    
+    def p(self, w):
+        if not self.cached:
+            self._cache()
+        count = self.c.get(w,0)
+        return (count + self.dirichlet) / self.mass
+
+    def lp(self, w):
+        if not self.cached:
+            self._cache()
+        count = self.c.get(w,0)
+        return math.log(count + self.dirichlet) - math.log(self.mass)
+
+    def feedLine(self, l):
+        for w in tokenize(l):
+            self._countWord(w)
+        # self.stop += 1
+        # self.total += 1
+
+    def probLine(self, l):
+        total = 1
+        for w in tokenize(l):
+            total *= self.p(w)
+        return total
+
+    def lprobLine(self, l):
+        total = 0
+        for w in tokenize(l):
+            total += self.lp(w)
+        return total
+
+    def _countWord(self, w):
+        self.c[w] += 1
+        self.total += 1
+        self.cached = False
+
+    def _cache(self):
+        self.mass = ((len(self.c) + 1)*self.dirichlet + self.total)
+
+
+class DepartmentModel(Object):
+    def __init__(self):
+        self.wc_title = WordCount()
+
+
+
