@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 import math
+import cPickle
 
 from papers.models import *
 from papers.utils import iunaccent
@@ -17,6 +18,16 @@ class WordCount(Object):
         self.stop = 0 # Unused
         self.mass = self.dirichlet
         self.cached = True
+
+    def load(self, fname):
+        f = open(f, 'rb')
+        self = cPickle.load(f)
+        f.close()
+
+    def save(self, fname):
+        f = open(f, 'wb')
+        cPickle.save(f, self)
+        f.close()
     
     def p(self, w):
         if not self.cached:
