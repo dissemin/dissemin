@@ -21,5 +21,6 @@ urlpatterns = patterns('',
         url(r'^paper/(?P<pk>\d+)/$', views.PaperView.as_view(), name='paper'),
         url(r'^journal/(?P<journal>\d+)/$', views.searchView, name='journal'),
         url(r'^publisher/(?P<pk>\d+)/$', views.PublisherView.as_view(), name='publisher'),
+        url(r'^sources$', views.sourcesView, name='sources'),
         url(r'^ajax/', include('papers.ajax')),
 )

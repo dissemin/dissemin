@@ -135,7 +135,7 @@
  {% ifchanged paper.year %}
  {% if not forloop.first %}</ul></div>{% endif %}
     <div class="ulContainer">
-    <div class="listYear">{{ paper.year }}</div><ul>
+    <div class="listYear">{{ paper.year }}</div><ul class="withoutTriangles">
  {% endifchanged %}
     <li>
         {% include "papers/publiListItem.html" with paper=paper %}

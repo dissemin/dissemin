@@ -121,7 +121,7 @@
 {% if journals.paginator.num_pages > 1 %}
  <div class="searchPages">{% bootstrap_paginate journals range=10 %}</div>
  {% endif %}
-<ul>
+<ul class="withoutTriangles">
     {% for journal in journals %}
         <li><a href="{% url 'journal' journal.id %}">{{ journal }}</a></li>
     {% empty %}

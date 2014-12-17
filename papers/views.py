@@ -226,4 +226,7 @@ class PublisherView(generic.DetailView):
         context['journals'] = current_journals
         return context
 
+def sourcesView(request):
+    return render(request, 'papers/sources.html')
+
 
