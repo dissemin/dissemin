@@ -12,7 +12,7 @@ def tokenize(l):
 
 class WordCount:
     def __init__(self):
-        self.dirichlet = 1
+        self.dirichlet = 1.
         self.total = 0
         self.c = dict()
         self.stop = 0 # Unused
@@ -20,13 +20,14 @@ class WordCount:
         self.cached = True
 
     def load(self, fname):
-        f = open(f, 'rb')
-        self = cPickle.load(f)
+        f = open(fname, 'rb')
+        dct = cPickle.load(f)
         f.close()
+        self.__dict__.update(dct)
 
     def save(self, fname):
-        f = open(f, 'wb')
-        cPickle.save(f, self)
+        f = open(fname, 'wb')
+        cPickle.dump(self.__dict__, f)
         f.close()
     
     def p(self, w):
@@ -48,16 +49,24 @@ class WordCount:
         # self.total += 1
 
     def probLine(self, l):
-        total = 1
+        total = 1.
         for w in tokenize(l):
             total *= self.p(w)
         return total
 
-    def lprobLine(self, l):
-        total = 0
+    def lProbLine(self, l):
+        total = 0.
         for w in tokenize(l):
             total += self.lp(w)
         return total
+
+    def nlProbLine(self, l):
+        total = 0.
+        lgt = 0
+        for w in tokenize(l):
+            total += self.lp(w)
+            lgt += 1
+        return total / lgt
 
     def _countWord(self, w):
         c = self.c.get(w,0)
