@@ -1,13 +1,13 @@
 # -*- encoding: utf-8 -*-
 from __future__ import unicode_literals
 from papers.models import *
-from papers.utils import iunaccent
+from papers.utils import iunaccent, normalize_name_words
 from codecs import open
 
 first_name_f = 1
 last_name_f = 0
-email_f = 2
-url_f = 3
+url_f = 2
+email_f = 3
 role_f = 4
 group_f = 5
 dept_f = 6
@@ -18,7 +18,6 @@ def import_from_tsv(filename):
     for line in f:
         fields = line.strip().split('\t')
         print fields
-        print len(fields)
 
         dept = fields[dept_f]
         (department, found) = Department.objects.get_or_create(name__iexact=dept,
@@ -29,7 +28,7 @@ def import_from_tsv(filename):
             email = None
 
         first = fields[first_name_f]
-        last = fields[last_name_f]
+        last = normalize_name_words(fields[last_name_f])
         full = iunaccent(first+' '+last)
         n, created = Name.get_or_create(first,last)
         if created or not n.researcher:
@@ -45,7 +44,9 @@ def import_from_tsv(filename):
             g, created = ResearchGroup.objects.get_or_create(name=group)
             n.researcher.groups.add(g)
 
+        n.save()
         n.researcher.save()
 
 
-import_from_tsv('data/chercheurs-di-dc.tsv.csv')
+import_from_tsv('data/dma')
+

@@ -210,7 +210,7 @@ def get_or_create_publisher(romeo_xml_description):
             c.save()
             if c.text.lower() == 'all titles are open access journals':
                 publisher.status = 'OA'
-                publisher.save(update_fields=['status'])
+                publisher.save(update_fields=['oa_status'])
     
     for link in xml.findall('./copyrightlinks/copyrightlink'):
         text = None
