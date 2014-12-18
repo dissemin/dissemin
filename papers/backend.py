@@ -108,7 +108,7 @@ def create_publication(paper, metadata):
     if matches:
         return matches[0]
 
-    title = metadata['container-title']
+    title = metadata['container-title'][:512]
     issn = metadata.get('ISSN',None)
     if issn and type(issn) == type([]):
         issn = issn[0] # TODO pass all the ISSN to the RoMEO interface
@@ -119,6 +119,8 @@ def create_publication(paper, metadata):
     date = '-'.join(map(str,date_dict.get('date-parts',[[]])[0])) # TODO this is horribly ugly
     # for instance it outputs dates like 2014-2-3
     publisher = metadata.get('publisher', None)
+    if publisher:
+        publisher = publisher[:512]
     pubtype = 'article'
 
     # Lookup journal

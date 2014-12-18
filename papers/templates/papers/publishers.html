@@ -45,7 +45,7 @@
 {% block lists %}
 <div class="searchPages">{% bootstrap_paginate search_results range=10 %}</div>
  {% for publisher in search_results %}
- {% if forloop.first %}<ul>{% endif %}
+ {% if forloop.first %}<ul class="withoutTriangles">{% endif %}
     <li>
         <div class="unselectedCriterion">
            <div class="pubLogo">

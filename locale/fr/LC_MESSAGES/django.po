@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-16 15:30+0100\n"
+"POT-Creation-Date: 2014-12-17 17:28+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,7 +27,7 @@ msgid "Last name"
 msgstr "Nom"
 
 #: papers/forms.py:11 papers/templates/papers/department.html:81
-#: papers/templates/papers/search.html:44
+#: papers/templates/papers/search.html:48
 msgid "Department"
 msgstr "Département"
 
@@ -181,7 +181,8 @@ msgstr ""
 #: papers/templates/papers/index.html:30
 #, python-format
 msgid "See also the <a href=\"%(publishers_url)s\">publishers list</a>."
-msgstr "Voir aussi la <a href=\"%(publishers_url)s\">liste des maisons d'édition</a>."
+msgstr ""
+"Voir aussi la <a href=\"%(publishers_url)s\">liste des maisons d'édition</a>."
 
 #: papers/templates/papers/paper.html:37
 msgid "Full text:"
@@ -212,7 +213,8 @@ msgid "[PDF]"
 msgstr "[PDF]"
 
 #: papers/templates/papers/paper.html:80
-#: papers/templates/papers/search.html:68
+#: papers/templates/papers/publisher.html:36
+#: papers/templates/papers/search.html:72
 msgid "Publisher"
 msgstr "Maison d'édition"
 
@@ -237,28 +239,28 @@ msgstr ""
 "productions</a> écrites par des chercheurs de l'ENS.\n"
 "   "
 
-#: papers/templates/papers/publisher.html:74
+#: papers/templates/papers/publisher.html:107
 msgid "Conditions"
 msgstr "Conditions"
 
-#: papers/templates/papers/publisher.html:80
+#: papers/templates/papers/publisher.html:113
 msgid "Policy details"
 msgstr "Détails de la politique"
 
-#: papers/templates/papers/publisher.html:86
+#: papers/templates/papers/publisher.html:119
 msgid "Source:"
 msgstr "Source :"
 
-#: papers/templates/papers/publisher.html:87
+#: papers/templates/papers/publisher.html:120
 msgid "Journals in which researchers have authored papers"
 msgstr "Revues dans lesquelles les chercheurs ont écrit des papiers"
 
-#: papers/templates/papers/publisher.html:95
+#: papers/templates/papers/publisher.html:128
 msgid "None."
 msgstr "Aucune."
 
 #: papers/templates/papers/publishers.html:21
-#: papers/templates/papers/search.html:78
+#: papers/templates/papers/search.html:82
 msgid "Refine search"
 msgstr "Affiner la recherche"
 
@@ -273,25 +275,30 @@ msgstr ""
 "    %(nb_results)s résultats\n"
 "    "
 
+#: papers/templates/papers/publishers.html:29
+#: papers/templates/papers/search.html:90
+msgid "By publisher policy:"
+msgstr "Par politique de publication"
+
 #: papers/templates/papers/publishers.html:64
-#: papers/templates/papers/search.html:141
+#: papers/templates/papers/search.html:145
 msgid "No production found."
 msgstr "Aucune production trouvée."
 
-#: papers/templates/papers/search.html:28
+#: papers/templates/papers/search.html:31
 msgid "Researcher"
 msgstr "Personne"
 
-#: papers/templates/papers/search.html:36
+#: papers/templates/papers/search.html:40
 msgctxt "Researcher"
 msgid "Homepage"
 msgstr "Page personnelle"
 
-#: papers/templates/papers/search.html:39
+#: papers/templates/papers/search.html:43
 msgid "Address:"
 msgstr "Adresse:"
 
-#: papers/templates/papers/search.html:48
+#: papers/templates/papers/search.html:52
 #, python-format
 msgid ""
 "\n"
@@ -302,19 +309,19 @@ msgstr ""
 "            %(count)s membres\n"
 "            "
 
-#: papers/templates/papers/search.html:55
+#: papers/templates/papers/search.html:59
 msgid "Journal"
 msgstr "Revue"
 
-#: papers/templates/papers/search.html:58
+#: papers/templates/papers/search.html:62
 msgid "Published by"
 msgstr "Publiée par"
 
-#: papers/templates/papers/search.html:60
+#: papers/templates/papers/search.html:64
 msgid "ISSN:"
 msgstr "ISSN:"
 
-#: papers/templates/papers/search.html:80
+#: papers/templates/papers/search.html:84
 #, python-format
 msgid ""
 "\n"
@@ -325,17 +332,29 @@ msgstr ""
 "    %(nb_results)s résultats\n"
 "    "
 
-#: papers/templates/papers/search.html:86
-msgid "By publisher policy:"
-msgstr "Par politique de publication"
-
-#: papers/templates/papers/search.html:99
+#: papers/templates/papers/search.html:103
 msgid "By full text availability:"
 msgstr "Par disponibilité du texte intégral"
 
-#: papers/templates/papers/search.html:112
+#: papers/templates/papers/search.html:116
 msgid "By visibility:"
 msgstr "Par visibilité"
+
+#: papers/templates/papers/sources.html:11
+msgid "Data sources"
+msgstr "Sources de données"
+
+#: papers/templates/papers/sources.html:13
+msgid "Primary sources"
+msgstr "Sources primaires"
+
+#: papers/templates/papers/sources.html:19
+msgid "Secondary sources"
+msgstr "Sources secondaires"
+
+#: papers/templates/papers/sources.html:20
+msgid "Harvested with the OAI-PMH protocol."
+msgstr "Moissonées avec le protocole OAI-PMH."
 
 #: papers/templatetags/statuses.py:17
 msgid "Unknown OA status"
