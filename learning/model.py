@@ -6,9 +6,12 @@ import cPickle
 
 from papers.models import *
 from papers.utils import iunaccent
+from nltk.tokenize.punkt import PunktWordTokenizer
+
+punktTokenizer = PunktWordTokenizer()
 
 def tokenize(l):
-    return iunaccent(l).split()
+    return punktTokenizer.tokenize(iunaccent(l))
 
 class WordCount(Object):
     def __init__(self):
