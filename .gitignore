@@ -11,3 +11,12 @@ celerybeat-schedule
 repositories
 # Localization
 *.mo
+# Virtualenv
+bin/
+local/
+include/
+lib/
+# Fiddling
+models/
+learning/dataset/
+
