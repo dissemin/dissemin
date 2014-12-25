@@ -40,7 +40,7 @@
         <p><a href="{{ researcher.homepage }}">{% trans "Homepage" context "Researcher" %}</a></p>
         {% endif %}
         {% if request.user.is_superuser and researcher.email %}
-        <p>{% trans "Address:" %}{{ researcher.email }}</p>
+        <p>{% trans "Address:" %} {{ researcher.email }}</p>
         {% endif %}
     </div>
 {% endif %}

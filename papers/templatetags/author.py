@@ -10,8 +10,8 @@ register = template.Library()
 
 @register.filter(is_safe=True)
 def authorlink(author):
-    if author.name.is_known:
-        return mark_safe('<a href="'+reverse('researcher', kwargs={'researcher':author.name.researcher.id})+'">'+escape(unicode(author.name))+'</a>')
+    if author.researcher:
+        return mark_safe('<a href="'+reverse('researcher', kwargs={'researcher':author.researcher.id})+'">'+escape(unicode(author.name))+'</a>')
     else:
         return mark_safe(escape(unicode(author.name)))
 

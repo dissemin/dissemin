@@ -28,7 +28,6 @@ class ResearcherAdmin(admin.ModelAdmin):
       #  (None, {'fields': ['nae']}),
         ('Affiliation', {'fields': ['department', 'groups']})
         ]
-    inlines = [NameInline]
 
 class AuthorInline(admin.TabularInline):
     model = Author

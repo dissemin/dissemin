@@ -51,7 +51,7 @@ def save_if_not_saved(obj):
         obj.save()
 
 def get_or_create_paper(title, author_names, year, doi=None, visibility='VISIBLE'):
-    # If a DOI is present, first look up using it
+    # If a DOI is present, first look it up
     if doi:
         matches = Publication.objects.filter(doi__exact=doi)
         if matches:
@@ -78,10 +78,14 @@ def get_or_create_paper(title, author_names, year, doi=None, visibility='VISIBLE
     else:
         p = Paper(title=title,year=year,fingerprint=fp,visibility=visibility)
         p.save()
+        authors = []
         for author_name in author_names:
             save_if_not_saved(author_name)
             a = Author(name=author_name, paper=p)
             a.save()
+            authors.append(a)
+        for author in authors:
+            author.runClustering()
 
     if doi:
         try:
@@ -96,6 +100,8 @@ def get_or_create_paper(title, author_names, year, doi=None, visibility='VISIBLE
 def merge_papers(first, second):
     # TODO What if the authors are not the same?
     # We should merge the list of authors, so that the order is preserved
+
+    # TODO merge author relations
 
     if first.pk == second.pk:
         return

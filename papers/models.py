@@ -63,6 +63,7 @@ class ResearchGroup(models.Model):
         return self.name
 
 class Researcher(models.Model):
+    name = models.ForeignKey('Name')
     department = models.ForeignKey(Department)
     groups = models.ManyToManyField(ResearchGroup,blank=True,null=True)
     email = models.EmailField(blank=True,null=True)
@@ -75,53 +76,57 @@ class Researcher(models.Model):
     last_status_update = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
-        first_name = Name.objects.filter(researcher_id=self.id).order_by('id').first()
-        if first_name:
-            return unicode(first_name)
-        return _("Anonymous researcher")
+        return unicode(self.name)
 
     @property
     def authors_by_year(self):
         return Author.objects.filter(name__researcher_id=self.id).order_by('-paper__year')
     @property
     def names(self):
-        return self.name_set.order_by('id')
-    @property
-    def name(self):
-        name = self.names[0]
-        if name:
-            return name
-        else:
-            return _("Anonymous researcher")
+        return Name.objects.filter(author__researcher=self)
     @property
     def aka(self):
-        return self.names[:2]
+        return self.names[1:]
 
 MAX_NAME_LENGTH = 256
 class Name(models.Model):
-    researcher = models.ForeignKey(Researcher, blank=True, null=True, on_delete=models.SET_NULL)
     first = models.CharField(max_length=MAX_NAME_LENGTH)
     last = models.CharField(max_length=MAX_NAME_LENGTH)
     full = models.CharField(max_length=MAX_NAME_LENGTH*2+1, db_index=True)
+    is_known = models.BooleanField(default=False)
 
-    unique_together = ('first','last')# TODO Two researchers with the same name is not supported
+    unique_together = ('first','last')
     
     class Meta:
         ordering = ['last','first']
 
     @classmethod
     def create(cls, first, last):
+        """
+        Creates an instance of the Name object without saving it.
+        Useful for name lookups where we are not sure we want to
+        keep the name in the model.
+        """
+        first = first[:MAX_NAME_LENGTH]
+        last = last[:MAX_NAME_LENGTH]
         full = iunaccent(first+' '+last)
         return cls(first=first,last=last,full=full)
     @classmethod
     def get_or_create(cls, first, last):
+        """
+        Replacement for the regular get_or_create, so that the full
+        name is built based on first and last
+        """
         full = iunaccent(first+' '+last)
         return cls.objects.get_or_create(full=full, defaults={'first':first,'last':last})
+    def last_name_known(self):
+        """
+        Is the last name of this Name the same as the last name of a known researcher?
+        """
+        count = Name.objects.filter(last__iexact=self.last,is_known=True).count()
+        return count > 0
     def __unicode__(self):
         return '%s %s' % (self.first,self.last)
-    @property
-    def is_known(self):
-        return self.researcher != None
 
 # Papers matching one or more researchers
 class Paper(models.Model):
@@ -180,12 +185,19 @@ class Paper(models.Model):
         self.save()
 
 # Researcher / Paper binary relation
-# TODO: it could be a ManyToMany field...
 class Author(models.Model):
     paper = models.ForeignKey(Paper)
     name = models.ForeignKey(Name)
+    researcher = models.ForeignKey(Researcher, blank=True, null=True, on_delete=models.SET_NULL)
     def __unicode__(self):
         return unicode(self.name)
+    @property
+    def is_known(self):
+        return self.researcher != None
+    def runClustering(self):
+        # TODO this method is supposed to update name.is_known if needed
+        # TODO not implemented
+        return True
 
 # Publisher associated with a journal
 class Publisher(models.Model):
@@ -206,6 +218,8 @@ class Publisher(models.Model):
     def publi_count(self):
         # TODO compute this with aggregates
         # and cache the number of papers for each journal
+        # TODO ensure that the papers are not only visible,
+        # but also assigned to a researcher
         count = 0
         for journal in self.journal_set.all():
             count += journal.publication_set.filter(paper__visibility='VISIBLE').count()

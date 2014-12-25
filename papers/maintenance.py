@@ -23,11 +23,16 @@ from __future__ import unicode_literals
 from papers.models import *
 
 def cleanup_papers():
+    """
+    Deletes all the papers where none of the authors have been identified
+    as a known researcher.
+    TODO: write another version focusing on the last name only.
+    """
     deleted_count = 0
     for p in Paper.objects.all():
         researcher_found = False
         for a in p.author_set.all():
-            if a.name.researcher:
+            if a.researcher:
                 researcher_found = True
                 break
         if not researcher_found:
@@ -38,9 +43,12 @@ def cleanup_papers():
 
 
 def cleanup_researchers():
+    """
+    Deletes all the researchers who have not authored any paper.
+    """
     deleted_count = 0
     for p in Researcher.objects.all():
-        nb_papers = Paper.objects.filter(author__name__researcher=p).count()
+        nb_papers = Paper.objects.filter(author__researcher=p).count()
         if not nb_papers:
             print "Deleting researcher id "+str(p.pk)
             deleted_count += 1
@@ -49,6 +57,9 @@ def cleanup_researchers():
 
 
 def cleanup_names(dry_run = False):
+    """
+    Deletes all the names that are not present in any paper.
+    """
     deleted_count = 0
     for n in Name.objects.all():
         if not n.researcher:

@@ -132,16 +132,22 @@ def add_base_document(doc, source):
                 'In document "'+title+'"')
             return False
     
-    # Lookup the names and check that at least one of them is known
-    model_names = []
-    researcher_found = False
-    for name in author_names:
-        mn = lookup_name(name)
-        model_names.append(mn)
-        if mn.researcher:
-            researcher_found = True
+    # TODO: this would be more flexible (but should be done for OAI and CrossRef as well -> refactor)
+    # researcher_found = False
+    # for author in author_names:
+    #    count = Name.objects.filter(last__iexact=author[1],is_known=True).count()
+    #    if count > 0:
+    #        researcher_found = True
+    #        break
+    #if not researcher_found:
+    #    return False
 
-    if not researcher_found:
+    # Lookup the names
+    model_names = map(lookup_name, author_names)
+
+    # Check that at least one of the last names is known
+    # TODO remove this and do the things above
+    if all(not elem.is_known for elem in model_names):
         return False
 
     if not 'dcdocid' in metadata:
