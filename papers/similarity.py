@@ -27,6 +27,7 @@ from sklearn import svm
 from sklearn.metrics import confusion_matrix
 import numpy as np
 import matplotlib.pyplot as plt
+from unidecode import unidecode
 
 punktTokenizer = PunktWordTokenizer()
 
@@ -108,6 +109,11 @@ class PublicationSimilarity(SimilarityFeature):
         else:
             return 0.
 
+def nocomma(lst):
+    lst = map(lambda x: str(x).replace(',',''), lst)
+    lst = [x if x else ' ' for x in lst]
+    return ','.join(lst)
+
 class SimilarityClassifier(object):
     def __init__(self, publicationModel):
         self.simFeatures = [CoauthorsSimilarity(), PublicationSimilarity(publicationModel)]
@@ -144,7 +150,7 @@ class SimilarityClassifier(object):
             return None
         feat_vec = self._computeFeatures(authorA, authorB)
         output = self.classifier.predict(feat_vec)
-        return output[0,0]
+        return output[0]
 
     def plotClassification(self, features, labels):
         h = 0.1
@@ -164,16 +170,19 @@ class SimilarityClassifier(object):
         plt.show()
 
     def outputGraph(self, author_set, outfile):
-        print('nodedef>name VARCHAR,label VARCHAR,pid VARCHAR', file=outfile)
+        print('nodedef>name VARCHAR,label VARCHAR,pid VARCHAR,visibility VARCHAR', file=outfile)
         for author in author_set:
             paper = author.paper
-            print(','.join([str(author.pk), unidecode(paper.title), str(paper.id)]), file=outfile)
+            visibility = paper.visibility
+            if paper.year <= 2012:
+                visibility = 'NOT_LABELLED'
+            print(nocomma([author.pk, unidecode(paper.title), paper.id, visibility]), file=outfile)
         print('edgedef>node1 VARCHAR,node2 VARCHAR', file=outfile)
         authors = list(author_set)
         for i in range(len(authors)):
             for j in range(i):
                 if self.classify(authors[i],authors[j]):
-                    print(','.join([str(authors[i].pk),str(authors[j].pk)]), file=outfile())
+                    print(nocomma([authors[i].pk,authors[j].pk]), file=outfile)
 
 
 

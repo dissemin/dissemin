@@ -20,7 +20,7 @@
 
 
 from __future__ import unicode_literals, print_function
-
+from django.db.models import Q
 from papers.models import *
 from learning.model import *
 from papers.similarity import *
@@ -37,7 +37,7 @@ all_papers_model = WordCount()
 all_papers_model.load('models/everything.pkl')
 sc = SimilarityClassifier(all_papers_model)
 
-recompute = True
+recompute = False
 if recompute:
     print("Getting authors")
     authors = sc._toAuthorPairs(author_ids)
@@ -72,7 +72,13 @@ for i in range(len(labels)):
 
 sc.train(features, labels, kernel='linear')
 print(sc.confusion(features, labels))
-sc.plotClassification(features, labels)
+# sc.plotClassification(features, labels)
+
+def testResearcher(pk):
+    outf = open('learning/dataset/researcher-'+str(pk)+'.gdf', 'w')
+    sc.outputGraph(Author.objects.filter(researcher_id=pk).filter(Q(paper__visibility='VISIBLE') |
+        Q(paper__visibility='DELETED')), outf)
+    outf.close()
 
 
 #w = WordCount()
