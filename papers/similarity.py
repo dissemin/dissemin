@@ -110,7 +110,7 @@ class PublicationSimilarity(SimilarityFeature):
             return 0.
 
 def nocomma(lst):
-    lst = map(lambda x: str(x).replace(',',''), lst)
+    lst = map(lambda x: str(x).replace(',','').replace('\n',''), lst)
     lst = [x if x else ' ' for x in lst]
     return ','.join(lst)
 
