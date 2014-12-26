@@ -31,6 +31,8 @@ OA_STATUS_CHOICES = (
         ('UNK', _('Policy unclear')),
    )
 
+OA_STATUS_PREFERENCE = ['OA','OK','NOK','UNK']
+
 PDF_STATUS_CHOICES = [('OK', _('Available')),
                       ('NOK', _('Unavailable'))]
 
@@ -147,36 +149,32 @@ class Paper(models.Model):
     def sorted_oai_records(self):
         return self.oairecord_set.order_by('-priority')
 
-    def update_oa_status(self):
-        # Look for publications
-        qs = list(self.publication_set.all()[:1])
-        if qs:
-            self.oa_status = qs[0].oa_status()
-        else:
-            self.oa_status = 'UNK'
-        # Look for automatic OA OAI sources
-        records = list(self.oairecord_set.filter(source__oa=True,pdf_url__isnull=False)[:1])
-        if records:
-            self.oa_status = 'OA'
-        self.save()
-
-    # TODO merge these two functions !
-
-    def update_pdf_url(self):
+    def update_availability(self):
         # TODO: create an oa_status field in each publication so that we optimize queries
         # and can deal with hybrid OA
-
-        # If it is an open access publisher, keep the publisher version
-        if self.oa_status == 'OA':
-            publications = self.publication_set.filter(journal__publisher__oa_status='OA')[:1]
-            if publications:
-                self.pdf_url = publications[0].splash_url()
-                self.save()
-                return
-        # otherwise try the OAI sources
-        matches = OaiRecord.objects.filter(about=self.id,pdf_url__isnull=False)[:1]
-        if matches:
-            self.pdf_url = matches[0].pdf_url
+        self.pdf_url = None
+        publis = self.publication_set.all()
+        oa_idx = len(OA_STATUS_PREFERENCE)-1
+        for publi in publis:
+            cur_status = publi.oa_status()
+            try:
+                idx = OA_STATUS_PREFERENCE.index(cur_status)
+            except ValueError:
+                idx = len(OA_STATUS_PREFERENCE)
+            oa_idx = min(idx, oa_idx)
+            if OA_STATUS_CHOICES[oa_idx][0] == 'OA':
+                self.pdf_url = publi.splash_url()
+            if oa_idx == 0:
+                break
+        self.oa_status = OA_STATUS_CHOICES[oa_idx][0]
+        if not self.pdf_url:
+            matches = OaiRecord.objects.filter(
+                    about=self.id,pdf_url__isnull=False).order_by(
+                            '-source__oa', 'source__priority')[:1]
+            if matches:
+                self.pdf_url = matches[0].pdf_url
+                if matches[0].source.oa:
+                    self.oa_status = 'OA'
         self.save()
 
 # Researcher / Paper binary relation
@@ -229,8 +227,7 @@ class Publisher(models.Model):
         self.save()
         papers = Paper.objects.filter(publication__journal__publisher=self.pk)
         for p in papers:
-            p.update_oa_status()
-            p.update_pdf_url()
+            p.update_availability()
 
 # Journal data retrieved from RoMEO
 class Journal(models.Model):
@@ -276,6 +273,7 @@ class DisambiguationChoice(models.Model):
 
 # Publication of these papers (in journals or conference proceedings)
 class Publication(models.Model):
+    # TODO prepare this model for user input (allow for other URLs than DOIs)
     paper = models.ForeignKey(Paper)
     pubtype = models.CharField(max_length=64)
     title = models.CharField(max_length=512) # this is actually the *journal* title

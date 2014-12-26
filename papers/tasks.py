@@ -191,8 +191,7 @@ def fetch_dois_for_researcher(pk):
 def update_paper_statuses():
     papers = Paper.objects.all()
     for p in papers:
-        p.update_oa_status()
-        p.update_pdf_url()
+        p.update_availability()
 
 
 @shared_task
