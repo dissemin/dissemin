@@ -21,7 +21,5 @@ models/
 learning/dataset/
 learning/evaluate.py
 learning/gengraph.py
-learning/make_dataset.py
 learning/regression.py
-learning/train.py
 

@@ -310,6 +310,12 @@ class Publication(models.Model):
         if self.doi:
             return 'http://dx.doi.org/'+self.doi
 
+    def full_title(self):
+        if self.journal:
+            return self.journal.title
+        else:
+            return self.title
+
     def details_to_str(self):
         result = ''
         if self.issue or self.volume or self.pages or self.date:
