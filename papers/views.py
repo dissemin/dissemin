@@ -141,6 +141,8 @@ def searchView(request, **kwargs):
 
     # Sort
     queryset = queryset.order_by('-year')
+    # Make distinct
+    queryset = queryset.distinct()
 
     # Build the paginator
     paginator = Paginator(queryset, NB_RESULTS_PER_PAGE)
