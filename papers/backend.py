@@ -117,8 +117,7 @@ def merge_papers(first, second):
     Publication.objects.filter(paper=second.pk).update(paper=first.pk)
     second.delete()
     first.visibility = new_status
-    first.update_oa_status()
-    first.update_pdf_url()
+    first.update_availability()
 
 
 # Create a Publication entry based on the DOI metadata
@@ -161,8 +160,7 @@ def create_publication(paper, metadata):
             doi=doi, pubtype=pubtype, publisher=publisher,
             journal=journal)
     pub.save()
-    paper.update_oa_status()
-    paper.update_pdf_url()
+    paper.update_availability()
     return pub
 
 

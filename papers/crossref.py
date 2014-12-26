@@ -74,7 +74,7 @@ def fetch_metadata_by_DOI(doi):
     opener.addheaders = [('Accept','application/citeproc+json')]
     try:
         request = 'http://dx.doi.org/'+doi
-        response = urlopen_retry(request, opener=opener).read() # TODO is this unsecure ?
+        response = urlopen_retry(request, opener=opener).read() 
         parsed = json.loads(response)
         return parsed
     except HTTPError as e:

@@ -125,11 +125,9 @@ def parse_comma_name(name):
             last = words[last_initial_idx+1:]
 
         # CASE 6: we have no clue
-        # We simply cut roughly in the middle !
+        # We simply keep the last word as last name
         else:
-            cut_idx = len(words)/2
-            if len(words) == 3:
-                cut_idx = 2
+            cut_idx = len(words)-1
             first = words[:cut_idx]
             last = words[cut_idx:]
             
