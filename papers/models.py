@@ -359,6 +359,7 @@ class OaiRecord(models.Model):
     splash_url = models.URLField(max_length=1024, null=True, blank=True)
     pdf_url = models.URLField(max_length=1024, null=True, blank=True)
     description = models.TextField(null=True,blank=True)
+    keywords = models.TextField(null=True,blank=True)
 
     # Cached version of source.priority
     priority = models.IntegerField(default=1)

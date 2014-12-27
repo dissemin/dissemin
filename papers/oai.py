@@ -75,12 +75,14 @@ def add_oai_record(record, source, paper=None):
             merge_papers(paper, r.about)
         return
 
+    keywords = ' '.join(record[1]._map['subject'])
 
     r = OaiRecord(
             source=source,
             identifier=identifier,
             about=paper,
             description=curdesc,
+            keywords=keywords,
             pdf_url=pdf_url,
             splash_url=splash_url)
     r.save()
