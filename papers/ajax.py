@@ -70,20 +70,11 @@ def addResearcher(request):
             role = form.cleaned_data['role']
             homepage = form.cleaned_data['homepage']
 
-            name, created = Name.objects.get_or_create(full=iunaccent(first+' '+last),
-                    defaults={'first':first, 'last':last})
-            if not created and Researcher.objects.filter(name=name).count() > 0:
-                # we forbid the creation of two researchers with the same name,
-                # although our model would support it (TODO ?)
+            try:
+                researcher = create_researcher(first, last, dept, email, role, homepage)
+            except ValueError:
                 return HttpResponseForbidden('Researcher already present', content_type='text/plain')
-            researcher = Researcher(
-                    department=dept,
-                    email=email,
-                    role=role,
-                    homepage=homepage,
-                    name=name)
-            researcher.save()
-            name.update(is_known=True)
+
             return HttpResponse(json.dumps({
                 'id':researcher.id,
                 'name':first+' '+last}), content_type='application/javascript')

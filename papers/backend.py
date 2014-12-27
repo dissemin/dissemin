@@ -31,6 +31,26 @@ from papers.crossref import fetch_metadata_by_DOI
 from papers.romeo import fetch_journal
 from papers.name import parse_comma_name
 
+def create_researcher(first, last, dept, email, role, homepage):
+    name, created = Name.objects.get_or_create(full=iunaccent(first+' '+last),
+            defaults={'first':first, 'last':last})
+    if not created and Researcher.objects.filter(name=name).count() > 0:
+        # we forbid the creation of two researchers with the same name,
+        # although our model would support it (TODO ?)
+        raise ValueError
+
+    researcher = Researcher(
+            department=dept,
+            email=email,
+            role=role,
+            homepage=homepage,
+            name=name)
+    researcher.save()
+    name.is_known=True
+    name.save(update_fields=['is_known'])
+    return researcher
+
+
 def lookup_name(author_name):
     first_name = author_name[0][:MAX_NAME_LENGTH]
     last_name = author_name[1][:MAX_NAME_LENGTH]

@@ -29,23 +29,15 @@ def import_from_tsv(filename):
 
         first = fields[first_name_f]
         last = normalize_name_words(fields[last_name_f])
-        full = iunaccent(first+' '+last)
-        n, created = Name.get_or_create(first,last)
-        if created or not n.researcher:
-            r = Researcher(department=department, email=email)
-            r.save()
-            n.researcher = r
-        n.researcher.email = email
-        n.researcher.homepage = fields[url_f]
-        n.researcher.role = fields[role_f]
-        
+        homepage = fields[url_f]
+        role = fields[role_f]
+
+        researcher = create_researcher(first, last, department, email, role, homepage)
+       
         group = fields[group_f]
         if group:
             g, created = ResearchGroup.objects.get_or_create(name=group)
-            n.researcher.groups.add(g)
-
-        n.save()
-        n.researcher.save()
+            researcher.groups.add(g)
 
 
 import_from_tsv('data/dma')
