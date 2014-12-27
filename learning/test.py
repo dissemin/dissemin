@@ -72,7 +72,7 @@ for i in range(len(labels)):
 
 sc.train(features, labels, kernel='linear')
 print(sc.confusion(features, labels))
-# sc.plotClassification(features, labels)
+sc.plotClassification(features, labels)
 
 def testResearcher(pk):
     outf = open('learning/dataset/researcher-'+str(pk)+'.gdf', 'w')

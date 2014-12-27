@@ -29,13 +29,14 @@ from urllib2 import urlopen, URLError
 from urllib import urlencode
 import xml.etree.ElementTree as ET
 import unicodedata
+import datetime
 
 bielefeld_timeout = 10
 max_base_no_match = 30
 
 def fetch_papers_from_base_for_researcher(researcher):
-    for name in researcher.name_set.all():
-        fetch_papers_from_base_by_researcher_name((name.first,name.last))
+    name = researcher.name
+    fetch_papers_from_base_by_researcher_name((name.first,name.last))
 
 def fetch_papers_from_base_by_researcher_name(name):
     base_url = 'http://api.base-search.net/cgi-bin/BaseHttpSearchInterface.fcgi'
@@ -113,6 +114,9 @@ def add_base_document(doc, source):
         creators = [creators]
     author_names = map(parse_comma_name, creators)
     
+    # TODO: change this code: fetch the date first, and if it fails,
+    # fall back on dcyear, but not the contrary !!!
+    # -> we want a reliable pubdate
     try:
         year = int(metadata['dcyear'])
     except ValueError as e:
@@ -131,6 +135,7 @@ def add_base_document(doc, source):
             print("Warning, skipping document because no year or date is provided\n"+
                 'In document "'+title+'"')
             return False
+    pubdate = datetime.date(year=year,month=01,day=01)
     
     # TODO: this would be more flexible (but should be done for OAI and CrossRef as well -> refactor)
     # researcher_found = False
@@ -173,7 +178,7 @@ def add_base_document(doc, source):
     if not (pdf_url or splash_url):
         return False
 
-    paper = get_or_create_paper(title, model_names, year, doi, 'CANDIDATE')
+    paper = get_or_create_paper(title, model_names, pubdate, doi, 'CANDIDATE')
     
     record = OaiRecord(
             source=source,

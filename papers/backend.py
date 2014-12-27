@@ -23,7 +23,7 @@ from __future__ import unicode_literals
 from django.core.exceptions import ObjectDoesNotExist
 import re
 
-from papers.utils import to_plain_name, create_paper_fingerprint
+from papers.utils import to_plain_name, create_paper_fingerprint, date_from_dateparts
 from papers.errors import MetadataSourceException
 from papers.models import *
 from papers.doi import to_doi
@@ -50,7 +50,7 @@ def save_if_not_saved(obj):
     if not obj.pk:
         obj.save()
 
-def get_or_create_paper(title, author_names, year, doi=None, visibility='VISIBLE'):
+def get_or_create_paper(title, author_names, pubdate, doi=None, visibility='VISIBLE'):
     # If a DOI is present, first look it up
     if doi:
         matches = Publication.objects.filter(doi__exact=doi)
@@ -61,8 +61,8 @@ def get_or_create_paper(title, author_names, year, doi=None, visibility='VISIBLE
                 paper.save(update_fields=['visibility'])
             return matches[0].paper
 
-    if not title or not author_names or not year:
-        raise ValueError("A title, year and authors have to be provided to create a paper.")
+    if not title or not author_names or not pubdate:
+        raise ValueError("A title, pubdate and authors have to be provided to create a paper.")
 
     # Otherwise look up the fingerprint
     plain_names = map(to_plain_name, author_names)
@@ -76,12 +76,21 @@ def get_or_create_paper(title, author_names, year, doi=None, visibility='VISIBLE
             p.visibility = 'VISIBLE'
             p.save(update_fields=['visibility'])
     else:
-        p = Paper(title=title,year=year,fingerprint=fp,visibility=visibility)
+        year = pubdate.year
+        p = Paper(title=title,
+                year=year,
+                pubdate=pubdate,
+                fingerprint=fp,
+                visibility=visibility)
         p.save()
         authors = []
         for author_name in author_names:
             save_if_not_saved(author_name)
             a = Author(name=author_name, paper=p)
+            # TODO: TEMPORARY:
+            if author_name.is_known:
+                a.researcher = Researcher.objects.get(name=author_name)
+            # TO BE REPLACED BY the clustering algo in the following loop
             a.save()
             authors.append(a)
         for author in authors:
@@ -140,7 +149,10 @@ def create_publication(paper, metadata):
     pages = metadata.get('page',None)
     issue = metadata.get('issue',None)
     date_dict = metadata.get('issued',dict())
-    date = '-'.join(map(str,date_dict.get('date-parts',[[]])[0])) # TODO this is horribly ugly
+    pubdate = None
+    if 'date-parts' in date_dict:
+        dateparts = date_dict.get('date-parts')[0]
+        pubdate = date_from_dateparts(dateparts)
     # for instance it outputs dates like 2014-2-3
     publisher = metadata.get('publisher', None)
     if publisher:
@@ -156,10 +168,15 @@ def create_publication(paper, metadata):
 
 
     pub = Publication(title=title, issue=issue, volume=volume,
-            date=date, paper=paper, pages=pages,
+            pubdate=pubdate, paper=paper, pages=pages,
             doi=doi, pubtype=pubtype, publisher=publisher,
             journal=journal)
     pub.save()
+    cur_pubdate = paper.pubdate
+    if type(cur_pubdate) != type(pubdate):
+        cur_pubdate = cur_pubdate.date()
+    if pubdate and pubdate > cur_pubdate:
+        paper.pubdate = pubdate
     paper.update_availability()
     return pub
 

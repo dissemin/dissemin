@@ -134,7 +134,13 @@ class Name(models.Model):
 class Paper(models.Model):
     title = models.CharField(max_length=1024)
     fingerprint = models.CharField(max_length=64)
+    
+    # Year of publication, if that means anything (updated when we add OaiRecords or Publications)
     year = models.IntegerField()
+    # Approximate publication date.
+    # For instance if we only know it is in 2014 we'll put 2014-01-01
+    pubdate = models.DateField()
+
     last_modified = models.DateField(auto_now=True)
     visibility = models.CharField(max_length=32, default='VISIBLE')
 
@@ -295,7 +301,7 @@ class Publication(models.Model):
     issue = models.CharField(max_length=64, blank=True, null=True)
     volume = models.CharField(max_length=64, blank=True, null=True)
     pages = models.CharField(max_length=64, blank=True, null=True)
-    date = models.CharField(max_length=128, blank=True, null=True)
+    pubdate = models.DateField(blank=True, null=True)
     publisher = models.CharField(max_length=512, blank=True, null=True)
     doi = models.CharField(max_length=1024, unique=True, blank=True, null=True) # in theory, there is no limit
     def oa_status(self):
@@ -316,7 +322,7 @@ class Publication(models.Model):
 
     def details_to_str(self):
         result = ''
-        if self.issue or self.volume or self.pages or self.date:
+        if self.issue or self.volume or self.pages or self.pubdate:
             result += ', '
         if self.issue:
             result += self.issue
@@ -326,8 +332,8 @@ class Publication(models.Model):
             result += ', '
         if self.pages:
             result += self.pages+', '
-        if self.date:
-            result += self.date
+        if self.pubdate:
+            result += str(self.pubdate.year)
         return result
 
     def __unicode__(self):

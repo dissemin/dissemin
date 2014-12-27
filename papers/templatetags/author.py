@@ -21,14 +21,14 @@ def publication(publi):
         result = '<a href="'+reverse('journal', kwargs={'journal':publi.journal.id})+'"><emph>'+escape(unicode(publi.journal.title))+'</emph></a>'
     else:
         result = escape(unicode(publi.title))
-    if publi.issue or publi.volume or publi.pages or publi.date:
+    if publi.issue or publi.volume or publi.pages or publi.pubdate:
         result += ', '
     if publi.issue:
         result += '<strong>'+escape(unicode(publi.issue))+'</strong>'
     if publi.volume:
         result += '('+escape(unicode(publi.volume))+')'
-    if publi.issue or publi.volume:
+    if (publi.issue or publi.volume) and publi.pubdate:
         result += ', '
-    if publi.date:
-        result += escape(unicode(publi.date))
+    if publi.pubdate:
+        result += escape(unicode(str(publi.pubdate.year)))
     return mark_safe(result)

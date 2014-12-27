@@ -120,14 +120,14 @@ def add_core_document(doc, source):
     identifier = None
     splash_url = None
     pdf_url = None
-    year = None
+    pubdate = None
     doi = None
     description = None
     
     # TO BE CONTINUED
 
     if False:
-        paper = get_or_create_paper(title, authors, year, doi, 'CANDIDATE')
+        paper = get_or_create_paper(title, authors, pubdate, doi, 'CANDIDATE')
 
         record = OaiRecord(
                 source=source,

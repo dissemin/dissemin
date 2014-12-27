@@ -80,18 +80,15 @@ def process_records(listRecords):
             if not doi:
                 doi = to_doi(identifier)
 
-        # A year for the publication is necessary
+        # A publication date is necessary
         pubdate = find_earliest_oai_date(record)
-        year = None
-        if pubdate:
-            year = pubdate.year
-        else:
+        if not pubdate:
             print "No publication date, skipping"
             continue
 
 
         logger.info('Saving record %s' % record[0].identifier())
-        paper = get_or_create_paper(metadata['title'][0], authors, year, doi)
+        paper = get_or_create_paper(metadata['title'][0], authors, pubdate, doi)
 
         # Save the record
         add_oai_record(record, source, paper)
@@ -107,8 +104,7 @@ def fetch_everything_for_researcher(pk):
 @shared_task
 def fetch_records_for_researcher(pk):
     researcher = Researcher.objects.get(pk=pk)
-    for name in researcher.name_set.all():
-        fetch_records_for_name(name)
+    fetch_records_for_name(researcher.name)
 
 def fetch_records_for_name(name):
     # First try with the comma-separated name
@@ -141,47 +137,50 @@ def fetch_dois_for_researcher(pk):
     researcher.save()
     nb_records = 0
 
-    for name in researcher.name_set.all():
-        lst = fetch_papers_from_crossref_by_researcher_name(name)
+    name = researcher.name
+    lst = fetch_papers_from_crossref_by_researcher_name(name)
 
-        researcher.status = 'Saving records'
-        researcher.save()
+    researcher.status = 'Saving records'
+    researcher.save()
 
-        count = 0
-        for metadata in lst:
-            # the upstream function ensures that there is a non-empty title
-            if not 'DOI' in metadata or not metadata['DOI']:
-                print "No DOI, skipping"
-                continue
-            doi = to_doi(metadata['DOI'])
+    count = 0
+    for metadata in lst:
+        # the upstream function ensures that there is a non-empty title
+        if not 'DOI' in metadata or not metadata['DOI']:
+            print "No DOI, skipping"
+            continue
+        doi = to_doi(metadata['DOI'])
 
+        try:
+            d = Publication.objects.get(doi=doi)
+            paper = d.paper
+        except ObjectDoesNotExist:
+            # TODO also parse plain dates, as in the following DOI:
+            # http://dx.doi.org/10.13140/2.1.4250.8161
+            # By the way, the following code is ugly
+            pubdate = None
             try:
-                d = Publication.objects.get(doi=doi)
-                paper = d.paper
-            except ObjectDoesNotExist:
-                year = None
+                pubdate = date_from_dateparts(metadata['issued']['date-parts'][0])
+            except Exception:
+                pass
+            if not pubdate:
                 try:
-                    year = int(metadata['issued']['date-parts'][0][0])
+                    pubdate = date_from_dateparts(['deposited']['date-parts'][0])
                 except Exception:
                     pass
-                if not year:
-                    try:
-                        year = int(metadata['deposited']['date-parts'][0][0])
-                    except Exception:
-                        pass
 
-                if not year:
-                    print "No year, skipping"
-                    continue
-                
-                title = metadata['title']
-                authors = map(lookup_name, map(convert_to_name_pair, metadata['author']))
-                paper = get_or_create_paper(title, authors, year) # don't let this function
-                # create the publication, because it would re-fetch the metadata from CrossRef
-                create_publication(paper, metadata)
+            if not pubdate:
+                print "No pubdate, skipping"
+                continue
+            
+            title = metadata['title']
+            authors = map(lookup_name, map(convert_to_name_pair, metadata['author']))
+            paper = get_or_create_paper(title, authors, pubdate) # don't let this function
+            # create the publication, because it would re-fetch the metadata from CrossRef
+            create_publication(paper, metadata)
 
-                count += 1
-        nb_records += count
+            count += 1
+    nb_records += count
 
     researcher.status = 'OK, %d records processed.' % nb_records
     researcher.save()

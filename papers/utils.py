@@ -21,6 +21,7 @@
 from __future__ import unicode_literals
 import re
 import hashlib
+import datetime
 from unidecode import unidecode
 
 from time import sleep
@@ -104,6 +105,7 @@ def create_paper_plain_fingerprint(title, authors):
         if not author:
             continue
         # TODO remove the - in "J.-W. Dupont" TODO TODO
+        # TODO take into account only the first initial
         author = (remove_diacritics(author[0]),remove_diacritics(author[1]))
         # Initials of the given names
         initials = map(lambda x: x[0].lower(), split_words(author[0]))
@@ -168,4 +170,11 @@ def urlopen_retry(url, **kwargs):# data, timeout, retries, delay, backoff):
             delay=delay*backoff,
             backoff=backoff)
 
+### Partial date representation
+
+def date_from_dateparts(dateparts):
+    year = 1970 if len(dateparts) < 1 else dateparts[0]
+    month = 01 if len(dateparts) < 2 else dateparts[1]
+    day = 01 if len(dateparts) < 3 else dateparts[2]
+    return datetime.date(year=year, month=month, day=day)
 

@@ -140,7 +140,7 @@ def searchView(request, **kwargs):
         search_description = _('All papers')
 
     # Sort
-    queryset = queryset.order_by('-year')
+    queryset = queryset.order_by('-pubdate')
     # Make distinct
     queryset = queryset.distinct()
 
