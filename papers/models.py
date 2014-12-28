@@ -38,6 +38,7 @@ PDF_STATUS_CHOICES = [('OK', _('Available')),
 
 VISIBILITY_CHOICES = [('VISIBLE', _('Visible')),
                       ('CANDIDATE', _('Candidate')),
+                      ('NOT_RELEVANT', _('Not relevant')),
                       ('DELETED', _('Deleted')),
                       ]
 
@@ -360,6 +361,7 @@ class OaiRecord(models.Model):
     pdf_url = models.URLField(max_length=1024, null=True, blank=True)
     description = models.TextField(null=True,blank=True)
     keywords = models.TextField(null=True,blank=True)
+    contributors = models.CharField(max_length=2048, null=True, blank=True)
 
     # Cached version of source.priority
     priority = models.IntegerField(default=1)

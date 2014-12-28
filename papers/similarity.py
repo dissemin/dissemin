@@ -21,7 +21,7 @@
 from __future__ import unicode_literals, print_function
 
 from papers.models import Name, Author, Researcher
-from papers.utils import match_names, iunaccent
+from papers.utils import match_names, iunaccent, nocomma, filter_punctuation
 from nltk.tokenize.punkt import PunktWordTokenizer
 from sklearn import svm
 from sklearn.metrics import confusion_matrix
@@ -74,9 +74,59 @@ class CoauthorsSimilarity(SimilarityFeature):
                     score += 1.
         return score
 
+def intersectionScore(model, strA, strB, explain=False):
+    """
+    Returns the sum of the -log scores of the common words in the two strings
+    """
+    threshold = 4
+    wordsA = set(filter_punctuation(tokenize(strA)))
+    wordsB = set(filter_punctuation(tokenize(strB)))
+    intersection = wordsA & wordsB
+    union = wordsA | wordsB
+    if explain:
+        for w in intersection:
+            print(w+'\t'+str(model.lp(w)))
+    wordScores = map(model.lp, intersection)
+    wordScores = filter(lambda lp: -lp >= threshold, wordScores)
+    interScore = -sum(wordScores)
+    return interScore# / len(union)
+
+
+class TitleSimilarity(SimilarityFeature):
+    """
+    Similarity between the titles
+    """
+    def __init__(self, languageModel):
+        super(TitleSimilarity, self).__init__()
+        self.languageModel = languageModel
+
+    def compute(self, authorA, authorB, explain=False):
+        ta = authorA.paper.title
+        tb = authorB.paper.title
+        return intersectionScore(self.languageModel, ta, tb, explain)
+
+class ContributorsSimilarity(SimilarityFeature):
+    """
+    Similarity between the contributors (institutions according to HAL)
+    """
+    def __init__(self, languageModel):
+        super(ContributorsSimilarity, self).__init__()
+        self.languageModel = languageModel
+
+    def compute(self, authorA, authorB, explain=False):
+        contributorsA = [r.contributors for r in authorA.paper.oairecord_set.all()]
+        contributorsB = [r.contributors for r in authorB.paper.oairecord_set.all()]
+        contributorsA = filter(lambda x: x != None, contributorsA)
+        contributorsB = filter(lambda x: x != None, contributorsB)
+        ta = ' '.join(contributorsA)
+        tb = ' '.join(contributorsB)
+        return intersectionScore(self.languageModel, ta, tb, explain)
+
+
 class PublicationSimilarity(SimilarityFeature):
     """
-    Similarity between the publications associated to the two papers
+    Similarity between the publications associated to the two papers.
+    The keywords provided through OAI-PMH are also taken into account.
     """
     def __init__(self, languageModel):
         super(PublicationSimilarity, self).__init__()
@@ -85,40 +135,43 @@ class PublicationSimilarity(SimilarityFeature):
     def compute(self, authorA, authorB, explain=False):
         pubsA = authorA.paper.publication_set.all()
         pubsB = authorB.paper.publication_set.all()
-        nbPubPairs = 0
+        allA = [a.full_title() for a in pubsA]
+        for r in authorA.paper.oairecord_set.all():
+            if r.keywords:
+                allA.append(r.keywords)
+        allB = [a.full_title() for a in pubsB]
+        for r in authorB.paper.oairecord_set.all():
+            if r.keywords:
+                allB.append(r.keywords)
+
+        nbPairs = 0
         totalScore = 0.
-        for a in pubsA:
-            for b in pubsB:
-                nbPubPairs += 1
-                ta = a.full_title()
-                tb = b.full_title()
+        for ta in allA:
+            for tb in allB:
+                nbPairs += 1
                 if ta == tb:
-                    totalScore += 50.0
+                    totalScore += 40.0
+                    # maxScore = max(40.0,maxScore)
                 else:
-                    wordsA = set(tokenize(ta))
-                    wordsB = set(tokenize(tb))
-                    intersection = wordsA & wordsB
-                    union = wordsA | wordsB
-                    if explain:
-                        for w in intersection:
-                            print(w+'\t'+str(self.languageModel.lp(w)))
-                    interScore = -sum([self.languageModel.lp(w) for w in intersection])
-                    totalScore += interScore# / len(union)
-        if nbPubPairs:
-            return totalScore / nbPubPairs
+                    totalScore += intersectionScore(self.languageModel, ta, tb, explain)
+              
+        if nbPairs:
+            return totalScore / nbPairs
         else:
             return 0.
 
-def nocomma(lst):
-    lst = map(lambda x: str(x).replace(',','').replace('\n',''), lst)
-    lst = [x if x else ' ' for x in lst]
-    return ','.join(lst)
-
 class SimilarityClassifier(object):
-    def __init__(self, publicationModel):
-        self.simFeatures = [CoauthorsSimilarity(), PublicationSimilarity(publicationModel)]
+    def __init__(self, publicationModel, contributorsModel=None):
+        if not contributorsModel:
+            contributorsModel = publicationModel
+        self.simFeatures = [
+                CoauthorsSimilarity(),
+                PublicationSimilarity(publicationModel),
+                TitleSimilarity(publicationModel),
+                ContributorsSimilarity(contributorsModel),
+                ]
         self.classifier = None
-        self.positiveSampleWeight = 0.25
+        self.positiveSampleWeight = 0.1
     
     def _computeFeatures(self, authorA, authorB):
         features = []

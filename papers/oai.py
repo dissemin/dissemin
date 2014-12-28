@@ -62,10 +62,15 @@ def add_oai_record(record, source, paper=None):
         except KeyError:
             print "Warning, invalid extractor for source "+source.name
 
+    keywords = ' '.join(record[1]._map['subject'])
+    contributors = ' '.join(record[1]._map['contributor'])
+
     matching = OaiRecord.objects.filter(identifier=identifier)
     if len(matching) > 0:
         r = matching[0]
         r.description = curdesc
+        r.keywords = keywords
+        r.contributors = contributors
         if pdf_url:
             r.pdf_url = pdf_url
         if splash_url:
@@ -75,7 +80,6 @@ def add_oai_record(record, source, paper=None):
             merge_papers(paper, r.about)
         return
 
-    keywords = ' '.join(record[1]._map['subject'])
 
     r = OaiRecord(
             source=source,
@@ -83,6 +87,7 @@ def add_oai_record(record, source, paper=None):
             about=paper,
             description=curdesc,
             keywords=keywords,
+            contributors=contributors,
             pdf_url=pdf_url,
             splash_url=splash_url)
     r.save()

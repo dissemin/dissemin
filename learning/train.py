@@ -26,6 +26,7 @@ from learning.model import *
 
 
 w = WordCount()
+w_contrib = WordCount()
 count = 0
 for p in OaiRecord.objects.filter(about__visibility="VISIBLE"):
     if count % 100 == 0:
@@ -33,6 +34,11 @@ for p in OaiRecord.objects.filter(about__visibility="VISIBLE"):
     count += 1
     if p.description and len(p.description) > 50:
         w.feedLine(p.description)
+    if p.keywords:
+        w.feedLine(p.keywords)
+    if p.contributors:
+        w_contrib.feedLine(p.contributors)
+        
 count = 0
 for p in Publication.objects.filter(paper__visibility="VISIBLE"):
     if count % 100 == 0:
@@ -41,6 +47,7 @@ for p in Publication.objects.filter(paper__visibility="VISIBLE"):
     w.feedLine(p.full_title())
     w.feedLine(p.paper.title)
 w.save('models/everything.pkl')
+w_contrib.save('models/contributors.pkl')
 
 
 exit(0)

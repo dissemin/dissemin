@@ -35,9 +35,11 @@ for line in open('learning/dataset/author_ids', 'r'):
 
 all_papers_model = WordCount()
 all_papers_model.load('models/everything.pkl')
-sc = SimilarityClassifier(all_papers_model)
+contributors_model = WordCount()
+contributors_model.load('models/contributors.pkl')
+sc = SimilarityClassifier(all_papers_model, contributors_model)
 
-recompute = False
+recompute = True
 if recompute:
     print("Getting authors")
     authors = sc._toAuthorPairs(author_ids)
@@ -57,22 +59,25 @@ else:
         features.append(f)
     inf.close()
 
+sc.train(features, labels, kernel='linear')
+
 def paper_url(pk):
     print('http://localhost:8000/paper/'+str(Author.objects.get(pk=pk).paper_id))
+
 print("Curious papers")
 pubSc = sc.simFeatures[1]
 for i in range(len(labels)):
-    if features[i][1] > 10.0 and labels[i] == 0:
+    prediction = sc.classifier.predict(features[i])[0]
+    if labels[i] == 0 and prediction == 1:
         print("#####")
         paper_url(author_ids[i][0])
         paper_url(author_ids[i][1])
-        print("Explanation")
-        pubSc.compute(Author.objects.get(pk=author_ids[i][0]),
-                Author.objects.get(pk=author_ids[i][1]), explain=True)
+        #print("Explanation")
+        #pubSc.compute(Author.objects.get(pk=author_ids[i][0]),
+        #        Author.objects.get(pk=author_ids[i][1]), explain=True)
 
-sc.train(features, labels, kernel='linear')
 print(sc.confusion(features, labels))
-sc.plotClassification(features, labels)
+#sc.plotClassification(features, labels)
 
 def testResearcher(pk):
     outf = open('learning/dataset/researcher-'+str(pk)+'.gdf', 'w')
@@ -87,5 +92,4 @@ def testResearcher(pk):
 #    w.feedLine(p.title)
 #
 #w.save('titles.wc')
-
 

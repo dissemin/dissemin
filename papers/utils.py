@@ -28,6 +28,19 @@ from time import sleep
 import socket
 from urllib2 import urlopen, build_opener
 
+filter_punctuation_alphanum_regex = re.compile(r'\w')
+def filter_punctuation(lst):
+    return filter(lambda x: filter_punctuation_alphanum_regex.findall(x) != [], lst)
+
+def nocomma(lst):
+    """
+    Join fields using ',' ensuring that it does not appear in the fields
+    """
+    lst = map(lambda x: str(x).replace(',','').replace('\n',''), lst)
+    lst = [x if x else ' ' for x in lst]
+    return ','.join(lst)
+
+
 def match_names(a,b):
     if not a or not b:
         return False

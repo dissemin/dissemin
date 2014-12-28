@@ -82,4 +82,8 @@ makeTextEditable($('#paperTitle'), '/ajax/change-paper', '{{ paper.id }}', 'titl
 <p><a href="{{ publi | doi_to_url }}">{{ publi.publisher|default:publisher }}</a> {% trans "via DOI" %}</p>
 {% endfor %}
 </div>
+
+{% if request.user.is_superuser %}
+<p>Visibility: {{ paper.visibility }}</p>
+{% endif %}
 {% endblock %}
