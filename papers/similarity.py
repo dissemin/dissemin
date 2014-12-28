@@ -25,6 +25,7 @@ from papers.utils import match_names, iunaccent, nocomma, filter_punctuation
 from nltk.tokenize.punkt import PunktWordTokenizer
 from sklearn import svm
 from sklearn.metrics import confusion_matrix
+import cPickle
 import numpy as np
 import matplotlib.pyplot as plt
 from unidecode import unidecode
@@ -161,7 +162,14 @@ class PublicationSimilarity(SimilarityFeature):
             return 0.
 
 class SimilarityClassifier(object):
-    def __init__(self, publicationModel, contributorsModel=None):
+    def __init__(self, **kwargs):
+        if 'filename' in kwargs:
+            self.load(kwargs['filename'])
+            return
+        elif not 'languageModel' in kwargs:
+            raise ValueError('A language model has to be provided.')
+        publicationModel = kwargs['languageModel']
+        contributorsModel = kwargs.get('contributorsModel', publicationModel)
         if not contributorsModel:
             contributorsModel = publicationModel
         self.simFeatures = [
@@ -237,5 +245,16 @@ class SimilarityClassifier(object):
                 if self.classify(authors[i],authors[j]):
                     print(nocomma([authors[i].pk,authors[j].pk]), file=outfile)
 
+    def load(self, fname):
+        f = open(fname, 'rb')
+        dct = cPickle.load(f)
+        f.close()
+        self.__dict__.update(dct)
+
+    def save(self, fname):
+        f = open(fname, 'wb')
+        cPickle.dump(self.__dict__, f)
+        f.close()
+ 
 
 

@@ -37,7 +37,7 @@ all_papers_model = WordCount()
 all_papers_model.load('models/everything.pkl')
 contributors_model = WordCount()
 contributors_model.load('models/contributors.pkl')
-sc = SimilarityClassifier(all_papers_model, contributors_model)
+sc = SimilarityClassifier(languageModel=all_papers_model, contributorsModel=contributors_model)
 
 recompute = True
 if recompute:
@@ -78,6 +78,7 @@ for i in range(len(labels)):
 
 print(sc.confusion(features, labels))
 #sc.plotClassification(features, labels)
+sc.save('models/similarity.pkl')
 
 def testResearcher(pk):
     outf = open('learning/dataset/researcher-'+str(pk)+'.gdf', 'w')

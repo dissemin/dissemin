@@ -193,16 +193,70 @@ class Paper(models.Model):
 class Author(models.Model):
     paper = models.ForeignKey(Paper)
     name = models.ForeignKey(Name)
+    cluster = models.ForeignKey('Author', blank=True, null=True, related_name='clusterrel')
+    num_children = models.IntegerField(default=1)
+    similar = models.ForeignKey('Author', blank=True, null=True, related_name='similarrel')
     researcher = models.ForeignKey(Researcher, blank=True, null=True, on_delete=models.SET_NULL)
     def __unicode__(self):
         return unicode(self.name)
+    def get_cluster_id(self):
+        """
+        This is the "find" in "Union Find".
+        """
+        if not self.cluster:
+            return self.id
+        elif self.cluster_id != self.id: # it is supposed to be the case
+            result = self.cluster.get_cluster_id()
+            if result != self.cluster_id:
+                self.cluster_id = result
+                self.save(update_fields=['cluster_id'])
+            return result
+        raise ValueError('Invalid cluster id (loop)')
+
+    def get_cluster(self):
+        i = self.get_cluster_id()
+        if i != self.id:
+            return Author.objects.get(pk=i)
+        return self
+
+    def merge_with(self, author):
+        """
+        Merges the clusters of two authors
+        """
+        cur_cluster_id = self.get_cluster_id()
+        if cur_cluster_id != self.id:
+            cur_cluster = Author.objects.get(pk=cur_cluster_id)
+        else:
+            cur_cluster = self
+        new_cluster_id = author.get_cluster_id()
+        if cur_cluster_id != new_cluster_id:
+            new_cluster = Author.objects.get(pk=new_cluster_id)
+            cur_cluster.cluster = new_cluster
+            cur_cluster.save(update_fields=['cluster'])
+            new_cluster.num_children += cur_cluster.num_children
+            if not new_cluster.researcher and cur_cluster.researcher:
+                new_cluster.researcher = cur_cluster.researcher
+            new_cluster.save(update_fields=['num_children', 'researcher'])
+
+    def flatten_cluster(self, upstream_root=None):
+        """
+        Flattens the cluster rooted in self, using upstream_root if provided,
+        or as the root if None
+        """
+        if not upstream_root:
+            upstream_root = self
+        else:
+            self.cluster = upstream_root
+            if upstream_root.researcher:
+                self.researcher = upstream_root.researcher()
+            self.save()
+        children = self.clusterrel_set.all()
+        for child in children:
+            child.flatten_cluster(upstream_root)
+
     @property
     def is_known(self):
         return self.researcher != None
-    def runClustering(self):
-        # TODO this method is supposed to update name.is_known if needed
-        # TODO not implemented
-        return True
 
 # Publisher associated with a journal
 class Publisher(models.Model):
