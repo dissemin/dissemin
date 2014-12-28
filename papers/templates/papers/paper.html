@@ -89,7 +89,7 @@ makeTextEditable($('#paperTitle'), '/ajax/change-paper', '{{ paper.id }}', 'titl
 {% for a in paper.author_set.all %}
 <p>{{a}}: 
 {% if a.cluster %}
-<a href="{% url 'paper' a.paper %}">{{ a.paper }}</a>
+<a href="{% url 'paper' a.paper.pk %}">{{ a.paper }}</a>
 {% else %}
 itself
 {% endif %}
