@@ -1,14 +1,14 @@
 # -*- encoding: utf-8 -*-
-from __future__ import unicode_literals
+from __future__ import unicode_literals, print_function
 
 from papers.similarity import SimilarityClassifier
 from papers.models import Author
 import random
 
-authorSimilarityClassifier = SimilarityClassifier(filename='models/similarity.pkl')
+# authorSimilarityClassifier = SimilarityClassifier(filename='models/similarity.pkl')
 
 class ClusteringContext(object):
-    def __init__(self, author_queryset):
+    def __init__(self, author_queryset, sc):
         """
         Caveat: the author_queryset has to be closed under the "children" relation.
         """
@@ -17,6 +17,7 @@ class ClusteringContext(object):
         self.similar = dict()
         self.children = dict()
         self.cluster_ids = set()
+        self.sc = sc
         for author in author_queryset:
             pk = author.pk
             self.authors[pk] = author
@@ -93,7 +94,7 @@ class ClusteringContext(object):
             self.children[new_root].append(old_root)
             self.cluster_ids.discard(old_root)
 
-    def runClustering(self, target, order_pk=False):
+    def runClustering(self, target, order_pk=False, logf=None):
         # TODO this method is supposed to update name.is_known if needed
         # for now, it is not required, but it will be when we introduce a
         # better name similarity function
@@ -106,18 +107,21 @@ class ClusteringContext(object):
             clusters = filter(lambda x: x < target, self.cluster_ids)
         else:
             clusters = self.clusters.copy()
-        print "Number of clusters: "+str(len(clusters))
-        print " ".join([str(self.num_children(x)) for x in clusters])
+        print("Number of clusters: "+str(len(clusters)))
+        print(" ".join([str(self.num_children(x)) for x in clusters]))
 
         # STEP 2: for each cluster, compute similarity
         nb_edges_added = 0
         for cid in clusters:
+            print("C n°"+str(cid))
             cluster_contents = self.children[cid]
             to_check = self.sample_with_multiplicity(NB_TESTS_WITHIN_CLUSTER, cid)
             # to_check = random.sample(cluster_contents, nb_tests)
             match_found = False
             for author in to_check:
-                similar = authorSimilarityClassifier.classify(self.authors[author], self.authors[target])
+                similar = self.sc.classify(self.authors[author], self.authors[target])
+                print("   "+str(target)+"-"+str(author)+"\t"+str(similar))
+                print(str(self.authors[author].pk)+"-"+str(self.authors[target].pk)+"\t"+str(similar), file=logf)
                 if similar:
                     match_found = True
                     self.similar[target] = author
@@ -126,7 +130,7 @@ class ClusteringContext(object):
                     break
             if match_found:
                 nb_edges_added += 1
-        print str(nb_edges_added)+" edges added"
+        print(str(nb_edges_added)+" edges added")
 
         # STEP 3: if we have ended up in a cluster associated with a researcher, fine
 

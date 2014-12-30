@@ -20,11 +20,28 @@
 
 
 from __future__ import print_function
-from random import randint
+from random import randint, sample
 
 from papers.models import *
 
 out = open('learning/dataset/author_ids', 'w')
+
+def indices_same_set(n):
+    r = []
+    for i in range(n):
+        for j in range(i):
+            r.append((i,j))
+    return r
+
+def indices_two_sets(n,p):
+    r = []
+    for i in range(n):
+        for j in range(p):
+            r.append((i,j))
+    return r
+
+def sample2(lst, nb_samples):
+    return sample(lst, min(len(lst), nb_samples))
 
 for researcher in Researcher.objects.filter(department_id=21):
     authors = Author.objects.filter(researcher=researcher,paper__year__gt=2012)
@@ -32,20 +49,16 @@ for researcher in Researcher.objects.filter(department_id=21):
     authors_invalid = list(authors.filter(paper__visibility='DELETED'))
     nb_valid = len(authors_valid)
     nb_invalid = len(authors_invalid)
-    for a in authors_valid:
+    indices_valid = sample2(indices_same_set(nb_valid), 2*nb_valid)
+    indices_invalid = sample2(indices_two_sets(nb_valid, nb_invalid), 2*(nb_invalid+nb_valid))
+
+    for (i,j) in indices_valid:
         # Generate positive training examples
-        for k in range(1):
-            a2 = authors_valid[randint(0,nb_valid-1)]
-            print('\t'.join([str(a.pk),str(a2.pk),'1']), file=out)
+        print('\t'.join([str(authors_valid[i].pk),str(authors_valid[j].pk),'1']), file=out)
+
+    for (i,j) in indices_invalid:
         # Generate negative training examples
-        if nb_invalid:
-            a3 = authors_invalid[randint(0,nb_invalid-1)]
-            print('\t'.join([str(a.pk),str(a3.pk),'0']), file=out)
-    for a in authors_invalid:
-        # Generate negative training examples
-        if nb_valid:
-            a2 = authors_valid[randint(0,nb_valid-1)]
-            print('\t'.join([str(a.pk),str(a2.pk),'0']), file=out)
+        print('\t'.join([str(authors_valid[i].pk),str(authors_invalid[j].pk),'0']), file=out)
 
 #for p in Paper.objects.filter(author__name__researcher__department_id=24,year__gt=2012):
 #    visible = 0

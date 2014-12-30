@@ -179,7 +179,7 @@ class SimilarityClassifier(object):
                 ContributorsSimilarity(contributorsModel),
                 ]
         self.classifier = None
-        self.positiveSampleWeight = 0.1
+        self.positiveSampleWeight = 0.15
     
     def _computeFeatures(self, authorA, authorB):
         features = []
@@ -230,7 +230,7 @@ class SimilarityClassifier(object):
         plt.yticks(())
         plt.show()
 
-    def outputGraph(self, author_set, outfile):
+    def outputGraph(self, author_set, outfile, logf):
         print('nodedef>name VARCHAR,label VARCHAR,pid VARCHAR,visibility VARCHAR', file=outfile)
         for author in author_set:
             paper = author.paper
@@ -242,7 +242,9 @@ class SimilarityClassifier(object):
         authors = list(author_set)
         for i in range(len(authors)):
             for j in range(i):
-                if self.classify(authors[i],authors[j]):
+                output = self.classify(authors[i],authors[j])
+                print(str(authors[i].pk)+"-"+str(authors[j].pk)+"\t"+str(output), file=logf)
+                if output: 
                     print(nocomma([authors[i].pk,authors[j].pk]), file=outfile)
 
     def load(self, fname):

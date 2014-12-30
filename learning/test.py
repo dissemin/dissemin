@@ -39,7 +39,7 @@ contributors_model = WordCount()
 contributors_model.load('models/contributors.pkl')
 sc = SimilarityClassifier(languageModel=all_papers_model, contributorsModel=contributors_model)
 
-recompute = True
+recompute = False
 if recompute:
     print("Getting authors")
     authors = sc._toAuthorPairs(author_ids)
@@ -48,7 +48,7 @@ if recompute:
     print("Writing features back")
     outf = open('learning/dataset/author-features', 'w')
     for i in range(len(labels)):
-        print('\t'.join([str(features[i][0]), str(features[i][1])]), file=outf)
+        print('\t'.join(map(lambda x: str(x), features[i])), file=outf)
 
     outf.close()
 else:
@@ -59,32 +59,37 @@ else:
         features.append(f)
     inf.close()
 
-sc.train(features, labels, kernel='linear')
+if True:
+    sc.train(features, labels, kernel='linear')
 
-def paper_url(pk):
-    print('http://localhost:8000/paper/'+str(Author.objects.get(pk=pk).paper_id))
+    def paper_url(pk):
+        print('http://localhost:8000/paper/'+str(Author.objects.get(pk=pk).paper_id))
 
-print("Curious papers")
-pubSc = sc.simFeatures[1]
-for i in range(len(labels)):
-    prediction = sc.classifier.predict(features[i])[0]
-    if labels[i] == 0 and prediction == 1:
-        print("#####")
-        paper_url(author_ids[i][0])
-        paper_url(author_ids[i][1])
-        #print("Explanation")
-        #pubSc.compute(Author.objects.get(pk=author_ids[i][0]),
-        #        Author.objects.get(pk=author_ids[i][1]), explain=True)
+    print("Curious papers")
+    pubSc = sc.simFeatures[1]
+    for i in range(len(labels)):
+        prediction = sc.classifier.predict(features[i])[0]
+        if labels[i] == 0 and prediction == 1:
+            print("#####")
+            paper_url(author_ids[i][0])
+            paper_url(author_ids[i][1])
+            #print("Explanation")
+            #pubSc.compute(Author.objects.get(pk=author_ids[i][0]),
+            #        Author.objects.get(pk=author_ids[i][1]), explain=True)
 
-print(sc.confusion(features, labels))
-#sc.plotClassification(features, labels)
-sc.save('models/similarity.pkl')
+    print(sc.confusion(features, labels))
+    #sc.plotClassification(features, labels)
+    sc.save('models/similarity.pkl')
+#sc2 = SimilarityClassifier(filename='models/similarity.pkl')
+#print(sc2.confusion(features, labels))
 
 def testResearcher(pk):
     outf = open('learning/dataset/researcher-'+str(pk)+'.gdf', 'w')
+    logf = open('learning/dataset/researcher-'+str(pk)+'.log', 'w')
     sc.outputGraph(Author.objects.filter(researcher_id=pk).filter(Q(paper__visibility='VISIBLE') |
-        Q(paper__visibility='DELETED')), outf)
+        Q(paper__visibility='DELETED')), outf, logf)
     outf.close()
+    logf.close()
 
 
 #w = WordCount()
