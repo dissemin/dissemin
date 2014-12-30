@@ -41,7 +41,7 @@ class RelevanceFeature(object):
         """
         pass
 
-    def compute(self, author, dpt_id):
+    def compute(self, author, dpt_id, explain=False):
         """
         Returns the value of the feature for the given author.
         """
@@ -55,23 +55,39 @@ class KnownCoauthors(RelevanceFeature):
     def __init__(self):
         super(KnownCoauthors, self).__init__()
 
-    def compute(self, author, dpt_id):
+    def compute(self, author, dpt_id, explain=False):
         coauthors = author.paper.author_set.exclude(id=author.id).select_related('name')
         count = 0
         for a in coauthors:
             if a.is_known:
                 count += 1
+                if explain:
+                    print('      '+unicode(a))
+        if explain:
+            print('   Common coauthors: '+str(count))
         return float(count)
 
 class TopicalRelevanceFeature(RelevanceFeature):
     """
     General class for topic-based features.
     """
-    def __init__(self, **kwargs):
+    def __init__(self, languageModel, **kwargs):
         super(TopicalRelevanceFeature, self).__init__()
+        self.lang = languageModel
         self.models = dict()
         if 'filename' in kwargs:
             self.load(kwargs['filename'])
+
+    def _wScore(self, line, dpt_id, explain=False):
+        topicScore = self.models[dpt_id].lProbLine(line)
+        langScore = self.lang.lProbLine(line)
+        words = tokenize(line)
+        if explain:
+            for w in words:
+                a = self.models[dpt_id].lp(w)
+                b = self.lang.lp(w)
+                print('      '+w+'\t'+str(a)+'-'+str(b)+' = '+str(a-b))
+        return topicScore - langScore
 
     def load(self, filename):
         f = open(filename, 'rb')
@@ -95,75 +111,83 @@ class TitleRelevance(TopicalRelevanceFeature):
     """
     Relevance of the title regarding the department
     """
-    def __init__(self, **kwargs):
-        super(TitleRelevance, self).__init__(**kwargs)
-        self.threshold = 4
+    def __init__(self, lm, **kwargs):
+        super(TitleRelevance, self).__init__(lm, **kwargs)
 
     def feed(self, author, dpt_id):
         self.feedLine(author.paper.title, dpt_id)
 
-    def compute(self, author, dpt_id):
+    def compute(self, author, dpt_id, explain=False):
         if dpt_id not in self.models:
             print("Warning, scoring a title for an unknown department")
             return 0.
-        return self.models[dpt_id].lProbLine(author.paper.title, self.threshold)
+        return self._wScore(author.paper.title, dpt_id, explain)
 
 class PublicationRelevance(TopicalRelevanceFeature):
     """
     Relevance of the publications regarding the department
     """
-    def __init__(self, **kwargs):
-        super(PublicationRelevance, self).__init__(**kwargs)
+    def __init__(self, lm, **kwargs):
+        super(PublicationRelevance, self).__init__(lm, **kwargs)
         self.threshold = 4
 
     def feed(self, author, dpt_id):
         for pub in author.paper.publication_set.all().select_related('journal'):
             self.feedLine(pub.full_title(), dpt_id)
 
-    def compute(self, author, dpt_id):
+    def compute(self, author, dpt_id, explain=False):
         if dpt_id not in self.models:
             print("Warning, scoring a publication for an unknown department")
             return 0.
         titles = [pub.full_title() for pub in author.paper.publication_set.all().select_related('journal')]
         if titles:
-            return max(map(lambda t: self.models[dpt_id].lProbLine(t, self.threshold), titles))
+            return max(map(lambda t: self._wScore(t, dpt_id, explain), titles))
         return 0.
 
 class KeywordsRelevance(TopicalRelevanceFeature):
     """
     Relevance of the publications regarding the department
     """
-    def __init__(self, **kwargs):
-        super(KeywordsRelevance, self).__init__(**kwargs)
+    def __init__(self, lm, **kwargs):
+        super(KeywordsRelevance, self).__init__(lm, **kwargs)
         self.threshold = 4
 
     def feed(self, author, dpt_id):
         for record in author.paper.oairecord_set.all():
             self.feedLine(record.keywords, dpt_id)
 
-    def compute(self, author, dpt_id):
+    def compute(self, author, dpt_id, explain=False):
         if dpt_id not in self.models:
             print("Warning, scoring an oairecord for an unknown department")
             return 0.
         words = [rec.keywords for rec in author.paper.oairecord_set.all()]
         words = filter(lambda x: x != None, words)
-        return float(sum(map(lambda t: self.models[dpt_id].lProbLine(t, self.threshold), words)))
+        return float(sum(map(lambda t: self._wScore(t, dpt_id, explain), words)))
 
 class RelevanceClassifier(object):
     def __init__(self, **kwargs):
         if 'filename' in kwargs:
             self.load(kwargs['filename'])
             return
+        elif 'languageModel' not in kwargs:
+            raise ValueError("A language model is required.")
+        lm = kwargs['languageModel']
+        cm = kwargs.get('contributorsModel', lm)
         self.features = [
                 KnownCoauthors(),
-                TitleRelevance(),
-                KeywordsRelevance(),
-                PublicationRelevance(),
+                TitleRelevance(lm),
+                KeywordsRelevance(lm),
+                PublicationRelevance(cm),
                 ]
         self.classifier = None
-        self.positiveSampleWeight = 0.15
+        self.positiveSampleWeight = 0.2
     
-    def computeFeatures(self, author, dpt_id):
+    def computeFeatures(self, author, dpt_id, explain=False):
+        if explain:
+            for i in range(len(self.features)):
+                print('   Feature '+str(i))
+                f = self.features[i]
+                f.compute(author, dpt_id, True)
         return map(lambda f: f.compute(author, dpt_id), self.features)
 
     def train(self, features, labels, kernel='rbf'):

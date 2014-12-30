@@ -14,11 +14,15 @@ for line in open('learning/dataset/relevance_training_ids', 'r'):
     author_ids.append((vals[0], vals[1]))
     labels.append(vals[2])
 
-rc = RelevanceClassifier()
+all_fields_model = WordCount()
+all_fields_model.load('models/everything.pkl')
+contributors_model = WordCount()
+contributors_model.load('models/contributors.pkl')
+rc = RelevanceClassifier(languageModel=all_fields_model,contributorsModel=contributors_model)
 
-make_lm = True
+make_lm = False
 if make_lm:
-    print("Language model")
+    print("Topic model")
     i = 0
     for author in Author.objects.filter(name__researcher__department_id=21,paper__visibility='VISIBLE'):
         if i % 100 == 0:
@@ -29,7 +33,7 @@ if make_lm:
 else:
     rc.load('models/relevance.pkl')
 
-recompute = True
+recompute = False
 if recompute:
     print("Computing features")
     features = []
@@ -50,8 +54,20 @@ else:
         features.append(f)
     inf.close()
 
-
 rc.train(features, labels, 'linear')
+
+def paper_url(pk):
+    print('http://localhost:8000/paper/'+str(Author.objects.get(pk=pk).paper_id))
+
+for i in range(len(labels)):
+    prediction = rc.classifier.predict(features[i])[0]
+    if labels[i] == 0 and prediction == 1:
+        print("#####")
+        paper_url(author_ids[i][0])
+        print("Explanation")
+        print(rc.computeFeatures(Author.objects.get(pk=author_ids[i][0]), 21, explain=True))
+
+
 print(rc.confusion(features, labels))
 rc.save('models/relevance.pkl')
 
