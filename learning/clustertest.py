@@ -20,7 +20,7 @@ def clusterResearcher(rpk):
             Q(paper__visibility='VISIBLE') | Q(paper__visibility='DELETED')).order_by('id')
 
     # Delete researchers
-    authors.update(researcher=None,cluster=None)
+    authors.update(researcher=None,cluster=None,num_children=1)
 
     if False:
         inf = open('learning/dataset/author-features', 'r')
@@ -60,5 +60,6 @@ def clusterResearcher(rpk):
     graphf = open('learning/gephi/classified-'+str(researcher.pk)+'.gdf', 'w')
     cc.outputGraph(graphf)
     graphf.close()
+    return cc
 
 

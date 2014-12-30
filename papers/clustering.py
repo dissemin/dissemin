@@ -26,6 +26,8 @@ class ClusteringContext(object):
         self.similar = dict()
         # The pks of the children (in the union find)
         self.children = dict()
+        # The number of indirect children
+        self.cluster_size = dict()
         # The id of the researcher associated to the cluster rooted in pk 
         self.researcher = dict()
         # The id of the roots of the clusters
@@ -51,16 +53,15 @@ class ClusteringContext(object):
                 self.cluster_ids.add(pk)
             self.author_data[pk] = sc.getDataById(pk)
             self.researcher[pk] = author.researcher_id
+            self.cluster_size[pk] = author.num_children
 
     def commit(self):
         for (pk,val) in self.authors.items():
             val.cluster_id = self.find(pk)
             val.similar_id = self.similar.get(pk,None)
             val.researcher_id = self.researcher.get(val.cluster_id,None)
+            val.num_children = self.cluster_size[pk]
             val.save()
-
-    def num_children(self, pk):
-        return len(self.children.get(pk,0))+1
 
     def classify(self, pkA, pkB):
         # No need to cache as the algorithm already performs every test
@@ -68,7 +69,7 @@ class ClusteringContext(object):
         return self.sc.classifyData(self.author_data[pkA], self.author_data[pkB])
 
     def sample_with_multiplicity(self, nb_samples, root_idx):
-        population_size = self.num_children(root_idx)
+        population_size = self.cluster_size[root_idx]
         if nb_samples < population_size:
             nb_samples = min(nb_samples, population_size)
             indices = random.sample(xrange(population_size), nb_samples)
@@ -90,7 +91,7 @@ class ClusteringContext(object):
             if cur_author != new_root:
                 self.parent[cur_author] = new_root
 
-            end_window = cur_offset + self.num_children(cur_author)
+            end_window = cur_offset + self.cluster_size[cur_author]
 
             recursive_indices = []
             while cur_idx != None and cur_idx >= cur_offset and cur_idx < end_window:
@@ -98,7 +99,7 @@ class ClusteringContext(object):
                 cur_idx = next(indices_it, None)
 
             if recursive_indices:
-                if self.num_children(cur_author) == 1:
+                if self.cluster_size[cur_author] == 1:
                     yield cur_author
                 else:
                     for x in self.do_sample_with_multiplicity(recursive_indices, cur_author, new_root):
@@ -126,6 +127,7 @@ class ClusteringContext(object):
         if new_root != old_root:
             self.parent[old_root] = new_root
             self.children[new_root].append(old_root)
+            self.cluster_size[new_root] += self.cluster_size[old_root]
             self.cluster_ids.discard(old_root)
             self.researcher[new_root] = max(
                     self.researcher.get(new_root,None),
@@ -148,7 +150,7 @@ class ClusteringContext(object):
         else:
             clusters = self.clusters.copy()
         print("Number of clusters: "+str(len(clusters)))
-        print(" ".join([str(self.num_children(x)) for x in clusters]))
+        print(" ".join([str(self.cluster_size[x]) for x in clusters]))
 
         # STEP 2: for each cluster, compute similarity
         nb_edges_added = 0
