@@ -18,6 +18,7 @@ class ClusteringContext(object):
         self.children = dict()
         self.cluster_ids = set()
         self.sc = sc
+        self.author_data = dict()
         for author in author_queryset:
             pk = author.pk
             self.authors[pk] = author
@@ -26,6 +27,7 @@ class ClusteringContext(object):
             self.children[pk] = [child.pk for child in author.clusterrel.all()]
             if author.cluster_id == None:
                 self.cluster_ids.add(pk)
+            self.author_data[pk] = sc.getDataById(pk)
 
     def commit(self):
         for (pk,val) in self.authors.items():
@@ -36,6 +38,11 @@ class ClusteringContext(object):
 
     def num_children(self, pk):
         return len(self.children.get(pk,0))+1
+
+    def classify(self, pkA, pkB):
+        # No need to cache as the algorithm already performs every test
+        # at most once
+        return self.sc.classifyData(self.author_data[pkA], self.author_data[pkB])
 
     def sample_with_multiplicity(self, nb_samples, root_idx):
         population_size = self.num_children(root_idx)
@@ -119,7 +126,7 @@ class ClusteringContext(object):
             # to_check = random.sample(cluster_contents, nb_tests)
             match_found = False
             for author in to_check:
-                similar = self.sc.classify(self.authors[author], self.authors[target])
+                similar = self.classify(author, target)
                 print("   "+str(target)+"-"+str(author)+"\t"+str(similar))
                 print(str(self.authors[author].pk)+"-"+str(self.authors[target].pk)+"\t"+str(similar), file=logf)
                 if similar:

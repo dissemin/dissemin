@@ -49,10 +49,32 @@ class SimilarityFeature(object):
     do they represent the same person?
     """
     def __init__(self):
+        """
+        Parameters should be set here.
+        """
         pass
 
-    def compute(self, authorA, authorB):
+    def fetchData(self, author):
+        """
+        Fetches the data used by the classifier from the Author object
+        """
+        return None
+
+    def score(self, dataA, dataB):
+        """
+        Computes the score based on the two data returned by fetchData.
+        This function should be as simple as possible, expensive computations
+        should be kept in fetchData if possible
+        """
         return 0.
+
+    def compute(self, authorA, authorB):
+        """
+        Fetches data for the authors and computes the similarity
+        WARNING: recomputing the classifying data every time might be expensive.
+        Ideally, this method should not be reimplemented.
+        """
+        return self.score(self.fetchData(authorA), self.fetchData(authorB))
 
 
 class CoauthorsSimilarity(SimilarityFeature):
@@ -63,27 +85,24 @@ class CoauthorsSimilarity(SimilarityFeature):
     def __init__(self):
         super(CoauthorsSimilarity, self).__init__()
     
-    def compute(self, authorA, authorB):
-        coauthorsA = authorA.paper.author_set.exclude(id=authorA.id)
-        coauthorsB = authorB.paper.author_set.exclude(id=authorB.id)
+    def fetchData(self, author):
+        coauthors = author.paper.author_set.exclude(id=author.id).select_related('name')
+        return map(lambda author: (author.name.first,author.name.last), coauthors)
+
+    def score(self, dataA, dataB):
         score = 0.
-        for a in coauthorsA:
-            for b in coauthorsB:
-                name_a = a.name
-                name_b = b.name
-                if match_names((name_a.first,name_a.last),(name_b.first, name_b.last)):
+        for a in dataA:
+            for b in dataB:
+                if match_names(a,b):
                     score += 1.
         return score
 
-def intersectionScore(model, strA, strB, explain=False):
+def intersectionScore(model, wordsA, wordsB, explain=False):
     """
-    Returns the sum of the -log scores of the common words in the two strings
+    Returns the sum of the -log scores of the common words in the two sets
     """
-    threshold = 4
-    wordsA = set(filter_punctuation(tokenize(strA)))
-    wordsB = set(filter_punctuation(tokenize(strB)))
+    threshold = 4 # TODO this threshold should depend on the language model used.
     intersection = wordsA & wordsB
-    union = wordsA | wordsB
     if explain:
         for w in intersection:
             print(w+'\t'+str(model.lp(w)))
@@ -101,10 +120,11 @@ class TitleSimilarity(SimilarityFeature):
         super(TitleSimilarity, self).__init__()
         self.languageModel = languageModel
 
-    def compute(self, authorA, authorB, explain=False):
-        ta = authorA.paper.title
-        tb = authorB.paper.title
-        return intersectionScore(self.languageModel, ta, tb, explain)
+    def fetchData(self, author):
+        return set(filter_punctuation(tokenize(author.paper.title)))
+
+    def score(self, dataA, dataB):
+        return intersectionScore(self.languageModel, dataA, dataB)
 
 class ContributorsSimilarity(SimilarityFeature):
     """
@@ -114,14 +134,14 @@ class ContributorsSimilarity(SimilarityFeature):
         super(ContributorsSimilarity, self).__init__()
         self.languageModel = languageModel
 
-    def compute(self, authorA, authorB, explain=False):
-        contributorsA = [r.contributors for r in authorA.paper.oairecord_set.all()]
-        contributorsB = [r.contributors for r in authorB.paper.oairecord_set.all()]
-        contributorsA = filter(lambda x: x != None, contributorsA)
-        contributorsB = filter(lambda x: x != None, contributorsB)
-        ta = ' '.join(contributorsA)
-        tb = ' '.join(contributorsB)
-        return intersectionScore(self.languageModel, ta, tb, explain)
+    def fetchData(self, author):
+        contributors = [r.contributors for r in author.paper.oairecord_set.all()]
+        contributors = filter(lambda x: x != None, contributors)
+        ta = ' '.join(contributors)
+        return set(filter_punctuation(tokenize(ta)))
+
+    def score(self, dataA, dataB):
+        return intersectionScore(self.languageModel, dataA, dataB)
 
 
 class PublicationSimilarity(SimilarityFeature):
@@ -133,28 +153,25 @@ class PublicationSimilarity(SimilarityFeature):
         super(PublicationSimilarity, self).__init__()
         self.languageModel = languageModel
 
-    def compute(self, authorA, authorB, explain=False):
-        pubsA = authorA.paper.publication_set.all()
-        pubsB = authorB.paper.publication_set.all()
-        allA = [a.full_title() for a in pubsA]
-        for r in authorA.paper.oairecord_set.all():
+    def fetchData(self, author):
+        pubs = author.paper.publication_set.all()
+        titles = [a.full_title() for a in pubs]
+        for r in author.paper.oairecord_set.all():
             if r.keywords:
-                allA.append(r.keywords)
-        allB = [a.full_title() for a in pubsB]
-        for r in authorB.paper.oairecord_set.all():
-            if r.keywords:
-                allB.append(r.keywords)
+                titles.append(r.keywords)
+        titles = map(lambda t: set(filter_punctuation(tokenize(t))), titles)
+        return titles
 
+    def score(self, dataA, dataB):
         nbPairs = 0
         totalScore = 0.
-        for ta in allA:
-            for tb in allB:
+        for ta in dataA:
+            for tb in dataB:
                 nbPairs += 1
                 if ta == tb:
                     totalScore += 40.0
-                    # maxScore = max(40.0,maxScore)
                 else:
-                    totalScore += intersectionScore(self.languageModel, ta, tb, explain)
+                    totalScore += intersectionScore(self.languageModel, ta, tb)
               
         if nbPairs:
             return totalScore / nbPairs
@@ -181,20 +198,19 @@ class SimilarityClassifier(object):
         self.classifier = None
         self.positiveSampleWeight = 0.15
     
-    def _computeFeatures(self, authorA, authorB):
-        features = []
-        for f in self.simFeatures:
-            features.append(f.compute(authorA, authorB))
-        return features
+    def computeFeatures(self, lstDataA, lstDataB):
+        if len(lstDataA) != len(self.simFeatures) or len(lstDataB) != len(self.simFeatures):
+            return None
+        lst = zip(self.simFeatures, lstDataA, lstDataB)
+        return map(lambda (f,a,b): f.score(a,b), lst)
 
-    def _toAuthorPairs(self, author_ids):
-        authors = [(Author.objects.get(pk=ida),Author.objects.get(pk=idb)) for (ida,idb) in author_ids]
-        return authors
+    def lstData(self, author):
+        return map(lambda f: f.fetchData(author), self.simFeatures)
 
-    def _toFeaturePairs(self, authors):
-        features = [self._computeFeatures(a,b) for (a,b) in authors]
-        return features
-  
+    def getDataById(self,id):
+        author = Author.objects.get(pk=id)
+        return self.lstData(author)
+ 
     def train(self, features, labels, kernel='rbf'):
         self.classifier = svm.SVC(kernel=str(kernel))
         weights = [(self.positiveSampleWeight if label else 1.) for label in labels]
@@ -207,9 +223,18 @@ class SimilarityClassifier(object):
         return confusion_matrix(pred, labels)
 
     def classify(self, authorA, authorB):
+        """
+        Warning: this is inefficient, it might be better to compute the data first
+        and then use classifyData
+        """
         if not self.classifier:
             return None
-        feat_vec = self._computeFeatures(authorA, authorB)
+        dataA = self.lstData(authorA)
+        dataB = self.lstData(authorB)
+        return self.classifyData(dataA, dataB)
+
+    def classifyData(self, dataA, dataB):
+        feat_vec = self.computeFeatures(dataA, dataB)
         output = self.classifier.predict(feat_vec)
         return output[0]
 

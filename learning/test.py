@@ -39,12 +39,23 @@ contributors_model = WordCount()
 contributors_model.load('models/contributors.pkl')
 sc = SimilarityClassifier(languageModel=all_papers_model, contributorsModel=contributors_model)
 
-recompute = False
+def getAuthorData(sc, id):
+    try:
+        return author_data_cache[id]
+    except KeyError:
+        x = sc.getDataById(id)
+        author_data_cache[id] = x
+        return x
+
+author_data_cache = dict()
+
+recompute = True
 if recompute:
-    print("Getting authors")
-    authors = sc._toAuthorPairs(author_ids)
     print("Computing features")
-    features = sc._toFeaturePairs(authors)
+    features = []
+    for (idA,idB) in author_ids:
+        f = sc.computeFeatures(getAuthorData(sc, idA), getAuthorData(sc, idB))
+        features.append(f)
     print("Writing features back")
     outf = open('learning/dataset/author-features', 'w')
     for i in range(len(labels)):
