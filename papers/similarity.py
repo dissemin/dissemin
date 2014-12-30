@@ -21,7 +21,7 @@
 from __future__ import unicode_literals, print_function
 
 from papers.models import Name, Author, Researcher
-from papers.utils import match_names, iunaccent, nocomma, filter_punctuation
+from papers.utils import match_names, iunaccent, nocomma, filter_punctuation, tokenize
 from nltk.tokenize.punkt import PunktWordTokenizer
 from sklearn import svm
 from sklearn.metrics import confusion_matrix
@@ -29,19 +29,6 @@ import cPickle
 import numpy as np
 import matplotlib.pyplot as plt
 from unidecode import unidecode
-
-punktTokenizer = PunktWordTokenizer()
-
-def tokenize(l):
-    return punktTokenizer.tokenize(iunaccent(l))
-
-def jaccard(setA, setB):
-    inter = setA & setB
-    union = setA | setB
-    if union:
-        return float(len(inter)) / len(union)
-    else:
-        return 1.
 
 class SimilarityFeature(object):
     """
@@ -257,17 +244,19 @@ class SimilarityClassifier(object):
 
     def outputGraph(self, author_set, outfile, logf):
         print('nodedef>name VARCHAR,label VARCHAR,pid VARCHAR,visibility VARCHAR', file=outfile)
+        author_data = []
         for author in author_set:
             paper = author.paper
             visibility = paper.visibility
             if paper.year <= 2012:
                 visibility = 'NOT_LABELLED'
+            author_data.append(self.lstData(author))
             print(nocomma([author.pk, unidecode(paper.title), paper.id, visibility]), file=outfile)
         print('edgedef>node1 VARCHAR,node2 VARCHAR', file=outfile)
         authors = list(author_set)
         for i in range(len(authors)):
             for j in range(i):
-                output = self.classify(authors[i],authors[j])
+                output = self.classifyData(author_data[i],author_data[j])
                 print(str(authors[i].pk)+"-"+str(authors[j].pk)+"\t"+str(output), file=logf)
                 if output: 
                     print(nocomma([authors[i].pk,authors[j].pk]), file=outfile)

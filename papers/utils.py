@@ -27,6 +27,9 @@ from unidecode import unidecode
 from time import sleep
 import socket
 from urllib2 import urlopen, build_opener
+from nltk.tokenize.punkt import PunktWordTokenizer
+
+### General string utilities ###
 
 filter_punctuation_alphanum_regex = re.compile(r'\w')
 def filter_punctuation(lst):
@@ -75,6 +78,14 @@ def remove_diacritics(s):
 
 def iunaccent(s):
     return remove_diacritics(s).lower()
+
+punktTokenizer = PunktWordTokenizer()
+
+def tokenize(l):
+    return punktTokenizer.tokenize(iunaccent(l))
+
+### Name-related functions ####
+
 
 split_re = re.compile(r'[ .,-]*')
 def split_words(string):

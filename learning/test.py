@@ -28,7 +28,7 @@ from papers.similarity import *
 # Read dataset
 author_ids = []
 labels = []
-for line in open('learning/dataset/author_ids', 'r'):
+for line in open('learning/dataset/similarity_training_ids', 'r'):
     vals = map(lambda x: int(x), line.strip().split('\t'))
     author_ids.append((vals[0],vals[1]))
     labels.append(vals[2])
@@ -39,6 +39,8 @@ contributors_model = WordCount()
 contributors_model.load('models/contributors.pkl')
 sc = SimilarityClassifier(languageModel=all_papers_model, contributorsModel=contributors_model)
 
+author_data_cache = dict()
+
 def getAuthorData(sc, id):
     try:
         return author_data_cache[id]
@@ -47,9 +49,7 @@ def getAuthorData(sc, id):
         author_data_cache[id] = x
         return x
 
-author_data_cache = dict()
-
-recompute = True
+recompute = False
 if recompute:
     print("Computing features")
     features = []
@@ -102,11 +102,4 @@ def testResearcher(pk):
     outf.close()
     logf.close()
 
-
-#w = WordCount()
-#
-#for p in Paper.objects.filter(visibility="VISIBLE"):
-#    w.feedLine(p.title)
-#
-#w.save('titles.wc')
 

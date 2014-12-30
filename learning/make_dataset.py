@@ -24,8 +24,10 @@ from random import randint, sample
 
 from papers.models import *
 
-out = open('learning/dataset/author_ids', 'w')
+out_sim = open('learning/dataset/similarity_training_ids', 'w')
+out_rel = open('learning/dataset/relevance_training_ids', 'w')
 
+# Helpers to pick some pairs in identical or different sets
 def indices_same_set(n):
     r = []
     for i in range(n):
@@ -40,25 +42,40 @@ def indices_two_sets(n,p):
             r.append((i,j))
     return r
 
+# Sample k elements from a set (ensuring that k does not exceed the cardinal of the set)
 def sample2(lst, nb_samples):
     return sample(lst, min(len(lst), nb_samples))
 
-for researcher in Researcher.objects.filter(department_id=21):
+department_id = 21 # informatique
+
+for researcher in Researcher.objects.filter(department_id=department_id):
     authors = Author.objects.filter(researcher=researcher,paper__year__gt=2012)
     authors_valid = list(authors.filter(paper__visibility='VISIBLE'))
     authors_invalid = list(authors.filter(paper__visibility='DELETED'))
     nb_valid = len(authors_valid)
     nb_invalid = len(authors_invalid)
+
+    # Generate similarity training examples
     indices_valid = sample2(indices_same_set(nb_valid), 2*nb_valid)
     indices_invalid = sample2(indices_two_sets(nb_valid, nb_invalid), 2*(nb_invalid+nb_valid))
 
+    #   Positive
     for (i,j) in indices_valid:
-        # Generate positive training examples
-        print('\t'.join([str(authors_valid[i].pk),str(authors_valid[j].pk),'1']), file=out)
+        print('\t'.join([str(authors_valid[i].pk),str(authors_valid[j].pk),'1']), file=out_sim)
 
+    #   Negative
     for (i,j) in indices_invalid:
-        # Generate negative training examples
-        print('\t'.join([str(authors_valid[i].pk),str(authors_invalid[j].pk),'0']), file=out)
+        print('\t'.join([str(authors_valid[i].pk),str(authors_invalid[j].pk),'0']), file=out_sim)
+
+    # Generate relevance training examples
+    #   Positive
+    for a in authors_valid:
+        print('\t'.join([str(a.pk),str(department_id),'1']), file=out_rel)
+
+    #   Negative
+    for a in authors_invalid:
+        print('\t'.join([str(a.pk),str(department_id),'0']), file=out_rel)
+
 
 #for p in Paper.objects.filter(author__name__researcher__department_id=24,year__gt=2012):
 #    visible = 0
@@ -68,7 +85,8 @@ for researcher in Researcher.objects.filter(department_id=21):
 #        continue
 #    print(str(p.pk)+"\t"+str(visible),file=out)
 
-out.close()
+out_sim.close()
+out_rel.close()
 
 
 
