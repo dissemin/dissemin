@@ -63,7 +63,7 @@ def add_oai_record(record, source, paper=None):
             print "Warning, invalid extractor for source "+source.name
 
     keywords = ' '.join(record[1]._map['subject'])
-    contributors = ' '.join(record[1]._map['contributor'])
+    contributors = ' '.join(record[1]._map['contributor'])[:4096]
 
     matching = OaiRecord.objects.filter(identifier=identifier)
     if len(matching) > 0:

@@ -415,7 +415,7 @@ class OaiRecord(models.Model):
     pdf_url = models.URLField(max_length=1024, null=True, blank=True)
     description = models.TextField(null=True,blank=True)
     keywords = models.TextField(null=True,blank=True)
-    contributors = models.CharField(max_length=2048, null=True, blank=True)
+    contributors = models.CharField(max_length=4096, null=True, blank=True)
 
     # Cached version of source.priority
     priority = models.IntegerField(default=1)
