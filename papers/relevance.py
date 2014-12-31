@@ -129,7 +129,6 @@ class PublicationRelevance(TopicalRelevanceFeature):
     """
     def __init__(self, lm, **kwargs):
         super(PublicationRelevance, self).__init__(lm, **kwargs)
-        self.threshold = 4
 
     def feed(self, author, dpt_id):
         for pub in author.paper.publication_set.all().select_related('journal'):
@@ -137,7 +136,7 @@ class PublicationRelevance(TopicalRelevanceFeature):
 
     def compute(self, author, dpt_id, explain=False):
         if dpt_id not in self.models:
-            print("Warning, scoring a publication for an unknown department")
+            print("Warning, scoring a publication for an unknown department id "+str(dpt_id))
             return 0.
         titles = [pub.full_title() for pub in author.paper.publication_set.all().select_related('journal')]
         if titles:
@@ -150,7 +149,6 @@ class KeywordsRelevance(TopicalRelevanceFeature):
     """
     def __init__(self, lm, **kwargs):
         super(KeywordsRelevance, self).__init__(lm, **kwargs)
-        self.threshold = 4
 
     def feed(self, author, dpt_id):
         for record in author.paper.oairecord_set.all():
@@ -158,9 +156,28 @@ class KeywordsRelevance(TopicalRelevanceFeature):
 
     def compute(self, author, dpt_id, explain=False):
         if dpt_id not in self.models:
-            print("Warning, scoring an oairecord for an unknown department")
+            print("Warning, scoring an oairecord for an unknown department id "+str(dpt_id))
             return 0.
         words = [rec.keywords for rec in author.paper.oairecord_set.all()]
+        words = filter(lambda x: x != None, words)
+        return float(sum(map(lambda t: self._wScore(t, dpt_id, explain), words)))
+
+class ContributorsRelevance(TopicalRelevanceFeature):
+    """
+    Relevance of the contributors regarding the department
+    """
+    def __init__(self, lm, **kwargs):
+        super(ContributorsRelevance, self).__init__(lm, **kwargs)
+
+    def feed(self, author, dpt_id):
+        for record in author.paper.oairecord_set.all():
+            self.feedLine(records.contributors, dpt_id)
+
+    def compute(self, author, dpt_id, explain=False):
+        if dpt_id not in self.models:
+            print("Warning, scoring contributors for an unknown department id "+str(dpt_id))
+            return 0.
+        words = [rec.contributors for rec in author.paper.oairecord_set.all()]
         words = filter(lambda x: x != None, words)
         return float(sum(map(lambda t: self._wScore(t, dpt_id, explain), words)))
 
