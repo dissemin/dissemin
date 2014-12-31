@@ -59,7 +59,7 @@ class KnownCoauthors(RelevanceFeature):
         coauthors = author.paper.author_set.exclude(id=author.id).select_related('name')
         count = 0
         for a in coauthors:
-            if a.is_known:
+            if a.researcher != None:
                 count += 1
                 if explain:
                     print('      '+unicode(a))

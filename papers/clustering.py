@@ -2,14 +2,47 @@
 from __future__ import unicode_literals, print_function
 
 from papers.similarity import SimilarityClassifier
+from papers.relevance import RelevanceClassifier
 from papers.models import Author, Researcher
+from django.db.models import Q
 import random
 
 # For graph output
 from papers.utils import nocomma
 from unidecode import unidecode
 
-# authorSimilarityClassifier = SimilarityClassifier(filename='models/similarity.pkl')
+def clusterResearcher(rpk, sc, rc):
+    researcher=Researcher.objects.get(pk=rpk)
+    npk=researcher.name.pk
+
+    authors = Author.objects.filter(name_id=npk).filter(
+            Q(paper__visibility='VISIBLE') | Q(paper__visibility='DELETED')).order_by('id')
+
+    # Delete researchers
+    print("Removing previous clustering output…")
+    authors.update(researcher=None,cluster=None,num_children=1)
+
+    cc = ClusteringContext(authors, sc, rc)
+
+    logf = open('log-clustering', 'w')
+
+    print("Fetching authors…")
+    authors = list(authors)
+    count = len(authors)
+    idx = 0
+    for a in authors:
+        print("# "+str(idx)+"/"+str(count)+" ## "+unicode(a.paper_id))
+        cc.runClustering(a.pk, researcher, True, logf)
+        idx += 1
+    logf.close()
+
+    cc.commit()
+
+    graphf = open('learning/gephi/classified-'+str(researcher.pk)+'.gdf', 'w')
+    cc.outputGraph(graphf)
+    graphf.close()
+    return cc
+
 
 class ClusteringContext(object):
     def __init__(self, author_queryset, sc, rc):
