@@ -249,4 +249,6 @@ class PublisherView(generic.DetailView):
 def sourcesView(request):
     return render(request, 'papers/sources.html')
 
+def faqView(request):
+    return render(request, 'papers/faq.html')
 
