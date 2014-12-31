@@ -113,8 +113,8 @@ def get_or_create_paper(title, author_names, pubdate, doi=None, visibility='VISI
             # TO BE REPLACED BY the clustering algo in the following loop
             a.save()
             authors.append(a)
-        for author in authors:
-            author.runClustering()
+        #for author in authors:
+        #    author.runClustering()
 
     if doi:
         try:

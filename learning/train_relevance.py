@@ -20,20 +20,23 @@ contributors_model = WordCount()
 contributors_model.load('models/contributors.pkl')
 rc = RelevanceClassifier(languageModel=all_fields_model,contributorsModel=contributors_model)
 
-make_lm = False
+make_lm = True
 if make_lm:
     print("Topic model")
     i = 0
-    for author in Author.objects.filter(name__researcher__department_id=21,paper__visibility='VISIBLE'):
+    for author in Author.objects.filter(paper__visibility='VISIBLE', researcher__isnull=False).select_related('researcher'):
         if i % 100 == 0:
             print(i)
-        rc.feed(author, 21)
+        rc.feed(author, author.researcher.department_id)
         i += 1
+    for i in range(4):
+        if i > 0:
+            print(rc.features[i].models.keys())
     rc.save('models/relevance.pkl')
 else:
     rc.load('models/relevance.pkl')
 
-recompute = False
+recompute = True
 if recompute:
     print("Computing features")
     features = []
@@ -65,7 +68,7 @@ for i in range(len(labels)):
         print("#####")
         paper_url(author_ids[i][0])
         print("Explanation")
-        print(rc.computeFeatures(Author.objects.get(pk=author_ids[i][0]), 21, explain=True))
+        print(rc.computeFeatures(Author.objects.get(pk=author_ids[i][0]), author_ids[i][1], explain=True))
 
 
 print(rc.confusion(features, labels))
