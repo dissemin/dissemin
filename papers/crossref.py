@@ -118,7 +118,7 @@ def fetch_papers_from_crossref_by_researcher_name(name, update=False):
         researcher_found = False
 
         # Get the next batch of DOIs
-        dois = fetch_list_of_DOIs_from_crossref(query, batch_number, nb_results_per_request, query)
+        dois = fetch_list_of_DOIs_from_crossref(query, batch_number, nb_results_per_request, name.last)
         batch_number += 1
 
         for doi in dois:
@@ -144,7 +144,7 @@ def fetch_papers_from_crossref_by_researcher_name(name, update=False):
             # Normalize metadata
             if metadata == None:
                 continue
-            if not 'author' in metadata: # TODO handle journals: not author but editor
+            if not 'author' in metadata:
                 continue
             authors = map(convert_to_name_pair, metadata['author'])
             if not 'title' in metadata or not metadata['title']:
@@ -176,7 +176,7 @@ def fetch_papers_from_crossref_by_researcher_name(name, update=False):
             if not save_doi:
                 matching_authors = filter(lambda a: match_names(a,(name.first,name.last)), authors)
 
-                # If one of them is known, we save this DOI
+                # If one of them matches the target name, we save it
                 if matching_authors:
                     save_doi = True
 

@@ -38,6 +38,7 @@ PDF_STATUS_CHOICES = [('OK', _('Available')),
 
 VISIBILITY_CHOICES = [('VISIBLE', _('Visible')),
                       ('CANDIDATE', _('Candidate')),
+                      ('NOT_RELEVANT', _('Not relevant')),
                       ('DELETED', _('Deleted')),
                       ]
 
@@ -65,6 +66,7 @@ class ResearchGroup(models.Model):
         return self.name
 
 class Researcher(models.Model):
+    name = models.ForeignKey('Name')
     department = models.ForeignKey(Department)
     groups = models.ManyToManyField(ResearchGroup,blank=True,null=True)
     email = models.EmailField(blank=True,null=True)
@@ -77,59 +79,69 @@ class Researcher(models.Model):
     last_status_update = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
-        first_name = Name.objects.filter(researcher_id=self.id).order_by('id').first()
-        if first_name:
-            return unicode(first_name)
-        return _("Anonymous researcher")
+        return unicode(self.name)
 
     @property
     def authors_by_year(self):
         return Author.objects.filter(name__researcher_id=self.id).order_by('-paper__year')
     @property
     def names(self):
-        return self.name_set.order_by('id')
-    @property
-    def name(self):
-        name = self.names[0]
-        if name:
-            return name
-        else:
-            return _("Anonymous researcher")
+        return Name.objects.filter(author__researcher=self)
     @property
     def aka(self):
-        return self.names[:2]
+        return self.names[1:]
 
 MAX_NAME_LENGTH = 256
 class Name(models.Model):
-    researcher = models.ForeignKey(Researcher, blank=True, null=True, on_delete=models.SET_NULL)
     first = models.CharField(max_length=MAX_NAME_LENGTH)
     last = models.CharField(max_length=MAX_NAME_LENGTH)
     full = models.CharField(max_length=MAX_NAME_LENGTH*2+1, db_index=True)
+    is_known = models.BooleanField(default=False)
 
-    unique_together = ('first','last')# TODO Two researchers with the same name is not supported
+    unique_together = ('first','last')
     
     class Meta:
         ordering = ['last','first']
 
     @classmethod
     def create(cls, first, last):
+        """
+        Creates an instance of the Name object without saving it.
+        Useful for name lookups where we are not sure we want to
+        keep the name in the model.
+        """
+        first = first[:MAX_NAME_LENGTH]
+        last = last[:MAX_NAME_LENGTH]
         full = iunaccent(first+' '+last)
         return cls(first=first,last=last,full=full)
     @classmethod
     def get_or_create(cls, first, last):
+        """
+        Replacement for the regular get_or_create, so that the full
+        name is built based on first and last
+        """
         full = iunaccent(first+' '+last)
         return cls.objects.get_or_create(full=full, defaults={'first':first,'last':last})
+    def last_name_known(self):
+        """
+        Is the last name of this Name the same as the last name of a known researcher?
+        """
+        count = Name.objects.filter(last__iexact=self.last,is_known=True).count()
+        return count > 0
     def __unicode__(self):
         return '%s %s' % (self.first,self.last)
-    @property
-    def is_known(self):
-        return self.researcher != None
 
 # Papers matching one or more researchers
 class Paper(models.Model):
     title = models.CharField(max_length=1024)
     fingerprint = models.CharField(max_length=64)
+    
+    # Year of publication, if that means anything (updated when we add OaiRecords or Publications)
     year = models.IntegerField()
+    # Approximate publication date.
+    # For instance if we only know it is in 2014 we'll put 2014-01-01
+    pubdate = models.DateField()
+
     last_modified = models.DateField(auto_now=True)
     visibility = models.CharField(max_length=32, default='VISIBLE')
 
@@ -178,12 +190,73 @@ class Paper(models.Model):
         self.save()
 
 # Researcher / Paper binary relation
-# TODO: it could be a ManyToMany field...
 class Author(models.Model):
     paper = models.ForeignKey(Paper)
     name = models.ForeignKey(Name)
+    cluster = models.ForeignKey('Author', blank=True, null=True, related_name='clusterrel')
+    num_children = models.IntegerField(default=1)
+    similar = models.ForeignKey('Author', blank=True, null=True, related_name='similarrel')
+    researcher = models.ForeignKey(Researcher, blank=True, null=True, on_delete=models.SET_NULL)
     def __unicode__(self):
         return unicode(self.name)
+    def get_cluster_id(self):
+        """
+        This is the "find" in "Union Find".
+        """
+        if not self.cluster:
+            return self.id
+        elif self.cluster_id != self.id: # it is supposed to be the case
+            result = self.cluster.get_cluster_id()
+            if result != self.cluster_id:
+                self.cluster_id = result
+                self.save(update_fields=['cluster_id'])
+            return result
+        raise ValueError('Invalid cluster id (loop)')
+
+    def get_cluster(self):
+        i = self.get_cluster_id()
+        if i != self.id:
+            return Author.objects.get(pk=i)
+        return self
+
+    def merge_with(self, author):
+        """
+        Merges the clusters of two authors
+        """
+        cur_cluster_id = self.get_cluster_id()
+        if cur_cluster_id != self.id:
+            cur_cluster = Author.objects.get(pk=cur_cluster_id)
+        else:
+            cur_cluster = self
+        new_cluster_id = author.get_cluster_id()
+        if cur_cluster_id != new_cluster_id:
+            new_cluster = Author.objects.get(pk=new_cluster_id)
+            cur_cluster.cluster = new_cluster
+            cur_cluster.save(update_fields=['cluster'])
+            new_cluster.num_children += cur_cluster.num_children
+            if not new_cluster.researcher and cur_cluster.researcher:
+                new_cluster.researcher = cur_cluster.researcher
+            new_cluster.save(update_fields=['num_children', 'researcher'])
+
+    def flatten_cluster(self, upstream_root=None):
+        """
+        Flattens the cluster rooted in self, using upstream_root if provided,
+        or as the root if None
+        """
+        if not upstream_root:
+            upstream_root = self
+        else:
+            self.cluster = upstream_root
+            if upstream_root.researcher:
+                self.researcher = upstream_root.researcher()
+            self.save()
+        children = self.clusterrel_set.all()
+        for child in children:
+            child.flatten_cluster(upstream_root)
+
+    @property
+    def is_known(self):
+        return self.researcher != None
 
 # Publisher associated with a journal
 class Publisher(models.Model):
@@ -204,6 +277,8 @@ class Publisher(models.Model):
     def publi_count(self):
         # TODO compute this with aggregates
         # and cache the number of papers for each journal
+        # TODO ensure that the papers are not only visible,
+        # but also assigned to a researcher
         count = 0
         for journal in self.journal_set.all():
             count += journal.publication_set.filter(paper__visibility='VISIBLE').count()
@@ -281,7 +356,7 @@ class Publication(models.Model):
     issue = models.CharField(max_length=64, blank=True, null=True)
     volume = models.CharField(max_length=64, blank=True, null=True)
     pages = models.CharField(max_length=64, blank=True, null=True)
-    date = models.CharField(max_length=128, blank=True, null=True)
+    pubdate = models.DateField(blank=True, null=True)
     publisher = models.CharField(max_length=512, blank=True, null=True)
     doi = models.CharField(max_length=1024, unique=True, blank=True, null=True) # in theory, there is no limit
     def oa_status(self):
@@ -294,9 +369,15 @@ class Publication(models.Model):
         if self.doi:
             return 'http://dx.doi.org/'+self.doi
 
+    def full_title(self):
+        if self.journal:
+            return self.journal.title
+        else:
+            return self.title
+
     def details_to_str(self):
         result = ''
-        if self.issue or self.volume or self.pages or self.date:
+        if self.issue or self.volume or self.pages or self.pubdate:
             result += ', '
         if self.issue:
             result += self.issue
@@ -306,8 +387,8 @@ class Publication(models.Model):
             result += ', '
         if self.pages:
             result += self.pages+', '
-        if self.date:
-            result += self.date
+        if self.pubdate:
+            result += str(self.pubdate.year)
         return result
 
     def __unicode__(self):
@@ -333,6 +414,8 @@ class OaiRecord(models.Model):
     splash_url = models.URLField(max_length=1024, null=True, blank=True)
     pdf_url = models.URLField(max_length=1024, null=True, blank=True)
     description = models.TextField(null=True,blank=True)
+    keywords = models.TextField(null=True,blank=True)
+    contributors = models.CharField(max_length=4096, null=True, blank=True)
 
     # Cached version of source.priority
     priority = models.IntegerField(default=1)

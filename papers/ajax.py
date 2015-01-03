@@ -70,18 +70,11 @@ def addResearcher(request):
             role = form.cleaned_data['role']
             homepage = form.cleaned_data['homepage']
 
-            name, created = Name.objects.get_or_create(full=iunaccent(first+' '+last),
-                    defaults={'first':first, 'last':last})
-            if not created and name.researcher != None:
-                    return HttpResponseForbidden('Researcher already present', content_type='text/plain')
-            researcher = Researcher(
-                    department=dept,
-                    email=email,
-                    role=role,
-                    homepage=homepage)
-            researcher.save()
-            name.researcher = researcher
-            name.save(update_fields=['researcher'])
+            try:
+                researcher = create_researcher(first, last, dept, email, role, homepage)
+            except ValueError:
+                return HttpResponseForbidden('Researcher already present', content_type='text/plain')
+
             return HttpResponse(json.dumps({
                 'id':researcher.id,
                 'name':first+' '+last}), content_type='application/javascript')

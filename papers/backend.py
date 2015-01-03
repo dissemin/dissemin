@@ -23,13 +23,33 @@ from __future__ import unicode_literals
 from django.core.exceptions import ObjectDoesNotExist
 import re
 
-from papers.utils import to_plain_name, create_paper_fingerprint
+from papers.utils import to_plain_name, create_paper_fingerprint, date_from_dateparts
 from papers.errors import MetadataSourceException
 from papers.models import *
 from papers.doi import to_doi
 from papers.crossref import fetch_metadata_by_DOI
 from papers.romeo import fetch_journal
 from papers.name import parse_comma_name
+
+def create_researcher(first, last, dept, email, role, homepage):
+    name, created = Name.objects.get_or_create(full=iunaccent(first+' '+last),
+            defaults={'first':first, 'last':last})
+    if not created and Researcher.objects.filter(name=name).count() > 0:
+        # we forbid the creation of two researchers with the same name,
+        # although our model would support it (TODO ?)
+        raise ValueError
+
+    researcher = Researcher(
+            department=dept,
+            email=email,
+            role=role,
+            homepage=homepage,
+            name=name)
+    researcher.save()
+    name.is_known=True
+    name.save(update_fields=['is_known'])
+    return researcher
+
 
 def lookup_name(author_name):
     first_name = author_name[0][:MAX_NAME_LENGTH]
@@ -50,8 +70,8 @@ def save_if_not_saved(obj):
     if not obj.pk:
         obj.save()
 
-def get_or_create_paper(title, author_names, year, doi=None, visibility='VISIBLE'):
-    # If a DOI is present, first look up using it
+def get_or_create_paper(title, author_names, pubdate, doi=None, visibility='VISIBLE'):
+    # If a DOI is present, first look it up
     if doi:
         matches = Publication.objects.filter(doi__exact=doi)
         if matches:
@@ -61,8 +81,8 @@ def get_or_create_paper(title, author_names, year, doi=None, visibility='VISIBLE
                 paper.save(update_fields=['visibility'])
             return matches[0].paper
 
-    if not title or not author_names or not year:
-        raise ValueError("A title, year and authors have to be provided to create a paper.")
+    if not title or not author_names or not pubdate:
+        raise ValueError("A title, pubdate and authors have to be provided to create a paper.")
 
     # Otherwise look up the fingerprint
     plain_names = map(to_plain_name, author_names)
@@ -76,12 +96,25 @@ def get_or_create_paper(title, author_names, year, doi=None, visibility='VISIBLE
             p.visibility = 'VISIBLE'
             p.save(update_fields=['visibility'])
     else:
-        p = Paper(title=title,year=year,fingerprint=fp,visibility=visibility)
+        year = pubdate.year
+        p = Paper(title=title,
+                year=year,
+                pubdate=pubdate,
+                fingerprint=fp,
+                visibility=visibility)
         p.save()
+        authors = []
         for author_name in author_names:
             save_if_not_saved(author_name)
             a = Author(name=author_name, paper=p)
+            # TODO: TEMPORARY:
+            if author_name.is_known:
+                a.researcher = Researcher.objects.get(name=author_name)
+            # TO BE REPLACED BY the clustering algo in the following loop
             a.save()
+            authors.append(a)
+        #for author in authors:
+        #    author.runClustering()
 
     if doi:
         try:
@@ -96,6 +129,8 @@ def get_or_create_paper(title, author_names, year, doi=None, visibility='VISIBLE
 def merge_papers(first, second):
     # TODO What if the authors are not the same?
     # We should merge the list of authors, so that the order is preserved
+
+    # TODO merge author relations
 
     if first.pk == second.pk:
         return
@@ -134,7 +169,10 @@ def create_publication(paper, metadata):
     pages = metadata.get('page',None)
     issue = metadata.get('issue',None)
     date_dict = metadata.get('issued',dict())
-    date = '-'.join(map(str,date_dict.get('date-parts',[[]])[0])) # TODO this is horribly ugly
+    pubdate = None
+    if 'date-parts' in date_dict:
+        dateparts = date_dict.get('date-parts')[0]
+        pubdate = date_from_dateparts(dateparts)
     # for instance it outputs dates like 2014-2-3
     publisher = metadata.get('publisher', None)
     if publisher:
@@ -150,10 +188,15 @@ def create_publication(paper, metadata):
 
 
     pub = Publication(title=title, issue=issue, volume=volume,
-            date=date, paper=paper, pages=pages,
+            pubdate=pubdate, paper=paper, pages=pages,
             doi=doi, pubtype=pubtype, publisher=publisher,
             journal=journal)
     pub.save()
+    cur_pubdate = paper.pubdate
+    if type(cur_pubdate) != type(pubdate):
+        cur_pubdate = cur_pubdate.date()
+    if pubdate and pubdate > cur_pubdate:
+        paper.pubdate = pubdate
     paper.update_availability()
     return pub
 

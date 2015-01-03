@@ -63,8 +63,8 @@ def predsplit_backwards(predicate, words):
 
 def parse_comma_name(name):
     """
-    Parse an name of the form "Last name, First name" to (first name, last name)
-    Tries to do something reasonable if there is no comma.
+    Parse a name of the form "Last name, First name" to (first name, last name)
+    Try to do something reasonable if there is no comma.
     """
     if ',' in name:
         name = comma_re.sub(',',name)

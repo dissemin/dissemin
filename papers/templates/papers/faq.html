@@ -1,0 +1,132 @@
+{% extends "dissemin/skeleton.html" %}
+
+{% load i18n %}
+
+{% block headTitle %}
+Frequently Asked Questions
+{% endblock %}
+
+{% block content %}
+<div id="fullPage">
+    <div id="contentTitle">{% trans "Frequently Asked Questions" %}</div>
+    <div id="actualContent">
+
+        <h4>Open Access</h4>
+        <p><a href="#open-access">{% trans "What is Open Access?" %}</a></p>
+        <p><a href="#repositories-rock">{% trans "Why should I upload my papers to a repository?" %}</a></p>
+        <p><a href="#what-repository">{% trans "What repository should I use?" %}</a></p>
+
+        <h4>Dissem.in</h4>
+        <p><a href="#dissemin">{% trans "What is dissem.in?" %}</a></p>
+        <p><a href="#repository">{% trans "Is dissem.in a repository?" %}</a></p>
+        <p><a href="#running">{% trans "Who runs dissem.in?" %}</a></p>
+        <p><a href="#creating-a-profile">{% trans "Can I create my profile on dissem.in?" %}</a></p>
+        <p><a href="#new-institution">{% trans "Can I use dissem.in for my institution?" %}</a></p>
+
+        <h4>Policies and full-text availability</h4>
+        <p><a href="#policy-classes">{% trans "What do your policy classes mean?" %}</a></p>
+        <p><a href="#availability">{% trans "When is a paper considered available?" %}</a></p>
+        <p><a href="#statistics">{% trans "Should I trust your statistics?" %}</a></p>
+
+        <h4>Omissions and errors</h4>
+        <p><a href="#copy-available">{% trans "There is a freely available copy of my article online but Dissem.in does not find it." %}</a></p>
+        <p><a href="#missing-paper">{% trans "One of my papers is missing. Why?" %}</a></p>
+        <p><a href="#incorrect-metadata">{% trans "Some details of my paper are incorrect. What can I do?" %}</a></p>
+
+        <h4>Behind the scene</h4>
+        <p><a href="#sources">{% trans "Where do you get the data from?" %}</a></p>
+        <p><a href="#getting-involved">{% trans "How can I help?" %}</a></p>
+        <p><a href="#source-code">{% trans "Where is the source code?" %}</a></p>
+        <p><a href="#oai">{% trans "Can I harvest your data?" %}</a></p>
+        <p><a href="#bikes">{% trans "Do you like bikes?" %}</a></p>
+ 
+        <h3>Open Access</h3>
+
+        <h2 id="open-access">{% trans "What is Open Access?" %}</h2>
+        <p>
+        In a nutshell, the Open Access movement promotes free access to the scientific literature. For a 
+        more in-depth introduction, we recommend
+        <a href="http://www.phdcomics.com/comics.php?f=1533">this video in English</a>
+            and
+            <a href="http://pablo.rauzy.name/openaccess/introduction.html">this introduction in French</a>.
+        </p>
+        <h2 id="repositories-rock">Why should I upload my papers to a repository?</h2>
+        <p>
+        You should do it because:
+        <ul>
+            <li>It makes your research <strong>more accessible</strong> and <strong>more visible</strong>.
+            Many researchers routinely check papers in topic repositories such as arXiv, and
+            it is less likely that these researchers check your homepage regularly.
+              </li>
+              <li>You can even do it before publication. You can get <strong>valuable feedback</strong>
+              to improve your paper before the actual peer-reviewing process. It also witnesses the fact
+              that you have had your ideas earlier than the actual publication time.</li>
+              <li>
+              It provides you a <strong>durable storage</strong>. Your homepage
+              is likely to change or to disappear, for instance if you leave your current institution.
+              </li>
+              <li>
+              Some publishers do not allow preprints on homepages but allow them in
+              repositories.</li>
+              <li>
+              Finally, for all these reasons,
+              an increasing number of <strong>funding bodies</strong> require the outcomes of
+              their projects to be available in a repository.
+              </li>
+          </ul>
+        </p>
+        <h2 id="what-repository">What repository should I use?</h2>
+        <p>
+            TODO.
+        </p>
+
+        <h3>Dissem.in</h3>
+        <h2 id="dissemin">{% trans "What is dissem.in?" %}</h2>
+        <h2 id="repository">{% trans "Is dissem.in a repository?" %}</h2>
+        <h2 id="running">{% trans "Who runs dissem.in?" %}</h2>
+        <h2 id="creating-a-profile">{% trans "Can I create my profile on dissem.in?" %}</h2>
+        <h2 id="new-institution">{% trans "Can I use dissem.in for my institution?" %}</h2>
+
+        <h3>Policies and full-text availability</h3>
+        <h2 id="policy-classes">{% trans "What do your policy classes mean?" %}</h2>
+        <h2 id="availability">{% trans "When is a paper considered available?" %}</h2>
+        <h2 id="statistics">{% trans "Should I trust your statistics?" %}</h2>
+
+        <h3>Omissions and errors</h3>
+        <h2 id="missing-paper">{% trans "One of my papers is missing. Why?" %}</h2>
+            <p>There are many possible reasons: maybe it is not available from any
+               of <a href="{% url 'sources' %}">our sources</a>, your name is spelt
+               differently or partially in the authors list, our algorithms estimated
+               that it has been written by an homonym researcher, or it has been deleted
+               by one of your co-authors.</p>
+            <p>In any case, you should be able to add it manually soon.</p>
+
+        <h2 id="incorrect-metadata">{% trans "Some details of my paper are incorrect. What can I do?" %}</h2>
+            <p>In a near future, you should be able to create an account and fix it by yourself.
+               If it is really urgent, send a message to contact@dissem.in.</p>
+
+       <h2 id="copy-available">{% trans "There is a freely available copy of my article online but Dissem.in does not find it." %}</h2>
+            <p>There are two cases:
+            <ul>
+                    <li>Your article is available on a personal homepage or a similar
+                    website. In this case, you should read <a href="#repositories-rock">
+                        why you should also put it in a repository</a>.</li>
+                    <li>Your article is available in a repository but does not appear as
+                     available in Dissem.in. In this case you should send a message
+                     to contact@dissem.in to fix the problem.</li>
+            </ul>
+            </p>
+
+        <h3>Behind the scene</h3>
+
+        <h2 id="sources">{% trans "Where do you get the data from?" %}</h2>
+            <p>Our sources are listed on <a href="{% url 'sources' %}">this page</a>.</p>
+
+
+        <h2 id="getting-involved">{% trans "How can I help?" %}</h2>
+        <h2 id="source-code">{% trans "Where is the source code?" %}</h2>
+        <h2 id="oai">{% trans "Can I harvest your data?" %}</h2>
+        <h2 id="bikes">{% trans "Do you like bikes?" %}</h2>
+ 
+    </div>
+{% endblock %}

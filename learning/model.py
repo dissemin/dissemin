@@ -25,13 +25,7 @@ import math
 import cPickle
 
 from papers.models import *
-from papers.utils import iunaccent
-from nltk.tokenize.punkt import PunktWordTokenizer
-
-punktTokenizer = PunktWordTokenizer()
-
-def tokenize(l):
-    return punktTokenizer.tokenize(iunaccent(l))
+from papers.utils import iunaccent, tokenize
 
 class WordCount:
     def __init__(self):
@@ -77,10 +71,12 @@ class WordCount:
             total *= self.p(w)
         return total
 
-    def lProbLine(self, l):
+    def lProbLine(self, l, threshold=None):
         total = 0.
         for w in tokenize(l):
-            total += self.lp(w)
+            lp = self.lp(w)
+            if threshold == None or lp >= -threshold:
+                total += lp
         return total
 
     def nlProbLine(self, l):

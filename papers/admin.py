@@ -28,7 +28,6 @@ class ResearcherAdmin(admin.ModelAdmin):
       #  (None, {'fields': ['nae']}),
         ('Affiliation', {'fields': ['department', 'groups']})
         ]
-    inlines = [NameInline]
 
 class AuthorInline(admin.TabularInline):
     model = Author
@@ -44,7 +43,7 @@ class PublicationInline(admin.StackedInline):
     extra = 0
 
 class PaperAdmin(admin.ModelAdmin):
-    fields = ['title', 'year']
+    fields = ['title', 'year', 'visibility']
     inlines = [AuthorInline, PublicationInline, OaiInline]
 
 admin.site.register(Department)

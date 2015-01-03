@@ -98,12 +98,12 @@ def searchView(request, **kwargs):
     search_description = _('Papers')
     if 'researcher' in args:
         researcher = get_object_or_404(Researcher, pk=args.get('researcher'))
-        queryset = queryset.filter(author__name__researcher=researcher)
+        queryset = queryset.filter(author__researcher=researcher)
         search_description += _(' authored by ')+unicode(researcher)
         context['researcher'] = researcher
     elif 'department' in args:
         department = get_object_or_404(Department, pk=args.get('department'))
-        queryset = queryset.filter(author__name__researcher__department=department)
+        queryset = queryset.filter(author__researcher__department=department)
         search_description += _(' authored in ')+unicode(department)
         context['department'] = department
     if 'journal' in args:
@@ -140,7 +140,9 @@ def searchView(request, **kwargs):
         search_description = _('All papers')
 
     # Sort
-    queryset = queryset.order_by('-year')
+    queryset = queryset.order_by('-pubdate')
+    # Make distinct
+    queryset = queryset.distinct()
 
     # Build the paginator
     paginator = Paginator(queryset, NB_RESULTS_PER_PAGE)
@@ -247,4 +249,6 @@ class PublisherView(generic.DetailView):
 def sourcesView(request):
     return render(request, 'papers/sources.html')
 
+def faqView(request):
+    return render(request, 'papers/faq.html')
 

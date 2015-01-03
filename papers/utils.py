@@ -21,11 +21,28 @@
 from __future__ import unicode_literals
 import re
 import hashlib
+import datetime
 from unidecode import unidecode
 
 from time import sleep
 import socket
 from urllib2 import urlopen, build_opener
+from nltk.tokenize.punkt import PunktWordTokenizer
+
+### General string utilities ###
+
+filter_punctuation_alphanum_regex = re.compile(r'\w')
+def filter_punctuation(lst):
+    return filter(lambda x: filter_punctuation_alphanum_regex.findall(x) != [], lst)
+
+def nocomma(lst):
+    """
+    Join fields using ',' ensuring that it does not appear in the fields
+    """
+    lst = map(lambda x: str(x).replace(',','').replace('\n',''), lst)
+    lst = [x if x else ' ' for x in lst]
+    return ','.join(lst)
+
 
 def match_names(a,b):
     if not a or not b:
@@ -61,6 +78,14 @@ def remove_diacritics(s):
 
 def iunaccent(s):
     return remove_diacritics(s).lower()
+
+punktTokenizer = PunktWordTokenizer()
+
+def tokenize(l):
+    return punktTokenizer.tokenize(iunaccent(l))
+
+### Name-related functions ####
+
 
 split_re = re.compile(r'[ .,-]*')
 def split_words(string):
@@ -104,6 +129,7 @@ def create_paper_plain_fingerprint(title, authors):
         if not author:
             continue
         # TODO remove the - in "J.-W. Dupont" TODO TODO
+        # TODO take into account only the first initial
         author = (remove_diacritics(author[0]),remove_diacritics(author[1]))
         # Initials of the given names
         initials = map(lambda x: x[0].lower(), split_words(author[0]))
@@ -168,4 +194,11 @@ def urlopen_retry(url, **kwargs):# data, timeout, retries, delay, backoff):
             delay=delay*backoff,
             backoff=backoff)
 
+### Partial date representation
+
+def date_from_dateparts(dateparts):
+    year = 1970 if len(dateparts) < 1 else dateparts[0]
+    month = 01 if len(dateparts) < 2 else dateparts[1]
+    day = 01 if len(dateparts) < 3 else dateparts[2]
+    return datetime.date(year=year, month=month, day=day)
 
