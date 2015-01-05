@@ -8,12 +8,30 @@ Dissemin
 
 {% block content %}
 <div id="fullPage">
+    <h4>{% trans "Welcome to dissem.in" %}</h4>
     <p>
+    {% url 'faq' as faq_url %}
     {% blocktrans %}
-    There are currently {{ nb_researchers }} registered researchers,
-from {{ nb_departments }} departments.
+    Dissem.in helps researchers at <a href="http://www.ens.fr/">ENS</a> to upload their papers to institutional or subject repositories,
+    fostering <a href="http://en.wikipedia.org/wiki/Self-archiving">Green Open Access</a>.
+    See the <a href="{{ faq_url }}">FAQ</a> for more information about dissem.in.
     {% endblocktrans %}
     </p>
+
+    <p>
+    {% blocktrans %}
+    This is a preproduction version of the platform.
+    {% endblocktrans %}
+    </p>
+
+    <h4>{% trans "Statistics" %}</h4>
+    <p>
+    {% blocktrans %}
+    We gather the publications of {{ nb_researchers }} researchers, from {{ nb_departments }} departments.
+    {% endblocktrans %}
+    </p>
+
+    <h4>{% trans "Browse papers" %}</h4>
 
     {% url 'search' as search_url %}
     <p>{% blocktrans %}

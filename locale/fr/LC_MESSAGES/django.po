@@ -3,12 +3,11 @@
 # This file is distributed under the same license as the Dissemin package.
 # Antonin Delpeuch <antonin@delpeuch.eu>, 2014.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-17 17:28+0100\n"
+"POT-Creation-Date: 2015-01-05 09:26+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,118 +17,90 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: papers/forms.py:9
+#: papers/forms.py:28
 msgid "First name"
 msgstr "Prénom"
 
-#: papers/forms.py:10
+#: papers/forms.py:29
 msgid "Last name"
 msgstr "Nom"
 
-#: papers/forms.py:11 papers/templates/papers/department.html:81
+#: papers/forms.py:30 papers/templates/papers/department.html:81
 #: papers/templates/papers/search.html:48
 msgid "Department"
 msgstr "Département"
 
-#: papers/forms.py:12
+#: papers/forms.py:31
 msgid "Email"
 msgstr "Email"
 
-#: papers/forms.py:13 papers/templates/papers/publisher.html:40
+#: papers/forms.py:32 papers/templates/papers/publisher.html:40
 msgid "Homepage"
 msgstr "Site web"
 
-#: papers/forms.py:14
+#: papers/forms.py:33
 msgid "Role"
 msgstr "Fonction"
 
-#: papers/models.py:7
+#: papers/models.py:28
 msgid "Open Access"
 msgstr "Accès Libre"
 
-#: papers/models.py:8
+#: papers/models.py:29
 msgid "Allows pre/post prints"
 msgstr "Pré/post-publications autorisées"
 
-#: papers/models.py:9
+#: papers/models.py:30
 msgid "Forbids pre/post prints"
 msgstr "Pré/post-publications interdites"
 
-#: papers/models.py:10
+#: papers/models.py:31
 msgid "Policy unclear"
 msgstr "Politique inconnue"
 
-#: papers/models.py:13 papers/templates/papers/paper.html:38
+#: papers/models.py:36 papers/templates/papers/paper.html:38
 msgid "Available"
 msgstr "Disponible"
 
-#: papers/models.py:14 papers/templates/papers/paper.html:39
+#: papers/models.py:37 papers/templates/papers/paper.html:39
 msgid "Unavailable"
 msgstr "Indisponible"
 
-#: papers/models.py:16
+#: papers/models.py:39
 msgid "Visible"
 msgstr "Visible"
 
-#: papers/models.py:17
+#: papers/models.py:40
 msgid "Candidate"
 msgstr "Candidat"
 
-#: papers/models.py:18
+#: papers/models.py:41
+msgid "Not relevant"
+msgstr "Non pertinent"
+
+#: papers/models.py:42
 msgid "Deleted"
 msgstr "Supprimé"
 
-#: papers/models.py:21
+#: papers/models.py:45
 msgid "Allowed"
 msgstr ""
 
-#: papers/models.py:22
+#: papers/models.py:46
 msgid "Forbidden"
 msgstr ""
 
-#: papers/models.py:23
+#: papers/models.py:47
 msgid "Restricted"
 msgstr ""
 
-#: papers/models.py:24
+#: papers/models.py:48
 msgid "Unclear"
 msgstr ""
 
-#: papers/models.py:25
+#: papers/models.py:49
 msgid "Unknown"
 msgstr ""
-
-#: papers/models.py:60 papers/models.py:74
-msgid "Anonymous researcher"
-msgstr "Chercheur anonyme"
-
-#: papers/views.py:43
-msgid "Publishers"
-msgstr "Maisons d'édition"
-
-#: papers/views.py:80 papers/views.py:121
-msgid "Papers"
-msgstr "Papiers"
-
-#: papers/views.py:84
-msgid " authored by "
-msgstr " écrits par "
-
-#: papers/views.py:89
-msgid " authored in "
-msgstr " écrits au "
-
-#: papers/views.py:94
-msgid " in "
-msgstr " dans "
-
-#: papers/views.py:99
-msgid " published by "
-msgstr " publiés par "
-
-#: papers/views.py:122
-msgid "All papers"
-msgstr "Tous les papiers"
 
 #: papers/templates/papers/department.html:44
 #: papers/templates/papers/group.html:18
@@ -149,24 +120,163 @@ msgstr "Ajouter"
 msgid "Papers of the members"
 msgstr "Papiers des membres"
 
+#: papers/templates/papers/faq.html:11
+msgid "Frequently Asked Questions"
+msgstr ""
+
+#: papers/templates/papers/faq.html:15 papers/templates/papers/faq.html:45
+msgid "What is Open Access?"
+msgstr ""
+
+#: papers/templates/papers/faq.html:16
+msgid "Why should I upload my papers to a repository?"
+msgstr ""
+
+#: papers/templates/papers/faq.html:17
+msgid "What repository should I use?"
+msgstr ""
+
+#: papers/templates/papers/faq.html:20 papers/templates/papers/faq.html:93
+msgid "What is dissem.in?"
+msgstr ""
+
+#: papers/templates/papers/faq.html:21 papers/templates/papers/faq.html:98
+msgid "Is dissem.in a repository?"
+msgstr ""
+
+#: papers/templates/papers/faq.html:22 papers/templates/papers/faq.html:101
+msgid "Who runs dissem.in?"
+msgstr ""
+
+#: papers/templates/papers/faq.html:23 papers/templates/papers/faq.html:103
+msgid "Can I create my profile on dissem.in?"
+msgstr ""
+
+#: papers/templates/papers/faq.html:24 papers/templates/papers/faq.html:107
+msgid "Can I use dissem.in for my institution?"
+msgstr ""
+
+#: papers/templates/papers/faq.html:27 papers/templates/papers/faq.html:111
+msgid "What do your policy classes mean?"
+msgstr ""
+
+#: papers/templates/papers/faq.html:28 papers/templates/papers/faq.html:112
+msgid "When is a paper considered available?"
+msgstr ""
+
+#: papers/templates/papers/faq.html:29 papers/templates/papers/faq.html:116
+msgid "Should I trust your statistics?"
+msgstr ""
+
+#: papers/templates/papers/faq.html:32 papers/templates/papers/faq.html:141
+msgid ""
+"There is a freely available copy of my article online but Dissem.in does not "
+"find it."
+msgstr ""
+
+#: papers/templates/papers/faq.html:33 papers/templates/papers/faq.html:129
+msgid "One of my papers is missing. Why?"
+msgstr ""
+
+#: papers/templates/papers/faq.html:34 papers/templates/papers/faq.html:137
+msgid "Some details of my paper are incorrect. What can I do?"
+msgstr ""
+
+#: papers/templates/papers/faq.html:37 papers/templates/papers/faq.html:155
+msgid "Where do you get the data from?"
+msgstr ""
+
+#: papers/templates/papers/faq.html:38 papers/templates/papers/faq.html:158
+msgid "How can I help?"
+msgstr ""
+
+#: papers/templates/papers/faq.html:39 papers/templates/papers/faq.html:171
+msgid "Where is the source code?"
+msgstr ""
+
+#: papers/templates/papers/faq.html:40 papers/templates/papers/faq.html:173
+msgid "Can I harvest your data?"
+msgstr ""
+
+#: papers/templates/papers/faq.html:41
+msgid "Do you like bikes?"
+msgstr ""
+
+#: papers/templates/papers/faq.html:175
+msgid "Do you like bicycles?"
+msgstr ""
+
+#: papers/templates/papers/feedback.html:6
+#: papers/templates/papers/feedback.html:11
+#: templates/dissemin/skeleton.html:32
+msgid "Feedback"
+msgstr "Réactions"
+
+#: papers/templates/papers/feedback.html:15
+msgid "Your feedback is highly appreciated!"
+msgstr "Votre avis nous intéresse beaucoup!"
+
 #: papers/templates/papers/group.html:14
 msgid "Website"
 msgstr "Page web"
 
-#: papers/templates/papers/index.html:12
+#: papers/templates/papers/index.html:11
+msgid "Welcome to dissem.in"
+msgstr "Bienvenue sur dissem.in"
+
+#: papers/templates/papers/index.html:14
 #, python-format
 msgid ""
 "\n"
-"    There are currently %(nb_researchers)s registered researchers,\n"
-"from %(nb_departments)s departments.\n"
+"    Dissem.in helps researchers at <a href=\"http://www.ens.fr/\">ENS</a> to "
+"upload their papers to institutional or subject repositories,\n"
+"    fostering <a href=\"http://en.wikipedia.org/wiki/Self-archiving\">Green "
+"Open Access</a>.\n"
+"    See the <a href=\"%(faq_url)s\">FAQ</a> for more information about "
+"dissem.in.\n"
 "    "
 msgstr ""
 "\n"
-"Il y a actuellement %(nb_researchers)s chercheurs inscrits,\n"
-"dans %(nb_departments)s départements.\n"
+"    Dissem.in aide les chercheurs à l'<a href=\"http://www.ens.fr/\">ENS</a> "
+"à déposer leurs papiers dans des dépôts institutionnels ou thématiques,\n"
+"    encourageant le <a href=\"http://en.wikipedia.org/wiki/Self-archiving"
+"\">Green Open Access</a>.\n"
+"    Consultez la <a href=\"%(faq_url)s\">FAQ</a> pour plus d'informations "
+"sur dissem.in.\n"
 "    "
 
-#: papers/templates/papers/index.html:19
+#: papers/templates/papers/index.html:22
+msgid ""
+"\n"
+"    This is a preproduction version of the platform.\n"
+"    "
+msgstr ""
+"\n"
+"    Ceci est une version de préproduction de la plateforme.\n"
+"    "
+
+#: papers/templates/papers/index.html:27
+msgid "Statistics"
+msgstr "Statistiques"
+
+#: papers/templates/papers/index.html:29
+#, python-format
+msgid ""
+"\n"
+"    We gather the publications of %(nb_researchers)s researchers, from "
+"%(nb_departments)s departments.\n"
+"    "
+msgstr ""
+"\n"
+"    Nous rassemblons les publications de %(nb_researchers)s chercheurs issus "
+"de %(nb_departments)s départements.\n"
+"    "
+
+#: papers/templates/papers/index.html:34
+msgid "Browse papers"
+msgstr "Parcourir les papiers"
+
+#: papers/templates/papers/index.html:37
 #, python-format
 msgid ""
 "\n"
@@ -178,7 +288,7 @@ msgstr ""
 "par département:\n"
 "    "
 
-#: papers/templates/papers/index.html:30
+#: papers/templates/papers/index.html:48
 #, python-format
 msgid "See also the <a href=\"%(publishers_url)s\">publishers list</a>."
 msgstr ""
@@ -354,7 +464,7 @@ msgstr "Sources secondaires"
 
 #: papers/templates/papers/sources.html:20
 msgid "Harvested with the OAI-PMH protocol."
-msgstr "Moissonées avec le protocole OAI-PMH."
+msgstr "Moissonnées avec le protocole OAI-PMH."
 
 #: papers/templatetags/statuses.py:17
 msgid "Unknown OA status"
@@ -431,6 +541,34 @@ msgstr "La politique concernant les versions finales est inconnue."
 msgid "Unknown policy"
 msgstr "Politique inconnue"
 
+#: papers/views.py:61
+msgid "Publishers"
+msgstr "Maisons d'édition"
+
+#: papers/views.py:98 papers/views.py:139
+msgid "Papers"
+msgstr "Papiers"
+
+#: papers/views.py:102
+msgid " authored by "
+msgstr " écrits par "
+
+#: papers/views.py:107
+msgid " authored in "
+msgstr " écrits au "
+
+#: papers/views.py:112
+msgid " in "
+msgstr " dans "
+
+#: papers/views.py:117
+msgid " published by "
+msgstr " publiés par "
+
+#: papers/views.py:140
+msgid "All papers"
+msgstr "Tous les papiers"
+
 #: templates/admin/base_site.html:4
 msgid "Dissemin site admin"
 msgstr "Administration du site Dissemin"
@@ -445,12 +583,8 @@ msgid "Home"
 msgstr "Accueil"
 
 #: templates/dissemin/skeleton.html:32
-msgid "About"
-msgstr "À propos"
-
-#: templates/dissemin/skeleton.html:32
-msgid "Feedback"
-msgstr "Réactions"
+msgid "FAQ"
+msgstr "FAQ"
 
 #: templates/dissemin/skeleton.html:36
 msgid "Login"

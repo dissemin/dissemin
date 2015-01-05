@@ -42,5 +42,6 @@ urlpatterns = patterns('',
         url(r'^publisher/(?P<pk>\d+)/$', views.PublisherView.as_view(), name='publisher'),
         url(r'^sources$', views.sourcesView, name='sources'),
         url(r'^faq$', views.faqView, name='faq'),
+        url(r'^feedback$', views.feedbackView, name='feedback'),
         url(r'^ajax/', include('papers.ajax')),
 )

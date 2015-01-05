@@ -17,7 +17,7 @@ Frequently Asked Questions
         <p><a href="#what-repository">{% trans "What repository should I use?" %}</a></p>
 
         <h4>Dissem.in</h4>
-        <p><a href="#dissemin">{% trans "What is dissem.in?" %}</a></p>
+        <p><a href="#what-is-dissemin">{% trans "What is dissem.in?" %}</a></p>
         <p><a href="#repository">{% trans "Is dissem.in a repository?" %}</a></p>
         <p><a href="#running">{% trans "Who runs dissem.in?" %}</a></p>
         <p><a href="#creating-a-profile">{% trans "Can I create my profile on dissem.in?" %}</a></p>
@@ -77,20 +77,53 @@ Frequently Asked Questions
         </p>
         <h2 id="what-repository">What repository should I use?</h2>
         <p>
-            TODO.
+            There are roughly two types of repositories:
+            <ul>
+                <li>Subject repositories, restricted to some research fields, such as <a href="http://arxiv.org">arXiv</a>.</li>
+                <li>Institutional repositories, designated to store the research output of a given institution or country.
+                    For instance, ENS has <a href="http://hal-ens.archives-ouvertes.fr/">its own repository</a> integrated in
+                    <a href="http://hal.archives-ouvertes.fr/">HAL</a>.
+                </li>
+            </ul>
+            If your research community favours a specific repository, using it makes sense as it will increase your
+            visibility. If not, institutional repositories are also a good option. 
         </p>
 
         <h3>Dissem.in</h3>
-        <h2 id="dissemin">{% trans "What is dissem.in?" %}</h2>
+        <h2 id="what-is-dissemin">{% trans "What is dissem.in?" %}</h2>
+        <p>Dissem.in is a web platform gathering metadata from <a href="{% url 'sources' %}">various sources</a>
+        and analyzing the full text availability of publications of researchers, currently only within the ENS.
+        It has been designed to foster the use of repositories (rather than preprints posted on personal homepages),
+        <a href="#repositories-rock">for numerous reasons</a>.</p>
         <h2 id="repository">{% trans "Is dissem.in a repository?" %}</h2>
+        <p>Dissem.in is not a repository as it does not store any full text. When the full text of a publication
+        is available, a link to the relevant page is provided.</p>
         <h2 id="running">{% trans "Who runs dissem.in?" %}</h2>
+        <p>Dissem.in is currently run by its developper, <a href="http://antonin.delpeuch.eu">Antonin Delpeuch</a>.</p>
         <h2 id="creating-a-profile">{% trans "Can I create my profile on dissem.in?" %}</h2>
+        <p>If your institution is not covered by dissem.in, currently, no, you cannot.
+        Our algorithms require some information about your department and research field
+        to gather your publications.</p>
         <h2 id="new-institution">{% trans "Can I use dissem.in for my institution?" %}</h2>
+        <p>Yes, just ask <a href="mailto:contact@dissem.in">contact@dissem.in</a>.</p>
 
         <h3>Policies and full-text availability</h3>
         <h2 id="policy-classes">{% trans "What do your policy classes mean?" %}</h2>
         <h2 id="availability">{% trans "When is a paper considered available?" %}</h2>
+        <p>When we have found it in one of the repositories we harvest. The list of
+        these repositories can be found here. Thanks to <a href="http://www.base-search.net">the BASE search engine</a>,
+        we cover more than 68 millions of preprints.</p>
         <h2 id="statistics">{% trans "Should I trust your statistics?" %}</h2>
+        <p>There are a few caveats concerning our data:
+        <ul>
+            <li>Some papers are not present in any of our metadata sources, so they are not counted at all ;</li>
+            <li>Some entries in our system do not correspond to proper research papers ;</li>
+            <li>Some of them have been incorrectly classified by our homonym disambiguation system ;</li>
+            <li>Some repositories might not be covered by any of our sources, so a paper might be marked as unavailable while it is available ;</li>
+            <li>Some papers might be marked as available but actually, they are not (for instance because the content has been deleted) ;</li>
+            <li>And many other technical issues.</li>
+        </ul>
+        But our platform is increasingly reliable and we think that department-wise statistics are meaningful.</p>
 
         <h3>Omissions and errors</h3>
         <h2 id="missing-paper">{% trans "One of my papers is missing. Why?" %}</h2>
@@ -112,8 +145,8 @@ Frequently Asked Questions
                     website. In this case, you should read <a href="#repositories-rock">
                         why you should also put it in a repository</a>.</li>
                     <li>Your article is available in a repository but does not appear as
-                     available in Dissem.in. In this case you should send a message
-                     to contact@dissem.in to fix the problem.</li>
+                     available in dissem.in. In this case you should send a message
+                     to <a href="mailto:contact@dissem.in">contact@dissem.in</a> to fix the problem.</li>
             </ul>
             </p>
 
@@ -122,11 +155,25 @@ Frequently Asked Questions
         <h2 id="sources">{% trans "Where do you get the data from?" %}</h2>
             <p>Our sources are listed on <a href="{% url 'sources' %}">this page</a>.</p>
 
-
         <h2 id="getting-involved">{% trans "How can I help?" %}</h2>
+        <p>There are many ways to get involved, even if you do not want to write any code.
+        <ul>
+            <li>Tell us what you think: <a href="mailto:contact@dissem.in">contact@dissem.in</a> ;</li>
+            <li>Help us to tag articles to improve our author disambiguation algorithm ;</li>
+            <li>Help us with the overall usability of the website ;</li>
+            <li>Help us with the translation of the interface ;</li>
+            <li>Help us to get lists of researchers from departments ;</li>
+            <li>Fix metadata errors (you have to get an account for that) ;</li>
+            <li>Spread the word about this tool ;</li>
+            <li>Star <a href="http://github.com/wetneb/dissemin">our github project</a>!</li>
+        </ul>
+        </p>
         <h2 id="source-code">{% trans "Where is the source code?" %}</h2>
+        <p>The source code is available <a href="http://github.com/wetneb/dissemin">on github</a>.</p>
         <h2 id="oai">{% trans "Can I harvest your data?" %}</h2>
-        <h2 id="bikes">{% trans "Do you like bikes?" %}</h2>
- 
+        <p>Yes! But we have not implemented any API yet. Tell us what you need.</p>
+        <h2 id="bikes">{% trans "Do you like bicycles?" %}</h2>
+        <p>Yes! Bikes are awesome. You should like them too.</p>
+        <p><a href="#">Back to top</a></p>
     </div>
 {% endblock %}

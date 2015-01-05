@@ -40,7 +40,8 @@ ul, .withTriangles
     /* border: 1px solid b; */
     background-color: #2A6496; /* #3448A2; */
     margin: 5px;
-    border-radius: 5px;
+    margin: 0px;
+    /* border-radius: 5px; */
     padding-top: 5px;
     padding-bottom: 7px;
     padding-left: 10px;

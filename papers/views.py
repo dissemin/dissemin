@@ -252,3 +252,6 @@ def sourcesView(request):
 def faqView(request):
     return render(request, 'papers/faq.html')
 
+def feedbackView(request):
+    return render(request, 'papers/feedback.html')
+
