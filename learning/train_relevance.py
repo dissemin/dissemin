@@ -11,10 +11,10 @@ from papers.clustering import *
 # 0: no clustering has taken place before
 # 1: one step of clustering has taken place before
 #    … and so on
-stage = 0
+stage = 1
 
-make_lm = False#True
-recompute = False#True
+make_lm = False
+recompute = False
 train = True
 cluster = True
 
@@ -93,6 +93,8 @@ elif train:
 
 # Train the classifier and show outliers
 if train or recompute or make_lm:
+    if stage > 0:
+        rc.positiveSampleWeight = 0.4
     rc.train(features, labels, 'linear')
 
     def paper_url(pk):

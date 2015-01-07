@@ -89,6 +89,18 @@ class TopicalRelevanceFeature(RelevanceFeature):
                 print('      '+w+'\t'+str(a)+'-'+str(b)+' = '+str(a-b))
         return topicScore - langScore
 
+    def _normalizedWScore(self, line, dpt_id, explain=False):
+        topicScore = self.models[dpt_id].nlProbLine(line)
+        langScore = self.lang.nlProbLine(line)
+        if explain:
+            words = tokenize(line)
+            for w in words:
+                a = self.models[dpt_id].lp(w)
+                b = self.lang.lp(w)
+                print('      '+w+'\t'+str(a)+'-'+str(b)+' = '+str(a-b))
+        return topicScore - langScore
+
+
     def load(self, filename):
         f = open(filename, 'rb')
         dct = cPickle.load(f)
@@ -121,7 +133,7 @@ class TitleRelevance(TopicalRelevanceFeature):
         if dpt_id not in self.models:
             print("Warning, scoring a title for an unknown department")
             return 0.
-        return self._wScore(author.paper.title, dpt_id, explain)
+        return self._normalizedWScore(author.paper.title, dpt_id, explain)
 
 class PublicationRelevance(TopicalRelevanceFeature):
     """
@@ -140,7 +152,7 @@ class PublicationRelevance(TopicalRelevanceFeature):
             return 0.
         titles = [pub.full_title() for pub in author.paper.publication_set.all().select_related('journal')]
         if titles:
-            return max(map(lambda t: self._wScore(t, dpt_id, explain), titles))
+            return max(map(lambda t: self._normalizedWScore(t, dpt_id, explain), titles))
         return 0.
 
 class KeywordsRelevance(TopicalRelevanceFeature):
@@ -160,7 +172,7 @@ class KeywordsRelevance(TopicalRelevanceFeature):
             return 0.
         words = [rec.keywords for rec in author.paper.oairecord_set.all()]
         words = filter(lambda x: x != None, words)
-        return float(sum(map(lambda t: self._wScore(t, dpt_id, explain), words)))
+        return float(sum(map(lambda t: self._normalizedWScore(t, dpt_id, explain), words)))
 
 class ContributorsRelevance(TopicalRelevanceFeature):
     """
@@ -179,7 +191,7 @@ class ContributorsRelevance(TopicalRelevanceFeature):
             return 0.
         words = [rec.contributors for rec in author.paper.oairecord_set.all()]
         words = filter(lambda x: x != None, words)
-        return float(sum(map(lambda t: self._wScore(t, dpt_id, explain), words)))
+        return float(sum(map(lambda t: self._normalizedWScore(t, dpt_id, explain), words)))
 
 class RelevanceClassifier(object):
     def __init__(self, **kwargs):

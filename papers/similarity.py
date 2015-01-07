@@ -183,7 +183,7 @@ class SimilarityClassifier(object):
                 ContributorsSimilarity(contributorsModel),
                 ]
         self.classifier = None
-        self.positiveSampleWeight = 0.15
+        self.positiveSampleWeight = 0.1
     
     def computeFeatures(self, lstDataA, lstDataB):
         if len(lstDataA) != len(self.simFeatures) or len(lstDataB) != len(self.simFeatures):

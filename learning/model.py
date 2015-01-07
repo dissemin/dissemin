@@ -85,7 +85,9 @@ class WordCount:
         for w in tokenize(l):
             total += self.lp(w)
             lgt += 1
-        return total / lgt
+        if lgt > 0:
+            return total / lgt
+        return 0.
 
     def _countWord(self, w):
         c = self.c.get(w,0)
