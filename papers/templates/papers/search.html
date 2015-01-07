@@ -130,7 +130,9 @@
 {% endblock %}
 
 {% block lists %}
+ {% if search_results.paginator.num_pages > 1 %}
 <div class="searchPages">{% bootstrap_paginate search_results range=10 %}</div>
+ {% endif %}
  {% for paper in search_results %}
  {% ifchanged paper.year %}
  {% if not forloop.first %}</ul></div>{% endif %}
