@@ -22,7 +22,7 @@ def clusterResearcher(rpk, sc, rc):
     print("Removing previous clustering output…")
     authors.update(researcher=None,cluster=None,num_children=1)
 
-    cc = ClusteringContext(authors, sc, rc)
+    cc = ClusteringContext(authors, researcher, sc, rc)
 
     logf = open('log-clustering', 'w')
 
@@ -32,7 +32,7 @@ def clusterResearcher(rpk, sc, rc):
     idx = 0
     for a in authors:
         print("# "+str(idx)+"/"+str(count)+" ## "+unicode(a.paper_id))
-        cc.runClustering(a.pk, researcher, True, logf)
+        cc.runClustering(a.pk, True, logf)
         idx += 1
     logf.close()
 
@@ -45,7 +45,7 @@ def clusterResearcher(rpk, sc, rc):
 
 
 class ClusteringContext(object):
-    def __init__(self, author_queryset, sc, rc):
+    def __init__(self, author_queryset, researcher, sc, rc):
         """
         Caveat: the author_queryset has to be closed under the "children" relation.
         """
@@ -61,12 +61,17 @@ class ClusteringContext(object):
         self.children = dict()
         # The number of indirect children
         self.cluster_size = dict()
-        # The id of the researcher associated to the cluster rooted in pk 
-        self.researcher = dict()
+        # The number of indirect children classified as relevant for the researcher
+        self.num_relevant = dict()
         # The id of the roots of the clusters
         self.cluster_ids = set()
-        # Is this paper classified as relevant (TODO: for debugging purposes only)
+        # Has this paper been tested for relevance yet?
+        self.relevance_computed = dict()
+        # For debugging purposes only
         self.relevance = dict()
+
+        # Researcher we're trying to cluster
+        self.researcher = researcher
 
         # The similarity and relevance classifiers
         self.sc = sc
@@ -85,15 +90,21 @@ class ClusteringContext(object):
             if author.cluster_id == None:
                 self.cluster_ids.add(pk)
             self.author_data[pk] = sc.getDataById(pk)
-            self.researcher[pk] = author.researcher_id
+            self.num_relevant[pk] = 0
             self.cluster_size[pk] = author.num_children
 
     def commit(self):
         for (pk,val) in self.authors.items():
             val.cluster_id = self.find(pk)
             val.similar_id = self.similar.get(pk,None)
-            val.researcher_id = self.researcher.get(val.cluster_id,None)
             val.num_children = self.cluster_size[pk]
+            cluster_size = self.cluster_size[val.cluster_id]
+            if self.num_relevant[val.cluster_id] >= cluster_size/2.0:
+                val.researcher_id = self.researcher.id
+            else:
+                val.researcher_id = None
+            # Num_relevant is not stored as it is department-centric
+            # whereas the clusters themselves are "universal"
             val.save()
 
     def classify(self, pkA, pkB):
@@ -161,21 +172,31 @@ class ClusteringContext(object):
             self.parent[old_root] = new_root
             self.children[new_root].append(old_root)
             self.cluster_size[new_root] += self.cluster_size[old_root]
+            self.num_relevant[new_root] += self.num_relevant[old_root]
             self.cluster_ids.discard(old_root)
-            self.researcher[new_root] = max(
-                    self.researcher.get(new_root,None),
-                    self.researcher.get(old_root,None))
-            # TODO: what happens if we have two different researchers ? Refuse the merge ?
 
-    def runClustering(self, target, researcher, order_pk=False, logf=None):
+    def computeRelevance(self, target):
+        if not self.relevance_computed.get(target, False):
+            dept_pk = self.researcher.department_id
+            relevant = self.rc.classify(self.authors[target], dept_pk)
+            parent = self.find(target)
+            self.relevance[target] = relevant
+            if relevant:
+                self.num_relevant[parent] += 1
+                if parent != target:
+                    self.num_relevant[target] += 1
+            self.relevance_computed[target] = relevant
+
+
+    def runClustering(self, target, order_pk=False, logf=None):
         # TODO this method is supposed to update name.is_known if needed
         # for now, it is not required, but it will be when we introduce a
         # better name similarity function
         MAX_CLUSTER_SIZE_DURING_FETCH = 1000
-        NB_TESTS_WITHIN_CLUSTER = 10 # if clusters are 2/3-quasicliques,
-        # it yields a proba of less than 0.01 to miss a match
+        NB_TESTS_WITHIN_CLUSTER = 32
 
-        dept_pk = researcher.department_id
+        # STEP 0: compute relevance
+        self.computeRelevance(target)
 
         # STEP 1: clusters
         if order_pk:
@@ -207,21 +228,6 @@ class ClusteringContext(object):
             if match_found:
                 nb_edges_added += 1
         print(str(nb_edges_added)+" edges added")
-
-        # STEP 3: if we have ended up in a cluster associated with a researcher, fine
-        rootpk = self.find(target)
-        cur_researcher = self.researcher.get(target, None)
-        if cur_researcher:
-            print("Already classified as relevant")
-            #return
-            # TODO uncomment this return
-        
-        # STEP 4: if not, we classify this record
-        relevant = self.rc.classify(self.authors[target], dept_pk)
-        self.relevance[target] = relevant
-        print("Relevance: "+str(relevant))
-        if relevant:
-            self.researcher[rootpk] = researcher.pk
 
 
     def outputGraph(self, outf):

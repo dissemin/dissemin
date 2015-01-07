@@ -11,12 +11,12 @@ from papers.clustering import *
 # 0: no clustering has taken place before
 # 1: one step of clustering has taken place before
 #    … and so on
-stage = 1
+stage = 0
 
-make_lm = True
-recompute = True
-cluster = True
+make_lm = False#True
+recompute = False#True
 train = True
+cluster = True
 
 # Read dataset
 author_ids = []
@@ -31,10 +31,14 @@ all_fields_model = WordCount()
 all_fields_model.load('models/everything.pkl')
 contributors_model = WordCount()
 contributors_model.load('models/contributors.pkl')
-rc = RelevanceClassifier(languageModel=all_fields_model,contributorsModel=contributors_model)
+publications_model = WordCount()
+publications_model.load('models/publications.pkl')
+rc = RelevanceClassifier(languageModel=all_fields_model,
+        contributorsModel=contributors_model,
+        publicationsModel=publications_model)
 
 # If this is the first stage, we reset all author attributions
-if stage == 0:
+if stage <= 0:
     print("Resetting author attributions…")
     for name in Name.objects.filter(is_known=True):
         try:
@@ -44,6 +48,9 @@ if stage == 0:
             name.save(update_fields=['is_known'])
 
         name.author_set.all().update(researcher=r)
+
+if stage < 0:
+    exit(0)
 
 relevance_model_fname = 'models/relevance-'+str(stage)+'.pkl'
 
@@ -107,4 +114,5 @@ if cluster:
     sc = SimilarityClassifier(filename="models/similarity.pkl")
     for r in Researcher.objects.all():
         clusterResearcher(r.pk, sc, rc)
+        print("That was researcher "+str(r.pk))
 

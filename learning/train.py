@@ -27,6 +27,8 @@ from learning.model import *
 
 w = WordCount()
 w_contrib = WordCount()
+w_journal = WordCount()
+
 count = 0
 for p in OaiRecord.objects.filter(about__visibility="VISIBLE"):
     if count % 100 == 0:
@@ -46,8 +48,11 @@ for p in Publication.objects.filter(paper__visibility="VISIBLE"):
     count += 1
     w.feedLine(p.full_title())
     w.feedLine(p.paper.title)
+    w_journal.feedLine(p.full_title())
+
 w.save('models/everything.pkl')
 w_contrib.save('models/contributors.pkl')
+w_journal.save('models/publications.pkl')
 
 
 exit(0)
