@@ -41,12 +41,8 @@ NB_JOURNALS_PER_PAGE = 30
 
 def index(request):
     nb_researchers = Researcher.objects.count()
-    nb_groups = ResearchGroup.objects.count()
-    nb_departments = Department.objects.count()
     context = {
         'nb_researchers': nb_researchers,
-        'nb_groups': nb_groups,
-        'nb_departments': nb_departments,
         'departments': Department.objects.order_by('name')
         }
     return render(request, 'papers/index.html', context)
@@ -156,7 +152,7 @@ def searchView(request, **kwargs):
 
     context['search_results'] = current_papers
     context['search_description'] = search_description
-    context['nb_results'] = queryset.count()
+    context['nb_results'] = current_papers.count
 
     # Build the GET requests for variants of the parameters
     args_without_page = args.copy()

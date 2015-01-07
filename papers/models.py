@@ -54,7 +54,7 @@ class Department(models.Model):
 
     @property
     def sorted_researchers(self):
-        return self.researcher_set.order_by('name')
+        return self.researcher_set.select_related('name').order_by('name')
 
     def __unicode__(self):
         return self.name
