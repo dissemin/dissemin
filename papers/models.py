@@ -195,6 +195,7 @@ class Author(models.Model):
     name = models.ForeignKey(Name)
     cluster = models.ForeignKey('Author', blank=True, null=True, related_name='clusterrel')
     num_children = models.IntegerField(default=1)
+    num_relevant = models.IntegerField(default=0)
     similar = models.ForeignKey('Author', blank=True, null=True, related_name='similarrel')
     researcher = models.ForeignKey(Researcher, blank=True, null=True, on_delete=models.SET_NULL)
     def __unicode__(self):

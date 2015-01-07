@@ -59,7 +59,7 @@ class KnownCoauthors(RelevanceFeature):
         coauthors = author.paper.author_set.exclude(id=author.id).select_related('name')
         count = 0
         for a in coauthors:
-            if a.is_known:
+            if a.researcher != None:
                 count += 1
                 if explain:
                     print('      '+unicode(a))
@@ -171,7 +171,7 @@ class ContributorsRelevance(TopicalRelevanceFeature):
 
     def feed(self, author, dpt_id):
         for record in author.paper.oairecord_set.all():
-            self.feedLine(records.contributors, dpt_id)
+            self.feedLine(record.contributors, dpt_id)
 
     def compute(self, author, dpt_id, explain=False):
         if dpt_id not in self.models:
@@ -190,14 +190,16 @@ class RelevanceClassifier(object):
             raise ValueError("A language model is required.")
         lm = kwargs['languageModel']
         cm = kwargs.get('contributorsModel', lm)
+        pm = kwargs.get('publicationsModel', lm)
         self.features = [
                 KnownCoauthors(),
                 TitleRelevance(lm),
                 KeywordsRelevance(lm),
-                PublicationRelevance(cm),
+                PublicationRelevance(pm),
+                ContributorsRelevance(cm),
                 ]
         self.classifier = None
-        self.positiveSampleWeight = 0.2
+        self.positiveSampleWeight = 1.0
     
     def computeFeatures(self, author, dpt_id, explain=False):
         if explain:
