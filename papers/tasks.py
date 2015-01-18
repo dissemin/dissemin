@@ -37,7 +37,7 @@ from papers.oai import *
 from papers.doi import to_doi
 from papers.crossref import fetch_papers_from_crossref_by_researcher_name, convert_to_name_pair
 from papers.proxy import *
-from papers.utils import name_normalization
+from papers.name import name_normalization
 from papers.base import fetch_papers_from_base_for_researcher
 
 logger = get_task_logger(__name__)

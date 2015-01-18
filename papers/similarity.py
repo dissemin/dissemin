@@ -21,7 +21,8 @@
 from __future__ import unicode_literals, print_function
 
 from papers.models import Name, Author, Researcher
-from papers.utils import match_names, iunaccent, nocomma, filter_punctuation, tokenize
+from papers.utils import iunaccent, nocomma, filter_punctuation, tokenize
+from paper.name import match_names
 from nltk.tokenize.punkt import PunktWordTokenizer
 from sklearn import svm
 from sklearn.metrics import confusion_matrix

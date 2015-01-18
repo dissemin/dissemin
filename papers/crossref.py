@@ -28,7 +28,8 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from papers.errors import MetadataSourceException
 from papers.doi import to_doi
-from papers.utils import match_names, normalize_name_words, create_paper_fingerprint, urlopen_retry, iunaccent
+from papers.name import match_names, normalize_name_words
+from papers.utils import create_paper_fingerprint, urlopen_retry, iunaccent
 from papers.models import Publication, Paper
 
 from unidecode import unidecode

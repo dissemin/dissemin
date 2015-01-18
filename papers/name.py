@@ -23,13 +23,65 @@ from __future__ import unicode_literals
 import re
 import name_tools
 
-from papers.utils import normalize_name_words, iunaccent, remove_diacritics
+from papers.utils import split_words, iunaccent, remove_diacritics
 
 # Name managemement: heuristics to separate a name into (first,last)
 comma_re = re.compile(r',+')
 space_re = re.compile(r'\s+')
 initial_re = re.compile(r'(^|\W)\w(\W|$)')
 lowercase_re = re.compile(r'[a-z]')
+
+
+def match_names(a,b):
+    if not a or not b:
+        return False
+    (firstA,lastA) = a
+    (firstB,lastB) = b
+    return lastA.lower() == lastB.lower() and match_first_names(firstA,firstB)
+
+initial_re = re.compile(r'[A-Z](\.,;)*$')
+def normalize_name_words(w):
+    """ If it is an initial, ensure it is of the form "T.", and recapitalize fully capitalized words. """
+    w = w.strip()
+    words = w.split()
+    words = map(recapitalize_word, words)
+    words = map(lambda w: w[0]+'.' if initial_re.match(w) else w, words)
+    return ' '.join(words)
+
+
+def recapitalize_word(w):
+    """ Turns every fully capitalized word into an uncapitalized word (except for the first character) """
+    return w[0]+w[1:].lower() if all(map(isupper, w)) else w
+
+def match_first_names(a,b):
+    partsA = split_words(a)
+    partsB = split_words(b)
+    partsA = map(unicode.lower, partsA)
+    partsB = map(unicode.lower, partsB)
+    return partsA == partsB
+# TODO : add support for initials ?
+# but this might include a lot of garbage
+
+def to_plain_name(name):
+    return (name.first,name.last)
+
+# Name normalization function used by the OAI proxy
+nn_separator_re = re.compile(r',+ *')
+nn_escaping_chars_re = re.compile(r'[\{\}\\]')
+nn_nontext_re = re.compile(r'[^a-z_]+')
+nn_final_nontext_re = re.compile(r'[^a-z_]+$')
+
+def name_normalization(ident):
+    ident = remove_diacritics(ident).lower()
+    ident = ident.strip()
+    ident = nn_separator_re.sub('_',ident)
+    ident = nn_escaping_chars_re.sub('',ident)
+    ident = nn_final_nontext_re.sub('',ident)
+    ident = nn_nontext_re.sub('-',ident)
+    return ident
+
+
+#### Helpers for the name splitting heuristic ######
 
 # Does this string contain a name initial?
 def contains_initials(s):
@@ -62,6 +114,8 @@ def predsplit_backwards(predicate, words):
             first.insert(0, words[i])
     return (first,last)
 
+
+###### Name splitting heuristic based on name_tools ######
 
 def parse_comma_name(name):
     """
