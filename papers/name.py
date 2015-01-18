@@ -21,6 +21,7 @@
 from __future__ import unicode_literals
 
 import re
+import name_tools
 
 from papers.utils import normalize_name_words, iunaccent, remove_diacritics
 
@@ -61,23 +62,21 @@ def predsplit_backwards(predicate, words):
             first.insert(0, words[i])
     return (first,last)
 
+
 def parse_comma_name(name):
     """
     Parse a name of the form "Last name, First name" to (first name, last name)
     Try to do something reasonable if there is no comma.
     """
     if ',' in name:
-        name = comma_re.sub(',',name)
-        idx = name.find(',')
-        last_name = name[:idx]
-        first_name = name[(idx+1):]
+        # In this case name_tools does it well
+        prefix, first_name, last_name, suffix = name_tools.split(names)
     else:
-        # TODO: there is probably a better way to parse names such as "Colin de la Higuera"
-        # list of "particle words" such as "de, von, van, du" ?
-        # That would be europe-centric though...
         words = space_re.split(name)
         if not words:
             return ('','')
+        first_name = None
+        last_name = None
 
         # Search for initials in the words
         initial = map(contains_initials, words)
@@ -94,8 +93,8 @@ def parse_comma_name(name):
         # CASE 2: the last word is capitalized but not all of them are
         # we assume that it is the last word of the last name
         elif not initial[-1] and capitalized[-1] and not all(capitalized):
-            (first,last) = predsplit_backwards(
-                    (lambda i: capitalized[i] and not initial[i]),
+            (first,last) = predsplit_forward(
+                    (lambda i: (not capitalized[i]) or initial[i]),
                     words)
 
         # CASE 3: the first word is an initial
@@ -125,14 +124,14 @@ def parse_comma_name(name):
             last = words[last_initial_idx+1:]
 
         # CASE 6: we have no clue
-        # We simply keep the last word as last name
+        # We fall back on name_tools, where wise things are done
+        # to parse correctly names such as "Colin de la Higuera"
         else:
-            cut_idx = len(words)-1
-            first = words[:cut_idx]
-            last = words[cut_idx:]
+            prefix, first_name, last_name, suffix = name_tools.split(name)
             
-        first_name = ' '.join(first)
-        last_name = ' '.join(last)
+        if not first_name or not last_name:
+            first_name = ' '.join(first)
+            last_name = ' '.join(last)
 
     first_name = first_name.strip()
     last_name = last_name.strip()
