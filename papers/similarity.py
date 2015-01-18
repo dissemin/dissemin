@@ -65,10 +65,29 @@ class SimilarityFeature(object):
         return self.score(self.fetchData(authorA), self.fetchData(authorB))
 
 
+class AuthorNameSimilarity(SimilarityFeature):
+    """
+    Similarity of the names of the target authors.
+    This is kept separate from CoauthorsSimilarity as it is probably
+    useful to give it a different weight in the classifier.
+    """
+    def __init__(self):
+        super(AuthorNameSimilarity, self).__init__()
+
+    def fetchData(self, author):
+        return to_plain_name(author.name)
+
+    def score(self, dataA, dataB):
+        # TODO: this score function is far from optimal
+        # refine it so that 'Claire Mathieu' and 'Claire Mathieu-Kenyon' gets
+        # a decent score
+        firstA, lastA = dataA
+        firstB, lastB = dataB
+        return name_tools.match(firstA+' '+lastA, firstB+' '+lastB)
+
 class CoauthorsSimilarity(SimilarityFeature):
     """
     Number of matching coauthors (without the target authors themselves)
-    TODO: use Invenio's name similarity algorithm to refine this.
     """
     def __init__(self):
         super(CoauthorsSimilarity, self).__init__()
@@ -78,11 +97,16 @@ class CoauthorsSimilarity(SimilarityFeature):
         return map(lambda author: (author.name.first,author.name.last), coauthors)
 
     def score(self, dataA, dataB):
+        # TODO: finer name similarity.
         score = 0.
         for a in dataA:
             for b in dataB:
-                if match_names(a,b):
-                    score += 1.
+                firstA, lastA = a
+                firstB, lastB = b
+                score += name_tools.match(firstA+' '+lastA,firstB+' '+lastB)
+                #Previously, it was:
+                #if match_names(a,b):
+                #    score += 1.
         return score
 
 def intersectionScore(model, wordsA, wordsB, explain=False):
@@ -178,6 +202,7 @@ class SimilarityClassifier(object):
         if not contributorsModel:
             contributorsModel = publicationModel
         self.simFeatures = [
+                AuthorNameSimilarity(),
                 CoauthorsSimilarity(),
                 PublicationSimilarity(publicationModel),
                 TitleSimilarity(publicationModel),
