@@ -66,14 +66,22 @@ class ResearchGroup(models.Model):
         return self.name
 
 class Researcher(models.Model):
+    # The preferred name for this researcher
     name = models.ForeignKey('Name')
+    # Variants of this name found in the papers
+    name_variants = models.ManyToManyField('Name', related_name='variant_of')
+    # Department the researcher belongs to
     department = models.ForeignKey(Department)
+    # Research groups the researcher belongs to
     groups = models.ManyToManyField(ResearchGroup,blank=True,null=True)
+    
+    # Various info about the researcher (not used internally)
     email = models.EmailField(blank=True,null=True)
     homepage = models.URLField(blank=True, null=True)
     role = models.CharField(max_length=128, null=True, blank=True)
 
     # DOI search
+    # TODO is this still needed ?
     last_doi_search = models.DateTimeField(null=True,blank=True)
     status = models.CharField(max_length=512, blank=True, null=True)
     last_status_update = models.DateTimeField(auto_now=True)
@@ -122,12 +130,15 @@ class Name(models.Model):
         """
         full = iunaccent(first+' '+last)
         return cls.objects.get_or_create(full=full, defaults={'first':first,'last':last})
-    def last_name_known(self):
+    def update_is_known(self):
         """
-        Is the last name of this Name the same as the last name of a known researcher?
+        A name is considered as known when it belongs to a name variants group of a researcher
         """
-        count = Name.objects.filter(last__iexact=self.last,is_known=True).count()
-        return count > 0
+        new_value = self.variant_of.count() > 0
+        if new_value != self.is_known:
+            self.is_known = new_value
+            self.save(update_fields=['is_known'])
+
     def __unicode__(self):
         return '%s %s' % (self.first,self.last)
 
