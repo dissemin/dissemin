@@ -79,3 +79,13 @@ def add_names_to_variants():
     for r in Researcher.objects.all():
         r.name_variants.add(r.name)
 
+def update_paper_statuses():
+    """
+    Should only be run if something went wrong,
+    the backend is supposed to update the fields by itself
+    """
+    papers = Paper.objects.all()
+    for p in papers:
+        p.update_availability()
+
+

@@ -52,6 +52,7 @@ def process_records(listRecords):
         authors = get_oai_authors(metadata)
 
         # Filter the record
+        # TODO TODO TODO this is wrong: it is the name that should be known
         if all(not elem.is_known for elem in authors):
             continue
         if not 'title' in metadata or metadata['title'] == []:
@@ -116,6 +117,7 @@ def fetch_records_for_name(name):
     ident2 = name_normalization(ident2)
     fetch_records_for_normalized_name(ident2)
     # TODO: try with first and last swapped, added as CANDIDATEs ?
+    # TODO: this is all very ugly.
 
 def fetch_records_for_normalized_name(ident):
     client = get_proxy_client()
@@ -184,13 +186,6 @@ def fetch_dois_for_researcher(pk):
 
     researcher.status = 'OK, %d records processed.' % nb_records
     researcher.save()
-
-# Should only be run if something went wrong,
-# the backend is supposed to update the fields by itself
-def update_paper_statuses():
-    papers = Paper.objects.all()
-    for p in papers:
-        p.update_availability()
 
 
 @shared_task
