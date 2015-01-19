@@ -102,6 +102,10 @@ def searchView(request, **kwargs):
         queryset = queryset.filter(author__researcher__department=department)
         search_description += _(' authored in ')+unicode(department)
         context['department'] = department
+    elif 'name' in args:
+        name = get_object_or_404(Name, pk=args.get('name'))
+        queryset = queryset.filter(author__name=name)
+        context['name'] = name
     if 'journal' in args:
         journal = get_object_or_404(Journal, pk=args.get('journal'))
         queryset = queryset.filter(publication__journal=journal)
@@ -152,7 +156,7 @@ def searchView(request, **kwargs):
 
     context['search_results'] = current_papers
     context['search_description'] = search_description
-    context['nb_results'] = current_papers.count
+    context['nb_results'] = paginator.count
 
     # Build the GET requests for variants of the parameters
     args_without_page = args.copy()

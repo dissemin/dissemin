@@ -42,7 +42,7 @@ from papers.base import fetch_papers_from_base_for_researcher
 
 logger = get_task_logger(__name__)
 
-def process_records(listRecords):
+def process_records(ccf, listRecords):
     count = 0
     saved = 0
     for record in listRecords:
@@ -52,7 +52,6 @@ def process_records(listRecords):
         authors = get_oai_authors(metadata)
 
         # Filter the record
-        # TODO TODO TODO this is wrong: it is the name that should be known
         if all(not elem.is_known for elem in authors):
             continue
         if not 'title' in metadata or metadata['title'] == []:

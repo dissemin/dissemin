@@ -12,10 +12,13 @@ from papers.utils import nocomma
 from unidecode import unidecode
 
 def clusterResearcher(rpk, sc, rc):
+    """
+    Runs the algorithm on the whole set of papers related to a researcher
+    Not suitable for online incremental update.
+    """
     researcher=Researcher.objects.get(pk=rpk)
-    npk=researcher.name.pk
 
-    authors = Author.objects.filter(name_id=npk).filter(
+    authors = Author.objects.filter(name__variant_of=researcher).filter(
             Q(paper__visibility='VISIBLE') | Q(paper__visibility='DELETED')).order_by('id')
 
     # Delete researchers
@@ -45,7 +48,7 @@ def clusterResearcher(rpk, sc, rc):
 
 
 class ClusteringContext(object):
-    def __init__(self, author_queryset, researcher, sc, rc):
+    def __init__(self, researcher, sc, rc):
         """
         Caveat: the author_queryset has to be closed under the "children" relation.
         """
@@ -80,18 +83,24 @@ class ClusteringContext(object):
         # The author data used for the similarity classifier (cached)
         self.author_data = dict()
 
+        author_queryset = Author.objects.filter(name__variant_of=researcher).filter(
+            Q(paper__visibility='VISIBLE') | Q(paper__visibility='DELETED')).order_by('id')
+
         for author in author_queryset:
-            pk = author.pk
-            self.authors[pk] = author
-            if pk != author.cluster_id:
-                self.parent[pk] = author.cluster_id
-            self.similar[pk] = author.similar
-            self.children[pk] = [child.pk for child in author.clusterrel.all()]
-            if author.cluster_id == None:
-                self.cluster_ids.add(pk)
-            self.author_data[pk] = sc.getDataById(pk)
-            self.num_relevant[pk] = 0
-            self.cluster_size[pk] = author.num_children
+            self.addAuthor(author)
+
+    def addAuthor(self, author):
+        pk = author.pk
+        self.authors[pk] = author
+        if pk != author.cluster_id:
+            self.parent[pk] = author.cluster_id
+        self.similar[pk] = author.similar
+        self.children[pk] = [child.pk for child in author.clusterrel.all()]
+        if author.cluster_id == None:
+            self.cluster_ids.add(pk)
+        self.author_data[pk] = sc.getDataById(pk)
+        self.num_relevant[pk] = 0
+        self.cluster_size[pk] = author.num_children
 
     def commit(self):
         for (pk,val) in self.authors.items():
@@ -189,9 +198,6 @@ class ClusteringContext(object):
 
 
     def runClustering(self, target, order_pk=False, logf=None):
-        # TODO this method is supposed to update name.is_known if needed
-        # for now, it is not required, but it will be when we introduce a
-        # better name similarity function
         MAX_CLUSTER_SIZE_DURING_FETCH = 1000
         NB_TESTS_WITHIN_CLUSTER = 32
 
@@ -242,5 +248,44 @@ class ClusteringContext(object):
         for (x,y) in self.parent.items():
             if y != None:
                 print(nocomma([x,y]), file=outf)
+
+
+# This structure stores clustering contextes for online clustering
+class ClusteringContextFactory(object):
+    """
+    Creates and stores clustering contexts for each researcher.
+    The contexts are created lazily.
+    """
+    def __init__(self, sc, rc):
+        self.cc = dict()
+        self.sc = sc
+        self.rc = rc
+        self.authors_to_cluster = []
+
+    def load(self, researcher):
+        if researcher.pk in self.cc:
+            return
+        # Otherwise we have to create a fresh one
+        context = ClusteringContext(researcher, self.sc, self.rc)
+        self.cc[researcher.pk] = context
+
+    def clusterAuthorLater(self, author):
+        self.authors_to_cluster.append(author)
+
+    def clusterAuthorNow(self, author):
+        potential_researchers = author.name.variant_of.all()
+        for researcher in potential_researchers:
+            self.load(researcher)
+            self.cc[researcher.pk].addAuthor(author)
+            self.cc[researcher.pk].runClustering(author.pk)
+    
+    def clusterThemNow(self):
+        for author in self.authors_to_cluster:
+            self.clusterAuthorNow(author)
+  
+    def commitThemAll(self):
+        for k in self.cc:
+            self.cc[k].commit()
+    
 
 

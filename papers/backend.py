@@ -53,6 +53,7 @@ def create_researcher(first, last, dept, email, role, homepage):
 
 
 def lookup_name(author_name):
+    # TODO this should be a Name class method (EASY TODO!)
     first_name = author_name[0][:MAX_NAME_LENGTH]
     last_name = author_name[1][:MAX_NAME_LENGTH]
     full_name = first_name+' '+last_name
@@ -64,14 +65,28 @@ def lookup_name(author_name):
     name = Name.create(first_name,last_name)
     # The name is not saved: the name has to be saved only
     # if the paper is saved.
+    num_variants = name.variants_queryset().count()
+    if num_variants > 0:
+        name.is_known = True
     return name
 
 # Used to save unsaved names after lookup
-def save_if_not_saved(obj):
+def save_name_if_not_saved(obj):
+    # TODO this should be a Name method. (EASY TODO!)
     if not obj.pk:
+        obj.update_variants()
+        # the is_known field should already be up to date as it is computed in the lookup
         obj.save()
 
-def get_or_create_paper(title, author_names, pubdate, doi=None, visibility='VISIBLE'):
+# TODO: this could be a method of ClusteringContextFactory ?
+# TODO: implement a dummy relevance classifier for the first phase
+def get_or_create_paper(ccf, title, author_names, pubdate, doi=None, visibility='VISIBLE'):
+    """
+    Creates a paper if it is not already present.
+    The ccf argument is a ClusteringContextFactory object.
+    The clustering algorithm is run to decide what authors should be 
+    attributed to the paper.
+    """
     # If a DOI is present, first look it up
     if doi:
         matches = Publication.objects.filter(doi__exact=doi)
@@ -106,16 +121,12 @@ def get_or_create_paper(title, author_names, pubdate, doi=None, visibility='VISI
         p.save()
         authors = []
         for author_name in author_names:
-            save_if_not_saved(author_name)
+            save_name_if_not_saved(author_name)
             a = Author(name=author_name, paper=p)
-            # TODO: TEMPORARY:
-            if author_name.is_known:
-                a.researcher = Researcher.objects.get(name=author_name)
-            # TO BE REPLACED BY the clustering algo in the following loop
             a.save()
+            if author_name.is_known:
+                ccf.clusterAuthorLater(a)
             authors.append(a)
-        #for author in authors:
-        #    author.runClustering()
 
     if doi:
         try:

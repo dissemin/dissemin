@@ -130,6 +130,21 @@ class Name(models.Model):
         """
         full = iunaccent(first+' '+last)
         return cls.objects.get_or_create(full=full, defaults={'first':first,'last':last})
+    def variants_queryset(self):
+        """
+        Returns the queryset of should-be variants
+        """
+        # TODO this could be refined (icontains?)
+        return Researcher.objects.filter(name__iexact = self.last)
+
+    def update_variants(self):
+        """
+        Sets the variants of this name to the candidates returned by variants_queryset
+        """
+        self.variants_of.delete()
+        for researcher in self.variants_queryset():
+            researcher.name_variants.add(self)
+
     def update_is_known(self):
         """
         A name is considered as known when it belongs to a name variants group of a researcher
