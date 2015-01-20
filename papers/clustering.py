@@ -25,7 +25,7 @@ def clusterResearcher(rpk, sc, rc):
     print("Removing previous clustering output…")
     authors.update(researcher=None,cluster=None,num_children=1)
 
-    cc = ClusteringContext(authors, researcher, sc, rc)
+    cc = ClusteringContext(researcher, sc, rc)
 
     logf = open('log-clustering', 'w')
 
@@ -98,7 +98,7 @@ class ClusteringContext(object):
         self.children[pk] = [child.pk for child in author.clusterrel.all()]
         if author.cluster_id == None:
             self.cluster_ids.add(pk)
-        self.author_data[pk] = sc.getDataById(pk)
+        self.author_data[pk] = self.sc.getDataById(pk)
         self.num_relevant[pk] = 0
         self.cluster_size[pk] = author.num_children
 
@@ -187,7 +187,7 @@ class ClusteringContext(object):
     def computeRelevance(self, target):
         if not self.relevance_computed.get(target, False):
             dept_pk = self.researcher.department_id
-            relevant = self.rc.classify(self.authors[target], dept_pk)
+            relevant = self.rc.classify(self.authors[target], dept_pk, True)
             parent = self.find(target)
             self.relevance[target] = relevant
             if relevant:

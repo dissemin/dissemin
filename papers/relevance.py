@@ -22,7 +22,7 @@ from __future__ import unicode_literals, print_function
 
 from papers.models import Name, Author, Researcher
 from papers.utils import iunaccent, nocomma, filter_punctuation, tokenize
-from papers.names import match_names
+from papers.name import match_names
 from learning.model import WordCount
 from sklearn import svm
 from sklearn.metrics import confusion_matrix
@@ -60,7 +60,7 @@ class KnownCoauthors(RelevanceFeature):
         coauthors = author.paper.author_set.exclude(id=author.id).select_related('name')
         count = 0
         for a in coauthors:
-            if a.researcher != None:
+            if a.name.is_known:
                 count += 1
                 if explain:
                     print('      '+unicode(a))
@@ -233,11 +233,13 @@ class RelevanceClassifier(object):
         pred = self.classifier.predict(features)
         return confusion_matrix(pred, labels)
 
-    def classify(self, author, dpt_id):
+    def classify(self, author, dpt_id, verbose=False):
         if not self.classifier:
             return None
         features = self.computeFeatures(author, dpt_id)
         output = self.classifier.predict(features)
+        if verbose:
+            print(str(features)+' -> '+str(output[0]))
         return output[0]
 
     def feed(self, author, dpt_id):

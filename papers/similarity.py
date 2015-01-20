@@ -22,7 +22,7 @@ from __future__ import unicode_literals, print_function
 
 from papers.models import Name, Author, Researcher
 from papers.utils import iunaccent, nocomma, filter_punctuation, tokenize
-from paper.name import match_names
+from papers.name import match_names
 from nltk.tokenize.punkt import PunktWordTokenizer
 from sklearn import svm
 from sklearn.metrics import confusion_matrix
@@ -30,6 +30,7 @@ import cPickle
 import numpy as np
 import matplotlib.pyplot as plt
 from unidecode import unidecode
+import name_tools
 
 class SimilarityFeature(object):
     """
@@ -246,8 +247,10 @@ class SimilarityClassifier(object):
         dataB = self.lstData(authorB)
         return self.classifyData(dataA, dataB)
 
-    def classifyData(self, dataA, dataB):
+    def classifyData(self, dataA, dataB, verbose=False):
         feat_vec = self.computeFeatures(dataA, dataB)
+        if verbose:
+            print(feat_vec)
         output = self.classifier.predict(feat_vec)
         return output[0]
 
