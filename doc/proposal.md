@@ -13,7 +13,7 @@ Antonin Delpeuch, University of Cambridge, Trinity College and École Normale Su
 > Summary of your proposal; maximum 200 words. The abstract should be a concise statement of the problem, approach and conclusions of the work described. You can copy and paste this into the submission system later.
 
 Many researchers do not upload their papers to any open repository, for instance because the deposit process is too
-complicated or because they are not sure they are allowed to do so by their publishers.
+complicated or because they are not sure to be allowed to do so by their publishers.
 We present a new web platform designed to help researchers upload their papers to an open repository. Based on various metadata sources,
 we create a publications list that can be filtered by publisher policy and full text availability in major repositories.
 This enables us to get a list of publications that are not available
@@ -81,6 +81,8 @@ of the audience will help us to improve the tool and to adapt it to the needs of
 Our web platform allows to browse the publications of researchers within a university. These
 publications can be filtered using two criteria: publisher policy and full text availability.
 
+![Screenshot of the search criteria](https://raw.githubusercontent.com/wetneb/dissemin/master/doc/img/criteria.png)
+
 2.1 Publisher policy
 
 We use the SHERPA/RoMEO API to fetch publisher policies. They provide their own
@@ -108,6 +110,13 @@ Full text availability is detected by searching for the articles in open reposit
 Our goal is to detect only copies present in open repositories, and not on personal
 homepages, to foster the use of repositories. Incidentally, it is also much easier
 to discover automatically a preprint when it is stored in an open repository.
+
+2.3. Combination of the two criteria
+
+These two criteria can be visually combined to help researchers to grasp instantly
+the status of their publications:
+
+![Screenshot of the publications list](https://raw.githubusercontent.com/wetneb/dissemin/master/doc/img/publist.png)
 
 3. Technical details
 
