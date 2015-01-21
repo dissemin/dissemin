@@ -103,6 +103,7 @@ We divide the policies into four categories:
 * Unknown policy: in all other cases.
 
 These classes can be easily identified using the following symbols:
+
 ![Screenshot of the search criteria](https://raw.githubusercontent.com/wetneb/dissemin/master/doc/img/policy.png)
 
 ##### 2.2 Full text availability
@@ -113,6 +114,7 @@ homepages, to foster the use of repositories. Incidentally, it is also much easi
 to discover automatically a preprint when it is stored in an open repository.
 
 The full text availability is presented with a symbol:
+
 ![Screenshot of the availability criteria](https://raw.githubusercontent.com/wetneb/dissemin/master/doc/img/availability.png)
 
 ##### 2.3. Combination of the two criteria
