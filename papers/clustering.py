@@ -298,13 +298,13 @@ class ClusteringContext(object):
         graphf.close()           
 
     def outputGraph(self, outf):
-        print('nodedef>name VARCHAR,label VARCHAR,pid VARCHAR,visibility VARCHAR,relevance VARCHAR', file=outf)
+        print('nodedef>name VARCHAR,label VARCHAR,pid VARCHAR,visibility VARCHAR,relevance VARCHAR,relevant VARCHAR', file=outf)
         for (x,v) in self.authors.items():
             visibility = v.paper.visibility
             if v.paper.year <= 2012:
                 visibility = 'NOT_LABELLED'
             print(nocomma([x,unidecode(v.paper.title), v.paper.id,
-                visibility, self.relevance.get(x,None)]), file=outf)
+                visibility, self.relevance.get(x,None),self.relevance.get(x,-1.)>0.]), file=outf)
         print('edgedef>node1 VARCHAR,node2 VARCHAR', file=outf)
         for (x,y) in self.edge_set:
             if y != None:
