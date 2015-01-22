@@ -30,7 +30,7 @@ class ClusteringContext(object):
         self.children = dict()
         # The number of indirect children
         self.cluster_size = dict()
-        # The number of indirect children classified as relevant for the researcher
+        # The sum of the relevance scores of the indirect children
         self.num_relevant = dict()
         # The id of the roots of the clusters
         self.cluster_ids = set()
@@ -106,7 +106,7 @@ class ClusteringContext(object):
             val.num_children = self.cluster_size[pk]
             val.cluster_relevance = self.num_relevant[val.cluster_id]
             cluster_size = self.cluster_size[val.cluster_id]
-            if self.num_relevant[val.cluster_id] >= cluster_size/2.0:
+            if self.num_relevant[val.cluster_id] > 0:
                 val.researcher_id = self.researcher.id
             else:
                 val.researcher_id = None
@@ -208,14 +208,13 @@ class ClusteringContext(object):
         """
         if not self.relevance_computed.get(target, False):
             dept_pk = self.researcher.department_id
-            relevant = self.rc.classify(self.authors[target], dept_pk, True)
+            relevance = self.rc.score(self.authors[target], dept_pk, True)
             parent = self.find(target)
-            self.relevance[target] = relevant
-            if relevant:
-                self.num_relevant[parent] += 1
-                if parent != target:
-                    self.num_relevant[target] += 1
-            self.relevance_computed[target] = relevant
+            self.relevance[target] = relevance
+            self.num_relevant[parent] += relevance
+            if parent != target:
+                self.num_relevant[target] += relevance
+            self.relevance_computed[target] = True
 
 
     def runClustering(self, target, order_pk=False, logf=None):
@@ -252,7 +251,8 @@ class ClusteringContext(object):
                 similar = self.classify(author, target)
                 if similar:
                     print("   "+str(target)+"-"+str(author)+"\t"+str(similar))
-                print(str(self.authors[author].pk)+"-"+
+                if logf:
+                    print(str(self.authors[author].pk)+"-"+
                         str(self.authors[target].pk)+"\t"+str(similar), file=logf)
                 if similar:
                     match_found = True
@@ -278,6 +278,13 @@ class ClusteringContext(object):
                 num_children=1,
                 cluster_relevance=0.,
                 similar=None)
+        print("Updating clustering context…")
+        for pk in self.parent:
+            self.parent[pk] = None
+            self.num_relevant[pk] = 0.
+            self.children[pk] = []
+            self.cluster_ids.add(pk)
+            self.cluster_size[pk] = 1
 
         logf = None
         idx = 0
@@ -291,7 +298,7 @@ class ClusteringContext(object):
         self.commit()
 
         graphf = open('learning/gephi/classified-'+str(self.researcher.pk)+'.gdf', 'w')
-        cc.outputGraph(graphf)
+        self.outputGraph(graphf)
         graphf.close()           
 
     def outputGraph(self, outf):
@@ -324,6 +331,7 @@ class ClusteringContextFactory(object):
         if researcher.pk in self.cc:
             return
         # Otherwise we have to create a fresh one
+        print('Loading clustering context for researcher '+str(researcher))
         context = ClusteringContext(researcher, self.sc, self.rc)
         self.cc[researcher.pk] = context
 

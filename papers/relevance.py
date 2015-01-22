@@ -234,13 +234,23 @@ class RelevanceClassifier(object):
         return confusion_matrix(pred, labels)
 
     def classify(self, author, dpt_id, verbose=False):
+        distance = self.distance(author, dpt_id, verbose)
+        if distance:
+            return distance > 0.
+
+    def score(self, author, dpt_id, verbose=False):
+        """
+        Returns the distance (value of the decision function)
+        for an author. An author is relevant when its distance
+        is positive.
+        """
         if not self.classifier:
             return None
         features = self.computeFeatures(author, dpt_id)
-        output = self.classifier.predict(features)
+        distance = self.classifier.decision_function([features])[0][0]
         if verbose:
-            print(str(features)+' -> '+str(output[0]))
-        return output[0]
+            print(str(features)+' -> '+str(distance))
+        return distance
 
     def feed(self, author, dpt_id):
         for f in self.features:

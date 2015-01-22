@@ -104,10 +104,10 @@ class CoauthorsSimilarity(SimilarityFeature):
             for b in dataB:
                 firstA, lastA = a
                 firstB, lastB = b
-                score += name_tools.match(firstA+' '+lastA,firstB+' '+lastB)
-                #Previously, it was:
-                #if match_names(a,b):
-                #    score += 1.
+                #score += name_tools.match(firstA+' '+lastA,firstB+' '+lastB)
+                # Previously, it was:
+                if match_names(a,b):
+                    score += 1.
         return score
 
 def intersectionScore(model, wordsA, wordsB, explain=False):
@@ -203,7 +203,7 @@ class SimilarityClassifier(object):
         if not contributorsModel:
             contributorsModel = publicationModel
         self.simFeatures = [
-                AuthorNameSimilarity(),
+    #            AuthorNameSimilarity(),
                 CoauthorsSimilarity(),
                 PublicationSimilarity(publicationModel),
                 TitleSimilarity(publicationModel),
@@ -217,6 +217,11 @@ class SimilarityClassifier(object):
             return None
         lst = zip(self.simFeatures, lstDataA, lstDataB)
         return map(lambda (f,a,b): f.score(a,b), lst)
+        #result = []
+        #for (f,a,b) in lst:
+        #    print('# Computing feature '+str(type(f)))
+        #    result.append(f.score(a,b))
+        #return result
 
     def lstData(self, author):
         return map(lambda f: f.fetchData(author), self.simFeatures)
