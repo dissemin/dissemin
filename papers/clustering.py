@@ -23,9 +23,6 @@ class ClusteringContext(object):
         self.authors = dict()
         # The pk of the parent (if any)
         self.parent = dict()
-        # The pk of the author that was found similar when merging two clusters (if any)
-        # TODO this does not make any sense
-        self.similar = dict()
         # The pks of the children (in the union find)
         self.children = dict()
         # The number of indirect children
@@ -36,8 +33,10 @@ class ClusteringContext(object):
         self.cluster_ids = set()
         # Has this paper been tested for relevance yet?
         self.relevance_computed = dict()
+
         # For debugging purposes only
         self.relevance = dict()
+        self.edge_set = set()
 
         # Researcher we're trying to cluster
         self.researcher = researcher
@@ -72,7 +71,6 @@ class ClusteringContext(object):
             self.parent[pk] = None
         else:
             self.parent[pk] = author.cluster_id
-        self.similar[pk] = author.similar
         self.children[pk] = filter(lambda x: x != pk, [child.pk for child in author.clusterrel.all()])
         if author.cluster_id == None or author.cluster_id == pk:
             self.cluster_ids.add(pk)
@@ -102,7 +100,6 @@ class ClusteringContext(object):
         """
         for (pk,val) in self.authors.items():
             val.cluster_id = self.find(pk)
-            val.similar_id = self.similar.get(pk,None)
             val.num_children = self.cluster_size[pk]
             val.cluster_relevance = self.num_relevant[val.cluster_id]
             cluster_size = self.cluster_size[val.cluster_id]
@@ -256,7 +253,7 @@ class ClusteringContext(object):
                         str(self.authors[target].pk)+"\t"+str(similar), file=logf)
                 if similar:
                     match_found = True
-                    self.similar[target] = author
+                    self.edge_set.add((target,author))
                     # Merge the two clusters
                     self.union(target, author)
                     break
@@ -276,8 +273,7 @@ class ClusteringContext(object):
                 researcher=None,
                 cluster=None,
                 num_children=1,
-                cluster_relevance=0.,
-                similar=None)
+                cluster_relevance=0.)
         print("Updating clustering context…")
         for pk in self.parent:
             self.parent[pk] = None
@@ -310,7 +306,7 @@ class ClusteringContext(object):
             print(nocomma([x,unidecode(v.paper.title), v.paper.id,
                 visibility, self.relevance.get(x,None)]), file=outf)
         print('edgedef>node1 VARCHAR,node2 VARCHAR', file=outf)
-        for (x,y) in self.parent.items():
+        for (x,y) in self.edge_set:
             if y != None:
                 print(nocomma([x,y]), file=outf)
 
