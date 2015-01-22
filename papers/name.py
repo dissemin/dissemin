@@ -33,11 +33,24 @@ lowercase_re = re.compile(r'[a-z]')
 
 
 def match_names(a,b):
+    """
+    Returns a boolean: are these two names compatible?
+    Examples:
+    > ('Robin', 'Ryder'),('R.', 'Ryder'): True
+    > ('Robin J.', 'Ryder'),('R.', 'Ryder'): True
+    > ('R. J.', 'Ryder'),('J.', 'Ryder'): False
+    > ('Claire', 'Mathieu'),('Claire', 'Kenyon-Mathieu'): False
+    """
     if not a or not b:
         return False
     (firstA,lastA) = a
     (firstB,lastB) = b
-    return lastA.lower() == lastB.lower() and match_first_names(firstA,firstB)
+    if lastA.lower() != lastB.lower():
+        return False
+    partsA = split_words(firstA)
+    partsB = split_words(firstB)
+    parts = zip(partsA, partsB)
+    return all(map(match_first_names, parts))
 
 initial_re = re.compile(r'[A-Z](\.,;)*$')
 def normalize_name_words(w):
@@ -53,14 +66,14 @@ def recapitalize_word(w):
     """ Turns every fully capitalized word into an uncapitalized word (except for the first character) """
     return w[0]+w[1:].lower() if all(map(isupper, w)) else w
 
-def match_first_names(a,b):
-    partsA = split_words(a)
-    partsB = split_words(b)
-    partsA = map(unicode.lower, partsA)
-    partsB = map(unicode.lower, partsB)
-    return partsA == partsB
-# TODO : add support for initials ?
-# but this might include a lot of garbage
+def match_first_names(pair):
+    a,b = pair
+    if len(a) == 1 and len(b) > 0:
+        return a.lower() == b[0].lower()
+    elif len(b) == 1 and len(a) > 0:
+        return b.lower() == a[0].lower()
+    else:
+        return a.lower() == b.lower()
 
 def to_plain_name(name):
     return (name.first,name.last)

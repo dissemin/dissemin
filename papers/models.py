@@ -154,6 +154,31 @@ class Name(models.Model):
             self.is_known = new_value
             self.save(update_fields=['is_known'])
 
+    @classmethod
+    def lookup_name(cls, author_name):
+        first_name = author_name[0][:MAX_NAME_LENGTH]
+        last_name = author_name[1][:MAX_NAME_LENGTH]
+        full_name = first_name+' '+last_name
+        full_name = full_name.strip()
+        normalized = iunaccent(full_name)
+        name = cls.objects.filter(full=normalized).first()
+        if name:
+            return name
+        name = cls.create(first_name,last_name)
+        # The name is not saved: the name has to be saved only
+        # if the paper is saved.
+        num_variants = name.variants_queryset().count()
+        if num_variants > 0:
+            name.is_known = True
+        return name
+
+    # Used to save unsaved names after lookup
+    def save_if_not_saved(self):
+        if not self.pk:
+            # the is_known field should already be up to date as it is computed in the lookup
+            self.save()
+            self.update_variants()
+
     def __unicode__(self):
         return '%s %s' % (self.first,self.last)
 

@@ -148,7 +148,7 @@ def add_base_document(doc, source):
     #    return False
 
     # Lookup the names
-    model_names = map(lookup_name, author_names)
+    model_names = map(Name.lookup_name, author_names)
 
     # Check that at least one of the last names is known
     # TODO remove this and do the things above

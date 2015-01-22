@@ -176,7 +176,7 @@ def fetch_dois_for_researcher(pk):
                 continue
             
             title = metadata['title']
-            authors = map(lookup_name, map(convert_to_name_pair, metadata['author']))
+            authors = map(Name.lookup_name, map(convert_to_name_pair, metadata['author']))
             paper = get_or_create_paper(title, authors, pubdate) # don't let this function
             # create the publication, because it would re-fetch the metadata from CrossRef
             create_publication(paper, metadata)

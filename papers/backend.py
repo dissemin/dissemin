@@ -54,32 +54,6 @@ def create_researcher(first, last, dept, email, role, homepage):
     return researcher
 
 
-def lookup_name(author_name):
-    # TODO this should be a Name class method (EASY TODO!)
-    first_name = author_name[0][:MAX_NAME_LENGTH]
-    last_name = author_name[1][:MAX_NAME_LENGTH]
-    full_name = first_name+' '+last_name
-    full_name = full_name.strip()
-    normalized = iunaccent(full_name)
-    name = Name.objects.filter(full=normalized).first()
-    if name:
-        return name
-    name = Name.create(first_name,last_name)
-    # The name is not saved: the name has to be saved only
-    # if the paper is saved.
-    num_variants = name.variants_queryset().count()
-    if num_variants > 0:
-        name.is_known = True
-    return name
-
-# Used to save unsaved names after lookup
-def save_name_if_not_saved(obj):
-    # TODO this should be a Name method. (EASY TODO!)
-    if not obj.pk:
-        # the is_known field should already be up to date as it is computed in the lookup
-        obj.save()
-        obj.update_variants()
-
 # TODO: this could be a method of ClusteringContextFactory ?
 # TODO: implement a dummy relevance classifier for the first phase
 def get_or_create_paper(title, author_names, pubdate, doi=None, visibility='VISIBLE'):
@@ -122,7 +96,7 @@ def get_or_create_paper(title, author_names, pubdate, doi=None, visibility='VISI
         p.save()
         authors = []
         for author_name in author_names:
-            save_name_if_not_saved(author_name)
+            author.name.save_if_not_saved()
             a = Author(name=author_name, paper=p)
             a.save()
             if author_name.is_known:
