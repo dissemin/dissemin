@@ -55,7 +55,7 @@ Although it is not a repository in itself, it uses the protocols
 > Tell us what you will (and won't) cover in the presentation. Why will your topic be of interest to the intended audience? Include figures and images if they will help reviewers evaluate the proposal content. If you are proposing a panel, outline how you envision each panelist contributing to the overall discussion. Proposals should be 2-4 pages in length and in English.
 
 
-1. Introduction to the problem.
+#### 1. Introduction to the problem.
 
 Green open access is less expensive than gold open access, but the time it costs researchers to
 upload their papers to repositories is far from negligible. In the case where administrative staff
@@ -76,14 +76,12 @@ We first give a quick tour of the tool, implemented as a web platform. Then, we 
 and administrative challenges behind the project. Finally, we hope that the questions and reactions
 of the audience will help us to improve the tool and to adapt it to the needs of the community.
 
-2. Overview of the system
+#### 2. Overview of the system
 
 Our web platform allows to browse the publications of researchers within a university. These
 publications can be filtered using two criteria: publisher policy and full text availability.
 
-![Screenshot of the search criteria](https://raw.githubusercontent.com/wetneb/dissemin/master/doc/img/criteria.png)
-
-2.1 Publisher policy
+##### 2.1 Publisher policy
 
 We use the SHERPA/RoMEO API to fetch publisher policies. They provide their own
 policy classification, but for our purpose a simpler classification is sufficient.
@@ -104,23 +102,34 @@ We divide the policies into four categories:
   cannot be uploaded. This is rather rare.
 * Unknown policy: in all other cases.
 
-2.2 Full text availability
+These classes can be easily identified using the following symbols:
+
+![Screenshot of the search criteria](https://raw.githubusercontent.com/wetneb/dissemin/master/doc/img/policy.png)
+
+##### 2.2 Full text availability
 
 Full text availability is detected by searching for the articles in open repositories.
 Our goal is to detect only copies present in open repositories, and not on personal
 homepages, to foster the use of repositories. Incidentally, it is also much easier
 to discover automatically a preprint when it is stored in an open repository.
 
-2.3. Combination of the two criteria
+The full text availability is presented with a symbol:
+
+![Screenshot of the availability criteria](https://raw.githubusercontent.com/wetneb/dissemin/master/doc/img/availability.png)
+
+##### 2.3. Combination of the two criteria
 
 These two criteria can be visually combined to help researchers to grasp instantly
-the status of their publications:
+the status of their publications, as in the following example:
 
 ![Screenshot of the publications list](https://raw.githubusercontent.com/wetneb/dissemin/master/doc/img/publist.png)
 
-3. Technical details
+The two first papers were not found in any repository, but their publisher's policy indicates that they could be made available. They would then be marked as the third paper. The fourth paper is published in an open access journal and
+is hence considered available. The last paper is also available and the publisher policy is marked as unknown.
 
-3.1. Metadata sources
+#### 3. Technical details
+
+##### 3.1. Metadata sources
 
 We use two different tools to discover preprints:
 * Bielefeld Academic Search Engine (through its API): this service covers a large
@@ -139,7 +148,7 @@ this service does not provide a criterion to distinguish the "Open access"
 class from the "Pre/post-prints allowed" class: we use the Directory of 
 Open Access Journals for that purpose.
 
-3.2. Author disambiguation
+##### 3.2. Author disambiguation
 
 
 
