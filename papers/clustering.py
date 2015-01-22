@@ -331,7 +331,7 @@ class ClusteringContextFactory(object):
         if researcher.pk in self.cc:
             return
         # Otherwise we have to create a fresh one
-        print('Loading clustering context for researcher '+str(researcher))
+        print('Loading clustering context for researcher '+unicode(researcher))
         context = ClusteringContext(researcher, self.sc, self.rc)
         self.cc[researcher.pk] = context
 
