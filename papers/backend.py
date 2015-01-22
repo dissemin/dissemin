@@ -31,6 +31,8 @@ from papers.crossref import fetch_metadata_by_DOI
 from papers.romeo import fetch_journal
 from papers.name import to_plain_name, parse_comma_name
 
+from papers.globals import *
+
 def create_researcher(first, last, dept, email, role, homepage):
     name, created = Name.objects.get_or_create(full=iunaccent(first+' '+last),
             defaults={'first':first, 'last':last})
@@ -74,16 +76,15 @@ def lookup_name(author_name):
 def save_name_if_not_saved(obj):
     # TODO this should be a Name method. (EASY TODO!)
     if not obj.pk:
-        obj.update_variants()
         # the is_known field should already be up to date as it is computed in the lookup
         obj.save()
+        obj.update_variants()
 
 # TODO: this could be a method of ClusteringContextFactory ?
 # TODO: implement a dummy relevance classifier for the first phase
-def get_or_create_paper(ccf, title, author_names, pubdate, doi=None, visibility='VISIBLE'):
+def get_or_create_paper(title, author_names, pubdate, doi=None, visibility='VISIBLE'):
     """
     Creates a paper if it is not already present.
-    The ccf argument is a ClusteringContextFactory object.
     The clustering algorithm is run to decide what authors should be 
     attributed to the paper.
     """
@@ -125,7 +126,7 @@ def get_or_create_paper(ccf, title, author_names, pubdate, doi=None, visibility=
             a = Author(name=author_name, paper=p)
             a.save()
             if author_name.is_known:
-                ccf.clusterAuthorLater(a)
+                clustering_context_factory.clusterAuthorLater(a)
             authors.append(a)
 
     if doi:

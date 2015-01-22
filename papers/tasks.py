@@ -42,7 +42,7 @@ from papers.base import fetch_papers_from_base_for_researcher
 
 logger = get_task_logger(__name__)
 
-def process_records(ccf, listRecords):
+def process_records(listRecords):
     count = 0
     saved = 0
     for record in listRecords:
@@ -99,7 +99,8 @@ def process_records(ccf, listRecords):
 def fetch_everything_for_researcher(pk):
     fetch_records_for_researcher(pk)
     fetch_dois_for_researcher(pk)
-    fetch_papers_from_base_for_researcher(Researcher.objects.get(pk=pk))
+    # fetch_papers_from_base_for_researcher(Researcher.objects.get(pk=pk))
+    clustering_context_factory.commitThemAll()
 
 @shared_task
 def fetch_records_for_researcher(pk):

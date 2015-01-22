@@ -135,13 +135,13 @@ class Name(models.Model):
         Returns the queryset of should-be variants
         """
         # TODO this could be refined (icontains?)
-        return Researcher.objects.filter(name__iexact = self.last)
+        return Researcher.objects.filter(name__last__iexact = self.last)
 
     def update_variants(self):
         """
         Sets the variants of this name to the candidates returned by variants_queryset
         """
-        self.variants_of.delete()
+        self.variant_of.clear()
         for researcher in self.variants_queryset():
             researcher.name_variants.add(self)
 
@@ -173,6 +173,8 @@ class Paper(models.Model):
 
     def __unicode__(self):
         return self.title
+
+    # TODO easy TODO: order authors by ID !!!!!!
 
     # The two following fields need to be updated after the relevant changes
     # using the methods below.
@@ -221,6 +223,7 @@ class Author(models.Model):
     name = models.ForeignKey(Name)
     cluster = models.ForeignKey('Author', blank=True, null=True, related_name='clusterrel')
     num_children = models.IntegerField(default=1)
+    cluster_relevance = models.FloatField(default=0) # TODO change this default to a negative value
     similar = models.ForeignKey('Author', blank=True, null=True, related_name='similarrel')
     researcher = models.ForeignKey(Researcher, blank=True, null=True, on_delete=models.SET_NULL)
     def __unicode__(self):

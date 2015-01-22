@@ -23,7 +23,7 @@ from __future__ import unicode_literals
 import re
 import name_tools
 
-from papers.utils import split_words, iunaccent, remove_diacritics
+from papers.utils import split_words, iunaccent, remove_diacritics, isupper
 
 # Name managemement: heuristics to separate a name into (first,last)
 comma_re = re.compile(r',+')
@@ -124,7 +124,7 @@ def parse_comma_name(name):
     """
     if ',' in name:
         # In this case name_tools does it well
-        prefix, first_name, last_name, suffix = name_tools.split(names)
+        prefix, first_name, last_name, suffix = name_tools.split(name)
     else:
         words = space_re.split(name)
         if not words:
