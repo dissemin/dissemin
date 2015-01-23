@@ -30,7 +30,7 @@ comma_re = re.compile(r',+')
 space_re = re.compile(r'\s+')
 initial_re = re.compile(r'(^|\W)\w(\W|$)')
 lowercase_re = re.compile(r'[a-z]')
-
+letter_re = re.compile(r'\w')
 
 def match_names(a,b):
     """
@@ -64,7 +64,17 @@ def normalize_name_words(w):
 
 def recapitalize_word(w):
     """ Turns every fully capitalized word into an uncapitalized word (except for the first character) """
-    return w[0]+w[1:].lower() if all(map(isupper, w)) else w
+    if w.upper() == w:
+        previousIsChar = False
+        res = ''
+        for i in range(len(w)):
+            if previousIsChar:
+                res += w[i].lower()
+            else:
+                res += w[i]
+            previousIsChar = letter_re.match(w[i]) != None
+        return res
+    return w
 
 def match_first_names(pair):
     a,b = pair
