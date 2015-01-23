@@ -158,6 +158,8 @@ class Name(models.Model):
 
     @classmethod
     def lookup_name(cls, author_name):
+        if author_name == None:
+            return
         first_name = author_name[0][:MAX_NAME_LENGTH]
         last_name = author_name[1][:MAX_NAME_LENGTH]
 

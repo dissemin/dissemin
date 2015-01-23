@@ -147,32 +147,12 @@ def fetch_papers_from_crossref_by_researcher_name(name, update=False):
                 continue
             if not 'author' in metadata:
                 continue
-            authors = map(convert_to_name_pair, metadata['author'])
+
             if not 'title' in metadata or not metadata['title']:
                 print "No title, skipping"
                 continue 
 
-            # First look if the paper is already known.
-            # This is useful because we might have got the full names of the authors
-            # from another source (e.g. OAI) but we might have only the initials
-            # in the CrossRef version. If the fingerprints match, we can magically
-            # expand the initials and associate the DOI to the initial paper.
-            #fp = create_paper_fingerprint(metadata['title'], authors)
-            #try:
-            #    Paper.objects.get(fingerprint=fp)
-            #    # If the paper is already found, then the DOI is relevant: we emit it.
-            #    print "Matching paper found"
-            #except ObjectDoesNotExist:
-            #    # Otherwise we might not have heard of it before, but it might be
-            #    # still relevant (i.e. involving one of the known researchers)
-            #    pass
-
-            # Then look if any of the authors is known
-            for a in authors:
-                if a:
-                    print a[1]+', '+a[0]
-
-            # Otherwise we save it!
+            # Save it!
             yield metadata
 
             count += 1
