@@ -97,10 +97,14 @@ def process_records(listRecords):
 
 @shared_task
 def fetch_everything_for_researcher(pk):
-    fetch_records_for_researcher(pk)
-    fetch_dois_for_researcher(pk)
-    # fetch_papers_from_base_for_researcher(Researcher.objects.get(pk=pk))
-    clustering_context_factory.commitThemAll()
+    try:
+        # fetch_records_for_researcher(pk)
+        fetch_dois_for_researcher(pk)
+        # fetch_papers_from_base_for_researcher(Researcher.objects.get(pk=pk))
+    except MetadataSourceException as e:
+        raise e
+    finally:
+        clustering_context_factory.commitThemAll()
 
 @shared_task
 def fetch_records_for_researcher(pk):
@@ -177,6 +181,9 @@ def fetch_dois_for_researcher(pk):
             
             title = metadata['title']
             authors = map(Name.lookup_name, map(convert_to_name_pair, metadata['author']))
+            if all(not elem.is_known for elem in authors):
+                continue
+            print "# Saved."
             paper = get_or_create_paper(title, authors, pubdate) # don't let this function
             # create the publication, because it would re-fetch the metadata from CrossRef
             create_publication(paper, metadata)

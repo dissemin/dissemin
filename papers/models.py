@@ -22,6 +22,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
 from papers.utils import nstr, iunaccent
+from papers.name import match_names
 from django.utils.translation import ugettext_lazy as _
 
 OA_STATUS_CHOICES = (
@@ -132,7 +133,8 @@ class Name(models.Model):
         return cls.objects.get_or_create(full=full, defaults={'first':first,'last':last})
     def variants_queryset(self):
         """
-        Returns the queryset of should-be variants
+        Returns the queryset of should-be variants.
+        WARNING: This is to be used on a name that is already associated with a researcher.
         """
         # TODO this could be refined (icontains?)
         return Researcher.objects.filter(name__last__iexact = self.last)
@@ -158,18 +160,32 @@ class Name(models.Model):
     def lookup_name(cls, author_name):
         first_name = author_name[0][:MAX_NAME_LENGTH]
         last_name = author_name[1][:MAX_NAME_LENGTH]
+
+        # First, check if the name itself is known
+        # (we do not take the first/last separation into account
+        # here because the exact match is already a quite strong
+        # condition)
         full_name = first_name+' '+last_name
         full_name = full_name.strip()
         normalized = iunaccent(full_name)
         name = cls.objects.filter(full=normalized).first()
         if name:
             return name
+
+        # Otherwise, we create a name
         name = cls.create(first_name,last_name)
-        # The name is not saved: the name has to be saved only
-        # if the paper is saved.
-        num_variants = name.variants_queryset().count()
-        if num_variants > 0:
-            name.is_known = True
+        # The name is not saved yet: the name has to be saved only
+        # if the paper is saved or it is a variant of a known name
+
+        # Then, we look for known names with the same last name.
+        similar_names = cls.objects.filter(last__iexact=last_name, is_known=True)
+        for sim in similar_names:
+            if match_names((sim.first,sim.last),(first_name,last_name)):
+                name.is_known = True
+                name.save()
+                for researcher in sim.variant_of.all():
+                    researcher.name_variants.add(name)
+
         return name
 
     # Used to save unsaved names after lookup

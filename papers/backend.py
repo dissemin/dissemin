@@ -96,7 +96,7 @@ def get_or_create_paper(title, author_names, pubdate, doi=None, visibility='VISI
         p.save()
         authors = []
         for author_name in author_names:
-            author.name.save_if_not_saved()
+            author_name.save_if_not_saved()
             a = Author(name=author_name, paper=p)
             a.save()
             if author_name.is_known:
