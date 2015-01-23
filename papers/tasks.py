@@ -182,7 +182,7 @@ def fetch_dois_for_researcher(pk):
             title = metadata['title']
             authors = map(Name.lookup_name, map(convert_to_name_pair, metadata['author']))
             authors = filter(lambda x: x != None, authors)
-            if all(not elem.is_known for elem in authors) or authors = []:
+            if all(not elem.is_known for elem in authors) or authors == []:
                 continue
             print "# Saved."
             paper = get_or_create_paper(title, authors, pubdate) # don't let this function

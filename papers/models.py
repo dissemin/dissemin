@@ -180,13 +180,20 @@ class Name(models.Model):
         # if the paper is saved or it is a variant of a known name
 
         # Then, we look for known names with the same last name.
-        similar_names = cls.objects.filter(last__iexact=last_name, is_known=True)
-        for sim in similar_names:
-            if match_names((sim.first,sim.last),(first_name,last_name)):
-                name.is_known = True
-                name.save()
-                for researcher in sim.variant_of.all():
-                    researcher.name_variants.add(name)
+        similar_researchers = Researcher.objects.filter(name__last__iexact=last_name).select_related('name')
+        for r in similar_researchers:
+            if match_names((r.name.first,r.name.last), (first_name,last_name)):
+                r.name_variants.add(name)
+   
+        # Other approach that adds *many* names
+        #
+        #similar_names = cls.objects.filter(last__iexact=last_name, is_known=True)
+        #for sim in similar_names:
+        #    if match_names((sim.first,sim.last),(first_name,last_name)):
+        #        name.is_known = True
+        #        name.save()
+        #        for researcher in sim.variant_of.all():
+        #            researcher.name_variants.add(name)
 
         return name
 
