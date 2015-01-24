@@ -233,7 +233,8 @@ class ClusteringContext(object):
         if order_pk:
             clusters = filter(lambda x: x < target, self.cluster_ids)
         else:
-            clusters = filter(lambda x: x != target, self.cluster_ids)
+            target_cluster = self.find(target)
+            clusters = filter(lambda x: x != target_cluster, self.cluster_ids)
         print("Number of clusters: "+str(len(clusters)))
         print(" ".join([str(self.cluster_size[x]) for x in clusters]))
 
@@ -362,7 +363,7 @@ class ClusteringContextFactory(object):
     def clusterThemNow(self):
         for (author,researcher) in self.authors_to_cluster:
             self.clusterAuthor(author, researcher)
-        authors_to_cluster = []
+        self.authors_to_cluster = []
   
     def commitThemAll(self):
         self.clusterThemNow()

@@ -99,6 +99,19 @@ class Researcher(models.Model):
     @property
     def aka(self):
         return self.names[1:]
+    def update_variants(self):
+        """
+        Sets the variants of this name to the candidates returned by variants_queryset
+        """
+        self.name_variants.clear()
+        last = self.name.last
+        for name in Name.objects.filter(last__iexact=last):
+            if match_names((name.first,name.last),(self.name.first,self.name.last)):
+                self.name_variants.add(name)
+                if not name.is_known:
+                    name.is_known = True
+                    name.save(update_fields=['is_known'])
+
 
 MAX_NAME_LENGTH = 256
 class Name(models.Model):
@@ -181,6 +194,9 @@ class Name(models.Model):
 
         # Then, we look for known names with the same last name.
         similar_researchers = Researcher.objects.filter(name__last__iexact=last_name).select_related('name')
+        if similar_researchers:
+            name.is_known = True
+            name.save()
         for r in similar_researchers:
             if match_names((r.name.first,r.name.last), (first_name,last_name)):
                 r.name_variants.add(name)

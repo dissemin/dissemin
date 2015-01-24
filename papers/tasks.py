@@ -53,6 +53,7 @@ def process_records(listRecords):
 
         # Filter the record
         if all(not elem.is_known for elem in authors):
+            print "No relevant author, continue"
             continue
         if not 'title' in metadata or metadata['title'] == []:
             continue
@@ -112,20 +113,12 @@ def fetch_records_for_researcher(pk):
     fetch_records_for_name(researcher.name)
 
 def fetch_records_for_name(name):
-    # First try with the comma-separated name
-    ident1 = name.last + ', ' + name.first
-    ident1 = name_normalization(ident1)
-    fetch_records_for_normalized_name(ident1)
-    # Then try with the non-separated name
-    ident2 = name.first + ' ' + name.last
-    ident2 = name_normalization(ident2)
-    fetch_records_for_normalized_name(ident2)
-    # TODO: try with first and last swapped, added as CANDIDATEs ?
-    # TODO: this is all very ugly.
+    fetch_records_for_last_name(name.last)
 
-def fetch_records_for_normalized_name(ident):
+def fetch_records_for_last_name(lastname):
     client = get_proxy_client()
     try:
+        ident = name_normalization(lastname)
         listRecords = client.listRecords(metadataPrefix='oai_dc', set=PROXY_AUTHOR_PREFIX+ident)
         process_records(listRecords)
     except NoRecordsMatchError:
@@ -199,5 +192,3 @@ def fetch_dois_for_researcher(pk):
 @shared_task
 def change_publisher_oa_status(pk, status):
     publisher = Publisher.objects.get(pk=pk)
-    publisher.change_oa_status(status)
-

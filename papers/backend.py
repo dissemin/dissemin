@@ -48,9 +48,7 @@ def create_researcher(first, last, dept, email, role, homepage):
             homepage=homepage,
             name=name)
     researcher.save()
-    researcher.name_variants.add(name)
-    name.is_known=True
-    name.save(update_fields=['is_known'])
+    researcher.update_variants()
     return researcher
 
 
