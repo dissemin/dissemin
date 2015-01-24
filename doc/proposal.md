@@ -41,7 +41,9 @@ green open access, open access policy enforcement, open access statistics, insti
 ### **Audience**
 > Tell us in a sentence or two who is the likely audience for this (Some examples might be repository managers, developers, data producers, librarians, etc.)
 
-developers, repository managers, open access officers in universities or funders
+Repository managers can be interested in this tool to populate their repository.
+Libriarians and open access officers in universities or funders can be interested in this tool to enforce their own open access policy.
+Developpers can be interested in the technical challenges behind the project.
 
 ### Background
 > How does your submission address the conference themes or the overarching topic of open repositories?
@@ -66,7 +68,7 @@ need to understand the policies of their publishers and find the repository that
 Universities adopt open access policies to foster green open access, but lack tools to enforce them.
 When a university runs an institutional repository, it is easy to get the list of publications in the
 repository, but it is much harder to find the missing ones without requiring the researchers to
-report them manualvly. Neither researchers nor universities have a simple way to get the list of
+report them manually. Neither researchers nor universities have a simple way to get the list of
 their publications that are not available in any repository.
 
 Our aim is to solve this problem, by building a system that leverages various metadata sources
@@ -119,7 +121,7 @@ The full text availability is presented with a symbol:
 
 ##### 2.3. Combination of the two criteria
 
-These two criteria can be visually combined to help researchers to grasp instantly
+These two criteria can be visually combined to help researchers grasp instantly
 the status of their publications, as in the following example:
 
 ![Screenshot of the publications list](https://raw.githubusercontent.com/wetneb/dissemin/master/doc/img/publist.png)
@@ -132,24 +134,37 @@ is hence considered available. The last paper is also available and the publishe
 ##### 3.1. Metadata sources
 
 We use two different tools to discover preprints:
+* Our own OAI-PMH harvester, covering 8 millions of papers from the major open repositories
+  such as arXiv, HAL and PubMed Central.
+  Papers discovered using OAI-PMH are added to the publications list and marked as
+  available if the full text is also available from the OAI-PMH provider.
 * Bielefeld Academic Search Engine (through its API): this service covers a large
   collection of preprints, but the metadata it serves is not always very reliable,
   so we cannot afford to import systematically all the search results matching a given
   author in our database.
   However, if we have discovered a publication from another source and BASE can find
   a preprint for it, we mark this publication as available.
-* Our own OAI-PMH harvester, covering 8 millions of papers from the major open repositories
-  such as arXiv, HAL and PubMed Central.
-  Papers discovered using OAI-PMH are added to the publications list and marked as
-  available if the full text is also available from the OAI-PMH provider.
 
-Policies are fetched from SHERPA/RoMEO.
-this service does not provide a criterion to distinguish the "Open access"
-class from the "Pre/post-prints allowed" class: we use the Directory of 
-Open Access Journals for that purpose.
+Policies are fetched from SHERPA/RoMEO, through its API. We also plan to use Heloise, a similar service
+run by CCSD.
 
 ##### 3.2. Author disambiguation
 
+We perform automatic author name disambiguation to get accurate publications list for each researcher.
+The problem can be formulated as follows. Given a list of researchers for each department in a university,
+and given a list of millions of papers fetched from various sources, find the papers corresponding to our
+known researchers.
+Our approach is a two-stage algorithm, similar to the AuthorMagic heuristics used in the Invenio platform.
+
+* First, papers sharing a similar author name are grouped by similarity, so that two papers in the same
+  group have most likely be authored by the same researcher.
+* Second, the relevance of each group of papers for our target researcher is estimated, and a cluster
+  of similar papers is added to the publications list if the majority of these papers are considered
+  relevant to the researcher.
+
+###### 3.2.1. Similarity prediction
+
+###### 3.2.2. Relevance prediction
 
 
 ### **Conclusion**
