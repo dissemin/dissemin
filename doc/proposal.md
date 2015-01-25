@@ -156,7 +156,7 @@ We perform automatic author name disambiguation to get accurate publications lis
 The problem can be formulated as follows. Given a list of researchers for each department in a university,
 and given a list of millions of papers fetched from various sources, find the papers corresponding to our
 known researchers.
-Our approach is a two-stage algorithm, similar to the AuthorMagic heuristics used in the Invenio platform.
+Our approach is a two-stage algorithm, similar to the AuthorMagic heuristics used in the Invenio platform [2].
 
 * First, papers sharing a similar author name are grouped by similarity, so that two papers in the same
   group have most likely be authored by the same researcher.
@@ -185,7 +185,12 @@ as the number of author that could refer to a researcher in the university.
 ### **Conclusion**
 > Summarize the take-home message from the presentation. What are the main points? It would be great if this were a part of the conversation around the conference theme.
 
+A very large amount of metadata is already available through various sources, and we can use it to get a clear picture
+of the publications practices of researchers. This should help researchers to upload their papers and universities
+to enforce open access policies. What feature would *you* need?
+
 ### **References**
 > This is not compulsory but may help. Use any clear unambiguous reference style you like.
 
-[1] : Research Consulting
+[1] : Conting the Costs of Open Access. The estimated cost to UK research organisations of achieving compliance with open access mandates in 2013/14. Research Consulting, November 2014.
+[2] : Weiler, H., Meyer-Wegener, K., & Mele, S. (2011, October). Authormagic: an approach to author disambiguation in large-scale digital libraries. In Proceedings of the 20th ACM international conference on Information and knowledge management (pp. 2293-2296). ACM.
