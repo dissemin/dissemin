@@ -128,6 +128,17 @@ the status of their publications, as in the following example:
 The two first papers were not found in any repository, but their publisher's policy indicates that they could be made available. They would then be marked as the third paper. The fourth paper is published in an open access journal and
 is hence considered available. The last paper is also available and the publisher policy is marked as unknown.
 
+#### 3. Demo
+
+A prototype is running and encompasses some departments of the École Normale Supérieure (ENS), a french university.
+It is online here:
+
+http://ens.dissem.in/
+
+The source code is released under the GNU General Public License version 2 or later, and can be found at:
+
+http://github.com/wetneb/dissemin
+
 #### 3. Technical details
 
 ##### 3.1. Metadata sources
@@ -192,5 +203,6 @@ to enforce open access policies. What feature would *you* need?
 ### **References**
 > This is not compulsory but may help. Use any clear unambiguous reference style you like.
 
-[1] : Conting the Costs of Open Access. The estimated cost to UK research organisations of achieving compliance with open access mandates in 2013/14. Research Consulting, November 2014.
+[1] : Counting the Costs of Open Access. The estimated cost to UK research organisations of achieving compliance with open access mandates in 2013/14. Research Consulting, November 2014.
+
 [2] : Weiler, H., Meyer-Wegener, K., & Mele, S. (2011, October). Authormagic: an approach to author disambiguation in large-scale digital libraries. In Proceedings of the 20th ACM international conference on Information and knowledge management (pp. 2293-2296). ACM.
