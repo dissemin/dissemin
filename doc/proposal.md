@@ -41,9 +41,9 @@ green open access, open access policy enforcement, open access statistics, insti
 ### **Audience**
 > Tell us in a sentence or two who is the likely audience for this (Some examples might be repository managers, developers, data producers, librarians, etc.)
 
-Repository managers can be interested in this tool to populate their repository.
-Libriarians and open access officers in universities or funders can be interested in this tool to enforce their own open access policy.
-Developpers can be interested in the technical challenges behind the project.
+**Repository managers** can be interested in this tool to populate their repository.
+**Libriarians and open access officers** in universities or funders could use it to enforce their own open access policy.
+**Developpers** can be interested in the technical challenges behind the project.
 
 ### Background
 > How does your submission address the conference themes or the overarching topic of open repositories?
@@ -85,15 +85,14 @@ publications can be filtered using two criteria: publisher policy and full text 
 
 ##### 2.1 Publisher policy
 
-We use the SHERPA/RoMEO API to fetch publisher policies. They provide their own
-policy classification, but for our purpose a simpler classification is sufficient.
+We use the SHERPA/RoMEO API to fetch publisher policies.
 
 We divide the policies into four categories:
 * Open access: when the paper is published in an open access journal. Note that this
   does not include hybrid open access schemes: a paper published in a traditional
   journal and for which a paid open access option has been purchased will not fall
   into this category.
-  The reason for this choice is mainly technical: there is no simple way to detect
+  The reason for this choice is mainly technical: we have no simple way to detect
   if one particular publication in a closed journal is freely available.
 * Pre/post-prints allowed: when the publisher allows the author to upload
   some version of the paper to a repository. SHERPA/RoMEO makes a distinction
@@ -135,7 +134,9 @@ is hence considered available. The last paper is also available and the publishe
 
 We use two different tools to discover preprints:
 * Our own OAI-PMH harvester, covering 8 millions of papers from the major open repositories
-  such as arXiv, HAL and PubMed Central.
+  such as arXiv, HAL and PubMed Central. The harvester acts as a proxy: it exposes
+  the metadata it harvests as an OAI-PMH source, with additional metadata (OAI sets) to enable
+  a search by author name.
   Papers discovered using OAI-PMH are added to the publications list and marked as
   available if the full text is also available from the OAI-PMH provider.
 * Bielefeld Academic Search Engine (through its API): this service covers a large
@@ -144,6 +145,7 @@ We use two different tools to discover preprints:
   author in our database.
   However, if we have discovered a publication from another source and BASE can find
   a preprint for it, we mark this publication as available.
+* A CORE interface is being implemented.
 
 Policies are fetched from SHERPA/RoMEO, through its API. We also plan to use Heloise, a similar service
 run by CCSD.
@@ -164,8 +166,21 @@ Our approach is a two-stage algorithm, similar to the AuthorMagic heuristics use
 
 ###### 3.2.1. Similarity prediction
 
+The similarity between two papers is estimated using a linear Support Vector Machine with the following features:
+* Number of common authors
+* Similarity between the affiliations of the authors, if they are available
+* Similarity between the titles
+* Similarity between the journal titles
+For the last three features, the similarity of two strings is measured by the score of the common words
+for a unigram language model.
+
 ###### 3.2.2. Relevance prediction
 
+The relevance of a paper relative to a target researcher is also estimated using a Support Vector Machine.
+Its features are computed using a topic model built for each department: it is a unigram language model trained
+on the papers of this department only.
+The topic relevance of the title, the journal title, the keywords and the institution are used as features, as well
+as the number of author that could refer to a researcher in the university.
 
 ### **Conclusion**
 > Summarize the take-home message from the presentation. What are the main points? It would be great if this were a part of the conversation around the conference theme.
