@@ -60,7 +60,7 @@ Although it is not a repository in itself, it uses the protocols
 > Tell us what you will (and won't) cover in the presentation. Why will your topic be of interest to the intended audience? Include figures and images if they will help reviewers evaluate the proposal content. If you are proposing a panel, outline how you envision each panelist contributing to the overall discussion. Proposals should be 2-4 pages in length and in English.
 
 
-#### 1. Introduction to the problem.
+#### 1. Introduction to the problem
 
 Green open access is less expensive than gold open access, but the time it costs researchers to
 upload their papers to repositories is far from negligible. In the case where administrative staff
@@ -68,18 +68,22 @@ is available to help them complete their submissions, these costs are estimated 
 paper according to a recent study [1]. But the time required is not the only hurdle: researchers
 need to understand the policies of their publishers and find the repository that suits their needs.
 
-Universities adopt open access policies to foster green open access, but lack tools to enforce them.
+Meanwhile, universities adopt open access policies to foster green open access, but lack tools to enforce them.
 When a university runs an institutional repository, it is easy to get the list of publications in the
 repository, but it is much harder to find the missing ones without requiring the researchers to
 report them manually. Neither researchers nor universities have a simple way to get the list of
 their publications that are not available in any repository.
 
-Our aim is to solve this problem, by building a system that leverages various metadata sources
-to get the publications list of researchers. The tool helps researchers to upload their
-papers and universities to measure the availability of their research output in open repositories.
+Our goal is to solve these two problems: easing deposits in repositories and providing tools for
+open access policies. To do so, we build a system that leverages various metadata sources
+to get the publications list of researchers affiliated to a given university.
+The tool helps researchers to upload their papers and universities to measure the
+availability of their research output in open repositories. The key feature is that the system is
+not a repository itself and is not tied to a particular repository, but more a form of search engine.
+
 We first give a quick tour of the tool, implemented as a web platform. Then, we review the technical
 and administrative challenges behind the project. Finally, we hope that the questions and reactions
-of the audience will help us to improve the tool and to adapt it to the needs of the community.
+of the audience will help us to improve the system and to adapt it to the needs of the community.
 
 #### 2. Overview of the system
 
