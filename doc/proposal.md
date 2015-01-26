@@ -95,20 +95,20 @@ publications can be filtered using two criteria: publisher policy and full text 
 We use the SHERPA/RoMEO API to fetch publisher policies.
 
 We divide the policies into four categories:
-* Open access: when the paper is published in an open access journal. Note that this
+* **Open access**: when the paper is published in an open access journal. Note that this
   does not include hybrid open access schemes: a paper published in a traditional
   journal and for which a paid open access option has been purchased will not fall
   into this category.
   The reason for this choice is mainly technical: we have no simple way to detect
   if one particular publication in a closed journal is freely available.
-* Pre/post-prints allowed: when the publisher allows the author to upload
+* **Pre/post-prints allowed**: when the publisher allows the author to upload
   some version of the paper to a repository. SHERPA/RoMEO makes a distinction
   between three versions of a paper: the paper as it was submitted to the journal,
   after revisions suggested by the reviewers and after proper publication.
   A journal falls in this category when any of the three versions can be uploaded.
-* Pre/post-prints forbidden: when all of the three versions mentionned above
+* **Pre/post-prints forbidden*: when all of the three versions mentionned above
   cannot be uploaded. This is rather rare.
-* Unknown policy: in all other cases.
+* **Unknown policy**: in all other cases.
 
 These classes can be easily identified using the following symbols:
 
