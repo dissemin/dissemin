@@ -106,7 +106,7 @@ We divide the policies into four categories:
   between three versions of a paper: the paper as it was submitted to the journal,
   after revisions suggested by the reviewers and after proper publication.
   A journal falls in this category when any of the three versions can be uploaded.
-* **Pre/post-prints forbidden*: when all of the three versions mentionned above
+* **Pre/post-prints forbidden**: when all of the three versions mentionned above
   cannot be uploaded. This is rather rare.
 * **Unknown policy**: in all other cases.
 
@@ -157,13 +157,13 @@ We use two different tools to discover preprints:
   a search by author name.
   Papers discovered using OAI-PMH are added to the publications list and marked as
   available if the full text is also available from the OAI-PMH provider.
-* Bielefeld Academic Search Engine (through its API): this service covers a large
+* Bielefeld Academic Search Engine [3] (through its API): this service covers a large
   collection of preprints, but the metadata it serves is not always very reliable,
   so we cannot afford to import systematically all the search results matching a given
   author in our database.
   However, if we have discovered a publication from another source and BASE can find
   a preprint for it, we mark this publication as available.
-* A CORE interface is being implemented.
+* A CORE [4] interface is being implemented.
 
 Policies are fetched from SHERPA/RoMEO, through its API. We also plan to use Heloise, a similar service
 run by CCSD.
@@ -213,3 +213,7 @@ to enforce open access policies. What feature would *you* need?
 [1] : Counting the Costs of Open Access. The estimated cost to UK research organisations of achieving compliance with open access mandates in 2013/14. Research Consulting, November 2014.
 
 [2] : Weiler, H., Meyer-Wegener, K., & Mele, S. (2011, October). Authormagic: an approach to author disambiguation in large-scale digital libraries. In Proceedings of the 20th ACM international conference on Information and knowledge management (pp. 2293-2296). ACM.
+
+[3] : Pieper, D., & Summann, F. (2006). Bielefeld Academic Search Engine (BASE): An end-user oriented institutional repository search service. Library Hi Tech, 24(4), 614-619.
+
+[4] : Knoth, P., & Zdrahal, Z. (2013). CORE: COnnecting REpositories
