@@ -1,5 +1,8 @@
 > *For reviewers: This template is using markdown, plain text formatting syntax. For more information, please contact us at or15-program-chairs@googlegroups.com*
 
+This proposal can be viewed with proper formatting here:
+https://github.com/wetneb/dissemin/blob/master/doc/proposal.md
+
 ## **Dissem.in: Towards One-Click Deposits for Green Open Access**
 
 Antonin Delpeuch, University of Cambridge, Trinity College and École Normale Supérieure (Paris), antonin@delpeuch.eu
