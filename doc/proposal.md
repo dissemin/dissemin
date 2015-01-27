@@ -189,6 +189,7 @@ The similarity between two papers is estimated using a linear Support Vector Mac
 * Similarity between the affiliations of the authors, if they are available
 * Similarity between the titles
 * Similarity between the journal titles
+
 For the last three features, the similarity of two strings is measured by the score of the common words
 for a unigram language model.
 
@@ -199,6 +200,9 @@ Its features are computed using a topic model built for each department: it is a
 on the papers of this department only.
 The topic relevance of the title, the journal title, the keywords and the institution are used as features, as well
 as the number of author that could refer to a researcher in the university.
+
+So our algorithm heavily relies on the fact that researchers are assigned to departments, that give us some information about the expected topic of their publications. This compensates for the lack of unique identifier
+for authors, but requires to get lists of researchers from departments, which is done manually for the moment.
 
 ### **Conclusion**
 > Summarize the take-home message from the presentation. What are the main points? It would be great if this were a part of the conversation around the conference theme.
