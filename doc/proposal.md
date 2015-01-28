@@ -205,6 +205,19 @@ as the number of author that could refer to a researcher in the university.
 So our algorithm heavily relies on the fact that researchers are assigned to departments, that give us some information about the expected topic of their publications. This compensates for the lack of unique identifier
 for authors, but requires to get lists of researchers from departments, which is done manually for the moment.
 
+#### 4. Current and future work
+
+We are currently working on the platform, to facilitate two use cases.
+
+The first goal is to enable a "one-click deposit": a paper could be uploaded to a repository through the platform,
+using the SWORD protocol. The researcher would only need to provide the full text as the metadata associated with it
+is already stored by our platform.
+
+The second goal is to help administrations spot the publishers who keep their articles away from repositories.
+Some of them allow deposits when there is a specific agreement with the funder. As our tool can provide the list
+of articles within the institution and published by a given publisher, administrative staff could use that information
+to spot the publishers for which it is worth spending time on such an agreement.
+
 ### **Conclusion**
 > Summarize the take-home message from the presentation. What are the main points? It would be great if this were a part of the conversation around the conference theme.
 
