@@ -71,15 +71,16 @@ need to understand the policies of their publishers and find the repository that
 Meanwhile, universities adopt open access policies to foster green open access, but lack tools to enforce them.
 When a university runs an institutional repository, it is easy to get the list of publications in the
 repository, but it is much harder to find the missing ones without requiring the researchers to
-report them manually. Neither researchers nor universities have a simple way to get the list of
-their publications that are not available in any repository.
+report them manually. Policies might even not specify one particular repository where every production
+should be deposited, but accept a wide range of such repositories, making the search for missing papers
+even harder.
 
 Our goal is to solve these two problems: easing deposits in repositories and providing tools for
 open access policies. To do so, we build a system that leverages various metadata sources
 to get the publications list of researchers affiliated to a given university.
 The tool helps researchers to upload their papers and universities to measure the
 availability of their research output in open repositories. The key feature is that the system is
-not a repository itself and is not tied to a particular repository, but more a form of search engine.
+not a repository itself and is not tied to a particular repository, but is more a form of search engine.
 
 We first give a quick tour of the tool, implemented as a web platform. Then, we review the technical
 and administrative challenges behind the project. Finally, we hope that the questions and reactions
@@ -157,7 +158,7 @@ We use two different tools to discover preprints:
   a search by author name.
   Papers discovered using OAI-PMH are added to the publications list and marked as
   available if the full text is also available from the OAI-PMH provider.
-* Bielefeld Academic Search Engine [3] (through its API): this service covers a large
+* Bielefeld Academic Search Engine (through its API) [3]: this service covers a large
   collection of preprints, but the metadata it serves is not always very reliable,
   so we cannot afford to import systematically all the search results matching a given
   author in our database.
@@ -177,7 +178,7 @@ known researchers.
 Our approach is a two-stage algorithm, similar to the AuthorMagic heuristics used in the Invenio platform [2].
 
 * First, papers sharing a similar author name are grouped by similarity, so that two papers in the same
-  group have most likely be authored by the same researcher.
+  group have most likely been authored by the same researcher.
 * Second, the relevance of each group of papers for our target researcher is estimated, and a cluster
   of similar papers is added to the publications list if the majority of these papers are considered
   relevant to the researcher.
