@@ -154,6 +154,7 @@ def parse_comma_name(name):
             return ('','')
         first_name = None
         last_name = None
+        from_lists = True
 
         # Search for initials in the words
         initial = map(contains_initials, words)
@@ -205,8 +206,9 @@ def parse_comma_name(name):
         # to parse correctly names such as "Colin de la Higuera"
         else:
             prefix, first_name, last_name, suffix = name_tools.split(name)
+            from_lists = False
             
-        if not first_name or not last_name:
+        if from_lists:
             first_name = ' '.join(first)
             last_name = ' '.join(last)
 
