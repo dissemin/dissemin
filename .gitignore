@@ -24,3 +24,9 @@ learning/gengraph.py
 learning/regression.py
 learning/gephi/
 
+# Proposals
+doc/Makefile
+doc/project.*
+doc/references.bib
+
+
