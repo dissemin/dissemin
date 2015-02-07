@@ -24,7 +24,7 @@ makeTextEditable($('#paperTitle'), '/ajax/change-paper', '{{ paper.id }}', 'titl
 
 {% block lists %}
 <p>
-{% for author in paper.author_set.all %}{% if not forloop.first %},{% endif %}
+{% for author in paper.sorted_authors %}{% if not forloop.first %},{% endif %}
 {{ author | authorlink }}{% endfor %}</p>
 {% for publi in paper.publication_set.all %}
 <p>{{ publi | publication }}

@@ -240,8 +240,6 @@ class Paper(models.Model):
     def __unicode__(self):
         return self.title
 
-    # TODO easy TODO: order authors by ID !!!!!!
-
     # The two following fields need to be updated after the relevant changes
     # using the methods below.
     oa_status = models.CharField(max_length=32, null=True, blank=True, default='UNK')
@@ -254,6 +252,10 @@ class Paper(models.Model):
     @property
     def sorted_oai_records(self):
         return self.oairecord_set.order_by('-priority')
+
+    @property
+    def sorted_authors(self):
+        return self.author_set.order_by('id')
 
     def update_availability(self):
         # TODO: create an oa_status field in each publication so that we optimize queries
