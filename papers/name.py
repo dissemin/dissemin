@@ -103,6 +103,14 @@ def name_normalization(ident):
     ident = nn_nontext_re.sub('-',ident)
     return ident
 
+def name_signature(first, last):
+    ident = last.lower().strip()
+    ident = nn_escaping_chars_re.sub('',ident)
+    ident = nn_final_nontext_re.sub('',ident)
+    ident = nn_nontext_re.sub('-',ident)
+    if len(first):
+        ident = first[0].lower()+'-'+ident
+    return ident
 
 #### Helpers for the name splitting heuristic ######
 

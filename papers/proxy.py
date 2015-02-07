@@ -32,6 +32,7 @@ PROXY_DAY_GRANULARITY = False
 
 PROXY_SOURCE_PREFIX = "proaixy:source:"
 PROXY_AUTHOR_PREFIX = "proaixy:lastname:"
+PROXY_SIGNATURE_PREFIX = "proaixy:authorsig:"
 
 def get_proxy_client():
     registry = MetadataRegistry()

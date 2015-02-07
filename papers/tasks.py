@@ -37,7 +37,7 @@ from papers.oai import *
 from papers.doi import to_doi
 from papers.crossref import fetch_papers_from_crossref_by_researcher_name, convert_to_name_pair
 from papers.proxy import *
-from papers.name import name_normalization
+from papers.name import name_normalization, name_signature
 from papers.base import fetch_papers_from_base_for_researcher
 
 logger = get_task_logger(__name__)
@@ -113,8 +113,20 @@ def fetch_records_for_researcher(pk):
     fetch_records_for_name(researcher.name)
 
 def fetch_records_for_name(name):
-    fetch_records_for_last_name(name.last)
+    fetch_records_for_signature(name_signature(name.first, name.last))
 
+def fetch_records_for_signature(ident):
+    client = get_proxy_client()
+    try:
+        listRecords = client.listRecords(metadataPrefix='oai_dc', set=PROXY_SIGNATURE_PREFIX+ident)
+        process_records(listRecords)
+    except NoRecordsMatchError:
+        pass
+    except BadArgumentError as e:
+        print "Signature is unknown for the proxy: "+unicode(e)
+        pass
+
+# TODO unused:
 def fetch_records_for_last_name(lastname):
     client = get_proxy_client()
     try:
