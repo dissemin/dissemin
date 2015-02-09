@@ -8,7 +8,7 @@
 
 \begin{document}
 
-\title{Dissem.in: Metadata Harvesting for Open Access Policies (Extended Abstract)}
+\title{Dissem.in: Metadata Harvesting for Open Access Policies}
 \author{Antonin Delpeuch \\
 University of Cambridge \\
 École Normale Supérieure \\
@@ -16,37 +16,23 @@ University of Cambridge \\
 
 \maketitle
 
-\begin{abstract}
 Many universities adopt open access policies requiring researchers to make their articles freely
 available in a repository. Enforcing these policies is far from straightforward however: according to
 a recent study in the UK~\cite{research2014counting},
 each article costs an estimated 33 GBP of staff time to ensure policy
-compliance. We leverage several metadata sources to reduce this cost,
-by creating a publications list that can be filtered by publisher policy and full text availability in
-major repositories. This enables us to get a list of publications that are not available in any
-repository yet, but that could safely be uploaded according to the publisher's policy. The
-metadata gathered by our tool could then be reused to speed up the deposit of these papers,
-using the SWORD protocol.
-We discuss the technical challenges behind the project and demonstrate the system itself.
-\end{abstract}
-
-\section{Introduction}
-
-Universities adopt open access policies to foster green open
-access, but lack tools to enforce them.
+compliance.
 Researchers often consider these policies as a burden: they need to
 understand the requirements of their publishers and their institutions,
 and to spend time uploading their articles to various repositories, with
 the appropriate metadata.
 
-To solve these problems, we build a
+To solve these problems, we build \emph{dissem.in}, a
 system that leverages various metadata sources to get the publications
 list of researchers affiliated to a given university. The tool helps
 researchers to upload their papers and universities to measure the
 availability of their research output in open repositories. The key
 feature is that the system is not a repository itself and is not tied to
-a particular repository, but is more a form of search engine.
-
+any particular repository, but is more a form of search engine.
 
 \section{Overview of the system}
 
@@ -73,11 +59,11 @@ instantly the status of their publications, as in the following example:
 \includegraphics[scale=0.5]{img/publist.png}
 \end{figure}
 
-The two first papers were not found in any repository, but their
-publisher's policy indicates that they could be made available. They
-would then be marked as the third paper. The fourth paper is published
-in an open access journal and is hence considered available. The last
-paper is also available and the publisher policy is marked as unknown.
+%The two first papers were not found in any repository, but their
+%publisher's policy indicates that they could be made available. They
+%would then be marked as the third paper. The fourth paper is published
+%in an open access journal and is hence considered available. The last
+%paper is also available and the publisher policy is marked as unknown.
 
 \section{Demo}
 
