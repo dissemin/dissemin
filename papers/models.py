@@ -26,7 +26,7 @@ from papers.name import match_names
 from django.utils.translation import ugettext_lazy as _
 
 OA_STATUS_CHOICES = (
-        ('OA', _('Open Access')),
+        ('OA', _('Open access')),
         ('OK', _('Allows pre/post prints')),
         ('NOK', _('Forbids pre/post prints')),
         ('UNK', _('Policy unclear')),
@@ -49,9 +49,69 @@ POLICY_CHOICES = [('can', _('Allowed')),
                   ('unclear', _('Unclear')),
                   ('unknown', _('Unknown'))]
 
+COMBINED_STATUS_CHOICES = [
+   ('oa', _('Open access')),
+   ('ok', _('Preprint available')),
+   ('couldbe', _('Unavailable but compatible')),
+   ('unk', _('Unknown status')),
+   ('closed', _('Preprints forbidden'))
+]
+
+class AccessStatistics(models.Model):
+    """
+    Caches numbers of papers in different access statuses for some queryset
+    """
+    num_oa = models.IntegerField(default=0)
+    num_ok = models.IntegerField(default=0)
+    num_couldbe = models.IntegerField(default=0)
+    num_unk = models.IntegerField(default=0)
+    num_closed = models.IntegerField(default=0)
+
+    def update(self, queryset):
+        """
+        Updates the statistics for papers contained in the given Paper queryset
+        """
+        self.num_oa = queryset.filter(oa_status='OA').count()
+        self.num_ok = queryset.filter(pdf_url__isnull=False).count() - self.num_oa
+        self.num_couldbe = queryset.filter(pdf_url__isnull=True, oa_status='OK').count()
+        self.num_unk = queryset.filter(pdf_url__isnull=True, oa_status='UNK').count()
+        self.num_closed = queryset.filter(pdf_url__isnull=True, oa_status='NOK').count()
+        self.save()
+
+    def total(self):
+        return self.num_oa + self.num_ok + self.num_couldbe + self.num_unk + self.num_closed
+
+    @property
+    def percentage_oa(self):
+        total = self.total()
+        if total:
+            return int(100.*self.num_oa/self.total())
+    @property
+    def percentage_ok(self):
+        total = self.total()
+        if total:
+            return int(100.*self.num_ok/self.total())
+    @property
+    def percentage_couldbe(self):
+        total = self.total()
+        if total:
+            return int(100.*self.num_couldbe/self.total())
+    @property
+    def percentage_unk(self):
+        return 100 - (self.percentage_oa + self.percentage_ok +
+            self.percentage_closed + self.percentage_couldbe)
+    @property
+    def percentage_closed(self):
+        total = self.total()
+        if total:
+            return int(100.*self.num_closed/self.total())
+
+
 # Information about the researchers and their groups
 class Department(models.Model):
     name = models.CharField(max_length=300)
+
+    stats = models.ForeignKey(AccessStatistics, null=True)
 
     @property
     def sorted_researchers(self):
@@ -59,6 +119,9 @@ class Department(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def update_stats(self):
+        self.stats.update(Paper.objects.filter(author__researcher__department=self).distinct())
 
 class ResearchGroup(models.Model):
     name = models.CharField(max_length=300)
