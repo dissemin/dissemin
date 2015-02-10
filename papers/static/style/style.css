@@ -51,7 +51,8 @@ ul, .withTriangles
 
 #content
 {
-    width: 1030px;
+    max-width: 1030px;
+    min-width: 630px;
     margin: auto;
     padding: 10px;
 }
