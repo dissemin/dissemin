@@ -21,6 +21,8 @@
 from __future__ import unicode_literals
 
 from papers.models import *
+from time import sleep
+from django.db.models import Q
 
 def cleanup_papers():
     """
@@ -29,7 +31,8 @@ def cleanup_papers():
     TODO: write another version focusing on the last name only.
     """
     deleted_count = 0
-    for p in Paper.objects.all():
+    for p in Paper.objects.all().select_related('author'):
+        sleep(0.1)
         researcher_found = False
         for a in p.author_set.all():
             if a.researcher:
