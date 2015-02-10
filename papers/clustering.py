@@ -268,6 +268,7 @@ class ClusteringContext(object):
         """
         pklist = list(self.parent)
         pklist.sort()
+        self.edge_set = set()
 
         print("Removing previous clustering output…")
         self.getAuthorQuerySet().update(
@@ -294,12 +295,21 @@ class ClusteringContext(object):
 
         self.commit()
 
+        output_full_graph = False
+        if output_full_graph:
+            self.edge_set = set()
+            for i in range(len(pklist)):
+                for j in range(i):
+                    if self.classify(pklist[i],pklist[j]):
+                        self.edge_set.add((pklist[i],pklist[j]))
+
+
         graphf = open('learning/gephi/classified-'+str(self.researcher.pk)+'.gdf', 'w')
         self.outputGraph(graphf)
         graphf.close()           
 
     def outputGraph(self, outf):
-        print('nodedef>name VARCHAR,label VARCHAR,pid VARCHAR,visibility VARCHAR,relevance VARCHAR,relevant VARCHAR', file=outf)
+        print('nodedef>name VARCHAR,label VARCHAR,pid VARCHAR,visibility VARCHAR,relevance FLOAT,relevant VARCHAR', file=outf)
         for (x,v) in self.authors.items():
             visibility = v.paper.visibility
             if v.paper.year <= 2012:
