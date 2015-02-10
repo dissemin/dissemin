@@ -17,11 +17,12 @@
 
     <span><a href="{% url 'paper' paper.id %}" id="paper-title-{{ paper.id }}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">{{ paper.title }}</a>&nbsp;</span>
 </span><br />
+<span class="pubRef">
 {% for publi in paper.publication_set.all %}
-<span class="pubRef">{{ publi | publication }}{% if forloop.last %}.{% else %},{% endif %}</span><br />
+{{ publi | publication }}{% if forloop.last %}.{% else %},{% endif %}<br />
 {% empty %}
 {% for record in paper.prioritary_oai_records %}
-{{ record.source.name }}{% if forloop.last %}.{% else %},{% endif %}
+<a href="{{ record.splash_url }}">{{ record.source.name }}</a>{% if forloop.last %}.{% else %},{% endif %}{% endfor %}
 {% endfor %}
-{% endfor %}
+</span>
 </div>
