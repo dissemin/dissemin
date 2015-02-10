@@ -104,7 +104,7 @@ def add_core_document(doc, source):
         return False
     authors_list = parse_core_authors_list(authors_list[0])
     authors_list = map(parse_comma_name, authors_list)
-    authors = map(lookup_name, authors_list)
+    authors = map(Name.lookup_name, authors_list)
     
     # Filter the record
     if all(not elem.is_known for elem in authors):

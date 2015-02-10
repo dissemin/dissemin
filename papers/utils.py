@@ -43,13 +43,9 @@ def nocomma(lst):
     lst = [x if x else ' ' for x in lst]
     return ','.join(lst)
 
-
-def match_names(a,b):
-    if not a or not b:
-        return False
-    (firstA,lastA) = a
-    (firstB,lastB) = b
-    return lastA.lower() == lastB.lower() and match_first_names(firstA,firstB)
+split_re = re.compile(r'[ .,-]*')
+def split_words(string):
+    return filter(lambda x: x != '', split_re.split(string))
 
 def ulower(s):
     return unicode(s).lower()
@@ -84,37 +80,8 @@ punktTokenizer = PunktWordTokenizer()
 def tokenize(l):
     return punktTokenizer.tokenize(iunaccent(l))
 
-### Name-related functions ####
 
-
-split_re = re.compile(r'[ .,-]*')
-def split_words(string):
-    return filter(lambda x: x != '', split_re.split(string))
-
-initial_re = re.compile(r'[A-Z](\.,;)*$')
-def normalize_name_words(w):
-    """ If it is an initial, ensure it is of the form "T.", and recapitalize it. """
-    w = w.strip()
-    words = w.split()
-    words = map(recapitalize_word, words)
-    words = map(lambda w: w[0]+'.' if initial_re.match(w) else w, words)
-    return ' '.join(words)
-
-def recapitalize_word(w):
-    """ Turns every word fully capitalized into an uncapitalized word (except for the first character) """
-    return w[0]+w[1:].lower() if all(map(isupper, w)) else w
-
-def match_first_names(a,b):
-    partsA = split_words(a)
-    partsB = split_words(b)
-    partsA = map(unicode.lower, partsA)
-    partsB = map(unicode.lower, partsB)
-    return partsA == partsB
-# TODO : add support for initials ?
-# but this might include a lot of garbage
-
-def to_plain_name(name):
-    return (name.first,name.last)
+##### Paper fingerprinting
 
 stripped_chars = re.compile(r'[^- a-z0-9]')
 def create_paper_plain_fingerprint(title, authors):
@@ -155,21 +122,6 @@ def create_paper_fingerprint(title, authors):
     m.update(create_paper_plain_fingerprint(title, authors))
     return m.hexdigest()
 
-
-#### Name normalization
-nn_separator_re = re.compile(r',+ *')
-nn_escaping_chars_re = re.compile(r'[\{\}\\]')
-nn_nontext_re = re.compile(r'[^a-z_]+')
-nn_final_nontext_re = re.compile(r'[^a-z_]+$')
-
-def name_normalization(ident):
-    ident = remove_diacritics(ident).lower()
-    ident = ident.strip()
-    ident = nn_separator_re.sub('_',ident)
-    ident = nn_escaping_chars_re.sub('',ident)
-    ident = nn_final_nontext_re.sub('',ident)
-    ident = nn_nontext_re.sub('-',ident)
-    return ident
 
 ### Open an URL with retries
 

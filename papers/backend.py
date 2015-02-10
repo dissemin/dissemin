@@ -23,13 +23,15 @@ from __future__ import unicode_literals
 from django.core.exceptions import ObjectDoesNotExist
 import re
 
-from papers.utils import to_plain_name, create_paper_fingerprint, date_from_dateparts
+from papers.utils import create_paper_fingerprint, date_from_dateparts
 from papers.errors import MetadataSourceException
 from papers.models import *
 from papers.doi import to_doi
 from papers.crossref import fetch_metadata_by_DOI
 from papers.romeo import fetch_journal
-from papers.name import parse_comma_name
+from papers.name import to_plain_name, parse_comma_name
+
+from papers.globals import *
 
 def create_researcher(first, last, dept, email, role, homepage):
     name, created = Name.objects.get_or_create(full=iunaccent(first+' '+last),
@@ -46,31 +48,18 @@ def create_researcher(first, last, dept, email, role, homepage):
             homepage=homepage,
             name=name)
     researcher.save()
-    name.is_known=True
-    name.save(update_fields=['is_known'])
+    researcher.update_variants()
     return researcher
 
 
-def lookup_name(author_name):
-    first_name = author_name[0][:MAX_NAME_LENGTH]
-    last_name = author_name[1][:MAX_NAME_LENGTH]
-    full_name = first_name+' '+last_name
-    full_name = full_name.strip()
-    normalized = iunaccent(full_name)
-    name = Name.objects.filter(full=normalized).first()
-    if name:
-        return name
-    name = Name.create(first_name,last_name)
-    # The name is not saved: the name has to be saved only
-    # if the paper is saved.
-    return name
-
-# Used to save unsaved names after lookup
-def save_if_not_saved(obj):
-    if not obj.pk:
-        obj.save()
-
+# TODO: this could be a method of ClusteringContextFactory ?
+# TODO: implement a dummy relevance classifier for the first phase
 def get_or_create_paper(title, author_names, pubdate, doi=None, visibility='VISIBLE'):
+    """
+    Creates a paper if it is not already present.
+    The clustering algorithm is run to decide what authors should be 
+    attributed to the paper.
+    """
     # If a DOI is present, first look it up
     if doi:
         matches = Publication.objects.filter(doi__exact=doi)
@@ -105,16 +94,12 @@ def get_or_create_paper(title, author_names, pubdate, doi=None, visibility='VISI
         p.save()
         authors = []
         for author_name in author_names:
-            save_if_not_saved(author_name)
+            author_name.save_if_not_saved()
             a = Author(name=author_name, paper=p)
-            # TODO: TEMPORARY:
-            if author_name.is_known:
-                a.researcher = Researcher.objects.get(name=author_name)
-            # TO BE REPLACED BY the clustering algo in the following loop
             a.save()
+            if author_name.is_known:
+                clustering_context_factory.clusterAuthorLater(a)
             authors.append(a)
-        #for author in authors:
-        #    author.runClustering()
 
     if doi:
         try:

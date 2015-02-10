@@ -21,7 +21,8 @@
 from __future__ import unicode_literals, print_function
 
 from papers.models import Name, Author, Researcher
-from papers.utils import match_names, iunaccent, nocomma, filter_punctuation, tokenize
+from papers.utils import iunaccent, nocomma, filter_punctuation, tokenize
+from papers.name import match_names
 from nltk.tokenize.punkt import PunktWordTokenizer
 from sklearn import svm
 from sklearn.metrics import confusion_matrix
@@ -29,6 +30,7 @@ import cPickle
 import numpy as np
 import matplotlib.pyplot as plt
 from unidecode import unidecode
+import name_tools
 
 class SimilarityFeature(object):
     """
@@ -64,10 +66,29 @@ class SimilarityFeature(object):
         return self.score(self.fetchData(authorA), self.fetchData(authorB))
 
 
+class AuthorNameSimilarity(SimilarityFeature):
+    """
+    Similarity of the names of the target authors.
+    This is kept separate from CoauthorsSimilarity as it is probably
+    useful to give it a different weight in the classifier.
+    """
+    def __init__(self):
+        super(AuthorNameSimilarity, self).__init__()
+
+    def fetchData(self, author):
+        return to_plain_name(author.name)
+
+    def score(self, dataA, dataB):
+        # TODO: this score function is far from optimal
+        # refine it so that 'Claire Mathieu' and 'Claire Mathieu-Kenyon' gets
+        # a decent score
+        firstA, lastA = dataA
+        firstB, lastB = dataB
+        return name_tools.match(firstA+' '+lastA, firstB+' '+lastB)
+
 class CoauthorsSimilarity(SimilarityFeature):
     """
     Number of matching coauthors (without the target authors themselves)
-    TODO: use Invenio's name similarity algorithm to refine this.
     """
     def __init__(self):
         super(CoauthorsSimilarity, self).__init__()
@@ -77,9 +98,14 @@ class CoauthorsSimilarity(SimilarityFeature):
         return map(lambda author: (author.name.first,author.name.last), coauthors)
 
     def score(self, dataA, dataB):
+        # TODO: finer name similarity.
         score = 0.
         for a in dataA:
             for b in dataB:
+                firstA, lastA = a
+                firstB, lastB = b
+                #score += name_tools.match(firstA+' '+lastA,firstB+' '+lastB)
+                # Previously, it was:
                 if match_names(a,b):
                     score += 1.
         return score
@@ -177,19 +203,25 @@ class SimilarityClassifier(object):
         if not contributorsModel:
             contributorsModel = publicationModel
         self.simFeatures = [
+    #            AuthorNameSimilarity(),
                 CoauthorsSimilarity(),
                 PublicationSimilarity(publicationModel),
                 TitleSimilarity(publicationModel),
                 ContributorsSimilarity(contributorsModel),
                 ]
         self.classifier = None
-        self.positiveSampleWeight = 0.15
+        self.positiveSampleWeight = 0.1
     
     def computeFeatures(self, lstDataA, lstDataB):
         if len(lstDataA) != len(self.simFeatures) or len(lstDataB) != len(self.simFeatures):
             return None
         lst = zip(self.simFeatures, lstDataA, lstDataB)
         return map(lambda (f,a,b): f.score(a,b), lst)
+        #result = []
+        #for (f,a,b) in lst:
+        #    print('# Computing feature '+str(type(f)))
+        #    result.append(f.score(a,b))
+        #return result
 
     def lstData(self, author):
         return map(lambda f: f.fetchData(author), self.simFeatures)
@@ -220,8 +252,10 @@ class SimilarityClassifier(object):
         dataB = self.lstData(authorB)
         return self.classifyData(dataA, dataB)
 
-    def classifyData(self, dataA, dataB):
+    def classifyData(self, dataA, dataB, verbose=False):
         feat_vec = self.computeFeatures(dataA, dataB)
+        if verbose:
+            print(feat_vec)
         output = self.classifier.predict(feat_vec)
         return output[0]
 

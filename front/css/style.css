@@ -1,0 +1,108 @@
+body
+{
+    margin: 0px;
+    padding: 0px;
+    vertical-align: top;
+    background-color: #4883b2;
+}
+
+.header-image
+{
+    width: 100%;
+    height: 560px;
+    background-color: #4883b2;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+    display: block;
+    vertical-align: top;
+}
+
+.orange-button
+{
+    background: none;
+    border-color: #d77311;
+    color: #d77311;
+}
+
+.orange-button:hover, 
+.orange-button:focus, 
+.orange-button:active, 
+.orange-button.active
+{
+    background-color:  #d77311;
+    border-color: #222222;
+}
+
+.band
+{
+    vertical-align: top;
+    display: block;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 50px 0px;
+    text-align: center;
+}
+
+#band-1
+{
+    background-color: #833341;
+    color: #e0d693;
+}
+
+#band-2
+{
+    background: url('../img/graph.png') no-repeat center;
+    background-color: rgba(63, 63, 63, 1);
+    width: 100%;
+    height: 250px;
+}
+
+h1
+{
+    font-size: 50px;
+    padding: 25px;
+    margin: 0px;
+}
+
+.use-case
+{
+    display: inline-block;
+    vertical-align: top;
+    width: 390px;
+    padding: 10px;
+}
+
+.use-case p
+{
+    font-size: 1.2em;
+}
+
+#researcher
+{
+    background: url('../img/researcher.png') no-repeat center;
+    z-index: 20;
+}
+
+#university
+{
+    background: url('../img/university.png') no-repeat center;
+    z-index: 20;
+}
+
+.logo-scroll, #researcher, #university
+{
+    height: 150px;
+    width: 195px;
+    margin: auto;
+    display: block;
+}
+
+#footer
+{
+    text-align: center;
+    padding: 40px;
+}
+
+#footer a
+{
+    color: black;
+}

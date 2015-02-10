@@ -26,9 +26,8 @@ from oaipmh.datestamp import tolerant_datestamp_to_datetime
 from oaipmh.error import DatestampError, NoRecordsMatchError
 
 from papers.backend import *
-from papers.name import parse_comma_name
+from papers.name import parse_comma_name, normalize_name_words
 from papers.models import OaiRecord, OaiSource
-from papers.utils import normalize_name_words
 from papers.extractors import *
 
 import re
@@ -97,7 +96,7 @@ def add_oai_record(record, source, paper=None):
 
 def get_oai_authors(metadata):
     """ Get the authors names out of a search result """
-    return map(lookup_name, map(parse_comma_name, metadata['creator']))
+    return map(Name.lookup_name, map(parse_comma_name, metadata['creator']))
 
 def find_earliest_oai_date(record):
     """ Find the latest publication date (if any) in a record """

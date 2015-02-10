@@ -22,10 +22,11 @@ from __future__ import unicode_literals
 from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
 from papers.utils import nstr, iunaccent
+from papers.name import match_names
 from django.utils.translation import ugettext_lazy as _
 
 OA_STATUS_CHOICES = (
-        ('OA', _('Open Access')),
+        ('OA', _('Open access')),
         ('OK', _('Allows pre/post prints')),
         ('NOK', _('Forbids pre/post prints')),
         ('UNK', _('Policy unclear')),
@@ -48,16 +49,79 @@ POLICY_CHOICES = [('can', _('Allowed')),
                   ('unclear', _('Unclear')),
                   ('unknown', _('Unknown'))]
 
+COMBINED_STATUS_CHOICES = [
+   ('oa', _('Open access')),
+   ('ok', _('Preprint available')),
+   ('couldbe', _('Unavailable but compatible')),
+   ('unk', _('Unknown status')),
+   ('closed', _('Preprints forbidden'))
+]
+
+class AccessStatistics(models.Model):
+    """
+    Caches numbers of papers in different access statuses for some queryset
+    """
+    num_oa = models.IntegerField(default=0)
+    num_ok = models.IntegerField(default=0)
+    num_couldbe = models.IntegerField(default=0)
+    num_unk = models.IntegerField(default=0)
+    num_closed = models.IntegerField(default=0)
+
+    def update(self, queryset):
+        """
+        Updates the statistics for papers contained in the given Paper queryset
+        """
+        self.num_oa = queryset.filter(oa_status='OA').count()
+        self.num_ok = queryset.filter(pdf_url__isnull=False).count() - self.num_oa
+        self.num_couldbe = queryset.filter(pdf_url__isnull=True, oa_status='OK').count()
+        self.num_unk = queryset.filter(pdf_url__isnull=True, oa_status='UNK').count()
+        self.num_closed = queryset.filter(pdf_url__isnull=True, oa_status='NOK').count()
+        self.save()
+
+    def total(self):
+        return self.num_oa + self.num_ok + self.num_couldbe + self.num_unk + self.num_closed
+
+    @property
+    def percentage_oa(self):
+        total = self.total()
+        if total:
+            return int(100.*self.num_oa/self.total())
+    @property
+    def percentage_ok(self):
+        total = self.total()
+        if total:
+            return int(100.*self.num_ok/self.total())
+    @property
+    def percentage_couldbe(self):
+        total = self.total()
+        if total:
+            return int(100.*self.num_couldbe/self.total())
+    @property
+    def percentage_unk(self):
+        return 100 - (self.percentage_oa + self.percentage_ok +
+            self.percentage_closed + self.percentage_couldbe)
+    @property
+    def percentage_closed(self):
+        total = self.total()
+        if total:
+            return int(100.*self.num_closed/self.total())
+
+
 # Information about the researchers and their groups
 class Department(models.Model):
     name = models.CharField(max_length=300)
 
+    stats = models.ForeignKey(AccessStatistics, null=True)
+
     @property
     def sorted_researchers(self):
-        return self.researcher_set.order_by('name')
+        return self.researcher_set.select_related('name').order_by('name')
 
     def __unicode__(self):
         return self.name
+
+    def update_stats(self):
+        self.stats.update(Paper.objects.filter(author__researcher__department=self).distinct())
 
 class ResearchGroup(models.Model):
     name = models.CharField(max_length=300)
@@ -66,14 +130,22 @@ class ResearchGroup(models.Model):
         return self.name
 
 class Researcher(models.Model):
+    # The preferred name for this researcher
     name = models.ForeignKey('Name')
+    # Variants of this name found in the papers
+    name_variants = models.ManyToManyField('Name', related_name='variant_of')
+    # Department the researcher belongs to
     department = models.ForeignKey(Department)
+    # Research groups the researcher belongs to
     groups = models.ManyToManyField(ResearchGroup,blank=True,null=True)
+    
+    # Various info about the researcher (not used internally)
     email = models.EmailField(blank=True,null=True)
     homepage = models.URLField(blank=True, null=True)
     role = models.CharField(max_length=128, null=True, blank=True)
 
     # DOI search
+    # TODO is this still needed ?
     last_doi_search = models.DateTimeField(null=True,blank=True)
     status = models.CharField(max_length=512, blank=True, null=True)
     last_status_update = models.DateTimeField(auto_now=True)
@@ -90,6 +162,19 @@ class Researcher(models.Model):
     @property
     def aka(self):
         return self.names[1:]
+    def update_variants(self):
+        """
+        Sets the variants of this name to the candidates returned by variants_queryset
+        """
+        self.name_variants.clear()
+        last = self.name.last
+        for name in Name.objects.filter(last__iexact=last):
+            if match_names((name.first,name.last),(self.name.first,self.name.last)):
+                self.name_variants.add(name)
+                if not name.is_known:
+                    name.is_known = True
+                    name.save(update_fields=['is_known'])
+
 
 MAX_NAME_LENGTH = 256
 class Name(models.Model):
@@ -122,12 +207,82 @@ class Name(models.Model):
         """
         full = iunaccent(first+' '+last)
         return cls.objects.get_or_create(full=full, defaults={'first':first,'last':last})
-    def last_name_known(self):
+    def variants_queryset(self):
         """
-        Is the last name of this Name the same as the last name of a known researcher?
+        Returns the queryset of should-be variants.
+        WARNING: This is to be used on a name that is already associated with a researcher.
         """
-        count = Name.objects.filter(last__iexact=self.last,is_known=True).count()
-        return count > 0
+        # TODO this could be refined (icontains?)
+        return Researcher.objects.filter(name__last__iexact = self.last)
+
+    def update_variants(self):
+        """
+        Sets the variants of this name to the candidates returned by variants_queryset
+        """
+        self.variant_of.clear()
+        for researcher in self.variants_queryset():
+            researcher.name_variants.add(self)
+
+    def update_is_known(self):
+        """
+        A name is considered as known when it belongs to a name variants group of a researcher
+        """
+        new_value = self.variant_of.count() > 0
+        if new_value != self.is_known:
+            self.is_known = new_value
+            self.save(update_fields=['is_known'])
+
+    @classmethod
+    def lookup_name(cls, author_name):
+        if author_name == None:
+            return
+        first_name = author_name[0][:MAX_NAME_LENGTH]
+        last_name = author_name[1][:MAX_NAME_LENGTH]
+
+        # First, check if the name itself is known
+        # (we do not take the first/last separation into account
+        # here because the exact match is already a quite strong
+        # condition)
+        full_name = first_name+' '+last_name
+        full_name = full_name.strip()
+        normalized = iunaccent(full_name)
+        name = cls.objects.filter(full=normalized).first()
+        if name:
+            return name
+
+        # Otherwise, we create a name
+        name = cls.create(first_name,last_name)
+        # The name is not saved yet: the name has to be saved only
+        # if the paper is saved or it is a variant of a known name
+
+        # Then, we look for known names with the same last name.
+        similar_researchers = Researcher.objects.filter(name__last__iexact=last_name).select_related('name')
+        if similar_researchers:
+            name.is_known = True
+            name.save()
+        for r in similar_researchers:
+            if match_names((r.name.first,r.name.last), (first_name,last_name)):
+                r.name_variants.add(name)
+   
+        # Other approach that adds *many* names
+        #
+        #similar_names = cls.objects.filter(last__iexact=last_name, is_known=True)
+        #for sim in similar_names:
+        #    if match_names((sim.first,sim.last),(first_name,last_name)):
+        #        name.is_known = True
+        #        name.save()
+        #        for researcher in sim.variant_of.all():
+        #            researcher.name_variants.add(name)
+
+        return name
+
+    # Used to save unsaved names after lookup
+    def save_if_not_saved(self):
+        if not self.pk:
+            # the is_known field should already be up to date as it is computed in the lookup
+            self.save()
+            self.update_variants()
+
     def __unicode__(self):
         return '%s %s' % (self.first,self.last)
 
@@ -160,6 +315,10 @@ class Paper(models.Model):
     @property
     def sorted_oai_records(self):
         return self.oairecord_set.order_by('-priority')
+
+    @property
+    def sorted_authors(self):
+        return self.author_set.order_by('id')
 
     def update_availability(self):
         # TODO: create an oa_status field in each publication so that we optimize queries
@@ -195,6 +354,7 @@ class Author(models.Model):
     name = models.ForeignKey(Name)
     cluster = models.ForeignKey('Author', blank=True, null=True, related_name='clusterrel')
     num_children = models.IntegerField(default=1)
+    cluster_relevance = models.FloatField(default=0) # TODO change this default to a negative value
     similar = models.ForeignKey('Author', blank=True, null=True, related_name='similarrel')
     researcher = models.ForeignKey(Researcher, blank=True, null=True, on_delete=models.SET_NULL)
     def __unicode__(self):

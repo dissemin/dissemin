@@ -123,6 +123,13 @@ perseeExtractor = RegexExtractor([
         'pdf', r'\1'),
     ])
 
+numdamExtractor = RegexExtractor([
+    ('identifier', re.compile(r'(http://www\.numdam\.org/item?id=[^ ]*)'),
+        'splash', r'\1'),
+    ('identifier', re.compile(r'http://www\.numdam\.org/item?id=([^ ]*)'),
+        'pdf', r'http://archive\.numdam\.org/article/\1.pdf'),
+    ])
+
 
 REGISTERED_EXTRACTORS = {
         'arxiv': arxivExtractor,
@@ -131,6 +138,7 @@ REGISTERED_EXTRACTORS = {
         'pmc' : pmcExtractor,
         'doaj' : doajExtractor,
         'persee' : perseeExtractor,
+        'numdam' : numdamExtractor,
         }
 
 

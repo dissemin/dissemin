@@ -21,14 +21,98 @@
 from __future__ import unicode_literals
 
 import re
+import name_tools
 
-from papers.utils import normalize_name_words, iunaccent, remove_diacritics
+from papers.utils import split_words, iunaccent, remove_diacritics, isupper
 
 # Name managemement: heuristics to separate a name into (first,last)
 comma_re = re.compile(r',+')
 space_re = re.compile(r'\s+')
 initial_re = re.compile(r'(^|\W)\w(\W|$)')
 lowercase_re = re.compile(r'[a-z]')
+letter_re = re.compile(r'\w')
+
+def match_names(a,b):
+    """
+    Returns a boolean: are these two names compatible?
+    Examples:
+    > ('Robin', 'Ryder'),('R.', 'Ryder'): True
+    > ('Robin J.', 'Ryder'),('R.', 'Ryder'): True
+    > ('R. J.', 'Ryder'),('J.', 'Ryder'): False
+    > ('Claire', 'Mathieu'),('Claire', 'Kenyon-Mathieu'): False
+    """
+    if not a or not b:
+        return False
+    (firstA,lastA) = a
+    (firstB,lastB) = b
+    if lastA.lower() != lastB.lower():
+        return False
+    partsA = split_words(firstA)
+    partsB = split_words(firstB)
+    parts = zip(partsA, partsB)
+    return all(map(match_first_names, parts))
+
+initial_re = re.compile(r'[A-Z](\.,;)*$')
+def normalize_name_words(w):
+    """ If it is an initial, ensure it is of the form "T.", and recapitalize fully capitalized words. """
+    w = w.strip()
+    words = w.split()
+    words = map(recapitalize_word, words)
+    words = map(lambda w: w[0]+'.' if initial_re.match(w) else w, words)
+    return ' '.join(words)
+
+
+def recapitalize_word(w):
+    """ Turns every fully capitalized word into an uncapitalized word (except for the first character) """
+    if w.upper() == w:
+        previousIsChar = False
+        res = ''
+        for i in range(len(w)):
+            if previousIsChar:
+                res += w[i].lower()
+            else:
+                res += w[i]
+            previousIsChar = letter_re.match(w[i]) != None
+        return res
+    return w
+
+def match_first_names(pair):
+    a,b = pair
+    if len(a) == 1 and len(b) > 0:
+        return a.lower() == b[0].lower()
+    elif len(b) == 1 and len(a) > 0:
+        return b.lower() == a[0].lower()
+    else:
+        return a.lower() == b.lower()
+
+def to_plain_name(name):
+    return (name.first,name.last)
+
+# Name normalization function used by the OAI proxy
+nn_separator_re = re.compile(r',+ *')
+nn_escaping_chars_re = re.compile(r'[\{\}\\]')
+nn_nontext_re = re.compile(r'[^a-z_]+')
+nn_final_nontext_re = re.compile(r'[^a-z_]+$')
+
+def name_normalization(ident):
+    ident = remove_diacritics(ident).lower()
+    ident = ident.strip()
+    ident = nn_separator_re.sub('_',ident)
+    ident = nn_escaping_chars_re.sub('',ident)
+    ident = nn_final_nontext_re.sub('',ident)
+    ident = nn_nontext_re.sub('-',ident)
+    return ident
+
+def name_signature(first, last):
+    ident = last.lower().strip()
+    ident = nn_escaping_chars_re.sub('',ident)
+    ident = nn_final_nontext_re.sub('',ident)
+    ident = nn_nontext_re.sub('-',ident)
+    if len(first):
+        ident = first[0].lower()+'-'+ident
+    return ident
+
+#### Helpers for the name splitting heuristic ######
 
 # Does this string contain a name initial?
 def contains_initials(s):
@@ -61,23 +145,24 @@ def predsplit_backwards(predicate, words):
             first.insert(0, words[i])
     return (first,last)
 
+
+###### Name splitting heuristic based on name_tools ######
+
 def parse_comma_name(name):
     """
     Parse a name of the form "Last name, First name" to (first name, last name)
     Try to do something reasonable if there is no comma.
     """
     if ',' in name:
-        name = comma_re.sub(',',name)
-        idx = name.find(',')
-        last_name = name[:idx]
-        first_name = name[(idx+1):]
+        # In this case name_tools does it well
+        prefix, first_name, last_name, suffix = name_tools.split(name)
     else:
-        # TODO: there is probably a better way to parse names such as "Colin de la Higuera"
-        # list of "particle words" such as "de, von, van, du" ?
-        # That would be europe-centric though...
         words = space_re.split(name)
         if not words:
             return ('','')
+        first_name = None
+        last_name = None
+        from_lists = True
 
         # Search for initials in the words
         initial = map(contains_initials, words)
@@ -94,8 +179,8 @@ def parse_comma_name(name):
         # CASE 2: the last word is capitalized but not all of them are
         # we assume that it is the last word of the last name
         elif not initial[-1] and capitalized[-1] and not all(capitalized):
-            (first,last) = predsplit_backwards(
-                    (lambda i: capitalized[i] and not initial[i]),
+            (first,last) = predsplit_forward(
+                    (lambda i: (not capitalized[i]) or initial[i]),
                     words)
 
         # CASE 3: the first word is an initial
@@ -125,14 +210,15 @@ def parse_comma_name(name):
             last = words[last_initial_idx+1:]
 
         # CASE 6: we have no clue
-        # We simply keep the last word as last name
+        # We fall back on name_tools, where wise things are done
+        # to parse correctly names such as "Colin de la Higuera"
         else:
-            cut_idx = len(words)-1
-            first = words[:cut_idx]
-            last = words[cut_idx:]
+            prefix, first_name, last_name, suffix = name_tools.split(name)
+            from_lists = False
             
-        first_name = ' '.join(first)
-        last_name = ' '.join(last)
+        if from_lists:
+            first_name = ' '.join(first)
+            last_name = ' '.join(last)
 
     first_name = first_name.strip()
     last_name = last_name.strip()

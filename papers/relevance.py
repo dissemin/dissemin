@@ -21,7 +21,7 @@
 from __future__ import unicode_literals, print_function
 
 from papers.models import Name, Author, Researcher
-from papers.utils import match_names, iunaccent, nocomma, filter_punctuation, tokenize
+from papers.utils import iunaccent, nocomma, filter_punctuation, tokenize
 from learning.model import WordCount
 from sklearn import svm
 from sklearn.metrics import confusion_matrix
@@ -59,7 +59,7 @@ class KnownCoauthors(RelevanceFeature):
         coauthors = author.paper.author_set.exclude(id=author.id).select_related('name')
         count = 0
         for a in coauthors:
-            if a.researcher != None:
+            if a.name.is_known:
                 count += 1
                 if explain:
                     print('      '+unicode(a))
@@ -88,6 +88,18 @@ class TopicalRelevanceFeature(RelevanceFeature):
                 b = self.lang.lp(w)
                 print('      '+w+'\t'+str(a)+'-'+str(b)+' = '+str(a-b))
         return topicScore - langScore
+
+    def _normalizedWScore(self, line, dpt_id, explain=False):
+        topicScore = self.models[dpt_id].nlProbLine(line)
+        langScore = self.lang.nlProbLine(line)
+        if explain:
+            words = tokenize(line)
+            for w in words:
+                a = self.models[dpt_id].lp(w)
+                b = self.lang.lp(w)
+                print('      '+w+'\t'+str(a)+'-'+str(b)+' = '+str(a-b))
+        return topicScore - langScore
+
 
     def load(self, filename):
         f = open(filename, 'rb')
@@ -121,7 +133,7 @@ class TitleRelevance(TopicalRelevanceFeature):
         if dpt_id not in self.models:
             print("Warning, scoring a title for an unknown department")
             return 0.
-        return self._wScore(author.paper.title, dpt_id, explain)
+        return self._normalizedWScore(author.paper.title, dpt_id, explain)
 
 class PublicationRelevance(TopicalRelevanceFeature):
     """
@@ -140,7 +152,7 @@ class PublicationRelevance(TopicalRelevanceFeature):
             return 0.
         titles = [pub.full_title() for pub in author.paper.publication_set.all().select_related('journal')]
         if titles:
-            return max(map(lambda t: self._wScore(t, dpt_id, explain), titles))
+            return max(map(lambda t: self._normalizedWScore(t, dpt_id, explain), titles))
         return 0.
 
 class KeywordsRelevance(TopicalRelevanceFeature):
@@ -160,7 +172,7 @@ class KeywordsRelevance(TopicalRelevanceFeature):
             return 0.
         words = [rec.keywords for rec in author.paper.oairecord_set.all()]
         words = filter(lambda x: x != None, words)
-        return float(sum(map(lambda t: self._wScore(t, dpt_id, explain), words)))
+        return float(sum(map(lambda t: self._normalizedWScore(t, dpt_id, explain), words)))
 
 class ContributorsRelevance(TopicalRelevanceFeature):
     """
@@ -179,7 +191,7 @@ class ContributorsRelevance(TopicalRelevanceFeature):
             return 0.
         words = [rec.contributors for rec in author.paper.oairecord_set.all()]
         words = filter(lambda x: x != None, words)
-        return float(sum(map(lambda t: self._wScore(t, dpt_id, explain), words)))
+        return float(sum(map(lambda t: self._normalizedWScore(t, dpt_id, explain), words)))
 
 class RelevanceClassifier(object):
     def __init__(self, **kwargs):
@@ -220,12 +232,24 @@ class RelevanceClassifier(object):
         pred = self.classifier.predict(features)
         return confusion_matrix(pred, labels)
 
-    def classify(self, author, dpt_id):
+    def classify(self, author, dpt_id, verbose=False):
+        distance = self.distance(author, dpt_id, verbose)
+        if distance:
+            return distance > 0.
+
+    def score(self, author, dpt_id, verbose=False):
+        """
+        Returns the distance (value of the decision function)
+        for an author. An author is relevant when its distance
+        is positive.
+        """
         if not self.classifier:
             return None
         features = self.computeFeatures(author, dpt_id)
-        output = self.classifier.predict(features)
-        return output[0]
+        distance = self.classifier.decision_function([features])[0][0]
+        if verbose:
+            print(str(features)+' -> '+str(distance))
+        return distance
 
     def feed(self, author, dpt_id):
         for f in self.features:

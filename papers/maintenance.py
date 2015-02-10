@@ -75,3 +75,20 @@ def cleanup_names(dry_run = False):
     print "Deleted "+str(deleted_count)+" names"
 
 
+def add_names_to_variants():
+    """
+    Ensures the name of each researcher is in its other_names set
+    """
+    for r in Researcher.objects.all():
+        r.name_variants.add(r.name)
+
+def update_paper_statuses():
+    """
+    Should only be run if something went wrong,
+    the backend is supposed to update the fields by itself
+    """
+    papers = Paper.objects.all()
+    for p in papers:
+        p.update_availability()
+
+

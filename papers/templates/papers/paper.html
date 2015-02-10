@@ -24,7 +24,7 @@ makeTextEditable($('#paperTitle'), '/ajax/change-paper', '{{ paper.id }}', 'titl
 
 {% block lists %}
 <p>
-{% for author in paper.author_set.all %}{% if not forloop.first %},{% endif %}
+{% for author in paper.sorted_authors %}{% if not forloop.first %},{% endif %}
 {{ author | authorlink }}{% endfor %}</p>
 {% for publi in paper.publication_set.all %}
 <p>{{ publi | publication }}
@@ -89,7 +89,8 @@ makeTextEditable($('#paperTitle'), '/ajax/change-paper', '{{ paper.id }}', 'titl
 {% for a in paper.author_set.all %}
 <p>{{a}}: 
 {% if a.cluster %}
-<a href="{% url 'paper' a.paper.pk %}">{{ a.paper }}</a>
+<a href="{% url 'paper' a.cluster.paper.pk %}">{{ a.cluster.paper }}</a>
+({{a.cluster.num_children}} authors, score {{a.cluster.cluster_relevance}})
 {% else %}
 itself
 {% endif %}

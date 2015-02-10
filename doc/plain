@@ -1,0 +1,103 @@
+
+Dissem.in: Metadata Harvesting for Open Access Policies
+Antonin Delpeuch 
+University of Cambridge 
+École Normale Supérieure 
+antonin@delpeuch.eu
+
+
+
+Many institutions adopt open access policies, requiring researchers to make their articles freely
+available in a repository. Enforcing these policies is far from straightforward however: according to
+a recent study in the UK ,
+each article costs an estimated 33 GBP of staff time to ensure compliance with the RCUK policy.
+Researchers often consider these policies as a burden: they need to
+understand the requirements of their publishers and their institutions,
+and to spend time uploading their articles to various repositories, with
+the appropriate metadata.
+
+We propose to lower these barriers with dissem.in, a
+system that leverages various metadata sources to get a clear picture
+of the access status of publications.
+The platform allows researchers and librarians to search for papers
+filtered by two criteria: full text availability in open repositories
+and publisher preprint policy. This enables us to compute a list of papers
+that are not available in repositories yet, but that could safely be uploaded
+to repositories given the preprint policy of the publisher.
+We expect such a tool to be very useful when enforcing open access policies, especially when 
+there is no designated repository where researchers have to upload their works.
+
+The web platform is a free software still under development, and is being tested at École Normale
+Supérieure, a french university, to implement an open access policy. A proof of concept is running
+at http://ens.dissem.in/ and encompasses a few departments in this university.
+ 
+Each researcher in a given university
+
+ the publications
+list of researchers affiliated to a given university. The tool helps
+researchers to upload their papers and universities to measure the
+availability of their research output in open repositories. The key
+feature is that the system is not a repository itself and is not tied to
+any particular repository, but is more a form of search engine.
+
+Overview of the system
+
+Our web platform allows to browse the publications of researchers within
+a university. These publications can be filtered using two criteria:
+publisher policy and full text availability.
+
+
+
+
+
+
+
+
+
+
+
+
+These two criteria can be visually combined to help researchers grasp
+instantly the status of their publications, as in the following example:
+
+
+
+
+
+
+
+
+
+
+
+
+Demo
+
+A prototype is running and encompasses some departments of the École
+Normale Supérieure (ENS), a french university where an open access policy
+is being elaborated. It is online here:
+http://ens.dissem.in/
+
+Technical details
+
+Metadata sources
+
+We use the OAI-PMH  protocol to crawl repositories, covering more
+than 8 millions of papers. An additional coverage is provided by the Bielefeld
+Academic Search Engine  and CrossRef.org.
+
+Author disambiguation
+
+We perform automatic author name disambiguation to get accurate
+publications list for each researcher. The problem can be formulated as
+follows: given a list of researchers for each department in a
+university, and given a list of millions of papers fetched from various
+sources, find the papers corresponding to our known researchers. Our
+approach is a two-stage machine learning algorithm, similar to the AuthorMagic heuristics
+used in the Invenio platform .
+
+plain
+
+
+
+

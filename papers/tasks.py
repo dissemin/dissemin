@@ -37,7 +37,7 @@ from papers.oai import *
 from papers.doi import to_doi
 from papers.crossref import fetch_papers_from_crossref_by_researcher_name, convert_to_name_pair
 from papers.proxy import *
-from papers.utils import name_normalization
+from papers.name import name_normalization, name_signature
 from papers.base import fetch_papers_from_base_for_researcher
 
 logger = get_task_logger(__name__)
@@ -53,6 +53,7 @@ def process_records(listRecords):
 
         # Filter the record
         if all(not elem.is_known for elem in authors):
+            print "No relevant author, continue"
             continue
         if not 'title' in metadata or metadata['title'] == []:
             continue
@@ -97,9 +98,14 @@ def process_records(listRecords):
 
 @shared_task
 def fetch_everything_for_researcher(pk):
-    fetch_records_for_researcher(pk)
-    fetch_dois_for_researcher(pk)
-    fetch_papers_from_base_for_researcher(Researcher.objects.get(pk=pk))
+    try:
+        # fetch_records_for_researcher(pk)
+        fetch_dois_for_researcher(pk)
+        # fetch_papers_from_base_for_researcher(Researcher.objects.get(pk=pk))
+    except MetadataSourceException as e:
+        raise e
+    finally:
+        clustering_context_factory.commitThemAll()
 
 @shared_task
 def fetch_records_for_researcher(pk):
@@ -107,19 +113,24 @@ def fetch_records_for_researcher(pk):
     fetch_records_for_name(researcher.name)
 
 def fetch_records_for_name(name):
-    # First try with the comma-separated name
-    ident1 = name.last + ', ' + name.first
-    ident1 = name_normalization(ident1)
-    fetch_records_for_normalized_name(ident1)
-    # Then try with the non-separated name
-    ident2 = name.first + ' ' + name.last
-    ident2 = name_normalization(ident2)
-    fetch_records_for_normalized_name(ident2)
-    # TODO: try with first and last swapped, added as CANDIDATEs ?
+    fetch_records_for_signature(name_signature(name.first, name.last))
 
-def fetch_records_for_normalized_name(ident):
+def fetch_records_for_signature(ident):
     client = get_proxy_client()
     try:
+        listRecords = client.listRecords(metadataPrefix='oai_dc', set=PROXY_SIGNATURE_PREFIX+ident)
+        process_records(listRecords)
+    except NoRecordsMatchError:
+        pass
+    except BadArgumentError as e:
+        print "Signature is unknown for the proxy: "+unicode(e)
+        pass
+
+# TODO unused:
+def fetch_records_for_last_name(lastname):
+    client = get_proxy_client()
+    try:
+        ident = name_normalization(lastname)
         listRecords = client.listRecords(metadataPrefix='oai_dc', set=PROXY_AUTHOR_PREFIX+ident)
         process_records(listRecords)
     except NoRecordsMatchError:
@@ -174,7 +185,11 @@ def fetch_dois_for_researcher(pk):
                 continue
             
             title = metadata['title']
-            authors = map(lookup_name, map(convert_to_name_pair, metadata['author']))
+            authors = map(Name.lookup_name, map(convert_to_name_pair, metadata['author']))
+            authors = filter(lambda x: x != None, authors)
+            if all(not elem.is_known for elem in authors) or authors == []:
+                continue
+            print "# Saved."
             paper = get_or_create_paper(title, authors, pubdate) # don't let this function
             # create the publication, because it would re-fetch the metadata from CrossRef
             create_publication(paper, metadata)
@@ -185,16 +200,7 @@ def fetch_dois_for_researcher(pk):
     researcher.status = 'OK, %d records processed.' % nb_records
     researcher.save()
 
-# Should only be run if something went wrong,
-# the backend is supposed to update the fields by itself
-def update_paper_statuses():
-    papers = Paper.objects.all()
-    for p in papers:
-        p.update_availability()
-
 
 @shared_task
 def change_publisher_oa_status(pk, status):
     publisher = Publisher.objects.get(pk=pk)
-    publisher.change_oa_status(status)
-

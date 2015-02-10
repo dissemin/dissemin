@@ -137,18 +137,8 @@ def add_base_document(doc, source):
             return False
     pubdate = datetime.date(year=year,month=01,day=01)
     
-    # TODO: this would be more flexible (but should be done for OAI and CrossRef as well -> refactor)
-    # researcher_found = False
-    # for author in author_names:
-    #    count = Name.objects.filter(last__iexact=author[1],is_known=True).count()
-    #    if count > 0:
-    #        researcher_found = True
-    #        break
-    #if not researcher_found:
-    #    return False
-
     # Lookup the names
-    model_names = map(lookup_name, author_names)
+    model_names = map(Name.lookup_name, author_names)
 
     # Check that at least one of the last names is known
     # TODO remove this and do the things above

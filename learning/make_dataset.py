@@ -49,7 +49,7 @@ def sample2(lst, nb_samples):
 department_id = 21 # informatique
 
 for researcher in Researcher.objects.filter(department_id=department_id):
-    authors = Author.objects.filter(researcher=researcher,paper__year__gt=2012)
+    authors = Author.objects.filter(name=researcher.name_id,paper__year__gt=2012)
     authors_valid = list(authors.filter(paper__visibility='VISIBLE'))
     authors_invalid = list(authors.filter(paper__visibility='DELETED'))
     nb_valid = len(authors_valid)
