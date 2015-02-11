@@ -22,7 +22,7 @@
 {{ publi | publication }}{% if forloop.last %}.{% else %},{% endif %}<br />
 {% empty %}
 {% for record in paper.prioritary_oai_records %}
-<a href="{{ record.splash_url }}">{{ record.source.name }}{% if record.pdf_url == None %}{% trans " (metadata only)" %}{% endif %}</a>{% if forloop.last %}.{% else %},{% endif %}{% endfor %}
+{% if record.splash_url %}<a href="{{ record.splash_url }}">{% endif %}{{ record.source.name }}{% if record.pdf_url == None %}{% trans " (metadata only)" %}{% endif %}{% if record.splash_url %}</a>{% endif %}{% if forloop.last %}.{% else %},{% endif %}{% endfor %}
 {% endfor %}
 </span>
 </div>
