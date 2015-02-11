@@ -23,12 +23,12 @@
     <script type="text/javascript">
         {% block jsScript %}{% endblock %}
     </script>
-    <title>{% block headTitle %}{% endblock %} - Dissemin</title>
+    <title>{% block headTitle %}{% endblock %} - dissem.in</title>
 </head>
 <body>
     <div id="wrapper">
         <div id="header">
-            <span id="dissemin"><a href="/">Dissemin</a></span>
+            <span id="dissemin"><a href="/">dissem.in</a></span>
             <div id="rightLinks"><a href="/">{% trans "Home" context "memu bar" %}</a> &#9679; <a href="{% url 'faq' %}">{% trans "FAQ" %}</a> &#9679; <a href="{% url 'feedback' %}">{% trans "Feedback" %}</a> &#9679;
                 {% if request.user.is_authenticated %}
                 <a href="/logout/">Logout</a>
@@ -49,4 +49,4 @@
         <p><strong>{% trans "Contact:" %}</strong> support@dissem.in</p>
     </div>
 </body>
-
+</html>
