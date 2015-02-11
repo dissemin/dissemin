@@ -26,8 +26,8 @@ ENS
 
     <h4>{% trans "Statistics" %}</h4>
     <p>
-    {% blocktrans %}
-    We gather the publications of {{ nb_researchers }} researchers, from {{ departments.count }} departments.
+    {% blocktrans with depts=departments.count %}
+    We gather the publications of {{ nb_researchers }} researchers, from {{ depts }} departments.
     {% endblocktrans %}
     </p>
 
