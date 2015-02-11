@@ -58,7 +58,11 @@ def publishersView(request, **kwargs):
     if 'status' in args:
         queryset = queryset.filter(oa_status=args.get('status'))
         context['status'] = args.get('status')
-    queryset = queryset.order_by('name')
+
+    # Ordering
+    # queryset = queryset.order_by('name')
+    queryset = queryset.order_by('-stats__num_tot')
+    queryset = queryset.select_related('stats')
 
     # Build the paginator
     paginator = Paginator(queryset, NB_RESULTS_PER_PAGE)

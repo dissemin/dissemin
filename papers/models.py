@@ -66,46 +66,46 @@ class AccessStatistics(models.Model):
     num_couldbe = models.IntegerField(default=0)
     num_unk = models.IntegerField(default=0)
     num_closed = models.IntegerField(default=0)
+    num_tot = models.IntegerField(default=0)
 
     def update(self, queryset):
         """
         Updates the statistics for papers contained in the given Paper queryset
         """
+        queryset = queryset.filter(visibility="VISIBLE")
         self.num_oa = queryset.filter(oa_status='OA').count()
         self.num_ok = queryset.filter(pdf_url__isnull=False).count() - self.num_oa
         self.num_couldbe = queryset.filter(pdf_url__isnull=True, oa_status='OK').count()
         self.num_unk = queryset.filter(pdf_url__isnull=True, oa_status='UNK').count()
         self.num_closed = queryset.filter(pdf_url__isnull=True, oa_status='NOK').count()
+        self.num_tot = queryset.count()
         self.save()
-
-    def total(self):
-        return self.num_oa + self.num_ok + self.num_couldbe + self.num_unk + self.num_closed
 
     @property
     def percentage_oa(self):
-        total = self.total()
-        if total:
-            return int(100.*self.num_oa/self.total())
+        if self.num_tot:
+            return int(100.*self.num_oa/self.num_tot)
     @property
     def percentage_ok(self):
-        total = self.total()
-        if total:
-            return int(100.*self.num_ok/self.total())
+        if self.num_tot:
+            return int(100.*self.num_ok/self.num_tot)
     @property
     def percentage_couldbe(self):
-        total = self.total()
-        if total:
-            return int(100.*self.num_couldbe/self.total())
+        if self.num_tot:
+            return int(100.*self.num_couldbe/self.num_tot)
     @property
     def percentage_unk(self):
         return 100 - (self.percentage_oa + self.percentage_ok +
             self.percentage_closed + self.percentage_couldbe)
     @property
     def percentage_closed(self):
-        total = self.total()
         if total:
-            return int(100.*self.num_closed/self.total())
+            return int(100.*self.num_closed/self.num_tot)
 
+    @classmethod
+    def update_all_stats(self, _class):
+        for x in _class.objects.all():
+            x.update_stats()
 
 # Information about the researchers and their groups
 class Department(models.Model):
@@ -121,6 +121,9 @@ class Department(models.Model):
         return self.name
 
     def update_stats(self):
+        if not self.stats:
+            self.stats = AccessStatistics.objects.create()
+            self.save()
         self.stats.update(Paper.objects.filter(author__researcher__department=self).distinct())
 
 class ResearchGroup(models.Model):
@@ -428,6 +431,14 @@ class Publisher(models.Model):
     postprint = models.CharField(max_length=32, choices=POLICY_CHOICES, default='unknown')
     pdfversion = models.CharField(max_length=32, choices=POLICY_CHOICES, default='unknown')
     oa_status = models.CharField(max_length=32, choices=OA_STATUS_CHOICES, default='UNK')
+
+    stats = models.ForeignKey(AccessStatistics, null=True)
+
+    def update_stats(self):
+        if not self.stats:
+            self.stats = AccessStatistics.objects.create()
+            self.save()
+        self.stats.update(Paper.objects.filter(publication__journal__publisher=self).distinct())
     def __unicode__(self):
         if not self.alias:
             return self.name

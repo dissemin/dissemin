@@ -55,6 +55,11 @@
            <div class="criterionItem">
                <span class="paperTitle">
                    <a href="{% url 'publisher' publisher.pk %}">{{ publisher }}</a>
+                       {% if publisher.stats %}
+                           {% blocktrans with num_total=publisher.stats.num_tot %}
+                           ({{ num_total }} papers)
+                           {% endblocktrans %}
+                       {% endif %}
                </span>
            </div>
         </div>
