@@ -16,7 +16,7 @@ Frequently Asked Questions
         <p><a href="#repositories-rock">{% trans "Why should I upload my papers to a repository?" %}</a></p>
         <p><a href="#what-repository">{% trans "What repository should I use?" %}</a></p>
 
-        <h4>Dissem.in</h4>
+        <h4>dissem.in</h4>
         <p><a href="#what-is-dissemin">{% trans "What is dissem.in?" %}</a></p>
         <p><a href="#repository">{% trans "Is dissem.in a repository?" %}</a></p>
         <p><a href="#running">{% trans "Who runs dissem.in?" %}</a></p>
@@ -109,6 +109,48 @@ Frequently Asked Questions
 
         <h3>Policies and full-text availability</h3>
         <h2 id="policy-classes">{% trans "What do your policy classes mean?" %}</h2>
+        <p>
+        <div>
+            <div class="pubLogo">
+                <div class="pubLogoPic-OA"></div>
+            </div>
+            <div class="criterionItem">
+                <strong>Open access:</strong><br />
+                The full text is made freely available by the publisher.
+            </div>
+        </div>
+        <div>
+            <div class="pubLogo">
+                <div class="pubLogoPic-OK pubLogoPic-PDF"></div>
+            </div>
+            <div class="criterionItem">
+                <strong>Pre/post prints allowed and full text available:</strong><br />
+                The full text is available in a repository, but might not be freely
+                available from the publisher itself. This is in line with the publishing policy
+                and is called green open access or self-archiving.
+            </div>
+        </div>
+        <div>
+            <div class="pubLogo">
+                <div class="pubLogoPic-OK"></div>
+            </div>
+            <div class="criterionItem">
+                <strong>Pre/post prints allowed but full text unavailable:</strong><br />
+                The full text could be made available in a repository (as above)
+                according to the publishing policy.
+            </div>
+        </div>
+        <div>
+            <div class="pubLogo">
+                <div class="pubLogoPic-NOK"></div>
+            </div>
+            <div class="criterionItem">
+                <strong>Pre/post prints forbidden:</strong><br />
+
+                The publisher forbids deposits in repositories, in general.
+            </div>
+        </div>
+        </p>
         <h2 id="availability">{% trans "When is a paper considered available?" %}</h2>
         <p>When we have found it in one of the repositories we harvest. The list of
         these repositories can be found <a href="{% url "sources" %}">here</a>.
