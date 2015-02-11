@@ -99,7 +99,7 @@ class AccessStatistics(models.Model):
             self.percentage_closed + self.percentage_couldbe)
     @property
     def percentage_closed(self):
-        if total:
+        if self.num_tot:
             return int(100.*self.num_closed/self.num_tot)
 
     @classmethod
@@ -177,6 +177,13 @@ class Researcher(models.Model):
                 if not name.is_known:
                     name.is_known = True
                     name.save(update_fields=['is_known'])
+
+    stats = models.ForeignKey(AccessStatistics, null=True)
+    def update_stats(self):
+        if not self.stats:
+            self.stats = AccessStatistics.objects.create()
+            self.save()
+        self.stats.update(Paper.objects.filter(author__researcher=self).distinct())
 
 
 MAX_NAME_LENGTH = 256
@@ -456,7 +463,7 @@ class Publisher(models.Model):
         return count
     @property
     def sorted_journals(self):
-        return self.journal_set.all().order_by('title')
+        return self.journal_set.all().select_related('stats').filter(stats__num_tot__gt=0).order_by('-stats__num_tot')
     @property
     def preprint_conditions(self):
         return self.publisherrestrictiondetail_set.filter(applies_to='preprint')
@@ -481,6 +488,14 @@ class Journal(models.Model):
     last_updated = models.DateTimeField(auto_now=True)
     issn = models.CharField(max_length=10, blank=True, null=True, unique=True)
     publisher = models.ForeignKey(Publisher)
+
+    stats = models.ForeignKey(AccessStatistics, null=True)
+    def update_stats(self):
+        if not self.stats:
+            self.stats = AccessStatistics.objects.create()
+            self.save()
+        self.stats.update(Paper.objects.filter(publication__journal=self).distinct())
+
     def __unicode__(self):
         return self.title
     class Meta:

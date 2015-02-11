@@ -45,12 +45,23 @@ function addResearcher() {
 <ul id="membersList">
     {% for person in department.sorted_researchers %}
     <li><a href="{% url 'researcher' person.id %}">{{ person }}</a>
+           {% if person.stats %}
+           <span class="numPapers">
+               {% blocktrans count num_total=person.stats.num_tot %}
+               ({{ num_total }} paper)
+               {% plural %}
+               ({{ num_total }} papers)
+               {% endblocktrans %}
+           </span>
+           {% endif %}
+
         {% if request.user.is_superuser %}
             <button type="button" class="close researcherDeleteButton"
                 id="delete-researcher-{{ person.id }}">
                 <span aria-hidden="true">&times;</span><span class="sr-only">{% trans "Delete" %}</span>
             </button>
         {% endif %}
+
     </li>
     {% endfor %}
 </ul>

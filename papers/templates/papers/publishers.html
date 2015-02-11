@@ -56,9 +56,13 @@
                <span class="paperTitle">
                    <a href="{% url 'publisher' publisher.pk %}">{{ publisher }}</a>
                        {% if publisher.stats %}
-                           {% blocktrans with num_total=publisher.stats.num_tot %}
-                           ({{ num_total }} papers)
-                           {% endblocktrans %}
+                           <span class="numPapers">
+                               {% blocktrans count num_total=publisher.stats.num_tot %}
+                               ({{ num_total }} paper)
+                               {% plural %}
+                               ({{ num_total }} papers)
+                               {% endblocktrans %}
+                           </span>
                        {% endif %}
                </span>
            </div>
