@@ -43,7 +43,7 @@ class PublicationInline(admin.StackedInline):
     extra = 0
 
 class PaperAdmin(admin.ModelAdmin):
-    fields = ['title', 'year', 'visibility']
+    fields = ['title', 'pubdate', 'visibility']
     inlines = [AuthorInline, PublicationInline, OaiInline]
 
 admin.site.register(Department)

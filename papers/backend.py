@@ -85,9 +85,7 @@ def get_or_create_paper(title, author_names, pubdate, doi=None, visibility='VISI
             p.visibility = 'VISIBLE'
             p.save(update_fields=['visibility'])
     else:
-        year = pubdate.year
         p = Paper(title=title,
-                year=year,
                 pubdate=pubdate,
                 fingerprint=fp,
                 visibility=visibility)

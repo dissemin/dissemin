@@ -158,7 +158,7 @@ class Researcher(models.Model):
 
     @property
     def authors_by_year(self):
-        return Author.objects.filter(name__researcher_id=self.id).order_by('-paper__year')
+        return Author.objects.filter(name__researcher_id=self.id).order_by('-paper__pubdate')
     @property
     def names(self):
         return Name.objects.filter(author__researcher=self)
@@ -317,6 +317,10 @@ class Paper(models.Model):
     # using the methods below.
     oa_status = models.CharField(max_length=32, null=True, blank=True, default='UNK')
     pdf_url = models.URLField(max_length=2048, null=True, blank=True)
+
+    @property
+    def year(self):
+        return self.pubdate.year
 
     @property
     def prioritary_oai_records(self):
