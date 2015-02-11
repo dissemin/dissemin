@@ -6,11 +6,11 @@ from papers.relevance import *
 from papers.clustering import *
 
 
-print("Loading similarity classifier…")
-sc = SimilarityClassifier(filename='models/similarity.pkl')
-print("Loading relevance classifier…")
-rc = RelevanceClassifier(filename='models/relevance-1.pkl')
+# print("Loading similarity classifier…")
+# sc = SimilarityClassifier(filename='models/similarity.pkl')
+# print("Loading relevance classifier…")
+# rc = RelevanceClassifier(filename='models/relevance-1.pkl')
 
-clustering_context_factory = ClusteringContextFactory(sc, rc)
+# clustering_context_factory = ClusteringContextFactory(sc, rc)
 
 
