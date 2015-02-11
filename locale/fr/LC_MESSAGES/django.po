@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-11 14:45+0100\n"
+"POT-Creation-Date: 2015-02-11 15:28+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -136,11 +136,11 @@ msgid_plural ""
 "               "
 msgstr[0] ""
 "\n"
-"            (%(count)s papier\n"
+"            (%(num_total)s papier\n"
 "            "
 msgstr[1] ""
 "\n"
-"            %(count)s papiers\n"
+"            %(num_total)s papier\n"
 "            "
 
 #: papers/templates/papers/department.html:61
@@ -296,7 +296,7 @@ msgid "Statistics"
 msgstr "Statistiques"
 
 #: papers/templates/papers/index.html:29
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "\n"
 "    We gather the publications of %(nb_researchers)s researchers, from "
@@ -370,7 +370,7 @@ msgstr "via DOI"
 
 #: papers/templates/papers/publiListItem.html:25
 msgid " (metadata only)"
-msgstr ""
+msgstr " (notice)"
 
 #: papers/templates/papers/publisher.html:45
 msgid "Policy"
@@ -445,7 +445,13 @@ msgid_plural ""
 "                               (%(num_total)s papers)\n"
 "                               "
 msgstr[0] ""
+"\n"
+"                               (%(num_total)s papier)\n"
+"                               "
 msgstr[1] ""
+"\n"
+"                               (%(num_total)s papier)\n"
+"                               "
 
 #: papers/templates/papers/publishers.html:73
 #: papers/templates/papers/search.html:157
@@ -666,6 +672,58 @@ msgstr ""
 #: templates/dissemin/skeleton.html:49
 msgid "Contact:"
 msgstr "Contact:"
+
+#, fuzzy
+#~| msgid "Statistics"
+#~ msgid "Static Files"
+#~ msgstr "Statistiques"
+
+#, fuzzy
+#~| msgid "Conditions"
+#~ msgid "Syndication"
+#~ msgstr "Conditions"
+
+#, fuzzy
+#~| msgid "Address:"
+#~ msgid "IPv4 address"
+#~ msgstr "Adresse:"
+
+#, fuzzy
+#~| msgid "Address:"
+#~ msgid "IP address"
+#~ msgstr "Adresse:"
+
+#, fuzzy
+#~| msgid "Members:"
+#~ msgid "November"
+#~ msgstr "Membres:"
+
+#, fuzzy
+#~| msgid "Members:"
+#~ msgid "December"
+#~ msgstr "Membres:"
+
+#, fuzzy
+#~| msgid "Papers"
+#~ msgid "apr"
+#~ msgstr "Papiers"
+
+#, fuzzy
+#~| msgid "Members:"
+#~ msgctxt "alt. month"
+#~ msgid "November"
+#~ msgstr "Membres:"
+
+#, fuzzy
+#~| msgid "Members:"
+#~ msgctxt "alt. month"
+#~ msgid "December"
+#~ msgstr "Membres:"
+
+#, fuzzy
+#~| msgid "Last name"
+#~ msgid "name"
+#~ msgstr "Nom"
 
 #~ msgid ""
 #~ "\n"
