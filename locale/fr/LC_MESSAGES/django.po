@@ -136,11 +136,11 @@ msgid_plural ""
 "               "
 msgstr[0] ""
 "\n"
-"            (%(num_total)s papier\n"
+"            (%(num_total)s papier)\n"
 "            "
 msgstr[1] ""
 "\n"
-"            %(num_total)s papier\n"
+"            (%(num_total)s papiers)\n"
 "            "
 
 #: papers/templates/papers/department.html:61
@@ -450,7 +450,7 @@ msgstr[0] ""
 "                               "
 msgstr[1] ""
 "\n"
-"                               (%(num_total)s papier)\n"
+"                               (%(num_total)s papiers)\n"
 "                               "
 
 #: papers/templates/papers/publishers.html:73

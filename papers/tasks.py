@@ -204,3 +204,5 @@ def fetch_dois_for_researcher(pk):
 @shared_task
 def change_publisher_oa_status(pk, status):
     publisher = Publisher.objects.get(pk=pk)
+    publisher.change_oa_status(status)
+

@@ -457,14 +457,12 @@ class Publisher(models.Model):
             return self.name+' ('+self.alias+')'
     @property
     def publi_count(self):
-        # TODO compute this with aggregates
-        # and cache the number of papers for each journal
         # TODO ensure that the papers are not only visible,
         # but also assigned to a researcher
-        count = 0
-        for journal in self.journal_set.all():
-            count += journal.publication_set.filter(paper__visibility='VISIBLE').count()
-        return count
+        if self.stats:
+            return self.stats.num_tot
+        return 0
+
     @property
     def sorted_journals(self):
         return self.journal_set.all().select_related('stats').filter(stats__num_tot__gt=0).order_by('-stats__num_tot')
