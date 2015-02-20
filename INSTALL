@@ -1,0 +1,48 @@
+Dependencies:
+
+libxml2
+python-dev
+libxslt-dev
+postgresql-server-dev-all
+liblapack-dev
+gfortran
+libopenblas-dev (notsure)
+python-virtualenv
+
+
+-----------
+Building of a virtual environment to put all the python dependencies.
+
+*virtualenv .virtualenv 
+*source .virtualenv/bin/activate
+*pip install django
+*pip install celery
+*pip install PyOAI (BUG)
+*pip install unidecode
+*pip install psycopg2
+*pip install django-bootstrap-pagination
+*pip install name_tools
+*pip install nltk
+*pip install numpy
+*pip install scikit-learn
+*pip install scipy
+*pip install matplotlib
+* touch romeo_api_key
+
+
+------
+Setting the database
+
+sudo su postgres
+psql
+CREATE USER dissemin WITH PASSWORD 'dissemin';
+CREATE DATABASE dissemin WITH OWNER dissemin;
+
+	ctrl+d
+
+
+---Download a backup.gz of the database on ulminfo.fr
+
+gunzip backup.gz
+cat backup | psql dissemin
+
