@@ -255,6 +255,11 @@ ul, .withTriangles
 
 }
 
+.undoDeletePaper
+{
+    line-height: 40px;
+}
+
 /* Policy choices pics */
 
 .policyPic

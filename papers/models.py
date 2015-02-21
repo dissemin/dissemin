@@ -341,6 +341,15 @@ class Paper(models.Model):
             return 2 # NOT RELEVANT
         return 0 # VISIBLE
 
+    @property
+    def visibility_code(self):
+        idx = 0
+        for code, lbl in VISIBILITY_CHOICES:
+            if code == self.visibility:
+                return idx
+            idx += 1
+        return idx
+
     def update_availability(self):
         # TODO: create an oa_status field in each publication so that we optimize queries
         # and can deal with hybrid OA
