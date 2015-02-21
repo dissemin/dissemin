@@ -84,8 +84,10 @@ makeTextEditable($('#paperTitle'), '/ajax/change-paper', '{{ paper.id }}', 'titl
 </div>
 
 {% if request.user.is_superuser %}
-<p>Visibility: {{ paper.visibility }}</p>
-<p>Clusters:</p>
+<span class="detailsTitle">{% trans "Admin zone" %}</span>
+<div class="detailsContent">
+    <p><strong>Visibility:</strong> {{ paper.visibility }}</p>
+    <p><strong>Clusters:</strong></p>
 {% for a in paper.author_set.all %}
 <p>{{a}}: 
 {% if a.cluster %}
@@ -96,5 +98,15 @@ itself
 {% endif %}
 </p>
 {% endfor %}
+<p><strong>Annotations:</strong>
+<ul>
+{% for annot in paper.annotation_set.all %}
+    <li>{{ annot }}</li>
+{% empty %}
+None
+{% endfor %}
+</ul>
+</p>
+</div>
 {% endif %}
 {% endblock %}

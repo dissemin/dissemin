@@ -32,7 +32,7 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 
 from papers.models import *
-from papers.user import is_admin
+from papers.user import *
 from papers.forms import AddResearcherForm
 from papers.utils import iunaccent
 from papers.tasks import *
@@ -90,8 +90,13 @@ def addResearcher(request):
 @user_passes_test(is_authenticated)
 def annotatePaper(request, pk, status):
     paper = get_object_or_404(Paper, pk=pk)
-    if not status in range(len(VISIBILITY_CHOICES)):
+    try:
+        status = int(status)
+        if not status in range(len(VISIBILITY_CHOICES)):
+            raise ValueError
+    except ValueError:
         return HttpResponseForbidden('Invalid visibility status', content_type='text/plain')
+
     visibility = VISIBILITY_CHOICES[status][0]
     Annotation.create(paper, visibility, request.user)
     return HttpResponse('OK', content_type='text/plain')
@@ -131,7 +136,7 @@ def changePublisherStatus(request):
     
 
 urlpatterns = patterns('',
-    url(r'^annotate-paper-(?P<pk>\d+)-(?P<status>\d+)\$', annotatePaper, name='ajax-annotatePaper'),
+    url(r'^annotate-paper-(?P<pk>\d+)-(?P<status>\d+)$', annotatePaper, name='ajax-annotatePaper'),
     url(r'^delete-researcher-(?P<pk>\d+)$', deleteResearcher, name='ajax-deleteResearcher'),
     url(r'^change-department$', changeDepartment, name='ajax-changeDepartment'),
     url(r'^change-paper$', changePaper, name='ajax-changePaper'),

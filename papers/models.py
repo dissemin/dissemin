@@ -335,6 +335,12 @@ class Paper(models.Model):
     def sorted_authors(self):
         return self.author_set.order_by('id')
 
+    @property
+    def toggled_visibility(self):
+        if self.visibility == 'VISIBLE':
+            return 2 # NOT RELEVANT
+        return 0 # VISIBLE
+
     def update_availability(self):
         # TODO: create an oa_status field in each publication so that we optimize queries
         # and can deal with hybrid OA
@@ -619,7 +625,7 @@ class OaiRecord(models.Model):
 
 # Annotation tool to train the models
 class Annotation(models.Model):
-    paper = models.ForeignKey(Author, unique=True)
+    paper = models.ForeignKey(Paper)
     status = models.CharField(max_length=64)
     user = models.ForeignKey(User)
     timestamp = models.DateTimeField(auto_now=True)
@@ -628,7 +634,8 @@ class Annotation(models.Model):
         return unicode(self.user)+': '+self.status
     @classmethod
     def create(self, paper, status, user): 
-        annot = Annotation.create(paper=paper, status=status, user=user)
+        annot = Annotation(paper=paper, status=status, user=user)
+        annot.save()
         paper.visibility = status
         paper.save(update_fields=['visibility'])
 

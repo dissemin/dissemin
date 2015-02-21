@@ -11,8 +11,8 @@
 <strong>{{ a2 }}</strong>{% else %}
 {{ a2|authorlink }}{% endif %}{% endfor %}</span><br />
 <span class="paperTitle">
-{% if request.user.is_superuser %}
-<button type="button" class="close paperDeleteButton" id="delete-paper-{{ paper.pk }}"><span aria-hidden="true">&times;</span><span class="sr-only">{% trans "Delete" %}</span></button>
+{% if request.user.is_authenticated %}
+<button type="button" class="close paperDeleteButton" id="annotate-paper-{{ paper.pk }}-{{ paper.toggled_visibility }}"><span aria-hidden="true">&times;</span><span class="sr-only">{% trans "Delete" %}</span></button>
 {% endif %}
 
     <span><a href="{% url 'paper' paper.id %}" id="paper-title-{{ paper.id }}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">{{ paper.title }}</a>&nbsp;</span>
