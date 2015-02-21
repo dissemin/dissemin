@@ -87,11 +87,13 @@ def addResearcher(request):
         return HttpResponseForbidden(json.dumps(form.errors), content_type='application/javascript')
 
 # Paper management
-@user_passes_test(is_admin)
-def deletePaper(request, pk):
+@user_passes_test(is_authenticated)
+def annotatePaper(request, pk, status):
     paper = get_object_or_404(Paper, pk=pk)
-    paper.visibility = 'DELETED'
-    paper.save(update_fields=['visibility'])
+    if not status in range(len(VISIBILITY_CHOICES)):
+        return HttpResponseForbidden('Invalid visibility status', content_type='text/plain')
+    visibility = VISIBILITY_CHOICES[status][0]
+    Annotation.create(paper, visibility, request.user)
     return HttpResponse('OK', content_type='text/plain')
 
 @user_passes_test(is_admin)
@@ -129,7 +131,7 @@ def changePublisherStatus(request):
     
 
 urlpatterns = patterns('',
-    url(r'^delete-paper-(?P<pk>\d+)$', deletePaper, name='ajax-deletePaper'),
+    url(r'^annotate-paper-(?P<pk>\d+)-(?P<status>\d+)\$', annotatePaper, name='ajax-annotatePaper'),
     url(r'^delete-researcher-(?P<pk>\d+)$', deleteResearcher, name='ajax-deleteResearcher'),
     url(r'^change-department$', changeDepartment, name='ajax-changeDepartment'),
     url(r'^change-paper$', changePaper, name='ajax-changePaper'),

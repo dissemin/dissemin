@@ -21,6 +21,7 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.models import User
 from papers.utils import nstr, iunaccent
 from papers.name import match_names
 from django.utils.translation import ugettext_lazy as _
@@ -614,5 +615,21 @@ class OaiRecord(models.Model):
     last_update = models.DateTimeField(auto_now=True)
     def __unicode__(self):
         return self.identifier
+
+
+# Annotation tool to train the models
+class Annotation(models.Model):
+    paper = models.ForeignKey(Author, unique=True)
+    status = models.CharField(max_length=64)
+    user = models.ForeignKey(User)
+    timestamp = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return unicode(self.user)+': '+self.status
+    @classmethod
+    def create(self, paper, status, user): 
+        annot = Annotation.create(paper=paper, status=status, user=user)
+        paper.visibility = status
+        paper.save(update_fields=['visibility'])
 
 
