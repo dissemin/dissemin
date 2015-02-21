@@ -1,4 +1,4 @@
-Dependencies:
+First, install the following dependencies (debian packages)
 
 libxml2
 python-dev
@@ -6,25 +6,16 @@ libxslt-dev
 postgresql-server-dev-all
 liblapack-dev
 gfortran
-libopenblas-dev (notsure)
+libopenblas-dev
 python-virtualenv
 
 
 -----------
-Building of a virtual environment to put all the python dependencies.
+Then, build a virtual environment to put all the python dependencies.
 
-*virtualenv .virtualenv 
+*virtualenv .virtualenv
 *source .virtualenv/bin/activate
-*pip install django
-*pip install celery
-*pip install PyOAI (BUG)
-*pip install unidecode
-*pip install psycopg2
-*pip install django-bootstrap-pagination
-*pip install name_tools
-*pip install numpy
-*pip install scikit-learn
-*pip install scipy
+*pip install -r requirements.txt
 * touch romeo_api_key
 
 Optional python dependencies (if you want to debug the learning system):
