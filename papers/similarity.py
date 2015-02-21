@@ -23,12 +23,10 @@ from __future__ import unicode_literals, print_function
 from papers.models import Name, Author, Researcher
 from papers.utils import iunaccent, nocomma, filter_punctuation, tokenize
 from papers.name import match_names
-from nltk.tokenize.punkt import PunktWordTokenizer
 from sklearn import svm
 from sklearn.metrics import confusion_matrix
 import cPickle
 import numpy as np
-import matplotlib.pyplot as plt
 from unidecode import unidecode
 import name_tools
 
@@ -260,6 +258,7 @@ class SimilarityClassifier(object):
         return output[0]
 
     def plotClassification(self, features, labels):
+        import matplotlib.pyplot as plt
         h = 0.1
         X = np.array(features)
         x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1

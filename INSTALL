@@ -22,13 +22,14 @@ Building of a virtual environment to put all the python dependencies.
 *pip install psycopg2
 *pip install django-bootstrap-pagination
 *pip install name_tools
-*pip install nltk
 *pip install numpy
 *pip install scikit-learn
 *pip install scipy
-*pip install matplotlib
 * touch romeo_api_key
 
+Optional python dependencies (if you want to debug the learning system):
+*pip install nltk
+*pip install matplotlib
 
 ------
 Setting the database

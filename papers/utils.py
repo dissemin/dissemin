@@ -27,7 +27,7 @@ from unidecode import unidecode
 from time import sleep
 import socket
 from urllib2 import urlopen, build_opener
-from nltk.tokenize.punkt import PunktWordTokenizer
+
 
 ### General string utilities ###
 
@@ -75,11 +75,16 @@ def remove_diacritics(s):
 def iunaccent(s):
     return remove_diacritics(s).lower()
 
-punktTokenizer = PunktWordTokenizer()
 
-def tokenize(l):
-    return punktTokenizer.tokenize(iunaccent(l))
-
+try:
+    from nltk.tokenize.punkt import PunktWordTokenizer
+    punktTokenizer = PunktWordTokenizer()
+    def tokenize(l):
+        return punktTokenizer.tokenize(iunaccent(l))
+except ImportError:
+    tokenize_space_re = re.compile(r'\s+')
+    def tokenize(l):
+        return tokenize_spae_re.split(l)
 
 ##### Paper fingerprinting
 

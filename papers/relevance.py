@@ -27,7 +27,6 @@ from sklearn import svm
 from sklearn.metrics import confusion_matrix
 import cPickle
 import numpy as np
-import matplotlib.pyplot as plt
 from unidecode import unidecode
 
 class RelevanceFeature(object):
@@ -257,6 +256,7 @@ class RelevanceClassifier(object):
                 f.feed(author, dpt_id)
 
     def plotClassification(self, features, labels):
+        import matplotlib.pyplot as plt
         h = 0.1
         X = np.array(features)
         x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
