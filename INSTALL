@@ -17,6 +17,10 @@ Then, build a virtual environment to put all the python dependencies.
 *source .virtualenv/bin/activate
 *pip install -r requirements.txt
 * touch romeo_api_key
+* git clone https://github.com/threonorm/django-cas /tmp/django-cas
+* cd /tmp/django-cas 
+* python setup.py install
+
 
 Optional python dependencies (if you want to debug the learning system):
 *pip install nltk
