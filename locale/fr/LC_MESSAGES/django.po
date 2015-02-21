@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-11 15:28+0100\n"
+"POT-Creation-Date: 2015-02-21 23:46+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,79 +42,79 @@ msgstr "Site web"
 msgid "Role"
 msgstr "Fonction"
 
-#: papers/models.py:29 papers/models.py:53
+#: papers/models.py:30 papers/models.py:54
 msgid "Open access"
 msgstr "Accès libre"
 
-#: papers/models.py:30
+#: papers/models.py:31
 msgid "Allows pre/post prints"
 msgstr "Pré/post-publications autorisées"
 
-#: papers/models.py:31
+#: papers/models.py:32
 msgid "Forbids pre/post prints"
 msgstr "Pré/post-publications interdites"
 
-#: papers/models.py:32
+#: papers/models.py:33
 msgid "Policy unclear"
 msgstr "Politique inconnue"
 
-#: papers/models.py:37 papers/templates/papers/paper.html:38
+#: papers/models.py:38 papers/templates/papers/paper.html:38
 msgid "Available"
 msgstr "Disponible"
 
-#: papers/models.py:38 papers/templates/papers/paper.html:39
+#: papers/models.py:39 papers/templates/papers/paper.html:39
 msgid "Unavailable"
 msgstr "Indisponible"
 
-#: papers/models.py:40
+#: papers/models.py:41
 msgid "Visible"
 msgstr "Visible"
 
-#: papers/models.py:41
+#: papers/models.py:42
 msgid "Candidate"
 msgstr "Candidat"
 
-#: papers/models.py:42
+#: papers/models.py:43
 msgid "Not relevant"
 msgstr "Non pertinent"
 
-#: papers/models.py:43
+#: papers/models.py:44
 msgid "Deleted"
 msgstr "Supprimé"
 
-#: papers/models.py:46
+#: papers/models.py:47
 msgid "Allowed"
 msgstr ""
 
-#: papers/models.py:47
+#: papers/models.py:48
 msgid "Forbidden"
 msgstr ""
 
-#: papers/models.py:48
+#: papers/models.py:49
 msgid "Restricted"
 msgstr ""
 
-#: papers/models.py:49
+#: papers/models.py:50
 msgid "Unclear"
 msgstr ""
 
-#: papers/models.py:50
+#: papers/models.py:51
 msgid "Unknown"
 msgstr ""
 
-#: papers/models.py:54
+#: papers/models.py:55
 msgid "Preprint available"
 msgstr "Préprint disponible"
 
-#: papers/models.py:55
+#: papers/models.py:56
 msgid "Unavailable but compatible"
 msgstr ""
 
-#: papers/models.py:56
+#: papers/models.py:57
 msgid "Unknown status"
 msgstr "État inconnu"
 
-#: papers/models.py:57
+#: papers/models.py:58
 msgid "Preprints forbidden"
 msgstr ""
 
@@ -144,7 +144,7 @@ msgstr[1] ""
 "            "
 
 #: papers/templates/papers/department.html:61
-#: papers/templates/papers/publiListItem.html:15
+#: papers/templates/papers/publiListItem.html:21
 msgid "Delete"
 msgstr "Supprimer"
 
@@ -368,7 +368,19 @@ msgstr "Maison d'édition"
 msgid "via DOI"
 msgstr "via DOI"
 
-#: papers/templates/papers/publiListItem.html:25
+#: papers/templates/papers/paper.html:87
+msgid "Admin zone"
+msgstr ""
+
+#: papers/templates/papers/publiListItem.html:18
+msgid "Paper deleted. "
+msgstr ""
+
+#: papers/templates/papers/publiListItem.html:19
+msgid "Undo"
+msgstr ""
+
+#: papers/templates/papers/publiListItem.html:31
 msgid " (metadata only)"
 msgstr " (notice)"
 
@@ -656,6 +668,10 @@ msgstr "Accueil"
 #: templates/dissemin/skeleton.html:32
 msgid "FAQ"
 msgstr "FAQ"
+
+#: templates/dissemin/skeleton.html:34
+msgid "Logout"
+msgstr "Se déconnecter"
 
 #: templates/dissemin/skeleton.html:36
 msgid "Login"
