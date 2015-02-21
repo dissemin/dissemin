@@ -70,8 +70,15 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+		'cas.middleware.CASMiddleware',   #Line to comment/uncomment to bypass/activate the cas
 )
 
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+		'cas.backends.CASBackend',
+
+)
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     'django.core.context_processors.request',
@@ -87,6 +94,11 @@ TEMPLATE_LOADERS = (
 ROOT_URLCONF = 'dissemin.urls'
 
 WSGI_APPLICATION = 'dissemin.wsgi.application'
+
+#CAS_SERVER_URL="https://localhost:8443/cas/login"    #Local tomcat CAS
+CAS_SERVER_URL="https://cas.eleves.ens.fr/login"    #CRI CAS
+CAS_LOGOUT_COMPLETELY = True
+CAS_PROVIDE_URL_TO_LOGOUT = True
 
 
 # Database

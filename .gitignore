@@ -23,7 +23,8 @@ learning/evaluate.py
 learning/gengraph.py
 learning/regression.py
 learning/gephi/
-
+# Virtual env
+.virtualenv/
 # Proposals
 doc/Makefile
 doc/project.*
