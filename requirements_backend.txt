@@ -2,3 +2,5 @@ pyoai
 numpy
 scipy
 scikit-learn
+czipfile
+httplib
