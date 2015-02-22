@@ -20,14 +20,16 @@
 
 from __future__ import unicode_literals, print_function
 
-from papers.models import Name, Author, Researcher
-from papers.utils import iunaccent, nocomma, filter_punctuation, tokenize
-from learning.model import WordCount
 from sklearn import svm
 from sklearn.metrics import confusion_matrix
 import cPickle
 import numpy as np
 from unidecode import unidecode
+
+from papers.models import Name, Author, Researcher
+from papers.utils import iunaccent, nocomma, filter_punctuation, tokenize
+
+from learning.model import WordCount
 
 class RelevanceFeature(object):
     """

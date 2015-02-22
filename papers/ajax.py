@@ -30,12 +30,12 @@ from django.db import IntegrityError
 import json
 
 from django.views.decorators.csrf import csrf_exempt
+from celery.execute import send_task
 
 from papers.models import *
 from papers.user import *
 from papers.forms import AddResearcherForm
 from papers.utils import iunaccent
-from papers.tasks import *
 
 # General function used to change a CharField in a model with ajax
 def process_ajax_change(request, model, allowedFields):
@@ -71,7 +71,7 @@ def addResearcher(request):
             homepage = form.cleaned_data['homepage']
 
             try:
-                researcher = create_researcher(first, last, dept, email, role, homepage)
+                researcher = Researcher.create_from_scratch(first, last, dept, email, role, homepage)
             except ValueError:
                 return HttpResponseForbidden('Researcher already present', content_type='text/plain')
 
@@ -127,7 +127,7 @@ def changePublisherStatus(request):
         publisher = Publisher.objects.get(pk=pk)
         status = request.POST.get('status')
         if status in allowedStatuses and status != publisher.oa_status:
-            change_publisher_oa_status.apply_async(eta=timezone.now(), kwargs={'pk':pk,'status':status})
+            send_task('change_publisher_oa_status', [], {'pk':pk,'status':status})
             return HttpResponse('OK', content_type='text/plain')
         else:
             raise ObjectDoesNotExist

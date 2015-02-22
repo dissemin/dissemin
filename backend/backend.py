@@ -27,30 +27,11 @@ from papers.utils import create_paper_fingerprint, date_from_dateparts
 from papers.errors import MetadataSourceException
 from papers.models import *
 from papers.doi import to_doi
-from papers.crossref import fetch_metadata_by_DOI
-from papers.romeo import fetch_journal
 from papers.name import to_plain_name, parse_comma_name
 
-from papers.globals import *
-
-def create_researcher(first, last, dept, email, role, homepage):
-    name, created = Name.objects.get_or_create(full=iunaccent(first+' '+last),
-            defaults={'first':first, 'last':last})
-    if not created and Researcher.objects.filter(name=name).count() > 0:
-        # we forbid the creation of two researchers with the same name,
-        # although our model would support it (TODO ?)
-        raise ValueError
-
-    researcher = Researcher(
-            department=dept,
-            email=email,
-            role=role,
-            homepage=homepage,
-            name=name)
-    researcher.save()
-    researcher.update_variants()
-    return researcher
-
+from backend.crossref import fetch_metadata_by_DOI
+from backend.romeo import fetch_journal
+from backend.globals import *
 
 # TODO: this could be a method of ClusteringContextFactory ?
 # TODO: implement a dummy relevance classifier for the first phase

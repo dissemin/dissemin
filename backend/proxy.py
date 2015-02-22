@@ -23,7 +23,7 @@ from __future__ import unicode_literals
 from oaipmh.client import Client
 from oaipmh.metadata import MetadataRegistry, oai_dc_reader
 
-from papers.oai import my_oai_dc_reader
+from backend.oai import my_oai_dc_reader
 
 # A few settings telling how to access the OAI proxy
 PROXY_ENDPOINT = "http://proaixy.dissem.in/oai"

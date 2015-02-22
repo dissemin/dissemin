@@ -21,15 +21,16 @@
 
 from __future__ import unicode_literals
 
-from papers.errors import MetadataSourceException
-from papers.backend import *
-from papers.utils import iunaccent
-
 from urllib2 import urlopen, URLError
 from urllib import urlencode
 import xml.etree.ElementTree as ET
 import unicodedata
 import datetime
+
+from papers.errors import MetadataSourceException
+from papers.utils import iunaccent
+
+from backend.backend import *
 
 bielefeld_timeout = 10
 max_base_no_match = 30

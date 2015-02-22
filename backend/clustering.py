@@ -1,16 +1,16 @@
 # -*- encoding: utf-8 -*-
 from __future__ import unicode_literals, print_function
 
-from papers.similarity import SimilarityClassifier
-from papers.relevance import RelevanceClassifier
-from papers.models import Author, Researcher
 from django.db.models import Q
 import random
-
 # For graph output
-from papers.utils import nocomma
 from unidecode import unidecode
 
+from papers.models import Author, Researcher
+from papers.utils import nocomma
+
+from backend.similarity import SimilarityClassifier
+from backend.relevance import RelevanceClassifier
 
 
 class ClusteringContext(object):

@@ -1,0 +1,4 @@
+pyoai
+numpy
+scipy
+scikit-learn

@@ -29,9 +29,10 @@ from django.contrib.auth.decorators import user_passes_test
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 
+from celery.execute import send_task
+
 from papers.models import *
 from papers.forms import *
-from papers.tasks import *
 from papers.user import is_admin
 
 # Number of papers shown on a search results page
@@ -197,15 +198,14 @@ def logoutView(request):
 @user_passes_test(is_admin)
 def updateResearcherOAI(request, pk):
     source = get_object_or_404(Researcher, pk=pk)
-    fetch_records_for_researcher.apply_async(eta=timezone.now(), kwargs={'pk':pk})
+    send_task('fetch_records_for_researcher', [], {'pk':pk})
     return render(request, 'papers/updateResearcher.html', {'researcher':source})
 
 @user_passes_test(is_admin)
 def updateResearcher(request, pk):
     source = get_object_or_404(Researcher, pk=pk)
-    fetch_dois_for_researcher.apply_async(eta=timezone.now(), kwargs={'pk':pk})
+    send_task('fetch_dois_for_researcher', [], {'pk':pk})
     return render(request, 'papers/updateResearcher.html', {'researcher':source})
-
 
 class ResearcherView(generic.DetailView):
     model = Researcher
