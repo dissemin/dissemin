@@ -18,21 +18,21 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-
 from __future__ import unicode_literals
 
 from django.utils import timezone
-
-from papers.errors import MetadataSourceException
-from papers.backend import *
-from papers.models import *
-from papers.oai import my_oai_dc_reader
-from papers.name import parse_comma_name
-
 from urllib2 import urlopen, URLError
 from urllib import urlencode, quote_plus
 from lxml import etree
 import unicodedata
+
+from papers.errors import MetadataSourceException
+from papers.models import *
+from papers.name import parse_comma_name
+
+from backend.backend import *
+from backend.oai import my_oai_dc_reader
+
 
 core_timeout = 10
 max_no_match_before_give_up = 30

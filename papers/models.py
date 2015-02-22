@@ -186,6 +186,26 @@ class Researcher(models.Model):
             self.save()
         self.stats.update(Paper.objects.filter(author__researcher=self).distinct())
 
+    @classmethod
+    def create_from_scratch(cls, first, last, dept, email, role, homepage):
+        name, created = Name.objects.get_or_create(full=iunaccent(first+' '+last),
+                defaults={'first':first, 'last':last})
+        if not created and cls.objects.filter(name=name).count() > 0:
+            # we forbid the creation of two researchers with the same name,
+            # although our model would support it (TODO ?)
+            raise ValueError
+
+        researcher = Researcher(
+                department=dept,
+                email=email,
+                role=role,
+                homepage=homepage,
+                name=name)
+        researcher.save()
+        researcher.update_variants()
+        researcher.update_stats()
+        return researcher
+
 
 MAX_NAME_LENGTH = 256
 class Name(models.Model):

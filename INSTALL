@@ -1,30 +1,32 @@
+dissem.in is split in two parts:
+- the web frontend, powered by Django
+- the tasks backend, powered by Celery
+
+Installing the tasks backend requires additional dependencies and
+is not necessary if you want to do light dev that does not require
+harvesting metadata or running author disambiguation.
+
+
+Installation instructions for the web frontend
+==============================================
+
+
 First, install the following dependencies (debian packages)
 
-libxml2
-python-dev
-libxslt-dev
 postgresql-server-dev-all
-liblapack-dev
-gfortran
-libopenblas-dev
 python-virtualenv
 
 
 -----------
-Then, build a virtual environment to put all the python dependencies.
+Then, build a virtual environment to isolate all the python dependencies.
 
-*virtualenv .virtualenv
-*source .virtualenv/bin/activate
-*pip install -r requirements.txt
+* virtualenv .virtualenv
+* source .virtualenv/bin/activate
+* pip install -r requirements_frontend.txt
 * touch romeo_api_key
 * git clone https://github.com/threonorm/django-cas /tmp/django-cas
 * cd /tmp/django-cas 
 * python setup.py install
-
-
-Optional python dependencies (if you want to debug the learning system):
-*pip install nltk
-*pip install matplotlib
 
 ------
 Setting the database
@@ -41,4 +43,31 @@ CREATE DATABASE dissemin WITH OWNER dissemin;
 
 gunzip backup.gz
 cat backup | psql dissemin
+
+
+Installation instructions for the tasks backend
+===============================================
+
+The backend communicates with the frontend through AMQP. The default settings are
+configured to use RabbitMQ, an AMQP server.
+
+# apt-get install rabbitmq-server
+
+(this launches the rabbitmq server)
+
+Install Python dependencies:
+
+$ sudo apt-get install libxml2 python-dev libxslt-dev liblapack-dev gfortran libopenblas-dev
+$ source .virtualend/bin/activate
+$ pip install -r requirements_backend.txt
+
+Optional python dependencies (if you want to debug the learning system):
+$ pip install nltk
+$ pip install matplotlib
+
+
+To run the backend (still in the virtualenv):
+
+$ celery --app=dissemin.celery:app worker -B -l INFO
+
 

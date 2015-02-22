@@ -19,13 +19,15 @@
 #
 
 from __future__ import unicode_literals
+
 from urllib2 import urlopen, HTTPError, URLError
 from urllib import urlencode
+import xml.etree.ElementTree as ET
+import unicodedata
+
 from papers.models import *
 from papers.errors import MetadataSourceException
 from papers.utils import nstrip
-import xml.etree.ElementTree as ET
-import unicodedata
 
 romeo_api_key = open('romeo_api_key').read().strip()
 

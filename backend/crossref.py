@@ -19,11 +19,14 @@
 #
 
 from __future__ import unicode_literals
+
 from urllib2 import URLError, HTTPError, build_opener
 from urllib import urlencode
 import json
+from unidecode import unidecode
 
 from celery import current_task
+
 from django.core.exceptions import ObjectDoesNotExist
 
 from papers.errors import MetadataSourceException
@@ -31,8 +34,6 @@ from papers.doi import to_doi
 from papers.name import match_names, normalize_name_words
 from papers.utils import create_paper_fingerprint, urlopen_retry, iunaccent
 from papers.models import Publication, Paper
-
-from unidecode import unidecode
 
 nb_results_per_request = 60
 crossref_timeout = 15

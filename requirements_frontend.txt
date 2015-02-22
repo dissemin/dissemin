@@ -1,10 +1,6 @@
 django
 celery
-pyoai
 unidecode
 psycopg2
 django-bootstrap-pagination
 name_tools
-numpy
-scipy
-scikit-learn

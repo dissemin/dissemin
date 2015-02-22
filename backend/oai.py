@@ -25,10 +25,11 @@ from oaipmh.metadata import MetadataRegistry, oai_dc_reader
 from oaipmh.datestamp import tolerant_datestamp_to_datetime
 from oaipmh.error import DatestampError, NoRecordsMatchError
 
-from papers.backend import *
 from papers.name import parse_comma_name, normalize_name_words
 from papers.models import OaiRecord, OaiSource
-from papers.extractors import *
+
+from backend.backend import *
+from backend.extractors import *
 
 import re
 

@@ -1,9 +1,9 @@
 # -*- encoding: utf-8 -*-
 
 from __future__ import unicode_literals
-from papers.similarity import *
-from papers.relevance import *
-from papers.clustering import *
+from backend.similarity import *
+from backend.relevance import *
+from backend.clustering import *
 
 
 # print("Loading similarity classifier…")

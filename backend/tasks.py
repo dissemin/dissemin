@@ -32,13 +32,15 @@ from oaipmh.datestamp import tolerant_datestamp_to_datetime
 from oaipmh.error import DatestampError, NoRecordsMatchError, BadArgumentError
 
 from papers.models import *
-from papers.backend import *
-from papers.oai import *
 from papers.doi import to_doi
-from papers.crossref import fetch_papers_from_crossref_by_researcher_name, convert_to_name_pair
-from papers.proxy import *
 from papers.name import name_normalization, name_signature
-from papers.base import fetch_papers_from_base_for_researcher
+
+from backend.backend import *
+from backend.crossref import fetch_papers_from_crossref_by_researcher_name, convert_to_name_pair
+from backend.proxy import *
+from backend.oai import *
+from backend.base import fetch_papers_from_base_for_researcher
+
 
 logger = get_task_logger(__name__)
 
@@ -96,7 +98,7 @@ def process_records(listRecords):
         saved += 1
     return (count,saved)
 
-@shared_task
+@shared_task(name='fetch_everything_for_researcher')
 def fetch_everything_for_researcher(pk):
     try:
         # fetch_records_for_researcher(pk)
@@ -107,7 +109,7 @@ def fetch_everything_for_researcher(pk):
     finally:
         clustering_context_factory.commitThemAll()
 
-@shared_task
+@shared_task(name='fetch_records_for_researcher')
 def fetch_records_for_researcher(pk):
     researcher = Researcher.objects.get(pk=pk)
     fetch_records_for_name(researcher.name)
@@ -140,7 +142,7 @@ def fetch_records_for_last_name(lastname):
         pass
 
 
-@shared_task
+@shared_task(name='fetch_dois_for_researcher')
 def fetch_dois_for_researcher(pk):
     researcher = Researcher.objects.get(pk=pk)
 
@@ -201,7 +203,7 @@ def fetch_dois_for_researcher(pk):
     researcher.save()
 
 
-@shared_task
+@shared_task(name='change_publisher_oa_status')
 def change_publisher_oa_status(pk, status):
     publisher = Publisher.objects.get(pk=pk)
     publisher.change_oa_status(status)
