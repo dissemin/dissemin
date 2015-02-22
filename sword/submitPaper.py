@@ -10,13 +10,14 @@ c.get_service_document()
 print type(c)
 
 collection = c.workspaces[0][1][0]
-print collection
+print collection.href
 with open("art.xml","r") as data:
-	receipt = c.create(col_iri=collection.href,
+		receipt = c.create(col_iri="http://api-preprod.archives-ouvertes.fr/sword/hal",
 									packaging = "http://purl.org/net/sword-types/AOfr",
-							  	metadata_entry = data,
-									#filename = "art.xml",
-									mimetype = "text/xml"
+									metadata_entry = data,									
+									mimetype = "text/xml",
+#							  	payload = data,
+#									filename = "art.xml",
 									)
-
+	
 #curl -v -u bthom:dissemin api-preprod.archives-ouvertes.fr/sword/hal -H "X-Packaging:http://purl.org/net/sword-types/AOfr" -X POST -H "Content-Type:text/xml" -d @art.xml
