@@ -22,4 +22,6 @@ from __future__ import unicode_literals
 def is_admin(user):
     return user.is_superuser
 
+def is_authenticated(user):
+    return user.is_authenticated()
 

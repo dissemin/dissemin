@@ -5,17 +5,23 @@
         {% if paper.pdf_url %}<a href="{{ paper.pdf_url }}" class="filldiv"></a>{% endif %}
     </div>
 </div>
+
 <div class="pubText"><span class="paperAuthors">
 {% for a2 in paper.sorted_authors %}{% if not forloop.first %},{% endif %}
 {% if a2.researcher and a2.researcher.id = researcher_id %}
 <strong>{{ a2 }}</strong>{% else %}
 {{ a2|authorlink }}{% endif %}{% endfor %}</span><br />
 <span class="paperTitle">
-{% if request.user.is_superuser %}
-<button type="button" class="close paperDeleteButton" id="delete-paper-{{ paper.pk }}"><span aria-hidden="true">&times;</span><span class="sr-only">{% trans "Delete" %}</span></button>
+{% if request.user.is_authenticated %}
+<button type="button" class="close paperDeleteButton"
+    id="annotate-paper-{{ paper.pk }}-{{ paper.toggled_visibility }}"
+    data-undotext="{% trans "Paper deleted. " %}"
+    data-undoundo="{% trans "Undo" %}"
+    data-undolink="annotate-paper-{{paper.pk}}-{{ paper.visibility_code }}"
+    data-undoclass="undoDeletePaper"><span aria-hidden="true">&times;</span><span class="sr-only">{% trans "Delete" %}</span></button>
 {% endif %}
 
-    <span><a href="{% url 'paper' paper.id %}" id="paper-title-{{ paper.id }}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">{{ paper.title }}</a>&nbsp;</span>
+<span><a href="{% url 'paper' paper.id %}" id="paper-title-{{ paper.id }}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">{{ paper.title }}</a>&nbsp;</span>
 </span><br />
 <span class="pubRef">
 {% for publi in paper.publication_set.all %}

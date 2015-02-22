@@ -21,6 +21,7 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.models import User
 from papers.utils import nstr, iunaccent
 from papers.name import match_names
 from django.utils.translation import ugettext_lazy as _
@@ -334,6 +335,21 @@ class Paper(models.Model):
     def sorted_authors(self):
         return self.author_set.order_by('id')
 
+    @property
+    def toggled_visibility(self):
+        if self.visibility == 'VISIBLE':
+            return 2 # NOT RELEVANT
+        return 0 # VISIBLE
+
+    @property
+    def visibility_code(self):
+        idx = 0
+        for code, lbl in VISIBILITY_CHOICES:
+            if code == self.visibility:
+                return idx
+            idx += 1
+        return idx
+
     def update_availability(self):
         # TODO: create an oa_status field in each publication so that we optimize queries
         # and can deal with hybrid OA
@@ -614,5 +630,22 @@ class OaiRecord(models.Model):
     last_update = models.DateTimeField(auto_now=True)
     def __unicode__(self):
         return self.identifier
+
+
+# Annotation tool to train the models
+class Annotation(models.Model):
+    paper = models.ForeignKey(Paper)
+    status = models.CharField(max_length=64)
+    user = models.ForeignKey(User)
+    timestamp = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return unicode(self.user)+': '+self.status
+    @classmethod
+    def create(self, paper, status, user): 
+        annot = Annotation(paper=paper, status=status, user=user)
+        annot.save()
+        paper.visibility = status
+        paper.save(update_fields=['visibility'])
 
 

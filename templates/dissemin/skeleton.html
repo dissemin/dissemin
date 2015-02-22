@@ -29,9 +29,9 @@
     <div id="wrapper">
         <div id="header">
             <span id="dissemin"><a href="/">dissem.in</a></span>
-            <div id="rightLinks"><a href="/">{% trans "Home" context "memu bar" %}</a> &#9679; <a href="{% url 'faq' %}">{% trans "FAQ" %}</a> &#9679; <a href="{% url 'feedback' %}">{% trans "Feedback" %}</a> &#9679;
+            <div id="rightLinks"><a href="/">{% trans "Home" context "memu bar" %}</a> &nbsp; &#9679; &nbsp; <a href="{% url 'faq' %}">{% trans "FAQ" %}</a> &nbsp; &#9679; &nbsp; <a href="{% url 'feedback' %}">{% trans "Feedback" %}</a> &nbsp; &#9679; &nbsp;
                 {% if request.user.is_authenticated %}
-                <a href="/logout/">Logout</a>
+                {{ request.user }} − <a href="/logout/">{% trans "Logout" %}</a>
                 {% else %}
                 <a href="/login/?next={{ request.get_full_path |urlencode}}">{% trans "Login" %}</a>
                 {% endif %}
