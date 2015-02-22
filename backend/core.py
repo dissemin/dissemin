@@ -30,7 +30,7 @@ from papers.errors import MetadataSourceException
 from papers.models import *
 from papers.name import parse_comma_name
 
-from backend.backend import *
+from backend.create import *
 from backend.oai import my_oai_dc_reader
 
 

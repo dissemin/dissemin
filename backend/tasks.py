@@ -35,7 +35,7 @@ from papers.models import *
 from papers.doi import to_doi
 from papers.name import name_normalization, name_signature
 
-from backend.backend import *
+from backend.create import *
 from backend.crossref import fetch_papers_from_crossref_by_researcher_name, convert_to_name_pair
 from backend.proxy import *
 from backend.oai import *

@@ -26,9 +26,9 @@ from oaipmh.datestamp import tolerant_datestamp_to_datetime
 from oaipmh.error import DatestampError, NoRecordsMatchError
 
 from papers.name import parse_comma_name, normalize_name_words
-from papers.models import OaiRecord, OaiSource
+from papers.models import OaiRecord, OaiSource, Name
 
-from backend.backend import *
+from backend.oai import *
 from backend.extractors import *
 
 import re
