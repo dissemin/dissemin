@@ -110,9 +110,10 @@ def name_similarity(a,b):
     Returns a float: how similar are these two names?
     Examples:
     > ('Robin', 'Ryder'),('Robin', 'Ryder'): 1.0
-    > ('Robin', 'Ryder'),('R.', 'Ryder'): 0.5
-    > ('R.', 'Ryder'),('R.', 'Ryder'): 0.5
-    > ('Robin J.', 'Ryder'),('R.', 'Ryder'): 0.5
+    > ('Robin', 'Ryder'),('R.', 'Ryder'): 0.3
+    > ('R.', 'Ryder'),('R.', 'Ryder'): 0.3
+    > ('Robin J.', 'Ryder'),('R.', 'Ryder'): 0.3
+    > ('Robin J.', 'Ryder'),('R. J.', 'Ryder'): 0.6
     > ('R. J.', 'Ryder'),('J.', 'Ryder'): 0
     > ('Claire', 'Mathieu'),('Claire', 'Kenyon-Mathieu'): 0
     > ('Robin', 'Ryder'), ('Robin J.', 'Ryder') : 1
@@ -132,7 +133,7 @@ def name_similarity(a,b):
     full_name_found = (True in map(lambda (a,b): len(a) > 1 and len(b) > 1, parts))
     if full_name_found:
         return 1.
-    return 0.5
+    return min(0.3*len(parts),1.0)
 
 
 #### Helpers for the name splitting heuristic ######
