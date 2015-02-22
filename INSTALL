@@ -45,6 +45,12 @@ CREATE DATABASE dissemin WITH OWNER dissemin;
 $ gunzip backup.gz
 $ cat backup | psql dissemin
 
+Then, the server can be launched with:
+
+$ python manage.py runserver
+
+and can be accessed at:
+http://localhost:8000/
 
 Installation instructions for the tasks backend
 ===============================================
