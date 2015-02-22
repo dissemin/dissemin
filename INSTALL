@@ -41,8 +41,9 @@ CREATE DATABASE dissemin WITH OWNER dissemin;
 
 ---Download a backup.gz of the database on ulminfo.fr
 
-gunzip backup.gz
-cat backup | psql dissemin
+(to be run as "postgres" user)
+$ gunzip backup.gz
+$ cat backup | psql dissemin
 
 
 Installation instructions for the tasks backend
