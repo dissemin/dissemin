@@ -1,22 +1,32 @@
-from sword2 import *
+import httplib
 
-#http://api-test.archives-ouvertes.fr/sword/
-#test-ws test
 
-c = Connection("http://api-preprod.archives-ouvertes.fr/sword/servicedocument",		user_name="bthom", user_pass="dissemin")
+## simple wrapper function to encode the username & pass
+def encodeUserData(user, password):
+    return "Basic " + (user + ":" + password).encode("base64").rstrip()
 
-#c=Connection("http://127.0.0.1:1234/sd-uri", user_name="sword", user_pass="sword")
-c.get_service_document()
-print type(c)
+u='bthom'
+p='dissemin'
+conn = httplib.HTTPConnection("api-preprod.archives-ouvertes.fr")
 
-collection = c.workspaces[0][1][0]
-print collection
-with open("art.xml","r") as data:
-	receipt = c.create(col_iri=collection.href,
-									packaging = "http://purl.org/net/sword-types/AOfr",
-							  	metadata_entry = data,
-									#filename = "art.xml",
-									mimetype = "text/xml"
-									)
+#httplib.HTTPConnection.debuglevel = 1 #Uncomment to debug mode
 
-#curl -v -u bthom:dissemin api-preprod.archives-ouvertes.fr/sword/hal -H "X-Packaging:http://purl.org/net/sword-types/AOfr" -X POST -H "Content-Type:text/xml" -d @art.xml
+
+def CreateMetadataHal(fl):  #Homemade sword protocol 
+	with open(fl,"r") as data:
+		strData = data.read()#.replace("\n","").replace("\t","").replace("\r","")
+		conn.putrequest("POST", "/sword/hal/", True,True)
+		conn.putheader("Authorization",encodeUserData(u,p))
+		conn.putheader("Host","api-preprod.archives-ouvertes.fr")
+#		conn.putheader("Accept","*/*")  #useless
+		conn.putheader("X-Packaging","http://purl.org/net/sword-types/AOfr")
+		conn.putheader("Content-Type","text/xml")
+		conn.putheader("Content-Length",len(strData))
+		conn.endheaders()
+		conn.send(strData)
+		r1 = conn.getresponse()
+		print r1.read()
+
+
+CreatemetadataHal("art.xml")
+##curl -v -u bthom:dissemin api-preprod.archives-ouvertes.fr/sword/hal -H "X-Packaging:http://purl.org/net/sword-types/AOfr" -X POST -H "Content-Type:text/xml" -d @art.xml
