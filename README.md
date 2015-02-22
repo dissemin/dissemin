@@ -1,8 +1,9 @@
-dissemin
+dissem.in
 ================
 
 Web platform showing the articles written by researchers of an institution.
-It highlights the articles that are not freely available while uploading them would comply with the publisher's policy.
+It highlights the articles that are not freely available while uploading
+them would comply with the publisher's policy.
 
 Data sources:
 * OAI-PMH, through a proxy
@@ -23,4 +24,13 @@ Dependencies:
 
 To use the RoMEO backend, it is useful to use a free api key. Write your api key in
 the file `romeo_api_key` at the root of the repository so that dissemin can use it.
+
+Installation instructions are provided in `INSTALL`.
+
+Demo
+----
+
+An instance can be found here:
+http://ens.dissem.in/
+
 
