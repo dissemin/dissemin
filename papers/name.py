@@ -41,16 +41,7 @@ def match_names(a,b):
     > ('R. J.', 'Ryder'),('J.', 'Ryder'): False
     > ('Claire', 'Mathieu'),('Claire', 'Kenyon-Mathieu'): False
     """
-    if not a or not b:
-        return False
-    (firstA,lastA) = a
-    (firstB,lastB) = b
-    if lastA.lower() != lastB.lower():
-        return False
-    partsA = split_words(firstA)
-    partsB = split_words(firstB)
-    parts = zip(partsA, partsB)
-    return all(map(match_first_names, parts))
+    return name_similarity(a,b) > 0.
 
 initial_re = re.compile(r'[A-Z](\.,;)*$')
 def normalize_name_words(w):
@@ -111,6 +102,38 @@ def name_signature(first, last):
     if len(first):
         ident = first[0].lower()+'-'+ident
     return ident
+
+### Name similarity measure ###
+
+def name_similarity(a,b):
+    """
+    Returns a float: how similar are these two names?
+    Examples:
+    > ('Robin', 'Ryder'),('Robin', 'Ryder'): 1.0
+    > ('Robin', 'Ryder'),('R.', 'Ryder'): 0.5
+    > ('R.', 'Ryder'),('R.', 'Ryder'): 0.5
+    > ('Robin J.', 'Ryder'),('R.', 'Ryder'): 0.5
+    > ('R. J.', 'Ryder'),('J.', 'Ryder'): 0
+    > ('Claire', 'Mathieu'),('Claire', 'Kenyon-Mathieu'): 0
+    > ('Robin', 'Ryder'), ('Robin J.', 'Ryder') : 1
+    > ('Robin K.','Ryder'), ('Robin J.', 'Ryder'): 0.
+    """
+    if not a or not b:
+        return False
+    (firstA,lastA) = a
+    (firstB,lastB) = b
+    if lastA.lower() != lastB.lower():
+        return False
+    partsA = split_words(firstA)
+    partsB = split_words(firstB)
+    parts = zip(partsA, partsB)
+    if not all(map(match_first_names, parts)):
+        return 0.
+    full_name_found = (True in map(lambda (a,b): len(a) > 1 and len(b) > 1, parts))
+    if full_name_found:
+        return 1.
+    return 0.5
+
 
 #### Helpers for the name splitting heuristic ######
 
