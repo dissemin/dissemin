@@ -44,60 +44,6 @@ from backend.base import fetch_papers_from_base_for_researcher
 
 logger = get_task_logger(__name__)
 
-def process_records(listRecords):
-    count = 0
-    saved = 0
-    for record in listRecords:
-        count += 1
-
-        metadata = record[1]._map
-        authors = get_oai_authors(metadata)
-
-        # Filter the record
-        if all(not elem.is_known for elem in authors):
-            print "No relevant author, continue"
-            continue
-        if not 'title' in metadata or metadata['title'] == []:
-            continue
-
-        # Find the source
-        sets = record[0].setSpec()
-        source_identifier = None
-        for s in sets:
-            if s.startswith(PROXY_SOURCE_PREFIX):
-                source_identifier = s[len(PROXY_SOURCE_PREFIX):]
-                break
-        source = None
-        if source_identifier:
-            try:
-                source = OaiSource.objects.get(identifier=source_identifier)
-            except ObjectDoesNotExist:
-                pass
-        if not source:
-            print "Invalid source '"+str(source_identifier)+"' from the proxy, skipping"
-            continue
-
-        # Find the DOI, if any
-        doi = None
-        for identifier in metadata['identifier']:
-            if not doi:
-                doi = to_doi(identifier)
-
-        # A publication date is necessary
-        pubdate = find_earliest_oai_date(record)
-        if not pubdate:
-            print "No publication date, skipping"
-            continue
-
-
-        logger.info('Saving record %s' % record[0].identifier())
-        paper = get_or_create_paper(metadata['title'][0], authors, pubdate, doi)
-
-        # Save the record
-        add_oai_record(record, source, paper)
-        saved += 1
-    return (count,saved)
-
 @shared_task(name='fetch_everything_for_researcher')
 def fetch_everything_for_researcher(pk):
     try:
@@ -108,6 +54,8 @@ def fetch_everything_for_researcher(pk):
         raise e
     finally:
         clustering_context_factory.commitThemAll()
+        r = Researcher.objects.get(pk=pk)
+        r.update_stats()
 
 @shared_task(name='fetch_records_for_researcher')
 def fetch_records_for_researcher(pk):
@@ -207,4 +155,5 @@ def fetch_dois_for_researcher(pk):
 def change_publisher_oa_status(pk, status):
     publisher = Publisher.objects.get(pk=pk)
     publisher.change_oa_status(status)
+    publisher.update_stats()
 

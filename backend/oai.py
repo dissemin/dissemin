@@ -38,6 +38,59 @@ my_oai_dc_reader = oai_dc_reader
 my_oai_dc_reader._fields['accessRights'] = ('textList', 'oai_dc:dc/dcterms:accessRights/text()')
 my_oai_dc_reader._namespaces['dcterms'] = 'http://purl.org/dc/terms/'
 
+def process_records(listRecords):
+    count = 0
+    saved = 0
+    for record in listRecords:
+        count += 1
+
+        metadata = record[1]._map
+        authors = get_oai_authors(metadata)
+
+        # Filter the record
+        if all(not elem.is_known for elem in authors):
+            print "No relevant author, continue"
+            continue
+        if not 'title' in metadata or metadata['title'] == []:
+            continue
+
+        # Find the source
+        sets = record[0].setSpec()
+        source_identifier = None
+        for s in sets:
+            if s.startswith(PROXY_SOURCE_PREFIX):
+                source_identifier = s[len(PROXY_SOURCE_PREFIX):]
+                break
+        source = None
+        if source_identifier:
+            try:
+                source = OaiSource.objects.get(identifier=source_identifier)
+            except ObjectDoesNotExist:
+                pass
+        if not source:
+            print "Invalid source '"+str(source_identifier)+"' from the proxy, skipping"
+            continue
+
+        # Find the DOI, if any
+        doi = None
+        for identifier in metadata['identifier']:
+            if not doi:
+                doi = to_doi(identifier)
+
+        # A publication date is necessary
+        pubdate = find_earliest_oai_date(record)
+        if not pubdate:
+            print "No publication date, skipping"
+            continue
+
+        logger.info('Saving record %s' % record[0].identifier())
+        paper = get_or_create_paper(metadata['title'][0], authors, pubdate, doi)
+
+        # Save the record
+        add_oai_record(record, source, paper)
+        saved += 1
+    return (count,saved)
+
 
 def add_oai_record(record, source, paper=None):
     """ Add a record (from OAI-PMH) to the local database """
