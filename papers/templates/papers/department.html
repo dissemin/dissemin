@@ -57,7 +57,11 @@ function addResearcher() {
 
         {% if request.user.is_superuser %}
             <button type="button" class="close researcherDeleteButton"
-                id="delete-researcher-{{ person.id }}">
+                id="delete-researcher-{{ person.id }}"
+                data-undotext="{% trans "Researcher deleted. " %}"
+                data-undoundo=""
+                data-undolink="#"
+                data-undoclass="">
                 <span aria-hidden="true">&times;</span><span class="sr-only">{% trans "Delete" %}</span>
             </button>
         {% endif %}
