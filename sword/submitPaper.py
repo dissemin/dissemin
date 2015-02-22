@@ -18,3 +18,5 @@ with open("art.xml","r") as data:
 									#filename = "art.xml",
 									mimetype = "text/xml"
 									)
+
+#curl -v -u bthom:dissemin api-preprod.archives-ouvertes.fr/sword/hal -H "X-Packaging:http://purl.org/net/sword-types/AOfr" -X POST -H "Content-Type:text/xml" -d @art.xml
