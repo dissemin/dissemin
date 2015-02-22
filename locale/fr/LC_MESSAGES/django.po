@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-21 23:46+0100\n"
+"POT-Creation-Date: 2015-02-22 15:37+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,7 +25,7 @@ msgstr "Prénom"
 msgid "Last name"
 msgstr "Nom"
 
-#: papers/forms.py:30 papers/templates/papers/department.html:92
+#: papers/forms.py:30 papers/templates/papers/department.html:96
 #: papers/templates/papers/search.html:53
 msgid "Department"
 msgstr "Département"
@@ -84,23 +84,23 @@ msgstr "Supprimé"
 
 #: papers/models.py:47
 msgid "Allowed"
-msgstr ""
+msgstr "Autorisés"
 
 #: papers/models.py:48
 msgid "Forbidden"
-msgstr ""
+msgstr "Interdits"
 
 #: papers/models.py:49
 msgid "Restricted"
-msgstr ""
+msgstr "Restreints"
 
 #: papers/models.py:50
 msgid "Unclear"
-msgstr ""
+msgstr "Ambigü"
 
 #: papers/models.py:51
 msgid "Unknown"
-msgstr ""
+msgstr "Inconnu"
 
 #: papers/models.py:55
 msgid "Preprint available"
@@ -108,7 +108,7 @@ msgstr "Préprint disponible"
 
 #: papers/models.py:56
 msgid "Unavailable but compatible"
-msgstr ""
+msgstr "Pourrait être disponible"
 
 #: papers/models.py:57
 msgid "Unknown status"
@@ -116,7 +116,7 @@ msgstr "État inconnu"
 
 #: papers/models.py:58
 msgid "Preprints forbidden"
-msgstr ""
+msgstr "Prépublications interdites"
 
 #: papers/templates/papers/department.html:44
 #: papers/templates/papers/group.html:18
@@ -144,107 +144,136 @@ msgstr[1] ""
 "            "
 
 #: papers/templates/papers/department.html:61
+#, fuzzy
+#| msgid "Researcher"
+msgid "Researcher deleted. "
+msgstr "Personne"
+
+#: papers/templates/papers/department.html:65
 #: papers/templates/papers/publiListItem.html:21
 msgid "Delete"
 msgstr "Supprimer"
 
-#: papers/templates/papers/department.html:84
+#: papers/templates/papers/department.html:88
 msgid "Add"
 msgstr "Ajouter"
 
-#: papers/templates/papers/department.html:94
+#: papers/templates/papers/department.html:98
 msgid "Papers of the members"
 msgstr "Papiers des membres"
 
+#msgstr "Foire Aux Questions"
 #: papers/templates/papers/faq.html:11
 msgid "Frequently Asked Questions"
 msgstr ""
 
+#msgstr "Qu'est-ce que l'accès libre ?"
 #: papers/templates/papers/faq.html:15 papers/templates/papers/faq.html:45
 msgid "What is Open Access?"
 msgstr ""
 
+#msgstr "Pourquoi devrais-je mettre mes papiers sur un dépôt ?"
 #: papers/templates/papers/faq.html:16
 msgid "Why should I upload my papers to a repository?"
 msgstr ""
 
+#msgstr "Quel dépôt utiliser ?"
 #: papers/templates/papers/faq.html:17
 msgid "What repository should I use?"
 msgstr ""
 
+#msgstr "Qu'est-ce que dissem.in?"
 #: papers/templates/papers/faq.html:20 papers/templates/papers/faq.html:93
 msgid "What is dissem.in?"
 msgstr ""
 
+#msgstr "dissem.in est-il un dépôt ?"
 #: papers/templates/papers/faq.html:21 papers/templates/papers/faq.html:98
 msgid "Is dissem.in a repository?"
 msgstr ""
 
+#msgstr "Qui héberge dissem.in ?"
 #: papers/templates/papers/faq.html:22 papers/templates/papers/faq.html:101
 msgid "Who runs dissem.in?"
 msgstr ""
 
+#msgstr "Puis-je créer mon profil sur dissem.in ?"
 #: papers/templates/papers/faq.html:23 papers/templates/papers/faq.html:103
 msgid "Can I create my profile on dissem.in?"
 msgstr ""
 
+#msgstr "Puis-je utiliser dissem.in pour mon institution ?"
 #: papers/templates/papers/faq.html:24 papers/templates/papers/faq.html:107
 msgid "Can I use dissem.in for my institution?"
 msgstr ""
 
+#msgstr "À quoi les classes de politiques correspondent-elles ?"
 #: papers/templates/papers/faq.html:27 papers/templates/papers/faq.html:111
 msgid "What do your policy classes mean?"
 msgstr ""
 
+#msgstr "Sous quelles conditions les papiers sont-ils considérés comme disponibles ?"
 #: papers/templates/papers/faq.html:28 papers/templates/papers/faq.html:154
 msgid "When is a paper considered available?"
 msgstr ""
 
+#msgstr "Peut-on faire confiance à vos statistiques ?"
 #: papers/templates/papers/faq.html:29 papers/templates/papers/faq.html:159
 msgid "Should I trust your statistics?"
 msgstr ""
 
+#msgstr ""
+#"Une copie de mon article est disponible librement mais dissem.in ne la "
+#"trouve pas."
 #: papers/templates/papers/faq.html:32 papers/templates/papers/faq.html:184
 msgid ""
 "There is a freely available copy of my article online but Dissem.in does not "
 "find it."
 msgstr ""
 
+#msgstr "Un de mes papiers est absent, pourquoi ?"
 #: papers/templates/papers/faq.html:33 papers/templates/papers/faq.html:172
 msgid "One of my papers is missing. Why?"
 msgstr ""
 
+#msgstr "Certains détails bibliographiques sont incorrects. Que faire ?"
 #: papers/templates/papers/faq.html:34 papers/templates/papers/faq.html:180
 msgid "Some details of my paper are incorrect. What can I do?"
 msgstr ""
 
+#msgstr "D'où tirez-vous vos données ?"
 #: papers/templates/papers/faq.html:37 papers/templates/papers/faq.html:198
 msgid "Where do you get the data from?"
 msgstr ""
 
+#msgstr "Comment participer à dissem.in ?"
 #: papers/templates/papers/faq.html:38 papers/templates/papers/faq.html:201
 msgid "How can I help?"
 msgstr ""
 
+#msgstr "Où est le code source ?"
 #: papers/templates/papers/faq.html:39 papers/templates/papers/faq.html:214
 msgid "Where is the source code?"
 msgstr ""
 
+#msgstr "Puis-je moissonner vos données ?"
 #: papers/templates/papers/faq.html:40 papers/templates/papers/faq.html:216
 msgid "Can I harvest your data?"
 msgstr ""
 
+#msgstr "Aimez-vous les vélos ?"
 #: papers/templates/papers/faq.html:41
 msgid "Do you like bikes?"
 msgstr ""
 
+#msgstr "Aimez-vous les vélos ?"
 #: papers/templates/papers/faq.html:218
 msgid "Do you like bicycles?"
 msgstr ""
 
 #: papers/templates/papers/feedback.html:6
 #: papers/templates/papers/feedback.html:11
-#: templates/dissemin/skeleton.html:32
+#: templates/dissemin/skeleton.html:33
 msgid "Feedback"
 msgstr "Réactions"
 
@@ -370,15 +399,15 @@ msgstr "via DOI"
 
 #: papers/templates/papers/paper.html:87
 msgid "Admin zone"
-msgstr ""
+msgstr "Administration"
 
 #: papers/templates/papers/publiListItem.html:18
 msgid "Paper deleted. "
-msgstr ""
+msgstr "Papier supprimé. "
 
 #: papers/templates/papers/publiListItem.html:19
 msgid "Undo"
-msgstr ""
+msgstr "Annuler"
 
 #: papers/templates/papers/publiListItem.html:31
 msgid " (metadata only)"
@@ -415,7 +444,7 @@ msgstr "Source :"
 
 #: papers/templates/papers/publisher.html:121
 msgid "Access status statistics"
-msgstr ""
+msgstr "Statistiques d'accessibilité"
 
 #: papers/templates/papers/publisher.html:124
 msgid "Journals in which researchers have authored papers"
@@ -485,7 +514,7 @@ msgstr "Adresse:"
 
 #: papers/templates/papers/search.html:44
 msgid "Names:"
-msgstr ""
+msgstr "Noms:"
 
 #: papers/templates/papers/search.html:57
 #, python-format
@@ -500,7 +529,7 @@ msgstr ""
 
 #: papers/templates/papers/search.html:63
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #: papers/templates/papers/search.html:69
 msgid "Journal"
@@ -624,31 +653,31 @@ msgstr "La politique concernant les versions finales est inconnue."
 msgid "Unknown policy"
 msgstr "Politique inconnue"
 
-#: papers/views.py:57
+#: papers/views.py:58
 msgid "Publishers"
 msgstr "Maisons d'édition"
 
-#: papers/views.py:98 papers/views.py:143
+#: papers/views.py:99 papers/views.py:144
 msgid "Papers"
 msgstr "Papiers"
 
-#: papers/views.py:102
+#: papers/views.py:103
 msgid " authored by "
 msgstr " écrits par "
 
-#: papers/views.py:107
+#: papers/views.py:108
 msgid " authored in "
 msgstr " écrits au "
 
-#: papers/views.py:116
+#: papers/views.py:117
 msgid " in "
 msgstr " dans "
 
-#: papers/views.py:121
+#: papers/views.py:122
 msgid " published by "
 msgstr " publiés par "
 
-#: papers/views.py:144
+#: papers/views.py:145
 msgid "All papers"
 msgstr "Tous les papiers"
 
@@ -660,24 +689,24 @@ msgstr "Administration du site Dissemin"
 msgid "Dissemin administration"
 msgstr "Administration de Dissemin"
 
-#: templates/dissemin/skeleton.html:32
+#: templates/dissemin/skeleton.html:33
 msgctxt "memu bar"
 msgid "Home"
 msgstr "Accueil"
 
-#: templates/dissemin/skeleton.html:32
+#: templates/dissemin/skeleton.html:33
 msgid "FAQ"
 msgstr "FAQ"
 
-#: templates/dissemin/skeleton.html:34
+#: templates/dissemin/skeleton.html:35
 msgid "Logout"
 msgstr "Se déconnecter"
 
-#: templates/dissemin/skeleton.html:36
+#: templates/dissemin/skeleton.html:37
 msgid "Login"
 msgstr "Se connecter"
 
-#: templates/dissemin/skeleton.html:48
+#: templates/dissemin/skeleton.html:49
 msgid ""
 "The information provided on this website should not be relied upon for legal "
 "advice."
@@ -685,7 +714,7 @@ msgstr ""
 "Les informations rassemblées sur ce site sont fournies à titre indicatif "
 "uniquement et sans aucune garantie."
 
-#: templates/dissemin/skeleton.html:49
+#: templates/dissemin/skeleton.html:50
 msgid "Contact:"
 msgstr "Contact:"
 
