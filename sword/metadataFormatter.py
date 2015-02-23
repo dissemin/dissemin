@@ -34,6 +34,7 @@ class MetadataFormatter(object):
         """
         return etree.tostring(self.render(paper, filename),
                 pretty_print=pretty,
+                encoding='UTF-8',
                 xml_declaration=True)
 
 def addChild(elem, childName):
@@ -175,7 +176,7 @@ class AOFRFormatter(MetadataFormatter):
 # The following lines are for testing purposes only
 formatter = AOFRFormatter()
 paper = Paper.objects.get(pk=1233)
-print formatter.toString(paper, 'article.pdf', True)
+print(formatter.toString(paper, 'article.pdf', True))
 
 
 
