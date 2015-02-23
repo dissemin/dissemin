@@ -18,7 +18,7 @@
                     </titleStmt>
                     <editionStmt>
                         <edition>
-                            <ref type="src" target="paper.zip" subtype="author" n="1"/>
+                            <ref type="file" target="article.pdf" subtype="author" n="1"/>
                         </edition>
                     </editionStmt>
                     <seriesStmt>
