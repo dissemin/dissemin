@@ -48,7 +48,10 @@ class AOFRFormatter(MetadataFormatter):
         return "AOfr"
 
     def render(self, paper, filename):
-        tei = etree.Element('TEI')
+        xmlns_uri = 'http://www.tei-c.org/ns/1.0'
+        xmlns = '{%s}' % xmlns_uri
+        nsmap = {None: xmlns_uri, 'hal':'http://hal.archives-ouvertes.fr'}
+        tei = etree.Element(xmlns+'TEI', nsmap=nsmap)
         text = addChild(tei, 'text')
         body = addChild(text, 'body')
         listBibl = addChild(body, 'listBibl')
@@ -160,7 +163,7 @@ class AOFRFormatter(MetadataFormatter):
 # The following lines are for testing purposes only
 formatter = AOFRFormatter()
 paper = Paper.objects.get(pk=1234)
-print formatter.toString(paper, 'file.pdf', True)
+print formatter.toString(paper, 'article.pdf', True)
 
 
 
