@@ -30,7 +30,7 @@ import datetime
 from papers.errors import MetadataSourceException
 from papers.utils import iunaccent
 
-from backend.backend import *
+from backend.create import *
 
 bielefeld_timeout = 10
 max_base_no_match = 30

@@ -142,3 +142,4 @@ STATIC_ROOT = '/home/antonin/Programmation/OA/static/'
 # Celery config
 BROKER_URL = 'amqp://guest:guest@127.0.0.1:5672//'
 CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
+CELERY_IMPORTS = ['backend.tasks']
