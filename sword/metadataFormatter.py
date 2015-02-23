@@ -7,6 +7,9 @@ from lxml import etree
 from papers.models import Paper, Publication, Author, Researcher, Name, OaiRecord
 from papers.utils import split_words
 
+
+XMLLANG_ATTRIB= '{http://www.w3.org/XML/1998/namespace}lang'
+
 class MetadataFormatter(object):
     """
     Abstract interface formatting metadata to a SWORD format
@@ -97,14 +100,21 @@ class AOFRFormatter(MetadataFormatter):
         typology.attrib['scheme'] = 'halTypology'
         typology.attrib['n'] = 'ART' # TODO change this
 
+        abstract = addChild(profileDesc, 'abstract')
+        abstract.attrib[XMLLANG_ATTRIB] = 'en'
+        abstract.text = 'No abstract.'
+        for record in paper.sorted_oai_records:
+            if record.description:
+                abstract.text = record.description
+                break
+
         back = addChild(text, 'back')
 
         return tei
 
     def renderTitleAuthors(self, root, paper):
         title = addChild(root, 'title')
-        # TODO this should be xml:lang
-        title.attrib['lang'] = 'en' # TODO: autodetect language?
+        title.attrib[XMLLANG_ATTRIB] = 'en' # TODO: autodetect language?
         title.text = paper.title
         
         for author in paper.sorted_authors:
@@ -162,7 +172,7 @@ class AOFRFormatter(MetadataFormatter):
 
 # The following lines are for testing purposes only
 formatter = AOFRFormatter()
-paper = Paper.objects.get(pk=1234)
+paper = Paper.objects.get(pk=1233)
 print formatter.toString(paper, 'article.pdf', True)
 
 
