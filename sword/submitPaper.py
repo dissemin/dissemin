@@ -1,7 +1,7 @@
 import httplib
 from zipfile import *
 import StringIO
-
+import sword.metadataFormatter
 ## simple wrapper function to encode the username & pass
 def encodeUserData(user, password):
     return "Basic " + (user + ":" + password).encode("base64").rstrip()
@@ -58,9 +58,8 @@ def FullHal(pdf,metadata):
 	r1 = conn.getresponse()
 	print r1.read()
 
-with open("meta.xml","r") as xml:
-	with open("article.pdf","r") as art:
- 		FullHal(art.read(),xml.read())
+with open("sword/article.pdf","r") as art:
+ 		FullHal(art.read(),sword.metadataFormatter.generate())
 
 #TODO parse the XML to search "<edition>" then add the src
 #TODO Full SSL. Right now user/pass are not crypted.
