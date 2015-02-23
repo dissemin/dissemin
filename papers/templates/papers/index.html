@@ -8,7 +8,7 @@ ENS
 
 {% block content %}
 <div id="fullPage">
-    <h4>{% trans "Welcome to dissem.in" %}</h4>
+    <h2>{% trans "Welcome to dissem.in" %}</h2>
     <p>
     {% url 'faq' as faq_url %}
     {% blocktrans %}
@@ -24,14 +24,14 @@ ENS
     {% endblocktrans %}
     </p>
 
-    <h4>{% trans "Statistics" %}</h4>
+    <h2>{% trans "Statistics" %}</h2>
     <p>
     {% blocktrans with depts=departments.count %}
     We gather the publications of {{ nb_researchers }} researchers, from {{ depts }} departments.
     {% endblocktrans %}
     </p>
 
-    <h4>{% trans "Browse papers" %}</h4>
+    <h2>{% trans "Browse papers" %}</h2>
 
     {% url 'search' as search_url %}
     <p>{% blocktrans %}

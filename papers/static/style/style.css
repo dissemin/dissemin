@@ -1,14 +1,21 @@
+/* fonts */
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,300italic,700italic);
+
 body
 {
     text-align: center;
     margin: 0px;
+    font-family:"Open Sans", "sans-serif", sans;
+    font-size:16px;
+    font-weight:300;
 }
 
 /* boilerplate for links */
 
 a
 {
-    color: #373793;
+    color: #1F4A6E;
+    font-weight:400;
 }
 
 a:link
@@ -33,6 +40,18 @@ ul, .withTriangles
     color: gray;
 }
 
+/* better titles */
+
+h1, h2, h3, h4
+{
+    font-weight:bold;
+}
+
+h4
+{
+    margin-top:20px;
+}
+
 /* general structure */
 
 #header, #title, #content, #footer
@@ -52,14 +71,23 @@ ul, .withTriangles
     padding-left: 10px;
     padding-right: 10px;
     color: white;
+    font-size:1.3em;
 }
 
-#content
+#content, #subheader, #subfooter
 {
     max-width: 1030px;
     min-width: 630px;
     margin: auto;
-    padding: 10px;
+    padding: 0 10px;
+}
+
+#content {
+    padding: 0;
+}
+
+#subheader {
+    line-height:2em;
 }
 
 #sidebar
@@ -83,11 +111,14 @@ ul, .withTriangles
     min-height: 500px;
     padding-left: 20px;
     padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     height: auto !important;
     height:100%;
+    border-top: 1px solid transparent;
     border-left: 1px solid rgba(192,188,206,1);
     border-right: 1px solid rgba(192,188,206,1);
-    border-bottom: 1px solid rgba(192,188,206,1);
+    border-bottom: 1px solid transparent;
 }
 
 #summaryLists, #detailContent
@@ -129,9 +160,15 @@ ul, .withTriangles
 {
 }
 
+li 
+{
+    line-height:1.8em;
+}
+
 .withTriangles
 {
     list-style-image: url('../blue-triangle.png');
+    margin-left: 15px;
 }
 
 .withoutTriangles
@@ -142,7 +179,7 @@ ul, .withTriangles
 
 #summaryLists ul
 {
-    padding-left: 7px;
+    padding-left: 27px;
 }
 
 .ulContainer
@@ -222,7 +259,7 @@ ul, .withTriangles
 .pubText
 {
     margin-left: 43px;
-    border-left: 3px solid green;
+    border-left: 3px solid #8ECC50;
     min-height: 55px;
 }
 
@@ -378,6 +415,17 @@ ul, .withTriangles
 
 /* Access statistics */
 
+.access-statistics 
+{
+    max-width:600px;
+    height:10px;
+    overflow:hidden;
+    border-radius:10px;
+    margin:8px;
+    margin-bottom:15px;
+    box-shadow:0 0 0 2px #fff, 0 0 0 3px #999;
+}
+
 .accessStats
 {
     height: 25px;
@@ -396,27 +444,27 @@ ul, .withTriangles
 
 .access-class-oa
 {
-    background-color: orange;
+    background-color: #FF870F;
 }
 
 .access-class-ok
 {
-    background-color: green;
+    background-color: #89DB37;
 }
 
 .access-class-couldbe
 {
-    background-color: yellow;
+    background-color: #FAE43E;
 }
 
 .access-class-unk
 {
-    background-color: gray;
+    background-color: #B4B4B4;
 }
 
 .access-class-closed
 {
-    background-color: black;
+    background-color: #999999;
 }
 
 /* Search pages buttons */
