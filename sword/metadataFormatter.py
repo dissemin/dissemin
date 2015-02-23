@@ -90,6 +90,9 @@ class AOFRFormatter(MetadataFormatter):
             classCode = addChild(textClass, 'classCode')
             classCode.attrib['scheme'] = 'halDomain'
             classCode.text = domain
+        typology = addChild(textClass, 'classCode')
+        typology.attrib['scheme'] = 'halTypology'
+        typology.attrib['n'] = 'ART' # TODO change this
 
         back = addChild(text, 'back')
 
