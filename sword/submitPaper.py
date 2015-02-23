@@ -10,7 +10,7 @@ u='bthom'
 p='dissemin'
 conn = httplib.HTTPConnection("api-preprod.archives-ouvertes.fr")
 
-#httplib.HTTPConnection.debuglevel = 1 #Uncomment to debug mode
+httplib.HTTPConnection.debuglevel = 1 #Uncomment to debug mode
 
 
 #TODO add specific headers for export-toarxiv and so one
@@ -42,19 +42,29 @@ def CreateZipFromPdfAndMetadata(pdf,metadata):
 	return s.getvalue()
 
 
+
 def FullHal(pdf,metadata):
 	strData = CreateZipFromPdfAndMetadata(pdf,metadata)
 	conn.putrequest("POST", "/sword/hal/", True,True)
 	conn.putheader("Authorization",encodeUserData(u,p))
+	conn.putheader("User-Agent", "curl/7.35.0")
 	conn.putheader("Host","api-preprod.archives-ouvertes.fr")
+	conn.putheader("Accept","*/*")
 	conn.putheader("X-Packaging","http://purl.org/net/sword-types/AOfr")
 	conn.putheader("Content-Type","application/zip")
-	conn.putheader("Content-Disposition","attachment; filename=meta.xml")
+	conn.putheader("Content-Disposition"," attachment; filename=meta.xml")
 	conn.putheader("Content-Length",len(strData))
+	conn.putheader("Expect","100-continue")
 	conn.endheaders()
 	conn.send(strData)
 	r1 = conn.getresponse()
 	print r1.read()
+
+#Zip seems to work
+#with ZipFile("depo.zip","w") as myZip:
+#	myZip.write("meta.xml")
+#	myZip.write("article.pdf")
+#	myZip.close()
 
 with open("meta.xml","r") as xml:
 	with open("article.pdf","r") as art:
