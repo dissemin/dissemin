@@ -1,0 +1,8 @@
+-Pourquoi pas compatible avec les libs sword standards? Il semble que c'est
+parce que sensible sur les headers forcés genre Connection et Accept-Encoding
+
+-Pourquoi dans les fichiers d'exemples vous proposez un fichier avec un .zip
+
+-Manque de documentation sur la structure qu'il faut pour le xml.
+
+-Qu'est-ce qui est minimal en terme d'information?
