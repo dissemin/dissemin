@@ -68,6 +68,17 @@ class AOFRFormatter(MetadataFormatter):
 
         self.renderTitleAuthors(titleStmt, paper)
 
+        # publicationStmt
+        publicationStmt = addChild(biblFull, 'publicationStmt')
+        # TODO add license here
+
+        # seriesStmt
+        seriesStmt = addChild(biblFull, 'seriesStmt')
+        idno = addChild(seriesStmt, 'idno')
+        idno.attrib['type'] = 'stamp'
+        idno.attrib['n'] = 'ENS-PARIS'
+        # TODO add other stamps here (based on the institutions)
+
         # editionStmt
         if filename != None:
             editionStmt = addChild(biblFull, 'editionStmt')
@@ -89,10 +100,10 @@ class AOFRFormatter(MetadataFormatter):
 
         # profileDesc
         profileDesc = addChild(biblFull, 'profileDesc')
-        textClass = addChild(profileDesc, 'textClass')
-        langUsage = addChild(textClass, 'langUsage')
+        langUsage = addChild(profileDesc, 'langUsage')
         language = addChild(langUsage, 'language')
         language.attrib['ident'] = 'en' # TODO adapt this?
+        textClass = addChild(profileDesc, 'textClass')
 
         domains = ['spi.plasma', 'phys.phys.phys-gen-ph']
         for domain in domains:
@@ -167,6 +178,14 @@ class AOFRFormatter(MetadataFormatter):
             idno = addChild(biblStruct, 'idno')
             idno.attrib['type'] = 'doi'
             idno.text = publi.doi 
+
+        data = addChild(imprint, 'data')
+        data.attrib['type'] = 'datePub'
+        data.text = 'unknown'
+        if publi.pubdate:
+            # TODO output more precise date if available
+            data.text = str(publi.pubdate.year)
+
 
     def renderJournal(self, root, journal):
         pass
