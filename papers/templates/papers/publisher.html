@@ -4,6 +4,7 @@
 {% load i18n %}
 {% load statuses %}
 {% load bootstrap_pagination %}
+{% load staticfiles %}
 
 {% block headTitle %}
 {{ publisher }}
@@ -38,6 +39,7 @@
 <p>{{ publisher.name }}</p>
 {% if publisher.url %}
 <p><a href="{{ publisher.url }}">{% trans "Homepage" %}</a></p>
+
 {% endif %}
 
 {% if request.user.is_superuser %}
@@ -61,6 +63,9 @@
     <div class="pubLogo"><div class="pubLogoPic-{{ publisher.oa_status }}"></div></div>
     <div class="criterionItem">{{ publisher.oa_status |explain_oa_status }}</div>
 </div>
+<p class="sherpaAcknowledgement">Data provided by<br />
+<a href="http://www.sherpa.ac.uk/romeo/"><img src="{% static "img/sherpa-romeo.gif" %}" width="210px" alt="SHERPA/RoMEO" /></a></p>
+
 {% endif %}
 </div>
 {% endblock %}
@@ -116,7 +121,6 @@
         <li><a href="{{ link.url }}">{{ link.text }}</a></li>
     {% endfor %}
 </ul>
-<p>{% trans "Source:" %} <a href="http://www.sherpa.ac.uk/romeo">SHERPA/RoMEO</a>.</p>
 {% if publisher.stats %}
 <h4>{% trans "Access status statistics" %}</h4>
     {% include "papers/accessStatistics.html" with stats=publisher.stats %}
