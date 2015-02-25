@@ -174,9 +174,10 @@ class AOFRFormatter(MetadataFormatter):
 
 
 # The following lines are for testing purposes only
-formatter = AOFRFormatter()
-paper = Paper.objects.get(pk=1233)
-print(formatter.toString(paper, 'article.pdf', True))
+def generate():
+	formatter = AOFRFormatter()
+	paper = Paper.objects.get(pk=1233)
+	return formatter.toString(paper, 'article.pdf', True)
 
 
 
