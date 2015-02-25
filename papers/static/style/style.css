@@ -413,6 +413,13 @@ li
     padding-bottom: 3px;
 }
 
+/* SHERPA source */
+
+.sherpaAcknowledgement
+{
+    text-align: center;
+}
+
 /* Access statistics */
 
 .access-statistics 
