@@ -485,7 +485,7 @@ li
 .small-glyphicon
 {
     font-size: 0.7em;
-    color: grey;
+    color: gray;
 }
 
 .editable-long-input
@@ -493,6 +493,24 @@ li
     width: 150px;
 }
 
+/* Annotation buttons */
+
+.button-paper-right, .button-paper-wrong
+{
+    border-color: #C0C0C0;
+}
+
+.button-paper-right.active, .button-paper-right.focus
+{
+    background-color: #5CB85C;
+    border-color: #398439;
+}
+
+.button-paper-wrong.active, .button-paper-wrong.focus
+{
+    background-color: #C9302C;
+    border-color: #AC2925;
+}
 
 /* Shamelessly taken from
  * https://github.com/vitalets/x-editable/issues/361 */

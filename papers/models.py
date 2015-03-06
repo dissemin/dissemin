@@ -330,6 +330,7 @@ class Paper(models.Model):
 
     last_modified = models.DateField(auto_now=True)
     visibility = models.CharField(max_length=32, default='VISIBLE')
+    last_annotation = models.CharField(max_length=32, null=True, blank=True)
 
     def __unicode__(self):
         return self.title
@@ -361,11 +362,22 @@ class Paper(models.Model):
             return 2 # NOT RELEVANT
         return 0 # VISIBLE
 
+    # TODO: use only codes or only strings, but this is UGLY!
     @property
     def visibility_code(self):
         idx = 0
         for code, lbl in VISIBILITY_CHOICES:
             if code == self.visibility:
+                return idx
+            idx += 1
+        return idx
+
+    # TODO: use only codes or only strings, but this is UGLY!
+    @property
+    def annotation_code(self):
+        idx = 0
+        for code, lbl in VISIBILITY_CHOICES:
+            if code == self.last_annotation:
                 return idx
             idx += 1
         return idx
@@ -665,7 +677,8 @@ class Annotation(models.Model):
     def create(self, paper, status, user): 
         annot = Annotation(paper=paper, status=status, user=user)
         annot.save()
-        paper.visibility = status
-        paper.save(update_fields=['visibility'])
+        # TODO: we leave paper visibility as is, for the experiment, but this should be changed in the future.
+        paper.last_annotation = status
+        paper.save(update_fields=['last_annotation'])
 
 

@@ -24,6 +24,15 @@
     {% endif %}
     });
 {% endif %}
+{% if request.user.is_authenticated %}
+    $(function(){
+        $('.annotate-paper-radio').change(function(){
+            console.log($(this));
+            var value = $(this).val();
+            $.ajax({url:'/ajax/'+$(this).attr('name')+'-'+value})
+        });
+    });
+{% endif %}
 {% endblock %}
 
 {% block details %}

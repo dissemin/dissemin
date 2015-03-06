@@ -12,14 +12,6 @@
 <strong>{{ a2 }}</strong>{% else %}
 {{ a2|authorlink }}{% endif %}{% endfor %}</span><br />
 <span class="paperTitle">
-{% if request.user.is_authenticated %}
-<button type="button" class="close paperDeleteButton"
-    id="annotate-paper-{{ paper.pk }}-{{ paper.toggled_visibility }}"
-    data-undotext="{% trans "Paper deleted. " %}"
-    data-undoundo="{% trans "Undo" %}"
-    data-undolink="annotate-paper-{{paper.pk}}-{{ paper.visibility_code }}"
-    data-undoclass="undoDeletePaper"><span aria-hidden="true">&times;</span><span class="sr-only">{% trans "Delete" %}</span></button>
-{% endif %}
 
 <span><a href="{% url 'paper' paper.id %}" id="paper-title-{{ paper.id }}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">{{ paper.title }}</a>&nbsp;</span>
 </span><br />
@@ -29,6 +21,28 @@
 {% empty %}
 {% for record in paper.prioritary_oai_records %}
 {% if record.splash_url %}<a href="{{ record.splash_url }}">{% endif %}{{ record.source.name }}{% if record.pdf_url == None %}{% trans " (metadata only)" %}{% endif %}{% if record.splash_url %}</a>{% endif %}{% if forloop.last %}.{% else %},{% endif %}{% endfor %}
+<br />
 {% endfor %}
 </span>
+{% if request.user.is_authenticated %}
+<form>
+    <div class="btn-group-sm" data-toggle="buttons">
+    {% with vis=paper.annotation_code %}
+    <label class="btn button-paper-right annotate-paper {% if vis == 0 %}active{% endif %}">
+        <input type="radio" name="annotate-paper-{{ paper.pk }}" class="annotate-paper-radio" value="0"
+         {% if vis == 0 %}checked="checked"{% endif %}/>
+        {% trans "Right" %}
+    </label>
+    <label class="btn button-paper-wrong annotate-paper {% if vis == 2 %}active{%endif%}">
+        <input type="radio" name="annotate-paper-{{ paper.pk }}" class="annotate-paper-radio" value="2"
+        {% if vis == 2 %}checked="checked"{% endif %}/>
+        {% trans "Wrong" %}
+    </label>
+    {% endwith %}
+    <span></span>
+</div>
+</form>
+{% endif %}
+
+
 </div>
