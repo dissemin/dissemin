@@ -96,7 +96,8 @@ ROOT_URLCONF = 'dissemin.urls'
 WSGI_APPLICATION = 'dissemin.wsgi.application'
 
 #CAS_SERVER_URL="https://localhost:8443/cas/login"    #Local tomcat CAS
-CAS_SERVER_URL="https://cas.eleves.ens.fr/login"    #CRI CAS
+#CAS_SERVER_URL="https://cas.eleves.ens.fr/login"   #SPI CAS
+CAS_SERVER_URL="https://sso.ens.fr/cas/login"    #CRI CAS
 CAS_LOGOUT_COMPLETELY = True
 CAS_PROVIDE_URL_TO_LOGOUT = True
 
