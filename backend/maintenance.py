@@ -21,6 +21,7 @@
 from __future__ import unicode_literals
 
 from papers.models import *
+from papers.utils import sanitize_html
 from time import sleep
 from django.db.models import Q
 
@@ -91,4 +92,14 @@ def update_paper_statuses():
     for p in papers:
         p.update_availability()
 
+def cleanup_titles():
+    """
+    Run HTML sanitizing on all the titles of the papers
+    (this is normally done on creation of the papers, but
+    not for old dumps of the database)
+    """
+    papers = Paper.objects.all()
+    for p in papers:
+        p.title = sanitize_html(p.title)
+        p.save(update_fields=['title'])
 

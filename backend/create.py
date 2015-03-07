@@ -54,6 +54,8 @@ def get_or_create_paper(title, author_names, pubdate, doi=None, visibility='VISI
     if not title or not author_names or not pubdate:
         raise ValueError("A title, pubdate and authors have to be provided to create a paper.")
 
+    title = sanitize_html(title)
+
     # Otherwise look up the fingerprint
     plain_names = map(to_plain_name, author_names)
     fp = create_paper_fingerprint(title, plain_names)

@@ -4,3 +4,4 @@ unidecode
 psycopg2
 django-bootstrap-pagination
 name_tools
+lxml

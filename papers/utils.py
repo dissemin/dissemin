@@ -23,6 +23,10 @@ import re
 import hashlib
 import datetime
 from unidecode import unidecode
+from lxml.html.clean import Cleaner
+from lxml.html import fromstring, _transform_result
+from lxml import etree
+from io import StringIO
 
 from time import sleep
 import socket
@@ -86,10 +90,61 @@ except ImportError:
     def tokenize(l):
         return tokenize_spae_re.split(l)
 
+## HTML sanitizing for the title
+
+overescaped_re = re.compile(r'&amp;#(\d+);')
+whitespace_re = re.compile(r'\s+')
+
+html_cleaner = Cleaner()
+html_cleaner.allow_tags = ['sup','b','span']
+html_cleaner.remove_unknown_tags = False
+
+html_killer = Cleaner()
+html_killer.allow_tags = ['div']
+html_killer.remove_unknown_tags = False
+
+def unescape_latex(s):
+    # TODO: replace this by a proper LaTeX unescaping algorithm (hence increasing the coverage)
+    s = s.replace("\\'e","é")
+    s = s.replace("\\`e","è")
+    s = s.replace("\\`a","à")
+    s = s.replace('\\"o',"ö")
+    s = s.replace('\\"a',"ä")
+    s = s.replace('\\"e',"ë")
+    s = s.replace('\\"{\\i}',"ï")
+    s = s.replace('\\^{o}',"ô")
+    s = s.replace('\\^{a}',"â")
+    s = s.replace('\\^{e}',"ê")
+    s = s.replace('\\^{i}',"î")
+    s = s.replace("\\'{E}","É")
+    s = s.replace("\\`{E}","È")
+    s = s.replace("\\`{A}","À")
+    s = s.replace('\\"{O}',"Ö")
+    s = s.replace('\\^{O}',"Ô")
+    s = s.replace('\\"{A}',"Ä")
+    return s
+
+def sanitize_html(s):
+    s = overescaped_re.sub(r'&#\1;', s)
+    s = whitespace_re.sub(r' ', s)
+    s = unescape_latex(s)
+    orig = html_cleaner.clean_html('<span>'+s+'</span>')
+    return orig[6:-7]
+
+def kill_html(s):
+    """
+    Removes every tag except <div> (but there are no
+    <div> in titles as sanitize_html removes them)
+    """
+    orig = html_killer.clean_html('<div>'+s+'</div>')
+    return orig[5:-6]
+
+
 ##### Paper fingerprinting
 
 stripped_chars = re.compile(r'[^- a-z0-9]')
 def create_paper_plain_fingerprint(title, authors):
+    title = kill_html(title)
     title = remove_diacritics(title).lower()
     title = stripped_chars.sub('',title)
     title = title.strip()
