@@ -35,21 +35,26 @@ from celery.execute import send_task
 from papers.models import *
 from papers.user import *
 from papers.forms import AddResearcherForm
-from papers.utils import iunaccent
+from papers.utils import iunaccent, sanitize_html
 
 # General function used to change a CharField in a model with ajax
 def process_ajax_change(request, model, allowedFields):
+    response = dict()
     try:
         dept = model.objects.get(pk=request.POST.get('pk'))
         field = request.POST.get('name')
         if field in allowedFields:
-            setattr(dept, field, request.POST.get('value'))
+            val = request.POST.get('value')
+            val = sanitize_html(val)
+            setattr(dept, field, val)
             dept.save(update_fields=[field])
-            return HttpResponse('OK', content_type='text/plain')
+            response['status'] = 'OK'
+            response['value'] = val
+            return HttpResponse(json.dumps(response), content_type='text/plain')
         else:
             raise ObjectDoesNotExist
     except ObjectDoesNotExist:
-        return HttpResponseNotFound('NOK', content_type='text/plain')
+        return HttpResponseNotFound(json.dumps(response), content_type='text/plain')
 
 # Researcher management
 @user_passes_test(is_admin)

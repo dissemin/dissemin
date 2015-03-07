@@ -53,7 +53,15 @@ function makeTextEditable(domElement, ajaxUrl, pk, field) {
         type: 'text',
         pk: pk,
         name: field,
+        escape: false,
         url: ajaxUrl,
+        success: function(response, newValue) {
+            response=JSON.parse(response);
+            console.log(response);
+            console.log(response["value"]);
+            console.log(response.value);
+            console.log({newValue:response.value});
+            return {newValue:response.value}; },
         mode: 'inline',
         toggle: 'manual',
         inputclass: 'editable-long-input',
