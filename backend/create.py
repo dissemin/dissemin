@@ -110,6 +110,13 @@ def merge_papers(first, second):
     
     OaiRecord.objects.filter(about=second.pk).update(about=first.pk)
     Publication.objects.filter(paper=second.pk).update(paper=first.pk)
+    Annotation.objects.filter(paper=second.pk).update(paper=first.pk)
+    if second.last_annotation:
+        first.last_annotation = None
+        for annot in first.annotation_set.all().order_by('-timestamp'):
+            first.last_annotation = annot.status
+            break
+        first.save(update_fields=['last_annotation'])
     second.delete()
     first.visibility = new_status
     first.update_availability()
