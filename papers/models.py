@@ -22,7 +22,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
-from papers.utils import nstr, iunaccent
+from papers.utils import nstr, iunaccent, create_paper_plain_fingerprint
 from papers.name import match_names
 from django.utils.translation import ugettext_lazy as _
 
@@ -409,6 +409,13 @@ class Paper(models.Model):
                 if matches[0].source.oa:
                     self.oa_status = 'OA'
         self.save()
+
+    def plain_fingerprint(self):
+        """
+        Debugging function to display the plain fingerprint
+        """
+        authors = [(a.name.first,a.name.last) for a in self.author_set.all().select_related('name')]
+        return create_paper_plain_fingerprint(self.title, authors)
 
 # Researcher / Paper binary relation
 class Author(models.Model):

@@ -21,9 +21,11 @@
 from __future__ import unicode_literals
 
 from papers.models import *
-from papers.utils import sanitize_html
+from papers.utils import sanitize_html, create_paper_fingerprint
+from backend.create import merge_papers
 from time import sleep
 from django.db.models import Q
+from django.db import DatabaseError
 
 def cleanup_papers():
     """
@@ -111,4 +113,26 @@ def update_all_stats():
     AccessStatistics.update_all_stats(Publisher)
     AccessStatistics.update_all_stats(Journal)
     AccessStatistics.update_all_stats(Researcher)
+
+def recompute_fingerprints():
+    """
+    Recomputes the fingerprints of all papers, merging
+    those who end up having the same fingerprint
+    """
+    merged = 0
+    for p in Paper.objects.all():
+        authors = [(a.name.first,a.name.last) for a in p.author_set.all().select_related('name')]
+        new_fp = create_paper_fingerprint(p.title, authors)
+        if new_fp != p.fingerprint:
+            matching = list(Paper.objects.filter(fingerprint=new_fp))
+            if matching:
+                merge_papers(p, matching[0])
+                merged += 1
+            else:
+                p.fingerprint = new_fp
+                try:
+                    p.save(update_fields=['fingerprint'])
+                except DatabaseError as e:
+                    pass
+    print "%d papers merged" % merged
 
