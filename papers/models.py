@@ -322,8 +322,6 @@ class Paper(models.Model):
     title = models.CharField(max_length=1024)
     fingerprint = models.CharField(max_length=64)
     
-    # Year of publication, if that means anything (updated when we add OaiRecords or Publications)
-    year = models.IntegerField()
     # Approximate publication date.
     # For instance if we only know it is in 2014 we'll put 2014-01-01
     pubdate = models.DateField()

@@ -70,6 +70,7 @@ def get_or_create_paper(title, author_names, pubdate, doi=None, visibility='VISI
     else:
         p = Paper(title=title,
                 pubdate=pubdate,
+                year=pubdate.year,
                 fingerprint=fp,
                 visibility=visibility)
         p.save()
