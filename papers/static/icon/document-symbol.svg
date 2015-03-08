@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 14.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 43363)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" x="0px" y="0px" width="214px"
-	 height="288px" viewBox="208.138 207.445 214 288" enable-background="new 208.138 207.445 214 288" xml:space="preserve">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="595.275px" height="841.891px" viewBox="0 0 595.275 841.891" enable-background="new 0 0 595.275 841.891"
+	 xml:space="preserve">
 <g id="document" inkscape:version="0.48.3.1 r9886" sodipodi:docname="document-symbol.svg" inkscape:export-ydpi="14.675159" inkscape:export-xdpi="14.675159" inkscape:export-filename="/home/antonin/Programmation/OA/dissemin/papers/static/document-symbol.png" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
 	<g>
 		
-			<image overflow="visible" opacity="0.19" width="197" height="270" xlink:href="AFCBEF26.png"  transform="matrix(1 0 0 1 220.6379 217.9451)">
+			<image overflow="visible" opacity="0.19" width="197" height="270" xlink:href="AFCBEF27.png"  transform="matrix(1 0 0 1 220.6379 217.9451)">
 		</image>
 		<g>
 			<path fill="#FAFAFA" d="M402.04,263.138v189.396c0,11.046-8.954,20-20,20H256.324c-11.046,0-20-8.954-20-20V253.138
@@ -32,7 +26,7 @@
 <g id="open-access" display="none">
 	<g display="inline">
 		
-			<image overflow="visible" opacity="0.25" width="91" height="125" xlink:href="AFCBEF20.png"  transform="matrix(1 0 0 1 314.6379 348.9451)">
+			<image overflow="visible" opacity="0.25" width="91" height="125" xlink:href="AFCBEF22.png"  transform="matrix(1 0 0 1 314.6379 348.9451)">
 		</image>
 		<g>
 			<g>
@@ -50,11 +44,11 @@
 		</g>
 	</g>
 </g>
-<g id="locked">
+<g id="locked" display="none">
 	
-		<image overflow="visible" opacity="0.25" width="97" height="114" xlink:href="AFCBEF2E.png"  transform="matrix(1 0 0 1 311.6379 349.9451)">
+		<image display="inline" overflow="visible" opacity="0.25" width="97" height="114" xlink:href="AFCBEF21.png"  transform="matrix(1 0 0 1 311.6379 349.9451)">
 	</image>
-	<g>
+	<g display="inline">
 		<g>
 			<g>
 				<path fill="#3B0909" d="M390.331,433.177c0,6.627-5.373,12-12,12h-42.527c-6.627,0-12-5.373-12-12v-22.732
@@ -68,70 +62,39 @@
 </g>
 <g id="open" display="none">
 	
-		<image display="inline" overflow="visible" opacity="0.25" width="221" height="270" xlink:href="AFCBEF38.png"  transform="matrix(1 0 0 1 223.638 220.9451)">
+		<image display="inline" overflow="visible" opacity="0.25" width="133" height="114" xlink:href="AFCBEF2D.png"  transform="matrix(1 0 0 1 311.6379 349.9451)">
 	</image>
 	<g display="inline">
 		<g>
 			<g>
-				<defs>
-					<path id="SVGID_1_" d="M402.04,263.138v189.396c0,11.046-8.954,20-20,20H256.324c-11.046,0-20-8.954-20-20V253.138
-						c0-11.046,8.954-20,20-20H372.04L402.04,263.138z"/>
-				</defs>
-				<clipPath id="SVGID_2_">
-					<use xlink:href="#SVGID_1_"  overflow="visible"/>
-				</clipPath>
-			</g>
-		</g>
-		<g>
-			<g>
-				<defs>
-					<path id="SVGID_3_" d="M402.04,263.138v189.396c0,11.046-8.954,20-20,20H256.324c-11.046,0-20-8.954-20-20V253.138
-						c0-11.046,8.954-20,20-20H372.04L402.04,263.138z"/>
-				</defs>
-				<clipPath id="SVGID_4_">
-					<use xlink:href="#SVGID_3_"  overflow="visible"/>
-				</clipPath>
-				<g clip-path="url(#SVGID_4_)">
-					<path fill="#B3B3B3" d="M390.331,433.177c0,6.627-5.373,12-12,12h-42.527c-6.627,0-12-5.373-12-12v-22.732
-						c0-6.627,5.373-12,12-12h42.527c6.627,0,12,5.373,12,12V433.177z"/>
-					<path fill="#B3B3B3" d="M385.505,415.383h-16V390.69c0.003-15.434,12.815-27.988,28.563-27.988c0.002,0,0.003,0,0.005,0
-						c15.744,0.003,28.555,12.557,28.558,27.986v4.695h-16v-4.693c-0.001-6.608-5.636-11.987-12.56-11.988c-0.001,0-0.002,0-0.003,0
-						c-6.927,0-12.562,5.377-12.563,11.989V415.383L385.505,415.383z"/>
-				</g>
-			</g>
-		</g>
-		<g>
-			<g>
-				<defs>
-					<path id="SVGID_5_" d="M402.04,263.138v189.396c0,11.046-8.954,20-20,20H256.324c-11.046,0-20-8.954-20-20V253.138
-						c0-11.046,8.954-20,20-20H372.04L402.04,263.138z"/>
-				</defs>
-				<clipPath id="SVGID_6_">
-					<use xlink:href="#SVGID_5_"  overflow="visible"/>
-				</clipPath>
+				<path fill="#B3B3B3" d="M390.331,433.177c0,6.627-5.373,12-12,12h-42.527c-6.627,0-12-5.373-12-12v-22.732
+					c0-6.627,5.373-12,12-12h42.527c6.627,0,12,5.373,12,12V433.177z"/>
+				<path fill="#B3B3B3" d="M385.505,415.383h-16V390.69c0.003-15.434,12.815-27.988,28.563-27.988c0.002,0,0.003,0,0.005,0
+					c15.744,0.003,28.555,12.557,28.558,27.986v4.695h-16v-4.693c-0.001-6.608-5.636-11.987-12.56-11.988c-0.001,0-0.002,0-0.003,0
+					c-6.927,0-12.562,5.377-12.563,11.989V415.383L385.505,415.383z"/>
 			</g>
 		</g>
 	</g>
 </g>
-<g id="texte-full" display="none">
-	<line display="inline" fill="none" stroke="#D4D4D4" stroke-width="6" x1="259.682" y1="323.445" x2="378.683" y2="323.445"/>
-	<line display="inline" fill="none" stroke="#D4D4D4" stroke-width="6" x1="259.682" y1="343.445" x2="378.683" y2="343.445"/>
-	<line display="inline" fill="none" stroke="#D4D4D4" stroke-width="6" x1="259.682" y1="363.445" x2="378.683" y2="363.445"/>
-	<line display="inline" fill="none" stroke="#D4D4D4" stroke-width="6" x1="259.682" y1="383.445" x2="378.683" y2="383.445"/>
-	<line display="inline" fill="none" stroke="#D4D4D4" stroke-width="6" x1="259.682" y1="403.445" x2="378.683" y2="403.445"/>
-</g>
-<g id="texte-part">
+<g id="texte-full">
 	<line fill="none" stroke="#D4D4D4" stroke-width="6" x1="259.682" y1="323.445" x2="378.683" y2="323.445"/>
 	<line fill="none" stroke="#D4D4D4" stroke-width="6" x1="259.682" y1="343.445" x2="378.683" y2="343.445"/>
-	<line fill="none" stroke="#D4D4D4" stroke-width="6" x1="259.682" y1="363.445" x2="315.728" y2="363.445"/>
-	<line fill="none" stroke="#D4D4D4" stroke-width="6" x1="259.682" y1="383.445" x2="315.728" y2="383.445"/>
-	<line fill="none" stroke="#D4D4D4" stroke-width="6" x1="259.682" y1="403.445" x2="315.728" y2="403.445"/>
+	<line fill="none" stroke="#D4D4D4" stroke-width="6" x1="259.682" y1="363.445" x2="378.683" y2="363.445"/>
+	<line fill="none" stroke="#D4D4D4" stroke-width="6" x1="259.682" y1="383.445" x2="378.683" y2="383.445"/>
+	<line fill="none" stroke="#D4D4D4" stroke-width="6" x1="259.682" y1="403.445" x2="378.683" y2="403.445"/>
 </g>
-<g id="pdf" display="none">
-	<g display="inline">
+<g id="texte_x5F_red" display="none">
+	<line display="inline" fill="none" stroke="#D4D4D4" stroke-width="6" x1="259.682" y1="323.445" x2="378.683" y2="323.445"/>
+	<line display="inline" fill="none" stroke="#D4D4D4" stroke-width="6" x1="259.682" y1="343.445" x2="378.683" y2="343.445"/>
+	<line display="inline" fill="none" stroke="#D4D4D4" stroke-width="6" x1="259.682" y1="363.445" x2="315.728" y2="363.445"/>
+	<line display="inline" fill="none" stroke="#D4D4D4" stroke-width="6" x1="259.682" y1="383.445" x2="315.728" y2="383.445"/>
+	<line display="inline" fill="none" stroke="#D4D4D4" stroke-width="6" x1="259.682" y1="403.445" x2="315.728" y2="403.445"/>
+</g>
+<g id="pdf">
+	<g>
 		<g>
 			
-				<image overflow="visible" opacity="0.25" width="149" height="83" xlink:href="AFCBEF39.png"  transform="matrix(1 0 0 1 212.638 237.9451)">
+				<image overflow="visible" opacity="0.25" width="149" height="83" xlink:href="AFCBEF2F.png"  transform="matrix(1 0 0 1 212.638 237.9451)">
 			</image>
 			<g>
 				<path fill="#B70909" d="M343.071,287.143c0,8.311-4.812,15.048-10.745,15.048h-96.443c-5.935,0-10.745-6.737-10.745-15.048
