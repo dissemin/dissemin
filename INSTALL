@@ -6,6 +6,11 @@ Installing the tasks backend requires additional dependencies and
 is not necessary if you want to do light dev that does not require
 harvesting metadata or running author disambiguation.
 
+EASY INSTALLATION METHOD
+========================
+
+Run the VirtualBox virtual machine provided. (More details coming soon)
+
 
 Installation instructions for the web frontend
 ==============================================
@@ -15,6 +20,10 @@ First, install the following dependencies (debian packages)
 
 postgresql-server-dev-all
 python-virtualenv
+build-essential
+libxml2-dev
+libxslt1-dev
+python-dev
 
 
 -----------
