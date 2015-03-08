@@ -21,6 +21,7 @@
 from __future__ import unicode_literals
 
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Q
 import re
 
 from papers.utils import create_paper_fingerprint, date_from_dateparts, sanitize_html
@@ -173,5 +174,53 @@ def create_publication(paper, metadata):
         paper.pubdate = pubdate
     paper.update_availability()
     return pub
+
+def create_oairecord(**kwargs):
+    if 'source' not in kwargs:
+        raise ValueError('No source provided to create the OAI record.')
+    source = kwargs['source']
+    if 'identifier' not in kwargs:
+        raise ValueError('No identifier provided to create the OAI record.')
+    identifier = kwargs['identifier']
+    if 'about' not in kwargs:
+        raise ValueError('No paper provided to create the OAI record.')
+    about = kwargs['about']
+    if 'splash_url' not in kwargs:
+        raise ValueError('No URL provided to create the OAI record.')
+    splash_url = kwargs['splash_url']
+
+    # Search for duplicate records
+    exact_dups = OaiRecord.objects.filter(identifier=identifier,about=about)
+    if exact_dups:
+        return exact_dups[0]
+
+    pdf_url = kwargs.get('pdf_url')
+    if pdf_url == None:
+        matches = OaiRecord.objects.filter(about=about,splash_url=splash_url)
+        if matches:
+            return matches[0]
+    else:
+        matches = OaiRecord.objects.filter(Q(splash_url=splash_url) | Q(pdf_url=pdf_url) |
+                Q(pdf_url__isnull=True), about=about)
+        for m in matches:
+            if m.pdf_url == None:
+                m.pdf_url = pdf_url
+                m.save(update_fields=['pdf_url'])
+                m.about.update_availability()
+            return m
+
+    # Otherwise create a new record
+    record = OaiRecord(
+            source=source,
+            identifier=identifier,
+            splash_url=splash_url,
+            pdf_url=pdf_url,
+            about=about,
+            description=kwargs.get('description'),
+            priority=source.priority)
+    record.save()
+
+    about.update_availability()
+    return record
 
 

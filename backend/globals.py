@@ -6,11 +6,11 @@ from backend.relevance import *
 from backend.clustering import *
 
 
-# print("Loading similarity classifier…")
-# sc = SimilarityClassifier(filename='models/similarity.pkl')
-# print("Loading relevance classifier…")
-# rc = RelevanceClassifier(filename='models/relevance-1.pkl')
+print("Loading similarity classifier…")
+sc = SimilarityClassifier(filename='models/similarity.pkl')
+print("Loading relevance classifier…")
+rc = RelevanceClassifier(filename='models/relevance-0.pkl')
 
-# clustering_context_factory = ClusteringContextFactory(sc, rc)
+clustering_context_factory = ClusteringContextFactory(sc, rc)
 
 
