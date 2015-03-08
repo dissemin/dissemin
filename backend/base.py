@@ -181,7 +181,7 @@ def add_base_document(doc, source):
             priority=source.priority)
     record.save()
 
-    paper.update_pdf_url()
+    paper.update_availability()
     return True
 
 

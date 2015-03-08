@@ -23,7 +23,7 @@ from __future__ import unicode_literals
 from django.core.exceptions import ObjectDoesNotExist
 import re
 
-from papers.utils import create_paper_fingerprint, date_from_dateparts
+from papers.utils import create_paper_fingerprint, date_from_dateparts, sanitize_html
 from papers.errors import MetadataSourceException
 from papers.models import *
 from papers.doi import to_doi
