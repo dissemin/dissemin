@@ -4,18 +4,18 @@ from __future__ import unicode_literals, print_function
 from django.db.models import Q
 from papers.models import *
 from learning.model import *
-from papers.relevance import *
-from papers.clustering import *
+from backend.relevance import *
+from backend.clustering import *
 
 # Stage of the learning process
 # 0: no clustering has taken place before
 # 1: one step of clustering has taken place before
 #    … and so on
-stage = 1
+stage = 0
 
 make_lm = False
 recompute = False
-train = True
+train = False
 cluster = True
 
 # Read dataset
@@ -115,6 +115,8 @@ if train or recompute or make_lm:
 if cluster:
     sc = SimilarityClassifier(filename="models/similarity.pkl")
     for r in Researcher.objects.all():
-        clusterResearcher(r.pk, sc, rc)
+        cc = ClusteringContext(r, sc, rc)
+        cc.reclusterBatch()
+        cc.commit()
         print("That was researcher "+str(r.pk))
 
