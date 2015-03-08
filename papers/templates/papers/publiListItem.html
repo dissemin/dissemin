@@ -1,9 +1,8 @@
 {% load author %}
 {% load i18n %}
 <div class="pubLogo">
-    <div class="pubLogoPic-{{ paper.oa_status }} {% if paper.pdf_url %}pubLogoPic-PDF{% endif %}">
-        {% if paper.pdf_url %}<a href="{{ paper.pdf_url }}" class="filldiv"></a>{% endif %}
-    </div>
+    {% if paper.pdf_url %}<a href="{{ paper.pdf_url }}"><img src="/static/symbol-PDF-{{ paper.oa_status }}.png" width="52" height="70" /></a>
+    {% else %}<img src="/static/symbol-{{ paper.oa_status }}.png" width="52" height="70" />{% endif %}
 </div>
 
 <div class="pubText"><span class="paperAuthors">
@@ -13,7 +12,8 @@
 {{ a2|authorlink }}{% endif %}{% endfor %}</span><br />
 <span class="paperTitle">
 
-<span><a href="{% url 'paper' paper.id %}" id="paper-title-{{ paper.id }}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">{{ paper.title }}</a>&nbsp;</span>
+<span><a href="{% url 'paper' paper.id %}" id="paper-title-{{ paper.id }}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">{{ paper.title }}</a>
+{% if paper.pdf_url %}<a href="{{ paper.pdf_url }}"><img src="/static/extpdf.png"/></a>{% else %}&nbsp;{% endif %}</span>
 </span><br />
 <span class="pubRef">
 {% for publi in paper.publication_set.all %}

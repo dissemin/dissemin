@@ -1,6 +1,5 @@
 /* fonts */
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,300italic,700italic);
-
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,300italic,700italic|Neuton);
 body
 {
     text-align: center;
@@ -179,7 +178,7 @@ li
 
 #summaryLists ul
 {
-    padding-left: 27px;
+    padding-left: 22px;
 }
 
 .ulContainer
@@ -214,37 +213,37 @@ li
 
 .pubLogoPic-UNK, .pubLogoPic-OK, .pubLogoPic-NOK, .pubLogoPic-OA, .pubLogoPic-PDF, .pubLogoPic-PDF-OK, .pubLogoPic-PDF-NOK
 {
-    height: 52px;
-    width: 70px;
+    height: 70px;
+    width: 52px;
     background-repeat: no-repeat;
 }
 .pubLogoPic-UNK, .pubLogoPic-PDF-NOK
 {
-    background-image: url('../document-symbol.png');
+    background-image: url('../symbol-UNK.png');
 }
 .pubLogoPic-UNK.pubLogoPic-PDF, .pubLogoPic-PDF-OK
 {
-    background-image: url('../pdf-symbol.png');
+    background-image: url('../symbol-PDF-UNK.png');
 }
 .pubLogoPic-OK
 {
-    background-image: url('../open-symbol.png');
+    background-image: url('../symbol-OK.png');
 }
 .pubLogoPic-OK.pubLogoPic-PDF
 {
-    background-image: url('../pdf-open-symbol.png');
+    background-image: url('../symbol-PDF-OK.png');
 }
 .pubLogoPic-NOK
 {
-    background-image: url('../closed-symbol.png');
+    background-image: url('../symbol-NOK.png');
 }
 .pubLogoPic-NOK.pubLogoPic-PDF
 {
-    background-image: url('../pdf-closed-symbol.png');
+    background-image: url('../symbol-PDF-NOK.png');
 }
 .pubLogoPic-OA
 {
-    background-image: url('../oa-symbol.png');
+    background-image: url('../symbol-OA.png');
 }
 
 .pubText, .criterionItem
@@ -258,7 +257,7 @@ li
 
 .pubText
 {
-    margin-left: 43px;
+    margin-left: 60px;
     border-left: 3px solid #8ECC50;
     min-height: 55px;
 }
@@ -281,7 +280,13 @@ li
 
 .paperTitle
 {
-    font-size: 1em;
+    font-size: 1.3em;
+	font-family:"Neuton", serif;
+}
+
+h1.paperTitle {
+	margin-top:0;
+	font-weight:normal;
 }
 
 .paperDeleteButton, .researcherDeleteButton
@@ -332,9 +337,10 @@ li
 
 .criterionItem
 {
-    margin-left: 33px;
-    margin-top: 5px;
+    margin-left: 52px;
+    margin-top: 15px;
     margin-bottom: 5px;
+	padding-left: 6px;
 }
 
 .criterionCross
@@ -345,19 +351,27 @@ li
     margin: auto;
 }
 
-.unselectedCriterion
+.criterion {
+	clear:both;
+}
+
+.unselectedCriterion, .selectedCriterion
 {
-    height: 48px;
+    height: 75px;
     padding: 2px;
     margin: 0px;
+	clear: both;
+}
+
+.unselectedCriterion
+{
 }
 
 .selectedCriterion
 {
-    border: 2px solid green;
-    height: 48px;
-    padding: 2px;
-    margin: 0px;
+    border: 2px solid #8ecc50;
+	margin-top: -2px;
+	margin-bottom:-2px;
 }
 
 

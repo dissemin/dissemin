@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block bodyTitle %}
-<span id="paperTitle" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">{{ paper.title }}</span>
+<h1 class="paperTitle" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">{{ paper.title }}</h1>
 {% endblock %}
 
 {% block jsScript %}
@@ -35,8 +35,8 @@ makeTextEditable($('#paperTitle'), '/ajax/change-paper', '{{ paper.id }}', 'titl
 {% endfor %}
 
 <p><strong>{% trans "Full text:" %}</strong>
-    {% if paper.pdf_url %}<a href="{{ paper.pdf_url }}">{% trans "Available" %}</a>
-    {% else %}{% trans "Unavailable" %}{% endif %}.</p>
+    {% if paper.pdf_url %}<a href="{{ paper.pdf_url }}">{% trans "Available" %} <img src="/static/extpdf.png"/></a>
+    {% else %}{% trans "Unavailable" %}{% endif %}</p>
 
 {% if paper.publication_set.first.journal %}
 <p><strong>{% trans "Publisher policy:" %}</strong> {{ paper.oa_status | explain_oa_status }}
