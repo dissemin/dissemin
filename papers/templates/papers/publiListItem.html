@@ -12,15 +12,14 @@
 {{ a2|authorlink }}{% endif %}{% endfor %}</span><br />
 <span class="paperTitle">
 
-<span><a href="{% url 'paper' paper.id %}" id="paper-title-{{ paper.id }}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">{{ paper.title }}</a>
-{% if paper.pdf_url %}<a href="{{ paper.pdf_url }}"><img src="/static/extpdf.png"/></a>{% else %}&nbsp;{% endif %}</span>
+<span><a href="{% url 'paper' paper.id %}" id="paper-title-{{ paper.id }}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">{{ paper.title }}</a></span>
 </span><br />
-<span class="pubRef">
+<span class="pubRef">{% if paper.pdf_url %}<a href="{{ paper.pdf_url }}"><img src="/static/extpdf.png" alt="PDF" /></a> | {% endif %}
 {% for publi in paper.publication_set.all %}
 {{ publi | publication }}{% if forloop.last %}.{% else %},{% endif %}<br />
 {% empty %}
 {% for record in paper.prioritary_oai_records %}
-{% if record.splash_url %}<a href="{{ record.splash_url }}">{% endif %}{{ record.source.name }}{% if record.pdf_url == None %}{% trans " (metadata only)" %}{% endif %}{% if record.splash_url %}</a>{% endif %}{% if forloop.last %}.{% else %},{% endif %}{% endfor %}
+{% if record.splash_url %}<a href="{{ record.splash_url }}">{% endif %}{{ record.source.name }}{% if record.pdf_url == None %}{% trans " (metadata only)" %}{% endif %}{% if record.splash_url %} <img src="/static/extlink.png"/></a>{% endif %}{% if forloop.last %}.{% else %},{% endif %}{% endfor %}
 <br />
 {% endfor %}
 </span>
