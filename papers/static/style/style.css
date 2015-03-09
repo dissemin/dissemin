@@ -289,6 +289,14 @@ h1.paperTitle {
 	font-weight:normal;
 }
 
+.abstract {
+	width:500px;
+	font-size:0.9em;
+	font-weight:normal;
+	text-align:justify;
+	margin-left:50px;
+}
+
 .paperDeleteButton, .researcherDeleteButton
 {
 /*    color: white;
