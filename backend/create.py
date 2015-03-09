@@ -175,6 +175,25 @@ def create_publication(paper, metadata):
     paper.update_availability()
     return pub
 
+def find_duplicate_records(source, identifier, about, splash_url, pdf_url):
+    exact_dups = OaiRecord.objects.filter(identifier=identifier,about=about)
+    if exact_dups:
+        return exact_dups[0]
+
+    if pdf_url == None:
+        matches = OaiRecord.objects.filter(about=about,splash_url=splash_url)
+        if matches:
+            return matches[0]
+    else:
+        matches = OaiRecord.objects.filter(Q(splash_url=splash_url) | Q(pdf_url=pdf_url) |
+                Q(pdf_url__isnull=True), about=about)
+        for m in matches:
+            if m.pdf_url == None:
+                m.pdf_url = pdf_url
+                m.save(update_fields=['pdf_url'])
+                m.about.update_availability()
+            return m
+
 def create_oairecord(**kwargs):
     if 'source' not in kwargs:
         raise ValueError('No source provided to create the OAI record.')
@@ -190,24 +209,40 @@ def create_oairecord(**kwargs):
     splash_url = kwargs['splash_url']
 
     # Search for duplicate records
-    exact_dups = OaiRecord.objects.filter(identifier=identifier,about=about)
-    if exact_dups:
-        return exact_dups[0]
-
     pdf_url = kwargs.get('pdf_url')
-    if pdf_url == None:
-        matches = OaiRecord.objects.filter(about=about,splash_url=splash_url)
-        if matches:
-            return matches[0]
-    else:
-        matches = OaiRecord.objects.filter(Q(splash_url=splash_url) | Q(pdf_url=pdf_url) |
-                Q(pdf_url__isnull=True), about=about)
-        for m in matches:
-            if m.pdf_url == None:
-                m.pdf_url = pdf_url
-                m.save(update_fields=['pdf_url'])
-                m.about.update_availability()
-            return m
+    match = find_duplicate_records(source, identifier, about, splash_url, pdf_url)
+
+    # Update the duplicate if necessary
+    if match:
+        changed = False
+
+        if pdf_url != None and (match.pdf_url == None or
+                (match.pdf_url != pdf_url and match.priority < source.priority)):
+            match.source = source
+            match.pdf_url = pdf_url
+
+        contributors = kwargs.get('contributors', '')
+        if len(match.contributors) < len(contributors):
+            match.contributors = contributors
+            changed = True
+
+        keywords = kwargs.get('keywords', '')
+        if len(match.keywords) < len(keywords):
+            match.keywords = keywords
+            changed = True
+
+        description = kwargs.get('description', '')
+        if len(match.description) < len(description):
+            match.description = description
+            changed = True
+
+        if changed:
+            match.save()
+
+        if about.pk != match.about.pk:
+            merge_papers(about, match.about)
+
+        return match
 
     # Otherwise create a new record
     record = OaiRecord(
@@ -217,6 +252,8 @@ def create_oairecord(**kwargs):
             pdf_url=pdf_url,
             about=about,
             description=kwargs.get('description'),
+            keywords=kwargs.get('keywords'),
+            contributors=kwargs.get('contributors'),
             priority=source.priority)
     record.save()
 

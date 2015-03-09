@@ -24,7 +24,6 @@ from __future__ import unicode_literals
 from urllib2 import urlopen, URLError
 from urllib import urlencode
 import xml.etree.ElementTree as ET
-from django.db.models import Q
 import unicodedata
 import datetime
 
@@ -159,21 +158,30 @@ def add_base_document(doc, source):
     description = metadata.get('dcdescription')
     splash_url = metadata.get('dclink')
     pdf_url = None
-    if splash_url and splash_url.endswith('.pdf'):
-        pdf_url = splash_url
-    for url in metadata.get('dcidentifier', []):
-        if url.endswith('.pdf'):
+
+    potential_links = metadata.get('dcidentifier', [])
+    potential_links.append(splash_url)
+    if 'dcsource' in metadata:
+        potential_links.append(metadata['dcsource'])
+
+    additional_dois = []
+    for url in potential_links:
+        if url.startswith('http://dx.doi.org/'):
+            if doi == None:
+                doi = url
+            else:
+                additional_dois.append(url)
+        elif url.endswith('.pdf'):
             pdf_url = url
-    if metadata.get('dcsource', '').endswith('.pdf') or metadata.get('dcoa','2') == '1':
-        pdf_url = metadata['dcsource']
 
     if not (pdf_url or splash_url):
         return False
 
-    print "YEAR: "+str(pubdate.year)
+    # TODO: add publications for additional DOIs
+
     paper = get_or_create_paper(title, model_names, pubdate, doi, 'CANDIDATE')
-  
-    create_oairecord(
+    
+    record = create_oairecord(
             source=source,
             identifier=identifier,
             splash_url=splash_url,
@@ -182,7 +190,6 @@ def add_base_document(doc, source):
             description=description)
 
     return True
-
 
 
 
