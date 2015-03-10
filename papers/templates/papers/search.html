@@ -50,13 +50,15 @@
         {% endif %}
         {% if request.user.is_superuser and researcher.email %}
         <p>{% trans "Address:" %} {{ researcher.email }}</p>
+        {% endif %}
+        {% if request.user.is_superuser %}
         <p>{% trans "Names:" %}
             <ul>
             {% for name in researcher.name_variants.all %}
             <li><a href="{% url 'search' %}?name={{ name.id }}">{{ name }}</a></li>
             {% endfor %}
          </ul></p>
-        {% endif %}
+         {% endif %}
     </div>
 {% elif department %}
 <span class="detailsTitle">{% trans "Department" %}</span>
