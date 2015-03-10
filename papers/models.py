@@ -252,7 +252,8 @@ class Name(models.Model):
         """
         self.variant_of.clear()
         for researcher in self.variants_queryset():
-            researcher.name_variants.add(self)
+            if match_names((researcher.name.first,researcher.name.last), (self.first,self.last)):
+                researcher.name_variants.add(self)
 
     def update_is_known(self):
         """
@@ -287,13 +288,18 @@ class Name(models.Model):
         # if the paper is saved or it is a variant of a known name
 
         # Then, we look for known names with the same last name.
-        similar_researchers = Researcher.objects.filter(name__last__iexact=last_name).select_related('name')
-        if similar_researchers:
-            name.is_known = True
-            name.save()
+        similar_researchers = Researcher.objects.filter(
+                name__last__iexact=last_name).select_related('name')
+
+        saved = False
         for r in similar_researchers:
             if match_names((r.name.first,r.name.last), (first_name,last_name)):
+                if not saved:
+                    saved = True
+                    name.is_known = True
+                    name.save()
                 r.name_variants.add(name)
+
    
         # Other approach that adds *many* names
         #

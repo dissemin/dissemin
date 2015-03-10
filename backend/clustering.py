@@ -107,8 +107,6 @@ class ClusteringContext(object):
                 val.researcher_id = self.researcher.id
             else:
                 val.researcher_id = None
-            # Num_relevant is not stored as it is department-centric
-            # whereas the clusters themselves are "universal"
             val.save()
 
     def classify(self, pkA, pkB):
