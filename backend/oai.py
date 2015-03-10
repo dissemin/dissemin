@@ -27,9 +27,12 @@ from oaipmh.error import DatestampError, NoRecordsMatchError
 
 from papers.name import parse_comma_name, normalize_name_words
 from papers.models import OaiRecord, OaiSource, Name
+from papers.doi import to_doi
 
 from backend.oai import *
 from backend.extractors import *
+from backend.proxy import PROXY_SOURCE_PREFIX
+from backend.create import *
 
 import re
 
@@ -83,7 +86,7 @@ def process_records(listRecords):
             print "No publication date, skipping"
             continue
 
-        logger.info('Saving record %s' % record[0].identifier())
+        print 'Saving record %s' % record[0].identifier()
         paper = get_or_create_paper(metadata['title'][0], authors, pubdate, doi)
 
         # Save the record
