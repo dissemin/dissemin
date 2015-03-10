@@ -30,7 +30,12 @@ from io import StringIO
 
 from time import sleep
 import socket
-from urllib2 import urlopen, build_opener
+import httplib
+import urllib2
+from httplib import HTTPException
+from urllib2 import urlopen, build_opener, URLError
+
+from papers.errors import MetadataSourceException
 
 
 ### General string utilities ###
@@ -96,7 +101,7 @@ overescaped_re = re.compile(r'&amp;#(\d+);')
 whitespace_re = re.compile(r'\s+')
 
 html_cleaner = Cleaner()
-html_cleaner.allow_tags = ['sup','b','span']
+html_cleaner.allow_tags = ['sub','sup','b','span']
 html_cleaner.remove_unknown_tags = False
 
 html_killer = Cleaner()
@@ -183,21 +188,32 @@ def create_paper_fingerprint(title, authors):
     return m.hexdigest()
 
 
+
 ### Open an URL with retries
 
 def urlopen_retry(url, **kwargs):# data, timeout, retries, delay, backoff):
     data = kwargs.get('data', None)
     timeout = kwargs.get('timeout', 10)
-    retries = kwargs.get('retries', 4)
+    retries = kwargs.get('retries', 3)
     delay = kwargs.get('delay', 5)
     backoff = kwargs.get('backoff', 2)
+    headers = kwargs.get('headers', {})
     opener = kwargs.get('opener', build_opener())
     try:
-        return opener.open(url, data, timeout)
-    except socket.timeout:
+        req = urllib2.Request(url, data, headers)
+        return opener.open(req, data, timeout)
+    except socket.timeout as e:
         if retries <= 0:
-            raise
+            raise MetadataSourceException('timeout: '+str(e))
+    except URLError as e:
+        if retries <= 0:
+            raise MetadataSourceException('URL error: '+str(e))
+    except HTTPException as e:
+        if retries <= 0:
+            raise MetadataSourceException('HTTP error: '+str(e))
+
     print "Retrying in "+str(delay)+" seconds..."
+    print "URL: "+url
     sleep(delay)
     return urlopen_retry(url,
             data=data,
