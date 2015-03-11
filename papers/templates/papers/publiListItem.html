@@ -7,10 +7,15 @@
 
 <div class="pubText">
     <span class="paperAuthors">
-        {% for a2 in paper.sorted_authors %}{% if not forloop.first %},{% endif %}
+        {% for a2 in paper.displayed_authors %}{% if not forloop.first %},{% endif %}
         {% if a2.researcher and a2.researcher.id = researcher_id %}
         <strong>{{ a2 }}</strong>{% else %}
         {{ a2|authorlink }}{% endif %}{% endfor %}
+        {% if paper.has_many_authors %}
+            {% blocktrans with remaining_authors=paper.nb_remaining_authors %}
+            and {{ remaining_authors }} other authors
+            {% endblocktrans %}
+        {% endif %}
     </span>
     <br />
     <span class="paperTitle">

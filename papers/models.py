@@ -340,6 +340,9 @@ class Paper(models.Model):
     oa_status = models.CharField(max_length=32, null=True, blank=True, default='UNK')
     pdf_url = models.URLField(max_length=2048, null=True, blank=True)
 
+    cached_author_count = None
+    nb_remaining_authors = None
+
     @property
     def year(self):
         return self.pubdate.year
@@ -355,6 +358,26 @@ class Paper(models.Model):
     @property
     def sorted_authors(self):
         return self.author_set.order_by('id')
+
+    def author_count(self):
+        if self.cached_author_count == None:
+            self.cached_author_count = self.author_set.count()
+        return self.cached_author_count
+
+    def has_many_authors(self):
+        return self.author_count() > 15
+
+    def interesting_authors(self):
+        lst = (list(self.sorted_authors.filter(name__is_known=True))+list(
+            self.sorted_authors.filter(name__is_known=False))[:3])[:15]
+        self.nb_remaining_authors = self.author_count() - len(lst)
+        return lst
+
+    def displayed_authors(self):
+        if self.has_many_authors():
+            return self.interesting_authors()
+        else:
+            return self.sorted_authors
 
     @property
     def toggled_visibility(self):
