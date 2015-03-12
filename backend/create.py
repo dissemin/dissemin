@@ -164,6 +164,7 @@ def create_publication(paper, metadata):
     publisher = None
     if journal:
         publisher = journal.publisher
+        AliasPublisher.increment(publisher_name, journal.publisher)
     else:
         publisher = fetch_publisher(publisher_name)
 
@@ -225,21 +226,18 @@ def create_oairecord(**kwargs):
                 (match.pdf_url != pdf_url and match.priority < source.priority)):
             match.source = source
             match.pdf_url = pdf_url
-
-        contributors = kwargs.get('contributors', '')
-        if len(match.contributors) < len(contributors):
-            match.contributors = contributors
             changed = True
 
-        keywords = kwargs.get('keywords', '')
-        if len(match.keywords) < len(keywords):
-            match.keywords = keywords
-            changed = True
-
-        description = kwargs.get('description', '')
-        if len(match.description) < len(description):
-            match.description = description
-            changed = True
+        def update_field_conditionally(field):
+            new_val = kwargs.get(field, '')
+            if new_val and (not match.__dict__[field] or
+                    len(match.__dict__[field]) < len(new_val)):
+                match.__dict__[field] = new_val
+                changed = True
+        
+        update_field_conditionally('contributors')
+        update_field_conditionally('keywords')
+        update_field_conditionally('description')
 
         if changed:
             match.save()

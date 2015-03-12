@@ -94,6 +94,10 @@ def base_xml_to_dict(doc):
     for s in strings:
         if 'name' in s.attrib:
             dct[s.attrib['name']] = s.text
+    ints = doc.findall('./int')
+    for s in ints:
+        if 'name' in s.attrib:
+            dct[s.attrib['name']] = int(s.text)
     arrays = doc.findall('./arr')
     for a in arrays:
         if 'name' in a.attrib:
@@ -151,8 +155,12 @@ def add_base_document(doc, source):
                 "In document '"+title+"'")
         return False
     identifier = 'base:'+metadata['dcdocid']
-    if OaiRecord.objects.filter(identifier=identifier).first():
-        return True
+
+    # We let it update previous records.
+    # otherwise, uncomment the following lines
+
+    # if OaiRecord.objects.filter(identifier=identifier).first():
+    #     return True
 
     doi = None
     description = metadata.get('dcdescription')
@@ -163,16 +171,20 @@ def add_base_document(doc, source):
     potential_links.append(splash_url)
     if 'dcsource' in metadata:
         potential_links.append(metadata['dcsource'])
+       
 
     additional_dois = []
     for url in potential_links:
-        if url.startswith('http://dx.doi.org/'):
+        potential_doi = to_doi(url)
+        if potential_doi:
             if doi == None:
-                doi = url
+                doi = potential_doi
             else:
-                additional_dois.append(url)
+                additional_dois.append(potential_doi)
         elif url.endswith('.pdf'):
             pdf_url = url
+    if (not pdf_url) and metadata.get('dcoa',2) == 1:
+        pdf_url = splash_url
 
     if not (pdf_url or splash_url):
         return False
@@ -188,6 +200,7 @@ def add_base_document(doc, source):
             pdf_url=pdf_url,
             about=paper,
             description=description)
+    paper.update_availability()
 
     return True
 
