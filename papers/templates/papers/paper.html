@@ -34,22 +34,18 @@ makeTextEditable($('#paperTitle'), '/ajax/change-paper', '{{ paper.id }}', 'titl
 </p>
 {% endfor %}
 
-<p><strong>{% trans "Full text:" %}</strong>
+    <p><strong>{% trans "Full text:" %}</strong>
     {% if paper.pdf_url %}<a href="{{ paper.pdf_url }}">{% trans "Available" %}</a>
     {% else %}{% trans "Unavailable" %}{% endif %}.</p>
 
-{% if paper.publication_set.first.journal %}
-<p><strong>{% trans "Publisher policy:" %}</strong> {{ paper.oa_status | explain_oa_status }}
-(<a href="{% url 'publisher' paper.publication_set.first.journal.publisher.pk %}">{% trans "details" %}</a>)</p>
-{% endif %}
-
-{% for record in paper.oairecord_set.all %}
-{% if forloop.first %}
-    {% if record.description %}
-        <p><strong>{% trans "Abstract." %}</strong> {{ record.description }}</p>
-    {% endif %}
-{% endif %}
-{% endfor %}
+    {% for publi in paper.publications_with_unique_publisher %}
+        {% with publi.publisher as psh %}
+            <p><strong>{% trans "Publisher:" %}</strong>
+            <a href="{% url 'publisher' psh.pk %}">{{ psh }}</a></p>
+            <p><strong>{% trans "Policy:" %}</strong> {{ psh.oa_status | explain_oa_status }}
+            (<a href="{% url 'publisher' psh.pk %}">{% trans "details" %}</a>)</p>
+        {% endwith %}
+    {% endfor %}
 {% endblock %}
 
 {% block details %}
@@ -87,6 +83,7 @@ makeTextEditable($('#paperTitle'), '/ajax/change-paper', '{{ paper.id }}', 'titl
 <span class="detailsTitle">{% trans "Admin zone" %}</span>
 <div class="detailsContent">
     <p><strong>Visibility:</strong> {{ paper.visibility }}</p>
+    <p><strong>Publisher:</strong> {{ paper.publisher }}</p>
     <p><strong>Clusters:</strong></p>
 {% for a in paper.author_set.all %}
 <p>{{a}}: 

@@ -23,7 +23,9 @@ from __future__ import unicode_literals
 from papers.models import *
 from papers.utils import sanitize_html, create_paper_fingerprint
 from backend.create import merge_papers
+from backend.romeo import fetch_publisher
 from time import sleep
+from collections import defaultdict
 from django.db.models import Q
 from django.db import DatabaseError
 
@@ -135,4 +137,43 @@ def recompute_fingerprints():
                 except DatabaseError as e:
                     pass
     print "%d papers merged" % merged
+
+def journal_to_publisher():
+    """
+    Sets the "publisher" field of publications where the "journal" field
+    is not empty.
+    """
+    # TODO: is there a more efficient way to do this with updates?
+    for publi in Publication.objects.filter(journal__isnull=False).select_related('journal'):
+        publi.publisher_id = publi.journal.publisher_id
+        publi.save(update_fields=['publisher'])
+
+def create_publisher_aliases(erase_existing=True):
+    # TODO: this might be more efficient with aggregates?
+    counts = defaultdict(int)
+    for p in Publication.objects.all():
+        if p.publisher_id:
+            pair = (p.publisher_name,p.publisher_id)
+            counts[pair] += 1
+
+    if erase_existing:
+        AliasPublisher.objects.all().delete()
+
+    for (name,pk) in counts:
+        if not erase_existing:
+            alias = AliasPublisher.objects.get_or_create(name=name,publisher_id=pk)
+        else:
+            alias = AliasPublisher(name=name,publisher_id=pk)
+        alias.count = counts[(name,pk)]
+        alias.save()
+
+def refetch_publishers():
+    """
+    Tries to assign publishers to Publications without Journals
+    """
+    for p in Publication.objects.filter(publisher__isnull=True):
+        publisher = fetch_publisher(p.publisher_name)
+        if publisher:
+            p.publisher = publisher
+            p.save(update_fields=['publisher'])
 

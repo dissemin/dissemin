@@ -31,7 +31,7 @@ from papers.doi import to_doi
 from papers.name import to_plain_name, parse_comma_name
 
 from backend.crossref import fetch_metadata_by_DOI
-from backend.romeo import fetch_journal
+from backend.romeo import fetch_journal, fetch_publisher
 from backend.globals import *
 
 # TODO: this could be a method of ClusteringContextFactory ?
@@ -149,23 +149,28 @@ def create_publication(paper, metadata):
         dateparts = date_dict.get('date-parts')[0]
         pubdate = date_from_dateparts(dateparts)
     # for instance it outputs dates like 2014-2-3
-    publisher = metadata.get('publisher', None)
-    if publisher:
-        publisher = publisher[:512]
-    pubtype = 'article'
+    publisher_name = metadata.get('publisher', None)
+    if publisher_name:
+        publisher_name = publisher_name[:512]
+
+    pubtype = metadata.get('type','unknown')
 
     # Lookup journal
     search_terms = {'jtitle':title}
     if issn:
         search_terms['issn'] = issn
     journal = fetch_journal(search_terms)
-    # TODO use the "publisher" info ?
 
+    publisher = None
+    if journal:
+        publisher = journal.publisher
+    else:
+        publisher = fetch_publisher(publisher_name)
 
     pub = Publication(title=title, issue=issue, volume=volume,
             pubdate=pubdate, paper=paper, pages=pages,
-            doi=doi, pubtype=pubtype, publisher=publisher,
-            journal=journal)
+            doi=doi, pubtype=pubtype, publisher_name=publisher_name,
+            journal=journal, publisher=publisher)
     pub.save()
     cur_pubdate = paper.pubdate
     if type(cur_pubdate) != type(pubdate):

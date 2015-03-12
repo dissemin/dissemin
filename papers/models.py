@@ -414,6 +414,13 @@ class Paper(models.Model):
                     self.oa_status = 'OA'
         self.save()
 
+    def publications_with_unique_publisher(self):
+        seen_publishers = set()
+        for publication in self.publication_set.all():
+            if publication.publisher_id and publication.publisher_id not in seen_publishers:
+                seen_publishers.add(publication.publisher_id)
+                yield publication
+
     def plain_fingerprint(self):
         """
         Debugging function to display the plain fingerprint
@@ -494,7 +501,7 @@ class Author(models.Model):
 # Publisher associated with a journal
 class Publisher(models.Model):
     romeo_id = models.CharField(max_length=64)
-    name = models.CharField(max_length=256)
+    name = models.CharField(max_length=256, db_index=True)
     alias = models.CharField(max_length=256,null=True,blank=True)
     url = models.URLField(null=True,blank=True)
     preprint = models.CharField(max_length=32, choices=POLICY_CHOICES, default='unknown')
@@ -508,7 +515,7 @@ class Publisher(models.Model):
         if not self.stats:
             self.stats = AccessStatistics.objects.create()
             self.save()
-        self.stats.update(Paper.objects.filter(publication__journal__publisher=self).distinct())
+        self.stats.update(Paper.objects.filter(publication__publisher=self).distinct())
     def __unicode__(self):
         if not self.alias:
             return self.name
@@ -539,13 +546,13 @@ class Publisher(models.Model):
             return
         self.oa_status = new_oa_status
         self.save()
-        papers = Paper.objects.filter(publication__journal__publisher=self.pk)
+        papers = Paper.objects.filter(publication__publisher=self.pk)
         for p in papers:
             p.update_availability()
 
 # Journal data retrieved from RoMEO
 class Journal(models.Model):
-    title = models.CharField(max_length=256)
+    title = models.CharField(max_length=256, db_index=True)
     last_updated = models.DateTimeField(auto_now=True)
     issn = models.CharField(max_length=10, blank=True, null=True, unique=True)
     publisher = models.ForeignKey(Publisher)
@@ -593,22 +600,39 @@ class DisambiguationChoice(models.Model):
     title = models.CharField(max_length=512)
     issn = models.CharField(max_length=128)
 
+# Counts the number of times a given publisher string has
+# been associated with a model publisher
+class AliasPublisher(models.Model):
+    publisher = models.ForeignKey(Publisher)
+    name = models.CharField(max_length=512)
+    count = models.IntegerField(default=0)
+    unique_together = ('name','publisher')
+
+    def __unicode__(self):
+        return self.name + ' --'+str(self.count)+'--> '+self.publisher.name
+
 # Publication of these papers (in journals or conference proceedings)
 class Publication(models.Model):
     # TODO prepare this model for user input (allow for other URLs than DOIs)
     paper = models.ForeignKey(Paper)
     pubtype = models.CharField(max_length=64)
+
     title = models.CharField(max_length=512) # this is actually the *journal* title
     journal = models.ForeignKey(Journal, blank=True, null=True)
+
+    publisher = models.ForeignKey(Publisher, blank=True, null=True)
+    publisher_name = models.CharField(max_length=512, blank=True, null=True)
+
     issue = models.CharField(max_length=64, blank=True, null=True)
     volume = models.CharField(max_length=64, blank=True, null=True)
     pages = models.CharField(max_length=64, blank=True, null=True)
     pubdate = models.DateField(blank=True, null=True)
-    publisher = models.CharField(max_length=512, blank=True, null=True)
+
     doi = models.CharField(max_length=1024, unique=True, blank=True, null=True) # in theory, there is no limit
+
     def oa_status(self):
-        if self.journal:
-            return self.journal.publisher.oa_status
+        if self.publisher:
+            return self.publisher.oa_status
         else:
             return 'UNK'
 

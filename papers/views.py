@@ -118,7 +118,7 @@ def searchView(request, **kwargs):
         context['journal'] = journal
     elif 'publisher' in args:
         publisher = get_object_or_404(Publisher, pk=args.get('publisher'))
-        queryset = queryset.filter(publication__journal__publisher=publisher)
+        queryset = queryset.filter(publication__publisher=publisher)
         search_description += _(' published by ')+unicode(publisher)
         context['publisher'] = publisher
     if 'status' in args:
