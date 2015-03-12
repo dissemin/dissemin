@@ -101,7 +101,7 @@ overescaped_re = re.compile(r'&amp;#(\d+);')
 whitespace_re = re.compile(r'\s+')
 
 html_cleaner = Cleaner()
-html_cleaner.allow_tags = ['sup','b','span']
+html_cleaner.allow_tags = ['sub','sup','b','span']
 html_cleaner.remove_unknown_tags = False
 
 html_killer = Cleaner()
