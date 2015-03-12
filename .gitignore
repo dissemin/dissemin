@@ -1,5 +1,6 @@
 # python files
 *.pyc
+build/
 # vim 
 .*.swp
 # API keys
@@ -16,6 +17,9 @@ bin/
 local/
 include/
 lib/
+# SWORD
+sword/generated.xml
+sword/docs/
 # Fiddling
 models/
 learning/dataset/
@@ -23,6 +27,7 @@ learning/evaluate.py
 learning/gengraph.py
 learning/regression.py
 learning/gephi/
+scratch.py
 # Virtual env
 .virtualenv/
 # Proposals
