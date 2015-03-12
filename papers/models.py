@@ -610,6 +610,12 @@ class AliasPublisher(models.Model):
 
     def __unicode__(self):
         return self.name + ' --'+str(self.count)+'--> '+self.publisher.name
+    @classmethod
+    def increment(cls, name, publisher):
+        # TODO it would be more efficient with an update, but it does not really work
+        alias, created = cls.objects.get_or_create(name=name, publisher=publisher)
+        alias.count += 1
+        alias.save()
 
 # Publication of these papers (in journals or conference proceedings)
 class Publication(models.Model):

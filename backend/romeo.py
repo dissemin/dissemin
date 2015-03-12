@@ -40,6 +40,29 @@ PUBLISHER_NAME_ASSOCIATION_THRESHOLD = 10
 # and the second one
 PUBLISHER_NAME_ASSOCIATION_FACTOR = 4
 
+def perform_romeo_query(search_terms):
+    if romeo_api_key:
+        search_terms['ak'] = romeo_api_key
+    request = 'http://sherpa.ac.uk/romeo/api29.php?'+urlencode(search_terms)
+
+    # Perform the query
+    try:
+        response = urlopen(request).read()
+    except URLError as e:
+        raise MetadataSourceException('Error while querying RoMEO.\n'+
+                'URL was: '+request+'\n'
+                'Error is: '+str(e))
+
+    # Parse it
+    try:
+        root = ET.fromstring(response)
+    except ET.ParseError as e:
+        raise MetadataSourceException('RoMEO returned an invalid XML response.\n'+
+                'URL was: '+request+'\n'
+                'Error is: '+str(e))
+
+    return root
+
 
 def find_journal_in_model(search_terms):
     issn = search_terms.get('issn', None)
@@ -58,7 +81,7 @@ def find_journal_in_model(search_terms):
             return matches[0]
 
 
-def fetch_journal(search_terms, matching_mode='exact'):
+def fetch_journal(search_terms):
     """
     Fetch the journal data from RoMEO. Returns an Journal object.
     search_terms should be a dictionnary object containing at least one of these fields:
@@ -80,26 +103,8 @@ def fetch_journal(search_terms, matching_mode='exact'):
     if journal:
         return journal
 
-    # Prepare the query
-    if romeo_api_key:
-        search_terms['ak'] = romeo_api_key
-    request = 'http://sherpa.ac.uk/romeo/api29.php?'+urlencode(search_terms)
-
     # Perform the query
-    try:
-        response = urlopen(request).read()
-    except URLError as e:
-        raise MetadataSourceException('Error while querying RoMEO.\n'+
-                'URL was: '+request+'\n'
-                'Error is: '+str(e))
-
-    # Parse it
-    try:
-        root = ET.fromstring(response)
-    except ET.ParseError as e:
-        raise MetadataSourceException('RoMEO returned an invalid XML response.\n'+
-                'URL was: '+request+'\n'
-                'Error is: '+str(e))
+    root = perform_romeo_query(search_terms)
 
     # Find the matching journals (if any)
     journals = list(root.findall('./journals/journal'))
@@ -152,20 +157,21 @@ def fetch_publisher(publisher_name, matching_mode='exact'):
     print "Fetching publisher: "+publisher_name
     # First, let's see if we have a publisher with that name
     for p in Publisher.objects.filter(name=publisher_name)[:1]:
+        print "Exact match"
         return p
-
-    print "No exact match"
 
     # Second, let's see if the publisher name has often been associated to a known publisher
     aliases = list(AliasPublisher.objects.filter(name=publisher_name).order_by('-count')[:2])
     if len(aliases) == 1:
         if aliases[0].count > PUBLISHER_NAME_ASSOCIATION_THRESHOLD:
             print "Found alias: "+str(aliases[0])
+            AliasPublisher.increment(publisher_name, aliases[0].publisher)
             return aliases[0].publisher
     elif len(aliases) == 2:
         if aliases[0].count > PUBLISHER_NAME_ASSOCIATION_FACTOR*aliases[1].count:
             print "Found alias: "+str(aliases[0])
             print "Second result: "+str(aliases[1])
+            AliasPublisher.increment(publisher_name, aliases[0].publisher)
             return aliases[0].publisher
         else:
             print "Not clear enough:"
@@ -177,34 +183,29 @@ def fetch_publisher(publisher_name, matching_mode='exact'):
 
     # Prepare the query
     search_terms = dict()
-    if romeo_api_key:
-        search_terms['ak'] = romeo_api_key
     search_terms['pub'] = remove_diacritics(publisher_name)
-    request = 'http://sherpa.ac.uk/romeo/api29.php?'+urlencode(search_terms)
-    print "Request: "+request
+    search_terms['qtype'] = 'all'
 
-    # Perform the query
-    try:
-        response = urlopen(request).read()
-    except URLError as e:
-        raise MetadataSourceException('Error while querying RoMEO.\n'+
-                'URL was: '+request+'\n'
-                'Error is: '+str(e))
-
-    # Parse it
-    try:
-        root = ET.fromstring(response)
-    except ET.ParseError as e:
-        raise MetadataSourceException('RoMEO returned an invalid XML response.\n'+
-                'URL was: '+request+'\n'
-                'Error is: '+str(e))
+    root = perform_romeo_query(search_terms)
 
     # Find the publisher
     publishers = root.findall('./publishers/publisher')
-    if len(publishers) != 1:
+    if len(publishers) == 0:
+        print "No results"
         return
+    elif len(publishers) > 1:
+        print str(len(publishers)) + " results"
+        search_terms['qtype'] = 'exact'
+        root = perform_romeo_query(search_terms)
+        publishers = root.findall('./publishers/publisher')
+        if len(publishers) != 1:
+            print str(len(publishers)) + " results after exact"
+            return
 
-    return get_or_create_publisher(publishers[0])
+    print "Successfully fetched from RoMEO"
+    publisher =  get_or_create_publisher(publishers[0])
+    AliasPublisher.increment(publisher_name, publisher)
+    return publisher
 
 def get_or_create_publisher(romeo_xml_description):
     """
