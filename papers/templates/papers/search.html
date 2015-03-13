@@ -63,7 +63,7 @@
     <div class="detailsContent">
         <p>{{ department }}</p>
         <p><a href="{% url 'department' department.id %}">
-            {% blocktrans with count=department.researcher_set.count %}
+            {% blocktrans trimmed with count=department.researcher_set.count %}
             {{ count }} members
             {% endblocktrans %}
         </a></p>
@@ -100,7 +100,7 @@
 
 <span class="detailsTitle">{% trans "Refine search" %}</span>
 <div class="detailsContent">
-    <p>{% blocktrans %}
+    <p>{% blocktrans trimmed %}
     {{ nb_results }} papers found
     {% endblocktrans %}
     </p>

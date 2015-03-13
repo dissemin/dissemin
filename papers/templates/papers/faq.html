@@ -38,20 +38,22 @@ Frequently Asked Questions
         <p><a href="#getting-involved">{% trans "How can I help?" %}</a></p>
         <p><a href="#source-code">{% trans "Where is the source code?" %}</a></p>
         <p><a href="#oai">{% trans "Can I harvest your data?" %}</a></p>
-        <p><a href="#bikes">{% trans "Do you like bikes?" %}</a></p>
  
         <h3>Open Access</h3>
 
         <h2 id="open-access">{% trans "What is Open Access?" %}</h2>
         <p>
+        {% blocktrans trimmed %}
         In a nutshell, the Open Access movement promotes free access to the scientific literature. For a 
         more in-depth introduction, we recommend
         <a href="http://www.phdcomics.com/comics.php?f=1533">this video in English</a>
-            and
-            <a href="http://pablo.rauzy.name/openaccess/introduction.html">this introduction in French</a>.
+        and
+        <a href="http://pablo.rauzy.name/openaccess/introduction.html">this introduction in French</a>.
+        {% endblocktrans %}
         </p>
         <h2 id="repositories-rock">Why should I upload my papers to a repository?</h2>
         <p>
+        {% blocktrans trimmed %}
         You should do it because:
         <ul>
             <li>It makes your research <strong>more accessible</strong> and <strong>more visible</strong>.
@@ -74,9 +76,11 @@ Frequently Asked Questions
               their projects to be available in a repository.
               </li>
           </ul>
+        {% endblocktrans %}
         </p>
         <h2 id="what-repository">What repository should I use?</h2>
         <p>
+        {% blocktrans trimmed %}
             There are roughly two types of repositories:
             <ul>
                 <li>Subject repositories, restricted to some research fields, such as <a href="http://arxiv.org">arXiv</a>.</li>
@@ -87,25 +91,48 @@ Frequently Asked Questions
             </ul>
             If your research community favours a specific repository, using it makes sense as it will increase your
             visibility. If not, institutional repositories are also a good option. 
+        {% endblocktrans %}
         </p>
 
         <h3>Dissem.in</h3>
+
         <h2 id="what-is-dissemin">{% trans "What is dissem.in?" %}</h2>
-        <p>Dissem.in is a web platform gathering metadata from <a href="{% url 'sources' %}">various sources</a>
+
+        <p>
+        {% url 'sources' as sources_url %}
+        {% blocktrans trimmed %}
+        Dissem.in is a web platform gathering metadata from <a href="{{ sources_url }}">various sources</a>
         and analyzing the full text availability of publications of researchers, currently only within the ENS.
         It has been designed to foster the use of repositories (rather than preprints posted on personal homepages),
-        <a href="#repositories-rock">for numerous reasons</a>.</p>
+        <a href="#repositories-rock">for numerous reasons</a>.
+        {% endblocktrans %}
+        </p>
         <h2 id="repository">{% trans "Is dissem.in a repository?" %}</h2>
-        <p>Dissem.in is not a repository as it does not store any full text. When the full text of a publication
-        is available, a link to the relevant page is provided.</p>
+        <p>
+        {% blocktrans trimmed %}
+        Dissem.in is not a repository as it does not store any full text. When the full text of a publication
+        is available, a link to the relevant page is provided.
+        {% endblocktrans %}
+        </p>
         <h2 id="running">{% trans "Who runs dissem.in?" %}</h2>
-        <p>Dissem.in is currently run by its developper, <a href="http://antonin.delpeuch.eu">Antonin Delpeuch</a>.</p>
+        <p>
+        {% blocktrans trimmed %}
+        Dissem.in is brought to you by <a href="https://github.com/wetneb/dissemin/graphs/contributors">the dissem.in team</a>.
+        {% endblocktrans %}
         <h2 id="creating-a-profile">{% trans "Can I create my profile on dissem.in?" %}</h2>
-        <p>If your institution is not covered by dissem.in, currently, no, you cannot.
+        <p>
+        {% blocktrans trimmed %}
+        If your institution is not covered by dissem.in, currently, no, you cannot.
         Our algorithms require some information about your department and research field
-        to gather your publications.</p>
+        to gather your publications.
+        {% endblocktrans %}
+        </p>
         <h2 id="new-institution">{% trans "Can I use dissem.in for my institution?" %}</h2>
-        <p>Yes, just ask <a href="mailto:contact@dissem.in">contact@dissem.in</a>.</p>
+        <p>
+        {% blocktrans trimmed %}
+        Yes, just ask <a href="mailto:contact@dissem.in">contact@dissem.in</a>.
+        {% endblocktrans %}
+        </p>
 
         <h3>Policies and full-text availability</h3>
         <h2 id="policy-classes">{% trans "What do your policy classes mean?" %}</h2>
@@ -115,8 +142,10 @@ Frequently Asked Questions
                 <div class="pubLogoPic-OA"></div>
             </div>
             <div class="criterionItem">
+                {% blocktrans trimmed %}
                 <strong>Open access:</strong><br />
                 The full text is made freely available by the publisher.
+                {% endblocktrans %}
             </div>
         </div>
         <div>
@@ -124,10 +153,12 @@ Frequently Asked Questions
                 <div class="pubLogoPic-OK pubLogoPic-PDF"></div>
             </div>
             <div class="criterionItem">
+                {% blocktrans trimmed %}
                 <strong>Pre/post prints allowed and full text available:</strong><br />
                 The full text is available in a repository, but might not be freely
                 available from the publisher itself. This is in line with the publishing policy
                 and is called green open access or self-archiving.
+                {% endblocktrans %}
             </div>
         </div>
         <div>
@@ -135,9 +166,11 @@ Frequently Asked Questions
                 <div class="pubLogoPic-OK"></div>
             </div>
             <div class="criterionItem">
+                {% blocktrans trimmed %}
                 <strong>Pre/post prints allowed but full text unavailable:</strong><br />
                 The full text could be made available in a repository (as above)
                 according to the publishing policy.
+                {% endblocktrans %}
             </div>
         </div>
         <div>
@@ -145,19 +178,26 @@ Frequently Asked Questions
                 <div class="pubLogoPic-NOK"></div>
             </div>
             <div class="criterionItem">
+                {% blocktrans trimmed %}
                 <strong>Pre/post prints forbidden:</strong><br />
-
                 The publisher forbids deposits in repositories, in general.
+                {% endblocktrans %}
             </div>
         </div>
         </p>
         <h2 id="availability">{% trans "When is a paper considered available?" %}</h2>
-        <p>When we have found it in one of the repositories we harvest. The list of
-        these repositories can be found <a href="{% url "sources" %}">here</a>.
+        <p>
+        {% blocktrans trimmed %}
+        When we have found it in one of the repositories we harvest. The list of
+        these repositories can be found <a href="{{ sources_url }}">here</a>.
         Thanks to <a href="http://www.base-search.net">the BASE search engine</a>,
-        we cover more than 68 millions of preprints.</p>
+        we cover more than 68 millions of preprints.
+        {% endblocktrans %}
+        </p>
         <h2 id="statistics">{% trans "Should I trust your statistics?" %}</h2>
-        <p>There are a few caveats concerning our data:
+        <p>
+        {% blocktrans trimmed %}
+        There are a few caveats concerning our data:
         <ul>
             <li>Some papers are not present in any of our metadata sources, so they are not counted at all ;</li>
             <li>Some entries in our system do not correspond to proper research papers ;</li>
@@ -166,23 +206,33 @@ Frequently Asked Questions
             <li>Some papers might be marked as available but actually, they are not (for instance because the content has been deleted) ;</li>
             <li>And many other technical issues.</li>
         </ul>
-        But our platform is increasingly reliable and we think that department-wise statistics are meaningful.</p>
+        But our platform is increasingly reliable and we think that department-wise statistics are meaningful.
+        {% endblocktrans %}
+        </p>
 
         <h3>Omissions and errors</h3>
         <h2 id="missing-paper">{% trans "One of my papers is missing. Why?" %}</h2>
+            {% blocktrans trimmed %}
             <p>There are many possible reasons: maybe it is not available from any
-               of <a href="{% url 'sources' %}">our sources</a>, your name is spelt
+            of <a href="{{ sources_url }}">our sources</a>, your name is spelt
                differently or partially in the authors list, our algorithms estimated
                that it has been written by an homonym researcher, or it has been deleted
                by one of your co-authors.</p>
             <p>In any case, you should be able to add it manually soon.</p>
+            {% endblocktrans %}
 
         <h2 id="incorrect-metadata">{% trans "Some details of my paper are incorrect. What can I do?" %}</h2>
-            <p>In a near future, you should be able to create an account and fix it by yourself.
-               If it is really urgent, send a message to contact@dissem.in.</p>
+        <p>
+        {% blocktrans trimmed %}
+        In a near future, you should be able to create an account and fix it by yourself.
+        If it is really urgent, send a message to contact@dissem.in.
+        {% endblocktrans %}
+        </p>
 
-       <h2 id="copy-available">{% trans "There is a freely available copy of my article online but Dissem.in does not find it." %}</h2>
-            <p>There are two cases:
+       <h2 id="copy-available">{% trans "There is a freely available copy of my article online but dissem.in does not find it." %}</h2>
+       <p>
+            {% blocktrans trimmed %}
+            There are two cases:
             <ul>
                     <li>Your article is available on a personal homepage or a similar
                     website. In this case, you should read <a href="#repositories-rock">
@@ -191,32 +241,48 @@ Frequently Asked Questions
                      available in dissem.in. In this case you should send a message
                      to <a href="mailto:contact@dissem.in">contact@dissem.in</a> to fix the problem.</li>
             </ul>
+            {% endblocktrans %}
             </p>
 
         <h3>Behind the scene</h3>
 
         <h2 id="sources">{% trans "Where do you get the data from?" %}</h2>
-            <p>Our sources are listed on <a href="{% url 'sources' %}">this page</a>.</p>
+        <p>
+        {% blocktrans trimmed %}
+        Our sources are listed on <a href="{{ url_sources }}">this page</a>.
+        {% endblocktrans %}
+        </p>
 
         <h2 id="getting-involved">{% trans "How can I help?" %}</h2>
-        <p>There are many ways to get involved, even if you do not want to write any code.
+        <p>
+        {% blocktrans trimmed %}
+        There are many ways to get involved, even if you do not want to write any code.
         <ul>
             <li>Tell us what you think: <a href="mailto:contact@dissem.in">contact@dissem.in</a> ;</li>
-            <li>Help us to tag articles to improve our author disambiguation algorithm ;</li>
+            <li>Help us to tag articles to improve our author disambiguation algorithm (you need an ENS account);</li>
             <li>Help us with the overall usability of the website ;</li>
             <li>Help us with the translation of the interface ;</li>
             <li>Help us to get lists of researchers from departments ;</li>
-            <li>Fix metadata errors (you have to get an account for that) ;</li>
+            <li>Fix metadata errors (you need an ENS account) ;</li>
             <li>Spread the word about this tool ;</li>
+            <li>Fix some any issue listed here.</li>
             <li>Star <a href="http://github.com/wetneb/dissemin">our github project</a>!</li>
         </ul>
+        If you can code, have a look at our <a href="http://github.com/wetneb/dissemin">list of suggested improvements and fixes</a>.
+        {% endblocktrans %}
         </p>
         <h2 id="source-code">{% trans "Where is the source code?" %}</h2>
-        <p>The source code is available <a href="http://github.com/wetneb/dissemin">on github</a>.</p>
+        <p>
+        {% blocktrans trimmed %}
+        The source code is available <a href="http://github.com/wetneb/dissemin">on github</a>.
+        {% endblocktrans %}
+        </p>
         <h2 id="oai">{% trans "Can I harvest your data?" %}</h2>
-        <p>Yes! But we have not implemented any API yet. Tell us what you need.</p>
-        <h2 id="bikes">{% trans "Do you like bicycles?" %}</h2>
-        <p>Yes! Bikes are awesome. You should like them too.</p>
+        <p>
+        {% blocktrans trimmed %}
+        Yes! But we have not implemented any API yet. Tell us what you need.
+        {% endblocktrans %}
+        </p>
         <p><a href="#">Back to top</a></p>
     </div>
 {% endblock %}

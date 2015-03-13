@@ -47,7 +47,7 @@ function addResearcher() {
     <li><a href="{% url 'researcher' person.id %}">{{ person }}</a>
            {% if person.stats %}
            <span class="numPapers">
-               {% blocktrans count num_total=person.stats.num_tot %}
+               {% blocktrans trimmed count num_total=person.stats.num_tot %}
                ({{ num_total }} paper)
                {% plural %}
                ({{ num_total }} papers)

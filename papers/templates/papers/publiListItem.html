@@ -12,7 +12,7 @@
         <strong>{{ a2 }}</strong>{% else %}
         {{ a2|authorlink }}{% endif %}{% endfor %}
         {% if paper.has_many_authors %}
-            {% blocktrans with remaining_authors=paper.nb_remaining_authors %}
+            {% blocktrans trimmed with remaining_authors=paper.nb_remaining_authors %}
             and {{ remaining_authors }} other authors
             {% endblocktrans %}
         {% endif %}
