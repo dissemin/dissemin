@@ -181,23 +181,35 @@ def create_publication(paper, metadata):
     paper.update_availability()
     return pub
 
+https_re = re.compile(r'https?(.*)')
+
 def find_duplicate_records(source, identifier, about, splash_url, pdf_url):
     exact_dups = OaiRecord.objects.filter(identifier=identifier,about=about)
     if exact_dups:
         return exact_dups[0]
+    
+    def shorten(url):
+        if not url:
+            return
+        match = https_re.match(url.strip())
+        if not match:
+            print "Warning, invalid URL: "+url
+        return match.group(1)
+
+    short_splash = shorten(splash_url)
+    short_pdf = shorten(pdf_url)
 
     if pdf_url == None:
-        matches = OaiRecord.objects.filter(about=about,splash_url=splash_url)
+        matches = OaiRecord.objects.filter(about=about,
+                splash_url__endswith=short_splash)
         if matches:
             return matches[0]
     else:
-        matches = OaiRecord.objects.filter(Q(splash_url=splash_url) | Q(pdf_url=pdf_url) |
-                Q(pdf_url__isnull=True), about=about)
+        matches = OaiRecord.objects.filter(
+                Q(splash_url__endswith=short_splash) |
+                Q(pdf_url__endswith=short_pdf) |
+                Q(pdf_url__isnull=True), about=about)[:1]
         for m in matches:
-            if m.pdf_url == None:
-                m.pdf_url = pdf_url
-                m.save(update_fields=['pdf_url'])
-                m.about.update_availability()
             return m
 
 def create_oairecord(**kwargs):
@@ -225,6 +237,7 @@ def create_oairecord(**kwargs):
         if pdf_url != None and (match.pdf_url == None or
                 (match.pdf_url != pdf_url and match.priority < source.priority)):
             match.source = source
+            match.priority = source.priority
             match.pdf_url = pdf_url
             changed = True
 
