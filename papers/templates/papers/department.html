@@ -44,6 +44,11 @@ function addResearcher() {
 <p>{% trans "Members:" %}</p>
 <ul id="membersList">
     {% for person in department.sorted_researchers %}
+    {% ifchanged person.name.first_letter %}
+        </ul>
+        <p>{{ person.name.first_letter }}</p>
+        <ul>
+    {% endifchanged %}
     <li><a href="{% url 'researcher' person.id %}">{{ person }}</a>
            {% if person.stats %}
            <span class="numPapers">

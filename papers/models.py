@@ -317,6 +317,9 @@ class Name(models.Model):
     def __unicode__(self):
         return '%s %s' % (self.first,self.last)
 
+    def first_letter(self):
+        return self.last[0]
+
 # Papers matching one or more researchers
 class Paper(models.Model):
     title = models.CharField(max_length=1024)
