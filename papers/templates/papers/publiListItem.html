@@ -6,7 +6,7 @@
 </div>
 
 <div class="pubText">
-    <span class="paperAuthors">
+    <p class="paperAuthors">
         {% for a2 in paper.displayed_authors %}{% if not forloop.first %},{% endif %}
         {% if a2.researcher and a2.researcher.id = researcher_id %}
         <strong>{{ a2 }}</strong>{% else %}
@@ -16,16 +16,12 @@
             and {{ remaining_authors }} other authors
             {% endblocktrans %}
         {% endif %}
-    </span>
-    <br />
-    <span class="paperTitle">
-        <span>
-            <a href="{% url 'paper' paper.id %}" id="paper-title-{{ paper.id }}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">{% autoescape off %}{{ paper.title }}{% endautoescape %}</a>
-        </span>
-    </span>
-    <br />
+    </p>
+    <p class="paperTitle">
+    <a href="{% url 'paper' paper.id %}" id="paper-title-{{ paper.id }}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">{% autoescape off %}{{ paper.title }}{% endautoescape %}</a>
+    </p>
     
-    <span class="pubRef">
+    <p class="pubRef">
         {% if paper.pdf_url %}
             <a href="{{ paper.pdf_url }}"><img src="/static/extpdf.png" alt="PDF" /></a> |
         {% endif %}
@@ -38,7 +34,7 @@
             {% endfor %}
             <br />
          {% endfor %}
-    </span>
+    </p>
     
     {% if request.user.is_authenticated %}
     <form>
