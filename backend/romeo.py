@@ -20,7 +20,7 @@
 
 from __future__ import unicode_literals
 
-import xml.etree.ElementTree as ET
+import xml.etree.ElementTree as ET # TODO move to lxml, it handles utf-8 better
 
 import requests
 import requests.exceptions
@@ -48,7 +48,7 @@ def perform_romeo_query(search_terms):
 
     # Perform the query
     try:
-        response = requests.get(base_url, params=search_terms).text
+        response = requests.get(base_url, params=search_terms).text.encode('utf-8')
     except requests.exceptions.RequestException as e:
         raise MetadataSourceException('Error while querying RoMEO.\n'+
                 'URL was: '+request+'\n'
