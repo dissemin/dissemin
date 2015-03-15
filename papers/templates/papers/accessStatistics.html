@@ -1,8 +1,8 @@
 {% load i18n %}
 <div class="access-statistics">
-    <div class="access-class-oa" style="width: {{ stats.percentage_oa }}%"></div><!--
- --><div class="access-class-ok" style="width: {{ stats.percentage_ok }}%"></div><!--
- --><div class="access-class-couldbe" style="width: {{ stats.percentage_couldbe }}%"></div><!--
- --><div class="access-class-unk" style="width: {{ stats.percentage_unk }}%"></div><!--
- --><div class="access-class-closed" style="width: {{ stats.percentage_closed }}%"></div>
+    <div class="access-class-oa" style="width: {{ stats.percentage_oa }}%" title="{% trans "Open Access" %}"></div><!--
+ --><div class="access-class-ok" style="width: {{ stats.percentage_ok }}%" title="{% trans "Publications are available" %}"></div><!--
+ --><div class="access-class-couldbe" style="width: {{ stats.percentage_couldbe }}%" title="{% trans "Publications could be online" %}"></div><!--
+ --><div class="access-class-unk" style="width: {{ stats.percentage_unk }}%" title="{% trans "Policy unknown" %}"></div><!--
+ --><div class="access-class-closed" style="width: {{ stats.percentage_closed }}%" title="{% trans "Upload is forbidden" %}"></div>
 </div>
