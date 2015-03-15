@@ -199,6 +199,9 @@ def find_duplicate_records(source, identifier, about, splash_url, pdf_url):
     short_splash = shorten(splash_url)
     short_pdf = shorten(pdf_url)
 
+    if splash_url == None or about == None:
+        return
+
     if pdf_url == None:
         matches = OaiRecord.objects.filter(about=about,
                 splash_url__endswith=short_splash)
