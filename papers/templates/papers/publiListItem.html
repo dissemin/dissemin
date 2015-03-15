@@ -13,7 +13,7 @@
 {{ a2|authorlink }}{% endif %}{% endfor %}</span><br />
 <span class="paperTitle">
 
-<span><a href="{% url 'paper' paper.id %}" id="paper-title-{{ paper.id }}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">{{ paper.title }}</a>&nbsp;</span>
+    <span><a href="{% url 'paper' paper.id %}" id="paper-title-{{ paper.id }}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">{% autoescape off %}{{ paper.title }}{% endautoescape %}</a>&nbsp;</span>
 </span><br />
 <span class="pubRef">
 {% for publi in paper.publication_set.all %}

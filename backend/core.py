@@ -21,8 +21,8 @@
 from __future__ import unicode_literals
 
 from django.utils import timezone
-from urllib2 import urlopen, URLError
-from urllib import urlencode, quote_plus
+import requests
+import requests.exceptions
 from lxml import etree
 import unicodedata
 
@@ -57,9 +57,8 @@ def fetch_papers_from_core_by_researcher_name(name):
         while offset < nb_results and no_match < max_no_match_before_give_up:
             query_args = {'api_key':core_api_key,
                     'offset':str(offset)}
-            request = base_url+search_terms+'?'+urlencode(query_args)
-            f = urlopen(request)
-            response = f.read()
+            f = requests.get(base_url+search_terms, params=query_args)
+            response = f.text
             root = etree.fromstring(response)
             result_list = list(root.iter('record'))
             if not result_list:
@@ -81,7 +80,7 @@ def fetch_papers_from_core_by_researcher_name(name):
                         no_match += 1
                 except MetadataSourceException as e:
                     raise MetadataSourceException(str(e)+'\nIn URL: '+request)
-    except URLError as e:
+    except requests.exceptions.RequestException as e:
         raise MetadataSourceException('Error while fetching metadata from CORE:\n'+
                 'Unable to open the URL: '+request+'\n'+
                 'Error was: '+str(e))

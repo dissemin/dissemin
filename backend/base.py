@@ -21,8 +21,8 @@
 
 from __future__ import unicode_literals
 
-from urllib2 import urlopen, URLError
-from urllib import urlencode
+import requests
+import requests.exceptions
 import xml.etree.ElementTree as ET
 import unicodedata
 import datetime
@@ -53,8 +53,8 @@ def fetch_papers_from_base_by_researcher_name(name):
                     'offset':str(offset),
                     'query':search_terms}
             request = base_url+'?'+urlencode(query_args)
-            f = urlopen(request)
-            response = f.read()
+            f = requests.get(base_url, params=query_args)
+            response = f.text
             root = ET.fromstring(response)
             result_list = list(root.findall('./result'))
             if not result_list:
@@ -78,7 +78,7 @@ def fetch_papers_from_base_by_researcher_name(name):
                 except MetadataSourceException as e:
                     raise MetadataSourceException(str(e)+'\nIn URL: '+request)
 
-    except URLError as e:
+    except requests.exceptions.RequestException as e:
         raise MetadataSourceException('Error while fetching metadata from BASE:\n'+
                 'Unable to open the URL: '+request+'\n'+
                 'Error was: '+str(e))

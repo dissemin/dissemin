@@ -20,9 +20,10 @@
 
 from __future__ import unicode_literals
 
-from urllib2 import urlopen, HTTPError, URLError
-from urllib import urlencode
-import xml.etree.ElementTree as ET
+import xml.etree.ElementTree as ET # TODO move to lxml, it handles utf-8 better
+
+import requests
+import requests.exceptions
 
 from papers.models import *
 from papers.errors import MetadataSourceException
@@ -43,12 +44,12 @@ PUBLISHER_NAME_ASSOCIATION_FACTOR = 4
 def perform_romeo_query(search_terms):
     if romeo_api_key:
         search_terms['ak'] = romeo_api_key
-    request = 'http://sherpa.ac.uk/romeo/api29.php?'+urlencode(search_terms)
+    base_url = 'http://sherpa.ac.uk/romeo/api29.php'
 
     # Perform the query
     try:
-        response = urlopen(request).read()
-    except URLError as e:
+        response = requests.get(base_url, params=search_terms).text.encode('utf-8')
+    except requests.exceptions.RequestException as e:
         raise MetadataSourceException('Error while querying RoMEO.\n'+
                 'URL was: '+request+'\n'
                 'Error is: '+str(e))
@@ -81,7 +82,7 @@ def find_journal_in_model(search_terms):
             return matches[0]
 
 
-def fetch_journal(search_terms):
+def fetch_journal(search_terms, matching_mode = 'exact'):
     """
     Fetch the journal data from RoMEO. Returns an Journal object.
     search_terms should be a dictionnary object containing at least one of these fields:
@@ -153,7 +154,7 @@ def fetch_journal(search_terms):
     result.save()
     return result
 
-def fetch_publisher(publisher_name, matching_mode='exact'):
+def fetch_publisher(publisher_name):
     print "Fetching publisher: "+publisher_name
     # First, let's see if we have a publisher with that name
     for p in Publisher.objects.filter(name=publisher_name)[:1]:

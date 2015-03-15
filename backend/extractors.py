@@ -80,6 +80,15 @@ class CairnExtractor(RegexExtractor):
             urls['pdf'] = None
         return urls
 
+class OpenAireExtractor(RegexExtractor):
+    def __init__(self, mappings):
+        super(OpenAireExtractor, self).__init__(mappings)
+
+    def _post_filter(self, record, urls):
+        if record[1]._map.get('rights') == 'info:eu-repo/semantics/openAccess':
+            urls['pdf'] = urls.get('splash')
+        return urls
+
 
 arxivExtractor = RegexExtractor([
     ('identifier',re.compile(r'(http://arxiv.org/abs/[^ ]*)$'),
@@ -130,6 +139,10 @@ numdamExtractor = RegexExtractor([
         'pdf', r'http://archive\.numdam\.org/article/\1.pdf'),
     ])
 
+openaireExtractor = OpenAireExtractor([
+    ('identifier', re.compile(r'(https?://[^ ]*)'),
+        'splash', r'\1'),
+    ])
 
 REGISTERED_EXTRACTORS = {
         'arxiv': arxivExtractor,
@@ -139,6 +152,7 @@ REGISTERED_EXTRACTORS = {
         'doaj' : doajExtractor,
         'persee' : perseeExtractor,
         'numdam' : numdamExtractor,
+        'openaire' : openaireExtractor,
         }
 
 

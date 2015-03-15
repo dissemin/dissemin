@@ -11,7 +11,11 @@
 {% endblock %}
 
 {% block bodyTitle %}
-<span id="paperTitle" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">{{ paper.title }}</span>
+<span id="paperTitle" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">
+    {% autoescape off %}
+        {{ paper.title }}
+    {% endautoescape %}
+</span>
 {% endblock %}
 
 {% block jsScript %}
