@@ -5,7 +5,7 @@ body
     text-align: center;
     margin: 0px;
     font-family:"Open Sans", "sans-serif", sans;
-    font-size:16px;
+    font-size:14.5px;
     font-weight:300;
 }
 
@@ -70,7 +70,7 @@ h4
     padding-left: 10px;
     padding-right: 10px;
     color: white;
-    font-size:1.3em;
+    font-size:1em;
 }
 
 #content, #subheader, #subfooter
@@ -161,7 +161,7 @@ h4
 
 li 
 {
-    line-height:1.8em;
+    line-height:1.5em;
 }
 
 .withTriangles
@@ -178,7 +178,7 @@ li
 
 #summaryLists ul
 {
-    padding-left: 22px;
+    padding-left: 0px;
 }
 
 .ulContainer
@@ -201,6 +201,8 @@ li
     float: left;
     vertical-align: middle;
     display: table-cell;
+    height: 70px;
+    width: 52px;
 }
 
 .filldiv
@@ -213,9 +215,10 @@ li
 
 .pubLogoPic-UNK, .pubLogoPic-OK, .pubLogoPic-NOK, .pubLogoPic-OA, .pubLogoPic-PDF, .pubLogoPic-PDF-OK, .pubLogoPic-PDF-NOK
 {
-    height: 70px;
-    width: 52px;
+    height: 100%;
+    width: 100%;
     background-repeat: no-repeat;
+    background-size: 100%;
 }
 .pubLogoPic-UNK, .pubLogoPic-PDF-NOK
 {
@@ -280,8 +283,8 @@ li
 
 .paperTitle
 {
-    font-size: 1.3em;
-	font-family:"Neuton", serif;
+    font-size: 1.2em;
+	/* font-family:"Neuton", serif; */
 }
 
 h1.paperTitle {
@@ -345,10 +348,10 @@ h1.paperTitle {
 
 .criterionItem
 {
-    margin-left: 52px;
-    margin-top: 15px;
-    margin-bottom: 5px;
-	padding-left: 6px;
+    margin-left: 45px;
+    margin-top: 8px;
+    margin-bottom: 3px;
+	padding-left: 3px;
 }
 
 .criterionCross
@@ -365,10 +368,16 @@ h1.paperTitle {
 
 .unselectedCriterion, .selectedCriterion
 {
-    height: 75px;
+    height: 55px;
     padding: 2px;
     margin: 0px;
 	clear: both;
+}
+
+.unselectedCriterion .pubLogo, .selectedCriterion .pubLogo
+{
+    height: 50px;
+    width: 37px;
 }
 
 .unselectedCriterion
