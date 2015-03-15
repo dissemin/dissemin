@@ -20,9 +20,10 @@
 
 from __future__ import unicode_literals
 
-from urllib2 import urlopen, HTTPError, URLError
-from urllib import urlencode
 import xml.etree.ElementTree as ET
+
+import requests
+import requests.exceptions
 
 from papers.models import *
 from papers.errors import MetadataSourceException
@@ -43,12 +44,12 @@ PUBLISHER_NAME_ASSOCIATION_FACTOR = 4
 def perform_romeo_query(search_terms):
     if romeo_api_key:
         search_terms['ak'] = romeo_api_key
-    request = 'http://sherpa.ac.uk/romeo/api29.php?'+urlencode(search_terms)
+    base_url = 'http://sherpa.ac.uk/romeo/api29.php'
 
     # Perform the query
     try:
-        response = urlopen(request).read()
-    except URLError as e:
+        response = requests.get(base_url, params=search_terms).text
+    except requests.exceptions.RequestException as e:
         raise MetadataSourceException('Error while querying RoMEO.\n'+
                 'URL was: '+request+'\n'
                 'Error is: '+str(e))

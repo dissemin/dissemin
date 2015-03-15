@@ -52,8 +52,7 @@ def fetch_list_of_DOIs_from_crossref(query, page, number, citationToken=None):
     query_args = {'q':unidecode(query), 'page':str(page), 'number':str(number)}
     request = 'http://search.crossref.org/dois?'+urlencode(query_args)
     try:
-        f = urlopen_retry(request, timeout=crossref_timeout, headers={'Connection':'Keep-Alive'})
-        response = f.read()
+        response = urlopen_retry(request, timeout=crossref_timeout)
         parsed = json.loads(response)
         result = []
         for dct in parsed:
@@ -72,25 +71,15 @@ def fetch_list_of_DOIs_from_crossref(query, page, number, citationToken=None):
                 request+'\nError was: '+str(e))
 
 def fetch_metadata_by_DOI(doi):
-    opener = build_opener()
-    opener.addheaders = [('Accept','application/citeproc+json')]
+    addheaders = {'Accept':'application/citeproc+json'}
     try:
         request = 'http://dx.doi.org/'+doi
         response = urlopen_retry(request,
-                opener=opener,
                 timeout=crossref_timeout,
-                headers={'Connection':'Keep-Alive'},
-                retries=0).read() 
+                headers=addheaders,
+                retries=0)
         parsed = json.loads(response)
         return parsed
-    except HTTPError as e:
-        if e.code == 404:
-            return None
-        raise MetadataSourceException('Error while fetching DOI metadata:\nUnable to open the URL: '+
-                request+'\nError was: '+str(e))
-    except URLError as e:
-        raise MetadataSourceException('Error while fetching DOI metadata:\nUnable to open the URL: '+
-                request+'\nError was: '+str(e))
     except ValueError as e:
         raise MetadataSourceException('Error while fetching DOI metadata:\nInvalid JSON response.\n'+
                 'Error: '+str(e))

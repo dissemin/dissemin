@@ -30,10 +30,7 @@ from io import StringIO
 
 from time import sleep
 import socket
-import httplib
-import urllib2
-from httplib import HTTPException
-from urllib2 import urlopen, build_opener, URLError
+import requests
 
 from papers.errors import MetadataSourceException
 
@@ -198,19 +195,21 @@ def urlopen_retry(url, **kwargs):# data, timeout, retries, delay, backoff):
     delay = kwargs.get('delay', 5)
     backoff = kwargs.get('backoff', 2)
     headers = kwargs.get('headers', {})
-    opener = kwargs.get('opener', build_opener())
     try:
-        req = urllib2.Request(url, data, headers)
-        return opener.open(req, data, timeout)
-    except socket.timeout as e:
+        r = requests.get(url,
+                params=data,
+                timeout=timeout,
+                headers=headers,
+                allow_redirects=True)
+        return r.text
+    except requests.exceptions.Timeout as e:
         if retries <= 0:
-            raise MetadataSourceException('timeout: '+str(e))
-    except URLError as e:
+            raise MetadataSourceException('Timeout: '+str(e))
+    except requests.exceptions.ConnectionError as e:
         if retries <= 0:
-            raise MetadataSourceException('URL error: '+str(e))
-    except HTTPException as e:
-        if retries <= 0:
-            raise MetadataSourceException('HTTP error: '+str(e))
+            raise MetadataSourceException('Connection error: '+str(e))
+    except requests.exceptions.RequestException as e:
+        raise MetadataSourceException('Request error: '+str(e))
 
     print "Retrying in "+str(delay)+" seconds..."
     print "URL: "+url
