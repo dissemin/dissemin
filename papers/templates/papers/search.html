@@ -14,6 +14,9 @@
 {% endblock %}
 
 {% block jsScript %}
+    function changeDisplay () {
+	   $(".ulContainer").toggleClass("mosaic-on");
+	}
 {% if request.user.is_superuser %}
     $(function(){
     {% for paper in search_results %}
@@ -39,7 +42,7 @@
 {% if researcher %}
 <span class="detailsTitle">{% trans "Researcher" %}</span>
     <div class="detailsContent">
-        <p>{{ researcher }}</p>
+        <p id="detail-name">{{ researcher }}</p>
         {% if researcher.role %}
         <p id="researcher-role"
          data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">{{ researcher.role }}</p>
@@ -61,7 +64,7 @@
 {% elif department %}
 <span class="detailsTitle">{% trans "Department" %}</span>
     <div class="detailsContent">
-        <p>{{ department }}</p>
+        <p id="detail-name">{{ department }}</p>
         <p><a href="{% url 'department' department.id %}">
             {% blocktrans trimmed with count=department.researcher_set.count %}
             {{ count }} members
@@ -71,13 +74,13 @@
 {% elif name %}
 <span class="detailsTitle">{% trans "Name" %}</span>
     <div class="detailsContent">
-        <p>{{ name }}</p>
+        <p id="detail-name">{{ name }}</p>
      </div>
 {% endif %}
 {% if journal %}
 <span class="detailsTitle">{% trans "Journal" %}</span>
     <div class="detailsContent">
-        <p>{{ journal }}</p>
+        <p id="detail-name">{{ journal }}</p>
         <p>{% trans "Published by" %} <a href="{% url 'publisher' journal.publisher.id %}">{{ journal.publisher }}</a></p>
         {% if journal.issn %}
         <p>{% trans "ISSN:" %} {{ journal.issn }}</p>
@@ -97,6 +100,11 @@
         </div>
     </div>
 {% endif %}
+
+<span class="detailsTitle">{% trans "Display" %}</span>
+<div class="detailsContent">
+  <p><a href="#" onclick="changeDisplay(); return false;">{% trans "Change display mode" %}</a></p>
+</div>
 
 <span class="detailsTitle">{% trans "Refine search" %}</span>
 <div class="detailsContent">
@@ -158,7 +166,7 @@
     <div class="ulContainer">
     <div class="listYear">{{ paper.year }}</div><ul class="withoutTriangles">
  {% endifchanged %}
-    <li>
+    <li class="pubItem">
         {% include "papers/publiListItem.html" with paper=paper %}
 </li>    
         {% if forloop.last %}</ul></div>{% endif %}
