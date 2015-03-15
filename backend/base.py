@@ -200,7 +200,6 @@ def add_base_document(doc, source):
             pdf_url=pdf_url,
             about=paper,
             description=description)
-    paper.update_availability()
 
     return True
 

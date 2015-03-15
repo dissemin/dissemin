@@ -184,7 +184,7 @@ def create_publication(paper, metadata):
 https_re = re.compile(r'https?(.*)')
 
 def find_duplicate_records(source, identifier, about, splash_url, pdf_url):
-    exact_dups = OaiRecord.objects.filter(identifier=identifier,about=about)
+    exact_dups = OaiRecord.objects.filter(identifier=identifier)
     if exact_dups:
         return exact_dups[0]
     
@@ -258,6 +258,7 @@ def create_oairecord(**kwargs):
         if about.pk != match.about.pk:
             merge_papers(about, match.about)
 
+        match.about.update_availability()
         return match
 
     # Otherwise create a new record
