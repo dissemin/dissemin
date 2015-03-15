@@ -81,7 +81,7 @@ def find_journal_in_model(search_terms):
             return matches[0]
 
 
-def fetch_journal(search_terms):
+def fetch_journal(search_terms, matching_mode = 'exact'):
     """
     Fetch the journal data from RoMEO. Returns an Journal object.
     search_terms should be a dictionnary object containing at least one of these fields:
@@ -153,7 +153,7 @@ def fetch_journal(search_terms):
     result.save()
     return result
 
-def fetch_publisher(publisher_name, matching_mode='exact'):
+def fetch_publisher(publisher_name):
     print "Fetching publisher: "+publisher_name
     # First, let's see if we have a publisher with that name
     for p in Publisher.objects.filter(name=publisher_name)[:1]:
