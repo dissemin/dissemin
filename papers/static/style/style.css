@@ -1,12 +1,11 @@
 /* fonts */
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,300italic,700italic);
-
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,300italic,700italic|Neuton);
 body
 {
     text-align: center;
     margin: 0px;
     font-family:"Open Sans", "sans-serif", sans;
-    font-size:16px;
+    font-size:14.5px;
     font-weight:300;
 }
 
@@ -71,7 +70,7 @@ h4
     padding-left: 10px;
     padding-right: 10px;
     color: white;
-    font-size:1.3em;
+    font-size:1em;
 }
 
 #content, #subheader, #subfooter
@@ -162,7 +161,7 @@ h4
 
 li 
 {
-    line-height:1.8em;
+    line-height:1.5em;
 }
 
 .withTriangles
@@ -179,7 +178,7 @@ li
 
 #summaryLists ul
 {
-    padding-left: 27px;
+    padding-left: 0px;
 }
 
 .ulContainer
@@ -202,6 +201,8 @@ li
     float: left;
     vertical-align: middle;
     display: table-cell;
+    height: 70px;
+    width: 52px;
 }
 
 .filldiv
@@ -214,37 +215,38 @@ li
 
 .pubLogoPic-UNK, .pubLogoPic-OK, .pubLogoPic-NOK, .pubLogoPic-OA, .pubLogoPic-PDF, .pubLogoPic-PDF-OK, .pubLogoPic-PDF-NOK
 {
-    height: 40px;
-    width: 31px;
+    height: 100%;
+    width: 100%;
     background-repeat: no-repeat;
+    background-size: 100%;
 }
 .pubLogoPic-UNK, .pubLogoPic-PDF-NOK
 {
-    background-image: url('../document-symbol.png');
+    background-image: url('../symbol-UNK.png');
 }
 .pubLogoPic-UNK.pubLogoPic-PDF, .pubLogoPic-PDF-OK
 {
-    background-image: url('../pdf-symbol.png');
+    background-image: url('../symbol-PDF-UNK.png');
 }
 .pubLogoPic-OK
 {
-    background-image: url('../open-symbol.png');
+    background-image: url('../symbol-OK.png');
 }
 .pubLogoPic-OK.pubLogoPic-PDF
 {
-    background-image: url('../pdf-open-symbol.png');
+    background-image: url('../symbol-PDF-OK.png');
 }
 .pubLogoPic-NOK
 {
-    background-image: url('../closed-symbol.png');
+    background-image: url('../symbol-NOK.png');
 }
 .pubLogoPic-NOK.pubLogoPic-PDF
 {
-    background-image: url('../pdf-closed-symbol.png');
+    background-image: url('../symbol-PDF-NOK.png');
 }
 .pubLogoPic-OA
 {
-    background-image: url('../oa-symbol.png');
+    background-image: url('../symbol-OA.png');
 }
 
 .pubText, .criterionItem
@@ -258,7 +260,7 @@ li
 
 .pubText
 {
-    margin-left: 43px;
+    margin-left: 60px;
     border-left: 3px solid #8ECC50;
     min-height: 55px;
 }
@@ -281,7 +283,21 @@ li
 
 .paperTitle
 {
-    font-size: 1em;
+    font-size: 1.2em;
+	/* font-family:"Neuton", serif; */
+}
+
+h1.paperTitle {
+	margin-top:0;
+	font-weight:normal;
+}
+
+.abstract {
+	width:500px;
+	font-size:0.9em;
+	font-weight:normal;
+	text-align:justify;
+	margin-left:50px;
 }
 
 .paperDeleteButton, .researcherDeleteButton
@@ -332,9 +348,10 @@ li
 
 .criterionItem
 {
-    margin-left: 33px;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin-left: 45px;
+    margin-top: 8px;
+    margin-bottom: 3px;
+	padding-left: 3px;
 }
 
 .criterionCross
@@ -345,19 +362,33 @@ li
     margin: auto;
 }
 
-.unselectedCriterion
+.criterion {
+	clear:both;
+}
+
+.unselectedCriterion, .selectedCriterion
 {
-    height: 48px;
+    height: 55px;
     padding: 2px;
     margin: 0px;
+	clear: both;
+}
+
+.unselectedCriterion .pubLogo, .selectedCriterion .pubLogo
+{
+    height: 50px;
+    width: 37px;
+}
+
+.unselectedCriterion
+{
 }
 
 .selectedCriterion
 {
-    border: 2px solid green;
-    height: 48px;
-    padding: 2px;
-    margin: 0px;
+    border: 2px solid #8ecc50;
+	margin-top: -2px;
+	margin-bottom:-2px;
 }
 
 

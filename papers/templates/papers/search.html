@@ -65,7 +65,7 @@
     <div class="detailsContent">
         <p>{{ department }}</p>
         <p><a href="{% url 'department' department.id %}">
-            {% blocktrans with count=department.researcher_set.count %}
+            {% blocktrans trimmed with count=department.researcher_set.count %}
             {{ count }} members
             {% endblocktrans %}
         </a></p>
@@ -102,13 +102,13 @@
 
 <span class="detailsTitle">{% trans "Refine search" %}</span>
 <div class="detailsContent">
-    <p>{% blocktrans %}
+    <p>{% blocktrans trimmed %}
     {{ nb_results }} papers found
     {% endblocktrans %}
     </p>
 
 {% if not journal and not publisher %}
-<span class="criterion">{% trans "By publisher policy:" %}</span>
+<p class="criterion">{% trans "By publisher policy:" %}</p>
 {% for st in oa_status_choices %}
 <div class="{% if st.0 == status %}selectedCriterion{% else %}unselectedCriterion{% endif %}">
     <div class="pubLogo"><div class="pubLogoPic-{{ st.0 }}"><a href="{% url 'search' %}?{{ st.2.urlencode }}" class="filldiv"></a></div></div>
@@ -121,10 +121,10 @@
 {% endfor %}
 {% endif %}
 
-<span class="criterion">{% trans "By full text availability:" %}</span>
+<p class="criterion">{% trans "By full text availability:" %}</p>
 {% for st in pdf_status_choices %}
 <div class="{% if st.0 == pdf %}selectedCriterion{% else %}unselectedCriterion{% endif %}">
-     <div class="pubLogo"><div class="pubLogoPic-PDF-{{ st.0 }}"><a href="{% url 'search' %}?{{ st.2.urlencode }}" class="filldiv"></a></div></div>
+    <div class="pubLogo"><div class="pubLogoPic-PDF-{{ st.0 }}"><a href="{% url 'search' %}?{{ st.2.urlencode }}" class="filldiv"></a></div></div>
     <div class="criterionItem"><a href="{% url 'search' %}?{{ st.2.urlencode }}">{{ st.1 }}</a>
         {% if st.0 == pdf %}
         <div class="criterionCross"><a href="{% url 'search' %}?{{ st.2.urlencode }}">x</a></div>
@@ -134,10 +134,10 @@
 {% endfor %}
 
 {% if request.user.is_superuser %}
-<span class="criterion">{% trans "By visibility:" %}</span>
+<p class="criterion">{% trans "By visibility:" %}</p>
 {% for st in visibility_choices %}
    <div class="{% if st.0 == visibility %}selectedCriterion{% else %}unselectedCriterion{% endif %}">
-     <div class="pubLogo"><div class="pubLogoPic-PDF-{{ st.0 }}"><a href="{% url 'search' %}?{{ st.2.urlencode }}" class="filldiv"></a></div></div>
+    <div class="pubLogo"><div class="pubLogoPic-PDF-{{ st.0 }}"><a href="{% url 'search' %}?{{ st.2.urlencode }}" class="filldiv"></a></div></div>
     <div class="criterionItem"><a href="{% url 'search' %}?{{ st.2.urlencode }}">{{ st.1 }}</a>
         {% if st.0 == visibility %}
         <div class="criterionCross"><a href="{% url 'search' %}?{{ st.2.urlencode }}">x</a></div>

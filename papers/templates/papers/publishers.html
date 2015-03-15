@@ -20,8 +20,9 @@
 
 <span class="detailsTitle">{% trans "Refine search" %}</span>
 <div class="detailsContent">
-    <p>{% blocktrans %}
-    {{ nb_results }} publishers found
+    <p>
+    {% blocktrans trimmed %}
+        {{ nb_results }} publishers found
     {% endblocktrans %}
     </p>
 
@@ -59,7 +60,7 @@
                    <a href="{% url 'publisher' publisher.pk %}">{{ publisher }}</a>
                        {% if publisher.stats %}
                            <span class="numPapers">
-                               {% blocktrans count num_total=publisher.stats.num_tot %}
+                               {% blocktrans trimmed count num_total=publisher.stats.num_tot %}
                                ({{ num_total }} paper)
                                {% plural %}
                                ({{ num_total }} papers)

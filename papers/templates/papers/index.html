@@ -11,7 +11,7 @@ ENS
     <h2>{% trans "Welcome to dissem.in" %}</h2>
     <p>
     {% url 'faq' as faq_url %}
-    {% blocktrans %}
+    {% blocktrans trimmed %}
     Dissem.in helps researchers at <a href="http://www.ens.fr/">ENS</a> to upload their papers to institutional or subject repositories,
     fostering <a href="http://en.wikipedia.org/wiki/Self-archiving">Green Open Access</a>.
     See the <a href="{{ faq_url }}">FAQ</a> for more information about dissem.in.
@@ -19,14 +19,14 @@ ENS
     </p>
 
     <p>
-    {% blocktrans %}
+    {% blocktrans trimmed %}
     This is a preproduction version of the platform.
     {% endblocktrans %}
     </p>
 
     <h2>{% trans "Statistics" %}</h2>
     <p>
-    {% blocktrans with depts=departments.count %}
+    {% blocktrans trimmed with depts=departments.count %}
     We gather the publications of {{ nb_researchers }} researchers, from {{ depts }} departments.
     {% endblocktrans %}
     </p>
@@ -34,19 +34,23 @@ ENS
     <h2>{% trans "Browse papers" %}</h2>
 
     {% url 'search' as search_url %}
-    <p>{% blocktrans %}
+    <p>{% blocktrans trimmed %}
     See <a href="{{ search_url }}">all papers</a> or browse by department:
     {% endblocktrans %}
     </p>
-<ul>
-    {% for dept in departments %}
-    <li><a href="{% url 'department' dept.id %}">{{ dept }}</a>
-    {% include "papers/accessStatistics.html" with stats=dept.stats %}
-    </li>
-    {% endfor %}
-</ul>
+    <ul>
+        {% for dept in departments %}
+        <li><a href="{% url 'department' dept.id %}">{{ dept }}</a>
+        {% include "papers/accessStatistics.html" with stats=dept.stats %}
+        </li>
+        {% endfor %}
+    </ul>
 
-{% url 'publishers' as publishers_url %}
-<p>{% blocktrans %}See also the <a href="{{ publishers_url }}">publishers list</a>.{% endblocktrans %}</p>
+    {% url 'publishers' as publishers_url %}
+    <p>
+        {% blocktrans trimmed %}
+        See also the <a href="{{ publishers_url }}">publishers list</a>.
+        {% endblocktrans %}
+    </p>
 </div>
 {% endblock %}

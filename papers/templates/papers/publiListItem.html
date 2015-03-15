@@ -1,48 +1,63 @@
 {% load author %}
 {% load i18n %}
 <div class="pubLogo">
-    <div class="pubLogoPic-{{ paper.oa_status }} {% if paper.pdf_url %}pubLogoPic-PDF{% endif %}">
-        {% if paper.pdf_url %}<a href="{{ paper.pdf_url }}" class="filldiv"></a>{% endif %}
+    {% if paper.pdf_url %}<a href="{{ paper.pdf_url }}"><img src="/static/symbol-PDF-{{ paper.oa_status }}.png" width="52" height="70" /></a>
+    {% else %}<img src="/static/symbol-{{ paper.oa_status }}.png" width="52" height="70" />{% endif %}
+</div>
+
+<div class="pubText">
+    <span class="paperAuthors">
+        {% for a2 in paper.displayed_authors %}{% if not forloop.first %},{% endif %}
+        {% if a2.researcher and a2.researcher.id = researcher_id %}
+        <strong>{{ a2 }}</strong>{% else %}
+        {{ a2|authorlink }}{% endif %}{% endfor %}
+        {% if paper.has_many_authors %}
+            {% blocktrans trimmed with remaining_authors=paper.nb_remaining_authors %}
+            and {{ remaining_authors }} other authors
+            {% endblocktrans %}
+        {% endif %}
+    </span>
+    <br />
+    <span class="paperTitle">
+        <span>
+            <a href="{% url 'paper' paper.id %}" id="paper-title-{{ paper.id }}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">{% autoescape off %}{{ paper.title }}{% endautoescape %}</a>
+        </span>
+    </span>
+    <br />
+    
+    <span class="pubRef">
+        {% if paper.pdf_url %}
+            <a href="{{ paper.pdf_url }}"><img src="/static/extpdf.png" alt="PDF" /></a> |
+        {% endif %}
+
+        {% for publi in paper.publication_set.all %}
+            {{ publi | publication }}{% if forloop.last %}.{% else %},{% endif %}<br />
+        {% empty %}
+            {% for record in paper.prioritary_oai_records %}
+                {% if record.splash_url %}<a href="{{ record.splash_url }}">{% endif %}{{ record.source.name }}{% if record.pdf_url == None %}{% trans " (metadata only)" %}{% endif %}{% if record.splash_url %} <img src="/static/extlink.png"/></a>{% endif %}{% if forloop.last %}.{% else %},{% endif %}
+            {% endfor %}
+            <br />
+         {% endfor %}
+    </span>
+    
+    {% if request.user.is_authenticated %}
+    <form>
+        <div class="btn-group-sm" data-toggle="buttons">
+        {% with vis=paper.annotation_code %}
+        <label class="btn button-paper-right annotate-paper {% if vis == 0 %}active{% endif %}">
+            <input type="radio" name="annotate-paper-{{ paper.pk }}" class="annotate-paper-radio" value="0"
+             {% if vis == 0 %}checked="checked"{% endif %}/>
+            {% trans "Right" %}
+        </label>
+        <label class="btn button-paper-wrong annotate-paper {% if vis == 2 %}active{%endif%}">
+            <input type="radio" name="annotate-paper-{{ paper.pk }}" class="annotate-paper-radio" value="2"
+            {% if vis == 2 %}checked="checked"{% endif %}/>
+            {% trans "Wrong" %}
+        </label>
+        {% endwith %}
+        <span></span>
     </div>
-</div>
-
-<div class="pubText"><span class="paperAuthors">
-{% for a2 in paper.sorted_authors %}{% if not forloop.first %},{% endif %}
-{% if a2.researcher and a2.researcher.id = researcher_id %}
-<strong>{{ a2 }}</strong>{% else %}
-{{ a2|authorlink }}{% endif %}{% endfor %}</span><br />
-<span class="paperTitle">
-
-    <span><a href="{% url 'paper' paper.id %}" id="paper-title-{{ paper.id }}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">{% autoescape off %}{{ paper.title }}{% endautoescape %}</a>&nbsp;</span>
-</span><br />
-<span class="pubRef">
-{% for publi in paper.publication_set.all %}
-{{ publi | publication }}{% if forloop.last %}.{% else %},{% endif %}<br />
-{% empty %}
-{% for record in paper.prioritary_oai_records %}
-{% if record.splash_url %}<a href="{{ record.splash_url }}">{% endif %}{{ record.source.name }}{% if record.pdf_url == None %}{% trans " (metadata only)" %}{% endif %}{% if record.splash_url %}</a>{% endif %}{% if forloop.last %}.{% else %},{% endif %}{% endfor %}
-<br />
-{% endfor %}
-</span>
-{% if request.user.is_authenticated %}
-<form>
-    <div class="btn-group-sm" data-toggle="buttons">
-    {% with vis=paper.annotation_code %}
-    <label class="btn button-paper-right annotate-paper {% if vis == 0 %}active{% endif %}">
-        <input type="radio" name="annotate-paper-{{ paper.pk }}" class="annotate-paper-radio" value="0"
-         {% if vis == 0 %}checked="checked"{% endif %}/>
-        {% trans "Right" %}
-    </label>
-    <label class="btn button-paper-wrong annotate-paper {% if vis == 2 %}active{%endif%}">
-        <input type="radio" name="annotate-paper-{{ paper.pk }}" class="annotate-paper-radio" value="2"
-        {% if vis == 2 %}checked="checked"{% endif %}/>
-        {% trans "Wrong" %}
-    </label>
-    {% endwith %}
-    <span></span>
-</div>
-</form>
-{% endif %}
-
+    </form>
+    {% endif %}
 
 </div>

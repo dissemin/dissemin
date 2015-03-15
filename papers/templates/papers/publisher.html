@@ -72,7 +72,7 @@
 
 {% block lists %}
 {% url 'search' as search_url %}
-<p>{% blocktrans with name=publisher.name count=publisher.publi_count id=publisher.pk %}
+<p>{% blocktrans trimmed with name=publisher.name count=publisher.publi_count id=publisher.pk %}
 {{ name }} has published <a href="{{ search_url }}?publisher={{ id }}">{{ count }} productions</a> authored by researchers from ENS.
    {% endblocktrans %}
 </p>
@@ -133,7 +133,7 @@
     {% for journal in journals %}
         <li><a href="{% url 'journal' journal.id %}">{{ journal }}</a>
            <span class="numPapers">
-               {% blocktrans count num_total=journal.stats.num_tot %}
+               {% blocktrans trimmed count num_total=journal.stats.num_tot %}
                ({{ num_total }} paper)
                {% plural %}
                ({{ num_total }} papers)

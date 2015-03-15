@@ -38,6 +38,7 @@ makeTextEditable($('#paperTitle'), '/ajax/change-paper', '{{ paper.id }}', 'titl
 </p>
 {% endfor %}
 
+<<<<<<< HEAD
     <p><strong>{% trans "Full text:" %}</strong>
     {% if paper.pdf_url %}<a href="{{ paper.pdf_url }}">{% trans "Available" %}</a>
     {% else %}{% trans "Unavailable" %}{% endif %}.</p>
@@ -50,6 +51,25 @@ makeTextEditable($('#paperTitle'), '/ajax/change-paper', '{{ paper.id }}', 'titl
             (<a href="{% url 'publisher' psh.pk %}">{% trans "details" %}</a>)</p>
         {% endwith %}
     {% endfor %}
+=======
+<p><strong>{% trans "Full text:" %}</strong>
+    {% if paper.pdf_url %}<a href="{{ paper.pdf_url }}">{% trans "Available" %} <img src="/static/extpdf.png"/></a>
+    {% else %}{% trans "Unavailable" %}{% endif %}</p>
+
+{% if paper.publication_set.first.journal %}
+<p><strong>{% trans "Publisher policy:" %}</strong> {{ paper.oa_status | explain_oa_status }}
+(<a href="{% url 'publisher' paper.publication_set.first.journal.publisher.pk %}">{% trans "details" %}</a>)</p>
+{% endif %}
+
+{% for record in paper.oairecord_set.all %}
+{% if forloop.first %}
+    {% if record.description %}
+        <p><strong>{% trans "Abstract." %}</strong></p>
+		<div class="abstract">{{ record.description }}</div>
+    {% endif %}
+{% endif %}
+{% endfor %}
+>>>>>>> webdiz
 {% endblock %}
 
 {% block details %}
@@ -68,18 +88,17 @@ makeTextEditable($('#paperTitle'), '/ajax/change-paper', '{{ paper.id }}', 'titl
     {% endif %}
     {% if record.splash_url %}
         <a href="{{ record.splash_url }}">
-     {% endif %}
-     {% trans "[Web page]" %}
-     {% if record.splash_url %}</a>{% endif %}
+     [{% trans "Web page" %} <img src="/static/extlink.png" />]
+     </a>{% if record.pdf_url %} | {% endif %}{% endif %}
      {% if record.pdf_url %}
-         <a href="{{ record.pdf_url }}">{% trans "[PDF]" %}</a>
+         <a href="{{ record.pdf_url }}"><img src="/static/extpdf.png" alt="PDF" /></a>
      {% endif %}
 </p>
 {% endfor %}
 
 {% trans "Publisher" as publisher %}
 {% for publi in paper.publication_set.all %}
-<p><a href="{{ publi | doi_to_url }}">{{ publi.publisher|default:publisher }}</a> {% trans "via DOI" %}</p>
+<p><a href="{{ publi | doi_to_url }}">{{ publi.publisher|default:publisher }} <img src="/static/extlink.png" /></a> {% trans "via DOI" %}</p>
 {% endfor %}
 </div>
 
