@@ -38,10 +38,9 @@ makeTextEditable($('#paperTitle'), '/ajax/change-paper', '{{ paper.id }}', 'titl
 </p>
 {% endfor %}
 
-<<<<<<< HEAD
-    <p><strong>{% trans "Full text:" %}</strong>
-    {% if paper.pdf_url %}<a href="{{ paper.pdf_url }}">{% trans "Available" %}</a>
-    {% else %}{% trans "Unavailable" %}{% endif %}.</p>
+<p><strong>{% trans "Full text:" %}</strong>
+    {% if paper.pdf_url %}<a href="{{ paper.pdf_url }}">{% trans "Available" %} <img src="/static/extpdf.png"/></a>
+    {% else %}{% trans "Unavailable" %}{% endif %}</p>
 
     {% for publi in paper.publications_with_unique_publisher %}
         {% with publi.publisher as psh %}
@@ -51,15 +50,6 @@ makeTextEditable($('#paperTitle'), '/ajax/change-paper', '{{ paper.id }}', 'titl
             (<a href="{% url 'publisher' psh.pk %}">{% trans "details" %}</a>)</p>
         {% endwith %}
     {% endfor %}
-=======
-<p><strong>{% trans "Full text:" %}</strong>
-    {% if paper.pdf_url %}<a href="{{ paper.pdf_url }}">{% trans "Available" %} <img src="/static/extpdf.png"/></a>
-    {% else %}{% trans "Unavailable" %}{% endif %}</p>
-
-{% if paper.publication_set.first.journal %}
-<p><strong>{% trans "Publisher policy:" %}</strong> {{ paper.oa_status | explain_oa_status }}
-(<a href="{% url 'publisher' paper.publication_set.first.journal.publisher.pk %}">{% trans "details" %}</a>)</p>
-{% endif %}
 
 {% for record in paper.oairecord_set.all %}
 {% if forloop.first %}
@@ -69,7 +59,6 @@ makeTextEditable($('#paperTitle'), '/ajax/change-paper', '{{ paper.id }}', 'titl
     {% endif %}
 {% endif %}
 {% endfor %}
->>>>>>> webdiz
 {% endblock %}
 
 {% block details %}
