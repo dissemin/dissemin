@@ -21,6 +21,7 @@
 from __future__ import unicode_literals
 
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Q
 import re
 
 from papers.utils import create_paper_fingerprint, date_from_dateparts, sanitize_html
@@ -30,7 +31,7 @@ from papers.doi import to_doi
 from papers.name import to_plain_name, parse_comma_name
 
 from backend.crossref import fetch_metadata_by_DOI
-from backend.romeo import fetch_journal
+from backend.romeo import fetch_journal, fetch_publisher
 from backend.globals import *
 
 # TODO: this could be a method of ClusteringContextFactory ?
@@ -70,6 +71,7 @@ def get_or_create_paper(title, author_names, pubdate, doi=None, visibility='VISI
     else:
         p = Paper(title=title,
                 pubdate=pubdate,
+                year=pubdate.year,
                 fingerprint=fp,
                 visibility=visibility)
         p.save()
@@ -147,23 +149,29 @@ def create_publication(paper, metadata):
         dateparts = date_dict.get('date-parts')[0]
         pubdate = date_from_dateparts(dateparts)
     # for instance it outputs dates like 2014-2-3
-    publisher = metadata.get('publisher', None)
-    if publisher:
-        publisher = publisher[:512]
-    pubtype = 'article'
+    publisher_name = metadata.get('publisher', None)
+    if publisher_name:
+        publisher_name = publisher_name[:512]
+
+    pubtype = metadata.get('type','unknown')
 
     # Lookup journal
     search_terms = {'jtitle':title}
     if issn:
         search_terms['issn'] = issn
     journal = fetch_journal(search_terms)
-    # TODO use the "publisher" info ?
 
+    publisher = None
+    if journal:
+        publisher = journal.publisher
+        AliasPublisher.increment(publisher_name, journal.publisher)
+    else:
+        publisher = fetch_publisher(publisher_name)
 
     pub = Publication(title=title, issue=issue, volume=volume,
             pubdate=pubdate, paper=paper, pages=pages,
-            doi=doi, pubtype=pubtype, publisher=publisher,
-            journal=journal)
+            doi=doi, pubtype=pubtype, publisher_name=publisher_name,
+            journal=journal, publisher=publisher)
     pub.save()
     cur_pubdate = paper.pubdate
     if type(cur_pubdate) != type(pubdate):
@@ -172,5 +180,101 @@ def create_publication(paper, metadata):
         paper.pubdate = pubdate
     paper.update_availability()
     return pub
+
+https_re = re.compile(r'https?(.*)')
+
+def find_duplicate_records(source, identifier, about, splash_url, pdf_url):
+    exact_dups = OaiRecord.objects.filter(identifier=identifier)
+    if exact_dups:
+        return exact_dups[0]
+    
+    def shorten(url):
+        if not url:
+            return
+        match = https_re.match(url.strip())
+        if not match:
+            print "Warning, invalid URL: "+url
+        return match.group(1)
+
+    short_splash = shorten(splash_url)
+    short_pdf = shorten(pdf_url)
+
+    if pdf_url == None:
+        matches = OaiRecord.objects.filter(about=about,
+                splash_url__endswith=short_splash)
+        if matches:
+            return matches[0]
+    else:
+        matches = OaiRecord.objects.filter(
+                Q(splash_url__endswith=short_splash) |
+                Q(pdf_url__endswith=short_pdf) |
+                Q(pdf_url__isnull=True), about=about)[:1]
+        for m in matches:
+            return m
+
+def create_oairecord(**kwargs):
+    if 'source' not in kwargs:
+        raise ValueError('No source provided to create the OAI record.')
+    source = kwargs['source']
+    if 'identifier' not in kwargs:
+        raise ValueError('No identifier provided to create the OAI record.')
+    identifier = kwargs['identifier']
+    if 'about' not in kwargs:
+        raise ValueError('No paper provided to create the OAI record.')
+    about = kwargs['about']
+    if 'splash_url' not in kwargs:
+        raise ValueError('No URL provided to create the OAI record.')
+    splash_url = kwargs['splash_url']
+
+    # Search for duplicate records
+    pdf_url = kwargs.get('pdf_url')
+    match = find_duplicate_records(source, identifier, about, splash_url, pdf_url)
+
+    # Update the duplicate if necessary
+    if match:
+        changed = False
+
+        if pdf_url != None and (match.pdf_url == None or
+                (match.pdf_url != pdf_url and match.priority < source.priority)):
+            match.source = source
+            match.priority = source.priority
+            match.pdf_url = pdf_url
+            changed = True
+
+        def update_field_conditionally(field):
+            new_val = kwargs.get(field, '')
+            if new_val and (not match.__dict__[field] or
+                    len(match.__dict__[field]) < len(new_val)):
+                match.__dict__[field] = new_val
+                changed = True
+        
+        update_field_conditionally('contributors')
+        update_field_conditionally('keywords')
+        update_field_conditionally('description')
+
+        if changed:
+            match.save()
+
+        if about.pk != match.about.pk:
+            merge_papers(about, match.about)
+
+        match.about.update_availability()
+        return match
+
+    # Otherwise create a new record
+    record = OaiRecord(
+            source=source,
+            identifier=identifier,
+            splash_url=splash_url,
+            pdf_url=pdf_url,
+            about=about,
+            description=kwargs.get('description'),
+            keywords=kwargs.get('keywords'),
+            contributors=kwargs.get('contributors'),
+            priority=source.priority)
+    record.save()
+
+    about.update_availability()
+    return record
 
 

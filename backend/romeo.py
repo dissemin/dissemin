@@ -23,54 +23,24 @@ from __future__ import unicode_literals
 from urllib2 import urlopen, HTTPError, URLError
 from urllib import urlencode
 import xml.etree.ElementTree as ET
-import unicodedata
 
 from papers.models import *
 from papers.errors import MetadataSourceException
-from papers.utils import nstrip
+from papers.utils import nstrip, remove_diacritics
 
 romeo_api_key = open('romeo_api_key').read().strip()
 
-def find_journal_in_model(search_terms):
-    issn = search_terms.get('issn', None)
-    title = search_terms.get('jtitle', None)
-    # Look up the journal in the model
-    # By ISSN
-    if issn:
-        matches = Journal.objects.filter(issn=issn)
-        if matches:
-            return matches[0]
+# Minimum number of times we have seen a publisher name
+# associated to a publisher to assign this publisher
+# to publications where the journal was not found.
+# (when this name has only been associated to one publisher)
+PUBLISHER_NAME_ASSOCIATION_THRESHOLD = 10
 
-    # By title
-    if title:
-        matches = Journal.objects.filter(title__iexact=title)
-        if matches:
-            return matches[0]
+# Minimum ratio between the most commonly matched journal
+# and the second one
+PUBLISHER_NAME_ASSOCIATION_FACTOR = 4
 
-
-def fetch_journal(search_terms, matching_mode='exact'):
-    """
-    Fetch the journal data from RoMEO. Returns an Journal object.
-    search_terms should be a dictionnary object containing at least one of these fields:
-    """
-    allowed_fields = ['issn', 'jtitle']
-    original_search_terms = search_terms.copy()
-
-    # Check the arguments
-    if not all(map(lambda x: x in allowed_fields, (key for key in search_terms))):
-        raise ValueError('The search terms have to belong to '+str(allowed_fields)+
-                'but the dictionary I got is '+str(search_terms))
-
-    # Remove diacritics (because it has to be sent in ASCII to ROMEO)
-    for key in search_terms:
-        search_terms[key] = unicodedata.normalize('NFKD',search_terms[key]).encode('ASCII', 'ignore')
-
-    # First check we don't have it already
-    journal = find_journal_in_model(search_terms)
-    if journal:
-        return journal
-
-    # Prepare the query
+def perform_romeo_query(search_terms):
     if romeo_api_key:
         search_terms['ak'] = romeo_api_key
     request = 'http://sherpa.ac.uk/romeo/api29.php?'+urlencode(search_terms)
@@ -90,6 +60,51 @@ def fetch_journal(search_terms, matching_mode='exact'):
         raise MetadataSourceException('RoMEO returned an invalid XML response.\n'+
                 'URL was: '+request+'\n'
                 'Error is: '+str(e))
+
+    return root
+
+
+def find_journal_in_model(search_terms):
+    issn = search_terms.get('issn', None)
+    title = search_terms.get('jtitle', None)
+    # Look up the journal in the model
+    # By ISSN
+    if issn:
+        matches = Journal.objects.filter(issn=issn)
+        if matches:
+            return matches[0]
+
+    # By title
+    if title:
+        matches = Journal.objects.filter(title__iexact=title)
+        if matches:
+            return matches[0]
+
+
+def fetch_journal(search_terms):
+    """
+    Fetch the journal data from RoMEO. Returns an Journal object.
+    search_terms should be a dictionnary object containing at least one of these fields:
+    """
+    allowed_fields = ['issn', 'jtitle']
+    original_search_terms = search_terms.copy()
+
+    # Check the arguments
+    if not all(map(lambda x: x in allowed_fields, (key for key in search_terms))):
+        raise ValueError('The search terms have to belong to '+str(allowed_fields)+
+                'but the dictionary I got is '+str(search_terms))
+
+    # Remove diacritics (because it has to be sent in ASCII to ROMEO)
+    for key in search_terms:
+        search_terms[key] = remove_diacritics(search_terms[key])
+
+    # First check we don't have it already
+    journal = find_journal_in_model(search_terms)
+    if journal:
+        return journal
+
+    # Perform the query
+    root = perform_romeo_query(search_terms)
 
     # Find the matching journals (if any)
     journals = list(root.findall('./journals/journal'))
@@ -137,6 +152,60 @@ def fetch_journal(search_terms, matching_mode='exact'):
     result = Journal(title=name,issn=issn,publisher=publisher)
     result.save()
     return result
+
+def fetch_publisher(publisher_name, matching_mode='exact'):
+    print "Fetching publisher: "+publisher_name
+    # First, let's see if we have a publisher with that name
+    for p in Publisher.objects.filter(name=publisher_name)[:1]:
+        print "Exact match"
+        return p
+
+    # Second, let's see if the publisher name has often been associated to a known publisher
+    aliases = list(AliasPublisher.objects.filter(name=publisher_name).order_by('-count')[:2])
+    if len(aliases) == 1:
+        if aliases[0].count > PUBLISHER_NAME_ASSOCIATION_THRESHOLD:
+            print "Found alias: "+str(aliases[0])
+            AliasPublisher.increment(publisher_name, aliases[0].publisher)
+            return aliases[0].publisher
+    elif len(aliases) == 2:
+        if aliases[0].count > PUBLISHER_NAME_ASSOCIATION_FACTOR*aliases[1].count:
+            print "Found alias: "+str(aliases[0])
+            print "Second result: "+str(aliases[1])
+            AliasPublisher.increment(publisher_name, aliases[0].publisher)
+            return aliases[0].publisher
+        else:
+            print "Not clear enough:"
+            print aliases[0]
+            print aliases[1]
+       
+
+    # Otherwise, let's try to fetch the publisher from RoMEO!
+
+    # Prepare the query
+    search_terms = dict()
+    search_terms['pub'] = remove_diacritics(publisher_name)
+    search_terms['qtype'] = 'all'
+
+    root = perform_romeo_query(search_terms)
+
+    # Find the publisher
+    publishers = root.findall('./publishers/publisher')
+    if len(publishers) == 0:
+        print "No results"
+        return
+    elif len(publishers) > 1:
+        print str(len(publishers)) + " results"
+        search_terms['qtype'] = 'exact'
+        root = perform_romeo_query(search_terms)
+        publishers = root.findall('./publishers/publisher')
+        if len(publishers) != 1:
+            print str(len(publishers)) + " results after exact"
+            return
+
+    print "Successfully fetched from RoMEO"
+    publisher =  get_or_create_publisher(publishers[0])
+    AliasPublisher.increment(publisher_name, publisher)
+    return publisher
 
 def get_or_create_publisher(romeo_xml_description):
     """

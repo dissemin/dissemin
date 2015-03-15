@@ -27,9 +27,12 @@ from oaipmh.error import DatestampError, NoRecordsMatchError
 
 from papers.name import parse_comma_name, normalize_name_words
 from papers.models import OaiRecord, OaiSource, Name
+from papers.doi import to_doi
 
 from backend.oai import *
 from backend.extractors import *
+from backend.proxy import PROXY_SOURCE_PREFIX
+from backend.create import *
 
 import re
 
@@ -83,7 +86,7 @@ def process_records(listRecords):
             print "No publication date, skipping"
             continue
 
-        logger.info('Saving record %s' % record[0].identifier())
+        print 'Saving record %s' % record[0].identifier()
         paper = get_or_create_paper(metadata['title'][0], authors, pubdate, doi)
 
         # Save the record
@@ -118,23 +121,7 @@ def add_oai_record(record, source, paper=None):
     keywords = ' '.join(record[1]._map['subject'])
     contributors = ' '.join(record[1]._map['contributor'])[:4096]
 
-    matching = OaiRecord.objects.filter(identifier=identifier)
-    if len(matching) > 0:
-        r = matching[0]
-        r.description = curdesc
-        r.keywords = keywords
-        r.contributors = contributors
-        if pdf_url:
-            r.pdf_url = pdf_url
-        if splash_url:
-            r.splash_url = splash_url
-        r.save()
-        if paper and paper.pk != r.about.pk:
-            merge_papers(paper, r.about)
-        return
-
-
-    r = OaiRecord(
+    create_oairecord(
             source=source,
             identifier=identifier,
             about=paper,
@@ -143,10 +130,7 @@ def add_oai_record(record, source, paper=None):
             contributors=contributors,
             pdf_url=pdf_url,
             splash_url=splash_url)
-    r.save()
 
-    if paper:
-        paper.update_availability()
 
 def get_oai_authors(metadata):
     """ Get the authors names out of a search result """

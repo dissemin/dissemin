@@ -22,6 +22,7 @@
 from __future__ import print_function
 from random import randint, sample
 
+import datetime
 from papers.models import *
 
 out_sim = open('learning/dataset/similarity_training_ids', 'w')
@@ -49,7 +50,7 @@ def sample2(lst, nb_samples):
 department_id = 21 # informatique
 
 for researcher in Researcher.objects.filter(department_id=department_id):
-    authors = Author.objects.filter(name=researcher.name_id,paper__year__gt=2012)
+    authors = Author.objects.filter(name=researcher.name_id,paper__pubdate__gt=datetime.date(2012,01,01))
     authors_valid = list(authors.filter(paper__visibility='VISIBLE'))
     authors_invalid = list(authors.filter(paper__visibility='DELETED'))
     nb_valid = len(authors_valid)

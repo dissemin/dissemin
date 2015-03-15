@@ -3,6 +3,7 @@ from __future__ import unicode_literals, print_function
 
 from django.db.models import Q
 import random
+from collections import defaultdict
 # For graph output
 from unidecode import unidecode
 
@@ -24,7 +25,7 @@ class ClusteringContext(object):
         # The pk of the parent (if any)
         self.parent = dict()
         # The pks of the children (in the union find)
-        self.children = dict()
+        self.children = defaultdict(list)
         # The number of indirect children
         self.cluster_size = dict()
         # The sum of the relevance scores of the indirect children
@@ -51,7 +52,8 @@ class ClusteringContext(object):
         author_queryset = self.getAuthorQuerySet()
 
         for author in author_queryset:
-            self.addAuthor(author)
+            self.addAuthor(author, False)
+        self.updateChildren()
 
     def getAuthorQuerySet(self):
         """
@@ -59,11 +61,14 @@ class ClusteringContext(object):
         Useful to populate the clustering context.
         """
         return Author.objects.filter(name__variant_of=self.researcher).filter(
-                Q(paper__visibility='VISIBLE') | Q(paper__visibility='DELETED')).order_by('id')
+                Q(paper__visibility='VISIBLE') | Q(paper__visibility='DELETED')).order_by(
+                    'id').select_related('paper')
 
-    def addAuthor(self, author):
+    def addAuthor(self, author, add_children=True):
         """
         Add an author to the clustering context, setting up everything for the clustering.
+        Set add_children to False if you want to update self.children manually
+        (saves a request)
         """
         pk = author.pk
         self.authors[pk] = author
@@ -71,12 +76,33 @@ class ClusteringContext(object):
             self.parent[pk] = None
         else:
             self.parent[pk] = author.cluster_id
-        self.children[pk] = filter(lambda x: x != pk, [child.pk for child in author.clusterrel.all()])
+        # TODO check that these children are known in the cache ?
+        if add_children:
+            self.children[pk] = filter(lambda x: x != pk, [child.pk for child in author.clusterrel.all()])
         if author.cluster_id == None or author.cluster_id == pk:
             self.cluster_ids.add(pk)
-        self.author_data[pk] = self.sc.getDataById(pk)
+
         self.num_relevant[pk] = author.cluster_relevance
         self.cluster_size[pk] = author.num_children
+
+    def updateChildren(self):
+        """
+        Updates the children relation from the cache only, not performing any
+        additional request
+        """
+        self.children = defaultdict(list)
+        for pk in self.parent:
+            parent_pk = self.parent[pk]
+            if parent_pk != pk:
+                self.children[parent_pk].append(pk)
+
+    def getAuthorData(self, pk):
+        """
+        Computes and returns the data needed for similarity classification (if not already cached)
+        """
+        if pk not in self.author_data:
+            self.author_data[pk] = self.sc.getDataById(pk)
+        return self.author_data[pk]
 
     def checkGraph(self):
         """
@@ -107,8 +133,6 @@ class ClusteringContext(object):
                 val.researcher_id = self.researcher.id
             else:
                 val.researcher_id = None
-            # Num_relevant is not stored as it is department-centric
-            # whereas the clusters themselves are "universal"
             val.save()
 
     def classify(self, pkA, pkB):
@@ -117,7 +141,7 @@ class ClusteringContext(object):
         """
         # No need to cache as the algorithm already performs every test
         # at most once
-        return self.sc.classifyData(self.author_data[pkA], self.author_data[pkB])
+        return self.sc.classifyData(self.getAuthorData(pkA), self.getAuthorData(pkB))
 
     def sample_with_multiplicity(self, nb_samples, root_idx):
         """
