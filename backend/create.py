@@ -124,6 +124,10 @@ def merge_papers(first, second):
     first.update_availability()
 
 
+CROSSREF_PUBTYPE_ALIASES = {
+        'article':'journal-article',
+        }
+
 # Create a Publication entry based on the DOI metadata
 def create_publication(paper, metadata):
     if not metadata:
@@ -154,6 +158,7 @@ def create_publication(paper, metadata):
         publisher_name = publisher_name[:512]
 
     pubtype = metadata.get('type','unknown')
+    pubtype = CROSSREF_PUBTYPE_ALIASES.get(pubtype, pubtype)
 
     # Lookup journal
     search_terms = {'jtitle':title}

@@ -138,6 +138,11 @@ def searchView(request, **kwargs):
         elif val == 'NOK':
             queryset = queryset.filter(pdf_url__isnull=True)
         context['pdf'] = val
+    if 'pubtype' in args:
+        val = args.get('pubtype')
+        if val in PAPER_TYPE_PREFERENCE:
+            queryset = queryset.filter(doctype=val)
+        context['pubtype'] = val
     if 'visibility' in args and is_admin(request.user):
         val = args.get('visibility')
         if val in [x[0] for x in VISIBILITY_CHOICES]:
@@ -176,10 +181,12 @@ def searchView(request, **kwargs):
         del args_without_page['page']
     oa_variants = varyQueryArguments('status', args_without_page, OA_STATUS_CHOICES)
     pdf_variants = varyQueryArguments('pdf', args_without_page, PDF_STATUS_CHOICES)
+    pubtype_variants = varyQueryArguments('pubtype', args_without_page, PAPER_TYPE_CHOICES)
     visibility_variants = varyQueryArguments('visibility', args_without_page, VISIBILITY_CHOICES)
 
     context['oa_status_choices'] = oa_variants
     context['pdf_status_choices'] = pdf_variants
+    context['pubtype_status_choices'] = pubtype_variants
     context['visibility_choices'] = visibility_variants
 
     return render(request, 'papers/search.html', context)

@@ -58,6 +58,23 @@ COMBINED_STATUS_CHOICES = [
    ('closed', _('Preprints forbidden'))
 ]
 
+PAPER_TYPE_CHOICES = [
+   ('journal-article', _('Journal article')),
+   ('proceedings-article', _('Proceedings article')),
+   ('book-chapter', _('Book chapter')),
+   ('book', _('Book')),
+   ('journal-issue', _('Journal issue')),
+   ('proceedings', _('Proceedings')),
+   ('reference-entry', _('Entry')),
+   ('report', _('Report')),
+   ('thesis', _('Thesis')),
+   ('dataset', _('Dataset')),
+   ('preprint', _('Preprint')),
+   ('other', _('Other document')),
+   ]
+
+PAPER_TYPE_PREFERENCE = [x for (x,y) in PAPER_TYPE_CHOICES]
+
 class AccessStatistics(models.Model):
     """
     Caches numbers of papers in different access statuses for some queryset
@@ -339,6 +356,8 @@ class Paper(models.Model):
     visibility = models.CharField(max_length=32, default='VISIBLE')
     last_annotation = models.CharField(max_length=32, null=True, blank=True)
 
+    doctype = models.CharField(max_length=32, null=True, blank=True)
+
     def __unicode__(self):
         return self.title
 
@@ -418,7 +437,9 @@ class Paper(models.Model):
         self.pdf_url = None
         publis = self.publication_set.all()
         oa_idx = len(OA_STATUS_PREFERENCE)-1
+        type_idx = len(PAPER_TYPE_PREFERENCE)-1
         for publi in publis:
+            # OA status
             cur_status = publi.oa_status()
             try:
                 idx = OA_STATUS_PREFERENCE.index(cur_status)
@@ -427,9 +448,17 @@ class Paper(models.Model):
             oa_idx = min(idx, oa_idx)
             if OA_STATUS_CHOICES[oa_idx][0] == 'OA':
                 self.pdf_url = publi.splash_url()
-            if oa_idx == 0:
-                break
+
+            # Pub type
+            cur_type = publi.pubtype
+            try:
+                idx = PAPER_TYPE_PREFERENCE.index(cur_type)
+            except ValueError:
+                idx = len(PAPER_TYPE_PREFERENCE)
+            type_idx = min(idx, type_idx)
+
         self.oa_status = OA_STATUS_CHOICES[oa_idx][0]
+        self.doctype = PAPER_TYPE_PREFERENCE[type_idx]
         if not self.pdf_url:
             matches = OaiRecord.objects.filter(
                     about=self.id,pdf_url__isnull=False).order_by(
