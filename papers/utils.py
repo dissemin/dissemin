@@ -28,13 +28,6 @@ from lxml.html import fromstring, _transform_result
 from lxml import etree
 from io import StringIO
 
-from time import sleep
-import socket
-import requests
-
-from papers.errors import MetadataSourceException
-
-
 ### General string utilities ###
 
 filter_punctuation_alphanum_regex = re.compile(r'\w')
@@ -183,43 +176,6 @@ def create_paper_fingerprint(title, authors):
     m = hashlib.md5()
     m.update(create_paper_plain_fingerprint(title, authors))
     return m.hexdigest()
-
-
-
-### Open an URL with retries
-
-def urlopen_retry(url, **kwargs):# data, timeout, retries, delay, backoff):
-    data = kwargs.get('data', None)
-    timeout = kwargs.get('timeout', 10)
-    retries = kwargs.get('retries', 3)
-    delay = kwargs.get('delay', 5)
-    backoff = kwargs.get('backoff', 2)
-    headers = kwargs.get('headers', {})
-    try:
-        r = requests.get(url,
-                params=data,
-                timeout=timeout,
-                headers=headers,
-                allow_redirects=True)
-        return r.text
-    except requests.exceptions.Timeout as e:
-        if retries <= 0:
-            raise MetadataSourceException('Timeout: '+str(e))
-    except requests.exceptions.ConnectionError as e:
-        if retries <= 0:
-            raise MetadataSourceException('Connection error: '+str(e))
-    except requests.exceptions.RequestException as e:
-        raise MetadataSourceException('Request error: '+str(e))
-
-    print "Retrying in "+str(delay)+" seconds..."
-    print "URL: "+url
-    sleep(delay)
-    return urlopen_retry(url,
-            data=data,
-            timeout=timeout,
-            retries=retries-1,
-            delay=delay*backoff,
-            backoff=backoff)
 
 ### Partial date representation
 
