@@ -31,6 +31,7 @@ from papers.errors import MetadataSourceException
 from papers.utils import iunaccent
 
 from backend.create import *
+from backend.name_cache import name_lookup_cache
 
 bielefeld_timeout = 10
 max_base_no_match = 30
@@ -143,7 +144,7 @@ def add_base_document(doc, source):
     pubdate = datetime.date(year=year,month=01,day=01)
     
     # Lookup the names
-    model_names = map(Name.lookup_name, author_names)
+    model_names = map(name_lookup_cache.lookup, author_names)
 
     # Check that at least one of the last names is known
     # TODO remove this and do the things above

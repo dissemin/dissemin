@@ -33,6 +33,7 @@ from backend.oai import *
 from backend.extractors import *
 from backend.proxy import PROXY_SOURCE_PREFIX
 from backend.create import *
+from backend.name_cache import name_lookup_cache
 
 import re
 
@@ -134,7 +135,7 @@ def add_oai_record(record, source, paper=None):
 
 def get_oai_authors(metadata):
     """ Get the authors names out of a search result """
-    return map(Name.lookup_name, map(parse_comma_name, metadata['creator']))
+    return map(name_lookup_cache.lookup, map(parse_comma_name, metadata['creator']))
 
 def find_earliest_oai_date(record):
     """ Find the latest publication date (if any) in a record """

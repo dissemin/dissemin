@@ -32,6 +32,7 @@ from papers.name import parse_comma_name
 
 from backend.create import *
 from backend.oai import my_oai_dc_reader
+from backend.name_cache import name_lookup_cache
 
 
 core_timeout = 10
@@ -103,7 +104,7 @@ def add_core_document(doc, source):
         return False
     authors_list = parse_core_authors_list(authors_list[0])
     authors_list = map(parse_comma_name, authors_list)
-    authors = map(Name.lookup_name, authors_list)
+    authors = map(name_lookup_cache.lookup, authors_list)
     
     # Filter the record
     if all(not elem.is_known for elem in authors):

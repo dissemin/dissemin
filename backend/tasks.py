@@ -40,6 +40,7 @@ from backend.crossref import fetch_papers_from_crossref_by_researcher_name, conv
 from backend.proxy import *
 from backend.oai import *
 from backend.base import fetch_papers_from_base_for_researcher
+from backend.name_cache import name_lookup_cache
 
 
 logger = get_task_logger(__name__)
@@ -47,9 +48,9 @@ logger = get_task_logger(__name__)
 @shared_task(name='fetch_everything_for_researcher')
 def fetch_everything_for_researcher(pk):
     try:
-        # fetch_records_for_researcher(pk)
+        fetch_records_for_researcher(pk)
         fetch_dois_for_researcher(pk)
-        # fetch_papers_from_base_for_researcher(Researcher.objects.get(pk=pk))
+        fetch_papers_from_base_for_researcher(Researcher.objects.get(pk=pk))
     except MetadataSourceException as e:
         raise e
     finally:
@@ -135,7 +136,7 @@ def fetch_dois_for_researcher(pk):
                 continue
             
             title = metadata['title']
-            authors = map(Name.lookup_name, map(convert_to_name_pair, metadata['author']))
+            authors = map(name_lookup_cache.lookup, map(convert_to_name_pair, metadata['author']))
             authors = filter(lambda x: x != None, authors)
             if all(not elem.is_known for elem in authors) or authors == []:
                 continue

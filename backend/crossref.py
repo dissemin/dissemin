@@ -33,8 +33,9 @@ from papers.errors import MetadataSourceException
 from papers.doi import to_doi
 from papers.name import match_names, normalize_name_words
 from papers.utils import create_paper_fingerprint, iunaccent
-from backend.utils import urlopen_retry
 from papers.models import Publication, Paper
+
+from backend.utils import urlopen_retry
 
 nb_results_per_request = 60
 crossref_timeout = 15
