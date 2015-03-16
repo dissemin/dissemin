@@ -97,19 +97,24 @@ def searchView(request, **kwargs):
     args.update(kwargs)
     
     search_description = _('Papers')
+    head_search_description = _('Papers')
     if 'researcher' in args:
         researcher = get_object_or_404(Researcher, pk=args.get('researcher'))
         queryset = queryset.filter(author__researcher=researcher)
         search_description += _(' authored by ')+unicode(researcher)
+        head_search_description = unicode(researcher)
         context['researcher'] = researcher
     elif 'department' in args:
         department = get_object_or_404(Department, pk=args.get('department'))
         queryset = queryset.filter(author__researcher__department=department)
         search_description += _(' authored in ')+unicode(department)
+        head_search_description = unicode(department)
         context['department'] = department
     elif 'name' in args:
         name = get_object_or_404(Name, pk=args.get('name'))
         queryset = queryset.filter(author__name=name)
+        search_description += _(' authored by ')+unicode(name)
+        head_search_description = unicode(name)
         context['name'] = name
     if 'journal' in args:
         journal = get_object_or_404(Journal, pk=args.get('journal'))
@@ -120,6 +125,7 @@ def searchView(request, **kwargs):
         publisher = get_object_or_404(Publisher, pk=args.get('publisher'))
         queryset = queryset.filter(publication__publisher=publisher)
         search_description += _(' published by ')+unicode(publisher)
+        head_search_description = unicode(publisher)
         context['publisher'] = publisher
     if 'status' in args:
         queryset = queryset.filter(oa_status=args.get('status'))
@@ -161,6 +167,7 @@ def searchView(request, **kwargs):
 
     context['search_results'] = current_papers
     context['search_description'] = search_description
+    context['head_search_description'] = head_search_description
     context['nb_results'] = paginator.count
 
     # Build the GET requests for variants of the parameters
