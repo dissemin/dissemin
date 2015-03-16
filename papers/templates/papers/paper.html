@@ -6,6 +6,17 @@
 {% load doi %}
 {% load i18n %}
 
+{% block metaTags %}
+    <meta name="citation_title" content="{{ paper.title }}" />
+    {% for author in paper.sorted_authors %}
+        <meta name="citation_author" content="{{ author.name.last }}, {{ author.name.first }}" />
+    {% endfor %}
+    <meta name="citation_publication_date" content="{{ paper.year }}" />
+    {% if paper.pdf_url %}
+        <meta name="citation_pdf_url" content="{{ paper.pdf_url }}" />
+    {% endif %}
+{% endblock %}
+
 {% block headTitle %}
 {{ paper.title }}
 {% endblock %}
