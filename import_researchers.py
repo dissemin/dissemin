@@ -1,7 +1,9 @@
 # -*- encoding: utf-8 -*-
 from __future__ import unicode_literals
 from papers.models import *
-from papers.utils import iunaccent, normalize_name_words
+from backend.create import *
+from papers.utils import iunaccent
+from papers.name import normalize_name_words
 from codecs import open
 
 first_name_f = 1
@@ -31,8 +33,10 @@ def import_from_tsv(filename):
         last = normalize_name_words(fields[last_name_f])
         homepage = fields[url_f]
         role = fields[role_f]
+        if homepage == '':
+            homepage = None
 
-        researcher = create_researcher(first, last, department, email, role, homepage)
+        researcher = Researcher.create_from_scratch(first, last, department, email, role, homepage)
        
         group = fields[group_f]
         if group:
@@ -40,5 +44,5 @@ def import_from_tsv(filename):
             researcher.groups.add(g)
 
 
-import_from_tsv('data/dma')
+import_from_tsv('data/listes/geosciences.tsv')
 
