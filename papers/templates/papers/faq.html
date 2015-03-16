@@ -3,7 +3,7 @@
 {% load i18n %}
 
 {% block headTitle %}
-Frequently Asked Questions
+{% trans "Frequently Asked Questions" %}
 {% endblock %}
 
 {% block content %}
@@ -23,23 +23,23 @@ Frequently Asked Questions
         <p><a href="#creating-a-profile">{% trans "Can I create my profile on dissem.in?" %}</a></p>
         <p><a href="#new-institution">{% trans "Can I use dissem.in for my institution?" %}</a></p>
 
-        <h4>Policies and full-text availability</h4>
+        <h4>{% trans "Policies and full-text availability" %}</h4>
         <p><a href="#policy-classes">{% trans "What do your policy classes mean?" %}</a></p>
         <p><a href="#availability">{% trans "When is a paper considered available?" %}</a></p>
         <p><a href="#statistics">{% trans "Should I trust your statistics?" %}</a></p>
 
-        <h4>Omissions and errors</h4>
+        <h4>{% trans "Omissions and errors" %}</h4>
         <p><a href="#copy-available">{% trans "There is a freely available copy of my article online but Dissem.in does not find it." %}</a></p>
         <p><a href="#missing-paper">{% trans "One of my papers is missing. Why?" %}</a></p>
         <p><a href="#incorrect-metadata">{% trans "Some details of my paper are incorrect. What can I do?" %}</a></p>
 
-        <h4>Behind the scene</h4>
+        <h4>{% trans "Behind the scene" %}</h4>
         <p><a href="#sources">{% trans "Where do you get the data from?" %}</a></p>
         <p><a href="#getting-involved">{% trans "How can I help?" %}</a></p>
         <p><a href="#source-code">{% trans "Where is the source code?" %}</a></p>
         <p><a href="#oai">{% trans "Can I harvest your data?" %}</a></p>
  
-        <h3>Open Access</h3>
+        <h3>{% trans "Open Access" %}</h3>
 
         <h2 id="open-access">{% trans "What is Open Access?" %}</h2>
         <p>
@@ -51,7 +51,7 @@ Frequently Asked Questions
         <a href="http://pablo.rauzy.name/openaccess/introduction.html">this introduction in French</a>.
         {% endblocktrans %}
         </p>
-        <h2 id="repositories-rock">Why should I upload my papers to a repository?</h2>
+        <h2 id="repositories-rock">{% trans "Why should I upload my papers to a repository?" %}</h2>
         <p>
         {% blocktrans trimmed %}
         You should do it because:
@@ -78,7 +78,7 @@ Frequently Asked Questions
           </ul>
         {% endblocktrans %}
         </p>
-        <h2 id="what-repository">What repository should I use?</h2>
+        <h2 id="what-repository">{% trans "What repository should I use?" %}</h2>
         <p>
         {% blocktrans trimmed %}
             There are roughly two types of repositories:

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-13 08:06+0100\n"
+"POT-Creation-Date: 2015-03-16 13:39+0100\n"
 "PO-Revision-Date: 2015-03-13 11:57+0100\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
@@ -26,8 +26,8 @@ msgstr "Prénom"
 msgid "Last name"
 msgstr "Nom"
 
-#: papers/forms.py:30 papers/templates/papers/department.html:96
-#: papers/templates/papers/search.html:62
+#: papers/forms.py:30 papers/templates/papers/department.html:99
+#: papers/templates/papers/search.html:67
 msgid "Department"
 msgstr "Département"
 
@@ -59,11 +59,11 @@ msgstr "Pré/post-publications interdites"
 msgid "Policy unclear"
 msgstr "Politique inconnue"
 
-#: papers/models.py:38 papers/templates/papers/paper.html:38
+#: papers/models.py:38 papers/templates/papers/paper.html:42
 msgid "Available"
 msgstr "Disponible"
 
-#: papers/models.py:39 papers/templates/papers/paper.html:39
+#: papers/models.py:39 papers/templates/papers/paper.html:43
 msgid "Unavailable"
 msgstr "Indisponible"
 
@@ -119,12 +119,33 @@ msgstr "État inconnu"
 msgid "Preprints forbidden"
 msgstr "Prépublications interdites"
 
+#: papers/templates/papers/accessStatistics.html:5
+#: papers/templates/papers/faq.html:42
+msgid "Open Access"
+msgstr "Accès libre"
+
+#: papers/templates/papers/accessStatistics.html:8
+msgid "Publications are available"
+msgstr ""
+
+#: papers/templates/papers/accessStatistics.html:11
+msgid "Publications could be online"
+msgstr ""
+
+#: papers/templates/papers/accessStatistics.html:14
+msgid "Policy unknown"
+msgstr "Politique inconnue"
+
+#: papers/templates/papers/accessStatistics.html:17
+msgid "Upload is forbidden"
+msgstr "Prépublications interdites"
+
 #: papers/templates/papers/department.html:44
 #: papers/templates/papers/group.html:18
 msgid "Members:"
 msgstr "Membres:"
 
-#: papers/templates/papers/department.html:50
+#: papers/templates/papers/department.html:53
 #: papers/templates/papers/publisher.html:136
 #: papers/templates/papers/publishers.html:63
 #, python-format
@@ -133,19 +154,19 @@ msgid_plural "(%(num_total)s papers)"
 msgstr[0] "(%(num_total)s papier)"
 msgstr[1] "(%(num_total)s papiers)"
 
-#: papers/templates/papers/department.html:61
+#: papers/templates/papers/department.html:64
 msgid "Researcher deleted. "
 msgstr "Chercheur supprimé."
 
-#: papers/templates/papers/department.html:65
+#: papers/templates/papers/department.html:68
 msgid "Delete"
 msgstr "Supprimer"
 
-#: papers/templates/papers/department.html:88
+#: papers/templates/papers/department.html:91
 msgid "Add"
 msgstr "Ajouter"
 
-#: papers/templates/papers/department.html:98
+#: papers/templates/papers/department.html:101
 msgid "Papers of the members"
 msgstr "Papiers des membres"
 
@@ -153,17 +174,19 @@ msgstr "Papiers des membres"
 msgid "Frequently Asked Questions"
 msgstr "Foire aux questions"
 
+#: papers/templates/papers/faq.html:15 papers/templates/papers/faq.html:44
 msgid "What is Open Access?"
 msgstr "Qu'est-ce que le libre accès ?"
 
-#: papers/templates/papers/faq.html:16
+#: papers/templates/papers/faq.html:16 papers/templates/papers/faq.html:54
 msgid "Why should I upload my papers to a repository?"
 msgstr "Pourquoi mettre en ligne mes papiers dans un dépôt ?"
 
-#: papers/templates/papers/faq.html:17
+#: papers/templates/papers/faq.html:17 papers/templates/papers/faq.html:81
 msgid "What repository should I use?"
 msgstr "Quel dépôt utiliser ?"
 
+#: papers/templates/papers/faq.html:20 papers/templates/papers/faq.html:99
 msgid "What is dissem.in?"
 msgstr "Qu'est-ce que dissem.in ?"
 
@@ -183,6 +206,10 @@ msgstr "Puis-je me créer un profil sur dissem.in ?"
 msgid "Can I use dissem.in for my institution?"
 msgstr "Puis-je utiliser dissem.in pour mon institution ?"
 
+#: papers/templates/papers/faq.html:26
+msgid "Policies and full-text availability"
+msgstr "Par disponibilité du texte intégral"
+
 #: papers/templates/papers/faq.html:27 papers/templates/papers/faq.html:138
 msgid "What do your policy classes mean?"
 msgstr "Que signifient les différentes politiques d'accès ?"
@@ -194,6 +221,10 @@ msgstr "Quand considérez-vous qu'un papier est disponible ?"
 #: papers/templates/papers/faq.html:29 papers/templates/papers/faq.html:197
 msgid "Should I trust your statistics?"
 msgstr "Vos statistiques sont-elles fiables ?"
+
+#: papers/templates/papers/faq.html:31
+msgid "Omissions and errors"
+msgstr "Erreurs et oublis"
 
 #: papers/templates/papers/faq.html:32
 msgid ""
@@ -210,6 +241,10 @@ msgstr "Pourquoi manque-t-il certains de mes papiers ?"
 #: papers/templates/papers/faq.html:34 papers/templates/papers/faq.html:224
 msgid "Some details of my paper are incorrect. What can I do?"
 msgstr "Certaines informations sur mon papier sont incorrectes. Que faire ?"
+
+#: papers/templates/papers/faq.html:36
+msgid "Behind the scene"
+msgstr "En coulisses"
 
 #: papers/templates/papers/faq.html:37 papers/templates/papers/faq.html:249
 msgid "Where do you get the data from?"
@@ -596,41 +631,45 @@ msgid "See also the <a href=\"%(publishers_url)s\">publishers list</a>."
 msgstr ""
 "Voir aussi la <a href=\"%(publishers_url)s\">liste des maisons d'édition</a>."
 
-#: papers/templates/papers/paper.html:37
+#: papers/templates/papers/paper.html:41
 msgid "Full text:"
 msgstr "Texte intégral:"
 
-#: papers/templates/papers/paper.html:42
-msgid "Publisher policy:"
-msgstr "Politique de la maison d'édition:"
+#: papers/templates/papers/paper.html:47
+msgid "Publisher:"
+msgstr "Maison d'édition:"
 
-#: papers/templates/papers/paper.html:43
+#: papers/templates/papers/paper.html:49
+msgid "Policy:"
+msgstr "Politique:"
+
+#: papers/templates/papers/paper.html:50
 msgid "details"
 msgstr "détails"
 
-#: papers/templates/papers/paper.html:49
+#: papers/templates/papers/paper.html:57
 msgid "Abstract."
 msgstr "Résumé."
 
-#: papers/templates/papers/paper.html:57
+#: papers/templates/papers/paper.html:65
 msgid "Available from"
 msgstr "Disponible depuis"
 
-#: papers/templates/papers/paper.html:72
+#: papers/templates/papers/paper.html:80
 msgid "Web page"
 msgstr "Page web"
 
-#: papers/templates/papers/paper.html:80
+#: papers/templates/papers/paper.html:88
 #: papers/templates/papers/publisher.html:37
-#: papers/templates/papers/search.html:91
+#: papers/templates/papers/search.html:96
 msgid "Publisher"
 msgstr "Maison d'édition"
 
-#: papers/templates/papers/paper.html:82
+#: papers/templates/papers/paper.html:90
 msgid "via DOI"
 msgstr "via DOI"
 
-#: papers/templates/papers/paper.html:87
+#: papers/templates/papers/paper.html:95
 msgid "Admin zone"
 msgstr "Administration"
 
@@ -639,15 +678,15 @@ msgstr "Administration"
 msgid "and %(remaining_authors)s other authors"
 msgstr "et %(remaining_authors)s autres auteurs"
 
-#: papers/templates/papers/publiListItem.html:37
+#: papers/templates/papers/publiListItem.html:33
 msgid " (metadata only)"
 msgstr " (notice)"
 
-#: papers/templates/papers/publiListItem.html:50
+#: papers/templates/papers/publiListItem.html:46
 msgid "Right"
 msgstr "Correct"
 
-#: papers/templates/papers/publiListItem.html:55
+#: papers/templates/papers/publiListItem.html:51
 msgid "Wrong"
 msgstr "Incorrect"
 
@@ -685,7 +724,7 @@ msgid "None."
 msgstr "Aucune."
 
 #: papers/templates/papers/publishers.html:21
-#: papers/templates/papers/search.html:101
+#: papers/templates/papers/search.html:111
 msgid "Refine search"
 msgstr "Affiner la recherche"
 
@@ -695,63 +734,71 @@ msgid "%(nb_results)s publishers found"
 msgstr "%(nb_results)s maisons d'édition trouvées"
 
 #: papers/templates/papers/publishers.html:30
-#: papers/templates/papers/search.html:109
+#: papers/templates/papers/search.html:119
 msgid "By publisher policy:"
 msgstr "Par politique de publication"
 
 #: papers/templates/papers/publishers.html:76
-#: papers/templates/papers/search.html:166
+#: papers/templates/papers/search.html:176
 msgid "No production found."
 msgstr "Aucune production trouvée."
 
-#: papers/templates/papers/search.html:40
+#: papers/templates/papers/search.html:43
 msgid "Researcher"
 msgstr "Personne"
 
-#: papers/templates/papers/search.html:49
+#: papers/templates/papers/search.html:52
 msgctxt "Researcher"
 msgid "Homepage"
 msgstr "Page personnelle"
 
-#: papers/templates/papers/search.html:52
+#: papers/templates/papers/search.html:55
 msgid "Address:"
 msgstr "Adresse:"
 
-#: papers/templates/papers/search.html:53
+#: papers/templates/papers/search.html:58
 msgid "Names:"
 msgstr "Noms:"
 
-#: papers/templates/papers/search.html:66
+#: papers/templates/papers/search.html:71
 #, python-format
 msgid "%(count)s members"
 msgstr "%(count)s membres"
 
-#: papers/templates/papers/search.html:72
+#: papers/templates/papers/search.html:77
 msgid "Name"
 msgstr "Nom"
 
-#: papers/templates/papers/search.html:78
+#: papers/templates/papers/search.html:83
 msgid "Journal"
 msgstr "Revue"
 
-#: papers/templates/papers/search.html:81
+#: papers/templates/papers/search.html:86
 msgid "Published by"
 msgstr "Publiée par"
 
-#: papers/templates/papers/search.html:83
+#: papers/templates/papers/search.html:88
 msgid "ISSN:"
 msgstr "ISSN:"
 
-#: papers/templates/papers/search.html:103
+#: papers/templates/papers/search.html:106
+msgid "Display"
+msgstr ""
+
+#: papers/templates/papers/search.html:108
+msgid "Change display mode"
+msgstr ""
+
+#: papers/templates/papers/search.html:113
 #, python-format
 msgid "%(nb_results)s papers found"
 msgstr "%(nb_results)s papiers trouvés"
 
-#: papers/templates/papers/search.html:122
+#: papers/templates/papers/search.html:132
 msgid "By full text availability:"
 msgstr "Par disponibilité du texte intégral"
 
-#: papers/templates/papers/search.html:135
+#: papers/templates/papers/search.html:145
 msgid "By visibility:"
 msgstr "Par visibilité"
 
