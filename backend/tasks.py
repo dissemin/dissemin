@@ -55,6 +55,7 @@ def fetch_everything_for_researcher(pk):
         raise e
     finally:
         clustering_context_factory.commitThemAll()
+        clustering_context_factory.unloadResearcher(pk)
         r = Researcher.objects.get(pk=pk)
         r.update_stats()
 

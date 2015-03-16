@@ -376,33 +376,67 @@ class ClusteringContextFactory(object):
 
 
     def clusterAuthorLater(self, author):
+        """
+        Calls clusterAuthor for all the relevant researchers
+        given the author.
+        """
         potential_researchers = author.name.variant_of.all()
         for researcher in potential_researchers:
             self.clusterAuthorResearcherLater(author, researcher)
 
     def clusterAuthorResearcherLater(self, author, researcher):
+        """
+        Pushes the author to a queue for later clustering.
+        The features for this author are not fetched immediately,
+        so that we can still add more metadata from other sources.
+
+        The clustering context is loaded now (if not already loaded),
+        because when loading a context we expect that all present authors
+        are already clustered.
+        """
         self.load(researcher)
         self.authors_to_cluster.append((author,researcher))
 
     def clusterAuthor(self, author, researcher):
+        """
+        Run the clustering for a given author / researcher pair.
+        """
         self.load(researcher)
         self.cc[researcher.pk].addAuthor(author)
         self.cc[researcher.pk].runClustering(author.pk)
 
     def clusterAuthorForAllResearchers(self, author):
+        """
+        Calls clusterAuthor for all the relevant researchers 
+        given the author
+        """
         potential_researchers = author.name.variant_of.all()
         for researcher in potential_researchers:
             self.clusterAuthor(author, researcher)
     
     def clusterThemNow(self):
+        """
+        Clusters all the pending author/researcher pairs
+        """
         for (author,researcher) in self.authors_to_cluster:
             self.clusterAuthor(author, researcher)
         self.authors_to_cluster = []
   
     def commitThemAll(self):
+        """
+        Commits the results of all clusterings back to the
+        database
+        """
         self.clusterThemNow()
         for k in self.cc:
             self.cc[k].commit()
+
+    def unloadResearcher(self, pk):
+        """
+        Frees the clustering context of a given researcher.
+        You should ensure that it has been committed before.
+        """
+        del self.cc[k]
     
 
 
