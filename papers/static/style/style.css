@@ -366,7 +366,7 @@ h1.paperTitle {
 	clear:both;
 }
 
-.unselectedCriterion, .selectedCriterion
+.unselectedCriterion, .selectedCriterion, .publisher
 {
     height: 55px;
     padding: 2px;
@@ -374,7 +374,11 @@ h1.paperTitle {
 	clear: both;
 }
 
-.unselectedCriterion .pubLogo, .selectedCriterion .pubLogo
+.publisher {
+	clear: unset;
+}
+
+.unselectedCriterion .pubLogo, .selectedCriterion .pubLogo, .publisher .pubLogo
 {
     height: 50px;
     width: 37px;
@@ -387,8 +391,7 @@ h1.paperTitle {
 .selectedCriterion
 {
     border: 2px solid #8ecc50;
-	margin-top: -2px;
-	margin-bottom:-2px;
+	margin: -2px;
 }
 
 /* Mosaic display */
@@ -573,27 +576,27 @@ h1.paperTitle {
 
 .access-class-oa
 {
-    background-color: #FF870F;
+    background-color: #FF8300;
 }
 
 .access-class-ok
 {
-    background-color: #89DB37;
+    background-color: #F9B698;
 }
 
 .access-class-couldbe
 {
-    background-color: #FAE43E;
+    background-color: #FACED8;
 }
 
 .access-class-unk
 {
-    background-color: #B4B4B4;
+    background-color: #B7B2D9;
 }
 
 .access-class-closed
 {
-    background-color: #999999;
+    background-color: #151E59;
 }
 
 /* Search pages buttons */
