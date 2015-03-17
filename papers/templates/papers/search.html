@@ -142,16 +142,17 @@
 {% endfor %}
 
 <p class="criterion">{% trans "By document type:" %}</p>
+<ul>
 {% for st in pubtype_status_choices %}
-<div class="{% if st.0 == pubtype %}selectedCriterion{% else %}unselectedCriterion{% endif %}">
-     <div class="pubLogo"><div class="pubLogoPic-type-{{ st.0 }}"><a href="{% url 'search' %}?{{ st.2.urlencode }}" class="filldiv"></a></div></div>
-    <div class="criterionItem"><a href="{% url 'search' %}?{{ st.2.urlencode }}">{{ st.1 }}</a>
-        {% if st.0 == pdf %}
-        <div class="criterionCross"><a href="{% url 'search' %}?{{ st.2.urlencode }}">x</a></div>
+     <li>
+         <a href="{% url 'search' %}?{{ st.2.urlencode }}"
+        class="{% if st.0 == pubtype %}selectedPubtype{% else %}unselectedPubtype{% endif %}">{{ st.1 }}</a>
+        {% if st.0 == pubtype %}
+        &nbsp; <a href="{% url 'search' %}?{{ st.2.urlencode }}" class="pubtypeCriterionCross">x</a>
         {% endif %}
-    </div>
-</div>
+    </li>
 {% endfor %}
+</ul>
     
 
 {% if request.user.is_superuser %}

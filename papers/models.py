@@ -438,6 +438,8 @@ class Paper(models.Model):
         publis = self.publication_set.all()
         oa_idx = len(OA_STATUS_PREFERENCE)-1
         type_idx = len(PAPER_TYPE_PREFERENCE)-1
+        if self.doctype in PAPER_TYPE_PREFERENCE:
+            type_idx = PAPER_TYPE_PREFERENCE.index(self.doctype)
         for publi in publis:
             # OA status
             cur_status = publi.oa_status()

@@ -394,6 +394,12 @@ h1.paperTitle {
 	margin: -2px;
 }
 
+.selectedPubtype
+{
+	font-weight:bold;
+    text-decoration:underline;
+}
+
 /* Mosaic display */
 
 .mosaic-on .pubItem {
