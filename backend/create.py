@@ -262,6 +262,7 @@ def create_oairecord(**kwargs):
         update_field_conditionally('contributors')
         update_field_conditionally('keywords')
         update_field_conditionally('description')
+        update_field_conditionally('pubtype')
 
         if changed:
             match.save()
@@ -282,6 +283,7 @@ def create_oairecord(**kwargs):
             description=kwargs.get('description'),
             keywords=kwargs.get('keywords'),
             contributors=kwargs.get('contributors'),
+            pubtype=kwargs.get('pubtype'),
             priority=source.priority)
     record.save()
 

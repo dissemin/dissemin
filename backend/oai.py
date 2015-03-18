@@ -122,6 +122,9 @@ def add_oai_record(record, source, paper=None):
     keywords = ' '.join(record[1]._map['subject'])
     contributors = ' '.join(record[1]._map['contributor'])[:4096]
 
+    pubtype = record[1]._map.get('type')
+    pubtype = PUBTYPE_TRANSLATIONS.get(pubtype, source.default_pubtype)
+
     create_oairecord(
             source=source,
             identifier=identifier,
@@ -129,6 +132,7 @@ def add_oai_record(record, source, paper=None):
             description=curdesc,
             keywords=keywords,
             contributors=contributors,
+            pubtype=pubtype,
             pdf_url=pdf_url,
             splash_url=splash_url)
 

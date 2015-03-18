@@ -66,6 +66,7 @@ PAPER_TYPE_CHOICES = [
    ('journal-issue', _('Journal issue')),
    ('proceedings', _('Proceedings')),
    ('reference-entry', _('Entry')),
+   ('poster', _('Poster')),
    ('report', _('Report')),
    ('thesis', _('Thesis')),
    ('dataset', _('Dataset')),
@@ -750,6 +751,7 @@ class OaiRecord(models.Model):
     description = models.TextField(null=True,blank=True)
     keywords = models.TextField(null=True,blank=True)
     contributors = models.CharField(max_length=4096, null=True, blank=True)
+    pubtype = models.CharField(max_length=512, null=True, blank=True)
 
     # Cached version of source.priority
     priority = models.IntegerField(default=1)
