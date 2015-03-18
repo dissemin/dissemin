@@ -72,14 +72,13 @@ def UpdateHal(pdf,idHal):
 #		etree.SubElement(nodeInteresting, 'ref', type="file", target="article.pdf")  	
 #		metadata = etree.tostring(metadata)
 #		print metadata 
-
 		strData = zp.read()#CreateZipFromPdfAndMetadata(pdf,metadata)
 		conn.putrequest("PUT", "https://api-preprod.archives-ouvertes.fr/sword/"+idHal, True,True)
 		conn.putheader("Authorization",encodeUserData(u,p))
 		conn.putheader("Packaging","http://purl.org/net/sword-types/AOfr")
 		conn.putheader("Content-Type","application/zip")
 		conn.putheader("Content-Disposition"," attachment; filename=meta.xml")
-		#conn.putheader("Content-Length",len(strData))
+		conn.putheader("Content-Length",len(strData))
 		conn.endheaders()
 		print "Sending... :\n"
 		conn.send(strData)
