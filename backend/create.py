@@ -33,6 +33,7 @@ from papers.name import to_plain_name, parse_comma_name
 from backend.crossref import fetch_metadata_by_DOI
 from backend.romeo import fetch_journal, fetch_publisher
 from backend.globals import *
+from backend.utils import maybe_recapitalize_title
 
 # TODO: this could be a method of ClusteringContextFactory ?
 # TODO: implement a dummy relevance classifier for the first phase
@@ -56,6 +57,7 @@ def get_or_create_paper(title, author_names, pubdate, doi=None, visibility='VISI
         raise ValueError("A title, pubdate and authors have to be provided to create a paper.")
 
     title = sanitize_html(title)
+    title = maybe_recapitalize_title(title)
 
     # Otherwise look up the fingerprint
     plain_names = map(to_plain_name, author_names)
@@ -71,6 +73,7 @@ def get_or_create_paper(title, author_names, pubdate, doi=None, visibility='VISI
     else:
         p = Paper(title=title,
                 pubdate=pubdate,
+                doctype='other',
                 year=pubdate.year,
                 fingerprint=fp,
                 visibility=visibility)
