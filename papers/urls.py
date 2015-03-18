@@ -44,4 +44,5 @@ urlpatterns = patterns('',
         url(r'^faq$', views.faqView, name='faq'),
         url(r'^feedback$', views.feedbackView, name='feedback'),
         url(r'^ajax/', include('papers.ajax')),
+        url(r'^regular_login/$', views.regularLogin, name='regular_login'),
 )
