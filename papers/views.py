@@ -25,6 +25,7 @@ from django.template import RequestContext, loader
 from django.views import generic
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth import logout
+from django.contrib.auth.views import login as auth_login
 from django.contrib.auth.decorators import user_passes_test
 from django.utils import timezone
 from django.utils.translation import ugettext as _
@@ -33,7 +34,7 @@ from celery.execute import send_task
 
 from papers.models import *
 from papers.forms import *
-from papers.user import is_admin
+from papers.user import is_admin, is_authenticated
 
 # Number of papers shown on a search results page
 NB_RESULTS_PER_PAGE = 20
@@ -272,4 +273,7 @@ def faqView(request):
 
 def feedbackView(request):
     return render(request, 'papers/feedback.html')
+
+def regularLogin(request):
+    return auth_login(request, 'papers/login.html')
 

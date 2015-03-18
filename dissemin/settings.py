@@ -70,13 +70,13 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-		'cas.middleware.CASMiddleware',   #Line to comment/uncomment to bypass/activate the cas
+	'cas.middleware.CASMiddleware',   #Line to comment/uncomment to bypass/activate the cas
 )
 
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-		'cas.backends.CASBackend',
+    'cas.backends.CASBackend',
 
 )
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
