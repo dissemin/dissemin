@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-16 13:39+0100\n"
+"POT-Creation-Date: 2015-03-19 09:26+0100\n"
 "PO-Revision-Date: 2015-03-13 11:57+0100\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
@@ -59,11 +59,11 @@ msgstr "Pré/post-publications interdites"
 msgid "Policy unclear"
 msgstr "Politique inconnue"
 
-#: papers/models.py:38 papers/templates/papers/paper.html:42
+#: papers/models.py:38 papers/templates/papers/paper.html:53
 msgid "Available"
 msgstr "Disponible"
 
-#: papers/models.py:39 papers/templates/papers/paper.html:43
+#: papers/models.py:39 papers/templates/papers/paper.html:54
 msgid "Unavailable"
 msgstr "Indisponible"
 
@@ -119,6 +119,58 @@ msgstr "État inconnu"
 msgid "Preprints forbidden"
 msgstr "Prépublications interdites"
 
+#: papers/models.py:62
+msgid "Journal article"
+msgstr "Article dans une revue"
+
+#: papers/models.py:63
+msgid "Proceedings article"
+msgstr "Communication dans une conférence"
+
+#: papers/models.py:64
+msgid "Book chapter"
+msgstr "Chapitre d'ouvrage"
+
+#: papers/models.py:65
+msgid "Book"
+msgstr "Ouvrage"
+
+#: papers/models.py:66
+msgid "Journal issue"
+msgstr "Numéro d'une revue"
+
+#: papers/models.py:67
+msgid "Proceedings"
+msgstr "Actes de conférence"
+
+#: papers/models.py:68
+msgid "Entry"
+msgstr "Article d'encyclopédie"
+
+#: papers/models.py:69
+msgid "Poster"
+msgstr "Poster"
+
+#: papers/models.py:70
+msgid "Report"
+msgstr "Rapport"
+
+#: papers/models.py:71
+msgid "Thesis"
+msgstr "Thèse"
+
+#: papers/models.py:72
+msgid "Dataset"
+msgstr "Banque de données"
+
+#: papers/models.py:73
+msgid "Preprint"
+msgstr "Préprint"
+
+#: papers/models.py:74
+msgid "Other document"
+msgstr "Autre publication"
+
 #: papers/templates/papers/accessStatistics.html:5
 #: papers/templates/papers/faq.html:42
 msgid "Open Access"
@@ -170,7 +222,7 @@ msgstr "Ajouter"
 msgid "Papers of the members"
 msgstr "Papiers des membres"
 
-#: papers/templates/papers/faq.html:11
+#: papers/templates/papers/faq.html:6 papers/templates/papers/faq.html:11
 msgid "Frequently Asked Questions"
 msgstr "Foire aux questions"
 
@@ -566,7 +618,7 @@ msgstr ""
 
 #: papers/templates/papers/feedback.html:6
 #: papers/templates/papers/feedback.html:11
-#: templates/dissemin/skeleton.html:33
+#: templates/dissemin/skeleton.html:35
 msgid "Feedback"
 msgstr "Réactions"
 
@@ -631,45 +683,67 @@ msgid "See also the <a href=\"%(publishers_url)s\">publishers list</a>."
 msgstr ""
 "Voir aussi la <a href=\"%(publishers_url)s\">liste des maisons d'édition</a>."
 
-#: papers/templates/papers/paper.html:41
+#: papers/templates/papers/login.html:18
+msgid "Please correct the error below."
+msgid_plural "Please correct the errors below."
+msgstr[0] ""
+msgstr[1] ""
+
+#: papers/templates/papers/login.html:34
+msgid "Username:"
+msgstr ""
+
+#: papers/templates/papers/login.html:38
+msgid "Password:"
+msgstr ""
+
+#: papers/templates/papers/login.html:45
+msgid "Forgotten your password or username?"
+msgstr ""
+
+#: papers/templates/papers/login.html:49
+msgid "Log in"
+msgstr ""
+
+#: papers/templates/papers/paper.html:52
 msgid "Full text:"
 msgstr "Texte intégral:"
 
-#: papers/templates/papers/paper.html:47
+#: papers/templates/papers/paper.html:58
 msgid "Publisher:"
 msgstr "Maison d'édition:"
 
-#: papers/templates/papers/paper.html:49
+#: papers/templates/papers/paper.html:60
 msgid "Policy:"
 msgstr "Politique:"
 
-#: papers/templates/papers/paper.html:50
+#: papers/templates/papers/paper.html:61
 msgid "details"
 msgstr "détails"
 
-#: papers/templates/papers/paper.html:57
+#: papers/templates/papers/paper.html:68
 msgid "Abstract."
 msgstr "Résumé."
 
-#: papers/templates/papers/paper.html:65
+#: papers/templates/papers/paper.html:76
 msgid "Available from"
 msgstr "Disponible depuis"
 
-#: papers/templates/papers/paper.html:80
+#: papers/templates/papers/paper.html:91
 msgid "Web page"
 msgstr "Page web"
 
-#: papers/templates/papers/paper.html:88
+#: papers/templates/papers/paper.html:99
 #: papers/templates/papers/publisher.html:37
 #: papers/templates/papers/search.html:96
 msgid "Publisher"
 msgstr "Maison d'édition"
 
-#: papers/templates/papers/paper.html:90
+#: papers/templates/papers/paper.html:101
 msgid "via DOI"
 msgstr "via DOI"
 
-#: papers/templates/papers/paper.html:95
+#: papers/templates/papers/paper.html:106
 msgid "Admin zone"
 msgstr "Administration"
 
@@ -739,7 +813,7 @@ msgid "By publisher policy:"
 msgstr "Par politique de publication"
 
 #: papers/templates/papers/publishers.html:76
-#: papers/templates/papers/search.html:176
+#: papers/templates/papers/search.html:190
 msgid "No production found."
 msgstr "Aucune production trouvée."
 
@@ -798,7 +872,11 @@ msgstr "%(nb_results)s papiers trouvés"
 msgid "By full text availability:"
 msgstr "Par disponibilité du texte intégral"
 
-#: papers/templates/papers/search.html:145
+#: papers/templates/papers/search.html:144
+msgid "By document type:"
+msgstr "Par type de document:"
+
+#: papers/templates/papers/search.html:159
 msgid "By visibility:"
 msgstr "Par visibilité"
 
@@ -893,31 +971,31 @@ msgstr "La politique concernant les versions finales est inconnue."
 msgid "Unknown policy"
 msgstr "Politique inconnue"
 
-#: papers/views.py:58
+#: papers/views.py:59
 msgid "Publishers"
 msgstr "Maisons d'édition"
 
-#: papers/views.py:99 papers/views.py:144
+#: papers/views.py:100 papers/views.py:101 papers/views.py:156
 msgid "Papers"
 msgstr "Papiers"
 
-#: papers/views.py:103
+#: papers/views.py:105 papers/views.py:117
 msgid " authored by "
 msgstr " écrits par "
 
-#: papers/views.py:108
+#: papers/views.py:111
 msgid " authored in "
 msgstr " écrits au "
 
-#: papers/views.py:117
+#: papers/views.py:123
 msgid " in "
 msgstr " dans "
 
-#: papers/views.py:122
+#: papers/views.py:128
 msgid " published by "
 msgstr " publiés par "
 
-#: papers/views.py:145
+#: papers/views.py:157
 msgid "All papers"
 msgstr "Tous les papiers"
 
@@ -929,24 +1007,24 @@ msgstr "Administration du site Dissemin"
 msgid "Dissemin administration"
 msgstr "Administration de Dissemin"
 
-#: templates/dissemin/skeleton.html:33
+#: templates/dissemin/skeleton.html:35
 msgctxt "memu bar"
 msgid "Home"
 msgstr "Accueil"
 
-#: templates/dissemin/skeleton.html:33
+#: templates/dissemin/skeleton.html:35
 msgid "FAQ"
 msgstr "FAQ"
 
-#: templates/dissemin/skeleton.html:35
+#: templates/dissemin/skeleton.html:37
 msgid "Logout"
 msgstr "Se déconnecter"
 
-#: templates/dissemin/skeleton.html:37
+#: templates/dissemin/skeleton.html:39
 msgid "Login"
 msgstr "Se connecter"
 
-#: templates/dissemin/skeleton.html:50
+#: templates/dissemin/skeleton.html:52
 msgid ""
 "The information provided on this website should not be relied upon for legal "
 "advice."
@@ -954,7 +1032,6 @@ msgstr ""
 "Les informations rassemblées sur ce site sont fournies à titre indicatif "
 "uniquement et sans aucune garantie."
 
-#: templates/dissemin/skeleton.html:51
+#: templates/dissemin/skeleton.html:53
 msgid "Contact:"
 msgstr "Contact:"
-

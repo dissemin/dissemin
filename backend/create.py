@@ -262,8 +262,17 @@ def create_oairecord(**kwargs):
         update_field_conditionally('contributors')
         update_field_conditionally('keywords')
         update_field_conditionally('description')
-        update_field_conditionally('pubtype')
 
+        new_pubtype = kwargs.get('pubtype', source.default_pubtype)
+        if new_pubtype in PAPER_TYPE_PREFERENCE:
+            idx = PAPER_TYPE_PREFERENCE.index(new_pubtype)
+            old_idx = len(PAPER_TYPE_PREFERENCE)-1
+            if match.pubtype in PAPER_TYPE_PREFERENCE:
+                old_idx = PAPER_TYPE_PREFERENCE.index(match.pubtype)
+            if new_idx < old_idx:
+                changed = True
+                match.pubtype = PAPER_TYPE_PREFERENCE[new_idx]
+            
         if changed:
             match.save()
 
@@ -283,7 +292,7 @@ def create_oairecord(**kwargs):
             description=kwargs.get('description'),
             keywords=kwargs.get('keywords'),
             contributors=kwargs.get('contributors'),
-            pubtype=kwargs.get('pubtype'),
+            pubtype=kwargs.get('pubtype', source.default_pubtype),
             priority=source.priority)
     record.save()
 

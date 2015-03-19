@@ -461,15 +461,21 @@ class Paper(models.Model):
             type_idx = min(idx, type_idx)
 
         self.oa_status = OA_STATUS_CHOICES[oa_idx][0]
-        self.doctype = PAPER_TYPE_PREFERENCE[type_idx]
         if not self.pdf_url:
-            matches = OaiRecord.objects.filter(
-                    about=self.id,pdf_url__isnull=False).order_by(
-                            '-source__oa', 'source__priority')[:1]
-            if matches:
-                self.pdf_url = matches[0].pdf_url
-                if matches[0].source.oa:
+            matches = self.oairecord_set.all().order_by(
+                            '-source__oa', 'source__priority').select_related('source')
+            self.pdf_url = None
+            for m in matches:
+                if not self.pdf_url:
+                    self.pdf_url = m.pdf_url
+                if m.source.oa:
                     self.oa_status = 'OA'
+
+                if m.pubtype in PAPER_TYPE_PREFERENCE:
+                    new_idx = PAPER_TYPE_PREFERENCE.index(m.pubtype)
+                    type_idx = min(new_idx, type_idx)
+
+        self.doctype = PAPER_TYPE_PREFERENCE[type_idx]
         self.save()
 
     def publications_with_unique_publisher(self):
@@ -735,6 +741,7 @@ class OaiSource(models.Model):
     name = models.CharField(max_length=100)
     oa = models.BooleanField(default=False)
     priority = models.IntegerField(default=1)
+    default_pubtype = models.CharField(max_length=128)
 
     # Fetching properties
     last_status_update = models.DateTimeField(auto_now=True)
