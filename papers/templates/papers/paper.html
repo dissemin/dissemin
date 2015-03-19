@@ -10,6 +10,9 @@
     <meta name="citation_title" content="{{ paper.title }}" />
     {% for author in paper.sorted_authors %}
         <meta name="citation_author" content="{{ author.name.last }}, {{ author.name.first }}" />
+        {% if author.affiliation %}
+        <meta name="citation_author_institution" content="{{ author.affiliation }}" />
+        {% endif %}
     {% endfor %}
     <meta name="citation_publication_date" content="{{ paper.year }}" />
     {% if paper.pdf_url %}

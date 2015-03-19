@@ -501,6 +501,9 @@ class Author(models.Model):
     cluster_relevance = models.FloatField(default=0) # TODO change this default to a negative value
     similar = models.ForeignKey('Author', blank=True, null=True, related_name='similarrel')
     researcher = models.ForeignKey(Researcher, blank=True, null=True, on_delete=models.SET_NULL)
+
+    affiliation = models.CharField(max_length=512, null=True, blank=True)
+
     def __unicode__(self):
         return unicode(self.name)
     def get_cluster_id(self):
