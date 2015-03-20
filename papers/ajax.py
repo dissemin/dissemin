@@ -125,6 +125,37 @@ def changeResearcher(request):
     allowedFields = ['role']
     return process_ajax_change(request, Researcher, allowedFields)
 
+# Author management
+@user_passes_test(is_admin)
+def changeAuthor(request):
+    response = dict()
+    try:
+        author = Author.objects.get(pk=request.POST.get('pk'))
+        first = request.POST.get('value[first]')
+        if first:
+            first = sanitize_html(first)
+        last = request.POST.get('value[last]')
+        if last:
+            last = sanitize_html(last)
+        if not first or not last:
+            return HttpResponseForbidden('First and last names are required.', content_type='text/plain')
+        author.name.first = first
+        author.name.last = last
+        author.name.save()
+
+        # TODO recompute fingerprint and merge if needed
+        author.paper.invalidate_cache()
+        response['status'] = 'OK'
+        researcher_id = author.researcher_id
+        if not researcher_id:
+            researcher_id = False
+        response['value'] = {'first':first,'last':last,'researcher_id':researcher_id}
+        return HttpResponse(json.dumps(response), content_type='text/plain')
+    except ObjectDoesNotExist:
+        return HttpResponseNotFound(json.dumps(response), content_type='text/plain')
+
+   
+
 # Publisher management
 @user_passes_test(is_admin)
 def changePublisherStatus(request):
@@ -148,6 +179,7 @@ urlpatterns = patterns('',
     url(r'^change-department$', changeDepartment, name='ajax-changeDepartment'),
     url(r'^change-paper$', changePaper, name='ajax-changePaper'),
     url(r'^change-researcher$', changeResearcher, name='ajax-changeResearcher'),
+    url(r'^change-author$', changeAuthor, name='ajax-changeAuthor'),
     url(r'^add-researcher$', addResearcher, name='ajax-addResearcher'),
     url(r'^change-publisher-status$', changePublisherStatus, name='ajax-changePublisherStatus'),
 )

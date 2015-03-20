@@ -22,6 +22,9 @@
     {% for paper in search_results %}
         makeTextEditable($('#paper-title-{{ paper.id }}'), '/ajax/change-paper', '{{ paper.id }}', 'title');
     {% endfor %}
+    $(".authorName").each(function(index) {
+        makeAuthorEditable($(this));
+    });
     {% if researcher %}
         makeTextEditable($('#researcher-role'), '/ajax/change-researcher', '{{ researcher.id }}', 'role');
     {% endif %}

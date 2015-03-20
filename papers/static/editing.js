@@ -42,8 +42,45 @@ $(function(){
 
 var pencilElements = new Array();
 
+var pencilCode = '<a href="#"><span class="glyphicon glyphicon-pencil small-glyphicon" aria-hidden="true"></span></a>'; 
+var pencilCodeNbsp = '<a href="#">&nbsp;<span class="glyphicon glyphicon-pencil small-glyphicon" aria-hidden="true"></span></a>'; 
+    
+function makeAuthorEditable(domElement) {
+    domElement.parent().append(pencilCodeNbsp);
+    var pencilElem = domElement.parent().children().last();
+    var tabId = pencilElements.length;
+    pencilElements[tabId] = pencilElem;
+    pencilElem.detach();
+
+    domElement.editable({
+        type:'name',
+        name: 'name',
+        value:{first: domElement.data('first'), last: domElement.data('last') },
+        url: '/ajax/change-author',
+        success: function(response, newValue) {
+            return {newValue: JSON.parse(response).value}; },
+        toggle: 'manual',
+        showbuttons: false,
+    });
+
+    pencilElem.click(function(e){
+        // pencilElements[tabId].detach();
+        e.stopPropagation();
+        domElement.editable('toggle');
+        e.preventDefault();
+     });
+
+    domElement.parent().hover(
+            function () {
+                domElement.parent().append(pencilElements[tabId]);
+            },
+            function () {
+                pencilElements[tabId].detach();
+            });
+
+}
+
 function makeTextEditable(domElement, ajaxUrl, pk, field) {
-    var pencilCode = '<a href="#"><span class="glyphicon glyphicon-pencil small-glyphicon" aria-hidden="true"></span></a>'; 
     domElement.parent().append(pencilCode);
     var pencilElem = domElement.parent().children().last();
     var tabId = pencilElements.length;
@@ -57,10 +94,6 @@ function makeTextEditable(domElement, ajaxUrl, pk, field) {
         url: ajaxUrl,
         success: function(response, newValue) {
             response=JSON.parse(response);
-            console.log(response);
-            console.log(response["value"]);
-            console.log(response.value);
-            console.log({newValue:response.value});
             return {newValue:response.value}; },
         mode: 'inline',
         toggle: 'manual',
