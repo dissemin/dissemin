@@ -22,6 +22,8 @@ from __future__ import unicode_literals
 from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
+from django.core.cache import cache
+from django.core.cache.utils import make_template_fragment_key
 from papers.utils import nstr, iunaccent, create_paper_plain_fingerprint
 from papers.name import match_names
 from django.utils.translation import ugettext_lazy as _
@@ -477,6 +479,7 @@ class Paper(models.Model):
 
         self.doctype = PAPER_TYPE_PREFERENCE[type_idx]
         self.save()
+        self.invalidate_cache()
 
     def publications_with_unique_publisher(self):
         seen_publishers = set()
@@ -491,6 +494,11 @@ class Paper(models.Model):
         """
         authors = [(a.name.first,a.name.last) for a in self.author_set.all().select_related('name')]
         return create_paper_plain_fingerprint(self.title, authors)
+
+    def invalidate_cache(self):
+        for rpk in [a.researcher_id for a in self.author_set.filter(researcher_id__isnull=False)]+[None]:
+            key = make_template_fragment_key('publiListItem', [self.pk, rpk])
+            cache.delete(key)
 
 # Researcher / Paper binary relation
 class Author(models.Model):

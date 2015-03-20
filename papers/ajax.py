@@ -48,6 +48,8 @@ def process_ajax_change(request, model, allowedFields):
             val = sanitize_html(val)
             setattr(dept, field, val)
             dept.save(update_fields=[field])
+            if hasattr(dept, "invalidate_cache"):
+                dept.invalidate_cache()
             response['status'] = 'OK'
             response['value'] = val
             return HttpResponse(json.dumps(response), content_type='text/plain')

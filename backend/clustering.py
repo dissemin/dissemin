@@ -134,6 +134,7 @@ class ClusteringContext(object):
             else:
                 val.researcher_id = None
             val.save()
+            val.paper.invalidate_cache()
 
     def classify(self, pkA, pkB):
         """

@@ -122,6 +122,7 @@ def merge_papers(first, second):
             first.last_annotation = annot.status
             break
         first.save(update_fields=['last_annotation'])
+    second.invalidate_cache()
     second.delete()
     first.visibility = new_status
     first.update_availability()

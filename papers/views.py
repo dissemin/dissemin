@@ -105,6 +105,7 @@ def searchView(request, **kwargs):
         search_description += _(' authored by ')+unicode(researcher)
         head_search_description = unicode(researcher)
         context['researcher'] = researcher
+        context['researcher_id'] = researcher.id
     elif 'department' in args:
         department = get_object_or_404(Department, pk=args.get('department'))
         queryset = queryset.filter(author__researcher__department=department)

@@ -1,5 +1,8 @@
 {% load author %}
 {% load i18n %}
+{% load cache %}
+{% cache 60000 publiListItem paper.pk researcher_id %}
+
 <div class="pubLogo">
     {% if paper.pdf_url %}<a href="{{ paper.pdf_url }}"><img src="/static/symbol-PDF-{{ paper.oa_status }}.png" width="52" height="70" /></a>
     {% else %}<img src="/static/symbol-{{ paper.oa_status }}.png" width="52" height="70" />{% endif %}
@@ -57,3 +60,4 @@
     {% endif %}
 
 </div>
+{% endcache %}
