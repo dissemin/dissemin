@@ -59,7 +59,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'papers',
-    'bootstrap_pagination'
+    'bootstrap_pagination',
+#    'debug_toolbar',
 )
 
 MIDDLEWARE_CLASSES = (

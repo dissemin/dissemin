@@ -45,7 +45,7 @@ def index(request):
     nb_researchers = Researcher.objects.count()
     context = {
         'nb_researchers': nb_researchers,
-        'departments': Department.objects.order_by('name')
+        'departments': Department.objects.order_by('name').select_related('stats')
         }
     return render(request, 'papers/index.html', context)
 

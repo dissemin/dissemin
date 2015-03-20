@@ -134,7 +134,7 @@ class Department(models.Model):
 
     @property
     def sorted_researchers(self):
-        return self.researcher_set.select_related('name').order_by('name')
+        return self.researcher_set.select_related('name', 'stats').order_by('name')
 
     def __unicode__(self):
         return self.name
@@ -384,7 +384,7 @@ class Paper(models.Model):
 
     @property
     def sorted_authors(self):
-        return self.author_set.order_by('id')
+        return self.author_set.order_by('id').select_related('name')
 
     def author_count(self):
         if self.cached_author_count == None:
