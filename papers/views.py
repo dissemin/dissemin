@@ -99,6 +99,8 @@ def searchView(request, **kwargs):
     
     search_description = _('Papers')
     head_search_description = _('Papers')
+
+    context['researcher_id'] = None
     if 'researcher' in args:
         researcher = get_object_or_404(Researcher, pk=args.get('researcher'))
         queryset = queryset.filter(author__researcher=researcher)
