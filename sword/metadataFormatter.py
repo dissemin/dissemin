@@ -69,7 +69,7 @@ class AOFRFormatter(MetadataFormatter):
         self.renderTitleAuthors(titleStmt, paper)
 
         # publicationStmt
-        publicationStmt = addChild(biblFull, 'publicationStmt')
+        # publicationStmt = addChild(biblFull, 'publicationStmt')
         # TODO add license here
 
         # seriesStmt
@@ -79,8 +79,20 @@ class AOFRFormatter(MetadataFormatter):
         idno.attrib['n'] = 'ENS-PARIS'
         # TODO add other stamps here (based on the institutions)
 
+        # notesStmt
+        notesStmt = addChild(biblFull, 'notesStmt')
+        note = addChild(notesStmt, 'note')
+        note.attrib['type'] = 'popular'
+        note.attrib['n'] = '0'
+        note = addChild(notesStmt, 'note')
+        note.attrib['type'] = 'audience'
+        note.attrib['n'] = '3'
+        note = addChild(notesStmt, 'note')
+        note.attrib['type'] = 'peer'
+        note.attrib['n'] = '1'
+
         # editionStmt
-        if filename != None:
+        if False and filename != None:
             editionStmt = addChild(biblFull, 'editionStmt')
             edition = addChild(editionStmt, 'edition')
             ref = addChild(edition, 'ref')
@@ -122,7 +134,7 @@ class AOFRFormatter(MetadataFormatter):
                 abstract.text = record.description
                 break
 
-        back = addChild(text, 'back')
+        # back = addChild(text, 'back')
 
         return tei
 
@@ -147,6 +159,10 @@ class AOFRFormatter(MetadataFormatter):
             lastName = addChild(nameNode, 'surname')
             lastName.text = name.last
 
+            if author.researcher_id:
+                affiliation = addChild(node, 'affiliation')
+                affiliation.attrib['ref'] = '#struct-104208'
+
     def renderPubli(self, biblStruct, publi):
         # TODO: handle publication type properly
         root = addChild(biblStruct, 'monogr')
@@ -161,7 +177,7 @@ class AOFRFormatter(MetadataFormatter):
                
         if publi.publisher:
             publisher = addChild(imprint, 'publisher')
-            publisher.text = publi.publisher
+            publisher.text = unicode(publi.publisher)
         if publi.issue:
             biblScope = addChild(imprint, 'biblScope')
             biblScope.attrib['unit'] = 'issue'
@@ -179,7 +195,7 @@ class AOFRFormatter(MetadataFormatter):
             idno.attrib['type'] = 'doi'
             idno.text = publi.doi 
 
-        data = addChild(imprint, 'data')
+        data = addChild(imprint, 'date')
         data.attrib['type'] = 'datePub'
         data.text = 'unknown'
         if publi.pubdate:
@@ -195,7 +211,7 @@ class AOFRFormatter(MetadataFormatter):
 # The following lines are for testing purposes only
 def generate():
 	formatter = AOFRFormatter()
-	paper = Paper.objects.get(pk=1233)
+	paper = Paper.objects.get(pk=19549)
 	return formatter.toString(paper, 'article.pdf', True)
 
 
