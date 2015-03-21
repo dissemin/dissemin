@@ -19,38 +19,38 @@ ENS
     </p>
 
     <p>
-    {% blocktrans trimmed %}
-    This is a preproduction version of the platform.
-    {% endblocktrans %}
-    </p>
-
-    <h2>{% trans "Statistics" %}</h2>
-    <p>
     {% blocktrans trimmed with depts=departments.count %}
     We gather the publications of {{ nb_researchers }} researchers, from {{ depts }} departments.
     {% endblocktrans %}
     </p>
 
-    <h2>{% trans "Browse papers" %}</h2>
-
-    {% url 'search' as search_url %}
-    <p>{% blocktrans trimmed %}
-    See <a href="{{ search_url }}">all papers</a> or browse by department:
-    {% endblocktrans %}
-    </p>
+    <h2>{% trans "Departments" %}</h2>
     <ul>
-        {% for dept in departments %}
-        <li><a href="{% url 'department' dept.id %}">{{ dept }}</a>
-        {% include "papers/accessStatistics.html" with stats=dept.stats %}
-        </li>
-        {% endfor %}
+    {% for dept in departments %}
+    <li><a href="{% url 'department' dept.pk %}">{{ dept }}</a></li>
+    {% endfor %}
     </ul>
+    <a href="#">See all {{ nb_departments }} departments</a>
 
-    {% url 'publishers' as publishers_url %}
-    <p>
-        {% blocktrans trimmed %}
-        See also the <a href="{{ publishers_url }}">publishers list</a>.
-        {% endblocktrans %}
-    </p>
+
+    <h2>{% trans "Papers" %}</h2>
+    
+    {% url 'search' as search_url %}
+    <ul>
+    {% for paper in papers %}
+       {% include "papers/publiListItem.html" with paper=paper %}
+    {% endfor %}
+    </ul>
+    <a href="{{ search_url }}">See all {{ nb_papers }} papers</a>
+
+    <h2>{% trans "Publishers" %}</h2>
+
+    <ul>
+    {% for publisher in publishers %}
+    <li><a href="{% url 'publisher' publisher.pk %}">{{ publisher }}</a></li>   
+    {% endfor %}
+    </ul>
+    <a href="{% url 'publishers' %}">See all {{ nb_publishers }} publishers</a>
+
 </div>
 {% endblock %}

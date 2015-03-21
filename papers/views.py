@@ -42,10 +42,15 @@ NB_RESULTS_PER_PAGE = 20
 NB_JOURNALS_PER_PAGE = 30
 
 def index(request):
-    nb_researchers = Researcher.objects.count()
+    
     context = {
-        'nb_researchers': nb_researchers,
-        'departments': Department.objects.order_by('name').select_related('stats')
+        'nb_researchers': Researcher.objects.count(),
+        'nb_departments': Department.objects.count(),
+        'nb_papers': Paper.objects.filter(visibility='VISIBLE').count(),
+        'nb_publishers': Publisher.objects.filter(stats__num_tot__gt=0).count(),
+        'departments': Department.objects.order_by('name').select_related('stats')[:3],
+        'papers' : Paper.objects.filter(visibility='VISIBLE').order_by('-pubdate')[:3],
+        'publishers' : Publisher.objects.all().filter(stats__isnull=False).order_by('-stats__num_tot')[:3],
         }
     return render(request, 'papers/index.html', context)
 
