@@ -161,7 +161,7 @@ class AOFRFormatter(MetadataFormatter):
 
             if author.researcher_id:
                 affiliation = addChild(node, 'affiliation')
-                affiliation.attrib['ref'] = '#struct-104208'
+                affiliation.attrib['ref'] = '#struct-247621'
 
     def renderPubli(self, biblStruct, publi):
         # TODO: handle publication type properly
