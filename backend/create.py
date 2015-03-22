@@ -96,37 +96,6 @@ def get_or_create_paper(title, author_names, pubdate, doi=None, visibility='VISI
             pass
     return p
 
-# Merges the second paper into the first one
-def merge_papers(first, second):
-    # TODO What if the authors are not the same?
-    # We should merge the list of authors, so that the order is preserved
-
-    # TODO merge author relations
-
-    if first.pk == second.pk:
-        return
-
-    statuses = [first.visibility,second.visibility]
-    new_status = 'DELETED'
-    for s in VISIBILITY_CHOICES:
-        if s[0] in statuses:
-            new_status = s[0]
-            break
-    
-    OaiRecord.objects.filter(about=second.pk).update(about=first.pk)
-    Publication.objects.filter(paper=second.pk).update(paper=first.pk)
-    Annotation.objects.filter(paper=second.pk).update(paper=first.pk)
-    if second.last_annotation:
-        first.last_annotation = None
-        for annot in first.annotation_set.all().order_by('-timestamp'):
-            first.last_annotation = annot.status
-            break
-        first.save(update_fields=['last_annotation'])
-    second.invalidate_cache()
-    second.delete()
-    first.visibility = new_status
-    first.update_availability()
-
 
 CROSSREF_PUBTYPE_ALIASES = {
         'article':'journal-article',
@@ -278,7 +247,7 @@ def create_oairecord(**kwargs):
             match.save()
 
         if about.pk != match.about.pk:
-            merge_papers(about, match.about)
+            about.merge(match.about)
 
         match.about.update_availability()
         return match

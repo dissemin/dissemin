@@ -27,6 +27,7 @@ from django.core.cache.utils import make_template_fragment_key
 from papers.utils import nstr, iunaccent, create_paper_plain_fingerprint
 from papers.name import match_names
 from django.utils.translation import ugettext_lazy as _
+import hashlib
 
 OA_STATUS_CHOICES = (
         ('OA', _('Open access')),
@@ -495,10 +496,62 @@ class Paper(models.Model):
         authors = [(a.name.first,a.name.last) for a in self.author_set.all().select_related('name')]
         return create_paper_plain_fingerprint(self.title, authors)
 
+    def new_fingerprint(self):
+        buf = self.plain_fingerprint()
+        m = hashlib.md5()
+        m.update(buf)
+        return m.hexdigest()
+
     def invalidate_cache(self):
         for rpk in [a.researcher_id for a in self.author_set.filter(researcher_id__isnull=False)]+[None]:
             key = make_template_fragment_key('publiListItem', [self.pk, rpk])
             cache.delete(key)
+
+    # Merge paper into self
+    def merge(self, paper):
+        # TODO What if the authors are not the same?
+        # We should merge the list of authors, so that the order is preserved
+
+        # TODO merge author relations
+
+        if self.pk == paper.pk:
+            return
+
+        statuses = [self.visibility,paper.visibility]
+        new_status = 'DELETED'
+        for s in VISIBILITY_CHOICES:
+            if s[0] in statuses:
+                new_status = s[0]
+                break
+        
+        OaiRecord.objects.filter(about=paper.pk).update(about=self.pk)
+        Publication.objects.filter(paper=paper.pk).update(paper=self.pk)
+        Annotation.objects.filter(paper=paper.pk).update(paper=self.pk)
+        if paper.last_annotation:
+            self.last_annotation = None
+            for annot in self.annotation_set.all().order_by('-timestamp'):
+                self.last_annotation = annot.status
+                break
+            self.save(update_fields=['last_annotation'])
+        paper.invalidate_cache()
+        paper.delete()
+        self.visibility = new_status
+        self.update_availability()
+
+
+    def recompute_fingerprint_and_merge_if_needed(self):
+        new_fingerprint = self.new_fingerprint()
+        if self.fingerprint == new_fingerprint:
+            return
+        match = Paper.objects.filter(fingerprint=new_fingerprint).first()
+        if match is None:
+            self.fingerprint = new_fingerprint
+            self.save(update_fields=['fingerprint'])
+            return
+        else:
+            match.merge(self)
+            return match
+
 
 # Researcher / Paper binary relation
 class Author(models.Model):

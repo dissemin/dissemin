@@ -45,7 +45,7 @@ var pencilElements = new Array();
 var pencilCode = '<a href="#"><span class="glyphicon glyphicon-pencil small-glyphicon" aria-hidden="true"></span></a>'; 
 var pencilCodeNbsp = '<a href="#">&nbsp;<span class="glyphicon glyphicon-pencil small-glyphicon" aria-hidden="true"></span></a>'; 
     
-function makeAuthorEditable(domElement) {
+function makeAuthorEditable(domElement, mergedCallback) {
     domElement.parent().append(pencilCodeNbsp);
     var pencilElem = domElement.parent().children().last();
     var tabId = pencilElements.length;
@@ -58,7 +58,12 @@ function makeAuthorEditable(domElement) {
         value:{first: domElement.data('first'), last: domElement.data('last') },
         url: '/ajax/change-author',
         success: function(response, newValue) {
-            return {newValue: JSON.parse(response).value}; },
+            resp = JSON.parse(response);
+            console.logl(resp);
+            if(resp.merged != '') {
+                setTimeout(function() { mergedCallback(domElement, resp); }, 1000);
+            }
+            return {newValue: resp.value}; },
         toggle: 'manual',
         showbuttons: false,
     });
@@ -80,7 +85,7 @@ function makeAuthorEditable(domElement) {
 
 }
 
-function makeTextEditable(domElement, ajaxUrl, field) {
+function makeTextEditable(domElement, ajaxUrl, field, merge_callback) {
     domElement.parent().append(pencilCode);
     var pencilElem = domElement.parent().children().last();
     var tabId = pencilElements.length;
@@ -93,6 +98,9 @@ function makeTextEditable(domElement, ajaxUrl, field) {
         url: ajaxUrl,
         success: function(response, newValue) {
             response=JSON.parse(response);
+            if(response.merged != '') {
+                setTimeout(function() { merge_callback(domElement, response); }, 1000);
+            }
             return {newValue:response.value}; },
         mode: 'inline',
         toggle: 'manual',

@@ -41,15 +41,21 @@ from papers.utils import iunaccent, sanitize_html
 def process_ajax_change(request, model, allowedFields):
     response = dict()
     try:
-        dept = model.objects.get(pk=request.POST.get('pk'))
+        instance = model.objects.get(pk=request.POST.get('pk'))
         field = request.POST.get('name')
         if field in allowedFields:
             val = request.POST.get('value')
             val = sanitize_html(val)
-            setattr(dept, field, val)
-            dept.save(update_fields=[field])
-            if hasattr(dept, "invalidate_cache"):
-                dept.invalidate_cache()
+            setattr(instance, field, val)
+            instance.save(update_fields=[field])
+            if hasattr(instance, "invalidate_cache"):
+                instance.invalidate_cache()
+            if model == Paper:
+                merged = instance.recompute_fingerprint_and_merge_if_needed()
+                response['merged'] = ''
+                if merged:
+                    response['merged'] = merged.pk
+                    response['merged_title'] = merged.title
             response['status'] = 'OK'
             response['value'] = val
             return HttpResponse(json.dumps(response), content_type='text/plain')
@@ -142,17 +148,23 @@ def changeAuthor(request):
         if author.name.first != first or author.name.last != last:
             new_name = Name.lookup_name((first,last))
             new_name.save()
-            print "##### NAME CHANGED, new pk="+str(new_name.pk)
             author.name_id = new_name.pk
             author.save()
 
-        # TODO recompute fingerprint and merge if needed
         author.paper.invalidate_cache()
         response['status'] = 'OK'
         researcher_id = author.researcher_id
         if not researcher_id:
             researcher_id = False
         response['value'] = {'first':first,'last':last,'researcher_id':researcher_id}
+        
+        # The fingerprint might have changed and might collide with another paper
+        merged = author.paper.recompute_fingerprint_and_merge_if_needed()
+        response['merged'] = ''
+        if merged:
+            response['merged'] = merged.pk
+            response['merged_title'] = merged.title
+
         return HttpResponse(json.dumps(response), content_type='text/plain')
     except ObjectDoesNotExist:
         return HttpResponseNotFound(json.dumps(response), content_type='text/plain')

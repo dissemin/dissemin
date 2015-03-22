@@ -35,9 +35,14 @@
 {% block jsScript %}
 {% if request.user.is_superuser %}
 $(function(){
-    makeTextEditable($('#paperTitle'), '/ajax/change-paper', 'title');
+
+    function paperMerged(domElem, response) {
+        window.location.replace('/paper/'+response.merged);
+    }
+
+    makeTextEditable($('#paperTitle'), '/ajax/change-paper', 'title', paperMerged);
     $(".unknownAuthorName").each(function(index) {
-        makeAuthorEditable($(this));
+        makeAuthorEditable($(this), paperMerged);
     });
 });
 {% endif %}

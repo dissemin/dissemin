@@ -156,6 +156,7 @@ def create_paper_plain_fingerprint(title, authors):
         # Initials of the given names
         initials = map(lambda x: x[0].lower(), split_words(author[0]))
         # Last name, without the small words such as "van", "der", "de"…
+        # TODO: remove this filter
         last_words = filter(lambda x: x[0].isupper(), split_words(author[1]))
         # If no word was uppercased, fall back on all the words
         if not last_words:

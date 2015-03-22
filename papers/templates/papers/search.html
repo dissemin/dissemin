@@ -19,15 +19,22 @@
 	}
 {% if request.user.is_superuser %}
     $(function(){
+
+    function paperMerged(domElem, response) {
+        li = domElem.closest('li');
+        li.replaceWith('<li class="itemMerged">{% trans "Paper merged with " %}<a href="/paper/'+
+            response.merged+'">"'+response.merged_title+'"</a></li>');
+    }
+
     $(".paperItemTitle").each(function(index) {
-        makeTextEditable($(this), '/ajax/change-paper', 'title');
+        makeTextEditable($(this), '/ajax/change-paper', 'title', paperMerged);
     });
 
     $(".unknownAuthorName").each(function(index) {
-        makeAuthorEditable($(this));
+        makeAuthorEditable($(this), paperMerged);
     });
     {% if researcher %}
-        makeTextEditable($('#researcher-role'), '/ajax/change-researcher', 'role');
+    makeTextEditable($('#researcher-role'), '/ajax/change-researcher', 'role', function(a,b) { ; });
     {% endif %}
     });
 {% endif %}

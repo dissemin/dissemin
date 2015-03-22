@@ -22,7 +22,6 @@ from __future__ import unicode_literals
 
 from papers.models import *
 from papers.utils import sanitize_html, create_paper_fingerprint
-from backend.create import merge_papers
 from backend.romeo import fetch_publisher
 from time import sleep
 from collections import defaultdict
@@ -128,7 +127,7 @@ def recompute_fingerprints():
         if new_fp != p.fingerprint:
             matching = list(Paper.objects.filter(fingerprint=new_fp))
             if matching:
-                merge_papers(p, matching[0])
+                p.merge(matching[0])
                 merged += 1
             else:
                 p.fingerprint = new_fp
