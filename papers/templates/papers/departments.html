@@ -1,0 +1,22 @@
+{% extends "dissemin/skeleton.html" %}
+
+{% load i18n %}
+
+{% block headTitle %}
+ENS
+{% endblock %}
+
+{% block content %}
+<div id="fullPage">
+  <h2>{% trans "List of departments" %}</h2>
+  
+  <ul>
+  {% for dept in departments %}
+    <li><a href="{% url 'department' dept.id %}">{{ dept }}</a>
+    {% include "papers/accessStatistics.html" with stats=dept.stats %}
+    </li>
+  {% endfor %}
+  </ul>
+  
+</div>
+{% endblock %}

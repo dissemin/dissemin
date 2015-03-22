@@ -109,7 +109,7 @@ h4
 {
     min-height: 500px;
     padding-left: 20px;
-    padding-right: 10px;
+    padding-right: 20px;
     padding-top: 10px;
     padding-bottom: 10px;
     height: auto !important;
@@ -662,3 +662,83 @@ h1.paperTitle {
     width: 100%;
 }
 
+/* Homepage */
+
+#welcome {
+    background-color: #2A6496;
+	color:white;
+	padding:20px 50px;
+	font-size:1.2em;
+	font-weight:normal;
+	margin:10px 0;
+	overflow:hidden;
+}
+
+#welcome p {
+	width:70%;
+}
+
+#welcome a {
+	color:#fff;
+	text-decoration:underline;
+}
+
+#welcome #institutionblock {
+	float:right;
+	width:29%;
+	text-align:center;
+}
+
+#welcome #institution {
+	max-width:100%;
+}
+
+#smallPaperList {
+	border:1px solid #ccc;
+	border-radius:10px;
+	overflow:hidden;
+}
+
+#smallPaperList ul {
+	max-height:300px;
+	overflow-y:auto;
+	margin:0;
+}
+
+.seeAll {
+	display:block;
+	width:100%;
+	font-weight:bold;
+}
+
+#smallPaperList .seeAll {
+	background:#eee;
+	border-top:1px solid #ccc;
+	padding:6px 10px;
+}
+
+#siteSummaries {
+	overflow:hidden;
+	margin-top:20px;
+}
+
+.siteSummary {
+	width:48%;
+	width:calc(50% - 10px);
+	background:#eee;
+	padding:20px;
+}
+
+.siteSummary h2 {
+	margin-top:0px;
+}
+
+.siteSummary.left {
+	float:left;
+	margin-right:10px;
+}
+
+.siteSummary.right {
+	float:right;
+	margin-left:10px;
+}

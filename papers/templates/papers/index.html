@@ -8,7 +8,13 @@ ENS
 
 {% block content %}
 <div id="fullPage">
+  <div id="welcome">
+	<div id="institutionblock">
+	  <img id="institution" src="/static/ens.png" />
+	</div>
+	
     <h2>{% trans "Welcome to dissem.in" %}</h2>
+	
     <p>
     {% url 'faq' as faq_url %}
     {% blocktrans trimmed %}
@@ -17,40 +23,60 @@ ENS
     See the <a href="{{ faq_url }}">FAQ</a> for more information about dissem.in.
     {% endblocktrans %}
     </p>
-
+	
     <p>
-    {% blocktrans trimmed with depts=departments.count %}
+    {% blocktrans trimmed with depts=nb_departments %}
     We gather the publications of {{ nb_researchers }} researchers, from {{ depts }} departments.
     {% endblocktrans %}
     </p>
+  </div>
+  
 
-    <h2>{% trans "Departments" %}</h2>
+  
+  <h2>{% trans "Latest papers" %}</h2>
+    
+  <div id="smallPaperList">
+    
+	{% url 'search' as search_url %}
+    <ul class="withoutTriangles">
+    {% for paper in papers %}
+	   <li>
+       {% include "papers/publiListItem.html" with paper=paper %}
+	   </li>
+    {% endfor %}
+    </ul>
+    <a href="{{ search_url }}" class="seeAll">See all {{ nb_papers }} papers</a>
+	
+  </div>
+	
+  <div id="siteSummaries">
+	
+  <div class="siteSummary left">
+    
+	<h2>{% trans "Departments" %}</h2>
     <ul>
     {% for dept in departments %}
     <li><a href="{% url 'department' dept.pk %}">{{ dept }}</a></li>
     {% endfor %}
     </ul>
-    <a href="#">See all {{ nb_departments }} departments</a>
-
-
-    <h2>{% trans "Papers" %}</h2>
+    <a href="{% url 'departments' %}" class="seeAll">See all {{ nb_departments }} departments</a>
+	
+  </div>
+	
+  <div class="siteSummary right">
     
-    {% url 'search' as search_url %}
-    <ul>
-    {% for paper in papers %}
-       {% include "papers/publiListItem.html" with paper=paper %}
-    {% endfor %}
-    </ul>
-    <a href="{{ search_url }}">See all {{ nb_papers }} papers</a>
-
-    <h2>{% trans "Publishers" %}</h2>
+	<h2>{% trans "Publishers" %}</h2>
 
     <ul>
     {% for publisher in publishers %}
     <li><a href="{% url 'publisher' publisher.pk %}">{{ publisher }}</a></li>   
     {% endfor %}
     </ul>
-    <a href="{% url 'publishers' %}">See all {{ nb_publishers }} publishers</a>
+    <a href="{% url 'publishers' %}" class="seeAll">See all {{ nb_publishers }} publishers</a>
+	
+  </div>
+  
+  </div>
 
 </div>
 {% endblock %}
