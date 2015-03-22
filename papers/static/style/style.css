@@ -265,6 +265,11 @@ li
     min-height: 55px;
 }
 
+.pubText p
+{
+    margin: 0px 0px 5px;
+}
+
 .pubRef
 {
     color: #6e6e6e;
