@@ -1,7 +1,7 @@
 {% load author %}
 {% load i18n %}
 {% load cache %}
-{% cache 60000 publiListItem paper.pk researcher_id %}
+{% cache 60000 publiListItem paper.pk researcher_id with_buttons %}
 
 <div class="pubLogo">
     {% if paper.pdf_url %}<a href="{{ paper.pdf_url }}"><img src="/static/symbol-PDF-{{ paper.oa_status }}.png" width="52" height="70" /></a>
@@ -45,7 +45,7 @@
          {% endfor %}
     </p>
     
-    {% if request.user.is_authenticated %}
+    {% if request.user.is_authenticated and with_buttons %}
     <form>
         <div class="btn-group-sm" data-toggle="buttons">
         {% with vis=paper.annotation_code %}

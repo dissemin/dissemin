@@ -186,7 +186,7 @@
     <div class="listYear">{{ paper.year }}</div><ul class="withoutTriangles">
  {% endifchanged %}
     <li class="pubItem">
-        {% include "papers/publiListItem.html" with paper=paper %}
+        {% include "papers/publiListItem.html" with paper=paper with_buttons=request.user.is_authenticated %}
 </li>    
         {% if forloop.last %}</ul></div>{% endif %}
  {% empty %}

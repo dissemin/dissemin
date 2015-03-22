@@ -41,7 +41,7 @@ ENS
     <ul class="withoutTriangles">
     {% for paper in papers %}
 	   <li>
-       {% include "papers/publiListItem.html" with paper=paper %}
+       {% include "papers/publiListItem.html" with paper=paper with_buttons=False %}
 	   </li>
     {% endfor %}
     </ul>
