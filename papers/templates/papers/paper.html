@@ -25,7 +25,7 @@
 {% endblock %}
 
 {% block bodyTitle %}
-<span id="paperTitle" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">
+<span id="paperTitle" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}" data-pk="{{ paper.pk }}">
     {% autoescape off %}
         {{ paper.title }}
     {% endautoescape %}
@@ -35,7 +35,7 @@
 {% block jsScript %}
 {% if request.user.is_superuser %}
 $(function(){
-makeTextEditable($('#paperTitle'), '/ajax/change-paper', '{{ paper.id }}', 'title');
+makeTextEditable($('#paperTitle'), '/ajax/change-paper', 'title');
 });
 {% endif %}
 {% endblock %}

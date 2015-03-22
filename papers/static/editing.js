@@ -80,7 +80,7 @@ function makeAuthorEditable(domElement) {
 
 }
 
-function makeTextEditable(domElement, ajaxUrl, pk, field) {
+function makeTextEditable(domElement, ajaxUrl, field) {
     domElement.parent().append(pencilCode);
     var pencilElem = domElement.parent().children().last();
     var tabId = pencilElements.length;
@@ -88,7 +88,6 @@ function makeTextEditable(domElement, ajaxUrl, pk, field) {
 
     domElement.editable({
         type: 'text',
-        pk: pk,
         name: field,
         escape: false,
         url: ajaxUrl,

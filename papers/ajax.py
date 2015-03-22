@@ -139,9 +139,12 @@ def changeAuthor(request):
             last = sanitize_html(last)
         if not first or not last:
             return HttpResponseForbidden('First and last names are required.', content_type='text/plain')
-        author.name.first = first
-        author.name.last = last
-        author.name.save()
+        if author.name.first != first or author.name.last != last:
+            new_name = Name.lookup_name((first,last))
+            new_name.save()
+            print "##### NAME CHANGED, new pk="+str(new_name.pk)
+            author.name_id = new_name.pk
+            author.save()
 
         # TODO recompute fingerprint and merge if needed
         author.paper.invalidate_cache()
