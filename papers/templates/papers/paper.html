@@ -35,7 +35,10 @@
 {% block jsScript %}
 {% if request.user.is_superuser %}
 $(function(){
-makeTextEditable($('#paperTitle'), '/ajax/change-paper', 'title');
+    makeTextEditable($('#paperTitle'), '/ajax/change-paper', 'title');
+    $(".unknownAuthorName").each(function(index) {
+        makeAuthorEditable($(this));
+    });
 });
 {% endif %}
 {% endblock %}
@@ -43,7 +46,11 @@ makeTextEditable($('#paperTitle'), '/ajax/change-paper', 'title');
 {% block lists %}
 <p>
 {% for author in paper.sorted_authors %}{% if not forloop.first %},{% endif %}
-{{ author | authorlink }}{% endfor %}</p>
+<span><span class="{% if author.researcher_id %}knownAuthorName{% else %}unknownAuthorName{% endif %}"
+    data-pk="{{ author.pk }}"
+    data-first="{{ author.name.first }}"
+    data-last="{{ author.name.last }}"
+    data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">{{ author | authorlink }}</span></span>{% endfor %}</p>
 {% for publi in paper.publication_set.all %}
 <p>{{ publi | publication }}
 {% if publi.doi %}
