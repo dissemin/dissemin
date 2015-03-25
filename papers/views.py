@@ -49,7 +49,7 @@ def index(request):
         'nb_papers': Paper.objects.filter(visibility='VISIBLE').count(),
         'nb_publishers': Publisher.objects.filter(stats__num_tot__gt=0).count(),
         'departments': Department.objects.order_by('name').select_related('stats')[:3],
-        'papers' : Paper.objects.filter(visibility='VISIBLE').order_by('-pubdate')[:3],
+        'papers' : Paper.objects.filter(visibility='VISIBLE').order_by('-pubdate')[:5],
         'publishers' : Publisher.objects.all().filter(stats__isnull=False).order_by('-stats__num_tot')[:3],
         }
     return render(request, 'papers/index.html', context)
@@ -94,6 +94,12 @@ def publishersView(request, **kwargs):
     context['oa_status_choices'] = oa_variants
     return render(request, 'papers/publishers.html', context)
 
+def departmentsView(request, **kwargs):
+	context = {
+        'nb_departments': Department.objects.count(),
+        'departments': Department.objects.order_by('name').select_related('stats'),
+        }
+	return render(request, 'papers/departments.html', context)
 
 def searchView(request, **kwargs):
     context = dict()

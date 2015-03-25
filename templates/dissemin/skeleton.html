@@ -19,7 +19,7 @@
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
     });
     </script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async>
     </script>
     <script type="text/javascript" src="{% static "editing.js" %}"></script>
     <script type="text/javascript" src="{% static "name.js" %}"></script>
@@ -33,7 +33,7 @@
         <div id="header">
 	  <div id="subheader">
             <span id="dissemin"><a href="/">dissem.in</a></span>
-            <div id="rightLinks"><a href="/">{% trans "Home" context "memu bar" %}</a> &nbsp; &#9679; &nbsp; <a href="{% url 'faq' %}">{% trans "FAQ" %}</a> &nbsp; &#9679; &nbsp; <a href="{% url 'feedback' %}">{% trans "Feedback" %}</a> &nbsp; &#9679; &nbsp;
+            <div id="rightLinks"><a href="/">{% trans "Home" context "memu bar" %}</a> &nbsp;&nbsp; <a href="{% url 'faq' %}">{% trans "FAQ" %}</a> &nbsp;&nbsp; <a href="{% url 'feedback' %}">{% trans "Feedback" %}</a> &nbsp;&nbsp;
                 {% if request.user.is_authenticated %}
                 {{ request.user }} − <a href="/logout/">{% trans "Logout" %}</a>
                 {% else %}
