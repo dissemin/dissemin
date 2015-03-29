@@ -1,0 +1,19 @@
+{% extends "dissemin/skeleton.html" %}
+
+{% load i18n %}
+
+{% block headTitle %}
+{% trans "Page not found" %}
+{% endblock %}
+
+{% block content %}
+<div id="fullPage">
+    <div style="text-align: center; padding-top: 50px;">
+        <h2>{% trans "Page not found" %}</h2>
+        <p>{% blocktrans %}
+            The page you requested could not be found. <a href="/">Go back to the home page.</a>
+           {% endblocktrans %}
+        </p>
+    </div>
+</div>
+{% endblock %}
