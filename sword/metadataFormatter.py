@@ -8,6 +8,8 @@ from papers.models import Paper, Publication, Author, Researcher, Name, OaiRecor
 from papers.utils import split_words
 
 
+ENS_HAL_ID = 59704
+
 XMLLANG_ATTRIB= '{http://www.w3.org/XML/1998/namespace}lang'
 
 class MetadataFormatter(object):
@@ -161,7 +163,7 @@ class AOFRFormatter(MetadataFormatter):
 
             if author.researcher_id:
                 affiliation = addChild(node, 'affiliation')
-                affiliation.attrib['ref'] = '#struct-247621'
+                affiliation.attrib['ref'] = '#struct-'+str(ENS_HAL_ID)
 
     def renderPubli(self, biblStruct, publi):
         # TODO: handle publication type properly

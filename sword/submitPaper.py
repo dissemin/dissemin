@@ -65,14 +65,7 @@ def FullHal(pdf,metadata):
 #I will assume that the online "edition" is where I want
 
 def UpdateHal(pdf,idHal):
-    with open("sword/t/deposit.zip","r") as zp:    
-        #metadata = mt.read()
-#        metadata = etree.fromstring(mt.read())
-#        nodeInteresting = metadata.find(".//{http://www.tei-c.org/ns/1.0}edition")
-#        etree.SubElement(nodeInteresting, 'ref', type="file", target="article.pdf")      
-#        metadata = etree.tostring(metadata)
-#        print metadata 
-        strData = zp.read()#CreateZipFromPdfAndMetadata(pdf,metadata)
+        strData = CreateZipFromPdfAndMetadata(pdf,sword.metadataFormatter.generate())
         conn.putrequest("PUT", "/sword/"+idHal, True,True)
         conn.putheader("Host", "api-preprod.archives-ouvertes.fr")
         conn.putheader("Authorization",encodeUserData(u,p))
@@ -92,7 +85,8 @@ def UpdateHal(pdf,idHal):
 # edition editionStmt biblFull  listBibl body text tei
 def bla():
     with open("sword/t/article.pdf","r") as art:
-         UpdateHal(art.read(),"lirmm-00090366")
+  		#FullHal(art.read(), sword.metadataFormatter.generate())      
+			UpdateHal(art.read(),"hal-01030339")
 
 #TODO parse the XML to search "<edition>" then add the src
 #TODO Full SSL. Right now user/pass are not crypted.
