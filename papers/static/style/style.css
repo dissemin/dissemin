@@ -251,6 +251,8 @@ li
 
 .pubText, .criterionItem
 {
+	display: table-cell;
+	vertical-align: middle;
     margin-top: 15px;
     margin-bottom: 15px;
     padding-left: 10px;
@@ -373,10 +375,11 @@ h1.paperTitle {
 
 .unselectedCriterion, .selectedCriterion, .publisher
 {
-    height: 55px;
+    min-height: 50px;
     padding: 2px;
     margin: 0px;
 	clear: both;
+	display:table-row;
 }
 
 .publisher {
