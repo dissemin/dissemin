@@ -750,3 +750,25 @@ h1.paperTitle {
 	float:right;
 	margin-left:10px;
 }
+
+/* FAQ */
+#faqSummary {
+	margin:20px;
+	background:#eee;
+	padding-bottom:10px;
+}
+
+#faqSummary h4, .faq h3 {
+    background-color: #2A6496;
+	color:white;
+	padding:10px;
+}
+
+.faq h3 {
+	margin-left:-10px;
+	margin-right:-10px;
+}
+
+#faqSummary p {
+	padding-left: 20px;
+}

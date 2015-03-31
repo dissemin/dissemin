@@ -7,10 +7,11 @@
 {% endblock %}
 
 {% block content %}
-<div id="fullPage">
+<div id="fullPage" class="faq">
     <div id="contentTitle">{% trans "Frequently Asked Questions" %}</div>
     <div id="actualContent">
 
+	  <div id="faqSummary">
         <h4>Open Access</h4>
         <p><a href="#open-access">{% trans "What is Open Access?" %}</a></p>
         <p><a href="#repositories-rock">{% trans "Why should I upload my papers to a repository?" %}</a></p>
@@ -38,7 +39,7 @@
         <p><a href="#getting-involved">{% trans "How can I help?" %}</a></p>
         <p><a href="#source-code">{% trans "Where is the source code?" %}</a></p>
         <p><a href="#oai">{% trans "Can I harvest your data?" %}</a></p>
- 
+      </div>
         <h3>{% trans "Open Access" %}</h3>
 
         <h2 id="open-access">{% trans "What is Open Access?" %}</h2>
@@ -137,7 +138,7 @@
         <h3>Policies and full-text availability</h3>
         <h2 id="policy-classes">{% trans "What do your policy classes mean?" %}</h2>
         <p>
-        <div>
+        <div class="unselectedCriterion">
             <div class="pubLogo">
                 <div class="pubLogoPic-OA"></div>
             </div>
@@ -148,7 +149,7 @@
                 {% endblocktrans %}
             </div>
         </div>
-        <div>
+        <div class="unselectedCriterion">
             <div class="pubLogo">
                 <div class="pubLogoPic-OK pubLogoPic-PDF"></div>
             </div>
@@ -161,7 +162,7 @@
                 {% endblocktrans %}
             </div>
         </div>
-        <div>
+        <div class="unselectedCriterion">
             <div class="pubLogo">
                 <div class="pubLogoPic-OK"></div>
             </div>
@@ -173,7 +174,7 @@
                 {% endblocktrans %}
             </div>
         </div>
-        <div>
+        <div class="unselectedCriterion">
             <div class="pubLogo">
                 <div class="pubLogoPic-NOK"></div>
             </div>
