@@ -45,7 +45,7 @@ ENS
 	   </li>
     {% endfor %}
     </ul>
-    <a href="{{ search_url }}" class="seeAll">See all {{ nb_papers }} papers</a>
+    <a href="{{ search_url }}" class="seeAll">{% blocktrans %}See all {{ nb_papers }} papers{% endblocktrans %}</a>
 	
   </div>
 	
@@ -59,7 +59,7 @@ ENS
     <li><a href="{% url 'department' dept.pk %}">{{ dept }}</a></li>
     {% endfor %}
     </ul>
-    <a href="{% url 'departments' %}" class="seeAll">See all {{ nb_departments }} departments</a>
+    <a href="{% url 'departments' %}" class="seeAll">{% blocktrans %}See all {{ nb_departments }} departments{% endblocktrans %}</a>
 	
   </div>
 	
@@ -72,7 +72,7 @@ ENS
     <li><a href="{% url 'publisher' publisher.pk %}">{{ publisher }}</a></li>   
     {% endfor %}
     </ul>
-    <a href="{% url 'publishers' %}" class="seeAll">See all {{ nb_publishers }} publishers</a>
+    <a href="{% url 'publishers' %}" class="seeAll">{% blocktrans %}See all {{ nb_publishers }} publishers{% endblocktrans %}</a>
 	
   </div>
   
