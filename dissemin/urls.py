@@ -21,14 +21,28 @@
 from django.conf.urls import patterns, include, url
 from django.conf import settings
 from django.conf.urls.static import static
+from django.shortcuts import render
 
 from django.contrib import admin
 admin.autodiscover()
+
+def handler404(request):
+    response = render(request, '404.html')
+    response.status_code = 404
+    return response
+
+
+def handler500(request):
+    response = render(request, '500.html')
+    response.status_code = 500
+    return response
 
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'dissemin.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
+    url(r'^404-error$', (lambda x: render(x, '404.html'))),
+    url(r'^500-error$', (lambda x: render(x, '500.html'))),
     url(r'^admin/logout/$','cas.views.logout', name='logout'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/login/$', 'cas.views.login', name='login'), 
