@@ -111,21 +111,8 @@ h1
 {
     display: inline-block;
     width: 180px;
+    margin-bottom: 10px;
 }
-
-.you
-{
-    width: 150px;
-    height: 150px;
-    border: 4px dashed #bbbbbb;
-    border-radius: 10px;
-    text-align: center;
-    font-size: 60px;
-    padding: 30px;
-    vertical-align: center;
-    margin: auto;
-}
-
 
 .memberName
 {

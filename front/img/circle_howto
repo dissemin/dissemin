@@ -1,0 +1,9 @@
+for f in antoine.png antonin.png pablo.png thomas.png robin.png; do
+  convert -size 150x150 xc:none -fill $f -draw "circle 75,75 75,1" circle_$f
+done
+
+convert -size 150x150 xc:none -fill none -stroke '#bbb' -strokewidth 6 \
+  -draw "stroke-dasharray 20 15 circle 75,75 147,72" \
+  -draw "line 55,75 95,75" \
+  -draw "line 75,55 75,95" \
+  circle_you.png
