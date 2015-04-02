@@ -249,10 +249,14 @@ li
     background-image: url('../symbol-OA.png');
 }
 
-.pubText, .criterionItem
+.criterionItem
 {
 	display: table-cell;
 	vertical-align: middle;
+}
+
+.pubText, .criterionItem
+{
     margin-top: 15px;
     margin-bottom: 15px;
     padding-left: 10px;
