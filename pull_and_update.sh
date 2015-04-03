@@ -1,5 +1,6 @@
 #!/bin/sh
 
+set -e
 echo "### Updating the git repository"
 echo "> git checkout master"
 git checkout master
@@ -20,4 +21,9 @@ echo "### Updating translation files"
 echo "> python manage.py compilemessages"
 python manage.py compilemessages
 echo "### Successfully updated the local copy"
-
+echo ""
+echo "Now you can run the platform with:"
+echo "python manage.py runserver"
+echo ""
+echo "It will be available at http://localhost:8000/"
+echo ""

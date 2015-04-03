@@ -9,7 +9,15 @@ harvesting metadata or running author disambiguation.
 EASY INSTALLATION METHOD
 ========================
 
-Run the VirtualBox virtual machine provided. (More details coming soon)
+Use the VirtualBox virtual machine provided.
+
+1. Install VirtualBox
+2. Download http://pintoch.ulminfo.fr/DisseminVM.ova
+3. Run the VM and login to it with user and pass "dissemin"
+4. Go to the local copy, directory "~/dissemin"
+5. Update the local copy by running ./pull_and_update.sh
+6. Run the server with "python manage.py runserver"
+7. You can see the result on http://localhost:8000/ (from both the VM and the host)
 
 
 Installation instructions for the web frontend
@@ -24,6 +32,7 @@ build-essential
 libxml2-dev
 libxslt1-dev
 python-dev
+gettext
 
 
 -----------
