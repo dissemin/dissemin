@@ -253,6 +253,7 @@ li
 {
 	display: table-cell;
 	vertical-align: middle;
+	width:100%;
 }
 
 .pubText, .criterionItem
@@ -383,7 +384,7 @@ h1.paperTitle {
     padding: 2px;
     margin: 0px;
 	clear: both;
-	display:table-row;
+	display:table;
 }
 
 .publisher {
