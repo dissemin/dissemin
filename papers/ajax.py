@@ -114,25 +114,25 @@ def annotatePaper(request, pk, status):
     Annotation.create(paper, visibility, request.user)
     return HttpResponse('OK', content_type='text/plain')
 
-@user_passes_test(is_admin)
+@user_passes_test(is_authenticated)
 def changePaper(request):
     allowedFields = ['title']
     return process_ajax_change(request, Paper, allowedFields)
 
 # Department management
-@user_passes_test(is_admin)
+@user_passes_test(is_authenticated)
 def changeDepartment(request):
     allowedFields = ['name']
     return process_ajax_change(request, Department, allowedFields)
 
 # Researcher management
-@user_passes_test(is_admin)
+@user_passes_test(is_authenticated)
 def changeResearcher(request):
     allowedFields = ['role']
     return process_ajax_change(request, Researcher, allowedFields)
 
 # Author management
-@user_passes_test(is_admin)
+@user_passes_test(is_authenticated)
 def changeAuthor(request):
     response = dict()
     try:

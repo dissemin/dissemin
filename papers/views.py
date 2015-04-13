@@ -29,6 +29,7 @@ from django.contrib.auth.views import login as auth_login
 from django.contrib.auth.decorators import user_passes_test
 from django.utils import timezone
 from django.utils.translation import ugettext as _
+from django.utils.decorators import method_decorator
 
 from celery.execute import send_task
 
@@ -255,6 +256,13 @@ class DepartmentView(generic.DetailView):
 class PaperView(generic.DetailView):
     model = Paper
     template_name = 'papers/paper.html'
+
+class UploadPaperView(generic.DetailView):
+    model = Paper
+    template_name = 'papers/upload_paper.html'
+    @method_decorator(user_passes_test(is_authenticated))
+    def dispatch(self, *args, **kwargs):
+            return super(UploadPaperView, self).dispatch(*args, **kwargs)
 
 class JournalView(generic.DetailView):
     model = Journal

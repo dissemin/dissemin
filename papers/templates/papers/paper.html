@@ -33,7 +33,7 @@
 {% endblock %}
 
 {% block jsScript %}
-{% if request.user.is_superuser %}
+{% if request.user.is_authenticated %}
 $(function(){
 
     function paperMerged(domElem, response) {
