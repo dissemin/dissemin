@@ -162,7 +162,7 @@ class Researcher(models.Model):
     # Department the researcher belongs to
     department = models.ForeignKey(Department)
     # Research groups the researcher belongs to
-    groups = models.ManyToManyField(ResearchGroup,blank=True,null=True)
+    groups = models.ManyToManyField(ResearchGroup)
     
     # Various info about the researcher (not used internally)
     email = models.EmailField(blank=True,null=True)
