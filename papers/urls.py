@@ -28,7 +28,7 @@ from papers import views, ajax
 
 urlpatterns = patterns('',
         url(r'^$', views.index, name='index'),
-        url(r'^login/$', login, {'template_name': 'admin/login.html'}),
+        url(r'^login/$', login, name='login'),
         url(r'^logout/$', views.logoutView, name='logout'),
         url(r'^search/?$', views.searchView, name='search'),
         url(r'^publishers$', views.publishersView, name='publishers'),
