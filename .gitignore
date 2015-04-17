@@ -35,5 +35,6 @@ doc/Makefile
 doc/project.*
 doc/references.bib
 doc/bio.doc
-
+#Passwords
+dissemin/NOTONGIT*
 

@@ -37,6 +37,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
+#EMAIL settings
+
+EMAIL_HOST='mail.gandi.net'
+EMAIL_HOST_USER=open('dissemin/NOTONGITemailuser', 'r').read().rstrip()
+EMAIL_HOST_PASSWORD=open('dissemin/NOTONGITemailpassword', 'r').read().rstrip()
+EMAIL_USE_TLS=True
+
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '40@!t4mmh7325-^wh+jo3teu^!yj3lfz5p%ok(8+7th8pg^hy1'
 
@@ -109,9 +117,9 @@ CAS_PROVIDE_URL_TO_LOGOUT = True
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dissemin',
-        'USER': 'dissemin',
-        'PASSWORD': 'dissemin',
+        'NAME': 'dev_dissemin',
+        'USER': 'dev_dissemin',
+        'PASSWORD': 'fcd3ed5090ba90e3a1a7844924a9680b',
         'HOST': 'localhost'
     }
 }
@@ -151,7 +159,7 @@ LOGIN_REDIRECT_URL = '/'
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/home/antonin/Programmation/OA/static/'
+STATIC_ROOT = '/opt/dissemin/www/static/'
 
 # Celery config
 BROKER_URL = 'amqp://guest:guest@127.0.0.1:5672//'
