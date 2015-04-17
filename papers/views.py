@@ -258,6 +258,7 @@ class PaperView(generic.DetailView):
     model = Paper
     template_name = 'papers/paper.html'
 
+@user_passes_test(is_admin)
 def mailPaperView(request, pk):
     source = get_object_or_404(Paper, pk=pk)
     if source.can_be_asked_for_upload():
