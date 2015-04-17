@@ -22,17 +22,19 @@ from __future__ import unicode_literals
 from django.core.mail import send_mail
 from papers.models import *
 
+
+
 #For now, I put a guard to prevent sending mail to any people except pintoch and bthom.
 def send_email_for_paper(paper):
 	allAuthors = paper.author_set.filter(researcher__isnull=False)	
-	send_mail('Someone is asking for one of your papers', ", ".join(map(lambda x:x.name.full.title(),allAuthors)) + ",\n\n" +
-	"Someone recently signaled on dissem.in that one of your papers is not available on a regular repository. "
-	"However we believe the policy of the publisher does not forbid you to release a pre/post publication. \n\n"
-	"The title of this paper is:\n" +
-	paper.title  +
-	"\n\nThat could be great if you could upload this paper! For that, you can use the following url, we already filled-up the"
-	" metadatas so you just need the actual document. (URL AVAILABLE SOON) \n\n-----\ndissem.in"  
-	, 'paper@dissem.in'
-	, list(set(["thomas.07fr@gmail.com","antonin@delpeuch.eu"]) & set(map(lambda x: x.researcher.email,allAuthors)))
-	, fail_silently=False)
+	names = ", ".join(map(lambda x:x.name.full.title(),allAuthors)) 
+	title = paper.title
+	url = "TODO, Url not available yet"
+	my_template = open('paper/templates/papers/emailTemplate', 'r').read()
+	fill_holes=my_template.replace('$NAMES', names).replace('$TITLE', title).replace('$URL',url) 
+	send_mail( fill_holes
+		, 'paper@dissem.in'
+		, list(set(["thomas.07fr@gmail.com","antonin@delpeuch.eu"])
+			& set(map(lambda x: x.researcher.email,allAuthors)))
+		, fail_silently=False)
 
