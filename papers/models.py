@@ -28,7 +28,7 @@ from papers.utils import nstr, iunaccent, create_paper_plain_fingerprint
 from papers.name import match_names
 from django.utils.translation import ugettext_lazy as _
 import hashlib
-import datetime
+from datetime import datetime, timedelta
 
 OA_STATUS_CHOICES = (
         ('OA', _('Open access')),
@@ -375,10 +375,10 @@ class Paper(models.Model):
     nb_remaining_authors = None
 
     def already_asked_for_upload(self):
-        if self.pubdate == null:
-            return None
+        if self.pubdate == None:
+            return False
         else: 
-            return ((datetime.now - self.pubdate) <= datetime.timedelta(days=10))
+            return ((datetime.now().date() - self.pubdate) <= timedelta(days=10))
 
     def can_be_asked_for_upload(self):
         return not(self.already_asked_for_upload()) and not(self.author_set.filter(researcher__isnull=False)==[])

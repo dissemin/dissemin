@@ -260,7 +260,7 @@ class PaperView(generic.DetailView):
 
 def mailPaperView(request, pk):
     source = get_object_or_404(Paper, pk=pk)
-    if source.can_be_asked_for_upload:
+    if source.can_be_asked_for_upload():
         send_email_for_paper(source) 
         return render(request, 'papers/mail_paper.html', {'paper':source})
     else:
