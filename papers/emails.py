@@ -30,7 +30,7 @@ def send_email_for_paper(paper):
 	names = ", ".join(map(lambda x:x.name.full.title(),allAuthors)) 
 	title = paper.title
 	url = "TODO, Url not available yet"
-	my_template = open('paper/templates/papers/emailTemplate', 'r').read()
+	my_template = open('papers/templates/papers/emailTemplate', 'r').read()
 	fill_holes=my_template.replace('$NAMES', names).replace('$TITLE', title).replace('$URL',url) 
 	send_mail( fill_holes
 		, 'paper@dissem.in'
