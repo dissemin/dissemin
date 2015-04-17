@@ -375,7 +375,7 @@ class Paper(models.Model):
     nb_remaining_authors = None
 
     def already_asked_for_upload(self):
-        if self.pubdate == None:
+        if self.date_last_ask == None:
             return False
         else: 
             return ((datetime.now().date() - self.pubdate) <= timedelta(days=10))

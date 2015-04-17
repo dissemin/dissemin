@@ -57,8 +57,7 @@ $(function(){
     data-last="{{ author.name.last }}"
     data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">{{ author | authorlink }}</span></span>{% endfor %}</p>
 
-
-{% if paper.can_be_asked_for_upload%}
+{% if paper.can_be_asked_for_upload and request.user.is_authenticated %}
 <p><span><a href="{% url 'mail_paper' paper.pk %}" class="btn btn-default btn-xs">{% trans "Ask upload" %}</a></span></p> 
 {% endif %}
 
