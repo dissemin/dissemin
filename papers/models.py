@@ -28,6 +28,7 @@ from papers.utils import nstr, iunaccent, create_paper_plain_fingerprint
 from papers.name import match_names
 from django.utils.translation import ugettext_lazy as _
 import hashlib
+import datetime
 
 OA_STATUS_CHOICES = (
         ('OA', _('Open access')),
@@ -351,7 +352,7 @@ class Name(models.Model):
 class Paper(models.Model):
     title = models.CharField(max_length=1024)
     fingerprint = models.CharField(max_length=64)
-
+    date_last_ask = models.DateField()
     # Approximate publication date.
     # For instance if we only know it is in 2014 we'll put 2014-01-01
     pubdate = models.DateField()
@@ -373,11 +374,15 @@ class Paper(models.Model):
     cached_author_count = None
     nb_remaining_authors = None
 
-    def can_be_asked_for_upload(self):
-        not(already_asked_for_upload(self)) and not(self.author_set.filter(researcher__isnull=False)==[])
-	
     def already_asked_for_upload(self):
-        return False
+        if self.pubdate == null:
+            return None
+        else: 
+            return ((datetime.now - self.pubdate) <= datetime.timedelta(days=10))
+
+    def can_be_asked_for_upload(self):
+        return not(self.already_asked_for_upload()) and not(self.author_set.filter(researcher__isnull=False)==[])
+	
 
     @property
     def year(self):

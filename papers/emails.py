@@ -21,7 +21,7 @@
 from __future__ import unicode_literals
 from django.core.mail import send_mail
 from papers.models import *
-
+import datetime
 
 
 #For now, I put a guard to prevent sending mail to any people except pintoch and bthom.
@@ -29,7 +29,9 @@ def send_email_for_paper(paper):
     allAuthors = paper.author_set.filter(researcher__isnull=False)	
     names = ", ".join(map(lambda x:x.name.full.title(),allAuthors)) 
     title = paper.title
+    paper.date_last_ask = datetime.now 
     url = "TODO, Url not available yet"
     my_template = open('papers/templates/papers/emailTemplate', 'r').read()
     fill_holes=my_template.replace('$NAMES', names).replace('$TITLE', title).replace('$URL',url)
     send_mail( "Someone is asking for one of your papers.", fill_holes , 'paper@dissem.in', list(set(["thomas.07fr@gmail.com","antonin@delpeuch.eu"])& set(map(lambda x: x.researcher.email,allAuthors))), fail_silently=False)
+    paper.save()
