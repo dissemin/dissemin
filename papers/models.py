@@ -351,7 +351,7 @@ class Name(models.Model):
 class Paper(models.Model):
     title = models.CharField(max_length=1024)
     fingerprint = models.CharField(max_length=64)
-    
+
     # Approximate publication date.
     # For instance if we only know it is in 2014 we'll put 2014-01-01
     pubdate = models.DateField()
@@ -372,6 +372,12 @@ class Paper(models.Model):
 
     cached_author_count = None
     nb_remaining_authors = None
+
+    def can_be_asked_for_upload(self):
+        not(already_asked_for_upload(self)) and not(self.author_set.filter(researcher__isnull=False)==[])
+	
+    def already_asked_for_upload(self):
+        return False
 
     @property
     def year(self):

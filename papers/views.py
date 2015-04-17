@@ -36,6 +36,7 @@ from celery.execute import send_task
 from papers.models import *
 from papers.forms import *
 from papers.user import is_admin, is_authenticated
+from papers.emails import *
 
 # Number of papers shown on a search results page
 NB_RESULTS_PER_PAGE = 20
@@ -256,6 +257,16 @@ class DepartmentView(generic.DetailView):
 class PaperView(generic.DetailView):
     model = Paper
     template_name = 'papers/paper.html'
+
+def mailPaperView(request, pk):
+    source = get_object_or_404(Paper, pk=pk)
+    if source.can_be_asked_for_upload:
+        send_email_for_paper(source) 
+        return render(request, 'papers/mail_paper.html', {'paper':source})
+    else:
+        return redirect('/')
+
+
 
 class UploadPaperView(generic.DetailView):
     model = Paper
