@@ -32,9 +32,7 @@ def send_email_for_paper(paper):
 	url = "TODO, Url not available yet"
 	my_template = open('papers/templates/papers/emailTemplate', 'r').read()
 	fill_holes=my_template.replace('$NAMES', names).replace('$TITLE', title).replace('$URL',url) 
-	send_mail( fill_holes
-		, 'paper@dissem.in'
-		, list(set(["thomas.07fr@gmail.com","antonin@delpeuch.eu"])
-			& set(map(lambda x: x.researcher.email,allAuthors)))
+	send_mail( "Someone is asking for one of your papers.", fill_holes , 'paper@dissem.in'
+		, list(set(["thomas.07fr@gmail.com","antonin@delpeuch.eu"])& set(map(lambda x: x.researcher.email,allAuthors)))
 		, fail_silently=False)
 
