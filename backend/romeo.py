@@ -29,7 +29,8 @@ from papers.models import *
 from papers.errors import MetadataSourceException
 from papers.utils import nstrip, remove_diacritics
 
-romeo_api_key = open('romeo_api_key').read().strip()
+from dissemin.settings import ROMEO_API_KEY
+
 
 # Minimum number of times we have seen a publisher name
 # associated to a publisher to assign this publisher
@@ -42,8 +43,8 @@ PUBLISHER_NAME_ASSOCIATION_THRESHOLD = 10
 PUBLISHER_NAME_ASSOCIATION_FACTOR = 4
 
 def perform_romeo_query(search_terms):
-    if romeo_api_key:
-        search_terms['ak'] = romeo_api_key
+    if ROMEO_API_KEY:
+        search_terms['ak'] = ROMEO_API_KEY
     base_url = 'http://sherpa.ac.uk/romeo/api29.php'
 
     # Perform the query
