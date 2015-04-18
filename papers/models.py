@@ -381,7 +381,10 @@ class Paper(models.Model):
             return ((datetime.now().date() - self.pubdate) <= timedelta(days=10))
 
     def can_be_asked_for_upload(self):
-        return not(self.already_asked_for_upload()) and not(self.author_set.filter(researcher__isnull=False)==[])
+        return ((self.pdf_url==None) and
+                (self.oa_status=='OK') and
+                not(self.already_asked_for_upload()) and
+                not(self.author_set.filter(researcher__isnull=False)==[]))
 	
 
     @property
