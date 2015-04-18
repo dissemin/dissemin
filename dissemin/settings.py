@@ -37,12 +37,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
-#EMAIL settings
+# EMAIL settings
+# These are used to send messages to the researchers
+EMAIL_HOST = ''
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = True
 
-EMAIL_HOST='mail.gandi.net'
-EMAIL_HOST_USER=open('dissemin/NOTONGITemailuser', 'r').read().rstrip()
-EMAIL_HOST_PASSWORD=open('dissemin/NOTONGITemailpassword', 'r').read().rstrip()
-EMAIL_USE_TLS=True
+# RoMEO API KEY
+# Used to fetch publisher policies
+ROMEO_API_KEY = None
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -117,9 +121,9 @@ CAS_PROVIDE_URL_TO_LOGOUT = True
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dev_dissemin',
-        'USER': 'dev_dissemin',
-        'PASSWORD': 'fcd3ed5090ba90e3a1a7844924a9680b',
+        'NAME': 'dissemin',
+        'USER': 'dissemin',
+        'PASSWORD': 'dissemin',
         'HOST': 'localhost'
     }
 }
