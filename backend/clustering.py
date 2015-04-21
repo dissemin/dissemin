@@ -437,7 +437,8 @@ class ClusteringContextFactory(object):
         Frees the clustering context of a given researcher.
         You should ensure that it has been committed before.
         """
-        del self.cc[k]
+        if pk in self.cc:
+            del self.cc[pk]
     
 
 
