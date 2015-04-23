@@ -68,6 +68,19 @@ class KnownCoauthors(RelevanceFeature):
             print('   Common coauthors: '+str(count))
         return float(count)
 
+class AuthorNameSimilarity(RelevanceFeature):
+    """
+    The similarity of the target name with the reference name for the researcher
+    """
+    def __init__(self):
+        super(AuthorNameSimilarity, self).__init__()
+
+    def compute(self, author, dpt_id, explain=False):
+        score =  name_similarity(author.name, author.researcher.name)
+        if explain:
+            print('   Name similarity: '+str(score))
+        return score
+
 class TopicalRelevanceFeature(RelevanceFeature):
     """
     General class for topic-based features.
@@ -234,7 +247,7 @@ class RelevanceClassifier(object):
         return confusion_matrix(pred, labels)
 
     def classify(self, author, dpt_id, verbose=False):
-        distance = self.distance(author, dpt_id, verbose)
+        distance = self.score(author, dpt_id, verbose)
         if distance:
             return distance > 0.
 
@@ -286,4 +299,14 @@ class RelevanceClassifier(object):
         cPickle.dump(self.__dict__, f)
         f.close()
  
+class DummyRelevanceClassifier(RelevanceClassifier):
+    def __init__(self, **kwargs):
+        self.features = [
+                KnownCoauthors()
+                ]
+
+    def score(self, author, dpt_id, verbose=False):
+
+
+
 
