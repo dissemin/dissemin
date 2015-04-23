@@ -8,8 +8,13 @@ from backend.clustering import *
 
 print("Loading similarity classifier…")
 sc = SimilarityClassifier(filename='models/similarity.pkl')
-print("Loading relevance classifier…")
-rc = RelevanceClassifier(filename='models/relevance-0.pkl')
+relevance_stage = 0
+if relevance_stage == 0:
+    print('Loading dummy relevance classifier…')
+    rc = DummyRelevanceClassifier()
+else:
+    print("Loading relevance classifier…")
+    rc = RelevanceClassifier(filename='models/relevance-'+str(relevance_stage)+'.pkl')
 
 clustering_context_factory = ClusteringContextFactory(sc, rc)
 

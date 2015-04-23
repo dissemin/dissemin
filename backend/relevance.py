@@ -28,6 +28,7 @@ from unidecode import unidecode
 
 from papers.models import Name, Author, Researcher
 from papers.utils import iunaccent, nocomma, filter_punctuation, tokenize
+from papers.name import to_plain_name, name_similarity
 
 from learning.model import WordCount
 
@@ -66,7 +67,7 @@ class KnownCoauthors(RelevanceFeature):
         for a in coauthors:
             nb_coauthors += 1
             if a.name.is_known:
-                count += 1
+                count += 1 # TODO replace this by name similarity with the target researcher (but efficiently :-P)
                 if explain:
                     print('      '+unicode(a))
         if explain:
@@ -81,10 +82,11 @@ class AuthorNameSimilarity(RelevanceFeature):
         super(AuthorNameSimilarity, self).__init__()
 
     def compute(self, author, dpt_id, explain=False):
-        score =  name_similarity(author.name, author.researcher.name)
+        score =  name_similarity(to_plain_name(author.name),
+                to_plain_name(author.researcher.name))
         if explain:
             print('   Name similarity: '+str(score))
-        return score
+        return [score]
 
 class TopicalRelevanceFeature(RelevanceFeature):
     """
@@ -223,6 +225,7 @@ class RelevanceClassifier(object):
         cm = kwargs.get('contributorsModel', lm)
         pm = kwargs.get('publicationsModel', lm)
         self.features = [
+                AuthorSimilarity(),
                 KnownCoauthors(),
                 TitleRelevance(lm),
                 KeywordsRelevance(lm),
@@ -307,10 +310,14 @@ class RelevanceClassifier(object):
 class DummyRelevanceClassifier(RelevanceClassifier):
     def __init__(self, **kwargs):
         self.features = [
+                AuthorSimilarity(),
                 KnownCoauthors()
                 ]
 
     def score(self, author, dpt_id, verbose=False):
+        features = self.computeFeatures(author, dpt_id)
+        return sum(features)-0.8
+
 
 
 
