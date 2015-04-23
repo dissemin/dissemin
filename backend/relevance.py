@@ -31,6 +31,9 @@ from papers.utils import iunaccent, nocomma, filter_punctuation, tokenize
 
 from learning.model import WordCount
 
+def flatten(list_of_lists):
+    return [item for sublist in list_of_lists for item in sublist]
+
 class RelevanceFeature(object):
     """
     A feature for a binary classifier: given an author and a department,
@@ -46,7 +49,7 @@ class RelevanceFeature(object):
         """
         Returns the value of the feature for the given author.
         """
-        return 0.
+        return [0.]
 
 class KnownCoauthors(RelevanceFeature):
     """
@@ -59,14 +62,16 @@ class KnownCoauthors(RelevanceFeature):
     def compute(self, author, dpt_id, explain=False):
         coauthors = author.paper.author_set.exclude(id=author.id).select_related('name')
         count = 0
+        nb_coauthors = 0
         for a in coauthors:
+            nb_coauthors += 1
             if a.name.is_known:
                 count += 1
                 if explain:
                     print('      '+unicode(a))
         if explain:
-            print('   Common coauthors: '+str(count))
-        return float(count)
+            print('   Common coauthors: '+str(count)', total '+str(nb_coauthors))
+        return [float(count),float(nb_coauthors)] 
 
 class AuthorNameSimilarity(RelevanceFeature):
     """
@@ -146,8 +151,8 @@ class TitleRelevance(TopicalRelevanceFeature):
     def compute(self, author, dpt_id, explain=False):
         if dpt_id not in self.models:
             print("Warning, scoring a title for an unknown department")
-            return 0.
-        return self._normalizedWScore(author.paper.title, dpt_id, explain)
+            return [0.]
+        return [self._normalizedWScore(author.paper.title, dpt_id, explain)]
 
 class PublicationRelevance(TopicalRelevanceFeature):
     """
@@ -163,11 +168,11 @@ class PublicationRelevance(TopicalRelevanceFeature):
     def compute(self, author, dpt_id, explain=False):
         if dpt_id not in self.models:
             print("Warning, scoring a publication for an unknown department id "+str(dpt_id))
-            return 0.
+            return [0.]
         titles = [pub.full_title() for pub in author.paper.publication_set.all().select_related('journal')]
         if titles:
-            return max(map(lambda t: self._normalizedWScore(t, dpt_id, explain), titles))
-        return 0.
+            return [max(map(lambda t: self._normalizedWScore(t, dpt_id, explain), titles))]
+        return [0.]
 
 class KeywordsRelevance(TopicalRelevanceFeature):
     """
@@ -183,10 +188,10 @@ class KeywordsRelevance(TopicalRelevanceFeature):
     def compute(self, author, dpt_id, explain=False):
         if dpt_id not in self.models:
             print("Warning, scoring an oairecord for an unknown department id "+str(dpt_id))
-            return 0.
+            return [0.]
         words = [rec.keywords for rec in author.paper.oairecord_set.all()]
         words = filter(lambda x: x != None, words)
-        return float(sum(map(lambda t: self._normalizedWScore(t, dpt_id, explain), words)))
+        return [float(sum(map(lambda t: self._normalizedWScore(t, dpt_id, explain), words)))]
 
 class ContributorsRelevance(TopicalRelevanceFeature):
     """
@@ -205,7 +210,7 @@ class ContributorsRelevance(TopicalRelevanceFeature):
             return 0.
         words = [rec.contributors for rec in author.paper.oairecord_set.all()]
         words = filter(lambda x: x != None, words)
-        return float(sum(map(lambda t: self._normalizedWScore(t, dpt_id, explain), words)))
+        return [float(sum(map(lambda t: self._normalizedWScore(t, dpt_id, explain), words)))]
 
 class RelevanceClassifier(object):
     def __init__(self, **kwargs):
@@ -233,7 +238,7 @@ class RelevanceClassifier(object):
                 print('   Feature '+str(i))
                 f = self.features[i]
                 f.compute(author, dpt_id, True)
-        return map(lambda f: f.compute(author, dpt_id), self.features)
+        return flatten(map(lambda f: f.compute(author, dpt_id), self.features))
 
     def train(self, features, labels, kernel='rbf'):
         self.classifier = svm.SVC(kernel=str(kernel))
