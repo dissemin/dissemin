@@ -566,6 +566,27 @@ class Paper(models.Model):
             match.merge(self)
             return match
 
+    def update_visibility(self, prefetched_authors_field=None):
+        p = self
+        if p.visibility != 'VISIBLE' and p.visibility != 'NOT_RELEVANT':
+            return
+        researcher_found = False
+        if prefetched_authors_field:
+            authors = p.__dict__[prefetched_authors_field]
+        else:
+            authors = p.author_set.all()
+        for a in authors:
+            if a.researcher_id:
+                researcher_found = True
+                break
+        if researcher_found and p.visibility != 'VISIBLE':
+            p.visibility = 'VISIBLE'
+            p.save(update_fields=['visibility'])
+        elif not researcher_found and p.visibility != 'NOT_RELEVANT':
+            p.visibility = 'NOT_RELEVANT'
+            p.save(update_fields=['visibility'])
+
+
 
 # Researcher / Paper binary relation
 class Author(models.Model):

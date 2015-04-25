@@ -46,7 +46,7 @@ class RelevanceFeature(object):
         """
         pass
 
-    def compute(self, author, dpt_id, explain=False):
+    def compute(self, author, researcher, explain=False):
         """
         Returns the value of the feature for the given author.
         """
@@ -60,7 +60,7 @@ class KnownCoauthors(RelevanceFeature):
     def __init__(self):
         super(KnownCoauthors, self).__init__()
 
-    def compute(self, author, dpt_id, explain=False):
+    def compute(self, author, researcher, explain=False):
         coauthors = author.paper.author_set.exclude(id=author.id).select_related('name')
         count = 0
         nb_coauthors = 0
@@ -71,7 +71,7 @@ class KnownCoauthors(RelevanceFeature):
                 if explain:
                     print('      '+unicode(a))
         if explain:
-            print('   Common coauthors: '+str(count)', total '+str(nb_coauthors))
+            print('   Common coauthors: '+str(count)+', total '+str(nb_coauthors))
         return [float(count),float(nb_coauthors)] 
 
 class AuthorNameSimilarity(RelevanceFeature):
@@ -81,9 +81,9 @@ class AuthorNameSimilarity(RelevanceFeature):
     def __init__(self):
         super(AuthorNameSimilarity, self).__init__()
 
-    def compute(self, author, dpt_id, explain=False):
+    def compute(self, author, researcher, explain=False):
         score =  name_similarity(to_plain_name(author.name),
-                to_plain_name(author.researcher.name))
+                to_plain_name(researcher.name))
         if explain:
             print('   Name similarity: '+str(score))
         return [score]
@@ -99,24 +99,24 @@ class TopicalRelevanceFeature(RelevanceFeature):
         if 'filename' in kwargs:
             self.load(kwargs['filename'])
 
-    def _wScore(self, line, dpt_id, explain=False):
-        topicScore = self.models[dpt_id].lProbLine(line)
+    def _wScore(self, line, researcher, explain=False):
+        topicScore = self.models[researcher.department_id].lProbLine(line)
         langScore = self.lang.lProbLine(line)
         words = tokenize(line)
         if explain:
             for w in words:
-                a = self.models[dpt_id].lp(w)
+                a = self.models[researcher.department_id].lp(w)
                 b = self.lang.lp(w)
                 print('      '+w+'\t'+str(a)+'-'+str(b)+' = '+str(a-b))
         return topicScore - langScore
 
-    def _normalizedWScore(self, line, dpt_id, explain=False):
-        topicScore = self.models[dpt_id].nlProbLine(line)
+    def _normalizedWScore(self, line, researcher, explain=False):
+        topicScore = self.models[researcher.department_id].nlProbLine(line)
         langScore = self.lang.nlProbLine(line)
         if explain:
             words = tokenize(line)
             for w in words:
-                a = self.models[dpt_id].lp(w)
+                a = self.models[researcher.department_id].lp(w)
                 b = self.lang.lp(w)
                 print('      '+w+'\t'+str(a)+'-'+str(b)+' = '+str(a-b))
         return topicScore - langScore
@@ -147,14 +147,14 @@ class TitleRelevance(TopicalRelevanceFeature):
     def __init__(self, lm, **kwargs):
         super(TitleRelevance, self).__init__(lm, **kwargs)
 
-    def feed(self, author, dpt_id):
-        self.feedLine(author.paper.title, dpt_id)
+    def feed(self, author, researcher):
+        self.feedLine(author.paper.title, researcher.department_id)
 
-    def compute(self, author, dpt_id, explain=False):
-        if dpt_id not in self.models:
+    def compute(self, author, researcher, explain=False):
+        if researcher.department_id not in self.models:
             print("Warning, scoring a title for an unknown department")
             return [0.]
-        return [self._normalizedWScore(author.paper.title, dpt_id, explain)]
+        return [self._normalizedWScore(author.paper.title, researcher, explain)]
 
 class PublicationRelevance(TopicalRelevanceFeature):
     """
@@ -163,17 +163,17 @@ class PublicationRelevance(TopicalRelevanceFeature):
     def __init__(self, lm, **kwargs):
         super(PublicationRelevance, self).__init__(lm, **kwargs)
 
-    def feed(self, author, dpt_id):
+    def feed(self, author, researcher):
         for pub in author.paper.publication_set.all().select_related('journal'):
-            self.feedLine(pub.full_title(), dpt_id)
+            self.feedLine(pub.full_title(), researcher.department_id)
 
-    def compute(self, author, dpt_id, explain=False):
-        if dpt_id not in self.models:
-            print("Warning, scoring a publication for an unknown department id "+str(dpt_id))
+    def compute(self, author, researcher, explain=False):
+        if researcher.department_id not in self.models:
+            print("Warning, scoring a publication for an unknown department id "+str(researcher.department_id))
             return [0.]
         titles = [pub.full_title() for pub in author.paper.publication_set.all().select_related('journal')]
         if titles:
-            return [max(map(lambda t: self._normalizedWScore(t, dpt_id, explain), titles))]
+            return [max(map(lambda t: self._normalizedWScore(t, researcher, explain), titles))]
         return [0.]
 
 class KeywordsRelevance(TopicalRelevanceFeature):
@@ -183,17 +183,17 @@ class KeywordsRelevance(TopicalRelevanceFeature):
     def __init__(self, lm, **kwargs):
         super(KeywordsRelevance, self).__init__(lm, **kwargs)
 
-    def feed(self, author, dpt_id):
+    def feed(self, author, researcher):
         for record in author.paper.oairecord_set.all():
-            self.feedLine(record.keywords, dpt_id)
+            self.feedLine(record.keywords, researcher.department_id)
 
-    def compute(self, author, dpt_id, explain=False):
-        if dpt_id not in self.models:
-            print("Warning, scoring an oairecord for an unknown department id "+str(dpt_id))
+    def compute(self, author, researcher, explain=False):
+        if researcher.department_id not in self.models:
+            print("Warning, scoring an oairecord for an unknown department id "+str(researcher.department_id))
             return [0.]
         words = [rec.keywords for rec in author.paper.oairecord_set.all()]
         words = filter(lambda x: x != None, words)
-        return [float(sum(map(lambda t: self._normalizedWScore(t, dpt_id, explain), words)))]
+        return [float(sum(map(lambda t: self._normalizedWScore(t, researcher, explain), words)))]
 
 class ContributorsRelevance(TopicalRelevanceFeature):
     """
@@ -202,17 +202,17 @@ class ContributorsRelevance(TopicalRelevanceFeature):
     def __init__(self, lm, **kwargs):
         super(ContributorsRelevance, self).__init__(lm, **kwargs)
 
-    def feed(self, author, dpt_id):
+    def feed(self, author, researcher):
         for record in author.paper.oairecord_set.all():
-            self.feedLine(record.contributors, dpt_id)
+            self.feedLine(record.contributors, researcher.deparmtent_id)
 
-    def compute(self, author, dpt_id, explain=False):
-        if dpt_id not in self.models:
-            print("Warning, scoring contributors for an unknown department id "+str(dpt_id))
+    def compute(self, author, researcher, explain=False):
+        if researcher.department_id not in self.models:
+            print("Warning, scoring contributors for an unknown department id "+str(researcher.department_id))
             return 0.
         words = [rec.contributors for rec in author.paper.oairecord_set.all()]
         words = filter(lambda x: x != None, words)
-        return [float(sum(map(lambda t: self._normalizedWScore(t, dpt_id, explain), words)))]
+        return [float(sum(map(lambda t: self._normalizedWScore(t, researcher, explain), words)))]
 
 class RelevanceClassifier(object):
     def __init__(self, **kwargs):
@@ -225,7 +225,7 @@ class RelevanceClassifier(object):
         cm = kwargs.get('contributorsModel', lm)
         pm = kwargs.get('publicationsModel', lm)
         self.features = [
-                AuthorSimilarity(),
+                AuthorNameSimilarity(),
                 KnownCoauthors(),
                 TitleRelevance(lm),
                 KeywordsRelevance(lm),
@@ -235,13 +235,13 @@ class RelevanceClassifier(object):
         self.classifier = None
         self.positiveSampleWeight = 1.0
     
-    def computeFeatures(self, author, dpt_id, explain=False):
+    def computeFeatures(self, author, researcher, explain=False):
         if explain:
             for i in range(len(self.features)):
                 print('   Feature '+str(i))
                 f = self.features[i]
-                f.compute(author, dpt_id, True)
-        return flatten(map(lambda f: f.compute(author, dpt_id), self.features))
+                f.compute(author, researcher, True)
+        return flatten(map(lambda f: f.compute(author, researcher), self.features))
 
     def train(self, features, labels, kernel='rbf'):
         self.classifier = svm.SVC(kernel=str(kernel))
@@ -254,12 +254,12 @@ class RelevanceClassifier(object):
         pred = self.classifier.predict(features)
         return confusion_matrix(pred, labels)
 
-    def classify(self, author, dpt_id, verbose=False):
-        distance = self.score(author, dpt_id, verbose)
+    def classify(self, author, researcher, verbose=False):
+        distance = self.score(author, researcher, verbose)
         if distance:
             return distance > 0.
 
-    def score(self, author, dpt_id, verbose=False):
+    def score(self, author, researcher, verbose=False):
         """
         Returns the distance (value of the decision function)
         for an author. An author is relevant when its distance
@@ -267,16 +267,16 @@ class RelevanceClassifier(object):
         """
         if not self.classifier:
             return None
-        features = self.computeFeatures(author, dpt_id)
+        features = self.computeFeatures(author, researcher)
         distance = self.classifier.decision_function([features])[0][0]
         if verbose:
             print(str(features)+' -> '+str(distance))
         return distance
 
-    def feed(self, author, dpt_id):
+    def feed(self, author, researcher):
         for f in self.features:
             if isinstance(f, TopicalRelevanceFeature):
-                f.feed(author, dpt_id)
+                f.feed(author, researcher)
 
     def plotClassification(self, features, labels):
         import matplotlib.pyplot as plt
@@ -310,13 +310,15 @@ class RelevanceClassifier(object):
 class DummyRelevanceClassifier(RelevanceClassifier):
     def __init__(self, **kwargs):
         self.features = [
-                AuthorSimilarity(),
+                AuthorNameSimilarity(),
                 KnownCoauthors()
                 ]
 
-    def score(self, author, dpt_id, verbose=False):
-        features = self.computeFeatures(author, dpt_id)
-        return sum(features)-0.8
+    def score(self, author, researcher, verbose=False):
+        features = self.computeFeatures(author, researcher)
+        if features[0] >= 1.0: # author name similarity
+            return features[1] # nb of known coauthors
+        return -0.1
 
 
 

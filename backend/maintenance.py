@@ -25,7 +25,7 @@ from papers.utils import sanitize_html, create_paper_fingerprint
 from backend.romeo import fetch_publisher
 from time import sleep
 from collections import defaultdict
-from django.db.models import Q
+from django.db.models import Q, Prefetch
 from django.db import DatabaseError
 
 def cleanup_papers():
@@ -175,4 +175,19 @@ def refetch_publishers():
         if publisher:
             p.publisher = publisher
             p.save(update_fields=['publisher'])
+
+def hide_unattributed_papers():
+    """
+    Changes the visibility of papers based on whether they are attributed to a researcher or
+    not (only VISIBLE <-> NOT_RELEVANT)
+    """
+    qset = Paper.objects.filter(Q(visibility='VISIBLE') | Q(visibility='NOT_RELEVANT'))
+    count = qset.count()
+    cursor = 0
+    chunksize = 100
+    while cursor < count:
+        for p in qset[cursor:cursor+chunksize].prefetch_related(
+                Prefetch('author_set', to_attr='authors')):
+            p.update_visibility()
+        cursor += chunksize
 
