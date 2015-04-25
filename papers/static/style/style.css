@@ -34,6 +34,11 @@ ul, .withTriangles
     list-style-image: url('../blue-circle.png');
 }
 
+ul.noCircle
+{
+	list-style:none;
+}
+
 .numPapers
 {
     color: gray;
