@@ -135,6 +135,7 @@ class ClusteringContext(object):
                 val.researcher_id = None
             val.save()
             val.paper.invalidate_cache()
+            val.paper.update_visibility()
 
     def classify(self, pkA, pkB):
         """
@@ -229,8 +230,7 @@ class ClusteringContext(object):
         Compute the relevance of a given author.
         """
         if not self.relevance_computed.get(target, False):
-            dept_pk = self.researcher.department_id
-            relevance = self.rc.score(self.authors[target], dept_pk, True)
+            relevance = self.rc.score(self.authors[target], self.researcher, True)
             parent = self.find(target)
             self.relevance[target] = relevance
             self.num_relevant[parent] += relevance
@@ -300,7 +300,8 @@ class ClusteringContext(object):
                 researcher=None,
                 cluster=None,
                 num_children=1,
-                cluster_relevance=0.)
+                cluster_relevance=0.,
+                paper__visibility='NOT_RELEVANT')
         print("Updating clustering context…")
         for pk in self.parent:
             self.parent[pk] = None
@@ -437,7 +438,8 @@ class ClusteringContextFactory(object):
         Frees the clustering context of a given researcher.
         You should ensure that it has been committed before.
         """
-        del self.cc[k]
+        if pk in self.cc:
+            del self.cc[pk]
     
 
 

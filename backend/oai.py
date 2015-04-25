@@ -34,6 +34,7 @@ from backend.extractors import *
 from backend.proxy import PROXY_SOURCE_PREFIX
 from backend.create import *
 from backend.name_cache import name_lookup_cache
+from backend.pubtype_translations import *
 
 import re
 
@@ -123,7 +124,8 @@ def add_oai_record(record, source, paper=None):
     contributors = ' '.join(record[1]._map['contributor'])[:4096]
 
     pubtype = record[1]._map.get('type')
-    pubtype = PUBTYPE_TRANSLATIONS.get(pubtype, source.default_pubtype)
+    pubtype = source.default_pubtype
+    #pubtype = PUBTYPE_TRANSLATIONS.get(pubtype, source.default_pubtype)
 
     create_oairecord(
             source=source,
