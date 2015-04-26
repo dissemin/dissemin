@@ -36,7 +36,11 @@ def import_from_tsv(filename):
         if homepage == '':
             homepage = None
 
-        researcher = Researcher.create_from_scratch(first, last, department, email, role, homepage)
+        try:
+            researcher = Researcher.create_from_scratch(first, last, department, email, role, homepage)
+        except ValueError:
+            print "ValueError"
+            continue
        
         group = fields[group_f]
         if group:
@@ -44,5 +48,5 @@ def import_from_tsv(filename):
             researcher.groups.add(g)
 
 
-import_from_tsv('data/listes/geosciences.tsv')
+import_from_tsv('data/cambridge_researchers')
 

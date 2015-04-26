@@ -239,9 +239,9 @@ def create_oairecord(**kwargs):
             old_idx = len(PAPER_TYPE_PREFERENCE)-1
             if match.pubtype in PAPER_TYPE_PREFERENCE:
                 old_idx = PAPER_TYPE_PREFERENCE.index(match.pubtype)
-            if new_idx < old_idx:
+            if idx < old_idx:
                 changed = True
-                match.pubtype = PAPER_TYPE_PREFERENCE[new_idx]
+                match.pubtype = PAPER_TYPE_PREFERENCE[idx]
             
         if changed:
             match.save()
