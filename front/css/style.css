@@ -19,7 +19,7 @@ body
 
 .orange-button
 {
-    background: none;
+    background: rgba(131,51,65,1);
     border-color: #d77311;
     color: #d77311;
 }
@@ -80,6 +80,48 @@ h1
     vertical-align: top;
     width: 390px;
     padding: 10px;
+}
+
+.slide
+{
+    font-size: 1.6em;
+}
+
+.slide .ulCenter
+{
+    text-align: left;
+    margin: auto;
+    width: 800px;
+}
+
+.slide li
+{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.source
+{
+    font-size: 0.7em;
+}
+
+.disambig
+{
+    background: url('../img/graphe-1024.svg') no-repeat;
+    background-position: -300px 0px;
+}
+
+.oaLogo
+{
+    background: url('../img/oa_logo.svg') no-repeat;
+    background-position: 100% 50%;
+    background-size: 200px;
+}
+
+.inlineBg
+{
+    background-color: rgba(131, 51, 65, 0.5);
+    display: inline;
 }
 
 .use-case p
