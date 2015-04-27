@@ -44,7 +44,6 @@ class PublicationInline(admin.StackedInline):
 
 class PaperAdmin(admin.ModelAdmin):
     fields = ['title', 'pubdate', 'visibility']
-    inlines = [AuthorInline, PublicationInline, OaiInline]
 
 admin.site.register(Department)
 admin.site.register(ResearchGroup)

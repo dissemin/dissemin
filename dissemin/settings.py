@@ -37,6 +37,18 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
+# EMAIL settings
+# These are used to send messages to the researchers
+EMAIL_HOST = ''
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = True
+
+# RoMEO API KEY
+# Used to fetch publisher policies
+ROMEO_API_KEY = None
+
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '40@!t4mmh7325-^wh+jo3teu^!yj3lfz5p%ok(8+7th8pg^hy1'
 
@@ -71,15 +83,15 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-	'cas.middleware.CASMiddleware',   #Line to comment/uncomment to bypass/activate the cas
+    'django_cas_ng.middleware.CASMiddleware',
 )
 
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    'cas.backends.CASBackend',
-
+    'django_cas_ng.backends.CASBackend',
 )
+
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     'django.core.context_processors.request',
@@ -151,7 +163,7 @@ LOGIN_REDIRECT_URL = '/'
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/home/antonin/Programmation/OA/static/'
+STATIC_ROOT = '/opt/dissemin/www/static/'
 
 # Celery config
 BROKER_URL = 'amqp://guest:guest@127.0.0.1:5672//'

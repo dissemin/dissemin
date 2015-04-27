@@ -1,0 +1,85 @@
+{% extends "dissemin/details.html" %}
+
+{% load author %}
+{% load domain %}
+{% load statuses %}
+{% load doi %}
+{% load i18n %}
+
+{% block headTitle %}
+{{ paper.title }}
+{% endblock %}
+
+{% block bodyTitle %}
+<span id="paperTitle" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}" data-pk="{{ paper.pk }}">
+    {% autoescape off %}
+        {{ paper.title }}
+    {% endautoescape %}
+</span>
+{% endblock %}
+
+{% block jsScript %}
+{% endblock %}
+
+{% block lists %}
+<p><br /><br />Upload coming soon!</p>
+{% endblock %}
+
+{% block details %}
+<span class="detailsTitle">{% trans "Available from" %}</span>
+<div class="detailsContent">
+{% for record in paper.sorted_oai_records %}
+<p>
+    {% if record.priority > 0 %}
+        {{ record.source }}:
+    {% else %}
+        {% if record.splash_url %}
+            [{{ record.splash_url |domain }}]
+        {% elif record.pdf_url %}
+            [{{ record.pdf_url |domain }}]
+        {% endif %}
+    {% endif %}
+    {% if record.splash_url %}
+        <a href="{{ record.splash_url }}">
+     [{% trans "Web page" %} <img src="/static/extlink.png" />]
+     </a>{% if record.pdf_url %} | {% endif %}{% endif %}
+     {% if record.pdf_url %}
+         <a href="{{ record.pdf_url }}"><img src="/static/extpdf.png" alt="PDF" /></a>
+     {% endif %}
+</p>
+{% endfor %}
+
+{% trans "Publisher" as publisher %}
+{% for publi in paper.publication_set.all %}
+<p><a href="{{ publi | doi_to_url }}">{{ publi.publisher|default:publisher }} <img src="/static/extlink.png" /></a> {% trans "via DOI" %}</p>
+{% endfor %}
+</div>
+
+{% if request.user.is_superuser %}
+<span class="detailsTitle">{% trans "Admin zone" %}</span>
+<div class="detailsContent">
+    <p><strong>Visibility:</strong> {{ paper.visibility }}</p>
+    <p><strong>Publisher:</strong> {{ paper.publisher }}</p>
+    <p><strong>Clusters:</strong></p>
+{% for a in paper.author_set.all %}
+<p>{{a}}: 
+{% if a.cluster %}
+<a href="{% url 'paper' a.cluster.paper.pk %}">{{ a.cluster.paper }}</a>
+({{a.cluster.num_children}} authors, score {{a.cluster.cluster_relevance}})
+{% else %}
+itself
+{% endif %}
+</p>
+{% endfor %}
+<p><strong>Annotations:</strong>
+<ul>
+{% for annot in paper.annotation_set.all %}
+    <li>{{ annot }}</li>
+{% empty %}
+None
+{% endfor %}
+</ul>
+</p>
+</div>
+{% endif %}
+{% endblock %}

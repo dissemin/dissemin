@@ -13,7 +13,6 @@ ENS
   <ul>
   {% for dept in departments %}
     <li><a href="{% url 'department' dept.id %}">{{ dept }}</a>
-    {% include "papers/accessStatistics.html" with stats=dept.stats %}
     </li>
   {% endfor %}
   </ul>

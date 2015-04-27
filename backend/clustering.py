@@ -60,8 +60,7 @@ class ClusteringContext(object):
         The queryset returning all the authors related to the researcher, sorted by id.
         Useful to populate the clustering context.
         """
-        return Author.objects.filter(name__variant_of=self.researcher).filter(
-                Q(paper__visibility='VISIBLE') | Q(paper__visibility='DELETED')).order_by(
+        return Author.objects.filter(name__variant_of=self.researcher).order_by(
                     'id').select_related('paper')
 
     def addAuthor(self, author, add_children=True):
@@ -125,16 +124,20 @@ class ClusteringContext(object):
         Push the state of the graph to the database.
         """
         for (pk,val) in self.authors.items():
-            val.cluster_id = self.find(pk)
-            val.num_children = self.cluster_size[pk]
-            val.cluster_relevance = self.num_relevant[val.cluster_id]
-            cluster_size = self.cluster_size[val.cluster_id]
-            if self.num_relevant[val.cluster_id] > 0:
-                val.researcher_id = self.researcher.id
-            else:
-                val.researcher_id = None
-            val.save()
-            val.paper.invalidate_cache()
+            try:
+                val.cluster_id = self.find(pk)
+                val.num_children = self.cluster_size[pk]
+                val.cluster_relevance = self.num_relevant[val.cluster_id]
+                cluster_size = self.cluster_size[val.cluster_id]
+                if self.num_relevant[val.cluster_id] > 0:
+                    val.researcher_id = self.researcher.id
+                else:
+                    val.researcher_id = None
+                val.save()
+                val.paper.invalidate_cache()
+                val.paper.update_visibility()
+            except KeyError:
+                continue
 
     def classify(self, pkA, pkB):
         """
@@ -200,13 +203,14 @@ class ClusteringContext(object):
         This is the "Find" in "Union-Find":
         returns the id of the cluster an author belongs to.
         """
-        if self.parent[a] == None:
+        pa = self.parent[a]
+        if pa == None:
             return a
-        elif self.parent[a] == a:
+        elif pa == a:
             print("WARNING: parent[a] = a, with a = "+str(a))
             return a
         else:
-            res = self.find(self.parent[a])
+            res = self.find(pa)
             self.parent[a] = res
             return res
 
@@ -229,8 +233,7 @@ class ClusteringContext(object):
         Compute the relevance of a given author.
         """
         if not self.relevance_computed.get(target, False):
-            dept_pk = self.researcher.department_id
-            relevance = self.rc.score(self.authors[target], dept_pk, True)
+            relevance = self.rc.score(self.authors[target], self.researcher, True)
             parent = self.find(target)
             self.relevance[target] = relevance
             self.num_relevant[parent] += relevance
@@ -300,7 +303,8 @@ class ClusteringContext(object):
                 researcher=None,
                 cluster=None,
                 num_children=1,
-                cluster_relevance=0.)
+                cluster_relevance=0.,
+                paper__visibility='NOT_RELEVANT')
         print("Updating clustering context…")
         for pk in self.parent:
             self.parent[pk] = None
@@ -437,7 +441,8 @@ class ClusteringContextFactory(object):
         Frees the clustering context of a given researcher.
         You should ensure that it has been committed before.
         """
-        del self.cc[k]
+        if pk in self.cc:
+            del self.cc[pk]
     
 
 

@@ -17,7 +17,7 @@
     function changeDisplay () {
 	   $(".ulContainer").toggleClass("mosaic-on");
 	}
-{% if request.user.is_superuser %}
+{% if request.user.is_authenticated %}
     $(function(){
 
     function paperMerged(domElem, response) {

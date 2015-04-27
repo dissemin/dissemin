@@ -31,7 +31,12 @@ a:hover
 
 ul, .withTriangles
 {
-    list-style-image: url('../blue-triangle.png');
+    list-style-image: url('../blue-circle.png');
+}
+
+ul.noCircle
+{
+	list-style:none;
 }
 
 .numPapers
@@ -253,6 +258,7 @@ li
 {
 	display: table-cell;
 	vertical-align: middle;
+	width:100%;
 }
 
 .pubText, .criterionItem
@@ -383,7 +389,7 @@ h1.paperTitle {
     padding: 2px;
     margin: 0px;
 	clear: both;
-	display:table-row;
+	display:table;
 }
 
 .publisher {
