@@ -776,6 +776,8 @@ class AliasPublisher(models.Model):
     @classmethod
     def increment(cls, name, publisher):
         # TODO it would be more efficient with an update, but it does not really work
+        if not name:
+            return
         alias, created = cls.objects.get_or_create(name=name, publisher=publisher)
         alias.count += 1
         alias.save()

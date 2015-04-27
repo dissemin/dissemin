@@ -315,7 +315,7 @@ class DummyRelevanceClassifier(RelevanceClassifier):
                 ]
 
     def score(self, author, researcher, verbose=False):
-        features = self.computeFeatures(author, researcher)
+        features = self.computeFeatures(author, researcher, verbose)
         if features[0] >= 1.0: # author name similarity
             return features[1] # nb of known coauthors
         return -0.1
