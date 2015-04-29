@@ -84,7 +84,8 @@ h1
 
 .slide
 {
-    font-size: 1.6em;
+    font-size: 2em;
+    min-height: 100vh;
 }
 
 .slide .ulCenter
