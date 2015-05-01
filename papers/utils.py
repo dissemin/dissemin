@@ -83,7 +83,7 @@ try:
 except ImportError:
     tokenize_space_re = re.compile(r'\s+')
     def tokenize(l):
-        return tokenize_spae_re.split(l)
+        return tokenize_space_re.split(l)
 
 ## HTML sanitizing for the title
 

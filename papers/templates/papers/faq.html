@@ -30,7 +30,7 @@
         <p><a href="#statistics">{% trans "Should I trust your statistics?" %}</a></p>
 
         <h4>{% trans "Omissions and errors" %}</h4>
-        <p><a href="#copy-available">{% trans "There is a freely available copy of my article online but Dissem.in does not find it." %}</a></p>
+        <p><a href="#copy-available">{% trans "There is a freely available copy of my article online but dissem.in does not find it." %}</a></p>
         <p><a href="#missing-paper">{% trans "One of my papers is missing. Why?" %}</a></p>
         <p><a href="#incorrect-metadata">{% trans "Some details of my paper are incorrect. What can I do?" %}</a></p>
 
@@ -95,7 +95,7 @@
         {% endblocktrans %}
         </p>
 
-        <h3>Dissem.in</h3>
+        <h3>dissem.in</h3>
 
         <h2 id="what-is-dissemin">{% trans "What is dissem.in?" %}</h2>
 
@@ -200,11 +200,11 @@
         {% blocktrans trimmed %}
         There are a few caveats concerning our data:
         <ul>
-            <li>Some papers are not present in any of our metadata sources, so they are not counted at all ;</li>
-            <li>Some entries in our system do not correspond to proper research papers ;</li>
-            <li>Some of them have been incorrectly classified by our homonym disambiguation system ;</li>
-            <li>Some repositories might not be covered by any of our sources, so a paper might be marked as unavailable while it is available ;</li>
-            <li>Some papers might be marked as available but actually, they are not (for instance because the content has been deleted) ;</li>
+            <li>Some papers are not present in any of our metadata sources, so they are not counted at all.</li>
+            <li>Some entries in our system do not correspond to proper research papers.</li>
+            <li>Some of them have been incorrectly classified by our homonym disambiguation system.</li>
+            <li>Some repositories might not be covered by any of our sources, so a paper might be marked as unavailable while it is available.</li>
+            <li>Some papers might be marked as available but actually, they are not (for instance because the content has been deleted).</li>
             <li>And many other technical issues.</li>
         </ul>
         But our platform is increasingly reliable and we think that department-wise statistics are meaningful.
@@ -226,7 +226,7 @@
         <p>
         {% blocktrans trimmed %}
         In a near future, you should be able to create an account and fix it by yourself.
-        If it is really urgent, send a message to contact@dissem.in.
+        If it is really urgent, send a message to <a href="mailto:contact@dissem.in">contact@dissem.in</a>.
         {% endblocktrans %}
         </p>
 
@@ -250,26 +250,25 @@
         <h2 id="sources">{% trans "Where do you get the data from?" %}</h2>
         <p>
         {% blocktrans trimmed %}
-        Our sources are listed on <a href="{{ url_sources }}">this page</a>.
+        Our sources are listed on <a href="{{ sources_url }}">this page</a>.
         {% endblocktrans %}
         </p>
 
         <h2 id="getting-involved">{% trans "How can I help?" %}</h2>
         <p>
         {% blocktrans trimmed %}
-        There are many ways to get involved, even if you do not want to write any code.
+        There are many ways to get involved, even if you do not want to write any code:
         <ul>
-            <li>Tell us what you think: <a href="mailto:contact@dissem.in">contact@dissem.in</a> ;</li>
-            <li>Help us to tag articles to improve our author disambiguation algorithm (you need an ENS account);</li>
-            <li>Help us with the overall usability of the website ;</li>
-            <li>Help us with the translation of the interface ;</li>
-            <li>Help us to get lists of researchers from departments ;</li>
-            <li>Fix metadata errors (you need an ENS account) ;</li>
-            <li>Spread the word about this tool ;</li>
-            <li>Fix some any issue listed here.</li>
+            <li>Tell us what you think: <a href="mailto:contact@dissem.in">contact@dissem.in</a>.</li>
+            <li>Tag articles to improve our author disambiguation algorithm (you need an ENS account).</li>
+            <li>Help us improve the overall usability of the website.</li>
+            <li>Help us translate the interface.</li>
+            <li>Get lists of researchers from departments.</li>
+            <li>Fix metadata errors (you need an ENS account).</li>
+            <li>Spread the word about this tool.</li>
+            <li>Fix any of our listed <a href="http://github.com/wetneb/dissemin/issues">issues</a>.</li>
             <li>Star <a href="http://github.com/wetneb/dissemin">our github project</a>!</li>
         </ul>
-        If you can code, have a look at our <a href="http://github.com/wetneb/dissemin">list of suggested improvements and fixes</a>.
         {% endblocktrans %}
         </p>
         <h2 id="source-code">{% trans "Where is the source code?" %}</h2>

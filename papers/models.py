@@ -381,7 +381,10 @@ class Paper(models.Model):
             return ((datetime.now().date() - self.pubdate) <= timedelta(days=10))
 
     def can_be_asked_for_upload(self):
-        return not(self.already_asked_for_upload()) and not(self.author_set.filter(researcher__isnull=False)==[])
+        return ((self.pdf_url==None) and
+                (self.oa_status=='OK') and
+                not(self.already_asked_for_upload()) and
+                not(self.author_set.filter(researcher__isnull=False)==[]))
 	
 
     @property
@@ -562,6 +565,27 @@ class Paper(models.Model):
         else:
             match.merge(self)
             return match
+
+    def update_visibility(self, prefetched_authors_field=None):
+        p = self
+        if p.visibility != 'VISIBLE' and p.visibility != 'NOT_RELEVANT':
+            return
+        researcher_found = False
+        if prefetched_authors_field:
+            authors = p.__dict__[prefetched_authors_field]
+        else:
+            authors = p.author_set.all()
+        for a in authors:
+            if a.researcher_id:
+                researcher_found = True
+                break
+        if researcher_found and p.visibility != 'VISIBLE':
+            p.visibility = 'VISIBLE'
+            p.save(update_fields=['visibility'])
+        elif not researcher_found and p.visibility != 'NOT_RELEVANT':
+            p.visibility = 'NOT_RELEVANT'
+            p.save(update_fields=['visibility'])
+
 
 
 # Researcher / Paper binary relation
@@ -753,6 +777,8 @@ class AliasPublisher(models.Model):
     @classmethod
     def increment(cls, name, publisher):
         # TODO it would be more efficient with an update, but it does not really work
+        if not name:
+            return
         alias, created = cls.objects.get_or_create(name=name, publisher=publisher)
         alias.count += 1
         alias.save()
