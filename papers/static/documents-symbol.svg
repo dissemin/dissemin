@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 14.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 43363)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="595.275px" height="841.891px" viewBox="0 0 595.275 841.891" enable-background="new 0 0 595.275 841.891"
+	 xml:space="preserve">
+<g id="Calque_3">
+</g>
+<g id="svg2" inkscape:version="0.48.3.1 r9886" sodipodi:docname="document-symbol.svg" inkscape:export-ydpi="14.675159" inkscape:export-xdpi="14.675159" inkscape:export-filename="/home/antonin/Programmation/OA/dissemin/papers/static/document-symbol.png" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
+	<g>
+		
+			<image overflow="visible" opacity="0.19" width="197" height="270" xlink:href="8ECEBCB6.png"  transform="matrix(1 0 0 1 220.6379 217.9451)">
+		</image>
+		<g>
+			<path fill="#FAFAFA" d="M402.04,263.138v189.396c0,11.046-8.954,20-20,20H256.324c-11.046,0-20-8.954-20-20V253.138
+				c0-11.046,8.954-20,20-20H372.04L402.04,263.138z"/>
+		</g>
+	</g>
+	<polygon fill="#D9D9D9" points="372.04,233.138 402.04,263.138 372.04,263.138 	"/>
+	
+		<sodipodi:namedview  id="base" inkscape:window-y="19" inkscape:window-x="0" inkscape:window-height="879" inkscape:window-width="798" inkscape:current-layer="g2989" inkscape:document-units="px" inkscape:pageshadow="2" inkscape:pageopacity="0.0" inkscape:window-maximized="0" inkscape:zoom="1.4" borderopacity="1.0" bordercolor="#666666" showgrid="false" pagecolor="#ffffff" inkscape:cy="678.48422" inkscape:cx="324.56324">
+		</sodipodi:namedview>
+	<path fill="#C4C4C4" d="M382.04,474.035H256.324c-11.855,0-20.5-9.645-20.5-21.5h1c0,10.201,9.299,18.5,19.5,18.5H382.04
+		c10.201,0,19.5-8.299,19.5-18.5h1C402.54,464.39,393.896,474.035,382.04,474.035L382.04,474.035z"/>
+	<path fill="#D9D9D9" d="M400.98,264.199l-29.561-29.561H256.324c-10.201,0-19.5,8.299-19.5,18.5h-1c0-11.855,8.645-21.5,20.5-21.5
+		h116.337l29.439,31.439L400.98,264.199L400.98,264.199z"/>
+</g>
+<g id="Calque_2">
+	<line fill="none" stroke="#D4D4D4" stroke-width="6" x1="259.682" y1="317.445" x2="378.683" y2="317.445"/>
+	<line fill="none" stroke="#D4D4D4" stroke-width="6" x1="259.682" y1="337.445" x2="378.683" y2="337.445"/>
+	<line fill="none" stroke="#D4D4D4" stroke-width="6" x1="259.682" y1="357.445" x2="378.683" y2="357.445"/>
+	<line fill="none" stroke="#D4D4D4" stroke-width="6" x1="259.682" y1="377.445" x2="378.683" y2="377.445"/>
+	<line fill="none" stroke="#D4D4D4" stroke-width="6" x1="259.682" y1="397.445" x2="378.683" y2="397.445"/>
+	<path fill="#2A6496" stroke="#B8B8B8" stroke-width="4" d="M14.138,233.445c0,11.046-8.954,20-20,20h-190c-11.046,0-20-8.954-20-20
+		v-109c0-11.046,8.954-20,20-20h190c11.046,0,20,8.954,20,20V233.445z"/>
+</g>
+<g id="Calque_4">
+	<g>
+		
+			<image overflow="visible" opacity="0.19" width="91" height="125" xlink:href="8ECEBCBA.png"  transform="matrix(1 0 0 1 311.6379 345.9451)">
+		</image>
+		<g>
+			<g>
+				<g transform="matrix(0.09828756,0,0,0.09555575,287.19364,364.59616)">
+					<path inkscape:connector-curvature="0" fill="none" stroke="#F68212" stroke-width="10" d="M502.479,266.939V231.21
+						c0.02-115.54,93.704-209.194,209.246-209.174c115.513,0.02,209.147,93.664,209.167,209.174v258.418"/>
+					
+						<ellipse sodipodi:ry="256.08301" sodipodi:rx="256.08301" sodipodi:cy="680.729" sodipodi:cx="320.004" fill="#FFFFFF" stroke="#F68212" stroke-width="10" cx="711.09" cy="639.529" rx="25.17" ry="24.47">
+					</ellipse>
+				</g>
+				
+					<ellipse sodipodi:ry="86.428703" sodipodi:rx="86.428703" sodipodi:cy="681.659" sodipodi:cx="321.01001" fill="#F68212" cx="356.848" cy="426.004" rx="8.975" ry="8.724">
+				</ellipse>
+			</g>
+		</g>
+	</g>
+</g>
+</svg>
