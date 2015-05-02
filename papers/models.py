@@ -712,6 +712,7 @@ class Publisher(models.Model):
         papers = Paper.objects.filter(publication__publisher=self.pk)
         for p in papers:
             p.update_availability()
+            p.invalidate_cache()
 
 # Journal data retrieved from RoMEO
 class Journal(models.Model):

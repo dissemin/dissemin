@@ -166,13 +166,13 @@ def fetch_publisher(publisher_name):
     aliases = list(AliasPublisher.objects.filter(name=publisher_name).order_by('-count')[:2])
     if len(aliases) == 1:
         if aliases[0].count > PUBLISHER_NAME_ASSOCIATION_THRESHOLD:
-            print "Found alias: "+str(aliases[0])
+            print "Found alias: "+unicode(aliases[0]).encode('utf-8')
             AliasPublisher.increment(publisher_name, aliases[0].publisher)
             return aliases[0].publisher
     elif len(aliases) == 2:
         if aliases[0].count > PUBLISHER_NAME_ASSOCIATION_FACTOR*aliases[1].count:
-            print "Found alias: "+str(aliases[0])
-            print "Second result: "+str(aliases[1])
+            print "Found alias: "+unicode(aliases[0]).encode('utf-8')
+            print "Second result: "+unicode(aliases[1]).encode('utf-8')
             AliasPublisher.increment(publisher_name, aliases[0].publisher)
             return aliases[0].publisher
         else:
