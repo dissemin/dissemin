@@ -149,6 +149,7 @@ $(function(){
 {% for dept in view.departments %}
 <p><a href="{% url 'department' dept.id %}">{{ dept }}</a></p>
 {% endfor %}
+</div>
 
 {% if request.user.is_superuser %}
 <span class="detailsTitle">{% trans "Admin zone" %}</span>
