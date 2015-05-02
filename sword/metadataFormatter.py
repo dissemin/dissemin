@@ -211,9 +211,9 @@ class AOFRFormatter(MetadataFormatter):
 
 
 # The following lines are for testing purposes only
-def generate():
+def generate(theId):
 	formatter = AOFRFormatter()
-	paper = Paper.objects.get(pk=19549)
+	paper = Paper.objects.get(pk=theId)
 	return formatter.toString(paper, 'article.pdf', True)
 
 
