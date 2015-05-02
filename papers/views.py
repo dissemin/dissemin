@@ -259,7 +259,7 @@ class PaperView(generic.DetailView):
     template_name = 'papers/paper.html'
     def departments(self):
         paper = self.get_object()
-        return Departments.objects.filter(researcher__author__paper=paper).unique()
+        return Department.objects.filter(researcher__author__paper=paper).distinct()
 
 
 @user_passes_test(is_admin)
