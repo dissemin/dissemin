@@ -322,12 +322,21 @@ h1#paperTitle {
 	overflow:hidden;
 	padding:20px;
 	margin:10px 0px;
+	display:table;
+	width:100%;
 }
 
 #paperAvailabilityLogo {
+	display:table-cell;
 	float:left;
-	margin:10px;
-	margin-right:20px;
+	padding-right:10px;
+	width:52px;
+	vertical-align:middle;
+}
+
+#paperDetails {
+	display:table-cell;
+	vertical-align:middle;
 }
 
 .abstract {
