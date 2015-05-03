@@ -119,6 +119,8 @@ $(function(){
 <div class="detailsContent">
 {% for record in paper.sorted_oai_records %}
 <p>
+    {% if record.splash_url %}
+        <a href="{{ record.splash_url }}">
     {% if record.priority > 0 %}
         {{ record.source }}:
     {% else %}
@@ -128,13 +130,11 @@ $(function(){
             [{{ record.pdf_url |domain }}]
         {% endif %}
     {% endif %}
-    {% if record.splash_url %}
-        <a href="{{ record.splash_url }}">
-     [{% trans "Web page" %} <img src="/static/extlink.png" />]
-     </a>{% if record.pdf_url %} | {% endif %}{% endif %}
-     {% if record.pdf_url %}
-         <a href="{{ record.pdf_url }}"><img src="/static/extpdf.png" alt="PDF" /></a>
-     {% endif %}
+    {% if record.splash_url %}<img src="/static/extlink.png" /></a>{% if record.pdf_url %} | {% endif %}
+	{% endif %}
+    {% if record.pdf_url %}
+        <a href="{{ record.pdf_url }}"><img src="/static/extpdf.png" alt="PDF" /></a>
+    {% endif %}
 </p>
 {% endfor %}
 
