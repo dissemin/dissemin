@@ -121,8 +121,9 @@ $(function(){
 <p>
     {% if record.splash_url %}
         <a href="{{ record.splash_url }}">
+	{% endif %}
     {% if record.priority > 0 %}
-        {{ record.source }}:
+        {{ record.source }}
     {% else %}
         {% if record.splash_url %}
             [{{ record.splash_url |domain }}]
