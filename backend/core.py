@@ -23,8 +23,14 @@ from __future__ import unicode_literals
 from django.utils import timezone
 import requests
 import requests.exceptions
+import json
 from lxml import etree
+from urllib import quote
+from time import sleep
+from datetime import date
+
 import unicodedata
+import itertools
 
 from papers.errors import MetadataSourceException
 from papers.models import *
@@ -36,96 +42,189 @@ from backend.name_cache import name_lookup_cache
 
 
 core_timeout = 10
-max_no_match_before_give_up = 30
-core_api_key = open('core_api_key').read().strip()
+CORE_MAX_NO_MATCH_BEFORE_GIVE_UP = 30
+CORE_API_KEY = open('core_api_key').read().strip()
+CORE_BASE_URL = 'http://core.ac.uk/api-v2'
+CORE_FETCH_METADATA_BATCH_SIZE = 100
+
+def query_core(url, params, post_payload=None):
+    """
+    Generic function to send a request to CORE
+    'url': local API URL, such as '/articles/search'
+    'params': dict of GET parameters
+    """
+    try:
+        params['apiKey'] = CORE_API_KEY
+        full_url = CORE_BASE_URL + url
+        sleep(2)
+        if post_payload is None:
+            f = requests.get(full_url, params=params)
+        else:
+            f = requests.post(full_url, params=params,
+                    data=json.dumps(post_payload))
+        parsed = f.json()
+        return parsed
+    except ValueError as e:
+        raise MetadataSourceException('CORE returned invalid JSON payload for request '+f.url+'\n'+str(e))
+    except requests.exceptions.RequestException as e:
+        raise MetadataSourceException('HTTP error with CORE for URL:'+f.url+'\n'+str(e))
+    # TODO do something different depending on the status code.
+
 
 def fetch_papers_from_core_for_researcher(researcher):
     for name in researcher.name_set.all():
         fetch_papers_from_core_by_researcher_name((name.first,name.last))
 
+def search_single_query(search_terms, max_results=None, page_size=100):
+    page = 1
+    url = '/search/'+quote(search_terms)
+    numSent = 0
+    numTot = 0
+    while True:
+        numResultsAskedFor = page_size
+        if numTot:
+            numResultsAskedFor = min(numTot-numSent,page_size)
+        
+        params = {
+                'pageSize': str(numResultsAskedFor),
+                'page': str(page),
+            }
+        res = query_core(url, params)
+        numTot = res['totalHits']
+        for r in res['data']:
+            if r.get('type') == 'article' and 'id' in r:
+                yield int(r['id'])
+            numSent += 1
+        page += 1
+        if numSent >= numTot or (max_results is not None and numSent >= max_results) or len(res['data']) == 0:
+            break
+            
 
-def fetch_papers_from_core_by_researcher_name(name):
-    base_url = 'http://core.kmi.open.ac.uk/api/search/'
+def fetch_paper_metadata_by_core_ids(core_ids):
+    """
+    Fetches CORE metadata for each CORE id provided,
+    using the optimal combination of queries (hopefully).
+    """
+    batch_size = CORE_FETCH_METADATA_BATCH_SIZE
+    batch = []
+    for core_id in core_ids:
+        if len(batch) < batch_size:
+            batch.append(core_id)
+        else:
+            results = fetch_metadata_batch(batch)
+            for r in results:
+                yield r
+    if len(batch) > 1:
+        for r in fetch_metadata_batch(batch):
+            yield r
+    if len(batch) == 1:
+        yield fetch_single_core_metadata(batch[0])
+
+def fetch_metadata_batch(batch):
+    """
+    Fetches a batch of metadata from CORE in a single request
+    """
+    params = {
+            'metadata':'true',
+            'faithfulMetadata':'true',
+            'fulltextUrls':'true',
+            }
+    response = query_core('/articles/get', params, batch)
+    for item in response:
+        yield item
+
+def fetch_single_core_metadata(coreid):
+    """
+    Fetch a single article from its CORE id
+    """
+    params = {
+            'metadata':'true',
+            'faithfulMetadata':'true',
+            'fulltextUrls':'true',
+            }
+    response = query_core('/articles/get/'+str(coreid), params)
+    return response
+
+
+
+def fetch_papers_from_core_by_researcher_name(name, max_results=500):
     core_source = OaiSource.objects.get_or_create(identifier='core',
             name='CORE',
             priority=0)
     
-    search_terms = 'author:'+quote_plus('('+name[0]+' '+name[1]+')')
-    try:
-        offset = 0
-        nb_results = 1
-        no_match = 0
-        while offset < nb_results and no_match < max_no_match_before_give_up:
-            query_args = {'api_key':core_api_key,
-                    'offset':str(offset)}
-            f = requests.get(base_url+search_terms, params=query_args)
-            response = f.text
-            root = etree.fromstring(response)
-            result_list = list(root.iter('record'))
-            if not result_list:
-                raise MetadataSourceException('CORE returned no results for URL '+request)
-
-            try:
-                nb_results = int(list(root.iter('total_hits'))[0].text)
-            except (KeyError, IndexError, ValueError):
-                raise MetadataSourceException('Invalid number of results in CORE response, '+request)
-
-            offset += len(result_list)
-
-            for doc in result_list:
-                try:
-                    match = add_core_document(doc, core_source)
-                    if match:
-                        no_match = 0
-                    else:
-                        no_match += 1
-                except MetadataSourceException as e:
-                    raise MetadataSourceException(str(e)+'\nIn URL: '+request)
-    except requests.exceptions.RequestException as e:
-        raise MetadataSourceException('Error while fetching metadata from CORE:\n'+
-                'Unable to open the URL: '+request+'\n'+
-                'Error was: '+str(e))
-    except etree.ParseError as e:
-        raise MetadataSourceException('Error while fetching metadata from CORE:\n'+
-                'The XML document returned by the following URL is invalid:\n'+
-                request+'\n'+
-                'Reason: '+str(e))
+    max_unsuccessful_lookups = CORE_MAX_NO_MATCH_BEFORE_GIVE_UP
+    batch_size = CORE_FETCH_METADATA_BATCH_SIZE
+    search_terms = name[0]+' '+name[1]
+    ids = search_single_query(search_terms, max_results)
+    
+    unsuccessful_lookups = 0
+    current_batch = itertools.islice(ids, batch_size)
+    nb_results = 0
+    while current_batch:
+        results = fetch_paper_metadata_by_core_ids(current_batch)
+        for result in results:
+            match = None
+            if result.get('status') == 'OK':
+                nb_results += 1
+                match = add_core_document(result, core_source)
+            if match:
+                unsuccessful_lookups = 0
+            else:
+                unsuccessful_lookups += 1
+            if unsuccessful_lookups >= max_unsuccessful_lookups or nb_results >= max_results:
+                break
+        if unsuccessful_lookups >= max_unsuccessful_lookups or nb_results >= max_results:
+            current_batch = itertools.islice(ids, batch_size)
 
 core_sep_re = re.compile(r', *| *and *')
 def parse_core_authors_list(lst):
     return core_sep_re.split(lst)
 
 def add_core_document(doc, source):
-    xml_record = list(doc.iter('metadata'))[0]
-    metadata = my_oai_dc_reader(xml_record)._map
-    authors_list = metadata.get('creator', [])
+    metadata = doc.get('data', {})
+    authors_list = metadata.get('authors', [])
     if not authors_list:
         print "Ignoring CORE record as it has no creators."
         return False
-    authors_list = parse_core_authors_list(authors_list[0])
+
     authors_list = map(parse_comma_name, authors_list)
     authors = map(name_lookup_cache.lookup, authors_list)
     
     # Filter the record
     if all(not elem.is_known for elem in authors):
         return False
-    if not 'title' in metadata or metadata['title'] == []:
+    if not 'title' in metadata or not metadata['title']:
         return False
+    title = metadata['title']
 
     print "########"
-    print metadata['title']
+    print title
     print authors_list
-    print metadata
 
-    identifier = None
-    splash_url = None
+    if not 'id' in metadata:
+        print "WARNING: no CORE ID provided, skipping record"
+        return False
+    identifier = 'core:'+str(metadata['id'])
+    splash_url = 'http://core.ac.uk/display/'+str(metadata['id'])
+    pdf_urls = metadata.get('fulltextUrls', [])
+    if 'fulltextIdentifier' in metadata:
+        pdf_urls.append(metadata['fulltextIdentifier'])
+    if metadata.get('hasFullText') == 'true' and pdf_urls == []:
+        pdf_urls.append(splash_url)
     pdf_url = None
+    if pdf_urls:
+        pdf_url = pdf_urls[0]
     pubdate = None
-    doi = None
-    description = None
+    if 'year' in metadata:
+        try:
+            pubdate = date(year=int(metadata['year']),month=01,day=01)        
+        except ValueError:
+            pass
+    doi = None # TODO parse the original record and look for DOIs
+    #xml_record = list(doc.iter('metadata'))[0]
+    #metadata = my_oai_dc_reader(xml_record)._map
+    description = metadata.get('description')
     
-    # TO BE CONTINUED
-
     if False:
         paper = get_or_create_paper(title, authors, pubdate, doi, 'CANDIDATE')
 
