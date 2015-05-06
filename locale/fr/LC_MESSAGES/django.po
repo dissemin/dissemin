@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-28 13:39+0200\n"
-"PO-Revision-Date: 2015-03-13 11:57+0100\n"
+"POT-Creation-Date: 2015-05-02 09:54+0200\n"
+"PO-Revision-Date: 2015-05-02 10:01+0100\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -178,11 +178,11 @@ msgstr "Accès libre"
 
 #: papers/templates/papers/accessStatistics.html:8
 msgid "Publications are available"
-msgstr ""
+msgstr "Les publications sont disponibles"
 
 #: papers/templates/papers/accessStatistics.html:11
 msgid "Publications could be online"
-msgstr ""
+msgstr "Les publications pourraient être en ligne"
 
 #: papers/templates/papers/accessStatistics.html:14
 msgid "Policy unknown"
@@ -495,19 +495,6 @@ msgstr ""
 "avons accès à plus de 68 millions de preprints."
 
 #: papers/templates/papers/faq.html:200
-#, fuzzy
-#| msgid ""
-#| "There are a few caveats concerning our data: <ul> <li>Some papers are not "
-#| "present in any of our metadata sources, so they are not counted at all ;</"
-#| "li> <li>Some entries in our system do not correspond to proper research "
-#| "papers ;</li> <li>Some of them have been incorrectly classified by our "
-#| "homonym disambiguation system ;</li> <li>Some repositories might not be "
-#| "covered by any of our sources, so a paper might be marked as unavailable "
-#| "while it is available ;</li> <li>Some papers might be marked as available "
-#| "but actually, they are not (for instance because the content has been "
-#| "deleted) ;</li> <li>And many other technical issues.</li> </ul> But our "
-#| "platform is increasingly reliable and we think that department-wise "
-#| "statistics are meaningful."
 msgid ""
 "There are a few caveats concerning our data: <ul> <li>Some papers are not "
 "present in any of our metadata sources, so they are not counted at all.</li> "
@@ -586,20 +573,6 @@ msgstr ""
 "Une liste de nos sources est <a href=\"%(sources_url)s\">disponible</a>."
 
 #: papers/templates/papers/faq.html:259
-#, fuzzy
-#| msgid ""
-#| "There are many ways to get involved, even if you do not want to write any "
-#| "code. <ul> <li>Tell us what you think: <a href=\"mailto:contact@dissem.in"
-#| "\">contact@dissem.in</a> ;</li> <li>Help us to tag articles to improve "
-#| "our author disambiguation algorithm (you need an ENS account);</li> "
-#| "<li>Help us with the overall usability of the website ;</li> <li>Help us "
-#| "with the translation of the interface ;</li> <li>Help us to get lists of "
-#| "researchers from departments ;</li> <li>Fix metadata errors (you need an "
-#| "ENS account) ;</li> <li>Spread the word about this tool ;</li> <li>Fix "
-#| "some any issue listed here.</li> <li>Star <a href=\"http://github.com/"
-#| "wetneb/dissemin\">our github project</a>!</li> </ul> If you can code, "
-#| "have a look at our <a href=\"http://github.com/wetneb/dissemin\">list of "
-#| "suggested improvements and fixes</a>."
 msgid ""
 "There are many ways to get involved, even if you do not want to write any "
 "code: <ul> <li>Tell us what you think: <a href=\"mailto:contact@dissem.in"
@@ -613,19 +586,18 @@ msgid ""
 "wetneb/dissemin\">our github project</a>!</li> </ul>"
 msgstr ""
 "Il y a de nombreuses façons de nous aider, même sans écrire de code. <ul> "
-"<li>Faites-nous des remarques ou des suggestions sur dissem.in : <a href="
-"\"mailto:contact@dissem.in\">contact@dissem.in</a> ;</li> <li>Aidez-nous à "
-"annoter des articles pour améliorer notre algorithme de désambiguïsation des "
-"noms d'ateur (il vous faut un compte ENS pour ce faire);</li> <li>Aidez-nous "
-"à améliorer l'ergonomie du site web ;</li> <li>Aidez-nous à traduire "
-"l'interface ;</li> <li>Aidez-nous à obtenir des listes des chercheurs des "
-"différents départements manquants ;</li> <li>Corrigez les erreurs dans les "
-"métadonnées (il vous faut un compte ENS pour ce faire) ;</li> <li>Parlez de "
-"cet outil autour de vous ;</li> <li>Aidez à corriger l'un des bogues connus."
-"</li> <li>Décernez une étoile à <a href=\"http://github.com/wetneb/dissemin"
-"\">notre projet github</a> !</li> </ul> Si nous savez programmer, jetez un "
-"œil à notre <a href=\"http://github.com/wetneb/dissemin\">liste de problèmes "
-"et de suggestions</a>."
+"<li>Donnez-nous votre avis : <a href=\"mailto:contact@dissem.in"
+"\">contact@dissem.in</a> ;</li> <li>Aidez-nous à annoter des articles pour "
+"améliorer notre algorithme de désambiguïsation des noms d'auteur (il vous "
+"faut un compte ENS pour ce faire) ;</li> <li>Aidez-nous à améliorer "
+"l'ergonomie du site web ;</li> <li>Aidez-nous à traduire l'interface ;</li> "
+"<li>Aidez-nous à obtenir des listes des chercheurs des différents "
+"départements manquants ;</li> <li>Corrigez les erreurs dans les métadonnées "
+"(il vous faut un compte ENS pour ce faire) ;</li> <li>Parlez de cet outil "
+"autour de vous ;</li> <li>Aidez à corriger l'un des <a href=\"http://github."
+"com/wetneb/dissemin/issues\">problèmes répertoriés</a>.</li> <li>Décernez "
+"une étoile à <a href=\"http://github.com/wetneb/dissemin\">notre projet "
+"github</a> !</li> </ul>"
 
 #: papers/templates/papers/faq.html:276
 msgid ""
@@ -690,12 +662,12 @@ msgstr "Derniers papiers"
 #: papers/templates/papers/index.html:48
 #, python-format
 msgid "See all %(nb_papers)s papers"
-msgstr ""
+msgstr "Voir tous les papiers (%(nb_papers)s papiers)"
 
 #: papers/templates/papers/index.html:62
 #, python-format
 msgid "See all %(nb_departments)s departments"
-msgstr ""
+msgstr "Voir tous les départements (%(nb_departments)s départements)"
 
 #: papers/templates/papers/index.html:68 papers/views.py:66
 msgid "Publishers"
@@ -709,8 +681,8 @@ msgstr "Voir les %(nb_publishers)s maisons d'éditions"
 #: papers/templates/papers/login.html:18
 msgid "Please correct the error below."
 msgid_plural "Please correct the errors below."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Veuillez corriger l'erreur ci-dessous."
+msgstr[1] "Veuillez corriger les erreurs ci-dessous."
 
 #: papers/templates/papers/login.html:34
 msgid "Username:"
@@ -728,41 +700,9 @@ msgstr "Mot de passe ou identifiant oublié?"
 msgid "Log in"
 msgstr "Se connecter"
 
-#: papers/templates/papers/mail_paper.html:30
-#: papers/templates/papers/paper.html:96
-#: papers/templates/papers/upload_paper.html:29
-msgid "Available from"
-msgstr "Disponible depuis"
-
-#: papers/templates/papers/mail_paper.html:45
-#: papers/templates/papers/paper.html:111
-#: papers/templates/papers/upload_paper.html:44
-msgid "Web page"
-msgstr "Page web"
-
-#: papers/templates/papers/mail_paper.html:53
-#: papers/templates/papers/paper.html:119
-#: papers/templates/papers/publisher.html:37
-#: papers/templates/papers/search.html:108
-#: papers/templates/papers/upload_paper.html:52
-msgid "Publisher"
-msgstr "Maison d'édition"
-
-#: papers/templates/papers/mail_paper.html:55
-#: papers/templates/papers/paper.html:121
-#: papers/templates/papers/upload_paper.html:54
-msgid "via DOI"
-msgstr "via DOI"
-
-#: papers/templates/papers/mail_paper.html:60
-#: papers/templates/papers/paper.html:126
-#: papers/templates/papers/upload_paper.html:59
-msgid "Admin zone"
-msgstr "Administration"
-
 #: papers/templates/papers/paper.html:61
 msgid "Ask upload"
-msgstr ""
+msgstr "Demander la mise en ligne\t"
 
 #: papers/templates/papers/paper.html:72
 msgid "Full text:"
@@ -784,6 +724,33 @@ msgstr "détails"
 msgid "Abstract."
 msgstr "Résumé."
 
+#: papers/templates/papers/paper.html:96
+#: papers/templates/papers/upload_paper.html:29
+msgid "Available from"
+msgstr "Disponible depuis"
+
+#: papers/templates/papers/paper.html:111
+#: papers/templates/papers/upload_paper.html:44
+msgid "Web page"
+msgstr "Page web"
+
+#: papers/templates/papers/paper.html:119
+#: papers/templates/papers/publisher.html:37
+#: papers/templates/papers/search.html:108
+#: papers/templates/papers/upload_paper.html:52
+msgid "Publisher"
+msgstr "Maison d'édition"
+
+#: papers/templates/papers/paper.html:121
+#: papers/templates/papers/upload_paper.html:54
+msgid "via DOI"
+msgstr "via DOI"
+
+#: papers/templates/papers/paper.html:126
+#: papers/templates/papers/upload_paper.html:59
+msgid "Admin zone"
+msgstr "Administration"
+
 #: papers/templates/papers/publiListItem.html:24
 #, python-format
 msgid "and %(remaining_authors)s other authors"
@@ -791,11 +758,11 @@ msgstr "et %(remaining_authors)s autres auteurs"
 
 #: papers/templates/papers/publiListItem.html:35
 msgid "Download"
-msgstr ""
+msgstr "Télécharger"
 
 #: papers/templates/papers/publiListItem.html:37
 msgid "Upload"
-msgstr ""
+msgstr "Mettre en ligne"
 
 #: papers/templates/papers/publiListItem.html:44
 msgid " (metadata only)"
@@ -1042,7 +1009,7 @@ msgstr "Tous les papiers"
 
 #: templates/404.html:6 templates/404.html.py:12
 msgid "Page not found"
-msgstr ""
+msgstr "Page introuvable"
 
 #: templates/404.html:13
 msgid ""
@@ -1051,10 +1018,14 @@ msgid ""
 "to the home page.</a>\n"
 "           "
 msgstr ""
+"\n"
+"            La page demandée est introuvable. <a href=\"/\">Revenir à la "
+"page d'accueil.</a>\n"
+"           "
 
 #: templates/500.html:6 templates/500.html.py:12
 msgid "Internal error"
-msgstr ""
+msgstr "Erreur interne"
 
 #: templates/500.html:13
 msgid ""
@@ -1063,6 +1034,10 @@ msgid ""
 "to the home page.</a>\n"
 "           "
 msgstr ""
+"\n"
+"            Votre requête a déclenché une erreur interne. <a href=\"/"
+"\">Revenir à la page d'accueil.</a>\n"
+"           "
 
 #: templates/admin/base_site.html:4
 msgid "Dissemin site admin"

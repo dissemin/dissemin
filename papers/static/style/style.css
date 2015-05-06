@@ -304,16 +304,46 @@ li
 	/* font-family:"Neuton", serif; */
 }
 
-h1.paperTitle {
+h1#paperTitle {
 	margin-top:0;
 	font-weight:normal;
+	font-size:1.2em;
+	line-height:1.2;
+	margin-bottom:5px;
+}
+
+#paperAuthors {
+	font-size:1.1em;
+	margin:5px 0;
+}
+
+#paperAvailability {
+	background:#eee;
+	overflow:hidden;
+	padding:20px;
+	margin:10px 0px;
+	display:table;
+	width:100%;
+}
+
+#paperAvailabilityLogo {
+	display:table-cell;
+	float:left;
+	padding-right:10px;
+	width:52px;
+	vertical-align:middle;
+}
+
+#paperDetails {
+	display:table-cell;
+	vertical-align:middle;
 }
 
 .abstract {
-	width:500px;
 	font-size:0.9em;
 	font-weight:normal;
 	text-align:justify;
+	max-width:500px;
 	margin-left:50px;
 }
 

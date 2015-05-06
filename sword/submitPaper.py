@@ -1,6 +1,8 @@
 import httplib
 from zipfile import *
 from lxml import etree
+from django import form
+
 import StringIO
 import sword.metadataFormatter
 
@@ -9,12 +11,12 @@ import sword.metadataFormatter
 def encodeUserData(user, password):
     return "Basic " + (user + ":" + password).encode("base64").rstrip()
 
-u='bthom'
+u='dissemin'
 p='dissemin'
 
 conn = httplib.HTTPConnection("api-preprod.archives-ouvertes.fr")
 
-#httplib.HTTPConnection.debuglevel = 1 #Uncomment to debug mode
+httplib.HTTPConnection.debuglevel = 1 #Uncomment to debug mode
 
 
 #TODO add specific headers for export-toarxiv and so one
@@ -45,8 +47,6 @@ def MetadataHal(strData):  #Homemade sword protocol
     print r1.read()
 
 
-
-
 def FullHal(pdf,metadata):
     strData = CreateZipFromPdfAndMetadata(pdf,metadata)
     conn.putrequest("POST", "/sword/hal/", True,True)
@@ -65,7 +65,7 @@ def FullHal(pdf,metadata):
 #I will assume that the online "edition" is where I want
 
 def UpdateHal(pdf,idHal):
-        strData = CreateZipFromPdfAndMetadata(pdf,sword.metadataFormatter.generate())
+        strData = CreateZipFromPdfAndMetadata(pdf,sword.metadataFormatter.generate(9570))
         conn.putrequest("PUT", "/sword/"+idHal, True,True)
         conn.putheader("Host", "api-preprod.archives-ouvertes.fr")
         conn.putheader("Authorization",encodeUserData(u,p))
@@ -86,7 +86,7 @@ def UpdateHal(pdf,idHal):
 def bla():
     with open("sword/t/article.pdf","r") as art:
   		#FullHal(art.read(), sword.metadataFormatter.generate())      
-			UpdateHal(art.read(),"hal-01030339")
+			UpdateHal(art.read(),"inria-00528632")
 
 #TODO parse the XML to search "<edition>" then add the src
 #TODO Full SSL. Right now user/pass are not crypted.

@@ -257,6 +257,10 @@ class DepartmentView(generic.DetailView):
 class PaperView(generic.DetailView):
     model = Paper
     template_name = 'papers/paper.html'
+    def departments(self):
+        paper = self.get_object()
+        return Department.objects.filter(researcher__author__paper=paper).distinct()
+
 
 @user_passes_test(is_admin)
 def mailPaperView(request, pk):

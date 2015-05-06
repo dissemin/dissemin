@@ -25,11 +25,11 @@
 {% endblock %}
 
 {% block bodyTitle %}
-<span id="paperTitle" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}" data-pk="{{ paper.pk }}">
+<h1 id="paperTitle" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}" data-pk="{{ paper.pk }}">
     {% autoescape off %}
         {{ paper.title }}
     {% endautoescape %}
-</span>
+</h1>
 {% endblock %}
 
 {% block jsScript %}
@@ -49,7 +49,7 @@ $(function(){
 {% endblock %}
 
 {% block lists %}
-<p>
+<p id="paperAuthors">
 {% for author in paper.sorted_authors %}{% if not forloop.first %},{% endif %}
 <span><span class="{% if author.researcher_id %}knownAuthorName{% else %}unknownAuthorName{% endif %}"
     data-pk="{{ author.pk }}"
@@ -57,21 +57,22 @@ $(function(){
     data-last="{{ author.name.last }}"
     data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">{{ author | authorlink }}</span></span>{% endfor %}</p>
 
-{% if paper.can_be_asked_for_upload and request.user.is_authenticated %}
-<p><span><a href="{% url 'mail_paper' paper.pk %}" class="btn btn-default btn-xs">{% trans "Ask upload" %}</a></span></p> 
-{% endif %}
+<div id="paperAvailability">
 
-{% for publi in paper.publication_set.all %}
-<p>{{ publi | publication }}
-{% if publi.doi %}
-(DOI: <a href="{{ publi | doi_to_url }}">{{ publi.doi }}</a>)
-{% endif %}
-</p>
-{% endfor %}
+<div id="paperAvailabilityLogo">
+{% if paper.pdf_url %}<a href="{{ paper.pdf_url }}"><img src="/static/symbol-PDF-{{ paper.oa_status }}.png" width="52" height="70" /></a>
+    {% else %}<img src="/static/symbol-{{ paper.oa_status }}.png" width="52" height="70" />{% endif %}
+</div>
 
+<div id="paperDetails">
 <p><strong>{% trans "Full text:" %}</strong>
     {% if paper.pdf_url %}<a href="{{ paper.pdf_url }}">{% trans "Available" %} <img src="/static/extpdf.png"/></a>
-    {% else %}{% trans "Unavailable" %}{% endif %}</p>
+    {% else %}
+	  {% trans "Unavailable" %}
+	  {% if paper.can_be_asked_for_upload and request.user.is_authenticated %}
+        <span><a href="{% url 'mail_paper' paper.pk %}" class="btn btn-default btn-xs">{% trans "Ask upload" %}</a></span>
+{% endif %}
+    {% endif %}</p>
 
     {% for publi in paper.publications_with_unique_publisher %}
         {% with publi.publisher as psh %}
@@ -81,24 +82,48 @@ $(function(){
             (<a href="{% url 'publisher' psh.pk %}">{% trans "details" %}</a>)</p>
         {% endwith %}
     {% endfor %}
+</div>
+
+</div>
 
 {% for record in paper.oairecord_set.all %}
 {% if forloop.first %}
     {% if record.description %}
-        <p><strong>{% trans "Abstract." %}</strong></p>
-		<div class="abstract">{{ record.description }}</div>
+        <span class="detailsTitle">{% trans "Abstract" %}</span>
+		<div class="detailsContent"><div class="abstract">{{ record.description }}</div></div>
     {% endif %}
 {% endif %}
 {% endfor %}
+
 {% endblock %}
 
+
 {% block details %}
-<span class="detailsTitle">{% trans "Available from" %}</span>
+
+{% for publi in paper.publication_set.all %}
+{% if forloop.first %}
+  <span class="detailsTitle">{% trans "Published in" %}</span>
+  <div class="detailsContent">
+{% endif %}
+<p>{{ publi | publication }}
+{% if publi.doi %}
+(DOI: <a href="{{ publi | doi_to_url }}">{{ publi.doi }}</a>)
+{% endif %}
+</p>
+{% if forloop.last %}
+</div>
+{% endif %}
+{% endfor %}
+
+<span class="detailsTitle">{% trans "Data from" %}</span>
 <div class="detailsContent">
 {% for record in paper.sorted_oai_records %}
 <p>
+    {% if record.splash_url %}
+        <a href="{{ record.splash_url }}">
+	{% endif %}
     {% if record.priority > 0 %}
-        {{ record.source }}:
+        {{ record.source }}
     {% else %}
         {% if record.splash_url %}
             [{{ record.splash_url |domain }}]
@@ -106,19 +131,24 @@ $(function(){
             [{{ record.pdf_url |domain }}]
         {% endif %}
     {% endif %}
-    {% if record.splash_url %}
-        <a href="{{ record.splash_url }}">
-     [{% trans "Web page" %} <img src="/static/extlink.png" />]
-     </a>{% if record.pdf_url %} | {% endif %}{% endif %}
-     {% if record.pdf_url %}
-         <a href="{{ record.pdf_url }}"><img src="/static/extpdf.png" alt="PDF" /></a>
-     {% endif %}
+    {% if record.splash_url %}<img src="/static/extlink.png" /></a>{% if record.pdf_url %} | {% endif %}
+	{% endif %}
+    {% if record.pdf_url %}
+        <a href="{{ record.pdf_url }}"><img src="/static/extpdf.png" alt="PDF" /></a>
+    {% endif %}
 </p>
 {% endfor %}
 
 {% trans "Publisher" as publisher %}
 {% for publi in paper.publication_set.all %}
 <p><a href="{{ publi | doi_to_url }}">{{ publi.publisher|default:publisher }} <img src="/static/extlink.png" /></a> {% trans "via DOI" %}</p>
+{% endfor %}
+</div>
+
+<span class="detailsTitle">{% trans "Classified in" %}</span>
+<div class="detailsContent">
+{% for dept in view.departments %}
+<p><a href="{% url 'department' dept.id %}">{{ dept }}</a></p>
 {% endfor %}
 </div>
 
