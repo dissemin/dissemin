@@ -30,6 +30,12 @@ from papers.models import OaiRecord, OaiSource, Name
 from papers.doi import to_doi
 
 from backend.oai import *
+
+# Reader slightly tweaked because Cairn includes a useful non-standard field
+my_oai_dc_reader = oai_dc_reader
+my_oai_dc_reader._fields['accessRights'] = ('textList', 'oai_dc:dc/dcterms:accessRights/text()')
+my_oai_dc_reader._namespaces['dcterms'] = 'http://purl.org/dc/terms/'
+
 from backend.extractors import *
 from backend.proxy import PROXY_SOURCE_PREFIX
 from backend.create import *
@@ -38,10 +44,6 @@ from backend.pubtype_translations import *
 
 import re
 
-# Reader slightly tweaked because Cairn includes a useful non-standard field
-my_oai_dc_reader = oai_dc_reader
-my_oai_dc_reader._fields['accessRights'] = ('textList', 'oai_dc:dc/dcterms:accessRights/text()')
-my_oai_dc_reader._namespaces['dcterms'] = 'http://purl.org/dc/terms/'
 
 def process_records(listRecords):
     count = 0
