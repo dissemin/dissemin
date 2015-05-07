@@ -39,6 +39,7 @@ from backend.create import *
 from backend.crossref import fetch_papers_from_crossref_by_researcher_name, convert_to_name_pair
 from backend.proxy import *
 from backend.oai import *
+from backend.core import fetch_papers_from_core_for_researcher
 from backend.base import fetch_papers_from_base_for_researcher
 from backend.name_cache import name_lookup_cache
 
@@ -48,9 +49,11 @@ logger = get_task_logger(__name__)
 @shared_task(name='fetch_everything_for_researcher')
 def fetch_everything_for_researcher(pk):
     try:
+        r = Researcher.objects.get(pk=pk)
         fetch_dois_for_researcher(pk)
         fetch_records_for_researcher(pk)
- #       fetch_papers_from_base_for_researcher(Researcher.objects.get(pk=pk))
+        fetch_papers_from_core_for_researcher(r)
+        fetch_papers_from_base_for_researcher(Researcher.objects.get(pk=pk))
     except MetadataSourceException as e:
         raise e
     finally:

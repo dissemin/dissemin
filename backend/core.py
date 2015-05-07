@@ -45,35 +45,48 @@ core_timeout = 10
 CORE_MAX_NO_MATCH_BEFORE_GIVE_UP = 30
 CORE_API_KEY = open('core_api_key').read().strip()
 CORE_BASE_URL = 'http://core.ac.uk/api-v2'
-CORE_FETCH_METADATA_BATCH_SIZE = 100
+CORE_FETCH_METADATA_BATCH_SIZE = 100 # Max is 100
+CORE_WAIT_TIME = 15 # seconds
+CORE_RETRIES = 2 
+CORE_WAIT_FACTOR = 2 # factor by which wait time is multiplied for subsequent retries
 
-def query_core(url, params, post_payload=None):
+def query_core(url, params, post_payload=None, retries=CORE_RETRIES, wait_time=CORE_WAIT_TIME):
     """
     Generic function to send a request to CORE
     'url': local API URL, such as '/articles/search'
     'params': dict of GET parameters
     """
+    if retries < 0:
+        raise MetadataSourceException('Request to CORE failed: no retry left.\nURL was '+url)
     try:
-        params['apiKey'] = CORE_API_KEY
+        headers = {
+                'apiKey':CORE_API_KEY,
+                'user-agent':'dissem.in'
+                }
         full_url = CORE_BASE_URL + url
-        sleep(2)
         if post_payload is None:
-            f = requests.get(full_url, params=params)
+            f = requests.get(full_url, params=params, headers=headers)
         else:
             f = requests.post(full_url, params=params,
-                    data=json.dumps(post_payload))
+                    data=json.dumps(post_payload), headers=headers)
+        if f.status_code == 429:
+            print "CORE Throttled, waiting for "+str(wait_time)+" sec"
+            sleep(wait_timpe)
+            query_core(url, params, post_payload, retries-1, CORE_WAIT_FACTOR*wait_time)
+        elif f.status_code == 401:
+            raise MetadataSourceException('Invalid CORE API key.')
+        f.raise_for_status()
         parsed = f.json()
         return parsed
     except ValueError as e:
         raise MetadataSourceException('CORE returned invalid JSON payload for request '+f.url+'\n'+str(e))
     except requests.exceptions.RequestException as e:
-        raise MetadataSourceException('HTTP error with CORE for URL:'+f.url+'\n'+str(e))
-    # TODO do something different depending on the status code.
+        raise MetadataSourceException('HTTP error with CORE for URL: '+f.url+'\n'+str(e))
 
 
 def fetch_papers_from_core_for_researcher(researcher):
-    for name in researcher.name_set.all():
-        fetch_papers_from_core_by_researcher_name((name.first,name.last))
+    name = researcher.name
+    fetch_papers_from_core_by_researcher_name((name.first,name.last))
 
 def search_single_query(search_terms, max_results=None, page_size=100):
     page = 1
@@ -91,6 +104,9 @@ def search_single_query(search_terms, max_results=None, page_size=100):
             }
         res = query_core(url, params)
         numTot = res['totalHits']
+        if res['status'] != 'OK':
+            print "CORE: "+res['status']
+            break
         for r in res['data']:
             if r.get('type') == 'article' and 'id' in r:
                 yield int(r['id'])
@@ -148,13 +164,13 @@ def fetch_single_core_metadata(coreid):
 
 
 def fetch_papers_from_core_by_researcher_name(name, max_results=500):
-    core_source = OaiSource.objects.get_or_create(identifier='core',
+    core_source, created = OaiSource.objects.get_or_create(identifier='core',
             name='CORE',
             priority=0)
     
     max_unsuccessful_lookups = CORE_MAX_NO_MATCH_BEFORE_GIVE_UP
     batch_size = CORE_FETCH_METADATA_BATCH_SIZE
-    search_terms = name[0]+' '+name[1]
+    search_terms = 'authorsString:('+name[0]+' '+name[1]+')'
     ids = search_single_query(search_terms, max_results)
     
     unsuccessful_lookups = 0
@@ -173,8 +189,10 @@ def fetch_papers_from_core_by_researcher_name(name, max_results=500):
                 unsuccessful_lookups += 1
             if unsuccessful_lookups >= max_unsuccessful_lookups or nb_results >= max_results:
                 break
-        if unsuccessful_lookups >= max_unsuccessful_lookups or nb_results >= max_results:
+        if not (unsuccessful_lookups >= max_unsuccessful_lookups or nb_results >= max_results):
             current_batch = itertools.islice(ids, batch_size)
+        else:
+            current_batch = []
 
 core_sep_re = re.compile(r', *| *and *')
 def parse_core_authors_list(lst):
@@ -225,18 +243,19 @@ def add_core_document(doc, source):
     #metadata = my_oai_dc_reader(xml_record)._map
     description = metadata.get('description')
     
-    if False:
-        paper = get_or_create_paper(title, authors, pubdate, doi, 'CANDIDATE')
+    if pubdate is None or not title or not authors:
+        return False
 
-        record = OaiRecord(
-                source=source,
-                identifier=identifier,
-                splash_url=splash_url,
-                pdf_url=pdf_url,
-                description=description,
-                priority=source.priority)
-        record.save()
-        paper.update_pdf_url()
+    paper = get_or_create_paper(title, authors, pubdate, doi, 'CANDIDATE')
+
+    record = create_oairecord(
+            about=paper,
+            source=source,
+            identifier=identifier,
+            splash_url=splash_url,
+            pdf_url=pdf_url,
+            description=description,
+            priority=source.priority)
 
     return True
 
