@@ -54,6 +54,7 @@ Setting the database
 sudo su postgres
 psql
 CREATE USER dissemin WITH PASSWORD 'dissemin';
+ALTER USER dissemin CREATEDB;
 CREATE DATABASE dissemin WITH OWNER dissemin;
 
 	ctrl+d
