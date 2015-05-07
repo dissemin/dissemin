@@ -303,8 +303,7 @@ class ClusteringContext(object):
                 researcher=None,
                 cluster=None,
                 num_children=1,
-                cluster_relevance=0.,
-                paper__visibility='NOT_RELEVANT')
+                cluster_relevance=0.)
         print("Updating clustering context…")
         for pk in self.parent:
             self.parent[pk] = None
