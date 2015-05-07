@@ -25,7 +25,7 @@ import requests
 import requests.exceptions
 import xml.etree.ElementTree as ET
 import unicodedata
-import datetime
+from datetime import date
 
 from papers.errors import MetadataSourceException
 from papers.utils import iunaccent
@@ -53,10 +53,9 @@ def fetch_papers_from_base_by_researcher_name(name):
             query_args = {'func':'PerformSearch',
                     'offset':str(offset),
                     'query':search_terms}
-            request = base_url+'?'+urlencode(query_args)
             f = requests.get(base_url, params=query_args)
             response = f.text
-            root = ET.fromstring(response)
+            root = ET.fromstring(response.encode('utf-8'))
             result_list = list(root.findall('./result'))
             if not result_list:
                 raise MetadataSourceException('BASE returned no results for URL '+request)
@@ -130,9 +129,9 @@ def add_base_document(doc, source):
             title+'" : "'+metadata['dcyear']+'"')
     except KeyError: # No dcyear attribute, let's try to extract it from the date
         try:
-            date = metadata['dcdate']
+            pdate = metadata['dcdate']
             year_re = re.compile(r'[12][0-9][0-9][0-9]')
-            match = year_re.search(date)
+            match = year_re.search(pdate)
             if match:
                 year = int(match.group(0))
             else:
@@ -141,7 +140,7 @@ def add_base_document(doc, source):
             print("Warning, skipping document because no year or date is provided\n"+
                 'In document "'+title+'"')
             return False
-    pubdate = datetime.date(year=year,month=01,day=01)
+    pubdate = date(year=year,month=01,day=01)
     
     # Lookup the names
     model_names = map(name_lookup_cache.lookup, author_names)
