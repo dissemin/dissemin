@@ -352,7 +352,7 @@ class Name(models.Model):
 class Paper(models.Model):
     title = models.CharField(max_length=1024)
     fingerprint = models.CharField(max_length=64)
-    date_last_ask = models.DateField()
+    date_last_ask = models.DateField(null=True)
     # Approximate publication date.
     # For instance if we only know it is in 2014 we'll put 2014-01-01
     pubdate = models.DateField()
