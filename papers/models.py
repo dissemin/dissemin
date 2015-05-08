@@ -29,6 +29,7 @@ from papers.name import match_names
 from django.utils.translation import ugettext_lazy as _
 import hashlib
 from datetime import datetime, timedelta
+from urllib import urlencode # for the Google Scholar link
 
 OA_STATUS_CHOICES = (
         ('OA', _('Open access')),
@@ -585,6 +586,12 @@ class Paper(models.Model):
         elif not researcher_found and p.visibility != 'NOT_RELEVANT':
             p.visibility = 'NOT_RELEVANT'
             p.save(update_fields=['visibility'])
+
+    def google_scholar_link(self):
+        """
+        Link to search for the paper in Google Scholar
+        """
+        return 'http://scholar.google.com/scholar?'+urlencode({'q':self.title})
 
 
 

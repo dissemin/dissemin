@@ -60,7 +60,8 @@
             <input type="radio" name="annotate-paper-{{ paper.pk }}" class="annotate-paper-radio" value="2"
             {% if vis == 2 %}checked="checked"{% endif %}/>
             {% trans "Wrong" %}
-        </label>
+        </label>&nbsp;
+        <small><a href="{{ paper.google_scholar_link }}">{% trans "Search in Google Scholar" %}</a></small>
         {% endwith %}
         <span></span>
     </div>
