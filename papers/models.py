@@ -29,7 +29,7 @@ from papers.name import match_names
 from django.utils.translation import ugettext_lazy as _
 import hashlib
 from datetime import datetime, timedelta
-from urllib import urlencode # for the Google Scholar link
+from urllib import urlencode, quote # for the Google Scholar and CORE link
 
 OA_STATUS_CHOICES = (
         ('OA', _('Open access')),
@@ -592,6 +592,13 @@ class Paper(models.Model):
         Link to search for the paper in Google Scholar
         """
         return 'http://scholar.google.com/scholar?'+urlencode({'q':self.title})
+
+    def core_link(self):
+        """
+        Link to search for the paper in CORE
+        """
+        return 'http://core.ac.uk/search/'+quote(self.title)
+
 
 
 
