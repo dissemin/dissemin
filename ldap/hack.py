@@ -7,13 +7,14 @@ baseDN = "ou=people, dc=ens, dc=fr"
 searchScope = ldap.SCOPE_SUBTREE
 ## retrieve all attributes - again adjust to your needs - see documentation for more options
 retrieveAttributes = None 
-searchFilter = "cn=*farge*"
+
+#searchFilter = "cn=*farge*"
+searchFilter = "employeeType=*PROFESSEUR*"
 
 try:
 	ldap_result_id = conn.search(baseDN, searchScope, searchFilter, retrieveAttributes)
 	result_set = []
 	while 1:
-                print "Retry"
 		result_type, result_data = conn.result(ldap_result_id, 0)
 		if (result_data == []):
 			break
@@ -23,9 +24,10 @@ try:
 			## The appending to list is just for illustration. 
 			if result_type == ldap.RES_SEARCH_ENTRY:
 				result_set.append(result_data)
-	print result_set
+        for result in result_set:
+            print result
+        print str(len(result_set))+' results'
 except ldap.LDAPError, e:
 	print e
 
-print result_data
 
