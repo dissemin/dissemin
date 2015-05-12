@@ -30,7 +30,7 @@ def send_email_for_paper(paper):
     names = ", ".join(map(lambda x:x.name.full.title(),allAuthors)) 
     title = paper.title
     paper.date_last_ask = datetime.now().date() 
-    url = "http://ens.dissem.in/upload_paper/"+paper.id 
+    url = "http://ens.dissem.in/upload_paper/"+str(paper.id)
     my_template = open('papers/templates/papers/emailTemplate', 'r').read()
     fill_holes=my_template.replace('$NAMES', names).replace('$TITLE', title).replace('$URL',url)
     send_mail( "Someone is asking for one of your papers.", fill_holes , 'paper@dissem.in', list(set(["thomas.07fr@gmail.com","antonin@delpeuch.eu"])& set(map(lambda x: x.researcher.email,allAuthors))), fail_silently=False)
