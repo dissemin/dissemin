@@ -591,13 +591,13 @@ class Paper(models.Model):
         """
         Link to search for the paper in Google Scholar
         """
-        return 'http://scholar.google.com/scholar?'+urlencode({'q':self.title})
+        return 'http://scholar.google.com/scholar?'+urlencode({'q':self.title.encode('utf-8')})
 
     def core_link(self):
         """
         Link to search for the paper in CORE
         """
-        return 'http://core.ac.uk/search/'+quote(self.title)
+        return 'http://core.ac.uk/search/'+quote(self.title.encode('utf-8'))
 
 
 
