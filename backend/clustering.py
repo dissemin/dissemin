@@ -34,6 +34,8 @@ class ClusteringContext(object):
         self.cluster_ids = set()
         # Has this paper been tested for relevance yet?
         self.relevance_computed = dict()
+        # Is this author out of sync with the DB?
+        self.out_of_sync = set()
 
         # For debugging purposes only
         self.relevance = dict()
@@ -119,12 +121,18 @@ class ClusteringContext(object):
             if self.children[pk]:
                 print('Children: '+str(self.children[pk]))
 
-    def commit(self):
+    def commit(self, force=False):
         """
         Push the state of the graph to the database.
+        set force to True if you want to sync all the authors to the DB, even
+        if we think they are still in sync
         """
-        for (pk,val) in self.authors.items():
+        pks = self.out_of_sync
+        if force:
+            pks = self.authors.keys()
+        for pk in pks:
             try:
+                val = self.authors[pk]
                 val.cluster_id = self.find(pk)
                 val.num_children = self.cluster_size[pk]
                 val.cluster_relevance = self.num_relevant[val.cluster_id]
@@ -138,6 +146,7 @@ class ClusteringContext(object):
                 val.paper.update_visibility()
             except KeyError:
                 continue
+        self.out_of_sync.clear()
 
     def classify(self, pkA, pkB):
         """
@@ -211,7 +220,9 @@ class ClusteringContext(object):
             return a
         else:
             res = self.find(pa)
-            self.parent[a] = res
+            if pa != res:
+                self.parent[a] = res
+                self.out_of_sync.add(a)
             return res
 
     def union(self, a, b):
@@ -227,6 +238,8 @@ class ClusteringContext(object):
             self.cluster_size[new_root] += self.cluster_size[old_root]
             self.num_relevant[new_root] += self.num_relevant[old_root]
             self.cluster_ids.discard(old_root)
+            self.out_of_sync.add(old_root)
+            self.out_of_sync.add(new_root)
 
     def computeRelevance(self, target):
         """
@@ -240,6 +253,8 @@ class ClusteringContext(object):
             if parent != target:
                 self.num_relevant[target] += relevance
             self.relevance_computed[target] = True
+            self.out_of_sync.add(target)
+            self.out_of_sync.add(parent)
 
 
     def runClustering(self, target, order_pk=False, logf=None):
@@ -311,6 +326,7 @@ class ClusteringContext(object):
             self.children[pk] = []
             self.cluster_ids.add(pk)
             self.cluster_size[pk] = 1
+            self.out_of_sync.add(pk)
 
         logf = None
         idx = 0
