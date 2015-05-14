@@ -40,10 +40,10 @@ from backend.create import *
 from backend.oai import my_oai_dc_reader
 from backend.name_cache import name_lookup_cache
 
+from dissemin.settings import CORE_API_KEY
 
 core_timeout = 10
 CORE_MAX_NO_MATCH_BEFORE_GIVE_UP = 30
-CORE_API_KEY = open('core_api_key').read().strip()
 CORE_BASE_URL = 'http://core.ac.uk/api-v2'
 CORE_FETCH_METADATA_BATCH_SIZE = 100 # Max is 100
 CORE_WAIT_TIME = 15 # seconds
