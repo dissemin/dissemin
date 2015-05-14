@@ -181,7 +181,6 @@ def fetch_papers_from_core_by_researcher_name(name, max_results=500):
     current_batch = list(itertools.islice(ids, batch_size))
     nb_results = 0
     while current_batch:
-        cnt += 1
         results = fetch_paper_metadata_by_core_ids(current_batch)
         for result in results:
             match = None
