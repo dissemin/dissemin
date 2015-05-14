@@ -35,6 +35,7 @@ import itertools
 from papers.errors import MetadataSourceException
 from papers.models import *
 from papers.name import parse_comma_name
+from papers.utils import remove_diacritics
 
 from backend.create import *
 from backend.oai import my_oai_dc_reader
@@ -93,7 +94,7 @@ def fetch_papers_from_core_for_researcher(researcher):
 
 def search_single_query(search_terms, max_results=None, page_size=100):
     page = 1
-    url = '/search/'+quote(search_terms)
+    url = '/search/'+quote(remove_diacritics(search_terms))
     numSent = 0
     numTot = 0
     while True:
