@@ -65,8 +65,10 @@ def query_core(url, params, post_payload=None, retries=CORE_RETRIES, wait_time=C
                 }
         full_url = CORE_BASE_URL + url
         if post_payload is None:
+            print "CORE GET request: "+full_url
             f = requests.get(full_url, params=params, headers=headers)
         else:
+            print "CORE POST request: "+full_url
             f = requests.post(full_url, params=params,
                     data=json.dumps(post_payload), headers=headers)
         if f.status_code == 429:
@@ -77,6 +79,7 @@ def query_core(url, params, post_payload=None, retries=CORE_RETRIES, wait_time=C
             raise MetadataSourceException('Invalid CORE API key.')
         f.raise_for_status()
         parsed = f.json()
+        print "CORE answered back"
         return parsed
     except ValueError as e:
         raise MetadataSourceException('CORE returned invalid JSON payload for request '+f.url+'\n'+str(e))
@@ -174,9 +177,10 @@ def fetch_papers_from_core_by_researcher_name(name, max_results=500):
     ids = search_single_query(search_terms, max_results)
     
     unsuccessful_lookups = 0
-    current_batch = itertools.islice(ids, batch_size)
+    current_batch = list(itertools.islice(ids, batch_size))
     nb_results = 0
     while current_batch:
+        cnt += 1
         results = fetch_paper_metadata_by_core_ids(current_batch)
         for result in results:
             match = None
@@ -190,7 +194,7 @@ def fetch_papers_from_core_by_researcher_name(name, max_results=500):
             if unsuccessful_lookups >= max_unsuccessful_lookups or nb_results >= max_results:
                 break
         if not (unsuccessful_lookups >= max_unsuccessful_lookups or nb_results >= max_results):
-            current_batch = itertools.islice(ids, batch_size)
+            current_batch = list(itertools.islice(ids, batch_size))
         else:
             current_batch = []
 
