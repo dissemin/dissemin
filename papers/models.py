@@ -520,8 +520,9 @@ class Paper(models.Model):
 
     def invalidate_cache(self):
         for rpk in [a.researcher_id for a in self.author_set.filter(researcher_id__isnull=False)]+[None]:
-            key = make_template_fragment_key('publiListItem', [self.pk, rpk])
-            cache.delete(key)
+            for with_buttons in [False,True]:
+                key = make_template_fragment_key('publiListItem', [self.pk, rpk, with_buttons])
+                cache.delete(key)
 
     # Merge paper into self
     def merge(self, paper):
