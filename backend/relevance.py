@@ -308,7 +308,12 @@ class RelevanceClassifier(object):
         f.close()
  
 class DummyRelevanceClassifier(RelevanceClassifier):
+    """
+    Tries to do its best without relying on department-specific
+    topic models
+    """
     def __init__(self, **kwargs):
+        super(DummyRelevanceClassifier, self).__init__(**kwargs)
         self.features = [
                 AuthorNameSimilarity(),
                 KnownCoauthors()
@@ -319,6 +324,17 @@ class DummyRelevanceClassifier(RelevanceClassifier):
         if features[0] >= 1.0: # author name similarity
             return features[1] # nb of known coauthors
         return -0.1
+
+class AllRelevantClassifier(RelevanceClassifier):
+    """
+    Returns a positive similarity score for all papers
+    """
+    def __init__(self, **kwargs):
+        super(AllRelevantClassifier, self).__init__(**kwargs)
+
+    def score(self, author, researcher, verbose=False):
+        return 1.0
+
 
 
 
