@@ -1,0 +1,21 @@
+{% extends "dissemin/skeleton.html" %}
+
+{% load i18n %}
+
+{% block headTitle %}
+Annotations
+{% endblock %}
+
+{% block content %}
+<div id="fullPage">
+  <h2>{% trans "Hall of fame" %}</h2>
+  
+  <ul>
+  {% for user in view.users %}
+  <li>{{ user.username }}: {{ user.num_annot }} annotations
+    </li>
+  {% endfor %}
+  </ul>
+  
+</div>
+{% endblock %}

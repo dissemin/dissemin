@@ -26,10 +26,14 @@ from django.views import generic
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth import logout
 from django.contrib.auth.views import login as auth_login
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import user_passes_test
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 from django.utils.decorators import method_decorator
+from django.db.models import Count
+
+from datetime import datetime
 
 from celery.execute import send_task
 
@@ -314,4 +318,18 @@ def feedbackView(request):
 
 def regularLogin(request):
     return auth_login(request, 'papers/login.html')
+
+def annotationsView(request):
+    return render(request, 'papers/annotations.html', {'annotations':Annotation.objects.all(),
+        'users':User.objects.all()})
+
+class AnnotationsView(generic.TemplateView):
+    template_name = 'papers/annotations.html'
+    def users(self):
+        users = list(User.objects.all().annotate(num_annot=Count('annotation')))
+        sorted_users = sorted(users, key=lambda x:-x.num_annot)
+        filtered_users = filter(lambda x:x.num_annot > 0, sorted_users)
+        return sorted_users
+
+
 

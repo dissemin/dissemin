@@ -48,4 +48,5 @@ urlpatterns = patterns('',
         url(r'^feedback$', views.feedbackView, name='feedback'),
         url(r'^ajax/', include('papers.ajax')),
         url(r'^regular_login/$', views.regularLogin, name='regular_login'),
+        url(r'^annotations/$', views.AnnotationsView.as_view(), name='annotations'),
 )
