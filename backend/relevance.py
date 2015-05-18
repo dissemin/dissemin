@@ -313,7 +313,6 @@ class DummyRelevanceClassifier(RelevanceClassifier):
     topic models
     """
     def __init__(self, **kwargs):
-        super(DummyRelevanceClassifier, self).__init__(**kwargs)
         self.features = [
                 AuthorNameSimilarity(),
                 KnownCoauthors()
@@ -330,7 +329,7 @@ class AllRelevantClassifier(RelevanceClassifier):
     Returns a positive similarity score for all papers
     """
     def __init__(self, **kwargs):
-        super(AllRelevantClassifier, self).__init__(**kwargs)
+        pass
 
     def score(self, author, researcher, verbose=False):
         return 1.0
