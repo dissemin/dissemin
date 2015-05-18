@@ -905,5 +905,6 @@ class Annotation(models.Model):
         # TODO: we leave paper visibility as is, for the experiment, but this should be changed in the future.
         paper.last_annotation = status
         paper.save(update_fields=['last_annotation'])
+        paper.invalidate_cache()
 
 
