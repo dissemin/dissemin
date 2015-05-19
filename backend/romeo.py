@@ -52,15 +52,20 @@ def perform_romeo_query(search_terms):
         response = requests.get(base_url, params=search_terms).text.encode('utf-8')
     except requests.exceptions.RequestException as e:
         raise MetadataSourceException('Error while querying RoMEO.\n'+
-                'URL was: '+request+'\n'
+                'URL was: '+base_url+'\n'+
+                'Parameters were: '+str(search_terms)+'\n'+
                 'Error is: '+str(e))
 
     # Parse it
     try:
         root = ET.fromstring(response)
     except ET.ParseError as e:
-        raise MetadataSourceException('RoMEO returned an invalid XML response.\n'+
-                'URL was: '+request+'\n'
+        with open('/tmp/romeo_response.xml', 'w') as f:
+            f.write(response)
+            f.write('\n')
+        raise MetadataSourceException('RoMEO returned an invalid XML response, dumped at /tmp/romeo_response.xml\n'+
+                'URL was: '+base_url+'\n'+
+                'Parameters were: '+str(search_terms)+'\n'+
                 'Error is: '+str(e))
 
     return root

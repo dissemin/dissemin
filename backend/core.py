@@ -83,9 +83,9 @@ def query_core(url, params, post_payload=None, retries=CORE_RETRIES, wait_time=C
         print "CORE answered back"
         return parsed
     except ValueError as e:
-        raise MetadataSourceException('CORE returned invalid JSON payload for request '+f.url+'\n'+str(e))
+        raise MetadataSourceException('CORE returned invalid JSON payload for request '+full_url+'\n'+str(params)+'\n'+str(e))
     except requests.exceptions.RequestException as e:
-        raise MetadataSourceException('HTTP error with CORE for URL: '+f.url+'\n'+str(e))
+        raise MetadataSourceException('HTTP error with CORE for URL: '+full_url+'\n'+str(params)+'\n'+str(e))
 
 
 def fetch_papers_from_core_for_researcher(researcher):
