@@ -150,6 +150,7 @@ $(function(){
 {% for dept in view.departments %}
 <p><a href="{% url 'department' dept.id %}">{{ dept }}</a></p>
 {% endfor %}
+{% include "papers/annotButtons.html" with paper=paper %}
 </div>
 
 <span class="detailsTitle">{% trans "Tools" %}</span>

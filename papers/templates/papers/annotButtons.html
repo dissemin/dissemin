@@ -1,0 +1,22 @@
+{% load i18n %}
+<form>
+    <div class="btn-group-sm" data-toggle="buttons">
+    {% with vis=paper.annotation_code %}
+    <label class="btn button-paper-right annotate-paper {% if vis == 0 %}active{% endif %}">
+        <input type="radio" name="annotate-paper-{{ paper.pk }}" class="annotate-paper-radio" value="0"
+         {% if vis == 0 %}checked="checked"{% endif %}/>
+        {% trans "Right" %}
+    </label>
+    <label class="btn button-paper-wrong annotate-paper {% if vis == 2 %}active{%endif%}">
+        <input type="radio" name="annotate-paper-{{ paper.pk }}" class="annotate-paper-radio" value="2"
+        {% if vis == 2 %}checked="checked"{% endif %}/>
+        {% trans "Wrong" %}
+    </label>&nbsp;
+    {% if with_scholar %}
+    <small><a href="{{ paper.google_scholar_link }}">{% trans "Search in Google Scholar" %}</a></small>
+    {% endif %}
+    {% endwith %}
+    <span></span>
+</div>
+</form>
+
