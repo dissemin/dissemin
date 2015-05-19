@@ -2,6 +2,7 @@
 from __future__ import unicode_literals, print_function
 
 from django.db.models import Q
+from django.core.exceptions import ObjectDoesNotExist
 import random
 from collections import defaultdict
 # For graph output
@@ -10,7 +11,7 @@ from unidecode import unidecode
 from papers.models import Author, Researcher
 from papers.utils import nocomma
 
-from backend.similarity import SimilarityClassifier
+from backend.similarity import SimilarityClassifier, AuthorNotFound
 from backend.relevance import RelevanceClassifier
 
 
@@ -256,6 +257,37 @@ class ClusteringContext(object):
             self.out_of_sync.add(target)
             self.out_of_sync.add(parent)
 
+    def deleteAuthor(self, pk):
+        """
+        Removes an author from the cache, in case it has been deleted from the database
+        for some reason
+        """
+        def del_if_present(key, dct):
+            if key in dct:
+                del dct[key]
+
+        del_if_present(pk, self.authors)
+        parent = None
+        if pk in self.parent:
+            parent = self.parent[pk]
+            sisters = self.children[parent]
+            if pk in sisters:
+                self.children[parent].remove(pk)
+            del self.parent[pk]
+        children = self.children[pk]
+        for child in children:
+            if parent is None:
+                del_if_present(child, self.parent)
+            else:
+                self.parent[child] = parent
+        del self.children[pk]
+        if parent:
+            self.cluster_size[parent] -= 1
+        del_if_present(pk, self.cluster_ids)
+        if pk in self.cluster_ids:
+            self.cluster_ids.remove(pk)
+        del_if_present(pk, self.relevance_computed)
+        self.out_of_sync.remove(pk)
 
     def runClustering(self, target, order_pk=False, logf=None):
         """
@@ -266,6 +298,14 @@ class ClusteringContext(object):
         A log file can be provided in logf, the outcomes of the similarity classifier
         will be output there.
         """
+        try:
+            self._runClustering(target, order_pk, logf)
+        except AuthorNotFound as e:
+            self.deleteAuthor(e.pk)
+            self.runClustering(target, order_pk, logf)
+
+    def _runClustering(self, target, order_pk=False, logf=None):
+
         MAX_CLUSTER_SIZE_DURING_FETCH = 1000
         NB_TESTS_WITHIN_CLUSTER = 32
 

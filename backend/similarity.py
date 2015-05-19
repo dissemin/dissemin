@@ -26,10 +26,17 @@ import cPickle
 import numpy as np
 from unidecode import unidecode
 import name_tools
+from django.core.exceptions import ObjectDoesNotExist
 
 from papers.models import Name, Author, Researcher
 from papers.utils import iunaccent, nocomma, filter_punctuation, tokenize
 from papers.name import match_names
+
+class AuthorNotFound(Exception):
+    def __init__(self, message, pk, *args):
+        self.message = message
+        self.pk = pk
+        super(AuthorNotFound, self).__init__(message, *args)
 
 class SimilarityFeature(object):
     """
@@ -226,8 +233,11 @@ class SimilarityClassifier(object):
         return map(lambda f: f.fetchData(author), self.simFeatures)
 
     def getDataById(self,id):
-        author = Author.objects.get(pk=id)
-        return self.lstData(author)
+        try:
+            author = Author.objects.get(pk=id)
+            return self.lstData(author)
+        except Author.DoesNotExist as e:
+            raise AuthorNotFound(e.message, id)
  
     def train(self, features, labels, kernel='rbf'):
         self.classifier = svm.SVC(kernel=str(kernel))
