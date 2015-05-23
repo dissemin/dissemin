@@ -45,6 +45,14 @@ $(function(){
         makeAuthorEditable($(this), paperMerged);
     });
 });
+$(function(){
+    $('.annotate-paper-radio').change(function(){
+        console.log($(this));
+        var value = $(this).val();
+        $.ajax({url:'/ajax/'+$(this).attr('name')+'-'+value})
+    });
+});
+
 {% endif %}
 {% endblock %}
 
