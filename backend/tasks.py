@@ -53,7 +53,7 @@ def fetch_everything_for_researcher(pk):
         fetch_dois_for_researcher(pk)
         fetch_records_for_researcher(pk)
         fetch_papers_from_core_for_researcher(r)
-        fetch_papers_from_base_for_researcher(Researcher.objects.get(pk=pk))
+        #fetch_papers_from_base_for_researcher(Researcher.objects.get(pk=pk))
     except MetadataSourceException as e:
         raise e
     finally:
