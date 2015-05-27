@@ -82,7 +82,7 @@ class AuthorNameSimilarity(SimilarityFeature):
         super(AuthorNameSimilarity, self).__init__()
 
     def fetchData(self, author):
-        return to_plain_name(author.name)
+        return (author.name.first, author.name.last)
 
     def score(self, dataA, dataB):
         # TODO: this score function is far from optimal
@@ -209,7 +209,7 @@ class SimilarityClassifier(object):
         if not contributorsModel:
             contributorsModel = publicationModel
         self.simFeatures = [
-    #            AuthorNameSimilarity(),
+                AuthorNameSimilarity(),
                 CoauthorsSimilarity(),
                 PublicationSimilarity(publicationModel),
                 TitleSimilarity(publicationModel),

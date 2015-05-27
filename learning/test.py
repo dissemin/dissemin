@@ -23,7 +23,7 @@ from __future__ import unicode_literals, print_function
 from django.db.models import Q
 from papers.models import *
 from learning.model import *
-from papers.similarity import *
+from backend.similarity import *
 
 # Read dataset
 author_ids = []
@@ -49,7 +49,7 @@ def getAuthorData(sc, id):
         author_data_cache[id] = x
         return x
 
-recompute = False
+recompute = True
 if recompute:
     print("Computing features")
     features = []
@@ -74,7 +74,7 @@ if True:
     sc.train(features, labels, kernel='linear')
 
     def paper_url(pk):
-        print('http://localhost:8000/paper/'+str(Author.objects.get(pk=pk).paper_id))
+        print('http://beta.ens.dissem.in/paper/'+str(Author.objects.get(pk=pk).paper_id))
 
     print("Curious papers")
     pubSc = sc.simFeatures[1]
