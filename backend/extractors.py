@@ -20,6 +20,8 @@
 
 from __future__ import unicode_literals
 
+from papers.models import OaiSource
+
 import re
 
 class URLExtractor(object):
@@ -155,7 +157,20 @@ REGISTERED_EXTRACTORS = {
         'openaire' : openaireExtractor,
         }
 
+# Set up the model for the sources
+oai_sources = [
+        ('arxiv','arXiv',False,1,'preprint'),
+        ('hal', 'HAL', False, 1, 'preprint'),
+        ('cairn', 'Cairn', False, 1, 'preprint'),
+        ('pmc', 'PubMed Central', False, 1, 'preprint'),
+        ('doaj', 'DOAJ', True, 1, 'preprint'),
+        ('persee', 'Persée', True, 1, 'preprint'),
+        ('openaire', 'OpenAIRE', False, 1, 'preprint'),
+        ]
 
+for identifier, name, oa, priority, pubtype in oai_sources:
+    OaiSource.objects.get_or_create(identifier=identifier,
+            defaults={'name':name,'oa':oa,'priority':priority,'default_pubtype':pubtype})
 
 
 
