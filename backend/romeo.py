@@ -20,7 +20,7 @@
 
 from __future__ import unicode_literals
 
-import xml.etree.ElementTree as ET # TODO move to lxml, it handles utf-8 better
+import lxml.etree as ET
 
 import requests
 import requests.exceptions
