@@ -158,7 +158,11 @@ $(function(){
 {% for dept in view.departments %}
 <p><a href="{% url 'department' dept.id %}">{{ dept }}</a></p>
 {% endfor %}
-{% include "papers/annotButtons.html" with paper=paper %}
+
+{% if request.user.is_authenticated %}
+    {% include "papers/annotButtons.html" with paper=paper with_scholar=1 %}
+{% endif %}
+
 </div>
 
 <span class="detailsTitle">{% trans "Tools" %}</span>
