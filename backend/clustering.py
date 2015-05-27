@@ -283,11 +283,11 @@ class ClusteringContext(object):
         del self.children[pk]
         if parent:
             self.cluster_size[parent] -= 1
-        del_if_present(pk, self.cluster_ids)
         if pk in self.cluster_ids:
             self.cluster_ids.remove(pk)
         del_if_present(pk, self.relevance_computed)
-        self.out_of_sync.remove(pk)
+        if pk in self.out_of_sync:
+            self.out_of_sync.remove(pk)
 
     def runClustering(self, target, order_pk=False, logf=None):
         """
@@ -345,9 +345,10 @@ class ClusteringContext(object):
                 nb_edges_added += 1
         print(str(nb_edges_added)+" edges added")
 
-    def reclusterBatch(self):
+    def reclusterBatch(self, compute_all_edges=False):
         """
         Reclusters everything!
+        If compute_all_edges is true, the full similarity graph is dumped.
         """
         pklist = list(self.parent)
         pklist.sort()
@@ -389,10 +390,16 @@ class ClusteringContext(object):
 
 
         graphf = open('learning/gephi/classified-'+str(self.researcher.pk)+'.gdf', 'w')
-        self.outputGraph(graphf)
+        self.outputGraph(graphf, compute_all_edges)
         graphf.close()           
 
-    def outputGraph(self, outf):
+    def outputGraph(self, outf, compute_all_edges=False):
+        """
+        For debugging purposes:
+        outputs the similarity/relevance graph to a file.
+        by default, only outputs the spanning graph for each connected component
+        if compute_all_edges is true, we recompute all the similarities and output the full graph
+        """
         print('nodedef>name VARCHAR,label VARCHAR,pid VARCHAR,visibility VARCHAR,relevance FLOAT,relevant VARCHAR', file=outf)
         for (x,v) in self.authors.items():
             visibility = v.paper.visibility
@@ -401,9 +408,19 @@ class ClusteringContext(object):
             print(nocomma([x,unidecode(v.paper.title), v.paper.id,
                 visibility, self.relevance.get(x,None),self.relevance.get(x,-1.)>0.]), file=outf)
         print('edgedef>node1 VARCHAR,node2 VARCHAR', file=outf)
-        for (x,y) in self.edge_set:
-            if y != None:
-                print(nocomma([x,y]), file=outf)
+        if not compute_all_edges:
+            for (x,y) in self.edge_set:
+                if y != None:
+                    print(nocomma([x,y]), file=outf)
+        else:
+            author_pks = list(self.authors.keys())
+            for i in range(len(author_pks)):
+                for j in range(i):
+                    x = author_pks[i]
+                    y = author_pks[j]
+                    if self.classify(x, y):
+                        print(nocomma([x,y]), file=outf)
+
 
 
 # This structure stores clustering contextes for online clustering
@@ -426,13 +443,13 @@ class ClusteringContextFactory(object):
         context = ClusteringContext(researcher, self.sc, self.rc)
         self.cc[researcher.pk] = context
 
-    def reclusterBatch(self, researcher):
+    def reclusterBatch(self, researcher, compute_all_edges=False):
         """
         Runs the algorithm on the whole set of papers related to a researcher
         Not suitable for online incremental update.
         """
         self.load(researcher)
-        self.cc[researcher.pk].reclusterBatch()
+        self.cc[researcher.pk].reclusterBatch(compute_all_edges)
 
 
     def clusterAuthorLater(self, author):
