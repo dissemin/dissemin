@@ -25,7 +25,7 @@ from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
 from papers.utils import nstr, iunaccent, create_paper_plain_fingerprint
-from papers.name import match_names
+from papers.name import match_names, name_similarity
 from papers.utils import remove_diacritics, sanitize_html
 from django.utils.translation import ugettext_lazy as _
 import hashlib
@@ -157,11 +157,18 @@ class ResearchGroup(models.Model):
     def __unicode__(self):
         return self.name
 
+class NameVariant(models.Model):
+    """
+    A name is a possible name for a given researcher, with a confidence score associated with it
+    """
+    name = models.ForeignKey('Name')
+    researcher = models.ForeignKey('Researcher')
+    confidence = models.FloatField(default=1.)
+    unique_together = (('name','researcher'),)
+
 class Researcher(models.Model):
     # The preferred name for this researcher
     name = models.ForeignKey('Name')
-    # Variants of this name found in the papers
-    name_variants = models.ManyToManyField('Name', related_name='variant_of')
     # Department the researcher belongs to
     department = models.ForeignKey(Department)
     # Research groups the researcher belongs to
@@ -190,15 +197,32 @@ class Researcher(models.Model):
     @property
     def aka(self):
         return self.names[1:]
-    def update_variants(self):
+    @property
+    def name_variants(self):
+        return NameVariant.objects.filter(researcher=self)
+
+    def variants_queryset(self):
+        """
+        The set of names with the same last name
+        """
+        return Name.objects.filter(last__iexact=self.name.last)
+
+    def update_variants(self, reset=False):
         """
         Sets the variants of this name to the candidates returned by variants_queryset
         """
-        self.name_variants.clear()
+        nvqs = NameVariant.objects.filter(researcher=self)
+        if reset:
+            nvqs.delete()
+            current_name_variants = set()
+        else:
+            current_name_variants = set([nv.name_id for nv in nvqs])
+
         last = self.name.last
-        for name in Name.objects.filter(last__iexact=last):
-            if match_names((name.first,name.last),(self.name.first,self.name.last)):
-                self.name_variants.add(name)
+        for name in self.variants_queryset():
+            sim = name_similarity((name.first,name.last),(self.name.first,self.name.last))
+            if sim > 0 and name.id not in current_name_variants:
+                nv = NameVariant.objects.create(name=name, researcher=self, confidence=sim)
                 if not name.is_known:
                     name.is_known = True
                     name.save(update_fields=['is_known'])
@@ -276,16 +300,20 @@ class Name(models.Model):
         """
         Sets the variants of this name to the candidates returned by variants_queryset
         """
-        self.variant_of.clear()
         for researcher in self.variants_queryset():
-            if match_names((researcher.name.first,researcher.name.last), (self.first,self.last)):
-                researcher.name_variants.add(self)
+            sim = name_similarity((researcher.name.first,researcher.name.last), (self.first,self.last))
+            if sim > 0:
+                self.is_known = True
+                if self.pk is None:
+                    self.save()
+                NameVariant.objects.get_or_create(name=self,researcher=researcher,
+                        defaults={'confidence':sim})
 
     def update_is_known(self):
         """
         A name is considered as known when it belongs to a name variants group of a researcher
         """
-        new_value = self.variant_of.count() > 0
+        new_value = NameVariants.objects.filter(name=self).count() > 0
         if new_value != self.is_known:
             self.is_known = new_value
             self.save(update_fields=['is_known'])
@@ -316,25 +344,7 @@ class Name(models.Model):
         similar_researchers = Researcher.objects.filter(
                 name__last__iexact=last_name).select_related('name')
 
-        saved = False
-        for r in similar_researchers:
-            if match_names((r.name.first,r.name.last), (first_name,last_name)):
-                if not saved:
-                    saved = True
-                    name.is_known = True
-                    name.save()
-                r.name_variants.add(name)
-
-   
-        # Other approach that adds *many* names
-        #
-        #similar_names = cls.objects.filter(last__iexact=last_name, is_known=True)
-        #for sim in similar_names:
-        #    if match_names((sim.first,sim.last),(first_name,last_name)):
-        #        name.is_known = True
-        #        name.save()
-        #        for researcher in sim.variant_of.all():
-        #            researcher.name_variants.add(name)
+        self.update_variants()
 
         return name
 

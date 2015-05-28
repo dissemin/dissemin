@@ -69,8 +69,8 @@
         {% if request.user.is_superuser %}
         <p>{% trans "Names:" %}
             <ul>
-            {% for name in researcher.name_variants.all %}
-            <li><a href="{% url 'search' %}?name={{ name.id }}">{{ name }}</a></li>
+            {% for nv in researcher.name_variants.all %}
+            <li><a href="{% url 'search' %}?name={{ nv.name_id }}">{{ nv.name }}</a> ({{ nv.confidence }})</li>
             {% endfor %}
          </ul></p>
          {% endif %}
