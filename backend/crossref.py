@@ -122,8 +122,8 @@ def fetch_papers_from_crossref_by_researcher_name(name, update=False):
             # First check whether the DOI is already in the model
             if not update:
                 try:
-                    Publication.objects.get(doi=doi)
-                    print "Skipped as it is already in the model"
+                    p = Publication.objects.get(doi=doi)
+                    print "Skipped as it is already in the model (paper id "+str(p.paper_id)+')'
                     researcher_found = True
                     continue # The DOI already exists, skipping
                 except ObjectDoesNotExist:
