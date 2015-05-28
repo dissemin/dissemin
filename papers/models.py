@@ -212,6 +212,8 @@ class Researcher(models.Model):
 
     @classmethod
     def create_from_scratch(cls, first, last, dept, email, role, homepage):
+        first = first.strip()
+        last = last.strip()
         name, created = Name.objects.get_or_create(full=iunaccent(first+' '+last),
                 defaults={'first':first, 'last':last})
         if not created and cls.objects.filter(name=name).count() > 0:
@@ -250,8 +252,8 @@ class Name(models.Model):
         Useful for name lookups where we are not sure we want to
         keep the name in the model.
         """
-        first = first[:MAX_NAME_LENGTH]
-        last = last[:MAX_NAME_LENGTH]
+        first = first[:MAX_NAME_LENGTH].strip()
+        last = last[:MAX_NAME_LENGTH].strip()
         full = iunaccent(first+' '+last)
         return cls(first=first,last=last,full=full)
     @classmethod
@@ -260,7 +262,7 @@ class Name(models.Model):
         Replacement for the regular get_or_create, so that the full
         name is built based on first and last
         """
-        full = iunaccent(first+' '+last)
+        full = iunaccent(first.strip()+' '+last.strip())
         return cls.objects.get_or_create(full=full, defaults={'first':first,'last':last})
     def variants_queryset(self):
         """
@@ -292,15 +294,14 @@ class Name(models.Model):
     def lookup_name(cls, author_name):
         if author_name == None:
             return
-        first_name = author_name[0][:MAX_NAME_LENGTH]
-        last_name = author_name[1][:MAX_NAME_LENGTH]
+        first_name = author_name[0][:MAX_NAME_LENGTH].strip()
+        last_name = author_name[1][:MAX_NAME_LENGTH].strip()
 
         # First, check if the name itself is known
         # (we do not take the first/last separation into account
         # here because the exact match is already a quite strong
         # condition)
         full_name = first_name+' '+last_name
-        full_name = full_name.strip()
         normalized = iunaccent(full_name)
         name = cls.objects.filter(full=normalized).first()
         if name:
