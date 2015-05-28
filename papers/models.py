@@ -26,7 +26,7 @@ from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
 from papers.utils import nstr, iunaccent, create_paper_plain_fingerprint
 from papers.name import match_names
-from papers.utils import remove_diacritics
+from papers.utils import remove_diacritics, sanitize_html
 from django.utils.translation import ugettext_lazy as _
 import hashlib
 from datetime import datetime, timedelta
@@ -252,8 +252,8 @@ class Name(models.Model):
         Useful for name lookups where we are not sure we want to
         keep the name in the model.
         """
-        first = first[:MAX_NAME_LENGTH].strip()
-        last = last[:MAX_NAME_LENGTH].strip()
+        first = sanitize_html(first[:MAX_NAME_LENGTH].strip())
+        last = sanitize_html(last[:MAX_NAME_LENGTH].strip())
         full = iunaccent(first+' '+last)
         return cls(first=first,last=last,full=full)
     @classmethod
@@ -294,8 +294,8 @@ class Name(models.Model):
     def lookup_name(cls, author_name):
         if author_name == None:
             return
-        first_name = author_name[0][:MAX_NAME_LENGTH].strip()
-        last_name = author_name[1][:MAX_NAME_LENGTH].strip()
+        first_name = sanitize_html(author_name[0][:MAX_NAME_LENGTH].strip())
+        last_name = sanitize_html(author_name[1][:MAX_NAME_LENGTH].strip())
 
         # First, check if the name itself is known
         # (we do not take the first/last separation into account

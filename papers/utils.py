@@ -88,6 +88,7 @@ except ImportError:
 ## HTML sanitizing for the title
 
 overescaped_re = re.compile(r'&amp;#(\d+);')
+unicode4_re = re.compile(r'(\\u[0-9A-Z]{4})(?![0-9A-Z])')
 whitespace_re = re.compile(r'\s+')
 
 html_cleaner = Cleaner()
@@ -121,6 +122,7 @@ def unescape_latex(s):
 
 def sanitize_html(s):
     s = overescaped_re.sub(r'&#\1;', s)
+    s = unicode4_re.sub(lambda x: x.group(1).decode('unicode-escape'), s)
     s = whitespace_re.sub(r' ', s)
     s = unescape_latex(s)
     orig = html_cleaner.clean_html('<span>'+s+'</span>')
