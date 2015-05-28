@@ -25,6 +25,7 @@ from sklearn.metrics import confusion_matrix
 import cPickle
 import numpy as np
 from unidecode import unidecode
+from django.core.exceptions import ObjectDoesNotExist
 
 from papers.models import Name, Author, Researcher
 from papers.utils import iunaccent, nocomma, filter_punctuation, tokenize
@@ -82,11 +83,11 @@ class AuthorNameSimilarity(RelevanceFeature):
         super(AuthorNameSimilarity, self).__init__()
 
     def compute(self, author, researcher, explain=False):
-        score =  name_similarity(to_plain_name(author.name),
-                to_plain_name(researcher.name))
-        if explain:
-            print('   Name similarity: '+str(score))
-        return [score]
+        try:
+            nv = NameVariant.objects.get(researcher_id=author.researcher_id,name_id=author.name_id)
+            return [nv.confidence]
+        except ObjectDoesNotExist:
+            return [0.]
 
 class TopicalRelevanceFeature(RelevanceFeature):
     """
