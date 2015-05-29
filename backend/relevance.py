@@ -65,12 +65,9 @@ class KnownCoauthors(RelevanceFeature):
         count = 0
         nb_coauthors = 0
         for a in coauthors:
-            nb_coauthors += 1
-            if a.name.is_known:
-                # TODO is_known should be a float and wo would sum it
-                count += 1
-                if explain:
-                    print('      '+unicode(a))
+            nb_coauthors += a.name.best_confidence
+            if explain and a.name.is_known:
+                print('      '+unicode(a))
         if explain:
             print('   Common coauthors: '+str(count)+', total '+str(nb_coauthors))
         return [float(count),float(nb_coauthors)] 

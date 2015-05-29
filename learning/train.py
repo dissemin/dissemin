@@ -25,8 +25,8 @@ from papers.models import *
 from learning.model import *
 from backend.similarity import *
 
-TRAIN_LM = False
-TRAIN_SIMILARITY = True
+TRAIN_LM = True
+TRAIN_SIMILARITY = False
 
 w = WordCount()
 w_contrib = WordCount()
