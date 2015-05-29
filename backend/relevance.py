@@ -27,7 +27,7 @@ import numpy as np
 from unidecode import unidecode
 from django.core.exceptions import ObjectDoesNotExist
 
-from papers.models import Name, Author, Researcher
+from papers.models import Name, Author, Researcher, NameVariant
 from papers.utils import iunaccent, nocomma, filter_punctuation, tokenize
 from papers.name import to_plain_name, name_similarity
 
@@ -66,11 +66,9 @@ class KnownCoauthors(RelevanceFeature):
         count = 0
         nb_coauthors = 0
         for a in coauthors:
-            nb_coauthors += 1
-            if a.name.is_known:
-                count += 1 # TODO replace this by name similarity with the target researcher (but efficiently :-P)
-                if explain:
-                    print('      '+unicode(a))
+            nb_coauthors += a.name.best_confidence
+            if explain and a.name.is_known:
+                print('      '+unicode(a))
         if explain:
             print('   Common coauthors: '+str(count)+', total '+str(nb_coauthors))
         return [float(count),float(nb_coauthors)] 
@@ -84,6 +82,7 @@ class AuthorNameSimilarity(RelevanceFeature):
 
     def compute(self, author, researcher, explain=False):
         try:
+            # TODO this is quite inefficient, can we save these queries ?
             nv = NameVariant.objects.get(researcher_id=author.researcher_id,name_id=author.name_id)
             return [nv.confidence]
         except ObjectDoesNotExist:
@@ -335,7 +334,23 @@ class AllRelevantClassifier(RelevanceClassifier):
     def score(self, author, researcher, verbose=False):
         return 1.0
 
-
+class SimpleRelevanceClassifier(RelevanceClassifier):
+    """
+    A relevance classifier that does not require any topical feature,
+    but designed to be a bit better than the Dummy one
+    (trainable)
+    """
+    def __init__(self, **kwargs):
+        if 'filename' in kwargs:
+            self.load(kwargs['filename'])
+            return
+        self.features = [
+                AuthorNameSimilarity(),
+                KnownCoauthors(),
+                ]
+        self.classifier = None
+        self.positiveSampleWeight = 1.0
+ 
 
 
 

@@ -223,9 +223,9 @@ class Researcher(models.Model):
             sim = name_similarity((name.first,name.last),(self.name.first,self.name.last))
             if sim > 0 and name.id not in current_name_variants:
                 nv = NameVariant.objects.create(name=name, researcher=self, confidence=sim)
-                if not name.is_known:
-                    name.is_known = True
-                    name.save(update_fields=['is_known'])
+                if name.best_confidence < sim:
+                    name.best_confidence = sim
+                    name.save(update_fields=['best_confidence'])
 
     stats = models.ForeignKey(AccessStatistics, null=True)
     def update_stats(self):
@@ -262,12 +262,16 @@ class Name(models.Model):
     first = models.CharField(max_length=MAX_NAME_LENGTH)
     last = models.CharField(max_length=MAX_NAME_LENGTH)
     full = models.CharField(max_length=MAX_NAME_LENGTH*2+1, db_index=True)
-    is_known = models.BooleanField(default=False)
+    best_confidence = models.FloatField(default=0.)
 
     unique_together = ('first','last')
     
     class Meta:
         ordering = ['last','first']
+
+    @property
+    def is_known(self):
+        return self.best_confidence > 0.
 
     @classmethod
     def create(cls, first, last):
@@ -303,20 +307,21 @@ class Name(models.Model):
         for researcher in self.variants_queryset():
             sim = name_similarity((researcher.name.first,researcher.name.last), (self.first,self.last))
             if sim > 0:
-                self.is_known = True
-                if self.pk is None:
+                old_sim = self.best_confidence
+                self.best_confidence = sim
+                if self.pk is None or old_sim < sim:
                     self.save()
                 NameVariant.objects.get_or_create(name=self,researcher=researcher,
                         defaults={'confidence':sim})
 
-    def update_is_known(self):
+    def update_best_confidence(self):
         """
         A name is considered as known when it belongs to a name variants group of a researcher
         """
-        new_value = NameVariants.objects.filter(name=self).count() > 0
-        if new_value != self.is_known:
-            self.is_known = new_value
-            self.save(update_fields=['is_known'])
+        new_value = max([0.]+[d['confidence'] for d in self.namevariant_set.all().values('confidence')])
+        if new_value != self.best_confidence:
+            self.best_confidence = new_value
+            self.save(update_fields=['best_confidence'])
 
     @classmethod
     def lookup_name(cls, author_name):
@@ -351,7 +356,7 @@ class Name(models.Model):
     # Used to save unsaved names after lookup
     def save_if_not_saved(self):
         if not self.pk:
-            # the is_known field should already be up to date as it is computed in the lookup
+            # the best_confidence field should already be up to date as it is computed in the lookup
             self.save()
             self.update_variants()
 
@@ -425,8 +430,8 @@ class Paper(models.Model):
         return self.author_count() > 15
 
     def interesting_authors(self):
-        lst = (list(self.sorted_authors.filter(name__is_known=True))+list(
-            self.sorted_authors.filter(name__is_known=False))[:3])[:15]
+        lst = (list(self.sorted_authors.filter(name__best_confidence__gt=0))+list(
+            self.sorted_authors.filter(name__best_confidence=0))[:3])[:15]
         self.nb_remaining_authors = self.author_count() - len(lst)
         return lst
 

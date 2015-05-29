@@ -30,7 +30,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from papers.models import Name, Author, Researcher
 from papers.utils import iunaccent, nocomma, filter_punctuation, tokenize
-from papers.name import match_names
+from papers.name import match_names, name_similarity, to_plain_name
 
 class AuthorNotFound(Exception):
     def __init__(self, message, pk, *args):
@@ -90,7 +90,7 @@ class AuthorNameSimilarity(SimilarityFeature):
         # a decent score
         firstA, lastA = dataA
         firstB, lastB = dataB
-        return name_tools.match(firstA+' '+lastA, firstB+' '+lastB)
+        return name_similarity(dataA,dataB)
 
 class CoauthorsSimilarity(SimilarityFeature):
     """
@@ -104,17 +104,46 @@ class CoauthorsSimilarity(SimilarityFeature):
         return map(lambda author: (author.name.first,author.name.last), coauthors)
 
     def score(self, dataA, dataB):
-        # TODO: finer name similarity.
         score = 0.
         for a in dataA:
             for b in dataB:
                 firstA, lastA = a
                 firstB, lastB = b
+                score += name_similarity(a,b)
                 #score += name_tools.match(firstA+' '+lastA,firstB+' '+lastB)
                 # Previously, it was:
-                if match_names(a,b):
-                    score += 1.
+                #if match_names(a,b):
+                #    score += 1.
         return score
+
+class NameLengths(SimilarityFeature):
+    """
+    Length of the last name (if common)
+    """
+    def __init__(self):
+        super(NameLengths, self).__init__()
+
+    def fetchData(self, author):
+        return author.name.last
+
+    def score(self, dataA, dataB):
+        if dataA.lower() != dataB.lower():
+            return 0
+        else:
+            return len(dataA)
+
+class NumberOfAuthorsSimilarity(SimilarityFeature):
+    """
+    Similarity of the number of authors of the two papers
+    """
+    def __init__(self):
+        super(NumberOfAuthorsSimilarity, self).__init__()
+
+    def fetchData(self, author):
+        return author.paper.author_set.count()
+
+    def score(self, dataA, dataB):
+        return (-1.)*pow(dataA-dataB, 2)/(dataA+dataB+1)
 
 def intersectionScore(model, wordsA, wordsB, explain=False):
     """
@@ -209,7 +238,9 @@ class SimilarityClassifier(object):
         if not contributorsModel:
             contributorsModel = publicationModel
         self.simFeatures = [
-    #            AuthorNameSimilarity(),
+                AuthorNameSimilarity(),
+                NumberOfAuthorsSimilarity(),
+                NameLengths(),
                 CoauthorsSimilarity(),
                 PublicationSimilarity(publicationModel),
                 TitleSimilarity(publicationModel),
