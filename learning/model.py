@@ -23,6 +23,7 @@ from __future__ import unicode_literals
 
 import math
 import cPickle
+from collections import defaultdict
 
 from papers.models import *
 from papers.utils import iunaccent, tokenize
@@ -31,7 +32,7 @@ class WordCount:
     def __init__(self):
         self.dirichlet = 1.
         self.total = 0
-        self.c = dict()
+        self.c = defaultdict(int)
         self.stop = 0 # Unused
         self.mass = self.dirichlet
         self.cached = True
@@ -50,13 +51,13 @@ class WordCount:
     def p(self, w):
         if not self.cached:
             self._cache()
-        count = self.c.get(w,0)
+        count = self.c[w]
         return (count + self.dirichlet) / self.mass
 
     def lp(self, w):
         if not self.cached:
             self._cache()
-        count = self.c.get(w,0)
+        count = self.c[w]
         return math.log(count + self.dirichlet) - math.log(self.mass)
 
     def feedLine(self, l):
@@ -90,8 +91,7 @@ class WordCount:
         return 0.
 
     def _countWord(self, w):
-        c = self.c.get(w,0)
-        self.c[w] = c+1
+        self.c[w] += 1
         self.total += 1
         self.cached = False
 

@@ -71,6 +71,7 @@ else:
     inf.close()
 
 if True:
+    sc.positiveSampleWeight = 0.04
     sc.train(features, labels, kernel='linear')
 
     def paper_url(pk):

@@ -11,19 +11,19 @@ from backend.clustering import *
 # 0: no clustering has taken place before
 # 1: one step of clustering has taken place before
 #    … and so on
-stage = 0
+stage = 1
 
 make_lm = False
-recompute = False
-train = False
-cluster = True
+recompute = True
+train = True
+cluster = False
 
 # Read dataset
 author_ids = []
 labels = []
 for line in open('learning/dataset/relevance_training_ids', 'r'):
     vals = map(lambda x: int(x), line.strip().split('\t'))
-    author_ids.append((vals[0], vals[1]))
+    author_ids.append((vals[0], Researcher.objects.get(pk=int(vals[1]))))
     labels.append(vals[2])
 
 # These models are not re-trained at each step because they don't depend on the clustering output
@@ -33,7 +33,7 @@ contributors_model = WordCount()
 contributors_model.load('models/contributors.pkl')
 publications_model = WordCount()
 publications_model.load('models/publications.pkl')
-rc = RelevanceClassifier(languageModel=all_fields_model,
+rc = SimpleRelevanceClassifier(languageModel=all_fields_model,
         contributorsModel=contributors_model,
         publicationsModel=publications_model)
 
@@ -61,11 +61,8 @@ if make_lm:
     for author in Author.objects.filter(paper__visibility='VISIBLE', researcher__isnull=False).select_related('researcher'):
         if i % 100 == 0:
             print(i)
-        rc.feed(author, author.researcher.department_id)
+        rc.feed(author, author.researcher)
         i += 1
-    for i in range(4):
-        if i > 0:
-            print(rc.features[i].models.keys())
     rc.save(relevance_model_fname)
 else:
     rc.load(relevance_model_fname)
@@ -74,9 +71,9 @@ else:
 if recompute or make_lm:
     print("Computing features")
     features = []
-    for (id,dpt) in author_ids:
+    for (id,researcher) in author_ids:
         author = Author.objects.get(pk=id)
-        f = rc.computeFeatures(author, dpt)
+        f = rc.computeFeatures(author, researcher)
         features.append(f)
     print("Writing features back")
     outf = open('learning/dataset/relevance-features-'+str(stage), 'w')
@@ -98,7 +95,7 @@ if train or recompute or make_lm:
     rc.train(features, labels, 'linear')
 
     def paper_url(pk):
-        print('http://localhost:8000/paper/'+str(Author.objects.get(pk=pk).paper_id))
+        print('http://beta.ens.dissem.in/paper/'+str(Author.objects.get(pk=pk).paper_id))
 
     for i in range(len(labels)):
         prediction = rc.classifier.predict(features[i])[0]

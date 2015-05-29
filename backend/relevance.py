@@ -26,7 +26,7 @@ import cPickle
 import numpy as np
 from unidecode import unidecode
 
-from papers.models import Name, Author, Researcher
+from papers.models import Name, Author, Researcher, NameVariant
 from papers.utils import iunaccent, nocomma, filter_punctuation, tokenize
 from papers.name import to_plain_name, name_similarity
 
@@ -67,7 +67,8 @@ class KnownCoauthors(RelevanceFeature):
         for a in coauthors:
             nb_coauthors += 1
             if a.name.is_known:
-                count += 1 # TODO replace this by name similarity with the target researcher (but efficiently :-P)
+                # TODO is_known should be a float and wo would sum it
+                count += 1
                 if explain:
                     print('      '+unicode(a))
         if explain:
@@ -82,11 +83,12 @@ class AuthorNameSimilarity(RelevanceFeature):
         super(AuthorNameSimilarity, self).__init__()
 
     def compute(self, author, researcher, explain=False):
-        score =  name_similarity(to_plain_name(author.name),
-                to_plain_name(researcher.name))
-        if explain:
-            print('   Name similarity: '+str(score))
-        return [score]
+        try:
+            # TODO this is quite inefficient, can we save these queries ?
+            nv = NameVariant.objects.get(researcher_id=author.researcher_id,name_id=author.name_id)
+            return [nv.confidence]
+        except ObjectDoesNotExist:
+            return [0.]
 
 class TopicalRelevanceFeature(RelevanceFeature):
     """
@@ -334,7 +336,23 @@ class AllRelevantClassifier(RelevanceClassifier):
     def score(self, author, researcher, verbose=False):
         return 1.0
 
-
+class SimpleRelevanceClassifier(RelevanceClassifier):
+    """
+    A relevance classifier that does not require any topical feature,
+    but designed to be a bit better than the Dummy one
+    (trainable)
+    """
+    def __init__(self, **kwargs):
+        if 'filename' in kwargs:
+            self.load(kwargs['filename'])
+            return
+        self.features = [
+                AuthorNameSimilarity(),
+                KnownCoauthors(),
+                ]
+        self.classifier = None
+        self.positiveSampleWeight = 1.0
+ 
 
 
 
