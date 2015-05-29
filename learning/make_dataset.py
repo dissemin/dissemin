@@ -48,10 +48,15 @@ def sample2(lst, nb_samples):
     return sample(lst, min(len(lst), nb_samples))
 
 for researcher in Researcher.objects.all():
-    authors = Author.objects.filter(name=researcher.name_id,paper__last_annotation__isnull=False)
+    authors_valid = []
+    authors_invalid = []
 
-    authors_valid = list(authors.filter(paper__last_annotation='VISIBLE'))
-    authors_invalid = list(authors.filter(paper__last_annotation='NOT_RELEVANT'))
+    for name_variant in researcher.namevariant_set.all().select_related('name'):
+        authors = Author.objects.filter(name=name_variant.name,paper__last_annotation__isnull=False)
+
+        authors_valid += list(authors.filter(paper__last_annotation='VISIBLE'))
+        authors_invalid += list(authors.filter(paper__last_annotation='NOT_RELEVANT'))
+
     nb_valid = len(authors_valid)
     nb_invalid = len(authors_invalid)
 
@@ -70,11 +75,11 @@ for researcher in Researcher.objects.all():
     # Generate relevance training examples
     #   Positive
     for a in authors_valid:
-        print('\t'.join([str(a.pk),str(researcher.department_id),'1']), file=out_rel)
+        print('\t'.join([str(a.pk),str(researcher.id),'1']), file=out_rel)
 
     #   Negative
     for a in authors_invalid:
-        print('\t'.join([str(a.pk),str(researcher.department_id),'0']), file=out_rel)
+        print('\t'.join([str(a.pk),str(researcher.id),'0']), file=out_rel)
 
 
 #for p in Paper.objects.filter(author__name__researcher__department_id=24,year__gt=2012):
