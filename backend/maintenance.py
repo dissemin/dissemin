@@ -78,13 +78,6 @@ def cleanup_names(dry_run = False):
                     n.delete()
     print "Deleted "+str(deleted_count)+" names"
 
-def add_names_to_variants():
-    """
-    Ensures the name of each researcher is in its other_names set
-    """
-    for r in Researcher.objects.all():
-        r.name_variants.add(r.name)
-
 def merge_names(fro,to):
     """
     Merges the name object 'fro' into 'to

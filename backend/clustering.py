@@ -63,7 +63,7 @@ class ClusteringContext(object):
         The queryset returning all the authors related to the researcher, sorted by id.
         Useful to populate the clustering context.
         """
-        return Author.objects.filter(name__variant_of=self.researcher).order_by(
+        return Author.objects.filter(name__namevariant__researcher=self.researcher).order_by(
                     'id').select_related('paper')
 
     def addAuthor(self, author, add_children=True):
@@ -457,7 +457,7 @@ class ClusteringContextFactory(object):
         Calls clusterAuthor for all the relevant researchers
         given the author.
         """
-        potential_researchers = author.name.variant_of.all()
+        potential_researchers = Researcher.objects.filter(namevariant__name=author.name)
         for researcher in potential_researchers:
             self.clusterAuthorResearcherLater(author, researcher)
 
@@ -487,7 +487,7 @@ class ClusteringContextFactory(object):
         Calls clusterAuthor for all the relevant researchers 
         given the author
         """
-        potential_researchers = author.name.variant_of.all()
+        potential_researchers = Researcher.objects.filter(namevariant__name=author.name)
         for researcher in potential_researchers:
             self.clusterAuthor(author, researcher)
     
