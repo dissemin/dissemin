@@ -67,6 +67,7 @@ class KnownCoauthors(RelevanceFeature):
         nb_coauthors = 0
         for a in coauthors:
             nb_coauthors += a.name.best_confidence
+            count += 1
             if explain and a.name.is_known:
                 print('      '+unicode(a))
         if explain:
@@ -83,8 +84,8 @@ class AuthorNameSimilarity(RelevanceFeature):
     def compute(self, author, researcher, explain=False):
         try:
             # TODO this is quite inefficient, can we save these queries ?
-            nv = NameVariant.objects.get(researcher_id=author.researcher_id,name_id=author.name_id)
-            return [nv.confidence]
+            #nv = NameVariant.objects.get(researcher_id=author.researcher_id,name_id=author.name_id)
+            return [author.name.best_confidence]
         except ObjectDoesNotExist:
             return [0.]
 
@@ -268,7 +269,8 @@ class RelevanceClassifier(object):
         if not self.classifier:
             return None
         features = self.computeFeatures(author, researcher)
-        distance = self.classifier.decision_function([features])[0][0]
+        resp = self.classifier.decision_function([features])
+        distance = resp[0]
         if verbose:
             print(str(features)+' -> '+str(distance))
         return distance
