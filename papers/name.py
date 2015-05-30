@@ -105,35 +105,59 @@ def name_signature(first, last):
 
 ### Name similarity measure ###
 
+weight_initial_match = 0.2
+weight_full_match = 0.4
+def weight_first_name(word):
+    if len(word) > 1:
+        return weight_full_match
+    else:
+        return weight_initial_match
+
 def name_similarity(a,b):
     """
     Returns a float: how similar are these two names?
     Examples:
     > ('Robin', 'Ryder'),('Robin', 'Ryder'): 1.0
-    > ('Robin', 'Ryder'),('R.', 'Ryder'): 0.3
-    > ('R.', 'Ryder'),('R.', 'Ryder'): 0.3
-    > ('Robin J.', 'Ryder'),('R.', 'Ryder'): 0.3
-    > ('Robin J.', 'Ryder'),('R. J.', 'Ryder'): 0.6
-    > ('R. J.', 'Ryder'),('J.', 'Ryder'): 0
+    > ('Robin', 'Ryder'),('R.', 'Ryder'): 0.2
+    > ('R.', 'Ryder'),('R.', 'Ryder'): 0.2
+    > ('Robin J.', 'Ryder'),('R.', 'Ryder'): 0.15
+    > ('Robin J.', 'Ryder'),('R. J.', 'Ryder'): 0.4
+    > ('R. J.', 'Ryder'),('J.', 'Ryder'): 0.2
     > ('Claire', 'Mathieu'),('Claire', 'Kenyon-Mathieu'): 0
-    > ('Robin', 'Ryder'), ('Robin J.', 'Ryder') : 1
-    > ('Robin K.','Ryder'), ('Robin J.', 'Ryder'): 0.
+    > ('Robin', 'Ryder'), ('Robin J.', 'Ryder') : 0.35
+    > ('W. Timothy','Gowers'), ('Timothy','Gowers') : 0.35
+    > ('Robin K.','Ryder'), ('Robin J.', 'Ryder'): 0
     """
+
     if not a or not b:
         return False
     (firstA,lastA) = a
     (firstB,lastB) = b
     if lastA.lower() != lastB.lower():
-        return False
+        return 0.
+    if firstA.lower() == firstB.lower():
+        return 1.
     partsA = split_words(firstA)
     partsB = split_words(firstB)
     parts = zip(partsA, partsB)
     if not all(map(match_first_names, parts)):
-        return 0.
-    full_name_found = (True in map(lambda (a,b): len(a) > 1 and len(b) > 1, parts))
-    if full_name_found:
-        return 1.
-    return min(0.3*len(parts),1.0)
+        # Try to match in reverse
+        partsA.reverse()
+        partsB.reverse()
+        parts = zip(partsA, partsB)
+        if not all(map(match_first_names, parts)):
+            return 0.
+    maxlen = max(len(partsA), len(partsB))
+    sumscores = 0
+    for i in range(maxlen):
+        if i < len(parts):
+            sumscores += weight_first_name(parts[i][0])
+        elif i < len(partsA):
+            sumscores -= 0.25*weight_first_name(partsA[i])
+        else:
+            sumscores -= 0.25*weight_first_name(partsB[i])
+    sumscores = max(min(sumscores, 1), 0)
+    return sumscores
 
 
 #### Helpers for the name splitting heuristic ######
