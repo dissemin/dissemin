@@ -14,7 +14,7 @@ from backend.clustering import *
 stage = 1
 
 make_lm = False
-recompute = False
+recompute = True
 train = True
 cluster = False
 
@@ -91,7 +91,7 @@ elif train:
 # Train the classifier and show outliers
 if train or recompute or make_lm:
     if stage > 0:
-        rc.positiveSampleWeight = 0.3
+        rc.positiveSampleWeight = 0.27
     rc.train(features, labels, 'linear')
 
     def paper_url(pk):

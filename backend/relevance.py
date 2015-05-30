@@ -22,6 +22,7 @@ from __future__ import unicode_literals, print_function
 
 from sklearn import svm
 from sklearn.metrics import confusion_matrix
+from sklearn.preprocessing import StandardScaler
 import cPickle
 import numpy as np
 from unidecode import unidecode
@@ -234,6 +235,7 @@ class RelevanceClassifier(object):
                 ContributorsRelevance(cm),
                 ]
         self.classifier = None
+        self.scaler = None
         self.positiveSampleWeight = 1.0
     
     def computeFeatures(self, author, researcher, explain=False):
@@ -246,13 +248,17 @@ class RelevanceClassifier(object):
 
     def train(self, features, labels, kernel='rbf'):
         self.classifier = svm.SVC(kernel=str(kernel))
+        self.scaler = StandardScaler()
+        self.scaler.fit(features)
+        scaled_features = self.scaler.transform(features)
         weights = [(self.positiveSampleWeight if label else 1.) for label in labels]
-        self.classifier.fit(features, labels, sample_weight=weights)
+        self.classifier.fit(scaled_features, labels, sample_weight=weights)
 
     def confusion(self, features, labels):
         if not self.classifier:
             return None
-        pred = self.classifier.predict(features)
+        scaled = self.scaler.transform(features)
+        pred = self.classifier.predict(scaled)
         return confusion_matrix(pred, labels)
 
     def classify(self, author, researcher, verbose=False):
@@ -269,7 +275,8 @@ class RelevanceClassifier(object):
         if not self.classifier:
             return None
         features = self.computeFeatures(author, researcher)
-        resp = self.classifier.decision_function([features])
+        scaled = self.scaler.transform([features])
+        resp = self.classifier.decision_function(scaled)
         distance = resp[0]
         if verbose:
             print(str(features)+' -> '+str(distance))
@@ -281,6 +288,7 @@ class RelevanceClassifier(object):
                 f.feed(author, researcher)
 
     def plotClassification(self, features, labels):
+        # TODO this is broken: no scaling
         import matplotlib.pyplot as plt
         h = 0.1
         X = np.array(features)

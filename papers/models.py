@@ -223,7 +223,7 @@ class Researcher(models.Model):
             sim = name_similarity((name.first,name.last),(self.name.first,self.name.last))
             if sim > 0 and name.id not in current_name_variants:
                 nv = NameVariant.objects.create(name=name, researcher=self, confidence=sim)
-                if name.best_confidence < sim:
+                if name.best_confidence < sim or reset:
                     name.best_confidence = sim
                     name.save(update_fields=['best_confidence'])
 
