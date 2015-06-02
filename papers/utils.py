@@ -76,10 +76,8 @@ def iunaccent(s):
 
 
 try:
-    from nltk.tokenize.punkt import PunktWordTokenizer
-    punktTokenizer = PunktWordTokenizer()
-    def tokenize(l):
-        return punktTokenizer.tokenize(iunaccent(l))
+    from nltk.tokenize import word_tokenize
+    tokenize = word_tokenize
 except ImportError:
     tokenize_space_re = re.compile(r'\s+')
     def tokenize(l):
