@@ -220,6 +220,7 @@ def create_oairecord(**kwargs):
             match.source = source
             match.priority = source.priority
             match.pdf_url = pdf_url
+            match.splash_url = splash_url
             changed = True
 
         def update_field_conditionally(field):

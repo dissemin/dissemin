@@ -498,7 +498,7 @@ class Paper(models.Model):
         self.oa_status = OA_STATUS_CHOICES[oa_idx][0]
         if not self.pdf_url:
             matches = self.oairecord_set.all().order_by(
-                            '-source__oa', 'source__priority').select_related('source')
+                            '-source__oa', '-source__priority').select_related('source')
             self.pdf_url = None
             for m in matches:
                 if not self.pdf_url:
