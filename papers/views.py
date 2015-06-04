@@ -275,6 +275,7 @@ def mailPaperView(request, pk):
     else:
         return redirect('/')
 
+@user_passes_test(is_authenticated)
 def paper_upload_view(request, pk):
     paper = get_object_or_404(Paper, pk=pk)
     context = {'paper':paper}
@@ -282,11 +283,18 @@ def paper_upload_view(request, pk):
         form = PaperUploadForm(request.POST, request.FILES)
         context['form'] = form
         if form.is_valid():
-            #d = DepositRecord(
-            #form.save()
+            d = DepositRecord(paper=paper, user=request.user,
+                    upload_type=form.cleaned_data['upload_type'],
+                    file=request.FILES['file'])
+            d.save()
 
-            # upload the paper.
+            # TODO upload the paper.here
+            # set the identifier and the pdf_url accordingly
+
+
             context['success'] = True
+        else:
+            context['failed'] = True
     else:
         context['form'] = PaperUploadForm()
     return render(request, 'papers/upload_paper.html', context)

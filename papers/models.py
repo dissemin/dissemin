@@ -915,11 +915,14 @@ class DepositRecord(models.Model):
     user = models.ForeignKey(User)
 
     request = models.TextField(null=True,blank=True)
-    identifer = models.CharField(max_length=512, unique=True)
+    identifer = models.CharField(max_length=512)
     #deposition id on zenodo/hal/whatever
     pdf_url = models.URLField(max_length=1024, null=True, blank=True)
     date = models.DateTimeField(auto_now=True) # deposit date
-    upload_type = models.CharField(max_length=64) # preprint, postprint, publisher's version ?
+    upload_type = models.CharField(max_length=64, choices=UPLOAD_TYPE_CHOICES)
+
+    file = models.FileField(upload_to='deposits')
+
     def __unicode__(self):
         return self.identifier
 

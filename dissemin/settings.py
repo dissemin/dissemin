@@ -165,6 +165,9 @@ LOGIN_REDIRECT_URL = '/'
 STATIC_URL = '/static/'
 STATIC_ROOT = '/opt/dissemin/www/static/'
 
+# User uploads
+MEDIA_ROOT = 'media/'
+
 # Celery config
 BROKER_URL = 'amqp://guest:guest@127.0.0.1:5672//'
 CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']

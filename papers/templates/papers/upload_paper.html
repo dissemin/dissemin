@@ -22,6 +22,15 @@
 {% endblock %}
 
 {% block lists %}
+{% if success %}
+    <p>Paper successfully uploaded!</p>
+    <p>Thank you so much, you are awesome!</p>
+    <p>Really, I mean it!</p>
+    <p><a href="{% url 'paper' paper.pk %}">Back to the paper</a></p>
+{% else %}
+{% if failed %}
+<p>Upload failed.</p>
+{% endif %}
 <p><br />Upload your paper to Zenodo:
 <form action="{% url 'upload_paper' paper.pk %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
@@ -30,6 +39,7 @@
     <input type="submit" value="Submit" />
 </form>
 </p>
+{% endif %}
 {% endblock %}
 
 {% block details %}
