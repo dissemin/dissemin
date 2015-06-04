@@ -275,14 +275,29 @@ def mailPaperView(request, pk):
     else:
         return redirect('/')
 
+@user_passes_test(is_authenticated)
+def paper_upload_view(request, pk):
+    paper = get_object_or_404(Paper, pk=pk)
+    context = {'paper':paper}
+    if request.method == 'POST':
+        form = PaperUploadForm(request.POST, request.FILES)
+        context['form'] = form
+        if form.is_valid():
+            d = DepositRecord(paper=paper, user=request.user,
+                    upload_type=form.cleaned_data['upload_type'],
+                    file=request.FILES['file'])
+            d.save()
+
+            # TODO upload the paper.here
+            # set the identifier and the pdf_url accordingly
 
 
-class UploadPaperView(generic.DetailView):
-    model = Paper
-    template_name = 'papers/upload_paper.html'
-    @method_decorator(user_passes_test(is_authenticated))
-    def dispatch(self, *args, **kwargs):
-            return super(UploadPaperView, self).dispatch(*args, **kwargs)
+            context['success'] = True
+        else:
+            context['failed'] = True
+    else:
+        context['form'] = PaperUploadForm()
+    return render(request, 'papers/upload_paper.html', context)
 
 class JournalView(generic.DetailView):
     model = Journal

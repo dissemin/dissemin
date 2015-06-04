@@ -80,6 +80,12 @@ PAPER_TYPE_CHOICES = [
    ('other', _('Other document')),
    ]
 
+UPLOAD_TYPE_CHOICES = [
+   ('preprint', _('Preprint')),
+   ('postprint', _('Postprint')),
+   ('publishers', _("Publisher's version")),
+   ]
+
 PAPER_TYPE_PREFERENCE = [x for (x,y) in PAPER_TYPE_CHOICES]
 
 class AccessStatistics(models.Model):
@@ -902,6 +908,22 @@ class OaiRecord(models.Model):
         self.save(update_fields=['priority'])
 
     last_update = models.DateTimeField(auto_now=True)
+    def __unicode__(self):
+        return self.identifier
+
+class DepositRecord(models.Model):
+    paper = models.ForeignKey(Paper)
+    user = models.ForeignKey(User)
+
+    request = models.TextField(null=True,blank=True)
+    identifer = models.CharField(max_length=512)
+    #deposition id on zenodo/hal/whatever
+    pdf_url = models.URLField(max_length=1024, null=True, blank=True)
+    date = models.DateTimeField(auto_now=True) # deposit date
+    upload_type = models.CharField(max_length=64, choices=UPLOAD_TYPE_CHOICES)
+
+    file = models.FileField(upload_to='deposits')
+
     def __unicode__(self):
         return self.identifier
 

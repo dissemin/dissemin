@@ -22,7 +22,24 @@
 {% endblock %}
 
 {% block lists %}
-<p><br /><br />Upload coming soon!</p>
+{% if success %}
+    <p>Paper successfully uploaded!</p>
+    <p>Thank you so much, you are awesome!</p>
+    <p>Really, I mean it!</p>
+    <p><a href="{% url 'paper' paper.pk %}">Back to the paper</a></p>
+{% else %}
+{% if failed %}
+<p>Upload failed.</p>
+{% endif %}
+<p><br />Upload your paper to Zenodo:
+<form action="{% url 'upload_paper' paper.pk %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form }}
+    Success: {{ success }}
+    <input type="submit" value="Submit" />
+</form>
+</p>
+{% endif %}
 {% endblock %}
 
 {% block details %}
@@ -55,31 +72,4 @@
 {% endfor %}
 </div>
 
-{% if request.user.is_superuser %}
-<span class="detailsTitle">{% trans "Admin zone" %}</span>
-<div class="detailsContent">
-    <p><strong>Visibility:</strong> {{ paper.visibility }}</p>
-    <p><strong>Publisher:</strong> {{ paper.publisher }}</p>
-    <p><strong>Clusters:</strong></p>
-{% for a in paper.author_set.all %}
-<p>{{a}}: 
-{% if a.cluster %}
-<a href="{% url 'paper' a.cluster.paper.pk %}">{{ a.cluster.paper }}</a>
-({{a.cluster.num_children}} authors, score {{a.cluster.cluster_relevance}})
-{% else %}
-itself
-{% endif %}
-</p>
-{% endfor %}
-<p><strong>Annotations:</strong>
-<ul>
-{% for annot in paper.annotation_set.all %}
-    <li>{{ annot }}</li>
-{% empty %}
-None
-{% endfor %}
-</ul>
-</p>
-</div>
-{% endif %}
 {% endblock %}
