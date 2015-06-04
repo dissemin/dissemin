@@ -349,7 +349,7 @@ class Name(models.Model):
         similar_researchers = Researcher.objects.filter(
                 name__last__iexact=last_name).select_related('name')
 
-        self.update_variants()
+        name.update_variants()
 
         return name
 
