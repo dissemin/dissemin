@@ -21,6 +21,7 @@
 from __future__ import unicode_literals
 
 from papers.models import *
+import backend.crossref
 from papers.utils import sanitize_html, create_paper_fingerprint
 from backend.romeo import fetch_publisher
 from time import sleep
@@ -177,6 +178,17 @@ def refetch_publishers():
         if publisher:
             p.publisher = publisher
             p.save(update_fields=['publisher'])
+
+def refetch_containers():
+    """
+    Tries to assign containers to Publications without containers
+    """
+    for p in Publication.objects.filter(container__isnull=True):
+        metadata = backend.crossref.fetch_metadata_by_DOI(p.doi)
+        p.container = metadata.get('container-title')
+        print p.container
+        if p.container:
+            p.save()
 
 def hide_unattributed_papers():
     """

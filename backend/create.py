@@ -30,7 +30,7 @@ from papers.models import *
 from papers.doi import to_doi
 from papers.name import to_plain_name, parse_comma_name
 
-from backend.crossref import fetch_metadata_by_DOI
+import backend.crossref
 from backend.romeo import fetch_journal, fetch_publisher
 from backend.globals import *
 from backend.utils import maybe_recapitalize_title
@@ -89,7 +89,7 @@ def get_or_create_paper(title, author_names, pubdate, doi=None, visibility='VISI
 
     if doi:
         try:
-            metadata = fetch_metadata_by_DOI(doi)
+            metadata = backend.crossref.fetch_metadata_by_DOI(doi)
             create_publication(p, metadata)
         except MetadataSourceException as e:
             print "Warning, metadata source exception while fetching DOI "+doi+":\n"+unicode(e)

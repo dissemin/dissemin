@@ -823,6 +823,7 @@ class Publication(models.Model):
 
     title = models.CharField(max_length=512) # this is actually the *journal* title
     journal = models.ForeignKey(Journal, blank=True, null=True)
+    container = models.CharField(max_length=512, blank=True, null=True)
 
     publisher = models.ForeignKey(Publisher, blank=True, null=True)
     publisher_name = models.CharField(max_length=512, blank=True, null=True)
