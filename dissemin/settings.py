@@ -49,6 +49,10 @@ EMAIL_USE_TLS = True
 ROMEO_API_KEY = None
 CORE_API_KEY = None
 
+# DOI proxy
+DOI_PROXY_DOMAIN =  'dx.doi.org'
+DOI_PROXY_SUPPORTS_BATCH = False
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '40@!t4mmh7325-^wh+jo3teu^!yj3lfz5p%ok(8+7th8pg^hy1'
 

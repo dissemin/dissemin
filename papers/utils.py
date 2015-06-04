@@ -180,9 +180,54 @@ def create_paper_fingerprint(title, authors):
 
 ### Partial date representation
 
+def parse_int(val, default):
+    try:
+        return int(val)
+    except ValueError:
+        return default
+
 def date_from_dateparts(dateparts):
-    year = 1970 if len(dateparts) < 1 else dateparts[0]
-    month = 01 if len(dateparts) < 2 else dateparts[1]
-    day = 01 if len(dateparts) < 3 else dateparts[2]
+    year = 1970 if len(dateparts) < 1 else parse_int(dateparts[0], 1970)
+    month = 01 if len(dateparts) < 2 else parse_int(dateparts[1], 01)
+    day = 01 if len(dateparts) < 3 else parse_int(dateparts[2], 01)
     return datetime.date(year=year, month=month, day=day)
 
+def tolerant_datestamp_to_datetime(datestamp):
+    """A datestamp to datetime that's more tolerant of diverse inputs.
+    Taken from pyoai.
+
+    Not used inside pyoai itself right now, but can be used when defining
+    your own metadata schema if that has a broader variety of datetimes
+    in there.
+    """
+    splitted = datestamp.split('T')
+    if len(splitted) == 2:
+        d, t = splitted
+        # if no Z is present, raise error
+        if t[-1] != 'Z':
+            raise DatestampError(datestamp)
+        # split off Z at the end
+        t = t[:-1]
+    else:
+        d = splitted[0]
+        t = '00:00:00'
+    d_splitted = d.split('-')
+    if len(d_splitted) == 3:
+        YYYY, MM, DD = d_splitted
+    elif len(d_splitted) == 2:
+        YYYY, MM = d_splitted
+        DD = '01'
+    elif len(d_splitted) == 1:
+        YYYY = d_splitted[0]
+        MM = '01'
+        DD = '01'   
+    else:
+        raise ValueError("Invalid datestamp: "+str(datestamp))
+    
+    t_splitted = t.split(':')
+    if len(t_splitted) == 3:
+        hh, mm, ss = t_splitted
+    else:
+        raise ValueError("Invalid datestamp: "+str(datestamp))
+    return datetime.datetime(
+        int(YYYY), int(MM), int(DD), int(hh), int(mm), int(ss))
