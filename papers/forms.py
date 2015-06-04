@@ -32,4 +32,9 @@ class AddResearcherForm(forms.Form):
     homepage = forms.URLField(label=_('Homepage'),required=False)
     role = forms.CharField(label=_('Role'),required=False)
 
+class PaperUploadForm(forms.Form):
+    file = forms.FileField()
+    upload_type = forms.ChoiceField(label=_('Upload type'), choices = UPLOAD_TYPE_CHOICES,
+            initial='postprint')
+
 

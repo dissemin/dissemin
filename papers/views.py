@@ -275,14 +275,21 @@ def mailPaperView(request, pk):
     else:
         return redirect('/')
 
+def paper_upload_view(request, pk):
+    paper = get_object_or_404(Paper, pk=pk)
+    context = {'paper':paper}
+    if request.method == 'POST':
+        form = PaperUploadForm(request.POST, request.FILES)
+        context['form'] = form
+        if form.is_valid():
+            #d = DepositRecord(
+            #form.save()
 
-
-class UploadPaperView(generic.DetailView):
-    model = Paper
-    template_name = 'papers/upload_paper.html'
-    @method_decorator(user_passes_test(is_authenticated))
-    def dispatch(self, *args, **kwargs):
-            return super(UploadPaperView, self).dispatch(*args, **kwargs)
+            # upload the paper.
+            context['success'] = True
+    else:
+        context['form'] = PaperUploadForm()
+    return render(request, 'papers/upload_paper.html', context)
 
 class JournalView(generic.DetailView):
     model = Journal
