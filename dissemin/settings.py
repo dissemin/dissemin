@@ -173,6 +173,13 @@ STATIC_ROOT = '/opt/dissemin/www/static/'
 MEDIA_ROOT = 'media/'
 
 # Celery config
-BROKER_URL = 'amqp://guest:guest@127.0.0.1:5672//'
+BROKER_URL = 'redis://localhost:6379/0'
+
+BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 43200}
+# This is the time in seconds before an unacknowledged task is re-sent to
+# another worker. It should exceed the length of the longest task, otherwise
+# it will be executed twice ! 43200 is one day.
+
+# RabbitMQ setting: BROKER_URL = 'amqp://guest:guest@127.0.0.1:5672//'
 CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
 CELERY_IMPORTS = ['backend.tasks']
