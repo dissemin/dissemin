@@ -81,6 +81,11 @@ def fetch_records_for_signature(ident):
         print "Signature is unknown for the proxy: "+unicode(e)
         pass
 
+@shared_task(name='recluster_researcher')
+def recluster_researcher(pk):
+    r = Researcher.objects.get(pk=pk)
+    clustering_context_factory.reclusterBatch(r
+
 # TODO unused:
 def fetch_records_for_last_name(lastname):
     client = get_proxy_client()

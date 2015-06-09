@@ -24,6 +24,7 @@ from django.http import HttpResponse
 from django.template import RequestContext, loader
 from django.views import generic
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.urlresolvers import reverse
 from django.contrib.auth import logout
 from django.contrib.auth.views import login as auth_login
 from django.contrib.auth.models import User
@@ -231,16 +232,16 @@ def logoutView(request):
         return redirect('/')
 
 @user_passes_test(is_admin)
-def updateResearcherOAI(request, pk):
+def reclusterResearcher(request, pk):
     source = get_object_or_404(Researcher, pk=pk)
-    send_task('fetch_records_for_researcher', [], {'pk':pk})
-    return render(request, 'papers/updateResearcher.html', {'researcher':source})
+    send_task('recluster_researcher', [], {'pk':pk})
+    return redirect(request.META['HTTP_REFERER'])
 
 @user_passes_test(is_admin)
-def updateResearcher(request, pk):
+def refetchResearcher(request, pk):
     source = get_object_or_404(Researcher, pk=pk)
-    send_task('fetch_dois_for_researcher', [], {'pk':pk})
-    return render(request, 'papers/updateResearcher.html', {'researcher':source})
+    send_task('fetch_everything_for_researcher', [], {'pk':pk})
+    return redirect(request.META['HTTP_REFERER'])
 
 class ResearcherView(generic.DetailView):
     model = Researcher

@@ -28,13 +28,14 @@ from papers import views, ajax
 
 urlpatterns = patterns('',
         url(r'^$', views.index, name='index'),
+        # Authentication
         url(r'^login/$', login, name='login'),
+        url(r'^regular_login/$', views.regularLogin, name='regular_login'),
         url(r'^logout/$', views.logoutView, name='logout'),
+        # Paper views
         url(r'^search/?$', views.searchView, name='search'),
         url(r'^publishers$', views.publishersView, name='publishers'),
         url(r'^researcher/(?P<researcher>\d+)/$', views.searchView, name='researcher'),
-        url(r'^researcher/(?P<pk>\d+)/update/$', views.updateResearcher, name='updateResearcher'),
-        url(r'^researcher/(?P<pk>\d+)/updateoai/$', views.updateResearcherOAI, name='updateResearcherOAI'),
         url(r'^group/(?P<pk>\d+)/$', views.GroupView.as_view(), name='group'),
         url(r'^department/(?P<pk>\d+)/$', views.DepartmentView.as_view(), name='department'),
         url(r'^departments/$', views.departmentsView, name='departments'),
@@ -43,10 +44,14 @@ urlpatterns = patterns('',
         url(r'^mail_paper/(?P<pk>\d+)/$', views.mailPaperView, name='mail_paper'),
         url(r'^journal/(?P<journal>\d+)/$', views.searchView, name='journal'),
         url(r'^publisher/(?P<pk>\d+)/$', views.PublisherView.as_view(), name='publisher'),
+        # Static views
         url(r'^sources$', views.sourcesView, name='sources'),
         url(r'^faq$', views.faqView, name='faq'),
         url(r'^feedback$', views.feedbackView, name='feedback'),
+        # Tasks, AJAX
         url(r'^ajax/', include('papers.ajax')),
-        url(r'^regular_login/$', views.regularLogin, name='regular_login'),
+        url(r'^researcher/(?P<pk>\d+)/update/$', views.refetchResearcher, name='refetch-researcher'),
+        url(r'^researcher/(?P<pk>\d+)/recluster/$', views.reclusterResearcher, name='recluster-researcher'),
+        # Annotations (to be deleted)
         url(r'^annotations/$', views.AnnotationsView.as_view(), name='annotations'),
 )

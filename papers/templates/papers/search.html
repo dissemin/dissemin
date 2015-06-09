@@ -73,6 +73,9 @@
             <li><a href="{% url 'search' %}?name={{ nv.name_id }}">{{ nv.name }}</a> ({{ nv.confidence }})</li>
             {% endfor %}
          </ul></p>
+
+         <a href="{% url 'refresh-researcher' researcher.pk %}">Refresh papers</a><br />
+         <a href="{% url 'recluster-researcher' researcher.pk %}">Refresh classifiaction</a>
          {% endif %}
     </div>
 {% elif department %}
