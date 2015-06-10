@@ -1,5 +1,5 @@
 django
-celery
+celery[redis]
 unidecode
 psycopg2
 django-bootstrap-pagination

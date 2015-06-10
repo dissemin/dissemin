@@ -75,13 +75,17 @@ def iunaccent(s):
     return remove_diacritics(s).lower()
 
 
+tokenize_space_re = re.compile(r'\s+')
+def fallback_tokenize(l):
+    return tokenize_space_re.split(l)
+
 try:
     from nltk.tokenize import word_tokenize
     tokenize = word_tokenize
 except ImportError:
-    tokenize_space_re = re.compile(r'\s+')
-    def tokenize(l):
-        return tokenize_space_re.split(l)
+    tokenize = fallback_tokenize
+except LookupError:
+    tokenize = fallback_tokenize
 
 ## HTML sanitizing for the title
 
