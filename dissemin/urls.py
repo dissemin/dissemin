@@ -49,4 +49,5 @@ urlpatterns = patterns('',
     url(r'^accounts/logout/$','django_cas_ng.views.logout', name='logout'),
     url(r'^logout/$', 'django_cas_ng.views.logout'),
     url(r'^', include('papers.urls')),
+    url(r'^', include('publishers.urls')),
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

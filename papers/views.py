@@ -43,6 +43,9 @@ from papers.forms import *
 from papers.user import is_admin, is_authenticated
 from papers.emails import *
 
+from publishers.views import varyQueryArguments
+from publishers.models import OA_STATUS_CHOICES
+
 # Number of papers shown on a search results page
 NB_RESULTS_PER_PAGE = 20
 # Number of journals per page on a Publisher page
@@ -60,46 +63,6 @@ def index(request):
         'publishers' : Publisher.objects.all().filter(stats__isnull=False).order_by('-stats__num_tot')[:3],
         }
     return render(request, 'papers/index.html', context)
-
-def publishersView(request, **kwargs):
-    context = dict()
-    # Build the queryset
-    queryset = Publisher.objects.all()
-    args = request.GET.copy()
-    args.update(kwargs)
-
-    search_description = _('Publishers')
-    if 'status' in args:
-        queryset = queryset.filter(oa_status=args.get('status'))
-        context['status'] = args.get('status')
-
-    # Ordering
-    # queryset = queryset.order_by('name')
-    queryset = queryset.order_by('-stats__num_tot')
-    queryset = queryset.select_related('stats')
-
-    # Build the paginator
-    paginator = Paginator(queryset, NB_RESULTS_PER_PAGE)
-    page = args.get('page')
-    try:
-        current_publishers = paginator.page(page)
-    except PageNotAnInteger:
-        current_publishers = paginator.page(1)
-    except EmptyPage:
-        current_publishers = paginator.page(paginator.num_pages)
-
-    context['search_results'] = current_publishers
-    context['search_description'] = search_description
-    context['nb_results'] = queryset.count()
-
-    # Build the GET requests for variants of the parameters
-    args_without_page = args.copy()
-    if 'page' in args_without_page:
-        del args_without_page['page']
-    oa_variants = varyQueryArguments('status', args_without_page, OA_STATUS_CHOICES)
-
-    context['oa_status_choices'] = oa_variants
-    return render(request, 'papers/publishers.html', context)
 
 def departmentsView(request, **kwargs):
 	context = {
@@ -213,17 +176,6 @@ def searchView(request, **kwargs):
 
     return render(request, 'papers/search.html', context)
 
-def varyQueryArguments(key, args, possibleValues):
-    variants = []
-    for s in possibleValues:
-        queryargs = args.copy()
-        if s[0] != queryargs.get(key):
-            queryargs[key] = s[0]
-        else:
-            queryargs.pop(key)
-        variants.append((s[0], s[1], queryargs))
-    return variants
-
 def logoutView(request):
     logout(request)
     if 'HTTP_REFERER' in request.META:
@@ -303,25 +255,6 @@ def paper_upload_view(request, pk):
 class JournalView(generic.DetailView):
     model = Journal
     template_name = 'papers/journal.html'
-
-class PublisherView(generic.DetailView):
-    model = Publisher
-    template_name = 'papers/publisher.html'
-    def get_context_data(self, **kwargs):
-        context = super(PublisherView, self).get_context_data(**kwargs)
-        context['oa_status_choices'] = OA_STATUS_CHOICES
-        # Build the paginator
-        publisher = context['publisher']
-        paginator = Paginator(publisher.sorted_journals, NB_JOURNALS_PER_PAGE)
-        page = self.request.GET.get('page')
-        try:
-            current_journals = paginator.page(page)
-        except PageNotAnInteger:
-            current_journals = paginator.page(1)
-        except EmptyPage:
-            current_journals = paginator.page(paginator.num_pages)
-        context['journals'] = current_journals
-        return context
 
 def sourcesView(request):
     return render(request, 'papers/sources.html')

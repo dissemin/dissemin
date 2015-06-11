@@ -24,22 +24,19 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
+from django.utils.translation import ugettext_lazy as _
+
 from papers.utils import nstr, iunaccent, create_paper_plain_fingerprint
 from papers.name import match_names, name_similarity
 from papers.utils import remove_diacritics, sanitize_html
-from django.utils.translation import ugettext_lazy as _
+
+from statistics.models import AccessStatistics
+from publishers.models import Publisher, Journal, OA_STATUS_CHOICES, OA_STATUS_PREFERENCE
+
 import hashlib
 from datetime import datetime, timedelta
 from urllib import urlencode, quote # for the Google Scholar and CORE link
 
-OA_STATUS_CHOICES = (
-        ('OA', _('Open access')),
-        ('OK', _('Allows pre/post prints')),
-        ('NOK', _('Forbids pre/post prints')),
-        ('UNK', _('Policy unclear')),
-   )
-
-OA_STATUS_PREFERENCE = ['OA','OK','NOK','UNK']
 
 PDF_STATUS_CHOICES = [('OK', _('Available')),
                       ('NOK', _('Unavailable'))]
@@ -49,12 +46,6 @@ VISIBILITY_CHOICES = [('VISIBLE', _('Visible')),
                       ('NOT_RELEVANT', _('Not relevant')),
                       ('DELETED', _('Deleted')),
                       ]
-
-POLICY_CHOICES = [('can', _('Allowed')),
-                  ('cannot', _('Forbidden')),
-                  ('restricted', _('Restricted')),
-                  ('unclear', _('Unclear')),
-                  ('unknown', _('Unknown'))]
 
 COMBINED_STATUS_CHOICES = [
    ('oa', _('Open access')),
@@ -87,56 +78,6 @@ UPLOAD_TYPE_CHOICES = [
    ]
 
 PAPER_TYPE_PREFERENCE = [x for (x,y) in PAPER_TYPE_CHOICES]
-
-class AccessStatistics(models.Model):
-    """
-    Caches numbers of papers in different access statuses for some queryset
-    """
-    num_oa = models.IntegerField(default=0)
-    num_ok = models.IntegerField(default=0)
-    num_couldbe = models.IntegerField(default=0)
-    num_unk = models.IntegerField(default=0)
-    num_closed = models.IntegerField(default=0)
-    num_tot = models.IntegerField(default=0)
-
-    def update(self, queryset):
-        """
-        Updates the statistics for papers contained in the given Paper queryset
-        """
-        queryset = queryset.filter(visibility="VISIBLE")
-        self.num_oa = queryset.filter(oa_status='OA').count()
-        self.num_ok = queryset.filter(pdf_url__isnull=False).count() - self.num_oa
-        self.num_couldbe = queryset.filter(pdf_url__isnull=True, oa_status='OK').count()
-        self.num_unk = queryset.filter(pdf_url__isnull=True, oa_status='UNK').count()
-        self.num_closed = queryset.filter(pdf_url__isnull=True, oa_status='NOK').count()
-        self.num_tot = queryset.count()
-        self.save()
-
-    @property
-    def percentage_oa(self):
-        if self.num_tot:
-            return int(100.*self.num_oa/self.num_tot)
-    @property
-    def percentage_ok(self):
-        if self.num_tot:
-            return int(100.*self.num_ok/self.num_tot)
-    @property
-    def percentage_couldbe(self):
-        if self.num_tot:
-            return int(100.*self.num_couldbe/self.num_tot)
-    @property
-    def percentage_unk(self):
-        return 100 - (self.percentage_oa + self.percentage_ok +
-            self.percentage_closed + self.percentage_couldbe)
-    @property
-    def percentage_closed(self):
-        if self.num_tot:
-            return int(100.*self.num_closed/self.num_tot)
-
-    @classmethod
-    def update_all_stats(self, _class):
-        for x in _class.objects.all():
-            x.update_stats()
 
 # Information about the researchers and their groups
 class Department(models.Model):
@@ -698,128 +639,6 @@ class Author(models.Model):
     @property
     def is_known(self):
         return self.researcher != None
-
-# Publisher associated with a journal
-class Publisher(models.Model):
-    romeo_id = models.CharField(max_length=64)
-    name = models.CharField(max_length=256, db_index=True)
-    alias = models.CharField(max_length=256,null=True,blank=True)
-    url = models.URLField(null=True,blank=True)
-    preprint = models.CharField(max_length=32, choices=POLICY_CHOICES, default='unknown')
-    postprint = models.CharField(max_length=32, choices=POLICY_CHOICES, default='unknown')
-    pdfversion = models.CharField(max_length=32, choices=POLICY_CHOICES, default='unknown')
-    oa_status = models.CharField(max_length=32, choices=OA_STATUS_CHOICES, default='UNK')
-
-    stats = models.ForeignKey(AccessStatistics, null=True)
-
-    def update_stats(self):
-        if not self.stats:
-            self.stats = AccessStatistics.objects.create()
-            self.save()
-        self.stats.update(Paper.objects.filter(publication__publisher=self).distinct())
-    def __unicode__(self):
-        if not self.alias:
-            return self.name
-        else:
-            return self.name+' ('+self.alias+')'
-    @property
-    def publi_count(self):
-        # TODO ensure that the papers are not only visible,
-        # but also assigned to a researcher
-        if self.stats:
-            return self.stats.num_tot
-        return 0
-
-    @property
-    def sorted_journals(self):
-        return self.journal_set.all().select_related('stats').filter(stats__num_tot__gt=0).order_by('-stats__num_tot')
-    @property
-    def preprint_conditions(self):
-        return self.publisherrestrictiondetail_set.filter(applies_to='preprint')
-    @property
-    def postprint_conditions(self):
-        return self.publisherrestrictiondetail_set.filter(applies_to='postprint')
-    @property
-    def pdfversion_conditions(self):
-        return self.publisherrestrictiondetail_set.filter(applies_to='pdfversion')
-    def change_oa_status(self, new_oa_status):
-        if self.oa_status == new_oa_status:
-            return
-        self.oa_status = new_oa_status
-        self.save()
-        papers = Paper.objects.filter(publication__publisher=self.pk)
-        for p in papers:
-            p.update_availability()
-            p.invalidate_cache()
-
-# Journal data retrieved from RoMEO
-class Journal(models.Model):
-    title = models.CharField(max_length=256, db_index=True)
-    last_updated = models.DateTimeField(auto_now=True)
-    issn = models.CharField(max_length=10, blank=True, null=True, unique=True)
-    publisher = models.ForeignKey(Publisher)
-
-    stats = models.ForeignKey(AccessStatistics, null=True)
-    def update_stats(self):
-        if not self.stats:
-            self.stats = AccessStatistics.objects.create()
-            self.save()
-        self.stats.update(Paper.objects.filter(publication__journal=self).distinct())
-
-    def __unicode__(self):
-        return self.title
-    class Meta:
-        ordering = ['title']
-
-class PublisherCondition(models.Model):
-    publisher = models.ForeignKey(Publisher)
-    text = models.CharField(max_length=1024)
-    def __unicode__(self):
-        return self.text
-
-class PublisherCopyrightLink(models.Model):
-    publisher = models.ForeignKey(Publisher)
-    text = models.CharField(max_length=256)
-    url = models.URLField()
-    def __unicode__(self):
-        return self.text
-
-class PublisherRestrictionDetail(models.Model):
-    publisher = models.ForeignKey(Publisher)
-    text = models.CharField(max_length=256)
-    applies_to = models.CharField(max_length=32)
-    def __unicode__(self):
-        return self.text
-
-class Disambiguation(models.Model):
-    publications = models.ManyToManyField('Publication')
-    title = models.CharField(max_length=512)
-    issn = models.CharField(max_length=128)
-    unique_together = ('title', 'issn')
-
-class DisambiguationChoice(models.Model):
-    about = models.ForeignKey(Disambiguation)
-    title = models.CharField(max_length=512)
-    issn = models.CharField(max_length=128)
-
-# Counts the number of times a given publisher string has
-# been associated with a model publisher
-class AliasPublisher(models.Model):
-    publisher = models.ForeignKey(Publisher)
-    name = models.CharField(max_length=512)
-    count = models.IntegerField(default=0)
-    unique_together = ('name','publisher')
-
-    def __unicode__(self):
-        return self.name + ' --'+str(self.count)+'--> '+self.publisher.name
-    @classmethod
-    def increment(cls, name, publisher):
-        # TODO it would be more efficient with an update, but it does not really work
-        if not name:
-            return
-        alias, created = cls.objects.get_or_create(name=name, publisher=publisher)
-        alias.count += 1
-        alias.save()
 
 # Publication of these papers (in journals or conference proceedings)
 class Publication(models.Model):
