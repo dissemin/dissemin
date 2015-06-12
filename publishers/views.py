@@ -27,6 +27,11 @@ from django.utils.translation import ugettext as _
 
 from publishers.models import *
 
+# Number of publishers per page in the publishers list
+NB_RESULTS_PER_PAGE = 20 
+# Number of journals per page on a Publisher page
+NB_JOURNALS_PER_PAGE = 30
+
 def varyQueryArguments(key, args, possibleValues):
     variants = []
     for s in possibleValues:
@@ -77,11 +82,11 @@ def publishersView(request, **kwargs):
     oa_variants = varyQueryArguments('status', args_without_page, OA_STATUS_CHOICES)
 
     context['oa_status_choices'] = oa_variants
-    return render(request, 'papers/publishers.html', context)
+    return render(request, 'publishers/list.html', context)
 
 class PublisherView(generic.DetailView):
     model = Publisher
-    template_name = 'papers/publisher.html'
+    template_name = 'publishers/policy.html'
     def get_context_data(self, **kwargs):
         context = super(PublisherView, self).get_context_data(**kwargs)
         context['oa_status_choices'] = OA_STATUS_CHOICES

@@ -48,8 +48,6 @@ from publishers.models import OA_STATUS_CHOICES
 
 # Number of papers shown on a search results page
 NB_RESULTS_PER_PAGE = 20
-# Number of journals per page on a Publisher page
-NB_JOURNALS_PER_PAGE = 30
 
 def index(request):
     
