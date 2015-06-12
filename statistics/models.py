@@ -72,4 +72,6 @@ class AccessStatistics(models.Model):
         for x in _class.objects.all():
             x.update_stats()
 
+    class Meta:
+        db_table = 'papers_accessstatistics'
 

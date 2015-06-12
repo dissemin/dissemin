@@ -10,35 +10,37 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ('statistics', '0001_initial'),
+        ('publishers', '0001_initial'),
     ]
 
     operations = [
-        migrations.CreateModel(
-            name='AccessStatistics',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('num_oa', models.IntegerField(default=0)),
-                ('num_ok', models.IntegerField(default=0)),
-                ('num_couldbe', models.IntegerField(default=0)),
-                ('num_unk', models.IntegerField(default=0)),
-                ('num_closed', models.IntegerField(default=0)),
-                ('num_tot', models.IntegerField(default=0)),
-            ],
-            options={
-            },
-            bases=(models.Model,),
-        ),
-        migrations.CreateModel(
-            name='AliasPublisher',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('name', models.CharField(max_length=512)),
-                ('count', models.IntegerField(default=0)),
-            ],
-            options={
-            },
-            bases=(models.Model,),
-        ),
+#        migrations.CreateModel(
+#            name='AccessStatistics',
+#            fields=[
+#                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+#                ('num_oa', models.IntegerField(default=0)),
+#                ('num_ok', models.IntegerField(default=0)),
+#                ('num_couldbe', models.IntegerField(default=0)),
+#                ('num_unk', models.IntegerField(default=0)),
+#                ('num_closed', models.IntegerField(default=0)),
+#                ('num_tot', models.IntegerField(default=0)),
+#            ],
+#            options={
+#            },
+#            bases=(models.Model,),
+#        ),
+#        migrations.CreateModel(
+#            name='AliasPublisher',
+#            fields=[
+#                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+#                ('name', models.CharField(max_length=512)),
+#                ('count', models.IntegerField(default=0)),
+#            ],
+#            options={
+#            },
+#            bases=(models.Model,),
+#        ),
         migrations.CreateModel(
             name='Annotation',
             fields=[
@@ -68,7 +70,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(max_length=300)),
-                ('stats', models.ForeignKey(to='papers.AccessStatistics', null=True)),
+                ('stats', models.ForeignKey(to='statistics.AccessStatistics', null=True)),
             ],
             options={
             },
@@ -112,19 +114,19 @@ class Migration(migrations.Migration):
             },
             bases=(models.Model,),
         ),
-        migrations.CreateModel(
-            name='Journal',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('title', models.CharField(max_length=256, db_index=True)),
-                ('last_updated', models.DateTimeField(auto_now=True)),
-                ('issn', models.CharField(max_length=10, unique=True, null=True, blank=True)),
-            ],
-            options={
-                'ordering': ['title'],
-            },
-            bases=(models.Model,),
-        ),
+#        migrations.CreateModel(
+#            name='Journal',
+#            fields=[
+#                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+#                ('title', models.CharField(max_length=256, db_index=True)),
+#                ('last_updated', models.DateTimeField(auto_now=True)),
+#                ('issn', models.CharField(max_length=10, unique=True, null=True, blank=True)),
+#            ],
+#            options={
+#                'ordering': ['title'],
+#            },
+#            bases=(models.Model,),
+#        ),
         migrations.CreateModel(
             name='Name',
             fields=[
@@ -215,66 +217,66 @@ class Migration(migrations.Migration):
                 ('pages', models.CharField(max_length=64, null=True, blank=True)),
                 ('pubdate', models.DateField(null=True, blank=True)),
                 ('doi', models.CharField(max_length=1024, unique=True, null=True, blank=True)),
-                ('journal', models.ForeignKey(blank=True, to='papers.Journal', null=True)),
+                ('journal', models.ForeignKey(blank=True, to='publishers.Journal', null=True)),
                 ('paper', models.ForeignKey(to='papers.Paper')),
             ],
             options={
             },
             bases=(models.Model,),
         ),
-        migrations.CreateModel(
-            name='Publisher',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('romeo_id', models.CharField(max_length=64)),
-                ('name', models.CharField(max_length=256, db_index=True)),
-                ('alias', models.CharField(max_length=256, null=True, blank=True)),
-                ('url', models.URLField(null=True, blank=True)),
-                ('preprint', models.CharField(default='unknown', max_length=32, choices=[('can', 'Allowed'), ('cannot', 'Forbidden'), ('restricted', 'Restricted'), ('unclear', 'Unclear'), ('unknown', 'Unknown')])),
-                ('postprint', models.CharField(default='unknown', max_length=32, choices=[('can', 'Allowed'), ('cannot', 'Forbidden'), ('restricted', 'Restricted'), ('unclear', 'Unclear'), ('unknown', 'Unknown')])),
-                ('pdfversion', models.CharField(default='unknown', max_length=32, choices=[('can', 'Allowed'), ('cannot', 'Forbidden'), ('restricted', 'Restricted'), ('unclear', 'Unclear'), ('unknown', 'Unknown')])),
-                ('oa_status', models.CharField(default='UNK', max_length=32, choices=[('OA', 'Open access'), ('OK', 'Allows pre/post prints'), ('NOK', 'Forbids pre/post prints'), ('UNK', 'Policy unclear')])),
-                ('stats', models.ForeignKey(to='papers.AccessStatistics', null=True)),
-            ],
-            options={
-            },
-            bases=(models.Model,),
-        ),
-        migrations.CreateModel(
-            name='PublisherCondition',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('text', models.CharField(max_length=1024)),
-                ('publisher', models.ForeignKey(to='papers.Publisher')),
-            ],
-            options={
-            },
-            bases=(models.Model,),
-        ),
-        migrations.CreateModel(
-            name='PublisherCopyrightLink',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('text', models.CharField(max_length=256)),
-                ('url', models.URLField()),
-                ('publisher', models.ForeignKey(to='papers.Publisher')),
-            ],
-            options={
-            },
-            bases=(models.Model,),
-        ),
-        migrations.CreateModel(
-            name='PublisherRestrictionDetail',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('text', models.CharField(max_length=256)),
-                ('applies_to', models.CharField(max_length=32)),
-                ('publisher', models.ForeignKey(to='papers.Publisher')),
-            ],
-            options={
-            },
-            bases=(models.Model,),
-        ),
+ #       migrations.CreateModel(
+ #           name='Publisher',
+ #           fields=[
+ #               ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+ #               ('romeo_id', models.CharField(max_length=64)),
+ #               ('name', models.CharField(max_length=256, db_index=True)),
+ #               ('alias', models.CharField(max_length=256, null=True, blank=True)),
+ #               ('url', models.URLField(null=True, blank=True)),
+ #               ('preprint', models.CharField(default='unknown', max_length=32, choices=[('can', 'Allowed'), ('cannot', 'Forbidden'), ('restricted', 'Restricted'), ('unclear', 'Unclear'), ('unknown', 'Unknown')])),
+ #               ('postprint', models.CharField(default='unknown', max_length=32, choices=[('can', 'Allowed'), ('cannot', 'Forbidden'), ('restricted', 'Restricted'), ('unclear', 'Unclear'), ('unknown', 'Unknown')])),
+ #               ('pdfversion', models.CharField(default='unknown', max_length=32, choices=[('can', 'Allowed'), ('cannot', 'Forbidden'), ('restricted', 'Restricted'), ('unclear', 'Unclear'), ('unknown', 'Unknown')])),
+ #               ('oa_status', models.CharField(default='UNK', max_length=32, choices=[('OA', 'Open access'), ('OK', 'Allows pre/post prints'), ('NOK', 'Forbids pre/post prints'), ('UNK', 'Policy unclear')])),
+ #               ('stats', models.ForeignKey(to='statistics.AccessStatistics', null=True)),
+ #           ],
+ #           options={
+ #           },
+ #           bases=(models.Model,),
+ #       ),
+ #       migrations.CreateModel(
+ #           name='PublisherCondition',
+ #           fields=[
+ #               ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+ #               ('text', models.CharField(max_length=1024)),
+ #               ('publisher', models.ForeignKey(to='publishers.Publisher')),
+ #           ],
+ #           options={
+ #           },
+ #           bases=(models.Model,),
+ #       ),
+ #       migrations.CreateModel(
+ #           name='PublisherCopyrightLink',
+ #           fields=[
+ #               ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+ #               ('text', models.CharField(max_length=256)),
+ #               ('url', models.URLField()),
+ #               ('publisher', models.ForeignKey(to='publishers.Publisher')),
+ #           ],
+ #           options={
+ #           },
+ #           bases=(models.Model,),
+ #       ),
+ #       migrations.CreateModel(
+ #           name='PublisherRestrictionDetail',
+ #           fields=[
+ #               ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+ #               ('text', models.CharField(max_length=256)),
+ #               ('applies_to', models.CharField(max_length=32)),
+ #               ('publisher', models.ForeignKey(to='publishers.Publisher')),
+ #           ],
+ #           options={
+ #           },
+ #           bases=(models.Model,),
+ #       ),
         migrations.CreateModel(
             name='Researcher',
             fields=[
@@ -316,13 +318,13 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='researcher',
             name='stats',
-            field=models.ForeignKey(to='papers.AccessStatistics', null=True),
+            field=models.ForeignKey(to='statistics.AccessStatistics', null=True),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='publication',
             name='publisher',
-            field=models.ForeignKey(blank=True, to='papers.Publisher', null=True),
+            field=models.ForeignKey(blank=True, to='publishers.Publisher', null=True),
             preserve_default=True,
         ),
         migrations.AddField(
@@ -343,18 +345,18 @@ class Migration(migrations.Migration):
             field=models.ForeignKey(to='papers.Researcher'),
             preserve_default=True,
         ),
-        migrations.AddField(
-            model_name='journal',
-            name='publisher',
-            field=models.ForeignKey(to='papers.Publisher'),
-            preserve_default=True,
-        ),
-        migrations.AddField(
-            model_name='journal',
-            name='stats',
-            field=models.ForeignKey(to='papers.AccessStatistics', null=True),
-            preserve_default=True,
-        ),
+#        migrations.AddField(
+#            model_name='journal',
+#            name='publisher',
+#            field=models.ForeignKey(to='publishers.Publisher'),
+#            preserve_default=True,
+#        ),
+#        migrations.AddField(
+#            model_name='journal',
+#            name='stats',
+#            field=models.ForeignKey(to='statistics.AccessStatistics', null=True),
+#            preserve_default=True,
+#        ),
         migrations.AddField(
             model_name='disambiguation',
             name='publications',
@@ -409,10 +411,10 @@ class Migration(migrations.Migration):
             field=models.ForeignKey(to=settings.AUTH_USER_MODEL),
             preserve_default=True,
         ),
-        migrations.AddField(
-            model_name='aliaspublisher',
-            name='publisher',
-            field=models.ForeignKey(to='papers.Publisher'),
-            preserve_default=True,
-        ),
+#        migrations.AddField(
+#            model_name='aliaspublisher',
+#            name='publisher',
+#            field=models.ForeignKey(to='publishers.Publisher'),
+#            preserve_default=True,
+#        ),
     ]

@@ -1,0 +1,28 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
+from django.db import models, migrations
+
+
+class Migration(migrations.Migration):
+
+    dependencies = [
+        ('papers', '0001_initial'),
+    ]
+
+    operations = [
+        migrations.RemoveField(
+            model_name='disambiguation',
+            name='publications',
+        ),
+        migrations.RemoveField(
+            model_name='disambiguationchoice',
+            name='about',
+        ),
+        migrations.DeleteModel(
+            name='Disambiguation',
+        ),
+        migrations.DeleteModel(
+            name='DisambiguationChoice',
+        ),
+    ]

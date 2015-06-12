@@ -54,6 +54,9 @@ class Publisher(models.Model):
 
     stats = models.ForeignKey(AccessStatistics, null=True)
 
+    class Meta:
+        db_table = 'papers_publisher'
+
     def update_stats(self):
         if not self.stats:
             self.stats = AccessStatistics.objects.create()
@@ -112,12 +115,15 @@ class Journal(models.Model):
         return self.title
     class Meta:
         ordering = ['title']
+        db_table = 'papers_journal'
 
 class PublisherCondition(models.Model):
     publisher = models.ForeignKey(Publisher)
     text = models.CharField(max_length=1024)
     def __unicode__(self):
         return self.text
+    class Meta:
+        db_table = 'papers_publishercondition'
 
 class PublisherCopyrightLink(models.Model):
     publisher = models.ForeignKey(Publisher)
@@ -125,6 +131,8 @@ class PublisherCopyrightLink(models.Model):
     url = models.URLField()
     def __unicode__(self):
         return self.text
+    class Meta:
+        db_table = 'papers_publishercopyrightlink'
 
 class PublisherRestrictionDetail(models.Model):
     publisher = models.ForeignKey(Publisher)
@@ -132,6 +140,8 @@ class PublisherRestrictionDetail(models.Model):
     applies_to = models.CharField(max_length=32)
     def __unicode__(self):
         return self.text
+    class Meta:
+        db_table = 'papers_publisherrestrictiondetail'
 
 # Counts the number of times a given publisher string has
 # been associated with a model publisher
@@ -151,5 +161,8 @@ class AliasPublisher(models.Model):
         alias, created = cls.objects.get_or_create(name=name, publisher=publisher)
         alias.count += 1
         alias.save()
+
+    class Meta:
+        db_table = 'papers_aliaspublisher'
 
 
