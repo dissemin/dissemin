@@ -74,8 +74,8 @@
             {% endfor %}
          </ul></p>
 
-         <a href="{% url 'refetch-researcher' researcher.pk %}">{% trans "Refresh papers" %}</a><br />
-         <a href="{% url 'recluster-researcher' researcher.pk %}">{% trans "Refresh classification" %}</a>
+         <a href="{% url 'refetch-researcher' researcher.pk %}" class="btn btn-default">{% trans "Refresh papers" %}</a><br />
+         <a href="{% url 'recluster-researcher' researcher.pk %}" class="btn btn-default">{% trans "Refresh classification" %}</a>
          {% endif %}
     </div>
 {% elif department %}
