@@ -45,6 +45,8 @@ from papers.emails import *
 
 from publishers.views import varyQueryArguments
 from publishers.models import OA_STATUS_CHOICES
+from sword.submitOnZenodo import *
+from dissemin.settings import MEDIA_ROOT 
 
 # Number of papers shown on a search results page
 NB_RESULTS_PER_PAGE = 20
@@ -238,11 +240,7 @@ def paper_upload_view(request, pk):
                     upload_type=form.cleaned_data['upload_type'],
                     file=request.FILES['file'])
             d.save()
-
-            # TODO upload the paper.here
-            # set the identifier and the pdf_url accordingly
-
-
+            submitPubli(paper, MEDIA_ROOT + d.file.url)
             context['success'] = True
         else:
             context['failed'] = True
