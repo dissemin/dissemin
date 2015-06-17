@@ -49,6 +49,9 @@ EMAIL_USE_TLS = True
 ROMEO_API_KEY = None
 CORE_API_KEY = None
 
+# Zenodo Key
+ZENODO_KEY = None
+
 # DOI proxy
 DOI_PROXY_DOMAIN =  'dx.doi.org'
 DOI_PROXY_SUPPORTS_BATCH = False
