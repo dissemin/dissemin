@@ -40,3 +40,6 @@ dissemin/NOTONGIT*
 # Uploaded files
 media/deposits/
 
+# build files for doc
+doc/sphinx/_build/
+
