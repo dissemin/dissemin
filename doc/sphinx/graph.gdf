@@ -1,0 +1,1 @@
+nodedef>name VARCHAR,label VARCHAR,researcher VARCHAR,dept VARCHAR
