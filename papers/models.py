@@ -81,55 +81,84 @@ PAPER_TYPE_PREFERENCE = [x for (x,y) in PAPER_TYPE_CHOICES]
 
 # Information about the researchers and their groups
 class Department(models.Model):
+    """
+    A department in an institution. Each :py:class:`Researcher` is affiliated with exactly one department.
+    """
+
+    #: The full name of the department
     name = models.CharField(max_length=300)
 
+    #: :py:class:`AccessStatistics` about the papers authored in this department
     stats = models.ForeignKey(AccessStatistics, null=True)
 
     @property
     def sorted_researchers(self):
+        """List of :py:class:`Researcher` in this department sorted by last name (prefetches their stats as well)"""
         return self.researcher_set.select_related('name', 'stats').order_by('name')
 
     def __unicode__(self):
         return self.name
 
     def update_stats(self):
+        """Refreshes the department-level access statistics for that department."""
         if not self.stats:
             self.stats = AccessStatistics.objects.create()
             self.save()
         self.stats.update(Paper.objects.filter(author__researcher__department=self).distinct())
 
 class ResearchGroup(models.Model):
-    name = models.CharField(max_length=300)
+    """
+    A research group is a group of researchers working on the same topic. Researchers can
+    belong to multiple research groups.
+    """
 
+    #: The full name of the research group
+    name = models.CharField(max_length=300)
     def __unicode__(self):
         return self.name
 
 class NameVariant(models.Model):
     """
-    A name is a possible name for a given researcher, with a confidence score associated with it
+    A NameVariant is a binary relation between names and researchers. When present, it indicates
+    that a given name is a possible name for the researcher. The confidence that papers with that
+    name are authored by the given researcher is indicated by a confidence score.
     """
+
+    #: The :py:class:`Name` that is part of the relation
     name = models.ForeignKey('Name')
+    #: The :py:class:`Researcher` to which the name is attributed
     researcher = models.ForeignKey('Researcher')
+    #: The similarity score between this name and one of the reference names for this researcher
     confidence = models.FloatField(default=1.)
     unique_together = (('name','researcher'),)
 
 class Researcher(models.Model):
-    # The preferred name for this researcher
+    """
+    A model to represent a researcher in a department
+    """
+
+    #: The preferred :py:class:`Name` for this researcher
     name = models.ForeignKey('Name')
-    # Department the researcher belongs to
+    #: :py:class:`Department` the researcher belongs to
     department = models.ForeignKey(Department)
-    # Research groups the researcher belongs to
+    #: The (possibly multiple) :py:class:`ResearchGroup` the researcher belongs to
     groups = models.ManyToManyField(ResearchGroup)
     
     # Various info about the researcher (not used internally)
+    #: Email address for this researcher
     email = models.EmailField(blank=True,null=True)
+    #: URL of the homepage
     homepage = models.URLField(blank=True, null=True)
+    #: Grade (student, post-doc, professor…)
     role = models.CharField(max_length=128, null=True, blank=True)
 
     # DOI search
     # TODO is this still needed ?
+    #: Date of the last CrossRef search for this researcher
     last_doi_search = models.DateTimeField(null=True,blank=True)
+    #: Status of the current harvesting process for this researcher
     status = models.CharField(max_length=512, blank=True, null=True)
+    #: Last time the harvesting status was updated
     last_status_update = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
@@ -137,26 +166,38 @@ class Researcher(models.Model):
 
     @property
     def authors_by_year(self):
+        """:py:class:`Author` objects for this researcher, filtered by decreasing publication date"""
         return Author.objects.filter(name__researcher_id=self.id).order_by('-paper__pubdate')
     @property
-    def names(self):
-        return Name.objects.filter(author__researcher=self)
-    @property
-    def aka(self):
-        return self.names[1:]
-    @property
     def name_variants(self):
+        """
+        All the names found in papers that could belong to the researcher.
+        Among these names, at least the preferred :py:attr:`name`
+        should have confidence 1.0 (other names can have confidence 1.0 if 
+        multiple names are known. The other names have been found in publications
+        and are similar to one of these 1.0 confidence name variants.
+        """
         return NameVariant.objects.filter(researcher=self)
 
     def variants_queryset(self):
         """
-        The set of names with the same last name
+        The set of names with the same last name. This is a larger approximation
+        than the actual name variants to keep the SQL query simple. The method
+        `update_variants` filters out the candidates which are not compatible with the reference
+        name.
+
+        .. todo::
+            This should rather rely on the name variants with confidence 1.0
         """
         return Name.objects.filter(last__iexact=self.name.last)
 
     def update_variants(self, reset=False):
         """
         Sets the variants of this name to the candidates returned by variants_queryset
+        and which have a positive name similarity with the reference name.
+
+        .. todo::
+            This should rather rely on the name variants with confidence 1.0
         """
         nvqs = NameVariant.objects.filter(researcher=self)
         if reset:
@@ -176,6 +217,7 @@ class Researcher(models.Model):
 
     stats = models.ForeignKey(AccessStatistics, null=True)
     def update_stats(self):
+        """Update the access statistics for the papers authored by this researcher"""
         if not self.stats:
             self.stats = AccessStatistics.objects.create()
             self.save()
@@ -183,6 +225,9 @@ class Researcher(models.Model):
 
     @classmethod
     def create_from_scratch(cls, first, last, dept, email, role, homepage):
+        """Creates a researcher, creating first the :py:class:`Name` for it.
+
+        :raises ValueError: if a researcher with that name already exists."""
         first = first.strip()
         last = last.strip()
         name, created = Name.objects.get_or_create(full=iunaccent(first+' '+last),
