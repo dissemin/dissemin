@@ -34,16 +34,18 @@
 <p><br />Upload your paper to Zenodo:
 <form action="{% url 'upload_paper' paper.pk %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form }}
-    Success: {{ success }}
-    <input type="submit" value="Submit" />
+    {% if success %}<p class="form_success">{% trans "The file was succesfully submitted" %}</p>{% endif %}
+    <div id="paper_uploader">
+      {{ form.as_p }}
+      <p><input type="submit" /></p>
+    </div>
 </form>
 </p>
 {% endif %}
 {% endblock %}
 
 {% block details %}
-<span class="detailsTitle">{% trans "Available from" %}</span>
+<span class="detailsTitle">{% trans "Data from" %}</span>
 <div class="detailsContent">
 {% for record in paper.sorted_oai_records %}
 <p>

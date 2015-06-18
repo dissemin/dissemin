@@ -812,3 +812,19 @@ h1#paperTitle {
 #faqSummary p {
 	padding-left: 20px;
 }
+
+/* upload paper */
+#paper_uploader {
+	padding:20px;
+	background:#eee;
+}
+
+#paper_uploader input {
+	display:inline-block;
+}
+
+.form_success {
+	font-weight:bold;
+	background:#9e6;
+	padding:5px;
+}
