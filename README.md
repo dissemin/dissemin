@@ -1,16 +1,18 @@
 dissem.in
 ================
 
+[![Documentation Status](https://readthedocs.org/projects/dissemin/badge/?version=latest)](https://readthedocs.org/projects/dissemin/?badge=latest)
+
 Web platform showing the articles written by researchers of an institution.
 It highlights the articles that are not freely available while uploading
 them would comply with the publisher's policy.
 
 Data sources:
 * OAI-PMH, through a proxy
-* CrossRef.org
+* CrossRef.org, through a proxy
 * SHERPA/RoMEO
 * Bielefeld Academic Search Engine (BASE)
-* Soon: CORE
+* CORE
 
 Dependencies:
 * Python 2.7 (should work with Python 3)
