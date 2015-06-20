@@ -1,9 +1,10 @@
-function showStatsPie (data, target_id) {
-	var target = document.getElementById(target_id);
-    var w = 300, h = 300, r = 100;
-    var color = d3.scale.category20c();     //builtin range of colors
+var stats_colors = ["#F68212", "#FCD821", "#419BE8", "#eeeeee", "#122B52"];
 
-    var vis = d3.select(target)
+function showStatsPie (data, target_id) {
+    var w = 220, h = 120, r = 100;
+    var color = d3.scale.ordinal().range(stats_colors);
+
+    var vis = d3.select("#"+target_id).select(".statspie_graph")
         .append("svg:svg")              //create the SVG element inside the <body>
         .data([data])                   //associate our data with the document
             .attr("width", w)           //set the width and height of our visualization (these will be attributes of the <svg> tag
@@ -16,9 +17,10 @@ function showStatsPie (data, target_id) {
 		.innerRadius(r/2);
 
     var pie = d3.layout.pie()           //this will create arc data for us given a list of values
-        .value(function(d) { return d.value; })
-		.startAngle(Math.PI/2)
-		.endAngle(-Math.PI/2);    //we must tell it out to access the value of each element in our data array
+        .value(function(d) { return d.value; }) //we must tell it out to access the value of each element in our data array
+		.sort(null)
+		.startAngle(-Math.PI/2)
+		.endAngle(Math.PI/2);
 
     var arcs = vis.selectAll("g.slice")     //this selects all <g> elements with class slice (there aren't any yet)
         .data(pie)                          //associate the generated pie data (an array of arcs, each having startAngle, endAngle and value properties) 
@@ -38,5 +40,26 @@ function showStatsPie (data, target_id) {
                 return "translate(" + arc.centroid(d) + ")";        //this gives us a pair of coordinates like [50, 50]
             })
             .attr("text-anchor", "middle")                          //center the text on it's origin
-            .text(function(d, i) { return data[i].label; });        //get the label from our original data array
+            .text(function(d, i) { return (data[i].value == 0 ? "" : data[i].value); });        //get the label from our original data array
+
+	makeCaptions(data, d3.select("#"+target_id).select(".statspie_caption"));
+}
+
+function makeCaptions (data, target) {
+	var captions = target.selectAll("div")
+		.data(data)
+		.enter()
+			.append("div")
+			.attr("class", "stats_caption_line")
+
+		captions.append("div")
+			.attr("class", "stats_caption_box")
+			.style("background-color", function(d, i) {return stats_colors[i]; })
+
+		captions.append("div")
+			.attr("class", "stats_caption_text")
+			.text(function(d) { return d.label; })
+			.append("span")
+				.attr("class", "detail")
+				.text(function(d) { return " ("+d.value+")"; });
 }

@@ -1,8 +1,7 @@
 {% load i18n %}
-<div class="access-statistics">
-  <div id="statspie_n{{ stats_counter }}"></div>
-  <div class="statspie_caption">
-  </div>
+<div class="access-statistics" id="statspie_n{{ stats_counter }}">
+  <div class="statspie_graph"></div>
+  <div class="statspie_caption"></div>
   <script type="text/javascript">
   var data = [{ "label":"{% trans 'Open Access' %}", "value":{{ stats.num_oa }} },
               { "label":"{% trans 'Publications are available' %}", "value":{{ stats.num_ok }} },

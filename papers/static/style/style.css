@@ -603,13 +603,41 @@ h1#paperTitle {
 
 .access-statistics 
 {
-    max-width:600px;
-    height:10px;
     overflow:hidden;
-    border-radius:10px;
     margin:8px;
     margin-bottom:15px;
-    box-shadow:0 0 0 2px #fff, 0 0 0 3px #999;
+}
+
+.statspie_graph {
+	display:inline-block;
+	vertical-align:top;
+	margin-right:20px;
+}
+
+.statspie_caption {
+	font-size:0.9em;
+	display:inline-block;
+	vertical-align:top;
+}
+
+.stats_caption_line {
+	display:block;
+}
+
+.stats_caption_box {
+	display:inline-block;
+	width:20px;
+	height:1em;
+	vertical-align:middle;
+	margin:0 5px;
+}
+
+.stats_caption_text {
+	display:inline-block;
+}
+
+.stats_caption_text .detail {
+	color:#666;
 }
 
 .accessStats
