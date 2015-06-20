@@ -1,4 +1,4 @@
-function showStats (data, target_id) {
+function showStatsPie (data, target_id) {
 	var target = document.getElementById(target_id);
     var w = 300, h = 300, r = 100;
     var color = d3.scale.category20c();     //builtin range of colors

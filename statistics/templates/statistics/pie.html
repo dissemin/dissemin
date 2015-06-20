@@ -1,6 +1,6 @@
 {% load i18n %}
 <div class="access-statistics">
-  <div id="statspie_n{{ stats_id }}"></div>
+  <div id="statspie_n{{ stats_counter }}"></div>
   <div class="statspie_caption">
   </div>
   <script type="text/javascript">
@@ -9,6 +9,6 @@
               { "label":"{% trans 'Publications could be online' %}", "value":{{ stats.num_couldbe }} },
               { "label":"{% trans 'Policy unknown' %}", "value":{{ stats.num_unk }} },
               { "label":"{% trans 'Upload is forbidden' %}", "value":{{ stats.num_closed }} } ];
-  showStats(data, "statspie_n{{ stats_id }}");
+  showStatsPie(data, "statspie_n{{ stats_counter }}");
   </script>
 </div>

@@ -6,6 +6,10 @@
 ENS
 {% endblock %}
 
+{% block extra_head %}
+{% include 'statistics/headers.html' %}
+{% endblock %}
+
 {% block content %}
 <div id="fullPage">
   <h2>{% trans "Departments" %}</h2>
@@ -13,6 +17,7 @@ ENS
   <ul>
   {% for dept in departments %}
     <li><a href="{% url 'department' dept.id %}">{{ dept }}</a>
+    {% include 'statistics/pie.html' with stats=dept.stats and stats_counter=forloop.counter %}
     </li>
   {% endfor %}
   </ul>
