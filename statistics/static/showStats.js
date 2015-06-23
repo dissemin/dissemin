@@ -2,10 +2,11 @@ var stats_colors = ["#F68212", "#FCD821", "#419BE8", "#eeeeee", "#122B52"];
 var stats_colors_aggregated = ["#D2ED1D", "#E62029"];
 
 function showStatsPie (detailed_data, aggregated_data, target_id) {
-    var w = 220, h = 145, r = 100;
+    var w = 220, h = 145;
+	var r = 100, mr = 50, imr = 45, ir = 40; // radii
     var color = d3.scale.ordinal().range(stats_colors);
     var color_agg = d3.scale.ordinal().range(stats_colors_aggregated);
-
+	
 	// Create the svg element
 	
     var vis = d3.select("#"+target_id).select(".statspie_graph")
@@ -25,7 +26,7 @@ function showStatsPie (detailed_data, aggregated_data, target_id) {
 				
     var arc = d3.svg.arc()              //this will create <path> elements for us using arc data
         .outerRadius(r)
-		.innerRadius(r/2);
+		.innerRadius(mr);
 
     var pie = d3.layout.pie()           //this will create arc data for us given a list of values
         .value(function(d) { return d.value; }) //we must tell it out to access the value of each element in our data array
@@ -54,7 +55,7 @@ function showStatsPie (detailed_data, aggregated_data, target_id) {
         arcs_text.append("svg:text")                                     //add a label to each slice
                 .attr("transform", function(d) {                    //set the label's origin to the center of the arc
                 //we have to make sure to set these before calling arc.centroid
-                d.innerRadius = r/2;
+                d.innerRadius = mr;
                 d.outerRadius = r;
                 return "translate(" + arc.centroid(d) + ")";        //this gives us a pair of coordinates like [50, 50]
             })
@@ -64,8 +65,8 @@ function showStatsPie (detailed_data, aggregated_data, target_id) {
 	// Inner aggregated statistics		
 	
 	var arc2 = d3.svg.arc()
-        .outerRadius(r/2)
-		.innerRadius(0);
+        .outerRadius(imr)
+		.innerRadius(ir);
 		
 	var arcs2 = d3.select(parts[0][1]).selectAll("g.slice")     //this selects all <g> elements with class slice (there aren't any yet)
         .data(pie)                          //associate the generated pie data (an array of arcs, each having startAngle, endAngle and value properties) 
@@ -84,32 +85,32 @@ function showStatsPie (detailed_data, aggregated_data, target_id) {
             .append("svg:g")
                 .attr("class", "slicetext");
 				
-        arcs2_text.append("svg:text")                                     //add a label to each slice
+    /*    arcs2_text.append("svg:text")                                     //add a label to each slice
             .attr("transform", function(d) {                    //set the label's origin to the center of the arc
                 //we have to make sure to set these before calling arc.centroid
-                d.innerRadius = 0;
-                d.outerRadius = r/2;
+                d.innerRadius = imr;
+                d.outerRadius = ir;
                 return "translate(" + arc2.centroid(d) + ")";        //this gives us a pair of coordinates like [50, 50]
             })
-            .attr("text-anchor", "middle")                          //center the text on it's origin
+            .attr("text-anchor", "middle")                          //center the text on its origin
             .text(function(d, i) { return (aggregated_data[i].value == 0 ? "" : aggregated_data[i].value); });        //get the label from our original data array
-		
+	*/
+	
 		arcs2_text.append("svg:line")
-			.attr("x1", function(d, i) { return arc2.centroid(d)[0] + (i==0 ? -1 : 1)*10 })
-			.attr("x2", function(d, i) { return arc2.centroid(d)[0] + (i==0 ? -1 : 1)*10 })
-			.attr("y1", function(d, i) { return arc2.centroid(d)[1] + 6 })
+			.attr("x1", function(d, i) { return arc2.centroid(d)[0]})
+			.attr("x2", function(d, i) { return arc2.centroid(d)[0]})
+			.attr("y1", function(d, i) { return arc2.centroid(d)[1] + 5})
 			.attr("y2", function(d, i) { return 2 + i*20; })
             .attr("style", "stroke:rgb(0,0,0);stroke-width:1")
 		
-		arcs2_text.append("svg:text")                                     //add a label to each slice
-                .attr("transform", function(d, i) {                    //set the label's origin to the center of the arc
-                //we have to make sure to set these before calling arc.centroid
+		arcs2_text.append("svg:text")
+                .attr("transform", function(d, i) {
                 d.innerRadius = 0;
                 d.outerRadius = r/2;
-                return "translate(" + arc2.centroid(d)[0] + ", "+ (15 + i*20) +")";        //this gives us a pair of coordinates like [50, 50]
+                return "translate(" + arc2.centroid(d)[0] + ", "+ (15 + i*20) +")";
             })
-            .attr("text-anchor", "middle")                          //center the text on it's origin
-            .text(function(d, i) { return (aggregated_data[i].label); });        //get the label from our original data array
+            .attr("text-anchor", "middle")
+            .text(function(d, i) { return (aggregated_data[i].label); });
 	
 	makeCaptions(detailed_data, d3.select("#"+target_id).select(".statspie_caption"));
 }
