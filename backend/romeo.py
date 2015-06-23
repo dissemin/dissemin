@@ -280,12 +280,6 @@ def get_or_create_publisher(romeo_xml_description):
 
     # Compute OA status of the publisher
     status = 'UNK'
-    if xml.attrib.get('id') == 'DOAJ':
-        status = 'OA'
-    if preprint == 'can' or postprint == 'can' or pdfversion == 'can':
-        status = 'OK'
-    elif preprint == 'cannot' and postprint == 'cannot' and pdfversion == 'cannot':
-        status = 'NOK'
 
     publisher = Publisher(name=name, alias=alias, url=url, preprint=preprint,
             postprint=postprint, pdfversion=pdfversion, romeo_id=romeo_id,
@@ -306,9 +300,10 @@ def get_or_create_publisher(romeo_xml_description):
         if condition.text:
             c = PublisherCondition(publisher=publisher, text=condition.text.strip())
             c.save()
-            if c.text.lower() == 'all titles are open access journals':
-                publisher.status = 'OA'
-                publisher.save(update_fields=['oa_status'])
+
+    # Update the publisher status
+    publisher.status = publisher.classify_oa_status()
+    publisher.save(update_fields=['oa_status'])
     
     for link in xml.findall('./copyrightlinks/copyrightlink'):
         text = None

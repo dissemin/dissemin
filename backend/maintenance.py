@@ -24,6 +24,7 @@ from papers.models import *
 import backend.crossref
 from papers.utils import sanitize_html, create_paper_fingerprint
 from backend.romeo import fetch_publisher
+from backend.tasks import change_publisher_oa_status
 from time import sleep
 from collections import defaultdict
 from django.db.models import Q, Prefetch
@@ -204,4 +205,13 @@ def hide_unattributed_papers():
                 Prefetch('author_set', to_attr='authors')):
             p.update_visibility()
         cursor += chunksize
+
+
+def recompute_publisher_policies():
+    """
+    Recomputes the publisher policy according to some possibly new criteria
+    """
+    for p in Publisher.objects.all():
+        change_publisher_oa_status(p.pk, p.classify_oa_status())
+
 

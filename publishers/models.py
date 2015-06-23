@@ -22,6 +22,7 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.db.models.loading import get_model
 
 from statistics.models import AccessStatistics
 
@@ -41,6 +42,7 @@ POLICY_CHOICES = [('can', _('Allowed')),
 
 OA_STATUS_PREFERENCE = [x for x,y in OA_STATUS_CHOICES]
 
+
 # Publisher associated with a journal
 class Publisher(models.Model):
     romeo_id = models.CharField(max_length=64)
@@ -57,11 +59,30 @@ class Publisher(models.Model):
     class Meta:
         db_table = 'papers_publisher'
 
+    def classify_oa_status(self):
+        """
+        Classify the publisher status into one of "OA" (gold open access), "OK" (self-archiving permitted for some version),
+        "NOK" (self-archiving not allowed), "UNK" (unknown or unclear policy)..
+        """
+        status = 'UNK'
+        lst = [self.preprint, self.postprint, self.pdfversion]
+        if 'can' in lst:
+            status = 'OK'
+        elif 'cannot' in lst and all(map(lambda x: x == 'cannot' or x == 'unknown', lst)):
+            status = 'NOK'
+
+        for c in self.publishercondition_set.all():
+            if c.text.lower() == 'all titles are open access journals':
+                status = 'OA'
+            elif 'doaj says it is an open access journal' in c.text.lower():
+                status = 'OA'
+        return status
+
     def update_stats(self):
         if not self.stats:
             self.stats = AccessStatistics.objects.create()
             self.save()
-        self.stats.update(Paper.objects.filter(publication__publisher=self).distinct())
+        self.stats.update(get_model('papers', 'Paper').objects.filter(publication__publisher=self).distinct())
     def __unicode__(self):
         if not self.alias:
             return self.name
@@ -92,7 +113,7 @@ class Publisher(models.Model):
             return
         self.oa_status = new_oa_status
         self.save()
-        papers = Paper.objects.filter(publication__publisher=self.pk)
+        papers = get_model('papers', 'Paper').objects.filter(publication__publisher=self.pk)
         for p in papers:
             p.update_availability()
             p.invalidate_cache()
@@ -109,7 +130,7 @@ class Journal(models.Model):
         if not self.stats:
             self.stats = AccessStatistics.objects.create()
             self.save()
-        self.stats.update(Paper.objects.filter(publication__journal=self).distinct())
+        self.stats.update(get_model('papers', 'Paper').objects.filter(publication__journal=self).distinct())
 
     def __unicode__(self):
         return self.title
