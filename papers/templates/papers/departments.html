@@ -17,14 +17,8 @@ ENS
   <ul id="departmentsList">
   {% for dept in departments %}
     <li>
-        <table>
-            <tr><td>
-                 <a href="{% url 'department' dept.id %}">{{ dept }}</a>
-            </td></tr>
-            <tr><td>
+         <a href="{% url 'department' dept.id %}">{{ dept }}</a>
     {% include 'statistics/pie.html' with stats=dept.stats stats_counter=forloop.counter %}
-            </td></tr>
-        </table>
     </li>
   {% endfor %}
   </ul>

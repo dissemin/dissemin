@@ -545,6 +545,10 @@ h1#paperTitle {
     padding-left: 0;
 }
 
+#departmentsList li {
+    display: inline-block;
+}
+
 /* Department list */
 
 #membersList {
