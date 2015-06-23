@@ -4,6 +4,8 @@
   <div class="statspie_graph"></div>
   <div class="statspie_caption"></div>
   <script type="text/javascript">
+{% with obj.stats as stats %}
+{% with obj.object_id as object_id %}
 var data = [
     { "label":"{% trans 'Open Access' %}",
        "value":{{ stats.num_oa }},
@@ -21,5 +23,7 @@ var data = [
       "value":{{ stats.num_closed }},
       "url":"{{ object_id | statsurl:"closed" }}" } ];
   showStatsPie(data, "statspie_n{{ stats_counter }}");
+{% endwith %}
+{% endwith %}
   </script>
 </div>
