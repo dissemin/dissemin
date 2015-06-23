@@ -14,10 +14,17 @@ ENS
 <div id="fullPage">
   <h2>{% trans "Departments" %}</h2>
   
-  <ul>
+  <ul id="departmentsList">
   {% for dept in departments %}
-    <li><a href="{% url 'department' dept.id %}">{{ dept }}</a>
+    <li>
+        <table>
+            <tr><td>
+                 <a href="{% url 'department' dept.id %}">{{ dept }}</a>
+            </td></tr>
+            <tr><td>
     {% include 'statistics/pie.html' with stats=dept.stats stats_counter=forloop.counter %}
+            </td></tr>
+        </table>
     </li>
   {% endfor %}
   </ul>

@@ -534,6 +534,17 @@ h1#paperTitle {
     clear: both;
 }
 
+/* Departments list */
+
+#departmentsList {
+    -webkit-columns:2;
+    -moz-columns:2;
+    columns:2;
+    margin-left: 0px;
+    list-style: none;
+    padding-left: 0;
+}
+
 /* Department list */
 
 #membersList {
@@ -612,6 +623,10 @@ h1#paperTitle {
 	display:inline-block;
 	vertical-align:top;
 	margin-right:20px;
+}
+
+#departmentsList .statspie_graph {
+    margin-right: 5px;
 }
 
 .statspie_caption {
