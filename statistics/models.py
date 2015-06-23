@@ -73,6 +73,14 @@ class AccessStatistics(models.Model):
     def percentage_closed(self):
         if self.num_tot:
             return int(100.*self.num_closed/self.num_tot)
+    @property
+    def percentage_available(self):
+        if self.num_tot:
+            return int(100.*(self.num_oa + self.num_ok)/self.num_tot)
+    @property
+    def percentage_unavailable(self):
+        if self.num_tot:
+            return int(100.*(self.num_couldbe + self.num_unk + self.num_closed)/self.num_tot)
             
 
     @classmethod

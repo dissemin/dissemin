@@ -1,0 +1,14 @@
+{% load i18n %}
+{% load statsurl %}
+<div class="access-statistics">
+  <div class="stats_pctbar">
+  {% with obj.stats as stats %}
+  {% with obj.object_id as object_id %}
+    <div class="available" style="width:{{ stats.percentage_available }}%">
+    {% if stats.percentage_available > 50 %}{{ stats.percentage_available }}%</div>
+    {% else %}&nbsp;</div><div>{{ stats.percentage_available }}%</div>{% endif %}
+  </div>
+  <div class="stats_pctbar_caption">{{ stats.percentage_available }}% {% trans "of the papers by this publisher are available" %}</div>
+  {% endwith %}
+  {% endwith %}
+</div>

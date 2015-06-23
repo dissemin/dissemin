@@ -42,6 +42,13 @@
 
 {% endif %}
 
+{% if publisher.stats %}
+<span class="detailsTitle">{% trans "Availability statistics" %}</span>
+<div class="detailsContent">
+  {% include 'statistics/availabilitypct.html' with obj=publisher %}
+</div>
+{% endif %}
+
 {% if request.user.is_superuser %}
 </div>
 <span class="detailsTitle">{% trans "Policy" %}</span>
