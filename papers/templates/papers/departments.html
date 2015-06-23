@@ -18,7 +18,7 @@ ENS
   {% for dept in departments %}
     <li>
          <a href="{% url 'department' dept.id %}">{{ dept }}</a>
-    {% include 'statistics/pie.html' with stats=dept.stats stats_counter=forloop.counter %}
+         {% include 'statistics/pie.html' with stats=dept.stats stats_counter=forloop.counter object_id=dept.object_id %}
     </li>
   {% endfor %}
   </ul>

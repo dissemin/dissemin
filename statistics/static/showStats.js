@@ -56,8 +56,9 @@ function makeCaptions (data, target) {
 			.attr("class", "stats_caption_box")
 			.style("background-color", function(d, i) {return stats_colors[i]; })
 
-		captions.append("div")
+		captions.append("a")
 			.attr("class", "stats_caption_text")
+            .attr("href", function(d) { return d.url })
 			.text(function(d) { return d.label; })
 			.append("span")
 				.attr("class", "detail")

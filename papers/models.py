@@ -106,6 +106,11 @@ class Department(models.Model):
             self.save()
         self.stats.update(Paper.objects.filter(author__researcher__department=self).distinct())
 
+    @property
+    def object_id(self):
+        """Criteria to use in the search view to filter on this department"""
+        return "department=%d" % self.pk
+
 class ResearchGroup(models.Model):
     """
     A research group is a group of researchers working on the same topic. Researchers can
@@ -116,6 +121,11 @@ class ResearchGroup(models.Model):
     name = models.CharField(max_length=300)
     def __unicode__(self):
         return self.name
+
+    @property
+    def object_id(self):
+        """Criteria to use in the search view to filter on this research group"""
+        return "group=%d" % self.pk
 
 class NameVariant(models.Model):
     """
@@ -247,6 +257,11 @@ class Researcher(models.Model):
         researcher.update_variants()
         researcher.update_stats()
         return researcher
+    
+    @property
+    def object_id(self):
+        """Criteria to use in the search view to filter on this researcher"""
+        return "researcher=%d" % self.pk
 
 
 MAX_NAME_LENGTH = 256
@@ -357,6 +372,11 @@ class Name(models.Model):
 
     def first_letter(self):
         return self.last[0]
+
+    @property
+    def object_id(self):
+        """Criteria to use in the search view to filter on this name"""
+        return "name=%d" % self.pk
 
 # Papers matching one or more researchers
 class Paper(models.Model):
