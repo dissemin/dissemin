@@ -515,6 +515,8 @@ class Paper(models.Model):
             for m in matches:
                 if not self.pdf_url:
                     self.pdf_url = m.pdf_url
+                    if not self.pdf_url:
+                        self.pdf_url = m.splash_url
                 if m.source.oa:
                     self.oa_status = 'OA'
 
