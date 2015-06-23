@@ -6,7 +6,8 @@
   <script type="text/javascript">
 {% with obj.stats as stats %}
 {% with obj.object_id as object_id %}
-var data = [
+$(function() {
+  var detailed_data = [
     { "label":"{% trans 'Open Access' %}",
        "value":{{ stats.num_oa }},
        "url":"{{ object_id | statsurl:"oa" }}" },
@@ -22,7 +23,16 @@ var data = [
     { "label":"{% trans 'Upload is forbidden' %}",
       "value":{{ stats.num_closed }},
       "url":"{{ object_id | statsurl:"closed" }}" } ];
-  showStatsPie(data, "statspie_n{{ stats_counter }}");
+
+  var aggregated_data = [
+    { "label":"{% trans 'Available' %}",
+       "value":{{ stats.num_available }},
+       "url":"{{ object_id | statsurl:"ok" }}" },
+    { "label":"{% trans 'Unavailable' %}",
+       "value":{{ stats.num_unavailable }},
+       "url":"{{ object_id | statsurl:"nok" }}" }];
+  showStatsPie(detailed_data, aggregated_data, "statspie_n{{ stats_counter }}");
+  });
 {% endwith %}
 {% endwith %}
   </script>

@@ -47,6 +47,13 @@ class AccessStatistics(models.Model):
         self.save()
 
     @property
+    def num_available(self):
+        return self.num_oa + self.num_ok
+    @property
+    def num_unavailable(self):
+        return self.num_couldbe + self.num_unk + self.num_closed
+
+    @property
     def percentage_oa(self):
         if self.num_tot:
             return int(100.*self.num_oa/self.num_tot)
@@ -66,6 +73,7 @@ class AccessStatistics(models.Model):
     def percentage_closed(self):
         if self.num_tot:
             return int(100.*self.num_closed/self.num_tot)
+            
 
     @classmethod
     def update_all_stats(self, _class):
