@@ -21,6 +21,7 @@
 from __future__ import unicode_literals
 
 import lxml.etree as ET
+from io import StringIO, BytesIO
 
 import requests
 import requests.exceptions
@@ -45,6 +46,7 @@ PUBLISHER_NAME_ASSOCIATION_THRESHOLD = 10
 PUBLISHER_NAME_ASSOCIATION_FACTOR = 4
 
 def perform_romeo_query(search_terms):
+    search_terms = search_terms.copy()
     if ROMEO_API_KEY:
         search_terms['ak'] = ROMEO_API_KEY
     base_url = 'http://sherpa.ac.uk/romeo/api29.php'
@@ -60,7 +62,8 @@ def perform_romeo_query(search_terms):
 
     # Parse it
     try:
-        root = ET.fromstring(response)
+        parser = ET.XMLParser(encoding='utf-8')
+        root = ET.parse(BytesIO(response), parser)
     except ET.ParseError as e:
         with open('/tmp/romeo_response.xml', 'w') as f:
             f.write(response)
