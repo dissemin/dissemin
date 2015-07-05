@@ -44,8 +44,6 @@ $(function(){
     $(".unknownAuthorName").each(function(index) {
         makeAuthorEditable($(this), paperMerged);
     });
-});
-$(function(){
     $('.annotate-paper-radio').change(function(){
         console.log($(this));
         var value = $(this).val();
@@ -54,16 +52,49 @@ $(function(){
 });
 
 {% endif %}
+{% if paper.has_many_authors %}
+$(function(){
+    var summary = $('#authorSummary').clone();
+    var full = $('#authorFull').detach();
+    var setup_links = function(){
+    $('#show_all_authors').click(function(){
+        $('#authorSummary').replaceWith(full);
+        setup_links();
+      });
+    $('#show_less_authors').click(function(){
+        $('#authorFull').replaceWith(summary);
+        setup_links();
+     });
+    };
+    setup_links();
+});
+{% endif %}
 {% endblock %}
 
 {% block lists %}
 <p id="paperAuthors">
-{% for author in paper.sorted_authors %}{% if not forloop.first %},{% endif %}
-<span><span class="{% if author.researcher_id %}knownAuthorName{% else %}unknownAuthorName{% endif %}"
-    data-pk="{{ author.pk }}"
-    data-first="{{ author.name.first }}"
-    data-last="{{ author.name.last }}"
-    data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">{{ author | authorlink }}</span></span>{% endfor %}</p>
+{% if paper.has_many_authors %}
+    <div id="authorSummary">
+        {% include "papers/authorList.html" with author_list=paper.interesting_authors %}
+         {% with paper.nb_remaining_authors as nb_remaining_authors %}
+            {% blocktrans %}
+            and <a href="#" id="show_all_authors">{{ nb_remaining_authors }} other authors</a>
+            {% endblocktrans %}
+        {% endwith %}
+    </div>
+    <div id="authorFull">
+        {% with paper.author_count as nb_authors %}
+            {% blocktrans %}
+            All {{ nb_authors }} authors (<a href="#" id="show_less_authors">show less</a>):<br />
+            {% endblocktrans %}
+        {% endwith %}
+
+        {% include "papers/authorList.html" with author_list=paper.sorted_authors %}
+    </div>
+{% else %}
+    {% include "papers/authorList.html" with author_list=paper.sorted_authors %}
+{% endif %}
+</p>
 
 <div id="paperAvailability">
 
