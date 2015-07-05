@@ -125,6 +125,8 @@ doajExtractor = RegexExtractor([
         'pdf', r'\1'),
     ('identifier', re.compile(r'(http://doaj\.org/search[^ ]*)'),
         'splash', r'\1'),
+    ('identifier', re.compile(r'(https?://doaj\.org/article/[^ ]*)'),
+        'splash', r'\1'),
     ])
 
 perseeExtractor = RegexExtractor([
