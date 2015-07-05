@@ -126,20 +126,30 @@ def recompute_fingerprints():
     """
     merged = 0
     for p in Paper.objects.all():
-        authors = [(a.name.first,a.name.last) for a in p.author_set.all().select_related('name')]
-        new_fp = create_paper_fingerprint(p.title, authors)
-        if new_fp != p.fingerprint:
-            matching = list(Paper.objects.filter(fingerprint=new_fp))
-            if matching:
-                p.merge(matching[0])
-                merged += 1
-            else:
-                p.fingerprint = new_fp
-                try:
-                    p.save(update_fields=['fingerprint'])
-                except DatabaseError as e:
-                    pass
+        match = p.recompute_fingerprint_and_merge_if_needed()
+        if match is not None:
+            merged += 1
     print "%d papers merged" % merged
+
+def find_collisions():
+    """
+    Recomputes all the fingerprints and reports those which would be
+    merged by recompute_fingerprints()
+    """
+    dct = defaultdict(set)
+    for p in Paper.objects.all():
+        fp = p.new_fingerprint()
+        dct[fp].add(p)
+
+    for fp, s in dct.items():
+        if len(s) > 1:
+            first = True
+            for paper in s:
+                if first:
+                    first = False
+                    print "### "+paper.plain_fingerprint()
+                print paper.title
+                print paper.bare_author_names()
 
 def journal_to_publisher():
     """

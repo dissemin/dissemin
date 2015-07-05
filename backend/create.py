@@ -79,7 +79,7 @@ def _get_or_create_paper(title, author_names, pubdate, doi, visibility):
 
     # Otherwise look up the fingerprint
     plain_names = map(to_plain_name, author_names)
-    fp = create_paper_fingerprint(title, plain_names)
+    fp = create_paper_fingerprint(title, plain_names, pubdate.year)
     matches = Paper.objects.filter(fingerprint__exact=fp)
 
     p = None

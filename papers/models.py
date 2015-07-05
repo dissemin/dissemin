@@ -535,15 +535,23 @@ class Paper(models.Model):
                 seen_publishers.add(publication.publisher_id)
                 yield publication
 
-    def plain_fingerprint(self):
+    def bare_author_names(self):
+        """
+        The list of name pairs (first,last) of the authors
+        """
+        return [(a.name.first,a.name.last) for a in self.author_set.all().select_related('name')]
+
+    def plain_fingerprint(self, verbose=False):
         """
         Debugging function to display the plain fingerprint
         """
-        authors = [(a.name.first,a.name.last) for a in self.author_set.all().select_related('name')]
-        return create_paper_plain_fingerprint(self.title, authors)
+        fp = create_paper_plain_fingerprint(self.title, self.bare_author_names(), self.year)
+        if verbose:
+            print fp
+        return fp
 
-    def new_fingerprint(self):
-        buf = self.plain_fingerprint()
+    def new_fingerprint(self, verbose=False):
+        buf = self.plain_fingerprint(verbose)
         m = hashlib.md5()
         m.update(buf)
         return m.hexdigest()

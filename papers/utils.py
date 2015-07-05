@@ -142,44 +142,47 @@ def kill_html(s):
 ##### Paper fingerprinting
 
 stripped_chars = re.compile(r'[^- a-z0-9]')
-def create_paper_plain_fingerprint(title, authors):
+def create_paper_plain_fingerprint(title, authors, year):
     title = kill_html(title)
     title = remove_diacritics(title).lower()
     title = stripped_chars.sub('',title)
     title = title.strip()
     title = re.sub('[ -]+', '-', title)
     buf = title
+    
+    # If the title is just one word, we add the year (for "Preface", "Introduction" cases)
+    if not '-' in title:
+        buf += '-'+str(year)
 
     author_names_list = []
     for author in authors:
         if not author:
             continue
-        # TODO remove the - in "J.-W. Dupont" TODO TODO
-        # TODO take into account only the first initial
         author = (remove_diacritics(author[0]),remove_diacritics(author[1]))
-        # Initials of the given names
-        initials = map(lambda x: x[0].lower(), split_words(author[0]))
+        # Initials of the given names are not used anymore in the fingerprints
+        # initials = map(lambda x: x[0].lower(), split_words(author[0]))
+
         # Last name, without the small words such as "van", "der", "de"…
-        # TODO: remove this filter
+        # We could remove this filter? Or not as it is useful to get rid of name splitting errors
         last_words = filter(lambda x: x[0].isupper(), split_words(author[1]))
+
         # If no word was uppercased, fall back on all the words
         if not last_words:
             last_words = split_words(author[1])
         # Lowercase
         last_words = map(ulower, last_words)
-        fp = ('-'.join(initials))+'-'+('-'.join(last_words))
+        fp = '-'.join(last_words)
         author_names_list.append(fp)
 
     author_names_list.sort()
     for fp in author_names_list:
         buf += '/'+fp
 
-    print "Fingerprint: "+buf
     return buf
 
-def create_paper_fingerprint(title, authors):
+def create_paper_fingerprint(title, authors, year):
     m = hashlib.md5()
-    m.update(create_paper_plain_fingerprint(title, authors))
+    m.update(create_paper_plain_fingerprint(title, authors, year))
     return m.hexdigest()
 
 ### Partial date representation
