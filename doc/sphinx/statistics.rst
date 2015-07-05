@@ -7,6 +7,7 @@ Subpackages
 .. toctree::
 
     statistics.migrations
+    statistics.templatetags
 
 Submodules
 ----------

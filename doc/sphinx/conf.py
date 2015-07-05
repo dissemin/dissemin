@@ -271,7 +271,9 @@ import inspect
 import dissemin.settings
 from django.utils.html import strip_tags
 from django.utils.encoding import force_unicode
+import django
 
+django.setup()
 
 def process_docstring(app, what, name, obj, options, lines):
     # This causes import errors if left outside the function

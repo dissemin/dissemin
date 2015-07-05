@@ -7,6 +7,7 @@ Submodules
 .. toctree::
 
    sword.metadataFormatter
+   sword.submitOnZenodo
    sword.submitPaper
 
 Module contents
