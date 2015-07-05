@@ -92,10 +92,19 @@ def process_records(listRecords):
 
         print 'Saving record %s' % record[0].identifier()
         paper = get_or_create_paper(metadata['title'][0], authors, pubdate, doi)
+        if paper is None:
+            print "Paper creation failed, skipping"
+            continue
 
         # Save the record
-        add_oai_record(record, source, paper)
-        saved += 1
+        try:
+            add_oai_record(record, source, paper)
+            saved += 1
+        except ValueError as e:
+            print "Warning, OAI record "+identifier+" skipped:\n"+unicode(e)
+            if paper.is_orphan():
+                paper.visibility = 'CANDIDATE'
+                paper.save(update_fields=['visibility'])
     return (count,saved)
 
 

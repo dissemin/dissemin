@@ -29,6 +29,8 @@ from papers.models import *
 from papers.errors import MetadataSourceException
 from papers.utils import nstrip, remove_diacritics
 
+from publishers.models import Publisher, Journal, AliasPublisher
+
 from dissemin.settings import ROMEO_API_KEY
 
 

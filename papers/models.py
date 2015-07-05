@@ -631,6 +631,11 @@ class Paper(models.Model):
         """
         return 'http://core.ac.uk/search/'+quote(remove_diacritics(self.title))
 
+    def is_orphan(self):
+        """
+        When no publication or OAI record is associated with this paper.
+        """
+        return (self.oairecord_set.count() == 0 and self.publication_set.count() == 0)
 
 
 

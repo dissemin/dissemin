@@ -189,6 +189,8 @@ def parse_int(val, default):
         return int(val)
     except ValueError:
         return default
+    except TypeError:
+        return default
 
 def date_from_dateparts(dateparts):
     year = 1970 if len(dateparts) < 1 else parse_int(dateparts[0], 1970)

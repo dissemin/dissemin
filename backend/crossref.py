@@ -23,6 +23,7 @@ from __future__ import unicode_literals
 from urllib2 import URLError, HTTPError, build_opener
 from urllib import urlencode
 import json, requests
+from requests.exceptions import RequestException
 from unidecode import unidecode
 
 from celery import current_task
@@ -248,7 +249,10 @@ def fetch_dois_by_batch(doi_list):
     data = {'dois':json.dumps(doi_list)}
     try:
         req = requests.post('http://'+DOI_PROXY_DOMAIN+'/batch', data)
+        req.raise_for_status()
         return req.json()
+    except RequestException as e:
+        raise MetadataSourceException('Connecting to the DOI proxy at '+DOI_PROXY_DOMAIN+' failed: '+str(e))
     except ValueError as e:
         raise MetadataSourceException('Invalid JSON returned by the DOI proxy: '+str(e))
     except requests.exceptions.RequestException as e:

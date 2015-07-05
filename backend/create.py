@@ -22,6 +22,7 @@ from __future__ import unicode_literals
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
+from django.db import DataError
 import re
 
 from papers.utils import create_paper_fingerprint, date_from_dateparts, sanitize_html
@@ -30,19 +31,36 @@ from papers.models import *
 from papers.doi import to_doi
 from papers.name import to_plain_name, parse_comma_name
 
+from publishers.models import AliasPublisher
+
 import backend.crossref
 from backend.romeo import fetch_journal, fetch_publisher
 from backend.globals import *
 from backend.utils import maybe_recapitalize_title
 
 # TODO: this could be a method of ClusteringContextFactory ?
-# TODO: implement a dummy relevance classifier for the first phase
 def get_or_create_paper(title, author_names, pubdate, doi=None, visibility='VISIBLE'):
     """
     Creates a paper if it is not already present.
     The clustering algorithm is run to decide what authors should be 
     attributed to the paper.
+
+    :param title: The title of the paper (as a string). If it is too long for the database,
+                  ValueError is raised.
+    :param author_names: The ordered list of author names, as Name objects.
+    :param pubdate: The publication date, as a python date object
+    :param doi: If provided, also fetch metadata from CrossRef based on this DOI and
+                create the relevant publication.
+    :param visibility: The visibility of the paper if it is created. If another paper
+                exists, the visibility will be set to the maximum of the two possible
+                visibilities.
     """
+    try:
+        return _get_or_create_paper(title, author_names, pubdate, doi, visibility)
+    except DataError as e:
+        raise ValueError('Invalid paper, does not fit in the database schema:\n'+unicode(e))
+
+def _get_or_create_paper(title, author_names, pubdate, doi, visibility):
     # If a DOI is present, first look it up
     if doi:
         matches = Publication.objects.filter(doi__exact=doi)
@@ -101,8 +119,21 @@ CROSSREF_PUBTYPE_ALIASES = {
         'article':'journal-article',
         }
 
-# Create a Publication entry based on the DOI metadata
 def create_publication(paper, metadata):
+    """
+    Creates a Publication entry based on the DOI metadata (as returned by the JSON format
+    from CrossRef).
+
+    :param paper: the paper the publication object refers to
+    :param metadata: the CrossRef metadata (parsed from JSON)
+    :return: None if the metadata is invalid or the data does not fit in the database schema.
+    """
+    try:
+        return _create_publication(paper, metadata)
+    except DataError:
+        pass
+
+def _create_publication(paper, metadata):
     if not metadata:
         return
     if not 'container-title' in metadata or not metadata['container-title']:
@@ -194,16 +225,16 @@ def find_duplicate_records(source, identifier, about, splash_url, pdf_url):
             return m
 
 def create_oairecord(**kwargs):
-    if 'source' not in kwargs:
+    if kwargs.get('source') is None:
         raise ValueError('No source provided to create the OAI record.')
     source = kwargs['source']
-    if 'identifier' not in kwargs:
+    if kwargs.get('identifier') is None:
         raise ValueError('No identifier provided to create the OAI record.')
     identifier = kwargs['identifier']
-    if 'about' not in kwargs:
+    if kwargs.get('about') is None:
         raise ValueError('No paper provided to create the OAI record.')
     about = kwargs['about']
-    if 'splash_url' not in kwargs:
+    if kwargs.get('splash_url') is None:
         raise ValueError('No URL provided to create the OAI record.')
     splash_url = kwargs['splash_url']
 
@@ -245,7 +276,10 @@ def create_oairecord(**kwargs):
                 match.pubtype = PAPER_TYPE_PREFERENCE[idx]
             
         if changed:
-            match.save()
+            try:
+                match.save()
+            except DataError as e:
+                raise ValueError('Unable to create OAI record:\n'+unicode(e))
 
         if about.pk != match.about.pk:
             about.merge(match.about)
