@@ -3,6 +3,6 @@ numpy
 scipy
 scikit-learn
 czipfile
-httplib
+httplib2
 requests
 titlecase

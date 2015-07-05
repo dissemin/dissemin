@@ -1,4 +1,4 @@
-import httplib
+import httplib2
 from zipfile import *
 from lxml import etree
 from django import form
@@ -14,9 +14,9 @@ def encodeUserData(user, password):
 u='dissemin'
 p='dissemin'
 
-conn = httplib.HTTPConnection("api-preprod.archives-ouvertes.fr")
+conn = httplib2.HTTPConnection("api-preprod.archives-ouvertes.fr")
 
-httplib.HTTPConnection.debuglevel = 1 #Uncomment to debug mode
+httplib2.HTTPConnection.debuglevel = 1 #Uncomment to debug mode
 
 
 #TODO add specific headers for export-toarxiv and so one
