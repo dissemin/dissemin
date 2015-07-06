@@ -145,7 +145,7 @@ def parse_crossref_date(date):
         except ValueError:
             pass
     if 'raw' in date:
-        ret = tolerant_datestamp_to_datetime(date).date()
+        ret = tolerant_datestamp_to_datetime(date['raw']).date()
     return ret
 
 def get_publication_date(metadata):

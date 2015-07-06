@@ -29,6 +29,8 @@ from backend.tasks import *
 from papers.models import *
 from publishers.models import *
 
+import datetime
+
 from lxml import etree
 
 # SHERPA/RoMEO interface
@@ -81,8 +83,104 @@ class CoreTest(PrefilledTest):
 
 # Test that the CrossRef interface works
 class CrossRefTest(PrefilledTest):
-    def test_crossref_interface_works(self):
-        fetch_dois_for_researcher(self.r1.pk)
+    def test_fetch_single_doi(self):
+        doi = '10.5380/dp.v1i1.1922'
+        metadata = fetch_metadata_by_DOI(doi)
+        self.assertEqual(metadata,
+                {'publisher': 'Universidade Federal do Parana',
+                 'DOI': '10.5380/dp.v1i1.1922',
+                 'subtitle': [],
+                 'author': [{'given': 'Frederic', 'family': 'Worms'}],
+                 'URL': 'http://dx.doi.org/10.5380/dp.v1i1.1922',
+                 'issued': {'date-parts': [[2005, 3, 18]]},
+                 'reference-count': 0,
+                 'title': 'A concep\xe7\xe3o bergsoniana do tempo',
+                 'volume': '1',
+                 'source': 'CrossRef',
+                 'prefix': 'http://id.crossref.org/prefix/10.5380',
+                 'score': 1.0,
+                 'deposited': {'timestamp': 1421107200000, 'date-parts': [[2015, 1, 13]]},
+                 'type': 'journal-article',
+                 'container-title': 'DoisPontos',
+                 'indexed': {'timestamp': 1421405831942, 'date-parts': [[2015, 1, 16]]}, 
+                 'issue': '1',
+                 'ISSN': ['2179-7412', '1807-3883'],
+                 'member': 'http://id.crossref.org/member/3785'})
+
+    def test_parse_crossref_date_incomplete(self):
+        self.assertEqual(
+                parse_crossref_date({'date-parts': [[2015,07,06]]}),
+                datetime.date(year=2015,month=07,day=06))
+        self.assertEqual(
+                parse_crossref_date({'date-parts': [[2015,07]]}),
+                datetime.date(year=2015,month=07,day=01))
+        self.assertEqual(
+                parse_crossref_date({'date-parts': [[2015]]}),
+                datetime.date(year=2015,month=01,day=01))
+
+    def test_parse_crossref_date_raw(self):
+        self.assertEqual(
+                parse_crossref_date({'raw': '2015'}),
+                datetime.date(year=2015,month=01,day=01))
+        self.assertEqual(
+                parse_crossref_date({'raw': '2015-07'}),
+                datetime.date(year=2015,month=07,day=01))
+        self.assertEqual(
+                parse_crossref_date({'raw': '2015-07-06'}),
+                datetime.date(year=2015,month=07,day=06))
+
+    def test_get_publication_date(self):
+        self.assertEqual(
+                get_publication_date(fetch_metadata_by_DOI('10.5281/zenodo.18898')),
+                datetime.date(year=2015,month=01,day=01))
+        self.assertEqual(
+                get_publication_date(fetch_metadata_by_DOI('10.5380/dp.v1i1.1919')),
+                datetime.date(year=2005,month=03,day=18))
+
+    def test_batch_queries(self):
+        dois = [
+            '10.1007/978-3-540-46375-7_2',
+            '10.1007/978-3-540-46375-7_9',
+            '10.2307/2540916',
+            '10.1016/s1169-8330(00)80059-9',
+            '10.1017/s0022112009008003',
+            '10.1051/proc/2011014',
+            '10.1016/0169-5983(88)90079-2',
+            '10.1080/14685240600601061',
+            '10.1103/physreve.79.026303',
+            '10.1103/physreve.66.046307',
+            '10.1103/physrevlett.95.244502',
+            '10.1017/s0022112089002351',
+            '10.1063/1.4738850',
+            '10.1103/physrevlett.87.054501',
+            '10.1080/14685248.2012.711476',
+            '10.1007/978-94-011-4177-2_12',
+            '10.1007/978-1-4615-4697-9_2',
+            '10.1007/978-1-4612-0137-3_7',
+            '10.1007/978-1-4020-6472-2_35']
+        incremental = list(fetch_dois_incrementally(dois))
+        self.assertEqual(len(incremental), len(dois))
+        if DOI_PROXY_SUPPORTS_BATCH:
+            batch = fetch_dois_by_batch(dois)
+            self.assertEqual(incremental, batch)
+
+    def test_convert_to_name_pair(self):
+        self.assertEqual(
+                convert_to_name_pair({'family':'Farge','given':'Marie'}),
+                ('Marie','Farge'))
+        self.assertEqual(
+                convert_to_name_pair({'literal':'Marie Farge'}),
+                ('Marie','Farge'))
+        self.assertEqual(
+                convert_to_name_pair({'literal':'Farge, Marie'}),
+                ('Marie','Farge'))
+        self.assertEqual(
+                convert_to_name_pair({'family':'Arvind'}),
+                ('','Arvind'))
+
+    def test_fetch_dois_for_researcher(self):
+        pass
+        #fetch_dois_for_researcher(self.r1.pk)
 
 # Test that the proaixy interface works
 class ProaixyTest(PrefilledTest):
