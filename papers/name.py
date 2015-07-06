@@ -38,7 +38,8 @@ def match_names(a,b):
     Examples:
     > ('Robin', 'Ryder'),('R.', 'Ryder'): True
     > ('Robin J.', 'Ryder'),('R.', 'Ryder'): True
-    > ('R. J.', 'Ryder'),('J.', 'Ryder'): False
+    > ('R. J.', 'Ryder'),('J.', 'Ryder'): True
+    > ('R. K.', 'Ryder'),('K.', 'Ryder'): False
     > ('Claire', 'Mathieu'),('Claire', 'Kenyon-Mathieu'): False
     """
     return name_similarity(a,b) > 0.
@@ -278,4 +279,15 @@ def parse_comma_name(name):
 
     return (first_name,last_name)
 
+### Name unification heuristics ###
+
+def name_unification(a, b):
+    """
+    Returns the unified name of two matching names
+
+    :param a: the first name pair (pair of unicode strings)
+    :param b: the second name pair (idem)
+    :returns: a unified name pair.
+    """
+    return a
 
