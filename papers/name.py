@@ -47,9 +47,21 @@ def match_names(a,b):
 
 initial_re = re.compile(r'[A-Z](\.,;)*$')
 def normalize_name_words(w):
-    """ If it is an initial, ensure it is of the form "T.", and recapitalize fully capitalized words. """
-    name_words, separators = split_name_words(w.strip())
+    """
+    If it is an initial, ensure it is of the form "T.", and recapitalize fully capitalized words.
+    Also convert things like "Jp." to "J.-P."
+    """
+    name_words, separators = split_name_words(w)
     name_words = map(recapitalize_word, name_words)
+    return rebuild_name(name_words, separators)
+
+def rebuild_name(name_words, separators):
+    """ Reconstructs a name string out of words and separators, as returned by split_name_words.
+    len(name_words) = len(separators) + 1 is assumed.
+
+    :param name_words: The list of name words (without periods)
+    :param separators: The list of separators ('' or '-'). 
+    """
     separators = map(lambda x: ' ' if x == '' else x, separators)
     output = ''
     for idx, word in enumerate(name_words):
@@ -69,7 +81,7 @@ def split_name_words(string):
     :returns: A pair of lists. The first one is the list of words, the second is the
               list of separators (either '' or '-')
     """
-    buf = string
+    buf = string.strip()
     words = []
     separators = []
     match = name_separator_re.search(buf)
@@ -80,10 +92,18 @@ def split_name_words(string):
             buf = buf[match.end(1):]
             has_period = len(match.group(2)) > 0
             if has_period:
-                for idx, char in enumerate(word):
-                    words.append(char.upper())
-                    if idx < len(word)-1:
-                        separators.append('-')
+                if len(word) <= 3:
+                    # A case like "Jp." or "Jpf."
+                    # In this case we understand each letter as an initial
+                    for idx, char in enumerate(word):
+                        words.append(char.upper())
+                        if idx < len(word)-1:
+                            separators.append('-')
+                else:
+                    # A case like "Joseph."
+                    # The period is probably here by mistake
+                    # We want to avoid translating it to "J. O. S. E. P. H."
+                    words.append(word)
             else:
                 words.append(word)
             if len(match.group(4)):
@@ -111,6 +131,8 @@ def recapitalize_word(w):
 
 def match_first_names(pair):
     a,b = pair
+    if a is None or b is None:
+        return True
     if len(a) == 1 and len(b) > 0:
         return a.lower() == b[0].lower()
     elif len(b) == 1 and len(a) > 0:
@@ -175,9 +197,13 @@ def name_similarity(a,b):
         return False
     (firstA,lastA) = a
     (firstB,lastB) = b
-    if lastA.lower() != lastB.lower():
+    firstA = iunaccent(firstA)
+    firstB = iunaccent(firstB)
+    lastA = iunaccent(lastA)
+    lastB = iunaccent(lastB)
+    if lastA != lastB:
         return 0.
-    if firstA.lower() == firstB.lower():
+    if firstA == firstB:
         return 1.
     partsA, sepsA = split_name_words(firstA)
     partsB, sepsB = split_name_words(firstB)
@@ -204,9 +230,11 @@ def name_similarity(a,b):
 
 #### Helpers for the name splitting heuristic ######
 
-# Does this string contain a name initial?
+# Is this string a name initial?
 def contains_initials(s):
-    return initial_re.search(iunaccent(s)) != None
+    # TODO delete the following commented dead code
+    return len(s) == 1 #initial_re.search(iunaccent(s)) != None
+
 # Is this word fully capitalized?
 def is_fully_capitalized(s):
     return lowercase_re.search(remove_diacritics(s)) == None
@@ -247,7 +275,7 @@ def parse_comma_name(name):
         # In this case name_tools does it well
         prefix, first_name, last_name, suffix = name_tools.split(name)
     else:
-        words = space_re.split(name)
+        words, separators = split_name_words(name)
         if not words:
             return ('','')
         first_name = None
@@ -322,6 +350,22 @@ def parse_comma_name(name):
 
 ### Name unification heuristics ###
 
+def zipNone(lstA, lstB):
+    """
+    Just as zip(), but pads with None the shortest list so that the list lengths match
+    """
+    la = len(lstA)
+    lb = len(lstB)
+    def aux():
+        for i in range(max(la,lb)):
+            objA, objB = None, None
+            if i < la:
+                objA = lstA[i]
+            if i < lb:
+                objB = lstB[i]
+            yield (objA,objB)
+    return list(aux())
+
 def name_unification(a, b):
     """
     Returns the unified name of two matching names
@@ -330,5 +374,52 @@ def name_unification(a, b):
     :param b: the second name pair (idem)
     :returns: a unified name pair.
     """
-    return a
+    firstA, lastA = a
+    firstB, lastB = b
+
+    if lastA != lastB:
+        return None
+
+    wordsA, sepsA = split_name_words(firstA) 
+    wordsB, sepsB = split_name_words(firstB)
+
+    def keep_best(pair):
+        a,b = pair
+        if a is None:
+            return b
+        elif b is None:
+            return a
+        elif len(a) < len(b):
+            return b
+        else:
+            return a
+
+    words = zipNone(wordsA, wordsB)
+    seps = zipNone(sepsA, sepsB)
+    best_words = None
+    if all(map(match_first_names, words)):
+        # Forward match
+        best_words = map(keep_best, words)
+        best_seps = map(keep_best, seps)
+    else:
+        wordsA.reverse()
+        wordsB.reverse()
+        sepsA.reverse()
+        sepsB.reverse()
+        words = zipNone(wordsA, wordsB)
+        seps = zipNone(sepsA, sepsB)
+        if all(map(match_first_names, words)):
+            # Backward match
+            best_words = map(keep_best, words)
+            best_words.reverse()
+            seps.reverse()
+            best_seps = map(keep_best, seps)
+
+    if best_words is not None:
+        firstUnified = rebuild_name(best_words, best_seps)
+        return firstUnified, lastA
+
+    # No match
+    return None
+
 

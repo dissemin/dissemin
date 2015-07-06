@@ -51,6 +51,9 @@ class MatchNamesTest(unittest.TestCase):
     def test_last_name(self):
         self.assertFalse(match_names(('Claire','Mathieu'),('Claire','Kenyon-Mathieu')))
 
+    def test_unicode(self):
+        self.assertTrue(match_names(('Thomas Émile','Bourgeat'), ('T. E.','Bourgeat')))
+
 class SplitNameWordsTest(unittest.TestCase):
     def test_simple(self):
         self.assertEqual(split_name_words('Jean'), (['Jean'],[]))
@@ -73,6 +76,12 @@ class SplitNameWordsTest(unittest.TestCase):
     def test_flattened(self):
         self.assertEqual(split_name_words('JP.'), (['J','P'],['-']))
         self.assertEqual(split_name_words('Jp.'), (['J','P'],['-']))
+
+    def test_probably_not_flattened(self):
+        self.assertEqual(split_name_words('Joseph.'), (['Joseph'],[]))
+
+    def test_strange_characters(self):
+        self.assertEqual(split_name_words('Jean*-Frederic'), (['Jean','Frederic'],['-']))
 
 class NormalizeNameWordsTest(unittest.TestCase):
     def test_simple(self):
@@ -181,15 +190,16 @@ class NameUnificationTest(unittest.TestCase):
         self.assertEqual(name_unification(('W. T.','Gowers'), ('Timothy','Gowers')), ('W. Timothy','Gowers'))
 
     def test_flattened_initials(self):
-        self.assertEqual(name_unification(('J. P.','Gendre'), ('Jp.','Gendre')), ('J. P.','Gendre'))
+        self.assertEqual(name_unification(('J. P.','Gendre'), ('Jp.','Gendre')), ('J.-P.','Gendre'))
+        self.assertEqual(name_unification(('J. Pierre','Gendre'), ('Jp.','Gendre')), ('J.-Pierre','Gendre'))
 
     def test_empty_first_name(self):
         self.assertEqual(name_unification(('', 'Placet'), ('Vincent', 'Placet')), ('Vincent', 'Placet'))
 
     def test_name_splitting_error(self):
+        # Not sure we can get that right with a reasonable rule
         self.assertEqual(name_unification(('Johannes G. de', 'Vries'), ('Johannes G.','de Vries')),
                 ('Johannes G.','de Vries'))
+        self.assertEqual(name_unification(('Éric Colin', 'de Verdière'), ('E.','Colin de Verdière')),
+                ('Éric','Colin de Verdière'))
 
-    def test_strange_characters(self):
-        self.assertEqual(name_unification(('Jean*-Frederic', 'Colombel'),('Jean-Frederic','Colombel')),
-                ('Jean-Frederic','Colombel'))
