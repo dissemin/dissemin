@@ -36,6 +36,9 @@ class MatchNamesTest(unittest.TestCase):
         self.assertTrue(match_names(('R. J.','Ryder'),('J.','Ryder')))
         self.assertTrue(match_names(('W. T.','Gowers'),('Timothy','Gowers')))
 
+    def test_middle_initial(self):
+        self.assertFalse(match_names(('W. T. K.', 'Gowers'),('Timothy', 'Gowers')))
+
     def test_hyphen(self):
         self.assertTrue(match_names(('J.-P.','Dupont'),('J.','Dupont')))
         self.assertTrue(match_names(('Jean-Pierre','Dupont'),('J.-P.','Dupont')))
@@ -48,12 +51,87 @@ class MatchNamesTest(unittest.TestCase):
     def test_last_name(self):
         self.assertFalse(match_names(('Claire','Mathieu'),('Claire','Kenyon-Mathieu')))
 
+class SplitNameWordsTest(unittest.TestCase):
+    def test_simple(self):
+        self.assertEqual(split_name_words('Jean'), (['Jean'],[]))
+        self.assertEqual(split_name_words('Jean Pierre'), (['Jean','Pierre'], ['']))
+        self.assertEqual(split_name_words('Jean-Pierre'), (['Jean','Pierre'], ['-']))
+        self.assertEqual(split_name_words('J.-P.'), (['J','P'], ['-']))
+        self.assertEqual(split_name_words('J. P.'), (['J','P'], ['']))
+
+    def test_awkward_spacing(self):
+        self.assertEqual(split_name_words('J.P.'), (['J','P'],['']))
+        self.assertEqual(split_name_words('J.  P.'), (['J','P'],['']))
+        self.assertEqual(split_name_words('Jean - Pierre'), (['Jean','Pierre'],['-']))
+
+    def test_unicode(self):
+        self.assertEqual(split_name_words('Émilie'), (['Émilie'],[]))
+        self.assertEqual(split_name_words('José'), (['José'],[]))
+        self.assertEqual(split_name_words('José Alphonse'), (['José', 'Alphonse'],['']))
+        self.assertEqual(split_name_words('É. R.'), (['É','R'],['']))
+    
+    def test_flattened(self):
+        self.assertEqual(split_name_words('JP.'), (['J','P'],['-']))
+        self.assertEqual(split_name_words('Jp.'), (['J','P'],['-']))
+
+class NormalizeNameWordsTest(unittest.TestCase):
+    def test_simple(self):
+        self.assertEqual(normalize_name_words('Jean'), 'Jean')
+        self.assertEqual(normalize_name_words('Jean-Pierre'), 'Jean-Pierre')
+        self.assertEqual(normalize_name_words('John Mark'), 'John Mark')
+        self.assertEqual(normalize_name_words('JEAN-PIERRE'), 'Jean-Pierre')
+        self.assertEqual(normalize_name_words('JOHN MARK'), 'John Mark')
+
+    def test_unicode(self):
+        self.assertEqual(normalize_name_words('JOSÉ'), 'José')
+        self.assertEqual(normalize_name_words('JOSÉ-ALAIN'), 'José-Alain')
+        self.assertEqual(normalize_name_words('José'), 'José')
+        self.assertEqual(normalize_name_words('ÉMILIE'), 'Émilie')
+        self.assertEqual(normalize_name_words('Émilie'), 'Émilie')
+
+    def test_spacing(self):
+        self.assertEqual(normalize_name_words('John  Mark'), 'John Mark')
+        self.assertEqual(normalize_name_words(' John  Mark'), 'John Mark')
+        self.assertEqual(normalize_name_words(' John Mark \n'), 'John Mark')
+        self.assertEqual(normalize_name_words('Jean - Pierre'), 'Jean-Pierre')
+        self.assertEqual(normalize_name_words('J.P. Morgan'), 'J. P. Morgan')
+
+    def test_flattened(self):
+        self.assertEqual(normalize_name_words('JP. Morgan'), 'J.-P. Morgan')
+        self.assertEqual(normalize_name_words('Jp. Morgan'), 'J.-P. Morgan')
+
+    def test_involutive(self):
+        lst = [
+                'Jean',
+                'Jean-Pierre',
+                'John Mark',
+                'JEAN-PIERRE',
+                'JOHN MARK',
+                'JOSÉ',
+                'JOSÉ-ALAIN',
+                'José',
+                'ÉMILIE',
+                'Émilie',
+                'John  Mark',
+                'Jean - Pierre',
+                'J.P. Morgan',
+                'JP. Morgan',
+                'Jp. Morgan',
+              ]
+        for sample in lst:
+            normalized = normalize_name_words(sample)
+            self.assertEqual(normalized, normalize_name_words(normalized))
+
 class RecapitalizeWordTest(unittest.TestCase):
     def test_recapitalize_word(self):
         self.assertEqual(recapitalize_word('Dupont'),'Dupont')
         self.assertEqual(recapitalize_word('van'),'van')
         self.assertEqual(recapitalize_word('CLARK'),'Clark')
         self.assertEqual(recapitalize_word('GRANROTH-WILDING'),'Granroth-Wilding')
+
+    def test_unicode(self):
+        self.assertEqual(recapitalize_word('ÉMILIE'), 'Émilie')
+        self.assertEqual(recapitalize_word('JOSÉ'), 'José')
 
 class ParseCommaNameTest(unittest.TestCase):
     def test_simple(self):

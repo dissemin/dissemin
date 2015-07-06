@@ -23,14 +23,15 @@ from __future__ import unicode_literals
 import re
 import name_tools
 
-from papers.utils import split_words, iunaccent, remove_diacritics, isupper
+from papers.utils import iunaccent, remove_diacritics, isupper
 
 # Name managemement: heuristics to separate a name into (first,last)
 comma_re = re.compile(r',+')
 space_re = re.compile(r'\s+')
-initial_re = re.compile(r'(^|\W)\w(\W|$)')
-lowercase_re = re.compile(r'[a-z]')
-letter_re = re.compile(r'\w')
+initial_re = re.compile(r'(^|\W)\w(\W|$)', re.UNICODE)
+lowercase_re = re.compile(r'[a-z]') # TODO make this unicode-portable
+# See http://stackoverflow.com/questions/5224835/what-is-the-proper-regular-expression-to-match-all-utf-8-unicode-lowercase-lette
+letter_re = re.compile(r'\w', re.UNICODE)
 
 def match_names(a,b):
     """
@@ -47,12 +48,52 @@ def match_names(a,b):
 initial_re = re.compile(r'[A-Z](\.,;)*$')
 def normalize_name_words(w):
     """ If it is an initial, ensure it is of the form "T.", and recapitalize fully capitalized words. """
-    w = w.strip()
-    words = w.split()
-    words = map(recapitalize_word, words)
-    words = map(lambda w: w[0]+'.' if initial_re.match(w) else w, words)
-    return ' '.join(words)
+    name_words, separators = split_name_words(w.strip())
+    name_words = map(recapitalize_word, name_words)
+    separators = map(lambda x: ' ' if x == '' else x, separators)
+    output = ''
+    for idx, word in enumerate(name_words):
+        output += word
+        if len(word) == 1:
+            output += '.'
+        if idx < len(separators):
+            output += separators[idx]
+        elif idx < len(name_words)-1:
+            print "WARNING: incorrect name splitting for '"+w+"'"
+            output += ' '
+    return output
 
+name_separator_re = re.compile(r'\w\b((\.*) *(-*) *)(\w|$)', re.UNICODE)
+def split_name_words(string):
+    """
+    :returns: A pair of lists. The first one is the list of words, the second is the
+              list of separators (either '' or '-')
+    """
+    buf = string
+    words = []
+    separators = []
+    match = name_separator_re.search(buf)
+    while match is not None:
+        pos = match.start(1)
+        if pos > 0 and pos < len(string):
+            word = buf[:pos]
+            buf = buf[match.end(1):]
+            has_period = len(match.group(2)) > 0
+            if has_period:
+                for idx, char in enumerate(word):
+                    words.append(char.upper())
+                    if idx < len(word)-1:
+                        separators.append('-')
+            else:
+                words.append(word)
+            if len(match.group(4)):
+                separators.append(match.group(3))
+        else:
+            break
+        match = name_separator_re.search(buf)
+    if buf:
+        words.append(buf)
+    return (words,separators)
 
 def recapitalize_word(w):
     """ Turns every fully capitalized word into an uncapitalized word (except for the first character) """
@@ -138,8 +179,8 @@ def name_similarity(a,b):
         return 0.
     if firstA.lower() == firstB.lower():
         return 1.
-    partsA = split_words(firstA)
-    partsB = split_words(firstB)
+    partsA, sepsA = split_name_words(firstA)
+    partsB, sepsB = split_name_words(firstB)
     parts = zip(partsA, partsB)
     if not all(map(match_first_names, parts)):
         # Try to match in reverse
