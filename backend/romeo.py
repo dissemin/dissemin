@@ -30,7 +30,7 @@ from papers.models import *
 from papers.errors import MetadataSourceException
 from papers.utils import nstrip, remove_diacritics
 
-from publishers.models import Publisher, Journal, AliasPublisher
+from publishers.models import Publisher, Journal, AliasPublisher, PublisherCondition, PublisherCopyrightLink
 
 from dissemin.settings import ROMEO_API_KEY
 
@@ -289,6 +289,7 @@ def get_or_create_publisher(romeo_xml_description):
     publisher = Publisher(name=name, alias=alias, url=url, preprint=preprint,
             postprint=postprint, pdfversion=pdfversion, romeo_id=romeo_id,
             oa_status=status)
+
     publisher.save()
 
     # Add the conditions, restrictions, and copyright
@@ -307,7 +308,7 @@ def get_or_create_publisher(romeo_xml_description):
             c.save()
 
     # Update the publisher status
-    publisher.status = publisher.classify_oa_status()
+    publisher.oa_status = publisher.classify_oa_status()
     publisher.save(update_fields=['oa_status'])
     
     for link in xml.findall('./copyrightlinks/copyrightlink'):

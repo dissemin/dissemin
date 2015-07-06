@@ -26,27 +26,27 @@ from papers.name import *
 
 class MatchNamesTest(unittest.TestCase):
     def test_simple(self):
-        self.assertEqual(match_names(('Robin','Ryder'),('Robin','Ryder')), True)
-        self.assertEqual(match_names(('Robin','Ryder'),('R.','Ryder')), True)
-        self.assertEqual(match_names(('R. J.','Ryder'),('R.','Ryder')), True)
-        self.assertEqual(match_names(('Jean', 'Dupont'),('Joseph','Dupont')), False)
-        self.assertEqual(match_names(('R. K.','Ryder'),('J.','Ryder')), False)
+        self.assertTrue(match_names(('Robin','Ryder'),('Robin','Ryder')))
+        self.assertTrue(match_names(('Robin','Ryder'),('R.','Ryder')))
+        self.assertTrue(match_names(('R. J.','Ryder'),('R.','Ryder')))
+        self.assertFalse(match_names(('Jean', 'Dupont'),('Joseph','Dupont')))
+        self.assertFalse(match_names(('R. K.','Ryder'),('J.','Ryder')))
 
     def test_reverse_order(self):
-        self.assertEqual(match_names(('R. J.','Ryder'),('J.','Ryder')), True)
-        self.assertEqual(match_names(('W. T.','Gowers'),('Timothy','Gowers')), True)
+        self.assertTrue(match_names(('R. J.','Ryder'),('J.','Ryder')))
+        self.assertTrue(match_names(('W. T.','Gowers'),('Timothy','Gowers')))
 
     def test_hyphen(self):
-        self.assertEqual(match_names(('J.-P.','Dupont'),('J.','Dupont')), True)
-        self.assertEqual(match_names(('Jean-Pierre','Dupont'),('J.-P.','Dupont')), True)
+        self.assertTrue(match_names(('J.-P.','Dupont'),('J.','Dupont')))
+        self.assertTrue(match_names(('Jean-Pierre','Dupont'),('J.-P.','Dupont')))
 
     def test_flattened_initials(self):
-        self.assertEqual(match_names(('Jamie Oliver','Ryder'),('Jo','Ryder')), False)
-        self.assertEqual(match_names(('Jean-Pierre','Dupont'),('JP.','Dupont')), True)
-        self.assertEqual(match_names(('Jean-Pierre','Dupont'),('Jp.','Dupont')), True)
+        self.assertFalse(match_names(('Jamie Oliver','Ryder'),('Jo','Ryder')))
+        self.assertTrue(match_names(('Jean-Pierre','Dupont'),('JP.','Dupont')))
+        self.assertTrue(match_names(('Jean-Pierre','Dupont'),('Jp.','Dupont')))
 
     def test_last_name(self):
-        self.assertEqual(match_names(('Claire','Mathieu'),('Claire','Kenyon-Mathieu')), False)
+        self.assertFalse(match_names(('Claire','Mathieu'),('Claire','Kenyon-Mathieu')))
 
 class RecapitalizeWordTest(unittest.TestCase):
     def test_recapitalize_word(self):
