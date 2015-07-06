@@ -70,16 +70,41 @@ class RomeoTest(TestCase):
 class PrefilledTest(TestCase):
     def setUp(self):
         self.d = Department.objects.create(name='Chemistry dept')
+        self.di = Department.objects.create(name='Comp sci dept')
         self.r1 = Researcher.create_from_scratch('Isabelle', 'Aujard', self.d, None, None, None)
         self.r2 = Researcher.create_from_scratch('Ludovic', 'Jullien', self.d, None, None, None)
+        self.r3 = Researcher.create_from_scratch('Antoine', 'Amarilli', self.di, None, None, None)
         self.hal = OaiSource.objects.create(identifier='hal',
                 name='HAL',
+                default_pubtype='preprint')
+        self.arxiv = OaiSource.objects.create(identifier='arxiv',
+                name='arXiv',
                 default_pubtype='preprint')
 
 # Test that the CORE interface works
 class CoreTest(PrefilledTest):
+    def test_query(self):
+        self.assertIsInstance(
+                query_core('/articles/get/23770479', {}),
+                dict)
+        self.assertIsInstance(
+                query_core('/search/Geoffrey+Bodenhausen', {}),
+                dict)
+
+    def test_search(self):
+        num_results = 10
+        record_list = list(search_single_query('authorsString:(Antoine Amarilli)', num_results))
+        self.assertEqual(len(record_list), num_results)
+
+    def test_single_query(self):
+        num_results = 210 # so that multiple batches are done
+        records = list(fetch_paper_metadata_by_core_ids(search_single_query('homotopy', num_results)))
+        self.assertTrue(len(records) < num_results)
+        self.assertTrue(len(records) > 1)
+
     def test_core_interface_works(self):
         fetch_papers_from_core_for_researcher(self.r1)
+        fetch_papers_from_core_for_researcher(self.r3)
 
 # Test that the CrossRef interface works
 class CrossRefTest(PrefilledTest):
@@ -179,11 +204,15 @@ class CrossRefTest(PrefilledTest):
                 ('','Arvind'))
 
     def test_fetch_dois_for_researcher(self):
-        pass
-        #fetch_dois_for_researcher(self.r1.pk)
+        fetch_dois_for_researcher(self.r1.pk)
 
 # Test that the proaixy interface works
 class ProaixyTest(PrefilledTest):
-    def test_proaixy_interface_works(self):
+    def test_proaixy_interface_works_1(self):
         fetch_records_for_researcher(self.r1.pk)
+        clustering_context_factory.commitThemAll()
+    
+    def test_proaixy_interface_works_2(self):
+        fetch_records_for_researcher(self.r3.pk)
+        clustering_context_factory.commitThemAll()
 

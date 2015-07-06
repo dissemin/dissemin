@@ -297,7 +297,7 @@ def fetch_publications(researcher):
         if all(not elem.is_known for elem in authors) or authors == []:
             skipped += 1
             continue
-        print "# Saved."
+        print "Saved doi "+doi
         paper = backend.create.get_or_create_paper(title, authors, pubdate) # don't let this function
         # create the publication, because it would re-fetch the metadata from CrossRef
         backend.create.create_publication(paper, metadata)

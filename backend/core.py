@@ -80,7 +80,6 @@ def query_core(url, params, post_payload=None, retries=CORE_RETRIES, wait_time=C
             raise MetadataSourceException('Invalid CORE API key.')
         f.raise_for_status()
         parsed = f.json()
-        print "CORE answered back"
         return parsed
     except ValueError as e:
         raise MetadataSourceException('CORE returned invalid JSON payload for request '+full_url+'\n'+str(params)+'\n'+str(e))
@@ -97,6 +96,7 @@ def search_single_query(search_terms, max_results=None, page_size=100):
     url = '/search/'+quote(remove_diacritics(search_terms))
     numSent = 0
     numTot = 0
+    numYielded = 0
     while True:
         numResultsAskedFor = page_size
         if numTot:
@@ -112,11 +112,12 @@ def search_single_query(search_terms, max_results=None, page_size=100):
             print "CORE: "+res['status']
             break
         for r in res['data']:
-            if r.get('type') == 'article' and 'id' in r:
+            if r.get('type') == 'article' and 'id' in r and numYielded < max_results:
+                numYielded += 1
                 yield int(r['id'])
             numSent += 1
         page += 1
-        if numSent >= numTot or (max_results is not None and numSent >= max_results) or len(res['data']) == 0:
+        if numSent >= numTot or (max_results is not None and numYielded >= max_results) or len(res['data']) == 0:
             break
             
 
@@ -132,6 +133,7 @@ def fetch_paper_metadata_by_core_ids(core_ids):
             batch.append(core_id)
         else:
             results = fetch_metadata_batch(batch)
+            batch = []
             for r in results:
                 yield r
     if len(batch) > 1:
@@ -166,7 +168,6 @@ def fetch_single_core_metadata(coreid):
     return response
 
 
-
 def fetch_papers_from_core_by_researcher_name(name, max_results=500):
     core_source, created = OaiSource.objects.get_or_create(identifier='core',
             name='CORE',
@@ -193,14 +194,15 @@ def fetch_papers_from_core_by_researcher_name(name, max_results=500):
                 unsuccessful_lookups += 1
             if unsuccessful_lookups >= max_unsuccessful_lookups or nb_results >= max_results:
                 break
-        if not (unsuccessful_lookups >= max_unsuccessful_lookups or nb_results >= max_results):
-            current_batch = list(itertools.islice(ids, batch_size))
-        else:
-            current_batch = []
+        if unsuccessful_lookups >= max_unsuccessful_lookups or nb_results >= max_results:
+            break
+        current_batch = list(itertools.islice(ids, batch_size))
 
-core_sep_re = re.compile(r', *| *and *')
-def parse_core_authors_list(lst):
-    return core_sep_re.split(lst)
+# TODO remove this dead code
+
+#core_sep_re = re.compile(r', *| *and *')
+#def parse_core_authors_list(lst):
+#    return core_sep_re.split(lst)
 
 def add_core_document(doc, source):
     metadata = doc.get('data', {})

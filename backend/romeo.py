@@ -29,8 +29,9 @@ import requests.exceptions
 from papers.models import *
 from papers.errors import MetadataSourceException
 from papers.utils import nstrip, remove_diacritics
+from backend.utils import urlopen_retry
 
-from publishers.models import Publisher, Journal, AliasPublisher, PublisherCondition, PublisherCopyrightLink
+from publishers.models import *
 
 from dissemin.settings import ROMEO_API_KEY
 
@@ -53,7 +54,7 @@ def perform_romeo_query(search_terms):
 
     # Perform the query
     try:
-        response = requests.get(base_url, params=search_terms).text.encode('utf-8')
+        response = urlopen_retry(base_url, data=search_terms).encode('utf-8')
     except requests.exceptions.RequestException as e:
         raise MetadataSourceException('Error while querying RoMEO.\n'+
                 'URL was: '+base_url+'\n'+
@@ -329,7 +330,6 @@ def get_or_create_publisher(romeo_xml_description):
 def addRestriction(xml, applies_to, publisher):
     text = nstrip(xml.text)
     if text:
-        print "Adding restriction "+text
         r = PublisherRestrictionDetail(publisher=publisher, applies_to=applies_to, text=text)
         r.save()
 

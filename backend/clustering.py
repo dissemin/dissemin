@@ -8,7 +8,7 @@ from collections import defaultdict
 # For graph output
 from unidecode import unidecode
 
-from papers.models import Author, Researcher
+from papers.models import Author, Researcher, Paper
 from papers.utils import nocomma
 
 from backend.similarity import SimilarityClassifier, AuthorNotFound
@@ -131,9 +131,12 @@ class ClusteringContext(object):
         pks = self.out_of_sync
         if force:
             pks = self.authors.keys()
-        for pk in pks:
+        # Refetch fresh versions of the authors, because some papers might have been merged
+        # together
+        out_of_sync_authors = Author.objects.filter(pk__in=pks)
+        for val in out_of_sync_authors:
             try:
-                val = self.authors[pk]
+                pk = val.pk
                 val.cluster_id = self.find(pk)
                 val.num_children = self.cluster_size[pk]
                 val.cluster_relevance = self.num_relevant[val.cluster_id]
@@ -143,8 +146,8 @@ class ClusteringContext(object):
                 else:
                     val.researcher_id = None
                 val.save()
-                val.paper.invalidate_cache()
                 val.paper.update_visibility()
+                val.paper.invalidate_cache()
             except KeyError:
                 continue
         self.out_of_sync.clear()
