@@ -415,30 +415,62 @@ class Paper(models.Model):
                 (self.oa_status=='OK') and
                 not(self.already_asked_for_upload()) and
                 not(self.author_set.filter(researcher__isnull=False)==[]))
-	
 
     @property
     def year(self):
+        """
+        Year of publication of the paper
+        """
         return self.pubdate.year
 
     @property
     def prioritary_oai_records(self):
+        """
+        OAI records from custom sources we trust (positive priority)
+        """
         return self.sorted_oai_records.filter(priority__gt=0)
 
     @property
     def sorted_oai_records(self):
+        """
+        OAI records sorted by decreasing order of priority
+        (lower priority means poorer overall quality of the source).
+        """
         return self.oairecord_set.order_by('-priority')
 
     @property
     def sorted_authors(self):
-        return self.author_set.order_by('id').select_related('name')
+        """
+        The author sorted as they should appear. Their names are pre-fetched.
+        """
+        return self.author_set.order_by('position').select_related('name')
+
+    def author_names(self):
+        """
+        The list of Name instances of the authors
+        """
+        return [a.name for a in self.sorted_authors]
+
+    def bare_author_names(self):
+        """
+        The list of name pairs (first,last) of the authors
+        """
+        return [(name.first,name.last) for name in self.author_names()]
+
 
     def author_count(self):
+        """
+        Number of authors. This property is cached in instances to
+        avoid repeated COUNT queries.
+        """
         if self.cached_author_count == None:
             self.cached_author_count = self.author_set.count()
         return self.cached_author_count
 
     def has_many_authors(self):
+        """
+        When the paper has more than 15 authors (arbitrary threshold)
+        """
         return self.author_count() > 15
 
     def interesting_authors(self):
@@ -535,12 +567,6 @@ class Paper(models.Model):
                 seen_publishers.add(publication.publisher_id)
                 yield publication
 
-    def bare_author_names(self):
-        """
-        The list of name pairs (first,last) of the authors
-        """
-        return [(a.name.first,a.name.last) for a in self.author_set.all().select_related('name')]
-
     def plain_fingerprint(self, verbose=False):
         """
         Debugging function to display the plain fingerprint
@@ -562,12 +588,25 @@ class Paper(models.Model):
                 key = make_template_fragment_key('publiListItem', [self.pk, rpk, with_buttons])
                 cache.delete(key)
 
+    def update_author_names(self, new_author_names):
+        """
+        Improves the current list of authors by considering a new list of author names.
+        Missing authors are added, and names are unified.
+
+        :param new_author_names: list of Name instances (the order matters)
+        """
+        pass
+
     # Merge paper into self
     def merge(self, paper):
-        # TODO What if the authors are not the same?
-        # We should merge the list of authors, so that the order is preserved
+        """
+        Merges a paper into itself. This deletes the other paper.
+        We do our best to unify all the metadata parts, but of course
+        there will always be some mistakes as there is no way to find out
+        which metadata part is best in general.
 
-        # TODO merge author relations
+        :param paper: The second paper to merge and delete.
+        """
 
         if self.pk == paper.pk:
             return
@@ -582,6 +621,7 @@ class Paper(models.Model):
         OaiRecord.objects.filter(about=paper.pk).update(about=self.pk)
         Publication.objects.filter(paper=paper.pk).update(paper=self.pk)
         Annotation.objects.filter(paper=paper.pk).update(paper=self.pk)
+        self.update_author_names(paper.author_names())
         if paper.last_annotation:
             self.last_annotation = None
             for annot in self.annotation_set.all().order_by('-timestamp'):
@@ -651,6 +691,7 @@ class Paper(models.Model):
 class Author(models.Model):
     paper = models.ForeignKey(Paper)
     name = models.ForeignKey(Name)
+    position = models.IntegerField(default=0)
     cluster = models.ForeignKey('Author', blank=True, null=True, related_name='clusterrel')
     num_children = models.IntegerField(default=1)
     cluster_relevance = models.FloatField(default=0) # TODO change this default to a negative value

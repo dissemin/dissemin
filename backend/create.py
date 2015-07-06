@@ -96,14 +96,12 @@ def _get_or_create_paper(title, author_names, pubdate, doi, visibility):
                 fingerprint=fp,
                 visibility=visibility)
         p.save()
-        authors = []
-        for author_name in author_names:
+        for idx, author_name in enumerate(author_names):
             author_name.save_if_not_saved()
-            a = Author(name=author_name, paper=p)
+            a = Author(name=author_name, paper=p, position=idx)
             a.save()
             if author_name.is_known:
                 clustering_context_factory.clusterAuthorLater(a)
-            authors.append(a)
 
     if doi:
         try:
