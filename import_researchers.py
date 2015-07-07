@@ -6,8 +6,8 @@ from papers.utils import iunaccent
 from papers.name import normalize_name_words
 from codecs import open
 
-first_name_f = 1
 last_name_f = 0
+first_name_f = 1
 url_f = 2
 email_f = 3
 role_f = 4
