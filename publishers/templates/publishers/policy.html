@@ -80,7 +80,7 @@
 {% block lists %}
 {% url 'search' as search_url %}
 <p>{% blocktrans trimmed with name=publisher.name count=publisher.publi_count id=publisher.pk %}
-{{ name }} has published <a href="{{ search_url }}?publisher={{ id }}">{{ count }} productions</a> authored by researchers from ENS.
+{{ name }} has published <a href="{{ search_url }}?publisher={{ id }}">{{ count }} productions</a> authored by researchers from {{ UNIVERSITY_SHORT_NAME }}.
    {% endblocktrans %}
 </p>
 {% with publisher.preprint as policy %}

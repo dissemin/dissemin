@@ -3,7 +3,7 @@
 {% load i18n %}
 
 {% block headTitle %}
-ENS
+{{ UNIVERSITY_SHORT_NAME }}
 {% endblock %}
 
 {% block content %}
@@ -18,7 +18,7 @@ ENS
     <p>
     {% url 'faq' as faq_url %}
     {% blocktrans trimmed %}
-    Dissem.in helps researchers at <a href="http://www.ens.fr/">ENS</a> to upload their papers to institutional or subject repositories,
+    Dissem.in helps researchers at <a href="{{ UNIVERSITY_URL }}">{{ UNIVERSITY_SHORT_NAME }}</a> to upload their papers to institutional or subject repositories,
     fostering <a href="http://en.wikipedia.org/wiki/Self-archiving">Green Open Access</a>.
     See the <a href="{{ faq_url }}">FAQ</a> for more information about dissem.in.
     {% endblocktrans %}

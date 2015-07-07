@@ -23,7 +23,7 @@ from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views import generic
 from django.utils.translation import ugettext as _
-
+from dissemin.settings import UNIVERSITY_BRANDING
 
 from publishers.models import *
 
@@ -82,6 +82,7 @@ def publishersView(request, **kwargs):
     oa_variants = varyQueryArguments('status', args_without_page, OA_STATUS_CHOICES)
 
     context['oa_status_choices'] = oa_variants
+    context.update(UNIVERSITY_BRANDING)
     return render(request, 'publishers/list.html', context)
 
 class PublisherView(generic.DetailView):

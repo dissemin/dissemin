@@ -46,7 +46,7 @@ from papers.emails import *
 from publishers.views import varyQueryArguments
 from publishers.models import OA_STATUS_CHOICES
 from sword.submitOnZenodo import *
-from dissemin.settings import MEDIA_ROOT 
+from dissemin.settings import MEDIA_ROOT, UNIVERSITY_BRANDING 
 
 # Number of papers shown on a search results page
 NB_RESULTS_PER_PAGE = 20
@@ -62,6 +62,7 @@ def index(request):
         'papers' : Paper.objects.filter(visibility='VISIBLE').order_by('-pubdate')[:5],
         'publishers' : Publisher.objects.all().filter(stats__isnull=False).order_by('-stats__num_tot')[:3],
         }
+    context.update(UNIVERSITY_BRANDING)
     return render(request, 'papers/index.html', context)
 
 def departmentsView(request, **kwargs):
@@ -256,7 +257,8 @@ def sourcesView(request):
     return render(request, 'papers/sources.html')
 
 def faqView(request):
-    return render(request, 'papers/faq.html')
+    return render(request, 'papers/faq.html',
+            UNIVERSITY_BRANDING)
 
 def feedbackView(request):
     return render(request, 'papers/feedback.html')

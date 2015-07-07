@@ -37,6 +37,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
+# University names
+UNIVERSITY_BRANDING = {
+        u'UNIVERSITY_FULL_NAME': u'École Normale Supérieure',
+        u'UNIVERSITY_SHORT_NAME': u"l'ENS",
+        u'UNIVERSITY_REPOSITORY_URL': u'http://hal-ens.archives-ouvertes.fr/',
+        u'UNIVERSITY_URL': u'http://www.ens.fr/',
+}
+
 # EMAIL settings
 # These are used to send messages to the researchers
 EMAIL_HOST = ''

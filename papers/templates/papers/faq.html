@@ -86,8 +86,7 @@
             <ul>
                 <li>Subject repositories, restricted to some research fields, such as <a href="http://arxiv.org">arXiv</a>.</li>
                 <li>Institutional repositories, designated to store the research output of a given institution or country.
-                    For instance, ENS has <a href="http://hal-ens.archives-ouvertes.fr/">its own repository</a> integrated in
-                    <a href="http://hal.archives-ouvertes.fr/">HAL</a>.
+                    For instance, {{ UNIVERSITY_SHORT_NAME }} has <a href="{{ UNIVERSITY_REPOSITORY_URL }}">its own repository</a>.
                 </li>
             </ul>
             If your research community favours a specific repository, using it makes sense as it will increase your
@@ -103,7 +102,7 @@
         {% url 'sources' as sources_url %}
         {% blocktrans trimmed %}
         Dissem.in is a web platform gathering metadata from <a href="{{ sources_url }}">various sources</a>
-        and analyzing the full text availability of publications of researchers, currently only within the ENS.
+        and analyzing the full text availability of publications of researchers, currently only within {{ UNIVERSITY_SHORT_NAME }}.
         It has been designed to foster the use of repositories (rather than preprints posted on personal homepages),
         <a href="#repositories-rock">for numerous reasons</a>.
         {% endblocktrans %}
@@ -260,11 +259,11 @@
         There are many ways to get involved, even if you do not want to write any code:
         <ul>
             <li>Tell us what you think: <a href="mailto:contact@dissem.in">contact@dissem.in</a>.</li>
-            <li>Tag articles to improve our author disambiguation algorithm (you need an ENS account).</li>
+            <li>Tag articles to improve our author disambiguation algorithm (you need an account).</li>
             <li>Help us improve the overall usability of the website.</li>
             <li>Help us translate the interface.</li>
             <li>Get lists of researchers from departments.</li>
-            <li>Fix metadata errors (you need an ENS account).</li>
+            <li>Fix metadata errors (you need an account).</li>
             <li>Spread the word about this tool.</li>
             <li>Fix any of our listed <a href="http://github.com/wetneb/dissemin/issues">issues</a>.</li>
             <li>Star <a href="http://github.com/wetneb/dissemin">our github project</a>!</li>
