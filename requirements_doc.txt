@@ -1,0 +1,4 @@
+django
+celery[redis]
+unidecode
+name_tools
