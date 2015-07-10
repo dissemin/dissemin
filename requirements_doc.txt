@@ -5,3 +5,4 @@ name_tools
 psycopg2
 django-bootstrap-pagination
 django-cas-ng
+mock

@@ -263,6 +263,17 @@ texinfo_documents = [
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 #texinfo_no_detailmenu = False
 
+# Mock LXML
+import sys
+from unittest.mock import MagicMock
+
+class Mock(MagicMock):
+    @classmethod
+    def __getattr__(cls, name):
+        return Mock()
+
+MOCK_MODULES = ['lxml']
+sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES)
 
 # Snippet to document Django models
 # https://djangosnippets.org/snippets/2533/
@@ -313,3 +324,4 @@ def process_docstring(app, what, name, obj, options, lines):
 def setup(app):
     # Register the docstring processor with sphinx
     app.connect('autodoc-process-docstring', process_docstring)  
+
