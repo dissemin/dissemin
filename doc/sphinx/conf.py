@@ -265,14 +265,14 @@ texinfo_documents = [
 
 # Mock LXML
 import sys
-from unittest.mock import MagicMock
+from mock import MagicMock
 
 class Mock(MagicMock):
     @classmethod
     def __getattr__(cls, name):
         return Mock()
 
-MOCK_MODULES = ['lxml']
+MOCK_MODULES = ['lxml', 'lxml.html', 'lxml.html.clean']
 sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES)
 
 # Snippet to document Django models
