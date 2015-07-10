@@ -184,7 +184,7 @@ $(function(){
 {% endfor %}
 </div>
 
-<span class="detailsTitle">{% trans "Classified in" %}</span>
+<span class="detailsTitle">{% trans "Departments" %}</span>
 <div class="detailsContent">
 {% for dept in view.departments %}
 <p><a href="{% url 'department' dept.id %}">{{ dept }}</a></p>

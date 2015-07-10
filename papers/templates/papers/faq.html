@@ -82,15 +82,16 @@
         <h2 id="what-repository">{% trans "What repository should I use?" %}</h2>
         <p>
         {% blocktrans trimmed %}
-            There are roughly two types of repositories:
+            There are roughly three types of repositories:
             <ul>
                 <li>Subject repositories, restricted to some research fields, such as <a href="http://arxiv.org">arXiv</a>.</li>
                 <li>Institutional repositories, designated to store the research output of a given institution or country.
                     For instance, {{ UNIVERSITY_SHORT_NAME }} has <a href="{{ UNIVERSITY_REPOSITORY_URL }}">its own repository</a>.
                 </li>
+                <li>General-purpose academic repositories such as <a href="http://zenodo.org">Zenodo</a>,
+                    not limited to a particular scope.</li>
             </ul>
-            If your research community favours a specific repository, using it makes sense as it will increase your
-            visibility. If not, institutional repositories are also a good option. 
+            If your research community favours a specific repository, using it makes sense as it will increase your visibility. If not, institutional or general-purpose repositories are also a good option.
         {% endblocktrans %}
         </p>
 
@@ -112,12 +113,14 @@
         {% blocktrans trimmed %}
         Dissem.in is not a repository as it does not store any full text. When the full text of a publication
         is available, a link to the relevant page is provided.
+        The full texts deposited through Dissem.in are stored in third-party repositories such as
+        <a href="http://zenodo.org">Zenodo</a> or <a href="http://hal.archives-ouvertes.fr">HAL</a>.
         {% endblocktrans %}
         </p>
         <h2 id="running">{% trans "Who runs dissem.in?" %}</h2>
         <p>
         {% blocktrans trimmed %}
-        Dissem.in is brought to you by <a href="https://github.com/wetneb/dissemin/graphs/contributors">the dissem.in team</a>.
+        Dissem.in is brought to you by <a href="http://dissem.in/#team">our team</a>.
         {% endblocktrans %}
         <h2 id="creating-a-profile">{% trans "Can I create my profile on dissem.in?" %}</h2>
         <p>
@@ -134,7 +137,7 @@
         {% endblocktrans %}
         </p>
 
-        <h3>Policies and full-text availability</h3>
+        <h3>{% trans "Policies and full-text availability" %}</h3>
         <h2 id="policy-classes">{% trans "What do your policy classes mean?" %}</h2>
         <p>
         <div class="unselectedCriterion">
@@ -190,7 +193,8 @@
         {% blocktrans trimmed %}
         When we have found it in one of the repositories we harvest. The list of
         these repositories can be found <a href="{{ sources_url }}">here</a>.
-        Thanks to <a href="http://www.base-search.net">the BASE search engine</a>,
+        Thanks to the <a href="http://www.base-search.net">BASE</a> and
+        <a href="http://core.ac.uk">CORE</a> search engines,
         we cover more than 68 millions of preprints.
         {% endblocktrans %}
         </p>
@@ -210,7 +214,7 @@
         {% endblocktrans %}
         </p>
 
-        <h3>Omissions and errors</h3>
+        <h3>{% trans "Omissions and errors" %}</h3>
         <h2 id="missing-paper">{% trans "One of my papers is missing. Why?" %}</h2>
             {% blocktrans trimmed %}
             <p>There are many possible reasons: maybe it is not available from any
@@ -244,7 +248,7 @@
             {% endblocktrans %}
             </p>
 
-        <h3>Behind the scene</h3>
+        <h3>{% trans "Behind the scene" %}</h3>
 
         <h2 id="sources">{% trans "Where do you get the data from?" %}</h2>
         <p>
@@ -256,17 +260,18 @@
         <h2 id="getting-involved">{% trans "How can I help?" %}</h2>
         <p>
         {% blocktrans trimmed %}
-        There are many ways to get involved, even if you do not want to write any code:
+        There are many ways to get involved:
         <ul>
-            <li>Tell us what you think: <a href="mailto:contact@dissem.in">contact@dissem.in</a>.</li>
+            <li><a href="mailto:contact@dissem.in">Send us</a> a list of researchers for your
+                university or department so that we can set up an instance of Dissemin for you.</li>
+            <li>Contribute to <a href="http://github.com/wetneb/dissemin">the code</a>.</li>
+            <li>Fix any of our listed <a href="http://github.com/wetneb/dissemin/issues">issues</a>.</li>
+            <li>Help us translate the interface in your language.</li>
             <li>Tag articles to improve our author disambiguation algorithm (you need an account).</li>
-            <li>Help us improve the overall usability of the website.</li>
-            <li>Help us translate the interface.</li>
-            <li>Get lists of researchers from departments.</li>
             <li>Fix metadata errors (you need an account).</li>
             <li>Spread the word about this tool.</li>
-            <li>Fix any of our listed <a href="http://github.com/wetneb/dissemin/issues">issues</a>.</li>
             <li>Star <a href="http://github.com/wetneb/dissemin">our github project</a>!</li>
+            <li>Lend us a server (or equivalently, give us some money).</li>
         </ul>
         {% endblocktrans %}
         </p>
@@ -274,6 +279,7 @@
         <p>
         {% blocktrans trimmed %}
         The source code is available <a href="http://github.com/wetneb/dissemin">on github</a>.
+        <a href="http://dissemin.readthedocs.org/en/latest">A documentation</a> is being written.
         {% endblocktrans %}
         </p>
         <h2 id="oai">{% trans "Can I harvest your data?" %}</h2>
@@ -282,6 +288,6 @@
         Yes! But we have not implemented any API yet. Tell us what you need.
         {% endblocktrans %}
         </p>
-        <p><a href="#">Back to top</a></p>
+        <p><a href="#">{% trans "Back to top" %}</a></p>
     </div>
 {% endblock %}
