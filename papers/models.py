@@ -27,7 +27,7 @@ from django.core.cache.utils import make_template_fragment_key
 from django.utils.translation import ugettext_lazy as _
 
 from papers.utils import nstr, iunaccent, create_paper_plain_fingerprint
-from papers.name import match_names, name_similarity
+from papers.name import match_names, name_similarity, unify_name_lists
 from papers.utils import remove_diacritics, sanitize_html
 
 from statistics.models import AccessStatistics
@@ -611,27 +611,27 @@ class Paper(models.Model):
         """
         old_authors = self.sorted_authors
         old_names = map(lambda a: (a.name.first,a.name.last), old_authors)
-        unified_names = unify_name_list(old_names, new_author_names)
+        unified_names = unify_name_lists(old_names, new_author_names)
         for i, (new_name, (idx,_)) in enumerate(unified_names):
             if idx is not None: # Updating the name of an existing author
+                author = old_authors[idx]
                 fields = []
                 if idx != i:
-                    old_authors[idx].position = i
+                    author.position = i
                     fields.append('position')
                 if new_name != (author.name.first,author.name.last):
-                    author.name = Name.lookup_name(new_name)
-                    # TODO might be safer to delete this one (properly) and create a new one.
-                    author.name.save()
-                    fields.append('name_id')
+                    name = Name.lookup_name(new_name)
+                    name.save()
+                    author.name = name
+                    fields.append('name')
                 if fields:
-                    old_authors.save(update_fields=fields)
+                    author.save(update_fields=fields)
             else: # Creating a new author
                 name = Name.lookup_name(new_name)
-                author = Author(paper=self,name=name)
-                # TODO TODO
-                
-
-        pass 
+                name.save()
+                # TODO maybe we could cluster it ? -> move this code to the backend?
+                author = Author(paper=self,name=name,position=i)
+                author.save()
 
     # Merge paper into self
     def merge(self, paper):

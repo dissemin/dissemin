@@ -61,15 +61,20 @@ def get_or_create_paper(title, author_names, pubdate, doi=None, visibility='VISI
         raise ValueError('Invalid paper, does not fit in the database schema:\n'+unicode(e))
 
 def _get_or_create_paper(title, author_names, pubdate, doi, visibility):
+    plain_names = map(to_plain_name, author_names)
+
+    def upgrade_visibility(paper):
+        if visibility == 'VISIBLE' and paper.visibility == 'CANDIDATE':
+            paper.visibility = 'VISIBLE'
+            paper.save(update_fields=['visibility'])
+        paper.update_author_names(plain_names)
+        return paper
+
     # If a DOI is present, first look it up
     if doi:
         matches = Publication.objects.filter(doi__exact=doi)
         if matches:
-            paper = matches[0].paper
-            if visibility == 'VISIBLE' and paper.visibility == 'CANDIDATE':
-                paper.visibility = 'VISIBLE'
-                paper.save(update_fields=['visibility'])
-            return matches[0].paper
+            return upgrade_visibility(matches[0].paper)
 
     if not title or not author_names or not pubdate:
         raise ValueError("A title, pubdate and authors have to be provided to create a paper.")
@@ -78,16 +83,12 @@ def _get_or_create_paper(title, author_names, pubdate, doi, visibility):
     title = maybe_recapitalize_title(title)
 
     # Otherwise look up the fingerprint
-    plain_names = map(to_plain_name, author_names)
     fp = create_paper_fingerprint(title, plain_names, pubdate.year)
     matches = Paper.objects.filter(fingerprint__exact=fp)
 
     p = None
     if matches:
-        p = matches[0]
-        if visibility == 'VISIBLE' and p.visibility == 'CANDIDATE':
-            p.visibility = 'VISIBLE'
-            p.save(update_fields=['visibility'])
+        p = upgrade_visibility(matches[0])
     else:
         p = Paper(title=title,
                 pubdate=pubdate,

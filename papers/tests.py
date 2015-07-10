@@ -22,6 +22,7 @@
 from __future__ import unicode_literals
 
 import unittest
+import django.test
 from papers.name import *
 
 class MatchNamesTest(unittest.TestCase):
@@ -247,6 +248,7 @@ class UnifyNameListsTest(unittest.TestCase):
                  [(('Jean P.','Dupont'),(0,1)),(('Marie','Dupont'),(1,0))],
                  [(('Marie','Dupont'),(1,0)),(('Jean P.','Dupont'),(0,1))]    
             ])
+
 
 
 

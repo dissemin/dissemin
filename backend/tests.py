@@ -216,3 +216,33 @@ class ProaixyTest(PrefilledTest):
         fetch_records_for_researcher(self.r3.pk)
         clustering_context_factory.commitThemAll()
 
+class PaperMethodsTest(PrefilledTest):
+    def test_update_author_names(self):
+        for old_author_names, new_author_names, final in [
+                ([('G.','Bodenhausen')],
+                 [('Geoffrey','Bodenhausen')],
+                 [('Geoffrey','Bodenhausen')]),
+                ([('L. F.','Jullien'),('A.','Amarilli')],
+                 [('Ludovic','Jullien'),('R.','Pérand'),('Antoine','Amarilli')],
+                 [('Ludovic F.','Jullien'),('R.','Pérand'),('Antoine','Amarilli')]),
+                ]:
+            paper = get_or_create_paper('This is a test paper',
+                    map(Name.lookup_name, old_author_names), datetime.date(year=2015,month=04,day=05))
+            clustering_context_factory.commitThemAll()
+            paper.update_author_names(new_author_names)
+            self.assertEqual(paper.bare_author_names(), final)
+
+    def test_multiple_get_or_create(self):
+        date = datetime.date(year=2003,month=4,day=9)
+        paper = get_or_create_paper('Beta-rays in black pudding',
+                map(Name.lookup_name, [('F.','Rodrigo'),('A.','Johnson'),('Pete','Blunsom')]),
+                date)
+
+        paper2 = get_or_create_paper('Beta-rays in black pudding',
+                map(Name.lookup_name, [('Frank','Rodrigo'),('A. L.','Johnson'),('P.','Blunsom')]),
+                date)
+
+        self.assertEqual(paper.pk, paper2.pk)
+        self.assertEqual(paper.bare_author_names(), [('Frank','Rodrigo'),('A. L.','Johnson'),
+            ('Pete','Blunsom')])
+
