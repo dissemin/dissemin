@@ -83,6 +83,8 @@ PAPER_TYPE_PREFERENCE = [x for (x,y) in PAPER_TYPE_CHOICES]
 class Department(models.Model):
     """
     A department in an institution. Each :py:class:`Researcher` is affiliated with exactly one department.
+
+    :param name: the full name of the department
     """
 
     #: The full name of the department

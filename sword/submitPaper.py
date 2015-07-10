@@ -1,7 +1,7 @@
 import httplib2
 from zipfile import *
 from lxml import etree
-from django import form
+from django import forms
 
 import StringIO
 import sword.metadataFormatter

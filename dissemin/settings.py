@@ -78,26 +78,63 @@ ZENODO_KEY = None
 
 ### DOI proxy ###
 # The interface where to get DOI metadata from.
-DOI_PROXY_DOMAIN =  'doi-cache.ulminfo.fr'
+# 
+# This interface should at least support fetching metadata for one
+# single DOI, like this:
+# curl -LH "Accept: application/citeproc+json" http://DOI_PROXY_DOMAIN/10.1080/15568318.2012.660115
+# (returns the citation as Citeproc+JSON)
+#
+DOI_PROXY_DOMAIN =  'doi-cache.ulminfo.fr' # This acts as a caching proxy for dx.doi.org
+#
+# In addition, if the endpoint supports it, batch requests can be performed:
+# curl -d 'dois=["10.1016/j.physletb.2015.01.010","10.5380/dp.v1i1.1922","10.1007/978-3-319-10936-7_9"]' \\
+#        http://doi-cache.ulminfo.fr/batch
+# (returns a list of citation in Citeproc+JSON format)
+#
 DOI_PROXY_SUPPORTS_BATCH = True
-# Uncomment these settings if you rather want
-# to fetch metadata directly from CrossRef (slower as not cached)
-DOI_PROXY_DOMAIN =  'dx.doi.org'
-DOI_PROXY_SUPPORTS_BATCH = False
 
-# SECURITY WARNING: keep the secret key used in production secret!
+# Uncomment these settings if you rather want
+# to fetch metadata directly from CrossRef (slower as not cached,
+# and more requests as there is no batch support).
+#DOI_PROXY_DOMAIN =  'dx.doi.org'
+#DOI_PROXY_SUPPORTS_BATCH = False
+
+### Security key ###
+# This is used by django to generate various things (mainly for 
+# authentication). Just pick a fairly random string and keep it
+# secret.
 SECRET_KEY = '40@!t4mmh7325-^wh+jo3teu^!yj3lfz5p%ok(8+7th8pg^hy1'
 
+### Debug mode ###
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# This can safely (and should) be kept to True
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+### Allowed hosts ###
+# They are the domains under which your dissemin instance should
+# be reachable
+ALLOWED_HOSTS = ['localhost']
+
+
+### Central Authentication System ###
+# This is used to authenticate your users.
+# You only have to provide the URL of your CAS system and users
+# will automatically be redirected to this page to log in from dissemin.
+# Therefore no account creation is needed!
+CAS_SERVER_URL="https://sso.ens.fr/cas/login"    #CRI CAS
+
+# When logging out from dissemin, should we also log out from the CAS?
+CAS_LOGOUT_COMPLETELY = True
+# Should we provide a redirect URL to the CAS so that unlogged users
+# can come back to dissemin?
+CAS_PROVIDE_URL_TO_LOGOUT = True
+
+### Application definition ###
+# You should not have to change anything in this section.
 
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
-
-# Application definition
 
 INSTALLED_APPS = (
     'django.contrib.admin',
@@ -146,12 +183,6 @@ ROOT_URLCONF = 'dissemin.urls'
 
 WSGI_APPLICATION = 'dissemin.wsgi.application'
 
-#CAS_SERVER_URL="https://localhost:8443/cas/login"    #Local tomcat CAS
-#CAS_SERVER_URL="https://cas.eleves.ens.fr/login"   #SPI CAS
-CAS_SERVER_URL="https://sso.ens.fr/cas/login"    #CRI CAS
-CAS_LOGOUT_COMPLETELY = True
-CAS_PROVIDE_URL_TO_LOGOUT = True
-
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
@@ -167,9 +198,10 @@ DATABASES = {
 }
 
 # Cache backend
-# This one is only suitable for developpment
+# https://docs.djangoproject.com/en/1.7/topics/cache/
 CACHES = {
         'default': {
+# This one is only suitable for developpment
             'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
             'LOCATION': 'my-cache'
 # This one should be used in production
@@ -178,42 +210,47 @@ CACHES = {
     }
 }
 
+### Static files (CSS, JavaScript, Images) ###
+# This defines how static files are stored and accessed.
+# https://docs.djangoproject.com/en/1.6/howto/static-files/
+#
+# Absolute path to where the static files are stored.
+# This is what you should change!
+STATIC_ROOT = '/opt/dissemin/www/static/'
+# Relative URL where static files are accessed (you should not
+# need to change this).
+STATIC_URL = '/static/'
+
+# Relative path to the directory where we store user uploads
+MEDIA_ROOT = 'media/'
+
+### Celery config ###
+# Celery runs asynchronous tasks such as metadata harvesting or
+# complex updates.
+# To communicate with it, we need a "broker".
+# This is an example broker with Redis.
+BROKER_URL = 'redis://localhost:6379/0'
+# For a RabbitMQ setting: BROKER_URL = 'amqp://guest:guest@127.0.0.1:5672//'
+
+CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
+CELERY_IMPORTS = ['backend.tasks']
+
+# This is the time in seconds before an unacknowledged task is re-sent to
+# another worker. It should exceed the length of the longest task, otherwise
+# it will be executed twice ! 43200 is one day.
+BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 43200}
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'Europe/Paris'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
-
 LOCALE_PATHS = ('locale',)
 
 # Login and athentication
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = '/opt/dissemin/www/static/'
-
-# User uploads
-MEDIA_ROOT = 'media/'
-
-# Celery config
-BROKER_URL = 'redis://localhost:6379/0'
-
-BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 43200}
-# This is the time in seconds before an unacknowledged task is re-sent to
-# another worker. It should exceed the length of the longest task, otherwise
-# it will be executed twice ! 43200 is one day.
-
-# RabbitMQ setting: BROKER_URL = 'amqp://guest:guest@127.0.0.1:5672//'
-CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
-CELERY_IMPORTS = ['backend.tasks']

@@ -272,8 +272,11 @@ import dissemin.settings
 from django.utils.html import strip_tags
 from django.utils.encoding import force_unicode
 import django
+from django.db.models.fields.files import FileDescriptor
+FileDescriptor.__get__ = lambda self, *args, **kwargs: self
 
 django.setup()
+
 
 def process_docstring(app, what, name, obj, options, lines):
     # This causes import errors if left outside the function

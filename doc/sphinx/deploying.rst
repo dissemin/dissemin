@@ -1,3 +1,5 @@
+.. _page-deploying:
+
 Deploying dissemin
 ==================
 
@@ -20,9 +22,8 @@ to the relevant Django documentation.
 We describe here how to set up the server with lighttpd, a lightweight
 web server, with FastCGI.
 
-Add this to your lighttpd config:
+Add this to your lighttpd config::
 
-::
    $HTTP["host"] =~ "^myhostname.com$" {
        accesslog.filename   = "/var/log/lighttpd/dissemin-$INSTANCE.log"
        server.document-root = "$SOURCE_PATH/www/"

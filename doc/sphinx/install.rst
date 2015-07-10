@@ -1,3 +1,5 @@
+.. _page-install:
+
 Installation
 ============
 
@@ -10,7 +12,7 @@ necessary if you want to do light dev that does not require harvesting
 metadata or running author disambiguation.
 
 Installation instructions for the web frontend
----------------------
+----------------------------------------------
 
 First, install the following dependencies (debian packages)
 ``postgresql postgresql-server-dev-all postgresql-client python-virtualenv build-essential libxml2-dev libxslt1-dev python-dev gettext``
@@ -93,7 +95,7 @@ This is done by applying migrations::
 
 (this should be done every time the source code is updated).
 Then you can move on to :ref:`page-importresearchers`
-and :ref:`server`.
+and :ref:`page-deploying`.
 
 Optional: installing the tasks backend
 --------------------------------------
@@ -104,6 +106,7 @@ We recommend redis.
 TODO: update the rest of the doc
 The default
 settings are configured to use RabbitMQ, an AMQP server::
+
    apt-get install rabbitmq-server
 
 (this launches the rabbitmq server). Install Python dependencies::
