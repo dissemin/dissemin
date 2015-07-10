@@ -422,4 +422,57 @@ def name_unification(a, b):
     # No match
     return None
 
+def unify_name_lists(a,b):
+    """
+    Unify two name lists, by matching compatible names and unifying them, and inserting the other names as they are.
+    The names are sorted by average rank in the two lists.
 
+    :returns: the unified list of pairs: the first component is the unified name (a pair itself),
+              the second is the pair of indices from the original lists this name was created from
+              (None when there is no corresponding name in one of the lists).
+    """
+    # TODO some normalization of last names? for instance case, hyphens…
+
+    a = sorted(enumerate(a), key=lambda (idx,(first,last)): (last,first))
+    b = sorted(enumerate(b), key=lambda (idx,(first,last)): (last,first))
+
+    iA = 0
+    iB = 0
+    lenA = float(len(a))
+    lenB = float(len(b))
+    result = []
+    while iA < len(a) or iB < len(b):
+        if iA == len(a):
+            result.append((b[iB][1],(rankB+1)/lenB,(None,iB)))
+            iB += 1
+        elif iB == len(b):
+            result.append((a[iA][1],(rankA+1)/lenA,(iA,None)))
+            iA += 1
+        else:
+            idxA = a[iA][0]
+            idxB = b[iB][0]
+            nameA = a[iA][1]
+            nameB = b[iB][1]
+            rankA = (idxA+1)/lenA
+            rankB = (idxB+1)/lenB
+
+            if nameA[1] == nameB[1]:
+                unified = name_unification(nameA,nameB)
+                if unified is not None:
+                    result.append((unified,0.5*(rankA+rankB),(idxA,idxB)))
+                else:
+                    result.append((nameA,rankA,(idxA,None)))
+                    result.append((nameB,rankB,(None,idxB)))
+                iA += 1
+                iB += 1
+            else:
+                if nameA[1] < nameB[1]:
+                    result.append((nameA,rankA,(idxA,None)))
+                    iA += 1
+                else:
+                    result.append((nameB,rankB,(None,idxB)))
+                    iB += 1
+
+    result = map(lambda (name,rank,idx):(name,idx), sorted(result, key=lambda x:x[1]))
+    return result
+    

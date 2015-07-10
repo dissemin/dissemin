@@ -476,12 +476,21 @@ class Paper(models.Model):
         return self.author_count() > 15
 
     def interesting_authors(self):
+        """
+        The list of authors to display when the complete list is too long.
+        We display first the authors whose names are known, and then a few ones
+        who are unknown.
+        """
         lst = (list(self.sorted_authors.filter(name__best_confidence__gt=0))+list(
             self.sorted_authors.filter(name__best_confidence=0))[:3])[:15]
         self.nb_remaining_authors = self.author_count() - len(lst)
         return lst
 
     def displayed_authors(self):
+        """
+        Returns the full list of authors if there are not too many of them,
+        otherwise returns only the interesting_authors()
+        """
         if self.has_many_authors():
             return self.interesting_authors()
         else:
@@ -585,6 +594,9 @@ class Paper(models.Model):
         return m.hexdigest()
 
     def invalidate_cache(self):
+        """
+        Invalidate the HTML cache for all the publications of this researcher.
+        """
         for rpk in [a.researcher_id for a in self.author_set.filter(researcher_id__isnull=False)]+[None]:
             for with_buttons in [False,True]:
                 key = make_template_fragment_key('publiListItem', [self.pk, rpk, with_buttons])
@@ -597,12 +609,34 @@ class Paper(models.Model):
 
         :param new_author_names: list of Name instances (the order matters)
         """
-        pass
+        old_authors = self.sorted_authors
+        old_names = map(lambda a: (a.name.first,a.name.last), old_authors)
+        unified_names = unify_name_list(old_names, new_author_names)
+        for i, (new_name, (idx,_)) in enumerate(unified_names):
+            if idx is not None: # Updating the name of an existing author
+                fields = []
+                if idx != i:
+                    old_authors[idx].position = i
+                    fields.append('position')
+                if new_name != (author.name.first,author.name.last):
+                    author.name = Name.lookup_name(new_name)
+                    # TODO might be safer to delete this one (properly) and create a new one.
+                    author.name.save()
+                    fields.append('name_id')
+                if fields:
+                    old_authors.save(update_fields=fields)
+            else: # Creating a new author
+                name = Name.lookup_name(new_name)
+                author = Author(paper=self,name=name)
+                # TODO TODO
+                
+
+        pass 
 
     # Merge paper into self
     def merge(self, paper):
         """
-        Merges a paper into itself. This deletes the other paper.
+        Merges another paper into self. This deletes the other paper.
         We do our best to unify all the metadata parts, but of course
         there will always be some mistakes as there is no way to find out
         which metadata part is best in general.
