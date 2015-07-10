@@ -3,5 +3,4 @@ celery[redis]
 unidecode
 name_tools
 django-bootstrap-pagination
-name_tools
 django-cas-ng
