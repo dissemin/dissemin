@@ -22,11 +22,11 @@
 """
 Django settings for dissemin project.
 
-For more information on this file, see
-https://docs.djangoproject.com/en/1.6/topics/settings/
+See the doc for details of usage:
+http://dissemin.readthedocs.org/en/latest/install.html
 
-For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.6/ref/settings/
+For the full list of Django settings and their values, see
+https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -37,7 +37,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
-# University names
+### University names. ###
+# This is used at various places to name the university.
+# The URLs are not pointing to any special interface, they are only used
+# to redirect users to the relevant websites.
 UNIVERSITY_BRANDING = {
         u'UNIVERSITY_FULL_NAME': u'École Normale Supérieure',
         u'UNIVERSITY_SHORT_NAME': u"l'ENS",
@@ -45,22 +48,40 @@ UNIVERSITY_BRANDING = {
         u'UNIVERSITY_URL': u'http://www.ens.fr/',
 }
 
-# EMAIL settings
-# These are used to send messages to the researchers
+### Emailing settings ###
+# These are used to send messages to the researchers.
+# This is still a very experimental feature. We recommend you leave these
+# settings as they are for now.
 EMAIL_HOST = ''
 EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = True
 
+### API keys ###
+# These keys are used to communicate with various interfaces. See
+# http://dissemin.readthedocs.org/en/latest/apikeys.html 
+
 # RoMEO API KEY
-# Used to fetch publisher policies
+# Used to fetch publisher policies. Get one at
+# http://www.sherpa.ac.uk/romeo/apiregistry.php
 ROMEO_API_KEY = None
+
+# CORE API key
+# Used to fetch full text availability. Get one at
+# http://www.sherpa.ac.uk/romeo/apiregistry.php
 CORE_API_KEY = None
 
-# Zenodo Key
+# Zenodo API key
+# Used to upload papers. Get one at
+# https://zenodo.org/youraccount/register
 ZENODO_KEY = None
 
-# DOI proxy
+### DOI proxy ###
+# The interface where to get DOI metadata from.
+DOI_PROXY_DOMAIN =  'doi-cache.ulminfo.fr'
+DOI_PROXY_SUPPORTS_BATCH = True
+# Uncomment these settings if you rather want
+# to fetch metadata directly from CrossRef (slower as not cached)
 DOI_PROXY_DOMAIN =  'dx.doi.org'
 DOI_PROXY_SUPPORTS_BATCH = False
 

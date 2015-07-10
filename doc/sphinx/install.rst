@@ -1,8 +1,9 @@
 Installation
 ============
 
-dissem.in is split in two parts: - the web frontend, powered by Django -
-the tasks backend, powered by Celery
+dissem.in is split in two parts:
+- the web frontend, powered by Django;
+- the tasks backend, powered by Celery.
 
 Installing the tasks backend requires additional dependencies and is not
 necessary if you want to do light dev that does not require harvesting
@@ -25,28 +26,55 @@ Set up the database
 -------------------
 
 Choose a unique database and user name (they can be identical), such as
-``disseminENS``. Choose a strong password for your user (such as the
-output of ``date | md5sum``)::
+``dissemin_myuni``. Choose a strong password for your user::
 
    sudo su postgres
    psql
-   CREATE USER dissemin_ens WITH PASSWORD 'b3a55787b3adc3913c2129205821765d';
-   ALTER USER dissemin_ens CREATEDB;
-   CREATE DATABASE dissemin_ens WITH OWNER dissemin_ens;
+   CREATE USER dissemin_myuni WITH PASSWORD 'b3a55787b3adc3913c2129205821765d';
+   ALTER USER dissemin_myuni CREATEDB;
+   CREATE DATABASE dissemin_myuni WITH OWNER dissemin_myuni;
 
 Configure the settings
 ----------------------
 
-Edit ``dissemin/settings.py`` to change the following settings: -
-``CORE_API_KEY`` and ``ROMEO_API_KEYS`` are required if you want to
-import papers automatically from these sources. See [[this
-page\|apikeys]] to learn how to get them. - Create a fresh
-``SERCET_KEY`` (any random-looking string that you can keep secret will
-do) - Fill the DATABASE section with the details you chose in the
-previous step - Set up the URL of your Central Authentication System in
-``CAS_URL`` - Set up the SMTP parameters to send emails to authors, in
-the ``EMAIL`` section. - Create a ``www/static`` directory and set the
-``STATIC_ROOT`` variable to the global path for this folder.
+Edit ``dissemin/settings.py`` to change the following settings:
+
+- Set up the university branding, defining:
+    - ``UNIVERSITY_FULL_NAME``: the complete name of the university;
+    - ``UNIVERSITY_SHORT_NAME``: the short name (with determiner);
+    - ``UNIVERSITY_REPOSITORY_URL``: the address of your university's
+      institutional repository, if it has one. This is not intended to
+      be the url of an API, simply the address where to redirect users
+      to when they want to see the repository;
+    - ``UNIVERSITY_URL``: the website of your university.
+
+- (Optional) Set up the SMTP parameters to send emails to authors, in
+  the ``EMAIL`` section.
+
+- ``CORE_API_KEY`` and ``ROMEO_API_KEYS`` are required if you want to
+  import papers automatically from these sources. See :ref:`page-apikeys`
+  about how to get them. The ``ZENODO_KEY`` is required
+  if you want to upload papers to Zenodo.
+
+- Create a fresh ``SECRET_KEY`` (any random-looking string that you can keep secret will
+  do).
+
+- Set ``DEBUG`` to ``False`` if your website will be available from anywhere. (Keep ``TEMPLATE_DEBUG``
+  to ``True``).
+
+- Add the domain you will be using (for instance ``myuni.dissem.in``) to the ``ALLOWED_HOSTS``.
+
+- Set up the URL of your Central Authentication System in
+  ``CAS_URL``.
+
+- Fill the DATABASES section with the details you chose in the
+  previous step
+
+- Create a ``www/static`` directory and set the ``STATIC_ROOT``
+  variable to the global path for this folder. For instance, if your
+  local copy of dissemin is in ``/home/me/dissemin``, set ``STATIC_ROOT = '/home/me/dissemin/www/static'``.
+
+
 
 You should commit these changes on a separate branch, let's call it
 ``prod``::
@@ -64,10 +92,11 @@ This is done by applying migrations::
    python manage.py migrate
 
 (this should be done every time the source code is updated).
-Then you can move on to [[running the web server\|server]].
+Then you can move on to :ref:`page-importresearchers`
+and :ref:`server`.
 
 Optional: installing the tasks backend
------------------------------------
+--------------------------------------
 
 The backend communicates with the frontend through a message passing
 infrastructure. TODO: link to the Django doc for that.
