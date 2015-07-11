@@ -164,11 +164,11 @@ msgstr "Incorrect"
 #: papers/templates/papers/annotButtons.html:16
 #: papers/templates/papers/paper.html:201
 msgid "Search in Google Scholar"
-msgstr ""
+msgstr "Chercher dans Google Scholar"
 
 #: papers/templates/papers/annotations.html:11
 msgid "Hall of fame"
-msgstr ""
+msgstr "Podium"
 
 #: papers/templates/papers/department.html:49
 #: papers/templates/papers/group.html:18
