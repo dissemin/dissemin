@@ -43,3 +43,6 @@ media/deposits/
 # build files for doc
 doc/sphinx/_build/
 
+# Coverage
+.coverage
+htmlcov/
