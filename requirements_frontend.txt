@@ -6,3 +6,4 @@ django-bootstrap-pagination
 name_tools
 lxml
 django-cas-ng
+unicode_tex

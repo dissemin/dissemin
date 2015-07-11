@@ -22,6 +22,7 @@ from __future__ import unicode_literals
 import re
 import hashlib
 import datetime
+import unicode_tex
 from unidecode import unidecode
 from lxml.html.clean import Cleaner
 from lxml.html import fromstring, _transform_result
@@ -101,26 +102,17 @@ html_killer = Cleaner()
 html_killer.allow_tags = ['div']
 html_killer.remove_unknown_tags = False
 
+latexmath_re = re.compile(r'\$(\S[^$]*\S|\S)\$')
+def remove_latex_math_dollars(string):
+    return latexmath_re.sub(r'\1', string)
+
+latex_command_re = re.compile(r'(\\([a-zA-Z]+|[.=\'"])({[^}]*})*)')
 def unescape_latex(s):
-    # TODO: replace this by a proper LaTeX unescaping algorithm (hence increasing the coverage)
-    s = s.replace("\\'e","é")
-    s = s.replace("\\`e","è")
-    s = s.replace("\\`a","à")
-    s = s.replace('\\"o',"ö")
-    s = s.replace('\\"a',"ä")
-    s = s.replace('\\"e',"ë")
-    s = s.replace('\\"{\\i}',"ï")
-    s = s.replace('\\^{o}',"ô")
-    s = s.replace('\\^{a}',"â")
-    s = s.replace('\\^{e}',"ê")
-    s = s.replace('\\^{i}',"î")
-    s = s.replace("\\'{E}","É")
-    s = s.replace("\\`{E}","È")
-    s = s.replace("\\`{A}","À")
-    s = s.replace('\\"{O}',"Ö")
-    s = s.replace('\\^{O}',"Ô")
-    s = s.replace('\\"{A}',"Ä")
-    return s
+    def conditional_replace(fragment):
+        rep = unicode_tex.tex_to_unicode_map.get(fragment.group(0))
+        return rep if rep is not None else fragment.group(0)
+
+    return latex_command_re.sub(conditional_replace, s)
 
 def sanitize_html(s):
     s = overescaped_re.sub(r'&#\1;', s)

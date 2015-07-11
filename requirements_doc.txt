@@ -6,3 +6,4 @@ psycopg2
 django-bootstrap-pagination
 django-cas-ng
 mock
+unicode_tex

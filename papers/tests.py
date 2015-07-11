@@ -24,6 +24,7 @@ from __future__ import unicode_literals
 import unittest
 import django.test
 from papers.name import *
+from papers.utils import unescape_latex, remove_latex_math_dollars
 
 class MatchNamesTest(unittest.TestCase):
     def test_simple(self):
@@ -249,6 +250,22 @@ class UnifyNameListsTest(unittest.TestCase):
                  [(('Marie','Dupont'),(1,0)),(('Jean P.','Dupont'),(0,1))]    
             ])
 
+class UnescapeLatexTest(unittest.TestCase):
+    def test_simple(self):
+        self.assertEqual(unescape_latex('This is a test'), 'This is a test')
+        self.assertEqual(unescape_latex('This is an \\alpha ray'), 'This is an α ray')
+        self.assertEqual(unescape_latex('This is an $\\alpha$ ray'), 'This is an $α$ ray')
+
+    def test_remove_latex_math_dollars(self):
+        self.assertEqual(remove_latex_math_dollars('This is an $α$ test'), 'This is an α test')
+        self.assertEqual(remove_latex_math_dollars('This is an $α + x$ test'), 'This is an α + x test')
+
+    def test_dollar_present(self):
+        self.assertEqual(unescape_latex('The revenue is $30 per cow'), 'The revenue is $30 per cow')
+        self.assertEqual(remove_latex_math_dollars('The revenue is $30 per cow'),
+                'The revenue is $30 per cow')
+        self.assertEqual(remove_latex_math_dollars('Instead of $15, the revenue is $30 per cow'),
+                'Instead of $15, the revenue is $30 per cow')
 
 
 
