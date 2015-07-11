@@ -28,6 +28,7 @@ body
 {
     text-align: center;
     padding: 20px;
+    position: relative;
 }
 
 .orange-button
@@ -120,20 +121,32 @@ h1
 {
     width: 500px;
     margin: auto;
-    background-color: rgba(255,255,255,0.45);
+    background-color: rgba(255,255,255,0.5);
     padding: 20px;
     margin-top: 40px;
     margin-bottom: 40px;
     display: inline-block;
+    z-index: 10;
+    position: relative;
 }
 
 .oiseau
 {
-    float: right;
-    padding: 50px;
+    /*float: right;
     position: absolute;
-    padding-top: 100px;
+    padding-left: 20px; * */
+    padding: 5px;
 }
+
+.migration
+{
+    position: absolute;
+    right: 10px;
+    padding: 10px;
+    padding-top: 80px;
+    z-index: 5;
+}
+
 
 .slide
 {
