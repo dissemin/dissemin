@@ -44,4 +44,15 @@ def explain_policy(status, arg):
         }
     return mark_safe(explanations.get((status,arg),_("Unknown policy")))
 
+@register.filter(is_safe=True)
+def explain_policy_short(status):
+    explanations = {
+        ("can"): _('archiving allowed.'),
+        ("cannot"): _('archiving forbidden.'),
+        ("restricted"): _('archiving restricted:'),
+        ("unclear"): _('policy unclear.'),
+        ("unknown"): _('policy unknown.'),
+        }
+    return mark_safe(explanations.get((status),_("policy unknown.")))
+
 

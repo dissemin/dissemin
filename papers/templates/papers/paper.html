@@ -105,11 +105,12 @@ $(function(){
 
 <div id="paperDetails">
 <p><strong>{% trans "Full text:" %}</strong>
-    {% if paper.pdf_url %}<a href="{{ paper.pdf_url }}">{% trans "Available" %} <img src="/static/extpdf.png"/></a>
+    {% if paper.pdf_url %}
+    <a href="{{ paper.pdf_url }}" class="btn btn-default btn-xs">{% trans "Download" %}</a> 
     {% else %}
 	  {% trans "Unavailable" %}
 	  {% if paper.can_be_asked_for_upload and request.user.is_authenticated %}
-        <span><a href="{% url 'mail_paper' paper.pk %}" class="btn btn-default btn-xs">{% trans "Ask upload" %}</a></span>
+      <!-- <span><a href="{% url 'mail_paper' paper.pk %}" class="btn btn-default btn-xs">{% trans "Ask upload" %}</a></span> -->
 {% endif %}
     {% endif %}</p>
 
@@ -117,8 +118,7 @@ $(function(){
         {% with publi.publisher as psh %}
             <p><strong>{% trans "Publisher:" %}</strong>
             <a href="{% url 'publisher' psh.pk %}">{{ psh }}</a></p>
-            <p><strong>{% trans "Policy:" %}</strong> {{ psh.oa_status | explain_oa_status }}
-            (<a href="{% url 'publisher' psh.pk %}">{% trans "details" %}</a>)</p>
+            {% include "papers/detailsPolicy.html" with publisher=psh %}
         {% endwith %}
     {% endfor %}
 </div>

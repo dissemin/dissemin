@@ -160,10 +160,6 @@ h4
 
 /* List of publications */
 
-#summaryLists li, #summaryLists ul
-{
-}
-
 li 
 {
     line-height:1.5em;
@@ -179,11 +175,12 @@ li
 {
     list-style-type: none;
     list-style-image: none;
+    padding-left: 0px;
 }
 
 #summaryLists ul
 {
-    padding-left: 0px;
+    /* padding-left: 0px; */
 }
 
 .ulContainer
@@ -385,10 +382,48 @@ h1#paperTitle {
     background-image: url('../orange-circle.png');
 }
 
+.policyPic-unclear
+{
+    background-image: url('../white-circle.png');
+}
+
+.policyPic-unknown
+{
+    background-image: url('../question-circle.png');
+}
+
 .policyText
 {
     margin-left: 25px;
     min-height: 25px;
+}
+
+.policyText ul
+{
+    padding-left: 25px;
+}
+
+.policyItem
+{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-top: 1px solid #cccccc;
+}
+
+.lastPolicyItem
+{
+    border-bottom: 1px solid #cccccc;
+}
+
+.policyDetailUpload
+{
+    float: right;
+}
+
+.linkToFullPolicy
+{
+    font-size: 0.8em;
+    text-align: right;
 }
 
 /* Criterions in the side bar */

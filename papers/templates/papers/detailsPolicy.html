@@ -1,0 +1,56 @@
+{% load statuses %}
+{% load i18n %}
+
+{% with publisher.preprint as policy %}
+<div class="policyItem">
+    <div class="policyPic policyPic-{{ policy }}"></div>
+    <div class="policyText">
+        <p>{% trans "Preprint:" %} {{ policy | explain_policy_short }}
+        {% if policy != "cannot" %}
+        <span class="policyDetailUpload"><a href="{% url 'upload_paper' paper.pk %}?type=preprint" class="btn btn-default btn-xs">{% trans "Upload" %}</a></span></p>
+        {% endif %}
+        <ul>
+        {% for restriction in publisher.preprint_conditions %}
+            <li>{{ restriction|striptags }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+    <div style="clear:both;"></div>
+</div>
+{% endwith %}
+{% with publisher.postprint as policy %}
+<div class="policyItem">
+    <div class="policyPic policyPic-{{ policy }}"></div>
+    <div class="policyText">
+        <p>{% trans "Postprint:" %} {{ policy | explain_policy_short }}
+        {% if policy != "cannot" %}
+        <span class="policyDetailUpload"> <a href="{% url 'upload_paper' paper.pk %}?type=postprint" class="btn btn-default btn-xs">{% trans "Upload" %}</a></span></p>
+        {% endif %}
+        <ul>
+        {% for restriction in publisher.postprint_conditions %}
+            <li>{{ restriction|striptags }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+    <div style="clear:both;"></div>
+</div>
+{% endwith %}
+{% with publisher.pdfversion as policy %}
+<div class="policyItem lastPolicyItem">
+    <div class="policyPic policyPic-{{ policy }}"></div>
+    <div class="policyText">
+        <p>{% trans "Publisher's version:" %} {{ policy | explain_policy_short }}
+        {% if policy != "cannot" %}
+        <span class="policyDetailUpload"><a href="{% url 'upload_paper' paper.pk %}?type=published" class="btn btn-default btn-xs">{% trans "Upload" %}</a></span></p>
+        {% endif %}
+        <ul>
+        {% for restriction in publisher.pdfversion_conditions %}
+            <li>{{ restriction|striptags }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+    <div style="clear:both;"></div>
+</div>
+{% endwith %}
+<p class="linkToFullPolicy"><a href="{% url 'publisher' publisher.pk %}">{% trans "Policy details" %}</a>.</p>
+
