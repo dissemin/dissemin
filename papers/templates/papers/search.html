@@ -63,6 +63,9 @@
         {% if researcher.homepage %}
         <p><a href="{{ researcher.homepage }}">{% trans "Homepage" context "Researcher" %}</a></p>
         {% endif %}
+        {% if researcher.orcid %}
+        <p>ORCiD: <a href="http://orcid.org/{{ researcher.orcid }}">{{ researcher.orcid }}</a></p>
+        {% endif %}
         {% if request.user.is_superuser and researcher.email %}
         <p>{% trans "Address:" %} {{ researcher.email }}</p>
         {% endif %}

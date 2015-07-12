@@ -163,6 +163,9 @@ class Researcher(models.Model):
     homepage = models.URLField(blank=True, null=True)
     #: Grade (student, post-doc, professor…)
     role = models.CharField(max_length=128, null=True, blank=True)
+    #: ORCiD identifier
+    orcid = models.CharField(max_length=32, null=True, blank=True, unique=True)
+    # TODO This could be a custom field as we know what format to expect
 
     # DOI search
     # TODO is this still needed ?
@@ -236,10 +239,13 @@ class Researcher(models.Model):
         self.stats.update(Paper.objects.filter(author__researcher=self).distinct())
 
     @classmethod
-    def create_from_scratch(cls, first, last, dept, email, role, homepage):
+    def create_from_scratch(cls, first, last, dept, email, role, homepage, orcid=None):
         """Creates a researcher, creating first the :py:class:`Name` for it.
 
-        :raises ValueError: if a researcher with that name already exists."""
+        :raises ValueError: if a researcher with that name already exists,
+                            or if an invalid ORCiD is provided.
+        :raises DataError: if a researcher with that ORCiD already exists.
+        """
         first = first.strip()
         last = last.strip()
         name, created = Name.objects.get_or_create(full=iunaccent(first+' '+last),
@@ -249,12 +255,19 @@ class Researcher(models.Model):
             # although our model would support it (TODO ?)
             raise ValueError
 
+        if orcid is not None:
+            orcid = validate_orcid(orcid)
+            if orcid is None:
+                raise ValueError('Invalid ORCiD: "%s"' % orcid)
+
         researcher = Researcher(
                 department=dept,
                 email=email,
                 role=role,
                 homepage=homepage,
-                name=name)
+                name=name,
+                orcid=orcid)
+        # This will raise DataError if such an ORCiD already exists
         researcher.save()
         researcher.update_variants()
         researcher.update_stats()

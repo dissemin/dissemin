@@ -232,3 +232,30 @@ def tolerant_datestamp_to_datetime(datestamp):
         raise ValueError("Invalid datestamp: "+str(datestamp))
     return datetime.datetime(
         int(YYYY), int(MM), int(DD), int(hh), int(mm), int(ss))
+
+### ORCiD utilities ###
+
+orcid_re = re.compile(r'^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{3}[X0-9]$')
+
+def validate_orcid(orcid):
+    """
+    :returns: a cleaned ORCiD if the argument represents a valid ORCiD, None otherwise
+    """
+    try:
+        orcid = str(orcid).strip()
+    except ValueError:
+        return
+
+    match = orcid_re.match(orcid)
+    if not match:
+        return
+    nums = orcid.replace('-','')
+    total = 0
+    for i in range(15):
+        total = (total + int(nums[i])) * 2
+    checkdigit = (12 - (total % 11)) % 11
+    checkchar = str(checkdigit) if checkdigit != 10 else 'X'
+    if nums[-1] == checkchar:
+        return orcid
+
+

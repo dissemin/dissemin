@@ -24,7 +24,7 @@ from __future__ import unicode_literals
 import unittest
 import django.test
 from papers.name import *
-from papers.utils import unescape_latex, remove_latex_math_dollars
+from papers.utils import unescape_latex, remove_latex_math_dollars, validate_orcid
 
 class MatchNamesTest(unittest.TestCase):
     def test_simple(self):
@@ -267,5 +267,19 @@ class UnescapeLatexTest(unittest.TestCase):
         self.assertEqual(remove_latex_math_dollars('Instead of $15, the revenue is $30 per cow'),
                 'Instead of $15, the revenue is $30 per cow')
 
+class ValidateOrcidTest(unittest.TestCase):
+    def test_simple(self):
+        self.assertEqual(validate_orcid(None), None)
+        self.assertEqual(validate_orcid(189), None)
+        self.assertEqual(validate_orcid('rst'), None)
+        self.assertEqual(validate_orcid('0123012301230123'), None)
 
+    def test_checksum(self):
+        self.assertEqual(validate_orcid('0000-0002-8612-8827'), '0000-0002-8612-8827')
+        self.assertEqual(validate_orcid('0000-0002-8612-8828'), None)
+        self.assertEqual(validate_orcid('0000-0001-5892-743X'), '0000-0001-5892-743X')
+        self.assertEqual(validate_orcid('0000-0001-5892-7431'), None)
+
+    def test_whitespace(self):
+        self.assertEqual(validate_orcid('\t0000-0002-8612-8827  '), '0000-0002-8612-8827')
 
