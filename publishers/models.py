@@ -42,6 +42,18 @@ POLICY_CHOICES = [('can', _('Allowed')),
 
 OA_STATUS_PREFERENCE = [x for x,y in OA_STATUS_CHOICES]
 
+class DummyPublisher(object):
+    pk = None
+    preprint = 'unknown'
+    postprint = 'unknown'
+    pdfversion = 'unknown'
+    preprint_conditions = []
+    postprint_conditions = []
+    pdfversion_conditions = []
+    def __init__(self):
+        pass
+
+default_publisher = DummyPublisher()
 
 # Publisher associated with a journal
 class Publisher(models.Model):

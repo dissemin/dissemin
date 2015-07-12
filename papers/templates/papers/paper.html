@@ -118,7 +118,7 @@ $(function(){
         {% with publi.publisher as psh %}
             <p><strong>{% trans "Publisher:" %}</strong>
             <a href="{% url 'publisher' psh.pk %}">{{ psh }}</a></p>
-            {% include "papers/detailsPolicy.html" with publisher=psh %}
+            {% include "publishers/detailsPolicy.html" with publisher=psh mode="link" %}
         {% endwith %}
     {% endfor %}
 </div>

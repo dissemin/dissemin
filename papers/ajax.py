@@ -34,7 +34,7 @@ from celery.execute import send_task
 
 from papers.models import *
 from papers.user import *
-from papers.forms import AddResearcherForm
+from papers.forms import AddResearcherForm, AjaxUploadForm
 from papers.utils import iunaccent, sanitize_html
 
 # General function used to change a CharField in a model with ajax
@@ -188,6 +188,23 @@ def changePublisherStatus(request):
         return HttpResponseNotFound('NOK: '+message, content_type='text/plain')
     
 
+# AJAX upload
+@user_passes_test(is_authenticated)
+def handleAjaxUpload(request):
+    if request.method == 'POST':
+        form = AjaxUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            return HttpResponse('{"status":"success"}', content_type='text/json')
+    return HttpResponse('{"status":"error"}', content_type='text/json')
+
+@user_passes_test(is_authenticated)
+def handleUrlDownload(request):
+    if request.method == 'POST':
+        form = UrlDownloadForm(request.POST)
+        if form.is_valid():
+            return HttpResponse('{"status":success"}', content_type='text/json')
+    return HttpResponse('{"status":"error"}', content_type='text/json')
+
 urlpatterns = patterns('',
     url(r'^annotate-paper-(?P<pk>\d+)-(?P<status>\d+)$', annotatePaper, name='ajax-annotatePaper'),
     url(r'^delete-researcher-(?P<pk>\d+)$', deleteResearcher, name='ajax-deleteResearcher'),
@@ -197,5 +214,7 @@ urlpatterns = patterns('',
     url(r'^change-author$', changeAuthor, name='ajax-changeAuthor'),
     url(r'^add-researcher$', addResearcher, name='ajax-addResearcher'),
     url(r'^change-publisher-status$', changePublisherStatus, name='ajax-changePublisherStatus'),
+    url(r'^upload-fulltext$', handleAjaxUpload, name='ajax-uploadFulltext'),
+    url(r'^download-url$', handleAjaxUpload, name='ajax-downloadUrl'),
 )
 

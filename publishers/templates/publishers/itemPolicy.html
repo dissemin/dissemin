@@ -1,0 +1,26 @@
+{% load statuses %}
+{% load i18n %}
+
+<div class="policyItem {% if typ == "preprint" %}firstPolicyItem{% elif typ == "pdfversion" %}lastPolicyItem{% endif %}">
+    <div class="policyPic policyPic-{{ policy }}"></div>
+    <div class="policyText">
+        <p>{{ type_text }} {{ policy | explain_policy_short }}
+        {% if policy != "cannot" %}
+            <span class="policyDetailUpload">
+            {% if mode == "link" %}
+            <a href="{% url 'upload_paper' paper.pk %}?type={{ typ }}" class="btn btn-default btn-xs">{% trans "Upload" %}</a>
+            {% elif mode == "radio" %}
+            <input type="radio" name="radioUploadType" value="{{ typ }}" />   
+            {% endif %}
+            </span>
+        {% endif %}
+        </p>
+        <ul>
+        {% for restriction in conditions %}
+            <li>{{ restriction|striptags }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+    <div style="clear:both;"></div>
+</div>
+

@@ -38,3 +38,9 @@ class PaperUploadForm(forms.Form):
             initial='postprint')
 
 
+class AjaxUploadForm(forms.Form):
+    file = forms.FileField()
+
+class UrlDownloadForm(forms.Form):
+    url = forms.URLField(label=_('URL'),required=True)
+

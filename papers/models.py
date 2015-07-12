@@ -31,7 +31,7 @@ from papers.name import match_names, name_similarity, unify_name_lists
 from papers.utils import remove_diacritics, sanitize_html
 
 from statistics.models import AccessStatistics
-from publishers.models import Publisher, Journal, OA_STATUS_CHOICES, OA_STATUS_PREFERENCE
+from publishers.models import Publisher, Journal, OA_STATUS_CHOICES, OA_STATUS_PREFERENCE, default_publisher
 
 import hashlib
 from datetime import datetime, timedelta
@@ -590,6 +590,11 @@ class Paper(models.Model):
             if publication.publisher_id and publication.publisher_id not in seen_publishers:
                 seen_publishers.add(publication.publisher_id)
                 yield publication
+
+    def publisher(self):
+        for publication in self.publication_set.all():
+            return publication.publisher
+        return default_publisher
 
     def plain_fingerprint(self, verbose=False):
         """
