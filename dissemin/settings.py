@@ -94,6 +94,19 @@ DOI_PROXY_DOMAIN =  'doi-cache.ulminfo.fr' # This acts as a caching proxy for dx
 #
 DOI_PROXY_SUPPORTS_BATCH = True
 
+### Paper deposits ###
+# Max size of the PDFs (in bytes)
+# 2.5MB - 2621440
+# 5MB - 5242880
+# 10MB - 10485760
+# 20MB - 20971520
+# 50MB - 5242880
+DEPOSIT_MAX_FILE_SIZE = 10485760
+# Max download time when the file is downloaded from an URL (in seconds)
+URL_DEPOSIT_DOWNLOAD_TIMEOUT = 5
+# Allowed content types
+DEPOSIT_CONTENT_TYPES = ['application/pdf','application/x-pdf','application/octet-stream']
+
 # Uncomment these settings if you rather want
 # to fetch metadata directly from CrossRef (slower as not cached,
 # and more requests as there is no batch support).

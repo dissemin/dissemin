@@ -46,7 +46,7 @@ from papers.emails import *
 from publishers.views import varyQueryArguments
 from publishers.models import OA_STATUS_CHOICES
 from sword.submitOnZenodo import *
-from dissemin.settings import MEDIA_ROOT, UNIVERSITY_BRANDING 
+from dissemin.settings import MEDIA_ROOT, UNIVERSITY_BRANDING, DEPOSIT_MAX_FILE_SIZE 
 
 # Number of papers shown on a search results page
 NB_RESULTS_PER_PAGE = 20
@@ -232,7 +232,7 @@ def mailPaperView(request, pk):
 @user_passes_test(is_authenticated)
 def paper_upload_view(request, pk):
     paper = get_object_or_404(Paper, pk=pk)
-    context = {'paper':paper}
+    context = {'paper':paper, 'max_file_size':DEPOSIT_MAX_FILE_SIZE}
     if request.GET.get('type') not in [None,'preprint','postprint','pdfversion']:
         return HttpResponseForbidden()
     if request.method == 'POST':

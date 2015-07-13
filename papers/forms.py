@@ -21,6 +21,9 @@
 
 from django import forms
 from django.utils.translation import ugettext as _
+from django.template.defaultfilters import filesizeformat
+
+from dissemin.settings import DEPOSIT_CONTENT_TYPES, DEPOSIT_MAX_FILE_SIZE
 
 from papers.models import *
 
@@ -37,9 +40,21 @@ class PaperUploadForm(forms.Form):
     upload_type = forms.ChoiceField(label=_('Upload type'), choices = UPLOAD_TYPE_CHOICES,
             initial='postprint')
 
+invalid_content_type_message = _('Invalid file format: only PDF files are accepted.')
 
 class AjaxUploadForm(forms.Form):
-    file = forms.FileField()
+    upl = forms.FileField()
+
+    def clean_upl(self):
+        content = self.cleaned_data['upl']
+        if content.content_type in DEPOSIT_CONTENT_TYPES:
+            if content._size > DEPOSIT_MAX_FILE_SIZE:
+                raise forms.ValidationError(_('File too large (%s). Maximum size is %s.') %
+                        (filesizeformat(content._size), filesizeformat(DEPOSIT_MAX_FILE_SIZE)),
+                        code='too_large')
+        else:
+            raise forms.ValidationError(invalid_content_type_message, code='invalid_type')
+        return content
 
 class UrlDownloadForm(forms.Form):
     url = forms.URLField(label=_('URL'),required=True)

@@ -23,10 +23,56 @@
 
 {% block jsScript %}
 
+   
+
 $(function(){
 
     var resultDiv = $('#uploadedResult');
     var uploadForm = $('#uploadForm');
+
+    function addFileWidget(name, size) {
+        var tpl = $('<div class="uploadFileItem uploadWorking"><div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%"></div></div><p></p><span></span></div>');
+
+        // Append the file name and file size
+        tpl.find('p').text(name)
+        var formattedSize = 'Uploading...';
+        if(size > 0) {
+            formattedSize = formatFileSize(size);
+        }
+        tpl.append('<i>' + formattedSize + '</i>');
+
+        // Add the HTML to the UL element
+        resultDiv.empty();
+        return tpl.appendTo(resultDiv);
+    }
+
+    function removeBar() {
+        var progressDiv = $('.progress');
+        progressDiv.fadeOut(function(){
+            progressDiv.remove();
+        });
+    }
+
+    function updateProgress(tpl, progress) {
+        var progressBar = $('.progress-bar');
+        progressBar.css('width', progress+'%').attr('aria-valuenow', progress);
+    }
+
+    function uploadComplete(tpl) {
+        tpl.removeClass('uploadWorking');
+        var uploadInputs = $('#uploadInputs');
+        uploadInputs.fadeOut(function(){
+            uploadInputs.remove();
+        });
+        removeBar();
+    }
+
+    function displayErrorMessage(tpl, msg) {
+        tpl.find('i').text(msg);
+        tpl.addClass('uploadError');
+        removeBar();
+    }
+
 
     $('#browseButton').click(function(){
         // Simulate a click on the file input button
@@ -45,27 +91,17 @@ $(function(){
         add: function (e, data) {
             console.log('starting upload');
 
-            var tpl = $('<div class="working"><div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%"></div></div><p></p><span></span></div>');
+            data.context = addFileWidget(data.files[0].name, data.files[0].size);
 
-            // Append the file name and file size
-            tpl.find('p').text(data.files[0].name)
-            .append('<br /><i>' + formatFileSize(data.files[0].size) + '</i>');
+           // Listen for clicks on the cancel icon
+            data.context.find('span').click(function(){
 
-            // Add the HTML to the UL element
-            data.context = tpl.appendTo(resultDiv);
-
-            // Initialize the knob plugin
-            // tpl.find('input').knob();
-
-            // Listen for clicks on the cancel icon
-            tpl.find('span').click(function(){
-
-                if(tpl.hasClass('working')){
+                if(data.context.hasClass('working')){
                     jqXHR.abort();
                 }
 
-                tpl.fadeOut(function(){
-                    tpl.remove();
+                data.context.fadeOut(function(){
+                    data.context.remove();
                 });
 
             });
@@ -75,34 +111,23 @@ $(function(){
         },
 
         progress: function(e, data){
-            console.log('progress');
             // Calculate the completion percentage of the upload
             var progress = parseInt(data.loaded / data.total * 100, 10);
-            console.log(progress);
-            //console.log(data.context[0]);
-            //console.log(data.context[0].find('.progressbar'));
 
-            // Update the hidden input field and trigger a change
-            // so that the jQuery knob plugin knows to update the dial
-            var progressBar = $('.progress-bar');
-            var progressDiv = $('.progress');
-            progressBar.css('width', progress+'%').attr('aria-valuenow', progress);
+            updateProgress(data.context, progress);
+        },
 
-            if(progress == 100){
-                data.context.removeClass('working');
-                var uploadInputs = $('#uploadInputs');
-                uploadInputs.fadeOut(function(){
-                    uploadInputs.remove();
-                });
-                progressDiv.fadeOut(function(){
-                    progressDiv.remove();
-                });
-            }
+        done: function(e, data) {
+            uploadComplete(data.context);
         },
 
         fail:function(e, data){
-            // Something has gone wrong!
-            data.context.addClass('error');
+            resp = data.jqXHR.responseJSON
+            if('upl' in resp) {
+                displayErrorMessage(data.context, resp['upl']);
+            } else {
+                $('#globalError').text(data.jqXHR.responseText);
+            }
         }
     });
 
@@ -147,13 +172,55 @@ $(function(){
     {% if request.GET.type %}
         $('#optionUploadType').collapse('hide');
     {% endif %}
+
+    function uploadUrl() {
+        var data = $('#urlForm').serialize();
+        console.log(data);
+        $('#addResearcherForm .formErrorDiv').each(function () {
+            $(this).text('');
+            });
+        
+        var tpl = addFileWidget($('#uploadUrl').val(),0);
+
+        updateProgress(tpl, 10);
+       $.post('{% url 'ajax-downloadUrl' %}', data, null, 'json').fail(function(data) {
+                console.log(data);
+                if(!data.responseJSON)
+                {
+                    $('#globalError').text(data.responseText);
+                }
+                else
+                {
+                    var resp = data.responseJSON;
+                    displayErrorMessage(tpl, resp['message']);
+                    // error = data.responseJSON;
+                    // for(field in error) {
+                    //    $('#error-'+field).text(error[field]);
+                    //}
+
+                }
+            }).done(function(data) {
+                console.log(data);
+                if(data['status'] == 'error') {
+                    $('#globalError').text(data['message']);
+                }
+                if(data['status'] == 'success') {
+                    tpl.find('i').text(formatFileSize(data['size']));
+                    updateProgress(tpl, 100);
+                    uploadComplete(tpl);
+                }
+        });
+    }
+
+    $('#submitUploadUrl').click(uploadUrl);
 });
+
 
 {% endblock %}
 
 {% block lists %}
 {% if success %}
-    <p>Paper successfully uploaded!</p>
+    <p>Papecr successfully uploaded!</p>
     <p>Thank you so much, you are awesome!</p>
     <p>Really, I mean it!</p>
     <p><a href="{% url 'paper' paper.pk %}">Back to the paper</a></p>
@@ -185,11 +252,11 @@ $(function(){
         </div>
         <div class="uploadModeUrl">
 
-            <form id="urlForm" method="post" action="{% url 'ajax-downloadUrl' %}">
+            <form id="urlForm" method="post" action="javascript:uploadUrl();">
                 {% csrf_token %}
                 <label for="url">{% trans "Enter an URL:" %}</label>
                 <div>
-                    <a id="submitUploadUrl" class="btn btn-success"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></a>
+                    <button type="submit" id="submitUploadUrl" class="btn btn-success"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
                     <div class="urlContainer">
                         <input id="uploadUrl" type="text" class="form-control" name="url" placeholder="http://"/>
                     </div>
@@ -201,7 +268,8 @@ $(function(){
             <p>{% trans "Drop a file here" %}</p>
             </div>
         </div>
-        <p>{% trans "PDF files only, maximum size 10MB." %}</p>
+        <p>{% trans "PDF files only, maximum size:" %} {{ max_file_size|filesizeformat }}.</p>
+        <div id="globalError"></div>
     </div>
     <div id="uploadedResult"></div>
 </div>

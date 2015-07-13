@@ -934,6 +934,16 @@ h1#paperTitle {
     float: right;
 }
 
+.uploadFileItem {
+    padding: 5px;
+}
+
+.uploadError {
+    border: 1px solid #808080;
+    border-radius: 2px;
+    background-color: #fe9898;
+}
+
 #uploadOptions {
     padding-top: 5px;
 }
