@@ -103,7 +103,7 @@ DOI_PROXY_SUPPORTS_BATCH = True
 # 50MB - 5242880
 DEPOSIT_MAX_FILE_SIZE = 10485760
 # Max download time when the file is downloaded from an URL (in seconds)
-URL_DEPOSIT_DOWNLOAD_TIMEOUT = 5
+URL_DEPOSIT_DOWNLOAD_TIMEOUT = 10
 # Allowed content types
 DEPOSIT_CONTENT_TYPES = ['application/pdf','application/x-pdf','application/octet-stream']
 

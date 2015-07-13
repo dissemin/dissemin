@@ -21,7 +21,6 @@
 from __future__ import unicode_literals
 from django import forms
 from django.utils.translation import ugettext as _
-from django.template.defaultfilters import filesizeformat
 
 from dissemin.settings import DEPOSIT_CONTENT_TYPES, DEPOSIT_MAX_FILE_SIZE
 

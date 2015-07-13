@@ -35,6 +35,7 @@ from upload.models import *
 from dissemin.settings import URL_DEPOSIT_DOWNLOAD_TIMEOUT, DEPOSIT_MAX_FILE_SIZE, DEPOSIT_CONTENT_TYPES
 
 import requests, json
+from requests.packages.urllib3.exceptions import ReadTimeoutError, HTTPError
 import wand.image, wand.exceptions
 import PyPDF2
 from datetime import datetime
@@ -162,6 +163,10 @@ def handleUrlDownload(request):
             except requests.exceptions.Timeout as e:
                 response['message'] = _('Invalid URL (server timed out).')
             except requests.exceptions.RequestException as e:
+                response['message'] = _('Invalid URL.')
+            except ReadTimeoutError as e:
+                response['message'] = _('Invalid URL (server timed out).')
+            except HTTPError as e:
                 response['message'] = _('Invalid URL.')
 
             if 'message' in response:
