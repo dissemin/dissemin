@@ -2,22 +2,37 @@
 {% load i18n %}
 
 <div class="policyItem {% if typ == "preprint" %}firstPolicyItem{% elif typ == "pdfversion" %}lastPolicyItem{% endif %}">
+    <div style="display:none;">
+        <span id="hiddenInline-{{ typ }}">
+            <span><strong>{{ type_text_no_punc }}</strong>
+                (<span class="policyPicSpan policyPic-{{ policy }}"></span>
+                {{ policy | explain_policy_short_no_punc }})</span>
+        </span>
+    </div>
     <div class="policyPic policyPic-{{ policy }}"></div>
     <div class="policyText">
-        <p>{{ type_text }} {{ policy | explain_policy_short }}
+        <p>
+        {% if mode == "radio" %}<label>{% endif %}
+        {{ type_text }} {{ policy | explain_policy_short }}
         {% if policy != "cannot" %}
             <span class="policyDetailUpload">
             {% if mode == "link" %}
             <a href="{% url 'upload_paper' paper.pk %}?type={{ typ }}" class="btn btn-default btn-xs">{% trans "Upload" %}</a>
             {% elif mode == "radio" %}
-            <input type="radio" name="radioUploadType" value="{{ typ }}" />   
+            <input type="radio" name="radioUploadType" value="{{ typ }}" id="radio{{ typ }}"
+                {% if request.GET.type == typ %}checked="checked"{% endif %} />   
             {% endif %}
             </span>
         {% endif %}
+        {% if mode == "radio" %}</label>{% endif %}
         </p>
         <ul>
         {% for restriction in conditions %}
-            <li>{{ restriction|striptags }}</li>
+            <li>
+                {% if mode == "radio" %}<label for="radio{{ typ }}">{% endif %}
+                {{ restriction|striptags }}
+            {% if mode == "radio" %}</label>{% endif %}
+            </li>
         {% endfor %}
         </ul>
     </div>

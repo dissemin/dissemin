@@ -367,6 +367,16 @@ h1#paperTitle {
     float: left;
 }
 
+.policyPicSpan
+{
+    height: 1.1em;
+    width: 1em;
+    display: inline-block;
+    vertical-align:middle;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
 .policyPic-can
 {
     background-image: url('../green-circle.png');
@@ -396,6 +406,13 @@ h1#paperTitle {
 {
     margin-left: 25px;
     min-height: 25px;
+}
+
+.policyText label
+{
+    display: block;
+    margin-bottom: 0px;
+    font-weight: inherit;
 }
 
 .policyText ul
@@ -926,13 +943,19 @@ h1#paperTitle {
     padding: 5px 10px;
 }
 
+.panel-heading a
+{
+    color: inherit;
+    font-weight: inherit;
+}
+
 #dropZone {
     width: 100%;
     height: 100px;
     border: 2px dashed grey;
     display: inline-block;
     text-align: center;
-    font-color: #CCC;
+    color: #CCC;
 }
 #dropZone p {
     text-align: center;

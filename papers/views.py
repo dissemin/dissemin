@@ -20,7 +20,7 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden
 from django.template import RequestContext, loader
 from django.views import generic
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -227,12 +227,14 @@ def mailPaperView(request, pk):
         send_email_for_paper(source) 
         return render(request, 'papers/mail_paper.html', {'paper':source})
     else:
-        return redirect('/')
+        return HttpResponseForbidden()
 
 @user_passes_test(is_authenticated)
 def paper_upload_view(request, pk):
     paper = get_object_or_404(Paper, pk=pk)
     context = {'paper':paper}
+    if request.GET.get('type') not in [None,'preprint','postprint','pdfversion']:
+        return HttpResponseForbidden()
     if request.method == 'POST':
         form = PaperUploadForm(request.POST, request.FILES)
         context['form'] = form

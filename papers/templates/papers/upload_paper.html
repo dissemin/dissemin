@@ -34,8 +34,6 @@ $(function(){
         $(this).parent().parent().find('input').click();
     });
 
-    console.log($('#dropZone'));
-
     // Initialize the jQuery File Upload plugin
     uploadForm.fileupload({
 
@@ -92,8 +90,9 @@ $(function(){
 
             if(progress == 100){
                 data.context.removeClass('working');
-                uploadForm.fadeOut(function(){
-                    uploadForm.remove();
+                var uploadInputs = $('#uploadInputs');
+                uploadInputs.fadeOut(function(){
+                    uploadInputs.remove();
                 });
                 progressDiv.fadeOut(function(){
                     progressDiv.remove();
@@ -129,6 +128,25 @@ $(function(){
         return (bytes / 1000).toFixed(2) + ' KB';
     }
 
+
+    /* Panels */
+    $('#optionUploadType').collapse({
+        parent:$('#uploadOptions'),
+        toggle:false,
+        }).on('show.bs.collapse', function () {
+        $('#uploadTypeInline').empty();
+    }).on('hidden.bs.collapse', function () {
+        var selected = $("input[type='radio'][name='radioUploadType']:checked");
+        if(selected.length > 0) {
+            $('#uploadTypeInline').append($('#hiddenInline-'+selected.val()).clone());      
+        }
+    });
+    $("input[type='radio'][name='radioUploadType']").click(function(){
+        $('#optionUploadType').collapse('hide');
+    });
+    {% if request.GET.type %}
+        $('#optionUploadType').collapse('hide');
+    {% endif %}
 });
 
 {% endblock %}
@@ -156,30 +174,35 @@ $(function(){
 </div>
 
 <span class="detailsTitle">{% trans "Document" %}</span>
-<div id="uploadInputs" class="detailsContent">
-    <div class="uploadModeBrowse">
-        <form id="uploadForm" method="post" action="{% url 'ajax-uploadFulltext' %}" enctype="multipart/form-data">
-            {% csrf_token %}
-            <p>{% trans "Select a file:" %}</p>
-            <p><a class="btn btn-success" id="browseButton">{% trans "Browse" %}</a><input type="file" name="upl" style="display:none" /></p>
-        </form>
-    </div>
-    <div class="uploadModeUrl">
-        <form id="urlForm" method="post" action="{% url 'ajax-downloadUrl' %}">
-            {% csrf_token %}
-            <p>{% trans "Enter an URL:" %}</p>
-            <a id="submitUploadUrl" class="btn btn-success"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></a>
-            <div class="urlContainer">
-                <input id="uploadUrl" type="text" class="form-control" name="url" placeholder="http://"/>
-            </div>
-        </form>
-    </div>
-    <div class="uploadModeDrop">
-        <div id="dropZone">
-        <p>{% trans "Drop a file here" %}</p>
+<div class="detailsContent">
+    <div id="uploadInputs">
+        <div class="uploadModeBrowse">
+            <form id="uploadForm" method="post" action="{% url 'ajax-uploadFulltext' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label for="upl">{% trans "Select a file:" %}</label>
+                <p><a class="btn btn-success" id="browseButton">{% trans "Browse" %}</a><input type="file" name="upl" style="display:none" /></p>
+            </form>
         </div>
+        <div class="uploadModeUrl">
+
+            <form id="urlForm" method="post" action="{% url 'ajax-downloadUrl' %}">
+                {% csrf_token %}
+                <label for="url">{% trans "Enter an URL:" %}</label>
+                <div>
+                    <a id="submitUploadUrl" class="btn btn-success"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></a>
+                    <div class="urlContainer">
+                        <input id="uploadUrl" type="text" class="form-control" name="url" placeholder="http://"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="uploadModeDrop">
+            <div id="dropZone">
+            <p>{% trans "Drop a file here" %}</p>
+            </div>
+        </div>
+        <p>{% trans "PDF files only, maximum size 10MB." %}</p>
     </div>
-    <p>{% trans "PDF files only, maximum size 10MB." %}</p>
     <div id="uploadedResult"></div>
 </div>
 
@@ -187,11 +210,8 @@ $(function(){
 <div id="uploadOptions" class="panel-group detailsContent" role="tablist" aria-multiselectable="true">
     <div class="panel panel-default">
         <div class="panel-heading" role="tab" id="headingUploadType">
-            <span>
-                {% trans "Upload type:" %} postprint <a role="button" data-toggle="collapse"
-                  data-parent="#uploadOptions" href="#optionUploadType" aria-expanded="true"
-                  aria-controls="optionUploadType">({% trans "Change" %})</a>
-            </span>
+            <a role="button" data-toggle="collapse" data-parent="#uploadOptions"
+                href="#optionUploadType">{% trans "Upload type:" %}</span><span id="uploadTypeInline"></a>
         </div>
         <div id="optionUploadType" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingUploadType">
             <div class="panel-body">
@@ -202,9 +222,9 @@ $(function(){
     <div class="panel panel-default">
         <div class="panel-heading" role="tab" id="headingRepository">
             <span>
-                {% trans "Repository:" %} Zenodo <a role="button" data-toggle="collapse"
+                <a role="button" data-toggle="collapse"
                   data-parent="#uploadOptions" href="#optionRepository" aria-expanded="true"
-                  aria-controls="optionRepository">({% trans "Change" %})</a>
+                                                                        aria-controls="optionRepository">{% trans "Repository:" %} <strong>Zenodo</strong></a>
             </span>
         </div>
         <div id="optionRepository" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingRepository">

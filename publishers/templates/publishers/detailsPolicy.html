@@ -3,10 +3,13 @@
 
 <div class="policyList">
 {% trans "Preprint:" as type_text %}
-{% include "publishers/itemPolicy.html" with policy=publisher.preprint conditions=publisher.preprint_conditions type_text=type_text typ="preprint" %}
+{% trans "preprint" as ttnp %}
+{% include "publishers/itemPolicy.html" with policy=publisher.preprint conditions=publisher.preprint_conditions type_text=type_text typ="preprint" type_text_no_punc=ttnp %}
 {% trans "Postprint:" as type_text %}
-{% include "publishers/itemPolicy.html" with policy=publisher.postprint conditions=publisher.postprint_conditions type_text=type_text typ="postprint" %}
-{% trans "Publisher's version:" as type_text %}
-{% include "publishers/itemPolicy.html" with policy=publisher.pdfversion conditions=publisher.pdfversion_conditions type_text=type_text typ="pdfversion" %}
+{% trans "postprint" as ttnp %}
+{% include "publishers/itemPolicy.html" with policy=publisher.postprint conditions=publisher.postprint_conditions type_text=type_text typ="postprint" type_text_no_punc=ttnp %}
+{% trans "Published version:" as type_text %}
+{% trans "published version" as ttnp %}
+{% include "publishers/itemPolicy.html" with policy=publisher.pdfversion conditions=publisher.pdfversion_conditions type_text=type_text typ="pdfversion" type_text_no_punc=ttnp %}
 </div>
 
