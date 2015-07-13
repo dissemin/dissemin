@@ -35,7 +35,7 @@ libxml2-dev
 libxslt1-dev
 python-dev
 gettext
-
+libmagickwand-dev
 
 -----------
 Then, build a virtual environment to isolate all the python dependencies.

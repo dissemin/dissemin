@@ -37,7 +37,7 @@ from dissemin.settings import URL_DEPOSIT_DOWNLOAD_TIMEOUT, DEPOSIT_MAX_FILE_SIZ
 
 from papers.models import *
 from papers.user import *
-from papers.forms import AddResearcherForm, AjaxUploadForm, UrlDownloadForm, invalid_content_type_message
+from papers.forms import AddResearcherForm
 from papers.utils import iunaccent, sanitize_html
 
 # General function used to change a CharField in a model with ajax
@@ -191,48 +191,6 @@ def changePublisherStatus(request):
         return HttpResponseNotFound('NOK: '+message, content_type='text/plain')
     
 
-# AJAX upload
-@user_passes_test(is_authenticated)
-def handleAjaxUpload(request):
-    if request.method == 'POST':
-        form = AjaxUploadForm(request.POST, request.FILES)
-        if form.is_valid():
-            return HttpResponse('{"status":"success"}', content_type='text/json')
-    return HttpResponseForbidden(json.dumps(form.errors), content_type='text/json')
-
-@user_passes_test(is_authenticated)
-def handleUrlDownload(request):
-    response = {'status':'error'}
-    if request.method == 'POST':
-        form = UrlDownloadForm(request.POST)
-        if form.is_valid():
-            try:
-                r = requests.get(form.cleaned_data['url'], timeout=URL_DEPOSIT_DOWNLOAD_TIMEOUT, stream=True)
-                r.raise_for_status()
-                content = r.raw.read(DEPOSIT_MAX_FILE_SIZE+1, decode_content=False)
-
-                if len(content) > DEPOSIT_MAX_FILE_SIZE:
-                    response['message'] = __('File too large.')
-
-                content_type = r.headers.get('content-type')
-                if 'text/html' in content_type:
-                    response['message'] = __('Invalid content type: this link points to a web page, '+
-                            'we need a direct link to a PDF file.')
-                elif content_type not in DEPOSIT_CONTENT_TYPES:
-                    response['message'] = invalid_content_type_message
-
-            except requests.exceptions.Timeout as e:
-                response['message'] = __('Invalid URL (server timed out).')
-            except requests.exceptions.RequestException as e:
-                response['message'] = __('Invalid URL.')
-
-            if 'message' in response:
-                return HttpResponseForbidden(json.dumps(response))
-            response = {'status':'success','size':len(content)}
-            return HttpResponse(json.dumps(response), content_type='text/json')
-    response['message'] = __('Invalid form.')
-    return HttpResponseForbidden(json.dumps(response), content_type='text/json')
-
 urlpatterns = patterns('',
     url(r'^annotate-paper-(?P<pk>\d+)-(?P<status>\d+)$', annotatePaper, name='ajax-annotatePaper'),
     url(r'^delete-researcher-(?P<pk>\d+)$', deleteResearcher, name='ajax-deleteResearcher'),
@@ -242,7 +200,5 @@ urlpatterns = patterns('',
     url(r'^change-author$', changeAuthor, name='ajax-changeAuthor'),
     url(r'^add-researcher$', addResearcher, name='ajax-addResearcher'),
     url(r'^change-publisher-status$', changePublisherStatus, name='ajax-changePublisherStatus'),
-    url(r'^upload-fulltext$', handleAjaxUpload, name='ajax-uploadFulltext'),
-    url(r'^download-url$', handleUrlDownload, name='ajax-downloadUrl'),
 )
 

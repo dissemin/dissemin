@@ -19,25 +19,30 @@
 #
 
 from __future__ import unicode_literals
+
 from django import forms
+
 from django.utils.translation import ugettext as _
 from django.template.defaultfilters import filesizeformat
-
 from dissemin.settings import DEPOSIT_CONTENT_TYPES, DEPOSIT_MAX_FILE_SIZE
 
-from papers.models import *
 
-class AddResearcherForm(forms.Form):
-    first = forms.CharField(label=_('First name'), max_length=256, min_length=2)
-    last = forms.CharField(label=_('Last name'), max_length=256, min_length=2)
-    department = forms.ModelChoiceField(label=_('Department'), queryset=Department.objects.all())
-    email = forms.EmailField(label=_('Email'), required=False)
-    homepage = forms.URLField(label=_('Homepage'),required=False)
-    role = forms.CharField(label=_('Role'),required=False)
+invalid_content_type_message = _('Invalid file format: only PDF files are accepted.')
 
-class PaperUploadForm(forms.Form):
-    file = forms.FileField()
-    upload_type = forms.ChoiceField(label=_('Upload type'), choices = UPLOAD_TYPE_CHOICES,
-            initial='postprint')
+class AjaxUploadForm(forms.Form):
+    upl = forms.FileField()
 
+    def clean_upl(self):
+        content = self.cleaned_data['upl']
+        if content.content_type in DEPOSIT_CONTENT_TYPES:
+            if content._size > DEPOSIT_MAX_FILE_SIZE:
+                raise forms.ValidationError(_('File too large (%s). Maximum size is %s.') %
+                        (filesizeformat(content._size), filesizeformat(DEPOSIT_MAX_FILE_SIZE)),
+                        code='too_large')
+        else:
+            raise forms.ValidationError(invalid_content_type_message, code='invalid_type')
+        return content
+
+class UrlDownloadForm(forms.Form):
+    url = forms.URLField(label=_('URL'),required=True)
 

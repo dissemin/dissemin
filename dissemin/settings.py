@@ -157,6 +157,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'upload',
     'statistics',
     'publishers',
     'papers',
@@ -237,6 +238,7 @@ STATIC_URL = '/static/'
 
 # Relative path to the directory where we store user uploads
 MEDIA_ROOT = 'media/'
+MEDIA_URL = '/media/'
 
 ### Celery config ###
 # Celery runs asynchronous tasks such as metadata harvesting or

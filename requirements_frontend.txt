@@ -7,3 +7,5 @@ name_tools
 lxml
 django-cas-ng
 unicode_tex
+wand
+PyPDF2

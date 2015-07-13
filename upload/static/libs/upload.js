@@ -1,0 +1,176 @@
+$(function(){
+
+    var resultDiv = $('#uploadedResult');
+    var uploadForm = $('#uploadForm');
+
+    function addFileWidget(name, size) {
+        var tpl = $('<div class="uploadFileItem uploadWorking"><div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%"></div></div>    <div class="fileDetails"><p></p><span></span></div><div style="clear:both"></div></div>');
+
+        // Append the file name and file size
+        tpl.find('p').text(name)
+        var formattedSize = 'Uploading...';
+        if(size > 0) {
+            formattedSize = formatFileSize(size);
+        }
+        tpl.find('span').append('<i>' + formattedSize + '</i>');
+
+        // Add the HTML to the UL element
+        resultDiv.empty();
+        return tpl.appendTo(resultDiv);
+    }
+
+    function removeBar() {
+        var progressDiv = $('.progress');
+        progressDiv.fadeOut(function(){
+            progressDiv.remove();
+        });
+    }
+
+    function updateProgress(tpl, progress) {
+        var progressBar = $('.progress-bar');
+        progressBar.css('width', progress+'%').attr('aria-valuenow', progress);
+    }
+
+    function uploadComplete(tpl, data) {
+        var i = tpl.find('i');
+        i.empty().append(data['num_pages']+' pages<br/>'+formatFileSize(data['size']));
+        tpl.prepend(
+            '<img src="'+data['thumbnail']+'" class="uploadThumbnail" alt="Thumbnail" />');
+
+        tpl.removeClass('uploadWorking');
+        var uploadInputs = $('#uploadInputs');
+        uploadInputs.fadeOut(function(){
+            uploadInputs.remove();
+        });
+        removeBar();
+    }
+
+    function displayErrorMessage(tpl, msg) {
+        tpl.find('i').text(msg);
+        tpl.addClass('uploadError');
+        removeBar();
+    }
+
+
+    $('#browseButton').click(function(){
+        // Simulate a click on the file input button
+        // to show the file browser dialog
+        $(this).parent().parent().find('input').click();
+    });
+
+    // Initialize the jQuery File Upload plugin
+    uploadForm.fileupload({
+
+        // This element will accept file drag/drop uploading
+        dropZone: $('#dropZone'),
+
+        // This function is called when a file is added to the queue;
+        // either via the browse button, or via drag/drop:
+        add: function (e, data) {
+            console.log('starting upload');
+
+            data.context = addFileWidget(data.files[0].name, data.files[0].size);
+
+           // Listen for clicks on the cancel icon
+            data.context.find('span').click(function(){
+
+                if(data.context.hasClass('working')){
+                    jqXHR.abort();
+                }
+
+                data.context.fadeOut(function(){
+                    data.context.remove();
+                });
+
+            });
+
+            // Automatically upload the file once it is added to the queue
+            var jqXHR = data.submit();
+        },
+
+        progress: function(e, data){
+            // Calculate the completion percentage of the upload
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+
+            updateProgress(data.context, progress);
+        },
+
+        done: function(e, data) {
+            uploadComplete(data.context, data.jqXHR.responseJSON);
+        },
+
+        fail:function(e, data){
+            var resp = data.jqXHR.responseJSON;
+            console.log(resp);
+            if(typeof resp != 'undefined' && 'upl' in resp) {
+                displayErrorMessage(data.context, resp['upl']);
+            } else {
+                $('#globalError').text(data.jqXHR.responseText);
+            }
+        }
+    });
+
+    // Prevent the default action when a file is dropped on the window
+    $(document).on('drop dragover', function (e) {
+        e.preventDefault();
+    });
+
+    // Helper function that formats the file sizes
+    function formatFileSize(bytes) {
+        if (typeof bytes !== 'number') {
+            return '';
+        }
+
+        if (bytes >= 1000000000) {
+            return (bytes / 1000000000).toFixed(2) + ' GB';
+        }
+
+        if (bytes >= 1000000) {
+            return (bytes / 1000000).toFixed(2) + ' MB';
+        }
+
+        return (bytes / 1000).toFixed(2) + ' KB';
+    }
+
+    // Function triggered when an URL is submitted
+    function uploadUrl() {
+        var data = $('#urlForm').serialize();
+        console.log(data);
+        $('#addResearcherForm .formErrorDiv').each(function () {
+            $(this).text('');
+            });
+        
+        var tpl = addFileWidget($('#uploadUrl').val(),0);
+
+        updateProgress(tpl, 10);
+       $.post('/ajax-upload/download-url', data, null, 'json').fail(function(data) {
+                console.log(data);
+                if(!data.responseJSON)
+                {
+                    $('#globalError').text(data.responseText);
+                }
+                else
+                {
+                    var resp = data.responseJSON;
+                    displayErrorMessage(tpl, resp['message']);
+                    // error = data.responseJSON;
+                    // for(field in error) {
+                    //    $('#error-'+field).text(error[field]);
+                    //}
+
+                }
+            }).done(function(data) {
+                console.log(data);
+                if(data['status'] == 'error') {
+                    $('#globalError').text(data['message']);
+                }
+                if(data['status'] == 'success') {
+                    updateProgress(tpl, 100);
+                    uploadComplete(tpl, data);
+                }
+        });
+    }
+
+    $('#submitUploadUrl').click(uploadUrl);
+
+});

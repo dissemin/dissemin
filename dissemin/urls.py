@@ -48,6 +48,8 @@ urlpatterns = patterns('',
     url(r'^accounts/login/$', 'django_cas_ng.views.login', name='login'), 
     url(r'^accounts/logout/$','django_cas_ng.views.logout', name='logout'),
     url(r'^logout/$', 'django_cas_ng.views.logout'),
+    url(r'^ajax-upload/', include('upload.urls')),
     url(r'^', include('papers.urls')),
     url(r'^', include('publishers.urls')),
-) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT
+) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
