@@ -917,18 +917,6 @@ h1#paperTitle {
     font-weight: inherit;
 }
 
-#dropZone {
-    width: 100%;
-    height: 100px;
-    border: 2px dashed grey;
-    display: inline-block;
-    text-align: center;
-    color: #CCC;
-}
-#dropZone p {
-    text-align: center;
-}
-
 #optionUploadType .panel-body {
     padding: 0px;
 }
@@ -947,6 +935,29 @@ h1#paperTitle {
 
 .submitDeposit {
     text-align: center;
+}
+
+#waitingArea {
+    text-align: center;
+}
+
+.waitingBird {
+    display: inline-block;
+    border-radius: 50%;
+    background-color: #84B4DE;
+    width: 128px;
+    height: 128px;
+    margin: 12px;
+}
+.waitingBird img {
+    width: 128px;
+    height: 100px;
+    margin-top: 14px;
+}
+
+#waitingArea span {
+    font-style: italic;
+    font-size: 1.2em;
 }
 
 #paper_uploader {

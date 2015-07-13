@@ -235,20 +235,6 @@ def paper_upload_view(request, pk):
     context = {'paper':paper, 'max_file_size':DEPOSIT_MAX_FILE_SIZE}
     if request.GET.get('type') not in [None,'preprint','postprint','pdfversion']:
         return HttpResponseForbidden()
-    if request.method == 'POST':
-        form = PaperUploadForm(request.POST, request.FILES)
-        context['form'] = form
-        if form.is_valid():
-            d = DepositRecord(paper=paper, user=request.user,
-                    upload_type=form.cleaned_data['upload_type'],
-                    file=request.FILES['file'])
-            d.save()
-            submitPubli(paper, MEDIA_ROOT + d.file.url)
-            context['success'] = True
-        else:
-            context['failed'] = True
-    else:
-        context['form'] = PaperUploadForm()
     return render(request, 'papers/upload_paper.html', context)
 
 class JournalView(generic.DetailView):

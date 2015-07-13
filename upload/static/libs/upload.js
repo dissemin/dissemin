@@ -37,6 +37,8 @@ $(function(){
         tpl.prepend(
             '<img src="'+data['thumbnail']+'" class="uploadThumbnail" alt="Thumbnail" />');
 
+        $('#uploadFileId').val(data['file_id']);
+
         tpl.removeClass('uploadWorking');
         var uploadInputs = $('#uploadInputs');
         uploadInputs.fadeOut(function(){
@@ -67,7 +69,6 @@ $(function(){
         // This function is called when a file is added to the queue;
         // either via the browse button, or via drag/drop:
         add: function (e, data) {
-            console.log('starting upload');
 
             data.context = addFileWidget(data.files[0].name, data.files[0].size);
 
@@ -101,7 +102,6 @@ $(function(){
 
         fail:function(e, data){
             var resp = data.jqXHR.responseJSON;
-            console.log(resp);
             if(typeof resp != 'undefined' && 'upl' in resp) {
                 displayErrorMessage(data.context, resp['upl']);
             } else {
@@ -135,16 +135,11 @@ $(function(){
     // Function triggered when an URL is submitted
     function uploadUrl() {
         var data = $('#urlForm').serialize();
-        console.log(data);
-        $('#addResearcherForm .formErrorDiv').each(function () {
-            $(this).text('');
-            });
         
         var tpl = addFileWidget($('#uploadUrl').val(),0);
 
         updateProgress(tpl, 10);
-       $.post('/ajax-upload/download-url', data, null, 'json').fail(function(data) {
-                console.log(data);
+        $.post('/ajax-upload/download-url', data, null, 'json').fail(function(data) {
                 if(!data.responseJSON)
                 {
                     $('#globalError').text(data.responseText);
@@ -153,14 +148,8 @@ $(function(){
                 {
                     var resp = data.responseJSON;
                     displayErrorMessage(tpl, resp['message']);
-                    // error = data.responseJSON;
-                    // for(field in error) {
-                    //    $('#error-'+field).text(error[field]);
-                    //}
-
                 }
             }).done(function(data) {
-                console.log(data);
                 if(data['status'] == 'error') {
                     $('#globalError').text(data['message']);
                 }

@@ -37,8 +37,10 @@ from dissemin.settings import URL_DEPOSIT_DOWNLOAD_TIMEOUT, DEPOSIT_MAX_FILE_SIZ
 
 from papers.models import *
 from papers.user import *
-from papers.forms import AddResearcherForm
+from papers.forms import AddResearcherForm, PaperDepositForm
 from papers.utils import iunaccent, sanitize_html
+
+from time import sleep # TODO delete me
 
 # General function used to change a CharField in a model with ajax
 def process_ajax_change(request, model, allowedFields):
@@ -189,7 +191,26 @@ def changePublisherStatus(request):
             raise ObjectDoesNotExist
     except ObjectDoesNotExist:
         return HttpResponseNotFound('NOK: '+message, content_type='text/plain')
-    
+
+
+@user_passes_test(is_authenticated)
+def submitDeposit(request, pk):
+    paper = get_object_or_404(Paper, pk=pk)
+    if request.method == 'POST':
+        form = PaperDepositForm(request.POST)
+        if form.is_valid():
+            context = {}
+            sleep(2)
+            #d = DepositRecord(paper=paper, user=request.user,
+            #        upload_type=form.cleaned_data['upload_type'],
+            #        file=request.FILES['file'])
+            #d.save()
+            #submitPubli(paper, MEDIA_ROOT + d.file.url)
+            context['success'] = True
+            return HttpResponse(json.dumps(context), content_type='text/json')
+        else:
+            return HttpResponseForbidden(json.dumps(form.errors), content_type='text/json')
+    return HttpResponseForbidden()
 
 urlpatterns = patterns('',
     url(r'^annotate-paper-(?P<pk>\d+)-(?P<status>\d+)$', annotatePaper, name='ajax-annotatePaper'),
@@ -200,5 +221,6 @@ urlpatterns = patterns('',
     url(r'^change-author$', changeAuthor, name='ajax-changeAuthor'),
     url(r'^add-researcher$', addResearcher, name='ajax-addResearcher'),
     url(r'^change-publisher-status$', changePublisherStatus, name='ajax-changePublisherStatus'),
+    url(r'^submit-deposit-(?P<pk>\d+)$', submitDeposit, name='ajax-submitDeposit'),
 )
 

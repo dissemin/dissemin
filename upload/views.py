@@ -131,10 +131,13 @@ def save_pdf(user, orig_name, pdf_blob):
     upload.thumbnail.save('thumbnail.png', thumbnail_file)
     upload.save()
 
-    response = {'status':'success',
+    response = {
+            'status':'success',
             'size':len(pdf_blob),
             'num_pages':num_pages,
-            'thumbnail':upload.thumbnail.url}
+            'thumbnail':upload.thumbnail.url,
+            'file_id':upload.id,
+            }
     return response
 
 

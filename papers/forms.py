@@ -25,6 +25,7 @@ from django.utils.translation import ugettext as _
 from dissemin.settings import DEPOSIT_CONTENT_TYPES, DEPOSIT_MAX_FILE_SIZE
 
 from papers.models import *
+from upload.models import UploadedPDF
 
 class AddResearcherForm(forms.Form):
     first = forms.CharField(label=_('First name'), max_length=256, min_length=2)
@@ -34,9 +35,15 @@ class AddResearcherForm(forms.Form):
     homepage = forms.URLField(label=_('Homepage'),required=False)
     role = forms.CharField(label=_('Role'),required=False)
 
-class PaperUploadForm(forms.Form):
-    file = forms.FileField()
-    upload_type = forms.ChoiceField(label=_('Upload type'), choices = UPLOAD_TYPE_CHOICES,
-            initial='postprint')
+class PaperDepositForm(forms.Form):
+    file_id = forms.IntegerField()
+    radioUploadType = forms.ChoiceField(label=_('Upload type'), choices = UPLOAD_TYPE_CHOICES)
 
+    def clean_file_id(self):
+        id = self.cleaned_data['file_id']
+        try:
+            uploadedPDF = UploadedPDF.objects.get(pk=id)
+        except UploadedPDF.NotFound:
+            raise forms.ValidationError(_("Invalid full text identifier."), code='invalid_file_id')
+        return uploadedPDF
 

@@ -1,6 +1,5 @@
 
 function makeDeletable(elem) {
-    console.log(elem.data('undotext'));
     elem.click( function (evt) {
     var domElem = $(this);
     console.log($(this));
