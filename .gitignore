@@ -38,7 +38,7 @@ doc/bio.doc
 #Passwords
 dissemin/NOTONGIT*
 # Uploaded files
-media/deposits/
+media/
 
 # build files for doc
 doc/sphinx/_build/

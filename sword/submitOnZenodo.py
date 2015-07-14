@@ -1,36 +1,41 @@
+# -*- encoding: utf-8 -*-
+
+# Dissemin: open access policy enforcement tool
+# Copyright (C) 2014 Antonin Delpeuch
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Affero General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+# 
+# You should have received a copy of the GNU Affero General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+#
+
+from __future__ import unicode_literals
+
 import json
 import requests 
+
+from django.utils.translation import ugettext as _
 from os.path import basename
 from dissemin.settings import ZENODO_KEY
-#THIS IS PRIVATE
 
-
-#url = "https://zenodo.org/api/deposit/depositions/1234/files?access_token=2SsQE9VkkgDQG1WDjrvrZqTJtkmsGHICEaccBY6iAEuBlSTdMC6QvcTR2HRv"
-#TODO error handling
+class DepositError(Exception):
+    def __init__(self, msg, logs):
+        super(DepositError, self).__init__(msg)
+        self.logs = logs
 
 ZENODO_API_URL = "https://zenodo.org/api/deposit/depositions"
 
-def submitPubli(paper,filePdf):
-    if ZENODO_KEY is None:
-        raise ValueError("No Zenodo API key provided.")
-
-    # Checking the access token
-    r = requests.get(ZENODO_API_URL+"?access_token=" + ZENODO_KEY)
-    print(r.status_code)
-
-    # Creating a new deposition
-    headers = {"Content-Type": "application/json"}
-    r = requests.post(ZENODO_API_URL+"?access_token=" + ZENODO_KEY , data="{}", headers=headers)
-    print(r.status_code)
-    deposition_id = r.json()['id']
-
-    # Uploading the PDF
-    data = {'filename':basename(filePdf)}
-    files = {'file': open(filePdf, 'rb')}
-    r = requests.post(ZENODO_API_URL+"/%s/files?access_token=%s" % (deposition_id,ZENODO_KEY), data=data, files=files)
-    print(r.status_code)
-
-    # Submitting the metadata
+def createZenodoMetadata(paper):
+    data = {}
     abstract = "No abstract"
     for record in paper.sorted_oai_records:
         if record.description:
@@ -50,11 +55,67 @@ def submitPubli(paper,filePdf):
         if publi.doi:
             data['metadata']['doi']= publi.doi
             break
-    r = requests.put(ZENODO_API_URL+"/%s?access_token=%s" % ( deposition_id, ZENODO_KEY), data=json.dumps(data), headers=headers)
-    
-    # Deleting the deposition
-    print(r.status_code)
-    r = requests.delete(ZENODO_API_URL+"/%s?access_token=%s" % ( deposition_id, ZENODO_KEY) )
-#    r = requests.post("https://zenodo.org/api/deposit/depositions/%s/actions/publish?access_token=2SsQE9VkkgDQG1WDjrvrZqTJtkmsGHICEaccBY6iAEuBlSTdMC6QvcTR2HRv" % deposition_id)
-#   print(r.status_code)
-    return r
+    return data
+
+def submitPubli(paper,filePdf):
+    result = {}
+    log = ''
+    def log_request(r, expected_status_code, error_msg, log):
+        log += '--- Request to %s\n' % r.url
+        log += 'Status code: %d (expected %d)\n' % (r.status_code, expected_status_code)
+        if r.status_code != expected_status_code:
+            log += 'Server response:\n'
+            log += r.text
+            log += '\n'
+            raise DepositError(error_msg, log)
+        return log
+
+    if ZENODO_KEY is None:
+        raise DepositError("No Zenodo API key provided.")
+
+    try:
+        # Checking the access token
+        log += "### Checking the access token\n"
+        r = requests.get(ZENODO_API_URL+"?access_token=" + ZENODO_KEY)
+        log = log_request(r, 200, 'Unable to authenticate to Zenodo.', log)
+           
+        # Creating a new deposition
+        log += "### Creating a new deposition\n"
+        headers = {"Content-Type": "application/json"}
+        r = requests.post(ZENODO_API_URL+"?access_token=" + ZENODO_KEY , data=str("{}"), headers=headers)
+        log = log_request(r, 201, 'Unable to create a new deposition on Zenodo.', log)
+        deposition_id = r.json()['id']
+        result['identifier'] = deposition_id
+        log += "Deposition id: %d\n" % deposition_id
+
+        # Uploading the PDF
+        log += "### Uploading the PDF\n"
+        data = {'filename':basename(filePdf)}
+        files = {'file': open(filePdf, 'rb')}
+        r = requests.post(ZENODO_API_URL+"/%s/files?access_token=%s" % (deposition_id,ZENODO_KEY), data=data, files=files)
+        log = log_request(r, 201, 'Unable to send the document to Zenodo.', log)
+
+        # Creating the metadata
+        log += "### Generating the metadata\n"
+        data = createZenodoMetadata(paper)
+        log += str(data)+'\n'
+
+        # Submitting the metadata
+        log += "### Submitting the metadata\n"
+        r = requests.put(ZENODO_API_URL+"/%s?access_token=%s" % ( deposition_id, ZENODO_KEY), data=json.dumps(data), headers=headers)
+        log = log_request(r, 200, 'Unable to submit paper metadata to Zenodo.', log)
+        
+        # Deleting the deposition
+        log += "### Deleting the deposition\n"
+        r = requests.delete(ZENODO_API_URL+"/%s?access_token=%s" % ( deposition_id, ZENODO_KEY) )
+    #    r = requests.post("https://zenodo.org/api/deposit/depositions/%s/actions/publish?access_token=2SsQE9VkkgDQG1WDjrvrZqTJtkmsGHICEaccBY6iAEuBlSTdMC6QvcTR2HRv" % deposition_id)
+    #   print(r.status_code)
+    except DepositError as e:
+        raise e
+    except Exception as e:
+        log += "Caught exception:\n"
+        log += str(type(e))+': '+str(e)
+        raise DepositError('Connection to Zenodo failed. Please try again later.', log)
+
+    result['logs'] = log
+    return result

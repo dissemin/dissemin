@@ -51,10 +51,13 @@
     padding-top: 5px;
 }
 
-.uploadError {
+.error {
     border: 1px solid #808080;
     border-radius: 2px;
     background-color: #fe9898;
+    padding: 4px;
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
 
 #dropZone {

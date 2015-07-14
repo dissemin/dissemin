@@ -42,6 +42,7 @@ $(function(){
     });
     $("input[type='radio'][name='radioUploadType']").click(function(){
         $('#optionUploadType').collapse('hide');
+        $('#error-radioUploadType').removeClass('error').empty();
     });
     {% if request.GET.type %}
         $('#optionUploadType').collapse('hide');
@@ -52,7 +53,7 @@ $(function(){
     /* Submitting the deposit */
     function depositPaper() {
        var data = $('#depositForm').serialize();
-       $('#depositError').removeClass('error').empty()
+       $('.error').removeClass('error').empty()
        $('#waitingArea,.submitDeposit').toggle();
 
        $.post('{% url 'ajax-submitDeposit' paper.pk %}', data, null, 'json').fail(
@@ -63,31 +64,35 @@ $(function(){
                 } else {
                     error = data.responseJSON;
                     console.log(error);
+                    if('message' in error) {
+                        errorText = error['message']
+                    }
+                    if('form' in error) {
+                        errors = error['form']
+                        if('file_id' in errors) {
+                            $('#globalError').addClass('error').text(errors['file_id'][0]); 
+                        }
+                        if('radioUploadType' in errors) {
+                            $('#error-radioUploadType').addClass('error').text(errors['radioUploadType'][0]);
+                            $('#optionUploadType').collapse('show');
+                        }
+                    }
                     for(field in error) {
-                        $('#error-'+field).text(error[field]);
+                        $('#error-'+field).addClass('error').text(error[field]);
                     }
                 }
-                $('#depositError').addClass('error').text(errorText);
+                if(errorText) {
+                    $('#depositError').addClass('error').text(errorText);
+                }
                 $('#waitingArea,.submitDeposit').toggle();
             }).done(function(data) {
-                $('#waitingArea,.submitDeposit').toggle();
-                var uploadId = data.responseJSON['upload_id'];
+                var uploadId = data['upload_id'];
                 window.location.replace('{% url 'paper' paper.pk %}?deposit='+uploadId);
             });
     }
 {% endblock %}
 
 {% block lists %}
-{% if success %}
-    <p>Papecr successfully uploaded!</p>
-    <p>Thank you so much, you are awesome!</p>
-    <p>Really, I mean it!</p>
-    <p><a href="{% url 'paper' paper.pk %}">Back to the paper</a></p>
-{% else %}
-{% if failed %}
-<p>Upload failed.</p>
-{% endif %}
-
 <div id="uploadIntro">
     <p>
         {% blocktrans %}
@@ -109,6 +114,7 @@ $(function(){
 <input type="hidden" id="uploadFileId" name="file_id" />
 <span class="detailsTitle">{% trans "Options" %}</span>
 <div id="uploadOptions" class="panel-group detailsContent" role="tablist" aria-multiselectable="true">
+    <div id="error-radioUploadType"></div>
     <div class="panel panel-default">
         <div class="panel-heading" role="tab" id="headingUploadType">
             <a role="button" data-toggle="collapse" data-parent="#uploadOptions"

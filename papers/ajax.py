@@ -39,7 +39,7 @@ from papers.models import *
 from papers.user import *
 from papers.forms import AddResearcherForm, PaperDepositForm
 from papers.utils import iunaccent, sanitize_html
-from sword.submitOnZenodo import submitPubli
+from sword.submitOnZenodo import submitPubli, DepositError
 
 from time import sleep # TODO delete me
 import os.path
@@ -199,38 +199,47 @@ def changePublisherStatus(request):
 def submitDeposit(request, pk):
     paper = get_object_or_404(Paper, pk=pk)
     if request.method == 'POST':
+        context = {'status':'error'}
         form = PaperDepositForm(request.POST)
-        if form.is_valid():
-            context = {'status':'error'}
 
-            # Check that the paper has been uploaded by the same user
-            pdf = form.cleaned_data['file_id']
-            if pdf.user_id != request.user.id:
-                context['message'] = _('Access to the PDF was denied.')
-                return HttpResponseForbidden(json.dumps(context))
+        if not form.is_valid():
+            context['form'] = form.errors
+            return HttpResponseForbidden(json.dumps(context), content_type='text/json')
 
-            # Create initial record
-            d = DepositRecord(
-                    paper=paper,
-                    user=pdf.user,
-                    upload_type=form.cleaned_data['radioUploadType'],
-                    file=pdf)
+        # Check that the paper has been uploaded by the same user
+        pdf = form.cleaned_data['file_id']
+        if pdf.user_id != request.user.id:
+            context['message'] = _('Access to the PDF was denied.')
+            return HttpResponseForbidden(json.dumps(context))
+
+        # Create initial record
+        d = DepositRecord(
+                paper=paper,
+                user=pdf.user,
+                upload_type=form.cleaned_data['radioUploadType'],
+                file=pdf)
+        d.save()
+
+        # Submit paper to Zenodo
+        path = os.path.join(MEDIA_ROOT, pdf.file.name)
+        
+        zenodo = {}
+        try:
+            zenodo = submitPubli(paper, path)
+        except DepositError as e:
+            d.request = e.logs+'\nMessage: '+str(e)
             d.save()
+            context['message'] = str(e)
+            return HttpResponseForbidden(json.dumps(context), content_type='text/json')
 
-            # Submit paper to Zenodo
-            path = os.path.join(MEDIA_ROOT, pdf.file.name)
-            print "Path to file: "+path
+        d.identifier = zenodo.get('identifier')
+        d.pdf_url = zenodo.get('pdf_url')
+        d.request = zenodo.get('logs')
+        d.save()
 
-            submitPubli(paper, path)
-
-            #d = DepositRecord(paper=paper, user=request.user,
-            #        upload_type=form.cleaned_data['upload_type'],
-            #        file=request.FILES['file'])
-            #d.save()
-            context['status'] = 'success'
-            return HttpResponse(json.dumps(context), content_type='text/json')
-        else:
-            return HttpResponseForbidden(json.dumps(form.errors), content_type='text/json')
+        context['status'] = 'success'
+        context['upload_id'] = d.id
+        return HttpResponse(json.dumps(context), content_type='text/json')
     return HttpResponseForbidden()
 
 urlpatterns = patterns('',

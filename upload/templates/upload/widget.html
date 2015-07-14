@@ -1,5 +1,6 @@
 {% load i18n %}
 
+<div id="globalError"></div>
 <div id="uploadInputs">
     <div class="uploadModeBrowse">
         <form id="uploadForm" method="post" action="{% url 'ajax-uploadFulltext' %}" enctype="multipart/form-data">
@@ -27,7 +28,6 @@
         </div>
     </div>
     <p>{% trans "PDF files only, maximum size:" %} {{ max_file_size|filesizeformat }}.</p>
-    <div id="globalError"></div>
 </div>
 <div id="uploadedResult"></div>
 

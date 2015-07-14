@@ -40,6 +40,7 @@ $(function(){
         $('#uploadFileId').val(data['file_id']);
 
         tpl.removeClass('uploadWorking');
+        $('#globalError').removeClass('error').empty();
         var uploadInputs = $('#uploadInputs');
         uploadInputs.fadeOut(function(){
             uploadInputs.remove();
@@ -49,7 +50,7 @@ $(function(){
 
     function displayErrorMessage(tpl, msg) {
         tpl.find('i').text(msg);
-        tpl.addClass('uploadError');
+        tpl.addClass('error');
         removeBar();
     }
 
