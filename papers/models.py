@@ -32,6 +32,7 @@ from papers.utils import remove_diacritics, sanitize_html
 
 from statistics.models import AccessStatistics
 from publishers.models import Publisher, Journal, OA_STATUS_CHOICES, OA_STATUS_PREFERENCE, default_publisher
+from upload.models import UploadedPDF
 
 import hashlib
 from datetime import datetime, timedelta
@@ -909,14 +910,14 @@ class DepositRecord(models.Model):
     paper = models.ForeignKey(Paper)
     user = models.ForeignKey(User)
 
-    request = models.TextField(null=True,blank=True)
-    identifer = models.CharField(max_length=512)
+    request = models.TextField(null=True, blank=True)
+    identifier = models.CharField(max_length=512, null=True, blank=True)
     #deposition id on zenodo/hal/whatever
     pdf_url = models.URLField(max_length=1024, null=True, blank=True)
     date = models.DateTimeField(auto_now=True) # deposit date
-    upload_type = models.CharField(max_length=64, choices=UPLOAD_TYPE_CHOICES)
+    upload_type = models.CharFile = models.FileField(upload_to='deposits')
 
-    file = models.FileField(upload_to='deposits')
+    file = models.ForeignKey(UploadedPDF)
 
     def __unicode__(self):
         return self.identifier

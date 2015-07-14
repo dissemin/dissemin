@@ -71,7 +71,8 @@ $(function(){
                 $('#waitingArea,.submitDeposit').toggle();
             }).done(function(data) {
                 $('#waitingArea,.submitDeposit').toggle();
-                alert('Paper successfully deposited!');      
+                var uploadId = data.responseJSON['upload_id'];
+                window.location.replace('{% url 'paper' paper.pk %}?deposit='+uploadId);
             });
     }
 {% endblock %}

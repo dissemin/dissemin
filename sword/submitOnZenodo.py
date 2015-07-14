@@ -8,17 +8,29 @@ from dissemin.settings import ZENODO_KEY
 #url = "https://zenodo.org/api/deposit/depositions/1234/files?access_token=2SsQE9VkkgDQG1WDjrvrZqTJtkmsGHICEaccBY6iAEuBlSTdMC6QvcTR2HRv"
 #TODO error handling
 
+ZENODO_API_URL = "https://zenodo.org/api/deposit/depositions"
+
 def submitPubli(paper,filePdf):
-    r = requests.get("https://zenodo.org/api/deposit/depositions?access_token=" + ZENODO_KEY)
+    if ZENODO_KEY is None:
+        raise ValueError("No Zenodo API key provided.")
+
+    # Checking the access token
+    r = requests.get(ZENODO_API_URL+"?access_token=" + ZENODO_KEY)
     print(r.status_code)
+
+    # Creating a new deposition
     headers = {"Content-Type": "application/json"}
-    r = requests.post("https://zenodo.org/api/deposit/depositions?access_token=" + ZENODO_KEY , data="{}", headers=headers)
+    r = requests.post(ZENODO_API_URL+"?access_token=" + ZENODO_KEY , data="{}", headers=headers)
     print(r.status_code)
     deposition_id = r.json()['id']
+
+    # Uploading the PDF
     data = {'filename':basename(filePdf)}
     files = {'file': open(filePdf, 'rb')}
-    r = requests.post("https://zenodo.org/api/deposit/depositions/%s/files?access_token=%s" % (deposition_id,ZENODO_KEY), data=data, files=files)
+    r = requests.post(ZENODO_API_URL+"/%s/files?access_token=%s" % (deposition_id,ZENODO_KEY), data=data, files=files)
     print(r.status_code)
+
+    # Submitting the metadata
     abstract = "No abstract"
     for record in paper.sorted_oai_records:
         if record.description:
@@ -38,9 +50,11 @@ def submitPubli(paper,filePdf):
         if publi.doi:
             data['metadata']['doi']= publi.doi
             break
-    r = requests.put("https://zenodo.org/api/deposit/depositions/%s?access_token=%s" % ( deposition_id, ZENODO_KEY), data=json.dumps(data), headers=headers)
+    r = requests.put(ZENODO_API_URL+"/%s?access_token=%s" % ( deposition_id, ZENODO_KEY), data=json.dumps(data), headers=headers)
+    
+    # Deleting the deposition
     print(r.status_code)
-    r = requests.delete("https://zenodo.org/api/deposit/depositions/%s?access_token=%s" % ( deposition_id, ZENODO_KEY) )
+    r = requests.delete(ZENODO_API_URL+"/%s?access_token=%s" % ( deposition_id, ZENODO_KEY) )
 #    r = requests.post("https://zenodo.org/api/deposit/depositions/%s/actions/publish?access_token=2SsQE9VkkgDQG1WDjrvrZqTJtkmsGHICEaccBY6iAEuBlSTdMC6QvcTR2HRv" % deposition_id)
 #   print(r.status_code)
     return r

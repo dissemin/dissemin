@@ -33,14 +33,16 @@ import json, requests
 from django.views.decorators.csrf import csrf_exempt
 from celery.execute import send_task
 
-from dissemin.settings import URL_DEPOSIT_DOWNLOAD_TIMEOUT, DEPOSIT_MAX_FILE_SIZE, DEPOSIT_CONTENT_TYPES
+from dissemin.settings import URL_DEPOSIT_DOWNLOAD_TIMEOUT, DEPOSIT_MAX_FILE_SIZE, DEPOSIT_CONTENT_TYPES, MEDIA_ROOT
 
 from papers.models import *
 from papers.user import *
 from papers.forms import AddResearcherForm, PaperDepositForm
 from papers.utils import iunaccent, sanitize_html
+from sword.submitOnZenodo import submitPubli
 
 from time import sleep # TODO delete me
+import os.path
 
 # General function used to change a CharField in a model with ajax
 def process_ajax_change(request, model, allowedFields):
@@ -199,14 +201,33 @@ def submitDeposit(request, pk):
     if request.method == 'POST':
         form = PaperDepositForm(request.POST)
         if form.is_valid():
-            context = {}
-            sleep(2)
+            context = {'status':'error'}
+
+            # Check that the paper has been uploaded by the same user
+            pdf = form.cleaned_data['file_id']
+            if pdf.user_id != request.user.id:
+                context['message'] = _('Access to the PDF was denied.')
+                return HttpResponseForbidden(json.dumps(context))
+
+            # Create initial record
+            d = DepositRecord(
+                    paper=paper,
+                    user=pdf.user,
+                    upload_type=form.cleaned_data['radioUploadType'],
+                    file=pdf)
+            d.save()
+
+            # Submit paper to Zenodo
+            path = os.path.join(MEDIA_ROOT, pdf.file.name)
+            print "Path to file: "+path
+
+            submitPubli(paper, path)
+
             #d = DepositRecord(paper=paper, user=request.user,
             #        upload_type=form.cleaned_data['upload_type'],
             #        file=request.FILES['file'])
             #d.save()
-            #submitPubli(paper, MEDIA_ROOT + d.file.url)
-            context['success'] = True
+            context['status'] = 'success'
             return HttpResponse(json.dumps(context), content_type='text/json')
         else:
             return HttpResponseForbidden(json.dumps(form.errors), content_type='text/json')
