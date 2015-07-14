@@ -99,6 +99,7 @@ def make_thumbnail(pdf_blob):
             image.format = 'png'
             return (num_pages,image.make_blob())
     except wand.exceptions.WandException as e:
+        # Wand failed: we consider the PDF file as invalid
         pass
     except ValueError:
         pass

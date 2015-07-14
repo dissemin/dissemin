@@ -1,6 +1,7 @@
 {% load i18n %}
 
 <div id="globalError"></div>
+    <p class="uploadDescription">{% trans "Select here the full text of your article. PDF files only, maximum size:" %} {{ max_file_size|filesizeformat }}.</p>
 <div id="uploadInputs">
     <div class="uploadModeBrowse">
         <form id="uploadForm" method="post" action="{% url 'ajax-uploadFulltext' %}" enctype="multipart/form-data">
@@ -11,9 +12,9 @@
     </div>
     <div class="uploadModeUrl">
 
-        <form id="urlForm" method="post" action="javascript:uploadUrl();">
+        <form id="urlForm" method="post" action="javascript:uploadUrl()">
             {% csrf_token %}
-            <label for="url">{% trans "Enter an URL:" %}</label>
+            <label for="url">{% trans "Or enter an URL:" %}</label>
             <div>
                 <button type="submit" id="submitUploadUrl" class="btn btn-success"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
                 <div class="urlContainer">
@@ -24,10 +25,9 @@
     </div>
     <div class="uploadModeDrop">
         <div id="dropZone">
-        <p>{% trans "Drop a file here" %}</p>
+        <p>{% trans "Or drop a file here:" %}</p>
         </div>
     </div>
-    <p>{% trans "PDF files only, maximum size:" %} {{ max_file_size|filesizeformat }}.</p>
 </div>
 <div id="uploadedResult"></div>
 

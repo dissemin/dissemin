@@ -2,12 +2,14 @@ $(function(){
 
     var resultDiv = $('#uploadedResult');
     var uploadForm = $('#uploadForm');
+    var filename = "";
 
     function addFileWidget(name, size) {
-        var tpl = $('<div class="uploadFileItem uploadWorking"><div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%"></div></div>    <div class="fileDetails"><p></p><span></span></div><div style="clear:both"></div></div>');
+        var tpl = $('<div class="uploadFileItem uploadWorking"><div class="progress progress-striped active"><div class="progress-bar" style="width:100%"></div></div>    <div class="fileDetails"></div><div style="clear:both"></div></div>');
 
         // Append the file name and file size
-        tpl.find('p').text(name)
+        console.log(name);
+        filename = name;
         var formattedSize = 'Uploading...';
         if(size > 0) {
             formattedSize = formatFileSize(size);
@@ -27,13 +29,14 @@ $(function(){
     }
 
     function updateProgress(tpl, progress) {
-        var progressBar = $('.progress-bar');
-        progressBar.css('width', progress+'%').attr('aria-valuenow', progress);
+        //var progressBar = $('.progress-bar');
+        //progressBar.css('width', progress+'%').attr('aria-valuenow', progress);
     }
 
     function uploadComplete(tpl, data) {
-        var i = tpl.find('i');
-        i.empty().append(data['num_pages']+' pages<br/>'+formatFileSize(data['size']));
+        var fd = tpl.find('.fileDetails');
+        fd.empty().append($('<p>'+filename+'</p><i>'+data['num_pages']+' pages<br/>'
+                    +formatFileSize(data['size'])+'</i>'));
         tpl.prepend(
             '<img src="'+data['thumbnail']+'" class="uploadThumbnail" alt="Thumbnail" />');
 
@@ -49,7 +52,7 @@ $(function(){
     }
 
     function displayErrorMessage(tpl, msg) {
-        tpl.find('i').text(msg);
+        tpl.find('.fileDetails').append($('<p>'+filename+'</p><i>'+msg+'</i>'));
         tpl.addClass('error');
         removeBar();
     }
@@ -98,6 +101,7 @@ $(function(){
         },
 
         done: function(e, data) {
+            console.log(data)
             uploadComplete(data.context, data.jqXHR.responseJSON);
         },
 
@@ -141,6 +145,7 @@ $(function(){
 
         updateProgress(tpl, 10);
         $.post('/ajax-upload/download-url', data, null, 'json').fail(function(data) {
+                console.log(data);
                 if(!data.responseJSON)
                 {
                     $('#globalError').text(data.responseText);
@@ -151,6 +156,7 @@ $(function(){
                     displayErrorMessage(tpl, resp['message']);
                 }
             }).done(function(data) {
+                console.log(data);
                 if(data['status'] == 'error') {
                     $('#globalError').text(data['message']);
                 }
@@ -161,6 +167,8 @@ $(function(){
         });
     }
 
-    $('#submitUploadUrl').click(uploadUrl);
+    $('#submitUploadUrl').click(function() {
+        uploadUrl();
+    });
 
 });

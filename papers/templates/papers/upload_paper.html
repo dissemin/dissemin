@@ -105,11 +105,11 @@ $(function(){
 </div>
 
 <span class="detailsTitle">{% trans "Document" %}</span>
-<div class="detailsContent">
+<div class="detailsContent uploadSection">
     {% include "upload/widget.html" %}
 </div>
 
-<form method="POST" action="javascript:depositPaper();" id="depositForm">
+<form method="POST" action="javascript:depositPaper()" id="depositForm">
 {% csrf_token %}
 <input type="hidden" id="uploadFileId" name="file_id" />
 <span class="detailsTitle">{% trans "Options" %}</span>

@@ -1,8 +1,4 @@
 
-#uploadInputs {
-    padding-top: 10px;
-}
-
 .uploadModeBrowse, .uploadModeUrl, .uploadModeDrop {
     width: 32%;
     display: inline-block;
@@ -11,12 +7,14 @@
 
 .uploadModeBrowse {
     width: 20%;
-    padding-top: 5px;
+    padding-top: 15px;
 }
 
 .uploadModeUrl {
     width: 42%;
-    padding-top: 5px;
+    padding: 15px;
+    height: 100px;
+    border-left: 1px solid #CCC;
 }
 
 #submitUploadUrl {
@@ -30,6 +28,8 @@
 
 .uploadModeDrop {
     float: right;
+    padding-left: 15px;
+    border-left: 1px solid #CCC;
 }
 
 .uploadFileItem {
@@ -66,10 +66,10 @@
     border: 2px dashed grey;
     display: inline-block;
     text-align: center;
-    color: #CCC;
 }
 #dropZone p {
     text-align: center;
+    font-weight: 700;
 }
 
 
