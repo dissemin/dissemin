@@ -34,27 +34,95 @@ class DepositError(Exception):
 
 ZENODO_API_URL = "https://zenodo.org/api/deposit/depositions"
 
+def swordDocumentType(paper):
+    tr = {
+            'journal-article':('publication','article'),
+            'proceedings-article':('publication','conferencepaper'),
+            'book-chapter':('publication','section'),
+            'book':('publication','book'),
+            'journal-issue':('publication','book'),
+            'proceedings':('publication','book'),
+            'reference-entry':('publication','other'),
+            'poster':('poster',),
+            'report':('publication','report'),
+            'thesis':('publication','thesis'),
+            'dataset':('dataset',),
+            'preprint':('publication','preprint'),
+            'other':('publication','other'),
+         }
+    return tr[paper.doctype]
+
 def createZenodoMetadata(paper):
-    data = {}
-    abstract = "No abstract"
-    for record in paper.sorted_oai_records:
-        if record.description:
+    metadata = {}
+    oairecords = paper.sorted_oai_records
+    publications = paper.publication_set.all()
+
+    # Document type
+    dt = swordDocumentType(paper)
+    metadata['upload_type'] = dt[0]
+    if dt[0] == 'publication':
+        metadata['publication_type'] = dt[1]
+
+    # Publication date
+    metadata['publication_date'] = paper.pubdate.isoformat()
+
+    # Title
+    metadata['title'] = paper.title
+
+    # Creators
+    def formatAuthor(author):
+        res = {'name':author.name.last+', '+author.name.first}
+        if author.researcher and author.researcher.orcid:
+            res['orcid'] = author.researcher.orcid
+        # TODO: affiliation
+        return res
+    metadata['creators'] = map(formatAuthor, paper.sorted_authors)
+
+    # Abstract
+    abstract = ''
+    for record in oairecords:
+        if record.description and abstract == '':
             abstract = record.description
             break
-    data = {"metadata": {"title": paper.title,
-                        "upload_type": "publication",
-                        "publication_type": "conferencepaper",
-                        "description": abstract,
-                        "creators": map(lambda x:{"name": x.name.last +", " + x.name.first , "affiliation" : "ENS" }  ,paper.sorted_authors)}}
-    for publi in paper.publication_set.all():
+    metadata['description'] = abstract
+
+    # Access right: TODO
+
+    # License: TODO
+
+    # Embargo date: TODO
+
+    # DOI
+    for publi in publications:
+        metadata['doi'] = publi.doi
         if publi.pubdate:
-            # TODO output more precise date if available
-            data['metadata']['publication_date'] = str(publi.pubdate.year)+"-01-01"
+            metadata['publication_date'] = publi.pubdate.isoformat()
+            if publi.journal:
+                metadata['journal_title'] = publi.journal.title
+            else:
+                metadata['journal_title'] = publi.title
+            if publi.volume:
+                metadata['journal_volume'] = publi.volume
+            if publi.issue:
+                metadata['journal_issue'] = publi.issue
+            if publi.pages:
+                metadata['journal_pages'] = publi.pages
+            if publi.container:
+                metadata['conference_title'] = publi.container
             break
-    for publi in paper.publication_set.all():
-        if publi.doi:
-            data['metadata']['doi']= publi.doi
-            break
+
+    # Keywords TODO (this involves having separated keywords in OAI records.)
+
+    # Notes TODO
+    # metadata['notes'] = 'Uploaded by dissem.in on behalf of ' …
+
+    # Related identifiers
+    idents = map(lambda r: {'relation':'isAlternateIdentifier','identifier':r.splash_url}, oairecords)
+    for publi in publications:
+        if publi.journal and publi.journal.issn:
+            idents.append({'relation':'isPartOf','identifier':publi.journal.issn})
+    
+    data = {"metadata": metadata}
     return data
 
 def submitPubli(paper,filePdf):
@@ -98,7 +166,7 @@ def submitPubli(paper,filePdf):
         # Creating the metadata
         log += "### Generating the metadata\n"
         data = createZenodoMetadata(paper)
-        log += str(data)+'\n'
+        log += json.dumps(data, indent=4)+'\n'
 
         # Submitting the metadata
         log += "### Submitting the metadata\n"

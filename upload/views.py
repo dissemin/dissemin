@@ -38,6 +38,7 @@ import requests, json
 from requests.packages.urllib3.exceptions import ReadTimeoutError, HTTPError
 import wand.image, wand.exceptions
 import PyPDF2
+from PyPDF2.utils import PyPdfError
 from datetime import datetime
 
 # AJAX upload
@@ -53,6 +54,10 @@ def handleAjaxUpload(request):
 
             status = save_pdf(request.user, orig_name, pdf_file)
 
+            if status['status'] == 'error':
+                status['upl'] = status['message']
+                return HttpResponseForbidden(json.dumps(status), content_type='text/json')
+
             return HttpResponse(json.dumps(status), content_type='text/json')
     return HttpResponseForbidden(json.dumps(form.errors), content_type='text/json')
 
@@ -65,21 +70,36 @@ def make_thumbnail(pdf_blob):
     """
     try:
         resolution = int(THUMBNAIL_MAX_WIDTH / (21/2.54))+1
+        num_pages = None
 
-        orig_pdf = StringIO(pdf_blob)
-        reader = PyPDF2.PdfFileReader(orig_pdf)
-        num_pages = reader.getNumPages()
-        if num_pages == 0:
-            raise ValueError
-        writer = PyPDF2.PdfFileWriter()
-        writer.addPage(reader.getPage(0))
-        first_page = StringIO()
-        writer.write(first_page)
-        first_blob = first_page.getvalue()
+        first_blob = False
+        try: # We try to extract the first page of the PDF
+            orig_pdf = StringIO(pdf_blob)
+            reader = PyPDF2.PdfFileReader(orig_pdf)
+            num_pages = reader.getNumPages()
+            if not reader.isEncrypted and num_pages == 0:
+                return
+            writer = PyPDF2.PdfFileWriter()
+            writer.addPage(reader.getPage(0))
+            first_page = StringIO()
+            writer.write(first_page)
+            first_blob = first_page.getvalue()
+        except PyPdfError as e:
+            # PyPDF2 failed (maybe it believes the file is encrypted…)
+            # We try to convert the file with ImageMagick (wand) anyway,
+            # rendering the whole PDF as we have not been able to 
+            # select the first page
+            print "PyPDF error: "+str(e)
+            first_blob = pdf_blob
 
+        # We render the PDF (or only its first page if we succeeded to extract it)
         with wand.image.Image(blob=pdf_blob, format='pdf', resolution=resolution) as image:
             if image.height == 0 or image.width == 0:
-                raise ValueError
+                return
+            if num_pages is None:
+                num_pages = len(image.sequence)
+            if num_pages == 0:
+                return
             image = wand.image.Image(image=image.sequence[0])
             
             # Resizing disabled, we computed a reasonable resolution.
@@ -173,12 +193,15 @@ def handleUrlDownload(request):
             except HTTPError as e:
                 response['message'] = _('Invalid URL.')
 
-            if 'message' in response:
+            if response['status'] == 'error':
                 return HttpResponseForbidden(json.dumps(response))
 
             orig_name = form.cleaned_data['url']
 
             response = save_pdf(request.user, orig_name, content) 
+
+            if response['status'] == 'error':
+                return HttpResponseForbidden(json.dumps(response))
 
             return HttpResponse(json.dumps(response), content_type='text/json')
     response['message'] = _('Invalid form.')

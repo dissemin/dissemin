@@ -75,7 +75,7 @@ PAPER_TYPE_CHOICES = [
 UPLOAD_TYPE_CHOICES = [
    ('preprint', _('Preprint')),
    ('postprint', _('Postprint')),
-   ('publishers', _("Publisher's version")),
+   ('pdfversion', _("Published version")),
    ]
 
 PAPER_TYPE_PREFERENCE = [x for (x,y) in PAPER_TYPE_CHOICES]

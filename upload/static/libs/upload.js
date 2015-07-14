@@ -110,7 +110,7 @@ $(function(){
             if(typeof resp != 'undefined' && 'upl' in resp) {
                 displayErrorMessage(data.context, resp['upl']);
             } else {
-                $('#globalError').text(data.jqXHR.responseText);
+                $('#globalError').addClass('error').text(data.jqXHR.responseText);
             }
         }
     });

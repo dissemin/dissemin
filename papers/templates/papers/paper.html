@@ -96,6 +96,12 @@ $(function(){
 {% endif %}
 </p>
 
+<!-- TODO Oh my god Evarin look how ugly this is! -->
+{% if request.GET.deposit %}
+<h1>{% trans "Paper successfully deposited!" %}</h1>
+<h3>But as you can see this page has not been changed to reflect that! #TODO</h3>
+{% endif %}
+
 <div id="paperAvailability">
 
 <div id="paperAvailabilityLogo">
