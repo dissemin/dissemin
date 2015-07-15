@@ -41,10 +41,6 @@ urlpatterns = patterns('',
         url(r'^paper/(?P<pk>\d+)/$', views.PaperView.as_view(), name='paper'),
         url(r'^mail_paper/(?P<pk>\d+)/$', views.mailPaperView, name='mail_paper'),
         url(r'^journal/(?P<journal>\d+)/$', views.searchView, name='journal'),
-        # Static views
-        url(r'^sources$', views.sourcesView, name='sources'),
-        url(r'^faq$', views.faqView, name='faq'),
-        url(r'^feedback$', views.feedbackView, name='feedback'),
         # Tasks, AJAX
         url(r'^ajax/', include('papers.ajax')),
         url(r'^researcher/(?P<pk>\d+)/update/$', views.refetchResearcher, name='refetch-researcher'),

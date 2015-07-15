@@ -232,16 +232,6 @@ class JournalView(generic.DetailView):
     model = Journal
     template_name = 'papers/journal.html'
 
-def sourcesView(request):
-    return render(request, 'papers/sources.html')
-
-def faqView(request):
-    return render(request, 'papers/faq.html',
-            UNIVERSITY_BRANDING)
-
-def feedbackView(request):
-    return render(request, 'papers/feedback.html')
-
 def regularLogin(request):
     return auth_login(request, 'papers/login.html')
 

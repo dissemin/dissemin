@@ -24,6 +24,7 @@ from django.conf.urls.static import static
 from django.shortcuts import render
 
 from django.contrib import admin
+from dissemin.settings import UNIVERSITY_BRANDING
 admin.autodiscover()
 
 def handler404(request):
@@ -37,20 +38,29 @@ def handler500(request):
     response.status_code = 500
     return response
 
+def temp(name):
+    return (lambda x: render(x, name, UNIVERSITY_BRANDING))
+
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'dissemin.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
-    url(r'^404-error$', (lambda x: render(x, '404.html'))),
-    url(r'^500-error$', (lambda x: render(x, '500.html'))),
+    # Errors
+    url(r'^404-error$', temp('404.html')),
+    url(r'^500-error$', temp('500.html')),
+    # Static views
+    url(r'^sources$', temp('dissemin/sources.html'), name='sources'),
+    url(r'^faq$', temp('dissemin/faq.html'), name='faq'),
+    url(r'^tos$', temp('dissemin/tos.html'), name='tos'),
+    url(r'^feedback$', temp('dissemin/feedback.html'), name='feedback'),
+    # Authentication
     url(r'^admin/logout/$','django_cas_ng.views.logout', name='logout'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/login/$', 'django_cas_ng.views.login', name='login'), 
     url(r'^accounts/logout/$','django_cas_ng.views.logout', name='logout'),
     url(r'^logout/$', 'django_cas_ng.views.logout'),
+    # Apps
     url(r'^ajax-upload/', include('upload.urls')),
     url(r'^', include('papers.urls')),
     url(r'^', include('publishers.urls')),
     url(r'^', include('deposit.urls')),
+# Remove this in production
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

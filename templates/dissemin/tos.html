@@ -1,0 +1,88 @@
+{% extends "dissemin/skeleton.html" %}
+
+{% load i18n %}
+
+{% block headTitle %}
+{% trans "Frequently Asked Questions" %}
+{% endblock %}
+
+{% block content %}
+<div id="fullPage" class="faq">
+    <div id="contentTitle">{% trans "Terms of Service" %}</div>
+    <div id="actualContent">
+
+	  <div id="faqSummary">
+        <h4>{% trans "In short" %}</h4>
+        <p><a href="#scope">{% trans "Scope of the service" %}</a></p>
+        <p><a href="#privacy">{% trans "Privacy" %}</a></p>
+        <p><a href="#deposits">{% trans "Deposits through Dissemin" %}</a></p>
+
+        <h4>{% trans "In full" %}</h4>
+        <p><a href="#personal-data">{% trans "Personal data" %}</a></p>
+        <p><a href="#cnil">Déclaration CNIL</a></p>
+        <p><a href="#deposit-rights">{% trans "Use of the deposit service" %}</a></p>
+        <p><a href="#full-text-storage">{% trans "Full text storage" %}</a></p>
+        <p><a href="#reporting-misuse">{% trans "Reporting misuse" %}</a></p>
+      </div>
+
+        <h3>{% trans "In short" %}</h3>
+
+        <h2 id="scope">{% trans "Scope of the service" %}</h2>
+
+        <p>
+        {% blocktrans trimmed %}
+        {% endblocktrans %}
+        </p>
+
+        <h2 id="privacy">{% trans "Privacy" %}</h2>
+
+        <p>
+        {% blocktrans trimmed %}
+        {% endblocktrans %}
+        </p>
+
+        <h2 id="deposits">{% trans "Deposits through Dissemin" %}</h2>
+
+        <p>
+        {% blocktrans trimmed %}
+        {% endblocktrans %}
+        </p>
+
+
+        <h3>{% trans "In full" %}</h3>
+        <h2 id="personal-data">{% trans "Personal data" %}</h2>
+
+        <p>
+        {% blocktrans trimmed %}
+        {% endblocktrans %}
+        </p>
+
+        <h2 id="cnil">Déclaration CNIL</h2>
+
+        <p>
+        </p>
+
+        <h2 id="deposit-rights">{% trans "Use of the deposit service" %}</h2>
+
+        <p>
+        {% blocktrans trimmed %}
+        {% endblocktrans %}
+        </p>
+
+        <h2 id="full-text-storage">{% trans "Full text storage" %}</h2>
+
+        <p>
+        {% blocktrans trimmed %}
+        {% endblocktrans %}
+        </p>
+
+        <h2 id="reporting-misuse">{% trans "Reporting misuse" %}</h2>
+
+        <p>
+        {% blocktrans trimmed %}
+        {% endblocktrans %}
+        </p>
+
+        <p><a href="#">{% trans "Back to top" %}</a></p>
+    </div>
+{% endblock %}
