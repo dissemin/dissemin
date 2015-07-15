@@ -193,7 +193,7 @@ def handleUrlDownload(request):
             except HTTPError as e:
                 response['message'] = _('Invalid URL.')
 
-            if response['status'] == 'error':
+            if 'message' in response:
                 return HttpResponseForbidden(json.dumps(response))
 
             orig_name = form.cleaned_data['url']
