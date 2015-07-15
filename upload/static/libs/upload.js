@@ -34,30 +34,34 @@ $(function(){
     }
 
     function uploadComplete(tpl, data) {
-        var fd = tpl.find('.fileDetails');
-        fd.empty().append($('<p>'+filename+'</p><i>'+data['num_pages']+' pages<br/>'
-                    +formatFileSize(data['size'])+'</i><p><a id="changeFile" href="#">Change</a></p>'));
-        tpl.prepend(
-            '<img src="'+data['thumbnail']+'" class="uploadThumbnail" alt="Thumbnail" />');
 
-        $('#uploadFileId').val(data['file_id']);
-
-        tpl.removeClass('uploadWorking');
         $('#globalError').removeClass('error').empty();
+        removeBar();
         var uploadInputs = $('#uploadInputs');
-        uploadInputs.fadeOut();
+        uploadInputs.fadeOut(function(){
+            var fd = tpl.find('.fileDetails');
+            fd.empty().append($('<p>'+filename+'</p><i>'+data['num_pages']+' pages<br/>'
+                        +formatFileSize(data['size'])+'</i><p><a id="changeFile" href="#">Change</a></p>'));
+            tpl.prepend(
+                '<img src="'+data['thumbnail']+'" class="uploadThumbnail" alt="Thumbnail" />');
 
-        $('#changeFile').click(function(){
-            var uploadFileItem = tpl;
-            uploadFileItem.fadeOut(function(){
-               uploadFileItem.remove(); 
-               uploadInputs.show();
-            });
+            $('#uploadFileId').val(data['file_id']);
+
+            tpl.removeClass('uploadWorking');           
+
+            $('#changeFile').click(function(){
+                var uploadFileItem = tpl;
+                uploadFileItem.fadeOut(function(){
+                   uploadFileItem.remove(); 
+                   uploadInputs.show();
+                });
         });
         //function(){
         //    uploadInputs.hide();
         //});
-        removeBar();
+
+        });
+
     }
 
     function displayErrorMessage(tpl, msg) {

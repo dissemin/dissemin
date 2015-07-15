@@ -175,7 +175,7 @@ def submitPubli(paper,filePdf):
         return log
 
     if ZENODO_KEY is None:
-        raise DepositError("No Zenodo API key provided.")
+        raise DepositError("No Zenodo API key provided.",'')
 
     try:
         # Checking the access token
