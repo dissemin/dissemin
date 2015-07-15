@@ -25,6 +25,7 @@ import requests
 
 from django.utils.translation import ugettext as _
 from os.path import basename
+from backend.crossref import consolidate_publication
 from dissemin.settings import ZENODO_KEY
 
 class DepositError(Exception):
@@ -81,9 +82,18 @@ def createZenodoMetadata(paper):
     # Abstract
     abstract = ''
     for record in oairecords:
-        if record.description and abstract == '':
+        if record.description and len(record.description) > len(abstract):
             abstract = record.description
-            break
+
+    if len(abstract) < 32: # that's really short for an abstract !
+        for publi in publications:
+            print "Consolidating!"
+            publi = consolidate_publication(publi)
+            print publi.abstract
+            if publi.abstract and len(publi.abstract) > len(abstract):
+                abstract = publi.abstract
+                break
+
     metadata['description'] = abstract
 
     # Access right: TODO

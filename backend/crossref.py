@@ -118,6 +118,30 @@ def fetch_metadata_by_DOI(doi):
         raise MetadataSourceException('Error while fetching DOI metadata:\nInvalid JSON response.\n'+
                 'Error: '+str(e))
 
+def fetch_zotero_by_DOI(doi):
+    """
+    Fetch Zotero metadata for a given DOI.
+    Works only with the doi_cache proxy.
+    """
+    try:
+        request = requests.get('http://'+DOI_PROXY_DOMAIN+'/zotero/'+doi)
+        return request.json()
+    except ValueError as e:
+        raise MetadataSourceException('Error while fetching Zotero metadat:\nInvalid JSON response.\n'+
+                'Error: '+str(e))
+
+def consolidate_publication(publi):
+    """
+    Fetches the abstract from Zotero and adds it to the publication if it succeeds.
+    """
+    zotero = fetch_zotero_by_DOI(publi.doi)
+    print zotero
+    for item in zotero:
+        if 'abstractNote' in item:
+            publi.abstract = item['abstractNote']
+            publi.save(update_fields=['abstract'])
+    return publi
+
 def convert_to_name_pair(dct):
     """ Converts a dictionary {'family':'Last','given':'First'} to ('First','Last') """
     result = None
