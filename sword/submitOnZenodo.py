@@ -22,11 +22,14 @@ from __future__ import unicode_literals
 
 import json
 import requests 
+import traceback, sys
+from StringIO import StringIO
 
 from django.utils.translation import ugettext as _
 from os.path import basename
-from backend.crossref import consolidate_publication
-from dissemin.settings import ZENODO_KEY
+#from backend.crossref import consolidate_publication
+from dissemin.settings import ZENODO_KEY, DOI_PROXY_DOMAIN
+from papers.errors import MetadataSourceException
 
 class DepositError(Exception):
     def __init__(self, msg, logs):
@@ -34,6 +37,30 @@ class DepositError(Exception):
         self.logs = logs
 
 ZENODO_API_URL = "https://zenodo.org/api/deposit/depositions"
+
+def fetch_zotero_by_DOI(doi):
+    """
+    Fetch Zotero metadata for a given DOI.
+    Works only with the doi_cache proxy.
+    """
+    try:
+        request = requests.get('http://'+DOI_PROXY_DOMAIN+'/zotero/'+doi)
+        return request.json()
+    except ValueError as e:
+        raise MetadataSourceException('Error while fetching Zotero metadat:\nInvalid JSON response.\n'+
+                'Error: '+str(e))
+
+def consolidate_publication(publi):
+    """
+    Fetches the abstract from Zotero and adds it to the publication if it succeeds.
+    """
+    zotero = fetch_zotero_by_DOI(publi.doi)
+    for item in zotero:
+        if 'abstractNote' in item:
+            publi.abstract = item['abstractNote']
+            publi.save(update_fields=['abstract'])
+    return publi
+
 
 def swordDocumentType(paper):
     tr = {
@@ -89,7 +116,6 @@ def createZenodoMetadata(paper):
         for publi in publications:
             print "Consolidating!"
             publi = consolidate_publication(publi)
-            print publi.abstract
             if publi.abstract and len(publi.abstract) > len(abstract):
                 abstract = publi.abstract
                 break
@@ -192,7 +218,9 @@ def submitPubli(paper,filePdf):
         raise e
     except Exception as e:
         log += "Caught exception:\n"
-        log += str(type(e))+': '+str(e)
+        log += str(type(e))+': '+str(e)+'\n'
+        log += traceback.format_exc()
+        log += '\n'
         raise DepositError('Connection to Zenodo failed. Please try again later.', log)
 
     result['logs'] = log
