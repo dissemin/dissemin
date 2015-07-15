@@ -907,22 +907,6 @@ class OaiRecord(models.Model):
     def __unicode__(self):
         return self.identifier
 
-class DepositRecord(models.Model):
-    paper = models.ForeignKey(Paper)
-    user = models.ForeignKey(User)
-
-    request = models.TextField(null=True, blank=True)
-    identifier = models.CharField(max_length=512, null=True, blank=True)
-    #deposition id on zenodo/hal/whatever
-    pdf_url = models.URLField(max_length=1024, null=True, blank=True)
-    date = models.DateTimeField(auto_now=True) # deposit date
-    upload_type = models.CharFile = models.FileField(upload_to='deposits')
-
-    file = models.ForeignKey(UploadedPDF)
-
-    def __unicode__(self):
-        return self.identifier
-
 
 # Annotation tool to train the models
 class Annotation(models.Model):

@@ -20,19 +20,22 @@
 
 from __future__ import unicode_literals
 from django import forms
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext as __
 
-from dissemin.settings import DEPOSIT_CONTENT_TYPES, DEPOSIT_MAX_FILE_SIZE
-
-from papers.models import *
+from deposit.models import *
 from upload.models import UploadedPDF
+from papers.models import UPLOAD_TYPE_CHOICES
 
-class AddResearcherForm(forms.Form):
-    first = forms.CharField(label=_('First name'), max_length=256, min_length=2)
-    last = forms.CharField(label=_('Last name'), max_length=256, min_length=2)
-    department = forms.ModelChoiceField(label=_('Department'), queryset=Department.objects.all())
-    email = forms.EmailField(label=_('Email'), required=False)
-    homepage = forms.URLField(label=_('Homepage'),required=False)
-    role = forms.CharField(label=_('Role'),required=False)
+class PaperDepositForm(forms.Form):
+    file_id = forms.IntegerField()
+    radioUploadType = forms.ChoiceField(label=_('Upload type'), choices = UPLOAD_TYPE_CHOICES)
 
+    def clean_file_id(self):
+        id = self.cleaned_data['file_id']
+        try:
+            uploadedPDF = UploadedPDF.objects.get(pk=id)
+        except UploadedPDF.NotFound:
+            raise forms.ValidationError(__("Invalid full text identifier."), code='invalid_file_id')
+        return uploadedPDF
 

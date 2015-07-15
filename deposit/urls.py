@@ -19,20 +19,12 @@
 #
 
 from __future__ import unicode_literals
-from django import forms
-from django.utils.translation import ugettext as _
 
-from dissemin.settings import DEPOSIT_CONTENT_TYPES, DEPOSIT_MAX_FILE_SIZE
+from django.conf.urls import patterns, include, url
 
-from papers.models import *
-from upload.models import UploadedPDF
+from deposit import views
 
-class AddResearcherForm(forms.Form):
-    first = forms.CharField(label=_('First name'), max_length=256, min_length=2)
-    last = forms.CharField(label=_('Last name'), max_length=256, min_length=2)
-    department = forms.ModelChoiceField(label=_('Department'), queryset=Department.objects.all())
-    email = forms.EmailField(label=_('Email'), required=False)
-    homepage = forms.URLField(label=_('Homepage'),required=False)
-    role = forms.CharField(label=_('Role'),required=False)
-
-
+urlpatterns = patterns('',
+        url(r'^deposit_paper/(?P<pk>\d+)/$', views.start_view, name='upload_paper'),
+        url(r'^ajax/submit-deposit-(?P<pk>\d+)$', views.submitDeposit, name='ajax-submitDeposit'),
+)

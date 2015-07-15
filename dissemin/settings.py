@@ -157,10 +157,11 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'upload',
     'statistics',
     'publishers',
     'papers',
+    'upload',
+    'deposit',
     'bootstrap_pagination',
 #    'debug_toolbar',
 )

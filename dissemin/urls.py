@@ -51,5 +51,6 @@ urlpatterns = patterns('',
     url(r'^ajax-upload/', include('upload.urls')),
     url(r'^', include('papers.urls')),
     url(r'^', include('publishers.urls')),
+    url(r'^', include('deposit.urls')),
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

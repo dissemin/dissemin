@@ -895,78 +895,7 @@ h1#paperTitle {
 	padding-left: 20px;
 }
 
-/* upload paper */
-
-#uploadIntro {
-    padding-top: 10px;
-}
-
-.uploadSection {
-    padding-top: 8px;
-}
-
-#uploadOptions {
-    padding-top: 5px;
-}
-
-#uploadOptions .panel-heading
-{
-    padding: 5px 10px;
-}
-
-.panel-heading a
-{
-    color: inherit;
-    font-weight: inherit;
-}
-
-#optionUploadType .panel-body {
-    padding: 0px;
-}
-
-#optionUploadType .policyItem {
-    padding: 5px 10px;
-}
-
-.panel-body .lastPolicyItem {
-    border-bottom: none;
-}
-
-.panel-body .firstPolicyItem {
-    border-top: none;
-}
-
-.submitDeposit {
-    text-align: center;
-}
-
-#waitingArea {
-    text-align: center;
-}
-
-.waitingBird {
-    display: inline-block;
-    border-radius: 50%;
-    background-color: #84B4DE;
-    width: 128px;
-    height: 128px;
-    margin: 12px;
-}
-.waitingBird img {
-    width: 128px;
-    height: 100px;
-    margin-top: 14px;
-}
-
-#waitingArea span {
-    font-style: italic;
-    font-size: 1.2em;
-}
-
-#paper_uploader {
-	padding:20px;
-	background:#eee;
-}
+/* Not sure we need these anymore */
 
 #paper_uploader input {
 	display:inline-block;

@@ -77,21 +77,6 @@ class Migration(migrations.Migration):
             bases=(models.Model,),
         ),
         migrations.CreateModel(
-            name='DepositRecord',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('request', models.TextField(null=True, blank=True)),
-                ('identifer', models.CharField(max_length=512)),
-                ('pdf_url', models.URLField(max_length=1024, null=True, blank=True)),
-                ('date', models.DateTimeField(auto_now=True)),
-                ('upload_type', models.CharField(max_length=64, choices=[('preprint', 'Preprint'), ('postprint', 'Postprint'), ('publishers', "Publisher's version")])),
-                ('file', models.FileField(upload_to='deposits')),
-            ],
-            options={
-            },
-            bases=(models.Model,),
-        ),
-        migrations.CreateModel(
             name='Disambiguation',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
@@ -361,18 +346,6 @@ class Migration(migrations.Migration):
             model_name='disambiguation',
             name='publications',
             field=models.ManyToManyField(to='papers.Publication'),
-            preserve_default=True,
-        ),
-        migrations.AddField(
-            model_name='depositrecord',
-            name='paper',
-            field=models.ForeignKey(to='papers.Paper'),
-            preserve_default=True,
-        ),
-        migrations.AddField(
-            model_name='depositrecord',
-            name='user',
-            field=models.ForeignKey(to=settings.AUTH_USER_MODEL),
             preserve_default=True,
         ),
         migrations.AddField(

@@ -37,9 +37,8 @@ from dissemin.settings import URL_DEPOSIT_DOWNLOAD_TIMEOUT, DEPOSIT_MAX_FILE_SIZ
 
 from papers.models import *
 from papers.user import *
-from papers.forms import AddResearcherForm, PaperDepositForm
+from papers.forms import AddResearcherForm
 from papers.utils import iunaccent, sanitize_html
-from sword.submitOnZenodo import submitPubli, DepositError
 
 from time import sleep # TODO delete me
 import os.path
@@ -195,53 +194,6 @@ def changePublisherStatus(request):
         return HttpResponseNotFound('NOK: '+message, content_type='text/plain')
 
 
-@user_passes_test(is_authenticated)
-def submitDeposit(request, pk):
-    paper = get_object_or_404(Paper, pk=pk)
-    if request.method == 'POST':
-        context = {'status':'error'}
-        form = PaperDepositForm(request.POST)
-
-        if not form.is_valid():
-            context['form'] = form.errors
-            return HttpResponseForbidden(json.dumps(context), content_type='text/json')
-
-        # Check that the paper has been uploaded by the same user
-        pdf = form.cleaned_data['file_id']
-        if pdf.user_id != request.user.id:
-            context['message'] = _('Access to the PDF was denied.')
-            return HttpResponseForbidden(json.dumps(context))
-
-        # Create initial record
-        d = DepositRecord(
-                paper=paper,
-                user=pdf.user,
-                upload_type=form.cleaned_data['radioUploadType'],
-                file=pdf)
-        d.save()
-
-        # Submit paper to Zenodo
-        path = os.path.join(MEDIA_ROOT, pdf.file.name)
-        
-        zenodo = {}
-        try:
-            zenodo = submitPubli(paper, path)
-        except DepositError as e:
-            d.request = e.logs+'\nMessage: '+str(e)
-            d.save()
-            context['message'] = str(e)
-            return HttpResponseForbidden(json.dumps(context), content_type='text/json')
-
-        d.identifier = zenodo.get('identifier')
-        d.pdf_url = zenodo.get('pdf_url')
-        d.request = zenodo.get('logs')
-        d.save()
-
-        context['status'] = 'success'
-        context['upload_id'] = d.id
-        return HttpResponse(json.dumps(context), content_type='text/json')
-    return HttpResponseForbidden()
-
 urlpatterns = patterns('',
     url(r'^annotate-paper-(?P<pk>\d+)-(?P<status>\d+)$', annotatePaper, name='ajax-annotatePaper'),
     url(r'^delete-researcher-(?P<pk>\d+)$', deleteResearcher, name='ajax-deleteResearcher'),
@@ -251,6 +203,5 @@ urlpatterns = patterns('',
     url(r'^change-author$', changeAuthor, name='ajax-changeAuthor'),
     url(r'^add-researcher$', addResearcher, name='ajax-addResearcher'),
     url(r'^change-publisher-status$', changePublisherStatus, name='ajax-changePublisherStatus'),
-    url(r'^submit-deposit-(?P<pk>\d+)$', submitDeposit, name='ajax-submitDeposit'),
 )
 
