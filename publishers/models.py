@@ -22,7 +22,9 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from django.db.models.loading import get_model
+
+from django.apps import apps
+get_model = apps.get_model
 
 from statistics.models import AccessStatistics
 

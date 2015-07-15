@@ -36,7 +36,7 @@ $(function(){
     function uploadComplete(tpl, data) {
         var fd = tpl.find('.fileDetails');
         fd.empty().append($('<p>'+filename+'</p><i>'+data['num_pages']+' pages<br/>'
-                    +formatFileSize(data['size'])+'</i>'));
+                    +formatFileSize(data['size'])+'</i><p><a id="changeFile" href="#">Change</a></p>'));
         tpl.prepend(
             '<img src="'+data['thumbnail']+'" class="uploadThumbnail" alt="Thumbnail" />');
 
@@ -45,9 +45,18 @@ $(function(){
         tpl.removeClass('uploadWorking');
         $('#globalError').removeClass('error').empty();
         var uploadInputs = $('#uploadInputs');
-        uploadInputs.fadeOut(function(){
-            uploadInputs.remove();
+        uploadInputs.fadeOut();
+
+        $('#changeFile').click(function(){
+            var uploadFileItem = tpl;
+            uploadFileItem.fadeOut(function(){
+               uploadFileItem.remove(); 
+               uploadInputs.show();
+            });
         });
+        //function(){
+        //    uploadInputs.hide();
+        //});
         removeBar();
     }
 
