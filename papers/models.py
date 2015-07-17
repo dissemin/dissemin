@@ -572,10 +572,11 @@ class Paper(models.Model):
             for m in matches:
                 if not self.pdf_url:
                     self.pdf_url = m.pdf_url
-                    if not self.pdf_url:
-                        self.pdf_url = m.splash_url
+
                 if m.source.oa:
                     self.oa_status = 'OA'
+                    if not self.pdf_url:
+                        self.pdf_url = m.splash_url
 
                 if m.pubtype in PAPER_TYPE_PREFERENCE:
                     new_idx = PAPER_TYPE_PREFERENCE.index(m.pubtype)
@@ -590,6 +591,9 @@ class Paper(models.Model):
         for publication in self.publication_set.all():
             if publication.publisher_id and publication.publisher_id not in seen_publishers:
                 seen_publishers.add(publication.publisher_id)
+                yield publication
+            elif publication.publisher_name not in seen_publishers:
+                seen_publishers.add(publication.publisher_name)
                 yield publication
 
     def publisher(self):
