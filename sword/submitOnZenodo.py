@@ -197,12 +197,18 @@ def submitPubli(paper,filePdf):
         data = {'filename':basename(filePdf)}
         files = {'file': open(filePdf, 'rb')}
         r = requests.post(ZENODO_API_URL+"/%s/files?access_token=%s" % (deposition_id,ZENODO_KEY), data=data, files=files)
-        log = log_request(r, 201, 'Unable to send the document to Zenodo.', log)
+        log = log_request(r, 201, 'Unable to transfer the document to Zenodo.', log)
 
         # Creating the metadata
         log += "### Generating the metadata\n"
         data = createZenodoMetadata(paper)
         log += json.dumps(data, indent=4)+'\n'
+
+        # Check that there is an abstract
+        if data['metadata'].get('description','') == '':
+            log += 'No abstract found, aborting.\n'
+            raise DepositError('No abstract is available for this paper but '+
+                    'Zenodo requires to attach one.',log)
 
         # Submitting the metadata
         log += "### Submitting the metadata\n"
