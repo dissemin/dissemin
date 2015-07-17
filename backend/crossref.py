@@ -222,31 +222,25 @@ def fetch_papers_from_crossref_by_researcher_name(name, update=False):
                 missing_dois.append(doi)
         print "%d dois. %d records already present, fetching %d new ones" % (len(dois), len(records), len(missing_dois))
 
-        if DOI_PROXY_SUPPORTS_BATCH:
-            new_dois = fetch_dois_by_batch(missing_dois)
-        else:
-            new_dois = fetch_dois_incrementally(missing_dois)
+        new_dois = fetch_dois(missing_dois)
             
         for metadata in new_dois:
-               # Normalize metadata
-            if metadata is None or type(metadata) != type({}):
-                if metadata is not None:
-                    print "WARNING: Invalid metadata: type is "+str(type(metadata))
-                    print "The doi proxy is doing something nasty!"
-                continue
-            if not 'author' in metadata:
-                continue
-
-            if not 'title' in metadata or not metadata['title']:
-                print "No title, skipping"
-                continue 
-
             # Save it!
             yield metadata
 
             count += 1
             if count % 10 == 0 and hasattr(current_task, 'update_state'):
                 current_task.update_state('FETCHING', meta={'nbRecords':count})
+
+def fetch_dois(doi_list):
+    """
+    Fetch the metadata of a list of DOIs from CrossRef,
+    by batch if the server supports it, otherwise incrementally.
+    """
+    if DOI_PROXY_SUPPORTS_BATCH:
+        return fetch_dois_by_batch(doi_list)
+    else:
+        return fetch_dois_incrementally(doi_list)
 
 def fetch_dois_incrementally(doi_list):
     """
@@ -281,7 +275,44 @@ def fetch_dois_by_batch(doi_list):
         raise MetadataSourceException('Invalid JSON returned by the DOI proxy: '+str(e))
     except requests.exceptions.RequestException as e:
         raise MetadataSourceException('Failed to retrieve batch metadata from the proxy: '+str(e))
-            
+
+def save_doi_metadata(metadata):
+    """
+    Given the metadata from CrossRef, create the associated paper and publication
+    """        
+    # Normalize metadata
+    if metadata is None or type(metadata) != type({}):
+        if metadata is not None:
+            print "WARNING: Invalid metadata: type is "+str(type(metadata))
+            print "The doi proxy is doing something nasty!"
+        raise ValueError('Invalid metadata format, expecting a dict')
+    if not 'author' in metadata:
+        raise ValueError('No author provided')
+
+    if not 'title' in metadata or not metadata['title']:
+        raise ValueError('No title')
+
+    # the upstream function ensures that there is a non-empty title
+    if not 'DOI' in metadata or not metadata['DOI']:
+        raise ValueError("No DOI, skipping")
+    doi = to_doi(metadata['DOI'])
+
+    pubdate = get_publication_date(metadata)
+
+    if pubdate is None:
+        raise ValueError('No pubdate')
+    
+    title = metadata['title']
+    authors = map(name_lookup_cache.lookup, map(convert_to_name_pair, metadata['author']))
+    authors = filter(lambda x: x != None, authors)
+    if all(not elem.is_known for elem in authors) or authors == []:
+        raise ValueError('No known author')
+
+    print "Saved doi "+doi
+    paper = backend.create.get_or_create_paper(title, authors, pubdate) # don't let this function
+    # create the publication, because it would re-fetch the metadata from CrossRef
+    backend.create.create_publication(paper, metadata)
+
 
 def fetch_publications(researcher):
     """
@@ -301,30 +332,11 @@ def fetch_publications(researcher):
         if skipped > crossref_max_skipped_records:
             break
 
-        # the upstream function ensures that there is a non-empty title
-        if not 'DOI' in metadata or not metadata['DOI']:
-            print "No DOI, skipping"
+        try:
+            save_doi_metadata(metadata)
+        except ValueError:
             skipped += 1
             continue
-        doi = to_doi(metadata['DOI'])
-
-        pubdate = get_publication_date(metadata)
-
-        if pubdate is None:
-            print "No pubdate, skipping"
-            skipped += 1
-            continue
-        
-        title = metadata['title']
-        authors = map(name_lookup_cache.lookup, map(convert_to_name_pair, metadata['author']))
-        authors = filter(lambda x: x != None, authors)
-        if all(not elem.is_known for elem in authors) or authors == []:
-            skipped += 1
-            continue
-        print "Saved doi "+doi
-        paper = backend.create.get_or_create_paper(title, authors, pubdate) # don't let this function
-        # create the publication, because it would re-fetch the metadata from CrossRef
-        backend.create.create_publication(paper, metadata)
 
         count += 1
         skipped = 0
