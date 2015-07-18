@@ -27,15 +27,14 @@
         {% block jsScript %}{% endblock %}
     </script>
     {% block extra_head %}{% endblock %}
-    <title>{% block headTitle %}{% endblock %} - dissem.in</title>
+    <title>{% block headTitle %}{% endblock %} - dissemin</title>
 </head>
 <body>
     <div id="wrapper">
         <div id="header">
 	  <div id="subheader">
-            <span id="dissemin"><a href="/">dissem.in</a></span>
-            <div id="rightLinks"><a href="/">{% trans "Home" context "memu bar" %}</a> &nbsp;&nbsp; <a href="{% url 'faq' %}">{% trans "FAQ" %}</a> &nbsp;&nbsp; <a href="{% url 'feedback' %}">{% trans "Feedback" %}</a> &nbsp;&nbsp;
-                {% if request.user.is_authenticated %}
+            <span id="dissemin"><a href="/">dissemin</a></span>
+            <div id="rightLinks"><a href="/">{% trans "Home" context "memu bar" %}</a> &nbsp;&nbsp; <a href="{% url 'faq' %}">{% trans "FAQ" %}</a> &nbsp;&nbsp; {% if request.user.is_authenticated %}
                 {{ request.user }} − <a href="/logout/">{% trans "Logout" %}</a>
                 {% else %}
                 <a href="/login/?next={{ request.get_full_path |urlencode}}">{% trans "Login" %}</a>
@@ -51,7 +50,7 @@
     </div>
     <div id="footer">
       <div id="subfooter">
-        <p>{% trans "The information provided on this website should not be relied upon for legal advice." %}</p>
+          <p>{% trans "The information provided on this website should not be relied upon for legal advice." %} <a href="{% url 'tos' %}">{% trans "Terms of Service" %}</a>.</p>
         <p><strong>{% trans "Contact:" %}</strong> support@dissem.in</p>
       </div>
     </div>
