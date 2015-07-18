@@ -29,6 +29,7 @@ from datetime import date
 
 from papers.errors import MetadataSourceException
 from papers.utils import iunaccent
+from papers.models import OaiRecord
 
 from backend.create import *
 from backend.name_cache import name_lookup_cache
@@ -193,7 +194,7 @@ def add_base_document(doc, source):
 
     paper = get_or_create_paper(title, model_names, pubdate, doi, 'CANDIDATE')
     
-    record = create_oairecord(
+    record = OaiRecord.new(
             source=source,
             identifier=identifier,
             splash_url=splash_url,

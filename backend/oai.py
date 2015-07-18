@@ -138,7 +138,7 @@ def add_oai_record(record, source, paper=None):
     pubtype = source.default_pubtype
     #pubtype = PUBTYPE_TRANSLATIONS.get(pubtype, source.default_pubtype)
 
-    create_oairecord(
+    OaiRecord.new(
             source=source,
             identifier=identifier,
             about=paper,

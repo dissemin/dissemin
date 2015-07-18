@@ -254,7 +254,7 @@ def add_core_document(doc, source):
 
     paper = get_or_create_paper(title, authors, pubdate, doi, 'CANDIDATE')
 
-    record = create_oairecord(
+    record = OaiRecord.new(
             about=paper,
             source=source,
             identifier=identifier,

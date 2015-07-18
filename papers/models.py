@@ -24,6 +24,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
+from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 
 from papers.utils import nstr, iunaccent, create_paper_plain_fingerprint
@@ -34,7 +35,7 @@ from statistics.models import AccessStatistics
 from publishers.models import Publisher, Journal, OA_STATUS_CHOICES, OA_STATUS_PREFERENCE, default_publisher
 from upload.models import UploadedPDF
 
-import hashlib
+import hashlib, re
 from datetime import datetime, timedelta
 from urllib import urlencode, quote # for the Google Scholar and CORE link
 
@@ -932,6 +933,121 @@ class OaiRecord(models.Model):
     last_update = models.DateTimeField(auto_now=True)
     def __unicode__(self):
         return self.identifier
+
+    @classmethod
+    def new(cls, **kwargs):
+        if kwargs.get('source') is None:
+            raise ValueError('No source provided to create the OAI record.')
+        source = kwargs['source']
+        if kwargs.get('identifier') is None:
+            raise ValueError('No identifier provided to create the OAI record.')
+        identifier = kwargs['identifier']
+        if kwargs.get('about') is None:
+            raise ValueError('No paper provided to create the OAI record.')
+        about = kwargs['about']
+        if kwargs.get('splash_url') is None:
+            raise ValueError('No URL provided to create the OAI record.')
+        splash_url = kwargs['splash_url']
+
+        # Search for duplicate records
+        pdf_url = kwargs.get('pdf_url')
+        match = OaiRecord.find_duplicate_records(source, identifier, about, splash_url, pdf_url)
+
+        # Update the duplicate if necessary
+        if match:
+            changed = False
+
+            if pdf_url != None and (match.pdf_url == None or
+                    (match.pdf_url != pdf_url and match.priority < source.priority)):
+                match.source = source
+                match.priority = source.priority
+                match.pdf_url = pdf_url
+                match.splash_url = splash_url
+                changed = True
+
+            def update_field_conditionally(field):
+                new_val = kwargs.get(field, '')
+                if new_val and (not match.__dict__[field] or
+                        len(match.__dict__[field]) < len(new_val)):
+                    match.__dict__[field] = new_val
+                    changed = True
+            
+            update_field_conditionally('contributors')
+            update_field_conditionally('keywords')
+            update_field_conditionally('description')
+
+            new_pubtype = kwargs.get('pubtype', source.default_pubtype)
+            if new_pubtype in PAPER_TYPE_PREFERENCE:
+                idx = PAPER_TYPE_PREFERENCE.index(new_pubtype)
+                old_idx = len(PAPER_TYPE_PREFERENCE)-1
+                if match.pubtype in PAPER_TYPE_PREFERENCE:
+                    old_idx = PAPER_TYPE_PREFERENCE.index(match.pubtype)
+                if idx < old_idx:
+                    changed = True
+                    match.pubtype = PAPER_TYPE_PREFERENCE[idx]
+                
+            if changed:
+                try:
+                    match.save()
+                except DataError as e:
+                    raise ValueError('Unable to create OAI record:\n'+unicode(e))
+
+            if about.pk != match.about.pk:
+                about.merge(match.about)
+
+            match.about.update_availability()
+            return match
+
+        # Otherwise create a new record
+        record = OaiRecord(
+                source=source,
+                identifier=identifier,
+                splash_url=splash_url,
+                pdf_url=pdf_url,
+                about=about,
+                description=kwargs.get('description'),
+                keywords=kwargs.get('keywords'),
+                contributors=kwargs.get('contributors'),
+                pubtype=kwargs.get('pubtype', source.default_pubtype),
+                priority=source.priority)
+        record.save()
+
+        about.update_availability()
+        return record
+    
+    @classmethod
+    def find_duplicate_records(cls, source, identifier, about, splash_url, pdf_url):
+        https_re = re.compile(r'https?(.*)')
+        exact_dups = OaiRecord.objects.filter(identifier=identifier)
+        if exact_dups:
+            return exact_dups[0]
+        
+        def shorten(url):
+            if not url:
+                return
+            match = https_re.match(url.strip())
+            if not match:
+                print "Warning, invalid URL: "+url
+            return match.group(1)
+
+        short_splash = shorten(splash_url)
+        short_pdf = shorten(pdf_url)
+
+        if splash_url == None or about == None:
+            return
+
+        if pdf_url == None:
+            matches = OaiRecord.objects.filter(about=about,
+                    splash_url__endswith=short_splash)
+            if matches:
+                return matches[0]
+        else:
+            matches = OaiRecord.objects.filter(
+                    Q(splash_url__endswith=short_splash) |
+                    Q(pdf_url__endswith=short_pdf) |
+                    Q(pdf_url__isnull=True), about=about)[:1]
+            for m in matches:
+                return m
 
 
 # Annotation tool to train the models

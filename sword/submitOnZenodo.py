@@ -30,9 +30,9 @@ from os.path import basename
 #from backend.crossref import consolidate_publication
 from dissemin.settings import ZENODO_KEY, DOI_PROXY_DOMAIN
 from papers.errors import MetadataSourceException
-from papers.models import OaiSource
+from papers.models import OaiSource, OaiRecord
 
-import backend.create
+#import backend.create
 
 class DepositError(Exception):
     def __init__(self, msg, logs):
@@ -235,7 +235,7 @@ def submitPubli(paper,filePdf):
     pdf_url = 'https://zenodo.org/record/%d/files/article.pdf' % deposition_id
 
     # Create the corresponding OAI record
-    backend.create.create_oairecord(
+    OaiRecord.new(
             source=zenodo_oai_source,
             identifier=('zenodo:%d' % deposition_id),
             about=paper,
