@@ -39,7 +39,7 @@ from backend.globals import *
 from backend.utils import maybe_recapitalize_title
 
 # TODO: this could be a method of ClusteringContextFactory ?
-def get_or_create_paper(title, author_names, pubdate, doi=None, visibility='VISIBLE'):
+def get_or_create_paper(title, author_names, pubdate, doi=None, visibility='VISIBLE', affiliations=None):
     """
     Creates a paper if it is not already present.
     The clustering algorithm is run to decide what authors should be 
@@ -54,13 +54,15 @@ def get_or_create_paper(title, author_names, pubdate, doi=None, visibility='VISI
     :param visibility: The visibility of the paper if it is created. If another paper
                 exists, the visibility will be set to the maximum of the two possible
                 visibilities.
+    :param affiliations: A list of (possibly None) affiliations for the authors. It has to 
+                have the same length as the list of author names. Affiliations can be replaced by ORCIDs.
     """
     try:
-        return _get_or_create_paper(title, author_names, pubdate, doi, visibility)
+        return _get_or_create_paper(title, author_names, pubdate, doi, visibility, affiliations)
     except DataError as e:
         raise ValueError('Invalid paper, does not fit in the database schema:\n'+unicode(e))
 
-def _get_or_create_paper(title, author_names, pubdate, doi, visibility):
+def _get_or_create_paper(title, author_names, pubdate, doi, visibility, affiliations):
     plain_names = map(to_plain_name, author_names)
 
     def upgrade_visibility(paper):
@@ -68,6 +70,8 @@ def _get_or_create_paper(title, author_names, pubdate, doi, visibility):
             paper.visibility = 'VISIBLE'
             paper.save(update_fields=['visibility'])
         paper.update_author_names(plain_names)
+        if affiliations:
+            paper.update_affiliations(affiliations)
         return paper
 
     # If a DOI is present, first look it up
@@ -99,7 +103,10 @@ def _get_or_create_paper(title, author_names, pubdate, doi, visibility):
         p.save()
         for idx, author_name in enumerate(author_names):
             author_name.save_if_not_saved()
-            a = Author(name=author_name, paper=p, position=idx)
+            aff = None
+            if affiliations:
+                aff = affiliations[idx]
+            a = Author(name=author_name, paper=p, position=idx, affiliation=aff)
             a.save()
             if author_name.is_known:
                 clustering_context_factory.clusterAuthorLater(a)

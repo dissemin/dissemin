@@ -29,7 +29,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from papers.utils import nstr, iunaccent, create_paper_plain_fingerprint
 from papers.name import match_names, name_similarity, unify_name_lists
-from papers.utils import remove_diacritics, sanitize_html
+from papers.utils import remove_diacritics, sanitize_html, validate_orcid
 
 from statistics.models import AccessStatistics
 from publishers.models import Publisher, Journal, OA_STATUS_CHOICES, OA_STATUS_PREFERENCE, default_publisher
@@ -673,6 +673,30 @@ class Paper(models.Model):
                 # TODO maybe we could cluster it ? -> move this code to the backend?
                 author = Author(paper=self,name=name,position=i)
                 author.save()
+                
+    def update_affiliations(self, affiliations):
+        """
+        Improves the current list of affiliations by considering a list of new 
+        affiliations. ORCiDs are preferred over plain strings, longer plain
+        strings are preferred over shorter plain strings, and plain strings
+        are preferred over None
+        """
+        def greater(a, b):
+            if a is None:
+                return False
+            if b is None:
+                return True
+            if validate_orcid(a):
+                return True
+            if validate_orcid(b):
+                return False
+            return len(a) > len(b)
+
+        for i, author in enumerate(self.sorted_authors):
+            if greater(affiliations[i], author.affiliation):
+                author.affiliation = affiliations[i]
+                author.save(update_fields=['affiliation'])
+
 
     # Merge paper into self
     def merge(self, paper):

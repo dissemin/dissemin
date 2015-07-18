@@ -30,13 +30,13 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from papers.errors import MetadataSourceException
 from papers.doi import to_doi
-from papers.name import match_names, normalize_name_words, parse_comma_name
+from papers.name import match_names, normalize_name_words, parse_comma_name, name_similarity
 from papers.utils import create_paper_fingerprint, iunaccent, tolerant_datestamp_to_datetime, date_from_dateparts, validate_orcid, parse_int
 from papers.models import Publication, Paper, Name, OaiSource, OaiRecord
 from papers.bibtex import parse_bibtex
 
 import backend.create
-from backend.crossref import fetch_dois, save_doi_metadata
+from backend.crossref import fetch_dois, save_doi_metadata, convert_to_name_pair
 from backend.name_cache import name_lookup_cache
 
 import requests, json
@@ -88,6 +88,27 @@ def orcid_to_doctype(typ):
     return orcid_type_to_pubtype.get(typ.lower().replace('_','-').replace(' ','-'), 'other')
     
 
+def affiliate_author_with_orcid(ref_name, orcid, authors):
+    """
+    Given a reference name and an ORCiD for a researcher, find out which
+    author in the list is the most likely to be that author. This function
+    is run on author lists of papers listed in the ORCiD record so we expect
+    that one of the authors should be the same person as the ORCiD holder.
+    This just finds the most similar name and returns the appropriate affiliations
+    list (None everywhere except for the most similar name where it is the ORCiD).
+    """
+    max_sim_idx = None
+    max_sim = 0.
+    for idx, name in enumerate(authors):
+        cur_similarity = name_similarity(name, ref_name) 
+        if cur_similarity > max_sim:
+            max_sim_idx = idx
+            max_sim = cur_similarity
+    affiliations = [None]*len(authors)
+    if max_sim_idx is not None:
+        affiliations[max_sim_idx] = orcid
+    return affiliations
+
 def jpath(path, js, default=None):
     def _walk(lst, js):
         if js is None:
@@ -117,8 +138,14 @@ def fetch_orcid_records(id):
     except ValueError as e:
         raise MetadataSourceException('The ORCiD %s returned invalid JSON.' % id)
 
+    # Reference name
+    name_item = jpath('orcid-profile/orcid-bio/personal-details', profile)
+    ref_name = (jpath('given-names/value', name_item),
+                jpath('family-name/value', name_item))
+
     # curl -H "Accept: application/orcid+json" 'http://pub.orcid.org/v1.2/0000-0002-8612-8827/orcid-works' -L -i
-    dois = []
+    dois = [] # list of DOIs to fetch
+    papers = [] # list of papers created
 
     # Fetch publications
     pubs = jpath('orcid-profile/orcid-activities/orcid-works/orcid-work', profile)
@@ -179,8 +206,10 @@ def fetch_orcid_records(id):
         # ORCiD internal id
         identifier = j('put-code')
 
+        affiliations = affiliate_author_with_orcid(ref_name, id, entry['author'])
+
         # Create paper:
-        paper = backend.create.get_or_create_paper(title, authors, pubdate)
+        paper = backend.create.get_or_create_paper(title, authors, pubdate, None, 'VISIBLE', affiliations)
         record = OaiRecord.new(
                 source=orcid_oai_source,
                 identifier=identifier,
@@ -191,9 +220,13 @@ def fetch_orcid_records(id):
     doi_metadata = fetch_dois(dois)
     for metadata in doi_metadata:
         try:
-            save_doi_metadata(metadata)
+            paper = save_doi_metadata(metadata)
+            authors = map(convert_to_name_pair, metadata['author'])
+            affiliations = affiliate_author_with_orcid(ref_name, id, authors)
+            paper.update_affiliations(affiliations)
         except ValueError:
             pass
 
 orcid_oai_source, _ = OaiSource.objects.get_or_create(identifier='orcid',
-            defaults={'name':'ORCiD','oa':False,'priority':1,'default_pubtype':'misc'})
+            defaults={'name':'ORCID','oa':False,'priority':1,'default_pubtype':'other'})
+

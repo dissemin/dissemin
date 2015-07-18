@@ -24,6 +24,7 @@ from django.test import TestCase
 from backend.core import *
 from backend.crossref import *
 from backend.romeo import *
+from backend.orcid import *
 from backend.oai import *
 from backend.tasks import *
 from papers.models import *
@@ -221,6 +222,33 @@ class ProaixyTest(PrefilledTest):
     def test_proaixy_interface_works_2(self):
         fetch_records_for_researcher(self.r3.pk)
         clustering_context_factory.commitThemAll()
+
+class OrcidTest(PrefilledTest):
+    def test_affiliate_author(self):
+        self.assertEqual(
+                affiliate_author_with_orcid(
+                ('Jordi','Cortadella'),
+                '0000-0001-8114-250X',
+                [('N.','Nikitin'), ('J.','De San Pedro'),('J.','Carmona'), ('J.','Cortadella')]),
+                [None,None,None,'0000-0001-8114-250X'])
+        self.assertEqual(
+                affiliate_author_with_orcid(
+                ('Antonin','Delpeuch'),
+                '0000-0002-8612-8827',
+                [('Antonin','Delpeuch'),('Anne','Preller')]),
+                ['0000-0002-8612-8827',None])
+
+
+    def test_update_affiliations(self):
+        id = '0000-0002-8612-8827'
+        fetch_records_for_researcher(self.r4.pk)
+        fetch_orcid_records(id)
+        p = Paper.objects.get(title='From Natural Language to RDF Graphs with Pregroups')
+        author = p.author_set.get(position=0)
+        self.assertEqual(author.affiliation, id)
+        p = Paper.objects.get(title='Complexity of Grammar Induction for Quantum Types')
+        author = p.author_set.get(position=0)
+        self.assertEqual(author.affiliation, id)
 
 class PaperMethodsTest(PrefilledTest):
     def test_update_author_names(self):
