@@ -74,6 +74,7 @@ class PrefilledTest(TestCase):
         self.r1 = Researcher.create_from_scratch('Isabelle', 'Aujard', self.d, None, None, None)
         self.r2 = Researcher.create_from_scratch('Ludovic', 'Jullien', self.d, None, None, None)
         self.r3 = Researcher.create_from_scratch('Antoine', 'Amarilli', self.di, None, None, None)
+        self.r4 = Researcher.create_from_scratch('Antonin', 'Delpeuch', self.di, None, None, None)
         self.hal = OaiSource.objects.create(identifier='hal',
                 name='HAL',
                 default_pubtype='preprint')
@@ -205,6 +206,11 @@ class CrossRefTest(PrefilledTest):
 
     def test_fetch_dois_for_researcher(self):
         fetch_dois_for_researcher(self.r1.pk)
+
+    def test_affiliation(self):
+        fetch_dois_for_researcher(self.r4.pk)
+        p = Publication.objects.get(doi='10.4204/eptcs.172.16')
+        self.assertEqual(p.paper.author_set.all()[0].affiliation, 'École Normale Supérieure, Paris')
 
 # Test that the proaixy interface works
 class ProaixyTest(PrefilledTest):

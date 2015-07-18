@@ -308,10 +308,21 @@ def save_doi_metadata(metadata):
     if all(not elem.is_known for elem in authors) or authors == []:
         raise ValueError('No known author')
 
+    def get_affiliation(author_elem):
+        for dct in author_elem.get('affiliation', []):
+            if 'name' in dct:
+                return dct['name']
+
+    affiliations = map(get_affiliation, metadata['author'])
+
     print "Saved doi "+doi
-    paper = backend.create.get_or_create_paper(title, authors, pubdate) # don't let this function
+    paper = backend.create.get_or_create_paper(title, authors, pubdate, 
+            None, 'VISIBLE', affiliations)
+    # The doi is not passed to this function so that it does not try to refetch the metadata
+    # from CrossRef
     # create the publication, because it would re-fetch the metadata from CrossRef
     backend.create.create_publication(paper, metadata)
+    return paper
 
 
 def fetch_publications(researcher):
