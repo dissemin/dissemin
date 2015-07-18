@@ -43,6 +43,8 @@ from papers.forms import *
 from papers.user import is_admin, is_authenticated
 from papers.emails import *
 
+from deposit.models import *
+
 from publishers.views import varyQueryArguments
 from publishers.models import OA_STATUS_CHOICES
 from dissemin.settings import MEDIA_ROOT, UNIVERSITY_BRANDING, DEPOSIT_MAX_FILE_SIZE 
@@ -217,6 +219,17 @@ class PaperView(generic.DetailView):
     def departments(self):
         paper = self.get_object()
         return Department.objects.filter(researcher__author__paper=paper).distinct()
+    def get_context_data(self, **kwargs):
+        context = super(PaperView, self).get_context_data(**kwargs)
+        if 'deposit' in self.request.GET:
+            try:
+                pk = int(self.request.GET['deposit'])
+                dep = DepositRecord.objects.get(pk=pk)
+                if dep.paper_id == self.get_object().id:
+                    context['deposit'] = dep
+            except (TypeError, ValueError, DepositRecord.DoesNotExist):
+                pass
+        return context
 
 
 @user_passes_test(is_admin)

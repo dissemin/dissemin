@@ -536,6 +536,10 @@ class Paper(models.Model):
             idx += 1
         return idx
 
+    @property
+    def is_deposited(self):
+        return self.depositrecord_set.count() > 0
+
     def update_availability(self):
         # TODO: create an oa_status field in each publication so that we optimize queries
         # and can deal with hybrid OA
@@ -598,7 +602,7 @@ class Paper(models.Model):
 
     def publisher(self):
         for publication in self.publication_set.all():
-            return publication.publisher
+            return publication.publisher_or_default()
         return default_publisher
 
     def plain_fingerprint(self, verbose=False):
@@ -856,6 +860,11 @@ class Publication(models.Model):
             return self.journal.title
         else:
             return self.title
+
+    def publisher_or_default(self):
+        if self.publisher_id:
+            return self.publisher
+        return default_publisher
 
     def details_to_str(self):
         result = ''

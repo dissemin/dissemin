@@ -96,10 +96,8 @@ $(function(){
 {% endif %}
 </p>
 
-<!-- TODO Oh my god Evarin look how ugly this is! -->
-{% if request.GET.deposit %}
-<h1>{% trans "Paper successfully deposited!" %}</h1>
-<h3>But as you can see this page has not been changed to reflect that! #TODO</h3>
+{% if deposit %}
+<div class="depositSuccess">{% trans "Paper successfully deposited!" %}</div>
 {% endif %}
 
 <div id="paperAvailability">
@@ -119,14 +117,20 @@ $(function(){
       <!-- <span><a href="{% url 'mail_paper' paper.pk %}" class="btn btn-default btn-xs">{% trans "Ask upload" %}</a></span> -->
 {% endif %}
     {% endif %}</p>
-
-    {% for publi in paper.publications_with_unique_publisher %}
-        {% with publi.publisher as psh %}
-            <p><strong>{% trans "Publisher:" %}</strong>
+    {% with paper.publisher as psh %}
+        <p><strong>{% trans "Publisher:" %}</strong>
+        {% if psh.pk %}
             <a href="{% url 'publisher' psh.pk %}">{{ psh }}</a></p>
+        {% else %}
+            {{ publi.publisher_name }}</p>
+        {% endif %}
+        {% if paper.is_deposited %}
+        <strong>Deposited.</strong>
+            <a href="{% url 'upload_paper' paper.pk %}" class="btn btn-default btn-xs">{% trans "Deposit again" %}</a>
+        {% else %}
             {% include "publishers/detailsPolicy.html" with publisher=psh mode="link" %}
-        {% endwith %}
-    {% endfor %}
+        {% endif %}
+    {% endwith %}
 </div>
 
 </div>
@@ -184,9 +188,8 @@ $(function(){
 </p>
 {% endfor %}
 
-{% trans "Publisher" as publisher %}
 {% for publi in paper.publication_set.all %}
-<p><a href="{{ publi | doi_to_url }}">{{ publi.publisher|default:publisher }} <img src="/static/extlink.png" /></a> {% trans "via DOI" %}</p>
+<p><a href="{{ publi | doi_to_url }}">{{ publi.publisher|default:publi.publisher_name }} <img src="/static/extlink.png" /></a> {% trans "via DOI" %}</p>
 {% endfor %}
 </div>
 

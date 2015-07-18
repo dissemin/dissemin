@@ -30,6 +30,9 @@ from os.path import basename
 #from backend.crossref import consolidate_publication
 from dissemin.settings import ZENODO_KEY, DOI_PROXY_DOMAIN
 from papers.errors import MetadataSourceException
+from papers.models import OaiSource
+
+import backend.create
 
 class DepositError(Exception):
     def __init__(self, msg, logs):
@@ -194,7 +197,7 @@ def submitPubli(paper,filePdf):
 
         # Uploading the PDF
         log += "### Uploading the PDF\n"
-        data = {'filename':basename(filePdf)}
+        data = {'filename':'article.pdf'}
         files = {'file': open(filePdf, 'rb')}
         r = requests.post(ZENODO_API_URL+"/%s/files?access_token=%s" % (deposition_id,ZENODO_KEY), data=data, files=files)
         log = log_request(r, 201, 'Unable to transfer the document to Zenodo.', log)
@@ -229,5 +232,19 @@ def submitPubli(paper,filePdf):
         log += '\n'
         raise DepositError('Connection to Zenodo failed. Please try again later.', log)
 
+    # Create the corresponding OAI record
+    backend.create.create_oairecord(
+            source=zenodo_oai_source,
+            identifier=('zenodo:%d' % deposition_id),
+            about=paper,
+            splash_url=('https://zenodo.org/record/%d' % deposition_id),
+            pdf_url=('https://zenodo.org/record/%d/files/article.pdf' % deposition_id))
+
     result['logs'] = log
     return result
+
+
+
+zenodo_oai_source, _ = OaiSource.objects.get_or_create(identifier='zenodo',
+            defaults={'name':'Zenodo','oa':False,'priority':2,'default_pubtype':'other'})
+

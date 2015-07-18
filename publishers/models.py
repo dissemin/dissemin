@@ -22,6 +22,7 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext as __
 
 from django.apps import apps
 get_model = apps.get_model
@@ -54,6 +55,8 @@ class DummyPublisher(object):
     pdfversion_conditions = []
     def __init__(self):
         pass
+    def __unicode__(self):
+        return __('Unknown publisher')
 
 default_publisher = DummyPublisher()
 
