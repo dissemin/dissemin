@@ -538,7 +538,7 @@ class Paper(models.Model):
 
     @property
     def is_deposited(self):
-        return self.depositrecord_set.count() > 0
+        return self.successful_deposits().count() > 0
 
     def update_availability(self):
         # TODO: create an oa_status field in each publication so that we optimize queries
@@ -604,6 +604,19 @@ class Paper(models.Model):
         for publication in self.publication_set.all():
             return publication.publisher_or_default()
         return default_publisher
+
+    def successful_deposits(self):
+        return self.depositrecord_set.filter(pdf_url__isnull=False)
+    
+    def abstract(self):
+        for rec in self.publication_set.all():
+            if rec.abstract:
+                return rec.abstract
+        best_abstract = ''
+        for rec in self.oairecord_set.all():
+            if rec.description and len(rec.description) > len(best_abstract):
+                best_abstract = rec.description
+        return best_abstract
 
     def plain_fingerprint(self, verbose=False):
         """

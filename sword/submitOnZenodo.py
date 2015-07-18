@@ -232,14 +232,17 @@ def submitPubli(paper,filePdf):
         log += '\n'
         raise DepositError('Connection to Zenodo failed. Please try again later.', log)
 
+    pdf_url = 'https://zenodo.org/record/%d/files/article.pdf' % deposition_id
+
     # Create the corresponding OAI record
     backend.create.create_oairecord(
             source=zenodo_oai_source,
             identifier=('zenodo:%d' % deposition_id),
             about=paper,
             splash_url=('https://zenodo.org/record/%d' % deposition_id),
-            pdf_url=('https://zenodo.org/record/%d/files/article.pdf' % deposition_id))
+            pdf_url=pdf_url)
 
+    result['pdf_url'] = pdf_url
     result['logs'] = log
     return result
 

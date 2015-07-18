@@ -96,7 +96,7 @@ $(function(){
 {% endif %}
 </p>
 
-{% if deposit %}
+{% if deposit.pdf_url %}
 <div class="depositSuccess">{% trans "Paper successfully deposited!" %}</div>
 {% endif %}
 
@@ -135,14 +135,10 @@ $(function(){
 
 </div>
 
-{% for record in paper.oairecord_set.all %}
-{% if forloop.first %}
-    {% if record.description %}
-        <span class="detailsTitle">{% trans "Abstract" %}</span>
-		<div class="detailsContent"><div class="abstract">{{ record.description }}</div></div>
-    {% endif %}
+{% if paper.abstract %}
+    <span class="detailsTitle">{% trans "Abstract" %}</span>
+    <div class="detailsContent"><div class="abstract">{{ paper.abstract }}</div></div>
 {% endif %}
-{% endfor %}
 
 {% endblock %}
 
