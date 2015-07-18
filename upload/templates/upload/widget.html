@@ -7,7 +7,7 @@
         <form id="uploadForm" method="post" action="{% url 'ajax-uploadFulltext' %}" enctype="multipart/form-data">
             {% csrf_token %}
             <label for="upl">{% trans "Select a file:" %}</label>
-            <p><a class="btn btn-success" id="browseButton">{% trans "Browse" %}</a><input type="file" name="upl" style="display:none" /></p>
+            <p><a class="btn btn-success" id="browseButton"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> {% trans "Browse" %}</a><input type="file" name="upl" style="display:none" /></p>
         </form>
     </div>
     <div class="uploadModeUrl">

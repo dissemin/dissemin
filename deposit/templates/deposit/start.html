@@ -158,7 +158,7 @@ $(function(){
 </div>
 <div id="depositError"></div>
 <div id="uploadSubmitSection">
-    <p class="submitDeposit"><button type="submit" id="submitDeposit" class="btn btn-lg btn-primary">{% trans "Deposit" %}</button></p>
+    <p class="submitDeposit"><button type="submit" id="submitDeposit" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-circle-arrow-up"></span> {% trans "Deposit" %}</button></p>
     <div id="waitingArea">
         <span>{% trans "Processing deposit..." %}</span> <span class="waitingBird"><img src="{% static "img/animated-bird.gif" %}" /></span> <span>{% trans "please wait..." %}</span>
     </div>
@@ -175,31 +175,7 @@ $(function(){
 {% block details %}
 <span class="detailsTitle">{% trans "Data from" %}</span>
 <div class="detailsContent">
-{% for record in paper.sorted_oai_records %}
-<p>
-    {% if record.priority > 0 %}
-        {{ record.source }}:
-    {% else %}
-        {% if record.splash_url %}
-            [{{ record.splash_url |domain }}]
-        {% elif record.pdf_url %}
-            [{{ record.pdf_url |domain }}]
-        {% endif %}
-    {% endif %}
-    {% if record.splash_url %}
-        <a href="{{ record.splash_url }}">
-     [{% trans "Web page" %} <img src="/static/extlink.png" />]
-     </a>{% if record.pdf_url %} | {% endif %}{% endif %}
-     {% if record.pdf_url %}
-         <a href="{{ record.pdf_url }}"><img src="/static/extpdf.png" alt="PDF" /></a>
-     {% endif %}
-</p>
-{% endfor %}
-
-{% trans "Publisher" as publisher %}
-{% for publi in paper.publication_set.all %}
-<p><a href="{{ publi | doi_to_url }}">{{ publi.publisher|default:publisher }} <img src="/static/extlink.png" /></a> {% trans "via DOI" %}</p>
-{% endfor %}
+    {% include "papers/paperSources.html" with paper=paper %}
 </div>
 
 {% endblock %}

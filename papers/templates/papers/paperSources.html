@@ -1,0 +1,30 @@
+{% load i18n %}
+{% load domain %}
+{% load doi %}
+
+{% for record in paper.sorted_oai_records %}
+<p>
+    {% if record.splash_url %}
+        <a href="{{ record.splash_url }}">
+	{% endif %}
+    {% if record.priority > 0 %}
+        {{ record.source }}
+    {% else %}
+        {% if record.splash_url %}
+            [{{ record.splash_url |domain }}]
+        {% elif record.pdf_url %}
+            [{{ record.pdf_url |domain }}]
+        {% endif %}
+    {% endif %}
+    {% if record.splash_url %}<img src="/static/extlink.png" /></a>{% if record.pdf_url %} | {% endif %}
+	{% endif %}
+    {% if record.pdf_url %}
+    <a href="{{ record.pdf_url }}" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-save"></span> PDF</a>
+    {% endif %}
+</p>
+{% endfor %}
+
+{% for publi in paper.publication_set.all %}
+<p><a href="{{ publi | doi_to_url }}">{{ publi.publisher|default:publi.publisher_name }} <img src="/static/extlink.png" /></a> {% trans "via DOI" %}</p>
+{% endfor %}
+

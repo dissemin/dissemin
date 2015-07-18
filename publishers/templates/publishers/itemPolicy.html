@@ -17,7 +17,7 @@
         {% if policy != "cannot" %}
             <span class="policyDetailUpload">
             {% if mode == "link" %}
-            <a href="{% url 'upload_paper' paper.pk %}?type={{ typ }}" class="btn btn-default btn-xs">{% trans "Upload" %}</a>
+            <a href="{% url 'upload_paper' paper.pk %}?type={{ typ }}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-open"></span> {% trans "Upload" %}</a>
             {% elif mode == "radio" %}
             <input type="radio" name="radioUploadType" value="{{ typ }}" id="radio{{ typ }}"
                 {% if request.GET.type == typ %}checked="checked"{% endif %} />   
