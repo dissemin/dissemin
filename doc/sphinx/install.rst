@@ -90,7 +90,6 @@ Create the database structure
 
 This is done by applying migrations::
 
-   python manage.py migrate auth
    python manage.py migrate
 
 (this should be done every time the source code is updated).
