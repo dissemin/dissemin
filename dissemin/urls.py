@@ -53,14 +53,16 @@ urlpatterns = patterns('',
     # Authentication
     url(r'^admin/logout/$','django_cas_ng.views.logout', name='logout'),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^accounts/login/$', 'django_cas_ng.views.login', name='login'), 
-    url(r'^accounts/logout/$','django_cas_ng.views.logout', name='logout'),
-    url(r'^logout/$', 'django_cas_ng.views.logout'),
+    #url(r'^accounts/login/$', 'django_cas_ng.views.login', name='login'), 
+    #url(r'^accounts/logout/$','django_cas_ng.views.logout', name='logout'),
+    #url(r'^logout/$', 'django_cas_ng.views.logout'),
     # Apps
     url(r'^ajax-upload/', include('upload.urls')),
     url(r'^', include('papers.urls')),
     url(r'^', include('publishers.urls')),
     url(r'^', include('deposit.urls')),
+    # Social auth
+    (r'^accounts/', include('allauth.urls')),
 # Remove this in production
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -9,3 +9,4 @@ django-cas-ng
 unicode_tex
 wand
 PyPDF2
+django-allauth

@@ -1,5 +1,7 @@
 {% load staticfiles %}
 {% load i18n %}
+{% load socialaccount %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,6 +40,7 @@
                 {{ request.user }} − <a href="/logout/">{% trans "Logout" %}</a>
                 {% else %}
                 <a href="/login/?next={{ request.get_full_path |urlencode}}">{% trans "Login" %}</a>
+                - <a href="{% provider_login_url "orcid" %}">Login with ORCID</a>
                 {% endif %}
             </div>
           </div>
