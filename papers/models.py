@@ -187,7 +187,7 @@ class Researcher(models.Model):
         self.stats.update(Paper.objects.filter(author__researcher=self).distinct())
 
     @classmethod
-    def create_from_scratch(cls, first, last, dept, email, role, homepage, orcid=None):
+    def create_from_scratch(cls, first, last, email, role, homepage, orcid=None):
         """Creates a researcher, creating first the :py:class:`Name` for it.
 
         :raises ValueError: if a researcher with that name already exists,

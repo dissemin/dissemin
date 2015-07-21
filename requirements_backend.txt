@@ -6,3 +6,4 @@ czipfile
 httplib2
 requests
 titlecase
+bibtexparser

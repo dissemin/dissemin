@@ -42,6 +42,7 @@ from papers.models import *
 from papers.forms import *
 from papers.user import is_admin, is_authenticated
 from papers.emails import *
+from papers.orcid import *
 
 from deposit.models import *
 
@@ -51,9 +52,21 @@ from dissemin.settings import MEDIA_ROOT, UNIVERSITY_BRANDING, DEPOSIT_MAX_FILE_
 
 from allauth.socialaccount.signals import pre_social_login, social_account_added
 
+import json
+
 def fetch_on_orcid_login(sender, **kwargs):
-    print kwarg['sociallogin'].account.uid
-    print kwargs
+    account = kwargs['sociallogin'].account
+    orcid = account.uid
+    profile = account.extra_data
+    
+    researcher = None
+    try:
+        researcher = Researcher.objects.get(orcid=orcid)
+    except Researcher.DoesNotExist:
+        name = get_name_from_orcid_profile(profile)
+        # TODO extract email & homepage from profile
+        researcher = Researcher.create_from_scratch(name[0],name[1], None, None, None, orcid)
+    send_task('fetch_everything_for_researcher', [], {'pk':researcher.id})
 
 pre_social_login.connect(fetch_on_orcid_login)
 
