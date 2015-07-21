@@ -41,8 +41,8 @@ from backend.proxy import *
 from backend.oai import *
 from backend.core import fetch_papers_from_core_for_researcher
 from backend.base import fetch_papers_from_base_for_researcher
+from backend.orcid import fetch_orcid_records
 from backend.name_cache import name_lookup_cache
-
 
 logger = get_task_logger(__name__)
 
@@ -50,6 +50,8 @@ logger = get_task_logger(__name__)
 def fetch_everything_for_researcher(pk):
     try:
         r = Researcher.objects.get(pk=pk)
+        if r.orcid:
+            fetch_orcid_records(r.orcid)
         fetch_dois_for_researcher(pk)
         fetch_records_for_researcher(pk)
         fetch_papers_from_core_for_researcher(r)

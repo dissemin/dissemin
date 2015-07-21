@@ -23,12 +23,6 @@
     See the <a href="{{ faq_url }}">FAQ</a> for more information about dissem.in.
     {% endblocktrans %}
     </p>
-	
-    <p>
-    {% blocktrans trimmed with depts=nb_departments %}
-    We gather the publications of {{ nb_researchers }} researchers, from {{ depts }} departments.
-    {% endblocktrans %}
-    </p>
   </div>
   
 
@@ -53,14 +47,7 @@
 	
   <div class="siteSummary left">
     
-	<h2>{% trans "Departments" %}</h2>
-    <ul>
-    {% for dept in departments %}
-    <li><a href="{% url 'department' dept.pk %}">{{ dept }}</a></li>
-    {% endfor %}
-    </ul>
-    <a href="{% url 'departments' %}" class="seeAll">{% blocktrans %}See all {{ nb_departments }} departments{% endblocktrans %}</a>
-	
+
   </div>
 	
   <div class="siteSummary right">

@@ -81,56 +81,6 @@ UPLOAD_TYPE_CHOICES = [
 
 PAPER_TYPE_PREFERENCE = [x for (x,y) in PAPER_TYPE_CHOICES]
 
-# Information about the researchers and their groups
-class Department(models.Model):
-    """
-    A department in an institution. Each :py:class:`Researcher` is affiliated with exactly one department.
-
-    :param name: the full name of the department
-    """
-
-    #: The full name of the department
-    name = models.CharField(max_length=300)
-
-    #: :py:class:`AccessStatistics` about the papers authored in this department
-    stats = models.ForeignKey(AccessStatistics, null=True)
-
-    @property
-    def sorted_researchers(self):
-        """List of :py:class:`Researcher` in this department sorted by last name (prefetches their stats as well)"""
-        return self.researcher_set.select_related('name', 'stats').order_by('name')
-
-    def __unicode__(self):
-        return self.name
-
-    def update_stats(self):
-        """Refreshes the department-level access statistics for that department."""
-        if not self.stats:
-            self.stats = AccessStatistics.objects.create()
-            self.save()
-        self.stats.update(Paper.objects.filter(author__researcher__department=self).distinct())
-
-    @property
-    def object_id(self):
-        """Criteria to use in the search view to filter on this department"""
-        return "department=%d" % self.pk
-
-class ResearchGroup(models.Model):
-    """
-    A research group is a group of researchers working on the same topic. Researchers can
-    belong to multiple research groups.
-    """
-
-    #: The full name of the research group
-    name = models.CharField(max_length=300)
-    def __unicode__(self):
-        return self.name
-
-    @property
-    def object_id(self):
-        """Criteria to use in the search view to filter on this research group"""
-        return "group=%d" % self.pk
-
 class NameVariant(models.Model):
     """
     A NameVariant is a binary relation between names and researchers. When present, it indicates
@@ -148,16 +98,12 @@ class NameVariant(models.Model):
 
 class Researcher(models.Model):
     """
-    A model to represent a researcher in a department
+    A model to represent a researcher
     """
 
     #: The preferred :py:class:`Name` for this researcher
     name = models.ForeignKey('Name')
-    #: :py:class:`Department` the researcher belongs to
-    department = models.ForeignKey(Department)
-    #: The (possibly multiple) :py:class:`ResearchGroup` the researcher belongs to
-    groups = models.ManyToManyField(ResearchGroup)
-    
+   
     # Various info about the researcher (not used internally)
     #: Email address for this researcher
     email = models.EmailField(blank=True,null=True)
@@ -263,7 +209,6 @@ class Researcher(models.Model):
                 raise ValueError('Invalid ORCiD: "%s"' % orcid)
 
         researcher = Researcher(
-                department=dept,
                 email=email,
                 role=role,
                 homepage=homepage,

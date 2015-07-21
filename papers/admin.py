@@ -23,12 +23,6 @@ class NameInline(admin.TabularInline):
     model = Name
     extra = 0
 
-class ResearcherAdmin(admin.ModelAdmin):
-    fieldsets = [
-      #  (None, {'fields': ['nae']}),
-        ('Affiliation', {'fields': ['department', 'groups']})
-        ]
-
 class AuthorInline(admin.TabularInline):
     model = Author
     extra = 0
@@ -45,9 +39,7 @@ class PublicationInline(admin.StackedInline):
 class PaperAdmin(admin.ModelAdmin):
     fields = ['title', 'pubdate', 'visibility']
 
-admin.site.register(Department)
-admin.site.register(ResearchGroup)
-admin.site.register(Researcher, ResearcherAdmin)
+admin.site.register(Researcher)
 admin.site.register(Name)
 admin.site.register(Paper, PaperAdmin)
 admin.site.register(OaiSource)

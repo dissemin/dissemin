@@ -49,6 +49,14 @@ from publishers.views import varyQueryArguments
 from publishers.models import OA_STATUS_CHOICES
 from dissemin.settings import MEDIA_ROOT, UNIVERSITY_BRANDING, DEPOSIT_MAX_FILE_SIZE 
 
+from allauth.socialaccount.signals import pre_social_login, social_account_added
+
+def fetch_on_orcid_login(sender, **kwargs):
+    print kwarg['sociallogin'].account.uid
+    print kwargs
+
+pre_social_login.connect(fetch_on_orcid_login)
+
 # Number of papers shown on a search results page
 NB_RESULTS_PER_PAGE = 20
 
@@ -56,22 +64,13 @@ def index(request):
     
     context = {
         'nb_researchers': Researcher.objects.count(),
-        'nb_departments': Department.objects.count(),
         'nb_papers': Paper.objects.filter(visibility='VISIBLE').count(),
         'nb_publishers': Publisher.objects.filter(stats__num_tot__gt=0).count(),
-        'departments': Department.objects.order_by('name').select_related('stats')[:3],
         'papers' : Paper.objects.filter(visibility='VISIBLE').order_by('-pubdate')[:5],
         'publishers' : Publisher.objects.all().filter(stats__isnull=False).order_by('-stats__num_tot')[:3],
         }
     context.update(UNIVERSITY_BRANDING)
     return render(request, 'papers/index.html', context)
-
-def departmentsView(request, **kwargs):
-	context = {
-        'nb_departments': Department.objects.count(),
-        'departments': Department.objects.order_by('name').select_related('stats'),
-        }
-	return render(request, 'papers/departments.html', context)
 
 def searchView(request, **kwargs):
     context = dict()
@@ -84,19 +83,17 @@ def searchView(request, **kwargs):
     head_search_description = _('Papers')
 
     context['researcher_id'] = None
-    if 'researcher' in args:
-        researcher = get_object_or_404(Researcher, pk=args.get('researcher'))
+    if 'researcher' in args or 'orcid' in args:
+        researcher = None
+        if 'researcher' in args:
+            researcher = get_object_or_404(Researcher, pk=args.get('researcher'))
+        elif 'orcid' in args:
+            researcher = get_object_or_404(Researcher, orcid=args.get('orcid'))
         queryset = queryset.filter(author__researcher=researcher)
         search_description += _(' authored by ')+unicode(researcher)
         head_search_description = unicode(researcher)
         context['researcher'] = researcher
         context['researcher_id'] = researcher.id
-    elif 'department' in args:
-        department = get_object_or_404(Department, pk=args.get('department'))
-        queryset = queryset.filter(author__researcher__department=department)
-        search_description += _(' authored in ')+unicode(department)
-        head_search_description = unicode(department)
-        context['department'] = department
     elif 'name' in args:
         name = get_object_or_404(Name, pk=args.get('name'))
         queryset = queryset.filter(author__name=name)
@@ -200,18 +197,6 @@ def refetchResearcher(request, pk):
 class ResearcherView(generic.DetailView):
     model = Researcher
     template_name = 'papers/researcher.html'
-
-class GroupView(generic.DetailView):
-    model = ResearchGroup
-    template_name = 'papers/group.html'
-    
-class DepartmentView(generic.DetailView):
-    model = Department
-    template_name = 'papers/department.html'
-    def get_context_data(self, **kwargs):
-        context = super(DepartmentView, self).get_context_data(**kwargs)
-        context['add_form'] = AddResearcherForm()
-        return context
 
 class PaperView(generic.DetailView):
     model = Paper

@@ -59,7 +59,6 @@
         data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}"
         data-pk="{{ researcher.pk }}">{{ researcher.role }}</span></p>
         {% endif %}
-        <p><a href="{% url 'department' researcher.department.id %}">{{ researcher.department }}</a></p>
         {% if researcher.homepage %}
         <p><a href="{{ researcher.homepage }}">{% trans "Homepage" context "Researcher" %}</a></p>
         {% endif %}
@@ -80,16 +79,6 @@
          <a href="{% url 'refetch-researcher' researcher.pk %}" class="btn btn-default">{% trans "Refresh papers" %}</a><br />
          <a href="{% url 'recluster-researcher' researcher.pk %}" class="btn btn-default">{% trans "Refresh classification" %}</a>
          {% endif %}
-    </div>
-{% elif department %}
-<span class="detailsTitle">{% trans "Department" %}</span>
-    <div class="detailsContent">
-        <p id="detail-name">{{ department }}</p>
-        <p><a href="{% url 'department' department.id %}">
-            {% blocktrans trimmed with count=department.researcher_set.count %}
-            {{ count }} members
-            {% endblocktrans %}
-        </a></p>
     </div>
 {% elif name %}
 <span class="detailsTitle">{% trans "Name" %}</span>
