@@ -5,4 +5,4 @@
     data-first="{{ author.name.first }}"
     data-last="{{ author.name.last }}"
     data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}"
-    >{{ author | authorlink }}</span></span>{% if author.orcid %}<a href="http://orcid.org/{{ author.orcid }}"><img src="{% static "img/orcid-small.png" %}" alt="ORCID" /></a>{% endif %}{% endfor %}
+    >{{ author | authorlink }}</span></span>{% if author.orcid %}<a href="http://orcid.org/{{ author.orcid }}" class="orcidLink"><img src="{% static "img/orcid-small.png" %}" alt="ORCID" /></a>{% endif %}{% endfor %}

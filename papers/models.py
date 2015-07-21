@@ -748,6 +748,12 @@ class Author(models.Model):
 
     def __unicode__(self):
         return unicode(self.name)
+    def orcid(self):
+        """
+        If the affiliation looks like an ORCiD, return it, otherwise None
+        """
+        return validate_orcid(self.affiliation)
+
     def get_cluster_id(self):
         """
         This is the "find" in "Union Find".

@@ -443,6 +443,10 @@ h1#paperTitle {
     text-align: right;
 }
 
+.orcidLink {
+    padding-left: 2px;
+}
+
 /* Paper depositing */
 
 .depositSuccess {
