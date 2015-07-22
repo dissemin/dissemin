@@ -4,4 +4,5 @@
     data-pk="{{ author.pk }}"
     data-first="{{ author.name.first }}"
     data-last="{{ author.name.last }}"
-    data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">{{ author | authorlink }}</span></span>{% endfor %}
+    data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}"
+    >{% if author.researcher_id and author.researcher_id == researcher_id %}<strong>{{ author }}</strong>{% else %}{{ author | authorlink }}{% endif %}</span></span>{% if author.orcid %}<a href="http://orcid.org/{{ author.orcid }}" class="orcidLink"><img src="{% static "img/orcid-small.png" %}" alt="ORCID" /></a>{% endif %}{% endfor %}
