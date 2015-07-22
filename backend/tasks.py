@@ -50,19 +50,31 @@ logger = get_task_logger(__name__)
 def fetch_everything_for_researcher(pk):
     try:
         r = Researcher.objects.get(pk=pk)
+        def update_task(name):
+            r.current_task = name
+            r.save(update_fields=['current_task'])
+
         if r.orcid:
+            update_task('orcid')
             fetch_orcid_records(r.orcid)
+        update_task('crossref')
         fetch_dois_for_researcher(pk)
+        update_task('oai')
         fetch_records_for_researcher(pk)
+        update_task('core')
         fetch_papers_from_core_for_researcher(r)
         #fetch_papers_from_base_for_researcher(Researcher.objects.get(pk=pk))
     except MetadataSourceException as e:
         raise e
     finally:
+        update_task('clustering')
         clustering_context_factory.commitThemAll()
         clustering_context_factory.unloadResearcher(pk)
         r = Researcher.objects.get(pk=pk)
+        update_task('stats')
         r.update_stats()
+        r.harvester = None
+        update_task(None)
 
 @shared_task(name='fetch_records_for_researcher')
 def fetch_records_for_researcher(pk):

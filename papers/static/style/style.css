@@ -909,6 +909,33 @@ h1#paperTitle {
 	padding-left: 20px;
 }
 
+/* Waiting area */
+
+#waitingArea {
+    text-align: center;
+}
+
+.waitingBird {
+    display: inline-block;
+    border-radius: 50%;
+    background-color: #84B4DE;
+    width: 128px;
+    height: 128px;
+    margin: 12px;
+}
+.waitingBird img {
+    width: 128px;
+    height: 100px;
+    margin-top: 14px;
+}
+
+#waitingArea span {
+    font-style: italic;
+    font-size: 1.2em;
+}
+
+
+
 /* Not sure we need these anymore */
 
 #paper_uploader input {

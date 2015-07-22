@@ -58,17 +58,10 @@ def fetch_on_orcid_login(sender, **kwargs):
     account = kwargs['sociallogin'].account
     orcid = account.uid
     profile = account.extra_data
-    
-    researcher = None
-    try:
-        researcher = Researcher.objects.get(orcid=orcid)
-    except Researcher.DoesNotExist:
-        name = get_name_from_orcid_profile(profile)
-        # TODO extract email & homepage from profile
-        researcher = Researcher.create_from_scratch(name[0],name[1], None, None, None, orcid)
-    send_task('fetch_everything_for_researcher', [], {'pk':researcher.id})
+    r = Researcher.get_or_create_by_orcid(orcid, profile)
+    r.fetch_everything()
 
-pre_social_login.connect(fetch_on_orcid_login)
+social_account_added.connect(fetch_on_orcid_login)
 
 # Number of papers shown on a search results page
 NB_RESULTS_PER_PAGE = 20
@@ -101,7 +94,13 @@ def searchView(request, **kwargs):
         if 'researcher' in args:
             researcher = get_object_or_404(Researcher, pk=args.get('researcher'))
         elif 'orcid' in args:
-            researcher = get_object_or_404(Researcher, orcid=args.get('orcid'))
+            try:
+                researcher = Researcher.objects.get(orcid=args.get('orcid'))
+            except Researcher.DoesNotExist:
+                orcid = validate_orcid(args.get('orcid'))
+                researcher = Researcher.get_or_create_by_orcid(orcid)
+                researcher.fetch_everything()
+
         queryset = queryset.filter(author__researcher=researcher)
         search_description += _(' authored by ')+unicode(researcher)
         head_search_description = unicode(researcher)

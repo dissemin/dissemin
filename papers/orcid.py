@@ -20,6 +20,8 @@
 
 from __future__ import unicode_literals
 
+import requests, json
+from papers.errors import MetadataSourceException
 
 def jpath(path, js, default=None):
     def _walk(lst, js):
@@ -30,6 +32,17 @@ def jpath(path, js, default=None):
         else:
             return _walk(lst[1:], js.get(lst[0],{} if len(lst) > 1 else default))
     return _walk(path.split('/'), js)
+
+def get_orcid_profile(id):
+    try:
+        headers = {'Accept':'application/orcid+json'}
+        profile_req = requests.get('http://pub.orcid.org/v1.2/%s/orcid-profile' % id, headers=headers)
+        return profile_req.json()
+    except requests.exceptions.HTTPError:
+        raise MetadataSourceException('The ORCiD %s could not be found' % id)
+    except (ValueError, TypeError) as e:
+        raise MetadataSourceException('The ORCiD %s returned invalid JSON.' % id)
+
 
 def get_name_from_orcid_profile(profile):
     name_item = jpath('orcid-profile/orcid-bio/personal-details', profile)

@@ -26,10 +26,12 @@ from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
 from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
+from celery.execute import send_task
 
 from papers.utils import nstr, iunaccent, create_paper_plain_fingerprint
 from papers.name import match_names, name_similarity, unify_name_lists
 from papers.utils import remove_diacritics, sanitize_html, validate_orcid
+from papers.orcid import get_orcid_profile, get_name_from_orcid_profile
 
 from statistics.models import AccessStatistics
 from publishers.models import Publisher, Journal, OA_STATUS_CHOICES, OA_STATUS_PREFERENCE, default_publisher
@@ -81,6 +83,16 @@ UPLOAD_TYPE_CHOICES = [
 
 PAPER_TYPE_PREFERENCE = [x for (x,y) in PAPER_TYPE_CHOICES]
 
+HARVESTER_TASK_CHOICES = [
+   ('orcid', _('Fetching publications from ORCID')),
+   ('crossref', _('Fetching publications from CrossRef')),
+   ('base', _('Fetching publications from BASE')),
+   ('core', _('Fetching publications from CORE')),
+   ('oai', _('Fetching publications from OAI-PMH')),
+   ('clustering', _('Clustering publications')),
+   ('stats', _('Updating statistics')),
+   ]
+
 class NameVariant(models.Model):
     """
     A NameVariant is a binary relation between names and researchers. When present, it indicates
@@ -115,17 +127,19 @@ class Researcher(models.Model):
     orcid = models.CharField(max_length=32, null=True, blank=True, unique=True)
     # TODO This could be a custom field as we know what format to expect
 
-    # DOI search
-    # TODO is this still needed ?
-    #: Date of the last CrossRef search for this researcher
-    last_doi_search = models.DateTimeField(null=True,blank=True)
-    #: Status of the current harvesting process for this researcher
-    status = models.CharField(max_length=512, blank=True, null=True)
-    #: Last time the harvesting status was updated
-    last_status_update = models.DateTimeField(auto_now=True)
+    # Fetching
+    #: Last time we harvested publications for this researcher
+    last_harvest = models.DateTimeField(null=True, blank=True)
+    #: Task id of the harvester (if any)
+    harvester = models.CharField(max_length=512, null=True, blank=True)
+    #: Current subtask of the harvester
+    current_task = models.CharField(max_length=64, choices=HARVESTER_TASK_CHOICES, null=True, blank=True)
 
     def __unicode__(self):
-        return unicode(self.name)
+        if self.name_id:
+            return unicode(self.name)
+        else:
+            return 'Unnamed researcher'
 
     @property
     def authors_by_year(self):
@@ -185,6 +199,24 @@ class Researcher(models.Model):
             self.stats = AccessStatistics.objects.create()
             self.save()
         self.stats.update(Paper.objects.filter(author__researcher=self).distinct())
+
+    def fetch_everything(self):
+        self.harvester = send_task('fetch_everything_for_researcher', [], {'pk':self.id}).id
+        self.save(update_fields=['harvester'])
+
+    @classmethod
+    def get_or_create_by_orcid(cls, orcid, profile=None):
+        researcher = None
+        try:
+            researcher = Researcher.objects.get(orcid=orcid)
+        except Researcher.DoesNotExist:
+            if profile is None:
+                profile = get_orcid_profile(orcid) 
+            name = get_name_from_orcid_profile(profile)
+            # TODO extract email & homepage from profile
+            researcher = Researcher.create_from_scratch(name[0],name[1], None, None, None, orcid)
+        return researcher
+
 
     @classmethod
     def create_from_scratch(cls, first, last, email, role, homepage, orcid=None):
@@ -626,6 +658,12 @@ class Paper(models.Model):
         strings are preferred over shorter plain strings, and plain strings
         are preferred over None
         """
+        if len(affiliations) != self.author_set.count():
+            print "Warning, number of affiliations differ for paper %d" % self.pk
+            print "New affiliations: "+unicode(affiliations)
+            print "%d authors" % self.author_set.count()
+            return
+
         def greater(a, b):
             if a is None:
                 return False

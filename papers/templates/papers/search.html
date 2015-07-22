@@ -47,6 +47,29 @@
         });
     });
 {% endif %}
+{% if researcher.current_task %}
+    function pollHarvesting(){
+        console.log('pollHarvesting()');
+        $.get('{% url 'ajax-harvestingStatus' researcher.id %}', function(data) {
+            console.log(data);
+            if(data) {
+                $('#harvestingStatus').text(data['display']);
+                setTimeout(pollHarvesting, 1500);
+            } else {
+                var area = $('#waitingArea');
+                area.fadeOut(function(){
+                    area.hide();
+                });
+            }
+            }).fail(function () {
+                console.log('fail');
+                setTimeout(pollHarvesting, 2000);
+            });
+    }
+    $(function(){
+        setTimeout(pollHarvesting, 1500);
+    });
+{% endif %}
 {% endblock %}
 
 {% block details %}
@@ -180,6 +203,15 @@
 {% endblock %}
 
 {% block lists %}
+ {% if researcher.current_task %}
+    <div id="waitingArea">
+        <span class="waitingBird"><img src="{% static "img/animated-bird.gif" %}" alt="Paper bird" /></span>
+        <br />
+        <span id="harvestingStatus">{{ researcher.get_current_task_display }}</span><span>…</span>
+        <br />
+    </div>
+ {% endif %}
+ 
  {% if search_results.paginator.num_pages > 1 %}
 <div class="searchPages">{% bootstrap_paginate search_results range=10 %}</div>
  {% endif %}
