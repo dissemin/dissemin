@@ -33,7 +33,7 @@ from backend.utils import urlopen_retry
 
 from publishers.models import *
 
-from dissemin.settings import ROMEO_API_KEY
+from dissemin.settings import ROMEO_API_KEY, ROMEO_API_DOMAIN
 
 
 # Minimum number of times we have seen a publisher name
@@ -50,7 +50,7 @@ def perform_romeo_query(search_terms):
     search_terms = search_terms.copy()
     if ROMEO_API_KEY:
         search_terms['ak'] = ROMEO_API_KEY
-    base_url = 'http://sherpa.ac.uk/romeo/api29.php'
+    base_url = 'http://'+ROMEO_API_DOMAIN+'/romeo/api29.php'
 
     # Perform the query
     try:
@@ -125,7 +125,6 @@ def fetch_journal(search_terms, matching_mode = 'exact'):
         # Retry with a less restrictive matching type
         if matching_mode == 'exact':
             return fetch_journal(original_search_terms, 'contains')
-        # TODO do it also with 'contains' but with a disambiguation notice
         return None
     if len(journals) > 1:
         print ("Warning, "+str(len(journals))+" journals match the RoMEO request, "+
@@ -190,7 +189,6 @@ def fetch_publisher(publisher_name):
             print "Not clear enough:"
             print aliases[0]
             print aliases[1]
-       
 
     # Otherwise, let's try to fetch the publisher from RoMEO!
 
