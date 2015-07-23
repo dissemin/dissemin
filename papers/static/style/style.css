@@ -934,7 +934,22 @@ h1#paperTitle {
     font-size: 1.2em;
 }
 
+/* Login page */
 
+.regularLogin {
+    width: 48%;
+    float: right;
+    display: inline-block;
+    border-left: 1px solid #CCC;
+    padding: 5px;
+    padding-left: 7px;
+}
+
+.socialLogin {
+    width: 48%;
+    float: left;
+    display: inline-block;
+}
 
 /* Not sure we need these anymore */
 

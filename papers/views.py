@@ -242,9 +242,6 @@ class JournalView(generic.DetailView):
     model = Journal
     template_name = 'papers/journal.html'
 
-def regularLogin(request):
-    return auth_login(request, 'papers/login.html')
-
 def annotationsView(request):
     return render(request, 'papers/annotations.html', {'annotations':Annotation.objects.all(),
         'users':User.objects.all()})

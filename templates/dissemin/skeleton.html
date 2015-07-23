@@ -39,8 +39,7 @@
             <div id="rightLinks"><a href="/">{% trans "Home" context "memu bar" %}</a> &nbsp;&nbsp; <a href="{% url 'faq' %}">{% trans "FAQ" %}</a> &nbsp;&nbsp; {% if request.user.is_authenticated %}
                 {{ request.user }} − <a href="/logout/">{% trans "Logout" %}</a>
                 {% else %}
-                <a href="/login/?next={{ request.get_full_path |urlencode}}">{% trans "Login" %}</a>
-                - <a href="{% provider_login_url "orcid" %}">Login with ORCID</a>
+                <a href="{% url "account_login" %}?next={{ request.get_full_path |urlencode}}">{% trans "Login" %}</a>
                 {% endif %}
             </div>
           </div>

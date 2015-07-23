@@ -22,6 +22,7 @@ from django.conf.urls import patterns, include, url
 from django.conf import settings
 from django.conf.urls.static import static
 from django.shortcuts import render
+import allauth.account.views
 
 from django.contrib import admin
 from dissemin.settings import UNIVERSITY_BRANDING
@@ -38,6 +39,9 @@ def handler500(request):
     response.status_code = 500
     return response
 
+class LoginView(allauth.account.views.LoginView):
+    template_name = 'dissemin/login.html'
+
 def temp(name):
     return (lambda x: render(x, name, UNIVERSITY_BRANDING))
 
@@ -51,7 +55,7 @@ urlpatterns = patterns('',
     url(r'^tos$', temp('dissemin/tos.html'), name='tos'),
     url(r'^feedback$', temp('dissemin/feedback.html'), name='feedback'),
     # Authentication
-    url(r'^admin/logout/$','django_cas_ng.views.logout', name='logout'),
+    #url(r'^admin/logout/$','django_cas_ng.views.logout', name='logout'),
     url(r'^admin/', include(admin.site.urls)),
     #url(r'^accounts/login/$', 'django_cas_ng.views.login', name='login'), 
     #url(r'^accounts/logout/$','django_cas_ng.views.logout', name='logout'),
@@ -62,7 +66,8 @@ urlpatterns = patterns('',
     url(r'^', include('publishers.urls')),
     url(r'^', include('deposit.urls')),
     # Social auth
-    (r'^accounts/', include('allauth.urls')),
+    url(r'^accounts/login/$', LoginView.as_view(), name='login'),
+    url(r'^accounts/', include('allauth.urls')),
 # Remove this in production
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
