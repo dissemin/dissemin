@@ -2,6 +2,8 @@
 
 {% load i18n %}
 {% load account %}
+{% load static %}
+{% load socialaccount %}
 
 {% block headTitle %}{% trans "Sign In" %}{% endblock %}
 
@@ -10,23 +12,39 @@
 <h1>{% trans "Sign In" %}</h1>
 
 {% if socialaccount.providers %}
-<p>{% blocktrans with site.name as site_name %}Please sign in with one
-of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
-for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
+<p>{% blocktrans with site.name as site_name %}
+Please sign in to continue.
+{% endblocktrans %}</p>
 
 <div class="socialLogin left">
+    <h3>{% trans "ORCID account" %}</h3>
+    <img src="{% static "img/orcid-big.png" %}" alt="ORCID" style="float: right" />
 
+    <p>
+    {% blocktrans %}
+    ORCID is an independent non-profit effort to provide an open registry of unique researcher identifiers and open
+    services to link research activities and organizations to these identifiers. Learn more at <a href="http://orcid.org">orcid.org</a>.
+    {% endblocktrans %}
+    </p>
+
+    <p style="text-align: center">
+    <a href="{% provider_login_url "orcid" %}" class="btn btn-orcid">Login with ORCID</a>
+    </p>
+    <!--
   <ul class="socialaccount_providers">
     {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-  </ul>
+</ul>
+-->
 
 </div>
 
 <div class="regularLogin right">
+<h3>{% trans "Dissemin account" %}</h3>
 {% include "socialaccount/snippets/login_extra.html" %}
 
 {% else %}
 <div class="regularLogin">
+<h3>{% trans "Dissemin account" %}</h3>
 <p>{% blocktrans %}If you have not created an account yet, then please
 <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
 {% endif %}

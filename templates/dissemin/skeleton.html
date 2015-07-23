@@ -37,7 +37,7 @@
 	  <div id="subheader">
             <span id="dissemin"><a href="/">dissemin</a></span>
             <div id="rightLinks"><a href="/">{% trans "Home" context "memu bar" %}</a> &nbsp;&nbsp; <a href="{% url 'faq' %}">{% trans "FAQ" %}</a> &nbsp;&nbsp; {% if request.user.is_authenticated %}
-                {{ request.user }} − <a href="/logout/">{% trans "Logout" %}</a>
+                {{ request.user }} − <a href="{% url "account_logout" %}">{% trans "Logout" %}</a>
                 {% else %}
                 <a href="{% url "account_login" %}?next={{ request.get_full_path |urlencode}}">{% trans "Login" %}</a>
                 {% endif %}

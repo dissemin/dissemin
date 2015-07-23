@@ -951,6 +951,13 @@ h1#paperTitle {
     display: inline-block;
 }
 
+.btn-orcid {
+    color: #FFF;
+    background-color: #a6ce39;
+    border-color: #8EAB8E;
+    font-weight: 800;
+}
+
 /* Not sure we need these anymore */
 
 #paper_uploader input {
