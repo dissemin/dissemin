@@ -34,26 +34,15 @@ from papers.name import match_names, normalize_name_words, parse_comma_name, nam
 from papers.utils import create_paper_fingerprint, iunaccent, tolerant_datestamp_to_datetime, date_from_dateparts, validate_orcid, parse_int
 from papers.models import Publication, Paper, Name, OaiSource, OaiRecord
 from papers.bibtex import parse_bibtex
+from papers.orcid import *
 
 import backend.create
 from backend.crossref import fetch_dois, save_doi_metadata, convert_to_name_pair
 from backend.name_cache import name_lookup_cache
 
+
 import requests, json
 from datetime import date
-
-# Number of results per page we ask the CrossRef search interface
-# (looks like it does not support more than 20)
-nb_results_per_request = 20
-# Maximum timeout for the CrossRef interface (sometimes it is a bit lazy)
-crossref_timeout = 15
-# Maximum number of pages looked for a researcher
-max_crossref_batches_per_researcher = 25
-# Maxmimum number of batches trivially skipped (because the last name does not occur in them)
-crossref_max_empty_batches = 5
-# Maximum number of non-trivially skipped records that do not match any researcher
-crossref_max_skipped_records = 100
-
 
 orcid_type_to_pubtype = {
         'book':'book',
@@ -109,22 +98,6 @@ def affiliate_author_with_orcid(ref_name, orcid, authors):
         affiliations[max_sim_idx] = orcid
     return affiliations
 
-def jpath(path, js, default=None):
-    def _walk(lst, js):
-        if js is None:
-            return default
-        if lst == []:
-            return js
-        else:
-            return _walk(lst[1:], js.get(lst[0],{} if len(lst) > 1 else default))
-    return _walk(path.split('/'), js)
-
-def get_name_from_orcid_profile(profile):
-    name_item = jpath('orcid-profile/orcid-bio/personal-details', profile)
-    return (jpath('given-names/value', name_item),
-            jpath('family-name/value', name_item))
-
-
 def fetch_orcid_records(id, profile=None):
     """
     Queries ORCiD to retrieve the publications associated with a given ORCiD.
@@ -138,14 +111,7 @@ def fetch_orcid_records(id, profile=None):
 
     # Get ORCiD profile
     if profile is None:
-        try:
-            headers = {'Accept':'application/orcid+json'}
-            profile_req = requests.get('http://pub.orcid.org/v1.2/%s/orcid-profile' % id, headers=headers)
-            profile = profile_req.json()
-        except requests.exceptions.HTTPError:
-            raise MetadataSourceException('The ORCiD %s could not be found' % id)
-        except ValueError as e:
-            raise MetadataSourceException('The ORCiD %s returned invalid JSON.' % id)
+        profile = get_orcid_profile(id)
 
     # Reference name
     ref_name = get_name_from_orcid_profile(profile)

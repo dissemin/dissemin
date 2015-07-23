@@ -1,7 +1,8 @@
-{% load author %}
+{% load author %}{% load static %}
 {% for author in author_list %}{% if not forloop.first %},{% endif %}
 <span><span class="{% if author.researcher_id %}knownAuthorName{% else %}unknownAuthorName{% endif %}"
     data-pk="{{ author.pk }}"
     data-first="{{ author.name.first }}"
     data-last="{{ author.name.last }}"
-    data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">{{ author | authorlink }}</span></span>{% endfor %}
+    data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}"
+    >{% if author.researcher_id and author.researcher_id == researcher_id %}<strong>{{ author }}</strong>{% else %}{{ author | authorlink }}{% endif %}</span></span>{% if author.orcid %}<a href="http://orcid.org/{{ author.orcid }}" class="orcidLink"><img src="{% static "img/orcid-small.png" %}" alt="ORCID" /></a>{% endif %}{% endfor %}

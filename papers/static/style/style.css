@@ -443,6 +443,10 @@ h1#paperTitle {
     text-align: right;
 }
 
+.orcidLink {
+    padding-left: 2px;
+}
+
 /* Paper depositing */
 
 .depositSuccess {
@@ -903,6 +907,48 @@ h1#paperTitle {
 
 #faqSummary p {
 	padding-left: 20px;
+}
+
+/* Waiting area */
+
+#waitingArea {
+    text-align: center;
+}
+
+.waitingBird {
+    display: inline-block;
+    border-radius: 50%;
+    background-color: #84B4DE;
+    width: 128px;
+    height: 128px;
+    margin: 12px;
+}
+.waitingBird img {
+    width: 128px;
+    height: 100px;
+    margin-top: 14px;
+}
+
+#waitingArea span {
+    font-style: italic;
+    font-size: 1.2em;
+}
+
+/* Login page */
+
+.regularLogin {
+    width: 48%;
+    float: right;
+    display: inline-block;
+    border-left: 1px solid #CCC;
+    padding: 5px;
+    padding-left: 7px;
+}
+
+.socialLogin {
+    width: 48%;
+    float: left;
+    display: inline-block;
 }
 
 /* Not sure we need these anymore */

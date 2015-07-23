@@ -277,7 +277,7 @@ USE_TZ = True
 LOCALE_PATHS = ('locale',)
 
 # Login and athentication
-LOGIN_URL = '/login/'
+LOGIN_URL = '/accounts/login'
 LOGIN_REDIRECT_URL = '/'
 
 

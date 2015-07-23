@@ -10,16 +10,7 @@
 
 <div class="pubText">
     <p class="paperAuthors">
-        {% for a2 in paper.displayed_authors %}{% if not forloop.first %},{% endif %}
-        <span><span class="{% if a2.researcher_id %}knownAuthorName{% else %}unknownAuthorName{% endif %}"
-                data-pk="{{ a2.pk }}"
-                data-first="{{ a2.name.first }}"
-                data-last="{{ a2.name.last }}"
-                data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}"
-                >
-        {% if a2.researcher_id and a2.researcher_id = researcher_id %}
-        <strong>{{ a2 }}</strong>{% else %}
-        {{ a2|authorlink }}{% endif %}</span></span>{% endfor %}
+        {% include "papers/authorList.html" with author_list=paper.displayed_authors %}
         {% if paper.has_many_authors %}
             {% blocktrans trimmed with remaining_authors=paper.nb_remaining_authors %}
             and {{ remaining_authors }} other authors

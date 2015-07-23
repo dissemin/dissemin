@@ -42,6 +42,7 @@ from papers.models import *
 from papers.forms import *
 from papers.user import is_admin, is_authenticated
 from papers.emails import *
+from papers.orcid import *
 
 from deposit.models import *
 
@@ -51,11 +52,16 @@ from dissemin.settings import MEDIA_ROOT, UNIVERSITY_BRANDING, DEPOSIT_MAX_FILE_
 
 from allauth.socialaccount.signals import pre_social_login, social_account_added
 
-def fetch_on_orcid_login(sender, **kwargs):
-    orcid = kwargs['sociallogin'].account.uid
-    profile = kwargs
+import json
 
-pre_social_login.connect(fetch_on_orcid_login)
+def fetch_on_orcid_login(sender, **kwargs):
+    account = kwargs['sociallogin'].account
+    orcid = account.uid
+    profile = account.extra_data
+    r = Researcher.get_or_create_by_orcid(orcid, profile)
+    r.fetch_everything()
+
+social_account_added.connect(fetch_on_orcid_login)
 
 # Number of papers shown on a search results page
 NB_RESULTS_PER_PAGE = 20
@@ -88,7 +94,13 @@ def searchView(request, **kwargs):
         if 'researcher' in args:
             researcher = get_object_or_404(Researcher, pk=args.get('researcher'))
         elif 'orcid' in args:
-            researcher = get_object_or_404(Researcher, orcid=args.get('orcid'))
+            try:
+                researcher = Researcher.objects.get(orcid=args.get('orcid'))
+            except Researcher.DoesNotExist:
+                orcid = validate_orcid(args.get('orcid'))
+                researcher = Researcher.get_or_create_by_orcid(orcid)
+                researcher.fetch_everything()
+
         queryset = queryset.filter(author__researcher=researcher)
         search_description += _(' authored by ')+unicode(researcher)
         head_search_description = unicode(researcher)
@@ -229,9 +241,6 @@ def mailPaperView(request, pk):
 class JournalView(generic.DetailView):
     model = Journal
     template_name = 'papers/journal.html'
-
-def regularLogin(request):
-    return auth_login(request, 'papers/login.html')
 
 def annotationsView(request):
     return render(request, 'papers/annotations.html', {'annotations':Annotation.objects.all(),
