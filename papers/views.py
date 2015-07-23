@@ -52,8 +52,8 @@ from dissemin.settings import MEDIA_ROOT, UNIVERSITY_BRANDING, DEPOSIT_MAX_FILE_
 from allauth.socialaccount.signals import pre_social_login, social_account_added
 
 def fetch_on_orcid_login(sender, **kwargs):
-    print kwarg['sociallogin'].account.uid
-    print kwargs
+    orcid = kwargs['sociallogin'].account.uid
+    profile = kwargs
 
 pre_social_login.connect(fetch_on_orcid_login)
 
