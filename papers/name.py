@@ -46,13 +46,22 @@ def match_names(a,b):
     return name_similarity(a,b) > 0.
 
 initial_re = re.compile(r'[A-Z](\.,;)*$')
+final_comma_re = re.compile(r',+( |$)')
+def remove_final_comma(w):
+    """
+    Remove all commas following words
+    """
+    return final_comma_re.sub(r'\1', w)
+
 def normalize_name_words(w):
     """
     If it is an initial, ensure it is of the form "T.", and recapitalize fully capitalized words.
     Also convert things like "Jp." to "J.-P."
+    This function is to be called on first or last names only.
     """
     name_words, separators = split_name_words(w)
     name_words = map(recapitalize_word, name_words)
+    name_words = map(remove_final_comma, name_words)
     return rebuild_name(name_words, separators)
 
 def rebuild_name(name_words, separators):
