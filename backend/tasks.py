@@ -56,7 +56,9 @@ def fetch_everything_for_researcher(pk):
 
         if r.orcid:
             update_task('orcid')
-            fetch_orcid_records(r.orcid)
+            num = fetch_orcid_records(r.orcid)
+            r.empty_orcid_profile = (num == 0)
+            r.save(update_fields=['empty_orcid_profile'])
         update_task('crossref')
         fetch_dois_for_researcher(pk)
         update_task('oai')

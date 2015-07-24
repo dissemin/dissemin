@@ -103,6 +103,8 @@ def fetch_orcid_records(id, profile=None):
     Queries ORCiD to retrieve the publications associated with a given ORCiD.
 
     :param profile: The ORCID profile if it has already been fetched before (format: parsed JSON).
+    :returns: the number of records we managed to extract from the ORCID profile (some of them could be in
+            free form, hence not imported)
     """
     # Cleanup iD:
     id = validate_orcid(id)
@@ -119,6 +121,7 @@ def fetch_orcid_records(id, profile=None):
     # curl -H "Accept: application/orcid+json" 'http://pub.orcid.org/v1.2/0000-0002-8612-8827/orcid-works' -L -i
     dois = [] # list of DOIs to fetch
     papers = [] # list of papers created
+    records_found = 0 # how many records did we successfully import from the profile?
 
     # Fetch publications
     pubs = jpath('orcid-profile/orcid-activities/orcid-works/orcid-work', profile, [])
@@ -189,6 +192,7 @@ def fetch_orcid_records(id, profile=None):
                 about=paper,
                 splash_url='http://orcid.org/'+id,
                 pubtype=doctype)
+        records_found += 1
 
     doi_metadata = fetch_dois(dois)
     for metadata in doi_metadata:
@@ -196,9 +200,12 @@ def fetch_orcid_records(id, profile=None):
             authors = map(convert_to_name_pair, metadata['author'])
             affiliations = affiliate_author_with_orcid(ref_name, id, authors)
             paper = save_doi_metadata(metadata, affiliations)
+            records_found += 1
         except (ValueError, TypeError):
             # TODO we could try to add them based on the bibtex…
             pass
+
+    return records_found
 
 orcid_oai_source, _ = OaiSource.objects.get_or_create(identifier='orcid',
             defaults={'name':'ORCID','oa':False,'priority':1,'default_pubtype':'other'})

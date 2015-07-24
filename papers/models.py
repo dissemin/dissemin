@@ -127,6 +127,8 @@ class Researcher(models.Model):
     #: ORCiD identifier
     orcid = models.CharField(max_length=32, null=True, blank=True, unique=True)
     # TODO This could be a custom field as we know what format to expect
+    #: Did we manage to import at least one record from the ORCID profile? (Null if we have not tried)
+    empty_orcid_profile = models.NullBooleanField()
 
     # Fetching
     #: Last time we harvested publications for this researcher

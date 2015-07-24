@@ -56,10 +56,11 @@
                 $('#harvestingStatus').text(data['display']);
                 setTimeout(pollHarvesting, 1500);
             } else {
-                var area = $('#waitingArea');
+                /* var area = $('#waitingArea');
                 area.fadeOut(function(){
                     area.hide();
-                });
+                    }); */
+                location.reload(true);
             }
             }).fail(function () {
                 console.log('fail');
@@ -212,6 +213,15 @@
     </div>
  {% endif %}
  
+ {% if researcher.empty_orcid_profile %}
+ <p></p>
+ <div class="alert alert-warning">
+     {% blocktrans %}
+     Your ORCID profile does not reference any publication. You can add them easily using the <a href="http://search.crossref.org">CrossRef Search service</a>. This helps services like this one identify your publications.
+     {% endblocktrans %}
+ </div>
+ {% endif %}
+
  {% if search_results.paginator.num_pages > 1 %}
 <div class="searchPages">{% bootstrap_paginate search_results range=10 %}</div>
  {% endif %}
@@ -226,7 +236,9 @@
 </li>    
         {% if forloop.last %}</ul></div>{% endif %}
  {% empty %}
- <p>{% trans "No production found." %}</p>
+    {% if not researcher.current_task %}
+         <p>{% trans "No production found." %}</p>
+    {% endif %}
  {% endfor %}
  {% if search_results.paginator.num_pages > 1 %}
  <div class="searchPages">{% bootstrap_paginate search_results range=10 %}</div>
