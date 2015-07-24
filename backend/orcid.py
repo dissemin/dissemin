@@ -201,7 +201,7 @@ def fetch_orcid_records(id, profile=None):
             affiliations = affiliate_author_with_orcid(ref_name, id, authors)
             paper = save_doi_metadata(metadata, affiliations)
             records_found += 1
-        except (ValueError, TypeError):
+        except (KeyError, ValueError, TypeError):
             # TODO we could try to add them based on the bibtex…
             pass
 

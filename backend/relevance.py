@@ -390,11 +390,13 @@ class OrcidRelevanceClassifier(RelevanceClassifier):
 
     def score(self, author, researcher, verbose=False):
         features = self.computeFeatures(author, researcher, verbose)
-        if features[0] >= 0.5: # orcid relevance
-            return 1.0 # nb of known coauthors
-        return 0.1*(features[1]-2)
 
-
+        if not researcher.empty_orcid_profile: # if we found at least one record in the orcid profile
+            if features[0] >= 0.5: # if the ORCIDs match
+                return 10.0 # then we give a very good confidence
+            return 0.1*(features[1]-2) # otherwise a slightly negative confidence
+        else: # otherwise we don't know any publication for sure…
+            return features[1] - 0.5
 
 
 

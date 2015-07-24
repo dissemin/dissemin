@@ -48,9 +48,9 @@ nb_results_per_request = 20
 # Maximum timeout for the CrossRef interface (sometimes it is a bit lazy)
 crossref_timeout = 15
 # Maximum number of pages looked for a researcher
-max_crossref_batches_per_researcher = 25
+max_crossref_batches_per_researcher = 7
 # Maxmimum number of batches trivially skipped (because the last name does not occur in them)
-crossref_max_empty_batches = 5
+crossref_max_empty_batches = 2
 # Maximum number of non-trivially skipped records that do not match any researcher
 crossref_max_skipped_records = 100
 
