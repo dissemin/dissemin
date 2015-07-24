@@ -107,11 +107,18 @@ class NormalizeNameWordsTest(unittest.TestCase):
         self.assertEqual(normalize_name_words(' John  Mark'), 'John Mark')
         self.assertEqual(normalize_name_words(' John Mark \n'), 'John Mark')
         self.assertEqual(normalize_name_words('Jean - Pierre'), 'Jean-Pierre')
-        self.assertEqual(normalize_name_words('J.P. Morgan'), 'J. P. Morgan')
+        self.assertEqual(normalize_name_words('J.P.'), 'J. P.')
 
     def test_flattened(self):
-        self.assertEqual(normalize_name_words('JP. Morgan'), 'J.-P. Morgan')
-        self.assertEqual(normalize_name_words('Jp. Morgan'), 'J.-P. Morgan')
+        self.assertEqual(normalize_name_words('JP.'), 'J.-P.')
+        self.assertEqual(normalize_name_words('Jp.'), 'J.-P.')
+
+    def test_comma(self):
+        self.assertEqual(normalize_name_words('John, Mark'), 'John Mark')
+        self.assertEqual(normalize_name_words('John,, Mark'), 'John Mark')
+        self.assertEqual(normalize_name_words('John Mark,'), 'John Mark')
+        self.assertEqual(normalize_name_words('John Mark,,'), 'John Mark')
+        self.assertEqual(normalize_name_words('John, Mark,,'), 'John Mark')
 
     def test_involutive(self):
         lst = [
