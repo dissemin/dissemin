@@ -33,7 +33,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from papers.errors import MetadataSourceException
 from papers.doi import to_doi
 from papers.name import match_names, normalize_name_words, parse_comma_name
-from papers.utils import create_paper_fingerprint, iunaccent, tolerant_datestamp_to_datetime, date_from_dateparts
+from papers.utils import create_paper_fingerprint, iunaccent, tolerant_datestamp_to_datetime, date_from_dateparts, affiliation_is_greater
 from papers.models import Publication, Paper
 
 from backend.utils import urlopen_retry
@@ -276,9 +276,12 @@ def fetch_dois_by_batch(doi_list):
     except requests.exceptions.RequestException as e:
         raise MetadataSourceException('Failed to retrieve batch metadata from the proxy: '+str(e))
 
-def save_doi_metadata(metadata):
+def save_doi_metadata(metadata, extra_affiliations=None):
     """
     Given the metadata from CrossRef, create the associated paper and publication
+
+    :param extra_affiliations: an optional affiliations list, which will be unified
+        with the affiliations extracted from the metadata. This is useful for the ORCID interface.
     """        
     # Normalize metadata
     if metadata is None or type(metadata) != type({}):
@@ -314,6 +317,10 @@ def save_doi_metadata(metadata):
                 return dct['name']
 
     affiliations = map(get_affiliation, metadata['author'])
+    if extra_affiliations and len(affiliations) == len(extra_affiliations):
+        for i in range(len(affiliations)):
+            if affiliation_is_greater(extra_affiliations[i],affiliations[i]):
+                affiliations[i] = extra_affiliations[i]
 
     print "Saved doi "+doi
     paper = backend.create.get_or_create_paper(title, authors, pubdate, 

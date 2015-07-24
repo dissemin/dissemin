@@ -140,10 +140,12 @@ def changeResearcher(request):
 @user_passes_test(is_authenticated)
 def harvestingStatus(request, pk): 
     researcher = get_object_or_404(Researcher, pk=pk)
-    resp = None
+    resp = {}
     if researcher.current_task:
         resp['status'] = researcher.current_task
-        resp['display'] = researcher.get_current_task_display
+        resp['display'] = researcher.get_current_task_display()
+    else:
+        resp = None
     return HttpResponse(json.dumps(resp), content_type='text/json')
 
 # Author management

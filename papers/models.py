@@ -30,7 +30,7 @@ from celery.execute import send_task
 
 from papers.utils import nstr, iunaccent, create_paper_plain_fingerprint
 from papers.name import match_names, name_similarity, unify_name_lists
-from papers.utils import remove_diacritics, sanitize_html, validate_orcid
+from papers.utils import remove_diacritics, sanitize_html, validate_orcid, affiliation_is_greater
 from papers.orcid import get_orcid_profile, get_name_from_orcid_profile
 
 from statistics.models import AccessStatistics
@@ -84,6 +84,7 @@ UPLOAD_TYPE_CHOICES = [
 PAPER_TYPE_PREFERENCE = [x for (x,y) in PAPER_TYPE_CHOICES]
 
 HARVESTER_TASK_CHOICES = [
+   ('init', _('Preparing profile')),
    ('orcid', _('Fetching publications from ORCID')),
    ('crossref', _('Fetching publications from CrossRef')),
    ('base', _('Fetching publications from BASE')),
@@ -202,7 +203,8 @@ class Researcher(models.Model):
 
     def fetch_everything(self):
         self.harvester = send_task('fetch_everything_for_researcher', [], {'pk':self.id}).id
-        self.save(update_fields=['harvester'])
+        self.current_task = 'init' 
+        self.save(update_fields=['harvester','current_task'])
 
     @classmethod
     def get_or_create_by_orcid(cls, orcid, profile=None):
@@ -664,19 +666,8 @@ class Paper(models.Model):
             print "%d authors" % self.author_set.count()
             return
 
-        def greater(a, b):
-            if a is None:
-                return False
-            if b is None:
-                return True
-            if validate_orcid(a):
-                return True
-            if validate_orcid(b):
-                return False
-            return len(a) > len(b)
-
         for i, author in enumerate(self.sorted_authors):
-            if greater(affiliations[i], author.affiliation):
+            if affiliation_is_greater(affiliations[i], author.affiliation):
                 author.affiliation = affiliations[i]
                 author.save(update_fields=['affiliation'])
 

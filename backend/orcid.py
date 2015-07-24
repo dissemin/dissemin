@@ -121,7 +121,7 @@ def fetch_orcid_records(id, profile=None):
     papers = [] # list of papers created
 
     # Fetch publications
-    pubs = jpath('orcid-profile/orcid-activities/orcid-works/orcid-work', profile)
+    pubs = jpath('orcid-profile/orcid-activities/orcid-works/orcid-work', profile, [])
     for pub in pubs:
         def j(path, default=None):
             return jpath(path, pub, default)
@@ -193,11 +193,11 @@ def fetch_orcid_records(id, profile=None):
     doi_metadata = fetch_dois(dois)
     for metadata in doi_metadata:
         try:
-            paper = save_doi_metadata(metadata)
             authors = map(convert_to_name_pair, metadata['author'])
             affiliations = affiliate_author_with_orcid(ref_name, id, authors)
-            paper.update_affiliations(affiliations)
-        except ValueError:
+            paper = save_doi_metadata(metadata, affiliations)
+        except (ValueError, TypeError):
+            # TODO we could try to add them based on the bibtex…
             pass
 
 orcid_oai_source, _ = OaiSource.objects.get_or_create(identifier='orcid',

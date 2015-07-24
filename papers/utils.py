@@ -258,4 +258,20 @@ def validate_orcid(orcid):
     if nums[-1] == checkchar:
         return orcid
 
+def affiliation_is_greater(a, b):
+    """
+    Compares to affiliation values. Returns True
+    when the first contains more information than
+    the second
+    """
+    if a is None:
+        return False
+    if b is None:
+        return True
+    if validate_orcid(a):
+        return True
+    if validate_orcid(b):
+        return False
+    return len(a) > len(b)
+
 
