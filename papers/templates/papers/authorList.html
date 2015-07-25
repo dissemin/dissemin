@@ -1,4 +1,4 @@
-{% load author %}
+{% load author %}{% load static %}
 {% for author in author_list %}{% if not forloop.first %},{% endif %}
 <span><span class="{% if author.researcher_id %}knownAuthorName{% else %}unknownAuthorName{% endif %}"
     data-pk="{{ author.pk }}"
