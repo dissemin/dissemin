@@ -22,6 +22,7 @@ from __future__ import unicode_literals
 
 import requests, json
 from papers.errors import MetadataSourceException
+from papers.name import normalize_name_words
 
 def jpath(path, js, default=None):
     def _walk(lst, js):
@@ -46,7 +47,7 @@ def get_orcid_profile(id):
 
 def get_name_from_orcid_profile(profile):
     name_item = jpath('orcid-profile/orcid-bio/personal-details', profile)
-    return (jpath('given-names/value', name_item),
-            jpath('family-name/value', name_item))
+    return (normalize_name_words(jpath('given-names/value', name_item)),
+            normalize_name_words(jpath('family-name/value', name_item)))
 
 
