@@ -88,6 +88,7 @@ h4
 
 #content {
     padding: 0;
+    overflow: hidden;
 }
 
 #subheader {
@@ -128,6 +129,8 @@ h4
 #summaryLists, #detailContent
 {
     margin-right: 292px; 
+    padding-bottom: 32767px;
+    margin-bottom: -32767px;
 }
 
 
