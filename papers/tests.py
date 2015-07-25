@@ -79,6 +79,10 @@ class SplitNameWordsTest(unittest.TestCase):
         self.assertEqual(split_name_words('JP.'), (['J','P'],['-']))
         self.assertEqual(split_name_words('Jp.'), (['J','P'],['-']))
 
+    def test_abbreviation(self):
+        self.assertEqual(split_name_words('Ms.'), (['Ms.'],[]))
+        self.assertEqual(split_name_words('St. Louis'), (['St.', 'Louis'],['']))
+
     def test_probably_not_flattened(self):
         self.assertEqual(split_name_words('Joseph.'), (['Joseph'],[]))
 

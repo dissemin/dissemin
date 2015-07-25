@@ -34,6 +34,7 @@ from papers.name import match_names, normalize_name_words, parse_comma_name, nam
 from papers.utils import create_paper_fingerprint, iunaccent, tolerant_datestamp_to_datetime, date_from_dateparts, validate_orcid, parse_int
 from papers.models import Publication, Paper, Name, OaiSource, OaiRecord
 from papers.bibtex import parse_bibtex
+from papers.orcid import *
 
 import backend.create
 from backend.crossref import fetch_dois, save_doi_metadata, convert_to_name_pair
@@ -109,17 +110,7 @@ def affiliate_author_with_orcid(ref_name, orcid, authors):
         affiliations[max_sim_idx] = orcid
     return affiliations
 
-def jpath(path, js, default=None):
-    def _walk(lst, js):
-        if js is None:
-            return default
-        if lst == []:
-            return js
-        else:
-            return _walk(lst[1:], js.get(lst[0],{} if len(lst) > 1 else default))
-    return _walk(path.split('/'), js)
-
-def fetch_orcid_records(id):
+def fetch_orcid_records(id, profile=None):
     """
     Queries ORCiD to retrieve the publications associated with a given ORCiD.
     """
@@ -129,19 +120,11 @@ def fetch_orcid_records(id):
         raise MetadataSourceException('Invalid ORCiD identifier')
 
     # Get ORCiD profile
-    try:
-        headers = {'Accept':'application/orcid+json'}
-        profile_req = requests.get('http://pub.orcid.org/v1.2/%s/orcid-profile' % id, headers=headers)
-        profile = profile_req.json()
-    except requests.exceptions.HTTPError:
-        raise MetadataSourceException('The ORCiD %s could not be found' % id)
-    except ValueError as e:
-        raise MetadataSourceException('The ORCiD %s returned invalid JSON.' % id)
+    if profile is None:
+        profile = get_orcid_profile(id)
 
     # Reference name
-    name_item = jpath('orcid-profile/orcid-bio/personal-details', profile)
-    ref_name = (jpath('given-names/value', name_item),
-                jpath('family-name/value', name_item))
+    ref_name = get_name_from_orcid_profile(profile)
 
     # curl -H "Accept: application/orcid+json" 'http://pub.orcid.org/v1.2/0000-0002-8612-8827/orcid-works' -L -i
     dois = [] # list of DOIs to fetch

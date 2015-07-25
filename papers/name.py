@@ -84,6 +84,7 @@ def rebuild_name(name_words, separators):
             output += ' '
     return output
 
+common_abbr = set(['st','dr','prof','jr','sr','mr','ms','mrs','mme','fr'])
 name_separator_re = re.compile(r'\w\b((\.*) *(-*) *)(\w|$)', re.UNICODE)
 def split_name_words(string):
     """
@@ -101,7 +102,9 @@ def split_name_words(string):
             buf = buf[match.end(1):]
             has_period = len(match.group(2)) > 0
             if has_period:
-                if len(word) <= 3:
+                if word.lower() in common_abbr:
+                    words.append(word+'.')
+                elif len(word) <= 3:
                     # A case like "Jp." or "Jpf."
                     # In this case we understand each letter as an initial
                     for idx, char in enumerate(word):
