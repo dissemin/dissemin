@@ -1,5 +1,6 @@
 {% load i18n %}
 {% load statsurl %}
+{% if stats.num_tot %}
 <div class="access-statistics" id="statspie_n{{ stats_counter }}">
   <div class="statspie_graph"></div>
   <div class="statspie_caption"></div>
@@ -37,3 +38,4 @@ $(function() {
 {% endwith %}
   </script>
 </div>
+{% endif %}
