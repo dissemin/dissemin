@@ -88,6 +88,7 @@ h4
 
 #content {
     padding: 0;
+    overflow: hidden;
 }
 
 #subheader {
@@ -128,6 +129,8 @@ h4
 #summaryLists, #detailContent
 {
     margin-right: 292px; 
+    padding-bottom: 32767px;
+    margin-bottom: -32767px;
 }
 
 
@@ -441,6 +444,10 @@ h1#paperTitle {
 {
     font-size: 0.8em;
     text-align: right;
+}
+
+.orcidLink {
+    padding-left: 2px;
 }
 
 /* Paper depositing */
@@ -903,6 +910,55 @@ h1#paperTitle {
 
 #faqSummary p {
 	padding-left: 20px;
+}
+
+/* Waiting area */
+
+#waitingArea {
+    text-align: center;
+}
+
+.waitingBird {
+    display: inline-block;
+    border-radius: 50%;
+    background-color: #84B4DE;
+    width: 128px;
+    height: 128px;
+    margin: 12px;
+}
+.waitingBird img {
+    width: 128px;
+    height: 100px;
+    margin-top: 14px;
+}
+
+#waitingArea span {
+    font-style: italic;
+    font-size: 1.2em;
+}
+
+/* Login page */
+
+.regularLogin {
+    width: 48%;
+    float: right;
+    display: inline-block;
+    border-left: 1px solid #CCC;
+    padding: 5px;
+    padding-left: 7px;
+}
+
+.socialLogin {
+    width: 48%;
+    float: left;
+    display: inline-block;
+}
+
+.btn-orcid {
+    color: #FFF;
+    background-color: #a6ce39;
+    border-color: #8EAB8E;
+    font-weight: 800;
 }
 
 /* Not sure we need these anymore */
