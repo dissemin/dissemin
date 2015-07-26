@@ -137,7 +137,16 @@ $(function(){
         </div>
         <div id="optionRepository" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingRepository">
             <div class="panel-body">
-                {% trans "Zenodo is currently the only supported repository." %}
+                <a href="https://zenodo.org" target="_blank">
+                    <img src="{% static "img/zenodo-black-200.png" %}" alt="Zenodo" style="float: left" />
+                </a>
+                <p>
+                {% blocktrans %}
+                Your document will be archived in <a href="https://zenodo.org/" target="_blank">Zenodo</a>,
+                    a general-purpose open repository hosted by CERN.
+                    If the document does not have a DOI yet, Zenodo will create one.
+                {% endblocktrans %}
+                </p>
             </div>
         </div>
     </div>
@@ -151,7 +160,9 @@ $(function(){
         </div>
         <div id="optionMetadata" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingMetadata">
             <div class="panel-body">
-                {% trans "Coming soon." %}
+                <table>
+                    {{ zenodo_form }}
+                </table>
             </div>
         </div>
     </div>
