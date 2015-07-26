@@ -37,7 +37,7 @@ from papers.user import is_admin, is_authenticated
 @user_passes_test(is_authenticated)
 def start_view(request, pk):
     paper = get_object_or_404(Paper, pk=pk)
-    context = {'paper':paper, 'max_file_size':DEPOSIT_MAX_FILE_SIZE}
+    context = {'paper':paper, 'max_file_size':DEPOSIT_MAX_FILE_SIZE, 'zenodo_form':createZenodoForm(paper)}
     if request.GET.get('type') not in [None,'preprint','postprint','pdfversion']:
         return HttpResponseForbidden()
     return render(request, 'deposit/start.html', context)
@@ -48,9 +48,13 @@ def submitDeposit(request, pk):
     if request.method == 'POST':
         context = {'status':'error'}
         form = PaperDepositForm(request.POST)
+        zenodoForm = ZenodoForm(request.POST)
 
         if not form.is_valid():
             context['form'] = form.errors
+            return HttpResponseForbidden(json.dumps(context), content_type='text/json')
+        if not zenodoForm.is_valid():
+            context['zenodoForm'] = form.errors
             return HttpResponseForbidden(json.dumps(context), content_type='text/json')
 
         # Check that the paper has been uploaded by the same user
@@ -72,7 +76,7 @@ def submitDeposit(request, pk):
         
         zenodo = {}
         try:
-            zenodo = submitPubli(paper, path)
+            zenodo = submitPubli(paper, path, zenodoForm)
         except DepositError as e:
             d.request = e.logs+'\nMessage: '+str(e)
             d.save()

@@ -25,12 +25,15 @@ import requests
 import traceback, sys
 from StringIO import StringIO
 
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext as __
+from django import forms
 from os.path import basename
 #from backend.crossref import consolidate_publication
 from dissemin.settings import ZENODO_KEY, DOI_PROXY_DOMAIN
 from papers.errors import MetadataSourceException
 from papers.models import OaiSource, OaiRecord
+
+from deposit.models import ZENODO_LICENSES_CHOICES
 
 #import backend.create
 
@@ -50,7 +53,7 @@ def fetch_zotero_by_DOI(doi):
         request = requests.get('http://'+DOI_PROXY_DOMAIN+'/zotero/'+doi)
         return request.json()
     except ValueError as e:
-        raise MetadataSourceException('Error while fetching Zotero metadat:\nInvalid JSON response.\n'+
+        raise MetadataSourceException('Error while fetching Zotero metadata:\nInvalid JSON response.\n'+
                 'Error: '+str(e))
 
 def consolidate_publication(publi):
@@ -83,7 +86,17 @@ def swordDocumentType(paper):
          }
     return tr[paper.doctype]
 
-def createZenodoMetadata(paper):
+class ZenodoForm(forms.Form):
+    abstract = forms.CharField(label=__('Abstract'), required=False, widget=forms.Textarea)
+    license = forms.ChoiceField(label=__('License'), choices=ZENODO_LICENSES_CHOICES, initial='cc-by')
+
+def createZenodoForm(paper):
+    formdata = {'license':'cc-by'}
+    if paper.abstract is not None:
+        formdata['abstract'] = paper.abstract()
+    return ZenodoForm(formdata)
+
+def createZenodoMetadata(paper, form):
     metadata = {}
     oairecords = paper.sorted_oai_records
     publications = paper.publication_set.all()
@@ -114,6 +127,7 @@ def createZenodoMetadata(paper):
     for record in oairecords:
         if record.description and len(record.description) > len(abstract):
             abstract = record.description
+    abstract = abstract or form.cleaned_data['abstract']
 
     if len(abstract) < 32: # that's really short for an abstract !
         for publi in publications:
@@ -127,7 +141,8 @@ def createZenodoMetadata(paper):
 
     # Access right: TODO
 
-    # License: TODO
+    # License
+    metadata['license'] = form.cleaned_data['license']
 
     # Embargo date: TODO
 
@@ -164,7 +179,7 @@ def createZenodoMetadata(paper):
     data = {"metadata": metadata}
     return data
 
-def submitPubli(paper,filePdf):
+def submitPubli(paper,filePdf,form):
     result = {}
     log = ''
     def log_request(r, expected_status_code, error_msg, log):
@@ -178,19 +193,19 @@ def submitPubli(paper,filePdf):
         return log
 
     if ZENODO_KEY is None:
-        raise DepositError("No Zenodo API key provided.",'')
+        raise DepositError(__("No Zenodo API key provided."),'')
 
     try:
         # Checking the access token
         log += "### Checking the access token\n"
         r = requests.get(ZENODO_API_URL+"?access_token=" + ZENODO_KEY)
-        log = log_request(r, 200, 'Unable to authenticate to Zenodo.', log)
+        log = log_request(r, 200, __('Unable to authenticate to Zenodo.'), log)
            
         # Creating a new deposition
         log += "### Creating a new deposition\n"
         headers = {"Content-Type": "application/json"}
         r = requests.post(ZENODO_API_URL+"?access_token=" + ZENODO_KEY , data=str("{}"), headers=headers)
-        log = log_request(r, 201, 'Unable to create a new deposition on Zenodo.', log)
+        log = log_request(r, 201, __('Unable to create a new deposition on Zenodo.'), log)
         deposition_id = r.json()['id']
         result['identifier'] = deposition_id
         log += "Deposition id: %d\n" % deposition_id
@@ -200,23 +215,23 @@ def submitPubli(paper,filePdf):
         data = {'filename':'article.pdf'}
         files = {'file': open(filePdf, 'rb')}
         r = requests.post(ZENODO_API_URL+"/%s/files?access_token=%s" % (deposition_id,ZENODO_KEY), data=data, files=files)
-        log = log_request(r, 201, 'Unable to transfer the document to Zenodo.', log)
+        log = log_request(r, 201, __('Unable to transfer the document to Zenodo.'), log)
 
         # Creating the metadata
         log += "### Generating the metadata\n"
-        data = createZenodoMetadata(paper)
+        data = createZenodoMetadata(paper, form)
         log += json.dumps(data, indent=4)+'\n'
 
         # Check that there is an abstract
         if data['metadata'].get('description','') == '':
             log += 'No abstract found, aborting.\n'
-            raise DepositError('No abstract is available for this paper but '+
-                    'Zenodo requires to attach one.',log)
+            raise DepositError(__('No abstract is available for this paper but '+
+                    'Zenodo requires to attach one. Please use the metadata panel to provide one.'),log)
 
         # Submitting the metadata
         log += "### Submitting the metadata\n"
         r = requests.put(ZENODO_API_URL+"/%s?access_token=%s" % ( deposition_id, ZENODO_KEY), data=json.dumps(data), headers=headers)
-        log = log_request(r, 200, 'Unable to submit paper metadata to Zenodo.', log)
+        log = log_request(r, 200, __('Unable to submit paper metadata to Zenodo.'), log)
         
         # Deleting the deposition
         log += "### Deleting the deposition\n"
