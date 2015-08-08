@@ -56,9 +56,10 @@ import json
 
 def fetch_on_orcid_login(sender, **kwargs):
     account = kwargs['sociallogin'].account
+    user = kwargs['request'].user
     orcid = account.uid
     profile = account.extra_data
-    r = Researcher.get_or_create_by_orcid(orcid, profile)
+    r = Researcher.get_or_create_by_orcid(orcid, profile, user)
     r.fetch_everything()
 
 social_account_added.connect(fetch_on_orcid_login)
@@ -209,6 +210,14 @@ def refetchResearcher(request, pk):
 class ResearcherView(generic.DetailView):
     model = Researcher
     template_name = 'papers/researcher.html'
+
+@user_passes_test(is_authenticated)
+def myProfileView(request):
+    try:
+        r = Researcher.objects.get(user=request.user)
+        return searchView(request, researcher=r.pk)
+    except Researcher.DoesNotExist:
+        return render(request, 'papers/createProfile.html')
 
 class PaperView(generic.DetailView):
     model = Paper

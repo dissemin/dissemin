@@ -116,6 +116,8 @@ class Researcher(models.Model):
 
     #: The preferred :py:class:`Name` for this researcher
     name = models.ForeignKey('Name')
+    #: It can be associated to a user
+    user = models.ForeignKey(User, null=True, blank=True)
    
     # Various info about the researcher (not used internally)
     #: Email address for this researcher
@@ -209,7 +211,7 @@ class Researcher(models.Model):
         self.save(update_fields=['harvester','current_task'])
 
     @classmethod
-    def get_or_create_by_orcid(cls, orcid, profile=None):
+    def get_or_create_by_orcid(cls, orcid, profile=None, user=None):
         researcher = None
         try:
             researcher = Researcher.objects.get(orcid=orcid)
@@ -218,22 +220,28 @@ class Researcher(models.Model):
                 profile = get_orcid_profile(orcid) 
             name = get_name_from_orcid_profile(profile)
             # TODO extract email & homepage from profile
-            researcher = Researcher.create_from_scratch(name[0],name[1], None, None, None, orcid)
+            researcher = Researcher.create_from_scratch(name[0],name[1], orcid=orcid,
+                    user=user)
         return researcher
 
+    @classmethod
+    def get_or_create_by_name(cls, first, last, **kwargs):
+       name, created = Name.get_or_create(first, last)
+       researcher, created = Researcher.objects.get_or_create(name=name, defaults=kwargs)
+       if created:
+           researcher.update_variants()
+           researcher.update_stats()
+       return researcher
 
     @classmethod
-    def create_from_scratch(cls, first, last, email, role, homepage, orcid=None):
+    def create_from_scratch(cls, first, last, **kwargs):
         """Creates a researcher, creating first the :py:class:`Name` for it.
 
         :raises ValueError: if a researcher with that name already exists,
                             or if an invalid ORCiD is provided.
         :raises DataError: if a researcher with that ORCiD already exists.
         """
-        first = first.strip()
-        last = last.strip()
-        name, created = Name.objects.get_or_create(full=iunaccent(first+' '+last),
-                defaults={'first':first, 'last':last})
+        name, created = Name.get_or_create(first, last)
         if not created and cls.objects.filter(name=name).count() > 0:
             # we forbid the creation of two researchers with the same name,
             # although our model would support it (TODO ?)
@@ -244,12 +252,7 @@ class Researcher(models.Model):
             if orcid is None:
                 raise ValueError('Invalid ORCiD: "%s"' % orcid)
 
-        researcher = Researcher(
-                email=email,
-                role=role,
-                homepage=homepage,
-                name=name,
-                orcid=orcid)
+        researcher = Researcher(name=name, **kwargs)
         # This will raise DataError if such an ORCiD already exists
         researcher.save()
         researcher.update_variants()
@@ -295,7 +298,9 @@ class Name(models.Model):
         Replacement for the regular get_or_create, so that the full
         name is built based on first and last
         """
-        full = iunaccent(first.strip()+' '+last.strip())
+        first = first.strip()
+        last = last.strip()
+        full = iunaccent(first+' '+last)
         return cls.objects.get_or_create(full=full, defaults={'first':first,'last':last})
     def variants_queryset(self):
         """

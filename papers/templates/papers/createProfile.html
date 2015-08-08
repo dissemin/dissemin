@@ -1,0 +1,21 @@
+{% extends "dissemin/skeleton.html" %}
+
+{% load i18n %}
+{% load account %}
+{% load static %}
+{% load socialaccount %}
+
+{% block headTitle %}{% trans "Create you profile" %}{% endblock %}
+
+{% block content %}
+<div id="fullPage">
+<h1>{% trans "Create your profile" %}</h1>
+
+<p>
+{% blocktrans %}
+To fetch your publications, we need one last piece of information: your name.
+{% endblocktrans %}
+</p>
+
+</div>
+{% endblock %}
