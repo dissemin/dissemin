@@ -43,6 +43,7 @@ from backend.core import fetch_papers_from_core_for_researcher
 from backend.base import fetch_papers_from_base_for_researcher
 from backend.orcid import fetch_orcid_records
 from backend.name_cache import name_lookup_cache
+from backend.extractors import * # to ensure that OaiSources are created
 
 logger = get_task_logger(__name__)
 
@@ -52,7 +53,8 @@ def fetch_everything_for_researcher(pk):
         r = Researcher.objects.get(pk=pk)
         def update_task(name):
             r.current_task = name
-            r.save(update_fields=['current_task'])
+            r.last_harvest = timezone.now()
+            r.save(update_fields=['current_task','last_harvest'])
 
         if r.orcid:
             update_task('orcid')
