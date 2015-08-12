@@ -21,10 +21,11 @@
 from django.conf.urls import patterns, include, url
 from django.conf import settings
 from django.conf.urls.static import static
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import allauth.account.views
 
 from django.contrib import admin
+from django.contrib.auth import logout
 from dissemin.settings import UNIVERSITY_BRANDING
 admin.autodiscover()
 
@@ -41,6 +42,13 @@ def handler500(request):
 
 class LoginView(allauth.account.views.LoginView):
     template_name = 'dissemin/login.html'
+
+def logoutView(request):
+    logout(request)
+    if 'HTTP_REFERER' in request.META:
+        return redirect(request.META['HTTP_REFERER'])
+    else:
+        return redirect('/')
 
 def temp(name):
     return (lambda x: render(x, name, UNIVERSITY_BRANDING))
@@ -67,6 +75,7 @@ urlpatterns = patterns('',
     url(r'^', include('deposit.urls')),
     # Social auth
     url(r'^accounts/login/$', LoginView.as_view(), name='login'),
+    url(r'^accounts/logout/$', logoutView, name='logout'),
     url(r'^accounts/', include('allauth.urls')),
 # Remove this in production
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT

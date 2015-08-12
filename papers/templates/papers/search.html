@@ -216,10 +216,26 @@
  {% if researcher.empty_orcid_profile %}
  <p></p>
  <div class="alert alert-warning">
-     {% blocktrans %}
-     Your ORCID profile does not reference any publication. You can add them easily using <a href="http://search.crossref.org">CrossRef Metadata Search</a>. This helps services like this one identify your publications.<br />
-     The publications shown below might be irrelevant.
+     {% if researcher.user == request.user %}
+     {% url 'refetch-researcher' researcher.pk as url_refetch %}
+     <p>
+     {% blocktrans trimmed %}
+     Your ORCID profile does not reference any publication. You can add them easily using <a href="http://search.crossref.org">CrossRef Metadata Search</a>.<br />
+     The ones shown below match your name but might be irrelevant or incomplete.
      {% endblocktrans %}
+     {% if not researcher.current_task %}
+         </p><p>
+         <div style="text-align:center">
+         <a href="{{ url_refetch }}" class="btn btn-default">Update papers</a>
+         </div>
+     {% endif %}
+     {% else %}
+     {% blocktrans trimmed %}
+     This ORCID profile does not reference any publication.
+     The ones shown below might be irrelevant or incomplete.
+     {% endblocktrans %}
+     {% endif %}
+     </p>
  </div>
  {% endif %}
 

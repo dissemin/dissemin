@@ -208,6 +208,7 @@ class Researcher(models.Model):
         self.stats.update(Paper.objects.filter(author__researcher=self).distinct())
 
     def fetch_everything(self):
+        # TODO ensure the task is run only once per researcher
         self.harvester = send_task('fetch_everything_for_researcher', [], {'pk':self.id}).id
         self.current_task = 'init' 
         self.save(update_fields=['harvester','current_task'])

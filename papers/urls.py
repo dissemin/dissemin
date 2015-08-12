@@ -28,9 +28,6 @@ from papers import views, ajax
 
 urlpatterns = patterns('',
         url(r'^$', views.index, name='index'),
-        # Authentication
-        #url(r'^login/$', login, name='login'),
-        #url(r'^logout/$', views.logoutView, name='logout'),
         # Paper views
         url(r'^search/?$', views.searchView, name='search'),
         url(r'^researcher/(?P<researcher>\d+)/$', views.searchView, name='researcher'),

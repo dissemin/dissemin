@@ -25,7 +25,6 @@ from django.template import RequestContext, loader
 from django.views import generic
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse
-from django.contrib.auth import logout
 from django.contrib.auth.views import login as auth_login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import user_passes_test
@@ -188,22 +187,17 @@ def searchView(request, **kwargs):
 
     return render(request, 'papers/search.html', context)
 
-def logoutView(request):
-    logout(request)
-    if 'HTTP_REFERER' in request.META:
-        return redirect(request.META['HTTP_REFERER'])
-    else:
-        return redirect('/')
-
 @user_passes_test(is_admin)
 def reclusterResearcher(request, pk):
     source = get_object_or_404(Researcher, pk=pk)
     send_task('recluster_researcher', [], {'pk':pk})
     return redirect(request.META['HTTP_REFERER'])
 
-@user_passes_test(is_admin)
+@user_passes_test(is_authenticated)
 def refetchResearcher(request, pk):
-    source = get_object_or_404(Researcher, pk=pk)
+    researcher = get_object_or_404(Researcher, pk=pk)
+    if researcher.user != request.user and not request.user.is_staff:
+        return HttpResponseForbidden("Not authorized to update papers for this researcher.")
     send_task('fetch_everything_for_researcher', [], {'pk':pk})
     return redirect(request.META['HTTP_REFERER'])
 
