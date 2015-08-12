@@ -127,6 +127,16 @@ def split_name_words(string):
         words.append(buf)
     return (words,separators)
 
+def shorten_first_name(string):
+    words, separators = split_name_words(string)
+    result = ""
+    for i in range(len(words)):
+        if words[i][0].isupper():
+            result += words[i][0]+'.'
+            if i < len(separators):
+                result += separators[i] if separators[i] else ' '
+    return result
+
 def recapitalize_word(w):
     """ Turns every fully capitalized word into an uncapitalized word (except for the first character) """
     if w.upper() == w:
