@@ -36,10 +36,9 @@ DEPOSIT_STATUS_CHOICES = [
    ]
 
 ZENODO_LICENSES_CHOICES = [
-   ('cc0', _('CC 0')),
+   ('cc-zero', _('CC 0')),
    ('cc-by', _('CC BY')),
    ('cc-by-sa', _('CC BY SA')),
-   ('cc-by-nc', _('CC BY NC')),
  ]
 
 class DepositRecord(models.Model):
