@@ -127,7 +127,7 @@ def createZenodoMetadata(paper, form):
     for record in oairecords:
         if record.description and len(record.description) > len(abstract):
             abstract = record.description
-    abstract = abstract or form.cleaned_data['abstract']
+    abstract = form.cleaned_data['abstract'] or abstract
 
     if len(abstract) < 32: # that's really short for an abstract !
         for publi in publications:
