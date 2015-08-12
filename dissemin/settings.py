@@ -31,6 +31,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from datetime import timedelta
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -117,6 +118,11 @@ DEPOSIT_CONTENT_TYPES = ['application/pdf','application/x-pdf','application/octe
 # and more requests as there is no batch support).
 #DOI_PROXY_DOMAIN =  'dx.doi.org'
 #DOI_PROXY_SUPPORTS_BATCH = False
+
+### Paper freshness options ###
+# On login of an user, minimum time between the last harvest to trigger
+# a new harvest for that user.
+PROFILE_REFRESH_ON_LOGIN = timedelta(days=1)
 
 ### Security key ###
 # This is used by django to generate various things (mainly for 

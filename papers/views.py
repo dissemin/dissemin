@@ -56,13 +56,13 @@ import json
 
 def fetch_on_orcid_login(sender, **kwargs):
     account = kwargs['sociallogin'].account
-    user = kwargs['request'].user
     orcid = account.uid
     profile = account.extra_data
+    user = account.user
     r = Researcher.get_or_create_by_orcid(orcid, profile, user)
-    r.fetch_everything()
+    r.fetch_everything_if_outdated()
 
-social_account_added.connect(fetch_on_orcid_login)
+pre_social_login.connect(fetch_on_orcid_login)
 
 # Number of papers shown on a search results page
 NB_RESULTS_PER_PAGE = 20

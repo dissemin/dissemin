@@ -26,6 +26,7 @@ from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
 from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
+from django.utils import timezone
 from celery.execute import send_task
 
 from papers.utils import nstr, iunaccent, create_paper_plain_fingerprint
@@ -36,6 +37,7 @@ from papers.orcid import get_orcid_profile, get_name_from_orcid_profile
 from statistics.models import AccessStatistics
 from publishers.models import Publisher, Journal, OA_STATUS_CHOICES, OA_STATUS_PREFERENCE, default_publisher
 from upload.models import UploadedPDF
+from dissemin.settings import PROFILE_REFRESH_ON_LOGIN
 
 import hashlib, re
 from datetime import datetime, timedelta
@@ -210,6 +212,10 @@ class Researcher(models.Model):
         self.current_task = 'init' 
         self.save(update_fields=['harvester','current_task'])
 
+    def fetch_everything_if_outdated(self):
+        if self.last_harvest is None or timezone.now() - self.last_harvest > PROFILE_REFRESH_ON_LOGIN:
+            self.fetch_everything()
+
     @classmethod
     def get_or_create_by_orcid(cls, orcid, profile=None, user=None):
         researcher = None
@@ -247,8 +253,8 @@ class Researcher(models.Model):
             # although our model would support it (TODO ?)
             raise ValueError
 
-        if orcid is not None:
-            orcid = validate_orcid(orcid)
+        if kwargs.get('orcid') is not None:
+            orcid = validate_orcid(kwargs['orcid'])
             if orcid is None:
                 raise ValueError('Invalid ORCiD: "%s"' % orcid)
 
