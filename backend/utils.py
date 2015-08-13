@@ -24,8 +24,35 @@ import requests
 import requests.exceptions
 from time import sleep
 from titlecase import titlecase
+from dissemin.settings import redis_client
 
 from papers.errors import MetadataSourceException
+
+### Run a task at most one at a time
+
+class run_only_once(object):
+    def __init__(self, base_id, **kwargs):
+        self.base_id = base_id
+        self.keys = kwargs.get('keys', [])
+        self.timeout = int(kwargs.get('timeout', 60*10))
+
+    def __call__(self, f):
+        def inner(*args, **kwargs):
+            id = self.base_id+'-'+('-'.join([str(kwargs.get(key,'none')) for key in self.keys]))
+            lock = redis_client.lock(id, timeout=self.timeout)
+            have_lock = False
+            result = None
+            try:
+                have_lock = lock.acquire(blocking=False)
+                if have_lock:
+                    result = f(*args, **kwargs)
+            finally:
+                if have_lock:
+                    lock.release()
+            return result
+        return inner
+
+
 
 ### Open an URL with retries
 

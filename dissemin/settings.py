@@ -267,6 +267,8 @@ MEDIA_URL = '/media/'
 # This is an example broker with Redis.
 BROKER_URL = 'redis://localhost:6379/0'
 # For a RabbitMQ setting: BROKER_URL = 'amqp://guest:guest@127.0.0.1:5672//'
+import redis
+redis_client = redis.StrictRedis(host='localhost', port=6379, db=0)
 
 CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
 CELERY_IMPORTS = ['backend.tasks']

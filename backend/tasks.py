@@ -44,10 +44,12 @@ from backend.base import fetch_papers_from_base_for_researcher
 from backend.orcid import fetch_orcid_records
 from backend.name_cache import name_lookup_cache
 from backend.extractors import * # to ensure that OaiSources are created
+from backend.utils import run_only_once
 
 logger = get_task_logger(__name__)
 
 @shared_task(name='fetch_everything_for_researcher')
+@run_only_once('researcher', keys=['pk'])
 def fetch_everything_for_researcher(pk):
     try:
         r = Researcher.objects.get(pk=pk)
