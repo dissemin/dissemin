@@ -137,7 +137,6 @@ def changeResearcher(request):
     allowedFields = ['role']
     return process_ajax_change(request, Researcher, allowedFields)
 
-@user_passes_test(is_authenticated)
 def harvestingStatus(request, pk): 
     researcher = get_object_or_404(Researcher, pk=pk)
     resp = {}
