@@ -98,11 +98,12 @@ def affiliate_author_with_orcid(ref_name, orcid, authors):
         affiliations[max_sim_idx] = orcid
     return affiliations
 
-def fetch_orcid_records(id, profile=None):
+def fetch_orcid_records(id, profile=None, use_doi=True):
     """
     Queries ORCiD to retrieve the publications associated with a given ORCiD.
 
     :param profile: The ORCID profile if it has already been fetched before (format: parsed JSON).
+    :param use_doi: Fetch the publications by DOI when we find one (recommended, but slow)
     :returns: the number of records we managed to extract from the ORCID profile (some of them could be in
             free form, hence not imported)
     """
@@ -139,9 +140,8 @@ def fetch_orcid_records(id, profile=None):
             # We don't do it yet, we only store the DOI, so that we can fetch them
             # by batch later.
             dois.append(doi)
-            continue
 
-        # Otherwise, extract information from ORCiD
+        # Extract information from ORCiD
 
         # Title
         title = j('work-title/title/value')
@@ -171,6 +171,9 @@ def fetch_orcid_records(id, profile=None):
             continue
         entry = parse_bibtex(bibtex)
 
+        if entry.get('author', []) == []:
+            print "Warning: Skipping ORCID publication: no authors."
+            print j('work-citation/citation')
         authors = map(name_lookup_cache.lookup, entry['author'])
 
         # Pubdate
@@ -194,16 +197,16 @@ def fetch_orcid_records(id, profile=None):
                 pubtype=doctype)
         records_found += 1
 
-    doi_metadata = fetch_dois(dois)
-    for metadata in doi_metadata:
-        try:
-            authors = map(convert_to_name_pair, metadata['author'])
-            affiliations = affiliate_author_with_orcid(ref_name, id, authors)
-            paper = save_doi_metadata(metadata, affiliations)
-            records_found += 1
-        except (KeyError, ValueError, TypeError):
-            # TODO we could try to add them based on the bibtex…
-            pass
+    if use_doi:
+        doi_metadata = fetch_dois(dois)
+        for metadata in doi_metadata:
+            try:
+                authors = map(convert_to_name_pair, metadata['author'])
+                affiliations = affiliate_author_with_orcid(ref_name, id, authors)
+                paper = save_doi_metadata(metadata, affiliations)
+                records_found += 1
+            except (KeyError, ValueError, TypeError):
+                pass
 
     return records_found
 

@@ -217,6 +217,11 @@ class Researcher(models.Model):
         if self.last_harvest is None or timezone.now() - self.last_harvest > PROFILE_REFRESH_ON_LOGIN:
             self.fetch_everything()
 
+    def init_from_orcid(self):
+        self.harvester = send_task('init_profile_from_orcid', [], {'pk':self.id}).id
+        self.current_task = 'init'
+        self.save(update_fields=['harvester', 'current_task'])
+
     @classmethod
     def get_or_create_by_orcid(cls, orcid, profile=None, user=None):
         researcher = None

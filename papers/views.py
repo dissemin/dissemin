@@ -57,9 +57,17 @@ def fetch_on_orcid_login(sender, **kwargs):
     account = kwargs['sociallogin'].account
     orcid = account.uid
     profile = account.extra_data
-    user = account.user
+    user = None
+    if 'user' in account.__dict__:
+        user = account.user
     r = Researcher.get_or_create_by_orcid(orcid, profile, user)
-    r.fetch_everything_if_outdated()
+    if r.user_id is None and user is not None:
+        r.user = user
+        r.save(update_fields=['user'])
+    if r.empty_orcid_profile is None:
+        r.init_from_orcid()
+    else:
+        r.fetch_everything_if_outdated()
 
 pre_social_login.connect(fetch_on_orcid_login)
 
@@ -99,7 +107,7 @@ def searchView(request, **kwargs):
             except Researcher.DoesNotExist:
                 orcid = validate_orcid(args.get('orcid'))
                 researcher = Researcher.get_or_create_by_orcid(orcid)
-                researcher.fetch_everything()
+                researcher.init_from_orcid()
 
         queryset = queryset.filter(author__researcher=researcher)
         search_description += _(' authored by ')+unicode(researcher)

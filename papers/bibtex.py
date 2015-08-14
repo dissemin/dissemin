@@ -41,7 +41,7 @@ def parse_bibtex(bibtex):
         print "Warning: %d Bibtex items in parse_bibtex, defaulting to the first one" % len(db.entries)
 
     entry = db.entries[0]
-    entry['author'] = parse_authors_list(entry['author'])
+    entry['author'] = parse_authors_list(entry.get('author', ''))
     return entry
 
 ### Bibtex utilites ###

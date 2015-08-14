@@ -25,7 +25,7 @@ from oaipmh.metadata import MetadataRegistry, oai_dc_reader
 from oaipmh.datestamp import tolerant_datestamp_to_datetime
 from oaipmh.error import DatestampError, NoRecordsMatchError
 
-from papers.name import parse_comma_name, normalize_name_words
+from papers.name import parse_comma_name, name_normalization, name_signature, normalize_name_words
 from papers.models import OaiRecord, OaiSource, Name
 from papers.doi import to_doi
 
@@ -37,13 +37,44 @@ my_oai_dc_reader._fields['accessRights'] = ('textList', 'oai_dc:dc/dcterms:acces
 my_oai_dc_reader._namespaces['dcterms'] = 'http://purl.org/dc/terms/'
 
 from backend.extractors import *
-from backend.proxy import PROXY_SOURCE_PREFIX
+from backend.proxy import PROXY_SOURCE_PREFIX, PROXY_SIGNATURE_PREFIX, PROXY_AUTHOR_PREFIX, get_proxy_client
 from backend.create import *
 from backend.name_cache import name_lookup_cache
 from backend.pubtype_translations import *
 
 import re
 
+def fetch_records_for_name(name, signature=True):
+    if signature:
+        fetch_records_for_signature(name_signature(name.first, name.last))
+    else:
+        fetch_records_for_full_name(name.first, name.last)
+
+def fetch_records_for_signature(ident):
+    client = get_proxy_client()
+    try:
+        listRecords = client.listRecords(metadataPrefix='oai_dc', set=PROXY_SIGNATURE_PREFIX+ident)
+        process_records(listRecords)
+    except NoRecordsMatchError:
+        pass
+    except BadArgumentError as e:
+        print "Signature is unknown for the proxy: "+unicode(e)
+        pass
+
+def fetch_records_for_full_name(firstname, lastname):
+    client = get_proxy_client()
+    try:
+        ident = name_normalization(lastname+', '+firstname)
+        listRecords = client.listRecords(metadataPrefix='oai_dc', set=PROXY_AUTHOR_PREFIX+ident)
+        process_records(listRecords)
+        ident = name_normalization(firstname+' '+lastname)
+        listRecords = client.listRecords(metadataPrefix='oai_dc', set=PROXY_AUTHOR_PREFIX+ident)
+        process_records(listRecords)
+    except NoRecordsMatchError:
+        pass
+    except BadArgumentError as e:
+        print "Author is unknown for the proxy: "+unicode(e)
+        pass
 
 def process_records(listRecords):
     count = 0
