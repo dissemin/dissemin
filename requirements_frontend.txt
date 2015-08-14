@@ -10,3 +10,4 @@ unicode_tex
 wand
 PyPDF2
 django-allauth
+django-redis-cache

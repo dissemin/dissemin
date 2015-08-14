@@ -133,6 +133,7 @@ SECRET_KEY = '40@!t4mmh7325-^wh+jo3teu^!yj3lfz5p%ok(8+7th8pg^hy1'
 ### Debug mode ###
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+DEBUG_TOOLBAR_CONFIG = {'SHOW_TOOLBAR_CALLBACK': lambda r: True}
 
 # This can safely (and should) be kept to True
 TEMPLATE_DEBUG = True
@@ -179,7 +180,7 @@ INSTALLED_APPS = (
     'upload',
     'deposit',
     'bootstrap_pagination',
-#    'debug_toolbar',
+    'debug_toolbar',
 )
 
 SITE_ID = 1
@@ -236,12 +237,19 @@ DATABASES = {
 # https://docs.djangoproject.com/en/1.7/topics/cache/
 CACHES = {
         'default': {
-# This one is only suitable for developpment
-            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-            'LOCATION': 'my-cache'
 # This one should be used in production
 #            'BACKEND':'django.core.cache.backends.memcached.MemcachedCache',
 #            'LOCATION':'127.0.0.1:11211',
+# This one is only suitable for developpment
+#            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+#            'LOCATION': 'my-cache'
+# This one should be used in production
+#            'BACKEND':'django.core.cache.backends.memcached.MemcachedCache',
+#            'LOCATION':'127.0.0.1:11211',
+# This one uses Redis, which is already required for message-passing to Celery, so let's use it as a cache too
+             'BACKEND':'redis_cache.RedisCache',
+             'LOCATION':'localhost:6379',
+
     }
 }
 
