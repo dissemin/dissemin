@@ -637,9 +637,8 @@ class Paper(models.Model):
         Invalidate the HTML cache for all the publications of this researcher.
         """
         for rpk in [a.researcher_id for a in self.author_set.filter(researcher_id__isnull=False)]+[None]:
-            for with_buttons in [False,True]:
-                key = make_template_fragment_key('publiListItem', [self.pk, rpk, with_buttons])
-                cache.delete(key)
+            key = make_template_fragment_key('publiListItem', [self.pk, rpk])
+            cache.delete(key)
 
     def update_author_names(self, new_author_names):
         """
