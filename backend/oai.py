@@ -23,7 +23,7 @@ from __future__ import unicode_literals
 from oaipmh.client import Client
 from oaipmh.metadata import MetadataRegistry, oai_dc_reader
 from oaipmh.datestamp import tolerant_datestamp_to_datetime
-from oaipmh.error import DatestampError, NoRecordsMatchError
+from oaipmh.error import DatestampError, NoRecordsMatchError, BadArgumentError
 
 from papers.name import parse_comma_name, name_normalization, name_signature, normalize_name_words
 from papers.models import OaiRecord, OaiSource, Name

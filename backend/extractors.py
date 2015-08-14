@@ -87,7 +87,7 @@ class OpenAireExtractor(RegexExtractor):
         super(OpenAireExtractor, self).__init__(mappings)
 
     def _post_filter(self, record, urls):
-        if record[1]._map.get('rights') == 'info:eu-repo/semantics/openAccess':
+        if 'info:eu-repo/semantics/openAccess' in record[1]._map.get('rights', []):
             urls['pdf'] = urls.get('splash')
         return urls
 
@@ -146,6 +146,8 @@ numdamExtractor = RegexExtractor([
 openaireExtractor = OpenAireExtractor([
     ('identifier', re.compile(r'(https?://[^ ]*)'),
         'splash', r'\1'),
+    ('identifier', re.compile(r'(https?://[^ ]*\.pdf)'),
+        'pdf', r'\1'),
     ])
 
 REGISTERED_EXTRACTORS = {
