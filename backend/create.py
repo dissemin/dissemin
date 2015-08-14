@@ -69,9 +69,7 @@ def _get_or_create_paper(title, author_names, pubdate, doi, visibility, affiliat
         if visibility == 'VISIBLE' and paper.visibility == 'CANDIDATE':
             paper.visibility = 'VISIBLE'
             paper.save(update_fields=['visibility'])
-        paper.update_author_names(plain_names)
-        if affiliations:
-            paper.update_affiliations(affiliations)
+        paper.update_author_names(plain_names, affiliations)
         return paper
 
     # If a DOI is present, first look it up

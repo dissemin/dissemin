@@ -640,17 +640,23 @@ class Paper(models.Model):
             key = make_template_fragment_key('publiListItem', [self.pk, rpk])
             cache.delete(key)
 
-    def update_author_names(self, new_author_names):
+    def update_author_names(self, new_author_names, new_affiliations=None):
         """
         Improves the current list of authors by considering a new list of author names.
         Missing authors are added, and names are unified.
+        If affiliations are provided, they will replace the old ones if they are
+        more informative.
 
         :param new_author_names: list of Name instances (the order matters)
+        :param new_affiliations: (optional) list of affiliation strings for the new author names.
         """
+        if new_affiliations is None:
+            new_affiliations = [None]*len(new_author_names)
+        assert len(new_author_names) == len(new_affiliations)
         old_authors = self.sorted_authors
         old_names = map(lambda a: (a.name.first,a.name.last), old_authors)
         unified_names = unify_name_lists(old_names, new_author_names)
-        for i, (new_name, (idx,_)) in enumerate(unified_names):
+        for i, (new_name, (idx,new_idx)) in enumerate(unified_names):
             if idx is not None: # Updating the name of an existing author
                 author = old_authors[idx]
                 fields = []
@@ -662,33 +668,17 @@ class Paper(models.Model):
                     name.save()
                     author.name = name
                     fields.append('name')
+                if new_idx is not None and affiliation_is_greater(new_affiliations[new_idx], author.affiliation):
+                    author.affiliation = new_affiliations[new_idx]
+                    fields.append('affiliation')
                 if fields:
                     author.save(update_fields=fields)
             else: # Creating a new author
                 name = Name.lookup_name(new_name)
                 name.save()
                 # TODO maybe we could cluster it ? -> move this code to the backend?
-                author = Author(paper=self,name=name,position=i)
+                author = Author(paper=self,name=name,position=i,affiliation=new_affiliations[new_idx])
                 author.save()
-                
-    def update_affiliations(self, affiliations):
-        """
-        Improves the current list of affiliations by considering a list of new 
-        affiliations. ORCiDs are preferred over plain strings, longer plain
-        strings are preferred over shorter plain strings, and plain strings
-        are preferred over None
-        """
-        if len(affiliations) != self.author_set.count():
-            print "Warning, number of affiliations differ for paper %d" % self.pk
-            print "New affiliations: "+unicode(affiliations)
-            print "%d authors" % self.author_set.count()
-            return
-
-        for i, author in enumerate(self.sorted_authors):
-            if affiliation_is_greater(affiliations[i], author.affiliation):
-                author.affiliation = affiliations[i]
-                author.save(update_fields=['affiliation'])
-
 
     # Merge paper into self
     def merge(self, paper):
