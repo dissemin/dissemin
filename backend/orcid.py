@@ -30,7 +30,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from papers.errors import MetadataSourceException
 from papers.doi import to_doi
-from papers.name import match_names, normalize_name_words, parse_comma_name, name_similarity
+from papers.name import match_names, normalize_name_words, parse_comma_name, shallower_name_similarity
 from papers.utils import create_paper_fingerprint, iunaccent, tolerant_datestamp_to_datetime, date_from_dateparts, validate_orcid, parse_int
 from papers.models import Publication, Paper, Name, OaiSource, OaiRecord
 from papers.bibtex import parse_bibtex
@@ -89,7 +89,8 @@ def affiliate_author_with_orcid(ref_name, orcid, authors):
     max_sim_idx = None
     max_sim = 0.
     for idx, name in enumerate(authors):
-        cur_similarity = name_similarity(name, ref_name) 
+        cur_similarity = shallower_name_similarity(name, ref_name) 
+        print "shallower(%s,%s): %f" % (str(name),str(ref_name),cur_similarity)
         if cur_similarity > max_sim:
             max_sim_idx = idx
             max_sim = cur_similarity

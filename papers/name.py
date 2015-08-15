@@ -249,6 +249,41 @@ def name_similarity(a,b):
     sumscores = max(min(sumscores, 1), 0)
     return sumscores
 
+def shallower_name_similarity(a, b):
+    """
+    Same as name_similarity, but accepts differences in the last names.
+    This heuristics is more costly but is only used to attribute an ORCID
+    affiliation to the right author in papers fetched from ORCID.
+    """
+    if not a or not b:
+        return False
+    firstA, lastA = a
+    firstB, lastB = b
+
+    # Matching last names
+    lastA = iunaccent(lastA)
+    lastB = iunaccent(lastB)
+    wordsA, sepA = split_name_words(lastA)
+    wordsB, sepB = split_name_words(lastB)
+    wordsA = set(wordsA)
+    wordsB = set(wordsB)
+    ratio = float(len(wordsA & wordsB)) / len(wordsA | wordsB)
+
+    partsA, sepsA = split_name_words(firstA)
+    partsB, sepsB = split_name_words(firstB)
+    partsA = map(lambda x: x[0], partsA)
+    partsB = map(lambda x: x[0], partsB)
+
+    parts = zip(partsA, partsB)
+    if not all(map(match_first_names, parts)):
+        # Try to match in reverse
+        partsA.reverse()
+        partsB.reverse()
+        parts = zip(partsA, partsB)
+        if not all(map(match_first_names, parts)):
+            return 0.
+
+    return ratio*len(parts)/max(len(partsA), len(partsB))
 
 #### Helpers for the name splitting heuristic ######
 

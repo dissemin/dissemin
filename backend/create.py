@@ -106,6 +106,7 @@ def _get_or_create_paper(title, author_names, pubdate, doi, visibility, affiliat
                 aff = affiliations[idx]
             a = Author(name=author_name, paper=p, position=idx, affiliation=aff)
             a.save()
+            a.update_name_variants_if_needed()
             if author_name.is_known:
                 clustering_context_factory.clusterAuthorLater(a)
 

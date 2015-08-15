@@ -671,6 +671,7 @@ class Paper(models.Model):
                 if new_idx is not None and affiliation_is_greater(new_affiliations[new_idx], author.affiliation):
                     author.affiliation = new_affiliations[new_idx]
                     fields.append('affiliation')
+                    author.update_name_variants_if_needed()
                 if fields:
                     author.save(update_fields=fields)
             else: # Creating a new author
@@ -849,6 +850,26 @@ class Author(models.Model):
     @property
     def is_known(self):
         return self.researcher != None
+
+    @property
+    def orcid(self):
+        return validate_orcid(self.affiliation)
+
+    def update_name_variants_if_needed(self, default_confidence=0.1):
+        """
+        Ensure that an author associated with an ORCID has a name
+        that is the variant of the researcher with that ORCID
+        """
+        orcid = self.orcid
+        if orcid:
+            try:
+                r = Researcher.objects.get(orcid=orcid)
+                nv = NameVariant.objects.get_or_create(
+                        researcher=r,
+                        name=self.name,
+                        defaults={'confidence':default_confidence})
+            except Researcher.DoesNotExist:
+                pass
 
 # Publication of these papers (in journals or conference proceedings)
 class Publication(models.Model):
