@@ -58,7 +58,7 @@ def fetch_on_orcid_login(sender, **kwargs):
     orcid = account.uid
     profile = account.extra_data
     user = None
-    if 'user' in account.__dict__:
+    if '_user_cache' in account.__dict__:
         user = account.user
     r = Researcher.get_or_create_by_orcid(orcid, profile, user)
     if r.user_id is None and user is not None:
