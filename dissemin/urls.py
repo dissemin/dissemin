@@ -23,6 +23,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.shortcuts import render, redirect
 import allauth.account.views
+from os.path import join
 
 from django.contrib import admin
 from django.contrib.auth import logout
@@ -79,4 +80,5 @@ urlpatterns = patterns('',
     url(r'^accounts/', include('allauth.urls')),
 # Remove this in production
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT
+) + static('/', document_root=join(settings.STATIC_ROOT, 'favicon')
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
