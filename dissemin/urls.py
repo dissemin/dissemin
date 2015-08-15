@@ -64,5 +64,4 @@ urlpatterns = patterns('',
     url(r'^', include('deposit.urls')),
 # Remove this in production
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT
-) + static('/', document_root=join(settings.STATIC_ROOT, 'favicon')
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
