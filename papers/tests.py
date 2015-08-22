@@ -261,6 +261,18 @@ class UnifyNameListsTest(unittest.TestCase):
                  [(('Marie','Dupont'),(1,0)),(('Jean P.','Dupont'),(0,1))]    
             ])
 
+    def test_dirty_input(self):
+        self.assertEqual(unify_name_lists(
+            [('Jérémie','Boutier'),('Alphonse','Viger')],
+            [('J{é}r{é}mie', 'Boutier'),('A.','Viger')]),
+            [(('Jérémie','Boutier'),(0,None)),(('Alphonse','Viger'),(1,1))])
+
+    def test_duplicates(self):
+        self.assertEqual(unify_name_lists(
+            [('Jérémie','Boutier'),('Jérémie','Boutier')],
+            [('J.','Boutier')]),
+            [(('Jérémie','Boutier'),(0,0)),(None,(1,None))])
+
 class UnescapeLatexTest(unittest.TestCase):
     def test_simple(self):
         self.assertEqual(unescape_latex('This is a test'), 'This is a test')

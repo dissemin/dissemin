@@ -517,7 +517,12 @@ def unify_name_lists(a,b):
                 unified = name_unification(nameA,nameB)
                 if unified is not None:
                     result.append((unified,0.5*(rankA+rankB),(idxA,idxB)))
+                elif shallower_name_similarity(nameA, nameB) > 0.:
+                    # Those two names might refer to the same person
+                    # default to the first one as unification failed
+                    result.append((nameA,rankA,(idxA,None)))
                 else:
+                    # Those two names look incompatible
                     result.append((nameA,rankA,(idxA,None)))
                     result.append((nameB,rankB,(None,idxB)))
                 iA += 1
@@ -531,5 +536,15 @@ def unify_name_lists(a,b):
                     iB += 1
 
     result = map(lambda (name,rank,idx):(name,idx), sorted(result, key=lambda x:x[1]))
-    return result
+
+    def make_unique(lst):
+        seen = set()
+        for name,idx in lst:
+            if name not in seen:
+                seen.add(name)
+                yield (name,idx)
+            else:
+                yield (None,idx)
+
+    return list(make_unique(result))
     

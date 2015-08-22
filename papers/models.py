@@ -659,6 +659,11 @@ class Paper(models.Model):
         for i, (new_name, (idx,new_idx)) in enumerate(unified_names):
             if idx is not None: # Updating the name of an existing author
                 author = old_authors[idx]
+                if new_name is None:
+                    # Delete that author, it was pruned because it already
+                    # appears elsewhere
+                    author.delete()
+                    continue
                 fields = []
                 if idx != i:
                     author.position = i
@@ -674,7 +679,7 @@ class Paper(models.Model):
                     author.update_name_variants_if_needed()
                 if fields:
                     author.save(update_fields=fields)
-            else: # Creating a new author
+            elif new_name is not None: # Creating a new author
                 name = Name.lookup_name(new_name)
                 name.save()
                 # TODO maybe we could cluster it ? -> move this code to the backend?
