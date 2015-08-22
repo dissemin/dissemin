@@ -23,6 +23,7 @@ from __future__ import unicode_literals
 import re, bibtexparser
 from bibtexparser.bparser import BibTexParser
 from bibtexparser.customization import convert_to_unicode
+from papers.utils import unescape_latex, remove_latex_braces
 
 from papers.name import parse_comma_name
 
@@ -62,5 +63,6 @@ def insert_newlines_in_bibtex(bib):
     return bib3
 
 def parse_authors_list(authors):
-    return map(parse_comma_name, authors.split(' and '))
+    return map(parse_comma_name,
+                remove_latex_braces(unescape_latex(authors)).split(' and '))
 

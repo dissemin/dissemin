@@ -114,6 +114,21 @@ def unescape_latex(s):
 
     return latex_command_re.sub(conditional_replace, s)
 
+latex_one_character_braces_re = re.compile(r'(^|(^|[^\\])\b(\w+)){(.)}', re.UNICODE)
+latex_full_line_braces_re = re.compile(r'^{(.*)}$')
+latex_word_braces_re = re.compile(r'(^|\s){(\w+)}($|\s)', re.UNICODE)
+def remove_latex_braces(s):
+    """
+    Removes spurious braces such as in "Th{é}odore" or "a {CADE} conference"
+    This should be run *after* unescape_latex
+    """
+    s = latex_full_line_braces_re.sub(r'\1', s)
+    s = latex_word_braces_re.sub(r'\1\2\3', s)
+    s = latex_one_character_braces_re.sub(r'\1\4', s)
+    s = latex_one_character_braces_re.sub(r'\1\4', s)
+    s = latex_one_character_braces_re.sub(r'\1\4', s)
+    return s
+
 def sanitize_html(s):
     s = overescaped_re.sub(r'&#\1;', s)
     s = unicode4_re.sub(lambda x: x.group(1).decode('unicode-escape'), s)

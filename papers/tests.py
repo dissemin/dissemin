@@ -24,7 +24,7 @@ from __future__ import unicode_literals
 import unittest
 import django.test
 from papers.name import *
-from papers.utils import unescape_latex, remove_latex_math_dollars, validate_orcid
+from papers.utils import unescape_latex, remove_latex_math_dollars, validate_orcid, remove_latex_braces
 
 class MatchNamesTest(unittest.TestCase):
     def test_simple(self):
@@ -277,6 +277,29 @@ class UnescapeLatexTest(unittest.TestCase):
                 'The revenue is $30 per cow')
         self.assertEqual(remove_latex_math_dollars('Instead of $15, the revenue is $30 per cow'),
                 'Instead of $15, the revenue is $30 per cow')
+
+class RemoveLatexBracesTest(unittest.TestCase):
+    def test_simple(self):
+        self.assertEqual(remove_latex_braces('this is a test'), 'this is a test')
+        self.assertEqual(remove_latex_braces('this is a {Test}'), 'this is a Test')
+        self.assertEqual(remove_latex_braces('this {is} a Test'), 'this is a Test')
+        self.assertEqual(remove_latex_braces('{this} is a Test'), 'this is a Test')
+        self.assertEqual(remove_latex_braces('{this is a Test}'), 'this is a Test')
+
+    def test_unicode(self):
+        self.assertEqual(remove_latex_braces('th{í}s is a Test'), 'thís is a Test')
+        self.assertEqual(remove_latex_braces('{t}hís is a Test'), 'thís is a Test')
+        self.assertEqual(remove_latex_braces('thís {is} a Test'), 'thís is a Test')
+
+    def test_math(self):
+        self.assertEqual(remove_latex_braces('base^{superscript}_{subscript}'), 'base^{superscript}_{subscript}')
+
+    def test_command(self):
+        self.assertEqual(remove_latex_braces('in \\mathbb{R} let'), 'in \\mathbb{R} let')
+        self.assertEqual(remove_latex_braces('in \\emph{blue} let'), 'in \\emph{blue} let')
+
+    def test_multiple(self):
+        self.assertEqual(remove_latex_braces('J{é}r{é}mie'), 'Jérémie')
 
 class ValidateOrcidTest(unittest.TestCase):
     def test_simple(self):
