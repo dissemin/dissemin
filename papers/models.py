@@ -27,6 +27,7 @@ from django.core.cache.utils import make_template_fragment_key
 from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
+from solo.models import SingletonModel
 from celery.execute import send_task
 
 from papers.utils import nstr, iunaccent, create_paper_plain_fingerprint
@@ -1089,6 +1090,22 @@ class OaiRecord(models.Model):
             for m in matches:
                 return m
 
+# A singleton to link to a special instance of AccessStatistics for all papers
+class PaperWorld(SingletonModel):
+    stats = models.ForeignKey(AccessStatistics, null=True)
+
+    def update_stats(self):
+        """Update the access statistics for all papers"""
+        if not self.stats:
+            self.stats = AccessStatistics.objects.create()
+            self.save()
+        self.stats.update(Paper.objects.all())
+
+    def __unicode__(self):
+        return "All papers"
+
+    class Meta:
+        verbose_name = "Paper World"
 
 # Annotation tool to train the models
 class Annotation(models.Model):

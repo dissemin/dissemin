@@ -827,6 +827,11 @@ h1#paperTitle {
 	overflow:hidden;
 }
 
+#welcome .startButton {
+    text-align: center;
+    width: 100%;
+}
+
 #welcome p {
 	width:70%;
 }
@@ -835,6 +840,12 @@ h1#paperTitle {
 	color:#fff;
 	text-decoration:underline;
 }
+
+#welcome .startButton a {
+    color: #2A6496;
+    text-decoration: none;
+}
+
 
 #welcome #institutionblock {
 	float:right;
@@ -894,6 +905,46 @@ h1#paperTitle {
 .siteSummary.right {
 	float:right;
 	margin-left:10px;
+}
+
+.oaPannel {
+    background: #eee;
+    padding: 20px;
+}
+
+.oaPannel h2 {
+    margin-top: 0px;
+}
+
+.oaPannel.left {
+    float:left;
+    margin-right:10px;
+    width:58%;
+    width:calc(60% - 10px);
+}
+
+.oaPannel.right {
+    float:right;
+    margin-left:10px;
+    width:38%;
+    width:calc(40% - 10px);
+}
+
+/*
+#globalStats, #statsExplanations {
+    width: 48%;
+    width:calc(50% - 5px);
+}
+*/
+
+#globalStats {
+    float:right;
+    margin-right: 5px;
+}
+
+#statsExplanations {
+    float:left;
+    margin-left: 5px;
 }
 
 /* FAQ */

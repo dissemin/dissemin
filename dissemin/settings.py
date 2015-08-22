@@ -180,6 +180,7 @@ INSTALLED_APPS = (
     'upload',
     'deposit',
     'bootstrap_pagination',
+    'solo',
     'debug_toolbar',
 )
 

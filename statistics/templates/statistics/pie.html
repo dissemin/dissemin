@@ -1,27 +1,27 @@
 {% load i18n %}
 {% load statsurl %}
+{% with obj.stats as stats %}
+{% with obj.object_id as object_id %}
 {% if stats.num_tot %}
 <div class="access-statistics" id="statspie_n{{ stats_counter }}">
   <div class="statspie_graph"></div>
   <div class="statspie_caption"></div>
   <script type="text/javascript">
-{% with obj.stats as stats %}
-{% with obj.object_id as object_id %}
 $(function() {
   var detailed_data = [
-    { "label":"{% trans 'Open Access' %}",
+    { "label":"{% trans 'Available from the publisher' %}",
        "value":{{ stats.num_oa }},
        "url":"{{ object_id | statsurl:"oa" }}" },
-    { "label":"{% trans 'Publications are available' %}",
+    { "label":"{% trans 'Available from the authors' %}",
        "value":{{ stats.num_ok }},
        "url":"{{ object_id | statsurl:"ok" }}" },
-    { "label":"{% trans 'Publications could be online' %}",
+    { "label":"{% trans 'Could be shared by the authors' %}",
       "value":"{{ stats.num_couldbe }}",
       "url": "{{ object_id | statsurl:"couldbe" }}" },
-    { "label":"{% trans 'Policy unknown' %}",
+    { "label":"{% trans 'Unknown sharing policy' %}",
       "value":{{ stats.num_unk }},
       "url": "{{ object_id | statsurl:"unk" }}" },
-    { "label":"{% trans 'Upload is forbidden' %}",
+    { "label":"{% trans 'Sharing forbidden by the publisher' %}",
       "value":{{ stats.num_closed }},
       "url":"{{ object_id | statsurl:"closed" }}" } ];
 
@@ -34,8 +34,8 @@ $(function() {
        "url":"{{ object_id | statsurl:"nok" }}" }];
   showStatsPie(detailed_data, aggregated_data, "statspie_n{{ stats_counter }}");
   });
-{% endwith %}
-{% endwith %}
   </script>
 </div>
 {% endif %}
+{% endwith %}
+{% endwith %}

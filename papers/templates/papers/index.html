@@ -1,9 +1,14 @@
 {% extends "dissemin/skeleton.html" %}
 
 {% load i18n %}
+{% load solo_tags %}
 
 {% block headTitle %}
-{{ UNIVERSITY_SHORT_NAME_WITHOUT_DETERMINER }}
+{% trans "Home" %}
+{% endblock %}
+
+{% block extra_head %}
+{% include 'statistics/headers.html' %}
 {% endblock %}
 
 {% block content %}
@@ -13,54 +18,77 @@
 	  <img id="institution" src="/static/ens.png" />
 	</div>
 	
-    <h2>{% trans "Welcome to dissem.in" %}</h2>
+    <h2>{% trans "Welcome to dissemin" %}</h2>
 	
     <p>
     {% url 'faq' as faq_url %}
     {% blocktrans trimmed %}
-    Dissem.in helps researchers at <a href="{{ UNIVERSITY_URL }}">{{ UNIVERSITY_SHORT_NAME }}</a> to upload their papers to institutional or subject repositories,
-    fostering <a href="http://en.wikipedia.org/wiki/Self-archiving">Green Open Access</a>.
-    See the <a href="{{ faq_url }}">FAQ</a> for more information about dissem.in.
+    Dissemin helps researchers ensure that their publications are freely
+    available to their readers. Our free service spots paywalled papers
+    and lets you upload them in one click to <a href="http://zenodo.org" target="_blank">Zenodo</a>,
+    an innovative repository backed by the EU.
     {% endblocktrans %}
+    </p>
+    
+    <p>
+    {% blocktrans trimmed %}
+    Still unsure? Read below or check out the <a href="{{ faq_url }}">FAQ</a>.
+    {% endblocktrans %}
+    </p>
+    
+    <p class="startButton">
+        <a href="{% url 'my-profile' %}" class="btn btn-lg btn-default">{% trans "Analyze my publications" %}</a>
     </p>
   </div>
   
-
-  
-  <h2>{% trans "Latest papers" %}</h2>
-    
-  <div id="smallPaperList">
-    
-	{% url 'search' as search_url %}
-    <ul class="withoutTriangles">
-    {% for paper in papers %}
-	   <li>
-       {% include "papers/publiListItem.html" with paper=paper researcher_id=None with_buttons=False %}
-	   </li>
-    {% endfor %}
-    </ul>
-    <a href="{{ search_url }}" class="seeAll">{% blocktrans %}See all {{ nb_papers }} papers{% endblocktrans %}</a>
-	
-  </div>
-	
+ 	
   <div id="siteSummaries">
 	
-  <div class="siteSummary left">
-    
+  <div class="oaPannel left">
+    <h2>{% trans "Green open access" %}</h2> 
 
+    <div id="statsExplanations">
+        <p>
+        {% blocktrans trimmed %}
+        Many researchers do not use the right they have to
+        make their papers freely available online, in parallel
+        with the paywalled version proposed by traditional publishers.
+        {% endblocktrans %}
+        </p>
+
+        <p>
+        {% blocktrans trimmed %}
+        This forces libraries to buy overpriced electronic subscriptions
+        to journals, when they can afford them.
+        {% endblocktrans %}
+        </p>
+      </div>
+
+    <div id="globalStats">
+        {% get_solo 'papers.PaperWorld' as world %}
+        {% include "statistics/pie.html" with obj=world stats_counter=1 %}
+    </div>
+ 
   </div>
 	
-  <div class="siteSummary right">
+  <div class="oaPannel right">
     
-	<h2>{% trans "Publishers" %}</h2>
+	<h2>{% trans "Open repositories" %}</h2>
 
-    <ul>
-    {% for publisher in publishers %}
-    <li><a href="{% url 'publisher' publisher.pk %}">{{ publisher }}</a></li>   
-    {% endfor %}
-    </ul>
-    <a href="{% url 'publishers' %}" class="seeAll">{% blocktrans %}See all {{ nb_publishers }} publishers{% endblocktrans %}</a>
-	
+    <p>
+    {% blocktrans trimmed %}
+    Uploading your papers on your own webpage is not enough.
+    Such copies are less durable and harder to find than documents
+    uploaded to well-indexed repositories.
+    {% endblocktrans %} 
+    </p>
+
+    <p>
+    {% blocktrans trimmed %}
+    Dissemin searches for copies of your papers in a large collection
+    of open repositories and lets you spot the ones that could not be found.
+    {% endblocktrans %}
+    </p>
   </div>
   
   </div>
