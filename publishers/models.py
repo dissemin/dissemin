@@ -53,12 +53,14 @@ class DummyPublisher(object):
     preprint_conditions = []
     postprint_conditions = []
     pdfversion_conditions = []
-    def __init__(self):
-        pass
-    def __unicode__(self):
-        return __('Unknown publisher')
+    def __init__(self, name=None):
+        if name is not None:
+            self.name = name
+        else:
+            self.name = __('Unknown publisher')
 
-default_publisher = DummyPublisher()
+    def __unicode__(self):
+        return self.name
 
 # Publisher associated with a journal
 class Publisher(models.Model):

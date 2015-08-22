@@ -35,7 +35,7 @@ from papers.utils import remove_diacritics, sanitize_html, validate_orcid, affil
 from papers.orcid import get_orcid_profile, get_name_from_orcid_profile
 
 from statistics.models import AccessStatistics
-from publishers.models import Publisher, Journal, OA_STATUS_CHOICES, OA_STATUS_PREFERENCE, default_publisher
+from publishers.models import Publisher, Journal, OA_STATUS_CHOICES, OA_STATUS_PREFERENCE, DummyPublisher
 from upload.models import UploadedPDF
 from dissemin.settings import PROFILE_REFRESH_ON_LOGIN
 
@@ -602,7 +602,7 @@ class Paper(models.Model):
     def publisher(self):
         for publication in self.publication_set.all():
             return publication.publisher_or_default()
-        return default_publisher
+        return DummyPublisher()
 
     def successful_deposits(self):
         return self.depositrecord_set.filter(pdf_url__isnull=False)
@@ -916,7 +916,9 @@ class Publication(models.Model):
     def publisher_or_default(self):
         if self.publisher_id:
             return self.publisher
-        return default_publisher
+        if self.publisher_name:
+            return DummyPublisher(self.publisher_name)
+        return DummyPublisher()
 
     def details_to_str(self):
         result = ''

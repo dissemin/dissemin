@@ -121,7 +121,7 @@ $(function(){
         {% if psh.pk %}
             <a href="{% url 'publisher' psh.pk %}">{{ psh }}</a></p>
         {% else %}
-            {{ publi.publisher_name }}</p>
+            {{ psh }}</p>
         {% endif %}
         {% if paper.is_deposited %}
         <strong>Deposited.</strong>
