@@ -32,25 +32,6 @@
 {% endblock %}
 
 {% block jsScript %}
-{% if request.user.is_authenticated %}
-$(function(){
-
-    function paperMerged(domElem, response) {
-        window.location.replace('/paper/'+response.merged);
-    }
-
-    makeTextEditable($('#paperTitle'), '/ajax/change-paper', 'title', paperMerged);
-    $(".unknownAuthorName").each(function(index) {
-        makeAuthorEditable($(this), paperMerged);
-    });
-    $('.annotate-paper-radio').change(function(){
-        console.log($(this));
-        var value = $(this).val();
-        $.ajax({url:'/ajax/'+$(this).attr('name')+'-'+value})
-    });
-});
-
-{% endif %}
 {% if paper.has_many_authors %}
 $(function(){
     var summary = $('#authorSummary').clone();

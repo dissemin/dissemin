@@ -21,36 +21,6 @@
     function changeDisplay () {
 	   $(".ulContainer").toggleClass("mosaic-on");
 	}
-{% if request.user.is_authenticated %}
-    $(function(){
-
-    function paperMerged(domElem, response) {
-        li = domElem.closest('li');
-        li.replaceWith('<li class="itemMerged">{% trans "Paper merged with " %}<a href="/paper/'+
-            response.merged+'">"'+response.merged_title+'"</a></li>');
-    }
-
-    $(".paperItemTitle").each(function(index) {
-        makeTextEditable($(this), '/ajax/change-paper', 'title', paperMerged);
-    });
-
-    $(".unknownAuthorName").each(function(index) {
-        makeAuthorEditable($(this), paperMerged);
-    });
-    {% if researcher %}
-    makeTextEditable($('#researcher-role'), '/ajax/change-researcher', 'role', function(a,b) { ; });
-    {% endif %}
-    });
-{% endif %}
-{% if request.user.is_authenticated %}
-    $(function(){
-        $('.annotate-paper-radio').change(function(){
-            console.log($(this));
-            var value = $(this).val();
-            $.ajax({url:'/ajax/'+$(this).attr('name')+'-'+value})
-        });
-    });
-{% endif %}
 {% if researcher.current_task %}
     function pollHarvesting(){
         console.log('pollHarvesting()');

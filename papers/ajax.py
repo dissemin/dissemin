@@ -40,7 +40,6 @@ from papers.user import *
 from papers.forms import AddResearcherForm
 from papers.utils import iunaccent, sanitize_html
 
-from time import sleep # TODO delete me
 import os.path
 
 # General function used to change a CharField in a model with ajax
@@ -204,13 +203,13 @@ def changePublisherStatus(request):
         return HttpResponseNotFound('NOK: '+message, content_type='text/plain')
 
 urlpatterns = patterns('',
-    url(r'^annotate-paper-(?P<pk>\d+)-(?P<status>\d+)$', annotatePaper, name='ajax-annotatePaper'),
-    url(r'^delete-researcher-(?P<pk>\d+)$', deleteResearcher, name='ajax-deleteResearcher'),
-    url(r'^change-department$', changeDepartment, name='ajax-changeDepartment'),
-    url(r'^change-paper$', changePaper, name='ajax-changePaper'),
-    url(r'^change-researcher$', changeResearcher, name='ajax-changeResearcher'),
-    url(r'^change-author$', changeAuthor, name='ajax-changeAuthor'),
-    url(r'^add-researcher$', addResearcher, name='ajax-addResearcher'),
+#    url(r'^annotate-paper-(?P<pk>\d+)-(?P<status>\d+)$', annotatePaper, name='ajax-annotatePaper'),
+#    url(r'^delete-researcher-(?P<pk>\d+)$', deleteResearcher, name='ajax-deleteResearcher'),
+#    url(r'^change-department$', changeDepartment, name='ajax-changeDepartment'),
+#    url(r'^change-paper$', changePaper, name='ajax-changePaper'),
+#    url(r'^change-researcher$', changeResearcher, name='ajax-changeResearcher'),
+#    url(r'^change-author$', changeAuthor, name='ajax-changeAuthor'),
+#    url(r'^add-researcher$', addResearcher, name='ajax-addResearcher'),
     url(r'^change-publisher-status$', changePublisherStatus, name='ajax-changePublisherStatus'),
     url(r'^harvesting-status-(?P<pk>\d+)$', harvestingStatus, name='ajax-harvestingStatus'),
 )
