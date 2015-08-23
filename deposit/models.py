@@ -61,6 +61,6 @@ class DepositRecord(models.Model):
         if self.identifier:
             return self.identifier
         else:
-            return _('Deposit')
+            return unicode(_('Deposit'))
 
 

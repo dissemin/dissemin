@@ -942,7 +942,7 @@ class Publication(models.Model):
 
 # Rough data extracted through OAI-PMH
 class OaiSource(models.Model):
-    identifier = models.CharField(max_length=300)
+    identifier = models.CharField(max_length=300, unique=True)
     name = models.CharField(max_length=100)
     oa = models.BooleanField(default=False)
     priority = models.IntegerField(default=1)
@@ -952,6 +952,9 @@ class OaiSource(models.Model):
     last_status_update = models.DateTimeField(auto_now=True)
     def __unicode__(self):
         return self.name
+
+    class Meta:
+        verbose_name = "OAI source"
 
 class OaiRecord(models.Model):
     source = models.ForeignKey(OaiSource)
@@ -1089,6 +1092,9 @@ class OaiRecord(models.Model):
                     Q(pdf_url__isnull=True), about=about)[:1]
             for m in matches:
                 return m
+
+    class Meta:
+        verbose_name = "OAI record"
 
 # A singleton to link to a special instance of AccessStatistics for all papers
 class PaperWorld(SingletonModel):
