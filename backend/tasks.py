@@ -88,7 +88,7 @@ def init_profile_from_orcid(pk):
 
 
 @shared_task(name='fetch_everything_for_researcher')
-@run_only_once('researcher', keys=['pk'])
+@run_only_once('researcher', keys=['pk'], timeout=15*60)
 def fetch_everything_for_researcher(pk):
     try:
         r = Researcher.objects.get(pk=pk)
