@@ -69,6 +69,8 @@ def init_profile_from_orcid(pk):
     try:
         r = Researcher.objects.get(pk=pk)
         update_task = lambda name: update_researcher_task(r, name)
+        update_task('clustering')
+        clustering_context_factory.reclusterBatch(r)
         if r.orcid:
             update_task('orcid')
             num = fetch_orcid_records(r.orcid, use_doi=False)
