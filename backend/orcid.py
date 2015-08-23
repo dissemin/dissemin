@@ -90,7 +90,6 @@ def affiliate_author_with_orcid(ref_name, orcid, authors):
     max_sim = 0.
     for idx, name in enumerate(authors):
         cur_similarity = shallower_name_similarity(name, ref_name) 
-        print "shallower(%s,%s): %f" % (str(name),str(ref_name),cur_similarity)
         if cur_similarity > max_sim:
             max_sim_idx = idx
             max_sim = cur_similarity

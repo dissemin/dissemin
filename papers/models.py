@@ -711,7 +711,7 @@ class Paper(models.Model):
         OaiRecord.objects.filter(about=paper.pk).update(about=self.pk)
         Publication.objects.filter(paper=paper.pk).update(paper=self.pk)
         Annotation.objects.filter(paper=paper.pk).update(paper=self.pk)
-        self.update_author_names(paper.author_names())
+        self.update_author_names(map(lambda n: (n.first,n.last), paper.author_names()))
         if paper.last_annotation:
             self.last_annotation = None
             for annot in self.annotation_set.all().order_by('-timestamp'):
@@ -1100,6 +1100,10 @@ class PaperWorld(SingletonModel):
             self.stats = AccessStatistics.objects.create()
             self.save()
         self.stats.update(Paper.objects.all())
+
+    @property
+    def object_id(self):
+        return ''
 
     def __unicode__(self):
         return "All papers"

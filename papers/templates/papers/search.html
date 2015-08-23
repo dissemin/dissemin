@@ -9,6 +9,10 @@
 {{ head_search_description }}
 {% endblock %}
 
+{% block extra_head %}
+{% include "statistics/headers.html" %}
+{% endblock %}
+
 {% block bodyTitle %}
 {{ search_description }}
 {% endblock %}
@@ -92,6 +96,7 @@
         {% if request.user.is_superuser and researcher.email %}
         <p>{% trans "Address:" %} {{ researcher.email }}</p>
         {% endif %}
+        {% include "statistics/pie.html" with obj=researcher stats_counter=1 %}
         {% if request.user.is_superuser %}
         <p>{% trans "Names:" %}
             <ul>

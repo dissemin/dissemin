@@ -21,7 +21,7 @@ $(function() {
     { "label":"{% trans 'Unknown sharing policy' %}",
       "value":{{ stats.num_unk }},
       "url": "{{ object_id | statsurl:"unk" }}" },
-    { "label":"{% trans 'Sharing forbidden by the publisher' %}",
+    { "label":"{% trans 'Publisher forbids sharing' %}",
       "value":{{ stats.num_closed }},
       "url":"{{ object_id | statsurl:"closed" }}" } ];
 
