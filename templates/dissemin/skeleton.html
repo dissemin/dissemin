@@ -65,6 +65,9 @@
                     <div class="collapse navbar-collapse" id="navbar-collapse">
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="/">Home</a></li>
+                        {% if request.user.is_authenticated %}
+                            <li><a href="{% url 'my-profile' %}">My profile</a></li>
+                        {% endif %}
                             <li><a href="{% url 'faq' %}">FAQ</a></li>
                         {% if request.user.is_authenticated %}
                             <li class="dropdown">
