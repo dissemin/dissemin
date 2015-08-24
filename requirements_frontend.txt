@@ -12,3 +12,4 @@ PyPDF2
 django-allauth
 django-redis-cache
 django-solo
+requests
