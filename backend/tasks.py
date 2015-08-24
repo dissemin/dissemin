@@ -76,6 +76,9 @@ def init_profile_from_orcid(pk):
             num = fetch_orcid_records(r.orcid, use_doi=False)
             r.empty_orcid_profile = (num == 0)
             r.save(update_fields=['empty_orcid_profile'])
+        if r.empty_orcid_profile != False:
+            update_task('crossref')
+            fetch_dois_for_researcher(pk)
         update_task('oai')
         fetch_records_for_researcher(pk)
     finally:
@@ -134,6 +137,7 @@ def fetch_records_for_researcher(pk, signature=True):
 def recluster_researcher(pk):
     r = Researcher.objects.get(pk=pk)
     clustering_context_factory.reclusterBatch(r)
+    r.update_stats()
 
 @shared_task(name='fetch_dois_for_researcher')
 def fetch_dois_for_researcher(pk):
