@@ -48,7 +48,7 @@ def get_homepage_from_orcid_profile(profile):
     """
     Extract an URL for that researcher (if any)
     """
-    lst = jpath('orcid-profile/orcid-bio/researcher-urls/researcher-url', profile)
+    lst = jpath('orcid-profile/orcid-bio/researcher-urls/researcher-url', profile, default=[])
     for url in lst:
         val = jpath('url/value', url)
         name = jpath('url-name/value', url).lower()
