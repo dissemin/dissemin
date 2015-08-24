@@ -175,6 +175,10 @@ class NameSimilarityTest(unittest.TestCase):
         self.assertAlmostEqual(
                 name_similarity(('Robin', 'Ryder'),('Robin J.', 'Ryder')), 0.7)
 
+    def test_multiple(self):
+        self.assertAlmostEqual(
+                name_similarity(('Juan Pablo','Corella'),('J. Pablo','Corella')), 1.0)
+
     def test_reverse(self):
         self.assertAlmostEqual(
                 name_similarity(('W. Timothy','Gowers'), ('Timothy','Gowers') ), 0.7)

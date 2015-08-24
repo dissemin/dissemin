@@ -148,6 +148,8 @@ def kill_html(s):
 
 ##### Paper fingerprinting
 
+from papers.name import split_name_words
+
 stripped_chars = re.compile(r'[^- a-z0-9]')
 def create_paper_plain_fingerprint(title, authors, year):
     title = kill_html(title)
@@ -170,12 +172,17 @@ def create_paper_plain_fingerprint(title, authors, year):
         # initials = map(lambda x: x[0].lower(), split_words(author[0]))
 
         # Last name, without the small words such as "van", "der", "de"…
-        # We could remove this filter? Or not as it is useful to get rid of name splitting errors
-        last_words = filter(lambda x: x[0].isupper(), split_words(author[1]))
-
+        last_name_words, last_name_separators = split_name_words(author[1])
+        last_words = []
+        for i in range(len(last_name_words)):
+            if (last_name_words[i][0].isupper() or
+                (i > 0 and last_name_separators[i-1] == '-')):
+                last_words.append(last_name_words[i])
+             
         # If no word was uppercased, fall back on all the words
         if not last_words:
-            last_words = split_words(author[1])
+            last_words = last_name_words
+
         # Lowercase
         last_words = map(ulower, last_words)
         fp = '-'.join(last_words)

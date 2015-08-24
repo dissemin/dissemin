@@ -504,9 +504,13 @@ def unify_name_lists(a,b):
     result = []
     while iA < len(a) or iB < len(b):
         if iA == len(a):
+            idxB = b[iB][0]
+            rankB = (idxB+1)/lenB
             result.append((b[iB][1],(rankB+1)/lenB,(None,iB)))
             iB += 1
         elif iB == len(b):
+            idxA = a[iA][0]
+            rankA = (idxA+1)/lenA
             result.append((a[iA][1],(rankA+1)/lenA,(iA,None)))
             iA += 1
         else:
@@ -517,27 +521,29 @@ def unify_name_lists(a,b):
             rankA = (idxA+1)/lenA
             rankB = (idxB+1)/lenB
 
-            if nameA[1] == nameB[1]:
-                unified = name_unification(nameA,nameB)
-                if unified is not None:
-                    result.append((unified,0.5*(rankA+rankB),(idxA,idxB)))
-                elif shallower_name_similarity(nameA, nameB) > 0.:
-                    # Those two names might refer to the same person
-                    # default to the first one as unification failed
-                    result.append((nameA,rankA,(idxA,None)))
-                else:
-                    # Those two names look incompatible
-                    result.append((nameA,rankA,(idxA,None)))
-                    result.append((nameB,rankB,(None,idxB)))
+            unified = name_unification(nameA,nameB)
+            if unified is not None:
+                result.append((unified,0.5*(rankA+rankB),(idxA,idxB)))
                 iA += 1
                 iB += 1
+            elif shallower_name_similarity(nameA, nameB) > 0.:
+                # Those two names might refer to the same person
+                # default to the first one as unification failed
+                result.append((nameA,rankA,(idxA,None)))
+                iA += 1
+                iB += 1
+            elif nameA[1] == nameB[1]:
+                # Those two names look incompatible because of their first names
+                result.append((nameA,rankA,(idxA,None)))
+                result.append((nameB,rankB,(None,idxB)))
+                iA += 1
+                iB += 1
+            elif nameA[1] < nameB[1]:
+                result.append((nameA,rankA,(idxA,None)))
+                iA += 1
             else:
-                if nameA[1] < nameB[1]:
-                    result.append((nameA,rankA,(idxA,None)))
-                    iA += 1
-                else:
-                    result.append((nameB,rankB,(None,idxB)))
-                    iB += 1
+                result.append((nameB,rankB,(None,idxB)))
+                iB += 1
 
     result = map(lambda (name,rank,idx):(name,idx), sorted(result, key=lambda x:x[1]))
 
