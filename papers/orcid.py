@@ -83,13 +83,15 @@ def get_other_names_from_orcid_profile(profile):
     names = []
     credit_name = jpath('credit-name/value', name_item)
     if credit_name is not None:
+        print "Found credit name "+unicode(credit_name)
         names.append((normalize_name_words(jpath('given-names/value', name_item)),
             normalize_name_words(jpath('family-name/value', name_item))))
-    other_names = jpath('other-names', name_item, default=[])
+    other_names = jpath('other-names/other-name', name_item, default=[])
     for name in other_names:
         val = name.get('value')
         if val is not None:
             names.append(parse_comma_name(val))
+    print(names)
     return names
 
 

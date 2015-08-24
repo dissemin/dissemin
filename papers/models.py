@@ -33,7 +33,7 @@ from celery.execute import send_task
 from papers.utils import nstr, iunaccent, create_paper_plain_fingerprint
 from papers.name import match_names, name_similarity, unify_name_lists
 from papers.utils import remove_diacritics, sanitize_html, validate_orcid, affiliation_is_greater
-from papers.orcid import get_orcid_profile, get_name_from_orcid_profile
+from papers.orcid import *
 
 from statistics.models import AccessStatistics
 from publishers.models import Publisher, Journal, OA_STATUS_CHOICES, OA_STATUS_PREFERENCE, DummyPublisher
@@ -195,10 +195,21 @@ class Researcher(models.Model):
         for name in self.variants_queryset():
             sim = name_similarity((name.first,name.last),(self.name.first,self.name.last))
             if sim > 0 and name.id not in current_name_variants:
-                nv = NameVariant.objects.create(name=name, researcher=self, confidence=sim)
-                if name.best_confidence < sim or reset:
-                    name.best_confidence = sim
-                    name.save(update_fields=['best_confidence'])
+                self.add_name_variant(name, sim, force_update=reset)
+
+    def add_name_variant(self, name, confidence, force_update=False):
+        """
+        Add a name variant with the given confidence and update
+        the best_confidence field of the name accordingly.
+
+        :param force_update: set the best_confidence even if the current value is
+            higher.
+        """
+        nv = NameVariant.objects.get_or_create(
+                name=name, researcher=self, defaults={'confidence':confidence})
+        if name.best_confidence < confidence or force_update:
+            name.best_confidence = confidence
+            name.save(update_fields=['best_confidence'])
 
     stats = models.ForeignKey(AccessStatistics, null=True)
     def update_stats(self):
@@ -236,6 +247,11 @@ class Researcher(models.Model):
             email = get_email_from_orcid_profile(profile)
             researcher = Researcher.create_from_scratch(name[0],name[1], orcid=orcid,
                     user=user, homepage=homepage, email=email)
+            for variant in get_other_names_from_orcid_profile(profile):
+                confidence = name_similarity(variant, variant)
+                name = Name.lookup_name(variant)
+                researcher.add_name_variant(name, confidence)
+
         return researcher
 
     @classmethod
