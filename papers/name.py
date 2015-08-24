@@ -191,28 +191,32 @@ def name_signature(first, last):
 
 ### Name similarity measure ###
 
-weight_initial_match = 0.2
-weight_full_match = 0.4
+weight_initial_match = 0.4
+weight_full_match = 0.8
 def weight_first_name(word):
     if len(word) > 1:
         return weight_full_match
     else:
         return weight_initial_match
 
+def weight_first_names(name_pair):
+    a,b = name_pair
+    return min(weight_first_name(a),weight_first_name(b))
+
 def name_similarity(a,b):
     """
     Returns a float: how similar are these two names?
     Examples:
-    > ('Robin', 'Ryder'),('Robin', 'Ryder'): 1.0
-    > ('Robin', 'Ryder'),('R.', 'Ryder'): 0.2
-    > ('R.', 'Ryder'),('R.', 'Ryder'): 0.2
-    > ('Robin J.', 'Ryder'),('R.', 'Ryder'): 0.15
-    > ('Robin J.', 'Ryder'),('R. J.', 'Ryder'): 0.4
-    > ('R. J.', 'Ryder'),('J.', 'Ryder'): 0.2
-    > ('Claire', 'Mathieu'),('Claire', 'Kenyon-Mathieu'): 0
-    > ('Robin', 'Ryder'), ('Robin J.', 'Ryder') : 0.35
-    > ('W. Timothy','Gowers'), ('Timothy','Gowers') : 0.35
-    > ('Robin K.','Ryder'), ('Robin J.', 'Ryder'): 0
+    name_similarity(('Robin', 'Ryder'),('Robin', 'Ryder')) == 0.8
+    name_similarity(('Robin', 'Ryder'),('R.', 'Ryder')) == 0.4
+    name_similarity(('R.', 'Ryder'),('R.', 'Ryder')) == 0.4
+    name_similarity(('Robin J.', 'Ryder'),('R.', 'Ryder')) ==0.3
+    name_similarity(('Robin J.', 'Ryder'),('R. J.', 'Ryder')) == 0.8
+    name_similarity(('R. J.', 'Ryder'),('J.', 'Ryder')) == 0.3
+    name_similarity(('Robin', 'Ryder'),('Robin J.', 'Ryder')) == 0.7
+    name_similarity(('W. Timothy','Gowers'), ('Timothy','Gowers')) == 0.7
+    name_similarity(('Robin K.','Ryder'), ('Robin J.', 'Ryder')) == 0
+    name_similarity(('Claire', 'Mathieu'),('Claire', 'Kenyon-Mathieu') == 0
     """
 
     if not a or not b:
@@ -225,8 +229,8 @@ def name_similarity(a,b):
     lastB = iunaccent(lastB)
     if lastA != lastB:
         return 0.
-    if firstA == firstB:
-        return 1.
+    #if firstA == firstB:
+    #    return 1.
     partsA, sepsA = split_name_words(firstA)
     partsB, sepsB = split_name_words(firstB)
     parts = zip(partsA, partsB)
@@ -241,7 +245,7 @@ def name_similarity(a,b):
     sumscores = 0
     for i in range(maxlen):
         if i < len(parts):
-            sumscores += weight_first_name(parts[i][0])
+            sumscores += weight_first_names(parts[i])
         elif i < len(partsA):
             sumscores -= 0.25*weight_first_name(partsA[i])
         else:

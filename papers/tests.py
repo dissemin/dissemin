@@ -25,6 +25,7 @@ import unittest
 import django.test
 from papers.name import *
 from papers.utils import unescape_latex, remove_latex_math_dollars, validate_orcid, remove_latex_braces
+from papers.orcid import *
 
 class MatchNamesTest(unittest.TestCase):
     def test_simple(self):
@@ -156,6 +157,50 @@ class RecapitalizeWordTest(unittest.TestCase):
     def test_unicode(self):
         self.assertEqual(recapitalize_word('ÉMILIE'), 'Émilie')
         self.assertEqual(recapitalize_word('JOSÉ'), 'José')
+
+class NameSimilarityTest(unittest.TestCase):
+    def test_matching(self):
+        self.assertAlmostEqual(
+                name_similarity(('Robin', 'Ryder'),('Robin', 'Ryder')), 0.8)
+        self.assertAlmostEqual(
+                name_similarity(('Robin', 'Ryder'),('R.', 'Ryder')), 0.4)
+        self.assertAlmostEqual(
+                name_similarity(('R.', 'Ryder'),('R.', 'Ryder')), 0.4)
+        self.assertAlmostEqual(
+                name_similarity(('Robin J.', 'Ryder'),('R.', 'Ryder')), 0.3)
+        self.assertAlmostEqual(
+                name_similarity(('Robin J.', 'Ryder'),('R. J.', 'Ryder')), 0.8)
+        self.assertAlmostEqual(
+                name_similarity(('R. J.', 'Ryder'),('J.', 'Ryder')), 0.3)
+        self.assertAlmostEqual(
+                name_similarity(('Robin', 'Ryder'),('Robin J.', 'Ryder')), 0.7)
+
+    def test_reverse(self):
+        self.assertAlmostEqual(
+                name_similarity(('W. Timothy','Gowers'), ('Timothy','Gowers') ), 0.7)
+
+    def test_mismatch(self):
+        self.assertAlmostEqual(
+                name_similarity(('Robin K.','Ryder'), ('Robin J.', 'Ryder')), 0)
+        self.assertAlmostEqual(
+                name_similarity(('Claire', 'Mathieu'),('Claire', 'Kenyon-Mathieu')), 0)
+
+    def test_symmetric(self):
+        pairs = [ 
+            (('Robin', 'Ryder'),('Robin', 'Ryder')),
+            (('Robin', 'Ryder'),('R.', 'Ryder')),
+            (('R.', 'Ryder'),('R.', 'Ryder')),
+            (('Robin J.', 'Ryder'),('R.', 'Ryder')),
+            (('Robin J.', 'Ryder'),('R. J.', 'Ryder')),
+            (('R. J.', 'Ryder'),('J.', 'Ryder')),
+            (('Robin', 'Ryder'),('Robin J.', 'Ryder')),
+            (('W. Timothy','Gowers'), ('Timothy','Gowers') ),
+            (('Robin K.','Ryder'), ('Robin J.', 'Ryder')),
+            (('Claire', 'Mathieu'),('Claire', 'Kenyon-Mathieu')),
+        ]
+        for a,b in pairs:
+            self.assertAlmostEqual(name_similarity(a,b),name_similarity(b,a))
+
 
 class ParseCommaNameTest(unittest.TestCase):
     def test_simple(self):
@@ -328,4 +373,16 @@ class ValidateOrcidTest(unittest.TestCase):
 
     def test_whitespace(self):
         self.assertEqual(validate_orcid('\t0000-0002-8612-8827  '), '0000-0002-8612-8827')
+
+class GetNameFromOrcidProfileTest(unittest.TestCase):
+    def get(self, id):
+        return get_name_from_orcid_profile(get_orcid_profile(id))
+
+    def test_simple(self):
+        self.assertEqual(self.get('0000-0002-8612-8827'), ('Antonin','Delpeuch'))
+        self.assertEqual(self.get('0000-0003-0524-631X'), ('Thomas','Bourgeat'))
+
+    def test_credit(self):
+        self.assertEqual(self.get('0000-0003-3397-9895'), ('Sergey M.','Natanzon'))
+        self.assertEqual(self.get('0000-0001-9547-293X'), ('Darío', 'Álvarez'))
 

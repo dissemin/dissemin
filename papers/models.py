@@ -232,9 +232,10 @@ class Researcher(models.Model):
             if profile is None:
                 profile = get_orcid_profile(orcid) 
             name = get_name_from_orcid_profile(profile)
-            # TODO extract email & homepage from profile
+            homepage = get_homepage_from_orcid_profile(profile)
+            email = get_email_from_orcid_profile(profile)
             researcher = Researcher.create_from_scratch(name[0],name[1], orcid=orcid,
-                    user=user)
+                    user=user, homepage=homepage, email=email)
         return researcher
 
     @classmethod
