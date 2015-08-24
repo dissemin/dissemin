@@ -3,6 +3,7 @@
 {% load staticfiles %}
 {% load bootstrap_pagination %}
 {% load statuses %}
+{% load domain %}
 {% load i18n %}
 
 {% block headTitle %}
@@ -58,10 +59,10 @@
         data-pk="{{ researcher.pk }}">{{ researcher.role }}</span></p>
         {% endif %}
         {% if researcher.homepage %}
-        <p><a href="{{ researcher.homepage }}">{% trans "Homepage" context "Researcher" %}</a></p>
+        <p><span class="glyphicon glyphicon-home"></span> <a href="{{ researcher.homepage }}">{{ researcher.homepage|domain }}</a></p>
         {% endif %}
         {% if researcher.orcid %}
-        <p>ORCiD: <a href="http://orcid.org/{{ researcher.orcid }}">{{ researcher.orcid }}</a></p>
+        <p><a href="http://orcid.org/{{ researcher.orcid }}"><img src="{% static "img/orcid-small.png" %}" alt="ORCID" /> {{ researcher.orcid }}</a></p>
         {% endif %}
         {% if request.user.is_superuser and researcher.email %}
         <p>{% trans "Address:" %} {{ researcher.email }}</p>

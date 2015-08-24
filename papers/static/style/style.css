@@ -351,6 +351,7 @@ h1#paperTitle {
 	text-align:justify;
 	max-width:500px;
 	margin-left:50px;
+    margin-top:10px;
 }
 
 .paperDeleteButton, .researcherDeleteButton
@@ -668,6 +669,7 @@ h1#paperTitle {
 .detailsContent
 {
     border-top: 2px solid #2A6496;
+    margin-bottom: 30px;
 }
 
 #detail-name {
