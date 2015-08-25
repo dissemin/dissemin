@@ -26,6 +26,7 @@ import django.test
 from papers.name import *
 from papers.utils import unescape_latex, remove_latex_math_dollars, validate_orcid, remove_latex_braces
 from papers.orcid import *
+from papers.bibtex import parse_authors_list
 
 class MatchNamesTest(unittest.TestCase):
     def test_simple(self):
@@ -233,6 +234,11 @@ class ParseCommaNameTest(unittest.TestCase):
         self.assertEqual(parse_comma_name('Neal E. Young'), ('Neal E.', 'Young'))
 
     @unittest.expectedFailure
+    def test_collapsed_initials(self):
+        self.assertEqual(parse_comma_name('Badiou CS'), ('C. S.', 'Badiou'))
+        self.assertEqual(parse_comma_name('Tony LI'), ('Tony', 'Li'))
+
+    @unittest.expectedFailure
     def test_hard_cases(self):
         # TODO ?
         self.assertEqual(parse_comma_name('W. Timothy Gowers'), ('W. Timothy', 'Gowers'))
@@ -361,6 +367,16 @@ class RemoveLatexBracesTest(unittest.TestCase):
 
     def test_multiple(self):
         self.assertEqual(remove_latex_braces('J{é}r{é}mie'), 'Jérémie')
+
+class ParseAuthorsListTest(unittest.TestCase):
+    def test_simple(self):
+        self.assertEqual(parse_authors_list('Claire Toffano-Nioche and Daniel Gautheret and Fabrice Leclerc'),
+                [('Claire','Toffano-Nioche'),('Daniel','Gautheret'),('Fabrice','Leclerc')])
+
+    def test_etal(self):
+        self.assertEqual(parse_authors_list('Claire Toffano-Nioche and et al.'),
+                [('Claire','Toffano-Nioche')])
+
 
 class ValidateOrcidTest(unittest.TestCase):
     def test_simple(self):

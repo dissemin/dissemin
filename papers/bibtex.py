@@ -62,7 +62,10 @@ def insert_newlines_in_bibtex(bib):
     bib3 = bibtex_end_no_newline.sub('}\n}', bib2)
     return bib3
 
+et_al_re = re.compile(r'( and )?\s*et\s+al\.?\s*$', re.IGNORECASE | re.UNICODE)
 def parse_authors_list(authors):
+    authors = unescape_latex(authors)
+    authors = et_al_re.sub('', authors)
     return map(parse_comma_name,
                 remove_latex_braces(unescape_latex(authors)).split(' and '))
 

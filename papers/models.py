@@ -523,7 +523,7 @@ class Paper(models.Model):
         otherwise returns only the interesting_authors()
         """
         if self.has_many_authors():
-            return self.interesting_authors()
+            return self.interesting_authors
         else:
             return self.sorted_authors
 
