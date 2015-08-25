@@ -427,6 +427,12 @@ def zipNone(lstA, lstB):
             yield (objA,objB)
     return list(aux())
 
+def num_caps(a):
+    """
+    Number of capitalized letters
+    """
+    return sum(map(lambda c: 1 if c.isupper() else 0, a))
+
 def name_unification(a, b):
     """
     Returns the unified name of two matching names
@@ -438,7 +444,7 @@ def name_unification(a, b):
     firstA, lastA = a
     firstB, lastB = b
 
-    if lastA != lastB:
+    if lastA.lower() != lastB.lower():
         return None
 
     wordsA, sepsA = split_name_words(firstA) 
@@ -451,6 +457,12 @@ def name_unification(a, b):
         elif b is None:
             return a
         elif len(a) < len(b):
+            return b
+        elif len(b) < len(a):
+            return a
+        elif num_caps(b) < num_caps(a):
+            return a
+        elif num_caps(a) < num_caps(b):
             return b
         else:
             return a

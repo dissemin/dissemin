@@ -154,6 +154,7 @@ class RecapitalizeWordTest(unittest.TestCase):
         self.assertEqual(recapitalize_word('van'),'van')
         self.assertEqual(recapitalize_word('CLARK'),'Clark')
         self.assertEqual(recapitalize_word('GRANROTH-WILDING'),'Granroth-Wilding')
+        self.assertEqual(recapitalize_word('Jean-Pierre'), 'Jean-Pierre')
 
     def test_unicode(self):
         self.assertEqual(recapitalize_word('ÉMILIE'), 'Émilie')
@@ -260,6 +261,10 @@ class NameUnificationTest(unittest.TestCase):
 
     def test_uncommon_order(self):
         self.assertEqual(name_unification(('W. T.','Gowers'), ('Timothy','Gowers')), ('W. Timothy','Gowers'))
+
+    def test_fix_capitalization(self):
+        self.assertEqual(name_unification(('Marie-france','Sagot'),('Marie-France','Sagot')),('Marie-France','Sagot'))
+        self.assertEqual(name_unification(('Marie-France','Sagot'),('Marie-france','Sagot')),('Marie-France','Sagot'))
 
     def test_flattened_initials(self):
         self.assertEqual(name_unification(('J. P.','Gendre'), ('Jp.','Gendre')), ('J.-P.','Gendre'))
