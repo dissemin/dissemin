@@ -73,7 +73,7 @@ def init_profile_from_orcid(pk):
         clustering_context_factory.reclusterBatch(r)
         if r.orcid:
             update_task('orcid')
-            num = fetch_orcid_records(r.orcid, use_doi=False)
+            num = fetch_orcid_records(r.orcid)
             r.empty_orcid_profile = (num == 0)
             r.save(update_fields=['empty_orcid_profile'])
         if r.empty_orcid_profile != False:
