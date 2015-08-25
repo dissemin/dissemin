@@ -230,7 +230,7 @@
         {% if forloop.last %}</ul></div>{% endif %}
  {% empty %}
     {% if not researcher.current_task %}
-         <p>{% trans "No production found." %}</p>
+         <p class="notFound">{% trans "No production found." %}</p>
     {% endif %}
  {% endfor %}
  {% if search_results.paginator.num_pages > 1 %}

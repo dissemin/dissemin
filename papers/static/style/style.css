@@ -192,6 +192,14 @@ li
     /* padding-left: 0px; */
 }
 
+.notFound {
+    text-align: center;
+    font-size: 1.5em;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    color: #999;
+}
+
 .ulContainer
 {
     border-top: 1px solid rgba(192,188,206,1);

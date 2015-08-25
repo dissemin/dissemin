@@ -162,7 +162,9 @@ def fetch_orcid_records(id, profile=None, use_doi=True):
                 }
         contributors = map(get_contrib, j('work-contributors/contributor',[]))
 
-        authors = map(lambda x: parse_comma_name(x['name']), contributors)
+        author_names = filter(lambda x: x is not None, map(
+                              lambda x: x['name'], contributors))
+        authors = map(parse_comma_name, author_names)
         pubdate = None
         # ORCiD internal id
         identifier = j('put-code')

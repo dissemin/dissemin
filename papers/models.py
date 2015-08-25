@@ -205,6 +205,8 @@ class Researcher(models.Model):
         :param force_update: set the best_confidence even if the current value is
             higher.
         """
+        if name.id is None:
+            name.save()
         nv = NameVariant.objects.get_or_create(
                 name=name, researcher=self, defaults={'confidence':confidence})
         if name.best_confidence < confidence or force_update:

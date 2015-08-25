@@ -397,7 +397,7 @@ class OrcidRelevanceClassifier(RelevanceClassifier):
                 return 10.0 # then we give a very good confidence
             return 0.1*(features[1]-2) # otherwise a slightly negative confidence
         else: # otherwise we don't know any publication for sure…
-            return features[1] - 0.5
+            return features[1] - 0.4
 
 
 
