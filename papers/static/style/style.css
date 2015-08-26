@@ -465,6 +465,16 @@ h1#paperTitle {
     padding-left: 2px;
 }
 
+.helpPopover
+{
+    color: inherit;
+    border-bottom: 1px dotted black;
+}
+
+.helpPopover:hover, .helpPopover:link {
+    text-decoration: none;
+}
+
 /* Paper depositing */
 
 .depositSuccess {

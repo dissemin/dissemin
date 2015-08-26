@@ -3,13 +3,16 @@
 
 <div class="policyList">
 {% trans "Preprint:" as type_text %}
+{% trans "A preprint is a document produced by the authors without any interaction with the peer-reviewing process." as tte %}
 {% trans "preprint" as ttnp %}
-{% include "publishers/itemPolicy.html" with policy=publisher.preprint conditions=publisher.preprint_conditions type_text=type_text typ="preprint" type_text_no_punc=ttnp %}
+{% include "publishers/itemPolicy.html" with policy=publisher.preprint conditions=publisher.preprint_conditions type_text=type_text type_explanation=tte typ="preprint" type_text_no_punc=ttnp %}
 {% trans "Postprint:" as type_text %}
+{% trans "Postprints differ from preprints in that they include the changes suggested by the reviewers. They are not edited by the publisher." as tte %}
 {% trans "postprint" as ttnp %}
-{% include "publishers/itemPolicy.html" with policy=publisher.postprint conditions=publisher.postprint_conditions type_text=type_text typ="postprint" type_text_no_punc=ttnp %}
+{% include "publishers/itemPolicy.html" with policy=publisher.postprint conditions=publisher.postprint_conditions type_text=type_text type_explanation=tte typ="postprint" type_text_no_punc=ttnp %}
 {% trans "Published version:" as type_text %}
+{% trans "The published version is the final version of the paper, as formatted by the publisher." as tte %}
 {% trans "published version" as ttnp %}
-{% include "publishers/itemPolicy.html" with policy=publisher.pdfversion conditions=publisher.pdfversion_conditions type_text=type_text typ="pdfversion" type_text_no_punc=ttnp %}
+{% include "publishers/itemPolicy.html" with policy=publisher.pdfversion conditions=publisher.pdfversion_conditions type_text=type_text type_explanation=tte typ="pdfversion" type_text_no_punc=ttnp %}
 </div>
 

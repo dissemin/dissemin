@@ -29,6 +29,8 @@ $(function(){
     $('#waitingArea').hide();
     $('#uploadFileId').val('');
 
+    $('.helpPopover').popover({trigger: "hover"});
+
     /* Panels */
     $('#optionUploadType').collapse({
         parent:$('#uploadOptions'),

@@ -32,6 +32,9 @@
 {% endblock %}
 
 {% block jsScript %}
+$(function(){
+$('.helpPopover').popover({trigger: "hover"});
+});
 {% if paper.has_many_authors %}
 $(function(){
     var summary = $('#authorSummary').clone();
