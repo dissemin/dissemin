@@ -220,7 +220,12 @@ h1
 {
     display: inline-block;
     width: 180px;
-    margin-bottom: 10px;
+    margin: 10px;
+}
+
+.teamMember img
+{
+    width: 100%;
 }
 
 .memberName
