@@ -468,7 +468,7 @@ h1#paperTitle {
 .helpPopover
 {
     color: inherit;
-    border-bottom: 1px dotted black;
+    border-bottom: 1px dashed black;
 }
 
 .helpPopover:hover, .helpPopover:link {
@@ -684,9 +684,11 @@ h1#paperTitle {
     font-size: 1.2em;
 }
 
-.detailsContent
-{
+.detailsContent {
     border-top: 2px solid #2A6496;
+}
+
+.summaryLists .detailsContent {
     margin-bottom: 30px;
 }
 
