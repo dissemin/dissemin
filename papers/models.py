@@ -609,6 +609,21 @@ class Paper(models.Model):
         self.save()
         self.invalidate_cache()
 
+    def status_helptext(self):
+        """
+        Helptext displayed next to the paper logo
+        """
+        if self.oa_status == 'OA':
+            return _('This paper is made freely available by the publisher.')
+        if self.pdf_url is not None:
+            return _('This paper is available in a repository.')
+        if self.oa_status == 'OK' and self.pdf_url is None:
+            return _('This paper was not found in any repository, but could be made available legally by the author.')
+        if self.oa_status == 'NOK':
+            return _('The publisher of this paper forbids its archiving.')
+        if self.oa_status == 'UNK':
+            return _('This paper was not found in any repository; the policy of its publisher is unknown or unclear.')
+
     def publications_with_unique_publisher(self):
         seen_publishers = set()
         for publication in self.publication_set.all():

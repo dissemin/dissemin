@@ -40,7 +40,7 @@ def varyQueryArguments(key, args, possibleValues):
             queryargs[key] = s[0]
         else:
             queryargs.pop(key)
-        variants.append((s[0], s[1], queryargs))
+        variants.append(s+(queryargs,))
     return variants
 
 

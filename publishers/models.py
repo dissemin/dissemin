@@ -30,10 +30,10 @@ get_model = apps.get_model
 from statistics.models import AccessStatistics
 
 OA_STATUS_CHOICES = (
-        ('OA', _('Open access')),
-        ('OK', _('Allows pre/post prints')),
-        ('NOK', _('Forbids pre/post prints')),
-        ('UNK', _('Policy unclear')),
+        ('OA', _('Open access'), _('Freely available from the publisher.')),
+        ('OK', _('Allows pre/post prints'), _('The publisher sells copies but allows authors to deposit some version of the article in a repository.')),
+        ('NOK', _('Forbids pre/post prints'), _('The publisher forbids authors to deposit any version of their article online.')),
+        ('UNK', _('Policy unclear'), _('For complicated policies, unknown publishers and unpublished documents.')),
    )
 
 POLICY_CHOICES = [('can', _('Allowed')),
@@ -43,7 +43,8 @@ POLICY_CHOICES = [('can', _('Allowed')),
                   ('unknown', _('Unknown'))]
 
 
-OA_STATUS_PREFERENCE = [x for x,y in OA_STATUS_CHOICES]
+OA_STATUS_PREFERENCE = [x[0] for x in OA_STATUS_CHOICES]
+OA_STATUS_CHOICES_WITHOUT_HELPTEXT = [(x[0],x[1]) for x in OA_STATUS_CHOICES]
 
 class DummyPublisher(object):
     pk = None
@@ -71,7 +72,7 @@ class Publisher(models.Model):
     preprint = models.CharField(max_length=32, choices=POLICY_CHOICES, default='unknown')
     postprint = models.CharField(max_length=32, choices=POLICY_CHOICES, default='unknown')
     pdfversion = models.CharField(max_length=32, choices=POLICY_CHOICES, default='unknown')
-    oa_status = models.CharField(max_length=32, choices=OA_STATUS_CHOICES, default='UNK')
+    oa_status = models.CharField(max_length=32, choices=OA_STATUS_CHOICES_WITHOUT_HELPTEXT, default='UNK')
 
     stats = models.ForeignKey(AccessStatistics, null=True)
 
