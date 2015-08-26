@@ -49,13 +49,15 @@ from publishers.views import varyQueryArguments
 from publishers.models import OA_STATUS_CHOICES
 from dissemin.settings import MEDIA_ROOT, UNIVERSITY_BRANDING, DEPOSIT_MAX_FILE_SIZE 
 
-from allauth.socialaccount.signals import pre_social_login, social_account_added
+from allauth.socialaccount.signals import post_social_login
 
 import json
 
 def fetch_on_orcid_login(sender, **kwargs):
     account = kwargs['sociallogin'].account
     orcid = account.uid
+    if not orcid:
+        return
     profile = account.extra_data
     user = None
     if '_user_cache' in account.__dict__:
@@ -69,7 +71,7 @@ def fetch_on_orcid_login(sender, **kwargs):
     else:
         r.fetch_everything_if_outdated()
 
-pre_social_login.connect(fetch_on_orcid_login)
+post_social_login.connect(fetch_on_orcid_login)
 
 # Number of papers shown on a search results page
 NB_RESULTS_PER_PAGE = 20
@@ -264,6 +266,4 @@ class AnnotationsView(generic.TemplateView):
         sorted_users = sorted(users, key=lambda x:-x.num_annot)
         filtered_users = filter(lambda x:x.num_annot > 0, sorted_users)
         return sorted_users
-
-
 

@@ -115,6 +115,9 @@ def fetch_orcid_records(id, profile=None, use_doi=True):
     # Get ORCiD profile
     if profile is None:
         profile = get_orcid_profile(id)
+    if profile is None:
+        print "ORCID profile %s not found, aborting" % id
+        return 0
 
     # Reference name
     ref_name = get_name_from_orcid_profile(profile)

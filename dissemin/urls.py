@@ -44,6 +44,9 @@ def handler500(request):
 class LoginView(allauth.account.views.LoginView):
     template_name = 'dissemin/login.html'
 
+class SandboxLoginView(allauth.account.views.LoginView):
+    template_name = 'dissemin/sandbox.html'
+
 def logoutView(request):
     logout(request)
     if 'HTTP_REFERER' in request.META:
@@ -76,6 +79,7 @@ urlpatterns = patterns('',
     url(r'^', include('deposit.urls')),
     # Social auth
     url(r'^accounts/login/$', LoginView.as_view(), name='login'),
+    url(r'^accounts/sandbox_login/$', SandboxLoginView.as_view(), name='sandbox-login'),
     url(r'^accounts/logout/$', logoutView, name='logout'),
     url(r'^accounts/', include('allauth.urls')),
 # Remove this in production
