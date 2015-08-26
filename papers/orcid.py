@@ -34,12 +34,20 @@ def jpath(path, js, default=None):
             return _walk(lst[1:], js.get(lst[0],{} if len(lst) > 1 else default))
     return _walk(path.split('/'), js)
 
-def get_orcid_profile(id):
+def get_orcid_profile(id, instance='orcid.org'):
+    if instance not in ['orcid.org','sandbox.orcid.org']:
+        raise ValueError('Unexpected instance')
     try:
         headers = {'Accept':'application/orcid+json'}
-        profile_req = requests.get('http://pub.orcid.org/v1.2/%s/orcid-profile' % id, headers=headers)
-        return profile_req.json()
-    except requests.exceptions.HTTPError:
+        profile_req = requests.get('http://pub.%s/v1.2/%s/orcid-profile' % (instance,id), headers=headers)
+        parsed = profile_req.json()
+        if parsed.get('orcid-profile') is None:
+            # TEMPORARY: also check from the sandbox
+            if instance == 'orcid.org':
+                return get_orcid_profile(id, instance='sandbox.orcid.org')
+            raise ValueError
+        return None
+    except (requests.exceptions.HTTPError, ValueError):
         raise MetadataSourceException('The ORCiD %s could not be found' % id)
     except (ValueError, TypeError) as e:
         raise MetadataSourceException('The ORCiD %s returned invalid JSON.' % id)

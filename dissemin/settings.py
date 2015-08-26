@@ -174,6 +174,7 @@ INSTALLED_APPS = (
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.orcid',
+    'allauth.socialaccount.providers.orcidsandbox',
     'statistics',
     'publishers',
     'papers',
