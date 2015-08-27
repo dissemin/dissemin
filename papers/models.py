@@ -529,6 +529,24 @@ class Paper(models.Model):
         else:
             return self.sorted_authors
 
+    @cached_property
+    def owners(self):
+        """
+        Returns the list of users that own this papers (listed as authors and identified as such).
+        """
+        authors = self.sorted_authors # These don't need to be sorted, but this property is cached
+        users = []
+        for a in authors:
+            if a.researcher and a.researcher.user:
+                users.append(a.researcher.user)
+        return users
+
+    def is_owned_by(self, user):
+        """
+        Is this user one of the owners of that paper?
+        """
+        return user in self.owners
+
     @property
     def toggled_visibility(self):
         if self.visibility == 'VISIBLE':

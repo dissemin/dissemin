@@ -100,11 +100,18 @@ $(function(){
     <p>
         {% blocktrans %}
             You can deposit the full text of your article. Dissemin will
-            send it to a repostory where it will be made freely available.
-            Please ensure that you are one of the authors of this paper or
-            that you have the permission to upload it on their behalf.
+            send it to a repository where it will be made freely available.
         {% endblocktrans %}
     </p>
+
+    {% if not is_owner %}
+    <div class="alert alert-warning" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign"></span>
+        You do not appear to be one of the authors of this paper.
+        By using this form, you certify that you have the permission to
+        upload it on their behalf.
+    </div>
+    {% endif %}
 </div>
 
 <span class="detailsTitle">{% trans "Document" %}</span>
@@ -176,9 +183,9 @@ $(function(){
         <span>{% trans "Processing deposit..." %}</span> <span class="waitingBird"><img src="{% static "img/animated-bird.gif" %}" /></span> <span>{% trans "please wait..." %}</span>
     </div>
     <p>
+        {% url 'tos' as tosurl %}
         {% blocktrans %}
-            By depositing your article to Zenodo through Dissemin, you agree to the terms of use of
-            both services.
+        By depositing your article on Zenodo via Dissemin, you agree to our <a href="{{ tosurl }}">terms of service</a>.
         {% endblocktrans %}
     </p>
 </div>

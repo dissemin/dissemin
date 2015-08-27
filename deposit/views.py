@@ -37,7 +37,12 @@ from papers.user import is_admin, is_authenticated
 @user_passes_test(is_authenticated)
 def start_view(request, pk):
     paper = get_object_or_404(Paper, pk=pk)
-    context = {'paper':paper, 'max_file_size':DEPOSIT_MAX_FILE_SIZE, 'zenodo_form':createZenodoForm(paper)}
+    context = {
+            'paper':paper,
+            'max_file_size':DEPOSIT_MAX_FILE_SIZE,
+            'zenodo_form':createZenodoForm(paper),
+            'is_owner':paper.is_owned_by(request.user),
+            }
     if request.GET.get('type') not in [None,'preprint','postprint','pdfversion']:
         return HttpResponseForbidden()
     return render(request, 'deposit/start.html', context)
