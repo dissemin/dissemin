@@ -135,6 +135,8 @@ def consolidate_publication(publi):
     Fetches the abstract from Zotero and adds it to the publication if it succeeds.
     """
     zotero = fetch_zotero_by_DOI(publi.doi)
+    if zotero is None:
+        return publi
     for item in zotero:
         if 'abstractNote' in item:
             publi.abstract = item['abstractNote']
