@@ -30,9 +30,11 @@ from django.utils.translation import ugettext_lazy as _
 from os.path import basename
 
 ZENODO_LICENSES_CHOICES = [
-   ('cc-zero', _('CC 0')),
-   ('cc-by', _('CC BY')),
-   ('cc-by-sa', _('CC BY SA')),
+   ('cc-zero', _('Creative Commons CCZero')),
+   ('cc-by', _('Creative Commons Attribution')),
+   ('cc-by-sa', _('Creative Commons Attribution-ShareAlike')),
+   ('cc-by-nc-4.0', _('Creative Commons Attribution-NonCommercial')),
+   ('cc-by-nd-4.0', _('Creative Commons Attribution-NoDerivatives')),
  ]
 
 from deposit.protocol import *
