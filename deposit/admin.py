@@ -27,4 +27,4 @@ class DepositRecordAdmin(admin.ModelAdmin):
    raw_id_fields = ('paper','user')
 
 admin.site.register(DepositRecord, DepositRecordAdmin)
-
+admin.site.register(Repository)

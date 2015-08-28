@@ -73,11 +73,6 @@ ROMEO_API_KEY = None
 # http://www.sherpa.ac.uk/romeo/apiregistry.php
 CORE_API_KEY = None
 
-# Zenodo API key
-# Used to upload papers. Get one at
-# https://zenodo.org/youraccount/register
-ZENODO_KEY = None
-
 ### DOI proxy ###
 # The interface where to get DOI metadata from.
 # 
@@ -180,6 +175,7 @@ INSTALLED_APPS = (
     'papers',
     'upload',
     'deposit',
+    'deposit.zenodo',
     'bootstrap_pagination',
     'solo',
     'debug_toolbar',
@@ -276,6 +272,9 @@ MEDIA_URL = '/media/'
 # To communicate with it, we need a "broker".
 # This is an example broker with Redis.
 BROKER_URL = 'redis://localhost:6379/0'
+# We also use Redis as result backend.
+CELERY_RESULT_BACKEND = BROKER_URL
+
 # For a RabbitMQ setting: BROKER_URL = 'amqp://guest:guest@127.0.0.1:5672//'
 import redis
 redis_client = redis.StrictRedis(host='localhost', port=6379, db=0)

@@ -28,7 +28,6 @@ from StringIO import StringIO
 from django.utils.translation import ugettext as __
 from django import forms
 from os.path import basename
-#from backend.crossref import consolidate_publication
 from dissemin.settings import ZENODO_KEY, DOI_PROXY_DOMAIN
 from papers.errors import MetadataSourceException
 from papers.models import OaiSource, OaiRecord
@@ -56,18 +55,6 @@ def fetch_zotero_by_DOI(doi):
         raise MetadataSourceException('Error while fetching Zotero metadata:\nInvalid JSON response.\n'+
                 'Error: '+str(e))
 
-def consolidate_publication(publi):
-    """
-    Fetches the abstract from Zotero and adds it to the publication if it succeeds.
-    """
-    zotero = fetch_zotero_by_DOI(publi.doi)
-    for item in zotero:
-        if 'abstractNote' in item:
-            publi.abstract = item['abstractNote']
-            publi.save(update_fields=['abstract'])
-    return publi
-
-
 def swordDocumentType(paper):
     tr = {
             'journal-article':('publication','article'),
@@ -86,15 +73,30 @@ def swordDocumentType(paper):
          }
     return tr[paper.doctype]
 
+def wrap_with_prefetch_status(baseWidget, callback, fieldname):
+    orig_render = baseWidget.render
+    def new_render(self, name, value, attrs=None):
+        base_html = orig_render(self, name, value, attrs)
+        if value:
+            return base_html
+        return ('<span class="prefetchingFieldStatus" data-callback="%s" data-fieldid="%s" data-fieldname="%s" data-objfieldid="%s"></span>' % (callback,name,attrs['id'],fieldname))+base_html
+    baseWidget.render = new_render
+    return baseWidget
+
 class ZenodoForm(forms.Form):
-    abstract = forms.CharField(label=__('Abstract'), required=False, widget=forms.Textarea)
-    license = forms.ChoiceField(label=__('License'), choices=ZENODO_LICENSES_CHOICES, initial='cc-by')
+    abstract = forms.CharField(label=__('Abstract'), required=False,
+            widget=wrap_with_prefetch_status(forms.Textarea, 'mycallback', 'abstract'))
+    license = forms.ChoiceField(label=__('License'), choices=ZENODO_LICENSES_CHOICES, initial='cc-by',
+            widget=forms.RadioSelect)
 
 def createZenodoForm(paper):
-    formdata = {'license':'cc-by'}
-    if paper.abstract is not None:
-        formdata['abstract'] = paper.abstract()
-    return ZenodoForm(formdata)
+    data = {}
+    data['license'] = 'cc-by'
+    if paper.abstract:
+        data['abstract'] = paper.abstract
+    else:
+        paper.consolidate_metadata(wait=False)
+    return ZenodoForm(initial=data)
 
 def createZenodoMetadata(paper, form):
     metadata = {}
@@ -123,19 +125,10 @@ def createZenodoMetadata(paper, form):
     metadata['creators'] = map(formatAuthor, paper.sorted_authors)
 
     # Abstract
-    abstract = ''
-    for record in oairecords:
-        if record.description and len(record.description) > len(abstract):
-            abstract = record.description
-    abstract = form.cleaned_data['abstract'] or abstract
-
-    if len(abstract) < 32: # that's really short for an abstract !
-        for publi in publications:
-            print "Consolidating!"
-            publi = consolidate_publication(publi)
-            if publi.abstract and len(publi.abstract) > len(abstract):
-                abstract = publi.abstract
-                break
+    # If we are currently fetching the abstract, wait for the task to complete
+    if paper.task:
+        paper.consolidate_metadata(wait=True)
+    abstract = form.cleaned_data['abstract'] or paper.abstract
 
     metadata['description'] = abstract
 

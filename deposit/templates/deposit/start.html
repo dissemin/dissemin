@@ -169,9 +169,9 @@ $(function(){
         </div>
         <div id="optionMetadata" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingMetadata">
             <div class="panel-body">
-                <table>
-                    {{ zenodo_form }}
-                </table>
+                {% for form in forms %}
+                    {{ form }}
+                {% endfor %}
             </div>
         </div>
     </div>

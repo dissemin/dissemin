@@ -30,17 +30,26 @@ from dissemin.settings import MEDIA_ROOT, UNIVERSITY_BRANDING, DEPOSIT_MAX_FILE_
 
 from deposit.models import *
 from deposit.forms import *
-from sword.submitOnZenodo import *
 from papers.models import Paper
 from papers.user import is_admin, is_authenticated
+
+def get_all_protocols(paper, user):
+    repositories = Repository.objects.all()
+    protocols = []
+    for r in repositories:
+        implem = r.protocol_for_deposit(paper, user)
+        if implem is not None:
+            protocols.append(implem)
+    return protocols
 
 @user_passes_test(is_authenticated)
 def start_view(request, pk):
     paper = get_object_or_404(Paper, pk=pk)
+    forms = map(lambda i: i.get_form(), get_all_protocols(paper, request.user))
     context = {
             'paper':paper,
             'max_file_size':DEPOSIT_MAX_FILE_SIZE,
-            'zenodo_form':createZenodoForm(paper),
+            'forms': forms,
             'is_owner':paper.is_owned_by(request.user),
             }
     if request.GET.get('type') not in [None,'preprint','postprint','pdfversion']:
@@ -50,52 +59,62 @@ def start_view(request, pk):
 @user_passes_test(is_authenticated)
 def submitDeposit(request, pk):
     paper = get_object_or_404(Paper, pk=pk)
-    if request.method == 'POST':
-        context = {'status':'error'}
-        form = PaperDepositForm(request.POST)
-        zenodoForm = ZenodoForm(request.POST)
+    if request.method != 'POST':
+        return HttpResponseForbidden()
+    context = {'status':'error'}
+    form = PaperDepositForm(request.POST)
+    if not form.is_valid():
+        context['form'] = form.errors
+        return HttpResponseForbidden(json.dumps(context), content_type='text/json')
 
-        if not form.is_valid():
-            context['form'] = form.errors
+    protocols = get_all_protocols(paper, request.user)
+
+    repositoryForms = map(lambda i: i.get_bound_form(request.POST), protocols)
+    for idx, f in enumerate(repositoryForms):
+        if not f.is_valid():
+            repositoryForms[idx] = f.errors()
             return HttpResponseForbidden(json.dumps(context), content_type='text/json')
-        if not zenodoForm.is_valid():
-            context['zenodoForm'] = form.errors
-            return HttpResponseForbidden(json.dumps(context), content_type='text/json')
 
-        # Check that the paper has been uploaded by the same user
-        pdf = form.cleaned_data['file_id']
-        if pdf.user_id != request.user.id:
-            context['message'] = _('Access to the PDF was denied.')
-            return HttpResponseForbidden(json.dumps(context))
+    # Check that the paper has been uploaded by the same user
+    pdf = form.cleaned_data['file_id']
+    if pdf.user != request.user:
+        context['message'] = _('Access to the PDF was denied.')
+        return HttpResponseForbidden(json.dumps(context))
 
+    # Submit paper to all repositories (TODO: only a selection)
+    path = os.path.join(MEDIA_ROOT, pdf.file.name)
+
+    # TODO delete this
+    last_deposit = None
+    for idx, p in enumerate(protocols):
+        print "Create initial record"
         # Create initial record
         d = DepositRecord(
                 paper=paper,
                 user=pdf.user,
+                repository=p.repository,
                 upload_type=form.cleaned_data['radioUploadType'],
                 file=pdf)
         d.save()
+        last_deposit = d
 
-        # Submit paper to Zenodo
-        path = os.path.join(MEDIA_ROOT, pdf.file.name)
+        submitResult = p.submit_deposit_wrapper(path, repositoryForms[idx])
         
-        zenodo = {}
-        try:
-            zenodo = submitPubli(paper, path, zenodoForm)
-        except DepositError as e:
-            d.request = e.logs+'\nMessage: '+str(e)
+        d.request = submitResult.logs
+        if not submitResult.success():
+            # TODO error handling when some deposits were successful and
+            # some others were not.
+            context['message'] = submitResult.message
             d.save()
-            context['message'] = str(e)
             return HttpResponseForbidden(json.dumps(context), content_type='text/json')
-
-        d.identifier = zenodo.get('identifier')
-        d.pdf_url = zenodo.get('pdf_url')
-        d.request = zenodo.get('logs')
+        print "Deposit succeeded."
+        d.identifier = submitResult.identifier
+        d.pdf_url = submitResult.pdf_url
         d.save()
 
-        context['status'] = 'success'
-        context['upload_id'] = d.id
-        return HttpResponse(json.dumps(context), content_type='text/json')
-    return HttpResponseForbidden()
+    context['status'] = 'success'
+    # TODO change this (we don't need it)
+    context['upload_id'] = last_deposit.id
+    return HttpResponse(json.dumps(context), content_type='text/json')
 
 

@@ -29,6 +29,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 from solo.models import SingletonModel
 from celery.execute import send_task
+from celery.result import AsyncResult
 
 from papers.utils import nstr, iunaccent, create_paper_plain_fingerprint
 from papers.name import match_names, name_similarity, unify_name_lists
@@ -436,7 +437,9 @@ class Paper(models.Model):
     oa_status = models.CharField(max_length=32, null=True, blank=True, default='UNK')
     pdf_url = models.URLField(max_length=2048, null=True, blank=True)
 
-    cached_author_count = None
+    # Task id of the current task updating the metadata of this article (if any)
+    task = models.CharField(max_length=512, null=True, blank=True)
+
     nb_remaining_authors = None
 
     def already_asked_for_upload(self):
@@ -573,7 +576,7 @@ class Paper(models.Model):
             idx += 1
         return idx
 
-    @property
+    @cached_property
     def is_deposited(self):
         return self.successful_deposits().count() > 0
 
@@ -652,6 +655,20 @@ class Paper(models.Model):
                 seen_publishers.add(publication.publisher_name)
                 yield publication
 
+    def consolidate_metadata(self, wait=True):
+        """
+        Tries to find an abstract for the paper, if none is available yet,
+        possibly by fetching it from Zotero via doi-cache.
+        """
+        if self.task is None:
+            task = send_task('consolidate_paper', [], {'pk':self.id})
+            self.task = task.id
+            self.save(update_fields=['task'])
+        else:
+            task = AsyncResult(self.task)
+        if wait:
+            task.get()
+
     def publisher(self):
         for publication in self.publication_set.all():
             return publication.publisher_or_default()
@@ -660,6 +677,7 @@ class Paper(models.Model):
     def successful_deposits(self):
         return self.depositrecord_set.filter(pdf_url__isnull=False)
     
+    @cached_property
     def abstract(self):
         for rec in self.publication_set.all():
             if rec.abstract:

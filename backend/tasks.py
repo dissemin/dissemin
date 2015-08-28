@@ -35,7 +35,7 @@ from papers.models import *
 from papers.doi import to_doi
 
 from backend.create import *
-from backend.crossref import fetch_publications
+from backend.crossref import fetch_publications, consolidate_publication
 from backend.oai import *
 from backend.core import fetch_papers_from_core_for_researcher
 from backend.base import fetch_papers_from_base_for_researcher
@@ -90,6 +90,25 @@ def init_profile_from_orcid(pk):
         r.update_stats()
         update_task(None)
 
+
+@shared_task(name='consolidate_paper')
+@run_only_once('consolidate_paper', keys=['pk'], timeout=1*60)
+def consolidate_paper(pk):
+    p = None
+    try:
+        p = Paper.objects.get(pk=pk)
+        abstract = p.abstract or ''
+        for pub in p.publication_set.all():
+            pub = consolidate_publication(pub)
+            if pub.abstract and len(pub.abstract) > len(abstract):
+                abstract = pub.abstract
+                break
+    except Paper.DoesNotExist:
+        print "consolidate_paper: unknown paper %d" % pk
+    finally:
+        if p is not None:
+            p.task = None
+            p.save(update_fields=['task'])
 
 
 @shared_task(name='fetch_everything_for_researcher')
