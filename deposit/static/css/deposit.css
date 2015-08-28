@@ -48,4 +48,11 @@
 	background:#eee;
 }
 
+.prefetchingFieldStatus {
+    color: #555;
+    font-style: italic;
+}
 
+label[class="radio"] {
+    margin-left: 20px;
+}

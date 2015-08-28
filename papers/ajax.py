@@ -146,6 +146,23 @@ def harvestingStatus(request, pk):
         resp = None
     return HttpResponse(json.dumps(resp), content_type='text/json')
 
+@user_passes_test(is_authenticated)
+def waitForConsolidatedField(request):
+    try:
+        paper = Paper.objects.get(pk=int(request.GET["id"]))
+    except (KeyError, ValueError, Paper.DoesNotExist):
+        return HttpResponseForbidden('Invalid paper id', content_type='text/plain')
+    field = request.GET.get('field')
+    value = None
+    success = None
+    paper.consolidate_metadata(wait=True)
+    if field == 'abstract':
+        value = paper.abstract
+        success = len(paper.abstract) > 64
+    else:
+        return HttpResponseForbidden('Invalid field', content_type='text/plain')
+    return HttpResponse(json.dumps({'value':value}), content_type='text/json')
+
 # Author management
 @user_passes_test(is_authenticated)
 def changeAuthor(request):
@@ -212,5 +229,6 @@ urlpatterns = patterns('',
 #    url(r'^add-researcher$', addResearcher, name='ajax-addResearcher'),
     url(r'^change-publisher-status$', changePublisherStatus, name='ajax-changePublisherStatus'),
     url(r'^harvesting-status-(?P<pk>\d+)$', harvestingStatus, name='ajax-harvestingStatus'),
+    url(r'^wait-for-consolidated-field$', waitForConsolidatedField, name='ajax-waitForConsolidatedField'),
 )
 

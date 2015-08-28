@@ -165,6 +165,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'crispy_forms',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -180,6 +181,8 @@ INSTALLED_APPS = (
     'solo',
     'debug_toolbar',
 )
+
+CRISPY_TEMPLATE_PACK = 'bootstrap'
 
 SITE_ID = 1
 

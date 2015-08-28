@@ -6,6 +6,7 @@
 {% load doi %}
 {% load i18n %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block headTitle %}
 {% trans "Depositing" %} "{{ paper.title }}"
@@ -25,9 +26,39 @@
 {% endblock %}
 
 {% block jsScript %}
-$(function(){
+$(function() {
     $('#waitingArea').hide();
     $('#uploadFileId').val('');
+    
+    /* Prefetched fields */
+    $('.prefetchingFieldStatus').each(function(i,prefetch) {
+        var p = $(prefetch);
+        p.text('{% trans "Trying to fill this field automatically for you..." %}');
+        field = $("#"+p.data("fieldid"));
+        console.log(field);
+        objid = $("input[name="+p.data("objfieldname")+"]").val();
+        console.log(objid);
+        field.prop('disabled', true);
+        $.get(p.data("callback"),
+            {"field":p.data("fieldname"),
+            "id":objid}, null, 'json').fail(
+            function(data) {
+                console.log(data);
+                p.text('{% trans "Sorry, we could not fill this for you." %}');
+                field.prop('disabled', false);
+            }
+        ).done(
+            function(data) {
+                if(!data['success']) {
+                    p.text('{% trans "Sorry, we could not fill this for you." %}');
+                } else {
+                    p.text('');
+                }
+                field.prop('disabled', false);
+                field.val(data['value']);
+            }
+        );        
+    });
 
     $('.helpPopover').popover({trigger: "hover"});
 
@@ -170,7 +201,9 @@ $(function(){
         <div id="optionMetadata" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingMetadata">
             <div class="panel-body">
                 {% for form in forms %}
-                    {{ form }}
+                    <div class="form-group">
+                        {{ form|crispy }}
+                    </div>
                 {% endfor %}
             </div>
         </div>

@@ -27,13 +27,7 @@ from StringIO import StringIO
 
 from django.utils.translation import ugettext as __
 from django.utils.translation import ugettext_lazy as _
-from django import forms
 from os.path import basename
-
-from deposit.protocol import *
-from deposit.registry import *
-
-from papers.errors import MetadataSourceException
 
 ZENODO_LICENSES_CHOICES = [
    ('cc-zero', _('CC 0')),
@@ -41,25 +35,11 @@ ZENODO_LICENSES_CHOICES = [
    ('cc-by-sa', _('CC BY SA')),
  ]
 
-def wrap_with_prefetch_status(baseWidget, callback, fieldname):
-    """
-    Add a status text above the widget to display the prefetching status
-    of the data in the field.
-    """
-    orig_render = baseWidget.render
-    def new_render(self, name, value, attrs=None):
-        base_html = orig_render(self, name, value, attrs)
-        if value:
-            return base_html
-        return ('<span class="prefetchingFieldStatus" data-callback="%s" data-fieldid="%s" data-fieldname="%s" data-objfieldid="%s"></span>' % (callback,name,attrs['id'],fieldname))+base_html
-    baseWidget.render = new_render
-    return baseWidget
+from deposit.protocol import *
+from deposit.registry import *
+from deposit.zenodo.forms import *
 
-class ZenodoForm(forms.Form):
-    abstract = forms.CharField(label=__('Abstract'), required=False,
-            widget=wrap_with_prefetch_status(forms.Textarea, 'mycallback', 'abstract'))
-    license = forms.ChoiceField(label=__('License'), choices=ZENODO_LICENSES_CHOICES, initial='cc-by',
-            widget=forms.RadioSelect)
+from papers.errors import MetadataSourceException
 
 
 class ZenodoProtocol(RepositoryProtocol):
@@ -76,6 +56,7 @@ class ZenodoProtocol(RepositoryProtocol):
     def get_form(self):
         data = {}
         data['license'] = 'cc-by'
+        data['paper_id'] = self.paper.id
         if self.paper.abstract:
             data['abstract'] = self.paper.abstract
         else:
