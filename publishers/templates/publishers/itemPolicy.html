@@ -13,7 +13,7 @@
     <div class="policyText">
         <p>
         {% if mode == "radio" %}<label>{% endif %}
-        {{ type_text }} {{ policy | explain_policy_short }}
+            <span class="helpPopover" href="#" data-content="{{ type_explanation }}" rel="popover" data-placement="bottom">{{ type_text }}</span> {{ policy | explain_policy_short }}
         {% if policy != "cannot" %}
             <span class="policyDetailUpload">
             {% if mode == "link" %}

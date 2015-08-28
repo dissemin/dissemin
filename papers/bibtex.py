@@ -23,6 +23,7 @@ from __future__ import unicode_literals
 import re, bibtexparser
 from bibtexparser.bparser import BibTexParser
 from bibtexparser.customization import convert_to_unicode
+from papers.utils import unescape_latex, remove_latex_braces
 
 from papers.name import parse_comma_name
 
@@ -41,7 +42,7 @@ def parse_bibtex(bibtex):
         print "Warning: %d Bibtex items in parse_bibtex, defaulting to the first one" % len(db.entries)
 
     entry = db.entries[0]
-    entry['author'] = parse_authors_list(entry['author'])
+    entry['author'] = parse_authors_list(entry.get('author', ''))
     return entry
 
 ### Bibtex utilites ###
@@ -61,6 +62,10 @@ def insert_newlines_in_bibtex(bib):
     bib3 = bibtex_end_no_newline.sub('}\n}', bib2)
     return bib3
 
+et_al_re = re.compile(r'( and )?\s*et\s+al\.?\s*$', re.IGNORECASE | re.UNICODE)
 def parse_authors_list(authors):
-    return map(parse_comma_name, authors.split(' and '))
+    authors = unescape_latex(authors)
+    authors = et_al_re.sub('', authors)
+    return map(parse_comma_name,
+                remove_latex_braces(unescape_latex(authors)).split(' and '))
 

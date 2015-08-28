@@ -32,25 +32,9 @@
 {% endblock %}
 
 {% block jsScript %}
-{% if request.user.is_authenticated %}
 $(function(){
-
-    function paperMerged(domElem, response) {
-        window.location.replace('/paper/'+response.merged);
-    }
-
-    makeTextEditable($('#paperTitle'), '/ajax/change-paper', 'title', paperMerged);
-    $(".unknownAuthorName").each(function(index) {
-        makeAuthorEditable($(this), paperMerged);
-    });
-    $('.annotate-paper-radio').change(function(){
-        console.log($(this));
-        var value = $(this).val();
-        $.ajax({url:'/ajax/'+$(this).attr('name')+'-'+value})
-    });
+$('.helpPopover').popover({trigger: "hover"});
 });
-
-{% endif %}
 {% if paper.has_many_authors %}
 $(function(){
     var summary = $('#authorSummary').clone();
@@ -121,7 +105,7 @@ $(function(){
         {% if psh.pk %}
             <a href="{% url 'publisher' psh.pk %}">{{ psh }}</a></p>
         {% else %}
-            {{ publi.publisher_name }}</p>
+            {{ psh }}</p>
         {% endif %}
         {% if paper.is_deposited %}
         <strong>Deposited.</strong>
@@ -162,18 +146,6 @@ $(function(){
 <span class="detailsTitle">{% trans "Data from" %}</span>
 <div class="detailsContent">
     {% include 'papers/paperSources.html' with paper=paper %}
-</div>
-
-<span class="detailsTitle">{% trans "Departments" %}</span>
-<div class="detailsContent">
-{% for dept in view.departments %}
-<p><a href="{% url 'department' dept.id %}">{{ dept }}</a></p>
-{% endfor %}
-
-{% if request.user.is_authenticated %}
-    {% include "papers/annotButtons.html" with paper=paper with_scholar=1 %}
-{% endif %}
-
 </div>
 
 <span class="detailsTitle">{% trans "Tools" %}</span>

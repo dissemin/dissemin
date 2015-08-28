@@ -63,22 +63,46 @@ h4
     text-align: left;
 }
 
+/* Dissemin navbar header */
+
 #header
 {
-    /* border: 1px solid b; */
     background-color: #2A6496; /* #3448A2; */
     margin: 5px;
     margin: 0px;
-    /* border-radius: 5px; */
-    padding-top: 5px;
-    padding-bottom: 7px;
-    padding-left: 10px;
-    padding-right: 10px;
-    color: white;
     font-size:1em;
 }
 
-#content, #subheader, #subfooter
+#header a {
+    color: white;
+}
+
+#header .navbar
+{
+    background: none;
+    margin: 0;
+    border: none;
+}
+
+#header .navbar-default .navbar-toggle .icon-bar {
+    background-color: white;
+}
+
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+    background-color: #629AC3;
+}
+
+#header .dropdown-menu a {
+    color: #262626;
+}
+
+#header .dropdown-menu {
+    background-color: white;
+}
+
+#content, #subfooter
 {
     max-width: 1030px;
     min-width: 630px;
@@ -143,24 +167,6 @@ h4
     position: relative;
 }
 
-/* Dissemin header */
-
-#rightLinks
-{
-    float: right;
-    text-align: right;
-}
-
-#dissemin
-{
-    font-size: 1.2em;
-}
-
-#header a
-{
-    color: white;
-}
-
 /* List of publications */
 
 li 
@@ -184,6 +190,14 @@ li
 #summaryLists ul
 {
     /* padding-left: 0px; */
+}
+
+.notFound {
+    text-align: center;
+    font-size: 1.5em;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    color: #999;
 }
 
 .ulContainer
@@ -345,6 +359,7 @@ h1#paperTitle {
 	text-align:justify;
 	max-width:500px;
 	margin-left:50px;
+    margin-top:10px;
 }
 
 .paperDeleteButton, .researcherDeleteButton
@@ -448,6 +463,16 @@ h1#paperTitle {
 
 .orcidLink {
     padding-left: 2px;
+}
+
+.helpPopover
+{
+    color: inherit;
+    border-bottom: 1px dashed black;
+}
+
+.helpPopover:hover, .helpPopover:link {
+    text-decoration: none;
 }
 
 /* Paper depositing */
@@ -659,9 +684,12 @@ h1#paperTitle {
     font-size: 1.2em;
 }
 
-.detailsContent
-{
+.detailsContent {
     border-top: 2px solid #2A6496;
+}
+
+.summaryLists .detailsContent {
+    margin-bottom: 30px;
 }
 
 #detail-name {
@@ -821,6 +849,11 @@ h1#paperTitle {
 	overflow:hidden;
 }
 
+#welcome .startButton {
+    text-align: center;
+    width: 100%;
+}
+
 #welcome p {
 	width:70%;
 }
@@ -829,6 +862,12 @@ h1#paperTitle {
 	color:#fff;
 	text-decoration:underline;
 }
+
+#welcome .startButton a {
+    color: #2A6496;
+    text-decoration: none;
+}
+
 
 #welcome #institutionblock {
 	float:right;
@@ -888,6 +927,46 @@ h1#paperTitle {
 .siteSummary.right {
 	float:right;
 	margin-left:10px;
+}
+
+.oaPannel {
+    background: #eee;
+    padding: 20px;
+}
+
+.oaPannel h2 {
+    margin-top: 0px;
+}
+
+.oaPannel.left {
+    float:left;
+    margin-right:10px;
+    width:58%;
+    width:calc(60% - 10px);
+}
+
+.oaPannel.right {
+    float:right;
+    margin-left:10px;
+    width:38%;
+    width:calc(40% - 10px);
+}
+
+/*
+#globalStats, #statsExplanations {
+    width: 48%;
+    width:calc(50% - 5px);
+}
+*/
+
+#globalStats {
+    float:right;
+    margin-right: 5px;
+}
+
+#statsExplanations {
+    float:left;
+    margin-left: 5px;
 }
 
 /* FAQ */

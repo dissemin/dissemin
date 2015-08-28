@@ -25,7 +25,6 @@ from django.template import RequestContext, loader
 from django.views import generic
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse
-from django.contrib.auth import logout
 from django.contrib.auth.views import login as auth_login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import user_passes_test
@@ -42,12 +41,37 @@ from papers.models import *
 from papers.forms import *
 from papers.user import is_admin, is_authenticated
 from papers.emails import *
+from papers.orcid import *
 
 from deposit.models import *
 
 from publishers.views import varyQueryArguments
 from publishers.models import OA_STATUS_CHOICES
 from dissemin.settings import MEDIA_ROOT, UNIVERSITY_BRANDING, DEPOSIT_MAX_FILE_SIZE 
+
+from allauth.socialaccount.signals import post_social_login
+
+import json
+
+def fetch_on_orcid_login(sender, **kwargs):
+    account = kwargs['sociallogin'].account
+    orcid = account.uid
+    if not orcid:
+        return
+    profile = account.extra_data
+    user = None
+    if '_user_cache' in account.__dict__:
+        user = account.user
+    r = Researcher.get_or_create_by_orcid(orcid, profile, user)
+    if r.user_id is None and user is not None:
+        r.user = user
+        r.save(update_fields=['user'])
+    if r.empty_orcid_profile is None:
+        r.init_from_orcid()
+    else:
+        r.fetch_everything_if_outdated()
+
+post_social_login.connect(fetch_on_orcid_login)
 
 # Number of papers shown on a search results page
 NB_RESULTS_PER_PAGE = 20
@@ -56,22 +80,13 @@ def index(request):
     
     context = {
         'nb_researchers': Researcher.objects.count(),
-        'nb_departments': Department.objects.count(),
         'nb_papers': Paper.objects.filter(visibility='VISIBLE').count(),
         'nb_publishers': Publisher.objects.filter(stats__num_tot__gt=0).count(),
-        'departments': Department.objects.order_by('name').select_related('stats')[:3],
         'papers' : Paper.objects.filter(visibility='VISIBLE').order_by('-pubdate')[:5],
         'publishers' : Publisher.objects.all().filter(stats__isnull=False).order_by('-stats__num_tot')[:3],
         }
     context.update(UNIVERSITY_BRANDING)
     return render(request, 'papers/index.html', context)
-
-def departmentsView(request, **kwargs):
-	context = {
-        'nb_departments': Department.objects.count(),
-        'departments': Department.objects.order_by('name').select_related('stats'),
-        }
-	return render(request, 'papers/departments.html', context)
 
 def searchView(request, **kwargs):
     context = dict()
@@ -84,19 +99,23 @@ def searchView(request, **kwargs):
     head_search_description = _('Papers')
 
     context['researcher_id'] = None
-    if 'researcher' in args:
-        researcher = get_object_or_404(Researcher, pk=args.get('researcher'))
+    if 'researcher' in args or 'orcid' in args:
+        researcher = None
+        if 'researcher' in args:
+            researcher = get_object_or_404(Researcher, pk=args.get('researcher'))
+        elif 'orcid' in args:
+            try:
+                researcher = Researcher.objects.get(orcid=args.get('orcid'))
+            except Researcher.DoesNotExist:
+                orcid = validate_orcid(args.get('orcid'))
+                researcher = Researcher.get_or_create_by_orcid(orcid)
+                researcher.init_from_orcid()
+
         queryset = queryset.filter(author__researcher=researcher)
         search_description += _(' authored by ')+unicode(researcher)
         head_search_description = unicode(researcher)
         context['researcher'] = researcher
         context['researcher_id'] = researcher.id
-    elif 'department' in args:
-        department = get_object_or_404(Department, pk=args.get('department'))
-        queryset = queryset.filter(author__researcher__department=department)
-        search_description += _(' authored in ')+unicode(department)
-        head_search_description = unicode(department)
-        context['department'] = department
     elif 'name' in args:
         name = get_object_or_404(Name, pk=args.get('name'))
         queryset = queryset.filter(author__name=name)
@@ -178,22 +197,17 @@ def searchView(request, **kwargs):
 
     return render(request, 'papers/search.html', context)
 
-def logoutView(request):
-    logout(request)
-    if 'HTTP_REFERER' in request.META:
-        return redirect(request.META['HTTP_REFERER'])
-    else:
-        return redirect('/')
-
 @user_passes_test(is_admin)
 def reclusterResearcher(request, pk):
     source = get_object_or_404(Researcher, pk=pk)
     send_task('recluster_researcher', [], {'pk':pk})
     return redirect(request.META['HTTP_REFERER'])
 
-@user_passes_test(is_admin)
+@user_passes_test(is_authenticated)
 def refetchResearcher(request, pk):
-    source = get_object_or_404(Researcher, pk=pk)
+    researcher = get_object_or_404(Researcher, pk=pk)
+    if researcher.user != request.user and not request.user.is_staff:
+        return HttpResponseForbidden("Not authorized to update papers for this researcher.")
     send_task('fetch_everything_for_researcher', [], {'pk':pk})
     return redirect(request.META['HTTP_REFERER'])
 
@@ -201,17 +215,13 @@ class ResearcherView(generic.DetailView):
     model = Researcher
     template_name = 'papers/researcher.html'
 
-class GroupView(generic.DetailView):
-    model = ResearchGroup
-    template_name = 'papers/group.html'
-    
-class DepartmentView(generic.DetailView):
-    model = Department
-    template_name = 'papers/department.html'
-    def get_context_data(self, **kwargs):
-        context = super(DepartmentView, self).get_context_data(**kwargs)
-        context['add_form'] = AddResearcherForm()
-        return context
+@user_passes_test(is_authenticated)
+def myProfileView(request):
+    try:
+        r = Researcher.objects.get(user=request.user)
+        return searchView(request, researcher=r.pk)
+    except Researcher.DoesNotExist:
+        return render(request, 'papers/createProfile.html')
 
 class PaperView(generic.DetailView):
     model = Paper
@@ -245,9 +255,6 @@ class JournalView(generic.DetailView):
     model = Journal
     template_name = 'papers/journal.html'
 
-def regularLogin(request):
-    return auth_login(request, 'papers/login.html')
-
 def annotationsView(request):
     return render(request, 'papers/annotations.html', {'annotations':Annotation.objects.all(),
         'users':User.objects.all()})
@@ -259,6 +266,4 @@ class AnnotationsView(generic.TemplateView):
         sorted_users = sorted(users, key=lambda x:-x.num_annot)
         filtered_users = filter(lambda x:x.num_annot > 0, sorted_users)
         return sorted_users
-
-
 

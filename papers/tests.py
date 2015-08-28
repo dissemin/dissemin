@@ -24,7 +24,9 @@ from __future__ import unicode_literals
 import unittest
 import django.test
 from papers.name import *
-from papers.utils import unescape_latex, remove_latex_math_dollars, validate_orcid
+from papers.utils import unescape_latex, remove_latex_math_dollars, validate_orcid, remove_latex_braces
+from papers.orcid import *
+from papers.bibtex import parse_authors_list
 
 class MatchNamesTest(unittest.TestCase):
     def test_simple(self):
@@ -152,10 +154,59 @@ class RecapitalizeWordTest(unittest.TestCase):
         self.assertEqual(recapitalize_word('van'),'van')
         self.assertEqual(recapitalize_word('CLARK'),'Clark')
         self.assertEqual(recapitalize_word('GRANROTH-WILDING'),'Granroth-Wilding')
+        self.assertEqual(recapitalize_word('Jean-Pierre'), 'Jean-Pierre')
 
     def test_unicode(self):
         self.assertEqual(recapitalize_word('ÉMILIE'), 'Émilie')
         self.assertEqual(recapitalize_word('JOSÉ'), 'José')
+
+class NameSimilarityTest(unittest.TestCase):
+    def test_matching(self):
+        self.assertAlmostEqual(
+                name_similarity(('Robin', 'Ryder'),('Robin', 'Ryder')), 0.8)
+        self.assertAlmostEqual(
+                name_similarity(('Robin', 'Ryder'),('R.', 'Ryder')), 0.4)
+        self.assertAlmostEqual(
+                name_similarity(('R.', 'Ryder'),('R.', 'Ryder')), 0.4)
+        self.assertAlmostEqual(
+                name_similarity(('Robin J.', 'Ryder'),('R.', 'Ryder')), 0.3)
+        self.assertAlmostEqual(
+                name_similarity(('Robin J.', 'Ryder'),('R. J.', 'Ryder')), 0.8)
+        self.assertAlmostEqual(
+                name_similarity(('R. J.', 'Ryder'),('J.', 'Ryder')), 0.3)
+        self.assertAlmostEqual(
+                name_similarity(('Robin', 'Ryder'),('Robin J.', 'Ryder')), 0.7)
+
+    def test_multiple(self):
+        self.assertAlmostEqual(
+                name_similarity(('Juan Pablo','Corella'),('J. Pablo','Corella')), 1.0)
+
+    def test_reverse(self):
+        self.assertAlmostEqual(
+                name_similarity(('W. Timothy','Gowers'), ('Timothy','Gowers') ), 0.7)
+
+    def test_mismatch(self):
+        self.assertAlmostEqual(
+                name_similarity(('Robin K.','Ryder'), ('Robin J.', 'Ryder')), 0)
+        self.assertAlmostEqual(
+                name_similarity(('Claire', 'Mathieu'),('Claire', 'Kenyon-Mathieu')), 0)
+
+    def test_symmetric(self):
+        pairs = [ 
+            (('Robin', 'Ryder'),('Robin', 'Ryder')),
+            (('Robin', 'Ryder'),('R.', 'Ryder')),
+            (('R.', 'Ryder'),('R.', 'Ryder')),
+            (('Robin J.', 'Ryder'),('R.', 'Ryder')),
+            (('Robin J.', 'Ryder'),('R. J.', 'Ryder')),
+            (('R. J.', 'Ryder'),('J.', 'Ryder')),
+            (('Robin', 'Ryder'),('Robin J.', 'Ryder')),
+            (('W. Timothy','Gowers'), ('Timothy','Gowers') ),
+            (('Robin K.','Ryder'), ('Robin J.', 'Ryder')),
+            (('Claire', 'Mathieu'),('Claire', 'Kenyon-Mathieu')),
+        ]
+        for a,b in pairs:
+            self.assertAlmostEqual(name_similarity(a,b),name_similarity(b,a))
+
 
 class ParseCommaNameTest(unittest.TestCase):
     def test_simple(self):
@@ -184,6 +235,11 @@ class ParseCommaNameTest(unittest.TestCase):
         self.assertEqual(parse_comma_name('Neal E. Young'), ('Neal E.', 'Young'))
 
     @unittest.expectedFailure
+    def test_collapsed_initials(self):
+        self.assertEqual(parse_comma_name('Badiou CS'), ('C. S.', 'Badiou'))
+        self.assertEqual(parse_comma_name('Tony LI'), ('Tony', 'Li'))
+
+    @unittest.expectedFailure
     def test_hard_cases(self):
         # TODO ?
         self.assertEqual(parse_comma_name('W. Timothy Gowers'), ('W. Timothy', 'Gowers'))
@@ -205,6 +261,10 @@ class NameUnificationTest(unittest.TestCase):
 
     def test_uncommon_order(self):
         self.assertEqual(name_unification(('W. T.','Gowers'), ('Timothy','Gowers')), ('W. Timothy','Gowers'))
+
+    def test_fix_capitalization(self):
+        self.assertEqual(name_unification(('Marie-france','Sagot'),('Marie-France','Sagot')),('Marie-France','Sagot'))
+        self.assertEqual(name_unification(('Marie-France','Sagot'),('Marie-france','Sagot')),('Marie-France','Sagot'))
 
     def test_flattened_initials(self):
         self.assertEqual(name_unification(('J. P.','Gendre'), ('Jp.','Gendre')), ('J.-P.','Gendre'))
@@ -261,6 +321,18 @@ class UnifyNameListsTest(unittest.TestCase):
                  [(('Marie','Dupont'),(1,0)),(('Jean P.','Dupont'),(0,1))]    
             ])
 
+    def test_dirty_input(self):
+        self.assertEqual(unify_name_lists(
+            [('Jérémie','Boutier'),('Alphonse','Viger')],
+            [('J{é}r{é}mie', 'Boutier'),('A.','Viger')]),
+            [(('Jérémie','Boutier'),(0,None)),(('Alphonse','Viger'),(1,1))])
+
+    def test_duplicates(self):
+        self.assertEqual(unify_name_lists(
+            [('Jérémie','Boutier'),('Jérémie','Boutier')],
+            [('J.','Boutier')]),
+            [(('Jérémie','Boutier'),(0,0)),(None,(1,None))])
+
 class UnescapeLatexTest(unittest.TestCase):
     def test_simple(self):
         self.assertEqual(unescape_latex('This is a test'), 'This is a test')
@@ -278,6 +350,39 @@ class UnescapeLatexTest(unittest.TestCase):
         self.assertEqual(remove_latex_math_dollars('Instead of $15, the revenue is $30 per cow'),
                 'Instead of $15, the revenue is $30 per cow')
 
+class RemoveLatexBracesTest(unittest.TestCase):
+    def test_simple(self):
+        self.assertEqual(remove_latex_braces('this is a test'), 'this is a test')
+        self.assertEqual(remove_latex_braces('this is a {Test}'), 'this is a Test')
+        self.assertEqual(remove_latex_braces('this {is} a Test'), 'this is a Test')
+        self.assertEqual(remove_latex_braces('{this} is a Test'), 'this is a Test')
+        self.assertEqual(remove_latex_braces('{this is a Test}'), 'this is a Test')
+
+    def test_unicode(self):
+        self.assertEqual(remove_latex_braces('th{í}s is a Test'), 'thís is a Test')
+        self.assertEqual(remove_latex_braces('{t}hís is a Test'), 'thís is a Test')
+        self.assertEqual(remove_latex_braces('thís {is} a Test'), 'thís is a Test')
+
+    def test_math(self):
+        self.assertEqual(remove_latex_braces('base^{superscript}_{subscript}'), 'base^{superscript}_{subscript}')
+
+    def test_command(self):
+        self.assertEqual(remove_latex_braces('in \\mathbb{R} let'), 'in \\mathbb{R} let')
+        self.assertEqual(remove_latex_braces('in \\emph{blue} let'), 'in \\emph{blue} let')
+
+    def test_multiple(self):
+        self.assertEqual(remove_latex_braces('J{é}r{é}mie'), 'Jérémie')
+
+class ParseAuthorsListTest(unittest.TestCase):
+    def test_simple(self):
+        self.assertEqual(parse_authors_list('Claire Toffano-Nioche and Daniel Gautheret and Fabrice Leclerc'),
+                [('Claire','Toffano-Nioche'),('Daniel','Gautheret'),('Fabrice','Leclerc')])
+
+    def test_etal(self):
+        self.assertEqual(parse_authors_list('Claire Toffano-Nioche and et al.'),
+                [('Claire','Toffano-Nioche')])
+
+
 class ValidateOrcidTest(unittest.TestCase):
     def test_simple(self):
         self.assertEqual(validate_orcid(None), None)
@@ -293,4 +398,16 @@ class ValidateOrcidTest(unittest.TestCase):
 
     def test_whitespace(self):
         self.assertEqual(validate_orcid('\t0000-0002-8612-8827  '), '0000-0002-8612-8827')
+
+class GetNameFromOrcidProfileTest(unittest.TestCase):
+    def get(self, id):
+        return get_name_from_orcid_profile(get_orcid_profile(id))
+
+    def test_simple(self):
+        self.assertEqual(self.get('0000-0002-8612-8827'), ('Antonin','Delpeuch'))
+        self.assertEqual(self.get('0000-0003-0524-631X'), ('Thomas','Bourgeat'))
+
+    def test_credit(self):
+        self.assertEqual(self.get('0000-0003-3397-9895'), ('Sergey M.','Natanzon'))
+        self.assertEqual(self.get('0000-0001-9547-293X'), ('Darío', 'Álvarez'))
 

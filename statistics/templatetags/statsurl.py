@@ -11,7 +11,7 @@ register = template.Library()
 
 @register.filter(is_safe=True)
 def statsurl(object_id, criteria):
-    if object_id is None or len(object_id) == 0:
+    if object_id is None:
         return mark_safe("#")
     args = escape(object_id)
     if criteria == 'oa':

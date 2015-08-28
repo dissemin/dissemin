@@ -22,7 +22,7 @@ from __future__ import unicode_literals
 
 import requests, json
 from papers.errors import MetadataSourceException
-from papers.name import normalize_name_words
+from papers.name import normalize_name_words, parse_comma_name
 
 def jpath(path, js, default=None):
     def _walk(lst, js):
@@ -34,20 +34,71 @@ def jpath(path, js, default=None):
             return _walk(lst[1:], js.get(lst[0],{} if len(lst) > 1 else default))
     return _walk(path.split('/'), js)
 
-def get_orcid_profile(id):
+def get_orcid_profile(id, instance='orcid.org'):
+    if instance not in ['orcid.org','sandbox.orcid.org']:
+        raise ValueError('Unexpected instance')
     try:
         headers = {'Accept':'application/orcid+json'}
-        profile_req = requests.get('http://pub.orcid.org/v1.2/%s/orcid-profile' % id, headers=headers)
-        return profile_req.json()
-    except requests.exceptions.HTTPError:
+        profile_req = requests.get('http://pub.%s/v1.2/%s/orcid-profile' % (instance,id), headers=headers)
+        parsed = profile_req.json()
+        if parsed.get('orcid-profile') is None:
+            # TEMPORARY: also check from the sandbox
+            if instance == 'orcid.org':
+                return get_orcid_profile(id, instance='sandbox.orcid.org')
+            raise ValueError
+        return None
+    except (requests.exceptions.HTTPError, ValueError):
         raise MetadataSourceException('The ORCiD %s could not be found' % id)
     except (ValueError, TypeError) as e:
         raise MetadataSourceException('The ORCiD %s returned invalid JSON.' % id)
 
+def get_homepage_from_orcid_profile(profile):
+    """
+    Extract an URL for that researcher (if any)
+    """
+    lst = jpath('orcid-profile/orcid-bio/researcher-urls/researcher-url', profile, default=[])
+    for url in lst:
+        val = jpath('url/value', url)
+        name = jpath('url-name/value', url).lower()
+        if val and len(lst) == 1 or 'home' in name or 'personal' in name:
+            return val
+    if len(lst):
+        return jpath('url/value', lst[0]) or None
+
+def get_email_from_orcid_profile(profile):
+    # TODO
+    return None
 
 def get_name_from_orcid_profile(profile):
+    """
+    Returns a parsed version of the "credit name" in the ORCID profile.
+    If there is no such name, returns the given and family names on the profile
+    (they should exist)
+    """
     name_item = jpath('orcid-profile/orcid-bio/personal-details', profile)
+    name = jpath('credit-name/value', name_item)
+    if name is not None:
+        return parse_comma_name(name)
     return (normalize_name_words(jpath('given-names/value', name_item)),
             normalize_name_words(jpath('family-name/value', name_item)))
+
+def get_other_names_from_orcid_profile(profile):
+    """
+    Returns the list of other names listed on the ORCiD profile.
+    This includes the (given,family) name if a credit name was defined.
+    """
+    name_item = jpath('orcid-profile/orcid-bio/personal-details', profile)
+    names = []
+    credit_name = jpath('credit-name/value', name_item)
+    if credit_name is not None:
+        names.append((normalize_name_words(jpath('given-names/value', name_item)),
+            normalize_name_words(jpath('family-name/value', name_item))))
+    other_names = jpath('other-names/other-name', name_item, default=[])
+    for name in other_names:
+        val = name.get('value')
+        if val is not None:
+            names.append(parse_comma_name(val))
+    return names
+
 
 

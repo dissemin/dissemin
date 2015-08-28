@@ -33,7 +33,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from papers.errors import MetadataSourceException
 from papers.doi import to_doi
 from papers.name import match_names, normalize_name_words, parse_comma_name
-from papers.utils import create_paper_fingerprint, iunaccent, tolerant_datestamp_to_datetime, date_from_dateparts
+from papers.utils import create_paper_fingerprint, iunaccent, tolerant_datestamp_to_datetime, date_from_dateparts, affiliation_is_greater
 from papers.models import Publication, Paper
 
 from backend.utils import urlopen_retry
@@ -48,9 +48,9 @@ nb_results_per_request = 20
 # Maximum timeout for the CrossRef interface (sometimes it is a bit lazy)
 crossref_timeout = 15
 # Maximum number of pages looked for a researcher
-max_crossref_batches_per_researcher = 25
+max_crossref_batches_per_researcher = 7
 # Maxmimum number of batches trivially skipped (because the last name does not occur in them)
-crossref_max_empty_batches = 5
+crossref_max_empty_batches = 2
 # Maximum number of non-trivially skipped records that do not match any researcher
 crossref_max_skipped_records = 100
 
@@ -135,7 +135,8 @@ def consolidate_publication(publi):
     Fetches the abstract from Zotero and adds it to the publication if it succeeds.
     """
     zotero = fetch_zotero_by_DOI(publi.doi)
-    print zotero
+    if zotero is None:
+        return publi
     for item in zotero:
         if 'abstractNote' in item:
             publi.abstract = item['abstractNote']
@@ -276,9 +277,12 @@ def fetch_dois_by_batch(doi_list):
     except requests.exceptions.RequestException as e:
         raise MetadataSourceException('Failed to retrieve batch metadata from the proxy: '+str(e))
 
-def save_doi_metadata(metadata):
+def save_doi_metadata(metadata, extra_affiliations=None):
     """
     Given the metadata from CrossRef, create the associated paper and publication
+
+    :param extra_affiliations: an optional affiliations list, which will be unified
+        with the affiliations extracted from the metadata. This is useful for the ORCID interface.
     """        
     # Normalize metadata
     if metadata is None or type(metadata) != type({}):
@@ -314,6 +318,10 @@ def save_doi_metadata(metadata):
                 return dct['name']
 
     affiliations = map(get_affiliation, metadata['author'])
+    if extra_affiliations and len(affiliations) == len(extra_affiliations):
+        for i in range(len(affiliations)):
+            if affiliation_is_greater(extra_affiliations[i],affiliations[i]):
+                affiliations[i] = extra_affiliations[i]
 
     print "Saved doi "+doi
     paper = backend.create.get_or_create_paper(title, authors, pubdate, 

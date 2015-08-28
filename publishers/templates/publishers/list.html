@@ -14,6 +14,9 @@
 {% endblock %}
 
 {% block jsScript %}
+$(function(){
+    $('.logoHelpPopover').popover({trigger:"hover"});
+});
 {% endblock %}
 
 {% block details %}
@@ -29,11 +32,12 @@
 {% if not journal %}
 <span class="criterion">{% trans "By publisher policy:" %}</span>
 {% for st in oa_status_choices %}
-<div class="{% if st.0 == status %}selectedCriterion{% else %}unselectedCriterion{% endif %}">
-    <div class="pubLogo"><div class="pubLogoPic-{{ st.0 }}"><a href="{% url 'publishers' %}?{{ st.2.urlencode }}" class="filldiv"></a></div></div>
-    <div class="criterionItem"><a href="{% url 'publishers' %}?{{ st.2.urlencode }}">{{ st.1 }}</a>
+<div class="{% if st.0 == status %}selectedCriterion{% else %}unselectedCriterion{% endif %} logoHelpPopover"
+   data-content="{{ st.2 }}" rel="popover" data-placement="left">
+    <div class="pubLogo"><div class="pubLogoPic-{{ st.0 }}"><a href="{% url 'publishers' %}?{{ st.3.urlencode }}" class="filldiv"></a></div></div>
+    <div class="criterionItem"><a href="{% url 'publishers' %}?{{ st.3.urlencode }}">{{ st.1 }}</a>
         {% if st.0 == status %}
-        <div class="criterionCross"><a href="{% url 'publishers' %}?{{ st.2.urlencode }}">x</a></div>
+        <div class="criterionCross"><a href="{% url 'publishers' %}?{{ st.3.urlencode }}">x</a></div>
         {% endif %}
     </div>
 </div>

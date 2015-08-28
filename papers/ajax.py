@@ -40,7 +40,6 @@ from papers.user import *
 from papers.forms import AddResearcherForm
 from papers.utils import iunaccent, sanitize_html
 
-from time import sleep # TODO delete me
 import os.path
 
 # General function used to change a CharField in a model with ajax
@@ -137,6 +136,33 @@ def changeResearcher(request):
     allowedFields = ['role']
     return process_ajax_change(request, Researcher, allowedFields)
 
+def harvestingStatus(request, pk): 
+    researcher = get_object_or_404(Researcher, pk=pk)
+    resp = {}
+    if researcher.current_task:
+        resp['status'] = researcher.current_task
+        resp['display'] = researcher.get_current_task_display()
+    else:
+        resp = None
+    return HttpResponse(json.dumps(resp), content_type='text/json')
+
+@user_passes_test(is_authenticated)
+def waitForConsolidatedField(request):
+    try:
+        paper = Paper.objects.get(pk=int(request.GET["id"]))
+    except (KeyError, ValueError, Paper.DoesNotExist):
+        return HttpResponseForbidden('Invalid paper id', content_type='text/plain')
+    field = request.GET.get('field')
+    value = None
+    success = None
+    paper.consolidate_metadata(wait=True)
+    if field == 'abstract':
+        value = paper.abstract
+        success = len(paper.abstract) > 64
+    else:
+        return HttpResponseForbidden('Invalid field', content_type='text/plain')
+    return HttpResponse(json.dumps({'value':value}), content_type='text/json')
+
 # Author management
 @user_passes_test(is_authenticated)
 def changeAuthor(request):
@@ -193,15 +219,16 @@ def changePublisherStatus(request):
     except ObjectDoesNotExist:
         return HttpResponseNotFound('NOK: '+message, content_type='text/plain')
 
-
 urlpatterns = patterns('',
-    url(r'^annotate-paper-(?P<pk>\d+)-(?P<status>\d+)$', annotatePaper, name='ajax-annotatePaper'),
-    url(r'^delete-researcher-(?P<pk>\d+)$', deleteResearcher, name='ajax-deleteResearcher'),
-    url(r'^change-department$', changeDepartment, name='ajax-changeDepartment'),
-    url(r'^change-paper$', changePaper, name='ajax-changePaper'),
-    url(r'^change-researcher$', changeResearcher, name='ajax-changeResearcher'),
-    url(r'^change-author$', changeAuthor, name='ajax-changeAuthor'),
-    url(r'^add-researcher$', addResearcher, name='ajax-addResearcher'),
+#    url(r'^annotate-paper-(?P<pk>\d+)-(?P<status>\d+)$', annotatePaper, name='ajax-annotatePaper'),
+#    url(r'^delete-researcher-(?P<pk>\d+)$', deleteResearcher, name='ajax-deleteResearcher'),
+#    url(r'^change-department$', changeDepartment, name='ajax-changeDepartment'),
+#    url(r'^change-paper$', changePaper, name='ajax-changePaper'),
+#    url(r'^change-researcher$', changeResearcher, name='ajax-changeResearcher'),
+#    url(r'^change-author$', changeAuthor, name='ajax-changeAuthor'),
+#    url(r'^add-researcher$', addResearcher, name='ajax-addResearcher'),
     url(r'^change-publisher-status$', changePublisherStatus, name='ajax-changePublisherStatus'),
+    url(r'^harvesting-status-(?P<pk>\d+)$', harvestingStatus, name='ajax-harvestingStatus'),
+    url(r'^wait-for-consolidated-field$', waitForConsolidatedField, name='ajax-waitForConsolidatedField'),
 )
 

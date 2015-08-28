@@ -114,6 +114,21 @@ def unescape_latex(s):
 
     return latex_command_re.sub(conditional_replace, s)
 
+latex_one_character_braces_re = re.compile(r'(^|(^|[^\\])\b(\w+)){(.)}', re.UNICODE)
+latex_full_line_braces_re = re.compile(r'^{(.*)}$')
+latex_word_braces_re = re.compile(r'(^|\s){(\w+)}($|\s)', re.UNICODE)
+def remove_latex_braces(s):
+    """
+    Removes spurious braces such as in "Th{é}odore" or "a {CADE} conference"
+    This should be run *after* unescape_latex
+    """
+    s = latex_full_line_braces_re.sub(r'\1', s)
+    s = latex_word_braces_re.sub(r'\1\2\3', s)
+    s = latex_one_character_braces_re.sub(r'\1\4', s)
+    s = latex_one_character_braces_re.sub(r'\1\4', s)
+    s = latex_one_character_braces_re.sub(r'\1\4', s)
+    return s
+
 def sanitize_html(s):
     s = overescaped_re.sub(r'&#\1;', s)
     s = unicode4_re.sub(lambda x: x.group(1).decode('unicode-escape'), s)
@@ -132,6 +147,8 @@ def kill_html(s):
 
 
 ##### Paper fingerprinting
+
+from papers.name import split_name_words
 
 stripped_chars = re.compile(r'[^- a-z0-9]')
 def create_paper_plain_fingerprint(title, authors, year):
@@ -155,12 +172,17 @@ def create_paper_plain_fingerprint(title, authors, year):
         # initials = map(lambda x: x[0].lower(), split_words(author[0]))
 
         # Last name, without the small words such as "van", "der", "de"…
-        # We could remove this filter? Or not as it is useful to get rid of name splitting errors
-        last_words = filter(lambda x: x[0].isupper(), split_words(author[1]))
-
+        last_name_words, last_name_separators = split_name_words(author[1])
+        last_words = []
+        for i in range(len(last_name_words)):
+            if (last_name_words[i][0].isupper() or
+                (i > 0 and last_name_separators[i-1] == '-')):
+                last_words.append(last_name_words[i])
+             
         # If no word was uppercased, fall back on all the words
         if not last_words:
-            last_words = split_words(author[1])
+            last_words = last_name_words
+
         # Lowercase
         last_words = map(ulower, last_words)
         fp = '-'.join(last_words)
@@ -257,5 +279,21 @@ def validate_orcid(orcid):
     checkchar = str(checkdigit) if checkdigit != 10 else 'X'
     if nums[-1] == checkchar:
         return orcid
+
+def affiliation_is_greater(a, b):
+    """
+    Compares to affiliation values. Returns True
+    when the first contains more information than
+    the second
+    """
+    if a is None:
+        return False
+    if b is None:
+        return True
+    if validate_orcid(a):
+        return True
+    if validate_orcid(b):
+        return False
+    return len(a) > len(b)
 
 

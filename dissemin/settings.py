@@ -31,6 +31,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from datetime import timedelta
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -71,11 +72,6 @@ ROMEO_API_KEY = None
 # Used to fetch full text availability. Get one at
 # http://www.sherpa.ac.uk/romeo/apiregistry.php
 CORE_API_KEY = None
-
-# Zenodo API key
-# Used to upload papers. Get one at
-# https://zenodo.org/youraccount/register
-ZENODO_KEY = None
 
 ### DOI proxy ###
 # The interface where to get DOI metadata from.
@@ -118,6 +114,11 @@ DEPOSIT_CONTENT_TYPES = ['application/pdf','application/x-pdf','application/octe
 #DOI_PROXY_DOMAIN =  'dx.doi.org'
 #DOI_PROXY_SUPPORTS_BATCH = False
 
+### Paper freshness options ###
+# On login of an user, minimum time between the last harvest to trigger
+# a new harvest for that user.
+PROFILE_REFRESH_ON_LOGIN = timedelta(days=1)
+
 ### Security key ###
 # This is used by django to generate various things (mainly for 
 # authentication). Just pick a fairly random string and keep it
@@ -127,6 +128,7 @@ SECRET_KEY = '40@!t4mmh7325-^wh+jo3teu^!yj3lfz5p%ok(8+7th8pg^hy1'
 ### Debug mode ###
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+DEBUG_TOOLBAR_CONFIG = {'SHOW_TOOLBAR_CALLBACK': lambda r: True}
 
 # This can safely (and should) be kept to True
 TEMPLATE_DEBUG = True
@@ -162,14 +164,27 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'crispy_forms',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.orcid',
+    'allauth.socialaccount.providers.orcidsandbox',
     'statistics',
     'publishers',
     'papers',
     'upload',
     'deposit',
+    'deposit.zenodo',
     'bootstrap_pagination',
-#    'debug_toolbar',
+    'solo',
+    'debug_toolbar',
 )
+
+CRISPY_TEMPLATE_PACK = 'bootstrap'
+
+SITE_ID = 1
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -179,13 +194,14 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django_cas_ng.middleware.CASMiddleware',
+#    'django_cas_ng.middleware.CASMiddleware',
 )
 
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    'django_cas_ng.backends.CASBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+   # 'django_cas_ng.backends.CASBackend',
 )
 
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
@@ -222,12 +238,19 @@ DATABASES = {
 # https://docs.djangoproject.com/en/1.7/topics/cache/
 CACHES = {
         'default': {
-# This one is only suitable for developpment
-            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-            'LOCATION': 'my-cache'
 # This one should be used in production
 #            'BACKEND':'django.core.cache.backends.memcached.MemcachedCache',
 #            'LOCATION':'127.0.0.1:11211',
+# This one is only suitable for developpment
+#            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+#            'LOCATION': 'my-cache'
+# This one should be used in production
+#            'BACKEND':'django.core.cache.backends.memcached.MemcachedCache',
+#            'LOCATION':'127.0.0.1:11211',
+# This one uses Redis, which is already required for message-passing to Celery, so let's use it as a cache too
+             'BACKEND':'redis_cache.RedisCache',
+             'LOCATION':'localhost:6379',
+
     }
 }
 
@@ -252,7 +275,12 @@ MEDIA_URL = '/media/'
 # To communicate with it, we need a "broker".
 # This is an example broker with Redis.
 BROKER_URL = 'redis://localhost:6379/0'
+# We also use Redis as result backend.
+CELERY_RESULT_BACKEND = BROKER_URL
+
 # For a RabbitMQ setting: BROKER_URL = 'amqp://guest:guest@127.0.0.1:5672//'
+import redis
+redis_client = redis.StrictRedis(host='localhost', port=6379, db=0)
 
 CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
 CELERY_IMPORTS = ['backend.tasks']
@@ -272,7 +300,7 @@ USE_TZ = True
 LOCALE_PATHS = ('locale',)
 
 # Login and athentication
-LOGIN_URL = '/login/'
+LOGIN_URL = '/accounts/login'
 LOGIN_REDIRECT_URL = '/'
 
 

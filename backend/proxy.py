@@ -26,7 +26,7 @@ PROXY_ENDPOINT = "http://proaixy.dissem.in/oai"
 PROXY_DAY_GRANULARITY = False
 
 PROXY_SOURCE_PREFIX = "proaixy:source:"
-PROXY_AUTHOR_PREFIX = "proaixy:lastname:"
+PROXY_AUTHOR_PREFIX = "proaixy:author:"
 PROXY_SIGNATURE_PREFIX = "proaixy:authorsig:"
 
 

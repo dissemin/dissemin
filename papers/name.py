@@ -127,6 +127,16 @@ def split_name_words(string):
         words.append(buf)
     return (words,separators)
 
+def shorten_first_name(string):
+    words, separators = split_name_words(string)
+    result = ""
+    for i in range(len(words)):
+        if words[i][0].isupper():
+            result += words[i][0]+'.'
+            if i < len(separators):
+                result += separators[i] if separators[i] else ' '
+    return result
+
 def recapitalize_word(w):
     """ Turns every fully capitalized word into an uncapitalized word (except for the first character) """
     if w.upper() == w:
@@ -181,28 +191,32 @@ def name_signature(first, last):
 
 ### Name similarity measure ###
 
-weight_initial_match = 0.2
-weight_full_match = 0.4
+weight_initial_match = 0.4
+weight_full_match = 0.8
 def weight_first_name(word):
     if len(word) > 1:
         return weight_full_match
     else:
         return weight_initial_match
 
+def weight_first_names(name_pair):
+    a,b = name_pair
+    return min(weight_first_name(a),weight_first_name(b))
+
 def name_similarity(a,b):
     """
     Returns a float: how similar are these two names?
     Examples:
-    > ('Robin', 'Ryder'),('Robin', 'Ryder'): 1.0
-    > ('Robin', 'Ryder'),('R.', 'Ryder'): 0.2
-    > ('R.', 'Ryder'),('R.', 'Ryder'): 0.2
-    > ('Robin J.', 'Ryder'),('R.', 'Ryder'): 0.15
-    > ('Robin J.', 'Ryder'),('R. J.', 'Ryder'): 0.4
-    > ('R. J.', 'Ryder'),('J.', 'Ryder'): 0.2
-    > ('Claire', 'Mathieu'),('Claire', 'Kenyon-Mathieu'): 0
-    > ('Robin', 'Ryder'), ('Robin J.', 'Ryder') : 0.35
-    > ('W. Timothy','Gowers'), ('Timothy','Gowers') : 0.35
-    > ('Robin K.','Ryder'), ('Robin J.', 'Ryder'): 0
+    name_similarity(('Robin', 'Ryder'),('Robin', 'Ryder')) == 0.8
+    name_similarity(('Robin', 'Ryder'),('R.', 'Ryder')) == 0.4
+    name_similarity(('R.', 'Ryder'),('R.', 'Ryder')) == 0.4
+    name_similarity(('Robin J.', 'Ryder'),('R.', 'Ryder')) ==0.3
+    name_similarity(('Robin J.', 'Ryder'),('R. J.', 'Ryder')) == 0.8
+    name_similarity(('R. J.', 'Ryder'),('J.', 'Ryder')) == 0.3
+    name_similarity(('Robin', 'Ryder'),('Robin J.', 'Ryder')) == 0.7
+    name_similarity(('W. Timothy','Gowers'), ('Timothy','Gowers')) == 0.7
+    name_similarity(('Robin K.','Ryder'), ('Robin J.', 'Ryder')) == 0
+    name_similarity(('Claire', 'Mathieu'),('Claire', 'Kenyon-Mathieu') == 0
     """
 
     if not a or not b:
@@ -215,8 +229,8 @@ def name_similarity(a,b):
     lastB = iunaccent(lastB)
     if lastA != lastB:
         return 0.
-    if firstA == firstB:
-        return 1.
+    #if firstA == firstB:
+    #    return 1.
     partsA, sepsA = split_name_words(firstA)
     partsB, sepsB = split_name_words(firstB)
     parts = zip(partsA, partsB)
@@ -231,7 +245,7 @@ def name_similarity(a,b):
     sumscores = 0
     for i in range(maxlen):
         if i < len(parts):
-            sumscores += weight_first_name(parts[i][0])
+            sumscores += weight_first_names(parts[i])
         elif i < len(partsA):
             sumscores -= 0.25*weight_first_name(partsA[i])
         else:
@@ -239,6 +253,41 @@ def name_similarity(a,b):
     sumscores = max(min(sumscores, 1), 0)
     return sumscores
 
+def shallower_name_similarity(a, b):
+    """
+    Same as name_similarity, but accepts differences in the last names.
+    This heuristics is more costly but is only used to attribute an ORCID
+    affiliation to the right author in papers fetched from ORCID.
+    """
+    if not a or not b:
+        return False
+    firstA, lastA = a
+    firstB, lastB = b
+
+    # Matching last names
+    lastA = iunaccent(lastA)
+    lastB = iunaccent(lastB)
+    wordsA, sepA = split_name_words(lastA)
+    wordsB, sepB = split_name_words(lastB)
+    wordsA = set(wordsA)
+    wordsB = set(wordsB)
+    ratio = float(len(wordsA & wordsB)) / len(wordsA | wordsB)
+
+    partsA, sepsA = split_name_words(firstA)
+    partsB, sepsB = split_name_words(firstB)
+    partsA = map(lambda x: x[0], partsA)
+    partsB = map(lambda x: x[0], partsB)
+
+    parts = zip(partsA, partsB)
+    if not all(map(match_first_names, parts)):
+        # Try to match in reverse
+        partsA.reverse()
+        partsB.reverse()
+        parts = zip(partsA, partsB)
+        if not all(map(match_first_names, parts)):
+            return 0.
+
+    return ratio*len(parts)/max(len(partsA), len(partsB))
 
 #### Helpers for the name splitting heuristic ######
 
@@ -378,6 +427,12 @@ def zipNone(lstA, lstB):
             yield (objA,objB)
     return list(aux())
 
+def num_caps(a):
+    """
+    Number of capitalized letters
+    """
+    return sum(map(lambda c: 1 if c.isupper() else 0, a))
+
 def name_unification(a, b):
     """
     Returns the unified name of two matching names
@@ -389,7 +444,7 @@ def name_unification(a, b):
     firstA, lastA = a
     firstB, lastB = b
 
-    if lastA != lastB:
+    if lastA.lower() != lastB.lower():
         return None
 
     wordsA, sepsA = split_name_words(firstA) 
@@ -402,6 +457,12 @@ def name_unification(a, b):
         elif b is None:
             return a
         elif len(a) < len(b):
+            return b
+        elif len(b) < len(a):
+            return a
+        elif num_caps(b) < num_caps(a):
+            return a
+        elif num_caps(a) < num_caps(b):
             return b
         else:
             return a
@@ -455,9 +516,13 @@ def unify_name_lists(a,b):
     result = []
     while iA < len(a) or iB < len(b):
         if iA == len(a):
+            idxB = b[iB][0]
+            rankB = (idxB+1)/lenB
             result.append((b[iB][1],(rankB+1)/lenB,(None,iB)))
             iB += 1
         elif iB == len(b):
+            idxA = a[iA][0]
+            rankA = (idxA+1)/lenA
             result.append((a[iA][1],(rankA+1)/lenA,(iA,None)))
             iA += 1
         else:
@@ -468,23 +533,40 @@ def unify_name_lists(a,b):
             rankA = (idxA+1)/lenA
             rankB = (idxB+1)/lenB
 
-            if nameA[1] == nameB[1]:
-                unified = name_unification(nameA,nameB)
-                if unified is not None:
-                    result.append((unified,0.5*(rankA+rankB),(idxA,idxB)))
-                else:
-                    result.append((nameA,rankA,(idxA,None)))
-                    result.append((nameB,rankB,(None,idxB)))
+            unified = name_unification(nameA,nameB)
+            if unified is not None:
+                result.append((unified,0.5*(rankA+rankB),(idxA,idxB)))
                 iA += 1
                 iB += 1
+            elif shallower_name_similarity(nameA, nameB) > 0.:
+                # Those two names might refer to the same person
+                # default to the first one as unification failed
+                result.append((nameA,rankA,(idxA,None)))
+                iA += 1
+                iB += 1
+            elif nameA[1] == nameB[1]:
+                # Those two names look incompatible because of their first names
+                result.append((nameA,rankA,(idxA,None)))
+                result.append((nameB,rankB,(None,idxB)))
+                iA += 1
+                iB += 1
+            elif nameA[1] < nameB[1]:
+                result.append((nameA,rankA,(idxA,None)))
+                iA += 1
             else:
-                if nameA[1] < nameB[1]:
-                    result.append((nameA,rankA,(idxA,None)))
-                    iA += 1
-                else:
-                    result.append((nameB,rankB,(None,idxB)))
-                    iB += 1
+                result.append((nameB,rankB,(None,idxB)))
+                iB += 1
 
     result = map(lambda (name,rank,idx):(name,idx), sorted(result, key=lambda x:x[1]))
-    return result
+
+    def make_unique(lst):
+        seen = set()
+        for name,idx in lst:
+            if name not in seen:
+                seen.add(name)
+                yield (name,idx)
+            else:
+                yield (None,idx)
+
+    return list(make_unique(result))
     

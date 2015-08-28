@@ -6,6 +6,7 @@
 {% load doi %}
 {% load i18n %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block headTitle %}
 {% trans "Depositing" %} "{{ paper.title }}"
@@ -25,9 +26,41 @@
 {% endblock %}
 
 {% block jsScript %}
-$(function(){
+$(function() {
     $('#waitingArea').hide();
     $('#uploadFileId').val('');
+    
+    /* Prefetched fields */
+    $('.prefetchingFieldStatus').each(function(i,prefetch) {
+        var p = $(prefetch);
+        p.text('{% trans "Trying to fill this field automatically for you..." %}');
+        field = $("#"+p.data("fieldid"));
+        console.log(field);
+        objid = $("input[name="+p.data("objfieldname")+"]").val();
+        console.log(objid);
+        field.prop('disabled', true);
+        $.get(p.data("callback"),
+            {"field":p.data("fieldname"),
+            "id":objid}, null, 'json').fail(
+            function(data) {
+                console.log(data);
+                p.text('{% trans "Sorry, we could not fill this for you." %}');
+                field.prop('disabled', false);
+            }
+        ).done(
+            function(data) {
+                if(!data['success']) {
+                    p.text('{% trans "Sorry, we could not fill this for you." %}');
+                } else {
+                    p.text('');
+                }
+                field.prop('disabled', false);
+                field.val(data['value']);
+            }
+        );        
+    });
+
+    $('.helpPopover').popover({trigger: "hover"});
 
     /* Panels */
     $('#optionUploadType').collapse({
@@ -98,11 +131,18 @@ $(function(){
     <p>
         {% blocktrans %}
             You can deposit the full text of your article. Dissemin will
-            send it to a repostory where it will be made freely available.
-            Please ensure that you are one of the authors of this paper or
-            that you have the permission to upload it on their behalf.
+            send it to a repository where it will be made freely available.
         {% endblocktrans %}
     </p>
+
+    {% if not is_owner %}
+    <div class="alert alert-warning" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign"></span>
+        You do not appear to be one of the authors of this paper.
+        By using this form, you certify that you have the permission to
+        upload it on their behalf.
+    </div>
+    {% endif %}
 </div>
 
 <span class="detailsTitle">{% trans "Document" %}</span>
@@ -160,9 +200,11 @@ $(function(){
         </div>
         <div id="optionMetadata" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingMetadata">
             <div class="panel-body">
-                <table>
-                    {{ zenodo_form }}
-                </table>
+                {% for form in forms %}
+                    <div class="form-group">
+                        {{ form|crispy }}
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -174,9 +216,9 @@ $(function(){
         <span>{% trans "Processing deposit..." %}</span> <span class="waitingBird"><img src="{% static "img/animated-bird.gif" %}" /></span> <span>{% trans "please wait..." %}</span>
     </div>
     <p>
+        {% url 'tos' as tosurl %}
         {% blocktrans %}
-            By depositing your article to Zenodo through Dissemin, you agree to the terms of use of
-            both services.
+        By depositing your article on Zenodo via Dissemin, you agree to our <a href="{{ tosurl }}">terms of service</a>.
         {% endblocktrans %}
     </p>
 </div>
