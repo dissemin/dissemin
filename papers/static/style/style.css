@@ -461,6 +461,12 @@ h1#paperTitle {
     text-align: right;
 }
 
+.publisher-policy
+{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 .orcidLink {
     padding-left: 2px;
 }

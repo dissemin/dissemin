@@ -2,6 +2,7 @@
 {% load i18n %}
 
 <div class="policyItem {% if typ == "preprint" %}firstPolicyItem{% elif typ == "pdfversion" %}lastPolicyItem{% endif %}">
+    {% if mode == "radio" %}
     <div style="display:none;">
         <span id="hiddenInline-{{ typ }}">
             <span><strong>{{ type_text_no_punc }}</strong>
@@ -9,6 +10,7 @@
                 {{ policy | explain_policy_short_no_punc }})</span>
         </span>
     </div>
+    {% endif %}
     <div class="policyPic policyPic-{{ policy }}"></div>
     <div class="policyText">
         <p>
@@ -36,6 +38,8 @@
         {% endfor %}
         </ul>
     </div>
+    {% if mode != "none" %}
     <div style="clear:both;"></div>
+    {% endif %}
 </div>
 

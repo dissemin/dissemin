@@ -23,6 +23,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import ugettext as __
+from django.utils.functional import cached_property
 
 from django.apps import apps
 get_model = apps.get_model
@@ -119,15 +120,27 @@ class Publisher(models.Model):
     @property
     def sorted_journals(self):
         return self.journal_set.all().select_related('stats').filter(stats__num_tot__gt=0).order_by('-stats__num_tot')
-    @property
+    @cached_property
     def preprint_conditions(self):
-        return self.publisherrestrictiondetail_set.filter(applies_to='preprint')
-    @property
+        return list(self.publisherrestrictiondetail_set.filter(applies_to='preprint'))
+    @cached_property
     def postprint_conditions(self):
-        return self.publisherrestrictiondetail_set.filter(applies_to='postprint')
-    @property
+        return list(self.publisherrestrictiondetail_set.filter(applies_to='postprint'))
+    @cached_property
     def pdfversion_conditions(self):
-        return self.publisherrestrictiondetail_set.filter(applies_to='pdfversion')
+        return list(self.publisherrestrictiondetail_set.filter(applies_to='pdfversion'))
+    @cached_property
+    def conditions(self):
+        return list(self.publishercondition_set.all())
+    @property
+    def has_conditions(self):
+        return len(self.conditions) > 0
+    @cached_property
+    def copyrightlinks(self):
+        return list(self.publishercopyrightlink_set.all())
+    @property
+    def has_copyrightlinks(self):
+        return len(self.copyrightlinks) > 0
     def change_oa_status(self, new_oa_status):
         if self.oa_status == new_oa_status:
             return
