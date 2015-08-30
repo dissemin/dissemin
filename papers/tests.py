@@ -399,6 +399,9 @@ class ValidateOrcidTest(unittest.TestCase):
     def test_whitespace(self):
         self.assertEqual(validate_orcid('\t0000-0002-8612-8827  '), '0000-0002-8612-8827')
 
+    def test_url(self):
+        self.assertEqual(validate_orcid('http://orcid.org/0000-0002-8612-8827'), '0000-0002-8612-8827')
+
 class GetNameFromOrcidProfileTest(unittest.TestCase):
     def get(self, id):
         return get_name_from_orcid_profile(get_orcid_profile(id))

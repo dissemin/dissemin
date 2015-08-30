@@ -152,6 +152,13 @@ class Researcher(models.Model):
             return 'Unnamed researcher'
 
     @property
+    def url(self):
+        if self.orcid:
+            return reverse('researcher-by-orcid', args=[self.orcid])
+        else:
+            return reverse('researcher', args=[self.pk])
+
+    @property
     def authors_by_year(self):
         """:py:class:`Author` objects for this researcher, filtered by decreasing publication date"""
         return Author.objects.filter(name__researcher_id=self.id).order_by('-paper__pubdate')
@@ -249,8 +256,18 @@ class Researcher(models.Model):
             name = get_name_from_orcid_profile(profile)
             homepage = get_homepage_from_orcid_profile(profile)
             email = get_email_from_orcid_profile(profile)
-            researcher = Researcher.create_from_scratch(name[0],name[1], orcid=orcid,
+            researcher = Researcher.get_or_create_by_name(name[0],name[1], orcid=orcid,
                     user=user, homepage=homepage, email=email)
+
+            # Ensure that extra info is added.
+            save = False
+            for kw, val in [('homepage',homepage),('orcid',orcid),('email',email)]:
+                if not researcher.__dict__[kw] and val:
+                    researcher.__dict__[kw] = val
+                    save = True
+            if save:
+                researcher.save()
+
             for variant in get_other_names_from_orcid_profile(profile):
                 confidence = name_similarity(variant, variant)
                 name = Name.lookup_name(variant)
@@ -267,6 +284,7 @@ class Researcher(models.Model):
            researcher.update_stats()
        return researcher
 
+    # TODO delete this method and replace it by get_or_create_by_name
     @classmethod
     def create_from_scratch(cls, first, last, **kwargs):
         """Creates a researcher, creating first the :py:class:`Name` for it.
@@ -279,7 +297,7 @@ class Researcher(models.Model):
         if not created and cls.objects.filter(name=name).count() > 0:
             # we forbid the creation of two researchers with the same name,
             # although our model would support it (TODO ?)
-            raise ValueError
+            raise ValueError('This name already exists')
 
         if kwargs.get('orcid') is not None:
             orcid = validate_orcid(kwargs['orcid'])

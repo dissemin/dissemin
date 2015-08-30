@@ -127,6 +127,10 @@ def split_name_words(string):
         words.append(buf)
     return (words,separators)
 
+def has_only_initials(string):
+    words, separators = split_name_words(string)
+    return all(map(lambda x: len(x) == 1, words))
+
 def shorten_first_name(string):
     words, separators = split_name_words(string)
     result = ""

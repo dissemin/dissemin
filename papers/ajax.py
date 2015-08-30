@@ -25,6 +25,8 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseForbidden
 from django.contrib.auth.decorators import user_passes_test
 from django.core.validators import validate_email
+from django.core.exceptions import MultipleObjectsReturned
+from django.template import loader
 from django.forms import ValidationError
 from django.db import IntegrityError
 from django.utils.translation import ugettext as __
@@ -37,7 +39,7 @@ from dissemin.settings import URL_DEPOSIT_DOWNLOAD_TIMEOUT, DEPOSIT_MAX_FILE_SIZ
 
 from papers.models import *
 from papers.user import *
-from papers.forms import AddResearcherForm
+from papers.forms import AddResearcherForm, AddUnaffiliatedResearcherForm
 from papers.utils import iunaccent, sanitize_html
 
 import os.path
@@ -75,6 +77,44 @@ def deleteResearcher(request, pk):
     researcher = get_object_or_404(Researcher, pk=pk)
     researcher.delete()
     return HttpResponse('OK', content_type='text/plain')
+
+def newUnaffiliatedResearcher(request):
+    if request.method != 'POST':
+        return HttpResponseForbidden('"Invalid method"', content_type='application/javascript')
+    form = AddUnaffiliatedResearcherForm(request.POST)
+    researcher = None
+    if form.is_valid():
+        orcid = form.cleaned_data['orcid']
+        if orcid:
+            researcher = Researcher.get_or_create_by_orcid(orcid)
+        else:
+            first = form.cleaned_data['first']
+            last = form.cleaned_data['last']
+            # Check that the researcher is not already known under a different name.
+            if not form.cleaned_data.get('force'):
+                name, created = Name.get_or_create(first, last)
+                try:
+                    researcher = Researcher.objects.get(name=name)
+                    return HttpResponse(json.dumps({'url':researcher.url}))
+                except (Researcher.DoesNotExist, MultipleObjectsReturned):
+                    pass
+                related_researchers = []
+                def renderResearcher(res):
+                    return loader.render_to_string('papers/itemResearcher.html',
+                            {'researcher':res})
+                if not created:
+                    # select_related ? TODO
+                    related_researchers = list(map(lambda nv: nv.researcher, name.namevariant_set.all()))
+                    if related_researchers:
+                        rendered = map(renderResearcher, related_researchers)
+                        return HttpResponse(json.dumps({'disambiguation':rendered}))
+                    # TODO add search results from CrossRef interface.
+            researcher = Researcher.get_or_create_by_name(first, last)
+        researcher.fetch_everything_if_outdated()
+        return HttpResponse(json.dumps({'url':researcher.url}))
+    else:
+        return HttpResponseForbidden(json.dumps(form.errors), content_type='application/javascript')
+
 
 @user_passes_test(is_admin)
 def addResearcher(request):
@@ -227,6 +267,7 @@ urlpatterns = patterns('',
 #    url(r'^change-researcher$', changeResearcher, name='ajax-changeResearcher'),
 #    url(r'^change-author$', changeAuthor, name='ajax-changeAuthor'),
 #    url(r'^add-researcher$', addResearcher, name='ajax-addResearcher'),
+    url(r'^new-unaffiliated-researcher$', newUnaffiliatedResearcher, name='ajax-newUnaffiliatedResearcher'),
     url(r'^change-publisher-status$', changePublisherStatus, name='ajax-changePublisherStatus'),
     url(r'^harvesting-status-(?P<pk>\d+)$', harvestingStatus, name='ajax-harvestingStatus'),
     url(r'^wait-for-consolidated-field$', waitForConsolidatedField, name='ajax-waitForConsolidatedField'),

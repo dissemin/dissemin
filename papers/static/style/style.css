@@ -858,6 +858,10 @@ h1#paperTitle {
     width: 100%;
 }
 
+.form-inline .form-group {
+    width: auto;
+}
+
 .editableform .form-control {
     width: 100%;
 }
@@ -891,8 +895,51 @@ h1#paperTitle {
 #welcome .startButton a {
     color: #2A6496;
     text-decoration: none;
+    margin: 0px 10px;
 }
 
+#lookUpColleague {
+    margin: auto;
+    max-width: 400px;
+}
+
+#lookUpColleague .form-inline {
+    padding: 5px 0px;
+}
+
+#nameGroup .form-group {
+    width:49%;
+    vertical-align: bottom;
+}
+
+#orcidGroup, #orcidGroup .form-group, #id_orcid, #nameGroup input {
+    width: 100%;
+}
+
+#lookUpColleague .formErrorDiv {
+    color: #FEA4A4;
+    font-size: 0.8em;
+}
+
+#lookUpColleagueForm {
+    margin-left: -110px;
+}
+
+.researcherMethodLabel {
+    width: 110px;
+    font-size: 0.9em;
+    font-style: italic;
+    text-align: right;
+    padding-right: 5px;
+}
+
+#submitGroup {
+    text-align: center;
+}
+
+#lookUpColleague input {
+    color: #2A6496;
+}
 
 #welcome #institutionblock {
 	float:right;

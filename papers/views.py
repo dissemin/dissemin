@@ -84,6 +84,7 @@ def index(request):
         'nb_publishers': Publisher.objects.filter(stats__num_tot__gt=0).count(),
         'papers' : Paper.objects.filter(visibility='VISIBLE').order_by('-pubdate')[:5],
         'publishers' : Publisher.objects.all().filter(stats__isnull=False).order_by('-stats__num_tot')[:3],
+        'newResearcherForm' : AddUnaffiliatedResearcherForm(),
         }
     context.update(UNIVERSITY_BRANDING)
     return render(request, 'papers/index.html', context)

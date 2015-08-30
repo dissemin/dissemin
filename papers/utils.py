@@ -257,20 +257,21 @@ def tolerant_datestamp_to_datetime(datestamp):
 
 ### ORCiD utilities ###
 
-orcid_re = re.compile(r'^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{3}[X0-9]$')
+orcid_re = re.compile(r'^(http://orcid.org/)?([0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{3}[X0-9])$')
 
 def validate_orcid(orcid):
     """
     :returns: a cleaned ORCiD if the argument represents a valid ORCiD, None otherwise
     """
     try:
-        orcid = str(orcid).strip()
-    except ValueError:
+        orcid = unicode(orcid).strip()
+    except ValueError, TypeError:
         return
 
     match = orcid_re.match(orcid)
     if not match:
         return
+    orcid = match.group(2)
     nums = orcid.replace('-','')
     total = 0
     for i in range(15):

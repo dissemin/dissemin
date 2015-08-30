@@ -1,0 +1,10 @@
+{% load domain %}
+{% load static %}
+<a href="{{ researcher.url }}">{{ researcher }}</a> 
+{% if researcher.orcid %}
+<span><a href="http://orcid.org/{{ researcher.orcid }}"><img src="{% static "img/orcid-small.png" %}" alt="ORCID" /> {{ researcher.orcid }}</a></span>
+{% endif %}
+
+{% if researcher.homepage %}
+<span><span class="glyphicon glyphicon-home"></span> <a href="{{ researcher.homepage }}">{{ researcher.homepage|domain }}</a></span>
+{% endif %}
