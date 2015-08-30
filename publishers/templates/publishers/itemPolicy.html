@@ -1,7 +1,7 @@
 {% load statuses %}
 {% load i18n %}
 
-<div class="policyItem {% if typ == "preprint" %}firstPolicyItem{% elif typ == "pdfversion" %}lastPolicyItem{% endif %}">
+<div class="policyItem {% if fst %}firstPolicyItem{% elif mode == "none" or lst %}{% if typ == "pdfversion" %}lastPolicyItem{% endif %}{% endif %}">
     {% if mode == "radio" %}
     <div style="display:none;">
         <span id="hiddenInline-{{ typ }}">

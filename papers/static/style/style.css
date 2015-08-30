@@ -360,6 +360,7 @@ h1#paperTitle {
 	max-width:500px;
 	margin-left:50px;
     margin-top:10px;
+    margin-bottom: 20px;
 }
 
 .paperDeleteButton, .researcherDeleteButton
@@ -448,6 +449,16 @@ h1#paperTitle {
 .lastPolicyItem
 {
     border-bottom: 1px solid #cccccc;
+}
+
+.policyReadMoreLink, .policySherpaLink
+{
+    font-style: italic;
+}
+
+.policySherpaLink
+{
+    float: right;
 }
 
 .policyDetailUpload

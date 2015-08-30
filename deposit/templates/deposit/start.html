@@ -129,9 +129,12 @@ $(function() {
 {% block lists %}
 <div id="uploadIntro">
     <p>
+        {% url 'tos' as tosurl %}
         {% blocktrans %}
             You can deposit the full text of your article. Dissemin will
             send it to a repository where it will be made freely available.
+            By depositing your article on Zenodo via Dissemin,
+            you agree to our <a href="{{ tosurl }}">terms of service</a>.
         {% endblocktrans %}
     </p>
 
@@ -215,20 +218,11 @@ $(function() {
     <div id="waitingArea">
         <span>{% trans "Processing deposit..." %}</span> <span class="waitingBird"><img src="{% static "img/animated-bird.gif" %}" /></span> <span>{% trans "please wait..." %}</span>
     </div>
-    <p>
-        {% url 'tos' as tosurl %}
-        {% blocktrans %}
-        By depositing your article on Zenodo via Dissemin, you agree to our <a href="{{ tosurl }}">terms of service</a>.
-        {% endblocktrans %}
-    </p>
 </div>
 </form>
 {% endblock %}
 
 {% block details %}
-<span class="detailsTitle">{% trans "Data from" %}</span>
-<div class="detailsContent">
-    {% include "papers/paperSources.html" with paper=paper %}
-</div>
+{% include "papers/paperDetails.html" with paper=paper %}
 
 {% endblock %}
