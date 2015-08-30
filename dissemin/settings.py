@@ -285,6 +285,13 @@ redis_client = redis.StrictRedis(host='localhost', port=6379, db=0)
 CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
 CELERY_IMPORTS = ['backend.tasks']
 
+CELERYBEAT_SCHEDULE = {
+        'update_all_stats': {
+            'task':'update_all_stats',
+            'schedule':timedelta(minutes=5),
+            }
+}
+
 # This is the time in seconds before an unacknowledged task is re-sent to
 # another worker. It should exceed the length of the longest task, otherwise
 # it will be executed twice ! 43200 is one day.

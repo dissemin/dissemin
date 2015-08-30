@@ -47,7 +47,7 @@ def varyQueryArguments(key, args, possibleValues):
 def publishersView(request, **kwargs):
     context = dict()
     # Build the queryset
-    queryset = Publisher.objects.all()
+    queryset = Publisher.objects.filter(stats__isnull=False)
     args = request.GET.copy()
     args.update(kwargs)
 

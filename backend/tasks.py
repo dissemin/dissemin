@@ -169,3 +169,14 @@ def change_publisher_oa_status(pk, status):
     publisher.change_oa_status(status)
     publisher.update_stats()
 
+@shared_task(name='update_all_stats')
+def update_all_stats():
+    """
+    Updates the stats for every model using them
+    """
+    AccessStatistics.update_all_stats(PaperWorld)
+    AccessStatistics.update_all_stats(Publisher)
+    AccessStatistics.update_all_stats(Journal)
+    AccessStatistics.update_all_stats(Researcher)
+
+
