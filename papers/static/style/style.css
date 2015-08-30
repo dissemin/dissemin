@@ -63,6 +63,14 @@ h4
     text-align: left;
 }
 
+#top-breadcrumb {
+    margin-bottom: 0px;
+    border-radius: 0px;
+    border-right: 1px solid #C0BCCE;
+    border-left: 1px solid #C0BCCE;
+    padding: 4px 17px;
+}
+
 /* Dissemin navbar header */
 
 #header

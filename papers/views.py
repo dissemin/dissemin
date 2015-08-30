@@ -116,6 +116,7 @@ def searchView(request, **kwargs):
         head_search_description = unicode(researcher)
         context['researcher'] = researcher
         context['researcher_id'] = researcher.id
+        context['breadcrumbs'] = researcher.breadcrumbs()
     elif 'name' in args:
         name = get_object_or_404(Name, pk=args.get('name'))
         queryset = queryset.filter(author__name=name)
@@ -127,12 +128,14 @@ def searchView(request, **kwargs):
         queryset = queryset.filter(publication__journal=journal)
         search_description += _(' in ')+unicode(journal)
         context['journal'] = journal
+        context['breadcrumbs'] = journal.breadcrumbs()
     elif 'publisher' in args:
         publisher = get_object_or_404(Publisher, pk=args.get('publisher'))
         queryset = queryset.filter(publication__publisher=publisher)
         search_description += _(' published by ')+unicode(publisher)
         head_search_description = unicode(publisher)
         context['publisher'] = publisher
+        context['breadcrumbs'] = publisher.breadcrumbs()+[(_('Papers'),'')]
     if 'status' in args:
         queryset = queryset.filter(oa_status=args.get('status'))
         # We don't update the search description here, it will be displayed on the side
@@ -159,6 +162,7 @@ def searchView(request, **kwargs):
         context['visibility'] = 'VISIBLE'
 
     if search_description == _('Papers'):
+        context['breadcrumbs'] = [(search_description,'')]
         search_description = _('All papers')
 
     # Sort
@@ -231,6 +235,8 @@ class PaperView(generic.DetailView):
         return Department.objects.filter(researcher__author__paper=paper).distinct()
     def get_context_data(self, **kwargs):
         context = super(PaperView, self).get_context_data(**kwargs)
+        context['breadcrumbs'] = self.get_object().breadcrumbs()
+        print context['breadcrumbs']
         if 'deposit' in self.request.GET:
             try:
                 pk = int(self.request.GET['deposit'])

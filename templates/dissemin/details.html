@@ -1,6 +1,9 @@
 {% extends "dissemin/skeleton.html" %}
 
 {% block content %}
+{% if breadcrumbs %}
+    {% include "dissemin/breadcrumbs.html" %}
+{% endif %}
 <div id="sidebar">
     {% block details %}
     {% endblock %}

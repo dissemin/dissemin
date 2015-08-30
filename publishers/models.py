@@ -24,6 +24,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import ugettext as __
 from django.utils.functional import cached_property
+from django.core.urlresolvers import reverse
 
 from django.apps import apps
 get_model = apps.get_model
@@ -46,6 +47,10 @@ POLICY_CHOICES = [('can', _('Allowed')),
 
 OA_STATUS_PREFERENCE = [x[0] for x in OA_STATUS_CHOICES]
 OA_STATUS_CHOICES_WITHOUT_HELPTEXT = [(x[0],x[1]) for x in OA_STATUS_CHOICES]
+
+
+def publishers_breadcrumbs():
+    return [(_('Publishers'),reverse('publishers'))]
 
 class DummyPublisher(object):
     pk = None
@@ -151,6 +156,12 @@ class Publisher(models.Model):
             p.update_availability()
             p.invalidate_cache()
 
+    def breadcrumbs(self):
+        result = publishers_breadcrumbs()
+        result.append((unicode(self), reverse('publisher', args=[self.pk])))
+        return result
+
+
 # Journal data retrieved from RoMEO
 class Journal(models.Model):
     title = models.CharField(max_length=256, db_index=True)
@@ -165,6 +176,8 @@ class Journal(models.Model):
             self.save()
         self.stats.update(get_model('papers', 'Paper').objects.filter(publication__journal=self).distinct())
 
+    def breadcrumbs(self):
+        return self.publisher.breadcrumbs()+[(unicode(self),'')]
     def __unicode__(self):
         return self.title
     class Meta:

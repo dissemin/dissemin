@@ -74,6 +74,7 @@ def publishersView(request, **kwargs):
     context['search_results'] = current_publishers
     context['search_description'] = search_description
     context['nb_results'] = queryset.count()
+    context['breadcrumbs'] = publishers_breadcrumbs()
 
     # Build the GET requests for variants of the parameters
     args_without_page = args.copy()
@@ -102,6 +103,10 @@ class PublisherView(generic.DetailView):
         except EmptyPage:
             current_journals = paginator.page(paginator.num_pages)
         context['journals'] = current_journals
+        
+        # Breadcrumbs
+        context['breadcrumbs'] = publisher.breadcrumbs()
+        
         return context
 
 

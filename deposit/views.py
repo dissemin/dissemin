@@ -25,6 +25,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseForbidden
 from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import render
+from django.utils.translation import ugettext as _
 
 from dissemin.settings import MEDIA_ROOT, UNIVERSITY_BRANDING, DEPOSIT_MAX_FILE_SIZE 
 
@@ -46,11 +47,14 @@ def get_all_protocols(paper, user):
 def start_view(request, pk):
     paper = get_object_or_404(Paper, pk=pk)
     forms = map(lambda i: i.get_form(), get_all_protocols(paper, request.user))
+    breadcrumbs = paper.breadcrumbs()
+    breadcrumbs.append((_('Deposit'),''))
     context = {
             'paper':paper,
             'max_file_size':DEPOSIT_MAX_FILE_SIZE,
             'forms': forms,
             'is_owner':paper.is_owned_by(request.user),
+            'breadcrumbs':breadcrumbs,
             }
     if request.GET.get('type') not in [None,'preprint','postprint','pdfversion']:
         return HttpResponseForbidden()

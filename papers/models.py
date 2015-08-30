@@ -21,6 +21,7 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
@@ -297,6 +298,9 @@ class Researcher(models.Model):
         """Criteria to use in the search view to filter on this researcher"""
         return "researcher=%d" % self.pk
 
+    def breadcrumbs(self):
+        return [(unicode(self),reverse('researcher', args=[self.pk]))]
+
 
 MAX_NAME_LENGTH = 256
 class Name(models.Model):
@@ -461,14 +465,14 @@ class Paper(models.Model):
         """
         return self.pubdate.year
 
-    @property
+    @cached_property
     def prioritary_oai_records(self):
         """
         OAI records from custom sources we trust (positive priority)
         """
         return self.sorted_oai_records.filter(priority__gt=0)
 
-    @property
+    @cached_property
     def sorted_oai_records(self):
         """
         OAI records sorted by decreasing order of priority
@@ -476,7 +480,7 @@ class Paper(models.Model):
         """
         return self.oairecord_set.order_by('-priority')
 
-    @property
+    @cached_property
     def sorted_authors(self):
         """
         The author sorted as they should appear. Their names are pre-fetched.
@@ -495,16 +499,15 @@ class Paper(models.Model):
         """
         return [(name.first,name.last) for name in self.author_names()]
 
-
+    @property
     def author_count(self):
         """
         Number of authors. This property is cached in instances to
         avoid repeated COUNT queries.
         """
-        if self.cached_author_count == None:
-            self.cached_author_count = self.author_set.count()
-        return self.cached_author_count
+        return len(self.sorted_authors)
 
+    @property
     def has_many_authors(self):
         """
         When the paper has more than 15 authors (arbitrary threshold)
@@ -517,9 +520,10 @@ class Paper(models.Model):
         We display first the authors whose names are known, and then a few ones
         who are unknown.
         """
-        lst = (list(self.sorted_authors.filter(name__best_confidence__gt=0))+list(
-            self.sorted_authors.filter(name__best_confidence=0))[:3])[:15]
-        self.nb_remaining_authors = self.author_count() - len(lst)
+        sorted_authors = self.sorted_authors
+        lst = (filter(lambda a: a.name.best_confidence > 0, sorted_authors)+filter(
+                      lambda a: a.name.best_confidence == 0, sorted_authors)[:3])[:15]
+        self.nb_remaining_authors = self.author_count - len(lst)
         return lst
 
     def displayed_authors(self):
@@ -527,7 +531,7 @@ class Paper(models.Model):
         Returns the full list of authors if there are not too many of them,
         otherwise returns only the interesting_authors()
         """
-        if self.has_many_authors():
+        if self.has_many_authors:
             return self.interesting_authors
         else:
             return self.sorted_authors
@@ -845,6 +849,39 @@ class Paper(models.Model):
         """
         return (self.oairecord_set.count() == 0 and self.publication_set.count() == 0)
 
+    def breadcrumbs(self):
+        """
+        Returns the navigation path to the paper, for display as breadcrumbs in the template.
+        """
+        first_researcher = None
+        for author in self.sorted_authors:
+            if author.researcher:
+                first_researcher = author.researcher
+                break
+        result = []
+        if first_researcher is None:
+            result.append((_('Papers'), reverse('search')))
+        else:
+            result.append((unicode(first_researcher), reverse('researcher', args=[first_researcher.pk])))
+        result.append((self.citation, reverse('paper', args=[self.pk])))
+        return result
+
+    def citation(self):
+        """
+        A short citation-like representation of the paper. E.g. Joyal and Street, 1992
+        """
+        result = ''
+        if self.author_count == 1:
+            result = self.sorted_authors[0].name.last
+        elif self.author_count == 2:
+            result = "%s and %s" % (
+                self.sorted_authors[0].name.last,
+                self.sorted_authors[1].name.last)
+        else:
+            result = "%s et. al." % (
+                self.sorted_authors[0].name.last)
+        result += ', %d' % self.year
+        return result
 
 
 # Researcher / Paper binary relation
