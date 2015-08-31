@@ -402,15 +402,15 @@ class ValidateOrcidTest(unittest.TestCase):
     def test_url(self):
         self.assertEqual(validate_orcid('http://orcid.org/0000-0002-8612-8827'), '0000-0002-8612-8827')
 
-class GetNameFromOrcidProfileTest(unittest.TestCase):
-    def get(self, id):
-        return get_name_from_orcid_profile(get_orcid_profile(id))
+class OrcidProfileTest(unittest.TestCase):
+    def test_simple_name(self):
+        self.assertEqual(OrcidProfile(id='0000-0002-8612-8827').name, ('Antonin','Delpeuch'))
+        self.assertEqual(OrcidProfile(id='0000-0003-0524-631X').name, ('Thomas','Bourgeat'))
 
-    def test_simple(self):
-        self.assertEqual(self.get('0000-0002-8612-8827'), ('Antonin','Delpeuch'))
-        self.assertEqual(self.get('0000-0003-0524-631X'), ('Thomas','Bourgeat'))
+    def test_credit_name(self):
+        self.assertEqual(OrcidProfile(id='0000-0003-3397-9895').name, ('Sergey M.','Natanzon'))
+        self.assertEqual(OrcidProfile(id='0000-0001-9547-293X').name, ('Darío', 'Álvarez'))
 
-    def test_credit(self):
-        self.assertEqual(self.get('0000-0003-3397-9895'), ('Sergey M.','Natanzon'))
-        self.assertEqual(self.get('0000-0001-9547-293X'), ('Darío', 'Álvarez'))
+    def test_homepage_without_http(self):
+        self.assertEqual(OrcidProfile(id='0000-0002-5710-3989').homepage, 'http://evrard.perso.enseeiht.fr')
 

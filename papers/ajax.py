@@ -78,6 +78,32 @@ def deleteResearcher(request, pk):
     researcher.delete()
     return HttpResponse('OK', content_type='text/plain')
 
+def researcherCandidatesByName(name):
+    """
+    Given a Name object, find researchers that are potentially meant
+    by this name. They come either from the model (Researcher instances
+    who have this name as NameVariant) or search results from the ORCID
+    API that are compatible with this name.
+
+    Results are returned as a list of HTML elements, to be displayed
+    in the disambiguation dialog.
+    """
+    # From the model
+    related_researchers = list(map(lambda nv: nv.researcher, name.namevariant_set.all()))
+    def renderResearcher(res):
+        return loader.render_to_string('papers/itemResearcher.html',
+                {'researcher':res})
+    rendered = map(renderResearcher, related_researchers)
+
+    # From ORCID
+    related_orcids = OrcidProfile.search_by_name(name.first, name.last)
+    def renderProfile(res):
+        return loader.render_to_string('papers/itemOrcid.html',
+                {'profile':res})
+    rendered += map(renderProfile, related_orcids)
+    return rendered
+    
+
 def newUnaffiliatedResearcher(request):
     if request.method != 'POST':
         return HttpResponseForbidden('"Invalid method"', content_type='application/javascript')
@@ -98,17 +124,10 @@ def newUnaffiliatedResearcher(request):
                     return HttpResponse(json.dumps({'url':researcher.url}))
                 except (Researcher.DoesNotExist, MultipleObjectsReturned):
                     pass
-                related_researchers = []
-                def renderResearcher(res):
-                    return loader.render_to_string('papers/itemResearcher.html',
-                            {'researcher':res})
-                if not created:
-                    # select_related ? TODO
-                    related_researchers = list(map(lambda nv: nv.researcher, name.namevariant_set.all()))
-                    if related_researchers:
-                        rendered = map(renderResearcher, related_researchers)
-                        return HttpResponse(json.dumps({'disambiguation':rendered}))
-                    # TODO add search results from CrossRef interface.
+                candidates = researcherCandidatesByName(name)
+                if candidates:
+                    return HttpResponse(json.dumps({'disambiguation':candidates}))
+
             researcher = Researcher.get_or_create_by_name(first, last)
         researcher.fetch_everything_if_outdated()
         return HttpResponse(json.dumps({'url':researcher.url}))

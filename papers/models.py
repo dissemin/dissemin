@@ -35,7 +35,7 @@ from celery.result import AsyncResult
 from papers.utils import nstr, iunaccent, create_paper_plain_fingerprint
 from papers.name import match_names, name_similarity, unify_name_lists
 from papers.utils import remove_diacritics, sanitize_html, validate_orcid, affiliation_is_greater
-from papers.orcid import *
+from papers.orcid import OrcidProfile
 
 from statistics.models import AccessStatistics
 from publishers.models import Publisher, Journal, OA_STATUS_CHOICES, OA_STATUS_PREFERENCE, DummyPublisher
@@ -252,10 +252,12 @@ class Researcher(models.Model):
             researcher = Researcher.objects.get(orcid=orcid)
         except Researcher.DoesNotExist:
             if profile is None:
-                profile = get_orcid_profile(orcid) 
-            name = get_name_from_orcid_profile(profile)
-            homepage = get_homepage_from_orcid_profile(profile)
-            email = get_email_from_orcid_profile(profile)
+                profile = OrcidProfile(id=orcid) 
+            else:
+                profile = OrcidProfile(json=profile)
+            name = profile.name
+            homepage = profile.homepage
+            email = profile.email
             researcher = Researcher.get_or_create_by_name(name[0],name[1], orcid=orcid,
                     user=user, homepage=homepage, email=email)
 
@@ -268,7 +270,7 @@ class Researcher(models.Model):
             if save:
                 researcher.save()
 
-            for variant in get_other_names_from_orcid_profile(profile):
+            for variant in profile.other_names:
                 confidence = name_similarity(variant, variant)
                 name = Name.lookup_name(variant)
                 researcher.add_name_variant(name, confidence)

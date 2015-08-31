@@ -1,0 +1,5 @@
+{% load domain %}
+{% load static %}
+<a href="{% url 'researcher-by-orcid' profile.orcid %}">{{ profile.first }} {{ profile.last }}</a>, 
+<span><a href="http://orcid.org/{{ profile.orcid }}"><img src="{% static "img/orcid-small.png" %}" alt="ORCID" /> {{ profile.orcid }}</a></span>
+

@@ -113,15 +113,17 @@ def fetch_orcid_records(id, profile=None, use_doi=True):
         raise MetadataSourceException('Invalid ORCiD identifier')
 
     # Get ORCiD profile
-    if profile is None:
-        profile = get_orcid_profile(id)
-    if profile is None:
-        print "ORCID profile %s not found, aborting" % id
+    try:
+        if profile is None:
+            profile = OrcidProfile(id=id)
+        else:
+            profile = OrcidProfile(json=profile)
+    except MetadataSourceException as e:
+        print e
         return 0
 
     # Reference name
     ref_name = get_name_from_orcid_profile(profile)
-
     # curl -H "Accept: application/orcid+json" 'http://pub.orcid.org/v1.2/0000-0002-8612-8827/orcid-works' -L -i
     dois = [] # list of DOIs to fetch
     papers = [] # list of papers created
