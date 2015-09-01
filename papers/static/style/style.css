@@ -912,6 +912,10 @@ h1#paperTitle {
     vertical-align: bottom;
 }
 
+#welcome .active {
+    background-color: #D1D1D1;
+}
+
 #orcidGroup, #orcidGroup .form-group, #id_orcid, #nameGroup input {
     width: 100%;
 }

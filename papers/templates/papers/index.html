@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load solo_tags %}
+{% load static %}
 
 {% block headTitle %}
 {% trans "Home" %}
@@ -17,7 +18,12 @@ $(function(){
         $(this).toggleClass('active');
         $('#lookUpColleague').slideToggle();
     });
- });
+});
+
+function reqComplete() {
+    $('#lookUpColleagueForm :input').prop('disabled', false);
+    $('#loadingPic').remove();
+}
 
 function lookUpColleague() {
     var data = $('#lookUpColleagueForm').serialize();
@@ -30,8 +36,11 @@ function lookUpColleague() {
     }
 
     $('#forceInput').val('');
+    $('#lookUpColleagueForm :input').prop('disabled', true);
+    $('#submitGroup').append('<img alt="{% trans "Searching..." %}" src="{% static "img/loading.gif" %}" id="loadingPic" style="margin-right: -32px; margin-left: -2px;" />');
     $.post('{% url 'ajax-newUnaffiliatedResearcher' %}', data, null, 'json').fail(
         function(data) {
+            reqComplete();
             if(!data.responseJSON) {
                 $('#globalError').text(data.responseText);
             } else {
@@ -45,7 +54,7 @@ function lookUpColleague() {
                 }
             }
         }).done(function(data) {
-            console.log(data);
+            reqComplete();
             if('url' in data) {
                 window.location.replace(data['url']);
             } else {
@@ -67,7 +76,7 @@ function lookUpColleague() {
 <div id="fullPage">
   <div id="welcome">
 	<div id="institutionblock">
-	  <img id="institution" src="/static/img/bird-front.png" />
+        <img id="institution" src="{% static "img/bird-front.png" %}" />
 	</div>
 	
     <h2>{% trans "Welcome to dissemin" %}</h2>
