@@ -907,6 +907,11 @@ h1#paperTitle {
     padding: 5px 0px;
 }
 
+.confirmSuggestion {
+    margin-top: -4px;
+    float: right;
+}
+
 #nameGroup .form-group {
     width:49%;
     vertical-align: bottom;

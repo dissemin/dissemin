@@ -25,7 +25,7 @@ from lxml import etree
 from django.utils.http import urlencode
 from papers.errors import MetadataSourceException
 from papers.name import normalize_name_words, parse_comma_name, shallower_name_similarity
-from papers.utils import jpath
+from papers.utils import jpath, urlize
 
 class OrcidProfile(object):
     """
@@ -80,11 +80,6 @@ class OrcidProfile(object):
         """
         Extract an URL for that researcher (if any)
         """
-        def urlize(val):
-            if val and not val.startswith('http://'):
-                val = 'http://'+val
-            return val
-
         lst = jpath('orcid-profile/orcid-bio/researcher-urls/researcher-url', self.json, default=[])
         for url in lst:
             val = jpath('url/value', url)
@@ -177,10 +172,21 @@ class OrcidProfile(object):
                     continue
                 orcid = orcid_elem[0].text
 
+                # Add other things
+                lst = elem.xpath('./ns:orcid-profile/ns:orcid-bio/ns:researcher-urls/ns:researcher-url/ns:url/text()', namespaces=ns)
+                homepage = None 
+                for url in lst:
+                    homepage = urlize(url)
+                    break
+
+                keywords = elem.xpath('./ns:orcid-profile/ns:orcid-bio/ns:keywords/ns:keyword/text()', namespaces=ns)
+
                 yield {
                         'first':candidateFirst,
                         'last':candidateLast,
                         'orcid':orcid,
+                        'homepage':homepage,
+                        'keywords':keywords,
                       }
 
         except etree.XMLSyntaxError as e:
