@@ -123,7 +123,7 @@ def fetch_orcid_records(id, profile=None, use_doi=True):
         return 0
 
     # Reference name
-    ref_name = get_name_from_orcid_profile(profile)
+    ref_name = profile.name
     # curl -H "Accept: application/orcid+json" 'http://pub.orcid.org/v1.2/0000-0002-8612-8827/orcid-works' -L -i
     dois = [] # list of DOIs to fetch
     papers = [] # list of papers created

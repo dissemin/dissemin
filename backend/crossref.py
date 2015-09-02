@@ -33,7 +33,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from papers.errors import MetadataSourceException
 from papers.doi import to_doi
 from papers.name import match_names, normalize_name_words, parse_comma_name
-from papers.utils import create_paper_fingerprint, iunaccent, tolerant_datestamp_to_datetime, date_from_dateparts, affiliation_is_greater
+from papers.utils import create_paper_fingerprint, iunaccent, tolerant_datestamp_to_datetime, date_from_dateparts, affiliation_is_greater, jpath
 from papers.models import Publication, Paper
 
 from backend.utils import urlopen_retry
@@ -42,6 +42,35 @@ import backend.create
 
 from dissemin.settings import DOI_PROXY_DOMAIN, DOI_PROXY_SUPPORTS_BATCH
 
+######## HOW THIS MODULE WORKS ###########
+#
+# 1. Background on DOIs
+#
+# DOIs are managed by the DOI International Foundation. They provide
+# a persistent identifier for objects. dx.doi.org redirects to the current
+# URL for a given DOI (this URL can be updated by the provider).
+#
+# DOIs can be emitted by many different providers: among others, CrossRef,
+# DataCite, MEDRA, etc.
+#
+# Using content negotiation, we can also retrieve metadata about these DOIs.
+# By passing the header Accept: application/citeproc+json, supported by multiple
+# academic DOI providers. This is *slow* because we need two HTTP requests per DOI
+# to retrieve the metadata. Therefore we have implemented a proxy that caches
+# this metadata and serves it in only one HTTP request once it is cached. It also
+# provides a batch lookup capability.
+#
+# 2. CrossRef
+#
+# CrossRef is one particular DOI provider, the largest one for academic works.
+# They provide their own search API that returns the metadata of the objects found.
+# We do not need to use content negotation to fetch the metadata from CrossRef
+# as it is already provided in the search results.
+#
+# Content negotiation remains useful for other providers (DOIs discovered by 
+# other means).
+#
+
 # Number of results per page we ask the CrossRef search interface
 # (looks like it does not support more than 20)
 nb_results_per_request = 20
@@ -49,99 +78,13 @@ nb_results_per_request = 20
 crossref_timeout = 15
 # Maximum number of pages looked for a researcher
 max_crossref_batches_per_researcher = 7
-# Maxmimum number of batches trivially skipped (because the last name does not occur in them)
-crossref_max_empty_batches = 2
 # Maximum number of non-trivially skipped records that do not match any researcher
 crossref_max_skipped_records = 100
 
 
-def fetch_list_of_DOIs_from_crossref(query, page, number, citationToken=None):
-    """
-    Queries the search interface and returns a list of potentially relevant DOIs.
-    This does not return the full metadata, only the DOI lists.
-    - query is the string to search for (the CrossRef query)
-    - number is the number of records to display on each page (apparently only 20 works)
-    - page is the page number (starting at 0)
-    - citationToken is a token to look for in the full citation. If it is not present,
-      the DOI will not be returned. Concretely, this is used with the last name of the
-      researcher we look at, because there are no chances that the paper will make
-      it through the rest of the pipeline if the last name does not occur exactly 
-      in this form.
-    """
-    try:
-        page = int(page)
-        number = int(number)
-    except ValueError:
-        raise ValueError("Page and number have to be integers.")
+####### 1. Generic DOI metadata fetching tools ########
 
-    if citationToken:
-        citationToken = iunaccent(citationToken)
-
-    query_args = {'q':unidecode(query), 'page':str(page), 'number':str(number)}
-    request = 'http://search.crossref.org/dois?'+urlencode(query_args)
-    try:
-        response = urlopen_retry(request, timeout=crossref_timeout)
-        parsed = json.loads(response)
-        result = []
-        for dct in parsed:
-            if citationToken and not ('fullCitation' in dct and
-                    citationToken in iunaccent(dct['fullCitation'])):
-                continue
-            if 'doi' in dct and 'title' in dct:
-                parsed = to_doi(dct['doi'])
-                if parsed and dct['title']:
-                    result.append(parsed)
-        return result
-    except ValueError as e:
-        raise MetadataSourceException('Error while fetching metadata:\nInvalid response.\n'+
-                'URL was: %s\nJSON parser error was: %s' % (request,unicode(e))) 
-    except MetadataSourceException as e:
-        raise MetadataSourceException('Error while fetching metadata:\nUnable to open the URL: '+
-                request+'\nError was: '+str(e))
-
-def fetch_metadata_by_DOI(doi):
-    """
-    Fetch the metadata for a single DOI.
-    This is supported by the standard proxy, dx.doi.org,
-    as well as more advanced proxies such as doi_cache
-    """
-    addheaders = {'Accept':'application/citeproc+json'}
-    try:
-        request = 'http://'+DOI_PROXY_DOMAIN+'/'+doi
-        response = urlopen_retry(request,
-                timeout=crossref_timeout,
-                headers=addheaders,
-                retries=0)
-        parsed = json.loads(response)
-        return parsed
-    except ValueError as e:
-        raise MetadataSourceException('Error while fetching DOI metadata:\nInvalid JSON response.\n'+
-                'Error: '+str(e))
-
-def fetch_zotero_by_DOI(doi):
-    """
-    Fetch Zotero metadata for a given DOI.
-    Works only with the doi_cache proxy.
-    """
-    try:
-        request = requests.get('http://'+DOI_PROXY_DOMAIN+'/zotero/'+doi)
-        return request.json()
-    except ValueError as e:
-        raise MetadataSourceException('Error while fetching Zotero metadat:\nInvalid JSON response.\n'+
-                'Error: '+str(e))
-
-def consolidate_publication(publi):
-    """
-    Fetches the abstract from Zotero and adds it to the publication if it succeeds.
-    """
-    zotero = fetch_zotero_by_DOI(publi.doi)
-    if zotero is None:
-        return publi
-    for item in zotero:
-        if 'abstractNote' in item:
-            publi.abstract = item['abstractNote']
-            publi.save(update_fields=['abstract'])
-    return publi
+# Citeproc+json parsing utilities
 
 def convert_to_name_pair(dct):
     """ Converts a dictionary {'family':'Last','given':'First'} to ('First','Last') """
@@ -186,52 +129,26 @@ def get_publication_date(metadata):
         date = parse_crossref_date(metadata['deposited'])
     return date
 
-def fetch_papers_from_crossref_by_researcher_name(name, update=False):
+# Fetching utilities
+
+def fetch_metadata_by_DOI(doi):
     """
-    The update parameter forces the function to download again
-    the metadata for DOIs that are already in the model
+    Fetch the metadata for a single DOI.
+    This is supported by the standard proxy, dx.doi.org,
+    as well as more advanced proxies such as doi_cache
     """
-    researcher_found = True
-    batch_number = 1
-    results = []
-
-    # The search term sent to CrossRef is the name of the researcher
-    query = unicode(name)
-
-    # While a valid resource where the researcher is author or editor is found
-    count = 0
-    empty_batches = 0
-    while (batch_number < max_crossref_batches_per_researcher and
-            empty_batches < crossref_max_empty_batches):
-        print ""
-        print "Batch number "+str(batch_number)
-
-        # Get the next batch of DOIs
-        dois = fetch_list_of_DOIs_from_crossref(query, batch_number, nb_results_per_request, name.last)
-        batch_number += 1
-        if len(dois) == 0:
-            empty_batches += 1
-
-        records = { publi.doi:publi for publi in Publication.objects.filter(doi__in=dois) }
-        if update:
-            for r in records:
-                yield records
-        count += len(records)
-        missing_dois = []
-        for doi in dois:
-            if doi not in records:
-                missing_dois.append(doi)
-        print "%d dois. %d records already present, fetching %d new ones" % (len(dois), len(records), len(missing_dois))
-
-        new_dois = fetch_dois(missing_dois)
-            
-        for metadata in new_dois:
-            # Save it!
-            yield metadata
-
-            count += 1
-            if count % 10 == 0 and hasattr(current_task, 'update_state'):
-                current_task.update_state('FETCHING', meta={'nbRecords':count})
+    addheaders = {'Accept':'application/citeproc+json'}
+    try:
+        request = 'http://'+DOI_PROXY_DOMAIN+'/'+doi
+        response = urlopen_retry(request,
+                timeout=crossref_timeout,
+                headers=addheaders,
+                retries=0)
+        parsed = json.loads(response)
+        return parsed
+    except ValueError as e:
+        raise MetadataSourceException('Error while fetching DOI metadata:\nInvalid JSON response.\n'+
+                'Error: '+str(e))
 
 def fetch_dois(doi_list):
     """
@@ -279,7 +196,7 @@ def fetch_dois_by_batch(doi_list):
 
 def save_doi_metadata(metadata, extra_affiliations=None):
     """
-    Given the metadata from CrossRef, create the associated paper and publication
+    Given the metadata as Citeproc+JSON or from CrossRef, create the associated paper and publication
 
     :param extra_affiliations: an optional affiliations list, which will be unified
         with the affiliations extracted from the metadata. This is useful for the ORCID interface.
@@ -307,6 +224,9 @@ def save_doi_metadata(metadata, extra_affiliations=None):
         raise ValueError('No pubdate')
     
     title = metadata['title']
+    # CrossRef metadata stores titles in lists
+    if type(title) == type([]):
+        title = title[0]
     authors = map(name_lookup_cache.lookup, map(convert_to_name_pair, metadata['author']))
     authors = filter(lambda x: x != None, authors)
     if all(not elem.is_known for elem in authors) or authors == []:
@@ -331,6 +251,52 @@ def save_doi_metadata(metadata, extra_affiliations=None):
     # create the publication, because it would re-fetch the metadata from CrossRef
     backend.create.create_publication(paper, metadata)
     return paper
+
+
+##### CrossRef search API #######
+
+def search_for_dois_incrementally(query, filters={}, max_batches=max_crossref_batches_per_researcher):
+    """
+    Searches for DOIs for the given query and yields their metadata as it finds them.
+
+    :param query: the search query to pass to CrossRef
+    :param filters: filters as specified by the REST API
+    :param max_batches: maximum number of queries to send to CrossRef
+    """
+    params = {'query':query}
+    if filters:
+        params['filter'] = ','.join(map(lambda k,v: k+":"+v, filters))
+    
+    count = 0
+    rows = 20
+    offset = 0
+    while not max_batches or count < max_batches:
+        url = 'http://api.crossref.org/works'
+        params['rows'] = rows
+        params['offset'] = offset
+        
+        try:
+            r = requests.get(url, params=params)
+            print "CROSSREF: "+r.url
+            js = r.json()
+            for item in jpath('message/items', js, default=[]):
+                yield item
+        except ValueError as e:
+            raise MetadataSourceException('Error while fetching CrossRef results:\nInvalid response.\n'+
+                    'URL was: %s\nJSON parser error was: %s' % (request,unicode(e))) 
+        except requests.exceptions.RequestException as e:
+            raise MetadataSourceException('Error while fetching CrossRef results:\nUnable to open the URL: '+
+                    request+'\nError was: '+str(e))
+
+        offset += rows
+        count += 1
+
+def fetch_papers_from_crossref_by_researcher_name(name, update=False):
+    """
+    The update parameter forces the function to download again
+    the metadata for DOIs that are already in the model
+    """
+    return search_for_dois_incrementally(unicode(name))
 
 
 def fetch_publications(researcher):
@@ -364,5 +330,31 @@ def fetch_publications(researcher):
     researcher.status = 'OK, %d records processed.' % nb_records
     researcher.save()
 
+##### Zotero interface #####
+
+def fetch_zotero_by_DOI(doi):
+    """
+    Fetch Zotero metadata for a given DOI.
+    Works only with the doi_cache proxy.
+    """
+    try:
+        request = requests.get('http://'+DOI_PROXY_DOMAIN+'/zotero/'+doi)
+        return request.json()
+    except ValueError as e:
+        raise MetadataSourceException('Error while fetching Zotero metadata:\nInvalid JSON response.\n'+
+                'Error: '+str(e))
+
+def consolidate_publication(publi):
+    """
+    Fetches the abstract from Zotero and adds it to the publication if it succeeds.
+    """
+    zotero = fetch_zotero_by_DOI(publi.doi)
+    if zotero is None:
+        return publi
+    for item in zotero:
+        if 'abstractNote' in item:
+            publi.abstract = item['abstractNote']
+            publi.save(update_fields=['abstract'])
+    return publi
 
 

@@ -163,7 +163,10 @@ def add_oai_record(record, source, paper=None):
     keywords = ' '.join(record[1]._map['subject'])
     contributors = ' '.join(record[1]._map['contributor'])[:4096]
 
-    pubtype = record[1]._map.get('type')
+    pubtype_list = record[1]._map.get('type')
+    pubtype = None
+    if len(pubtype_list) > 0:
+        pubtype = pubtype_list[0]
     #pubtype = source.default_pubtype
     pubtype = PUBTYPE_TRANSLATIONS.get(pubtype, source.default_pubtype)
 
@@ -189,11 +192,9 @@ def find_earliest_oai_date(record):
     for date in record[1]._map['date']:
         try:
             parsed = tolerant_datestamp_to_datetime(date)
-            if earliest == None or parsed < earliest:
+            if earliest is None or parsed < earliest:
                 earliest = parsed
-        except DatestampError:
-            continue
-        except ValueError:
+        except (DatestampError, ValueError):
             continue
     return earliest
 

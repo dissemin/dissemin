@@ -25,16 +25,7 @@ from lxml import etree
 from django.utils.http import urlencode
 from papers.errors import MetadataSourceException
 from papers.name import normalize_name_words, parse_comma_name, shallower_name_similarity
-
-def jpath(path, js, default=None):
-    def _walk(lst, js):
-        if js is None:
-            return default
-        if lst == []:
-            return js
-        else:
-            return _walk(lst[1:], js.get(lst[0],{} if len(lst) > 1 else default))
-    return _walk(path.split('/'), js)
+from papers.utils import jpath
 
 class OrcidProfile(object):
     """
@@ -56,6 +47,9 @@ class OrcidProfile(object):
 
     def __contains__(self, key):
         return self.json.__contains__(key)
+
+    def get(self, *args, **kwargs):
+        return self.json.get(*args, **kwargs)
 
     def fetch(self, id, instance='orcid.org'):
         """

@@ -51,7 +51,7 @@ PUBTYPE_TRANSLATIONS = {
         'info:eu-repo/semantics/workingPaper':'preprint',
         'info:eu-repo/semantics/preprint':'preprint',
         'info:eu-repo/semantics/report':'report',
-        'info:eu-repo/semantics/annotation':'dataset';
+        'info:eu-repo/semantics/annotation':'dataset',
         'info:eu-repo/semantics/contributionToPeriodical':'other',
         'info:eu-repo/semantics/patent':'other',
         'info:eu-repo/semantics/other':'other',

@@ -145,6 +145,18 @@ def kill_html(s):
     orig = html_killer.clean_html('<div>'+s+'</div>')
     return orig[5:-6]
 
+#### XPath for JSON !
+
+def jpath(path, js, default=None):
+    def _walk(lst, js):
+        if js is None:
+            return default
+        if lst == []:
+            return js
+        else:
+            return _walk(lst[1:], js.get(lst[0],{} if len(lst) > 1 else default))
+    return _walk(path.split('/'), js)
+
 
 ##### Paper fingerprinting
 
@@ -158,6 +170,10 @@ def create_paper_plain_fingerprint(title, authors, year):
     title = title.strip()
     title = re.sub('[ -]+', '-', title)
     buf = title
+
+    # If the title is long enough, we return the fingerprint as is
+    if len(buf) > 50:
+        return buf
     
     # If the title is just one word, we add the year (for "Preface", "Introduction" cases)
     if not '-' in title:
