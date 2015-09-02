@@ -29,8 +29,6 @@ from papers.name import parse_comma_name, name_normalization, name_signature, no
 from papers.models import OaiRecord, OaiSource, Name
 from papers.doi import to_doi
 
-from backend.oai import *
-
 # Reader slightly tweaked because Cairn includes a useful non-standard field
 my_oai_dc_reader = oai_dc_reader
 my_oai_dc_reader._fields['accessRights'] = ('textList', 'oai_dc:dc/dcterms:accessRights/text()')
@@ -166,8 +164,8 @@ def add_oai_record(record, source, paper=None):
     contributors = ' '.join(record[1]._map['contributor'])[:4096]
 
     pubtype = record[1]._map.get('type')
-    pubtype = source.default_pubtype
-    #pubtype = PUBTYPE_TRANSLATIONS.get(pubtype, source.default_pubtype)
+    #pubtype = source.default_pubtype
+    pubtype = PUBTYPE_TRANSLATIONS.get(pubtype, source.default_pubtype)
 
     OaiRecord.new(
             source=source,
