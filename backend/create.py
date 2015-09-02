@@ -149,7 +149,11 @@ def _create_publication(paper, metadata):
     if matches:
         return matches[0]
 
-    title = metadata['container-title'][:512]
+    title = metadata['container-title']
+    if type(title) == type([]):
+        title = title[0]
+    title = title[:512]
+
     issn = metadata.get('ISSN',None)
     if issn and type(issn) == type([]):
         issn = issn[0] # TODO pass all the ISSN to the RoMEO interface

@@ -192,8 +192,18 @@
         <br />
     </div>
  {% endif %}
- 
- {% if researcher.empty_orcid_profile %}
+
+ {% if not researcher.orcid %}
+ <p></p>
+ <div class="alert alert-warning">
+     <p>
+     {% blocktrans trimmed %}
+     This researcher is not associated with any ORCID profile. The publications below
+     match their name but might be irrelevant.
+     {% endblocktrans %}
+     </p>
+ </div>
+ {% elif researcher.empty_orcid_profile %}
  <p></p>
  <div class="alert alert-warning">
      {% if researcher.user == request.user %}
