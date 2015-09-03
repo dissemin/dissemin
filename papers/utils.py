@@ -145,6 +145,11 @@ def kill_html(s):
     orig = html_killer.clean_html('<div>'+s+'</div>')
     return orig[5:-6]
 
+def urlize(val):
+    if val and not val.startswith('http://'):
+        val = 'http://'+val
+    return val
+
 #### XPath for JSON !
 
 def jpath(path, js, default=None):

@@ -200,6 +200,7 @@ def save_doi_metadata(metadata, extra_affiliations=None):
 
     :param extra_affiliations: an optional affiliations list, which will be unified
         with the affiliations extracted from the metadata. This is useful for the ORCID interface.
+    :returns: the paper, created if needed
     """        
     # Normalize metadata
     if metadata is None or type(metadata) != type({}):
@@ -299,9 +300,11 @@ def fetch_papers_from_crossref_by_researcher_name(name, update=False):
     return search_for_dois_incrementally(unicode(name))
 
 
-def fetch_publications(researcher):
+def fetch_publications(researcher, fetch_oai=True):
     """
     Fetch and save the publications from CrossRef for a given researcher
+
+    :param fetch_oai: Try to fetch full text availability with proaixy.
     """
     # TODO: do it for all name variants of confidence 1.0
     researcher.status = 'Fetching DOI list.'
@@ -318,7 +321,7 @@ def fetch_publications(researcher):
             break
 
         try:
-            save_doi_metadata(metadata)
+            yield save_doi_metadata(metadata)
         except ValueError:
             skipped += 1
             continue

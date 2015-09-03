@@ -28,6 +28,7 @@ PROXY_DAY_GRANULARITY = False
 PROXY_SOURCE_PREFIX = "proaixy:source:"
 PROXY_AUTHOR_PREFIX = "proaixy:author:"
 PROXY_SIGNATURE_PREFIX = "proaixy:authorsig:"
+PROXY_FINGERPRINT_PREFIX = "proaixy:fingerprint:"
 
 
 from oaipmh.client import Client

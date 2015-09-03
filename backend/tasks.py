@@ -123,11 +123,13 @@ def fetch_everything_for_researcher(pk):
             r.empty_orcid_profile = (num == 0)
             r.save(update_fields=['empty_orcid_profile'])
         update_task('crossref')
-        fetch_dois_for_researcher(pk)
-        update_task('oai')
-        fetch_records_for_researcher(pk)
-        update_task('core')
-        fetch_papers_from_core_for_researcher(r)
+        for paper in fetch_dois_for_researcher(pk):
+            print paper
+            fetch_records_for_fingerprint(paper.fingerprint)
+        #update_task('oai')
+        #fetch_records_for_researcher(pk)
+        #update_task('core')
+        #fetch_papers_from_core_for_researcher(r)
         #fetch_papers_from_base_for_researcher(Researcher.objects.get(pk=pk))
     except MetadataSourceException as e:
         raise e
@@ -161,7 +163,7 @@ def recluster_researcher(pk):
 @shared_task(name='fetch_dois_for_researcher')
 def fetch_dois_for_researcher(pk):
     researcher = Researcher.objects.get(pk=pk)
-    fetch_publications(researcher)
+    return fetch_publications(researcher)
 
 @shared_task(name='change_publisher_oa_status')
 def change_publisher_oa_status(pk, status):
