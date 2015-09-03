@@ -68,9 +68,11 @@
               It provides you a <strong>durable storage</strong>. Your homepage
               is likely to change or to disappear, for instance if you leave your current institution.
               </li>
-              <li>
-              Some publishers do not allow preprints on homepages but allow them in
-              repositories.</li>
+              <li>Librarians around the world cannot check whether all the papers in a given journal
+              are available on homepages: in doubt, they subscribe to this journal to make sure their
+              researchers have access to it. These subscriptions incurr a high cost to research institutions.
+              Papers stored in repositories are <strong>easier to detect</strong> and can help academia save
+              money.</li>
               <li>
               Finally, for all these reasons,
               an increasing number of <strong>funding bodies</strong> require the outcomes of
@@ -86,12 +88,11 @@
             <ul>
                 <li>Subject repositories, restricted to some research fields, such as <a href="http://arxiv.org">arXiv</a>.</li>
                 <li>Institutional repositories, designated to store the research output of a given institution or country.
-                    For instance, {{ UNIVERSITY_SHORT_NAME }} has <a href="{{ UNIVERSITY_REPOSITORY_URL }}">its own repository</a>.
                 </li>
                 <li>General-purpose academic repositories such as <a href="http://zenodo.org">Zenodo</a>,
                     not limited to a particular scope.</li>
             </ul>
-            If your research community favours a specific repository, using it makes sense as it will increase your visibility. If not, institutional or general-purpose repositories are also a good option.
+            If your research community favours a specific repository, using it makes sense as it will increase your visibility. If not, institutional or general-purpose repositories are also good options.
         {% endblocktrans %}
         </p>
 
@@ -102,8 +103,8 @@
         <p>
         {% url 'sources' as sources_url %}
         {% blocktrans trimmed %}
-        Dissem.in is a web platform gathering metadata from <a href="{{ sources_url }}">various sources</a>
-        and analyzing the full text availability of publications of researchers, currently only within {{ UNIVERSITY_SHORT_NAME }}.
+        Dissemin is a web platform gathering metadata from <a href="{{ sources_url }}">many sources</a>
+        and analyzing the full text availability of publications of researchers.
         It has been designed to foster the use of repositories (rather than preprints posted on personal homepages),
         <a href="#repositories-rock">for numerous reasons</a>.
         {% endblocktrans %}
@@ -111,26 +112,25 @@
         <h2 id="repository">{% trans "Is dissem.in a repository?" %}</h2>
         <p>
         {% blocktrans trimmed %}
-        Dissem.in is not a repository as it does not store any full text. When the full text of a publication
+        Dissemin is not a repository as it does not store any full text. When the full text of a publication
         is available, a link to the relevant page is provided.
-        The full texts deposited through Dissem.in are stored in third-party repositories such as
+        The full texts deposited through Dissemin are stored in third-party repositories such as
         <a href="http://zenodo.org">Zenodo</a> or <a href="http://hal.archives-ouvertes.fr">HAL</a>.
         {% endblocktrans %}
         </p>
         <h2 id="running">{% trans "Who runs dissem.in?" %}</h2>
         <p>
         {% blocktrans trimmed %}
-        Dissem.in is brought to you by <a href="http://dissem.in/#team">our team</a>.
+        Dissemin is brought to you by <a href="http://dissem.in/#team">our team</a>.
         {% endblocktrans %}
         <h2 id="creating-a-profile">{% trans "Can I create my profile on dissem.in?" %}</h2>
         <p>
         {% blocktrans trimmed %}
-        If your institution is not covered by dissem.in, currently, no, you cannot.
-        Our algorithms require some information about your department and research field
-        to gather your publications.
+        Yes you can. We will ask you to create an ORCID profile if you do not have one yet.
+        This only takes a few seconds.
         {% endblocktrans %}
         </p>
-        <h2 id="new-institution">{% trans "Can I use dissem.in for my institution?" %}</h2>
+        <h2 id="new-institution">{% trans "Can I use dissem.in as Current Research Information System for my institution?" %}</h2>
         <p>
         {% blocktrans trimmed %}
         Yes, just ask <a href="mailto:contact@dissem.in">contact@dissem.in</a>.
@@ -148,6 +148,8 @@
                 {% blocktrans trimmed %}
                 <strong>Open access:</strong><br />
                 The full text is made freely available by the publisher.
+                Hybrid open access schemes are not covered and should be avoided
+                by researchers as they are overpriced most of the time.
                 {% endblocktrans %}
             </div>
         </div>
@@ -173,6 +175,7 @@
                 <strong>Pre/post prints allowed but full text unavailable:</strong><br />
                 The full text could be made available in a repository (as above)
                 according to the publishing policy.
+                We encourage their authors to do so.
                 {% endblocktrans %}
             </div>
         </div>
@@ -184,6 +187,9 @@
                 {% blocktrans trimmed %}
                 <strong>Pre/post prints forbidden:</strong><br />
                 The publisher forbids deposits in repositories, in general.
+                Authors might still be allowed to deposit their works after
+                some embargo period or if their funder has an agreement with
+                this publisher.
                 {% endblocktrans %}
             </div>
         </div>
@@ -262,16 +268,14 @@
         {% blocktrans trimmed %}
         There are many ways to get involved:
         <ul>
+            <li>Encourage researchers to use this service.</li>
             <li><a href="mailto:contact@dissem.in">Send us</a> a list of researchers for your
-                university or department so that we can set up an instance of Dissemin for you.</li>
+                university or department so that we can set up an instance of Dissemin for your institution.</li>
+            <li>Help us translate the interface in your language.</li>
             <li>Contribute to <a href="http://github.com/wetneb/dissemin">the code</a>.</li>
             <li>Fix any of our listed <a href="http://github.com/wetneb/dissemin/issues">issues</a>.</li>
-            <li>Help us translate the interface in your language.</li>
-            <li>Tag articles to improve our author disambiguation algorithm (you need an account).</li>
-            <li>Fix metadata errors (you need an account).</li>
-            <li>Spread the word about this tool.</li>
             <li>Star <a href="http://github.com/wetneb/dissemin">our github project</a>!</li>
-            <li>Lend us a server (or equivalently, give us some money).</li>
+            <li>Donations will be accepted soon.</li>
         </ul>
         {% endblocktrans %}
         </p>
