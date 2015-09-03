@@ -286,10 +286,10 @@ CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
 CELERY_IMPORTS = ['backend.tasks']
 
 CELERYBEAT_SCHEDULE = {
-        'update_all_stats': {
-            'task':'update_all_stats',
-            'schedule':timedelta(minutes=5),
-            }
+#        'update_all_stats': {
+#            'task':'update_all_stats',
+#            'schedule':timedelta(minutes=5),
+#            }
 }
 
 # This is the time in seconds before an unacknowledged task is re-sent to

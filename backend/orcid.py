@@ -221,6 +221,7 @@ def fetch_orcid_records(id, profile=None, use_doi=True):
             try:
                 authors = map(convert_to_name_pair, metadata['author'])
                 affiliations = affiliate_author_with_orcid(ref_name, id, authors)
+                records_found += 1
                 paper = save_doi_metadata(metadata, affiliations)
                 record = OaiRecord.new(
                         source=orcid_oai_source,
@@ -228,7 +229,6 @@ def fetch_orcid_records(id, profile=None, use_doi=True):
                         about=paper,
                         splash_url='http://orcid.org/'+id,
                         pubtype=paper.doctype)
-                records_found += 1
             except (KeyError, ValueError, TypeError):
                 pass
 
