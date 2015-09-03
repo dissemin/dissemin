@@ -1,0 +1,11 @@
+{% load i18n %}
+<ol class="breadcrumb" id="top-breadcrumb">
+    <li><a href="/">{% trans "Home" %}</a></li>
+{% for bc in breadcrumbs %}
+    {% if not forloop.last %}
+   <li><a href="{{ bc.1 }}">{{ bc.0 }}</a></li>
+    {% else %}
+   <li class="active">{{ bc.0 }}</li>
+   {% endif %}
+{% endfor %}
+</ol>

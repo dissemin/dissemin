@@ -40,14 +40,14 @@ def varyQueryArguments(key, args, possibleValues):
             queryargs[key] = s[0]
         else:
             queryargs.pop(key)
-        variants.append((s[0], s[1], queryargs))
+        variants.append(s+(queryargs,))
     return variants
 
 
 def publishersView(request, **kwargs):
     context = dict()
     # Build the queryset
-    queryset = Publisher.objects.all()
+    queryset = Publisher.objects.filter(stats__isnull=False)
     args = request.GET.copy()
     args.update(kwargs)
 
@@ -74,6 +74,7 @@ def publishersView(request, **kwargs):
     context['search_results'] = current_publishers
     context['search_description'] = search_description
     context['nb_results'] = queryset.count()
+    context['breadcrumbs'] = publishers_breadcrumbs()
 
     # Build the GET requests for variants of the parameters
     args_without_page = args.copy()
@@ -102,6 +103,10 @@ class PublisherView(generic.DetailView):
         except EmptyPage:
             current_journals = paginator.page(paginator.num_pages)
         context['journals'] = current_journals
+        
+        # Breadcrumbs
+        context['breadcrumbs'] = publisher.breadcrumbs()
+        
         return context
 
 

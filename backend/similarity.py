@@ -98,6 +98,7 @@ class CoauthorsSimilarity(SimilarityFeature):
     """
     def __init__(self):
         super(CoauthorsSimilarity, self).__init__()
+        self.max_nb_authors = 50
     
     def fetchData(self, author):
         coauthors = author.paper.author_set.exclude(id=author.id).select_related('name')
@@ -105,6 +106,8 @@ class CoauthorsSimilarity(SimilarityFeature):
 
     def score(self, dataA, dataB):
         score = 0.
+        if min(len(dataA),len(dataB)) > self.max_nb_authors:
+            return 0.
         for a in dataA:
             for b in dataB:
                 firstA, lastA = a

@@ -25,6 +25,8 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseForbidden
 from django.contrib.auth.decorators import user_passes_test
 from django.core.validators import validate_email
+from django.core.exceptions import MultipleObjectsReturned
+from django.template import loader
 from django.forms import ValidationError
 from django.db import IntegrityError
 from django.utils.translation import ugettext as __
@@ -37,10 +39,9 @@ from dissemin.settings import URL_DEPOSIT_DOWNLOAD_TIMEOUT, DEPOSIT_MAX_FILE_SIZ
 
 from papers.models import *
 from papers.user import *
-from papers.forms import AddResearcherForm
+from papers.forms import AddResearcherForm, AddUnaffiliatedResearcherForm
 from papers.utils import iunaccent, sanitize_html
 
-from time import sleep # TODO delete me
 import os.path
 
 # General function used to change a CharField in a model with ajax
@@ -76,6 +77,63 @@ def deleteResearcher(request, pk):
     researcher = get_object_or_404(Researcher, pk=pk)
     researcher.delete()
     return HttpResponse('OK', content_type='text/plain')
+
+def researcherCandidatesByName(name):
+    """
+    Given a Name object, find researchers that are potentially meant
+    by this name. They come either from the model (Researcher instances
+    who have this name as NameVariant) or search results from the ORCID
+    API that are compatible with this name.
+
+    Results are returned as a list of HTML elements, to be displayed
+    in the disambiguation dialog.
+    """
+    # From the model
+    related_researchers = list(map(lambda nv: nv.researcher, name.namevariant_set.all()))
+    def renderResearcher(res):
+        return loader.render_to_string('papers/itemResearcher.html',
+                {'researcher':res})
+    rendered = map(renderResearcher, related_researchers)
+
+    # From ORCID
+    related_orcids = OrcidProfile.search_by_name(name.first, name.last)
+    def renderProfile(res):
+        return loader.render_to_string('papers/itemOrcid.html',
+                {'profile':res})
+    rendered += map(renderProfile, related_orcids)
+    return rendered
+    
+
+def newUnaffiliatedResearcher(request):
+    if request.method != 'POST':
+        return HttpResponseForbidden('"Invalid method"', content_type='application/javascript')
+    form = AddUnaffiliatedResearcherForm(request.POST)
+    researcher = None
+    if form.is_valid():
+        orcid = form.cleaned_data['orcid']
+        if orcid:
+            researcher = Researcher.get_or_create_by_orcid(orcid)
+        else:
+            first = form.cleaned_data['first']
+            last = form.cleaned_data['last']
+            # Check that the researcher is not already known under a different name.
+            if not form.cleaned_data.get('force'):
+                name, created = Name.get_or_create(first, last)
+                try:
+                    researcher = Researcher.objects.get(name=name)
+                    return HttpResponse(json.dumps({'url':researcher.url}))
+                except (Researcher.DoesNotExist, MultipleObjectsReturned):
+                    pass
+                candidates = researcherCandidatesByName(name)
+                if candidates:
+                    return HttpResponse(json.dumps({'disambiguation':candidates}))
+
+            researcher = Researcher.get_or_create_by_name(first, last)
+        researcher.fetch_everything_if_outdated()
+        return HttpResponse(json.dumps({'url':researcher.url}))
+    else:
+        return HttpResponseForbidden(json.dumps(form.errors), content_type='application/javascript')
+
 
 @user_passes_test(is_admin)
 def addResearcher(request):
@@ -137,6 +195,33 @@ def changeResearcher(request):
     allowedFields = ['role']
     return process_ajax_change(request, Researcher, allowedFields)
 
+def harvestingStatus(request, pk): 
+    researcher = get_object_or_404(Researcher, pk=pk)
+    resp = {}
+    if researcher.current_task:
+        resp['status'] = researcher.current_task
+        resp['display'] = researcher.get_current_task_display()
+    else:
+        resp = None
+    return HttpResponse(json.dumps(resp), content_type='text/json')
+
+@user_passes_test(is_authenticated)
+def waitForConsolidatedField(request):
+    try:
+        paper = Paper.objects.get(pk=int(request.GET["id"]))
+    except (KeyError, ValueError, Paper.DoesNotExist):
+        return HttpResponseForbidden('Invalid paper id', content_type='text/plain')
+    field = request.GET.get('field')
+    value = None
+    success = None
+    paper.consolidate_metadata(wait=True)
+    if field == 'abstract':
+        value = paper.abstract
+        success = len(paper.abstract) > 64
+    else:
+        return HttpResponseForbidden('Invalid field', content_type='text/plain')
+    return HttpResponse(json.dumps({'value':value}), content_type='text/json')
+
 # Author management
 @user_passes_test(is_authenticated)
 def changeAuthor(request):
@@ -193,15 +278,17 @@ def changePublisherStatus(request):
     except ObjectDoesNotExist:
         return HttpResponseNotFound('NOK: '+message, content_type='text/plain')
 
-
 urlpatterns = patterns('',
-    url(r'^annotate-paper-(?P<pk>\d+)-(?P<status>\d+)$', annotatePaper, name='ajax-annotatePaper'),
-    url(r'^delete-researcher-(?P<pk>\d+)$', deleteResearcher, name='ajax-deleteResearcher'),
-    url(r'^change-department$', changeDepartment, name='ajax-changeDepartment'),
-    url(r'^change-paper$', changePaper, name='ajax-changePaper'),
-    url(r'^change-researcher$', changeResearcher, name='ajax-changeResearcher'),
-    url(r'^change-author$', changeAuthor, name='ajax-changeAuthor'),
-    url(r'^add-researcher$', addResearcher, name='ajax-addResearcher'),
+#    url(r'^annotate-paper-(?P<pk>\d+)-(?P<status>\d+)$', annotatePaper, name='ajax-annotatePaper'),
+#    url(r'^delete-researcher-(?P<pk>\d+)$', deleteResearcher, name='ajax-deleteResearcher'),
+#    url(r'^change-department$', changeDepartment, name='ajax-changeDepartment'),
+#    url(r'^change-paper$', changePaper, name='ajax-changePaper'),
+#    url(r'^change-researcher$', changeResearcher, name='ajax-changeResearcher'),
+#    url(r'^change-author$', changeAuthor, name='ajax-changeAuthor'),
+#    url(r'^add-researcher$', addResearcher, name='ajax-addResearcher'),
+    url(r'^new-unaffiliated-researcher$', newUnaffiliatedResearcher, name='ajax-newUnaffiliatedResearcher'),
     url(r'^change-publisher-status$', changePublisherStatus, name='ajax-changePublisherStatus'),
+    url(r'^harvesting-status-(?P<pk>\d+)$', harvestingStatus, name='ajax-harvestingStatus'),
+    url(r'^wait-for-consolidated-field$', waitForConsolidatedField, name='ajax-waitForConsolidatedField'),
 )
 

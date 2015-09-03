@@ -84,8 +84,6 @@ class AuthorNameSimilarity(RelevanceFeature):
 
     def compute(self, author, researcher, explain=False):
         try:
-            # TODO this is quite inefficient, can we save these queries ?
-            #nv = NameVariant.objects.get(researcher_id=author.researcher_id,name_id=author.name_id)
             return [author.name.best_confidence]
         except ObjectDoesNotExist:
             return [0.]
@@ -215,6 +213,24 @@ class ContributorsRelevance(TopicalRelevanceFeature):
         words = [rec.contributors for rec in author.paper.oairecord_set.all()]
         words = filter(lambda x: x != None, words)
         return [float(sum(map(lambda t: self._normalizedWScore(t, researcher, explain), words)))]
+
+class OrcidRelevance(RelevanceFeature):
+    """
+    Returns 1 when the ORCID of the author and the researcher match, 0 otherwise
+    """
+    def __init__(self):
+        super(OrcidRelevance, self).__init__()
+
+    def compute(self, author, researcher, explain=False):
+        if explain:
+            if author.affiliation == researcher.orcid:
+                print("ORCID match")
+            else:
+                print("ORCID mismatch")
+        if author.affiliation == researcher.orcid:
+            return [1.]
+        return [0.]
+
 
 class RelevanceClassifier(object):
     def __init__(self, **kwargs):
@@ -361,7 +377,27 @@ class SimpleRelevanceClassifier(RelevanceClassifier):
         self.classifier = None
         self.positiveSampleWeight = 1.0
  
+class OrcidRelevanceClassifier(RelevanceClassifier):
+    """
+    Returns relevance 1 when ORCID ids match,
+    and a small negative score otherwise
+    """
+    def __init__(self, **kwargs):
+        self.features = [
+                OrcidRelevance(),
+                AuthorNameSimilarity(),
+                ]
 
+    def score(self, author, researcher, verbose=False):
+        features = self.computeFeatures(author, researcher, verbose)
+
+        # note: == False is not spurious here, because it could be True, False or None!
+        if researcher.empty_orcid_profile == False: # if we found at least one record in the orcid profile
+            if features[0] >= 0.5: # if the ORCIDs match
+                return 10.0 # then we give a very good confidence
+            return 0.1*(features[1]-2) # otherwise a slightly negative confidence
+        else: # otherwise we don't know any publication for sure…
+            return features[1] - 0.4
 
 
 

@@ -3,6 +3,7 @@
 {% load author %}
 {% load i18n %}
 {% load statuses %}
+{% load domain %}
 {% load bootstrap_pagination %}
 {% load staticfiles %}
 
@@ -31,16 +32,31 @@
        });
     }
     {% endif %}
+  $(function(){
+  $('.helpPopover').popover({trigger: "hover"});
+  });
 {% endblock %}
 
 {% block details %}
 <span class="detailsTitle">{% trans "Publisher" %}</span>
 <div class="detailsContent">
-<p>{{ publisher.name }}</p>
+<p id="detail-name">{{ publisher.name }}</p>
 {% if publisher.url %}
-<p><a href="{{ publisher.url }}">{% trans "Homepage" %}</a></p>
-
+<p>
+    <span class="glyphicon glyphicon-home"></span>
+    <a href="{{ publisher.url }}">{{ publisher.url|domain }}</a>
+</p>
 {% endif %}
+
+{% if not request.user.is_superuser %}
+    <div class="unselectedCriterion">
+        <div class="pubLogo"><div class="pubLogoPic-{{ publisher.oa_status }}"></div></div>
+        <div class="criterionItem">{{ publisher.oa_status |explain_oa_status }}</div>
+    </div>
+{% endif %}
+
+<p class="sherpaAcknowledgement">{% trans "Policy data provided by" %}<br />
+<a href="http://www.sherpa.ac.uk/romeo/"><img src="{% static "img/sherpa-romeo.gif" %}" width="210px" alt="SHERPA/RoMEO" /></a></p>
 
 {% if publisher.stats %}
 <span class="detailsTitle">{% trans "Availability statistics" %}</span>
@@ -65,70 +81,36 @@
 </div>
 {% endfor %}
 
-{% else %}
-<div class="unselectedCriterion">
-    <div class="pubLogo"><div class="pubLogoPic-{{ publisher.oa_status }}"></div></div>
-    <div class="criterionItem">{{ publisher.oa_status |explain_oa_status }}</div>
-</div>
-<p class="sherpaAcknowledgement">Data provided by<br />
-<a href="http://www.sherpa.ac.uk/romeo/"><img src="{% static "img/sherpa-romeo.gif" %}" width="210px" alt="SHERPA/RoMEO" /></a></p>
-
 {% endif %}
+
 </div>
 {% endblock %}
 
 {% block lists %}
 {% url 'search' as search_url %}
-<p>{% blocktrans trimmed with name=publisher.name count=publisher.publi_count id=publisher.pk %}
-{{ name }} has published <a href="{{ search_url }}?publisher={{ id }}">{{ count }} productions</a> authored by researchers from {{ UNIVERSITY_SHORT_NAME }}.
-   {% endblocktrans %}
-</p>
 {% with publisher.preprint as policy %}
-<div class="policyPic policyPic-{{ policy }}"></div>
-<div class="policyText">
-    <p>{{ policy | explain_policy:"preprint" }}</p>
-    <ul>
-    {% for restriction in publisher.preprint_conditions %}
-        <li>{{ restriction|striptags }}</li>
-    {% endfor %}
-    </ul>
+<div class="publisher-policy">
+{% include "publishers/detailsPolicy.html" with mode="none" %}
 </div>
 {% endwith %}
-{% with publisher.postprint as policy %}
-<div class="policyPic policyPic-{{ policy }}"></div>
-<div class="policyText">
-    <p>{{ policy|explain_policy:"postprint" }}</p>
+{% if publisher.has_conditions %}
+    <h4>{% trans "Conditions" %}</h4>
     <ul>
-    {% for restriction in publisher.postprint_conditions %}
-        <li>{{ restriction|striptags }}</li>
+    {% for condition in publisher.publishercondition_set.all %}
+        <li>{{ condition|striptags }}</li>
     {% endfor %}
     </ul>
-</div>
-{% endwith %}
-{% with publisher.pdfversion as policy %}
-<div class="policyPic policyPic-{{ policy }}"></div>
-<div class="policyText">
-    <p>{{ policy | explain_policy:"pdfversion" }}</p>
+{% endif %}
+{% if publisher.has_copyrightlinks %}
+    <h4>{% trans "Policy details" %}</h4>
     <ul>
-    {% for restriction in publisher.pdfversion_conditions %}
-        <li>{{ restriction|striptags }}</li>
-    {% endfor %}
+        {% for link in publisher.publishercopyrightlink_set.all %}
+            <li><a href="{{ link.url }}">{{ link.text }}</a></li>
+        {% endfor %}
     </ul>
-</div>
-{% endwith %}
-<h4>{% trans "Conditions" %}</h4>
-<ul>
-{% for condition in publisher.publishercondition_set.all %}
-    <li>{{ condition|striptags }}</li>
-{% endfor %}
-</ul>
-<h4>{% trans "Policy details" %}</h4>
-<ul>
-    {% for link in publisher.publishercopyrightlink_set.all %}
-        <li><a href="{{ link.url }}">{{ link.text }}</a></li>
-    {% endfor %}
-</ul>
-<h4>{% trans "Journals in which researchers have authored papers" %}</h4>
+{% endif %}
+<h4>{% trans "Journals" %}</h4>
+<p>{% trans "Only journals with papers written by our users are listed." %}</p>
 {% if journals.paginator.num_pages > 1 %}
  <div class="searchPages">{% bootstrap_paginate journals range=10 %}</div>
  {% endif %}

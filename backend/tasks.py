@@ -33,72 +33,130 @@ from oaipmh.error import DatestampError, NoRecordsMatchError, BadArgumentError
 
 from papers.models import *
 from papers.doi import to_doi
-from papers.name import name_normalization, name_signature
 
 from backend.create import *
-from backend.crossref import fetch_publications
-from backend.proxy import *
+from backend.crossref import fetch_publications, consolidate_publication
 from backend.oai import *
 from backend.core import fetch_papers_from_core_for_researcher
 from backend.base import fetch_papers_from_base_for_researcher
+from backend.orcid import fetch_orcid_records
 from backend.name_cache import name_lookup_cache
-
+from backend.extractors import * # to ensure that OaiSources are created
+from backend.utils import run_only_once
 
 logger = get_task_logger(__name__)
 
+def update_researcher_task(r, task_name):
+    """
+    Update the task identifier associated to a given researcher.
+    This also updates the 'last_harvest' field.
+    """
+    r.current_task = task_name
+    r.last_harvest = timezone.now()
+    r.save(update_fields=['current_task','last_harvest'])
+
+
+@shared_task(name='init_profile_from_orcid')
+@run_only_once('researcher', keys=['pk'])
+def init_profile_from_orcid(pk):
+    """
+    Populates the profile from ORCID and Proaixy.
+    Does not fetch DOIs from ORCID as it can be slow.
+
+    This task is intended to be very quick, so that users
+    can see their ORCID publications quickly.
+    """
+    try:
+        r = Researcher.objects.get(pk=pk)
+        update_task = lambda name: update_researcher_task(r, name)
+        update_task('clustering')
+        clustering_context_factory.reclusterBatch(r)
+        if r.orcid:
+            update_task('orcid')
+            num = fetch_orcid_records(r.orcid)
+            r.empty_orcid_profile = (num == 0)
+            r.save(update_fields=['empty_orcid_profile'])
+        if r.empty_orcid_profile != False:
+            update_task('crossref')
+            fetch_dois_for_researcher(pk)
+        update_task('oai')
+        fetch_records_for_researcher(pk)
+    finally:
+        update_task('clustering')
+        clustering_context_factory.commitThemAll()
+        clustering_context_factory.unloadResearcher(pk)
+        r = Researcher.objects.get(pk=pk)
+        update_task('stats')
+        r.update_stats()
+        update_task(None)
+
+
+@shared_task(name='consolidate_paper')
+@run_only_once('consolidate_paper', keys=['pk'], timeout=1*60)
+def consolidate_paper(pk):
+    p = None
+    try:
+        p = Paper.objects.get(pk=pk)
+        abstract = p.abstract or ''
+        for pub in p.publication_set.all():
+            pub = consolidate_publication(pub)
+            if pub.abstract and len(pub.abstract) > len(abstract):
+                abstract = pub.abstract
+                break
+    except Paper.DoesNotExist:
+        print "consolidate_paper: unknown paper %d" % pk
+    finally:
+        if p is not None:
+            p.task = None
+            p.save(update_fields=['task'])
+
+
 @shared_task(name='fetch_everything_for_researcher')
+@run_only_once('researcher', keys=['pk'], timeout=15*60)
 def fetch_everything_for_researcher(pk):
     try:
         r = Researcher.objects.get(pk=pk)
+        update_task = lambda name: update_researcher_task(r, name)
+        if r.orcid:
+            update_task('orcid')
+            num = fetch_orcid_records(r.orcid)
+            r.empty_orcid_profile = (num == 0)
+            r.save(update_fields=['empty_orcid_profile'])
+        update_task('crossref')
         fetch_dois_for_researcher(pk)
+        update_task('oai')
         fetch_records_for_researcher(pk)
+        update_task('core')
         fetch_papers_from_core_for_researcher(r)
         #fetch_papers_from_base_for_researcher(Researcher.objects.get(pk=pk))
     except MetadataSourceException as e:
         raise e
     finally:
+        update_task('clustering')
         clustering_context_factory.commitThemAll()
         clustering_context_factory.unloadResearcher(pk)
         r = Researcher.objects.get(pk=pk)
+        update_task('stats')
         r.update_stats()
+        r.harvester = None
+        update_task(None)
 
 @shared_task(name='fetch_records_for_researcher')
-def fetch_records_for_researcher(pk):
+def fetch_records_for_researcher(pk, signature=True):
+    """
+    Fetch OAI records from Proaixy for the given researcher.
+
+    :param signature: Search by name signature (D. Knuth) instead
+       of full name (Donald Knuth)
+    """
     researcher = Researcher.objects.get(pk=pk)
-    fetch_records_for_name(researcher.name)
-
-def fetch_records_for_name(name):
-    fetch_records_for_signature(name_signature(name.first, name.last))
-
-def fetch_records_for_signature(ident):
-    client = get_proxy_client()
-    try:
-        listRecords = client.listRecords(metadataPrefix='oai_dc', set=PROXY_SIGNATURE_PREFIX+ident)
-        process_records(listRecords)
-    except NoRecordsMatchError:
-        pass
-    except BadArgumentError as e:
-        print "Signature is unknown for the proxy: "+unicode(e)
-        pass
+    fetch_records_for_name(researcher.name, signature=signature)
 
 @shared_task(name='recluster_researcher')
 def recluster_researcher(pk):
     r = Researcher.objects.get(pk=pk)
     clustering_context_factory.reclusterBatch(r)
-
-# TODO unused:
-def fetch_records_for_last_name(lastname):
-    client = get_proxy_client()
-    try:
-        ident = name_normalization(lastname)
-        listRecords = client.listRecords(metadataPrefix='oai_dc', set=PROXY_AUTHOR_PREFIX+ident)
-        process_records(listRecords)
-    except NoRecordsMatchError:
-        pass
-    except BadArgumentError as e:
-        print "Author is unknown for the proxy: "+unicode(e)
-        pass
-
+    r.update_stats()
 
 @shared_task(name='fetch_dois_for_researcher')
 def fetch_dois_for_researcher(pk):
@@ -110,4 +168,15 @@ def change_publisher_oa_status(pk, status):
     publisher = Publisher.objects.get(pk=pk)
     publisher.change_oa_status(status)
     publisher.update_stats()
+
+@shared_task(name='update_all_stats')
+def update_all_stats():
+    """
+    Updates the stats for every model using them
+    """
+    AccessStatistics.update_all_stats(PaperWorld)
+    AccessStatistics.update_all_stats(Publisher)
+    AccessStatistics.update_all_stats(Journal)
+    AccessStatistics.update_all_stats(Researcher)
+
 

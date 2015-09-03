@@ -9,3 +9,9 @@ django-cas-ng
 unicode_tex
 wand
 PyPDF2
+django-allauth
+django-redis-cache
+django-solo
+requests
+pillow
+django-crispy-forms

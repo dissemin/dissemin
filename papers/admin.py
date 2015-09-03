@@ -23,12 +23,6 @@ class NameInline(admin.TabularInline):
     model = Name
     extra = 0
 
-class ResearcherAdmin(admin.ModelAdmin):
-    fieldsets = [
-      #  (None, {'fields': ['nae']}),
-        ('Affiliation', {'fields': ['department', 'groups']})
-        ]
-
 class AuthorInline(admin.TabularInline):
     model = Author
     extra = 0
@@ -43,15 +37,18 @@ class PublicationInline(admin.StackedInline):
     extra = 0
 
 class PaperAdmin(admin.ModelAdmin):
-    fields = ['title', 'pubdate', 'visibility']
+    fields = ['title', 'pubdate', 'visibility', 'doctype', 'oa_status']
+    list_display = ('title','pubdate','visibility','doctype', 'oa_status')
 
-admin.site.register(Department)
-admin.site.register(ResearchGroup)
+class OaiRecordAdmin(admin.ModelAdmin):
+    raw_id_fields = ('about',)
+
+class ResearcherAdmin(admin.ModelAdmin):
+    raw_id_fields = ('name','stats',)
+
 admin.site.register(Researcher, ResearcherAdmin)
 admin.site.register(Name)
 admin.site.register(Paper, PaperAdmin)
 admin.site.register(OaiSource)
-admin.site.register(OaiRecord)
-admin.site.register(Journal)
-admin.site.register(Publisher)
+admin.site.register(OaiRecord, OaiRecordAdmin)
 

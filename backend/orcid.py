@@ -30,7 +30,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from papers.errors import MetadataSourceException
 from papers.doi import to_doi
-from papers.name import match_names, normalize_name_words, parse_comma_name, name_similarity
+from papers.name import match_names, normalize_name_words, parse_comma_name, shallower_name_similarity
 from papers.utils import create_paper_fingerprint, iunaccent, tolerant_datestamp_to_datetime, date_from_dateparts, validate_orcid, parse_int
 from papers.models import Publication, Paper, Name, OaiSource, OaiRecord
 from papers.bibtex import parse_bibtex
@@ -40,21 +40,9 @@ import backend.create
 from backend.crossref import fetch_dois, save_doi_metadata, convert_to_name_pair
 from backend.name_cache import name_lookup_cache
 
+
 import requests, json
 from datetime import date
-
-# Number of results per page we ask the CrossRef search interface
-# (looks like it does not support more than 20)
-nb_results_per_request = 20
-# Maximum timeout for the CrossRef interface (sometimes it is a bit lazy)
-crossref_timeout = 15
-# Maximum number of pages looked for a researcher
-max_crossref_batches_per_researcher = 25
-# Maxmimum number of batches trivially skipped (because the last name does not occur in them)
-crossref_max_empty_batches = 5
-# Maximum number of non-trivially skipped records that do not match any researcher
-crossref_max_skipped_records = 100
-
 
 orcid_type_to_pubtype = {
         'book':'book',
@@ -89,7 +77,7 @@ def orcid_to_doctype(typ):
     return orcid_type_to_pubtype.get(typ.lower().replace('_','-').replace(' ','-'), 'other')
     
 
-def affiliate_author_with_orcid(ref_name, orcid, authors):
+def affiliate_author_with_orcid(ref_name, orcid, authors, initial_affiliations=None):
     """
     Given a reference name and an ORCiD for a researcher, find out which
     author in the list is the most likely to be that author. This function
@@ -101,18 +89,23 @@ def affiliate_author_with_orcid(ref_name, orcid, authors):
     max_sim_idx = None
     max_sim = 0.
     for idx, name in enumerate(authors):
-        cur_similarity = name_similarity(name, ref_name) 
+        cur_similarity = shallower_name_similarity(name, ref_name) 
         if cur_similarity > max_sim:
             max_sim_idx = idx
             max_sim = cur_similarity
-    affiliations = [None]*len(authors)
+    affiliations = initial_affiliations or [None]*len(authors)
     if max_sim_idx is not None:
         affiliations[max_sim_idx] = orcid
     return affiliations
 
-def fetch_orcid_records(id, profile=None):
+def fetch_orcid_records(id, profile=None, use_doi=True):
     """
     Queries ORCiD to retrieve the publications associated with a given ORCiD.
+
+    :param profile: The ORCID profile if it has already been fetched before (format: parsed JSON).
+    :param use_doi: Fetch the publications by DOI when we find one (recommended, but slow)
+    :returns: the number of records we managed to extract from the ORCID profile (some of them could be in
+            free form, hence not imported)
     """
     # Cleanup iD:
     id = validate_orcid(id)
@@ -120,18 +113,24 @@ def fetch_orcid_records(id, profile=None):
         raise MetadataSourceException('Invalid ORCiD identifier')
 
     # Get ORCiD profile
-    if profile is None:
-        profile = get_orcid_profile(id)
+    try:
+        if profile is None:
+            profile = OrcidProfile(id=id)
+        else:
+            profile = OrcidProfile(json=profile)
+    except MetadataSourceException as e:
+        print e
+        return 0
 
     # Reference name
-    ref_name = get_name_from_orcid_profile(profile)
-
+    ref_name = profile.name
     # curl -H "Accept: application/orcid+json" 'http://pub.orcid.org/v1.2/0000-0002-8612-8827/orcid-works' -L -i
     dois = [] # list of DOIs to fetch
     papers = [] # list of papers created
+    records_found = 0 # how many records did we successfully import from the profile?
 
     # Fetch publications
-    pubs = jpath('orcid-profile/orcid-activities/orcid-works/orcid-work', profile)
+    pubs = jpath('orcid-profile/orcid-activities/orcid-works/orcid-work', profile, [])
     for pub in pubs:
         def j(path, default=None):
             return jpath(path, pub, default)
@@ -141,14 +140,16 @@ def fetch_orcid_records(id, profile=None):
         for extid in j('work-external-identifiers/work-external-identifier', []):
             if extid.get('work-external-identifier-type') == 'DOI':
                 doi = to_doi(jpath('work-external-identifier-id/value', extid))
-        if doi:
-            # If a DOI is available, create the paper using metadata from CrossRef.
-            # We don't do it yet, we only store the DOI, so that we can fetch them
-            # by batch later.
-            dois.append(doi)
+                if doi:
+                    # If a DOI is available, create the paper using metadata from CrossRef.
+                    # We don't do it yet, we only store the DOI, so that we can fetch them
+                    # by batch later.
+                    dois.append(doi)
+
+        if doi and use_doi:
             continue
 
-        # Otherwise, extract information from ORCiD
+        # Extract information from ORCiD
 
         # Title
         title = j('work-title/title/value')
@@ -158,38 +159,51 @@ def fetch_orcid_records(id, profile=None):
         # Type
         doctype = orcid_to_doctype(j('work-type', 'other'))
 
-        # Bibtex
-        bibtex = None
-        if j('work-citation/work-citation-type') == 'BIBTEX':
-            bibtex = j('work-citation/citation')
-
         # Contributors (ignored for now as they are very often not present)
-        #def get_contrib(js):
-        #    return {
-        #        'orcid':jpath('contributor-orcid', js),
-        #        'name': jpath('credit-name/value', js),
-        #        }
-        #authors = map(get_contrib, j('work-contributors/contributor',[]))
+        def get_contrib(js):
+            return {
+                 'orcid':jpath('contributor-orcid', js),
+                 'name': jpath('credit-name/value', js),
+                }
+        contributors = map(get_contrib, j('work-contributors/contributor',[]))
 
-        # Parse bibtex
-        if bibtex is None:
-            print "Warning: Skipping ORCID publication: no contributors or Bibtex."
-            print j('work-citation/work-citation-type')
-            continue
-        entry = parse_bibtex(bibtex)
-
-        authors = map(name_lookup_cache.lookup, entry['author'])
-
+        author_names = filter(lambda x: x is not None, map(
+                              lambda x: x['name'], contributors))
+        authors = map(parse_comma_name, author_names)
+        pubdate = None
+        # ORCiD internal id
+        identifier = j('put-code')
+        affiliations = map(lambda x: x['orcid'], contributors)
         # Pubdate
         year = parse_int(j('publication-date/year/value'), 1970)
         month = parse_int(j('publication-date/month/value'), 01)
         day = parse_int(j('publication-date/day/value'), 01)
         pubdate = date(year=year, month=month, day=day)
 
-        # ORCiD internal id
-        identifier = j('put-code')
+        # Citation type: metadata format
+        citation_format = j('work-citation/work-citation-type')
+        print citation_format
+        bibtex = j('work-citation/citation')
 
-        affiliations = affiliate_author_with_orcid(ref_name, id, entry['author'])
+        if bibtex is not None:
+            try:
+                entry = parse_bibtex(bibtex)
+
+                if entry.get('author', []) == []:
+                    print "Warning: Skipping ORCID publication: no authors."
+                    print j('work-citation/citation')
+                if not authors:
+                    authors = entry['author']
+            except ValueError:
+                pass
+
+        affiliations = affiliate_author_with_orcid(ref_name, id, authors, initial_affiliations=affiliations)
+
+        authors = map(name_lookup_cache.lookup, authors)
+
+        if not authors:
+            print "No authors found, skipping"
+            continue
 
         # Create paper:
         paper = backend.create.get_or_create_paper(title, authors, pubdate, None, 'VISIBLE', affiliations)
@@ -199,16 +213,26 @@ def fetch_orcid_records(id, profile=None):
                 about=paper,
                 splash_url='http://orcid.org/'+id,
                 pubtype=doctype)
+        records_found += 1
 
-    doi_metadata = fetch_dois(dois)
-    for metadata in doi_metadata:
-        try:
-            paper = save_doi_metadata(metadata)
-            authors = map(convert_to_name_pair, metadata['author'])
-            affiliations = affiliate_author_with_orcid(ref_name, id, authors)
-            paper.update_affiliations(affiliations)
-        except ValueError:
-            pass
+    if use_doi:
+        doi_metadata = fetch_dois(dois)
+        for metadata in doi_metadata:
+            try:
+                authors = map(convert_to_name_pair, metadata['author'])
+                affiliations = affiliate_author_with_orcid(ref_name, id, authors)
+                paper = save_doi_metadata(metadata, affiliations)
+                record = OaiRecord.new(
+                        source=orcid_oai_source,
+                        identifier='orcid:'+id+':'+metadata['DOI'],
+                        about=paper,
+                        splash_url='http://orcid.org/'+id,
+                        pubtype=paper.doctype)
+                records_found += 1
+            except (KeyError, ValueError, TypeError):
+                pass
+
+    return records_found
 
 orcid_oai_source, _ = OaiSource.objects.get_or_create(identifier='orcid',
             defaults={'name':'ORCID','oa':False,'priority':1,'default_pubtype':'other'})

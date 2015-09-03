@@ -24,9 +24,11 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from django.db import models
-from papers.models import Paper
+from papers.models import Paper, OaiSource
 from django.contrib.auth.models import User
 from upload.models import UploadedPDF
+from deposit.protocol import *
+from deposit.registry import *
 
 DEPOSIT_STATUS_CHOICES = [
    ('created', _('Created')),
@@ -35,16 +37,63 @@ DEPOSIT_STATUS_CHOICES = [
    ('deposited', _('Deposited')),
    ]
 
-ZENODO_LICENSES_CHOICES = [
-   ('cc0', _('CC 0')),
-   ('cc-by', _('CC BY')),
-   ('cc-by-sa', _('CC BY SA')),
-   ('cc-by-nc', _('CC BY NC')),
- ]
+class Repository(models.Model):
+    """
+    This stores the parameters for a particular repository.
+    """
+    # Name
+    name = models.CharField(max_length=64)
+    # Description
+    description = models.TextField()
+    # Logo
+    logo = models.ImageField(upload_to='repository_logos/')
+
+    # The identifier of the interface (protocol) used for that repository
+    protocol = models.CharField(max_length=32)
+    # The source with which the OaiRecords associated with the deposits are created
+    oaisource = models.ForeignKey(OaiSource)
+    
+    # The identifier of the account under which papers should be deposited
+    username = models.CharField(max_length=64, null=True, blank=True)
+    # The password for that account
+    password = models.CharField(max_length=128, null=True, blank=True)
+    # An API key required by the protocol
+    api_key = models.CharField(max_length=256, null=True, blank=True)
+    # The API's endpoint
+    endpoint = models.CharField(max_length=256, null=True, blank=True)
+
+    def get_implementation(self):
+        """
+        Returns an instance of the class corresponding to the protocol identifier,
+        bound with this repository.
+        """
+        cls = protocol_registry.get(self.protocol)
+        if cls is None:
+            return
+        return cls(self)
+
+    def protocol_for_deposit(self, paper, user):
+        """
+        Returns an instance of the protocol initialized for the given
+        paper and user, if initialization succeeded.
+        """
+        instance = self.get_implementation()
+        if instance is None:
+            return
+        if instance.init_deposit(paper, user):
+            return instance
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = 'Repositories'
 
 class DepositRecord(models.Model):
     paper = models.ForeignKey(Paper)
     user = models.ForeignKey(User)
+
+    repository = models.ForeignKey(Repository)
 
     request = models.TextField(null=True, blank=True)
     identifier = models.CharField(max_length=512, null=True, blank=True)
@@ -62,6 +111,6 @@ class DepositRecord(models.Model):
         if self.identifier:
             return self.identifier
         else:
-            return _('Deposit')
+            return unicode(_('Deposit'))
 
 

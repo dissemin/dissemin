@@ -21,19 +21,26 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
 from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
+from django.utils import timezone
+from solo.models import SingletonModel
+from celery.execute import send_task
+from celery.result import AsyncResult
 
 from papers.utils import nstr, iunaccent, create_paper_plain_fingerprint
 from papers.name import match_names, name_similarity, unify_name_lists
-from papers.utils import remove_diacritics, sanitize_html, validate_orcid
+from papers.utils import remove_diacritics, sanitize_html, validate_orcid, affiliation_is_greater
+from papers.orcid import OrcidProfile
 
 from statistics.models import AccessStatistics
-from publishers.models import Publisher, Journal, OA_STATUS_CHOICES, OA_STATUS_PREFERENCE, default_publisher
+from publishers.models import Publisher, Journal, OA_STATUS_CHOICES, OA_STATUS_PREFERENCE, DummyPublisher
 from upload.models import UploadedPDF
+from dissemin.settings import PROFILE_REFRESH_ON_LOGIN
 
 import hashlib, re
 from datetime import datetime, timedelta
@@ -81,55 +88,16 @@ UPLOAD_TYPE_CHOICES = [
 
 PAPER_TYPE_PREFERENCE = [x for (x,y) in PAPER_TYPE_CHOICES]
 
-# Information about the researchers and their groups
-class Department(models.Model):
-    """
-    A department in an institution. Each :py:class:`Researcher` is affiliated with exactly one department.
-
-    :param name: the full name of the department
-    """
-
-    #: The full name of the department
-    name = models.CharField(max_length=300)
-
-    #: :py:class:`AccessStatistics` about the papers authored in this department
-    stats = models.ForeignKey(AccessStatistics, null=True)
-
-    @property
-    def sorted_researchers(self):
-        """List of :py:class:`Researcher` in this department sorted by last name (prefetches their stats as well)"""
-        return self.researcher_set.select_related('name', 'stats').order_by('name')
-
-    def __unicode__(self):
-        return self.name
-
-    def update_stats(self):
-        """Refreshes the department-level access statistics for that department."""
-        if not self.stats:
-            self.stats = AccessStatistics.objects.create()
-            self.save()
-        self.stats.update(Paper.objects.filter(author__researcher__department=self).distinct())
-
-    @property
-    def object_id(self):
-        """Criteria to use in the search view to filter on this department"""
-        return "department=%d" % self.pk
-
-class ResearchGroup(models.Model):
-    """
-    A research group is a group of researchers working on the same topic. Researchers can
-    belong to multiple research groups.
-    """
-
-    #: The full name of the research group
-    name = models.CharField(max_length=300)
-    def __unicode__(self):
-        return self.name
-
-    @property
-    def object_id(self):
-        """Criteria to use in the search view to filter on this research group"""
-        return "group=%d" % self.pk
+HARVESTER_TASK_CHOICES = [
+   ('init', _('Preparing profile')),
+   ('orcid', _('Fetching publications from ORCID')),
+   ('crossref', _('Fetching publications from CrossRef')),
+   ('base', _('Fetching publications from BASE')),
+   ('core', _('Fetching publications from CORE')),
+   ('oai', _('Fetching publications from OAI-PMH')),
+   ('clustering', _('Clustering publications')),
+   ('stats', _('Updating statistics')),
+   ]
 
 class NameVariant(models.Model):
     """
@@ -148,16 +116,14 @@ class NameVariant(models.Model):
 
 class Researcher(models.Model):
     """
-    A model to represent a researcher in a department
+    A model to represent a researcher
     """
 
     #: The preferred :py:class:`Name` for this researcher
     name = models.ForeignKey('Name')
-    #: :py:class:`Department` the researcher belongs to
-    department = models.ForeignKey(Department)
-    #: The (possibly multiple) :py:class:`ResearchGroup` the researcher belongs to
-    groups = models.ManyToManyField(ResearchGroup)
-    
+    #: It can be associated to a user
+    user = models.ForeignKey(User, null=True, blank=True)
+   
     # Various info about the researcher (not used internally)
     #: Email address for this researcher
     email = models.EmailField(blank=True,null=True)
@@ -168,18 +134,29 @@ class Researcher(models.Model):
     #: ORCiD identifier
     orcid = models.CharField(max_length=32, null=True, blank=True, unique=True)
     # TODO This could be a custom field as we know what format to expect
+    #: Did we manage to import at least one record from the ORCID profile? (Null if we have not tried)
+    empty_orcid_profile = models.NullBooleanField()
 
-    # DOI search
-    # TODO is this still needed ?
-    #: Date of the last CrossRef search for this researcher
-    last_doi_search = models.DateTimeField(null=True,blank=True)
-    #: Status of the current harvesting process for this researcher
-    status = models.CharField(max_length=512, blank=True, null=True)
-    #: Last time the harvesting status was updated
-    last_status_update = models.DateTimeField(auto_now=True)
+    # Fetching
+    #: Last time we harvested publications for this researcher
+    last_harvest = models.DateTimeField(null=True, blank=True)
+    #: Task id of the harvester (if any)
+    harvester = models.CharField(max_length=512, null=True, blank=True)
+    #: Current subtask of the harvester
+    current_task = models.CharField(max_length=64, choices=HARVESTER_TASK_CHOICES, null=True, blank=True)
 
     def __unicode__(self):
-        return unicode(self.name)
+        if self.name_id:
+            return unicode(self.name)
+        else:
+            return 'Unnamed researcher'
+
+    @property
+    def url(self):
+        if self.orcid:
+            return reverse('researcher-by-orcid', args=[self.orcid])
+        else:
+            return reverse('researcher', args=[self.pk])
 
     @property
     def authors_by_year(self):
@@ -227,10 +204,23 @@ class Researcher(models.Model):
         for name in self.variants_queryset():
             sim = name_similarity((name.first,name.last),(self.name.first,self.name.last))
             if sim > 0 and name.id not in current_name_variants:
-                nv = NameVariant.objects.create(name=name, researcher=self, confidence=sim)
-                if name.best_confidence < sim or reset:
-                    name.best_confidence = sim
-                    name.save(update_fields=['best_confidence'])
+                self.add_name_variant(name, sim, force_update=reset)
+
+    def add_name_variant(self, name, confidence, force_update=False):
+        """
+        Add a name variant with the given confidence and update
+        the best_confidence field of the name accordingly.
+
+        :param force_update: set the best_confidence even if the current value is
+            higher.
+        """
+        if name.id is None:
+            name.save()
+        nv = NameVariant.objects.get_or_create(
+                name=name, researcher=self, defaults={'confidence':confidence})
+        if name.best_confidence < confidence or force_update:
+            name.best_confidence = confidence
+            name.save(update_fields=['best_confidence'])
 
     stats = models.ForeignKey(AccessStatistics, null=True)
     def update_stats(self):
@@ -240,35 +230,83 @@ class Researcher(models.Model):
             self.save()
         self.stats.update(Paper.objects.filter(author__researcher=self).distinct())
 
+    def fetch_everything(self):
+        # TODO ensure the task is run only once per researcher
+        self.harvester = send_task('fetch_everything_for_researcher', [], {'pk':self.id}).id
+        self.current_task = 'init' 
+        self.save(update_fields=['harvester','current_task'])
+
+    def fetch_everything_if_outdated(self):
+        if self.last_harvest is None or timezone.now() - self.last_harvest > PROFILE_REFRESH_ON_LOGIN:
+            self.fetch_everything()
+
+    def init_from_orcid(self):
+        self.harvester = send_task('init_profile_from_orcid', [], {'pk':self.id}).id
+        self.current_task = 'init'
+        self.save(update_fields=['harvester', 'current_task'])
+
     @classmethod
-    def create_from_scratch(cls, first, last, dept, email, role, homepage, orcid=None):
+    def get_or_create_by_orcid(cls, orcid, profile=None, user=None):
+        researcher = None
+        try:
+            researcher = Researcher.objects.get(orcid=orcid)
+        except Researcher.DoesNotExist:
+            if profile is None:
+                profile = OrcidProfile(id=orcid) 
+            else:
+                profile = OrcidProfile(json=profile)
+            name = profile.name
+            homepage = profile.homepage
+            email = profile.email
+            researcher = Researcher.get_or_create_by_name(name[0],name[1], orcid=orcid,
+                    user=user, homepage=homepage, email=email)
+
+            # Ensure that extra info is added.
+            save = False
+            for kw, val in [('homepage',homepage),('orcid',orcid),('email',email)]:
+                if not researcher.__dict__[kw] and val:
+                    researcher.__dict__[kw] = val
+                    save = True
+            if save:
+                researcher.save()
+
+            for variant in profile.other_names:
+                confidence = name_similarity(variant, variant)
+                name = Name.lookup_name(variant)
+                researcher.add_name_variant(name, confidence)
+
+        return researcher
+
+    @classmethod
+    def get_or_create_by_name(cls, first, last, **kwargs):
+       name, created = Name.get_or_create(first, last)
+       researcher, created = Researcher.objects.get_or_create(name=name, defaults=kwargs)
+       if created:
+           researcher.update_variants()
+           researcher.update_stats()
+       return researcher
+
+    # TODO delete this method and replace it by get_or_create_by_name
+    @classmethod
+    def create_from_scratch(cls, first, last, **kwargs):
         """Creates a researcher, creating first the :py:class:`Name` for it.
 
         :raises ValueError: if a researcher with that name already exists,
                             or if an invalid ORCiD is provided.
         :raises DataError: if a researcher with that ORCiD already exists.
         """
-        first = first.strip()
-        last = last.strip()
-        name, created = Name.objects.get_or_create(full=iunaccent(first+' '+last),
-                defaults={'first':first, 'last':last})
+        name, created = Name.get_or_create(first, last)
         if not created and cls.objects.filter(name=name).count() > 0:
             # we forbid the creation of two researchers with the same name,
             # although our model would support it (TODO ?)
-            raise ValueError
+            raise ValueError('This name already exists')
 
-        if orcid is not None:
-            orcid = validate_orcid(orcid)
+        if kwargs.get('orcid') is not None:
+            orcid = validate_orcid(kwargs['orcid'])
             if orcid is None:
                 raise ValueError('Invalid ORCiD: "%s"' % orcid)
 
-        researcher = Researcher(
-                department=dept,
-                email=email,
-                role=role,
-                homepage=homepage,
-                name=name,
-                orcid=orcid)
+        researcher = Researcher(name=name, **kwargs)
         # This will raise DataError if such an ORCiD already exists
         researcher.save()
         researcher.update_variants()
@@ -279,6 +317,9 @@ class Researcher(models.Model):
     def object_id(self):
         """Criteria to use in the search view to filter on this researcher"""
         return "researcher=%d" % self.pk
+
+    def breadcrumbs(self):
+        return [(unicode(self),reverse('researcher', args=[self.pk]))]
 
 
 MAX_NAME_LENGTH = 256
@@ -314,7 +355,9 @@ class Name(models.Model):
         Replacement for the regular get_or_create, so that the full
         name is built based on first and last
         """
-        full = iunaccent(first.strip()+' '+last.strip())
+        first = first.strip()
+        last = last.strip()
+        full = iunaccent(first+' '+last)
         return cls.objects.get_or_create(full=full, defaults={'first':first,'last':last})
     def variants_queryset(self):
         """
@@ -418,7 +461,9 @@ class Paper(models.Model):
     oa_status = models.CharField(max_length=32, null=True, blank=True, default='UNK')
     pdf_url = models.URLField(max_length=2048, null=True, blank=True)
 
-    cached_author_count = None
+    # Task id of the current task updating the metadata of this article (if any)
+    task = models.CharField(max_length=512, null=True, blank=True)
+
     nb_remaining_authors = None
 
     def already_asked_for_upload(self):
@@ -440,14 +485,14 @@ class Paper(models.Model):
         """
         return self.pubdate.year
 
-    @property
+    @cached_property
     def prioritary_oai_records(self):
         """
         OAI records from custom sources we trust (positive priority)
         """
         return self.sorted_oai_records.filter(priority__gt=0)
 
-    @property
+    @cached_property
     def sorted_oai_records(self):
         """
         OAI records sorted by decreasing order of priority
@@ -455,7 +500,7 @@ class Paper(models.Model):
         """
         return self.oairecord_set.order_by('-priority')
 
-    @property
+    @cached_property
     def sorted_authors(self):
         """
         The author sorted as they should appear. Their names are pre-fetched.
@@ -474,16 +519,15 @@ class Paper(models.Model):
         """
         return [(name.first,name.last) for name in self.author_names()]
 
-
+    @property
     def author_count(self):
         """
         Number of authors. This property is cached in instances to
         avoid repeated COUNT queries.
         """
-        if self.cached_author_count == None:
-            self.cached_author_count = self.author_set.count()
-        return self.cached_author_count
+        return len(self.sorted_authors)
 
+    @property
     def has_many_authors(self):
         """
         When the paper has more than 15 authors (arbitrary threshold)
@@ -496,9 +540,10 @@ class Paper(models.Model):
         We display first the authors whose names are known, and then a few ones
         who are unknown.
         """
-        lst = (list(self.sorted_authors.filter(name__best_confidence__gt=0))+list(
-            self.sorted_authors.filter(name__best_confidence=0))[:3])[:15]
-        self.nb_remaining_authors = self.author_count() - len(lst)
+        sorted_authors = self.sorted_authors
+        lst = (filter(lambda a: a.name.best_confidence > 0, sorted_authors)+filter(
+                      lambda a: a.name.best_confidence == 0, sorted_authors)[:3])[:15]
+        self.nb_remaining_authors = self.author_count - len(lst)
         return lst
 
     def displayed_authors(self):
@@ -506,10 +551,28 @@ class Paper(models.Model):
         Returns the full list of authors if there are not too many of them,
         otherwise returns only the interesting_authors()
         """
-        if self.has_many_authors():
-            return self.interesting_authors()
+        if self.has_many_authors:
+            return self.interesting_authors
         else:
             return self.sorted_authors
+
+    @cached_property
+    def owners(self):
+        """
+        Returns the list of users that own this papers (listed as authors and identified as such).
+        """
+        authors = self.sorted_authors # These don't need to be sorted, but this property is cached
+        users = []
+        for a in authors:
+            if a.researcher and a.researcher.user:
+                users.append(a.researcher.user)
+        return users
+
+    def is_owned_by(self, user):
+        """
+        Is this user one of the owners of that paper?
+        """
+        return user in self.owners
 
     @property
     def toggled_visibility(self):
@@ -537,7 +600,7 @@ class Paper(models.Model):
             idx += 1
         return idx
 
-    @property
+    @cached_property
     def is_deposited(self):
         return self.successful_deposits().count() > 0
 
@@ -591,6 +654,21 @@ class Paper(models.Model):
         self.save()
         self.invalidate_cache()
 
+    def status_helptext(self):
+        """
+        Helptext displayed next to the paper logo
+        """
+        if self.oa_status == 'OA':
+            return _('This paper is made freely available by the publisher.')
+        if self.pdf_url is not None:
+            return _('This paper is available in a repository.')
+        if self.oa_status == 'OK' and self.pdf_url is None:
+            return _('This paper was not found in any repository, but could be made available legally by the author.')
+        if self.oa_status == 'NOK':
+            return _('The publisher of this paper forbids its archiving.')
+        if self.oa_status == 'UNK':
+            return _('This paper was not found in any repository; the policy of its publisher is unknown or unclear.')
+
     def publications_with_unique_publisher(self):
         seen_publishers = set()
         for publication in self.publication_set.all():
@@ -601,14 +679,29 @@ class Paper(models.Model):
                 seen_publishers.add(publication.publisher_name)
                 yield publication
 
+    def consolidate_metadata(self, wait=True):
+        """
+        Tries to find an abstract for the paper, if none is available yet,
+        possibly by fetching it from Zotero via doi-cache.
+        """
+        if self.task is None:
+            task = send_task('consolidate_paper', [], {'pk':self.id})
+            self.task = task.id
+            self.save(update_fields=['task'])
+        else:
+            task = AsyncResult(self.task)
+        if wait:
+            task.get()
+
     def publisher(self):
         for publication in self.publication_set.all():
             return publication.publisher_or_default()
-        return default_publisher
+        return DummyPublisher()
 
     def successful_deposits(self):
         return self.depositrecord_set.filter(pdf_url__isnull=False)
     
+    @cached_property
     def abstract(self):
         for rec in self.publication_set.all():
             if rec.abstract:
@@ -639,23 +732,33 @@ class Paper(models.Model):
         Invalidate the HTML cache for all the publications of this researcher.
         """
         for rpk in [a.researcher_id for a in self.author_set.filter(researcher_id__isnull=False)]+[None]:
-            for with_buttons in [False,True]:
-                key = make_template_fragment_key('publiListItem', [self.pk, rpk, with_buttons])
-                cache.delete(key)
+            key = make_template_fragment_key('publiListItem', [self.pk, rpk])
+            cache.delete(key)
 
-    def update_author_names(self, new_author_names):
+    def update_author_names(self, new_author_names, new_affiliations=None):
         """
         Improves the current list of authors by considering a new list of author names.
         Missing authors are added, and names are unified.
+        If affiliations are provided, they will replace the old ones if they are
+        more informative.
 
         :param new_author_names: list of Name instances (the order matters)
+        :param new_affiliations: (optional) list of affiliation strings for the new author names.
         """
+        if new_affiliations is None:
+            new_affiliations = [None]*len(new_author_names)
+        assert len(new_author_names) == len(new_affiliations)
         old_authors = self.sorted_authors
         old_names = map(lambda a: (a.name.first,a.name.last), old_authors)
         unified_names = unify_name_lists(old_names, new_author_names)
-        for i, (new_name, (idx,_)) in enumerate(unified_names):
+        for i, (new_name, (idx,new_idx)) in enumerate(unified_names):
             if idx is not None: # Updating the name of an existing author
                 author = old_authors[idx]
+                if new_name is None:
+                    # Delete that author, it was pruned because it already
+                    # appears elsewhere
+                    author.delete()
+                    continue
                 fields = []
                 if idx != i:
                     author.position = i
@@ -665,38 +768,18 @@ class Paper(models.Model):
                     name.save()
                     author.name = name
                     fields.append('name')
+                if new_idx is not None and affiliation_is_greater(new_affiliations[new_idx], author.affiliation):
+                    author.affiliation = new_affiliations[new_idx]
+                    fields.append('affiliation')
+                    author.update_name_variants_if_needed()
                 if fields:
                     author.save(update_fields=fields)
-            else: # Creating a new author
+            elif new_name is not None: # Creating a new author
                 name = Name.lookup_name(new_name)
                 name.save()
                 # TODO maybe we could cluster it ? -> move this code to the backend?
-                author = Author(paper=self,name=name,position=i)
+                author = Author(paper=self,name=name,position=i,affiliation=new_affiliations[new_idx])
                 author.save()
-                
-    def update_affiliations(self, affiliations):
-        """
-        Improves the current list of affiliations by considering a list of new 
-        affiliations. ORCiDs are preferred over plain strings, longer plain
-        strings are preferred over shorter plain strings, and plain strings
-        are preferred over None
-        """
-        def greater(a, b):
-            if a is None:
-                return False
-            if b is None:
-                return True
-            if validate_orcid(a):
-                return True
-            if validate_orcid(b):
-                return False
-            return len(a) > len(b)
-
-        for i, author in enumerate(self.sorted_authors):
-            if greater(affiliations[i], author.affiliation):
-                author.affiliation = affiliations[i]
-                author.save(update_fields=['affiliation'])
-
 
     # Merge paper into self
     def merge(self, paper):
@@ -722,7 +805,7 @@ class Paper(models.Model):
         OaiRecord.objects.filter(about=paper.pk).update(about=self.pk)
         Publication.objects.filter(paper=paper.pk).update(paper=self.pk)
         Annotation.objects.filter(paper=paper.pk).update(paper=self.pk)
-        self.update_author_names(paper.author_names())
+        self.update_author_names(map(lambda n: (n.first,n.last), paper.author_names()))
         if paper.last_annotation:
             self.last_annotation = None
             for annot in self.annotation_set.all().order_by('-timestamp'):
@@ -786,6 +869,39 @@ class Paper(models.Model):
         """
         return (self.oairecord_set.count() == 0 and self.publication_set.count() == 0)
 
+    def breadcrumbs(self):
+        """
+        Returns the navigation path to the paper, for display as breadcrumbs in the template.
+        """
+        first_researcher = None
+        for author in self.sorted_authors:
+            if author.researcher:
+                first_researcher = author.researcher
+                break
+        result = []
+        if first_researcher is None:
+            result.append((_('Papers'), reverse('search')))
+        else:
+            result.append((unicode(first_researcher), reverse('researcher', args=[first_researcher.pk])))
+        result.append((self.citation, reverse('paper', args=[self.pk])))
+        return result
+
+    def citation(self):
+        """
+        A short citation-like representation of the paper. E.g. Joyal and Street, 1992
+        """
+        result = ''
+        if self.author_count == 1:
+            result = self.sorted_authors[0].name.last
+        elif self.author_count == 2:
+            result = "%s and %s" % (
+                self.sorted_authors[0].name.last,
+                self.sorted_authors[1].name.last)
+        else:
+            result = "%s et. al." % (
+                self.sorted_authors[0].name.last)
+        result += ', %d' % self.year
+        return result
 
 
 # Researcher / Paper binary relation
@@ -803,6 +919,12 @@ class Author(models.Model):
 
     def __unicode__(self):
         return unicode(self.name)
+    def orcid(self):
+        """
+        If the affiliation looks like an ORCiD, return it, otherwise None
+        """
+        return validate_orcid(self.affiliation)
+
     def get_cluster_id(self):
         """
         This is the "find" in "Union Find".
@@ -862,6 +984,26 @@ class Author(models.Model):
     def is_known(self):
         return self.researcher != None
 
+    @property
+    def orcid(self):
+        return validate_orcid(self.affiliation)
+
+    def update_name_variants_if_needed(self, default_confidence=0.1):
+        """
+        Ensure that an author associated with an ORCID has a name
+        that is the variant of the researcher with that ORCID
+        """
+        orcid = self.orcid
+        if orcid:
+            try:
+                r = Researcher.objects.get(orcid=orcid)
+                nv = NameVariant.objects.get_or_create(
+                        researcher=r,
+                        name=self.name,
+                        defaults={'confidence':default_confidence})
+            except Researcher.DoesNotExist:
+                pass
+
 # Publication of these papers (in journals or conference proceedings)
 class Publication(models.Model):
     # TODO prepare this model for user input (allow for other URLs than DOIs)
@@ -902,7 +1044,9 @@ class Publication(models.Model):
     def publisher_or_default(self):
         if self.publisher_id:
             return self.publisher
-        return default_publisher
+        if self.publisher_name:
+            return DummyPublisher(self.publisher_name)
+        return DummyPublisher()
 
     def details_to_str(self):
         result = ''
@@ -925,7 +1069,7 @@ class Publication(models.Model):
 
 # Rough data extracted through OAI-PMH
 class OaiSource(models.Model):
-    identifier = models.CharField(max_length=300)
+    identifier = models.CharField(max_length=300, unique=True)
     name = models.CharField(max_length=100)
     oa = models.BooleanField(default=False)
     priority = models.IntegerField(default=1)
@@ -935,6 +1079,9 @@ class OaiSource(models.Model):
     last_status_update = models.DateTimeField(auto_now=True)
     def __unicode__(self):
         return self.name
+
+    class Meta:
+        verbose_name = "OAI source"
 
 class OaiRecord(models.Model):
     source = models.ForeignKey(OaiSource)
@@ -1073,6 +1220,29 @@ class OaiRecord(models.Model):
             for m in matches:
                 return m
 
+    class Meta:
+        verbose_name = "OAI record"
+
+# A singleton to link to a special instance of AccessStatistics for all papers
+class PaperWorld(SingletonModel):
+    stats = models.ForeignKey(AccessStatistics, null=True)
+
+    def update_stats(self):
+        """Update the access statistics for all papers"""
+        if not self.stats:
+            self.stats = AccessStatistics.objects.create()
+            self.save()
+        self.stats.update(Paper.objects.all())
+
+    @property
+    def object_id(self):
+        return ''
+
+    def __unicode__(self):
+        return "All papers"
+
+    class Meta:
+        verbose_name = "Paper World"
 
 # Annotation tool to train the models
 class Annotation(models.Model):

@@ -23,6 +23,8 @@ from __future__ import unicode_literals
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import ugettext as __
+from django.utils.functional import cached_property
+from django.core.urlresolvers import reverse
 
 from django.apps import apps
 get_model = apps.get_model
@@ -30,10 +32,10 @@ get_model = apps.get_model
 from statistics.models import AccessStatistics
 
 OA_STATUS_CHOICES = (
-        ('OA', _('Open access')),
-        ('OK', _('Allows pre/post prints')),
-        ('NOK', _('Forbids pre/post prints')),
-        ('UNK', _('Policy unclear')),
+        ('OA', _('Open access'), _('Freely available from the publisher.')),
+        ('OK', _('Allows pre/post prints'), _('The publisher sells copies but allows authors to deposit some version of the article in a repository.')),
+        ('NOK', _('Forbids pre/post prints'), _('The publisher forbids authors to deposit any version of their article online.')),
+        ('UNK', _('Policy unclear'), _('For complicated policies, unknown publishers and unpublished documents.')),
    )
 
 POLICY_CHOICES = [('can', _('Allowed')),
@@ -43,7 +45,12 @@ POLICY_CHOICES = [('can', _('Allowed')),
                   ('unknown', _('Unknown'))]
 
 
-OA_STATUS_PREFERENCE = [x for x,y in OA_STATUS_CHOICES]
+OA_STATUS_PREFERENCE = [x[0] for x in OA_STATUS_CHOICES]
+OA_STATUS_CHOICES_WITHOUT_HELPTEXT = [(x[0],x[1]) for x in OA_STATUS_CHOICES]
+
+
+def publishers_breadcrumbs():
+    return [(_('Publishers'),reverse('publishers'))]
 
 class DummyPublisher(object):
     pk = None
@@ -53,12 +60,14 @@ class DummyPublisher(object):
     preprint_conditions = []
     postprint_conditions = []
     pdfversion_conditions = []
-    def __init__(self):
-        pass
-    def __unicode__(self):
-        return __('Unknown publisher')
+    def __init__(self, name=None):
+        if name is not None:
+            self.name = name
+        else:
+            self.name = __('Unknown publisher')
 
-default_publisher = DummyPublisher()
+    def __unicode__(self):
+        return self.name
 
 # Publisher associated with a journal
 class Publisher(models.Model):
@@ -69,7 +78,7 @@ class Publisher(models.Model):
     preprint = models.CharField(max_length=32, choices=POLICY_CHOICES, default='unknown')
     postprint = models.CharField(max_length=32, choices=POLICY_CHOICES, default='unknown')
     pdfversion = models.CharField(max_length=32, choices=POLICY_CHOICES, default='unknown')
-    oa_status = models.CharField(max_length=32, choices=OA_STATUS_CHOICES, default='UNK')
+    oa_status = models.CharField(max_length=32, choices=OA_STATUS_CHOICES_WITHOUT_HELPTEXT, default='UNK')
 
     stats = models.ForeignKey(AccessStatistics, null=True)
 
@@ -116,15 +125,27 @@ class Publisher(models.Model):
     @property
     def sorted_journals(self):
         return self.journal_set.all().select_related('stats').filter(stats__num_tot__gt=0).order_by('-stats__num_tot')
-    @property
+    @cached_property
     def preprint_conditions(self):
-        return self.publisherrestrictiondetail_set.filter(applies_to='preprint')
-    @property
+        return list(self.publisherrestrictiondetail_set.filter(applies_to='preprint'))
+    @cached_property
     def postprint_conditions(self):
-        return self.publisherrestrictiondetail_set.filter(applies_to='postprint')
-    @property
+        return list(self.publisherrestrictiondetail_set.filter(applies_to='postprint'))
+    @cached_property
     def pdfversion_conditions(self):
-        return self.publisherrestrictiondetail_set.filter(applies_to='pdfversion')
+        return list(self.publisherrestrictiondetail_set.filter(applies_to='pdfversion'))
+    @cached_property
+    def conditions(self):
+        return list(self.publishercondition_set.all())
+    @property
+    def has_conditions(self):
+        return len(self.conditions) > 0
+    @cached_property
+    def copyrightlinks(self):
+        return list(self.publishercopyrightlink_set.all())
+    @property
+    def has_copyrightlinks(self):
+        return len(self.copyrightlinks) > 0
     def change_oa_status(self, new_oa_status):
         if self.oa_status == new_oa_status:
             return
@@ -134,6 +155,12 @@ class Publisher(models.Model):
         for p in papers:
             p.update_availability()
             p.invalidate_cache()
+
+    def breadcrumbs(self):
+        result = publishers_breadcrumbs()
+        result.append((unicode(self), reverse('publisher', args=[self.pk])))
+        return result
+
 
 # Journal data retrieved from RoMEO
 class Journal(models.Model):
@@ -149,6 +176,8 @@ class Journal(models.Model):
             self.save()
         self.stats.update(get_model('papers', 'Paper').objects.filter(publication__journal=self).distinct())
 
+    def breadcrumbs(self):
+        return self.publisher.breadcrumbs()+[(unicode(self),'')]
     def __unicode__(self):
         return self.title
     class Meta:

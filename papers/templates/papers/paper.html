@@ -32,25 +32,9 @@
 {% endblock %}
 
 {% block jsScript %}
-{% if request.user.is_authenticated %}
 $(function(){
-
-    function paperMerged(domElem, response) {
-        window.location.replace('/paper/'+response.merged);
-    }
-
-    makeTextEditable($('#paperTitle'), '/ajax/change-paper', 'title', paperMerged);
-    $(".unknownAuthorName").each(function(index) {
-        makeAuthorEditable($(this), paperMerged);
-    });
-    $('.annotate-paper-radio').change(function(){
-        console.log($(this));
-        var value = $(this).val();
-        $.ajax({url:'/ajax/'+$(this).attr('name')+'-'+value})
-    });
+$('.helpPopover').popover({trigger: "hover"});
 });
-
-{% endif %}
 {% if paper.has_many_authors %}
 $(function(){
     var summary = $('#authorSummary').clone();
@@ -121,7 +105,7 @@ $(function(){
         {% if psh.pk %}
             <a href="{% url 'publisher' psh.pk %}">{{ psh }}</a></p>
         {% else %}
-            {{ publi.publisher_name }}</p>
+            {{ psh }}</p>
         {% endif %}
         {% if paper.is_deposited %}
         <strong>Deposited.</strong>
@@ -144,67 +128,5 @@ $(function(){
 
 {% block details %}
 
-{% for publi in paper.publication_set.all %}
-{% if forloop.first %}
-  <span class="detailsTitle">{% trans "Published in" %}</span>
-  <div class="detailsContent">
-{% endif %}
-<p>{{ publi | publication }}
-{% if publi.doi %}
-(DOI: <a href="{{ publi | doi_to_url }}">{{ publi.doi }}</a>)
-{% endif %}
-</p>
-{% if forloop.last %}
-</div>
-{% endif %}
-{% endfor %}
-
-<span class="detailsTitle">{% trans "Data from" %}</span>
-<div class="detailsContent">
-    {% include 'papers/paperSources.html' with paper=paper %}
-</div>
-
-<span class="detailsTitle">{% trans "Departments" %}</span>
-<div class="detailsContent">
-{% for dept in view.departments %}
-<p><a href="{% url 'department' dept.id %}">{{ dept }}</a></p>
-{% endfor %}
-
-{% if request.user.is_authenticated %}
-    {% include "papers/annotButtons.html" with paper=paper with_scholar=1 %}
-{% endif %}
-
-</div>
-
-<span class="detailsTitle">{% trans "Tools" %}</span>
-<div class="detailsContent">
-    <p><a href="{{ paper.google_scholar_link }}">{% trans "Search in Google Scholar" %}</a></p>
-    <p><a href="{{ paper.core_link }}">{% trans "Search in CORE" %}</a></p>
-</div>
-
-{% if request.user.is_superuser %}
-<span class="detailsTitle">{% trans "Admin zone" %}</span>
-<div class="detailsContent">
-    <p><strong>Visibility:</strong> {{ paper.visibility }}</p>
-    <p><strong>Publisher:</strong> {{ paper.publisher }}</p>
-    <p><strong>Clusters:</strong></p>
-{% for a in paper.author_set.all %}
-{% if a.cluster %}
-<p>{{a}}: 
-<a href="{% url 'paper' a.cluster.paper.pk %}">{{ a.cluster.paper }}</a>
-({{a.cluster.num_children}} authors, score {{a.cluster.cluster_relevance}})
-</p>
-{% endif %}
-{% endfor %}
-<p><strong>Annotations:</strong>
-<ul>
-{% for annot in paper.annotation_set.all %}
-    <li>{{ annot }}</li>
-{% empty %}
-None
-{% endfor %}
-</ul>
-</p>
-</div>
-{% endif %}
+{% include "papers/paperDetails.html" with paper=paper %}
 {% endblock %}

@@ -21,10 +21,12 @@
 from django.conf.urls import patterns, include, url
 from django.conf import settings
 from django.conf.urls.static import static
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+import allauth.account.views
 from os.path import join
 
 from django.contrib import admin
+from django.contrib.auth import logout
 from dissemin.settings import UNIVERSITY_BRANDING
 admin.autodiscover()
 
@@ -39,6 +41,19 @@ def handler500(request):
     response.status_code = 500
     return response
 
+class LoginView(allauth.account.views.LoginView):
+    template_name = 'dissemin/login.html'
+
+class SandboxLoginView(allauth.account.views.LoginView):
+    template_name = 'dissemin/sandbox.html'
+
+def logoutView(request):
+    logout(request)
+    if 'HTTP_REFERER' in request.META:
+        return redirect(request.META['HTTP_REFERER'])
+    else:
+        return redirect('/')
+
 def temp(name):
     return (lambda x: render(x, name, UNIVERSITY_BRANDING))
 
@@ -52,17 +67,21 @@ urlpatterns = patterns('',
     url(r'^tos$', temp('dissemin/tos.html'), name='tos'),
     url(r'^feedback$', temp('dissemin/feedback.html'), name='feedback'),
     # Authentication
-    url(r'^admin/logout/$','django_cas_ng.views.logout', name='logout'),
+    #url(r'^admin/logout/$','django_cas_ng.views.logout', name='logout'),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^accounts/login/$', 'django_cas_ng.views.login', name='login'), 
-    url(r'^accounts/logout/$','django_cas_ng.views.logout', name='logout'),
-    url(r'^logout/$', 'django_cas_ng.views.logout'),
+    #url(r'^accounts/login/$', 'django_cas_ng.views.login', name='login'), 
+    #url(r'^accounts/logout/$','django_cas_ng.views.logout', name='logout'),
+    #url(r'^logout/$', 'django_cas_ng.views.logout'),
     # Apps
     url(r'^ajax-upload/', include('upload.urls')),
     url(r'^', include('papers.urls')),
     url(r'^', include('publishers.urls')),
     url(r'^', include('deposit.urls')),
+    # Social auth
+    url(r'^accounts/login/$', LoginView.as_view(), name='login'),
+    url(r'^accounts/sandbox_login/$', SandboxLoginView.as_view(), name='sandbox-login'),
+    url(r'^accounts/logout/$', logoutView, name='logout'),
+    url(r'^accounts/', include('allauth.urls')),
 # Remove this in production
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT
-) + static('/', document_root=join(settings.STATIC_ROOT, 'favicon')
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

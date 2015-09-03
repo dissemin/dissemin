@@ -46,4 +46,7 @@ class UploadedPDF(models.Model):
     #: A thumbnail of the first page
     thumbnail = models.FileField(upload_to='thumbnails/')
 
+    class Meta:
+        verbose_name = 'Uploaded PDF'
+
 

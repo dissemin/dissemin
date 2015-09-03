@@ -3,10 +3,15 @@
 {% load staticfiles %}
 {% load bootstrap_pagination %}
 {% load statuses %}
+{% load domain %}
 {% load i18n %}
 
 {% block headTitle %}
 {{ head_search_description }}
+{% endblock %}
+
+{% block extra_head %}
+{% include "statistics/headers.html" %}
 {% endblock %}
 
 {% block bodyTitle %}
@@ -14,37 +19,34 @@
 {% endblock %}
 
 {% block jsScript %}
+    $(function(){
+       $('.logoHelpPopover').popover({trigger: "hover"});
+    });
     function changeDisplay () {
 	   $(".ulContainer").toggleClass("mosaic-on");
 	}
-{% if request.user.is_authenticated %}
-    $(function(){
-
-    function paperMerged(domElem, response) {
-        li = domElem.closest('li');
-        li.replaceWith('<li class="itemMerged">{% trans "Paper merged with " %}<a href="/paper/'+
-            response.merged+'">"'+response.merged_title+'"</a></li>');
+{% if researcher.current_task %}
+    function pollHarvesting(){
+        console.log('pollHarvesting()');
+        $.get('{% url 'ajax-harvestingStatus' researcher.id %}', function(data) {
+            console.log(data);
+            if(data) {
+                $('#harvestingStatus').text(data['display']);
+                setTimeout(pollHarvesting, 1500);
+            } else {
+                /* var area = $('#waitingArea');
+                area.fadeOut(function(){
+                    area.hide();
+                    }); */
+                location.reload(true);
+            }
+            }).fail(function () {
+                console.log('fail');
+                setTimeout(pollHarvesting, 2000);
+            });
     }
-
-    $(".paperItemTitle").each(function(index) {
-        makeTextEditable($(this), '/ajax/change-paper', 'title', paperMerged);
-    });
-
-    $(".unknownAuthorName").each(function(index) {
-        makeAuthorEditable($(this), paperMerged);
-    });
-    {% if researcher %}
-    makeTextEditable($('#researcher-role'), '/ajax/change-researcher', 'role', function(a,b) { ; });
-    {% endif %}
-    });
-{% endif %}
-{% if request.user.is_authenticated %}
     $(function(){
-        $('.annotate-paper-radio').change(function(){
-            console.log($(this));
-            var value = $(this).val();
-            $.ajax({url:'/ajax/'+$(this).attr('name')+'-'+value})
-        });
+        setTimeout(pollHarvesting, 1500);
     });
 {% endif %}
 {% endblock %}
@@ -59,16 +61,16 @@
         data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}"
         data-pk="{{ researcher.pk }}">{{ researcher.role }}</span></p>
         {% endif %}
-        <p><a href="{% url 'department' researcher.department.id %}">{{ researcher.department }}</a></p>
         {% if researcher.homepage %}
-        <p><a href="{{ researcher.homepage }}">{% trans "Homepage" context "Researcher" %}</a></p>
+        <p><span class="glyphicon glyphicon-home"></span> <a href="{{ researcher.homepage }}">{{ researcher.homepage|domain }}</a></p>
         {% endif %}
         {% if researcher.orcid %}
-        <p>ORCiD: <a href="http://orcid.org/{{ researcher.orcid }}">{{ researcher.orcid }}</a></p>
+        <p><a href="http://orcid.org/{{ researcher.orcid }}"><img src="{% static "img/orcid-small.png" %}" alt="ORCID" /> {{ researcher.orcid }}</a></p>
         {% endif %}
         {% if request.user.is_superuser and researcher.email %}
         <p>{% trans "Address:" %} {{ researcher.email }}</p>
         {% endif %}
+        {% include "statistics/pie.html" with obj=researcher stats_counter=1 %}
         {% if request.user.is_superuser %}
         <p>{% trans "Names:" %}
             <ul>
@@ -80,16 +82,6 @@
          <a href="{% url 'refetch-researcher' researcher.pk %}" class="btn btn-default">{% trans "Refresh papers" %}</a><br />
          <a href="{% url 'recluster-researcher' researcher.pk %}" class="btn btn-default">{% trans "Refresh classification" %}</a>
          {% endif %}
-    </div>
-{% elif department %}
-<span class="detailsTitle">{% trans "Department" %}</span>
-    <div class="detailsContent">
-        <p id="detail-name">{{ department }}</p>
-        <p><a href="{% url 'department' department.id %}">
-            {% blocktrans trimmed with count=department.researcher_set.count %}
-            {{ count }} members
-            {% endblocktrans %}
-        </a></p>
     </div>
 {% elif name %}
 <span class="detailsTitle">{% trans "Name" %}</span>
@@ -136,11 +128,12 @@
 {% if not journal and not publisher %}
 <p class="criterion">{% trans "By publisher policy:" %}</p>
 {% for st in oa_status_choices %}
-<div class="{% if st.0 == status %}selectedCriterion{% else %}unselectedCriterion{% endif %}">
-    <div class="pubLogo"><div class="pubLogoPic-{{ st.0 }}"><a href="{% url 'search' %}?{{ st.2.urlencode }}" class="filldiv"></a></div></div>
-    <div class="criterionItem"><a href="{% url 'search' %}?{{ st.2.urlencode }}">{{ st.1 }}</a>
+<div class="{% if st.0 == status %}selectedCriterion{% else %}unselectedCriterion{% endif %} logoHelpPopover"
+     data-content="{{ st.2 }}" rel="popover" data-placement="left">
+    <div class="pubLogo"><div class="pubLogoPic-{{ st.0 }}"><a href="{% url 'search' %}?{{ st.3.urlencode }}" class="filldiv"></a></div></div>
+    <div class="criterionItem"><a href="{% url 'search' %}?{{ st.3.urlencode }}">{{ st.1 }}</a>
         {% if st.0 == status %}
-        <div class="criterionCross"><a href="{% url 'search' %}?{{ st.2.urlencode }}">x</a></div>
+        <div class="criterionCross"><a href="{% url 'search' %}?{{ st.3.urlencode }}">x</a></div>
         {% endif %}
     </div>
 </div>
@@ -191,6 +184,51 @@
 {% endblock %}
 
 {% block lists %}
+ {% if researcher.current_task %}
+    <div id="waitingArea">
+        <span class="waitingBird"><img src="{% static "img/animated-bird.gif" %}" alt="Paper bird" /></span>
+        <br />
+        <span id="harvestingStatus">{{ researcher.get_current_task_display }}</span><span>…</span>
+        <br />
+    </div>
+ {% endif %}
+
+ {% if not researcher.orcid %}
+ <p></p>
+ <div class="alert alert-warning">
+     <p>
+     {% blocktrans trimmed %}
+     This researcher is not associated with any ORCID profile. The publications below
+     match their name but might be irrelevant.
+     {% endblocktrans %}
+     </p>
+ </div>
+ {% elif researcher.empty_orcid_profile %}
+ <p></p>
+ <div class="alert alert-warning">
+     {% if researcher.user == request.user %}
+     {% url 'refetch-researcher' researcher.pk as url_refetch %}
+     <p>
+     {% blocktrans trimmed %}
+     Your ORCID profile does not reference any publication. You can add them easily using <a href="http://search.crossref.org">CrossRef Metadata Search</a>.<br />
+     The ones shown below match your name but might be irrelevant or incomplete.
+     {% endblocktrans %}
+     {% if not researcher.current_task %}
+         </p><p>
+         <div style="text-align:center">
+         <a href="{{ url_refetch }}" class="btn btn-default">Update papers</a>
+         </div>
+     {% endif %}
+     {% else %}
+     {% blocktrans trimmed %}
+     This ORCID profile does not reference any publication.
+     The ones shown below might be irrelevant or incomplete.
+     {% endblocktrans %}
+     {% endif %}
+     </p>
+ </div>
+ {% endif %}
+
  {% if search_results.paginator.num_pages > 1 %}
 <div class="searchPages">{% bootstrap_paginate search_results range=10 %}</div>
  {% endif %}
@@ -205,7 +243,9 @@
 </li>    
         {% if forloop.last %}</ul></div>{% endif %}
  {% empty %}
- <p>{% trans "No production found." %}</p>
+    {% if not researcher.current_task %}
+         <p class="notFound">{% trans "No production found." %}</p>
+    {% endif %}
  {% endfor %}
  {% if search_results.paginator.num_pages > 1 %}
  <div class="searchPages">{% bootstrap_paginate search_results range=10 %}</div>

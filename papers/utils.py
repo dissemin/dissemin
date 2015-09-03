@@ -114,6 +114,21 @@ def unescape_latex(s):
 
     return latex_command_re.sub(conditional_replace, s)
 
+latex_one_character_braces_re = re.compile(r'(^|(^|[^\\])\b(\w+)){(.)}', re.UNICODE)
+latex_full_line_braces_re = re.compile(r'^{(.*)}$')
+latex_word_braces_re = re.compile(r'(^|\s){(\w+)}($|\s)', re.UNICODE)
+def remove_latex_braces(s):
+    """
+    Removes spurious braces such as in "Th{é}odore" or "a {CADE} conference"
+    This should be run *after* unescape_latex
+    """
+    s = latex_full_line_braces_re.sub(r'\1', s)
+    s = latex_word_braces_re.sub(r'\1\2\3', s)
+    s = latex_one_character_braces_re.sub(r'\1\4', s)
+    s = latex_one_character_braces_re.sub(r'\1\4', s)
+    s = latex_one_character_braces_re.sub(r'\1\4', s)
+    return s
+
 def sanitize_html(s):
     s = overescaped_re.sub(r'&#\1;', s)
     s = unicode4_re.sub(lambda x: x.group(1).decode('unicode-escape'), s)
@@ -130,8 +145,22 @@ def kill_html(s):
     orig = html_killer.clean_html('<div>'+s+'</div>')
     return orig[5:-6]
 
+#### XPath for JSON !
+
+def jpath(path, js, default=None):
+    def _walk(lst, js):
+        if js is None:
+            return default
+        if lst == []:
+            return js
+        else:
+            return _walk(lst[1:], js.get(lst[0],{} if len(lst) > 1 else default))
+    return _walk(path.split('/'), js)
+
 
 ##### Paper fingerprinting
+
+from papers.name import split_name_words
 
 stripped_chars = re.compile(r'[^- a-z0-9]')
 def create_paper_plain_fingerprint(title, authors, year):
@@ -141,6 +170,10 @@ def create_paper_plain_fingerprint(title, authors, year):
     title = title.strip()
     title = re.sub('[ -]+', '-', title)
     buf = title
+
+    # If the title is long enough, we return the fingerprint as is
+    if len(buf) > 50:
+        return buf
     
     # If the title is just one word, we add the year (for "Preface", "Introduction" cases)
     if not '-' in title:
@@ -155,12 +188,17 @@ def create_paper_plain_fingerprint(title, authors, year):
         # initials = map(lambda x: x[0].lower(), split_words(author[0]))
 
         # Last name, without the small words such as "van", "der", "de"…
-        # We could remove this filter? Or not as it is useful to get rid of name splitting errors
-        last_words = filter(lambda x: x[0].isupper(), split_words(author[1]))
-
+        last_name_words, last_name_separators = split_name_words(author[1])
+        last_words = []
+        for i in range(len(last_name_words)):
+            if (last_name_words[i][0].isupper() or
+                (i > 0 and last_name_separators[i-1] == '-')):
+                last_words.append(last_name_words[i])
+             
         # If no word was uppercased, fall back on all the words
         if not last_words:
-            last_words = split_words(author[1])
+            last_words = last_name_words
+
         # Lowercase
         last_words = map(ulower, last_words)
         fp = '-'.join(last_words)
@@ -235,20 +273,21 @@ def tolerant_datestamp_to_datetime(datestamp):
 
 ### ORCiD utilities ###
 
-orcid_re = re.compile(r'^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{3}[X0-9]$')
+orcid_re = re.compile(r'^(http://orcid.org/)?([0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{3}[X0-9])$')
 
 def validate_orcid(orcid):
     """
     :returns: a cleaned ORCiD if the argument represents a valid ORCiD, None otherwise
     """
     try:
-        orcid = str(orcid).strip()
-    except ValueError:
+        orcid = unicode(orcid).strip()
+    except ValueError, TypeError:
         return
 
     match = orcid_re.match(orcid)
     if not match:
         return
+    orcid = match.group(2)
     nums = orcid.replace('-','')
     total = 0
     for i in range(15):
@@ -257,5 +296,21 @@ def validate_orcid(orcid):
     checkchar = str(checkdigit) if checkdigit != 10 else 'X'
     if nums[-1] == checkchar:
         return orcid
+
+def affiliation_is_greater(a, b):
+    """
+    Compares to affiliation values. Returns True
+    when the first contains more information than
+    the second
+    """
+    if a is None:
+        return False
+    if b is None:
+        return True
+    if validate_orcid(a):
+        return True
+    if validate_orcid(b):
+        return False
+    return len(a) > len(b)
 
 

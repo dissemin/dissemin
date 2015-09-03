@@ -1,0 +1,10 @@
+{% load domain %}
+{% load i18n %}
+{% load static %}
+{{ profile.first }} {{ profile.last }}, 
+<span><a href="http://orcid.org/{{ profile.orcid }}"><img src="{% static "img/orcid-small.png" %}" alt="ORCID" /> {{ profile.orcid }}</a></span>
+{% if researcher.homepage %}
+<span><span class="glyphicon glyphicon-home"></span> <a href="{{ researcher.homepage }}">{{ researcher.homepage|domain }}</a></span>
+{% endif %}
+<a href="{% url 'researcher-by-orcid' profile.orcid %}" class="btn btn-success btn-sm confirmSuggestion">{% trans "Yes" %}</a>
+

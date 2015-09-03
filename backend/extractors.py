@@ -87,7 +87,7 @@ class OpenAireExtractor(RegexExtractor):
         super(OpenAireExtractor, self).__init__(mappings)
 
     def _post_filter(self, record, urls):
-        if record[1]._map.get('rights') == 'info:eu-repo/semantics/openAccess':
+        if 'info:eu-repo/semantics/openAccess' in record[1]._map.get('rights', []):
             urls['pdf'] = urls.get('splash')
         return urls
 
@@ -146,6 +146,15 @@ numdamExtractor = RegexExtractor([
 openaireExtractor = OpenAireExtractor([
     ('identifier', re.compile(r'(https?://[^ ]*)'),
         'splash', r'\1'),
+    ('identifier', re.compile(r'(https?://[^ ]*\.pdf)'),
+        'pdf', r'\1'),
+    ])
+
+zenodoExtractor = RegexExtractor([
+    ('identifier', re.compile(r'(https?://zenodo.org/record/[0-9]*)'),
+        'splash', r'\1'),
+    ('identifier', re.compile(r'(https?://zenodo.org/record/[0-9]*)'),
+        'pdf', r'\1'),
     ])
 
 REGISTERED_EXTRACTORS = {
@@ -157,17 +166,19 @@ REGISTERED_EXTRACTORS = {
         'persee' : perseeExtractor,
         'numdam' : numdamExtractor,
         'openaire' : openaireExtractor,
+        'zenodo': zenodoExtractor,
         }
 
 # Set up the model for the sources
 oai_sources = [
-        ('arxiv','arXiv',False,1,'preprint'),
-        ('hal', 'HAL', False, 1, 'preprint'),
-        ('cairn', 'Cairn', False, 1, 'preprint'),
-        ('pmc', 'PubMed Central', False, 1, 'preprint'),
-        ('doaj', 'DOAJ', True, 1, 'preprint'),
-        ('persee', 'Persée', True, 1, 'preprint'),
-        ('openaire', 'OpenAIRE', False, 1, 'preprint'),
+        ('arxiv','arXiv',False, 10,'preprint'),
+        ('hal', 'HAL', False, 10, 'preprint'),
+        ('cairn', 'Cairn', False, 10, 'preprint'),
+        ('pmc', 'PubMed Central', False, 10, 'preprint'),
+        ('doaj', 'DOAJ', True, 10, 'preprint'),
+        ('persee', 'Persée', True, 10, 'preprint'),
+        ('openaire', 'OpenAIRE', False, 5, 'preprint'),
+        ('zenodo', 'Zenodo', False, 15, 'preprint'),
         ]
 
 for identifier, name, oa, priority, pubtype in oai_sources:
