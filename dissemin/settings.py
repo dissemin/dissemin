@@ -179,6 +179,7 @@ INSTALLED_APPS = (
     'deposit.zenodo',
     'bootstrap_pagination',
     'solo',
+    'swampdragon',
     'debug_toolbar',
 )
 
@@ -253,6 +254,9 @@ CACHES = {
 
     }
 }
+
+# SwampDragon settings
+SWAMP_DRAGON_CONNECTION = ('swampdragon.connections.sockjs_connection.DjangoSubscriberConnection', '/data')
 
 ### Static files (CSS, JavaScript, Images) ###
 # This defines how static files are stored and accessed.

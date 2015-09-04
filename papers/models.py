@@ -27,7 +27,8 @@ from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
 from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
-from django.utils import timezone, cached_property
+from django.utils import timezone
+from django.utils.functional import cached_property
 from solo.models import SingletonModel
 from celery.execute import send_task
 from celery.result import AsyncResult
