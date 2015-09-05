@@ -775,7 +775,10 @@ class Paper(models.Model):
                     fields.append('affiliation')
                     author.update_name_variants_if_needed()
                 if fields:
-                    author.save(update_fields=fields)
+                    if author.pk:
+                        author.save(update_fields=fields)
+                    else:
+                        author.save()
             elif new_name is not None: # Creating a new author
                 name = Name.lookup_name(new_name)
                 name.save()

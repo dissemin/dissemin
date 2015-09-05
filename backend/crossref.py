@@ -33,7 +33,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from papers.errors import MetadataSourceException
 from papers.doi import to_doi
 from papers.name import match_names, normalize_name_words, parse_comma_name
-from papers.utils import create_paper_fingerprint, iunaccent, tolerant_datestamp_to_datetime, date_from_dateparts, affiliation_is_greater, jpath
+from papers.utils import create_paper_fingerprint, iunaccent, tolerant_datestamp_to_datetime, date_from_dateparts, affiliation_is_greater, jpath, validate_orcid
 from papers.models import Publication, Paper
 
 from backend.utils import urlopen_retry
@@ -269,9 +269,11 @@ def search_for_dois_incrementally(query, filters={}, max_batches=max_crossref_ba
     :param filters: filters as specified by the REST API
     :param max_batches: maximum number of queries to send to CrossRef
     """
-    params = {'query':query}
+    params = {}
+    if query:
+        params['query'] = query
     if filters:
-        params['filter'] = ','.join(map(lambda k,v: k+":"+v, filters))
+        params['filter'] = ','.join(map(lambda (k,v): k+":"+v, filters.items()))
     
     count = 0
     rows = 20

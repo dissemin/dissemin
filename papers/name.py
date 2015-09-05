@@ -291,7 +291,10 @@ def shallower_name_similarity(a, b):
         if not all(map(match_first_names, parts)):
             return 0.
 
-    return ratio*len(parts)/max(len(partsA), len(partsB))
+    maxlen = max(len(partsA), len(partsB))
+    if maxlen > 0:
+        return ratio*len(parts)/maxlen
+    return 0.
 
 #### Helpers for the name splitting heuristic ######
 
