@@ -284,6 +284,8 @@ def validate_orcid(orcid):
     """
     :returns: a cleaned ORCiD if the argument represents a valid ORCiD, None otherwise
     """
+    if not orcid:
+        return
     try:
         orcid = unicode(orcid).strip()
     except ValueError, TypeError:

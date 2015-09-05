@@ -203,7 +203,7 @@ def save_doi_metadata(metadata, extra_affiliations=None):
     :returns: the paper, created if needed
     """        
     # Normalize metadata
-    if metadata is None or type(metadata) != type({}):
+    if metadata is None or type(metadata) != dict:
         if metadata is not None:
             print "WARNING: Invalid metadata: type is "+str(type(metadata))
             print "The doi proxy is doing something nasty!"
@@ -226,7 +226,7 @@ def save_doi_metadata(metadata, extra_affiliations=None):
     
     title = metadata['title']
     # CrossRef metadata stores titles in lists
-    if type(title) == type([]):
+    if type(title) == list:
         title = title[0]
     authors = map(name_lookup_cache.lookup, map(convert_to_name_pair, metadata['author']))
     authors = filter(lambda x: x != None, authors)
@@ -234,6 +234,11 @@ def save_doi_metadata(metadata, extra_affiliations=None):
         raise ValueError('No known author')
 
     def get_affiliation(author_elem):
+        # First, look for an ORCID id
+        orcid = validate_orcid(author_elem.get('ORCID'))
+        if orcid:
+            return orcid
+        # Otherwise return the plain affiliation, if any
         for dct in author_elem.get('affiliation', []):
             if 'name' in dct:
                 return dct['name']
