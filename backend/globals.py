@@ -10,11 +10,12 @@ clustering_context_factory = None
 
 if isfile('models/similarity.pkl'):
     print("Loading similarity classifier…")
-    sc = SimilarityClassifier(filename='models/similarity.pkl')
-    rc = OrcidRelevanceClassifier()
-
-    clustering_context_factory = ClusteringContextFactory(sc, rc)
+    similarity_classifier = SimilarityClassifier(filename='models/similarity.pkl')
+    relevance_classifier = OrcidRelevanceClassifier()
 else:
     print('Not loading classifiers as they have not been trained.')
+
+def get_ccf():
+    return ClusteringContextFactory(similarity_classifier, relevance_classifier)
 
 

@@ -34,12 +34,12 @@ from oaipmh.error import DatestampError, NoRecordsMatchError, BadArgumentError
 from papers.models import *
 from papers.doi import to_doi
 
-from backend.create import *
-from backend.crossref import fetch_publications, consolidate_publication
+from backend.globals import get_ccf
+from backend.crossref import *
 from backend.oai import *
-from backend.core import fetch_papers_from_core_for_researcher
+from backend.core import CorePaperSource
 from backend.base import fetch_papers_from_base_for_researcher
-from backend.orcid import fetch_orcid_records
+from backend.orcid import *
 from backend.name_cache import name_lookup_cache
 from backend.extractors import * # to ensure that OaiSources are created
 from backend.utils import run_only_once
@@ -66,30 +66,82 @@ def init_profile_from_orcid(pk):
     This task is intended to be very quick, so that users
     can see their ORCID publications quickly.
     """
+    
+    ccf = get_ccf()
+    r = Researcher.objects.get(pk=pk)
+    update_task = lambda name: update_researcher_task(r, name)
+    update_task('clustering')
+    ccf.reclusterBatch(r)
+    fetch_everything_for_researcher(pk)
+
+@shared_task(name='fetch_everything_for_researcher')
+@run_only_once('researcher', keys=['pk'], timeout=15*60)
+def fetch_everything_for_researcher(pk):
+    ccf = get_ccf()
+    oai = OaiPaperSource(ccf)
+    def fetch_accessibility(paper):
+        #paper.fetch_records_for_fingerprint(paper.fingerprint)
+        return paper
+
     try:
         r = Researcher.objects.get(pk=pk)
         update_task = lambda name: update_researcher_task(r, name)
-        update_task('clustering')
-        clustering_context_factory.reclusterBatch(r)
         if r.orcid:
             update_task('orcid')
-            num = fetch_orcid_records(r.orcid)
-            r.empty_orcid_profile = (num == 0)
+            source = OrcidPaperSource(ccf)
+            papers = list(map(fetch_accessibility, source.fetch_orcid_records(r.orcid)))
+            r.empty_orcid_profile = (len(papers) == 0)
             r.save(update_fields=['empty_orcid_profile'])
-        if r.empty_orcid_profile != False:
-            update_task('crossref')
-            fetch_dois_for_researcher(pk)
+        update_task('crossref')
+        source = CrossRefPaperSource(ccf)
+        papers = list(map(fetch_accessibility, source.fetch_publications(r)))
         update_task('oai')
-        fetch_records_for_researcher(pk)
+        oai.fetch_records_for_name(r.name)
+        update_task('core')
+        source = CorePaperSource(ccf)
+        source.fetch_for_researcher(r)
+        #fetch_papers_from_core_for_researcher(r)
+        #fetch_papers_from_base_for_researcher(Researcher.objects.get(pk=pk))
+    except MetadataSourceException as e:
+        raise e
     finally:
         update_task('clustering')
-        clustering_context_factory.commitThemAll()
-        clustering_context_factory.unloadResearcher(pk)
+        ccf.commitThemAll()
+        ccf.unloadResearcher(pk)
         r = Researcher.objects.get(pk=pk)
         update_task('stats')
         r.update_stats()
+        r.harvester = None
         update_task(None)
 
+@shared_task(name='fetch_records_for_researcher')
+def fetch_records_for_researcher(pk, signature=True):
+    """
+    Fetch OAI records from Proaixy for the given researcher.
+
+    :param signature: Search by name signature (D. Knuth) instead
+       of full name (Donald Knuth)
+    """
+    researcher = Researcher.objects.get(pk=pk)
+    fetch_records_for_name(researcher.name, signature=signature)
+
+@shared_task(name='recluster_researcher')
+def recluster_researcher(pk):
+    ccf = get_ccf()
+    r = Researcher.objects.get(pk=pk)
+    ccf.reclusterBatch(r)
+    r.update_stats()
+
+@shared_task(name='fetch_dois_for_researcher')
+def fetch_dois_for_researcher(pk):
+    researcher = Researcher.objects.get(pk=pk)
+    return fetch_publications(researcher)
+
+@shared_task(name='change_publisher_oa_status')
+def change_publisher_oa_status(pk, status):
+    publisher = Publisher.objects.get(pk=pk)
+    publisher.change_oa_status(status)
+    publisher.update_stats()
 
 @shared_task(name='consolidate_paper')
 @run_only_once('consolidate_paper', keys=['pk'], timeout=1*60)
@@ -111,65 +163,6 @@ def consolidate_paper(pk):
             p.save(update_fields=['task'])
 
 
-@shared_task(name='fetch_everything_for_researcher')
-@run_only_once('researcher', keys=['pk'], timeout=15*60)
-def fetch_everything_for_researcher(pk):
-    try:
-        r = Researcher.objects.get(pk=pk)
-        update_task = lambda name: update_researcher_task(r, name)
-        if r.orcid:
-            update_task('orcid')
-            num = fetch_orcid_records(r.orcid)
-            r.empty_orcid_profile = (num == 0)
-            r.save(update_fields=['empty_orcid_profile'])
-        update_task('crossref')
-        for paper in fetch_dois_for_researcher(pk):
-            print paper
-            fetch_records_for_fingerprint(paper.fingerprint)
-        #update_task('oai')
-        #fetch_records_for_researcher(pk)
-        #update_task('core')
-        #fetch_papers_from_core_for_researcher(r)
-        #fetch_papers_from_base_for_researcher(Researcher.objects.get(pk=pk))
-    except MetadataSourceException as e:
-        raise e
-    finally:
-        update_task('clustering')
-        clustering_context_factory.commitThemAll()
-        clustering_context_factory.unloadResearcher(pk)
-        r = Researcher.objects.get(pk=pk)
-        update_task('stats')
-        r.update_stats()
-        r.harvester = None
-        update_task(None)
-
-@shared_task(name='fetch_records_for_researcher')
-def fetch_records_for_researcher(pk, signature=True):
-    """
-    Fetch OAI records from Proaixy for the given researcher.
-
-    :param signature: Search by name signature (D. Knuth) instead
-       of full name (Donald Knuth)
-    """
-    researcher = Researcher.objects.get(pk=pk)
-    fetch_records_for_name(researcher.name, signature=signature)
-
-@shared_task(name='recluster_researcher')
-def recluster_researcher(pk):
-    r = Researcher.objects.get(pk=pk)
-    clustering_context_factory.reclusterBatch(r)
-    r.update_stats()
-
-@shared_task(name='fetch_dois_for_researcher')
-def fetch_dois_for_researcher(pk):
-    researcher = Researcher.objects.get(pk=pk)
-    return fetch_publications(researcher)
-
-@shared_task(name='change_publisher_oa_status')
-def change_publisher_oa_status(pk, status):
-    publisher = Publisher.objects.get(pk=pk)
-    publisher.change_oa_status(status)
-    publisher.update_stats()
 
 @shared_task(name='update_all_stats')
 def update_all_stats():

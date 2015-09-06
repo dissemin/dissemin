@@ -37,7 +37,6 @@ from papers.models import *
 from papers.name import parse_comma_name
 from papers.utils import remove_diacritics
 
-from backend.create import *
 from backend.oai import my_oai_dc_reader
 from backend.name_cache import name_lookup_cache
 
@@ -86,10 +85,107 @@ def query_core(url, params, post_payload=None, retries=CORE_RETRIES, wait_time=C
     except requests.exceptions.RequestException as e:
         raise MetadataSourceException('HTTP error with CORE for URL: '+full_url+'\n'+str(params)+'\n'+str(e))
 
+class CorePaperSource(object):
+    """
+    Fetches papers from the CORE search engine
+    """
+    def __init__(self, ccf):
+        self.ccf = ccf
+        self.core_source, created =  OaiSource.objects.get_or_create(identifier='core',
+                name='CORE',
+                priority=0)
 
-def fetch_papers_from_core_for_researcher(researcher):
-    name = researcher.name
-    fetch_papers_from_core_by_researcher_name((name.first,name.last))
+    def fetch_for_researcher(self, researcher):
+        name = researcher.name
+        self.fetch_by_name((name.first,name.last))
+
+    def fetch_by_name(self, name, max_results=500):
+        max_unsuccessful_lookups = CORE_MAX_NO_MATCH_BEFORE_GIVE_UP
+        batch_size = CORE_FETCH_METADATA_BATCH_SIZE
+        search_terms = 'authorsString:('+name[0]+' '+name[1]+')'
+        ids = search_single_query(search_terms, max_results)
+        
+        unsuccessful_lookups = 0
+        current_batch = list(itertools.islice(ids, batch_size))
+        nb_results = 0
+        while current_batch:
+            results = fetch_paper_metadata_by_core_ids(current_batch)
+            for result in results:
+                match = None
+                if result.get('status') == 'OK':
+                    nb_results += 1
+                    match = self.add_document(result)
+                if match:
+                    unsuccessful_lookups = 0
+                else:
+                    unsuccessful_lookups += 1
+                if unsuccessful_lookups >= max_unsuccessful_lookups or nb_results >= max_results:
+                    break
+            if unsuccessful_lookups >= max_unsuccessful_lookups or nb_results >= max_results:
+                break
+            current_batch = list(itertools.islice(ids, batch_size))
+
+    def add_document(self, doc):
+        metadata = doc.get('data', {})
+        authors_list = metadata.get('authors', [])
+        if not authors_list:
+            print "Ignoring CORE record as it has no creators."
+            return False
+
+        authors_list = map(parse_comma_name, authors_list)
+        authors = map(name_lookup_cache.lookup, authors_list)
+        
+        # Filter the record
+        if all(not elem.is_known for elem in authors):
+            return False
+        if not 'title' in metadata or not metadata['title']:
+            return False
+        title = metadata['title']
+
+        print "########"
+        print title
+        print authors_list
+
+        if not 'id' in metadata:
+            print "WARNING: no CORE ID provided, skipping record"
+            return False
+        identifier = 'core:'+str(metadata['id'])
+        splash_url = 'http://core.ac.uk/display/'+str(metadata['id'])
+        pdf_urls = metadata.get('fulltextUrls', [])
+        if 'fulltextIdentifier' in metadata:
+            pdf_urls.append(metadata['fulltextIdentifier'])
+        if metadata.get('hasFullText') == 'true' and pdf_urls == []:
+            pdf_urls.append(splash_url)
+        pdf_url = None
+        if pdf_urls:
+            pdf_url = pdf_urls[0]
+        pubdate = None
+        if 'year' in metadata:
+            try:
+                pubdate = date(year=int(metadata['year']),month=01,day=01)        
+            except ValueError:
+                pass
+        doi = None # TODO parse the original record and look for DOIs
+        #xml_record = list(doc.iter('metadata'))[0]
+        #metadata = my_oai_dc_reader(xml_record)._map
+        description = metadata.get('description')
+        
+        if pubdate is None or not title or not authors:
+            return False
+
+        paper = self.ccf.get_or_create_paper(title, authors, pubdate, doi, 'CANDIDATE')
+
+        record = OaiRecord.new(
+                about=paper,
+                source=self.core_source,
+                identifier=identifier,
+                splash_url=splash_url,
+                pdf_url=pdf_url,
+                description=description,
+                priority=self.core_source.priority)
+
+        return True
+
 
 def search_single_query(search_terms, max_results=None, page_size=100):
     page = 1
@@ -120,6 +216,7 @@ def search_single_query(search_terms, max_results=None, page_size=100):
         if numSent >= numTot or (max_results is not None and numYielded >= max_results) or len(res['data']) == 0:
             break
             
+
 
 def fetch_paper_metadata_by_core_ids(core_ids):
     """
@@ -168,102 +265,10 @@ def fetch_single_core_metadata(coreid):
     return response
 
 
-def fetch_papers_from_core_by_researcher_name(name, max_results=500):
-    core_source, created = OaiSource.objects.get_or_create(identifier='core',
-            name='CORE',
-            priority=0)
-    
-    max_unsuccessful_lookups = CORE_MAX_NO_MATCH_BEFORE_GIVE_UP
-    batch_size = CORE_FETCH_METADATA_BATCH_SIZE
-    search_terms = 'authorsString:('+name[0]+' '+name[1]+')'
-    ids = search_single_query(search_terms, max_results)
-    
-    unsuccessful_lookups = 0
-    current_batch = list(itertools.islice(ids, batch_size))
-    nb_results = 0
-    while current_batch:
-        results = fetch_paper_metadata_by_core_ids(current_batch)
-        for result in results:
-            match = None
-            if result.get('status') == 'OK':
-                nb_results += 1
-                match = add_core_document(result, core_source)
-            if match:
-                unsuccessful_lookups = 0
-            else:
-                unsuccessful_lookups += 1
-            if unsuccessful_lookups >= max_unsuccessful_lookups or nb_results >= max_results:
-                break
-        if unsuccessful_lookups >= max_unsuccessful_lookups or nb_results >= max_results:
-            break
-        current_batch = list(itertools.islice(ids, batch_size))
-
 # TODO remove this dead code
 
 #core_sep_re = re.compile(r', *| *and *')
 #def parse_core_authors_list(lst):
 #    return core_sep_re.split(lst)
-
-def add_core_document(doc, source):
-    metadata = doc.get('data', {})
-    authors_list = metadata.get('authors', [])
-    if not authors_list:
-        print "Ignoring CORE record as it has no creators."
-        return False
-
-    authors_list = map(parse_comma_name, authors_list)
-    authors = map(name_lookup_cache.lookup, authors_list)
-    
-    # Filter the record
-    if all(not elem.is_known for elem in authors):
-        return False
-    if not 'title' in metadata or not metadata['title']:
-        return False
-    title = metadata['title']
-
-    print "########"
-    print title
-    print authors_list
-
-    if not 'id' in metadata:
-        print "WARNING: no CORE ID provided, skipping record"
-        return False
-    identifier = 'core:'+str(metadata['id'])
-    splash_url = 'http://core.ac.uk/display/'+str(metadata['id'])
-    pdf_urls = metadata.get('fulltextUrls', [])
-    if 'fulltextIdentifier' in metadata:
-        pdf_urls.append(metadata['fulltextIdentifier'])
-    if metadata.get('hasFullText') == 'true' and pdf_urls == []:
-        pdf_urls.append(splash_url)
-    pdf_url = None
-    if pdf_urls:
-        pdf_url = pdf_urls[0]
-    pubdate = None
-    if 'year' in metadata:
-        try:
-            pubdate = date(year=int(metadata['year']),month=01,day=01)        
-        except ValueError:
-            pass
-    doi = None # TODO parse the original record and look for DOIs
-    #xml_record = list(doc.iter('metadata'))[0]
-    #metadata = my_oai_dc_reader(xml_record)._map
-    description = metadata.get('description')
-    
-    if pubdate is None or not title or not authors:
-        return False
-
-    paper = get_or_create_paper(title, authors, pubdate, doi, 'CANDIDATE')
-
-    record = OaiRecord.new(
-            about=paper,
-            source=source,
-            identifier=identifier,
-            splash_url=splash_url,
-            pdf_url=pdf_url,
-            description=description,
-            priority=source.priority)
-
-    return True
-
 
 

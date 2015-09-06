@@ -29,15 +29,18 @@ from unidecode import unidecode
 from celery import current_task
 
 from django.core.exceptions import ObjectDoesNotExist
+from django.db import DataError
 
 from papers.errors import MetadataSourceException
 from papers.doi import to_doi
 from papers.name import match_names, normalize_name_words, parse_comma_name
-from papers.utils import create_paper_fingerprint, iunaccent, tolerant_datestamp_to_datetime, date_from_dateparts, affiliation_is_greater, jpath, validate_orcid
+from papers.utils import create_paper_fingerprint, iunaccent, tolerant_datestamp_to_datetime, date_from_dateparts, affiliation_is_greater, jpath, validate_orcid, sanitize_html
 from papers.models import Publication, Paper
+from publishers.models import *
 
 from backend.utils import urlopen_retry
 from backend.name_cache import name_lookup_cache
+from backend.romeo import fetch_journal, fetch_publisher
 import backend.create
 
 from dissemin.settings import DOI_PROXY_DOMAIN, DOI_PROXY_SUPPORTS_BATCH
@@ -129,6 +132,85 @@ def get_publication_date(metadata):
         date = parse_crossref_date(metadata['deposited'])
     return date
 
+CROSSREF_PUBTYPE_ALIASES = {
+        'article':'journal-article',
+        }
+
+def create_publication(paper, metadata):
+    """
+    Creates a Publication entry based on the DOI metadata (as returned by the JSON format
+    from CrossRef).
+
+    :param paper: the paper the publication object refers to
+    :param metadata: the CrossRef metadata (parsed from JSON)
+    :return: None if the metadata is invalid or the data does not fit in the database schema.
+    """
+    try:
+        return _create_publication(paper, metadata)
+    except DataError:
+        pass
+
+def _create_publication(paper, metadata):
+    if not metadata:
+        return
+    if not 'container-title' in metadata or not metadata['container-title']:
+        return
+    doi = to_doi(metadata.get('DOI',None))
+    # Test first if there is no publication with this new DOI
+    matches = Publication.objects.filter(doi__exact=doi)
+    if matches:
+        return matches[0]
+
+    title = metadata['container-title']
+    if type(title) == type([]):
+        title = title[0]
+    title = title[:512]
+
+    issn = metadata.get('ISSN',None)
+    if issn and type(issn) == type([]):
+        issn = issn[0] # TODO pass all the ISSN to the RoMEO interface
+    volume = metadata.get('volume',None)
+    pages = metadata.get('page',None)
+    issue = metadata.get('issue',None)
+    date_dict = metadata.get('issued',dict())
+    pubdate = None
+    if 'date-parts' in date_dict:
+        dateparts = date_dict.get('date-parts')[0]
+        pubdate = date_from_dateparts(dateparts)
+    # for instance it outputs dates like 2014-2-3
+    publisher_name = metadata.get('publisher', None)
+    if publisher_name:
+        publisher_name = publisher_name[:512]
+
+    pubtype = metadata.get('type','unknown')
+    pubtype = CROSSREF_PUBTYPE_ALIASES.get(pubtype, pubtype)
+
+    # Lookup journal
+    search_terms = {'jtitle':title}
+    if issn:
+        search_terms['issn'] = issn
+    journal = fetch_journal(search_terms)
+
+    publisher = None
+    if journal:
+        publisher = journal.publisher
+        AliasPublisher.increment(publisher_name, journal.publisher)
+    else:
+        publisher = fetch_publisher(publisher_name)
+
+    pub = Publication(title=title, issue=issue, volume=volume,
+            pubdate=pubdate, paper=paper, pages=pages,
+            doi=doi, pubtype=pubtype, publisher_name=publisher_name,
+            journal=journal, publisher=publisher)
+    pub.save()
+    cur_pubdate = paper.pubdate
+    if type(cur_pubdate) != type(pubdate):
+        cur_pubdate = cur_pubdate.date()
+    if pubdate and pubdate > cur_pubdate:
+        paper.pubdate = pubdate
+    paper.update_availability()
+    return pub
+
 # Fetching utilities
 
 def fetch_metadata_by_DOI(doi):
@@ -194,151 +276,157 @@ def fetch_dois_by_batch(doi_list):
     except requests.exceptions.RequestException as e:
         raise MetadataSourceException('Failed to retrieve batch metadata from the proxy: '+str(e))
 
-def save_doi_metadata(metadata, extra_affiliations=None):
+class CrossRefPaperSource(object):
     """
-    Given the metadata as Citeproc+JSON or from CrossRef, create the associated paper and publication
-
-    :param extra_affiliations: an optional affiliations list, which will be unified
-        with the affiliations extracted from the metadata. This is useful for the ORCID interface.
-    :returns: the paper, created if needed
-    """        
-    # Normalize metadata
-    if metadata is None or type(metadata) != dict:
-        if metadata is not None:
-            print "WARNING: Invalid metadata: type is "+str(type(metadata))
-            print "The doi proxy is doing something nasty!"
-        raise ValueError('Invalid metadata format, expecting a dict')
-    if not 'author' in metadata:
-        raise ValueError('No author provided')
-
-    if not 'title' in metadata or not metadata['title']:
-        raise ValueError('No title')
-
-    # the upstream function ensures that there is a non-empty title
-    if not 'DOI' in metadata or not metadata['DOI']:
-        raise ValueError("No DOI, skipping")
-    doi = to_doi(metadata['DOI'])
-
-    pubdate = get_publication_date(metadata)
-
-    if pubdate is None:
-        raise ValueError('No pubdate')
-    
-    title = metadata['title']
-    # CrossRef metadata stores titles in lists
-    if type(title) == list:
-        title = title[0]
-    authors = map(name_lookup_cache.lookup, map(convert_to_name_pair, metadata['author']))
-    authors = filter(lambda x: x != None, authors)
-    if all(not elem.is_known for elem in authors) or authors == []:
-        raise ValueError('No known author')
-
-    def get_affiliation(author_elem):
-        # First, look for an ORCID id
-        orcid = validate_orcid(author_elem.get('ORCID'))
-        if orcid:
-            return orcid
-        # Otherwise return the plain affiliation, if any
-        for dct in author_elem.get('affiliation', []):
-            if 'name' in dct:
-                return dct['name']
-
-    affiliations = map(get_affiliation, metadata['author'])
-    if extra_affiliations and len(affiliations) == len(extra_affiliations):
-        for i in range(len(affiliations)):
-            if affiliation_is_greater(extra_affiliations[i],affiliations[i]):
-                affiliations[i] = extra_affiliations[i]
-
-    print "Saved doi "+doi
-    paper = backend.create.get_or_create_paper(title, authors, pubdate, 
-            None, 'VISIBLE', affiliations)
-    # The doi is not passed to this function so that it does not try to refetch the metadata
-    # from CrossRef
-    # create the publication, because it would re-fetch the metadata from CrossRef
-    backend.create.create_publication(paper, metadata)
-    return paper
-
-
-##### CrossRef search API #######
-
-def search_for_dois_incrementally(query, filters={}, max_batches=max_crossref_batches_per_researcher):
+    Fetches papers from CrossRef
     """
-    Searches for DOIs for the given query and yields their metadata as it finds them.
+    def __init__(self, ccf):
+        self.ccf = ccf
 
-    :param query: the search query to pass to CrossRef
-    :param filters: filters as specified by the REST API
-    :param max_batches: maximum number of queries to send to CrossRef
-    """
-    params = {}
-    if query:
-        params['query'] = query
-    if filters:
-        params['filter'] = ','.join(map(lambda (k,v): k+":"+v, filters.items()))
-    
-    count = 0
-    rows = 20
-    offset = 0
-    while not max_batches or count < max_batches:
-        url = 'http://api.crossref.org/works'
-        params['rows'] = rows
-        params['offset'] = offset
+    def save_doi_metadata(self, metadata, extra_affiliations=None):
+        """
+        Given the metadata as Citeproc+JSON or from CrossRef, create the associated paper and publication
+
+        :param extra_affiliations: an optional affiliations list, which will be unified
+            with the affiliations extracted from the metadata. This is useful for the ORCID interface.
+        :returns: the paper, created if needed
+        """        
+        # Normalize metadata
+        if metadata is None or type(metadata) != dict:
+            if metadata is not None:
+                print "WARNING: Invalid metadata: type is "+str(type(metadata))
+                print "The doi proxy is doing something nasty!"
+            raise ValueError('Invalid metadata format, expecting a dict')
+        if not 'author' in metadata:
+            raise ValueError('No author provided')
+
+        if not 'title' in metadata or not metadata['title']:
+            raise ValueError('No title')
+
+        # the upstream function ensures that there is a non-empty title
+        if not 'DOI' in metadata or not metadata['DOI']:
+            raise ValueError("No DOI, skipping")
+        doi = to_doi(metadata['DOI'])
+
+        pubdate = get_publication_date(metadata)
+
+        if pubdate is None:
+            raise ValueError('No pubdate')
         
-        try:
-            r = requests.get(url, params=params)
-            print "CROSSREF: "+r.url
-            js = r.json()
-            for item in jpath('message/items', js, default=[]):
-                yield item
-        except ValueError as e:
-            raise MetadataSourceException('Error while fetching CrossRef results:\nInvalid response.\n'+
-                    'URL was: %s\nJSON parser error was: %s' % (request,unicode(e))) 
-        except requests.exceptions.RequestException as e:
-            raise MetadataSourceException('Error while fetching CrossRef results:\nUnable to open the URL: '+
-                    request+'\nError was: '+str(e))
+        title = metadata['title']
+        # CrossRef metadata stores titles in lists
+        if type(title) == list:
+            title = title[0]
+        authors = map(name_lookup_cache.lookup, map(convert_to_name_pair, metadata['author']))
+        authors = filter(lambda x: x != None, authors)
+        if all(not elem.is_known for elem in authors) or authors == []:
+            raise ValueError('No known author')
 
-        offset += rows
-        count += 1
+        def get_affiliation(author_elem):
+            # First, look for an ORCID id
+            orcid = validate_orcid(author_elem.get('ORCID'))
+            if orcid:
+                return orcid
+            # Otherwise return the plain affiliation, if any
+            for dct in author_elem.get('affiliation', []):
+                if 'name' in dct:
+                    return dct['name']
 
-def fetch_papers_from_crossref_by_researcher_name(name, update=False):
-    """
-    The update parameter forces the function to download again
-    the metadata for DOIs that are already in the model
-    """
-    return search_for_dois_incrementally(unicode(name))
+        affiliations = map(get_affiliation, metadata['author'])
+        if extra_affiliations and len(affiliations) == len(extra_affiliations):
+            for i in range(len(affiliations)):
+                if affiliation_is_greater(extra_affiliations[i],affiliations[i]):
+                    affiliations[i] = extra_affiliations[i]
+
+        print "Saved doi "+doi
+        paper = self.ccf.get_or_create_paper(title, authors, pubdate, 
+                None, 'VISIBLE', affiliations)
+        # The doi is not passed to this function so that it does not try to refetch the metadata
+        # from CrossRef
+        # create the publication, because it would re-fetch the metadata from CrossRef
+        create_publication(paper, metadata)
+        return paper
+
+    ##### CrossRef search API #######
+
+    def search_for_dois_incrementally(self, query, filters={}, max_batches=max_crossref_batches_per_researcher):
+        """
+        Searches for DOIs for the given query and yields their metadata as it finds them.
+
+        :param query: the search query to pass to CrossRef
+        :param filters: filters as specified by the REST API
+        :param max_batches: maximum number of queries to send to CrossRef
+        """
+        params = {}
+        if query:
+            params['query'] = query
+        if filters:
+            params['filter'] = ','.join(map(lambda (k,v): k+":"+v, filters.items()))
+        
+        count = 0
+        rows = 20
+        offset = 0
+        while not max_batches or count < max_batches:
+            url = 'http://api.crossref.org/works'
+            params['rows'] = rows
+            params['offset'] = offset
+            
+            try:
+                r = requests.get(url, params=params)
+                print "CROSSREF: "+r.url
+                js = r.json()
+                for item in jpath('message/items', js, default=[]):
+                    yield item
+            except ValueError as e:
+                raise MetadataSourceException('Error while fetching CrossRef results:\nInvalid response.\n'+
+                        'URL was: %s\nJSON parser error was: %s' % (request,unicode(e))) 
+            except requests.exceptions.RequestException as e:
+                raise MetadataSourceException('Error while fetching CrossRef results:\nUnable to open the URL: '+
+                        request+'\nError was: '+str(e))
+
+            offset += rows
+            count += 1
+
+    def fetch_papers_from_crossref_by_researcher_name(self, name, update=False):
+        """
+        The update parameter forces the function to download again
+        the metadata for DOIs that are already in the model
+        """
+        return self.search_for_dois_incrementally(unicode(name))
 
 
-def fetch_publications(researcher, fetch_oai=True):
-    """
-    Fetch and save the publications from CrossRef for a given researcher
+    def fetch_publications(self, researcher, fetch_oai=True):
+        """
+        Fetch and save the publications from CrossRef for a given researcher
 
-    :param fetch_oai: Try to fetch full text availability with proaixy.
-    """
-    # TODO: do it for all name variants of confidence 1.0
-    researcher.status = 'Fetching DOI list.'
-    researcher.save()
-    nb_records = 0
+        :param fetch_oai: Try to fetch full text availability with proaixy.
+        """
+        # TODO: do it for all name variants of confidence 1.0
+        researcher.status = 'Fetching DOI list.'
+        researcher.save()
+        nb_records = 0
 
-    name = researcher.name
-    lst = fetch_papers_from_crossref_by_researcher_name(name)
+        name = researcher.name
+        lst = self.fetch_papers_from_crossref_by_researcher_name(name)
 
-    count = 0
-    skipped = 0
-    for metadata in lst:
-        if skipped > crossref_max_skipped_records:
-            break
-
-        try:
-            yield save_doi_metadata(metadata)
-        except ValueError:
-            skipped += 1
-            continue
-
-        count += 1
+        count = 0
         skipped = 0
-    nb_records += count
+        for metadata in lst:
+            if skipped > crossref_max_skipped_records:
+                break
 
-    researcher.status = 'OK, %d records processed.' % nb_records
-    researcher.save()
+            try:
+                yield self.save_doi_metadata(metadata)
+            except ValueError:
+                skipped += 1
+                continue
+
+            count += 1
+            skipped = 0
+        nb_records += count
+
+        researcher.status = 'OK, %d records processed.' % nb_records
+        researcher.save()
 
 ##### Zotero interface #####
 

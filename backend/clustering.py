@@ -3,16 +3,22 @@ from __future__ import unicode_literals, print_function
 
 from django.db.models import Q
 from django.core.exceptions import ObjectDoesNotExist
+from django.db import DataError
 import random
 from collections import defaultdict
 # For graph output
 from unidecode import unidecode
 
-from papers.models import Author, Researcher, Paper
-from papers.utils import nocomma
+from papers.models import Author, Researcher, Paper, Publication
+from papers.utils import nocomma, create_paper_fingerprint, date_from_dateparts, sanitize_html
+from papers.name import to_plain_name, parse_comma_name
+from papers.doi import to_doi
+from papers.errors import MetadataSourceException
 
 from backend.similarity import SimilarityClassifier, AuthorNotFound
 from backend.relevance import RelevanceClassifier
+from backend.utils import maybe_recapitalize_title
+from backend.crossref import fetch_metadata_by_DOI, create_publication
 
 
 class ClusteringContext(object):
@@ -519,5 +525,85 @@ class ClusteringContextFactory(object):
         if pk in self.cc:
             del self.cc[pk]
     
+    def get_or_create_paper(self, title, author_names, pubdate, doi=None, visibility='VISIBLE', affiliations=None):
+        """
+        Creates a paper if it is not already present.
+        The clustering algorithm is run to decide what authors should be 
+        attributed to the paper.
+
+        :param title: The title of the paper (as a string). If it is too long for the database,
+                      ValueError is raised.
+        :param author_names: The ordered list of author names, as Name objects.
+        :param pubdate: The publication date, as a python date object
+        :param doi: If provided, also fetch metadata from CrossRef based on this DOI and
+                    create the relevant publication.
+        :param visibility: The visibility of the paper if it is created. If another paper
+                    exists, the visibility will be set to the maximum of the two possible
+                    visibilities.
+        :param affiliations: A list of (possibly None) affiliations for the authors. It has to 
+                    have the same length as the list of author names. Affiliations can be replaced by ORCIDs.
+        """
+        try:
+            return self._get_or_create_paper(title, author_names, pubdate, doi, visibility, affiliations)
+        except DataError as e:
+            raise ValueError('Invalid paper, does not fit in the database schema:\n'+unicode(e))
+
+    def _get_or_create_paper(self, title, author_names, pubdate, doi, visibility, affiliations):
+        plain_names = map(to_plain_name, author_names)
+
+        def upgrade_visibility(paper):
+            if visibility == 'VISIBLE' and paper.visibility == 'CANDIDATE':
+                paper.visibility = 'VISIBLE'
+                paper.save(update_fields=['visibility'])
+            paper.update_author_names(plain_names, affiliations)
+            return paper
+
+        # If a DOI is present, first look it up
+        if doi:
+            matches = Publication.objects.filter(doi__exact=doi)
+            if matches:
+                return upgrade_visibility(matches[0].paper)
+
+        if not title or not author_names or not pubdate:
+            raise ValueError("A title, pubdate and authors have to be provided to create a paper.")
+
+        title = sanitize_html(title)
+        title = maybe_recapitalize_title(title)
+
+        # Otherwise look up the fingerprint
+        fp = create_paper_fingerprint(title, plain_names, pubdate.year)
+        matches = Paper.objects.filter(fingerprint__exact=fp)
+
+        p = None
+        if matches:
+            p = upgrade_visibility(matches[0])
+        else:
+            p = Paper(title=title,
+                    pubdate=pubdate,
+                    doctype='other',
+                    year=pubdate.year,
+                    fingerprint=fp,
+                    visibility=visibility)
+            p.save()
+            for idx, author_name in enumerate(author_names):
+                author_name.save_if_not_saved()
+                aff = None
+                if affiliations:
+                    aff = affiliations[idx]
+                a = Author(name=author_name, paper=p, position=idx, affiliation=aff)
+                a.save()
+                a.update_name_variants_if_needed()
+                if author_name.is_known:
+                    self.clusterAuthorLater(a)
+
+        if doi:
+            try:
+                metadata = fetch_metadata_by_DOI(doi)
+                create_publication(p, metadata)
+            except MetadataSourceException as e:
+                print("Warning, metadata source exception while fetching DOI "+doi+":\n"+unicode(e))
+                pass
+        return p
+
 
 
