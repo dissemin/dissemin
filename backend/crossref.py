@@ -375,8 +375,12 @@ class CrossRefPaperSource(object):
                 r = requests.get(url, params=params)
                 print "CROSSREF: "+r.url
                 js = r.json()
+                found = False
                 for item in jpath('message/items', js, default=[]):
+                    found = True
                     yield item
+                if not found:
+                    break
             except ValueError as e:
                 raise MetadataSourceException('Error while fetching CrossRef results:\nInvalid response.\n'+
                         'URL was: %s\nJSON parser error was: %s' % (request,unicode(e))) 

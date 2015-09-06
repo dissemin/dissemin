@@ -227,6 +227,12 @@ class OrcidPaperSource(object):
             yield paper
 
         if use_doi:
+            for metadata in crps.search_for_dois_incrementally('', {'orcid':id}):
+                paper = save_doi_metadata(metadata)
+                if paper:
+                    yield paper
+
+            # TODO: this is inefficient: check first that these DOIs are unknown for us
             doi_metadata = fetch_dois(dois)
             for metadata in doi_metadata:
                 try:
@@ -244,11 +250,6 @@ class OrcidPaperSource(object):
                     yield paper
                 except (KeyError, ValueError, TypeError):
                     pass
-
-            for metadata in crps.search_for_dois_incrementally('', {'orcid':id}):
-                paper = save_doi_metadata(metadata)
-                if paper:
-                    yield paper
 
 orcid_oai_source, _ = OaiSource.objects.get_or_create(identifier='orcid',
             defaults={'name':'ORCID','oa':False,'priority':1,'default_pubtype':'other'})
