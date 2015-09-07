@@ -200,6 +200,8 @@ def searchView(request, **kwargs):
     context['pubtype_status_choices'] = pubtype_variants
     context['visibility_choices'] = visibility_variants
 
+    if 'bare' in args:
+        return render(request, 'papers/ajaxListPapers.html', context)
     return render(request, 'papers/search.html', context)
 
 @user_passes_test(is_admin)
