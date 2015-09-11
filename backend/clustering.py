@@ -18,7 +18,7 @@ from papers.errors import MetadataSourceException
 from backend.similarity import SimilarityClassifier, AuthorNotFound
 from backend.relevance import RelevanceClassifier
 from backend.utils import maybe_recapitalize_title
-from backend.crossref import fetch_metadata_by_DOI, create_publication
+from backend import crossref
 
 
 class ClusteringContext(object):
@@ -601,8 +601,8 @@ class ClusteringContextFactory(object):
 
         if doi:
             try:
-                metadata = fetch_metadata_by_DOI(doi)
-                create_publication(p, metadata)
+                metadata = crossref.fetch_metadata_by_DOI(doi)
+                crossref.create_publication(p, metadata)
             except MetadataSourceException as e:
                 print("Warning, metadata source exception while fetching DOI "+doi+":\n"+unicode(e))
                 pass
