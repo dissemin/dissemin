@@ -24,7 +24,7 @@ from __future__ import unicode_literals
 import unittest
 import django.test
 from papers.name import *
-from papers.utils import unescape_latex, remove_latex_math_dollars, validate_orcid, remove_latex_braces
+from papers.utils import unescape_latex, remove_latex_math_dollars, validate_orcid, remove_latex_braces, kill_double_dollars
 from papers.orcid import *
 from papers.bibtex import parse_authors_list
 
@@ -272,6 +272,13 @@ class NameUnificationTest(unittest.TestCase):
 
     def test_empty_first_name(self):
         self.assertEqual(name_unification(('', 'Placet'), ('Vincent', 'Placet')), ('Vincent', 'Placet'))
+
+    def test_duplicated(self):
+        # http://api.openaire.eu/oai_pmh?verb=GetRecord&metadataPrefix=oai_dc&identifier=oai:dnet:od_______567::b9714edf9d96bbe640f7a8d753be81b7
+        self.assertEqual(name_unification(('A Adi','Shamir'),('Adi','Shamir')), ('Adi','Shamir'))
+        self.assertEqual(name_unification(('A A','Amarilli'),('Antoine','Amarilli')), ('Antoine A.','Amarilli'))
+        self.assertEqual(name_unification(('A A','Amarilli'),('A','Amarilli')), ('A. A.','Amarilli'))
+        self.assertEqual(name_unification(('H-C Hsieh-Chung','Chen'),('Hsieh-Chung','Chen')), ('Hsieh-Chung','Chen'))
     
     @unittest.expectedFailure
     def test_name_splitting_error(self):
@@ -373,6 +380,10 @@ class RemoveLatexBracesTest(unittest.TestCase):
     def test_multiple(self):
         self.assertEqual(remove_latex_braces('J{é}r{é}mie'), 'Jérémie')
 
+class KillDoubleDollarsTest(unittest.TestCase):
+    def test_simple(self):
+        self.assertEqual(kill_double_dollars('Fast Exhaustive Search for Quadratic Systems in $$\\mathbb {F}_{2}$$ on FPGAs'), 'Fast Exhaustive Search for Quadratic Systems in $\\mathbb {F}_{2}$ on FPGAs')
+
 class ParseAuthorsListTest(unittest.TestCase):
     def test_simple(self):
         self.assertEqual(parse_authors_list('Claire Toffano-Nioche and Daniel Gautheret and Fabrice Leclerc'),
@@ -381,7 +392,6 @@ class ParseAuthorsListTest(unittest.TestCase):
     def test_etal(self):
         self.assertEqual(parse_authors_list('Claire Toffano-Nioche and et al.'),
                 [('Claire','Toffano-Nioche')])
-
 
 class ValidateOrcidTest(unittest.TestCase):
     def test_simple(self):

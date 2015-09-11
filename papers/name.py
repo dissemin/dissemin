@@ -169,6 +169,25 @@ def match_first_names(pair):
 def to_plain_name(name):
     return (name.first,name.last)
 
+def deduplicate_words(words, separators):
+    """
+    Remove name duplicates in a list of words
+    """
+    seen = set()
+    cleaned_words = []
+    cleaned_seps = []
+    for idx, w in enumerate(words):
+        wl = w.lower()
+        if wl not in seen:
+            if len(wl) >= 3:
+                seen.add(wl)
+            cleaned_words.append(w)
+            if idx < len(separators):
+                cleaned_seps.append(separators[idx])
+    if len(cleaned_words):
+        cleaned_seps = cleaned_seps[:len(cleaned_words)-1]
+    return cleaned_words, cleaned_seps
+
 # Name normalization function used by the OAI proxy
 nn_separator_re = re.compile(r',+ *')
 nn_escaping_chars_re = re.compile(r'[\{\}\\]')
@@ -496,6 +515,7 @@ def name_unification(a, b):
             best_seps = map(keep_best, seps)
 
     if best_words is not None:
+        best_words, best_seps = deduplicate_words(best_words, best_seps)
         firstUnified = rebuild_name(best_words, best_seps)
         return firstUnified, lastA
 
