@@ -137,10 +137,10 @@ perseeExtractor = RegexExtractor([
     ])
 
 numdamExtractor = RegexExtractor([
-    ('identifier', re.compile(r'(http://www\.numdam\.org/item?id=[^ ]*)'),
+    ('identifier', re.compile(r'(http://www\.numdam\.org/item\?id=[^ ]*)'),
         'splash', r'\1'),
-    ('identifier', re.compile(r'http://www\.numdam\.org/item?id=([^ ]*)'),
-        'pdf', r'http://archive\.numdam\.org/article/\1.pdf'),
+    ('identifier', re.compile(r'http://www\.numdam\.org/item\?id=([^ ]*)'),
+        'pdf', r'http://archive.numdam.org/article/\1.pdf'),
     ])
 
 openaireExtractor = OpenAireExtractor([
@@ -179,6 +179,7 @@ oai_sources = [
         ('persee', 'Persée', True, 10, 'preprint'),
         ('openaire', 'OpenAIRE', False, 5, 'preprint'),
         ('zenodo', 'Zenodo', False, 15, 'preprint'),
+        ('numdam', 'Numdam', False, 10, 'journal-article'),
         ]
 
 for identifier, name, oa, priority, pubtype in oai_sources:
