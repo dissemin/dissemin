@@ -26,19 +26,32 @@
 	   $(".ulContainer").toggleClass("mosaic-on");
 	}
 {% if researcher.current_task %}
+    function refreshPapers() {
+        $.get(window.location.href+'?bare=true', function(data) {
+            if(data) {
+                $("#paperSearchResults").html(data);
+            }
+        });
+    }
+
     function pollHarvesting(){
         console.log('pollHarvesting()');
         $.get('{% url 'ajax-harvestingStatus' researcher.id %}', function(data) {
             console.log(data);
             if(data) {
-                $('#harvestingStatus').text(data['display']);
-                setTimeout(pollHarvesting, 1500);
+                var currentText = $('#harvestingStatus').text();
+                var newText = data['display'];
+                if(newText != currentText) {
+                    $('#harvestingStatus').text(newText);
+                    refreshPapers();
+                }
+                setTimeout(pollHarvesting, 3000);
             } else {
-                /* var area = $('#waitingArea');
+                var area = $('#waitingArea');
                 area.fadeOut(function(){
                     area.hide();
-                    }); */
-                location.reload(true);
+                    });
+                /* location.reload(true); */
             }
             }).fail(function () {
                 console.log('fail');
@@ -229,6 +242,7 @@
  </div>
  {% endif %}
 
+ <div id="paperSearchResults">
  {% if search_results.paginator.num_pages > 1 %}
 <div class="searchPages">{% bootstrap_paginate search_results range=10 %}</div>
  {% endif %}
@@ -250,4 +264,5 @@
  {% if search_results.paginator.num_pages > 1 %}
  <div class="searchPages">{% bootstrap_paginate search_results range=10 %}</div>
  {% endif %}
+ </div>
 {% endblock %}
