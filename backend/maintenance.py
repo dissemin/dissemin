@@ -110,6 +110,25 @@ def cleanup_titles():
         p.title = sanitize_html(p.title)
         p.save(update_fields=['title'])
 
+def cleanup_abstracts():
+    """
+    Run HTML sanitizing on the abstracts
+    (this is normally done on creation of the papers, but
+    not for old dumps of the database)
+    """
+    for p in Publication.objects.all():
+        if p.abstract:
+            new_abstract = sanitize_html(p.abstract)
+            if new_abstract != p.abstract:
+                p.abstract = new_abstract
+                p.save()
+    for p in OaiRecord.objects.all():
+        if p.description:
+            new_abstract = sanitize_html(p.description)
+            if new_abstract != p.description:
+                p.description = new_abstract
+                p.save()
+
 def recompute_fingerprints():
     """
     Recomputes the fingerprints of all papers, merging
@@ -185,6 +204,7 @@ def refetch_containers():
     """
     Tries to assign containers to Publications without containers
     """
+    # TODO 
     for p in Publication.objects.filter(container__isnull=True):
         metadata = backend.crossref.fetch_metadata_by_DOI(p.doi)
         p.container = metadata.get('container-title')

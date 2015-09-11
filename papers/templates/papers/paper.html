@@ -123,7 +123,7 @@ $(function(){
 
 {% if paper.abstract %}
     <span class="detailsTitle">{% trans "Abstract" %}</span>
-    <div class="detailsContent"><div class="abstract">{{ paper.abstract }}</div></div>
+    <div class="detailsContent"><div class="abstract">{% autoescape off %}{{ paper.abstract }}{% endautoescape %}</div></div>
 {% endif %}
 
 {% endblock %}

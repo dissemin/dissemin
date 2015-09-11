@@ -40,7 +40,7 @@ from dissemin.settings import URL_DEPOSIT_DOWNLOAD_TIMEOUT, DEPOSIT_MAX_FILE_SIZ
 from papers.models import *
 from papers.user import *
 from papers.forms import AddResearcherForm, AddUnaffiliatedResearcherForm
-from papers.utils import iunaccent, sanitize_html
+from papers.utils import iunaccent, sanitize_html, kill_html
 
 import os.path
 
@@ -216,7 +216,7 @@ def waitForConsolidatedField(request):
     success = None
     paper.consolidate_metadata(wait=True)
     if field == 'abstract':
-        value = paper.abstract
+        value = kill_html(paper.abstract)
         success = len(paper.abstract) > 64
     else:
         return HttpResponseForbidden('Invalid field', content_type='text/plain')

@@ -42,6 +42,7 @@ from deposit.registry import *
 from deposit.zenodo.forms import *
 
 from papers.errors import MetadataSourceException
+from papers.utils import kill_html
 
 
 class ZenodoProtocol(RepositoryProtocol):
@@ -60,7 +61,7 @@ class ZenodoProtocol(RepositoryProtocol):
         data['license'] = 'cc-by'
         data['paper_id'] = self.paper.id
         if self.paper.abstract:
-            data['abstract'] = self.paper.abstract
+            data['abstract'] = kill_html(self.paper.abstract)
         else:
             self.paper.consolidate_metadata(wait=False)
         return ZenodoForm(initial=data)
@@ -175,7 +176,7 @@ class ZenodoProtocol(RepositoryProtocol):
         # If we are currently fetching the abstract, wait for the task to complete
         if self.paper.task:
             self.paper.consolidate_metadata(wait=True)
-        abstract = form.cleaned_data['abstract'] or self.paper.abstract
+        abstract = form.cleaned_data['abstract'] or kill_html(self.paper.abstract)
 
         metadata['description'] = abstract
 

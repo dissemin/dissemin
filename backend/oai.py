@@ -67,6 +67,7 @@ def add_oai_record(record, source, paper=None):
     for desc in record[1]._map['description']:
         if len(desc) > len(curdesc):
                 curdesc = desc
+    curdesc = sanitize_html(curdesc)
 
     # Run extractor to find the URLs
     pdf_url = None

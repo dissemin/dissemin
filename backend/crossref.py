@@ -41,7 +41,6 @@ from publishers.models import *
 from backend.utils import urlopen_retry
 from backend.name_cache import name_lookup_cache
 from backend.romeo import fetch_journal, fetch_publisher
-import backend.create
 
 from dissemin.settings import DOI_PROXY_DOMAIN, DOI_PROXY_SUPPORTS_BATCH
 
@@ -455,7 +454,7 @@ def consolidate_publication(publi):
         return publi
     for item in zotero:
         if 'abstractNote' in item:
-            publi.abstract = item['abstractNote']
+            publi.abstract = sanitize_html(item['abstractNote'])
             publi.save(update_fields=['abstract'])
     return publi
 
