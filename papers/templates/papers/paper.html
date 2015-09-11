@@ -56,8 +56,11 @@ $(function(){
 
 {% block lists %}
 <p id="paperAuthors">
-{% if paper.has_many_authors %}
     <div id="authorSummary">
+    {% if paper.doctype != "other" %}
+    <span class="paperDocType">{{ paper.get_doctype_display }}</span> by
+    {% endif %}
+{% if paper.has_many_authors %}
         {% include "papers/authorList.html" with author_list=paper.interesting_authors %}
          {% with paper.nb_remaining_authors as nb_remaining_authors %}
             {% blocktrans %}
@@ -73,10 +76,10 @@ $(function(){
         {% endwith %}
 
         {% include "papers/authorList.html" with author_list=paper.sorted_authors %}
-    </div>
 {% else %}
     {% include "papers/authorList.html" with author_list=paper.sorted_authors %}
 {% endif %}
+    </div>
 </p>
 
 {% if deposit.pdf_url %}

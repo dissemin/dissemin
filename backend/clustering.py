@@ -80,6 +80,7 @@ class ClusteringContext(object):
         """
         pk = author.pk
         self.authors[pk] = author
+        print("Adding author %d" % pk)
         if pk == author.cluster_id:
             self.parent[pk] = None
         else:
@@ -256,6 +257,8 @@ class ClusteringContext(object):
         Compute the relevance of a given author.
         """
         if not self.relevance_computed.get(target, False):
+            if target not in self.authors:
+                raise AuthorNotFound("in computeRelevance, not in authors", target)
             relevance = self.rc.score(self.authors[target], self.researcher, True)
             parent = self.find(target)
             self.relevance[target] = relevance
@@ -310,8 +313,8 @@ class ClusteringContext(object):
         try:
             self._runClustering(target, order_pk, logf)
         except AuthorNotFound as e:
+            print("Author %d not found: %s" % (e.pk, e.message))
             self.deleteAuthor(e.pk)
-            self.runClustering(target, order_pk, logf)
 
     def _runClustering(self, target, order_pk=False, logf=None):
 

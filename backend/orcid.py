@@ -228,7 +228,7 @@ class OrcidPaperSource(object):
 
         if use_doi:
             for metadata in crps.search_for_dois_incrementally('', {'orcid':id}):
-                paper = save_doi_metadata(metadata)
+                paper = crps.save_doi_metadata(metadata)
                 if paper:
                     yield paper
 

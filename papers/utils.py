@@ -134,6 +134,7 @@ def sanitize_html(s):
     s = unicode4_re.sub(lambda x: x.group(1).decode('unicode-escape'), s)
     s = whitespace_re.sub(r' ', s)
     s = unescape_latex(s)
+    s = kill_double_dollars(s)
     orig = html_cleaner.clean_html('<span>'+s+'</span>')
     return orig[6:-7]
 
@@ -145,8 +146,17 @@ def kill_html(s):
     orig = html_killer.clean_html('<div>'+s+'</div>')
     return orig[5:-6]
 
+latex_double_dollar_re = re.compile(r'\$\$(.*)\$\$')
+def kill_double_dollars(s):
+    """
+    Removes double dollars (they generate line breaks with MathJax)
+    This is included in the sanitize_html function.
+    """
+    s = latex_double_dollar_re.sub(r'$\1$', s)
+    return s
+
 def urlize(val):
-    if val and not val.startswith('http://'):
+    if val and not val.startswith('http://') and not val.startswith('https://'):
         val = 'http://'+val
     return val
 

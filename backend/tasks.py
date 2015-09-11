@@ -80,7 +80,7 @@ def fetch_everything_for_researcher(pk):
     ccf = get_ccf()
     oai = OaiPaperSource(ccf)
     def fetch_accessibility(paper):
-        #paper.fetch_records_for_fingerprint(paper.fingerprint)
+        oai.fetch_records_for_fingerprint(paper.fingerprint)
         return paper
 
     try:
@@ -101,8 +101,8 @@ def fetch_everything_for_researcher(pk):
         source = CorePaperSource(ccf)
         source.fetch_for_researcher(r)
         ccf.commitThemAll()
-        update_task('oai')
-        oai.fetch_records_for_name(r.name)
+        #update_task('oai')
+        #oai.fetch_records_for_name(r.name)
         #fetch_papers_from_core_for_researcher(r)
         #fetch_papers_from_base_for_researcher(Researcher.objects.get(pk=pk))
     except MetadataSourceException as e:

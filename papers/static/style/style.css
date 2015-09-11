@@ -326,6 +326,11 @@ li
 	/* font-family:"Neuton", serif; */
 }
 
+.paperDocType
+{
+    font-style: italic;
+}
+
 h1#paperTitle {
 	margin-top:0;
 	font-weight:normal;

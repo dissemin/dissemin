@@ -452,7 +452,7 @@ class Paper(models.Model):
     visibility = models.CharField(max_length=32, default='VISIBLE')
     last_annotation = models.CharField(max_length=32, null=True, blank=True)
 
-    doctype = models.CharField(max_length=32, null=True, blank=True)
+    doctype = models.CharField(max_length=64, null=True, blank=True, choices=PAPER_TYPE_CHOICES)
 
     def __unicode__(self):
         return self.title
@@ -1013,7 +1013,7 @@ class Author(models.Model):
 class Publication(models.Model):
     # TODO prepare this model for user input (allow for other URLs than DOIs)
     paper = models.ForeignKey(Paper)
-    pubtype = models.CharField(max_length=64)
+    pubtype = models.CharField(max_length=64, choices=PAPER_TYPE_CHOICES)
 
     title = models.CharField(max_length=512) # this is actually the *journal* title
     journal = models.ForeignKey(Journal, blank=True, null=True)
@@ -1078,7 +1078,7 @@ class OaiSource(models.Model):
     name = models.CharField(max_length=100)
     oa = models.BooleanField(default=False)
     priority = models.IntegerField(default=1)
-    default_pubtype = models.CharField(max_length=128)
+    default_pubtype = models.CharField(max_length=64, choices=PAPER_TYPE_CHOICES)
 
     # Fetching properties
     last_status_update = models.DateTimeField(auto_now=True)
@@ -1098,7 +1098,7 @@ class OaiRecord(models.Model):
     description = models.TextField(null=True,blank=True)
     keywords = models.TextField(null=True,blank=True)
     contributors = models.CharField(max_length=4096, null=True, blank=True)
-    pubtype = models.CharField(max_length=512, null=True, blank=True)
+    pubtype = models.CharField(max_length=64, null=True, blank=True, choices=PAPER_TYPE_CHOICES)
 
     # Cached version of source.priority
     priority = models.IntegerField(default=1)

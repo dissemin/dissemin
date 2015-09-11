@@ -175,7 +175,7 @@ oai_sources = [
         ('hal', 'HAL', False, 10, 'preprint'),
         ('cairn', 'Cairn', False, 10, 'preprint'),
         ('pmc', 'PubMed Central', False, 10, 'preprint'),
-        ('doaj', 'DOAJ', True, 10, 'preprint'),
+        ('doaj', 'DOAJ', True, 10, 'journal-article'),
         ('persee', 'Persée', True, 10, 'preprint'),
         ('openaire', 'OpenAIRE', False, 5, 'preprint'),
         ('zenodo', 'Zenodo', False, 15, 'preprint'),
