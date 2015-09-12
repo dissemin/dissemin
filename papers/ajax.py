@@ -98,6 +98,8 @@ def researcherCandidatesByName(name):
     # From ORCID
     related_orcids = OrcidProfile.search_by_name(name.first, name.last)
     def renderProfile(res):
+        rendered_keywords = ', '.join(res.get('keywords',[]))
+        res['rendered_keywords'] = rendered_keywords
         return loader.render_to_string('papers/itemOrcid.html',
                 {'profile':res})
     rendered += map(renderProfile, related_orcids)

@@ -913,8 +913,15 @@ h1#paperTitle {
 }
 
 .confirmSuggestion {
-    margin-top: -4px;
     float: right;
+}
+
+.truncateModal {
+    width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
 }
 
 #nameGroup .form-group {

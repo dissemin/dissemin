@@ -1,10 +1,18 @@
 {% load domain %}
 {% load i18n %}
 {% load static %}
+{% load orcid %}
+<div class="truncateModal">
 {{ profile.first }} {{ profile.last }}, 
-<span><a href="http://orcid.org/{{ profile.orcid }}"><img src="{% static "img/orcid-small.png" %}" alt="ORCID" /> {{ profile.orcid }}</a></span>
-{% if researcher.homepage %}
-<span><span class="glyphicon glyphicon-home"></span> <a href="{{ researcher.homepage }}">{{ researcher.homepage|domain }}</a></span>
+<span>{{ profile.orcid|small_orcid }}.</span>
+  <!-- <a href="http://orcid.org/{{ profile.orcid }}" alt="ORCID profile: {{ profile.orcid }}"><img src="{% static "img/orcid-small.png" %}" alt="ORCID" /> {{ profile.orcid }}</a></span> -->
+{% if profile.homepage %}
+<span><span class="glyphicon glyphicon-home"></span> <a href="{{ profile.homepage }}">{{ profile.homepage|domain }}</a></span>
 {% endif %}
-<a href="{% url 'researcher-by-orcid' profile.orcid %}" class="btn btn-success btn-sm confirmSuggestion">{% trans "Yes" %}</a>
+{% if profile.keywords %}
+<span>Topics: {{ profile.rendered_keywords }}</span>
+{% endif %}
+</div>
+<div class="confirmSuggestion">
+    <a href="{% url 'researcher-by-orcid' profile.orcid %}" class="btn btn-success btn-sm">{% trans "Yes" %}</div></a>
 
