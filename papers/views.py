@@ -200,7 +200,7 @@ def searchView(request, **kwargs):
     context['pubtype_status_choices'] = pubtype_variants
     context['visibility_choices'] = visibility_variants
 
-    if 'bare' in args:
+    if request.META.get('CONTENT_TYPE') == 'application/json':
         return render(request, 'papers/ajaxListPapers.html', context)
     return render(request, 'papers/search.html', context)
 

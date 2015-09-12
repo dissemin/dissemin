@@ -27,11 +27,14 @@
 	}
 {% if researcher.current_task %}
     function refreshPapers() {
-        $.get(window.location.href+'?bare=true', function(data) {
-            if(data) {
-                $("#paperSearchResults").html(data);
-            }
-        });
+    console.log(window.location.href);
+    $.ajax({url:window.location.href,
+           success:function(data) {
+                if(data) {
+                    $("#paperSearchResults").html(data);
+                }
+           },
+          contentType:"application/json" });
     }
 
     function pollHarvesting(){
