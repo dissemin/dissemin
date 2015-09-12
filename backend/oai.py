@@ -28,6 +28,7 @@ from oaipmh.error import DatestampError, NoRecordsMatchError, BadArgumentError
 from papers.name import parse_comma_name, name_normalization, name_signature, normalize_name_words
 from papers.models import OaiRecord, OaiSource, Name
 from papers.doi import to_doi
+from papers.utils import sanitize_html
 
 # Reader slightly tweaked because Cairn includes a useful non-standard field
 my_oai_dc_reader = oai_dc_reader

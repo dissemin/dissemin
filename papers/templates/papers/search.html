@@ -30,8 +30,10 @@
     console.log(window.location.href);
     $.ajax({url:window.location.href,
            success:function(data) {
+                console.log(data);
                 if(data) {
-                    $("#paperSearchResults").html(data);
+                    $("#paperSearchResults").html(data['listPapers']);
+                    updateStats(data['stats']);
                 }
            },
           contentType:"application/json" });
@@ -54,6 +56,7 @@
                 area.fadeOut(function(){
                     area.hide();
                     });
+                refreshPapers();
                 /* location.reload(true); */
             }
             }).fail(function () {
