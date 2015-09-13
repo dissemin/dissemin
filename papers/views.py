@@ -206,7 +206,9 @@ def searchView(request, **kwargs):
         context['request'] = request
         response = {}
         response['listPapers'] = loader.render_to_string('papers/ajaxListPapers.html', context)
-        response['stats'] = json.loads(loader.render_to_string('statistics/data.js', {'stats':statsModel}))
+        response['stats'] = json.loads(loader.render_to_string('statistics/data.js',
+            {'stats':statsModel,
+             'object_id':researcher.object_id }))
         response['stats']['numtot'] = statsModel.num_tot
         if researcher.current_task:
             response['status'] = researcher.current_task
