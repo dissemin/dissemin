@@ -35,6 +35,7 @@ my_oai_dc_reader = oai_dc_reader
 my_oai_dc_reader._fields['accessRights'] = ('textList', 'oai_dc:dc/dcterms:accessRights/text()')
 my_oai_dc_reader._namespaces['dcterms'] = 'http://purl.org/dc/terms/'
 
+from backend.papersource import *
 from backend.extractors import *
 from backend.proxy import PROXY_SOURCE_PREFIX, PROXY_SIGNATURE_PREFIX, PROXY_AUTHOR_PREFIX, PROXY_FINGERPRINT_PREFIX, get_proxy_client
 from backend.name_cache import name_lookup_cache
@@ -104,13 +105,16 @@ def add_oai_record(record, source, paper=None):
             splash_url=splash_url)
 
 
-class OaiPaperSource(object):
+class OaiPaperSource(PaperSource):
     """
     A paper source that fetches records from the OAI-PMH proxy.
     """
     def __init__(self, ccf):
-        self.ccf = ccf
+        super(OaiPaperSource, self).__init__(ccf)
         self.client = get_proxy_client()
+
+    def fetch_papers(self, researcher):
+        return self.fetch_records_for_name(researcher.name)
 
     #### Record search utilities
 
@@ -120,9 +124,9 @@ class OaiPaperSource(object):
         or that match the full name if signature is set to False.
         """
         if signature:
-            self.fetch_records_for_signature(name_signature(name.first, name.last))
+            return self.fetch_records_for_signature(name_signature(name.first, name.last))
         else:
-            self.fetch_records_for_full_name(name.first, name.last)
+            return self.fetch_records_for_full_name(name.first, name.last)
 
     def fetch_records_for_fingerprint(self, ident):
         """
@@ -130,7 +134,7 @@ class OaiPaperSource(object):
         """
         try:
             listRecords = self.client.listRecords(metadataPrefix='oai_dc', set=PROXY_FINGERPRINT_PREFIX+ident)
-            self.process_records(listRecords)
+            return self.process_records(listRecords)
         except NoRecordsMatchError:
             pass
 
@@ -145,7 +149,7 @@ class OaiPaperSource(object):
     def fetch_records_for_signature(self, ident):
         try:
             listRecords = self.client.listRecords(metadataPrefix='oai_dc', set=PROXY_SIGNATURE_PREFIX+ident)
-            self.process_records(listRecords)
+            return self.process_records(listRecords)
         except NoRecordsMatchError:
             pass
         except BadArgumentError as e:
@@ -156,23 +160,20 @@ class OaiPaperSource(object):
         try:
             ident = name_normalization(lastname+', '+firstname)
             listRecords = self.client.listRecords(metadataPrefix='oai_dc', set=PROXY_AUTHOR_PREFIX+ident)
-            self.process_records(listRecords)
+            for p in self.process_records(listRecords):
+                yield p
             ident = name_normalization(firstname+' '+lastname)
             listRecords = client.listRecords(metadataPrefix='oai_dc', set=PROXY_AUTHOR_PREFIX+ident)
-            self.process_records(listRecords)
+            for p in self.process_records(listRecords):
+                yield p
         except NoRecordsMatchError:
             pass
         except BadArgumentError as e:
             print "Author is unknown for the proxy: "+unicode(e)
             pass
 
-
     def process_records(self, listRecords):
-        count = 0
-        saved = 0
         for record in listRecords:
-            count += 1
-
             metadata = record[1]._map
             authors = get_oai_authors(metadata)
 
@@ -219,15 +220,15 @@ class OaiPaperSource(object):
                 continue
 
             # Save the record
+            # TODO: we should check record validity *BEFORE* creating the paper
             try:
                 add_oai_record(record, source, paper)
-                saved += 1
+                yield paper
             except ValueError as e:
                 print "Warning, OAI record "+record[0].identifier()+" skipped:\n"+unicode(e)
                 if paper.is_orphan():
                     paper.visibility = 'CANDIDATE'
                     paper.save(update_fields=['visibility'])
-        return (count,saved)
 
 
 

@@ -37,6 +37,7 @@ from papers.models import *
 from papers.name import parse_comma_name
 from papers.utils import remove_diacritics
 
+from backend.papersource import PaperSource
 from backend.oai import my_oai_dc_reader
 from backend.name_cache import name_lookup_cache
 
@@ -85,19 +86,19 @@ def query_core(url, params, post_payload=None, retries=CORE_RETRIES, wait_time=C
     except requests.exceptions.RequestException as e:
         raise MetadataSourceException('HTTP error with CORE for URL: '+full_url+'\n'+str(params)+'\n'+str(e))
 
-class CorePaperSource(object):
+class CorePaperSource(PaperSource):
     """
     Fetches papers from the CORE search engine
     """
     def __init__(self, ccf):
-        self.ccf = ccf
+        super(CorePaperSource, self).__init__(ccf)
         self.core_source, created =  OaiSource.objects.get_or_create(identifier='core',
                 name='CORE',
                 priority=0)
 
-    def fetch_for_researcher(self, researcher):
+    def fetch_papers(self, researcher):
         name = researcher.name
-        self.fetch_by_name((name.first,name.last))
+        return self.fetch_by_name((name.first,name.last))
 
     def fetch_by_name(self, name, max_results=500):
         max_unsuccessful_lookups = CORE_MAX_NO_MATCH_BEFORE_GIVE_UP
@@ -117,6 +118,7 @@ class CorePaperSource(object):
                     match = self.add_document(result)
                 if match:
                     unsuccessful_lookups = 0
+                    yield match
                 else:
                     unsuccessful_lookups += 1
                 if unsuccessful_lookups >= max_unsuccessful_lookups or nb_results >= max_results:
@@ -184,8 +186,7 @@ class CorePaperSource(object):
                 description=description,
                 priority=self.core_source.priority)
 
-        return True
-
+        return paper
 
 def search_single_query(search_terms, max_results=None, page_size=100):
     page = 1
@@ -263,12 +264,5 @@ def fetch_single_core_metadata(coreid):
             }
     response = query_core('/articles/get/'+str(coreid), params)
     return response
-
-
-# TODO remove this dead code
-
-#core_sep_re = re.compile(r', *| *and *')
-#def parse_core_authors_list(lst):
-#    return core_sep_re.split(lst)
 
 

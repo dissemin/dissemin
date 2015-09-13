@@ -201,12 +201,17 @@ def searchView(request, **kwargs):
     context['visibility_choices'] = visibility_variants
 
     if request.META.get('CONTENT_TYPE') == 'application/json' and 'researcher' in context:
-        statsModel = context['researcher'].stats
+        researcher = context['researcher']
+        statsModel = researcher.stats
         context['request'] = request
-        listPapers = loader.render_to_string('papers/ajaxListPapers.html', context)
-        stats = json.loads(loader.render_to_string('statistics/data.js', {'stats':statsModel}))
-        stats['numtot'] = statsModel.num_tot
-        return HttpResponse(json.dumps({'stats':stats,'listPapers':listPapers}), content_type="application/json")
+        response = {}
+        response['listPapers'] = loader.render_to_string('papers/ajaxListPapers.html', context)
+        response['stats'] = json.loads(loader.render_to_string('statistics/data.js', {'stats':statsModel}))
+        response['stats']['numtot'] = statsModel.num_tot
+        if researcher.current_task:
+            response['status'] = researcher.current_task
+            response['display'] = researcher.get_current_task_display()
+        return HttpResponse(json.dumps(response), content_type="application/json")
     return render(request, 'papers/search.html', context)
 
 @user_passes_test(is_admin)

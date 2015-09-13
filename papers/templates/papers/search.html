@@ -27,45 +27,33 @@
 	}
 {% if researcher.current_task %}
     function refreshPapers() {
-    console.log(window.location.href);
     $.ajax({url:window.location.href,
            success:function(data) {
-                console.log(data);
                 if(data) {
                     $("#paperSearchResults").html(data['listPapers']);
                     updateStats(data['stats']);
+                    $("#nbPapersFound").text(data['stats']['numtot']);
+                    if('display' in data) {
+                        var currentText = $('#harvestingStatus').text();
+                        var newText = data['display'];
+                        if(newText != currentText) {
+                            $('#harvestingStatus').text(newText);
+                        }
+                        setTimeout(refreshPapers, 3000);
+                    } else {
+                        var area = $('#waitingArea');
+                        area.fadeOut(function(){
+                            area.hide();
+                        });
+                    }
+
                 }
            },
           contentType:"application/json" });
     }
 
-    function pollHarvesting(){
-        console.log('pollHarvesting()');
-        $.get('{% url 'ajax-harvestingStatus' researcher.id %}', function(data) {
-            console.log(data);
-            if(data) {
-                var currentText = $('#harvestingStatus').text();
-                var newText = data['display'];
-                if(newText != currentText) {
-                    $('#harvestingStatus').text(newText);
-                    refreshPapers();
-                }
-                setTimeout(pollHarvesting, 3000);
-            } else {
-                var area = $('#waitingArea');
-                area.fadeOut(function(){
-                    area.hide();
-                    });
-                refreshPapers();
-                /* location.reload(true); */
-            }
-            }).fail(function () {
-                console.log('fail');
-                setTimeout(pollHarvesting, 2000);
-            });
-    }
     $(function(){
-        setTimeout(pollHarvesting, 1500);
+        setTimeout(refreshPapers, 1500);
     });
 {% endif %}
 {% endblock %}
@@ -140,7 +128,7 @@
 <span class="detailsTitle">{% trans "Refine search" %}</span>
 <div class="detailsContent">
     <p>{% blocktrans trimmed %}
-    {{ nb_results }} papers found
+    <span id="nbPapersFound">{{ nb_results }}</span> papers found
     {% endblocktrans %}
     </p>
 

@@ -79,35 +79,19 @@ def init_profile_from_orcid(pk):
 def fetch_everything_for_researcher(pk):
     ccf = get_ccf()
     oai = OaiPaperSource(ccf)
-    def fetch_accessibility(paper):
-        oai.fetch_records_for_fingerprint(paper.fingerprint)
-        return paper
-
+    sources = [
+        ('orcid',OrcidPaperSource(ccf, oai)),
+        ('crossref',CrossRefPaperSource(ccf, oai)),
+        ('oai',oai),
+        ('core',CorePaperSource(ccf)),
+       ]
     try:
         r = Researcher.objects.get(pk=pk)
         update_task = lambda name: update_researcher_task(r, name)
-        if r.orcid:
-            update_task('orcid')
-            source = OrcidPaperSource(ccf)
-            papers = list(map(fetch_accessibility, source.fetch_orcid_records(r.orcid)))
-            ccf.commitThemAll()
-            r.update_stats()
-            r.empty_orcid_profile = (len(papers) == 0)
-            r.save(update_fields=['empty_orcid_profile'])
-        update_task('crossref')
-        source = CrossRefPaperSource(ccf)
-        papers = list(map(fetch_accessibility, source.fetch_publications(r)))
-        ccf.commitThemAll()
-        r.update_stats()
-        update_task('core')
-        source = CorePaperSource(ccf)
-        source.fetch_for_researcher(r)
-        ccf.commitThemAll()
-        r.update_stats()
-        update_task('oai')
-        oai.fetch_records_for_name(r.name)
-        ccf.commitThemAll()
-        r.update_stats()
+        for key,source in sources:
+            update_task(key)
+            source.fetch(r, incremental=True)
+
         #fetch_papers_from_core_for_researcher(r)
         #fetch_papers_from_base_for_researcher(Researcher.objects.get(pk=pk))
     except MetadataSourceException as e:

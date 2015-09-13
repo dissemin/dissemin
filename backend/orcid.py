@@ -37,6 +37,7 @@ from papers.bibtex import parse_bibtex
 from papers.orcid import *
 
 import backend.create
+from backend.papersource import PaperSource
 from backend.crossref import fetch_dois, CrossRefPaperSource, convert_to_name_pair
 from backend.name_cache import name_lookup_cache
 
@@ -102,9 +103,19 @@ def affiliate_author_with_orcid(ref_name, orcid, authors, initial_affiliations=N
 
 ### Paper fetching ####
 
-class OrcidPaperSource(object):
-    def __init__(self, ccf):
-        self.ccf = ccf
+class OrcidPaperSource(PaperSource):
+    def fetch_papers(self, researcher):
+        if researcher.orcid:
+            found = False
+            for paper in self.fetch_orcid_records(researcher.orcid):
+                if not found:
+                    researcher.empty_orcid_profile = False
+                    researcher.save(update_fields=['empty_orcid_profile'])
+                    found = True
+                yield paper
+            if not found and researcher.empty_orcid_profile != True:
+                researcher.empty_orcid_profile = True
+                researcher.save(update_fields=['empty_orcid_profile'])
 
     def fetch_orcid_records(self, id, profile=None, use_doi=True):
         """

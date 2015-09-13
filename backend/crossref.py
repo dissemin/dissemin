@@ -38,6 +38,7 @@ from papers.utils import create_paper_fingerprint, iunaccent, tolerant_datestamp
 from papers.models import Publication, Paper
 from publishers.models import *
 
+from backend.papersource import PaperSource
 from backend.utils import urlopen_retry
 from backend.name_cache import name_lookup_cache
 from backend.romeo import fetch_journal, fetch_publisher
@@ -275,13 +276,10 @@ def fetch_dois_by_batch(doi_list):
     except requests.exceptions.RequestException as e:
         raise MetadataSourceException('Failed to retrieve batch metadata from the proxy: '+str(e))
 
-class CrossRefPaperSource(object):
+class CrossRefPaperSource(PaperSource):
     """
     Fetches papers from CrossRef
     """
-    def __init__(self, ccf):
-        self.ccf = ccf
-
     def save_doi_metadata(self, metadata, extra_affiliations=None):
         """
         Given the metadata as Citeproc+JSON or from CrossRef, create the associated paper and publication
@@ -398,11 +396,10 @@ class CrossRefPaperSource(object):
         return self.search_for_dois_incrementally(unicode(name))
 
 
-    def fetch_publications(self, researcher, fetch_oai=True):
+    def fetch_papers(self, researcher):
         """
         Fetch and save the publications from CrossRef for a given researcher
-
-        :param fetch_oai: Try to fetch full text availability with proaixy.
+        Users should rather use the "fetch" method from PaperSource.
         """
         # TODO: do it for all name variants of confidence 1.0
         researcher.status = 'Fetching DOI list.'

@@ -507,9 +507,13 @@ class ClusteringContextFactory(object):
         """
         Clusters all the pending author/researcher pairs
         """
+        seen_researchers = set()
         for (author,researcher) in self.authors_to_cluster:
             self.clusterAuthor(author, researcher)
+            seen_researchers.add(researcher)
         self.authors_to_cluster = []
+        for r in seen_researchers:
+            r.update_stats()
   
     def commitThemAll(self):
         """
