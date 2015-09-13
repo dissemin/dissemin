@@ -166,4 +166,13 @@ def update_all_stats():
     AccessStatistics.update_all_stats(Journal)
     AccessStatistics.update_all_stats(Researcher)
 
+@shared_task(name='update_all_stats_but_researchers')
+def update_all_stats_but_researchers():
+    """
+    Updates the stats for every model using them
+    """
+    AccessStatistics.update_all_stats(PaperWorld)
+    AccessStatistics.update_all_stats(Publisher)
+    AccessStatistics.update_all_stats(Journal)
+
 
