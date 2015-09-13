@@ -78,9 +78,6 @@ def submitDeposit(request, pk):
         if not f.is_valid():
             repositoryForms[idx] = f.errors()
             return HttpResponseForbidden(json.dumps(context), content_type='text/json')
-        if not zenodoForm.is_valid():
-            context['zenodoForm'] = form.errors
-            return HttpResponseForbidden(json.dumps(context), content_type='text/json')
 
     # Check that the paper has been uploaded by the same user
     pdf = form.cleaned_data['file_id']

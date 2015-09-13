@@ -141,7 +141,7 @@ class ZenodoProtocol(RepositoryProtocol):
             self.log(traceback.format_exc())
             raise DepositError('Connection to Zenodo failed. Please try again later.')
 
-        deposit_result.splash_url = 'https://zenodo.rg/record/%d' % deposition_id
+        deposit_result.splash_url = 'https://zenodo.org/record/%d' % deposition_id
         deposit_result.pdf_url = 'https://zenodo.org/record/%d/files/article.pdf' % deposition_id
 
         return deposit_result

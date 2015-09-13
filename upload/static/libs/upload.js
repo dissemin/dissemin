@@ -5,7 +5,7 @@ $(function(){
     var filename = "";
 
     function addFileWidget(name, size) {
-        var tpl = $('<div class="uploadFileItem uploadWorking"><div class="progress progress-striped active"><div class="progress-bar" style="width:100%"></div></div>    <div class="fileDetails"></div><div style="clear:both"></div></div>');
+        var tpl = $('<div class="uploadFileItem uploadWorking"><div class="progress progress-striped active"><div class="progress-bar" style="width:100%"></div></div>    <div class="fileDetails"></div><div style="clear:left"></div></div>');
 
         // Append the file name and file size
         console.log(name);
