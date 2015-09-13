@@ -25,14 +25,7 @@ from papers.models import *
 from learning.model import *
 from backend.similarity import *
 
-def getAuthorData(sc, id):
-    try:
-        return author_data_cache[id]
-    except KeyError:
-        x = sc.getDataById(id)
-        author_data_cache[id] = x
-        return x
-
+from sklearn.grid_search import GridSearchCV
 
 def run():
     # Read dataset
@@ -50,7 +43,16 @@ def run():
     sc = SimilarityClassifier(languageModel=all_papers_model, contributorsModel=contributors_model)
 
     author_data_cache = dict()
-    recompute = True
+    def getAuthorData(sc, id):
+        try:
+            return author_data_cache[id]
+        except KeyError:
+            x = sc.getDataById(id)
+            author_data_cache[id] = x
+            return x
+
+
+    recompute = False
     if recompute:
         print("Computing features")
         features = []
@@ -72,8 +74,19 @@ def run():
         inf.close()
 
     if True:
-        sc.positiveSampleWeight = 0.04
-        sc.train(features, labels, kernel='linear')
+        def custom_scorer(estimator, X, y):
+            conf = estimator.confusion(X,y)
+            print(conf)
+            return -conf[1][0]
+
+        param_grid = [
+                {'positiveSampleWeight':[0.001,0.005,0.01,0.02,0.05]}]
+        cv = GridSearchCV(sc, param_grid, cv=5, scoring=custom_scorer, iid=False)
+        cv.fit(features, labels)
+        print("Grid scores:")
+        print(cv.grid_scores_)
+
+        sc = cv.best_estimator_
 
         def paper_url(pk):
             print('http://beta.ens.dissem.in/paper/'+str(Author.objects.get(pk=pk).paper_id))

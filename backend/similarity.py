@@ -98,7 +98,7 @@ class CoauthorsSimilarity(SimilarityFeature):
     """
     def __init__(self):
         super(CoauthorsSimilarity, self).__init__()
-        self.max_nb_authors = 50
+        self.max_nb_authors = 32
     
     def fetchData(self, author):
         coauthors = author.paper.author_set.exclude(id=author.id).select_related('name')
@@ -249,8 +249,29 @@ class SimilarityClassifier(object):
                 TitleSimilarity(publicationModel),
                 ContributorsSimilarity(contributorsModel),
                 ]
+        self.publicationModel = publicationModel
+        self.contributorsModel = contributorsModel
         self.classifier = None
         self.positiveSampleWeight = 0.1
+        self.kernel = 'linear'
+
+    def get_params(self, **kwargs):
+        return {
+                'languageModel':self.publicationModel,
+                'contributorsModel':self.contributorsModel,
+                'positiveSampleWeight':self.positiveSampleWeight,
+                'kernel':self.kernel}
+
+    def set_params(self, **kwargs):
+        if 'kernel' in kwargs:
+            self.kernel = kwargs['kernel']
+        if 'positiveSampleWeight' in kwargs:
+            self.positiveSampleWeight = kwargs['positiveSampleWeight']
+        if 'languageModel' in kwargs:
+            self.publicationModel = kwargs['languageModel']
+        if 'contributorsModel' in kwargs:
+            self.contributorsModel = kwargs['contributorsModel']
+        return self
     
     def computeFeatures(self, lstDataA, lstDataB):
         if len(lstDataA) != len(self.simFeatures) or len(lstDataB) != len(self.simFeatures):
@@ -273,10 +294,11 @@ class SimilarityClassifier(object):
         except Author.DoesNotExist as e:
             raise AuthorNotFound(e.message, id)
  
-    def train(self, features, labels, kernel='rbf'):
-        self.classifier = svm.SVC(kernel=str(kernel))
+    def fit(self, features, labels):
+        self.classifier = svm.SVC(kernel=str(self.kernel))
         weights = [(self.positiveSampleWeight if label else 1.) for label in labels]
         self.classifier.fit(features, labels, sample_weight=weights)
+        return self
 
     def confusion(self, features, labels):
         if not self.classifier:
@@ -301,6 +323,14 @@ class SimilarityClassifier(object):
             print(feat_vec)
         output = self.classifier.predict(feat_vec)
         return output[0]
+
+    def predict(feat_mat):
+        """
+        Predict labels for raw feature matrix (to be used internally by CV
+        grid search)
+        """
+        return self.classifier.predict(feat_mat)
+
 
     def plotClassification(self, features, labels):
         import matplotlib.pyplot as plt

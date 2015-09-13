@@ -259,7 +259,7 @@ class ClusteringContext(object):
         if not self.relevance_computed.get(target, False):
             if target not in self.authors:
                 raise AuthorNotFound("in computeRelevance, not in authors", target)
-            relevance = self.rc.score(self.authors[target], self.researcher, True)
+            relevance = self.rc.score(self.authors[target], self.researcher, False)
             parent = self.find(target)
             self.relevance[target] = relevance
             self.num_relevant[parent] += relevance
