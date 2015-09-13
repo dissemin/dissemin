@@ -232,7 +232,6 @@ class Researcher(models.Model):
         self.stats.update(Paper.objects.filter(author__researcher=self).distinct())
 
     def fetch_everything(self):
-        # TODO ensure the task is run only once per researcher
         self.harvester = send_task('fetch_everything_for_researcher', [], {'pk':self.id}).id
         self.current_task = 'init' 
         self.save(update_fields=['harvester','current_task'])
@@ -240,6 +239,11 @@ class Researcher(models.Model):
     def fetch_everything_if_outdated(self):
         if self.last_harvest is None or timezone.now() - self.last_harvest > PROFILE_REFRESH_ON_LOGIN:
             self.fetch_everything()
+
+    def recluster_batch(self):
+        self.harvester = send_task('recluster_researcher', [], {'pk':self.id}).id
+        self.current_task = 'clustering'
+        self.save(update_fields=['harvester','current_task'])
 
     def init_from_orcid(self):
         self.harvester = send_task('init_profile_from_orcid', [], {'pk':self.id}).id
