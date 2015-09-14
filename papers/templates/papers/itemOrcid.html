@@ -5,7 +5,6 @@
 <div class="truncateModal">
 {{ profile.first }} {{ profile.last }}, 
 <span>{{ profile.orcid|small_orcid }}.</span>
-  <!-- <a href="http://orcid.org/{{ profile.orcid }}" alt="ORCID profile: {{ profile.orcid }}"><img src="{% static "img/orcid-small.png" %}" alt="ORCID" /> {{ profile.orcid }}</a></span> -->
 {% if profile.homepage %}
 <span><span class="glyphicon glyphicon-home"></span> <a href="{{ profile.homepage }}">{{ profile.homepage|domain }}</a></span>
 {% endif %}

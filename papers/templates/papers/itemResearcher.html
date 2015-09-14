@@ -1,9 +1,10 @@
 {% load domain %}
 {% load i18n %}
 {% load static %}
+{% load orcid %}
 {{ researcher }}, 
 {% if researcher.orcid %}
-<span><a href="http://orcid.org/{{ researcher.orcid }}"><img src="{% static "img/orcid-small.png" %}" alt="ORCID" /> {{ researcher.orcid }}</a></span>
+<span>{{ researcher.orcid|small_orcid }}</span>
 {% endif %}
 
 {% if researcher.homepage %}

@@ -93,6 +93,10 @@ def researcherCandidatesByName(name):
     def renderResearcher(res):
         return loader.render_to_string('papers/itemResearcher.html',
                 {'researcher':res})
+    seen_orcids = set()
+    for researcher in related_researchers:
+        if researcher.orcid:
+            seen_orcids.add(researcher.orcid)
     rendered = map(renderResearcher, related_researchers)
 
     # From ORCID
@@ -102,6 +106,7 @@ def researcherCandidatesByName(name):
         res['rendered_keywords'] = rendered_keywords
         return loader.render_to_string('papers/itemOrcid.html',
                 {'profile':res})
+    related_orcids = filter(lambda r: r['orcid'] not in seen_orcids, related_orcids)
     rendered += map(renderProfile, related_orcids)
     return rendered
     
