@@ -136,7 +136,7 @@ class OaiPaperSource(PaperSource):
             listRecords = self.client.listRecords(metadataPrefix='oai_dc', set=PROXY_FINGERPRINT_PREFIX+ident)
             return self.process_records(listRecords)
         except NoRecordsMatchError:
-            pass
+            return []
 
     def fetch_accessibility(self, paper):
         """
@@ -155,6 +155,7 @@ class OaiPaperSource(PaperSource):
         except BadArgumentError as e:
             print "Signature is unknown for the proxy: "+unicode(e)
             pass
+        return []
 
     def fetch_records_for_full_name(self, firstname, lastname):
         try:
@@ -171,7 +172,7 @@ class OaiPaperSource(PaperSource):
         except BadArgumentError as e:
             print "Author is unknown for the proxy: "+unicode(e)
             pass
-
+    
     def process_records(self, listRecords):
         for record in listRecords:
             metadata = record[1]._map

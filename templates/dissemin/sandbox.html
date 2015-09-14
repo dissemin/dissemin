@@ -11,7 +11,8 @@
 <div id="fullPage">
 <h1>{% trans "SANDBOX Sign in" %}</h1>
 
-{% if socialaccount.providers %}
+{% get_providers as socialaccount_providers %}
+{% if socialaccount_providers %}
 
 <img src="{% static "img/orcid-big.png" %}" alt="ORCID" style="float: right" />
 <p>
