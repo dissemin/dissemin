@@ -102,7 +102,7 @@ html_killer = Cleaner()
 html_killer.allow_tags = ['div']
 html_killer.remove_unknown_tags = False
 
-latexmath_re = re.compile(r'\$(\S[^$]*\S|\S)\$')
+latexmath_re = re.compile(r'\$(\S[^$]*?\S|\S)\$')
 def remove_latex_math_dollars(string):
     return latexmath_re.sub(r'\1', string)
 
@@ -146,7 +146,7 @@ def kill_html(s):
     orig = html_killer.clean_html('<div>'+s+'</div>')
     return orig[5:-6]
 
-latex_double_dollar_re = re.compile(r'\$\$(.*)\$\$')
+latex_double_dollar_re = re.compile(r'\$\$([^\$]*?)\$\$')
 def kill_double_dollars(s):
     """
     Removes double dollars (they generate line breaks with MathJax)

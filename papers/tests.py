@@ -384,6 +384,9 @@ class KillDoubleDollarsTest(unittest.TestCase):
     def test_simple(self):
         self.assertEqual(kill_double_dollars('Fast Exhaustive Search for Quadratic Systems in $$\\mathbb {F}_{2}$$ on FPGAs'), 'Fast Exhaustive Search for Quadratic Systems in $\\mathbb {F}_{2}$ on FPGAs')
 
+    def test_multiple(self):
+        self.assertEqual(kill_double_dollars('$$\\textit{K}$$ -trivial, $$\\textit{K}$$ -low and $${{\\mathrm{\\textit{MLR}}}}$$ -low Sequences: A Tutorial'), '$\\textit{K}$ -trivial, $\\textit{K}$ -low and ${{\\mathrm{\\textit{MLR}}}}$ -low Sequences: A Tutorial')
+
 class ParseAuthorsListTest(unittest.TestCase):
     def test_simple(self):
         self.assertEqual(parse_authors_list('Claire Toffano-Nioche and Daniel Gautheret and Fabrice Leclerc'),
