@@ -38,7 +38,7 @@ from backend.globals import get_ccf
 from backend.crossref import *
 from backend.oai import *
 from backend.core import CorePaperSource
-from backend.base import fetch_papers_from_base_for_researcher
+from backend.base import BasePaperSource
 from backend.orcid import *
 from backend.name_cache import name_lookup_cache
 from backend.extractors import * # to ensure that OaiSources are created
@@ -78,12 +78,13 @@ def init_profile_from_orcid(pk):
 @run_only_once('researcher', keys=['pk'], timeout=15*60)
 def fetch_everything_for_researcher(pk):
     ccf = get_ccf()
-    oai = OaiPaperSource(ccf)
+    oai = OaiPaperSource(ccf, max_results=250)
     sources = [
-        ('orcid',OrcidPaperSource(ccf, oai)),
-        ('crossref',CrossRefPaperSource(ccf, oai)),
+        ('orcid',OrcidPaperSource(ccf, oai, max_results=1000)),
+        ('crossref',CrossRefPaperSource(ccf, oai, max_results=500)),
+        ('base',BasePaperSource(ccf, max_results=250)),
+        ('core',CorePaperSource(ccf, max_results=250)),
         ('oai',oai),
-        ('core',CorePaperSource(ccf)),
        ]
     try:
         r = Researcher.objects.get(pk=pk)
@@ -120,9 +121,13 @@ def fetch_records_for_researcher(pk, signature=True):
 @shared_task(name='recluster_researcher')
 def recluster_researcher(pk):
     ccf = get_ccf()
-    r = Researcher.objects.get(pk=pk)
-    ccf.reclusterBatch(r)
-    r.update_stats()
+    try:
+        r = Researcher.objects.get(pk=pk)
+        ccf.reclusterBatch(r)
+    finally:
+        r.update_stats()
+        update_researcher_task(r, None)
+
 
 @shared_task(name='fetch_dois_for_researcher')
 def fetch_dois_for_researcher(pk):

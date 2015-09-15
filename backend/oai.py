@@ -114,7 +114,7 @@ class OaiPaperSource(PaperSource):
         self.client = get_proxy_client()
 
     def fetch_papers(self, researcher):
-        return self.fetch_records_for_name(researcher.name)
+        return self.fetch_records_for_name(researcher.name, signature=False)
 
     #### Record search utilities
 
