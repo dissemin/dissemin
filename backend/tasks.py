@@ -82,9 +82,9 @@ def fetch_everything_for_researcher(pk):
     sources = [
         ('orcid',OrcidPaperSource(ccf, oai, max_results=1000)),
         ('crossref',CrossRefPaperSource(ccf, oai, max_results=500)),
-        ('base',BasePaperSource(ccf, max_results=250)),
-        ('core',CorePaperSource(ccf, max_results=250)),
         ('oai',oai),
+        ('base',BasePaperSource(ccf, max_results=200)),
+       # ('core',CorePaperSource(ccf, max_results=250)),
        ]
     try:
         r = Researcher.objects.get(pk=pk)
