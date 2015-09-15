@@ -27,7 +27,7 @@ class PaperSource(object):
     for a given researcher.
     """
 
-    def __init__(self, ccf, oai=None):
+    def __init__(self, ccf, oai=None, max_results=None):
         """
         To construct a PaperSource, a Clustering Context Factory (ccf)
         is required: this allows us to cluster incoming papers and
@@ -40,9 +40,12 @@ class PaperSource(object):
 
         Subclasses can reimplement the constructor to get parameters for the source.
         Do not forget to call this base constructor though.
+
+        :param max_results: maximum number of papers to retrieve for each researcher.
         """
         self.ccf = ccf
         self.oai = oai
+        self.max_results = None
 
     def fetch_papers(self, researcher):
         """
@@ -60,10 +63,14 @@ class PaperSource(object):
             and commited one after the other. This is useful when
             papers are fetched on the fly for an user.
         """
+        count = 0
         for p in self.fetch_papers(researcher):
+            count += 1
             if self.oai:
                 p = self.oai.fetch_accessibility(p)
             if incremental:
                 self.ccf.commitThemAll()
+            if self.max_results is not None and count >= self.max_results:
+                break
 
 

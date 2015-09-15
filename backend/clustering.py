@@ -80,7 +80,6 @@ class ClusteringContext(object):
         """
         pk = author.pk
         self.authors[pk] = author
-        print("Adding author %d" % pk)
         if pk == author.cluster_id:
             self.parent[pk] = None
         else:

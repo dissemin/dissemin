@@ -109,8 +109,8 @@ class OaiPaperSource(PaperSource):
     """
     A paper source that fetches records from the OAI-PMH proxy.
     """
-    def __init__(self, ccf):
-        super(OaiPaperSource, self).__init__(ccf)
+    def __init__(self, *args, **kwargs):
+        super(OaiPaperSource, self).__init__(*args, **kwargs)
         self.client = get_proxy_client()
 
     def fetch_papers(self, researcher):

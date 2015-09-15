@@ -90,8 +90,8 @@ class CorePaperSource(PaperSource):
     """
     Fetches papers from the CORE search engine
     """
-    def __init__(self, ccf):
-        super(CorePaperSource, self).__init__(ccf)
+    def __init__(self, *args, **kwargs):
+        super(CorePaperSource, self).__init__(*args, **kwargs)
         self.core_source, created =  OaiSource.objects.get_or_create(identifier='core',
                 name='CORE',
                 priority=0)
