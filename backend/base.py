@@ -22,6 +22,7 @@
 from __future__ import unicode_literals
 
 import requests
+import re
 import requests.exceptions
 import xml.etree.ElementTree as ET
 import unicodedata

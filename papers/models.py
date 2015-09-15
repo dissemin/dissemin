@@ -1208,7 +1208,8 @@ class OaiRecord(models.Model):
             match = https_re.match(url.strip())
             if not match:
                 print "Warning, invalid URL: "+url
-            return match.group(1)
+            else:
+                return match.group(1)
 
         short_splash = shorten(splash_url)
         short_pdf = shorten(pdf_url)

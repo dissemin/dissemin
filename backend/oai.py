@@ -164,7 +164,7 @@ class OaiPaperSource(PaperSource):
             for p in self.process_records(listRecords):
                 yield p
             ident = name_normalization(firstname+' '+lastname)
-            listRecords = client.listRecords(metadataPrefix='oai_dc', set=PROXY_AUTHOR_PREFIX+ident)
+            listRecords = self.client.listRecords(metadataPrefix='oai_dc', set=PROXY_AUTHOR_PREFIX+ident)
             for p in self.process_records(listRecords):
                 yield p
         except NoRecordsMatchError:
