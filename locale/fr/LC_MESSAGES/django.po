@@ -279,7 +279,7 @@ msgid "Some details of my paper are incorrect. What can I do?"
 msgstr "Certaines informations sur mon papier sont incorrectes. Que faire ?"
 
 #: papers/templates/papers/faq.html:37 papers/templates/papers/faq.html:251
-msgid "Behind the scene"
+msgid "Behind the scenes"
 msgstr "En coulisses"
 
 #: papers/templates/papers/faq.html:38 papers/templates/papers/faq.html:253
