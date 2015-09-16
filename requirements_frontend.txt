@@ -9,9 +9,11 @@ django-cas-ng
 unicode_tex
 wand
 PyPDF2
-django-allauth
+-e git://github.com/wetneb/django-allauth.git#egg=django-allauth
 django-redis-cache
 django-solo
 requests
 pillow
 django-crispy-forms
+swampdragon
+django-debug-toolbar

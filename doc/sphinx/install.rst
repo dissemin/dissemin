@@ -99,14 +99,19 @@ and :ref:`page-deploying`.
 Optional: installing the tasks backend
 --------------------------------------
 
-The backend communicates with the frontend through a message passing
-infrastructure. TODO: link to the Django doc for that.
-We recommend redis.
-TODO: update the rest of the doc
-The default
-settings are configured to use RabbitMQ, an AMQP server::
+This part is only required if you want to fetch papers from metadata sources.
+This functionality is located in the `backend` module and has separate
+dependencies.
 
-   apt-get install rabbitmq-server
+The backend communicates with the frontend through a message passing
+infrastructure. We recommend redis for that (and the source code is
+configured for it). This serves also as a cache backend (to cache template
+fragments) and provides locks (to ensure that we do not fetch the publications
+of a given researcher twice, for instance).
+
+First, install the redis server::
+
+   apt-get install redis-server
 
 (this launches the rabbitmq server). Install Python dependencies::
 
