@@ -12,4 +12,6 @@ django-solo
 -e git://github.com/wetneb/django-allauth.git#egg=django-allauth
 django-redis-cache
 requests
+pillow
 swampdragon
+django-debug-toolbar
