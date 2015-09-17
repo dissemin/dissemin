@@ -60,8 +60,12 @@ def normalize_name_words(w):
     This function is to be called on first or last names only.
     """
     name_words, separators = split_name_words(w)
-    name_words = map(recapitalize_word, name_words)
-    name_words = map(remove_final_comma, name_words)
+    all_lower = all(map(lambda w: w.lower() == w, name_words))
+    new_name_words = []
+    for idx, word in enumerate(name_words):
+        force = all_lower or (idx > 0 and separators[idx-1])
+        new_name_words.append(recapitalize_word(word, force))
+    name_words = map(remove_final_comma, new_name_words)
     return rebuild_name(name_words, separators)
 
 def rebuild_name(name_words, separators):
@@ -141,14 +145,19 @@ def shorten_first_name(string):
                 result += separators[i] if separators[i] else ' '
     return result
 
-def recapitalize_word(w):
-    """ Turns every fully capitalized word into an uncapitalized word (except for the first character) """
-    if w.upper() == w:
+def recapitalize_word(w, force=False):
+    """
+    Turns every fully capitalized word into an uncapitalized word (except for the first character).
+    By default, only do it if the word is fully capitalized.
+    """
+    if (w.upper() == w and len(w) > 1) or force:
         previousIsChar = False
         res = ''
         for i in range(len(w)):
             if previousIsChar:
                 res += w[i].lower()
+            elif i == 0:
+                res += w[i].upper()
             else:
                 res += w[i]
             previousIsChar = letter_re.match(w[i]) != None

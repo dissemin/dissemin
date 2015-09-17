@@ -41,6 +41,7 @@ from papers.models import *
 from papers.user import *
 from papers.forms import AddResearcherForm, AddUnaffiliatedResearcherForm
 from papers.utils import iunaccent, sanitize_html, kill_html
+from papers.name import normalize_name_words
 
 import os.path
 
@@ -121,8 +122,8 @@ def newUnaffiliatedResearcher(request):
         if orcid:
             researcher = Researcher.get_or_create_by_orcid(orcid)
         else:
-            first = form.cleaned_data['first']
-            last = form.cleaned_data['last']
+            first = normalize_name_words(form.cleaned_data['first'])
+            last = normalize_name_words(form.cleaned_data['last'])
             # Check that the researcher is not already known under a different name.
             if not form.cleaned_data.get('force'):
                 name, created = Name.get_or_create(first, last)

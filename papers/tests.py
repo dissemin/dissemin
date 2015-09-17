@@ -97,6 +97,7 @@ class NormalizeNameWordsTest(unittest.TestCase):
     def test_simple(self):
         self.assertEqual(normalize_name_words('Jean'), 'Jean')
         self.assertEqual(normalize_name_words('Jean-Pierre'), 'Jean-Pierre')
+        self.assertEqual(normalize_name_words('Jean-pierre'), 'Jean-Pierre')
         self.assertEqual(normalize_name_words('John Mark'), 'John Mark')
         self.assertEqual(normalize_name_words('JEAN-PIERRE'), 'Jean-Pierre')
         self.assertEqual(normalize_name_words('JOHN MARK'), 'John Mark')
@@ -118,6 +119,10 @@ class NormalizeNameWordsTest(unittest.TestCase):
     def test_flattened(self):
         self.assertEqual(normalize_name_words('JP.'), 'J.-P.')
         self.assertEqual(normalize_name_words('Jp.'), 'J.-P.')
+
+    def test_lower(self):
+        self.assertEqual(normalize_name_words('catalin'), 'Catalin')
+        self.assertEqual(normalize_name_words('Colin de Verdière'), 'Colin de Verdière')
 
     def test_comma(self):
         self.assertEqual(normalize_name_words('John, Mark'), 'John Mark')
@@ -155,6 +160,13 @@ class RecapitalizeWordTest(unittest.TestCase):
         self.assertEqual(recapitalize_word('CLARK'),'Clark')
         self.assertEqual(recapitalize_word('GRANROTH-WILDING'),'Granroth-Wilding')
         self.assertEqual(recapitalize_word('Jean-Pierre'), 'Jean-Pierre')
+
+    def test_lower(self):
+        self.assertEqual(recapitalize_word('van'), 'van')
+        self.assertEqual(recapitalize_word('alphonse'), 'alphonse')
+
+    def test_force(self):
+        self.assertEqual(recapitalize_word('jean', True), 'Jean')
 
     def test_unicode(self):
         self.assertEqual(recapitalize_word('ÉMILIE'), 'Émilie')
