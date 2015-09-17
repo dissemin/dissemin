@@ -272,7 +272,7 @@ class Mock(MagicMock):
     def __getattr__(cls, name):
         return Mock()
 
-MOCK_MODULES = ['lxml', 'lxml.html', 'lxml.html.clean', 'wand.image', 'wand.exceptions']
+MOCK_MODULES = ['lxml', 'lxml.html', 'lxml.html.clean', 'wand', 'wand.image', 'wand.exceptions']
 sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES)
 
 # Snippet to document Django models
