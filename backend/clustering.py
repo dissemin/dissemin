@@ -64,6 +64,18 @@ class ClusteringContext(object):
             self.addAuthor(author, False)
         self.updateChildren()
 
+    def updateResearcherAttributes(self, researcher):
+        """
+        Updates the cached instance of the Researcher model.
+        This is useful when we discover new properties for this researcher
+        that influence the relevance or similarity classifications.
+        For now, this is only whether the ORCID profile is empty or not.
+        """
+        previously_nonempty = (self.researcher.empty_orcid_profile == False)
+        self.researcher = researcher
+        if (researcher.empty_orcid_profile == False) != previously_nonempty:
+            self.reclusterBatch()
+
     def getAuthorQuerySet(self):
         """
         The queryset returning all the authors related to the researcher, sorted by id.
@@ -530,6 +542,15 @@ class ClusteringContextFactory(object):
         """
         if pk in self.cc:
             del self.cc[pk]
+
+    def updateResearcher(self, researcher):
+        """
+        Updates the Researcher model object in the cache of the associated
+        clustering context, for instance so that relevance or similarity features
+        based on fields of this model are updated as well.
+        """
+        if researcher.pk in self.cc:
+            self.cc[researcher.pk].updateResearcherAttributes(researcher)
     
     def get_or_create_paper(self, title, author_names, pubdate, doi=None, visibility='VISIBLE', affiliations=None):
         """
