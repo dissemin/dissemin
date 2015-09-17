@@ -6,6 +6,8 @@ psycopg2
 django-bootstrap-pagination
 django-cas-ng
 mock
+pyoai
+httplib2
 unicode_tex
 django-crispy-forms
 django-solo
