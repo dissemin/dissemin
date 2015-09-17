@@ -9,6 +9,9 @@ mock
 unicode_tex
 django-crispy-forms
 django-solo
-django-allauth
+-e git://github.com/wetneb/django-allauth.git#egg=django-allauth
 django-redis-cache
 requests
+pillow
+swampdragon
+django-debug-toolbar
