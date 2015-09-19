@@ -100,6 +100,99 @@ HARVESTER_TASK_CHOICES = [
    ('stats', _('Updating statistics')),
    ]
 
+
+class Institution(models.Model):
+    """
+    A university or research institute.
+    """
+    #: The full name of the institution 
+    name = models.CharField(max_length=300)
+
+    #: :py:class:`AccessStatistics` about the papers authored in this institution.
+    stats = models.ForeignKey(AccessStatistics, null=True, blank=True)
+
+    @property
+    def sorted_departments(self):
+        """
+        Departments belonging to this institution, sorted by name.
+        """
+        return self.department_set.order_by('name')
+
+    def __unicode__(self):
+        return self.name
+
+    def update_stats(self):
+        """
+        Refreshes the institution-level access statistics.
+        """
+        if not self.stats:
+            self.stats = AccessStatistics.objects.create()
+            self.save()
+        self.stats.update(Paper.objects.filter(author__researcher__department__institution=self).distinct())
+
+    @property
+    def object_id(self):
+        """
+        Criteria to use in the search view to filter on this department
+        """
+        return "institution=%d" % self.pk
+
+    @property
+    def url(self):
+        """
+        The URL of the main page (list of departments for this institution.
+        """
+        return reverse('institution', args=[self.pk])
+
+    def breadcrumbs(self):
+        return [(unicode(self),self.url)]
+
+class Department(models.Model):
+    """
+    A department in an institution. Each :py:class:`Researcher` is affiliated with exactly one department.
+    :param name: the full name of the department
+    """
+
+    #: The full name of the department
+    name = models.CharField(max_length=300)
+    #: The institution it belongs to
+    institution = models.ForeignKey(Institution)
+
+    #: :py:class:`AccessStatistics` about the papers authored in this department
+    stats = models.ForeignKey(AccessStatistics, null=True, blank=True)
+
+    @property
+    def sorted_researchers(self):
+        """List of :py:class:`Researcher` in this department sorted by last name (prefetches their stats as well)"""
+        return self.researcher_set.select_related('name', 'stats').order_by('name')
+
+    def __unicode__(self):
+        return self.name
+
+    def update_stats(self):
+        """Refreshes the department-level access statistics for that department."""
+        if not self.stats:
+            self.stats = AccessStatistics.objects.create()
+            self.save()
+        self.stats.update(Paper.objects.filter(author__researcher__department=self).distinct())
+
+    @property
+    def object_id(self):
+        """
+        Criteria to use in the search view to filter on this department
+        """
+        return "department=%d" % self.pk
+
+    @property
+    def url(self):
+        """
+        The URL of the main page (list of researchers) for this department.
+        """
+        return reverse('department', args=[self.pk])
+
+    def breadcrumbs(self):
+        return self.institution.breadcrumbs()+[(unicode(self),self.url)]
+
 class NameVariant(models.Model):
     """
     A NameVariant is a binary relation between names and researchers. When present, it indicates
@@ -124,7 +217,9 @@ class Researcher(models.Model):
     name = models.ForeignKey('Name')
     #: It can be associated to a user
     user = models.ForeignKey(User, null=True, blank=True)
-   
+    #: It can be affiliated to a department
+    department = models.ForeignKey(Department, null=True)
+
     # Various info about the researcher (not used internally)
     #: Email address for this researcher
     email = models.EmailField(blank=True,null=True)
@@ -324,7 +419,11 @@ class Researcher(models.Model):
         return "researcher=%d" % self.pk
 
     def breadcrumbs(self):
-        return [(unicode(self),reverse('researcher', args=[self.pk]))]
+        last =  [(unicode(self),reverse('researcher', args=[self.pk]))]
+        if not self.department:
+            return last
+        else:
+            return self.department.breadcrumbs()+last
 
 
 MAX_NAME_LENGTH = 256

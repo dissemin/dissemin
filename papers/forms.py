@@ -43,6 +43,7 @@ class AddResearcherForm(forms.Form):
     email = forms.EmailField(label=_('Email'), required=False)
     homepage = forms.URLField(label=_('Homepage'),required=False)
     role = forms.CharField(label=_('Role'),required=False)
+    department = forms.ModelChoiceField(label=_('Department'), queryset=Department.objects.all())
 
 class AddUnaffiliatedResearcherForm(forms.Form):
     first = forms.CharField(label=_('First name'), max_length=256, min_length=2, required=False)

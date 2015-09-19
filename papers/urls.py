@@ -36,6 +36,9 @@ urlpatterns = patterns('',
         url(r'^paper/(?P<pk>\d+)/$', views.PaperView.as_view(), name='paper'),
         url(r'^mail_paper/(?P<pk>\d+)/$', views.mailPaperView, name='mail_paper'),
         url(r'^journal/(?P<journal>\d+)/$', views.searchView, name='journal'),
+        # Institution-specific views
+        url(r'^department/(?P<pk>\d+)/$', views.DepartmentView.as_view(), name='department'),
+        url(r'^institution/(?P<pk>\d+)/$', views.InstitutionView.as_view(), name='institution'),
         # Tasks, AJAX
         url(r'^ajax/', include('papers.ajax')),
         url(r'^researcher/(?P<pk>\d+)/update/$', views.refetchResearcher, name='refetch-researcher'),

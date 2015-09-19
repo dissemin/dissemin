@@ -242,6 +242,23 @@ def myProfileView(request):
     except Researcher.DoesNotExist:
         return render(request, 'papers/createProfile.html')
 
+class DepartmentView(generic.DetailView):
+    model = Department
+    template_name = 'papers/department.html'
+    def get_context_data(self, **kwargs):
+        context = super(DepartmentView, self).get_context_data(**kwargs)
+        context['breadcrumbs'] = self.get_object().breadcrumbs()
+        context['add_form'] = AddResearcherForm()
+        return context
+
+class InstitutionView(generic.DetailView):
+    model = Institution
+    template_name = 'papers/institution.html'
+    def get_context_data(self, **kwargs):
+        context = super(InstitutionView, self).get_context_data(**kwargs)
+        context['breadcrumbs'] = self.get_object().breadcrumbs()
+        return context
+
 class PaperView(generic.DetailView):
     model = Paper
     template_name = 'papers/paper.html'

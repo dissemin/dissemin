@@ -3,7 +3,7 @@
 {% load i18n %}
 
 {% block headTitle %}
-{{ UNIVERSITY_SHORT_NAME }}
+{{ institution }}
 {% endblock %}
 
 {% block extra_head %}
@@ -12,10 +12,10 @@
 
 {% block content %}
 <div id="fullPage">
-  <h2>{% trans "Departments" %}</h2>
+    <h2>{{ institution }}</h2>
   
   <ul id="departmentsList">
-  {% for dept in departments %}
+  {% for dept in institution.sorted_departments %}
     <li>
          <h2><a href="{% url 'department' dept.id %}">{{ dept }}</a></h2>
          {% include 'statistics/pie.html' with obj=dept stats_counter=forloop.counter %}

@@ -170,6 +170,8 @@ def update_all_stats():
     AccessStatistics.update_all_stats(Publisher)
     AccessStatistics.update_all_stats(Journal)
     AccessStatistics.update_all_stats(Researcher)
+    AccessStatistics.update_all_stats(Institution)
+    AccessStatistics.update_all_stats(Department)
 
 @shared_task(name='update_all_stats_but_researchers')
 @run_only_once('refresh_stats', timeout=3*60)
@@ -180,5 +182,7 @@ def update_all_stats_but_researchers():
     AccessStatistics.update_all_stats(PaperWorld)
     AccessStatistics.update_all_stats(Publisher)
     AccessStatistics.update_all_stats(Journal)
+    AccessStatistics.update_all_stats(Institution)
+    AccessStatistics.update_all_stats(Department)
 
 

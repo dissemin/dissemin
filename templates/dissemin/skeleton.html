@@ -87,6 +87,9 @@
             </nav>
         </div>
         <div id="content">
+            {% if breadcrumbs %}
+                {% include "dissemin/breadcrumbs.html" %}
+            {% endif %}
             {% block content %}
             {% endblock %}
         <div class="push"></div>
