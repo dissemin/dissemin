@@ -314,4 +314,18 @@ LOCALE_PATHS = ('locale',)
 LOGIN_URL = '/accounts/login'
 LOGIN_REDIRECT_URL = '/'
 
+# Travis settings
+# taken from https://gist.github.com/ndarville/3625246
+if 'TRAVIS' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE':   'django.db.backends.postgresql_psycopg2',
+            'NAME':     'travisci',
+            'USER':     'postgres',
+            'PASSWORD': '',
+            'HOST':     'localhost',
+            'PORT':     '',
+        }
+    }
+
 
