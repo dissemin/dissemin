@@ -190,7 +190,8 @@ def create_paper_plain_fingerprint(title, authors, year):
     if len(buf) > 50:
         return buf
     
-    # If the title is just one word, we add the year (for "Preface", "Introduction" cases)
+    # If the title is very short, we add the year (for "Preface", "Introduction", "New members" cases)
+    #if len(title) <= 16:
     if not '-' in title:
         buf += '-'+str(year)
 
