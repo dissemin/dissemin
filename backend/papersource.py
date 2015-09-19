@@ -66,7 +66,7 @@ class PaperSource(object):
         count = 0
         for p in self.fetch_papers(researcher):
             count += 1
-            print "--- Reseracher task: "+researcher.current_task
+            print "--- Reseracher task: "+str(researcher.current_task)
             if self.oai:
                 p = self.oai.fetch_accessibility(p)
             if incremental:

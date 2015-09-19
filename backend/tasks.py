@@ -127,12 +127,6 @@ def recluster_researcher(pk):
         r.update_stats()
         update_researcher_task(r, None)
 
-
-@shared_task(name='fetch_dois_for_researcher')
-def fetch_dois_for_researcher(pk):
-    researcher = Researcher.objects.get(pk=pk)
-    return fetch_publications(researcher)
-
 @shared_task(name='change_publisher_oa_status')
 def change_publisher_oa_status(pk, status):
     publisher = Publisher.objects.get(pk=pk)

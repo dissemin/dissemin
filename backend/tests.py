@@ -70,12 +70,15 @@ class RomeoTest(TestCase):
 # Generic test case that requires some example DB
 class PrefilledTest(TestCase):
     def setUp(self):
-        self.d = Department.objects.create(name='Chemistry dept')
-        self.di = Department.objects.create(name='Comp sci dept')
-        self.r1 = Researcher.create_from_scratch('Isabelle', 'Aujard', self.d, None, None, None)
-        self.r2 = Researcher.create_from_scratch('Ludovic', 'Jullien', self.d, None, None, None)
-        self.r3 = Researcher.create_from_scratch('Antoine', 'Amarilli', self.di, None, None, None)
-        self.r4 = Researcher.create_from_scratch('Antonin', 'Delpeuch', self.di, None, None, None)
+        self.i = Institution.objects.create(name='ENS')
+        self.d = Department.objects.create(name='Chemistry dept', institution=self.i)
+        self.di = Department.objects.create(name='Comp sci dept', institution=self.i)
+        self.r1 = Researcher.create_from_scratch('Isabelle', 'Aujard', department=self.d)
+        self.r2 = Researcher.create_from_scratch('Ludovic', 'Jullien', department=self.d)
+        self.r3 = Researcher.create_from_scratch('Antoine', 'Amarilli', department=self.di)
+        self.r4 = Researcher.create_from_scratch('Antonin', 'Delpeuch', department=self.di, orcid=
+            '0000-0002-8612-8827')
+        self.r5 = Researcher.create_from_scratch('Terence', 'Tao')
         self.hal = OaiSource.objects.create(identifier='hal',
                 name='HAL',
                 default_pubtype='preprint')
@@ -83,8 +86,28 @@ class PrefilledTest(TestCase):
                 name='arXiv',
                 default_pubtype='preprint')
 
+# Generic test series for a PaperSource instance
+class PaperSourceTest(PrefilledTest):
+    def setUp(self):
+        super(PaperSourceTest, self).setUp()
+        self.ccf = get_ccf()
+        self.source = None
+        self.researcher = self.r4
+
+    def test_fetch(self):
+        if self.source is None:
+            return
+        papers = list(self.source.fetch_papers(self.researcher))
+        self.assertTrue(len(papers) > 1)
+        self.source.fetch(self.r3)
+
 # Test that the CORE interface works
-class CoreTest(PrefilledTest):
+class CoreTest(PaperSourceTest):
+    def setUp(self):
+        super(CoreTest, self).setUp()
+        self.source = CorePaperSource(self.ccf)
+        self.researcher = self.r5
+
     def test_query(self):
         self.assertIsInstance(
                 query_core('/articles/get/23770479', {}),
@@ -104,12 +127,13 @@ class CoreTest(PrefilledTest):
         self.assertTrue(len(records) < num_results)
         self.assertTrue(len(records) > 1)
 
-    def test_core_interface_works(self):
-        fetch_papers_from_core_for_researcher(self.r1)
-        fetch_papers_from_core_for_researcher(self.r3)
 
 # Test that the CrossRef interface works
-class CrossRefTest(PrefilledTest):
+class CrossRefTest(PaperSourceTest):
+    def setUp(self):
+        super(CrossRefTest, self).setUp()
+        self.source = CrossRefPaperSource(self.ccf)
+
     def test_fetch_single_doi(self):
         doi = '10.5380/dp.v1i1.1922'
         metadata = fetch_metadata_by_DOI(doi)
@@ -205,25 +229,22 @@ class CrossRefTest(PrefilledTest):
                 convert_to_name_pair({'family':'Arvind'}),
                 ('','Arvind'))
 
-    def test_fetch_dois_for_researcher(self):
-        fetch_dois_for_researcher(self.r1.pk)
-
     def test_affiliation(self):
-        fetch_dois_for_researcher(self.r4.pk)
+        self.source.fetch(self.r4)
         p = Publication.objects.get(doi='10.4204/eptcs.172.16')
         self.assertEqual(p.paper.author_set.all()[0].affiliation, 'École Normale Supérieure, Paris')
 
 # Test that the proaixy interface works
-class ProaixyTest(PrefilledTest):
-    def test_proaixy_interface_works_1(self):
-        fetch_records_for_researcher(self.r1.pk)
-        clustering_context_factory.commitThemAll()
-    
-    def test_proaixy_interface_works_2(self):
-        fetch_records_for_researcher(self.r3.pk)
-        clustering_context_factory.commitThemAll()
+class OaiTest(PaperSourceTest):
+    def setUp(self):
+        super(OaiTest, self).setUp()
+        self.source = OaiPaperSource(self.ccf)
 
-class OrcidTest(PrefilledTest):
+class OrcidTest(PaperSourceTest):
+    def setUp(self):
+        super(OrcidTest, self).setUp()
+        self.source = OrcidPaperSource(self.ccf)
+
     def test_affiliate_author(self):
         self.assertEqual(
                 affiliate_author_with_orcid(
@@ -240,9 +261,9 @@ class OrcidTest(PrefilledTest):
 
 
     def test_update_affiliations(self):
-        id = '0000-0002-8612-8827'
-        fetch_records_for_researcher(self.r4.pk)
-        fetch_orcid_records(id)
+        crps = CrossRefPaperSource(self.ccf)
+        crps.fetch(self.r4)
+        self.source.fetch(self.r4)
         p = Paper.objects.get(title='From Natural Language to RDF Graphs with Pregroups')
         author = p.author_set.get(position=0)
         self.assertEqual(author.affiliation, id)
@@ -251,6 +272,9 @@ class OrcidTest(PrefilledTest):
         self.assertEqual(author.affiliation, id)
 
 class PaperMethodsTest(PrefilledTest):
+    def setUp(self):
+        self.ccf = get_ccf()
+
     def test_update_author_names(self):
         for old_author_names, new_author_names, final in [
                 ([('G.','Bodenhausen')],
@@ -260,19 +284,19 @@ class PaperMethodsTest(PrefilledTest):
                  [('Ludovic','Jullien'),('R.','Pérand'),('Antoine','Amarilli')],
                  [('Ludovic F.','Jullien'),('R.','Pérand'),('Antoine','Amarilli')]),
                 ]:
-            paper = get_or_create_paper('This is a test paper',
+            paper = self.ccf.get_or_create_paper('This is a test paper',
                     map(Name.lookup_name, old_author_names), datetime.date(year=2015,month=04,day=05))
-            clustering_context_factory.commitThemAll()
+            self.ccf.commitThemAll()
             paper.update_author_names(new_author_names)
             self.assertEqual(paper.bare_author_names(), final)
 
     def test_multiple_get_or_create(self):
         date = datetime.date(year=2003,month=4,day=9)
-        paper = get_or_create_paper('Beta-rays in black pudding',
+        paper = self.ccf.get_or_create_paper('Beta-rays in black pudding',
                 map(Name.lookup_name, [('F.','Rodrigo'),('A.','Johnson'),('Pete','Blunsom')]),
                 date)
 
-        paper2 = get_or_create_paper('Beta-rays in black pudding',
+        paper2 = self.ccf.get_or_create_paper('Beta-rays in black pudding',
                 map(Name.lookup_name, [('Frank','Rodrigo'),('A. L.','Johnson'),('P.','Blunsom')]),
                 date)
 
