@@ -92,9 +92,8 @@ def fetch_everything_for_researcher(pk):
         for key,source in sources:
             update_task(key)
             source.fetch(r, incremental=True)
+        update_task(None)
 
-        #fetch_papers_from_core_for_researcher(r)
-        #fetch_papers_from_base_for_researcher(Researcher.objects.get(pk=pk))
     except MetadataSourceException as e:
         raise e
     finally:
@@ -162,6 +161,7 @@ def consolidate_paper(pk):
 
 
 @shared_task(name='update_all_stats')
+@run_only_once('refresh_stats', timeout=3*60)
 def update_all_stats():
     """
     Updates the stats for every model using them
@@ -172,6 +172,7 @@ def update_all_stats():
     AccessStatistics.update_all_stats(Researcher)
 
 @shared_task(name='update_all_stats_but_researchers')
+@run_only_once('refresh_stats', timeout=3*60)
 def update_all_stats_but_researchers():
     """
     Updates the stats for every model using them
