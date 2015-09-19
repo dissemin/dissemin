@@ -66,10 +66,12 @@ class PaperSource(object):
         count = 0
         for p in self.fetch_papers(researcher):
             count += 1
+            print "--- Reseracher task: "+researcher.current_task
             if self.oai:
                 p = self.oai.fetch_accessibility(p)
             if incremental:
-                self.ccf.commitThemAll()
+                self.ccf.load(researcher)
+                self.ccf.cc[researcher.pk].commit()
             if self.max_results is not None and count >= self.max_results:
                 break
 

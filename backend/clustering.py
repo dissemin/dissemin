@@ -331,6 +331,7 @@ class ClusteringContext(object):
 
         MAX_CLUSTER_SIZE_DURING_FETCH = 1000
         NB_TESTS_WITHIN_CLUSTER = 32
+        MAX_NUMBER_OF_CLUSTER_COMPARISONS = 50
 
         # STEP 0: compute relevance
         self.computeRelevance(target)
@@ -343,6 +344,12 @@ class ClusteringContext(object):
             clusters = filter(lambda x: x != target_cluster, self.cluster_ids)
         print("Number of clusters: "+str(len(clusters)))
         print(" ".join([str(self.cluster_size[x]) for x in clusters]))
+
+        # STEP 1': if there are too many clusters, only keep a random selection
+        # of them. We might miss edges, but we cannot afford to run in quadratic
+        # time in these extreme cases.
+        if len(clusters) > MAX_NUMBER_OF_CLUSTER_COMPARISONS:
+            clusters = random.sample(clusters, MAX_NUMBER_OF_CLUSTER_COMPARISONS)
 
         # STEP 2: for each cluster, compute similarity
         nb_edges_added = 0

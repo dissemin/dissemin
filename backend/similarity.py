@@ -101,12 +101,14 @@ class CoauthorsSimilarity(SimilarityFeature):
         self.max_nb_authors = 32
     
     def fetchData(self, author):
+        if author.paper.author_count > self.max_nb_authors:
+            return None
         coauthors = author.paper.author_set.exclude(id=author.id).select_related('name')
         return map(lambda author: (author.name.first,author.name.last), coauthors)
 
     def score(self, dataA, dataB):
         score = 0.
-        if min(len(dataA),len(dataB)) > self.max_nb_authors:
+        if dataA is None or dataB is None:
             return 0.
         for a in dataA:
             for b in dataB:
@@ -143,7 +145,7 @@ class NumberOfAuthorsSimilarity(SimilarityFeature):
         super(NumberOfAuthorsSimilarity, self).__init__()
 
     def fetchData(self, author):
-        return author.paper.author_set.count()
+        return author.paper.author_count
 
     def score(self, dataA, dataB):
         return (-1.)*pow(dataA-dataB, 2)/(dataA+dataB+1)
@@ -205,9 +207,9 @@ class PublicationSimilarity(SimilarityFeature):
         self.languageModel = languageModel
 
     def fetchData(self, author):
-        pubs = author.paper.publication_set.all()
+        pubs = author.paper.publication_set.all()[:5]
         titles = [a.full_title() for a in pubs]
-        for r in author.paper.oairecord_set.all():
+        for r in author.paper.oairecord_set.all()[:5]:
             if r.keywords:
                 titles.append(r.keywords)
         titles = map(lambda t: set(filter_punctuation(tokenize(t))), titles)
