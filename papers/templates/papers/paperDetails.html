@@ -31,7 +31,8 @@
 <span class="detailsTitle">{% trans "Admin zone" %}</span>
 <div class="detailsContent">
     <p><strong>Visibility:</strong> {{ paper.visibility }}</p>
-    <p><strong>Publisher:</strong> {{ paper.publisher }}</p>
+    <p><strong>Fingerprint:</strong> {{ paper.plain_fingerprint }}</p>
+    <p><strong>Fingerprint:</strong> {{ paper.fingerprint }}</p>
     <p><strong>Clusters:</strong></p>
 {% for a in paper.author_set.all %}
 {% if a.cluster %}
