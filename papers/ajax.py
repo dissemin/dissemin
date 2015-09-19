@@ -230,7 +230,7 @@ def waitForConsolidatedField(request):
         success = len(paper.abstract) > 64
     else:
         return HttpResponseForbidden('Invalid field', content_type='text/plain')
-    return HttpResponse(json.dumps({'value':value}), content_type='text/json')
+    return HttpResponse(json.dumps({'success':True,'value':value}), content_type='text/json')
 
 # Author management
 @user_passes_test(is_authenticated)

@@ -204,7 +204,7 @@
     </div>
  {% endif %}
 
- {% if not researcher.orcid %}
+ {% if researcher and not researcher.orcid %}
  <p></p>
  <div class="alert alert-warning">
      <p>
