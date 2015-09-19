@@ -380,7 +380,7 @@ class CrossRefPaperSource(PaperSource):
                     break
             except ValueError as e:
                 raise MetadataSourceException('Error while fetching CrossRef results:\nInvalid response.\n'+
-                        'URL was: %s\nJSON parser error was: %s' % (request,unicode(e))) 
+                        'URL was: %s\nJSON parser error was: %s' % (url,unicode(e))) 
             except requests.exceptions.RequestException as e:
                 raise MetadataSourceException('Error while fetching CrossRef results:\nUnable to open the URL: '+
                         request+'\nError was: '+str(e))
