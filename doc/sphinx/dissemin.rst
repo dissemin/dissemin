@@ -1,12 +1,20 @@
 dissemin package
 ================
 
+Subpackages
+-----------
+
+.. toctree::
+
+    dissemin.scripts
+
 Submodules
 ----------
 
 .. toctree::
 
    dissemin.celery
+   dissemin.debug
    dissemin.settings
    dissemin.urls
    dissemin.wsgi

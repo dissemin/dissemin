@@ -42,6 +42,7 @@ media/
 
 # build files for doc
 doc/sphinx/_build/
+doc/sphinx/*.migrations.*.rst
 
 # Coverage
 .coverage

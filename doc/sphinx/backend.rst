@@ -9,7 +9,6 @@ Submodules
    backend.base
    backend.clustering
    backend.core
-   backend.create
    backend.crossref
    backend.extractors
    backend.globals
@@ -17,6 +16,8 @@ Submodules
    backend.maintenance
    backend.name_cache
    backend.oai
+   backend.orcid
+   backend.papersource
    backend.proxy
    backend.pubtype_translations
    backend.relevance
