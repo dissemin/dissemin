@@ -14,16 +14,20 @@ services: postgresql
 env:
   - DJANGO=1.7.9
 
+virtualenv:
+  system_site_packages: true
+
 before_install:
   - export DJANGO_SETTINGS_MODULE=dissemin.settings
   - export PYTHONPATH=$HOME/builds/wetneb/dissemin
   - export PIP_USE_MIRRORS=true
+  - sudo apt-get install -qq python-numpy python-scipy
 
 install:
   - pip install django==$DJANGO --quiet
   - pip install psycopg2 --quiet
   - pip install -r requirements_frontend.txt
-  - pip install -r requirements_backend.txt
+  - pip install -r requirements_backend_light.txt
 
 before_script:
   - psql -c "CREATE DATABASE mydb;" -U postgres
