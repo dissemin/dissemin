@@ -1,0 +1,17 @@
+django
+celery[redis]
+unidecode
+psycopg2
+django-bootstrap-pagination
+name_tools
+django-cas-ng
+unicode_tex
+wand
+PyPDF2
+-e git://github.com/wetneb/django-allauth.git#egg=django-allauth
+django-redis-cache
+django-solo
+pillow
+django-crispy-forms
+swampdragon
+django-debug-toolbar
