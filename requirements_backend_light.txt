@@ -3,3 +3,4 @@ czipfile
 httplib2
 titlecase
 bibtexparser
+scikit-learn

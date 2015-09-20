@@ -20,7 +20,6 @@ addons:
        - python-scipy
        - python-requests
        - python-lxml
-       - python-sklearn
 
 env:
   - DJANGO=1.7.9
