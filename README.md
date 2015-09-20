@@ -1,7 +1,7 @@
 dissem.in
 ================
 
-[![Documentation Status](https://readthedocs.org/projects/dissemin/badge/?version=latest)](https://readthedocs.org/projects/dissemin/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/dissemin/badge/?version=latest)](https://readthedocs.org/projects/dissemin/?badge=latest) [![Build Status](https://travis-ci.org/wetneb/dissemin.svg)](https://travis-ci.org/wetneb/dissemin)
 
 Web platform showing the articles written by researchers of an institution.
 It highlights the articles that are not freely available while uploading

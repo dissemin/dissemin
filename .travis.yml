@@ -43,4 +43,5 @@ before_script:
 
 script:
   - python manage.py migrate --noinput
+  - python manage.py test
 
