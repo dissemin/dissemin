@@ -1,7 +1,7 @@
 dissem.in
 ================
 
-[![Documentation Status](https://readthedocs.org/projects/dissemin/badge/?version=latest)](https://readthedocs.org/projects/dissemin/?badge=latest) [![Build Status](https://travis-ci.org/wetneb/dissemin.svg)](https://travis-ci.org/wetneb/dissemin)
+[![Documentation Status](https://readthedocs.org/projects/dissemin/badge/?version=latest)](https://readthedocs.org/projects/dissemin/?badge=latest) [![Build Status](https://travis-ci.org/wetneb/dissemin.svg)](https://travis-ci.org/wetneb/dissemin) [![Coverage Status](https://coveralls.io/repos/wetneb/dissemin/badge.svg?branch=master&service=github)](https://coveralls.io/github/wetneb/dissemin?branch=master)
 
 Web platform showing the articles written by researchers of an institution.
 It highlights the articles that are not freely available while uploading
