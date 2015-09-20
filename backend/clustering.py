@@ -620,14 +620,17 @@ class ClusteringContextFactory(object):
                     visibility=visibility)
             p.save()
             for idx, author_name in enumerate(author_names):
-                author_name.save_if_not_saved()
+                name_was_new = author_name.pk is None
+                author_name.save()
+                if name_was_new:
+                    author_name.update_variants()
                 aff = None
                 if affiliations:
                     aff = affiliations[idx]
                 a = Author(name=author_name, paper=p, position=idx, affiliation=aff)
                 a.save()
                 a.update_name_variants_if_needed()
-                if author_name.is_known:
+                if a.name.is_known:
                     self.clusterAuthorLater(a)
 
         if doi:

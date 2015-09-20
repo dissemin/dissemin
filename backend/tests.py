@@ -98,6 +98,8 @@ class PaperSourceTest(PrefilledTest):
         if self.source is None:
             return
         papers = list(self.source.fetch_papers(self.researcher))
+        for p in papers:
+            p.check_authors()
         self.assertTrue(len(papers) > 1)
         self.source.fetch(self.r3)
 
@@ -263,13 +265,17 @@ class OrcidTest(PaperSourceTest):
     def test_update_affiliations(self):
         crps = CrossRefPaperSource(self.ccf)
         crps.fetch(self.r4)
+        p = Paper.objects.get(title='From Natural Language to RDF Graphs with Pregroups')
+        p.check_authors()
         self.source.fetch(self.r4)
         p = Paper.objects.get(title='From Natural Language to RDF Graphs with Pregroups')
+        p.check_authors()
         author = p.author_set.get(position=0)
-        self.assertEqual(author.affiliation, id)
+        self.assertEqual(author.affiliation, self.r4.orcid)
         p = Paper.objects.get(title='Complexity of Grammar Induction for Quantum Types')
+        p.check_authors()
         author = p.author_set.get(position=0)
-        self.assertEqual(author.affiliation, id)
+        self.assertEqual(author.affiliation, self.r4.orcid)
 
 class PaperMethodsTest(PrefilledTest):
     def setUp(self):

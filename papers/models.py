@@ -526,7 +526,7 @@ class Name(models.Model):
 
     # Used to save unsaved names after lookup
     def save_if_not_saved(self):
-        if not self.pk:
+        if self.pk is None:
             # the best_confidence field should already be up to date as it is computed in the lookup
             self.save()
             self.update_variants()
@@ -609,7 +609,7 @@ class Paper(models.Model):
         """
         The author sorted as they should appear. Their names are pre-fetched.
         """
-        return self.author_set.order_by('position').select_related('name')
+        return self.author_set.all().order_by('position').prefetch_related('name')
 
     def author_names(self):
         """
@@ -854,10 +854,18 @@ class Paper(models.Model):
             new_affiliations = [None]*len(new_author_names)
         assert len(new_author_names) == len(new_affiliations)
         old_authors = self.sorted_authors
+
+        # Invalidate cached properties
+        del self.sorted_authors
+        if hasattr(self, 'interesting_authors'):
+            del self.interesting_authors
+
         old_names = map(lambda a: (a.name.first,a.name.last), old_authors)
         unified_names = unify_name_lists(old_names, new_author_names)
+        seen_old_names = set()
         for i, (new_name, (idx,new_idx)) in enumerate(unified_names):
             if idx is not None: # Updating the name of an existing author
+                seen_old_names.add(idx)
                 author = old_authors[idx]
                 if new_name is None:
                     # Delete that author, it was pruned because it already
@@ -878,6 +886,7 @@ class Paper(models.Model):
                     fields.append('affiliation')
                     author.update_name_variants_if_needed()
                 if fields:
+                    author.name.save_if_not_saved()
                     if author.pk:
                         author.save(update_fields=fields)
                     else:
@@ -888,8 +897,17 @@ class Paper(models.Model):
                 # TODO maybe we could cluster it ? -> move this code to the backend?
                 author = Author(paper=self,name=name,position=i,affiliation=new_affiliations[new_idx])
                 author.save()
+        for idx, author in enumerate(old_authors):
+            if idx not in seen_old_names:
+                author.delete()
 
-    # Merge paper into self
+    def check_authors(self):
+        for a in self.author_set.all():
+            if a.name_id is None:
+                raise ValueError("Author references a null name!")
+            elif a.name is None:
+                raise ValueError("Name referenced by author could not be found!")
+
     def merge(self, paper):
         """
         Merges another paper into self. This deletes the other paper.

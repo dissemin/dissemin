@@ -36,7 +36,6 @@ from papers.models import Publication, Paper, Name, OaiSource, OaiRecord
 from papers.bibtex import parse_bibtex
 from papers.orcid import *
 
-import backend.create
 from backend.papersource import PaperSource
 from backend.crossref import fetch_dois, CrossRefPaperSource, convert_to_name_pair
 from backend.name_cache import name_lookup_cache

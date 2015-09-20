@@ -319,6 +319,10 @@ class UnifyNameListsTest(unittest.TestCase):
             [('Jean','Dupont'),('Marie','Dupré'),('Alphonse','de Lamartine')],
             [('J.','Dupont'),('M.','Dupré'),('A.','de Lamartine')]),
             [(('Jean','Dupont'),(0,0)),(('Marie','Dupré'),(1,1)),(('Alphonse','de Lamartine'),(2,2))])
+        self.assertEqual(unify_name_lists(
+            [('Antonin','Delpeuch'),('Anne','Preller')],
+            [('Antonin','Delpeuch'),('Anne','Preller')]),
+            [(('Antonin','Delpeuch'),(0,0)),(('Anne','Preller'),(1,1))])
 
     def test_insertion(self):
         self.assertEqual(unify_name_lists(
