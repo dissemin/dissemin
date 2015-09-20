@@ -4,7 +4,7 @@ Using the Dissemin Virtual Machine
 ==================================
 
 1. Install VirtualBox
-2. Download http://pintoch.ulminfo.fr/DisseminVM.ova
+2. Download http://dev.dissem.in/files/DisseminVM.ova
 3. Run the VM and login to it with user and pass "dissemin"
 4. Go to the local copy, directory "~/dissemin"
 5. Update the local copy by running ./pull_and_update.sh

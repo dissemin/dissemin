@@ -38,6 +38,7 @@ install:
   - pip install -r requirements_frontend_light.txt
   - pip install -r requirements_backend_light.txt
   - pip install coveralls
+  - wget http://dev.dissem.in/files/similarity.pkl -O models/similarity.pkl
 
 before_script:
   - psql -c "CREATE DATABASE dissemin;" -U postgres
