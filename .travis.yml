@@ -45,7 +45,7 @@ before_script:
 
 script:
   - python manage.py migrate --noinput
-  - coverage run --source=dissemin,papers,backend,deposit,upload,statistics manage.py test papers.tests
+  - coverage run --source=dissemin,papers,backend,deposit,upload,statistics manage.py test
 
 after_success:
   - coveralls

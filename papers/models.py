@@ -897,9 +897,15 @@ class Paper(models.Model):
                 # TODO maybe we could cluster it ? -> move this code to the backend?
                 author = Author(paper=self,name=name,position=i,affiliation=new_affiliations[new_idx])
                 author.save()
+        
+        # Just in case unify_name_lists pruned authors without telling us…
         for idx, author in enumerate(old_authors):
             if idx not in seen_old_names:
                 author.delete()
+
+        # Invalidate our local cache
+        if hasattr(self, 'sorted_authors'):
+            del self.sorted_authors
 
     def check_authors(self):
         for a in self.author_set.all():
