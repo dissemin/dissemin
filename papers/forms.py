@@ -65,7 +65,7 @@ class AddUnaffiliatedResearcherForm(forms.Form):
                 self.add_error('last',
                     forms.ValidationError(_('A last name is required.'), code='required'))
             elif not cleaned_data.get('first') and not cleaned_data.get('last') and 'orcid' not in self.errors:
-                raise forms.ValidationError(_('A name or an ORCID identifier are required.'), code='empty')
+                raise forms.ValidationError(_('A name or an ORCID identifier is required.'), code='empty')
         return cleaned_data
 
 

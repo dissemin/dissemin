@@ -770,7 +770,7 @@ class Paper(models.Model):
         if self.oa_status == 'OK' and self.pdf_url is None:
             return _('This paper was not found in any repository, but could be made available legally by the author.')
         if self.oa_status == 'NOK':
-            return _('The publisher of this paper forbids its archiving.')
+            return _('Distributing this paper is prohibited by the publisher')
         if self.oa_status == 'UNK':
             return _('This paper was not found in any repository; the policy of its publisher is unknown or unclear.')
 
