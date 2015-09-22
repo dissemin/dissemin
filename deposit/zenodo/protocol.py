@@ -129,10 +129,16 @@ class ZenodoProtocol(RepositoryProtocol):
             log = log_request(r, 200, __('Unable to submit paper metadata to Zenodo.'))
             
             # Deleting the deposition
-            self.log("### Deleting the deposition")
-            r = requests.delete(self.api_url+"/%s?access_token=%s" % ( deposition_id, api_key) )
-        #    r = requests.post("https://zenodo.org/api/deposit/depositions/%s/actions/publish?access_token=2SsQE9VkkgDQG1WDjrvrZqTJtkmsGHICEaccBY6iAEuBlSTdMC6QvcTR2HRv" % deposition_id)
-        #   print(r.status_code)
+            #self.log("### Deleting the deposition")
+            #r = requests.delete(self.api_url+"/%s?access_token=%s" % ( deposition_id, api_key) )
+            self.log("### Publishing the deposition")
+            r = requests.post(self.api_url+"/%s/actions/publish?access_token=%s" % (deposition_id, api_key))
+            log = log_request(r, 202, __('Unable to publish the deposition on Zenodo.'))
+            self.log(r.text)
+            deposition_object = r.json()
+            deposit_result.splash_url = deposition_object['record_url'] 
+            deposit_result.pdf_url = deposit_result.splash_url + '/files/article.pdf'
+
         except DepositError as e:
             raise e
         except Exception as e:
@@ -140,9 +146,6 @@ class ZenodoProtocol(RepositoryProtocol):
             self.log(str(type(e))+': '+str(e)+'')
             self.log(traceback.format_exc())
             raise DepositError('Connection to Zenodo failed. Please try again later.')
-
-        deposit_result.splash_url = 'https://zenodo.org/record/%d' % deposition_id
-        deposit_result.pdf_url = 'https://zenodo.org/record/%d/files/article.pdf' % deposition_id
 
         return deposit_result
 
