@@ -137,8 +137,6 @@ def newUnaffiliatedResearcher(request):
                     return HttpResponse(json.dumps({'disambiguation':candidates}))
 
             researcher = Researcher.get_or_create_by_name(first, last)
-            # TODO recluster batch only if created
-            researcher.recluster_batch()
         researcher.fetch_everything_if_outdated()
         return HttpResponse(json.dumps({'url':researcher.url}))
     else:

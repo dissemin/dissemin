@@ -504,6 +504,21 @@ class ClusteringContextFactory(object):
         self.load(researcher)
         self.authors_to_cluster.append((author,researcher))
 
+    def clusterPendingAuthorsForResearcher(self, researcher):
+        """
+        Flushes the queue of authors to be clustered for a given
+        researcher. (Runs clustering for them and commits them.)
+        """
+        self.load(researcher)
+        remaining = []
+        for (author,r) in self.authors_to_cluster:
+            if r == researcher:
+                self.clusterAuthor(author, r)
+            else:
+                remaining.append((author,r))
+        self.authors_to_cluster = remaining
+        self.cc[researcher.pk].commit()
+
     def clusterAuthor(self, author, researcher):
         """
         Run the clustering for a given author / researcher pair.
@@ -530,6 +545,7 @@ class ClusteringContextFactory(object):
             self.clusterAuthor(author, researcher)
             seen_researchers.add(researcher)
         self.authors_to_cluster = []
+        # TODO does it really make sense to update the stats BEFORE authors are commited ???
         for r in seen_researchers:
             r.update_stats()
   

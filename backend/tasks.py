@@ -86,25 +86,29 @@ def fetch_everything_for_researcher(pk):
         ('base',BasePaperSource(ccf, max_results=200)),
        # ('core',CorePaperSource(ccf, max_results=250)),
        ]
+    r = Researcher.objects.get(pk=pk)
+
+    # If it is the first time we fetch this researcher
+    if r.stats is None:
+        # make sure publications already known are also considered
+        ccf.reclusterBatch(r)
     try:
-        r = Researcher.objects.get(pk=pk)
-        update_task = lambda name: update_researcher_task(r, name)
         for key,source in sources:
-            update_task(key)
+            update_researcher_task(r, key)
             source.fetch(r, incremental=True)
-        update_task(None)
+        update_researcher_task(r, None)
 
     except MetadataSourceException as e:
         raise e
     finally:
-        update_task('clustering')
+        update_researcher_task(r, 'clustering')
         ccf.commitThemAll()
         ccf.unloadResearcher(pk)
         r = Researcher.objects.get(pk=pk)
-        update_task('stats')
+        update_researcher_task(r, 'stats')
         r.update_stats()
         r.harvester = None
-        update_task(None)
+        update_researcher_task(r, None)
 
 @shared_task(name='fetch_records_for_researcher')
 def fetch_records_for_researcher(pk, signature=True):
@@ -118,6 +122,7 @@ def fetch_records_for_researcher(pk, signature=True):
     fetch_records_for_name(researcher.name, signature=signature)
 
 @shared_task(name='recluster_researcher')
+@run_only_once('researcher', keys=['pk'], timeout=15*60)
 def recluster_researcher(pk):
     ccf = get_ccf()
     try:

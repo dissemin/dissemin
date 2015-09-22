@@ -95,7 +95,9 @@ def affiliate_author_with_orcid(ref_name, orcid, authors, initial_affiliations=N
         if cur_similarity > max_sim:
             max_sim_idx = idx
             max_sim = cur_similarity
-    affiliations = initial_affiliations or [None]*len(authors)
+    affiliations = [None]*len(authors)
+    if initial_affiliations and len(initial_affiliations) == len(authors):
+        affiliations = initial_affiliations
     if max_sim_idx is not None:
         affiliations[max_sim_idx] = orcid
     return affiliations
