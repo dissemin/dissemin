@@ -1,0 +1,5 @@
+#!/bin/sh
+
+read line;
+curl -d url=$line http://ulminfo.fr:8765/l10n
+

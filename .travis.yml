@@ -22,6 +22,7 @@ addons:
        - python-scipy
        - python-requests
        - python-lxml
+       - curl
 
 env:
   - DJANGO=1.7.9
@@ -48,6 +49,7 @@ before_script:
 script:
   - python manage.py migrate --noinput
   - coverage run --source=dissemin,papers,backend,deposit,upload,statistics manage.py test
+  - ./update_translations.sh | ./devutils/txtp | ./devutils/l10n_to_gitbot
 
 after_success:
   - coveralls
