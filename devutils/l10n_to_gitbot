@@ -1,5 +1,6 @@
 #!/bin/sh
 
 read line;
-curl -d url=$line http://ulminfo.fr:8765/l10n
+echo $line;
+echo curl --data-urlencode "url=$line" http://ulminfo.fr:8765/l10n
 

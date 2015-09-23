@@ -3,7 +3,6 @@
 # update translations, report missing and fuzzy translations
 
 if [ -z "$TRAVIS" ]; then
-    echo "CD"
     # go into directory of script
     DIR="$( cd "$( dirname "$0" )" && pwd )"
     cd "$DIR"
