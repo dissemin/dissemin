@@ -265,14 +265,17 @@ texinfo_documents = [
 
 # Mock LXML
 import sys
-from mock import Mock as MagicMock
-from mock import patch
 
-class Mock(MagicMock):
-    @classmethod
-    def __getattr__(cls, name):
-        return Mock()
-    __all__ = []
+import mock
+
+#from mock import Mock as MagicMock
+#from mock import patch
+
+#class Mock(MagicMock):
+#    @classmethod
+#    def __getattr__(cls, name):
+#        return Mock()
+#    __all__ = []
 
 MOCK_MODULES = [
     'lxml', 'lxml.html', 'lxml.html.clean',
@@ -284,7 +287,10 @@ MOCK_MODULES = [
     'bibtexparser', 'bibtexparser.bparser', 'bibtexparser.customization',
     'psycopg2', 'django.db.backends.postgresql_psycopg2',
     ]
-patch.dict('sys.modules', **{name:Mock() for name in MOCK_MODULES})
+
+for mod_name in MOCK_MODULES:
+       sys.modules[mod_name] = mock.Mock()
+#patch.dict('sys.modules', **{name:Mock() for name in MOCK_MODULES})
 
 # Snippet to document Django models
 # https://djangosnippets.org/snippets/2533/
