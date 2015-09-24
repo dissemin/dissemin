@@ -271,10 +271,10 @@ import mock
 #from mock import Mock as MagicMock
 #from mock import patch
 
-class BetterMock(Mock):
+class BetterMock(mock.Mock):
     @classmethod
     def __getattr__(cls, name):
-        return Mock()
+        return BetterMock()
 #    __all__ = []
 
 MOCK_MODULES = [
@@ -292,7 +292,7 @@ MOCK_MODULES = [
     ]
 
 for mod_name in MOCK_MODULES:
-       sys.modules[mod_name] = mock.BetterMock()
+       sys.modules[mod_name] = BetterMock()
 #patch.dict('sys.modules', **{name:Mock() for name in MOCK_MODULES})
 
 # Snippet to document Django models
