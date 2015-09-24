@@ -1,38 +1,12 @@
 dissem.in
 ================
 
-[![Documentation Status](https://readthedocs.org/projects/dissemin/badge/?version=latest)](https://readthedocs.org/projects/dissemin/?badge=latest) [![Build Status](https://travis-ci.org/wetneb/dissemin.svg)](https://travis-ci.org/wetneb/dissemin) [![Coverage Status](https://coveralls.io/repos/wetneb/dissemin/badge.svg?branch=master&service=github)](https://coveralls.io/github/wetneb/dissemin?branch=master)
+[![Documentation Status](https://readthedocs.org/projects/dissemin/badge/?version=latest)](http://dev.dissem.in/doc/) [![Build Status](https://travis-ci.org/wetneb/dissemin.svg)](https://travis-ci.org/wetneb/dissemin) [![Coverage Status](https://coveralls.io/repos/wetneb/dissemin/badge.svg?branch=master&service=github)](https://coveralls.io/github/wetneb/dissemin?branch=master)
 
-Web platform showing the articles written by researchers of an institution.
-It highlights the articles that are not freely available while uploading
-them would comply with the publisher's policy.
+Web platform to help researchers upload their papers to open repositories.
+Released under the [Affero General Public License](http://www.gnu.org/licenses/agpl-3.0.en.html).
 
-Data sources:
-* OAI-PMH, through a proxy
-* CrossRef.org, through a proxy
-* SHERPA/RoMEO
-* Bielefeld Academic Search Engine (BASE)
-* CORE
-
-Dependencies:
-* Python 2.7 (should work with Python 3)
-* Django
-* Celery
-* PyOAI
-* unidecode
-* psycopg2
-* django-bootstrap-pagination
-* name\_tools
-
-To use the RoMEO backend, it is useful to use a free api key. Write your api key in
-the file `romeo_api_key` at the root of the repository so that dissemin can use it.
-
-Installation instructions are provided in `INSTALL`.
-
-Demo
-----
-
-An instance can be found here:
-http://ens.dissem.in/
-
+* [Project's homepage](http://dissem.in)
+* [Documentation](http://dev.dissem.in/doc)
+* [To do list](https://github.com/wetneb/dissemin/issues)
 
