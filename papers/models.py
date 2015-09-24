@@ -1030,7 +1030,7 @@ class Paper(models.Model):
                 self.sorted_authors[0].name.last,
                 self.sorted_authors[1].name.last)
         else:
-            result = "%s et. al." % (
+            result = "%s et al." % (
                 self.sorted_authors[0].name.last)
         result += ', %d' % self.year
         return result
