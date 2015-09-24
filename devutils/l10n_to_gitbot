@@ -1,6 +1,8 @@
 #!/bin/sh
 
-read line;
-echo $line;
-curl --data-urlencode "url=$line" http://ulminfo.fr:8765/l10n
+read lines;
+echo "$lines to be translated";
+if [ $lines -gt 0 ]; then
+    curl --data-urlencode "nblines=$lines" http://ulminfo.fr:8765/l10n
+fi
 
