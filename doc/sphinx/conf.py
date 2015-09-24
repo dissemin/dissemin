@@ -271,10 +271,10 @@ import mock
 #from mock import Mock as MagicMock
 #from mock import patch
 
-#class Mock(MagicMock):
-#    @classmethod
-#    def __getattr__(cls, name):
-#        return Mock()
+class BetterMock(Mock):
+    @classmethod
+    def __getattr__(cls, name):
+        return Mock()
 #    __all__ = []
 
 MOCK_MODULES = [
@@ -285,11 +285,14 @@ MOCK_MODULES = [
     'sklearn', 'sklearn.metrics', 'sklearn.preprocessing', 'sklearn.svm',
     'titlecase', 'titlecase.titlecase',
     'bibtexparser', 'bibtexparser.bparser', 'bibtexparser.customization',
-    'psycopg2', 'django.db.backends.postgresql_psycopg2',
+    'psycopg2', 'django.db.backends.postgresql_psycopg2','django.db.backends.postgresql_psycopg2.base',
+    'django.db.backends.postgresql_psycopg2.client', 'django.db.backends.postgresql_psycopg2.creation',
+    'django.db.backends.postgresql_psycopg2.introspection', 'django.db.backends.postgresql_psycopg2.operations',
+    'django.db.backends.postgresql_psycopg2.schema', 'django.db.backends.postgresql_psycopg2.versions',
     ]
 
 for mod_name in MOCK_MODULES:
-       sys.modules[mod_name] = mock.Mock()
+       sys.modules[mod_name] = mock.BetterMock()
 #patch.dict('sys.modules', **{name:Mock() for name in MOCK_MODULES})
 
 # Snippet to document Django models
