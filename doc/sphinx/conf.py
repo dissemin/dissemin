@@ -265,7 +265,7 @@ texinfo_documents = [
 
 # Mock LXML
 import sys
-from mock import MagicMock
+from mock import MagicMock, patch
 
 class Mock(MagicMock):
     @classmethod
@@ -277,8 +277,9 @@ MOCK_MODULES = [
     'wand.exceptions', 'PyPDF2', 'PyPDF2.utils',
     'numpy', 'sklearn', 'sklearn.metrics', 'sklearn.preprocessing', 'titlecase',
     'bibtexparser', 'bibtexparser.bparser', 'bibtexparser.customization',
+    'psycopg2'
     ]
-sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES)
+patch.dict('sys.modules', **{name:MagicMock() for name in MOCK_MODULES})
 
 # Snippet to document Django models
 # https://djangosnippets.org/snippets/2533/
