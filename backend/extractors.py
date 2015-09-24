@@ -23,6 +23,7 @@ from __future__ import unicode_literals
 from papers.models import OaiSource
 
 import re
+import os
 
 class URLExtractor(object):
     def __init__(self):
@@ -182,9 +183,12 @@ oai_sources = [
         ('numdam', 'Numdam', False, 10, 'journal-article'),
         ]
 
-for identifier, name, oa, priority, pubtype in oai_sources:
-    OaiSource.objects.get_or_create(identifier=identifier,
-            defaults={'name':name,'oa':oa,'priority':priority,'default_pubtype':pubtype})
+if os.environ.get('READTHEDOCS', None) != 'True':
+
+    # Auto-create all the Oai Sources when this module is imported
+    for identifier, name, oa, priority, pubtype in oai_sources:
+        OaiSource.objects.get_or_create(identifier=identifier,
+                defaults={'name':name,'oa':oa,'priority':priority,'default_pubtype':pubtype})
 
 
 
