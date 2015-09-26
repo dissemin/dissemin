@@ -143,7 +143,8 @@ class OaiPaperSource(PaperSource):
         Computes the accessibility of a given paper,
         by fetching preprints from OAI-PMH
         """
-        self.fetch_records_for_fingerprint(paper.fingerprint)
+        for p in self.fetch_records_for_fingerprint(paper.fingerprint):
+            continue
         return paper
 
     def fetch_records_for_signature(self, ident):
