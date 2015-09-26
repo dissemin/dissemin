@@ -73,6 +73,7 @@ def init_profile_from_orcid(pk):
     update_task('clustering')
     ccf.reclusterBatch(r)
     fetch_everything_for_researcher(pk)
+    del ccf
 
 @shared_task(name='fetch_everything_for_researcher')
 @run_only_once('researcher', keys=['pk'], timeout=15*60)
@@ -109,6 +110,7 @@ def fetch_everything_for_researcher(pk):
         r.update_stats()
         r.harvester = None
         update_researcher_task(r, None)
+        del ccf
 
 @shared_task(name='fetch_records_for_researcher')
 def fetch_records_for_researcher(pk, signature=True):
@@ -131,6 +133,7 @@ def recluster_researcher(pk):
     finally:
         r.update_stats()
         update_researcher_task(r, None)
+    del ccf
 
 @shared_task(name='change_publisher_oa_status')
 def change_publisher_oa_status(pk, status):
