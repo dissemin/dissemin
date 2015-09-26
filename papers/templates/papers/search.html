@@ -22,9 +22,6 @@
     $(function(){
        $('.logoHelpPopover').popover({trigger: "hover"});
     });
-    function changeDisplay () {
-	   $(".ulContainer").toggleClass("mosaic-on");
-	}
 {% if researcher.current_task %}
     function refreshPapers() {
     $.ajax({url:window.location.href,
@@ -123,11 +120,6 @@
         </div>
     </div>
 {% endif %}
-
-<span class="detailsTitle">{% trans "Display" %}</span>
-<div class="detailsContent">
-  <p><a href="#" onclick="changeDisplay(); return false;">{% trans "Change display mode" %}</a></p>
-</div>
 
 <span class="detailsTitle">{% trans "Refine search" %}</span>
 <div class="detailsContent">
