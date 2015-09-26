@@ -66,12 +66,12 @@ EMAIL_USE_TLS = True
 # RoMEO API KEY
 # Used to fetch publisher policies. Get one at
 # http://www.sherpa.ac.uk/romeo/apiregistry.php
-ROMEO_API_KEY = 'XwGyK6xaDYo'
+ROMEO_API_KEY = None
 
 # CORE API key
 # Used to fetch full text availability. Get one at
 # http://www.sherpa.ac.uk/romeo/apiregistry.php
-CORE_API_KEY = '1bpBFx1w3frRfNIM21gLKSzlISVkWBx5'
+CORE_API_KEY = None 
 
 ### DOI proxy ###
 # The interface where to get DOI metadata from.
@@ -123,11 +123,11 @@ PROFILE_REFRESH_ON_LOGIN = timedelta(days=1)
 # This is used by django to generate various things (mainly for 
 # authentication). Just pick a fairly random string and keep it
 # secret.
-SECRET_KEY = '40@!t4mmh732auni983e0J!LD87987465000a97e96e8c%ok(8+7th8pg^hy1'
+SECRET_KEY = '40@!t4mmh7325-^wh+jo3teu^!yj3lfz5p%ok(8+7th8pg^hy1'
 
 ### Debug mode ###
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 #DEBUG_TOOLBAR_CONFIG = {'SHOW_TOOLBAR_CALLBACK': lambda r: True}
 
 # This can safely (and should) be kept to True
@@ -136,7 +136,7 @@ TEMPLATE_DEBUG = True
 ### Allowed hosts ###
 # They are the domains under which your dissemin instance should
 # be reachable
-ALLOWED_HOSTS = ['localhost','orcid.dissem.in']
+ALLOWED_HOSTS = ['localhost']
 
 
 ### Central Authentication System ###
@@ -228,9 +228,9 @@ WSGI_APPLICATION = 'dissemin.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dissemin_orcid',
-        'USER': 'dissemin_orcid',
-        'PASSWORD': 'dec749551b7012ad4de7db11e18',
+        'NAME': 'dissemin',
+        'USER': 'dissemin',
+        'PASSWORD': 'dissemin',
         'HOST': 'localhost'
     }
 }
