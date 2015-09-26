@@ -18,9 +18,67 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
+"""
+This module defines the :class:`AccessStatistics` model. It stores statistics
+about the accessiblity status of papers related to any model
+(currently :class:`.Researcher`, :class:`.Journal`, :class:`.Publisher`,
+:class:`.Department`, :class:`.Institution` and :class:`.PaperWorld`).
+
+As all these modules are spread in different apps and link to :class:`AccessStatistics`,
+this model has been separated from the rest for dependency reasons.
+
+The different states a paper can have are defined in :py:obj:`COMBINED_STATUS_CHOICES`
+(where a human-readable description is given), :py:obj:`STATUS_QUERYSET_FILTER`
+(where the corresponding QuerySet filters are defined) and in :py:func:`combined_status_for_instance`
+which computes the status of a particular paper.
+"""
+
 from __future__ import unicode_literals
 
 from django.db import models
+from django.db.models import Q
+from django.utils.translation import ugettext_lazy as _
+
+#: Paper status (combined because it takes into account
+#: both the publisher policy and the full text availability).
+#:
+#: If these states are changed, then the filters :py:obj:`STATUS_QUERYSET_FILTER`
+#: have to be updated, as well as :py:func:`combined_status_for_instance`.
+COMBINED_STATUS_CHOICES = [
+    ('oa', _('Available from the publisher')),
+    ('ok', _('Available from the author')),
+    ('couldbe', _('Could be shared by the authors')),
+    ('unk', _('Unknown/unclear sharing policy')),
+    ('closed', _('Publisher forbids sharing')),
+    ]
+
+#: Filters associated to each combined status choice
+#: These filters, once applied to a queryset of Papers,
+#: select the papers in the given state.
+STATUS_QUERYSET_FILTER = {
+    'oa': lambda q: q.filter(oa_status='OA'),
+    'ok': lambda q: q.filter(Q(pdf_url__isnull=False) & ~Q(oa_status=='OA')),
+    'couldbe': lambda q: q.filter(pdf_url__isnull=True, oa_status='OK'),
+    'unk': lambda q: q.filter(pdf_url__isnull=True, oa_status='UNK'),
+    'closed': lambda q: q.filter(pdf_url__isnull=True, oa_status='NOK'),
+    }
+
+def combined_status_for_instance(paper):
+    """
+    Computes the current combined status of a given paper.
+    This is defined here so that the function can be easily updated when
+    we change :py:obj:`STATUS_QUERYSET_FILTER` or :py:obj:`COMBINED_STATUS_CHOICES`.
+    """
+    if paper.oa_status == 'OA':
+        return 'oa'
+    elif paper.pdf_url:
+        return 'ok'
+    else:
+        if paper.oa_status == 'OK':
+            return 'couldbe'
+        elif paper.oa_status == 'NOK':
+            return 'closed'
+    return 'unk'
 
 class AccessStatistics(models.Model):
     """
@@ -35,56 +93,60 @@ class AccessStatistics(models.Model):
 
     def update(self, queryset):
         """
-        Updates the statistics for papers contained in the given Paper queryset
+        Updates the statistics for papers contained in the given :py:class:`Paper` queryset
         """
         queryset = queryset.filter(visibility="VISIBLE")
-        self.num_oa = queryset.filter(oa_status='OA').count()
-        self.num_ok = queryset.filter(pdf_url__isnull=False).count() - self.num_oa
-        self.num_couldbe = queryset.filter(pdf_url__isnull=True, oa_status='OK').count()
-        self.num_unk = queryset.filter(pdf_url__isnull=True, oa_status='UNK').count()
-        self.num_closed = queryset.filter(pdf_url__isnull=True, oa_status='NOK').count()
+        for key, modifier in STATUS_QUERYSET_FILTER.items():
+            self.__dict__['num_'+key] = modifier(queryset).count()
         self.num_tot = queryset.count()
         self.save()
 
     @property
     def num_available(self):
+        """
+        Total number of available items (from publisher or author)
+        """
         return self.num_oa + self.num_ok
+
     @property
     def num_unavailable(self):
+        """
+        Total number of unavailable items
+        """
         return self.num_couldbe + self.num_unk + self.num_closed
 
     @property
-    def percentage_oa(self):
+    def percentages(self):
+        """
+        A dictionary whose keys are the identifiers for the paper states
+        and whose values are the percentages of these states for the given statistics.
+        """
         if self.num_tot:
-            return int(100.*self.num_oa/self.num_tot)
-    @property
-    def percentage_ok(self):
-        if self.num_tot:
-            return int(100.*self.num_ok/self.num_tot)
-    @property
-    def percentage_couldbe(self):
-        if self.num_tot:
-            return int(100.*self.num_couldbe/self.num_tot)
-    @property
-    def percentage_unk(self):
-        return 100 - (self.percentage_oa + self.percentage_ok +
-            self.percentage_closed + self.percentage_couldbe)
-    @property
-    def percentage_closed(self):
-        if self.num_tot:
-            return int(100.*self.num_closed/self.num_tot)
+            return {key: 100.*self.__dict__['num_'+key]/self.num_tot for key in STATUS_QUERYSET_FILTER}
+
     @property
     def percentage_available(self):
+        """
+        Percentage of available items
+        """
         if self.num_tot:
             return int(100.*(self.num_oa + self.num_ok)/self.num_tot)
     @property
     def percentage_unavailable(self):
+        """
+        Percentage of unavailable items
+        """
         if self.num_tot:
             return int(100.*(self.num_couldbe + self.num_unk + self.num_closed)/self.num_tot)
             
 
     @classmethod
     def update_all_stats(self, _class):
+        """
+        Update all statistics for the objects of a given class.
+        This calls the underlying :py:meth:`!update_stats()` function for each instance
+        of the model.
+        """
         for x in _class.objects.all():
             x.update_stats()
 

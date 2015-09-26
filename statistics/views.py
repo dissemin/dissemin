@@ -16,6 +16,9 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
+"""
+This app does not contain any view yet.
+"""
+
 from django.shortcuts import render
 
-# Create your views here.

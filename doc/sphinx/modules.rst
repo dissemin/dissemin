@@ -7,11 +7,8 @@
    backend
    deposit
    dissemin
-   load_dump
    manage
    papers
    publishers
-   r
    statistics
-   sword
    upload

@@ -18,6 +18,38 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
+"""
+This module defines most of the models used in the platform.
+
+* :class:`Paper` represents a (deduplicated) paper.
+   The sources it has been discovered from are witnessed
+   by two types of records:
+    * :class:`Publication` instances are created by the CrossRef source
+      and indicate the DOI, the citation details (publisher, journal, pages, volume...)
+    * :class:`OaiRecord` instances are created by OAI-PMH sources, BASE or CORE,
+      and indicate the availability of the paper in repositories.
+      They link to an :class:`OaiSource` object that indicates what data source
+      we have got this record from.
+   Multiple :class:`Publication` and :class:`OaiRecord` can (and typically are) associated
+   with a paper, when the metadata they contain yield the same paper fingerprint.
+
+* :class:`Researcher` represents a researcher profile (a physical person).
+   This person has a cannonical :class:`Name`, but can also be associated with
+   other names through a :class:`NameVariant` relation (indicating a confidence value
+   for the association of the name with this reseracher).
+
+* :class:`Author` objects represent the occurrence of a :class:`Name` in the author list
+   of a :class:`Paper`. When we are confident that this name actually refers to a
+   given :class:`Researcher`, the :class:`Author` object has a link to it.
+   All the authors that could potentially be associated with a given :class:`Researcher`
+   (that is when their name is a :class:`NameVariant` for that researcher) are clustered
+   in groups by merging similar authors (i.e. authors associated to similar papers).
+   
+* Researchers can be organized into :class:`Department` instances, which belong to an
+  :class:`Institution`.
+
+"""
+
 from __future__ import unicode_literals
 from django.db import models
 from django.core.exceptions import ObjectDoesNotExist

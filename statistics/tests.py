@@ -16,6 +16,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from django.test import TestCase
+"""
+This app does not define any tests yet.
+"""
 
-# Create your tests here.
+from django.test import TestCase
