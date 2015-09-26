@@ -70,7 +70,7 @@ from papers.name import match_names, name_similarity, unify_name_lists
 from papers.utils import remove_diacritics, sanitize_html, validate_orcid, affiliation_is_greater
 from papers.orcid import OrcidProfile
 
-from statistics.models import AccessStatistics
+from statistics.models import AccessStatistics, COMBINED_STATUS_CHOICES, PDF_STATUS_CHOICES
 from publishers.models import Publisher, Journal, OA_STATUS_CHOICES, OA_STATUS_PREFERENCE, DummyPublisher
 from upload.models import UploadedPDF
 from dissemin.settings import PROFILE_REFRESH_ON_LOGIN
@@ -79,23 +79,11 @@ import hashlib, re
 from datetime import datetime, timedelta
 from urllib import urlencode, quote # for the Google Scholar and CORE link
 
-
-PDF_STATUS_CHOICES = [('OK', _('Available')),
-                      ('NOK', _('Unavailable'))]
-
 VISIBILITY_CHOICES = [('VISIBLE', _('Visible')),
                       ('CANDIDATE', _('Candidate')),
                       ('NOT_RELEVANT', _('Not relevant')),
                       ('DELETED', _('Deleted')),
                       ]
-
-COMBINED_STATUS_CHOICES = [
-   ('oa', _('Open access')),
-   ('ok', _('Preprint available')),
-   ('couldbe', _('Unavailable but compatible')),
-   ('unk', _('Unknown status')),
-   ('closed', _('Preprints forbidden'))
-]
 
 PAPER_TYPE_CHOICES = [
    ('journal-article', _('Journal article')),

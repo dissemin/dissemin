@@ -78,7 +78,6 @@
         {% if request.user.is_superuser and researcher.email %}
         <p>{% trans "Address:" %} {{ researcher.email }}</p>
         {% endif %}
-        {% include "statistics/pie.html" with obj=researcher stats_counter=1 %}
         {% if request.user.is_superuser %}
         <p>{% trans "Names:" %}
             <ul>
@@ -90,6 +89,7 @@
          <a href="{% url 'refetch-researcher' researcher.pk %}" class="btn btn-default">{% trans "Refresh papers" %}</a><br />
          <a href="{% url 'recluster-researcher' researcher.pk %}" class="btn btn-default">{% trans "Refresh classification" %}</a>
          {% endif %}
+        {% include "statistics/pie.html" with obj=researcher stats_counter=1 %}
     </div>
 {% elif name %}
 <span class="detailsTitle">{% trans "Name" %}</span>
@@ -109,6 +109,11 @@
         <div class="pubLogo"><div class="pubLogoPic-{{ journal.publisher.oa_status }}"></div></div>
         <div class="criterionItem">{{ journal.publisher.oa_status |explain_oa_status}}</div>
         </div>
+
+    <p>{% blocktrans trimmed %}
+    <span id="nbPapersFound">{{ nb_results }}</span> papers found
+    {% endblocktrans %}
+    </p>
     </div>
 {% elif publisher %}
 <span class="detailsTitle">{% trans "Publisher" %}</span>
@@ -118,17 +123,18 @@
         <div class="pubLogo"><div class="pubLogoPic-{{ publisher.oa_status }}"></div></div>
         <div class="criterionItem">{{ publisher.oa_status |explain_oa_status}}</div>
         </div>
+
+    <p>{% blocktrans trimmed %}
+    <span id="nbPapersFound">{{ nb_results }}</span> papers found
+    {% endblocktrans %}
+    </p>
     </div>
 {% endif %}
 
 <span class="detailsTitle">{% trans "Refine search" %}</span>
 <div class="detailsContent">
-    <p>{% blocktrans trimmed %}
-    <span id="nbPapersFound">{{ nb_results }}</span> papers found
-    {% endblocktrans %}
-    </p>
 
-{% if not journal and not publisher %}
+{% if not journal and not publisher and request.user.is_superuser %}
 <p class="criterion">{% trans "By publisher policy:" %}</p>
 {% for st in oa_status_choices %}
 <div class="{% if st.0 == status %}selectedCriterion{% else %}unselectedCriterion{% endif %} logoHelpPopover"
@@ -143,6 +149,7 @@
 {% endfor %}
 {% endif %}
 
+{% if request.user.is_superuser %}
 <p class="criterion">{% trans "By full text availability:" %}</p>
 {% for st in pdf_status_choices %}
 <div class="{% if st.0 == pdf %}selectedCriterion{% else %}unselectedCriterion{% endif %}">
@@ -154,6 +161,7 @@
     </div>
 </div>
 {% endfor %}
+{% endif %}
 
 <p class="criterion">{% trans "By document type:" %}</p>
 <ul>

@@ -1,7 +1,7 @@
 var stats_colors = ["#F68212", "#FCD821", "#419BE8", "#eeeeee", "#122B52"];
 var stats_colors_aggregated = ["#D2ED1D", "#E62029"];
 
-function showStatsPie (detailed_data, aggregated_data, target_id) {
+function showStatsPie (detailed_data, aggregated_data, target_id, current_state) {
     var w = 220, h = 145;
 	var r = 100, mr = 50, imr = 45, ir = 40; // radii
     var color = d3.scale.ordinal().range(stats_colors);
@@ -117,7 +117,7 @@ function showStatsPie (detailed_data, aggregated_data, target_id) {
         .text(function(d, i) { return (aggregated_data[i].label); });
 
 	var captions = d3.select("#"+target_id).select(".statspie_caption");
-    makeCaptions(detailed_data, captions);
+    makeCaptions(detailed_data, captions, current_state);
 
     function updatePie(data) {
         var newDetailedData = data['detailed'];
@@ -155,7 +155,7 @@ function showStatsPie (detailed_data, aggregated_data, target_id) {
     return updatePie;
 }
 
-function makeCaptions (data, target) {
+function makeCaptions (data, target, current_state) {
 	var captions = target.selectAll("div")
 		.data(data)
 		.enter()
@@ -167,8 +167,18 @@ function makeCaptions (data, target) {
 			.style("background-color", function(d, i) {return stats_colors[i]; })
 
 		captions.append("a")
-			.attr("class", "stats_caption_text")
-            .attr("href", function(d) { return d.url })
+			.attr("class", function(d) {
+                if(d.id == current_state){
+                    return "stats_caption_label_activated";
+                } else {
+                    return "stats_caption_label"; }
+            })
+            .attr("href", function(d) {
+                if(d.id == current_state) {
+                    return d.baseurl;
+                } else {
+                    return d.url;
+                } })
 			.text(function(d) { return d.label; })
 			.append("span")
 				.attr("class", "detail")

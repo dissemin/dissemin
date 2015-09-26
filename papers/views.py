@@ -47,6 +47,7 @@ from deposit.models import *
 
 from publishers.views import varyQueryArguments
 from publishers.models import OA_STATUS_CHOICES
+from statistics.models import COMBINED_STATUS_CHOICES, STATUS_QUERYSET_FILTER, PDF_STATUS_CHOICES
 from dissemin.settings import MEDIA_ROOT, UNIVERSITY_BRANDING, DEPOSIT_MAX_FILE_SIZE 
 
 from allauth.socialaccount.signals import post_social_login
@@ -137,6 +138,11 @@ def searchView(request, **kwargs):
         head_search_description = unicode(publisher)
         context['publisher'] = publisher
         context['breadcrumbs'] = publisher.breadcrumbs()+[(_('Papers'),'')]
+    if 'state' in args:
+        state = args.get('state')
+        context['state'] = state
+        state_filter = STATUS_QUERYSET_FILTER.get(state)
+        queryset = state_filter(queryset)
     if 'status' in args:
         queryset = queryset.filter(oa_status=args.get('status'))
         # We don't update the search description here, it will be displayed on the side
@@ -194,9 +200,11 @@ def searchView(request, **kwargs):
     pdf_variants = varyQueryArguments('pdf', args_without_page, PDF_STATUS_CHOICES)
     pubtype_variants = varyQueryArguments('pubtype', args_without_page, PAPER_TYPE_CHOICES)
     visibility_variants = varyQueryArguments('visibility', args_without_page, VISIBILITY_CHOICES)
+    state_variants = varyQueryArguments('state', args_without_page, COMBINED_STATUS_CHOICES)
 
     context['oa_status_choices'] = oa_variants
     context['pdf_status_choices'] = pdf_variants
+    context['state_choices'] = state_variants
     context['pubtype_status_choices'] = pubtype_variants
     context['visibility_choices'] = visibility_variants
 

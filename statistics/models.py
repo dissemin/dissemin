@@ -38,6 +38,9 @@ from __future__ import unicode_literals
 from django.db import models
 from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
+from django.core.urlresolvers import reverse
+
+import json
 
 #: Paper status (combined because it takes into account
 #: both the publisher policy and the full text availability).
@@ -52,12 +55,16 @@ COMBINED_STATUS_CHOICES = [
     ('closed', _('Publisher forbids sharing')),
     ]
 
+#: Availability status choices
+PDF_STATUS_CHOICES = [('OK', _('Available')),
+                      ('NOK', _('Unavailable'))]
+
 #: Filters associated to each combined status choice
 #: These filters, once applied to a queryset of Papers,
 #: select the papers in the given state.
 STATUS_QUERYSET_FILTER = {
     'oa': lambda q: q.filter(oa_status='OA'),
-    'ok': lambda q: q.filter(Q(pdf_url__isnull=False) & ~Q(oa_status=='OA')),
+    'ok': lambda q: q.filter(Q(pdf_url__isnull=False) & ~Q(oa_status='OA')),
     'couldbe': lambda q: q.filter(pdf_url__isnull=True, oa_status='OK'),
     'unk': lambda q: q.filter(pdf_url__isnull=True, oa_status='UNK'),
     'closed': lambda q: q.filter(pdf_url__isnull=True, oa_status='NOK'),
@@ -149,6 +156,34 @@ class AccessStatistics(models.Model):
         """
         for x in _class.objects.all():
             x.update_stats()
+
+    def pie_data(self, object_id):
+        """
+        Returns a JSON representation of the data needed to display
+        the statistics as a pie.
+        """
+        baseurl = reverse('search')+'?'+object_id
+        detailed_data = []
+        for (key,desc) in COMBINED_STATUS_CHOICES:
+            item = {
+                'id':key,
+                'label':unicode(desc),
+                'value':self.__dict__['num_'+key],
+                'url':baseurl+'&state='+key,
+                'baseurl':baseurl,
+                }
+            detailed_data.append(item)
+        aggregated_data = []
+        for (key,desc) in PDF_STATUS_CHOICES:
+            item = {
+                'id':key,
+                'label':unicode(desc),
+                'value':self.num_available if key == 'OK' else self.num_unavailable,
+                'url':baseurl+'&pdf='+key,
+                'baseurl':baseurl,
+                }
+            aggregated_data.append(item)
+        return json.dumps({'detailed':detailed_data,'aggregated':aggregated_data})
 
     class Meta:
         db_table = 'papers_accessstatistics'

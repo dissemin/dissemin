@@ -741,6 +741,10 @@ h1#paperTitle {
 	border-right:1px solid #666;
 }
 
+.stats_caption_label_activated {
+    font-weight: bold;
+}
+
 
 /* Search pages buttons */
 .searchPages
