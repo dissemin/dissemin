@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-24 01:23+0200\n"
-"PO-Revision-Date: 2015-09-24 01:24+0200\n"
+"POT-Creation-Date: 2015-09-24 21:26+0200\n"
+"PO-Revision-Date: 2015-09-24 22:12+0200\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -190,7 +190,7 @@ msgstr "Il faut fournir un nom ou un identifiant ORCID."
 msgid "Available"
 msgstr "Disponible"
 
-#: papers/models.py:52 papers/templates/papers/paper.html:101
+#: papers/models.py:52 papers/templates/papers/paper.html:105
 msgid "Unavailable"
 msgstr "Indisponible"
 
@@ -551,7 +551,19 @@ msgstr ""
 msgid "Yes"
 msgstr "Oui"
 
-#: papers/templates/papers/paper.html:66
+#: papers/templates/papers/paper.html:62
+#, python-format
+msgctxt "as in: _Journal article by_ Tom Smith, Nicole Allen"
+msgid ""
+" \n"
+"    <span class=\"paperDocType\">%(doctype)s</span> by\n"
+"    "
+msgstr ""
+" \n"
+"    <span class=\"paperDocType\">%(doctype)s</span> de\n"
+"    "
+
+#: papers/templates/papers/paper.html:70
 #, python-format
 msgid ""
 "\n"
@@ -564,7 +576,7 @@ msgstr ""
 "%(nb_remaining_authors)s autres auteurs</a>\n"
 "            "
 
-#: papers/templates/papers/paper.html:73
+#: papers/templates/papers/paper.html:77
 #, python-format
 msgid ""
 "\n"
@@ -577,32 +589,32 @@ msgstr ""
 "\"show_less_authors\">afficher moins</a>):<br />\n"
 "            "
 
-#: papers/templates/papers/paper.html:86
+#: papers/templates/papers/paper.html:90
 msgid "Paper successfully deposited!"
 msgstr "L'article a été correctement déposé !"
 
-#: papers/templates/papers/paper.html:97
+#: papers/templates/papers/paper.html:101
 msgid "Full text:"
 msgstr "Texte intégral:"
 
-#: papers/templates/papers/paper.html:99
+#: papers/templates/papers/paper.html:103
 #: papers/templates/papers/publiListItem.html:27
 msgid "Download"
 msgstr "Télécharger"
 
-#: papers/templates/papers/paper.html:103
+#: papers/templates/papers/paper.html:107
 msgid "Ask upload"
 msgstr "Demander la mise en ligne\t"
 
-#: papers/templates/papers/paper.html:107
+#: papers/templates/papers/paper.html:111
 msgid "Publisher:"
 msgstr "Maison d'édition:"
 
-#: papers/templates/papers/paper.html:115
+#: papers/templates/papers/paper.html:119
 msgid "Deposit again"
 msgstr "Déposer à nouveau"
 
-#: papers/templates/papers/paper.html:125
+#: papers/templates/papers/paper.html:129
 msgid "Abstract"
 msgstr "Résumé"
 
