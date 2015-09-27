@@ -327,8 +327,6 @@ if 'TRAVIS' in os.environ:
             'PORT':     '',
         }
     }
-    print "ENVIRON KEYS"
-    print os.environ.keys()
 if 'CORE_API_KEY' in os.environ:
     CORE_API_KEY = os.environ['CORE_API_KEY']
 
