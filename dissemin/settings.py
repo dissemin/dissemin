@@ -327,5 +327,10 @@ if 'TRAVIS' in os.environ:
             'PORT':     '',
         }
     }
+if 'CORE_API_KEY' in os.environ:
+    CORE_API_KEY = os.environ['CORE_API_KEY']
+
+if 'ROMEO_API_KEY' in os.environ:
+    ROMEO_API_KEY = os.environ['ROMEO_API_KEY']
 
 

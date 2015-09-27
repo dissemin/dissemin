@@ -6,6 +6,12 @@
 
 language: python
 
+# RoMEO API key
+secure: "GKEIv4zmZqSzJ8l2Vby7/yP5fhwGMZRgBigqO26wwDy4y3yJi1osdSKOHweiMmqW7Qees7VbAAfoPaYRffqzjv2T0vAIjgdcLs2XQ7J2SvFswMGg0NLjnCWKkq1EXhsx+yUnnv/+Ya3nRnD8cSglal+0OXJgs52WsbM92gg6ykI=" 
+# CORE API key
+secure: "WA2ns9gBb1BC5kE+sWuvROFXoXSxrIXfVqVJIrNOH70/ZbUfiW7/vmFW6cAqtda+vhe0ck6+LJtNrSi3cub2tG8N6SydO/r4jy/nbFTa76jDV/6W+xoiWckhpJ+CNPPGNLRPbk0oOam374SJ0//fpQsT/5/pOPVWd+9WG2JU2Kk="
+
+
 python:
   - 2.7
 
