@@ -18,6 +18,16 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
+"""
+This module contains functions that are not normally needed
+to run the platform, but that can be useful during development,
+or to cleanup various things in the database.
+
+These functions are not integrated in the rest of the platform,
+so running them involves starting a Django shell ("python manage.py shell"),
+importing this module and running the function manually.
+"""
+
 from __future__ import unicode_literals
 
 from papers.models import *
@@ -38,7 +48,6 @@ def cleanup_papers():
     """
     deleted_count = 0
     for p in Paper.objects.all().select_related('author'):
-        sleep(0.1)
         researcher_found = False
         for a in p.author_set.all():
             if a.researcher:
@@ -71,7 +80,7 @@ def cleanup_names(dry_run = False):
     """
     deleted_count = 0
     for n in Name.objects.all():
-        if not n.researcher:
+        if n.researcher_set.all().count() == 0:
             nb_papers = Author.objects.filter(name=n).count()
             if not nb_papers:
                 print "Deleting name id "+str(n.pk)+": "+unicode(n)
@@ -85,8 +94,7 @@ def merge_names(fro,to):
     Merges the name object 'fro' into 'to
     """
     Researcher.objects.filter(name_id=fro.id).update(name_id=to.id)
-    ResearcherVariants = Researcher.name_variants.through
-    ResearcherVariants.objects.filter(name_id=fro.id).update(name_id=to.id)
+    NameVariant.objects.filter(name_id=fro.id).update(name_id=to.id)
     Author.objects.filter(name_id=fro.id).update(name_id=to.id)
     fro.delete()
 

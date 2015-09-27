@@ -27,6 +27,7 @@ from backend.romeo import *
 from backend.orcid import *
 from backend.oai import *
 from backend.tasks import *
+from backend.maintenance import *
 from papers.models import *
 from publishers.models import *
 
@@ -101,7 +102,13 @@ class PaperSourceTest(PrefilledTest):
         for p in papers:
             p.check_authors()
         self.assertTrue(len(papers) > 1)
-        self.source.fetch(self.r3)
+
+    def test_empty(self):
+        if self.source is None:
+            return
+        emptyres = Researcher.create_from_scratch('Anrscuienrsc','Lecsrcudresies')
+        papers = list(self.source.fetch_papers(emptyres))
+        self.assertEqual(papers, [])
 
 # Test that the CORE interface works
 class CoreTest(PaperSourceTest):
@@ -129,8 +136,15 @@ class CoreTest(PaperSourceTest):
         self.assertTrue(len(records) < num_results)
         self.assertTrue(len(records) > 1)
 
+class CrossRefOaiTest(PaperSourceTest):
+    """
+    Test for the CrossRef interface with OAI availability fetching
+    """
+    def setUp(self):
+        super(CrossRefOaiTest, self).setUp()
+        self.oaisource = OaiPaperSource(self.ccf) 
+        self.source = CrossRefPaperSource(self.ccf, oai=self.oaisource)
 
-# Test that the CrossRef interface works
 class CrossRefTest(PaperSourceTest):
     def setUp(self):
         super(CrossRefTest, self).setUp()
@@ -242,6 +256,16 @@ class OaiTest(PaperSourceTest):
         super(OaiTest, self).setUp()
         self.source = OaiPaperSource(self.ccf)
 
+    def test_signature(self):
+        for idx, p in enumerate(self.source.fetch_records_for_name(self.r3.name, signature=True)):
+            if idx > 10:
+                break
+
+    def test_full_name(self):
+        for idx, p in enumerate(self.source.fetch_records_for_name(self.r3.name, signature=False)):
+            if idx > 10:
+                break
+
 class OrcidTest(PaperSourceTest):
     def setUp(self):
         super(OrcidTest, self).setUp()
@@ -309,4 +333,55 @@ class PaperMethodsTest(PrefilledTest):
         self.assertEqual(paper.pk, paper2.pk)
         self.assertEqual(paper.bare_author_names(), [('Frank','Rodrigo'),('A. L.','Johnson'),
             ('Pete','Blunsom')])
+
+
+class MaintenanceTest(PrefilledTest):
+    def setUp(self):
+        super(MaintenanceTest, self).setUp()
+        self.ccf = get_ccf()
+
+    def test_cleanup_papers(self):
+        cleanup_papers()
+
+    def test_cleanup_researchers(self):
+        cleanup_researchers()
+
+    def test_cleanup_names(self):
+        n = Name.lookup_name(('Anaruic','Leclescuantebrste'))
+        n.save()
+        cleanup_names()
+        self.assertEqual(Name.lookup_name(('Anaruic','Leclescuantebrste')).pk, None)
+
+    def test_merge_names(self):
+        crps = CrossRefPaperSource(self.ccf)
+        crps.fetch(self.r2)
+        n = Name.lookup_name(('Isabelle','Autard'))
+        n.save()
+        merge_names(self.r2.name, n)
+        self.assertEqual(Researcher.objects.get(pk=self.r2.pk).name, n)
+        p = Publication.objects.get(doi="10.1002/anie.200800037").paper
+        self.assertEqual(p.author_set.get(position=7).name, n)
+
+    def test_update_paper_statuses(self):
+        crps = CrossRefPaperSource(self.ccf)
+        crps.fetch(self.r2)
+        p = Publication.objects.get(doi="10.1002/anie.200800037").paper
+        self.assertEqual(p.pdf_url, None)
+        pdf_url = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+        oairecord = OaiRecord.new(source=self.arxiv,
+                identifier='oai:arXiv.org:aunrisste',
+                about=p,
+                splash_url='http://www.perdu.com/',
+                pdf_url=pdf_url)
+        update_paper_statuses()
+        self.assertEqual(Paper.objects.get(pk=p.pk).pdf_url, pdf_url)
+
+    def test_cleanup(self):
+        oaips = OaiPaperSource(self.ccf)
+        oaips.fetch(self.r3)
+        cleanup_titles()
+        cleanup_abstracts()
+
+
+
 
