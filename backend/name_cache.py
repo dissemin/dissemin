@@ -18,6 +18,13 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
+"""
+This module caches name lookups in memory.
+This is especially useful when fetching new papers,
+as we have to look up every author name, checking
+whether we have already a model instance for it.
+"""
+
 from __future__ import unicode_literals
 
 from papers.models import Name
@@ -32,6 +39,11 @@ class NameCache(object):
         self.cnt = defaultdict(int)
 
     def lookup(self, name):
+        """
+        :param name: a `(first,last)` pair representing a name.
+        :returns: a :class:`.Name` instance, which is not saved (has no `id`)
+            if the name is new.
+        """
         self.cnt[name] += 1
         if name in self.dct:
             return self.dct[name]
@@ -41,12 +53,33 @@ class NameCache(object):
         return val
 
     def prune(self, threshold):
-        for k in self.cnt:
+        """
+        Prunes all the instances that have been looked up less than
+        `threshold` times.
+        :param threshold: mininum number of lookups for a :class:`.Name` to be kept.
+            If `None`, clears all the names.
+        """
+        if threshold is None:
+            self.cnt.clear()
+            self.dct.clear()
+            return
+        for k in self.cnt.keys():
             if self.cnt[k] <= threshold:
                 del self.cnt[k]
                 del self.dct[k]
  
+    def check(self):
+        """
+        Perform a sanity check of the cache (used in tests)
+        :returns: `True` when the cache is sane.
+        """
+        if set(self.dct.keys()) != set(self.cnt.keys()):
+            return False
+        if not all(map(lambda (k,v): v > 0, self.cnt.items())):
+            return False
+        return True
 
+#: Global name lookup cache, mostly used by the tasks backend.
 name_lookup_cache = NameCache()
 
 

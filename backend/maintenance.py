@@ -31,10 +31,12 @@ importing this module and running the function manually.
 from __future__ import unicode_literals
 
 from papers.models import *
+from publishers.models import *
 import backend.crossref
 from papers.utils import sanitize_html, create_paper_fingerprint
 from backend.romeo import fetch_publisher
 from backend.tasks import change_publisher_oa_status
+from backend.name_cache import name_lookup_cache
 from time import sleep
 from collections import defaultdict
 from django.db.models import Q, Prefetch
@@ -242,5 +244,12 @@ def recompute_publisher_policies():
     """
     for p in Publisher.objects.all():
         change_publisher_oa_status(p.pk, p.classify_oa_status())
+
+
+def prune_name_lookup_cache(threshold):
+    """
+    Prunes the name lookup cache (removes names which are not looked up often)
+    """
+    name_lookup_cache.prune(threshold)
 
 

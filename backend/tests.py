@@ -339,12 +339,38 @@ class MaintenanceTest(PrefilledTest):
     def setUp(self):
         super(MaintenanceTest, self).setUp()
         self.ccf = get_ccf()
+        crps = CrossRefPaperSource(self.ccf)
+        crps.fetch(self.r2)
+        consolidate_paper(Publication.objects.get(doi='10.1021/cb400178m').paper_id)
+
+    def test_create_publisher_aliases(self):
+        create_publisher_aliases()
+
+    def test_journal_to_publisher(self):
+        journal_to_publisher()
+
+    def test_refetch_publishers(self):
+        refetch_publishers()
+
+    def test_refetch_containers(self):
+        refetch_containers()
+
+    def test_recompute_publisher_policies(self):
+        recompute_publisher_policies()
 
     def test_cleanup_papers(self):
         cleanup_papers()
 
     def test_cleanup_researchers(self):
         cleanup_researchers()
+
+    def test_prune_name_lookup_cache(self):
+        prune_name_lookup_cache(3)
+        self.assertTrue(name_lookup_cache.check())
+        prune_name_lookup_cache(None)
+        self.assertTrue(name_lookup_cache.check())
+        self.assertEqual(len(name_lookup_cache.cnt), 0)
+        self.assertEqual(len(name_lookup_cache.dct), 0)
 
     def test_cleanup_names(self):
         n = Name.lookup_name(('Anaruic','Leclescuantebrste'))
@@ -353,18 +379,14 @@ class MaintenanceTest(PrefilledTest):
         self.assertEqual(Name.lookup_name(('Anaruic','Leclescuantebrste')).pk, None)
 
     def test_merge_names(self):
-        crps = CrossRefPaperSource(self.ccf)
-        crps.fetch(self.r2)
         n = Name.lookup_name(('Isabelle','Autard'))
         n.save()
-        merge_names(self.r2.name, n)
-        self.assertEqual(Researcher.objects.get(pk=self.r2.pk).name, n)
+        merge_names(self.r1.name, n)
+        self.assertEqual(Researcher.objects.get(pk=self.r1.pk).name, n)
         p = Publication.objects.get(doi="10.1002/anie.200800037").paper
-        self.assertEqual(p.author_set.get(position=7).name, n)
+        self.assertEqual(p.author_set.get(position=1).name, n)
 
     def test_update_paper_statuses(self):
-        crps = CrossRefPaperSource(self.ccf)
-        crps.fetch(self.r2)
         p = Publication.objects.get(doi="10.1002/anie.200800037").paper
         self.assertEqual(p.pdf_url, None)
         pdf_url = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
@@ -381,6 +403,7 @@ class MaintenanceTest(PrefilledTest):
         oaips.fetch(self.r3)
         cleanup_titles()
         cleanup_abstracts()
+
 
 
 
