@@ -226,7 +226,9 @@ class NameVariant(models.Model):
     researcher = models.ForeignKey('Researcher')
     #: The similarity score between this name and one of the reference names for this researcher
     confidence = models.FloatField(default=1.)
-    unique_together = (('name','researcher'),)
+
+    class Meta:
+        unique_together = (('name','researcher'),)
 
 class Researcher(models.Model):
     """
@@ -453,9 +455,8 @@ class Name(models.Model):
     full = models.CharField(max_length=MAX_NAME_LENGTH*2+1, db_index=True)
     best_confidence = models.FloatField(default=0.)
 
-    unique_together = ('first','last')
-    
     class Meta:
+        unique_together = ('first','last')
         ordering = ['last','first']
 
     @property

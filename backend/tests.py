@@ -378,6 +378,24 @@ class MaintenanceTest(PrefilledTest):
         cleanup_names()
         self.assertEqual(Name.lookup_name(('Anaruic','Leclescuantebrste')).pk, None)
 
+    def test_name_initial(self):
+        n = self.r1.name
+        p = Publication.objects.get(doi="10.1002/anie.200800037").paper
+        n1 = p.author_set.get(position=1).name
+        print ""
+        print "NAME 1"
+        print "%d, %s, %s" % (n1.pk,n1.full,unicode(n1))
+        print ""
+        print "NAME 2"
+        print "%d, %s, %s" % (n.pk,n.full,unicode(n))
+        print ""
+        if (n1.first,n1.last) == (n.first,n.last):
+            print "CONFLICT DETECTED"
+        else:
+            print "NAME PAIRS DIFFER"
+
+        self.assertEqual(p.author_set.get(position=1).name, n)
+
     def test_merge_names(self):
         n = Name.lookup_name(('Isabelle','Autard'))
         n.save()

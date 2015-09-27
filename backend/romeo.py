@@ -166,29 +166,20 @@ def fetch_journal(search_terms, matching_mode = 'exact'):
     return result
 
 def fetch_publisher(publisher_name):
-    print "Fetching publisher: "+publisher_name
     # First, let's see if we have a publisher with that name
     for p in Publisher.objects.filter(name=publisher_name)[:1]:
-        print "Exact match"
         return p
 
     # Second, let's see if the publisher name has often been associated to a known publisher
     aliases = list(AliasPublisher.objects.filter(name=publisher_name).order_by('-count')[:2])
     if len(aliases) == 1:
         if aliases[0].count > PUBLISHER_NAME_ASSOCIATION_THRESHOLD:
-            print "Found alias: "+unicode(aliases[0]).encode('utf-8')
             AliasPublisher.increment(publisher_name, aliases[0].publisher)
             return aliases[0].publisher
     elif len(aliases) == 2:
         if aliases[0].count > PUBLISHER_NAME_ASSOCIATION_FACTOR*aliases[1].count:
-            print "Found alias: "+unicode(aliases[0]).encode('utf-8')
-            print "Second result: "+unicode(aliases[1]).encode('utf-8')
             AliasPublisher.increment(publisher_name, aliases[0].publisher)
             return aliases[0].publisher
-        else:
-            print "Not clear enough:"
-            print aliases[0]
-            print aliases[1]
 
     # Otherwise, let's try to fetch the publisher from RoMEO!
 
@@ -202,7 +193,6 @@ def fetch_publisher(publisher_name):
     # Find the publisher
     publishers = root.findall('./publishers/publisher')
     if len(publishers) == 0:
-        print "No results"
         return
     elif len(publishers) > 1:
         print str(len(publishers)) + " results"
@@ -210,10 +200,8 @@ def fetch_publisher(publisher_name):
         root = perform_romeo_query(search_terms)
         publishers = root.findall('./publishers/publisher')
         if len(publishers) != 1:
-            print str(len(publishers)) + " results after exact"
             return
 
-    print "Successfully fetched from RoMEO"
     publisher =  get_or_create_publisher(publishers[0])
     AliasPublisher.increment(publisher_name, publisher)
     return publisher

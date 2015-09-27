@@ -100,6 +100,34 @@ def merge_names(fro,to):
     Author.objects.filter(name_id=fro.id).update(name_id=to.id)
     fro.delete()
 
+def merge_all_identical_names():
+    """
+    Prepares the DB for the `(first,last)` uniqueness constraint on names
+    """
+    s = {}
+    for n in Name.objects.all():
+        key = (n.first,n.last)
+        if key not in s:
+            s[key] = n
+        else:
+            merge_names(n, s[key])
+
+def merge_identical_namevariants():
+    """
+    Prepares the DB for the `(researcher,name)` uniqueness constraint on name variants
+    """
+    s = {}
+    for nv in NameVariant.objects.all():
+        key = (nv.researcher_id,nv.name_id)
+        if key not in s:
+            s[key] = nv
+        else:
+            conf = max(s[key].confidence, nv.confidence)
+            nv.delete()
+            if conf != s[key].confidence:
+                s[key].confidence = conf
+                s[key].save(update_fields=['confidence'])
+
 def update_paper_statuses():
     """
     Should only be run if something went wrong,

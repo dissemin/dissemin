@@ -44,12 +44,15 @@ class NameCache(object):
         :returns: a :class:`.Name` instance, which is not saved (has no `id`)
             if the name is new.
         """
-        self.cnt[name] += 1
+        return Name.lookup_name(name)
         if name in self.dct:
+            self.cnt[name] += 1
             return self.dct[name]
 
         val = Name.lookup_name(name)
-        self.dct[name] = val
+        if val.pk is not None:
+            self.dct[name] = val
+            self.cnt[name] += 1
         return val
 
     def prune(self, threshold):
