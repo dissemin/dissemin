@@ -35,6 +35,7 @@ ZENODO_LICENSES_CHOICES = [
    ('cc-by-sa', _('Creative Commons Attribution-ShareAlike')),
    ('cc-by-nc-4.0', _('Creative Commons Attribution-NonCommercial')),
    ('cc-by-nd-4.0', _('Creative Commons Attribution-NoDerivatives')),
+   ('other-closed', _('Other (closed license)')),
  ]
 
 from deposit.protocol import *

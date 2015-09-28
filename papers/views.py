@@ -142,7 +142,8 @@ def searchView(request, **kwargs):
         state = args.get('state')
         context['state'] = state
         state_filter = STATUS_QUERYSET_FILTER.get(state)
-        queryset = state_filter(queryset)
+        if state_filter is not None:
+            queryset = state_filter(queryset)
     if 'status' in args:
         queryset = queryset.filter(oa_status=args.get('status'))
         # We don't update the search description here, it will be displayed on the side
