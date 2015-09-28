@@ -111,6 +111,7 @@ def fetch_everything_for_researcher(pk):
         r.harvester = None
         update_researcher_task(r, None)
         del ccf
+        name_lookup_cache.prune()
 
 @shared_task(name='fetch_records_for_researcher')
 def fetch_records_for_researcher(pk, signature=True):

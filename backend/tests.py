@@ -87,6 +87,9 @@ class PrefilledTest(TestCase):
                 name='arXiv',
                 default_pubtype='preprint')
 
+    def tearDown(self):
+        name_lookup_cache.prune()
+
 # Generic test series for a PaperSource instance
 class PaperSourceTest(PrefilledTest):
     def setUp(self):

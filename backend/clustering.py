@@ -9,7 +9,7 @@ from collections import defaultdict
 # For graph output
 from unidecode import unidecode
 
-from papers.models import Author, Researcher, Paper, Publication
+from papers.models import Author, Researcher, Paper, Publication, Name
 from papers.utils import nocomma, create_paper_fingerprint, date_from_dateparts, sanitize_html
 from papers.name import to_plain_name, parse_comma_name
 from papers.doi import to_doi
@@ -637,8 +637,8 @@ class ClusteringContextFactory(object):
             p.save()
             for idx, author_name in enumerate(author_names):
                 name_was_new = author_name.pk is None
-                author_name.save()
                 if name_was_new:
+                    author_name.save()
                     author_name.update_variants()
                 aff = None
                 if affiliations:

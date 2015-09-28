@@ -44,7 +44,6 @@ class NameCache(object):
         :returns: a :class:`.Name` instance, which is not saved (has no `id`)
             if the name is new.
         """
-        return Name.lookup_name(name)
         if name in self.dct:
             self.cnt[name] += 1
             return self.dct[name]
@@ -55,7 +54,7 @@ class NameCache(object):
             self.cnt[name] += 1
         return val
 
-    def prune(self, threshold):
+    def prune(self, threshold=None):
         """
         Prunes all the instances that have been looked up less than
         `threshold` times.
