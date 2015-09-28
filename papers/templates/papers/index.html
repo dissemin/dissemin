@@ -37,7 +37,8 @@ function lookUpColleague() {
 
     $('#forceInput').val('');
     $('#lookUpColleagueForm :input').prop('disabled', true);
-    $('#submitGroup').append('<img alt="{% trans "Searching..." %}" src="{% static "img/loading.gif" %}" id="loadingPic" style="margin-right: -32px; margin-left: -2px;" />');
+    {% trans "Searching..." context "alternate text of the waiting picture in the name lookup form" as searching_alt %}
+    $('#submitGroup').append('<img alt="{{ searching_alt|escapejs }}" src="{% static "img/loading.gif" %}" id="loadingPic" style="margin-right: -32px; margin-left: -2px;" />');
     $.post('{% url 'ajax-newUnaffiliatedResearcher' %}', data, null, 'json').fail(
         function(data) {
             reqComplete();

@@ -33,7 +33,9 @@ $(function() {
     /* Prefetched fields */
     $('.prefetchingFieldStatus').each(function(i,prefetch) {
         var p = $(prefetch);
-        p.text("{% trans "Trying to fill this field automatically for you..." %}");
+
+        {% trans "Trying to fill this field automatically for you..." as trying_fill %}
+        p.text("{{ trying_fill|escapejs }}");
         field = $("#"+p.data("fieldid"));
         console.log(field);
         objid = $("input[name="+p.data("objfieldname")+"]").val();
@@ -44,13 +46,14 @@ $(function() {
             "id":objid}, null, 'json').fail(
             function(data) {
                 console.log(data);
-                p.text('{% trans "Sorry, we could not fill this for you." %}');
+                {% trans "Sorry, we could not fill this for you." as sorry %}
+                p.text('{{ sorry|escapejs }}');
                 field.prop('disabled', false);
             }
         ).done(
             function(data) {
                 if(!data['success']) {
-                    p.text('{% trans "Sorry, we could not fill this for you." %}');
+                p.text('{{ sorry|escapejs }}');
                 } else {
                     p.text('');
                 }
