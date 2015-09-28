@@ -33,7 +33,7 @@ $(function() {
     /* Prefetched fields */
     $('.prefetchingFieldStatus').each(function(i,prefetch) {
         var p = $(prefetch);
-        p.text('{% trans "Trying to fill this field automatically for you..." %}');
+        p.text("{% trans "Trying to fill this field automatically for you..." %}");
         field = $("#"+p.data("fieldid"));
         console.log(field);
         objid = $("input[name="+p.data("objfieldname")+"]").val();
