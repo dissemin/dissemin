@@ -46,6 +46,12 @@
 
                 }
            },
+          error:function(xhr,error,exception) {
+            var area = $('#waitingArea');
+            area.fadeOut(function(){
+                area.hide();
+            });
+          },
           contentType:"application/json" });
     }
 
