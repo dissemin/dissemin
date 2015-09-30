@@ -79,7 +79,7 @@ def submitDeposit(request, pk):
             repositoryForms[idx] = f.errors
             # TODO delete this, error reporting should be done in a generic way for each
             # repository form
-            context['message'] = _("An abstract is required, please paste one in the Metadata pannel.")
+            context['message'] = _("An abstract is required, please paste one in the Metadata panel.")
             return HttpResponseForbidden(json.dumps(context), content_type='text/json')
 
     # Check that the paper has been uploaded by the same user

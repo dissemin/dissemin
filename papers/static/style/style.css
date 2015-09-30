@@ -994,23 +994,23 @@ h1#paperTitle {
 	margin-left:10px;
 }
 
-.oaPannel {
+.oaPanel {
     background: #eee;
     padding: 20px;
 }
 
-.oaPannel h2 {
+.oaPanel h2 {
     margin-top: 0px;
 }
 
-.oaPannel.left {
+.oaPanel.left {
     float:left;
     margin-right:10px;
     width:58%;
     width:calc(60% - 10px);
 }
 
-.oaPannel.right {
+.oaPanel.right {
     float:right;
     margin-left:10px;
     width:38%;

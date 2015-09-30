@@ -12,11 +12,11 @@
 
 #welcome p { width: 100%; }
 
-.oaPannel.left, .oaPannel.right, .oaPannel.left > *, .oaPannel.right > *, #globalStats, #statsExplanations, .siteSummary.left, .siteSummary.right {
+.oaPanel.left, .oaPanel.right, .oaPanel.left > *, .oaPanel.right > *, #globalStats, #statsExplanations, .siteSummary.left, .siteSummary.right {
   float: none;
   margin: 0;
 }
-.oaPannel.left, .oaPannel.right, .siteSummary.left, .siteSummary.right { width: 100%; margin: 0 0 20px 0; }
+.oaPanel.left, .oaPanel.right, .siteSummary.left, .siteSummary.right { width: 100%; margin: 0 0 20px 0; }
 
 #sidebar { float: none; width: 100%; }
 
