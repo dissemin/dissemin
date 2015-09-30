@@ -1,17 +1,5 @@
 /* fonts */
 @font-face {
-  font-family: 'Neuton';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Neuton Regular'), local('Neuton-Regular'), url(http://fonts.gstatic.com/s/neuton/v8/FWmpGWvJ4R8gbr0i3io5KQ.woff) format('woff');
-}
-@font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 300;
-  src: local('Open Sans Light'), local('OpenSans-Light'), url(http://fonts.gstatic.com/s/opensans/v13/DXI1ORHCpsQm3Vp6mXoaTXhCUOGz7vYGh680lGh-uXM.woff) format('woff');
-}
-@font-face {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 400;
