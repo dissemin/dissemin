@@ -1,5 +1,7 @@
 /* small screen fixes */
 
+#content { min-width: 300px; }
+
 #welcome #institutionblock {
   float: none;
   margin: 0 auto;
@@ -10,10 +12,11 @@
 
 #welcome p { width: 100%; }
 
-.oaPannel.left, .oaPannel.right, .oaPannel.left > *, .oaPannel.right > * {
-  float: none;
+.oaPannel.left, .oaPannel.right, .oaPannel.left > *, .oaPannel.right > *, #globalStats, #statsExplanations,  {
+  float: none !important;
+  margin: 0;
 }
-.oaPannel { width: 100%; margin: 0 0 20px 0; }
+.oaPannel.left, .oaPannel.right { width: 100%; margin: 0 0 20px 0; }
 
 #sidebar { float: none; width: 100%; }
 
