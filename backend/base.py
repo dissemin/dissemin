@@ -65,7 +65,7 @@ class BasePaperSource(PaperSource):
                 root = ET.fromstring(response.encode('utf-8'))
                 result_list = list(root.findall('./result'))
                 if not result_list:
-                    raise MetadataSourceException('BASE returned no results for URL '+request)
+                    raise MetadataSourceException('BASE returned no results for URL '+f.url)
                 result_list = result_list[0]
                 try:
                     nb_results = int(result_list.attrib['numFound'])

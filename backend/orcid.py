@@ -243,9 +243,12 @@ class OrcidPaperSource(PaperSource):
 
         if use_doi:
             for metadata in crps.search_for_dois_incrementally('', {'orcid':id}):
-                paper = crps.save_doi_metadata(metadata)
-                if paper:
-                    yield paper
+                try:
+                    paper = crps.save_doi_metadata(metadata)
+                    if paper:
+                        yield paper
+                except ValueError as e:
+                    print "Saving CrossRef record from ORCID failed: %s" % unicode(e)
 
             # TODO: this is inefficient: check first that these DOIs are unknown for us
             doi_metadata = fetch_dois(dois)

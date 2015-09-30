@@ -4,8 +4,9 @@ Installation
 ============
 
 dissem.in is split in two parts:
-- the web frontend, powered by Django;
-- the tasks backend, powered by Celery.
+
+* the web frontend, powered by Django;
+* the tasks backend, powered by Celery.
 
 Installing the tasks backend requires additional dependencies and is not
 necessary if you want to do light dev that does not require harvesting
@@ -120,10 +121,12 @@ First, install the redis server::
    pip install -r requirements_backend.txt
 
 Optional python dependencies (if you want to debug the learning system)::
+
    pip install nltk
    pip install matplotlib
 
 To run the backend (still in the virtualenv)::
+
    celery --app=dissemin.celery:app worker -B -l INFO
 
 
