@@ -36,8 +36,9 @@ class AjaxUploadForm(forms.Form):
         content = self.cleaned_data['upl']
         if content.content_type in DEPOSIT_CONTENT_TYPES:
             if content._size > DEPOSIT_MAX_FILE_SIZE:
-                raise forms.ValidationError(_('File too large (%s). Maximum size is %s.') %
-                        (filesizeformat(content._size), filesizeformat(DEPOSIT_MAX_FILE_SIZE)),
+                raise forms.ValidationError(_('File too large (%(size)s). Maximum size is %(maxsize)s.') %
+                        {'size':filesizeformat(content._size),
+                         'maxsize':filesizeformat(DEPOSIT_MAX_FILE_SIZE))},
                         code='too_large')
         else:
             raise forms.ValidationError(invalid_content_type_message, code='invalid_type')

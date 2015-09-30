@@ -99,7 +99,7 @@ function lookUpColleague() {
     </p>
     
     <p class="startButton">
-    <a href="{% url 'my-profile' %}" class="btn btn-lg btn-default">{% trans "Analyze my publications" %}</a> or <a href="#" id="lookupColleagueButton" class="btn btn-lg btn-default">{% trans "Look up a colleague" %}</a>
+    <a href="{% url 'my-profile' %}" class="btn btn-lg btn-default">{% trans "Analyze my publications" %}</a>{% trans "or" context "Analyze my publications OR Look up my colleagues" %}<a href="#" id="lookupColleagueButton" class="btn btn-lg btn-default">{% trans "Look up a colleague" %}</a>
     </p>
 
     <div id="lookUpColleague" style="display: none">

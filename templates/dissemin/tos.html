@@ -20,7 +20,6 @@
         <h4>{% trans "In full" %}</h4>
         <p><a href="#personal-data">{% trans "Personal data" %}</a></p>
         <p><a href="#cnil">Déclaration CNIL</a></p>
-        <p><a href="#deposit-rights">{% trans "Use of the deposit service" %}</a></p>
         <p><a href="#full-text-storage">{% trans "Full text storage" %}</a></p>
         <p><a href="#reporting-misuse">{% trans "Reporting misuse" %}</a></p>
       </div>
@@ -85,7 +84,41 @@
 
         <p>
         {% blocktrans trimmed %}
+        Dissemin uses ORCID's public OAuth interface to authenticate its users.
+        This interface only transmits information marked as public in the user's ORCID
+        profile. This means that ORCID passwords are never transmitted and email addresses
+        are not transmitted when they are marked as private, which is the default setting.
 
+        When logging in to Dissemin from ORCID, Dissemin acquires the user's ORCID id,
+        as well as all public information attached to the ORCID record.
+
+        Dissemin can store any information input by its users on the platform. Users
+        can ask for a copy of the personal information Dissemin stores about them by
+        writing an email to support@dissem.in.
+        {% endblocktrans %}
+        </p>
+
+        <h2 id="full-text-storage">{% trans "Full text storage" %}</h2>
+
+        <p>
+        {% blocktrans trimmed %}
+        Documents deposited in repositories via Dissemin can be stored on the platform,
+        but are not available for download on the platform. They can be stored internally
+        for logging purposes, and to make sure failed deposits can be fixed later.
+        Dissemin does not commit to store any of the files it receives from its users.
+
+        Users can write to support@dissem.in if they want one of their uploads to be deleted
+        from our internal storage space, or from the repository they have deposited to.
+        Note that deletion policies vary accross repositories: we provide no guarantee that
+        deposits can be deleted from the target repositories.
+        {% endblocktrans %}
+        </p>
+
+        <h2 id="reporting-misuse">{% trans "Reporting misuse" %}</h2>
+
+        <p>
+        {% blocktrans trimmed %}
+        Misuse can be reported to support@dissem.in.
         {% endblocktrans %}
         </p>
 
@@ -96,26 +129,6 @@
         l'objet de la déclaration CNIL n°1877980.
         </p>
 
-        <h2 id="deposit-rights">{% trans "Use of the deposit service" %}</h2>
-
-        <p>
-        {% blocktrans trimmed %}
-        {% endblocktrans %}
-        </p>
-
-        <h2 id="full-text-storage">{% trans "Full text storage" %}</h2>
-
-        <p>
-        {% blocktrans trimmed %}
-        {% endblocktrans %}
-        </p>
-
-        <h2 id="reporting-misuse">{% trans "Reporting misuse" %}</h2>
-
-        <p>
-        {% blocktrans trimmed %}
-        {% endblocktrans %}
-        </p>
 
         <p><a href="#">{% trans "Back to top" %}</a></p>
     </div>

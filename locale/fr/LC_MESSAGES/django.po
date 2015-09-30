@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-30 15:55+0200\n"
+"POT-Creation-Date: 2015-09-30 21:44+0200\n"
 "PO-Revision-Date: 2015-09-30 15:59+0200\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
@@ -46,7 +46,7 @@ msgstr "Dépôt"
 #: deposit/templates/deposit/start.html:12
 #: deposit/templates/deposit/start.html:16
 msgid "Depositing"
-msgstr "En cours de dépôt"
+msgstr "Dépôt de"
 
 #: deposit/templates/deposit/start.html:37
 msgid "Trying to fill this field automatically for you..."
@@ -409,6 +409,7 @@ msgid "Website"
 msgstr "Page web"
 
 #: papers/templates/papers/index.html:8 templates/dissemin/breadcrumbs.html:3
+#: templates/dissemin/skeleton.html:68
 msgid "Home"
 msgstr "Accueil"
 
@@ -446,6 +447,11 @@ msgstr ""
 #: papers/templates/papers/index.html:102
 msgid "Analyze my publications"
 msgstr "Analyser mes publications"
+
+#: papers/templates/papers/index.html:102
+msgctxt "Analyze my publications OR Look up my colleagues"
+msgid "or"
+msgstr ""
 
 #: papers/templates/papers/index.html:102
 msgid "Look up a colleague"
@@ -1522,7 +1528,7 @@ msgstr ""
 "Oui ! Cependant, nous n'avons pas encore implémenté d'API. N'hésitez pas à "
 "nous dire ce dont vous avez besoin."
 
-#: templates/dissemin/faq.html:295 templates/dissemin/tos.html:120
+#: templates/dissemin/faq.html:295 templates/dissemin/tos.html:133
 msgid "Back to top"
 msgstr "Revenir en haut"
 
@@ -1602,9 +1608,17 @@ msgstr "Mot de passe oublié ?"
 msgid "SANDBOX Sign in"
 msgstr "SANDBOX Connexion"
 
-#: templates/dissemin/skeleton.html:78
+#: templates/dissemin/skeleton.html:59
+msgid "Toggle navigation"
+msgstr ""
+
+#: templates/dissemin/skeleton.html:70 templates/dissemin/skeleton.html:78
 msgid "My profile"
 msgstr "Mon profil"
+
+#: templates/dissemin/skeleton.html:72
+msgid "FAQ"
+msgstr "FAQ"
 
 #: templates/dissemin/skeleton.html:79
 msgid "Logout"
@@ -1650,43 +1664,39 @@ msgstr "Moissonnées avec le protocole OAI-PMH."
 msgid "Suggest a data source"
 msgstr "Suggérer l'ajout d'une source"
 
-#: templates/dissemin/tos.html:15 templates/dissemin/tos.html.py:28
+#: templates/dissemin/tos.html:15 templates/dissemin/tos.html.py:27
 msgid "In short"
 msgstr "En résumé"
 
-#: templates/dissemin/tos.html:16 templates/dissemin/tos.html.py:30
+#: templates/dissemin/tos.html:16 templates/dissemin/tos.html.py:29
 msgid "Scope of the service"
 msgstr "Objet du service"
 
-#: templates/dissemin/tos.html:17 templates/dissemin/tos.html.py:43
+#: templates/dissemin/tos.html:17 templates/dissemin/tos.html.py:42
 msgid "Privacy"
 msgstr "Vie privée"
 
-#: templates/dissemin/tos.html:18 templates/dissemin/tos.html.py:61
+#: templates/dissemin/tos.html:18 templates/dissemin/tos.html.py:60
 msgid "Deposits through Dissemin"
 msgstr "Déposer avec Dissemin"
 
-#: templates/dissemin/tos.html:20 templates/dissemin/tos.html.py:83
+#: templates/dissemin/tos.html:20 templates/dissemin/tos.html.py:82
 msgid "In full"
 msgstr "Version complète"
 
-#: templates/dissemin/tos.html:21 templates/dissemin/tos.html.py:84
+#: templates/dissemin/tos.html:21 templates/dissemin/tos.html.py:83
 msgid "Personal data"
 msgstr "Données personnelles"
 
-#: templates/dissemin/tos.html:23 templates/dissemin/tos.html.py:99
-msgid "Use of the deposit service"
-msgstr "Utilisation du service de dépôt"
-
-#: templates/dissemin/tos.html:24 templates/dissemin/tos.html.py:106
+#: templates/dissemin/tos.html:23 templates/dissemin/tos.html.py:101
 msgid "Full text storage"
 msgstr "Stockage du texte intégral"
 
-#: templates/dissemin/tos.html:25 templates/dissemin/tos.html.py:113
+#: templates/dissemin/tos.html:24 templates/dissemin/tos.html.py:117
 msgid "Reporting misuse"
 msgstr "Signaler un abus"
 
-#: templates/dissemin/tos.html:33
+#: templates/dissemin/tos.html:32
 msgid ""
 "This platform offers an analysis of the accessibility of scholarly "
 "publications. It can also deposit publications on behalf of their authors in "
@@ -1701,7 +1711,7 @@ msgstr ""
 "fournies sans valeur légale. En cas de doute, les utilisateurs sont priés de "
 "se référer aux sources qui font autorité."
 
-#: templates/dissemin/tos.html:46
+#: templates/dissemin/tos.html:45
 msgid ""
 "Unauthenticated users are not tracked as the platform does not include any "
 "third-party analytics or advertisement services. Authenticated users are "
@@ -1723,7 +1733,7 @@ msgstr ""
 "pour authentifier nos utilisateurs : en vous connectant à notre plateforme, "
 "vous autorisez cet usage des cookies."
 
-#: templates/dissemin/tos.html:64
+#: templates/dissemin/tos.html:63
 msgid ""
 "The platform can perform mandated publication deposit to repositories. Users "
 "are only allowed to upload papers that they have authored themselves, or "
@@ -1738,25 +1748,55 @@ msgstr ""
 "d'utilisation, vous devez respecter les conditions d'utilisation des dépôts "
 "que vous utilisez."
 
-#: templates/dissemin/tos.html:75
+#: templates/dissemin/tos.html:74
 msgid "Contact"
 msgstr "Contact"
 
-#: templates/dissemin/tos.html:78
+#: templates/dissemin/tos.html:77
 msgid "Please address any inquiry to support@dissem.in."
 msgstr ""
 "Merci d'adresser tout signalement ou toute demande à support@dissem.in."
+
+#: templates/dissemin/tos.html:86
+msgid ""
+"Dissemin uses ORCID's public OAuth interface to authenticate its users. This "
+"interface only transmits information marked as public in the user's ORCID "
+"profile. This means that ORCID passwords are never transmitted and email "
+"addresses are not transmitted when they are marked as private, which is the "
+"default setting. When logging in to Dissemin from ORCID, Dissemin acquires "
+"the user's ORCID id, as well as all public information attached to the ORCID "
+"record. Dissemin can store any information input by its users on the "
+"platform. Users can ask for a copy of the personal information Dissemin "
+"stores about them by writing an email to support@dissem.in."
+msgstr ""
+
+#: templates/dissemin/tos.html:104
+msgid ""
+"Documents deposited in repositories via Dissemin can be stored on the "
+"platform, but are not available for download on the platform. They can be "
+"stored internally for logging purposes, and to make sure failed deposits can "
+"be fixed later. Dissemin does not commit to store any of the files it "
+"receives from its users. Users can write to support@dissem.in if they want "
+"one of their uploads to be deleted from our internal storage space, or from "
+"the repository they have deposited to. Note that deletion policies vary "
+"accross repositories: we provide no guarantee that deposits can be deleted "
+"from the target repositories."
+msgstr ""
+
+#: templates/dissemin/tos.html:120
+msgid "Misuse can be reported to support@dissem.in."
+msgstr ""
+"Merci d'adresser tout abus à support@dissem.in."
 
 #: upload/forms.py:30
 msgid "Invalid file format: only PDF files are accepted."
 msgstr "Format de fichier invalide : seuls les fichiers PDF sont acceptés."
 
 #: upload/forms.py:39
-#, python-format
-msgid "File too large (%s). Maximum size is %s."
-msgstr "Fichier trop volumineux (%s). La taille maximale est de %s."
+msgid "File too large (%(size)s). Maximum size is %(maxsize)s."
+msgstr "Fichier trop volumineux (%(size)s). La taille maximale est de %(maxsize)s."
 
-#: upload/forms.py:47
+#: upload/forms.py:48
 msgid "URL"
 msgstr "URL"
 
@@ -1792,8 +1832,12 @@ msgid "File too large."
 msgstr "Fichier trop volumineux."
 
 #: upload/views.py:182
-msgid "Invalid content type: this link points to a web page, "
-msgstr "Type MIME invalide : ce lien pointe vers une page Web. "
+msgid ""
+"Invalid content type: this link points to a web page, we need a direct link "
+"to a PDF file."
+msgstr ""
+"Type MIME invalide : ce lien pointe vers une page Web, un lien direct "
+"vers un fichier PDF est requis."
 
 #: upload/views.py:188 upload/views.py:192
 msgid "Invalid URL (server timed out)."
@@ -1806,6 +1850,9 @@ msgstr "URL invalide."
 #: upload/views.py:207
 msgid "Invalid form."
 msgstr "Formulaire invalide."
+
+#~ msgid "Use of the deposit service"
+#~ msgstr "Utilisation du service de dépôt"
 
 #~ msgid ""
 #~ "Dissemin helps researchers at <a href=\"%(institution_website)s\">"
@@ -1936,9 +1983,6 @@ msgstr "Formulaire invalide."
 
 #~ msgid "Journals in which researchers have authored papers"
 #~ msgstr "Revues dans lesquelles les chercheurs ont écrit des papiers"
-
-#~ msgid "FAQ"
-#~ msgstr "FAQ"
 
 #~ msgid ""
 #~ "There are many ways to get involved, even if you do not want to write any "
