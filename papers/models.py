@@ -279,7 +279,7 @@ class Researcher(models.Model):
     @property
     def authors_by_year(self):
         """:py:class:`Author` objects for this researcher, filtered by decreasing publication date"""
-        return Author.objects.filter(name__researcher_id=self.id).order_by('-paper__pubdate')
+        return Author.objects.filter(researcher_id=self.id).order_by('-paper__pubdate')
     @property
     def name_variants(self):
         """
