@@ -1,0 +1,23 @@
+/* small screen fixes */
+
+#welcome #institutionblock {
+  float: none;
+  margin: 0 auto;
+  width: 50%;
+}
+
+#welcome .startButton .btn { display: block; }
+
+#welcome p { width: 100%; }
+
+.oaPannel.left, .oaPannel.right, .oaPannel.left > *, .oaPannel.right > * {
+  float: none;
+}
+.oaPannel { width: 100%; margin: 0 0 20px 0; }
+
+#sidebar { float: none; width: 100%; }
+
+#summaryLists { width: 100%; }
+
+#subfooter { min-width: 300px; }
+#subfooter p { margin: 10px 0; }
