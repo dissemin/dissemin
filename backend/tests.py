@@ -325,6 +325,7 @@ class OrcidIntegrationTest(PaperSourceTest):
         author = p.author_set.get(position=0)
         self.assertEqual(author.affiliation, self.r4.orcid)
 
+
 class PaperMethodsTest(PrefilledTest):
     @classmethod
     def setUpClass(self):

@@ -432,14 +432,48 @@ class ValidateOrcidTest(unittest.TestCase):
         self.assertEqual(validate_orcid('http://orcid.org/0000-0002-8612-8827'), '0000-0002-8612-8827')
 
 class OrcidProfileTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(self):
+        self.antonin = OrcidProfile(id='0000-0002-8612-8827')
+        self.thomas = OrcidProfile(id='0000-0003-0524-631X')
+        self.sergey = OrcidProfile(id='0000-0003-3397-9895')
+
     def test_simple_name(self):
-        self.assertEqual(OrcidProfile(id='0000-0002-8612-8827').name, ('Antonin','Delpeuch'))
-        self.assertEqual(OrcidProfile(id='0000-0003-0524-631X').name, ('Thomas','Bourgeat'))
+        self.assertEqual(self.antonin.name, ('Antonin','Delpeuch'))
+        self.assertEqual(self.thomas.name, ('Thomas','Bourgeat'))
 
     def test_credit_name(self):
-        self.assertEqual(OrcidProfile(id='0000-0003-3397-9895').name, ('Sergey M.','Natanzon'))
+        self.assertEqual(self.sergey.name, ('Sergey M.','Natanzon'))
         self.assertEqual(OrcidProfile(id='0000-0001-9547-293X').name, ('Darío', 'Álvarez'))
+
+    def test_other_names(self):
+        self.assertEqual(set(self.sergey.other_names),
+                set([('Sergey', 'Natanzon'), ('S.', 'Natanzon'),
+                    ('S. M.', 'Natanzon'), ('Sergey', 'Natanzon')]))
 
     def test_homepage_without_http(self):
         self.assertEqual(OrcidProfile(id='0000-0002-5710-3989').homepage, 'http://evrard.perso.enseeiht.fr')
+
+    def test_iterable(self):
+        for key in self.thomas:
+            self.assertEqual(type(key), unicode)
+
+    def test_attr(self):
+        self.assertTrue('orcid-profile' in self.thomas)
+        self.assertEqual(type(self.thomas['orcid-profile']), dict)
+
+    def test_wrong_instance(self):
+        with self.assertRaises(ValueError):
+            p = OrcidProfile()
+            p.fetch('0000-0002-2963-7764', 'dissem.in')
+
+    def test_sandbox(self):
+        self.assertEqual(OrcidProfile(id='0000-0001-9882-3387').name, ('Donald','Duck'))
+
+    def test_search(self):
+        results = list(OrcidProfile.search_by_name('Maarten','Jacobs'))
+        self.assertTrue(all(map(lambda x: len(x['orcid']) and (len(x['first']) or len(x['last'])), results)))
+        names_returned = map(lambda x: (x['first'],x['last']), results)
+        self.assertTrue(('Maarten','Jacobs') in names_returned)
+
 
