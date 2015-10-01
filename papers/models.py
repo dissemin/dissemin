@@ -401,40 +401,20 @@ class Researcher(models.Model):
 
     @classmethod
     def get_or_create_by_name(cls, first, last, **kwargs):
-       name, created = Name.get_or_create(first, last)
-       researcher, created = Researcher.objects.get_or_create(name=name, defaults=kwargs)
-       if created:
-           researcher.update_variants()
-           researcher.update_stats()
-       return researcher
-
-    # TODO delete this method and replace it by get_or_create_by_name
-    @classmethod
-    def create_from_scratch(cls, first, last, **kwargs):
-        """Creates a researcher, creating first the :py:class:`Name` for it.
-
-        :raises ValueError: if a researcher with that name already exists,
-                            or if an invalid ORCiD is provided.
-        :raises DataError: if a researcher with that ORCiD already exists.
-        """
         name, created = Name.get_or_create(first, last)
-        if not created and cls.objects.filter(name=name).count() > 0:
-            # we forbid the creation of two researchers with the same name,
-            # although our model would support it (TODO ?)
-            raise ValueError('This name already exists')
 
         if kwargs.get('orcid') is not None:
-            orcid = validate_orcid(kwargs['orcid'])
-            if orcid is None:
+            orcid = kwargs['orcid']
+            kwargs['orcid'] = validate_orcid(orcid)
+            if kwargs['orcid'] is None:
                 raise ValueError('Invalid ORCiD: "%s"' % orcid)
 
-        researcher = Researcher(name=name, **kwargs)
-        # This will raise DataError if such an ORCiD already exists
-        researcher.save()
-        researcher.update_variants()
-        researcher.update_stats()
+        researcher, created = Researcher.objects.get_or_create(name=name, defaults=kwargs)
+        if created:
+            researcher.update_variants()
+            researcher.update_stats()
         return researcher
-    
+
     @property
     def object_id(self):
         """Criteria to use in the search view to filter on this researcher"""
@@ -874,10 +854,12 @@ class Paper(models.Model):
         if new_affiliations is None:
             new_affiliations = [None]*len(new_author_names)
         assert len(new_author_names) == len(new_affiliations)
-        old_authors = self.sorted_authors
+        if hasattr(self, 'sorted_authors'):
+            del self.sorted_authors
+        old_authors = list(self.sorted_authors)
 
         # Invalidate cached properties
-        del self.sorted_authors
+        #del self.sorted_authors
         if hasattr(self, 'interesting_authors'):
             del self.interesting_authors
 

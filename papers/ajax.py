@@ -156,7 +156,7 @@ def addResearcher(request):
             homepage = form.cleaned_data['homepage']
 
             try:
-                researcher = Researcher.create_from_scratch(first, last,
+                researcher = Researcher.get_or_create_by_name(first, last,
                         department=dept, email=email, role=role, homepage=homepage)
             except ValueError:
                 return HttpResponseForbidden('Researcher already present', content_type='text/plain')

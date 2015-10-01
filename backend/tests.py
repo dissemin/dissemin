@@ -20,6 +20,7 @@
 
 from __future__ import unicode_literals
 
+import unittest
 from django.test import TestCase
 from backend.core import *
 from backend.crossref import *
@@ -70,30 +71,37 @@ class RomeoTest(TestCase):
 
 # Generic test case that requires some example DB
 class PrefilledTest(TestCase):
-    def setUp(self):
-        self.i = Institution.objects.create(name='ENS')
-        self.d = Department.objects.create(name='Chemistry dept', institution=self.i)
-        self.di = Department.objects.create(name='Comp sci dept', institution=self.i)
-        self.r1 = Researcher.create_from_scratch('Isabelle', 'Aujard', department=self.d)
-        self.r2 = Researcher.create_from_scratch('Ludovic', 'Jullien', department=self.d)
-        self.r3 = Researcher.create_from_scratch('Antoine', 'Amarilli', department=self.di)
-        self.r4 = Researcher.create_from_scratch('Antonin', 'Delpeuch', department=self.di, orcid=
+    @classmethod
+    def setUpClass(self):
+        self.i, _ = Institution.objects.get_or_create(name='ENS')
+        self.d, _ = Department.objects.get_or_create(name='Chemistry dept', institution=self.i)
+        self.di, _ = Department.objects.get_or_create(name='Comp sci dept', institution=self.i)
+        self.r1 = Researcher.get_or_create_by_name('Isabelle', 'Aujard', department=self.d)
+        self.r2 = Researcher.get_or_create_by_name('Ludovic', 'Jullien', department=self.d)
+        self.r3 = Researcher.get_or_create_by_name('Antoine', 'Amarilli', department=self.di)
+        self.r4 = Researcher.get_or_create_by_name('Antonin', 'Delpeuch', department=self.di, orcid=
             '0000-0002-8612-8827')
-        self.r5 = Researcher.create_from_scratch('Terence', 'Tao')
-        self.hal = OaiSource.objects.create(identifier='hal',
+        self.r5 = Researcher.get_or_create_by_name('Terence', 'Tao')
+        self.hal, _ = OaiSource.objects.get_or_create(identifier='hal',
                 name='HAL',
                 default_pubtype='preprint')
-        self.arxiv = OaiSource.objects.create(identifier='arxiv',
+        self.arxiv, _ = OaiSource.objects.get_or_create(identifier='arxiv',
                 name='arXiv',
                 default_pubtype='preprint')
+
+    @classmethod
+    def tearDownClass(self):
+        name_lookup_cache.prune()
 
     def tearDown(self):
         name_lookup_cache.prune()
 
+
 # Generic test series for a PaperSource instance
 class PaperSourceTest(PrefilledTest):
-    def setUp(self):
-        super(PaperSourceTest, self).setUp()
+    @classmethod
+    def setUpClass(self):
+        super(PaperSourceTest, self).setUpClass()
         self.ccf = get_ccf()
         self.source = None
         self.researcher = self.r4
@@ -105,18 +113,27 @@ class PaperSourceTest(PrefilledTest):
         for p in papers:
             p.check_authors()
         self.assertTrue(len(papers) > 1)
+        self.check_papers(papers)
+
+    def check_papers(self, papers):
+        """
+        Method that subclasses can reimplement to check the papers
+        downloaded in test_fetch.
+        """
+        pass
 
     def test_empty(self):
         if self.source is None:
             return
-        emptyres = Researcher.create_from_scratch('Anrscuienrsc','Lecsrcudresies')
+        emptyres = Researcher.get_or_create_by_name('Anrscuienrsc','Lecsrcudresies')
         papers = list(self.source.fetch_papers(emptyres))
         self.assertEqual(papers, [])
 
 # Test that the CORE interface works
 class CoreTest(PaperSourceTest):
-    def setUp(self):
-        super(CoreTest, self).setUp()
+    @classmethod
+    def setUpClass(self):
+        super(CoreTest, self).setUpClass()
         self.source = CorePaperSource(self.ccf)
         self.researcher = self.r5
 
@@ -143,16 +160,27 @@ class CrossRefOaiTest(PaperSourceTest):
     """
     Test for the CrossRef interface with OAI availability fetching
     """
-    def setUp(self):
-        super(CrossRefOaiTest, self).setUp()
+    @classmethod
+    def setUpClass(self):
+        super(CrossRefOaiTest, self).setUpClass()
         self.oaisource = OaiPaperSource(self.ccf) 
         self.source = CrossRefPaperSource(self.ccf, oai=self.oaisource)
 
-class CrossRefTest(PaperSourceTest):
-    def setUp(self):
-        super(CrossRefTest, self).setUp()
+class CrossRefIntegrationTest(PaperSourceTest):
+    @classmethod
+    def setUpClass(self):
+        super(CrossRefIntegrationTest, self).setUpClass()
         self.source = CrossRefPaperSource(self.ccf)
 
+    def check_papers(self, papers):
+        # Check affiliations are kept
+        p = Publication.objects.get(doi='10.4204/eptcs.172.16')
+        self.assertEqual(p.paper.author_set.all()[0].affiliation, 'École Normale Supérieure, Paris')
+        # Check that each paper has a publication
+        for p in papers:
+            self.assertTrue(len(p.publication_set.all()) > 0)
+
+class CrossRefUnitTest(unittest.TestCase):
     def test_fetch_single_doi(self):
         doi = '10.5380/dp.v1i1.1922'
         metadata = fetch_metadata_by_DOI(doi)
@@ -248,15 +276,12 @@ class CrossRefTest(PaperSourceTest):
                 convert_to_name_pair({'family':'Arvind'}),
                 ('','Arvind'))
 
-    def test_affiliation(self):
-        self.source.fetch(self.r4)
-        p = Publication.objects.get(doi='10.4204/eptcs.172.16')
-        self.assertEqual(p.paper.author_set.all()[0].affiliation, 'École Normale Supérieure, Paris')
 
 # Test that the proaixy interface works
 class OaiTest(PaperSourceTest):
-    def setUp(self):
-        super(OaiTest, self).setUp()
+    @classmethod
+    def setUpClass(self):
+        super(OaiTest, self).setUpClass()
         self.source = OaiPaperSource(self.ccf)
 
     def test_signature(self):
@@ -269,11 +294,7 @@ class OaiTest(PaperSourceTest):
             if idx > 10:
                 break
 
-class OrcidTest(PaperSourceTest):
-    def setUp(self):
-        super(OrcidTest, self).setUp()
-        self.source = OrcidPaperSource(self.ccf)
-
+class OrcidUnitTest(unittest.TestCase):
     def test_affiliate_author(self):
         self.assertEqual(
                 affiliate_author_with_orcid(
@@ -288,13 +309,13 @@ class OrcidTest(PaperSourceTest):
                 [('Antonin','Delpeuch'),('Anne','Preller')]),
                 ['0000-0002-8612-8827',None])
 
+class OrcidIntegrationTest(PaperSourceTest):
+    @classmethod
+    def setUpClass(self):
+        super(OrcidIntegrationTest, self).setUpClass()
+        self.source = OrcidPaperSource(self.ccf)
 
-    def test_update_affiliations(self):
-        crps = CrossRefPaperSource(self.ccf)
-        crps.fetch(self.r4)
-        p = Paper.objects.get(title='From Natural Language to RDF Graphs with Pregroups')
-        p.check_authors()
-        self.source.fetch(self.r4)
+    def check_papers(self, papers):
         p = Paper.objects.get(title='From Natural Language to RDF Graphs with Pregroups')
         p.check_authors()
         author = p.author_set.get(position=0)
@@ -305,7 +326,8 @@ class OrcidTest(PaperSourceTest):
         self.assertEqual(author.affiliation, self.r4.orcid)
 
 class PaperMethodsTest(PrefilledTest):
-    def setUp(self):
+    @classmethod
+    def setUpClass(self):
         self.ccf = get_ccf()
 
     def test_update_author_names(self):
@@ -339,8 +361,9 @@ class PaperMethodsTest(PrefilledTest):
 
 
 class MaintenanceTest(PrefilledTest):
-    def setUp(self):
-        super(MaintenanceTest, self).setUp()
+    @classmethod
+    def setUpClass(self):
+        super(MaintenanceTest, self).setUpClass()
         self.ccf = get_ccf()
         crps = CrossRefPaperSource(self.ccf)
         crps.fetch(self.r2)
@@ -382,22 +405,10 @@ class MaintenanceTest(PrefilledTest):
         self.assertEqual(Name.lookup_name(('Anaruic','Leclescuantebrste')).pk, None)
 
     def test_name_initial(self):
-        n = self.r1.name
-        p = Publication.objects.get(doi="10.1002/anie.200800037").paper
-        n1 = p.author_set.get(position=1).name
-        print ""
-        print "NAME 1"
-        print "%d, %s, %s" % (n1.pk,n1.full,unicode(n1))
-        print ""
-        print "NAME 2"
-        print "%d, %s, %s" % (n.pk,n.full,unicode(n))
-        print ""
-        if (n1.first,n1.last) == (n.first,n.last):
-            print "CONFLICT DETECTED"
-        else:
-            print "NAME PAIRS DIFFER"
-
-        self.assertEqual(p.author_set.get(position=1).name, n)
+        n = self.r2.name
+        p = Publication.objects.get(doi="10.1002/ange.19941062339").paper
+        n1 = p.author_set.get(position=0).name
+        self.assertEqual(p.author_set.get(position=0).name, n)
 
     def test_merge_names(self):
         n = Name.lookup_name(('Isabelle','Autard'))
@@ -424,8 +435,5 @@ class MaintenanceTest(PrefilledTest):
         oaips.fetch(self.r3)
         cleanup_titles()
         cleanup_abstracts()
-
-
-
 
 
