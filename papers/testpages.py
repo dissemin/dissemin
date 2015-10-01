@@ -23,6 +23,7 @@ from __future__ import unicode_literals
 
 import unittest
 import django.test
+from papers.utils import overescaped_re
 from django.core.urlresolvers import reverse
 from backend.tests import PrefilledTest
 from backend.globals import get_ccf
@@ -51,6 +52,8 @@ class RenderingTest(PrefilledTest):
 
     def checkHtml(self, resp):
         self.assertEqual(resp.status_code, 200)
+        # Check that there are no overescaped HTML strings…
+        self.assertEqual(overescaped_re.findall(resp.content), [])
         # TODO check resp.content for HTML errors
 
     def getPage(self, *args, **kwargs):

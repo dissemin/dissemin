@@ -17,5 +17,19 @@
 #
 
 from django.test import TestCase
+from backend.romeo import *
+from papers.testpages import RenderingTest
 
-# Create your tests here.
+class JournalPageTest(RenderingTest):
+
+    def test_escaping(self):
+        # issue #115
+        journal = fetch_journal({'issn':'1309-534X'})
+        # Small hack to make the journal appear in the publisher's journal list
+        journal.update_stats()
+        journal.stats.num_tot = 1
+        journal.stats.save()
+        r = self.getPage('publisher', kwargs={'pk':journal.publisher_id})
+        print r.content
+        self.checkHtml(r)
+

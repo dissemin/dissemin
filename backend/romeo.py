@@ -28,7 +28,7 @@ import requests.exceptions
 
 from papers.models import *
 from papers.errors import MetadataSourceException
-from papers.utils import nstrip, remove_diacritics
+from papers.utils import nstrip, remove_diacritics, kill_html
 from backend.utils import urlopen_retry
 
 from publishers.models import *
@@ -100,6 +100,9 @@ def fetch_journal(search_terms, matching_mode = 'exact'):
     search_terms should be a dictionnary object containing at least one of these fields:
     """
     allowed_fields = ['issn', 'jtitle']
+    # Make the title HTML-safe before searching for it in the database or in the API
+    if 'title' in search_terms:
+        search_terms['title'] = kill_html(search_terms['title'])
     original_search_terms = search_terms.copy()
 
     # Check the arguments
@@ -139,7 +142,7 @@ def fetch_journal(search_terms, matching_mode = 'exact'):
     if len(names) > 1:
         print("Warning, "+str(len(names))+" names provided for one journal, "+
                 "defaulting to the first one")
-    name = names[0].text
+    name = kill_html(names[0].text)
     
     issn = None
     try:
@@ -222,7 +225,7 @@ def get_or_create_publisher(romeo_xml_description):
     
     name = None
     try:
-        name = xml.findall('./name')[0].text.strip()
+        name = kill_html(xml.findall('./name')[0].text.strip())
     except (KeyError, IndexError, AttributeError):
         raise MetadataSourceException('RoMEO did not provide the publisher\'s name.\n'+
                 'URL was: '+request)
@@ -230,6 +233,8 @@ def get_or_create_publisher(romeo_xml_description):
     alias = None
     try:
         alias = nstrip(xml.findall('./alias')[0].text)
+        if alias:
+            alias = kill_html(alias)
     except KeyError, IndexError:
         pass
 
