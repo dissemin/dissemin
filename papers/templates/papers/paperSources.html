@@ -24,7 +24,7 @@
 </p>
 {% endfor %}
 
-{% for publi in paper.publication_set.all %}
+{% for publi in paper.first_publications %}
 <p><a href="{{ publi | doi_to_url }}">{{ publi.publisher|default:publi.publisher_name }} <img src="/static/extlink.png" /></a> {% trans "via DOI" %}</p>
 {% endfor %}
 

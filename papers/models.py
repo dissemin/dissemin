@@ -662,6 +662,15 @@ class Paper(models.Model):
         else:
             return self.sorted_authors
 
+    def first_publications(self):
+        """
+        The list of the 3 first publications associated with this paper
+        (in most cases, that should return *all* publications, but in some nasty cases
+        many publications end up merged, and it is not very elegant to show all of them
+        to the users).
+        """
+        return self.publication_set.all()[:3]
+
     @cached_property
     def owners(self):
         """
