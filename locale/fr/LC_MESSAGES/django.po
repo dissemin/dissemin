@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-02 12:04+0200\n"
-"PO-Revision-Date: 2015-10-02 12:11+0200\n"
+"POT-Creation-Date: 2015-10-03 01:56+0200\n"
+"PO-Revision-Date: 2015-10-03 01:57+0200\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -303,15 +303,15 @@ msgstr "Regroupement des publications"
 msgid "Updating statistics"
 msgstr "Mise à jour des statistiques"
 
-#: papers/models.py:777
+#: papers/models.py:786
 msgid "This paper is made freely available by the publisher."
 msgstr "Le texte intégral de l'article est en libre accès chez l'éditeur."
 
-#: papers/models.py:779
+#: papers/models.py:788
 msgid "This paper is available in a repository."
 msgstr "Cet article est disponible dans un dépôt."
 
-#: papers/models.py:781
+#: papers/models.py:790
 msgid ""
 "This paper was not found in any repository, but could be made available "
 "legally by the author."
@@ -319,11 +319,11 @@ msgstr ""
 "Cet article n'a été trouvé dans aucun dépôt, mais ses auteurs ont le droit "
 "de le mettre en ligne."
 
-#: papers/models.py:783
+#: papers/models.py:792
 msgid "Distributing this paper is prohibited by the publisher"
 msgstr "L'éditeur interdit la mise en ligne de cet article"
 
-#: papers/models.py:785
+#: papers/models.py:794
 msgid ""
 "This paper was not found in any repository; the policy of its publisher is "
 "unknown or unclear."
@@ -331,7 +331,7 @@ msgstr ""
 "Cet article n'a été trouvé dans aucun dépôt, et la politique de l'éditeur "
 "est inconnue ou imprécise."
 
-#: papers/models.py:1027 papers/views.py:100 papers/views.py:101
+#: papers/models.py:1036 papers/views.py:100 papers/views.py:101
 #: papers/views.py:140 papers/views.py:172
 msgid "Papers"
 msgstr "Papiers"
@@ -418,11 +418,19 @@ msgctxt "alternate text of the waiting picture in the name lookup form"
 msgid "Searching..."
 msgstr "Recherche en cours..."
 
-#: papers/templates/papers/index.html:83
+#: papers/templates/papers/index.html:66
+msgid "Looking for one of these researchers?"
+msgstr "Pensiez-vous à l'un de ces chercheurs ?"
+
+#: papers/templates/papers/index.html:67
+msgid "Looking for this researcher?"
+msgstr "Pensiez-vous à ce chercheur ?"
+
+#: papers/templates/papers/index.html:91
 msgid "Welcome to dissemin"
 msgstr "Bienvenue sur dissemin"
 
-#: papers/templates/papers/index.html:87
+#: papers/templates/papers/index.html:95
 msgid ""
 "Dissemin helps researchers ensure that their publications are freely "
 "available to their readers. Our free service spots paywalled papers and lets "
@@ -436,7 +444,7 @@ msgstr ""
 "clics sur <a href=\"http://zenodo.org\" target=\"_blank\">Zenodo</a>, un "
 "dépôt innovant soutenu par l'UE."
 
-#: papers/templates/papers/index.html:96
+#: papers/templates/papers/index.html:104
 #, python-format
 msgid ""
 "Still unsure? Read below or check out the <a href=\"%(faq_url)s\">FAQ</a>."
@@ -444,54 +452,50 @@ msgstr ""
 "Vous hésitez toujours ? Lisez ce qui suit ou jetez un œil à la <a href="
 "\"%(faq_url)s\">FAQ</a>."
 
-#: papers/templates/papers/index.html:102
+#: papers/templates/papers/index.html:110
 msgid "Analyze my publications"
 msgstr "Analyser mes publications"
 
-#: papers/templates/papers/index.html:102
+#: papers/templates/papers/index.html:110
 msgctxt "Analyze my publications OR Look up my colleagues"
 msgid "or"
 msgstr "ou"
 
-#: papers/templates/papers/index.html:102
+#: papers/templates/papers/index.html:110
 msgid "Look up a colleague"
 msgstr "Chercher un collègue"
 
-#: papers/templates/papers/index.html:118
-#: papers/templates/papers/index.html:119
+#: papers/templates/papers/index.html:126
+#: papers/templates/papers/index.html:127
 msgid "Firstname"
 msgstr "Prénom"
 
-#: papers/templates/papers/index.html:123
-#: papers/templates/papers/index.html:124
+#: papers/templates/papers/index.html:131
+#: papers/templates/papers/index.html:132
 msgid "Lastname"
 msgstr "Nom"
 
-#: papers/templates/papers/index.html:133
+#: papers/templates/papers/index.html:141
 msgid "identifier (such as 0000-0001-2345-6789)"
 msgstr "identifiant (par exemple, 0000-0001-2345-6789)"
 
-#: papers/templates/papers/index.html:141
+#: papers/templates/papers/index.html:149
 msgid "Search"
 msgstr "Recherche"
 
-#: papers/templates/papers/index.html:156
-msgid "Looking for one of these researchers?"
-msgstr "Pensiez-vous à l'un de ces chercheurs ?"
-
-#: papers/templates/papers/index.html:163
+#: papers/templates/papers/index.html:171
 msgid "Cancel"
 msgstr "Annuler"
 
-#: papers/templates/papers/index.html:164
+#: papers/templates/papers/index.html:172
 msgid "No, carry on"
 msgstr "Non, continuer"
 
-#: papers/templates/papers/index.html:173
+#: papers/templates/papers/index.html:181
 msgid "Green open access"
 msgstr "Libre accès (voie verte)"
 
-#: papers/templates/papers/index.html:177
+#: papers/templates/papers/index.html:185
 msgid ""
 "Many researchers do not use their right make their papers freely available "
 "online, in addition to the paywalled version offered by traditional "
@@ -501,7 +505,7 @@ msgstr ""
 "sur le Web, pour compléter la version payante proposée par les éditeurs "
 "traditionnels. Pourtant, tous ne le font pas."
 
-#: papers/templates/papers/index.html:185
+#: papers/templates/papers/index.html:193
 msgid ""
 "This forces libraries to buy overpriced electronic subscriptions to "
 "journals, when they can afford them at all."
@@ -510,11 +514,11 @@ msgstr ""
 "électroniques aux journaux de recherche, ce qui grève leurs finances et "
 "limite leur offre."
 
-#: papers/templates/papers/index.html:201
+#: papers/templates/papers/index.html:209
 msgid "Open repositories"
 msgstr "Dépôts ouverts"
 
-#: papers/templates/papers/index.html:204
+#: papers/templates/papers/index.html:212
 msgid ""
 "Uploading your papers on your own webpage is not enough. Such copies are "
 "less stable and harder to find than documents uploaded to well-indexed "
@@ -525,7 +529,7 @@ msgstr ""
 "difficiles à trouver que celles qui sont déposées dans des dépôts bien "
 "indexés."
 
-#: papers/templates/papers/index.html:212
+#: papers/templates/papers/index.html:220
 msgid ""
 "Dissemin searches for copies of your papers in a large collection of open "
 "repositories and tells you which ones cannot be accessed."
