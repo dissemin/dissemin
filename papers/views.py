@@ -275,7 +275,6 @@ class PaperView(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super(PaperView, self).get_context_data(**kwargs)
         context['breadcrumbs'] = self.get_object().breadcrumbs()
-        print context['breadcrumbs']
         if 'deposit' in self.request.GET:
             try:
                 pk = int(self.request.GET['deposit'])

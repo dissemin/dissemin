@@ -29,14 +29,16 @@
         <a href="{% url 'upload_paper' paper.pk %}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-open"></span> {% trans "Upload" %}</a> | 
         {% endif %}
 
-        {% for publi in paper.publication_set.all %}
-            {{ publi | publication }}{% if forloop.last %}.{% else %},{% endif %}<br />
-        {% empty %}
+        {% with paper.publication_set.first as publi %}
+            {% if publi %}
+                {{ publi | publication }}{% if forloop.last %}.{% else %},{% endif %}<br />
+            {% else %}
             {% for record in paper.prioritary_oai_records %}
                 {% if record.splash_url %}<a href="{{ record.splash_url }}">{% endif %}{{ record.source.name }}{% if record.pdf_url == None %}{% trans " (metadata only)" %}{% endif %}{% if record.splash_url %} <img src="/static/extlink.png"/></a>{% endif %}{% if forloop.last %}.{% else %},{% endif %}
             {% endfor %}
             <br />
-         {% endfor %}
+            {% endif %}
+        {% endwith %}
     </p>
     
 </div>

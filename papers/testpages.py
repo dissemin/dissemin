@@ -23,6 +23,7 @@ from __future__ import unicode_literals
 
 import unittest
 import django.test
+from papers.utils import overescaped_re
 from django.core.urlresolvers import reverse
 from backend.tests import PrefilledTest
 from backend.globals import get_ccf
@@ -51,10 +52,26 @@ class RenderingTest(PrefilledTest):
 
     def checkHtml(self, resp):
         self.assertEqual(resp.status_code, 200)
+        # Check that there are no overescaped HTML strings…
+        self.assertEqual(overescaped_re.findall(resp.content), [])
         # TODO check resp.content for HTML errors
 
     def getPage(self, *args, **kwargs):
+        urlargs = kwargs.copy()
+        if 'getargs' in kwargs:
+            del urlargs['getargs']
+            return self.client.get(reverse(*args, **urlargs), kwargs['getargs'])
         return self.client.get(reverse(*args, **kwargs))
+
+class PaperPagesTest(RenderingTest):
+    @classmethod
+    def setUpClass(self):
+        super(PaperPagesTest, self).setUpClass()
+        ccf = get_ccf()
+        crps = CrossRefPaperSource(ccf)
+        oai = OaiPaperSource(ccf)
+        crps.fetch(self.r3, incremental=True)
+        oai.fetch(self.r3, incremental=True)
 
     def test_index(self):
         self.checkHtml(self.getPage('index'))
@@ -68,16 +85,13 @@ class RenderingTest(PrefilledTest):
 
     def test_search(self):
         self.checkHtml(self.getPage('search'))
+        self.checkHtml(self.getPage('search', getargs={'researcher':self.r3.pk}))
+        self.checkHtml(self.getPage('search', getargs={'name':self.r3.name_id}))
         # TODO more tests here
 
 #        url(r'^my-profile', views.myProfileView, name='my-profile'),
 
     def test_paper(self):
-        ccf = get_ccf()
-        crps = CrossRefPaperSource(ccf)
-        oai = OaiPaperSource(ccf)
-        crps.fetch_papers(self.r3)
-        oai.fetch_papers(self.r3)
-        for p in self.r3.authors_by_year:
-            self.checkHtml(self.getPage('paper', kwargs={'pk':p.pk}))
+        for a in self.r3.authors_by_year:
+            self.checkHtml(self.getPage('paper', kwargs={'pk':a.paper_id}))
 

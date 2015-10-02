@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load author %}
 {% load statuses %}
-{% for publi in paper.publication_set.all %}
+{% for publi in paper.first_publications %}
 {% if forloop.first %}
   <span class="detailsTitle">{% trans "Published in" %}</span>
   <div class="detailsContent">

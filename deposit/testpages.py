@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*-
+
 # Dissemin: open access policy enforcement tool
 # Copyright (C) 2014 Antonin Delpeuch
 #
@@ -16,20 +18,21 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from django.test import TestCase
-from backend.romeo import *
 from papers.testpages import RenderingTest
+from backend.globals import get_ccf
+from backend.crossref import CrossRefPaperSource
 
-class JournalPageTest(RenderingTest):
+class DepositPagesTest(RenderingTest):
+    @classmethod
+    def setUpClass(self):
+        super(DepositPagesTest, self).setUpClass()
+        ccf = get_ccf()
+        crps = CrossRefPaperSource(ccf)
+        crps.fetch(self.r3, incremental=True)
 
-    def test_escaping(self):
-        # issue #115
-        journal = fetch_journal({'issn':'1309-534X'})
-        # Small hack to make the journal appear in the publisher's journal list
-        journal.update_stats()
-        journal.stats.num_tot = 1
-        journal.stats.save()
-        r = self.getPage('publisher', kwargs={'pk':journal.publisher_id})
-        print r.content
-        self.checkHtml(r)
+    def test_start_deposit_unauthenticated(self):
+        paper = self.r3.author_set.all()[0].paper
+        r = self.getPage('upload_paper', kwargs={'pk':paper.pk})
+        self.assertEqual(r.status_code, 302)
+
 
