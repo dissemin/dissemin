@@ -33,8 +33,8 @@
             {% if publi %}
                 {{ publi | publication }}{% if forloop.last %}.{% else %},{% endif %}<br />
             {% else %}
-            {% for record in paper.prioritary_oai_records %}
-                {% if record.splash_url %}<a href="{{ record.splash_url }}">{% endif %}{{ record.source.name }}{% if record.pdf_url == None %}{% trans " (metadata only)" %}{% endif %}{% if record.splash_url %} <img src="/static/extlink.png"/></a>{% endif %}{% if forloop.last %}.{% else %},{% endif %}
+            {% for record in paper.unique_prioritary_oai_records %}
+                {{ record.source.name }}{% if record.pdf_url == None %}{% trans " (metadata only)" %}{% endif %}{% if forloop.last %}.{% else %},{% endif %}
             {% endfor %}
             <br />
             {% endif %}

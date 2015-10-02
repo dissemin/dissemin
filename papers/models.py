@@ -598,6 +598,14 @@ class Paper(models.Model):
         """
         return self.sorted_oai_records.filter(priority__gt=0)
 
+    @property
+    def unique_prioritary_oai_records(self):
+        seen_sources = set()
+        for record in self.prioritary_oai_records:
+            if record.source_id not in seen_sources:
+                seen_sources.add(record.source_id)
+                yield record
+
     @cached_property
     def sorted_oai_records(self):
         """
