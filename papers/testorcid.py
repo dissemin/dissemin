@@ -25,25 +25,6 @@ import unittest
 
 from papers.orcid import *
 
-class ValidateOrcidTest(unittest.TestCase):
-    def test_simple(self):
-        self.assertEqual(validate_orcid(None), None)
-        self.assertEqual(validate_orcid(189), None)
-        self.assertEqual(validate_orcid('rst'), None)
-        self.assertEqual(validate_orcid('0123012301230123'), None)
-
-    def test_checksum(self):
-        self.assertEqual(validate_orcid('0000-0002-8612-8827'), '0000-0002-8612-8827')
-        self.assertEqual(validate_orcid('0000-0002-8612-8828'), None)
-        self.assertEqual(validate_orcid('0000-0001-5892-743X'), '0000-0001-5892-743X')
-        self.assertEqual(validate_orcid('0000-0001-5892-7431'), None)
-
-    def test_whitespace(self):
-        self.assertEqual(validate_orcid('\t0000-0002-8612-8827  '), '0000-0002-8612-8827')
-
-    def test_url(self):
-        self.assertEqual(validate_orcid('http://orcid.org/0000-0002-8612-8827'), '0000-0002-8612-8827')
-
 class OrcidProfileTest(unittest.TestCase):
     @classmethod
     def setUpClass(self):
