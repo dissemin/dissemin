@@ -20,8 +20,10 @@
 
 from __future__ import unicode_literals
 
+import unittest
 import django.test
 from papers.models import *
+import papers.doi
 
 class ResearcherTest(django.test.TestCase):
     def test_creation(self):
@@ -37,5 +39,10 @@ class ResearcherTest(django.test.TestCase):
         r1 = Researcher.get_or_create_by_orcid('0000-0001-7295-1671')
         r2 = Researcher.get_or_create_by_orcid('0000-0001-5393-1421')
         self.assertNotEqual(r1, r2)
+
+import doctest
+def load_tests(loader, tests, ignore):
+    tests.addTests(doctest.DocTestSuite(papers.doi))
+    return tests
 
 

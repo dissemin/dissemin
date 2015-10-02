@@ -27,20 +27,24 @@ import re
 # environment: fields of a metadata record and not plain text
 
 doi_re = re.compile(r'^ *(?:[Dd][Oo][Ii] *[:=])? *(?:http://dx\.doi\.org/)?(10\.[0-9]{4,}[^ ]*/[^ ]+) *$')
+openaire_doi_re = re.compile(r'info:eu-repo/semantics/altIdentifier/doi/(10\.[0-9]{4,}[^ ]*/[^ ]+) *') 
 
-# Supported formats
-#
-# 'http://dx.doi.org/10.1145/1721837.1721839'
-# '10.1145/1721837.1721839'
-# 'DOI: 10.1145/1721837.1721839'
-#
-# These are all converted to
-# '10.1145/1721837.1721839'
 def to_doi(candidate):
-    """ Convert a representation of a DOI to its normal form. """
+    """
+    >>> to_doi('http://dx.doi.org/10.1145/1721837.1721839')
+    u'10.1145/1721837.1721839'
+    >>> to_doi('10.1145/1721837.1721839')
+    u'10.1145/1721837.1721839'
+    >>> to_doi('DOI: 10.1145/1721837.1721839')
+    u'10.1145/1721837.1721839'
+    >>> to_doi('info:eu-repo/semantics/altIdentifier/doi/10.1145/1721837.1721839')
+    u'10.1145/1721837.1721839'
+    """
     m = doi_re.match(candidate)
     if m:
         return m.groups()[0]
     else:
-        return None
+        openaire_match = openaire_doi_re.match(candidate)
+        if openaire_match:
+            return openaire_match.group(1)
 

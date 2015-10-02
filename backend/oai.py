@@ -205,7 +205,7 @@ class OaiPaperSource(PaperSource):
 
             # Find the DOI, if any
             doi = None
-            for identifier in metadata['identifier']:
+            for identifier in metadata['identifier']+metadata['relation']:
                 if not doi:
                     doi = to_doi(identifier)
 
