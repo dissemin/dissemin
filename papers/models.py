@@ -404,12 +404,13 @@ class Researcher(models.Model):
         name, created = Name.get_or_create(first, last)
 
         if kwargs.get('orcid') is not None:
-            orcid = kwargs['orcid']
-            kwargs['orcid'] = validate_orcid(orcid)
+            orcid = validate_orcid(kwargs['orcid'])
             if kwargs['orcid'] is None:
                 raise ValueError('Invalid ORCiD: "%s"' % orcid)
+            researcher, created = Researcher.objects.get_or_create(name=name, orcid=orcid, defaults=kwargs)
+        else:
+            researcher, created = Researcher.objects.get_or_create(name=name, defaults=kwargs)
 
-        researcher, created = Researcher.objects.get_or_create(name=name, defaults=kwargs)
         if created:
             researcher.update_variants()
             researcher.update_stats()

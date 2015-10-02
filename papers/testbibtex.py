@@ -18,24 +18,19 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
+
 from __future__ import unicode_literals
 
-import django.test
-from papers.models import *
+import unittest
+from papers.bibtex import parse_authors_list
 
-class ResearcherTest(django.test.TestCase):
-    def test_creation(self):
-        r = Researcher.get_or_create_by_name('Marie', 'Farge')
-        r2 = Researcher.get_or_create_by_name(' Marie', ' Farge')
-        self.assertEqual(r, r2)
+class ParseAuthorsListTest(unittest.TestCase):
+    def test_simple(self):
+        self.assertEqual(parse_authors_list('Claire Toffano-Nioche and Daniel Gautheret and Fabrice Leclerc'),
+                [('Claire','Toffano-Nioche'),('Daniel','Gautheret'),('Fabrice','Leclerc')])
 
-        r3 = Researcher.get_or_create_by_orcid('0000-0002-4445-8625')
-        self.assertNotEqual(r, r3)
-
-    def test_name_conflict(self):
-        # Both are called "John Doe"
-        r1 = Researcher.get_or_create_by_orcid('0000-0001-7295-1671')
-        r2 = Researcher.get_or_create_by_orcid('0000-0001-5393-1421')
-        self.assertNotEqual(r1, r2)
+    def test_etal(self):
+        self.assertEqual(parse_authors_list('Claire Toffano-Nioche and et al.'),
+                [('Claire','Toffano-Nioche')])
 
 

@@ -79,6 +79,7 @@ class PaperPagesTest(RenderingTest):
     def test_researcher(self):
         for r in [self.r1, self.r2, self.r3, self.r4]:
             self.checkHtml(self.getPage('researcher', kwargs={'researcher':r.pk}))
+            self.checkHtml(self.client.get(self.r4.url))
 
     def test_researcher_orcid(self):
         self.checkHtml(self.getPage('researcher-by-orcid', kwargs={'orcid':self.r4.orcid}))
