@@ -260,7 +260,16 @@ class CrossRefUnitTest(unittest.TestCase):
         self.assertEqual(len(incremental), len(dois))
         if DOI_PROXY_SUPPORTS_BATCH:
             batch = fetch_dois_by_batch(dois)
-            self.assertEqual(incremental, batch)
+            self.assertEqual([item['DOI'] for item in incremental],
+                             [item['DOI'] for item in batch])
+
+    def test_mixed_queries(self):
+        dois = [
+            '10.1016/0169-5983(88)90079-2',
+            '10.5281/zenodo.12826',
+            ]
+        results = fetch_dois_by_batch(dois)
+        self.assertEqual([item['DOI'] for item in results], dois)
 
     def test_convert_to_name_pair(self):
         self.assertEqual(

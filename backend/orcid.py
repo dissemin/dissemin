@@ -250,8 +250,12 @@ class OrcidPaperSource(PaperSource):
                 except ValueError as e:
                     print "Saving CrossRef record from ORCID failed: %s" % unicode(e)
 
-            # TODO: this is inefficient: check first that these DOIs are unknown for us
-            doi_metadata = fetch_dois(dois)
+            # Now we add the DOIs found in the ORCID profile.
+            # Let's first check which ones we already know
+            known_dois = Publication.objects.filter(doi__in=dois).values_list('doi', flat=True)
+            missing_dois = list(set(dois) - set(known_dois))
+
+            doi_metadata = fetch_dois(missing_dois)
             for metadata in doi_metadata:
                 try:
                     authors = map(convert_to_name_pair, metadata['author'])

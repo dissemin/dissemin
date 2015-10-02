@@ -264,15 +264,30 @@ def fetch_dois_by_batch(doi_list):
     """
     if len(doi_list) == 0:
         return []
-    data = {'dois':json.dumps(doi_list)}
+    params = {'filter':','.join(['doi:'+doi for doi in doi_list])}
     try:
-        req = requests.post('http://'+DOI_PROXY_DOMAIN+'/batch', data)
+        # First we fetch dois by batch from CrossRef. That's fast, but only works for CrossRef DOIs
+        req = requests.get('http://api.crossref.org/works', params=params)
         req.raise_for_status()
-        return req.json()
+        results = req.json()['message'].get('items',[])
+        dct = {item['DOI']:item for item in results}
+
+        # Some DOIs might not be in the results list, because they are issued by other organizations
+        # We fetch them using our proxy (cached content negociation)
+        missing_dois = list(set(doi_list) - set(dct.keys()))
+        req = requests.post('http://'+DOI_PROXY_DOMAIN+'/batch', {'dois':json.dumps(missing_dois)})
+        req.raise_for_status()
+        missing_dois_dct = {item['DOI']:item for item in req.json()}
+        dct.update(missing_dois_dct)
+
+        result = [dct.get(doi) for doi in doi_list]
+        return result
     except RequestException as e:
         raise MetadataSourceException('Connecting to the DOI proxy at '+DOI_PROXY_DOMAIN+' failed: '+str(e))
     except ValueError as e:
         raise MetadataSourceException('Invalid JSON returned by the DOI proxy: '+str(e))
+    except KeyError as e:
+        return []
     except requests.exceptions.RequestException as e:
         raise MetadataSourceException('Failed to retrieve batch metadata from the proxy: '+str(e))
 
