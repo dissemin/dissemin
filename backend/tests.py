@@ -30,6 +30,7 @@ from backend.oai import *
 from backend.tasks import *
 from backend.maintenance import *
 from papers.models import *
+from papers.errors import *
 from publishers.models import *
 
 import datetime
@@ -263,10 +264,18 @@ class CrossRefUnitTest(unittest.TestCase):
             self.assertEqual([item['DOI'] for item in incremental],
                              [item['DOI'] for item in batch])
 
+    def test_dirty_batches(self):
+        with self.assertRaises(MetadataSourceException):
+            fetch_dois_by_batch(['aunirestauniecb898989']) # definitely not a DOI
+
+        dois = ['10.5281/anuirsetacesecesrbl'] # probably not a DOI
+        results = fetch_dois_by_batch(dois)
+        self.assertTrue(all([item is None for item in results]))
+
     def test_mixed_queries(self):
         dois = [
-            '10.1016/0169-5983(88)90079-2',
-            '10.5281/zenodo.12826',
+            '10.1016/0169-5983(88)90079-2', # CrossRef DOI
+            '10.5281/zenodo.12826', # DataCite DOI
             ]
         results = fetch_dois_by_batch(dois)
         self.assertEqual([item['DOI'] for item in results], dois)

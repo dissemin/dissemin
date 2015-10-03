@@ -262,6 +262,13 @@ def fetch_dois_by_batch(doi_list):
     of a given researcher, as the records have most likely been already cached before
     by the proxy)
     """
+    def results_list_to_dict(results):
+        dct = {}
+        for item in results:
+            if item and 'DOI' in item:
+                dct[item['DOI']] = item
+        return dct
+
     if len(doi_list) == 0:
         return []
     params = {'filter':','.join(['doi:'+doi for doi in doi_list])}
@@ -270,14 +277,14 @@ def fetch_dois_by_batch(doi_list):
         req = requests.get('http://api.crossref.org/works', params=params)
         req.raise_for_status()
         results = req.json()['message'].get('items',[])
-        dct = {item['DOI']:item for item in results}
+        dct = results_list_to_dict(results)
 
         # Some DOIs might not be in the results list, because they are issued by other organizations
         # We fetch them using our proxy (cached content negociation)
         missing_dois = list(set(doi_list) - set(dct.keys()))
         req = requests.post('http://'+DOI_PROXY_DOMAIN+'/batch', {'dois':json.dumps(missing_dois)})
         req.raise_for_status()
-        missing_dois_dct = {item['DOI']:item for item in req.json()}
+        missing_dois_dct = results_list_to_dict(req.json())
         dct.update(missing_dois_dct)
 
         result = [dct.get(doi) for doi in doi_list]
