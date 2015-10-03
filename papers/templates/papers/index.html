@@ -119,22 +119,22 @@ function lookUpColleague() {
                 <td></td><td id="globalError" class="formErrorDiv"></td>
             </tr>
             <tr>
-                <td style="vertical-align: bottom; padding-bottom: 10px"><div class="researcherMethodLabel">by name</div></td>
+                <td style="vertical-align: bottom; padding-bottom: 10px"><div class="researcherMethodLabel">{% trans "by name" context "before name fields in researcher lookup form" %}</div></td>
             <td class="form-inline" id="nameGroup">
                 <div class="form-group">
                     <div class="formErrorDiv" id="error-first"></div>
                     <label for="id_first" class="sr-only">{% trans "Firstname" %}</label>
-                    <input type="text" name="first" id="id_first" class="form-control" placeholder="{% trans "Firstname" %}" />
+                    <input type="text" name="first" id="id_first" class="form-control" placeholder="{% trans "Firstname" context "Placeholder in researcher lookup form" %}" />
                 </div>
                 <div class="form-group">
                     <div class="formErrorDiv" id="error-last"></div>
-                    <label for="id_last" class="sr-only">{% trans "Lastname" %}</label>
+                    <label for="id_last" class="sr-only">{% trans "Lastname" context "Placeholder in researcher lookup form" %}</label>
                     <input type="text" name="last" id="id_last" class="form-control" placeholder="{% trans "Lastname" %}"/>
                 </div>
             </td>
             </tr>
             <tr>
-                <td><div class="researcherMethodLabel">or by ORCID</div></td>
+                <td><div class="researcherMethodLabel">{% trans "or by ORCID" context "before ORCID field in researcher lookup form" %}</div></td>
             <td class="form-inline" id="orcidGroup">
                 <div class="form-group">
                     <label for="id_orcid" class="sr-only">ORCID</label>
