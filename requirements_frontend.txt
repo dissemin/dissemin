@@ -17,3 +17,4 @@ pillow
 django-crispy-forms
 swampdragon
 django-debug-toolbar
+django-jsonview

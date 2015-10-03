@@ -26,6 +26,7 @@ from django.http import HttpResponse, HttpResponseNotFound, HttpResponseForbidde
 from django.contrib.auth.decorators import user_passes_test
 from django.core.validators import validate_email
 from django.core.exceptions import MultipleObjectsReturned
+from django.views.decorators.http import require_POST
 from django.template import loader
 from django.forms import ValidationError
 from django.db import IntegrityError
@@ -43,9 +44,13 @@ from papers.forms import AddResearcherForm, AddUnaffiliatedResearcherForm
 from papers.utils import iunaccent, sanitize_html, kill_html
 from papers.name import normalize_name_words
 
+from jsonview.decorators import json_view
+
 import os.path
 
 # General function used to change a CharField in a model with ajax
+@json_view
+@require_POST
 def process_ajax_change(request, model, allowedFields):
     response = dict()
     try:
@@ -66,11 +71,11 @@ def process_ajax_change(request, model, allowedFields):
                     response['merged_title'] = merged.title
             response['status'] = 'OK'
             response['value'] = val
-            return HttpResponse(json.dumps(response), content_type='text/plain')
+            return response
         else:
             raise ObjectDoesNotExist
     except ObjectDoesNotExist:
-        return HttpResponseNotFound(json.dumps(response), content_type='text/plain')
+        return response, 404
 
 # Researcher management
 @user_passes_test(is_admin)
@@ -111,10 +116,9 @@ def researcherCandidatesByName(name):
     rendered += map(renderProfile, related_orcids)
     return rendered
     
-
+@json_view
+@require_POST
 def newUnaffiliatedResearcher(request):
-    if request.method != 'POST':
-        return HttpResponseForbidden('"Invalid method"', content_type='application/javascript')
     form = AddUnaffiliatedResearcherForm(request.POST)
     researcher = None
     if form.is_valid():
@@ -129,21 +133,22 @@ def newUnaffiliatedResearcher(request):
                 name, created = Name.get_or_create(first, last)
                 try:
                     researcher = Researcher.objects.get(name=name)
-                    return HttpResponse(json.dumps({'url':researcher.url}))
+                    return {'url':researcher.url}
                 except (Researcher.DoesNotExist, MultipleObjectsReturned):
                     pass
                 candidates = researcherCandidatesByName(name)
                 if candidates:
-                    return HttpResponse(json.dumps({'disambiguation':candidates}))
+                    return {'disambiguation':candidates}
 
             researcher = Researcher.get_or_create_by_name(first, last)
         researcher.fetch_everything_if_outdated()
-        return HttpResponse(json.dumps({'url':researcher.url}))
+        return {'url':researcher.url}
     else:
-        return HttpResponseForbidden(json.dumps(form.errors), content_type='application/javascript')
+        return form.errors, 403
 
-
+@json_view
 @user_passes_test(is_admin)
+@require_POST
 def addResearcher(request):
     form = AddResearcherForm(request.POST)
     if form.is_valid():
@@ -161,16 +166,14 @@ def addResearcher(request):
             except ValueError:
                 return HttpResponseForbidden('Researcher already present', content_type='text/plain')
 
-            return HttpResponse(json.dumps({
+            return {
                 'id':researcher.id,
-                'name':first+' '+last}), content_type='application/javascript')
+                'name':first+' '+last
+                }
         except IntegrityError as e:
-            print "integrity error"
-            print e
-            return HttpResponseForbidden('Invalid input, something went wrong', content_type='text/plain')
+            return {'message':'Invalid input, something went wrong'}, 500
     else:
-        print json.dumps(form.errors)
-        return HttpResponseForbidden(json.dumps(form.errors), content_type='application/javascript')
+        return form.errors, 403
 
 # Paper management
 @user_passes_test(is_authenticated)
@@ -204,6 +207,7 @@ def changeResearcher(request):
     allowedFields = ['role']
     return process_ajax_change(request, Researcher, allowedFields)
 
+@json_view
 def harvestingStatus(request, pk): 
     researcher = get_object_or_404(Researcher, pk=pk)
     resp = {}
@@ -212,9 +216,10 @@ def harvestingStatus(request, pk):
         resp['display'] = researcher.get_current_task_display()
     else:
         resp = None
-    return HttpResponse(json.dumps(resp), content_type='text/json')
+    return resp
 
 @user_passes_test(is_authenticated)
+@json_view
 def waitForConsolidatedField(request):
     try:
         paper = Paper.objects.get(pk=int(request.GET["id"]))
@@ -222,17 +227,18 @@ def waitForConsolidatedField(request):
         return HttpResponseForbidden('Invalid paper id', content_type='text/plain')
     field = request.GET.get('field')
     value = None
-    success = None
+    success = False
     paper.consolidate_metadata(wait=True)
     if field == 'abstract':
         value = kill_html(paper.abstract)
         success = len(paper.abstract) > 64
     else:
-        return HttpResponseForbidden('Invalid field', content_type='text/plain')
-    return HttpResponse(json.dumps({'success':True,'value':value}), content_type='text/json')
+        return {'success':success,'message':'Invalid field'}
+    return {'success':success,'value':value}
 
 # Author management
 @user_passes_test(is_authenticated)
+@json_view
 def changeAuthor(request):
     response = dict()
     try:
@@ -244,7 +250,7 @@ def changeAuthor(request):
         if last:
             last = sanitize_html(last)
         if not first or not last:
-            return HttpResponseForbidden('First and last names are required.', content_type='text/plain')
+            return {'message':'First and last names are required.'}, 403
         if author.name.first != first or author.name.last != last:
             new_name = Name.lookup_name((first,last))
             new_name.save()
@@ -265,11 +271,9 @@ def changeAuthor(request):
             response['merged'] = merged.pk
             response['merged_title'] = merged.title
 
-        return HttpResponse(json.dumps(response), content_type='text/plain')
+        return response
     except ObjectDoesNotExist:
-        return HttpResponseNotFound(json.dumps(response), content_type='text/plain')
-
-   
+        return response, 404
 
 # Publisher management
 @user_passes_test(is_admin)

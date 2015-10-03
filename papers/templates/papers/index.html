@@ -43,11 +43,12 @@ function lookUpColleague() {
         function(data) {
             reqComplete();
             if(!data.responseJSON) {
-                $('#globalError').text(data.responseText);
+            {% trans "Dissemin encountered an error, please try again later." as errormsg %}
+                $('#globalError').text('{{ errormsg|escapejs }}');
             } else {
                 error = data.responseJSON;
                 for(field in error) {
-                    if(field == '__all__') {
+                    if(field == '__all__' || field == 'message') {
                         $('#globalError').text(error[field]);
                     } else {
                         $('#error-'+field).text(error[field]);

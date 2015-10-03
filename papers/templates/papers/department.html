@@ -26,15 +26,17 @@ function addResearcher() {
         });
 
    $.post('{% url 'ajax-addResearcher' %}', data, null, 'json').fail(function(data) {
-            if(!data.responseJSON)
-            {
-                $('#globalError').text(data.responseText);
-            }
-            else
-            {
+            if(!data.responseJSON) {
+                {% trans "Dissemin encountered an error, please try again later." as errormsg %}
+                $('#globalError').text('{{ errormsg|escapejs }}');
+            } else {
                 error = data.responseJSON;
                 for(field in error) {
-                    $('#error-'+field).text(error[field]);
+                    if(field == 'message') {
+                        $('#globalError').text(error[field]);
+                    } else {
+                        $('#error-'+field).text(error[field]);
+                    }
                 }
             }
         }).done(function(data) {

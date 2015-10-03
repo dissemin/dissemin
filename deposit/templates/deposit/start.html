@@ -97,7 +97,8 @@ $(function() {
             function(data) {
                 var errorText = '';
                 if(!data.responseJSON) {
-                    errorText = data.responseText;
+                    {% trans "Dissemin encountered an error, please try again later." as errormsg %}
+                    errorText = "{{ errormsg|escapejs }}";
                 } else {
                     error = data.responseJSON;
                     console.log(error);
