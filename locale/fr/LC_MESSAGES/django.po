@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-03 01:56+0200\n"
-"PO-Revision-Date: 2015-10-03 01:57+0200\n"
+"POT-Creation-Date: 2015-10-03 16:16+0200\n"
+"PO-Revision-Date: 2015-10-03 16:17+0200\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -38,7 +38,7 @@ msgstr "Document défectueux"
 msgid "Deposited"
 msgstr "Déposé"
 
-#: deposit/models.py:114 deposit/templates/deposit/start.html:220
+#: deposit/models.py:114 deposit/templates/deposit/start.html:221
 #: deposit/views.py:51
 msgid "Deposit"
 msgstr "Dépôt"
@@ -56,7 +56,13 @@ msgstr "J'essaie de préremplir ce champ..."
 msgid "Sorry, we could not fill this for you."
 msgstr "Désolé, impossible de préremplir ceci"
 
-#: deposit/templates/deposit/start.html:136
+#: deposit/templates/deposit/start.html:100
+#: papers/templates/papers/department.html:30
+#: papers/templates/papers/index.html:46
+msgid "Dissemin encountered an error, please try again later."
+msgstr "Une erreur est survenue, merci de réessayer plus tard."
+
+#: deposit/templates/deposit/start.html:137
 #, python-format
 msgid ""
 "\n"
@@ -75,23 +81,23 @@ msgstr ""
 "d'utilisation</a>.\n"
 "        "
 
-#: deposit/templates/deposit/start.html:154
+#: deposit/templates/deposit/start.html:155
 msgid "Document"
 msgstr "Document"
 
-#: deposit/templates/deposit/start.html:162
+#: deposit/templates/deposit/start.html:163
 msgid "Options"
 msgstr "Options"
 
-#: deposit/templates/deposit/start.html:168
+#: deposit/templates/deposit/start.html:169
 msgid "Upload type:"
 msgstr "Type de dépôt:"
 
-#: deposit/templates/deposit/start.html:181
+#: deposit/templates/deposit/start.html:182
 msgid "Repository:"
 msgstr "Dépôt :"
 
-#: deposit/templates/deposit/start.html:190
+#: deposit/templates/deposit/start.html:191
 msgid ""
 "\n"
 "                Your document will be archived in <a href=\"https://zenodo."
@@ -109,15 +115,15 @@ msgstr ""
 "un.\n"
 "                "
 
-#: deposit/templates/deposit/start.html:204
+#: deposit/templates/deposit/start.html:205
 msgid "Review metadata"
 msgstr "Relire les métadonnés"
 
-#: deposit/templates/deposit/start.html:222
+#: deposit/templates/deposit/start.html:223
 msgid "Processing deposit..."
 msgstr "Dépôt en cours de traitement..."
 
-#: deposit/templates/deposit/start.html:222
+#: deposit/templates/deposit/start.html:223
 msgid "please wait..."
 msgstr "veuillez patienter..."
 
@@ -179,7 +185,7 @@ msgstr "Site web"
 msgid "Role"
 msgstr "Fonction"
 
-#: papers/forms.py:46 papers/templates/papers/department.html:104
+#: papers/forms.py:46 papers/templates/papers/department.html:106
 msgid "Department"
 msgstr "Département"
 
@@ -374,12 +380,12 @@ msgstr ""
 "Il nous faut une dernière information pour récupérer vos publications : "
 "votre nom.\n"
 
-#: papers/templates/papers/department.html:49
+#: papers/templates/papers/department.html:51
 #: papers/templates/papers/group.html:18
 msgid "Members:"
 msgstr "Membres:"
 
-#: papers/templates/papers/department.html:58
+#: papers/templates/papers/department.html:60
 #: publishers/templates/publishers/list.html:67
 #: publishers/templates/publishers/policy.html:121
 #, python-format
@@ -388,19 +394,19 @@ msgid_plural "(%(num_total)s papers)"
 msgstr[0] "(%(num_total)s papier)"
 msgstr[1] "(%(num_total)s papiers)"
 
-#: papers/templates/papers/department.html:69
+#: papers/templates/papers/department.html:71
 msgid "Researcher deleted. "
 msgstr "Chercheur supprimé."
 
-#: papers/templates/papers/department.html:73
+#: papers/templates/papers/department.html:75
 msgid "Delete"
 msgstr "Supprimer"
 
-#: papers/templates/papers/department.html:96
+#: papers/templates/papers/department.html:98
 msgid "Add"
 msgstr "Ajouter"
 
-#: papers/templates/papers/department.html:106
+#: papers/templates/papers/department.html:108
 msgid "Papers of the members"
 msgstr "Papiers des membres"
 
@@ -418,19 +424,19 @@ msgctxt "alternate text of the waiting picture in the name lookup form"
 msgid "Searching..."
 msgstr "Recherche en cours..."
 
-#: papers/templates/papers/index.html:66
+#: papers/templates/papers/index.html:67
 msgid "Looking for one of these researchers?"
 msgstr "Pensiez-vous à l'un de ces chercheurs ?"
 
-#: papers/templates/papers/index.html:67
+#: papers/templates/papers/index.html:68
 msgid "Looking for this researcher?"
 msgstr "Pensiez-vous à ce chercheur ?"
 
-#: papers/templates/papers/index.html:91
+#: papers/templates/papers/index.html:92
 msgid "Welcome to dissemin"
 msgstr "Bienvenue sur dissemin"
 
-#: papers/templates/papers/index.html:95
+#: papers/templates/papers/index.html:96
 msgid ""
 "Dissemin helps researchers ensure that their publications are freely "
 "available to their readers. Our free service spots paywalled papers and lets "
@@ -444,7 +450,7 @@ msgstr ""
 "clics sur <a href=\"http://zenodo.org\" target=\"_blank\">Zenodo</a>, un "
 "dépôt innovant soutenu par l'UE."
 
-#: papers/templates/papers/index.html:104
+#: papers/templates/papers/index.html:105
 #, python-format
 msgid ""
 "Still unsure? Read below or check out the <a href=\"%(faq_url)s\">FAQ</a>."
@@ -452,50 +458,68 @@ msgstr ""
 "Vous hésitez toujours ? Lisez ce qui suit ou jetez un œil à la <a href="
 "\"%(faq_url)s\">FAQ</a>."
 
-#: papers/templates/papers/index.html:110
+#: papers/templates/papers/index.html:111
 msgid "Analyze my publications"
 msgstr "Analyser mes publications"
 
-#: papers/templates/papers/index.html:110
+#: papers/templates/papers/index.html:111
 msgctxt "Analyze my publications OR Look up my colleagues"
 msgid "or"
 msgstr "ou"
 
-#: papers/templates/papers/index.html:110
+#: papers/templates/papers/index.html:111
 msgid "Look up a colleague"
 msgstr "Chercher un collègue"
 
-#: papers/templates/papers/index.html:126
+#: papers/templates/papers/index.html:123
+msgctxt "before name fields in researcher lookup form"
+msgid "by name"
+msgstr "par nom"
+
 #: papers/templates/papers/index.html:127
 msgid "Firstname"
 msgstr "Prénom"
 
-#: papers/templates/papers/index.html:131
+#: papers/templates/papers/index.html:128
+msgctxt "Placeholder in researcher lookup form"
+msgid "Firstname"
+msgstr "Prénom"
+
 #: papers/templates/papers/index.html:132
+msgctxt "Placeholder in researcher lookup form"
 msgid "Lastname"
 msgstr "Nom"
 
-#: papers/templates/papers/index.html:141
+#: papers/templates/papers/index.html:133
+msgid "Lastname"
+msgstr "Nom"
+
+#: papers/templates/papers/index.html:138
+msgctxt "before ORCID field in researcher lookup form"
+msgid "or by ORCID"
+msgstr "ou par ORCID"
+
+#: papers/templates/papers/index.html:142
 msgid "identifier (such as 0000-0001-2345-6789)"
 msgstr "identifiant (par exemple, 0000-0001-2345-6789)"
 
-#: papers/templates/papers/index.html:149
+#: papers/templates/papers/index.html:150
 msgid "Search"
 msgstr "Recherche"
 
-#: papers/templates/papers/index.html:171
+#: papers/templates/papers/index.html:172
 msgid "Cancel"
 msgstr "Annuler"
 
-#: papers/templates/papers/index.html:172
+#: papers/templates/papers/index.html:173
 msgid "No, carry on"
 msgstr "Non, continuer"
 
-#: papers/templates/papers/index.html:181
+#: papers/templates/papers/index.html:182
 msgid "Green open access"
 msgstr "Libre accès (voie verte)"
 
-#: papers/templates/papers/index.html:185
+#: papers/templates/papers/index.html:186
 msgid ""
 "Many researchers do not use their right make their papers freely available "
 "online, in addition to the paywalled version offered by traditional "
@@ -505,7 +529,7 @@ msgstr ""
 "sur le Web, pour compléter la version payante proposée par les éditeurs "
 "traditionnels. Pourtant, tous ne le font pas."
 
-#: papers/templates/papers/index.html:193
+#: papers/templates/papers/index.html:194
 msgid ""
 "This forces libraries to buy overpriced electronic subscriptions to "
 "journals, when they can afford them at all."
@@ -514,11 +538,11 @@ msgstr ""
 "électroniques aux journaux de recherche, ce qui grève leurs finances et "
 "limite leur offre."
 
-#: papers/templates/papers/index.html:209
+#: papers/templates/papers/index.html:210
 msgid "Open repositories"
 msgstr "Dépôts ouverts"
 
-#: papers/templates/papers/index.html:212
+#: papers/templates/papers/index.html:213
 msgid ""
 "Uploading your papers on your own webpage is not enough. Such copies are "
 "less stable and harder to find than documents uploaded to well-indexed "
@@ -529,7 +553,7 @@ msgstr ""
 "difficiles à trouver que celles qui sont déposées dans des dépôts bien "
 "indexés."
 
-#: papers/templates/papers/index.html:220
+#: papers/templates/papers/index.html:221
 msgid ""
 "Dissemin searches for copies of your papers in a large collection of open "
 "repositories and tells you which ones cannot be accessed."
