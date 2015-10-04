@@ -363,7 +363,12 @@ class CrossRefPaperSource(PaperSource):
         # The doi is not passed to this function so that it does not try to refetch the metadata
         # from CrossRef
         # create the publication, because it would re-fetch the metadata from CrossRef
-        create_publication(paper, metadata)
+        publication = create_publication(paper, metadata)
+
+        if publication is None: # Creating the publication failed!
+            paper.update_availability() # Make sure the paper only appears if it is still associated
+            # with another source.
+
         return paper
 
     ##### CrossRef search API #######
