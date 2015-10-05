@@ -19,6 +19,7 @@ from backend.similarity import SimilarityClassifier, AuthorNotFound
 from backend.relevance import RelevanceClassifier
 from backend.utils import maybe_recapitalize_title
 from backend import crossref
+from backend.name_cache import name_lookup_cache
 
 
 class ClusteringContext(object):
