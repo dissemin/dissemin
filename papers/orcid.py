@@ -105,8 +105,8 @@ class OrcidProfile(object):
         name = jpath('credit-name/value', name_item)
         if name is not None:
             return parse_comma_name(name)
-        return (normalize_name_words(jpath('given-names/value', name_item)),
-                normalize_name_words(jpath('family-name/value', name_item)))
+        return (normalize_name_words(jpath('given-names/value', name_item, '')),
+                normalize_name_words(jpath('family-name/value', name_item, '')))
 
     @property
     def other_names(self):
