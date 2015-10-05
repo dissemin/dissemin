@@ -38,7 +38,8 @@ from backend.papersource import PaperSource
 from backend.name_cache import name_lookup_cache
 
 bielefeld_timeout = 10
-max_base_no_match = 30
+max_base_no_match = 30 # maximum of consecutive non-relevant base records encountered
+max_base_batches = 20 # maximum number of requests per researcher
 
 class BasePaperSource(PaperSource):
     def __init__(self, *args, **kwargs):
@@ -53,10 +54,11 @@ class BasePaperSource(PaperSource):
         base_url = 'http://api.base-search.net/cgi-bin/BaseHttpSearchInterface.fcgi'
         search_terms = iunaccent(name[0]+' '+name[1])
         try:
+            nb_batch = 0
             offset = 0
             nb_results = 1
             no_match = 0
-            while offset < nb_results and no_match < max_base_no_match:
+            while offset < nb_results and no_match < max_base_no_match and nb_batch < max_base_batches:
                 query_args = {'func':'PerformSearch',
                         'offset':str(offset),
                         'query':search_terms}
@@ -86,6 +88,8 @@ class BasePaperSource(PaperSource):
                             no_match += 1
                     except MetadataSourceException as e:
                         raise MetadataSourceException(str(e)+'\nIn URL: '+request)
+
+                nb_batch += 1
 
         except requests.exceptions.RequestException as e:
             raise MetadataSourceException('Error while fetching metadata from BASE:\n'+
