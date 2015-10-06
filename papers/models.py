@@ -1297,7 +1297,7 @@ class OaiRecord(models.Model):
 
         # Search for duplicate records
         pdf_url = kwargs.get('pdf_url')
-        match = OaiRecord.find_duplicate_records(source, identifier, about, splash_url, pdf_url)
+        match = OaiRecord.find_duplicate_records(identifier, about, splash_url, pdf_url)
 
         # Update the duplicate if necessary
         if match:
@@ -1362,7 +1362,17 @@ class OaiRecord(models.Model):
         return record
     
     @classmethod
-    def find_duplicate_records(cls, source, identifier, about, splash_url, pdf_url):
+    def find_duplicate_records(cls, identifier, about, splash_url, pdf_url):
+        """
+        Finds duplicate OAI records. These duplicates can have a different identifier,
+        or slightly different urls (for instance https:// instead of http://).
+        
+        :param identifier: the identifier of the target record: if there is one with the same
+            identifier, it will be returned
+        :param about: the :class:`Paper` the record is about
+        :param splash_url: the splash url of the target record (link to the metadata page)
+        :param pdf_url: the url of the PDF, if known (otherwise `None`)
+        """
         https_re = re.compile(r'https?(.*)')
         exact_dups = OaiRecord.objects.filter(identifier=identifier)
         if exact_dups:
@@ -1380,10 +1390,10 @@ class OaiRecord(models.Model):
         short_splash = shorten(splash_url)
         short_pdf = shorten(pdf_url)
 
-        if splash_url == None or about == None:
+        if short_splash == None or about == None:
             return
 
-        if pdf_url == None:
+        if short_pdf == None:
             matches = OaiRecord.objects.filter(about=about,
                     splash_url__endswith=short_splash)
             if matches:
