@@ -24,6 +24,8 @@ import unittest
 import django.test
 from papers.models import *
 import papers.doi
+import datetime
+from backend.globals import get_ccf
 
 class ResearcherTest(django.test.TestCase):
     def test_creation(self):
@@ -39,6 +41,18 @@ class ResearcherTest(django.test.TestCase):
         r1 = Researcher.get_or_create_by_orcid('0000-0001-7295-1671')
         r2 = Researcher.get_or_create_by_orcid('0000-0001-5393-1421')
         self.assertNotEqual(r1, r2)
+
+class OaiRecordTest(django.test.TestCase):
+    @classmethod
+    def setUpClass(self):
+        self.source = OaiSource.objects.get_or_create(identifier='arxiv',
+                defaults={'name':'arXiv','oa':False,'priority':1,'default_pubtype':'preprint'})
+
+    def test_find_duplicate_records_invalid_url(self):
+        paper = get_ccf().get_or_create_paper('this is a title', [Name.lookup_name(('Jean','Saisrien'))],
+                datetime.date(year=2015,month=05,day=04))
+        # This used to throw an exception
+        OaiRecord.find_duplicate_records('anu18989risetced', paper, 'ftp://dissem.in/paper.pdf', None)
 
 import doctest
 def load_tests(loader, tests, ignore):

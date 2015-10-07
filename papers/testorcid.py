@@ -40,6 +40,9 @@ class OrcidProfileTest(unittest.TestCase):
         self.assertEqual(self.sergey.name, ('Sergey M.','Natanzon'))
         self.assertEqual(OrcidProfile(id='0000-0001-9547-293X').name, ('Darío', 'Álvarez'))
 
+    def test_empty_lastname(self):
+        self.assertEqual(OrcidProfile(id='0000-0001-5006-3868').name, ('Qiang',''))
+
     def test_other_names(self):
         self.assertEqual(set(self.sergey.other_names),
                 set([('Sergey', 'Natanzon'), ('S.', 'Natanzon'),

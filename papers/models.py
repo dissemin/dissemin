@@ -729,12 +729,19 @@ class Paper(models.Model):
         return self.successful_deposits().count() > 0
 
     def update_availability(self):
-        # TODO: create an oa_status field in each publication so that we optimize queries
-        # and can deal with hybrid OA
+        """
+        Updates the :class:`Paper`'s own `pdf_url` field
+        based on its sources (both :class:`Publication` and :class:`OaiRecord`).
+        
+        This uses a non-trivial logic, hence it is useful to keep this result cached
+        in the database row.
+        """
         self.pdf_url = None
         publis = self.publication_set.all()
         oa_idx = len(OA_STATUS_PREFERENCE)-1
         type_idx = len(PAPER_TYPE_PREFERENCE)-1
+        source_found = False
+
         if self.doctype in PAPER_TYPE_PREFERENCE:
             type_idx = PAPER_TYPE_PREFERENCE.index(self.doctype)
         for publi in publis:
@@ -756,6 +763,8 @@ class Paper(models.Model):
                 idx = len(PAPER_TYPE_PREFERENCE)
             type_idx = min(idx, type_idx)
 
+            source_found = True
+
         self.oa_status = OA_STATUS_CHOICES[oa_idx][0]
         if not self.pdf_url:
             matches = self.oairecord_set.all().order_by(
@@ -773,6 +782,14 @@ class Paper(models.Model):
                 if m.pubtype in PAPER_TYPE_PREFERENCE:
                     new_idx = PAPER_TYPE_PREFERENCE.index(m.pubtype)
                     type_idx = min(new_idx, type_idx)
+
+                source_found = True
+
+        # If this paper is not associated with any source, do not display it
+        # This happens when creating the associated OaiRecord or Publication
+        # failed due to some missing information.
+        if not source_found:
+            self.visibility = 'CANDIDATE'
 
         self.doctype = PAPER_TYPE_PREFERENCE[type_idx]
         self.save()
@@ -929,6 +946,11 @@ class Paper(models.Model):
             del self.sorted_authors
 
     def check_authors(self):
+        """
+        Check that all authors are associated with a valid name.
+        (This is normally enforced by the database but in some contexts
+        where names are cached, this was not the case.)
+        """
         for a in self.author_set.all():
             if a.name_id is None:
                 raise ValueError("Author references a null name!")
@@ -1020,7 +1042,7 @@ class Paper(models.Model):
         """
         When no publication or OAI record is associated with this paper.
         """
-        return (self.oairecord_set.count() == 0 and self.publication_set.count() == 0)
+        return (self.oairecord_set.count() + self.publication_set.count() == 0)
 
     def breadcrumbs(self):
         """
@@ -1275,7 +1297,7 @@ class OaiRecord(models.Model):
 
         # Search for duplicate records
         pdf_url = kwargs.get('pdf_url')
-        match = OaiRecord.find_duplicate_records(source, identifier, about, splash_url, pdf_url)
+        match = OaiRecord.find_duplicate_records(identifier, about, splash_url, pdf_url)
 
         # Update the duplicate if necessary
         if match:
@@ -1340,7 +1362,17 @@ class OaiRecord(models.Model):
         return record
     
     @classmethod
-    def find_duplicate_records(cls, source, identifier, about, splash_url, pdf_url):
+    def find_duplicate_records(cls, identifier, about, splash_url, pdf_url):
+        """
+        Finds duplicate OAI records. These duplicates can have a different identifier,
+        or slightly different urls (for instance https:// instead of http://).
+        
+        :param identifier: the identifier of the target record: if there is one with the same
+            identifier, it will be returned
+        :param about: the :class:`Paper` the record is about
+        :param splash_url: the splash url of the target record (link to the metadata page)
+        :param pdf_url: the url of the PDF, if known (otherwise `None`)
+        """
         https_re = re.compile(r'https?(.*)')
         exact_dups = OaiRecord.objects.filter(identifier=identifier)
         if exact_dups:
@@ -1358,10 +1390,10 @@ class OaiRecord(models.Model):
         short_splash = shorten(splash_url)
         short_pdf = shorten(pdf_url)
 
-        if splash_url == None or about == None:
+        if short_splash == None or about == None:
             return
 
-        if pdf_url == None:
+        if short_pdf == None:
             matches = OaiRecord.objects.filter(about=about,
                     splash_url__endswith=short_splash)
             if matches:

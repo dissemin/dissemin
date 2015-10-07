@@ -228,10 +228,6 @@ class OaiPaperSource(PaperSource):
                 yield paper
             except ValueError as e:
                 print "Warning, OAI record "+record[0].identifier()+" skipped:\n"+unicode(e)
-                if paper.is_orphan():
-                    paper.visibility = 'CANDIDATE'
-                    paper.save(update_fields=['visibility'])
-
-
+                paper.update_availability()
 
 

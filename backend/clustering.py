@@ -19,6 +19,7 @@ from backend.similarity import SimilarityClassifier, AuthorNotFound
 from backend.relevance import RelevanceClassifier
 from backend.utils import maybe_recapitalize_title
 from backend import crossref
+from backend.name_cache import name_lookup_cache
 
 
 class ClusteringContext(object):
@@ -636,8 +637,9 @@ class ClusteringContextFactory(object):
                     visibility=visibility)
             p.save()
             for idx, author_name in enumerate(author_names):
-                name_was_new = author_name.pk is None
-                if name_was_new:
+                if author_name.pk is None: # this name has not been saved in the db yet
+                    # look it up again to ensure it has not been created in between
+                    author_name = name_lookup_cache.lookup((author_name.first, author_name.last))
                     author_name.save()
                     author_name.update_variants()
                 aff = None
