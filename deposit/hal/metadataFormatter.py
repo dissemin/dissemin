@@ -1,5 +1,28 @@
 # -*- encoding: utf-8 -*-
 
+# Dissemin: open access policy enforcement tool
+# Copyright (C) 2014 Antonin Delpeuch
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Affero General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+# 
+# You should have received a copy of the GNU Affero General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+#
+
+"""
+This module defines a OAfr/TEI exporter, to be used with the SWORD interface to HAL.
+
+"""
+
 from __future__ import unicode_literals
 
 from lxml import etree
@@ -11,6 +34,25 @@ from papers.utils import split_words
 ENS_HAL_ID = 59704
 
 XMLLANG_ATTRIB= '{http://www.w3.org/XML/1998/namespace}lang'
+
+def aofrDocumentType(paper):
+    tr = {
+            'journal-article':'ART',
+            'proceedings-article':'COMM',
+            'book-chapter':'COUV',
+            'book':'OUV',
+            'journal-issue':'DOUV',
+            'proceedings':'DOUV',
+            'reference-entry':'OTHER',
+            'poster':'POSTER',
+            'report':'REPORT',
+            'thesis':'THESE',
+            'dataset':'OTHER',
+            'preprint':'UNDEFINED',
+            'other':'OTHER',
+         }
+    return tr[paper.doctype]
+
 
 class MetadataFormatter(object):
     """
@@ -126,7 +168,7 @@ class AOFRFormatter(MetadataFormatter):
             classCode.text = domain
         typology = addChild(textClass, 'classCode')
         typology.attrib['scheme'] = 'halTypology'
-        typology.attrib['n'] = 'ART' # TODO change this
+        typology.attrib['n'] = aofrDocumentType(paper)
 
         abstract = addChild(profileDesc, 'abstract')
         abstract.attrib[XMLLANG_ATTRIB] = 'en'

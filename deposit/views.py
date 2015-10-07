@@ -34,25 +34,25 @@ from deposit.forms import *
 from papers.models import Paper
 from papers.user import is_admin, is_authenticated
 
-def get_all_protocols(paper, user):
+def get_all_repositories_and_protocols(paper, user):
     repositories = Repository.objects.all()
     protocols = []
     for r in repositories:
         implem = r.protocol_for_deposit(paper, user)
         if implem is not None:
-            protocols.append(implem)
+            protocols.append((r,implem))
     return protocols
 
 @user_passes_test(is_authenticated)
 def start_view(request, pk):
     paper = get_object_or_404(Paper, pk=pk)
-    forms = map(lambda i: i.get_form(), get_all_protocols(paper, request.user))
+    repositories = get_all_repositories_and_protocols(paper, request.user)
     breadcrumbs = paper.breadcrumbs()
     breadcrumbs.append((_('Deposit'),''))
     context = {
             'paper':paper,
             'max_file_size':DEPOSIT_MAX_FILE_SIZE,
-            'forms': forms,
+            'available_repositories': repositories,
             'is_owner':paper.is_owned_by(request.user),
             'breadcrumbs':breadcrumbs,
             }

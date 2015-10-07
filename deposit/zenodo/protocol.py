@@ -72,15 +72,6 @@ class ZenodoProtocol(RepositoryProtocol):
 
     def submit_deposit(self, pdf, form):
         result = {}
-        log = ''
-        def log_request(r, expected_status_code, error_msg):
-            self.log('--- Request to %s\n' % r.url)
-            self.log('Status code: %d (expected %d)\n' % (r.status_code, expected_status_code))
-            if r.status_code != expected_status_code:
-                self.log('Server response:')
-                self.log(r.text)
-                self.log('')
-                raise DepositError(error_msg)
 
         if self.repository.api_key is None:
             raise DepositError(__("No Zenodo API key provided."),'')
@@ -93,13 +84,13 @@ class ZenodoProtocol(RepositoryProtocol):
             # Checking the access token
             self.log("### Checking the access token")
             r = requests.get(api_url_with_key)
-            log = log_request(r, 200, __('Unable to authenticate to Zenodo.'))
+            self.log_request(r, 200, __('Unable to authenticate to Zenodo.'))
                
             # Creating a new deposition
             self.log("### Creating a new deposition")
             headers = {"Content-Type": "application/json"}
             r = requests.post(api_url_with_key, data=str("{}"), headers=headers)
-            log = log_request(r, 201, __('Unable to create a new deposition on Zenodo.'))
+            self.log_request(r, 201, __('Unable to create a new deposition on Zenodo.'))
             deposition_id = r.json()['id']
             deposit_result.identifier = deposition_id
             self.log("Deposition id: %d" % deposition_id)
@@ -110,7 +101,7 @@ class ZenodoProtocol(RepositoryProtocol):
             files = {'file': open(pdf, 'rb')}
             r = requests.post(self.api_url+"/%s/files?access_token=%s" % (deposition_id,api_key),
                     data=data, files=files)
-            log = log_request(r, 201, __('Unable to transfer the document to Zenodo.'))
+            self.log_request(r, 201, __('Unable to transfer the document to Zenodo.'))
 
             # Creating the metadata
             self.log("### Generating the metadata")
@@ -127,14 +118,14 @@ class ZenodoProtocol(RepositoryProtocol):
             self.log("### Submitting the metadata")
             r = requests.put(self.api_url+"/%s?access_token=%s" % ( deposition_id, api_key),
                     data=json.dumps(data), headers=headers)
-            log = log_request(r, 200, __('Unable to submit paper metadata to Zenodo.'))
+            self.log_request(r, 200, __('Unable to submit paper metadata to Zenodo.'))
             
             # Deleting the deposition
             #self.log("### Deleting the deposition")
             #r = requests.delete(self.api_url+"/%s?access_token=%s" % ( deposition_id, api_key) )
             self.log("### Publishing the deposition")
             r = requests.post(self.api_url+"/%s/actions/publish?access_token=%s" % (deposition_id, api_key))
-            log = log_request(r, 202, __('Unable to publish the deposition on Zenodo.'))
+            self.log_request(r, 202, __('Unable to publish the deposition on Zenodo.'))
             self.log(r.text)
             deposition_object = r.json()
             deposit_result.splash_url = deposition_object['record_url'] 

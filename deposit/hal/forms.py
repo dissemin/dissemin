@@ -27,7 +27,7 @@ from django.utils.translation import ugettext as __
 from deposit.forms import BaseMetadataForm
 from deposit.zenodo.protocol import ZENODO_LICENSES_CHOICES
 
-class ZenodoForm(BaseMetadataForm):
+class HALForm(BaseMetadataForm):
     license = forms.ChoiceField(
             label=__('License'),
             choices=ZENODO_LICENSES_CHOICES,

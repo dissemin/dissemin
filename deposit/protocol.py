@@ -141,5 +141,17 @@ class RepositoryProtocol(object):
         """
         self._logs += line+'\n'
 
+    def log_request(r, expected_status_code, error_msg):
+        """
+        Logs an HTTP request and raises an error if the status code is unexpected.
+        """
+        self.log('--- Request to %s\n' % r.url)
+        self.log('Status code: %d (expected %d)\n' % (r.status_code, expected_status_code))
+        if r.status_code != expected_status_code:
+            self.log('Server response:')
+            self.log(r.text)
+            self.log('')
+            raise DepositError(error_msg)
+
 
 

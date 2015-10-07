@@ -30,10 +30,7 @@ $(function() {
     $('#waitingArea').hide();
     $('#uploadFileId').val('');
     
-    /* Prefetched fields */
-    $('.prefetchingFieldStatus').each(function(i,prefetch) {
-        var p = $(prefetch);
-
+    function initPrefetch(p) {
         {% trans "Trying to fill this field automatically for you..." as trying_fill %}
         p.text("{{ trying_fill|escapejs }}");
         field = $("#"+p.data("fieldid"));
@@ -61,26 +58,44 @@ $(function() {
                 field.val(data['value']);
             }
         );        
+    }
+
+    function updateMetadataForm(selected) {
+        // TODO
+    }
+
+    /* Prefetched fields */
+    $('.prefetchingFieldStatus').each(function(i,prefetch) {
+        initPrefetch($(prefetch));
     });
 
     $('.helpPopover').popover({trigger: "hover"});
 
     /* Panels */
-    $('#optionUploadType').collapse({
-        parent:$('#uploadOptions'),
-        toggle:false,
-        }).on('show.bs.collapse', function () {
-        $('#uploadTypeInline').empty();
-    }).on('hidden.bs.collapse', function () {
-        var selected = $("input[type='radio'][name='radioUploadType']:checked");
-        if(selected.length > 0) {
-            $('#uploadTypeInline').append($('#hiddenInline-'+selected.val()).clone());      
-        }
-    });
-    $("input[type='radio'][name='radioUploadType']").click(function(){
-        $('#optionUploadType').collapse('hide');
-        $('#error-radioUploadType').removeClass('error').empty();
-    });
+    function collapseWithInline(input_name, callback) {
+        $('#option'+input_name).collapse({
+            parent:$('#'+input_name+'Options'),
+            toggle:false,
+            }).on('show.bs.collapse', function () {
+            $('#'+input_name+'Inline').empty();
+        }).on('hidden.bs.collapse', function () {
+            var selected = $("input[type='radio'][name='radio"+input_name+"']:checked");
+            if(selected.length > 0) {
+            $('#'+input_name+'Inline').append($('#hiddenInline-'+selected.val()).clone());
+            }
+            if(callback != null) {
+                callback(selected);
+            }
+        });
+        $("input[type='radio'][name='radio"+input_name+"']").click(function(){
+            $('#option'+input_name).collapse('hide');
+            $('#error-radio'+input_name).removeClass('error').empty();
+        });
+    }
+
+    collapseWithInline('UploadType', null);
+    collapseWithInline('Repository', updateMetadataForm);
+
     {% if request.GET.type %}
         $('#optionUploadType').collapse('hide');
     {% endif %}
@@ -165,8 +180,8 @@ $(function() {
     <div id="error-radioUploadType"></div>
     <div class="panel panel-default">
         <div class="panel-heading" role="tab" id="headingUploadType">
-            <a role="button" data-toggle="collapse" data-parent="#uploadOptions"
-                href="#optionUploadType">{% trans "Upload type:" %}</span><span id="uploadTypeInline"></a>
+            <a role="button" data-toggle="collapse" data-parent="#UploadTypeOptions"
+            href="#optionUploadType">{% trans "Upload type:" %}<span id="UploadTypeInline"></span></a>
         </div>
         <div id="optionUploadType" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingUploadType">
             <div class="panel-body">
@@ -179,21 +194,37 @@ $(function() {
             <span>
                 <a role="button" data-toggle="collapse"
                   data-parent="#uploadOptions" href="#optionRepository" aria-expanded="true"
-                                                                        aria-controls="optionRepository">{% trans "Repository:" %} <strong>Zenodo</strong></a>
+                        aria-controls="optionRepository">{% trans "Repository:" %}<span id="RepositoryInline"></span></a>
             </span>
         </div>
         <div id="optionRepository" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingRepository">
             <div class="panel-body">
-                <a href="https://zenodo.org" target="_blank">
-                    <img src="{% static "img/zenodo-black-200.png" %}" alt="Zenodo" style="float: left" />
-                </a>
-                <p>
-                {% blocktrans %}
-                Your document will be archived in <a href="https://zenodo.org/" target="_blank">Zenodo</a>,
-                    a general-purpose open repository hosted by CERN.
-                    If the document does not have a DOI yet, Zenodo will create one.
-                {% endblocktrans %}
-                </p>
+                <div class="repositoryList">
+                {% for repository in available_repositories %}
+                {% with repository.0 as repo %}
+                <div class="repositoryItem {% if forloop.first %}firstItem{% endif %}">
+                    <div style="display:none">
+                        <span id="hiddenInline-repo{{ repo.pk }}">
+                            <span><strong>{{ repo.name }}</strong></span>
+                        </span>
+                    </div>
+                    <div class="repositoryLogo">
+                        <a href="#" target="_blank">
+                            <img src="{{ repo.logo.url }}" alt="{{ repo.name }}" />
+                        </a>
+                    </div>
+                        <div class="repositoryChoiceRadio">
+                            <input id="radiorepo{{ repository.pk}}" type="radio" value="repo{{repo.pk}}"
+                                name="radioRepository" />
+                        </div>
+                    <p>
+                        {{ repository.0.description }}
+                    </p>
+                    <div style="clear:left"></div>
+                </div>
+                {% endwith %}
+                {% endfor %}
+                </div>
             </div>
         </div>
     </div>
