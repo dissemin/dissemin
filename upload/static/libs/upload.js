@@ -122,8 +122,11 @@ $(function(){
             var resp = data.jqXHR.responseJSON;
             if(typeof resp != 'undefined' && 'upl' in resp) {
                 displayErrorMessage(data.context, resp['upl']);
+            } else if('message' in resp) {
+                $('#globalError').addClass('error').text(resp['message']);
             } else {
-                $('#globalError').addClass('error').text(data.jqXHR.responseText);
+                $('#globalError').addClass('error').text(
+                        "Dissemin encountered an error, please try again later.");
             }
         }
     });
