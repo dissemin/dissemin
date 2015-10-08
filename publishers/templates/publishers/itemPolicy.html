@@ -4,7 +4,7 @@
 <div class="policyItem {% if fst %}firstPolicyItem{% elif mode == "none" or lst %}{% if typ == "pdfversion" %}lastPolicyItem{% endif %}{% endif %}">
     {% if mode == "radio" %}
     <div style="display:none;">
-        <span id="hiddenInline-{{ typ }}">
+        <span id="hiddenInlineUploadType-{{ typ }}">
             <span><strong>{{ type_text_no_punc }}</strong>
                 (<span class="policyPicSpan policyPic-{{ policy }}"></span>
                 {{ policy | explain_policy_short_no_punc }})</span>

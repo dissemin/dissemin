@@ -12,11 +12,11 @@ def encodeUserData(user, password):
     return "Basic " + (user + ":" + password).encode("base64").rstrip()
 
 u='dissemin'
-p='dissemin'
+p='disseminonhal'
 
-conn = httplib2.HTTPConnection("api-preprod.archives-ouvertes.fr")
+conn = httplib2.Http("api-preprod.archives-ouvertes.fr")
 
-httplib2.HTTPConnection.debuglevel = 1 #Uncomment to debug mode
+httplib2.Http.debuglevel = 1 #Uncomment to debug mode
 
 
 #TODO add specific headers for export-toarxiv and so one
@@ -65,7 +65,7 @@ def FullHal(pdf,metadata):
 #I will assume that the online "edition" is where I want
 
 def UpdateHal(pdf,idHal):
-        strData = CreateZipFromPdfAndMetadata(pdf,sword.metadataFormatter.generate(9570))
+        strData = CreateZipFromPdfAndMetadata(pdf,sword.metadataFormatter.generate(4690))
         conn.putrequest("PUT", "/sword/"+idHal, True,True)
         conn.putheader("Host", "api-preprod.archives-ouvertes.fr")
         conn.putheader("Authorization",encodeUserData(u,p))

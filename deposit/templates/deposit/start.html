@@ -61,7 +61,23 @@ $(function() {
     }
 
     function updateMetadataForm(selected) {
-        // TODO
+        if(selected.val()) {
+        $.get("{% url 'ajax-getMetadataForm' %}", data={'paper':{{ paper.id }},'repository':selected.val()}
+            ).done(
+                function(data) {
+                    console.log(data);
+                    $("#repositoryMetadataForm").empty();
+                    if('status' in data && data['status'] == 'success') {
+                        $("#repositoryMetadataForm").append(data['form']);
+                    } else if ('message' in data) {
+                        $("#repositoryMetadataForm").append("<p>"+data["message"]+"</p>");
+                    }
+                }
+            ).fail(
+                function(data) {
+                    console.log(data);
+                });
+        }
     }
 
     /* Prefetched fields */
@@ -81,9 +97,10 @@ $(function() {
         }).on('hidden.bs.collapse', function () {
             var selected = $("input[type='radio'][name='radio"+input_name+"']:checked");
             if(selected.length > 0) {
-            $('#'+input_name+'Inline').append($('#hiddenInline-'+selected.val()).clone());
+            $('#'+input_name+'Inline').append($('#hiddenInline'+input_name+'-'+selected.val()).clone());
             }
             if(callback != null) {
+                console.log("calling callback");
                 callback(selected);
             }
         });
@@ -204,7 +221,7 @@ $(function() {
                 {% with repository.0 as repo %}
                 <div class="repositoryItem {% if forloop.first %}firstItem{% endif %}">
                     <div style="display:none">
-                        <span id="hiddenInline-repo{{ repo.pk }}">
+                        <span id="hiddenInlineRepository-{{ repo.pk }}">
                             <span><strong>{{ repo.name }}</strong></span>
                         </span>
                     </div>
@@ -214,7 +231,7 @@ $(function() {
                         </a>
                     </div>
                         <div class="repositoryChoiceRadio">
-                            <input id="radiorepo{{ repository.pk}}" type="radio" value="repo{{repo.pk}}"
+                            <input id="radiorepo{{ repository.pk}}" type="radio" value="{{repo.pk}}"
                                 name="radioRepository" />
                         </div>
                     <p>
@@ -238,11 +255,8 @@ $(function() {
         </div>
         <div id="optionMetadata" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingMetadata">
             <div class="panel-body">
-                {% for form in forms %}
-                    <div class="form-group">
-                        {{ form|crispy }}
-                    </div>
-                {% endfor %}
+                <div id="repositoryMetadataForm">
+                </div>
             </div>
         </div>
     </div>

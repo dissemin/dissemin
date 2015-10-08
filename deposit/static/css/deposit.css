@@ -56,3 +56,46 @@
 label[class="radio"] {
     margin-left: 20px;
 }
+
+/* Repository choice */
+
+.repositoryLogo {
+    float: left;
+    width: 125px;
+    padding: 5px 0px;
+    margin: auto;
+    min-width: 125px;
+}
+
+.repositoryLogo img {
+    max-width: 110px;
+    max-height: 70px;
+    display: block;
+    margin: auto;
+}
+
+.repositoryItem {
+    border-top: 1px solid #CCC;
+    padding-right: 10px;
+}
+
+#optionRepository .panel-body {
+    padding: 0px;
+}
+
+.repositoryItem p {
+    padding: 5px 10px;
+    margin-bottom: 0px;
+    margin-right: 20px;
+}
+
+.firstItem {
+    border-top: none;
+}
+
+.repositoryChoiceRadio {
+    float: right;
+    margin-top:10px;
+}
+
+

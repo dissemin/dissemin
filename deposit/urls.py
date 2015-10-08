@@ -27,4 +27,6 @@ from deposit import views
 urlpatterns = patterns('',
         url(r'^deposit_paper/(?P<pk>\d+)/$', views.start_view, name='upload_paper'),
         url(r'^ajax/submit-deposit-(?P<pk>\d+)$', views.submitDeposit, name='ajax-submitDeposit'),
+        url(r'^ajax/get-metadata-form$',
+                views.get_metadata_form, name='ajax-getMetadataForm'),
 )

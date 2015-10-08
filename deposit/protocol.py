@@ -141,7 +141,7 @@ class RepositoryProtocol(object):
         """
         self._logs += line+'\n'
 
-    def log_request(r, expected_status_code, error_msg):
+    def log_request(self, r, expected_status_code, error_msg):
         """
         Logs an HTTP request and raises an error if the status code is unexpected.
         """

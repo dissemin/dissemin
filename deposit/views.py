@@ -26,6 +26,8 @@ from django.http import HttpResponse, HttpResponseForbidden
 from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import render
 from django.utils.translation import ugettext as _
+from django.views.decorators.http import require_POST
+from jsonview.decorators import json_view
 
 from dissemin.settings import MEDIA_ROOT, UNIVERSITY_BRANDING, DEPOSIT_MAX_FILE_SIZE 
 
@@ -43,6 +45,21 @@ def get_all_repositories_and_protocols(paper, user):
             protocols.append((r,implem))
     return protocols
 
+@json_view
+@user_passes_test(is_authenticated)
+def get_metadata_form(request):
+    paper = get_object_or_404(Paper, pk=request.GET.get('paper'))
+    repo = get_object_or_404(Repository, pk=request.GET.get('repository'))
+    protocol = repo.protocol_for_deposit(paper, request.user)
+    if protocol is None:
+        print "no protocol"
+        return {'status':'repoNotAvailable',
+                'message':_('This repository is not available for this paper.')}
+
+    form = protocol.get_form()
+    return {'status':'success',
+            'form':unicode(form)}
+
 @user_passes_test(is_authenticated)
 def start_view(request, pk):
     paper = get_object_or_404(Paper, pk=pk)
@@ -55,73 +72,69 @@ def start_view(request, pk):
             'available_repositories': repositories,
             'is_owner':paper.is_owned_by(request.user),
             'breadcrumbs':breadcrumbs,
+            'repositoryForm':None,
             }
     if request.GET.get('type') not in [None,'preprint','postprint','pdfversion']:
         return HttpResponseForbidden()
     return render(request, 'deposit/start.html', context)
 
+@json_view
+@require_POST
 @user_passes_test(is_authenticated)
 def submitDeposit(request, pk):
     paper = get_object_or_404(Paper, pk=pk)
-    if request.method != 'POST':
-        return HttpResponseForbidden()
     context = {'status':'error'}
     form = PaperDepositForm(request.POST)
     if not form.is_valid():
         context['form'] = form.errors
-        return HttpResponseForbidden(json.dumps(context), content_type='text/json')
+        return context, 400
 
-    protocols = get_all_protocols(paper, request.user)
+    # This validation could take place in the form (but we need access to the paper and user?)
+    repository = form.cleaned_data['radioRepository']
+    protocol = repository.protocol_for_deposit(paper, request.user)
+    if protocol is None:
+        context['radioRepository'] = _("This repository cannot be used for this paper.")
+        return context, 400
 
-    repositoryForms = map(lambda i: i.get_bound_form(request.POST), protocols)
-    for idx, f in enumerate(repositoryForms):
-        if not f.is_valid():
-            repositoryForms[idx] = f.errors
-            # TODO delete this, error reporting should be done in a generic way for each
-            # repository form
-            context['message'] = _("An abstract is required, please paste one in the Metadata panel.")
-            return HttpResponseForbidden(json.dumps(context), content_type='text/json')
+    repositoryForm = protocol.get_bound_form(request.POST)
+
+    if not repositoryForm.is_valid():
+        context['form'] = repositoryForm.errors
+        return context, 400
 
     # Check that the paper has been uploaded by the same user
     pdf = form.cleaned_data['file_id']
     if pdf.user != request.user:
         context['message'] = _('Access to the PDF was denied.')
-        return HttpResponseForbidden(json.dumps(context))
+        return context, 400
 
-    # Submit paper to all repositories (TODO: only a selection)
+    # Submit the paper to the repository
     path = os.path.join(MEDIA_ROOT, pdf.file.name)
 
-    # TODO delete this
-    last_deposit = None
-    for idx, p in enumerate(protocols):
-        print "Create initial record"
-        # Create initial record
-        d = DepositRecord(
-                paper=paper,
-                user=pdf.user,
-                repository=p.repository,
-                upload_type=form.cleaned_data['radioUploadType'],
-                file=pdf)
-        d.save()
-        last_deposit = d
+    # Create initial record
+    d = DepositRecord(
+            paper=paper,
+            user=pdf.user,
+            repository=repository,
+            upload_type=form.cleaned_data['radioUploadType'],
+            file=pdf)
+    d.save()
 
-        submitResult = p.submit_deposit_wrapper(path, repositoryForms[idx])
-        
-        d.request = submitResult.logs
-        if not submitResult.success():
-            # TODO error handling when some deposits were successful and
-            # some others were not.
-            context['message'] = submitResult.message
-            d.save()
-            return HttpResponseForbidden(json.dumps(context), content_type='text/json')
-        print "Deposit succeeded."
-        d.identifier = submitResult.identifier
-        d.pdf_url = submitResult.pdf_url
+    submitResult = protocol.submit_deposit_wrapper(path, repositoryForm)
+    
+    d.request = submitResult.logs
+    if not submitResult.success():
+        context['message'] = submitResult.message
         d.save()
+        return context, 400
+
+    d.identifier = submitResult.identifier
+    d.pdf_url = submitResult.pdf_url
+    d.save()
 
     context['status'] = 'success'
     # TODO change this (we don't need it)
-    context['upload_id'] = last_deposit.id
-    return HttpResponse(json.dumps(context), content_type='text/json')
+    context['upload_id'] = d.id
+    return context
 
 

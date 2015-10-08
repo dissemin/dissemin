@@ -23,7 +23,8 @@ from __future__ import unicode_literals
 import json
 import requests 
 import traceback, sys
-from StringIO import StringIO
+from io import BytesIO
+from zipfile import ZipFile
 
 from django.utils.translation import ugettext as __
 from django.utils.translation import ugettext_lazy as _
@@ -32,6 +33,7 @@ from os.path import basename
 from deposit.protocol import *
 from deposit.registry import *
 from deposit.hal.forms import *
+from deposit.hal.metadataFormatter import *
 
 from papers.errors import MetadataSourceException
 from papers.utils import kill_html
@@ -63,10 +65,10 @@ class HALProtocol(RepositoryProtocol):
         return HALForm(data)
 
     def create_zip(self, pdf, metadata):
-        s = StringIO.StringIO()
+        s = BytesIO()
         with ZipFile(s, 'w') as zipFile:
-            zipFile.writestr("article.pdf", pdf)
-            zipFile.writestr("meta.xml", metadata)
+            zipFile.writestr("article.pdf", str(pdf))
+            zipFile.writestr("meta.xml", str(metadata))
         return s
 
     def submit_deposit(self, pdf, form):
@@ -95,13 +97,13 @@ class HALProtocol(RepositoryProtocol):
 
             # Creating a new deposition
             self.log("### Creating a new deposition")
-            files = {('deposit.zip',zipFile,'application/zip',{})}
+            files = {'file':('deposit.zip',zipFile,'application/zip')}
             headers = {"X-Packaging":"http://purl.org/net/sword-types/AOfr"}
             r = requests.post(self.api_url,
                     headers=headers,
                     files=files,
                     auth=(self.user,self.password))
-            log = log_request(r, 201, __('Unable to create a new deposition on HAL.'))
+            self.log_request(r, 201, __('Unable to create a new deposition on HAL.'))
             print r
             deposition_id = r.headers['Location']
             deposit_result.identifier = deposition_id
@@ -122,7 +124,7 @@ class HALProtocol(RepositoryProtocol):
 
     def createMetadata(self, form):
         formatter = AOFRFormatter()
-        metadata = formatter.toString(paper, 'article.pdf', True)
+        metadata = formatter.toString(self.paper, 'article.pdf', True)
         return metadata
 
 protocol_registry.register(HALProtocol)
