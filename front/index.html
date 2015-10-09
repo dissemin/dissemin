@@ -10,6 +10,8 @@
         <link href="./css/bootstrap.min.css" rel="stylesheet">
         <link href="./css/style.css" rel="stylesheet">
         <link rel="stylesheet" media="(max-width: 650px)" href="./css/mobile.css" />
+         <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css" />
+          <script src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
         <title>dissemin</title>
         <meta name="keywords" content="open access,green open access,preprint,institutional policy,publisher,repository" /> 
         <meta name="description" content="dissem.in helps researchers and universities to upload their papers to repositories, fostering green open access" />
@@ -43,7 +45,7 @@
                     and set up an open access policy to improve it.</p>
                 </div>
                 <p>
-                <a href="http://ens.dissem.in/researcher/1323/" class="btn btn-default btn-lg orange-button">Demo!</a>
+                <a href="http://orcid.dissem.in/" class="btn btn-default btn-lg orange-button">Demo!</a>
                 </p>
             </div>
         </div>
@@ -52,17 +54,34 @@
                 <img src="img/migration.png" class="migration" alt="Bird migration"/>
                 <div class="questions" >
                     <h2>Wait, what?</h2>
-                    <p>Many papers are still locked behind paywalls. For many of them, their authors could have
+                    <p>Millions of papers are still locked behind paywalls. For many of them, their authors could have
                     made them available in a repository, given the self-archiving policy of their publisher.</p>
 
                     <p>Dissemin spots these papers and helps their authors upload them quickly to
                     mature and visible repositories such as HAL or Zenodo.</p>
 
-                    <h2>How can I use it?</h2>
-                    <p>For now, Dissemin is a university-centric web platform. It analyzes the availability
-                       of papers published by researchers within a given institution.</p>
+                    <h2>Can I use it?</h2>
+                    <p>Our free service will be launched October 22nd, 12h30 UTC+1 at:
+                    </p>
+                    <p>École Normale Supérieure, Salle Dussane<br />
+                    45 rue d'Ulm<br />
+                    75005 Paris, France<br />
+                    </p>
 
-                    <p>Dissemin is free software that you can install for your own institution.</p>
+                    <p>Join us there!</p>
+                   <div id="map" class="map" style="height: 250px"></div>
+                    <script type="text/javascript">
+                    var map = L.map('map').setView([48.84244, 2.34455], 16);
+
+                    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+                                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                                }).addTo(map);
+
+                    L.marker([48.84244, 2.34455]).addTo(map)
+                            .bindPopup("45 rue d'Ulm, salle Dussane")
+                    .openPopup();
+                    </script>
+
                     <br />
                     <a href="http://ens.dissem.in/faq" class="btn btn-default btn-lg blue-button">FAQ and more information</a>
                 </div>
