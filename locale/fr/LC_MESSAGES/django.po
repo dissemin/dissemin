@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-03 16:16+0200\n"
-"PO-Revision-Date: 2015-10-03 16:17+0200\n"
+"POT-Creation-Date: 2015-10-08 23:33+0200\n"
+"PO-Revision-Date: 2015-10-08 23:34+0200\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -18,9 +18,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 1.8.4\n"
 
-#: deposit/forms.py:32
+#: deposit/forms.py:36
 msgid "Upload type"
 msgstr "Type de dépôt"
+
+#: deposit/forms.py:37
+msgid "Repository"
+msgstr "Dépôt"
 
 #: deposit/models.py:34
 msgid "Created"
@@ -38,8 +42,8 @@ msgstr "Document défectueux"
 msgid "Deposited"
 msgstr "Déposé"
 
-#: deposit/models.py:114 deposit/templates/deposit/start.html:221
-#: deposit/views.py:51
+#: deposit/models.py:114 deposit/templates/deposit/start.html:266
+#: deposit/views.py:68
 msgid "Deposit"
 msgstr "Dépôt"
 
@@ -48,21 +52,21 @@ msgstr "Dépôt"
 msgid "Depositing"
 msgstr "Dépôt de"
 
-#: deposit/templates/deposit/start.html:37
+#: deposit/templates/deposit/start.html:34
 msgid "Trying to fill this field automatically for you..."
 msgstr "J'essaie de préremplir ce champ..."
 
-#: deposit/templates/deposit/start.html:49
+#: deposit/templates/deposit/start.html:46
 msgid "Sorry, we could not fill this for you."
 msgstr "Désolé, impossible de préremplir ceci"
 
-#: deposit/templates/deposit/start.html:100
+#: deposit/templates/deposit/start.html:132
 #: papers/templates/papers/department.html:30
 #: papers/templates/papers/index.html:46
 msgid "Dissemin encountered an error, please try again later."
 msgstr "Une erreur est survenue, merci de réessayer plus tard."
 
-#: deposit/templates/deposit/start.html:137
+#: deposit/templates/deposit/start.html:169
 #, python-format
 msgid ""
 "\n"
@@ -81,59 +85,43 @@ msgstr ""
 "d'utilisation</a>.\n"
 "        "
 
-#: deposit/templates/deposit/start.html:155
+#: deposit/templates/deposit/start.html:187
 msgid "Document"
 msgstr "Document"
 
-#: deposit/templates/deposit/start.html:163
+#: deposit/templates/deposit/start.html:195
 msgid "Options"
 msgstr "Options"
 
-#: deposit/templates/deposit/start.html:169
+#: deposit/templates/deposit/start.html:201
 msgid "Upload type:"
 msgstr "Type de dépôt:"
 
-#: deposit/templates/deposit/start.html:182
+#: deposit/templates/deposit/start.html:214
 msgid "Repository:"
 msgstr "Dépôt :"
 
-#: deposit/templates/deposit/start.html:191
-msgid ""
-"\n"
-"                Your document will be archived in <a href=\"https://zenodo."
-"org/\" target=\"_blank\">Zenodo</a>,\n"
-"                    a general-purpose open repository hosted by CERN.\n"
-"                    If the document does not have a DOI yet, Zenodo will "
-"create one.\n"
-"                "
-msgstr ""
-"\n"
-"                Votre document sera archivé sur <a href=\"https://zenodo.org/"
-"\" target=\"_blank\">Zenodo</a>,\n"
-"                    un dépôt ouvert généraliste hébergé par le CERN.\n"
-"                    Si le document n'a pas encore de DOI, Zenodo en créera "
-"un.\n"
-"                "
-
-#: deposit/templates/deposit/start.html:205
+#: deposit/templates/deposit/start.html:253
 msgid "Review metadata"
 msgstr "Relire les métadonnés"
 
-#: deposit/templates/deposit/start.html:223
+#: deposit/templates/deposit/start.html:268
 msgid "Processing deposit..."
 msgstr "Dépôt en cours de traitement..."
 
-#: deposit/templates/deposit/start.html:223
+#: deposit/templates/deposit/start.html:268
 msgid "please wait..."
 msgstr "veuillez patienter..."
 
-#: deposit/views.py:82
-msgid "An abstract is required, please paste one in the Metadata panel."
-msgstr ""
-"Veuillez fournir un résumé en le copiant-collant dans le panneau "
-"\"Métadonnées\"."
+#: deposit/views.py:57
+msgid "This repository is not available for this paper."
+msgstr "Ce dépôt n'est pas disponible pour ce papier."
 
-#: deposit/views.py:88
+#: deposit/views.py:96
+msgid "This repository cannot be used for this paper."
+msgstr "Impossible d'envoyer ce papier vers le dépôt indiqué."
+
+#: deposit/views.py:108
 msgid "Access to the PDF was denied."
 msgstr "L'accès au PDF a été refusé."
 
@@ -309,15 +297,15 @@ msgstr "Regroupement des publications"
 msgid "Updating statistics"
 msgstr "Mise à jour des statistiques"
 
-#: papers/models.py:786
+#: papers/models.py:803
 msgid "This paper is made freely available by the publisher."
 msgstr "Le texte intégral de l'article est en libre accès chez l'éditeur."
 
-#: papers/models.py:788
+#: papers/models.py:805
 msgid "This paper is available in a repository."
 msgstr "Cet article est disponible dans un dépôt."
 
-#: papers/models.py:790
+#: papers/models.py:807
 msgid ""
 "This paper was not found in any repository, but could be made available "
 "legally by the author."
@@ -325,11 +313,11 @@ msgstr ""
 "Cet article n'a été trouvé dans aucun dépôt, mais ses auteurs ont le droit "
 "de le mettre en ligne."
 
-#: papers/models.py:792
+#: papers/models.py:809
 msgid "Distributing this paper is prohibited by the publisher"
 msgstr "L'éditeur interdit la mise en ligne de cet article"
 
-#: papers/models.py:794
+#: papers/models.py:811
 msgid ""
 "This paper was not found in any repository; the policy of its publisher is "
 "unknown or unclear."
@@ -337,7 +325,7 @@ msgstr ""
 "Cet article n'a été trouvé dans aucun dépôt, et la politique de l'éditeur "
 "est inconnue ou imprécise."
 
-#: papers/models.py:1036 papers/views.py:100 papers/views.py:101
+#: papers/models.py:1058 papers/views.py:100 papers/views.py:101
 #: papers/views.py:140 papers/views.py:172
 msgid "Papers"
 msgstr "Papiers"
@@ -1644,7 +1632,7 @@ msgstr "Afficher/masquer la navigation"
 msgid "My profile"
 msgstr "Mon profil"
 
-#: templates/dissemin/skeleton.html:72
+#: templates/dissemin/skeleton.html:72 templates/dissemin/skeleton.html:103
 msgid "FAQ"
 msgstr "FAQ"
 
@@ -1656,21 +1644,9 @@ msgstr "Se déconnecter"
 msgid "Login"
 msgstr "Se connecter"
 
-#: templates/dissemin/skeleton.html:101
-msgid ""
-"The information provided on this website should not be relied upon for legal "
-"advice."
-msgstr ""
-"Les informations rassemblées sur ce site sont fournies à titre indicatif "
-"uniquement et sans aucune garantie."
-
-#: templates/dissemin/skeleton.html:101 templates/dissemin/tos.html:11
+#: templates/dissemin/skeleton.html:105 templates/dissemin/tos.html:11
 msgid "Terms of Service"
 msgstr "Conditions d'utilisation"
-
-#: templates/dissemin/skeleton.html:102
-msgid "Contact:"
-msgstr "Contact:"
 
 #: templates/dissemin/sources.html:11
 msgid "Data sources"
@@ -1898,6 +1874,38 @@ msgstr "URL invalide."
 #: upload/views.py:207
 msgid "Invalid form."
 msgstr "Formulaire invalide."
+
+#~ msgid ""
+#~ "\n"
+#~ "                Your document will be archived in <a href=\"https://"
+#~ "zenodo.org/\" target=\"_blank\">Zenodo</a>,\n"
+#~ "                    a general-purpose open repository hosted by CERN.\n"
+#~ "                    If the document does not have a DOI yet, Zenodo will "
+#~ "create one.\n"
+#~ "                "
+#~ msgstr ""
+#~ "\n"
+#~ "                Votre document sera archivé sur <a href=\"https://zenodo."
+#~ "org/\" target=\"_blank\">Zenodo</a>,\n"
+#~ "                    un dépôt ouvert généraliste hébergé par le CERN.\n"
+#~ "                    Si le document n'a pas encore de DOI, Zenodo en "
+#~ "créera un.\n"
+#~ "                "
+
+#~ msgid "An abstract is required, please paste one in the Metadata panel."
+#~ msgstr ""
+#~ "Veuillez fournir un résumé en le copiant-collant dans le panneau "
+#~ "\"Métadonnées\"."
+
+#~ msgid ""
+#~ "The information provided on this website should not be relied upon for "
+#~ "legal advice."
+#~ msgstr ""
+#~ "Les informations rassemblées sur ce site sont fournies à titre indicatif "
+#~ "uniquement et sans aucune garantie."
+
+#~ msgid "Contact:"
+#~ msgstr "Contact:"
 
 #~ msgid "Use of the deposit service"
 #~ msgstr "Utilisation du service de dépôt"
