@@ -16,7 +16,6 @@
         <p>
         {% if mode == "radio" %}<label>{% endif %}
             <span class="helpPopover" data-content="{{ type_explanation }}" rel="popover" data-placement="bottom">{{ type_text }}</span> {{ policy | explain_policy_short }}
-        {% if policy != "cannot" %}
             <span class="policyDetailUpload">
             {% if mode == "link" %}
             <a href="{% url 'upload_paper' paper.pk %}?type={{ typ }}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-open"></span> {% trans "Upload" %}</a>
@@ -25,7 +24,6 @@
                 {% if request.GET.type == typ %}checked="checked"{% endif %} />   
             {% endif %}
             </span>
-        {% endif %}
         {% if mode == "radio" %}</label>{% endif %}
         </p>
         <ul>
