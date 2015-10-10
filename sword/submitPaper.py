@@ -1,10 +1,10 @@
-import httplib2
+import httplib
 from zipfile import *
 from lxml import etree
 from django import forms
 
 import StringIO
-import sword.metadataFormatter
+import deposit.hal.metadataFormatter
 
 #UPDATE NEEDED : IT seems that they change the doc, it is not with an host.
 ## simple wrapper function to encode the username & pass
@@ -14,9 +14,9 @@ def encodeUserData(user, password):
 u='dissemin'
 p='disseminonhal'
 
-conn = httplib2.Http("api-preprod.archives-ouvertes.fr")
+conn = httplib.HTTPConnection("api-preprod.archives-ouvertes.fr")
 
-httplib2.Http.debuglevel = 1 #Uncomment to debug mode
+httplib.HTTPConnection.debuglevel = 1 #Uncomment to debug mode
 
 
 #TODO add specific headers for export-toarxiv and so one
@@ -49,6 +49,8 @@ def MetadataHal(strData):  #Homemade sword protocol
 
 def FullHal(pdf,metadata):
     strData = CreateZipFromPdfAndMetadata(pdf,metadata)
+    with open('/tmp/hal.zip', 'w') as f:
+        f.write(strData)
     conn.putrequest("POST", "/sword/hal/", True,True)
     conn.putheader("Authorization",encodeUserData(u,p))
     conn.putheader("User-Agent", "curl/7.35.0")
@@ -65,7 +67,7 @@ def FullHal(pdf,metadata):
 #I will assume that the online "edition" is where I want
 
 def UpdateHal(pdf,idHal):
-        strData = CreateZipFromPdfAndMetadata(pdf,sword.metadataFormatter.generate(4690))
+        strData = CreateZipFromPdfAndMetadata(pdf,deposit.hal.metadataFormatter.generate(4690))
         conn.putrequest("PUT", "/sword/"+idHal, True,True)
         conn.putheader("Host", "api-preprod.archives-ouvertes.fr")
         conn.putheader("Authorization",encodeUserData(u,p))
@@ -85,8 +87,8 @@ def UpdateHal(pdf,idHal):
 # edition editionStmt biblFull  listBibl body text tei
 def bla():
     with open("sword/t/article.pdf","r") as art:
-  		#FullHal(art.read(), sword.metadataFormatter.generate())      
-			UpdateHal(art.read(),"inria-00528632")
+  		FullHal(art.read(), deposit.hal.metadataFormatter.generate(37737))      
+		#	UpdateHal(art.read(),"inria-00528632")
 
 #TODO parse the XML to search "<edition>" then add the src
 #TODO Full SSL. Right now user/pass are not crypted.

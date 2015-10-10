@@ -112,6 +112,19 @@ class AOFRFormatter(MetadataFormatter):
 
         self.renderTitleAuthors(titleStmt, paper)
 
+        # editionStmt
+        if filename != None:
+            editionStmt = addChild(biblFull, 'editionStmt')
+            edition = addChild(editionStmt, 'edition')
+            date = addChild(edition, 'date')
+            date.attrib['type'] = 'whenWritten'
+            date.text = str(paper.pubdate.year)
+            ref = addChild(edition, 'ref')
+            ref.attrib['type'] = 'file'
+            ref.attrib['subtype'] = 'author' # TODO adapt based on form info
+            ref.attrib['target'] = filename
+
+
         # publicationStmt
         # publicationStmt = addChild(biblFull, 'publicationStmt')
         # TODO add license here
@@ -134,15 +147,6 @@ class AOFRFormatter(MetadataFormatter):
         note = addChild(notesStmt, 'note')
         note.attrib['type'] = 'peer'
         note.attrib['n'] = '1'
-
-        # editionStmt
-        if False and filename != None:
-            editionStmt = addChild(biblFull, 'editionStmt')
-            edition = addChild(editionStmt, 'edition')
-            ref = addChild(edition, 'ref')
-            ref.attrib['type'] = 'file'
-            ref.attrib['subtype'] = 'author'
-            ref.attrib['target'] = filename
 
         # sourceDesc
         sourceDesc = addChild(biblFull, 'sourceDesc')
