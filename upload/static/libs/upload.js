@@ -8,7 +8,6 @@ $(function(){
         var tpl = $('<div class="uploadFileItem uploadWorking"><div class="progress progress-striped active"><div class="progress-bar" style="width:100%"></div></div>    <div class="fileDetails"></div><div style="clear:left"></div></div>');
 
         // Append the file name and file size
-        console.log(name);
         filename = name;
         var formattedSize = 'Uploading...';
         if(size > 0) {
@@ -114,7 +113,6 @@ $(function(){
         },
 
         done: function(e, data) {
-            console.log(data)
             uploadComplete(data.context, data.jqXHR.responseJSON);
         },
 
@@ -122,11 +120,13 @@ $(function(){
             var resp = data.jqXHR.responseJSON;
             if(typeof resp != 'undefined' && 'upl' in resp) {
                 displayErrorMessage(data.context, resp['upl']);
-            } else if('message' in resp) {
+            } else if(resp != undefined && 'message' in resp) {
                 $('#globalError').addClass('error').text(resp['message']);
+                removeBar();
             } else {
                 $('#globalError').addClass('error').text(
                         "Dissemin encountered an error, please try again later.");
+                removeBar();
             }
         }
     });
@@ -161,7 +161,6 @@ $(function(){
 
         updateProgress(tpl, 10);
         $.post('/ajax-upload/download-url', data, null, 'json').fail(function(data) {
-                console.log(data);
                 if(!data.responseJSON)
                 {
                     $('#globalError').text(data.responseText);
@@ -172,7 +171,6 @@ $(function(){
                     displayErrorMessage(tpl, resp['message']);
                 }
             }).done(function(data) {
-                console.log(data);
                 if(data['status'] == 'error') {
                     $('#globalError').text(data['message']);
                 }
