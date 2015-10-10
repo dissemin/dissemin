@@ -28,6 +28,7 @@ from django.shortcuts import render
 from django.utils.translation import ugettext as _
 from django.views.decorators.http import require_POST
 from jsonview.decorators import json_view
+from crispy_forms.templatetags.crispy_forms_filters import as_crispy_form
 
 from dissemin.settings import MEDIA_ROOT, UNIVERSITY_BRANDING, DEPOSIT_MAX_FILE_SIZE 
 
@@ -58,7 +59,7 @@ def get_metadata_form(request):
 
     form = protocol.get_form()
     return {'status':'success',
-            'form':unicode(form)}
+            'form':as_crispy_form(form)}
 
 @user_passes_test(is_authenticated)
 def start_view(request, pk):

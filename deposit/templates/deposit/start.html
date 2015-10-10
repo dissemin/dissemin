@@ -69,6 +69,11 @@ $(function() {
                     $("#repositoryMetadataForm").empty();
                     if('status' in data && data['status'] == 'success') {
                         $("#repositoryMetadataForm").append(data['form']);
+                        /* Prefetched fields */
+                        $('.prefetchingFieldStatus').each(function(i,prefetch) {
+                            initPrefetch($(prefetch));
+                        });
+
                     } else if ('message' in data) {
                         $("#repositoryMetadataForm").append("<p>"+data["message"]+"</p>");
                     }
@@ -79,11 +84,6 @@ $(function() {
                 });
         }
     }
-
-    /* Prefetched fields */
-    $('.prefetchingFieldStatus').each(function(i,prefetch) {
-        initPrefetch($(prefetch));
-    });
 
     $('.helpPopover').popover({trigger: "hover"});
 
