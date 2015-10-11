@@ -60,6 +60,11 @@ $(function() {
         );        
     }
 
+    /* Prefetched fields */
+    $('.prefetchingFieldStatus').each(function(i,prefetch) {
+        initPrefetch($(prefetch));
+    });
+
     function updateMetadataForm(selected) {
         if(selected.val()) {
         $.get("{% url 'ajax-getMetadataForm' %}", data={'paper':{{ paper.id }},'repository':selected.val()}
@@ -116,7 +121,6 @@ $(function() {
     {% if request.GET.type %}
         $('#optionUploadType').collapse('hide');
     {% endif %}
-
 });
 
     /* Submitting the deposit */
@@ -211,7 +215,11 @@ $(function() {
             <span>
                 <a role="button" data-toggle="collapse"
                   data-parent="#uploadOptions" href="#optionRepository" aria-expanded="true"
-                        aria-controls="optionRepository">{% trans "Repository:" %}<span id="RepositoryInline"></span></a>
+                        aria-controls="optionRepository">{% trans "Repository:" %}<span id="RepositoryInline">
+                            {% if selected_repository %}
+                            <span><strong>{{ selected_repository.name }}</strong>
+                            </span>
+                            {% endif %}</span></a>
             </span>
         </div>
         <div id="optionRepository" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingRepository">
@@ -219,10 +227,18 @@ $(function() {
                 <div class="repositoryList">
                 {% for repository in available_repositories %}
                 {% with repository.0 as repo %}
-                <div class="repositoryItem {% if forloop.first %}firstItem{% endif %}">
+                {% with repository.1 as proto %}
+                <div class="repositoryItem {% if forloop.first %}firstItem{% endif %} {% if not proto %}disabledRepositoryItem{% endif %}">
+
+                    {% if not repo.enabled %}
+                    <div style="text-align: center">
+                            {% trans "Coming soon:" context "This repository will be soon available in Dissemin" %}
+                    </div>
+                    {% endif %}
                     <div style="display:none">
                         <span id="hiddenInlineRepository-{{ repo.pk }}">
-                            <span><strong>{{ repo.name }}</strong></span>
+                            <span><strong>{{ repo.name }}</strong>
+                            </span>
                         </span>
                     </div>
                     <div class="repositoryLogo">
@@ -232,13 +248,16 @@ $(function() {
                     </div>
                         <div class="repositoryChoiceRadio">
                             <input id="radiorepo{{ repository.pk}}" type="radio" value="{{repo.pk}}"
-                                name="radioRepository" />
+                                name="radioRepository" {% if not proto %}disabled="disabled"{% endif %}
+                                {% if repo == selected_repository %}checked="checked"{% endif %} />
                         </div>
                     <p>
                         {{ repository.0.description }}
                     </p>
+
                     <div style="clear:left"></div>
                 </div>
+                {% endwith %}
                 {% endwith %}
                 {% endfor %}
                 </div>
@@ -256,6 +275,7 @@ $(function() {
         <div id="optionMetadata" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingMetadata">
             <div class="panel-body">
                 <div id="repositoryMetadataForm">
+                    {{ selected_protocol.get_form|crispy }}
                 </div>
             </div>
         </div>

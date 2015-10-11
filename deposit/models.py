@@ -41,11 +41,13 @@ class Repository(models.Model):
     """
     This stores the parameters for a particular repository.
     """
-    # Name
+    #: Name
     name = models.CharField(max_length=64)
-    # Description
+    #: Description
     description = models.TextField()
-    # Logo
+    #: URL of the homepage (ex: http://arxiv.org/ )
+    url = models.URLField(max_length=256, null=True, blank=True)
+    #: Logo
     logo = models.ImageField(upload_to='repository_logos/')
 
     # The identifier of the interface (protocol) used for that repository
@@ -62,6 +64,9 @@ class Repository(models.Model):
     # The API's endpoint
     endpoint = models.CharField(max_length=256, null=True, blank=True)
 
+    #: Setting this to false forbids any deposit in this repository
+    enabled = models.BooleanField(default=True)
+
     def get_implementation(self):
         """
         Returns an instance of the class corresponding to the protocol identifier,
@@ -77,6 +82,8 @@ class Repository(models.Model):
         Returns an instance of the protocol initialized for the given
         paper and user, if initialization succeeded.
         """
+        if not self.enabled:
+            return
         instance = self.get_implementation()
         if instance is None:
             return

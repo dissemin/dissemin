@@ -42,8 +42,8 @@ def get_all_repositories_and_protocols(paper, user):
     protocols = []
     for r in repositories:
         implem = r.protocol_for_deposit(paper, user)
-        if implem is not None:
-            protocols.append((r,implem))
+        #if implem is not None:
+        protocols.append((r,implem))
     return protocols
 
 @json_view
@@ -65,12 +65,21 @@ def get_metadata_form(request):
 def start_view(request, pk):
     paper = get_object_or_404(Paper, pk=pk)
     repositories = get_all_repositories_and_protocols(paper, request.user)
+    selected_repository = None
+    selected_protocol = None
+    for repo, protocol in repositories:
+        if protocol is not None:
+            selected_repository = repo
+            selected_protocol = protocol
+            break
     breadcrumbs = paper.breadcrumbs()
     breadcrumbs.append((_('Deposit'),''))
     context = {
             'paper':paper,
             'max_file_size':DEPOSIT_MAX_FILE_SIZE,
             'available_repositories': repositories,
+            'selected_repository':selected_repository,
+            'selected_protocol':selected_protocol,
             'is_owner':paper.is_owned_by(request.user),
             'breadcrumbs':breadcrumbs,
             'repositoryForm':None,

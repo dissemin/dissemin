@@ -79,6 +79,10 @@ label[class="radio"] {
     padding-right: 10px;
 }
 
+.disabledRepositoryItem p {
+    color: #999;
+}
+
 #optionRepository .panel-body {
     padding: 0px;
 }
