@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-08 23:33+0200\n"
-"PO-Revision-Date: 2015-10-08 23:34+0200\n"
+"POT-Creation-Date: 2015-10-11 12:45+0200\n"
+"PO-Revision-Date: 2015-10-11 12:46+0200\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -42,8 +42,8 @@ msgstr "Document défectueux"
 msgid "Deposited"
 msgstr "Déposé"
 
-#: deposit/models.py:114 deposit/templates/deposit/start.html:266
-#: deposit/views.py:68
+#: deposit/models.py:121 deposit/templates/deposit/start.html:286
+#: deposit/views.py:76
 msgid "Deposit"
 msgstr "Dépôt"
 
@@ -60,13 +60,13 @@ msgstr "J'essaie de préremplir ce champ..."
 msgid "Sorry, we could not fill this for you."
 msgstr "Désolé, impossible de préremplir ceci"
 
-#: deposit/templates/deposit/start.html:132
+#: deposit/templates/deposit/start.html:136
 #: papers/templates/papers/department.html:30
 #: papers/templates/papers/index.html:46
 msgid "Dissemin encountered an error, please try again later."
 msgstr "Une erreur est survenue, merci de réessayer plus tard."
 
-#: deposit/templates/deposit/start.html:169
+#: deposit/templates/deposit/start.html:173
 #, python-format
 msgid ""
 "\n"
@@ -85,43 +85,48 @@ msgstr ""
 "d'utilisation</a>.\n"
 "        "
 
-#: deposit/templates/deposit/start.html:187
+#: deposit/templates/deposit/start.html:191
 msgid "Document"
 msgstr "Document"
 
-#: deposit/templates/deposit/start.html:195
+#: deposit/templates/deposit/start.html:199
 msgid "Options"
 msgstr "Options"
 
-#: deposit/templates/deposit/start.html:201
+#: deposit/templates/deposit/start.html:205
 msgid "Upload type:"
 msgstr "Type de dépôt:"
 
-#: deposit/templates/deposit/start.html:214
+#: deposit/templates/deposit/start.html:218
 msgid "Repository:"
 msgstr "Dépôt :"
 
-#: deposit/templates/deposit/start.html:253
+#: deposit/templates/deposit/start.html:235
+msgctxt "This repository will be soon available in Dissemin"
+msgid "Coming soon:"
+msgstr "Bientôt disponible :"
+
+#: deposit/templates/deposit/start.html:272
 msgid "Review metadata"
 msgstr "Relire les métadonnés"
 
-#: deposit/templates/deposit/start.html:268
+#: deposit/templates/deposit/start.html:288
 msgid "Processing deposit..."
 msgstr "Dépôt en cours de traitement..."
 
-#: deposit/templates/deposit/start.html:268
+#: deposit/templates/deposit/start.html:288
 msgid "please wait..."
 msgstr "veuillez patienter..."
 
-#: deposit/views.py:57
+#: deposit/views.py:58
 msgid "This repository is not available for this paper."
 msgstr "Ce dépôt n'est pas disponible pour ce papier."
 
-#: deposit/views.py:96
+#: deposit/views.py:106
 msgid "This repository cannot be used for this paper."
 msgstr "Impossible d'envoyer ce papier vers le dépôt indiqué."
 
-#: deposit/views.py:108
+#: deposit/views.py:118
 msgid "Access to the PDF was denied."
 msgstr "L'accès au PDF a été refusé."
 
@@ -656,7 +661,7 @@ msgid "and %(remaining_authors)s other authors"
 msgstr "et %(remaining_authors)s autres auteurs"
 
 #: papers/templates/papers/publiListItem.html:29
-#: publishers/templates/publishers/itemPolicy.html:22
+#: publishers/templates/publishers/itemPolicy.html:21
 msgid "Upload"
 msgstr "Mettre en ligne"
 
