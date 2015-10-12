@@ -43,6 +43,7 @@ body
     font-family:"Open Sans", "sans-serif", sans;
     font-size:14.5px;
     font-weight:300;
+    background-color: #2A6496;
 }
 
 /* boilerplate for links */
@@ -156,7 +157,7 @@ h4
 
 #content {
     padding: 0;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 #subheader {
@@ -197,8 +198,8 @@ h4
 #summaryLists, #detailContent
 {
     margin-right: 292px; 
-    padding-bottom: 32767px;
-    margin-bottom: -32767px;
+   /* padding-bottom: 32767px;
+    margin-bottom: -32767px; */
 }
 
 
@@ -209,6 +210,8 @@ h4
     height: 100%;
     width: 100%;
     position: relative;
+    background-color: #FFF;
+    min-height: 350px;
 }
 
 /* List of publications */
