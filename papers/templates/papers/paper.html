@@ -1,5 +1,6 @@
 {% extends "dissemin/details.html" %}
 
+{% load static %}
 {% load author %}
 {% load statuses %}
 {% load doi %}
@@ -93,8 +94,7 @@ $(function(){
 <div id="paperAvailability">
 
 <div id="paperAvailabilityLogo">
-{% if paper.pdf_url %}<a href="{{ paper.pdf_url }}"><img src="/static/symbol-PDF-{{ paper.oa_status }}.png" width="52" height="70" /></a>
-    {% else %}<img src="/static/symbol-{{ paper.oa_status }}.png" width="52" height="70" />{% endif %}
+    <img src="{% static "img/logos/" %}{{ paper.combined_status }}.png" width="52" height="70" alt="Paper" />
 </div>
 
 <div id="paperDetails">

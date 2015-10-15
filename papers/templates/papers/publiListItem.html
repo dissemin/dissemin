@@ -5,8 +5,7 @@
 
 <div class="pubLogo logoHelpPopover" data-content="{{ paper.status_helptext }}" rel="popover"
     data-placement="bottom">
-    {% if paper.pdf_url %}<img src="/static/symbol-PDF-{{ paper.oa_status }}.png" width="52" height="70" />
-    {% else %}<img src="/static/symbol-{{ paper.oa_status }}.png" width="52" height="70" />{% endif %}
+    <img src="/static/img/logos/{{ paper.combined_status }}.png" width="52" height="70" />
 </div>
 
 <div class="pubText">
@@ -31,7 +30,7 @@
 
         {% with paper.publication_set.first as publi %}
             {% if publi %}
-                {{ publi | publication }}{% if forloop.last %}.{% else %},{% endif %}<br />
+                {{ publi | publication }}.<br />
             {% else %}
             {% for record in paper.unique_prioritary_oai_records %}
                 {{ record.source.name }}{% if record.pdf_url == None %}{% trans " (metadata only)" %}{% endif %}{% if forloop.last %}.{% else %},{% endif %}

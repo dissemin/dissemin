@@ -70,7 +70,7 @@ from papers.name import match_names, name_similarity, unify_name_lists
 from papers.utils import remove_diacritics, sanitize_html, validate_orcid, affiliation_is_greater
 from papers.orcid import OrcidProfile
 
-from statistics.models import AccessStatistics, COMBINED_STATUS_CHOICES, PDF_STATUS_CHOICES
+from statistics.models import AccessStatistics, COMBINED_STATUS_CHOICES, PDF_STATUS_CHOICES, STATUS_CHOICES_HELPTEXT, combined_status_for_instance
 from publishers.models import Publisher, Journal, OA_STATUS_CHOICES, OA_STATUS_PREFERENCE, DummyPublisher
 from upload.models import UploadedPDF
 from dissemin.settings import PROFILE_REFRESH_ON_LOGIN
@@ -799,16 +799,14 @@ class Paper(models.Model):
         """
         Helptext displayed next to the paper logo
         """
-        if self.oa_status == 'OA':
-            return _('This paper is made freely available by the publisher.')
-        if self.pdf_url is not None:
-            return _('This paper is available in a repository.')
-        if self.oa_status == 'OK' and self.pdf_url is None:
-            return _('This paper was not found in any repository, but could be made available legally by the author.')
-        if self.oa_status == 'NOK':
-            return _('Distributing this paper is prohibited by the publisher')
-        if self.oa_status == 'UNK':
-            return _('This paper was not found in any repository; the policy of its publisher is unknown or unclear.')
+        return STATUS_CHOICES_HELPTEXT[self.combined_status]
+    
+    @property
+    def combined_status(self):
+        """
+        The combined status of the paper (availability and policy)
+        """
+        return combined_status_for_instance(self)
 
     def publications_with_unique_publisher(self):
         seen_publishers = set()

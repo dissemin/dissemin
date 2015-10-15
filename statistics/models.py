@@ -55,6 +55,15 @@ COMBINED_STATUS_CHOICES = [
     ('closed', _('Publisher forbids sharing')),
     ]
 
+#: Helptext displayed when a paper logo is hovered 
+STATUS_CHOICES_HELPTEXT = {
+    'oa': _('This paper is made freely available by the publisher.'),
+    'ok':_('This paper is available in a repository.'),
+    'couldbe':_('This paper was not found in any repository, but could be made available legally by the author.'),
+    'unk':_('This paper was not found in any repository; the policy of its publisher is unknown or unclear.'),
+    'closed':_('Distributing this paper is prohibited by the publisher'),
+    }
+
 #: Availability status choices
 PDF_STATUS_CHOICES = [('OK', _('Available')),
                       ('NOK', _('Unavailable'))]
