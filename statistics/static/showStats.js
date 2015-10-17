@@ -2,7 +2,7 @@ var stats_colors = ["#FCD206", "#B9C909", "#419BE8", "#eeeeee", "#122B52"];
 var stats_colors_aggregated = ["#43A000", "#DB1456"];
 
 function showStatsPie (detailed_data, aggregated_data, target_id, current_state) {
-    var w = 220, h = 145;
+    var w = 201, h = 145;
 	var r = 100, mr = 50, imr = 45, ir = 40; // radii
     var color = d3.scale.ordinal().range(stats_colors);
     var color_agg = d3.scale.ordinal().range(stats_colors_aggregated);

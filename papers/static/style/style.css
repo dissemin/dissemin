@@ -214,6 +214,11 @@ h4
     min-height: 350px;
 }
 
+.centered
+{
+    text-align: center;
+}
+
 /* List of publications */
 
 li 
@@ -737,6 +742,12 @@ h1#paperTitle {
 	margin-right:20px;
 }
 
+#sidebar .statspie_graph {
+    display:block;
+    margin:auto;
+    text-align:center;
+}
+
 #departmentsList .statspie_graph {
     margin-right: 5px;
 }
@@ -1037,7 +1048,7 @@ h1#paperTitle {
 */
 
 #globalStats {
-    float:right;
+    float:left;
     margin-right: 5px;
 }
 

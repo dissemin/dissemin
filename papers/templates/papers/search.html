@@ -66,6 +66,11 @@
 <span class="detailsTitle">{% trans "Researcher" %}</span>
     <div class="detailsContent">
         <p id="detail-name">{{ researcher }}</p>
+        {% if not request.user.is_authenticated and not researcher.orcid %}
+        <p class="centered">
+        <a href="{% url 'my-profile' %}" class="btn btn-primary"><img src="{% static "img/orcid-small.png" %}" alt="ORCID" /> {% trans "Is it you?" %}</a>
+        </p>
+        {% endif %}
         {% if researcher.role %}
         <p><span id="researcher-role"
         data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}"
