@@ -108,6 +108,7 @@ class OrcidPaperSource(PaperSource):
     def fetch_papers(self, researcher):
         if researcher.orcid:
             return self.fetch_orcid_records(researcher.orcid)
+        return []
 
     def fetch_orcid_records(self, id, profile=None, use_doi=True):
         """
