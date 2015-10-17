@@ -293,31 +293,31 @@ li
 }
 .pubLogoPic-UNK, .pubLogoPic-PDF-NOK
 {
-    background-image: url('../symbol-UNK.png');
+    background-image: url('../img/logos/unk.png');
 }
 .pubLogoPic-UNK.pubLogoPic-PDF, .pubLogoPic-PDF-OK
 {
-    background-image: url('../symbol-PDF-UNK.png');
+    background-image: url('../img/logos/ok.png');
 }
 .pubLogoPic-OK
 {
-    background-image: url('../symbol-OK.png');
+    background-image: url('../img/logos/couldbe.png');
 }
 .pubLogoPic-OK.pubLogoPic-PDF
 {
-    background-image: url('../symbol-PDF-OK.png');
+    background-image: url('../img/logos/ok.png');
 }
 .pubLogoPic-NOK
 {
-    background-image: url('../symbol-NOK.png');
+    background-image: url('../img/logos/closed.png');
 }
 .pubLogoPic-NOK.pubLogoPic-PDF
 {
-    background-image: url('../symbol-PDF-NOK.png');
+    background-image: url('../img/logos/ok.png');
 }
 .pubLogoPic-OA
 {
-    background-image: url('../symbol-OA.png');
+    background-image: url('../img/logos/oa.png');
 }
 
 .criterionItem
