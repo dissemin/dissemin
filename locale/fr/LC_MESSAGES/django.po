@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-11 12:45+0200\n"
-"PO-Revision-Date: 2015-10-11 12:46+0200\n"
+"POT-Creation-Date: 2015-10-17 20:01+0200\n"
+"PO-Revision-Date: 2015-10-17 20:02+0200\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.8.4\n"
+"X-Generator: Poedit 1.8.5\n"
 
 #: deposit/forms.py:36
 msgid "Upload type"
@@ -302,41 +302,13 @@ msgstr "Regroupement des publications"
 msgid "Updating statistics"
 msgstr "Mise à jour des statistiques"
 
-#: papers/models.py:803
-msgid "This paper is made freely available by the publisher."
-msgstr "Le texte intégral de l'article est en libre accès chez l'éditeur."
-
-#: papers/models.py:805
-msgid "This paper is available in a repository."
-msgstr "Cet article est disponible dans un dépôt."
-
-#: papers/models.py:807
-msgid ""
-"This paper was not found in any repository, but could be made available "
-"legally by the author."
-msgstr ""
-"Cet article n'a été trouvé dans aucun dépôt, mais ses auteurs ont le droit "
-"de le mettre en ligne."
-
-#: papers/models.py:809
-msgid "Distributing this paper is prohibited by the publisher"
-msgstr "L'éditeur interdit la mise en ligne de cet article"
-
-#: papers/models.py:811
-msgid ""
-"This paper was not found in any repository; the policy of its publisher is "
-"unknown or unclear."
-msgstr ""
-"Cet article n'a été trouvé dans aucun dépôt, et la politique de l'éditeur "
-"est inconnue ou imprécise."
-
-#: papers/models.py:1058 papers/views.py:100 papers/views.py:101
+#: papers/models.py:1056 papers/views.py:100 papers/views.py:101
 #: papers/views.py:140 papers/views.py:172
 msgid "Papers"
 msgstr "Papiers"
 
 #: papers/templates/papers/ajaxListPapers.html:21
-#: papers/templates/papers/search.html:265
+#: papers/templates/papers/search.html:270
 #: publishers/templates/publishers/list.html:80
 msgid "No production found."
 msgstr "Aucune production trouvée."
@@ -560,7 +532,7 @@ msgstr ""
 msgid "Yes"
 msgstr "Oui"
 
-#: papers/templates/papers/paper.html:62
+#: papers/templates/papers/paper.html:63
 #, python-format
 msgctxt "as in: _Journal article by_ Tom Smith, Nicole Allen"
 msgid ""
@@ -572,7 +544,7 @@ msgstr ""
 "    <span class=\"paperDocType\">%(doctype)s</span> de\n"
 "    "
 
-#: papers/templates/papers/paper.html:70
+#: papers/templates/papers/paper.html:71
 #, python-format
 msgid ""
 "\n"
@@ -585,7 +557,7 @@ msgstr ""
 "%(nb_remaining_authors)s autres auteurs</a>\n"
 "            "
 
-#: papers/templates/papers/paper.html:77
+#: papers/templates/papers/paper.html:78
 #, python-format
 msgid ""
 "\n"
@@ -598,7 +570,7 @@ msgstr ""
 "\"show_less_authors\">afficher moins</a>):<br />\n"
 "            "
 
-#: papers/templates/papers/paper.html:90
+#: papers/templates/papers/paper.html:91
 msgid "Paper successfully deposited!"
 msgstr "L'article a été correctement déposé !"
 
@@ -607,11 +579,11 @@ msgid "Full text:"
 msgstr "Texte intégral:"
 
 #: papers/templates/papers/paper.html:103
-#: papers/templates/papers/publiListItem.html:27
+#: papers/templates/papers/publiListItem.html:26
 msgid "Download"
 msgstr "Télécharger"
 
-#: papers/templates/papers/paper.html:105 statistics/models.py:60
+#: papers/templates/papers/paper.html:105 statistics/models.py:69
 msgid "Unavailable"
 msgstr "Indisponible"
 
@@ -655,17 +627,17 @@ msgstr "Administration"
 msgid "via DOI"
 msgstr "via DOI"
 
-#: papers/templates/papers/publiListItem.html:16
+#: papers/templates/papers/publiListItem.html:15
 #, python-format
 msgid "and %(remaining_authors)s other authors"
 msgstr "et %(remaining_authors)s autres auteurs"
 
-#: papers/templates/papers/publiListItem.html:29
+#: papers/templates/papers/publiListItem.html:28
 #: publishers/templates/publishers/itemPolicy.html:21
 msgid "Upload"
 msgstr "Mettre en ligne"
 
-#: papers/templates/papers/publiListItem.html:37
+#: papers/templates/papers/publiListItem.html:36
 msgid " (metadata only)"
 msgstr " (notice)"
 
@@ -673,72 +645,76 @@ msgstr " (notice)"
 msgid "Researcher"
 msgstr "Personne"
 
-#: papers/templates/papers/search.html:85
+#: papers/templates/papers/search.html:71
+msgid "Is it you?"
+msgstr "Est-ce vous ?"
+
+#: papers/templates/papers/search.html:90
 msgid "Address:"
 msgstr "Adresse:"
 
-#: papers/templates/papers/search.html:88
+#: papers/templates/papers/search.html:93
 msgid "Names:"
 msgstr "Noms:"
 
-#: papers/templates/papers/search.html:95
+#: papers/templates/papers/search.html:100
 msgid "Refresh papers"
 msgstr "Mettre à jour les papiers"
 
-#: papers/templates/papers/search.html:96
+#: papers/templates/papers/search.html:101
 msgid "Refresh classification"
 msgstr "Rafraîchir la classification"
 
-#: papers/templates/papers/search.html:101
+#: papers/templates/papers/search.html:106
 msgid "Name"
 msgstr "Nom"
 
-#: papers/templates/papers/search.html:107
+#: papers/templates/papers/search.html:112
 msgid "Journal"
 msgstr "Revue"
 
-#: papers/templates/papers/search.html:110
+#: papers/templates/papers/search.html:115
 msgid "Published by"
 msgstr "Publiée par"
 
-#: papers/templates/papers/search.html:112
+#: papers/templates/papers/search.html:117
 msgid "ISSN:"
 msgstr "ISSN:"
 
-#: papers/templates/papers/search.html:119
-#: papers/templates/papers/search.html:133
+#: papers/templates/papers/search.html:124
+#: papers/templates/papers/search.html:138
 #, python-format
 msgid "<span id=\"nbPapersFound\">%(nb_results)s</span> papers found"
 msgstr "<span id=\"nbPapersFound\">%(nb_results)s</span> articles trouvés"
 
-#: papers/templates/papers/search.html:125
+#: papers/templates/papers/search.html:130
 #: publishers/templates/publishers/policy.html:41
 msgid "Publisher"
 msgstr "Maison d'édition"
 
-#: papers/templates/papers/search.html:140
+#: papers/templates/papers/search.html:145
 #: publishers/templates/publishers/list.html:24
 msgid "Refine search"
 msgstr "Affiner la recherche"
 
-#: papers/templates/papers/search.html:144
+#: papers/templates/papers/search.html:149
 #: publishers/templates/publishers/list.html:33
 msgid "By publisher policy:"
 msgstr "Par politique de publication"
 
-#: papers/templates/papers/search.html:159
+#: papers/templates/papers/search.html:164
 msgid "By full text availability:"
 msgstr "Par disponibilité du texte intégral"
 
-#: papers/templates/papers/search.html:172
+#: papers/templates/papers/search.html:177
 msgid "By document type:"
 msgstr "Par type de document:"
 
-#: papers/templates/papers/search.html:187
+#: papers/templates/papers/search.html:192
 msgid "By visibility:"
 msgstr "Par visibilité"
 
-#: papers/templates/papers/search.html:217
+#: papers/templates/papers/search.html:222
 msgid ""
 "This researcher is not associated with any ORCID profile. The publications "
 "below match their name but might be irrelevant."
@@ -746,7 +722,7 @@ msgstr ""
 "Ce chercheur n'est pas associé à un profil ORCID. Les publications ci-"
 "dessous correspondent au nom mais peuvent ne pas être pertinentes."
 
-#: papers/templates/papers/search.html:229
+#: papers/templates/papers/search.html:234
 msgid ""
 "Your ORCID profile does not reference any publication. You can add them "
 "easily using <a href=\"http://search.crossref.org\">CrossRef Metadata "
@@ -758,7 +734,7 @@ msgstr ""
 "Metadata Search</a>.<br /> Les publications ci-dessous correspondent à votre "
 "nom mais ne sont pas forcément pertinentes ou complètes."
 
-#: papers/templates/papers/search.html:240
+#: papers/templates/papers/search.html:245
 msgid ""
 "This ORCID profile does not reference any publication. The ones shown below "
 "might be irrelevant or incomplete."
@@ -1071,7 +1047,35 @@ msgstr "Politique inconnue ou complexe"
 msgid "Publisher forbids sharing"
 msgstr "Partage interdit par l'éditeur"
 
-#: statistics/models.py:59
+#: statistics/models.py:60
+msgid "This paper is made freely available by the publisher."
+msgstr "Le texte intégral de l'article est en libre accès chez l'éditeur."
+
+#: statistics/models.py:61
+msgid "This paper is available in a repository."
+msgstr "Cet article est disponible dans un dépôt."
+
+#: statistics/models.py:62
+msgid ""
+"This paper was not found in any repository, but could be made available "
+"legally by the author."
+msgstr ""
+"Cet article n'a été trouvé dans aucun dépôt, mais ses auteurs ont le droit "
+"de le mettre en ligne."
+
+#: statistics/models.py:63
+msgid ""
+"This paper was not found in any repository; the policy of its publisher is "
+"unknown or unclear."
+msgstr ""
+"Cet article n'a été trouvé dans aucun dépôt, et la politique de l'éditeur "
+"est inconnue ou imprécise."
+
+#: statistics/models.py:64
+msgid "Distributing this paper is prohibited by the publisher"
+msgstr "L'éditeur interdit la mise en ligne de cet article"
+
+#: statistics/models.py:68
 msgid "Available"
 msgstr "Disponible"
 
