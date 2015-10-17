@@ -66,12 +66,37 @@ class PaperSource(object):
         count = 0
         for p in self.fetch_papers(researcher):
             count += 1
+            # If an OAI source is set up to check the availability, do so
             if self.oai:
                 p = self.oai.fetch_accessibility(p)
+            # If clustering happens incrementally, cluster the researcher
             if incremental:
+                # First, check whether this paper is associated with an ORCID id
+                # for the target researcher
+                if researcher.orcid:
+                    matches = filter(lambda a: a.orcid == researcher.orcid, p.sorted_authors)
+                    if matches:
+                        self.update_empty_orcid(researcher, False)
+                
+                # Then, cluster the new author
                 self.ccf.clusterPendingAuthorsForResearcher(researcher)
                 researcher.update_stats()
+            
             if self.max_results is not None and count >= self.max_results:
                 break
+    
+    def update_empty_orcid(self, researcher, val):
+        """
+        Updates the empty_orcid_profile field of the provided :class:`Researcher` instance.
+        This is sent to the clustering context factory where a batch reclustering is performed
+        if needed. The relevance score of papers depend on whether we have found at least one
+        paper associated to the researcher via ORCID, hence we need this reclustering when
+        we discover such a paper.
+        """
+        if val != researcher.empty_orcid_profile:
+            researcher.empty_orcid_profile = val
+            researcher.save(update_fields=['empty_orcid_profile'])
+            self.ccf.updateResearcher(researcher)
+
 
 

@@ -190,6 +190,20 @@ class CrossRefIntegrationTest(PaperSourceTest):
         for p in papers:
             self.assertTrue(len(p.publication_set.all()) > 0)
 
+    def check_previously_present_papers_are_attributed(self):
+        # Fetch papers from a researcher
+        r = Researcher.get_or_create_by_name('Laurent','Bienvenu')
+        self.source.fetch(r, incremental=True)
+
+        # Now fetch a coauthor of him
+        r2 = Researcher.get_or_create_by_orcid('0000-0003-1698-5150')
+        self.source.fetch(r2, incremental=True)
+
+        # This paper should be attributed
+        p = Paper.objects.get(publication__doi='10.1016/j.jcss.2015.04.004')
+        self.assertEqual(p.sorted_authors[3].researcher, r2)
+
+
 class CrossRefUnitTest(unittest.TestCase):
     def test_fetch_single_doi(self):
         doi = '10.5380/dp.v1i1.1922'

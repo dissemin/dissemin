@@ -107,19 +107,7 @@ def affiliate_author_with_orcid(ref_name, orcid, authors, initial_affiliations=N
 class OrcidPaperSource(PaperSource):
     def fetch_papers(self, researcher):
         if researcher.orcid:
-            def update_empty(val):
-                researcher.empty_orcid_profile = val
-                researcher.save(update_fields=['empty_orcid_profile'])
-                self.ccf.updateResearcher(researcher)
-
-            found = False
-            for paper in self.fetch_orcid_records(researcher.orcid):
-                if not found:
-                    update_empty(False)
-                    found = True
-                yield paper
-            if not found and researcher.empty_orcid_profile != True:
-                update_empty(True)
+            return self.fetch_orcid_records(researcher.orcid)
 
     def fetch_orcid_records(self, id, profile=None, use_doi=True):
         """

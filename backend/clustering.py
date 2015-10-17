@@ -51,6 +51,8 @@ class ClusteringContext(object):
 
         # Researcher we're trying to cluster
         self.researcher = researcher
+        # The cached empty_orcid_profile of that researcher
+        self.cached_empty_orcid_profile = researcher.empty_orcid_profile
 
         # The similarity and relevance classifiers
         self.sc = sc
@@ -72,8 +74,9 @@ class ClusteringContext(object):
         that influence the relevance or similarity classifications.
         For now, this is only whether the ORCID profile is empty or not.
         """
-        previously_nonempty = (self.researcher.empty_orcid_profile == False)
+        previously_nonempty = (self.cached_empty_orcid_profile == False)
         self.researcher = researcher
+        self.cached_empty_orcid_profile = researcher.empty_orcid_profile
         if (researcher.empty_orcid_profile == False) != previously_nonempty:
             self.reclusterBatch()
 
