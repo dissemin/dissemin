@@ -1029,7 +1029,7 @@ msgstr "Aucune."
 
 #: statistics/models.py:51
 msgid "Available from the publisher"
-msgstr "Accessible à partir de l'éditeur."
+msgstr "Accessible à partir de l'éditeur"
 
 #: statistics/models.py:52
 msgid "Available from the author"
