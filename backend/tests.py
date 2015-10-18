@@ -114,6 +114,8 @@ class PaperSourceTest(PrefilledTest):
     @classmethod
     def setUpClass(self):
         super(PaperSourceTest, self).setUpClass()
+        if self is PaperSourceTest:
+            raise unittest.SkipTest("Base test")
         self.ccf = get_ccf()
         self.source = None
         self.researcher = self.r4

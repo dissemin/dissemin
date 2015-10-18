@@ -53,7 +53,7 @@ class ProtocolTest(PrefilledTest):
                 [self.r1.name, self.r2.name, self.r4.name],
                 date(year=2014,month=02,day=15))
         self.ccf.commitThemAll()
-        self.user = User.objects.create_user('myuser')
+        self.user, _ = User.objects.get_or_create(username='myuser')
         self.oaisource, _ = OaiSource.objects.get_or_create(
             identifier='deposit_oaisource',
             name='Repository OAI source',
