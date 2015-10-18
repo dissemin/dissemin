@@ -74,6 +74,8 @@ class RomeoTest(TestCase):
 class PrefilledTest(TestCase):
     @classmethod
     def setUpClass(self):
+        if self is PrefilledTest:
+            raise unittest.SkipTest("Base test")
         self.i, _ = Institution.objects.get_or_create(name='ENS')
         self.d, _ = Department.objects.get_or_create(name='Chemistry dept', institution=self.i)
         self.di, _ = Department.objects.get_or_create(name='Comp sci dept', institution=self.i)
@@ -117,8 +119,6 @@ class PaperSourceTest(PrefilledTest):
         self.researcher = self.r4
 
     def test_fetch(self):
-        if self.source is None:
-            return
         papers = list(self.source.fetch_papers(self.researcher))
         for p in papers:
             check_paper(self, p)
@@ -133,8 +133,6 @@ class PaperSourceTest(PrefilledTest):
         pass
 
     def test_empty(self):
-        if self.source is None:
-            return
         emptyres = Researcher.get_or_create_by_name('Anrscuienrsc','Lecsrcudresies')
         papers = list(self.source.fetch_papers(emptyres))
         self.assertEqual(papers, [])
@@ -370,6 +368,8 @@ class OrcidIntegrationTest(PaperSourceTest):
 class PaperMethodsTest(PrefilledTest):
     @classmethod
     def setUpClass(self):
+        if self is PaperMethodsTest:
+            raise unittest.SkipTest("Base test")
         self.ccf = get_ccf()
 
     def test_update_author_names(self):
