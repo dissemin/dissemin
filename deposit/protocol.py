@@ -67,6 +67,8 @@ class RepositoryProtocol(object):
     def __init__(self, repository, **kwargs):
         self.repository = repository
         self._logs = None
+        self.paper = None
+        self.user = None
 
     def protocol_identifier(self):
         """
