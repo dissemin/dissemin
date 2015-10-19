@@ -16,7 +16,7 @@ Installation instructions for the web frontend
 ----------------------------------------------
 
 First, install the following dependencies (debian packages)
-``postgresql postgresql-server-dev-all postgresql-client python-virtualenv build-essential libxml2-dev libxslt1-dev python-dev gettext``
+``postgresql postgresql-server-dev-all postgresql-client python-virtualenv build-essential libxml2-dev libxslt1-dev python-dev gettext libjpeg-dev``
 
 Then, build a virtual environment to isolate all the python
 dependencies::
