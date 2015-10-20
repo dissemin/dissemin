@@ -1,8 +1,8 @@
 {% load author %}
 {% load i18n %}
 {% load cache %}
-{% cache 60000 publiListItem paper.pk researcher_id %}
-
+{% get_current_language as LANGUAGE_CODE %}
+{% cache 60000 publiListItem paper.pk LANGUAGE_CODE researcher_id %}
 <div class="pubLogo logoHelpPopover" data-content="{{ paper.status_helptext }}" rel="popover"
     data-placement="bottom">
     <img src="/static/img/logos/{{ paper.combined_status }}.png" width="52" height="70" />

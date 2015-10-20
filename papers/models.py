@@ -73,7 +73,7 @@ from papers.orcid import OrcidProfile
 from statistics.models import AccessStatistics, COMBINED_STATUS_CHOICES, PDF_STATUS_CHOICES, STATUS_CHOICES_HELPTEXT, combined_status_for_instance
 from publishers.models import Publisher, Journal, OA_STATUS_CHOICES, OA_STATUS_PREFERENCE, DummyPublisher
 from upload.models import UploadedPDF
-from dissemin.settings import PROFILE_REFRESH_ON_LOGIN
+from dissemin.settings import PROFILE_REFRESH_ON_LOGIN, POSSIBLE_LANGUAGE_CODES
 
 import hashlib, re
 from datetime import datetime, timedelta
@@ -871,8 +871,9 @@ class Paper(models.Model):
         Invalidate the HTML cache for all the publications of this researcher.
         """
         for rpk in [a.researcher_id for a in self.author_set.filter(researcher_id__isnull=False)]+[None]:
-            key = make_template_fragment_key('publiListItem', [self.pk, rpk])
-            cache.delete(key)
+            for lang in POSSIBLE_LANGUAGE_CODES:
+                key = make_template_fragment_key('publiListItem', [self.pk, lang, rpk])
+                cache.delete(key)
 
     def update_author_names(self, new_author_names, new_affiliations=None):
         """

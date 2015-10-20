@@ -307,6 +307,7 @@ BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 43200}
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 LANGUAGE_CODE = 'en-us'
+POSSIBLE_LANGUAGE_CODES = ['en','fr']
 TIME_ZONE = 'Europe/Paris'
 USE_I18N = True
 USE_L10N = True
