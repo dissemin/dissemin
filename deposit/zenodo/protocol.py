@@ -74,7 +74,7 @@ class ZenodoProtocol(RepositoryProtocol):
         result = {}
 
         if self.repository.api_key is None:
-            raise DepositError(__("No Zenodo API key provided."),'')
+            raise DepositError(__("No Zenodo API key provided."))
         api_key = self.repository.api_key
         api_url_with_key = self.api_url+'?access_token='+api_key
 
@@ -137,7 +137,7 @@ class ZenodoProtocol(RepositoryProtocol):
             self.log("Caught exception:")
             self.log(str(type(e))+': '+str(e)+'')
             self.log(traceback.format_exc())
-            raise DepositError('Connection to Zenodo failed. Please try again later.')
+            raise DepositError(__('Failed to connect to Zenodo. Please try again later.'))
 
         return deposit_result
 

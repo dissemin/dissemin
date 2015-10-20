@@ -39,6 +39,10 @@ doc/bio.doc
 dissemin/NOTONGIT*
 # Uploaded files
 media/
+mediatest/repository_logos/
+www/
+runfcgi.pid
+.virtualenv
 
 # build files for doc
 doc/sphinx/_build/
