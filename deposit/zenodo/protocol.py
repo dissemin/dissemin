@@ -35,7 +35,7 @@ ZENODO_LICENSES_CHOICES = [
    ('cc-by-sa', _('Creative Commons Attribution-ShareAlike')),
    ('cc-by-nc-4.0', _('Creative Commons Attribution-NonCommercial')),
    ('cc-by-nd-4.0', _('Creative Commons Attribution-NoDerivatives')),
-   ('other-closed', _('Other (closed license)')),
+   ('other-open', _('Other open license')),
  ]
 
 from deposit.protocol import *
@@ -59,7 +59,7 @@ class ZenodoProtocol(RepositoryProtocol):
 
     def get_form(self):
         data = {}
-        data['license'] = 'cc-by'
+        data['license'] = 'other-open'
         data['paper_id'] = self.paper.id
         if self.paper.abstract:
             data['abstract'] = kill_html(self.paper.abstract)

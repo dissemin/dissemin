@@ -31,7 +31,7 @@ class ZenodoForm(BaseMetadataForm):
     license = forms.ChoiceField(
             label=__('License'),
             choices=ZENODO_LICENSES_CHOICES,
-            initial='cc-by',
+            initial='other-open',
             widget=forms.RadioSelect(attrs={'class':'radio-margin'})
             )
 
