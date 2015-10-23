@@ -24,6 +24,8 @@ addons:
        - python-requests
        - python-lxml
        - curl
+       - libffi-dev
+       - libssl-dev
 
 env:
   global:
