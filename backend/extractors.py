@@ -92,7 +92,6 @@ class OpenAireExtractor(RegexExtractor):
             urls['pdf'] = urls.get('splash')
         return urls
 
-
 arxivExtractor = RegexExtractor([
     ('identifier',re.compile(r'(http://arxiv.org/abs/[^ ]*)$'),
         'splash',r'\1'),
@@ -151,11 +150,9 @@ openaireExtractor = OpenAireExtractor([
         'pdf', r'\1'),
     ])
 
-zenodoExtractor = RegexExtractor([
+zenodoExtractor = OpenAireExtractor([
     ('identifier', re.compile(r'(https?://zenodo.org/record/[0-9]*)'),
         'splash', r'\1'),
-    ('identifier', re.compile(r'(https?://zenodo.org/record/[0-9]*)'),
-        'pdf', r'\1'),
     ])
 
 REGISTERED_EXTRACTORS = {
