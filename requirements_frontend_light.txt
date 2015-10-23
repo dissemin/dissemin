@@ -16,3 +16,6 @@ django-crispy-forms
 swampdragon
 django-debug-toolbar
 django-jsonview
+pyopenssl
+ndg-httpsclient
+pyasn1

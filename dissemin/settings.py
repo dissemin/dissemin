@@ -331,6 +331,10 @@ if 'TRAVIS' in os.environ:
             'PORT':     '',
         }
     }
+    # Patch urllib3 because the default SSL module on Travis sucks
+    import urllib3.contrib.pyopenssl
+    urllib3.contrib.pyopenssl.inject_into_urllib3()
+
 if 'CORE_API_KEY' in os.environ:
     CORE_API_KEY = os.environ['CORE_API_KEY']
 
