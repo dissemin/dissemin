@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-17 20:01+0200\n"
-"PO-Revision-Date: 2015-10-17 20:02+0200\n"
+"POT-Creation-Date: 2015-10-21 00:38+0200\n"
+"PO-Revision-Date: 2015-10-21 00:38+0200\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -151,8 +151,8 @@ msgid "Creative Commons Attribution-NoDerivatives"
 msgstr "Creative Commons Attribution-NoDerivatives (Pas de travaux dérivés)"
 
 #: deposit/zenodo/protocol.py:38
-msgid "Other (closed license)"
-msgstr "Autre (licence non-libre)"
+msgid "Other open license"
+msgstr "Autre licence libre"
 
 #: papers/forms.py:37
 msgid "Invalid ORCID identifier."
@@ -302,7 +302,7 @@ msgstr "Regroupement des publications"
 msgid "Updating statistics"
 msgstr "Mise à jour des statistiques"
 
-#: papers/models.py:1056 papers/views.py:100 papers/views.py:101
+#: papers/models.py:1057 papers/views.py:100 papers/views.py:101
 #: papers/views.py:140 papers/views.py:172
 msgid "Papers"
 msgstr "Papiers"
