@@ -1,4 +1,4 @@
-var stats_colors = ["#FCD206", "#B9C909", "#419BE8", "#eeeeee", "#122B52"];
+var stats_colors = ["#FCD206", "#B9C909", "#419BE8", "#dddddd", "#122B52"];
 var stats_colors_aggregated = ["#43A000", "#DB1456"];
 
 function showStatsPie (detailed_data, aggregated_data, target_id, current_state) {
