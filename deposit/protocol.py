@@ -131,7 +131,7 @@ class RepositoryProtocol(object):
                     splash_url=result.splash_url,
                     pdf_url=result.pdf_url)
 
-
+            self.paper.update_author_stats() # TODO write an unit test for this        
             return result
         except DepositError as e:
             self.log('Message: '+e.args[0])

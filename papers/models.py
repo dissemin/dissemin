@@ -671,6 +671,14 @@ class Paper(models.Model):
         else:
             return self.sorted_authors
 
+    def update_author_stats(self):
+        """
+        Updates the statistics of all researchers identified for this paper
+        """
+        for author in self.sorted_authors:
+            if author.researcher:
+                author.researcher.update_stats()
+
     def first_publications(self):
         """
         The list of the 3 first publications associated with this paper
