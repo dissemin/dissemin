@@ -19,3 +19,5 @@ django-jsonview
 pyopenssl
 ndg-httpsclient
 pyasn1
+urllib3
+cryptography
