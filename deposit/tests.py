@@ -31,6 +31,7 @@ from deposit.models import Repository, DepositRecord
 from deposit.protocol import DepositResult
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from io import BytesIO
+import os
 
 # 1x1 px image used as default logo for the repository
 simple_png_image = b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01\x08\x02\x00\x00\x00\x90wS\xde\x00\x00\x00\tpHYs\x00\x00\x0b\x13\x00\x00\x0b\x13\x01\x00\x9a\x9c\x18\x00\x00\x00\x07tIME\x07\xdf\n\x12\x0c+\x19\x84\x1d/"\x00\x00\x00\x19tEXtComment\x00Created with GIMPW\x81\x0e\x17\x00\x00\x00\x0cIDAT\x08\xd7c\xa8\xa9\xa9\x01\x00\x02\xec\x01u\x90\x90\x1eL\x00\x00\x00\x00IEND\xaeB`\x82'
@@ -51,6 +52,8 @@ class ProtocolTest(PrefilledTest):
         super(ProtocolTest, self).setUpClass()
         if self is ProtocolTest:
              raise unittest.SkipTest("Base test")
+        if 'TRAVIS' in os.environ:
+            raise unittest.SkipTest("Skipping deposit test on Travis to avoid mass submissions to sandboxes")
         self.ccf = get_ccf()
         self.p1 = self.ccf.get_or_create_paper(
                 "This is a test paper",
