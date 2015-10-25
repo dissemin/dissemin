@@ -149,7 +149,7 @@ class CoreTest(PaperSourceTest):
 
     def test_query(self):
         self.assertIsInstance(
-                query_core('/articles/get/23770479', {}),
+                query_core('/articles/get/19822106', {}),
                 dict)
         self.assertIsInstance(
                 query_core('/search/Geoffrey+Bodenhausen', {}),
