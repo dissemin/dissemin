@@ -26,6 +26,8 @@ to the metadata sources. Then, you can :ref:`page-importresearchers`.
    apikeys
    importresearchers
    deploying
+   datasources
+   datamodel
    development
    modules
 
