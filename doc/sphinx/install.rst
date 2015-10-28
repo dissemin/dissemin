@@ -97,6 +97,7 @@ This is done by applying migrations::
 Then you can move on to :ref:`page-importresearchers`
 and :ref:`page-deploying`.
 
+
 Optional: installing the tasks backend
 --------------------------------------
 
@@ -114,7 +115,7 @@ First, install the redis server::
 
    apt-get install redis-server
 
-(this launches the rabbitmq server). Install Python dependencies::
+(this launches the redis server). Install Python dependencies::
 
    sudo apt-get install libxml2 python-dev libxslt-dev liblapack-dev gfortran libopenblas-dev
    source .virtualend/bin/activate
@@ -129,5 +130,7 @@ To run the backend (still in the virtualenv)::
 
    celery --app=dissemin.celery:app worker -B -l INFO
 
+The -B option starts the scheduler for periodic tasks, the -l option sets the debug level
+to INFO.
 
 

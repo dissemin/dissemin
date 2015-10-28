@@ -7,6 +7,7 @@
    backend
    deposit
    dissemin
+   load_dump
    manage
    papers
    publishers

@@ -6,7 +6,7 @@ Submodules
 
 .. toctree::
 
-   statistics.templatetags.statsurl
+   statistics.templatetags.get_pie_data
 
 Module contents
 ---------------

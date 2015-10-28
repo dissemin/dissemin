@@ -6,6 +6,7 @@ Subpackages
 
 .. toctree::
 
+    deposit.hal
     deposit.migrations
     deposit.zenodo
 
@@ -19,6 +20,7 @@ Submodules
    deposit.models
    deposit.protocol
    deposit.registry
+   deposit.testpages
    deposit.tests
    deposit.urls
    deposit.views
