@@ -92,10 +92,10 @@ def fetch_everything_for_researcher(pk):
        ]
     r = Researcher.objects.get(pk=pk)
 
-    # If it is the first time we fetch this researcher
-    if r.stats is None:
-        # make sure publications already known are also considered
-        ccf.reclusterBatch(r)
+    ## If it is the first time we fetch this researcher
+    #if r.stats is None:
+    # make sure publications already known are also considered
+    ccf.reclusterBatch(r)
     try:
         for key,source in sources:
             update_researcher_task(r, key)
