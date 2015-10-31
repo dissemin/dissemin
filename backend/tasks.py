@@ -180,15 +180,22 @@ def update_all_stats():
     AccessStatistics.update_all_stats(Department)
 
 @shared_task(name='update_all_stats_but_researchers')
-@run_only_once('refresh_stats', timeout=3*60)
+@run_only_once('refresh_stats', timeout=10*60)
 def update_all_stats_but_researchers():
     """
     Updates the stats for every model using them
     """
     AccessStatistics.update_all_stats(PaperWorld)
     AccessStatistics.update_all_stats(Publisher)
-    AccessStatistics.update_all_stats(Journal)
     AccessStatistics.update_all_stats(Institution)
     AccessStatistics.update_all_stats(Department)
 
+@shared_task(name='update_journal_stats')
+@run_only_once('refresh_journal_stats', timeout=10*60)
+def update_journal_stats():
+    """
+    Updates statistics for journals (only visible to admins, so
+    not too frequently please)
+    """
+    AccessStatistics.update_all_stats(Journal)
 

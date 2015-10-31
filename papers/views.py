@@ -56,9 +56,12 @@ import json
 
 def fetch_on_orcid_login(sender, **kwargs):
     account = kwargs['sociallogin'].account
-    orcid = account.uid
+
+    # Only prefetch if the social login refers to a valid ORCID account
+    orcid = validate_orcid(account.uid)
     if not orcid:
         return
+
     profile = account.extra_data
     user = None
     if '_user_cache' in account.__dict__:
@@ -96,6 +99,9 @@ def searchView(request, **kwargs):
     queryset = Paper.objects.all()
     args = request.GET.copy()
     args.update(kwargs)
+
+    if 'journal' in args and not is_admin(request.user):
+        del args['journal']
     
     search_description = _('Papers')
     head_search_description = _('Papers')
@@ -294,10 +300,6 @@ def mailPaperView(request, pk):
         return render(request, 'papers/mail_paper.html', {'paper':source})
     else:
         return HttpResponseForbidden()
-
-class JournalView(generic.DetailView):
-    model = Journal
-    template_name = 'papers/journal.html'
 
 def annotationsView(request):
     return render(request, 'papers/annotations.html', {'annotations':Annotation.objects.all(),
