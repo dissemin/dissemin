@@ -156,7 +156,6 @@ REGISTERED_EXTRACTORS = {
         'doaj' : doajExtractor,
         'persee' : perseeExtractor,
         'numdam' : numdamExtractor,
-        'openaire' : openaireExtractor,
         'zenodo': zenodoExtractor,
         }
 

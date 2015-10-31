@@ -296,7 +296,7 @@ CELERYBEAT_SCHEDULE = {
         'update_all_stats_but_researchers': {
             'task':'update_all_stats_but_researchers',
             'schedule':timedelta(minutes=30),
-            }
+            },
         'update_journal_stats': {
             'task':'update_journal_stats',
             'schedule':timedelta(days=1),
