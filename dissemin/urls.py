@@ -21,14 +21,21 @@
 from django.conf.urls import patterns, include, url
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views import generic
 from django.shortcuts import render, redirect
 import allauth.account.views
 from os.path import join
 
 from django.contrib import admin
 from django.contrib.auth import logout
+from allauth.socialaccount import providers
 from dissemin.settings import UNIVERSITY_BRANDING
 admin.autodiscover()
+
+try:
+    import importlib
+except ImportError:
+    from django.utils import importlib
 
 def handler404(request):
     response = render(request, '404.html')
@@ -41,7 +48,7 @@ def handler500(request):
     response.status_code = 500
     return response
 
-class LoginView(allauth.account.views.LoginView):
+class LoginView(generic.TemplateView):
     template_name = 'dissemin/login.html'
 
 class SandboxLoginView(allauth.account.views.LoginView):
@@ -55,7 +62,9 @@ def logoutView(request):
         return redirect('/')
 
 def temp(name):
-    return (lambda x: render(x, name, UNIVERSITY_BRANDING))
+    def handler(request, *args, **kwargs):
+        return render(request, name, UNIVERSITY_BRANDING)
+    return handler
 
 urlpatterns = patterns('',
     # Errors
@@ -78,10 +87,21 @@ urlpatterns = patterns('',
     url(r'^', include('publishers.urls')),
     url(r'^', include('deposit.urls')),
     # Social auth
-    url(r'^accounts/login/$', LoginView.as_view(), name='login'),
+    url(r'^accounts/login/$', LoginView.as_view(), name='account_login'),
     url(r'^accounts/sandbox_login/$', SandboxLoginView.as_view(), name='sandbox-login'),
-    url(r'^accounts/logout/$', logoutView, name='logout'),
-    url(r'^accounts/', include('allauth.urls')),
+    url(r'^accounts/logout/$', logoutView, name='account_logout'),
+    url(r'^accounts/social/', include('allauth.socialaccount.urls')),
 # Remove this in production
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# Allauth social providers (normally included directly in the standard installation
+# of django-allauth, but as we disabled normal auth, we have to do it here).
+for provider in providers.registry.get_list():
+    try:
+        prov_mod = importlib.import_module(provider.package + '.urls')
+    except ImportError:
+        continue
+    prov_urlpatterns = getattr(prov_mod, 'urlpatterns', None)
+    if prov_urlpatterns:
+        urlpatterns += prov_urlpatterns
