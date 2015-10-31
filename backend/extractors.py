@@ -143,13 +143,6 @@ numdamExtractor = RegexExtractor([
         'pdf', r'http://archive.numdam.org/article/\1.pdf'),
     ])
 
-openaireExtractor = OpenAireExtractor([
-    ('identifier', re.compile(r'(https?://[^ ]*)'),
-        'splash', r'\1'),
-    ('identifier', re.compile(r'(https?://[^ ]*\.pdf)'),
-        'pdf', r'\1'),
-    ])
-
 zenodoExtractor = OpenAireExtractor([
     ('identifier', re.compile(r'(https?://zenodo.org/record/[0-9]*)'),
         'splash', r'\1'),
@@ -175,7 +168,6 @@ oai_sources = [
         ('pmc', 'PubMed Central', False, 10, 'preprint'),
         ('doaj', 'DOAJ', True, 10, 'journal-article'),
         ('persee', 'Persée', True, 10, 'preprint'),
-        ('openaire', 'OpenAIRE', False, 5, 'preprint'),
         ('zenodo', 'Zenodo', False, 15, 'preprint'),
         ('numdam', 'Numdam', False, 10, 'journal-article'),
         ]
