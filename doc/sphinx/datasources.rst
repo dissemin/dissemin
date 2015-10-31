@@ -113,28 +113,60 @@ features:
     }
 
 * A search API, basically a machine-readable version of `CrossRef Metadata Search <http://search.crossref.org>`_. Similar metadata is returned for each search result. The documentation can be found `here <https://github.com/CrossRef/rest-api-doc/blob/master/rest_api.md>`_. By searching for an researcher's name and browsing through the few first results pages, we get the metadata for most papers written by that researcher and registered at CrossRef.
+  When a researcher is associated with an ORCID id, we also search for papers using their id. This can return papers that do not appear in the ORCID profile (CrossRef has introduced an auto-update feature in 2015
+  to populate automatically the profiles, but it is an opt-in feature and only applies to subsequent papers).
   This service only returns DOIs issued by CrossRef, the two other services also work for other DOI
-  registration agencies such as DataCite or MEDRA.
+  registration agencies such as DataCite or MEDRA. DataCite offers a similar service but we do not use it as they cover mostly data.
+
 
 
 SHERPA/RoMEO
 ------------
 
-TODO
+`SHERPA/RoMEO <http://www.sherpa.ac.uk/romeo/>`_ is a service run by `JISC <https://www.jisc.ac.uk/>`_ which provides a semi-structured representation of publisher's self-archiving policies.
+They offer `an API <http://www.sherpa.ac.uk/romeo/apimanual.php?la=en&fIDnum=|&mode=simple>`_, whose functionality is very similar to the search service they offer to their regular users.
+You can search for a policy by journal or by publisher. Since some publishers have multiple archiving policies, RoMEO recommends to search by journal because it ensures that you will
+get the policy in place for this specific journal.
+
+For many journal articles and all conference papers, RoMEO knows the publisher but not the journal, and the metadata returned by CrossRef contains both the journal (or the proceedings title) and the publisher.
+We use therefore a two-step approach:
+
+* We search for the journal: if it succeeds, we assign the policy to the paper.
+* If it fails, we search for the publisher. If it returns a single result, we assign the policy to the paper.
+
+This is only the big picture: RoMEO has various matching modes (we try first the most restrictive ones), and we also maintain a mapping from CrossRef's publisher names to RoMEO's publisher names (they tend to differ).
+TODO describe this
 
 ORCID
 -----
 
-TODO
+ORCID has a public API that can be used to fetch the metadata of all papers ("works") made visible of any ORCID profile (unfortunately, very often, the profiles are empty).
+ORCID does not enforce any strict metadata format, which makes it hard to import papers in Dissemin. Specifically, works do not always have a list of authors (which is
+a shame given that this service is supposed to solve ambiguity of author names). Even worse, when an authors list is provided, the owner of the ORCID record is almost
+never identified in this list.
 
-BASE and CORE
--------------
+We try to make the most of the available metadata:
 
-TODO
+* If a DOI is present, fetch the metadata using content negociation ;
+* If a Bibtex version of the metadata is available, parse the Bibtex record to extract the title and author names ;
+* Otherwise, if no authors are given, skip the paper.
+
+We then try to find which author is the owner of the ORCID record, using a dedicated name-matching heuristic (:py:func:`papers.name.shallower_name_similarity`).
+The name that matches the most the reference name of the ORCID record is assumed to refer to the record's owner.
 
 Proaixy
 -------
 
-TODO
+`Proaixy <https://github.com/wetneb/proaixy>`_ is our own `OAI-PMH <http://www.openarchives.org/OAI/openarchivesprotocol.html>`_ proxy. We use it to discover preprints.
+It harvests papers from various OAI-PMH sources (notably `BASE <http://www.base-search.net>`_) and re-exposes the result in OAI-PMH, adding a few functionalities.
 
+* Search by fingerprint: each paper in Dissemin has a fingerprint, a robust representation of the title, and sometimes the year of publication or the last names of the
+  authors. Proaixy enables to fetch all records that match a given fingerprint.
+* Search by author name or name signature: a similar feature to search for papers matching a given name.
+
+BASE and CORE
+-------------
+
+Interfaces for the search APIs of BASE and CORE have been implemented but are not used anymore. They basically search for a researcher's name and go through the first few
+pages of results.
 
