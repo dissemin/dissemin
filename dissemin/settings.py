@@ -267,13 +267,13 @@ SWAMP_DRAGON_CONNECTION = ('swampdragon.connections.sockjs_connection.DjangoSubs
 #
 # Absolute path to where the static files are stored.
 # This is what you should change!
-STATIC_ROOT = '/home/pintoch/orcid/www/static/'
+STATIC_ROOT = '/home/dissemin/dissemin/www/static/'
 # Relative URL where static files are accessed (you should not
 # need to change this).
 STATIC_URL = '/static/'
 
 # Relative path to the directory where we store user uploads
-MEDIA_ROOT = '/home/pintoch/orcid/media/'
+MEDIA_ROOT = '/home/dissemin/dissemin/media/'
 MEDIA_URL = '/media/'
 
 ### Celery config ###
