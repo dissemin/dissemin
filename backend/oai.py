@@ -21,7 +21,7 @@
 from __future__ import unicode_literals
 
 from oaipmh.client import Client
-from oaipmh.metadata import MetadataRegistry, oai_dc_reader
+from oaipmh.metadata import MetadataRegistry
 from oaipmh.datestamp import tolerant_datestamp_to_datetime
 from oaipmh.error import DatestampError, NoRecordsMatchError, BadArgumentError
 
@@ -30,14 +30,9 @@ from papers.models import OaiRecord, OaiSource, Name
 from papers.doi import to_doi
 from papers.utils import sanitize_html
 
-# Reader slightly tweaked because Cairn includes a useful non-standard field
-my_oai_dc_reader = oai_dc_reader
-my_oai_dc_reader._fields['accessRights'] = ('textList', 'oai_dc:dc/dcterms:accessRights/text()')
-my_oai_dc_reader._namespaces['dcterms'] = 'http://purl.org/dc/terms/'
-
 from backend.papersource import *
 from backend.extractors import *
-from backend.proxy import PROXY_SOURCE_PREFIX, PROXY_SIGNATURE_PREFIX, PROXY_AUTHOR_PREFIX, PROXY_FINGERPRINT_PREFIX, get_proxy_client
+from backend.proxy import *
 from backend.name_cache import name_lookup_cache
 from backend.pubtype_translations import *
 
@@ -112,6 +107,7 @@ class OaiPaperSource(PaperSource):
     def __init__(self, *args, **kwargs):
         super(OaiPaperSource, self).__init__(*args, **kwargs)
         self.client = get_proxy_client()
+        self.base = get_base_client()
 
     def fetch_papers(self, researcher):
         return self.fetch_records_for_name(researcher.name, signature=False)
@@ -133,7 +129,7 @@ class OaiPaperSource(PaperSource):
         Fetch all the records that match a given paper fingerprint.
         """
         try:
-            listRecords = self.client.listRecords(metadataPrefix='oai_dc', set=PROXY_FINGERPRINT_PREFIX+ident)
+            listRecords = self.base.listRecords(metadataPrefix='base_dc', set=PROXY_FINGERPRINT_PREFIX+ident)
             return self.process_records(listRecords)
         except NoRecordsMatchError:
             return []

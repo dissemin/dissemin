@@ -92,6 +92,15 @@ class OpenAireExtractor(RegexExtractor):
             urls['pdf'] = urls.get('splash')
         return urls
 
+class BaseExtractor(RegexExtractor):
+    def __init__(self, mappings):
+        super(BaseExtractor, self).__init__(mappings)
+
+    def _post_filter(self, record, urls):
+        if '2' in record[1]._map.get('oa', []):
+            urls['pdf'] = urls.get('splash')
+        return urls
+
 arxivExtractor = RegexExtractor([
     ('identifier',re.compile(r'(http://arxiv.org/abs/[^ ]*)$'),
         'splash',r'\1'),
@@ -148,6 +157,14 @@ zenodoExtractor = OpenAireExtractor([
         'splash', r'\1'),
     ])
 
+baseExtractor = BaseExtractor([
+    ('identifier', re.compile(r'(http://.*)'), 'splash', r'\1'),
+    ('identifier', re.compile(r'(http://.*\.pdf)'), 'pdf', r'\1'),
+    ('link', re.compile(r'(http://.*)'), 'splash', r'\1'),
+    ('link', re.compile(r'(http://.*\.pdf)'), 'pdf', r'\1'),
+    ])
+
+
 REGISTERED_EXTRACTORS = {
         'arxiv': arxivExtractor,
         'hal': halExtractor,
@@ -157,6 +174,7 @@ REGISTERED_EXTRACTORS = {
         'persee' : perseeExtractor,
         'numdam' : numdamExtractor,
         'zenodo': zenodoExtractor,
+        'base' : baseExtractor,
         }
 
 # Set up the model for the sources
@@ -169,6 +187,7 @@ oai_sources = [
         ('persee', 'Persée', True, 10, 'preprint'),
         ('zenodo', 'Zenodo', False, 15, 'preprint'),
         ('numdam', 'Numdam', False, 10, 'journal-article'),
+        ('base', 'BASE', False, -2, 'preprint'),
         ]
 
 if os.environ.get('READTHEDOCS', None) != 'True':

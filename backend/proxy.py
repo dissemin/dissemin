@@ -20,8 +20,17 @@
 
 from __future__ import unicode_literals
 
-# A few settings telling how to access the OAI proxy
+# A few settings telling how to access the OAI proxies
+
+# This one is for the repositories we harvest manually
+# These papers will be included in the search results
+# even if they are not present in any other source
 PROXY_ENDPOINT = "http://proaixy.dissem.in/oai"
+
+# This one is for results from BASE
+# It is only used to fetch availability of existing papers
+# (we do not search by author name in this repository)
+BASE_LOCAL_ENDPOINT = "http://doai.dissem.in/oai"
 
 PROXY_DAY_GRANULARITY = False
 
@@ -33,7 +42,13 @@ PROXY_FINGERPRINT_PREFIX = "proaixy:fingerprint:"
 
 from oaipmh.client import Client
 from oaipmh.metadata import MetadataRegistry, oai_dc_reader
-from backend.oai import my_oai_dc_reader
+from oaipmh.metadata import oai_dc_reader, base_dc_reader
+
+# Reader slightly tweaked because Cairn includes a useful non-standard field
+my_oai_dc_reader = oai_dc_reader
+my_oai_dc_reader._fields['accessRights'] = ('textList', 'oai_dc:dc/dcterms:accessRights/text()')
+my_oai_dc_reader._namespaces['dcterms'] = 'http://purl.org/dc/terms/'
+
 
 def get_proxy_client():
     registry = MetadataRegistry()
@@ -42,4 +57,9 @@ def get_proxy_client():
     client._day_granularity = PROXY_DAY_GRANULARITY
     return client
 
+def get_base_client():
+    registry = MetadataRegistry()
+    registry.registerReader('base_dc', base_dc_reader)
+    client = Client(BASE_LOCAL_ENDPOINT, registry)
+    return client
 

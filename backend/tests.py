@@ -22,7 +22,6 @@ from __future__ import unicode_literals
 
 import unittest
 from django.test import TestCase
-from backend.core import *
 from backend.crossref import *
 from backend.romeo import *
 from backend.orcid import *

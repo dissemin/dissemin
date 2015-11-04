@@ -1,4 +1,4 @@
-pyoai
+-e git://github.com/wetneb/pyoai.git@base_dc#egg=pyoai
 numpy
 scipy
 scikit-learn
