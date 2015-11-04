@@ -107,8 +107,8 @@ msgid "Coming soon:"
 msgstr "Bientôt disponible :"
 
 #: deposit/templates/deposit/start.html:272
-msgid "Review metadata"
-msgstr "Relire les métadonnés"
+msgid "Metadata"
+msgstr "Métadonnés"
 
 #: deposit/templates/deposit/start.html:288
 msgid "Processing deposit..."
@@ -438,8 +438,8 @@ msgstr "Chercher un collègue"
 
 #: papers/templates/papers/index.html:123
 msgctxt "before name fields in researcher lookup form"
-msgid "by name"
-msgstr "par nom"
+msgid "by"
+msgstr "par"
 
 #: papers/templates/papers/index.html:127
 msgid "Firstname"
@@ -461,12 +461,12 @@ msgstr "Nom"
 
 #: papers/templates/papers/index.html:138
 msgctxt "before ORCID field in researcher lookup form"
-msgid "or by ORCID"
-msgstr "ou par ORCID"
+msgid "or by"
+msgstr "ou par"
 
 #: papers/templates/papers/index.html:142
-msgid "identifier (such as 0000-0001-2345-6789)"
-msgstr "identifiant (par exemple, 0000-0001-2345-6789)"
+msgid "ORCID (such as 0000-0001-2345-6789)"
+msgstr "ORCID (par exemple, 0000-0001-2345-6789)"
 
 #: papers/templates/papers/index.html:150
 msgid "Search"
@@ -1851,7 +1851,7 @@ msgstr "Sélectionnez un fichier :"
 
 #: upload/templates/upload/widget.html:10
 msgid "Browse"
-msgstr "Naviguer"
+msgstr "Parcourir"
 
 #: upload/templates/upload/widget.html:17
 msgid "Or enter an URL:"

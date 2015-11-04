@@ -181,9 +181,11 @@ $(function() {
     {% if not is_owner %}
     <div class="alert alert-warning" role="alert">
         <span class="glyphicon glyphicon-exclamation-sign"></span>
+        {% blocktrans trimmed %}
         You do not appear to be one of the authors of this paper.
         By using this form, you certify that you have the permission to
         upload it on their behalf.
+        {% endblocktrans %}
     </div>
     {% endif %}
 </div>
@@ -269,7 +271,7 @@ $(function() {
             <span>
                  <a role="button" data-toggle="collapse"
                   data-parent="#uploadOptions" href="#optionMetadata" aria-expanded="true"
-                  aria-controls="optionMetadata">{% trans "Review metadata" %}</a>
+                  aria-controls="optionMetadata">{% trans "Metadata" %}</a>
             </span>
         </div>
         <div id="optionMetadata" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingMetadata">
