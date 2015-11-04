@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-26 21:39+0100\n"
-"PO-Revision-Date: 2015-10-26 21:40+0100\n"
+"POT-Creation-Date: 2015-11-04 21:45+0100\n"
+"PO-Revision-Date: 2015-11-04 21:47+0100\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.8.5\n"
+"X-Generator: Poedit 1.8.6\n"
 
 #: deposit/forms.py:36
 msgid "Upload type"
@@ -42,7 +42,7 @@ msgstr "Document défectueux"
 msgid "Deposited"
 msgstr "Déposé"
 
-#: deposit/models.py:121 deposit/templates/deposit/start.html:286
+#: deposit/models.py:121 deposit/templates/deposit/start.html:288
 #: deposit/views.py:76
 msgid "Deposit"
 msgstr "Dépôt"
@@ -85,36 +85,45 @@ msgstr ""
 "d'utilisation</a>.\n"
 "        "
 
-#: deposit/templates/deposit/start.html:191
+#: deposit/templates/deposit/start.html:184
+msgid ""
+"You do not appear to be one of the authors of this paper. By using this "
+"form, you certify that you have the permission to upload it on their behalf."
+msgstr ""
+"Apparemment, vous n'êtes pas auteur de cet article. En utilisant ce "
+"formulaire, vous nous certifiez que vous avez leur permission pour soumettre "
+"l'article en leur nom."
+
+#: deposit/templates/deposit/start.html:193
 msgid "Document"
 msgstr "Document"
 
-#: deposit/templates/deposit/start.html:199
+#: deposit/templates/deposit/start.html:201
 msgid "Options"
 msgstr "Options"
 
-#: deposit/templates/deposit/start.html:205
+#: deposit/templates/deposit/start.html:207
 msgid "Upload type:"
 msgstr "Type de dépôt:"
 
-#: deposit/templates/deposit/start.html:218
+#: deposit/templates/deposit/start.html:220
 msgid "Repository:"
 msgstr "Dépôt :"
 
-#: deposit/templates/deposit/start.html:235
+#: deposit/templates/deposit/start.html:237
 msgctxt "This repository will be soon available in Dissemin"
 msgid "Coming soon:"
 msgstr "Bientôt disponible :"
 
-#: deposit/templates/deposit/start.html:272
+#: deposit/templates/deposit/start.html:274
 msgid "Metadata"
 msgstr "Métadonnés"
 
-#: deposit/templates/deposit/start.html:288
+#: deposit/templates/deposit/start.html:290
 msgid "Processing deposit..."
 msgstr "Dépôt en cours de traitement..."
 
-#: deposit/templates/deposit/start.html:288
+#: deposit/templates/deposit/start.html:290
 msgid "please wait..."
 msgstr "veuillez patienter..."
 
@@ -302,8 +311,8 @@ msgstr "Regroupement des publications"
 msgid "Updating statistics"
 msgstr "Mise à jour des statistiques"
 
-#: papers/models.py:1065 papers/views.py:100 papers/views.py:101
-#: papers/views.py:140 papers/views.py:172
+#: papers/models.py:1065 papers/views.py:106 papers/views.py:107
+#: papers/views.py:146 papers/views.py:178
 msgid "Papers"
 msgstr "Papiers"
 
@@ -858,19 +867,19 @@ msgstr "politique imprécise"
 msgid "policy unknown"
 msgstr "politique inconnue"
 
-#: papers/views.py:117 papers/views.py:125
+#: papers/views.py:123 papers/views.py:131
 msgid " authored by "
 msgstr " écrits par "
 
-#: papers/views.py:131
+#: papers/views.py:137
 msgid " in "
 msgstr " dans "
 
-#: papers/views.py:137
+#: papers/views.py:143
 msgid " published by "
 msgstr " publiés par "
 
-#: papers/views.py:174
+#: papers/views.py:180
 msgid "All papers"
 msgstr "Tous les papiers"
 
@@ -1666,15 +1675,15 @@ msgstr "Sources de données"
 msgid "Primary sources"
 msgstr "Sources primaires"
 
-#: templates/dissemin/sources.html:21
+#: templates/dissemin/sources.html:20
 msgid "Secondary sources"
 msgstr "Sources secondaires"
 
-#: templates/dissemin/sources.html:22
+#: templates/dissemin/sources.html:21
 msgid "Harvested with the OAI-PMH protocol."
 msgstr "Moissonnées avec le protocole OAI-PMH."
 
-#: templates/dissemin/sources.html:33
+#: templates/dissemin/sources.html:32
 msgid "Suggest a data source"
 msgstr "Suggérer l'ajout d'une source"
 
@@ -1870,8 +1879,12 @@ msgid "File too large."
 msgstr "Fichier trop volumineux."
 
 #: upload/views.py:182
-msgid "Invalid content type: this link points to a web page, "
-msgstr "Type MIME invalide : ce lien pointe vers une page Web. "
+msgid ""
+"Invalid content type: this link points to a web page, we need a direct link "
+"to a PDF file."
+msgstr ""
+"Type MIME invalide : ce lien pointe vers une page Web, il nous faut un lien "
+"direct vers un fichier PDF. "
 
 #: upload/views.py:188 upload/views.py:192
 msgid "Invalid URL (server timed out)."
