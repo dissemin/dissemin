@@ -139,33 +139,6 @@ class PaperSourceTest(PrefilledTest):
         papers = list(self.source.fetch_papers(emptyres))
         self.assertEqual(papers, [])
 
-# Test that the CORE interface works
-class CoreTest(PaperSourceTest):
-    @classmethod
-    def setUpClass(self):
-        super(CoreTest, self).setUpClass()
-        self.source = CorePaperSource(self.ccf)
-        self.researcher = self.r5
-
-    def test_query(self):
-        self.assertIsInstance(
-                query_core('/articles/get/19822106', {}),
-                dict)
-        self.assertIsInstance(
-                query_core('/search/Geoffrey+Bodenhausen', {}),
-                dict)
-
-    def test_search(self):
-        num_results = 10
-        record_list = list(search_single_query('authorsString:(Antoine Amarilli)', num_results))
-        self.assertEqual(len(record_list), num_results)
-
-    def test_single_query(self):
-        num_results = 210 # so that multiple batches are done
-        records = list(fetch_paper_metadata_by_core_ids(search_single_query('homotopy', num_results)))
-        self.assertTrue(len(records) < num_results)
-        self.assertTrue(len(records) > 1)
-
 class CrossRefOaiTest(PaperSourceTest):
     """
     Test for the CrossRef interface with OAI availability fetching
@@ -427,9 +400,6 @@ class MaintenanceTest(PrefilledTest):
 
     def test_recompute_publisher_policies(self):
         recompute_publisher_policies()
-
-    def test_cleanup_papers(self):
-        cleanup_papers()
 
     def test_cleanup_researchers(self):
         cleanup_researchers()

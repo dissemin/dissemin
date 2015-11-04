@@ -37,8 +37,6 @@ from papers.doi import to_doi
 from backend.globals import get_ccf
 from backend.crossref import *
 from backend.oai import *
-from backend.core import CorePaperSource
-from backend.base import BasePaperSource
 from backend.orcid import *
 from backend.name_cache import name_lookup_cache
 from backend.extractors import * # to ensure that OaiSources are created
@@ -87,8 +85,6 @@ def fetch_everything_for_researcher(pk):
         ('orcid',OrcidPaperSource(ccf, oai, max_results=1000)),
         ('crossref',CrossRefPaperSource(ccf, oai, max_results=500)),
         ('oai',oai),
-        ('base',BasePaperSource(ccf, max_results=200)),
-       # ('core',CorePaperSource(ccf, max_results=250)),
        ]
     r = Researcher.objects.get(pk=pk)
 

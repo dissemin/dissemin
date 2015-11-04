@@ -42,26 +42,6 @@ from collections import defaultdict
 from django.db.models import Q, Prefetch
 from django.db import DatabaseError
 
-def cleanup_papers():
-    """
-    Deletes all the papers where none of the authors have been identified
-    as a known researcher.
-    TODO: write another version focusing on the last name only.
-    """
-    deleted_count = 0
-    for p in Paper.objects.all().select_related('author'):
-        researcher_found = False
-        for a in p.author_set.all():
-            if a.researcher:
-                researcher_found = True
-                break
-        if not researcher_found:
-            print "Deleting paper id "+str(p.pk)
-            deleted_count += 1
-            p.delete()
-    print "Deleted "+str(deleted_count)+" papers"
-
-
 def cleanup_researchers():
     """
     Deletes all the researchers who have not authored any paper.
