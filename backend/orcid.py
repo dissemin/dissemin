@@ -107,6 +107,7 @@ def affiliate_author_with_orcid(ref_name, orcid, authors, initial_affiliations=N
 class OrcidPaperSource(PaperSource):
     def fetch_papers(self, researcher):
         if researcher.orcid:
+            self.update_empty_orcid(researcher, True)
             return self.fetch_orcid_records(researcher.orcid)
         return []
 
