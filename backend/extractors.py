@@ -158,10 +158,10 @@ zenodoExtractor = OpenAireExtractor([
     ])
 
 baseExtractor = BaseExtractor([
-    ('identifier', re.compile(r'(http://.*)'), 'splash', r'\1'),
-    ('identifier', re.compile(r'(http://.*\.pdf)'), 'pdf', r'\1'),
-    ('link', re.compile(r'(http://.*)'), 'splash', r'\1'),
-    ('link', re.compile(r'(http://.*\.pdf)'), 'pdf', r'\1'),
+    ('identifier', re.compile(r'(https?://.*)'), 'splash', r'\1'),
+    ('identifier', re.compile(r'(https?://.*\.pdf)'), 'pdf', r'\1'),
+    ('link', re.compile(r'(https?://.*)'), 'splash', r'\1'),
+    ('link', re.compile(r'(https?://.*\.pdf)'), 'pdf', r'\1'),
     ])
 
 
