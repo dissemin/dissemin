@@ -171,7 +171,7 @@ function makeCaptions (data, target, current_state) {
 		captions.append("a")
 			.attr("class", function(d) {
                 if(d.id == current_state){
-                    return "stats_caption_label_activated";
+                    return "stats_caption_label activated";
                 } else {
                     return "stats_caption_label"; }
             })

@@ -810,7 +810,7 @@ h1#paperTitle {
 	border-right:1px solid #666;
 }
 
-.stats_caption_label_activated {
+.stats_caption_label.activated {
     font-weight: bold;
 }
 
