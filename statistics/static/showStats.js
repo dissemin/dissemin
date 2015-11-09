@@ -164,7 +164,9 @@ function makeCaptions (data, target, current_state) {
 
 		captions.append("div")
 			.attr("class", "stats_caption_box")
-			.style("background-color", function(d, i) {return stats_colors[i]; })
+			.append("span")
+				.attr("class", "stats_caption_color")
+				.style("background-color", function(d, i) {return stats_colors[i]; })
 
 		captions.append("a")
 			.attr("class", function(d) {
@@ -182,6 +184,6 @@ function makeCaptions (data, target, current_state) {
 			.text(function(d) { return d.label; })
 			.append("span")
 				.attr("class", "detail")
-				.text(function(d) { return " ("+d.value+")"; });
+				.text(function(d) { return d.value; });
     return captions;
 }
