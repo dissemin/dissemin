@@ -731,7 +731,7 @@ h1#paperTitle {
 .access-statistics 
 {
     overflow:hidden;
-    margin:8px;
+    margin:0px;
     margin-bottom:15px;
 }
 
@@ -759,23 +759,33 @@ h1#paperTitle {
 }
 
 .stats_caption_line {
-	display:block;
+	display:table;
 }
 
 .stats_caption_box {
+	display:table-cell;
+	vertical-align:middle;
+}
+
+.stats_caption_color {
 	display:inline-block;
 	width:20px;
 	height:1em;
+	margin:0;
 	vertical-align:middle;
-	margin:0 5px;
 }
 
-.stats_caption_text {
-	display:inline-block;
+.stats_caption_label {
+	display:table-cell;
+	vertical-align:middle;
+	padding:1px;
+	padding-left:7px;
 }
 
-.stats_caption_text .detail {
+.stats_caption_label .detail {
 	color:#666;
+	font-size:0.8em;
+	margin-left:3px;
 }
 
 .stats_pctbar {
@@ -800,7 +810,7 @@ h1#paperTitle {
 	border-right:1px solid #666;
 }
 
-.stats_caption_label_activated {
+.stats_caption_label.activated {
     font-weight: bold;
 }
 
