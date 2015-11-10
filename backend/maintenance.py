@@ -222,6 +222,7 @@ def refetch_publishers():
         if publisher:
             p.publisher = publisher
             p.save(update_fields=['publisher'])
+            p.paper.update_availability()
 
 def refetch_containers():
     """

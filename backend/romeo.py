@@ -40,11 +40,11 @@ from dissemin.settings import ROMEO_API_KEY, ROMEO_API_DOMAIN
 # associated to a publisher to assign this publisher
 # to publications where the journal was not found.
 # (when this name has only been associated to one publisher)
-PUBLISHER_NAME_ASSOCIATION_THRESHOLD = 10
+PUBLISHER_NAME_ASSOCIATION_THRESHOLD = 32
 
 # Minimum ratio between the most commonly matched journal
 # and the second one
-PUBLISHER_NAME_ASSOCIATION_FACTOR = 4
+PUBLISHER_NAME_ASSOCIATION_FACTOR = 5
 
 def perform_romeo_query(search_terms):
     search_terms = search_terms.copy()
@@ -176,11 +176,17 @@ def fetch_publisher(publisher_name):
     # Second, let's see if the publisher name has often been associated to a known publisher
     aliases = list(AliasPublisher.objects.filter(name=publisher_name).order_by('-count')[:2])
     if len(aliases) == 1:
+        # Only one publisher found. If it has been seen often enough under that name,
+        # keep it!
         if aliases[0].count > PUBLISHER_NAME_ASSOCIATION_THRESHOLD:
             AliasPublisher.increment(publisher_name, aliases[0].publisher)
             return aliases[0].publisher
     elif len(aliases) == 2:
-        if aliases[0].count > PUBLISHER_NAME_ASSOCIATION_FACTOR*aliases[1].count:
+        # More than one publisher found (two aliases returned as we limited to the two first
+        # results). Then we need to make sure the first one appears a lot more often than
+        # the first
+        if (aliases[0].count > PUBLISHER_NAME_ASSOCIATION_THRESHOLD and
+            aliases[0].count > PUBLISHER_NAME_ASSOCIATION_FACTOR*aliases[1].count):
             AliasPublisher.increment(publisher_name, aliases[0].publisher)
             return aliases[0].publisher
 
