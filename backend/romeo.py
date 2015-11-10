@@ -170,8 +170,9 @@ def fetch_journal(search_terms, matching_mode = 'exact'):
 
 def fetch_publisher(publisher_name):
     # First, let's see if we have a publisher with that name
-    for p in Publisher.objects.filter(name=publisher_name)[:1]:
-        return p
+    matching_publishers = Publisher.objects.filter(name=publisher_name)
+    if len(matching_publishers) == 1:
+        return matching_publishers[0]
 
     # Second, let's see if the publisher name has often been associated to a known publisher
     aliases = list(AliasPublisher.objects.filter(name=publisher_name).order_by('-count')[:2])
