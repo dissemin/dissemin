@@ -62,7 +62,7 @@ def cleanup_names(dry_run = False):
     """
     deleted_count = 0
     for n in Name.objects.all():
-        if n.researcher_set.all().count() == 0:
+        if NameVariant.objects.filter(name=n).count() == 0:
             nb_papers = Author.objects.filter(name=n).count()
             if not nb_papers:
                 print "Deleting name id "+str(n.pk)+": "+unicode(n)
