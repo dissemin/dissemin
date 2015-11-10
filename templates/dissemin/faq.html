@@ -16,6 +16,7 @@
         <p><a href="#open-access">{% trans "What is Open Access?" %}</a></p>
         <p><a href="#repositories-rock">{% trans "Why should I upload my papers to a repository?" %}</a></p>
         <p><a href="#what-repository">{% trans "What repository should I use?" %}</a></p>
+        <p><a href="#why-no-deposit">{% trans "Why can't I deposit in [repository]?" %}</a></p>
 
         <h4>dissem.in</h4>
         <p><a href="#what-is-dissemin">{% trans "What is dissem.in?" %}</a></p>
@@ -94,6 +95,35 @@
                     not limited to a particular scope.</li>
             </ul>
             If your research community favours a specific repository, using it makes sense as it will increase your visibility. If not, institutional or general-purpose repositories are also good options.
+        {% endblocktrans %}
+        </p>
+        <h2 id="why-no-deposit">{% trans "Why can't I deposit in [repository] yet?" %}</h2>
+        <p>
+        {% blocktrans trimmed %}
+            At the moment, we only offer the option to deposit in <a
+              href="http://zenodo.org">Zenodo</a>, an innovative repository
+            backed by the EU. Supporting more repositories requires us to write
+            specific code for each repository. More importantly it requires the
+            repositories to give us permission to deposit papers in bulk. We
+            have been considering integrating the following repositories:
+            <ul>
+              <li><strong><a href="https://hal.archives-ouvertes.fr/">HAL</a></strong>,
+                a French repository managed by the <a
+                 href="https://www.ccsd.cnrs.fr/">CCSD</a>. We cannot integrate
+               HAL smoothly without help from the CCSD.
+               In particular, we need the CCSD to allow users to 
+               to deposit in HAL without providing affiliation information
+               for all authors of a paper (Dissemin cannot easily complete this for you).
+               If you would like to deposit in HAL with Dissemin,
+               don't hesitate to let the CSSD know that you are interested
+               (email: contact AT ccsd.cnrs.fr).</li>
+              <li><strong><a href="http://arxiv.org/">arXiv</a></strong>, a
+                well-known general-purpose repository. For now, arXiv has
+                declined to allow Dissemin to deposit using their SWORD API, and
+                wants users to deposit in arXiv manually. If you would like to
+                deposit in arXiv with Dissemin, you can let them know that you
+                are interested (email: help AT arxiv.org).</li>
+            </ul>
         {% endblocktrans %}
         </p>
 
