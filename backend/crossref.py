@@ -336,6 +336,11 @@ class CrossRefPaperSource(PaperSource):
         # CrossRef metadata stores titles in lists
         if type(title) == list:
             title = title[0]
+        subtitle = metadata.get('subtitle')
+        if subtitle:
+            if type(subtitle) == list:
+                subtitle = subtitle[0]
+            title += ': '+subtitle
         authors = map(name_lookup_cache.lookup, map(convert_to_name_pair, metadata['author']))
         authors = filter(lambda x: x != None, authors)
         if all(not elem.is_known for elem in authors) or authors == []:
