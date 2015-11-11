@@ -251,7 +251,6 @@ class Researcher(models.Model):
     role = models.CharField(max_length=128, null=True, blank=True)
     #: ORCiD identifier
     orcid = models.CharField(max_length=32, null=True, blank=True, unique=True)
-    # TODO This could be a custom field as we know what format to expect
     #: Did we manage to import at least one record from the ORCID profile? (Null if we have not tried)
     empty_orcid_profile = models.NullBooleanField()
 
@@ -498,6 +497,11 @@ class Name(models.Model):
 
     @classmethod
     def lookup_name(cls, author_name):
+        """
+        Lookup a name (pair of (first,last)) in the model.
+        If there is already such a name in the database, returns it,
+        otherwise creates one properly.
+        """
         if author_name == None:
             return
         first_name = sanitize_html(author_name[0][:MAX_NAME_LENGTH].strip())
@@ -527,23 +531,41 @@ class Name(models.Model):
 
         return name
 
-    # Used to save unsaved names after lookup
     def save_if_not_saved(self):
+        """
+        Used to save unsaved names after lookup
+        """
         if self.pk is None:
             # the best_confidence field should already be up to date as it is computed in the lookup
             self.save()
             self.update_variants()
 
     def __unicode__(self):
+        """
+        Unicode representation: first name followed by last name
+        """
         return '%s %s' % (self.first,self.last)
 
+
     def first_letter(self):
+        """
+        First letter of the last name, for sorting purposes
+        """
         return self.last[0]
 
     @property
     def object_id(self):
         """Criteria to use in the search view to filter on this name"""
         return "name=%d" % self.pk
+
+    def json(self):
+        """
+        Returns a JSON representation of the name (for dataset dumping purposes)
+        """
+        return {
+                'first':self.first,
+                'last':self.last,
+               }
 
 # Papers matching one or more researchers
 class Paper(models.Model):
@@ -559,9 +581,6 @@ class Paper(models.Model):
     last_annotation = models.CharField(max_length=32, null=True, blank=True)
 
     doctype = models.CharField(max_length=64, null=True, blank=True, choices=PAPER_TYPE_CHOICES)
-
-    def __unicode__(self):
-        return self.title
 
     # The two following fields need to be updated after the relevant changes
     # using the methods below.
@@ -999,6 +1018,12 @@ class Paper(models.Model):
 
 
     def recompute_fingerprint_and_merge_if_needed(self):
+        """
+        Recomputes the fingerprint based on the new
+        values of the paper's attributes, checks whether
+        there is already another paper with the same fingerprint,
+        and if so merge them.
+        """
         new_fingerprint = self.new_fingerprint()
         if self.fingerprint == new_fingerprint:
             return
@@ -1012,6 +1037,10 @@ class Paper(models.Model):
             return match
 
     def update_visibility(self, prefetched_authors_field=None):
+        """
+        Updates the visibility of the paper. Only papers with
+        known authors should be visible.
+        """
         p = self
         if p.visibility != 'VISIBLE' and p.visibility != 'NOT_RELEVANT':
             return
@@ -1030,6 +1059,26 @@ class Paper(models.Model):
         elif not researcher_found and p.visibility != 'NOT_RELEVANT':
             p.visibility = 'NOT_RELEVANT'
             p.save(update_fields=['visibility'])
+
+    def __unicode__(self):
+        """
+        Title of the paper
+        """
+        return self.title
+
+    def json(self):
+        """
+        JSON representation of the paper, for dataset dumping purposes
+        """
+        return {
+            'title': self.title,
+            'type': self.doctype,
+            'date': self.pubdate.isoformat(),
+            'authors': [a.json() for a in self.sorted_authors],
+            'publications': [p.json() for p in self.publication_set.all()],
+            'records': [r.json() for r in self.oairecord_set.all()],
+            }
+
 
     def google_scholar_link(self):
         """
@@ -1098,7 +1147,25 @@ class Author(models.Model):
     affiliation = models.CharField(max_length=512, null=True, blank=True)
 
     def __unicode__(self):
+        """
+        Unicode representation: name of the author
+        """
         return unicode(self.name)
+
+    def json(self):
+        """
+        JSON representation of the author for dataset dumping purposes
+        """
+        orcid_id = self.orcid
+        affiliation = None
+        if not orcid_id and self.affiliation:
+            affiliation = self.affiliation
+        return {
+                'name':self.name.json(),
+                'affiliation':affiliation,
+                'orcid':orcid_id,
+                }
+
     def orcid(self):
         """
         If the affiliation looks like an ORCiD, return it, otherwise None
@@ -1120,6 +1187,9 @@ class Author(models.Model):
         raise ValueError('Invalid cluster id (loop)')
 
     def get_cluster(self):
+        """
+        Helper returning the root of the cluster this author belongs to
+        """
         i = self.get_cluster_id()
         if i != self.id:
             return Author.objects.get(pk=i)
@@ -1206,12 +1276,18 @@ class Publication(models.Model):
     doi = models.CharField(max_length=1024, unique=True, blank=True, null=True) # in theory, there is no limit
 
     def oa_status(self):
+        """
+        Policy of the publisher for this publication
+        """
         if self.publisher:
             return self.publisher.oa_status
         else:
             return 'UNK'
 
     def splash_url(self):
+        """
+        Returns the splash url (the DOI url) for that paper (if a DOI is present, otherwise None)
+        """
         if self.doi:
             return 'http://dx.doi.org/'+self.doi
 
@@ -1228,24 +1304,33 @@ class Publication(models.Model):
             return DummyPublisher(self.publisher_name)
         return DummyPublisher()
 
-    def details_to_str(self):
-        result = ''
-        if self.issue or self.volume or self.pages or self.pubdate:
-            result += ', '
-        if self.issue:
-            result += self.issue
-        if self.volume:
-            result += '('+self.volume+')'
-        if self.issue or self.volume:
-            result += ', '
-        if self.pages:
-            result += self.pages+', '
-        if self.pubdate:
-            result += str(self.pubdate.year)
-        return result
-
     def __unicode__(self):
-        return self.title+self.details_to_str()
+        """
+        Title of the publication, followed by the details of the bibliographic reference.
+        """
+        return self.title
+
+    def json(self):
+        """
+        JSON representation of the publication, for dataset dumping purposes
+        """
+        issn = None
+        if self.journal:
+            issn = self.journal.issn
+        return {
+                'doi':self.doi,
+                'type':self.pubtype,
+                'publisher':self.publisher_name,
+                'journal':self.full_title(),
+                'issn':issn,
+                'container':self.container,
+                'issue':self.issue,
+                'volume':self.volume,
+                'pages':self.pages,
+                'abstract':self.abstract,
+               }
+
+
 
 # Rough data extracted through OAI-PMH
 class OaiSource(models.Model):
@@ -1287,6 +1372,10 @@ class OaiRecord(models.Model):
 
     @classmethod
     def new(cls, **kwargs):
+        """
+        Creates a new OAI record by checking first for duplicates and 
+        updating them if necessary.
+        """
         if kwargs.get('source') is None:
             raise ValueError('No source provided to create the OAI record.')
         source = kwargs['source']
@@ -1410,6 +1499,21 @@ class OaiRecord(models.Model):
                     Q(pdf_url__isnull=True), about=about)[:1]
             for m in matches:
                 return m
+
+    def json(self):
+        """
+        Dumps the OAI record as a JSON object (for dataset dumping purposes)
+        """
+        return {
+                'source':self.source.identifier,
+                'identifier':self.identifier,
+                'splash_url':self.splash_url,
+                'pdf_url':self.pdf_url,
+                'abstract':self.description,
+                'keywords':self.keywords,
+                'contributors':self.contributors,
+                'type':self.pubtype,
+                }
 
     class Meta:
         verbose_name = "OAI record"
