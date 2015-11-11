@@ -23,13 +23,16 @@ def cleanup_publisher_aliases(apps, schema_editor):
 
     print "Please run refetch_publishers()"
 
+def backwards(apps, schema_editor):
+    pass
 
 class Migration(migrations.Migration):
 
     dependencies = [
         ('publishers', '0001_initial'),
+        ('papers', '0001_initial'),
     ]
 
     operations = [
-        migrations.RunPython(cleanup_publisher_aliases),
+        migrations.RunPython(cleanup_publisher_aliases, backwards),
     ]
