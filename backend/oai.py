@@ -128,6 +128,7 @@ class OaiPaperSource(PaperSource):
         """
         Fetch all the records that match a given paper fingerprint.
         """
+        print "fetch_records_for_fingerprint: THIS IS DEPRECATED"
         try:
             listRecords = self.base.listRecords(metadataPrefix='base_dc', set=PROXY_FINGERPRINT_PREFIX+ident)
             return self.process_records(listRecords)
@@ -139,8 +140,35 @@ class OaiPaperSource(PaperSource):
         Computes the accessibility of a given paper,
         by fetching preprints from OAI-PMH
         """
-        for p in self.fetch_records_for_fingerprint(paper.fingerprint):
-            continue
+        try:
+            for record in self.base.listRecords(metadataPrefix='base_dc',
+                    set=PROXY_FINGERPRINT_PREFIX+paper.fingerprint):
+                # Find the source
+                sets = record[0].setSpec()
+                source_identifier = None
+                for s in sets:
+                    if s.startswith(PROXY_SOURCE_PREFIX):
+                        source_identifier = s[len(PROXY_SOURCE_PREFIX):]
+                        break
+                source = None
+                if source_identifier:
+                    try:
+                        source = OaiSource.objects.get(identifier=source_identifier)
+                    except OaiSource.DoesNotExist:
+                        pass
+                if not source:
+                    print "Invalid source '"+str(source_identifier)+"' from the proxy, skipping"
+                    continue
+
+                # Save the record
+                try:
+                    add_oai_record(record, source, paper)
+                except ValueError as e:
+                    print "Warning, OAI record "+record[0].identifier()+" skipped:\n"+unicode(e)
+
+            paper.update_availability()
+        except NoRecordsMatchError:
+            pass
         return paper
 
     def fetch_records_for_signature(self, ident):
