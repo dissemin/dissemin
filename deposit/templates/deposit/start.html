@@ -151,8 +151,9 @@ $(function() {
                             $('#optionUploadType').collapse('show');
                         }
                     }
-                    for(field in error) {
-                        $('#error-'+field).addClass('error').text(error[field]);
+                    if('form_html' in error) {
+                        $('#repositoryMetadataForm').html(error['form_html']);
+                        $('#optionMetadata').collapse('show');
                     }
                 }
                 if(errorText) {

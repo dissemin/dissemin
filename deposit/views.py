@@ -27,8 +27,10 @@ from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import render
 from django.utils.translation import ugettext as _
 from django.views.decorators.http import require_POST
+from django.template import RequestContext
 from jsonview.decorators import json_view
 from crispy_forms.templatetags.crispy_forms_filters import as_crispy_form
+from crispy_forms.utils import render_crispy_form
 
 from dissemin.settings import MEDIA_ROOT, UNIVERSITY_BRANDING, DEPOSIT_MAX_FILE_SIZE 
 
@@ -109,7 +111,9 @@ def submitDeposit(request, pk):
     repositoryForm = protocol.get_bound_form(request.POST)
 
     if not repositoryForm.is_valid():
-        context['form'] = repositoryForm.errors
+        request_context = RequestContext(request)
+        form_html = render_crispy_form(repositoryForm, context=request_context)
+        context['form_html'] = form_html
         return context, 400
 
     # Check that the paper has been uploaded by the same user
