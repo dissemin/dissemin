@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-09 20:44+0100\n"
-"PO-Revision-Date: 2015-11-10 16:40+0100\n"
+"POT-Creation-Date: 2015-11-10 07:52+0100\n"
+"PO-Revision-Date: 2015-11-11 12:51+0100\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -42,8 +42,8 @@ msgstr "Document défectueux"
 msgid "Deposited"
 msgstr "Déposé"
 
-#: deposit/models.py:121 deposit/templates/deposit/start.html:288
-#: deposit/views.py:76
+#: deposit/models.py:121 deposit/templates/deposit/start.html:289
+#: deposit/views.py:78
 msgid "Deposit"
 msgstr "Dépôt"
 
@@ -66,7 +66,7 @@ msgstr "Désolé, impossible de préremplir ceci"
 msgid "Dissemin encountered an error, please try again later."
 msgstr "Une erreur est survenue, merci de réessayer plus tard."
 
-#: deposit/templates/deposit/start.html:173
+#: deposit/templates/deposit/start.html:174
 #, python-format
 msgid ""
 "\n"
@@ -85,7 +85,7 @@ msgstr ""
 "d'utilisation</a>.\n"
 "        "
 
-#: deposit/templates/deposit/start.html:184
+#: deposit/templates/deposit/start.html:185
 msgid ""
 "You do not appear to be one of the authors of this paper. By using this "
 "form, you certify that you have the permission to upload it on their behalf."
@@ -94,48 +94,48 @@ msgstr ""
 "formulaire, vous nous certifiez que vous avez leur permission pour soumettre "
 "l'article en leur nom."
 
-#: deposit/templates/deposit/start.html:193
+#: deposit/templates/deposit/start.html:194
 msgid "Document"
 msgstr "Document"
 
-#: deposit/templates/deposit/start.html:201
+#: deposit/templates/deposit/start.html:202
 msgid "Options"
 msgstr "Options"
 
-#: deposit/templates/deposit/start.html:207
+#: deposit/templates/deposit/start.html:208
 msgid "Upload type:"
 msgstr "Type de dépôt:"
 
-#: deposit/templates/deposit/start.html:220
+#: deposit/templates/deposit/start.html:221
 msgid "Repository:"
 msgstr "Dépôt :"
 
-#: deposit/templates/deposit/start.html:237
+#: deposit/templates/deposit/start.html:238
 msgctxt "This repository will be soon available in Dissemin"
 msgid "Coming soon:"
 msgstr "Bientôt disponible :"
 
-#: deposit/templates/deposit/start.html:274
+#: deposit/templates/deposit/start.html:275
 msgid "Metadata"
 msgstr "Métadonnés"
 
-#: deposit/templates/deposit/start.html:290
+#: deposit/templates/deposit/start.html:291
 msgid "Processing deposit..."
 msgstr "Dépôt en cours de traitement..."
 
-#: deposit/templates/deposit/start.html:290
+#: deposit/templates/deposit/start.html:291
 msgid "please wait..."
 msgstr "veuillez patienter..."
 
-#: deposit/views.py:58
+#: deposit/views.py:60
 msgid "This repository is not available for this paper."
 msgstr "Ce dépôt n'est pas disponible pour ce papier."
 
-#: deposit/views.py:106
+#: deposit/views.py:108
 msgid "This repository cannot be used for this paper."
 msgstr "Impossible d'envoyer ce papier vers le dépôt indiqué."
 
-#: deposit/views.py:118
+#: deposit/views.py:122
 msgid "Access to the PDF was denied."
 msgstr "L'accès au PDF a été refusé."
 
@@ -632,7 +632,7 @@ msgstr "Chercher dans CORE"
 msgid "Admin zone"
 msgstr "Administration"
 
-#: papers/templates/papers/paperSources.html:28
+#: papers/templates/papers/paperSources.html:31
 msgid "via DOI"
 msgstr "via DOI"
 
@@ -1882,6 +1882,23 @@ msgstr ""
 #: templates/dissemin/tos.html:120
 msgid "Misuse can be reported to support@dissem.in."
 msgstr "Merci d'adresser tout abus à support@dissem.in."
+
+#: templates/socialaccount/authentication_error.html:6
+#: templates/socialaccount/authentication_error.html:12
+msgid "Authentication error"
+msgstr "Erreur d'authentification"
+
+#: templates/socialaccount/authentication_error.html:16
+msgid ""
+"\n"
+"            Authentication has failed. <a href=\"/\">Go back to the login "
+"page.</a>\n"
+"           "
+msgstr ""
+"\n"
+"            L'authentification a échoué. <a href=\"/\">Revenir à la page "
+"d'accueil.</a>\n"
+"           "
 
 #: upload/forms.py:30
 msgid "Invalid file format: only PDF files are accepted."
