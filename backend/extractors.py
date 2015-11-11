@@ -97,7 +97,7 @@ class BaseExtractor(RegexExtractor):
         super(BaseExtractor, self).__init__(mappings)
 
     def _post_filter(self, record, urls):
-        if '2' in record[1]._map.get('oa', []):
+        if '1' in record[1]._map.get('oa', []):
             urls['pdf'] = urls.get('splash')
         return urls
 
