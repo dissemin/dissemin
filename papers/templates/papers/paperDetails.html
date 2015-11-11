@@ -32,7 +32,7 @@
 <div class="detailsContent">
     <p><strong>Visibility:</strong> {{ paper.visibility }}</p>
     <p><strong>Fingerprint:</strong> {{ paper.plain_fingerprint }}</p>
-    <p><strong>Fingerprint:</strong> <a href="http://proaixy.dissem.in/oai?verb=ListRecords&metadataPrefix=oai_dc&set=proaixy:fingerprint:{{ paper.fingerprint }}">{{ paper.fingerprint }}</a></p>
+    <p><strong>Fingerprint:</strong> <a href="http://doai.dissem.in/oai?verb=ListRecords&metadataPrefix=base_dc&set=proaixy:fingerprint:{{ paper.fingerprint }}">{{ paper.fingerprint }}</a></p>
     <p><strong>Clusters:</strong></p>
 {% for a in paper.author_set.all %}
 {% if a.cluster %}
