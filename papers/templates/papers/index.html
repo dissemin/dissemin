@@ -107,20 +107,14 @@ function lookUpColleague() {
     {% endblocktrans %}
     </p>
     
-    <p class="startButton">
-    <a href="{% url 'my-profile' %}" class="btn btn-lg btn-default">{% trans "Analyze my publications" %}</a>{% trans "or" context "Analyze my publications OR Look up my colleagues" %}<a href="#" id="lookupColleagueButton" class="btn btn-lg btn-default">{% trans "Look up a colleague" %}</a>
-    </p>
-
-    <div id="lookUpColleague" style="display: none">
+    <div id="lookUpColleague">
         <form id="lookUpColleagueForm" action="javascript:lookUpColleague();" method="post">
             {% csrf_token %}
+            <em>{% trans "Look up a researcher:" context "before name fields in researcher lookup form" %}</em>
+            <div id="globalError" class="formErrorDiv"></div>
             <table>
             <tbody>
             <tr>
-                <td></td><td id="globalError" class="formErrorDiv"></td>
-            </tr>
-            <tr>
-                <td style="vertical-align: bottom; padding-bottom: 10px"><div class="researcherMethodLabel">{% trans "by" context "before name fields in researcher lookup form" %}</div></td>
             <td class="form-inline" id="nameGroup">
                 <div class="form-group">
                     <div class="formErrorDiv" id="error-first"></div>
@@ -133,18 +127,7 @@ function lookUpColleague() {
                     <input type="text" name="last" id="id_last" class="form-control" placeholder="{% trans "Lastname" %}"/>
                 </div>
             </td>
-            </tr>
-            <tr>
-                <td><div class="researcherMethodLabel">{% trans "or by" context "before ORCID field in researcher lookup form" %}</div></td>
-            <td class="form-inline" id="orcidGroup">
-                <div class="form-group">
-                    <label for="id_orcid" class="sr-only">ORCID</label>
-                    <input type="text" name="orcid" id="id_orcid" class="form-control" placeholder="{% trans "ORCID (such as 0000-0001-2345-6789)" %}" />
-                    <div class="formErrorDiv" id="error-orcid"></div>
-                </div>
-            </td>
-            </tr>
-            <tr><td></td><td>
+                 <td>
                 <div id="submitGroup">
                     <input type="hidden" name="force" id="forceInput" />
                     <input type="submit" class="btn btn-default" value="{% trans "Search" %}" />
@@ -155,6 +138,12 @@ function lookUpColleague() {
             </table>
         </form>
     </div>
+
+    <p class="startButton">
+    {% trans "or" %} <a href="{% url 'my-profile' %}" class="btn btn-lg btn-default"><img src="{% static "img/orcid-big.png" %}" alt="iD" width="20px" /> {% trans "Start with ORCID" %}</a>
+    </p>
+
+
   </div>
   
   <div id="disambiguationModal" class="modal fade">
