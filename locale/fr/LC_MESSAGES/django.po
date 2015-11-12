@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-10 07:52+0100\n"
-"PO-Revision-Date: 2015-11-11 12:51+0100\n"
+"POT-Creation-Date: 2015-11-11 12:16+0100\n"
+"PO-Revision-Date: 2015-11-13 00:59+0100\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -311,7 +311,7 @@ msgstr "Regroupement des publications"
 msgid "Updating statistics"
 msgstr "Mise à jour des statistiques"
 
-#: papers/models.py:1063 papers/views.py:106 papers/views.py:107
+#: papers/models.py:1112 papers/views.py:106 papers/views.py:107
 #: papers/views.py:146 papers/views.py:178
 msgid "Papers"
 msgstr "Papiers"
@@ -432,78 +432,64 @@ msgstr ""
 "Vous hésitez toujours ? Lisez ce qui suit ou jetez un œil à la <a href="
 "\"%(faq_url)s\">FAQ</a>."
 
-#: papers/templates/papers/index.html:111
-msgid "Analyze my publications"
-msgstr "Analyser mes publications"
-
-#: papers/templates/papers/index.html:111
-msgctxt "Analyze my publications OR Look up my colleagues"
-msgid "or"
-msgstr "ou"
-
-#: papers/templates/papers/index.html:111
-msgid "Look up a colleague"
-msgstr "Chercher un collègue"
-
-#: papers/templates/papers/index.html:123
+#: papers/templates/papers/index.html:113
 msgctxt "before name fields in researcher lookup form"
-msgid "by"
-msgstr "par"
+msgid "Look up a researcher:"
+msgstr "Trouver un chercheur :"
+
+#: papers/templates/papers/index.html:121
+msgid "Firstname"
+msgstr "Prénom"
+
+#: papers/templates/papers/index.html:122
+msgctxt "Placeholder in researcher lookup form"
+msgid "Firstname"
+msgstr "Prénom"
+
+#: papers/templates/papers/index.html:126
+msgctxt "Placeholder in researcher lookup form"
+msgid "Lastname"
+msgstr "Nom"
 
 #: papers/templates/papers/index.html:127
-msgid "Firstname"
-msgstr "Prénom"
-
-#: papers/templates/papers/index.html:128
-msgctxt "Placeholder in researcher lookup form"
-msgid "Firstname"
-msgstr "Prénom"
-
-#: papers/templates/papers/index.html:132
-msgctxt "Placeholder in researcher lookup form"
 msgid "Lastname"
 msgstr "Nom"
 
 #: papers/templates/papers/index.html:133
-msgid "Lastname"
-msgstr "Nom"
-
-#: papers/templates/papers/index.html:138
-msgctxt "before ORCID field in researcher lookup form"
-msgid "or by"
-msgstr "ou par"
-
-#: papers/templates/papers/index.html:142
-msgid "ORCID (such as 0000-0001-2345-6789)"
-msgstr "ORCID (par exemple, 0000-0001-2345-6789)"
-
-#: papers/templates/papers/index.html:150
 msgid "Search"
 msgstr "Recherche"
 
-#: papers/templates/papers/index.html:172
+#: papers/templates/papers/index.html:143
+msgid "or"
+msgstr "ou"
+
+#: papers/templates/papers/index.html:143
+msgid "Start with ORCID"
+msgstr "S'inscrire avec ORCID"
+
+#: papers/templates/papers/index.html:161
 msgid "Cancel"
 msgstr "Annuler"
 
-#: papers/templates/papers/index.html:173
+#: papers/templates/papers/index.html:162
 msgid "No, carry on"
 msgstr "Non, continuer"
 
-#: papers/templates/papers/index.html:182
+#: papers/templates/papers/index.html:171
 msgid "Green open access"
 msgstr "Libre accès (voie verte)"
 
-#: papers/templates/papers/index.html:186
+#: papers/templates/papers/index.html:175
 msgid ""
-"Many researchers do not use their right make their papers freely available "
-"online, in addition to the paywalled version offered by traditional "
-"publishers."
+"Many researchers do not use their right to make their papers freely "
+"available online, in addition to the paywalled version offered by "
+"traditional publishers."
 msgstr ""
 "Les chercheurs ont souvent le droit de mettre leurs articles en accès libre "
 "sur le Web, pour compléter la version payante proposée par les éditeurs "
 "traditionnels. Pourtant, tous ne le font pas."
 
-#: papers/templates/papers/index.html:194
+#: papers/templates/papers/index.html:183
 msgid ""
 "This forces libraries to buy overpriced electronic subscriptions to "
 "journals, when they can afford them at all."
@@ -512,11 +498,11 @@ msgstr ""
 "électroniques aux journaux de recherche, ce qui grève leurs finances et "
 "limite leur offre."
 
-#: papers/templates/papers/index.html:210
+#: papers/templates/papers/index.html:199
 msgid "Open repositories"
 msgstr "Dépôts ouverts"
 
-#: papers/templates/papers/index.html:213
+#: papers/templates/papers/index.html:202
 msgid ""
 "Uploading your papers on your own webpage is not enough. Such copies are "
 "less stable and harder to find than documents uploaded to well-indexed "
@@ -527,7 +513,7 @@ msgstr ""
 "difficiles à trouver que celles qui sont déposées dans des dépôts bien "
 "indexés."
 
-#: papers/templates/papers/index.html:221
+#: papers/templates/papers/index.html:210
 msgid ""
 "Dissemin searches for copies of your papers in a large collection of open "
 "repositories and tells you which ones cannot be accessed."
@@ -1964,6 +1950,23 @@ msgstr "URL invalide."
 #: upload/views.py:207
 msgid "Invalid form."
 msgstr "Formulaire invalide."
+
+#~ msgid "Analyze my publications"
+#~ msgstr "Analyser mes publications"
+
+#~ msgid "Look up a colleague"
+#~ msgstr "Chercher un collègue"
+
+#~ msgctxt "before name fields in researcher lookup form"
+#~ msgid "by"
+#~ msgstr "par"
+
+#~ msgctxt "before ORCID field in researcher lookup form"
+#~ msgid "or by"
+#~ msgstr "ou par"
+
+#~ msgid "ORCID (such as 0000-0001-2345-6789)"
+#~ msgstr "ORCID (par exemple, 0000-0001-2345-6789)"
 
 #~ msgid "Why can't I deposit in [repository]?"
 #~ msgstr "Pourquoi ne puis-je pas déposer dans mon dépôt favori ?"
