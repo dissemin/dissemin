@@ -289,12 +289,18 @@ class NameUnificationTest(unittest.TestCase):
         self.assertEqual(name_unification(('H-C Hsieh-Chung','Chen'),('Hsieh-Chung','Chen')), ('Hsieh-Chung','Chen'))
     
     @unittest.expectedFailure
+    def test_composite_last_name(self):
+        # TODO this should be reasonably easy to get right
+        self.assertEqual(name_unification(('F.', 'Zappa Nardelli'), ('Francesco', 'Nardelli')), ('Francesco', 'Zappa Nardelli'))
+
+    @unittest.expectedFailure
     def test_name_splitting_error(self):
         # TODO Not sure we can get that right with a reasonable rule
         self.assertEqual(name_unification(('Johannes G. de', 'Vries'), ('Johannes G.','de Vries')),
                 ('Johannes G.','de Vries'))
         self.assertEqual(name_unification(('Éric Colin', 'de Verdière'), ('E.','Colin de Verdière')),
                 ('Éric','Colin de Verdière'))
+
 
 class UnifyNameListsTest(unittest.TestCase):
     def test_simple(self):
