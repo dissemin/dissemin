@@ -122,25 +122,21 @@ def newUnaffiliatedResearcher(request):
     form = AddUnaffiliatedResearcherForm(request.POST)
     researcher = None
     if form.is_valid():
-        orcid = form.cleaned_data['orcid']
-        if orcid:
-            researcher = Researcher.get_or_create_by_orcid(orcid)
-        else:
-            first = normalize_name_words(form.cleaned_data['first'])
-            last = normalize_name_words(form.cleaned_data['last'])
-            # Check that the researcher is not already known under a different name.
-            if not form.cleaned_data.get('force'):
-                name, created = Name.get_or_create(first, last)
-                try:
-                    researcher = Researcher.objects.get(name=name)
-                    return {'url':researcher.url}
-                except (Researcher.DoesNotExist, MultipleObjectsReturned):
-                    pass
-                candidates = researcherCandidatesByName(name)
-                if candidates:
-                    return {'disambiguation':candidates}
+        first = normalize_name_words(form.cleaned_data['first'])
+        last = normalize_name_words(form.cleaned_data['last'])
+        # Check that the researcher is not already known under a different name.
+        if not form.cleaned_data.get('force'):
+            name, created = Name.get_or_create(first, last)
+            try:
+                researcher = Researcher.objects.get(name=name)
+                return {'url':researcher.url}
+            except (Researcher.DoesNotExist, MultipleObjectsReturned):
+                pass
+            candidates = researcherCandidatesByName(name)
+            if candidates:
+                return {'disambiguation':candidates}
 
-            researcher = Researcher.get_or_create_by_name(first, last)
+        researcher = Researcher.get_or_create_by_name(first, last)
         researcher.fetch_everything_if_outdated()
         return {'url':researcher.url}
     else:
