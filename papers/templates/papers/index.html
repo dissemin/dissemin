@@ -58,7 +58,7 @@ function lookUpColleague() {
         }).done(function(data) {
             reqComplete();
             if('url' in data) {
-                window.location.replace(data['url']);
+                window.location.href = data['url'];
             } else {
                 for(item in data['disambiguation']) {
                     var text = data['disambiguation'][item];
