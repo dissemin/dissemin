@@ -271,7 +271,13 @@ def fetch_dois_by_batch(doi_list):
 
     if len(doi_list) == 0:
         return []
+    elif len(doi_list) > nb_results_per_request:
+        first_dois = fetch_dois_by_batch(doi_list[:nb_results_per_request])
+        last_dois = fetch_dois_by_batch(doi_list[nb_results_per_request:])
+        return first_dois + last_dois
+
     params = {'filter':','.join(['doi:'+doi for doi in doi_list])}
+    req = None
     try:
         # First we fetch dois by batch from CrossRef. That's fast, but only works for CrossRef DOIs
         req = requests.get('http://api.crossref.org/works', params=params)
@@ -290,7 +296,7 @@ def fetch_dois_by_batch(doi_list):
         result = [dct.get(doi) for doi in doi_list]
         return result
     except RequestException as e:
-        raise MetadataSourceException('Connecting to the DOI proxy at '+DOI_PROXY_DOMAIN+' failed: '+str(e))
+        raise MetadataSourceException('Connecting to the DOI proxy at '+req.url+' failed: '+str(e))
     except ValueError as e:
         raise MetadataSourceException('Invalid JSON returned by the DOI proxy: '+str(e))
     except KeyError as e:

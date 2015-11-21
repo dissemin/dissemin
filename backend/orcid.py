@@ -195,7 +195,15 @@ class OrcidPaperSource(PaperSource):
             year = parse_int(j('publication-date/year/value'), 1970)
             month = parse_int(j('publication-date/month/value'), 01)
             day = parse_int(j('publication-date/day/value'), 01)
-            pubdate = date(year=year, month=month, day=day)
+            pubdate = None
+            try:
+                pubdate = date(year=year, month=01, day=01)
+                pubdate = date(year=year, month=month, day=01)
+                pubdate = date(year=year, month=month, day=day)
+            except ValueError:
+                if pubdate is None:
+                    print "Invalid publication date in ORCID publication, skipping"
+                    continue
 
             # Citation type: metadata format
             citation_format = j('work-citation/work-citation-type')
