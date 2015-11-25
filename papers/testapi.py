@@ -42,7 +42,7 @@ class PaperApiTest(JsonRenderingTest):
         oai.fetch(self.r3, incremental=True)
 
     def test_valid_paper(self):
-        p = Paper.objects.get(pk=1)
+        p = self.r3.author_set.first().paper
         parsed = self.checkJson(self.getPage('api-paper', args=[p.pk]))
 
         
