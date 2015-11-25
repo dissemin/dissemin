@@ -42,6 +42,7 @@ from time import sleep
 from collections import defaultdict
 from django.db.models import Q, Prefetch
 from django.db import DatabaseError
+from papers.errors import MetadataSourceException
 
 def cleanup_researchers():
     """
@@ -282,10 +283,13 @@ def refetch_doi_availability():
     for p in Publication.objects.filter(pdf_url__isnull=True):
         if not p.doi:
             continue
-        if not p.pdf_url and (p.oa_status() == 'OA' or fetch_oa(p.doi)):
-            print "Updating DOI "+p.doi
-            p.pdf_url = 'http://dx.doi.org/'+p.doi
-            p.save(update_fields=['pdf_url'])
-            p.paper.update_availability()
+        try:
+            if not p.pdf_url and (p.oa_status() == 'OA' or fetch_oa(p.doi)):
+                print "Updating DOI "+p.doi
+                p.pdf_url = 'http://dx.doi.org/'+p.doi
+                p.save(update_fields=['pdf_url'])
+                p.paper.update_availability()
+        except MetadataSourceException as e:
+            continue
 
 
