@@ -147,7 +147,7 @@
         Dissemin is not a repository as it does not store any full text. When the full text of a publication
         is available, a link to the relevant page is provided.
         The full texts deposited through Dissemin are stored in third-party repositories such as
-        <a href="http://zenodo.org">Zenodo</a> or <a href="http://hal.archives-ouvertes.fr">HAL</a>.
+        <a href="http://zenodo.org">Zenodo</a>.
         {% endblocktrans %}
         </p>
         <h2 id="running">{% trans "Who runs dissem.in?" %}</h2>
@@ -179,9 +179,8 @@
             <div class="criterionItem">
                 {% blocktrans trimmed %}
                 <strong>Open access:</strong><br />
-                The full text is made freely available by the publisher.
-                Hybrid open access schemes are not covered and should be avoided
-                by researchers as they are overpriced most of the time.
+                The full text is made freely available by the publisher
+                (in a fully open access or hybrid journal).
                 {% endblocktrans %}
             </div>
         </div>
@@ -231,9 +230,8 @@
         {% blocktrans trimmed %}
         When we have found it in one of the repositories we harvest. The list of
         these repositories can be found <a href="{{ sources_url }}">here</a>.
-        Thanks to the <a href="http://www.base-search.net">BASE</a> and
-        <a href="http://core.ac.uk">CORE</a> search engines,
-        we cover more than 68 millions of preprints.
+        Thanks to the <a href="http://www.base-search.net">BASE</a> search engine,
+        we cover more than 80 millions of preprints.
         {% endblocktrans %}
         </p>
         <h2 id="statistics">{% trans "Should I trust your statistics?" %}</h2>
@@ -320,7 +318,8 @@
         <h2 id="oai">{% trans "Can I harvest your data?" %}</h2>
         <p>
         {% blocktrans trimmed %}
-        Yes! But we have not implemented any API yet. Tell us what you need.
+        Yes! We even have <a href="http://dev.dissem.in/#api">an API</a>. If it does not suit your needs,
+        tell us what you need.
         {% endblocktrans %}
         </p>
         <p><a href="#">{% trans "Back to top" %}</a></p>
