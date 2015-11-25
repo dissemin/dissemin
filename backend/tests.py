@@ -289,6 +289,18 @@ class CrossRefUnitTest(unittest.TestCase):
                 convert_to_name_pair({'family':'Arvind'}),
                 ('','Arvind'))
 
+    def test_is_oa_license(self):
+        # Creative Commons licenses
+        self.assertTrue(is_oa_license('http://creativecommons.org/licenses/by-nc-nd/2.5/co/'))
+        self.assertTrue(is_oa_license('http://creativecommons.org/licenses/by-nc/3.10/'))
+        self.assertTrue(is_oa_license('https://creativecommons.org/licenses/by-nc-sa/4.0/'))
+        # Other open licenses
+        self.assertTrue(is_oa_license('http://www.elsevier.com/open-access/userlicense/1.0/'))
+        # Closed licenses
+        self.assertFalse(is_oa_license('http://link.aps.org/licenses/aps-default-license'))
+        self.assertFalse(is_oa_license('http://www.acs.org/content/acs/en/copyright.html'))
+        self.assertFalse(is_oa_license('http://www.elsevier.com/tdm/userlicense/1.0/'))
+
 
 # Test that the proaixy interface works
 class OaiTest(PaperSourceTest):

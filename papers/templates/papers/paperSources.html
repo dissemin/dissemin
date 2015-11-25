@@ -28,6 +28,10 @@
 {% endfor %}
 
 {% for publi in paper.first_publications %}
-<p><a href="{{ publi | doi_to_url }}">{{ publi.publisher|default:publi.publisher_name }} <img src="/static/extlink.png" /></a> {% trans "via DOI" %}</p>
+<p><a href="{{ publi | doi_to_url }}">{{ publi.publisher|default:publi.publisher_name }} <img src="/static/extlink.png" /></a> 
+ {% if publi.pdf_url %}
+    | <a href="{{ publi.pdf_url }}" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-save"></span> PDF</a>
+    {% endif %}</p>
+
 {% endfor %}
 

@@ -84,6 +84,25 @@ max_crossref_batches_per_researcher = 7
 # Maximum number of non-trivially skipped records that do not match any researcher
 crossref_max_skipped_records = 100
 
+# Licenses considered OA, as stored by CrossRef
+def is_oa_license(license_url):
+    """
+    This function returns whether we expect a publication under a given license
+    to be freely available from the publisher.
+    
+    Licenses are as expressed in CrossRef: see http://api.crossref.org/licenses
+    """
+    if "creativecommons.org/licenses/" in license_url:
+        return True
+    oa_licenses = set([
+            "http://koreanjpathol.org/authors/access.php",
+            "http://olabout.wiley.com/WileyCDA/Section/id-815641.html",
+            "http://pubs.acs.org/page/policy/authorchoice_ccby_termsofuse.html",
+            "http://pubs.acs.org/page/policy/authorchoice_ccbyncnd_termsofuse.html",
+            "http://pubs.acs.org/page/policy/authorchoice_termsofuse.html",
+            "http://www.elsevier.com/open-access/userlicense/1.0/",
+            ])
+    return license_url in oa_licenses
 
 ####### 1. Generic DOI metadata fetching tools ########
 
@@ -185,6 +204,12 @@ def _create_publication(paper, metadata):
     pubtype = metadata.get('type','unknown')
     pubtype = CROSSREF_PUBTYPE_ALIASES.get(pubtype, pubtype)
 
+    # PDF availability
+    pdf_url = None
+    licenses = set([(license or {}).get('URL') for license in metadata.get('license', [])])
+    if any(map(is_oa_license, licenses)):
+        pdf_url = 'http://dx.doi.org/'+doi
+
     # Lookup journal
     search_terms = {'jtitle':title}
     if issn:
@@ -201,7 +226,7 @@ def _create_publication(paper, metadata):
     pub = Publication(title=title, issue=issue, volume=volume,
             pubdate=pubdate, paper=paper, pages=pages,
             doi=doi, pubtype=pubtype, publisher_name=publisher_name,
-            journal=journal, publisher=publisher)
+            journal=journal, publisher=publisher, pdf_url=pdf_url)
     pub.save()
     cur_pubdate = paper.pubdate
     if type(cur_pubdate) != type(pubdate):

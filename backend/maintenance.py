@@ -36,6 +36,7 @@ import backend.crossref
 from papers.utils import sanitize_html, create_paper_fingerprint
 from backend.romeo import fetch_publisher
 from backend.tasks import change_publisher_oa_status
+from backend.crossref import fetch_metadata_by_DOI, is_oa_license
 from backend.name_cache import name_lookup_cache
 from time import sleep
 from collections import defaultdict
@@ -265,5 +266,26 @@ def prune_name_lookup_cache(threshold):
     Prunes the name lookup cache (removes names which are not looked up often)
     """
     name_lookup_cache.prune(threshold)
+
+
+def refetch_doi_availability():
+    """
+    Refetches DOI metadata for all publications
+    """
+    def fetch_oa(doi):
+        metadata = fetch_metadata_by_DOI(doi)
+        if metadata is None:
+            return False
+        licenses = set([(license or {}).get('URL') for license in metadata.get('license', [])])
+        return any(map(is_oa_license, licenses))
+
+    for p in Publication.objects.filter(pdf_url__isnull=True):
+        if not p.doi:
+            continue
+        if not p.pdf_url and (p.oa_status() == 'OA' or fetch_oa(p.doi)):
+            print "Updating DOI "+p.doi
+            p.pdf_url = 'http://dx.doi.org/'+p.doi
+            p.save(update_fields=['pdf_url'])
+            p.paper.update_availability()
 
 

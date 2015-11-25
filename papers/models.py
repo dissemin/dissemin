@@ -781,7 +781,7 @@ class Paper(models.Model):
                 idx = len(OA_STATUS_PREFERENCE)
             oa_idx = min(idx, oa_idx)
             if OA_STATUS_CHOICES[oa_idx][0] == 'OA':
-                self.pdf_url = publi.splash_url()
+                self.pdf_url = publi.pdf_url or publi.splash_url()
 
             # Pub type
             cur_type = publi.pubtype
@@ -1275,11 +1275,15 @@ class Publication(models.Model):
 
     doi = models.CharField(max_length=1024, unique=True, blank=True, null=True) # in theory, there is no limit
 
+    pdf_url = models.URLField(max_length=2048, blank=True, null=True) # not null when we know the paper is available from them
+
     def oa_status(self):
         """
         Policy of the publisher for this publication
         """
-        if self.publisher:
+        if self.pdf_url:
+            return 'OA'
+        elif self.publisher:
             return self.publisher.oa_status
         else:
             return 'UNK'
@@ -1319,6 +1323,7 @@ class Publication(models.Model):
             issn = self.journal.issn
         return {
                 'doi':self.doi,
+                'pdf_url':self.pdf_url,
                 'type':self.pubtype,
                 'publisher':self.publisher_name,
                 'journal':self.full_title(),
