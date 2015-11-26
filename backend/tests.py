@@ -57,6 +57,16 @@ class RomeoTest(TestCase):
         self.assertEqual(journal.title, 'Revista de Gastroenterología de México')
         self.assertEqual(journal.publisher.name, 'Elsevier España')
 
+    def test_ampersand(self):
+        terms = {'issn':'0003-1305'}
+        journal = fetch_journal(terms)
+        self.assertEqual(journal.publisher.name, 'Taylor & Francis')
+
+    def test_overescaped(self):
+        terms = {'issn':'2310-0133'}
+        journal = fetch_journal(terms)
+        self.assertEqual(journal.publisher.alias, 'Научный издательский дом Исследов')
+
     def test_openaccess(self):
         self.assertEqual(fetch_journal({'issn':'1471-2105'}).publisher.oa_status, 'OA')
         self.assertEqual(fetch_journal({'issn':'1951-6169'}).publisher.oa_status, 'OA')

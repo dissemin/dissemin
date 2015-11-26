@@ -21,6 +21,7 @@
 from __future__ import unicode_literals
 
 import lxml.etree as ET
+from lxml.html import fromstring
 from io import StringIO, BytesIO
 
 import requests
@@ -28,7 +29,7 @@ import requests.exceptions
 
 from papers.models import *
 from papers.errors import MetadataSourceException
-from papers.utils import nstrip, remove_diacritics, kill_html
+from papers.utils import nstrip, remove_diacritics, kill_html, sanitize_html
 from backend.utils import urlopen_retry
 
 from publishers.models import *
@@ -232,7 +233,8 @@ def get_or_create_publisher(romeo_xml_description):
     
     name = None
     try:
-        name = kill_html(xml.findall('./name')[0].text.strip())
+        raw_name = xml.findall('./name')[0].text.strip()
+        name = fromstring(kill_html(sanitize_html(raw_name))).text
     except (KeyError, IndexError, AttributeError):
         raise MetadataSourceException('RoMEO did not provide the publisher\'s name.\n'+
                 'URL was: '+request)
@@ -241,7 +243,7 @@ def get_or_create_publisher(romeo_xml_description):
     try:
         alias = nstrip(xml.findall('./alias')[0].text)
         if alias:
-            alias = kill_html(alias)
+            alias = fromstring(kill_html(sanitize_html(alias))).text
     except KeyError, IndexError:
         pass
 

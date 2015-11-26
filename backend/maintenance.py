@@ -39,6 +39,7 @@ from backend.tasks import change_publisher_oa_status
 from backend.crossref import fetch_metadata_by_DOI, is_oa_license
 from backend.name_cache import name_lookup_cache
 from time import sleep
+from lxml.html import fromstring
 from collections import defaultdict
 from django.db.models import Q, Prefetch
 from django.db import DatabaseError
@@ -291,5 +292,12 @@ def refetch_doi_availability():
                 p.paper.update_availability()
         except MetadataSourceException as e:
             continue
+
+def sanitize_publisher_names():
+    for p in Publisher.objects.all():
+        p.name = fromstring(sanitize_html(p.name)).text
+        if p.alias:
+            p.alias = fromstring(sanitize_html(p.alias)).text
+        p.save()
 
 
