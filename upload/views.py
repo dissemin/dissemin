@@ -179,8 +179,8 @@ def handleUrlDownload(request):
 
                 content_type = r.headers.get('content-type')
                 if 'text/html' in content_type:
-                    response['message'] = _('Invalid content type: this link points to a web page, '+
-                            'we need a direct link to a PDF file.')
+                    response['message'] = ( # Left as one line for compatibility purposes
+ _('Invalid content type: this link points to a web page, we need a direct link to a PDF file.'))
                 elif content_type not in DEPOSIT_CONTENT_TYPES:
                     response['message'] = invalid_content_type_message
 

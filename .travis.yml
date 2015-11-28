@@ -58,8 +58,7 @@ before_script:
   - psql -c "CREATE DATABASE dissemin;" -U postgres
 
 script:
-  - ./update_translations.sh | tee translations | grep msgid | wc -l | ./devutils/l10n_to_gitbot
-  - cat translations
+  - ./update_translations.sh | grep msgid | wc -l | ./devutils/l10n_to_gitbot
   - python manage.py migrate --noinput
   - coverage run --source=dissemin,papers,backend,deposit,upload,statistics manage.py test
 
