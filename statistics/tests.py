@@ -35,17 +35,25 @@ class StatisticsTest(PrefilledTest):
         crps = CrossRefPaperSource(ccf)
         oai = OaiPaperSource(ccf)
         crps.fetch(self.r2, incremental=True)
-        oai.fetch(self.r3, incremental=True)
+        oai.fetch(self.r2, incremental=True)
 
     def validStats(self, stats):
         self.assertTrue(stats.check_values())
         self.assertTrue(stats.num_tot > 1)
 
+    def printStats(self, stats):
+        print "OA: %d" % stats.num_oa
+        print "OK: %d" % stats.num_ok
+        print "COULDBE: %d" % stats.num_couldbe
+        print "TOT: %d" % stats.num_tot
+
     def test_researcher(self):
+        self.printStats(self.r2.stats)
         self.validStats(self.r2.stats)
     
     def test_department(self):
         self.d.update_stats()
+        self.printStats(self.d.stats)
         self.validStats(self.d.stats)
 
     def test_institution(self):
