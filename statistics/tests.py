@@ -25,6 +25,7 @@ from backend.tests import PrefilledTest
 from backend.globals import get_ccf
 from backend.crossref import CrossRefPaperSource
 from backend.oai import OaiPaperSource
+from papers.models import PaperWorld
 
 class StatisticsTest(PrefilledTest):
     @classmethod
@@ -52,7 +53,7 @@ class StatisticsTest(PrefilledTest):
         self.validStats(self.i.stats)
 
     def test_paperworld(self):
-        pw = PaperWorld.objects.get()
+        pw = PaperWorld.get_solo()
         pw.update_stats()
         self.validStats(pw.stats)
 

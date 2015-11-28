@@ -21,3 +21,4 @@ ndg-httpsclient
 pyasn1
 urllib3
 cryptography
+html5lib
