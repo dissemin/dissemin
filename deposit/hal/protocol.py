@@ -74,7 +74,7 @@ class HALProtocol(RepositoryProtocol):
     def submit_deposit(self, pdf, form):
         result = {}
         if self.user is None or self.password is None:
-            raise DepositError(__("No HAL user credentials provided."),'')
+            raise DepositError(__("No HAL user credentials provided."))
 
         deposit_result = DepositResult()
 

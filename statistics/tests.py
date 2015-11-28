@@ -17,7 +17,46 @@
 #
 
 """
-This app does not define any tests yet.
+Tests statistics update and statistics consistency.
 """
 
 from django.test import TestCase
+from backend.tests import PrefilledTest
+from backend.globals import get_ccf
+from backend.crossref import CrossRefPaperSource
+from backend.oai import OaiPaperSource
+
+class StatisticsTest(PrefilledTest):
+    @classmethod
+    def setUpClass(self):
+        super(StatisticsTest, self).setUpClass()
+        ccf = get_ccf()
+        crps = CrossRefPaperSource(ccf)
+        oai = OaiPaperSource(ccf)
+        crps.fetch(self.r2, incremental=True)
+        oai.fetch(self.r3, incremental=True)
+
+    def validStats(self, stats):
+        self.assertTrue(stats.check_values())
+        self.assertTrue(stats.num_tot > 1)
+
+    def test_researcher(self):
+        self.validStats(self.r2.stats)
+    
+    def test_department(self):
+        self.d.update_stats()
+        self.validStats(self.d.stats)
+
+    def test_institution(self):
+        self.i.update_stats()
+        self.validStats(self.i.stats)
+
+    def test_paperworld(self):
+        pw = PaperWorld.objects.get()
+        pw.update_stats()
+        self.validStats(pw.stats)
+
+
+# TODO check journal and publisher stats
+# TODO check that (for instance) department stats add up to institution stats
+

@@ -160,7 +160,7 @@ class Institution(models.Model):
     @property
     def url(self):
         """
-        The URL of the main page (list of departments for this institution.
+        The URL of the main page (list of departments for this institution).
         """
         return reverse('institution', args=[self.pk])
 
@@ -262,6 +262,9 @@ class Researcher(models.Model):
     #: Current subtask of the harvester
     current_task = models.CharField(max_length=64, choices=HARVESTER_TASK_CHOICES, null=True, blank=True)
 
+    #: Statistics of papers authored by this researcher
+    stats = models.ForeignKey(AccessStatistics, null=True)
+
     def __unicode__(self):
         if self.name_id:
             return unicode(self.name)
@@ -339,7 +342,6 @@ class Researcher(models.Model):
             name.best_confidence = confidence
             name.save(update_fields=['best_confidence'])
 
-    stats = models.ForeignKey(AccessStatistics, null=True)
     def update_stats(self):
         """Update the access statistics for the papers authored by this researcher"""
         if not self.stats:
@@ -1214,28 +1216,20 @@ class Author(models.Model):
                 new_cluster.researcher = cur_cluster.researcher
             new_cluster.save(update_fields=['num_children', 'researcher'])
 
-    def flatten_cluster(self, upstream_root=None):
-        """
-        Flattens the cluster rooted in self, using upstream_root if provided,
-        or as the root if None
-        """
-        if not upstream_root:
-            upstream_root = self
-        else:
-            self.cluster = upstream_root
-            if upstream_root.researcher:
-                self.researcher = upstream_root.researcher()
-            self.save()
-        children = self.clusterrel_set.all()
-        for child in children:
-            child.flatten_cluster(upstream_root)
-
     @property
     def is_known(self):
+        """
+        An author is "known" when it is linked to a known researcher.
+        """
         return self.researcher != None
 
     @property
     def orcid(self):
+        """
+        Returns the ORCID associated to this author (if any).
+        Note that this can be null even if the author is associated with a researcher
+        that has an ORCID.
+        """
         return validate_orcid(self.affiliation)
 
     def update_name_variants_if_needed(self, default_confidence=0.1):

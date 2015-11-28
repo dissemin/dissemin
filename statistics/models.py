@@ -194,6 +194,20 @@ class AccessStatistics(models.Model):
             aggregated_data.append(item)
         return json.dumps({'detailed':detailed_data,'aggregated':aggregated_data})
 
+    def check_values(self):
+        """
+        Checks that values are consistent (non-negative and summing up to the total).
+        """
+        return (
+                self.num_oa >= 0 and
+                self.num_ok >= 0 and
+                self.num_couldbe >= 0 and
+                self.num_unk >= 0 and
+                self.num_closed >= 0 and
+                self.num_oa + self.num_ok + self.num_couldbe +
+                  self.num_unk + self.num_closed == self.num_tot
+                )
+
     class Meta:
         db_table = 'papers_accessstatistics'
 
