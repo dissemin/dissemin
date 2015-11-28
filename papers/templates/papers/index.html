@@ -86,7 +86,7 @@ function lookUpColleague() {
 <div id="fullPage">
   <div id="welcome">
 	<div id="institutionblock">
-        <img id="institution" src="{% static "img/bird-front.png" %}" />
+        <img id="institution" src="{% static "img/bird-front.png" %}" alt="Dissemin" />
 	</div>
 	
     <h2>{% trans "Welcome to dissemin" %}</h2>
@@ -143,7 +143,7 @@ function lookUpColleague() {
     </div>
 
     <p class="startButton">
-    {% trans "or" %} <a href="{% url 'my-profile' %}" class="btn btn-lg btn-default"><img src="{% static "img/orcid-big.png" %}" alt="iD" width="20px" /> {% trans "Start with ORCID" %}</a>
+    {% trans "or" %} <a href="{% url 'my-profile' %}" class="btn btn-lg btn-default"><img src="{% static "img/orcid-big.png" %}" alt="iD" width="20" /> {% trans "Start with ORCID" %}</a>
     </p>
 
 

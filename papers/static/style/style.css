@@ -383,11 +383,6 @@ h1#paperTitle {
 	margin-bottom:5px;
 }
 
-#paperAuthors {
-	font-size:1.1em;
-	margin:5px 0;
-}
-
 #paperAvailability {
 	background:#eee;
 	overflow:hidden;

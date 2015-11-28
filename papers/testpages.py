@@ -23,6 +23,7 @@ from __future__ import unicode_literals
 
 import unittest
 import django.test
+import html5lib
 from papers.utils import overescaped_re
 from django.core.urlresolvers import reverse
 from backend.tests import PrefilledTest
@@ -35,11 +36,7 @@ from backend.oai import OaiPaperSource
 #        # Paper views
 #        url(r'^mail_paper/(?P<pk>\d+)/$', views.mailPaperView, name='mail_paper'),
 #        url(r'^journal/(?P<journal>\d+)/$', views.searchView, name='journal'),
-#        # Institution-specific views
-#        url(r'^department/(?P<pk>\d+)/$', views.DepartmentView.as_view(), name='department'),
-#        url(r'^institution/(?P<pk>\d+)/$', views.InstitutionView.as_view(), name='institution'),
 #        # Tasks, AJAX
-#        url(r'^ajax/', include('papers.ajax')),
 #        url(r'^researcher/(?P<pk>\d+)/update/$', views.refetchResearcher, name='refetch-researcher'),
 #        url(r'^researcher/(?P<pk>\d+)/recluster/$', views.reclusterResearcher, name='recluster-researcher'),
 #        # Annotations (to be deleted)
@@ -49,12 +46,18 @@ class RenderingTest(PrefilledTest):
     def setUp(self):
         super(RenderingTest, self).setUp()
         self.client = django.test.Client()
+        self.parser = html5lib.HTMLParser(strict=True)
 
     def checkHtml(self, resp):
         self.assertEqual(resp.status_code, 200)
         # Check that there are no overescaped HTML strings…
         self.assertEqual(overescaped_re.findall(resp.content), [])
-        # TODO check resp.content for HTML errors
+        try:
+            parsed = self.parser.parse(resp.content)
+        except html5lib.html5parser.ParseError as e:
+            print resp.content
+            print e
+            raise e
 
     def getPage(self, *args, **kwargs):
         urlargs = kwargs.copy()
@@ -62,6 +65,20 @@ class RenderingTest(PrefilledTest):
             del urlargs['getargs']
             return self.client.get(reverse(*args, **urlargs), kwargs['getargs'])
         return self.client.get(reverse(*args, **kwargs))
+
+    def checkPage(self, *args, **kwargs):
+        self.checkHtml(self.getPage(*args, **kwargs))
+
+    def checkUrl(self, url):
+        self.checkHtml(self.client.get(url))
+
+class InstitutionPagesTest(RenderingTest):
+    def test_dept(self):
+        self.checkUrl(self.d.url)
+        self.checkUrl(self.di.url)
+
+    def test_univ(self):
+        self.checkUrl(self.i.url)
 
 class PaperPagesTest(RenderingTest):
     @classmethod
@@ -78,21 +95,21 @@ class PaperPagesTest(RenderingTest):
         
     def test_researcher(self):
         for r in [self.r1, self.r2, self.r3, self.r4]:
-            self.checkHtml(self.getPage('researcher', kwargs={'researcher':r.pk}))
-            self.checkHtml(self.client.get(self.r4.url))
+            self.checkPage('researcher', kwargs={'researcher':r.pk})
+            self.checkUrl(self.r4.url)
 
     def test_researcher_orcid(self):
-        self.checkHtml(self.getPage('researcher-by-orcid', kwargs={'orcid':self.r4.orcid}))
+        self.checkPage('researcher-by-orcid', kwargs={'orcid':self.r4.orcid})
 
     def test_search(self):
-        self.checkHtml(self.getPage('search'))
-        self.checkHtml(self.getPage('search', getargs={'researcher':self.r3.pk}))
-        self.checkHtml(self.getPage('search', getargs={'name':self.r3.name_id}))
+        self.checkPage('search')
+        self.checkPage('search', getargs={'researcher':self.r3.pk})
+        self.checkPage('search', getargs={'name':self.r3.name_id})
         # TODO more tests here
 
 #        url(r'^my-profile', views.myProfileView, name='my-profile'),
 
     def test_paper(self):
         for a in self.r3.authors_by_year:
-            self.checkHtml(self.getPage('paper', kwargs={'pk':a.paper_id}))
+            self.checkPage('paper', kwargs={'pk':a.paper_id})
 
