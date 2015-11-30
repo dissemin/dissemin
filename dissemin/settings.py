@@ -81,7 +81,7 @@ CORE_API_KEY = None
 # curl -LH "Accept: application/citeproc+json" http://DOI_PROXY_DOMAIN/10.1080/15568318.2012.660115
 # (returns the citation as Citeproc+JSON)
 #
-DOI_PROXY_DOMAIN =  'doi-cache.ulminfo.fr' # This acts as a caching proxy for dx.doi.org
+DOI_PROXY_DOMAIN =  'doi-cache.dissem.in' # This acts as a caching proxy for dx.doi.org
 #
 # In addition, if the endpoint supports it, batch requests can be performed:
 # curl -d 'dois=["10.1016/j.physletb.2015.01.010","10.5380/dp.v1i1.1922","10.1007/978-3-319-10936-7_9"]' \\
