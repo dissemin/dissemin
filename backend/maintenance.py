@@ -83,34 +83,6 @@ def merge_names(fro,to):
     Author.objects.filter(name_id=fro.id).update(name_id=to.id)
     fro.delete()
 
-def merge_all_identical_names():
-    """
-    Prepares the DB for the `(first,last)` uniqueness constraint on names
-    """
-    s = {}
-    for n in Name.objects.all():
-        key = (n.first,n.last)
-        if key not in s:
-            s[key] = n
-        else:
-            merge_names(n, s[key])
-
-def merge_identical_namevariants():
-    """
-    Prepares the DB for the `(researcher,name)` uniqueness constraint on name variants
-    """
-    s = {}
-    for nv in NameVariant.objects.all():
-        key = (nv.researcher_id,nv.name_id)
-        if key not in s:
-            s[key] = nv
-        else:
-            conf = max(s[key].confidence, nv.confidence)
-            nv.delete()
-            if conf != s[key].confidence:
-                s[key].confidence = conf
-                s[key].save(update_fields=['confidence'])
-
 def update_paper_statuses():
     """
     Should only be run if something went wrong,
@@ -186,16 +158,6 @@ def find_collisions():
                     print "### "+paper.plain_fingerprint()
                 print paper.title
                 print paper.bare_author_names()
-
-def journal_to_publisher():
-    """
-    Sets the "publisher" field of publications where the "journal" field
-    is not empty.
-    """
-    # TODO: is there a more efficient way to do this with updates?
-    for publi in Publication.objects.filter(journal__isnull=False).select_related('journal'):
-        publi.publisher_id = publi.journal.publisher_id
-        publi.save(update_fields=['publisher'])
 
 def create_publisher_aliases(erase_existing=True):
     # TODO: this might be more efficient with aggregates?
@@ -292,12 +254,5 @@ def refetch_doi_availability():
                 p.paper.update_availability()
         except MetadataSourceException as e:
             continue
-
-def sanitize_publisher_names():
-    for p in Publisher.objects.all():
-        p.name = fromstring(sanitize_html(p.name)).text
-        if p.alias:
-            p.alias = fromstring(sanitize_html(p.alias)).text
-        p.save()
 
 

@@ -410,9 +410,6 @@ class MaintenanceTest(PrefilledTest):
     def test_create_publisher_aliases(self):
         create_publisher_aliases()
 
-    def test_journal_to_publisher(self):
-        journal_to_publisher()
-
     def test_refetch_publishers(self):
         refetch_publishers()
 
