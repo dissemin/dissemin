@@ -28,6 +28,7 @@ from django.http import HttpResponse, HttpResponseNotFound, HttpResponseForbidde
 from django.core.files.base import ContentFile
 from django.contrib.auth.decorators import user_passes_test
 from django.utils.translation import ugettext as _
+from django.views.decorators.http import require_POST
 from papers.user import *
 
 from upload.forms import *
@@ -35,6 +36,7 @@ from upload.models import *
 from dissemin.settings import URL_DEPOSIT_DOWNLOAD_TIMEOUT, DEPOSIT_MAX_FILE_SIZE, DEPOSIT_CONTENT_TYPES
 
 import requests, json
+from jsonview.decorators import json_view
 from requests.packages.urllib3.exceptions import ReadTimeoutError, HTTPError
 import wand.image, wand.exceptions
 import PyPDF2
@@ -42,24 +44,24 @@ from PyPDF2.utils import PyPdfError
 from datetime import datetime
 
 # AJAX upload
+@json_view
+@require_POST
 @user_passes_test(is_authenticated)
 def handleAjaxUpload(request):
-    if request.method == 'POST':
-        form = AjaxUploadForm(request.POST, request.FILES)
-        if form.is_valid():
-            # We read the whole file in memory, which 
-            # is reasonably safe because we know it's not too big
-            pdf_file = request.FILES['upl'].read()
-            orig_name = request.FILES['upl'].name
+    form = AjaxUploadForm(request.POST, request.FILES)
+    if form.is_valid():
+        # We read the whole file in memory, which 
+        # is reasonably safe because we know it's not too big
+        pdf_file = request.FILES['upl'].read()
+        orig_name = request.FILES['upl'].name
 
-            status = save_pdf(request.user, orig_name, pdf_file)
+        status = save_pdf(request.user, orig_name, pdf_file)
 
-            if status['status'] == 'error':
-                status['upl'] = status['message']
-                return HttpResponseForbidden(json.dumps(status), content_type='text/json')
+        if status['status'] == 'error':
+            status['upl'] = status['message']
+            return status, 403
 
-            return HttpResponse(json.dumps(status), content_type='text/json')
-    return HttpResponseForbidden(json.dumps(form.errors), content_type='text/json')
+        return status
 
 def make_thumbnail(pdf_blob):
     """
@@ -95,6 +97,8 @@ def make_thumbnail(pdf_blob):
         # We render the PDF (or only its first page if we succeeded to extract it)
         with wand.image.Image(blob=pdf_blob, format='pdf', resolution=resolution) as image:
             if image.height == 0 or image.width == 0:
+                return
+            if image.format != 'PDF':
                 return
             if num_pages is None:
                 num_pages = len(image.sequence)

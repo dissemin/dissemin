@@ -45,8 +45,9 @@ from backend.oai import OaiPaperSource
 #)
 
 class JsonRenderingTest(PrefilledTest):
-    def setUp(self):
-        super(JsonRenderingTest, self).setUp()
+    @classmethod
+    def setUpClass(self):
+        super(JsonRenderingTest, self).setUpClass()
         self.client = django.test.Client()
 
     def checkJson(self, resp, expected_status=200):
