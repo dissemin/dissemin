@@ -101,7 +101,8 @@ class PaperPagesTest(RenderingTest):
     def test_researcher_orcid(self):
         self.checkPage('researcher-by-orcid', kwargs={'orcid':self.r4.orcid})
 
-    @expected_failure # ampersands not escaped in django bootstrap pagination, https://github.com/jmcclell/django-bootstrap-pagination/issues/41
+    # ampersands not escaped in django bootstrap pagination, https://github.com/jmcclell/django-bootstrap-pagination/issues/41
+    @unittest.expectedFailure
     def test_search(self):
         self.checkPage('search')
         self.checkPage('search', getargs={'researcher':self.r3.pk})
