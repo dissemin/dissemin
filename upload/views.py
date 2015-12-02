@@ -62,6 +62,8 @@ def handleAjaxUpload(request):
             return status, 403
 
         return status
+    else:
+        return form.errors, 403
 
 def make_thumbnail(pdf_blob):
     """

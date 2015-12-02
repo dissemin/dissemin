@@ -40,6 +40,8 @@ dissemin/NOTONGIT*
 # Uploaded files
 media/
 mediatest/repository_logos/
+mediatest/thumbnails/
+mediatest/uploads/
 www/
 runfcgi.pid
 .virtualenv

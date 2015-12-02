@@ -24,6 +24,8 @@ from __future__ import unicode_literals
 import unittest
 import wand.image as image
 import django.test
+import os
+from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from papers.testajax import JsonRenderingTest
@@ -60,6 +62,7 @@ class UploadTest(JsonRenderingTest):
     @classmethod
     def setUpClass(self):
         super(UploadTest, self).setUpClass()
+        settings.MEDIA_ROOT = os.path.join(os.getcwd(), 'mediatest')
         User.objects.create_user('john','john@google.com','doe')
 
     def setUp(self):
@@ -67,7 +70,10 @@ class UploadTest(JsonRenderingTest):
 
     def upload(self, fname):
         with open(fname, 'r') as f:
-            return self.ajaxPost(reverse('ajax-uploadFulltext'), upl=f)
+            return self.ajaxPost(reverse('ajax-uploadFulltext'), {'upl':f})
+
+    def download(self, url):
+        return self.ajaxPost(reverse('ajax-downloadUrl'), {'url':url})
 
     def test_check_method(self):
         resp = self.ajaxGet(reverse('ajax-uploadFulltext'))
@@ -80,10 +86,28 @@ class UploadTest(JsonRenderingTest):
 
     def test_valid_upload(self):
         resp = self.upload('mediatest/blank.pdf')
+        print resp.content
         self.assertEqual(resp.status_code, 200)
 
     def test_invalid_format(self):
         resp = self.upload('mediatest/invalid.pdf')
+        self.assertEqual(resp.status_code, 403)
+
+    def test_download(self):
+        resp = self.download('http://arxiv.org/pdf/1410.1454v2')
         self.assertEqual(resp.status_code, 200)
 
+    def test_html_download(self):
+        resp = self.download('http://httpbin.org/')
+        self.assertEqual(resp.status_code, 403)
 
+    def test_invalid_url(self):
+        resp = self.download('ttp://dissem.in')
+
+    def test_notfound_url(self):
+        resp = self.download('http://httpbin.org/ainrsetcs')
+        self.assertEqual(resp.status_code, 403)
+
+    def test_timeout(self):
+        resp = self.download('https://httpbin.org/delay/20')
+        self.assertEqual(resp.status_code, 403)
