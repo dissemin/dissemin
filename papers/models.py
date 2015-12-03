@@ -862,6 +862,15 @@ class Paper(models.Model):
         if wait:
             task.get()
 
+    @classmethod
+    def create_by_doi(self, doi, wait=True):
+        """
+        Creates a paper given a DOI (sends a task to the backend).
+        """
+        task = send_task('get_paper_by_doi', [], {'doi':doi})
+        if wait:
+            return task.get()
+
     def publisher(self):
         for publication in self.publication_set.all():
             return publication.publisher_or_default()
@@ -891,6 +900,11 @@ class Paper(models.Model):
         return fp
 
     def new_fingerprint(self, verbose=False):
+        """
+        The fingerprint of the paper, taking into account the changes
+        that may have occured since the last computation of the fingerprint.
+        This does not update the `fingerprint` field, just computes its candidate value.
+        """
         buf = self.plain_fingerprint(verbose)
         m = hashlib.md5()
         m.update(buf)

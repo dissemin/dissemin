@@ -30,6 +30,7 @@ from backend.tests import PrefilledTest
 from backend.globals import get_ccf
 from backend.crossref import CrossRefPaperSource
 from backend.oai import OaiPaperSource
+from papers.models import Publication
 
 # TODO TO BE TESTED
 
@@ -115,4 +116,8 @@ class PaperPagesTest(RenderingTest):
         for a in self.r3.authors_by_year:
             self.checkPage('paper', kwargs={'pk':a.paper_id})
             self.assertTrue(not a.paper.is_orphan())
+
+    def test_paper_by_doi(self):
+        publi = Publication.objects.all()[0]
+        self.checkPage('paper-doi', kwargs={'doi':publi.doi})
 

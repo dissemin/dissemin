@@ -20,7 +20,7 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse, HttpResponseForbidden
+from django.http import HttpResponse, HttpResponseForbidden, Http404
 from django.template import RequestContext, loader
 from django.views import generic
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -42,6 +42,7 @@ from papers.forms import *
 from papers.user import is_admin, is_authenticated
 from papers.emails import *
 from papers.orcid import *
+from papers.doi import to_doi
 
 from deposit.models import *
 
@@ -81,7 +82,9 @@ post_social_login.connect(fetch_on_orcid_login)
 NB_RESULTS_PER_PAGE = 20
 
 def index(request):
-    
+    """
+    View for the home page
+    """
     context = {
         'nb_researchers': Researcher.objects.count(),
         'nb_papers': Paper.objects.filter(visibility='VISIBLE').count(),
@@ -94,6 +97,10 @@ def index(request):
     return render(request, 'papers/index.html', context)
 
 def searchView(request, **kwargs):
+    """
+    Any view that returns a list of papers can be expressed using this "search" view.
+    It allows to select a list of papers based on a list of criteria (but no keyword search for now).
+    """
     context = dict()
     # Build the queryset
     queryset = Paper.objects.all()
@@ -275,9 +282,31 @@ class InstitutionView(generic.DetailView):
 class PaperView(generic.DetailView):
     model = Paper
     template_name = 'papers/paper.html'
+
     def departments(self):
         paper = self.get_object()
         return Department.objects.filter(researcher__author__paper=paper).distinct()
+
+    def get_object(self):
+        queryset = self.get_queryset()
+        pk = self.kwargs.get('pk', None)
+        doi = to_doi(self.kwargs.get('doi', None))
+        if pk is not None:
+            queryset = queryset.filter(pk=pk)
+        elif doi is not None:
+            queryset = queryset.filter(publication__doi=doi)
+        if pk is None and doi is None:
+            raise AttributeError("Paper view expects a DOI or a pk")
+        try:
+            paper = queryset.get()
+        except Paper.DoesNotExist:
+            paper = Paper.create_by_doi(doi)
+            if paper is None:
+                raise Http404(_("No %(verbose_name)s found matching the query") %
+                        {'verbose_name': Publication._meta.verbose_name})
+        return paper
+            
+
     def get_context_data(self, **kwargs):
         context = super(PaperView, self).get_context_data(**kwargs)
         context['breadcrumbs'] = self.get_object().breadcrumbs()

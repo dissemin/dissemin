@@ -333,12 +333,30 @@ class CrossRefPaperSource(PaperSource):
     """
     Fetches papers from CrossRef
     """
-    def save_doi_metadata(self, metadata, extra_affiliations=None):
+    def create_paper_by_doi(self, doi):
+        """
+        Fetches the metadata with content-negotiation to create the paper.
+
+        :returns: a Paper object or None if there was an error
+        """
+        metadata = fetch_metadata_by_DOI(doi)
+        p = None
+        if metadata:
+            try:
+                p = self.save_doi_metadata(metadata, allow_unknown_authors=True)
+                if self.oai:
+                    self.oai.fetch_accessibility(p)
+            except ValueError:
+                pass
+        return p
+
+    def save_doi_metadata(self, metadata, extra_affiliations=None, allow_unknown_authors=False):
         """
         Given the metadata as Citeproc+JSON or from CrossRef, create the associated paper and publication
 
         :param extra_affiliations: an optional affiliations list, which will be unified
             with the affiliations extracted from the metadata. This is useful for the ORCID interface.
+        :param allow_unknown_authors: create the paper even if no author matches our researchers
         :returns: the paper, created if needed
         """        
         # Normalize metadata
@@ -374,7 +392,7 @@ class CrossRefPaperSource(PaperSource):
             title += ': '+subtitle
         authors = map(name_lookup_cache.lookup, map(convert_to_name_pair, metadata['author']))
         authors = filter(lambda x: x != None, authors)
-        if all(not elem.is_known for elem in authors) or authors == []:
+        if (not allow_unknown_authors and all(not elem.is_known for elem in authors)) or authors == []:
             raise ValueError('No known author')
 
         def get_affiliation(author_elem):

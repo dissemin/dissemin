@@ -22,7 +22,7 @@ from __future__ import unicode_literals
 
 from django.conf.urls import patterns, include, url
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, HttpResponseNotFound, HttpResponseForbidden
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseForbidden, Http404
 import json, requests
 
 from papers.models import *
@@ -38,7 +38,19 @@ def api_paper(request, pk):
             'paper':paper.json()
             }
 
+@json_view
+def api_paper_doi(request, doi):
+    p = Paper.create_by_doi(doi)
+    if p is None:
+        raise Http404
+    return {
+            'status':'ok',
+            'id':p.pk,
+            'paper':p.json()
+            }
+
 urlpatterns = patterns('',
     url(r'^paper/(?P<pk>\d+)/$', api_paper, name='api-paper'),
+    url(r'^(?P<doi>10\..*)$', api_paper_doi, name='api-paper-doi'),
 )
 

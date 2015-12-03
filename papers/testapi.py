@@ -45,5 +45,14 @@ class PaperApiTest(JsonRenderingTest):
         p = self.r3.author_set.first().paper
         parsed = self.checkJson(self.getPage('api-paper', args=[p.pk]))
 
+    def test_invalid_paper(self):
+        self.checkJson(self.getPage('api-paper', args=[123456]), 404)
+
+    def test_valid_doi(self):
+        self.checkJson(self.getPage('api-paper-doi', args=['10.1016/0379-6779(91)91572-r']))
+
+    def test_invalid_doi(self):
+        self.checkJson(self.getPage('api-paper-doi', args=['10.10.10.10.10']), 404)
+
         
 

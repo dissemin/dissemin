@@ -160,7 +160,13 @@ def consolidate_paper(pk):
             p.task = None
             p.save(update_fields=['task'])
 
-
+@shared_task(name='get_paper_by_doi')
+def get_paper_by_doi(doi):
+    ccf = get_ccf()
+    oai = OaiPaperSource(ccf, max_results=10)
+    crps = CrossRefPaperSource(ccf, oai, max_results=10)
+    p = crps.create_paper_by_doi(doi)
+    return p
 
 @shared_task(name='update_all_stats')
 @run_only_once('refresh_stats', timeout=3*60)
