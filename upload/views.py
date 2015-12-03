@@ -102,9 +102,6 @@ def make_thumbnail(pdf_blob):
             if image.height == 0 or image.width == 0:
                 print "0 width or height"
                 return
-            if image.format.lower() != 'pdf':
-                print "Wrong image format: "+image.format
-                return
             if num_pages is None:
                 num_pages = len(image.sequence)
             if num_pages == 0:
