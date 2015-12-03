@@ -87,6 +87,7 @@ class UploadTest(JsonRenderingTest):
     def test_valid_upload(self):
         resp = self.upload('mediatest/blank.pdf')
         print resp.content
+        print "MEDIA ROOT: "+settings.MEDIA_ROOT
         self.assertEqual(resp.status_code, 200)
 
     def test_invalid_format(self):
@@ -95,6 +96,8 @@ class UploadTest(JsonRenderingTest):
 
     def test_download(self):
         resp = self.download('http://arxiv.org/pdf/1410.1454v2')
+        print resp.content
+        print "MEDIA ROOT: "+settings.MEDIA_ROOT
         self.assertEqual(resp.status_code, 200)
 
     def test_html_download(self):

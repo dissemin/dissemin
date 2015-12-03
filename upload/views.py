@@ -126,8 +126,10 @@ def make_thumbnail(pdf_blob):
             return (num_pages,image.make_blob())
     except wand.exceptions.WandException as e:
         # Wand failed: we consider the PDF file as invalid
+        print "Wand exception: "+unicode(e)
         pass
     except ValueError:
+        print "ValueError: "+unicode(e)
         pass
 
 def save_pdf(user, orig_name, pdf_blob):
