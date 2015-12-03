@@ -82,6 +82,7 @@ def make_thumbnail(pdf_blob):
             reader = PyPDF2.PdfFileReader(orig_pdf)
             num_pages = reader.getNumPages()
             if not reader.isEncrypted and num_pages == 0:
+                print "No pages"
                 return
             writer = PyPDF2.PdfFileWriter()
             writer.addPage(reader.getPage(0))
@@ -99,12 +100,15 @@ def make_thumbnail(pdf_blob):
         # We render the PDF (or only its first page if we succeeded to extract it)
         with wand.image.Image(blob=pdf_blob, format='pdf', resolution=resolution) as image:
             if image.height == 0 or image.width == 0:
+                print "0 width or height"
                 return
-            if image.format != 'PDF':
+            if image.format.lower() != 'pdf':
+                print "Wrong image format: "+image.format
                 return
             if num_pages is None:
                 num_pages = len(image.sequence)
             if num_pages == 0:
+                print "No pages"
                 return
             image = wand.image.Image(image=image.sequence[0])
             
@@ -128,7 +132,7 @@ def make_thumbnail(pdf_blob):
         # Wand failed: we consider the PDF file as invalid
         print "Wand exception: "+unicode(e)
         pass
-    except ValueError:
+    except ValueError as e:
         print "ValueError: "+unicode(e)
         pass
 
