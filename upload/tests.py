@@ -101,6 +101,11 @@ class UploadTest(JsonRenderingTest):
         resp = self.download('http://httpbin.org/')
         self.assertEqual(resp.status_code, 403)
 
+    def test_loggedout_download(self):
+        self.client.logout()
+        resp = self.download('http://arxiv.org/pdf/1410.1454v2')
+        self.assertEqual(resp.status_code, 302)
+
     def test_invalid_url(self):
         resp = self.download('ttp://dissem.in')
 
@@ -111,3 +116,5 @@ class UploadTest(JsonRenderingTest):
     def test_timeout(self):
         resp = self.download('https://httpbin.org/delay/20')
         self.assertEqual(resp.status_code, 403)
+
+

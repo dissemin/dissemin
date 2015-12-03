@@ -168,49 +168,50 @@ def save_pdf(user, orig_name, pdf_blob):
     return response
 
 
+@json_view
+@require_POST
 @user_passes_test(is_authenticated)
 def handleUrlDownload(request):
     response = {'status':'error'}
-    if request.method == 'POST':
-        form = UrlDownloadForm(request.POST)
-        if form.is_valid():
-            content = None
-            try:
-                r = requests.get(form.cleaned_data['url'], timeout=URL_DEPOSIT_DOWNLOAD_TIMEOUT, stream=True)
-                r.raise_for_status()
-                content = r.raw.read(DEPOSIT_MAX_FILE_SIZE+1, decode_content=False)
+    form = UrlDownloadForm(request.POST)
+    if not form.is_valid():
+        response['message'] = _('Invalid form.')
+        return response, 403
+    content = None
+    try:
+        r = requests.get(form.cleaned_data['url'], timeout=URL_DEPOSIT_DOWNLOAD_TIMEOUT, stream=True)
+        r.raise_for_status()
+        content = r.raw.read(DEPOSIT_MAX_FILE_SIZE+1, decode_content=False)
 
-                if len(content) > DEPOSIT_MAX_FILE_SIZE:
-                    response['message'] = _('File too large.')
+        if len(content) > DEPOSIT_MAX_FILE_SIZE:
+            response['message'] = _('File too large.')
 
-                content_type = r.headers.get('content-type')
-                if 'text/html' in content_type:
-                    response['message'] = ( # Left as one line for compatibility purposes
- _('Invalid content type: this link points to a web page, we need a direct link to a PDF file.'))
-                elif content_type not in DEPOSIT_CONTENT_TYPES:
-                    response['message'] = invalid_content_type_message
+        content_type = r.headers.get('content-type')
+        if 'text/html' in content_type:
+            response['message'] = ( # Left as one line for compatibility purposes
+_('Invalid content type: this link points to a web page, we need a direct link to a PDF file.'))
+        elif content_type not in DEPOSIT_CONTENT_TYPES:
+            response['message'] = invalid_content_type_message
 
-            except requests.exceptions.Timeout as e:
-                response['message'] = _('Invalid URL (server timed out).')
-            except requests.exceptions.RequestException as e:
-                response['message'] = _('Invalid URL.')
-            except ReadTimeoutError as e:
-                response['message'] = _('Invalid URL (server timed out).')
-            except HTTPError as e:
-                response['message'] = _('Invalid URL.')
+    except requests.exceptions.Timeout as e:
+        response['message'] = _('Invalid URL (server timed out).')
+    except requests.exceptions.RequestException as e:
+        response['message'] = _('Invalid URL.')
+    except ReadTimeoutError as e:
+        response['message'] = _('Invalid URL (server timed out).')
+    except HTTPError as e:
+        response['message'] = _('Invalid URL.')
 
-            if 'message' in response:
-                return HttpResponseForbidden(json.dumps(response))
+    if 'message' in response:
+        return response, 403
 
-            orig_name = form.cleaned_data['url']
+    orig_name = form.cleaned_data['url']
 
-            response = save_pdf(request.user, orig_name, content) 
+    response = save_pdf(request.user, orig_name, content) 
 
-            if response['status'] == 'error':
-                return HttpResponseForbidden(json.dumps(response))
+    if response['status'] == 'error':
+        return response, 403
 
-            return HttpResponse(json.dumps(response), content_type='text/json')
-    response['message'] = _('Invalid form.')
-    return HttpResponseForbidden(json.dumps(response), content_type='text/json')
+    return response
 
 
