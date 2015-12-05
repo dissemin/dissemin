@@ -53,6 +53,10 @@ def publishers_breadcrumbs():
     return [(_('Publishers'),reverse('publishers'))]
 
 class DummyPublisher(object):
+    """
+    Class representing an "unknown" publisher, which means a publisher
+    with a name that did not return anything from SHERPA/RoMEO
+    """
     pk = None
     preprint = 'unknown'
     postprint = 'unknown'
@@ -71,6 +75,9 @@ class DummyPublisher(object):
 
 # Publisher associated with a journal
 class Publisher(models.Model):
+    """
+    A publisher, as represented by SHERPA/RoMEO
+    """
     romeo_id = models.CharField(max_length=64)
     name = models.CharField(max_length=256, db_index=True)
     alias = models.CharField(max_length=256,null=True,blank=True)
@@ -160,6 +167,15 @@ class Publisher(models.Model):
         result = publishers_breadcrumbs()
         result.append((unicode(self), reverse('publisher', args=[self.pk])))
         return result
+
+    def json(self):
+        """
+        A JSON representation of the policy
+        """
+        return {'preprint':self.preprint,
+                'postprint':self.postprint,
+                'published':self.pdfversion,
+                'romeo_id':self.romeo_id}
 
 
 # Journal data retrieved from RoMEO

@@ -160,9 +160,12 @@ def urlize(val):
         val = 'http://'+val
     return val
 
-#### XPath for JSON !
+#### JSON utilities !
 
 def jpath(path, js, default=None):
+    """
+    XPath for JSON !
+    """
     def _walk(lst, js):
         if js is None:
             return default
@@ -172,6 +175,11 @@ def jpath(path, js, default=None):
             return _walk(lst[1:], js.get(lst[0],{} if len(lst) > 1 else default))
     return _walk(path.split('/'), js)
 
+def remove_nones(dct):
+    """
+    Return a dict, without the None values
+    """
+    return {k:dct[k] for k in dct.keys().filter(lambda x: x is not None)}
 
 ##### Paper fingerprinting
 

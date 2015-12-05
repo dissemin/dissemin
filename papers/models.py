@@ -67,7 +67,7 @@ from celery.result import AsyncResult
 
 from papers.utils import nstr, iunaccent, create_paper_plain_fingerprint
 from papers.name import match_names, name_similarity, unify_name_lists
-from papers.utils import remove_diacritics, sanitize_html, validate_orcid, affiliation_is_greater
+from papers.utils import remove_diacritics, sanitize_html, validate_orcid, affiliation_is_greater, remove_nones
 from papers.orcid import OrcidProfile
 
 from statistics.models import AccessStatistics, COMBINED_STATUS_CHOICES, PDF_STATUS_CHOICES, STATUS_CHOICES_HELPTEXT, combined_status_for_instance
@@ -1086,14 +1086,15 @@ class Paper(models.Model):
         """
         JSON representation of the paper, for dataset dumping purposes
         """
-        return {
+        return remove_nones({
             'title': self.title,
             'type': self.doctype,
             'date': self.pubdate.isoformat(),
             'authors': [a.json() for a in self.sorted_authors],
             'publications': [p.json() for p in self.publication_set.all()],
             'records': [r.json() for r in self.oairecord_set.all()],
-            }
+            'pdf_url': self.pdf_url,
+            })
 
 
     def google_scholar_link(self):
@@ -1176,11 +1177,11 @@ class Author(models.Model):
         affiliation = None
         if not orcid_id and self.affiliation:
             affiliation = self.affiliation
-        return {
+        return remove_nones({
                 'name':self.name.json(),
                 'affiliation':affiliation,
                 'orcid':orcid_id,
-                }
+                })
 
     def orcid(self):
         """
@@ -1326,23 +1327,23 @@ class Publication(models.Model):
         """
         JSON representation of the publication, for dataset dumping purposes
         """
-        issn = None
-        if self.journal:
-            issn = self.journal.issn
-        return {
+        result = {
                 'doi':self.doi,
                 'pdf_url':self.pdf_url,
                 'type':self.pubtype,
                 'publisher':self.publisher_name,
                 'journal':self.full_title(),
-                'issn':issn,
                 'container':self.container,
                 'issue':self.issue,
                 'volume':self.volume,
                 'pages':self.pages,
                 'abstract':self.abstract,
                }
-
+        if self.publisher:
+            result['policy'] = self.publisher.json()
+        if self.journal:
+            result['issn'] = self.journal.issn
+        return remove_nones(result)
 
 
 # Rough data extracted through OAI-PMH
@@ -1517,7 +1518,7 @@ class OaiRecord(models.Model):
         """
         Dumps the OAI record as a JSON object (for dataset dumping purposes)
         """
-        return {
+        return remove_nones({
                 'source':self.source.identifier,
                 'identifier':self.identifier,
                 'splash_url':self.splash_url,
@@ -1526,7 +1527,7 @@ class OaiRecord(models.Model):
                 'keywords':self.keywords,
                 'contributors':self.contributors,
                 'type':self.pubtype,
-                }
+                })
 
     class Meta:
         verbose_name = "OAI record"
