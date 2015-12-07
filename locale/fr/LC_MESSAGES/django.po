@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-25 15:12+0100\n"
-"PO-Revision-Date: 2015-11-27 00:52+0100\n"
+"POT-Creation-Date: 2015-12-03 19:02+0100\n"
+"PO-Revision-Date: 2015-12-03 19:03+0100\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -311,8 +311,8 @@ msgstr "Regroupement des publications"
 msgid "Updating statistics"
 msgstr "Mise à jour des statistiques"
 
-#: papers/models.py:1112 papers/views.py:106 papers/views.py:107
-#: papers/views.py:146 papers/views.py:178
+#: papers/models.py:1128 papers/views.py:113 papers/views.py:114
+#: papers/views.py:153 papers/views.py:185
 msgid "Papers"
 msgstr "Papiers"
 
@@ -527,7 +527,7 @@ msgstr ""
 msgid "Yes"
 msgstr "Oui"
 
-#: papers/templates/papers/paper.html:63
+#: papers/templates/papers/paper.html:62
 #, python-format
 msgctxt "as in: _Journal article by_ Tom Smith, Nicole Allen"
 msgid ""
@@ -539,7 +539,7 @@ msgstr ""
 "    <span class=\"paperDocType\">%(doctype)s</span> de\n"
 "    "
 
-#: papers/templates/papers/paper.html:71
+#: papers/templates/papers/paper.html:70
 #, python-format
 msgid ""
 "\n"
@@ -552,7 +552,7 @@ msgstr ""
 "%(nb_remaining_authors)s autres auteurs</a>\n"
 "            "
 
-#: papers/templates/papers/paper.html:78
+#: papers/templates/papers/paper.html:77
 #, python-format
 msgid ""
 "\n"
@@ -565,36 +565,36 @@ msgstr ""
 "\"show_less_authors\">afficher moins</a>):<br />\n"
 "            "
 
-#: papers/templates/papers/paper.html:91
+#: papers/templates/papers/paper.html:89
 msgid "Paper successfully deposited!"
 msgstr "L'article a été correctement déposé !"
 
-#: papers/templates/papers/paper.html:101
+#: papers/templates/papers/paper.html:99
 msgid "Full text:"
 msgstr "Texte intégral:"
 
-#: papers/templates/papers/paper.html:103
+#: papers/templates/papers/paper.html:101
 #: papers/templates/papers/publiListItem.html:26
 msgid "Download"
 msgstr "Télécharger"
 
-#: papers/templates/papers/paper.html:105 statistics/models.py:69
+#: papers/templates/papers/paper.html:103 statistics/models.py:69
 msgid "Unavailable"
 msgstr "Indisponible"
 
-#: papers/templates/papers/paper.html:107
+#: papers/templates/papers/paper.html:105
 msgid "Ask upload"
 msgstr "Demander la mise en ligne\t"
 
-#: papers/templates/papers/paper.html:111
+#: papers/templates/papers/paper.html:109
 msgid "Publisher:"
 msgstr "Maison d'édition:"
 
-#: papers/templates/papers/paper.html:119
+#: papers/templates/papers/paper.html:117
 msgid "Deposit again"
 msgstr "Déposer à nouveau"
 
-#: papers/templates/papers/paper.html:129
+#: papers/templates/papers/paper.html:127
 msgid "Abstract"
 msgstr "Résumé"
 
@@ -849,21 +849,26 @@ msgstr "politique imprécise"
 msgid "policy unknown"
 msgstr "politique inconnue"
 
-#: papers/views.py:123 papers/views.py:131
+#: papers/views.py:130 papers/views.py:138
 msgid " authored by "
 msgstr " écrits par "
 
-#: papers/views.py:137
+#: papers/views.py:144
 msgid " in "
 msgstr " dans "
 
-#: papers/views.py:143
+#: papers/views.py:150
 msgid " published by "
 msgstr " publiés par "
 
-#: papers/views.py:180
+#: papers/views.py:187
 msgid "All papers"
 msgstr "Tous les papiers"
+
+#: papers/views.py:305
+#, python-format
+msgid "No %(verbose_name)s found matching the query"
+msgstr "Aucun %(verbose_name)s ne correspond à la requête"
 
 #: publishers/models.py:35
 msgid "Open access"
@@ -1917,15 +1922,19 @@ msgstr "Sinon, entrez un URL :"
 msgid "Or drop a file here:"
 msgstr "Sinon, glissez-déposez un fichier ici :"
 
-#: upload/views.py:139
+#: upload/views.py:148
 msgid "Invalid PDF file."
 msgstr "Fichier PDF invalide."
 
-#: upload/views.py:178
+#: upload/views.py:181
+msgid "Invalid form."
+msgstr "Formulaire invalide."
+
+#: upload/views.py:190
 msgid "File too large."
 msgstr "Fichier trop volumineux."
 
-#: upload/views.py:182
+#: upload/views.py:195
 msgid ""
 "Invalid content type: this link points to a web page, we need a direct link "
 "to a PDF file."
@@ -1933,17 +1942,13 @@ msgstr ""
 "Type MIME invalide : ce lien pointe vers une page Web, il nous faut un lien "
 "direct vers un fichier PDF. "
 
-#: upload/views.py:188 upload/views.py:192
+#: upload/views.py:200 upload/views.py:204
 msgid "Invalid URL (server timed out)."
 msgstr "URL invalide (délai de connexion expiré)."
 
-#: upload/views.py:190 upload/views.py:194
+#: upload/views.py:202 upload/views.py:206
 msgid "Invalid URL."
 msgstr "URL invalide."
-
-#: upload/views.py:207
-msgid "Invalid form."
-msgstr "Formulaire invalide."
 
 #~ msgid "via DOI"
 #~ msgstr "via DOI"
