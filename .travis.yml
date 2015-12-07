@@ -60,6 +60,7 @@ before_script:
 script:
   - ./update_translations.sh | grep msgid | wc -l | ./devutils/l10n_to_gitbot
   - python manage.py migrate --noinput
+  - ./celery.sh &
   - coverage run --source=dissemin,papers,backend,deposit,upload,statistics manage.py test -v 2
 
 after_success:
