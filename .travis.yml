@@ -22,7 +22,6 @@ addons:
        - python-numpy
        - python-scipy
        - python-requests
-       - python-sklearn
        - python-lxml
        - curl
        - libffi-dev
