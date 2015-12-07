@@ -46,6 +46,7 @@ class ResearcherTest(django.test.TestCase):
 class OaiRecordTest(django.test.TestCase):
     @classmethod
     def setUpClass(self):
+        super(OaiRecordTest, self).setUpClass()
         self.source = OaiSource.objects.get_or_create(identifier='arxiv',
                 defaults={'name':'arXiv','oa':False,'priority':1,'default_pubtype':'preprint'})
 
