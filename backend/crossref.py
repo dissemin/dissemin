@@ -29,6 +29,7 @@ from unidecode import unidecode
 from celery import current_task
 
 from django.core.exceptions import ObjectDoesNotExist
+from django.utils.http import urlencode
 from django.db import DataError
 
 from papers.errors import MetadataSourceException
@@ -461,7 +462,7 @@ class CrossRefPaperSource(PaperSource):
                     break
             except ValueError as e:
                 raise MetadataSourceException('Error while fetching CrossRef results:\nInvalid response.\n'+
-                        'URL was: %s\nJSON parser error was: %s' % (url,unicode(e))) 
+                        'URL was: %s\nParameters were: %s\nJSON parser error was: %s' % (url,urlencode(params),unicode(e))) 
             except requests.exceptions.RequestException as e:
                 raise MetadataSourceException('Error while fetching CrossRef results:\nUnable to open the URL: '+
                         request+'\nError was: '+str(e))
