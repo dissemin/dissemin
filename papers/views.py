@@ -290,7 +290,9 @@ class PaperView(generic.DetailView):
     def get_object(self):
         queryset = self.get_queryset()
         pk = self.kwargs.get('pk', None)
-        doi = to_doi(self.kwargs.get('doi', None))
+        doi = self.kwargs.get('doi', None)
+        if doi:
+            doi = to_doi(doi)
         if pk is not None:
             queryset = queryset.filter(pk=pk)
         elif doi is not None:

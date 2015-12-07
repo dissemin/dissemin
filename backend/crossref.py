@@ -534,6 +534,11 @@ def consolidate_publication(publi):
         if 'abstractNote' in item:
             publi.abstract = sanitize_html(item['abstractNote'])
             publi.save(update_fields=['abstract'])
+        for attachment in item.get('attachments', []):
+            if attachment.get('mimeType') == 'application/pdf':
+                publi.pdf_url = attachment.get('url')
+                publi.save(update_fields=['pdf_url'])
+                publi.paper.update_availability()
     return publi
 
 
