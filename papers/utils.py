@@ -179,7 +179,7 @@ def remove_nones(dct):
     """
     Return a dict, without the None values
     """
-    return {k:dct[k] for k in dct.keys().filter(lambda x: x is not None)}
+    return {k:dct[k] for k in filter(lambda x: x is not None, dct.keys())}
 
 ##### Paper fingerprinting
 
