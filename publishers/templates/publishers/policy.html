@@ -109,6 +109,8 @@
         {% endfor %}
     </ul>
 {% endif %}
+
+{% if request.user.is_superuser %}
 <h4>{% trans "Journals" %}</h4>
 <p>{% trans "Only journals with papers written by our users are listed." %}</p>
 {% if journals.paginator.num_pages > 1 %}
@@ -128,4 +130,5 @@
     <p>{% trans "None." %}</p>
     {% endfor %}
 </ul>
+{% endif %}
 {% endblock %}
