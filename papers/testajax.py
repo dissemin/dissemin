@@ -100,6 +100,7 @@ class PaperAjaxTest(JsonRenderingTest):
         for args in [
             {'orcid':'0000-0002-8435-1137'},
             {'first':'John'},
+            {'last':'Doe'},
             {},
             ]:
             parsed = self.checkJson(self.postPage('ajax-newUnaffiliatedResearcher',

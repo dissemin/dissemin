@@ -61,10 +61,14 @@ class AddUnaffiliatedResearcherForm(forms.Form):
         cleaned_data = super(AddUnaffiliatedResearcherForm, self).clean()
         print dict(self.errors)
         if not cleaned_data.get('orcid'):
-            if cleaned_data.get('first') and not cleaned_data.get('last'):
-                self.add_error('last',
-                    forms.ValidationError(_('A last name is required.'), code='required'))
-            elif not cleaned_data.get('first') and not cleaned_data.get('last') and 'orcid' not in self.errors:
+            if not cleaned_data.get('first') or not cleaned_data.get('last'):
+                if not cleaned_data.get('last'):
+                    self.add_error('last',
+                        forms.ValidationError(_('A last name is required.'), code='required'))
+                else:
+                    self.add_error('first',
+                        forms.ValidationError(_('A first name is required.'), code='required'))
+            elif 'orcid' not in self.errors:
                 raise forms.ValidationError(_('A name or an ORCID identifier is required.'), code='empty')
         return cleaned_data
 
