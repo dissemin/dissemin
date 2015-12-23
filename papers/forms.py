@@ -48,7 +48,6 @@ class AddResearcherForm(forms.Form):
 class AddUnaffiliatedResearcherForm(forms.Form):
     first = forms.CharField(label=_('First name'), max_length=256, min_length=2, required=False)
     last = forms.CharField(label=_('Last name'), max_length=256, min_length=2, required=False)
-    orcid = OrcidField(required=False)
     force = forms.CharField(max_length=32, required=False)
 
     def clean_first(self):
@@ -59,17 +58,13 @@ class AddUnaffiliatedResearcherForm(forms.Form):
 
     def clean(self):
         cleaned_data = super(AddUnaffiliatedResearcherForm, self).clean()
-        print dict(self.errors)
-        if not cleaned_data.get('orcid'):
-            if not cleaned_data.get('first') or not cleaned_data.get('last'):
-                if not cleaned_data.get('last'):
-                    self.add_error('last',
-                        forms.ValidationError(_('A last name is required.'), code='required'))
-                else:
-                    self.add_error('first',
-                        forms.ValidationError(_('A first name is required.'), code='required'))
-            elif 'orcid' not in self.errors:
-                raise forms.ValidationError(_('A name or an ORCID identifier is required.'), code='empty')
+        if not cleaned_data.get('first') or not cleaned_data.get('last'):
+            if not cleaned_data.get('last'):
+                self.add_error('last',
+                    forms.ValidationError(_('A last name is required.'), code='required'))
+            else:
+                self.add_error('first',
+                    forms.ValidationError(_('A first name is required.'), code='required'))
         return cleaned_data
 
 

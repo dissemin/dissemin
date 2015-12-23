@@ -88,7 +88,6 @@ class PaperAjaxTest(JsonRenderingTest):
 
     def test_valid_search(self):
         for args in [
-            {'orcid':'0000-0002-8435-1136'},
             {'first':'John','last':'Doe'},
             ]:
             parsed = self.checkJson(self.postPage('ajax-newUnaffiliatedResearcher',
