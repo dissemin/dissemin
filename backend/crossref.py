@@ -351,7 +351,8 @@ class CrossRefPaperSource(PaperSource):
                     self.oai.fetch_accessibility(p)
             except ValueError:
                 pass
-        return Paper.objects.get(pk=p.pk)
+        if p is not None:
+            return Paper.objects.get(pk=p.pk)
 
     def save_doi_metadata(self, metadata, extra_affiliations=None, allow_unknown_authors=False):
         """

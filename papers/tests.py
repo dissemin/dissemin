@@ -78,7 +78,7 @@ class PaperTest(django.test.TestCase):
         p = Paper.create_by_doi('10.1007/BF02702259')
         print json.dumps(p.json())
         # so the pdf_url of the publication should be set
-        self.assertEqual(p.publication_set.all().get().pdf_url.lower(), 'http://dx.doi.org/10.1007/BF02702259')
+        self.assertEqual(p.publication_set.all().get().pdf_url.lower(), 'http://dx.doi.org/10.1007/BF02702259'.lower())
 
     def test_create_no_authors(self):
         p = Paper.create_by_doi('10.1021/cen-v043n050.p033')
