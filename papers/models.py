@@ -1293,6 +1293,9 @@ class Publication(models.Model):
         if self.pdf_url:
             return 'OA'
         elif self.publisher:
+            if self.publisher.oa_status == 'OA' and self.doi:
+                self.pdf_url = 'http://dx.doi.org/'+self.doi
+                self.save()
             return self.publisher.oa_status
         else:
             return 'UNK'

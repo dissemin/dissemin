@@ -167,7 +167,9 @@ def create_publication(paper, metadata):
     """
     try:
         return _create_publication(paper, metadata)
-    except DataError:
+    except DataError as e:
+        print "create_publication: ignored DataError:"
+        print e
         pass
 
 def _create_publication(paper, metadata):
@@ -349,7 +351,7 @@ class CrossRefPaperSource(PaperSource):
                     self.oai.fetch_accessibility(p)
             except ValueError:
                 pass
-        return p
+        return Paper.objects.get(pk=p.pk)
 
     def save_doi_metadata(self, metadata, extra_affiliations=None, allow_unknown_authors=False):
         """

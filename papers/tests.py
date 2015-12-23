@@ -26,6 +26,7 @@ from datetime import date
 from papers.models import *
 import papers.doi
 import datetime
+import json
 from backend.globals import get_ccf
 
 class ResearcherTest(django.test.TestCase):
@@ -63,9 +64,22 @@ def load_tests(loader, tests, ignore):
 
 
 class PaperTest(django.test.TestCase):
+    @classmethod
+    def setUpClass(self):
+        super(PaperTest, self).setUpClass(self)
+        self.worker = start_celery_worker(Celery())
+
     def test_create_by_doi(self):
         p = Paper.create_by_doi('10.1109/synasc.2010.88')
         self.assertEqual(p.title, 'Monitoring and Support of Unreliable Services')
+        self.assertEqual(p.publication_set.all().get().doi, '10.1109/synasc.2010.88')
+
+    def test_publication_pdf_url(self):
+        # This paper is gold OA
+        p = Paper.create_by_doi('10.1007/BF02702259')
+        print json.dumps(p.json())
+        # so the pdf_url of the publication should be set
+        self.assertEqual(p.publication_set.all().get().pdf_url.lower(), 'http://dx.doi.org/10.1007/BF02702259')
 
     def test_create_no_authors(self):
         p = Paper.create_by_doi('10.1021/cen-v043n050.p033')
