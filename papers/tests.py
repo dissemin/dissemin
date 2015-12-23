@@ -66,8 +66,7 @@ def load_tests(loader, tests, ignore):
 class PaperTest(django.test.TestCase):
     @classmethod
     def setUpClass(self):
-        super(PaperTest, self).setUpClass(self)
-        self.worker = start_celery_worker(Celery())
+        super(PaperTest, self).setUpClass()
 
     def test_create_by_doi(self):
         p = Paper.create_by_doi('10.1109/synasc.2010.88')
