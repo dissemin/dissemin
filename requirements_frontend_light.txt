@@ -22,3 +22,5 @@ pyasn1
 urllib3
 cryptography
 html5lib
+djangorestframework
+django-rest-swagger

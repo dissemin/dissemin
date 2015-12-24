@@ -18,3 +18,5 @@ django-crispy-forms
 swampdragon
 django-debug-toolbar
 django-jsonview
+djangorestframework
+django-rest-swagger

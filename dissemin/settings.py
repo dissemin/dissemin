@@ -183,6 +183,8 @@ INSTALLED_APPS = (
     'bootstrap_pagination',
     'solo',
     'swampdragon',
+    'rest_framework',
+    'rest_framework_swagger',
 #    'debug_toolbar',
 )
 
@@ -347,3 +349,12 @@ if 'ROMEO_API_KEY' in os.environ:
     ROMEO_API_KEY = os.environ['ROMEO_API_KEY']
 
 
+# Settings for our own API
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+    'PAGE_SIZE': 10,
+    'DEFAULT_RENDERER_CLASSES': (
+                'rest_framework.renderers.JSONRenderer',
+                'rest_framework.renderers.BrowsableAPIRenderer',
+            ),
+}
