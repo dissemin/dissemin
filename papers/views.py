@@ -25,12 +25,14 @@ from django.template import RequestContext, loader
 from django.views import generic
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.views import login as auth_login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import user_passes_test
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 from django.utils.decorators import method_decorator
+from django.utils.functional import cached_property
 from django.db.models import Count
 
 from datetime import datetime
@@ -86,11 +88,7 @@ def index(request):
     View for the home page
     """
     context = {
-        'nb_researchers': Researcher.objects.count(),
-        'nb_papers': Paper.objects.filter(visibility='VISIBLE').count(),
-        'nb_publishers': Publisher.objects.filter(stats__num_tot__gt=0).count(),
         'papers' : Paper.objects.filter(visibility='VISIBLE').order_by('-pubdate')[:5],
-        'publishers' : Publisher.objects.all().filter(stats__isnull=False).order_by('-stats__num_tot')[:3],
         'newResearcherForm' : AddUnaffiliatedResearcherForm(),
         }
     context.update(UNIVERSITY_BRANDING)
@@ -267,7 +265,7 @@ class DepartmentView(generic.DetailView):
     template_name = 'papers/department.html'
     def get_context_data(self, **kwargs):
         context = super(DepartmentView, self).get_context_data(**kwargs)
-        context['breadcrumbs'] = self.get_object().breadcrumbs()
+        context['breadcrumbs'] = self.object.breadcrumbs()
         context['add_form'] = AddResearcherForm()
         return context
 
@@ -276,7 +274,7 @@ class InstitutionView(generic.DetailView):
     template_name = 'papers/institution.html'
     def get_context_data(self, **kwargs):
         context = super(InstitutionView, self).get_context_data(**kwargs)
-        context['breadcrumbs'] = self.get_object().breadcrumbs()
+        context['breadcrumbs'] = self.object.breadcrumbs()
         return context
 
 class PaperView(generic.DetailView):
@@ -284,7 +282,7 @@ class PaperView(generic.DetailView):
     template_name = 'papers/paper.html'
 
     def departments(self):
-        paper = self.get_object()
+        paper = self.object
         return Department.objects.filter(researcher__author__paper=paper).distinct()
 
     def get_object(self):
@@ -293,15 +291,15 @@ class PaperView(generic.DetailView):
         doi = self.kwargs.get('doi', None)
         if doi:
             doi = to_doi(doi)
-        if pk is not None:
-            queryset = queryset.filter(pk=pk)
-        elif doi is not None:
-            queryset = queryset.filter(publication__doi=doi)
-        if pk is None and doi is None:
-            raise AttributeError("Paper view expects a DOI or a pk")
         try:
-            paper = queryset.get()
-        except Paper.DoesNotExist:
+            if pk is not None:
+                paper = queryset.filter(pk=pk).get()
+            elif doi is not None:
+                publi = Publication.objects.get(doi=doi)
+                paper = publi.paper
+            else:
+                raise AttributeError("Paper view expects a DOI or a pk")
+        except ObjectDoesNotExist:
             paper = Paper.create_by_doi(doi)
             if paper is None:
                 raise Http404(_("No %(verbose_name)s found matching the query") %
@@ -311,12 +309,12 @@ class PaperView(generic.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(PaperView, self).get_context_data(**kwargs)
-        context['breadcrumbs'] = self.get_object().breadcrumbs()
+        context['breadcrumbs'] = self.object.breadcrumbs()
         if 'deposit' in self.request.GET:
             try:
                 pk = int(self.request.GET['deposit'])
                 dep = DepositRecord.objects.get(pk=pk)
-                if dep.paper_id == self.get_object().id:
+                if dep.paper_id == self.object.id:
                     context['deposit'] = dep
             except (TypeError, ValueError, DepositRecord.DoesNotExist):
                 pass
