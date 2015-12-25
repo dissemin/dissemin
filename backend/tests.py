@@ -183,7 +183,7 @@ class CrossRefIntegrationTest(PaperSourceTest):
 
         # This paper should be attributed
         p = Paper.objects.get(publication__doi='10.1016/j.jcss.2015.04.004')
-        self.assertEqual(p.sorted_authors[3].researcher, r2)
+        self.assertEqual(p.authors[3].researcher, r2)
 
 
 class CrossRefUnitTest(unittest.TestCase):

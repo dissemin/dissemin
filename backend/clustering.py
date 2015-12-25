@@ -635,7 +635,6 @@ class ClusteringContextFactory(object):
             p = Paper(title=title,
                     pubdate=pubdate,
                     doctype='other',
-                    year=pubdate.year,
                     fingerprint=fp,
                     visibility=visibility)
             p.save()

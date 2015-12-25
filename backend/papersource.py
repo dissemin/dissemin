@@ -74,7 +74,7 @@ class PaperSource(object):
                 # First, check whether this paper is associated with an ORCID id
                 # for the target researcher
                 if researcher.orcid:
-                    matches = filter(lambda a: a.orcid == researcher.orcid, p.sorted_authors)
+                    matches = filter(lambda a: a.orcid == researcher.orcid, p.authors)
                     if matches:
                         self.update_empty_orcid(researcher, False)
                 

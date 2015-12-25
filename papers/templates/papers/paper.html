@@ -8,7 +8,7 @@
 
 {% block metaTags %}
     <meta name="citation_title" content="{{ paper.title }}" />
-    {% for author in paper.sorted_authors %}
+    {% for author in paper.authors %}
         <meta name="citation_author" content="{{ author.name.last }}, {{ author.name.first }}" />
         {% if author.affiliation %}
         <meta name="citation_author_institution" content="{{ author.affiliation }}" />
@@ -79,9 +79,9 @@ $(function(){
             {% endblocktrans %}
         {% endwith %}
 
-        {% include "papers/authorList.html" with author_list=paper.sorted_authors %}
+        {% include "papers/authorList.html" with author_list=paper.authors %}
 {% else %}
-    {% include "papers/authorList.html" with author_list=paper.sorted_authors %}
+    {% include "papers/authorList.html" with author_list=paper.authors %}
 {% endif %}
 </div>
 

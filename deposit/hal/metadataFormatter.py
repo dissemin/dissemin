@@ -191,7 +191,7 @@ class AOFRFormatter(MetadataFormatter):
         title.attrib[XMLLANG_ATTRIB] = 'en' # TODO: autodetect language?
         title.text = paper.title
         
-        for author in paper.sorted_authors:
+        for author in paper.authors:
             node = addChild(root, 'author')
             node.attrib['role'] = 'aut'
             nameNode = addChild(node, 'persName')

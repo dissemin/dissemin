@@ -165,7 +165,7 @@ class ZenodoProtocol(RepositoryProtocol):
                 res['orcid'] = author.researcher.orcid
             # TODO: affiliation
             return res
-        metadata['creators'] = map(formatAuthor, self.paper.sorted_authors)
+        metadata['creators'] = map(formatAuthor, self.paper.authors)
 
         # Abstract
         # If we are currently fetching the abstract, wait for the task to complete

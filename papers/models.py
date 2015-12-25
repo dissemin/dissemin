@@ -60,54 +60,28 @@ from django.core.cache.utils import make_template_fragment_key
 from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
-from django.utils.functional import cached_property
 from solo.models import SingletonModel
 from celery.execute import send_task
 from celery.result import AsyncResult
 
-from papers.utils import nstr, iunaccent, create_paper_plain_fingerprint
+from papers.baremodels import *
 from papers.name import match_names, name_similarity, unify_name_lists
-from papers.utils import remove_diacritics, sanitize_html, validate_orcid, affiliation_is_greater, remove_nones
+from papers.utils import remove_diacritics, sanitize_html, validate_orcid, affiliation_is_greater, remove_nones, index_of, iunaccent
 from papers.orcid import OrcidProfile
 
-from statistics.models import AccessStatistics, COMBINED_STATUS_CHOICES, PDF_STATUS_CHOICES, STATUS_CHOICES_HELPTEXT, combined_status_for_instance
+from statistics.models import AccessStatistics, STATUS_CHOICES_HELPTEXT, combined_status_for_instance
 from publishers.models import Publisher, Journal, OA_STATUS_CHOICES, OA_STATUS_PREFERENCE, DummyPublisher
 from upload.models import UploadedPDF
 from dissemin.settings import PROFILE_REFRESH_ON_LOGIN, POSSIBLE_LANGUAGE_CODES
 
 import hashlib, re
 from datetime import datetime, timedelta
-from urllib import urlencode, quote # for the Google Scholar and CORE link
-
-VISIBILITY_CHOICES = [('VISIBLE', _('Visible')),
-                      ('CANDIDATE', _('Candidate')),
-                      ('NOT_RELEVANT', _('Not relevant')),
-                      ('DELETED', _('Deleted')),
-                      ]
-
-PAPER_TYPE_CHOICES = [
-   ('journal-article', _('Journal article')),
-   ('proceedings-article', _('Proceedings article')),
-   ('book-chapter', _('Book chapter')),
-   ('book', _('Book')),
-   ('journal-issue', _('Journal issue')),
-   ('proceedings', _('Proceedings')),
-   ('reference-entry', _('Entry')),
-   ('poster', _('Poster')),
-   ('report', _('Report')),
-   ('thesis', _('Thesis')),
-   ('dataset', _('Dataset')),
-   ('preprint', _('Preprint')),
-   ('other', _('Other document')),
-   ]
 
 UPLOAD_TYPE_CHOICES = [
    ('preprint', _('Preprint')),
    ('postprint', _('Postprint')),
    ('pdfversion', _("Published version")),
    ]
-
-PAPER_TYPE_PREFERENCE = [x for (x,y) in PAPER_TYPE_CHOICES]
 
 HARVESTER_TASK_CHOICES = [
    ('init', _('Preparing profile')),
@@ -430,8 +404,7 @@ class Researcher(models.Model):
             return self.department.breadcrumbs()+last
 
 
-MAX_NAME_LENGTH = 256
-class Name(models.Model):
+class Name(BareName, models.Model):
     first = models.CharField(max_length=MAX_NAME_LENGTH)
     last = models.CharField(max_length=MAX_NAME_LENGTH)
     full = models.CharField(max_length=MAX_NAME_LENGTH*2+1, db_index=True)
@@ -443,29 +416,21 @@ class Name(models.Model):
 
     @property
     def is_known(self):
+        """
+        Does this name belong to at least one known :class:`Researcher`?
+        """
         return self.best_confidence > 0.
 
-    @classmethod
-    def create(cls, first, last):
-        """
-        Creates an instance of the Name object without saving it.
-        Useful for name lookups where we are not sure we want to
-        keep the name in the model.
-        """
-        first = sanitize_html(first[:MAX_NAME_LENGTH].strip())
-        last = sanitize_html(last[:MAX_NAME_LENGTH].strip())
-        full = iunaccent(first+' '+last)
-        return cls(first=first,last=last,full=full)
     @classmethod
     def get_or_create(cls, first, last):
         """
         Replacement for the regular get_or_create, so that the full
         name is built based on first and last
         """
-        first = first.strip()
-        last = last.strip()
-        full = iunaccent(first+' '+last)
-        return cls.objects.get_or_create(full=full, defaults={'first':first,'last':last})
+        n = cls.create(first, last)
+        return cls.objects.get_or_create(full=n.full,
+                defaults={'first':n.first,'last':n.last})
+
     def variants_queryset(self):
         """
         Returns the queryset of should-be variants.
@@ -506,32 +471,28 @@ class Name(models.Model):
         """
         if author_name == None:
             return
-        first_name = sanitize_html(author_name[0][:MAX_NAME_LENGTH].strip())
-        last_name = sanitize_html(author_name[1][:MAX_NAME_LENGTH].strip())
+        n = cls.create(author_name[0], author_name[1])
 
         # First, check if the name itself is known
         # (we do not take the first/last separation into account
         # here because the exact match is already a quite strong
         # condition)
-        full_name = first_name+' '+last_name
-        normalized = iunaccent(full_name)
-        name = cls.objects.filter(full=normalized).first()
+        name = cls.objects.filter(full=n.full).first()
         if name:
             return name
 
-        # Otherwise, we create a name
-        name = cls.create(first_name,last_name)
+        # Otherwise, we create a name.
         # The name is not saved yet: the name has to be saved only
         # if the paper is saved or it is a variant of a known name
 
         # Then, we look for known names with the same last name.
         similar_researchers = Researcher.objects.filter(
-                name__last__iexact=last_name).select_related('name')
+                name__last__iexact=n.last).select_related('name')
 
         # Actually, this saves the name if it is relevant
-        name.update_variants()
+        n.update_variants()
 
-        return name
+        return n
 
     def save_if_not_saved(self):
         """
@@ -541,19 +502,6 @@ class Name(models.Model):
             # the best_confidence field should already be up to date as it is computed in the lookup
             self.save()
             self.update_variants()
-
-    def __unicode__(self):
-        """
-        Unicode representation: first name followed by last name
-        """
-        return '%s %s' % (self.first,self.last)
-
-
-    def first_letter(self):
-        """
-        First letter of the last name, for sorting purposes
-        """
-        return self.last[0]
 
     @property
     def object_id(self):
@@ -570,7 +518,7 @@ class Name(models.Model):
                }
 
 # Papers matching one or more researchers
-class Paper(models.Model):
+class Paper(models.Model, BarePaper):
     title = models.CharField(max_length=1024)
     fingerprint = models.CharField(max_length=64)
     date_last_ask = models.DateField(null=True)
@@ -592,7 +540,41 @@ class Paper(models.Model):
     # Task id of the current task updating the metadata of this article (if any)
     task = models.CharField(max_length=512, null=True, blank=True)
 
-    nb_remaining_authors = None
+
+    ### Relations to other models, reimplemented from :class:`BarePaper` ###
+
+    @cached_property
+    def authors(self):
+        """
+        The author sorted as they should appear. Their names are pre-fetched.
+        """
+        return sorted(self.author_set.all().prefetch_related('name'), key=lambda r: r.position)
+
+    @property
+    def publications(self):
+        """
+        The list of publications associated with this paper, returned
+        as a queryset.
+        """
+        return self.publication_set.all()
+
+    @property
+    def oairecords(self):
+        """
+        The list of OAI records associated with this paper, returned
+        as a queryset.
+        """
+        return self.oairecord_set.all()
+
+    ### Other methods, specific to this non-bare subclass ###
+
+    def update_author_stats(self):
+        """
+        Updates the statistics of all researchers identified for this paper
+        """
+        for author in self.authors:
+            if author.researcher:
+                author.researcher.update_stats()
 
     def already_asked_for_upload(self):
         if self.date_last_ask == None:
@@ -606,118 +588,14 @@ class Paper(models.Model):
                 not(self.already_asked_for_upload()) and
                 not(self.author_set.filter(researcher__isnull=False)==[]))
 
-    @property
-    def year(self):
-        """
-        Year of publication of the paper
-        """
-        return self.pubdate.year
-
-    @cached_property
-    def prioritary_oai_records(self):
-        """
-        OAI records from custom sources we trust (positive priority)
-        """
-        return self.sorted_oai_records.filter(priority__gt=0)
-
-    @property
-    def unique_prioritary_oai_records(self):
-        seen_sources = set()
-        for record in self.prioritary_oai_records:
-            if record.source_id not in seen_sources:
-                seen_sources.add(record.source_id)
-                yield record
-
-    @cached_property
-    def sorted_oai_records(self):
-        """
-        OAI records sorted by decreasing order of priority
-        (lower priority means poorer overall quality of the source).
-        """
-        return self.oairecord_set.order_by('-priority')
-
-    @cached_property
-    def sorted_authors(self):
-        """
-        The author sorted as they should appear. Their names are pre-fetched.
-        """
-        return self.author_set.all().order_by('position').prefetch_related('name')
-
-    def author_names(self):
-        """
-        The list of Name instances of the authors
-        """
-        return [a.name for a in self.sorted_authors]
-
-    def bare_author_names(self):
-        """
-        The list of name pairs (first,last) of the authors
-        """
-        return [(name.first,name.last) for name in self.author_names()]
-
-    @property
-    def author_count(self):
-        """
-        Number of authors. This property is cached in instances to
-        avoid repeated COUNT queries.
-        """
-        return len(self.sorted_authors)
-
-    @property
-    def has_many_authors(self):
-        """
-        When the paper has more than 15 authors (arbitrary threshold)
-        """
-        return self.author_count > 15
-
-    @cached_property
-    def interesting_authors(self):
-        """
-        The list of authors to display when the complete list is too long.
-        We display first the authors whose names are known, and then a few ones
-        who are unknown.
-        """
-        sorted_authors = self.sorted_authors
-        lst = (filter(lambda a: a.name.best_confidence > 0, sorted_authors)+filter(
-                      lambda a: a.name.best_confidence == 0, sorted_authors)[:3])[:15]
-        self.nb_remaining_authors = self.author_count - len(lst)
-        return lst
-
-    def displayed_authors(self):
-        """
-        Returns the full list of authors if there are not too many of them,
-        otherwise returns only the interesting_authors()
-        """
-        if self.has_many_authors:
-            return self.interesting_authors
-        else:
-            return self.sorted_authors
-
-    def update_author_stats(self):
-        """
-        Updates the statistics of all researchers identified for this paper
-        """
-        for author in self.sorted_authors:
-            if author.researcher:
-                author.researcher.update_stats()
-
-    def first_publications(self):
-        """
-        The list of the 3 first publications associated with this paper
-        (in most cases, that should return *all* publications, but in some nasty cases
-        many publications end up merged, and it is not very elegant to show all of them
-        to the users).
-        """
-        return self.publication_set.all()[:3]
 
     @cached_property
     def owners(self):
         """
         Returns the list of users that own this papers (listed as authors and identified as such).
         """
-        authors = self.sorted_authors # These don't need to be sorted, but this property is cached
         users = []
-        for a in authors:
+        for a in self.authors:
             if a.researcher and a.researcher.user:
                 users.append(a.researcher.user)
         return users
@@ -729,30 +607,8 @@ class Paper(models.Model):
         return user in self.owners
 
     @property
-    def toggled_visibility(self):
-        if self.visibility == 'VISIBLE':
-            return 2 # NOT RELEVANT
-        return 0 # VISIBLE
-
-    # TODO: use only codes or only strings, but this is UGLY!
-    @property
-    def visibility_code(self):
-        idx = 0
-        for code, lbl in VISIBILITY_CHOICES:
-            if code == self.visibility:
-                return idx
-            idx += 1
-        return idx
-
-    # TODO: use only codes or only strings, but this is UGLY!
-    @property
     def annotation_code(self):
-        idx = 0
-        for code, lbl in VISIBILITY_CHOICES:
-            if code == self.last_annotation:
-                return idx
-            idx += 1
-        return idx
+        return index_of(self.last_annotation, VISIBILITY_CHOICES)
 
     @cached_property
     def is_deposited(self):
@@ -766,62 +622,7 @@ class Paper(models.Model):
         This uses a non-trivial logic, hence it is useful to keep this result cached
         in the database row.
         """
-        self.pdf_url = None
-        publis = self.publication_set.all()
-        oa_idx = len(OA_STATUS_PREFERENCE)-1
-        type_idx = len(PAPER_TYPE_PREFERENCE)-1
-        source_found = False
-
-        if self.doctype in PAPER_TYPE_PREFERENCE:
-            type_idx = PAPER_TYPE_PREFERENCE.index(self.doctype)
-        for publi in publis:
-            # OA status
-            cur_status = publi.oa_status()
-            try:
-                idx = OA_STATUS_PREFERENCE.index(cur_status)
-            except ValueError:
-                idx = len(OA_STATUS_PREFERENCE)
-            oa_idx = min(idx, oa_idx)
-            if OA_STATUS_CHOICES[oa_idx][0] == 'OA':
-                self.pdf_url = publi.pdf_url or publi.splash_url()
-
-            # Pub type
-            cur_type = publi.pubtype
-            try:
-                idx = PAPER_TYPE_PREFERENCE.index(cur_type)
-            except ValueError:
-                idx = len(PAPER_TYPE_PREFERENCE)
-            type_idx = min(idx, type_idx)
-
-            source_found = True
-
-        self.oa_status = OA_STATUS_CHOICES[oa_idx][0]
-        if not self.pdf_url:
-            matches = self.oairecord_set.all().order_by(
-                            '-source__oa', '-source__priority').select_related('source')
-            self.pdf_url = None
-            for m in matches:
-                if not self.pdf_url:
-                    self.pdf_url = m.pdf_url
-
-                if m.source.oa:
-                    self.oa_status = 'OA'
-                    if not self.pdf_url:
-                        self.pdf_url = m.splash_url
-
-                if m.pubtype in PAPER_TYPE_PREFERENCE:
-                    new_idx = PAPER_TYPE_PREFERENCE.index(m.pubtype)
-                    type_idx = min(new_idx, type_idx)
-
-                source_found = True
-
-        # If this paper is not associated with any source, do not display it
-        # This happens when creating the associated OaiRecord or Publication
-        # failed due to some missing information.
-        if not source_found:
-            self.visibility = 'CANDIDATE'
-
-        self.doctype = PAPER_TYPE_PREFERENCE[type_idx]
+        super(Paper, self).update_availability()
         self.save()
         self.invalidate_cache()
 
@@ -837,16 +638,6 @@ class Paper(models.Model):
         The combined status of the paper (availability and policy)
         """
         return combined_status_for_instance(self)
-
-    def publications_with_unique_publisher(self):
-        seen_publishers = set()
-        for publication in self.publication_set.all():
-            if publication.publisher_id and publication.publisher_id not in seen_publishers:
-                seen_publishers.add(publication.publisher_id)
-                yield publication
-            elif publication.publisher_name not in seen_publishers:
-                seen_publishers.add(publication.publisher_name)
-                yield publication
 
     def consolidate_metadata(self, wait=True):
         """
@@ -871,45 +662,9 @@ class Paper(models.Model):
         if wait:
             return task.get()
 
-    def publisher(self):
-        for publication in self.publication_set.all():
-            return publication.publisher_or_default()
-        return DummyPublisher()
-
     def successful_deposits(self):
         return self.depositrecord_set.filter(pdf_url__isnull=False)
     
-    @cached_property
-    def abstract(self):
-        for rec in self.publication_set.all():
-            if rec.abstract:
-                return rec.abstract
-        best_abstract = ''
-        for rec in self.oairecord_set.all():
-            if rec.description and len(rec.description) > len(best_abstract):
-                best_abstract = rec.description
-        return best_abstract
-
-    def plain_fingerprint(self, verbose=False):
-        """
-        Debugging function to display the plain fingerprint
-        """
-        fp = create_paper_plain_fingerprint(self.title, self.bare_author_names(), self.year)
-        if verbose:
-            print fp
-        return fp
-
-    def new_fingerprint(self, verbose=False):
-        """
-        The fingerprint of the paper, taking into account the changes
-        that may have occured since the last computation of the fingerprint.
-        This does not update the `fingerprint` field, just computes its candidate value.
-        """
-        buf = self.plain_fingerprint(verbose)
-        m = hashlib.md5()
-        m.update(buf)
-        return m.hexdigest()
-
     def invalidate_cache(self):
         """
         Invalidate the HTML cache for all the publications of this researcher.
@@ -932,12 +687,11 @@ class Paper(models.Model):
         if new_affiliations is None:
             new_affiliations = [None]*len(new_author_names)
         assert len(new_author_names) == len(new_affiliations)
-        if hasattr(self, 'sorted_authors'):
-            del self.sorted_authors
-        old_authors = list(self.sorted_authors)
+        if hasattr(self, 'authors'):
+            del self.authors
+        old_authors = list(self.authors)
 
         # Invalidate cached properties
-        #del self.sorted_authors
         if hasattr(self, 'interesting_authors'):
             del self.interesting_authors
 
@@ -982,8 +736,8 @@ class Paper(models.Model):
                 author.delete()
 
         # Invalidate our local cache
-        if hasattr(self, 'sorted_authors'):
-            del self.sorted_authors
+        if hasattr(self, 'authors'):
+            del self.authors
 
     def check_authors(self):
         """
@@ -1052,75 +806,12 @@ class Paper(models.Model):
             match.merge(self)
             return match
 
-    def update_visibility(self, prefetched_authors_field=None):
-        """
-        Updates the visibility of the paper. Only papers with
-        known authors should be visible.
-        """
-        p = self
-        if p.visibility != 'VISIBLE' and p.visibility != 'NOT_RELEVANT':
-            return
-        researcher_found = False
-        if prefetched_authors_field:
-            authors = p.__dict__[prefetched_authors_field]
-        else:
-            authors = p.author_set.all()
-        for a in authors:
-            if a.researcher_id:
-                researcher_found = True
-                break
-        if researcher_found and p.visibility != 'VISIBLE':
-            p.visibility = 'VISIBLE'
-            p.save(update_fields=['visibility'])
-        elif not researcher_found and p.visibility != 'NOT_RELEVANT':
-            p.visibility = 'NOT_RELEVANT'
-            p.save(update_fields=['visibility'])
-
-    def __unicode__(self):
-        """
-        Title of the paper
-        """
-        return self.title
-
-    def json(self):
-        """
-        JSON representation of the paper, for dataset dumping purposes
-        """
-        return remove_nones({
-            'title': self.title,
-            'type': self.doctype,
-            'date': self.pubdate.isoformat(),
-            'authors': [a.json() for a in self.sorted_authors],
-            'publications': [p.json() for p in self.publication_set.all()],
-            'records': [r.json() for r in self.oairecord_set.all()],
-            'pdf_url': self.pdf_url,
-            })
-
-
-    def google_scholar_link(self):
-        """
-        Link to search for the paper in Google Scholar
-        """
-        return 'http://scholar.google.com/scholar?'+urlencode({'q':remove_diacritics(self.title)})
-
-    def core_link(self):
-        """
-        Link to search for the paper in CORE
-        """
-        return 'http://core.ac.uk/search/'+quote(remove_diacritics(self.title))
-
-    def is_orphan(self):
-        """
-        When no publication or OAI record is associated with this paper.
-        """
-        return (self.oairecord_set.count() + self.publication_set.count() == 0)
-
     def breadcrumbs(self):
         """
         Returns the navigation path to the paper, for display as breadcrumbs in the template.
         """
         first_researcher = None
-        for author in self.sorted_authors:
+        for author in self.authors:
             if author.researcher:
                 first_researcher = author.researcher
                 break
@@ -1132,26 +823,11 @@ class Paper(models.Model):
         result.append((self.citation, reverse('paper', args=[self.pk])))
         return result
 
-    def citation(self):
-        """
-        A short citation-like representation of the paper. E.g. Joyal and Street, 1992
-        """
-        result = ''
-        if self.author_count == 1:
-            result = self.sorted_authors[0].name.last
-        elif self.author_count == 2:
-            result = "%s and %s" % (
-                self.sorted_authors[0].name.last,
-                self.sorted_authors[1].name.last)
-        else:
-            result = "%s et al." % (
-                self.sorted_authors[0].name.last)
-        result += ', %d' % self.year
-        return result
+
 
 
 # Researcher / Paper binary relation
-class Author(models.Model):
+class Author(models.Model, BareAuthor):
     paper = models.ForeignKey(Paper)
     name = models.ForeignKey(Name)
     position = models.IntegerField(default=0)
@@ -1162,32 +838,6 @@ class Author(models.Model):
     researcher = models.ForeignKey(Researcher, blank=True, null=True, on_delete=models.SET_NULL)
 
     affiliation = models.CharField(max_length=512, null=True, blank=True)
-
-    def __unicode__(self):
-        """
-        Unicode representation: name of the author
-        """
-        return unicode(self.name)
-
-    def json(self):
-        """
-        JSON representation of the author for dataset dumping purposes
-        """
-        orcid_id = self.orcid
-        affiliation = None
-        if not orcid_id and self.affiliation:
-            affiliation = self.affiliation
-        return remove_nones({
-                'name':self.name.json(),
-                'affiliation':affiliation,
-                'orcid':orcid_id,
-                })
-
-    def orcid(self):
-        """
-        If the affiliation looks like an ORCiD, return it, otherwise None
-        """
-        return validate_orcid(self.affiliation)
 
     def get_cluster_id(self):
         """
@@ -1238,15 +888,6 @@ class Author(models.Model):
         """
         return self.researcher != None
 
-    @property
-    def orcid(self):
-        """
-        Returns the ORCID associated to this author (if any).
-        Note that this can be null even if the author is associated with a researcher
-        that has an ORCID.
-        """
-        return validate_orcid(self.affiliation)
-
     def update_name_variants_if_needed(self, default_confidence=0.1):
         """
         Ensure that an author associated with an ORCID has a name
@@ -1263,9 +904,14 @@ class Author(models.Model):
             except Researcher.DoesNotExist:
                 pass
 
-# Publication of these papers (in journals or conference proceedings)
-class Publication(models.Model):
-    # TODO prepare this model for user input (allow for other URLs than DOIs)
+class Publication(models.Model, BarePublication):
+    """
+    A Publication links a DOI to a :class:`Paper`, together with
+    the associated bibliographic metadata, retrived by content negociation.
+    
+    It represents the publication of the paper in a given venue, and holds
+    its availability from the publisher (in the `pdf_url` field).
+    """
     paper = models.ForeignKey(Paper)
     pubtype = models.CharField(max_length=64, choices=PAPER_TYPE_CHOICES)
 
@@ -1286,68 +932,6 @@ class Publication(models.Model):
 
     pdf_url = models.URLField(max_length=2048, blank=True, null=True) # not null when we know the paper is available from them
 
-    def oa_status(self):
-        """
-        Policy of the publisher for this publication
-        """
-        if self.pdf_url:
-            return 'OA'
-        elif self.publisher:
-            if self.publisher.oa_status == 'OA' and self.doi:
-                self.pdf_url = 'http://dx.doi.org/'+self.doi
-                self.save()
-            return self.publisher.oa_status
-        else:
-            return 'UNK'
-
-    def splash_url(self):
-        """
-        Returns the splash url (the DOI url) for that paper (if a DOI is present, otherwise None)
-        """
-        if self.doi:
-            return 'http://dx.doi.org/'+self.doi
-
-    def full_title(self):
-        if self.journal:
-            return self.journal.title
-        else:
-            return self.title
-
-    def publisher_or_default(self):
-        if self.publisher_id:
-            return self.publisher
-        if self.publisher_name:
-            return DummyPublisher(self.publisher_name)
-        return DummyPublisher()
-
-    def __unicode__(self):
-        """
-        Title of the publication, followed by the details of the bibliographic reference.
-        """
-        return self.title
-
-    def json(self):
-        """
-        JSON representation of the publication, for dataset dumping purposes
-        """
-        result = {
-                'doi':self.doi,
-                'pdf_url':self.pdf_url,
-                'type':self.pubtype,
-                'publisher':self.publisher_name,
-                'journal':self.full_title(),
-                'container':self.container,
-                'issue':self.issue,
-                'volume':self.volume,
-                'pages':self.pages,
-                'abstract':self.abstract,
-               }
-        if self.publisher:
-            result['policy'] = self.publisher.json()
-        if self.journal:
-            result['issn'] = self.journal.issn
-        return remove_nones(result)
-
 
 # Rough data extracted through OAI-PMH
 class OaiSource(models.Model):
@@ -1365,7 +949,7 @@ class OaiSource(models.Model):
     class Meta:
         verbose_name = "OAI source"
 
-class OaiRecord(models.Model):
+class OaiRecord(models.Model, BareOaiRecord):
     source = models.ForeignKey(OaiSource)
     about = models.ForeignKey(Paper)
 
@@ -1376,16 +960,14 @@ class OaiRecord(models.Model):
     keywords = models.TextField(null=True,blank=True)
     contributors = models.CharField(max_length=4096, null=True, blank=True)
     pubtype = models.CharField(max_length=64, null=True, blank=True, choices=PAPER_TYPE_CHOICES)
+    last_update = models.DateTimeField(auto_now=True)
 
     # Cached version of source.priority
     priority = models.IntegerField(default=1)
-    def update_priority(self):
-        self.priority = self.source.priority
-        self.save(update_fields=['priority'])
 
-    last_update = models.DateTimeField(auto_now=True)
-    def __unicode__(self):
-        return self.identifier
+    def update_priority(self):
+        super(OaiRecord, self).update_priority()
+        self.save(update_fields=['priority'])
 
     @classmethod
     def new(cls, **kwargs):
@@ -1517,26 +1099,13 @@ class OaiRecord(models.Model):
             for m in matches:
                 return m
 
-    def json(self):
-        """
-        Dumps the OAI record as a JSON object (for dataset dumping purposes)
-        """
-        return remove_nones({
-                'source':self.source.identifier,
-                'identifier':self.identifier,
-                'splash_url':self.splash_url,
-                'pdf_url':self.pdf_url,
-                'abstract':self.description,
-                'keywords':self.keywords,
-                'contributors':self.contributors,
-                'type':self.pubtype,
-                })
-
     class Meta:
         verbose_name = "OAI record"
 
-# A singleton to link to a special instance of AccessStatistics for all papers
 class PaperWorld(SingletonModel):
+    """
+    A singleton to link to a special instance of AccessStatistics for all papers
+    """
     stats = models.ForeignKey(AccessStatistics, null=True)
 
     def update_stats(self):
@@ -1556,8 +1125,10 @@ class PaperWorld(SingletonModel):
     class Meta:
         verbose_name = "Paper World"
 
-# Annotation tool to train the models
 class Annotation(models.Model):
+    """
+    Annotation tool to train the models
+    """
     paper = models.ForeignKey(Paper)
     status = models.CharField(max_length=64)
     user = models.ForeignKey(User)

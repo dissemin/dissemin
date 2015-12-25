@@ -340,3 +340,17 @@ def affiliation_is_greater(a, b):
     return len(a) > len(b)
 
 
+# List utilities
+
+def index_of(elem, choices):
+    """
+    Returns the index of elem (understood as a code) in the list of choices,
+    where choices are expected to be pairs of (code,verbose_description). 
+    """
+    idx = 0
+    for code, lbl in choices:
+        if code == elem:
+            return idx
+        idx += 1
+    return idx
+
