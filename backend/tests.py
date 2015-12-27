@@ -22,6 +22,7 @@ from __future__ import unicode_literals
 
 import unittest
 from django.test import TestCase
+from django.core.exceptions import ObjectDoesNotExist
 from backend.crossref import *
 from backend.romeo import *
 from backend.orcid import *
@@ -434,7 +435,11 @@ class MaintenanceTest(PrefilledTest):
         n = Name.lookup_name(('Anaruic','Leclescuantebrste'))
         n.save()
         cleanup_names()
-        self.assertEqual(Name.lookup_name(('Anaruic','Leclescuantebrste')).pk, None)
+        try:
+            n = Name.objects.get(first='Anaruic',last='Leclescuantebrste')
+            self.assertTrue(False and 'The name has not been cleaned up')
+        except ObjectDoesNotExist:
+            pass
 
     def test_name_initial(self):
         n = self.r2.name
@@ -451,7 +456,7 @@ class MaintenanceTest(PrefilledTest):
         self.assertEqual(p.author_set.get(position=1).name, n)
 
     def test_update_paper_statuses(self):
-        p = Publication.objects.get(doi="10.1002/anie.200800037").paper
+        p = Publication.objects.get(doi="10.1016/j.paid.2009.02.013").paper
         self.assertEqual(p.pdf_url, None)
         pdf_url = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
         oairecord = OaiRecord.new(source=self.arxiv,

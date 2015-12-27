@@ -183,20 +183,29 @@ class BarePaper(BareObject):
     def add_author(self, author):
         """
         Adds a new author to the paper, at the end of the list.
+
+        :returns: the :class:`BareAuthor` that was added (it can differ in subclasses)
         """
         self.bare_authors.append(author)
+        return author
 
     def add_oairecord(self, oairecord):
         """
         Adds a new OAI record to the paper
+
+        :returns: the :class:`BareOaiRecord` that was added (it can differ in subclasses)
         """
         self.bare_oairecords.append(oairecord)
+        return oairecord
 
     def add_publication(self, publication):
         """
         Adds a new publication to the paper
+
+        :returns: the :class:`BarePublication` that was added (it can differ in subclasses)
         """
         self.bare_publications.append(publication)
+        return publication
 
     ### Generic properties that should not need to be reimplemented ###
     @property

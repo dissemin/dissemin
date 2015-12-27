@@ -196,8 +196,9 @@ def refetch_containers():
     # TODO 
     for p in Publication.objects.filter(container__isnull=True):
         metadata = backend.crossref.fetch_metadata_by_DOI(p.doi)
+        if metadata is None:
+            continue
         p.container = metadata.get('container-title')
-        print p.container
         if p.container:
             p.save()
 

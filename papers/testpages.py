@@ -116,7 +116,7 @@ class PaperPagesTest(RenderingTest):
         for a in self.r3.authors_by_year:
             self.checkPage('paper', kwargs={'pk':a.paper_id})
             if a.paper.is_orphan():
-                print paper
+                print a.paper
             self.assertTrue(not a.paper.is_orphan())
 
     def test_paper_by_doi(self):

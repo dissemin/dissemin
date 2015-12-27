@@ -479,7 +479,6 @@ class Name(models.Model, BareName):
             # Actually, this saves the name if it is relevant
             n.update_variants()
 
-        print unicode(author_name)+" : Looked up "+unicode(n)+", created: "+unicode(created)
         return n
 
     def save_if_not_saved(self):
@@ -554,24 +553,32 @@ class Paper(models.Model, BarePaper):
         ist.position = self.author_count
         author.paper = self
         author.save()
+        return author
 
     def add_oairecord(self, oairecord):
         """
         Adds a record (possibly bare) to the paper, by saving it in
         the database
         """
-        oairecord = OaiRecord.from_bare(oairecord)
-        oairecord.about = self
-        oairecord.save()
+        return OaiRecord.new(about=self,
+                **oairecord.__dict__)
 
     def add_publication(self, publication):
         """
         Adds a publication (possibly bare) to the paper, by saving it
         in the database.
         """
+        doi = publication.__dict__.get('doi')
+        if doi is None:
+            raise ValueError("No DOI provided to create the publication")
+        # Test first if there is no publication with this new DOI
+        matches = Publication.objects.filter(doi__exact=doi)
+        if matches:
+            return matches[0]
         publication = Publication.from_bare(publication)
         publication.paper = self
         publication.save()
+        return publication 
 
     ### Other methods, specific to this non-bare subclass ###
 

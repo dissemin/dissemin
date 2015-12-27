@@ -179,10 +179,6 @@ def _create_publication(paper, metadata):
     if not 'container-title' in metadata or not metadata['container-title']:
         return
     doi = to_doi(metadata.get('DOI',None))
-    # Test first if there is no publication with this new DOI
-    matches = Publication.objects.filter(doi__exact=doi)
-    if matches:
-        return matches[0]
 
     title = metadata['container-title']
     if type(title) == type([]):
@@ -227,11 +223,11 @@ def _create_publication(paper, metadata):
     else:
         publisher = fetch_publisher(publisher_name)
 
-    pub = BarePublication(title=title, issue=issue, volume=volume,
+    barepub = BarePublication(title=title, issue=issue, volume=volume,
             pubdate=pubdate, paper=paper, pages=pages,
             doi=doi, pubtype=pubtype, publisher_name=publisher_name,
             journal=journal, publisher=publisher, pdf_url=pdf_url)
-    paper.add_publication(pub)
+    pub = paper.add_publication(barepub)
     cur_pubdate = paper.pubdate
     if type(cur_pubdate) != type(pubdate):
         cur_pubdate = cur_pubdate.date()
@@ -425,8 +421,10 @@ class CrossRefPaperSource(PaperSource):
         publication = create_publication(paper, metadata)
 
         if publication is None: # Creating the publication failed!
-            paper.update_availability() # Make sure the paper only appears if it is still associated
+            paper.update_visibility()
+            # Make sure the paper only appears if it is still associated
             # with another source.
+            # TODO add unit test for this
 
         return paper
 
