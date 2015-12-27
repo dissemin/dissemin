@@ -64,36 +64,94 @@ PAPER_TYPE_PREFERENCE = [x for (x,y) in PAPER_TYPE_CHOICES]
 
 MAX_NAME_LENGTH = 256
 
-class BarePaper(object):
+class BareObject(object):
+    """
+    A Bare object contains the skeleton for a non-bare (Django model) class.
+    Its fields are stored in memory only and it does not correspond to a DB entry.
+    To convert a bare object to its non-bare counterpart, for instance a BareName `b`
+    into a Name, use `Name.from_bare(b)`.
+    """
+    _bare_fields = []
+    _bare_foreign_key_fields = []
+
+    def __init__(self, *args, **kwargs):
+        super(BareObject, self).__init__()
+        #for f in self._bare_fields + self._bare_foreign_key_fields:
+        #    if not hasattr(self, f):
+        #        self.__dict__[f] = None
+        #for f in self._bare_foreign_key_fields:
+        #    if f+'_id' not in self.__dict__:
+        #        self.__dict__[f+'_id'] = None
+        for k, v in kwargs.items():
+            if k in self._bare_fields:
+                self.__dict__[k] = v
+            elif k in self._bare_foreign_key_fields:
+                self.__dict__[k] = v
+                if hasattr(v, 'id'):
+                    self.__dict__[k+'_id'] = v.id
+                else:
+                    self.__dict__[k+'_id'] = None
+
+    @classmethod
+    def from_bare(cls, bare_obj):
+        ist = cls()
+        for f in cls._bare_foreign_key_fields:
+            if hasattr(bare_obj, f+'_id'):
+                ist.__dict__[f+'_id'] = bare_obj.__dict__[f+'_id']
+        for f in cls._bare_fields+cls._bare_foreign_key_fields:
+            if hasattr(bare_obj, f):
+                ist.__dict__[f] = bare_obj.__dict__[f]
+        return ist
+
+
+class BarePaper(BareObject):
     """
     This class is the bare analogue to :class:`Paper`. Its authors are
     lists of :class:`BareName`, and its publications and OAI records are also bare.
     """
+    _bare_fields = [
+        #! The title of the paper
+        'title',
+        #! The fingerprint (robust version of the title, authors and year)
+        'fingerprint',
+        #! The publication date
+        'pubdate',
+        #! The document type
+        'doctype',
+        #! The OA status
+        'oa_status',
+        #! The url where we think the full text is available
+        'pdf_url',
+        #! Visibility
+        'visibility',
+        # Number of `uninteresting` authors
+        'nb_remaining_authors'
+    ]
 
-    #! The title of the paper
-    title = None
-    #! The fingerprint (robust version of the title, authors and year)
-    fingerprint = None
-    #! The publication date
-    pubdate = None
-    #! The document type
-    doctype = None
-    #! The OA status
-    oa_status = None
-    #! The url where we think the full text is available
-    pdf_url = None
-    #! Visibility
-    visibility = None
+    ### Creation
 
-    #! The authors: a list of :class:`BareName`
-    bare_authors = []
-    #! The publications associated with this paper: a list of :class:`BarePublication`
-    bare_publications = []
-    #! The OAI records associated with this paper: a list of :class:`BarePublication`
-    bare_oairecords = []
+    def __init__(self, *args, **kwargs):
+        super(BarePaper, self).__init__(*args, **kwargs)
+        #! The authors: a list of :class:`BareName`
+        self.bare_authors = []
+        #! The publications associated with this paper: a list of :class:`BarePublication`
+        self.bare_publications = []
+        #! The OAI records associated with this paper: a list of :class:`BarePublication`
+        self.bare_oairecords = []
 
-    # Number of `uninteresting` authors
-    nb_remaining_authors = None
+    @classmethod
+    def from_bare(cls, bare_obj):
+        ist = super(BarePaper, cls).from_bare(bare_obj)
+        for a in bare_obj.authors:
+            ist.add_author(a)
+        for p in bare_obj.publications:
+            ist.add_publication(p)
+        for r in bare_obj.oairecords:
+            ist.add_oairecord(r)
+        ist.fingerprint = ist.new_fingerprint()
+        ist.update_availability()
+        ist.update_visibility()
+        return ist
 
     ### Properties to be reimplemented by non-bare Paper ###
     @property
@@ -121,6 +179,24 @@ class BarePaper(object):
         be arbitrary iterables of subclasses of :class:`BareOaiRecord`.
         """
         return self.bare_oairecords
+
+    def add_author(self, author):
+        """
+        Adds a new author to the paper, at the end of the list.
+        """
+        self.bare_authors.append(author)
+
+    def add_oairecord(self, oairecord):
+        """
+        Adds a new OAI record to the paper
+        """
+        self.bare_oairecords.append(oairecord)
+
+    def add_publication(self, publication):
+        """
+        Adds a new publication to the paper
+        """
+        self.bare_publications.append(publication)
 
     ### Generic properties that should not need to be reimplemented ###
     @property
@@ -435,14 +511,18 @@ class BarePaper(object):
         result += ', %d' % self.year
         return result
 
-class BareAuthor(object):
+class BareAuthor(BareObject):
     """
     The base class for the author of a paper.
     This holds the name of the author, its position in the authors list,
     and its possible affiliations.
     """
-    name = None
-    affiliation = None
+    _bare_fields = [
+        'affiliation',
+    ]
+    _bare_foreign_key_fields = [
+        'name',
+    ]
 
     @property
     def orcid(self):
@@ -476,10 +556,19 @@ class BareAuthor(object):
                 })
 
 
-class BareName(object):
-    first = None
-    last = None
-    full = None
+class BareName(BareObject):
+    _bare_fields = [
+        'first',
+        'last',
+        'full',
+    ]
+
+    @classmethod
+    def create_bare(cls, first, last):
+        """
+        Same as `create`, provided for uniformity among bare classes.
+        """
+        return cls.create(first, last)
 
     @property
     def is_known(self):
@@ -524,22 +613,25 @@ class BareName(object):
                }
 
 
-class BarePublication(object):
-    pubtype = None
-    title = None # this is actually the *journal* title
-    journal = None # expected to be an actual model instance
-    journal_id = None
-    container = None
-    publisher = None # expected to be an actual model instance
-    publisher_id = None 
-    publisher_name = None
-    issue = None
-    volume = None
-    pages = None
-    pubdate = None
-    abstract = None
-    doi = None
-    pdf_url = None
+class BarePublication(BareObject):
+    _bare_fields = [
+        'pubtype',
+        'title', # this is actually the *journal* title
+        'container',
+        'publisher_name',
+        'issue',
+        'volume',
+        'pages',
+        'pubdate',
+        'abstract',
+        'doi',
+        'pdf_url',
+        ]
+
+    _bare_foreign_key_fields = [
+        'journal', # expected to be an actual model instance
+        'publisher', # expected to be an actual model instance
+    ]
 
     def oa_status(self):
         """
@@ -613,17 +705,21 @@ class BarePublication(object):
         return remove_nones(result)
 
 
-class BareOaiRecord(object):
-    source = None # expected to be an OaiSorce
+class BareOaiRecord(BareObject):
+    _bare_foreign_key_fields = [
+        'source', # expected to be an OaiSorce
+    ]
     
-    identifier = None
-    splash_url = None
-    pdf_url = None
-    description = None
-    keyworks = None
-    contributors = None
-    pubtype = None
-    priority = None
+    _bare_fields = [
+        'identifier',
+        'splash_url',
+        'pdf_url',
+        'description',
+        'keywords',
+        'contributors',
+        'pubtype',
+        'priority',
+    ]
 
     def update_priority(self):
         self.priority = self.source.priority
@@ -648,7 +744,5 @@ class BareOaiRecord(object):
                 'contributors':self.contributors,
                 'type':self.pubtype,
                 })
-
-
 
 

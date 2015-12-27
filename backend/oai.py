@@ -27,6 +27,7 @@ from oaipmh.error import DatestampError, NoRecordsMatchError, BadArgumentError
 
 from papers.name import parse_comma_name, name_normalization, name_signature, normalize_name_words
 from papers.models import OaiRecord, OaiSource, Name
+from papers.baremodels import BareOaiRecord
 from papers.doi import to_doi
 from papers.utils import sanitize_html
 
@@ -54,8 +55,8 @@ def find_earliest_oai_date(record):
             continue
     return earliest
 
-def add_oai_record(record, source, paper=None):
-    """ Add a record (from OAI-PMH) to the local database """
+def add_oai_record(record, source, paper):
+    """ Add a record (from OAI-PMH) to the given paper """
     header = record[0]
     identifier = header.identifier()
 
@@ -88,16 +89,16 @@ def add_oai_record(record, source, paper=None):
     #pubtype = source.default_pubtype
     pubtype = PUBTYPE_TRANSLATIONS.get(pubtype, source.default_pubtype)
 
-    OaiRecord.new(
+    record = BareOaiRecord(
             source=source,
             identifier=identifier,
-            about=paper,
             description=curdesc,
             keywords=keywords,
             contributors=contributors,
             pubtype=pubtype,
             pdf_url=pdf_url,
             splash_url=splash_url)
+    paper.add_oairecord(record)
 
 
 class OaiPaperSource(PaperSource):

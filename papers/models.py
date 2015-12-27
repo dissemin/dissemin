@@ -403,8 +403,7 @@ class Researcher(models.Model):
         else:
             return self.department.breadcrumbs()+last
 
-
-class Name(BareName, models.Model):
+class Name(models.Model, BareName):
     first = models.CharField(max_length=MAX_NAME_LENGTH)
     last = models.CharField(max_length=MAX_NAME_LENGTH)
     full = models.CharField(max_length=MAX_NAME_LENGTH*2+1, db_index=True)
@@ -468,30 +467,19 @@ class Name(BareName, models.Model):
         Lookup a name (pair of (first,last)) in the model.
         If there is already such a name in the database, returns it,
         otherwise creates one properly.
+
+        In addition to `get_or_create`, this looks for relevant researchers
+        whose name might match this one.
         """
         if author_name == None:
             return
-        n = cls.create(author_name[0], author_name[1])
+        n, created = cls.get_or_create(author_name[0], author_name[1])
 
-        # First, check if the name itself is known
-        # (we do not take the first/last separation into account
-        # here because the exact match is already a quite strong
-        # condition)
-        name = cls.objects.filter(full=n.full).first()
-        if name:
-            return name
+        if created or True:
+            # Actually, this saves the name if it is relevant
+            n.update_variants()
 
-        # Otherwise, we create a name.
-        # The name is not saved yet: the name has to be saved only
-        # if the paper is saved or it is a variant of a known name
-
-        # Then, we look for known names with the same last name.
-        similar_researchers = Researcher.objects.filter(
-                name__last__iexact=n.last).select_related('name')
-
-        # Actually, this saves the name if it is relevant
-        n.update_variants()
-
+        print unicode(author_name)+" : Looked up "+unicode(n)+", created: "+unicode(created)
         return n
 
     def save_if_not_saved(self):
@@ -508,14 +496,6 @@ class Name(BareName, models.Model):
         """Criteria to use in the search view to filter on this name"""
         return "name=%d" % self.pk
 
-    def json(self):
-        """
-        Returns a JSON representation of the name (for dataset dumping purposes)
-        """
-        return {
-                'first':self.first,
-                'last':self.last,
-               }
 
 # Papers matching one or more researchers
 class Paper(models.Model, BarePaper):
@@ -565,6 +545,33 @@ class Paper(models.Model, BarePaper):
         as a queryset.
         """
         return self.oairecord_set.all()
+
+    def add_author(self, author):
+        """
+        Add an author at the end of the authors list.
+        """
+        author = Author.from_bare(author)
+        ist.position = self.author_count
+        author.paper = self
+        author.save()
+
+    def add_oairecord(self, oairecord):
+        """
+        Adds a record (possibly bare) to the paper, by saving it in
+        the database
+        """
+        oairecord = OaiRecord.from_bare(oairecord)
+        oairecord.about = self
+        oairecord.save()
+
+    def add_publication(self, publication):
+        """
+        Adds a publication (possibly bare) to the paper, by saving it
+        in the database.
+        """
+        publication = Publication.from_bare(publication)
+        publication.paper = self
+        publication.save()
 
     ### Other methods, specific to this non-bare subclass ###
 

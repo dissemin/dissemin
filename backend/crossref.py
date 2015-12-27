@@ -37,6 +37,7 @@ from papers.doi import to_doi
 from papers.name import match_names, normalize_name_words, parse_comma_name
 from papers.utils import create_paper_fingerprint, iunaccent, tolerant_datestamp_to_datetime, date_from_dateparts, affiliation_is_greater, jpath, validate_orcid, sanitize_html
 from papers.models import Publication, Paper
+from papers.baremodels import BarePublication
 from publishers.models import *
 
 from backend.papersource import PaperSource
@@ -158,7 +159,7 @@ CROSSREF_PUBTYPE_ALIASES = {
 
 def create_publication(paper, metadata):
     """
-    Creates a Publication entry based on the DOI metadata (as returned by the JSON format
+    Creates a BarePublication entry based on the DOI metadata (as returned by the JSON format
     from CrossRef).
 
     :param paper: the paper the publication object refers to
@@ -226,11 +227,11 @@ def _create_publication(paper, metadata):
     else:
         publisher = fetch_publisher(publisher_name)
 
-    pub = Publication(title=title, issue=issue, volume=volume,
+    pub = BarePublication(title=title, issue=issue, volume=volume,
             pubdate=pubdate, paper=paper, pages=pages,
             doi=doi, pubtype=pubtype, publisher_name=publisher_name,
             journal=journal, publisher=publisher, pdf_url=pdf_url)
-    pub.save()
+    paper.add_publication(pub)
     cur_pubdate = paper.pubdate
     if type(cur_pubdate) != type(pubdate):
         cur_pubdate = cur_pubdate.date()
