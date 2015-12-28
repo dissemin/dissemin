@@ -578,7 +578,7 @@ class Paper(models.Model, BarePaper):
         matches = Publication.objects.filter(doi__exact=doi)
         if matches:
             publi = matches[0]
-            if publi.paper != self.
+            if publi.paper != self:
                 self.merge(publi.paper)
             return publi
 

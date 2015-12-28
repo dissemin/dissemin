@@ -28,6 +28,7 @@ from lxml.html.clean import Cleaner
 from lxml.html import fromstring, _transform_result
 from lxml import etree
 from io import StringIO
+from titlecase import titlecase
 
 ### General string utilities ###
 
