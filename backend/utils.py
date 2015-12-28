@@ -89,17 +89,4 @@ def urlopen_retry(url, **kwargs):# data, timeout, retries, delay, backoff):
             delay=delay*backoff,
             backoff=backoff)
 
-# Recapitalize a title if it is mostly uppercase
-def maybe_recapitalize_title(title):
-    nb_upper = 0
-    nb_lower = 0
-    for i in range(len(title)):
-        if title[i].isupper():
-            nb_upper += 1
-        elif title[i].islower():
-            nb_lower += 1
-
-    if nb_upper > nb_lower:
-        title = titlecase(title)
-    return title
 

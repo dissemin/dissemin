@@ -67,16 +67,18 @@ class PaperTest(django.test.TestCase):
     @classmethod
     def setUpClass(self):
         super(PaperTest, self).setUpClass()
+        self.ccf = get_ccf()
 
     def test_create_by_doi(self):
         p = Paper.create_by_doi('10.1109/synasc.2010.88')
+        p = self.ccf.save_paper(p)
         self.assertEqual(p.title, 'Monitoring and Support of Unreliable Services')
         self.assertEqual(p.publication_set.all().get().doi, '10.1109/synasc.2010.88')
 
     def test_publication_pdf_url(self):
         # This paper is gold OA
         p = Paper.create_by_doi('10.1007/BF02702259')
-        print json.dumps(p.json())
+        p = self.ccf.save_paper(p)
         # so the pdf_url of the publication should be set
         self.assertEqual(p.publication_set.all().get().pdf_url.lower(), 'http://dx.doi.org/10.1007/BF02702259'.lower())
 
@@ -91,11 +93,11 @@ class PaperTest(django.test.TestCase):
     def test_merge(self):
         # Get a paper with CrossRef metadata
         p = Paper.create_by_doi('10.1111/j.1744-6570.1953.tb01038.x')
-        p.save()
-        ccf = get_ccf()
+        p = self.ccf.save_paper(p)
         # Create a copy with slight variations
         names = map(Name.lookup_name, [('M. H.','Jones'),('R. H.', 'Haase'),('S. F.','Hulbert')])
-        p2 = ccf.get_or_create_paper('A Survey of the Literature on Technical Positions', names,
+        p2 = self.ccf.get_or_create_paper(
+                'A Survey of the Literature on Technical Positions', names,
                 date(year=2011, month=01, day=01))
         # The two are not merged because of the difference in the title
         self.assertNotEqual(p, p2)

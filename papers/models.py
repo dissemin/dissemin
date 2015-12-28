@@ -545,12 +545,15 @@ class Paper(models.Model, BarePaper):
         """
         return self.oairecord_set.all()
 
-    def add_author(self, author):
+    def add_author(self, author, position=None):
         """
         Add an author at the end of the authors list.
         """
         author = Author.from_bare(author)
-        ist.position = self.author_count
+        if position is not None:
+            author.position = position
+        else:
+            author.position = self.author_count
         author.paper = self
         author.save()
         return author
@@ -752,18 +755,6 @@ class Paper(models.Model, BarePaper):
         # Invalidate our local cache
         if hasattr(self, 'authors'):
             del self.authors
-
-    def check_authors(self):
-        """
-        Check that all authors are associated with a valid name.
-        (This is normally enforced by the database but in some contexts
-        where names are cached, this was not the case.)
-        """
-        for a in self.author_set.all():
-            if a.name_id is None:
-                raise ValueError("Author references a null name!")
-            elif a.name is None:
-                raise ValueError("Name referenced by author could not be found!")
 
     def merge(self, paper):
         """

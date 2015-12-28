@@ -95,7 +95,7 @@ def fetch_everything_for_researcher(pk):
     try:
         for key,source in sources:
             update_researcher_task(r, key)
-            source.fetch(r, incremental=True)
+            source.fetch_and_save(r, incremental=True)
         update_researcher_task(r, None)
 
     except MetadataSourceException as e:

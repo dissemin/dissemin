@@ -32,7 +32,8 @@ from papers.errors import MetadataSourceException
 from papers.doi import to_doi
 from papers.name import match_names, normalize_name_words, parse_comma_name, shallower_name_similarity
 from papers.utils import create_paper_fingerprint, iunaccent, tolerant_datestamp_to_datetime, date_from_dateparts, validate_orcid, parse_int
-from papers.models import Publication, Paper, Name, OaiSource, OaiRecord
+from papers.models import OaiSource
+from papers.baremodels import BarePaper, BareOaiRecord
 from papers.bibtex import parse_bibtex
 from papers.orcid import *
 
@@ -231,13 +232,15 @@ class OrcidPaperSource(PaperSource):
                 continue
 
             # Create paper:
-            paper = self.ccf.get_or_create_paper(title, authors, pubdate, None, 'VISIBLE', affiliations)
-            record = OaiRecord.new(
+            paper = BarePaper.create(title, authors, pubdate, 'VISIBLE', affiliations)
+
+            record = BareOaiRecord(
                     source=orcid_oai_source,
                     identifier=identifier,
-                    about=paper,
                     splash_url='http://orcid.org/'+id,
                     pubtype=doctype)
+
+            paper.add_oairecord(record)
             yield paper
 
         if use_doi:
@@ -258,12 +261,12 @@ class OrcidPaperSource(PaperSource):
                     paper = crps.save_doi_metadata(metadata, affiliations)
                     if not paper:
                         continue
-                    record = OaiRecord.new(
+                    record = BareOaiRecord(
                             source=orcid_oai_source,
                             identifier='orcid:'+id+':'+metadata['DOI'],
-                            about=paper,
                             splash_url='http://orcid.org/'+id,
                             pubtype=paper.doctype)
+                    paper.add_oairecord(record)
                     yield paper
                 except (KeyError, ValueError, TypeError):
                     pass

@@ -30,6 +30,7 @@ from backend.oai import *
 from backend.tasks import *
 from backend.maintenance import *
 from papers.models import *
+from papers.baremodels import *
 from papers.errors import *
 from publishers.models import *
 
@@ -113,11 +114,12 @@ def check_paper(asserter, paper):
     """
     All sorts of tests to ensure a paper is well-behaved
     """
+    asserter.assertIsInstance(paper, BarePaper)
     # All authors should have valid names
     paper.check_authors()
     # Visible papers should have at least one source
     if paper.visibility == 'VISIBLE': 
-        asserter.assertTrue(paper.oairecord_set.count()+paper.publication_set.count() > 0)
+        asserter.assertTrue(len(paper.oairecords)+len(paper.publications) > 0)
 
 # Generic test series for a PaperSource instance
 class PaperSourceTest(PrefilledTest):
@@ -131,9 +133,10 @@ class PaperSourceTest(PrefilledTest):
         self.researcher = self.r4
 
     def test_fetch(self):
-        papers = list(self.source.fetch_papers(self.researcher))
-        for p in papers:
-            check_paper(self, p)
+        papers = list(self.source.fetch_bare(self.researcher))
+        for paper in papers:
+            check_paper(self, paper)
+            self.ccf.save_paper(paper)
         self.assertTrue(len(papers) > 1)
         self.check_papers(papers)
 
@@ -171,16 +174,16 @@ class CrossRefIntegrationTest(PaperSourceTest):
         self.assertEqual(p.paper.author_set.all()[0].affiliation, 'École Normale Supérieure, Paris')
         # Check that each paper has a publication
         for p in papers:
-            self.assertTrue(len(p.publication_set.all()) > 0)
+            self.assertTrue(len(p.publications) > 0)
 
     def check_previously_present_papers_are_attributed(self):
         # Fetch papers from a researcher
         r = Researcher.get_or_create_by_name('Laurent','Bienvenu')
-        self.source.fetch(r, incremental=True)
+        self.source.fetch_and_save(r, incremental=True)
 
         # Now fetch a coauthor of him
         r2 = Researcher.get_or_create_by_orcid('0000-0003-1698-5150')
-        self.source.fetch(r2, incremental=True)
+        self.source.fetch_and_save(r2, incremental=True)
 
         # This paper should be attributed
         p = Paper.objects.get(publication__doi='10.1016/j.jcss.2015.04.004')
@@ -404,8 +407,8 @@ class MaintenanceTest(PrefilledTest):
     def setUpClass(self):
         super(MaintenanceTest, self).setUpClass()
         self.ccf = get_ccf()
-        crps = CrossRefPaperSource(self.ccf)
-        crps.fetch(self.r2)
+        self.crps = CrossRefPaperSource(self.ccf)
+        self.crps.fetch_and_save(self.r2)
         consolidate_paper(Publication.objects.get(doi='10.1021/cb400178m').paper_id)
 
     def test_create_publisher_aliases(self):
@@ -448,6 +451,9 @@ class MaintenanceTest(PrefilledTest):
         self.assertEqual(p.author_set.get(position=0).name, n)
 
     def test_merge_names(self):
+        paper = self.crps.create_paper_by_doi("10.1002/anie.200800037")
+        paper = self.ccf.save_paper(paper)
+
         n = Name.lookup_name(('Isabelle','Autard'))
         n.save()
         merge_names(self.r1.name, n)
@@ -456,7 +462,8 @@ class MaintenanceTest(PrefilledTest):
         self.assertEqual(p.author_set.get(position=1).name, n)
 
     def test_update_paper_statuses(self):
-        p = Publication.objects.get(doi="10.1016/j.paid.2009.02.013").paper
+        p = self.crps.create_paper_by_doi("10.1016/j.bmc.2005.06.035")
+        p = self.ccf.save_paper(p)
         self.assertEqual(p.pdf_url, None)
         pdf_url = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
         oairecord = OaiRecord.new(source=self.arxiv,
@@ -469,7 +476,7 @@ class MaintenanceTest(PrefilledTest):
 
     def test_cleanup(self):
         oaips = OaiPaperSource(self.ccf)
-        oaips.fetch(self.r3)
+        oaips.fetch_and_save(self.r3)
         cleanup_titles()
         cleanup_abstracts()
 

@@ -88,8 +88,8 @@ class PaperPagesTest(RenderingTest):
         ccf = get_ccf()
         crps = CrossRefPaperSource(ccf)
         oai = OaiPaperSource(ccf)
-        crps.fetch(self.r3, incremental=True)
-        oai.fetch(self.r3, incremental=True)
+        crps.fetch_and_save(self.r3, incremental=True)
+        oai.fetch_and_save(self.r3, incremental=True)
 
     def test_index(self):
         self.checkHtml(self.getPage('index'))

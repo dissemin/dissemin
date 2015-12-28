@@ -34,6 +34,7 @@ from django.utils.functional import cached_property
 from django.core.exceptions import ObjectDoesNotExist
 
 from papers.utils import *
+from papers.name import to_plain_name
 from statistics.models import COMBINED_STATUS_CHOICES, PDF_STATUS_CHOICES, STATUS_CHOICES_HELPTEXT
 from publishers.models import Publisher, Journal, OA_STATUS_CHOICES, OA_STATUS_PREFERENCE, DummyPublisher
 
@@ -76,12 +77,12 @@ class BareObject(object):
 
     def __init__(self, *args, **kwargs):
         super(BareObject, self).__init__()
-        #for f in self._bare_fields + self._bare_foreign_key_fields:
-        #    if not hasattr(self, f):
-        #        self.__dict__[f] = None
-        #for f in self._bare_foreign_key_fields:
-        #    if f+'_id' not in self.__dict__:
-        #        self.__dict__[f+'_id'] = None
+        for f in self._bare_fields + self._bare_foreign_key_fields:
+            if not hasattr(self, f):
+                self.__dict__[f] = None
+        for f in self._bare_foreign_key_fields:
+            if f+'_id' not in self.__dict__:
+                self.__dict__[f+'_id'] = None
         for k, v in kwargs.items():
             if k in self._bare_fields:
                 self.__dict__[k] = v
@@ -94,9 +95,19 @@ class BareObject(object):
 
     @classmethod
     def from_bare(cls, bare_obj):
-        ist = cls()
+        kwargs = {}
+        for k, v in bare_obj.__dict__.items():
+            if k in cls._bare_fields:
+                kwargs[k] = v
+            elif k in cls._bare_foreign_key_fields:
+                kwargs[k] = v
+
+        ist = cls(**kwargs)
+        return ist
         for f in cls._bare_foreign_key_fields:
-            if hasattr(bare_obj, f+'_id'):
+            if hasattr(bare_obj.__dict__.get(f), 'id') and bare_obj.__dict__[f].id:
+                ist.__dict__[f+'_id'] = bare_obj.__dict__[f].id
+            elif hasattr(bare_obj, f+'_id'):
                 ist.__dict__[f+'_id'] = bare_obj.__dict__[f+'_id']
         for f in cls._bare_fields+cls._bare_foreign_key_fields:
             if hasattr(bare_obj, f):
@@ -124,8 +135,6 @@ class BarePaper(BareObject):
         'pdf_url',
         #! Visibility
         'visibility',
-        # Number of `uninteresting` authors
-        'nb_remaining_authors'
     ]
 
     ### Creation
@@ -138,12 +147,21 @@ class BarePaper(BareObject):
         self.bare_publications = []
         #! The OAI records associated with this paper: a list of :class:`BarePublication`
         self.bare_oairecords = []
+        #! If there are lots of authors, how many are we hiding?
+        self.nb_remaining_authors = None
 
     @classmethod
-    def from_bare(cls, bare_obj):
+    def from_bare(cls, bare_obj, with_authors=True):
+        """
+        Creates an instance of this class from a :class:`BarePaper`.
+        
+        :param with_authors: set to False if the authors should not be created.
+        """
         ist = super(BarePaper, cls).from_bare(bare_obj)
-        for a in bare_obj.authors:
-            ist.add_author(a)
+        ist.save()
+        if with_authors:
+            for idx, a in enumerate(bare_obj.authors):
+                ist.add_author(a, position=idx)
         for p in bare_obj.publications:
             ist.add_publication(p)
         for r in bare_obj.oairecords:
@@ -152,6 +170,53 @@ class BarePaper(BareObject):
         ist.update_availability()
         ist.update_visibility()
         return ist
+
+
+    @classmethod
+    def create(cls, title, author_names, pubdate, visibility='VISIBLE', affiliations=None):
+        """
+        Creates a (bare) paper. To save it to the database, we
+        need to run the clustering algorithm to resolve Researchers for the authors,
+        using `save_paper` from :class:`ClusteringContext`.
+
+        :param title: The title of the paper (as a string). If it is too long for the database,
+                      ValueError is raised.
+        :param author_names: The ordered list of author names, as Name objects.
+        :param pubdate: The publication date, as a python date object
+        :param visibility: The visibility of the paper if it is created. If another paper
+                    exists, the visibility will be set to the maximum of the two possible
+                    visibilities.
+        :param affiliations: A list of (possibly None) affiliations for the authors. It has to 
+                    have the same length as the list of author names. Affiliations can be replaced by ORCIDs.
+        """
+        plain_names = map(to_plain_name, author_names)
+        
+        if not title or not author_names or not pubdate:
+            raise ValueError("A title, pubdate and authors have to be provided to create a paper.")
+
+        if affiliations is not None and len(author_names) != len(affiliations):
+            raise ValueError("The number of affiliations and authors have to be equal.")
+        if visibility not in [c for (c,_) in VISIBILITY_CHOICES]:
+            raise ValueError("Invalid paper visibility: %s" % unicode(visibility))
+
+        title = sanitize_html(title)
+        title = maybe_recapitalize_title(title)
+
+        p = cls()
+        p.title = title
+        p.pubdate = pubdate
+        p.visibility = visibility
+        for idx, n in enumerate(author_names):
+            a = BareAuthor()
+            a.name = n
+            if affiliations is not None:
+                a.affiliation = affiliations[idx]
+            p.add_author(a, position=idx)
+
+        p.fingerprint = p.new_fingerprint()
+
+        return p
+
 
     ### Properties to be reimplemented by non-bare Paper ###
     @property
@@ -180,9 +245,11 @@ class BarePaper(BareObject):
         """
         return self.bare_oairecords
 
-    def add_author(self, author):
+    def add_author(self, author, position=None):
         """
         Adds a new author to the paper, at the end of the list.
+
+        :param position: if provided, set the author to the given position.
 
         :returns: the :class:`BareAuthor` that was added (it can differ in subclasses)
         """
@@ -255,6 +322,12 @@ class BarePaper(BareObject):
         """
         return [a.name for a in self.authors]
 
+    def affiliations(self):
+        """
+        The list of affiliations of all authors
+        """
+        return [a.affiliation for a in self.authors]
+
     def bare_author_names(self):
         """
         The list of name pairs (first,last) of the authors
@@ -296,6 +369,16 @@ class BarePaper(BareObject):
             return self.interesting_authors
         else:
             return self.authors
+
+    def check_authors(self):
+        """
+        Check that all authors are associated with a valid name.
+        (This is normally enforced by the database but in some contexts
+        where names are cached, this was not the case.)
+        """
+        for a in self.authors:
+            if a.name is None:
+                raise ValueError("Name referenced by author could not be found!")
 
     # Publications ---------------------------------------------
     
@@ -651,7 +734,6 @@ class BarePublication(BareObject):
         elif self.publisher:
             if self.publisher.oa_status == 'OA' and self.doi:
                 self.pdf_url = 'http://dx.doi.org/'+self.doi
-                self.save()
             return self.publisher.oa_status
         else:
             return 'UNK'

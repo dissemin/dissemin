@@ -55,20 +55,28 @@ class PaperSource(object):
         """
         raise NotImplemented("fetch_papers should be implemented by the subclass")
 
-    def fetch(self, researcher, incremental=False):
+    def fetch_bare(self, researcher):
         """
-        This function is the one users should use to fetch papers.
+        This function returns a generator of :class:`BarePaper`s fetched for the given researcher.
+        """
+        for p in self.fetch_papers(researcher):
+            # If an OAI source is set up to check the availability, do so
+            if self.oai:
+                p = self.oai.fetch_accessibility(p)
+            yield p
+
+    def fetch_and_save(self, researcher, incremental=False):
+        """
+        Fetch papers and save them to the database.
 
         :param incremental: When set to true, papers are clustered
             and commited one after the other. This is useful when
             papers are fetched on the fly for an user.
         """
-        count = 0
-        for p in self.fetch_papers(researcher):
-            count += 1
-            # If an OAI source is set up to check the availability, do so
-            if self.oai:
-                p = self.oai.fetch_accessibility(p)
+        for p in self.fetch_bare(researcher):        
+            # Save the paper as non-bare
+            p = self.ccf.save_paper(p)
+
             # If clustering happens incrementally, cluster the researcher
             if incremental:
                 # First, check whether this paper is associated with an ORCID id

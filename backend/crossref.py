@@ -37,7 +37,7 @@ from papers.doi import to_doi
 from papers.name import match_names, normalize_name_words, parse_comma_name
 from papers.utils import create_paper_fingerprint, iunaccent, tolerant_datestamp_to_datetime, date_from_dateparts, affiliation_is_greater, jpath, validate_orcid, sanitize_html
 from papers.models import Publication, Paper
-from papers.baremodels import BarePublication
+from papers.baremodels import BarePublication, BarePaper
 from publishers.models import *
 
 from backend.papersource import PaperSource
@@ -348,8 +348,7 @@ class CrossRefPaperSource(PaperSource):
                     self.oai.fetch_accessibility(p)
             except ValueError:
                 pass
-        if p is not None:
-            return Paper.objects.get(pk=p.pk)
+        return p
 
     def save_doi_metadata(self, metadata, extra_affiliations=None, allow_unknown_authors=False):
         """
@@ -412,12 +411,9 @@ class CrossRefPaperSource(PaperSource):
                 if affiliation_is_greater(extra_affiliations[i],affiliations[i]):
                     affiliations[i] = extra_affiliations[i]
 
-        print "Saved doi "+doi
-        paper = self.ccf.get_or_create_paper(title, authors, pubdate, 
-                None, 'VISIBLE', affiliations)
-        # The doi is not passed to this function so that it does not try to refetch the metadata
-        # from CrossRef
-        # create the publication, because it would re-fetch the metadata from CrossRef
+        paper = BarePaper.create(title, authors, pubdate, 
+                'VISIBLE', affiliations)
+
         publication = create_publication(paper, metadata)
 
         if publication is None: # Creating the publication failed!

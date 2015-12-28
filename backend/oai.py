@@ -27,7 +27,7 @@ from oaipmh.error import DatestampError, NoRecordsMatchError, BadArgumentError
 
 from papers.name import parse_comma_name, name_normalization, name_signature, normalize_name_words
 from papers.models import OaiRecord, OaiSource, Name
-from papers.baremodels import BareOaiRecord
+from papers.baremodels import BareOaiRecord, BarePaper
 from papers.doi import to_doi
 from papers.utils import sanitize_html
 
@@ -36,6 +36,7 @@ from backend.extractors import *
 from backend.proxy import *
 from backend.name_cache import name_lookup_cache
 from backend.pubtype_translations import *
+from backend import crossref
 
 import re
 
@@ -241,7 +242,17 @@ class OaiPaperSource(PaperSource):
                 continue
 
             print 'Saving record %s' % record[0].identifier()
-            paper = self.ccf.get_or_create_paper(metadata['title'][0], authors, pubdate, doi)
+            paper = BarePaper.create(metadata['title'][0], authors, pubdate)
+
+            if doi:
+                try:
+                    metadata = crossref.fetch_metadata_by_DOI(doi)
+                    crossref.create_publication(paper, metadata)
+                except MetadataSourceException as e:
+                    print("Warning, metadata source exception while fetching DOI "+doi+":\n"+unicode(e))
+                    pass
+
+
             if paper is None:
                 print "Paper creation failed, skipping"
                 continue

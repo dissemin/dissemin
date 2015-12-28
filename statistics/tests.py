@@ -34,8 +34,8 @@ class StatisticsTest(PrefilledTest):
         ccf = get_ccf()
         crps = CrossRefPaperSource(ccf)
         oai = OaiPaperSource(ccf)
-        crps.fetch(self.r2, incremental=True)
-        oai.fetch(self.r2, incremental=True)
+        crps.fetch_and_save(self.r2, incremental=True)
+        oai.fetch_and_save(self.r2, incremental=True)
 
     def validStats(self, stats):
         self.assertTrue(stats.check_values())

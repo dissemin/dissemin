@@ -28,7 +28,7 @@ class DepositPagesTest(RenderingTest):
         super(DepositPagesTest, self).setUpClass()
         ccf = get_ccf()
         crps = CrossRefPaperSource(ccf)
-        crps.fetch(self.r3, incremental=True)
+        crps.fetch_and_save(self.r3, incremental=True)
 
     def test_start_deposit_unauthenticated(self):
         paper = self.r3.author_set.all()[0].paper
