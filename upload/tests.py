@@ -56,7 +56,6 @@ class ThumbnailTest(unittest.TestCase):
     def test_empty_pdf(self):
         self.assertEqual(self.thumbnail('mediatest/empty.pdf'), None)
 
-    @unittest.expectedFailure
     def test_wrong_file_format(self):
         self.assertEqual(self.thumbnail('mediatest/red-circle.png'), None)
 

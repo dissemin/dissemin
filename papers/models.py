@@ -577,7 +577,11 @@ class Paper(models.Model, BarePaper):
         # Test first if there is no publication with this new DOI
         matches = Publication.objects.filter(doi__exact=doi)
         if matches:
-            return matches[0]
+            publi = matches[0]
+            if publi.paper != self.
+                self.merge(publi.paper)
+            return publi
+
         publication = Publication.from_bare(publication)
         publication.paper = self
         publication.save()
