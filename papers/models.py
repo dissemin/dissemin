@@ -255,7 +255,8 @@ class Researcher(models.Model):
     @property
     def authors_by_year(self):
         """:py:class:`Author` objects for this researcher, filtered by decreasing publication date"""
-        return Author.objects.filter(researcher_id=self.id).order_by('-paper__pubdate')
+        return self.author_set.order_by('-paper__pubdate')
+
     @property
     def name_variants(self):
         """
@@ -355,7 +356,7 @@ class Researcher(models.Model):
             name = profile.name
             homepage = profile.homepage
             email = profile.email
-            researcher = Researcher.get_or_create_by_name(name[0],name[1], orcid=orcid,
+            researcher = Researcher.create_by_name(name[0],name[1], orcid=orcid,
                     user=user, homepage=homepage, email=email)
 
             # Ensure that extra info is added.
@@ -375,7 +376,12 @@ class Researcher(models.Model):
         return researcher
 
     @classmethod
-    def get_or_create_by_name(cls, first, last, **kwargs):
+    def create_by_name(cls, first, last, **kwargs):
+        """
+        Creates a :class:`Researcher` with the given name.
+        If an ORCID is provided, and a researcher with this ORCID already exists,
+        this researcher will be returned. In any other case, a new researcher will be created.
+        """
         name, created = Name.get_or_create(first, last)
 
         if kwargs.get('orcid') is not None:
@@ -384,7 +390,10 @@ class Researcher(models.Model):
                 raise ValueError('Invalid ORCiD: "%s"' % orcid)
             researcher, created = Researcher.objects.get_or_create(name=name, orcid=orcid, defaults=kwargs)
         else:
-            researcher, created = Researcher.objects.get_or_create(name=name, defaults=kwargs)
+            args = kwargs.copy()
+            args['name'] = name
+            researcher = Researcher.objects.create(**args)
+            created = True
 
         if created:
             researcher.update_variants()
@@ -402,6 +411,15 @@ class Researcher(models.Model):
             return last
         else:
             return self.department.breadcrumbs()+last
+
+    @cached_property
+    def latest_paper(self):
+        """
+        Returns the latest paper authored by this researcher, if any.
+        """
+        lst = list(self.authors_by_year[:1])
+        if lst:
+            return lst[0].paper
 
 class Name(models.Model, BareName):
     first = models.CharField(max_length=MAX_NAME_LENGTH)

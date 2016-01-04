@@ -5,9 +5,12 @@
 {{ researcher }}, 
 {% if researcher.orcid %}
 <span>{{ researcher.orcid|small_orcid }}</span>
+{% elif researcher.homepage %}
+<span><span class="glyphicon glyphicon-home"></span> <a href="{{ researcher.homepage }}">{{ researcher.homepage|domain }}</a></span>
+{% elif researcher.latest_paper %}
+<span class="latestPaper">{{ researcher.latest_paper.title }}</span>
+{% else %}
+<span>{% trans "(empty profile)" %}</span>
 {% endif %}
 
-{% if researcher.homepage %}
-<span><span class="glyphicon glyphicon-home"></span> <a href="{{ researcher.homepage }}">{{ researcher.homepage|domain }}</a></span>
-{% endif %}
 <a href="{{ researcher.url }}" class="btn btn-success btn-sm confirmSuggestion">{% trans "Yes" %}</a>

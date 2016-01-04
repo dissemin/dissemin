@@ -127,16 +127,11 @@ def newUnaffiliatedResearcher(request):
         # Check that the researcher is not already known under a different name.
         if not form.cleaned_data.get('force'):
             name, created = Name.get_or_create(first, last)
-            try:
-                researcher = Researcher.objects.get(name=name)
-                return {'url':researcher.url}
-            except (Researcher.DoesNotExist, MultipleObjectsReturned):
-                pass
             candidates = researcherCandidatesByName(name)
             if candidates:
                 return {'disambiguation':candidates}
 
-        researcher = Researcher.get_or_create_by_name(first, last)
+        researcher = Researcher.create_by_name(first, last)
         researcher.fetch_everything_if_outdated()
         return {'url':researcher.url}
     else:
@@ -157,7 +152,7 @@ def addResearcher(request):
             homepage = form.cleaned_data['homepage']
 
             try:
-                researcher = Researcher.get_or_create_by_name(first, last,
+                researcher = Researcher.create_by_name(first, last,
                         department=dept, email=email, role=role, homepage=homepage)
             except ValueError:
                 return HttpResponseForbidden('Researcher already present', content_type='text/plain')

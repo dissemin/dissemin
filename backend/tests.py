@@ -90,12 +90,12 @@ class PrefilledTest(TestCase):
         self.i, _ = Institution.objects.get_or_create(name='ENS')
         self.d, _ = Department.objects.get_or_create(name='Chemistry dept', institution=self.i)
         self.di, _ = Department.objects.get_or_create(name='Comp sci dept', institution=self.i)
-        self.r1 = Researcher.get_or_create_by_name('Isabelle', 'Aujard', department=self.d)
-        self.r2 = Researcher.get_or_create_by_name('Ludovic', 'Jullien', department=self.d)
-        self.r3 = Researcher.get_or_create_by_name('Antoine', 'Amarilli', department=self.di)
-        self.r4 = Researcher.get_or_create_by_name('Antonin', 'Delpeuch', department=self.di, orcid=
+        self.r1 = Researcher.create_by_name('Isabelle', 'Aujard', department=self.d)
+        self.r2 = Researcher.create_by_name('Ludovic', 'Jullien', department=self.d)
+        self.r3 = Researcher.create_by_name('Antoine', 'Amarilli', department=self.di)
+        self.r4 = Researcher.create_by_name('Antonin', 'Delpeuch', department=self.di, orcid=
             '0000-0002-8612-8827')
-        self.r5 = Researcher.get_or_create_by_name('Terence', 'Tao')
+        self.r5 = Researcher.create_by_name('Terence', 'Tao')
         self.hal, _ = OaiSource.objects.get_or_create(identifier='hal',
                 name='HAL',
                 default_pubtype='preprint')
@@ -148,7 +148,7 @@ class PaperSourceTest(PrefilledTest):
         pass
 
     def test_empty(self):
-        emptyres = Researcher.get_or_create_by_name('Anrscuienrsc','Lecsrcudresies')
+        emptyres = Researcher.create_by_name('Anrscuienrsc','Lecsrcudresies')
         papers = list(self.source.fetch_papers(emptyres))
         self.assertEqual(papers, [])
 
@@ -178,7 +178,7 @@ class CrossRefIntegrationTest(PaperSourceTest):
 
     def check_previously_present_papers_are_attributed(self):
         # Fetch papers from a researcher
-        r = Researcher.get_or_create_by_name('Laurent','Bienvenu')
+        r = Researcher.create_by_name('Laurent','Bienvenu')
         self.source.fetch_and_save(r, incremental=True)
 
         # Now fetch a coauthor of him
@@ -453,6 +453,8 @@ class MaintenanceTest(PrefilledTest):
     def test_merge_names(self):
         paper = self.crps.create_paper_by_doi("10.1002/anie.200800037")
         paper = self.ccf.save_paper(paper)
+        print paper.publications[0].doi
+        publi = Publication.objects.get(doi='10.1002/anie.200800037')
 
         n = Name.lookup_name(('Isabelle','Autard'))
         n.save()

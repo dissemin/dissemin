@@ -219,6 +219,13 @@ h4
     text-align: center;
 }
 
+/* Researcher lookup form results */
+
+.latestPaper
+{
+    font-style: italic;
+}
+
 /* List of publications */
 
 li 
