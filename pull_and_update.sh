@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# go into directory of script
+DIR="$( cd "$( dirname "$0" )" && pwd )"
+cd "$DIR"
+
 set -e
 echo "### Updating the git repository"
 echo "> git checkout master"
