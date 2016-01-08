@@ -53,7 +53,6 @@ def cleanup_researchers():
     for p in Researcher.objects.all():
         nb_papers = Paper.objects.filter(author__researcher=p).count()
         if not nb_papers:
-            print "Deleting researcher id "+str(p.pk)
             deleted_count += 1
             p.delete()
     print "Deleted "+str(deleted_count)+" researchers"
@@ -68,7 +67,6 @@ def cleanup_names(dry_run = False):
         if NameVariant.objects.filter(name=n).count() == 0:
             nb_papers = Author.objects.filter(name=n).count()
             if not nb_papers:
-                print "Deleting name id "+str(n.pk)+": "+unicode(n)
                 deleted_count += 1
                 if not dry_run:
                     n.delete()
