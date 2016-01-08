@@ -31,9 +31,9 @@ from backend.globals import get_ccf
 
 class ResearcherTest(django.test.TestCase):
     def test_creation(self):
-        r = Researcher.get_or_create_by_name('Marie', 'Farge')
-        r2 = Researcher.get_or_create_by_name(' Marie', ' Farge')
-        self.assertEqual(r, r2)
+        r = Researcher.create_by_name('Marie', 'Farge')
+        r2 = Researcher.create_by_name(' Marie', ' Farge')
+        self.assertNotEqual(r, r2)
 
         r3 = Researcher.get_or_create_by_orcid('0000-0002-4445-8625')
         self.assertNotEqual(r, r3)
