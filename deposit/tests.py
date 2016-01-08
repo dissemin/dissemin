@@ -26,7 +26,6 @@ from django.contrib.auth.models import User
 from django.forms import Form
 from papers.models import OaiSource
 from backend.tests import PrefilledTest
-from backend.globals import get_ccf
 from deposit.models import Repository, DepositRecord
 from deposit.protocol import DepositResult
 from django.core.files.uploadedfile import InMemoryUploadedFile
@@ -54,7 +53,6 @@ class ProtocolTest(PrefilledTest):
              raise unittest.SkipTest("Base test")
         if 'TRAVIS' in os.environ:
             raise unittest.SkipTest("Skipping deposit test on Travis to avoid mass submissions to sandboxes")
-        self.ccf = get_ccf()
         self.p1 = self.ccf.get_or_create_paper(
                 "This is a test paper",
                 [self.r1.name, self.r2.name, self.r4.name],

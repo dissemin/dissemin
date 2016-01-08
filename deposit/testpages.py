@@ -19,15 +19,13 @@
 #
 
 from papers.testpages import RenderingTest
-from backend.globals import get_ccf
 from backend.crossref import CrossRefPaperSource
 
 class DepositPagesTest(RenderingTest):
     @classmethod
     def setUpClass(self):
         super(DepositPagesTest, self).setUpClass()
-        ccf = get_ccf()
-        crps = CrossRefPaperSource(ccf)
+        crps = CrossRefPaperSource(self.ccf)
         crps.fetch_and_save(self.r3, incremental=True)
 
     def test_start_deposit_unauthenticated(self):

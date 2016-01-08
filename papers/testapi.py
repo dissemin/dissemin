@@ -25,7 +25,6 @@ import django.test
 import json
 from django.core.urlresolvers import reverse
 from backend.tests import PrefilledTest
-from backend.globals import get_ccf
 from backend.crossref import CrossRefPaperSource
 from backend.oai import OaiPaperSource
 from papers.testajax import JsonRenderingTest
@@ -35,9 +34,8 @@ class PaperApiTest(JsonRenderingTest):
     @classmethod
     def setUpClass(self):
         super(PaperApiTest, self).setUpClass()
-        ccf = get_ccf()
-        crps = CrossRefPaperSource(ccf)
-        oai = OaiPaperSource(ccf)
+        crps = CrossRefPaperSource(self.ccf)
+        oai = OaiPaperSource(self.ccf)
         crps.fetch_and_save(self.r3, incremental=True)
         oai.fetch_and_save(self.r3, incremental=True)
 

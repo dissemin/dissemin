@@ -22,7 +22,6 @@ Tests statistics update and statistics consistency.
 
 from django.test import TestCase
 from backend.tests import PrefilledTest
-from backend.globals import get_ccf
 from backend.crossref import CrossRefPaperSource
 from backend.oai import OaiPaperSource
 from papers.models import PaperWorld
@@ -31,9 +30,8 @@ class StatisticsTest(PrefilledTest):
     @classmethod
     def setUpClass(self):
         super(StatisticsTest, self).setUpClass()
-        ccf = get_ccf()
-        crps = CrossRefPaperSource(ccf)
-        oai = OaiPaperSource(ccf)
+        crps = CrossRefPaperSource(self.ccf)
+        oai = OaiPaperSource(self.ccf)
         crps.fetch_and_save(self.r2, incremental=True)
         oai.fetch_and_save(self.r2, incremental=True)
 

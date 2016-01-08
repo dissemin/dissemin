@@ -570,6 +570,13 @@ class ClusteringContextFactory(object):
         if pk in self.cc:
             del self.cc[pk]
 
+    def clear(self):
+        """
+        Calls unloadResearcher for all loaded researchers.
+        """
+        for k in self.cc:
+            del self.cc[k]
+
     def updateResearcher(self, researcher):
         """
         Updates the Researcher model object in the cache of the associated
