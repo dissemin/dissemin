@@ -164,7 +164,7 @@ def create_publication(paper, metadata):
 
     :param paper: the paper the publication object refers to
     :param metadata: the CrossRef metadata (parsed from JSON)
-    :return: None if the metadata is invalid or the data does not fit in the database schema.
+    :returns: None if the metadata is invalid or the data does not fit in the database schema, otherwise the pair of the paper and the publication.
     """
     try:
         return _create_publication(paper, metadata)
@@ -234,7 +234,7 @@ def _create_publication(paper, metadata):
     if pubdate and pubdate > cur_pubdate:
         paper.pubdate = pubdate
     paper.update_availability()
-    return pub
+    return paper, pub
 
 # Fetching utilities
 
@@ -414,13 +414,15 @@ class CrossRefPaperSource(PaperSource):
         paper = BarePaper.create(title, authors, pubdate, 
                 'VISIBLE', affiliations)
 
-        publication = create_publication(paper, metadata)
+        result = create_publication(paper, metadata)
 
-        if publication is None: # Creating the publication failed!
+        if result is None: # Creating the publication failed!
             paper.update_visibility()
             # Make sure the paper only appears if it is still associated
             # with another source.
             # TODO add unit test for this
+        else:
+            paper = result[0]
 
         return paper
 

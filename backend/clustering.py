@@ -325,6 +325,8 @@ class ClusteringContext(object):
         A log file can be provided in logf, the outcomes of the similarity classifier
         will be output there.
         """
+        self._runClustering(target, order_pk, logf)
+        return
         try:
             self._runClustering(target, order_pk, logf)
         except AuthorNotFound as e:
@@ -574,8 +576,7 @@ class ClusteringContextFactory(object):
         """
         Calls unloadResearcher for all loaded researchers.
         """
-        for k in self.cc:
-            del self.cc[k]
+        self.cc.clear()
 
     def updateResearcher(self, researcher):
         """
@@ -625,6 +626,10 @@ class ClusteringContextFactory(object):
         p = None
         if matches:
             p = upgrade_visibility(matches[0])
+            for publi in paper.publications:
+                p.add_publication(publi)
+            for record in paper.oairecords:
+                p.add_oairecord(record)
         else:
             p = Paper.from_bare(paper, with_authors=False)
             p.save()

@@ -77,15 +77,6 @@ class JsonRenderingTest(PrefilledTest):
 
 
 class PaperAjaxTest(JsonRenderingTest):
-    @classmethod
-    def setUpClass(self):
-        super(PaperAjaxTest, self).setUpClass()
-        self.ccf = get_ccf()
-        crps = CrossRefPaperSource(self.ccf)
-        oai = OaiPaperSource(self.ccf)
-        crps.fetch_and_save(self.r3, incremental=True)
-        oai.fetch_and_save(self.r3, incremental=True)
-
     def test_valid_search(self):
         for args in [
             {'first':'John','last':'Doe'},

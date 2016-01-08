@@ -77,7 +77,7 @@ router.register(r'papers', PaperViewSet, base_name='papers')
 
 @json_view
 def api_paper_doi(request, doi):
-    p = Paper.create_by_doi(doi)
+    p = Paper.create_by_doi(doi, bare=True)
     if p is None:
         raise Http404
     return {

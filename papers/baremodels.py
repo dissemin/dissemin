@@ -114,6 +114,12 @@ class BareObject(object):
                 ist.__dict__[f] = bare_obj.__dict__[f]
         return ist
 
+    def breadcrumbs(self):
+        """
+        Breadcrumbs of bare objects are empty by default.
+        """
+        return [(unicode(self),'#')]
+
 
 class BarePaper(BareObject):
     """
@@ -143,10 +149,10 @@ class BarePaper(BareObject):
         super(BarePaper, self).__init__(*args, **kwargs)
         #! The authors: a list of :class:`BareName`
         self.bare_authors = []
-        #! The publications associated with this paper: a list of :class:`BarePublication`
-        self.bare_publications = []
-        #! The OAI records associated with this paper: a list of :class:`BarePublication`
-        self.bare_oairecords = []
+        #! The publications associated with this paper: a list of :class:`BarePublication` indexed by their dois
+        self.bare_publications = {}
+        #! The OAI records associated with this paper: dict of :class:`BareOaiRecord` indexed by their identifiers
+        self.bare_oairecords = {}
         #! If there are lots of authors, how many are we hiding?
         self.nb_remaining_authors = None
 
@@ -235,7 +241,7 @@ class BarePaper(BareObject):
         The list of publications associated with this paper. They
         can be arbitrary iterables of subclasses of :class:`BarePublication`.
         """
-        return self.bare_publications
+        return self.bare_publications.values()
 
     @property
     def oairecords(self):
@@ -243,7 +249,7 @@ class BarePaper(BareObject):
         The list of OAI records associated with this paper. It can
         be arbitrary iterables of subclasses of :class:`BareOaiRecord`.
         """
-        return self.bare_oairecords
+        return self.bare_oairecords.values()
 
     def add_author(self, author, position=None):
         """
@@ -262,7 +268,7 @@ class BarePaper(BareObject):
 
         :returns: the :class:`BareOaiRecord` that was added (it can differ in subclasses)
         """
-        self.bare_oairecords.append(oairecord)
+        self.bare_oairecords[oairecord.identifier] = oairecord
         return oairecord
 
     def add_publication(self, publication):
@@ -271,7 +277,7 @@ class BarePaper(BareObject):
 
         :returns: the :class:`BarePublication` that was added (it can differ in subclasses)
         """
-        self.bare_publications.append(publication)
+        self.bare_publications[publication.doi] = publication
         return publication
 
     ### Generic properties that should not need to be reimplemented ###
@@ -531,12 +537,14 @@ class BarePaper(BareObject):
         Updates the visibility of the paper. Only papers with
         known authors should be visible.
         """
+        # TODO this should be moved to the non-bare Paper I think
+        # so that we can remove the ugly hasattr
         p = self
         if p.visibility != 'VISIBLE' and p.visibility != 'NOT_RELEVANT':
             return
         researcher_found = False
         for a in p.authors:
-            if a.researcher_id:
+            if hasattr(a, 'researcher_id') and a.researcher_id:
                 researcher_found = True
                 break
         if researcher_found and p.visibility != 'VISIBLE':

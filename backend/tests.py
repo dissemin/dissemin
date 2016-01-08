@@ -29,6 +29,7 @@ from backend.orcid import *
 from backend.oai import *
 from backend.tasks import *
 from backend.maintenance import *
+from backend.globals import *
 from papers.models import *
 from papers.baremodels import *
 from papers.errors import *
@@ -87,25 +88,25 @@ class PrefilledTest(TestCase):
     def setUpClass(self):
         if self is PrefilledTest:
             raise unittest.SkipTest("Base test")
-        self.i, _ = Institution.objects.get_or_create(name='ENS')
-        self.d, _ = Department.objects.get_or_create(name='Chemistry dept', institution=self.i)
-        self.di, _ = Department.objects.get_or_create(name='Comp sci dept', institution=self.i)
-        self.r1 = Researcher.create_by_name('Isabelle', 'Aujard', department=self.d)
-        self.r2 = Researcher.create_by_name('Ludovic', 'Jullien', department=self.d)
-        self.r3 = Researcher.create_by_name('Antoine', 'Amarilli', department=self.di)
-        self.r4 = Researcher.create_by_name('Antonin', 'Delpeuch', department=self.di, orcid=
-            '0000-0002-8612-8827')
-        self.r5 = Researcher.create_by_name('Terence', 'Tao')
-        self.hal, _ = OaiSource.objects.get_or_create(identifier='hal',
-                name='HAL',
-                default_pubtype='preprint')
-        self.arxiv, _ = OaiSource.objects.get_or_create(identifier='arxiv',
-                name='arXiv',
-                default_pubtype='preprint')
+        self.i = Institution.objects.get(name='ENS')
+        self.d = Department.objects.get(name='Chemistry dept')
+        self.di = Department.objects.get(name='Comp sci dept')
+        def get_by_name(first, last):
+            n = Name.lookup_name((first, last))
+            return Researcher.objects.get(name=n)
+        self.r1 = get_by_name('Isabelle', 'Aujard')
+        self.r2 = get_by_name('Ludovic', 'Jullien')
+        self.r3 = get_by_name('Antoine', 'Amarilli')
+        self.r4 = get_by_name('Antonin', 'Delpeuch')
+        self.r5 = get_by_name('Terence', 'Tao')
+        self.hal = OaiSource.objects.get(identifier='hal')
+        self.arxiv = OaiSource.objects.get(identifier='arxiv')
+        self.ccf = get_ccf()
 
     @classmethod
     def tearDownClass(self):
         name_lookup_cache.prune()
+        self.ccf.clear()
 
     def tearDown(self):
         name_lookup_cache.prune()
@@ -128,7 +129,6 @@ class PaperSourceTest(PrefilledTest):
         super(PaperSourceTest, self).setUpClass()
         if self is PaperSourceTest:
             raise unittest.SkipTest("Base test")
-        self.ccf = get_ccf()
         self.source = None
         self.researcher = self.r4
 
@@ -370,7 +370,7 @@ class PaperMethodsTest(PrefilledTest):
     def setUpClass(self):
         if self is PaperMethodsTest:
             raise unittest.SkipTest("Base test")
-        self.ccf = get_ccf()
+        super(PaperMethodsTest, self).setUpClass()
 
     def test_update_author_names(self):
         for old_author_names, new_author_names, final in [
@@ -406,7 +406,6 @@ class MaintenanceTest(PrefilledTest):
     @classmethod
     def setUpClass(self):
         super(MaintenanceTest, self).setUpClass()
-        self.ccf = get_ccf()
         self.crps = CrossRefPaperSource(self.ccf)
         self.crps.fetch_and_save(self.r2)
         consolidate_paper(Publication.objects.get(doi='10.1021/cb400178m').paper_id)
@@ -453,7 +452,6 @@ class MaintenanceTest(PrefilledTest):
     def test_merge_names(self):
         paper = self.crps.create_paper_by_doi("10.1002/anie.200800037")
         paper = self.ccf.save_paper(paper)
-        print paper.publications[0].doi
         publi = Publication.objects.get(doi='10.1002/anie.200800037')
 
         n = Name.lookup_name(('Isabelle','Autard'))

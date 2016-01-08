@@ -160,12 +160,23 @@ def consolidate_paper(pk):
             p.task = None
             p.save(update_fields=['task'])
 
+# TODO: no ccf is actually needed here!
+@shared_task(name='get_bare_paper_by_doi')
+def get_bare_paper_by_doi(doi):
+    ccf = get_ccf()
+    oai = OaiPaperSource(ccf, max_results=10)
+    crps = CrossRefPaperSource(ccf, oai, max_results=10)
+    p = crps.create_paper_by_doi(doi)
+    return p
+
 @shared_task(name='get_paper_by_doi')
 def get_paper_by_doi(doi):
     ccf = get_ccf()
     oai = OaiPaperSource(ccf, max_results=10)
     crps = CrossRefPaperSource(ccf, oai, max_results=10)
     p = crps.create_paper_by_doi(doi)
+    if p is not None:
+        p = ccf.save_paper(p)
     return p
 
 @shared_task(name='update_all_stats')

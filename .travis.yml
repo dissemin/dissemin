@@ -60,8 +60,9 @@ before_script:
 script:
   - ./update_translations.sh | grep msgid | wc -l | ./devutils/l10n_to_gitbot
   - python manage.py migrate --noinput
+  - python manage.py loaddata dissemin/fixtures/test_dump.json
   - ./celery.sh &
-  - coverage run --source=dissemin,papers,backend,deposit,upload,statistics manage.py test --testrunner dissemin.scripts.baretests.BareTestRunner -v 2
+  - coverage run --source=dissemin,papers,backend,deposit,upload,statistics manage.py test --testrunner dissemin.scripts.baretests.BareTestRunner -v 2 --failfast
 
 after_success:
   - coveralls

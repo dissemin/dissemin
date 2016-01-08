@@ -31,14 +31,6 @@ from papers.testajax import JsonRenderingTest
 from papers.models import Paper
 
 class PaperApiTest(JsonRenderingTest):
-    @classmethod
-    def setUpClass(self):
-        super(PaperApiTest, self).setUpClass()
-        crps = CrossRefPaperSource(self.ccf)
-        oai = OaiPaperSource(self.ccf)
-        crps.fetch_and_save(self.r3, incremental=True)
-        oai.fetch_and_save(self.r3, incremental=True)
-
     def test_valid_paper(self):
         p = self.r3.author_set.first().paper
         parsed = self.checkJson(self.getPage('papers-detail', args=[p.pk]))

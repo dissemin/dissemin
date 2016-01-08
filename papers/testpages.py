@@ -81,14 +81,6 @@ class InstitutionPagesTest(RenderingTest):
         self.checkUrl(self.i.url)
 
 class PaperPagesTest(RenderingTest):
-    @classmethod
-    def setUpClass(self):
-        super(PaperPagesTest, self).setUpClass()
-        crps = CrossRefPaperSource(self.ccf)
-        oai = OaiPaperSource(self.ccf)
-        crps.fetch_and_save(self.r3, incremental=True)
-        oai.fetch_and_save(self.r3, incremental=True)
-
     def test_index(self):
         self.checkHtml(self.getPage('index'))
         

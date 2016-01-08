@@ -593,7 +593,7 @@ class Paper(models.Model, BarePaper):
         if doi is None:
             raise ValueError("No DOI provided to create the publication")
         # Test first if there is no publication with this new DOI
-        matches = Publication.objects.filter(doi__exact=doi)
+        matches = Publication.objects.filter(doi__iexact=doi)
         if matches:
             publi = matches[0]
             if publi.paper != self:
@@ -693,11 +693,15 @@ class Paper(models.Model, BarePaper):
             task.get()
 
     @classmethod
-    def create_by_doi(self, doi, wait=True):
+    def create_by_doi(self, doi, wait=True, bare=False):
         """
         Creates a paper given a DOI (sends a task to the backend).
         """
-        task = send_task('get_paper_by_doi', [], {'doi':doi})
+        if not bare:
+            task = send_task('get_paper_by_doi', [], {'doi':doi})
+        else:
+            task = send_task('get_bare_paper_by_doi', [], {'doi':doi})
+
         if wait:
             return task.get()
 
@@ -1002,9 +1006,17 @@ class OaiRecord(models.Model, BareOaiRecord):
         Creates a new OAI record by checking first for duplicates and 
         updating them if necessary.
         """
+        source = None
         if kwargs.get('source') is None:
-            raise ValueError('No source provided to create the OAI record.')
-        source = kwargs['source']
+            source_id = kwargs.get('source_id')
+            try:
+                source = OaiSource.objects.get(id=source_id)
+            except ObjectDoesNotExist:
+                pass
+            if source is None:
+                raise ValueError('No source provided to create the OAI record.')
+        else:
+            source = kwargs['source']
         if kwargs.get('identifier') is None:
             raise ValueError('No identifier provided to create the OAI record.')
         identifier = kwargs['identifier']
