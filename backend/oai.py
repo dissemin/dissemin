@@ -20,6 +20,7 @@
 
 from __future__ import unicode_literals
 
+import itertools
 from oaipmh.client import Client
 from oaipmh.metadata import MetadataRegistry
 from oaipmh.datestamp import tolerant_datestamp_to_datetime
@@ -101,6 +102,15 @@ def add_oai_record(record, source, paper):
             splash_url=splash_url)
     paper.add_oairecord(record)
 
+def listRecords_or_empty(source, *args, **kwargs):
+    """
+    pyoai raises :class:`NoRecordsMatchError` when no records match,
+    we would rather like to get an empty list in that case.
+    """
+    try:
+        return source.listRecords(*args, **kwargs)
+    except NoRecordsMatchError:
+        return []
 
 class OaiPaperSource(PaperSource):
     """
@@ -131,54 +141,56 @@ class OaiPaperSource(PaperSource):
         Fetch all the records that match a given paper fingerprint.
         """
         print "fetch_records_for_fingerprint: THIS IS DEPRECATED"
-        try:
-            listRecords = self.base.listRecords(metadataPrefix='base_dc', set=PROXY_FINGERPRINT_PREFIX+ident)
-            return self.process_records(listRecords)
-        except NoRecordsMatchError:
-            return []
+        listRecords = listRecords_or_empty(self.client,
+                metadataPrefix='base_dc', set=PROXY_FINGERPRINT_PREFIX+ident)
+        return self.process_records(listRecords)
 
     def fetch_accessibility(self, paper):
         """
         Computes the accessibility of a given paper,
         by fetching preprints from OAI-PMH
         """
-        try:
-            for record in self.base.listRecords(metadataPrefix='base_dc',
-                    set=PROXY_FINGERPRINT_PREFIX+paper.fingerprint):
-                # Find the source
-                sets = record[0].setSpec()
-                source_identifier = None
-                for s in sets:
-                    if s.startswith(PROXY_SOURCE_PREFIX):
-                        source_identifier = s[len(PROXY_SOURCE_PREFIX):]
-                        break
-                source = None
-                if source_identifier:
-                    try:
-                        source = OaiSource.objects.get(identifier=source_identifier)
-                    except OaiSource.DoesNotExist:
-                        pass
-                if not source:
-                    print "Invalid source '"+str(source_identifier)+"' from the proxy, skipping"
-                    continue
+        records = listRecords_or_empty(self.base,
+                metadataPrefix='base_dc',
+                set=PROXY_FINGERPRINT_PREFIX+paper.fingerprint)
 
-                # Save the record
+        for publi in paper.publications:
+            records = itertools.chain(records, listRecords_or_empty(self.base,
+                metadataPrefix='base_dc',
+                set=PROXY_DOI_PREFIX+publi.doi))
+
+        for record in records:
+            # Find the source
+            sets = record[0].setSpec()
+            source_identifier = None
+            for s in sets:
+                if s.startswith(PROXY_SOURCE_PREFIX):
+                    source_identifier = s[len(PROXY_SOURCE_PREFIX):]
+                    break
+            source = None
+            if source_identifier:
                 try:
-                    add_oai_record(record, source, paper)
-                except ValueError as e:
-                    print "Warning, OAI record "+record[0].identifier()+" skipped:\n"+unicode(e)
+                    source = OaiSource.objects.get(identifier=source_identifier)
+                except OaiSource.DoesNotExist:
+                    pass
+            if not source:
+                print "Invalid source '"+str(source_identifier)+"' from the proxy, skipping"
+                continue
 
-            paper.update_availability()
-        except NoRecordsMatchError:
-            pass
+            # Save the record
+            try:
+                add_oai_record(record, source, paper)
+            except ValueError as e:
+                print "Warning, OAI record "+record[0].identifier()+" skipped:\n"+unicode(e)
+
+        paper.update_availability()
         return paper
 
     def fetch_records_for_signature(self, ident):
         try:
-            listRecords = self.client.listRecords(metadataPrefix='oai_dc', set=PROXY_SIGNATURE_PREFIX+ident)
+            listRecords = listRecords_or_empty(self.client,
+                    metadataPrefix='oai_dc', set=PROXY_SIGNATURE_PREFIX+ident)
             return self.process_records(listRecords)
-        except NoRecordsMatchError:
-            pass
         except BadArgumentError as e:
             print "Signature is unknown for the proxy: "+unicode(e)
             pass
@@ -191,11 +203,10 @@ class OaiPaperSource(PaperSource):
             for p in self.process_records(listRecords):
                 yield p
             ident = name_normalization(firstname+' '+lastname)
-            listRecords = self.client.listRecords(metadataPrefix='oai_dc', set=PROXY_AUTHOR_PREFIX+ident)
+            listRecords = listRecords_or_empty(self.client,
+                    metadataPrefix='oai_dc', set=PROXY_AUTHOR_PREFIX+ident)
             for p in self.process_records(listRecords):
                 yield p
-        except NoRecordsMatchError:
-            pass
         except BadArgumentError as e:
             print "Author is unknown for the proxy: "+unicode(e)
             pass

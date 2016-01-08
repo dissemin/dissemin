@@ -38,6 +38,7 @@ PROXY_SOURCE_PREFIX = "proaixy:source:"
 PROXY_AUTHOR_PREFIX = "proaixy:author:"
 PROXY_SIGNATURE_PREFIX = "proaixy:authorsig:"
 PROXY_FINGERPRINT_PREFIX = "proaixy:fingerprint:"
+PROXY_DOI_PREFIX = "proaixy:doi:"
 
 
 from oaipmh.client import Client
