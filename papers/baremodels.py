@@ -74,8 +74,12 @@ class BareObject(object):
     """
     _bare_fields = []
     _bare_foreign_key_fields = []
+    _mandatory_fields = []
 
     def __init__(self, *args, **kwargs):
+        """
+        Keyword arguments can be used to set fields of this bare object.
+        """
         super(BareObject, self).__init__()
         for f in self._bare_fields + self._bare_foreign_key_fields:
             if not hasattr(self, f):
@@ -95,6 +99,12 @@ class BareObject(object):
 
     @classmethod
     def from_bare(cls, bare_obj):
+        """
+        This creates an instance of the current class as a copy of a
+        bare instance. Concretely, this copies all the fields contained
+        in the bare object to an instance of the current class, which
+        is expected to be a subclass of the bare object's class.
+        """
         kwargs = {}
         for k, v in bare_obj.__dict__.items():
             if k in cls._bare_fields:
@@ -104,15 +114,6 @@ class BareObject(object):
 
         ist = cls(**kwargs)
         return ist
-        for f in cls._bare_foreign_key_fields:
-            if hasattr(bare_obj.__dict__.get(f), 'id') and bare_obj.__dict__[f].id:
-                ist.__dict__[f+'_id'] = bare_obj.__dict__[f].id
-            elif hasattr(bare_obj, f+'_id'):
-                ist.__dict__[f+'_id'] = bare_obj.__dict__[f+'_id']
-        for f in cls._bare_fields+cls._bare_foreign_key_fields:
-            if hasattr(bare_obj, f):
-                ist.__dict__[f] = bare_obj.__dict__[f]
-        return ist
 
     def breadcrumbs(self):
         """
@@ -120,6 +121,15 @@ class BareObject(object):
         """
         return [(unicode(self),'#')]
 
+    def check_mandatory_fields(self):
+        """
+        Raises `ValueError` if any field is missing.
+        The list of mandatory fields for the class should be stored in `_mandatory_fields`.
+        """
+        for field in self._mandatory_fields:
+            if not self.__dict__.get(field):
+                raise ValueError('No %s provided to create a %s.' %
+                        (field,self.__class__.__name__))
 
 class BarePaper(BareObject):
     """
@@ -141,6 +151,12 @@ class BarePaper(BareObject):
         'pdf_url',
         #! Visibility
         'visibility',
+    ]
+
+    _mandatory_fields = [
+        'title',
+        'pubdate',
+        'fingerprint',
     ]
 
     ### Creation
@@ -268,6 +284,7 @@ class BarePaper(BareObject):
 
         :returns: the :class:`BareOaiRecord` that was added (it can differ in subclasses)
         """
+        oairecord.check_mandatory_fields()
         self.bare_oairecords[oairecord.identifier] = oairecord
         return oairecord
 
@@ -277,6 +294,7 @@ class BarePaper(BareObject):
 
         :returns: the :class:`BarePublication` that was added (it can differ in subclasses)
         """
+        publication.check_mandatory_fields()
         self.bare_publications[publication.doi] = publication
         return publication
 
@@ -623,6 +641,9 @@ class BareAuthor(BareObject):
     _bare_foreign_key_fields = [
         'name',
     ]
+    _mandatory_fields = [
+        'name',
+    ]
 
     @property
     def orcid(self):
@@ -661,6 +682,11 @@ class BareName(BareObject):
         'first',
         'last',
         'full',
+    ]
+
+    _mandatory_fields = [
+        'last',
+        # first name can be empty, full is generated from first and last
     ]
 
     @classmethod
@@ -731,6 +757,11 @@ class BarePublication(BareObject):
     _bare_foreign_key_fields = [
         'journal', # expected to be an actual model instance
         'publisher', # expected to be an actual model instance
+    ]
+    
+    _mandatory_fields = [
+        'pubtype',
+        'title',
     ]
 
     def oa_status(self):
@@ -820,6 +851,12 @@ class BareOaiRecord(BareObject):
         'priority',
     ]
 
+    _mandatory_fields = [
+        'identifier',
+        'splash_url',
+        'source',
+    ]
+
     def update_priority(self):
         self.priority = self.source.priority
 
@@ -843,5 +880,7 @@ class BareOaiRecord(BareObject):
                 'contributors':self.contributors,
                 'type':self.pubtype,
                 })
+
+
 
 
