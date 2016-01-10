@@ -2,8 +2,8 @@
 from __future__ import unicode_literals, print_function
 
 from django.db.models import Q
+from django.db import connection
 from django.core.exceptions import ObjectDoesNotExist
-from django.db import DataError
 import random
 from collections import defaultdict
 # For graph output
@@ -20,7 +20,6 @@ from backend.similarity import SimilarityClassifier, AuthorNotFound
 from backend.relevance import RelevanceClassifier
 from backend import crossref
 from backend.name_cache import name_lookup_cache
-
 
 class ClusteringContext(object):
     def __init__(self, researcher, sc, rc):
@@ -132,7 +131,15 @@ class ClusteringContext(object):
         """
         Debugging tool to inspect the state of the Union-Find data structure
         """
+        invalid_author_found = False
         for pk in self.parent:
+            try:
+                a = Author.objects.get(pk=pk)
+            except Author.DoesNotExist:
+                print('Invalid author found in graph: %d' % pk)
+                invalid_author_found = True
+            continue
+
             print('## '+str(pk))
             parent = self.parent[pk]
             if parent != None:
@@ -143,6 +150,8 @@ class ClusteringContext(object):
                 print('Cluster size: '+str(self.cluster_size[pk]))
             if self.children[pk]:
                 print('Children: '+str(self.children[pk]))
+        if invalid_author_found:
+            raise ValueError('an invalid author was found')
 
     def commit(self, force=False):
         """
@@ -332,6 +341,7 @@ class ClusteringContext(object):
         except AuthorNotFound as e:
             print("Author %d not found: %s" % (e.pk, e.message))
             self.deleteAuthor(e.pk)
+            raise e
 
     def _runClustering(self, target, order_pk=False, logf=None):
 
@@ -564,6 +574,14 @@ class ClusteringContextFactory(object):
         for k in self.cc:
             self.cc[k].commit()
 
+    def checkThemAll(self):
+        """
+        Checks that the graphs in each clustering context are all valid
+        """
+        for k in self.cc:
+            print("Graph for researcher %d" % k)
+            self.cc[k].checkGraph()
+
     def unloadResearcher(self, pk):
         """
         Frees the clustering context of a given researcher.
@@ -572,11 +590,21 @@ class ClusteringContextFactory(object):
         if pk in self.cc:
             del self.cc[pk]
 
+    def deleteAuthor(self, pk):
+        """
+        Removes this author from all the clustering contexts
+        it belongs to.
+        """
+        for k in self.cc:
+            if pk in self.cc[k].authors:
+                self.cc[k].deleteAuthor(pk)
+
     def clear(self):
         """
         Calls unloadResearcher for all loaded researchers.
         """
         self.cc.clear()
+        self.authors_to_cluster = []
 
     def updateResearcher(self, researcher):
         """
@@ -586,72 +614,5 @@ class ClusteringContextFactory(object):
         """
         if researcher.pk in self.cc:
             self.cc[researcher.pk].updateResearcherAttributes(researcher)
-    
-    def get_or_create_paper(self, title, author_names, pubdate, visibility='VISIBLE', affiliations=None):
-        """
-        Creates an (initially) bare paper and saves it to the database.
 
-        :returns: the corresponding :class:`Paper` instance.
-        """
-        p = BarePaper.create(title, author_names, pubdate, visibility, affiliations)
-        return self.save_paper(p)
-
-    
-    def save_paper(self, paper):
-        """
-        Saves a paper to the database if it is not already present.
-        The clustering algorithm is run to decide what authors should be 
-        attributed to the paper.
-
-        :returns: the :class:`Paper` instance created from the bare paper supplied.
-        """
-        try:
-            return self._save_paper(paper)
-        except DataError as e:
-            raise ValueError('Invalid paper, does not fit in the database schema:\n'+unicode(e))
-
-    def _save_paper(self, paper):
-
-        def upgrade_visibility(db_paper):
-            if paper.visibility == 'VISIBLE' and db_paper.visibility == 'CANDIDATE':
-                db_paper.visibility = 'VISIBLE'
-                db_paper.save(update_fields=['visibility'])
-            db_paper.update_author_names(paper.bare_author_names(), paper.affiliations())
-            return db_paper
-
-        # Otherwise look up the fingerprint
-        fp = paper.fingerprint
-        matches = Paper.objects.filter(fingerprint__exact=fp)
-
-        p = None
-        if matches:
-            p = upgrade_visibility(matches[0])
-            for publi in paper.publications:
-                p.add_publication(publi)
-            for record in paper.oairecords:
-                p.add_oairecord(record)
-        else:
-            p = Paper.from_bare(paper, with_authors=False)
-            p.save()
-            for idx, author in enumerate(paper.authors):
-                a = Author.from_bare(author)
-                if a.name_id is None or a.name is None:
-                    author_name = name_lookup_cache.lookup((author.name.first, author.name.last))
-                    author_name.save()
-                    author_name.update_variants()
-                    a.name = author_name
-                a.paper = p
-                a.position = idx
-                a.save()
-                a.update_name_variants_if_needed()
-                if a.name.is_known:
-                    self.clusterAuthorLater(a)
-
-            p.fingerprint = p.new_fingerprint()
-            p.update_availability()
-            p.save()
-
-        return p
-
-
-
+   

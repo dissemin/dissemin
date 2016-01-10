@@ -58,6 +58,7 @@ from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
 from django.db.models import Q
+from django.db import DataError
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 from solo.models import SingletonModel
@@ -499,6 +500,15 @@ class Name(models.Model, BareName):
 
         return n
 
+    @classmethod
+    def from_bare(cls, bare_name):
+        """
+        Calls `lookup_name` for the given `bare_name`, if it is indeed bare..
+        """
+        if hasattr(bare_name, 'id'):
+            return bare_name # not so bare…
+        return cls.lookup_name((bare_name.first, bare_name.last))
+
     def save_if_not_saved(self):
         """
         Used to save unsaved names after lookup
@@ -604,6 +614,57 @@ class Paper(models.Model, BarePaper):
         publication.paper = self
         publication.save()
         return publication 
+
+    ### Paper creation ###
+
+    @classmethod
+    def get_or_create(cls, title, author_names, pubdate, visibility='VISIBLE', affiliations=None):
+        """
+        Creates an (initially) bare paper and saves it to the database.
+
+        :returns: the corresponding :class:`Paper` instance.
+        """
+        p = BarePaper.create(title, author_names, pubdate, visibility, affiliations)
+        return cls.from_bare(p)
+
+    @classmethod
+    def from_bare(cls, paper):
+        """
+        Saves a paper to the database if it is not already present.
+        The clustering algorithm is run to decide what authors should be 
+        attributed to the paper.
+
+        :returns: the :class:`Paper` instance created from the bare paper supplied.
+        """
+        try:
+            # Look up the fingerprint
+            fp = paper.fingerprint
+            matches = Paper.objects.filter(fingerprint__exact=fp)
+
+            p = None
+            if matches: # We have found a paper matching the fingerprint
+                p = matches[0]
+                if (paper.visibility == 'VISIBLE' and
+                        p.visibility == 'CANDIDATE'):
+                    p.visibility ='VISIBLE'
+                    p.save(update_fields=['visibility'])
+                p.update_author_names(paper.bare_author_names(),
+                        paper.affiliations())
+                for publi in paper.publications:
+                    p.add_publication(publi)
+                for record in paper.oairecords:
+                    p.add_oairecord(record)
+            else: # Otherwise we create a new paper
+                p = super(Paper, cls).from_bare(paper)
+                p.save()
+                p.update_availability()
+                p.save()
+
+            return p
+
+        except DataError as e:
+            raise ValueError('Invalid paper, does not fit in the database schema:\n'+unicode(e))
+
 
     ### Other methods, specific to this non-bare subclass ###
 
@@ -727,6 +788,7 @@ class Paper(models.Model, BarePaper):
         :param new_author_names: list of Name instances (the order matters)
         :param new_affiliations: (optional) list of affiliation strings for the new author names.
         """
+
         if new_affiliations is None:
             new_affiliations = [None]*len(new_author_names)
         assert len(new_author_names) == len(new_affiliations)
@@ -769,13 +831,13 @@ class Paper(models.Model, BarePaper):
             elif new_name is not None: # Creating a new author
                 name = Name.lookup_name(new_name)
                 name.save()
-                # TODO maybe we could cluster it ? -> move this code to the backend?
                 author = Author(paper=self,name=name,position=i,affiliation=new_affiliations[new_idx])
                 author.save()
         
         # Just in case unify_name_lists pruned authors without telling us…
         for idx, author in enumerate(old_authors):
             if idx not in seen_old_names:
+                print("** Deleting author %d **" % author.pk)
                 author.delete()
 
         # Invalidate our local cache

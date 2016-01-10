@@ -30,6 +30,7 @@ class StatisticsTest(PrefilledTest):
     @classmethod
     def setUpClass(self):
         super(StatisticsTest, self).setUpClass()
+        self.ccf.clear()
         crps = CrossRefPaperSource(self.ccf)
         oai = OaiPaperSource(self.ccf)
         crps.fetch_and_save(self.r2, incremental=True)

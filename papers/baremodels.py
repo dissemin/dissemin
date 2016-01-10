@@ -173,21 +173,18 @@ class BarePaper(BareObject):
         self.nb_remaining_authors = None
 
     @classmethod
-    def from_bare(cls, bare_obj, with_authors=True):
+    def from_bare(cls, bare_obj):
         """
         Creates an instance of this class from a :class:`BarePaper`.
-        
-        :param with_authors: set to False if the authors should not be created.
         """
         ist = super(BarePaper, cls).from_bare(bare_obj)
         ist.save()
-        if with_authors:
-            for idx, a in enumerate(bare_obj.authors):
-                ist.add_author(a, position=idx)
         for p in bare_obj.publications:
             ist.add_publication(p)
         for r in bare_obj.oairecords:
             ist.add_oairecord(r)
+        for idx, a in enumerate(bare_obj.authors):
+            ist.add_author(a, position=idx)
         ist.fingerprint = ist.new_fingerprint()
         ist.update_availability()
         ist.update_visibility()
@@ -199,7 +196,7 @@ class BarePaper(BareObject):
         """
         Creates a (bare) paper. To save it to the database, we
         need to run the clustering algorithm to resolve Researchers for the authors,
-        using `save_paper` from :class:`ClusteringContext`.
+        using `from_bare` from the (non-bare) :class:`Paper` subclass..
 
         :param title: The title of the paper (as a string). If it is too long for the database,
                       ValueError is raised.

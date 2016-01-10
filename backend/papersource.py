@@ -20,6 +20,8 @@
 
 from __future__ import unicode_literals
 
+from papers.models import Paper
+
 
 class PaperSource(object):
     """
@@ -27,10 +29,14 @@ class PaperSource(object):
     for a given researcher.
     """
 
-    def __init__(self, ccf, oai=None, max_results=None):
+    def __init__(self, ccf=None, oai=None, max_results=None):
         """
-        To construct a PaperSource, a Clustering Context Factory (ccf)
-        is required: this allows us to cluster incoming papers and
+        A PaperSource can be used without saving the papers
+        to the database, using :func:`fetch_bare`. In this case,
+        it is not necessary to provide a Clustering Context Factory (ccf).
+        This object is only required when the source is used to create
+        papers in the database, using `fetch_and save`.
+        It allows us to cluster incoming papers and
         assign them to researchers.
 
         If an OAI interface is provided, this allows us to check full
@@ -73,9 +79,12 @@ class PaperSource(object):
             and commited one after the other. This is useful when
             papers are fetched on the fly for an user.
         """
+        if self.ccf is None:
+            raise ValueError('Clustering context factory not provided')
+
         for p in self.fetch_bare(researcher):        
             # Save the paper as non-bare
-            p = self.ccf.save_paper(p)
+            p = Paper.from_bare(p)
 
             # If clustering happens incrementally, cluster the researcher
             if incremental:
@@ -104,7 +113,7 @@ class PaperSource(object):
         if val != researcher.empty_orcid_profile:
             researcher.empty_orcid_profile = val
             researcher.save(update_fields=['empty_orcid_profile'])
-            self.ccf.updateResearcher(researcher)
-
+            if self.ccf:
+                self.ccf.updateResearcher(researcher)
 
 

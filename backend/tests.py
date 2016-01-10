@@ -110,6 +110,7 @@ class PrefilledTest(TestCase):
 
     def tearDown(self):
         name_lookup_cache.prune()
+        self.ccf.clear()
 
 def check_paper(asserter, paper):
     """
@@ -136,7 +137,7 @@ class PaperSourceTest(PrefilledTest):
         papers = list(self.source.fetch_bare(self.researcher))
         for paper in papers:
             check_paper(self, paper)
-            self.ccf.save_paper(paper)
+            paper = Paper.from_bare(paper)
         self.assertTrue(len(papers) > 1)
         self.check_papers(papers)
 
@@ -381,7 +382,7 @@ class PaperMethodsTest(PrefilledTest):
                  [('Ludovic','Jullien'),('R.','Pérand'),('Antoine','Amarilli')],
                  [('Ludovic F.','Jullien'),('R.','Pérand'),('Antoine','Amarilli')]),
                 ]:
-            paper = self.ccf.get_or_create_paper('This is a test paper',
+            paper = Paper.get_or_create('This is a test paper',
                     map(Name.lookup_name, old_author_names), datetime.date(year=2015,month=04,day=05))
             self.ccf.commitThemAll()
             paper.update_author_names(new_author_names)
@@ -389,11 +390,11 @@ class PaperMethodsTest(PrefilledTest):
 
     def test_multiple_get_or_create(self):
         date = datetime.date(year=2003,month=4,day=9)
-        paper = self.ccf.get_or_create_paper('Beta-rays in black pudding',
+        paper = Paper.get_or_create('Beta-rays in black pudding',
                 map(Name.lookup_name, [('F.','Rodrigo'),('A.','Johnson'),('Pete','Blunsom')]),
                 date)
 
-        paper2 = self.ccf.get_or_create_paper('Beta-rays in black pudding',
+        paper2 = Paper.get_or_create('Beta-rays in black pudding',
                 map(Name.lookup_name, [('Frank','Rodrigo'),('A. L.','Johnson'),('P.','Blunsom')]),
                 date)
 
@@ -451,7 +452,7 @@ class MaintenanceTest(PrefilledTest):
 
     def test_merge_names(self):
         paper = self.crps.create_paper_by_doi("10.1002/anie.200800037")
-        paper = self.ccf.save_paper(paper)
+        paper = Paper.from_bare(paper)
         publi = Publication.objects.get(doi='10.1002/anie.200800037')
 
         n = Name.lookup_name(('Isabelle','Autard'))
@@ -463,7 +464,7 @@ class MaintenanceTest(PrefilledTest):
 
     def test_update_paper_statuses(self):
         p = self.crps.create_paper_by_doi("10.1016/j.bmc.2005.06.035")
-        p = self.ccf.save_paper(p)
+        p = Paper.from_bare(p)
         self.assertEqual(p.pdf_url, None)
         pdf_url = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
         oairecord = OaiRecord.new(source=self.arxiv,

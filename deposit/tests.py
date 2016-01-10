@@ -24,7 +24,7 @@ from django.test import TestCase
 from django.test.utils import override_settings
 from django.contrib.auth.models import User
 from django.forms import Form
-from papers.models import OaiSource
+from papers.models import OaiSource, Paper
 from backend.tests import PrefilledTest
 from deposit.models import Repository, DepositRecord
 from deposit.protocol import DepositResult
@@ -53,7 +53,7 @@ class ProtocolTest(PrefilledTest):
              raise unittest.SkipTest("Base test")
         if 'TRAVIS' in os.environ:
             raise unittest.SkipTest("Skipping deposit test on Travis to avoid mass submissions to sandboxes")
-        self.p1 = self.ccf.get_or_create_paper(
+        self.p1 = Paper.get_or_create(
                 "This is a test paper",
                 [self.r1.name, self.r2.name, self.r4.name],
                 date(year=2014,month=02,day=15))
