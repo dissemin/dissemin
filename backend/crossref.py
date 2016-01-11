@@ -84,7 +84,7 @@ crossref_timeout = 15
 # Maximum number of pages looked for a researcher
 max_crossref_batches_per_researcher = 7
 # Maximum number of non-trivially skipped records that do not match any researcher
-crossref_max_skipped_records = 100
+crossref_max_skipped_records = 50
 
 # Licenses considered OA, as stored by CrossRef
 def is_oa_license(license_url):
