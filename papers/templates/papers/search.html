@@ -59,6 +59,17 @@
         setTimeout(refreshPapers, 1500);
     });
 {% endif %}
+{% if request.user.is_superuser %}
+    $(function(){
+        $("#affiliationForm #id_value").change(function(){
+            console.log('change');
+            $.post('{% url 'ajax-setResearcherDepartment' %}', $('#affiliationForm').serialize(), null, 'json').fail(
+                function(data) {
+                    console.log(data);
+                    });
+         });
+     });
+{% endif %}
 {% endblock %}
 
 {% block details %}
@@ -96,7 +107,11 @@
             <li><a href="{% url 'search' %}?name={{ nv.name_id }}">{{ nv.name }}</a> ({{ nv.confidence }})</li>
             {% endfor %}
          </ul></p>
-
+         
+         <form method="POST" id="affiliationForm">
+         {% csrf_token %}
+         {{ researcher.affiliation_form }}</br>
+         </form>
          <a href="{% url 'refetch-researcher' researcher.pk %}" class="btn btn-default">{% trans "Refresh papers" %}</a><br />
          <a href="{% url 'recluster-researcher' researcher.pk %}" class="btn btn-default">{% trans "Refresh classification" %}</a>
          {% endif %}

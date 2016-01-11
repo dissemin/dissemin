@@ -45,6 +45,11 @@ class AddResearcherForm(forms.Form):
     role = forms.CharField(label=_('Role'),required=False)
     department = forms.ModelChoiceField(label=_('Department'), queryset=Department.objects.all())
 
+class ResearcherDepartmentForm(forms.Form):
+    value = forms.ModelChoiceField(label=_('Department'), queryset=Department.objects.all())
+    pk = forms.ModelChoiceField(label=_('Researcher'), queryset=Researcher.objects.all(), widget=forms.HiddenInput())
+    name = forms.CharField(widget=forms.HiddenInput(), initial='department_id')
+
 class AddUnaffiliatedResearcherForm(forms.Form):
     first = forms.CharField(label=_('First name'), max_length=256, min_length=2, required=False)
     last = forms.CharField(label=_('Last name'), max_length=256, min_length=2, required=False)

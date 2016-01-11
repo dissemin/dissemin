@@ -58,7 +58,9 @@ def process_ajax_change(request, model, allowedFields):
         field = request.POST.get('name')
         if field in allowedFields:
             val = request.POST.get('value')
-            val = sanitize_html(val)
+            # TODO check that 'value' is actually present
+            if type(val) == type(''):
+                val = sanitize_html(val)
             setattr(instance, field, val)
             instance.save(update_fields=[field])
             if hasattr(instance, "invalidate_cache"):
@@ -181,21 +183,26 @@ def annotatePaper(request, pk, status):
     Annotation.create(paper, visibility, request.user)
     return HttpResponse('OK', content_type='text/plain')
 
-@user_passes_test(is_authenticated)
+@user_passes_test(is_admin)
 def changePaper(request):
     allowedFields = ['title']
     return process_ajax_change(request, Paper, allowedFields)
 
 # Department management
-@user_passes_test(is_authenticated)
+@user_passes_test(is_admin)
 def changeDepartment(request):
     allowedFields = ['name']
     return process_ajax_change(request, Department, allowedFields)
 
 # Researcher management
-@user_passes_test(is_authenticated)
+@user_passes_test(is_admin)
 def changeResearcher(request):
     allowedFields = ['role']
+    return process_ajax_change(request, Researcher, allowedFields)
+
+@user_passes_test(is_admin)
+def setResearcherDepartment(request):
+    allowedFields = ['department_id']
     return process_ajax_change(request, Researcher, allowedFields)
 
 @json_view
@@ -228,7 +235,7 @@ def waitForConsolidatedField(request):
     return {'success':success,'value':value}
 
 # Author management
-@user_passes_test(is_authenticated)
+@user_passes_test(is_admin)
 @json_view
 def changeAuthor(request):
     response = dict()
@@ -294,5 +301,6 @@ urlpatterns = patterns('',
     url(r'^change-publisher-status$', changePublisherStatus, name='ajax-changePublisherStatus'),
 #    url(r'^harvesting-status-(?P<pk>\d+)$', harvestingStatus, name='ajax-harvestingStatus'),
     url(r'^wait-for-consolidated-field$', waitForConsolidatedField, name='ajax-waitForConsolidatedField'),
+    url(r'^set-researcher-department$', setResearcherDepartment, name='ajax-setResearcherDepartment'),
 )
 

@@ -422,6 +422,16 @@ class Researcher(models.Model):
         if lst:
             return lst[0].paper
 
+    def affiliation_form(self):
+        """
+        Returns a form to change the affiliation of this researcher
+        """
+        from papers.forms import ResearcherDepartmentForm
+        data = {'pk':self.id,
+                'department':self.department_id}
+        return ResearcherDepartmentForm(initial=data)
+
+
 class Name(models.Model, BareName):
     first = models.CharField(max_length=MAX_NAME_LENGTH)
     last = models.CharField(max_length=MAX_NAME_LENGTH)
@@ -915,9 +925,6 @@ class Paper(models.Model, BarePaper):
             result.append((unicode(first_researcher), reverse('researcher', args=[first_researcher.pk])))
         result.append((self.citation, reverse('paper', args=[self.pk])))
         return result
-
-
-
 
 # Researcher / Paper binary relation
 class Author(models.Model, BareAuthor):
