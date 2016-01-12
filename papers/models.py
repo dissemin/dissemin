@@ -771,7 +771,11 @@ class Paper(models.Model, BarePaper):
         if not bare:
             task = send_task('get_paper_by_doi', [], {'doi':doi})
         else:
-            task = send_task('get_bare_paper_by_doi', [], {'doi':doi})
+            import backend.crossref as crossref
+            import backend.oai as oai
+            oai = oai.OaiPaperSource(max_results=10)
+            crps = crossref.CrossRefPaperSource(oai=oai)
+            return crps.create_paper_by_doi(doi)
 
         if wait:
             return task.get()
@@ -1252,5 +1256,6 @@ class Annotation(models.Model):
         paper.last_annotation = status
         paper.save(update_fields=['last_annotation'])
         paper.invalidate_cache()
+
 
 
