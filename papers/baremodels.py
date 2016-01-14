@@ -564,10 +564,12 @@ class BarePaper(BareObject):
                 break
         if researcher_found and p.visibility != 'VISIBLE':
             p.visibility = 'VISIBLE'
-            p.save(update_fields=['visibility'])
+            if hasattr(self, 'pk'):
+                p.save(update_fields=['visibility'])
         elif not researcher_found and p.visibility != 'NOT_RELEVANT':
             p.visibility = 'NOT_RELEVANT'
-            p.save(update_fields=['visibility'])
+            if hasattr(self, 'pk'):
+                p.save(update_fields=['visibility'])
 
     # Other representations ------------------------------------------
     def __unicode__(self):
