@@ -86,18 +86,19 @@ class PaperSource(object):
             # Save the paper as non-bare
             p = Paper.from_bare(p)
 
-            # First, check whether this paper is associated with an ORCID id
+            # If clustering happens incrementally, cluster the researcher
+            if incremental:
+                self.ccf.clusterPendingAuthorsForResearcher(researcher)
+                researcher.update_stats()
+
+            # Check whether this paper is associated with an ORCID id
             # for the target researcher
             if researcher.orcid:
                 matches = filter(lambda a: a.orcid == researcher.orcid, p.authors)
                 if matches:
                     self.update_empty_orcid(researcher, False)
 
-            # If clustering happens incrementally, cluster the researcher
-            if incremental:
-                self.ccf.clusterPendingAuthorsForResearcher(researcher)
-                researcher.update_stats()
-            
+           
             if self.max_results is not None and count >= self.max_results:
                 break
     

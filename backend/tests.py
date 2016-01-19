@@ -403,6 +403,11 @@ class PaperMethodsTest(PrefilledTest):
             ('Pete','Blunsom')])
 
 
+class TasksTest(PrefilledTest):
+    def test_fetch_everything_with_orcid(self):
+        r = Researcher.get_or_create_by_orcid('0000-0002-6561-5642')
+        fetch_everything_for_researcher(r.pk)
+
 class MaintenanceTest(PrefilledTest):
     @classmethod
     def setUpClass(self):

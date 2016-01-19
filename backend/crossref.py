@@ -244,6 +244,8 @@ def fetch_metadata_by_DOI(doi):
     This is supported by the standard proxy, dx.doi.org,
     as well as more advanced proxies such as doi_cache
     """
+    if doi is None:
+        return
     addheaders = {'Accept':'application/citeproc+json'}
     try:
         request = 'http://'+DOI_PROXY_DOMAIN+'/'+doi

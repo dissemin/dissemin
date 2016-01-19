@@ -824,7 +824,8 @@ class Paper(models.Model, BarePaper):
                 if new_name is None:
                     # Delete that author, it was pruned because it already
                     # appears elsewhere
-                    author.delete()
+                    if author.id is not None:
+                        author.delete()
                     continue
                 fields = []
                 if idx != i:
