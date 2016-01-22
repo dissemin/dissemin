@@ -10,6 +10,8 @@ of their database but perform calls to their external API when required.
 This has the advantage of keeping the local data storage needs very modest,
 but fetching the appropriate data from the APIs takes some time.
 
+.. image:: architecture.svg
+
 CrossRef
 --------
 

@@ -54,7 +54,7 @@ Edit ``dissemin/settings.py`` to change the following settings:
 - (Optional) Set up the SMTP parameters to send emails to authors, in
   the ``EMAIL`` section.
 
-- ``CORE_API_KEY`` and ``ROMEO_API_KEYS`` are required if you want to
+- ``ROMEO_API_KEYS`` is required if you want to
   import papers automatically from these sources. See :ref:`page-apikeys`
   about how to get them. The ``ZENODO_KEY`` is required
   if you want to upload papers to Zenodo.
@@ -67,16 +67,12 @@ Edit ``dissemin/settings.py`` to change the following settings:
 
 - Add the domain you will be using (for instance ``myuni.dissem.in``) to the ``ALLOWED_HOSTS``.
 
-- Set up the URL of your Central Authentication System in
-  ``CAS_URL``.
-
 - Fill the DATABASES section with the details you chose in the
   previous step
 
 - Create a ``www/static`` directory and set the ``STATIC_ROOT``
   variable to the global path for this folder. For instance, if your
   local copy of dissemin is in ``/home/me/dissemin``, set ``STATIC_ROOT = '/home/me/dissemin/www/static'``.
-
 
 
 You should commit these changes on a separate branch, let's call it
