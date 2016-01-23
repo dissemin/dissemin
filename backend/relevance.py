@@ -274,7 +274,7 @@ class RelevanceClassifier(object):
         if not self.classifier:
             return None
         scaled = self.scaler.transform(features)
-        pred = self.classifier.predict(scaled)
+        pred = self.classifier.predict(np.array(scaled).reshape(1,-1))
         return confusion_matrix(pred, labels)
 
     def classify(self, author, researcher, verbose=False):

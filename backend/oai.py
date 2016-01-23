@@ -31,6 +31,7 @@ from papers.models import OaiRecord, OaiSource, Name
 from papers.baremodels import BareOaiRecord, BarePaper
 from papers.doi import to_doi
 from papers.utils import sanitize_html
+from papers.errors import MetadataSourceException
 
 from backend.papersource import *
 from backend.extractors import *

@@ -323,7 +323,7 @@ class SimilarityClassifier(object):
         feat_vec = self.computeFeatures(dataA, dataB)
         if verbose:
             print(feat_vec)
-        output = self.classifier.predict(feat_vec)
+        output = self.classifier.predict(np.array(feat_vec).reshape(1,-1))
         return output[0]
 
     def predict(feat_mat):
