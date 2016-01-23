@@ -25,6 +25,7 @@ They are only stored in memory. This is useful for the API, where lookups are do
 without name ambiguity resolution.
 """
 
+from __future__ import unicode_literals
 import hashlib, re
 from urllib import urlencode, quote # for the Google Scholar and CORE link
 
@@ -223,7 +224,7 @@ class BarePaper(BareObject):
 
         p = cls()
         p.title = title
-        p.pubdate = pubdate
+        p.pubdate = pubdate # pubdate will be checked in fingerprint computation
         p.visibility = visibility
         for idx, n in enumerate(author_names):
             a = BareAuthor()
@@ -272,7 +273,13 @@ class BarePaper(BareObject):
 
         :returns: the :class:`BareAuthor` that was added (it can differ in subclasses)
         """
-        self.bare_authors.append(author)
+        if position is not None:
+            if not (position >= 0 and position <= len(self.bare_authors)):
+                raise ValueError("Invalid author position '%s' of %d" %
+                        (str(position), len(self.bare_authors)))
+            self.bare_authors.insert(position, author)
+        else:
+            self.bare_authors.append(author)
         return author
 
     def add_oairecord(self, oairecord):
