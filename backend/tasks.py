@@ -69,9 +69,8 @@ def init_profile_from_orcid(pk):
     r = Researcher.objects.get(pk=pk)
     update_task = lambda name: update_researcher_task(r, name)
     update_task('clustering')
-    ccf.reclusterBatch(r)
     fetch_everything_for_researcher(pk)
-    del ccf
+    ccf.clear()
 
 @shared_task(name='fetch_everything_for_researcher')
 @run_only_once('researcher', keys=['pk'], timeout=15*60)
@@ -101,15 +100,12 @@ def fetch_everything_for_researcher(pk):
     except MetadataSourceException as e:
         raise e
     finally:
-        update_researcher_task(r, 'clustering')
-        ccf.commitThemAll()
-        ccf.unloadResearcher(pk)
         r = Researcher.objects.get(pk=pk)
         update_researcher_task(r, 'stats')
         r.update_stats()
         r.harvester = None
         update_researcher_task(r, None)
-        del ccf
+        ccf.clear()
         name_lookup_cache.prune()
 
 @shared_task(name='fetch_records_for_researcher')
