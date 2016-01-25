@@ -93,7 +93,7 @@ DOI_PROXY_SUPPORTS_BATCH = True
 ### RoMEO proxy ###
 # Set this to 'sherpa.ac.uk' if our custom mirror is not up anymore.
 # Otherwise our proxy caches results and is more reliable than the original endpoint.
-ROMEO_API_DOMAIN = 'romeo-cache.ulminfo.fr'
+ROMEO_API_DOMAIN = 'romeo-cache.dissem.in'
 
 ### Paper deposits ###
 # Max size of the PDFs (in bytes)
