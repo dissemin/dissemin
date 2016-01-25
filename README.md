@@ -10,5 +10,5 @@ Released under the [Affero General Public License](http://www.gnu.org/licenses/a
 * [Developers' home](http://dev.dissem.in/)
 * [Documentation](http://dev.dissem.in/doc)
 * [To do list](https://github.com/wetneb/dissemin/issues)
-* [Things you can help with without diving into our code](http://dev.dissem.in/#peripheral)
+* [Useful things you can do without diving into our code](http://dev.dissem.in/#peripheral)
 
