@@ -130,6 +130,13 @@ def searchView(request, **kwargs):
         context['researcher'] = researcher
         context['researcher_id'] = researcher.id
         context['breadcrumbs'] = researcher.breadcrumbs()
+    elif 'department' in args:
+        dept = get_object_or_404(Department, pk=args.get('department'))
+        queryset = queryset.filter(author__researcher__department=dept)
+        search_description = unicode(dept)
+        head_search_description = unicode(dept)
+        context['department'] = dept
+        context['breadcrumbs'] = dept.breadcrumbs()+[(_('Papers'), '')]
     elif 'name' in args:
         name = get_object_or_404(Name, pk=args.get('name'))
         queryset = queryset.filter(author__name=name)

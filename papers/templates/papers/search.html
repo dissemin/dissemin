@@ -122,6 +122,13 @@
     <div class="detailsContent">
         <p id="detail-name">{{ name }}</p>
      </div>
+{% elif department %}
+<span class="detailsTitle">{% trans "Department" %}</span>
+    <div class="detailsContent">
+        <p id="detail-name">{{ department }}</p>
+        {% include "statistics/pie.html" with obj=department stats_counter=1 %}
+    </div>
+
 {% endif %}
 {% if journal %}
 <span class="detailsTitle">{% trans "Journal" %}</span>
