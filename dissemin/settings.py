@@ -105,10 +105,6 @@ ROMEO_API_DOMAIN = 'romeo-cache.dissem.in'
 DEPOSIT_MAX_FILE_SIZE = 20971520
 # Max download time when the file is downloaded from an URL (in seconds)
 URL_DEPOSIT_DOWNLOAD_TIMEOUT = 10
-# Allowed content types
-DEPOSIT_CONTENT_TYPES = ['application/pdf','application/x-pdf',
-    'application/octet-stream','application/x-download',
-    'application/download']
 
 # Uncomment these settings if you rather want
 # to fetch metadata directly from CrossRef (slower as not cached,
