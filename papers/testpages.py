@@ -98,6 +98,7 @@ class PaperPagesTest(RenderingTest):
         self.checkPage('search')
         self.checkPage('search', getargs={'researcher':self.r3.pk})
         self.checkPage('search', getargs={'name':self.r3.name_id})
+        self.checkPage('search', getargs={'department':self.di})
         # TODO more tests here
 
 #        url(r'^my-profile', views.myProfileView, name='my-profile'),

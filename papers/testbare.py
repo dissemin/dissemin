@@ -64,14 +64,21 @@ class BarePaperTest(BareObjectTest):
         names = [BareName.create('Peter','Johnstone'),
                 BareName.create('Xing','Li')]
         pubdate = datetime.date(year=2014,month=9,day=4)
+        # No title
         self.assertRaises(ValueError, BarePaper.create,
                 '', names, pubdate)
+        # No authors
         self.assertRaises(ValueError, BarePaper.create,
                 'Excellent title', [], pubdate)
+        # No publication date
         self.assertRaises(ValueError, BarePaper.create,
                 'Excellent title', names, None)
+        # Invalid visibility
         self.assertRaises(ValueError, BarePaper.create,
                 'Excellent title', names, pubdate, visibility="something")
+        # Not enough affiliations
+        self.assertRaises(ValueError, BarePaper.create,
+                'Excellent title', names, pubdate, affiliations=['ENS'])
 
     def test_authors(self):
         """
@@ -101,6 +108,7 @@ class BarePaperTest(BareObjectTest):
         self.assertRaises(ValueError, p.add_author,
                 BareAuthor(name=BareName.create('Cantor','Bernstein')),
                 position=8)
+
 
 
 
