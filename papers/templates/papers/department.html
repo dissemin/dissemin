@@ -49,6 +49,7 @@ function addResearcher() {
 
 {% block lists %}
 <p></p>
+<p>{% trans "The administration has provided us with this list. Please report any problem to contact@dissem.in." %}</p>
 <ul id="membersList" class="noCircle">
     {% for person in department.sorted_researchers %}
     {% ifchanged person.name.first_letter %}

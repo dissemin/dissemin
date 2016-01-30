@@ -83,7 +83,10 @@ def process_ajax_change(request, model, allowedFields):
 @user_passes_test(is_admin)
 def deleteResearcher(request, pk):
     researcher = get_object_or_404(Researcher, pk=pk)
+    dept = researcher.department
     researcher.delete()
+    if dept:
+        dept.update_stats()
     return HttpResponse('OK', content_type='text/plain')
 
 def researcherCandidatesByName(name):
@@ -291,7 +294,7 @@ def changePublisherStatus(request):
 
 urlpatterns = patterns('',
 #    url(r'^annotate-paper-(?P<pk>\d+)-(?P<status>\d+)$', annotatePaper, name='ajax-annotatePaper'),
-#    url(r'^delete-researcher-(?P<pk>\d+)$', deleteResearcher, name='ajax-deleteResearcher'),
+    url(r'^delete-researcher-(?P<pk>\d+)$', deleteResearcher, name='ajax-deleteResearcher'),
 #    url(r'^change-department$', changeDepartment, name='ajax-changeDepartment'),
 #    url(r'^change-paper$', changePaper, name='ajax-changePaper'),
 #    url(r'^change-researcher$', changeResearcher, name='ajax-changeResearcher'),
