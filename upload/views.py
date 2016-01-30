@@ -33,7 +33,7 @@ from papers.user import *
 
 from upload.forms import *
 from upload.models import *
-from dissemin.settings import URL_DEPOSIT_DOWNLOAD_TIMEOUT, DEPOSIT_MAX_FILE_SIZE, DEPOSIT_CONTENT_TYPES
+from dissemin.settings import URL_DEPOSIT_DOWNLOAD_TIMEOUT, DEPOSIT_MAX_FILE_SIZE
 
 import requests, json
 from jsonview.decorators import json_view
@@ -193,8 +193,6 @@ def handleUrlDownload(request):
         if 'text/html' in content_type:
             response['message'] = ( # Left as one line for compatibility purposes
 _('Invalid content type: this link points to a web page, we need a direct link to a PDF file.'))
-        elif content_type not in DEPOSIT_CONTENT_TYPES:
-            response['message'] = invalid_content_type_message
 
     except requests.exceptions.Timeout as e:
         response['message'] = _('Invalid URL (server timed out).')

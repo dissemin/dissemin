@@ -22,8 +22,6 @@ from __future__ import unicode_literals
 from django import forms
 from django.utils.translation import ugettext as _
 
-from dissemin.settings import DEPOSIT_CONTENT_TYPES, DEPOSIT_MAX_FILE_SIZE
-
 from papers.models import *
 from papers.name import *
 from upload.models import UploadedPDF

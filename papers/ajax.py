@@ -36,7 +36,7 @@ import json, requests
 from django.views.decorators.csrf import csrf_exempt
 from celery.execute import send_task
 
-from dissemin.settings import URL_DEPOSIT_DOWNLOAD_TIMEOUT, DEPOSIT_MAX_FILE_SIZE, DEPOSIT_CONTENT_TYPES, MEDIA_ROOT
+from dissemin.settings import URL_DEPOSIT_DOWNLOAD_TIMEOUT, DEPOSIT_MAX_FILE_SIZE, MEDIA_ROOT
 
 from papers.models import *
 from papers.user import *
