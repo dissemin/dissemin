@@ -320,9 +320,7 @@ def shallower_name_similarity(a, b):
             return 0.
 
     maxlen = max(len(partsA), len(partsB))
-    if maxlen > 0:
-        return ratio*len(parts)/maxlen
-    return 0.
+    return ratio*(len(parts)+1)/(maxlen+1)
 
 #### Helpers for the name splitting heuristic ######
 
