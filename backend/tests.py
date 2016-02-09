@@ -500,4 +500,15 @@ class MaintenanceTest(PrefilledTest):
         cleanup_titles()
         cleanup_abstracts()
 
+class ClusteringTest(PrefilledTest):
+    def test_reclusterbatch(self):
+        p = BarePaper.create('test paper', [Name.lookup_name(('Random','Guy'))],
+                datetime.datetime.now())
+        p = Paper.from_bare(p)
+        a = p.author_set.all().first()
+        a.researcher = self.r4
+        a.save()
+        self.ccf.reclusterBatch(self.r4)
+        a = Author.objects.get(pk=a.pk)
+        self.assertEqual(a.researcher, None)
 

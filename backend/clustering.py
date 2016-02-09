@@ -406,6 +406,8 @@ class ClusteringContext(object):
                 cluster=None,
                 num_children=1,
                 cluster_relevance=0.)
+        Author.objects.filter(researcher=self.researcher
+                ).update(researcher=None)
         print("Updating clustering context…")
         for pk in self.parent:
             self.parent[pk] = None
