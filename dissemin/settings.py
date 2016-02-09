@@ -298,8 +298,11 @@ CELERYBEAT_SCHEDULE = {
         'update_journal_stats': {
             'task':'update_journal_stats',
             'schedule':timedelta(days=1),
-            }
-
+            },
+        'remove_empty_profiles': {
+            'task':'remove_empty_profiles',
+            'schedule':timedelta(hours=2),
+            },
 }
 
 # This is the time in seconds before an unacknowledged task is re-sent to
