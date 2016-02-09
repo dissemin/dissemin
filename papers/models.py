@@ -289,16 +289,21 @@ class Researcher(models.Model):
         .. todo::
             This should rather rely on the name variants with confidence 1.0
         """
-        nvqs = NameVariant.objects.filter(researcher=self)
+        nvqs = self.namevariant_set.all()
         if reset:
-            nvqs.delete()
+            for nv in nvqs:
+                name = nv.name
+                nv.delete()
+                name.update_best_confidence()
+
             current_name_variants = set()
         else:
             current_name_variants = set([nv.name_id for nv in nvqs])
 
         last = self.name.last
         for name in self.variants_queryset():
-            sim = name_similarity((name.first,name.last),(self.name.first,self.name.last))
+            sim = name_similarity((name.first,name.last),
+                                  (self.name.first,self.name.last))
             if sim > 0 and name.id not in current_name_variants:
                 self.add_name_variant(name, sim, force_update=reset)
 

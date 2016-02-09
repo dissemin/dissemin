@@ -165,6 +165,21 @@ def recapitalize_word(w, force=False):
     return w
 
 def match_first_names(pair):
+    """
+    Returns true when the given pair of first names
+    is compatible.
+
+    >>> match_first_names(('A','Amanda'))
+    True
+    >>> match_first_names(('Amanda','Amanda'))
+    True
+    >>> match_first_names(('Alfred','Amanda'))
+    False
+    >>> match_first_names(('patrick','P'))
+    True
+    >>> match_first_names((None,'Iryna'))
+    True
+    """
     a,b = pair
     if a is None or b is None:
         return True
@@ -176,6 +191,10 @@ def match_first_names(pair):
         return a.lower() == b.lower()
 
 def to_plain_name(name):
+    """
+    Converts a :class:`Name` instance to a pair of
+    (firstname,lastname)
+    """
     return (name.first,name.last)
 
 def deduplicate_words(words, separators):
@@ -239,16 +258,29 @@ def name_similarity(a,b):
     """
     Returns a float: how similar are these two names?
     Examples:
-    name_similarity(('Robin', 'Ryder'),('Robin', 'Ryder')) == 0.8
-    name_similarity(('Robin', 'Ryder'),('R.', 'Ryder')) == 0.4
-    name_similarity(('R.', 'Ryder'),('R.', 'Ryder')) == 0.4
-    name_similarity(('Robin J.', 'Ryder'),('R.', 'Ryder')) ==0.3
-    name_similarity(('Robin J.', 'Ryder'),('R. J.', 'Ryder')) == 0.8
-    name_similarity(('R. J.', 'Ryder'),('J.', 'Ryder')) == 0.3
-    name_similarity(('Robin', 'Ryder'),('Robin J.', 'Ryder')) == 0.7
-    name_similarity(('W. Timothy','Gowers'), ('Timothy','Gowers')) == 0.7
-    name_similarity(('Robin K.','Ryder'), ('Robin J.', 'Ryder')) == 0
-    name_similarity(('Claire', 'Mathieu'),('Claire', 'Kenyon-Mathieu') == 0
+
+    >>> int(10*name_similarity(('Robin', 'Ryder'),('Robin', 'Ryder')))
+    8
+    >>> int(10*name_similarity(('Robin', 'Ryder'),('R.', 'Ryder')))
+    4
+    >>> int(10*name_similarity(('R.', 'Ryder'),('R.', 'Ryder')))
+    4
+    >>> int(10*name_similarity(('Robin J.', 'Ryder'),('R.', 'Ryder')))
+    3
+    >>> int(10*name_similarity(('Robin J.', 'Ryder'),('R. J.', 'Ryder')))
+    8
+    >>> int(10*name_similarity(('R. J.', 'Ryder'),('J.', 'Ryder')))
+    3
+    >>> int(10*name_similarity(('Robin', 'Ryder'),('Robin J.', 'Ryder')))
+    7
+    >>> int(10*name_similarity(('W. Timothy','Gowers'), ('Timothy','Gowers')))
+    7
+    >>> int(10*name_similarity(('Robin K.','Ryder'), ('Robin J.', 'Ryder')))
+    0
+    >>> int(10*name_similarity(('Claire', 'Mathieu'),('Claire', 'Kenyon-Mathieu')))
+    0
+    >>> int(10*name_similarity(('Amanda P.','Brown'),('Patrick','Brown')))
+    0
     """
 
     if not a or not b:
@@ -261,8 +293,6 @@ def name_similarity(a,b):
     lastB = iunaccent(lastB)
     if lastA != lastB:
         return 0.
-    #if firstA == firstB:
-    #    return 1.
     partsA, sepsA = split_name_words(firstA)
     partsB, sepsB = split_name_words(firstB)
     parts = zip(partsA, partsB)
@@ -273,15 +303,29 @@ def name_similarity(a,b):
         parts = zip(partsA, partsB)
         if not all(map(match_first_names, parts)):
             return 0.
+
     maxlen = max(len(partsA), len(partsB))
     sumscores = 0
+    expanded = []
     for i in range(maxlen):
         if i < len(parts):
             sumscores += weight_first_names(parts[i])
+            expanded.append((len(partsA[i])>1, len(partsB[i])>1))
         elif i < len(partsA):
             sumscores -= 0.25*weight_first_name(partsA[i])
+            expanded.append((len(partsA[i])>1, False))
         else:
             sumscores -= 0.25*weight_first_name(partsB[i])
+            expanded.append((False, len(partsB[i])>1))
+
+    # Make sure expanded first names of A are included in that of B
+    # or that of B and included in that of A
+    # This prevents ('Amanda P.','Brown') and ('A. Patrick','Brown')
+    # frow matching
+    if not (all([a or not b for a,b in expanded]) or
+        all([b or not a for a,b in expanded])):
+        return 0.
+
     sumscores = max(min(sumscores, 1), 0)
     return sumscores
 

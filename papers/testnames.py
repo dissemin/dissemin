@@ -198,6 +198,8 @@ class NameSimilarityTest(unittest.TestCase):
                 name_similarity(('Robin K.','Ryder'), ('Robin J.', 'Ryder')), 0)
         self.assertAlmostEqual(
                 name_similarity(('Claire', 'Mathieu'),('Claire', 'Kenyon-Mathieu')), 0)
+        self.assertAlmostEqual(
+                name_similarity(('Amanda P.','Brown'),('Patrick','Brown')), 0)
 
     def test_symmetric(self):
         pairs = [ 
@@ -404,5 +406,11 @@ class UnifyNameListsTest(unittest.TestCase):
             [('Jérémie','Boutier'),('Jérémie','Boutier')],
             [('J.','Boutier')]),
             [(('Jérémie','Boutier'),(0,0)),(None,(1,None))])
+
+import doctest
+import papers.name
+def load_tests(loader, tests, ignore):
+    tests.addTests(doctest.DocTestSuite(papers.name))
+    return tests
 
 
