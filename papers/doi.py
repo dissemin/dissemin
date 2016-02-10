@@ -39,12 +39,14 @@ def to_doi(candidate):
     u'10.1145/1721837.1721839'
     >>> to_doi('info:eu-repo/semantics/altIdentifier/doi/10.1145/1721837.1721839')
     u'10.1145/1721837.1721839'
+    >>> to_doi('10.1093/jhmas/XXXI.4.480')
+    u'10.1093/jhmas/xxxi.4.480'
     """
     m = doi_re.match(candidate)
     if m:
-        return m.groups()[0]
+        return m.groups()[0].lower()
     else:
         openaire_match = openaire_doi_re.match(candidate)
         if openaire_match:
-            return openaire_match.group(1)
+            return openaire_match.group(1).lower()
 

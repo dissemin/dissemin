@@ -408,6 +408,20 @@ class TasksTest(PrefilledTest):
         r = Researcher.get_or_create_by_orcid('0000-0002-6561-5642')
         fetch_everything_for_researcher(r.pk)
 
+    def test_remove_empty_profiles(self):
+        Researcher.objects.update(last_harvest=datetime.datetime.now())
+        nb_researchers = Researcher.objects.all().count()
+        r = Researcher.create_by_name('Franck','Behindtree')
+        r.last_harvest = datetime.datetime.now()-datetime.timedelta(hours=4)
+        r.save()
+        r.update_stats()
+        pk = r.pk
+        remove_empty_profiles()
+        with self.assertRaises(ObjectDoesNotExist):
+            Researcher.objects.get(pk=pk)
+        self.assertEqual(Researcher.objects.count(), nb_researchers)
+
+
 class MaintenanceTest(PrefilledTest):
     @classmethod
     def setUpClass(self):
@@ -486,4 +500,15 @@ class MaintenanceTest(PrefilledTest):
         cleanup_titles()
         cleanup_abstracts()
 
+class ClusteringTest(PrefilledTest):
+    def test_reclusterbatch(self):
+        p = BarePaper.create('test paper', [Name.lookup_name(('Random','Guy'))],
+                datetime.datetime.now())
+        p = Paper.from_bare(p)
+        a = p.author_set.all().first()
+        a.researcher = self.r4
+        a.save()
+        self.ccf.reclusterBatch(self.r4)
+        a = Author.objects.get(pk=a.pk)
+        self.assertEqual(a.researcher, None)
 

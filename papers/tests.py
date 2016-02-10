@@ -44,6 +44,16 @@ class ResearcherTest(django.test.TestCase):
         r2 = Researcher.get_or_create_by_orcid('0000-0001-5393-1421')
         self.assertNotEqual(r1, r2)
 
+    def test_clear_name_variants(self):
+        r1 = Researcher.create_by_name('Jeanne','Harmi')
+        n = Name.lookup_name(('Ncersc','Harmi'))
+        n.save()
+        r1.add_name_variant(n, 0.7)
+        self.assertAlmostEqual(n.best_confidence, 0.7)
+        r1.update_variants(reset=True)
+        n = Name.objects.get(pk=n.pk)
+        self.assertAlmostEqual(n.best_confidence, 0.)
+
 class OaiRecordTest(django.test.TestCase):
     @classmethod
     def setUpClass(self):

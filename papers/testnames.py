@@ -198,6 +198,8 @@ class NameSimilarityTest(unittest.TestCase):
                 name_similarity(('Robin K.','Ryder'), ('Robin J.', 'Ryder')), 0)
         self.assertAlmostEqual(
                 name_similarity(('Claire', 'Mathieu'),('Claire', 'Kenyon-Mathieu')), 0)
+        self.assertAlmostEqual(
+                name_similarity(('Amanda P.','Brown'),('Patrick','Brown')), 0)
 
     def test_symmetric(self):
         pairs = [ 
@@ -214,6 +216,53 @@ class NameSimilarityTest(unittest.TestCase):
         ]
         for a,b in pairs:
             self.assertAlmostEqual(name_similarity(a,b),name_similarity(b,a))
+
+class ShallowerNameSimilarityTest(unittest.TestCase):
+    def test_matching(self):
+        self.assertAlmostEqual(
+            shallower_name_similarity(('Robin', 'Ryder'),('Robin', 'Ryder')), 1.0)
+        self.assertGreater(
+            shallower_name_similarity(('Robin', 'Ryder'),('R.', 'Ryder')), 0)
+        self.assertGreater(
+            shallower_name_similarity(('R.', 'Ryder'),('R.', 'Ryder')), 0)
+        self.assertGreater(
+            shallower_name_similarity(('Robin J.', 'Ryder'),('R.', 'Ryder')), 0)
+        self.assertGreater(
+            shallower_name_similarity(('Robin J.', 'Ryder'),('R. J.', 'Ryder')), 0)
+        self.assertGreater(
+            shallower_name_similarity(('Robin', 'Ryder'),('Robin J.', 'Ryder')), 0)
+        self.assertGreater(
+            shallower_name_similarity(('Robin', 'Ryder'),('', 'Ryder')), 0)
+
+    def test_multiple(self):
+        self.assertAlmostEqual(
+            shallower_name_similarity(('Juan Pablo','Corella'),('J. Pablo','Corella')), 1.0)
+
+    def test_reverse(self):
+        self.assertGreater(
+                shallower_name_similarity(('W. Timothy','Gowers'), ('Timothy','Gowers') ), 0)
+
+    def test_mismatch(self):
+        self.assertAlmostEqual(
+                shallower_name_similarity(('Robin K.','Ryder'), ('Robin J.', 'Ryder')), 0)
+        self.assertAlmostEqual(
+                shallower_name_similarity(('Robin','Ryder'), ('Robin', 'Rider')), 0)
+
+    def test_symmetric(self):
+        pairs = [ 
+            (('Robin', 'Ryder'),('Robin', 'Ryder')),
+            (('Robin', 'Ryder'),('R.', 'Ryder')),
+            (('R.', 'Ryder'),('R.', 'Ryder')),
+            (('Robin J.', 'Ryder'),('R.', 'Ryder')),
+            (('Robin J.', 'Ryder'),('R. J.', 'Ryder')),
+            (('R. J.', 'Ryder'),('J.', 'Ryder')),
+            (('Robin', 'Ryder'),('Robin J.', 'Ryder')),
+            (('W. Timothy','Gowers'), ('Timothy','Gowers') ),
+            (('Robin K.','Ryder'), ('Robin J.', 'Ryder')),
+            (('Claire', 'Mathieu'),('Claire', 'Kenyon-Mathieu')),
+        ]
+        for a,b in pairs:
+            self.assertAlmostEqual(shallower_name_similarity(a,b),shallower_name_similarity(b,a))
 
 
 class ParseCommaNameTest(unittest.TestCase):
@@ -357,5 +406,11 @@ class UnifyNameListsTest(unittest.TestCase):
             [('Jérémie','Boutier'),('Jérémie','Boutier')],
             [('J.','Boutier')]),
             [(('Jérémie','Boutier'),(0,0)),(None,(1,None))])
+
+import doctest
+import papers.name
+def load_tests(loader, tests, ignore):
+    tests.addTests(doctest.DocTestSuite(papers.name))
+    return tests
 
 
