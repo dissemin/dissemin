@@ -44,5 +44,29 @@ class PaperApiTest(JsonRenderingTest):
     def test_invalid_doi(self):
         self.checkJson(self.getPage('api-paper-doi', args=['10.10.10.10.10']), 404)
 
+    def test_query(self):
+        invalid_payloads = [
+            'test', '{}',
+            '{"title":""}',
+            '{"title":"this is a test"}',
+            '{"title":"this is a test","date":"aunriset"}',
+            '{"title":"this is a test","date":"2008"}',
+            '{"title":"this is a test","date":"2008","authors":"test"}',
+            '{"title":"this is a test","date":"2008-03","authors":[]}',
+            '{"title":"this is a test","date":"2008-03","authors":["lsc"]}',
+            '{"title":"test","date":"2008-03","authors":[{"error":"test"}]}',
+            ]
+
+        for payload in invalid_payloads:
+            self.checkJson(self.postPage('api-paper-query', postargs=payload,
+                postkwargs={'content_type':'application/json'}), 400)
+
+        valid_payloads = [
+            '{"title":"Strange resonances measured in Al+Al collisions at sqrt {S_ NN }= 2.65 GeV with the FOPI detector","date":"2015","authors":[{"plain":"Lopez, X."}]}',
+                ]
+        for payload in valid_payloads:
+            self.checkJson(self.postPage('api-paper-query', postargs=payload,
+                postkwargs={'content_type':'application/json'}), 200)
         
+            
 

@@ -25,8 +25,13 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseForbidden, Http404, JsonResponse
 import json, requests
 from jsonview.decorators import json_view
+from jsonview.exceptions import BadRequest
+from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_exempt
 
 from papers.models import *
+from papers.name import parse_comma_name
+from papers.utils import tolerant_datestamp_to_datetime
 
 from rest_framework import serializers, routers, viewsets, views
 from rest_framework.response import Response
@@ -79,16 +84,82 @@ router.register(r'papers', PaperViewSet, base_name='papers')
 def api_paper_doi(request, doi):
     p = Paper.create_by_doi(doi, bare=True)
     if p is None:
-        raise Http404
+        raise Http404("The paper you requested could not be found.")
     return {
             'status':'ok',
             'paper':p.json()
             }
 
+
+
+@json_view
+@csrf_exempt
+@require_POST
+def api_paper_query(request):
+    try:
+        fields = json.loads(request.body.decode('utf-8'))
+    except (ValueError, UnicodeDecodeError):
+        raise BadRequest('Invalid JSON payload')
+
+    title = fields.get('title')
+    if type(title) != unicode or not title or len(title) > 512:
+        raise BadRequest('Invalid title, has to be a non-empty string shorter than 512 characters')
+
+    pubdate = fields.get('date')
+    
+    date = fields.get('date')
+    if type(date) != unicode:
+        raise BadRequest('A date is required')
+    try:
+        date = tolerant_datestamp_to_datetime(date)
+    except ValueError as e:
+        raise BadRequest(unicode(e))
+
+    authors = fields.get('authors')
+    if type(authors) != list:
+        raise BadRequest('A list of authors is expected')
+
+    parsed_authors = []
+    for a in authors:
+        author = None
+        if type(a) != dict:
+            raise BadRequest('Invalid author')
+
+        if 'first' in a and 'last' in a:
+            if type(a['first']) != unicode or type(a['last']) != unicode or not a['last']:
+                raise BadRequest('Invalid (first,last) name provided')
+            else:
+                author = (a['first'],a['last'])
+        elif 'plain' in a:
+            if type(a['plain']) != unicode or not a['plain']:
+                raise BadRequest('Invalid plain name provided')
+            else:
+                author = parse_comma_name(a['plain'])
+
+        if author is None:
+            raise BadRequest('Invalid author')
+
+        parsed_authors.append(BareName.create(author[0],author[1]))
+
+    if not authors:
+        raise BadRequest('No authors provided')
+
+    try:
+        p = BarePaper.create(title, parsed_authors, date)
+    except ValueError:
+        raise BadRequest('Invalid paper')
+    import backend.oai as oai
+    oaisource = oai.OaiPaperSource(max_results=10)
+    p = oaisource.fetch_accessibility(p)
+     
+    return {'status':'ok','paper':p.json()}
+
+
 urlpatterns = patterns('',
     url(r'^', include(router.urls)),
 #    url(r'^paper/(?P<pk>\d+)/$', PaperView.as_view(), name='api-paper'),
     url(r'^(?P<doi>10\..*)$', api_paper_doi, name='api-paper-doi'),
+    url(r'^query$', api_paper_query, name='api-paper-query'),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^docs/', include('rest_framework_swagger.urls')),
 )

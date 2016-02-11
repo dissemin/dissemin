@@ -73,7 +73,9 @@ class JsonRenderingTest(PrefilledTest):
     def postPage(self, *args, **kwargs):
         urlargs = kwargs.copy()
         del urlargs['postargs']
-        return self.ajaxPost(reverse(*args, **urlargs), kwargs['postargs'])
+        if 'postkwargs' in urlargs:
+            del urlargs['postkwargs']
+        return self.ajaxPost(reverse(*args, **urlargs), kwargs['postargs'], **kwargs.get('postkwargs',{}))
 
 
 class PaperAjaxTest(JsonRenderingTest):
