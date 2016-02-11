@@ -32,6 +32,7 @@ from django.views.decorators.csrf import csrf_exempt
 from papers.models import *
 from papers.name import parse_comma_name
 from papers.utils import tolerant_datestamp_to_datetime
+from papers.errors import MetadataSourceException
 
 from rest_framework import serializers, routers, viewsets, views
 from rest_framework.response import Response
@@ -90,8 +91,6 @@ def api_paper_doi(request, doi):
             'paper':p.json()
             }
 
-
-
 @json_view
 @csrf_exempt
 @require_POST
@@ -100,6 +99,17 @@ def api_paper_query(request):
         fields = json.loads(request.body.decode('utf-8'))
     except (ValueError, UnicodeDecodeError):
         raise BadRequest('Invalid JSON payload')
+
+    doi = fields.get('doi')
+    if doi:
+        p = None
+        try:
+            p = Paper.create_by_doi(doi, bare=True)
+        except MetadataSourceException:
+            pass
+        if p is None:
+            raise BadRequest('Could not find a paper with this DOI')
+        return {'status':'ok','paper':p.json()}
 
     title = fields.get('title')
     if type(title) != unicode or not title or len(title) > 512:

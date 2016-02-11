@@ -597,6 +597,7 @@ class BarePaper(BareObject):
             'publications': [p.json() for p in self.publications],
             'records': [r.json() for r in self.oairecords],
             'pdf_url': self.pdf_url,
+            'classification': self.oa_status,
             })
 
 

@@ -47,6 +47,7 @@ class PaperApiTest(JsonRenderingTest):
     def test_query(self):
         invalid_payloads = [
             'test', '{}',
+            '{"doi":"anurisecbld"}',
             '{"title":""}',
             '{"title":"this is a test"}',
             '{"title":"this is a test","date":"aunriset"}',
@@ -63,6 +64,7 @@ class PaperApiTest(JsonRenderingTest):
 
         valid_payloads = [
             '{"title":"Strange resonances measured in Al+Al collisions at sqrt {S_ NN }= 2.65 GeV with the FOPI detector","date":"2015","authors":[{"plain":"Lopez, X."}]}',
+            '{"doi":"10.1016/j.paid.2009.02.013"}',
                 ]
         for payload in valid_payloads:
             self.checkJson(self.postPage('api-paper-query', postargs=payload,
