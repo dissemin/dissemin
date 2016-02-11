@@ -198,7 +198,7 @@ class AOFRFormatter(MetadataFormatter):
 
             name = author.name
             curtype = 'first'
-            for first in split_words(name.first):
+            for first in name.first.split(' '):
                 forename = addChild(nameNode, 'forename')
                 forename.attrib['type'] = curtype
                 forename.text = first

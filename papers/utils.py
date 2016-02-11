@@ -44,25 +44,18 @@ def nocomma(lst):
     lst = [x if x else ' ' for x in lst]
     return ','.join(lst)
 
-split_re = re.compile(r'[ .,-]*')
-def split_words(string):
-    return filter(lambda x: x != '', split_re.split(string))
-
 def ulower(s):
     return unicode(s).lower()
 
-def isupper(s):
-    if type(s) == type(u''):
-        return unicode.isupper(s)
-    else:
-        return str.isupper(s)
-
-def nstr(s):
-    if s:
-        return s
-    return ''
-
 def nstrip(s):
+    """
+    >>> nstrip(None) is None
+    True
+    >>> nstrip(u'aa')
+    u'aa'
+    >>> nstrip(u'  aa \\n')
+    u'aa'
+    """
     if s:
         return s.strip()
     return None
@@ -193,6 +186,11 @@ def jpath(path, js, default=None):
 def remove_nones(dct):
     """
     Return a dict, without the None values
+
+    >>> remove_nones({'orcid':None,'wtf':'pl'})
+    {'wtf':'pl'}
+    >>> remove_nones({'orcid':'blah','hey':'you'})
+    {'orcid':'blah','hey':'you'}
     """
     return {k:dct[k] for k in filter(lambda x: x is not None, dct.keys())}
 
@@ -223,8 +221,6 @@ def create_paper_plain_fingerprint(title, authors, year):
         if not author:
             continue
         author = (remove_diacritics(author[0]),remove_diacritics(author[1]))
-        # Initials of the given names are not used anymore in the fingerprints
-        # initials = map(lambda x: x[0].lower(), split_words(author[0]))
 
         # Last name, without the small words such as "van", "der", "de"…
         last_name_words, last_name_separators = split_name_words(author[1])
@@ -249,14 +245,19 @@ def create_paper_plain_fingerprint(title, authors, year):
 
     return buf
 
-def create_paper_fingerprint(title, authors, year):
-    m = hashlib.md5()
-    m.update(create_paper_plain_fingerprint(title, authors, year))
-    return m.hexdigest()
-
 ### Partial date representation
 
 def parse_int(val, default):
+    """
+    Returns an int or a default value if parsing the int failed.
+
+    >>> parse_int(90, None)
+    90
+    >>> parse_int(None, 90)
+    90
+    >>> parse_int('est', 8)
+    8
+    """
     try:
         return int(val)
     except ValueError:
@@ -265,6 +266,24 @@ def parse_int(val, default):
         return default
 
 def date_from_dateparts(dateparts):
+    """
+    Constructs a date from a list of at most 3 integers.
+
+    >>> date_from_dateparts([])
+    datetime.date(1970, 1, 1)
+    >>> date_from_dateparts([2015])
+    datetime.date(2015, 1, 1)
+    >>> date_from_dateparts([2015,02])
+    datetime.date(2015, 2, 1)
+    >>> date_from_dateparts([2015,02,16])
+    datetime.date(2015, 2, 16)
+    >>> date_from_dateparts([2015,02,16])
+    datetime.date(2015, 2, 16)
+    >>> date_from_dateparts([2015,02,35])
+    Traceback (most recent call last):
+        ...
+    ValueError: day is out of range for month
+    """
     year = 1970 if len(dateparts) < 1 else parse_int(dateparts[0], 1970)
     month = 01 if len(dateparts) < 2 else parse_int(dateparts[1], 01)
     day = 01 if len(dateparts) < 3 else parse_int(dateparts[2], 01)
@@ -274,16 +293,34 @@ def tolerant_datestamp_to_datetime(datestamp):
     """A datestamp to datetime that's more tolerant of diverse inputs.
     Taken from pyoai.
 
-    Not used inside pyoai itself right now, but can be used when defining
-    your own metadata schema if that has a broader variety of datetimes
-    in there.
+    >>> tolerant_datestamp_to_datetime('2016-02-11T18:34:12Z')
+    datetime.datetime(2016, 2, 11, 18, 34, 12)
+    >>> tolerant_datestamp_to_datetime('2016-02-11')
+    datetime.datetime(2016, 2, 11, 0, 0)
+    >>> tolerant_datestamp_to_datetime('2016-02')
+    datetime.datetime(2016, 2, 1, 0, 0)
+    >>> tolerant_datestamp_to_datetime('2016')
+    datetime.datetime(2016, 1, 1, 0, 0)
+    >>> tolerant_datestamp_to_datetime('2016-02-11T18:34:12') # Z needed
+    Traceback (most recent call last):
+        ...
+    ValueError: Invalid datestamp: 2016-02-11T18:34:12
+    >>> tolerant_datestamp_to_datetime('2016-02-11-3') # too many numbers
+    Traceback (most recent call last):
+        ...
+    ValueError: Invalid datestamp: 2016-02-11-3
+    >>> tolerant_datestamp_to_datetime('2016-02-11T18:37:09:38') # too many numbers
+    Traceback (most recent call last):
+        ...
+    ValueError: Invalid datestamp: 2016-02-11T18:37:09:38
+
     """
     splitted = datestamp.split('T')
     if len(splitted) == 2:
         d, t = splitted
         # if no Z is present, raise error
         if t[-1] != 'Z':
-            raise DatestampError(datestamp)
+            raise ValueError("Invalid datestamp: "+str(datestamp))
         # split off Z at the end
         t = t[:-1]
     else:
@@ -317,6 +354,15 @@ orcid_re = re.compile(r'^(http://orcid.org/)?([0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{3
 def validate_orcid(orcid):
     """
     :returns: a cleaned ORCiD if the argument represents a valid ORCiD, None otherwise
+
+    This does not check that the id actually exists on orcid.org,
+    only checks that it is syntactically valid (including the checksum).
+    See http://support.orcid.org/knowledgebase/articles/116780-structure-of-the-orcid-identifier
+
+    See the test suite for a more complete set of examples
+
+    >>> validate_orcid(u' 0000-0001-8633-6098\\n')
+    u'0000-0001-8633-6098'
     """
     if not orcid:
         return
@@ -343,14 +389,26 @@ def affiliation_is_greater(a, b):
     Compares to affiliation values. Returns True
     when the first contains more information than
     the second
+
+    >>> affiliation_is_greater(None, None)
+    False
+    >>> affiliation_is_greater(None, 'UPenn')
+    False
+    >>> affiliation_is_greater('UPenn', None)
+    True
+    >>> affiliation_is_greater('0000-0001-8633-6098', 'Ecole normale superieure, Paris')
+    True
+    >>> affiliation_is_greater('Ecole normale superieure', 'Upenn')
+    True
     """
     if a is None:
         return False
     if b is None:
         return True
-    if validate_orcid(a):
+    oa, ob = validate_orcid(a), validate_orcid(b)
+    if oa and not ob:
         return True
-    if validate_orcid(b):
+    if ob and not oa:
         return False
     return len(a) > len(b)
 
@@ -361,6 +419,13 @@ def index_of(elem, choices):
     """
     Returns the index of elem (understood as a code) in the list of choices,
     where choices are expected to be pairs of (code,verbose_description). 
+
+    >>> index_of(42, [])
+    0
+    >>> index_of('ok', [('ok','This is ok'),('nok','This is definitely not OK')])
+    0
+    >>> index_of('nok', [('ok','This is ok'),('nok','This is definitely not OK')])
+    1
     """
     idx = 0
     for code, lbl in choices:

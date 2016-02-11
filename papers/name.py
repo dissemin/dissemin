@@ -23,7 +23,7 @@ from __future__ import unicode_literals
 import re
 import name_tools
 
-from papers.utils import iunaccent, remove_diacritics, isupper
+from papers.utils import iunaccent, remove_diacritics
 
 # Name managemement: heuristics to separate a name into (first,last)
 comma_re = re.compile(r',+')

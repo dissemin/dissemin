@@ -23,7 +23,7 @@ from __future__ import unicode_literals
 
 import unittest
 
-from papers.utils import unescape_latex, remove_latex_math_dollars, validate_orcid, remove_latex_braces, kill_double_dollars
+from papers.utils import *
 
 class UnescapeLatexTest(unittest.TestCase):
     def test_simple(self):
@@ -91,4 +91,18 @@ class ValidateOrcidTest(unittest.TestCase):
     def test_url(self):
         self.assertEqual(validate_orcid('http://orcid.org/0000-0002-8612-8827'), '0000-0002-8612-8827')
 
+class UtilitiesTest(unittest.TestCase):
+    def test_affiliation_is_greater_partial_order(self):
+        for a,b in [(None,None),(None,'Cambridge'),('0000-0002-8612-8827','ENS'),
+                ('University of Oxford, Oxfordshire','0000-0001-5892-7431')]:
+            self.assertFalse(affiliation_is_greater(a,b) and
+                    affiliation_is_greater(b,a))
+            self.assertFalse(affiliation_is_greater(a,a))
+            self.assertFalse(affiliation_is_greater(b,b))
+
+import doctest
+import papers.utils
+def load_tests(loader, tests, ignore):
+    tests.addTests(doctest.DocTestSuite(papers.utils))
+    return tests
 
