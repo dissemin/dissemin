@@ -227,9 +227,13 @@ class OrcidRelevance(RelevanceFeature):
                 print("ORCID match")
             else:
                 print("ORCID mismatch")
-        if author.affiliation == researcher.orcid:
+        orcid = author.orcid
+        if orcid is None:
+            return [0.]
+        if orcid == researcher.orcid:
             return [1.]
-        return [0.]
+        else:
+            return [-1.]
 
 
 class RelevanceClassifier(object):
@@ -391,13 +395,7 @@ class OrcidRelevanceClassifier(RelevanceClassifier):
     def score(self, author, researcher, verbose=False):
         features = self.computeFeatures(author, researcher, verbose)
 
-        # note: == False is not spurious here, because it could be True, False or None!
-        if researcher.empty_orcid_profile == False: # if we found at least one record in the orcid profile
-            if features[0] >= 0.5: # if the ORCIDs match
-                return 64.0 # then we give a very good confidence
-            return 0.1*(features[1]-2) # otherwise a slightly negative confidence
-        else: # otherwise we don't know any publication for sure…
-            return features[1] - 0.4
+        return 64*features[0] + features[1] - 0.4
 
 
 
