@@ -28,7 +28,6 @@ from __future__ import unicode_literals
 from lxml import etree
 
 from papers.models import Paper, Publication, Author, Researcher, Name, OaiRecord
-from papers.utils import split_words
 
 
 ENS_HAL_ID = 59704

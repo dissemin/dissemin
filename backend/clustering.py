@@ -11,15 +11,11 @@ from unidecode import unidecode
 
 from papers.models import Author, Researcher, Paper, Publication, Name
 from papers.baremodels import BarePaper
-from papers.utils import nocomma, create_paper_fingerprint, date_from_dateparts, sanitize_html
-from papers.name import to_plain_name, parse_comma_name
-from papers.doi import to_doi
-from papers.errors import MetadataSourceException
+from papers.utils import nocomma
 
 from backend.similarity import SimilarityClassifier, AuthorNotFound
 from backend.relevance import RelevanceClassifier
 from backend import crossref
-from backend.name_cache import name_lookup_cache
 
 class ClusteringContext(object):
     def __init__(self, researcher, sc, rc):

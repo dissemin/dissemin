@@ -187,12 +187,14 @@ def remove_nones(dct):
     """
     Return a dict, without the None values
 
-    >>> remove_nones({'orcid':None,'wtf':'pl'})
-    {'wtf':'pl'}
-    >>> remove_nones({'orcid':'blah','hey':'you'})
-    {'orcid':'blah','hey':'you'}
+    >>> remove_nones({u'orcid':None,u'wtf':u'pl'})
+    {u'wtf': u'pl'}
+    >>> remove_nones({u'orcid':u'blah',u'hey':u'you'})
+    {u'orcid': u'blah', u'hey': u'you'}
+    >>> remove_nones({None:1})
+    {None: 1}
     """
-    return {k:dct[k] for k in filter(lambda x: x is not None, dct.keys())}
+    return dict(filter(lambda (k,v): v is not None, dct.items()))
 
 ##### Paper fingerprinting
 

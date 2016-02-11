@@ -35,7 +35,7 @@ from django.db import DataError
 from papers.errors import MetadataSourceException
 from papers.doi import to_doi
 from papers.name import match_names, normalize_name_words, parse_comma_name
-from papers.utils import create_paper_fingerprint, iunaccent, tolerant_datestamp_to_datetime, date_from_dateparts, affiliation_is_greater, jpath, validate_orcid, sanitize_html
+from papers.utils import iunaccent, tolerant_datestamp_to_datetime, date_from_dateparts, affiliation_is_greater, jpath, validate_orcid, sanitize_html
 from papers.models import Publication, Paper
 from papers.baremodels import BarePublication, BarePaper
 from publishers.models import *

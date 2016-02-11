@@ -31,7 +31,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from papers.errors import MetadataSourceException
 from papers.doi import to_doi
 from papers.name import match_names, normalize_name_words, parse_comma_name, shallower_name_similarity
-from papers.utils import create_paper_fingerprint, iunaccent, tolerant_datestamp_to_datetime, date_from_dateparts, validate_orcid, parse_int
+from papers.utils import validate_orcid, parse_int
 from papers.models import OaiSource
 from papers.baremodels import BarePaper, BareOaiRecord
 from papers.bibtex import parse_bibtex

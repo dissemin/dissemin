@@ -33,7 +33,7 @@ from __future__ import unicode_literals
 from papers.models import *
 from publishers.models import *
 import backend.crossref
-from papers.utils import sanitize_html, create_paper_fingerprint
+from papers.utils import sanitize_html
 from backend.romeo import fetch_publisher
 from backend.tasks import change_publisher_oa_status
 from backend.crossref import fetch_metadata_by_DOI, is_oa_license
