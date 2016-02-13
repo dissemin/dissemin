@@ -42,7 +42,6 @@ from celery.execute import send_task
 from papers.models import *
 from papers.forms import *
 from papers.user import is_admin, is_authenticated
-from papers.emails import *
 from papers.orcid import *
 from papers.doi import to_doi
 
