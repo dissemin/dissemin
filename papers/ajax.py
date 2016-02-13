@@ -40,7 +40,7 @@ from dissemin.settings import URL_DEPOSIT_DOWNLOAD_TIMEOUT, DEPOSIT_MAX_FILE_SIZ
 
 from papers.models import *
 from papers.user import *
-from papers.forms import AddResearcherForm, AddUnaffiliatedResearcherForm
+from papers.forms import AddUnaffiliatedResearcherForm
 from papers.utils import iunaccent, sanitize_html, kill_html
 from papers.name import normalize_name_words
 
@@ -48,10 +48,12 @@ from jsonview.decorators import json_view
 
 import os.path
 
-# General function used to change a CharField in a model with ajax
 @json_view
 @require_POST
 def process_ajax_change(request, model, allowedFields):
+    """
+    General function used to change a CharField in a model with ajax
+    """
     response = dict()
     try:
         instance = model.objects.get(pk=request.POST.get('pk'))
@@ -82,6 +84,10 @@ def process_ajax_change(request, model, allowedFields):
 # Researcher management
 @user_passes_test(is_admin)
 def deleteResearcher(request, pk):
+    """
+    Deletes a researcher (from a department). Their papers are
+    left as they are.
+    """
     researcher = get_object_or_404(Researcher, pk=pk)
     dept = researcher.department
     researcher.delete()
@@ -124,6 +130,11 @@ def researcherCandidatesByName(name):
 @json_view
 @require_POST
 def newUnaffiliatedResearcher(request):
+    """
+    creates a new unaffiliated researcher, or returns
+    a list of possible candidates if the name matches known
+    profiles.
+    """
     form = AddUnaffiliatedResearcherForm(request.POST)
     researcher = None
     if form.is_valid():
@@ -142,66 +153,37 @@ def newUnaffiliatedResearcher(request):
     else:
         return form.errors, 403
 
-@json_view
-@user_passes_test(is_admin)
-@require_POST
-def addResearcher(request):
-    form = AddResearcherForm(request.POST)
-    if form.is_valid():
-        try:
-            dept = form.cleaned_data['department']
-            email = form.cleaned_data['email']
-            first = form.cleaned_data['first']
-            last = form.cleaned_data['last']
-            role = form.cleaned_data['role']
-            homepage = form.cleaned_data['homepage']
+# paper management
+#@user_passes_test(is_authenticated)
+#def annotatepaper(request, pk, status):
+#    paper = get_object_or_404(Paper, pk=pk)
+#    try:
+#        status = int(status)
+#        if not status in range(len(VISIBILITY_CHOICES)):
+#            raise ValueError
+#    except valueError:
+#        return HttpResponseForbidden('Invalid visibility status', content_type='text/plain')
+#
+#    visibility = VISIBILITY_CHOICES[status][0]
+#    annotation.create(paper, visibility, request.user)
+#    return httpResponse('OK', content_type='text/plain')
 
-            try:
-                researcher = Researcher.create_by_name(first, last,
-                        department=dept, email=email, role=role, homepage=homepage)
-            except ValueError:
-                return HttpResponseForbidden('Researcher already present', content_type='text/plain')
+#@user_passes_test(is_admin)
+#def changepaper(request):
+#    allowedFields = ['title']
+#    return process_ajax_change(request, Paper, allowedFields)
 
-            return {
-                'id':researcher.id,
-                'name':first+' '+last
-                }
-        except IntegrityError as e:
-            return {'message':'Invalid input, something went wrong'}, 500
-    else:
-        return form.errors, 403
+# department management
+#@user_passes_test(is_admin)
+#def changedepartment(request):
+#    allowedFields = ['name']
+#    return process_ajax_change(request, Department, allowedFields)
 
-# Paper management
-@user_passes_test(is_authenticated)
-def annotatePaper(request, pk, status):
-    paper = get_object_or_404(Paper, pk=pk)
-    try:
-        status = int(status)
-        if not status in range(len(VISIBILITY_CHOICES)):
-            raise ValueError
-    except ValueError:
-        return HttpResponseForbidden('Invalid visibility status', content_type='text/plain')
-
-    visibility = VISIBILITY_CHOICES[status][0]
-    Annotation.create(paper, visibility, request.user)
-    return HttpResponse('OK', content_type='text/plain')
-
-@user_passes_test(is_admin)
-def changePaper(request):
-    allowedFields = ['title']
-    return process_ajax_change(request, Paper, allowedFields)
-
-# Department management
-@user_passes_test(is_admin)
-def changeDepartment(request):
-    allowedFields = ['name']
-    return process_ajax_change(request, Department, allowedFields)
-
-# Researcher management
-@user_passes_test(is_admin)
-def changeResearcher(request):
-    allowedFields = ['role']
-    return process_ajax_change(request, Researcher, allowedFields)
+# researcher management
+#@user_passes_test(is_admin)
+#def changeresearcher(request):
+#    allowedFields = ['role']
+#    return process_ajax_change(request, Researcher, allowedFields)
 
 @user_passes_test(is_admin)
 def setResearcherDepartment(request):
@@ -237,47 +219,48 @@ def waitForConsolidatedField(request):
         return {'success':success,'message':'Invalid field'}
     return {'success':success,'value':value}
 
-# Author management
-@user_passes_test(is_admin)
-@json_view
-def changeAuthor(request):
-    response = dict()
-    try:
-        author = Author.objects.get(pk=request.POST.get('pk'))
-        first = request.POST.get('value[first]')
-        if first:
-            first = sanitize_html(first)
-        last = request.POST.get('value[last]')
-        if last:
-            last = sanitize_html(last)
-        if not first or not last:
-            return {'message':'First and last names are required.'}, 403
-        if author.name.first != first or author.name.last != last:
-            new_name = Name.lookup_name((first,last))
-            new_name.save()
-            author.name_id = new_name.pk
-            author.save()
-
-        author.paper.invalidate_cache()
-        response['status'] = 'OK'
-        researcher_id = author.researcher_id
-        if not researcher_id:
-            researcher_id = False
-        response['value'] = {'first':first,'last':last,'researcher_id':researcher_id}
-        
-        # The fingerprint might have changed and might collide with another paper
-        merged = author.paper.recompute_fingerprint_and_merge_if_needed()
-        response['merged'] = ''
-        if merged:
-            response['merged'] = merged.pk
-            response['merged_title'] = merged.title
-
-        return response
-    except ObjectDoesNotExist:
-        return response, 404
+# author management
+#@user_passes_test(is_admin)
+#@json_view
+#def changeAuthor(request):
+#    response = dict()
+#    try:
+#        author = Author.objects.get(pk=request.POST.get('pk'))
+#        first = request.POST.get('value[first]')
+#        if first:
+#            first = sanitize_html(first)
+#        last = request.POST.get('value[last]')
+#        if last:
+#            last = sanitize_html(last)
+#        if not first or not last:
+#            return {'message':'First and last names are required.'}, 403
+#        if author.name.first != first or author.name.last != last:
+#            new_name = Name.lookup_name((first,last))
+#            new_name.save()
+#            author.name_id = new_name.pk
+#            author.save()
+#
+#        author.paper.invalidate_cache()
+#        response['status'] = 'OK'
+#        researcher_id = author.researcher_id
+#        if not researcher_id:
+#            researcher_id = False
+#        response['value'] = {'first':first,'last':last,'researcher_id':researcher_id}
+#        
+#        # the fingerprint might have changed and might collide with another paper
+#        merged = author.paper.recompute_fingerprint_and_merge_if_needed()
+#        response['merged'] = ''
+#        if merged:
+#            response['merged'] = merged.pk
+#            response['merged_title'] = merged.title
+#
+#        return response
+#    except ObjectDoesNotExist:
+#        return response, 404
 
 # Publisher management
 @user_passes_test(is_admin)
+@require_POST
 def changePublisherStatus(request):
     allowedStatuses = [s[0] for s in OA_STATUS_CHOICES]
     try:
@@ -299,7 +282,6 @@ urlpatterns = patterns('',
 #    url(r'^change-paper$', changePaper, name='ajax-changePaper'),
 #    url(r'^change-researcher$', changeResearcher, name='ajax-changeResearcher'),
 #    url(r'^change-author$', changeAuthor, name='ajax-changeAuthor'),
-    url(r'^add-researcher$', addResearcher, name='ajax-addResearcher'),
     url(r'^new-unaffiliated-researcher$', newUnaffiliatedResearcher, name='ajax-newUnaffiliatedResearcher'),
     url(r'^change-publisher-status$', changePublisherStatus, name='ajax-changePublisherStatus'),
 #    url(r'^harvesting-status-(?P<pk>\d+)$', harvestingStatus, name='ajax-harvestingStatus'),

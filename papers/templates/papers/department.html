@@ -81,26 +81,6 @@ function addResearcher() {
     {% endfor %}
 </ul>
 
-{% if request.user.is_superuser %}
-    <form action="javascript:addResearcher();" method="post" id="addResearcherForm">
-     <div id="globalError" class="formErrorDiv"></div>
-    {% csrf_token %}
-    {% for field in add_form %}
-       {% if field.name == 'department' %}
-       <input type="hidden" name="department" value="{{ department.id }}" />
-       {% else %}
-       <div class="input-group">
-           <div class="formErrorDiv" id="error-{{ field.name }}">{{ field.errors }}</div>
-           {{ field.label_tag }}
-           <input type="text" name="{{ field.name }}" id="{{ field.id }}" class="form-control" />
-        </div>
-        {% endif %}
-    {% endfor %}
-    <input type="submit" class="btn btn-default" value="{% trans "Add" %}" />
-    </form>
-{% endif %}
-
-
 {% endblock %}
 
 {% block details %}

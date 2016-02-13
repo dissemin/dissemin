@@ -273,7 +273,6 @@ class DepartmentView(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super(DepartmentView, self).get_context_data(**kwargs)
         context['breadcrumbs'] = self.object.breadcrumbs()
-        context['add_form'] = AddResearcherForm()
         return context
 
 class InstitutionView(generic.DetailView):

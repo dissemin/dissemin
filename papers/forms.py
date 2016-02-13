@@ -35,14 +35,6 @@ class OrcidField(forms.CharField):
             raise forms.ValidationError(_('Invalid ORCID identifier.'), code='invalid')
         return cleaned_val
 
-class AddResearcherForm(forms.Form):
-    first = forms.CharField(label=_('First name'), max_length=256, min_length=2)
-    last = forms.CharField(label=_('Last name'), max_length=256, min_length=2)
-    email = forms.EmailField(label=_('Email'), required=False)
-    homepage = forms.URLField(label=_('Homepage'),required=False)
-    role = forms.CharField(label=_('Role'),required=False)
-    department = forms.ModelChoiceField(label=_('Department'), queryset=Department.objects.all())
-
 class ResearcherDepartmentForm(forms.Form):
     value = forms.ModelChoiceField(label=_('Department'), queryset=Department.objects.all())
     pk = forms.ModelChoiceField(label=_('Researcher'), queryset=Researcher.objects.all(), widget=forms.HiddenInput())

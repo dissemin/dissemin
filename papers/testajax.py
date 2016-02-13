@@ -29,6 +29,11 @@ from backend.tests import PrefilledTest
 from backend.crossref import CrossRefPaperSource
 from backend.oai import OaiPaperSource
 
+from backend.crossref import CrossRefPaperSource
+from django.contrib.auth.models import User
+from time import sleep
+from papers.models import Paper
+
 # TODO TO BE TESTED
 #urlpatterns = patterns('',
 ##    url(r'^annotate-paper-(?P<pk>\d+)-(?P<status>\d+)$', annotatePaper, name='ajax-annotatePaper'),
@@ -82,10 +87,11 @@ class PaperAjaxTest(JsonRenderingTest):
     def test_valid_search(self):
         for args in [
             {'first':'John','last':'Doe'},
+            {'first':'Gilbeto','last':'Gil'},
             ]:
             parsed = self.checkJson(self.postPage('ajax-newUnaffiliatedResearcher',
                 postargs=args))
-            self.assertTrue(len(parsed) > 0)
+            self.assertTrue('disambiguation' in parsed or 'url' in parsed)
 
     def test_invalid_search(self):
         for args in [
@@ -99,4 +105,35 @@ class PaperAjaxTest(JsonRenderingTest):
             self.assertTrue(len(parsed) > 0)
 
         
+class PublisherAjaxTest(JsonRenderingTest):
+    @classmethod
+    def setUpClass(cls):
+        super(PublisherAjaxTest, cls).setUpClass()
+        u = User.objects.create_user('patrick', 'pat@mat.io', 'yo')
+        u.is_superuser = True
+        u.save()
+
+    def setUp(self):
+        super(PublisherAjaxTest, self).setUp()
+        self.papers = map(Paper.create_by_doi,
+                ['10.1038/526052a','10.1038/nchem.1829','10.1038/nchem.1365'])
+        self.publisher = self.papers[0].publications[0].publisher
+        self.assertEqual(self.publisher.name, 'Nature Publishing Group')
+
+    def test_logged_out(self):
+        self.client.logout()
+        req = self.postPage('ajax-changePublisherStatus',
+                postargs={'pk':self.publisher.pk,'status':'OA'})
+        self.assertEqual(req.status_code, 302)
+
+    def test_change_publisher_status(self):
+        self.client.login(username='patrick', password='yo')
+        p = self.postPage('ajax-changePublisherStatus',
+                postargs={'pk':self.publisher.pk,
+                          'status':'OA'})
+        self.assertEqual(p.status_code, 200)
+        sleep(3)
+        papers = [Paper.objects.get(pk=p.pk) for p in self.papers]
+        self.assertTrue(all([p.oa_status == 'OA' for p in papers]))
+
 
