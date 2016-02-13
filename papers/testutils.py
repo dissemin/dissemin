@@ -100,6 +100,13 @@ class UtilitiesTest(unittest.TestCase):
             self.assertFalse(affiliation_is_greater(a,a))
             self.assertFalse(affiliation_is_greater(b,b))
 
+    def test_jpath(self):
+        self.assertEqual(jpath('awesome',{}), None)
+        self.assertEqual(jpath('awesome',{}, 41), 41)
+        self.assertEqual(jpath('a',{'a':'b'}, 41), 'b')
+        self.assertEqual(jpath('a/b',{'a':{'b':7},'c':None}, 41), 7)
+        self.assertEqual(jpath('a',{'a':{'b':7},'c':None}, 41), {'b':7})
+
 import doctest
 import papers.utils
 def load_tests(loader, tests, ignore):

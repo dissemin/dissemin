@@ -32,23 +32,57 @@ from titlecase import titlecase
 
 ### General string utilities ###
 
-filter_punctuation_alphanum_regex = re.compile(r'\w')
+filter_punctuation_alphanum_regex = re.compile(r'.*\w')
 def filter_punctuation(lst):
-    return filter(lambda x: filter_punctuation_alphanum_regex.findall(x) != [], lst)
+    """
+    :param lst: list of strings
+    :returns: all the strings that contain at least one alphanumeric character
+
+    >>> filter_punctuation([u'abc',u'ab.',u'/,',u'a-b',u'#=', u'0'])
+    [u'abc', u'ab.', u'a-b', u'0']
+    """
+    return filter(lambda x: filter_punctuation_alphanum_regex.match(x) is not None,
+            lst)
 
 def nocomma(lst):
     """
     Join fields using ',' ensuring that it does not appear in the fields
+    This is used to output similarity graphs to be visualized with Gephi.
+
+    :param lst: list of strings
+    :returns: these strings joined by commas, ensuring they do not contain
+        commas themselves
+
+    >>> nocomma([u'a',u'b',u'cd'])
+    u'a,b,cd'
+    >>> nocomma([u'a,',u'b'])
+    u'a,b'
+    >>> nocomma([u'abc',u'',u'\\n',u'def'])
+    u'abc, , ,def'
     """
     lst = map(lambda x: str(x).replace(',','').replace('\n',''), lst)
     lst = [x if x else ' ' for x in lst]
     return ','.join(lst)
 
 def ulower(s):
+    """
+    Converts to unicode and lowercase.
+    :param s: a string
+    :return: unicode(s).lower()
+
+    >>> ulower('abSc')
+    u'absc'
+    >>> ulower(None)
+    u'none'
+    >>> ulower(89)
+    u'89'
+    """
     return unicode(s).lower()
 
 def nstrip(s):
     """
+    Just like unicode.strip(), but works for None too.
+
     >>> nstrip(None) is None
     True
     >>> nstrip(u'aa')
@@ -61,29 +95,55 @@ def nstrip(s):
     return None
 
 def remove_diacritics(s):
-    if type(s) == type(u''):
+    """
+    Removes diacritics using the `unidecode` package.
+
+    :param: an str or unicode string
+    :returns: if str: the same string. if unicode: the unidecoded string.
+
+    >>> remove_diacritics(u'aéèï')
+    'aeei'
+    >>> remove_diacritics(u'aéè'.encode('utf-8'))
+    'a\\xc3\\xa9\\xc3\\xa8'
+    """
+    if type(s) == unicode:
         return unidecode(s)
     else:
         return s
 
 def iunaccent(s):
+    """
+    Removes diacritics and case.
+
+    >>> iunaccent(u'BÉPO forever')
+    'bepo forever'
+    """
     return remove_diacritics(s).lower()
 
 
 tokenize_space_re = re.compile(r'\s+')
-def fallback_tokenize(l):
+def tokenize(l):
+    """
+    A (very very simple) tokenizer.
+
+    >>> tokenize(u'Hello world!')
+    [u'Hello', u'world!']
+    >>> tokenize(u'99\\tbottles\\nof  beeron \\tThe Wall')
+    [u'99', u'bottles', u'of', u'beeron', u'The', u'Wall']
+    """
     return tokenize_space_re.split(l)
 
-try:
-    from nltk.tokenize import word_tokenize
-    tokenize = word_tokenize
-except ImportError:
-    tokenize = fallback_tokenize
-except LookupError:
-    tokenize = fallback_tokenize
-
-# Recapitalize a title if it is mostly uppercase
 def maybe_recapitalize_title(title):
+    """
+    Recapitalize a title if it is mostly uppercase
+
+    >>> maybe_recapitalize_title(u'THIS IS CALLED SCREAMING')
+    u'This Is Called Screaming'
+    >>> maybe_recapitalize_title(u'This is just a normal title')
+    u'This is just a normal title'
+    >>> maybe_recapitalize_title(u'THIS IS JUST QUITE Awkward')
+    u'THIS IS JUST QUITE Awkward'
+    """
     nb_upper = 0
     nb_lower = 0
     for i in range(len(title)):
@@ -112,10 +172,29 @@ html_killer.remove_unknown_tags = False
 
 latexmath_re = re.compile(r'\$(\S[^$]*?\S|\S)\$')
 def remove_latex_math_dollars(string):
+    """
+    Removes LaTeX dollar tags.
+
+    >>> remove_latex_math_dollars(u'This is $\\\\beta$-reduction explained')
+    u'This is \\\\beta-reduction explained'
+    >>> remove_latex_math_dollars(u'Compare $\\\\frac{2}{3}$ to $\\\\pi$')
+    u'Compare \\\\frac{2}{3} to \\\\pi'
+    >>> remove_latex_math_dollars(u'Click here to win $100')
+    u'Click here to win $100'
+    >>> remove_latex_math_dollars(u'What do you prefer, $50 or $100?')
+    u'What do you prefer, $50 or $100?'
+    """
     return latexmath_re.sub(r'\1', string)
 
 latex_command_re = re.compile(r'(\\([a-zA-Z]+|[.=\'"])({[^}]*})*)')
 def unescape_latex(s):
+    """
+    Replaces LaTeX symbols by their unicode counterparts using
+    the `unicode_tex` package.
+
+    >>> unescape_latex(u'the $\\\\alpha$-rays of $\\\\Sigma$-algebras')
+    u'the $\\u03b1$-rays of $\\u03a3$-algebras'
+    """
     def conditional_replace(fragment):
         rep = unicode_tex.tex_to_unicode_map.get(fragment.group(0))
         return rep if rep is not None else fragment.group(0)
@@ -129,6 +208,15 @@ def remove_latex_braces(s):
     """
     Removes spurious braces such as in "Th{é}odore" or "a {CADE} conference"
     This should be run *after* unescape_latex
+
+    >>> remove_latex_braces(u'Th{é}odore')
+    u'Th\\xe9odore'
+    >>> remove_latex_braces(u'the {CADE} conference')
+    u'the CADE conference'
+    >>> remove_latex_braces(u'consider 2^{a+b}')
+    u'consider 2^{a+b}'
+    >>> remove_latex_braces(u'{why these braces?}')
+    u'why these braces?'
     """
     s = latex_full_line_braces_re.sub(r'\1', s)
     s = latex_word_braces_re.sub(r'\1\2\3', s)
@@ -138,6 +226,18 @@ def remove_latex_braces(s):
     return s
 
 def sanitize_html(s):
+    """
+    Removes most HTML tags, keeping the harmless ones.
+    This also renders some LaTeX characters with `unescape_latex`,
+    fixes overescaped HTML characters, and a few other fixes.
+
+    >>> sanitize_html('My title<sub>is</sub><a href="http://dissem.in"><sup>nice</sup></a>')
+    u'My title<sub>is</sub><sup>nice</sup>'
+    >>> sanitize_html('$\\\\alpha$-conversion')
+    u'$\\u03b1$-conversion'
+    >>> sanitize_html('$$\\\\eta + \\\\omega$$')
+    u'$\\u03b7 + \\u03c9$'
+    """
     s = overescaped_re.sub(r'&#\1;', s)
     s = unicode4_re.sub(lambda x: x.group(1).decode('unicode-escape'), s)
     s = whitespace_re.sub(r' ', s)
@@ -150,20 +250,39 @@ def kill_html(s):
     """
     Removes every tag except <div> (but there are no
     <div> in titles as sanitize_html removes them)
+
+    >>> kill_html('My title<sub>is</sub><a href="http://dissem.in"><sup>nice</sup>    </a>')
+    u'My titleisnice'
     """
     orig = html_killer.clean_html('<div>'+s+'</div>')
-    return orig[5:-6]
+    return orig[5:-6].strip()
 
 latex_double_dollar_re = re.compile(r'\$\$([^\$]*?)\$\$')
 def kill_double_dollars(s):
     """
     Removes double dollars (they generate line breaks with MathJax)
     This is included in the sanitize_html function.
+
+    >>> kill_double_dollars('This equation $$\\\\mathrm{P} = \\\\mathrm{NP}$$ breaks my design')
+    u'This equation $\\\\mathrm{P} = \\\\mathrm{NP}$ breaks my design'
     """
     s = latex_double_dollar_re.sub(r'$\1$', s)
     return s
 
 def urlize(val):
+    """
+    Ensures a would-be URL actually starts with "http://" or "https://".
+
+    :param val: the URL
+    :returns: the cleaned URL
+
+    >>> urlize(u'gnu.org')
+    u'http://gnu.org'
+    >>> urlize(None) is None
+    True
+    >>> urlize(u'https://gnu.org')
+    u'https://gnu.org'
+    """
     if val and not val.startswith('http://') and not val.startswith('https://'):
         val = 'http://'+val
     return val
@@ -172,7 +291,14 @@ def urlize(val):
 
 def jpath(path, js, default=None):
     """
-    XPath for JSON !
+    XPath for JSON!
+    
+    :param path: a list of keys to follow in the tree of dicts, written in a string,
+                separated by forward slashes
+    :param default: the default value to return when the key is not found
+
+    >>> jpath(u'message/items', {u'message':{u'items':u'hello'}})
+    u'hello'
     """
     def _walk(lst, js):
         if js is None:
@@ -181,7 +307,8 @@ def jpath(path, js, default=None):
             return js
         else:
             return _walk(lst[1:], js.get(lst[0],{} if len(lst) > 1 else default))
-    return _walk(path.split('/'), js)
+    r = _walk(path.split('/'), js)
+    return r
 
 def remove_nones(dct):
     """
@@ -202,6 +329,28 @@ from papers.name import split_name_words
 
 stripped_chars = re.compile(r'[^- a-z0-9]')
 def create_paper_plain_fingerprint(title, authors, year):
+    """
+    Creates a robust summary of a bibliographic reference.
+    This plain fingerprint should then be converted to an
+    actual fingerprint by hashing it (so that the length remains
+    constant).
+
+    :param title: the title of the paper
+    :param authors: the list of author names, represented
+        as (first_name, last_name) pairs
+    :param year: the year of publication of the paper
+
+    >>> create_paper_plain_fingerprint(' It  cleans whitespace And Case\\n',[('John','Doe')], 2015)
+    u'it-cleans-whitespace-and-case/doe'
+    >>> create_paper_plain_fingerprint('HTML tags are <emph>removed</emph>',[('John','Doe')], 2015)
+    u'html-tags-are-removed/doe'
+    >>> create_paper_plain_fingerprint('Les accents sont supprimés', [('John','Doe')],2015)
+    u'les-accents-sont-supprimes/doe'
+    >>> create_paper_plain_fingerprint('Long titles are unambiguous enough to be unique by themselves, no need for authors', [('John','Doe')], 2015)
+    u'long-titles-are-unambiguous-enough-to-be-unique-by-themselves-no-need-for-authors'
+    >>> create_paper_plain_fingerprint('Ambiguity', [('John','Doe')], 2014)
+    u'ambiguity-2014/doe'
+    """
     title = kill_html(title)
     title = remove_diacritics(title).lower()
     title = stripped_chars.sub('',title)
