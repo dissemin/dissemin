@@ -23,6 +23,10 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django import forms
+from django.utils.translation import ugettext as __
+from django.conf import settings
+
+import traceback, sys, requests
 
 from papers.models import *
 
@@ -136,6 +140,12 @@ class RepositoryProtocol(object):
         except DepositError as e:
             self.log('Message: '+e.args[0])
             return DepositResult(logs=self._logs,status='FAILED',message=e.args[0])
+        except Exception as e:
+            self.log("Caught exception:")
+            self.log(str(type(e))+': '+str(e)+'')
+            self.log(traceback.format_exc())
+            return DepositResult(logs=self._logs,status='FAILED',message=__('Failed to connect to the repository. Please try again later.'))
+
 
     def log(self, line):
         """

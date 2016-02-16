@@ -22,11 +22,10 @@ from __future__ import unicode_literals
 
 import json
 import requests 
-import traceback, sys
 from StringIO import StringIO
 
-from django.utils.translation import ugettext as __
 from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext as __
 from os.path import basename
 
 ZENODO_LICENSES_CHOICES = [
@@ -80,64 +79,55 @@ class ZenodoProtocol(RepositoryProtocol):
 
         deposit_result = DepositResult()
 
-        try:
-            # Checking the access token
-            self.log("### Checking the access token")
-            r = requests.get(api_url_with_key)
-            self.log_request(r, 200, __('Unable to authenticate to Zenodo.'))
-               
-            # Creating a new deposition
-            self.log("### Creating a new deposition")
-            headers = {"Content-Type": "application/json"}
-            r = requests.post(api_url_with_key, data=str("{}"), headers=headers)
-            self.log_request(r, 201, __('Unable to create a new deposition on Zenodo.'))
-            deposition_id = r.json()['id']
-            deposit_result.identifier = deposition_id
-            self.log("Deposition id: %d" % deposition_id)
+        # Checking the access token
+        self.log("### Checking the access token")
+        r = requests.get(api_url_with_key)
+        self.log_request(r, 200, __('Unable to authenticate to Zenodo.'))
+           
+        # Creating a new deposition
+        self.log("### Creating a new deposition")
+        headers = {"Content-Type": "application/json"}
+        r = requests.post(api_url_with_key, data=str("{}"), headers=headers)
+        self.log_request(r, 201, __('Unable to create a new deposition on Zenodo.'))
+        deposition_id = r.json()['id']
+        deposit_result.identifier = deposition_id
+        self.log("Deposition id: %d" % deposition_id)
 
-            # Uploading the PDF
-            self.log("### Uploading the PDF")
-            data = {'filename':'article.pdf'}
-            files = {'file': open(pdf, 'rb')}
-            r = requests.post(self.api_url+"/%s/files?access_token=%s" % (deposition_id,api_key),
-                    data=data, files=files)
-            self.log_request(r, 201, __('Unable to transfer the document to Zenodo.'))
+        # Uploading the PDF
+        self.log("### Uploading the PDF")
+        data = {'filename':'article.pdf'}
+        files = {'file': open(pdf, 'rb')}
+        r = requests.post(self.api_url+"/%s/files?access_token=%s" % (deposition_id,api_key),
+                data=data, files=files)
+        self.log_request(r, 201, __('Unable to transfer the document to Zenodo.'))
 
-            # Creating the metadata
-            self.log("### Generating the metadata")
-            data = self.createMetadata(form)
-            self.log(json.dumps(data, indent=4)+'')
+        # Creating the metadata
+        self.log("### Generating the metadata")
+        data = self.createMetadata(form)
+        self.log(json.dumps(data, indent=4)+'')
 
-            # Check that there is an abstract
-            if data['metadata'].get('description','') == '':
-                self.log('No abstract found, aborting.')
-                raise DepositError(__('No abstract is available for this paper but '+
-                        'Zenodo requires to attach one. Please use the metadata panel to provide one.'))
+        # Check that there is an abstract
+        if data['metadata'].get('description','') == '':
+            self.log('No abstract found, aborting.')
+            raise DepositError(__('No abstract is available for this paper but '+
+                    'Zenodo requires to attach one. Please use the metadata panel to provide one.'))
 
-            # Submitting the metadata
-            self.log("### Submitting the metadata")
-            r = requests.put(self.api_url+"/%s?access_token=%s" % ( deposition_id, api_key),
-                    data=json.dumps(data), headers=headers)
-            self.log_request(r, 200, __('Unable to submit paper metadata to Zenodo.'))
-            
-            # Deleting the deposition
-            #self.log("### Deleting the deposition")
-            #r = requests.delete(self.api_url+"/%s?access_token=%s" % ( deposition_id, api_key) )
-            self.log("### Publishing the deposition")
-            r = requests.post(self.api_url+"/%s/actions/publish?access_token=%s" % (deposition_id, api_key))
-            self.log_request(r, 202, __('Unable to publish the deposition on Zenodo.'))
-            self.log(r.text)
-            deposition_object = r.json()
-            deposit_result.splash_url = deposition_object['record_url'] 
-            deposit_result.pdf_url = deposit_result.splash_url + '/files/article.pdf'
-
-        except DepositError as e:
-            raise e
-        except Exception as e:
-            self.log("Caught exception:")
-            self.log(str(type(e))+': '+str(e)+'')
-            self.log(traceback.format_exc())
-            raise DepositError(__('Failed to connect to Zenodo. Please try again later.'))
+        # Submitting the metadata
+        self.log("### Submitting the metadata")
+        r = requests.put(self.api_url+"/%s?access_token=%s" % ( deposition_id, api_key),
+                data=json.dumps(data), headers=headers)
+        self.log_request(r, 200, __('Unable to submit paper metadata to Zenodo.'))
+        
+        # Deleting the deposition
+        #self.log("### Deleting the deposition")
+        #r = requests.delete(self.api_url+"/%s?access_token=%s" % ( deposition_id, api_key) )
+        self.log("### Publishing the deposition")
+        r = requests.post(self.api_url+"/%s/actions/publish?access_token=%s" % (deposition_id, api_key))
+        self.log_request(r, 202, __('Unable to publish the deposition on Zenodo.'))
+        self.log(r.text)
+        deposition_object = r.json()
+        deposit_result.splash_url = deposition_object['record_url'] 
+        deposit_result.pdf_url = deposit_result.splash_url + '/files/article.pdf'
 
         return deposit_result
 

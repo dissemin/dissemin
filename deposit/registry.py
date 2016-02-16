@@ -50,7 +50,9 @@ class ProtocolRegistry(object):
                 if protocol_module_re.match(app):
                     try:
                         importlib.import_module(app+'.protocol')
-                    except ImportError:
+                    except ImportError as e:
+                        print "ImportError in "+app+'.protocol'
+                        print e
                         pass
         self.loaded = True
 

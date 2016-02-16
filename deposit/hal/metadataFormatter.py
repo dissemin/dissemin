@@ -28,6 +28,7 @@ from __future__ import unicode_literals
 from lxml import etree
 
 from papers.models import Paper, Publication, Author, Researcher, Name, OaiRecord
+from deposit.sword.metadataFormatter import MetadataFormatter, addChild
 
 
 ENS_HAL_ID = 59704
@@ -52,41 +53,42 @@ def aofrDocumentType(paper):
          }
     return tr[paper.doctype]
 
-
-class MetadataFormatter(object):
+class DCFormatter(MetadataFormatter):
     """
-    Abstract interface formatting metadata to a SWORD format
+    Generic SWORD formatter
     """
 
     def formatName(self):
-        """
-        A string, identifier for the format
-        """
-        return None
-    
+        return "dc"
+
     def render(self, paper, filename):
-        """
-        Returns an XML node representing the article in the expected format
-        The filename of the attached PDF should be None when uploading metadata only.
-        """
-        return None
+        xmlns_uri = 'http://www.w3.org/2005/Atom'
+        dcterms_uri = "http://purl.org/dc/terms/"
+        xmlns = '{%s}' % xmlns_uri
+        dcterms = '{%s}' % dcterms_uri
+        nsmap = {None: xmlns_uri, 'dcterms': dcterms_uri}
+        entry = etree.Element(xmlns+'entry', nsmap=nsmap)
 
-    def toString(self, paper, filename, pretty=False):
-        """
-        The metadata as a string
-        """
-        return etree.tostring(self.render(paper, filename),
-                pretty_print=pretty,
-                encoding='UTF-8',
-                xml_declaration=True)
+        addChild(entry, 'title', paper.title)
 
-def addChild(elem, childName):
-    """
-    Utility function: create a node, append it and return it
-    """
-    node = etree.Element(childName)
-    elem.append(node)
-    return node
+        addChild(entry, 'id', 'paper/%d' % paper.id)
+
+        addChild(entry, 'updated', paper.last_modified.isoformat())
+
+        # Here comes the actual metadata
+
+        addChild(entry, dcterms+'title', paper.title)
+        if paper.abstract:
+            addChild(entry, dcterms+'abstract', paper.abstract)
+        addChild(entry, dcterms+'type', paper.doctype)
+        
+        for a in paper.authors:
+            addChild(entry, dcterms+'contributor', unicode(a))
+
+        for p in paper.publications:
+            addChild(entry, dcterms+'identifier', p.doi)
+
+        return entry
 
 class AOFRFormatter(MetadataFormatter):
     """

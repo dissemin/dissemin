@@ -176,6 +176,7 @@ INSTALLED_APPS = (
     'deposit',
     'deposit.zenodo',
     'deposit.hal',
+    'deposit.sword',
     'bootstrap_pagination',
     'solo',
     'swampdragon',
