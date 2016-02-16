@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-07 10:48+0100\n"
-"PO-Revision-Date: 2016-01-11 22:16+0100\n"
+"POT-Creation-Date: 2016-02-16 12:15+0100\n"
+"PO-Revision-Date: 2016-02-16 12:15+0100\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -235,45 +235,32 @@ msgstr "Autre publication"
 msgid "Invalid ORCID identifier."
 msgstr "Identifiant ORCID invalide."
 
-#: papers/forms.py:39 papers/forms.py:52
-msgid "First name"
-msgstr "Prénom"
-
-#: papers/forms.py:40 papers/forms.py:53
-msgid "Last name"
-msgstr "Nom"
-
-#: papers/forms.py:41
-msgid "Email"
-msgstr "Email"
-
-#: papers/forms.py:42
-msgid "Homepage"
-msgstr "Site web"
-
-#: papers/forms.py:43
-msgid "Role"
-msgstr "Fonction"
-
-#: papers/forms.py:44 papers/forms.py:47
-#: papers/templates/papers/department.html:107
+#: papers/forms.py:39 papers/templates/papers/department.html:87
 #: papers/templates/papers/search.html:126
 msgid "Department"
 msgstr "Département"
 
-#: papers/forms.py:48 papers/templates/papers/search.html:77
+#: papers/forms.py:40 papers/templates/papers/search.html:77
 msgid "Researcher"
 msgstr "Personne"
 
-#: papers/forms.py:59
+#: papers/forms.py:44
+msgid "First name"
+msgstr "Prénom"
+
+#: papers/forms.py:45
+msgid "Last name"
+msgstr "Nom"
+
+#: papers/forms.py:51
 msgid "Please spell out at least one name."
 msgstr "Veuillez indiquer au moins un nom."
 
-#: papers/forms.py:67
+#: papers/forms.py:59
 msgid "A last name is required."
 msgstr "Il faut fournir un nom de famille."
 
-#: papers/forms.py:70
+#: papers/forms.py:62
 msgid "A first name is required."
 msgstr "Il faut fournir un prénom."
 
@@ -317,8 +304,8 @@ msgstr "Regroupement des publications"
 msgid "Updating statistics"
 msgstr "Mise à jour des statistiques"
 
-#: papers/models.py:928 papers/views.py:111 papers/views.py:112
-#: papers/views.py:139 papers/views.py:158 papers/views.py:190
+#: papers/models.py:933 papers/views.py:110 papers/views.py:111
+#: papers/views.py:138 papers/views.py:157 papers/views.py:189
 msgid "Papers"
 msgstr "Papiers"
 
@@ -365,8 +352,8 @@ msgid ""
 "The administration has provided us with this list. Please report any problem "
 "to contact@dissem.in."
 msgstr ""
-"Cette liste nous a été fournie par l'administration. Merci de nous signaler tout "
-"problème à contact@dissem.in."
+"Cette liste nous a été fournie par l'administration. Merci de nous signaler "
+"tout problème à contact@dissem.in."
 
 #: papers/templates/papers/department.html:61
 #: publishers/templates/publishers/list.html:67
@@ -385,11 +372,7 @@ msgstr "Chercheur supprimé."
 msgid "Delete"
 msgstr "Supprimer"
 
-#: papers/templates/papers/department.html:99
-msgid "Add"
-msgstr "Ajouter"
-
-#: papers/templates/papers/department.html:109
+#: papers/templates/papers/department.html:89
 msgid "Papers of the members"
 msgstr "Papiers des membres"
 
@@ -862,23 +845,23 @@ msgstr "politique imprécise"
 msgid "policy unknown"
 msgstr "politique inconnue"
 
-#: papers/views.py:128 papers/views.py:143
+#: papers/views.py:127 papers/views.py:142
 msgid " authored by "
 msgstr " écrits par "
 
-#: papers/views.py:149
+#: papers/views.py:148
 msgid " in "
 msgstr " dans "
 
-#: papers/views.py:155
+#: papers/views.py:154
 msgid " published by "
 msgstr " publiés par "
 
-#: papers/views.py:192
+#: papers/views.py:191
 msgid "All papers"
 msgstr "Tous les papiers"
 
-#: papers/views.py:312
+#: papers/views.py:310
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr "Aucun %(verbose_name)s ne correspond à la requête"
@@ -1186,7 +1169,7 @@ msgstr "Dissem.in est-il un dépôt ?"
 msgid "Who runs dissem.in?"
 msgstr "Qui sommes-nous ?"
 
-#: templates/dissemin/faq.html:25 templates/dissemin/faq.html.py:158
+#: templates/dissemin/faq.html:25 templates/dissemin/faq.html.py:159
 msgid "Can I create my profile on dissem.in?"
 msgstr "Puis-je me créer un profil sur dissem.in ?"
 
@@ -1194,27 +1177,27 @@ msgstr "Puis-je me créer un profil sur dissem.in ?"
 msgid "Can I use dissem.in for my institution?"
 msgstr "Puis-je utiliser dissem.in pour mon institution ?"
 
-#: templates/dissemin/faq.html:28 templates/dissemin/faq.html.py:172
+#: templates/dissemin/faq.html:28 templates/dissemin/faq.html.py:173
 msgid "Policies and full-text availability"
 msgstr "Par disponibilité du texte intégral"
 
-#: templates/dissemin/faq.html:29 templates/dissemin/faq.html.py:173
+#: templates/dissemin/faq.html:29 templates/dissemin/faq.html.py:174
 msgid "What do your policy classes mean?"
 msgstr "Que signifient les différentes politiques d'accès ?"
 
-#: templates/dissemin/faq.html:30 templates/dissemin/faq.html.py:228
+#: templates/dissemin/faq.html:30 templates/dissemin/faq.html.py:229
 msgid "When is a paper considered available?"
 msgstr "Quand considérez-vous qu'un papier est disponible ?"
 
-#: templates/dissemin/faq.html:31 templates/dissemin/faq.html.py:237
+#: templates/dissemin/faq.html:31 templates/dissemin/faq.html.py:238
 msgid "Should I trust your statistics?"
 msgstr "Vos statistiques sont-elles fiables ?"
 
-#: templates/dissemin/faq.html:33 templates/dissemin/faq.html.py:252
+#: templates/dissemin/faq.html:33 templates/dissemin/faq.html.py:253
 msgid "Omissions and errors"
 msgstr "Erreurs et oublis"
 
-#: templates/dissemin/faq.html:34 templates/dissemin/faq.html.py:271
+#: templates/dissemin/faq.html:34 templates/dissemin/faq.html.py:272
 msgid ""
 "There is a freely available copy of my article online but dissem.in does not "
 "find it."
@@ -1222,31 +1205,31 @@ msgstr ""
 "Il y a une copie de mon papier librement accessible en ligne, mais dissem.in "
 "ne le trouve pas."
 
-#: templates/dissemin/faq.html:35 templates/dissemin/faq.html.py:253
+#: templates/dissemin/faq.html:35 templates/dissemin/faq.html.py:254
 msgid "One of my papers is missing. Why?"
 msgstr "Pourquoi manque-t-il certains de mes papiers ?"
 
-#: templates/dissemin/faq.html:36 templates/dissemin/faq.html.py:263
+#: templates/dissemin/faq.html:36 templates/dissemin/faq.html.py:264
 msgid "Some details of my paper are incorrect. What can I do?"
 msgstr "Certaines informations sur mon papier sont incorrectes. Que faire ?"
 
-#: templates/dissemin/faq.html:38 templates/dissemin/faq.html.py:286
+#: templates/dissemin/faq.html:38 templates/dissemin/faq.html.py:287
 msgid "Behind the scenes"
 msgstr "En coulisses"
 
-#: templates/dissemin/faq.html:39 templates/dissemin/faq.html.py:288
+#: templates/dissemin/faq.html:39 templates/dissemin/faq.html.py:289
 msgid "Where do you get the data from?"
 msgstr "D'où proviennent vos données ?"
 
-#: templates/dissemin/faq.html:40 templates/dissemin/faq.html.py:295
+#: templates/dissemin/faq.html:40 templates/dissemin/faq.html.py:296
 msgid "How can I help?"
 msgstr "Comment puis-je aider ?"
 
-#: templates/dissemin/faq.html:41 templates/dissemin/faq.html.py:311
+#: templates/dissemin/faq.html:41 templates/dissemin/faq.html.py:312
 msgid "Where is the source code?"
 msgstr "Où est le code source ?"
 
-#: templates/dissemin/faq.html:42 templates/dissemin/faq.html.py:318
+#: templates/dissemin/faq.html:42 templates/dissemin/faq.html.py:319
 msgid "Can I harvest your data?"
 msgstr "Puis-je récolter vos données ?"
 
@@ -1405,13 +1388,13 @@ msgstr ""
 
 #: templates/dissemin/faq.html:155
 msgid ""
-"Dissemin is brought to you by <a href=\"http://dissem.in/#team\">our team</"
-"a>."
+"Dissemin is brought to you by the <a href=\"http://association.dissem.in/"
+"#team\">CAPSH association</a>."
 msgstr ""
-"Dissemin est développé par <a href=\"http://dissem.in/#team\">notre équipe</"
-"a>."
+"Dissemin est développé par <a href=\"http://dissem.in/#team\">l'association "
+"CAPSH</a>."
 
-#: templates/dissemin/faq.html:160
+#: templates/dissemin/faq.html:161
 msgid ""
 "Yes you can. We will ask you to create an ORCID profile if you do not have "
 "one yet. This only takes a few seconds."
@@ -1419,7 +1402,7 @@ msgstr ""
 "Oui, vous pouvez. Le système vous demandera de créer un profil ORCID si vous "
 "n'en avez pas encore un. Ça ne prend que quelques secondes."
 
-#: templates/dissemin/faq.html:165
+#: templates/dissemin/faq.html:166
 msgid ""
 "Can I use dissem.in as Current Research Information System for my "
 "institution?"
@@ -1427,14 +1410,14 @@ msgstr ""
 "Puis-je utiliser dissemin comme base de données (CRIS) pour la recherche de "
 "mon institution ?"
 
-#: templates/dissemin/faq.html:167
+#: templates/dissemin/faq.html:168
 msgid ""
 "Yes, just ask <a href=\"mailto:contact@dissem.in\">contact@dissem.in</a>."
 msgstr ""
 "Oui, adressez-vous à <a href=\"mailto:contact@dissem.in\">contact@dissem.in</"
 "a>."
 
-#: templates/dissemin/faq.html:180
+#: templates/dissemin/faq.html:181
 msgid ""
 "<strong>Open access:</strong><br /> The full text is made freely available "
 "by the publisher (in a fully open access or hybrid journal)."
@@ -1443,7 +1426,7 @@ msgstr ""
 "à disposition de tous par la maison d'édition (dans une revue entièrement en "
 "libre accès ou dans une revue hybride)."
 
-#: templates/dissemin/faq.html:192
+#: templates/dissemin/faq.html:193
 msgid ""
 "<strong>Pre/post prints allowed and full text available:</strong><br /> The "
 "full text is available in a repository, but might not be freely available "
@@ -1456,7 +1439,7 @@ msgstr ""
 "Ceci se conforme à la politique de la maison d'édition et s'appelle le "
 "\"green open-access\" ou auto-archivage."
 
-#: templates/dissemin/faq.html:205
+#: templates/dissemin/faq.html:206
 msgid ""
 "<strong>Pre/post prints allowed but full text unavailable:</strong><br /> "
 "The full text could be made available in a repository (as above) according "
@@ -1467,7 +1450,7 @@ msgstr ""
 "dans un dépôt (comme plus haut) suivant la politique de la maison d'édition. "
 "Nous encourageons les auteurs à le faire."
 
-#: templates/dissemin/faq.html:218
+#: templates/dissemin/faq.html:219
 msgid ""
 "<strong>Pre/post prints forbidden:</strong><br /> The publisher forbids "
 "deposits in repositories, in general. Authors might still be allowed to "
@@ -1480,7 +1463,7 @@ msgstr ""
 "articles au terme d'une période d'exclusivité (embargo), ou si les agences "
 "qui financent leur recherche ont un accord avec l'éditeur. "
 
-#: templates/dissemin/faq.html:230
+#: templates/dissemin/faq.html:231
 #, python-format
 msgid ""
 "When we have found it in one of the repositories we harvest. The list of "
@@ -1493,7 +1476,7 @@ msgstr ""
 "moteur de recherche <a href=\"http://www.base-search.net\">BASE</a>, nous "
 "avons accès à plus de 80 millions de preprints."
 
-#: templates/dissemin/faq.html:239
+#: templates/dissemin/faq.html:240
 msgid ""
 "There are a few caveats concerning our data: <ul> <li>Some papers are not "
 "present in any of our metadata sources, so they are not counted at all.</li> "
@@ -1517,7 +1500,7 @@ msgstr ""
 "vraiment (par exemple, le contenu peut avoir été supprimé) ;</li> <li>Bien "
 "d'autres problèmes techniques peuvent se produire.</li> </ul> "
 
-#: templates/dissemin/faq.html:254
+#: templates/dissemin/faq.html:255
 #, python-format
 msgid ""
 "<p>There are many possible reasons: maybe it is not available from any of <a "
@@ -1533,7 +1516,7 @@ msgstr ""
 "supprimé par l'un de vos co-auteurs.</p> <p>Quoi qu'il en soit, il vous sera "
 "bientôt possible de l'ajouter manuellement.</p>"
 
-#: templates/dissemin/faq.html:265
+#: templates/dissemin/faq.html:266
 msgid ""
 "In a near future, you should be able to create an account and fix it by "
 "yourself. If it is really urgent, send a message to <a href=\"mailto:"
@@ -1543,7 +1526,7 @@ msgstr ""
 "erreurs par vous-même. En cas d'urgence, adressez-vous à <a href=\"mailto:"
 "contact@dissem.in\">contact@dissem.in</a>."
 
-#: templates/dissemin/faq.html:273
+#: templates/dissemin/faq.html:274
 msgid ""
 "There are two cases: <ul> <li>Your article is available on a personal "
 "homepage or a similar website. In this case, you should read <a href="
@@ -1561,13 +1544,13 @@ msgstr ""
 "contact@dissem.in\">contact@dissem.in</a> pour que nous corrigions le "
 "problème.</li> </ul>"
 
-#: templates/dissemin/faq.html:290
+#: templates/dissemin/faq.html:291
 #, python-format
 msgid "Our sources are listed on <a href=\"%(sources_url)s\">this page</a>."
 msgstr ""
 "Une liste de nos sources est <a href=\"%(sources_url)s\">disponible</a>."
 
-#: templates/dissemin/faq.html:297
+#: templates/dissemin/faq.html:298
 msgid ""
 "There are many ways to get involved: <ul> <li>Encourage researchers to use "
 "this service.</li> <li><a href=\"mailto:contact@dissem.in\">Send us</a> a "
@@ -1592,7 +1575,7 @@ msgstr ""
 "\">notre projet github</a> !</li><li><a href=\"http://association.dissem.in/"
 "#dons\">Nous acceptons les dons.</a>.</li> </ul>"
 
-#: templates/dissemin/faq.html:313
+#: templates/dissemin/faq.html:314
 msgid ""
 "The source code is available <a href=\"http://github.com/wetneb/dissemin"
 "\">on github</a>. <a href=\"http://dissemin.readthedocs.org/en/latest\">A "
@@ -1602,7 +1585,7 @@ msgstr ""
 "\">sur github</a>. <a href=\"http://dissemin.readthedocs.org/en/latest\">Une "
 "documentation</a> est en cours d'écriture."
 
-#: templates/dissemin/faq.html:320
+#: templates/dissemin/faq.html:321
 msgid ""
 "Yes! We even have <a href=\"http://dev.dissem.in/#api\">an API</a>. If it "
 "does not suit your needs, tell us what you need."
@@ -1611,7 +1594,7 @@ msgstr ""
 "vous n'êtes pas satisfait par ce qu'elle propose, n'hésitez pas à nous "
 "contacter."
 
-#: templates/dissemin/faq.html:325 templates/dissemin/tos.html:142
+#: templates/dissemin/faq.html:326 templates/dissemin/tos.html:142
 msgid "Back to top"
 msgstr "Revenir en haut"
 
@@ -1962,6 +1945,18 @@ msgstr "URL invalide (délai de connexion expiré)."
 #: upload/views.py:200 upload/views.py:204
 msgid "Invalid URL."
 msgstr "URL invalide."
+
+#~ msgid "Email"
+#~ msgstr "Email"
+
+#~ msgid "Homepage"
+#~ msgstr "Site web"
+
+#~ msgid "Role"
+#~ msgstr "Fonction"
+
+#~ msgid "Add"
+#~ msgstr "Ajouter"
 
 #~ msgid "A name or an ORCID identifier is required."
 #~ msgstr "Il faut fournir un nom ou un identifiant ORCID."
