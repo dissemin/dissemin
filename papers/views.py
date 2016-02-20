@@ -209,6 +209,7 @@ def searchView(request, **kwargs):
     context['search_description'] = search_description
     context['head_search_description'] = head_search_description
     context['nb_results'] = paginator.count
+    context['ajax_url'] = reverse('ajax-search')+'?'+urlencode(args) 
 
     # Build the GET requests for variants of the parameters
     args_without_page = args.copy()

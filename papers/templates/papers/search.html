@@ -24,7 +24,7 @@
     });
 {% if researcher.current_task %}
     function refreshPapers() {
-    $.ajax({url:window.location.href,
+    $.ajax({url:"{{ ajax_url }}",
            success:function(data) {
                 if(data) {
                     $("#paperSearchResults").html(data['listPapers']);
