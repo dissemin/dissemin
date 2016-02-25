@@ -63,18 +63,18 @@ class Repository(models.Model):
     #: Logo
     logo = models.ImageField(upload_to='repository_logos/')
 
-    # The identifier of the interface (protocol) used for that repository
+    #: The identifier of the interface (protocol) used for that repository
     protocol = models.CharField(max_length=32)
-    # The source with which the OaiRecords associated with the deposits are created
+    #: The source with which the OaiRecords associated with the deposits are created
     oaisource = models.ForeignKey(OaiSource)
     
-    # The identifier of the account under which papers should be deposited
+    #: The identifier of the account under which papers should be deposited
     username = models.CharField(max_length=64, null=True, blank=True)
-    # The password for that account
+    #: The password for that account
     password = models.CharField(max_length=128, null=True, blank=True)
-    # An API key required by the protocol
+    #: An API key required by the protocol
     api_key = models.CharField(max_length=256, null=True, blank=True)
-    # The API's endpoint
+    #: The API's endpoint
     endpoint = models.CharField(max_length=256, null=True, blank=True)
 
     #: Setting this to false forbids any deposit in this repository
