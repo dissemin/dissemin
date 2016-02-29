@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-29 15:25+0100\n"
+"POT-Creation-Date: 2016-02-29 15:37+0100\n"
 "PO-Revision-Date: 2016-02-16 12:15+0100\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
@@ -402,18 +402,24 @@ msgstr "Pensiez-vous à l'un de ces chercheurs ?"
 msgid "Looking for this researcher?"
 msgstr "Pensiez-vous à ce chercheur ?"
 
-#: papers/templates/papers/index.html:88
-msgid "Beta banner"
-msgstr "<a href=\"http://dissem.in/\">dissem.in</a> est actuellement en beta
-publique. N'hésitez pas à nous signaler tout problème que vous pourriez
-rencontrer sur <a href=\"https://github.com/dissemin/dissemin/\">Github</a> ou
-par e-mail à <a href=\"mailto:team+issue@dissem.in\">team+issue@dissem.in</a>."
+#: papers/templates/papers/index.html:89
+msgid ""
+"<a href=\\\"http://dissem.in/\\\">dissem.in</a> is currently in public "
+"beta.  Please, let us know about any issue you might have, either on <a href="
+"\\\"https://github.com/dissemin/dissemin/\\\">Github</a> or by email at <a "
+"href=\\\"mailto:team+issue@dissem.in\\\">team+issue@dissem.in</a>."
+msgstr ""
+"<a href=\"http://dissem.in/\">dissem.in</a> est actuellement en beta "
+"publique. N'hésitez pas à nous signaler tout problème que vous pourriez "
+"rencontrer sur <a href=\"https://github.com/dissemin/dissemin/\">Github</a> "
+"ou par e-mail à <a href=\"mailto:team+issue@dissem.in\">team+issue@dissem."
+"in</a>."
 
-#: papers/templates/papers/index.html:95
+#: papers/templates/papers/index.html:102
 msgid "Welcome to dissemin"
 msgstr "Bienvenue sur dissemin"
 
-#: papers/templates/papers/index.html:99
+#: papers/templates/papers/index.html:106
 msgid ""
 "Dissemin helps researchers ensure that their publications are freely "
 "available to their readers. Our free service spots paywalled papers and lets "
@@ -427,7 +433,7 @@ msgstr ""
 "clics sur <a href=\"http://zenodo.org\" target=\"_blank\">Zenodo</a>, un "
 "dépôt innovant soutenu par l'UE."
 
-#: papers/templates/papers/index.html:108
+#: papers/templates/papers/index.html:115
 #, python-format
 msgid ""
 "Still unsure? Read below or check out the <a href=\"%(faq_url)s\">FAQ</a>."
@@ -435,54 +441,54 @@ msgstr ""
 "Vous hésitez toujours ? Lisez ce qui suit ou jetez un œil à la <a href="
 "\"%(faq_url)s\">FAQ</a>."
 
-#: papers/templates/papers/index.html:116
+#: papers/templates/papers/index.html:123
 msgctxt "before name fields in researcher lookup form"
 msgid "Look up a researcher:"
 msgstr "Trouver un chercheur :"
 
-#: papers/templates/papers/index.html:124
+#: papers/templates/papers/index.html:131
 msgid "Firstname"
 msgstr "Prénom"
 
-#: papers/templates/papers/index.html:125
+#: papers/templates/papers/index.html:132
 msgctxt "Placeholder in researcher lookup form"
 msgid "Firstname"
 msgstr "Prénom"
-
-#: papers/templates/papers/index.html:129
-msgctxt "Placeholder in researcher lookup form"
-msgid "Lastname"
-msgstr "Nom"
-
-#: papers/templates/papers/index.html:130
-msgid "Lastname"
-msgstr "Nom"
 
 #: papers/templates/papers/index.html:136
+msgctxt "Placeholder in researcher lookup form"
+msgid "Lastname"
+msgstr "Nom"
+
+#: papers/templates/papers/index.html:137
+msgid "Lastname"
+msgstr "Nom"
+
+#: papers/templates/papers/index.html:143
 msgid "Search"
 msgstr "Recherche"
 
-#: papers/templates/papers/index.html:149
+#: papers/templates/papers/index.html:156
 msgid "or"
 msgstr "ou"
 
-#: papers/templates/papers/index.html:149
+#: papers/templates/papers/index.html:156
 msgid "Start with ORCID"
 msgstr "S'inscrire avec ORCID"
 
-#: papers/templates/papers/index.html:167
+#: papers/templates/papers/index.html:174
 msgid "Cancel"
 msgstr "Annuler"
 
-#: papers/templates/papers/index.html:168
+#: papers/templates/papers/index.html:175
 msgid "No, carry on"
 msgstr "Non, continuer"
 
-#: papers/templates/papers/index.html:177
+#: papers/templates/papers/index.html:184
 msgid "Green open access"
 msgstr "Libre accès (voie verte)"
 
-#: papers/templates/papers/index.html:181
+#: papers/templates/papers/index.html:188
 msgid ""
 "Many researchers do not use their right to make their papers freely "
 "available online, in addition to the paywalled version offered by "
@@ -492,7 +498,7 @@ msgstr ""
 "sur le Web, pour compléter la version payante proposée par les éditeurs "
 "traditionnels. Pourtant, tous ne le font pas."
 
-#: papers/templates/papers/index.html:189
+#: papers/templates/papers/index.html:196
 msgid ""
 "This forces libraries to buy overpriced electronic subscriptions to "
 "journals, when they can afford them at all."
@@ -501,11 +507,11 @@ msgstr ""
 "électroniques aux journaux de recherche, ce qui grève leurs finances et "
 "limite leur offre."
 
-#: papers/templates/papers/index.html:205
+#: papers/templates/papers/index.html:212
 msgid "Open repositories"
 msgstr "Dépôts ouverts"
 
-#: papers/templates/papers/index.html:208
+#: papers/templates/papers/index.html:215
 msgid ""
 "Uploading your papers on your own webpage is not enough. Such copies are "
 "less stable and harder to find than documents uploaded to well-indexed "
@@ -516,7 +522,7 @@ msgstr ""
 "difficiles à trouver que celles qui sont déposées dans des dépôts bien "
 "indexés."
 
-#: papers/templates/papers/index.html:216
+#: papers/templates/papers/index.html:223
 msgid ""
 "Dissemin searches for copies of your papers in a large collection of open "
 "repositories and tells you which ones cannot be accessed."

@@ -85,7 +85,14 @@ function lookUpColleague() {
 {% block content %}
 <div id="fullPage">
     <div class="alert alert-info" id="banner">
-        <p>{% trans "Beta banner" %}</p>
+        <p>
+        {% blocktrans trimmed %}
+	<a href=\"http://dissem.in/\">dissem.in</a> is currently in public
+        beta.  Please, let us know about any issue you might have, either on <a
+        href=\"https://github.com/dissemin/dissemin/\">Github</a> or by email at <a
+        href=\"mailto:team+issue@dissem.in\">team+issue@dissem.in</a>.
+        {% endblocktrans %}
+        </p>
     </div>
   <div id="welcome">
 	<div id="institutionblock">
