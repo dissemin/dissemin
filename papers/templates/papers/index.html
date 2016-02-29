@@ -84,13 +84,16 @@ function lookUpColleague() {
 
 {% block content %}
 <div id="fullPage">
+    <div class="alert alert-info" id="banner">
+        <p>{% trans "Beta banner" %}</p>
+    </div>
   <div id="welcome">
 	<div id="institutionblock">
         <img id="institution" src="{% static "img/bird-front.png" %}" alt="Dissemin" />
 	</div>
-	
+
     <h2>{% trans "Welcome to dissemin" %}</h2>
-	
+
     <p>
     {% url 'faq' as faq_url %}
     {% blocktrans trimmed %}
@@ -100,13 +103,13 @@ function lookUpColleague() {
     an innovative repository backed by the EU.
     {% endblocktrans %}
     </p>
-    
+
     <p>
     {% blocktrans trimmed %}
     Still unsure? Read below or check out the <a href="{{ faq_url }}">FAQ</a>.
     {% endblocktrans %}
     </p>
-    
+
     <div id="lookUpColleague">
         <form id="lookUpColleagueForm" action="javascript:lookUpColleague();" method="post">
             {% csrf_token %}
@@ -148,7 +151,7 @@ function lookUpColleague() {
 
 
   </div>
-  
+
   <div id="disambiguationModal" class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -167,11 +170,11 @@ function lookUpColleague() {
     </div>
   </div>
   </div>
- 	
+
   <div id="siteSummaries">
-	
+
   <div class="oaPanel left">
-    <h2>{% trans "Green open access" %}</h2> 
+    <h2>{% trans "Green open access" %}</h2>
 
     <div id="statsExplanations">
         <p>
@@ -194,11 +197,11 @@ function lookUpColleague() {
         {% get_solo 'papers.PaperWorld' as world %}
         {% include "statistics/pie.html" with obj=world stats_counter=1 %}
     </div>
- 
+
   </div>
-	
+
   <div class="oaPanel right">
-    
+
 	<h2>{% trans "Open repositories" %}</h2>
 
     <p>
@@ -206,7 +209,7 @@ function lookUpColleague() {
     Uploading your papers on your own webpage is not enough.
     Such copies are less stable and harder to find than documents
     uploaded to well-indexed repositories.
-    {% endblocktrans %} 
+    {% endblocktrans %}
     </p>
 
     <p>
@@ -216,7 +219,7 @@ function lookUpColleague() {
     {% endblocktrans %}
     </p>
   </div>
-  
+
   </div>
 
 </div>

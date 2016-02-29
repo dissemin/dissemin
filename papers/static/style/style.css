@@ -197,7 +197,7 @@ h4
 
 #summaryLists, #detailContent
 {
-    margin-right: 292px; 
+    margin-right: 292px;
    /* padding-bottom: 32767px;
     margin-bottom: -32767px; */
 }
@@ -228,7 +228,7 @@ h4
 
 /* List of publications */
 
-li 
+li
 {
     line-height:1.5em;
 }
@@ -683,7 +683,7 @@ h1#paperTitle {
 
 #actualContent
 {
-    border-top: 3px solid #2A6496; 
+    border-top: 3px solid #2A6496;
 }
 
 #actualContent h2
@@ -730,7 +730,7 @@ h1#paperTitle {
 
 /* Access statistics */
 
-.access-statistics 
+.access-statistics
 {
     overflow:hidden;
     margin:0px;
@@ -858,11 +858,11 @@ h1#paperTitle {
 /* Shamelessly taken from
  * https://github.com/vitalets/x-editable/issues/361 */
 .editable-container.editable-inline {
-    display: inline; 
+    display: inline;
 }
 
 .editable-input {
-    display: inline; 
+    display: inline;
 }
 
 .form-group {
@@ -963,6 +963,10 @@ h1#paperTitle {
 
 #lookUpColleague input {
     color: #2A6496;
+}
+
+#banner.alert-info {
+    background-color: #eee;
 }
 
 #welcome #institutionblock {
