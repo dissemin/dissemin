@@ -404,10 +404,10 @@ msgstr "Pensiez-vous à ce chercheur ?"
 
 #: papers/templates/papers/index.html:89
 msgid ""
-"<a href=\\\"http://dissem.in/\\\">dissem.in</a> is currently in public "
+"<a href=\"http://dissem.in/\">dissem.in</a> is currently in public "
 "beta.  Please, let us know about any issue you might have, either on <a href="
-"\\\"https://github.com/dissemin/dissemin/\\\">Github</a> or by email at <a "
-"href=\\\"mailto:bugs@dissem.in\\\">bugs@dissem.in</a>."
+"\"https://github.com/dissemin/dissemin/\">Github</a> or by email at <a "
+"href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
 msgstr ""
 "<a href=\"http://dissem.in/\">dissem.in</a> est actuellement en beta "
 "publique. N'hésitez pas à nous signaler tout problème que vous pourriez "
