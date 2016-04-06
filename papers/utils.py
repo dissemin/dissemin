@@ -61,7 +61,7 @@ def nocomma(lst):
     u'abc, , ,def'
     """
     lst = map(lambda x: str(x).replace(',','').replace('\n',''), lst)
-    lst = [x if x else ' ' for x in lst]
+    lst = [x or ' ' for x in lst]
     return ','.join(lst)
 
 def ulower(s):
