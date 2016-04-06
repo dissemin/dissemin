@@ -99,7 +99,7 @@ urlpatterns = patterns('',
 # of django-allauth, but as we disabled normal auth, we have to do it here).
 for provider in providers.registry.get_list():
     try:
-        prov_mod = importlib.import_module(provider.package + '.urls')
+        prov_mod = importlib.import_module(provider.get_package() + '.urls')
     except ImportError:
         continue
     prov_urlpatterns = getattr(prov_mod, 'urlpatterns', None)

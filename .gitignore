@@ -1,6 +1,8 @@
 # python files
 *.pyc
 build/
+src/
+.src/
 # vim 
 .*.swp
 # API keys

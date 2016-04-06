@@ -168,7 +168,6 @@ INSTALLED_APPS = (
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.orcid',
-    'allauth.socialaccount.providers.orcidsandbox',
     'statistics',
     'publishers',
     'papers',
@@ -206,6 +205,16 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
    # 'django_cas_ng.backends.CASBackend',
 )
+
+SOCIALACCOUNT_PROVIDERS = \
+   {'orcid':
+       {
+         # Base domain of the API. Default value: 'orcid.org', for the production API
+        'BASE_DOMAIN':'sandbox.orcid.org', # for the sandbox API
+         # Member API or Public API? Default: False (for the public API)
+         'MEMBER_API': False, # for the member API
+       }
+   }
 
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 TEMPLATE_CONTEXT_PROCESSORS = TCP + (
