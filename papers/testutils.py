@@ -42,6 +42,11 @@ class UnescapeLatexTest(unittest.TestCase):
         self.assertEqual(remove_latex_math_dollars('Instead of $15, the revenue is $30 per cow'),
                 'Instead of $15, the revenue is $30 per cow')
 
+    @unittest.expectedFailure
+    def test_crazy_accents(self):
+        self.assertEqual(unescape_latex("Cohomologie locale des faisceaux coh\\'erents et th\\'eor\\`emes de Lefschetz locaux et globaux (SGA 2)"),
+                "Cohomologie locale des faisceaux cohérents et théorèmes de Lefschetz locaux et globaux (SGA 2)")
+
 class RemoveLatexBracesTest(unittest.TestCase):
     def test_simple(self):
         self.assertEqual(remove_latex_braces('this is a test'), 'this is a test')
