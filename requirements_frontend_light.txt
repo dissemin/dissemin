@@ -1,4 +1,4 @@
-django
+django==1.8
 celery[redis]
 unidecode
 psycopg2
@@ -8,7 +8,7 @@ django-cas-ng
 unicode_tex
 wand
 PyPDF2
--e git://github.com/wetneb/django-allauth.git#egg=django-allauth
+-e git://github.com/dissemin/django-allauth.git@0.25.2-post_login-orcidv1.2#egg=django-allauth
 django-redis-cache
 django-solo
 pillow
