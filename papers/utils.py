@@ -131,6 +131,7 @@ def tokenize(l):
 def maybe_recapitalize_title(title):
     """
     Recapitalize a title if it is mostly uppercase
+    (number of uppercase letters > number of lowercase letters)
 
     >>> maybe_recapitalize_title(u'THIS IS CALLED SCREAMING')
     u'This Is Called Screaming'
