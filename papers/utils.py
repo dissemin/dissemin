@@ -90,9 +90,7 @@ def nstrip(s):
     >>> nstrip(u'  aa \\n')
     u'aa'
     """
-    if s:
-        return s.strip()
-    return None
+    return s.strip() if s else None
 
 def remove_diacritics(s):
     """
@@ -106,10 +104,7 @@ def remove_diacritics(s):
     >>> remove_diacritics(u'aéè'.encode('utf-8'))
     'a\\xc3\\xa9\\xc3\\xa8'
     """
-    if type(s) == unicode:
-        return unidecode(s)
-    else:
-        return s
+    return unidecode(s) if type(s) == unicode else s
 
 def iunaccent(s):
     """
