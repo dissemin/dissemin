@@ -140,17 +140,17 @@ def maybe_recapitalize_title(title):
     >>> maybe_recapitalize_title(u'THIS IS JUST QUITE Awkward')
     u'THIS IS JUST QUITE Awkward'
     """
-    nb_upper = 0
-    nb_lower = 0
-    for i in range(len(title)):
-        if title[i].isupper():
+    nb_upper = 0, nb_lower = 0
+    for letter in title:
+        if letter.isupper():
             nb_upper += 1
-        elif title[i].islower():
+        elif letter.islower():
             nb_lower += 1
 
     if nb_upper > nb_lower:
-        title = titlecase(title)
-    return title
+        return titlecase(title)
+    else:
+        return title
 
 ## HTML sanitizing for the title
 
