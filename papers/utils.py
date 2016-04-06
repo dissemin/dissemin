@@ -190,6 +190,8 @@ def unescape_latex(s):
 
     >>> unescape_latex(u'the $\\\\alpha$-rays of $\\\\Sigma$-algebras')
     u'the $\\u03b1$-rays of $\\u03a3$-algebras'
+    >>> unescape_latex(u'$\\textit{K}$ -trivial')
+    u'$\\textit{K}$ -trivial'
     """
     def conditional_replace(fragment):
         rep = unicode_tex.tex_to_unicode_map.get(fragment.group(0))
