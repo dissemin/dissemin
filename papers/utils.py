@@ -240,7 +240,7 @@ def sanitize_html(s):
     s = unescape_latex(s)
     s = kill_double_dollars(s)
     orig = html_cleaner.clean_html('<span>'+s+'</span>')
-    return orig[6:-7]
+    return orig[6:-7] # We cut the <span />
 
 def kill_html(s):
     """
@@ -251,7 +251,7 @@ def kill_html(s):
     u'My titleisnice'
     """
     orig = html_killer.clean_html('<div>'+s+'</div>')
-    return orig[5:-6].strip()
+    return orig[5:-6].strip() # We cut the <div />
 
 latex_double_dollar_re = re.compile(r'\$\$([^\$]*?)\$\$')
 def kill_double_dollars(s):
