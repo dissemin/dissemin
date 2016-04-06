@@ -61,7 +61,7 @@ def nocomma(lst):
     u'abc, , ,def'
     """
     lst = map(lambda x: str(x).replace(',','').replace('\n',''), lst)
-    lst = [x if x else ' ' for x in lst]
+    lst = [x or ' ' for x in lst]
     return ','.join(lst)
 
 def ulower(s):
@@ -90,9 +90,7 @@ def nstrip(s):
     >>> nstrip(u'  aa \\n')
     u'aa'
     """
-    if s:
-        return s.strip()
-    return None
+    return s.strip() if s else None
 
 def remove_diacritics(s):
     """
@@ -106,10 +104,7 @@ def remove_diacritics(s):
     >>> remove_diacritics(u'aéè'.encode('utf-8'))
     'a\\xc3\\xa9\\xc3\\xa8'
     """
-    if type(s) == unicode:
-        return unidecode(s)
-    else:
-        return s
+    return unidecode(s) if type(s) == unicode else s
 
 def iunaccent(s):
     """
@@ -136,6 +131,7 @@ def tokenize(l):
 def maybe_recapitalize_title(title):
     """
     Recapitalize a title if it is mostly uppercase
+    (number of uppercase letters > number of lowercase letters)
 
     >>> maybe_recapitalize_title(u'THIS IS CALLED SCREAMING')
     u'This Is Called Screaming'
@@ -144,17 +140,17 @@ def maybe_recapitalize_title(title):
     >>> maybe_recapitalize_title(u'THIS IS JUST QUITE Awkward')
     u'THIS IS JUST QUITE Awkward'
     """
-    nb_upper = 0
-    nb_lower = 0
-    for i in range(len(title)):
-        if title[i].isupper():
+    nb_upper, nb_lower = 0, 0
+    for letter in title:
+        if letter.isupper():
             nb_upper += 1
-        elif title[i].islower():
+        elif letter.islower():
             nb_lower += 1
 
     if nb_upper > nb_lower:
-        title = titlecase(title)
-    return title
+        return titlecase(title)
+    else:
+        return title
 
 ## HTML sanitizing for the title
 
@@ -197,7 +193,7 @@ def unescape_latex(s):
     """
     def conditional_replace(fragment):
         rep = unicode_tex.tex_to_unicode_map.get(fragment.group(0))
-        return rep if rep is not None else fragment.group(0)
+        return rep or fragment.group(0)
 
     return latex_command_re.sub(conditional_replace, s)
 
@@ -244,7 +240,7 @@ def sanitize_html(s):
     s = unescape_latex(s)
     s = kill_double_dollars(s)
     orig = html_cleaner.clean_html('<span>'+s+'</span>')
-    return orig[6:-7]
+    return orig[6:-7] # We cut the <span />
 
 def kill_html(s):
     """
@@ -255,7 +251,7 @@ def kill_html(s):
     u'My titleisnice'
     """
     orig = html_killer.clean_html('<div>'+s+'</div>')
-    return orig[5:-6].strip()
+    return orig[5:-6].strip() # We cut the <div />
 
 latex_double_dollar_re = re.compile(r'\$\$([^\$]*?)\$\$')
 def kill_double_dollars(s):
@@ -578,10 +574,8 @@ def index_of(elem, choices):
     >>> index_of('nok', [('ok','This is ok'),('nok','This is definitely not OK')])
     1
     """
-    idx = 0
-    for code, lbl in choices:
+    for idx, (code, lbl) in enumerate(choices):
         if code == elem:
             return idx
-        idx += 1
-    return idx
-
+    else:
+        return 0
