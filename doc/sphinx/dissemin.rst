@@ -16,6 +16,8 @@ Submodules
    dissemin.celery
    dissemin.debug
    dissemin.settings
+   dissemin.testcelery
+   dissemin.testsettings
    dissemin.urls
    dissemin.wsgi
 

@@ -16,17 +16,18 @@ Submodules
 
    papers.admin
    papers.ajax
+   papers.api
+   papers.baremodels
    papers.bibtex
    papers.doi
-   papers.emails
    papers.errors
    papers.forms
    papers.models
    papers.name
    papers.orcid
-   papers.routers
-   papers.serializers
    papers.testajax
+   papers.testapi
+   papers.testbare
    papers.testbibtex
    papers.testnames
    papers.testorcid

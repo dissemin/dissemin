@@ -6,13 +6,10 @@ Submodules
 
 .. toctree::
 
-   backend.base
    backend.clustering
-   backend.core
    backend.crossref
    backend.extractors
    backend.globals
-   backend.lda
    backend.maintenance
    backend.name_cache
    backend.oai

@@ -8,6 +8,7 @@ Subpackages
 
     deposit.hal
     deposit.migrations
+    deposit.sword
     deposit.zenodo
 
 Submodules
