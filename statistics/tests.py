@@ -24,7 +24,8 @@ from django.test import TestCase
 from backend.tests import PrefilledTest
 from backend.crossref import CrossRefPaperSource
 from backend.oai import OaiPaperSource
-from papers.models import PaperWorld
+from papers.models import PaperWorld, Paper
+from statistics.models import *
 
 class StatisticsTest(PrefilledTest):
     @classmethod
@@ -40,19 +41,22 @@ class StatisticsTest(PrefilledTest):
         self.assertTrue(stats.check_values())
         self.assertTrue(stats.num_tot > 1)
 
-    def printStats(self, stats):
-        print "OA: %d" % stats.num_oa
-        print "OK: %d" % stats.num_ok
-        print "COULDBE: %d" % stats.num_couldbe
-        print "TOT: %d" % stats.num_tot
-
     def test_researcher(self):
-        self.printStats(self.r2.stats)
         self.validStats(self.r2.stats)
+
+    def test_from_queryset(self):
+        bare_stats = BareAccessStatistics.from_queryset(
+                Paper.objects.filter(author__researcher=self.r2).distinct())
+        stats = self.r2.stats
+        self.assertEqual(bare_stats.num_oa, stats.num_oa)
+        self.assertEqual(bare_stats.num_ok, stats.num_ok)
+        self.assertEqual(bare_stats.num_couldbe, stats.num_couldbe)
+        self.assertEqual(bare_stats.num_unk, stats.num_unk)
+        self.assertEqual(bare_stats.num_closed, stats.num_closed)
+        self.assertEqual(bare_stats.num_tot, stats.num_tot)
     
     def test_department(self):
         self.d.update_stats()
-        self.printStats(self.d.stats)
         self.validStats(self.d.stats)
 
     def test_institution(self):

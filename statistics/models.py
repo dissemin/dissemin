@@ -96,26 +96,78 @@ def combined_status_for_instance(paper):
             return 'closed'
     return 'unk'
 
-class AccessStatistics(models.Model):
+class BareAccessStatistics(object):
     """
-    Caches numbers of papers in different access statuses for some queryset
+    A bare (not saved in the DB) summary of the status of publications
     """
-    num_oa = models.IntegerField(default=0)
-    num_ok = models.IntegerField(default=0)
-    num_couldbe = models.IntegerField(default=0)
-    num_unk = models.IntegerField(default=0)
-    num_closed = models.IntegerField(default=0)
-    num_tot = models.IntegerField(default=0)
+    @classmethod
+    def new(cls):
+        s = cls()
+        s.num_oa = 0
+        s.num_ok = 0
+        s.num_couldbe = 0
+        s.num_unk = 0
+        s.num_closed = 0
+        s.num_tot = 0
+        return s
 
-    def update(self, queryset):
+    @classmethod
+    def from_queryset(cls, qs):
         """
-        Updates the statistics for papers contained in the given :py:class:`Paper` queryset
+        This method fetches all the queryset.
+
+        :param qs: a queryset of :class:`~papers.models.Paper` objects
+        :returns: an object of the current class,
+                  with the status of all papers in this queryset.
         """
-        queryset = queryset.filter(visibility="VISIBLE")
-        for key, modifier in STATUS_QUERYSET_FILTER.items():
-            self.__dict__['num_'+key] = modifier(queryset).count()
-        self.num_tot = queryset.count()
-        self.save()
+        stats = cls.new()
+        for paper in qs:
+            stats.num_tot += 1
+            attrname = 'num_'+combined_status_for_instance(paper)
+            setattr(stats, attrname, getattr(stats, attrname) + 1)
+        return stats
+
+    def check_values(self):
+        """
+        Checks that values are consistent (non-negative and summing up to the total).
+        """
+        return (
+                self.num_oa >= 0 and
+                self.num_ok >= 0 and
+                self.num_couldbe >= 0 and
+                self.num_unk >= 0 and
+                self.num_closed >= 0 and
+                self.num_oa + self.num_ok + self.num_couldbe +
+                  self.num_unk + self.num_closed == self.num_tot
+                )
+
+    def pie_data(self, object_id):
+        """
+        Returns a JSON representation of the data needed to display
+        the statistics as a pie.
+        """
+        baseurl = reverse('search')+'?'+object_id
+        detailed_data = []
+        for (key,desc) in COMBINED_STATUS_CHOICES:
+            item = {
+                'id':key,
+                'label':unicode(desc),
+                'value':self.__dict__['num_'+key],
+                'url':baseurl+'&state='+key,
+                'baseurl':baseurl,
+                }
+            detailed_data.append(item)
+        aggregated_data = []
+        for (key,desc) in PDF_STATUS_CHOICES:
+            item = {
+                'id':key,
+                'label':unicode(desc),
+                'value':self.num_available if key == 'OK' else self.num_unavailable,
+                'url':baseurl+'&pdf='+key,
+                'baseurl':baseurl,
+                }
+            aggregated_data.append(item)
+        return json.dumps({'detailed':detailed_data,'aggregated':aggregated_data})
 
     @property
     def num_available(self):
@@ -154,7 +206,28 @@ class AccessStatistics(models.Model):
         """
         if self.num_tot:
             return int(100.*(self.num_couldbe + self.num_unk + self.num_closed)/self.num_tot)
-            
+ 
+
+class AccessStatistics(models.Model, BareAccessStatistics):
+    """
+    Caches numbers of papers in different access statuses for some queryset
+    """
+    num_oa = models.IntegerField(default=0)
+    num_ok = models.IntegerField(default=0)
+    num_couldbe = models.IntegerField(default=0)
+    num_unk = models.IntegerField(default=0)
+    num_closed = models.IntegerField(default=0)
+    num_tot = models.IntegerField(default=0)
+
+    def update(self, queryset):
+        """
+        Updates the statistics for papers contained in the given :py:class:`Paper` queryset
+        """
+        queryset = queryset.filter(visibility="VISIBLE")
+        for key, modifier in STATUS_QUERYSET_FILTER.items():
+            self.__dict__['num_'+key] = modifier(queryset).count()
+        self.num_tot = queryset.count()
+        self.save()
 
     @classmethod
     def update_all_stats(self, _class):
@@ -165,48 +238,6 @@ class AccessStatistics(models.Model):
         """
         for x in _class.objects.all():
             x.update_stats()
-
-    def pie_data(self, object_id):
-        """
-        Returns a JSON representation of the data needed to display
-        the statistics as a pie.
-        """
-        baseurl = reverse('search')+'?'+object_id
-        detailed_data = []
-        for (key,desc) in COMBINED_STATUS_CHOICES:
-            item = {
-                'id':key,
-                'label':unicode(desc),
-                'value':self.__dict__['num_'+key],
-                'url':baseurl+'&state='+key,
-                'baseurl':baseurl,
-                }
-            detailed_data.append(item)
-        aggregated_data = []
-        for (key,desc) in PDF_STATUS_CHOICES:
-            item = {
-                'id':key,
-                'label':unicode(desc),
-                'value':self.num_available if key == 'OK' else self.num_unavailable,
-                'url':baseurl+'&pdf='+key,
-                'baseurl':baseurl,
-                }
-            aggregated_data.append(item)
-        return json.dumps({'detailed':detailed_data,'aggregated':aggregated_data})
-
-    def check_values(self):
-        """
-        Checks that values are consistent (non-negative and summing up to the total).
-        """
-        return (
-                self.num_oa >= 0 and
-                self.num_ok >= 0 and
-                self.num_couldbe >= 0 and
-                self.num_unk >= 0 and
-                self.num_closed >= 0 and
-                self.num_oa + self.num_ok + self.num_couldbe +
-                  self.num_unk + self.num_closed == self.num_tot
-                )
 
     class Meta:
         db_table = 'papers_accessstatistics'

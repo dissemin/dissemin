@@ -49,7 +49,7 @@ from deposit.models import *
 
 from publishers.views import varyQueryArguments
 from publishers.models import OA_STATUS_CHOICES
-from statistics.models import COMBINED_STATUS_CHOICES, STATUS_QUERYSET_FILTER, PDF_STATUS_CHOICES
+from statistics.models import COMBINED_STATUS_CHOICES, STATUS_QUERYSET_FILTER, PDF_STATUS_CHOICES, BareAccessStatistics
 from dissemin.settings import MEDIA_ROOT, UNIVERSITY_BRANDING, DEPOSIT_MAX_FILE_SIZE 
 
 from allauth.socialaccount.signals import post_social_login
@@ -194,6 +194,8 @@ def searchView(request, **kwargs):
     queryset = queryset.order_by('-pubdate')
     # Make distinct
     queryset = queryset.distinct()
+    # Create stats
+    stats = BareAccessStatistics.from_queryset(queryset)
 
     # Build the paginator
     paginator = Paginator(queryset, NB_RESULTS_PER_PAGE)
@@ -205,6 +207,7 @@ def searchView(request, **kwargs):
     except EmptyPage:
         current_papers = paginator.page(paginator.num_pages)
 
+    context['search_stats'] = stats
     context['search_results'] = current_papers
     context['search_description'] = search_description
     context['head_search_description'] = head_search_description
@@ -229,12 +232,11 @@ def searchView(request, **kwargs):
 
     if request.META.get('CONTENT_TYPE') == 'application/json' and 'researcher' in context:
         researcher = context['researcher']
-        statsModel = researcher.stats
         context['request'] = request
         response = {}
         response['listPapers'] = loader.render_to_string('papers/ajaxListPapers.html', context)
-        response['stats'] = json.loads(statsModel.pie_data(researcher.object_id))
-        response['stats']['numtot'] = statsModel.num_tot
+        response['stats'] = json.loads(stats.pie_data(researcher.object_id))
+        response['stats']['numtot'] = stats.num_tot
         if researcher.current_task:
             response['status'] = researcher.current_task
             response['display'] = researcher.get_current_task_display()

@@ -1,27 +1,5 @@
-{% load get_pie_data %}
 {% with obj.stats as stats %}
 {% with obj.object_id as object_id %}
-<div class="access-statistics" id="statspie_n{{ stats_counter }}">
-  <div class="statspie_graph"></div>
-  <div class="statspie_caption"></div>
-  <script type="text/javascript">
-var updateStats = 0;
-$(function() {
-
-
-{% if stats.num_tot %}
-    var data = {{ stats|get_pie_data:object_id }};
-  updateStats = showStatsPie(data["detailed"], data["aggregated"], "statspie_n{{ stats_counter }}", "{{ state }}");
-{% else %}
-  updateStats = function(data) {
-     if(data['numtot']) {
-         var newUpdateStats = showStatsPie(data['detailed'], data['aggregated'], "statspie_n{{ stats_counter }}", "{{ state }}");
-         updateStats = newUpdateStats;
-     }
-  }
-{% endif %}
-  });
-  </script>
-</div>
+{% include "statistics/pie_without_object.html" %}
 {% endwith %}
 {% endwith %}

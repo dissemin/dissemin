@@ -115,18 +115,19 @@
          <a href="{% url 'refetch-researcher' researcher.pk %}" class="btn btn-default">{% trans "Refresh papers" %}</a><br />
          <a href="{% url 'recluster-researcher' researcher.pk %}" class="btn btn-default">{% trans "Refresh classification" %}</a>
          {% endif %}
-        {% include "statistics/pie.html" with obj=researcher stats_counter=1 %}
+        {% include "statistics/pie_without_object.html" with stats=search_stats object_id=researcher.object_id stats_counter=1 %}
     </div>
 {% elif name %}
 <span class="detailsTitle">{% trans "Name" %}</span>
     <div class="detailsContent">
         <p id="detail-name">{{ name }}</p>
+        {% include "statistics/pie_without_object.html" with stats=search_stats object_id=name.object_id %}
      </div>
 {% elif department %}
 <span class="detailsTitle">{% trans "Department" %}</span>
     <div class="detailsContent">
         <p id="detail-name">{{ department }}</p>
-        {% include "statistics/pie.html" with obj=department stats_counter=1 %}
+        {% include "statistics/pie_without_object.html" with obj=search_stats object_id=department.object_id stats_counter=1 %}
     </div>
 
 {% endif %}
