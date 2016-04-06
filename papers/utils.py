@@ -193,7 +193,7 @@ def unescape_latex(s):
     """
     def conditional_replace(fragment):
         rep = unicode_tex.tex_to_unicode_map.get(fragment.group(0))
-        return rep if rep is not None else fragment.group(0)
+        return rep or fragment.group(0)
 
     return latex_command_re.sub(conditional_replace, s)
 
