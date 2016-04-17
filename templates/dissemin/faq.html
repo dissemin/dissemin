@@ -35,6 +35,11 @@
         <p><a href="#missing-paper">{% trans "One of my papers is missing. Why?" %}</a></p>
         <p><a href="#incorrect-metadata">{% trans "Some details of my paper are incorrect. What can I do?" %}</a></p>
 
+        <h4>{% trans "Authentication with ORCID" %}</h4>
+        <p><a href="#orcid-why">{% trans "Why do you need to authenticate users?" %}</a></p>
+        <p><a href="#orcid-login">{% trans "What will you do to my ORCID profile if I log in?" %}</a></p>
+        <p><a href="#orcid-add-pubs">{% trans "How do I add publications to my ORCID profile?" %}</a></p>
+
         <h4>{% trans "Behind the scenes" %}</h4>
         <p><a href="#sources">{% trans "Where do you get the data from?" %}</a></p>
         <p><a href="#getting-involved">{% trans "How can I help?" %}</a></p>
@@ -283,6 +288,47 @@
             </ul>
             {% endblocktrans %}
             </p>
+
+        <h3>{% trans "Authentication with ORCID" %}</h3>
+
+        <h2 id="orcid-why">{% trans "Why do you need to authenticate users?" %}</h2>
+        <p>
+            {% blocktrans trimmed %}
+            Authenticating users is necessary to deposit papers on their behalf in open repositories.
+            Besides, knowing a user's ORCID id helps us find its publications, avoiding articles
+            authored by namesakes for instance.
+
+            Logging in via ORCID will not expose any private information to Dissemin: we only
+            have access to the public part of your ORCID record. For instance, unless you have
+            explicitly marked your email address as public, we do not even know your email address
+            when you log in to Dissemin via ORCID.
+            {% endblocktrans %}
+        </p>
+
+        <h2 id="orcid-login">{% trans "What will you do to my ORCID profile if I log in?" %}</h2>
+
+        <p>
+            {% blocktrans trimmed %}
+            Nothing. When you log in via ORCID to Dissemin, this does not grant us any
+            permission to change anything in your ORCID record.
+            {% endblocktrans %}
+        </p>
+
+        <h2 id="orcid-add-pubs">{% trans "How do I add publications to my ORCID profile?" %}</h2>
+
+        <p>
+            {% blocktrans trimmed %}
+            ORCID supports various methods to claim publications. Our preferred one is
+            via CrossRef's search interface. Here is how to use it:
+            <ul>
+                <li>Go to <a href="https://search.crossref.org/">CrossRef Metadata Search</a>;</li>
+                <li>Click "Log in" in the top right corner and go through the ORCID login process;</li>
+                <li>Search for your publications, for instance by typing your name in CrossRef's search interface;</li>
+                <li>Add publications that are yours to your ORCID record by clicking "Add to ORCID".</li>
+            </ul>
+            In the future, we hope to enable you to do this from Dissemin itself.
+            {% endblocktrans %}
+        </p>
 
         <h3>{% trans "Behind the scenes" %}</h3>
 
