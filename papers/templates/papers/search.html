@@ -97,6 +97,15 @@
         <p><span class="glyphicon glyphicon-star"></span> <a href="{{ researcher.department.institution.url }}">{{ researcher.department.institution }}</a></p>
         <p><span class="glyphicon glyphicon-star-empty"></span> <a href="{{ researcher.department.url }}">{{ researcher.department }}</a></p>
         {% endif %}
+        {% if search_stats.num_tot %}
+        <p><span class="glyphicon glyphicon-stats"></span>
+            {% blocktrans count nb_publi=search_stats.num_tot trimmed %}
+            1 publication
+            {% plural %}
+            {{ nb_publi }} publications
+            {% endblocktrans %}
+        </p>
+        {% endif %}
         {% if request.user.is_superuser and researcher.email %}
         <p>{% trans "Address:" %} {{ researcher.email }}</p>
         {% endif %}
@@ -142,9 +151,9 @@
         <div class="unselectedCriterion">
         <div class="pubLogo"><div class="pubLogoPic-{{ journal.publisher.oa_status }}"></div></div>
         <div class="criterionItem">{{ journal.publisher.oa_status |explain_oa_status}}</div>
-        </div>
+    </div>
 
-    <p>{% blocktrans trimmed %}
+    <p><span class="glyphicon glyphicon-stats"></span>{% blocktrans trimmed %}
     <span id="nbPapersFound">{{ nb_results }}</span> papers found
     {% endblocktrans %}
     </p>
@@ -158,7 +167,7 @@
         <div class="criterionItem">{{ publisher.oa_status |explain_oa_status}}</div>
         </div>
 
-    <p>{% blocktrans trimmed %}
+    <p><span class="glyphicon glyphicon-stats"></span>{% blocktrans trimmed %}
     <span id="nbPapersFound">{{ nb_results }}</span> papers found
     {% endblocktrans %}
     </p>
