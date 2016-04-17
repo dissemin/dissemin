@@ -21,12 +21,21 @@
 {% block jsScript %}
     $(function(){
        $('.logoHelpPopover').popover({trigger: "hover"});
+       $('#refetchPubsButton').click(refetchPubs);
+ {% if researcher.current_task %}
+       addWaitingArea("{{ researcher.get_current_task_display }}");
+ {% endif %}
     });
-{% if researcher.current_task %}
+    
+    function addWaitingArea(description) {
+    $('#waitingAreaContainer').html('<div id="waitingArea"><span class="waitingBird"><img src="{% static "img/animated-bird.gif" %}" alt="Paper bird" /></span><br /><span id="harvestingStatus">'+description+'</span><span>…</span><br /></div>');
+    }
+
     function refreshPapers() {
     $.ajax({url:"{{ ajax_url }}",
            success:function(data) {
                 if(data) {
+                    console.log(data);
                     $("#paperSearchResults").html(data['listPapers']);
                     updateStats(data['stats']);
                     $("#nbPapersFound").text(data['stats']['numtot']);
@@ -55,6 +64,17 @@
           contentType:"application/json" });
     }
 
+    function refetchPubs() {
+        console.log('started');
+        $.ajax({url:"{% url 'refetch-researcher' researcher.pk %}",
+            success:function(data) {
+                console.log('success');
+                addWaitingArea('{% trans "Refreshing profile" %}');
+                setTimeout(refreshPapers, 1000);
+                }
+          });
+    }
+{% if researcher.current_task %}
     $(function(){
         setTimeout(refreshPapers, 1500);
     });
@@ -104,6 +124,9 @@
             {% plural %}
             {{ nb_publi }} publications
             {% endblocktrans %}
+            {% if researcher.user == request.user or request.user.is_superuser %}
+            (<a href="#" id="refetchPubsButton">{% trans "Refresh" %}</a>)
+            {% endif %}
         </p>
         {% endif %}
         {% if request.user.is_superuser and researcher.email %}
@@ -121,7 +144,6 @@
          {% csrf_token %}
          {{ researcher.affiliation_form }}</br>
          </form>
-         <a href="{% url 'refetch-researcher' researcher.pk %}" class="btn btn-default">{% trans "Refresh papers" %}</a><br />
          <a href="{% url 'recluster-researcher' researcher.pk %}" class="btn btn-default">{% trans "Refresh classification" %}</a>
          {% endif %}
         {% include "statistics/pie_without_object.html" with stats=search_stats object_id=researcher.object_id stats_counter=1 %}
@@ -238,14 +260,8 @@
 {% endblock %}
 
 {% block lists %}
- {% if researcher.current_task %}
-    <div id="waitingArea">
-        <span class="waitingBird"><img src="{% static "img/animated-bird.gif" %}" alt="Paper bird" /></span>
-        <br />
-        <span id="harvestingStatus">{{ researcher.get_current_task_display }}</span><span>…</span>
-        <br />
-    </div>
- {% endif %}
+<div id="waitingAreaContainer">
+</div>
 
  {% if researcher and not researcher.orcid %}
  <p></p>

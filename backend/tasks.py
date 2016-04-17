@@ -92,6 +92,7 @@ def fetch_everything_for_researcher(pk):
     ## If it is the first time we fetch this researcher
     #if r.stats is None:
     # make sure publications already known are also considered
+    update_researcher_task(r, 'clustering')
     ccf.reclusterBatch(r)
     try:
         for key,source in sources:
