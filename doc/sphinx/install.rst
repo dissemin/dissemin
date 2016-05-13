@@ -93,6 +93,12 @@ This is done by applying migrations::
 Then you can move on to :ref:`page-importresearchers`
 and :ref:`page-deploying`.
 
+Clustering-specific: Train your classifier
+------------------------------------------
+
+*You can skip this step by downloading `this pre-trained model <http://dev.dissem.in/files/similarity.pkl>`, save it as a models/similarity.pkl*
+
+TODO: pintoch, someday, or not, you will document how to train the model!
 
 Optional: installing the tasks backend
 --------------------------------------
