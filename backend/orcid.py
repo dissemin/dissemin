@@ -362,9 +362,10 @@ class OrcidPaperSource(PaperSource):
                 continue
 
             yield self.create_paper(data_paper)
-
+        
+        # 2nd attempt with DOIs and CrossRef
         if use_doi:
-            # 2nd attempt with CrossRef.
+            # Let's grab papers from CrossRef
             for success, paper_or_metadata in self.fetch_crossref_incrementally(crps, orcid_id):
                 if success:
                     yield paper_or_metadata
@@ -372,7 +373,7 @@ class OrcidPaperSource(PaperSource):
                     ignored_papers.append(paper_or_metadata)
                     print ('This metadata (%s) yields no paper.' % (metadata))
 
-            # 3rd attempt with DOIs found in our ORCiD profile.
+            # Let's grab papers with DOIs found in our ORCiD profile.
             # FIXME(RaitoBezarius): if we fail here, we should get back the pub and yield it.
             for success, paper_or_metadata in self.fetch_metadata_from_dois(crps, orcid_id, dois):
                 if success:
