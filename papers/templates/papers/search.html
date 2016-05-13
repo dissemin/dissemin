@@ -117,10 +117,9 @@
         <p><span class="glyphicon glyphicon-star"></span> <a href="{{ researcher.department.institution.url }}">{{ researcher.department.institution }}</a></p>
         <p><span class="glyphicon glyphicon-star-empty"></span> <a href="{{ researcher.department.url }}">{{ researcher.department }}</a></p>
         {% endif %}
-        {% if search_stats.num_tot %}
         <p><span class="glyphicon glyphicon-stats"></span>
             {% blocktrans count nb_publi=search_stats.num_tot trimmed %}
-            1 publication
+            {{ nb_publi }} publication
             {% plural %}
             {{ nb_publi }} publications
             {% endblocktrans %}
@@ -128,7 +127,6 @@
             (<a href="#" id="refetchPubsButton">{% trans "Refresh" %}</a>)
             {% endif %}
         </p>
-        {% endif %}
         {% if request.user.is_superuser and researcher.email %}
         <p>{% trans "Address:" %} {{ researcher.email }}</p>
         {% endif %}
