@@ -93,6 +93,30 @@ This is done by applying migrations::
 Then you can move on to :ref:`page-importresearchers`
 and :ref:`page-deploying`.
 
+Social Authentication specific: Configuring sandbox ORCID
+---------------------------------------------------------
+
+*You are not forced to configure ORCID to work on Dissemin, just create a super user and use it!*
+
+Create an account on `Sandbox ORCID <sandbox.orcid.org>`
+Go to "Developer Tools", verify your mail using `Mailinator <mailinator.com>`.
+Set up a redirection URI to be `localhost:8000` or where your Dissemin server is running.
+
+Take your client ID and your secret key, you'll use them later.
+
+Ensure that in the settings, you have ``BASE_DOMAIN`` set up to ``sandbox.orcid.org``.
+
+Create a super user::
+
+   python manage.py createsuperuser
+
+Browse to ``localhost:8000/admin`` and log in the administration interface.
+Go to "Social Application" and add a new one. Set the provider to ``orcid.org``
+
+Here, you can use your app ID as your client ID and the secret key that you were given by ORCID earlier.
+
+Now, you can authenticate yourself using the ORCID sandbox!
+
 
 Optional: installing the tasks backend
 --------------------------------------
