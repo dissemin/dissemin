@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-23 19:26+0100\n"
-"PO-Revision-Date: 2016-04-17 19:18+0200\n"
+"POT-Creation-Date: 2016-02-23 22:16+0100\n"
+"PO-Revision-Date: 2016-04-17 22:09+0200\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -236,11 +236,11 @@ msgid "Invalid ORCID identifier."
 msgstr "Identifiant ORCID invalide."
 
 #: papers/forms.py:39 papers/templates/papers/department.html:87
-#: papers/templates/papers/search.html:136
+#: papers/templates/papers/search.html:158
 msgid "Department"
 msgstr "Département"
 
-#: papers/forms.py:40 papers/templates/papers/search.html:77
+#: papers/forms.py:40 papers/templates/papers/search.html:97
 msgid "Researcher"
 msgstr "Personne"
 
@@ -310,7 +310,7 @@ msgid "Papers"
 msgstr "Papiers"
 
 #: papers/templates/papers/ajaxListPapers.html:21
-#: papers/templates/papers/search.html:302
+#: papers/templates/papers/search.html:318
 #: publishers/templates/publishers/list.html:80
 msgid "No production found."
 msgstr "Aucune production trouvée."
@@ -644,83 +644,87 @@ msgstr "Mettre en ligne"
 msgid " (metadata only)"
 msgstr " (notice)"
 
-#: papers/templates/papers/search.html:82
+#: papers/templates/papers/search.html:72
+msgid "Refreshing profile"
+msgstr "Mise à jour du profil"
+
+#: papers/templates/papers/search.html:102
 msgid "Is it you?"
 msgstr "Est-ce vous ?"
 
-#: papers/templates/papers/search.html:102
+#: papers/templates/papers/search.html:122
 #, python-format
 msgid "1 publication"
 msgid_plural "%(nb_publi)s publications"
 msgstr[0] "1 publication"
 msgstr[1] "%(nb_publi)s publications"
 
-#: papers/templates/papers/search.html:110
+#: papers/templates/papers/search.html:128
+msgid "Refresh"
+msgstr "Mettre à jour"
+
+#: papers/templates/papers/search.html:133
 msgid "Address:"
 msgstr "Adresse:"
 
-#: papers/templates/papers/search.html:113
+#: papers/templates/papers/search.html:136
 msgid "Names:"
 msgstr "Noms:"
 
-#: papers/templates/papers/search.html:124
-msgid "Refresh papers"
-msgstr "Mettre à jour les papiers"
-
-#: papers/templates/papers/search.html:125
+#: papers/templates/papers/search.html:147
 msgid "Refresh classification"
 msgstr "Rafraîchir la classification"
 
-#: papers/templates/papers/search.html:130
+#: papers/templates/papers/search.html:152
 msgid "Name"
 msgstr "Nom"
 
-#: papers/templates/papers/search.html:144
+#: papers/templates/papers/search.html:166
 msgid "Journal"
 msgstr "Revue"
 
-#: papers/templates/papers/search.html:147
+#: papers/templates/papers/search.html:169
 msgid "Published by"
 msgstr "Publiée par"
 
-#: papers/templates/papers/search.html:149
+#: papers/templates/papers/search.html:171
 msgid "ISSN:"
 msgstr "ISSN:"
 
-#: papers/templates/papers/search.html:156
-#: papers/templates/papers/search.html:170
+#: papers/templates/papers/search.html:178
+#: papers/templates/papers/search.html:192
 #, python-format
 msgid "<span id=\"nbPapersFound\">%(nb_results)s</span> papers found"
 msgstr "<span id=\"nbPapersFound\">%(nb_results)s</span> articles trouvés"
 
-#: papers/templates/papers/search.html:162
+#: papers/templates/papers/search.html:184
 #: publishers/templates/publishers/policy.html:41
 msgid "Publisher"
 msgstr "Maison d'édition"
 
-#: papers/templates/papers/search.html:177
+#: papers/templates/papers/search.html:199
 #: publishers/templates/publishers/list.html:24
 msgid "Refine search"
 msgstr "Affiner la recherche"
 
-#: papers/templates/papers/search.html:181
+#: papers/templates/papers/search.html:203
 #: publishers/templates/publishers/list.html:33
 msgid "By publisher policy:"
 msgstr "Par politique de publication"
 
-#: papers/templates/papers/search.html:196
+#: papers/templates/papers/search.html:218
 msgid "By full text availability:"
 msgstr "Par disponibilité du texte intégral"
 
-#: papers/templates/papers/search.html:209
+#: papers/templates/papers/search.html:231
 msgid "By document type:"
 msgstr "Par type de document:"
 
-#: papers/templates/papers/search.html:224
+#: papers/templates/papers/search.html:246
 msgid "By visibility:"
 msgstr "Par visibilité"
 
-#: papers/templates/papers/search.html:254
+#: papers/templates/papers/search.html:270
 msgid ""
 "This researcher is not associated with any ORCID profile. The publications "
 "below match their name but might be irrelevant."
@@ -728,7 +732,7 @@ msgstr ""
 "Ce chercheur n'est pas associé à un profil ORCID. Les publications ci-"
 "dessous correspondent au nom mais peuvent ne pas être pertinentes."
 
-#: papers/templates/papers/search.html:266
+#: papers/templates/papers/search.html:282
 msgid ""
 "Your ORCID profile does not reference any publication. You can add them "
 "easily using <a href=\"http://search.crossref.org\">CrossRef Metadata "
@@ -740,7 +744,7 @@ msgstr ""
 "Metadata Search</a>.<br /> Les publications ci-dessous correspondent à votre "
 "nom mais ne sont pas forcément pertinentes ou complètes."
 
-#: papers/templates/papers/search.html:277
+#: papers/templates/papers/search.html:293
 msgid ""
 "This ORCID profile does not reference any publication. The ones shown below "
 "might be irrelevant or incomplete."
