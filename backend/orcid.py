@@ -113,7 +113,7 @@ class SkippedPaper(Exception):
 
 class ORCIDDataPaper(object):
 
-    def __init__(self, ref_name, id, pub, stop_if_dois_exists=False):
+    def __init__(self, ref_name, orcid_id, pub, stop_if_dois_exists=False):
         """
         stop_if_dois_exists: if we find any dois, we don't extract everything, just the dois.
         """
@@ -121,7 +121,7 @@ class ORCIDDataPaper(object):
         self._pub = pub
 
         self.ref_name = ref_name
-        self.id = id
+        self.id = orcid_id
 
         self.authors = []
         self.title = None
@@ -282,8 +282,39 @@ class OrcidPaperSource(PaperSource):
 
         return paper
 
-    
-    def fetch_orcid_records(self, id, profile=None, use_doi=True):
+    def fetch_crossref_incrementally(self, crps, orcid_id):
+        for metadata in crps.search_for_dois_incrementally('', {'orcid': orcid_id}):
+            try:
+                paper = crps.save_doi_metadata(metadata)
+                if paper:
+                    yield True, paper
+                else:
+                    yield False, metadata
+            except ValueError as e:
+                print "Saving CrossRef record from ORCID failed: %s" % unicode(e)
+
+    def fetch_metadata_from_dois(self, crps, orcid_id, dois):
+        doi_metadata = fetch_dois(dois)
+        for metadata in doi_metadata:
+            try:
+                authors = map(convert_to_name_pair, metadata['author'])
+                affiliations = affiliate_author_with_orcid(ref_name, orcid_id, authors)
+                paper = crps.save_doi_metadata(metadata, affiliations)
+                if not paper:
+                    yield False, metadata
+                    continue
+
+                record = BareOaiRecord(
+                        source=orcid_oai_source,
+                        identifier='orcid:%s:%s' % (orcid_id, metadata['DOI']),
+                        splash_url='http://orcid.org/%s' % (orcid_id),
+                        pubtype=paper.doctype)
+                paper.add_oairecord(record)
+                yield True, paper
+            except (KeyError, ValueError, TypeError):
+                yield False, metadata
+
+    def fetch_orcid_records(self, orcid_identifier, profile=None, use_doi=True):
         """
         Queries ORCiD to retrieve the publications associated with a given ORCiD.
         It also fetches such papers from the CrossRef search interface.
@@ -296,14 +327,14 @@ class OrcidPaperSource(PaperSource):
         crps = CrossRefPaperSource(self.ccf)
 
         # Cleanup iD:
-        id = validate_orcid(id)
-        if id is None:
+        orcid_id = validate_orcid(orcid_identifier)
+        if orcid_id is None:
             raise MetadataSourceException('Invalid ORCiD identifier')
 
         # Get ORCiD profile
         try:
             if profile is None:
-                profile = OrcidProfile(id=id)
+                profile = OrcidProfile(id=orcid_id)
             else:
                 profile = OrcidProfile(json=profile)
         except MetadataSourceException as e:
@@ -314,14 +345,12 @@ class OrcidPaperSource(PaperSource):
         ref_name = profile.name
         # curl -H "Accept: application/orcid+json" 'http://pub.orcid.org/v1.2/0000-0002-8612-8827/orcid-works' -L -i
         dois = [] # list of DOIs to fetch
-        papers = [] # list of papers created
         ignored_papers = [] # list of ignored papers due to incomplete metadata
-        records_found = 0 # how many records did we successfully import from the profile?
 
-        # Fetch publications
+        # Fetch publications (1st attempt with ORCiD data)
         pubs = jpath('orcid-profile/orcid-activities/orcid-works/orcid-work', profile, [])
         for pub in pubs:
-            data_paper = ORCIDDataPaper(ref_name, id, pub, stop_if_dois_exists=use_doi)
+            data_paper = ORCIDDataPaper(ref_name, orcid_id, pub, stop_if_dois_exists=use_doi)
 
             if data_paper.dois and use_doi: # We want to batch it rather than manually do it.
                 dois.extend(data_paper.dois)
@@ -335,31 +364,22 @@ class OrcidPaperSource(PaperSource):
             yield self.create_paper(data_paper)
 
         if use_doi:
-            for metadata in crps.search_for_dois_incrementally('', {'orcid': id}):
-                try:
-                    paper = crps.save_doi_metadata(metadata)
-                    if paper:
-                        yield paper
-                except ValueError as e:
-                    print "Saving CrossRef record from ORCID failed: %s" % unicode(e)
+            # 2nd attempt with CrossRef.
+            for success, paper_or_metadata in self.fetch_crossref_incrementally(crps, orcid_id):
+                if success:
+                    yield paper_or_metadata
+                else:
+                    ignored_papers.append(paper_or_metadata)
+                    print ('This metadata (%s) yields no paper.' % (metadata))
 
-            # Now we add the DOIs found in the ORCID profile.
-            doi_metadata = fetch_dois(dois)
-            for metadata in doi_metadata:
-                try:
-                    authors = map(convert_to_name_pair, metadata['author'])
-                    affiliations = affiliate_author_with_orcid(ref_name, id, authors)
-                    paper = crps.save_doi_metadata(metadata, affiliations)
-                    if not paper:
-                        continue
-                    record = BareOaiRecord(
-                            source=orcid_oai_source,
-                            identifier='orcid:'+id+':'+metadata['DOI'],
-                            splash_url='http://orcid.org/'+id,
-                            pubtype=paper.doctype)
-                    paper.add_oairecord(record)
-                    yield paper
-                except (KeyError, ValueError, TypeError):
-                    pass
-
-
+            # 3rd attempt with DOIs found in our ORCiD profile.
+            # FIXME(RaitoBezarius): if we fail here, we should get back the pub and yield it.
+            for success, paper_or_metadata in self.fetch_metadata_from_dois(crps, orcid_id, dois):
+                if success:
+                    yield paper_or_metadata
+                else:
+                    ignored_papers.append(paper_or_metadata)
+                    print ('This metadata (%s) yields no paper.' % (paper_or_metadata))
+       
+        if ignored_papers:
+            print ('Warning: Total ignored papers: %d' % (len(ignored_papers)))
