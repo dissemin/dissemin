@@ -75,7 +75,7 @@ class RomeoTest(TestCase):
         self.assertEqual(fetch_journal({'issn':'1951-6169'}).publisher.oa_status, 'OA')
 
     def test_closed(self):
-        self.assertEqual(fetch_journal({'issn':'0732-183X'}).publisher.oa_status, 'NOK')
+        self.assertEqual(fetch_journal({'issn':'0001-4826'}).publisher.oa_status, 'NOK')
 
     def test_open(self):
         self.assertEqual(fetch_journal({'issn':'1631-073X'}).publisher.oa_status, 'OK')
