@@ -396,6 +396,12 @@ def create_paper_plain_fingerprint(title, authors, year):
 
 ### Partial date representation
 
+def try_date(year, month, day):
+    try:
+        return datetime.date(year=year, month=month, day=day)
+    except ValueError:
+        return None
+
 def parse_int(val, default):
     """
     Returns an int or a default value if parsing the int failed.
