@@ -23,6 +23,7 @@ import re
 import hashlib
 import datetime
 import unicode_tex
+import unicodedata
 from unidecode import unidecode
 from lxml.html.clean import Cleaner
 from lxml.html import fromstring, _transform_result
@@ -182,7 +183,7 @@ def remove_latex_math_dollars(string):
     """
     return latexmath_re.sub(r'\1', string)
 
-latex_command_re = re.compile(r'(\\([a-zA-Z]+|[.=\'"])({[^}]*})*)')
+latex_command_re = re.compile(r'(?P<command>\\([a-zA-Z]+|[.=\'\`"])({[^}]*})*)(?P<letter>[a-zA-Z])?')
 def unescape_latex(s):
     """
     Replaces LaTeX symbols by their unicode counterparts using
@@ -194,8 +195,18 @@ def unescape_latex(s):
     u'$\\textit{K}$ -trivial'
     """
     def conditional_replace(fragment):
-        rep = unicode_tex.tex_to_unicode_map.get(fragment.group(0))
-        return rep or fragment.group(0)
+        cmd = fragment.group('command')
+        letter = fragment.group('letter') or ''
+
+        rep = unicode_tex.tex_to_unicode_map.get(cmd) or cmd
+
+        # We inverse the order to handle accents.
+        if cmd == r"\'" or cmd == r"\`":
+            # We normalize back to the normal form to get only one unicode character.
+            return unicodedata.normalize('NFC', letter + rep)
+        else:
+            # Let's just concat.
+            return rep + letter
 
     return latex_command_re.sub(conditional_replace, s)
 
