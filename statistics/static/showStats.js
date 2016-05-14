@@ -120,8 +120,8 @@ function showStatsPie (detailed_data, aggregated_data, target_id, current_state)
     makeCaptions(detailed_data, captions, current_state);
 
     function updatePie(data) {
-        var newDetailedData = data['detailed'];
-        var newAggregatedData = data['aggregated'];
+        var newDetailedData = data.detailed
+        var newAggregatedData = data.aggregated
         d3.select(parts[0][0]).datum(newDetailedData).selectAll("path")
          .data(pie)
          .transition()

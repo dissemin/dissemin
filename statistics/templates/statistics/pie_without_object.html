@@ -3,17 +3,16 @@
   <div class="statspie_graph"></div>
   <div class="statspie_caption"></div>
   <script type="text/javascript">
-var updateStats = 0;
 $(function() {
 
     // {{ stats.pk }} {{ stats.num_tot }}
 {% if stats.num_tot %}
-    var data = {{ stats|get_pie_data:object_id }};
-  updateStats = showStatsPie(data["detailed"], data["aggregated"], "statspie_n{{ stats_counter }}", "{{ state }}");
+    var data = JSON.load("{{ stats|get_pie_data:object_id }}")
+  updateStats = showStatsPie(data.detailed, data.aggregated, "statspie_n{{ stats_counter }}", "{{ state }}");
 {% else %}
   updateStats = function(data) {
-     if(data['numtot']) {
-         var newUpdateStats = showStatsPie(data['detailed'], data['aggregated'], "statspie_n{{ stats_counter }}", "{{ state }}");
+     if(data.numtot) {
+         var newUpdateStats = showStatsPie(data.detailed, data.aggregated, "statspie_n{{ stats_counter }}", "{{ state }}");
          updateStats = newUpdateStats;
      }
   }

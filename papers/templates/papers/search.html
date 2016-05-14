@@ -12,6 +12,7 @@
 
 {% block extra_head %}
 {% include "statistics/headers.html" %}
+<script type="text/javascript" src="{% static 'papers/refresh.js' %}"></script>
 {% endblock %}
 
 {% block bodyTitle %}
@@ -19,77 +20,26 @@
 {% endblock %}
 
 {% block jsScript %}
-    $(function(){
-       $('.logoHelpPopover').popover({trigger: "hover"});
-       $('#refetchPubsButton').click(refetchPubs);
- {% if researcher.current_task %}
-       addWaitingArea("{{ researcher.get_current_task_display }}");
- {% endif %}
+$(function(){
+       var config = {
+         refreshURL: "{{ ajax_url }}",
+         refreshMessage: "{% trans "Refreshing profile" %}",
+         refetchURL: "{% url "refetch-researcher" researcher.pk %}",
+         logoHelpNode: $('.logoHelpPopover'),
+         refetchButtonNode: $('#refetchPubsButton'),
+         waitingAreaContainerNode: $('#waitingAreaContainer'),
+         paperSearchResultsNode: $('#paperSearchResults'),
+         nbPapersFoundNode: $('#nbPapersFound'),
+         harvestingStatusNode: $('#harvestingStatus'),
+         animatedBirdGIF: "{% static "img/animated-bird.gif" %}",
+         currentTask: {% if researcher.current_task %}"{{ researcher.get_current_task_display }}"{% else %} null {% endif %},
+         isSuperUser: {{ request.user.is_superuser|yesno:"true,false,false" }},
+         affiliationFormInput: $('#id_value'),
+         affiliationForm: $('#affiliationForm'),
+         setResearcherDepartmentURL: "{% url 'ajax-setResearcherDepartment' %}"
+       }
+       init_paper_module(config)
     });
-    
-    function addWaitingArea(description) {
-    $('#waitingAreaContainer').html('<div id="waitingArea"><span class="waitingBird"><img src="{% static "img/animated-bird.gif" %}" alt="Paper bird" /></span><br /><span id="harvestingStatus">'+description+'</span><span>…</span><br /></div>');
-    }
-
-    function refreshPapers() {
-    $.ajax({url:"{{ ajax_url }}",
-           success:function(data) {
-                if(data) {
-                    console.log(data);
-                    $("#paperSearchResults").html(data['listPapers']);
-                    updateStats(data['stats']);
-                    $("#nbPapersFound").text(data['stats']['numtot']);
-                    if('display' in data) {
-                        var currentText = $('#harvestingStatus').text();
-                        var newText = data['display'];
-                        if(newText != currentText) {
-                            $('#harvestingStatus').text(newText);
-                        }
-                        setTimeout(refreshPapers, 3000);
-                    } else {
-                        var area = $('#waitingArea');
-                        area.fadeOut(function(){
-                            area.hide();
-                        });
-                    }
-
-                }
-           },
-          error:function(xhr,error,exception) {
-            var area = $('#waitingArea');
-            area.fadeOut(function(){
-                area.hide();
-            });
-          },
-          contentType:"application/json" });
-    }
-
-    function refetchPubs() {
-        console.log('started');
-        $.ajax({url:"{% url 'refetch-researcher' researcher.pk %}",
-            success:function(data) {
-                console.log('success');
-                addWaitingArea('{% trans "Refreshing profile" %}');
-                setTimeout(refreshPapers, 1000);
-                }
-          });
-    }
-{% if researcher.current_task %}
-    $(function(){
-        setTimeout(refreshPapers, 1500);
-    });
-{% endif %}
-{% if request.user.is_superuser %}
-    $(function(){
-        $("#affiliationForm #id_value").change(function(){
-            console.log('change');
-            $.post('{% url 'ajax-setResearcherDepartment' %}', $('#affiliationForm').serialize(), null, 'json').fail(
-                function(data) {
-                    console.log(data);
-                    });
-         });
-     });
-{% endif %}
 {% endblock %}
 
 {% block details %}
