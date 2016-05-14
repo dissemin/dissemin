@@ -1,0 +1,20 @@
+{% extends "dissemin/skeleton.html" %}
+
+{% load i18n %}
+{% load static %}
+
+{% block headTitle %}
+{% trans "Partners" %}
+{% endblock %}
+
+{% block content %}
+<div id="fullPage">
+    <div id="contentTitle">{% trans "Partners" %}</div>
+    <div id="actualContent">
+        <div style="text-align: center">
+            <br /><br /><br />
+            <a href="https://www.base-search.net/"><img alt="Bielefeld Academic Search Engine (BASE)" src="{% static "img/base-search.svg" %}" height="180px" /></a>
+            <a href="http://www.couperin.org/"><img alt="Consortium Couperin" src="{% static "img/couperin.png" %}" height="140px" /></a>
+        </div>
+    </div>
+{% endblock %}
