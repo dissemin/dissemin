@@ -297,6 +297,17 @@
  </div>
  {% endif %}
 
+ {% if messages %}
+ <p></p>
+ <ul class="messages">
+         {% for message in messages %}
+         <div class="alert alert-warning {% if message.tags %} {{ message.tags }} {% endif %}">
+                 <p>{{ message }}</p>
+         </div>
+         {% endfor %}
+ </ul>
+ {% endif %}
+
  <div id="paperSearchResults">
  {% if search_results.paginator.num_pages > 1 %}
 <div class="searchPages">{% bootstrap_paginate search_results range=10 %}</div>
