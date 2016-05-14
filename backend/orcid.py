@@ -27,6 +27,7 @@ from unidecode import unidecode
 from celery import current_task
 
 from django.core.exceptions import ObjectDoesNotExist
+import stored_messages
 
 from papers.errors import MetadataSourceException
 from papers.doi import to_doi
@@ -255,6 +256,7 @@ class ORCIDDataPaper(object):
 
 class OrcidPaperSource(PaperSource):
     def fetch_papers(self, researcher):
+        self.researcher = researcher
         if researcher.orcid:
             if researcher.empty_orcid_profile == None:
                 self.update_empty_orcid(researcher, True)
@@ -313,6 +315,14 @@ class OrcidPaperSource(PaperSource):
                 yield True, paper
             except (KeyError, ValueError, TypeError):
                 yield False, metadata
+
+    def warn_user_of_ignored_papers(self, ignored_papers):
+        user = self.researcher.user
+        message = "We ignored {} papers from your ORCID profile.".format(len(ignored_papers))
+        stored_messages.api.add_message_for([user],
+                stored_messages.STORED_ERROR,
+                message
+        )
 
     def fetch_orcid_records(self, orcid_identifier, profile=None, use_doi=True):
         """
@@ -384,4 +394,5 @@ class OrcidPaperSource(PaperSource):
                     print ('This metadata (%s) yields no paper.' % (paper_or_metadata))
        
         if ignored_papers:
+            self.warn_user_of_ignored_papers(ignored_papers)
             print ('Warning: Total ignored papers: %d' % (len(ignored_papers)))
