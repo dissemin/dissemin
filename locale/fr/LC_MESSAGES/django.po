@@ -1051,8 +1051,8 @@ msgid "Available from the author"
 msgstr "Accessible à partir de l'auteur"
 
 #: statistics/models.py:53
-msgid "Could be shared by the authors"
-msgstr "Pourrait être partagé par les auteurs"
+msgid "Should be shared by the authors"
+msgstr "Devrait être partagé par les auteurs"
 
 #: statistics/models.py:54
 msgid "Unknown/unclear sharing policy"

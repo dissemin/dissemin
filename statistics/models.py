@@ -50,7 +50,7 @@ import json
 COMBINED_STATUS_CHOICES = [
     ('oa', _('Available from the publisher')),
     ('ok', _('Available from the author')),
-    ('couldbe', _('Could be shared by the authors')),
+    ('couldbe', _('Should be shared by the authors')),
     ('unk', _('Unknown/unclear sharing policy')),
     ('closed', _('Publisher forbids sharing')),
     ]
