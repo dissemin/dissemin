@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-14 00:27+0200\n"
-"PO-Revision-Date: 2016-05-14 00:27+0200\n"
+"POT-Creation-Date: 2016-05-14 05:07+0200\n"
+"PO-Revision-Date: 2016-05-14 20:57+0200\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -1758,6 +1758,10 @@ msgstr ""
 #: templates/dissemin/login.html:69 templates/dissemin/sandbox.html:71
 msgid "Forgot Password?"
 msgstr "Mot de passe oublié ?"
+
+#: templates/dissemin/partners.html:7 templates/dissemin/partners.html:12
+msgid "Partners"
+msgstr "Partenaires"
 
 #: templates/dissemin/sandbox.html:12
 msgid "SANDBOX Sign in"
