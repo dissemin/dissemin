@@ -223,9 +223,9 @@ class ORCIDDataPaper(object):
 
         if self.bibtex is not None:
             try:
-                entry = parse_bibtex(bibtex)
+                entry = parse_bibtex(self.bibtex)
 
-                if 'author' not in entry or len(entry['author']) > 0:
+                if 'author' not in entry or len(entry['author']) == 0:
                     print "Warning: Skipping ORCID publication: no authors."
                     print self.bibtex
                     raise SkippedPaper
@@ -266,7 +266,7 @@ class OrcidPaperSource(PaperSource):
         # Create paper
         paper = BarePaper.create(
             data_paper.title,
-            data_paper.authors,
+            data_paper.authors_converted,
             data_paper.pubdate,
             'VISIBLE',
             data_paper.affiliations
@@ -293,7 +293,7 @@ class OrcidPaperSource(PaperSource):
             except ValueError as e:
                 print "Saving CrossRef record from ORCID failed: %s" % unicode(e)
 
-    def fetch_metadata_from_dois(self, crps, orcid_id, dois):
+    def fetch_metadata_from_dois(self, crps, ref_name, orcid_id, dois):
         doi_metadata = fetch_dois(dois)
         for metadata in doi_metadata:
             try:
@@ -354,6 +354,7 @@ class OrcidPaperSource(PaperSource):
 
             if data_paper.dois and use_doi: # We want to batch it rather than manually do it.
                 dois.extend(data_paper.dois)
+                continue
 
             # Extract information from ORCiD
             if data_paper.skipped:
@@ -375,7 +376,7 @@ class OrcidPaperSource(PaperSource):
 
             # Let's grab papers with DOIs found in our ORCiD profile.
             # FIXME(RaitoBezarius): if we fail here, we should get back the pub and yield it.
-            for success, paper_or_metadata in self.fetch_metadata_from_dois(crps, orcid_id, dois):
+            for success, paper_or_metadata in self.fetch_metadata_from_dois(crps, ref_name, orcid_id, dois):
                 if success:
                     yield paper_or_metadata
                 else:
