@@ -152,6 +152,15 @@ class ORCIDDataPaper(object):
 
             # These are the basic minimal information required for a BarePaper.
             if not self.authors or not self.title or not self.pubdate:
+                if not self.authors:
+                    self.skip_reason = "NO_AUTHOR"
+                elif not self.title:
+                    self.skip_reason = "NO_TITLE"
+                elif not self.pubdate:
+                    self.skip_reason = "INVALID_PUB_DATE"
+                else:
+                    pass
+
                 raise SkippedPaper
         except SkippedPaper:
             self.skipped = True
@@ -174,6 +183,7 @@ class ORCIDDataPaper(object):
         self.title = self.j('work-title/title/value')
         if self.title is None:
             print "Warning: Skipping ORCID publication: no title"
+            self.skip_reason = "NO_TITLE"
             raise SkippedPaper
 
     def _extract_type(self):
@@ -204,6 +214,7 @@ class ORCIDDataPaper(object):
         self.pubdate = try_date(year, month, day) or try_date(year, month, 1) or try_date(year, 1, 1)
         if self.pubdate is None:
             print "Invalid publication date in ORCID publication, skipping"
+            self.skip_reason = "INVALID_PUB_DATE"
             raise SkippedPaper
 
     def _extract_affiliations(self):
@@ -231,6 +242,7 @@ class ORCIDDataPaper(object):
                 if 'author' not in entry or len(entry['author']) == 0:
                     print "Warning: Skipping ORCID publication: no authors."
                     print self.bibtex
+                    self.skip_reason = "NO_AUTHOR"
                     raise SkippedPaper
                 else:
                     self.authors = entry['author']
@@ -253,6 +265,9 @@ class ORCIDDataPaper(object):
     @property
     def splash_url(self):
         return 'http://{}/{}'.format(settings.ORCID_BASE_DOMAIN, self.id)
+
+    def as_dict(self):
+        return self.__dict__
 
 
 
@@ -376,8 +391,8 @@ class OrcidPaperSource(PaperSource):
 
             # Extract information from ORCiD
             if data_paper.skipped:
-                print ('%s is skipped due to incorrect metadata' % (data_paper))
-                ignored_papers.append(pub)
+                print ('%s is skipped due to incorrect metadata (%s)' % (data_paper, data_paper.skip_reason))
+                ignored_papers.append(data_paper.as_dict())
                 continue
 
             yield self.create_paper(data_paper)
