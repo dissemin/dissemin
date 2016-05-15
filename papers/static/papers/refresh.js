@@ -1,4 +1,39 @@
 function init_paper_module (config) {
+    // using jQuery
+  function getCookie(name) {
+      var cookieValue = null;
+      if (document.cookie && document.cookie != '') {
+          var cookies = document.cookie.split(';');
+          for (var i = 0; i < cookies.length; i++) {
+              var cookie = jQuery.trim(cookies[i]);
+              // Does this cookie string begin with the name we want?
+              if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
+              }
+          }
+      }
+      return cookieValue;
+  }
+
+  function call_api(url, user_config) {
+    var csrftoken = getCookie('csrftoken');
+    var config = user_config || {}
+    return fetch(url, Object.assign(
+      {},
+      config,
+      {
+        headers: Object.assign({}, config.headers || {}, {
+          'X-CSRFToken': csrftoken,
+          'Content-Type': 'application/json'
+        }),
+        credentials: 'include'
+      }
+    ))
+  }
+
+  var MARK_AS_READ = gettext('Do not show this message anymore')
+
   function addWaitingArea (animatedBirdGIF, container, currentTask) {
     container.html(
       "<div id='waitingArea'>" +
@@ -21,6 +56,18 @@ function init_paper_module (config) {
     addWaitingArea(config.animatedBirdGIF,
                    config.waitingAreaContainerNode,
                    message)
+  }
+
+  function markMessageAsRead (messageId) {
+    return call_api(Urls['inbox-read'](messageId), {
+      method: 'POST'
+    })
+  }
+
+  function parseMessages (messages) {
+    return messages.map(function (message) {
+      return JSON.parse(message)
+    })
   }
 
   function flashMessages (messages) {
@@ -50,6 +97,7 @@ function init_paper_module (config) {
         true)
 
         html += '<p>' + human_message + '</p>'
+        html += '<button data-id=' + message.id + ' class="btn-mark-as-read">' + MARK_AS_READ + '</button>'
       }
 
       html += '</div>'
@@ -57,21 +105,25 @@ function init_paper_module (config) {
       // Insert new message one by one.
       $(html).appendTo('.messages')
     }
+
+    $('.btn-mark-as-read').click(function (evt) {
+      var $button = $(evt.target)
+      var $message = $button.parent()
+
+      var messageId = $(evt.target).attr('data-id')
+      markMessageAsRead(messageId)
+      $message.remove()
+    })
   }
 
   function refreshPapers () {
-    return fetch(config.refreshURL, {
-      credentials: 'same-origin',
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
+    return call_api(config.refreshURL)
       .then(function (response) {
         return response.json()
       }).then(function (data) {
         config.paperSearchResultsNode.html(data.listPapers)
         updateStats(data.stats)
-        flashMessages(data.messages)
+        flashMessages(parseMessages(data.messages))
         config.nbPapersFoundNode.text(data.stats.numtot)
 
         if (data.display) {
@@ -97,8 +149,8 @@ function init_paper_module (config) {
   function refetchPublications (refetchURL, refreshMessage) {
     return function (evt) {
       console.log('Dissemin is refetching your publications...', refetchURL)
-      return fetch(refetchURL, {
-        credentials: 'same-origin'
+      return call_api(refetchURL, {
+        credentials: 'include'
       })
         .then(function (response) {
           console.log('Refetch process is a success.', response)
@@ -113,7 +165,7 @@ function init_paper_module (config) {
 
   function updateResearcherDepartment (setResearcherURL) {
     return function (event) {
-      return fetch(setResearcherURL, {
+      return call_api(setResearcherURL, {
         method: 'POST',
         body: new BodyForm(config.affiliationForm),
         headers: {
@@ -154,9 +206,7 @@ function init_paper_module (config) {
   }
 
   if (config.initialMessages) {
-    var messages = config.initialMessages.map(function (message) {
-      return JSON.parse(message)
-    })
+    var messages = parseMessages(config.initialMessages)
     flashMessages(messages)
   }
 }
