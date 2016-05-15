@@ -111,11 +111,33 @@ Create a super user::
    python manage.py createsuperuser
 
 Browse to ``localhost:8000/admin`` and log in the administration interface.
-Go to "Social Application" and add a new one. Set the provider to ``orcid.org``
+Go to "Social Application" and add a new one. Set the provider to ``orcid.org``.
 
 Here, you can use your app ID as your client ID and the secret key that you were given by ORCID earlier.
+You should also activate the default Site object for this provider.
 
 Now, you can authenticate yourself using the ORCID sandbox!
+
+Add deposit interfaces
+----------------------
+
+If you want to enable deposit of papers to external repositories (such as Zenodo),
+you need to register them in the admin interface.
+
+The page `localhost:8000/admin/deposit/repository/` lists the currently registered
+interfaces and allows you to add one.
+
+To add a repository, you need the following settings:
+- A name, description and logo. They will be shown to the user on the deposit page.
+- A protocol: this is the internal name of the protocol Dissemin should use
+  to perform the deposit. For now, only `ZenodoProtocol` is available: it can
+  be used to deposit to Zenodo (both production and sandbox).
+- Some other settings, such as the endpoint of the deposit interface,
+  depending on what the protocol you have chosen requires.
+  In the case of Zenodo, you need the endpoint (such as `https://zenodo.org/api/deposit/depositions` or `https://sandbox.zenodo.org/api/deposit/depositions`) and the API
+  key (available from your account on Zenodo).
+
+A checkbox allows you to enable or disable the repository without deleting its settings.
 
 
 Optional: installing the tasks backend
