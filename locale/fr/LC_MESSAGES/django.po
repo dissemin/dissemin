@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-15 23:44+0200\n"
-"PO-Revision-Date: 2016-05-14 20:57+0200\n"
-"Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
+"POT-Creation-Date: 2016-05-15 23:50+0200\n"
+"PO-Revision-Date: 2016-05-15 23:52+0200\n"
+"Last-Translator: Ryan Lahfa <masterancpp@gmail.com>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -165,7 +165,7 @@ msgstr "Autre licence libre"
 
 #: notification/models.py:63
 msgid "inboxes"
-msgstr ""
+msgstr "boîtes de réceptions"
 
 #: papers/baremodels.py:43
 msgid "Visible"
@@ -1696,6 +1696,7 @@ msgid "Back to top"
 msgstr "Revenir en haut"
 
 #: templates/dissemin/feedback.html:6 templates/dissemin/feedback.html.py:11
+#: templates/dissemin/skeleton.html:107
 msgid "Feedback"
 msgstr "Réactions"
 
@@ -1768,6 +1769,7 @@ msgid "Forgot Password?"
 msgstr "Mot de passe oublié ?"
 
 #: templates/dissemin/partners.html:7 templates/dissemin/partners.html.py:12
+#: templates/dissemin/skeleton.html:115
 msgid "Partners"
 msgstr "Partenaires"
 
@@ -1798,6 +1800,14 @@ msgstr "Se connecter"
 #: templates/dissemin/skeleton.html:108 templates/dissemin/tos.html:11
 msgid "Terms of Service"
 msgstr "Conditions d'utilisation"
+
+#: templates/dissemin/skeleton.html:113
+msgid "Who are we?"
+msgstr "Qui sommes-nous?"
+
+#: templates/dissemin/skeleton.html:114
+msgid "Donate"
+msgstr "Faire une donation"
 
 #: templates/dissemin/sources.html:11
 msgid "Data sources"
@@ -2041,7 +2051,7 @@ msgstr ""
 
 #: upload/views.py:198
 msgid "Invalid SSL certificate on the remote server."
-msgstr ""
+msgstr "Certificat SSL invalide sur le serveur distant."
 
 #: upload/views.py:200 upload/views.py:204
 msgid "Invalid URL (server timed out)."
