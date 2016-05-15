@@ -235,7 +235,9 @@ $(function(){
      {% if not researcher.current_task %}
          </p><p>
          <div style="text-align:center">
-         <a href="{{ url_refetch }}" class="btn btn-default">Update papers</a>
+                 <a href="{{ url_refetch }}" class="btn btn-default">
+                         {% trans "Update papers" %}
+                 </a>
          </div>
      {% endif %}
      {% else %}
