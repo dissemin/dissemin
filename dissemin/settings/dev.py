@@ -3,6 +3,7 @@ Development specific settings for Dissemin project.
 """
 
 from .common import *
+import os
 
 DEBUG = True
 DEBUG_TOOLBAR_CONFIG = {'SHOW_TOOLBAR_CALLBACK': lambda r: True}

@@ -11,6 +11,9 @@ if 'CORE_API_KEY' in os.environ:
 if 'ROMEO_API_KEY' in os.environ:
     ROMEO_API_KEY = os.environ['ROMEO_API_KEY']
 
+# Relative path from the project to store the uploads
+MEDIA_ROOT = os.path.join(BASE_DIR, 'dissemin_media')
+
 # Travis settings
 # taken from https://gist.github.com/ndarville/3625246
 DATABASES = {
