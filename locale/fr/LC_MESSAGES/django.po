@@ -749,8 +749,6 @@ msgstr ""
 "nom mais ne sont pas forcément pertinentes ou complètes."
 
 #: papers/templates/papers/search.html:239
-#, fuzzy
-#| msgid "Latest papers"
 msgid "Update papers"
 msgstr "Met à jour les publications"
 
