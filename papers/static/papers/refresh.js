@@ -127,8 +127,10 @@ function init_paper_module (config) {
 
         html += '<p>' + human_message + '</p>'
         html += detailed_informations
-        html += '<button data-id=' + message.id + ' class="btn-mark-as-read">' + MARK_AS_READ + '</button>'
-        html += '<button class="btn-show-more-informations">' + gettext('Show more informations') + '</button>'
+        html += '<div class="message-actions">'
+          html += '<button data-id=' + message.id + ' class="btn btn-mark-as-read">' + MARK_AS_READ + '</button>'
+          html += '<button class="btn btn-show-more-informations">' + gettext('Show more informations') + '</button>'
+        html += '</div>'
       }
 
       html += '</div>'
@@ -139,7 +141,7 @@ function init_paper_module (config) {
 
     $('.btn-mark-as-read').click(function (evt) {
       var $button = $(evt.target)
-      var $message = $button.parent()
+      var $message = $button.parent().parent()
 
       var messageId = $(evt.target).attr('data-id')
       markMessageAsRead(messageId)
@@ -147,7 +149,7 @@ function init_paper_module (config) {
     })
     $('.btn-show-more-informations').click(function (evt) {
       var $button = $(evt.target)
-      var $message = $button.parent()
+      var $message = $button.parent().parent()
       var $more_information = $message.find('.more-information')
 
       if (!$more_information.hasClass('shown')) {
