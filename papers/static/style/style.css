@@ -1140,6 +1140,11 @@ h1#paperTitle {
     font-weight: 800;
 }
 
+/* Messages area */
+.messages {
+    padding-left: 0px;
+}
+
 /* Not sure we need these anymore */
 
 #paper_uploader input {
