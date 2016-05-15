@@ -37,9 +37,22 @@ function init_paper_module (config) {
       ]
 
       var html = (
-        '<div class="' + classes.join(' ') + '">' +
-          '<p>' + message.payload.message + '</p>' +
-        '</div>')
+        '<div class="' + classes.join(' ') + '">'
+      )
+
+      if (message.payload.code === 'IGNORED_PAPERS') {
+        var human_message = interpolate(ngettext(
+          'We ignored %(count)s paper from your ORCiD profile.',
+          'We ignored %(count)s papers from your ORCiD profile.',
+          message.payload.papers.length
+        ), 
+        { count: message.payload.papers.length }, 
+        true)
+
+        html += '<p>' + human_message + '</p>'
+      }
+
+      html += '</div>'
       
       // Insert new message one by one.
       $(html).appendTo('.messages')
@@ -138,5 +151,12 @@ function init_paper_module (config) {
     config.affiliationForm.change(
       updateResearcherDepartment(config.setResearcherDepartmentURL)
     )
+  }
+
+  if (config.initialMessages) {
+    var messages = config.initialMessages.map(function (message) {
+      return JSON.parse(message)
+    })
+    flashMessages(messages)
   }
 }
