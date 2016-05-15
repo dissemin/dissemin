@@ -206,6 +206,13 @@ BROKER_URL = 'redis://localhost:6379/0'
 # We also use Redis as result backend.
 CELERY_RESULT_BACKEND = BROKER_URL
 
+# Redis is not mandatory, this client is reserved for deposits.
+try:
+    import redis
+    redis_client = redis.StrictRedis(host='localhost', port=6379, db=0)
+except ImportError:
+    pass
+
 CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
 CELERY_IMPORTS = ['backend.tasks']
 
