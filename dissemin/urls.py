@@ -94,12 +94,14 @@ urlpatterns = patterns('',
     url(r'^', include('papers.urls')),
     url(r'^', include('publishers.urls')),
     url(r'^', include('deposit.urls')),
+    url(r'^', include('notification.urls')),
     # Social auth
     url(r'^accounts/login/$', LoginView.as_view(), name='account_login'),
     url(r'^accounts/sandbox_login/$', SandboxLoginView.as_view(), name='sandbox-login'),
     url(r'^accounts/logout/$', logoutView, name='account_logout'),
     url(r'^accounts/social/', include('allauth.socialaccount.urls')),
-    url(r'^jsi18n/$', javascript_catalog, js_info_dict, name='javascript-catalog')
+    # JavaScript i18n
+    url(r'^jsi18n/$', javascript_catalog, js_info_dict, name='javascript-catalog'),
 # Remove this in production
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
