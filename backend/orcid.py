@@ -252,7 +252,7 @@ class ORCIDDataPaper(object):
 
     @property
     def splash_url(self):
-        return 'http://{}/{}' % (settings.ORCID_BASE_DOMAIN, self.id)
+        return 'http://{}/{}'.format(settings.ORCID_BASE_DOMAIN, self.id)
 
 
 
