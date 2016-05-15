@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-15 21:40+0200\n"
+"POT-Creation-Date: 2016-05-15 22:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Ryan Lahfa <masterancpp@gmail.com>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
@@ -18,7 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: papers/static/papers/refresh.js:45
+#: papers/static/papers/refresh.js:35
+msgid "Do not show this message anymore"
+msgstr "Ne plus montrer ce message"
+
+#: papers/static/papers/refresh.js:92
 msgid "We ignored %(count)s paper from your ORCiD profile."
 msgid_plural "We ignored %(count)s papers from your ORCiD profile."
 msgstr[0] "Nous avons ignoré %(count)s publication de votre profil ORCiD"
