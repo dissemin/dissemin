@@ -38,6 +38,8 @@ from deposit.sword import metadataFormatter
 from papers.errors import MetadataSourceException
 from papers.utils import kill_html
 
+from django.conf import settings
+
 import sword2
 
 class SwordProtocol(RepositoryProtocol):
@@ -70,7 +72,7 @@ class SwordProtocol(RepositoryProtocol):
         entry.add_field('title', p.title)
         for a in p.authors:
             if a.orcid:
-                entry.add_author(unicode(a), uri='http://orcid.org/'+a.orcid)
+                entry.add_author(unicode(a), uri='http://{}/{}'.format(settings.ORCID_BASE_DOMAIN, a.orcid))
             else:
                 entry.add_author(unicode(a))
         if p.abstract:

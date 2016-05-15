@@ -6,11 +6,13 @@ from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.contrib.staticfiles.templatetags.staticfiles import static
 
+from django.conf import settings
+
 register = template.Library()
 
 @register.filter(is_safe=True)
 def orcid_to_url(orcid):
-    return mark_safe('http://orcid.org/'+escape(orcid))
+    return mark_safe('http://{}/{}'.format(settings.ORCID_BASE_DOMAIN, escape(orcid))
 
 @register.filter(is_safe=True)
 def small_orcid(orcid):
