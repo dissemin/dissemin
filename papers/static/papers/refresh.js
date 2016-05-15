@@ -128,7 +128,7 @@ function init_paper_module (config) {
 
         if (data.display) {
           // We update the status text if we have new status.
-          config.harvestingStatusNode.text(data.display)
+          config.harvestingStatusNode().text(data.display)
           setTimeout(refreshPapers, 3000)
         } else {
           config.waitingAreaNode.fadeOut(function () {

@@ -30,7 +30,9 @@ $(function(){
          waitingAreaContainerNode: $('#waitingAreaContainer'),
          paperSearchResultsNode: $('#paperSearchResults'),
          nbPapersFoundNode: $('#nbPapersFound'),
-         harvestingStatusNode: $('#harvestingStatus'),
+         harvestingStatusNode: function () {
+                 return $('#harvestingStatus')
+         },
          animatedBirdGIF: "{% static "img/animated-bird.gif" %}",
          currentTask: {% if researcher.current_task %}"{{ researcher.get_current_task_display }}"{% else %} null {% endif %},
          isSuperUser: {{ request.user.is_superuser|yesno:"true,false,false" }},
