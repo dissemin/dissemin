@@ -219,7 +219,8 @@ def searchView(request, **kwargs):
     # Notifications
     # TODO: unefficient query.
     notifications = get_notifications(request)
-    selected_messages = sorted(notifications, key=lambda msg: msg.level)[:3]
+    selected_messages = map(lambda n: n.serialize_to_json(),
+            sorted(notifications, key=lambda msg: msg.level)[:3])
     context['messages'] = selected_messages
 
     # Build the GET requests for variants of the parameters
@@ -245,7 +246,7 @@ def searchView(request, **kwargs):
         response['listPapers'] = loader.render_to_string('papers/ajaxListPapers.html', context)
         response['stats'] = json.loads(stats.pie_data(researcher.object_id))
         response['stats']['numtot'] = stats.num_tot
-        response['messages'] = map(lambda message: { 'tag': message.tag, 'level': message.level, 'payload': message.payload }, selected_messages)
+        response['messages'] = selected_messages
         if researcher.current_task:
             response['status'] = researcher.current_task
             response['display'] = researcher.get_current_task_display()

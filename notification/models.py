@@ -9,6 +9,9 @@ from django.utils.translation import ugettext_lazy as _
 
 from jsonfield import JSONField
 
+from .serializers import NotificationSerializer
+from rest_framework.renderers import JSONRenderer
+
 import json
 
 from .settings import notification_settings
@@ -26,6 +29,11 @@ class Notification(models.Model):
 
     def __str__(self):
         return json.dumps(self.payload)
+
+    def serialize_to_json(self):
+        serializer = NotificationSerializer(self)
+        return JSONRenderer().render(serializer.data)
+
 
 @python_2_unicode_compatible
 class NotificationArchive(models.Model):

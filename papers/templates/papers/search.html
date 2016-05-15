@@ -36,7 +36,8 @@ $(function(){
          isSuperUser: {{ request.user.is_superuser|yesno:"true,false,false" }},
          affiliationFormInput: $('#id_value'),
          affiliationForm: $('#affiliationForm'),
-         setResearcherDepartmentURL: "{% url 'ajax-setResearcherDepartment' %}"
+         setResearcherDepartmentURL: "{% url 'ajax-setResearcherDepartment' %}",
+         initialMessages: {{ messages | safe }}
        }
        init_paper_module(config)
     });
@@ -248,11 +249,6 @@ $(function(){
  {% endif %}
 
  <ul class="messages">
-         {% for message in messages %}
-         <div class="alert alert-warning {% if message.tag %} {{ message.tag }} {% endif %}">
-                 <p>{{ message.payload.message }}</p>
-         </div>
-         {% endfor %}
  </ul>
 
  <div id="paperSearchResults">

@@ -20,23 +20,6 @@ def get_backend_class():
 
     return getattr(importlib.import_module(module), klass)
 
-def translate_notifications(notifications):
-    translated = []
-    for notification in notifications:
-        if notification.payload.get('i18n', False):
-            # Plural messages
-            if notification.payload.get('messages', None) is not None:
-                singular, plural = notification.payload['messages']
-                count = notification.payload['variables']['count']
-                notification.payload['message'] = _plural(singular, plural, count) % notification.payload['variables']
-            # Singular message
-            else:
-                notification.payload['message'] = _(notification.payload['message'])
-
-        translated.append(notification)
-
-    return translated
-
 def get_notifications(request):
     """
     Get all unread messages from a user.
@@ -46,7 +29,7 @@ def get_notifications(request):
     BackendClass = get_backend_class()
     backend = BackendClass()
 
-    notifications = translate_notifications(backend.inbox_list(request.user))
+    notifications = backend.inbox_list(request.user)
     return notifications
 
 def add_notification_for(users, level, payload, tag='', date=None):

@@ -321,16 +321,8 @@ class OrcidPaperSource(PaperSource):
         user = self.researcher.user
         delete_notification_per_tag(user, 'backend_orcid')
         notification = {
-            'messages': (
-                "We ignored %(count)d paper (%(names)s) from your ORCID profile.",
-                "We ignored %(count)d papers (%(names)s) from your ORCID profile."
-            ),
-            'variables': {
-                'count': len(ignored_papers),
-                'names': ', '.join(map(lambda item: item['work-title']['title']['value'], ignored_papers))
-            },
-            'papers': ignored_papers,
-            'i18n': True
+            'code': 'IGNORED_PAPERS',
+            'papers': ignored_papers
         }
         add_notification_for([user],
                 notification_levels.ERROR,
