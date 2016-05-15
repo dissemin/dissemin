@@ -64,7 +64,7 @@ $(function(){
         <p><span class="glyphicon glyphicon-home"></span> <a href="{{ researcher.homepage }}">{{ researcher.homepage|domain }}</a></p>
         {% endif %}
         {% if researcher.orcid %}
-        <p><a href="http://orcid.org/{{ researcher.orcid }}"><img src="{% static "img/orcid-small.png" %}" alt="ORCID" /> {{ researcher.orcid }}</a></p>
+        <p><a href="{{ researcher.orcid_link }}"><img src="{% static "img/orcid-small.png" %}" alt="ORCID" /> {{ researcher.orcid }}</a></p>
         {% endif %}
         {% if researcher.department %}
         <p><span class="glyphicon glyphicon-star"></span> <a href="{{ researcher.department.institution.url }}">{{ researcher.department.institution }}</a></p>
