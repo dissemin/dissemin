@@ -27,7 +27,8 @@ from unidecode import unidecode
 from celery import current_task
 
 from django.core.exceptions import ObjectDoesNotExist
-import stored_messages
+from notification.api import add_notification_for, delete_notification_per_tag
+import notification.levels as notification_levels
 
 from papers.errors import MetadataSourceException
 from papers.doi import to_doi
@@ -318,10 +319,23 @@ class OrcidPaperSource(PaperSource):
 
     def warn_user_of_ignored_papers(self, ignored_papers):
         user = self.researcher.user
-        message = "We ignored {} papers from your ORCID profile.".format(len(ignored_papers))
-        stored_messages.api.add_message_for([user],
-                stored_messages.STORED_ERROR,
-                message
+        delete_notification_per_tag(user, 'backend_orcid')
+        notification = {
+            'messages': (
+                "We ignored %(count)d paper (%(names)s) from your ORCID profile.",
+                "We ignored %(count)d papers (%(names)s) from your ORCID profile."
+            ),
+            'variables': {
+                'count': len(ignored_papers),
+                'names': ', '.join(map(lambda item: item['work-title']['title']['value'], ignored_papers))
+            },
+            'papers': ignored_papers,
+            'i18n': True
+        }
+        add_notification_for([user],
+                notification_levels.ERROR,
+                notification,
+                'backend_orcid'
         )
 
     def fetch_orcid_records(self, orcid_identifier, profile=None, use_doi=True):
