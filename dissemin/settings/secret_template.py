@@ -1,8 +1,5 @@
 # encoding: utf8
 
-import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-
 ### Security key ###
 # This is used by django to generate various things (mainly for 
 # authentication). Just pick a fairly random string and keep it
