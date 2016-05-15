@@ -8,7 +8,7 @@ DEBUG = True
 DEBUG_TOOLBAR_CONFIG = {'SHOW_TOOLBAR_CALLBACK': lambda r: True}
 
 # Cache backend
-# https://docs.djangoproject.com/en/1.7/topics/cache/
+# https://docs.djangoproject.com/en/1.8/topics/cache/
 CACHES = {
     'default': {
 	'BACKEND': 'django.core.cache.backends.locmem.LocMemCache'

@@ -7,7 +7,7 @@ Optimized for performance.
 from .common import *
 
 # Double-check your production configuration, always before deployment.
-# See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
+# See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 DEBUG = False
 
@@ -16,7 +16,7 @@ DEBUG = False
 ALLOWED_HOSTS = ['dissem.in']
 
 # Cache backend
-# https://docs.djangoproject.com/en/1.7/topics/cache/
+# https://docs.djangoproject.com/en/1.8/topics/cache/
 CACHES = {
         'default': {
 # This one uses Redis, which is already required for message-passing to Celery, so let's use it as a cache too
@@ -39,7 +39,7 @@ SOCIALACCOUNT_PROVIDERS = \
 
 ### Static files (CSS, JavaScript, Images) ###
 # This defines how static files are stored and accessed.
-# https://docs.djangoproject.com/en/1.6/howto/static-files/
+# https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 # Absolute path to where the static files are stored.
 # This is what you should change!
