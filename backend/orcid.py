@@ -263,7 +263,7 @@ class OrcidPaperSource(PaperSource):
                 self.update_empty_orcid(researcher, True)
             return self.fetch_orcid_records(researcher.orcid)
         return []
-    
+
     def create_paper(self, data_paper):
         assert (not data_paper.skipped)
         # Create paper
@@ -319,16 +319,17 @@ class OrcidPaperSource(PaperSource):
 
     def warn_user_of_ignored_papers(self, ignored_papers):
         user = self.researcher.user
-        delete_notification_per_tag(user, 'backend_orcid')
-        notification = {
-            'code': 'IGNORED_PAPERS',
-            'papers': ignored_papers
-        }
-        add_notification_for([user],
-                notification_levels.ERROR,
-                notification,
-                'backend_orcid'
-        )
+        if user is not None:
+            delete_notification_per_tag(user, 'backend_orcid')
+            notification = {
+                'code': 'IGNORED_PAPERS',
+                'papers': ignored_papers
+            }
+            add_notification_for([user],
+                    notification_levels.ERROR,
+                    notification,
+                    'backend_orcid'
+            )
 
     def fetch_orcid_records(self, orcid_identifier, profile=None, use_doi=True):
         """
