@@ -1,4 +1,4 @@
-# encoding: utf8
+# coding: utf-8
 
 ### Security key ###
 # This is used by django to generate various things (mainly for 

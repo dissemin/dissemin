@@ -1,4 +1,4 @@
-# encoding: utf8
+# coding: utf-8
 
 ### University names. ###
 # This is used at various places to name the university.
