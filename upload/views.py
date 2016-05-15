@@ -194,6 +194,8 @@ def handleUrlDownload(request):
             response['message'] = ( # Left as one line for compatibility purposes
 _('Invalid content type: this link points to a web page, we need a direct link to a PDF file.'))
 
+    except requests.exceptions.SSLError as e:
+        response['message'] = _('Invalid SSL certificate on the remote server.')
     except requests.exceptions.Timeout as e:
         response['message'] = _('Invalid URL (server timed out).')
     except requests.exceptions.RequestException as e:
