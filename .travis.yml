@@ -46,7 +46,7 @@ before_install:
   - export PYTHONPATH=$HOME/builds/wetneb/dissemin
   - export PIP_USE_MIRRORS=true
   - echo "from .travis import *" > dissemin/settings/__init__.py
-  - cp dissemin/settings/travis_secret.py dissemin/settings/secret.py
+  - cp dissemin/settings/secret_template.py dissemin/settings/secret.py
   - cp dissemin/settings/university_template.py dissemin/settings/university.py
 
 install:
