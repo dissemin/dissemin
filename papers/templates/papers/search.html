@@ -252,7 +252,7 @@ $(function(){
  <ul class="messages">
          {% for message in messages %}
          <div class="alert alert-warning {% if message.tags %} {{ message.tags }} {% endif %}">
-                 <p>{{ message }}</p>
+                 <p>{{ message.payload.message }}</p>
          </div>
          {% endfor %}
  </ul>

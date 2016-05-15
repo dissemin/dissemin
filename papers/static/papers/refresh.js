@@ -37,7 +37,7 @@ function init_paper_module (config) {
 
       var html = (
         '<div class="' + classes.join(' ') + '">' +
-          '<p>' + message.text + '</p>' +
+          '<p>' + message.payload.message + '</p>' +
         '</div>')
       
       // Insert new message one by one.
