@@ -32,8 +32,9 @@ function init_paper_module (config) {
       var message = messages[index]
       var classes = [
         'alert',
-        'alert-warning'
-      ].concat(messages.tags || [])
+        'alert-warning',
+        message.tag || ''
+      ]
 
       var html = (
         '<div class="' + classes.join(' ') + '">' +

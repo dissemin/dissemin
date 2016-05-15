@@ -247,16 +247,13 @@ $(function(){
  </div>
  {% endif %}
 
- {% if messages %}
- <p></p>
  <ul class="messages">
          {% for message in messages %}
-         <div class="alert alert-warning {% if message.tags %} {{ message.tags }} {% endif %}">
+         <div class="alert alert-warning {% if message.tag %} {{ message.tag }} {% endif %}">
                  <p>{{ message.payload.message }}</p>
          </div>
          {% endfor %}
  </ul>
- {% endif %}
 
  <div id="paperSearchResults">
  {% if search_results.paginator.num_pages > 1 %}
