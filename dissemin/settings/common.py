@@ -119,6 +119,7 @@ INSTALLED_APPS = (
     'deposit.zenodo',
     'deposit.hal',
     'deposit.sword',
+    'notification',
     'bootstrap_pagination',
     'solo',
     'rest_framework',
