@@ -23,3 +23,4 @@ cryptography
 html5lib
 djangorestframework
 django-rest-swagger
+django-jsonfield
