@@ -1,0 +1,265 @@
+# -*- encoding: utf-8 -*-
+
+# Dissemin: open access policy enforcement tool
+# Copyright (C) 2014 Antonin Delpeuch
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+#
+
+
+"""
+Django settings for dissemin project.
+
+See the doc for details of usage:
+http://dissemin.readthedocs.org/en/latest/install.html
+
+For the full list of Django settings and their values, see
+https://docs.djangoproject.com/en/1.8/ref/settings/
+"""
+
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import os
+from datetime import timedelta
+
+try:
+    from .secret import SECRET_KEY, DATABASES, EMAIL_HOST, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, EMAIL_USE_TLS, ROMEO_API_KEY, CORE_API_KEY
+except ImportError as e:
+    raise RuntimeError('Secret file is missing, did you forget to add a secret.py in your settings folder?')
+
+try:
+    from .university import UNIVERSITY_BRANDING, CAS_SERVER_URL, CAS_LOGOUT_COMPLETELY, CAS_PROVIDE_URL_TO_LOGOUT, ENABLE_CAS
+except ImportError as e:
+    raise RuntimeError('University-specific file is missing, did you forget to add a university.py in your settings folder?')
+
+# dirname(__file__) → repo/dissemin/settings/common.py
+# .. → repo/dissemin/settings
+# .. → repo/dissemin
+# .. → repo/
+
+BASE_DIR = os.path.dirname(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
+
+
+### DOI proxy ###
+# The interface where to get DOI metadata from.
+# 
+# This interface should at least support fetching metadata for one
+# single DOI, like this:
+# curl -LH "Accept: application/citeproc+json" http://DOI_PROXY_DOMAIN/10.1080/15568318.2012.660115
+# (returns the citation as Citeproc+JSON)
+#
+DOI_PROXY_DOMAIN =  'doi-cache.dissem.in' # This acts as a caching proxy for dx.doi.org
+#
+# In addition, if the endpoint supports it, batch requests can be performed:
+# curl -d 'dois=["10.1016/j.physletb.2015.01.010","10.5380/dp.v1i1.1922","10.1007/978-3-319-10936-7_9"]' \\
+#        http://doi-cache.ulminfo.fr/batch
+# (returns a list of citation in Citeproc+JSON format)
+#
+DOI_PROXY_SUPPORTS_BATCH = True
+
+### RoMEO proxy ###
+# Set this to 'sherpa.ac.uk' if our custom mirror is not up anymore.
+# Otherwise our proxy caches results and is more reliable than the original endpoint.
+ROMEO_API_DOMAIN = 'romeo-cache.dissem.in'
+
+### Paper deposits ###
+# Max size of the PDFs (in bytes)
+# 2.5MB - 2621440
+# 5MB - 5242880
+# 10MB - 10485760
+# 20MB - 20971520
+# 50MB - 5242880
+DEPOSIT_MAX_FILE_SIZE = 1024*1024*20 # 20 MB
+# Max download time when the file is downloaded from an URL (in seconds)
+URL_DEPOSIT_DOWNLOAD_TIMEOUT = 10
+
+# Uncomment these settings if you rather want
+# to fetch metadata directly from CrossRef (slower as not cached,
+# and more requests as there is no batch support).
+#DOI_PROXY_DOMAIN =  'dx.doi.org'
+#DOI_PROXY_SUPPORTS_BATCH = False
+
+### Paper freshness options ###
+# On login of an user, minimum time between the last harvest to trigger
+# a new harvest for that user.
+PROFILE_REFRESH_ON_LOGIN = timedelta(days=1)
+
+### Application definition ###
+# You should not have to change anything in this section.
+
+INSTALLED_APPS = (
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'crispy_forms',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.orcid',
+    'statistics',
+    'publishers',
+    'papers',
+    'upload',
+    'deposit',
+    'deposit.zenodo',
+    'deposit.hal',
+    'deposit.sword',
+    'bootstrap_pagination',
+    'solo',
+    'rest_framework',
+    'rest_framework_swagger',
+)
+
+CRISPY_TEMPLATE_PACK = 'bootstrap'
+
+SITE_ID = 1
+
+MIDDLEWARE_CLASSES = (
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+)
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+
+if ENABLE_CAS:
+    MIDDLEWARE_CLASSES += (
+        'django_cas_ng.middleware.CASMiddleware',
+    )
+
+    AUTHENTICATION_BACKENDS += (
+        'django_cas_ng.backends.CASBackend',
+    )
+
+
+
+TEMPLATES = [
+        {
+            'BACKEND': 'django.template.backends.django.DjangoTemplates',
+            'DIRS': [
+                os.path.join(BASE_DIR, 'templates')
+            ],
+            'OPTIONS': {
+                'loaders': (
+                    ('django.template.loaders.cached.Loader', (
+                        'django.template.loaders.filesystem.Loader',
+                        'django.template.loaders.app_directories.Loader',
+                    )),
+                ),
+                'context_processors': (
+                    "django.contrib.auth.context_processors.auth",
+                    "django.template.context_processors.debug",
+                    "django.template.context_processors.i18n",
+                    "django.template.context_processors.media",
+                    "django.template.context_processors.static",
+                    "django.template.context_processors.tz",
+                    "django.template.context_processors.request"
+                ),
+                'debug': True
+            }
+        }
+]
+
+ROOT_URLCONF = 'dissemin.urls'
+
+WSGI_APPLICATION = 'dissemin.wsgi.application'
+
+
+### Static files (CSS, JavaScript, Images) ###
+# This defines how static files are stored and accessed.
+# https://docs.djangoproject.com/en/1.8/howto/static-files/
+#
+# Relative URL where static files are accessed (you don't have to change this).
+STATIC_URL = '/static/'
+# Relative path to the directory where we store user uploads (you don't have to change this).
+MEDIA_URL = '/media/'
+
+### Celery config ###
+# Celery runs asynchronous tasks such as metadata harvesting or
+# complex updates.
+# To communicate with it, we need a "broker".
+# This is an example broker with Redis.
+BROKER_URL = 'redis://localhost:6379/0'
+# We also use Redis as result backend.
+CELERY_RESULT_BACKEND = BROKER_URL
+
+CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
+CELERY_IMPORTS = ['backend.tasks']
+
+CELERYBEAT_SCHEDULE = {
+    'update_all_stats_but_researchers': {
+        'task': 'update_all_stats_but_researchers',
+        'schedule': timedelta(minutes=30),
+    },
+    'update_journal_stats': {
+        'task':'update_journal_stats',
+        'schedule': timedelta(days=1),
+    },
+    'remove_empty_profiles': {
+        'task': 'remove_empty_profiles',
+        'schedule': timedelta(hours=2),
+    },
+}
+
+# This is the time in seconds before an unacknowledged task is re-sent to
+# another worker. It should exceed the length of the longest task, otherwise
+# it will be executed twice ! 43200 is one day.
+BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 43200}
+
+# Internationalization
+# https://docs.djangoproject.com/en/1.8/topics/i18n/
+LANGUAGE_CODE = 'en-us'
+POSSIBLE_LANGUAGE_CODES = ['en','fr']
+TIME_ZONE = 'Europe/Paris'
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
+LOCALE_PATHS = ('locale',)
+
+# Login and athentication
+LOGIN_URL = '/accounts/login'
+LOGIN_REDIRECT_URL = '/'
+
+# Settings for our own API
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+    'PAGE_SIZE': 10,
+    'DEFAULT_RENDERER_CLASSES': (
+                'rest_framework.renderers.JSONRenderer',
+                'rest_framework.renderers.BrowsableAPIRenderer',
+            ),
+}
+
+if 'CORE_API_KEY' in os.environ:
+    CORE_API_KEY = os.environ['CORE_API_KEY']
+
+if 'ROMEO_API_KEY' in os.environ:
+    ROMEO_API_KEY = os.environ['ROMEO_API_KEY']
+
+# Travis settings
+# taken from https://gist.github.com/ndarville/3625246
+if 'TRAVIS' in os.environ:
+    from .travis import *

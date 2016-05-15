@@ -37,10 +37,29 @@ Choose a unique database and user name (they can be identical), such as
    ALTER USER dissemin_myuni CREATEDB;
    CREATE DATABASE dissemin_myuni WITH OWNER dissemin_myuni;
 
-Configure the settings
+Configure the secrets
 ----------------------
 
-Edit ``dissemin/settings.py`` to change the following settings:
+Copy ``dissemin/settings/secret_template.py`` to ``dissemin/settings/secret.py``.
+Edit this file to change the following settings:
+
+- Create a fresh ``SECRET_KEY`` (any random-looking string that you can keep secret will do).
+
+- Configure the ``DATABASES`` with the database you've set up earlier.
+
+- (Optional) Set up the SMTP parameters to send emails to authors, in the ``EMAIL`` section.
+
+- ``ROMEO_API_KEYS`` is required if you want to
+  import papers automatically from these sources. See :ref:`page-apikeys`
+  about how to get them. The ``ZENODO_KEY`` is required
+  if you want to upload papers to Zenodo.
+
+
+Configure the university-specific settings
+-----------------------------------------
+
+Copy ``dissemin/university_template.py`` to ``dissemin/university.py``.
+Then, edit this file to change the following settings:
 
 - Set up the university branding, defining:
     - ``UNIVERSITY_FULL_NAME``: the complete name of the university;
@@ -51,36 +70,27 @@ Edit ``dissemin/settings.py`` to change the following settings:
       to when they want to see the repository;
     - ``UNIVERSITY_URL``: the website of your university.
 
-- (Optional) Set up the SMTP parameters to send emails to authors, in
-  the ``EMAIL`` section.
+- Set up the CAS of your university if relevant, it is disabled by default (see  ``ENABLE_CAS``).
 
-- ``ROMEO_API_KEYS`` is required if you want to
-  import papers automatically from these sources. See :ref:`page-apikeys`
-  about how to get them. The ``ZENODO_KEY`` is required
-  if you want to upload papers to Zenodo.
+Now, your university settings are done.
 
-- Create a fresh ``SECRET_KEY`` (any random-looking string that you can keep secret will
-  do).
+Configure the application for development or production
+-------------------------------------------------------
 
-- Set ``DEBUG`` to ``False`` if your website will be available from anywhere. (Keep ``TEMPLATE_DEBUG``
-  to ``True``).
+Finally, create a file ``dissemin/settings/__init__.py`` with this content::
 
-- Add the domain you will be using (for instance ``myuni.dissem.in``) to the ``ALLOWED_HOSTS``.
+   # Development settings
+   from .dev import *
+   # Production settings.
+   from .prod import *
+   # Pick only one.
 
-- Fill the DATABASES section with the details you chose in the
-  previous step
+Depending on your environment, you might want to edit ``STATIC_ROOT`` and ``MEDIA_ROOT``, moreover, you have to create these locations.
 
-- Create a ``www/static`` directory and set the ``STATIC_ROOT``
-  variable to the global path for this folder. For instance, if your
-  local copy of dissemin is in ``/home/me/dissemin``, set ``STATIC_ROOT = '/home/me/dissemin/www/static'``.
+Don't forget to edit ``ALLOWED_HOSTS`` for production.
 
-
-You should commit these changes on a separate branch, let's call it
-``prod``::
-
-   git checkout -b prod
-   git add dissemin/settings.py
-   commit -m "Production settings"
+Common settings are available at ``dissemin/settings/common.py``.
+Travis specific settings are available at ``dissemin/settings/travis.py``.
 
 Create the database structure
 -----------------------------
@@ -99,8 +109,10 @@ Social Authentication specific: Configuring sandbox ORCID
 *You are not forced to configure ORCID to work on Dissemin, just create a super user and use it!*
 
 Create an account on `Sandbox ORCID <sandbox.orcid.org>`
+
 Go to "Developer Tools", verify your mail using `Mailinator <mailinator.com>`.
-Set up a redirection URI to be `localhost:8000` or where your Dissemin server is running.
+
+Set up a redirection URI to be `localhost:8000` (supposed to be where your Dissemin instance server is running).
 
 Take your client ID and your secret key, you'll use them later.
 
