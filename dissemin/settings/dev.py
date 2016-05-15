@@ -21,12 +21,14 @@ INSTALLED_APPS += (
     'debug_toolbar',
 )
 
+# Base domain of the ORCiD API.
+ORCID_BASE_DOMAIN = 'sandbox.orcid.org' # for the sandbox API
+
 # ORCiD provider configuration (sandbox)
 SOCIALACCOUNT_PROVIDERS = \
    {'orcid':
        {
-         # Base domain of the API. Default value: 'orcid.org', for the production API
-        'BASE_DOMAIN':'sandbox.orcid.org', # for the sandbox API
+        'BASE_DOMAIN': ORCID_BASE_DOMAIN,
          # Member API or Public API? Default: False (for the public API)
          'MEMBER_API': False, # for the member API
        }

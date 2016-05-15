@@ -43,6 +43,7 @@ from backend.papersource import PaperSource
 from backend.crossref import fetch_dois, CrossRefPaperSource, convert_to_name_pair
 from backend.name_cache import name_lookup_cache
 
+from django.conf import settings
 
 import requests, json
 
@@ -251,7 +252,7 @@ class ORCIDDataPaper(object):
 
     @property
     def splash_url(self):
-        return 'http://orcid.org/%s' % (self.id)
+        return 'http://{}/{}' % (settings.ORCID_BASE_DOMAIN, self.id)
 
 
 
@@ -310,7 +311,7 @@ class OrcidPaperSource(PaperSource):
                 record = BareOaiRecord(
                         source=orcid_oai_source,
                         identifier='orcid:%s:%s' % (orcid_id, metadata['DOI']),
-                        splash_url='http://orcid.org/%s' % (orcid_id),
+                        splash_url='http://%s/%s' % (settings.ORCID_BASE_DOMAIN, orcid_id),
                         pubtype=paper.doctype)
                 paper.add_oairecord(record)
                 yield True, paper

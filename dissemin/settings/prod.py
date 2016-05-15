@@ -29,12 +29,15 @@ CACHES = {
     }
 }
 
+# Base domain of the ORCiD API.
+# Default value: 'orcid.org', for the production API
+ORCID_BASE_DOMAIN = 'orcid.org'
+
 # ORCiD provider configuration (production)
 SOCIALACCOUNT_PROVIDERS = \
    {'orcid':
        {
-         # Base domain of the API. Default value: 'orcid.org', for the production API
-        'BASE_DOMAIN':'orcid.org', # for the production API.
+        'BASE_DOMAIN': ORCID_BASE_DOMAIN,
          # Member API or Public API? Default: False (for the public API)
          'MEMBER_API': False, # for the member API
        }
