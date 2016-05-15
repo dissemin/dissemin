@@ -36,6 +36,8 @@ env:
     - secure: "hUDdROzyWXFmXgPsU37kQeKY72kSC8FYxNyjpQhXIb7UGMbZsemJGpaePwwvJ24dw3im9NTxbMrAw3q2MZZc573mR+Mmnw+4LlWlHwAxZ2cMzFwDKz9v7/n1bJf6QrArbMuyL4qK8OnwjmnrWf4HWG1YfiP4kDm1aAmNbHUxOzQ="
       # Zenodo Sandbox API key
     - secure: "hC9XBvdx96Xcit8xg42k/OGZeDuM76oRa9tB4JiN8PJy7Ij0GuqvZsEmRgV9qgOtmbUdlfcWgCpvTvxB1ejOjLCPrefhmnHnJ2ss1ZYsJCDhnvqNEh6YuZgIjGHj65R11EGJcJCwycReNN9O8m2/6+z6XI1LyBE4xckrGcgeLxM="
+      # Gitbot l10n key (for translation notifications)
+    - secure: "qm+WAH7GpYIjid+q5tVnRgpiIwRmo7C8ou8GAeHJwTxkcmX8+YsYhuuacXO5mW/gcvjb9UNVCDkIKqjIsxJdmC0JovXJJ2dG2g1P39FfOCsF1+FpOqxdjBxdlJCoPb+Wmx7qk5+n+ZgqArgDPFwTWAPqsfshVPLplvaIYfA6H2s="
 
 
 virtualenv:
@@ -58,7 +60,7 @@ before_script:
   - psql -c "CREATE DATABASE dissemin;" -U postgres
 
 script:
-  - ./update_translations.sh | grep msgid | wc -l | ./devutils/l10n_to_gitbot
+  - ./devutils/notify_translations
   - python manage.py migrate --noinput
   - python manage.py loaddata dissemin/fixtures/test_dump.json
   - ./celery.sh &

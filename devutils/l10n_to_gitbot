@@ -3,6 +3,6 @@
 read lines;
 echo "$lines to be translated";
 if [ $lines -gt 0 ]; then
-    curl --data-urlencode "nblines=$lines" http://ulminfo.fr:8765/l10n
+    curl --data-urlencode "nblines=$lines" --data-urlencode "secret=$GITBOT_L10N_SECRET" http://ulminfo.fr:8765/l10n
 fi
 
