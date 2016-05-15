@@ -29,7 +29,6 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.views import login as auth_login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import user_passes_test
-from django.contrib.messages import get_messages
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 from django.utils.decorators import method_decorator
@@ -45,6 +44,8 @@ from papers.forms import *
 from papers.user import is_admin, is_authenticated
 from papers.orcid import *
 from papers.doi import to_doi
+
+from notification.api import get_notifications
 
 from deposit.models import *
 
@@ -215,11 +216,11 @@ def searchView(request, **kwargs):
     context['nb_results'] = paginator.count
     context['ajax_url'] = reverse('ajax-search')+'?'+urlencode(args) 
 
-    # Messages
-    storage = get_messages(request)
-    selected_messages = sorted(storage, lambda msg: msg.level)[:3]
+    # Notifications
+    # TODO: unefficient query.
+    notifications = get_notifications(request)
+    selected_messages = sorted(notifications, key=lambda msg: msg.level)[:3]
     context['messages'] = selected_messages
-    storage.used = False
 
     # Build the GET requests for variants of the parameters
     args_without_page = args.copy()
@@ -244,7 +245,7 @@ def searchView(request, **kwargs):
         response['listPapers'] = loader.render_to_string('papers/ajaxListPapers.html', context)
         response['stats'] = json.loads(stats.pie_data(researcher.object_id))
         response['stats']['numtot'] = stats.num_tot
-        response['messages'] = map(lambda message: { 'text': str(message), 'tags': message.tags }, selected_messages)
+        response['messages'] = map(lambda message: { 'level': message.level, 'payload': message.payload }, selected_messages)
         if researcher.current_task:
             response['status'] = researcher.current_task
             response['display'] = researcher.get_current_task_display()
