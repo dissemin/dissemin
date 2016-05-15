@@ -29,7 +29,7 @@ addons:
 
 env:
   global:
-    - DJANGO=1.7.9
+    - DJANGO=1.8.0
       # RoMEO API key
     - secure: "hQg8tso/Qv4zXhP4A2ahKKhFZQSariIvUr+xqzzoTVtuN/9OuzBFjZ1UF8atM5KKGZ47fFMK2wTjbVOWjSyLH/SF3Wy8bX9oHHg1P8bXcsle6O/tfa3U/2s0UiYtThEdxp+iyQIr6cjBA0gmB0v/vFrQot91GvjlUbi70Xjfcts="
       # CORE API key
@@ -42,7 +42,7 @@ virtualenv:
   system_site_packages: true
 
 before_install:
-  - export DJANGO_SETTINGS_MODULE=dissemin.settings
+  - export DJANGO_SETTINGS_MODULE=dissemin.settings.travis
   - export PYTHONPATH=$HOME/builds/wetneb/dissemin
   - export PIP_USE_MIRRORS=true
 
