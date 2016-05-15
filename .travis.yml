@@ -42,9 +42,12 @@ virtualenv:
   system_site_packages: true
 
 before_install:
-  - export DJANGO_SETTINGS_MODULE=dissemin.settings.travis
+  - export DJANGO_SETTINGS_MODULE=dissemin.settings
   - export PYTHONPATH=$HOME/builds/wetneb/dissemin
   - export PIP_USE_MIRRORS=true
+  - echo "from .travis import *" > dissemin/settings/__init__.py
+  - cp dissemin/settings/travis_secret.py dissemin/settings/secret.py
+  - cp dissemin/settings/university_template.py dissemin/settings/university.py
 
 install:
   - pip install django==$DJANGO --quiet
