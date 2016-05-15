@@ -21,8 +21,11 @@ CACHES = {
         'default': {
 # This one uses Redis, which is already required for message-passing to Celery, so let's use it as a cache too
              'BACKEND':'redis_cache.RedisCache',
-             'LOCATION':'localhost:6379',
-
+             'LOCATION':('%s:%d' % (REDIS_HOST,REDIS_PORT)),
+             'OPTIONS': {
+                 'DB':REDIS_DB,
+                 'PASSWORD':REDIS_PASSWORD,
+             },
     }
 }
 

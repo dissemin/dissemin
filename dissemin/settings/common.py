@@ -34,7 +34,7 @@ import os
 from datetime import timedelta
 
 try:
-    from .secret import SECRET_KEY, DATABASES, EMAIL_HOST, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, EMAIL_USE_TLS, ROMEO_API_KEY, CORE_API_KEY
+    from .secret import SECRET_KEY, DATABASES, EMAIL_HOST, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, EMAIL_USE_TLS, ROMEO_API_KEY, CORE_API_KEY, REDIS_HOST, REDIS_PORT, REDIS_DB, REDIS_PASSWORD
 except ImportError as e:
     raise RuntimeError('Secret file is missing, did you forget to add a secret.py in your settings folder?')
 
@@ -194,22 +194,30 @@ WSGI_APPLICATION = 'dissemin.wsgi.application'
 #
 # Relative URL where static files are accessed (you don't have to change this).
 STATIC_URL = '/static/'
-# Relative path to the directory where we store user uploads (you don't have to change this).
+# Relative URL where user uploads are accessed (you don't have to change this).
 MEDIA_URL = '/media/'
 
 ### Celery config ###
 # Celery runs asynchronous tasks such as metadata harvesting or
 # complex updates.
 # To communicate with it, we need a "broker".
-# This is an example broker with Redis.
-BROKER_URL = 'redis://localhost:6379/0'
+# This is an example broker with Redis
+# (with settings configured in your secret.py)
+REDIS_URL = ':%s@%s:%s/%d' % (
+        REDIS_PASSWORD,
+        REDIS_HOST,
+        REDIS_PORT,
+        REDIS_DB)
+BROKER_URL = 'redis://'+REDIS_URL
 # We also use Redis as result backend.
 CELERY_RESULT_BACKEND = BROKER_URL
 
 # Redis is not mandatory, this client is reserved for deposits.
 try:
     import redis
-    redis_client = redis.StrictRedis(host='localhost', port=6379, db=0)
+    redis_client = redis.StrictRedis(
+            host=REDIS_HOST, port=REDIS_PORT,
+            db=REDIS_DB, password=REDIS_PASSWORD)
 except ImportError:
     pass
 

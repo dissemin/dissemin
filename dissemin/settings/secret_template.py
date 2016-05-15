@@ -18,6 +18,12 @@ DATABASES = {
     }
 }
 
+# Redis (if you use it)
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+REDIS_DB = 0
+REDIS_PASSWORD = ''
+
 ### Emailing settings ###
 # These are used to send messages to the researchers.
 # This is still a very experimental feature. We recommend you leave these
