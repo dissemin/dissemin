@@ -95,6 +95,7 @@ urlpatterns = patterns('',
     url(r'^', include('publishers.urls')),
     url(r'^', include('deposit.urls')),
     url(r'^', include('notification.urls')),
+    url(r'^jsreverse/$', 'django_js_reverse.views.urls_js', name='js_reverse'),
     # Social auth
     url(r'^accounts/login/$', LoginView.as_view(), name='account_login'),
     url(r'^accounts/sandbox_login/$', SandboxLoginView.as_view(), name='sandbox-login'),

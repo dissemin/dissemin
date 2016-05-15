@@ -121,6 +121,7 @@ INSTALLED_APPS = (
     'deposit.sword',
     'notification',
     'bootstrap_pagination',
+    'django_js_reverse',
     'solo',
     'rest_framework',
     'rest_framework_swagger',

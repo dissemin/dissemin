@@ -21,3 +21,4 @@ djangorestframework
 django-rest-swagger
 -e git://github.com/swordapp/python-client-sword2#egg=sword2
 django-jsonfield
+django-js-reverse
