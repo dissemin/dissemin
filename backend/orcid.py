@@ -27,6 +27,8 @@ from unidecode import unidecode
 from celery import current_task
 
 from django.core.exceptions import ObjectDoesNotExist
+from notification.api import add_notification_for, delete_notification_per_tag
+import notification.levels as notification_levels
 
 from papers.errors import MetadataSourceException
 from papers.doi import to_doi
@@ -255,12 +257,13 @@ class ORCIDDataPaper(object):
 
 class OrcidPaperSource(PaperSource):
     def fetch_papers(self, researcher):
+        self.researcher = researcher
         if researcher.orcid:
             if researcher.empty_orcid_profile == None:
                 self.update_empty_orcid(researcher, True)
             return self.fetch_orcid_records(researcher.orcid)
         return []
-    
+
     def create_paper(self, data_paper):
         assert (not data_paper.skipped)
         # Create paper
@@ -313,6 +316,20 @@ class OrcidPaperSource(PaperSource):
                 yield True, paper
             except (KeyError, ValueError, TypeError):
                 yield False, metadata
+
+    def warn_user_of_ignored_papers(self, ignored_papers):
+        user = self.researcher.user
+        if user is not None:
+            delete_notification_per_tag(user, 'backend_orcid')
+            notification = {
+                'code': 'IGNORED_PAPERS',
+                'papers': ignored_papers
+            }
+            add_notification_for([user],
+                    notification_levels.ERROR,
+                    notification,
+                    'backend_orcid'
+            )
 
     def fetch_orcid_records(self, orcid_identifier, profile=None, use_doi=True):
         """
@@ -384,4 +401,5 @@ class OrcidPaperSource(PaperSource):
                     print ('This metadata (%s) yields no paper.' % (paper_or_metadata))
        
         if ignored_papers:
+            self.warn_user_of_ignored_papers(ignored_papers)
             print ('Warning: Total ignored papers: %d' % (len(ignored_papers)))

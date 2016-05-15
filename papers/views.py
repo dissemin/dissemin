@@ -45,6 +45,8 @@ from papers.user import is_admin, is_authenticated
 from papers.orcid import *
 from papers.doi import to_doi
 
+from notification.api import get_notifications
+
 from deposit.models import *
 
 from publishers.views import varyQueryArguments
@@ -214,6 +216,13 @@ def searchView(request, **kwargs):
     context['nb_results'] = paginator.count
     context['ajax_url'] = reverse('ajax-search')+'?'+urlencode(args) 
 
+    # Notifications
+    # TODO: unefficient query.
+    notifications = get_notifications(request)
+    selected_messages = map(lambda n: n.serialize_to_json(),
+            sorted(notifications, key=lambda msg: msg.level)[:3])
+    context['messages'] = selected_messages
+
     # Build the GET requests for variants of the parameters
     args_without_page = args.copy()
     if 'page' in args_without_page:
@@ -237,6 +246,7 @@ def searchView(request, **kwargs):
         response['listPapers'] = loader.render_to_string('papers/ajaxListPapers.html', context)
         response['stats'] = json.loads(stats.pie_data(researcher.object_id))
         response['stats']['numtot'] = stats.num_tot
+        response['messages'] = selected_messages
         if researcher.current_task:
             response['status'] = researcher.current_task
             response['display'] = researcher.get_current_task_display()

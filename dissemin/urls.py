@@ -23,6 +23,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.views import generic
 from django.shortcuts import render, redirect
+from django.views.i18n import javascript_catalog
 import allauth.account.views
 from os.path import join
 
@@ -66,6 +67,12 @@ def temp(name):
         return render(request, name, UNIVERSITY_BRANDING)
     return handler
 
+js_info_dict = {
+    'packages': (
+        'dissemin'
+    )
+}
+
 urlpatterns = patterns('',
     # Errors
     url(r'^404-error$', temp('404.html')),
@@ -87,11 +94,15 @@ urlpatterns = patterns('',
     url(r'^', include('papers.urls')),
     url(r'^', include('publishers.urls')),
     url(r'^', include('deposit.urls')),
+    url(r'^', include('notification.urls')),
+    url(r'^jsreverse/$', 'django_js_reverse.views.urls_js', name='js_reverse'),
     # Social auth
     url(r'^accounts/login/$', LoginView.as_view(), name='account_login'),
     url(r'^accounts/sandbox_login/$', SandboxLoginView.as_view(), name='sandbox-login'),
     url(r'^accounts/logout/$', logoutView, name='account_logout'),
     url(r'^accounts/social/', include('allauth.socialaccount.urls')),
+    # JavaScript i18n
+    url(r'^jsi18n/$', javascript_catalog, js_info_dict, name='javascript-catalog'),
 # Remove this in production
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

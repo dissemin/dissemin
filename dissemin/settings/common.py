@@ -119,7 +119,9 @@ INSTALLED_APPS = (
     'deposit.zenodo',
     'deposit.hal',
     'deposit.sword',
+    'notification',
     'bootstrap_pagination',
+    'django_js_reverse',
     'solo',
     'rest_framework',
     'rest_framework_swagger',
@@ -260,7 +262,7 @@ LOGIN_REDIRECT_URL = '/'
 
 # Settings for our own API
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
     'PAGE_SIZE': 10,
     'DEFAULT_RENDERER_CLASSES': (
                 'rest_framework.renderers.JSONRenderer',
