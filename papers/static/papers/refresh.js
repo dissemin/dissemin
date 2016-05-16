@@ -58,6 +58,16 @@ function init_paper_module (config) {
                    message)
   }
 
+  function renderReason (reason) {
+    if (reason === 'NO_AUTHOR') {
+      return gettext('No author')
+    } else if (reason === 'NO_TITLE') {
+      return gettext('No title')
+    } else if (reason === 'INVALID_PUB_DATE') {
+      return gettext('Invalid publication date')
+    }
+  }
+
   function markMessageAsRead (messageId) {
     return call_api(Urls['inbox-read'](messageId), {
       method: 'POST'
@@ -96,8 +106,31 @@ function init_paper_module (config) {
         { count: message.payload.papers.length }, 
         true)
 
+        var detailed_papers = message.payload.papers.map(function (paper) {
+          if (paper.title) {
+            return '<p>' + interpolate(gettext(
+              '"%(name)s" is ignored with the following reason: %(reason)s'
+            ),
+            {
+              name: paper.title,
+              reason: renderReason(paper.skip_reason)
+            },
+            true) + '</p>'
+          } else {
+            return '<p>' + gettext('A paper has been ignored, because it has no name') + '</p>'
+          }
+        }).map(function (paper) {
+          return '<li>' + paper + '</li>'
+        })
+
+        var detailed_informations = '<ul class="more-information">' + detailed_papers.join('\n') + '</ul>'
+
         html += '<p>' + human_message + '</p>'
-        html += '<button data-id=' + message.id + ' class="btn-mark-as-read">' + MARK_AS_READ + '</button>'
+        html += detailed_informations
+        html += '<div class="message-actions">'
+          html += '<button data-id=' + message.id + ' class="btn btn-mark-as-read">' + MARK_AS_READ + '</button>'
+          html += '<button class="btn btn-show-more-informations">' + gettext('Show more informations') + '</button>'
+        html += '</div>'
       }
 
       html += '</div>'
@@ -108,11 +141,24 @@ function init_paper_module (config) {
 
     $('.btn-mark-as-read').click(function (evt) {
       var $button = $(evt.target)
-      var $message = $button.parent()
+      var $message = $button.parent().parent()
 
       var messageId = $(evt.target).attr('data-id')
       markMessageAsRead(messageId)
       $message.remove()
+    })
+    $('.btn-show-more-informations').click(function (evt) {
+      var $button = $(evt.target)
+      var $message = $button.parent().parent()
+      var $more_information = $message.find('.more-information')
+
+      if (!$more_information.hasClass('shown')) {
+        $more_information.addClass('shown')
+        $button.text(gettext('Show less informations'))
+      } else {
+        $more_information.removeClass('shown')
+        $button.text(gettext('Show more informations'))
+      }
     })
   }
 

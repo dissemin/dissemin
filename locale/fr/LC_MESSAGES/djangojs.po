@@ -3,13 +3,12 @@
 # This file is distributed under the same license as the Dissemin package.
 # Antonin Delpeuch <antonin@delpeuch.eu>, 2014.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-15 22:24+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2016-05-16 00:46+0200\n"
+"PO-Revision-Date: 2016-05-16 00:48+0200\n"
 "Last-Translator: Ryan Lahfa <masterancpp@gmail.com>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -17,13 +16,42 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: papers/static/papers/refresh.js:35
 msgid "Do not show this message anymore"
 msgstr "Ne plus montrer ce message"
 
-#: papers/static/papers/refresh.js:92
+#: papers/static/papers/refresh.js:63
+msgid "No author"
+msgstr "Pas d'auteur"
+
+#: papers/static/papers/refresh.js:65
+msgid "No title"
+msgstr "Pas de titre"
+
+#: papers/static/papers/refresh.js:67
+msgid "Invalid publication date"
+msgstr "Date de publication invalide"
+
+#: papers/static/papers/refresh.js:102
 msgid "We ignored %(count)s paper from your ORCiD profile."
 msgid_plural "We ignored %(count)s papers from your ORCiD profile."
 msgstr[0] "Nous avons ignoré %(count)s publication de votre profil ORCiD"
 msgstr[1] "Nous avons ignoré %(count)s publications de votre profil ORCiD"
+
+#: papers/static/papers/refresh.js:112
+msgid "\"%(name)s\" is ignored with the following reason: %(reason)s"
+msgstr "« %(name)s » est ignoré pour la raison suivante: %(reason)s"
+
+#: papers/static/papers/refresh.js:120
+msgid "A paper has been ignored, because it has no name"
+msgstr "Un papier a été ignoré, car il n'a pas de titre"
+
+#: papers/static/papers/refresh.js:131 papers/static/papers/refresh.js:158
+msgid "Show more informations"
+msgstr "Montrer plus d'informations"
+
+#: papers/static/papers/refresh.js:155
+msgid "Show less informations"
+msgstr "Montrer moins d'informations"

@@ -1145,6 +1145,24 @@ h1#paperTitle {
     padding-left: 0px;
 }
 
+.backend_orcid > p {
+    margin: 0 0 15px 0;
+}
+
+.message-actions {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+.more-information {
+    display: none;
+}
+
+.more-information.shown {
+    display: block;
+}
+
 /* Not sure we need these anymore */
 
 #paper_uploader input {
