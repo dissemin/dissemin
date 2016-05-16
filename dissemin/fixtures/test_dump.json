@@ -273,6 +273,30 @@
 },
 {
   "fields": {
+    "model": "notification",
+    "app_label": "notification"
+  },
+  "model": "contenttypes.contenttype",
+  "pk": 35
+},
+{
+  "fields": {
+    "model": "notificationarchive",
+    "app_label": "notification"
+  },
+  "model": "contenttypes.contenttype",
+  "pk": 36
+},
+{
+  "fields": {
+    "model": "inbox",
+    "app_label": "notification"
+  },
+  "model": "contenttypes.contenttype",
+  "pk": 37
+},
+{
+  "fields": {
     "domain": "example.com",
     "name": "example.com"
   },
@@ -2097,52 +2121,18 @@
   "fields": {
     "task": null,
     "pubdate": "2015-07-01",
-    "title": "Intensional Data on the Web",
-    "oa_status": "UNK",
-    "pdf_url": null,
-    "doctype": "journal-article",
-    "visibility": "VISIBLE",
-    "last_modified": "2016-01-08",
-    "fingerprint": "971414e43cb24695c9a22af0cbf0086f",
-    "date_last_ask": null,
-    "last_annotation": null
-  },
-  "model": "papers.paper",
-  "pk": 14
-},
-{
-  "fields": {
-    "task": null,
-    "pubdate": "2015-07-01",
     "title": "Combining Existential Rules and Description Logics",
     "oa_status": "UNK",
     "pdf_url": null,
     "doctype": "proceedings",
     "visibility": "VISIBLE",
     "last_modified": "2016-01-08",
-    "fingerprint": "f50a321b958f7653c2a8f203cdac5ca3",
+    "fingerprint": "8810347e64adb2c7ecb1049dc808310c",
     "date_last_ask": null,
     "last_annotation": null
   },
   "model": "papers.paper",
   "pk": 15
-},
-{
-  "fields": {
-    "task": null,
-    "pubdate": "2015-06-01",
-    "title": "Structurally Tractable Uncertain Data",
-    "oa_status": "UNK",
-    "pdf_url": null,
-    "doctype": "proceedings",
-    "visibility": "VISIBLE",
-    "last_modified": "2016-01-08",
-    "fingerprint": "a6076cb37f838f4a741d0a954c519ebc",
-    "date_last_ask": null,
-    "last_annotation": null
-  },
-  "model": "papers.paper",
-  "pk": 16
 },
 {
   "fields": {
@@ -2154,7 +2144,7 @@
     "doctype": "proceedings",
     "visibility": "VISIBLE",
     "last_modified": "2016-01-08",
-    "fingerprint": "ca59ad397a6c96165dccfd7b40e06183",
+    "fingerprint": "becf3af12b2a8497c9181f6b0a0dd52f",
     "date_last_ask": null,
     "last_annotation": null
   },
@@ -2177,23 +2167,6 @@
   },
   "model": "papers.paper",
   "pk": 18
-},
-{
-  "fields": {
-    "task": null,
-    "pubdate": "2015-07-17",
-    "title": "Structurally Tractable Uncertain Data",
-    "oa_status": "UNK",
-    "pdf_url": "http://arxiv.org/pdf/1507.04955",
-    "doctype": "preprint",
-    "visibility": "VISIBLE",
-    "last_modified": "2016-01-08",
-    "fingerprint": "a6076cb37f838f4a741d0a954c519ebc",
-    "date_last_ask": null,
-    "last_annotation": null
-  },
-  "model": "papers.paper",
-  "pk": 19
 },
 {
   "fields": {
@@ -2334,30 +2307,13 @@
 {
   "fields": {
     "task": null,
-    "pubdate": "2011-06-01",
-    "title": "Can code polymorphism limit information leakage?",
-    "oa_status": "UNK",
-    "pdf_url": null,
-    "doctype": "preprint",
-    "visibility": "VISIBLE",
-    "last_modified": "2016-01-08",
-    "fingerprint": "ca618841408e675d65ccf5ee1d985a69",
-    "date_last_ask": null,
-    "last_annotation": null
-  },
-  "model": "papers.paper",
-  "pk": 28
-},
-{
-  "fields": {
-    "task": null,
     "pubdate": "2015-08-17",
     "title": "Intensional data on the web",
     "oa_status": "OK",
     "pdf_url": null,
     "doctype": "journal-article",
     "visibility": "VISIBLE",
-    "last_modified": "2016-01-08",
+    "last_modified": "2016-05-16",
     "fingerprint": "2d777e618e6803df2024a45e002d1a03",
     "date_last_ask": null,
     "last_annotation": null
@@ -2375,7 +2331,7 @@
     "doctype": "book-chapter",
     "visibility": "VISIBLE",
     "last_modified": "2016-01-08",
-    "fingerprint": "0fcfa6d6cebb137cb06a024f634d567a",
+    "fingerprint": "cac4daf74dc899a70a6029e31bca264d",
     "date_last_ask": null,
     "last_annotation": null
   },
@@ -2392,7 +2348,7 @@
     "doctype": "journal-article",
     "visibility": "VISIBLE",
     "last_modified": "2016-01-08",
-    "fingerprint": "f7243634b992468818950f307b90acc4",
+    "fingerprint": "e4e96719e13cddffc02aa52efc90c25f",
     "date_last_ask": null,
     "last_annotation": null
   },
@@ -2405,10 +2361,10 @@
     "pubdate": "2015-01-01",
     "title": "Structurally Tractable Uncertain Data",
     "oa_status": "OK",
-    "pdf_url": "http://arxiv.org/abs/1507.04955",
+    "pdf_url": "http://arxiv.org/pdf/1507.04955",
     "doctype": "proceedings-article",
     "visibility": "VISIBLE",
-    "last_modified": "2016-01-08",
+    "last_modified": "2016-05-16",
     "fingerprint": "8cc4a006d0507c3ca971c351d6b19dd2",
     "date_last_ask": null,
     "last_annotation": null
@@ -2426,7 +2382,7 @@
     "doctype": "book-chapter",
     "visibility": "VISIBLE",
     "last_modified": "2016-01-08",
-    "fingerprint": "7c479fbd9ef50a5bbdea426a766d3eb1",
+    "fingerprint": "a971363650f396b81d9d9bc893877cf3",
     "date_last_ask": null,
     "last_annotation": null
   },
@@ -2442,7 +2398,7 @@
     "pdf_url": null,
     "doctype": "book-chapter",
     "visibility": "VISIBLE",
-    "last_modified": "2016-01-08",
+    "last_modified": "2016-05-16",
     "fingerprint": "835417174a9b45def5608bfcc274b910",
     "date_last_ask": null,
     "last_annotation": null
@@ -2482,12 +2438,12 @@
 },
 {
   "fields": {
-    "cluster_relevance": 13.6,
+    "cluster_relevance": -55.2,
     "name": 3,
     "affiliation": null,
     "researcher": 3,
     "cluster": 11,
-    "num_children": 34,
+    "num_children": 27,
     "paper": 4,
     "position": 0,
     "similar": null
@@ -2767,51 +2723,6 @@
 },
 {
   "fields": {
-    "cluster_relevance": 5.6,
-    "name": 3,
-    "affiliation": null,
-    "researcher": 3,
-    "cluster": 11,
-    "num_children": 1,
-    "paper": 14,
-    "position": 0,
-    "similar": null
-  },
-  "model": "papers.author",
-  "pk": 47
-},
-{
-  "fields": {
-    "cluster_relevance": 0.0,
-    "name": 6,
-    "affiliation": null,
-    "researcher": null,
-    "cluster": null,
-    "num_children": 1,
-    "paper": 14,
-    "position": 1,
-    "similar": null
-  },
-  "model": "papers.author",
-  "pk": 48
-},
-{
-  "fields": {
-    "cluster_relevance": 0.0,
-    "name": 7,
-    "affiliation": null,
-    "researcher": null,
-    "cluster": null,
-    "num_children": 1,
-    "paper": 14,
-    "position": 2,
-    "similar": null
-  },
-  "model": "papers.author",
-  "pk": 49
-},
-{
-  "fields": {
     "cluster_relevance": 6.0,
     "name": 3,
     "affiliation": null,
@@ -2839,21 +2750,6 @@
   },
   "model": "papers.author",
   "pk": 51
-},
-{
-  "fields": {
-    "cluster_relevance": 6.4,
-    "name": 3,
-    "affiliation": null,
-    "researcher": 3,
-    "cluster": 11,
-    "num_children": 1,
-    "paper": 16,
-    "position": 0,
-    "similar": null
-  },
-  "model": "papers.author",
-  "pk": 52
 },
 {
   "fields": {
@@ -2914,21 +2810,6 @@
   },
   "model": "papers.author",
   "pk": 56
-},
-{
-  "fields": {
-    "cluster_relevance": 7.6,
-    "name": 3,
-    "affiliation": null,
-    "researcher": 3,
-    "cluster": 11,
-    "num_children": 1,
-    "paper": 19,
-    "position": 0,
-    "similar": null
-  },
-  "model": "papers.author",
-  "pk": 57
 },
 {
   "fields": {
@@ -3247,96 +3128,6 @@
 },
 {
   "fields": {
-    "cluster_relevance": 11.2,
-    "name": 3,
-    "affiliation": null,
-    "researcher": 3,
-    "cluster": 11,
-    "num_children": 1,
-    "paper": 28,
-    "position": 0,
-    "similar": null
-  },
-  "model": "papers.author",
-  "pk": 79
-},
-{
-  "fields": {
-    "cluster_relevance": 0.0,
-    "name": 25,
-    "affiliation": null,
-    "researcher": null,
-    "cluster": null,
-    "num_children": 1,
-    "paper": 28,
-    "position": 1,
-    "similar": null
-  },
-  "model": "papers.author",
-  "pk": 80
-},
-{
-  "fields": {
-    "cluster_relevance": 0.0,
-    "name": 13,
-    "affiliation": null,
-    "researcher": null,
-    "cluster": null,
-    "num_children": 1,
-    "paper": 28,
-    "position": 2,
-    "similar": null
-  },
-  "model": "papers.author",
-  "pk": 81
-},
-{
-  "fields": {
-    "cluster_relevance": 0.0,
-    "name": 26,
-    "affiliation": null,
-    "researcher": null,
-    "cluster": null,
-    "num_children": 1,
-    "paper": 28,
-    "position": 3,
-    "similar": null
-  },
-  "model": "papers.author",
-  "pk": 82
-},
-{
-  "fields": {
-    "cluster_relevance": 0.0,
-    "name": 14,
-    "affiliation": null,
-    "researcher": null,
-    "cluster": null,
-    "num_children": 1,
-    "paper": 28,
-    "position": 4,
-    "similar": null
-  },
-  "model": "papers.author",
-  "pk": 83
-},
-{
-  "fields": {
-    "cluster_relevance": 0.0,
-    "name": 27,
-    "affiliation": null,
-    "researcher": null,
-    "cluster": null,
-    "num_children": 1,
-    "paper": 28,
-    "position": 5,
-    "similar": null
-  },
-  "model": "papers.author",
-  "pk": 84
-},
-{
-  "fields": {
     "cluster_relevance": 0.0,
     "name": 3,
     "affiliation": null,
@@ -3359,56 +3150,11 @@
     "cluster": null,
     "num_children": 1,
     "paper": 29,
-    "position": 1,
+    "position": 3,
     "similar": null
   },
   "model": "papers.author",
   "pk": 86
-},
-{
-  "fields": {
-    "cluster_relevance": 0.0,
-    "name": 7,
-    "affiliation": null,
-    "researcher": null,
-    "cluster": null,
-    "num_children": 1,
-    "paper": 29,
-    "position": 2,
-    "similar": null
-  },
-  "model": "papers.author",
-  "pk": 87
-},
-{
-  "fields": {
-    "cluster_relevance": 11.6,
-    "name": 3,
-    "affiliation": null,
-    "researcher": 3,
-    "cluster": 11,
-    "num_children": 1,
-    "paper": 29,
-    "position": 0,
-    "similar": null
-  },
-  "model": "papers.author",
-  "pk": 88
-},
-{
-  "fields": {
-    "cluster_relevance": 0.0,
-    "name": 6,
-    "affiliation": null,
-    "researcher": null,
-    "cluster": null,
-    "num_children": 1,
-    "paper": 29,
-    "position": 1,
-    "similar": null
-  },
-  "model": "papers.author",
-  "pk": 89
 },
 {
   "fields": {
@@ -3682,21 +3428,6 @@
 },
 {
   "fields": {
-    "cluster_relevance": 12.8,
-    "name": 3,
-    "affiliation": null,
-    "researcher": 3,
-    "cluster": 11,
-    "num_children": 1,
-    "paper": 32,
-    "position": 0,
-    "similar": null
-  },
-  "model": "papers.author",
-  "pk": 108
-},
-{
-  "fields": {
     "cluster_relevance": 0.0,
     "name": 3,
     "affiliation": null,
@@ -3869,7 +3600,7 @@
     "cluster": null,
     "num_children": 1,
     "paper": 34,
-    "position": 1,
+    "position": 3,
     "similar": null
   },
   "model": "papers.author",
@@ -3884,7 +3615,7 @@
     "cluster": null,
     "num_children": 1,
     "paper": 34,
-    "position": 2,
+    "position": 5,
     "similar": null
   },
   "model": "papers.author",
@@ -3899,7 +3630,7 @@
     "cluster": null,
     "num_children": 1,
     "paper": 34,
-    "position": 3,
+    "position": 7,
     "similar": null
   },
   "model": "papers.author",
@@ -3914,7 +3645,7 @@
     "cluster": null,
     "num_children": 1,
     "paper": 34,
-    "position": 4,
+    "position": 9,
     "similar": null
   },
   "model": "papers.author",
@@ -3929,97 +3660,7 @@
     "cluster": null,
     "num_children": 1,
     "paper": 34,
-    "position": 5,
-    "similar": null
-  },
-  "model": "papers.author",
-  "pk": 124
-},
-{
-  "fields": {
-    "cluster_relevance": 13.6,
-    "name": 3,
-    "affiliation": null,
-    "researcher": 3,
-    "cluster": 11,
-    "num_children": 1,
-    "paper": 34,
-    "position": 0,
-    "similar": null
-  },
-  "model": "papers.author",
-  "pk": 125
-},
-{
-  "fields": {
-    "cluster_relevance": 0.0,
-    "name": 25,
-    "affiliation": null,
-    "researcher": null,
-    "cluster": null,
-    "num_children": 1,
-    "paper": 34,
-    "position": 1,
-    "similar": null
-  },
-  "model": "papers.author",
-  "pk": 126
-},
-{
-  "fields": {
-    "cluster_relevance": 0.0,
-    "name": 13,
-    "affiliation": null,
-    "researcher": null,
-    "cluster": null,
-    "num_children": 1,
-    "paper": 34,
     "position": 2,
-    "similar": null
-  },
-  "model": "papers.author",
-  "pk": 127
-},
-{
-  "fields": {
-    "cluster_relevance": 0.0,
-    "name": 26,
-    "affiliation": null,
-    "researcher": null,
-    "cluster": null,
-    "num_children": 1,
-    "paper": 34,
-    "position": 3,
-    "similar": null
-  },
-  "model": "papers.author",
-  "pk": 128
-},
-{
-  "fields": {
-    "cluster_relevance": 0.0,
-    "name": 14,
-    "affiliation": null,
-    "researcher": null,
-    "cluster": null,
-    "num_children": 1,
-    "paper": 34,
-    "position": 4,
-    "similar": null
-  },
-  "model": "papers.author",
-  "pk": 129
-},
-{
-  "fields": {
-    "cluster_relevance": 0.0,
-    "name": 27,
-    "affiliation": null,
-    "researcher": null,
-    "cluster": null,
-    "num_children": 1,
-    "paper": 34,
-    "position": 5,
     "similar": null
   },
   "model": "papers.author",
@@ -4408,7 +4049,7 @@
 {
   "fields": {
     "splash_url": "https://hal-institut-mines-telecom.archives-ouvertes.fr/hal-01191721",
-    "about": 14,
+    "about": 29,
     "description": "We call data intensional when it is not directly available, but must be accessed through a costlyinterface. Intensional data naturally arises in a number of Web data management scenarios, suchas Web crawling or ontology-based data access. Such scenarios require us to model an uncertainview of the world, for which, given a query, we must answer the question \u0093What is the best thingto do next?\u0094 Once data has been retrieved, the knowledge of the world is revised, and the wholeprocess is repeated, until enough knowledge about the world has been obtained for the particularapplication considered. In this article, we give an overview of the steps underlying all intensionaldata management scenarios, and illustrate them on three concrete applications: focused crawling,online influence maximization in social networks, and mining crowdsourced data.",
     "contributors": "Laboratoire Traitement et Communication de l'Information (LTCI) ; T\u00e9l\u00e9com ParisTech - Institut Mines-T\u00e9l\u00e9com - Centre National de la Recherche Scientifique (CNRS) Huawei Technologies",
     "pdf_url": null,
@@ -4459,7 +4100,7 @@
 {
   "fields": {
     "splash_url": "https://hal-institut-mines-telecom.archives-ouvertes.fr/hal-01190610",
-    "about": 16,
+    "about": 32,
     "description": "Many data management applications must deal with data which is uncertain, incomplete, or noisy. However, on existing uncertain data representations, we cannot tractably perform the important query evaluation tasks of determining query possibility, certainty, or probability: these problems are hard on arbitrary uncertain input instances. We thus ask whether we could restrict the structure of uncertain data so as to guarantee the tractability of exact query evaluation. We present our tractability results for tree and tree-like uncertain data, and a vision for probabilistic rule reasoning. We also study uncertainty about order, proposing a suitable representation, and study uncertain data conditioned by additional observations.",
     "contributors": "Laboratoire Traitement et Communication de l'Information (LTCI) ; T\u00e9l\u00e9com ParisTech - Institut Mines-T\u00e9l\u00e9com - Centre National de la Recherche Scientifique (CNRS)",
     "pdf_url": null,
@@ -4578,7 +4219,7 @@
 {
   "fields": {
     "splash_url": "http://arxiv.org/abs/1507.04955",
-    "about": 19,
+    "about": 32,
     "description": " Many data management applications must deal with data which is uncertain, incomplete, or noisy. However, on existing uncertain data representations, we cannot tractably perform the important query evaluation tasks of determining query possibility, certainty, or probability: these problems are hard on arbitrary uncertain input instances. We thus ask whether we could restrict the structure of uncertain data so as to guarantee the tractability of exact query evaluation. We present our tractability results for tree and tree-like uncertain data, and a vision for probabilistic rule reasoning. We also study uncertainty about order, proposing a suitable representation, and study uncertain data conditioned by additional observations. ",
     "contributors": "",
     "pdf_url": "http://arxiv.org/pdf/1507.04955",
@@ -4765,7 +4406,7 @@
 {
   "fields": {
     "splash_url": "https://hal.inria.fr/hal-01110259",
-    "about": 28,
+    "about": 34,
     "description": " In addition to its usual complexity assumptions, cryptography silently assumes that information can be physically protected in a single location. As one can easily imagine, real-life devices are not ideal and information may leak through different physical side-channels. It is a known fact that information leakage is a function of both the executed code F and its input x. In this work we explore the use of polymorphic code as a way of resisting side channel attacks. We present experimental results with procedural and functional languages. In each case we rewrite the protected code code Fi before its execution. The outcome is a genealogy of programs F0, F1, . . . such that for all inputs x and for all indexes i \u2260 j \u21d2 Fi(x) = Fj(x) and Fi ne; Fj . This is shown to increase resistance to side channel attacks. ",
     "contributors": "CASCADE (INRIA Paris-Rocquencourt) ; \u00c9cole normale sup\u00e9rieure - Paris (ENS Paris) - INRIA - CNRS Laboratoire d'informatique de l'\u00e9cole normale sup\u00e9rieure (LIENS) ; CNRS - \u00c9cole normale sup\u00e9rieure - Paris (ENS Paris) Claudio A. Ardagna  Jianying Zhou",
     "pdf_url": null,
@@ -4885,7 +4526,10 @@
   "fields": {
     "codename": "add_logentry",
     "name": "Can add log entry",
-    "content_type": 1
+    "content_type": [
+      "admin",
+      "logentry"
+    ]
   },
   "model": "auth.permission",
   "pk": 1
@@ -4894,7 +4538,10 @@
   "fields": {
     "codename": "change_logentry",
     "name": "Can change log entry",
-    "content_type": 1
+    "content_type": [
+      "admin",
+      "logentry"
+    ]
   },
   "model": "auth.permission",
   "pk": 2
@@ -4903,7 +4550,10 @@
   "fields": {
     "codename": "delete_logentry",
     "name": "Can delete log entry",
-    "content_type": 1
+    "content_type": [
+      "admin",
+      "logentry"
+    ]
   },
   "model": "auth.permission",
   "pk": 3
@@ -4912,7 +4562,10 @@
   "fields": {
     "codename": "add_permission",
     "name": "Can add permission",
-    "content_type": 2
+    "content_type": [
+      "auth",
+      "permission"
+    ]
   },
   "model": "auth.permission",
   "pk": 4
@@ -4921,7 +4574,10 @@
   "fields": {
     "codename": "change_permission",
     "name": "Can change permission",
-    "content_type": 2
+    "content_type": [
+      "auth",
+      "permission"
+    ]
   },
   "model": "auth.permission",
   "pk": 5
@@ -4930,7 +4586,10 @@
   "fields": {
     "codename": "delete_permission",
     "name": "Can delete permission",
-    "content_type": 2
+    "content_type": [
+      "auth",
+      "permission"
+    ]
   },
   "model": "auth.permission",
   "pk": 6
@@ -4939,7 +4598,10 @@
   "fields": {
     "codename": "add_group",
     "name": "Can add group",
-    "content_type": 3
+    "content_type": [
+      "auth",
+      "group"
+    ]
   },
   "model": "auth.permission",
   "pk": 7
@@ -4948,7 +4610,10 @@
   "fields": {
     "codename": "change_group",
     "name": "Can change group",
-    "content_type": 3
+    "content_type": [
+      "auth",
+      "group"
+    ]
   },
   "model": "auth.permission",
   "pk": 8
@@ -4957,7 +4622,10 @@
   "fields": {
     "codename": "delete_group",
     "name": "Can delete group",
-    "content_type": 3
+    "content_type": [
+      "auth",
+      "group"
+    ]
   },
   "model": "auth.permission",
   "pk": 9
@@ -4966,7 +4634,10 @@
   "fields": {
     "codename": "add_user",
     "name": "Can add user",
-    "content_type": 4
+    "content_type": [
+      "auth",
+      "user"
+    ]
   },
   "model": "auth.permission",
   "pk": 10
@@ -4975,7 +4646,10 @@
   "fields": {
     "codename": "change_user",
     "name": "Can change user",
-    "content_type": 4
+    "content_type": [
+      "auth",
+      "user"
+    ]
   },
   "model": "auth.permission",
   "pk": 11
@@ -4984,7 +4658,10 @@
   "fields": {
     "codename": "delete_user",
     "name": "Can delete user",
-    "content_type": 4
+    "content_type": [
+      "auth",
+      "user"
+    ]
   },
   "model": "auth.permission",
   "pk": 12
@@ -4993,7 +4670,10 @@
   "fields": {
     "codename": "add_contenttype",
     "name": "Can add content type",
-    "content_type": 5
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ]
   },
   "model": "auth.permission",
   "pk": 13
@@ -5002,7 +4682,10 @@
   "fields": {
     "codename": "change_contenttype",
     "name": "Can change content type",
-    "content_type": 5
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ]
   },
   "model": "auth.permission",
   "pk": 14
@@ -5011,7 +4694,10 @@
   "fields": {
     "codename": "delete_contenttype",
     "name": "Can delete content type",
-    "content_type": 5
+    "content_type": [
+      "contenttypes",
+      "contenttype"
+    ]
   },
   "model": "auth.permission",
   "pk": 15
@@ -5020,7 +4706,10 @@
   "fields": {
     "codename": "add_session",
     "name": "Can add session",
-    "content_type": 6
+    "content_type": [
+      "sessions",
+      "session"
+    ]
   },
   "model": "auth.permission",
   "pk": 16
@@ -5029,7 +4718,10 @@
   "fields": {
     "codename": "change_session",
     "name": "Can change session",
-    "content_type": 6
+    "content_type": [
+      "sessions",
+      "session"
+    ]
   },
   "model": "auth.permission",
   "pk": 17
@@ -5038,7 +4730,10 @@
   "fields": {
     "codename": "delete_session",
     "name": "Can delete session",
-    "content_type": 6
+    "content_type": [
+      "sessions",
+      "session"
+    ]
   },
   "model": "auth.permission",
   "pk": 18
@@ -5047,7 +4742,10 @@
   "fields": {
     "codename": "add_site",
     "name": "Can add site",
-    "content_type": 7
+    "content_type": [
+      "sites",
+      "site"
+    ]
   },
   "model": "auth.permission",
   "pk": 19
@@ -5056,7 +4754,10 @@
   "fields": {
     "codename": "change_site",
     "name": "Can change site",
-    "content_type": 7
+    "content_type": [
+      "sites",
+      "site"
+    ]
   },
   "model": "auth.permission",
   "pk": 20
@@ -5065,7 +4766,10 @@
   "fields": {
     "codename": "delete_site",
     "name": "Can delete site",
-    "content_type": 7
+    "content_type": [
+      "sites",
+      "site"
+    ]
   },
   "model": "auth.permission",
   "pk": 21
@@ -5074,7 +4778,10 @@
   "fields": {
     "codename": "add_emailaddress",
     "name": "Can add email address",
-    "content_type": 8
+    "content_type": [
+      "account",
+      "emailaddress"
+    ]
   },
   "model": "auth.permission",
   "pk": 22
@@ -5083,7 +4790,10 @@
   "fields": {
     "codename": "change_emailaddress",
     "name": "Can change email address",
-    "content_type": 8
+    "content_type": [
+      "account",
+      "emailaddress"
+    ]
   },
   "model": "auth.permission",
   "pk": 23
@@ -5092,7 +4802,10 @@
   "fields": {
     "codename": "delete_emailaddress",
     "name": "Can delete email address",
-    "content_type": 8
+    "content_type": [
+      "account",
+      "emailaddress"
+    ]
   },
   "model": "auth.permission",
   "pk": 24
@@ -5101,7 +4814,10 @@
   "fields": {
     "codename": "add_emailconfirmation",
     "name": "Can add email confirmation",
-    "content_type": 9
+    "content_type": [
+      "account",
+      "emailconfirmation"
+    ]
   },
   "model": "auth.permission",
   "pk": 25
@@ -5110,7 +4826,10 @@
   "fields": {
     "codename": "change_emailconfirmation",
     "name": "Can change email confirmation",
-    "content_type": 9
+    "content_type": [
+      "account",
+      "emailconfirmation"
+    ]
   },
   "model": "auth.permission",
   "pk": 26
@@ -5119,7 +4838,10 @@
   "fields": {
     "codename": "delete_emailconfirmation",
     "name": "Can delete email confirmation",
-    "content_type": 9
+    "content_type": [
+      "account",
+      "emailconfirmation"
+    ]
   },
   "model": "auth.permission",
   "pk": 27
@@ -5128,7 +4850,10 @@
   "fields": {
     "codename": "add_socialapp",
     "name": "Can add social application",
-    "content_type": 10
+    "content_type": [
+      "socialaccount",
+      "socialapp"
+    ]
   },
   "model": "auth.permission",
   "pk": 28
@@ -5137,7 +4862,10 @@
   "fields": {
     "codename": "change_socialapp",
     "name": "Can change social application",
-    "content_type": 10
+    "content_type": [
+      "socialaccount",
+      "socialapp"
+    ]
   },
   "model": "auth.permission",
   "pk": 29
@@ -5146,7 +4874,10 @@
   "fields": {
     "codename": "delete_socialapp",
     "name": "Can delete social application",
-    "content_type": 10
+    "content_type": [
+      "socialaccount",
+      "socialapp"
+    ]
   },
   "model": "auth.permission",
   "pk": 30
@@ -5155,7 +4886,10 @@
   "fields": {
     "codename": "add_socialaccount",
     "name": "Can add social account",
-    "content_type": 11
+    "content_type": [
+      "socialaccount",
+      "socialaccount"
+    ]
   },
   "model": "auth.permission",
   "pk": 31
@@ -5164,7 +4898,10 @@
   "fields": {
     "codename": "change_socialaccount",
     "name": "Can change social account",
-    "content_type": 11
+    "content_type": [
+      "socialaccount",
+      "socialaccount"
+    ]
   },
   "model": "auth.permission",
   "pk": 32
@@ -5173,7 +4910,10 @@
   "fields": {
     "codename": "delete_socialaccount",
     "name": "Can delete social account",
-    "content_type": 11
+    "content_type": [
+      "socialaccount",
+      "socialaccount"
+    ]
   },
   "model": "auth.permission",
   "pk": 33
@@ -5182,7 +4922,10 @@
   "fields": {
     "codename": "add_socialtoken",
     "name": "Can add social application token",
-    "content_type": 12
+    "content_type": [
+      "socialaccount",
+      "socialtoken"
+    ]
   },
   "model": "auth.permission",
   "pk": 34
@@ -5191,7 +4934,10 @@
   "fields": {
     "codename": "change_socialtoken",
     "name": "Can change social application token",
-    "content_type": 12
+    "content_type": [
+      "socialaccount",
+      "socialtoken"
+    ]
   },
   "model": "auth.permission",
   "pk": 35
@@ -5200,7 +4946,10 @@
   "fields": {
     "codename": "delete_socialtoken",
     "name": "Can delete social application token",
-    "content_type": 12
+    "content_type": [
+      "socialaccount",
+      "socialtoken"
+    ]
   },
   "model": "auth.permission",
   "pk": 36
@@ -5209,7 +4958,10 @@
   "fields": {
     "codename": "add_accessstatistics",
     "name": "Can add access statistics",
-    "content_type": 13
+    "content_type": [
+      "statistics",
+      "accessstatistics"
+    ]
   },
   "model": "auth.permission",
   "pk": 37
@@ -5218,7 +4970,10 @@
   "fields": {
     "codename": "change_accessstatistics",
     "name": "Can change access statistics",
-    "content_type": 13
+    "content_type": [
+      "statistics",
+      "accessstatistics"
+    ]
   },
   "model": "auth.permission",
   "pk": 38
@@ -5227,7 +4982,10 @@
   "fields": {
     "codename": "delete_accessstatistics",
     "name": "Can delete access statistics",
-    "content_type": 13
+    "content_type": [
+      "statistics",
+      "accessstatistics"
+    ]
   },
   "model": "auth.permission",
   "pk": 39
@@ -5236,7 +4994,10 @@
   "fields": {
     "codename": "add_publisher",
     "name": "Can add publisher",
-    "content_type": 14
+    "content_type": [
+      "publishers",
+      "publisher"
+    ]
   },
   "model": "auth.permission",
   "pk": 40
@@ -5245,7 +5006,10 @@
   "fields": {
     "codename": "change_publisher",
     "name": "Can change publisher",
-    "content_type": 14
+    "content_type": [
+      "publishers",
+      "publisher"
+    ]
   },
   "model": "auth.permission",
   "pk": 41
@@ -5254,7 +5018,10 @@
   "fields": {
     "codename": "delete_publisher",
     "name": "Can delete publisher",
-    "content_type": 14
+    "content_type": [
+      "publishers",
+      "publisher"
+    ]
   },
   "model": "auth.permission",
   "pk": 42
@@ -5263,7 +5030,10 @@
   "fields": {
     "codename": "add_journal",
     "name": "Can add journal",
-    "content_type": 15
+    "content_type": [
+      "publishers",
+      "journal"
+    ]
   },
   "model": "auth.permission",
   "pk": 43
@@ -5272,7 +5042,10 @@
   "fields": {
     "codename": "change_journal",
     "name": "Can change journal",
-    "content_type": 15
+    "content_type": [
+      "publishers",
+      "journal"
+    ]
   },
   "model": "auth.permission",
   "pk": 44
@@ -5281,7 +5054,10 @@
   "fields": {
     "codename": "delete_journal",
     "name": "Can delete journal",
-    "content_type": 15
+    "content_type": [
+      "publishers",
+      "journal"
+    ]
   },
   "model": "auth.permission",
   "pk": 45
@@ -5290,7 +5066,10 @@
   "fields": {
     "codename": "add_publishercondition",
     "name": "Can add publisher condition",
-    "content_type": 16
+    "content_type": [
+      "publishers",
+      "publishercondition"
+    ]
   },
   "model": "auth.permission",
   "pk": 46
@@ -5299,7 +5078,10 @@
   "fields": {
     "codename": "change_publishercondition",
     "name": "Can change publisher condition",
-    "content_type": 16
+    "content_type": [
+      "publishers",
+      "publishercondition"
+    ]
   },
   "model": "auth.permission",
   "pk": 47
@@ -5308,7 +5090,10 @@
   "fields": {
     "codename": "delete_publishercondition",
     "name": "Can delete publisher condition",
-    "content_type": 16
+    "content_type": [
+      "publishers",
+      "publishercondition"
+    ]
   },
   "model": "auth.permission",
   "pk": 48
@@ -5317,7 +5102,10 @@
   "fields": {
     "codename": "add_publishercopyrightlink",
     "name": "Can add publisher copyright link",
-    "content_type": 17
+    "content_type": [
+      "publishers",
+      "publishercopyrightlink"
+    ]
   },
   "model": "auth.permission",
   "pk": 49
@@ -5326,7 +5114,10 @@
   "fields": {
     "codename": "change_publishercopyrightlink",
     "name": "Can change publisher copyright link",
-    "content_type": 17
+    "content_type": [
+      "publishers",
+      "publishercopyrightlink"
+    ]
   },
   "model": "auth.permission",
   "pk": 50
@@ -5335,7 +5126,10 @@
   "fields": {
     "codename": "delete_publishercopyrightlink",
     "name": "Can delete publisher copyright link",
-    "content_type": 17
+    "content_type": [
+      "publishers",
+      "publishercopyrightlink"
+    ]
   },
   "model": "auth.permission",
   "pk": 51
@@ -5344,7 +5138,10 @@
   "fields": {
     "codename": "add_publisherrestrictiondetail",
     "name": "Can add publisher restriction detail",
-    "content_type": 18
+    "content_type": [
+      "publishers",
+      "publisherrestrictiondetail"
+    ]
   },
   "model": "auth.permission",
   "pk": 52
@@ -5353,7 +5150,10 @@
   "fields": {
     "codename": "change_publisherrestrictiondetail",
     "name": "Can change publisher restriction detail",
-    "content_type": 18
+    "content_type": [
+      "publishers",
+      "publisherrestrictiondetail"
+    ]
   },
   "model": "auth.permission",
   "pk": 53
@@ -5362,7 +5162,10 @@
   "fields": {
     "codename": "delete_publisherrestrictiondetail",
     "name": "Can delete publisher restriction detail",
-    "content_type": 18
+    "content_type": [
+      "publishers",
+      "publisherrestrictiondetail"
+    ]
   },
   "model": "auth.permission",
   "pk": 54
@@ -5371,7 +5174,10 @@
   "fields": {
     "codename": "add_aliaspublisher",
     "name": "Can add alias publisher",
-    "content_type": 19
+    "content_type": [
+      "publishers",
+      "aliaspublisher"
+    ]
   },
   "model": "auth.permission",
   "pk": 55
@@ -5380,7 +5186,10 @@
   "fields": {
     "codename": "change_aliaspublisher",
     "name": "Can change alias publisher",
-    "content_type": 19
+    "content_type": [
+      "publishers",
+      "aliaspublisher"
+    ]
   },
   "model": "auth.permission",
   "pk": 56
@@ -5389,7 +5198,10 @@
   "fields": {
     "codename": "delete_aliaspublisher",
     "name": "Can delete alias publisher",
-    "content_type": 19
+    "content_type": [
+      "publishers",
+      "aliaspublisher"
+    ]
   },
   "model": "auth.permission",
   "pk": 57
@@ -5398,7 +5210,10 @@
   "fields": {
     "codename": "add_institution",
     "name": "Can add institution",
-    "content_type": 20
+    "content_type": [
+      "papers",
+      "institution"
+    ]
   },
   "model": "auth.permission",
   "pk": 58
@@ -5407,7 +5222,10 @@
   "fields": {
     "codename": "change_institution",
     "name": "Can change institution",
-    "content_type": 20
+    "content_type": [
+      "papers",
+      "institution"
+    ]
   },
   "model": "auth.permission",
   "pk": 59
@@ -5416,7 +5234,10 @@
   "fields": {
     "codename": "delete_institution",
     "name": "Can delete institution",
-    "content_type": 20
+    "content_type": [
+      "papers",
+      "institution"
+    ]
   },
   "model": "auth.permission",
   "pk": 60
@@ -5425,7 +5246,10 @@
   "fields": {
     "codename": "add_department",
     "name": "Can add department",
-    "content_type": 21
+    "content_type": [
+      "papers",
+      "department"
+    ]
   },
   "model": "auth.permission",
   "pk": 61
@@ -5434,7 +5258,10 @@
   "fields": {
     "codename": "change_department",
     "name": "Can change department",
-    "content_type": 21
+    "content_type": [
+      "papers",
+      "department"
+    ]
   },
   "model": "auth.permission",
   "pk": 62
@@ -5443,7 +5270,10 @@
   "fields": {
     "codename": "delete_department",
     "name": "Can delete department",
-    "content_type": 21
+    "content_type": [
+      "papers",
+      "department"
+    ]
   },
   "model": "auth.permission",
   "pk": 63
@@ -5452,7 +5282,10 @@
   "fields": {
     "codename": "add_namevariant",
     "name": "Can add name variant",
-    "content_type": 22
+    "content_type": [
+      "papers",
+      "namevariant"
+    ]
   },
   "model": "auth.permission",
   "pk": 64
@@ -5461,7 +5294,10 @@
   "fields": {
     "codename": "change_namevariant",
     "name": "Can change name variant",
-    "content_type": 22
+    "content_type": [
+      "papers",
+      "namevariant"
+    ]
   },
   "model": "auth.permission",
   "pk": 65
@@ -5470,7 +5306,10 @@
   "fields": {
     "codename": "delete_namevariant",
     "name": "Can delete name variant",
-    "content_type": 22
+    "content_type": [
+      "papers",
+      "namevariant"
+    ]
   },
   "model": "auth.permission",
   "pk": 66
@@ -5479,7 +5318,10 @@
   "fields": {
     "codename": "add_researcher",
     "name": "Can add researcher",
-    "content_type": 23
+    "content_type": [
+      "papers",
+      "researcher"
+    ]
   },
   "model": "auth.permission",
   "pk": 67
@@ -5488,7 +5330,10 @@
   "fields": {
     "codename": "change_researcher",
     "name": "Can change researcher",
-    "content_type": 23
+    "content_type": [
+      "papers",
+      "researcher"
+    ]
   },
   "model": "auth.permission",
   "pk": 68
@@ -5497,7 +5342,10 @@
   "fields": {
     "codename": "delete_researcher",
     "name": "Can delete researcher",
-    "content_type": 23
+    "content_type": [
+      "papers",
+      "researcher"
+    ]
   },
   "model": "auth.permission",
   "pk": 69
@@ -5506,7 +5354,10 @@
   "fields": {
     "codename": "add_name",
     "name": "Can add name",
-    "content_type": 24
+    "content_type": [
+      "papers",
+      "name"
+    ]
   },
   "model": "auth.permission",
   "pk": 70
@@ -5515,7 +5366,10 @@
   "fields": {
     "codename": "change_name",
     "name": "Can change name",
-    "content_type": 24
+    "content_type": [
+      "papers",
+      "name"
+    ]
   },
   "model": "auth.permission",
   "pk": 71
@@ -5524,7 +5378,10 @@
   "fields": {
     "codename": "delete_name",
     "name": "Can delete name",
-    "content_type": 24
+    "content_type": [
+      "papers",
+      "name"
+    ]
   },
   "model": "auth.permission",
   "pk": 72
@@ -5533,7 +5390,10 @@
   "fields": {
     "codename": "add_paper",
     "name": "Can add paper",
-    "content_type": 25
+    "content_type": [
+      "papers",
+      "paper"
+    ]
   },
   "model": "auth.permission",
   "pk": 73
@@ -5542,7 +5402,10 @@
   "fields": {
     "codename": "change_paper",
     "name": "Can change paper",
-    "content_type": 25
+    "content_type": [
+      "papers",
+      "paper"
+    ]
   },
   "model": "auth.permission",
   "pk": 74
@@ -5551,7 +5414,10 @@
   "fields": {
     "codename": "delete_paper",
     "name": "Can delete paper",
-    "content_type": 25
+    "content_type": [
+      "papers",
+      "paper"
+    ]
   },
   "model": "auth.permission",
   "pk": 75
@@ -5560,7 +5426,10 @@
   "fields": {
     "codename": "add_author",
     "name": "Can add author",
-    "content_type": 26
+    "content_type": [
+      "papers",
+      "author"
+    ]
   },
   "model": "auth.permission",
   "pk": 76
@@ -5569,7 +5438,10 @@
   "fields": {
     "codename": "change_author",
     "name": "Can change author",
-    "content_type": 26
+    "content_type": [
+      "papers",
+      "author"
+    ]
   },
   "model": "auth.permission",
   "pk": 77
@@ -5578,7 +5450,10 @@
   "fields": {
     "codename": "delete_author",
     "name": "Can delete author",
-    "content_type": 26
+    "content_type": [
+      "papers",
+      "author"
+    ]
   },
   "model": "auth.permission",
   "pk": 78
@@ -5587,7 +5462,10 @@
   "fields": {
     "codename": "add_publication",
     "name": "Can add publication",
-    "content_type": 27
+    "content_type": [
+      "papers",
+      "publication"
+    ]
   },
   "model": "auth.permission",
   "pk": 79
@@ -5596,7 +5474,10 @@
   "fields": {
     "codename": "change_publication",
     "name": "Can change publication",
-    "content_type": 27
+    "content_type": [
+      "papers",
+      "publication"
+    ]
   },
   "model": "auth.permission",
   "pk": 80
@@ -5605,7 +5486,10 @@
   "fields": {
     "codename": "delete_publication",
     "name": "Can delete publication",
-    "content_type": 27
+    "content_type": [
+      "papers",
+      "publication"
+    ]
   },
   "model": "auth.permission",
   "pk": 81
@@ -5614,7 +5498,10 @@
   "fields": {
     "codename": "add_oaisource",
     "name": "Can add OAI source",
-    "content_type": 28
+    "content_type": [
+      "papers",
+      "oaisource"
+    ]
   },
   "model": "auth.permission",
   "pk": 82
@@ -5623,7 +5510,10 @@
   "fields": {
     "codename": "change_oaisource",
     "name": "Can change OAI source",
-    "content_type": 28
+    "content_type": [
+      "papers",
+      "oaisource"
+    ]
   },
   "model": "auth.permission",
   "pk": 83
@@ -5632,7 +5522,10 @@
   "fields": {
     "codename": "delete_oaisource",
     "name": "Can delete OAI source",
-    "content_type": 28
+    "content_type": [
+      "papers",
+      "oaisource"
+    ]
   },
   "model": "auth.permission",
   "pk": 84
@@ -5641,7 +5534,10 @@
   "fields": {
     "codename": "add_oairecord",
     "name": "Can add OAI record",
-    "content_type": 29
+    "content_type": [
+      "papers",
+      "oairecord"
+    ]
   },
   "model": "auth.permission",
   "pk": 85
@@ -5650,7 +5546,10 @@
   "fields": {
     "codename": "change_oairecord",
     "name": "Can change OAI record",
-    "content_type": 29
+    "content_type": [
+      "papers",
+      "oairecord"
+    ]
   },
   "model": "auth.permission",
   "pk": 86
@@ -5659,7 +5558,10 @@
   "fields": {
     "codename": "delete_oairecord",
     "name": "Can delete OAI record",
-    "content_type": 29
+    "content_type": [
+      "papers",
+      "oairecord"
+    ]
   },
   "model": "auth.permission",
   "pk": 87
@@ -5668,7 +5570,10 @@
   "fields": {
     "codename": "add_paperworld",
     "name": "Can add Paper World",
-    "content_type": 30
+    "content_type": [
+      "papers",
+      "paperworld"
+    ]
   },
   "model": "auth.permission",
   "pk": 88
@@ -5677,7 +5582,10 @@
   "fields": {
     "codename": "change_paperworld",
     "name": "Can change Paper World",
-    "content_type": 30
+    "content_type": [
+      "papers",
+      "paperworld"
+    ]
   },
   "model": "auth.permission",
   "pk": 89
@@ -5686,7 +5594,10 @@
   "fields": {
     "codename": "delete_paperworld",
     "name": "Can delete Paper World",
-    "content_type": 30
+    "content_type": [
+      "papers",
+      "paperworld"
+    ]
   },
   "model": "auth.permission",
   "pk": 90
@@ -5695,7 +5606,10 @@
   "fields": {
     "codename": "add_annotation",
     "name": "Can add annotation",
-    "content_type": 31
+    "content_type": [
+      "papers",
+      "annotation"
+    ]
   },
   "model": "auth.permission",
   "pk": 91
@@ -5704,7 +5618,10 @@
   "fields": {
     "codename": "change_annotation",
     "name": "Can change annotation",
-    "content_type": 31
+    "content_type": [
+      "papers",
+      "annotation"
+    ]
   },
   "model": "auth.permission",
   "pk": 92
@@ -5713,7 +5630,10 @@
   "fields": {
     "codename": "delete_annotation",
     "name": "Can delete annotation",
-    "content_type": 31
+    "content_type": [
+      "papers",
+      "annotation"
+    ]
   },
   "model": "auth.permission",
   "pk": 93
@@ -5722,7 +5642,10 @@
   "fields": {
     "codename": "add_uploadedpdf",
     "name": "Can add Uploaded PDF",
-    "content_type": 32
+    "content_type": [
+      "upload",
+      "uploadedpdf"
+    ]
   },
   "model": "auth.permission",
   "pk": 94
@@ -5731,7 +5654,10 @@
   "fields": {
     "codename": "change_uploadedpdf",
     "name": "Can change Uploaded PDF",
-    "content_type": 32
+    "content_type": [
+      "upload",
+      "uploadedpdf"
+    ]
   },
   "model": "auth.permission",
   "pk": 95
@@ -5740,7 +5666,10 @@
   "fields": {
     "codename": "delete_uploadedpdf",
     "name": "Can delete Uploaded PDF",
-    "content_type": 32
+    "content_type": [
+      "upload",
+      "uploadedpdf"
+    ]
   },
   "model": "auth.permission",
   "pk": 96
@@ -5749,7 +5678,10 @@
   "fields": {
     "codename": "add_repository",
     "name": "Can add repository",
-    "content_type": 33
+    "content_type": [
+      "deposit",
+      "repository"
+    ]
   },
   "model": "auth.permission",
   "pk": 97
@@ -5758,7 +5690,10 @@
   "fields": {
     "codename": "change_repository",
     "name": "Can change repository",
-    "content_type": 33
+    "content_type": [
+      "deposit",
+      "repository"
+    ]
   },
   "model": "auth.permission",
   "pk": 98
@@ -5767,7 +5702,10 @@
   "fields": {
     "codename": "delete_repository",
     "name": "Can delete repository",
-    "content_type": 33
+    "content_type": [
+      "deposit",
+      "repository"
+    ]
   },
   "model": "auth.permission",
   "pk": 99
@@ -5776,7 +5714,10 @@
   "fields": {
     "codename": "add_depositrecord",
     "name": "Can add deposit record",
-    "content_type": 34
+    "content_type": [
+      "deposit",
+      "depositrecord"
+    ]
   },
   "model": "auth.permission",
   "pk": 100
@@ -5785,7 +5726,10 @@
   "fields": {
     "codename": "change_depositrecord",
     "name": "Can change deposit record",
-    "content_type": 34
+    "content_type": [
+      "deposit",
+      "depositrecord"
+    ]
   },
   "model": "auth.permission",
   "pk": 101
@@ -5794,10 +5738,121 @@
   "fields": {
     "codename": "delete_depositrecord",
     "name": "Can delete deposit record",
-    "content_type": 34
+    "content_type": [
+      "deposit",
+      "depositrecord"
+    ]
   },
   "model": "auth.permission",
   "pk": 102
+},
+{
+  "fields": {
+    "codename": "add_notification",
+    "name": "Can add notification",
+    "content_type": [
+      "notification",
+      "notification"
+    ]
+  },
+  "model": "auth.permission",
+  "pk": 103
+},
+{
+  "fields": {
+    "codename": "change_notification",
+    "name": "Can change notification",
+    "content_type": [
+      "notification",
+      "notification"
+    ]
+  },
+  "model": "auth.permission",
+  "pk": 104
+},
+{
+  "fields": {
+    "codename": "delete_notification",
+    "name": "Can delete notification",
+    "content_type": [
+      "notification",
+      "notification"
+    ]
+  },
+  "model": "auth.permission",
+  "pk": 105
+},
+{
+  "fields": {
+    "codename": "add_notificationarchive",
+    "name": "Can add notification archive",
+    "content_type": [
+      "notification",
+      "notificationarchive"
+    ]
+  },
+  "model": "auth.permission",
+  "pk": 106
+},
+{
+  "fields": {
+    "codename": "change_notificationarchive",
+    "name": "Can change notification archive",
+    "content_type": [
+      "notification",
+      "notificationarchive"
+    ]
+  },
+  "model": "auth.permission",
+  "pk": 107
+},
+{
+  "fields": {
+    "codename": "delete_notificationarchive",
+    "name": "Can delete notification archive",
+    "content_type": [
+      "notification",
+      "notificationarchive"
+    ]
+  },
+  "model": "auth.permission",
+  "pk": 108
+},
+{
+  "fields": {
+    "codename": "add_inbox",
+    "name": "Can add inbox",
+    "content_type": [
+      "notification",
+      "inbox"
+    ]
+  },
+  "model": "auth.permission",
+  "pk": 109
+},
+{
+  "fields": {
+    "codename": "change_inbox",
+    "name": "Can change inbox",
+    "content_type": [
+      "notification",
+      "inbox"
+    ]
+  },
+  "model": "auth.permission",
+  "pk": 110
+},
+{
+  "fields": {
+    "codename": "delete_inbox",
+    "name": "Can delete inbox",
+    "content_type": [
+      "notification",
+      "inbox"
+    ]
+  },
+  "model": "auth.permission",
+  "pk": 111
 },
 {
   "fields": {
