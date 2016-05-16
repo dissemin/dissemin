@@ -302,6 +302,11 @@ class OrcidPaperSource(PaperSource):
         return paper
 
     def fetch_crossref_incrementally(self, crps, orcid_id):
+        # If we are using the ORCID sandbox, then do not look for papers from CrossRef
+        # as the ORCID ids they contain are production ORCID ids (not fake ones).
+        if settings.ORCID_BASE_DOMAIN != 'orcid.org':
+            return
+
         for metadata in crps.search_for_dois_incrementally('', {'orcid': orcid_id}):
             try:
                 paper = crps.save_doi_metadata(metadata)
