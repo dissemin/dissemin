@@ -82,26 +82,33 @@ class PaperSource(object):
         if self.ccf is None:
             raise ValueError('Clustering context factory not provided')
 
-        for p in self.fetch_bare(researcher):        
-            # Save the paper as non-bare
-            p = Paper.from_bare(p)
-
-            # If clustering happens incrementally, cluster the researcher
-            if incremental:
-                self.ccf.clusterPendingAuthorsForResearcher(researcher)
-                researcher.update_stats()
-
-            # Check whether this paper is associated with an ORCID id
-            # for the target researcher
-            if researcher.orcid:
-                matches = filter(lambda a: a.orcid == researcher.orcid, p.authors)
-                if matches:
-                    self.update_empty_orcid(researcher, False)
-
-           
+        count = 0
+        for p in self.fetch_bare(researcher):
+            paper = self.save_paper(p, researcher, incremental)
             if self.max_results is not None and count >= self.max_results:
                 break
-    
+
+            count += 1
+
+    def save_paper(self, bare_paper, researcher, incremental=False):
+        # Save the paper as non-bare
+        p = Paper.from_bare(bare_paper)
+
+        # If clustering happens incrementally, cluster the researcher
+        if incremental:
+            self.ccf.clusterPendingAuthorsForResearcher(researcher)
+            researcher.update_stats()
+
+        # Check whether this paper is associated with an ORCID id
+        # for the target researcher
+        if researcher.orcid:
+            matches = filter(lambda a: a.orcid == researcher.orcid, p.authors)
+            if matches:
+                self.update_empty_orcid(researcher, False)
+
+        return p
+
+
     def update_empty_orcid(self, researcher, val):
         """
         Updates the empty_orcid_profile field of the provided :class:`Researcher` instance.
