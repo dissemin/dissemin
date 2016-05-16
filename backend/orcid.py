@@ -382,15 +382,16 @@ class OrcidPaperSource(PaperSource):
         user = self.researcher.user
         if user is not None:
             delete_notification_per_tag(user, 'backend_orcid')
-            notification = {
-                'code': 'IGNORED_PAPERS',
-                'papers': ignored_papers
-            }
-            add_notification_for([user],
-                    notification_levels.ERROR,
-                    notification,
-                    'backend_orcid'
-            )
+            if ignored_papers:
+                notification = {
+                    'code': 'IGNORED_PAPERS',
+                    'papers': ignored_papers
+                }
+                add_notification_for([user],
+                        notification_levels.ERROR,
+                        notification,
+                        'backend_orcid'
+                )
 
     def fetch_orcid_records(self, orcid_identifier, profile=None, use_doi=True):
         """
@@ -479,6 +480,6 @@ class OrcidPaperSource(PaperSource):
                     ignored_papers.append(paper_or_metadata)
                     print ('This metadata (%s) yields no paper.' % (paper_or_metadata))
        
+        self.warn_user_of_ignored_papers(ignored_papers)
         if ignored_papers:
-            self.warn_user_of_ignored_papers(ignored_papers)
             print ('Warning: Total ignored papers: %d' % (len(ignored_papers)))
