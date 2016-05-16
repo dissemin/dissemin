@@ -114,60 +114,13 @@ def affiliate_author_with_orcid(ref_name, orcid, authors, initial_affiliations=N
 class SkippedPaper(Exception):
     pass
 
-class ORCIDDataPaper(object):
+class ORCIDMetadataExtractor(object):
 
-    def __init__(self, ref_name, orcid_id, pub, stop_if_dois_exists=False):
-        """
-        stop_if_dois_exists: if we find any dois, we don't extract everything, just the dois.
-        """
-
+    def __init__(self, pub):
         self._pub = pub
 
-        self.ref_name = ref_name
-        self.id = orcid_id
-
-        self.authors = []
-        self.title = None
-        self.pubdate = None
-
-        self.skipped = False
-
-        try:
-            self._extract_dois()
-            if self.dois and stop_if_dois_exists:
-                return
-
-            self._extract_title()
-            self._extract_type()
-            # self._extract_contributors()
-            # self._extract_authors_from_contributors()
-            self._extract_pubdate()
-            self._extract_internal_identifier()
-
-            self._extract_citation_format()
-            self._extract_authors_from_bibtex()
-
-            self._extract_affiliations()
-            self._convert_authors()
-
-            # These are the basic minimal information required for a BarePaper.
-            if not self.authors or not self.title or not self.pubdate:
-                if not self.authors:
-                    self.skip_reason = "NO_AUTHOR"
-                elif not self.title:
-                    self.skip_reason = "NO_TITLE"
-                elif not self.pubdate:
-                    self.skip_reason = "INVALID_PUB_DATE"
-                else:
-                    pass
-
-                raise SkippedPaper
-        except SkippedPaper:
-            self.skipped = True
-
-    def _extract_dois(self):
-        # DOIs
-        self.dois = []
+    def dois(self):
+        dois = []
         for extid in self.j('work-external-identifiers/work-external-identifier', []):
             if extid.get('work-external-identifier-type') == 'DOI':
                 doi = to_doi(jpath('work-external-identifier-id/value', extid))
@@ -175,22 +128,22 @@ class ORCIDDataPaper(object):
                     # If a DOI is available, create the paper using metadata from CrossRef.
                     # We don't do it yet, we only store the DOI, so that we can fetch them
                     # by batch later.
-                    self.dois.append(doi)
+                    dois.append(doi)
+        return dois
 
+    def title(self):
+            # Title
+            title = self.j('work-title/title/value')
+            if title is None:
+                print ("Warning: Skipping ORCID publication: no title")
+                raise SkippedPaper("NO_TITLE")
+            else:
+                return title
 
-    def _extract_title(self):
-        # Title
-        self.title = self.j('work-title/title/value')
-        if self.title is None:
-            print "Warning: Skipping ORCID publication: no title"
-            self.skip_reason = "NO_TITLE"
-            raise SkippedPaper
+    def type(self):
+        return orcid_to_doctype(self.j('work-type', 'other'))
 
-    def _extract_type(self):
-        # Type
-        self.doctype = orcid_to_doctype(self.j('work-type', 'other'))
-
-    def _extract_contributors(self):
+    def contributors(self):
         # Contributors (ignored for now as they are very often not present)
         def get_contrib(js):
             return {
@@ -198,60 +151,145 @@ class ORCIDDataPaper(object):
                     'name': jpath('credit-name/value', js),
             }
 
-        self.contributors = map(get_contrib, self.j('work-contributors/contributor', []))
+        return map(get_contrib, self.j('work-contributors/contributor', []))
 
-    def _extract_authors_from_contributors(self):
+    def authors_from_contributors(self, contributors):
         author_names = filter(lambda x: x is not None,
-                map(lambda x: x['name'], self.contributors)) # all contributors names which are not null
-        self.authors = map(parse_comma_name, author_names)
+                map(lambda x: x['name'], contributors)) # all contributors names which are not null
+        return map(parse_comma_name, author_names)
 
-    def _extract_pubdate(self):
-        # Pubdate
-        # Remark(RaitoBezarius): we don't want to put 01 ; it could be interpreted as octal 1.
-        year = parse_int(self.j('publication-date/year/value'), 1970)
-        month = parse_int(self.j('publication-date/month/value'), 1)
-        day = parse_int(self.j('publication-date/day/value'), 1)
-        self.pubdate = try_date(year, month, day) or try_date(year, month, 1) or try_date(year, 1, 1)
-        if self.pubdate is None:
-            print "Invalid publication date in ORCID publication, skipping"
-            self.skip_reason = "INVALID_PUB_DATE"
-            raise SkippedPaper
+    def pubdate(self):
+            # Pubdate
+            # Remark(RaitoBezarius): we don't want to put 01 ; it could be interpreted as octal 1.
+            year = parse_int(self.j('publication-date/year/value'), 1970)
+            month = parse_int(self.j('publication-date/month/value'), 1)
+            day = parse_int(self.j('publication-date/day/value'), 1)
+            pubdate = try_date(year, month, day) or try_date(year, month, 1) or try_date(year, 1, 1)
+            if pubdate is None:
+                print ("Invalid publication date in ORCID publication, skipping")
+                raise SkippedPaper("INVALID_PUB_DATE")
+            else:
+                return pubdate
 
-    def _extract_affiliations(self):
-        """
-        Dependent on authors.
-        Once we have contributors, we should fetch initial affiliations based on the contributors.
-        """
-        self.affiliations = affiliate_author_with_orcid(self.ref_name, self.id, self.authors, initial_affiliations=[])
-
-    def _extract_internal_identifier(self):
+    def internal_identifier(self):
         # ORCiD internal id
-        self.identifier = self.j('put-code')
+        return self.j('put-code')
 
-    def _extract_citation_format(self):
-        self.citation_format = self.j('work-citation/work-citation-type')
-        print "ORCID publication (%s) uses %s citation format" % (self.title, self.citation_format)
+    def affiliations(self, orcid_id, ref_name, authors, initial_affiliations):
+        return affiliate_author_with_orcid(ref_name, orcid_id, authors, initial_affiliations=initial_affiliations)
 
-    def _extract_authors_from_bibtex(self):
-        self.bibtex = self.j('work-citation/citation')
+    def citation_format(self):
+        return self.j('work-citation/work-citation-type')
 
-        if self.bibtex is not None:
+    def bibtex(self):
+        return self.j('work-citation/citation')
+
+    def authors_from_bibtex(self, bibtex):
+        if bibtex is not None:
             try:
-                entry = parse_bibtex(self.bibtex)
+                entry = parse_bibtex(bibtex)
 
                 if 'author' not in entry or len(entry['author']) == 0:
-                    print "Warning: Skipping ORCID publication: no authors."
-                    print self.bibtex
-                    self.skip_reason = "NO_AUTHOR"
-                    raise SkippedPaper
+                    print ("Warning: ORCiD publication with no authors.")
+                    print (bibtex)
+                    return []
                 else:
-                    self.authors = entry['author']
-
+                    return entry['author']
             except ValueError:
-                pass
+                return []
+        else:
+            return []
 
-    def _convert_authors(self):
-        self.authors_converted = map(name_lookup_cache.lookup, self.authors)
+    def convert_authors(self, authors):
+        return map(name_lookup_cache.lookup, authors)
+
+    def j(self, path, default=None):
+        return jpath(path, self._pub, default)
+
+
+class ORCIDDataPaper(object):
+
+    def __init__(self, orcid_id):
+        self.id = orcid_id
+
+        self.title = None
+        self.pubdate = None
+        self.doctype = None
+        self.identifier = None
+        self.citation_format = None
+        self.bibtex = None
+
+        self.authors = []
+        self.contributors = []
+        self.affiliations = []
+
+        self.dois = []
+
+        self.skipped = False
+        self.skip_reason = None
+
+    def initialize(self):
+        try:
+            self.throw_skipped()
+        except SkippedPaper as e:
+            self.skipped = True
+            self.skip_reason, = e.args
+
+    def is_skipped(self):
+        return any(lambda item: not item,
+                [
+                    self.title,
+                    self.authors,
+                    self.pubdate
+                ])
+
+    def throw_skipped(self):
+        if not self.title:
+            raise SkippedPaper('NO_TITLE')
+
+        if not self.authors:
+            raise SkippedPaper('NO_AUTHOR')
+
+        if not self.pubdate:
+            raise SkippedPaper('NO_PUBDATE')
+
+
+    @classmethod
+    def from_orcid_metadata(cls, ref_name, orcid_id, pub, stop_if_dois_exists=False, overrides=None):
+        if overrides is None:
+            overrides = {}
+
+        extractor = ORCIDMetadataExtractor(pub)
+        paper = ORCIDDataPaper(orcid_id)
+
+        for key, value in overrides.items():
+            setattr(paper, key, value)
+
+        try:
+            paper.dois.extend(extractor.dois()) # We concat lists.
+            if paper.dois and stop_if_dois_exists:
+                return paper
+
+            paper.title = extractor.title()
+            paper.doctype = extractor.type()
+            # paper.contributors = extractor.contributors()
+            # paper.authors.extend(extractor.authors_from_contributors(paper.contributors))
+            paper.pubdate = extractor.pubdate()
+            paper.identifier = extractor.internal_identifier()
+
+            paper.citation_format = extractor.citation_format()
+            paper.bibtex = extractor.bibtex()
+            paper.authors.extend(extractor.authors_from_bibtex(paper.bibtex))
+
+            paper.affiliations = extractor.affiliations(orcid_id, ref_name, paper.authors, paper.affiliations)
+            paper.authors = extractor.convert_authors(paper.authors)
+
+            paper.initialize()
+            return paper
+        except SkippedPaper as e:
+            paper.skipped = True
+            paper.skip_reason, = e.args
+
 
     def __repr__(self):
         return '<ORCIDDataPaper %s written by %s>' % (self.title, ', '.join(self.authors))
@@ -259,16 +297,12 @@ class ORCIDDataPaper(object):
     def __str__(self):
         return self.title
 
-    def j(self, path, default=None):
-        return jpath(path, self._pub, default)
-
     @property
     def splash_url(self):
         return 'http://{}/{}'.format(settings.ORCID_BASE_DOMAIN, self.id)
 
     def as_dict(self):
         return self.__dict__
-
 
 
 class OrcidPaperSource(PaperSource):
@@ -280,12 +314,23 @@ class OrcidPaperSource(PaperSource):
             return self.fetch_orcid_records(researcher.orcid)
         return []
 
+    def reconcile_paper(self, ref_name, orcid_id, metadata, overrides=None):
+        if overrides is None:
+            overrides = {}
+
+        return ORCIDDataPaper.from_orcid_metadata(
+            ref_name,
+            orcid_id,
+            metadata,
+            overrides=overrides
+        )
+
     def create_paper(self, data_paper):
         assert (not data_paper.skipped)
         # Create paper
         paper = BarePaper.create(
             data_paper.title,
-            data_paper.authors_converted,
+            data_paper.authors,
             data_paper.pubdate,
             'VISIBLE',
             data_paper.affiliations
@@ -383,20 +428,38 @@ class OrcidPaperSource(PaperSource):
         # Fetch publications (1st attempt with ORCiD data)
         pubs = jpath('orcid-profile/orcid-activities/orcid-works/orcid-work', profile, [])
         for pub in pubs:
-            data_paper = ORCIDDataPaper(ref_name, orcid_id, pub, stop_if_dois_exists=use_doi)
+            data_paper = ORCIDDataPaper.from_orcid_metadata(
+                ref_name,
+                orcid_id,
+                pub,
+                stop_if_dois_exists=use_doi
+            )
 
             if data_paper.dois and use_doi: # We want to batch it rather than manually do it.
                 dois.extend(data_paper.dois)
                 continue
 
-            # Extract information from ORCiD
+            # If the paper is skipped due to invalid metadata.
+            # We first try to reconcile it with local researcher author name.
+            # Then, we consider it missed.
             if data_paper.skipped:
                 print ('%s is skipped due to incorrect metadata (%s)' % (data_paper, data_paper.skip_reason))
-                ignored_papers.append(data_paper.as_dict())
-                continue
+
+                print ('Trying to reconcile it with local researcher.')
+                data_paper = self.reconcile_paper(
+                    ref_name,
+                    orcid_id,
+                    pub,
+                    overrides={
+                        'authors': [(self.researcher.name.first, self.researcher.name.last)]
+                    }
+                )
+                if data_paper.skipped:
+                    ignored_papers.append(data_paper.as_dict())
+                    continue
 
             yield self.create_paper(data_paper)
-        
+
         # 2nd attempt with DOIs and CrossRef
         if use_doi:
             # Let's grab papers from CrossRef
