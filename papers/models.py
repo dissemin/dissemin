@@ -436,7 +436,6 @@ class Researcher(models.Model):
                 'department':self.department_id}
         return ResearcherDepartmentForm(initial=data)
 
-
 class Name(models.Model, BareName):
     first = models.CharField(max_length=MAX_NAME_LENGTH)
     last = models.CharField(max_length=MAX_NAME_LENGTH)
@@ -542,7 +541,7 @@ class Name(models.Model, BareName):
 # Papers matching one or more researchers
 class Paper(models.Model, BarePaper):
     title = models.CharField(max_length=1024)
-    fingerprint = models.CharField(max_length=64)
+    fingerprint = models.CharField(max_length=64, unique=True)
     date_last_ask = models.DateField(null=True)
     # Approximate publication date.
     # For instance if we only know it is in 2014 we'll put 2014-01-01

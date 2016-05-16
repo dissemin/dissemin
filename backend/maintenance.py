@@ -126,15 +126,14 @@ def recompute_fingerprints():
     those who end up having the same fingerprint
     """
     merged = 0
-    batchsize = 500
-    idx = 0
     pc = Paper.objects.all().count()
-    while idx < pc:
-        for p in Paper.objects.all()[idx:idx+batchsize]:
-            match = p.recompute_fingerprint_and_merge_if_needed()
-            if match is not None:
-                merged += 1
-        idx += batchsize
+    for idx, p in enumerate(Paper.objects.all()):
+        if idx % 100 == 0:
+            print idx
+        p.fingerprint = 'blah'
+        match = p.recompute_fingerprint_and_merge_if_needed()
+        if match is not None:
+            merged += 1
     print "%d papers merged" % merged
 
 def find_collisions():
