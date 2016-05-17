@@ -238,6 +238,10 @@ class ShallowerNameSimilarityTest(unittest.TestCase):
         self.assertAlmostEqual(
             shallower_name_similarity(('Juan Pablo','Corella'),('J. Pablo','Corella')), 1.0)
 
+    def test_unicode(self):
+        self.assertGreater(
+            shallower_name_similarity((u'Cl\u0102\u0160ment','Pit-Claudel'),('Clément','Pit-Claudel')), 0)
+
     def test_reverse(self):
         self.assertGreater(
                 shallower_name_similarity(('W. Timothy','Gowers'), ('Timothy','Gowers') ), 0)
