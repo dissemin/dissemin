@@ -166,8 +166,6 @@ class BarePaper(BareObject):
         super(BarePaper, self).__init__(*args, **kwargs)
         #! The authors: a list of :class:`BareName`
         self.bare_authors = []
-        #! The publications associated with this paper: a list of :class:`BarePublication` indexed by their dois
-        self.bare_publications = {}
         #! The OAI records associated with this paper: dict of :class:`BareOaiRecord` indexed by their identifiers
         self.bare_oairecords = {}
         #! If there are lots of authors, how many are we hiding?
@@ -180,8 +178,6 @@ class BarePaper(BareObject):
         """
         ist = super(BarePaper, cls).from_bare(bare_obj)
         ist.save()
-        for p in bare_obj.publications:
-            ist.add_publication(p)
         for r in bare_obj.oairecords:
             ist.add_oairecord(r)
         for idx, a in enumerate(bare_obj.authors):
@@ -250,14 +246,6 @@ class BarePaper(BareObject):
         return self.bare_authors
 
     @property
-    def publications(self):
-        """
-        The list of publications associated with this paper. They
-        can be arbitrary iterables of subclasses of :class:`BarePublication`.
-        """
-        return self.bare_publications.values()
-
-    @property
     def oairecords(self):
         """
         The list of OAI records associated with this paper. It can
@@ -290,17 +278,14 @@ class BarePaper(BareObject):
         """
         oairecord.check_mandatory_fields()
         self.bare_oairecords[oairecord.identifier] = oairecord
+        # update the publication date
+        self.pubdate = datetime_to_date(self.pubdate)
+        if oairecord.pubdate:
+            new_pubdate = datetime_to_date(oairecord.pubdate)
+            if new_pubdate > self.pubdate:
+                self.pubdate = new_pubdate
+
         return oairecord
-
-    def add_publication(self, publication):
-        """
-        Adds a new publication to the paper
-
-        :returns: the :class:`BarePublication` that was added (it can differ in subclasses)
-        """
-        publication.check_mandatory_fields()
-        self.bare_publications[publication.doi] = publication
-        return publication
 
     ### Generic properties that should not need to be reimplemented ###
     @property
@@ -409,15 +394,31 @@ class BarePaper(BareObject):
                 raise ValueError("Name referenced by author could not be found!")
 
     # Publications ---------------------------------------------
+
+    @property
+    def publications(self):
+        """
+        The OAI records with publication metadata (i.e. journal title and
+        publisher name).
+        These records can potentially be associated with publisher policies.
+        """
+        res = []
+        # we don't yield because some functions actually do len( ) on the
+        # output of this method…
+        for r in self.oairecords:
+            if r.has_publication_metadata():
+                res.append(r)
+        return res
     
     def first_publications(self):
         """
-        The list of the 3 first publications associated with this paper
-        (in most cases, that should return *all* publications, but in some nasty cases
-        many publications end up merged, and it is not very elegant to show all of them
+        The list of the 3 first OAI records with publication metadata
+        associated with this paper (in most cases, that should return *all*
+        such records, but in some nasty cases many publications end up
+        merged, and it is not very elegant to show all of them
         to the users).
         """
-        return self.publications[:3]
+        return list(self.publications)[:3]
 
     def publications_with_unique_publisher(self):
         """
@@ -594,7 +595,6 @@ class BarePaper(BareObject):
             'type': self.doctype,
             'date': self.pubdate.isoformat(),
             'authors': [a.json() for a in self.authors],
-            'publications': [p.json() for p in self.publications],
             'records': [r.json() for r in self.oairecords],
             'pdf_url': self.pdf_url,
             'classification': self.oa_status,
@@ -745,21 +745,12 @@ class BareName(BareObject):
                 'last':self.last,
                }
 
-
-class BarePublication(BareObject):
-    _bare_fields = [
-        'pubtype',
-        'title', # this is actually the *journal* title
-        'container',
-        'publisher_name',
-        'issue',
-        'volume',
-        'pages',
-        'pubdate',
-        'abstract',
-        'doi',
-        'pdf_url',
-        ]
+class BareOaiRecord(BareObject):
+    # refactoring:
+    # imported from Publication
+    # 'title' -> 'journal_title'
+    # 'abstract' -> description
+    # 'full_title' -> full_journal_title
 
     _bare_foreign_key_fields = [
         'journal', # expected to be an actual model instance
@@ -770,6 +761,41 @@ class BarePublication(BareObject):
         'pubtype',
         'title',
     ]
+
+
+    _bare_foreign_key_fields = [
+        'source', # expected to be an OaiSorce
+        'journal', # expected to be a Journal
+        'publisher', # expected to be a Publisher
+    ]
+    
+    _bare_fields = [
+        'identifier',
+        'splash_url',
+        'pdf_url',
+        'description',
+        'keywords',
+        'contributors',
+        'pubtype',
+        'priority',
+        'journal_title',
+        'container',
+        'publisher_name',
+        'issue',
+        'volume',
+        'pages',
+        'pubdate',
+        'doi',
+    ]
+
+    _mandatory_fields = [
+        'identifier',
+        'splash_url',
+        'source',
+    ]
+
+    def update_priority(self):
+        self.priority = self.source.priority
 
     def oa_status(self):
         """
@@ -784,15 +810,7 @@ class BarePublication(BareObject):
         else:
             return 'UNK'
 
-    def splash_url(self):
-        """
-        Returns the splash url (the DOI url) for that paper
-        (if a DOI is present, otherwise None)
-        """
-        if self.doi:
-            return 'http://dx.doi.org/'+self.doi
-
-    def full_title(self):
+    def full_journal_title(self):
         """
         The full title of the journal, otherwise the title present
         in CrossRef's metadata, which might be shorter.
@@ -813,59 +831,24 @@ class BarePublication(BareObject):
             return DummyPublisher(self.publisher_name)
         return DummyPublisher()
 
-    def __unicode__(self):
+    def has_publication_metadata(self):
         """
-        Title of the publication, followed by the details of the bibliographic reference.
+        Does this record tell where the paper is published?
+        If so we can use it to look up the policy in RoMEO.
         """
-        return self.title
+        return bool(self.journal_title and self.publisher_name)
 
-    def json(self):
+    def source_or_publisher(self):
         """
-        JSON representation of the publication, for dataset dumping purposes
+        Returns the name of the source to display.
+        If the record comes from a repository that we index
+        directly via OAI-PMH, we return the name of the source.
+        If the record has a publisher name, we return the
+        publisher name.
         """
-        result = {
-                'doi':self.doi,
-                'pdf_url':self.pdf_url,
-                'type':self.pubtype,
-                'publisher':self.publisher_name,
-                'journal':self.full_title(),
-                'container':self.container,
-                'issue':self.issue,
-                'volume':self.volume,
-                'pages':self.pages,
-                'abstract':self.abstract,
-               }
         if self.publisher:
-            result['policy'] = self.publisher.json()
-        if self.journal:
-            result['issn'] = self.journal.issn
-        return remove_nones(result)
-
-
-class BareOaiRecord(BareObject):
-    _bare_foreign_key_fields = [
-        'source', # expected to be an OaiSorce
-    ]
-    
-    _bare_fields = [
-        'identifier',
-        'splash_url',
-        'pdf_url',
-        'description',
-        'keywords',
-        'contributors',
-        'pubtype',
-        'priority',
-    ]
-
-    _mandatory_fields = [
-        'identifier',
-        'splash_url',
-        'source',
-    ]
-
-    def update_priority(self):
-        self.priority = self.source.priority
+            return self.publisher.name
+        return self.source.name
 
     def __unicode__(self):
         """
@@ -877,17 +860,27 @@ class BareOaiRecord(BareObject):
         """
         Dumps the OAI record as a JSON object (for dataset dumping purposes)
         """
-        return remove_nones({
+        result = {}
+        if self.publisher:
+            result['policy'] = self.publisher.json()
+        if self.journal:
+            result['issn'] = self.journal.issn
+        result.update({
                 'source':self.source.identifier,
                 'identifier':self.identifier,
                 'splash_url':self.splash_url,
                 'pdf_url':self.pdf_url,
+                'doi':self.doi,
                 'abstract':self.description,
                 'keywords':self.keywords,
                 'contributors':self.contributors,
                 'type':self.pubtype,
+                'publisher':self.publisher_name,
+                'journal':self.full_journal_title(),
+                'container':self.container,
+                'issue':self.issue,
+                'volume':self.volume,
+                'pages':self.pages,
                 })
-
-
-
+        return remove_nones(result)
 

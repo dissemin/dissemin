@@ -8,7 +8,7 @@
         <a href="{{ record.splash_url }}">
 	{% endif %}
     {% if record.priority > 0 %}
-        {{ record.source }}
+        {{ record.source_or_publisher }}
     {% else %}
         {% if record.splash_url %}
             [{{ record.splash_url |domain }}]
@@ -25,13 +25,5 @@
         <a href="http://doai.dissem.in/oai?verb=GetRecord&metadataPrefix=base_dc&identifier={{ record.identifier }}">Metadata</a>
     {% endif %}
 </p>
-{% endfor %}
-
-{% for publi in paper.first_publications %}
-<p><a href="{{ publi | doi_to_url }}">{{ publi.publisher.name|default:publi.publisher_name }} <img src="/static/extlink.png" alt="[^]" /></a> 
- {% if publi.pdf_url %}
-    | <a href="{{ publi.pdf_url }}" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-save"></span> PDF</a>
-    {% endif %}</p>
-
 {% endfor %}
 

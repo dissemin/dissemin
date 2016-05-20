@@ -33,11 +33,11 @@ from django.utils.http import urlencode
 from django.db import DataError
 
 from papers.errors import MetadataSourceException
-from papers.doi import to_doi
+from papers.doi import to_doi, doi_to_crossref_identifier, doi_to_url
 from papers.name import match_names, normalize_name_words, parse_comma_name
 from papers.utils import iunaccent, tolerant_datestamp_to_datetime, date_from_dateparts, affiliation_is_greater, jpath, validate_orcid, sanitize_html
-from papers.models import Publication, Paper
-from papers.baremodels import BarePublication, BarePaper
+from papers.models import Paper, OaiSource
+from papers.baremodels import BareOaiRecord, BarePaper
 from publishers.models import *
 
 from backend.papersource import PaperSource
@@ -85,6 +85,13 @@ crossref_timeout = 15
 max_crossref_batches_per_researcher = 7
 # Maximum number of non-trivially skipped records that do not match any researcher
 crossref_max_skipped_records = 50
+
+# Source object for Crossref's OAI records
+crossref_oai_source, _ = OaiSource.objects.get_or_create(identifier='crossref',
+        defaults={'name':'Crossref','oa':False,'priority':1,
+            'default_pubtype':'journal-article'})
+
+
 
 # Licenses considered OA, as stored by CrossRef
 def is_oa_license(license_url):
@@ -159,7 +166,7 @@ CROSSREF_PUBTYPE_ALIASES = {
 
 def create_publication(paper, metadata):
     """
-    Creates a BarePublication entry based on the DOI metadata (as returned by the JSON format
+    Creates a BareOaiRecord entry based on the DOI metadata (as returned by the JSON format
     from CrossRef).
 
     :param paper: the paper the publication object refers to
@@ -208,7 +215,9 @@ def _create_publication(paper, metadata):
     pdf_url = None
     licenses = set([(license or {}).get('URL') for license in metadata.get('license', [])])
     if any(map(is_oa_license, licenses)):
-        pdf_url = 'http://dx.doi.org/'+doi
+        pdf_url = doi_to_url(doi)
+
+    splash_url = doi_to_url(doi)
 
     # Lookup journal
     search_terms = {'jtitle':title}
@@ -223,18 +232,25 @@ def _create_publication(paper, metadata):
     else:
         publisher = fetch_publisher(publisher_name)
 
-    barepub = BarePublication(title=title, issue=issue, volume=volume,
-            pubdate=pubdate, paper=paper, pages=pages,
-            doi=doi, pubtype=pubtype, publisher_name=publisher_name,
-            journal=journal, publisher=publisher, pdf_url=pdf_url)
-    pub = paper.add_publication(barepub)
-    cur_pubdate = paper.pubdate
-    if type(cur_pubdate) != type(pubdate):
-        cur_pubdate = cur_pubdate.date()
-    if pubdate and pubdate > cur_pubdate:
-        paper.pubdate = pubdate
+    barepub = BareOaiRecord(
+            paper=paper,
+            journal_title=title,
+            issue=issue,
+            volume=volume,
+            pubdate=pubdate,
+            pages=pages,
+            doi=doi,
+            pubtype=pubtype,
+            publisher_name=publisher_name,
+            journal=journal,
+            publisher=publisher,
+            pdf_url=pdf_url,
+            splash_url=splash_url,
+            source=crossref_oai_source,
+            identifier=doi_to_crossref_identifier(doi))
+    rec = paper.add_oairecord(barepub)
     paper.update_availability()
-    return paper, pub
+    return paper, rec
 
 # Fetching utilities
 
