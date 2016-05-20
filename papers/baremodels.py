@@ -818,7 +818,7 @@ class BareOaiRecord(BareObject):
         if self.journal:
             return self.journal.title
         else:
-            return self.title
+            return self.journal_title
 
     def publisher_or_default(self):
         """
