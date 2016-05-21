@@ -1,2 +1,0 @@
-from dissemin.settings import *
-
