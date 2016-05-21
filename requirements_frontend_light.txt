@@ -25,3 +25,4 @@ djangorestframework
 django-rest-swagger
 jsonfield
 django-js-reverse
+titlecase

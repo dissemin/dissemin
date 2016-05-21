@@ -22,3 +22,4 @@ django-rest-swagger
 -e git://github.com/swordapp/python-client-sword2#egg=sword2
 jsonfield
 django-js-reverse
+titlecase

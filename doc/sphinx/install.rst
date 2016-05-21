@@ -58,7 +58,7 @@ Edit this file to change the following settings:
 Configure the university-specific settings
 -----------------------------------------
 
-Copy ``dissemin/university_template.py`` to ``dissemin/university.py``.
+Copy ``dissemin/settings/university_template.py`` to ``dissemin/settings/university.py``.
 Then, edit this file to change the following settings:
 
 - Set up the university branding, defining:
