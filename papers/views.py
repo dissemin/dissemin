@@ -314,7 +314,7 @@ class PaperView(generic.DetailView):
             if pk is not None:
                 paper = queryset.get(pk=pk)
             elif doi is not None:
-                paper = Paper.objects.get(oairecord_doi=doi)
+                paper = Paper.objects.get(oairecord__doi=doi)
             else:
                 raise AttributeError("Paper view expects a DOI or a pk")
         except ObjectDoesNotExist:

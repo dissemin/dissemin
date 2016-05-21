@@ -173,7 +173,7 @@ def refetch_publishers():
     """
     Tries to assign publishers to OaiRecords without Journals
     """
-    for p in OaiRecord.objects.filter(publisher__isnull=True):
+    for p in OaiRecord.objects.filter(publisher__isnull=True,publisher_name__isnull=False):
         publisher = fetch_publisher(p.publisher_name)
         if publisher:
             p.publisher = publisher

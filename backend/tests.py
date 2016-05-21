@@ -54,6 +54,10 @@ class RomeoTest(TestCase):
         self.assertIsInstance(journal, Journal)
         self.assertEqual(journal.issn, terms['issn'])
 
+    def test_fetch_publisher(self):
+        self.assertEqual(fetch_publisher(None),None)
+        # TODO: more tests!
+
     def test_unicode(self):
         terms = {'issn':'0375-0906'}
         journal = fetch_journal(terms)
