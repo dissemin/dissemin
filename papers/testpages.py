@@ -102,7 +102,7 @@ class PaperPagesTest(RenderingTest):
         self.checkPage('search', getargs={'name':self.r3.name_id})
 
     def test_search_department(self):
-        self.checkPage('search', getargs={'department':self.di})
+        self.checkPage('search', getargs={'department':self.di.pk})
 
     # ampersands not escaped in django bootstrap pagination, https://github.com/jmcclell/django-bootstrap-pagination/issues/41
 
