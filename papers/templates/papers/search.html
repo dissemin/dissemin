@@ -21,6 +21,7 @@
 {% endblock %}
 
 {% block jsScript %}
+{% if researcher %}
 $(function(){
        var config = {
          refreshURL: "{{ ajax_url }}",
@@ -44,6 +45,7 @@ $(function(){
        }
        init_paper_module(config)
     });
+{% endif %}
 {% endblock %}
 
 {% block details %}
