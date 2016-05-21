@@ -268,14 +268,16 @@ import sys
 
 import mock
 
-#from mock import Mock as MagicMock
-#from mock import patch
+
 
 class BetterMock(mock.Mock):
     @classmethod
     def __getattr__(cls, name):
         return BetterMock()
 #    __all__ = []
+
+# WARNING: Mock is currently disabled. enable it by uncommenting
+# the two lines below the list of mocked modules
 
 MOCK_MODULES = [
     'lxml', 'lxml.html', 'lxml.html.clean',
@@ -291,9 +293,11 @@ MOCK_MODULES = [
     'django.db.backends.postgresql_psycopg2.schema', 'django.db.backends.postgresql_psycopg2.versions',
     ]
 
-for mod_name in MOCK_MODULES:
-       sys.modules[mod_name] = BetterMock()
-#patch.dict('sys.modules', **{name:Mock() for name in MOCK_MODULES})
+# To enable mocking, uncomment the following lines
+
+#for mod_name in MOCK_MODULES:
+#       sys.modules[mod_name] = BetterMock()
+
 
 # Snippet to document Django models
 # https://djangosnippets.org/snippets/2533/
