@@ -103,6 +103,7 @@ urlpatterns = patterns('',
     url(r'^accounts/social/', include('allauth.socialaccount.urls')),
     # JavaScript i18n
     url(r'^jsi18n/$', javascript_catalog, js_info_dict, name='javascript-catalog'),
+    url(r'^lang/', include('django.conf.urls.i18n'), name='set_language'),
 # Remove this in production
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
