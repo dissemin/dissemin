@@ -147,7 +147,7 @@ def consolidate_paper(pk):
     try:
         p = Paper.objects.get(pk=pk)
         abstract = p.abstract or ''
-        for pub in p.publication_set.all():
+        for pub in p.publications:
             pub = consolidate_publication(pub)
             if pub.abstract and len(pub.abstract) > len(abstract):
                 abstract = pub.abstract

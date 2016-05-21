@@ -83,14 +83,14 @@ class PaperTest(django.test.TestCase):
         p = Paper.create_by_doi('10.1109/synasc.2010.88')
         p = Paper.from_bare(p)
         self.assertEqual(p.title, 'Monitoring and Support of Unreliable Services')
-        self.assertEqual(p.publication_set.all().get().doi, '10.1109/synasc.2010.88')
+        self.assertEqual(p.publications[0].doi, '10.1109/synasc.2010.88')
 
     def test_publication_pdf_url(self):
         # This paper is gold OA
         p = Paper.create_by_doi('10.1007/BF02702259')
         p = Paper.from_bare(p)
         # so the pdf_url of the publication should be set
-        self.assertEqual(p.publication_set.all().get().pdf_url.lower(), 'http://dx.doi.org/10.1007/BF02702259'.lower())
+        self.assertEqual(p.publications[0].pdf_url.lower(), 'http://dx.doi.org/10.1007/BF02702259'.lower())
 
     def test_create_no_authors(self):
         p = Paper.create_by_doi('10.1021/cen-v043n050.p033')

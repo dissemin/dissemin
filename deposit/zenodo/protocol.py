@@ -134,7 +134,7 @@ class ZenodoProtocol(RepositoryProtocol):
     def createMetadata(self, form):
         metadata = {}
         oairecords = self.paper.sorted_oai_records
-        publications = self.paper.publication_set.all()
+        publications = self.paper.publications
 
         # Document type
         dt = swordDocumentType(self.paper)

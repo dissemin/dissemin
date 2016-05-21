@@ -9,7 +9,7 @@ from collections import defaultdict
 # For graph output
 from unidecode import unidecode
 
-from papers.models import Author, Researcher, Paper, Publication, Name
+from papers.models import Author, Researcher, Paper, Name
 from papers.baremodels import BarePaper
 from papers.utils import nocomma
 

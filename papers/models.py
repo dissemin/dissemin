@@ -24,13 +24,12 @@ This module defines most of the models used in the platform.
 * :class:`Paper` represents a (deduplicated) paper.
    The sources it has been discovered from are witnessed
    by two types of records:
-    * :class:`Publication` instances are created by the CrossRef source
-      and indicate the DOI, the citation details (publisher, journal, pages, volume...)
-    * :class:`OaiRecord` instances are created by OAI-PMH sources, BASE or CORE,
-      and indicate the availability of the paper in repositories.
+    * :class:`OaiRecord` instances are created by OAI-PMH sources, or
+      metadata sources not originally in OAI-PMH but wrapped in this format
+      by proaixy. They indicate the availability of the paper in repositories.
       They link to an :class:`OaiSource` object that indicates what data source
       we have got this record from.
-   Multiple :class:`Publication` and :class:`OaiRecord` can (and typically are) associated
+   Multiple :class:`OaiRecord` can (and typically are) associated
    with a paper, when the metadata they contain yield the same paper fingerprint.
 
 * :class:`Researcher` represents a researcher profile (a physical person).
@@ -719,7 +718,7 @@ class Paper(models.Model, BarePaper):
     def update_availability(self):
         """
         Updates the :class:`Paper`'s own `pdf_url` field
-        based on its sources (both :class:`Publication` and :class:`OaiRecord`).
+        based on its sources (:class:`OaiRecord`).
         
         This uses a non-trivial logic, hence it is useful to keep this result cached
         in the database row.
@@ -872,7 +871,6 @@ class Paper(models.Model, BarePaper):
                 break
         
         OaiRecord.objects.filter(about=paper.pk).update(about=self.pk)
-        Publication.objects.filter(paper=paper.pk).update(paper=self.pk)
         Annotation.objects.filter(paper=paper.pk).update(paper=self.pk)
         self.update_author_names(map(lambda n: (n.first,n.last), paper.author_names()))
         if paper.last_annotation:
@@ -1001,35 +999,6 @@ class Author(models.Model, BareAuthor):
             except Researcher.DoesNotExist:
                 pass
 
-class Publication(models.Model):
-    """
-    A Publication links a DOI to a :class:`Paper`, together with
-    the associated bibliographic metadata, retrived by content negociation.
-    
-    It represents the publication of the paper in a given venue, and holds
-    its availability from the publisher (in the `pdf_url` field).
-    """
-    paper = models.ForeignKey(Paper)
-    pubtype = models.CharField(max_length=64, choices=PAPER_TYPE_CHOICES)
-
-    title = models.CharField(max_length=512) # this is actually the *journal* title
-    journal = models.ForeignKey(Journal, blank=True, null=True)
-    container = models.CharField(max_length=512, blank=True, null=True)
-
-    publisher = models.ForeignKey(Publisher, blank=True, null=True)
-    publisher_name = models.CharField(max_length=512, blank=True, null=True)
-
-    issue = models.CharField(max_length=64, blank=True, null=True)
-    volume = models.CharField(max_length=64, blank=True, null=True)
-    pages = models.CharField(max_length=64, blank=True, null=True)
-    pubdate = models.DateField(blank=True, null=True)
-    abstract = models.TextField(blank=True, null=True)
-
-    doi = models.CharField(max_length=1024, unique=True, blank=True, null=True) # in theory, there is no limit
-
-    pdf_url = models.URLField(max_length=2048, blank=True, null=True) # not null when we know the paper is available from them
-
-
 # Rough data extracted through OAI-PMH
 class OaiSource(models.Model):
     identifier = models.CharField(max_length=300, unique=True)
@@ -1045,7 +1014,6 @@ class OaiSource(models.Model):
 
     class Meta:
         verbose_name = "OAI source"
-
 
 class OaiRecord(models.Model, BareOaiRecord):
     source = models.ForeignKey(OaiSource)
@@ -1183,6 +1151,8 @@ class OaiRecord(models.Model, BareOaiRecord):
                 volume=kwargs.get('volume'),
                 pages=kwargs.get('pages'),
                 doi=kwargs.get('doi'),
+                publisher=kwargs.get('publisher'),
+                journal=kwargs.get('journal'),
                 )
         record.save()
 

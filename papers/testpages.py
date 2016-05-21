@@ -29,7 +29,7 @@ from django.core.urlresolvers import reverse
 from backend.tests import PrefilledTest
 from backend.crossref import CrossRefPaperSource
 from backend.oai import OaiPaperSource
-from papers.models import Publication
+from papers.models import OaiRecord
 
 # TODO TO BE TESTED
 
@@ -111,6 +111,6 @@ class PaperPagesTest(RenderingTest):
             self.assertTrue(not a.paper.is_orphan())
 
     def test_paper_by_doi(self):
-        publi = Publication.objects.all()[0]
+        publi = OaiRecord.objects.filter(doi__isnull=False)[0]
         self.checkPage('paper-doi', kwargs={'doi':publi.doi})
 

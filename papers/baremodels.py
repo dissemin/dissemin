@@ -479,11 +479,8 @@ class BarePaper(BareObject):
     # Abstract -------------------------------------------------
     @cached_property
     def abstract(self):
-        for rec in self.publication_set.all():
-            if rec.abstract:
-                return rec.abstract
         best_abstract = ''
-        for rec in self.oairecord_set.all():
+        for rec in self.oairecords:
             if rec.description and len(rec.description) > len(best_abstract):
                 best_abstract = rec.description
         return best_abstract
@@ -493,7 +490,7 @@ class BarePaper(BareObject):
     def update_availability(self):
         """
         Updates the :class:`BarePaper`'s own `pdf_url` field
-        based on its sources (both :class:`BarePublication` and :class:`BareOaiRecord`).
+        based on its sources (:class:`BareOaiRecord`).
         
         This uses a non-trivial logic, hence it is useful to keep this result cached
         in the database row.
@@ -548,7 +545,7 @@ class BarePaper(BareObject):
                 source_found = True
 
         # If this paper is not associated with any source, do not display it
-        # This happens when creating the associated OaiRecord or Publication
+        # This happens when creating the associated OaiRecord
         # failed due to some missing information.
         if not source_found:
             self.visibility = 'CANDIDATE'

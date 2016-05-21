@@ -164,14 +164,14 @@ class PublicationRelevance(TopicalRelevanceFeature):
         super(PublicationRelevance, self).__init__(lm, **kwargs)
 
     def feed(self, author, researcher):
-        for pub in author.paper.publication_set.all().select_related('journal'):
+        for pub in author.paper.publications:
             self.feedLine(pub.full_title(), researcher.department_id)
 
     def compute(self, author, researcher, explain=False):
         if researcher.department_id not in self.models:
             print("Warning, scoring a publication for an unknown department id "+str(researcher.department_id))
             return [0.]
-        titles = [pub.full_title() for pub in author.paper.publication_set.all().select_related('journal')]
+        titles = [pub.full_title() for pub in author.paper.publications]
         if titles:
             return [max(map(lambda t: self._normalizedWScore(t, researcher, explain), titles))]
         return [0.]

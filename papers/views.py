@@ -146,13 +146,13 @@ def searchView(request, **kwargs):
         context['name'] = name
     if 'journal' in args:
         journal = get_object_or_404(Journal, pk=args.get('journal'))
-        queryset = queryset.filter(publication__journal=journal)
+        queryset = queryset.filter(oairecord__journal=journal)
         search_description += _(' in ')+unicode(journal)
         context['journal'] = journal
         context['breadcrumbs'] = journal.breadcrumbs()
     elif 'publisher' in args:
         publisher = get_object_or_404(Publisher, pk=args.get('publisher'))
-        queryset = queryset.filter(publication__publisher=publisher)
+        queryset = queryset.filter(oairecord__publisher=publisher)
         search_description += _(' published by ')+unicode(publisher)
         head_search_description = unicode(publisher)
         context['publisher'] = publisher
@@ -309,19 +309,19 @@ class PaperView(generic.DetailView):
         doi = self.kwargs.get('doi', None)
         if doi:
             doi = to_doi(doi)
+
         try:
             if pk is not None:
-                paper = queryset.filter(pk=pk).get()
+                paper = queryset.get(pk=pk)
             elif doi is not None:
-                publi = Publication.objects.get(doi=doi)
-                paper = publi.paper
+                paper = Paper.objects.get(oairecord_doi=doi)
             else:
                 raise AttributeError("Paper view expects a DOI or a pk")
         except ObjectDoesNotExist:
             paper = Paper.create_by_doi(doi)
             if paper is None:
                 raise Http404(_("No %(verbose_name)s found matching the query") %
-                        {'verbose_name': Publication._meta.verbose_name})
+                        {'verbose_name': Paper._meta.verbose_name})
         return paper
             
 
