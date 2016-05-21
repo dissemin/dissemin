@@ -32,6 +32,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 from datetime import timedelta
+from django.utils.translation import ugettext_lazy as _
 
 try:
     from .secret import SECRET_KEY, DATABASES, EMAIL_HOST, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, EMAIL_USE_TLS, ROMEO_API_KEY, CORE_API_KEY, REDIS_HOST, REDIS_PORT, REDIS_DB, REDIS_PASSWORD
@@ -250,6 +251,10 @@ BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 43200}
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 LANGUAGE_CODE = 'en-us'
 POSSIBLE_LANGUAGE_CODES = ['en','fr']
+LANGUAGES = [
+    ('en', _('English')),
+    ('fr', _('French')),
+]
 TIME_ZONE = 'Europe/Paris'
 USE_I18N = True
 USE_L10N = True

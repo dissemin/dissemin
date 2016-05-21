@@ -630,12 +630,6 @@ h1#paperTitle {
     color: white;
 }
 
-#footer .linkblock
-{
-    display: inline-block;
-    width: 30%;
-}
-
 #footer a {
 	color:#fff;
 }

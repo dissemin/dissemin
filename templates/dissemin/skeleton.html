@@ -99,28 +99,44 @@
         <div class="push"></div>
         </div>
     </div>
-    <div id="footer">
-      <div id="subfooter">
-           <div class="linkblock">
+    <div id="footer" class="container">
+      <div id="subfooter" class="row">
+           <div class="col-xs-4 col-md-3">
                <ul>
                    <li><a href="{% url 'faq' %}">{% trans "FAQ" %}</a></li>
                    <li><a href="{% url 'feedback' %}">{% trans "Feedback" %}</a></li>
                    <li><a href="{% url 'tos' %}">{% trans "Terms of Service" %}</a></li>
                </ul>
            </div>
-           <div class="linkblock">
+           <div class="col-xs-4 col-md-3">
                <ul>
                    <li><a href="http://association.dissem.in/">{% trans "Who are we?" %}</a></li>
                    <li><a href="http://association.dissem.in/#dons">{% trans "Donate" %}</a></li>
                    <li><a href="{% url 'partners' %}">{% trans "Partners" %}</a></li>
                </ul>
            </div>
-           <div class="linkblock">
+           <div class="col-xs-4 col-md-3">
                <ul>
                    <li>hello@dissem.in</li>
                    <li><a href="https://twitter.com/disseminOA">@disseminOA</a></li>
                    <li><a href="https://github.com/wetneb/dissemin">GitHub</a></li>
                </ul>
+           </div>
+           <div class="col-xs-4 col-md-3">
+               <h5>{% trans "Change language" %} <i class=" glyphicon glyphicon-globe"></i></h5>
+               {% get_current_language as LANGUAGE_CODE %}
+               <form action="{% url 'set_language' %}" method="post" id="change-lang-form" class="form-inline">
+                   {% csrf_token %}
+                   <select name="language" id="set-language" class="form-control" onchange="$('#change-lang-form').submit();">
+                       {% get_available_languages as LANGUAGES %}
+                       {% get_language_info_list for LANGUAGES as languages %}
+                       {% for language in languages %}
+                           <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %}
+                                   selected="selected"{% endif %}>{{ language.name_local.title }}</option>
+                       {% endfor %}
+                   </select>
+                   <noscript><input type="submit" class="btn btn-default" value="{% trans "Apply" %}"/></noscript>
+               </form>
            </div>
       </div>
     </div>
