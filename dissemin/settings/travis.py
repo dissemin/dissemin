@@ -36,7 +36,7 @@ DATABASES = {
 }
 
 # Base domain of the ORCiD API.
-ORCID_BASE_DOMAIN = 'sandbox.orcid.org' # for the sandbox API
+ORCID_BASE_DOMAIN = 'orcid.org' # our test dump uses identifiers from the production
 
 # ORCiD provider configuration (sandbox)
 SOCIALACCOUNT_PROVIDERS = \
