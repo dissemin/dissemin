@@ -7,12 +7,12 @@
 # modify it under the terms of the GNU General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -44,6 +44,11 @@ try:
 except ImportError as e:
     raise RuntimeError('University-specific file is missing, did you forget to add a university.py in your settings folder?')
 
+try:
+    from .search_engine import HAYSTACK_CONNECTIONS
+except ImportError as e:
+    raise RuntimeError('Search-engine-specific file is missing, did you forget to add a search_engine.py in your settings folder?')
+
 # dirname(__file__) → repo/dissemin/settings/common.py
 # .. → repo/dissemin/settings
 # .. → repo/dissemin
@@ -54,7 +59,7 @@ BASE_DIR = os.path.dirname(os.path.join(os.path.dirname(__file__), '..', '..', '
 
 ### DOI proxy ###
 # The interface where to get DOI metadata from.
-# 
+#
 # This interface should at least support fetching metadata for one
 # single DOI, like this:
 # curl -LH "Accept: application/citeproc+json" http://DOI_PROXY_DOMAIN/10.1080/15568318.2012.660115
