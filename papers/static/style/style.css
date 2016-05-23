@@ -906,15 +906,6 @@ input[type=checkbox]:checked + div.publisherCriterionBox
     display: inline;
 }
 
-.form-group {
-    width: 100%;
-}
-
-.form-inline .form-group {
-    display: inline;
-    width: auto;
-}
-
 .editableform .form-control {
     width: 100%;
 }
@@ -952,12 +943,20 @@ input[type=checkbox]:checked + div.publisherCriterionBox
 }
 
 #lookUpColleague {
-    margin: auto;
-    max-width: 400px;
+    text-align: center;
+}
+
+#lookUpColleagueForm {
+    text-align: left;
+    display: inline-block;
 }
 
 #lookUpColleague .form-inline {
-    padding: 5px 0px;
+    padding: 5px 2px;
+}
+
+#lookUpColleague .form-group {
+    margin-bottom: 0;
 }
 
 .confirmSuggestion {
@@ -972,16 +971,11 @@ input[type=checkbox]:checked + div.publisherCriterionBox
     display: inline-block;
 }
 
-#nameGroup .form-group {
-    width:49%;
-    vertical-align: bottom;
-}
-
 #welcome .active {
     background-color: #D1D1D1;
 }
 
-#orcidGroup, #orcidGroup .form-group, #id_orcid, #nameGroup input {
+#orcidGroup, #orcidGroup .form-group, #id_orcid {
     width: 100%;
 }
 
