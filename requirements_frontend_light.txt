@@ -26,3 +26,5 @@ django-rest-swagger
 jsonfield
 django-js-reverse
 titlecase
+django-haystack
+django-widget-tweaks
