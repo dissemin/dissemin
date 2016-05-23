@@ -126,6 +126,8 @@ INSTALLED_APPS = (
     'solo',
     'rest_framework',
     'rest_framework_swagger',
+    'haystack',
+    'widget_tweaks',
 )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap'

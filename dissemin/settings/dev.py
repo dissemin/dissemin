@@ -41,6 +41,14 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # Relative path from the project to store the uploads
 MEDIA_ROOT = os.path.join(BASE_DIR, 'dissemin_media')
 
+# Haystack
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+    },
+}
+
 # Disable caching in dev
 TEMPLATES = [
     {

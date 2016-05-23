@@ -596,7 +596,7 @@ h1#paperTitle {
 	clear:both;
 }
 
-.unselectedCriterion, .selectedCriterion, .publisher
+.unselectedCriterion, .selectedCriterion, .publisher, .publisherCriterion
 {
     min-height: 50px;
     padding: 2px;
@@ -605,11 +605,29 @@ h1#paperTitle {
 	display:table;
 }
 
+.publisherCriterion
+{
+    width: 100%;
+    margin-bottom: 2px;
+}
+
+.publisherCriterion input[type=checkbox]
+{
+    display: none;
+}
+
+.publisherCriterionBox label
+{
+    display: table;
+    padding: 0px 10px;
+    margin: 0px;
+}
+
 .publisher {
 	clear: unset;
 }
 
-.unselectedCriterion .pubLogo, .selectedCriterion .pubLogo, .publisher .pubLogo
+.unselectedCriterion .pubLogo, .selectedCriterion .pubLogo, .publisher .pubLogo, .publisherCriterion .pubLogo
 {
     height: 50px;
     width: 37px;
@@ -619,10 +637,26 @@ h1#paperTitle {
 {
 }
 
+input[type=checkbox]:checked + div.publisherCriterionBox
+{
+    border: 2px solid #8ecc50;
+	margin: -2px;
+}
+
 .selectedCriterion
 {
     border: 2px solid #8ecc50;
 	margin: -2px;
+}
+
+.publisherCriterionBox
+{
+    min-height: 50px;
+    width: 100%;
+    padding: 2px;
+    margin: 0px;
+    display: table;
+    border-radius: 5px;
 }
 
 .selectedPubtype
