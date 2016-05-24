@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-21 18:21+0200\n"
-"PO-Revision-Date: 2016-05-15 23:52+0200\n"
-"Last-Translator: Ryan Lahfa <masterancpp@gmail.com>\n"
+"POT-Creation-Date: 2016-05-24 22:32+0200\n"
+"PO-Revision-Date: 2016-05-24 22:34+0200\n"
+"Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -163,11 +163,11 @@ msgstr "Creative Commons Attribution-NoDerivatives (Pas de travaux dérivés)"
 msgid "Other open license"
 msgstr "Autre licence libre"
 
-#: dissemin/settings/common.py:255
+#: dissemin/settings/common.py:262
 msgid "English"
 msgstr "Anglais"
 
-#: dissemin/settings/common.py:256
+#: dissemin/settings/common.py:263
 msgid "French"
 msgstr "Français"
 
@@ -248,11 +248,11 @@ msgid "Invalid ORCID identifier."
 msgstr "Identifiant ORCID invalide."
 
 #: papers/forms.py:39 papers/templates/papers/department.html:87
-#: papers/templates/papers/search.html:110
+#: papers/templates/papers/search.html:112
 msgid "Department"
 msgstr "Département"
 
-#: papers/forms.py:40 papers/templates/papers/search.html:51
+#: papers/forms.py:40 papers/templates/papers/search.html:53
 msgid "Researcher"
 msgstr "Personne"
 
@@ -322,8 +322,8 @@ msgid "Papers"
 msgstr "Papiers"
 
 #: papers/templates/papers/ajaxListPapers.html:21
-#: papers/templates/papers/search.html:275
-#: publishers/templates/publishers/list.html:80
+#: papers/templates/papers/search.html:277
+#: publishers/templates/publishers/list.html:117
 msgid "No production found."
 msgstr "Aucune production trouvée."
 
@@ -368,7 +368,7 @@ msgstr ""
 "tout problème à contact@dissem.in."
 
 #: papers/templates/papers/department.html:61
-#: publishers/templates/publishers/list.html:67
+#: publishers/templates/publishers/list.html:104
 #: publishers/templates/publishers/policy.html:123
 #, python-format
 msgid "(%(num_total)s paper)"
@@ -476,6 +476,8 @@ msgid "Lastname"
 msgstr "Nom"
 
 #: papers/templates/papers/index.html:143
+#: publishers/templates/publishers/list.html:32
+#: publishers/templates/publishers/list.html:48
 msgid "Search"
 msgstr "Recherche"
 
@@ -656,87 +658,85 @@ msgstr "Mettre en ligne"
 msgid " (metadata only)"
 msgstr " (notice)"
 
-#: papers/templates/papers/search.html:27
+#: papers/templates/papers/search.html:28
 msgid "Refreshing profile"
 msgstr "Mise à jour du profil"
 
-#: papers/templates/papers/search.html:56
+#: papers/templates/papers/search.html:58
 msgid "Is it you?"
 msgstr "Est-ce vous ?"
 
-#: papers/templates/papers/search.html:75
+#: papers/templates/papers/search.html:77
 #, python-format
 msgid "%(nb_publi)s publication"
 msgid_plural "%(nb_publi)s publications"
 msgstr[0] "%(nb_publi)s publication"
 msgstr[1] "%(nb_publi)s publications"
 
-#: papers/templates/papers/search.html:81
+#: papers/templates/papers/search.html:83
 msgid "Refresh"
 msgstr "Mettre à jour"
 
-#: papers/templates/papers/search.html:85
+#: papers/templates/papers/search.html:87
 msgid "Address:"
 msgstr "Adresse:"
 
-#: papers/templates/papers/search.html:88
+#: papers/templates/papers/search.html:90
 msgid "Names:"
 msgstr "Noms:"
 
-#: papers/templates/papers/search.html:99
+#: papers/templates/papers/search.html:101
 msgid "Refresh classification"
 msgstr "Rafraîchir la classification"
 
-#: papers/templates/papers/search.html:104
+#: papers/templates/papers/search.html:106
 msgid "Name"
 msgstr "Nom"
 
-#: papers/templates/papers/search.html:118
+#: papers/templates/papers/search.html:120
 msgid "Journal"
 msgstr "Revue"
 
-#: papers/templates/papers/search.html:121
+#: papers/templates/papers/search.html:123
 msgid "Published by"
 msgstr "Publiée par"
 
-#: papers/templates/papers/search.html:123
+#: papers/templates/papers/search.html:125
 msgid "ISSN:"
 msgstr "ISSN:"
 
-#: papers/templates/papers/search.html:130
-#: papers/templates/papers/search.html:144
+#: papers/templates/papers/search.html:132
+#: papers/templates/papers/search.html:146
 #, python-format
 msgid "<span id=\"nbPapersFound\">%(nb_results)s</span> papers found"
 msgstr "<span id=\"nbPapersFound\">%(nb_results)s</span> articles trouvés"
 
-#: papers/templates/papers/search.html:136
+#: papers/templates/papers/search.html:138
 #: publishers/templates/publishers/policy.html:41
 msgid "Publisher"
 msgstr "Maison d'édition"
 
-#: papers/templates/papers/search.html:151
-#: publishers/templates/publishers/list.html:24
+#: papers/templates/papers/search.html:153
 msgid "Refine search"
 msgstr "Affiner la recherche"
 
-#: papers/templates/papers/search.html:155
-#: publishers/templates/publishers/list.html:33
+#: papers/templates/papers/search.html:157
 msgid "By publisher policy:"
 msgstr "Par politique de publication"
 
-#: papers/templates/papers/search.html:170
+#: papers/templates/papers/search.html:172
 msgid "By full text availability:"
 msgstr "Par disponibilité du texte intégral"
 
-#: papers/templates/papers/search.html:183
+#: papers/templates/papers/search.html:185
 msgid "By document type:"
 msgstr "Par type de document:"
 
-#: papers/templates/papers/search.html:198
+#: papers/templates/papers/search.html:200
 msgid "By visibility:"
 msgstr "Par visibilité"
 
-#: papers/templates/papers/search.html:222
+#: papers/templates/papers/search.html:224
 msgid ""
 "This researcher is not associated with any ORCID profile. The publications "
 "below match their name but might be irrelevant."
@@ -744,7 +744,7 @@ msgstr ""
 "Ce chercheur n'est pas associé à un profil ORCID. Les publications ci-"
 "dessous correspondent au nom mais peuvent ne pas être pertinentes."
 
-#: papers/templates/papers/search.html:234
+#: papers/templates/papers/search.html:236
 msgid ""
 "Your ORCID profile does not reference any publication. You can add them "
 "easily using <a href=\"http://search.crossref.org\">CrossRef Metadata "
@@ -756,11 +756,11 @@ msgstr ""
 "Metadata Search</a>.<br /> Les publications ci-dessous correspondent à votre "
 "nom mais ne sont pas forcément pertinentes ou complètes."
 
-#: papers/templates/papers/search.html:242
+#: papers/templates/papers/search.html:244
 msgid "Update papers"
 msgstr "Met à jour les publications"
 
-#: papers/templates/papers/search.html:247
+#: papers/templates/papers/search.html:249
 msgid ""
 "This ORCID profile does not reference any publication. The ones shown below "
 "might be irrelevant or incomplete."
@@ -768,7 +768,7 @@ msgstr ""
 "Ce profil ORCID n'indique aucune publication. Celles indiquées ci-dessous "
 "correspondent au nom mais peuvent ne pas être pertinentes ou complètes."
 
-#: papers/templatetags/statuses.py:17
+#: papers/templatetags/statuses.py:17 papers/templatetags/statuses.py:72
 msgid "Unknown OA status"
 msgstr "État OA inconnu"
 
@@ -905,6 +905,26 @@ msgstr "Tous les papiers"
 msgid "No %(verbose_name)s found matching the query"
 msgstr "Aucun %(verbose_name)s ne correspond à la requête"
 
+#: publishers/forms.py:10
+msgid "popularity"
+msgstr "popularité"
+
+#: publishers/forms.py:11
+msgid "name"
+msgstr "nom"
+
+#: publishers/forms.py:14
+msgid "increasing"
+msgstr "croissant(e)"
+
+#: publishers/forms.py:15
+msgid "decreasing"
+msgstr "décroissant(e)"
+
+#: publishers/forms.py:19 publishers/templates/publishers/list.html:53
+msgid "Filter by publisher policy"
+msgstr "Filtrer selon la politique de publication"
+
 #: publishers/models.py:35
 msgid "Open access"
 msgstr "Accès libre"
@@ -966,7 +986,7 @@ msgstr "Ambigü"
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: publishers/models.py:53 publishers/views.py:54
+#: publishers/models.py:53 publishers/views.py:61
 msgid "Publishers"
 msgstr "Maisons d'édition"
 
@@ -1019,10 +1039,20 @@ msgstr ""
 msgid "published version"
 msgstr "version publiée"
 
-#: publishers/templates/publishers/list.html:27
+#: publishers/templates/publishers/list.html:36
 #, python-format
-msgid "%(nb_results)s publishers found"
-msgstr "%(nb_results)s maisons d'édition trouvées"
+msgid "%(counter)s publisher found"
+msgid_plural "%(counter)s publishers found"
+msgstr[0] "%(counter)s maison d'édition trouvée"
+msgstr[1] "%(counter)s maisons d'édition trouvées"
+
+#: publishers/templates/publishers/list.html:73
+msgid "Sort by"
+msgstr "Trier par"
+
+#: publishers/templates/publishers/list.html:82
+msgid "Data provided by"
+msgstr "Données fournies par"
 
 #: publishers/templates/publishers/policy.html:58
 msgid "Policy data provided by"
@@ -1703,7 +1733,7 @@ msgstr ""
 msgid "Back to top"
 msgstr "Revenir en haut"
 
-#: templates/dissemin/feedback.html:6 templates/dissemin/feedback.html.py:11
+#: templates/dissemin/feedback.html:6 templates/dissemin/feedback.html:11
 #: templates/dissemin/skeleton.html:107
 msgid "Feedback"
 msgstr "Réactions"
@@ -1776,7 +1806,7 @@ msgstr ""
 msgid "Forgot Password?"
 msgstr "Mot de passe oublié ?"
 
-#: templates/dissemin/partners.html:7 templates/dissemin/partners.html.py:12
+#: templates/dissemin/partners.html:7 templates/dissemin/partners.html:12
 #: templates/dissemin/skeleton.html:115
 msgid "Partners"
 msgstr "Partenaires"
@@ -1821,7 +1851,7 @@ msgstr "Faire une donation"
 msgid "Change language"
 msgstr "Changer la langue"
 
-#: templates/dissemin/skeleton.html:139
+#: templates/dissemin/skeleton.html:138
 msgid "Apply"
 msgstr "Appliquer"
 
