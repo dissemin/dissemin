@@ -37,7 +37,7 @@
 {% for a in paper.author_set.all %}
 {% if a.cluster %}
 <p>{{a}}: 
-<a href="{% url 'paper' a.cluster.paper.pk %}">{{ a.cluster.paper }}</a>
+<a href="{% url 'paper' a.cluster.paper.pk a.cluster.paper.title|slugify %}">{{ a.cluster.paper }}</a>
 ({{a.cluster.num_children}} authors, score {{a.cluster.cluster_relevance}})
 </p>
 {% endif %}
