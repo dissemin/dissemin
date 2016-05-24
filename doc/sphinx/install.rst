@@ -74,6 +74,18 @@ Then, edit this file to change the following settings:
 
 Now, your university settings are done.
 
+Install and configure the search engine
+---------------------------------------
+
+You can choose any of the search backends supported by Haystack.
+
+Whoosh is the simplest option, as it is written in Python and you can install it via PyPI::
+
+    pip install whoosh
+
+and finally just copy ``dissemin/settings/search_engine_template.py`` to
+``dissemin/settings/search_engine.py``.
+
 Configure the application for development or production
 -------------------------------------------------------
 
@@ -102,6 +114,15 @@ This is done by applying migrations::
 (this should be done every time the source code is updated).
 Then you can move on to :ref:`page-importresearchers`
 and :ref:`page-deploying`.
+
+Populate the search index
+-------------------------
+
+The search engine must be synchronized with the database manually using::
+
+    python manage.py update_index
+
+That command should be run regularly to index new entries.
 
 Social Authentication specific: Configuring sandbox ORCID
 ---------------------------------------------------------

@@ -4,6 +4,7 @@
 {% load bootstrap_pagination %}
 {% load statuses %}
 {% load i18n %}
+{% load widget_tweaks %}
 
 {% block headTitle %}
 {{ search_description }}
@@ -15,43 +16,79 @@
 
 {% block jsScript %}
 $(function(){
-    $('.logoHelpPopover').popover({trigger:"hover"});
+    $('.logoHelpPopover').popover({
+        trigger:"hover",
+        placement: function(){
+            return $(window).width() < 768 ? 'bottom' : 'left'
+        }
+    });
 });
 {% endblock %}
 
 {% block details %}
 
-<span class="detailsTitle">{% trans "Refine search" %}</span>
-<div class="detailsContent">
-    <p>
-    {% blocktrans trimmed %}
-        {{ nb_results }} publishers found
-    {% endblocktrans %}
-    </p>
-
 {% if not journal %}
-<span class="criterion">{% trans "By publisher policy:" %}</span>
-{% for st in oa_status_choices %}
-<div class="{% if st.0 == status %}selectedCriterion{% else %}unselectedCriterion{% endif %} logoHelpPopover"
-   data-content="{{ st.2 }}" rel="popover" data-placement="left">
-    <div class="pubLogo"><div class="pubLogoPic-{{ st.0 }}"><a href="{% url 'publishers' %}?{{ st.3.urlencode }}" class="filldiv"></a></div></div>
-    <div class="criterionItem"><a href="{% url 'publishers' %}?{{ st.3.urlencode }}">{{ st.1 }}</a>
-        {% if st.0 == status %}
-        <div class="criterionCross"><a href="{% url 'publishers' %}?{{ st.3.urlencode }}">x</a></div>
-        {% endif %}
-    </div>
+<div class="detailsTitle">
+    {% trans "Search" %}
 </div>
-{% endfor %}
+<div class="detailsContent">
+<p>
+{% blocktrans trimmed count counter=nb_results %}
+    {{ counter }} publisher found
+    {% plural %}
+    {{ counter }} publishers found
+{% endblocktrans %}
+</p>
+
+    <form method="get" action="{% url 'publishers' %}" id="searchPublishers">
+        <div class="form-group" id="searchPublishersName"><div class="input-group">
+            {{ form.q.errors }}
+            {% render_field form.q class="form-control" %}
+            <label class="input-group-btn">
+                <button type="submit" class="btn btn-default">{% trans "Search" %}</button>
+            </label>
+        </div></div>
+        <div class="form-group" id="searchPublishersOAStatus">
+            {{ form.oa_status.errors }}
+            <label for="{{ form.oa_status.id_for_label }}">{% trans "Filter by publisher policy" %}</label>
+            {% for checkbox in form.oa_status %}
+            {% with value=checkbox.choice_value %}
+            <div class="logoHelpPopover" data-content="{{ value|helptext_oa_status }}">
+            <div class="checkbox publisherCriterion">
+                {{ checkbox.tag }}
+                <div class="publisherCriterionBox">
+                <label for="{{ checkbox.id_for_label }}">
+                    <img alt="" src="{% static value|logo_oa_status %}" height="70px" width="52px" class="pubLogo publisherCriterionLogo">
+                    <span class="criterionItem">{{ checkbox.choice_label }}</span>
+                </label>
+                </div>
+            </div>
+            </div>
+            {% endwith %}
+            {% endfor %}
+        </div>
+        <div class="form-group form-inline" id="searchPublishersSortBy">
+            {{ form.reverse_order.errors }}
+            {{ form.sort_by.errors }}
+            <label for="{{ form.sort_by.id_for_label }}">{% trans "Sort by" %}</label>
+            <div>
+            {% render_field form.reverse_order class="form-control" %}
+            {% render_field form.sort_by class="form-control" %}
+            </div>
+        </div>
+    </form>
 {% endif %}
 
-<p class="sherpaAcknowledgement">Data provided by<br />
+<p class="sherpaAcknowledgement">{% trans "Data provided by" %}<br />
 <a href="http://www.sherpa.ac.uk/romeo/"><img src="{% static "img/sherpa-romeo.gif" %}" width="210px" alt="SHERPA/RoMEO" /></a></p>
 </div>
 {% endblock %}
 
 {% block lists %}
-<div class="searchPages">{% bootstrap_paginate search_results range=10 %}</div>
- {% for publisher in search_results %}
+ {% if paginator.num_pages > 1 %}
+ <div class="searchPages">{% bootstrap_paginate page_obj range=10 %}</div>
+ {% endif %}
+ {% for result in page_obj %}{% with publisher=result.object %}
  {% if forloop.first %}<ul class="withoutTriangles">{% endif %}
     <li>
         <div class="publisher">
@@ -76,11 +113,11 @@ $(function(){
         </div>
     </li>    
         {% if forloop.last %}</ul>{% endif %}
- {% empty %}
+ {% endwith %}{% empty %}
  <p>{% trans "No production found." %}</p>
  {% endfor %}
- {% if search_results.paginator.num_pages > 1 %}
- <div class="searchPages">{% bootstrap_paginate search_results range=10 %}</div>
+ {% if paginator.num_pages > 1 %}
+ <div class="searchPages">{% bootstrap_paginate page_obj range=10 %}</div>
  {% endif %}
 {% endblock %}
 

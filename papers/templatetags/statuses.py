@@ -66,5 +66,17 @@ def explain_policy_short_no_punc(status):
         }
     return mark_safe(explanations.get((status),_("policy unknown.")))
 
+@register.filter(is_safe=True)
+def helptext_oa_status(status):
+    OA_STATUS_ = dict([(s[0], s[2]) for s in OA_STATUS_CHOICES])
+    return OA_STATUS_.get(status, _('Unknown OA status'))
 
-
+@register.filter(is_safe=True)
+def logo_oa_status(status):
+    OA_STATUS_IMG = {
+        'OA': 'oa',
+        'OK': 'couldbe',
+        'NOK': 'closed',
+        'UNK': 'unk',
+    }
+    return 'img/logos/' + OA_STATUS_IMG[status] + '.png'
