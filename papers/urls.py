@@ -34,7 +34,7 @@ urlpatterns = patterns('',
         url(r'^researcher/(?P<researcher>\d+)/$', views.searchView, name='researcher'),
         url(r'^(?P<orcid>[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{3}[X0-9])/$', views.searchView, name='researcher-by-orcid'),
         url(r'^my-profile', views.myProfileView, name='my-profile'),
-        url(r'^paper/(?P<pk>\d+)/$', views.PaperView.as_view(), name='paper'),
+        url(r'^paper/(?P<pk>\d+)/$', views.PaperView.as_view()), # Deprecated URL
         url(r'^p/(?P<pk>\d+)/(?P<slug>[\w-]+)?$', views.PaperView.as_view(), name='paper'),
         url(r'^(?P<doi>10\..*)', views.PaperView.as_view(), name='paper-doi'),
         url(r'^mail_paper/(?P<pk>\d+)/$', views.mailPaperView, name='mail_paper'),

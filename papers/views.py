@@ -29,6 +29,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.views import login as auth_login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import user_passes_test
+from django.template.defaultfilters import slugify
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 from django.utils.decorators import method_decorator
@@ -323,7 +324,16 @@ class PaperView(generic.DetailView):
                 raise Http404(_("No %(verbose_name)s found matching the query") %
                         {'verbose_name': Paper._meta.verbose_name})
         return paper
-            
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        slug = slugify(self.object.title)
+        if kwargs.get('slug') == slug:
+            context = self.get_context_data(object=self.object, **kwargs)
+            return self.render_to_response(context)
+        else:
+            return redirect('paper', pk=self.object.pk, slug=slug)
+
 
     def get_context_data(self, **kwargs):
         context = super(PaperView, self).get_context_data(**kwargs)
