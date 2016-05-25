@@ -59,6 +59,22 @@ from allauth.socialaccount.signals import post_social_login
 
 import json
 
+class SlugDetailView(generic.DetailView):
+    """
+    A DetailView for objects with a slug field for human-friendly URLs:
+    redirects if the slug in the request does not match the object's slug.
+    """
+    view_name = None
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if kwargs.get('slug') == self.object.slug:
+            context = self.get_context_data(object=self.object, **kwargs)
+            return self.render_to_response(context)
+        else:
+            kwargs['slug'] = self.object.slug
+            return redirect(self.view_name, permanent=True, **kwargs)
+
 def fetch_on_orcid_login(sender, **kwargs):
     account = kwargs['sociallogin'].account
 
@@ -296,9 +312,10 @@ class InstitutionView(generic.DetailView):
         context['breadcrumbs'] = self.object.breadcrumbs()
         return context
 
-class PaperView(generic.DetailView):
+class PaperView(SlugDetailView):
     model = Paper
     template_name = 'papers/paper.html'
+    view_name = 'paper'
 
     def departments(self):
         paper = self.object
@@ -324,16 +341,6 @@ class PaperView(generic.DetailView):
                 raise Http404(_("No %(verbose_name)s found matching the query") %
                         {'verbose_name': Paper._meta.verbose_name})
         return paper
-
-    def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        slug = slugify(self.object.title)
-        if kwargs.get('slug') == slug:
-            context = self.get_context_data(object=self.object, **kwargs)
-            return self.render_to_response(context)
-        else:
-            return redirect('paper', pk=self.object.pk, slug=slug)
-
 
     def get_context_data(self, **kwargs):
         context = super(PaperView, self).get_context_data(**kwargs)

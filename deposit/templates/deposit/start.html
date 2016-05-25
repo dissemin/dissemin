@@ -162,7 +162,7 @@ $(function() {
                 $('#waitingArea,.submitDeposit').toggle();
             }).done(function(data) {
                 var uploadId = data['upload_id'];
-                window.location.replace('{% url 'paper' paper.pk paper.title|slugify %}?deposit='+uploadId);
+                window.location.replace('{% url 'paper' paper.pk paper.slug %}?deposit='+uploadId);
             });
     }
 {% endblock %}

@@ -18,7 +18,7 @@
         {% endif %}
     </p>
     <p class="paperTitle">
-    <a href="{% url 'paper' paper.id paper.title|slugify %}" class="paperItemTitle" data-pk="{{ paper.id }}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">{% autoescape off %}{{ paper.title }}{% endautoescape %}</a>
+    <a href="{% url 'paper' paper.id paper.slug %}" class="paperItemTitle" data-pk="{{ paper.id }}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">{% autoescape off %}{{ paper.title }}{% endautoescape %}</a>
     </p>
     
     <p class="pubRef">

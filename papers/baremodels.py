@@ -29,6 +29,7 @@ from __future__ import unicode_literals
 import hashlib, re
 from urllib import urlencode, quote # for the Google Scholar and CORE link
 
+from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
 from django.utils.functional import cached_property
 
@@ -159,6 +160,10 @@ class BarePaper(BareObject):
         'pubdate',
         'fingerprint',
     ]
+
+    @property
+    def slug(self):
+        return slugify(self.title)
 
     ### Creation
 
