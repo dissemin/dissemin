@@ -21,6 +21,7 @@
 
 from __future__ import unicode_literals
 from django.db import models
+from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import ugettext as __
 from django.utils.functional import cached_property
@@ -177,6 +178,9 @@ class Publisher(models.Model):
                 'published':self.pdfversion,
                 'romeo_id':self.romeo_id}
 
+    @property
+    def slug(self):
+        return slugify(self.name)
 
 # Journal data retrieved from RoMEO
 class Journal(models.Model):

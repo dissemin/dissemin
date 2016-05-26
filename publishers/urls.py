@@ -25,7 +25,8 @@ from django.conf.urls import patterns, include, url
 from publishers import views
 
 urlpatterns = patterns('',
-        url(r'^s$', views.PublishersView.as_view(), name='publishers'),
-        url(r'^/(?P<pk>\d+)/$', views.PublisherView.as_view(), name='publisher'),
+        url(r'^publishers$', views.PublishersView.as_view(), name='publishers'),
+        url(r'^publisher/(?P<pk>\d+)/$', views.PublisherView.as_view()), # Deprecated URL
+        url(r'^b/(?P<pk>\d+)/(?P<slug>[\w-]+)?$', views.PublisherView.as_view(), name='publisher'),
     )
 

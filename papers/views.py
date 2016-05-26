@@ -51,6 +51,7 @@ from notification.api import get_notifications
 from deposit.models import *
 
 from publishers.views import varyQueryArguments
+from publishers.views import SlugDetailView
 from publishers.models import OA_STATUS_CHOICES
 from statistics.models import COMBINED_STATUS_CHOICES, STATUS_QUERYSET_FILTER, PDF_STATUS_CHOICES, BareAccessStatistics
 from dissemin.settings import MEDIA_ROOT, UNIVERSITY_BRANDING, DEPOSIT_MAX_FILE_SIZE 
@@ -58,22 +59,6 @@ from dissemin.settings import MEDIA_ROOT, UNIVERSITY_BRANDING, DEPOSIT_MAX_FILE_
 from allauth.socialaccount.signals import post_social_login
 
 import json
-
-class SlugDetailView(generic.DetailView):
-    """
-    A DetailView for objects with a slug field for human-friendly URLs:
-    redirects if the slug in the request does not match the object's slug.
-    """
-    view_name = None
-
-    def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        if kwargs.get('slug') == self.object.slug:
-            context = self.get_context_data(object=self.object, **kwargs)
-            return self.render_to_response(context)
-        else:
-            kwargs['slug'] = self.object.slug
-            return redirect(self.view_name, permanent=True, **kwargs)
 
 def fetch_on_orcid_login(sender, **kwargs):
     account = kwargs['sociallogin'].account
