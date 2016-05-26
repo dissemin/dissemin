@@ -28,7 +28,7 @@
         <a href="{% url 'upload_paper' paper.pk %}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-open"></span> {% trans "Upload" %}</a> | 
         {% endif %}
 
-        {% with paper.publication_set.first as publi %}
+        {% with paper.publications.first as publi %}
             {% if publi %}
                 {{ publi | publication }}.<br />
             {% else %}

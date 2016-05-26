@@ -29,7 +29,7 @@ print "importing metadataFormatter.py"
 
 from lxml import etree
 
-from papers.models import Paper, Publication, Author, Researcher, Name, OaiRecord
+from papers.models import Paper, Author, Researcher, Name, OaiRecord
 
 XMLLANG_ATTRIB= '{http://www.w3.org/XML/1998/namespace}lang'
 

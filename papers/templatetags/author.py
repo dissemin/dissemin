@@ -25,7 +25,7 @@ def publication(publi):
     if publi.journal:
         result += '<emph>'+escape(unicode(publi.journal.title))+'</emph>'
     else:
-        result = escape(unicode(publi.title))
+        result = escape(unicode(publi.journal_title))
     if publi.issue or publi.volume or publi.pages or publi.pubdate:
         result += ', '
     if publi.issue:

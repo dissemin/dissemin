@@ -54,6 +54,10 @@ class RomeoTest(TestCase):
         self.assertIsInstance(journal, Journal)
         self.assertEqual(journal.issn, terms['issn'])
 
+    def test_fetch_publisher(self):
+        self.assertEqual(fetch_publisher(None),None)
+        # TODO: more tests!
+
     def test_unicode(self):
         terms = {'issn':'0375-0906'}
         journal = fetch_journal(terms)
@@ -171,8 +175,8 @@ class CrossRefIntegrationTest(PaperSourceTest):
 
     def check_papers(self, papers):
         # Check affiliations are kept
-        p = Publication.objects.get(doi='10.4204/eptcs.172.16')
-        self.assertEqual(p.paper.author_set.all()[0].affiliation, 'École Normale Supérieure, Paris')
+        p = OaiRecord.objects.get(doi='10.4204/eptcs.172.16')
+        self.assertEqual(p.about.author_set.all()[0].affiliation, 'École Normale Supérieure, Paris')
         # Check that each paper has a publication
         for p in papers:
             self.assertTrue(len(p.publications) > 0)
@@ -187,7 +191,7 @@ class CrossRefIntegrationTest(PaperSourceTest):
         self.source.fetch_and_save(r2, incremental=True)
 
         # This paper should be attributed
-        p = Paper.objects.get(publication__doi='10.1016/j.jcss.2015.04.004')
+        p = Paper.objects.get(oairecord__doi='10.1016/j.jcss.2015.04.004')
         self.assertEqual(p.authors[3].researcher, r2)
 
 
@@ -428,7 +432,7 @@ class MaintenanceTest(PrefilledTest):
         super(MaintenanceTest, self).setUpClass()
         self.crps = CrossRefPaperSource(self.ccf)
         self.crps.fetch_and_save(self.r2)
-        consolidate_paper(Publication.objects.get(doi='10.1021/cb400178m').paper_id)
+        consolidate_paper(OaiRecord.objects.get(doi='10.1021/cb400178m').about_id)
 
     def test_create_publisher_aliases(self):
         create_publisher_aliases()
@@ -465,20 +469,20 @@ class MaintenanceTest(PrefilledTest):
 
     def test_name_initial(self):
         n = self.r2.name
-        p = Publication.objects.get(doi="10.1002/ange.19941062339").paper
+        p = OaiRecord.objects.get(doi="10.1002/ange.19941062339").about
         n1 = p.author_set.get(position=0).name
         self.assertEqual(p.author_set.get(position=0).name, n)
 
     def test_merge_names(self):
         paper = self.crps.create_paper_by_doi("10.1002/anie.200800037")
         paper = Paper.from_bare(paper)
-        publi = Publication.objects.get(doi='10.1002/anie.200800037')
+        publi = OaiRecord.objects.get(doi='10.1002/anie.200800037')
 
         n = Name.lookup_name(('Isabelle','Autard'))
         n.save()
         merge_names(self.r1.name, n)
         self.assertEqual(Researcher.objects.get(pk=self.r1.pk).name, n)
-        p = Publication.objects.get(doi="10.1002/anie.200800037").paper
+        p = OaiRecord.objects.get(doi="10.1002/anie.200800037").about
         self.assertEqual(p.author_set.get(position=1).name, n)
 
     def test_update_paper_statuses(self):

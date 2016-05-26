@@ -513,6 +513,16 @@ def tolerant_datestamp_to_datetime(datestamp):
     return datetime.datetime(
         int(YYYY), int(MM), int(DD), int(hh), int(mm), int(ss))
 
+def datetime_to_date(dt):
+    """
+    Converts a datetime or date object to a date object.
+    """
+    if type(dt) == datetime.datetime:
+        return dt.date()
+    elif type(dt) == datetime.date:
+        return dt
+    raise ValueError("Invalid date or datetime")
+
 ### ORCiD utilities ###
 
 orcid_re = re.compile(r'^(http://orcid.org/)?([0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{3}[X0-9])$')

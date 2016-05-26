@@ -32,10 +32,6 @@ class OaiInline(admin.TabularInline):
     model = OaiRecord
     extra = 0
 
-class PublicationInline(admin.StackedInline):
-    model = Publication
-    extra = 0
-
 class PaperAdmin(admin.ModelAdmin):
     fields = ['title', 'pubdate', 'visibility', 'doctype', 'oa_status']
     list_display = ('title','pubdate','visibility','doctype', 'oa_status')

@@ -170,6 +170,9 @@ def fetch_journal(search_terms, matching_mode = 'exact'):
     return result
 
 def fetch_publisher(publisher_name):
+    if publisher_name is None:
+        return
+
     # First, let's see if we have a publisher with that name
     matching_publishers = Publisher.objects.filter(name=publisher_name)
     if len(matching_publishers) == 1:

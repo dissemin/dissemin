@@ -50,3 +50,20 @@ def to_doi(candidate):
         if openaire_match:
             return openaire_match.group(1).lower()
 
+def doi_to_url(doi):
+    """
+    Takes a (valid) doi and returns its resolving URL
+    >>> doi_to_url(u'10.1093/jhmas/xxxi.4.480')
+    u'https://doi.org/10.1093/jhmas/xxxi.4.480'
+    """
+    return 'https://doi.org/'+doi
+
+
+def doi_to_crossref_identifier(doi):
+    """
+    Returns an internal OAI identifier for the DOI.
+    >>> doi_to_crossref_identifier(u'10.1093/jhmas/xxxi.4.480')
+    u'oai:crossref.org:10.1093/jhmas/xxxi.4.480'
+    """
+    return 'oai:crossref.org:'+doi
+

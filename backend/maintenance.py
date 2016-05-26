@@ -107,12 +107,6 @@ def cleanup_abstracts():
     (this is normally done on creation of the papers, but
     not for old dumps of the database)
     """
-    for p in Publication.objects.all():
-        if p.abstract:
-            new_abstract = sanitize_html(p.abstract)
-            if new_abstract != p.abstract:
-                p.abstract = new_abstract
-                p.save()
     for p in OaiRecord.objects.all():
         if p.description:
             new_abstract = sanitize_html(p.description)
@@ -159,7 +153,7 @@ def find_collisions():
 def create_publisher_aliases(erase_existing=True):
     # TODO: this might be more efficient with aggregates?
     counts = defaultdict(int)
-    for p in Publication.objects.all():
+    for p in OaiRecord.objects.all():
         if p.publisher_id:
             pair = (p.publisher_name,p.publisher_id)
             counts[pair] += 1
@@ -177,9 +171,9 @@ def create_publisher_aliases(erase_existing=True):
 
 def refetch_publishers():
     """
-    Tries to assign publishers to Publications without Journals
+    Tries to assign publishers to OaiRecords without Journals
     """
-    for p in Publication.objects.filter(publisher__isnull=True):
+    for p in OaiRecord.objects.filter(publisher__isnull=True,publisher_name__isnull=False):
         publisher = fetch_publisher(p.publisher_name)
         if publisher:
             p.publisher = publisher
@@ -188,10 +182,10 @@ def refetch_publishers():
 
 def refetch_containers():
     """
-    Tries to assign containers to Publications without containers
+    Tries to assign containers to OaiRecords without containers
     """
     # TODO 
-    for p in Publication.objects.filter(container__isnull=True):
+    for p in OaiRecord.objects.filter(container__isnull=True):
         metadata = backend.crossref.fetch_metadata_by_DOI(p.doi)
         if metadata is None:
             continue

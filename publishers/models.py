@@ -115,7 +115,7 @@ class Publisher(models.Model):
         if not self.stats:
             self.stats = AccessStatistics.objects.create()
             self.save()
-        self.stats.update(get_model('papers', 'Paper').objects.filter(publication__publisher=self).distinct())
+        self.stats.update(get_model('papers', 'Paper').objects.filter(oairecord__publisher=self).distinct())
     def __unicode__(self):
         if not self.alias:
             return self.name
@@ -158,7 +158,7 @@ class Publisher(models.Model):
             return
         self.oa_status = new_oa_status
         self.save()
-        papers = get_model('papers', 'Paper').objects.filter(publication__publisher=self.pk)
+        papers = get_model('papers', 'Paper').objects.filter(oairecord__publisher=self.pk)
         for p in papers:
             p.update_availability()
             p.invalidate_cache()
@@ -190,7 +190,7 @@ class Journal(models.Model):
         if not self.stats:
             self.stats = AccessStatistics.objects.create()
             self.save()
-        self.stats.update(get_model('papers', 'Paper').objects.filter(publication__journal=self).distinct())
+        self.stats.update(get_model('papers', 'Paper').objects.filter(oairecord__journal=self).distinct())
 
     def breadcrumbs(self):
         return self.publisher.breadcrumbs()+[(unicode(self),'')]

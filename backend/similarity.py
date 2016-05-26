@@ -207,9 +207,9 @@ class PublicationSimilarity(SimilarityFeature):
         self.languageModel = languageModel
 
     def fetchData(self, author):
-        pubs = author.paper.publication_set.all()[:5]
-        titles = [a.full_title() for a in pubs]
-        for r in author.paper.oairecord_set.all()[:5]:
+        pubs = author.paper.publications[:5]
+        titles = [a.full_journal_title() for a in pubs]
+        for r in author.paper.oairecords[:5]:
             if r.keywords:
                 titles.append(r.keywords)
         titles = map(lambda t: set(filter_punctuation(tokenize(t))), titles)
