@@ -31,7 +31,8 @@ urlpatterns = patterns('',
         # Paper views
         url(r'^search/?$', views.searchView, name='search'),
         url(r'^ajax/search$', views.searchView, name='ajax-search'),
-        url(r'^researcher/(?P<researcher>\d+)/$', views.searchView, name='researcher'),
+        url(r'^r/(?P<researcher>\d+)/(?P<slug>[\w-]+)?$', views.searchView, name='researcher'),
+        url(r'^researcher/(?P<researcher>\d+)$', views.searchView), # Deprecated URL
         url(r'^(?P<orcid>[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{3}[X0-9])/$', views.searchView, name='researcher-by-orcid'),
         url(r'^my-profile', views.myProfileView, name='my-profile'),
         url(r'^paper/(?P<pk>\d+)/$', views.PaperView.as_view()), # Deprecated URL

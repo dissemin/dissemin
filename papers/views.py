@@ -142,6 +142,11 @@ def searchView(request, **kwargs):
                 researcher = Researcher.get_or_create_by_orcid(orcid)
                 researcher.init_from_orcid()
 
+        # Slug parameter is None if 'orcid' in args
+        if args.get('slug') != researcher.slug:
+            kwargs['slug'] = researcher.slug
+            return redirect('researcher', permanent=True, **kwargs)
+
         queryset = queryset.filter(author__researcher=researcher)
         search_description += _(' authored by ')+unicode(researcher)
         head_search_description = unicode(researcher)
