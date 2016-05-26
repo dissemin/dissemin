@@ -55,7 +55,7 @@ function addResearcher() {
     {% ifchanged person.name.first_letter %}
     <li class="membersLetter">{{ person.name.first_letter }}</li>
     {% endifchanged %}
-    <li><a href="{% url 'researcher' person.id %}">{{ person }}</a>
+    <li><a href="{{ person.url }}">{{ person }}</a>
            {% if person.stats %}
            <span class="numPapers">
                {% blocktrans trimmed count num_total=person.stats.num_tot %}

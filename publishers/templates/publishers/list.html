@@ -98,7 +98,7 @@ $(function(){
            </div>
            <div class="criterionItem">
                <span class="paperTitle">
-                   <a href="{% url 'publisher' publisher.pk %}">{{ publisher }}</a>
+                   <a href="{{ publisher.canonical_url }}">{{ publisher }}</a>
                        {% if publisher.stats %}
                            <span class="numPapers">
                                {% blocktrans trimmed count num_total=publisher.stats.num_tot %}

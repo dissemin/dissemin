@@ -182,6 +182,10 @@ class Publisher(models.Model):
     def slug(self):
         return slugify(self.name)
 
+    @property
+    def canonical_url(self):
+        return reverse('publisher', kwargs={'pk':self.pk, 'slug':self.slug})
+
 # Journal data retrieved from RoMEO
 class Journal(models.Model):
     title = models.CharField(max_length=256, db_index=True)

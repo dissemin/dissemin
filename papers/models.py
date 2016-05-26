@@ -251,10 +251,7 @@ class Researcher(models.Model):
 
     @property
     def url(self):
-        if self.orcid:
-            return reverse('researcher-by-orcid', args=[self.orcid])
-        else:
-            return reverse('researcher', kwargs={'researcher':self.pk, 'slug':self.slug})
+        return reverse('researcher', kwargs={'researcher':self.pk, 'slug':self.slug})
 
     @property
     def authors_by_year(self):
