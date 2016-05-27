@@ -1,18 +1,18 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
-from haystack.query import SearchQuerySet
+from haystack.query import EmptySearchQuerySet, SearchQuerySet
 from haystack.forms import SearchForm
 from publishers.models import OA_STATUS_CHOICES_WITHOUT_HELPTEXT as OA_STATUS
 
 
 class PublisherForm(SearchForm):
     SORT_CHOICES = [
-        ('POPULARITY', _('popularity')),
-        ('NAME', _('name')),
+        ('num_papers', _('popularity')),
+        ('name', _('name')),
     ]
     ORDER_CHOICES = [
-        (False, _('increasing')),
-        (True, _('decreasing')),
+        ('dec', _('decreasing')),
+        ('inc', _('increasing')),
     ]
     oa_status = forms.MultipleChoiceField(
         choices=OA_STATUS,
@@ -20,24 +20,24 @@ class PublisherForm(SearchForm):
         widget=forms.CheckboxSelectMultiple,
         required=False)
     sort_by = forms.ChoiceField(choices=SORT_CHOICES, required=False)
-    reverse_order = forms.BooleanField(widget=forms.Select(choices=ORDER_CHOICES), required=False)
+    reverse_order = forms.ChoiceField(choices=ORDER_CHOICES, required=False)
 
     def search(self):
         queryset = super(PublisherForm, self).search()
 
         if not self.is_valid():
-            return EmptyQuerySet()
+            return EmptySearchQuerySet()
 
         if self.cleaned_data['oa_status']:
             queryset = queryset.filter(oa_status__in=self.cleaned_data['oa_status'])
 
-        if self.cleaned_data['sort_by'] == 'NAME':
-            queryset = queryset.order_by('name')
-        else:
-            queryset = queryset.order_by('num_papers')
+        # Default ordering by decreasing popularity
+        order = self.cleaned_data['sort_by'] or 'num_papers'
+        reverse_order = self.cleaned_data['reverse_order'] != 'inc'
+        if reverse_order:
+            order = '-' + order
 
-        if self.cleaned_data['reverse_order']:
-            queryset = queryset.reverse()
+        queryset = queryset.order_by(order)
 
         return queryset
 
