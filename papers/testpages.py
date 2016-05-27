@@ -69,6 +69,9 @@ class RenderingTest(PrefilledTest):
     def checkPage(self, *args, **kwargs):
         self.checkHtml(self.getPage(*args, **kwargs))
 
+    def checkPermanentRedirect(self, *args, **kwargs):
+        self.assertEqual(self.getPage(*args, **kwargs).status_code, 301)
+
     def checkUrl(self, url):
         self.checkHtml(self.client.get(url))
 
@@ -86,17 +89,18 @@ class PaperPagesTest(RenderingTest):
         
     def test_researcher(self):
         for r in [self.r1, self.r2, self.r3, self.r4]:
-            self.checkPage('researcher', kwargs={'researcher':r.pk})
+            self.checkPage('researcher', kwargs={'researcher':r.pk, 'slug':r.slug})
             self.checkUrl(self.r4.url)
 
     def test_researcher_orcid(self):
-        self.checkPage('researcher-by-orcid', kwargs={'orcid':self.r4.orcid})
+        self.checkPermanentRedirect('researcher-by-orcid', kwargs={'orcid':self.r4.orcid})
 
     def test_search_no_parameters(self):
         self.checkPage('search')
 
     def test_search_researcher_pk(self):
-        self.checkPage('search', getargs={'researcher':self.r3.pk})
+        self.checkPermanentRedirect('search', getargs={'researcher':self.r3.pk})
+        self.checkPage('search', getargs={'researcher':self.r3.pk, 'slug':self.r3.slug})
 
     def test_search_name(self):
         self.checkPage('search', getargs={'name':self.r3.name_id})
@@ -108,12 +112,12 @@ class PaperPagesTest(RenderingTest):
 
     def test_paper(self):
         for a in self.r3.authors_by_year:
-            self.checkPage('paper', kwargs={'pk':a.paper_id})
+            self.checkPage('paper', kwargs={'pk':a.paper_id, 'slug':a.paper.slug})
             if a.paper.is_orphan() and a.paper.visibility == 'VISIBLE':
                 print a.paper
             self.assertTrue(not a.paper.is_orphan())
 
     def test_paper_by_doi(self):
         publi = OaiRecord.objects.filter(doi__isnull=False)[0]
-        self.checkPage('paper-doi', kwargs={'doi':publi.doi})
+        self.checkPermanentRedirect('paper-doi', kwargs={'doi':publi.doi})
 

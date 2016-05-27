@@ -29,7 +29,8 @@ class JournalPageTest(RenderingTest):
         journal.update_stats()
         journal.stats.num_tot = 1
         journal.stats.save()
-        r = self.getPage('publisher', kwargs={'pk':journal.publisher_id})
+        publisher = journal.publisher
+        r = self.getPage('publisher', kwargs={'pk':publisher.pk, 'slug':publisher.slug})
         print r.content
         self.checkHtml(r)
 
