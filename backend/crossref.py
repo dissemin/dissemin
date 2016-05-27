@@ -159,13 +159,10 @@ def get_publication_date(metadata):
     date = None
     if 'issued' in metadata:
         date = parse_crossref_date(metadata['issued'])
-    print date
     if date is None and 'created' in metadata:
         date = parse_crossref_date(metadata['created'])
-    print date
     if date is None and 'deposited' in metadata:
         date = parse_crossref_date(metadata['deposited'])
-    print date
     return date
 
 CROSSREF_PUBTYPE_ALIASES = {

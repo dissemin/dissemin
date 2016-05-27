@@ -20,6 +20,7 @@
 
 from __future__ import absolute_import, unicode_literals
 import re
+import datetime
 
 from celery import shared_task
 from celery.utils.log import get_task_logger
@@ -215,7 +216,7 @@ def remove_empty_profiles():
     """
     Deletes all researchers without papers and without affiliations
     """
-    date_cap = datetime.now()-timedelta(hours=2)
+    date_cap = datetime.datetime.now()-datetime.timedelta(hours=2)
     Researcher.objects.filter(department__isnull=True,
             stats__num_tot=0,last_harvest__lt=date_cap).delete()
 
