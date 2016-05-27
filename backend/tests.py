@@ -173,6 +173,11 @@ class CrossRefIntegrationTest(PaperSourceTest):
         super(CrossRefIntegrationTest, self).setUpClass()
         self.source = CrossRefPaperSource(self.ccf)
 
+    def test_empty_pubdate(self):
+        # This DOI has an empty 'issued' date
+        p = self.source.create_paper_by_doi('10.1007/978-1-4020-7884-2_13')
+        self.assertEqual(p.pubdate.year, 2006)
+
     def check_papers(self, papers):
         # Check affiliations are kept
         p = OaiRecord.objects.get(doi='10.4204/eptcs.172.16')
@@ -181,7 +186,7 @@ class CrossRefIntegrationTest(PaperSourceTest):
         for p in papers:
             self.assertTrue(len(p.publications) > 0)
 
-    def check_previously_present_papers_are_attributed(self):
+    def test_previously_present_papers_are_attributed(self):
         # Fetch papers from a researcher
         r = Researcher.create_by_name('Laurent','Bienvenu')
         self.source.fetch_and_save(r, incremental=True)

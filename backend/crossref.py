@@ -23,6 +23,7 @@ from __future__ import unicode_literals
 from urllib2 import URLError, HTTPError, build_opener
 from urllib import urlencode
 import json, requests
+import datetime
 from requests.exceptions import RequestException
 from unidecode import unidecode
 
@@ -139,6 +140,8 @@ def parse_crossref_date(date):
         try:
             for date in date['date-parts']:
                 ret = date_from_dateparts(date)
+                if ret == datetime.date(year=1970,month=1,day=1):
+                    ret = None
                 if ret is not None:
                     return ret
         except ValueError:
@@ -156,8 +159,13 @@ def get_publication_date(metadata):
     date = None
     if 'issued' in metadata:
         date = parse_crossref_date(metadata['issued'])
+    print date
+    if date is None and 'created' in metadata:
+        date = parse_crossref_date(metadata['created'])
+    print date
     if date is None and 'deposited' in metadata:
         date = parse_crossref_date(metadata['deposited'])
+    print date
     return date
 
 CROSSREF_PUBTYPE_ALIASES = {
