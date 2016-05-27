@@ -19,7 +19,7 @@
 
 from __future__ import unicode_literals
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views import generic
 from django.utils.translation import ugettext as _
@@ -48,6 +48,26 @@ def varyQueryArguments(key, args, possibleValues):
     return variants
 
 
+class SlugDetailView(generic.DetailView):
+    """
+    A DetailView for objects with a slug field for human-friendly URLs:
+    redirects if the slug in the request does not match the object's slug.
+    """
+    view_name = None
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if kwargs.get('slug') == self.object.slug:
+            context = self.get_context_data(object=self.object, **kwargs)
+            return self.render_to_response(context)
+        else:
+            kwargs['slug'] = self.object.slug
+            return self.redirect(**kwargs)
+
+    def redirect(self, **kwargs):
+        return redirect(self.view_name, permanent=True, **kwargs)
+
+
 class PublishersView(SearchView):
     paginate_by = NB_RESULTS_PER_PAGE
     template_name = 'publishers/list.html'
@@ -66,9 +86,11 @@ class PublishersView(SearchView):
         return context
 
 
-class PublisherView(generic.DetailView):
+class PublisherView(SlugDetailView):
     model = Publisher
     template_name = 'publishers/policy.html'
+    view_name = 'publisher'
+
     def get_context_data(self, **kwargs):
         context = super(PublisherView, self).get_context_data(**kwargs)
         context['oa_status_choices'] = OA_STATUS_CHOICES

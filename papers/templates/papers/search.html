@@ -120,7 +120,7 @@ $(function(){
 <span class="detailsTitle">{% trans "Journal" %}</span>
     <div class="detailsContent">
         <p id="detail-name">{{ journal }}</p>
-        <p>{% trans "Published by" %} <a href="{% url 'publisher' journal.publisher.id %}">{{ journal.publisher }}</a></p>
+        <p>{% trans "Published by" %} <a href="{{ publisher.canonical_url }}">{{ journal.publisher }}</a></p>
         {% if journal.issn %}
         <p>{% trans "ISSN:" %} {{ journal.issn }}</p>
         {% endif %}
@@ -137,7 +137,7 @@ $(function(){
 {% elif publisher %}
 <span class="detailsTitle">{% trans "Publisher" %}</span>
     <div class="detailsContent">
-        <p><a href="{% url 'publisher' publisher.pk %}">{{ publisher }}</a></p>
+        <p><a href="{{ publisher.canonical_url }}">{{ publisher }}</a></p>
         <div class="unselectedCriterion">
         <div class="pubLogo"><div class="pubLogoPic-{{ publisher.oa_status }}"></div></div>
         <div class="criterionItem">{{ publisher.oa_status |explain_oa_status}}</div>

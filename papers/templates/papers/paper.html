@@ -108,7 +108,7 @@ $(function(){
     {% with paper.publisher as psh %}
         <p><strong>{% trans "Publisher:" %}</strong>
         {% if psh.pk %}
-            <a href="{% url 'publisher' psh.pk %}">{{ psh }}</a></p>
+        <a href="{{ psh.canonical_url }}">{{ psh }}</a></p>
         {% else %}
             {{ psh }}</p>
         {% endif %}

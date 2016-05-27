@@ -11,7 +11,7 @@ register = template.Library()
 @register.filter(is_safe=True)
 def authorlink(author):
     if author.researcher_id:
-        return mark_safe('<a href="'+reverse('researcher', kwargs={'researcher':author.researcher_id})+'">'+escape(unicode(author.name))+'</a>')
+        return mark_safe('<a href="'+author.researcher.url+'">'+escape(unicode(author.name))+'</a>')
     else:
         return mark_safe(escape(unicode(author.name)))
 
@@ -19,7 +19,7 @@ def authorlink(author):
 def publication(publi):
     result = ''
     if publi.publisher_id:
-        result += '<a href="'+reverse('publisher', kwargs={'pk':publi.publisher_id})+'">'+escape(publi.publisher.name)+'</a>, '
+        result += '<a href="'+publi.publisher.url+'">'+escape(publi.publisher.name)+'</a>, '
     if publi.pubtype == 'book-chapter' and publi.journal and publi.container and publi.container != unicode(publi.journal):
         result += escape(unicode(publi.container))+', '
     if publi.journal:

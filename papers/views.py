@@ -29,6 +29,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.views import login as auth_login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import user_passes_test
+from django.template.defaultfilters import slugify
 from django.utils import timezone
 from django.utils.translation import ugettext as _
 from django.utils.decorators import method_decorator
@@ -50,6 +51,7 @@ from notification.api import get_notifications
 from deposit.models import *
 
 from publishers.views import varyQueryArguments
+from publishers.views import SlugDetailView
 from publishers.models import OA_STATUS_CHOICES
 from statistics.models import COMBINED_STATUS_CHOICES, STATUS_QUERYSET_FILTER, PDF_STATUS_CHOICES, BareAccessStatistics
 from dissemin.settings import MEDIA_ROOT, UNIVERSITY_BRANDING, DEPOSIT_MAX_FILE_SIZE 
@@ -124,6 +126,11 @@ def searchView(request, **kwargs):
                 orcid = validate_orcid(args.get('orcid'))
                 researcher = Researcher.get_or_create_by_orcid(orcid)
                 researcher.init_from_orcid()
+
+        # Slug parameter is None if 'orcid' in args
+        if args.get('slug') != researcher.slug:
+            return redirect('researcher', permanent=True,
+                            researcher=researcher.pk, slug=researcher.slug)
 
         queryset = queryset.filter(author__researcher=researcher)
         search_description += _(' authored by ')+unicode(researcher)
@@ -295,9 +302,10 @@ class InstitutionView(generic.DetailView):
         context['breadcrumbs'] = self.object.breadcrumbs()
         return context
 
-class PaperView(generic.DetailView):
+class PaperView(SlugDetailView):
     model = Paper
     template_name = 'papers/paper.html'
+    view_name = 'paper'
 
     def departments(self):
         paper = self.object
@@ -323,7 +331,6 @@ class PaperView(generic.DetailView):
                 raise Http404(_("No %(verbose_name)s found matching the query") %
                         {'verbose_name': Paper._meta.verbose_name})
         return paper
-            
 
     def get_context_data(self, **kwargs):
         context = super(PaperView, self).get_context_data(**kwargs)
@@ -337,6 +344,12 @@ class PaperView(generic.DetailView):
             except (TypeError, ValueError, DepositRecord.DoesNotExist):
                 pass
         return context
+
+    def redirect(self, **kwargs):
+        if 'pk' not in kwargs:
+            del kwargs['doi']
+            kwargs['pk'] = self.object.pk
+        return super(PaperView, self).redirect(**kwargs)
 
 
 @user_passes_test(is_admin)

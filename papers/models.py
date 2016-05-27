@@ -239,6 +239,10 @@ class Researcher(models.Model):
     #: Statistics of papers authored by this researcher
     stats = models.ForeignKey(AccessStatistics, null=True)
 
+    @property
+    def slug(self):
+        return slugify(self.name)
+
     def __unicode__(self):
         if self.name_id:
             return unicode(self.name)
@@ -247,10 +251,7 @@ class Researcher(models.Model):
 
     @property
     def url(self):
-        if self.orcid:
-            return reverse('researcher-by-orcid', args=[self.orcid])
-        else:
-            return reverse('researcher', args=[self.pk])
+        return reverse('researcher', kwargs={'researcher':self.pk, 'slug':self.slug})
 
     @property
     def authors_by_year(self):
