@@ -62,7 +62,10 @@ class SlugDetailView(generic.DetailView):
             return self.render_to_response(context)
         else:
             kwargs['slug'] = self.object.slug
-            return redirect(self.view_name, permanent=True, **kwargs)
+            return self.redirect(**kwargs)
+
+    def redirect(self, **kwargs):
+        return redirect(self.view_name, permanent=True, **kwargs)
 
 
 class PublishersView(SearchView):
