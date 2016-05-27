@@ -20,7 +20,7 @@
 
 from __future__ import unicode_literals
 
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseForbidden, Http404, JsonResponse
 import json, requests
@@ -165,12 +165,12 @@ def api_paper_query(request):
     return {'status':'ok','paper':p.json()}
 
 
-urlpatterns = patterns('',
+urlpatterns = [ 
     url(r'^', include(router.urls)),
 #    url(r'^paper/(?P<pk>\d+)/$', PaperView.as_view(), name='api-paper'),
     url(r'^(?P<doi>10\..*)$', api_paper_doi, name='api-paper-doi'),
     url(r'^query$', api_paper_query, name='api-paper-query'),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^docs/', include('rest_framework_swagger.urls')),
-)
+]
 

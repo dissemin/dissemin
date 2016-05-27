@@ -20,13 +20,13 @@
 
 from __future__ import unicode_literals
 
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
 from django.contrib.auth.views import login
 from django.contrib.auth.views import logout
 
 from papers import views, ajax
 
-urlpatterns = patterns('',
+urlpatterns = [
         url(r'^$', views.index, name='index'),
         # Paper views
         url(r'^search/?$', views.searchView, name='search'),
@@ -51,4 +51,4 @@ urlpatterns = patterns('',
         url(r'^api/', include('papers.api')),
         # Annotations (to be deleted)
         url(r'^annotations/$', views.AnnotationsView.as_view(), name='annotations'),
-)
+]
