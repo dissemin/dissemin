@@ -29,7 +29,6 @@ from backend.orcid import *
 from backend.oai import *
 from backend.tasks import *
 from backend.maintenance import *
-from backend.globals import *
 from papers.models import *
 from papers.baremodels import *
 from papers.errors import *
@@ -178,7 +177,7 @@ class CrossRefIntegrationTest(PaperSourceTest):
     def check_papers(self, papers):
         # Check affiliations are kept
         p = OaiRecord.objects.get(doi='10.4204/eptcs.172.16')
-        self.assertEqual(p.about.author_set.all()[0].affiliation, 'École Normale Supérieure, Paris')
+        self.assertEqual(p.about.authors[0].affiliation, 'École Normale Supérieure, Paris')
         # Check that each paper has a publication
         for p in papers:
             self.assertTrue(len(p.publications) > 0)
@@ -364,12 +363,12 @@ class OrcidIntegrationTest(PaperSourceTest):
     def check_papers(self, papers):
         p = Paper.objects.get(title='From Natural Language to RDF Graphs with Pregroups')
         p.check_authors()
-        author = p.author_set.get(position=0)
-        self.assertEqual(author.affiliation, self.r4.orcid)
+        author = p.authors[0]
+        self.assertEqual(author.orcid, self.r4.orcid)
         p = Paper.objects.get(title='Complexity of Grammar Induction for Quantum Types')
         p.check_authors()
-        author = p.author_set.get(position=0)
-        self.assertEqual(author.affiliation, self.r4.orcid)
+        author = p.authors[0]
+        self.assertEqual(author.orcid, self.r4.orcid)
 
 
 class PaperMethodsTest(PrefilledTest):
@@ -471,22 +470,10 @@ class MaintenanceTest(PrefilledTest):
     def test_name_initial(self):
         n = self.r2.name
         p = OaiRecord.objects.get(doi="10.1002/ange.19941062339").about
-        n1 = p.author_set.get(position=0).name
-        self.assertEqual(p.author_set.get(position=0).name, n)
+        n1 = p.authors[0].name
+        self.assertEqual((n1.first,n1.last), (n.first,n.last))
 
-    def test_merge_names(self):
-        paper = self.crps.create_paper_by_doi("10.1002/anie.200800037")
-        paper = Paper.from_bare(paper)
-        publi = OaiRecord.objects.get(doi='10.1002/anie.200800037')
-
-        n = Name.lookup_name(('Isabelle','Autard'))
-        n.save()
-        merge_names(self.r1.name, n)
-        self.assertEqual(Researcher.objects.get(pk=self.r1.pk).name, n)
-        p = OaiRecord.objects.get(doi="10.1002/anie.200800037").about
-        self.assertEqual(p.author_set.get(position=1).name, n)
-
-    def test_update_paper_statuses(self):
+     def test_update_paper_statuses(self):
         p = self.crps.create_paper_by_doi("10.1016/j.bmc.2005.06.035")
         p = Paper.from_bare(p)
         self.assertEqual(p.pdf_url, None)

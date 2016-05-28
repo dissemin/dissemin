@@ -31,11 +31,10 @@ class StatisticsTest(PrefilledTest):
     @classmethod
     def setUpClass(self):
         super(StatisticsTest, self).setUpClass()
-        self.ccf.clear()
-        crps = CrossRefPaperSource(self.ccf)
-        oai = OaiPaperSource(self.ccf)
-        crps.fetch_and_save(self.r2, incremental=True)
-        oai.fetch_and_save(self.r2, incremental=True)
+        crps = CrossRefPaperSource()
+        oai = OaiPaperSource()
+        crps.fetch_and_save(self.r2)
+        oai.fetch_and_save(self.r2)
 
     def validStats(self, stats):
         self.assertTrue(stats.check_values())
@@ -46,7 +45,7 @@ class StatisticsTest(PrefilledTest):
 
     def test_from_queryset(self):
         bare_stats = BareAccessStatistics.from_queryset(
-                Paper.objects.filter(author__researcher=self.r2).distinct())
+                Paper.objects.filter(authors_list__contains=[{'researcher_id':self.r2.id}]).distinct())
         stats = self.r2.stats
         self.assertEqual(bare_stats.num_oa, stats.num_oa)
         self.assertEqual(bare_stats.num_ok, stats.num_ok)

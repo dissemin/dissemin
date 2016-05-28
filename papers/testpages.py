@@ -111,11 +111,11 @@ class PaperPagesTest(RenderingTest):
     # ampersands not escaped in django bootstrap pagination, https://github.com/jmcclell/django-bootstrap-pagination/issues/41
 
     def test_paper(self):
-        for a in self.r3.authors_by_year:
-            self.checkPage('paper', kwargs={'pk':a.paper_id, 'slug':a.paper.slug})
-            if a.paper.is_orphan() and a.paper.visibility == 'VISIBLE':
-                print a.paper
-            self.assertTrue(not a.paper.is_orphan())
+        for p in self.r3.papersr:
+            self.checkPage('paper', kwargs={'pk':p.id, 'slug':p.slug})
+            if p.is_orphan() and p.visibility == 'VISIBLE':
+                print p
+            self.assertTrue(not p.is_orphan())
 
     def test_paper_by_doi(self):
         publi = OaiRecord.objects.filter(doi__isnull=False)[0]

@@ -27,7 +27,7 @@ from __future__ import unicode_literals
 
 from lxml import etree
 
-from papers.models import Paper, Author, Researcher, Name, OaiRecord
+from papers.models import Paper, Researcher, Name, OaiRecord
 from deposit.sword.metadataFormatter import MetadataFormatter, addChild
 
 

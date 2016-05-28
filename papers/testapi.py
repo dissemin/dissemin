@@ -32,7 +32,7 @@ from papers.models import Paper
 
 class PaperApiTest(JsonRenderingTest):
     def test_valid_paper(self):
-        p = self.r3.author_set.first().paper
+        p = self.r3.papers[0]
         parsed = self.checkJson(self.getPage('papers-detail', args=[p.pk]))
 
     def test_invalid_paper(self):

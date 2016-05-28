@@ -124,7 +124,8 @@ class Institution(models.Model):
         if not self.stats:
             self.stats = AccessStatistics.objects.create()
             self.save()
-        self.stats.update(Paper.objects.filter(author__researcher__department__institution=self).distinct())
+        # TODO do the sum of researchers stats!
+        assert(False)
 
     @property
     def object_id(self):
@@ -170,7 +171,8 @@ class Department(models.Model):
         if not self.stats:
             self.stats = AccessStatistics.objects.create()
             self.save()
-        self.stats.update(Paper.objects.filter(author__researcher__department=self).distinct())
+        # TODO do the sum of researcher's stats!
+        assert(False)
 
     @property
     def object_id(self):
@@ -799,7 +801,7 @@ class Paper(models.Model, BarePaper):
                 key = make_template_fragment_key('publiListItem', [self.pk, lang, rpk])
                 cache.delete(key)
 
-    def update_author_names(self, new_author_names, new_affiliations=None):
+    def update_author_names(self, new_author_names, new_affiliations=None, new_orcid=None):
         """
         Improves the current list of authors by considering a new list of author names.
         Missing authors are added, and names are unified.
@@ -812,6 +814,8 @@ class Paper(models.Model, BarePaper):
 
         if new_affiliations is None:
             new_affiliations = [None]*len(new_author_names)
+        if new_orcid is None:
+            new_orcid = [None]*len(new_author_names)
         assert len(new_author_names) == len(new_affiliations)
         if hasattr(self, 'authors'):
             del self.authors
@@ -823,45 +827,36 @@ class Paper(models.Model, BarePaper):
 
         old_names = map(lambda a: (a.name.first,a.name.last), old_authors)
         unified_names = unify_name_lists(old_names, new_author_names)
-        seen_old_names = set()
-        for i, (new_name, (idx,new_idx)) in enumerate(unified_names):
-            if idx is not None: # Updating the name of an existing author
-                seen_old_names.add(idx)
-                author = old_authors[idx]
-                if new_name is None:
-                    # Delete that author, it was pruned because it already
-                    # appears elsewhere
-                    if author.id is not None:
-                        author.delete()
-                    continue
-                fields = []
-                if idx != i:
-                    author.position = i
-                    fields.append('position')
-                if new_name != (author.name.first,author.name.last):
-                    name = Name.lookup_name(new_name)
-                    name.save()
-                    author.name = name
-                    fields.append('name')
-                if new_idx is not None and affiliation_is_greater(new_affiliations[new_idx], author.affiliation):
-                    author.affiliation = new_affiliations[new_idx]
-                    fields.append('affiliation')
-                    author.update_name_variants_if_needed()
-                if fields:
-                    author.name.save_if_not_saved()
-                    author.save()
-            elif new_name is not None: # Creating a new author
-                name = Name.lookup_name(new_name)
-                name.save()
-                author = Author(paper=self,name=name,position=i,affiliation=new_affiliations[new_idx])
-                author.save()
-        
-        # Just in case unify_name_lists pruned authors without telling us…
-        for idx, author in enumerate(old_authors):
-            if idx not in seen_old_names:
-                print("** Deleting author %d **" % author.pk)
-                author.delete()
 
+        new_authors = []
+        for new_name, (old_idx, new_idx) in unified_names:
+            if new_name is None:
+                # skip duplicate names        
+                continue
+            
+            # Create the author
+            author = None
+            if old_idx is not None:
+                # this name is associated with an existing author
+                # so we keep it
+                author = old_authors[old_idx]
+            else:
+                # create a new author
+                author = BareAuthor()
+
+            # update attributes
+            author.name = BareName(first=new_name[0],last=new_name[1])
+            if new_idx is not None and affiliation_is_greater(
+                new_affiliations[new_idx],
+                author.affiliation):
+                author.affiliation = new_affiliations[new_idx]
+            if new_idx and new_orcid[new_idx]:
+                author.orcid = new_orcid[new_idx]
+            
+            new_authors.append(author.serialize())
+        self.authors_list = new_authors
+        self.save(update_fields=['authors_list'])
+                
         # Invalidate our local cache
         if hasattr(self, 'authors'):
             del self.authors
@@ -888,6 +883,7 @@ class Paper(models.Model, BarePaper):
         
         OaiRecord.objects.filter(about=paper.pk).update(about=self.pk)
         Annotation.objects.filter(paper=paper.pk).update(paper=self.pk)
+        # TODO: this does not preserve ORCID ids or affiliations !!!
         self.update_author_names(map(lambda n: (n.first,n.last), paper.author_names()))
         if paper.last_annotation:
             self.last_annotation = None

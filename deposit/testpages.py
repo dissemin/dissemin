@@ -25,6 +25,7 @@ class DepositPagesTest(RenderingTest):
     @classmethod
     def setUpClass(self):
         super(DepositPagesTest, self).setUpClass()
+        crps = CrossRefPaperSource()
         crps.fetch_and_save(self.r3)
 
     def test_start_deposit_unauthenticated(self):

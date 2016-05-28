@@ -51,7 +51,7 @@ def cleanup_researchers():
     """
     deleted_count = 0
     for p in Researcher.objects.all():
-        nb_papers = Paper.objects.filter(author__researcher=p).count()
+        nb_papers = p.papers.count()
         if not nb_papers:
             deleted_count += 1
             p.delete()
@@ -60,16 +60,14 @@ def cleanup_researchers():
 
 def cleanup_names(dry_run = False):
     """
-    Deletes all the names that are not present in any paper.
+    Deletes all the names that are not linked to any researcher
     """
     deleted_count = 0
     for n in Name.objects.all():
         if NameVariant.objects.filter(name=n).count() == 0:
-            nb_papers = Author.objects.filter(name=n).count()
-            if not nb_papers:
-                deleted_count += 1
-                if not dry_run:
-                    n.delete()
+            deleted_count += 1
+            if not dry_run:
+                n.delete()
     print "Deleted "+str(deleted_count)+" names"
 
 def merge_names(fro,to):
@@ -78,7 +76,6 @@ def merge_names(fro,to):
     """
     Researcher.objects.filter(name_id=fro.id).update(name_id=to.id)
     NameVariant.objects.filter(name_id=fro.id).update(name_id=to.id)
-    Author.objects.filter(name_id=fro.id).update(name_id=to.id)
     fro.delete()
 
 def update_paper_statuses():
