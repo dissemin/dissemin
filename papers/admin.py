@@ -23,11 +23,6 @@ class NameInline(admin.TabularInline):
     model = Name
     extra = 0
 
-class AuthorInline(admin.TabularInline):
-    model = Author
-    extra = 0
-    raw_id_fields = ('paper','name')
-
 class OaiInline(admin.TabularInline):
     model = OaiRecord
     extra = 0

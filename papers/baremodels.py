@@ -32,6 +32,7 @@ from urllib import urlencode, quote # for the Google Scholar and CORE link
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
 from django.utils.functional import cached_property
+from django.apps import apps
 
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -231,7 +232,11 @@ class BarePaper(BareObject):
             a = BareAuthor()
             a.name = n
             if affiliations is not None:
-                a.affiliation = affiliations[idx]
+                orcid = validate_orcid(affiliations[idx])
+                if orcid:
+                    a.orcid = orcid
+                else:
+                    a.affiliation = affiliations[idx]
             p.add_author(a, position=idx)
 
         p.fingerprint = p.new_fingerprint()
@@ -646,6 +651,8 @@ class BareAuthor(BareObject):
     """
     _bare_fields = [
         'affiliation',
+        'orcid',
+        'researcher_id',
     ]
     _bare_foreign_key_fields = [
         'name',
@@ -654,14 +661,42 @@ class BareAuthor(BareObject):
         'name',
     ]
 
+    @cached_property
+    def _researcher_model(self):
+        return apps.get_app_config('papers').get_model('Researcher')
+
+    @cached_property
+    def researcher(self):
+        """
+        Returns the :class:`Researcher` object associated with
+        this author (if any)
+        """
+        if self.researcher_id:
+            return self._researcher_model.objects.get(id=self.researcher_id)
+
     @property
-    def orcid(self):
+    def is_known(self):
         """
-        Returns the ORCID associated to this author (if any).
-        Note that this can be null even if the author is associated with a researcher
-        that has an ORCID.
+        An author is "known" when it is linked to a known researcher.
         """
-        return validate_orcid(self.affiliation)
+        return self.researcher != None
+
+    def update_name_variants_if_needed(self, default_confidence=0.1):
+        """
+        Ensure that an author associated with an ORCID has a name
+        that is the variant of the researcher with that ORCID
+        """
+        orcid = self.orcid
+        if orcid:
+            try:
+                r = self._researcher_model.objects.get(orcid=orcid)
+                NameVariant=apps.get_app_config('papers').get_model('NameVariant')
+                nv = NameVariant.objects.get_or_create(
+                        researcher=r,
+                        name=self.name,
+                        defaults={'confidence':default_confidence})
+            except Researcher.DoesNotExist:
+                pass
 
 
     # Representations -------------------------------
@@ -671,9 +706,36 @@ class BareAuthor(BareObject):
         """
         return unicode(self.name)
 
+    def serialize(self):
+        """
+        JSON representation for storage in a JSON field
+        (internal, not to be used as the output of the API)
+        """
+        return {
+            'name':self.name.serialize(),
+            'orcid':self.orcid,
+            'affiliation':self.affiliation,
+            'researcher_id':self.researcher_id,
+            }
+    
+    @classmethod
+    def deserialize(cls, rep):
+        """
+        Creates an Author object out of a serialized representation.
+        """
+        name = BareName.deserialize(rep['name'])
+        inst = cls(
+            affiliation=rep.get('affiliation'),
+            orcid=rep.get('orcid'),
+            name=name,
+            researcher_id=rep.get('researcher_id'),
+            )
+        return inst
+
     def json(self):
         """
-        JSON representation of the author for dataset dumping purposes
+        JSON representation of the author for dataset dumping purposes,
+        or for the public API.
         """
         orcid_id = self.orcid
         affiliation = None
@@ -738,9 +800,31 @@ class BareName(BareObject):
         """
         return self.last[0]
 
+    def serialize(self):
+        """
+        JSON representation for internal storage purposes
+        """
+        return {
+            'first':self.first,
+            'last':self.last,
+            'full':self.full,
+            }
+
+    @classmethod
+    def deserialize(cls, rep):
+        """
+        Reconstruct an object based on its serialized representation
+        """
+        inst = cls(
+            first=rep['first'],
+            last=rep['last'],
+            full=rep['full'],
+            )
+        return inst
+
     def json(self):
         """
-        Returns a JSON representation of the name (for dataset dumping purposes)
+        Returns a JSON representation of the name (for external APIs)
         """
         return {
                 'first':self.first,

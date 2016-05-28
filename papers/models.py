@@ -31,6 +31,7 @@ This module defines most of the models used in the platform.
       we have got this record from.
    Multiple :class:`OaiRecord` can (and typically are) associated
    with a paper, when the metadata they contain yield the same paper fingerprint.
+   These records are stored inside the Paper object in a JSON field.
 
 * :class:`Researcher` represents a researcher profile (a physical person).
    This person has a cannonical :class:`Name`, but can also be associated with
@@ -58,6 +59,7 @@ from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
 from django.db.models import Q
 from django.db import DataError
+from django.contrib.postgres.fields import JSONField
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 from solo.models import SingletonModel
@@ -254,9 +256,14 @@ class Researcher(models.Model):
         return reverse('researcher', kwargs={'researcher':self.pk, 'slug':self.slug})
 
     @property
-    def authors_by_year(self):
-        """:py:class:`Author` objects for this researcher, filtered by decreasing publication date"""
-        return self.author_set.order_by('-paper__pubdate')
+    def papers(self):
+        """
+        :py:class:`Paper` objects for this researcher,
+        sorted by decreasing publication date
+        """
+        return Paper.objects.filter(
+                authors_list__contains=[{'researcher_id':self.id}]
+                          ).order_by('-pubdate')
 
     @property
     def name_variants(self):
@@ -546,6 +553,7 @@ class Paper(models.Model, BarePaper):
     # Approximate publication date.
     # For instance if we only know it is in 2014 we'll put 2014-01-01
     pubdate = models.DateField()
+    authors_list = JSONField()
 
     last_modified = models.DateField(auto_now=True)
     visibility = models.CharField(max_length=32, default='VISIBLE')
@@ -569,7 +577,7 @@ class Paper(models.Model, BarePaper):
         """
         The author sorted as they should appear. Their names are pre-fetched.
         """
-        return sorted(self.author_set.all().prefetch_related('name'), key=lambda r: r.position)
+        return map(BareAuthor.deserialize, self.authors_list)
 
     @property
     def publications(self):
@@ -590,15 +598,16 @@ class Paper(models.Model, BarePaper):
 
     def add_author(self, author, position=None):
         """
-        Add an author at the end of the authors list.
+        Add an author at the end of the authors list by default
+        or at the specified position.
+        
+        :param position: add the author at that index.
         """
-        author = Author.from_bare(author)
-        if position is not None:
-            author.position = position
-        else:
-            author.position = self.author_count
-        author.paper = self
-        author.save()
+        author_serialized = author.serialize()
+        if position is None:
+            position = len(self.authors_list)
+        self.authors_list.insert(position, author_serialized)
+        self.save(update_field='autors_list')
         return author
 
     def add_oairecord(self, oairecord):
@@ -921,84 +930,6 @@ class Paper(models.Model, BarePaper):
             result.append((unicode(first_researcher), reverse('researcher', args=[first_researcher.pk])))
         result.append((self.citation, reverse('paper', args=[self.pk])))
         return result
-
-# Researcher / Paper binary relation
-class Author(models.Model, BareAuthor):
-    paper = models.ForeignKey(Paper)
-    name = models.ForeignKey(Name)
-    position = models.IntegerField(default=0)
-    cluster = models.ForeignKey('Author', blank=True, null=True, related_name='clusterrel')
-    num_children = models.IntegerField(default=1)
-    cluster_relevance = models.FloatField(default=0) # TODO change this default to a negative value
-    similar = models.ForeignKey('Author', blank=True, null=True, related_name='similarrel')
-    researcher = models.ForeignKey(Researcher, blank=True, null=True, on_delete=models.SET_NULL)
-
-    affiliation = models.CharField(max_length=512, null=True, blank=True)
-
-    def get_cluster_id(self):
-        """
-        This is the "find" in "Union Find".
-        """
-        if not self.cluster:
-            return self.id
-        elif self.cluster_id != self.id: # it is supposed to be the case
-            result = self.cluster.get_cluster_id()
-            if result != self.cluster_id:
-                self.cluster_id = result
-                self.save(update_fields=['cluster_id'])
-            return result
-        raise ValueError('Invalid cluster id (loop)')
-
-    def get_cluster(self):
-        """
-        Helper returning the root of the cluster this author belongs to
-        """
-        i = self.get_cluster_id()
-        if i != self.id:
-            return Author.objects.get(pk=i)
-        return self
-
-    def merge_with(self, author):
-        """
-        Merges the clusters of two authors
-        """
-        cur_cluster_id = self.get_cluster_id()
-        if cur_cluster_id != self.id:
-            cur_cluster = Author.objects.get(pk=cur_cluster_id)
-        else:
-            cur_cluster = self
-        new_cluster_id = author.get_cluster_id()
-        if cur_cluster_id != new_cluster_id:
-            new_cluster = Author.objects.get(pk=new_cluster_id)
-            cur_cluster.cluster = new_cluster
-            cur_cluster.save(update_fields=['cluster'])
-            new_cluster.num_children += cur_cluster.num_children
-            if not new_cluster.researcher and cur_cluster.researcher:
-                new_cluster.researcher = cur_cluster.researcher
-            new_cluster.save(update_fields=['num_children', 'researcher'])
-
-    @property
-    def is_known(self):
-        """
-        An author is "known" when it is linked to a known researcher.
-        """
-        return self.researcher != None
-
-    def update_name_variants_if_needed(self, default_confidence=0.1):
-        """
-        Ensure that an author associated with an ORCID has a name
-        that is the variant of the researcher with that ORCID
-        """
-        orcid = self.orcid
-        if orcid:
-            try:
-                r = Researcher.objects.get(orcid=orcid)
-                nv = NameVariant.objects.get_or_create(
-                        researcher=r,
-                        name=self.name,
-                        defaults={'confidence':default_confidence})
-            except Researcher.DoesNotExist:
-                pass
 
 # Rough data extracted through OAI-PMH
 class OaiSource(models.Model):

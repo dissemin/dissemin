@@ -132,7 +132,8 @@ def searchView(request, **kwargs):
             return redirect('researcher', permanent=True,
                             researcher=researcher.pk, slug=researcher.slug)
 
-        queryset = queryset.filter(author__researcher=researcher)
+        queryset =queryset.filter(
+            authors_list__contains=[{'researcher_id':researcher.id}])
         search_description += _(' authored by ')+unicode(researcher)
         head_search_description = unicode(researcher)
         context['researcher'] = researcher
