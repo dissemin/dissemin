@@ -553,7 +553,7 @@ class Paper(models.Model, BarePaper):
     # Approximate publication date.
     # For instance if we only know it is in 2014 we'll put 2014-01-01
     pubdate = models.DateField()
-    authors_list = JSONField()
+    authors_list = JSONField(default=list)
 
     last_modified = models.DateField(auto_now=True)
     visibility = models.CharField(max_length=32, default='VISIBLE')

@@ -16,7 +16,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='paper',
             name='authors_list',
-            field=django.contrib.postgres.fields.jsonb.JSONField(default=dict),
-            preserve_default=False,
+            field=django.contrib.postgres.fields.jsonb.JSONField(default=list),
         ),
     ]
