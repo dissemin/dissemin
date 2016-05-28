@@ -607,7 +607,7 @@ class Paper(models.Model, BarePaper):
         if position is None:
             position = len(self.authors_list)
         self.authors_list.insert(position, author_serialized)
-        self.save(update_field='autors_list')
+        self.save(update_fields=['authors_list'])
         return author
 
     def add_oairecord(self, oairecord):
