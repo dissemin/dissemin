@@ -27,7 +27,6 @@ from papers.models import *
 import papers.doi
 import datetime
 import json
-from backend.globals import get_ccf
 
 class ResearcherTest(django.test.TestCase):
     def test_creation(self):
@@ -77,7 +76,6 @@ class PaperTest(django.test.TestCase):
     @classmethod
     def setUpClass(self):
         super(PaperTest, self).setUpClass()
-        self.ccf = get_ccf()
 
     def test_create_by_doi(self):
         p = Paper.create_by_doi('10.1109/synasc.2010.88')

@@ -32,12 +32,7 @@ class PaperSource(object):
     def __init__(self, oai=None, max_results=None):
         """
         A PaperSource can be used without saving the papers
-        to the database, using :func:`fetch_bare`. In this case,
-        it is not necessary to provide a Clustering Context Factory (ccf).
-        This object is only required when the source is used to create
-        papers in the database, using `fetch_and save`.
-        It allows us to cluster incoming papers and
-        assign them to researchers.
+        to the database, using :func:`fetch_bare`.
 
         If an OAI interface is provided, this allows us to check full
         text availability as the papers are fetched. This should be used
@@ -80,7 +75,7 @@ class PaperSource(object):
         """
         count = 0
         for p in self.fetch_bare(researcher):
-            paper = self.save_paper(p, researcher, incremental)
+            paper = self.save_paper(p, researcher)
             if self.max_results is not None and count >= self.max_results:
                 break
 

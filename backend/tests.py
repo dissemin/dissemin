@@ -105,16 +105,13 @@ class PrefilledTest(TestCase):
         self.r5 = get_by_name('Terence', 'Tao')
         self.hal = OaiSource.objects.get(identifier='hal')
         self.arxiv = OaiSource.objects.get(identifier='arxiv')
-        self.ccf = get_ccf()
 
     @classmethod
     def tearDownClass(self):
         name_lookup_cache.prune()
-        self.ccf.clear()
 
     def tearDown(self):
         name_lookup_cache.prune()
-        self.ccf.clear()
 
 def check_paper(asserter, paper):
     """
@@ -164,14 +161,14 @@ class CrossRefOaiTest(PaperSourceTest):
     @classmethod
     def setUpClass(self):
         super(CrossRefOaiTest, self).setUpClass()
-        self.oaisource = OaiPaperSource(self.ccf) 
-        self.source = CrossRefPaperSource(self.ccf, oai=self.oaisource)
+        self.oaisource = OaiPaperSource() 
+        self.source = CrossRefPaperSource(oai=self.oaisource)
 
 class CrossRefIntegrationTest(PaperSourceTest):
     @classmethod
     def setUpClass(self):
         super(CrossRefIntegrationTest, self).setUpClass()
-        self.source = CrossRefPaperSource(self.ccf)
+        self.source = CrossRefPaperSource()
 
     def test_empty_pubdate(self):
         # This DOI has an empty 'issued' date
@@ -189,11 +186,11 @@ class CrossRefIntegrationTest(PaperSourceTest):
     def test_previously_present_papers_are_attributed(self):
         # Fetch papers from a researcher
         r = Researcher.create_by_name('Laurent','Bienvenu')
-        self.source.fetch_and_save(r, incremental=True)
+        self.source.fetch_and_save(r)
 
         # Now fetch a coauthor of him
         r2 = Researcher.get_or_create_by_orcid('0000-0003-1698-5150')
-        self.source.fetch_and_save(r2, incremental=True)
+        self.source.fetch_and_save(r2)
 
         # This paper should be attributed
         p = Paper.objects.get(oairecord__doi='10.1016/j.jcss.2015.04.004')
@@ -331,7 +328,7 @@ class OaiTest(PaperSourceTest):
     @classmethod
     def setUpClass(self):
         super(OaiTest, self).setUpClass()
-        self.source = OaiPaperSource(self.ccf)
+        self.source = OaiPaperSource()
 
     def test_signature(self):
         for idx, p in enumerate(self.source.fetch_records_for_name(self.r3.name, signature=True)):
@@ -362,7 +359,7 @@ class OrcidIntegrationTest(PaperSourceTest):
     @classmethod
     def setUpClass(self):
         super(OrcidIntegrationTest, self).setUpClass()
-        self.source = OrcidPaperSource(self.ccf)
+        self.source = OrcidPaperSource()
 
     def check_papers(self, papers):
         p = Paper.objects.get(title='From Natural Language to RDF Graphs with Pregroups')
@@ -393,7 +390,6 @@ class PaperMethodsTest(PrefilledTest):
                 ]:
             paper = Paper.get_or_create('This is a test paper',
                     map(Name.lookup_name, old_author_names), datetime.date(year=2015,month=04,day=05))
-            self.ccf.commitThemAll()
             paper.update_author_names(new_author_names)
             self.assertEqual(paper.bare_author_names(), final)
 
@@ -435,7 +431,7 @@ class MaintenanceTest(PrefilledTest):
     @classmethod
     def setUpClass(self):
         super(MaintenanceTest, self).setUpClass()
-        self.crps = CrossRefPaperSource(self.ccf)
+        self.crps = CrossRefPaperSource()
         self.crps.fetch_and_save(self.r2)
         consolidate_paper(OaiRecord.objects.get(doi='10.1021/cb400178m').about_id)
 
@@ -504,20 +500,8 @@ class MaintenanceTest(PrefilledTest):
         self.assertEqual(Paper.objects.get(pk=p.pk).pdf_url, pdf_url)
 
     def test_cleanup(self):
-        oaips = OaiPaperSource(self.ccf)
+        oaips = OaiPaperSource()
         oaips.fetch_and_save(self.r3)
         cleanup_titles()
         cleanup_abstracts()
-
-class ClusteringTest(PrefilledTest):
-    def test_reclusterbatch(self):
-        p = BarePaper.create('test paper', [Name.lookup_name(('Random','Guy'))],
-                datetime.datetime.now())
-        p = Paper.from_bare(p)
-        a = p.author_set.all().first()
-        a.researcher = self.r4
-        a.save()
-        self.ccf.reclusterBatch(self.r4)
-        a = Author.objects.get(pk=a.pk)
-        self.assertEqual(a.researcher, None)
 

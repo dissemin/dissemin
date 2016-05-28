@@ -335,7 +335,7 @@ class Researcher(models.Model):
         if not self.stats:
             self.stats = AccessStatistics.objects.create()
             self.save()
-        self.stats.update(Paper.objects.filter(author__researcher=self).distinct())
+        self.stats.update(self.papers)
 
     def fetch_everything(self):
         self.harvester = send_task('fetch_everything_for_researcher', [], {'pk':self.id}).id
@@ -788,7 +788,13 @@ class Paper(models.Model, BarePaper):
         """
         Invalidate the HTML cache for all the publications of this researcher.
         """
-        for rpk in [a.researcher_id for a in self.author_set.filter(researcher_id__isnull=False)]+[None]:
+        for a in self.authors+[None]:
+            rpk = None
+            if a:
+                if a.researcher_id is None:
+                    continue
+                else:
+                    rpk = a.researcher_id 
             for lang in POSSIBLE_LANGUAGE_CODES:
                 key = make_template_fragment_key('publiListItem', [self.pk, lang, rpk])
                 cache.delete(key)

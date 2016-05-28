@@ -37,7 +37,6 @@ from datetime import datetime, timedelta
 from papers.models import *
 from papers.doi import to_doi
 
-from backend.globals import get_ccf
 from backend.crossref import *
 from backend.oai import *
 from backend.orcid import *
@@ -68,12 +67,10 @@ def init_profile_from_orcid(pk):
     can see their ORCID publications quickly.
     """
     
-    ccf = get_ccf()
     r = Researcher.objects.get(pk=pk)
     update_task = lambda name: update_researcher_task(r, name)
     update_task('clustering')
     fetch_everything_for_researcher(pk)
-    ccf.clear()
 
 @shared_task(name='fetch_everything_for_researcher')
 @run_only_once('researcher', keys=['pk'], timeout=15*60)
@@ -81,11 +78,10 @@ def fetch_everything_for_reseracher_task(pk):
     fetch_everything_for_researcher(pk)
 
 def fetch_everything_for_researcher(pk):
-    ccf = get_ccf()
-    oai = OaiPaperSource(ccf, max_results=250)
+    oai = OaiPaperSource(max_results=250)
     sources = [
-        ('orcid',OrcidPaperSource(ccf, oai, max_results=1000)),
-        ('crossref',CrossRefPaperSource(ccf, oai, max_results=500)),
+        ('orcid',OrcidPaperSource(oai, max_results=1000)),
+        ('crossref',CrossRefPaperSource(oai, max_results=500)),
         ('oai',oai),
        ]
     r = Researcher.objects.get(pk=pk)
@@ -94,11 +90,10 @@ def fetch_everything_for_researcher(pk):
     #if r.stats is None:
     # make sure publications already known are also considered
     update_researcher_task(r, 'clustering')
-    ccf.reclusterBatch(r)
     try:
         for key,source in sources:
             update_researcher_task(r, key)
-            source.fetch_and_save(r, incremental=True)
+            source.fetch_and_save(r)
         update_researcher_task(r, None)
 
     except MetadataSourceException as e:
@@ -109,7 +104,6 @@ def fetch_everything_for_researcher(pk):
         r.update_stats()
         r.harvester = None
         update_researcher_task(r, None)
-        ccf.clear()
         name_lookup_cache.prune()
 
 @shared_task(name='fetch_records_for_researcher')
@@ -126,14 +120,11 @@ def fetch_records_for_researcher(pk, signature=True):
 @shared_task(name='recluster_researcher')
 @run_only_once('researcher', keys=['pk'], timeout=15*60)
 def recluster_researcher(pk):
-    ccf = get_ccf()
     try:
         r = Researcher.objects.get(pk=pk)
-        ccf.reclusterBatch(r)
     finally:
         r.update_stats()
         update_researcher_task(r, None)
-    del ccf
 
 @shared_task(name='change_publisher_oa_status')
 def change_publisher_oa_status(pk, status):
@@ -160,7 +151,6 @@ def consolidate_paper(pk):
             p.task = None
             p.save(update_fields=['task'])
 
-# TODO: no ccf is actually needed here!
 @shared_task(name='get_bare_paper_by_doi')
 def get_bare_paper_by_doi(doi):
     oai = OaiPaperSource(max_results=10)
@@ -170,9 +160,8 @@ def get_bare_paper_by_doi(doi):
 
 @shared_task(name='get_paper_by_doi')
 def get_paper_by_doi(doi):
-    ccf = get_ccf()
-    oai = OaiPaperSource(ccf=ccf, max_results=10)
-    crps = CrossRefPaperSource(ccf=ccf, oai=oai, max_results=10)
+    oai = OaiPaperSource(max_results=10)
+    crps = CrossRefPaperSource(oai=oai, max_results=10)
     p = crps.create_paper_by_doi(doi)
     if p is not None:
         p = Paper.from_bare(p)

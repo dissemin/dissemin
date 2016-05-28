@@ -24,7 +24,6 @@ import unittest
 import django.test
 import json
 from django.core.urlresolvers import reverse
-from backend.globals import get_ccf
 from backend.tests import PrefilledTest
 from backend.crossref import CrossRefPaperSource
 from backend.oai import OaiPaperSource

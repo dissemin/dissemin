@@ -408,7 +408,7 @@ class OrcidPaperSource(PaperSource):
         :returns: a generator, where all the papers found are yielded. (some of them could be in
                 free form, hence not imported)
         """
-        crps = CrossRefPaperSource(self.ccf)
+        crps = CrossRefPaperSource()
 
         # Cleanup iD:
         orcid_id = validate_orcid(orcid_identifier)
