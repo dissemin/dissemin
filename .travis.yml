@@ -11,7 +11,7 @@ python:
   - 2.7
 
 addons:
-  - postgresql: "9.4"
+  postgresql: "9.4"
 
 services:
   - postgresql
@@ -32,7 +32,7 @@ addons:
 
 env:
   global:
-    - DJANGO=1.8.0
+    - DJANGO=1.9.6
       # RoMEO API key
     - secure: "hQg8tso/Qv4zXhP4A2ahKKhFZQSariIvUr+xqzzoTVtuN/9OuzBFjZ1UF8atM5KKGZ47fFMK2wTjbVOWjSyLH/SF3Wy8bX9oHHg1P8bXcsle6O/tfa3U/2s0UiYtThEdxp+iyQIr6cjBA0gmB0v/vFrQot91GvjlUbi70Xjfcts="
       # CORE API key
@@ -65,6 +65,7 @@ install:
   - wget http://dev.dissem.in/files/similarity.pkl -O models/similarity.pkl
 
 before_script:
+  - psql --version
   - psql -c "CREATE DATABASE dissemin;" -U postgres
 
 script:
