@@ -333,7 +333,8 @@ class OrcidPaperSource(PaperSource):
             data_paper.authors,
             data_paper.pubdate,
             'VISIBLE',
-            data_paper.orcids
+            affiliations=None,
+            orcids=data_paper.orcids,
         )
         record = BareOaiRecord(
             source=orcid_oai_source,

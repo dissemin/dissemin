@@ -41,7 +41,7 @@ class StatisticsTest(PrefilledTest):
         self.assertTrue(stats.num_tot > 1)
 
     def test_researcher(self):
-        self.validStats(self.r2.stats)
+        self.validStats(self.r3.stats)
 
     def test_from_queryset(self):
         bare_stats = BareAccessStatistics.from_queryset(
@@ -55,6 +55,8 @@ class StatisticsTest(PrefilledTest):
         self.assertEqual(bare_stats.num_tot, stats.num_tot)
     
     def test_department(self):
+        self.r3.department = self.d
+        self.r3.save()
         self.d.update_stats()
         self.validStats(self.d.stats)
 
