@@ -2,4 +2,3 @@
 czipfile
 httplib2
 bibtexparser
-sklearn
