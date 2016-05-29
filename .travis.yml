@@ -69,7 +69,7 @@ script:
   - python manage.py migrate --noinput
   - python manage.py loaddata dissemin/fixtures/test_dump.json
   - ./celery.sh &
-  - coverage run --source=dissemin,papers,backend,deposit,upload,statistics --omit=*/migrations/* --omit=dissemin/settings/* manage.py test --testrunner dissemin.scripts.baretests.BareTestRunner -v 2 --failfast
+  - coverage run --source=dissemin,papers,backend,deposit,upload,statistics --omit=*/migrations/*,dissemin/settings/* manage.py test --testrunner dissemin.scripts.baretests.BareTestRunner -v 2 --failfast
 
 after_success:
   - coveralls
