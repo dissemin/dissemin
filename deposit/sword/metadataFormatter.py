@@ -7,19 +7,20 @@
 # modify it under the terms of the GNU Affero General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU Affero General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU Affero General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-"""
-This module defines a OAfr/TEI exporter, to be used with the SWORD interface to HAL.
+"""This module defines a DC metadata formatter. It supports only a
+subset of the namespace /elements/1.1 of http://purl.org/dc/elements/1.1 and
+the field dcterms:issued (that is apparently required for dspace).
 
 """
 
@@ -43,27 +44,28 @@ class MetadataFormatter(object):
         A string, identifier for the format
         """
         return None
-    
-    def render(self, paper, filename):
+
+    def render(self, paper):
         """
         Returns an XML node representing the article in the expected format
         The filename of the attached PDF should be None when uploading metadata only.
         """
         return None
 
-    def toString(self, paper, filename, pretty=False):
+    def toString(self, paper,  pretty=False):
         """
         The metadata as a string
         """
-        return etree.tostring(self.render(paper, filename),
+        return etree.tostring(self.render(paper),
                 pretty_print=pretty,
                 encoding='UTF-8',
                 xml_declaration=True)
 
 
 def addChild(elem, childName, text=None):
-    """
-    Utility function: create a node, append it and return it
+    """Utility function: create a node containing the text if not empty,
+    append it and return it
+
     """
     node = etree.Element(childName)
     elem.append(node)
@@ -73,43 +75,81 @@ def addChild(elem, childName, text=None):
 
 
 class DCFormatter(MetadataFormatter):
-    """
-    Generic SWORD formatter
+    """Create XML with Dublin Core (DC) datas. It consists in the
+    following metadata (if available), according to
+    http://purl.org/dc/elements/1.1 and http://purl.org/dc/terms :
+
+    - creator: An entity primarily responsible for making the
+      resource.
+
+    - date: A point or periof of time associated with an event in the
+      lifecycke of the resource. We take it equal to dcterms:issued.
+      If the month and the day are unknown dissemin consider them
+      equal to 01-01.
+
+    - description: Description may include but is not limited to: an
+      abstract, a table of contents, a graphical representation, or a
+      free-text account of the resource.
+
+    - identifier: An unambiguous reference to the resource within a
+      given context. There can be several identifier. Nothing seems to
+      say that there is a unique unique identifier.
+
+    - publisher: An entity responsible for making the resource
+      (un)available.
+
+    - title: A name given to the resource.
+
+    - type: the nature or genre of the resource.
+
+    - dcterms:issued: date of formal issuance of the resource.  If the
+      month and the day are unknown dissemin consider them equal to
+      01-01.
+
+
+    # TODO ADD SUPPORT FOR CONTRIBUTOR AFTER REMOVING ORCID NUMBER
+    # FROM AFFILIATION
+
     """
 
     def formatName(self):
         return "dc"
 
-    def render(self, paper, filename):
+    def render(self, paper):
         xmlns_uri = 'http://www.w3.org/2005/Atom'
         dcterms_uri = "http://purl.org/dc/terms/"
+        dc_uri = "http://purl.org/dc/elements/1.1/"
         xmlns = '{%s}' % xmlns_uri
+        dc = '{%s}' % dc_uri
         dcterms = '{%s}' % dcterms_uri
-        nsmap = {None: xmlns_uri, 'dcterms': dcterms_uri}
-        entry = etree.Element(xmlns+'entry', nsmap=nsmap)
+        nsmap = {None: xmlns_uri, 'dc': dc_uri, 'dcterms': dcterms_uri}
+        entry = etree.Element(xmlns+'metadata', nsmap=nsmap)
 
-        addChild(entry, 'title', paper.title)
+        # Normally dcterm is enough as it refines dc however as
+        # everything is always broken it seems that some "homemade"
+        # systems only expect dc and not dcterms, so everything is
+        # duplicated for a maximum of compatibility. Unclear if we
+        # want to keep this solution.
 
-        addChild(entry, 'id', 'paper/%d' % paper.id)
-
-        addChild(entry, 'updated', paper.last_modified.isoformat())
-
-        # Here comes the actual metadata
-
-        addChild(entry, dcterms+'title', paper.title)
-        if paper.abstract:
-            addChild(entry, dcterms+'abstract', paper.abstract)
-        addChild(entry, dcterms+'type', paper.doctype)
-        
+        #Here comes the sun, errr the actual metadata
         for a in paper.authors:
-            addChild(entry, dcterms+'contributor', unicode(a))
-
+            addChild(entry, dc+'creator', unicode(a))
+            addChild(entry, dcterms+'creator', unicode(a))
+        addChild(entry, dc+'date', paper.pubdate.strftime("%y-%m-%d"))
+        if paper.abstract:
+            addChild(entry, dc+'description', paper.abstract)
+            addChild(entry, dcterms+'description', paper.abstract)
+        # There can be several [unique identifiers] (nothing says that
+        # there is a unique unique identifier)
         for p in paper.publications:
+            addChild(entry, dc+'identifier', p.doi)
             addChild(entry, dcterms+'identifier', p.doi)
+        addChild(entry, dc+'publisher', p.publisher_name)
+        addChild(entry, dcterms+'publisher', p.publisher_name)
+        addChild(entry, dc+'title', paper.title)
+        addChild(entry, dcterms+'title', paper.title)
+        addChild(entry, dc+'type', paper.doctype)
+        addChild(entry, dcterms+'type', paper.doctype)
+        addChild(entry, dcterms+'issued', paper.pubdate.strftime("%y-%m-%d"))
 
         return entry
-
-
-
-
-
