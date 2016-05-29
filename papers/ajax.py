@@ -105,6 +105,8 @@ def researcherCandidatesByName(name):
     Results are returned as a list of HTML elements, to be displayed
     in the disambiguation dialog.
     """
+    # TODO add test to check this view!!!!
+
     # From the model
     related_researchers = list(map(lambda nv: nv.researcher, name.namevariant_set.all()))
     def renderResearcher(res):

@@ -132,8 +132,7 @@ def searchView(request, **kwargs):
             return redirect('researcher', permanent=True,
                             researcher=researcher.pk, slug=researcher.slug)
 
-        queryset =queryset.filter(
-            authors_list__contains=[{'researcher_id':researcher.id}])
+        queryset = queryset.filter(researchers=researcher)
         search_description += _(' authored by ')+unicode(researcher)
         head_search_description = unicode(researcher)
         context['researcher'] = researcher
@@ -141,14 +140,15 @@ def searchView(request, **kwargs):
         context['breadcrumbs'] = researcher.breadcrumbs()
     elif 'department' in args:
         dept = get_object_or_404(Department, pk=args.get('department'))
-        queryset = queryset.filter(author__researcher__department=dept)
+        queryset = queryset.filter(researchers__department=dept)
         search_description = unicode(dept)
         head_search_description = unicode(dept)
         context['department'] = dept
         context['breadcrumbs'] = dept.breadcrumbs()+[(_('Papers'), '')]
     elif 'name' in args:
         name = get_object_or_404(Name, pk=args.get('name'))
-        queryset = queryset.filter(author__name=name)
+        queryset = queryset.filter(authors_list__contains=
+            [{'name':{'full':name.full}}])
         search_description += _(' authored by ')+unicode(name)
         head_search_description = unicode(name)
         context['name'] = name

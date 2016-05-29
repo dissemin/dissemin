@@ -67,7 +67,6 @@ class StatisticsTest(PrefilledTest):
         pw.update_stats()
         self.validStats(pw.stats)
 
-
 # TODO check journal and publisher stats
 # TODO check that (for instance) department stats add up to institution stats
 

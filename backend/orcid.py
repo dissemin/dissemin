@@ -86,13 +86,13 @@ def orcid_to_doctype(typ):
     return orcid_type_to_pubtype.get(typ.lower().replace('_','-').replace(' ','-'), 'other')
     
 
-def affiliate_author_with_orcid(ref_name, orcid, authors, initial_affiliations=None):
+def affiliate_author_with_orcid(ref_name, orcid, authors, initial_orcids=None):
     """
     Given a reference name and an ORCiD for a researcher, find out which
     author in the list is the most likely to be that author. This function
     is run on author lists of papers listed in the ORCiD record so we expect
     that one of the authors should be the same person as the ORCiD holder.
-    This just finds the most similar name and returns the appropriate affiliations
+    This just finds the most similar name and returns the appropriate orcids
     list (None everywhere except for the most similar name where it is the ORCiD).
     """
     max_sim_idx = None
@@ -102,12 +102,12 @@ def affiliate_author_with_orcid(ref_name, orcid, authors, initial_affiliations=N
         if cur_similarity > max_sim:
             max_sim_idx = idx
             max_sim = cur_similarity
-    affiliations = [None]*len(authors)
-    if initial_affiliations and len(initial_affiliations) == len(authors):
-        affiliations = initial_affiliations
+    orcids = [None]*len(authors)
+    if initial_orcids and len(initial_orcids) == len(authors):
+        orcids = initial_orcids
     if max_sim_idx is not None:
-        affiliations[max_sim_idx] = orcid
-    return affiliations
+        orcids[max_sim_idx] = orcid
+    return orcids
 
 ### Paper fetching ####
 
@@ -175,8 +175,8 @@ class ORCIDMetadataExtractor(object):
         # ORCiD internal id
         return self.j('put-code')
 
-    def affiliations(self, orcid_id, ref_name, authors, initial_affiliations):
-        return affiliate_author_with_orcid(ref_name, orcid_id, authors, initial_affiliations=initial_affiliations)
+    def orcids(self, orcid_id, ref_name, authors, initial_orcids):
+        return affiliate_author_with_orcid(ref_name, orcid_id, authors, initial_orcids=initial_orcids)
 
     def citation_format(self):
         return self.j('work-citation/work-citation-type')
@@ -221,7 +221,7 @@ class ORCIDDataPaper(object):
 
         self.authors = []
         self.contributors = []
-        self.affiliations = []
+        self.orcids = []
 
         self.dois = []
 
@@ -281,7 +281,7 @@ class ORCIDDataPaper(object):
             paper.bibtex = extractor.bibtex()
             paper.authors.extend(extractor.authors_from_bibtex(paper.bibtex))
 
-            paper.affiliations = extractor.affiliations(orcid_id, ref_name, paper.authors, paper.affiliations)
+            paper.orcids = extractor.orcids(orcid_id, ref_name, paper.authors, paper.orcids)
             paper.authors = extractor.convert_authors(paper.authors)
 
             paper.initialize()
@@ -333,7 +333,7 @@ class OrcidPaperSource(PaperSource):
             data_paper.authors,
             data_paper.pubdate,
             'VISIBLE',
-            data_paper.affiliations
+            data_paper.orcids
         )
         record = BareOaiRecord(
             source=orcid_oai_source,
@@ -367,8 +367,8 @@ class OrcidPaperSource(PaperSource):
         for metadata in doi_metadata:
             try:
                 authors = map(convert_to_name_pair, metadata['author'])
-                affiliations = affiliate_author_with_orcid(ref_name, orcid_id, authors)
-                paper = crps.save_doi_metadata(metadata, affiliations)
+                orcids = affiliate_author_with_orcid(ref_name, orcid_id, authors)
+                paper = crps.save_doi_metadata(metadata, orcids)
                 if not paper:
                     yield False, metadata
                     continue

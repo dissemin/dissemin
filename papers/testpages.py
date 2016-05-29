@@ -56,7 +56,7 @@ class RenderingTest(PrefilledTest):
             parsed = self.parser.parse(resp.content)
         except html5lib.html5parser.ParseError as e:
             print resp.content
-            print e
+            print "HTML validation error: "+unicode(e)
             raise e
 
     def getPage(self, *args, **kwargs):
@@ -111,7 +111,7 @@ class PaperPagesTest(RenderingTest):
     # ampersands not escaped in django bootstrap pagination, https://github.com/jmcclell/django-bootstrap-pagination/issues/41
 
     def test_paper(self):
-        for p in self.r3.papersr:
+        for p in self.r3.papers:
             self.checkPage('paper', kwargs={'pk':p.id, 'slug':p.slug})
             if p.is_orphan() and p.visibility == 'VISIBLE':
                 print p

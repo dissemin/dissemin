@@ -195,7 +195,8 @@ class BarePaper(BareObject):
 
 
     @classmethod
-    def create(cls, title, author_names, pubdate, visibility='VISIBLE', affiliations=None):
+    def create(cls, title, author_names, pubdate, visibility='VISIBLE',
+                    affiliations=None, orcids=None):
         """
         Creates a (bare) paper. To save it to the database, we
         need to run the clustering algorithm to resolve Researchers for the authors,
@@ -209,7 +210,8 @@ class BarePaper(BareObject):
                     exists, the visibility will be set to the maximum of the two possible
                     visibilities.
         :param affiliations: A list of (possibly None) affiliations for the authors. It has to 
-                    have the same length as the list of author names. Affiliations can be replaced by ORCIDs.
+                    have the same length as the list of author names.
+        :param orcids: same as affiliations, but for ORCID ids.
         """
         plain_names = map(to_plain_name, author_names)
         
@@ -218,6 +220,8 @@ class BarePaper(BareObject):
 
         if affiliations is not None and len(author_names) != len(affiliations):
             raise ValueError("The number of affiliations and authors have to be equal.")
+        if orcids is not None and len(author_names) != len(orcids):
+            raise ValueError("The number of ORCIDs (or Nones) and authors have to be equal.")
         if visibility not in [c for (c,_) in VISIBILITY_CHOICES]:
             raise ValueError("Invalid paper visibility: %s" % unicode(visibility))
 
@@ -232,11 +236,11 @@ class BarePaper(BareObject):
             a = BareAuthor()
             a.name = n
             if affiliations is not None:
-                orcid = validate_orcid(affiliations[idx])
+                a.affiliation = affiliations[idx]
+            if orcids is not None:
+                orcid = validate_orcid(orcids[idx])
                 if orcid:
                     a.orcid = orcid
-                else:
-                    a.affiliation = affiliations[idx]
             p.add_author(a, position=idx)
 
         p.fingerprint = p.new_fingerprint()
@@ -350,6 +354,12 @@ class BarePaper(BareObject):
         The list of affiliations of all authors
         """
         return [a.affiliation for a in self.authors]
+
+    def orcids(self):
+        """
+        The list of ORCIDs of all authors
+        """
+        return [a.orcid for a in self.authors]
 
     def bare_author_names(self):
         """
@@ -505,6 +515,9 @@ class BarePaper(BareObject):
         This uses a non-trivial logic, hence it is useful to keep this result cached
         in the database row.
         """
+        # TODO rewrite this, taking into account the fact that
+        # publications are now OaiRecords as well!
+        # this should make it simpler.
         self.pdf_url = None
         publis = self.publications
         oa_idx = len(OA_STATUS_PREFERENCE)-1
@@ -522,7 +535,7 @@ class BarePaper(BareObject):
                 idx = len(OA_STATUS_PREFERENCE)
             oa_idx = min(idx, oa_idx)
             if OA_STATUS_CHOICES[oa_idx][0] == 'OA':
-                self.pdf_url = publi.pdf_url or publi.splash_url()
+                self.pdf_url = publi.pdf_url or publi.splash_url
 
             # Pub type
             cur_type = publi.pubtype

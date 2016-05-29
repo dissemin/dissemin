@@ -373,12 +373,12 @@ class CrossRefPaperSource(PaperSource):
                 pass
         return p
 
-    def save_doi_metadata(self, metadata, extra_affiliations=None, allow_unknown_authors=False):
+    def save_doi_metadata(self, metadata, extra_orcids=None, allow_unknown_authors=False):
         """
         Given the metadata as Citeproc+JSON or from CrossRef, create the associated paper and publication
 
-        :param extra_affiliations: an optional affiliations list, which will be unified
-            with the affiliations extracted from the metadata. This is useful for the ORCID interface.
+        :param extra_orcids: an optional orcids list, which will be unified
+            with the orcids extracted from the metadata. This is useful for the ORCID interface.
         :param allow_unknown_authors: create the paper even if no author matches our researchers
         :returns: the paper, created if needed
         """        
@@ -419,23 +419,24 @@ class CrossRefPaperSource(PaperSource):
             raise ValueError('No known author')
 
         def get_affiliation(author_elem):
-            # First, look for an ORCID id
-            orcid = validate_orcid(author_elem.get('ORCID'))
-            if orcid:
-                return orcid
-            # Otherwise return the plain affiliation, if any
             for dct in author_elem.get('affiliation', []):
                 if 'name' in dct:
                     return dct['name']
 
+        def get_orcid(author_elem):
+            orcid = validate_orcid(author_elem.get('ORCID'))
+            if orcid:
+                return orcid
+
+        new_orcids = map(get_orcid, metadata['author'])
+        if extra_orcids:
+            orcids = [new or old for (old,new) in zip(extra_orcids,new_orcids)]
+        else:
+            orcids = new_orcids
         affiliations = map(get_affiliation, metadata['author'])
-        if extra_affiliations and len(affiliations) == len(extra_affiliations):
-            for i in range(len(affiliations)):
-                if affiliation_is_greater(extra_affiliations[i],affiliations[i]):
-                    affiliations[i] = extra_affiliations[i]
 
         paper = BarePaper.create(title, authors, pubdate, 
-                'VISIBLE', affiliations)
+                'VISIBLE', affiliations, orcids)
 
         result = create_publication(paper, metadata)
 

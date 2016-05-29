@@ -25,8 +25,6 @@ This module defines a OAfr/TEI exporter, to be used with the SWORD interface to 
 
 from __future__ import unicode_literals
 
-print "importing metadataFormatter.py"
-
 from lxml import etree
 
 from papers.models import Paper, Researcher, OaiRecord

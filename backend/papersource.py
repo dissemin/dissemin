@@ -91,8 +91,10 @@ class PaperSource(object):
             for idx, a in enumerate(p.authors_list):
                 if a['orcid'] == researcher.orcid:
                     p.authors_list[idx]['researcher_id'] = researcher.id
+                    p.researchers.add(researcher.id)
                     self.update_empty_orcid(researcher, False)
-            
+
+            p.save()            
             researcher.update_stats()
 
         return p

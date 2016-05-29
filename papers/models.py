@@ -124,8 +124,10 @@ class Institution(models.Model):
         if not self.stats:
             self.stats = AccessStatistics.objects.create()
             self.save()
-        # TODO do the sum of researchers stats!
-        assert(False)
+        self.stats.clear()
+        for d in self.sorted_departments:
+            self.stats.add(d.stats)
+        self.stats.save()
 
     @property
     def object_id(self):
@@ -171,8 +173,10 @@ class Department(models.Model):
         if not self.stats:
             self.stats = AccessStatistics.objects.create()
             self.save()
-        # TODO do the sum of researcher's stats!
-        assert(False)
+        self.stats.clear()
+        for r in self.sorted_researchers:
+            self.stats.add(r.stats)
+        self.stats.save()
 
     @property
     def object_id(self):
@@ -432,9 +436,9 @@ class Researcher(models.Model):
         """
         Returns the latest paper authored by this researcher, if any.
         """
-        lst = list(self.authors_by_year[:1])
+        lst = list(self.papers[:1])
         if lst:
-            return lst[0].paper
+            return lst[0]
 
     def affiliation_form(self):
         """
@@ -551,11 +555,19 @@ class Name(models.Model, BareName):
 class Paper(models.Model, BarePaper):
     title = models.CharField(max_length=1024)
     fingerprint = models.CharField(max_length=64, unique=True)
-    date_last_ask = models.DateField(null=True)
-    # Approximate publication date.
-    # For instance if we only know it is in 2014 we'll put 2014-01-01
+    date_last_ask = models.DateField(null=True) # TODO remove (unused)
+
+    #: Approximate publication date.
+    #: For instance if we only know it is in 2014 we'll put 2014-01-01
     pubdate = models.DateField()
+
+    #: Full list of authors for this paper
     authors_list = JSONField(default=list)
+
+    #: Relation to Researcher: all researchers that appear in
+    #: authors_list (not all authors are researchers because not all
+    #: authors have profiles on dissemin)
+    researchers = models.ManyToManyField(Researcher)
 
     last_modified = models.DateField(auto_now=True)
     visibility = models.CharField(max_length=32, default='VISIBLE')
@@ -574,7 +586,7 @@ class Paper(models.Model, BarePaper):
 
     ### Relations to other models, reimplemented from :class:`BarePaper` ###
 
-    @cached_property
+    @property
     def authors(self):
         """
         The author sorted as they should appear. Their names are pre-fetched.
@@ -664,14 +676,13 @@ class Paper(models.Model, BarePaper):
                     p.visibility ='VISIBLE'
                     p.save(update_fields=['visibility'])
                 p.update_author_names(paper.bare_author_names(),
-                        paper.affiliations())
+                        paper.affiliations(), paper.orcids())
                 for record in paper.oairecords:
                     p.add_oairecord(record)
             else: # Otherwise we create a new paper
                 p = super(Paper, cls).from_bare(paper)
                 p.save()
                 p.update_availability()
-                p.save()
 
             return p
 
@@ -817,8 +828,6 @@ class Paper(models.Model, BarePaper):
         if new_orcid is None:
             new_orcid = [None]*len(new_author_names)
         assert len(new_author_names) == len(new_affiliations)
-        if hasattr(self, 'authors'):
-            del self.authors
         old_authors = list(self.authors)
 
         # Invalidate cached properties
@@ -845,7 +854,8 @@ class Paper(models.Model, BarePaper):
                 author = BareAuthor()
 
             # update attributes
-            author.name = BareName(first=new_name[0],last=new_name[1])
+            author.name = BareName.create_bare(first=new_name[0],
+                                                last=new_name[1])
             if new_idx is not None and affiliation_is_greater(
                 new_affiliations[new_idx],
                 author.affiliation):
@@ -856,10 +866,6 @@ class Paper(models.Model, BarePaper):
             new_authors.append(author.serialize())
         self.authors_list = new_authors
         self.save(update_fields=['authors_list'])
-                
-        # Invalidate our local cache
-        if hasattr(self, 'authors'):
-            del self.authors
 
     def merge(self, paper):
         """
@@ -883,8 +889,8 @@ class Paper(models.Model, BarePaper):
         
         OaiRecord.objects.filter(about=paper.pk).update(about=self.pk)
         Annotation.objects.filter(paper=paper.pk).update(paper=self.pk)
-        # TODO: this does not preserve ORCID ids or affiliations !!!
-        self.update_author_names(map(lambda n: (n.first,n.last), paper.author_names()))
+        self.update_author_names(map(lambda n: (n.first,n.last), paper.author_names()),
+                                paper.affiliations(), paper.orcids())
         if paper.last_annotation:
             self.last_annotation = None
             for annot in self.annotation_set.all().order_by('-timestamp'):

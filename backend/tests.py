@@ -191,7 +191,7 @@ class CrossRefIntegrationTest(PaperSourceTest):
         r2 = Researcher.get_or_create_by_orcid('0000-0003-1698-5150')
         self.source.fetch_and_save(r2)
 
-        # This paper should be attributed
+        # This paper should be attributed to the ORCID id
         p = Paper.objects.get(oairecord__doi='10.1016/j.jcss.2015.04.004')
         self.assertEqual(p.authors[3].researcher, r2)
 
@@ -473,7 +473,7 @@ class MaintenanceTest(PrefilledTest):
         n1 = p.authors[0].name
         self.assertEqual((n1.first,n1.last), (n.first,n.last))
 
-     def test_update_paper_statuses(self):
+    def test_update_paper_statuses(self):
         p = self.crps.create_paper_by_doi("10.1016/j.bmc.2005.06.035")
         p = Paper.from_bare(p)
         self.assertEqual(p.pdf_url, None)

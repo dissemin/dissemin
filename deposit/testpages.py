@@ -29,7 +29,7 @@ class DepositPagesTest(RenderingTest):
         crps.fetch_and_save(self.r3)
 
     def test_start_deposit_unauthenticated(self):
-        paper = self.r3.author_set.all()[0].paper
+        paper = self.r3.papers[0]
         r = self.getPage('upload_paper', kwargs={'pk':paper.pk})
         self.assertEqual(r.status_code, 302)
 
