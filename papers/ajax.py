@@ -20,7 +20,7 @@
 
 from __future__ import unicode_literals
 
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseForbidden
 from django.contrib.auth.decorators import user_passes_test
@@ -275,7 +275,7 @@ def changePublisherStatus(request):
     except ObjectDoesNotExist:
         return HttpResponseNotFound('NOK: '+message, content_type='text/plain')
 
-urlpatterns = patterns('',
+urlpatterns = [
 #    url(r'^annotate-paper-(?P<pk>\d+)-(?P<status>\d+)$', annotatePaper, name='ajax-annotatePaper'),
     url(r'^delete-researcher-(?P<pk>\d+)$', deleteResearcher, name='ajax-deleteResearcher'),
 #    url(r'^change-department$', changeDepartment, name='ajax-changeDepartment'),
@@ -287,5 +287,5 @@ urlpatterns = patterns('',
 #    url(r'^harvesting-status-(?P<pk>\d+)$', harvestingStatus, name='ajax-harvestingStatus'),
     url(r'^wait-for-consolidated-field$', waitForConsolidatedField, name='ajax-waitForConsolidatedField'),
     url(r'^set-researcher-department$', setResearcherDepartment, name='ajax-setResearcherDepartment'),
-)
+]
 

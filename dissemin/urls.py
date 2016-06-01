@@ -73,7 +73,7 @@ js_info_dict = {
     )
 }
 
-urlpatterns = patterns('',
+urlpatterns = [
     # Errors
     url(r'^404-error$', temp('404.html')),
     url(r'^500-error$', temp('500.html')),
@@ -105,7 +105,7 @@ urlpatterns = patterns('',
     url(r'^jsi18n/$', javascript_catalog, js_info_dict, name='javascript-catalog'),
     url(r'^lang/', include('django.conf.urls.i18n'), name='set_language'),
 # Remove this in production
-) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # Allauth social providers (normally included directly in the standard installation
