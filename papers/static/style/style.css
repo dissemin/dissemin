@@ -566,6 +566,17 @@ h1#paperTitle {
 
 /* Criterions in the side bar */
 
+.detailsContent label
+{
+    margin-bottom: 10px;
+}
+
+.detailsContent .checkbox
+{
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+
 .criterionItem
 {
     margin-left: 45px;
@@ -629,14 +640,12 @@ h1#paperTitle {
 
 input[type=checkbox]:checked + div.publisherCriterionBox
 {
-    border: 2px solid #8ecc50;
-	margin: -2px;
+    border-color: #8ecc50;
 }
 
 .selectedCriterion
 {
     border: 2px solid #8ecc50;
-	margin: -2px;
 }
 
 .publisherCriterionBox
@@ -646,6 +655,9 @@ input[type=checkbox]:checked + div.publisherCriterionBox
     padding: 2px;
     margin: 0px;
     display: table;
+    border-width: 2px;
+    border-style: solid;
+    border-color: transparent;
     border-radius: 5px;
 }
 
