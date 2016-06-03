@@ -33,10 +33,14 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import user_passes_test
 from django.template.defaultfilters import slugify
 from django.utils import timezone
+from django.utils.encoding import escape_uri_path
 from django.utils.translation import ugettext as _
 from django.utils.decorators import method_decorator
 from django.utils.functional import cached_property
 from django.db.models import Count
+from haystack.generic_views import SearchView
+from haystack.query import EmptySearchQuerySet
+from search import SearchQuerySet
 
 from datetime import datetime
 
@@ -267,6 +271,78 @@ def searchView(request, **kwargs):
             response['display'] = researcher.get_current_task_display()
         return HttpResponse(json.dumps(response), content_type="application/json")
     return render(request, 'papers/search.html', context)
+
+
+class PaperSearchView(SearchView):
+    """Displays a list of papers and a search form."""
+
+    paginate_by = NB_RESULTS_PER_PAGE
+    template_name = 'papers/search.html'
+    form_class = PaperForm
+    queryset = SearchQuerySet()
+
+    def get(self, request, *args, **kwargs):
+        if not is_admin(request.user):
+            request.GET = request.GET.copy()
+            request.GET.pop('visible', None)
+            request.GET.pop('availability', None)
+            request.GET.pop('oa_status', None)
+        return super(PaperSearchView, self).get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(PaperSearchView, self).get_context_data(**kwargs)
+        search_description = _('Papers')
+        query_string = self.request.META.get('QUERY_STRING', '')
+        context['breadcrumbs'] = [(search_description, '')]
+        context['search_description'] = (
+            search_description if query_string else _('All papers'))
+        context['head_search_description'] = _('Papers')
+        context['nb_results'] = self.queryset.count()
+
+        # Notifications
+        # TODO: unefficient query.
+        notifications = get_notifications(self.request)
+        selected_messages = map(
+            lambda n: n.serialize_to_json(),
+            sorted(notifications, key=lambda msg: msg.level)[:3])
+        context['messages'] = selected_messages
+
+        return context
+
+    def render_to_response(self, context, **kwargs):
+        if self.request.META.get('CONTENT_TYPE') == 'application/json':
+            response = self.raw_response(context, **kwargs)
+            return HttpResponse(json.dumps(response),
+                                content_type='application/json')
+        return super(PaperSearchView, self)\
+            .render_to_response(context, **kwargs)
+
+    def raw_response(self, context, **kwargs):
+        context['request'] = self.request
+        listPapers = loader.render_to_string('papers/paperList.html', context)
+        return {
+            'listPapers': listPapers,
+            'messages': context['messages'],
+        }
+
+    def form_invalid(self, form):
+        self.object_list = []
+        self.queryset = EmptySearchQuerySet()
+        return self.render_to_response(self.get_context_data(form=form))
+
+    def url_with_query_string(self, url=None, query_string=None):
+        """
+        Returns the current URL with its query string.
+
+        Both the URL and the query string can be overriden.
+        """
+        url = url or escape_uri_path(self.request.path)
+        if query_string is None:
+            query_string = self.request.META.get('QUERY_STRING', '')
+        if query_string:
+            url += '?' + query_string
+        return url
+
 
 @user_passes_test(is_admin)
 def reclusterResearcher(request, pk):

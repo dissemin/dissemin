@@ -577,6 +577,34 @@ h1#paperTitle {
     margin-bottom: 5px;
 }
 
+/* Document type */
+
+ul.compactList
+{
+    font-size: 0.9em;
+    padding: 0;
+    -moz-column-width: 100px;
+    -webkit-column-width: 100px;
+    column-width: 100px;
+}
+
+.compactList li
+{
+    list-style: none;
+}
+
+.compactList label.doctype
+{
+    margin-bottom: 0;
+}
+
+.compactList input
+{
+    transform: scale(0.9);
+    -webkit-transform: scale(0.9);
+    margin-top: 2px;
+}
+
 .criterionItem
 {
     margin-left: 45px;
@@ -641,6 +669,22 @@ h1#paperTitle {
 input[type=checkbox]:checked + div.publisherCriterionBox
 {
     border-color: #8ecc50;
+}
+
+.form-group .tightLabel
+{
+    padding-right: 6px;
+}
+
+.form-group .tightInput
+{
+    padding-left: 6px;
+}
+
+.form-control.tightForm
+{
+    padding-left: 8px;
+    padding-right: 8px;
 }
 
 .selectedCriterion
