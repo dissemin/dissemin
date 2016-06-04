@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-24 22:32+0200\n"
-"PO-Revision-Date: 2016-05-24 22:34+0200\n"
+"POT-Creation-Date: 2016-06-04 22:47+0200\n"
+"PO-Revision-Date: 2016-06-04 22:47+0200\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -175,71 +175,71 @@ msgstr "Français"
 msgid "inboxes"
 msgstr "boîtes de réceptions"
 
-#: papers/baremodels.py:43
+#: papers/baremodels.py:44
 msgid "Visible"
 msgstr "Visible"
 
-#: papers/baremodels.py:44
+#: papers/baremodels.py:45
 msgid "Candidate"
 msgstr "Candidat"
 
-#: papers/baremodels.py:45
+#: papers/baremodels.py:46
 msgid "Not relevant"
 msgstr "Non pertinent"
 
-#: papers/baremodels.py:46
+#: papers/baremodels.py:47
 msgid "Deleted"
 msgstr "Supprimé"
 
-#: papers/baremodels.py:50
+#: papers/baremodels.py:51
 msgid "Journal article"
 msgstr "Article dans une revue"
 
-#: papers/baremodels.py:51
+#: papers/baremodels.py:52
 msgid "Proceedings article"
 msgstr "Communication dans une conférence"
 
-#: papers/baremodels.py:52
+#: papers/baremodels.py:53
 msgid "Book chapter"
 msgstr "Chapitre d'ouvrage"
 
-#: papers/baremodels.py:53
+#: papers/baremodels.py:54
 msgid "Book"
 msgstr "Ouvrage"
 
-#: papers/baremodels.py:54
+#: papers/baremodels.py:55
 msgid "Journal issue"
 msgstr "Numéro d'une revue"
 
-#: papers/baremodels.py:55
+#: papers/baremodels.py:56
 msgid "Proceedings"
 msgstr "Actes de conférence"
 
-#: papers/baremodels.py:56
+#: papers/baremodels.py:57
 msgid "Entry"
 msgstr "Article d'encyclopédie"
 
-#: papers/baremodels.py:57
+#: papers/baremodels.py:58
 msgid "Poster"
 msgstr "Poster"
 
-#: papers/baremodels.py:58
+#: papers/baremodels.py:59
 msgid "Report"
 msgstr "Rapport"
 
-#: papers/baremodels.py:59
+#: papers/baremodels.py:60
 msgid "Thesis"
 msgstr "Thèse"
 
-#: papers/baremodels.py:60
+#: papers/baremodels.py:61
 msgid "Dataset"
 msgstr "Banque de données"
 
-#: papers/baremodels.py:61 papers/models.py:82
+#: papers/baremodels.py:62 papers/models.py:81
 msgid "Preprint"
 msgstr "Préprint"
 
-#: papers/baremodels.py:62
+#: papers/baremodels.py:63
 msgid "Other document"
 msgstr "Autre publication"
 
@@ -276,48 +276,48 @@ msgstr "Il faut fournir un nom de famille."
 msgid "A first name is required."
 msgstr "Il faut fournir un prénom."
 
-#: papers/models.py:83
+#: papers/models.py:82
 msgid "Postprint"
 msgstr "Postprint"
 
-#: papers/models.py:84
+#: papers/models.py:83
 msgid "Published version"
 msgstr "Version publiée"
 
-#: papers/models.py:88
+#: papers/models.py:87
 msgid "Preparing profile"
 msgstr "Préparation du profil"
 
-#: papers/models.py:89
+#: papers/models.py:88
 msgid "Fetching publications from ORCID"
 msgstr "Récupération des publications à partir d'ORCID"
 
-#: papers/models.py:90
+#: papers/models.py:89
 msgid "Fetching publications from CrossRef"
 msgstr "Récupération des publications à partir de CrossRef"
 
-#: papers/models.py:91
+#: papers/models.py:90
 msgid "Fetching publications from BASE"
 msgstr "Récupération des publications à partir de BASE"
 
-#: papers/models.py:92
+#: papers/models.py:91
 msgid "Fetching publications from CORE"
 msgstr "Récupération des publications à partir de CORE"
 
-#: papers/models.py:93
+#: papers/models.py:92
 msgid "Fetching publications from OAI-PMH"
 msgstr "Récupération des publications à partir d'OAI-PMH"
 
-#: papers/models.py:94
+#: papers/models.py:93
 msgid "Clustering publications"
 msgstr "Regroupement des publications"
 
-#: papers/models.py:95
+#: papers/models.py:94
 msgid "Updating statistics"
 msgstr "Mise à jour des statistiques"
 
-#: papers/models.py:932 papers/views.py:112 papers/views.py:113
-#: papers/views.py:140 papers/views.py:159 papers/views.py:191
+#: papers/models.py:919 papers/views.py:114 papers/views.py:115
+#: papers/views.py:150 papers/views.py:169 papers/views.py:201
 msgid "Papers"
 msgstr "Papiers"
 
@@ -884,23 +884,27 @@ msgstr "politique imprécise"
 msgid "policy unknown"
 msgstr "politique inconnue"
 
-#: papers/views.py:129 papers/views.py:144
+#: papers/views.py:131
+msgid "Invalid ORCID profile."
+msgstr "Profil ORCID invalide."
+
+#: papers/views.py:139 papers/views.py:154
 msgid " authored by "
 msgstr " écrits par "
 
-#: papers/views.py:150
+#: papers/views.py:160
 msgid " in "
 msgstr " dans "
 
-#: papers/views.py:156
+#: papers/views.py:166
 msgid " published by "
 msgstr " publiés par "
 
-#: papers/views.py:193
+#: papers/views.py:203
 msgid "All papers"
 msgstr "Tous les papiers"
 
-#: papers/views.py:323
+#: papers/views.py:334
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr "Aucun %(verbose_name)s ne correspond à la requête"
@@ -914,30 +918,30 @@ msgid "name"
 msgstr "nom"
 
 #: publishers/forms.py:14
-msgid "increasing"
-msgstr "croissant(e)"
-
-#: publishers/forms.py:15
 msgid "decreasing"
 msgstr "décroissant(e)"
+
+#: publishers/forms.py:15
+msgid "increasing"
+msgstr "croissant(e)"
 
 #: publishers/forms.py:19 publishers/templates/publishers/list.html:53
 msgid "Filter by publisher policy"
 msgstr "Filtrer selon la politique de publication"
 
-#: publishers/models.py:35
+#: publishers/models.py:36
 msgid "Open access"
 msgstr "Accès libre"
 
-#: publishers/models.py:35
+#: publishers/models.py:36
 msgid "Freely available from the publisher."
 msgstr "Librement accessible à partir de l'éditeur."
 
-#: publishers/models.py:36
+#: publishers/models.py:37
 msgid "Allows pre/post prints"
 msgstr "Pré/post-publications autorisées"
 
-#: publishers/models.py:36
+#: publishers/models.py:37
 msgid ""
 "The publisher sells copies but allows authors to deposit some version of the "
 "article in a repository."
@@ -945,48 +949,48 @@ msgstr ""
 "La version de l'éditeur est payante mais les auteurs ont le droit d'envoyer "
 "certaines versions de l'article dans un dépôt."
 
-#: publishers/models.py:37
+#: publishers/models.py:38
 msgid "Forbids pre/post prints"
 msgstr "Pré/post-publications interdites"
 
-#: publishers/models.py:37
+#: publishers/models.py:38
 msgid ""
 "The publisher forbids authors to deposit any version of their article online."
 msgstr ""
 "L'éditeur interdit aux auteurs de mettre en ligne leur article (quelle que "
 "soit la version)."
 
-#: publishers/models.py:38
+#: publishers/models.py:39
 msgid "Policy unclear"
 msgstr "Politique inconnue"
 
-#: publishers/models.py:38
+#: publishers/models.py:39
 msgid "For complicated policies, unknown publishers and unpublished documents."
 msgstr ""
 "Pour les politiques complexes, les éditeurs inconnus, et les documents non "
 "publiés."
 
-#: publishers/models.py:41
+#: publishers/models.py:42
 msgid "Allowed"
 msgstr "Autorisés"
 
-#: publishers/models.py:42
+#: publishers/models.py:43
 msgid "Forbidden"
 msgstr "Interdits"
 
-#: publishers/models.py:43
+#: publishers/models.py:44
 msgid "Restricted"
 msgstr "Restreints"
 
-#: publishers/models.py:44
+#: publishers/models.py:45
 msgid "Unclear"
 msgstr "Ambigü"
 
-#: publishers/models.py:45
+#: publishers/models.py:46
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: publishers/models.py:53 publishers/views.py:61
+#: publishers/models.py:54 publishers/views.py:81
 msgid "Publishers"
 msgstr "Maisons d'édition"
 
@@ -1140,7 +1144,7 @@ msgstr "L'éditeur interdit la mise en ligne de cet article"
 msgid "Available"
 msgstr "Disponible"
 
-#: statistics/templates/statistics/availabilitypct.html:11
+#: statistics/templates/statistics/availabilitypct.html:10
 msgid "of the papers by this publisher are available"
 msgstr "des articles de cet éditeur sont disponibles"
 
