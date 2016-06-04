@@ -398,6 +398,26 @@ class ResearcherView(PaperSearchView):
         return response
 
 
+class DepartmentPapersView(PaperSearchView):
+    """
+    Displays the papers of researchers from a given department in an
+    institution.
+    """
+    def get(self, request, *args, **kwargs):
+        self.dept = get_object_or_404(Department, pk=kwargs.get('pk'))
+        self.queryset = self.queryset.filter(departments=self.dept.id)
+        return super(DepartmentPapersView, self).get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(DepartmentPapersView, self).get_context_data(**kwargs)
+        context['department'] = self.dept
+        context['search_description'] = context['head_search_description'] = (
+            unicode(self.dept))
+        context['breadcrumbs'] = self.dept.breadcrumbs()+[(_('Papers'), '')]
+        context['search_stats'] = self.stats()
+        return context
+
+
 @user_passes_test(is_admin)
 def reclusterResearcher(request, pk):
     source = get_object_or_404(Researcher, pk=pk)
