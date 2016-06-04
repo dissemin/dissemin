@@ -143,7 +143,7 @@ class BareAccessStatistics(object):
         stats = cls.new()
         for paper in qs:
             stats.num_tot += 1
-            attrname = 'num_'+combined_status_for_instance(paper)
+            attrname = 'num_'+paper.combined_status
             setattr(stats, attrname, getattr(stats, attrname) + 1)
         return stats
 
