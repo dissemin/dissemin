@@ -30,9 +30,9 @@ urlpatterns = [
         url(r'^$', views.index, name='index'),
         # Paper views
         url(r'^search/$', views.PaperSearchView.as_view(), name='search'),
-        url(r'^r/(?P<researcher>\d+)/(?P<slug>[\w-]+)?$', views.searchView, name='researcher'),
-        url(r'^researcher/(?P<researcher>\d+)$', views.searchView), # Deprecated URL
-        url(r'^(?P<orcid>[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{3}[X0-9])/$', views.searchView, name='researcher-by-orcid'),
+        url(r'^r/(?P<researcher>\d+)/(?P<slug>[\w-]+)?$', views.ResearcherView.as_view(), name='researcher'),
+        url(r'^researcher/(?P<researcher>\d+)$', views.ResearcherView.as_view()),  # Deprecated URL
+        url(r'^(?P<orcid>[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{3}[X0-9])/$', views.ResearcherView.as_view(), name='researcher-by-orcid'),
         url(r'^my-profile', views.myProfileView, name='my-profile'),
         url(r'^paper/(?P<pk>\d+)/$', views.PaperView.as_view()), # Deprecated URL
         url(r'^p/(?P<pk>\d+)/(?P<slug>[\w-]+)?$', views.PaperView.as_view(), name='paper'),

@@ -81,7 +81,7 @@ $(function(){
         <p><span class="glyphicon glyphicon-star-empty"></span> <a href="{{ researcher.department.url }}">{{ researcher.department }}</a></p>
         {% endif %}
         <p><span class="glyphicon glyphicon-stats"></span>
-            {% blocktrans count nb_publi=search_stats.num_tot trimmed %}
+            {% blocktrans count nb_publi=researcher.stats.num_tot|default:0 trimmed %}
             {{ nb_publi }} publication
             {% plural %}
             {{ nb_publi }} publications

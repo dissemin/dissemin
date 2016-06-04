@@ -344,6 +344,60 @@ class PaperSearchView(SearchView):
         return url
 
 
+class ResearcherView(PaperSearchView):
+    """
+    Displays the papers of a given researcher.
+    """
+
+    def get(self, request, *args, **kwargs):
+        if 'researcher' in kwargs:
+            researcher = get_object_or_404(Researcher, pk=kwargs['researcher'])
+        elif 'orcid' in kwargs:
+            try:
+                researcher = Researcher.objects.get(orcid=kwargs['orcid'])
+            except Researcher.DoesNotExist:
+                try:
+                    orcid = validate_orcid(kwargs['orcid'])
+                    researcher = Researcher.get_or_create_by_orcid(orcid)
+                    researcher.init_from_orcid()
+                except MetadataSourceException:
+                    raise Http404(_('Invalid ORCID profile.'))
+
+        if kwargs.get('slug', '') != researcher.slug:
+            view_args = {'researcher': researcher.id, 'slug': researcher.slug}
+            url = reverse('researcher', kwargs=view_args)
+            self.url = self.url_with_query_string(url=url)
+            return HttpResponsePermanentRedirect(self.url)
+
+        self.queryset = self.queryset.filter(researchers=researcher.id)
+        self.researcher = researcher
+        return super(ResearcherView, self).get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(ResearcherView, self).get_context_data(**kwargs)
+        researcher = self.researcher
+        context['researcher'] = researcher
+        context['researcher_id'] = researcher.id
+        context['search_description'] += _(' authored by ')+unicode(researcher)
+        context['head_search_description'] = unicode(researcher)
+        context['breadcrumbs'] = researcher.breadcrumbs()
+        all_queryset = context['form'].all_combined_status
+        context['search_stats'] = self.stats(all_queryset)
+        context['ajax_url'] = self.url
+        return context
+
+    def raw_response(self, context, **kwargs):
+        response = super(ResearcherView, self).raw_response(context, **kwargs)
+        researcher = self.researcher
+        stats = context['search_stats']
+        response['stats'] = json.loads(stats.pie_data(researcher.object_id))
+        response['stats']['numtot'] = stats.num_tot
+        if researcher.current_task:
+            response['status'] = researcher.current_task
+            response['display'] = researcher.get_current_task_display()
+        return response
+
+
 @user_passes_test(is_admin)
 def reclusterResearcher(request, pk):
     source = get_object_or_404(Researcher, pk=pk)
@@ -358,15 +412,13 @@ def refetchResearcher(request, pk):
     send_task('fetch_everything_for_researcher', [], {'pk':pk})
     return redirect(request.META['HTTP_REFERER'])
 
-class ResearcherView(generic.DetailView):
-    model = Researcher
-    template_name = 'papers/researcher.html'
 
 @user_passes_test(is_authenticated)
 def myProfileView(request):
     try:
         r = Researcher.objects.get(user=request.user)
-        return searchView(request, researcher=r.pk)
+        return ResearcherPaperSearchView.as_view(request,
+                                            researcher=r.pk, slug=r.slug)
     except Researcher.DoesNotExist:
         return render(request, 'papers/createProfile.html')
 
