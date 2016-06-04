@@ -72,6 +72,9 @@ class RenderingTest(PrefilledTest):
     def checkPermanentRedirect(self, *args, **kwargs):
         self.assertEqual(self.getPage(*args, **kwargs).status_code, 301)
 
+    def check404(self, *args, **kwargs):
+        self.assertEqual(self.getPage(*args, **kwargs).status_code, 404)
+
     def checkUrl(self, url):
         self.checkHtml(self.client.get(url))
 
@@ -94,6 +97,9 @@ class PaperPagesTest(RenderingTest):
 
     def test_researcher_orcid(self):
         self.checkPermanentRedirect('researcher-by-orcid', kwargs={'orcid':self.r4.orcid})
+
+    def test_researcher_blocked_orcid(self):
+        self.check404('researcher-by-orcid', kwargs={'orcid':'0000-0002-2803-9471'})
 
     def test_search_no_parameters(self):
         self.checkPage('search')

@@ -123,9 +123,12 @@ def searchView(request, **kwargs):
             try:
                 researcher = Researcher.objects.get(orcid=args.get('orcid'))
             except Researcher.DoesNotExist:
-                orcid = validate_orcid(args.get('orcid'))
-                researcher = Researcher.get_or_create_by_orcid(orcid)
-                researcher.init_from_orcid()
+                try:
+                    orcid = validate_orcid(args.get('orcid'))
+                    researcher = Researcher.get_or_create_by_orcid(orcid)
+                    researcher.init_from_orcid()
+                except MetadataSourceException:
+                    raise Http404(_('Invalid ORCID profile.'))
 
         # Slug parameter is None if 'orcid' in args
         if args.get('slug') != researcher.slug:
