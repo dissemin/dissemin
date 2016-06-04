@@ -38,7 +38,8 @@ urlpatterns = [
         url(r'^p/(?P<pk>\d+)/(?P<slug>[\w-]+)?$', views.PaperView.as_view(), name='paper'),
         url(r'^(?P<doi>10\..*)', views.PaperView.as_view(), name='paper-doi'),
         url(r'^mail_paper/(?P<pk>\d+)/$', views.mailPaperView, name='mail_paper'),
-        url(r'^journal/(?P<journal>\d+)/$', views.searchView, name='journal'),
+        url(r'^search/b/(?P<publisher>\d+)/(?P<slug>[\w-]+)?$', views.PublisherPapersView.as_view(), name='publisher-papers'),
+        url(r'^journal/(?P<journal>\d+)/$', views.JournalPapersView.as_view(), name='journal'),
         # Institution-specific views
         url(r'^department/(?P<pk>\d+)/$', views.DepartmentView.as_view(), name='department'),
         url(r'^search/department/(?P<pk>\d+)/$', views.DepartmentPapersView.as_view(), name='department-papers'),

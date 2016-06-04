@@ -418,6 +418,48 @@ class DepartmentPapersView(PaperSearchView):
         return context
 
 
+class PublisherPapersView(PaperSearchView):
+    """
+    Displays the papers of a given publisher.
+
+    :class:`PublisherPapersView` is subclassed by :class:`JournalPapersView`,
+    which simply overrides a couple of variables.
+    """
+
+    publisher_key = 'publisher'
+    publisher_cls = Publisher
+    published_by = _(' published by ')
+
+    def get(self, request, *args, **kwargs):
+        if not is_admin(request.user):
+            raise Http404()
+        publisher = get_object_or_404(
+            self.publisher_cls, pk=kwargs[self.publisher_key])
+        self.publisher = publisher
+        self.queryset = self.queryset.filter(
+            **{self.publisher_key: publisher.id})
+        return super(PublisherPapersView, self)\
+            .get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        publisher = self.publisher
+        context = super(PublisherPapersView, self)\
+            .get_context_data(**kwargs)
+        context[self.publisher_key] = publisher
+        context['search_description'] += self.published_by+unicode(publisher)
+        context['head_search_description'] = unicode(publisher)
+        context['breadcrumbs'] = publisher.breadcrumbs()+[(_('Papers'), '')]
+        return context
+
+
+class JournalPapersView(PublisherPapersView):
+    """Displays the papers in a given journal."""
+
+    publisher_key = 'journal'
+    publisher_cls = Journal
+    published_by = _(' in ')
+
+
 @user_passes_test(is_admin)
 def reclusterResearcher(request, pk):
     source = get_object_or_404(Researcher, pk=pk)

@@ -127,7 +127,7 @@ $(function(){
 <span class="detailsTitle">{% trans "Journal" %}</span>
     <div class="detailsContent">
         <p id="detail-name">{{ journal }}</p>
-        <p>{% trans "Published by" %} <a href="{{ publisher.canonical_url }}">{{ journal.publisher }}</a></p>
+        <p>{% trans "Published by" %} <a href="{{ journal.publisher.canonical_url }}">{{ journal.publisher }}</a></p>
         {% if journal.issn %}
         <p>{% trans "ISSN:" %} {{ journal.issn }}</p>
         {% endif %}
@@ -136,8 +136,11 @@ $(function(){
         <div class="criterionItem">{{ journal.publisher.oa_status |explain_oa_status}}</div>
     </div>
 
-    <p><span class="glyphicon glyphicon-stats"></span>{% blocktrans trimmed %}
-    <span id="nbPapersFound">{{ nb_results }}</span> papers found
+    <p><span class="glyphicon glyphicon-stats"></span>
+    {% blocktrans trimmed count nb_publi=journal.stats.num_tot|default:0 %}
+    {{ nb_publi }} paper published in {{ journal }}
+    {% plural %}
+    {{ nb_publi }} papers published in {{ journal }}
     {% endblocktrans %}
     </p>
     </div>
@@ -150,8 +153,11 @@ $(function(){
         <div class="criterionItem">{{ publisher.oa_status |explain_oa_status}}</div>
         </div>
 
-    <p><span class="glyphicon glyphicon-stats"></span>{% blocktrans trimmed %}
-    <span id="nbPapersFound">{{ nb_results }}</span> papers found
+    <p><span class="glyphicon glyphicon-stats"></span>
+    {% blocktrans trimmed count nb_publi=publisher.stats.num_tot|default:0 %}
+    {{ nb_publi }} paper published by {{ publisher }}
+    {% plural %}
+    {{ nb_publi }} papers published by {{ publisher }}
     {% endblocktrans %}
     </p>
     </div>

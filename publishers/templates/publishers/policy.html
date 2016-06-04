@@ -87,7 +87,6 @@
 {% endblock %}
 
 {% block lists %}
-{% url 'search' as search_url %}
 {% with publisher.preprint as policy %}
 <div class="publisher-policy">
 {% include "publishers/detailsPolicy.html" with mode="none" %}
@@ -111,6 +110,14 @@
 {% endif %}
 
 {% if request.user.is_superuser %}
+<h4>{% trans "Publications" %}</h4>
+<ul>
+    <li><a href="{% url 'publisher-papers' publisher=publisher.id %}">
+        {% blocktrans trimmed with publisher=publisher.name %}
+        All papers published by {{ publisher }}
+        {% endblocktrans %}
+    </a></li>
+</ul>
 <h4>{% trans "Journals" %}</h4>
 <p>{% trans "Only journals with papers written by our users are listed." %}</p>
 {% if journals.paginator.num_pages > 1 %}
