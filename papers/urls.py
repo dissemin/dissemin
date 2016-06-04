@@ -21,10 +21,8 @@
 from __future__ import unicode_literals
 
 from django.conf.urls import include, url
-from django.contrib.auth.views import login
-from django.contrib.auth.views import logout
 
-from papers import views, ajax
+from papers import views
 
 urlpatterns = [
         url(r'^$', views.index, name='index'),

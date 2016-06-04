@@ -30,7 +30,6 @@ from papers.models import *
 from papers.name import *
 from publishers.models import OA_STATUS_CHOICES_WITHOUT_HELPTEXT
 from statistics.models import COMBINED_STATUS_CHOICES, PDF_STATUS_CHOICES
-from upload.models import UploadedPDF
 
 class OrcidField(forms.CharField):
     def to_python(self, val):
