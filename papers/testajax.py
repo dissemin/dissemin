@@ -60,6 +60,7 @@ class JsonRenderingTest(PrefilledTest):
 
     def ajaxGet(self, *args, **kwargs):
         kwargs['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest'
+        kwargs['CONTENT_TYPE'] = 'application/json'
         return self.client.get(*args, **kwargs)
 
     def ajaxPost(self, *args, **kwargs):
@@ -87,6 +88,12 @@ class PaperAjaxTest(JsonRenderingTest):
         super(PaperAjaxTest, cls).setUpClass()
         u = User.objects.create_user('terry', 'pit@mat.io', 'yo')
         u.save()
+
+    def test_researcher_papers(self):
+        page = self.getPage('researcher',
+                            kwargs={'researcher': self.r1.id,
+                                    'slug': self.r1.slug})
+        self.checkJson(page)
 
     def test_valid_search(self):
         for args in [
