@@ -107,14 +107,11 @@ class PaperPagesTest(RenderingTest):
     def test_search_no_parameters(self):
         self.checkPage('search')
 
-    def test_search_researcher_pk(self):
-        self.checkPermanentRedirect('search', getargs={'researcher':self.r3.pk})
-
     def test_search_name(self):
-        self.checkPage('search', getargs={'name':self.r3.name_id})
+        self.checkPage('search', getargs={'authors': self.r3.name})
 
-    def test_search_department(self):
-        self.checkPage('search', getargs={'department':self.di.pk})
+    def test_department_papers(self):
+        self.checkPage('department-papers', kwargs={'pk':self.di.pk})
 
     def test_missing_info_in_pub(self):
         p = Paper.create_by_doi('10.1007/978-3-642-14363-2_7')
