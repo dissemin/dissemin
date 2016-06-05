@@ -35,7 +35,6 @@ from papers.models import OaiRecord, Paper
 
 #        # Paper views
 #        url(r'^mail_paper/(?P<pk>\d+)/$', views.mailPaperView, name='mail_paper'),
-#        url(r'^journal/(?P<journal>\d+)/$', views.searchView, name='journal'),
 #        # Tasks, AJAX
 #        url(r'^researcher/(?P<pk>\d+)/update/$', views.refetchResearcher, name='refetch-researcher'),
 #        url(r'^researcher/(?P<pk>\d+)/recluster/$', views.reclusterResearcher, name='recluster-researcher'),
@@ -93,7 +92,7 @@ class PaperPagesTest(RenderingTest):
     def test_researcher(self):
         for r in [self.r1, self.r2, self.r3, self.r4]:
             self.checkPage('researcher', kwargs={'researcher':r.pk, 'slug':r.slug})
-            self.checkUrl(self.r4.url)
+            self.checkUrl(r.url)
 
     def test_researcher_orcid(self):
         self.checkPermanentRedirect('researcher-by-orcid', kwargs={'orcid':self.r4.orcid})
@@ -116,6 +115,16 @@ class PaperPagesTest(RenderingTest):
     def test_missing_info_in_pub(self):
         p = Paper.create_by_doi('10.1007/978-3-642-14363-2_7')
         self.checkPage('paper', kwargs={'pk':p.id, 'slug':p.slug})
+
+    def test_publisher_papers(self):
+        # TODO checkPage when logged in as superuser.
+        self.check404('publisher-papers', kwargs={'publisher': self.acm.pk})
+
+    def test_journal(self):
+        # TODO checkPage when logged in as superuser.
+        self.check404('journal', kwargs={'journal': self.lncs.pk})
+
+    # ampersands not escaped in django bootstrap pagination, https://github.com/jmcclell/django-bootstrap-pagination/issues/41
 
     def test_paper(self):
         for p in self.r3.papers:
