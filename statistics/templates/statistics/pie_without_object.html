@@ -1,22 +1,46 @@
 {% load get_pie_data %}
+{% load i18n %}
 <div class="access-statistics" id="statspie_n{{ stats_counter }}">
   <div class="statspie_graph"></div>
-  <div class="statspie_caption"></div>
+  <div class="statspie_caption">
+  {% if combined_status_form %}
+  <div class="stats_caption_table hiddenCheckboxes">
+    {{ combined_status.errors }}
+  {% else %}
+  <div class="stats_caption_table">
+  {% endif %}
+    {% for status in combined_status %}
+      {% if combined_status_form %}
+      <label class="stats_caption_line">
+        {{ status.tag }}
+      {% else %}
+      <a class="stats_caption_line" href="{% url 'search' %}?combined_status={{ status.choice_value }}">
+      {% endif %}
+        <span class="stats_caption_box">
+          <span class="stats_caption_color"
+            style="background-color:{% cycle "#FCD206" "#B9C909" "#419BE8" "#dddddd" "#122B52" %}"></span>
+        </span>
+        <span class="stats_caption_label">
+          <span class="stats_caption_label_text">{{ status.choice_label }}</span>
+          <span class="detail">
+            {% cycle stats.num_oa stats.num_ok stats.num_couldbe stats.num_unk stats.num_closed %}
+          </span>
+        </span>
+      {% if combined_status_form %}
+        <span class="checkbox-x glyphicon glyphicon-ok"></span>
+      </label>
+      {% else %}
+      </a>
+      {% endif %}
+    {% endfor %}
+  </div>
+  </div>
   <script type="text/javascript">
 $(function() {
-
-    // {{ stats.pk }} {{ stats.num_tot }}
-{% if stats.num_tot %}
-    var data = {{ stats|get_pie_data:object_id }}
-  updateStats = showStatsPie(data.detailed, data.aggregated, "statspie_n{{ stats_counter }}", "{{ state }}");
-{% else %}
-  updateStats = function(data) {
-     if(data.numtot) {
-         var newUpdateStats = showStatsPie(data.detailed, data.aggregated, "statspie_n{{ stats_counter }}", "{{ state }}");
-         updateStats = newUpdateStats;
-     }
-  }
-{% endif %}
-  });
+  // {{ stats.pk }} {{ stats.num_tot }}
+  var data = {{ stats|get_pie_data }}
+  data.on_statuses = {{ on_statuses|safe }}
+  updateStats = showStatsPie(data, "statspie_n{{ stats_counter }}");
+});
   </script>
 </div>

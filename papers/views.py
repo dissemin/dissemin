@@ -30,7 +30,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import user_passes_test
 from django.utils.encoding import escape_uri_path
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext as _, ungettext
 from django.db.models import Count
 from haystack.generic_views import SearchView
 from haystack.query import EmptySearchQuerySet
@@ -49,7 +49,7 @@ from notification.api import get_notifications
 from deposit.models import *
 
 from publishers.views import SlugDetailView
-from statistics.models import BareAccessStatistics, COMBINED_STATUS_CHOICES
+from statistics.models import COMBINED_STATUS_CHOICES, combined_status_stats
 from dissemin.settings import UNIVERSITY_BRANDING
 
 from allauth.socialaccount.signals import post_social_login
@@ -88,6 +88,9 @@ def index(request):
     """
     context = {
         'newResearcherForm' : AddUnaffiliatedResearcherForm(),
+        'combined_status' :
+            [{'choice_value': v, 'choice_label': l}
+             for v, l in COMBINED_STATUS_CHOICES]
         }
     context.update(UNIVERSITY_BRANDING)
     return render(request, 'papers/index.html', context)
@@ -117,7 +120,14 @@ class PaperSearchView(SearchView):
         context['search_description'] = (
             search_description if query_string else _('All papers'))
         context['head_search_description'] = _('Papers')
-        context['nb_results'] = self.queryset.count()
+        nb_results = self.queryset.count()
+        context['nb_results'] = ungettext(
+            '%d paper found',
+            '%d papers found',
+            nb_results) % nb_results
+        context['search_stats'] = combined_status_stats(self.queryset)
+        context['on_statuses'] = json.dumps(context['form'].on_statuses())
+        context['ajax_url'] = self.request.path
 
         # Notifications
         # TODO: unefficient query.
@@ -140,9 +150,13 @@ class PaperSearchView(SearchView):
     def raw_response(self, context, **kwargs):
         context['request'] = self.request
         listPapers = loader.render_to_string('papers/paperList.html', context)
+        stats = context['search_stats'].pie_data()
+        stats['on_statuses'] = context['form'].on_statuses()
         return {
             'listPapers': listPapers,
             'messages': context['messages'],
+            'stats': stats,
+            'nb_results': context['nb_results'],
         }
 
     def form_invalid(self, form):
@@ -201,17 +215,11 @@ class ResearcherView(PaperSearchView):
         context['search_description'] += _(' authored by ')+unicode(researcher)
         context['head_search_description'] = unicode(researcher)
         context['breadcrumbs'] = researcher.breadcrumbs()
-        all_queryset = context['form'].all_combined_status
-        context['search_stats'] = self.stats(all_queryset)
-        context['ajax_url'] = self.url
         return context
 
     def raw_response(self, context, **kwargs):
         response = super(ResearcherView, self).raw_response(context, **kwargs)
         researcher = self.researcher
-        stats = context['search_stats']
-        response['stats'] = json.loads(stats.pie_data(researcher.object_id))
-        response['stats']['numtot'] = stats.num_tot
         if researcher.current_task:
             response['status'] = researcher.current_task
             response['display'] = researcher.get_current_task_display()
@@ -234,7 +242,6 @@ class DepartmentPapersView(PaperSearchView):
         context['search_description'] = context['head_search_description'] = (
             unicode(self.dept))
         context['breadcrumbs'] = self.dept.breadcrumbs()+[(_('Papers'), '')]
-        context['search_stats'] = self.stats()
         return context
 
 

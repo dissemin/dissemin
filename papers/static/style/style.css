@@ -640,7 +640,8 @@ ul.compactList
     margin-bottom: 2px;
 }
 
-.publisherCriterion input[type=checkbox]
+.publisherCriterion input[type=checkbox],
+.hiddenCheckboxes input[type=checkbox]
 {
     display: none;
 }
@@ -669,6 +670,32 @@ ul.compactList
 input[type=checkbox]:checked + div.publisherCriterionBox
 {
     border-color: #8ecc50;
+}
+
+.checkbox-x
+{
+    visibility: hidden;
+    display: table-cell;
+}
+
+label.stats_caption_line
+{
+    cursor: pointer;
+}
+
+input[type=checkbox]:checked ~ .checkbox-x
+{
+    visibility: visible;
+}
+
+input[type=checkbox] ~ .stats_caption_label
+{
+    font-weight: normal;
+}
+
+input[type=checkbox]:checked ~ .stats_caption_label
+{
+    font-weight: bold;
 }
 
 .form-group .tightLabel
@@ -832,7 +859,7 @@ input[type=checkbox]:checked + div.publisherCriterionBox
 	margin-right:20px;
 }
 
-#sidebar .statspie_graph {
+#sidebar .statspie_graph, #sidebar .statspie_caption {
     display:block;
     margin:auto;
     text-align:center;
@@ -846,10 +873,16 @@ input[type=checkbox]:checked + div.publisherCriterionBox
 	font-size:0.9em;
 	display:inline-block;
 	vertical-align:top;
+	color:#1f4a6e;
+}
+
+.stats_caption_table {
+    display:table;
+    text-align:left;
 }
 
 .stats_caption_line {
-	display:table;
+	display:table-row;
 }
 
 .stats_caption_box {
@@ -870,12 +903,29 @@ input[type=checkbox]:checked + div.publisherCriterionBox
 	vertical-align:middle;
 	padding:1px;
 	padding-left:7px;
+	width:99%;
+}
+
+.stats_caption_label_text {
+    overflow:hidden;
+    white-space:nowrap;
+    max-width:204px;
+    display:inline-block;
+    vertical-align:top;
+}
+
+.stats_caption_line:hover .stats_caption_label_text {
+    text-decoration: underline;
 }
 
 .stats_caption_label .detail {
 	color:#666;
 	font-size:0.8em;
 	margin-left:3px;
+}
+
+a.stats_caption_line:hover {
+    text-decoration: none;
 }
 
 .stats_pctbar {

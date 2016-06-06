@@ -34,28 +34,31 @@ function init_paper_module (config) {
 
   var MARK_AS_READ = gettext('Do not show this message anymore')
 
-  function addWaitingArea (animatedBirdGIF, container, currentTask) {
-    container.html(
+  function addWaitingArea () {
+    $(
       "<div id='waitingArea'>" +
         "<span class='waitingBird'>" +
-          "<img src='" + animatedBirdGIF + "' alt='Paper animated bird' />" +
+          "<img src='" + config.animatedBirdGIF + "' alt='Paper animated bird' />" +
         "</span>" +
         "<br />" +
-        "<span id='harvestingStatus'>" +
-          currentTask +
-        "</span>" +
+        "<span id='harvestingStatus'></span>" +
         "<span>…</span>" +
         "<br />" +
       "</div>"
-    )
+    ).hide().appendTo(config.waitingAreaContainerNode)
 
     config.waitingAreaNode = $('#waitingArea')
+    config.harvestingStatusNode = $('#harvestingStatus')
+  }
+  addWaitingArea()
+
+  function fadeOutWaitingArea () {
+    config.waitingAreaNode.fadeOut()
   }
 
   function notifyWaitingArea (message) {
-    addWaitingArea(config.animatedBirdGIF,
-                   config.waitingAreaContainerNode,
-                   message)
+    config.harvestingStatusNode.html(message)
+    config.waitingAreaNode.show()
   }
 
   function renderReason (reason) {
@@ -162,33 +165,51 @@ function init_paper_module (config) {
     })
   }
 
+  function updateData (data) {
+    config.paperSearchResultsNode.html(data.listPapers)
+    updateStats(data.stats)
+    config.nbPapersFoundNode.text(data.nb_results)
+    flashMessages(parseMessages(data.messages))
+  }
+
+  var refreshTask
+  var query = window.location.search
+
+  // A user-requested refresh dims the paper list.
   function refreshPapers () {
-    return call_api(config.refreshURL)
+    config.paperSearchResultsNode.children().css('opacity', '0.5')
+    window.clearTimeout(refreshTask)
+    _refreshPapers(800)
+  }
+
+  function _refreshPapers (delay) {
+    refreshTask = window.setTimeout(_refresh, delay)
+  }
+
+  function _refresh () {
+    var this_query = query
+    return call_api(config.refreshURL + this_query)
       .then(function (response) {
         return response.json()
       }).then(function (data) {
-        config.paperSearchResultsNode.html(data.listPapers)
-        updateStats(data.stats)
-        flashMessages(parseMessages(data.messages))
-        config.nbPapersFoundNode.text(data.stats.numtot)
+        updateData(data)
 
         if (data.display) {
           // We update the status text if we have new status.
-          config.harvestingStatusNode().text(data.display)
-          setTimeout(refreshPapers, 3000)
+          notifyWaitingArea(data.display)
+          _refreshPapers(3000)
         } else {
-          config.waitingAreaNode.fadeOut(function () {
-            config.waitingAreaNode.hide()
-          })
+          fadeOutWaitingArea()
         }
 
-        console.log('Paper refresh has succeed', data)
+        if (window.location.search === this_query)
+          window.history.replaceState(data, "", document.location.search)
+        else
+          window.history.pushState(data, "", this_query)
       })
       .catch(function (error) {
         console.error('Paper refresh has failed', error)
-        config.waitingAreaNode.fadeOut(function () {
-          config.waitingAreaNode.hide()
-        })
+        fadeOutWaitingArea()
       })
   }
 
@@ -201,7 +222,7 @@ function init_paper_module (config) {
         .then(function (response) {
           console.log('Refetch process is a success.', response)
           notifyWaitingArea(refreshMessage)
-          setTimeout(refreshPapers, 1000)
+          refreshPapers()
         })
         .catch(function (error) {
           console.error('Refetch process has failed', error)
@@ -235,14 +256,14 @@ function init_paper_module (config) {
 
   // When we click on the refetch button, we reload the publications.
   config.refetchButtonNode.click(
-    refetchPublications(config.refetchURL, config.refreshMessage)
+    refetchPublications(config.refetchURL, config.refetchMessage)
   )
 
-  // If we have a current task running, we add message status on the waiting area.
-  // And we schedule a refresh paper to poll new results from the server.
+  // If we have a current task running,
+  // we schedule a paper refresh to poll new results from the server.
   if (config.currentTask) {
     notifyWaitingArea(config.currentTask)
-    setTimeout(refreshPapers, 1500)
+    _refreshPapers(1500)
   }
 
   if (config.isSuperUser) {
@@ -255,4 +276,56 @@ function init_paper_module (config) {
     var messages = parseMessages(config.initialMessages)
     flashMessages(messages)
   }
+
+  function refreshWithQuery(_query) {
+    query = _query ? '?' + _query : ''
+    refreshPapers()
+  }
+
+  function fillForm(form, query) {
+    var test = function (re) {
+      return (new RegExp(re)).test(query)
+    }
+    var find = function (re) {
+      var m = (new RegExp(re)).exec(query)
+      return m ? m[1].replace('+', ' ') : ''
+    }
+    $(form + ' :input, :input[form="' + form + '"]').each(function () {
+      switch (this.type) {
+        case 'checkbox':
+          this.checked = test(this.name + '=' + this.value)
+          break
+        case 'search':
+        case 'text':
+          $(this).val(find(this.name + '=([^&#]+)'))
+          break
+      }
+    })
+  }
+
+  window.onpopstate = function (e) {
+    query = document.location.search
+    if (e.state) {
+      updateData(e.state)
+    } else {
+      refreshPapers()
+    }
+    fillForm('#searchPapers', query)
+  }
+
+  $('#searchPapers').submit(function (e) {
+    e.preventDefault()
+    var $inputs = $(':input', this)
+    // Remove empty parameters from queries for cleaner URLs.
+    var disableEmptyInputs = function (b) {
+      $inputs.each(function (){
+        if (!$(this).val())
+          this.disabled = b
+      })
+    }
+    disableEmptyInputs(true)
+    notifyWaitingArea(config.refreshMessage)
+    refreshWithQuery($.param($(this).serializeArray()))
+    disableEmptyInputs(false)
+  })
 }

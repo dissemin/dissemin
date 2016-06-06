@@ -96,6 +96,16 @@ def combined_status_for_instance(paper):
             return 'closed'
     return 'unk'
 
+
+def combined_status_stats(queryset):
+    aggregations = queryset.get_aggregation_results()
+    buckets = {
+        bucket['key']: bucket['doc_count']
+        for bucket in aggregations['status']['buckets']
+    }
+    return BareAccessStatistics.from_dict(buckets)
+
+
 class BareAccessStatistics(object):
     """
     A bare (not saved in the DB) summary of the status of publications
@@ -147,6 +157,14 @@ class BareAccessStatistics(object):
             setattr(stats, attrname, getattr(stats, attrname) + 1)
         return stats
 
+    @classmethod
+    def from_dict(cls, d):
+        stats = cls.new()
+        for status, count in d.iteritems():
+            stats.num_tot += count
+            setattr(stats, 'num_'+status, count)
+        return stats
+
     def check_values(self):
         """
         Checks that values are consistent (non-negative and summing up to the total).
@@ -161,33 +179,25 @@ class BareAccessStatistics(object):
                   self.num_unk + self.num_closed == self.num_tot
                 )
 
-    def pie_data(self, object_id):
+    def pie_data(self):
         """
-        Returns a JSON representation of the data needed to display
+        Returns a dictionary containing the data needed to display
         the statistics as a pie.
         """
-        baseurl = reverse('search')+'?'+object_id
         detailed_data = []
         for (key,desc) in COMBINED_STATUS_CHOICES:
             item = {
                 'id':key,
                 'label':unicode(desc),
                 'value':self.__dict__['num_'+key],
-                'url':baseurl+'&state='+key,
-                'baseurl':baseurl,
                 }
             detailed_data.append(item)
-        aggregated_data = []
+        # Gives the translated label
+        aggregated_labels = []
         for (key,desc) in PDF_STATUS_CHOICES:
-            item = {
-                'id':key,
-                'label':unicode(desc),
-                'value':self.num_available if key == 'OK' else self.num_unavailable,
-                'url':baseurl+'&pdf='+key,
-                'baseurl':baseurl,
-                }
-            aggregated_data.append(item)
-        return json.dumps({'detailed':detailed_data,'aggregated':aggregated_data})
+            item = {'label': unicode(desc)}
+            aggregated_labels.append(item)
+        return {'detailed':detailed_data,'aggregated':aggregated_labels}
 
     @property
     def num_available(self):
