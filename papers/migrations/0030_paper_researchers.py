@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='paper',
             name='researchers',
-            field=models.ManyToManyField(blank=True, null=True, to='papers.Researcher'),
+            field=models.ManyToManyField(to='papers.Researcher'),
         ),
         migrations.RunPython(populate_researchers, do_nothing)
     ]
