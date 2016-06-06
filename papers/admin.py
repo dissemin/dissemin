@@ -17,6 +17,7 @@
 #
 
 from django.contrib import admin
+from solo.admin import SingletonModelAdmin
 from papers.models import *
 
 class NameInline(admin.TabularInline):
@@ -49,4 +50,4 @@ admin.site.register(Name)
 admin.site.register(Paper, PaperAdmin)
 admin.site.register(OaiSource)
 admin.site.register(OaiRecord, OaiRecordAdmin)
-
+admin.site.register(PaperWorld, SingletonModelAdmin)

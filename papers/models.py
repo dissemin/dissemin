@@ -1208,18 +1208,20 @@ class OaiRecord(models.Model, BareOaiRecord):
     class Meta:
         verbose_name = "OAI record"
 
+
+def create_default_stats():
+    return AccessStatistics.objects.create().pk
+
+
 class PaperWorld(SingletonModel):
     """
     A singleton to link to a special instance of AccessStatistics for all papers
     """
-    stats = models.ForeignKey(AccessStatistics, null=True)
+    stats = models.ForeignKey(AccessStatistics, default=create_default_stats)
 
     def update_stats(self):
         """Update the access statistics for all papers"""
-        if not self.stats:
-            self.stats = AccessStatistics.objects.create()
-            self.save()
-        self.stats.update(Paper.objects.all())
+        self.stats.update(Paper.objects.filter(visibility='VISIBLE'))
 
     @property
     def object_id(self):
