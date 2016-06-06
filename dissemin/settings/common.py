@@ -269,7 +269,7 @@ USE_TZ = True
 LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'),)
 
 # Login and athentication
-LOGIN_URL = '/accounts/login'
+LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 
 # Settings for our own API
