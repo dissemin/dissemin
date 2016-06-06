@@ -1201,7 +1201,7 @@ class PaperWorld(SingletonModel):
 
     def update_stats(self):
         """Update the access statistics for all papers"""
-        self.stats.update(Paper.objects.filter(visibility='VISIBLE'))
+        self.stats.update(Paper.objects.filter(visible=True))
 
     @property
     def object_id(self):
