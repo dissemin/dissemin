@@ -68,6 +68,7 @@ from papers.baremodels import *
 from papers.name import match_names, name_similarity, unify_name_lists
 from papers.utils import remove_diacritics, sanitize_html, validate_orcid, affiliation_is_greater, remove_nones, index_of, iunaccent
 from papers.orcid import OrcidProfile
+from papers.errors import MetadataSourceException
 
 from statistics.models import AccessStatistics, STATUS_CHOICES_HELPTEXT, combined_status_for_instance
 from publishers.models import Publisher, Journal, OA_STATUS_CHOICES, OA_STATUS_PREFERENCE, DummyPublisher
@@ -351,7 +352,17 @@ class Researcher(models.Model):
 
     @classmethod
     def get_or_create_by_orcid(cls, orcid, profile=None, user=None):
+        """
+        Creates (or returns an existing) researcher from its ORCID id.
+
+        :param profile: an :class:`OrcidProfile` object if it has already been fetched
+                        from the API (otherwise we will fetch it ourselves)
+        :param user: an user to associate with the profile.
+        :returns: a :class:`Researcher` if everything went well, raises MetadataSourceException otherwise
+        """
         researcher = None
+        if orcid is None:
+            raise MetadataSourceException('Invalid ORCID id')
         try:
             researcher = Researcher.objects.get(orcid=orcid)
         except Researcher.DoesNotExist:

@@ -98,6 +98,9 @@ class PaperPagesTest(RenderingTest):
     def test_researcher_orcid(self):
         self.checkPermanentRedirect('researcher-by-orcid', kwargs={'orcid':self.r4.orcid})
 
+    def test_invalid_orcid(self):
+        self.check404('researcher-by-orcid', kwargs={'orcid':'0000-0002-2803-9724'})
+
     def test_researcher_blocked_orcid(self):
         self.check404('researcher-by-orcid', kwargs={'orcid':'0000-0002-2803-9471'})
 
