@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-04 22:47+0200\n"
+"POT-Creation-Date: 2016-06-08 21:32+0200\n"
 "PO-Revision-Date: 2016-06-04 22:47+0200\n"
-"Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
+"Last-Translator: Li-yao Xia <li-yao.xia@ens.fr>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -42,7 +42,7 @@ msgstr "Document défectueux"
 msgid "Deposited"
 msgstr "Déposé"
 
-#: deposit/models.py:150 deposit/templates/deposit/start.html:289
+#: deposit/models.py:150 deposit/templates/deposit/start.html.py:289
 #: deposit/views.py:78
 msgid "Deposit"
 msgstr "Dépôt"
@@ -163,11 +163,11 @@ msgstr "Creative Commons Attribution-NoDerivatives (Pas de travaux dérivés)"
 msgid "Other open license"
 msgstr "Autre licence libre"
 
-#: dissemin/settings/common.py:262
+#: dissemin/settings/common.py:263
 msgid "English"
 msgstr "Anglais"
 
-#: dissemin/settings/common.py:263
+#: dissemin/settings/common.py:264
 msgid "French"
 msgstr "Français"
 
@@ -235,7 +235,7 @@ msgstr "Thèse"
 msgid "Dataset"
 msgstr "Banque de données"
 
-#: papers/baremodels.py:62 papers/models.py:81
+#: papers/baremodels.py:62 papers/models.py:82
 msgid "Preprint"
 msgstr "Préprint"
 
@@ -247,12 +247,12 @@ msgstr "Autre publication"
 msgid "Invalid ORCID identifier."
 msgstr "Identifiant ORCID invalide."
 
-#: papers/forms.py:39 papers/templates/papers/department.html:87
+#: papers/forms.py:39 papers/templates/papers/department.html.py:87
 #: papers/templates/papers/search.html:112
 msgid "Department"
 msgstr "Département"
 
-#: papers/forms.py:40 papers/templates/papers/search.html:53
+#: papers/forms.py:40 papers/templates/papers/search.html.py:53
 msgid "Researcher"
 msgstr "Personne"
 
@@ -276,54 +276,54 @@ msgstr "Il faut fournir un nom de famille."
 msgid "A first name is required."
 msgstr "Il faut fournir un prénom."
 
-#: papers/models.py:82
+#: papers/models.py:83
 msgid "Postprint"
 msgstr "Postprint"
 
-#: papers/models.py:83
+#: papers/models.py:84
 msgid "Published version"
 msgstr "Version publiée"
 
-#: papers/models.py:87
+#: papers/models.py:88
 msgid "Preparing profile"
 msgstr "Préparation du profil"
 
-#: papers/models.py:88
+#: papers/models.py:89
 msgid "Fetching publications from ORCID"
 msgstr "Récupération des publications à partir d'ORCID"
 
-#: papers/models.py:89
+#: papers/models.py:90
 msgid "Fetching publications from CrossRef"
 msgstr "Récupération des publications à partir de CrossRef"
 
-#: papers/models.py:90
+#: papers/models.py:91
 msgid "Fetching publications from BASE"
 msgstr "Récupération des publications à partir de BASE"
 
-#: papers/models.py:91
+#: papers/models.py:92
 msgid "Fetching publications from CORE"
 msgstr "Récupération des publications à partir de CORE"
 
-#: papers/models.py:92
+#: papers/models.py:93
 msgid "Fetching publications from OAI-PMH"
 msgstr "Récupération des publications à partir d'OAI-PMH"
 
-#: papers/models.py:93
+#: papers/models.py:94
 msgid "Clustering publications"
 msgstr "Regroupement des publications"
 
-#: papers/models.py:94
+#: papers/models.py:95
 msgid "Updating statistics"
 msgstr "Mise à jour des statistiques"
 
-#: papers/models.py:919 papers/views.py:114 papers/views.py:115
+#: papers/models.py:930 papers/views.py:114 papers/views.py:115
 #: papers/views.py:150 papers/views.py:169 papers/views.py:201
 msgid "Papers"
 msgstr "Papiers"
 
 #: papers/templates/papers/ajaxListPapers.html:21
 #: papers/templates/papers/search.html:277
-#: publishers/templates/publishers/list.html:117
+#: publishers/templates/publishers/list.html:125
 msgid "No production found."
 msgstr "Aucune production trouvée."
 
@@ -368,7 +368,7 @@ msgstr ""
 "tout problème à contact@dissem.in."
 
 #: papers/templates/papers/department.html:61
-#: publishers/templates/publishers/list.html:104
+#: publishers/templates/publishers/list.html:112
 #: publishers/templates/publishers/policy.html:123
 #, python-format
 msgid "(%(num_total)s paper)"
@@ -476,8 +476,8 @@ msgid "Lastname"
 msgstr "Nom"
 
 #: papers/templates/papers/index.html:143
-#: publishers/templates/publishers/list.html:32
-#: publishers/templates/publishers/list.html:48
+#: publishers/templates/publishers/list.html:33
+#: publishers/templates/publishers/list.html:49
 msgid "Search"
 msgstr "Recherche"
 
@@ -925,7 +925,7 @@ msgstr "décroissant(e)"
 msgid "increasing"
 msgstr "croissant(e)"
 
-#: publishers/forms.py:19 publishers/templates/publishers/list.html:53
+#: publishers/forms.py:19 publishers/templates/publishers/list.html.py:54
 msgid "Filter by publisher policy"
 msgstr "Filtrer selon la politique de publication"
 
@@ -1043,18 +1043,24 @@ msgstr ""
 msgid "published version"
 msgstr "version publiée"
 
-#: publishers/templates/publishers/list.html:36
+#: publishers/templates/publishers/list.html:37
 #, python-format
 msgid "%(counter)s publisher found"
 msgid_plural "%(counter)s publishers found"
 msgstr[0] "%(counter)s maison d'édition trouvée"
 msgstr[1] "%(counter)s maisons d'édition trouvées"
 
-#: publishers/templates/publishers/list.html:73
+#: publishers/templates/publishers/list.html:75
 msgid "Sort by"
 msgstr "Trier par"
 
-#: publishers/templates/publishers/list.html:82
+# "Trier par valeur croissante"
+#: publishers/templates/publishers/list.html:83
+#, python-format
+msgid "%(sort_by)s <div>%(increasing)s %(value)s</div>"
+msgstr "%(sort_by)s <div>%(value)s %(increasing)s</div>"
+
+#: publishers/templates/publishers/list.html:90
 msgid "Data provided by"
 msgstr "Données fournies par"
 
@@ -1733,11 +1739,11 @@ msgstr ""
 "vous n'êtes pas satisfait par ce qu'elle propose, n'hésitez pas à nous "
 "contacter."
 
-#: templates/dissemin/faq.html:372 templates/dissemin/tos.html:142
+#: templates/dissemin/faq.html:372 templates/dissemin/tos.html.py:142
 msgid "Back to top"
 msgstr "Revenir en haut"
 
-#: templates/dissemin/feedback.html:6 templates/dissemin/feedback.html:11
+#: templates/dissemin/feedback.html:6 templates/dissemin/feedback.html.py:11
 #: templates/dissemin/skeleton.html:107
 msgid "Feedback"
 msgstr "Réactions"
@@ -1755,7 +1761,7 @@ msgstr "Connexion"
 msgid "Sign in"
 msgstr "Connexion"
 
-#: templates/dissemin/login.html:19 templates/dissemin/sandbox.html:19
+#: templates/dissemin/login.html:19 templates/dissemin/sandbox.html.py:19
 msgid ""
 "Dissemin uses ORCID to authenticate its users. ORCID is an independent non-"
 "profit effort to provide an open registry of unique researcher identifiers. "
@@ -1770,11 +1776,11 @@ msgstr ""
 "recherche à ces identifiants. Pour en savoir plus, visitez <a href=\"http://"
 "orcid.org\">orcid.org</a>."
 
-#: templates/dissemin/login.html:28 templates/dissemin/sandbox.html:30
+#: templates/dissemin/login.html:28 templates/dissemin/sandbox.html.py:30
 msgid "Log in"
 msgstr "Se connecter"
 
-#: templates/dissemin/login.html:30 templates/dissemin/sandbox.html:32
+#: templates/dissemin/login.html:30 templates/dissemin/sandbox.html.py:32
 msgid ""
 "If you already have an ORCID account, you can use it with Dissemin. We will "
 "not make any changes to your profile."
@@ -1782,22 +1788,22 @@ msgstr ""
 "Si vous avez déjà un compte ORCID, vous pouvez l'utiliser avec Dissemin. "
 "Nous ne ferons aucun changement sur votre profil."
 
-#: templates/dissemin/login.html:42 templates/dissemin/sandbox.html:44
+#: templates/dissemin/login.html:42 templates/dissemin/sandbox.html.py:44
 msgid "Sign up"
 msgstr "Inscription"
 
-#: templates/dissemin/login.html:44 templates/dissemin/sandbox.html:46
+#: templates/dissemin/login.html:44 templates/dissemin/sandbox.html.py:46
 msgid ""
 "Not an ORCID user yet? Create an account, it is free and takes a few seconds."
 msgstr ""
 "Si vous n'utilisez pas encore ORCID, créer un compte ne prend que quelques "
 "secondes."
 
-#: templates/dissemin/login.html:59 templates/dissemin/sandbox.html:61
+#: templates/dissemin/login.html:59 templates/dissemin/sandbox.html.py:61
 msgid "Dissemin account"
 msgstr "Compte Dissemin"
 
-#: templates/dissemin/login.html:60 templates/dissemin/sandbox.html:62
+#: templates/dissemin/login.html:60 templates/dissemin/sandbox.html.py:62
 #, python-format
 msgid ""
 "If you have not created an account yet, then please\n"
@@ -1806,11 +1812,11 @@ msgstr ""
 "Si vous n'avez pas encore de compte, essayez de vous\n"
 "<a href=\"%(signup_url)s\">inscrire</a> d'abord."
 
-#: templates/dissemin/login.html:69 templates/dissemin/sandbox.html:71
+#: templates/dissemin/login.html:69 templates/dissemin/sandbox.html.py:71
 msgid "Forgot Password?"
 msgstr "Mot de passe oublié ?"
 
-#: templates/dissemin/partners.html:7 templates/dissemin/partners.html:12
+#: templates/dissemin/partners.html:7 templates/dissemin/partners.html.py:12
 #: templates/dissemin/skeleton.html:115
 msgid "Partners"
 msgstr "Partenaires"
@@ -1839,7 +1845,7 @@ msgstr "Se déconnecter"
 msgid "Login"
 msgstr "Se connecter"
 
-#: templates/dissemin/skeleton.html:108 templates/dissemin/tos.html:11
+#: templates/dissemin/skeleton.html:108 templates/dissemin/tos.html.py:11
 msgid "Terms of Service"
 msgstr "Conditions d'utilisation"
 
