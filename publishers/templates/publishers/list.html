@@ -5,6 +5,7 @@
 {% load statuses %}
 {% load i18n %}
 {% load widget_tweaks %}
+{% load capture_tags %}
 
 {% block headTitle %}
 {{ search_description }}
@@ -70,11 +71,18 @@ $(function(){
         <div class="form-group form-inline" id="searchPublishersSortBy">
             {{ form.reverse_order.errors }}
             {{ form.sort_by.errors }}
+            {% capture as sort_by silent %}
             <label for="{{ form.sort_by.id_for_label }}">{% trans "Sort by" %}</label>
-            <div>
+            {% endcapture %}
+            {% capture as increasing silent %}
             {% render_field form.reverse_order class="form-control" %}
+            {% endcapture %}
+            {% capture as value silent %}
             {% render_field form.sort_by class="form-control" %}
-            </div>
+            {% endcapture %}
+            {% blocktrans trimmed %}
+            {{ sort_by }} <div>{{ increasing }} {{ value }}</div>
+            {% endblocktrans %}
         </div>
     </form>
 {% endif %}

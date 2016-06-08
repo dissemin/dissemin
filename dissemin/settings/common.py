@@ -133,6 +133,7 @@ INSTALLED_APPS = (
     'rest_framework_swagger',
     'haystack',
     'widget_tweaks',
+    'capture_tag',
 )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap'
