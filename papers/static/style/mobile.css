@@ -18,9 +18,10 @@
 }
 .oaPanel.left, .oaPanel.right, .siteSummary.left, .siteSummary.right { width: 100%; margin: 0 0 20px 0; }
 
-#sidebar { float: none; width: 100%; }
-
-#summaryLists { width: 100%; }
+.flex { flex-direction: column; }
+#sidebar { width: 100%; }
+#summaryLists { align-self: auto; }
+#sidebar, #summaryLists, #sidebarSeparator { order: 0; margin: 0; }
 
 #subfooter { min-width: 300px; }
 #subfooter p { margin: 10px 0; }
