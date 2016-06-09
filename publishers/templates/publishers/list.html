@@ -122,7 +122,7 @@ $(function(){
     </li>    
         {% if forloop.last %}</ul>{% endif %}
  {% endwith %}{% empty %}
- <p>{% trans "No production found." %}</p>
+ <p class="notFound">{% trans "No publisher found." %}</p>
  {% endfor %}
  {% if paginator.num_pages > 1 %}
  <div class="searchPages">{% bootstrap_paginate page_obj range=10 %}</div>

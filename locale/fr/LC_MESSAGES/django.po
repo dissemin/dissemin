@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-08 21:32+0200\n"
+"POT-Creation-Date: 2016-06-09 10:30+0200\n"
 "PO-Revision-Date: 2016-06-04 22:47+0200\n"
 "Last-Translator: Li-yao Xia <li-yao.xia@ens.fr>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
@@ -323,7 +323,6 @@ msgstr "Papiers"
 
 #: papers/templates/papers/ajaxListPapers.html:21
 #: papers/templates/papers/search.html:277
-#: publishers/templates/publishers/list.html:125
 msgid "No production found."
 msgstr "Aucune production trouvée."
 
@@ -1063,6 +1062,10 @@ msgstr "%(sort_by)s <div>%(value)s %(increasing)s</div>"
 #: publishers/templates/publishers/list.html:90
 msgid "Data provided by"
 msgstr "Données fournies par"
+
+#: publishers/templates/publishers/list.html:125
+msgid "No publisher found."
+msgstr "Aucune maison d'édition trouvée."
 
 #: publishers/templates/publishers/policy.html:58
 msgid "Policy data provided by"
