@@ -5,6 +5,7 @@
 {% load statuses %}
 {% load i18n %}
 {% load widget_tweaks %}
+{% load choice_tags %}
 {% load capture_tags %}
 
 {% block headTitle %}
@@ -56,7 +57,7 @@ $(function(){
             {% with value=checkbox.choice_value %}
             <div class="logoHelpPopover" data-content="{{ value|helptext_oa_status }}">
             <div class="checkbox publisherCriterion">
-                {{ checkbox.tag }}
+                {{ checkbox|tag:'onchange="submit()"' }}
                 <div class="publisherCriterionBox">
                 <label for="{{ checkbox.id_for_label }}">
                     <img alt="" src="{% static value|logo_oa_status %}" height="70px" width="52px" class="pubLogo publisherCriterionLogo">
@@ -75,15 +76,18 @@ $(function(){
             <label for="{{ form.sort_by.id_for_label }}">{% trans "Sort by" %}</label>
             {% endcapture %}
             {% capture as increasing silent %}
-            {% render_field form.reverse_order class="form-control" %}
+            {% render_field form.reverse_order class="form-control" onchange="submit()" %}
             {% endcapture %}
             {% capture as value silent %}
-            {% render_field form.sort_by class="form-control" %}
+            {% render_field form.sort_by class="form-control" onchange="submit()" %}
             {% endcapture %}
             {% blocktrans trimmed %}
             {{ sort_by }} <div>{{ increasing }} {{ value }}</div>
             {% endblocktrans %}
         </div>
+        <noscript>
+            <div class="form-group"><button type="submit" class="btn btn-default">{% trans "Search" %}</button></div>
+        </noscript>
     </form>
 {% endif %}
 
