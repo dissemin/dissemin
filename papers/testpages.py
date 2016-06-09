@@ -29,7 +29,7 @@ from django.core.urlresolvers import reverse
 from backend.tests import PrefilledTest
 from backend.crossref import CrossRefPaperSource
 from backend.oai import OaiPaperSource
-from papers.models import OaiRecord
+from papers.models import OaiRecord, Paper
 
 # TODO TO BE TESTED
 
@@ -117,7 +117,9 @@ class PaperPagesTest(RenderingTest):
     def test_search_department(self):
         self.checkPage('search', getargs={'department':self.di.pk})
 
-    # ampersands not escaped in django bootstrap pagination, https://github.com/jmcclell/django-bootstrap-pagination/issues/41
+    def test_missing_info_in_pub(self):
+        p = Paper.create_by_doi('10.1007/978-3-642-14363-2_7')
+        self.checkPage('paper', kwargs={'pk':p.id, 'slug':p.slug})
 
     def test_paper(self):
         for a in self.r3.authors_by_year:
