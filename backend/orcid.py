@@ -332,7 +332,7 @@ class OrcidPaperSource(PaperSource):
             data_paper.title,
             data_paper.authors,
             data_paper.pubdate,
-            'VISIBLE',
+            visible=True,
             affiliations=None,
             orcids=data_paper.orcids,
         )

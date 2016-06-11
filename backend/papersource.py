@@ -29,22 +29,16 @@ class PaperSource(object):
     for a given researcher.
     """
 
-    def __init__(self, oai=None, max_results=None):
+    def __init__(self, max_results=None):
         """
         A PaperSource can be used without saving the papers
         to the database, using :func:`fetch_bare`.
-
-        If an OAI interface is provided, this allows us to check full
-        text availability as the papers are fetched. This should be used
-        for sources where full text availability is not provided in the metadata
-        (CrossRef, ORCID).
 
         Subclasses can reimplement the constructor to get parameters for the source.
         Do not forget to call this base constructor though.
 
         :param max_results: maximum number of papers to retrieve for each researcher.
         """
-        self.oai = oai
         self.max_results = None
 
     def fetch_papers(self, researcher):
@@ -59,11 +53,7 @@ class PaperSource(object):
         """
         This function returns a generator of :class:`BarePaper`s fetched for the given researcher.
         """
-        for p in self.fetch_papers(researcher):
-            # If an OAI source is set up to check the availability, do so
-            if self.oai:
-                p = self.oai.fetch_accessibility(p)
-            yield p
+        return self.fetch_papers(researcher)
 
     def fetch_and_save(self, researcher):
         """

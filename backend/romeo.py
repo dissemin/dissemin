@@ -209,7 +209,6 @@ def fetch_publisher(publisher_name):
     if len(publishers) == 0:
         return
     elif len(publishers) > 1:
-        print str(len(publishers)) + " results"
         search_terms['qtype'] = 'exact'
         root = perform_romeo_query(search_terms)
         publishers = root.findall('./publishers/publisher')

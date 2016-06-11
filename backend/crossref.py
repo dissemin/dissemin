@@ -38,7 +38,7 @@ from papers.doi import to_doi, doi_to_crossref_identifier, doi_to_url
 from papers.name import match_names, normalize_name_words, parse_comma_name
 from papers.utils import iunaccent, tolerant_datestamp_to_datetime, date_from_dateparts, affiliation_is_greater, jpath, validate_orcid, sanitize_html
 from papers.models import Paper, OaiSource
-from papers.baremodels import BareOaiRecord, BarePaper
+from papers.baremodels import BareOaiRecord, BarePaper, BareName
 from publishers.models import *
 
 from backend.papersource import PaperSource
@@ -366,20 +366,18 @@ class CrossRefPaperSource(PaperSource):
         p = None
         if metadata:
             try:
-                p = self.save_doi_metadata(metadata, allow_unknown_authors=True)
-                if self.oai:
-                    self.oai.fetch_accessibility(p)
-            except ValueError:
+                p = self.save_doi_metadata(metadata)
+            except ValueError as e:
+                print e
                 pass
         return p
 
-    def save_doi_metadata(self, metadata, extra_orcids=None, allow_unknown_authors=False):
+    def save_doi_metadata(self, metadata, extra_orcids=None):
         """
         Given the metadata as Citeproc+JSON or from CrossRef, create the associated paper and publication
 
         :param extra_orcids: an optional orcids list, which will be unified
             with the orcids extracted from the metadata. This is useful for the ORCID interface.
-        :param allow_unknown_authors: create the paper even if no author matches our researchers
         :returns: the paper, created if needed
         """        
         # Normalize metadata
@@ -413,10 +411,9 @@ class CrossRefPaperSource(PaperSource):
             if type(subtitle) == list:
                 subtitle = subtitle[0]
             title += ': '+subtitle
-        authors = map(name_lookup_cache.lookup, map(convert_to_name_pair, metadata['author']))
-        authors = filter(lambda x: x != None, authors)
-        if (not allow_unknown_authors and all(not elem.is_known for elem in authors)) or authors == []:
-            raise ValueError('No known author')
+
+        authors = [ BareName.create_bare(first,last) for first,last in
+                    map(convert_to_name_pair, metadata['author']) ]
 
         def get_affiliation(author_elem):
             for dct in author_elem.get('affiliation', []):
@@ -436,12 +433,12 @@ class CrossRefPaperSource(PaperSource):
         affiliations = map(get_affiliation, metadata['author'])
 
         paper = BarePaper.create(title, authors, pubdate, 
-                'VISIBLE', affiliations, orcids)
+                visible=True, affiliations=affiliations, orcids=orcids)
 
         result = create_publication(paper, metadata)
 
         if result is None: # Creating the publication failed!
-            paper.update_visibility()
+            paper.update_visible()
             # Make sure the paper only appears if it is still associated
             # with another source.
             # TODO add unit test for this
@@ -494,45 +491,13 @@ class CrossRefPaperSource(PaperSource):
             offset += rows
             count += 1
 
-    def fetch_papers_from_crossref_by_researcher_name(self, name, update=False):
-        """
-        The update parameter forces the function to download again
-        the metadata for DOIs that are already in the model
-        """
-        return self.search_for_dois_incrementally(unicode(name))
-
-
     def fetch_papers(self, researcher):
         """
         Fetch and save the publications from CrossRef for a given researcher
         Users should rather use the "fetch" method from PaperSource.
         """
-        # TODO: do it for all name variants of confidence 1.0
-        researcher.status = 'Fetching DOI list.'
-        researcher.save()
-        nb_records = 0
-
-        name = researcher.name
-        lst = self.fetch_papers_from_crossref_by_researcher_name(name)
-
-        count = 0
-        skipped = 0
-        for metadata in lst:
-            if skipped > crossref_max_skipped_records:
-                break
-
-            try:
-                yield self.save_doi_metadata(metadata)
-            except ValueError:
-                skipped += 1
-                continue
-
-            count += 1
-            skipped = 0
-        nb_records += count
-
-        researcher.status = 'OK, %d records processed.' % nb_records
-        researcher.save()
+        # TODO migrate fetch_crossref_incrementally here
+        return []
 
 ##### Zotero interface #####
 

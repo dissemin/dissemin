@@ -782,8 +782,7 @@ class Paper(models.Model, BarePaper):
         else:
             import backend.crossref as crossref
             import backend.oai as oai
-            oai = oai.OaiPaperSource(endpoint=BASE_LOCAL_ENDPOINT,max_results=10)
-            crps = crossref.CrossRefPaperSource(oai=oai)
+            crps = crossref.CrossRefPaperSource()
             return crps.create_paper_by_doi(doi)
 
         if wait:
@@ -855,7 +854,7 @@ class Paper(models.Model, BarePaper):
                 new_affiliations[new_idx],
                 author.affiliation):
                 author.affiliation = new_affiliations[new_idx]
-            if new_idx and new_orcid[new_idx]:
+            if new_idx is not None and new_orcid[new_idx]:
                 author.orcid = new_orcid[new_idx]
             
             new_authors.append(author.serialize())
@@ -874,9 +873,10 @@ class Paper(models.Model, BarePaper):
 
         if self.pk == paper.pk:
             return
+        
+        new_visibility = paper.visible or self.visible
 
         OaiRecord.objects.filter(about=paper.pk).update(about=self.pk)
-        Annotation.objects.filter(paper=paper.pk).update(paper=self.pk)
         self.update_author_names(map(lambda n: (n.first,n.last), paper.author_names()),
                                 paper.affiliations(), paper.orcids())
 

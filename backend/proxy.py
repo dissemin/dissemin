@@ -40,10 +40,24 @@ PROXY_SIGNATURE_PREFIX = "proaixy:authorsig:"
 PROXY_FINGERPRINT_PREFIX = "proaixy:fingerprint:"
 PROXY_DOI_PREFIX = "proaixy:doi:"
 
-
+import json
 from oaipmh.client import Client
-from oaipmh.metadata import MetadataRegistry, oai_dc_reader
+from oaipmh.metadata import MetadataRegistry, MetadataReader
+from oaipmh import common
 from oaipmh.metadata import oai_dc_reader, base_dc_reader
+
+class CiteprocReader(MetadataReader):
+    def __init__(self):
+        super(CiteprocReader, self).__init__({},{})
+
+    def __call__(self, element):
+        # extract the Json
+        jsontxt = element.text
+        payload = json.loads(jsontxt)
+
+        return common.Metadata(element, payload)
+
+citeproc_reader = CiteprocReader()
 
 # Reader slightly tweaked because Cairn includes a useful non-standard field
 my_oai_dc_reader = oai_dc_reader

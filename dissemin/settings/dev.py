@@ -18,7 +18,7 @@ CACHES = {
 
 # Add Debug Toolbar
 INSTALLED_APPS += (
-    'debug_toolbar',
+#    'debug_toolbar',
 )
 
 # Base domain of the ORCiD API.

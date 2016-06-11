@@ -120,8 +120,7 @@ def check_paper(asserter, paper):
     # All authors should have valid names
     paper.check_authors()
     # Visible papers should have at least one source
-    if paper.visibility == 'VISIBLE': 
-        asserter.assertTrue(len(paper.oairecords)+len(paper.publications) > 0)
+    asserter.assertEqual(paper.visible, not paper.is_orphan())
 
 # Generic test series for a PaperSource instance
 class PaperSourceTest(PrefilledTest):
@@ -153,20 +152,8 @@ class PaperSourceTest(PrefilledTest):
         papers = list(self.source.fetch_papers(emptyres))
         self.assertEqual(papers, [])
 
-class CrossRefOaiTest(PaperSourceTest):
-    """
-    Test for the CrossRef interface with OAI availability fetching
-    """
-    @classmethod
-    def setUpClass(self):
-        super(CrossRefOaiTest, self).setUpClass()
-        self.oaisource = OaiPaperSource() 
-        self.source = CrossRefPaperSource(oai=self.oaisource)
-
-class CrossRefIntegrationTest(PaperSourceTest):
-    @classmethod
-    def setUpClass(self):
-        super(CrossRefIntegrationTest, self).setUpClass()
+class CrossRefTest(TestCase):
+    def setUp(self):
         self.source = CrossRefPaperSource()
 
     def test_empty_pubdate(self):
@@ -174,26 +161,9 @@ class CrossRefIntegrationTest(PaperSourceTest):
         p = self.source.create_paper_by_doi('10.1007/978-1-4020-7884-2_13')
         self.assertEqual(p.pubdate.year, 2006)
 
-    def check_papers(self, papers):
-        # Check affiliations are kept
-        p = OaiRecord.objects.get(doi='10.4204/eptcs.172.16')
-        self.assertEqual(p.about.authors[0].affiliation, 'École Normale Supérieure, Paris')
-        # Check that each paper has a publication
-        for p in papers:
-            self.assertTrue(len(p.publications) > 0)
-
-    def test_previously_present_papers_are_attributed(self):
-        # Fetch papers from a researcher
-        r = Researcher.create_by_name('Laurent','Bienvenu')
-        self.source.fetch_and_save(r)
-
-        # Now fetch a coauthor of him
-        r2 = Researcher.get_or_create_by_orcid('0000-0003-1698-5150')
-        self.source.fetch_and_save(r2)
-
-        # This paper should be attributed to the ORCID id
-        p = Paper.objects.get(oairecord__doi='10.1016/j.jcss.2015.04.004')
-        self.assertEqual(p.authors[3].researcher, r2)
+    def test_affiliations(self):
+        p = self.source.create_paper_by_doi('10.4204/eptcs.172.16')
+        self.assertEqual(p.authors[0].affiliation, 'École Normale Supérieure, Paris')
 
 
 class CrossRefUnitTest(unittest.TestCase):
@@ -322,23 +292,6 @@ class CrossRefUnitTest(unittest.TestCase):
         self.assertFalse(is_oa_license('http://www.elsevier.com/tdm/userlicense/1.0/'))
 
 
-# Test that the proaixy interface works
-class OaiTest(PaperSourceTest):
-    @classmethod
-    def setUpClass(self):
-        super(OaiTest, self).setUpClass()
-        self.source = OaiPaperSource()
-
-    def test_signature(self):
-        for idx, p in enumerate(self.source.fetch_records_for_name(self.r3.name, signature=True)):
-            if idx > 10:
-                break
-
-    def test_full_name(self):
-        for idx, p in enumerate(self.source.fetch_records_for_name(self.r3.name, signature=False)):
-            if idx > 10:
-                break
-
 class OrcidUnitTest(unittest.TestCase):
     def test_affiliate_author(self):
         self.assertEqual(
@@ -369,6 +322,42 @@ class OrcidIntegrationTest(PaperSourceTest):
         p.check_authors()
         author = p.authors[0]
         self.assertEqual(author.orcid, self.r4.orcid)
+
+    def test_previously_present_papers_are_attributed(self):
+        print "################# Beginning of the story"
+        p = Paper.objects.get(title='Can a Program Reverse-Engineer Itself?')
+        print p.bare_author_names()
+    
+        # Fetch papers from a researcher
+        print "pablo"
+        pablo = Researcher.get_or_create_by_orcid('0000-0002-6293-3231')
+        self.source.fetch_and_save(pablo)
+
+        p = Paper.objects.get(oairecord__doi='10.1007/978-3-642-25516-8_1')
+        print "FINAL ORCIDs"
+        print [a.orcid for a in p.authors]
+        self.assertEqual(p.authors[2].orcid, pablo.orcid)
+
+        print "################# Did things get wrong?"
+        p = Paper.objects.get(title='Can a Program Reverse-Engineer Itself?')
+        print p.bare_author_names()
+
+        # Now fetch a coauthor of him
+        print "antoine"
+        antoine = Researcher.get_or_create_by_orcid('0000-0002-7977-4441')
+        self.source.fetch_and_save(antoine)
+
+        # This paper should be attributed to both ORCID ids
+        p = Paper.objects.get(oairecord__doi='10.1007/978-3-642-25516-8_1')
+        print "FINAL ORCIDs"
+        print [a.orcid for a in p.authors]
+
+        print "################# Yes they did"
+        p = Paper.objects.get(title='Can a Program Reverse-Engineer Itself?')
+        print p.bare_author_names()
+
+        self.assertEqual(p.authors[0].orcid, antoine.orcid)
+        self.assertEqual(p.authors[2].orcid, pablo.orcid)
 
 
 class PaperMethodsTest(PrefilledTest):
@@ -432,7 +421,6 @@ class MaintenanceTest(PrefilledTest):
         super(MaintenanceTest, self).setUpClass()
         self.crps = CrossRefPaperSource()
         self.crps.fetch_and_save(self.r2)
-        consolidate_paper(OaiRecord.objects.get(doi='10.1021/cb400178m').about_id)
 
     def test_create_publisher_aliases(self):
         create_publisher_aliases()
@@ -469,7 +457,7 @@ class MaintenanceTest(PrefilledTest):
 
     def test_name_initial(self):
         n = self.r2.name
-        p = OaiRecord.objects.get(doi="10.1002/ange.19941062339").about
+        p = Paper.create_by_doi("10.1002/ange.19941062339")
         n1 = p.authors[0].name
         self.assertEqual((n1.first,n1.last), (n.first,n.last))
 
@@ -486,9 +474,4 @@ class MaintenanceTest(PrefilledTest):
         update_paper_statuses()
         self.assertEqual(Paper.objects.get(pk=p.pk).pdf_url, pdf_url)
 
-    def test_cleanup(self):
-        oaips = OaiPaperSource()
-        oaips.fetch_and_save(self.r3)
-        cleanup_titles()
-        cleanup_abstracts()
 

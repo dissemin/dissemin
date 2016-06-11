@@ -22,8 +22,7 @@ Tests statistics update and statistics consistency.
 
 from django.test import TestCase
 from backend.tests import PrefilledTest
-from backend.crossref import CrossRefPaperSource
-from backend.oai import OaiPaperSource
+from backend.orcid import OrcidPaperSource
 from papers.models import PaperWorld, Paper
 from statistics.models import *
 
@@ -31,10 +30,8 @@ class StatisticsTest(PrefilledTest):
     @classmethod
     def setUpClass(self):
         super(StatisticsTest, self).setUpClass()
-        crps = CrossRefPaperSource()
-        oai = OaiPaperSource()
-        crps.fetch_and_save(self.r2)
-        oai.fetch_and_save(self.r2)
+        crps = OrcidPaperSource()
+        crps.fetch_and_save(self.r3)
 
     def validStats(self, stats):
         self.assertTrue(stats.check_values())

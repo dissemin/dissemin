@@ -32,21 +32,23 @@ class URLExtractor(object):
         """
         pass
 
-    def extract(self, record):
+    def extract(self, header, metadata):
         """
         Take a record (header + metadata) and return a dict()
         containing some keys among ['pdf', 'splash'] and
         whose values are respectively the PDF URL and splash URL
         """
-        return self._post_filter(record, self._urls(record))
+        self.header = header
+        self.metadata = metadata
+        return self._post_filter(self._urls())
 
-    def _urls(self, record):
+    def _urls(self):
         """
         Does the actual extraction job.
         """
         return dict()
 
-    def _post_filter(self, record, urls):
+    def _post_filter(self, urls):
         """
         Filters the URLs according to the record.
         Reimplement if you want to filter the results of a predefined filter.
@@ -62,12 +64,11 @@ class RegexExtractor(URLExtractor):
         super(RegexExtractor, self).__init__()
         self.mappings = mappings
 
-    def _urls(self, record):
-        metadata = record[1]._map
+    def _urls(self):
 
         urls = dict()
         for (field,regex,resource_type,skeleton) in self.mappings:
-            for val in metadata[field]:
+            for val in self.metadata[field]:
                 val = val.strip()
                 match = regex.match(val)
                 if match:
@@ -78,8 +79,8 @@ class CairnExtractor(RegexExtractor):
     def __init__(self, mappings):
         super(CairnExtractor, self).__init__(mappings)
 
-    def _post_filter(self, record, urls):
-        if not 'free access' in record[1]._map.get('accessRights'):
+    def _post_filter(self, urls):
+        if not 'free access' in metadata.get('accessRights'):
             urls['pdf'] = None
         return urls
 
@@ -87,8 +88,8 @@ class OpenAireExtractor(RegexExtractor):
     def __init__(self, mappings):
         super(OpenAireExtractor, self).__init__(mappings)
 
-    def _post_filter(self, record, urls):
-        if 'info:eu-repo/semantics/openAccess' in record[1]._map.get('rights', []):
+    def _post_filter(self, urls):
+        if 'info:eu-repo/semantics/openAccess' in metadata.get('rights', []):
             urls['pdf'] = urls.get('splash')
         return urls
 
@@ -96,8 +97,8 @@ class BaseExtractor(RegexExtractor):
     def __init__(self, mappings):
         super(BaseExtractor, self).__init__(mappings)
 
-    def _post_filter(self, record, urls):
-        if '1' in record[1]._map.get('oa', []):
+    def _post_filter(self, urls):
+        if '1' in self.metadata.get('oa', []):
             urls['pdf'] = urls.get('splash')
         return urls
 
@@ -165,7 +166,7 @@ baseExtractor = BaseExtractor([
     ])
 
 
-REGISTERED_EXTRACTORS = {
+REGISTERED_OAI_EXTRACTORS = {
         'arxiv': arxivExtractor,
         'hal': halExtractor,
         'cairn' : cairnExtractor,

@@ -26,9 +26,14 @@ from oaipmh.metadata import MetadataRegistry
 from oaipmh.datestamp import tolerant_datestamp_to_datetime
 from oaipmh.error import DatestampError, NoRecordsMatchError, BadArgumentError
 
+# metadat readers
+from oaipmh.metadata import oai_dc_reader
+from oaipmh.metadata import base_dc_reader
+from backend.proxy import citeproc_reader
+
 from papers.name import parse_comma_name, name_normalization, name_signature, normalize_name_words
-from papers.models import OaiRecord, OaiSource, Name
-from papers.baremodels import BareOaiRecord, BarePaper
+from papers.models import OaiSource
+from papers.baremodels import BareOaiRecord, BarePaper, BareName
 from papers.doi import to_doi
 from papers.utils import sanitize_html
 from papers.errors import MetadataSourceException
@@ -36,246 +41,293 @@ from papers.errors import MetadataSourceException
 from backend.papersource import *
 from backend.extractors import *
 from backend.proxy import *
+from backend.crossref import CrossRefPaperSource
 from backend.name_cache import name_lookup_cache
-from backend.pubtype_translations import *
+from backend.pubtype_translations import OAI_PUBTYPE_TRANSLATIONS
 from backend import crossref
 
 import re
 
-def get_oai_authors(metadata):
-    """ Get the authors names out of a search result """
-    return map(name_lookup_cache.lookup, map(parse_comma_name, metadata['creator']))
+class OaiTranslator(object):
+    """
+    A translator takes a metadata record from the OAI-PMH
+    proxy and converts it to a :class:`BarePaper`.
+    """
+    def format(self):
+        """
+        Returns the metadata format expected by the translator
+        """
+        return 'oai_dc'
 
-def find_earliest_oai_date(record):
-    """ Find the latest publication date (if any) in a record """
-    earliest = None
-    for date in record[1]._map['date']:
+    def translate(self, header, metadata):
+        """
+        Main method of the translator: translates a metadata
+        record to a :class:`BarePaper`.
+
+        :param header: the OAI-PMH header, as returned by pyoai
+        :param metadata: the dictionary of the record, as returned by pyoai
+        :returns: a :class:`BarePaper` or None if creation failed
+        """
+        raise NotImplemented
+
+class CiteprocTranslator(object):
+    """
+    A translator for the JSON-based Citeproc format served by Crossref
+    """
+    def __init__(self):
+        self.crps = CrossRefPaperSource()
+
+    def format(self):
+        return 'citeproc'
+
+    def translate(self, header, metadata):
         try:
-            parsed = tolerant_datestamp_to_datetime(date)
-            if earliest is None or parsed < earliest:
-                earliest = parsed
-        except (DatestampError, ValueError):
-            continue
-    return earliest
+            return self.crps.save_doi_metadata(metadata)
+        except ValueError:
+            return
 
-def add_oai_record(record, source, paper):
-    """ Add a record (from OAI-PMH) to the given paper """
-    header = record[0]
-    identifier = header.identifier()
+        
 
-    # A description is useful
-    curdesc = ""
-    for desc in record[1]._map['description']:
-        if len(desc) > len(curdesc):
-                curdesc = desc
-    curdesc = sanitize_html(curdesc)
+class OAIDCTranslator(object):
+    """
+    Translator for the default format supplied by OAI-PMH interfaces,
+    called oai_dc.
+    """
+    def format(self):
+        return 'oai_dc'
 
-    # Run extractor to find the URLs
-    pdf_url = None
-    splash_url = None
-    if source.identifier:
+    def get_oai_authors(self, metadata):
+        """
+        Get the authors names out of a metadata record
+        """
+        parsed =  map(parse_comma_name, metadata['creator'])
+        names = [BareName.create_bare(fst,lst) for fst, lst in parsed]
+        return names
+
+    def find_earliest_oai_date(self, metadata):
+        """
+        Find the latest publication date (if any) in a record
+        """
+        earliest = None
+        for date in metadata['date']:
+            try:
+                parsed = tolerant_datestamp_to_datetime(date)
+                if earliest is None or parsed < earliest:
+                    earliest = parsed
+            except (DatestampError, ValueError):
+                continue
+        return earliest
+
+    def extract_urls(self, header, metadata, source_identifier):
+        """
+        Extracts URLs from the record,
+        based on the identifier of its source.
+
+        The semantics of URLs vary greatly from provider
+        to provider, so we build custom rules for each
+        of the providers we cover. These rules
+        are stored as :class:`URLExtractor`.
+
+        :returns: a pair of URLs or Nones: the splash and
+            pdf url. The splash URL is requred (cannot be None)
+            and points to the URI where the resource is mentioned.
+            This is typically an abstract page.
+            The PDF url is non-empty if and only if we think
+            a full text is available. If it is possible, this
+            URL should point to the full text directly, otherwise
+            to a page where we think a human user can find the
+            full text by themselves (and for free).
+        """
+        pdf_url = None
+        splash_url = None
         try:
-            extractor = REGISTERED_EXTRACTORS[source.identifier]
-            urls = extractor.extract(record)
+            extractor = REGISTERED_OAI_EXTRACTORS[source_identifier]
+            urls = extractor.extract(header, metadata)
             pdf_url = urls.get('pdf')
             splash_url = urls.get('splash')
         except KeyError:
-            print "Warning, invalid extractor for source "+source.name
+            print "Warning, invalid extractor for source "+source_identifier
+        return splash_url, pdf_url
 
-    keywords = ' '.join(record[1]._map['subject'])
-    contributors = ' '.join(record[1]._map['contributor'])[:4096]
+    def translate(self, header, metadata):
+        """
+        Creates a BarePaper
+        """
+        # We need three things to create a paper:
+        # - publication date
+        pubdate = self.find_earliest_oai_date(metadata)
+        # - authors
+        authors = self.get_oai_authors(metadata)
 
-    pubtype_list = record[1]._map.get('type')
-    pubtype = None
-    if len(pubtype_list) > 0:
-        pubtype = pubtype_list[0]
-    #pubtype = source.default_pubtype
-    pubtype = PUBTYPE_TRANSLATIONS.get(pubtype, source.default_pubtype)
+        # - title
+        if not metadata.get('title') or not authors or not pubdate:
+            return
 
-    record = BareOaiRecord(
-            source=source,
-            identifier=identifier,
-            description=curdesc,
-            keywords=keywords,
-            contributors=contributors,
-            pubtype=pubtype,
-            pdf_url=pdf_url,
-            splash_url=splash_url)
-    paper.add_oairecord(record)
+        # Find the OAI source
+        sets = header.setSpec()
+        source_identifier = None
+        for s in sets:
+            if s.startswith(PROXY_SOURCE_PREFIX):
+                source_identifier = s[len(PROXY_SOURCE_PREFIX):]
+                break
+        source = None
+        if source_identifier:
+            try:
+                source = OaiSource.objects.get(identifier=source_identifier)
+            except OaiSource.DoesNotExist:
+                pass
+        if not source:
+            print "Invalid source '"+str(source_identifier)+"' from the proxy, skipping"
+            return
 
-def listRecords_or_empty(source, *args, **kwargs):
+        paper = BarePaper.create(metadata['title'][0], authors, pubdate)
+
+        if paper is None:
+            return
+
+        # Save the record
+        try:
+            self.add_oai_record(header, metadata, source, paper)
+            return paper
+        except ValueError as e:
+            print "Warning, OAI record "+header.identifier()+" skipped:\n"+unicode(e)
+            paper.update_availability()
+
+    def add_oai_record(self, header, metadata, source, paper):
+        """
+        Add a record (from OAI-PMH) to the given paper
+        """
+        identifier = header.identifier()
+
+        # description in oai_dc means abstract
+        curdesc = ""
+        for desc in metadata['description']:
+            if len(desc) > len(curdesc):
+                    curdesc = desc
+        curdesc = sanitize_html(curdesc)
+
+        # Run extractor to find the URLs
+        splash_url, pdf_url = self.extract_urls(header, metadata, source.identifier)
+
+        keywords = ' '.join(metadata['subject'])
+        contributors = ' '.join(metadata['contributor'])[:4096]
+
+        pubtype_list = metadata.get('type', [])
+        pubtype = None
+        if len(pubtype_list) > 0:
+            pubtype = pubtype_list[0]
+
+        pubtype = OAI_PUBTYPE_TRANSLATIONS.get(pubtype, source.default_pubtype)
+
+        # Find the DOI, if any
+        doi = None
+        for identifier in metadata['identifier']+metadata['relation']:
+            if not doi:
+                doi = to_doi(identifier)
+
+        record = BareOaiRecord(
+                source=source,
+                identifier=identifier,
+                description=curdesc,
+                keywords=keywords,
+                contributors=contributors,
+                pubtype=pubtype,
+                pdf_url=pdf_url,
+                splash_url=splash_url,
+                doi=doi)
+        paper.add_oairecord(record)
+
+class BASEDCTranslator(OAIDCTranslator):
     """
-    pyoai raises :class:`NoRecordsMatchError` when no records match,
-    we would rather like to get an empty list in that case.
+    base_dc is very similar to oai_dc, so we
+    don't have much to change
     """
-    try:
-        return source.listRecords(*args, **kwargs)
-    except NoRecordsMatchError:
-        return []
+    def format(self):
+        return 'base_dc'
+
 
 class OaiPaperSource(PaperSource):
     """
-    A paper source that fetches records from the OAI-PMH proxy.
+    A paper source that fetches records from the OAI-PMH proxy
+    (typically: proaixy).
+    
+    It uses the ListRecord verb to fetch records from the OAI-PMH
+    source. Each record is then converted to a :class:`BarePaper`
+    by an :class:`OaiTranslator` that handles the format
+    the metadata is served in. 
     """
-    def __init__(self, *args, **kwargs):
-        super(OaiPaperSource, self).__init__(*args, **kwargs)
-        self.client = get_proxy_client()
-        self.base = get_base_client()
+    def __init__(self, endpoint, day_granularity=False, *args, **kwargs):
+        """
+        This sets up the paper source.
 
-    def fetch_papers(self, researcher):
-        return self.fetch_records_for_name(researcher.name, signature=False)
+        :param endpoint: the address of the OAI-PMH endpoint
+            to fetch from.
+        :param day_granularity: should we use day-granular timestamps
+            to fetch from the proxy or full timestamps (default: False,
+            full timestamps)
+
+        See the protocol reference for more information on timestamp
+        granularity:
+        https://www.openarchives.org/OAI/openarchivesprotocol.html
+        """
+        super(OaiPaperSource, self).__init__(*args, **kwargs)
+        self.registry = MetadataRegistry()
+        self.registry.registerReader('oai_dc', oai_dc_reader)
+        self.registry.registerReader('base_dc', base_dc_reader)
+        self.registry.registerReader('citeproc', citeproc_reader)
+        self.client = Client(endpoint, self.registry)
+        self.client._day_granularity = day_granularity
+        self.translators = {}
+
+    ### Translator management
+
+    def add_translator(self, translator):
+        """
+        Adds the given translator to the paper source,
+        so that we know how to translate papers in the given format.
+        
+        The paper source cannot hold more than one translator
+        per OAI format (it decides what translator to use
+        solely based on the format) so if there is already a translator
+        for that format, it will be overriden.
+        """
+        self.translators[translator.format()] = translator
 
     #### Record search utilities
 
-    def fetch_records_for_name(self, name, signature=True):
+    def listRecords_or_empty(self, source, *args, **kwargs):
         """
-        Fetch all papers that match a given signature (first initial and full last name),
-        or that match the full name if signature is set to False.
+        pyoai raises :class:`NoRecordsMatchError` when no records match,
+        we would rather like to get an empty list in that case.
         """
-        if signature:
-            return self.fetch_records_for_signature(name_signature(name.first, name.last))
-        else:
-            return self.fetch_records_for_full_name(name.first, name.last)
-
-    def fetch_records_for_fingerprint(self, ident):
-        """
-        Fetch all the records that match a given paper fingerprint.
-        """
-        print "fetch_records_for_fingerprint: THIS IS DEPRECATED"
-        listRecords = listRecords_or_empty(self.client,
-                metadataPrefix='base_dc', set=PROXY_FINGERPRINT_PREFIX+ident)
-        return self.process_records(listRecords)
-
-    def fetch_accessibility(self, paper):
-        """
-        Computes the accessibility of a given paper,
-        by fetching preprints from OAI-PMH
-        """
-        records = listRecords_or_empty(self.base,
-                metadataPrefix='base_dc',
-                set=PROXY_FINGERPRINT_PREFIX+paper.fingerprint)
-
-        for publi in paper.publications:
-            records = itertools.chain(records, listRecords_or_empty(self.base,
-                metadataPrefix='base_dc',
-                set=PROXY_DOI_PREFIX+publi.doi))
-
-        for record in records:
-            # Find the source
-            sets = record[0].setSpec()
-            source_identifier = None
-            for s in sets:
-                if s.startswith(PROXY_SOURCE_PREFIX):
-                    source_identifier = s[len(PROXY_SOURCE_PREFIX):]
-                    break
-            source = None
-            if source_identifier:
-                try:
-                    source = OaiSource.objects.get(identifier=source_identifier)
-                except OaiSource.DoesNotExist:
-                    pass
-            if not source:
-                print "Invalid source '"+str(source_identifier)+"' from the proxy, skipping"
-                continue
-
-            # Save the record
-            try:
-                add_oai_record(record, source, paper)
-            except ValueError as e:
-                print "Warning, OAI record "+record[0].identifier()+" skipped:\n"+unicode(e)
-
-        paper.update_availability()
-        return paper
-
-    def fetch_records_for_signature(self, ident):
         try:
-            listRecords = listRecords_or_empty(self.client,
-                    metadataPrefix='oai_dc', set=PROXY_SIGNATURE_PREFIX+ident)
-            return self.process_records(listRecords)
-        except BadArgumentError as e:
-            print "Signature is unknown for the proxy: "+unicode(e)
-            pass
-        return []
+            return source.listRecords(*args, **kwargs)
+        except NoRecordsMatchError:
+            return []
 
-    def fetch_records_for_full_name(self, firstname, lastname):
-        try:
-            ident = name_normalization(lastname+', '+firstname)
-            listRecords = self.client.listRecords(metadataPrefix='oai_dc', set=PROXY_AUTHOR_PREFIX+ident)
-            for p in self.process_records(listRecords):
-                yield p
-            ident = name_normalization(firstname+' '+lastname)
-            listRecords = listRecords_or_empty(self.client,
-                    metadataPrefix='oai_dc', set=PROXY_AUTHOR_PREFIX+ident)
-            for p in self.process_records(listRecords):
-                yield p
-        except BadArgumentError as e:
-            print "Author is unknown for the proxy: "+unicode(e)
-            pass
-    
     def process_records(self, listRecords):
+        """
+        Save as :class:`Paper` all the records contained in this list
+        """
+        # check that we have at least one translator, otherwise
+        # it's not really worth trying…
+        if not self.translators:
+            raise ValueError("No OAI translators have been set up: "+
+                            "We cannot save any record.")
+        
         for record in listRecords:
-            metadata = record[1]._map
-            authors = get_oai_authors(metadata)
-
-            # Filter the record
-            if all(not elem.is_known for elem in authors):
-                print "No relevant author, continue"
-                continue
-            if not 'title' in metadata or metadata['title'] == []:
-                continue
-
-            # Find the source
-            sets = record[0].setSpec()
-            source_identifier = None
-            for s in sets:
-                if s.startswith(PROXY_SOURCE_PREFIX):
-                    source_identifier = s[len(PROXY_SOURCE_PREFIX):]
-                    break
-            source = None
-            if source_identifier:
-                try:
-                    source = OaiSource.objects.get(identifier=source_identifier)
-                except OaiSource.DoesNotExist:
-                    pass
-            if not source:
-                print "Invalid source '"+str(source_identifier)+"' from the proxy, skipping"
+            header = record[0]
+            metadata = record[1]
+            
+            translator = self.translators.get(header.format())
+            if translator is None:
+                print ("Warning: unknown metadata format %s, skipping" %
+                        header.format())
                 continue
 
-            # Find the DOI, if any
-            doi = None
-            for identifier in metadata['identifier']+metadata['relation']:
-                if not doi:
-                    doi = to_doi(identifier)
+            paper = translator.translate(header, metadata._map)
+            if paper is not None:
+                saved_paper = Paper.from_bare(paper)
 
-            # A publication date is necessary
-            pubdate = find_earliest_oai_date(record)
-            if not pubdate:
-                print "No publication date, skipping"
-                continue
-
-            print 'Saving record %s' % record[0].identifier()
-            paper = BarePaper.create(metadata['title'][0], authors, pubdate)
-
-            if doi:
-                try:
-                    metadata = crossref.fetch_metadata_by_DOI(doi)
-                    crossref.create_publication(paper, metadata)
-                except MetadataSourceException as e:
-                    print("Warning, metadata source exception while fetching DOI "+doi+":\n"+unicode(e))
-                    pass
-
-
-            if paper is None:
-                print "Paper creation failed, skipping"
-                continue
-
-            # Save the record
-            # TODO: we should check record validity *BEFORE* creating the paper
-            try:
-                add_oai_record(record, source, paper)
-                yield paper
-            except ValueError as e:
-                print "Warning, OAI record "+record[0].identifier()+" skipped:\n"+unicode(e)
-                paper.update_availability()
-
+    
 

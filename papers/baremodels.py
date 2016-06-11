@@ -218,7 +218,7 @@ class BarePaper(BareObject):
         if orcids is not None and len(author_names) != len(orcids):
             raise ValueError("The number of ORCIDs (or Nones) and authors have to be equal.")
         if type(visible) != bool:
-            raise ValueError("Invalid paper visible: %s" % unicode(visible))
+            raise ValueError("Invalid paper visibility: %s" % unicode(visible))
 
         title = sanitize_html(title)
         title = maybe_recapitalize_title(title)

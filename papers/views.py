@@ -91,7 +91,6 @@ def index(request):
     View for the home page
     """
     context = {
-        'papers' : Paper.objects.filter(visibility='VISIBLE').order_by('-pubdate')[:5],
         'newResearcherForm' : AddUnaffiliatedResearcherForm(),
         }
     context.update(UNIVERSITY_BRANDING)

@@ -38,7 +38,7 @@ from papers.models import *
 from papers.doi import to_doi
 
 from backend.crossref import *
-from backend.oai import *
+from backend.proxy import BASE_LOCAL_ENDPOINT
 from backend.orcid import *
 from backend.name_cache import name_lookup_cache
 from backend.extractors import * # to ensure that OaiSources are created
@@ -60,8 +60,7 @@ def update_researcher_task(r, task_name):
 @run_only_once('researcher', keys=['pk'])
 def init_profile_from_orcid(pk):
     """
-    Populates the profile from ORCID and Proaixy.
-    Does not fetch DOIs from ORCID as it can be slow.
+    Populates the profile from ORCID and Crossref
 
     This task is intended to be very quick, so that users
     can see their ORCID publications quickly.
@@ -78,11 +77,9 @@ def fetch_everything_for_reseracher_task(pk):
     fetch_everything_for_researcher(pk)
 
 def fetch_everything_for_researcher(pk):
-    oai = OaiPaperSource(max_results=250)
     sources = [
-        ('orcid',OrcidPaperSource(oai, max_results=1000)),
-        ('crossref',CrossRefPaperSource(oai, max_results=500)),
-        ('oai',oai),
+        ('orcid',OrcidPaperSource(max_results=1000)),
+        ('crossref',CrossRefPaperSource(max_results=500)),
        ]
     r = Researcher.objects.get(pk=pk)
 
@@ -105,17 +102,6 @@ def fetch_everything_for_researcher(pk):
         r.harvester = None
         update_researcher_task(r, None)
         name_lookup_cache.prune()
-
-@shared_task(name='fetch_records_for_researcher')
-def fetch_records_for_researcher(pk, signature=True):
-    """
-    Fetch OAI records from Proaixy for the given researcher.
-
-    :param signature: Search by name signature (D. Knuth) instead
-       of full name (Donald Knuth)
-    """
-    researcher = Researcher.objects.get(pk=pk)
-    fetch_records_for_name(researcher.name, signature=signature)
 
 @shared_task(name='recluster_researcher')
 @run_only_once('researcher', keys=['pk'], timeout=15*60)
@@ -153,15 +139,13 @@ def consolidate_paper(pk):
 
 @shared_task(name='get_bare_paper_by_doi')
 def get_bare_paper_by_doi(doi):
-    oai = OaiPaperSource(max_results=10)
-    crps = CrossRefPaperSource(oai=oai, max_results=10)
+    crps = CrossRefPaperSource(max_results=10)
     p = crps.create_paper_by_doi(doi)
     return p
 
 @shared_task(name='get_paper_by_doi')
 def get_paper_by_doi(doi):
-    oai = OaiPaperSource(max_results=10)
-    crps = CrossRefPaperSource(oai=oai, max_results=10)
+    crps = CrossRefPaperSource(max_results=10)
     p = crps.create_paper_by_doi(doi)
     if p is not None:
         p = Paper.from_bare(p)
