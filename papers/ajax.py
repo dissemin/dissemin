@@ -160,14 +160,11 @@ def newUnaffiliatedResearcher(request):
 #def annotatepaper(request, pk, status):
 #    paper = get_object_or_404(Paper, pk=pk)
 #    try:
-#        status = int(status)
-#        if not status in range(len(VISIBILITY_CHOICES)):
-#            raise ValueError
+#        visible = bool(status)
 #    except valueError:
 #        return HttpResponseForbidden('Invalid visibility status', content_type='text/plain')
 #
-#    visibility = VISIBILITY_CHOICES[status][0]
-#    annotation.create(paper, visibility, request.user)
+#    annotation.create(paper, visible, request.user)
 #    return httpResponse('OK', content_type='text/plain')
 
 #@user_passes_test(is_admin)

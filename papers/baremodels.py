@@ -37,16 +37,11 @@ from django.apps import apps
 from django.core.exceptions import ObjectDoesNotExist
 
 from papers.utils import *
+from papers.fingerprint import create_paper_plain_fingerprint
 from papers.name import to_plain_name
 from statistics.models import COMBINED_STATUS_CHOICES, PDF_STATUS_CHOICES, STATUS_CHOICES_HELPTEXT
 from publishers.models import Publisher, Journal, OA_STATUS_CHOICES, OA_STATUS_PREFERENCE, DummyPublisher
 
-
-VISIBILITY_CHOICES = [('VISIBLE', _('Visible')),
-                      ('CANDIDATE', _('Candidate')),
-                      ('NOT_RELEVANT', _('Not relevant')),
-                      ('DELETED', _('Deleted')),
-                      ]
 
 PAPER_TYPE_CHOICES = [
    ('journal-article', _('Journal article')),
@@ -153,7 +148,7 @@ class BarePaper(BareObject):
         #! The url where we think the full text is available
         'pdf_url',
         #! Visibility
-        'visibility',
+        'visible',
     ]
 
     _mandatory_fields = [
@@ -190,12 +185,12 @@ class BarePaper(BareObject):
             ist.add_author(a, position=idx)
         ist.fingerprint = ist.new_fingerprint()
         ist.update_availability()
-        ist.update_visibility()
+        ist.update_visible()
         return ist
 
 
     @classmethod
-    def create(cls, title, author_names, pubdate, visibility='VISIBLE',
+    def create(cls, title, author_names, pubdate, visible=True,
                     affiliations=None, orcids=None):
         """
         Creates a (bare) paper. To save it to the database, we
@@ -206,7 +201,7 @@ class BarePaper(BareObject):
                       ValueError is raised.
         :param author_names: The ordered list of author names, as Name objects.
         :param pubdate: The publication date, as a python date object
-        :param visibility: The visibility of the paper if it is created. If another paper
+        :param visible: The visibility of the paper if it is created. If another paper
                     exists, the visibility will be set to the maximum of the two possible
                     visibilities.
         :param affiliations: A list of (possibly None) affiliations for the authors. It has to 
@@ -222,8 +217,8 @@ class BarePaper(BareObject):
             raise ValueError("The number of affiliations and authors have to be equal.")
         if orcids is not None and len(author_names) != len(orcids):
             raise ValueError("The number of ORCIDs (or Nones) and authors have to be equal.")
-        if visibility not in [c for (c,_) in VISIBILITY_CHOICES]:
-            raise ValueError("Invalid paper visibility: %s" % unicode(visibility))
+        if type(visible) != bool:
+            raise ValueError("Invalid paper visible: %s" % unicode(visible))
 
         title = sanitize_html(title)
         title = maybe_recapitalize_title(title)
@@ -231,7 +226,7 @@ class BarePaper(BareObject):
         p = cls()
         p.title = title
         p.pubdate = pubdate # pubdate will be checked in fingerprint computation
-        p.visibility = visibility
+        p.visible = visible
         for idx, n in enumerate(author_names):
             a = BareAuthor()
             a.name = n
@@ -464,17 +459,6 @@ class BarePaper(BareObject):
         return DummyPublisher()
 
 
-    # Visibility ------------------------------------------------
-    @property
-    def toggled_visibility(self):
-        if self.visibility == 'VISIBLE':
-            return 2 # NOT RELEVANT
-        return 0 # VISIBLE
-
-    @property
-    def visibility_code(self):
-        return index_of(self.visibility, VISIBILITY_CHOICES)
-
     # Fingerprint -----------------------------------------------
     def plain_fingerprint(self, verbose=False):
         """
@@ -571,33 +555,16 @@ class BarePaper(BareObject):
         # This happens when creating the associated OaiRecord
         # failed due to some missing information.
         if not source_found:
-            self.visibility = 'CANDIDATE'
+            self.visible = False
 
         self.doctype = PAPER_TYPE_PREFERENCE[type_idx]
 
-    def update_visibility(self):
+    def update_visible(self):
         """
-        Updates the visibility of the paper. Only papers with
-        known authors should be visible.
+        Updates the visibility of the paper. Only papers with at least
+        one source should be visible.
         """
-        # TODO this should be moved to the non-bare Paper I think
-        # so that we can remove the ugly hasattr
-        p = self
-        if p.visibility != 'VISIBLE' and p.visibility != 'NOT_RELEVANT':
-            return
-        researcher_found = False
-        for a in p.authors:
-            if hasattr(a, 'researcher_id') and a.researcher_id:
-                researcher_found = True
-                break
-        if researcher_found and p.visibility != 'VISIBLE':
-            p.visibility = 'VISIBLE'
-            if hasattr(self, 'pk'):
-                p.save(update_fields=['visibility'])
-        elif not researcher_found and p.visibility != 'NOT_RELEVANT':
-            p.visibility = 'NOT_RELEVANT'
-            if hasattr(self, 'pk'):
-                p.save(update_fields=['visibility'])
+        self.visible = not self.is_orphan()
 
     # Other representations ------------------------------------------
     def __unicode__(self):
@@ -635,9 +602,9 @@ class BarePaper(BareObject):
 
     def is_orphan(self):
         """
-        When no publication or OAI record is associated with this paper.
+        When no OAI record is associated with this paper.
         """
-        return (len(self.oairecords) + len(self.publications) == 0)
+        return (len(self.oairecords) == 0)
 
     def citation(self):
         """

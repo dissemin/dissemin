@@ -113,7 +113,7 @@ class PaperPagesTest(RenderingTest):
     def test_paper(self):
         for p in self.r3.papers:
             self.checkPage('paper', kwargs={'pk':p.id, 'slug':p.slug})
-            if p.is_orphan() and p.visibility == 'VISIBLE':
+            if p.is_orphan() and p.visible:
                 print p
             self.assertTrue(not p.is_orphan())
 

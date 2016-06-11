@@ -243,7 +243,7 @@ class AccessStatistics(models.Model, BareAccessStatistics):
         """
         Updates the statistics for papers contained in the given :py:class:`Paper` queryset
         """
-        queryset = queryset.filter(visibility="VISIBLE")
+        queryset = queryset.filter(visible=True)
         for key, modifier in STATUS_QUERYSET_FILTER.items():
             self.__dict__['num_'+key] = modifier(queryset).count()
         self.num_tot = queryset.count()

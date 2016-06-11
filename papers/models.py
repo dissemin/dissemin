@@ -570,7 +570,7 @@ class Paper(models.Model, BarePaper):
     researchers = models.ManyToManyField(Researcher)
 
     last_modified = models.DateField(auto_now=True)
-    visibility = models.CharField(max_length=32, default='VISIBLE')
+    visible = models.BooleanField(default=True)
     last_annotation = models.CharField(max_length=32, null=True, blank=True)
 
     doctype = models.CharField(max_length=64, null=True, blank=True, choices=PAPER_TYPE_CHOICES)
@@ -645,13 +645,13 @@ class Paper(models.Model, BarePaper):
     ### Paper creation ###
 
     @classmethod
-    def get_or_create(cls, title, author_names, pubdate, visibility='VISIBLE', affiliations=None):
+    def get_or_create(cls, title, author_names, pubdate, visible=True, affiliations=None):
         """
         Creates an (initially) bare paper and saves it to the database.
 
         :returns: the corresponding :class:`Paper` instance.
         """
-        p = BarePaper.create(title, author_names, pubdate, visibility, affiliations)
+        p = BarePaper.create(title, author_names, pubdate, visible, affiliations)
         return cls.from_bare(p)
 
     @classmethod
@@ -671,10 +671,9 @@ class Paper(models.Model, BarePaper):
             p = None
             if matches: # We have found a paper matching the fingerprint
                 p = matches[0]
-                if (paper.visibility == 'VISIBLE' and
-                        p.visibility == 'CANDIDATE'):
-                    p.visibility ='VISIBLE'
-                    p.save(update_fields=['visibility'])
+                if paper.visible and not p.visible:
+                    p.visible = True
+                    p.save(update_fields=['visible'])
                 p.update_author_names(paper.bare_author_names(),
                         paper.affiliations(), paper.orcids())
                 for record in paper.oairecords:
@@ -730,10 +729,6 @@ class Paper(models.Model, BarePaper):
         """
         return user in self.owners
 
-    @property
-    def annotation_code(self):
-        return index_of(self.last_annotation, VISIBILITY_CHOICES)
-
     @cached_property
     def is_deposited(self):
         return self.successful_deposits().count() > 0
@@ -787,7 +782,7 @@ class Paper(models.Model, BarePaper):
         else:
             import backend.crossref as crossref
             import backend.oai as oai
-            oai = oai.OaiPaperSource(max_results=10)
+            oai = oai.OaiPaperSource(endpoint=BASE_LOCAL_ENDPOINT,max_results=10)
             crps = crossref.CrossRefPaperSource(oai=oai)
             return crps.create_paper_by_doi(doi)
 
@@ -880,26 +875,14 @@ class Paper(models.Model, BarePaper):
         if self.pk == paper.pk:
             return
 
-        statuses = [self.visibility,paper.visibility]
-        new_status = 'DELETED'
-        for s in VISIBILITY_CHOICES:
-            if s[0] in statuses:
-                new_status = s[0]
-                break
-        
         OaiRecord.objects.filter(about=paper.pk).update(about=self.pk)
         Annotation.objects.filter(paper=paper.pk).update(paper=self.pk)
         self.update_author_names(map(lambda n: (n.first,n.last), paper.author_names()),
                                 paper.affiliations(), paper.orcids())
-        if paper.last_annotation:
-            self.last_annotation = None
-            for annot in self.annotation_set.all().order_by('-timestamp'):
-                self.last_annotation = annot.status
-                break
-            self.save(update_fields=['last_annotation'])
+
         paper.invalidate_cache()
         paper.delete()
-        self.visibility = new_status
+        self.visible = new_visibility
         self.update_availability()
 
 
@@ -921,6 +904,15 @@ class Paper(models.Model, BarePaper):
         else:
             match.merge(self)
             return match
+
+    def update_visible(self):
+        """
+        Should this paper be shown to users?
+        """
+        old_visible = self.visible
+        super(Paper, self).update_visible()
+        if self.visible != old_visible:
+            p.save(update_fields=['visible'])
 
     def breadcrumbs(self):
         """
@@ -1169,26 +1161,5 @@ class PaperWorld(SingletonModel):
 
     class Meta:
         verbose_name = "Paper World"
-
-class Annotation(models.Model):
-    """
-    Annotation tool to train the models
-    """
-    paper = models.ForeignKey(Paper)
-    status = models.CharField(max_length=64)
-    user = models.ForeignKey(User)
-    timestamp = models.DateTimeField(auto_now=True)
-
-    def __unicode__(self):
-        return unicode(self.user)+': '+self.status
-    @classmethod
-    def create(self, paper, status, user): 
-        annot = Annotation(paper=paper, status=status, user=user)
-        annot.save()
-        # TODO: we leave paper visibility as is, for the experiment, but this should be changed in the future.
-        paper.last_annotation = status
-        paper.save(update_fields=['last_annotation'])
-        paper.invalidate_cache()
-
 
 

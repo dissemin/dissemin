@@ -75,7 +75,7 @@ class BarePaperTest(BareObjectTest):
                 'Excellent title', names, None)
         # Invalid visibility
         self.assertRaises(ValueError, BarePaper.create,
-                'Excellent title', names, pubdate, visibility="something")
+                'Excellent title', names, pubdate, visible="something")
         # Not enough affiliations
         self.assertRaises(ValueError, BarePaper.create,
                 'Excellent title', names, pubdate, affiliations=['ENS'])

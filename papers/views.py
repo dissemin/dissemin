@@ -187,14 +187,12 @@ def searchView(request, **kwargs):
         if val in PAPER_TYPE_PREFERENCE:
             queryset = queryset.filter(doctype=val)
         context['pubtype'] = val
-    if 'visibility' in args and is_admin(request.user):
-        val = args.get('visibility')
-        if val in [x[0] for x in VISIBILITY_CHOICES]:
-            queryset = queryset.filter(visibility=val)
-        context['visibility'] = val
+    if 'visible' in args and is_admin(request.user):
+        val = args.get('visible') == 'true'
+        context['visible'] = val
     else:
-        queryset = queryset.filter(visibility='VISIBLE')
-        context['visibility'] = 'VISIBLE'
+        queryset = queryset.filter(visible=True)
+        context['visible'] = True
 
     if search_description == _('Papers'):
         context['breadcrumbs'] = [(search_description,'')]
@@ -238,7 +236,8 @@ def searchView(request, **kwargs):
     oa_variants = varyQueryArguments('status', args_without_page, OA_STATUS_CHOICES)
     pdf_variants = varyQueryArguments('pdf', args_without_page, PDF_STATUS_CHOICES)
     pubtype_variants = varyQueryArguments('pubtype', args_without_page, PAPER_TYPE_CHOICES)
-    visibility_variants = varyQueryArguments('visibility', args_without_page, VISIBILITY_CHOICES)
+    visibility_choices = [(True,_('Visible')),(False,_('Invisible'))]
+    visibility_variants = varyQueryArguments('visible', args_without_page, visibility_choices)
     state_variants = varyQueryArguments('state', args_without_page, COMBINED_STATUS_CHOICES)
 
     context['oa_status_choices'] = oa_variants

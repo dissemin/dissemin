@@ -190,22 +190,6 @@ def refetch_containers():
         if p.container:
             p.save()
 
-def hide_unattributed_papers():
-    """
-    Changes the visibility of papers based on whether they are attributed to a researcher or
-    not (only VISIBLE <-> NOT_RELEVANT)
-    """
-    qset = Paper.objects.filter(Q(visibility='VISIBLE') | Q(visibility='NOT_RELEVANT'))
-    count = qset.count()
-    cursor = 0
-    chunksize = 100
-    while cursor < count:
-        for p in qset[cursor:cursor+chunksize].prefetch_related(
-                Prefetch('author_set', to_attr='authors')):
-            p.update_visibility()
-        cursor += chunksize
-
-
 def recompute_publisher_policies():
     """
     Recomputes the publisher policy according to some possibly new criteria
@@ -220,28 +204,5 @@ def prune_name_lookup_cache(threshold):
     """
     name_lookup_cache.prune(threshold)
 
-
-def refetch_doi_availability():
-    """
-    Refetches DOI metadata for all publications
-    """
-    def fetch_oa(doi):
-        metadata = fetch_metadata_by_DOI(doi)
-        if metadata is None:
-            return False
-        licenses = set([(license or {}).get('URL') for license in metadata.get('license', [])])
-        return any(map(is_oa_license, licenses))
-
-    for p in Publication.objects.filter(pdf_url__isnull=True):
-        if not p.doi:
-            continue
-        try:
-            if not p.pdf_url and (p.oa_status() == 'OA' or fetch_oa(p.doi)):
-                print "Updating DOI "+p.doi
-                p.pdf_url = 'http://dx.doi.org/'+p.doi
-                p.save(update_fields=['pdf_url'])
-                p.paper.update_availability()
-        except MetadataSourceException as e:
-            continue
 
 
