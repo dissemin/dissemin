@@ -25,10 +25,9 @@ import django.test
 import json
 from django.core.urlresolvers import reverse
 from backend.tests import PrefilledTest
-from backend.crossref import CrossRefPaperSource
+from backend.crossref import CrossRefAPI
 from backend.oai import OaiPaperSource
 
-from backend.crossref import CrossRefPaperSource
 from django.contrib.auth.models import User
 from time import sleep
 from papers.models import Paper

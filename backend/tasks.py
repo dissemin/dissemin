@@ -79,7 +79,7 @@ def fetch_everything_for_reseracher_task(pk):
 def fetch_everything_for_researcher(pk):
     sources = [
         ('orcid',OrcidPaperSource(max_results=1000)),
-        ('crossref',CrossRefPaperSource(max_results=500)),
+        ('crossref',CrossRefAPI(max_results=500)),
        ]
     r = Researcher.objects.get(pk=pk)
 
@@ -139,14 +139,14 @@ def consolidate_paper(pk):
 
 @shared_task(name='get_bare_paper_by_doi')
 def get_bare_paper_by_doi(doi):
-    crps = CrossRefPaperSource(max_results=10)
-    p = crps.create_paper_by_doi(doi)
+    cr_api = CrossRefAPI(max_results=10)
+    p = cr_api.create_paper_by_doi(doi)
     return p
 
 @shared_task(name='get_paper_by_doi')
 def get_paper_by_doi(doi):
-    crps = CrossRefPaperSource(max_results=10)
-    p = crps.create_paper_by_doi(doi)
+    cr_api = CrossRefAPI(max_results=10)
+    p = cr_api.create_paper_by_doi(doi)
     if p is not None:
         p = Paper.from_bare(p)
     return p

@@ -30,8 +30,8 @@ class StatisticsTest(PrefilledTest):
     @classmethod
     def setUpClass(self):
         super(StatisticsTest, self).setUpClass()
-        crps = OrcidPaperSource()
-        crps.fetch_and_save(self.r3)
+        cr_api = OrcidPaperSource()
+        cr_api.fetch_and_save(self.r3)
 
     def validStats(self, stats):
         self.assertTrue(stats.check_values())

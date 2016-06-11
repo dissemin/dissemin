@@ -40,7 +40,7 @@ from papers.bibtex import parse_bibtex
 from papers.orcid import *
 
 from backend.papersource import PaperSource
-from backend.crossref import fetch_dois, CrossRefPaperSource, convert_to_name_pair
+from backend.crossref import fetch_dois, CrossRefAPI, convert_to_name_pair
 from backend.name_cache import name_lookup_cache
 
 from django.conf import settings
@@ -347,15 +347,15 @@ class OrcidPaperSource(PaperSource):
 
         return paper
 
-    def fetch_crossref_incrementally(self, crps, orcid_id):
+    def fetch_crossref_incrementally(self, cr_api, orcid_id):
         # If we are using the ORCID sandbox, then do not look for papers from CrossRef
         # as the ORCID ids they contain are production ORCID ids (not fake ones).
         if settings.ORCID_BASE_DOMAIN != 'orcid.org':
             return
 
-        for metadata in crps.search_for_dois_incrementally('', {'orcid': orcid_id}):
+        for metadata in cr_api.search_for_dois_incrementally('', {'orcid': orcid_id}):
             try:
-                paper = crps.save_doi_metadata(metadata)
+                paper = cr_api.save_doi_metadata(metadata)
                 if paper:
                     yield True, paper
                 else:
@@ -363,13 +363,13 @@ class OrcidPaperSource(PaperSource):
             except ValueError as e:
                 print "Saving CrossRef record from ORCID failed: %s" % unicode(e)
 
-    def fetch_metadata_from_dois(self, crps, ref_name, orcid_id, dois):
+    def fetch_metadata_from_dois(self, cr_api, ref_name, orcid_id, dois):
         doi_metadata = fetch_dois(dois)
         for metadata in doi_metadata:
             try:
                 authors = map(convert_to_name_pair, metadata['author'])
                 orcids = affiliate_author_with_orcid(ref_name, orcid_id, authors)
-                paper = crps.save_doi_metadata(metadata, orcids)
+                paper = cr_api.save_doi_metadata(metadata, orcids)
                 if not paper:
                     yield False, metadata
                     continue
@@ -409,7 +409,7 @@ class OrcidPaperSource(PaperSource):
         :returns: a generator, where all the papers found are yielded. (some of them could be in
                 free form, hence not imported)
         """
-        crps = CrossRefPaperSource()
+        cr_api = CrossRefAPI()
 
         # Cleanup iD:
         orcid_id = validate_orcid(orcid_identifier)
@@ -470,7 +470,7 @@ class OrcidPaperSource(PaperSource):
         # 2nd attempt with DOIs and CrossRef
         if use_doi:
             # Let's grab papers from CrossRef
-            for success, paper_or_metadata in self.fetch_crossref_incrementally(crps, orcid_id):
+            for success, paper_or_metadata in self.fetch_crossref_incrementally(cr_api, orcid_id):
                 if success:
                     yield paper_or_metadata
                 else:
@@ -479,7 +479,7 @@ class OrcidPaperSource(PaperSource):
 
             # Let's grab papers with DOIs found in our ORCiD profile.
             # FIXME(RaitoBezarius): if we fail here, we should get back the pub and yield it.
-            for success, paper_or_metadata in self.fetch_metadata_from_dois(crps, ref_name, orcid_id, dois):
+            for success, paper_or_metadata in self.fetch_metadata_from_dois(cr_api, ref_name, orcid_id, dois):
                 if success:
                     yield paper_or_metadata
                 else:

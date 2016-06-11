@@ -41,7 +41,7 @@ from papers.errors import MetadataSourceException
 from backend.papersource import *
 from backend.extractors import *
 from backend.proxy import *
-from backend.crossref import CrossRefPaperSource
+from backend.crossref import CrossRefAPI
 from backend.name_cache import name_lookup_cache
 from backend.pubtype_translations import OAI_PUBTYPE_TRANSLATIONS
 from backend import crossref
@@ -75,14 +75,14 @@ class CiteprocTranslator(object):
     A translator for the JSON-based Citeproc format served by Crossref
     """
     def __init__(self):
-        self.crps = CrossRefPaperSource()
+        self.cr_api = CrossRefAPI()
 
     def format(self):
         return 'citeproc'
 
     def translate(self, header, metadata):
         try:
-            return self.crps.save_doi_metadata(metadata)
+            return self.cr_api.save_doi_metadata(metadata)
         except ValueError:
             return
 
@@ -292,6 +292,21 @@ class OaiPaperSource(PaperSource):
         for that format, it will be overriden.
         """
         self.translators[translator.format()] = translator
+
+    ### Record ingestion
+
+    def ingest(self, from_date=None, metadataPrefix='any'):
+        """
+        Main method to fill Dissemin with papers!
+
+        :param from_date: only fetch papers modified after that date in
+                          the proxy (useful for incremental fetching)
+        :param metadataPrefix: restrict the ingest for this metadata
+                          format
+        """
+        records = self.client.listRecords(metadataPrefix=metadataPrefix,
+                                          from_=from_date)
+        self.process_records(records)
 
     #### Record search utilities
 

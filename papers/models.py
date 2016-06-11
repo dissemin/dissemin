@@ -782,8 +782,8 @@ class Paper(models.Model, BarePaper):
         else:
             import backend.crossref as crossref
             import backend.oai as oai
-            crps = crossref.CrossRefPaperSource()
-            return crps.create_paper_by_doi(doi)
+            cr_api = crossref.CrossRefAPI()
+            return cr_api.create_paper_by_doi(doi)
 
         if wait:
             return task.get()

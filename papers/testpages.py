@@ -27,7 +27,7 @@ import html5lib
 from papers.utils import overescaped_re
 from django.core.urlresolvers import reverse
 from backend.tests import PrefilledTest
-from backend.crossref import CrossRefPaperSource
+from backend.crossref import CrossRefAPI
 from backend.oai import OaiPaperSource
 from papers.models import OaiRecord
 

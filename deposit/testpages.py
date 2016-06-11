@@ -19,14 +19,14 @@
 #
 
 from papers.testpages import RenderingTest
-from backend.crossref import CrossRefPaperSource
+from backend.crossref import CrossRefAPI
 
 class DepositPagesTest(RenderingTest):
     @classmethod
     def setUpClass(self):
         super(DepositPagesTest, self).setUpClass()
-        crps = CrossRefPaperSource()
-        crps.fetch_and_save(self.r3)
+        cr_api = CrossRefAPI()
+        cr_api.fetch_and_save(self.r3)
 
     def test_start_deposit_unauthenticated(self):
         paper = self.r3.papers[0]

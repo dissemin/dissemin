@@ -76,22 +76,27 @@ from dissemin.settings import DOI_PROXY_DOMAIN, DOI_PROXY_SUPPORTS_BATCH
 # Content negotiation remains useful for other providers (DOIs discovered by 
 # other means).
 #
+# 3. How this module is used in dissemin
+#
+# Crossref provides a search interface that can be used (among
+# others) to retrieve the papers associated with a given ORCID id.
+# This is used by the ORCID module.
+#
+# The metadata from Crossref is fetched via the OAI-PMH proxy (proaixy)
+# so the OAI module uses this module to convert the metadata.
+#
 
 # Number of results per page we ask the CrossRef search interface
-# (looks like it does not support more than 20)
-nb_results_per_request = 20
+nb_results_per_request = 100
+# Maximum number of pages we request
+max_crossref_batches_per_researcher = 10
 # Maximum timeout for the CrossRef interface (sometimes it is a bit lazy)
 crossref_timeout = 15
-# Maximum number of pages looked for a researcher
-max_crossref_batches_per_researcher = 7
-# Maximum number of non-trivially skipped records that do not match any researcher
-crossref_max_skipped_records = 50
 
 # Source object for Crossref's OAI records
 crossref_oai_source, _ = OaiSource.objects.get_or_create(identifier='crossref',
         defaults={'name':'Crossref','oa':False,'priority':1,
             'default_pubtype':'journal-article'})
-
 
 
 # Licenses considered OA, as stored by CrossRef
@@ -352,7 +357,7 @@ def fetch_dois_by_batch(doi_list):
     except requests.exceptions.RequestException as e:
         raise MetadataSourceException('Failed to retrieve batch metadata from the proxy: '+str(e))
 
-class CrossRefPaperSource(PaperSource):
+class CrossRefAPI(object):
     """
     Fetches papers from CrossRef
     """
@@ -438,10 +443,9 @@ class CrossRefPaperSource(PaperSource):
         result = create_publication(paper, metadata)
 
         if result is None: # Creating the publication failed!
-            paper.update_visible()
             # Make sure the paper only appears if it is still associated
             # with another source.
-            # TODO add unit test for this
+            paper.update_visible()
         else:
             paper = result[0]
 
@@ -491,13 +495,6 @@ class CrossRefPaperSource(PaperSource):
             offset += rows
             count += 1
 
-    def fetch_papers(self, researcher):
-        """
-        Fetch and save the publications from CrossRef for a given researcher
-        Users should rather use the "fetch" method from PaperSource.
-        """
-        # TODO migrate fetch_crossref_incrementally here
-        return []
 
 ##### Zotero interface #####
 

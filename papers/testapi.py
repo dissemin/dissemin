@@ -25,7 +25,7 @@ import django.test
 import json
 from django.core.urlresolvers import reverse
 from backend.tests import PrefilledTest
-from backend.crossref import CrossRefPaperSource
+from backend.crossref import CrossRefAPI
 from backend.oai import OaiPaperSource
 from papers.testajax import JsonRenderingTest
 from papers.models import Paper
