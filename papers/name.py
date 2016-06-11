@@ -646,7 +646,5 @@ def unify_name_lists(a,b):
             else:
                 yield (None,idx)
 
-    print result
-
     return list(make_unique(result))
     
