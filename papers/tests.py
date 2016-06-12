@@ -64,7 +64,7 @@ class OaiRecordTest(django.test.TestCase):
         paper = Paper.get_or_create('this is a title', [Name.lookup_name(('Jean','Saisrien'))],
                 datetime.date(year=2015,month=05,day=04))
         # This used to throw an exception
-        OaiRecord.find_duplicate_records('anu18989risetced', paper, 'ftp://dissem.in/paper.pdf', None)
+        OaiRecord.find_duplicate_records(paper, 'ftp://dissem.in/paper.pdf', None)
 
 import doctest
 def load_tests(loader, tests, ignore):

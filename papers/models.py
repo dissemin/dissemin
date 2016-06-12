@@ -583,6 +583,9 @@ class Paper(models.Model, BarePaper):
     # Task id of the current task updating the metadata of this article (if any)
     task = models.CharField(max_length=512, null=True, blank=True)
 
+    def __init__(self, *args, **kwargs):
+        super(Paper, self).__init__(*args, **kwargs)
+        self.just_created = False
 
     ### Relations to other models, reimplemented from :class:`BarePaper` ###
 
@@ -614,6 +617,9 @@ class Paper(models.Model, BarePaper):
         """
         Add an author at the end of the authors list by default
         or at the specified position.
+
+        The change is not commited to the database
+        (you need to call save() afterwards).
         
         :param position: add the author at that index.
         """
@@ -621,7 +627,6 @@ class Paper(models.Model, BarePaper):
         if position is None:
             position = len(self.authors_list)
         self.authors_list.insert(position, author_serialized)
-        self.save(update_fields=['authors_list'])
         return author
 
     def add_oairecord(self, oairecord):
@@ -637,10 +642,13 @@ class Paper(models.Model, BarePaper):
                 rec = matches[0]
                 if rec.about != self:
                     self.merge(rec.about)
+                self.just_created = False
                 return rec
 
-        return OaiRecord.new(about=self,
+        rec = OaiRecord.new(about=self,
                 **oairecord.__dict__)
+        self.just_created = False
+        return rec
 
     ### Paper creation ###
 
@@ -673,15 +681,18 @@ class Paper(models.Model, BarePaper):
                 p = matches[0]
                 if paper.visible and not p.visible:
                     p.visible = True
-                    p.save(update_fields=['visible'])
-                p.update_author_names(paper.bare_author_names(),
-                        paper.affiliations(), paper.orcids())
+                p.update_author_names(
+                        paper.bare_author_names(),
+                        paper.affiliations(),
+                        paper.orcids(),
+                        save_now=False)
                 for record in paper.oairecords:
                     p.add_oairecord(record)
-            else: # Otherwise we create a new paper
-                p = super(Paper, cls).from_bare(paper)
-                p.save()
+
                 p.update_availability()
+            else: # Otherwise we create a new paper
+                # this already saves the paper in the dbr
+                p = super(Paper, cls).from_bare(paper)
 
             return p
 
@@ -733,15 +744,19 @@ class Paper(models.Model, BarePaper):
     def is_deposited(self):
         return self.successful_deposits().count() > 0
 
-    def update_availability(self):
+    def update_availability(self, cached_oairecords=[]):
         """
         Updates the :class:`Paper`'s own `pdf_url` field
         based on its sources (:class:`OaiRecord`).
         
         This uses a non-trivial logic, hence it is useful to keep this result cached
         in the database row.
+
+        :param cached_oairecords: if the list of oairecords
+                to be considered is already available to the caller,
+                it can pass it to this function to save a db query
         """
-        super(Paper, self).update_availability()
+        super(Paper, self).update_availability(cached_oairecords)
         self.save()
         self.invalidate_cache()
 
@@ -806,7 +821,11 @@ class Paper(models.Model, BarePaper):
                 key = make_template_fragment_key('publiListItem', [self.pk, lang, rpk])
                 cache.delete(key)
 
-    def update_author_names(self, new_author_names, new_affiliations=None, new_orcid=None):
+    def update_author_names(self,
+            new_author_names,
+            new_affiliations=None,
+            new_orcid=None,
+            save_now=True):
         """
         Improves the current list of authors by considering a new list of author names.
         Missing authors are added, and names are unified.
@@ -859,7 +878,8 @@ class Paper(models.Model, BarePaper):
             
             new_authors.append(author.serialize())
         self.authors_list = new_authors
-        self.save(update_fields=['authors_list'])
+        if save_now:
+            self.save(update_fields=['authors_list'])
 
     def merge(self, paper):
         """
@@ -1010,14 +1030,50 @@ class OaiRecord(models.Model, BareOaiRecord):
         if kwargs.get('splash_url') is None:
             raise ValueError('No URL provided to create the OAI record.')
         splash_url = kwargs['splash_url']
-
-        # Search for duplicate records
         pdf_url = kwargs.get('pdf_url')
-        match = OaiRecord.find_duplicate_records(
-                identifier,
-                about,
-                splash_url,
-                pdf_url)
+    
+        # Has the paper we are trying to add a record to been just
+        # created? If so, we should not search for duplicate records in
+        # the paper itself.
+        match = None
+        if not about.just_created:
+            # Search for duplicate records
+            match = OaiRecord.find_duplicate_records(
+                    about,
+                    splash_url,
+                    pdf_url)
+
+        # We don't search for records with the same identifier yet,
+        # we will rather catch the exception thrown by the DB 
+        
+        if not match:
+            try:
+                # Otherwise create a new record
+                record = OaiRecord(
+                        source=source,
+                        identifier=identifier,
+                        splash_url=splash_url,
+                        pdf_url=pdf_url,
+                        about=about,
+                        description=kwargs.get('description'),
+                        keywords=kwargs.get('keywords'),
+                        contributors=kwargs.get('contributors'),
+                        pubtype=kwargs.get('pubtype', source.default_pubtype),
+                        priority=source.priority,
+                        journal_title=kwargs.get('journal_title'),
+                        container=kwargs.get('container'),
+                        publisher_name=kwargs.get('publisher_name'),
+                        issue=kwargs.get('issue'),
+                        volume=kwargs.get('volume'),
+                        pages=kwargs.get('pages'),
+                        doi=kwargs.get('doi'),
+                        publisher=kwargs.get('publisher'),
+                        journal=kwargs.get('journal'),
+                        )
+                record.save()
+                return record
+            except IntegrityError as e:
+                match = OaiRecord.objects.get(identifier=identifier) 
 
         # Update the duplicate if necessary
         if match:
@@ -1061,52 +1117,20 @@ class OaiRecord(models.Model, BareOaiRecord):
             if about.pk != match.about.pk:
                 about.merge(match.about)
 
-            match.about.update_availability()
             return match
 
-        # Otherwise create a new record
-        record = OaiRecord(
-                source=source,
-                identifier=identifier,
-                splash_url=splash_url,
-                pdf_url=pdf_url,
-                about=about,
-                description=kwargs.get('description'),
-                keywords=kwargs.get('keywords'),
-                contributors=kwargs.get('contributors'),
-                pubtype=kwargs.get('pubtype', source.default_pubtype),
-                priority=source.priority,
-                journal_title=kwargs.get('journal_title'),
-                container=kwargs.get('container'),
-                publisher_name=kwargs.get('publisher_name'),
-                issue=kwargs.get('issue'),
-                volume=kwargs.get('volume'),
-                pages=kwargs.get('pages'),
-                doi=kwargs.get('doi'),
-                publisher=kwargs.get('publisher'),
-                journal=kwargs.get('journal'),
-                )
-        record.save()
-
-        about.update_availability()
-        return record
-    
+   
     @classmethod
-    def find_duplicate_records(cls, identifier, about, splash_url, pdf_url):
+    def find_duplicate_records(cls, paper, splash_url, pdf_url):
         """
         Finds duplicate OAI records. These duplicates can have a different identifier,
         or slightly different urls (for instance https:// instead of http://).
         
-        :param identifier: the identifier of the target record: if there is one with the same
-            identifier, it will be returned
-        :param about: the :class:`Paper` the record is about
+        :param paper: the :class:`Paper` the record is about
         :param splash_url: the splash url of the target record (link to the metadata page)
         :param pdf_url: the url of the PDF, if known (otherwise `None`)
         """
         https_re = re.compile(r'https?(.*)')
-        exact_dups = OaiRecord.objects.filter(identifier=identifier)
-        if exact_dups:
-            return exact_dups[0]
         
         def shorten(url):
             if not url:
@@ -1120,21 +1144,15 @@ class OaiRecord(models.Model, BareOaiRecord):
         short_splash = shorten(splash_url)
         short_pdf = shorten(pdf_url)
 
-        if short_splash == None or about == None:
+        if short_splash == None or paper == None:
             return
 
-        if short_pdf == None:
-            matches = OaiRecord.objects.filter(about=about,
-                    splash_url__endswith=short_splash)
-            if matches:
-                return matches[0]
-        else:
-            matches = OaiRecord.objects.filter(
-                    Q(splash_url__endswith=short_splash) |
-                    Q(pdf_url__endswith=short_pdf) |
-                    Q(pdf_url__isnull=True), about=about)[:1]
-            for m in matches:
-                return m
+        for record in paper.oairecord_set.all():
+            if (record.splash_url.endswith(short_splash) or
+                (short_pdf is not None and
+                record.pdf_url is not None and
+                record.pdf_url.endswith(short_pdf))):
+                return record
 
     class Meta:
         verbose_name = "OAI record"

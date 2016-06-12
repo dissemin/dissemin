@@ -171,6 +171,9 @@ class BarePaper(BareObject):
         self.bare_oairecords = {}
         #! If there are lots of authors, how many are we hiding?
         self.nb_remaining_authors = None
+        #! This property is used in Paper to save SQL requests when
+        # adding OaiRecords
+        self.just_created = False
 
     @classmethod
     def from_bare(cls, bare_obj):
@@ -179,13 +182,13 @@ class BarePaper(BareObject):
         """
         ist = super(BarePaper, cls).from_bare(bare_obj)
         ist.save()
+        ist.just_created = True
         for r in bare_obj.oairecords:
             ist.add_oairecord(r)
         for idx, a in enumerate(bare_obj.authors):
             ist.add_author(a, position=idx)
         ist.fingerprint = ist.new_fingerprint()
-        ist.update_availability()
-        ist.update_visible()
+        ist.update_availability(bare_obj.oairecords)
         return ist
 
 
@@ -294,6 +297,7 @@ class BarePaper(BareObject):
             if new_pubdate > self.pubdate:
                 self.pubdate = new_pubdate
 
+        self.just_created = False
         return oairecord
 
     ### Generic properties that should not need to be reimplemented ###
@@ -491,38 +495,46 @@ class BarePaper(BareObject):
 
 
     # Updates ---------------------------------------------------
-    def update_availability(self):
+    def update_availability(self, cached_oairecords=[]):
         """
         Updates the :class:`BarePaper`'s own `pdf_url` field
         based on its sources (:class:`BareOaiRecord`).
         
         This uses a non-trivial logic, hence it is useful to keep this result cached
         in the database row.
+        
+        :param oairecords: the list of OaiRecords if we already have it
+                           from somewhere (otherwise it is fetched)
         """
-        # TODO rewrite this, taking into account the fact that
-        # publications are now OaiRecords as well!
-        # this should make it simpler.
+        records = cached_oairecords or self.oairecords
+        records = sorted(records, key=
+                         (lambda r: -r.priority))
+
         self.pdf_url = None
-        publis = self.publications
         oa_idx = len(OA_STATUS_PREFERENCE)-1
         type_idx = len(PAPER_TYPE_PREFERENCE)-1
         source_found = False
 
         if self.doctype in PAPER_TYPE_PREFERENCE:
             type_idx = PAPER_TYPE_PREFERENCE.index(self.doctype)
-        for publi in publis:
-            # OA status
-            cur_status = publi.oa_status()
-            try:
-                idx = OA_STATUS_PREFERENCE.index(cur_status)
-            except ValueError:
-                idx = len(OA_STATUS_PREFERENCE)
-            oa_idx = min(idx, oa_idx)
-            if OA_STATUS_CHOICES[oa_idx][0] == 'OA':
-                self.pdf_url = publi.pdf_url or publi.splash_url
+
+        for rec in records:
+            if rec.has_publication_metadata():
+                # OA status
+                cur_status = rec.oa_status()
+                try:
+                    idx = OA_STATUS_PREFERENCE.index(cur_status)
+                except ValueError:
+                    idx = len(OA_STATUS_PREFERENCE)
+                oa_idx = min(idx, oa_idx)
+                if OA_STATUS_CHOICES[oa_idx][0] == 'OA':
+                    self.pdf_url = rec.pdf_url or rec.splash_url
+            else:
+                if not self.pdf_url and rec.pdf_url:
+                    self.pdf_url = rec.pdf_url
 
             # Pub type
-            cur_type = publi.pubtype
+            cur_type = rec.pubtype
             try:
                 idx = PAPER_TYPE_PREFERENCE.index(cur_type)
             except ValueError:
@@ -532,24 +544,6 @@ class BarePaper(BareObject):
             source_found = True
 
         self.oa_status = OA_STATUS_CHOICES[oa_idx][0]
-        if not self.pdf_url:
-            records = list(self.oairecords)
-            matches = sorted(self.oairecords, key=(lambda r: (-r.source.oa,-r.source.priority)))
-            self.pdf_url = None
-            for m in matches:
-                if not self.pdf_url:
-                    self.pdf_url = m.pdf_url
-
-                if m.source.oa:
-                    self.oa_status = 'OA'
-                    if not self.pdf_url:
-                        self.pdf_url = m.splash_url
-
-                if m.pubtype in PAPER_TYPE_PREFERENCE:
-                    new_idx = PAPER_TYPE_PREFERENCE.index(m.pubtype)
-                    type_idx = min(new_idx, type_idx)
-
-                source_found = True
 
         # If this paper is not associated with any source, do not display it
         # This happens when creating the associated OaiRecord
@@ -812,12 +806,6 @@ class BareName(BareObject):
                }
 
 class BareOaiRecord(BareObject):
-    # refactoring:
-    # imported from Publication
-    # 'title' -> 'journal_title'
-    # 'abstract' -> description
-    # 'full_title' -> full_journal_title
-
     _bare_foreign_key_fields = [
         'journal', # expected to be an actual model instance
         'publisher', # expected to be an actual model instance
@@ -859,6 +847,11 @@ class BareOaiRecord(BareObject):
         'splash_url',
         'source',
     ]
+    
+    def __init__(self, *args, **kwargs):
+        super(BareOaiRecord, self).__init__(*args, **kwargs)
+        if self.source:
+            self.priority = self.source.priority
 
     def update_priority(self):
         self.priority = self.source.priority

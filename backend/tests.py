@@ -262,7 +262,6 @@ class MaintenanceTest(PrefilledTest):
     def setUpClass(self):
         super(MaintenanceTest, self).setUpClass()
         self.cr_api = CrossRefAPI()
-        self.cr_api.fetch_and_save(self.r2)
 
     def test_create_publisher_aliases(self):
         create_publisher_aliases()
