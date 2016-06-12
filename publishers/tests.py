@@ -19,6 +19,7 @@
 from django.test import TestCase
 from backend.romeo import *
 from papers.testpages import RenderingTest
+from papers.models import Paper
 
 class JournalPageTest(RenderingTest):
 
@@ -32,4 +33,9 @@ class JournalPageTest(RenderingTest):
         publisher = journal.publisher
         r = self.getPage('publisher', kwargs={'pk':publisher.pk, 'slug':publisher.slug})
         self.checkHtml(r)
+
+    def test_publisher_url(self):
+        p = Paper.create_by_doi('10.1007/978-3-642-14363-2_7')
+        for publi in p.publications:
+            self.checkPage('publisher', kwargs={'pk':publi.publisher_id, 'slug':publi.publisher.slug})
 

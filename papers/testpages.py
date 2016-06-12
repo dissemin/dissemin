@@ -29,7 +29,7 @@ from django.core.urlresolvers import reverse
 from backend.tests import PrefilledTest
 from backend.crossref import CrossRefAPI
 from backend.oai import OaiPaperSource
-from papers.models import OaiRecord
+from papers.models import OaiRecord, Paper
 
 # TODO TO BE TESTED
 
@@ -72,6 +72,9 @@ class RenderingTest(PrefilledTest):
     def checkPermanentRedirect(self, *args, **kwargs):
         self.assertEqual(self.getPage(*args, **kwargs).status_code, 301)
 
+    def check404(self, *args, **kwargs):
+        self.assertEqual(self.getPage(*args, **kwargs).status_code, 404)
+
     def checkUrl(self, url):
         self.checkHtml(self.client.get(url))
 
@@ -95,12 +98,17 @@ class PaperPagesTest(RenderingTest):
     def test_researcher_orcid(self):
         self.checkPermanentRedirect('researcher-by-orcid', kwargs={'orcid':self.r4.orcid})
 
+    def test_invalid_orcid(self):
+        self.check404('researcher-by-orcid', kwargs={'orcid':'0000-0002-2803-9724'})
+
+    def test_researcher_blocked_orcid(self):
+        self.check404('researcher-by-orcid', kwargs={'orcid':'9999-9999-9999-9994'})
+
     def test_search_no_parameters(self):
         self.checkPage('search')
 
     def test_search_researcher_pk(self):
         self.checkPermanentRedirect('search', getargs={'researcher':self.r3.pk})
-        self.checkPage('search', getargs={'researcher':self.r3.pk, 'slug':self.r3.slug})
 
     def test_search_name(self):
         self.checkPage('search', getargs={'name':self.r3.name_id})
@@ -108,7 +116,9 @@ class PaperPagesTest(RenderingTest):
     def test_search_department(self):
         self.checkPage('search', getargs={'department':self.di.pk})
 
-    # ampersands not escaped in django bootstrap pagination, https://github.com/jmcclell/django-bootstrap-pagination/issues/41
+    def test_missing_info_in_pub(self):
+        p = Paper.create_by_doi('10.1007/978-3-642-14363-2_7')
+        self.checkPage('paper', kwargs={'pk':p.id, 'slug':p.slug})
 
     def test_paper(self):
         for p in self.r3.papers:

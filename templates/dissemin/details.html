@@ -1,11 +1,11 @@
 {% extends "dissemin/skeleton.html" %}
 
 {% block content %}
+<div class="flex">
 <div id="sidebar">
     {% block details %}
     {% endblock %}
 </div>
-<div id="sidebarSeparator"></div>
 <div id="summaryLists">
     <span id="contentTitle">
     {% block bodyTitle %}
@@ -15,5 +15,6 @@
     {% block lists %}
     {% endblock %}
     </div>
+</div>
 </div>
 {% endblock %}

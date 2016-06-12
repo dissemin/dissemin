@@ -133,6 +133,7 @@ INSTALLED_APPS = (
     'rest_framework_swagger',
     'haystack',
     'widget_tweaks',
+    'capture_tag',
 )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap'
@@ -269,7 +270,7 @@ USE_TZ = True
 LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'),)
 
 # Login and athentication
-LOGIN_URL = '/accounts/login'
+LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 
 # Settings for our own API
