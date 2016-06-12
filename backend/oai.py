@@ -221,9 +221,9 @@ class OAIDCTranslator(object):
 
         # Find the DOI, if any
         doi = None
-        for identifier in metadata['identifier']+metadata['relation']:
+        for url in metadata['identifier']+metadata['relation']:
             if not doi:
-                doi = to_doi(identifier)
+                doi = to_doi(url)
 
         record = BareOaiRecord(
                 source=source,
