@@ -58,7 +58,7 @@ from django.contrib.auth.models import User
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
 from django.db.models import Q
-from django.db import DataError
+from django.db import transaction, DataError, IntegrityError
 from django.contrib.postgres.fields import JSONField
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
@@ -1044,8 +1044,8 @@ class OaiRecord(models.Model, BareOaiRecord):
                     pdf_url)
 
         # We don't search for records with the same identifier yet,
-        # we will rather catch the exception thrown by the DB 
-        
+        # we will rather catch the exception thrown by the DB
+
         if not match:
             try:
                 # Otherwise create a new record
@@ -1070,7 +1070,8 @@ class OaiRecord(models.Model, BareOaiRecord):
                         publisher=kwargs.get('publisher'),
                         journal=kwargs.get('journal'),
                         )
-                record.save()
+                with transaction.atomic():
+                    record.save()
                 return record
             except IntegrityError as e:
                 match = OaiRecord.objects.get(identifier=identifier) 
