@@ -131,9 +131,9 @@ def searchView(request, **kwargs):
                     raise Http404(_('Invalid ORCID profile.'))
 
         # Slug parameter is None if 'orcid' in args
-        if args.get('slug') != researcher.slug:
-            return redirect('researcher', permanent=True,
-                            researcher=researcher.pk, slug=researcher.slug)
+        #if args.get('slug') != researcher.slug:
+        #    return redirect('researcher', permanent=True,
+        #                    researcher=researcher.pk, slug=researcher.slug)
 
         queryset = queryset.filter(author__researcher=researcher)
         search_description += _(' authored by ')+unicode(researcher)
