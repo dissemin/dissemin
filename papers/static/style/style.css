@@ -164,21 +164,24 @@ h4
     line-height:2em;
 }
 
+.flex
+{
+    display: flex;
+    align-items: flex-start;
+}
+
 #sidebar
 {
-    float: right;
-    width: 280px;
     border-right: 1px solid rgba(192,188,206,1);
     border-bottom: 1px solid rgba(192,188,206,1);
-
-    left: 0;
-    /* position: fixed; */
-    top: 156px;
     padding: 15px;
     padding-left: 5px;
     padding-top: 7px;
     bottom: 0px;
+    margin-left: 10px;
     margin-bottom: 30px;
+    flex: 3 1 30%;
+    order: 3;
 }
 
 #fullPage, #summaryLists
@@ -198,23 +201,10 @@ h4
 
 #summaryLists
 {
-    margin-top: -30px;
+    flex: 7 1 70%;
+    order: 1;
+    align-self: stretch;
 }
-
-#sidebarSeparator
-{
-    margin: 30px 0;
-    padding: 0;
-    border: 0;
-}
-
-#summaryLists, #detailContent
-{
-    margin-right: 292px;
-   /* padding-bottom: 32767px;
-    margin-bottom: -32767px; */
-}
-
 
 #wrapper
 {
