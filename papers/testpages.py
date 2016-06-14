@@ -102,14 +102,13 @@ class PaperPagesTest(RenderingTest):
         self.check404('researcher-by-orcid', kwargs={'orcid':'0000-0002-2803-9724'})
 
     def test_researcher_blocked_orcid(self):
-        self.check404('researcher-by-orcid', kwargs={'orcid':'0000-0002-2803-9471'})
+        self.check404('researcher-by-orcid', kwargs={'orcid':'9999-9999-9999-9994'})
 
     def test_search_no_parameters(self):
         self.checkPage('search')
 
     def test_search_researcher_pk(self):
         self.checkPermanentRedirect('search', getargs={'researcher':self.r3.pk})
-        self.checkPage('search', getargs={'researcher':self.r3.pk, 'slug':self.r3.slug})
 
     def test_search_name(self):
         self.checkPage('search', getargs={'name':self.r3.name_id})
