@@ -295,7 +295,8 @@ class OaiPaperSource(PaperSource):
 
     ### Record ingestion
 
-    def ingest(self, from_date=None, metadataPrefix='any'):
+    def ingest(self, from_date=None, metadataPrefix='any',
+                resumptionToken=None):
         """
         Main method to fill Dissemin with papers!
 
@@ -304,9 +305,27 @@ class OaiPaperSource(PaperSource):
         :param metadataPrefix: restrict the ingest for this metadata
                           format
         """
-        records = self.client.listRecords(metadataPrefix=metadataPrefix,
-                                          from_=from_date)
+        records = self.client.listRecords(
+                    metadataPrefix=metadataPrefix,
+                    from_=from_date,
+                    resumptionToken=resumptionToken)
         self.process_records(records)
+
+    def create_paper_by_identifier(self, identifier, metadataPrefix):
+        """
+        Queries the OAI-PMH proxy for a single paper.
+
+        :param identifier: the OAI identifier to fetch
+        :param metadataPrefix: the format to use (a translator 
+                    has to be registered for that format, otherwise
+                    we return None with a warning message)
+        :returns: a Paper or None
+        """
+        record = self.client.getRecord(
+                    metadataPrefix=metadataPrefix,
+                    identifier=identifier)
+        return self.process_record(record[0],record[1]._map)
+        
 
     #### Record search utilities
 
@@ -320,6 +339,27 @@ class OaiPaperSource(PaperSource):
         except NoRecordsMatchError:
             return []
 
+    def process_record(self, header, metadata):
+        """
+        Saves the record given by the header and metadata (as returned by
+        pyoai) into a Paper, or None if anything failed.
+        """
+        translator = self.translators.get(header.format())
+        if translator is None:
+            print ("Warning: unknown metadata format %s, skipping" %
+                    header.format())
+            return
+
+        paper = translator.translate(header, metadata)
+        if paper is not None:
+            try:
+                return Paper.from_bare(paper)
+            except ValueError as e:
+                print "Ignoring invalid paper:"
+                print header.identifier()
+                print e
+
+ 
     def process_records(self, listRecords):
         """
         Save as :class:`Paper` all the records contained in this list
@@ -332,17 +372,8 @@ class OaiPaperSource(PaperSource):
         
         for record in listRecords:
             header = record[0]
-            metadata = record[1]
+            metadata = record[1]._map
             
-            translator = self.translators.get(header.format())
-            if translator is None:
-                print ("Warning: unknown metadata format %s, skipping" %
-                        header.format())
-                continue
-
-            paper = translator.translate(header, metadata._map)
-            if paper is not None:
-                saved_paper = Paper.from_bare(paper)
-
-    
+            self.process_record(header, metadata)
+   
 
