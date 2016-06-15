@@ -31,6 +31,5 @@ class JournalPageTest(RenderingTest):
         journal.stats.save()
         publisher = journal.publisher
         r = self.getPage('publisher', kwargs={'pk':publisher.pk, 'slug':publisher.slug})
-        print r.content
         self.checkHtml(r)
 
