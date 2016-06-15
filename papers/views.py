@@ -20,7 +20,9 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse, HttpResponseForbidden, Http404
+from django.http import (
+    HttpResponse, HttpResponseForbidden, Http404, HttpResponsePermanentRedirect,
+)
 from django.template import RequestContext, loader
 from django.views import generic
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -123,14 +125,21 @@ def searchView(request, **kwargs):
             try:
                 researcher = Researcher.objects.get(orcid=args.get('orcid'))
             except Researcher.DoesNotExist:
-                orcid = validate_orcid(args.get('orcid'))
-                researcher = Researcher.get_or_create_by_orcid(orcid)
-                researcher.init_from_orcid()
+                try:
+                    orcid = validate_orcid(args.get('orcid'))
+                    researcher = Researcher.get_or_create_by_orcid(orcid)
+                    researcher.init_from_orcid()
+                except MetadataSourceException:
+                    raise Http404(_('Invalid ORCID profile.'))
 
-        # Slug parameter is None if 'orcid' in args
-        if args.get('slug') != researcher.slug:
-            return redirect('researcher', permanent=True,
-                            researcher=researcher.pk, slug=researcher.slug)
+        # Redirect if slug doesn't match or researcher is looked up by ORCID.
+        if kwargs.get('slug', '') != researcher.slug:
+            view_args = {'researcher': researcher.id, 'slug': researcher.slug}
+            url = reverse('researcher', kwargs=view_args)
+            query_string = request.META.get('QUERY_STRING', '')
+            if query_string:
+                url += '?' + query_string
+            return HttpResponsePermanentRedirect(url)
 
         queryset = queryset.filter(author__researcher=researcher)
         search_description += _(' authored by ')+unicode(researcher)
