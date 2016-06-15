@@ -180,13 +180,9 @@ class OAIDCTranslator(object):
             print "Invalid source '"+str(source_identifier)+"' from the proxy, skipping"
             return
 
-        paper = BarePaper.create(metadata['title'][0], authors, pubdate)
-
-        if paper is None:
-            return
-
-        # Save the record
+        # Create paper and record
         try:
+            paper = BarePaper.create(metadata['title'][0], authors, pubdate)
             self.add_oai_record(header, metadata, source, paper)
             return paper
         except ValueError as e:

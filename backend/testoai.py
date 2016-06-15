@@ -65,14 +65,50 @@ class OaiTest(TestCase):
         Creation of a paper from an OAI record,
         when the exact same OAI record already exists.
         """
-        pass
+        # TODO we could repeat this for various papers
+        oai_id ='ftccsdartic:oai:hal.archives-ouvertes.fr:hal-00830421'
+
+        # first, make sure the paper isn't there already
+        self.delete(oai_id)
+        # create a paper from BASE
+        hal_paper = self.create(oai_id, 'base_dc')
+        
+        # Create it again!
+        new_paper = self.create(oai_id, 'base_dc')
+
+        # It's the same thing!
+        self.assertEqual(new_paper, hal_paper)
+        self.assertEqual(new_paper.oairecords, hal_paper.oairecords)
+        self.assertEqual(new_paper.authors, hal_paper.authors)
+        self.assertEqual(new_paper.title, hal_paper.title)
+ 
     
     def test_create_match_fp(self):
         """
         Addition of an OAI record when it is matched
         with an existing record by fingerprint.
         """
-        pass
+        # first, make sure the paper isn't there already
+        self.delete('ftccsdartic:oai:hal.archives-ouvertes.fr:hal-00939473')
+        # create a paper from BASE
+        hal_paper = self.create(
+            'ftccsdartic:oai:hal.archives-ouvertes.fr:hal-00939473',
+            'base_dc')
+        
+        # Save the existing records
+        records = set(hal_paper.oairecords)
+        # Create a new paper (refers to the same paper, but coming from
+        # another source)
+        new_paper = self.create('ftciteseerx:oai:CiteSeerX.psu:10.1.1.487.869',
+            'base_dc')
+        # the resulting paper has to be equal to the first one
+        # (this does not check that all their attributes are equal, just
+        # that they are the same row in the database, i.e. have same id)
+        self.assertEqual(new_paper, hal_paper)
+        # the new set of records is the old one plus the new record
+        records.add(OaiRecord.objects.get(identifier=
+                'ftciteseerx:oai:CiteSeerX.psu:10.1.1.487.869'))
+        self.assertEqual(set(new_paper.oairecords), records)
 
     @unittest.expectedFailure
     def test_create_match_doi(self):
