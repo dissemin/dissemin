@@ -26,12 +26,14 @@ import re
 # hence a quite permissive regexp, as we use it in a controlled
 # environment: fields of a metadata record and not plain text
 
-doi_re = re.compile(r'^ *(?:[Dd][Oo][Ii] *[:=])? *(?:http://dx\.doi\.org/)?(10\.[0-9]{4,}[^ ]*/[^ ]+) *$')
+doi_re = re.compile(r'^ *(?:[Dd][Oo][Ii] *[:=])? *(?:https?://(?:dx\.)?doi\.org/)?(10\.[0-9]{4,}[^ ]*/[^ ]+) *$')
 openaire_doi_re = re.compile(r'info:eu-repo/semantics/altIdentifier/doi/(10\.[0-9]{4,}[^ ]*/[^ ]+) *') 
 
 def to_doi(candidate):
     """
     >>> to_doi('http://dx.doi.org/10.1145/1721837.1721839')
+    u'10.1145/1721837.1721839'
+    >>> to_doi('https://doi.org/10.1145/1721837.1721839')
     u'10.1145/1721837.1721839'
     >>> to_doi('10.1145/1721837.1721839')
     u'10.1145/1721837.1721839'

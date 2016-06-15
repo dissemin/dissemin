@@ -70,6 +70,7 @@ from papers.baremodels import *
 from papers.name import match_names, name_similarity, unify_name_lists
 from papers.utils import remove_diacritics, sanitize_html, validate_orcid, affiliation_is_greater, remove_nones, index_of, iunaccent
 from papers.orcid import OrcidProfile
+from papers.doi import to_doi
 
 from statistics.models import AccessStatistics, STATUS_CHOICES_HELPTEXT, combined_status_for_instance
 from publishers.models import Publisher, Journal, OA_STATUS_CHOICES, OA_STATUS_PREFERENCE, DummyPublisher
@@ -634,16 +635,18 @@ class Paper(models.Model, BarePaper):
         Adds a record (possibly bare) to the paper, by saving it in
         the database
         """
-        # Test first if there is no publication with this new DOI
+        # Test first if there is no other record with this DOI
         doi = oairecord.doi
         if doi:
-            matches = OaiRecord.objects.filter(doi__iexact=doi)
+            matches = OaiRecord.objects.filter(doi__iexact=doi)[:1]
             if matches:
                 rec = matches[0]
                 if rec.about != self:
-                    self.merge(rec.about)
+                    # we delete self
+                    # and keep rec.about, so that the oldest paper
+                    # is kept (otherwise, we break links!)
+                    rec.about.merge(self)
                 self.just_created = False
-                return rec
 
         rec = OaiRecord.new(about=self,
                 **oairecord.__dict__)
@@ -691,7 +694,7 @@ class Paper(models.Model, BarePaper):
 
                 p.update_availability()
             else: # Otherwise we create a new paper
-                # this already saves the paper in the dbr
+                # this already saves the paper in the db
                 p = super(Paper, cls).from_bare(paper)
 
             return p
@@ -894,17 +897,24 @@ class Paper(models.Model, BarePaper):
         if self.pk == paper.pk:
             return
         
-        new_visibility = paper.visible or self.visible
+        oldid = paper.id
+        self.visible = paper.visible or self.visible
 
         OaiRecord.objects.filter(about=paper.pk).update(about=self.pk)
         self.update_author_names(map(lambda n: (n.first,n.last), paper.author_names()),
                                 paper.affiliations(), paper.orcids())
 
         paper.invalidate_cache()
-        paper.delete()
-        self.visible = new_visibility
-        self.update_availability()
 
+        # create a copy of the paper to delete,
+        # so that the instance we have got as argument
+        # is not invalidated
+        copied = Paper()
+        copied.__dict__.update(paper.__dict__)
+        copied.delete()
+
+        paper.id = self.id 
+        self.update_availability()
 
     def recompute_fingerprint_and_merge_if_needed(self):
         """
@@ -992,7 +1002,7 @@ class OaiRecord(models.Model, BareOaiRecord):
     pubdate = models.DateField(blank=True, null=True)
     abstract = models.TextField(blank=True, null=True)
 
-    doi = models.CharField(max_length=1024, unique=True, blank=True, null=True) # in theory, there is no limit
+    doi = models.CharField(max_length=1024, blank=True, null=True) # in theory, there is no limit
 
 
     last_update = models.DateTimeField(auto_now=True)
@@ -1116,7 +1126,7 @@ class OaiRecord(models.Model, BareOaiRecord):
                     raise ValueError('Unable to create OAI record:\n'+unicode(e))
 
             if about.pk != match.about.pk:
-                about.merge(match.about)
+                match.about.merge(about)
 
             return match
 
@@ -1134,8 +1144,14 @@ class OaiRecord(models.Model, BareOaiRecord):
         https_re = re.compile(r'https?(.*)')
         
         def shorten(url):
+            """
+            removes the 'https?' prefix or converts to DOI
+            """
             if not url:
                 return
+            doi = to_doi(url)
+            if doi:
+                return doi
             match = https_re.match(url.strip())
             if not match:
                 print "Warning, invalid URL: "+url
@@ -1149,10 +1165,11 @@ class OaiRecord(models.Model, BareOaiRecord):
             return
 
         for record in paper.oairecord_set.all():
-            if (record.splash_url.endswith(short_splash) or
+            short_splash2 = shorten(record.splash_url)
+            short_pdf2 = shorten(record.pdf_url)
+            if (short_splash == short_splash2 or
                 (short_pdf is not None and
-                record.pdf_url is not None and
-                record.pdf_url.endswith(short_pdf))):
+                short_pdf2 == short_pdf)):
                 return record
 
     class Meta:

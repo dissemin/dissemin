@@ -117,29 +117,57 @@ class OaiTest(TestCase):
                 'ftciteseerx:oai:CiteSeerX.psu:10.1.1.487.869'))
         self.assertSetEqual(set(new_paper.oairecords), records)
 
-    @unittest.expectedFailure
     def test_create_match_doi(self):
         """
         Addition of an OAI record when it is matched
         to an existing paper by DOI
         """
-        # first, make sure the paper isn't there already
-        self.delete('oai:crossref.org:10.1007/s10858-015-9994-8')
-        # Create a paper from BASE
-        spoc = self.create(
-            'ftspringeroc:10.1007/s10858-015-9994-8',
-            'base_dc')
+        first_id='ftunivmacedonia:oai:dspace.lib.uom.gr:2159/6240'
+        second_id='oai:crossref.org:10.1111/j.1574-0862.2005.00325.x'
 
-        records = set(spoc.oairecords)
-        new_paper = self.create(
-            'oai:crossref.org:10.1007/s10858-015-9994-8',
-            'citeproc')
-        self.assertEqual(spoc, new_paper)
-        records.add(OaiRecord.objects.get(identifier=
-            'oai:crossref.org:10.1007/s10858-015-9994-8'))
+        # first, make sure the paper isn't there already
+        self.delete(first_id)
+        # Create a paper from BASE
+        first = self.create(first_id,'base_dc')
+
+        self.assertEqual(first.oairecords[0].doi,
+                '10.1111/j.1574-0862.2005.00325.x')
+        records = set(first.oairecords)
+        new_paper = self.create(second_id, 'citeproc')
+
+        # Make sure that, if a merge happens, the oldest
+        # paper remains (otherwise we create broken links!)
+        self.assertEqual(first, new_paper)
+
+        records.add(OaiRecord.objects.get(identifier=second_id))
         self.assertEqual(set(new_paper.oairecords), records)
 
-    @unittest.expectedFailure
+    def test_update_pdf_url(self):
+        """
+        Two OAI records share the same splash URL, but
+        the second one has a pdf_url. We should add the PDF
+        url to the existing OAI record (merge the two records).
+        """
+        # first, make sure the paper isn't there already
+        self.delete('oai:crossref.org:10.1007/s10858-015-9994-8')
+        # Create a paper from Crossref
+        first = self.create(
+            'oai:crossref.org:10.1007/s10858-015-9994-8',
+            'citeproc')
+        # initially the PDF url should be empty 
+        self.assertEqual(first.oairecords[0].pdf_url, None)
+
+        # then we import a new identifier
+        new_paper = self.create(
+            'ftspringeroc:10.1007/s10858-015-9994-8',
+            'base_dc')
+        self.assertEqual(first, new_paper)
+
+        # no new record should be created
+        self.assertEqual(len(new_paper.oairecords), 1)
+        self.assertNotEqual(new_paper.oairecords[0].pdf_url, None)
+
+
     def test_create_match_identifier(self):
         """
         An OAI record with the same identifier already
