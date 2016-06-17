@@ -109,6 +109,10 @@ class BarePaperTest(BareObjectTest):
                 BareAuthor(name=BareName.create('Cantor','Bernstein')),
                 position=8)
 
-
-
-
+    def test_displayed_authors(self):
+        """
+        p.displayed_authors returns a list of authors.
+        """
+        self.assertEqual(len(self.ist.displayed_authors()), 2)
+        self.ist.MAX_DISPLAYED_AUTHORS = 1
+        self.assertEqual(len(self.ist.displayed_authors()), 1)

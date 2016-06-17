@@ -157,6 +157,10 @@ class BarePaper(BareObject):
         'fingerprint',
     ]
 
+    # Value above which we consider a paper to have too many authors to be
+    # displayed. See BarePaper.has_many_authors
+    MAX_DISPLAYED_AUTHORS = 15
+
     @property
     def slug(self):
         return slugify(self.title)
@@ -385,19 +389,17 @@ class BarePaper(BareObject):
     @property
     def has_many_authors(self):
         """
-        When the paper has more than 15 authors (arbitrary threshold)
+        When the paper has more than some arbitrary number of authors.
         """
-        return self.author_count > 15
+        return self.author_count > self.MAX_DISPLAYED_AUTHORS
 
     @cached_property
     def interesting_authors(self):
         """
         The list of authors to display when the complete list is too long.
-        We display first the authors whose names are known, and then a few ones
-        who are unknown.
         """
-        lst = (filter(lambda a: a.name.best_confidence > 0, self.authors)+filter(
-                      lambda a: a.name.best_confidence == 0, self.authors)[:3])[:15]
+        # TODO: Better selection
+        lst = self.authors[:self.MAX_DISPLAYED_AUTHORS]
         self.nb_remaining_authors = self.author_count - len(lst)
         return lst
 
