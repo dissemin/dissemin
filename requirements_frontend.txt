@@ -11,6 +11,7 @@ wand
 PyPDF2
 -e git://github.com/dissemin/django-allauth.git@0.25.2-post_login-orcidv1.2#egg=django-allauth
 django-redis-cache
+django-cache-machine
 django-solo
 requests
 pillow

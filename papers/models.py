@@ -62,6 +62,7 @@ from django.db import transaction, DataError, IntegrityError
 from django.contrib.postgres.fields import JSONField
 from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
+from caching.base import CachingManager, CachingMixin
 from solo.models import SingletonModel
 from celery.execute import send_task
 from celery.result import AsyncResult
@@ -638,7 +639,7 @@ class Paper(models.Model, BarePaper):
         # Test first if there is no other record with this DOI
         doi = oairecord.doi
         if doi:
-            matches = OaiRecord.objects.filter(doi__iexact=doi)[:1]
+            matches = OaiRecord.objects.filter(doi=doi)[:1]
             if matches:
                 rec = matches[0]
                 if rec.about != self:
@@ -691,7 +692,6 @@ class Paper(models.Model, BarePaper):
                         save_now=False)
                 for record in paper.oairecords:
                     p.add_oairecord(record)
-
                 p.update_availability()
             else: # Otherwise we create a new paper
                 # this already saves the paper in the db
@@ -962,7 +962,9 @@ class Paper(models.Model, BarePaper):
         return result
 
 # Rough data extracted through OAI-PMH
-class OaiSource(models.Model):
+class OaiSource(CachingMixin, models.Model):
+    objects = CachingManager()
+    
     identifier = models.CharField(max_length=300, unique=True)
     name = models.CharField(max_length=100)
     oa = models.BooleanField(default=False)

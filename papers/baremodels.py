@@ -180,6 +180,8 @@ class BarePaper(BareObject):
         """
         Creates an instance of this class from a :class:`BarePaper`.
         """
+        bare_obj.update_availability()
+        bare_obj.fingerprint = bare_obj.new_fingerprint()
         ist = super(BarePaper, cls).from_bare(bare_obj)
         ist.save()
         ist.just_created = True
@@ -187,8 +189,6 @@ class BarePaper(BareObject):
             ist.add_oairecord(r)
         for idx, a in enumerate(bare_obj.authors):
             ist.add_author(a, position=idx)
-        ist.fingerprint = ist.new_fingerprint()
-        ist.update_availability(bare_obj.oairecords)
         return ist
 
 
@@ -503,7 +503,7 @@ class BarePaper(BareObject):
         This uses a non-trivial logic, hence it is useful to keep this result cached
         in the database row.
         
-        :param oairecords: the list of OaiRecords if we already have it
+        :param cached_oairecords: the list of OaiRecords if we already have it
                            from somewhere (otherwise it is fetched)
         """
         records = cached_oairecords or self.oairecords

@@ -58,13 +58,16 @@ class OaiTest(TestCase):
         Creation of a paper from an OAI record,
         when the paper does not exist yet.
         """
-        oai_id ='ftccsdartic:oai:hal.archives-ouvertes.fr:hal-00830421'
+        oai_id = 'ftunivsavoie:oai:HAL:hal-01063697v1'
 
         # first, make sure the paper isn't there already
         self.delete(oai_id)
         # create a paper from BASE
         hal_paper = self.create(oai_id, 'base_dc')
         self.assertEqual(len(hal_paper.oairecords), 1)
+        self.assertNotEqual(hal_paper.pdf_url, None)
+        self.assertEqual(hal_paper.fingerprint,
+                hal_paper.new_fingerprint())
     
     def test_create_already_existing(self):
         """
