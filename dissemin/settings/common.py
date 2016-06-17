@@ -44,11 +44,6 @@ try:
 except ImportError as e:
     raise RuntimeError('University-specific file is missing, did you forget to add a university.py in your settings folder?')
 
-try:
-    from .search_engine import HAYSTACK_CONNECTIONS
-except ImportError as e:
-    raise RuntimeError('Search-engine-specific file is missing, did you forget to add a search_engine.py in your settings folder?')
-
 # dirname(__file__) → repo/dissemin/settings/common.py
 # .. → repo/dissemin/settings
 # .. → repo/dissemin
@@ -281,4 +276,13 @@ REST_FRAMEWORK = {
                 'rest_framework.renderers.JSONRenderer',
                 'rest_framework.renderers.BrowsableAPIRenderer',
             ),
+}
+
+# Custom backend for haystack with Elasticsearch
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'search.SearchEngine',
+        'URL': 'http://localhost:9200/',
+        'INDEX_NAME': 'dissemin',
+    },
 }

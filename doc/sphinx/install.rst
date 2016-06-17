@@ -77,14 +77,14 @@ Now, your university settings are done.
 Install and configure the search engine
 ---------------------------------------
 
-You can choose any of the search backends supported by Haystack.
+dissem.in uses the [Elasticsearch](https://www.elastic.co/products/elasticsearch)
+backend for Haystack.
 
-Whoosh is the simplest option, as it is written in Python and you can install it via PyPI::
+[Download Elasticsearch](https://www.elastic.co/downloads/elasticsearch)
+and unzip it.
 
-    pip install whoosh
-
-and finally just copy ``dissemin/settings/search_engine_template.py`` to
-``dissemin/settings/search_engine.py``.
+    cd elasticsearch-<version>
+    ./bin/elasticsearch    # Add -d to start elasticsearch in the background
 
 Configure the application for development or production
 -------------------------------------------------------

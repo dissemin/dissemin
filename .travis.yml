@@ -13,6 +13,7 @@ python:
 services:
   - postgresql
   - redis
+  - elasticsearch
 
 sudo: false
 
@@ -47,7 +48,6 @@ before_install:
   - export PYTHONPATH=$HOME/builds/wetneb/dissemin
   - export PIP_USE_MIRRORS=true
   - echo "from .travis import *" > dissemin/settings/__init__.py
-  - cp dissemin/settings/search_engine_template.py dissemin/settings/search_engine.py
   - cp dissemin/settings/secret_template.py dissemin/settings/secret.py
   - cp dissemin/settings/university_template.py dissemin/settings/university.py
 
@@ -57,7 +57,6 @@ install:
   - pip install -r requirements_frontend_light.txt
   - pip install -r requirements_backend_light.txt
   - pip install coveralls
-  - pip install whoosh
   - wget http://dev.dissem.in/files/similarity.pkl -O models/similarity.pkl
 
 before_script:
@@ -68,6 +67,7 @@ script:
   - ./devutils/notify_translations
   - python manage.py migrate --noinput
   - python manage.py loaddata dissemin/fixtures/test_dump.json
+  - python manage.py rebuild_index --noinput
   - ./celery.sh &
   - coverage run --source=dissemin,papers,backend,deposit,upload,statistics --omit=*/migrations/*,dissemin/settings/* manage.py test --testrunner dissemin.scripts.baretests.BareTestRunner -v 2 --failfast
 
