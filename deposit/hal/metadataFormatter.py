@@ -208,9 +208,10 @@ class AOFRFormatter(MetadataFormatter):
             lastName = addChild(nameNode, 'surname')
             lastName.text = name.last
 
-            if author.researcher_id:
-                affiliation = addChild(node, 'affiliation')
-                affiliation.attrib['ref'] = '#struct-'+str(ENS_HAL_ID)
+            # TODO affiliations come here
+            #if author.researcher_id:
+            affiliation = addChild(node, 'affiliation')
+            affiliation.attrib['ref'] = '#struct-'+str(ENS_HAL_ID)
 
     def renderPubli(self, biblStruct, publi):
         # TODO: handle publication type properly
@@ -220,7 +221,7 @@ class AOFRFormatter(MetadataFormatter):
 
         title = addChild(root, 'title')
         title.attrib['level'] = 'j' # TODO: this should be adapted based on the type
-        title.text = publi.full_title()
+        title.text = publi.full_journal_title()
 
         imprint = addChild(root, 'imprint')
 

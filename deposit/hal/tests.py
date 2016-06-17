@@ -20,12 +20,38 @@
 
 from __future__ import unicode_literals
 from django.test import TestCase
+from unittest import expectedFailure
+from papers.models import Paper
 from deposit.tests import ProtocolTest
 from deposit.hal.protocol import HALProtocol
+from deposit.hal.metadataFormatter import AOFRFormatter
+from lxml import etree
+from os import path
+
+class AOFRTest(TestCase):
+    @classmethod
+    def setUpClass(cls):
+        super(AOFRTest, cls).setUpClass()
+        xsd_fname = path.join(path.dirname(__file__), 'aofr-sword.xsd')
+        with open(xsd_fname, 'r') as f:
+            elem = etree.parse(f)
+            cls.xsd = etree.XMLSchema(elem)
+
+    @expectedFailure
+    def test_generate_metadata_doi(self):
+        f = AOFRFormatter()
+        dois = ['10.1175/jas-d-15-0240.1']
+        for doi in dois:
+            p = Paper.create_by_doi(doi)
+            rendered = f.render(p, 'article.pdf')
+            with open('/tmp/xml_validation.xml', 'w') as f:
+                f.write(etree.tostring(rendered, pretty_print=True))
+            self.xsd.assertValid(rendered)
 
 class HALProtocolTest(ProtocolTest):
     @classmethod
     def setUpClass(self):
         super(HALProtocolTest, self).setUpClass()
         self.proto = HALProtocol(self.repo)
+
 

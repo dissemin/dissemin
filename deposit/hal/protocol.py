@@ -38,6 +38,26 @@ from deposit.hal.metadataFormatter import *
 from papers.errors import MetadataSourceException
 from papers.utils import kill_html
 
+try:
+    import http.client as http_client
+except ImportError:
+    # Python 2
+    import httplib as http_client
+http_client.HTTPConnection.debuglevel = 1
+
+
+import logging
+
+# These two lines enable debugging at httplib level (requests->urllib3->http.client)
+# You will see the REQUEST, including HEADERS and DATA, and RESPONSE with HEADERS but without DATA.
+# The only thing missing will be the response.body which is not logged.
+# You must initialize logging, otherwise you'll not see debug output.
+logging.basicConfig()
+logging.getLogger().setLevel(logging.DEBUG)
+requests_log = logging.getLogger("requests.packages.urllib3")
+requests_log.setLevel(logging.DEBUG)
+requests_log.propagate = True
+
 
 class HALProtocol(RepositoryProtocol):
     """
@@ -49,8 +69,10 @@ class HALProtocol(RepositoryProtocol):
         self.api_url = repository.endpoint
         if not self.api_url:
             self.api_url = "https://api.archives-ouvertes.fr/sword/hal/"
-        self.user = repository.username
+        self.username = repository.username
         self.password = repository.password
+        print self.user
+        print self.password
 
     def get_form(self):
         data = {}
@@ -69,11 +91,20 @@ class HALProtocol(RepositoryProtocol):
         with ZipFile(s, 'w') as zipFile:
             zipFile.writestr("article.pdf", str(pdf))
             zipFile.writestr("meta.xml", str(metadata))
+
+        with open('/tmp/hal.zip', 'wb') as f:
+            with ZipFile(f, 'w') as zipFile:
+                zipFile.writestr("article.pdf", str(pdf))
+                zipFile.writestr("meta.xml", str(metadata))
         return s
+
+    def encodeUserData(self):
+        return "Basic " + (self.username + ":" + self.password
+                ).encode("base64").rstrip()
 
     def submit_deposit(self, pdf, form):
         result = {}
-        if self.user is None or self.password is None:
+        if self.username is None or self.password is None:
             raise DepositError(__("No HAL user credentials provided."))
 
         deposit_result = DepositResult()
@@ -82,7 +113,6 @@ class HALProtocol(RepositoryProtocol):
             # Creating the metadata
             self.log("### Generating metadata")
             metadata = self.createMetadata(form)
-            print metadata
             # TODO dump XML
 
             # Check that there is an abstract
@@ -97,17 +127,44 @@ class HALProtocol(RepositoryProtocol):
 
             # Creating a new deposition
             self.log("### Creating a new deposition")
-            files = {'file':('deposit.zip',zipFile,'application/zip')}
-            headers = {"X-Packaging":"http://purl.org/net/sword-types/AOfr"}
-            r = requests.post(self.api_url,
-                    headers=headers,
-                    files=files,
-                    auth=(self.user,self.password))
-            self.log_request(r, 201, __('Unable to create a new deposition on HAL.'))
-            print r
-            deposition_id = r.headers['Location']
+
+            host = 'api-preprod.archives-ouvertes.fr'
+            conn = http_client.HTTPConnection(host)
+            conn.putrequest('POST', '/sword/hal', True, True)
+            zipContent = zipFile.getvalue() 
+            headers = {
+                'Authorization': self.encodeUserData(),
+                'Host': host,
+                'X-Packaging':'http://purl.org/net/sword-types/AOfr',
+                'Content-Type':'application/zip',
+                'Content-Disposition': 'attachment; filename=meta.xml',
+                'Content-Length': len(zipContent),
+                }
+            for header, value in headers.items():
+                conn.putheader(header, value)
+            conn.endheaders()
+            conn.send(zipContent)
+            resp = conn.getresponse()
+            print resp.read()
+            deposition_id = resp.getheader('location')
+
+            if False:
+                files = {'file':('deposit.zip',zipfile,'application/zip')}
+                headers = {"x-packaging":"http://purl.org/net/sword-types/aofr"}
+                r = requests.post(self.api_url,
+                        headers=headers,
+                        files=files,
+                        auth=(self.username,self.password))
+                self.log(unicode(r.request.headers))
+                self.log(unicode(r.headers))
+                print "result"
+                print r.body
+                self.log_request(r, 201, __('unable to create a new deposition on hal.'))
+                deposition_id = r.headers['location']
+
+
             deposit_result.identifier = deposition_id
-            self.log("Deposition id: %d" % deposition_id)
+            self.log("Deposition id: %s" % deposition_id)
 
             deposit_result.splash_url = deposition_id
             deposit_result.pdf_url = deposit_result.splash_url + '/document'
