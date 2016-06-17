@@ -183,12 +183,12 @@ class BarePaper(BareObject):
         bare_obj.update_availability()
         bare_obj.fingerprint = bare_obj.new_fingerprint()
         ist = super(BarePaper, cls).from_bare(bare_obj)
+        for idx, a in enumerate(bare_obj.authors):
+            ist.add_author(a, position=idx)
         ist.save()
         ist.just_created = True
         for r in bare_obj.oairecords:
             ist.add_oairecord(r)
-        for idx, a in enumerate(bare_obj.authors):
-            ist.add_author(a, position=idx)
         return ist
 
 
@@ -404,13 +404,12 @@ class BarePaper(BareObject):
 
     def check_authors(self):
         """
-        Check that all authors are associated with a valid name.
-        (This is normally enforced by the database but in some contexts
-        where names are cached, this was not the case.)
+        Check the sanity of authors
+        (for now, only that the list is non-empty)
         """
-        for a in self.authors:
-            if a.name is None:
-                raise ValueError("Name referenced by author could not be found!")
+        if not self.authors:
+            raise ValueError("Empty authors list")
+        # TODO more checks here?
 
     # Publications ---------------------------------------------
 
