@@ -504,6 +504,7 @@ def fetch_zotero_by_DOI(doi):
     Works only with the doi_cache proxy.
     """
     try:
+        print ('http://'+DOI_PROXY_DOMAIN+'/zotero/'+doi)
         request = requests.get('http://'+DOI_PROXY_DOMAIN+'/zotero/'+doi)
         return request.json()
     except ValueError as e:
@@ -519,8 +520,8 @@ def consolidate_publication(publi):
         return publi
     for item in zotero:
         if 'abstractNote' in item:
-            publi.abstract = sanitize_html(item['abstractNote'])
-            publi.save(update_fields=['abstract'])
+            publi.description = sanitize_html(item['abstractNote'])
+            publi.save(update_fields=['description'])
         for attachment in item.get('attachments', []):
             if attachment.get('mimeType') == 'application/pdf':
                 publi.pdf_url = attachment.get('url')

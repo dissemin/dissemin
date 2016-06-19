@@ -55,7 +55,6 @@ def update_researcher_task(r, task_name):
     r.last_harvest = timezone.now()
     r.save(update_fields=['current_task','last_harvest'])
 
-
 @shared_task(name='init_profile_from_orcid')
 @run_only_once('researcher', keys=['pk'])
 def init_profile_from_orcid(pk):
@@ -126,15 +125,10 @@ def consolidate_paper(pk):
         abstract = p.abstract or ''
         for pub in p.publications:
             pub = consolidate_publication(pub)
-            if pub.abstract and len(pub.abstract) > len(abstract):
-                abstract = pub.abstract
+            if pub.description and len(pub.description) > len(abstract):
                 break
     except Paper.DoesNotExist:
         print "consolidate_paper: unknown paper %d" % pk
-    finally:
-        if p is not None:
-            p.task = None
-            p.save(update_fields=['task'])
 
 @shared_task(name='get_bare_paper_by_doi')
 def get_bare_paper_by_doi(doi):

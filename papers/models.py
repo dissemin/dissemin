@@ -1005,7 +1005,6 @@ class OaiRecord(models.Model, BareOaiRecord):
     volume = models.CharField(max_length=64, blank=True, null=True)
     pages = models.CharField(max_length=64, blank=True, null=True)
     pubdate = models.DateField(blank=True, null=True)
-    abstract = models.TextField(blank=True, null=True)
 
     doi = models.CharField(max_length=1024, blank=True, null=True) # in theory, there is no limit
 
