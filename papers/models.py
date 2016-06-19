@@ -629,7 +629,20 @@ class Paper(models.Model, BarePaper):
         if position is None:
             position = len(self.authors_list)
         self.authors_list.insert(position, author_serialized)
+        if author.researcher_id:
+            self.researchers.add(author.researcher_id)
         return author
+
+    def set_researcher(self, position, researcher_id):
+        """
+        Sets the researcher_id for the author at the given position
+        (0-indexed)
+        """
+        if position < 0 or position > len(self.authors_list):
+            raise ValueError('Invalid position provided')
+        self.authors_list[position]['researcher_id'] = researcher_id
+        self.save(update_fields=['authors_list'])
+        self.researchers.add(researcher_id)
 
     def add_oairecord(self, oairecord):
         """
@@ -685,14 +698,12 @@ class Paper(models.Model, BarePaper):
                 p = matches[0]
                 if paper.visible and not p.visible:
                     p.visible = True
-                p.update_author_names(
-                        paper.bare_author_names(),
-                        paper.affiliations(),
-                        paper.orcids(),
+                p.update_authors(
+                        paper.authors,
                         save_now=False)
                 for record in paper.oairecords:
                     p.add_oairecord(record)
-                p.update_availability()
+                p.update_availability() # in Paper, this saves to the db
             else: # Otherwise we create a new paper
                 # this already saves the paper in the db
                 p = super(Paper, cls).from_bare(paper)
@@ -824,10 +835,8 @@ class Paper(models.Model, BarePaper):
                 key = make_template_fragment_key('publiListItem', [self.pk, lang, rpk])
                 cache.delete(key)
 
-    def update_author_names(self,
-            new_author_names,
-            new_affiliations=None,
-            new_orcid=None,
+    def update_authors(self,
+            new_authors,
             save_now=True):
         """
         Improves the current list of authors by considering a new list of author names.
@@ -835,25 +844,21 @@ class Paper(models.Model, BarePaper):
         If affiliations are provided, they will replace the old ones if they are
         more informative.
 
-        :param new_author_names: list of Name instances (the order matters)
-        :param new_affiliations: (optional) list of affiliation strings for the new author names.
+        :param authors: list of BareAuthor instances (the order matters)
         """
-
-        if new_affiliations is None:
-            new_affiliations = [None]*len(new_author_names)
-        if new_orcid is None:
-            new_orcid = [None]*len(new_author_names)
-        assert len(new_author_names) == len(new_affiliations)
         old_authors = list(self.authors)
 
         # Invalidate cached properties
         if hasattr(self, 'interesting_authors'):
             del self.interesting_authors
 
+        new_author_names = [(a.name.first,a.name.last) for a in
+                            new_authors]
+
         old_names = map(lambda a: (a.name.first,a.name.last), old_authors)
         unified_names = unify_name_lists(old_names, new_author_names)
 
-        new_authors = []
+        unified_authors = []
         for new_name, (old_idx, new_idx) in unified_names:
             if new_name is None:
                 # skip duplicate names        
@@ -866,21 +871,20 @@ class Paper(models.Model, BarePaper):
                 # so we keep it
                 author = old_authors[old_idx]
             else:
-                # create a new author
-                author = BareAuthor()
+                author = new_authors[new_idx]
 
             # update attributes
             author.name = BareName.create_bare(first=new_name[0],
                                                 last=new_name[1])
             if new_idx is not None and affiliation_is_greater(
-                new_affiliations[new_idx],
+                new_authors[new_idx].affiliation,
                 author.affiliation):
-                author.affiliation = new_affiliations[new_idx]
-            if new_idx is not None and new_orcid[new_idx]:
-                author.orcid = new_orcid[new_idx]
+                author.affiliation = new_authors[new_idx].affiliation
+            if new_idx is not None and new_authors[new_idx].orcid:
+                author.orcid = new_authors[new_idx].orcid
             
-            new_authors.append(author.serialize())
-        self.authors_list = new_authors
+            unified_authors.append(author.serialize())
+        self.authors_list = unified_authors
         if save_now:
             self.save(update_fields=['authors_list'])
 
@@ -901,8 +905,7 @@ class Paper(models.Model, BarePaper):
         self.visible = paper.visible or self.visible
 
         OaiRecord.objects.filter(about=paper.pk).update(about=self.pk)
-        self.update_author_names(map(lambda n: (n.first,n.last), paper.author_names()),
-                                paper.affiliations(), paper.orcids())
+        self.update_authors(paper.authors, save_now=False)
 
         paper.invalidate_cache()
 
@@ -1155,9 +1158,7 @@ class OaiRecord(models.Model, BareOaiRecord):
             if doi:
                 return doi
             match = https_re.match(url.strip())
-            if not match:
-                print "Warning, invalid URL: "+url
-            else:
+            if match:
                 return match.group(1)
 
         short_splash = shorten(splash_url)

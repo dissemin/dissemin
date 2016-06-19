@@ -203,13 +203,7 @@ class OrcidIntegrationTest(PaperSourceTest):
 
 
 class PaperMethodsTest(PrefilledTest):
-    @classmethod
-    def setUpClass(self):
-        if self is PaperMethodsTest:
-            raise unittest.SkipTest("Base test")
-        super(PaperMethodsTest, self).setUpClass()
-
-    def test_update_author_names(self):
+    def test_update_authors(self):
         for old_author_names, new_author_names, final in [
                 ([('G.','Bodenhausen')],
                  [('Geoffrey','Bodenhausen')],
@@ -219,8 +213,10 @@ class PaperMethodsTest(PrefilledTest):
                  [('Ludovic F.','Jullien'),('R.','Pérand'),('Antoine','Amarilli')]),
                 ]:
             paper = Paper.get_or_create('This is a test paper',
-                    map(Name.lookup_name, old_author_names), datetime.date(year=2015,month=04,day=05))
-            paper.update_author_names(new_author_names)
+                    [BareName.create_bare(f,l) for (f,l) in old_author_names],
+                    datetime.date(year=2015,month=04,day=05))
+            new_authors = [BareAuthor(name=BareName.create_bare(f,l)) for (f,l) in new_author_names]
+            paper.update_authors(new_authors)
             self.assertEqual(paper.bare_author_names(), final)
 
     def test_multiple_get_or_create(self):
@@ -234,8 +230,8 @@ class PaperMethodsTest(PrefilledTest):
                 date)
 
         self.assertEqual(paper.pk, paper2.pk)
-        self.assertEqual(paper.bare_author_names(), [('Frank','Rodrigo'),('A. L.','Johnson'),
-            ('Pete','Blunsom')])
+        self.assertEqual(Paper.objects.get(pk=paper.pk).bare_author_names(),
+            [('Frank','Rodrigo'),('A. L.','Johnson'),('Pete','Blunsom')])
 
 
 class TasksTest(PrefilledTest):

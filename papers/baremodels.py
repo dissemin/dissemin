@@ -282,6 +282,15 @@ class BarePaper(BareObject):
             self.bare_authors.append(author)
         return author
 
+    def set_researcher(self, position, researcher_id):
+        """
+        Sets the researcher_id for the author at the given position
+        (0-indexed)
+        """
+        if position < 0 or position > len(self.authors_list):
+            raise ValueError('Invalid position provided')
+        self.bare_authors[position].researcher_id = researcher_id
+
     def add_oairecord(self, oairecord):
         """
         Adds a new OAI record to the paper
