@@ -82,6 +82,12 @@ class JsonRenderingTest(PrefilledTest):
 
 
 class PaperAjaxTest(JsonRenderingTest):
+    @classmethod
+    def setUpClass(cls):
+        super(PaperAjaxTest, cls).setUpClass()
+        u = User.objects.create_user('terry', 'pit@mat.io', 'yo')
+        u.save()
+
     def test_valid_search(self):
         for args in [
             {'first':'John','last':'Doe'},
@@ -101,6 +107,17 @@ class PaperAjaxTest(JsonRenderingTest):
             parsed = self.checkJson(self.postPage('ajax-newUnaffiliatedResearcher',
                 postargs=args), 403)
             self.assertTrue(len(parsed) > 0)
+
+    def test_consolidate_paper(self):
+        p = Paper.create_by_doi('10.1175/jas-d-15-0240.1')
+        self.client.login(username='terry',password='yo')
+        result = self.checkJson(self.getPage(
+                'ajax-waitForConsolidatedField', getargs={
+                    'field':'abstract',
+                    'id': p.id}))
+        self.client.logout()
+        self.assertTrue(result['success'])
+        self.assertTrue(len(result['value']) > 10)
 
         
 class PublisherAjaxTest(JsonRenderingTest):

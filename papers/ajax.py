@@ -203,19 +203,19 @@ def harvestingStatus(request, pk):
 @user_passes_test(is_authenticated)
 @json_view
 def waitForConsolidatedField(request):
+    success = False
     try:
         paper = Paper.objects.get(pk=int(request.GET["id"]))
     except (KeyError, ValueError, Paper.DoesNotExist):
-        return HttpResponseForbidden('Invalid paper id', content_type='text/plain')
+        return {'success':success,'message':'Invalid paper id'}, 404
     field = request.GET.get('field')
     value = None
-    success = False
     paper.consolidate_metadata(wait=True)
     if field == 'abstract':
         value = kill_html(paper.abstract)
         success = len(paper.abstract) > 64
     else:
-        return {'success':success,'message':'Invalid field'}
+        return {'success':success,'message':'Invalid field'}, 401
     return {'success':success,'value':value}
 
 # author management
