@@ -12,6 +12,17 @@ Installing the tasks backend requires additional dependencies and is not
 necessary if you want to do light dev that does not require harvesting
 metadata or running author disambiguation.
 
+_New!_ Kickstart your Dissemin in an container or VM using [Vagrant](https://www.vagrantup.com)
+----------------------------------------------------------------------------------------------
+
+First, install [Vagrant](https://www.vagrantup.com) and one of the supported providers: Virtual Box (should work fine), LXC (tested), libvirt (try it and tell us!).
+
+- ``vagrant up --provider=your_provider`` will create the VM / container and provision the machine once
+- ``vagrant ssh`` will let you poke into the machine and access its services (PostgreSQL, Redis, ElasticSearch)
+- A tmux session is running so that you can check out Celery and Django development server, attach it using: ``tmux attach``
+
+Dissemin will be available on your host machine at `localhost:8080` !
+
 Installation instructions for the web frontend
 ----------------------------------------------
 
