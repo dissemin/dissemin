@@ -2,14 +2,29 @@
 
 # We update the apt-get cache
 apt-get update
+
+# Install method HTTPS
+apt-get install -y apt-transport-https
+
+# Add new repositories for services
+
+# ElasticSearch
+wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | apt-key add -
+echo "deb https://packages.elastic.co/elasticsearch/2.x/debian stable main" | tee -a /etc/apt/sources.list.d/elasticsearch-2.x.list
+
+# We update the apt-get cache
+apt-get update
 apt-get install -y build-essential libxml2-dev libxslt1-dev gettext \
         libjpeg-dev liblapack-dev gfortran libopenblas-dev libmagickwand-dev \
+        default-jre-headless \
         pwgen git
 
 # We install Python
 apt-get install -y python python-dev python-virtualenv virtualenv
 # We install PostgreSQL now
 apt-get install -y postgresql postgresql-server-dev-all postgresql-client
+# We install ElasticSearch now
+apt-get install -y elasticsearch
 # We setup a Dissemin user
 DB_PASSWORD=$(pwgen -s 60 -1)
 sudo -u postgres -H bash <<EOF
@@ -105,6 +120,27 @@ then
         echo "__init__.py file already exists in settings, moved to __init__.py.user"
         mv /dissemin/dissemin/settings/__init__.py /dissemin/dissemin/settings/__init__.py.user
 fi
+
+if [ -f "/dissemin/dissemin/settings/search_engine.py" ]
+then
+        echo "Search engine settings already exists, moved to search_engine.py.user"
+        mv /dissemin/dissemin/settings/search_engine.py /dissemin/dissemin/settings/search_engine.py.user
+fi
+
+cat <<EOF > /dissemin/dissemin/settings/search_engine.py
+### Backend for Haystack
+
+import os
+
+# Haystack
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'INDEX_NAME': 'haystack',
+        'URL': 'http://127.0.0.1:9200/'
+    },
+}
+EOF
 
 echo 'from .dev import *' > /dissemin/dissemin/settings/__init__.py
 
