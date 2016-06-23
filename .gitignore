@@ -55,3 +55,8 @@ doc/sphinx/*.migrations.*.rst
 # Coverage
 .coverage
 htmlcov/
+
+# Vagrant
+.vagrant
+.vm_venv
+*.user
