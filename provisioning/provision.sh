@@ -34,9 +34,17 @@ EOF
 # We install Redis
 apt-get install -y redis-server
 
-# We restart all services
-service postgresql restart
-service redis-server restart
+# We restart all services and enable all services
+systemctl daemon-reload
+
+systemctl enable postgresql
+systemctl restart postgresql
+
+systemctl enable redis-server
+systemctl restart redis-server
+
+systemctl enable elasticsearch
+systemctl restart elasticsearch
 
 # We install some dev tools (tmux and vim)
 apt-get install -y tmux vim-nox
