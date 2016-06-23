@@ -168,7 +168,7 @@ tmux new-session -d -s $_SNAME
 # Remain on exit
 tmux set-option -t $_SNAME set-remain-on-exit on
 # Django development server
-tmux new-window -t $_SNAME -n django -c '/dissemin' -d '/dissemin/.vm_venv/bin/python /dissemin/manage.py runserver 127.0.0.1:8080'
+tmux new-window -t $_SNAME -n django -c '/dissemin' -d '/dissemin/.vm_venv/bin/python /dissemin/manage.py runserver 0.0.0.0:8080'
 # Celery backend
 tmux new-window -t $_SNAME -n celery -c '/dissemin' -d '/dissemin/.vm_venv/bin/celery --app=dissemin.celery:app worker -B -l INFO'
 # Super user prompt
