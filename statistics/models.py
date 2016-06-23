@@ -96,20 +96,50 @@ def combined_status_for_instance(paper):
             return 'closed'
     return 'unk'
 
+
+def combined_status_stats(queryset):
+    aggregations = queryset.get_aggregation_results()
+    buckets = {
+        bucket['key']: bucket['doc_count']
+        for bucket in aggregations['status']['buckets']
+    }
+    return BareAccessStatistics.from_dict(buckets)
+
+
 class BareAccessStatistics(object):
     """
     A bare (not saved in the DB) summary of the status of publications
     """
     @classmethod
     def new(cls):
+        """
+        Creates an empty object (all counters set to 0)
+        """
         s = cls()
-        s.num_oa = 0
-        s.num_ok = 0
-        s.num_couldbe = 0
-        s.num_unk = 0
-        s.num_closed = 0
-        s.num_tot = 0
+        s.clear()
         return s
+
+    def clear(self):
+        """
+        Sets all counters to zero
+        """
+        self.num_oa = 0
+        self.num_ok = 0
+        self.num_couldbe = 0
+        self.num_unk = 0
+        self.num_closed = 0
+        self.num_tot = 0
+
+    def add(self, other):
+        """
+        Adds the stats of `other` to self (sum of access statistics)
+        """
+        self.num_oa += other.num_oa
+        self.num_ok += other.num_ok
+        self.num_couldbe += other.num_couldbe
+        self.num_unk += other.num_unk
+        self.num_closed += other.num_closed
+        self.num_tot += other.num_tot
 
     @classmethod
     def from_queryset(cls, qs):
@@ -123,8 +153,16 @@ class BareAccessStatistics(object):
         stats = cls.new()
         for paper in qs:
             stats.num_tot += 1
-            attrname = 'num_'+combined_status_for_instance(paper)
+            attrname = 'num_'+paper.combined_status
             setattr(stats, attrname, getattr(stats, attrname) + 1)
+        return stats
+
+    @classmethod
+    def from_dict(cls, d):
+        stats = cls.new()
+        for status, count in d.iteritems():
+            stats.num_tot += count
+            setattr(stats, 'num_'+status, count)
         return stats
 
     def check_values(self):
@@ -141,33 +179,25 @@ class BareAccessStatistics(object):
                   self.num_unk + self.num_closed == self.num_tot
                 )
 
-    def pie_data(self, object_id):
+    def pie_data(self):
         """
-        Returns a JSON representation of the data needed to display
+        Returns a dictionary containing the data needed to display
         the statistics as a pie.
         """
-        baseurl = reverse('search')+'?'+object_id
         detailed_data = []
         for (key,desc) in COMBINED_STATUS_CHOICES:
             item = {
                 'id':key,
                 'label':unicode(desc),
                 'value':self.__dict__['num_'+key],
-                'url':baseurl+'&state='+key,
-                'baseurl':baseurl,
                 }
             detailed_data.append(item)
-        aggregated_data = []
+        # Gives the translated label
+        aggregated_labels = []
         for (key,desc) in PDF_STATUS_CHOICES:
-            item = {
-                'id':key,
-                'label':unicode(desc),
-                'value':self.num_available if key == 'OK' else self.num_unavailable,
-                'url':baseurl+'&pdf='+key,
-                'baseurl':baseurl,
-                }
-            aggregated_data.append(item)
-        return json.dumps({'detailed':detailed_data,'aggregated':aggregated_data})
+            item = {'label': unicode(desc)}
+            aggregated_labels.append(item)
+        return {'detailed':detailed_data,'aggregated':aggregated_labels}
 
     @property
     def num_available(self):
@@ -223,7 +253,7 @@ class AccessStatistics(models.Model, BareAccessStatistics):
         """
         Updates the statistics for papers contained in the given :py:class:`Paper` queryset
         """
-        queryset = queryset.filter(visibility="VISIBLE")
+        queryset = queryset.filter(visible=True)
         for key, modifier in STATUS_QUERYSET_FILTER.items():
             self.__dict__['num_'+key] = modifier(queryset).count()
         self.num_tot = queryset.count()

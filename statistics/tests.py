@@ -22,8 +22,7 @@ Tests statistics update and statistics consistency.
 
 from django.test import TestCase
 from backend.tests import PrefilledTest
-from backend.crossref import CrossRefPaperSource
-from backend.oai import OaiPaperSource
+from backend.orcid import OrcidPaperSource
 from papers.models import PaperWorld, Paper
 from statistics.models import *
 
@@ -31,22 +30,19 @@ class StatisticsTest(PrefilledTest):
     @classmethod
     def setUpClass(self):
         super(StatisticsTest, self).setUpClass()
-        self.ccf.clear()
-        crps = CrossRefPaperSource(self.ccf)
-        oai = OaiPaperSource(self.ccf)
-        crps.fetch_and_save(self.r2, incremental=True)
-        oai.fetch_and_save(self.r2, incremental=True)
+        cr_api = OrcidPaperSource()
+        cr_api.fetch_and_save(self.r3)
 
     def validStats(self, stats):
         self.assertTrue(stats.check_values())
         self.assertTrue(stats.num_tot > 1)
 
     def test_researcher(self):
-        self.validStats(self.r2.stats)
+        self.validStats(self.r3.stats)
 
     def test_from_queryset(self):
         bare_stats = BareAccessStatistics.from_queryset(
-                Paper.objects.filter(author__researcher=self.r2).distinct())
+                Paper.objects.filter(authors_list__contains=[{'researcher_id':self.r2.id}]).distinct())
         stats = self.r2.stats
         self.assertEqual(bare_stats.num_oa, stats.num_oa)
         self.assertEqual(bare_stats.num_ok, stats.num_ok)
@@ -56,6 +52,8 @@ class StatisticsTest(PrefilledTest):
         self.assertEqual(bare_stats.num_tot, stats.num_tot)
     
     def test_department(self):
+        self.r3.department = self.d
+        self.r3.save()
         self.d.update_stats()
         self.validStats(self.d.stats)
 
@@ -67,7 +65,6 @@ class StatisticsTest(PrefilledTest):
         pw = PaperWorld.get_solo()
         pw.update_stats()
         self.validStats(pw.stats)
-
 
 # TODO check journal and publisher stats
 # TODO check that (for instance) department stats add up to institution stats

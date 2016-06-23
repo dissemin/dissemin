@@ -51,7 +51,7 @@ def cleanup_researchers():
     """
     deleted_count = 0
     for p in Researcher.objects.all():
-        nb_papers = Paper.objects.filter(author__researcher=p).count()
+        nb_papers = p.papers.count()
         if not nb_papers:
             deleted_count += 1
             p.delete()
@@ -60,16 +60,14 @@ def cleanup_researchers():
 
 def cleanup_names(dry_run = False):
     """
-    Deletes all the names that are not present in any paper.
+    Deletes all the names that are not linked to any researcher
     """
     deleted_count = 0
     for n in Name.objects.all():
         if NameVariant.objects.filter(name=n).count() == 0:
-            nb_papers = Author.objects.filter(name=n).count()
-            if not nb_papers:
-                deleted_count += 1
-                if not dry_run:
-                    n.delete()
+            deleted_count += 1
+            if not dry_run:
+                n.delete()
     print "Deleted "+str(deleted_count)+" names"
 
 def merge_names(fro,to):
@@ -78,7 +76,6 @@ def merge_names(fro,to):
     """
     Researcher.objects.filter(name_id=fro.id).update(name_id=to.id)
     NameVariant.objects.filter(name_id=fro.id).update(name_id=to.id)
-    Author.objects.filter(name_id=fro.id).update(name_id=to.id)
     fro.delete()
 
 def update_paper_statuses():
@@ -193,22 +190,6 @@ def refetch_containers():
         if p.container:
             p.save()
 
-def hide_unattributed_papers():
-    """
-    Changes the visibility of papers based on whether they are attributed to a researcher or
-    not (only VISIBLE <-> NOT_RELEVANT)
-    """
-    qset = Paper.objects.filter(Q(visibility='VISIBLE') | Q(visibility='NOT_RELEVANT'))
-    count = qset.count()
-    cursor = 0
-    chunksize = 100
-    while cursor < count:
-        for p in qset[cursor:cursor+chunksize].prefetch_related(
-                Prefetch('author_set', to_attr='authors')):
-            p.update_visibility()
-        cursor += chunksize
-
-
 def recompute_publisher_policies():
     """
     Recomputes the publisher policy according to some possibly new criteria
@@ -223,28 +204,5 @@ def prune_name_lookup_cache(threshold):
     """
     name_lookup_cache.prune(threshold)
 
-
-def refetch_doi_availability():
-    """
-    Refetches DOI metadata for all publications
-    """
-    def fetch_oa(doi):
-        metadata = fetch_metadata_by_DOI(doi)
-        if metadata is None:
-            return False
-        licenses = set([(license or {}).get('URL') for license in metadata.get('license', [])])
-        return any(map(is_oa_license, licenses))
-
-    for p in Publication.objects.filter(pdf_url__isnull=True):
-        if not p.doi:
-            continue
-        try:
-            if not p.pdf_url and (p.oa_status() == 'OA' or fetch_oa(p.doi)):
-                print "Updating DOI "+p.doi
-                p.pdf_url = 'http://dx.doi.org/'+p.doi
-                p.save(update_fields=['pdf_url'])
-                p.paper.update_availability()
-        except MetadataSourceException as e:
-            continue
 
 

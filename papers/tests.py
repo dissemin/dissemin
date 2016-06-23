@@ -24,10 +24,10 @@ import unittest
 import django.test
 from datetime import date
 from papers.models import *
+from backend.orcid import OrcidPaperSource
 import papers.doi
 import datetime
 import json
-from backend.globals import get_ccf
 
 class ResearcherTest(django.test.TestCase):
     def test_creation(self):
@@ -65,7 +65,7 @@ class OaiRecordTest(django.test.TestCase):
         paper = Paper.get_or_create('this is a title', [Name.lookup_name(('Jean','Saisrien'))],
                 datetime.date(year=2015,month=05,day=04))
         # This used to throw an exception
-        OaiRecord.find_duplicate_records('anu18989risetced', paper, 'ftp://dissem.in/paper.pdf', None)
+        OaiRecord.find_duplicate_records(paper, 'ftp://dissem.in/paper.pdf', None)
 
 import doctest
 def load_tests(loader, tests, ignore):
@@ -77,10 +77,11 @@ class PaperTest(django.test.TestCase):
     @classmethod
     def setUpClass(self):
         super(PaperTest, self).setUpClass()
-        self.ccf = get_ccf()
 
     def test_create_by_doi(self):
-        p = Paper.create_by_doi('10.1109/synasc.2010.88')
+        # we recapitalize the DOI to make sure it is treated in a
+        # case-insensitive way internally
+        p = Paper.create_by_doi('10.1109/sYnAsc.2010.88')
         p = Paper.from_bare(p)
         self.assertEqual(p.title, 'Monitoring and Support of Unreliable Services')
         self.assertEqual(p.publications[0].doi, '10.1109/synasc.2010.88')
@@ -105,7 +106,8 @@ class PaperTest(django.test.TestCase):
         p = Paper.create_by_doi('10.1111/j.1744-6570.1953.tb01038.x')
         p = Paper.from_bare(p)
         # Create a copy with slight variations
-        names = map(Name.lookup_name, [('M. H.','Jones'),('R. H.', 'Haase'),('S. F.','Hulbert')])
+        names = [BareName.create_bare(f,l) for (f,l) in
+            [('M. H.','Jones'),('R. H.', 'Haase'),('S. F.','Hulbert')]]
         p2 = Paper.get_or_create(
                 'A Survey of the Literature on Technical Positions', names,
                 date(year=2011, month=01, day=01))
@@ -124,6 +126,24 @@ class PaperTest(django.test.TestCase):
         new_paper = p2.recompute_fingerprint_and_merge_if_needed()
         self.assertEqual(new_paper.pk, p.pk)
 
-
-
+    def test_attributions_preserved_by_merge(self):
+        p1 = Paper.create_by_doi('10.4049/jimmunol.167.12.6786')
+        r1 = Researcher.create_by_name('Stephan','Hauschildt')
+        p1.set_researcher(4, r1.id)
+        p2 = Paper.create_by_doi('10.1016/j.chemgeo.2015.03.025')
+        r2 = Researcher.create_by_name('Priscille','Lesne')
+        p2.set_researcher(0, r2.id)
+        
+        # merge them ! even if they actually don't have anything
+        # to do together
+        p1.merge(p2)
+        
+        p1.check_authors()
+        seen_rids = set()
+        for a in p1.authors:
+            if a.researcher_id:
+                seen_rids.add(a.researcher_id)
+        self.assertEqual(seen_rids,
+            set([r1.id, r2.id])) 
+        
 

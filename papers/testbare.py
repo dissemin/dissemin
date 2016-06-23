@@ -75,7 +75,7 @@ class BarePaperTest(BareObjectTest):
                 'Excellent title', names, None)
         # Invalid visibility
         self.assertRaises(ValueError, BarePaper.create,
-                'Excellent title', names, pubdate, visibility="something")
+                'Excellent title', names, pubdate, visible="something")
         # Not enough affiliations
         self.assertRaises(ValueError, BarePaper.create,
                 'Excellent title', names, pubdate, affiliations=['ENS'])
@@ -109,6 +109,10 @@ class BarePaperTest(BareObjectTest):
                 BareAuthor(name=BareName.create('Cantor','Bernstein')),
                 position=8)
 
-
-
-
+    def test_displayed_authors(self):
+        """
+        p.displayed_authors returns a list of authors.
+        """
+        self.assertEqual(len(self.ist.displayed_authors()), 2)
+        self.ist.MAX_DISPLAYED_AUTHORS = 1
+        self.assertEqual(len(self.ist.displayed_authors()), 1)

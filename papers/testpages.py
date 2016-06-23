@@ -27,7 +27,7 @@ import html5lib
 from papers.utils import overescaped_re
 from django.core.urlresolvers import reverse
 from backend.tests import PrefilledTest
-from backend.crossref import CrossRefPaperSource
+from backend.crossref import CrossRefAPI
 from backend.oai import OaiPaperSource
 from papers.models import OaiRecord, Paper
 
@@ -35,7 +35,6 @@ from papers.models import OaiRecord, Paper
 
 #        # Paper views
 #        url(r'^mail_paper/(?P<pk>\d+)/$', views.mailPaperView, name='mail_paper'),
-#        url(r'^journal/(?P<journal>\d+)/$', views.searchView, name='journal'),
 #        # Tasks, AJAX
 #        url(r'^researcher/(?P<pk>\d+)/update/$', views.refetchResearcher, name='refetch-researcher'),
 #        url(r'^researcher/(?P<pk>\d+)/recluster/$', views.reclusterResearcher, name='recluster-researcher'),
@@ -56,7 +55,7 @@ class RenderingTest(PrefilledTest):
             parsed = self.parser.parse(resp.content)
         except html5lib.html5parser.ParseError as e:
             print resp.content
-            print e
+            print "HTML validation error: "+unicode(e)
             raise e
 
     def getPage(self, *args, **kwargs):
@@ -93,7 +92,7 @@ class PaperPagesTest(RenderingTest):
     def test_researcher(self):
         for r in [self.r1, self.r2, self.r3, self.r4]:
             self.checkPage('researcher', kwargs={'researcher':r.pk, 'slug':r.slug})
-            self.checkUrl(self.r4.url)
+            self.checkUrl(r.url)
 
     def test_researcher_orcid(self):
         self.checkPermanentRedirect('researcher-by-orcid', kwargs={'orcid':self.r4.orcid})
@@ -107,25 +106,32 @@ class PaperPagesTest(RenderingTest):
     def test_search_no_parameters(self):
         self.checkPage('search')
 
-    def test_search_researcher_pk(self):
-        self.checkPermanentRedirect('search', getargs={'researcher':self.r3.pk})
-
     def test_search_name(self):
-        self.checkPage('search', getargs={'name':self.r3.name_id})
+        self.checkPage('search', getargs={'authors': self.r3.name})
 
-    def test_search_department(self):
-        self.checkPage('search', getargs={'department':self.di.pk})
+    def test_department_papers(self):
+        self.checkPage('department-papers', kwargs={'pk':self.di.pk})
 
     def test_missing_info_in_pub(self):
         p = Paper.create_by_doi('10.1007/978-3-642-14363-2_7')
         self.checkPage('paper', kwargs={'pk':p.id, 'slug':p.slug})
 
+    def test_publisher_papers(self):
+        # TODO checkPage when logged in as superuser.
+        self.check404('publisher-papers', kwargs={'publisher': self.acm.pk})
+
+    def test_journal(self):
+        # TODO checkPage when logged in as superuser.
+        self.check404('journal', kwargs={'journal': self.lncs.pk})
+
+    # ampersands not escaped in django bootstrap pagination, https://github.com/jmcclell/django-bootstrap-pagination/issues/41
+
     def test_paper(self):
-        for a in self.r3.authors_by_year:
-            self.checkPage('paper', kwargs={'pk':a.paper_id, 'slug':a.paper.slug})
-            if a.paper.is_orphan() and a.paper.visibility == 'VISIBLE':
-                print a.paper
-            self.assertTrue(not a.paper.is_orphan())
+        for p in self.r3.papers:
+            self.checkPage('paper', kwargs={'pk':p.id, 'slug':p.slug})
+            if p.is_orphan() and p.visible:
+                print p
+            self.assertTrue(not p.is_orphan())
 
     def test_paper_by_doi(self):
         publi = OaiRecord.objects.filter(doi__isnull=False)[0]

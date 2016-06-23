@@ -24,18 +24,13 @@ class NameInline(admin.TabularInline):
     model = Name
     extra = 0
 
-class AuthorInline(admin.TabularInline):
-    model = Author
-    extra = 0
-    raw_id_fields = ('paper','name')
-
 class OaiInline(admin.TabularInline):
     model = OaiRecord
     extra = 0
 
 class PaperAdmin(admin.ModelAdmin):
-    fields = ['title', 'pubdate', 'visibility', 'doctype', 'oa_status']
-    list_display = ('title','pubdate','visibility','doctype', 'oa_status')
+    fields = ['title', 'pubdate', 'visible', 'doctype', 'oa_status']
+    list_display = ('title','pubdate','visible','doctype', 'oa_status')
 
 class OaiRecordAdmin(admin.ModelAdmin):
     raw_id_fields = ('about',)

@@ -23,7 +23,7 @@ from __future__ import unicode_literals
 # arXiv: they are all 'text'
 # DOAJ: all 'article'
 
-PUBTYPE_TRANSLATIONS = {
+OAI_PUBTYPE_TRANSLATIONS = {
         # Our own typology
         'journal-article':'journal-article',
         'proceedings-article':'proceedings-article',

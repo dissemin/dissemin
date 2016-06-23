@@ -29,28 +29,16 @@ class PaperSource(object):
     for a given researcher.
     """
 
-    def __init__(self, ccf=None, oai=None, max_results=None):
+    def __init__(self, max_results=None):
         """
         A PaperSource can be used without saving the papers
-        to the database, using :func:`fetch_bare`. In this case,
-        it is not necessary to provide a Clustering Context Factory (ccf).
-        This object is only required when the source is used to create
-        papers in the database, using `fetch_and save`.
-        It allows us to cluster incoming papers and
-        assign them to researchers.
-
-        If an OAI interface is provided, this allows us to check full
-        text availability as the papers are fetched. This should be used
-        for sources where full text availability is not provided in the metadata
-        (CrossRef, ORCID).
+        to the database, using :func:`fetch_bare`.
 
         Subclasses can reimplement the constructor to get parameters for the source.
         Do not forget to call this base constructor though.
 
         :param max_results: maximum number of papers to retrieve for each researcher.
         """
-        self.ccf = ccf
-        self.oai = oai
         self.max_results = None
 
     def fetch_papers(self, researcher):
@@ -65,13 +53,9 @@ class PaperSource(object):
         """
         This function returns a generator of :class:`BarePaper`s fetched for the given researcher.
         """
-        for p in self.fetch_papers(researcher):
-            # If an OAI source is set up to check the availability, do so
-            if self.oai:
-                p = self.oai.fetch_accessibility(p)
-            yield p
+        return self.fetch_papers(researcher)
 
-    def fetch_and_save(self, researcher, incremental=False):
+    def fetch_and_save(self, researcher):
         """
         Fetch papers and save them to the database.
 
@@ -79,32 +63,29 @@ class PaperSource(object):
             and commited one after the other. This is useful when
             papers are fetched on the fly for an user.
         """
-        if self.ccf is None:
-            raise ValueError('Clustering context factory not provided')
-
         count = 0
         for p in self.fetch_bare(researcher):
-            paper = self.save_paper(p, researcher, incremental)
+            paper = self.save_paper(p, researcher)
             if self.max_results is not None and count >= self.max_results:
                 break
 
             count += 1
 
-    def save_paper(self, bare_paper, researcher, incremental=False):
+    def save_paper(self, bare_paper, researcher):
         # Save the paper as non-bare
         p = Paper.from_bare(bare_paper)
-
-        # If clustering happens incrementally, cluster the researcher
-        if incremental:
-            self.ccf.clusterPendingAuthorsForResearcher(researcher)
-            researcher.update_stats()
 
         # Check whether this paper is associated with an ORCID id
         # for the target researcher
         if researcher.orcid:
-            matches = filter(lambda a: a.orcid == researcher.orcid, p.authors)
-            if matches:
-                self.update_empty_orcid(researcher, False)
+            for idx, a in enumerate(p.authors_list):
+                if a['orcid'] == researcher.orcid:
+                    p.authors_list[idx]['researcher_id'] = researcher.id
+                    p.researchers.add(researcher.id)
+                    self.update_empty_orcid(researcher, False)
+
+            p.save()            
+            researcher.update_stats()
 
         return p
 
@@ -112,15 +93,9 @@ class PaperSource(object):
     def update_empty_orcid(self, researcher, val):
         """
         Updates the empty_orcid_profile field of the provided :class:`Researcher` instance.
-        This is sent to the clustering context factory where a batch reclustering is performed
-        if needed. The relevance score of papers depend on whether we have found at least one
-        paper associated to the researcher via ORCID, hence we need this reclustering when
-        we discover such a paper.
         """
         if val != researcher.empty_orcid_profile:
             researcher.empty_orcid_profile = val
             researcher.save(update_fields=['empty_orcid_profile'])
-            if self.ccf:
-                self.ccf.updateResearcher(researcher)
 
 

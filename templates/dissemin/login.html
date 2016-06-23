@@ -33,7 +33,7 @@ services to link research activities and organizations to these identifiers. Lea
     {% endblocktrans %}
     </p>
     <p style="text-align: center">
-    <a href="{% provider_login_url "orcid" auth_params="show_login=True" %}" class="btn btn-orcid">Log in</a>
+    <a href="{% provider_login_url "orcid" auth_params="show_login=True" %}" class="btn btn-orcid">{% trans "Log in" %}</a>
     </p>
 
 </div>
@@ -48,7 +48,7 @@ services to link research activities and organizations to these identifiers. Lea
     </p>
 
     <p style="text-align: center">
-    <a href="{% provider_login_url "orcid" auth_params="show_login=False" %}" class="btn btn-orcid">Sign up</a>
+    <a href="{% provider_login_url "orcid" auth_params="show_login=False" %}" class="btn btn-orcid">{% trans "Sign up" %}</a>
     </p>
 
 </div>

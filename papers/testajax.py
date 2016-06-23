@@ -24,12 +24,10 @@ import unittest
 import django.test
 import json
 from django.core.urlresolvers import reverse
-from backend.globals import get_ccf
 from backend.tests import PrefilledTest
-from backend.crossref import CrossRefPaperSource
+from backend.crossref import CrossRefAPI
 from backend.oai import OaiPaperSource
 
-from backend.crossref import CrossRefPaperSource
 from django.contrib.auth.models import User
 from time import sleep
 from papers.models import Paper
@@ -62,6 +60,7 @@ class JsonRenderingTest(PrefilledTest):
 
     def ajaxGet(self, *args, **kwargs):
         kwargs['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest'
+        kwargs['CONTENT_TYPE'] = 'application/json'
         return self.client.get(*args, **kwargs)
 
     def ajaxPost(self, *args, **kwargs):
@@ -84,6 +83,18 @@ class JsonRenderingTest(PrefilledTest):
 
 
 class PaperAjaxTest(JsonRenderingTest):
+    @classmethod
+    def setUpClass(cls):
+        super(PaperAjaxTest, cls).setUpClass()
+        u = User.objects.create_user('terry', 'pit@mat.io', 'yo')
+        u.save()
+
+    def test_researcher_papers(self):
+        page = self.getPage('researcher',
+                            kwargs={'researcher': self.r1.id,
+                                    'slug': self.r1.slug})
+        self.checkJson(page)
+
     def test_valid_search(self):
         for args in [
             {'first':'John','last':'Doe'},
@@ -103,6 +114,17 @@ class PaperAjaxTest(JsonRenderingTest):
             parsed = self.checkJson(self.postPage('ajax-newUnaffiliatedResearcher',
                 postargs=args), 403)
             self.assertTrue(len(parsed) > 0)
+
+    def test_consolidate_paper(self):
+        p = Paper.create_by_doi('10.1175/jas-d-15-0240.1')
+        self.client.login(username='terry',password='yo')
+        result = self.checkJson(self.getPage(
+                'ajax-waitForConsolidatedField', getargs={
+                    'field':'abstract',
+                    'id': p.id}))
+        self.client.logout()
+        self.assertTrue(result['success'])
+        self.assertTrue(len(result['value']) > 10)
 
         
 class PublisherAjaxTest(JsonRenderingTest):

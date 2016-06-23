@@ -583,7 +583,7 @@ def unify_name_lists(a,b):
               (None when there is no corresponding name in one of the lists).
     """
     # TODO some normalization of last names? for instance case, hyphens…
-
+    
     a = sorted(enumerate(a), key=lambda (idx,(first,last)): (last,first))
     b = sorted(enumerate(b), key=lambda (idx,(first,last)): (last,first))
 

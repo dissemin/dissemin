@@ -1,4 +1,4 @@
-django==1.8
+django==1.9
 celery[redis]
 unidecode
 psycopg2
@@ -10,6 +10,7 @@ wand
 PyPDF2
 -e git://github.com/dissemin/django-allauth.git@0.25.2-post_login-orcidv1.2#egg=django-allauth
 django-redis-cache
+django-cache-machine
 django-solo
 pillow
 django-crispy-forms
@@ -31,3 +32,4 @@ titlecase
 -e git://github.com/django-haystack/django-haystack.git@f1ed18313777005dd77ed724ecbfb27c0b03cad8#egg=django-haystack
 django-widget-tweaks
 django-capture-tag
+elasticsearch

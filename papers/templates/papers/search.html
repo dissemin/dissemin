@@ -1,11 +1,12 @@
 {% extends "dissemin/details.html" %}
 
 {% load staticfiles %}
-{% load bootstrap_pagination %}
 {% load statuses %}
 {% load domain %}
 {% load orcid %}
 {% load i18n %}
+{% load widget_tweaks %}
+{% load capture_tags %}
 
 {% block headTitle %}
 {{ head_search_description }}
@@ -21,31 +22,29 @@
 {% endblock %}
 
 {% block jsScript %}
-{% if researcher %}
 $(function(){
        var config = {
          refreshURL: "{{ ajax_url }}",
-         refreshMessage: "{% trans "Refreshing profile" %}",
-         refetchURL: "{% url "refetch-researcher" researcher.pk %}",
+         refreshMessage: "{% trans "Refreshing results" %}",
          logoHelpNode: $('.logoHelpPopover'),
          refetchButtonNode: $('#refetchPubsButton'),
          waitingAreaContainerNode: $('#waitingAreaContainer'),
          paperSearchResultsNode: $('#paperSearchResults'),
          nbPapersFoundNode: $('#nbPapersFound'),
-         harvestingStatusNode: function () {
-                 return $('#harvestingStatus')
-         },
          animatedBirdGIF: "{% static "img/animated-bird.gif" %}",
+{% if researcher %}
+         refetchURL: "{% url "refetch-researcher" researcher.pk %}",
+         refetchMessage: "{% trans "Refreshing profile" %}",
          currentTask: {% if researcher.current_task %}"{{ researcher.get_current_task_display }}"{% else %} null {% endif %},
-         isSuperUser: {{ request.user.is_superuser|yesno:"true,false,false" }},
-         affiliationFormInput: $('#id_value'),
          affiliationForm: $('#affiliationForm'),
+         affiliationFormInput: $('#id_value'),
          setResearcherDepartmentURL: "{% url 'ajax-setResearcherDepartment' %}",
+{% endif %}
+         isSuperUser: {{ request.user.is_superuser|yesno:"true,false,false" }},
          initialMessages: {{ messages | safe }}
        }
        init_paper_module(config)
     });
-{% endif %}
 {% endblock %}
 
 {% block details %}
@@ -74,7 +73,7 @@ $(function(){
         <p><span class="glyphicon glyphicon-star-empty"></span> <a href="{{ researcher.department.url }}">{{ researcher.department }}</a></p>
         {% endif %}
         <p><span class="glyphicon glyphicon-stats"></span>
-            {% blocktrans count nb_publi=search_stats.num_tot trimmed %}
+            {% blocktrans count nb_publi=researcher.stats.num_tot|default:0 trimmed %}
             {{ nb_publi }} publication
             {% plural %}
             {{ nb_publi }} publications
@@ -90,7 +89,7 @@ $(function(){
         <p>{% trans "Names:" %}
             <ul>
             {% for nv in researcher.name_variants.all %}
-            <li><a href="{% url 'search' %}?name={{ nv.name_id }}">{{ nv.name }}</a> ({{ nv.confidence }})</li>
+            <li><a href="{% url 'search' %}?authors={{ nv.name_id }}">{{ nv.name }}</a> ({{ nv.confidence }})</li>
             {% endfor %}
          </ul></p>
          
@@ -100,27 +99,17 @@ $(function(){
          </form>
          <a href="{% url 'recluster-researcher' researcher.pk %}" class="btn btn-default">{% trans "Refresh classification" %}</a>
          {% endif %}
-        {% include "statistics/pie_without_object.html" with stats=search_stats object_id=researcher.object_id stats_counter=1 %}
     </div>
-{% elif name %}
-<span class="detailsTitle">{% trans "Name" %}</span>
-    <div class="detailsContent">
-        <p id="detail-name">{{ name }}</p>
-        {% include "statistics/pie_without_object.html" with stats=search_stats object_id=name.object_id %}
-     </div>
 {% elif department %}
 <span class="detailsTitle">{% trans "Department" %}</span>
     <div class="detailsContent">
         <p id="detail-name">{{ department }}</p>
-        {% include "statistics/pie_without_object.html" with obj=search_stats object_id=department.object_id stats_counter=1 %}
     </div>
-
-{% endif %}
-{% if journal %}
+{% elif journal %}
 <span class="detailsTitle">{% trans "Journal" %}</span>
     <div class="detailsContent">
         <p id="detail-name">{{ journal }}</p>
-        <p>{% trans "Published by" %} <a href="{{ publisher.canonical_url }}">{{ journal.publisher }}</a></p>
+        <p>{% trans "Published by" %} <a href="{{ journal.publisher.canonical_url }}">{{ journal.publisher }}</a></p>
         {% if journal.issn %}
         <p>{% trans "ISSN:" %} {{ journal.issn }}</p>
         {% endif %}
@@ -129,8 +118,11 @@ $(function(){
         <div class="criterionItem">{{ journal.publisher.oa_status |explain_oa_status}}</div>
     </div>
 
-    <p><span class="glyphicon glyphicon-stats"></span>{% blocktrans trimmed %}
-    <span id="nbPapersFound">{{ nb_results }}</span> papers found
+    <p><span class="glyphicon glyphicon-stats"></span>
+    {% blocktrans trimmed count nb_publi=journal.stats.num_tot|default:0 %}
+    {{ nb_publi }} paper published in {{ journal }}
+    {% plural %}
+    {{ nb_publi }} papers published in {{ journal }}
     {% endblocktrans %}
     </p>
     </div>
@@ -143,73 +135,132 @@ $(function(){
         <div class="criterionItem">{{ publisher.oa_status |explain_oa_status}}</div>
         </div>
 
-    <p><span class="glyphicon glyphicon-stats"></span>{% blocktrans trimmed %}
-    <span id="nbPapersFound">{{ nb_results }}</span> papers found
+    <p><span class="glyphicon glyphicon-stats"></span>
+    {% blocktrans trimmed count nb_publi=publisher.stats.num_tot|default:0 %}
+    {{ nb_publi }} paper published by {{ publisher }}
+    {% plural %}
+    {{ nb_publi }} papers published by {{ publisher }}
     {% endblocktrans %}
     </p>
     </div>
 {% endif %}
 
-<span class="detailsTitle">{% trans "Refine search" %}</span>
+<span class="detailsTitle">{% trans "Search" %}</span>
 <div class="detailsContent">
+<p id="nbPapersFound">{{ nb_results }}</p>
 
-{% if not journal and not publisher and request.user.is_superuser %}
-<p class="criterion">{% trans "By publisher policy:" %}</p>
-{% for st in oa_status_choices %}
-<div class="{% if st.0 == status %}selectedCriterion{% else %}unselectedCriterion{% endif %} logoHelpPopover"
-     data-content="{{ st.2 }}" rel="popover" data-placement="left">
-    <div class="pubLogo"><div class="pubLogoPic-{{ st.0 }}"><a href="{% url 'search' %}?{{ st.3.urlencode }}" class="filldiv"></a></div></div>
-    <div class="criterionItem"><a href="{% url 'search' %}?{{ st.3.urlencode }}">{{ st.1 }}</a>
-        {% if st.0 == status %}
-        <div class="criterionCross"><a href="{% url 'search' %}?{{ st.3.urlencode }}">x</a></div>
-        {% endif %}
+<form method="get" action="." id="searchPapers" onChange="$(this).submit()">
+    <div class="form-group" id="searchPaperCombinedStatus">
+    {% with combined_status_form=True %}
+    {% with combined_status=form.status %}
+    {% include "statistics/pie_without_object.html" with stats=search_stats object_id=researcher.object_id stats_counter=1 %}
+    {% endwith %}
+    {% endwith %}
+    <noscript>{# Clarifies the usage of the checkboxes in the caption of the pie. #}
+    <div class="form-group">
+        <button type="submit" class="btn btn-default" form="searchPapers">{% trans "Search" %}</button>
     </div>
-</div>
-{% endfor %}
-{% endif %}
-
-{% if request.user.is_superuser %}
-<p class="criterion">{% trans "By full text availability:" %}</p>
-{% for st in pdf_status_choices %}
-<div class="{% if st.0 == pdf %}selectedCriterion{% else %}unselectedCriterion{% endif %}">
-    <div class="pubLogo"><div class="pubLogoPic-PDF-{{ st.0 }}"><a href="{% url 'search' %}?{{ st.2.urlencode }}" class="filldiv"></a></div></div>
-    <div class="criterionItem"><a href="{% url 'search' %}?{{ st.2.urlencode }}">{{ st.1 }}</a>
-        {% if st.0 == pdf %}
-        <div class="criterionCross"><a href="{% url 'search' %}?{{ st.2.urlencode }}">x</a></div>
-        {% endif %}
+    </noscript>
     </div>
-</div>
-{% endfor %}
-{% endif %}
-
-<p class="criterion">{% trans "By document type:" %}</p>
-<ul>
-{% for st in pubtype_status_choices %}
-     <li>
-         <a href="{% url 'search' %}?{{ st.2.urlencode }}"
-        class="{% if st.0 == pubtype %}selectedPubtype{% else %}unselectedPubtype{% endif %}">{{ st.1 }}</a>
-        {% if st.0 == pubtype %}
-        &nbsp; <a href="{% url 'search' %}?{{ st.2.urlencode }}" class="pubtypeCriterionCross">x</a>
-        {% endif %}
-    </li>
-{% endfor %}
-</ul>
-    
-
-{% if request.user.is_superuser %}
-<p class="criterion">{% trans "By visibility:" %}</p>
-{% for st in visibility_choices %}
-   <div class="{% if st.0 == visibility %}selectedCriterion{% else %}unselectedCriterion{% endif %}">
-    <div class="pubLogo"><div class="pubLogoPic-PDF-{{ st.0 }}"><a href="{% url 'search' %}?{{ st.2.urlencode }}" class="filldiv"></a></div></div>
-    <div class="criterionItem"><a href="{% url 'search' %}?{{ st.2.urlencode }}">{{ st.1 }}</a>
-        {% if st.0 == visibility %}
-        <div class="criterionCross"><a href="{% url 'search' %}?{{ st.2.urlencode }}">x</a></div>
-        {% endif %}
-   </div>
-</div>
-{% endfor %}
-{% endif %}
-
+    <div class="form-group" id="searchPapersName">
+        <label>{% trans "Search by title" %}</label>
+        <div class="input-group">
+        {{ form.q.errors }}
+        {% render_field form.q class="form-control" %}
+        <label class="input-group-btn">
+            <button type="submit" class="btn btn-default">{% trans "Search" %}</button>
+        </label>
+        </div>
+    </div>
+    <div class="form-group" id="searchAuthorsName">
+        <label for="{{ form.authors.id_for_label }}">{% trans "By authors" %}</label>
+        {{ form.authors.errors }}
+        {% render_field form.authors class="form-control" %}
+    </div>
+    <div class="form-horizontal">
+        <label>{% trans "By publication date" %}</label>
+        <div class="form-group" id="searchPaperPubDateAfter">
+            {{ form.pub_after.errors }}
+            <label class="col-xs-2 col-sm-3 control-label tightLabel" for="{{ form.pub_after.id_for_label }}">{% trans "after" %}</label>
+            <div class="col-xs-10 col-sm-9 tightInput">
+                {% render_field form.pub_after class="form-control" %}
+            </div>
+        </div>
+        <div class="form-group" id="searchPaperPubDateBefore">
+            {{ form.pub_before.errors }}
+            <label class="col-xs-2 col-sm-3 control-label tightLabel" for="{{ form.pub_before.id_for_label }}">{% trans "before" %}</label>
+            <div class="col-xs-10 col-sm-9 tightInput">
+            {% render_field form.pub_before class="form-control" %}
+            </div>
+        </div>
+    </div>
+    <div class="form-group" id="searchPapersDoctype">
+        <label>{% trans "By document type" %}</label>
+        {{ form.doctypes.errors }}
+        <ul class="compactList">
+            {% for checkbox in form.doctypes %}
+            {% with value=checkbox.choice_value %}
+            <li class="checkbox">
+                <label class="doctype">
+                    {{ checkbox.tag }}
+                    {{ checkbox.choice_label }}
+                </label>
+            </li>
+            {% endwith %}
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="form-group form-inline" id="searchPapersSortBy">
+        {{ form.reverse_order.errors }}
+        {{ form.sort_by.errors }}
+        {% capture as sort_by silent %}
+        <label for="{{ form.sort_by.id_for_label }}">{% trans "Sort by" %}</label>
+        {% endcapture %}
+        {% capture as increasing silent %}
+        {% render_field form.reverse_order class="form-control tightForm" %}
+        {% endcapture %}
+        {% capture as value silent %}
+        {% render_field form.sort_by class="form-control tightForm" %}
+        {% endcapture %}
+        {% blocktrans trimmed %}
+        {{ sort_by }} <div>{{ increasing }} {{ value }}</div>
+        {% endblocktrans %}
+    </div>
+    {% if request.user.is_superuser %}
+    <div class="form-group" id="searchPapersVisibility">
+        <label for="{{ form.visibility.id_for_label }}">{% trans "By visibility" %}</label>
+        {{ form.visibility.errors }}
+        {% render_field form.visibility class="form-control" %}
+    </div>
+    <div class="form-group" id="searchPapersPDFAvailability">
+        <label for="{{ form.availability.id_for_label }}">{% trans "By full text availability" %}</label>
+        {{ form.availability.errors }}
+        {% render_field form.availability class="form-control" %}
+    </div>
+    <div class="form-group" id="searchPapersOAStatus">
+        {{ form.oa_status.errors }}
+        <label for="{{ form.oa_status.id_for_label }}">{% trans "By publisher policy" %}</label>
+        {% for checkbox in form.oa_status %}
+        {% with value=checkbox.choice_value %}
+        <div class="logoHelpPopover" data-content="{{ value|helptext_oa_status }}">
+        <div class="checkbox publisherCriterion">
+            {{ checkbox.tag }}
+            <div class="publisherCriterionBox">
+            <label for="{{ checkbox.id_for_label }}">
+                <img alt="" src="{% static value|logo_oa_status %}" height="70px" width="52px" class="pubLogo publisherCriterionLogo">
+                <span class="criterionItem">{{ checkbox.choice_label }}</span>
+            </label>
+            </div>
+        </div>
+        </div>
+        {% endwith %}
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div class="form-group">
+        <button type="submit" class="btn btn-default">{% trans "Search" %}</button>
+    </div>
+</form>
 </div>
 {% endblock %}
 
@@ -259,26 +310,6 @@ $(function(){
  </ul>
 
  <div id="paperSearchResults">
- {% if search_results.paginator.num_pages > 1 %}
-<div class="searchPages">{% bootstrap_paginate search_results range=10 %}</div>
- {% endif %}
- {% for paper in search_results %}
- {% ifchanged paper.year %}
- {% if not forloop.first %}</ul></div>{% endif %}
-    <div class="ulContainer">
-    <div class="listYear">{{ paper.year }}</div><ul class="withoutTriangles">
- {% endifchanged %}
-    <li class="pubItem">
-        {% include "papers/publiListItem.html" with paper=paper with_buttons=request.user.is_authenticated %}
-</li>    
-        {% if forloop.last %}</ul></div>{% endif %}
- {% empty %}
-    {% if not researcher.current_task %}
-         <p class="notFound">{% trans "No production found." %}</p>
-    {% endif %}
- {% endfor %}
- {% if search_results.paginator.num_pages > 1 %}
- <div class="searchPages">{% bootstrap_paginate search_results range=10 %}</div>
- {% endif %}
+     {% include "papers/paperList.html" %}
  </div>
 {% endblock %}

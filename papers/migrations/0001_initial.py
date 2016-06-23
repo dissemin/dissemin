@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.db import models, migrations
 import django.db.models.deletion
 from django.conf import settings
+from papers import baremodels
 
 
 class Migration(migrations.Migration):
@@ -63,7 +64,7 @@ class Migration(migrations.Migration):
             ],
             options={
             },
-            bases=(models.Model,),
+            bases=(models.Model,baremodels.BareAuthor),
         ),
         migrations.CreateModel(
             name='Department',
@@ -124,7 +125,7 @@ class Migration(migrations.Migration):
             options={
                 'ordering': ['last', 'first'],
             },
-            bases=(models.Model,),
+            bases=(models.Model,baremodels.BareName),
         ),
         migrations.CreateModel(
             name='NameVariant',
@@ -153,7 +154,7 @@ class Migration(migrations.Migration):
             ],
             options={
             },
-            bases=(models.Model,),
+            bases=(models.Model,baremodels.BareOaiRecord),
         ),
         migrations.CreateModel(
             name='OaiSource',
@@ -187,7 +188,7 @@ class Migration(migrations.Migration):
             ],
             options={
             },
-            bases=(models.Model,),
+            bases=(models.Model,baremodels.BarePaper),
         ),
         migrations.CreateModel(
             name='Publication',

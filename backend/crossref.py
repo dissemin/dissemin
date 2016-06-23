@@ -38,7 +38,7 @@ from papers.doi import to_doi, doi_to_crossref_identifier, doi_to_url
 from papers.name import match_names, normalize_name_words, parse_comma_name
 from papers.utils import iunaccent, tolerant_datestamp_to_datetime, date_from_dateparts, affiliation_is_greater, jpath, validate_orcid, sanitize_html
 from papers.models import Paper, OaiSource
-from papers.baremodels import BareOaiRecord, BarePaper
+from papers.baremodels import BareOaiRecord, BarePaper, BareName
 from publishers.models import *
 
 from backend.papersource import PaperSource
@@ -76,22 +76,27 @@ from dissemin.settings import DOI_PROXY_DOMAIN, DOI_PROXY_SUPPORTS_BATCH
 # Content negotiation remains useful for other providers (DOIs discovered by 
 # other means).
 #
+# 3. How this module is used in dissemin
+#
+# Crossref provides a search interface that can be used (among
+# others) to retrieve the papers associated with a given ORCID id.
+# This is used by the ORCID module.
+#
+# The metadata from Crossref is fetched via the OAI-PMH proxy (proaixy)
+# so the OAI module uses this module to convert the metadata.
+#
 
 # Number of results per page we ask the CrossRef search interface
-# (looks like it does not support more than 20)
-nb_results_per_request = 20
+nb_results_per_request = 100
+# Maximum number of pages we request
+max_crossref_batches_per_researcher = 10
 # Maximum timeout for the CrossRef interface (sometimes it is a bit lazy)
 crossref_timeout = 15
-# Maximum number of pages looked for a researcher
-max_crossref_batches_per_researcher = 7
-# Maximum number of non-trivially skipped records that do not match any researcher
-crossref_max_skipped_records = 50
 
 # Source object for Crossref's OAI records
 crossref_oai_source, _ = OaiSource.objects.get_or_create(identifier='crossref',
         defaults={'name':'Crossref','oa':False,'priority':1,
             'default_pubtype':'journal-article'})
-
 
 
 # Licenses considered OA, as stored by CrossRef
@@ -352,7 +357,7 @@ def fetch_dois_by_batch(doi_list):
     except requests.exceptions.RequestException as e:
         raise MetadataSourceException('Failed to retrieve batch metadata from the proxy: '+str(e))
 
-class CrossRefPaperSource(PaperSource):
+class CrossRefAPI(object):
     """
     Fetches papers from CrossRef
     """
@@ -366,20 +371,18 @@ class CrossRefPaperSource(PaperSource):
         p = None
         if metadata:
             try:
-                p = self.save_doi_metadata(metadata, allow_unknown_authors=True)
-                if self.oai:
-                    self.oai.fetch_accessibility(p)
-            except ValueError:
+                p = self.save_doi_metadata(metadata)
+            except ValueError as e:
+                print e
                 pass
         return p
 
-    def save_doi_metadata(self, metadata, extra_affiliations=None, allow_unknown_authors=False):
+    def save_doi_metadata(self, metadata, extra_orcids=None):
         """
         Given the metadata as Citeproc+JSON or from CrossRef, create the associated paper and publication
 
-        :param extra_affiliations: an optional affiliations list, which will be unified
-            with the affiliations extracted from the metadata. This is useful for the ORCID interface.
-        :param allow_unknown_authors: create the paper even if no author matches our researchers
+        :param extra_orcids: an optional orcids list, which will be unified
+            with the orcids extracted from the metadata. This is useful for the ORCID interface.
         :returns: the paper, created if needed
         """        
         # Normalize metadata
@@ -413,37 +416,36 @@ class CrossRefPaperSource(PaperSource):
             if type(subtitle) == list:
                 subtitle = subtitle[0]
             title += ': '+subtitle
-        authors = map(name_lookup_cache.lookup, map(convert_to_name_pair, metadata['author']))
-        authors = filter(lambda x: x != None, authors)
-        if (not allow_unknown_authors and all(not elem.is_known for elem in authors)) or authors == []:
-            raise ValueError('No known author')
+
+        authors = [ BareName.create_bare(first,last) for first,last in
+                    map(convert_to_name_pair, metadata['author']) ]
 
         def get_affiliation(author_elem):
-            # First, look for an ORCID id
-            orcid = validate_orcid(author_elem.get('ORCID'))
-            if orcid:
-                return orcid
-            # Otherwise return the plain affiliation, if any
             for dct in author_elem.get('affiliation', []):
                 if 'name' in dct:
                     return dct['name']
 
+        def get_orcid(author_elem):
+            orcid = validate_orcid(author_elem.get('ORCID'))
+            if orcid:
+                return orcid
+
+        new_orcids = map(get_orcid, metadata['author'])
+        if extra_orcids:
+            orcids = [new or old for (old,new) in zip(extra_orcids,new_orcids)]
+        else:
+            orcids = new_orcids
         affiliations = map(get_affiliation, metadata['author'])
-        if extra_affiliations and len(affiliations) == len(extra_affiliations):
-            for i in range(len(affiliations)):
-                if affiliation_is_greater(extra_affiliations[i],affiliations[i]):
-                    affiliations[i] = extra_affiliations[i]
 
         paper = BarePaper.create(title, authors, pubdate, 
-                'VISIBLE', affiliations)
+                visible=True, affiliations=affiliations, orcids=orcids)
 
         result = create_publication(paper, metadata)
 
         if result is None: # Creating the publication failed!
-            paper.update_visibility()
             # Make sure the paper only appears if it is still associated
             # with another source.
-            # TODO add unit test for this
+            paper.update_visible()
         else:
             paper = result[0]
 
@@ -493,45 +495,6 @@ class CrossRefPaperSource(PaperSource):
             offset += rows
             count += 1
 
-    def fetch_papers_from_crossref_by_researcher_name(self, name, update=False):
-        """
-        The update parameter forces the function to download again
-        the metadata for DOIs that are already in the model
-        """
-        return self.search_for_dois_incrementally(unicode(name))
-
-
-    def fetch_papers(self, researcher):
-        """
-        Fetch and save the publications from CrossRef for a given researcher
-        Users should rather use the "fetch" method from PaperSource.
-        """
-        # TODO: do it for all name variants of confidence 1.0
-        researcher.status = 'Fetching DOI list.'
-        researcher.save()
-        nb_records = 0
-
-        name = researcher.name
-        lst = self.fetch_papers_from_crossref_by_researcher_name(name)
-
-        count = 0
-        skipped = 0
-        for metadata in lst:
-            if skipped > crossref_max_skipped_records:
-                break
-
-            try:
-                yield self.save_doi_metadata(metadata)
-            except ValueError:
-                skipped += 1
-                continue
-
-            count += 1
-            skipped = 0
-        nb_records += count
-
-        researcher.status = 'OK, %d records processed.' % nb_records
-        researcher.save()
 
 ##### Zotero interface #####
 
@@ -541,6 +504,7 @@ def fetch_zotero_by_DOI(doi):
     Works only with the doi_cache proxy.
     """
     try:
+        print ('http://'+DOI_PROXY_DOMAIN+'/zotero/'+doi)
         request = requests.get('http://'+DOI_PROXY_DOMAIN+'/zotero/'+doi)
         return request.json()
     except ValueError as e:
@@ -556,8 +520,8 @@ def consolidate_publication(publi):
         return publi
     for item in zotero:
         if 'abstractNote' in item:
-            publi.abstract = sanitize_html(item['abstractNote'])
-            publi.save(update_fields=['abstract'])
+            publi.description = sanitize_html(item['abstractNote'])
+            publi.save(update_fields=['description'])
         for attachment in item.get('attachments', []):
             if attachment.get('mimeType') == 'application/pdf':
                 publi.pdf_url = attachment.get('url')

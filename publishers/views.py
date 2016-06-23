@@ -23,7 +23,6 @@ from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views import generic
 from django.utils.translation import ugettext as _
-from haystack.query import SearchQuerySet
 from haystack.generic_views import SearchView
 from haystack.forms import SearchForm
 from dissemin.settings import UNIVERSITY_BRANDING

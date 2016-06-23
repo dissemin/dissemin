@@ -105,6 +105,8 @@ def researcherCandidatesByName(name):
     Results are returned as a list of HTML elements, to be displayed
     in the disambiguation dialog.
     """
+    # TODO add test to check this view!!!!
+
     # From the model
     related_researchers = list(map(lambda nv: nv.researcher, name.namevariant_set.all()))
     def renderResearcher(res):
@@ -158,14 +160,11 @@ def newUnaffiliatedResearcher(request):
 #def annotatepaper(request, pk, status):
 #    paper = get_object_or_404(Paper, pk=pk)
 #    try:
-#        status = int(status)
-#        if not status in range(len(VISIBILITY_CHOICES)):
-#            raise ValueError
+#        visible = bool(status)
 #    except valueError:
 #        return HttpResponseForbidden('Invalid visibility status', content_type='text/plain')
 #
-#    visibility = VISIBILITY_CHOICES[status][0]
-#    annotation.create(paper, visibility, request.user)
+#    annotation.create(paper, visible, request.user)
 #    return httpResponse('OK', content_type='text/plain')
 
 #@user_passes_test(is_admin)
@@ -204,19 +203,19 @@ def harvestingStatus(request, pk):
 @user_passes_test(is_authenticated)
 @json_view
 def waitForConsolidatedField(request):
+    success = False
     try:
         paper = Paper.objects.get(pk=int(request.GET["id"]))
     except (KeyError, ValueError, Paper.DoesNotExist):
-        return HttpResponseForbidden('Invalid paper id', content_type='text/plain')
+        return {'success':success,'message':'Invalid paper id'}, 404
     field = request.GET.get('field')
     value = None
-    success = False
     paper.consolidate_metadata(wait=True)
     if field == 'abstract':
         value = kill_html(paper.abstract)
         success = len(paper.abstract) > 64
     else:
-        return {'success':success,'message':'Invalid field'}
+        return {'success':success,'message':'Invalid field'}, 401
     return {'success':success,'value':value}
 
 # author management

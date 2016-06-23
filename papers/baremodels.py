@@ -32,20 +32,16 @@ from urllib import urlencode, quote # for the Google Scholar and CORE link
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
 from django.utils.functional import cached_property
+from django.apps import apps
 
 from django.core.exceptions import ObjectDoesNotExist
 
 from papers.utils import *
+from papers.fingerprint import create_paper_plain_fingerprint
 from papers.name import to_plain_name
 from statistics.models import COMBINED_STATUS_CHOICES, PDF_STATUS_CHOICES, STATUS_CHOICES_HELPTEXT
 from publishers.models import Publisher, Journal, OA_STATUS_CHOICES, OA_STATUS_PREFERENCE, DummyPublisher
 
-
-VISIBILITY_CHOICES = [('VISIBLE', _('Visible')),
-                      ('CANDIDATE', _('Candidate')),
-                      ('NOT_RELEVANT', _('Not relevant')),
-                      ('DELETED', _('Deleted')),
-                      ]
 
 PAPER_TYPE_CHOICES = [
    ('journal-article', _('Journal article')),
@@ -152,7 +148,7 @@ class BarePaper(BareObject):
         #! The url where we think the full text is available
         'pdf_url',
         #! Visibility
-        'visibility',
+        'visible',
     ]
 
     _mandatory_fields = [
@@ -160,6 +156,10 @@ class BarePaper(BareObject):
         'pubdate',
         'fingerprint',
     ]
+
+    # Value above which we consider a paper to have too many authors to be
+    # displayed. See BarePaper.has_many_authors
+    MAX_DISPLAYED_AUTHORS = 15
 
     @property
     def slug(self):
@@ -175,26 +175,30 @@ class BarePaper(BareObject):
         self.bare_oairecords = {}
         #! If there are lots of authors, how many are we hiding?
         self.nb_remaining_authors = None
+        #! This property is used in Paper to save SQL requests when
+        # adding OaiRecords
+        self.just_created = False
 
     @classmethod
     def from_bare(cls, bare_obj):
         """
         Creates an instance of this class from a :class:`BarePaper`.
         """
+        bare_obj.update_availability()
+        bare_obj.fingerprint = bare_obj.new_fingerprint()
         ist = super(BarePaper, cls).from_bare(bare_obj)
-        ist.save()
-        for r in bare_obj.oairecords:
-            ist.add_oairecord(r)
         for idx, a in enumerate(bare_obj.authors):
             ist.add_author(a, position=idx)
-        ist.fingerprint = ist.new_fingerprint()
-        ist.update_availability()
-        ist.update_visibility()
+        ist.save()
+        ist.just_created = True
+        for r in bare_obj.oairecords:
+            ist.add_oairecord(r)
         return ist
 
 
     @classmethod
-    def create(cls, title, author_names, pubdate, visibility='VISIBLE', affiliations=None):
+    def create(cls, title, author_names, pubdate, visible=True,
+                    affiliations=None, orcids=None):
         """
         Creates a (bare) paper. To save it to the database, we
         need to run the clustering algorithm to resolve Researchers for the authors,
@@ -204,11 +208,12 @@ class BarePaper(BareObject):
                       ValueError is raised.
         :param author_names: The ordered list of author names, as Name objects.
         :param pubdate: The publication date, as a python date object
-        :param visibility: The visibility of the paper if it is created. If another paper
+        :param visible: The visibility of the paper if it is created. If another paper
                     exists, the visibility will be set to the maximum of the two possible
                     visibilities.
         :param affiliations: A list of (possibly None) affiliations for the authors. It has to 
-                    have the same length as the list of author names. Affiliations can be replaced by ORCIDs.
+                    have the same length as the list of author names.
+        :param orcids: same as affiliations, but for ORCID ids.
         """
         plain_names = map(to_plain_name, author_names)
         
@@ -217,8 +222,10 @@ class BarePaper(BareObject):
 
         if affiliations is not None and len(author_names) != len(affiliations):
             raise ValueError("The number of affiliations and authors have to be equal.")
-        if visibility not in [c for (c,_) in VISIBILITY_CHOICES]:
-            raise ValueError("Invalid paper visibility: %s" % unicode(visibility))
+        if orcids is not None and len(author_names) != len(orcids):
+            raise ValueError("The number of ORCIDs (or Nones) and authors have to be equal.")
+        if type(visible) != bool:
+            raise ValueError("Invalid paper visibility: %s" % unicode(visible))
 
         title = sanitize_html(title)
         title = maybe_recapitalize_title(title)
@@ -226,12 +233,16 @@ class BarePaper(BareObject):
         p = cls()
         p.title = title
         p.pubdate = pubdate # pubdate will be checked in fingerprint computation
-        p.visibility = visibility
+        p.visible = visible
         for idx, n in enumerate(author_names):
             a = BareAuthor()
             a.name = n
             if affiliations is not None:
                 a.affiliation = affiliations[idx]
+            if orcids is not None:
+                orcid = validate_orcid(orcids[idx])
+                if orcid:
+                    a.orcid = orcid
             p.add_author(a, position=idx)
 
         p.fingerprint = p.new_fingerprint()
@@ -275,6 +286,15 @@ class BarePaper(BareObject):
             self.bare_authors.append(author)
         return author
 
+    def set_researcher(self, position, researcher_id):
+        """
+        Sets the researcher_id for the author at the given position
+        (0-indexed)
+        """
+        if position < 0 or position > len(self.authors_list):
+            raise ValueError('Invalid position provided')
+        self.bare_authors[position].researcher_id = researcher_id
+
     def add_oairecord(self, oairecord):
         """
         Adds a new OAI record to the paper
@@ -290,6 +310,7 @@ class BarePaper(BareObject):
             if new_pubdate > self.pubdate:
                 self.pubdate = new_pubdate
 
+        self.just_created = False
         return oairecord
 
     ### Generic properties that should not need to be reimplemented ###
@@ -346,6 +367,12 @@ class BarePaper(BareObject):
         """
         return [a.affiliation for a in self.authors]
 
+    def orcids(self):
+        """
+        The list of ORCIDs of all authors
+        """
+        return [a.orcid for a in self.authors]
+
     def bare_author_names(self):
         """
         The list of name pairs (first,last) of the authors
@@ -362,19 +389,17 @@ class BarePaper(BareObject):
     @property
     def has_many_authors(self):
         """
-        When the paper has more than 15 authors (arbitrary threshold)
+        When the paper has more than some arbitrary number of authors.
         """
-        return self.author_count > 15
+        return self.author_count > self.MAX_DISPLAYED_AUTHORS
 
     @cached_property
     def interesting_authors(self):
         """
         The list of authors to display when the complete list is too long.
-        We display first the authors whose names are known, and then a few ones
-        who are unknown.
         """
-        lst = (filter(lambda a: a.name.best_confidence > 0, self.authors)+filter(
-                      lambda a: a.name.best_confidence == 0, self.authors)[:3])[:15]
+        # TODO: Better selection
+        lst = self.authors[:self.MAX_DISPLAYED_AUTHORS]
         self.nb_remaining_authors = self.author_count - len(lst)
         return lst
 
@@ -390,13 +415,12 @@ class BarePaper(BareObject):
 
     def check_authors(self):
         """
-        Check that all authors are associated with a valid name.
-        (This is normally enforced by the database but in some contexts
-        where names are cached, this was not the case.)
+        Check the sanity of authors
+        (for now, only that the list is non-empty)
         """
-        for a in self.authors:
-            if a.name is None:
-                raise ValueError("Name referenced by author could not be found!")
+        if not self.authors:
+            raise ValueError("Empty authors list")
+        # TODO more checks here?
 
     # Publications ---------------------------------------------
 
@@ -449,17 +473,6 @@ class BarePaper(BareObject):
         return DummyPublisher()
 
 
-    # Visibility ------------------------------------------------
-    @property
-    def toggled_visibility(self):
-        if self.visibility == 'VISIBLE':
-            return 2 # NOT RELEVANT
-        return 0 # VISIBLE
-
-    @property
-    def visibility_code(self):
-        return index_of(self.visibility, VISIBILITY_CHOICES)
-
     # Fingerprint -----------------------------------------------
     def plain_fingerprint(self, verbose=False):
         """
@@ -492,35 +505,46 @@ class BarePaper(BareObject):
 
 
     # Updates ---------------------------------------------------
-    def update_availability(self):
+    def update_availability(self, cached_oairecords=[]):
         """
         Updates the :class:`BarePaper`'s own `pdf_url` field
         based on its sources (:class:`BareOaiRecord`).
         
         This uses a non-trivial logic, hence it is useful to keep this result cached
         in the database row.
+        
+        :param cached_oairecords: the list of OaiRecords if we already have it
+                           from somewhere (otherwise it is fetched)
         """
+        records = cached_oairecords or self.oairecords
+        records = sorted(records, key=
+                         (lambda r: -r.priority))
+
         self.pdf_url = None
-        publis = self.publications
         oa_idx = len(OA_STATUS_PREFERENCE)-1
         type_idx = len(PAPER_TYPE_PREFERENCE)-1
         source_found = False
 
         if self.doctype in PAPER_TYPE_PREFERENCE:
             type_idx = PAPER_TYPE_PREFERENCE.index(self.doctype)
-        for publi in publis:
-            # OA status
-            cur_status = publi.oa_status()
-            try:
-                idx = OA_STATUS_PREFERENCE.index(cur_status)
-            except ValueError:
-                idx = len(OA_STATUS_PREFERENCE)
-            oa_idx = min(idx, oa_idx)
-            if OA_STATUS_CHOICES[oa_idx][0] == 'OA':
-                self.pdf_url = publi.pdf_url or publi.splash_url()
+
+        for rec in records:
+            if rec.has_publication_metadata():
+                # OA status
+                cur_status = rec.oa_status()
+                try:
+                    idx = OA_STATUS_PREFERENCE.index(cur_status)
+                except ValueError:
+                    idx = len(OA_STATUS_PREFERENCE)
+                oa_idx = min(idx, oa_idx)
+                if OA_STATUS_CHOICES[oa_idx][0] == 'OA':
+                    self.pdf_url = rec.pdf_url or rec.splash_url
+            else:
+                if not self.pdf_url and rec.pdf_url:
+                    self.pdf_url = rec.pdf_url
 
             # Pub type
-            cur_type = publi.pubtype
+            cur_type = rec.pubtype
             try:
                 idx = PAPER_TYPE_PREFERENCE.index(cur_type)
             except ValueError:
@@ -530,56 +554,21 @@ class BarePaper(BareObject):
             source_found = True
 
         self.oa_status = OA_STATUS_CHOICES[oa_idx][0]
-        if not self.pdf_url:
-            records = list(self.oairecords)
-            matches = sorted(self.oairecords, key=(lambda r: (-r.source.oa,-r.source.priority)))
-            self.pdf_url = None
-            for m in matches:
-                if not self.pdf_url:
-                    self.pdf_url = m.pdf_url
-
-                if m.source.oa:
-                    self.oa_status = 'OA'
-                    if not self.pdf_url:
-                        self.pdf_url = m.splash_url
-
-                if m.pubtype in PAPER_TYPE_PREFERENCE:
-                    new_idx = PAPER_TYPE_PREFERENCE.index(m.pubtype)
-                    type_idx = min(new_idx, type_idx)
-
-                source_found = True
 
         # If this paper is not associated with any source, do not display it
         # This happens when creating the associated OaiRecord
         # failed due to some missing information.
         if not source_found:
-            self.visibility = 'CANDIDATE'
+            self.visible = False
 
         self.doctype = PAPER_TYPE_PREFERENCE[type_idx]
 
-    def update_visibility(self):
+    def update_visible(self):
         """
-        Updates the visibility of the paper. Only papers with
-        known authors should be visible.
+        Updates the visibility of the paper. Only papers with at least
+        one source should be visible.
         """
-        # TODO this should be moved to the non-bare Paper I think
-        # so that we can remove the ugly hasattr
-        p = self
-        if p.visibility != 'VISIBLE' and p.visibility != 'NOT_RELEVANT':
-            return
-        researcher_found = False
-        for a in p.authors:
-            if hasattr(a, 'researcher_id') and a.researcher_id:
-                researcher_found = True
-                break
-        if researcher_found and p.visibility != 'VISIBLE':
-            p.visibility = 'VISIBLE'
-            if hasattr(self, 'pk'):
-                p.save(update_fields=['visibility'])
-        elif not researcher_found and p.visibility != 'NOT_RELEVANT':
-            p.visibility = 'NOT_RELEVANT'
-            if hasattr(self, 'pk'):
-                p.save(update_fields=['visibility'])
+        self.visible = not self.is_orphan()
 
     # Other representations ------------------------------------------
     def __unicode__(self):
@@ -617,9 +606,9 @@ class BarePaper(BareObject):
 
     def is_orphan(self):
         """
-        When no publication or OAI record is associated with this paper.
+        When no OAI record is associated with this paper.
         """
-        return (len(self.oairecords) + len(self.publications) == 0)
+        return (len(self.oairecords) == 0)
 
     def citation(self):
         """
@@ -646,6 +635,8 @@ class BareAuthor(BareObject):
     """
     _bare_fields = [
         'affiliation',
+        'orcid',
+        'researcher_id',
     ]
     _bare_foreign_key_fields = [
         'name',
@@ -654,14 +645,42 @@ class BareAuthor(BareObject):
         'name',
     ]
 
+    @cached_property
+    def _researcher_model(self):
+        return apps.get_app_config('papers').get_model('Researcher')
+
+    @cached_property
+    def researcher(self):
+        """
+        Returns the :class:`Researcher` object associated with
+        this author (if any)
+        """
+        if self.researcher_id:
+            return self._researcher_model.objects.get(id=self.researcher_id)
+
     @property
-    def orcid(self):
+    def is_known(self):
         """
-        Returns the ORCID associated to this author (if any).
-        Note that this can be null even if the author is associated with a researcher
-        that has an ORCID.
+        An author is "known" when it is linked to a known researcher.
         """
-        return validate_orcid(self.affiliation)
+        return self.researcher != None
+
+    def update_name_variants_if_needed(self, default_confidence=0.1):
+        """
+        Ensure that an author associated with an ORCID has a name
+        that is the variant of the researcher with that ORCID
+        """
+        orcid = self.orcid
+        if orcid:
+            try:
+                r = self._researcher_model.objects.get(orcid=orcid)
+                NameVariant=apps.get_app_config('papers').get_model('NameVariant')
+                nv = NameVariant.objects.get_or_create(
+                        researcher=r,
+                        name=self.name,
+                        defaults={'confidence':default_confidence})
+            except Researcher.DoesNotExist:
+                pass
 
 
     # Representations -------------------------------
@@ -671,9 +690,36 @@ class BareAuthor(BareObject):
         """
         return unicode(self.name)
 
+    def serialize(self):
+        """
+        JSON representation for storage in a JSON field
+        (internal, not to be used as the output of the API)
+        """
+        return {
+            'name':self.name.serialize(),
+            'orcid':self.orcid,
+            'affiliation':self.affiliation,
+            'researcher_id':self.researcher_id,
+            }
+    
+    @classmethod
+    def deserialize(cls, rep):
+        """
+        Creates an Author object out of a serialized representation.
+        """
+        name = BareName.deserialize(rep['name'])
+        inst = cls(
+            affiliation=rep.get('affiliation'),
+            orcid=rep.get('orcid'),
+            name=name,
+            researcher_id=rep.get('researcher_id'),
+            )
+        return inst
+
     def json(self):
         """
-        JSON representation of the author for dataset dumping purposes
+        JSON representation of the author for dataset dumping purposes,
+        or for the public API.
         """
         orcid_id = self.orcid
         affiliation = None
@@ -738,9 +784,31 @@ class BareName(BareObject):
         """
         return self.last[0]
 
+    def serialize(self):
+        """
+        JSON representation for internal storage purposes
+        """
+        return {
+            'first':self.first,
+            'last':self.last,
+            'full':self.full,
+            }
+
+    @classmethod
+    def deserialize(cls, rep):
+        """
+        Reconstruct an object based on its serialized representation
+        """
+        inst = cls(
+            first=rep['first'],
+            last=rep['last'],
+            full=rep['full'],
+            )
+        return inst
+
     def json(self):
         """
-        Returns a JSON representation of the name (for dataset dumping purposes)
+        Returns a JSON representation of the name (for external APIs)
         """
         return {
                 'first':self.first,
@@ -748,12 +816,6 @@ class BareName(BareObject):
                }
 
 class BareOaiRecord(BareObject):
-    # refactoring:
-    # imported from Publication
-    # 'title' -> 'journal_title'
-    # 'abstract' -> description
-    # 'full_title' -> full_journal_title
-
     _bare_foreign_key_fields = [
         'journal', # expected to be an actual model instance
         'publisher', # expected to be an actual model instance
@@ -795,6 +857,11 @@ class BareOaiRecord(BareObject):
         'splash_url',
         'source',
     ]
+    
+    def __init__(self, *args, **kwargs):
+        super(BareOaiRecord, self).__init__(*args, **kwargs)
+        if self.source:
+            self.priority = self.source.priority
 
     def update_priority(self):
         self.priority = self.source.priority

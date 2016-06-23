@@ -159,8 +159,6 @@ def api_paper_query(request):
     except ValueError:
         raise BadRequest('Invalid paper')
     import backend.oai as oai
-    oaisource = oai.OaiPaperSource(max_results=10)
-    p = oaisource.fetch_accessibility(p)
      
     return {'status':'ok','paper':p.json()}
 

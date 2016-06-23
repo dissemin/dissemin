@@ -1,7 +1,4 @@
--e git://github.com/wetneb/pyoai.git@base_dc#egg=pyoai
-numpy
-scipy
-scikit-learn
+-e git://github.com/wetneb/pyoai.git@any_metadataPrefix#egg=pyoai
 czipfile
 httplib2
 requests

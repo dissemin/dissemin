@@ -113,7 +113,9 @@ class UtilitiesTest(unittest.TestCase):
 
 import doctest
 import papers.utils
+import papers.fingerprint
 def load_tests(loader, tests, ignore):
     tests.addTests(doctest.DocTestSuite(papers.utils))
+    tests.addTests(doctest.DocTestSuite(papers.fingerprint))
     return tests
 
