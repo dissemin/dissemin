@@ -29,7 +29,7 @@ apt-get install -y elasticsearch
 DB_PASSWORD=$(pwgen -s 60 -1)
 sudo -u postgres -H bash <<EOF
 psql -c "CREATE USER dissemin WITH PASSWORD '${DB_PASSWORD}';"
-createdb --locale="fr_FR.UTF-8" --owner dissemin dissemin
+createdb --owner dissemin dissemin
 EOF
 # We install Redis
 apt-get install -y redis-server
@@ -163,7 +163,10 @@ python /dissemin/manage.py update_index
 _SNAME=Django
 
 sudo -u vagrant -H bash <<EOF
-echo 'source /dissemin/.vm_venv/bin/activate' >> /home/vagrant/.bash_profile
+cat >> /home/vagrant/.bash_profile <<LOL
+source /dissemin/.vm_venv/bin/activate
+LOL
+
 tmux start-server
 tmux new-session -d -s $_SNAME
 # Remain on exit
