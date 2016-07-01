@@ -1123,6 +1123,7 @@ class OaiRecord(models.Model, BareOaiRecord):
             update_field_conditionally('contributors')
             update_field_conditionally('keywords')
             update_field_conditionally('description')
+            update_field_conditionally('doi')
 
             new_pubtype = kwargs.get('pubtype', source.default_pubtype)
             if new_pubtype in PAPER_TYPE_PREFERENCE:

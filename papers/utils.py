@@ -390,6 +390,8 @@ def tolerant_datestamp_to_datetime(datestamp):
     datetime.datetime(2016, 2, 11, 18, 34, 12)
     >>> tolerant_datestamp_to_datetime('2016-02-11')
     datetime.datetime(2016, 2, 11, 0, 0)
+    >>> tolerant_datestamp_to_datetime('2016/02/11')
+    datetime.datetime(2016, 2, 11, 0, 0)
     >>> tolerant_datestamp_to_datetime('2016-02')
     datetime.datetime(2016, 2, 1, 0, 0)
     >>> tolerant_datestamp_to_datetime('2016')
@@ -419,6 +421,8 @@ def tolerant_datestamp_to_datetime(datestamp):
     else:
         d = splitted[0]
         t = '00:00:00'
+    if '/' in d and '-' not in d:
+        d = d.replace('/','-')
     d_splitted = d.split('-')
     if len(d_splitted) == 3:
         YYYY, MM, DD = d_splitted

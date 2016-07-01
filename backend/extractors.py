@@ -158,6 +158,13 @@ zenodoExtractor = OpenAireExtractor([
         'splash', r'\1'),
     ])
 
+researchgateExtractor = RegexExtractor([
+    ('source', re.compile(r'(https?://[^ ]*)'),
+	'splash', r'\1'),
+    ('identifier', re.compile(r'(https?://[^ ]*\.pdf)'),
+	'pdf', r'\1'),
+	])
+
 baseExtractor = BaseExtractor([
     ('identifier', re.compile(r'(https?://.*)'), 'splash', r'\1'),
     ('identifier', re.compile(r'(https?://.*\.pdf)'), 'pdf', r'\1'),
@@ -176,6 +183,7 @@ REGISTERED_OAI_EXTRACTORS = {
         'numdam' : numdamExtractor,
         'zenodo': zenodoExtractor,
         'base' : baseExtractor,
+	'researchgate': researchgateExtractor,
         }
 
 # Set up the model for the sources
@@ -189,6 +197,7 @@ oai_sources = [
         ('zenodo', 'Zenodo', False, 15, 'preprint'),
         ('numdam', 'Numdam', False, 10, 'journal-article'),
         ('base', 'BASE', False, -2, 'preprint'),
+	('researchgate', 'ResearchGate', False, -10, 'journal-article'),
         ]
 
 if os.environ.get('READTHEDOCS', None) != 'True':

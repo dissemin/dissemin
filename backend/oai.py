@@ -23,7 +23,6 @@ from __future__ import unicode_literals
 import itertools
 from oaipmh.client import Client
 from oaipmh.metadata import MetadataRegistry
-from oaipmh.datestamp import tolerant_datestamp_to_datetime
 from oaipmh.error import DatestampError, NoRecordsMatchError, BadArgumentError
 
 # metadat readers
@@ -35,7 +34,7 @@ from papers.name import parse_comma_name, name_normalization, name_signature, no
 from papers.models import OaiSource
 from papers.baremodels import BareOaiRecord, BarePaper, BareName
 from papers.doi import to_doi
-from papers.utils import sanitize_html
+from papers.utils import sanitize_html, tolerant_datestamp_to_datetime
 from papers.errors import MetadataSourceException
 
 from backend.papersource import *
@@ -217,7 +216,7 @@ class OAIDCTranslator(object):
 
         # Find the DOI, if any
         doi = None
-        for url in metadata['identifier']+metadata['relation']:
+        for url in metadata['identifier']+metadata['relation']+metadata['source']:
             if not doi:
                 doi = to_doi(url)
 
