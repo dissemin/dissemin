@@ -517,7 +517,7 @@ class BarePaper(BareObject):
                 idx = len(OA_STATUS_PREFERENCE)
             oa_idx = min(idx, oa_idx)
             if OA_STATUS_CHOICES[oa_idx][0] == 'OA':
-                self.pdf_url = publi.pdf_url or publi.splash_url()
+                self.pdf_url = publi.pdf_url or publi.splash_url
 
             # Pub type
             cur_type = publi.pubtype
