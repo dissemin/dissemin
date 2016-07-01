@@ -180,7 +180,7 @@ class ZenodoProtocol(RepositoryProtocol):
                 if publi.journal:
                     metadata['journal_title'] = publi.journal.title
                 else:
-                    metadata['journal_title'] = publi.title
+                    metadata['journal_title'] = publi.journal_title
                 if publi.volume:
                     metadata['journal_volume'] = publi.volume
                 if publi.issue:
