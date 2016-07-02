@@ -38,8 +38,12 @@
   <script type="text/javascript">
 $(function() {
   // {{ stats.pk }} {{ stats.num_tot }}
-  var data = {{ stats|get_pie_data }}
-  data.on_statuses = {{ on_statuses|safe }}
+  var data = {{ stats|get_pie_data }};
+  {% if on_statuses %}
+  data.on_statuses = {{ on_statuses|safe }};
+  {% else %}
+  data.on_statuses = [];
+  {% endif %}
   updateStats = showStatsPie(data, "statspie_n{{ stats_counter }}");
 });
   </script>
