@@ -112,7 +112,7 @@
 {% if request.user.is_superuser %}
 <h4>{% trans "Publications" %}</h4>
 <ul>
-    <li><a href="{% url 'publisher-papers' publisher=publisher.id %}">
+    <li><a href="{% url 'publisher-papers' publisher.id publisher.slug %}">
         {% blocktrans trimmed with publisher=publisher.name %}
         All papers published by {{ publisher }}
         {% endblocktrans %}

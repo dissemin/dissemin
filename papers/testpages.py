@@ -24,12 +24,14 @@ from __future__ import unicode_literals
 import unittest
 import django.test
 import html5lib
+import datetime
 from papers.utils import overescaped_re
 from django.core.urlresolvers import reverse
 from backend.tests import PrefilledTest
 from backend.crossref import CrossRefAPI
 from backend.oai import OaiPaperSource
-from papers.models import OaiRecord, Paper
+from papers.baremodels import BareName
+from papers.models import OaiRecord, Paper, Researcher
 
 # TODO TO BE TESTED
 
@@ -97,6 +99,15 @@ class PaperPagesTest(RenderingTest):
     def test_researcher_orcid(self):
         self.checkPermanentRedirect('researcher-by-orcid', kwargs={'orcid':self.r4.orcid})
 
+    def test_researcher_with_empty_slug(self):
+        """
+        Researchers may have names with characters that
+        are all ignored by slugify.
+        """
+        r = Researcher.create_by_name('!@#', '$%^')
+        self.assertEqual(r.slug, '')
+        self.checkPage('researcher', args=[r.pk, r.slug])
+
     def test_invalid_orcid(self):
         self.check404('researcher-by-orcid', kwargs={'orcid':'0000-0002-2803-9724'})
 
@@ -118,7 +129,7 @@ class PaperPagesTest(RenderingTest):
 
     def test_publisher_papers(self):
         # TODO checkPage when logged in as superuser.
-        self.check404('publisher-papers', kwargs={'publisher': self.acm.pk})
+        self.check404('publisher-papers', args=[self.acm.pk, self.acm.slug])
 
     def test_journal(self):
         # TODO checkPage when logged in as superuser.
@@ -137,3 +148,14 @@ class PaperPagesTest(RenderingTest):
         publi = OaiRecord.objects.filter(doi__isnull=False)[0]
         self.checkPermanentRedirect('paper-doi', kwargs={'doi':publi.doi})
 
+    def test_paper_with_empty_slug(self):
+        """
+        Papers may have titles with characters that
+        are all ignored by slugify.
+        """
+        p = Paper.get_or_create(
+            '!@#$%^*()',
+            [BareName.create('Jean', 'Saisrien')],
+            datetime.date(2016, 7, 2))
+        self.assertEqual(p.slug, '')
+        self.checkPage('paper', args=[p.pk, p.slug])

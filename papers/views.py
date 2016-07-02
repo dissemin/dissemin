@@ -197,7 +197,7 @@ class ResearcherView(PaperSearchView):
                 except MetadataSourceException:
                     raise Http404(_('Invalid ORCID profile.'))
 
-        if kwargs.get('slug', '') != researcher.slug:
+        if kwargs.get('slug') != researcher.slug:
             view_args = {'researcher': researcher.id, 'slug': researcher.slug}
             url = reverse('researcher', kwargs=view_args)
             self.url = self.url_with_query_string(url=url)

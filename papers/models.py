@@ -438,7 +438,7 @@ class Researcher(models.Model):
         return "researcher=%d" % self.pk
 
     def breadcrumbs(self):
-        last =  [(unicode(self),reverse('researcher', args=[self.pk]))]
+        last =  [(unicode(self), self.url)]
         if not self.department:
             return last
         else:
@@ -971,9 +971,13 @@ class Paper(models.Model, BarePaper):
         if first_researcher is None:
             result.append((_('Papers'), reverse('search')))
         else:
-            result.append((unicode(first_researcher), reverse('researcher', args=[first_researcher.pk])))
-        result.append((self.citation, reverse('paper', args=[self.pk])))
+            result.append((unicode(first_researcher), first_researcher.url))
+        result.append((self.citation, self.url))
         return result
+
+    @property
+    def url(self):
+        return reverse('paper', args=[self.pk, self.slug])
 
 # Rough data extracted through OAI-PMH
 class OaiSource(CachingMixin, models.Model):

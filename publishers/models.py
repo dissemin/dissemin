@@ -166,7 +166,7 @@ class Publisher(models.Model):
 
     def breadcrumbs(self):
         result = publishers_breadcrumbs()
-        result.append((unicode(self), reverse('publisher', args=[self.pk])))
+        result.append((unicode(self), self.canonical_url))
         return result
 
     def json(self):
