@@ -54,4 +54,13 @@ class HALProtocolTest(ProtocolTest):
         super(HALProtocolTest, self).setUpClass()
         self.proto = HALProtocol(self.repo)
 
+    def test_predict_topic(self):
+        cases = [
+                ('IBEX: Harvesting Entities from the Web Using Unique Identifiers','INFO'),
+                ('Global climate change entails many threats and challenges for the majority of crops.', 'SDV'),
+                ('', None),
+            ]
+        for text, topic in cases:
+            self.assertEqual(self.proto.predict_topic(text), topic)
+    
 

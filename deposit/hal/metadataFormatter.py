@@ -26,9 +26,29 @@ This module defines a OAfr/TEI exporter, to be used with the SWORD interface to 
 from __future__ import unicode_literals
 
 from lxml import etree
+from django.utils.translation import ugettext_lazy as _
 
 from papers.models import Paper, Researcher, Name, OaiRecord
 from deposit.sword.metadataFormatter import MetadataFormatter, addChild
+
+HAL_TOPIC_CHOICES = [
+    ('CHIM',_('Chimie')),
+    ('INFO',_('Informatique')),
+    ('MATH',_('Mathématiques')),
+    ('PHYS',_('Physique')),
+    ('NLIN',_('Science non linéaire')),
+    ('SCCO',_('Sciences cognitives')),
+    ('SDE',_('Sciences de l\'environnement')),
+    ('SDU',_('Planète et Univers')),
+    ('SHS',_('Sciences de l\'Homme et Société')),
+    ('SDV',_('Sciences du Vivant')),
+    ('SPI',_('Sciences de l\'ingénieur')),
+    ('STAT',_('Statistiques')),
+    ('QFIN',_('Économie et finance quantitative')),
+    ('OTHER',_('Autre')),
+  ]
+
+
 
 
 ENS_HAL_ID = 59704

@@ -26,6 +26,7 @@ from django.utils.translation import ugettext as __
 
 from deposit.forms import BaseMetadataForm
 from deposit.zenodo.protocol import ZENODO_LICENSES_CHOICES
+from deposit.hal.metadataFormatter import HAL_TOPIC_CHOICES
 
 class HALForm(BaseMetadataForm):
     license = forms.ChoiceField(
@@ -34,4 +35,7 @@ class HALForm(BaseMetadataForm):
             initial='cc-by',
             widget=forms.RadioSelect(attrs={'class':'radio-margin'})
             )
+    topic = forms.ChoiceField(
+            label=__('Scientific field'),
+            choices=HAL_TOPIC_CHOICES)
 

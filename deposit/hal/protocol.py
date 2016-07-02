@@ -32,6 +32,7 @@ from os.path import basename
 
 from deposit.protocol import *
 from deposit.registry import *
+
 from deposit.hal.forms import *
 from deposit.hal.metadataFormatter import *
 
@@ -74,13 +75,33 @@ class HALProtocol(RepositoryProtocol):
         print self.user
         print self.password
 
+    def predict_topic(self, topic_text):
+        if not topic_text:
+            return
+        try:
+            r = requests.post('http://haltopics.dissem.in:6377/predict', data={'text':topic_text})
+            return r.json()['decision']['code']
+        except (requests.RequestsException, ValueError, KeyError) as e:
+            print e
+            return None
+
     def get_form(self):
         data = {}
         data['paper_id'] = self.paper.id
+        
+        # Abstract
         if self.paper.abstract:
             data['abstract'] = kill_html(self.paper.abstract)
         else:
             self.paper.consolidate_metadata(wait=False)
+
+        # Topic
+        topic_text = ''
+        if 'abstract' in data:
+            topic_text = data['abstract']
+        else:
+            topic_text = self.paper.title
+        
         return HALForm(initial=data)
 
     def get_bound_form(self, data):
