@@ -46,7 +46,7 @@ OAI_PUBTYPE_TRANSLATIONS = {
         'info:eu-repo/semantics/book':'book',
         'info:eu-repo/semantics/bookPart':'book-chapter',
         'info:eu-repo/semantics/review':'other',
-        'info:eu-repo/semantics/conferenceObject':'proceedings',
+        'info:eu-repo/semantics/conferenceObject':'proceedings-article',
         'info:eu-repo/semantics/lecture':'other',
         'info:eu-repo/semantics/workingPaper':'preprint',
         'info:eu-repo/semantics/preprint':'preprint',
@@ -55,6 +55,21 @@ OAI_PUBTYPE_TRANSLATIONS = {
         'info:eu-repo/semantics/contributionToPeriodical':'other',
         'info:eu-repo/semantics/patent':'other',
         'info:eu-repo/semantics/other':'other',
+        # BASE
+        'typenorm:0000':'other', # text
+        'typenorm:0001':'journal-article',
+        'typenorm:0002':'book',
+        'typenorm:0003':'proceedings-article',
+        'typenorm:0004':'thesis',
+        'typenorm:0005':'other', # review
+        'typenorm:0101':'other', # audio
+        'typenorm:0102':'other', # video
+        'typenorm:0103':'poster', # image
+        'typenorm:0104':'poster', # map
+        'typenorm:0105':'other', # software
+        'typenorm:0106':'dataset',
+        'typenorm:0107':'other', # sheet music
+        'typenorm:9999':'other', # unknown
         }
 
 SET_TO_PUBTYPE = {

@@ -207,12 +207,16 @@ class OAIDCTranslator(object):
         keywords = ' '.join(metadata['subject'])
         contributors = ' '.join(metadata['contributor'])[:4096]
 
-        pubtype_list = metadata.get('type', [])
+        typenorms = ['typenorm:'+tn for tn in metadata.get('typenorm',[])]
+        pubtype_list = metadata.get('type', []) + typenorms
         pubtype = None
-        if len(pubtype_list) > 0:
-            pubtype = pubtype_list[0]
+        for raw_pubtype in pubtype_list:
+            pubtype = OAI_PUBTYPE_TRANSLATIONS.get(raw_pubtype)
+            if pubtype is not None:
+                break
 
-        pubtype = OAI_PUBTYPE_TRANSLATIONS.get(pubtype, source.default_pubtype)
+        if pubtype is None:
+            pubtype = source.default_pubtype
 
         # Find the DOI, if any
         doi = None

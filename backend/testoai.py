@@ -227,4 +227,17 @@ class OaiTest(TestCase):
             self.create('aiunrsecauiebleuiest', 'unknown_format')
         
 
+    def test_base_doctype(self):
+        mappings = {
+            'ftunivsavoie:oai:HAL:hal-01062241v1':'proceedings-article',
+            'ftunivsavoie:oai:HAL:hal-01062339v1':'book-chapter',
+            'ftunivmacedonia:oai:dspace.lib.uom.gr:2159/6227':'other',
+            'ftartxiker:oai:HAL:hal-00845819v1':'journal-article',
+            'ftdatacite:oai:oai.datacite.org:402223':'dataset',
+        }
+            
+        for ident, typ in mappings.items():
+            paper = self.create(ident, 'base_dc')
+            self.assertEqual(paper.doctype, typ)
+        
 
