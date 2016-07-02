@@ -129,8 +129,8 @@ class RepositoryProtocol(object):
             # Create the corresponding OAI record
             OaiRecord.new(
                     source=self.repository.oaisource,
-                    identifier=('deposition:%d:%d' %
-                        (self.repository.id, result.identifier)),
+                    identifier=('deposition:%d:%s' %
+                        (self.repository.id, unicode(result.identifier))),
                     about=self.paper,
                     splash_url=result.splash_url,
                     pdf_url=result.pdf_url)

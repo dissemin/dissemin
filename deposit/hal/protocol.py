@@ -34,7 +34,7 @@ from deposit.protocol import *
 from deposit.registry import *
 
 from deposit.hal.forms import *
-from deposit.hal.metadataFormatter import *
+from deposit.hal.metadataFormatter import AOFRFormatter
 
 from papers.errors import MetadataSourceException
 from papers.utils import kill_html
@@ -81,7 +81,7 @@ class HALProtocol(RepositoryProtocol):
         try:
             r = requests.post('http://haltopics.dissem.in:6377/predict', data={'text':topic_text})
             return r.json()['decision']['code']
-        except (requests.RequestsException, ValueError, KeyError) as e:
+        except (requests.exceptions.RequestException, ValueError, KeyError) as e:
             print e
             return None
 
@@ -101,6 +101,7 @@ class HALProtocol(RepositoryProtocol):
             topic_text = data['abstract']
         else:
             topic_text = self.paper.title
+        data['topic'] = self.predict_topic(topic_text)
         
         return HALForm(initial=data)
 
@@ -134,6 +135,8 @@ class HALProtocol(RepositoryProtocol):
             # Creating the metadata
             self.log("### Generating metadata")
             metadata = self.createMetadata(form)
+            with open('/tmp/hal.xml', 'w') as f:
+                f.write(metadata)
             # TODO dump XML
 
             # Check that there is an abstract
@@ -168,21 +171,8 @@ class HALProtocol(RepositoryProtocol):
             resp = conn.getresponse()
             print resp.read()
             deposition_id = resp.getheader('location')
-
-            if False:
-                files = {'file':('deposit.zip',zipfile,'application/zip')}
-                headers = {"x-packaging":"http://purl.org/net/sword-types/aofr"}
-                r = requests.post(self.api_url,
-                        headers=headers,
-                        files=files,
-                        auth=(self.username,self.password))
-                self.log(unicode(r.request.headers))
-                self.log(unicode(r.headers))
-                print "result"
-                print r.body
-                self.log_request(r, 201, __('unable to create a new deposition on hal.'))
-                deposition_id = r.headers['location']
-
+            if not deposition_id:
+                raise DepositError(__('HAL rejected the submission'))
 
             deposit_result.identifier = deposition_id
             self.log("Deposition id: %s" % deposition_id)
@@ -202,7 +192,8 @@ class HALProtocol(RepositoryProtocol):
 
     def createMetadata(self, form):
         formatter = AOFRFormatter()
-        metadata = formatter.toString(self.paper, 'article.pdf', True)
+        metadata = formatter.toString(self.paper, 'article.pdf',
+                                      form, pretty=True)
         return metadata
 
 protocol_registry.register(HALProtocol)
