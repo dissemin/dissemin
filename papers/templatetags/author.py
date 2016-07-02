@@ -19,8 +19,8 @@ def authorlink(author):
 def publication(publi):
     result = ''
     if publi.publisher_id:
-        if publi.publisher.url:
-            result += '<a href="'+publi.publisher.url+'">'+escape(publi.publisher.name)+'</a>, '
+        if publi.publisher.canonical_url:
+            result += '<a href="'+publi.publisher.canonical_url+'">'+escape(publi.publisher.name)+'</a>, '
         else:
             result += escape(publi.publisher.name)+', '
     if publi.pubtype == 'book-chapter' and publi.journal and publi.container and publi.container != unicode(publi.journal):
