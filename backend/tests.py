@@ -20,9 +20,11 @@
 
 from __future__ import unicode_literals
 
+import haystack
 import unittest
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.management import call_command
 from backend.crossref import *
 from backend.romeo import *
 from backend.orcid import *
@@ -37,6 +39,15 @@ from publishers.models import *
 import datetime
 
 from lxml import etree
+
+TEST_INDEX = {
+    'default': {
+        'ENGINE': 'search.SearchEngine',
+        'URL': 'http://localhost:9200/',
+        'INDEX_NAME': 'dissemin_test',
+    },
+}
+
 
 # SHERPA/RoMEO interface
 class RomeoTest(TestCase):
@@ -86,11 +97,15 @@ class RomeoTest(TestCase):
         self.assertEqual(fetch_journal({'issn':'0036-8075'}).publisher.oa_status, 'OK')
 
 # Generic test case that requires some example DB
+@override_settings(HAYSTACK_CONNECTIONS=TEST_INDEX)
 class PrefilledTest(TestCase):
     @classmethod
     def setUpClass(self):
         if self is PrefilledTest:
             raise unittest.SkipTest("Base test")
+        super(PrefilledTest, self).setUpClass()
+        haystack.connections.reload('default')
+        call_command('update_index', verbosity=0)
         self.i = Institution.objects.get(name='ENS')
         self.d = Department.objects.get(name='Chemistry dept')
         self.di = Department.objects.get(name='Comp sci dept')
@@ -110,6 +125,8 @@ class PrefilledTest(TestCase):
     @classmethod
     def tearDownClass(self):
         name_lookup_cache.prune()
+        haystack.connections['default'].get_backend().clear()
+        super(PrefilledTest, self).tearDownClass()
 
     def tearDown(self):
         name_lookup_cache.prune()
@@ -128,9 +145,9 @@ def check_paper(asserter, paper):
 class PaperSourceTest(PrefilledTest):
     @classmethod
     def setUpClass(self):
-        super(PaperSourceTest, self).setUpClass()
         if self is PaperSourceTest:
             raise unittest.SkipTest("Base test")
+        super(PaperSourceTest, self).setUpClass()
         self.source = None
         self.researcher = self.r4
 

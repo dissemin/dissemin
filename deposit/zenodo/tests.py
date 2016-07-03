@@ -27,9 +27,9 @@ import os, unittest
 class ZenodoProtocolTest(ProtocolTest):
     @classmethod
     def setUpClass(self):
-        super(ZenodoProtocolTest, self).setUpClass()
         if 'ZENODO_SANDBOX_API_KEY' not in os.environ:
             raise unittest.SkipTest("Environment variable ZENODO_SANDBOX_API_KEY is undefined")
+        super(ZenodoProtocolTest, self).setUpClass()
         self.repo.api_key = os.environ['ZENODO_SANDBOX_API_KEY']
         self.repo.endpoint = 'https://sandbox.zenodo.org/api/deposit/depositions'
         self.proto = ZenodoProtocol(self.repo)
