@@ -33,7 +33,6 @@ ndg-httpsclient
 pillow
 psycopg2
 pyasn1
-pyoai
 pyopenssl
 requests
 titlecase
