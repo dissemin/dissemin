@@ -3,7 +3,6 @@
 # django-haystack
 -e git://github.com/django-haystack/django-haystack.git@f1ed18313777005dd77ed724ecbfb27c0b03cad8#egg=django-haystack
 -e git://github.com/swordapp/python-client-sword2#egg=sword2
--e git://github.com/wetneb/django-allauth.git#egg=django-allauth
 -e git://github.com/wetneb/pyoai.git@any_metadataPrefix#egg=pyoai
 PyPDF2
 bibtexparser
