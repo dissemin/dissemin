@@ -9,7 +9,7 @@ bibtexparser
 celery[redis]
 cryptography
 czipfile
-django
+django==1.9
 django-bootstrap-pagination
 django-cache-machine
 django-capture-tag
@@ -21,7 +21,6 @@ django-redis-cache
 django-rest-swagger
 django-solo
 django-widget-tweaks
-django==1.9
 djangorestframework
 elasticsearch
 html5lib
