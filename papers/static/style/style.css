@@ -204,6 +204,7 @@ h4
     flex: 7 1 70%;
     order: 1;
     align-self: stretch;
+    max-width: 750px;
 }
 
 #wrapper
@@ -356,6 +357,7 @@ li
 .pubText p
 {
     margin: 0px 0px 5px;
+    word-wrap: break-word;
 }
 
 .pubRef
