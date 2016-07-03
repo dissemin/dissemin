@@ -245,7 +245,7 @@ class BASEDCTranslator(OAIDCTranslator):
         return 'base_dc'
 
 
-class OaiPaperSource(PaperSource):
+class OaiPaperSource(PaperSource): # TODO: this should not inherit from PaperSource
     """
     A paper source that fetches records from the OAI-PMH proxy
     (typically: proaixy).

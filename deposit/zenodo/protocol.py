@@ -29,12 +29,18 @@ from django.utils.translation import ugettext as __
 from os.path import basename
 
 ZENODO_LICENSES_CHOICES = [
-   ('cc-zero', _('Creative Commons CCZero')),
-   ('cc-by', _('Creative Commons Attribution')),
-   ('cc-by-sa', _('Creative Commons Attribution-ShareAlike')),
-   ('cc-by-nc-4.0', _('Creative Commons Attribution-NonCommercial')),
-   ('cc-by-nd-4.0', _('Creative Commons Attribution-NoDerivatives')),
-   ('other-open', _('Other open license')),
+   ('cc-zero',
+        _('Creative Commons CCZero (CC0)')),
+   ('cc-by',
+        _('Creative Commons Attribution (CC-BY)')),
+   ('cc-by-sa',
+        _('Creative Commons Attribution-ShareAlike (CC-BY-SA)')),
+   ('cc-by-nc-4.0',
+        _('Creative Commons Attribution-NonCommercial (CC-BY-NC)')),
+   ('cc-by-nd-4.0',
+        _('Creative Commons Attribution-NoDerivatives (CC-BY-ND)')),
+   ('other-open',
+        _('Other open license')),
  ]
 
 from deposit.protocol import *
