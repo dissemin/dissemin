@@ -102,7 +102,7 @@ class PaperSearchView(SearchView):
     paginate_by = NB_RESULTS_PER_PAGE
     template_name = 'papers/search.html'
     form_class = PaperForm
-    queryset = SearchQuerySet()
+    queryset = SearchQuerySet().models(Paper)
 
     def get(self, request, *args, **kwargs):
         if not is_admin(request.user):
