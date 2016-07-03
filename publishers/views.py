@@ -24,7 +24,6 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views import generic
 from django.utils.translation import ugettext as _
 from haystack.generic_views import SearchView
-from haystack.query import SearchQuerySet
 from haystack.forms import SearchForm
 from dissemin.settings import UNIVERSITY_BRANDING
 
@@ -72,7 +71,6 @@ class PublishersView(SearchView):
     paginate_by = NB_RESULTS_PER_PAGE
     template_name = 'publishers/list.html'
     form_class = PublisherForm
-    queryset = SearchQuerySet().models(Publisher)
 
     def get_context_data(self, **kwargs):
         context = super(PublishersView, self).get_context_data(**kwargs)
