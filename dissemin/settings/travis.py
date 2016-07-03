@@ -35,6 +35,9 @@ DATABASES = {
     }
 }
 
+# On Travis, always update the index in real time
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
 # Base domain of the ORCiD API.
 ORCID_BASE_DOMAIN = 'orcid.org' # our test dump uses identifiers from the production
 
