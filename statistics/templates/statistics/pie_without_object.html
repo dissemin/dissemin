@@ -14,7 +14,7 @@
       <label class="stats_caption_line">
         {{ status.tag }}
       {% else %}
-      <a class="stats_caption_line" href="{% url 'search' %}?combined_status={{ status.choice_value }}">
+      <a class="stats_caption_line" href="{% url 'search' %}?status={{ status.choice_value }}">
       {% endif %}
         <span class="stats_caption_box">
           <span class="stats_caption_color"
