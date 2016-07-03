@@ -11,8 +11,8 @@ git checkout master
 echo "> git pull"
 git pull
 echo "### Updating dependencies ###"
-sudo pip install --src .src -r requirements_frontend.txt
-sudo pip install --src .src -r requirements_backend.txt
+sudo pip install --src .src -r requirements.txt
+sudo pip install --src .src -r requirements-dev.txt
 echo "### Migrating the database ###"
 python manage.py migrate
 echo "### Updating translation files"

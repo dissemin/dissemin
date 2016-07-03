@@ -34,7 +34,8 @@ dependencies::
 
    virtualenv .virtualenv
    source .virtualenv/bin/activate
-   pip install -r requirements_frontend.txt
+   pip install -r requirements.txt
+   pip install -r requirements-dev.txt
 
 Set up the database
 -------------------
@@ -204,8 +205,9 @@ First, install the redis server::
 (this launches the redis server). Install Python dependencies::
 
    sudo apt-get install libxml2 python-dev libxslt-dev liblapack-dev gfortran libopenblas-dev
-   source .virtualend/bin/activate
-   pip install -r requirements_backend.txt
+   source .virtualenv/bin/activate
+   pip install -r requirements.txt
+   pip install -r requirements-dev.txt
 
 Optional python dependencies (if you want to debug the learning system)::
 

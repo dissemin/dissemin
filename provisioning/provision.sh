@@ -51,7 +51,7 @@ apt-get install -y tmux vim-nox
 # We create a virtualenv for Dissemin
 virtualenv /dissemin/.vm_venv --no-site-packages -p $(which python2.7)
 # We install dependencies in the virtualenv
-req_files=(requirements_backend.txt requirements_frontend.txt requirements_backend_light.txt requirements_frontend_light.txt)
+req_files=(requirements.txt requirements-dev.txt)
 
 for req in "${req_files[@]}"
 do
