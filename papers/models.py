@@ -1021,7 +1021,7 @@ class OaiRecord(models.Model, BareOaiRecord):
     pages = models.CharField(max_length=64, blank=True, null=True)
     pubdate = models.DateField(blank=True, null=True)
 
-    doi = models.CharField(max_length=1024, blank=True, null=True) # in theory, there is no limit
+    doi = models.CharField(max_length=1024, blank=True, null=True, db_index=True) # in theory, there is no limit
 
 
     last_update = models.DateTimeField(auto_now=True)
