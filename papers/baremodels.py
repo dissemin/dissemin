@@ -398,8 +398,8 @@ class BarePaper(BareObject):
         """
         The list of authors to display when the complete list is too long.
         """
-        # TODO: Better selection
-        lst = self.authors[:self.MAX_DISPLAYED_AUTHORS]
+        lst = (filter(lambda a: a.researcher_id is not None, self.authors)+filter(
+                lambda a: a.researcher_id is None, self.authors)[:3])[:self.MAX_DISPLAYED_AUTHORS]
         self.nb_remaining_authors = self.author_count - len(lst)
         return lst
 
