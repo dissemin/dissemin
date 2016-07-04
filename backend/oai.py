@@ -21,6 +21,7 @@
 from __future__ import unicode_literals
 
 import itertools
+from datetime import datetime
 from oaipmh.client import Client
 from oaipmh.metadata import MetadataRegistry
 from oaipmh.error import DatestampError, NoRecordsMatchError, BadArgumentError
@@ -369,10 +370,24 @@ class OaiPaperSource(PaperSource): # TODO: this should not inherit from PaperSou
             raise ValueError("No OAI translators have been set up: "+
                             "We cannot save any record.")
         
+        last_report = datetime.now()
+        processed_since_report = 0
+
         for record in listRecords:
             header = record[0]
             metadata = record[1]._map
             
             self.process_record(header, metadata)
-   
+            
+            # rate reporting
+            processed_since_report += 1
+            if processed_since_report >= 1000:
+                td = datetime.now() - last_report
+                rate = 'infty'
+                if td:
+                    rate = unicode(processed_since_report / td.seconds)
+                print ("current rate: %s records/s" % rate)
+                processed_since_report = 0
+                last_report = datetime.now()
+    
 
