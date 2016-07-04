@@ -7,12 +7,12 @@
 # modify it under the terms of the GNU Affero General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU Affero General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU Affero General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -21,7 +21,7 @@
 from __future__ import unicode_literals
 
 import json
-import requests 
+import requests
 from StringIO import StringIO
 
 from django.utils.translation import ugettext_lazy as _
@@ -89,7 +89,7 @@ class ZenodoProtocol(RepositoryProtocol):
         self.log("### Checking the access token")
         r = requests.get(api_url_with_key)
         self.log_request(r, 200, __('Unable to authenticate to Zenodo.'))
-           
+
         # Creating a new deposition
         self.log("### Creating a new deposition")
         headers = {"Content-Type": "application/json"}
@@ -123,7 +123,7 @@ class ZenodoProtocol(RepositoryProtocol):
         r = requests.put(self.api_url+"/%s?access_token=%s" % ( deposition_id, api_key),
                 data=json.dumps(data), headers=headers)
         self.log_request(r, 200, __('Unable to submit paper metadata to Zenodo.'))
-        
+
         # Deleting the deposition
         #self.log("### Deleting the deposition")
         #r = requests.delete(self.api_url+"/%s?access_token=%s" % ( deposition_id, api_key) )
@@ -132,7 +132,7 @@ class ZenodoProtocol(RepositoryProtocol):
         self.log_request(r, 202, __('Unable to publish the deposition on Zenodo.'))
         self.log(r.text)
         deposition_object = r.json()
-        deposit_result.splash_url = deposition_object['record_url'] 
+        deposit_result.splash_url = deposition_object['record_url']
         deposit_result.pdf_url = deposit_result.splash_url + '/files/article.pdf'
 
         return deposit_result
@@ -207,7 +207,7 @@ class ZenodoProtocol(RepositoryProtocol):
         for publi in publications:
             if publi.journal and publi.journal.issn:
                 idents.append({'relation':'isPartOf','identifier':publi.journal.issn})
-        
+
         data = {"metadata": metadata}
         return data
 

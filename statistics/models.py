@@ -7,12 +7,12 @@
 # modify it under the terms of the GNU Affero General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU Affero General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU Affero General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -55,7 +55,7 @@ COMBINED_STATUS_CHOICES = [
     ('closed', _('Publisher forbids sharing')),
     ]
 
-#: Helptext displayed when a paper logo is hovered 
+#: Helptext displayed when a paper logo is hovered
 STATUS_CHOICES_HELPTEXT = {
     'oa': _('This paper is made freely available by the publisher.'),
     'ok':_('This paper is available in a repository.'),
@@ -236,7 +236,7 @@ class BareAccessStatistics(object):
         """
         if self.num_tot:
             return int(100.*(self.num_couldbe + self.num_unk + self.num_closed)/self.num_tot)
- 
+
 
 class AccessStatistics(models.Model, BareAccessStatistics):
     """

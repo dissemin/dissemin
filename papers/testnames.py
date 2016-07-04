@@ -7,12 +7,12 @@
 # modify it under the terms of the GNU Affero General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU Affero General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU Affero General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -72,7 +72,7 @@ class SplitNameWordsTest(unittest.TestCase):
         self.assertEqual(split_name_words('José'), (['José'],[]))
         self.assertEqual(split_name_words('José Alphonse'), (['José', 'Alphonse'],['']))
         self.assertEqual(split_name_words('É. R.'), (['É','R'],['']))
-    
+
     def test_flattened(self):
         self.assertEqual(split_name_words('JP.'), (['J','P'],['-']))
         self.assertEqual(split_name_words('Jp.'), (['J','P'],['-']))
@@ -202,7 +202,7 @@ class NameSimilarityTest(unittest.TestCase):
                 name_similarity(('Amanda P.','Brown'),('Patrick','Brown')), 0)
 
     def test_symmetric(self):
-        pairs = [ 
+        pairs = [
             (('Robin', 'Ryder'),('Robin', 'Ryder')),
             (('Robin', 'Ryder'),('R.', 'Ryder')),
             (('R.', 'Ryder'),('R.', 'Ryder')),
@@ -253,7 +253,7 @@ class ShallowerNameSimilarityTest(unittest.TestCase):
                 shallower_name_similarity(('Robin','Ryder'), ('Robin', 'Rider')), 0)
 
     def test_symmetric(self):
-        pairs = [ 
+        pairs = [
             (('Robin', 'Ryder'),('Robin', 'Ryder')),
             (('Robin', 'Ryder'),('R.', 'Ryder')),
             (('R.', 'Ryder'),('R.', 'Ryder')),
@@ -340,7 +340,7 @@ class NameUnificationTest(unittest.TestCase):
         self.assertEqual(name_unification(('A A','Amarilli'),('Antoine','Amarilli')), ('Antoine A.','Amarilli'))
         self.assertEqual(name_unification(('A A','Amarilli'),('A','Amarilli')), ('A. A.','Amarilli'))
         self.assertEqual(name_unification(('H-C Hsieh-Chung','Chen'),('Hsieh-Chung','Chen')), ('Hsieh-Chung','Chen'))
-    
+
     @unittest.expectedFailure
     def test_composite_last_name(self):
         # TODO this should be reasonably easy to get right
@@ -396,7 +396,7 @@ class UnifyNameListsTest(unittest.TestCase):
             [('M.','Dupont'),('J. P.','Dupont')]) in
             [
                  [(('Jean P.','Dupont'),(0,1)),(('Marie','Dupont'),(1,0))],
-                 [(('Marie','Dupont'),(1,0)),(('Jean P.','Dupont'),(0,1))]    
+                 [(('Marie','Dupont'),(1,0)),(('Jean P.','Dupont'),(0,1))]
             ])
 
     def test_dirty_input(self):

@@ -7,12 +7,12 @@
 # modify it under the terms of the GNU General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -86,7 +86,7 @@ class CiteprocTranslator(object):
         except ValueError:
             return
 
-        
+
 
 class OAIDCTranslator(object):
     """
@@ -250,11 +250,11 @@ class OaiPaperSource(PaperSource): # TODO: this should not inherit from PaperSou
     """
     A paper source that fetches records from the OAI-PMH proxy
     (typically: proaixy).
-    
+
     It uses the ListRecord verb to fetch records from the OAI-PMH
     source. Each record is then converted to a :class:`BarePaper`
     by an :class:`OaiTranslator` that handles the format
-    the metadata is served in. 
+    the metadata is served in.
     """
     def __init__(self, endpoint, day_granularity=False, *args, **kwargs):
         """
@@ -285,7 +285,7 @@ class OaiPaperSource(PaperSource): # TODO: this should not inherit from PaperSou
         """
         Adds the given translator to the paper source,
         so that we know how to translate papers in the given format.
-        
+
         The paper source cannot hold more than one translator
         per OAI format (it decides what translator to use
         solely based on the format) so if there is already a translator
@@ -316,7 +316,7 @@ class OaiPaperSource(PaperSource): # TODO: this should not inherit from PaperSou
         Queries the OAI-PMH proxy for a single paper.
 
         :param identifier: the OAI identifier to fetch
-        :param metadataPrefix: the format to use (a translator 
+        :param metadataPrefix: the format to use (a translator
                     has to be registered for that format, otherwise
                     we return None with a warning message)
         :returns: a Paper or None
@@ -325,7 +325,7 @@ class OaiPaperSource(PaperSource): # TODO: this should not inherit from PaperSou
                     metadataPrefix=metadataPrefix,
                     identifier=identifier)
         return self.process_record(record[0],record[1]._map)
-        
+
 
     #### Record search utilities
 
@@ -359,7 +359,7 @@ class OaiPaperSource(PaperSource): # TODO: this should not inherit from PaperSou
                 print header.identifier()
                 print e
 
- 
+
     def process_records(self, listRecords):
         """
         Save as :class:`Paper` all the records contained in this list
@@ -369,16 +369,16 @@ class OaiPaperSource(PaperSource): # TODO: this should not inherit from PaperSou
         if not self.translators:
             raise ValueError("No OAI translators have been set up: "+
                             "We cannot save any record.")
-        
+
         last_report = datetime.now()
         processed_since_report = 0
 
         for record in listRecords:
             header = record[0]
             metadata = record[1]._map
-            
+
             self.process_record(header, metadata)
-            
+
             # rate reporting
             processed_since_report += 1
             if processed_since_report >= 1000:
@@ -389,5 +389,5 @@ class OaiPaperSource(PaperSource): # TODO: this should not inherit from PaperSou
                 print ("current rate: %s records/s" % rate)
                 processed_since_report = 0
                 last_report = datetime.now()
-    
+
 

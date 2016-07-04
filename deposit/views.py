@@ -6,12 +6,12 @@
 # modify it under the terms of the GNU Affero General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU Affero General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU Affero General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -32,7 +32,7 @@ from jsonview.decorators import json_view
 from crispy_forms.templatetags.crispy_forms_filters import as_crispy_form
 from crispy_forms.utils import render_crispy_form
 
-from dissemin.settings import MEDIA_ROOT, UNIVERSITY_BRANDING, DEPOSIT_MAX_FILE_SIZE 
+from dissemin.settings import MEDIA_ROOT, UNIVERSITY_BRANDING, DEPOSIT_MAX_FILE_SIZE
 
 from deposit.models import *
 from deposit.forms import *
@@ -135,7 +135,7 @@ def submitDeposit(request, pk):
     d.save()
 
     submitResult = protocol.submit_deposit_wrapper(path, repositoryForm)
-    
+
     d.request = submitResult.logs
     if not submitResult.success():
         context['message'] = submitResult.message

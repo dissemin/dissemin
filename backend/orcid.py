@@ -7,12 +7,12 @@
 # modify it under the terms of the GNU General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -84,7 +84,7 @@ orcid_oai_source, _ = OaiSource.objects.get_or_create(identifier='orcid',
 
 def orcid_to_doctype(typ):
     return orcid_type_to_pubtype.get(typ.lower().replace('_','-').replace(' ','-'), 'other')
-    
+
 
 def affiliate_author_with_orcid(ref_name, orcid, authors, initial_orcids=None):
     """
@@ -98,7 +98,7 @@ def affiliate_author_with_orcid(ref_name, orcid, authors, initial_orcids=None):
     max_sim_idx = None
     max_sim = 0.
     for idx, name in enumerate(authors):
-        cur_similarity = shallower_name_similarity(name, ref_name) 
+        cur_similarity = shallower_name_similarity(name, ref_name)
         if cur_similarity > max_sim:
             max_sim_idx = idx
             max_sim = cur_similarity
@@ -485,7 +485,7 @@ class OrcidPaperSource(PaperSource):
                 else:
                     ignored_papers.append(paper_or_metadata)
                     print ('This metadata (%s) yields no paper.' % (paper_or_metadata))
-       
+
         self.warn_user_of_ignored_papers(ignored_papers)
         if ignored_papers:
             print ('Warning: Total ignored papers: %d' % (len(ignored_papers)))

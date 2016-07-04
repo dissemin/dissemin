@@ -7,12 +7,12 @@
 # modify it under the terms of the GNU Affero General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU Affero General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU Affero General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -60,7 +60,7 @@ def create_paper_plain_fingerprint(title, authors, year):
     # If the title is long enough, we return the fingerprint as is
     if len(buf) > 50:
         return buf
-    
+
     # If the title is very short, we add the year (for "Preface", "Introduction", "New members" cases)
     #if len(title) <= 16:
     if not '-' in title:
@@ -79,7 +79,7 @@ def create_paper_plain_fingerprint(title, authors, year):
             if (last_name_words[i][0].isupper() or
                 (i > 0 and last_name_separators[i-1] == '-')):
                 last_words.append(last_name_words[i])
-             
+
         # If no word was uppercased, fall back on all the words
         if not last_words:
             last_words = last_name_words

@@ -7,12 +7,12 @@
 # modify it under the terms of the GNU Affero General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU Affero General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU Affero General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -128,7 +128,7 @@ def researcherCandidatesByName(name):
     related_orcids = filter(lambda r: r['orcid'] not in seen_orcids, related_orcids)
     rendered += map(renderProfile, related_orcids)
     return rendered
-    
+
 @json_view
 @require_POST
 def newUnaffiliatedResearcher(request):
@@ -190,7 +190,7 @@ def setResearcherDepartment(request):
     return process_ajax_change(request, Researcher, allowedFields)
 
 @json_view
-def harvestingStatus(request, pk): 
+def harvestingStatus(request, pk):
     researcher = get_object_or_404(Researcher, pk=pk)
     resp = {}
     if researcher.current_task:
@@ -245,7 +245,7 @@ def waitForConsolidatedField(request):
 #        if not researcher_id:
 #            researcher_id = False
 #        response['value'] = {'first':first,'last':last,'researcher_id':researcher_id}
-#        
+#
 #        # the fingerprint might have changed and might collide with another paper
 #        merged = author.paper.recompute_fingerprint_and_merge_if_needed()
 #        response['merged'] = ''

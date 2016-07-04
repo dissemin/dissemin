@@ -7,12 +7,12 @@
 # modify it under the terms of the GNU Affero General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU Affero General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU Affero General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -116,7 +116,7 @@ def api_paper_query(request):
         raise BadRequest('Invalid title, has to be a non-empty string shorter than 512 characters')
 
     pubdate = fields.get('date')
-    
+
     date = fields.get('date')
     if type(date) != unicode:
         raise BadRequest('A date is required')
@@ -159,11 +159,11 @@ def api_paper_query(request):
     except ValueError:
         raise BadRequest('Invalid paper')
     import backend.oai as oai
-     
+
     return {'status':'ok','paper':p.json()}
 
 
-urlpatterns = [ 
+urlpatterns = [
     url(r'^', include(router.urls)),
 #    url(r'^paper/(?P<pk>\d+)/$', PaperView.as_view(), name='api-paper'),
     url(r'^(?P<doi>10\..*)$', api_paper_doi, name='api-paper-doi'),

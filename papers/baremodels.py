@@ -7,12 +7,12 @@
 # modify it under the terms of the GNU Affero General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU Affero General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU Affero General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -211,12 +211,12 @@ class BarePaper(BareObject):
         :param visible: The visibility of the paper if it is created. If another paper
                     exists, the visibility will be set to the maximum of the two possible
                     visibilities.
-        :param affiliations: A list of (possibly None) affiliations for the authors. It has to 
+        :param affiliations: A list of (possibly None) affiliations for the authors. It has to
                     have the same length as the list of author names.
         :param orcids: same as affiliations, but for ORCID ids.
         """
         plain_names = map(to_plain_name, author_names)
-        
+
         if not title or not author_names or not pubdate:
             raise ValueError("A title, pubdate and authors have to be provided to create a paper.")
 
@@ -438,7 +438,7 @@ class BarePaper(BareObject):
             if r.has_publication_metadata():
                 res.append(r)
         return res
-    
+
     def first_publications(self):
         """
         The list of the 3 first OAI records with publication metadata
@@ -509,10 +509,10 @@ class BarePaper(BareObject):
         """
         Updates the :class:`BarePaper`'s own `pdf_url` field
         based on its sources (:class:`BareOaiRecord`).
-        
+
         This uses a non-trivial logic, hence it is useful to keep this result cached
         in the database row.
-        
+
         :param cached_oairecords: the list of OaiRecords if we already have it
                            from somewhere (otherwise it is fetched)
         """
@@ -701,7 +701,7 @@ class BareAuthor(BareObject):
             'affiliation':self.affiliation,
             'researcher_id':self.researcher_id,
             }
-    
+
     @classmethod
     def deserialize(cls, rep):
         """
@@ -821,7 +821,7 @@ class BareOaiRecord(BareObject):
         'journal', # expected to be a Journal
         'publisher', # expected to be a Publisher
     ]
-    
+
     _bare_fields = [
         'identifier',
         'splash_url',
@@ -846,7 +846,7 @@ class BareOaiRecord(BareObject):
         'splash_url',
         'source',
     ]
-    
+
     def __init__(self, *args, **kwargs):
         super(BareOaiRecord, self).__init__(*args, **kwargs)
         if self.source:
@@ -880,7 +880,7 @@ class BareOaiRecord(BareObject):
 
     def publisher_or_default(self):
         """
-        Returns the publisher. If the publisher is unknown, 
+        Returns the publisher. If the publisher is unknown,
         returns an instance of :class:`DummyPublisher`.
         """
         if self.publisher_id:

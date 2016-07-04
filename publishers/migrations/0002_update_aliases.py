@@ -9,7 +9,7 @@ def cleanup_publisher_aliases(apps, schema_editor):
     Publication = apps.get_model("papers", "Publication")
     AliasPublisher.objects.all().delete()
     Publication.objects.filter(journal__isnull=True).update(publisher=None)
-    
+
     counts = defaultdict(int)
     for p in Publication.objects.filter(publisher__isnull=False):
         pair = (p.publisher_name,p.publisher_id)
