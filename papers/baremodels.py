@@ -817,17 +817,6 @@ class BareName(BareObject):
 
 class BareOaiRecord(BareObject):
     _bare_foreign_key_fields = [
-        'journal', # expected to be an actual model instance
-        'publisher', # expected to be an actual model instance
-    ]
-    
-    _mandatory_fields = [
-        'pubtype',
-        'title',
-    ]
-
-
-    _bare_foreign_key_fields = [
         'source', # expected to be an OaiSorce
         'journal', # expected to be a Journal
         'publisher', # expected to be a Publisher
