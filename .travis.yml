@@ -67,7 +67,6 @@ script:
   - python manage.py migrate --noinput
   - python manage.py loaddata dissemin/fixtures/test_dump.json
   - python manage.py rebuild_index --noinput
-  - ./celery.sh &
   - coverage run --source=dissemin,papers,backend,deposit,upload,statistics --omit=*/migrations/*,dissemin/settings/* manage.py test --testrunner dissemin.scripts.baretests.BareTestRunner -v 2 --failfast
 
 after_success:

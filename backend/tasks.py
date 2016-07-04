@@ -71,9 +71,6 @@ def init_profile_from_orcid(pk):
 
 @shared_task(name='fetch_everything_for_researcher')
 @run_only_once('researcher', keys=['pk'], timeout=15*60)
-def fetch_everything_for_reseracher_task(pk):
-    fetch_everything_for_researcher(pk)
-
 def fetch_everything_for_researcher(pk):
     sources = [
         ('orcid',OrcidPaperSource(max_results=1000)),

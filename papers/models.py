@@ -347,8 +347,8 @@ class Researcher(models.Model):
         self.stats.update(self.papers)
 
     def fetch_everything(self):
-        from backend.tasks import fetch_everything_for_researcher_task
-        self.harvester = fetch_everything_for_researcher_task.delay(pk=self.id).id
+        from backend.tasks import fetch_everything_for_researcher
+        self.harvester = fetch_everything_for_researcher.delay(pk=self.id).id
         self.current_task = 'init'
         self.save(update_fields=['harvester','current_task'])
 
@@ -816,8 +816,13 @@ class Paper(models.Model, BarePaper):
         Creates a paper given a DOI
         """
         import backend.crossref as crossref
+        from backend.papersource import PaperSource
         cr_api = crossref.CrossRefAPI()
-        return cr_api.create_paper_by_doi(doi)
+        bare_paper = cr_api.create_paper_by_doi(doi)
+        if bare:
+            return bare_paper
+        elif bare_paper:
+            return Paper.from_bare(bare_paper) # TODO TODO index it?
 
     def successful_deposits(self):
         return self.depositrecord_set.filter(pdf_url__isnull=False)
