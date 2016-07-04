@@ -140,6 +140,8 @@ def parse_crossref_date(date):
     """
     Parse the date representation from CrossRef to a python object
     """
+    if not date:
+        return None
     ret = None
     if 'date-parts' in date:
         try:
