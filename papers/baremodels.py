@@ -817,7 +817,7 @@ class BareName(BareObject):
 
 class BareOaiRecord(BareObject):
     _bare_foreign_key_fields = [
-        'source', # expected to be an OaiSorce
+        'source', # expected to be an OaiSource
         'journal', # expected to be a Journal
         'publisher', # expected to be a Publisher
     ]
