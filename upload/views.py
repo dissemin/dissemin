@@ -7,12 +7,12 @@
 # modify it under the terms of the GNU Affero General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU Affero General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU Affero General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -50,7 +50,7 @@ from datetime import datetime
 def handleAjaxUpload(request):
     form = AjaxUploadForm(request.POST, request.FILES)
     if form.is_valid():
-        # We read the whole file in memory, which 
+        # We read the whole file in memory, which
         # is reasonably safe because we know it's not too big
         pdf_file = request.FILES['upl'].read()
         orig_name = request.FILES['upl'].name
@@ -92,7 +92,7 @@ def make_thumbnail(pdf_blob):
         except PyPdfError as e:
             # PyPDF2 failed (maybe it believes the file is encrypted…)
             # We try to convert the file with ImageMagick (wand) anyway,
-            # rendering the whole PDF as we have not been able to 
+            # rendering the whole PDF as we have not been able to
             # select the first page
             print "PyPDF error: "+str(e)
             first_blob = pdf_blob
@@ -108,7 +108,7 @@ def make_thumbnail(pdf_blob):
                 print "No pages"
                 return
             image = wand.image.Image(image=image.sequence[0])
-            
+
             # Resizing disabled, we computed a reasonable resolution.
             # But anyway it costs much less than rendering…
 
@@ -147,7 +147,7 @@ def save_pdf(user, orig_name, pdf_blob):
     if res is None:
         response['message'] = _('Invalid PDF file.')
         return response
-   
+
     num_pages, png_blob = res
 
     # Otherwise we save the file!
@@ -210,7 +210,7 @@ _('Invalid content type: this link points to a web page, we need a direct link t
 
     orig_name = form.cleaned_data['url']
 
-    response = save_pdf(request.user, orig_name, content) 
+    response = save_pdf(request.user, orig_name, content)
 
     if response['status'] == 'error':
         return response, 403

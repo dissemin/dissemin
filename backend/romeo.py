@@ -7,12 +7,12 @@
 # modify it under the terms of the GNU General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -146,7 +146,7 @@ def fetch_journal(search_terms, matching_mode = 'exact'):
         print("Warning, "+str(len(names))+" names provided for one journal, "+
                 "defaulting to the first one")
     name = kill_html(names[0].text)
-    
+
     issn = None
     try:
         issn = nstrip(journal.findall('./issn')[0].text)
@@ -234,7 +234,7 @@ def get_or_create_publisher(romeo_xml_description):
     except KeyError:
         raise MetadataSourceException('RoMEO did not provide a publisher id.\n'+
                 'URL was: '+request)
-    
+
     name = None
     try:
         raw_name = xml.findall('./name')[0].text.strip()
@@ -315,7 +315,7 @@ def get_or_create_publisher(romeo_xml_description):
     # Update the publisher status
     publisher.oa_status = publisher.classify_oa_status()
     publisher.save(update_fields=['oa_status'])
-    
+
     for link in xml.findall('./copyrightlinks/copyrightlink'):
         text = None
         url = None

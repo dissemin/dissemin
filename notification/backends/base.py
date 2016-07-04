@@ -7,7 +7,7 @@ class NotificationBackend(object):
         :param level: a notification level (could be seen as priority)
         :param payload: a dict payload serializable (depends on implementation detail: JSON / MsgPack / whatever)
         :param date: a date to deliver the notification on (default: now)
-        
+
         :returns: a Notification instance
         """
         raise NotImplementedError
@@ -21,7 +21,7 @@ class NotificationBackend(object):
         :returns: an iterable containing `Notification` instances
         """
         raise NotImplementedError
-    
+
     def inbox_purge(self, user):
         """
         Delete all the notifications in `user` inbox.
@@ -31,7 +31,7 @@ class NotificationBackend(object):
         :returns: nothing.
         """
         raise NotImplementedError
-    
+
     def inbox_store(self, users, notification):
         """
         Store a `Notification` instance in the inbox for the list of users.
@@ -57,7 +57,7 @@ class NotificationBackend(object):
         """
 
         raise NotImplementedError
-    
+
     def inbox_get(self, user, notification_id):
         """
         Get a `Notification` from a user inbox.

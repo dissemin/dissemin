@@ -1,7 +1,7 @@
 # coding: utf-8
 
 ### Security key ###
-# This is used by django to generate various things (mainly for 
+# This is used by django to generate various things (mainly for
 # authentication). Just pick a fairly random string and keep it
 # secret.
 SECRET_KEY = '40@!t4mmh7325-^wh+jo3teu^!yj3lfz5p%ok(8+7th8pg^hy1'
@@ -35,7 +35,7 @@ EMAIL_USE_TLS = True
 
 ### API keys ###
 # These keys are used to communicate with various interfaces. See
-# http://dissemin.readthedocs.org/en/latest/apikeys.html 
+# http://dissemin.readthedocs.org/en/latest/apikeys.html
 
 # RoMEO API KEY
 # Used to fetch publisher policies. Get one at

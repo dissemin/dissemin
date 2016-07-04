@@ -7,12 +7,12 @@
 # modify it under the terms of the GNU Affero General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU Affero General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU Affero General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -81,7 +81,7 @@ class DCFormatter(MetadataFormatter):
         if paper.abstract:
             addChild(entry, dcterms+'abstract', paper.abstract)
         addChild(entry, dcterms+'type', paper.doctype)
-        
+
         for a in paper.authors:
             addChild(entry, dcterms+'contributor', unicode(a))
 
@@ -191,7 +191,7 @@ class AOFRFormatter(MetadataFormatter):
         title = addChild(root, 'title')
         title.attrib[XMLLANG_ATTRIB] = 'en' # TODO: autodetect language?
         title.text = paper.title
-        
+
         for author in paper.authors:
             node = addChild(root, 'author')
             node.attrib['role'] = 'aut'
@@ -223,7 +223,7 @@ class AOFRFormatter(MetadataFormatter):
         title.text = publi.full_title()
 
         imprint = addChild(root, 'imprint')
-               
+
         if publi.publisher:
             publisher = addChild(imprint, 'publisher')
             publisher.text = unicode(publi.publisher)
@@ -242,7 +242,7 @@ class AOFRFormatter(MetadataFormatter):
         if publi.doi:
             idno = addChild(biblStruct, 'idno')
             idno.attrib['type'] = 'doi'
-            idno.text = publi.doi 
+            idno.text = publi.doi
 
         data = addChild(imprint, 'date')
         data.attrib['type'] = 'datePub'

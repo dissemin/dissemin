@@ -7,12 +7,12 @@
 # modify it under the terms of the GNU Affero General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU Affero General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU Affero General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -301,7 +301,7 @@ def urlize(val):
 def jpath(path, js, default=None):
     """
     XPath for JSON!
-    
+
     :param path: a list of keys to follow in the tree of dicts, written in a string,
                 separated by forward slashes
     :param default: the default value to return when the key is not found
@@ -436,14 +436,14 @@ def tolerant_datestamp_to_datetime(datestamp):
     elif len(d_splitted) == 1:
         YYYY = d_splitted[0]
         MM = '01'
-        DD = '01'  
+        DD = '01'
     else:
         raise ValueError("Invalid datestamp: "+str(datestamp))
     if (len(YYYY) != 4 or
         len(MM) > 2 or
         len(DD) > 2):
         raise ValueError("Invalid datestamp: "+str(datestamp))
-    
+
     t_splitted = t.split(':')
     if len(t_splitted) == 3:
         hh, mm, ss = t_splitted
@@ -533,7 +533,7 @@ def affiliation_is_greater(a, b):
 def index_of(elem, choices):
     """
     Returns the index of elem (understood as a code) in the list of choices,
-    where choices are expected to be pairs of (code,verbose_description). 
+    where choices are expected to be pairs of (code,verbose_description).
 
     >>> index_of(42, [])
     0

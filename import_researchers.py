@@ -41,7 +41,7 @@ def import_from_tsv(filename):
         except ValueError:
             print "ValueError"
             continue
-       
+
         group = fields[group_f]
         if group:
             g, created = ResearchGroup.objects.get_or_create(name=group)

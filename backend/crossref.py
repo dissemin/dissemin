@@ -7,12 +7,12 @@
 # modify it under the terms of the GNU General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -73,7 +73,7 @@ from dissemin.settings import DOI_PROXY_DOMAIN, DOI_PROXY_SUPPORTS_BATCH
 # We do not need to use content negotation to fetch the metadata from CrossRef
 # as it is already provided in the search results.
 #
-# Content negotiation remains useful for other providers (DOIs discovered by 
+# Content negotiation remains useful for other providers (DOIs discovered by
 # other means).
 #
 # 3. How this module is used in dissemin
@@ -104,7 +104,7 @@ def is_oa_license(license_url):
     """
     This function returns whether we expect a publication under a given license
     to be freely available from the publisher.
-    
+
     Licenses are as expressed in CrossRef: see http://api.crossref.org/licenses
     """
     if "creativecommons.org/licenses/" in license_url:
@@ -384,7 +384,7 @@ class CrossRefAPI(object):
         :param extra_orcids: an optional orcids list, which will be unified
             with the orcids extracted from the metadata. This is useful for the ORCID interface.
         :returns: the paper, created if needed
-        """        
+        """
         # Normalize metadata
         if metadata is None or type(metadata) != dict:
             if metadata is not None:
@@ -406,7 +406,7 @@ class CrossRefAPI(object):
 
         if pubdate is None:
             raise ValueError('No pubdate')
-        
+
         title = metadata['title']
         # CrossRef metadata stores titles in lists
         if type(title) == list:
@@ -440,7 +440,7 @@ class CrossRefAPI(object):
             orcids = new_orcids
         affiliations = map(get_affiliation, metadata['author'])
 
-        paper = BarePaper.create(title, authors, pubdate, 
+        paper = BarePaper.create(title, authors, pubdate,
                 visible=True, affiliations=affiliations, orcids=orcids)
 
         result = create_publication(paper, metadata)
@@ -469,7 +469,7 @@ class CrossRefAPI(object):
             params['query'] = query
         if filters:
             params['filter'] = ','.join(map(lambda (k,v): k+":"+v, filters.items()))
-        
+
         count = 0
         rows = 20
         offset = 0
@@ -477,7 +477,7 @@ class CrossRefAPI(object):
             url = 'http://api.crossref.org/works'
             params['rows'] = rows
             params['offset'] = offset
-            
+
             try:
                 r = requests.get(url, params=params)
                 print "CROSSREF: "+r.url
@@ -490,7 +490,7 @@ class CrossRefAPI(object):
                     break
             except ValueError as e:
                 raise MetadataSourceException('Error while fetching CrossRef results:\nInvalid response.\n'+
-                        'URL was: %s\nParameters were: %s\nJSON parser error was: %s' % (url,urlencode(params),unicode(e))) 
+                        'URL was: %s\nParameters were: %s\nJSON parser error was: %s' % (url,urlencode(params),unicode(e)))
             except requests.exceptions.RequestException as e:
                 raise MetadataSourceException('Error while fetching CrossRef results:\nUnable to open the URL: '+
                         request+'\nError was: '+str(e))

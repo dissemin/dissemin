@@ -7,12 +7,12 @@
 # modify it under the terms of the GNU Affero General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU Affero General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU Affero General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -44,7 +44,7 @@ This module defines most of the models used in the platform.
    All the authors that could potentially be associated with a given :class:`Researcher`
    (that is when their name is a :class:`NameVariant` for that researcher) are clustered
    in groups by merging similar authors (i.e. authors associated to similar papers).
-   
+
 * Researchers can be organized into :class:`Department` instances, which belong to an
   :class:`Institution`.
 
@@ -104,7 +104,7 @@ class Institution(models.Model):
     """
     A university or research institute.
     """
-    #: The full name of the institution 
+    #: The full name of the institution
     name = models.CharField(max_length=300)
 
     #: :py:class:`AccessStatistics` about the papers authored in this institution.
@@ -279,7 +279,7 @@ class Researcher(models.Model):
         """
         All the names found in papers that could belong to the researcher.
         Among these names, at least the preferred :py:attr:`name`
-        should have confidence 1.0 (other names can have confidence 1.0 if 
+        should have confidence 1.0 (other names can have confidence 1.0 if
         multiple names are known. The other names have been found in publications
         and are similar to one of these 1.0 confidence name variants.
         """
@@ -348,7 +348,7 @@ class Researcher(models.Model):
 
     def fetch_everything(self):
         self.harvester = send_task('fetch_everything_for_researcher', [], {'pk':self.id}).id
-        self.current_task = 'init' 
+        self.current_task = 'init'
         self.save(update_fields=['harvester','current_task'])
 
     def fetch_everything_if_outdated(self):
@@ -382,7 +382,7 @@ class Researcher(models.Model):
             researcher = Researcher.objects.get(orcid=orcid)
         except Researcher.DoesNotExist:
             if profile is None:
-                profile = OrcidProfile(id=orcid) 
+                profile = OrcidProfile(id=orcid)
             else:
                 profile = OrcidProfile(json=profile)
             name = profile.name
@@ -633,7 +633,7 @@ class Paper(models.Model, BarePaper):
 
         The change is not commited to the database
         (you need to call save() afterwards).
-        
+
         :param position: add the author at that index.
         """
         author_serialized = author.serialize()
@@ -694,7 +694,7 @@ class Paper(models.Model, BarePaper):
     def from_bare(cls, paper):
         """
         Saves a paper to the database if it is not already present.
-        The clustering algorithm is run to decide what authors should be 
+        The clustering algorithm is run to decide what authors should be
         attributed to the paper.
 
         :returns: the :class:`Paper` instance created from the bare paper supplied.
@@ -738,7 +738,7 @@ class Paper(models.Model, BarePaper):
     def already_asked_for_upload(self):
         if self.date_last_ask == None:
             return False
-        else: 
+        else:
             return ((datetime.now().date() - self.pubdate) <= timedelta(days=10))
 
     def can_be_asked_for_upload(self):
@@ -773,7 +773,7 @@ class Paper(models.Model, BarePaper):
         """
         Updates the :class:`Paper`'s own `pdf_url` field
         based on its sources (:class:`OaiRecord`).
-        
+
         This uses a non-trivial logic, hence it is useful to keep this result cached
         in the database row.
 
@@ -790,7 +790,7 @@ class Paper(models.Model, BarePaper):
         Helptext displayed next to the paper logo
         """
         return STATUS_CHOICES_HELPTEXT[self.combined_status]
-    
+
     @property
     def combined_status(self):
         """
@@ -830,7 +830,7 @@ class Paper(models.Model, BarePaper):
 
     def successful_deposits(self):
         return self.depositrecord_set.filter(pdf_url__isnull=False)
-    
+
     def invalidate_cache(self):
         """
         Invalidate the HTML cache for all the publications of this researcher.
@@ -841,7 +841,7 @@ class Paper(models.Model, BarePaper):
                 if a.researcher_id is None:
                     continue
                 else:
-                    rpk = a.researcher_id 
+                    rpk = a.researcher_id
             for lang in POSSIBLE_LANGUAGE_CODES:
                 key = make_template_fragment_key('publiListItem', [self.pk, lang, rpk])
                 cache.delete(key)
@@ -872,9 +872,9 @@ class Paper(models.Model, BarePaper):
         unified_authors = []
         for new_name, (old_idx, new_idx) in unified_names:
             if new_name is None:
-                # skip duplicate names        
+                # skip duplicate names
                 continue
-            
+
             # Create the author
             author = None
             if old_idx is not None:
@@ -893,7 +893,7 @@ class Paper(models.Model, BarePaper):
                 author.affiliation = new_authors[new_idx].affiliation
             if new_idx is not None and new_authors[new_idx].orcid:
                 author.orcid = new_authors[new_idx].orcid
-            
+
             unified_authors.append(author.serialize())
         self.authors_list = unified_authors
         if save_now:
@@ -911,7 +911,7 @@ class Paper(models.Model, BarePaper):
 
         if self.pk == paper.pk:
             return
-        
+
         oldid = paper.id
         self.visible = paper.visible or self.visible
 
@@ -927,7 +927,7 @@ class Paper(models.Model, BarePaper):
         copied.__dict__.update(paper.__dict__)
         copied.delete()
 
-        paper.id = self.id 
+        paper.id = self.id
         self.update_availability()
 
     def recompute_fingerprint_and_merge_if_needed(self):
@@ -982,7 +982,7 @@ class Paper(models.Model, BarePaper):
 # Rough data extracted through OAI-PMH
 class OaiSource(CachingMixin, models.Model):
     objects = CachingManager()
-    
+
     identifier = models.CharField(max_length=300, unique=True)
     name = models.CharField(max_length=100)
     oa = models.BooleanField(default=False)
@@ -1036,7 +1036,7 @@ class OaiRecord(models.Model, BareOaiRecord):
     @classmethod
     def new(cls, **kwargs):
         """
-        Creates a new OAI record by checking first for duplicates and 
+        Creates a new OAI record by checking first for duplicates and
         updating them if necessary.
         """
         source = None
@@ -1060,7 +1060,7 @@ class OaiRecord(models.Model, BareOaiRecord):
             raise ValueError('No URL provided to create the OAI record.')
         splash_url = kwargs['splash_url']
         pdf_url = kwargs.get('pdf_url')
-    
+
         # Has the paper we are trying to add a record to been just
         # created? If so, we should not search for duplicate records in
         # the paper itself.
@@ -1103,7 +1103,7 @@ class OaiRecord(models.Model, BareOaiRecord):
                     record.save()
                 return record
             except IntegrityError as e:
-                match = OaiRecord.objects.get(identifier=identifier) 
+                match = OaiRecord.objects.get(identifier=identifier)
 
         # Update the duplicate if necessary
         if match:
@@ -1123,7 +1123,7 @@ class OaiRecord(models.Model, BareOaiRecord):
                         len(match.__dict__[field]) < len(new_val)):
                     match.__dict__[field] = new_val
                     changed = True
-            
+
             update_field_conditionally('contributors')
             update_field_conditionally('keywords')
             update_field_conditionally('description')
@@ -1138,7 +1138,7 @@ class OaiRecord(models.Model, BareOaiRecord):
                 if idx < old_idx:
                     changed = True
                     match.pubtype = PAPER_TYPE_PREFERENCE[idx]
-                
+
             if changed:
                 try:
                     match.save()
@@ -1150,19 +1150,19 @@ class OaiRecord(models.Model, BareOaiRecord):
 
             return match
 
-   
+
     @classmethod
     def find_duplicate_records(cls, paper, splash_url, pdf_url):
         """
         Finds duplicate OAI records. These duplicates can have a different identifier,
         or slightly different urls (for instance https:// instead of http://).
-        
+
         :param paper: the :class:`Paper` the record is about
         :param splash_url: the splash url of the target record (link to the metadata page)
         :param pdf_url: the url of the PDF, if known (otherwise `None`)
         """
         https_re = re.compile(r'https?(.*)')
-        
+
         def shorten(url):
             """
             removes the 'https?' prefix or converts to DOI

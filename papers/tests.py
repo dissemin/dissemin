@@ -7,12 +7,12 @@
 # modify it under the terms of the GNU Affero General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU Affero General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU Affero General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -133,17 +133,17 @@ class PaperTest(django.test.TestCase):
         p2 = Paper.create_by_doi('10.1016/j.chemgeo.2015.03.025')
         r2 = Researcher.create_by_name('Priscille','Lesne')
         p2.set_researcher(0, r2.id)
-        
+
         # merge them ! even if they actually don't have anything
         # to do together
         p1.merge(p2)
-        
+
         p1.check_authors()
         seen_rids = set()
         for a in p1.authors:
             if a.researcher_id:
                 seen_rids.add(a.researcher_id)
         self.assertEqual(seen_rids,
-            set([r1.id, r2.id])) 
-        
+            set([r1.id, r2.id]))
+
 

@@ -7,12 +7,12 @@
 # modify it under the terms of the GNU Affero General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU Affero General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU Affero General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -109,7 +109,7 @@ class RepositoryProtocol(object):
         """
         Submit a paper to the repository.
         This is expected to raise DepositError if something goes wrong.
-        
+
         :param pdf: Filename to the PDF file to submit
         :param form: The form returned by get_form and completed by the user.
         :returns: a DepositResult object.
@@ -135,7 +135,7 @@ class RepositoryProtocol(object):
                     splash_url=result.splash_url,
                     pdf_url=result.pdf_url)
 
-            self.paper.update_author_stats() # TODO write an unit test for this        
+            self.paper.update_author_stats() # TODO write an unit test for this
             return result
         except DepositError as e:
             self.log('Message: '+e.args[0])

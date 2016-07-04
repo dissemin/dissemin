@@ -7,12 +7,12 @@
 # modify it under the terms of the GNU Affero General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU Affero General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU Affero General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -68,7 +68,7 @@ class OaiTest(TestCase):
         self.assertNotEqual(hal_paper.pdf_url, None)
         self.assertEqual(hal_paper.fingerprint,
                 hal_paper.new_fingerprint())
-    
+
     def test_create_already_existing(self):
         """
         Creation of a paper from an OAI record,
@@ -81,7 +81,7 @@ class OaiTest(TestCase):
         self.delete(oai_id)
         # create a paper from BASE
         hal_paper = self.create(oai_id, 'base_dc')
-        
+
         # Create it again!
         new_paper = self.create(oai_id, 'base_dc')
 
@@ -91,8 +91,8 @@ class OaiTest(TestCase):
         self.assertListEqual(new_paper.bare_author_names(),
                             hal_paper.bare_author_names())
         self.assertEqual(new_paper.title, hal_paper.title)
- 
-    
+
+
     def test_create_match_fp(self):
         """
         Addition of an OAI record when it is matched
@@ -104,7 +104,7 @@ class OaiTest(TestCase):
         hal_paper = self.create(
             'ftccsdartic:oai:hal.archives-ouvertes.fr:hal-00939473',
             'base_dc')
-        
+
         # Save the existing records
         records = set(hal_paper.oairecords)
         # Create a new paper (refers to the same paper, but coming from
@@ -157,7 +157,7 @@ class OaiTest(TestCase):
         first = self.create(
             'oai:crossref.org:10.1007/s10858-015-9994-8',
             'citeproc')
-        # initially the PDF url should be empty 
+        # initially the PDF url should be empty
         self.assertEqual(first.oairecords[0].pdf_url, None)
 
         # then we import a new identifier
@@ -186,7 +186,7 @@ class OaiTest(TestCase):
         hal_paper.title += ' babebibobu'
         hal_paper.fingerprint = hal_paper.new_fingerprint()
         hal_paper.save()
-        
+
         # add the OAI record again
         new_paper = self.create(identifier, 'base_dc')
         self.assertEqual(new_paper, hal_paper)
@@ -215,7 +215,7 @@ class OaiTest(TestCase):
         """
         with self.assertRaises(BadArgumentError):
             self.create('aiunrsecauiebleuiest', 'oai_dc')
-    
+
     def test_create_invalid_format(self):
         """
         Fetching with an invalid format from OAI
@@ -223,7 +223,7 @@ class OaiTest(TestCase):
         # Format not available from the interface
         with self.assertRaises(BadArgumentError):
             self.create('aiunrsecauiebleuiest', 'unknown_format')
-        
+
 
     # tests of particular translators
     # TODO: translate them as tests of the translators and not the
@@ -237,11 +237,11 @@ class OaiTest(TestCase):
             'ftartxiker:oai:HAL:hal-00845819v1':'journal-article',
             'ftdatacite:oai:oai.datacite.org:402223':'dataset',
         }
-            
+
         for ident, typ in mappings.items():
             paper = self.create(ident, 'base_dc')
             self.assertEqual(paper.doctype, typ)
-        
+
 
     def test_crossref_invalid_metadata(self):
         # authors with no family name

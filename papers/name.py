@@ -7,12 +7,12 @@
 # modify it under the terms of the GNU Affero General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU Affero General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU Affero General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -73,7 +73,7 @@ def rebuild_name(name_words, separators):
     len(name_words) = len(separators) + 1 is assumed.
 
     :param name_words: The list of name words (without periods)
-    :param separators: The list of separators ('' or '-'). 
+    :param separators: The list of separators ('' or '-').
     """
     separators = map(lambda x: ' ' if x == '' else x, separators)
     output = ''
@@ -430,7 +430,7 @@ def parse_comma_name(name):
             (last,first) = predsplit_forward(
                     (lambda i: capitalized[i] and not initial[i]),
                     words)
-            
+
 
         # CASE 2: the last word is capitalized but not all of them are
         # we assume that it is the last word of the last name
@@ -471,7 +471,7 @@ def parse_comma_name(name):
         else:
             prefix, first_name, last_name, suffix = name_tools.split(name)
             from_lists = False
-            
+
         if from_lists:
             first_name = ' '.join(first)
             last_name = ' '.join(last)
@@ -524,7 +524,7 @@ def name_unification(a, b):
     if lastA.lower() != lastB.lower():
         return None
 
-    wordsA, sepsA = split_name_words(firstA) 
+    wordsA, sepsA = split_name_words(firstA)
     wordsB, sepsB = split_name_words(firstB)
 
     def keep_best(pair):
@@ -583,7 +583,7 @@ def unify_name_lists(a,b):
               (None when there is no corresponding name in one of the lists).
     """
     # TODO some normalization of last names? for instance case, hyphens…
-    
+
     a = sorted(enumerate(a), key=lambda (idx,(first,last)): (last,first))
     b = sorted(enumerate(b), key=lambda (idx,(first,last)): (last,first))
 
@@ -647,4 +647,4 @@ def unify_name_lists(a,b):
                 yield (None,idx)
 
     return list(make_unique(result))
-    
+
