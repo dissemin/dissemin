@@ -48,11 +48,11 @@ class ProtocolTest(PrefilledTest):
     @classmethod
     @override_settings(MEDIA_ROOT='mediatest/')
     def setUpClass(self):
-        super(ProtocolTest, self).setUpClass()
         if self is ProtocolTest:
              raise unittest.SkipTest("Base test")
         if 'TRAVIS' in os.environ:
             raise unittest.SkipTest("Skipping deposit test on Travis to avoid mass submissions to sandboxes")
+        super(ProtocolTest, self).setUpClass()
         self.p1 = Paper.get_or_create(
                 "This is a test paper",
                 [self.r1.name, self.r2.name, self.r4.name],

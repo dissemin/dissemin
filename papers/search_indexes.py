@@ -40,10 +40,11 @@ class PaperIndex(indexes.SearchIndex, indexes.Indexable):
         return 'OK' if obj.pdf_url else 'NOK'
 
     def prepare_researchers(self, obj):
-        return [r.id for r in obj.researchers.all()]
+        return list(obj.researchers.values_list('id', flat=True))
 
     def prepare_departments(self, obj):
-        return list(set([r.department.id for r in obj.researchers.all()]))
+        return list(obj.researchers.filter(department__isnull=False)
+                    .values_list('department', flat=True))
 
     def prepare_publisher(self, obj):
         oairecord = obj.oairecords.filter(journal__isnull=False).first()
