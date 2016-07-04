@@ -408,6 +408,10 @@ def tolerant_datestamp_to_datetime(datestamp):
     Traceback (most recent call last):
         ...
     ValueError: Invalid datestamp: 2016-02-11T18:37:09:38
+    >>> tolerant_datestamp_to_datetime('20151023371')
+    Traceback (most recent call last):
+        ...
+    ValueError: Invalid datestamp: 20151023371
 
     """
     splitted = datestamp.split('T')
@@ -432,8 +436,12 @@ def tolerant_datestamp_to_datetime(datestamp):
     elif len(d_splitted) == 1:
         YYYY = d_splitted[0]
         MM = '01'
-        DD = '01'   
+        DD = '01'  
     else:
+        raise ValueError("Invalid datestamp: "+str(datestamp))
+    if (len(YYYY) != 4 or
+        len(MM) > 2 or
+        len(DD) > 2):
         raise ValueError("Invalid datestamp: "+str(datestamp))
     
     t_splitted = t.split(':')

@@ -220,12 +220,14 @@ class OaiTest(TestCase):
         """
         Fetching with an invalid format from OAI
         """
-        # Format not registered
-        # TODO
         # Format not available from the interface
         with self.assertRaises(BadArgumentError):
             self.create('aiunrsecauiebleuiest', 'unknown_format')
         
+
+    # tests of particular translators
+    # TODO: translate them as tests of the translators and not the
+    # whole backend?
 
     def test_base_doctype(self):
         mappings = {
@@ -241,3 +243,9 @@ class OaiTest(TestCase):
             self.assertEqual(paper.doctype, typ)
         
 
+    def test_crossref_invalid_metadata(self):
+        # authors with no family name
+        paper = self.create(
+                'oai:crossref.org:10.4156/aiss.vol3.issue9.31',
+                'citeproc')
+        self.assertEqual(paper, None)

@@ -73,6 +73,17 @@ class RomeoTest(TestCase):
         journal = fetch_journal(terms)
         self.assertEqual(journal.publisher.alias, 'Научный издательский дом Исследов')
 
+    def test_too_long(self):
+        terms = {'jtitle': ("Volume 3: Industrial Applications; Modeling "
+            "for Oil and Gas, Control and Validation, Estimation, and Control of "
+            "Automotive Systems; Multi-Agent and Networked Systems; Control System "
+            "Design; Physical Human-Robot Interaction; "
+            "Rehabilitation Robotics; Sensing and Actuation for Control; Biomedical "
+            "Systems; Time Delay Systems and Stability; Unmanned Ground and Surface "
+            "Robotics; Vehicle Motion Controls; Vibration Analysis and Isolation; "
+            "Vibration and Control for Energy Harvesting; Wind Energy")}
+        self.assertEqual(fetch_journal(terms), None)
+
     def test_openaccess(self):
         self.assertEqual(fetch_journal({'issn':'1471-2105'}).publisher.oa_status, 'OA')
         self.assertEqual(fetch_journal({'issn':'1951-6169'}).publisher.oa_status, 'OA')

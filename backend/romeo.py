@@ -114,6 +114,8 @@ def fetch_journal(search_terms, matching_mode = 'exact'):
     # Remove diacritics (because it has to be sent in ASCII to ROMEO)
     for key in search_terms:
         search_terms[key] = remove_diacritics(search_terms[key])
+        if len(search_terms[key]) > 256:
+            return None
 
     # First check we don't have it already
     journal = find_journal_in_model(search_terms)

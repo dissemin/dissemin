@@ -391,14 +391,14 @@ class CrossRefAPI(object):
                 print "WARNING: Invalid metadata: type is "+str(type(metadata))
                 print "The doi proxy is doing something nasty!"
             raise ValueError('Invalid metadata format, expecting a dict')
-        if not 'author' in metadata:
+        if not metadata.get('author'):
             raise ValueError('No author provided')
 
-        if not 'title' in metadata or not metadata['title']:
+        if not metadata.get('title'):
             raise ValueError('No title')
 
         # the upstream function ensures that there is a non-empty title
-        if not 'DOI' in metadata or not metadata['DOI']:
+        if not metadata.get('DOI'):
             raise ValueError("No DOI, skipping")
         doi = to_doi(metadata['DOI'])
 
@@ -417,8 +417,11 @@ class CrossRefAPI(object):
                 subtitle = subtitle[0]
             title += ': '+subtitle
 
+        name_pairs = map(convert_to_name_pair, metadata['author'])
+        if None in name_pairs:
+            raise ValueError('Invalid author')
         authors = [ BareName.create_bare(first,last) for first,last in
-                    map(convert_to_name_pair, metadata['author']) ]
+                    name_pairs ]
 
         def get_affiliation(author_elem):
             for dct in author_elem.get('affiliation', []):
