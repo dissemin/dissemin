@@ -21,6 +21,7 @@ django-redis-cache
 django-rest-swagger
 django-solo
 django-widget-tweaks
+django-memoize
 djangorestframework
 elasticsearch
 html5lib

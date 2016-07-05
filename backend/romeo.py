@@ -23,6 +23,7 @@ from __future__ import unicode_literals
 import lxml.etree as ET
 from lxml.html import fromstring
 from io import StringIO, BytesIO
+from memoize import memoize
 
 import requests
 import requests.exceptions
@@ -94,12 +95,18 @@ def find_journal_in_model(search_terms):
         if matches:
             return matches[0]
 
-
 def fetch_journal(search_terms, matching_mode = 'exact'):
     """
     Fetch the journal data from RoMEO. Returns an Journal object.
     search_terms should be a dictionnary object containing at least one of these fields:
     """
+    journal = _memoized_fetch_journal(search_terms, matching_mode)
+    if journal != 'none': # @memoize does not cache None
+        return journal
+
+@memoize(timeout=864000) # 10 days
+def _memoized_fetch_journal(search_terms, matching_mode):
+
     allowed_fields = ['issn', 'jtitle']
     # Make the title HTML-safe before searching for it in the database or in the API
     if 'title' in search_terms:
@@ -115,7 +122,7 @@ def fetch_journal(search_terms, matching_mode = 'exact'):
     for key in search_terms:
         search_terms[key] = remove_diacritics(search_terms[key])
         if len(search_terms[key]) > 256:
-            return None
+            return 'none'
 
     # First check we don't have it already
     journal = find_journal_in_model(search_terms)
@@ -123,16 +130,15 @@ def fetch_journal(search_terms, matching_mode = 'exact'):
         return journal
 
     # Perform the query
+    search_terms['qtype'] = matching_mode
     root = perform_romeo_query(search_terms)
 
     # Find the matching journals (if any)
     journals = list(root.findall('./journals/journal'))
+
     if not journals:
-        # Retry with a less restrictive matching type
-        if matching_mode == 'exact':
-            return fetch_journal(original_search_terms, 'contains')
-        return None
-    if len(journals) > 1:
+        return 'none'
+    elif len(journals) > 1:
         print ("Warning, "+str(len(journals))+" journals match the RoMEO request, "+
                 "defaulting to the first one")
         # TODO different behaviour: get the ISSN and try again.
@@ -161,7 +167,7 @@ def fetch_journal(search_terms, matching_mode = 'exact'):
     # Otherwise we need to find the publisher
     publishers = root.findall('./publishers/publisher')
     if not publishers:
-        return None
+        return 'none'
     # TODO here we shouldn't default to the first one but look it up using the <romeopub>
     publisher_desc = publishers[0]
 
