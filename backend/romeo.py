@@ -108,30 +108,31 @@ def fetch_journal(search_terms, matching_mode = 'exact'):
 def _memoized_fetch_journal(search_terms, matching_mode):
 
     allowed_fields = ['issn', 'jtitle']
+    terms = search_terms.copy()
     # Make the title HTML-safe before searching for it in the database or in the API
-    if 'title' in search_terms:
-        search_terms['title'] = kill_html(search_terms['title'])
-    original_search_terms = search_terms.copy()
+    if 'title' in terms:
+        terms['title'] = kill_html(terms['title'])
 
     # Check the arguments
-    if not all(map(lambda x: x in allowed_fields, (key for key in search_terms))):
+    if not all(map(lambda x: x in allowed_fields, (key for key in terms))):
         raise ValueError('The search terms have to belong to '+str(allowed_fields)+
-                'but the dictionary I got is '+str(search_terms))
+                'but the dictionary I got is '+str(terms))
 
     # Remove diacritics (because it has to be sent in ASCII to ROMEO)
-    for key in search_terms:
-        search_terms[key] = remove_diacritics(search_terms[key])
-        if len(search_terms[key]) > 256:
+    for key in terms:
+        terms[key] = remove_diacritics(terms[key])
+        if len(terms[key]) > 256:
             return 'none'
 
     # First check we don't have it already
-    journal = find_journal_in_model(search_terms)
+    journal = find_journal_in_model(terms)
     if journal:
         return journal
 
     # Perform the query
-    search_terms['qtype'] = matching_mode
-    root = perform_romeo_query(search_terms)
+    if matching_mode != 'exact':
+        terms['qtype'] = matching_mode
+    root = perform_romeo_query(terms)
 
     # Find the matching journals (if any)
     journals = list(root.findall('./journals/journal'))
