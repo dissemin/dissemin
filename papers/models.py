@@ -691,6 +691,10 @@ class Paper(models.Model, BarePaper):
         return cls.from_bare(p)
 
     @classmethod
+    def find_by_fingerprint(cls, fp):
+        return Paper.objects.filter(fingerprint__exact=fp)
+
+    @classmethod
     def from_bare(cls, paper):
         """
         Saves a paper to the database if it is not already present.
@@ -702,7 +706,7 @@ class Paper(models.Model, BarePaper):
         try:
             # Look up the fingerprint
             fp = paper.fingerprint
-            matches = Paper.objects.filter(fingerprint__exact=fp)
+            matches = Paper.find_by_fingerprint(fp)
 
             p = None
             if matches: # We have found a paper matching the fingerprint
@@ -1074,36 +1078,37 @@ class OaiRecord(models.Model, BareOaiRecord):
 
         # We don't search for records with the same identifier yet,
         # we will rather catch the exception thrown by the DB
+        if not match:
+            same_identifier = OaiRecord.objects.filter(identifier=identifier)
+            if same_identifier:
+                match = same_identifier[0]
 
         if not match:
-            try:
-                # Otherwise create a new record
-                record = OaiRecord(
-                        source=source,
-                        identifier=identifier,
-                        splash_url=splash_url,
-                        pdf_url=pdf_url,
-                        about=about,
-                        description=kwargs.get('description'),
-                        keywords=kwargs.get('keywords'),
-                        contributors=kwargs.get('contributors'),
-                        pubtype=kwargs.get('pubtype', source.default_pubtype),
-                        priority=source.priority,
-                        journal_title=kwargs.get('journal_title'),
-                        container=kwargs.get('container'),
-                        publisher_name=kwargs.get('publisher_name'),
-                        issue=kwargs.get('issue'),
-                        volume=kwargs.get('volume'),
-                        pages=kwargs.get('pages'),
-                        doi=kwargs.get('doi'),
-                        publisher=kwargs.get('publisher'),
-                        journal=kwargs.get('journal'),
-                        )
-                with transaction.atomic():
-                    record.save()
-                return record
-            except IntegrityError as e:
-                match = OaiRecord.objects.get(identifier=identifier)
+            # Otherwise create a new record
+            record = OaiRecord(
+                    source=source,
+                    identifier=identifier,
+                    splash_url=splash_url,
+                    pdf_url=pdf_url,
+                    about=about,
+                    description=kwargs.get('description'),
+                    keywords=kwargs.get('keywords'),
+                    contributors=kwargs.get('contributors'),
+                    pubtype=kwargs.get('pubtype', source.default_pubtype),
+                    priority=source.priority,
+                    journal_title=kwargs.get('journal_title'),
+                    container=kwargs.get('container'),
+                    publisher_name=kwargs.get('publisher_name'),
+                    issue=kwargs.get('issue'),
+                    volume=kwargs.get('volume'),
+                    pages=kwargs.get('pages'),
+                    doi=kwargs.get('doi'),
+                    publisher=kwargs.get('publisher'),
+                    journal=kwargs.get('journal'),
+                    )
+            #with transaction.atomic():
+            record.save()
+            return record
 
         # Update the duplicate if necessary
         if match:
