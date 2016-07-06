@@ -72,3 +72,9 @@ script:
 
 after_success:
   - coveralls
+
+notifications:
+  webhooks:
+    urls:
+      - lahfa.xyz:8080/Openbot/travisci/dissemin
+    on_start: true
