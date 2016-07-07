@@ -371,6 +371,13 @@ li
     color: #272743;
 }
 
+.paperDownloadDomain
+{
+    color: #6e6e6e;
+    font-size: 0.9em;
+    margin-left: 5px;
+}
+
 .paperAuthors
 {
     font-size: 0.95em;
