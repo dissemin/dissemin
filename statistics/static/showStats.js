@@ -4,7 +4,7 @@ var stats_colors_aggregated = ["#43A000", "#DB1456"];
 function readablizeNumber (number) {
   var units = ['', 'k', 'M', 'G', 'T', 'P'];
   var e = Math.floor(Math.log(number) / Math.log(1000));
-  return (number / Math.pow(1000, e)).toFixed(2) + " " + units[e];
+  return (number / Math.pow(1000, e)).toFixed((e > 0) ? 2 : 0) + " " + units[e];
 }
 
 function preProcessData(data) {
