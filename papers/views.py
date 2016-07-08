@@ -36,8 +36,6 @@ from haystack.generic_views import SearchView
 from haystack.query import EmptySearchQuerySet
 from search import SearchQuerySet
 
-from celery.execute import send_task
-
 from papers.models import *
 from papers.forms import AddUnaffiliatedResearcherForm, PaperForm
 from papers.user import is_admin, is_authenticated
@@ -286,19 +284,13 @@ class JournalPapersView(PublisherPapersView):
     publisher_cls = Journal
     published_by = _(' in ')
 
-
-@user_passes_test(is_admin)
-def reclusterResearcher(request, pk):
-    source = get_object_or_404(Researcher, pk=pk)
-    send_task('recluster_researcher', [], {'pk':pk})
-    return redirect(request.META['HTTP_REFERER'])
-
+# TODO: this should be moved to /ajax/
 @user_passes_test(is_authenticated)
 def refetchResearcher(request, pk):
     researcher = get_object_or_404(Researcher, pk=pk)
     if researcher.user != request.user and not request.user.is_staff:
         return HttpResponseForbidden("Not authorized to update papers for this researcher.")
-    send_task('fetch_everything_for_researcher', [], {'pk':pk})
+    fetch_everything_for_researcher.delay(pk=pk)
     return redirect(request.META['HTTP_REFERER'])
 
 

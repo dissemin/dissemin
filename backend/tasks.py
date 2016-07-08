@@ -40,8 +40,7 @@ from papers.doi import to_doi
 from backend.crossref import *
 from backend.proxy import BASE_LOCAL_ENDPOINT
 from backend.orcid import *
-from backend.name_cache import name_lookup_cache
-from backend.extractors import * # to ensure that OaiSources are created
+import backend.extractors # to ensure that OaiSources are created
 from backend.utils import run_only_once
 
 logger = get_task_logger(__name__)
@@ -72,9 +71,6 @@ def init_profile_from_orcid(pk):
 
 @shared_task(name='fetch_everything_for_researcher')
 @run_only_once('researcher', keys=['pk'], timeout=15*60)
-def fetch_everything_for_reseracher_task(pk):
-    fetch_everything_for_researcher(pk)
-
 def fetch_everything_for_researcher(pk):
     sources = [
         ('orcid',OrcidPaperSource(max_results=1000)),
@@ -99,16 +95,6 @@ def fetch_everything_for_researcher(pk):
         r.update_stats()
         r.harvester = None
         update_researcher_task(r, None)
-        name_lookup_cache.prune()
-
-@shared_task(name='recluster_researcher')
-@run_only_once('researcher', keys=['pk'], timeout=15*60)
-def recluster_researcher(pk):
-    try:
-        r = Researcher.objects.get(pk=pk)
-    finally:
-        r.update_stats()
-        update_researcher_task(r, None)
 
 @shared_task(name='change_publisher_oa_status')
 def change_publisher_oa_status(pk, status):
@@ -129,20 +115,6 @@ def consolidate_paper(pk):
                 break
     except Paper.DoesNotExist:
         print "consolidate_paper: unknown paper %d" % pk
-
-@shared_task(name='get_bare_paper_by_doi')
-def get_bare_paper_by_doi(doi):
-    cr_api = CrossRefAPI()
-    p = cr_api.create_paper_by_doi(doi)
-    return p
-
-@shared_task(name='get_paper_by_doi')
-def get_paper_by_doi(doi):
-    cr_api = CrossRefAPI()
-    p = cr_api.create_paper_by_doi(doi)
-    if p is not None:
-        p = Paper.from_bare(p)
-    return p
 
 @shared_task(name='update_all_stats')
 @run_only_once('refresh_stats', timeout=3*60)

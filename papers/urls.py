@@ -45,7 +45,6 @@ urlpatterns = [
         # Tasks, AJAX
         url(r'^ajax/', include('papers.ajax')),
         url(r'^researcher/(?P<pk>\d+)/update/$', views.refetchResearcher, name='refetch-researcher'),
-        url(r'^researcher/(?P<pk>\d+)/recluster/$', views.reclusterResearcher, name='recluster-researcher'),
         # API
         url(r'^api/', include('papers.api')),
         # Annotations (to be deleted)
