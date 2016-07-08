@@ -23,7 +23,6 @@ from __future__ import unicode_literals
 import lxml.etree as ET
 from lxml.html import fromstring
 from io import StringIO, BytesIO
-from memoize import memoize
 
 import requests
 import requests.exceptions
@@ -31,12 +30,11 @@ import requests.exceptions
 from papers.models import *
 from papers.errors import MetadataSourceException
 from papers.utils import nstrip, remove_diacritics, kill_html, sanitize_html
-from backend.utils import urlopen_retry
+from backend.utils import cached_urlopen_retry
 
 from publishers.models import *
 
 from dissemin.settings import ROMEO_API_KEY, ROMEO_API_DOMAIN
-
 
 # Minimum number of times we have seen a publisher name
 # associated to a publisher to assign this publisher
@@ -56,7 +54,7 @@ def perform_romeo_query(search_terms):
 
     # Perform the query
     try:
-        response = urlopen_retry(base_url, data=search_terms).encode('utf-8')
+        response = cached_urlopen_retry(base_url, data=search_terms).encode('utf-8')
     except requests.exceptions.RequestException as e:
         raise MetadataSourceException('Error while querying RoMEO.\n'+
                 'URL was: '+base_url+'\n'+
@@ -100,13 +98,6 @@ def fetch_journal(search_terms, matching_mode = 'exact'):
     Fetch the journal data from RoMEO. Returns an Journal object.
     search_terms should be a dictionnary object containing at least one of these fields:
     """
-    journal = _memoized_fetch_journal(search_terms, matching_mode)
-    if journal != 'none': # @memoize does not cache None
-        return journal
-
-@memoize(timeout=864000) # 10 days
-def _memoized_fetch_journal(search_terms, matching_mode):
-
     allowed_fields = ['issn', 'jtitle']
     terms = search_terms.copy()
     # Make the title HTML-safe before searching for it in the database or in the API
@@ -122,7 +113,7 @@ def _memoized_fetch_journal(search_terms, matching_mode):
     for key in terms:
         terms[key] = remove_diacritics(terms[key])
         if len(terms[key]) > 256:
-            return 'none'
+            return None
 
     # First check we don't have it already
     journal = find_journal_in_model(terms)
@@ -138,7 +129,7 @@ def _memoized_fetch_journal(search_terms, matching_mode):
     journals = list(root.findall('./journals/journal'))
 
     if not journals:
-        return 'none'
+        return None
     elif len(journals) > 1:
         print ("Warning, "+str(len(journals))+" journals match the RoMEO request, "+
                 "defaulting to the first one")
@@ -168,7 +159,7 @@ def _memoized_fetch_journal(search_terms, matching_mode):
     # Otherwise we need to find the publisher
     publishers = root.findall('./publishers/publisher')
     if not publishers:
-        return 'none'
+        return None
     # TODO here we shouldn't default to the first one but look it up using the <romeopub>
     publisher_desc = publishers[0]
 
