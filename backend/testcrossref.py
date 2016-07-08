@@ -111,6 +111,7 @@ class CrossRefUnitTest(unittest.TestCase):
                  'member': 'http://id.crossref.org/member/3785'})
 
     def test_parse_crossref_date_incomplete(self):
+        self.assertEqual(parse_crossref_date(None), None)
         self.assertEqual(
                 parse_crossref_date({'date-parts': [[2015,07,06]]}),
                 datetime.date(year=2015,month=07,day=06))

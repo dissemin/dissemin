@@ -23,6 +23,7 @@ from __future__ import unicode_literals
 import lxml.etree as ET
 from lxml.html import fromstring
 from io import StringIO, BytesIO
+from memoize import memoize
 
 import requests
 import requests.exceptions
@@ -94,45 +95,51 @@ def find_journal_in_model(search_terms):
         if matches:
             return matches[0]
 
-
 def fetch_journal(search_terms, matching_mode = 'exact'):
     """
     Fetch the journal data from RoMEO. Returns an Journal object.
     search_terms should be a dictionnary object containing at least one of these fields:
     """
+    journal = _memoized_fetch_journal(search_terms, matching_mode)
+    if journal != 'none': # @memoize does not cache None
+        return journal
+
+@memoize(timeout=864000) # 10 days
+def _memoized_fetch_journal(search_terms, matching_mode):
+
     allowed_fields = ['issn', 'jtitle']
+    terms = search_terms.copy()
     # Make the title HTML-safe before searching for it in the database or in the API
-    if 'title' in search_terms:
-        search_terms['title'] = kill_html(search_terms['title'])
-    original_search_terms = search_terms.copy()
+    if 'title' in terms:
+        terms['title'] = kill_html(terms['title'])
 
     # Check the arguments
-    if not all(map(lambda x: x in allowed_fields, (key for key in search_terms))):
+    if not all(map(lambda x: x in allowed_fields, (key for key in terms))):
         raise ValueError('The search terms have to belong to '+str(allowed_fields)+
-                'but the dictionary I got is '+str(search_terms))
+                'but the dictionary I got is '+str(terms))
 
     # Remove diacritics (because it has to be sent in ASCII to ROMEO)
-    for key in search_terms:
-        search_terms[key] = remove_diacritics(search_terms[key])
-        if len(search_terms[key]) > 256:
-            return None
+    for key in terms:
+        terms[key] = remove_diacritics(terms[key])
+        if len(terms[key]) > 256:
+            return 'none'
 
     # First check we don't have it already
-    journal = find_journal_in_model(search_terms)
+    journal = find_journal_in_model(terms)
     if journal:
         return journal
 
     # Perform the query
-    root = perform_romeo_query(search_terms)
+    if matching_mode != 'exact':
+        terms['qtype'] = matching_mode
+    root = perform_romeo_query(terms)
 
     # Find the matching journals (if any)
     journals = list(root.findall('./journals/journal'))
+
     if not journals:
-        # Retry with a less restrictive matching type
-        if matching_mode == 'exact':
-            return fetch_journal(original_search_terms, 'contains')
-        return None
-    if len(journals) > 1:
+        return 'none'
+    elif len(journals) > 1:
         print ("Warning, "+str(len(journals))+" journals match the RoMEO request, "+
                 "defaulting to the first one")
         # TODO different behaviour: get the ISSN and try again.
@@ -161,7 +168,7 @@ def fetch_journal(search_terms, matching_mode = 'exact'):
     # Otherwise we need to find the publisher
     publishers = root.findall('./publishers/publisher')
     if not publishers:
-        return None
+        return 'none'
     # TODO here we shouldn't default to the first one but look it up using the <romeopub>
     publisher_desc = publishers[0]
 

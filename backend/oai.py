@@ -30,6 +30,7 @@ from oaipmh.error import DatestampError, NoRecordsMatchError, BadArgumentError
 from oaipmh.metadata import oai_dc_reader
 from oaipmh.metadata import base_dc_reader
 from backend.proxy import citeproc_reader
+from django.db import transaction
 
 from papers.name import parse_comma_name, name_normalization, name_signature, normalize_name_words
 from papers.models import OaiSource
@@ -353,7 +354,9 @@ class OaiPaperSource(PaperSource): # TODO: this should not inherit from PaperSou
         paper = translator.translate(header, metadata)
         if paper is not None:
             try:
-                return Paper.from_bare(paper)
+                with transaction.atomic():
+                    saved = Paper.from_bare(paper)
+                return saved
             except ValueError as e:
                 print "Ignoring invalid paper:"
                 print header.identifier()
@@ -384,7 +387,7 @@ class OaiPaperSource(PaperSource): # TODO: this should not inherit from PaperSou
             if processed_since_report >= 1000:
                 td = datetime.now() - last_report
                 rate = 'infty'
-                if td:
+                if td.seconds:
                     rate = unicode(processed_since_report / td.seconds)
                 print ("current rate: %s records/s" % rate)
                 processed_since_report = 0

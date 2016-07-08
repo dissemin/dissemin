@@ -25,7 +25,8 @@ class JournalPageTest(RenderingTest):
 
     def test_escaping(self):
         # issue #115
-        journal = fetch_journal({'issn':'1309-534X'})
+        # in the meantime the journal has been deleted from sherpa
+        journal = fetch_journal({'issn':'0302-9743'})
         # Small hack to make the journal appear in the publisher's journal list
         journal.update_stats()
         journal.stats.num_tot = 1

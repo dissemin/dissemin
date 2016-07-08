@@ -129,6 +129,7 @@ INSTALLED_APPS = (
     'haystack',
     'widget_tweaks',
     'capture_tag',
+    'memoize',
 )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap'

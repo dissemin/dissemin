@@ -1,6 +1,12 @@
 var stats_colors = ["#FCD206", "#B9C909", "#419BE8", "#dddddd", "#122B52"];
 var stats_colors_aggregated = ["#43A000", "#DB1456"];
 
+function readablizeNumber (number) {
+  var units = ['', 'k', 'M', 'G', 'T', 'P'];
+  var e = Math.floor(Math.log(number) / Math.log(1000));
+  return (number / Math.pow(1000, e)).toFixed((e > 0) ? 2 : 0) + " " + units[e];
+}
+
 function preProcessData(data) {
     // The pie only shows active OA categories, which have graph_value = value,
     // while inactive ones have graph_value = 0.
@@ -79,7 +85,7 @@ function showStatsPie (data, target_id) {
         return "translate(" + thisArc.centroid(d) + ")";//this gives us a pair of coordinates like [50, 50]
     }
     function textForLabel(d, i) {
-         return (d.data.graph_value === 0 ? "" : d.data.graph_value);
+         return (d.data.graph_value === 0 ? "" : readablizeNumber(d.data.graph_value));
     }
 	var arcs_text = d3.select(parts[0][0]).selectAll("g.slicetext")
         .data(pie)

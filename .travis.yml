@@ -71,3 +71,10 @@ script:
 
 after_success:
   - coveralls
+
+notifications:
+  irc:
+    channels:
+      - "ulminfo.fr#dissemin"
+    on_success: never
+    on_failure: always
