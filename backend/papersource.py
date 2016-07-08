@@ -39,7 +39,7 @@ class PaperSource(object):
 
         :param max_results: maximum number of papers to retrieve for each researcher.
         """
-        self.max_results = None
+        self.max_results = max_results
 
     def fetch_papers(self, researcher):
         """

@@ -70,6 +70,8 @@ OAI_PUBTYPE_TRANSLATIONS = {
         'typenorm:0106':'dataset',
         'typenorm:0107':'other', # sheet music
         'typenorm:9999':'other', # unknown
+        # RG
+        'inProceedings':'proceedings-article',
         }
 
 SET_TO_PUBTYPE = {

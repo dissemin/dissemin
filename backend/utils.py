@@ -25,6 +25,7 @@ import requests.exceptions
 from time import sleep
 from titlecase import titlecase
 from dissemin.settings import redis_client
+from memoize import memoize
 
 from papers.errors import MetadataSourceException
 
@@ -88,5 +89,9 @@ def urlopen_retry(url, **kwargs):# data, timeout, retries, delay, backoff):
             retries=retries-1,
             delay=delay*backoff,
             backoff=backoff)
+
+@memoize(timeout=86400) # 1 day
+def cached_urlopen_retry(*args, **kwargs):
+    return urlopen_retry(*args, **kwargs)
 
 

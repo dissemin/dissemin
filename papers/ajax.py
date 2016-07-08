@@ -34,7 +34,6 @@ from django.utils.translation import ugettext as __
 import json, requests
 
 from django.views.decorators.csrf import csrf_exempt
-from celery.execute import send_task
 
 from dissemin.settings import URL_DEPOSIT_DOWNLOAD_TIMEOUT, DEPOSIT_MAX_FILE_SIZE, MEDIA_ROOT
 
@@ -267,7 +266,8 @@ def changePublisherStatus(request):
         publisher = Publisher.objects.get(pk=pk)
         status = request.POST.get('status')
         if status in allowedStatuses and status != publisher.oa_status:
-            send_task('change_publisher_oa_status', [], {'pk':pk,'status':status})
+            from backend.tasks import change_publisher_oa_status
+            change_publisher_oa_status.delay(pk=pk,status=status)
             return HttpResponse('OK', content_type='text/plain')
         else:
             raise ObjectDoesNotExist

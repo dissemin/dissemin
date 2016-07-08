@@ -48,6 +48,8 @@ SOCIALACCOUNT_PROVIDERS = \
        }
    }
 
+# Mock Celery (run tasks directly in the main process)
+CELERY_ALWAYS_EAGER = True
 
 # Debug Email Backend
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

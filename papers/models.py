@@ -64,7 +64,6 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
 from caching.base import CachingManager, CachingMixin
 from solo.models import SingletonModel
-from celery.execute import send_task
 from celery.result import AsyncResult
 
 from papers.baremodels import *
@@ -73,6 +72,7 @@ from papers.utils import remove_diacritics, sanitize_html, validate_orcid, affil
 from papers.orcid import OrcidProfile
 from papers.doi import to_doi
 from papers.errors import MetadataSourceException
+
 
 from statistics.models import AccessStatistics, STATUS_CHOICES_HELPTEXT, combined_status_for_instance
 from publishers.models import Publisher, Journal, OA_STATUS_CHOICES, OA_STATUS_PREFERENCE, DummyPublisher
@@ -347,7 +347,8 @@ class Researcher(models.Model):
         self.stats.update(self.papers)
 
     def fetch_everything(self):
-        self.harvester = send_task('fetch_everything_for_researcher', [], {'pk':self.id}).id
+        from backend.tasks import fetch_everything_for_researcher
+        self.harvester = fetch_everything_for_researcher.delay(pk=self.id).id
         self.current_task = 'init'
         self.save(update_fields=['harvester','current_task'])
 
@@ -355,13 +356,9 @@ class Researcher(models.Model):
         if self.last_harvest is None or timezone.now() - self.last_harvest > PROFILE_REFRESH_ON_LOGIN:
             self.fetch_everything()
 
-    def recluster_batch(self):
-        self.harvester = send_task('recluster_researcher', [], {'pk':self.id}).id
-        self.current_task = 'clustering'
-        self.save(update_fields=['harvester','current_task'])
-
     def init_from_orcid(self):
-        self.harvester = send_task('init_profile_from_orcid', [], {'pk':self.id}).id
+        from backend.tasks import init_profile_from_orcid
+        self.harvester = init_profile_from_orcid(pk=self.id).id
         self.current_task = 'init'
         self.save(update_fields=['harvester', 'current_task'])
 
@@ -808,7 +805,8 @@ class Paper(models.Model, BarePaper):
         possibly by fetching it from Zotero via doi-cache.
         """
         if self.task is None:
-            task = send_task('consolidate_paper', [], {'pk':self.id})
+            from backend.tasks import consolidate_paper
+            task = consolidate_paper.delay(pk=self.id)
             self.task = task.id
             self.save(update_fields=['task'])
         else:
@@ -817,20 +815,18 @@ class Paper(models.Model, BarePaper):
             task.get()
 
     @classmethod
-    def create_by_doi(self, doi, wait=True, bare=False):
+    def create_by_doi(self, doi, bare=False):
         """
-        Creates a paper given a DOI (sends a task to the backend).
+        Creates a paper given a DOI
         """
-        if not bare:
-            task = send_task('get_paper_by_doi', [], {'doi':doi})
-        else:
-            import backend.crossref as crossref
-            import backend.oai as oai
-            cr_api = crossref.CrossRefAPI()
-            return cr_api.create_paper_by_doi(doi)
-
-        if wait:
-            return task.get()
+        import backend.crossref as crossref
+        from backend.papersource import PaperSource
+        cr_api = crossref.CrossRefAPI()
+        bare_paper = cr_api.create_paper_by_doi(doi)
+        if bare:
+            return bare_paper
+        elif bare_paper:
+            return Paper.from_bare(bare_paper) # TODO TODO index it?
 
     def successful_deposits(self):
         return self.depositrecord_set.filter(pdf_url__isnull=False)
