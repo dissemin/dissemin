@@ -50,6 +50,7 @@ class ProtocolTest(PrefilledTest):
     def setUpClass(self):
         if self is ProtocolTest:
              raise unittest.SkipTest("Base test")
+        super(ProtocolTest, self).setUpClass()
         self.p1 = Paper.get_or_create(
                 "This is a test paper",
                 [self.r1.name, self.r2.name, self.r4.name],
