@@ -124,16 +124,22 @@ class ZenodoProtocol(RepositoryProtocol):
                 data=json.dumps(data), headers=headers)
         self.log_request(r, 200, __('Unable to submit paper metadata to Zenodo.'))
 
-        # Deleting the deposition
-        #self.log("### Deleting the deposition")
-        #r = requests.delete(self.api_url+"/%s?access_token=%s" % ( deposition_id, api_key) )
-        self.log("### Publishing the deposition")
-        r = requests.post(self.api_url+"/%s/actions/publish?access_token=%s" % (deposition_id, api_key))
-        self.log_request(r, 202, __('Unable to publish the deposition on Zenodo.'))
-        self.log(r.text)
-        deposition_object = r.json()
-        deposit_result.splash_url = deposition_object['record_url']
-        deposit_result.pdf_url = deposit_result.splash_url + '/files/article.pdf'
+        if dry_run:
+            # Deleting the deposition
+            self.log("### Deleting the deposition")
+            r = requests.delete(self.api_url+"/%s?access_token=%s" % ( deposition_id, api_key) )
+            self.log(r.text)
+            deposit_result.status = 'DRY_SUCCESS'
+
+        else:
+            self.log("### Publishing the deposition")
+            r = requests.post(self.api_url+"/%s/actions/publish?access_token=%s" % (deposition_id, api_key))
+            self.log_request(r, 202, __('Unable to publish the deposition on Zenodo.'))
+            self.log(r.text)
+
+            deposition_object = r.json()
+            deposit_result.splash_url = deposition_object['record_url']
+            deposit_result.pdf_url = deposit_result.splash_url + '/files/article.pdf'
 
         return deposit_result
 
@@ -196,11 +202,6 @@ class ZenodoProtocol(RepositoryProtocol):
                 if publi.container:
                     metadata['conference_title'] = publi.container
                 break
-
-        # Keywords TODO (this involves having separated keywords in OAI records.)
-
-        # Notes TODO
-        # metadata['notes'] = 'Uploaded by dissem.in on behalf of ' …
 
         # Related identifiers
         idents = map(lambda r: {'relation':'isAlternateIdentifier','identifier':r.splash_url}, oairecords)

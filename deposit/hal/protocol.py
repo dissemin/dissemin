@@ -44,20 +44,11 @@ try:
 except ImportError:
     # Python 2
     import httplib as http_client
-http_client.HTTPConnection.debuglevel = 1
 
 
 import logging
 
-# These two lines enable debugging at httplib level (requests->urllib3->http.client)
-# You will see the REQUEST, including HEADERS and DATA, and RESPONSE with HEADERS but without DATA.
-# The only thing missing will be the response.body which is not logged.
-# You must initialize logging, otherwise you'll not see debug output.
-logging.basicConfig()
-logging.getLogger().setLevel(logging.DEBUG)
-requests_log = logging.getLogger("requests.packages.urllib3")
-requests_log.setLevel(logging.DEBUG)
-requests_log.propagate = True
+#http_client.HTTPConnection.debuglevel = 1
 
 
 class HALProtocol(RepositoryProtocol):
@@ -72,8 +63,6 @@ class HALProtocol(RepositoryProtocol):
             self.api_url = "https://api.archives-ouvertes.fr/sword/hal/"
         self.username = repository.username
         self.password = repository.password
-        print self.user
-        print self.password
 
     def predict_topic(self, topic_text):
         if not topic_text:
@@ -82,7 +71,6 @@ class HALProtocol(RepositoryProtocol):
             r = requests.post('http://haltopics.dissem.in:6377/predict', data={'text':topic_text})
             return r.json()['decision']['code']
         except (requests.exceptions.RequestException, ValueError, KeyError) as e:
-            print e
             return None
 
     def get_form(self):
@@ -124,7 +112,7 @@ class HALProtocol(RepositoryProtocol):
         return "Basic " + (self.username + ":" + self.password
                 ).encode("base64").rstrip()
 
-    def submit_deposit(self, pdf, form):
+    def submit_deposit(self, pdf, form, dry_run=False):
         result = {}
         if self.username is None or self.password is None:
             raise DepositError(__("No HAL user credentials provided."))
@@ -135,16 +123,7 @@ class HALProtocol(RepositoryProtocol):
             # Creating the metadata
             self.log("### Generating metadata")
             metadata = self.createMetadata(form)
-            with open('/tmp/hal.xml', 'w') as f:
-                f.write(metadata)
-            # TODO dump XML
-
-            # Check that there is an abstract
-            #if data['metadata'].get('description','') == '':
-            #    self.log('No abstract found, aborting.')
-            #    raise DepositError(__('No abstract is available for this paper but '+
-            #            'Zenodo requires to attach one. Please use the metadata panel to provide one.'))
-
+            
             # Bundling the metadata and the PDF
             self.log("### Creating ZIP file")
             zipFile = self.create_zip(pdf, metadata)
@@ -169,16 +148,42 @@ class HALProtocol(RepositoryProtocol):
             conn.endheaders()
             conn.send(zipContent)
             resp = conn.getresponse()
-            print resp.read()
-            deposition_id = resp.getheader('location')
+
+            xml_response = resp.read()
+            conn.close()
+
+            parser = etree.XMLParser(encoding='utf-8')
+            receipt = etree.parse(BytesIO(xml_response), parser)
+            receipt = receipt.getroot()
+            deposition_id = receipt.find('{http://www.w3.org/2005/Atom}id').text
+            password = receipt.find('{http://hal.archives-ouvertes.fr/}password').text
+            document_url = resp.getheader('location')
+
             if not deposition_id:
                 raise DepositError(__('HAL rejected the submission'))
 
-            deposit_result.identifier = deposition_id
             self.log("Deposition id: %s" % deposition_id)
 
-            deposit_result.splash_url = deposition_id
+            deposit_result.identifier = deposition_id
+            deposit_result.splash_url = document_url
             deposit_result.pdf_url = deposit_result.splash_url + '/document'
+            
+            if dry_run:
+                conn = http_client.HTTPConnection(host)
+                conn.putrequest('DELETE', '/sword/'+deposition_id)
+                headers = {
+                    'Authorization':self.encodeUserData(),
+                   # 'Host': host,
+                    'Accept': '*/*',
+                    'User-Agent': 'dissemin',
+                }
+                for header, value in headers.items():
+                    conn.putheader(header, value)
+                conn.endheaders()
+                resp = conn.getresponse()
+                self.log(resp.read())
+                conn.close()
+                deposit_result.status = 'DRY_SUCCESS'
 
         except DepositError as e:
             raise e

@@ -52,7 +52,19 @@ class HALProtocolTest(ProtocolTest):
     @classmethod
     def setUpClass(self):
         super(HALProtocolTest, self).setUpClass()
+        self.repo.username = 'test_ws'
+        self.repo.password = 'test'
         self.proto = HALProtocol(self.repo)
+
+    def test_lncs(self):
+        """
+        Submit a paper from LNCS
+        """
+        p = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
+        r = self.dry_deposit(p,
+            abstract='this is an abstract',
+            topic='INFO')
+        self.assertEqual(r.status, 'DRY_SUCCESS')
 
     def test_predict_topic(self):
         cases = [
