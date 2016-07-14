@@ -579,7 +579,7 @@ class Paper(models.Model, BarePaper):
     #: authors have profiles on dissemin)
     researchers = models.ManyToManyField(Researcher)
 
-    last_modified = models.DateField(auto_now=True)
+    last_modified = models.DateTimeField(auto_now=True)
     visible = models.BooleanField(default=True)
     last_annotation = models.CharField(max_length=32, null=True, blank=True)
 

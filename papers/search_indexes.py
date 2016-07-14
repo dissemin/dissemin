@@ -30,6 +30,9 @@ class PaperIndex(indexes.SearchIndex, indexes.Indexable):
     def get_model(self):
         return Paper
 
+    def get_updated_field(self):
+        return "last_modified"
+
     def prepare_authors_full(self, obj):
         return [a['name']['full'] for a in obj.authors_list]
 

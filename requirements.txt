@@ -23,6 +23,7 @@ django-solo
 django-widget-tweaks
 django-memoize
 djangorestframework
+django-bulk-update
 elasticsearch
 html5lib
 httplib2
@@ -41,3 +42,5 @@ unicode_tex
 unidecode
 urllib3
 wand
+python-dateutil # for haystack, as explained here:
+#http://django-haystack.readthedocs.io/en/v2.4.1/management_commands.html
