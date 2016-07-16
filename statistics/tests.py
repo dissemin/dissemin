@@ -33,6 +33,10 @@ class StatisticsTest(PrefilledTest):
         cr_api = OrcidPaperSource()
         cr_api.fetch_and_save(self.r3)
 
+    @classmethod
+    def tearDownClass(cls):
+        pass
+
     def validStats(self, stats):
         self.assertTrue(stats.check_values())
         self.assertTrue(stats.num_tot > 1)

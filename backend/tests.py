@@ -110,11 +110,12 @@ class RomeoTest(TestCase):
 # Generic test case that requires some example DB
 @override_settings(HAYSTACK_CONNECTIONS=TEST_INDEX)
 class PrefilledTest(TestCase):
+    fixtures = ['test_dump.json']
+
     @classmethod
-    def setUpClass(self):
+    def setUpTestData(self):
         if self is PrefilledTest:
             raise unittest.SkipTest("Base test")
-        super(PrefilledTest, self).setUpClass()
         haystack.connections.reload('default')
         call_command('update_index', verbosity=0)
         self.i = Institution.objects.get(name='ENS')
