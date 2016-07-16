@@ -1,3 +1,4 @@
+setuptools==24.0.3
 -e git://github.com/dissemin/django-allauth.git@0.25.2-post_login-orcidv1.2#egg=django-allauth
 # compat fix for django 1.9, see https://stackoverflow.com/questions/34314319/haystack-says-model-could-not-be-found-for-searchresult
 # django-haystack
@@ -24,7 +25,7 @@ django-widget-tweaks
 django-memoize
 djangorestframework
 elasticsearch
-html5lib
+html5lib==0.999999999
 httplib2
 jsonfield
 lxml
