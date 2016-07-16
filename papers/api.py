@@ -168,7 +168,7 @@ urlpatterns = [
 #    url(r'^paper/(?P<pk>\d+)/$', PaperView.as_view(), name='api-paper'),
     url(r'^(?P<doi>10\..*)$', api_paper_doi, name='api-paper-doi'),
     url(r'^query$', api_paper_query, name='api-paper-query'),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^docs/', include('rest_framework_swagger.urls')),
+#    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+#    url(r'^docs/', include('rest_framework_swagger.urls')),
 ]
 
