@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.tei-c.org/ns/1.0" xmlns:ns1="http://www.tei-c.org/ns/1.0">
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/xml.xsd"/>
+    <xs:annotation>
+        <xs:documentation>AOfr Schema for SWORD HAL Open Archive import</xs:documentation>
+    </xs:annotation>
+    <xs:element name="TEI">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ns1:text"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="text">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ns1:body"/>
+                <xs:element minOccurs="0" ref="ns1:back"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="body">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ns1:listBibl"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="listBibl">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ns1:biblFull"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="biblFull">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="ns1:titleStmt"/>
+                <xs:element minOccurs="0" ref="ns1:editionStmt"/>
+                <xs:element minOccurs="0" ref="ns1:publicationStmt"/>
+                <xs:element minOccurs="0" ref="ns1:seriesStmt"/>
+                <xs:element minOccurs="0" ref="ns1:notesStmt"/>
+                <xs:element ref="ns1:sourceDesc"/>
+                <xs:element ref="ns1:profileDesc"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="titleStmt">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:title"/><!-- %%title et %%subTitle - SE RETROUVE ÉGALEMENT DANS text/body/listBibl/biblFull/sourceDesc/biblStruct/analytic -->
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:author"/><!-- %%auteur(s) et affiliation(s) - SE RETROUVE ÉGALEMENT DANS text/body/listBibl/biblFull/sourceDesc/biblStruct/analytic -->
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:funder"/><!-- %%funding, %%anrProject et %europeanProject -->
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="funder">
+        <xs:complexType mixed="true">
+            <xs:attribute name="ref"/>
+            <!-- pour les projets ANR et Européen connu de HAL : ref -> #projanr-IDENTIFANT ou #projeurop-IDENTIFANT -->
+            <!-- sinon la définitions des projets se fait dans text/back : ref -> #local-IDLOCAL -->
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="editionStmt">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ns1:edition"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="edition">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="ns1:date"/><!-- %%writingDate -->
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:ref"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="publicationStmt">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ns1:availability"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="availability">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ns1:licence"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="licence">
+        <xs:complexType>
+            <xs:attribute name="target" type="xs:anyURI"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="seriesStmt">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:idno"/><!-- %%collection -->
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="notesStmt">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="ns1:note"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="note">
+        <xs:complexType mixed="true">
+            <xs:attribute name="n" type="xs:integer"/>
+            <xs:attribute name="type" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="commentary"/><!-- %%comment -->
+                        <xs:enumeration value="description"/><!-- %%description -->
+                        <xs:enumeration value="audience"/><!-- valeur possible de l'attribut n : http://api-preprod.archives-ouvertes.fr/ref/metadataList/?q=metaName_s:audience&wt=xml -->
+                        <xs:enumeration value="invited"/><!-- valeur possible de l'attribut n : http://api-preprod.archives-ouvertes.fr/ref/metadataList/?q=metaName_s:invitedCommunication&wt=xml -->
+                        <xs:enumeration value="popular"/><!-- valeur possible de l'attribut n : http://api-preprod.archives-ouvertes.fr/ref/metadataList/?q=metaName_s:popularLevel&wt=xml -->
+                        <xs:enumeration value="peer"/><!-- valeur possible de l'attribut n : http://api-preprod.archives-ouvertes.fr/ref/metadataList/?q=metaName_s:peerReviewing&wt=xml -->
+                        <xs:enumeration value="proceedings"/><!-- valeur possible de l'attribut n : http://api-preprod.archives-ouvertes.fr/ref/metadataList/?q=metaName_s:proceedings&wt=xml -->
+                        <xs:enumeration value="report"/><!-- valeur possible de l'attribut n : http://api-preprod.archives-ouvertes.fr/ref/metadataList/?q=metaName_s:reportType&wt=xml -->
+                        <xs:enumeration value="image"/><!-- valeur possible de l'attribut n : http://api-preprod.archives-ouvertes.fr/ref/metadataList/?q=metaName_s:imageType&wt=xml -->
+                        <xs:enumeration value="lecture"/><!-- valeur possible de l'attribut n : http://api-preprod.archives-ouvertes.fr/ref/metadataList/?q=metaName_s:lectureType&wt=xml -->
+                        <xs:enumeration value="degree"/>
+                        <xs:enumeration value="pastel_thematique"/><!-- valeur possible de l'attribut n : http://api-preprod.archives-ouvertes.fr/ref/metadataList/?q=metaName_s:pastel_thematique&wt=xml -->
+                        <xs:enumeration value="pastel_library"/><!-- valeur possible de l'attribut n : http://api-preprod.archives-ouvertes.fr/ref/metadataList/?q=metaName_s:pastel_library&wt=xml -->
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="sourceDesc">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ns1:biblStruct"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="biblStruct">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ns1:analytic"/>
+                <xs:element minOccurs="0" ref="ns1:monogr"/>
+                <xs:element minOccurs="0" ref="ns1:series"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:idno"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:ref"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:relatedItem"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="analytic">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="ns1:title"/><!-- %%title et %%subTitle -->
+                <xs:element maxOccurs="unbounded" ref="ns1:author"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="monogr">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:idno"/>
+                <xs:element minOccurs="0" ref="ns1:title"/><!-- %%journal, %%bookTitle et %%source -->
+                <xs:element minOccurs="0" ref="ns1:meeting"/>
+                <xs:element minOccurs="0" ref="ns1:respStmt"/>
+                <xs:element minOccurs="0" ref="ns1:settlement"/><!-- %%city [type in PATENT,IMG,MAP,LECTURE] -->
+                <xs:element minOccurs="0" ref="ns1:country"/><!-- %%country  [type not in PATENT,IMG,MAP,LECTURE] -->
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:editor"/><!-- %%scientificEditor -->
+                <xs:element minOccurs="0" ref="ns1:imprint"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:authority"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="meeting">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="ns1:title"/><!-- %%conferenceTitle -->
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:date"/><!-- %%conferenceStartDate et %%conferenceEndDate -->
+                <xs:element minOccurs="0" ref="ns1:settlement"/><!-- %%city  [type not in PATENT,IMG,MAP,LECTURE] -->
+                <xs:element minOccurs="0" ref="ns1:country"/><!-- %%country  [type not in PATENT,IMG,MAP,LECTURE] -->
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="respStmt">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ns1:resp"/>
+                <xs:element maxOccurs="unbounded" ref="ns1:name"/><!-- %%conferenceOrganizer -->
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="resp"/>
+    <xs:element name="name"/>
+    <xs:element name="imprint">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:publisher"/><!-- %%publisher -->
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:pubPlace"/><!-- %%publicationLocation -->
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:biblScope"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:date"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="publisher"/>
+    <xs:element name="pubPlace"/>
+    <xs:element name="biblScope">
+        <xs:complexType mixed="true">
+            <xs:attribute name="unit" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="serie"/><!-- %%serie -->
+                        <xs:enumeration value="volume"/><!-- %%volume -->
+                        <xs:enumeration value="issue"/><!-- %%issue -->
+                        <xs:enumeration value="pp"/><!-- %%page -->
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="authority">
+        <xs:complexType mixed="true">
+            <xs:attribute name="type" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="institution"/><!-- %%authorityInstitution -->
+                        <xs:enumeration value="school"/><!-- %%thesisSchool -->
+                        <xs:enumeration value="supervisor"/><!-- %%director -->
+                        <xs:enumeration value="jury"/><!-- %%committee -->
+                        <xs:enumeration value="supervisorEmail"/><!-- %%mail director -->
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="series">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:editor"/><!-- %%seriesEditor -->
+                <xs:element minOccurs="0" ref="ns1:title"/><!-- %%lectureName -->
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="relatedItem">
+        <xs:complexType mixed="true">
+            <xs:attribute name="type" use="required" type="xs:string"/><!-- valeur possible de l'attribut type : http://api-preprod.archives-ouvertes.fr/ref/metadataList/?q=metaName_s:relatedType&wt=xml -->
+            <xs:attribute name="target" use="required" type="xs:anyURI"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="profileDesc">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ns1:langUsage"/>
+                <xs:element minOccurs="0" ref="ns1:textClass"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:abstract"/>
+                <xs:element minOccurs="0" ref="ns1:particDesc"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="langUsage">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ns1:language"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="language">
+        <xs:complexType>
+            <xs:attribute name="ident" use="required" type="xs:string"/><!-- %%language -->
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="textClass">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="ns1:keywords"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:classCode"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="keywords">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="ns1:term"/><!-- %%keyword -->
+            </xs:sequence>
+            <xs:attribute name="scheme" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="author"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="term">
+        <xs:complexType mixed="true">
+            <xs:attribute ref="xml:lang" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="classCode">
+        <xs:complexType mixed="true">
+            <xs:attribute name="n" type="xs:string"/>
+            <xs:attribute name="scheme" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="classification"/><!-- %%classification -->
+                        <xs:enumeration value="acm"/> <!-- %%classification ACM -->
+                        <xs:enumeration value="mesh"/><!-- %%classification MESH -->
+                        <xs:enumeration value="jel"/><!-- %%classification JEL -->
+                        <xs:enumeration value="halDomain"/><!-- %%domain HAL : http://api-preprod.archives-ouvertes.fr/ref/domain/?wt=wml -->
+                        <xs:enumeration value="halTypology"/><!-- %%type HAL : http://api-preprod.archives-ouvertes.fr/ref/typdoc/?wt=xml -->
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="abstract">
+        <!-- %%abstract -->
+        <xs:complexType mixed="true">
+            <xs:attribute ref="xml:lang" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="particDesc">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="ns1:org"/>
+                <!-- %%collaboration -->
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="back">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="ns1:listOrg"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="listOrg">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="ns1:org"/>
+            </xs:sequence>
+            <xs:attribute name="type" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="structures"/>
+                        <xs:enumeration value="laboratories"/>
+                        <xs:enumeration value="projects"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="title">
+        <xs:complexType mixed="true">
+            <xs:attribute name="level" type="xs:string"/>
+            <xs:attribute name="type" type="xs:string"/>
+            <xs:attribute ref="xml:lang"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="author">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="ns1:persName"/>
+                <xs:element minOccurs="0" ref="ns1:email"/>
+                <xs:element minOccurs="0" ref="ns1:ptr"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:idno"/>
+                <xs:element minOccurs="0" ref="ns1:orgName"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:affiliation"/>
+            </xs:sequence>
+            <xs:attribute name="role" use="required" type="xs:string"/><!-- valeur possible de l'attribut n : http://api-preprod.archives-ouvertes.fr/ref/metadataList/?q=metaName_s:relator&wt=xml -->
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="persName">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="ns1:forename"/>
+                <xs:element ref="ns1:surname"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="forename">
+        <xs:complexType mixed="true">
+            <xs:attribute name="type">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="first"/>
+                        <xs:enumeration value="middle"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="surname"/>
+    <xs:element name="email"/>
+    <xs:element name="ptr">
+        <xs:complexType>
+            <xs:attribute name="type" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="url"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="target" use="required" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="affiliation">
+        <xs:complexType>
+            <xs:attribute name="ref" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="date">
+        <xs:complexType mixed="true">
+            <xs:attribute name="notBefore" type="xs:date"/>
+            <!-- %%embargo sur chaque fichier -->
+            <xs:attribute name="type">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="whenWritten"/><!-- %%writingDate -->
+                        <xs:enumeration value="start"/>
+                        <xs:enumeration value="end"/>
+                        <xs:enumeration value="datePub"/>
+                        <xs:enumeration value="dateDefended"/>
+                        <xs:enumeration value="dateEpub"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute use="optional" name="precision">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="unknown"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ref">
+        <xs:complexType mixed="true">
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element ref="ns1:date"/>
+                <xs:element ref="ns1:desc"/>
+            </xs:choice>
+            <xs:attribute name="n" type="xs:string" use="optional"/><!-- valeur possible : 0 ou 1 -->
+            <xs:attribute name="subtype" type="xs:string" use="optional"/><!-- valeur possible : http://api-preprod.archives-ouvertes.fr/ref/metadataList/?q=metaName_s:typeAnnex&wt=xml ou http://api-preprod.archives-ouvertes.fr/ref/metadataList/?q=metaName_s:fileSource&wt=xml -->
+            <xs:attribute name="target" use="optional" type="xs:string"/>
+            <xs:attribute name="type" use="required" type="xs:string"/><!-- valeur possible : http://api-preprod.archives-ouvertes.fr/ref/metadataList/?q=metaName_s:fileType&wt=xml -->
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="idno">
+        <xs:complexType mixed="true">
+            <xs:attribute name="n" type="xs:string"/>
+            <xs:attribute name="type" use="required" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="settlement"/>
+    <xs:element name="country">
+        <xs:complexType>
+            <xs:attribute name="key" use="required" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="editor"/>
+    <xs:element name="org">
+        <xs:complexType mixed="true">
+            <xs:sequence>
+                <xs:choice minOccurs="0" maxOccurs="unbounded">
+                    <xs:element ref="ns1:desc"/>
+                    <xs:element ref="ns1:idno"/>
+                    <xs:element ref="ns1:orgName"/>
+                    <xs:element ref="ns1:date"/>
+                </xs:choice>
+                <xs:choice>
+                    <xs:element minOccurs="0" ref="ns1:listRelation"/>
+                </xs:choice>
+            </xs:sequence>
+            <xs:attribute name="type" use="required" type="xs:string"/>
+            <xs:attribute use="optional" ref="xml:id"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="listRelation">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="ns1:relation"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="relation">
+        <xs:complexType>
+            <xs:attribute name="type" type="xs:string"/>
+            <xs:attribute name="name" type="xs:string"/>
+            <xs:attribute name="active" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="orgName">
+        <xs:complexType mixed="true">
+            <xs:attribute name="ref"/>
+            <xs:attribute name="type" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="desc">
+        <xs:complexType mixed="true">
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element ref="ns1:ref"/>
+                <xs:element ref="ns1:address"/>
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="address">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="ns1:addrLine"/>
+                <xs:element ref="ns1:country"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="addrLine" type="xs:string"/>
+</xs:schema>

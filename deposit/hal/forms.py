@@ -25,13 +25,21 @@ from django import forms
 from django.utils.translation import ugettext as __
 
 from deposit.forms import BaseMetadataForm
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout
 from deposit.zenodo.protocol import ZENODO_LICENSES_CHOICES
+from deposit.hal.metadataFormatter import HAL_TOPIC_CHOICES
 
 class HALForm(BaseMetadataForm):
-    license = forms.ChoiceField(
-            label=__('License'),
-            choices=ZENODO_LICENSES_CHOICES,
-            initial='cc-by',
-            widget=forms.RadioSelect(attrs={'class':'radio-margin'})
-            )
+    def __init__(self, *args, **kwargs):
+        super(HALForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-lg-2'
+        self.helper.field_class = 'col-lg-8'
+ 
+    topic = forms.ChoiceField(
+            label=__('Scientific field'),
+            choices=HAL_TOPIC_CHOICES)
+
 

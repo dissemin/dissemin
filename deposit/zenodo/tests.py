@@ -39,5 +39,3 @@ class ZenodoProtocolTest(ProtocolTest):
         data['abstract'] = lorem_ipsum
         self.form = self.proto.get_bound_form(data)
         self.form.is_valid()
-
-

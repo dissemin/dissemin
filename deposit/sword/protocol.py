@@ -20,8 +20,6 @@
 
 from __future__ import unicode_literals
 
-print "importing protocol.py"
-
 import json
 import requests
 import traceback, sys
@@ -90,10 +88,9 @@ class SwordProtocol(RepositoryProtocol):
 
         return entry
 
-    def submit_deposit(self, pdf, form):
+    def submit_deposit(self, pdf, form, dry_run=False):
         result = {}
 
-        print "Submit deposit"
         conn = None
         try:
             self.log("### Connecting")
@@ -131,6 +128,6 @@ class SwordProtocol(RepositoryProtocol):
 
         return deposit_result
 
-from deposit.registry import *
+from deposit.registry import protocol_registry
 protocol_registry.register(SwordProtocol)
 

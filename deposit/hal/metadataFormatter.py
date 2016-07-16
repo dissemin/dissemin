@@ -26,10 +26,27 @@ This module defines a OAfr/TEI exporter, to be used with the SWORD interface to 
 from __future__ import unicode_literals
 
 from lxml import etree
+from django.utils.translation import ugettext_lazy as _
 
 from papers.models import Paper, Researcher, Name, OaiRecord
 from deposit.sword.metadataFormatter import MetadataFormatter, addChild
 
+HAL_TOPIC_CHOICES = [
+    ('CHIM',_('Chemistry')),
+    ('INFO',_('Computer science')),
+    ('MATH',_('Mathematics')),
+    ('PHYS',_('Physics')),
+    ('NLIN',_('Non-linear science')),
+    ('SCCO',_('Cognitive science')),
+    ('SDE',_('Environment sciences')),
+    ('SDU',_('Planet and Universe')),
+    ('SHS',_('Humanities and Social Science')),
+    ('SDV',_('Life sciences')),
+    ('SPI',_('Engineering sciences')),
+    ('STAT',_('Statistics')),
+    ('QFIN',_('Economy and quantitative finance')),
+    ('OTHER',_('Other')),
+  ]
 
 ENS_HAL_ID = 59704
 
@@ -53,43 +70,6 @@ def aofrDocumentType(paper):
          }
     return tr[paper.doctype]
 
-class DCFormatter(MetadataFormatter):
-    """
-    Generic SWORD formatter
-    """
-
-    def formatName(self):
-        return "dc"
-
-    def render(self, paper, filename):
-        xmlns_uri = 'http://www.w3.org/2005/Atom'
-        dcterms_uri = "http://purl.org/dc/terms/"
-        xmlns = '{%s}' % xmlns_uri
-        dcterms = '{%s}' % dcterms_uri
-        nsmap = {None: xmlns_uri, 'dcterms': dcterms_uri}
-        entry = etree.Element(xmlns+'entry', nsmap=nsmap)
-
-        addChild(entry, 'title', paper.title)
-
-        addChild(entry, 'id', 'paper/%d' % paper.id)
-
-        addChild(entry, 'updated', paper.last_modified.isoformat())
-
-        # Here comes the actual metadata
-
-        addChild(entry, dcterms+'title', paper.title)
-        if paper.abstract:
-            addChild(entry, dcterms+'abstract', paper.abstract)
-        addChild(entry, dcterms+'type', paper.doctype)
-
-        for a in paper.authors:
-            addChild(entry, dcterms+'contributor', unicode(a))
-
-        for p in paper.publications:
-            addChild(entry, dcterms+'identifier', p.doi)
-
-        return entry
-
 class AOFRFormatter(MetadataFormatter):
     """
     Formatter for HAL
@@ -98,7 +78,7 @@ class AOFRFormatter(MetadataFormatter):
     def formatName(self):
         return "AOfr"
 
-    def render(self, paper, filename):
+    def render(self, paper, filename, form):
         xmlns_uri = 'http://www.tei-c.org/ns/1.0'
         xmlns = '{%s}' % xmlns_uri
         nsmap = {None: xmlns_uri, 'hal':'http://hal.archives-ouvertes.fr'}
@@ -156,8 +136,9 @@ class AOFRFormatter(MetadataFormatter):
 
         self.renderTitleAuthors(analytic, paper)
 
+        halType = aofrDocumentType(paper)
         for publication in paper.publications:
-            self.renderPubli(biblStruct, publication)
+            self.renderPubli(biblStruct, publication, halType)
 
         # profileDesc
         profileDesc = addChild(biblFull, 'profileDesc')
@@ -166,14 +147,14 @@ class AOFRFormatter(MetadataFormatter):
         language.attrib['ident'] = 'en' # TODO adapt this?
         textClass = addChild(profileDesc, 'textClass')
 
-        domains = ['spi.plasma', 'phys.phys.phys-gen-ph']
+        domains = [form.cleaned_data['topic'].lower()]
         for domain in domains:
             classCode = addChild(textClass, 'classCode')
             classCode.attrib['scheme'] = 'halDomain'
             classCode.text = domain
         typology = addChild(textClass, 'classCode')
         typology.attrib['scheme'] = 'halTypology'
-        typology.attrib['n'] = aofrDocumentType(paper)
+        typology.attrib['n'] = halType
 
         abstract = addChild(profileDesc, 'abstract')
         abstract.attrib[XMLLANG_ATTRIB] = 'en'
@@ -208,19 +189,23 @@ class AOFRFormatter(MetadataFormatter):
             lastName = addChild(nameNode, 'surname')
             lastName.text = name.last
 
-            if author.researcher_id:
-                affiliation = addChild(node, 'affiliation')
-                affiliation.attrib['ref'] = '#struct-'+str(ENS_HAL_ID)
+            # TODO affiliations come here
+            #if author.researcher_id:
+            affiliation = addChild(node, 'affiliation')
+            affiliation.attrib['ref'] = '#struct-'+str(ENS_HAL_ID)
 
-    def renderPubli(self, biblStruct, publi):
+    def renderPubli(self, biblStruct, publi, halType):
         # TODO: handle publication type properly
         root = addChild(biblStruct, 'monogr')
         if publi.journal:
              self.renderJournal(root, publi.journal)
 
         title = addChild(root, 'title')
-        title.attrib['level'] = 'j' # TODO: this should be adapted based on the type
-        title.text = publi.full_title()
+        if halType == 'COUV' or halType == 'OUV' or halType == 'COMM':
+            title.attrib['level'] = 'm'
+        else:
+            title.attrib['level'] = 'j'
+        title.text = publi.full_journal_title()
 
         imprint = addChild(root, 'imprint')
 
@@ -250,6 +235,8 @@ class AOFRFormatter(MetadataFormatter):
         if publi.pubdate:
             # TODO output more precise date if available
             data.text = str(publi.pubdate.year)
+        else:
+            data.text = str(publi.about.pubdate.year)
 
 
     def renderJournal(self, root, journal):

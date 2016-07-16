@@ -145,6 +145,7 @@ def submitDeposit(request, pk):
     d.identifier = submitResult.identifier
     d.pdf_url = submitResult.pdf_url
     d.save()
+    paper.update_availability()
 
     context['status'] = 'success'
     # TODO change this (we don't need it)

@@ -42,18 +42,18 @@ class MetadataFormatter(object):
         """
         return None
 
-    def render(self, paper, filename):
+    def render(self, paper, filename, form=None):
         """
         Returns an XML node representing the article in the expected format
         The filename of the attached PDF should be None when uploading metadata only.
         """
         return None
 
-    def toString(self, paper, filename, pretty=False):
+    def toString(self, paper, filename, form=None, pretty=False):
         """
         The metadata as a string
         """
-        return etree.tostring(self.render(paper, filename),
+        return etree.tostring(self.render(paper, filename, form),
                 pretty_print=pretty,
                 encoding='UTF-8',
                 xml_declaration=True)
@@ -78,7 +78,7 @@ class DCFormatter(MetadataFormatter):
     def formatName(self):
         return "dc"
 
-    def render(self, paper, filename):
+    def render(self, paper, filename, form=None):
         xmlns_uri = 'http://www.w3.org/2005/Atom'
         dcterms_uri = "http://purl.org/dc/terms/"
         xmlns = '{%s}' % xmlns_uri
@@ -102,8 +102,9 @@ class DCFormatter(MetadataFormatter):
         for a in paper.authors:
             addChild(entry, dcterms+'contributor', unicode(a))
 
-        for p in paper.publications:
-            addChild(entry, dcterms+'identifier', p.doi)
+        for p in paper.oairecords:
+            if p.doi:
+                addChild(entry, dcterms+'identifier', p.doi)
 
         return entry
 

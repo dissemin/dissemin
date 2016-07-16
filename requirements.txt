@@ -25,7 +25,7 @@ django-memoize
 djangorestframework
 django-bulk-update
 elasticsearch
-html5lib
+html5lib==0.999999999
 httplib2
 jsonfield
 lxml

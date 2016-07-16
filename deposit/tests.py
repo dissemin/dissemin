@@ -50,8 +50,6 @@ class ProtocolTest(PrefilledTest):
     def setUpClass(self):
         if self is ProtocolTest:
              raise unittest.SkipTest("Base test")
-        if 'TRAVIS' in os.environ:
-            raise unittest.SkipTest("Skipping deposit test on Travis to avoid mass submissions to sandboxes")
         super(ProtocolTest, self).setUpClass()
         self.p1 = Paper.get_or_create(
                 "This is a test paper",
@@ -87,12 +85,18 @@ class ProtocolTest(PrefilledTest):
         retval = self.proto.get_form()
         self.assertIsInstance(retval, Form)
 
-    @unittest.expectedFailure
-    def test_submit_deposit_wrapper(self):
+    def dry_deposit(self, paper, **form_fields):
+        enabled = self.proto.init_deposit(paper, self.user)
+        self.assertTrue(enabled)
+
+        args = form_fields.copy()
+        args['paper_id'] = paper.id
+
+        form = self.proto.get_bound_form(args)
+        self.assertTrue(form.is_valid())
         pdf = 'mediatest/blank.pdf'
-        deposit_result = self.proto.submit_deposit_wrapper(pdf, self.form)
+        deposit_result = self.proto.submit_deposit_wrapper(pdf,
+                                        form, dry_run=True)
         self.assertIsInstance(deposit_result, DepositResult)
-        self.assertTrue(deposit_result.success())
-
-
+        return deposit_result
 

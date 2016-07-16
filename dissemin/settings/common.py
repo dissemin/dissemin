@@ -132,7 +132,7 @@ INSTALLED_APPS = (
     'memoize',
 )
 
-CRISPY_TEMPLATE_PACK = 'bootstrap'
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 SITE_ID = 1
 
