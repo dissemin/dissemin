@@ -65,8 +65,6 @@ before_script:
 
 script:
   - ./devutils/notify_translations
-  - python manage.py migrate --noinput
-  - python manage.py rebuild_index --noinput
   - coverage run --source=dissemin,papers,backend,deposit,upload,statistics --omit=*/migrations/*,dissemin/settings/* manage.py test -v 2
 
 after_success:
