@@ -28,17 +28,17 @@ from deposit.forms import BaseMetadataForm
 
 ZENODO_LICENSES_CHOICES = [
    ('cc-zero',
-    _('Creative Commons CCZero (CC0)')),
+    __('Creative Commons CCZero (CC0)')),
    ('cc-by',
-    _('Creative Commons Attribution (CC-BY)')),
+    __('Creative Commons Attribution (CC-BY)')),
    ('cc-by-sa',
-    _('Creative Commons Attribution-ShareAlike (CC-BY-SA)')),
+    __('Creative Commons Attribution-ShareAlike (CC-BY-SA)')),
    ('cc-by-nc-4.0',
-    _('Creative Commons Attribution-NonCommercial (CC-BY-NC)')),
+    __('Creative Commons Attribution-NonCommercial (CC-BY-NC)')),
    ('cc-by-nd-4.0',
-    _('Creative Commons Attribution-NoDerivatives (CC-BY-ND)')),
+    __('Creative Commons Attribution-NoDerivatives (CC-BY-ND)')),
    ('other-open',
-    _('Other open license')),
+    __('Other open license')),
  ]
 
 
