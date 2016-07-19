@@ -60,3 +60,6 @@ htmlcov/
 .vagrant
 .vm_venv
 *.user
+
+# Auto-completion
+.ropeproject
