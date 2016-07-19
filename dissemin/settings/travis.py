@@ -2,14 +2,18 @@
 Travis specific settings for tests
 """
 
-from .common import *
 import os
+
+# Patch urllib3 because the default SSL module on Travis sucks
+import urllib3.contrib.pyopenssl
+
+from .common import *
 
 # Cache backend
 # https://docs.djangoproject.com/en/1.8/topics/cache/
 CACHES = {
     'default': {
-	'BACKEND': 'django.core.cache.backends.locmem.LocMemCache'
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache'
     }
 }
 
@@ -36,7 +40,7 @@ DATABASES = {
 }
 
 # Base domain of the ORCiD API.
-ORCID_BASE_DOMAIN = 'orcid.org' # our test dump uses identifiers from the production
+ORCID_BASE_DOMAIN = 'orcid.org'  # our test dump uses identifiers from the production
 
 # ORCiD provider configuration (sandbox)
 SOCIALACCOUNT_PROVIDERS = \
@@ -44,9 +48,9 @@ SOCIALACCOUNT_PROVIDERS = \
        {
         'BASE_DOMAIN': ORCID_BASE_DOMAIN,
          # Member API or Public API? Default: False (for the public API)
-         'MEMBER_API': False, # for the member API
+         'MEMBER_API': False,  # for the member API
        }
-   }
+    }
 
 # Mock Celery (run tasks directly in the main process)
 CELERY_ALWAYS_EAGER = True
@@ -54,6 +58,4 @@ CELERY_ALWAYS_EAGER = True
 # Debug Email Backend
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# Patch urllib3 because the default SSL module on Travis sucks
-import urllib3.contrib.pyopenssl
 urllib3.contrib.pyopenssl.inject_into_urllib3()

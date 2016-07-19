@@ -17,8 +17,8 @@ UNIVERSITY_BRANDING = {
 # You only have to provide the URL of your CAS system and users
 # will automatically be redirected to this page to log in from dissemin.
 # Therefore no account creation is needed!
-ENABLE_CAS = False # It will add the relevant middlewares and auth backends.
-CAS_SERVER_URL="https://sso.ens.fr/cas/login"    #CRI CAS
+ENABLE_CAS = False  # It will add the relevant middlewares and auth backends.
+CAS_SERVER_URL = "https://sso.ens.fr/cas/login"  # CRI CAS
 
 # When logging out from dissemin, should we also log out from the CAS?
 CAS_LOGOUT_COMPLETELY = True

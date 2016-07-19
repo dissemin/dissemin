@@ -23,7 +23,9 @@
 from __future__ import unicode_literals
 
 import re
+
 from django.conf import settings
+
 try:
     import importlib
 except ImportError:
@@ -32,7 +34,9 @@ except ImportError:
 
 protocol_module_re = re.compile(r'deposit.\w+')
 
+
 class ProtocolRegistry(object):
+
     def __init__(self):
         self.dct = {}
         self.loaded = False
@@ -53,8 +57,6 @@ class ProtocolRegistry(object):
                     except ImportError as e:
                         print "ImportError in "+app+'.protocol'
                         print e
-                        pass
         self.loaded = True
 
 protocol_registry = ProtocolRegistry()
-

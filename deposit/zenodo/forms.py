@@ -20,18 +20,18 @@
 
 from __future__ import unicode_literals
 
-from django.core.urlresolvers import reverse
 from django import forms
+from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as __
 
 from deposit.forms import BaseMetadataForm
 from deposit.zenodo.protocol import ZENODO_LICENSES_CHOICES
+
 
 class ZenodoForm(BaseMetadataForm):
     license = forms.ChoiceField(
             label=__('License'),
             choices=ZENODO_LICENSES_CHOICES,
             initial='other-open',
-            widget=forms.RadioSelect(attrs={'class':'radio-margin'})
+            widget=forms.RadioSelect(attrs={'class': 'radio-margin'})
             )
-

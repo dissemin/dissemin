@@ -27,9 +27,12 @@ from __future__ import unicode_literals
 
 from lxml import etree
 
-from papers.models import Paper, Researcher, OaiRecord
+from papers.models import OaiRecord
+from papers.models import Paper
+from papers.models import Researcher
 
-XMLLANG_ATTRIB= '{http://www.w3.org/XML/1998/namespace}lang'
+XMLLANG_ATTRIB = '{http://www.w3.org/XML/1998/namespace}lang'
+
 
 class MetadataFormatter(object):
     """
@@ -54,9 +57,9 @@ class MetadataFormatter(object):
         The metadata as a string
         """
         return etree.tostring(self.render(paper, filename, form),
-                pretty_print=pretty,
-                encoding='UTF-8',
-                xml_declaration=True)
+                              pretty_print=pretty,
+                              encoding='UTF-8',
+                              xml_declaration=True)
 
 
 def addChild(elem, childName, text=None):
@@ -107,8 +110,3 @@ class DCFormatter(MetadataFormatter):
                 addChild(entry, dcterms+'identifier', p.doi)
 
         return entry
-
-
-
-
-

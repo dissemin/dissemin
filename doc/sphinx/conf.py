@@ -12,8 +12,18 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
-import sys
+# Mock LXML
+import inspect
 import os
+import sys
+
+import django
+from django.db.models.fields.files import FileDescriptor
+from django.utils.encoding import force_unicode
+from django.utils.html import strip_tags
+import mock
+
+import dissemin.settings
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -188,14 +198,14 @@ htmlhelp_basename = 'Dissemindoc'
 # -- Options for LaTeX output ---------------------------------------------
 
 latex_elements = {
-# The paper size ('letterpaper' or 'a4paper').
-#'papersize': 'letterpaper',
+    # The paper size ('letterpaper' or 'a4paper').
+    #'papersize': 'letterpaper',
 
-# The font size ('10pt', '11pt' or '12pt').
-#'pointsize': '10pt',
+    # The font size ('10pt', '11pt' or '12pt').
+    #'pointsize': '10pt',
 
-# Additional stuff for the LaTeX preamble.
-#'preamble': '',
+    # Additional stuff for the LaTeX preamble.
+    #'preamble': '',
 }
 
 # Grouping the document tree into LaTeX files. List of tuples
@@ -263,14 +273,9 @@ texinfo_documents = [
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 #texinfo_no_detailmenu = False
 
-# Mock LXML
-import sys
-
-import mock
-
-
 
 class BetterMock(mock.Mock):
+
     @classmethod
     def __getattr__(cls, name):
         return BetterMock()
@@ -287,7 +292,7 @@ MOCK_MODULES = [
     'sklearn', 'sklearn.metrics', 'sklearn.preprocessing', 'sklearn.svm',
     'titlecase', 'titlecase.titlecase',
     'bibtexparser', 'bibtexparser.bparser', 'bibtexparser.customization',
-    'psycopg2', 'django.db.backends.postgresql_psycopg2','django.db.backends.postgresql_psycopg2.base',
+    'psycopg2', 'django.db.backends.postgresql_psycopg2', 'django.db.backends.postgresql_psycopg2.base',
     'django.db.backends.postgresql_psycopg2.client', 'django.db.backends.postgresql_psycopg2.creation',
     'django.db.backends.postgresql_psycopg2.introspection', 'django.db.backends.postgresql_psycopg2.operations',
     'django.db.backends.postgresql_psycopg2.schema', 'django.db.backends.postgresql_psycopg2.versions',
@@ -295,19 +300,13 @@ MOCK_MODULES = [
 
 # To enable mocking, uncomment the following lines
 
-#for mod_name in MOCK_MODULES:
+# for mod_name in MOCK_MODULES:
 #       sys.modules[mod_name] = BetterMock()
 
 
 # Snippet to document Django models
 # https://djangosnippets.org/snippets/2533/
 
-import inspect
-import dissemin.settings
-from django.utils.html import strip_tags
-from django.utils.encoding import force_unicode
-import django
-from django.db.models.fields.files import FileDescriptor
 FileDescriptor.__get__ = lambda self, *args, **kwargs: self
 
 django.setup()
@@ -340,12 +339,13 @@ def process_docstring(app, what, name, obj, options, lines):
                 lines.append(u':param %s: %s' % (field.attname, verbose_name))
 
             # Add the field's type to the docstring
-            lines.append(u':type %s: %s' % (field.attname, type(field).__name__))
+            lines.append(u':type %s: %s' %
+                         (field.attname, type(field).__name__))
 
     # Return the extended docstring
     return lines
 
+
 def setup(app):
     # Register the docstring processor with sphinx
     app.connect('autodoc-process-docstring', process_docstring)
-

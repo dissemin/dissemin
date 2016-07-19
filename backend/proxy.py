@@ -20,6 +20,15 @@
 
 from __future__ import unicode_literals
 
+import json
+
+from oaipmh import common
+from oaipmh.client import Client
+from oaipmh.metadata import base_dc_reader
+from oaipmh.metadata import MetadataReader
+from oaipmh.metadata import MetadataRegistry
+from oaipmh.metadata import oai_dc_reader
+
 # A few settings telling how to access the OAI proxies
 
 # This one is for the repositories we harvest manually
@@ -40,15 +49,11 @@ PROXY_SIGNATURE_PREFIX = "proaixy:authorsig:"
 PROXY_FINGERPRINT_PREFIX = "proaixy:fingerprint:"
 PROXY_DOI_PREFIX = "proaixy:doi:"
 
-import json
-from oaipmh.client import Client
-from oaipmh.metadata import MetadataRegistry, MetadataReader
-from oaipmh import common
-from oaipmh.metadata import oai_dc_reader, base_dc_reader
 
 class CiteprocReader(MetadataReader):
+
     def __init__(self):
-        super(CiteprocReader, self).__init__({},{})
+        super(CiteprocReader, self).__init__({}, {})
 
     def __call__(self, element):
         # extract the Json
@@ -61,7 +66,8 @@ citeproc_reader = CiteprocReader()
 
 # Reader slightly tweaked because Cairn includes a useful non-standard field
 my_oai_dc_reader = oai_dc_reader
-my_oai_dc_reader._fields['accessRights'] = ('textList', 'oai_dc:dc/dcterms:accessRights/text()')
+my_oai_dc_reader._fields['accessRights'] = (
+    'textList', 'oai_dc:dc/dcterms:accessRights/text()')
 my_oai_dc_reader._namespaces['dcterms'] = 'http://purl.org/dc/terms/'
 
 
@@ -72,9 +78,9 @@ def get_proxy_client():
     client._day_granularity = PROXY_DAY_GRANULARITY
     return client
 
+
 def get_base_client():
     registry = MetadataRegistry()
     registry.registerReader('base_dc', base_dc_reader)
     client = Client(BASE_LOCAL_ENDPOINT, registry)
     return client
-

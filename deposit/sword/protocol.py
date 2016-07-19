@@ -21,36 +21,36 @@
 from __future__ import unicode_literals
 
 import json
-import requests
-import traceback, sys
+from os.path import basename
 from StringIO import StringIO
+import sys
+import traceback
 
+from django.conf import settings
 from django.utils.translation import ugettext as __
 from django.utils.translation import ugettext_lazy as _
-from os.path import basename
+import requests
+import sword2
 
-from deposit.protocol import *
 from deposit.forms import *
+from deposit.protocol import *
+from deposit.registry import protocol_registry
 from deposit.sword import metadataFormatter
-
 from papers.errors import MetadataSourceException
 from papers.utils import kill_html
 
-from django.conf import settings
-
-import sword2
 
 class SwordProtocol(RepositoryProtocol):
     """
     A generic SWORD protocol using the sword2 library
     """
+
     def get_conn(self):
         if self.repository.endpoint is None:
             raise DepositError(__("No servicedocument provided."))
         return sword2.Connection(self.repository.endpoint,
-                user_name=self.repository.username,
-                user_pass=self.repository.password)
-
+                                 user_name=self.repository.username,
+                                 user_pass=self.repository.password)
 
     def get_form(self):
         data = {}
@@ -70,7 +70,8 @@ class SwordProtocol(RepositoryProtocol):
         entry.add_field('title', p.title)
         for a in p.authors:
             if a.orcid:
-                entry.add_author(unicode(a), uri='http://{}/{}'.format(settings.ORCID_BASE_DOMAIN, a.orcid))
+                entry.add_author(
+                    unicode(a), uri='http://{}/{}'.format(settings.ORCID_BASE_DOMAIN, a.orcid))
             else:
                 entry.add_author(unicode(a))
         if p.abstract:
@@ -97,7 +98,7 @@ class SwordProtocol(RepositoryProtocol):
             conn = self.get_conn()
             self.log("### Creating metadata")
             #entry = self.createMetadata(form)
-            #self.log(entry.pretty_print())
+            # self.log(entry.pretty_print())
 
             formatter = DCFormatter()
             meta = formatter.toString(self.paper, 'article.pdf', True)
@@ -106,15 +107,18 @@ class SwordProtocol(RepositoryProtocol):
 
             f = StringIO(pdf)
             self.log("### Submitting metadata")
-            #receipt = conn.create(metadata_entry=entry,mimetype="application/pdf",
+            # receipt = conn.create(metadata_entry=entry,mimetype="application/pdf",
             #        payload=f,col_iri=self.repository.api_key)
             #receipt = conn.create(metadata_entry=entry,col_iri=self.repository.api_key)
-            files = {'file':('metadata.xml',meta)}
-            headers = {'In-Progress':'false', 'Content-Type': 'application/atom+xml; type=entry'}
-            auth = requests.auth.HTTPBasicAuth(self.repository.username,self.repository.password)
+            files = {'file': ('metadata.xml', meta)}
+            headers = {'In-Progress': 'false',
+                       'Content-Type': 'application/atom+xml; type=entry'}
+            auth = requests.auth.HTTPBasicAuth(
+                self.repository.username, self.repository.password)
             r = requests.post(self.repository.api_key, files=files, headers=headers,
-                    auth=auth)
-            self.log_request(r, 201, __('Unable to submit the paper to the collection.'))
+                              auth=auth)
+            self.log_request(r, 201, __(
+                'Unable to submit the paper to the collection.'))
 
             self.log(unicode(r.text))
 
@@ -128,6 +132,4 @@ class SwordProtocol(RepositoryProtocol):
 
         return deposit_result
 
-from deposit.registry import protocol_registry
 protocol_registry.register(SwordProtocol)
-

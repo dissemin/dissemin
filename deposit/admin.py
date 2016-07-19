@@ -19,12 +19,15 @@
 #
 
 from __future__ import unicode_literals
+
 from django.contrib import admin
+
 from deposit.models import *
 
+
 class DepositRecordAdmin(admin.ModelAdmin):
-   list_display = ('identifier', 'paper', 'user')
-   raw_id_fields = ('paper','user')
+    list_display = ('identifier', 'paper', 'user')
+    raw_id_fields = ('paper', 'user')
 
 admin.site.register(DepositRecord, DepositRecordAdmin)
 admin.site.register(Repository)

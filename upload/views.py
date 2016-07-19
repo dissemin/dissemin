@@ -20,30 +20,37 @@
 
 from __future__ import unicode_literals
 
+from datetime import datetime
+import json
 from StringIO import StringIO
 
-from django.shortcuts import render
-
-from django.http import HttpResponse, HttpResponseNotFound, HttpResponseForbidden
-from django.core.files.base import ContentFile
 from django.contrib.auth.decorators import user_passes_test
+from django.core.files.base import ContentFile
+from django.http import HttpResponse
+from django.http import HttpResponseForbidden
+from django.http import HttpResponseNotFound
+from django.shortcuts import render
 from django.utils.translation import ugettext as _
 from django.views.decorators.http import require_POST
-from papers.user import *
-
-from upload.forms import *
-from upload.models import *
-from dissemin.settings import URL_DEPOSIT_DOWNLOAD_TIMEOUT, DEPOSIT_MAX_FILE_SIZE
-
-import requests, json
 from jsonview.decorators import json_view
-from requests.packages.urllib3.exceptions import ReadTimeoutError, HTTPError
-import wand.image, wand.exceptions
 import PyPDF2
 from PyPDF2.utils import PyPdfError
-from datetime import datetime
+import requests
+from requests.packages.urllib3.exceptions import HTTPError
+from requests.packages.urllib3.exceptions import ReadTimeoutError
+import wand.exceptions
+import wand.image
+
+from dissemin.settings import DEPOSIT_MAX_FILE_SIZE
+from dissemin.settings import URL_DEPOSIT_DOWNLOAD_TIMEOUT
+from papers.user import *
+from upload.forms import *
+from upload.models import *
+
 
 # AJAX upload
+
+
 @json_view
 @require_POST
 @user_passes_test(is_authenticated)
@@ -65,6 +72,7 @@ def handleAjaxUpload(request):
     else:
         return form.errors, 403
 
+
 def make_thumbnail(pdf_blob):
     """
     Takes a PDF file (represented as a string) and returns a pair:
@@ -77,7 +85,7 @@ def make_thumbnail(pdf_blob):
         num_pages = None
 
         first_blob = False
-        try: # We try to extract the first page of the PDF
+        try:  # We try to extract the first page of the PDF
             orig_pdf = StringIO(pdf_blob)
             reader = PyPDF2.PdfFileReader(orig_pdf)
             num_pages = reader.getNumPages()
@@ -97,7 +105,8 @@ def make_thumbnail(pdf_blob):
             print "PyPDF error: "+str(e)
             first_blob = pdf_blob
 
-        # We render the PDF (or only its first page if we succeeded to extract it)
+        # We render the PDF (or only its first page if we succeeded to extract
+        # it)
         with wand.image.Image(blob=pdf_blob, format='pdf', resolution=resolution) as image:
             if image.height == 0 or image.width == 0:
                 print "0 width or height"
@@ -114,24 +123,23 @@ def make_thumbnail(pdf_blob):
 
             #ratio = float(image.width)/image.height
             #ref_ratio = float(THUMBNAIL_MAX_WIDTH)/THUMBNAIL_MAX_HEIGHT
-            #if ratio < ref_ratio:
+            # if ratio < ref_ratio:
             #    new_height = THUMBNAIL_MAX_HEIGHT
             #    new_width = int(new_height * ratio)
-            #else:
+            # else:
             #    new_width = THUMBNAIL_MAX_WIDTH
             #    new_height = int(new_width / ratio)
-            #print "Resizing to %d/%d" % (new_height,new_width)
+            # print "Resizing to %d/%d" % (new_height,new_width)
             #image.resize(new_width, new_height)
 
             image.format = 'png'
-            return (num_pages,image.make_blob())
+            return (num_pages, image.make_blob())
     except wand.exceptions.WandException as e:
         # Wand failed: we consider the PDF file as invalid
         print "Wand exception: "+unicode(e)
-        pass
     except ValueError as e:
         print "ValueError: "+unicode(e)
-        pass
+
 
 def save_pdf(user, orig_name, pdf_blob):
     """
@@ -141,7 +149,7 @@ def save_pdf(user, orig_name, pdf_blob):
     :returns: the status context telling whether the operation has succeded.
     """
 
-    response = {'status':'error'}
+    response = {'status': 'error'}
     # Check that the file is a valid PDF by extracting the first page
     res = make_thumbnail(pdf_blob)
     if res is None:
@@ -162,11 +170,11 @@ def save_pdf(user, orig_name, pdf_blob):
     upload.save()
 
     response = {
-            'status':'success',
-            'size':len(pdf_blob),
-            'num_pages':num_pages,
-            'thumbnail':upload.thumbnail.url,
-            'file_id':upload.id,
+            'status': 'success',
+            'size': len(pdf_blob),
+            'num_pages': num_pages,
+            'thumbnail': upload.thumbnail.url,
+            'file_id': upload.id,
             }
     return response
 
@@ -175,14 +183,15 @@ def save_pdf(user, orig_name, pdf_blob):
 @require_POST
 @user_passes_test(is_authenticated)
 def handleUrlDownload(request):
-    response = {'status':'error'}
+    response = {'status': 'error'}
     form = UrlDownloadForm(request.POST)
     if not form.is_valid():
         response['message'] = _('Invalid form.')
         return response, 403
     content = None
     try:
-        r = requests.get(form.cleaned_data['url'], timeout=URL_DEPOSIT_DOWNLOAD_TIMEOUT, stream=True)
+        r = requests.get(form.cleaned_data[
+                         'url'], timeout=URL_DEPOSIT_DOWNLOAD_TIMEOUT, stream=True)
         r.raise_for_status()
         content = r.raw.read(DEPOSIT_MAX_FILE_SIZE+1, decode_content=False)
 
@@ -191,8 +200,8 @@ def handleUrlDownload(request):
 
         content_type = r.headers.get('content-type')
         if 'text/html' in content_type:
-            response['message'] = ( # Left as one line for compatibility purposes
-_('Invalid content type: this link points to a web page, we need a direct link to a PDF file.'))
+            response['message'] = (  # Left as one line for compatibility purposes
+                _('Invalid content type: this link points to a web page, we need a direct link to a PDF file.'))
 
     except requests.exceptions.SSLError as e:
         response['message'] = _('Invalid SSL certificate on the remote server.')
@@ -216,5 +225,3 @@ _('Invalid content type: this link points to a web page, we need a direct link t
         return response, 403
 
     return response
-
-

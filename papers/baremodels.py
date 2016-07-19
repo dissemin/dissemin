@@ -26,22 +26,29 @@ without name ambiguity resolution.
 """
 
 from __future__ import unicode_literals
-import hashlib, re
-from urllib import urlencode, quote # for the Google Scholar and CORE link
 
-from django.template.defaultfilters import slugify
-from django.utils.translation import ugettext_lazy as _
-from django.utils.functional import cached_property
+import hashlib
+import re
+from statistics.models import COMBINED_STATUS_CHOICES
+from statistics.models import PDF_STATUS_CHOICES
+from statistics.models import STATUS_CHOICES_HELPTEXT
+from urllib import quote  # for the Google Scholar and CORE link
+from urllib import urlencode
+
 from django.apps import apps
-
 from django.core.exceptions import ObjectDoesNotExist
+from django.template.defaultfilters import slugify
+from django.utils.functional import cached_property
+from django.utils.translation import ugettext_lazy as _
 
-from papers.utils import *
 from papers.fingerprint import create_paper_plain_fingerprint
 from papers.name import to_plain_name
-from statistics.models import COMBINED_STATUS_CHOICES, PDF_STATUS_CHOICES, STATUS_CHOICES_HELPTEXT
-from publishers.models import Publisher, Journal, OA_STATUS_CHOICES, OA_STATUS_PREFERENCE, DummyPublisher
-
+from papers.utils import *
+from publishers.models import DummyPublisher
+from publishers.models import Journal
+from publishers.models import OA_STATUS_CHOICES
+from publishers.models import OA_STATUS_PREFERENCE
+from publishers.models import Publisher
 
 PAPER_TYPE_CHOICES = [
    ('journal-article', _('Journal article')),
@@ -59,9 +66,10 @@ PAPER_TYPE_CHOICES = [
    ('other', _('Other document')),
    ]
 
-PAPER_TYPE_PREFERENCE = [x for (x,y) in PAPER_TYPE_CHOICES]
+PAPER_TYPE_PREFERENCE = [x for (x, y) in PAPER_TYPE_CHOICES]
 
 MAX_NAME_LENGTH = 256
+
 
 class BareObject(object):
     """
@@ -117,7 +125,7 @@ class BareObject(object):
         """
         Breadcrumbs of bare objects are empty by default.
         """
-        return [(unicode(self),'#')]
+        return [(unicode(self), '#')]
 
     def check_mandatory_fields(self):
         """
@@ -127,7 +135,8 @@ class BareObject(object):
         for field in self._mandatory_fields:
             if not self.__dict__.get(field):
                 raise ValueError('No %s provided to create a %s.' %
-                        (field,self.__class__.__name__))
+                                 (field, self.__class__.__name__))
+
 
 class BarePaper(BareObject):
     """
@@ -165,7 +174,7 @@ class BarePaper(BareObject):
     def slug(self):
         return slugify(self.title)
 
-    ### Creation
+    # Creation
 
     def __init__(self, *args, **kwargs):
         super(BarePaper, self).__init__(*args, **kwargs)
@@ -195,10 +204,9 @@ class BarePaper(BareObject):
             ist.add_oairecord(r)
         return ist
 
-
     @classmethod
     def create(cls, title, author_names, pubdate, visible=True,
-                    affiliations=None, orcids=None):
+               affiliations=None, orcids=None):
         """
         Creates a (bare) paper. To save it to the database, we
         need to run the clustering algorithm to resolve Researchers for the authors,
@@ -218,12 +226,15 @@ class BarePaper(BareObject):
         plain_names = map(to_plain_name, author_names)
 
         if not title or not author_names or not pubdate:
-            raise ValueError("A title, pubdate and authors have to be provided to create a paper.")
+            raise ValueError(
+                "A title, pubdate and authors have to be provided to create a paper.")
 
         if affiliations is not None and len(author_names) != len(affiliations):
-            raise ValueError("The number of affiliations and authors have to be equal.")
+            raise ValueError(
+                "The number of affiliations and authors have to be equal.")
         if orcids is not None and len(author_names) != len(orcids):
-            raise ValueError("The number of ORCIDs (or Nones) and authors have to be equal.")
+            raise ValueError(
+                "The number of ORCIDs (or Nones) and authors have to be equal.")
         if type(visible) != bool:
             raise ValueError("Invalid paper visibility: %s" % unicode(visible))
 
@@ -232,7 +243,7 @@ class BarePaper(BareObject):
 
         p = cls()
         p.title = title
-        p.pubdate = pubdate # pubdate will be checked in fingerprint computation
+        p.pubdate = pubdate  # pubdate will be checked in fingerprint computation
         p.visible = visible
         for idx, n in enumerate(author_names):
             a = BareAuthor()
@@ -248,7 +259,6 @@ class BarePaper(BareObject):
         p.fingerprint = p.new_fingerprint()
 
         return p
-
 
     ### Properties to be reimplemented by non-bare Paper ###
     @property
@@ -280,7 +290,7 @@ class BarePaper(BareObject):
         if position is not None:
             if not (position >= 0 and position <= len(self.bare_authors)):
                 raise ValueError("Invalid author position '%s' of %d" %
-                        (str(position), len(self.bare_authors)))
+                                 (str(position), len(self.bare_authors)))
             self.bare_authors.insert(position, author)
         else:
             self.bare_authors.append(author)
@@ -377,7 +387,7 @@ class BarePaper(BareObject):
         """
         The list of name pairs (first,last) of the authors
         """
-        return [(name.first,name.last) for name in self.author_names()]
+        return [(name.first, name.last) for name in self.author_names()]
 
     @property
     def author_count(self):
@@ -472,13 +482,13 @@ class BarePaper(BareObject):
             return publication.publisher_or_default()
         return DummyPublisher()
 
-
     # Fingerprint -----------------------------------------------
     def plain_fingerprint(self, verbose=False):
         """
         Debugging function to display the plain fingerprint
         """
-        fp = create_paper_plain_fingerprint(self.title, self.bare_author_names(), self.year)
+        fp = create_paper_plain_fingerprint(
+            self.title, self.bare_author_names(), self.year)
         if verbose:
             print fp
         return fp
@@ -503,7 +513,6 @@ class BarePaper(BareObject):
                 best_abstract = rec.description
         return best_abstract
 
-
     # Updates ---------------------------------------------------
     def update_availability(self, cached_oairecords=[]):
         """
@@ -517,8 +526,7 @@ class BarePaper(BareObject):
                            from somewhere (otherwise it is fetched)
         """
         records = cached_oairecords or self.oairecords
-        records = sorted(records, key=
-                         (lambda r: -r.priority))
+        records = sorted(records, key=(lambda r: -r.priority))
 
         self.pdf_url = None
         oa_idx = len(OA_STATUS_PREFERENCE)-1
@@ -591,12 +599,11 @@ class BarePaper(BareObject):
             'classification': self.oa_status,
             })
 
-
     def google_scholar_link(self):
         """
         Link to search for the paper in Google Scholar
         """
-        return 'http://scholar.google.com/scholar?'+urlencode({'q':remove_diacritics(self.title)})
+        return 'http://scholar.google.com/scholar?'+urlencode({'q': remove_diacritics(self.title)})
 
     def core_link(self):
         """
@@ -626,6 +633,7 @@ class BarePaper(BareObject):
                 self.authors[0].name.last)
         result += ', %d' % self.year
         return result
+
 
 class BareAuthor(BareObject):
     """
@@ -674,14 +682,14 @@ class BareAuthor(BareObject):
         if orcid:
             try:
                 r = self._researcher_model.objects.get(orcid=orcid)
-                NameVariant=apps.get_app_config('papers').get_model('NameVariant')
+                NameVariant = apps.get_app_config(
+                    'papers').get_model('NameVariant')
                 nv = NameVariant.objects.get_or_create(
                         researcher=r,
                         name=self.name,
-                        defaults={'confidence':default_confidence})
+                        defaults={'confidence': default_confidence})
             except Researcher.DoesNotExist:
                 pass
-
 
     # Representations -------------------------------
     def __unicode__(self):
@@ -696,10 +704,10 @@ class BareAuthor(BareObject):
         (internal, not to be used as the output of the API)
         """
         return {
-            'name':self.name.serialize(),
-            'orcid':self.orcid,
-            'affiliation':self.affiliation,
-            'researcher_id':self.researcher_id,
+            'name': self.name.serialize(),
+            'orcid': self.orcid,
+            'affiliation': self.affiliation,
+            'researcher_id': self.researcher_id,
             }
 
     @classmethod
@@ -726,9 +734,9 @@ class BareAuthor(BareObject):
         if not orcid_id and self.affiliation:
             affiliation = self.affiliation
         return remove_nones({
-                'name':self.name.json(),
-                'affiliation':affiliation,
-                'orcid':orcid_id,
+                'name': self.name.json(),
+                'affiliation': affiliation,
+                'orcid': orcid_id,
                 })
 
 
@@ -775,8 +783,7 @@ class BareName(BareObject):
         """
         Unicode representation: first name followed by last name
         """
-        return '%s %s' % (self.first,self.last)
-
+        return '%s %s' % (self.first, self.last)
 
     def first_letter(self):
         """
@@ -789,9 +796,9 @@ class BareName(BareObject):
         JSON representation for internal storage purposes
         """
         return {
-            'first':self.first,
-            'last':self.last,
-            'full':self.full,
+            'first': self.first,
+            'last': self.last,
+            'full': self.full,
             }
 
     @classmethod
@@ -811,15 +818,16 @@ class BareName(BareObject):
         Returns a JSON representation of the name (for external APIs)
         """
         return {
-                'first':self.first,
-                'last':self.last,
+                'first': self.first,
+                'last': self.last,
                }
+
 
 class BareOaiRecord(BareObject):
     _bare_foreign_key_fields = [
-        'source', # expected to be an OaiSource
-        'journal', # expected to be a Journal
-        'publisher', # expected to be a Publisher
+        'source',  # expected to be an OaiSource
+        'journal',  # expected to be a Journal
+        'publisher',  # expected to be a Publisher
     ]
 
     _bare_fields = [
@@ -924,21 +932,20 @@ class BareOaiRecord(BareObject):
         if self.journal:
             result['issn'] = self.journal.issn
         result.update({
-                'source':self.source.identifier,
-                'identifier':self.identifier,
-                'splash_url':self.splash_url,
-                'pdf_url':self.pdf_url,
-                'doi':self.doi,
-                'abstract':self.description,
-                'keywords':self.keywords,
-                'contributors':self.contributors,
-                'type':self.pubtype,
-                'publisher':self.publisher_name,
-                'journal':self.full_journal_title(),
-                'container':self.container,
-                'issue':self.issue,
-                'volume':self.volume,
-                'pages':self.pages,
+                'source': self.source.identifier,
+                'identifier': self.identifier,
+                'splash_url': self.splash_url,
+                'pdf_url': self.pdf_url,
+                'doi': self.doi,
+                'abstract': self.description,
+                'keywords': self.keywords,
+                'contributors': self.contributors,
+                'type': self.pubtype,
+                'publisher': self.publisher_name,
+                'journal': self.full_journal_title(),
+                'container': self.container,
+                'issue': self.issue,
+                'volume': self.volume,
+                'pages': self.pages,
                 })
         return remove_nones(result)
-

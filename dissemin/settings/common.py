@@ -30,26 +30,45 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import os
 from datetime import timedelta
+import os
+
 from django.utils.translation import ugettext_lazy as _
 
 try:
-    from .secret import SECRET_KEY, DATABASES, EMAIL_HOST, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, EMAIL_USE_TLS, ROMEO_API_KEY, CORE_API_KEY, REDIS_HOST, REDIS_PORT, REDIS_DB, REDIS_PASSWORD
+    from .secret import CORE_API_KEY
+    from .secret import DATABASES
+    from .secret import EMAIL_HOST
+    from .secret import EMAIL_HOST_PASSWORD
+    from .secret import EMAIL_HOST_USER
+    from .secret import EMAIL_USE_TLS
+    from .secret import REDIS_DB
+    from .secret import REDIS_HOST
+    from .secret import REDIS_PASSWORD
+    from .secret import REDIS_PORT
+    from .secret import ROMEO_API_KEY
+    from .secret import SECRET_KEY
 except ImportError as e:
-    raise RuntimeError('Secret file is missing, did you forget to add a secret.py in your settings folder?')
+    raise RuntimeError(
+        'Secret file is missing, did you forget to add a secret.py in your settings folder?')
 
 try:
-    from .university import UNIVERSITY_BRANDING, CAS_SERVER_URL, CAS_LOGOUT_COMPLETELY, CAS_PROVIDE_URL_TO_LOGOUT, ENABLE_CAS
+    from .university import CAS_LOGOUT_COMPLETELY
+    from .university import CAS_PROVIDE_URL_TO_LOGOUT
+    from .university import CAS_SERVER_URL
+    from .university import ENABLE_CAS
+    from .university import UNIVERSITY_BRANDING
 except ImportError as e:
-    raise RuntimeError('University-specific file is missing, did you forget to add a university.py in your settings folder?')
+    raise RuntimeError(
+        'University-specific file is missing, did you forget to add a university.py in your settings folder?')
 
 # dirname(__file__) → repo/dissemin/settings/common.py
 # .. → repo/dissemin/settings
 # .. → repo/dissemin
 # .. → repo/
 
-BASE_DIR = os.path.dirname(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
+BASE_DIR = os.path.dirname(os.path.join(
+    os.path.dirname(__file__), '..', '..', '..'))
 
 
 ### DOI proxy ###
@@ -60,7 +79,8 @@ BASE_DIR = os.path.dirname(os.path.join(os.path.dirname(__file__), '..', '..', '
 # curl -LH "Accept: application/citeproc+json" http://DOI_PROXY_DOMAIN/10.1080/15568318.2012.660115
 # (returns the citation as Citeproc+JSON)
 #
-DOI_PROXY_DOMAIN =  'doi-cache.dissem.in' # This acts as a caching proxy for dx.doi.org
+# This acts as a caching proxy for dx.doi.org
+DOI_PROXY_DOMAIN = 'doi-cache.dissem.in'
 #
 # In addition, if the endpoint supports it, batch requests can be performed:
 # curl -d 'dois=["10.1016/j.physletb.2015.01.010","10.5380/dp.v1i1.1922","10.1007/978-3-319-10936-7_9"]' \\
@@ -77,7 +97,8 @@ DOI_PROXY_SUPPORTS_BATCH = True
 
 ### RoMEO proxy ###
 # Set this to 'sherpa.ac.uk' if our custom mirror is not up anymore.
-# Otherwise our proxy caches results and is more reliable than the original endpoint.
+# Otherwise our proxy caches results and is more reliable than the
+# original endpoint.
 ROMEO_API_DOMAIN = 'romeo-cache.dissem.in'
 
 ### Paper deposits ###
@@ -87,7 +108,7 @@ ROMEO_API_DOMAIN = 'romeo-cache.dissem.in'
 # 10MB - 10485760
 # 20MB - 20971520
 # 50MB - 5242880
-DEPOSIT_MAX_FILE_SIZE = 1024*1024*20 # 20 MB
+DEPOSIT_MAX_FILE_SIZE = 1024*1024*20  # 20 MB
 # Max download time when the file is downloaded from an URL (in seconds)
 URL_DEPOSIT_DOWNLOAD_TIMEOUT = 10
 
@@ -160,7 +181,6 @@ if ENABLE_CAS:
     AUTHENTICATION_BACKENDS += (
         'django_cas_ng.backends.CASBackend',
     )
-
 
 
 TEMPLATES = [
@@ -237,7 +257,7 @@ CELERYBEAT_SCHEDULE = {
         'schedule': timedelta(minutes=30),
     },
     'update_journal_stats': {
-        'task':'update_journal_stats',
+        'task': 'update_journal_stats',
         'schedule': timedelta(days=1),
     },
     'remove_empty_profiles': {
@@ -254,7 +274,7 @@ BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 43200}
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 LANGUAGE_CODE = 'en-us'
-POSSIBLE_LANGUAGE_CODES = ['en','fr']
+POSSIBLE_LANGUAGE_CODES = ['en', 'fr']
 LANGUAGES = [
     ('en', _('English')),
     ('fr', _('French')),

@@ -20,17 +20,18 @@
 
 from __future__ import unicode_literals
 
-import unittest
-import django.test
-import json
 from django.core.urlresolvers import reverse
-from backend.tests import PrefilledTest
+import django.test
+
 from backend.crossref import CrossRefAPI
 from backend.oai import OaiPaperSource
-from papers.testajax import JsonRenderingTest
+from backend.tests import PrefilledTest
 from papers.models import Paper
+from papers.testajax import JsonRenderingTest
+
 
 class PaperApiTest(JsonRenderingTest):
+
     def test_valid_paper(self):
         p = self.r3.papers[0]
         parsed = self.checkJson(self.getPage('papers-detail', args=[p.pk]))
@@ -39,10 +40,12 @@ class PaperApiTest(JsonRenderingTest):
         self.checkJson(self.getPage('papers-detail', args=[123456]), 404)
 
     def test_valid_doi(self):
-        self.checkJson(self.getPage('api-paper-doi', args=['10.1016/0379-6779(91)91572-r']))
+        self.checkJson(self.getPage('api-paper-doi',
+                                    args=['10.1016/0379-6779(91)91572-r']))
 
     def test_invalid_doi(self):
-        self.checkJson(self.getPage('api-paper-doi', args=['10.10.10.10.10']), 404)
+        self.checkJson(self.getPage('api-paper-doi',
+                                    args=['10.10.10.10.10']), 404)
 
     def test_query(self):
         invalid_payloads = [
@@ -60,7 +63,7 @@ class PaperApiTest(JsonRenderingTest):
 
         for payload in invalid_payloads:
             self.checkJson(self.postPage('api-paper-query', postargs=payload,
-                postkwargs={'content_type':'application/json'}), 400)
+                                         postkwargs={'content_type': 'application/json'}), 400)
 
         valid_payloads = [
             '{"title":"Strange resonances measured in Al+Al collisions at sqrt {S_ NN }= 2.65 GeV with the FOPI detector","date":"2015","authors":[{"plain":"Lopez, X."}]}',
@@ -68,7 +71,4 @@ class PaperApiTest(JsonRenderingTest):
                 ]
         for payload in valid_payloads:
             self.checkJson(self.postPage('api-paper-query', postargs=payload,
-                postkwargs={'content_type':'application/json'}), 200)
-
-
-
+                                         postkwargs={'content_type': 'application/json'}), 200)

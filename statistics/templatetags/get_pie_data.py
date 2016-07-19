@@ -1,9 +1,10 @@
 # -*- encoding: utf-8 -*-
 from __future__ import unicode_literals
 
+import json
+
 from django import template
 from django.utils.safestring import mark_safe
-import json
 
 register = template.Library()
 

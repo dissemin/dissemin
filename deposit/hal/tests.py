@@ -19,16 +19,21 @@
 #
 
 from __future__ import unicode_literals
-from django.test import TestCase
-from unittest import expectedFailure
-from papers.models import Paper
-from deposit.tests import ProtocolTest
-from deposit.hal.protocol import HALProtocol
-from deposit.hal.metadataFormatter import AOFRFormatter
-from lxml import etree
+
 from os import path
+from unittest import expectedFailure
+
+from django.test import TestCase
+from lxml import etree
+
+from deposit.hal.metadataFormatter import AOFRFormatter
+from deposit.hal.protocol import HALProtocol
+from deposit.tests import ProtocolTest
+from papers.models import Paper
+
 
 class AOFRTest(TestCase):
+
     @classmethod
     def setUpClass(cls):
         super(AOFRTest, cls).setUpClass()
@@ -48,7 +53,9 @@ class AOFRTest(TestCase):
                 f.write(etree.tostring(rendered, pretty_print=True))
             self.xsd.assertValid(rendered)
 
+
 class HALProtocolTest(ProtocolTest):
+
     @classmethod
     def setUpClass(self):
         super(HALProtocolTest, self).setUpClass()
@@ -62,17 +69,15 @@ class HALProtocolTest(ProtocolTest):
         """
         p = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
         r = self.dry_deposit(p,
-            abstract='this is an abstract',
-            topic='INFO')
+                             abstract='this is an abstract',
+                             topic='INFO')
         self.assertEqual(r.status, 'DRY_SUCCESS')
 
     def test_predict_topic(self):
         cases = [
-                ('IBEX: Harvesting Entities from the Web Using Unique Identifiers','INFO'),
+                ('IBEX: Harvesting Entities from the Web Using Unique Identifiers', 'INFO'),
                 ('Global climate change entails many threats and challenges for the majority of crops.', 'SDV'),
                 ('', None),
             ]
         for text, topic in cases:
             self.assertEqual(self.proto.predict_topic(text), topic)
-    
-

@@ -20,32 +20,36 @@
 
 from __future__ import unicode_literals
 
-from django.conf.urls import include, url
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, HttpResponseNotFound, HttpResponseForbidden
+from django.conf.urls import include
+from django.conf.urls import url
 from django.contrib.auth.decorators import user_passes_test
-from django.core.validators import validate_email
 from django.core.exceptions import MultipleObjectsReturned
-from django.views.decorators.http import require_POST
-from django.template import loader
-from django.forms import ValidationError
+from django.core.validators import validate_email
 from django.db import IntegrityError
+from django.forms import ValidationError
+from django.http import HttpResponse
+from django.http import HttpResponseForbidden
+from django.http import HttpResponseNotFound
+from django.shortcuts import get_object_or_404
+from django.shortcuts import render
+from django.template import loader
 from django.utils.translation import ugettext as __
-import json, requests
-
 from django.views.decorators.csrf import csrf_exempt
-
-from dissemin.settings import URL_DEPOSIT_DOWNLOAD_TIMEOUT, DEPOSIT_MAX_FILE_SIZE, MEDIA_ROOT
-
-from papers.models import *
-from papers.user import *
-from papers.forms import AddUnaffiliatedResearcherForm
-from papers.utils import iunaccent, sanitize_html, kill_html
-from papers.name import normalize_name_words
-
+from django.views.decorators.http import require_POST
 from jsonview.decorators import json_view
+import requests
 
-import os.path
+from dissemin.settings import DEPOSIT_MAX_FILE_SIZE
+from dissemin.settings import MEDIA_ROOT
+from dissemin.settings import URL_DEPOSIT_DOWNLOAD_TIMEOUT
+from papers.forms import AddUnaffiliatedResearcherForm
+from papers.models import *
+from papers.name import normalize_name_words
+from papers.user import *
+from papers.utils import iunaccent
+from papers.utils import kill_html
+from papers.utils import sanitize_html
+
 
 @json_view
 @require_POST
@@ -81,6 +85,8 @@ def process_ajax_change(request, model, allowedFields):
         return response, 404
 
 # Researcher management
+
+
 @user_passes_test(is_admin)
 def deleteResearcher(request, pk):
     """
@@ -93,6 +99,7 @@ def deleteResearcher(request, pk):
     if dept:
         dept.update_stats()
     return HttpResponse('OK', content_type='text/plain')
+
 
 def researcherCandidatesByName(name):
     """
@@ -107,10 +114,12 @@ def researcherCandidatesByName(name):
     # TODO add test to check this view!!!!
 
     # From the model
-    related_researchers = list(map(lambda nv: nv.researcher, name.namevariant_set.all()))
+    related_researchers = list(
+        map(lambda nv: nv.researcher, name.namevariant_set.all()))
+
     def renderResearcher(res):
         return loader.render_to_string('papers/itemResearcher.html',
-                {'researcher':res})
+                                       {'researcher': res})
     seen_orcids = set()
     for researcher in related_researchers:
         if researcher.orcid:
@@ -119,14 +128,17 @@ def researcherCandidatesByName(name):
 
     # From ORCID
     related_orcids = OrcidProfile.search_by_name(name.first, name.last)
+
     def renderProfile(res):
-        rendered_keywords = ', '.join(res.get('keywords',[]))
+        rendered_keywords = ', '.join(res.get('keywords', []))
         res['rendered_keywords'] = rendered_keywords
         return loader.render_to_string('papers/itemOrcid.html',
-                {'profile':res})
-    related_orcids = filter(lambda r: r['orcid'] not in seen_orcids, related_orcids)
+                                       {'profile': res})
+    related_orcids = filter(
+        lambda r: r['orcid'] not in seen_orcids, related_orcids)
     rendered += map(renderProfile, related_orcids)
     return rendered
+
 
 @json_view
 @require_POST
@@ -146,17 +158,17 @@ def newUnaffiliatedResearcher(request):
             name, created = Name.get_or_create(first, last)
             candidates = researcherCandidatesByName(name)
             if candidates:
-                return {'disambiguation':candidates}
+                return {'disambiguation': candidates}
 
         researcher = Researcher.create_by_name(first, last)
         researcher.fetch_everything_if_outdated()
-        return {'url':researcher.url}
+        return {'url': researcher.url}
     else:
         return form.errors, 403
 
 # paper management
 #@user_passes_test(is_authenticated)
-#def annotatepaper(request, pk, status):
+# def annotatepaper(request, pk, status):
 #    paper = get_object_or_404(Paper, pk=pk)
 #    try:
 #        visible = bool(status)
@@ -167,26 +179,28 @@ def newUnaffiliatedResearcher(request):
 #    return httpResponse('OK', content_type='text/plain')
 
 #@user_passes_test(is_admin)
-#def changepaper(request):
+# def changepaper(request):
 #    allowedFields = ['title']
 #    return process_ajax_change(request, Paper, allowedFields)
 
 # department management
 #@user_passes_test(is_admin)
-#def changedepartment(request):
+# def changedepartment(request):
 #    allowedFields = ['name']
 #    return process_ajax_change(request, Department, allowedFields)
 
 # researcher management
 #@user_passes_test(is_admin)
-#def changeresearcher(request):
+# def changeresearcher(request):
 #    allowedFields = ['role']
 #    return process_ajax_change(request, Researcher, allowedFields)
+
 
 @user_passes_test(is_admin)
 def setResearcherDepartment(request):
     allowedFields = ['department_id']
     return process_ajax_change(request, Researcher, allowedFields)
+
 
 @json_view
 def harvestingStatus(request, pk):
@@ -199,6 +213,7 @@ def harvestingStatus(request, pk):
         resp = None
     return resp
 
+
 @user_passes_test(is_authenticated)
 @json_view
 def waitForConsolidatedField(request):
@@ -206,7 +221,7 @@ def waitForConsolidatedField(request):
     try:
         paper = Paper.objects.get(pk=int(request.GET["id"]))
     except (KeyError, ValueError, Paper.DoesNotExist):
-        return {'success':success,'message':'Invalid paper id'}, 404
+        return {'success': success, 'message': 'Invalid paper id'}, 404
     field = request.GET.get('field')
     value = None
     paper.consolidate_metadata(wait=True)
@@ -214,13 +229,13 @@ def waitForConsolidatedField(request):
         value = kill_html(paper.abstract)
         success = len(paper.abstract) > 64
     else:
-        return {'success':success,'message':'Invalid field'}, 401
-    return {'success':success,'value':value}
+        return {'success': success, 'message': 'Invalid field'}, 401
+    return {'success': success, 'value': value}
 
 # author management
 #@user_passes_test(is_admin)
 #@json_view
-#def changeAuthor(request):
+# def changeAuthor(request):
 #    response = dict()
 #    try:
 #        author = Author.objects.get(pk=request.POST.get('pk'))
@@ -257,6 +272,8 @@ def waitForConsolidatedField(request):
 #        return response, 404
 
 # Publisher management
+
+
 @user_passes_test(is_admin)
 @require_POST
 def changePublisherStatus(request):
@@ -267,7 +284,7 @@ def changePublisherStatus(request):
         status = request.POST.get('status')
         if status in allowedStatuses and status != publisher.oa_status:
             from backend.tasks import change_publisher_oa_status
-            change_publisher_oa_status.delay(pk=pk,status=status)
+            change_publisher_oa_status.delay(pk=pk, status=status)
             return HttpResponse('OK', content_type='text/plain')
         else:
             raise ObjectDoesNotExist
@@ -275,16 +292,20 @@ def changePublisherStatus(request):
         return HttpResponseNotFound('NOK: '+message, content_type='text/plain')
 
 urlpatterns = [
-#    url(r'^annotate-paper-(?P<pk>\d+)-(?P<status>\d+)$', annotatePaper, name='ajax-annotatePaper'),
-    url(r'^delete-researcher-(?P<pk>\d+)$', deleteResearcher, name='ajax-deleteResearcher'),
-#    url(r'^change-department$', changeDepartment, name='ajax-changeDepartment'),
-#    url(r'^change-paper$', changePaper, name='ajax-changePaper'),
-#    url(r'^change-researcher$', changeResearcher, name='ajax-changeResearcher'),
-#    url(r'^change-author$', changeAuthor, name='ajax-changeAuthor'),
-    url(r'^new-unaffiliated-researcher$', newUnaffiliatedResearcher, name='ajax-newUnaffiliatedResearcher'),
-    url(r'^change-publisher-status$', changePublisherStatus, name='ajax-changePublisherStatus'),
-#    url(r'^harvesting-status-(?P<pk>\d+)$', harvestingStatus, name='ajax-harvestingStatus'),
-    url(r'^wait-for-consolidated-field$', waitForConsolidatedField, name='ajax-waitForConsolidatedField'),
-    url(r'^set-researcher-department$', setResearcherDepartment, name='ajax-setResearcherDepartment'),
+    #    url(r'^annotate-paper-(?P<pk>\d+)-(?P<status>\d+)$', annotatePaper, name='ajax-annotatePaper'),
+    url(r'^delete-researcher-(?P<pk>\d+)$',
+        deleteResearcher, name='ajax-deleteResearcher'),
+    #    url(r'^change-department$', changeDepartment, name='ajax-changeDepartment'),
+    #    url(r'^change-paper$', changePaper, name='ajax-changePaper'),
+    #    url(r'^change-researcher$', changeResearcher, name='ajax-changeResearcher'),
+    #    url(r'^change-author$', changeAuthor, name='ajax-changeAuthor'),
+    url(r'^new-unaffiliated-researcher$', newUnaffiliatedResearcher,
+        name='ajax-newUnaffiliatedResearcher'),
+    url(r'^change-publisher-status$', changePublisherStatus,
+        name='ajax-changePublisherStatus'),
+    #    url(r'^harvesting-status-(?P<pk>\d+)$', harvestingStatus, name='ajax-harvestingStatus'),
+    url(r'^wait-for-consolidated-field$', waitForConsolidatedField,
+        name='ajax-waitForConsolidatedField'),
+    url(r'^set-researcher-department$', setResearcherDepartment,
+        name='ajax-setResearcherDepartment'),
 ]
-

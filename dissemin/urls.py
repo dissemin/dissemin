@@ -18,25 +18,30 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from django.conf.urls import patterns, include, url
-from django.conf import settings
-from django.conf.urls.static import static
-from django.views import generic
-from django.shortcuts import render, redirect
-from django.views.i18n import javascript_catalog
-import allauth.account.views
-from os.path import join
 
+import allauth.account.views
+from allauth.socialaccount import providers
+from django.conf import settings
+from django.conf.urls import include
+from django.conf.urls import patterns
+from django.conf.urls import url
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import logout
-from allauth.socialaccount import providers
+from django.shortcuts import redirect
+from django.shortcuts import render
+from django.views import generic
+from django.views.i18n import javascript_catalog
+
 from dissemin.settings import UNIVERSITY_BRANDING
+
 admin.autodiscover()
 
 try:
     import importlib
 except ImportError:
     from django.utils import importlib
+
 
 def handler404(request):
     response = render(request, '404.html')
@@ -49,11 +54,14 @@ def handler500(request):
     response.status_code = 500
     return response
 
+
 class LoginView(generic.TemplateView):
     template_name = 'dissemin/login.html'
 
+
 class SandboxLoginView(allauth.account.views.LoginView):
     template_name = 'dissemin/sandbox.html'
+
 
 def logoutView(request):
     logout(request)
@@ -61,6 +69,7 @@ def logoutView(request):
         return redirect(request.META['HTTP_REFERER'])
     else:
         return redirect('/')
+
 
 def temp(name):
     def handler(request, *args, **kwargs):
@@ -98,15 +107,16 @@ urlpatterns = [
     url(r'^jsreverse/$', 'django_js_reverse.views.urls_js', name='js_reverse'),
     # Social auth
     url(r'^accounts/login/$', LoginView.as_view(), name='account_login'),
-    url(r'^accounts/sandbox_login/$', SandboxLoginView.as_view(), name='sandbox-login'),
+    url(r'^accounts/sandbox_login/$',
+        SandboxLoginView.as_view(), name='sandbox-login'),
     url(r'^accounts/logout/$', logoutView, name='account_logout'),
     url(r'^accounts/social/', include('allauth.socialaccount.urls')),
     # JavaScript i18n
     url(r'^jsi18n/$', javascript_catalog, js_info_dict, name='javascript-catalog'),
     url(r'^lang/', include('django.conf.urls.i18n'), name='set_language'),
-# Remove this in production
+    # Remove this in production
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT
-) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+           ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # Allauth social providers (normally included directly in the standard installation
 # of django-allauth, but as we disabled normal auth, we have to do it here).

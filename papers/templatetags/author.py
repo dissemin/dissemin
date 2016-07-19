@@ -2,11 +2,12 @@
 from __future__ import unicode_literals
 
 from django import template
+from django.core.urlresolvers import reverse
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
-from django.core.urlresolvers import reverse
 
 register = template.Library()
+
 
 @register.filter(is_safe=True)
 def authorlink(author):
@@ -15,12 +16,14 @@ def authorlink(author):
     else:
         return mark_safe(escape(unicode(author.name)))
 
+
 @register.filter(is_safe=True)
 def publication(publi):
     result = ''
     if publi.publisher_id:
         if publi.publisher.canonical_url:
-            result += '<a href="'+publi.publisher.canonical_url+'">'+escape(publi.publisher.name)+'</a>, '
+            result += '<a href="'+publi.publisher.canonical_url + \
+                '">'+escape(publi.publisher.name)+'</a>, '
         else:
             result += escape(publi.publisher.name)+', '
     if publi.pubtype == 'book-chapter' and publi.journal and publi.container and publi.container != unicode(publi.journal):

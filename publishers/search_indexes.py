@@ -1,5 +1,6 @@
-from .models import Publisher
 from haystack import indexes
+
+from .models import Publisher
 
 
 class PublisherIndex(indexes.SearchIndex, indexes.Indexable):

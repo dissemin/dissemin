@@ -19,16 +19,24 @@
 #
 
 from __future__ import unicode_literals
+
+import os
+import unittest
+
 from django.test import TestCase
-from deposit.tests import ProtocolTest, lorem_ipsum
+
+from deposit.tests import lorem_ipsum
+from deposit.tests import ProtocolTest
 from deposit.zenodo.protocol import ZenodoProtocol
-import os, unittest
+
 
 class ZenodoProtocolTest(ProtocolTest):
+
     @classmethod
     def setUpClass(self):
         if 'ZENODO_SANDBOX_API_KEY' not in os.environ:
-            raise unittest.SkipTest("Environment variable ZENODO_SANDBOX_API_KEY is undefined")
+            raise unittest.SkipTest(
+                "Environment variable ZENODO_SANDBOX_API_KEY is undefined")
         super(ZenodoProtocolTest, self).setUpClass()
         self.repo.api_key = os.environ['ZENODO_SANDBOX_API_KEY']
         self.repo.endpoint = 'https://sandbox.zenodo.org/api/deposit/depositions'

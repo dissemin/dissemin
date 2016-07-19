@@ -18,19 +18,23 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-import unittest
 from datetime import date
-from django.test import TestCase
-from django.test.utils import override_settings
-from django.contrib.auth.models import User
-from django.forms import Form
-from papers.models import OaiSource, Paper
-from backend.tests import PrefilledTest
-from deposit.models import Repository, DepositRecord
-from deposit.protocol import DepositResult
-from django.core.files.uploadedfile import InMemoryUploadedFile
 from io import BytesIO
 import os
+import unittest
+
+from django.contrib.auth.models import User
+from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.forms import Form
+from django.test import TestCase
+from django.test.utils import override_settings
+
+from backend.tests import PrefilledTest
+from deposit.models import DepositRecord
+from deposit.models import Repository
+from deposit.protocol import DepositResult
+from papers.models import OaiSource
+from papers.models import Paper
 
 # 1x1 px image used as default logo for the repository
 simple_png_image = b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01\x08\x02\x00\x00\x00\x90wS\xde\x00\x00\x00\tpHYs\x00\x00\x0b\x13\x00\x00\x0b\x13\x01\x00\x9a\x9c\x18\x00\x00\x00\x07tIME\x07\xdf\n\x12\x0c+\x19\x84\x1d/"\x00\x00\x00\x19tEXtComment\x00Created with GIMPW\x81\x0e\x17\x00\x00\x00\x0cIDAT\x08\xd7c\xa8\xa9\xa9\x01\x00\x02\xec\x01u\x90\x90\x1eL\x00\x00\x00\x00IEND\xaeB`\x82'
@@ -38,10 +42,12 @@ simple_png_image = b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00
 # for sample abstracts
 lorem_ipsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
+
 class ProtocolTest(PrefilledTest):
     """
     Set of generic tests that any protocol should pass.
     """
+
     def __init__(self, *args, **kwargs):
         super(ProtocolTest, self).__init__(*args, **kwargs)
 
@@ -49,12 +55,12 @@ class ProtocolTest(PrefilledTest):
     @override_settings(MEDIA_ROOT='mediatest/')
     def setUpClass(self):
         if self is ProtocolTest:
-             raise unittest.SkipTest("Base test")
+            raise unittest.SkipTest("Base test")
         super(ProtocolTest, self).setUpClass()
         self.p1 = Paper.get_or_create(
                 "This is a test paper",
                 [self.r1.name, self.r2.name, self.r4.name],
-                date(year=2014,month=02,day=15))
+                date(year=2014, month=02, day=15))
         self.user, _ = User.objects.get_or_create(username='myuser')
         self.oaisource, _ = OaiSource.objects.get_or_create(
             identifier='deposit_oaisource',
@@ -96,7 +102,6 @@ class ProtocolTest(PrefilledTest):
         self.assertTrue(form.is_valid())
         pdf = 'mediatest/blank.pdf'
         deposit_result = self.proto.submit_deposit_wrapper(pdf,
-                                        form, dry_run=True)
+                                                           form, dry_run=True)
         self.assertIsInstance(deposit_result, DepositResult)
         return deposit_result
-

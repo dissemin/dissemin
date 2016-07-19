@@ -35,12 +35,10 @@ which computes the status of a particular paper.
 
 from __future__ import unicode_literals
 
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
-from django.core.urlresolvers import reverse
-
-import json
 
 #: Paper status (combined because it takes into account
 #: both the publisher policy and the full text availability).
@@ -58,10 +56,10 @@ COMBINED_STATUS_CHOICES = [
 #: Helptext displayed when a paper logo is hovered
 STATUS_CHOICES_HELPTEXT = {
     'oa': _('This paper is made freely available by the publisher.'),
-    'ok':_('This paper is available in a repository.'),
-    'couldbe':_('This paper was not found in any repository, but could be made available legally by the author.'),
-    'unk':_('This paper was not found in any repository; the policy of its publisher is unknown or unclear.'),
-    'closed':_('Distributing this paper is prohibited by the publisher'),
+    'ok': _('This paper is available in a repository.'),
+    'couldbe': _('This paper was not found in any repository, but could be made available legally by the author.'),
+    'unk': _('This paper was not found in any repository; the policy of its publisher is unknown or unclear.'),
+    'closed': _('Distributing this paper is prohibited by the publisher'),
     }
 
 #: Availability status choices
@@ -78,6 +76,7 @@ STATUS_QUERYSET_FILTER = {
     'unk': lambda q: q.filter(pdf_url__isnull=True, oa_status='UNK'),
     'closed': lambda q: q.filter(pdf_url__isnull=True, oa_status='NOK'),
     }
+
 
 def combined_status_for_instance(paper):
     """
@@ -185,19 +184,19 @@ class BareAccessStatistics(object):
         the statistics as a pie.
         """
         detailed_data = []
-        for (key,desc) in COMBINED_STATUS_CHOICES:
+        for (key, desc) in COMBINED_STATUS_CHOICES:
             item = {
-                'id':key,
-                'label':unicode(desc),
-                'value':self.__dict__['num_'+key],
+                'id': key,
+                'label': unicode(desc),
+                'value': self.__dict__['num_'+key],
                 }
             detailed_data.append(item)
         # Gives the translated label
         aggregated_labels = []
-        for (key,desc) in PDF_STATUS_CHOICES:
+        for (key, desc) in PDF_STATUS_CHOICES:
             item = {'label': unicode(desc)}
             aggregated_labels.append(item)
-        return {'detailed':detailed_data,'aggregated':aggregated_labels}
+        return {'detailed': detailed_data, 'aggregated': aggregated_labels}
 
     @property
     def num_available(self):
@@ -229,6 +228,7 @@ class BareAccessStatistics(object):
         """
         if self.num_tot:
             return int(100.*(self.num_oa + self.num_ok)/self.num_tot)
+
     @property
     def percentage_unavailable(self):
         """
@@ -271,4 +271,3 @@ class AccessStatistics(models.Model, BareAccessStatistics):
 
     class Meta:
         db_table = 'papers_accessstatistics'
-

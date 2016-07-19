@@ -17,26 +17,29 @@
 #
 
 from django.test import TestCase
+
 from backend.romeo import *
-from papers.testpages import RenderingTest
 from papers.models import Paper
+from papers.testpages import RenderingTest
+
 
 class JournalPageTest(RenderingTest):
 
     def test_escaping(self):
         # issue #115
         # in the meantime the journal has been deleted from sherpa
-        journal = fetch_journal({'issn':'0302-9743'})
+        journal = fetch_journal({'issn': '0302-9743'})
         # Small hack to make the journal appear in the publisher's journal list
         journal.update_stats()
         journal.stats.num_tot = 1
         journal.stats.save()
         publisher = journal.publisher
-        r = self.getPage('publisher', kwargs={'pk':publisher.pk, 'slug':publisher.slug})
+        r = self.getPage('publisher', kwargs={
+                         'pk': publisher.pk, 'slug': publisher.slug})
         self.checkHtml(r)
 
     def test_publisher_url(self):
         p = Paper.create_by_doi('10.1007/978-3-642-14363-2_7')
         for publi in p.publications:
-            self.checkPage('publisher', kwargs={'pk':publi.publisher_id, 'slug':publi.publisher.slug})
-
+            self.checkPage('publisher', kwargs={
+                           'pk': publi.publisher_id, 'slug': publi.publisher.slug})

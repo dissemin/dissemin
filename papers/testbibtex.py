@@ -22,15 +22,16 @@
 from __future__ import unicode_literals
 
 import unittest
+
 from papers.bibtex import parse_authors_list
 
+
 class ParseAuthorsListTest(unittest.TestCase):
+
     def test_simple(self):
         self.assertEqual(parse_authors_list('Claire Toffano-Nioche and Daniel Gautheret and Fabrice Leclerc'),
-                [('Claire','Toffano-Nioche'),('Daniel','Gautheret'),('Fabrice','Leclerc')])
+                         [('Claire', 'Toffano-Nioche'), ('Daniel', 'Gautheret'), ('Fabrice', 'Leclerc')])
 
     def test_etal(self):
         self.assertEqual(parse_authors_list('Claire Toffano-Nioche and et al.'),
-                [('Claire','Toffano-Nioche')])
-
-
+                         [('Claire', 'Toffano-Nioche')])
