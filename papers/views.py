@@ -19,40 +19,44 @@
 
 from __future__ import unicode_literals
 
-from django.shortcuts import render, get_object_or_404, redirect
-from django.http import (
-    HttpResponse, HttpResponseForbidden, Http404, HttpResponsePermanentRedirect,
-)
-from django.template import loader
-from django.views import generic
-from django.core.urlresolvers import reverse
-from django.core.exceptions import ObjectDoesNotExist
-from django.contrib.auth.models import User
-from django.contrib.auth.decorators import user_passes_test
-from django.utils.encoding import escape_uri_path
-from django.utils.translation import ugettext as _, ungettext
-from django.db.models import Count
-from haystack.generic_views import SearchView
-from haystack.query import EmptySearchQuerySet
-from search import SearchQuerySet
-
-from papers.models import *
-from papers.forms import AddUnaffiliatedResearcherForm, PaperForm
-from papers.user import is_admin, is_authenticated
-from papers.orcid import *
-from papers.doi import to_doi
-
-from notification.api import get_notifications
-
-from deposit.models import *
-
-from publishers.views import SlugDetailView
-from statistics.models import COMBINED_STATUS_CHOICES, combined_status_stats
-from dissemin.settings import UNIVERSITY_BRANDING
+import json
+from statistics.models import COMBINED_STATUS_CHOICES
+from statistics.models import combined_status_stats
 
 from allauth.socialaccount.signals import post_social_login
+from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
+from django.core.urlresolvers import reverse
+from django.db.models import Count
+from django.http import Http404
+from django.http import HttpResponse
+from django.http import HttpResponseForbidden
+from django.http import HttpResponsePermanentRedirect
+from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect
+from django.shortcuts import render
+from django.template import loader
+from django.utils.encoding import escape_uri_path
+from django.utils.translation import ugettext as _
+from django.utils.translation import ungettext
+from django.views import generic
+from haystack.generic_views import SearchView
+from haystack.query import EmptySearchQuerySet
 
-import json
+from deposit.models import *
+from dissemin.settings import UNIVERSITY_BRANDING
+from notification.api import get_notifications
+from papers.doi import to_doi
+from papers.forms import AddUnaffiliatedResearcherForm
+from papers.forms import PaperForm
+from papers.models import *
+from papers.orcid import *
+from papers.user import is_admin
+from papers.user import is_authenticated
+from publishers.views import SlugDetailView
+from search import SearchQuerySet
+
 
 def fetch_on_orcid_login(sender, **kwargs):
     account = kwargs['sociallogin'].account
@@ -80,13 +84,14 @@ post_social_login.connect(fetch_on_orcid_login)
 # Number of papers shown on a search results page
 NB_RESULTS_PER_PAGE = 20
 
+
 def index(request):
     """
     View for the home page
     """
     context = {
-        'newResearcherForm' : AddUnaffiliatedResearcherForm(),
-        'combined_status' :
+        'newResearcherForm': AddUnaffiliatedResearcherForm(),
+        'combined_status':
             [{'choice_value': v, 'choice_label': l}
              for v, l in COMBINED_STATUS_CHOICES]
         }
@@ -229,6 +234,7 @@ class DepartmentPapersView(PaperSearchView):
     Displays the papers of researchers from a given department in an
     institution.
     """
+
     def get(self, request, *args, **kwargs):
         self.dept = get_object_or_404(Department, pk=kwargs.get('pk'))
         self.queryset = self.queryset.filter(departments=self.dept.id)
@@ -285,6 +291,8 @@ class JournalPapersView(PublisherPapersView):
     published_by = _(' in ')
 
 # TODO: this should be moved to /ajax/
+
+
 @user_passes_test(is_authenticated)
 def refetchResearcher(request, pk):
     researcher = get_object_or_404(Researcher, pk=pk)
@@ -299,25 +307,30 @@ def myProfileView(request):
     try:
         r = Researcher.objects.get(user=request.user)
         return ResearcherPaperSearchView.as_view(request,
-                                            researcher=r.pk, slug=r.slug)
+                                                 researcher=r.pk, slug=r.slug)
     except Researcher.DoesNotExist:
         return render(request, 'papers/createProfile.html')
+
 
 class DepartmentView(generic.DetailView):
     model = Department
     template_name = 'papers/department.html'
+
     def get_context_data(self, **kwargs):
         context = super(DepartmentView, self).get_context_data(**kwargs)
         context['breadcrumbs'] = self.object.breadcrumbs()
         return context
 
+
 class InstitutionView(generic.DetailView):
     model = Institution
     template_name = 'papers/institution.html'
+
     def get_context_data(self, **kwargs):
         context = super(InstitutionView, self).get_context_data(**kwargs)
         context['breadcrumbs'] = self.object.breadcrumbs()
         return context
+
 
 class PaperView(SlugDetailView):
     model = Paper
@@ -346,7 +359,7 @@ class PaperView(SlugDetailView):
             paper = Paper.create_by_doi(doi)
             if paper is None:
                 raise Http404(_("No %(verbose_name)s found matching the query") %
-                        {'verbose_name': Paper._meta.verbose_name})
+                              {'verbose_name': Paper._meta.verbose_name})
         return paper
 
     def get_context_data(self, **kwargs):
@@ -374,19 +387,21 @@ def mailPaperView(request, pk):
     source = get_object_or_404(Paper, pk=pk)
     if source.can_be_asked_for_upload():
         send_email_for_paper(source)
-        return render(request, 'papers/mail_paper.html', {'paper':source})
+        return render(request, 'papers/mail_paper.html', {'paper': source})
     else:
         return HttpResponseForbidden()
 
+
 def annotationsView(request):
-    return render(request, 'papers/annotations.html', {'annotations':Annotation.objects.all(),
-        'users':User.objects.all()})
+    return render(request, 'papers/annotations.html', {'annotations': Annotation.objects.all(),
+                                                       'users': User.objects.all()})
+
 
 class AnnotationsView(generic.TemplateView):
     template_name = 'papers/annotations.html'
+
     def users(self):
         users = list(User.objects.all().annotate(num_annot=Count('annotation')))
-        sorted_users = sorted(users, key=lambda x:-x.num_annot)
-        filtered_users = filter(lambda x:x.num_annot > 0, sorted_users)
+        sorted_users = sorted(users, key=lambda x: -x.num_annot)
+        filtered_users = filter(lambda x: x.num_annot > 0, sorted_users)
         return sorted_users
-

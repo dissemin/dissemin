@@ -19,6 +19,7 @@
 #
 
 from __future__ import unicode_literals
+
 import re
 
 # DOIs have very few limitations on what can appear in them
@@ -26,8 +27,11 @@ import re
 # hence a quite permissive regexp, as we use it in a controlled
 # environment: fields of a metadata record and not plain text
 
-doi_re = re.compile(r'^ *(?:[Dd][Oo][Ii] *[:=])? *(?:https?://(?:dx\.)?doi\.org/)?(10\.[0-9]{4,}[^ ]*/[^ ]+) *$')
-openaire_doi_re = re.compile(r'info:eu-repo/semantics/altIdentifier/doi/(10\.[0-9]{4,}[^ ]*/[^ ]+) *')
+doi_re = re.compile(
+    r'^ *(?:[Dd][Oo][Ii] *[:=])? *(?:https?://(?:dx\.)?doi\.org/)?(10\.[0-9]{4,}[^ ]*/[^ ]+) *$')
+openaire_doi_re = re.compile(
+    r'info:eu-repo/semantics/altIdentifier/doi/(10\.[0-9]{4,}[^ ]*/[^ ]+) *')
+
 
 def to_doi(candidate):
     """
@@ -52,6 +56,7 @@ def to_doi(candidate):
         if openaire_match:
             return openaire_match.group(1).lower()
 
+
 def doi_to_url(doi):
     """
     Takes a (valid) doi and returns its resolving URL
@@ -68,4 +73,3 @@ def doi_to_crossref_identifier(doi):
     u'oai:crossref.org:10.1093/jhmas/xxxi.4.480'
     """
     return 'oai:crossref.org:'+doi
-

@@ -19,21 +19,26 @@
 #
 
 from __future__ import unicode_literals
-import re
-import hashlib
+
 import datetime
-import unicode_tex
-import unicodedata
-from unidecode import unidecode
-from lxml.html.clean import Cleaner
-from lxml.html import fromstring, _transform_result
-from lxml import etree
+import hashlib
 from io import StringIO
+import re
+import unicodedata
+
+from lxml import etree
+from lxml.html import _transform_result
+from lxml.html import fromstring
+from lxml.html.clean import Cleaner
 from titlecase import titlecase
+import unicode_tex
+from unidecode import unidecode
 
 ### General string utilities ###
 
 filter_punctuation_alphanum_regex = re.compile(r'.*\w')
+
+
 def filter_punctuation(lst):
     """
     :param lst: list of strings
@@ -43,7 +48,8 @@ def filter_punctuation(lst):
     [u'abc', u'ab.', u'a-b', u'0']
     """
     return filter(lambda x: filter_punctuation_alphanum_regex.match(x) is not None,
-            lst)
+                  lst)
+
 
 def nocomma(lst):
     """
@@ -61,9 +67,10 @@ def nocomma(lst):
     >>> nocomma([u'abc',u'',u'\\n',u'def'])
     u'abc, , ,def'
     """
-    lst = map(lambda x: str(x).replace(',','').replace('\n',''), lst)
+    lst = map(lambda x: str(x).replace(',', '').replace('\n', ''), lst)
     lst = [x or ' ' for x in lst]
     return ','.join(lst)
+
 
 def ulower(s):
     """
@@ -80,6 +87,7 @@ def ulower(s):
     """
     return unicode(s).lower()
 
+
 def nstrip(s):
     """
     Just like unicode.strip(), but works for None too.
@@ -92,6 +100,7 @@ def nstrip(s):
     u'aa'
     """
     return s.strip() if s else None
+
 
 def remove_diacritics(s):
     """
@@ -107,6 +116,7 @@ def remove_diacritics(s):
     """
     return unidecode(s) if type(s) == unicode else s
 
+
 def iunaccent(s):
     """
     Removes diacritics and case.
@@ -118,6 +128,8 @@ def iunaccent(s):
 
 
 tokenize_space_re = re.compile(r'\s+')
+
+
 def tokenize(l):
     """
     A (very very simple) tokenizer.
@@ -128,6 +140,7 @@ def tokenize(l):
     [u'99', u'bottles', u'of', u'beeron', u'The', u'Wall']
     """
     return tokenize_space_re.split(l)
+
 
 def maybe_recapitalize_title(title):
     """
@@ -153,14 +166,14 @@ def maybe_recapitalize_title(title):
     else:
         return title
 
-## HTML sanitizing for the title
+# HTML sanitizing for the title
 
 overescaped_re = re.compile(r'&amp;#(\d+);')
 unicode4_re = re.compile(r'(\\u[0-9A-Z]{4})(?![0-9A-Z])')
 whitespace_re = re.compile(r'\s+')
 
 html_cleaner = Cleaner()
-html_cleaner.allow_tags = ['sub','sup','b','span']
+html_cleaner.allow_tags = ['sub', 'sup', 'b', 'span']
 html_cleaner.remove_unknown_tags = False
 
 html_killer = Cleaner()
@@ -168,6 +181,8 @@ html_killer.allow_tags = ['div']
 html_killer.remove_unknown_tags = False
 
 latexmath_re = re.compile(r'\$(\S[^$]*?\S|\S)\$')
+
+
 def remove_latex_math_dollars(string):
     """
     Removes LaTeX dollar tags.
@@ -183,7 +198,10 @@ def remove_latex_math_dollars(string):
     """
     return latexmath_re.sub(r'\1', string)
 
-latex_command_re = re.compile(r'(?P<command>\\([a-zA-Z]+|[.=\'\`"])({[^}]*})*)(?P<letter>[a-zA-Z])?')
+latex_command_re = re.compile(
+    r'(?P<command>\\([a-zA-Z]+|[.=\'\`"])({[^}]*})*)(?P<letter>[a-zA-Z])?')
+
+
 def unescape_latex(s):
     """
     Replaces LaTeX symbols by their unicode counterparts using
@@ -202,7 +220,8 @@ def unescape_latex(s):
 
         # We inverse the order to handle accents.
         if cmd == r"\'" or cmd == r"\`":
-            # We normalize back to the normal form to get only one unicode character.
+            # We normalize back to the normal form to get only one unicode
+            # character.
             return unicodedata.normalize('NFC', letter + rep)
         else:
             # Let's just concat.
@@ -210,9 +229,12 @@ def unescape_latex(s):
 
     return latex_command_re.sub(conditional_replace, s)
 
-latex_one_character_braces_re = re.compile(r'(^|(^|[^\\])\b(\w+)){(.)}', re.UNICODE)
+latex_one_character_braces_re = re.compile(
+    r'(^|(^|[^\\])\b(\w+)){(.)}', re.UNICODE)
 latex_full_line_braces_re = re.compile(r'^{(.*)}$')
 latex_word_braces_re = re.compile(r'(^|\s){(\w+)}($|\s)', re.UNICODE)
+
+
 def remove_latex_braces(s):
     """
     Removes spurious braces such as in "Th{é}odore" or "a {CADE} conference"
@@ -234,6 +256,7 @@ def remove_latex_braces(s):
     s = latex_one_character_braces_re.sub(r'\1\4', s)
     return s
 
+
 def sanitize_html(s):
     """
     Removes most HTML tags, keeping the harmless ones.
@@ -253,7 +276,8 @@ def sanitize_html(s):
     s = unescape_latex(s)
     s = kill_double_dollars(s)
     orig = html_cleaner.clean_html('<span>'+s+'</span>')
-    return orig[6:-7] # We cut the <span />
+    return orig[6:-7]  # We cut the <span />
+
 
 def kill_html(s):
     """
@@ -264,9 +288,11 @@ def kill_html(s):
     u'My titleisnice'
     """
     orig = html_killer.clean_html('<div>'+s+'</div>')
-    return orig[5:-6].strip() # We cut the <div />
+    return orig[5:-6].strip()  # We cut the <div />
 
 latex_double_dollar_re = re.compile(r'\$\$([^\$]*?)\$\$')
+
+
 def kill_double_dollars(s):
     """
     Removes double dollars (they generate line breaks with MathJax)
@@ -277,6 +303,7 @@ def kill_double_dollars(s):
     """
     s = latex_double_dollar_re.sub(r'$\1$', s)
     return s
+
 
 def urlize(val):
     """
@@ -296,7 +323,8 @@ def urlize(val):
         val = 'http://'+val
     return val
 
-#### JSON utilities !
+# JSON utilities !
+
 
 def jpath(path, js, default=None):
     """
@@ -315,9 +343,10 @@ def jpath(path, js, default=None):
         if lst == []:
             return js
         else:
-            return _walk(lst[1:], js.get(lst[0],{} if len(lst) > 1 else default))
+            return _walk(lst[1:], js.get(lst[0], {} if len(lst) > 1 else default))
     r = _walk(path.split('/'), js)
     return r
+
 
 def remove_nones(dct):
     """
@@ -330,15 +359,17 @@ def remove_nones(dct):
     >>> remove_nones({None:1})
     {None: 1}
     """
-    return dict(filter(lambda (k,v): v is not None, dct.items()))
+    return dict(filter(lambda (k, v): v is not None, dct.items()))
 
-### Partial date representation
+# Partial date representation
+
 
 def try_date(year, month, day):
     try:
         return datetime.date(year=year, month=month, day=day)
     except ValueError:
         return None
+
 
 def parse_int(val, default):
     """
@@ -357,6 +388,7 @@ def parse_int(val, default):
         return default
     except TypeError:
         return default
+
 
 def date_from_dateparts(dateparts):
     """
@@ -381,6 +413,7 @@ def date_from_dateparts(dateparts):
     month = 01 if len(dateparts) < 2 else parse_int(dateparts[1], 01)
     day = 01 if len(dateparts) < 3 else parse_int(dateparts[2], 01)
     return datetime.date(year=year, month=month, day=day)
+
 
 def tolerant_datestamp_to_datetime(datestamp):
     """A datestamp to datetime that's more tolerant of diverse inputs.
@@ -426,7 +459,7 @@ def tolerant_datestamp_to_datetime(datestamp):
         d = splitted[0]
         t = '00:00:00'
     if '/' in d and '-' not in d:
-        d = d.replace('/','-')
+        d = d.replace('/', '-')
     d_splitted = d.split('-')
     if len(d_splitted) == 3:
         YYYY, MM, DD = d_splitted
@@ -440,8 +473,8 @@ def tolerant_datestamp_to_datetime(datestamp):
     else:
         raise ValueError("Invalid datestamp: "+str(datestamp))
     if (len(YYYY) != 4 or
-        len(MM) > 2 or
-        len(DD) > 2):
+            len(MM) > 2 or
+            len(DD) > 2):
         raise ValueError("Invalid datestamp: "+str(datestamp))
 
     t_splitted = t.split(':')
@@ -451,6 +484,7 @@ def tolerant_datestamp_to_datetime(datestamp):
         raise ValueError("Invalid datestamp: "+str(datestamp))
     return datetime.datetime(
         int(YYYY), int(MM), int(DD), int(hh), int(mm), int(ss))
+
 
 def datetime_to_date(dt):
     """
@@ -464,7 +498,9 @@ def datetime_to_date(dt):
 
 ### ORCiD utilities ###
 
-orcid_re = re.compile(r'^(http://orcid.org/)?([0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{3}[X0-9])$')
+orcid_re = re.compile(
+    r'^(http://orcid.org/)?([0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{3}[X0-9])$')
+
 
 def validate_orcid(orcid):
     """
@@ -490,7 +526,7 @@ def validate_orcid(orcid):
     if not match:
         return
     orcid = match.group(2)
-    nums = orcid.replace('-','')
+    nums = orcid.replace('-', '')
     total = 0
     for i in range(15):
         total = (total + int(nums[i])) * 2
@@ -498,6 +534,7 @@ def validate_orcid(orcid):
     checkchar = str(checkdigit) if checkdigit != 10 else 'X'
     if nums[-1] == checkchar:
         return orcid
+
 
 def affiliation_is_greater(a, b):
     """

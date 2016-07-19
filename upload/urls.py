@@ -20,13 +20,13 @@
 
 from __future__ import unicode_literals
 
-from django.conf.urls import include, url
-from dissemin import settings
+from django.conf.urls import include
+from django.conf.urls import url
 
+from dissemin import settings
 from upload.views import *
 
 urlpatterns = [
     url(r'^upload-fulltext$', handleAjaxUpload, name='ajax-uploadFulltext'),
     url(r'^download-url$', handleUrlDownload, name='ajax-downloadUrl'),
 ]
-

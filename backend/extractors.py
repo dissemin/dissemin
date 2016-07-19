@@ -20,17 +20,18 @@
 
 from __future__ import unicode_literals
 
+import os
+import re
+
 from papers.models import OaiSource
 
-import re
-import os
 
 class URLExtractor(object):
+
     def __init__(self):
         """
         Init the extractor, usually with some parameters
         """
-        pass
 
     def extract(self, header, metadata):
         """
@@ -57,6 +58,7 @@ class URLExtractor(object):
 
 
 class RegexExtractor(URLExtractor):
+
     def __init__(self, mappings):
         """
         mappings: list of (field,regex,resource_type,skeleton)
@@ -67,7 +69,7 @@ class RegexExtractor(URLExtractor):
     def _urls(self):
 
         urls = dict()
-        for (field,regex,resource_type,skeleton) in self.mappings:
+        for (field, regex, resource_type, skeleton) in self.mappings:
             for val in self.metadata[field]:
                 val = val.strip()
                 match = regex.match(val)
@@ -75,7 +77,9 @@ class RegexExtractor(URLExtractor):
                     urls[resource_type] = regex.sub(skeleton, val)
         return urls
 
+
 class CairnExtractor(RegexExtractor):
+
     def __init__(self, mappings):
         super(CairnExtractor, self).__init__(mappings)
 
@@ -84,7 +88,9 @@ class CairnExtractor(RegexExtractor):
             urls['pdf'] = None
         return urls
 
+
 class OpenAireExtractor(RegexExtractor):
+
     def __init__(self, mappings):
         super(OpenAireExtractor, self).__init__(mappings)
 
@@ -93,7 +99,9 @@ class OpenAireExtractor(RegexExtractor):
             urls['pdf'] = urls.get('splash')
         return urls
 
+
 class BaseExtractor(RegexExtractor):
+
     def __init__(self, mappings):
         super(BaseExtractor, self).__init__(mappings)
 
@@ -103,24 +111,24 @@ class BaseExtractor(RegexExtractor):
         return urls
 
 arxivExtractor = RegexExtractor([
-    ('identifier',re.compile(r'(http://arxiv.org/abs/[^ ]*)$'),
-        'splash',r'\1'),
-    ('identifier',re.compile(r'http://arxiv.org/abs/([^ ]*)$'),
-        'pdf',r'http://arxiv.org/pdf/\1')
+    ('identifier', re.compile(r'(http://arxiv.org/abs/[^ ]*)$'),
+        'splash', r'\1'),
+    ('identifier', re.compile(r'http://arxiv.org/abs/([^ ]*)$'),
+        'pdf', r'http://arxiv.org/pdf/\1')
     ])
 
 halExtractor = RegexExtractor([
-    ('identifier',re.compile(r'(https?://[a-z\-0-9.]*/[a-z0-9\-]*)$'),
+    ('identifier', re.compile(r'(https?://[a-z\-0-9.]*/[a-z0-9\-]*)$'),
         'splash', r'\1'),
-    ('identifier',re.compile(r'(https?://[a-z\-0-9.]*/[a-z0-9\-]*/document)$'),
+    ('identifier', re.compile(r'(https?://[a-z\-0-9.]*/[a-z0-9\-]*/document)$'),
         'pdf', r'\1'),
     ])
 
 cairnExtractor = CairnExtractor([
-    ('identifier',re.compile(r'(http://www\.cairn\.info/article\.php\?ID_ARTICLE=[^ ]*)$'),
-        'splash',r'\1'),
-    ('identifier',re.compile(r'(http://www\.cairn\.info/)article(\.php\?ID_ARTICLE=[^ ]*)$'),
-        'pdf',r'\1load_pdf\2'),
+    ('identifier', re.compile(r'(http://www\.cairn\.info/article\.php\?ID_ARTICLE=[^ ]*)$'),
+        'splash', r'\1'),
+    ('identifier', re.compile(r'(http://www\.cairn\.info/)article(\.php\?ID_ARTICLE=[^ ]*)$'),
+        'pdf', r'\1load_pdf\2'),
     ])
 
 pmcExtractor = RegexExtractor([
@@ -160,10 +168,10 @@ zenodoExtractor = OpenAireExtractor([
 
 researchgateExtractor = RegexExtractor([
     ('source', re.compile(r'(https?://[^ ]*)'),
-	'splash', r'\1'),
+        'splash', r'\1'),
     ('identifier', re.compile(r'(https?://[^ ]*\.pdf)'),
-	'pdf', r'\1'),
-	])
+        'pdf', r'\1'),
+        ])
 
 baseExtractor = BaseExtractor([
     ('identifier', re.compile(r'(https?://.*)'), 'splash', r'\1'),
@@ -176,19 +184,19 @@ baseExtractor = BaseExtractor([
 REGISTERED_OAI_EXTRACTORS = {
         'arxiv': arxivExtractor,
         'hal': halExtractor,
-        'cairn' : cairnExtractor,
-        'pmc' : pmcExtractor,
-        'doaj' : doajExtractor,
-        'persee' : perseeExtractor,
-        'numdam' : numdamExtractor,
+        'cairn': cairnExtractor,
+        'pmc': pmcExtractor,
+        'doaj': doajExtractor,
+        'persee': perseeExtractor,
+        'numdam': numdamExtractor,
         'zenodo': zenodoExtractor,
-        'base' : baseExtractor,
-	'researchgate': researchgateExtractor,
+        'base': baseExtractor,
+        'researchgate': researchgateExtractor,
         }
 
 # Set up the model for the sources
 oai_sources = [
-        ('arxiv','arXiv',False, 10,'preprint'),
+        ('arxiv', 'arXiv', False, 10, 'preprint'),
         ('hal', 'HAL', False, 10, 'preprint'),
         ('cairn', 'Cairn', False, 10, 'preprint'),
         ('pmc', 'PubMed Central', False, 10, 'preprint'),
@@ -197,7 +205,7 @@ oai_sources = [
         ('zenodo', 'Zenodo', False, 15, 'preprint'),
         ('numdam', 'Numdam', False, 10, 'journal-article'),
         ('base', 'BASE', False, -2, 'preprint'),
-	('researchgate', 'ResearchGate', False, -10, 'journal-article'),
+        ('researchgate', 'ResearchGate', False, -10, 'journal-article'),
         ]
 
 if os.environ.get('READTHEDOCS', None) != 'True':
@@ -205,7 +213,4 @@ if os.environ.get('READTHEDOCS', None) != 'True':
     # Auto-create all the Oai Sources when this module is imported
     for identifier, name, oa, priority, pubtype in oai_sources:
         OaiSource.objects.get_or_create(identifier=identifier,
-                defaults={'name':name,'oa':oa,'priority':priority,'default_pubtype':pubtype})
-
-
-
+                                        defaults={'name': name, 'oa': oa, 'priority': priority, 'default_pubtype': pubtype})

@@ -18,25 +18,31 @@
 
 from django.contrib import admin
 from solo.admin import SingletonModelAdmin
+
 from papers.models import *
+
 
 class NameInline(admin.TabularInline):
     model = Name
     extra = 0
 
+
 class OaiInline(admin.TabularInline):
     model = OaiRecord
     extra = 0
 
+
 class PaperAdmin(admin.ModelAdmin):
     fields = ['title', 'pubdate', 'visible', 'doctype', 'oa_status']
-    list_display = ('title','pubdate','visible','doctype', 'oa_status')
+    list_display = ('title', 'pubdate', 'visible', 'doctype', 'oa_status')
+
 
 class OaiRecordAdmin(admin.ModelAdmin):
     raw_id_fields = ('about',)
 
+
 class ResearcherAdmin(admin.ModelAdmin):
-    raw_id_fields = ('name','stats',)
+    raw_id_fields = ('name', 'stats',)
 
 admin.site.register(Institution)
 admin.site.register(Department)

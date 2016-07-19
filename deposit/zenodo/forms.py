@@ -20,18 +20,32 @@
 
 from __future__ import unicode_literals
 
-from django.core.urlresolvers import reverse
 from django import forms
+from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as __
 
 from deposit.forms import BaseMetadataForm
-from deposit.zenodo.protocol import ZENODO_LICENSES_CHOICES
+
+ZENODO_LICENSES_CHOICES = [
+   ('cc-zero',
+    __('Creative Commons CCZero (CC0)')),
+   ('cc-by',
+    __('Creative Commons Attribution (CC-BY)')),
+   ('cc-by-sa',
+    __('Creative Commons Attribution-ShareAlike (CC-BY-SA)')),
+   ('cc-by-nc-4.0',
+    __('Creative Commons Attribution-NonCommercial (CC-BY-NC)')),
+   ('cc-by-nd-4.0',
+    __('Creative Commons Attribution-NoDerivatives (CC-BY-ND)')),
+   ('other-open',
+    __('Other open license')),
+ ]
+
 
 class ZenodoForm(BaseMetadataForm):
     license = forms.ChoiceField(
             label=__('License'),
             choices=ZENODO_LICENSES_CHOICES,
             initial='other-open',
-            widget=forms.RadioSelect(attrs={'class':'radio-margin'})
+            widget=forms.RadioSelect(attrs={'class': 'radio-margin'})
             )
-

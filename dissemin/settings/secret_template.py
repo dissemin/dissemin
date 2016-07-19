@@ -46,4 +46,3 @@ ROMEO_API_KEY = None
 # Used to fetch full text availability. Get one at
 # http://www.sherpa.ac.uk/romeo/apiregistry.php
 CORE_API_KEY = None
-

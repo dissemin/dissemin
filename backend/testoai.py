@@ -20,19 +20,21 @@
 
 from __future__ import unicode_literals
 
-import unittest
-from django.test import TestCase
 from django.core.exceptions import ObjectDoesNotExist
-from backend.oai import OaiPaperSource
+from django.test import TestCase
+
 from backend.oai import BASEDCTranslator
-from backend.oai import OAIDCTranslator
 from backend.oai import CiteprocTranslator
-from papers.models import OaiRecord
-from papers.baremodels import BareOaiRecord
+from backend.oai import OAIDCTranslator
+from backend.oai import OaiPaperSource
 from oaipmh.error import BadArgumentError
+from papers.baremodels import BareOaiRecord
 from papers.errors import *
+from papers.models import OaiRecord
+
 
 class OaiTest(TestCase):
+
     def setUp(self):
         self.oai = OaiPaperSource(endpoint='http://doai.io/oai')
         self.oai.add_translator(BASEDCTranslator())
@@ -67,7 +69,7 @@ class OaiTest(TestCase):
         self.assertEqual(len(hal_paper.oairecords), 1)
         self.assertNotEqual(hal_paper.pdf_url, None)
         self.assertEqual(hal_paper.fingerprint,
-                hal_paper.new_fingerprint())
+                         hal_paper.new_fingerprint())
 
     def test_create_already_existing(self):
         """
@@ -75,7 +77,7 @@ class OaiTest(TestCase):
         when the exact same OAI record already exists.
         """
         # TODO we could repeat this for various papers
-        oai_id ='ftccsdartic:oai:hal.archives-ouvertes.fr:hal-00830421'
+        oai_id = 'ftccsdartic:oai:hal.archives-ouvertes.fr:hal-00830421'
 
         # first, make sure the paper isn't there already
         self.delete(oai_id)
@@ -87,11 +89,11 @@ class OaiTest(TestCase):
 
         # It's the same thing!
         self.assertEqual(new_paper, hal_paper)
-        self.assertSetEqual(set(new_paper.oairecords), set(hal_paper.oairecords))
+        self.assertSetEqual(set(new_paper.oairecords),
+                            set(hal_paper.oairecords))
         self.assertListEqual(new_paper.bare_author_names(),
-                            hal_paper.bare_author_names())
+                             hal_paper.bare_author_names())
         self.assertEqual(new_paper.title, hal_paper.title)
-
 
     def test_create_match_fp(self):
         """
@@ -110,14 +112,14 @@ class OaiTest(TestCase):
         # Create a new paper (refers to the same paper, but coming from
         # another source)
         new_paper = self.create('ftciteseerx:oai:CiteSeerX.psu:10.1.1.487.869',
-            'base_dc')
+                                'base_dc')
         # the resulting paper has to be equal to the first one
         # (this does not check that all their attributes are equal, just
         # that they are the same row in the database, i.e. have same id)
         self.assertEqual(new_paper, hal_paper)
         # the new set of records is the old one plus the new record
-        records.add(OaiRecord.objects.get(identifier=
-                'ftciteseerx:oai:CiteSeerX.psu:10.1.1.487.869'))
+        records.add(OaiRecord.objects.get(
+            identifier='ftciteseerx:oai:CiteSeerX.psu:10.1.1.487.869'))
         self.assertSetEqual(set(new_paper.oairecords), records)
 
     def test_create_match_doi(self):
@@ -125,16 +127,16 @@ class OaiTest(TestCase):
         Addition of an OAI record when it is matched
         to an existing paper by DOI
         """
-        first_id='ftunivmacedonia:oai:dspace.lib.uom.gr:2159/6240'
-        second_id='oai:crossref.org:10.1111/j.1574-0862.2005.00325.x'
+        first_id = 'ftunivmacedonia:oai:dspace.lib.uom.gr:2159/6240'
+        second_id = 'oai:crossref.org:10.1111/j.1574-0862.2005.00325.x'
 
         # first, make sure the paper isn't there already
         self.delete(first_id)
         # Create a paper from BASE
-        first = self.create(first_id,'base_dc')
+        first = self.create(first_id, 'base_dc')
 
         self.assertEqual(first.oairecords[0].doi,
-                '10.1111/j.1574-0862.2005.00325.x')
+                         '10.1111/j.1574-0862.2005.00325.x')
         records = set(first.oairecords)
         new_paper = self.create(second_id, 'citeproc')
 
@@ -170,7 +172,6 @@ class OaiTest(TestCase):
         self.assertEqual(len(new_paper.oairecords), 1)
         self.assertNotEqual(new_paper.oairecords[0].pdf_url, None)
 
-
     def test_create_match_identifier(self):
         """
         An OAI record with the same identifier already
@@ -197,12 +198,12 @@ class OaiTest(TestCase):
         Metadata that we don't accept
         """
         identifiers = [
-        # Contributors too long to fit in the db
-        ('ftbnfgallica:oai:bnf.fr:gallica/ark:/12148/btv1b8621766k',
-        'base_dc'),
-        # No authors
-        ('ftcarmelhelios:oai:archive.library.cmu.edu:heinz:box00200/fld00021/bdl0031/doc0001/',
-        'base_dc'),
+            # Contributors too long to fit in the db
+            ('ftbnfgallica:oai:bnf.fr:gallica/ark:/12148/btv1b8621766k',
+             'base_dc'),
+            # No authors
+            ('ftcarmelhelios:oai:archive.library.cmu.edu:heinz:box00200/fld00021/bdl0031/doc0001/',
+             'base_dc'),
          ]
         for i, f in identifiers:
             self.assertEqual(
@@ -224,24 +225,22 @@ class OaiTest(TestCase):
         with self.assertRaises(BadArgumentError):
             self.create('aiunrsecauiebleuiest', 'unknown_format')
 
-
     # tests of particular translators
     # TODO: translate them as tests of the translators and not the
     # whole backend?
 
     def test_base_doctype(self):
         mappings = {
-            'ftunivsavoie:oai:HAL:hal-01062241v1':'proceedings-article',
-            'ftunivsavoie:oai:HAL:hal-01062339v1':'book-chapter',
-            'ftunivmacedonia:oai:dspace.lib.uom.gr:2159/6227':'other',
-            'ftartxiker:oai:HAL:hal-00845819v1':'journal-article',
-            'ftdatacite:oai:oai.datacite.org:402223':'dataset',
+            'ftunivsavoie:oai:HAL:hal-01062241v1': 'proceedings-article',
+            'ftunivsavoie:oai:HAL:hal-01062339v1': 'book-chapter',
+            'ftunivmacedonia:oai:dspace.lib.uom.gr:2159/6227': 'other',
+            'ftartxiker:oai:HAL:hal-00845819v1': 'journal-article',
+            'ftdatacite:oai:oai.datacite.org:402223': 'dataset',
         }
 
         for ident, typ in mappings.items():
             paper = self.create(ident, 'base_dc')
             self.assertEqual(paper.doctype, typ)
-
 
     def test_crossref_invalid_metadata(self):
         # authors with no family name

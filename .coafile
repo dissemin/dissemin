@@ -1,0 +1,5 @@
+[Python]
+bears = SpaceConsistencyBear, PEP8Bear, PyImportSortBear, PyUnusedCodeBear
+files = **.py
+ignore = .src/**.py, **/migrations/**.py
+use_spaces = yeah

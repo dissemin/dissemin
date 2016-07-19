@@ -20,13 +20,14 @@
 
 from __future__ import unicode_literals
 
+import datetime
 import unittest
+
 import django.test
-from datetime import date
+
 from papers.baremodels import *
 import papers.doi
-import datetime
-import json
+
 
 class BareObjectTest(unittest.TestCase):
     """
@@ -34,6 +35,7 @@ class BareObjectTest(unittest.TestCase):
     Subclasses should reimplement setUp
     to create a test instance in self.ist.
     """
+
     def setUp(self):
         self.ist = None
         raise unittest.SkipTest('Base test')
@@ -51,34 +53,35 @@ class BarePaperTest(BareObjectTest):
     """
     Tests methods of BarePaper objects
     """
+
     def setUp(self):
         self.ist = BarePaper.create('Groundbreaking Results',
-                [BareName.create('Alfred','Kastler'),
-                 BareName.create('John', 'Dubuc')],
-                datetime.date(year=2015,month=3,day=2))
+                                    [BareName.create('Alfred', 'Kastler'),
+                                     BareName.create('John', 'Dubuc')],
+                                    datetime.date(year=2015, month=3, day=2))
 
     def test_create(self):
         """
         BarePaper.create checks its arguments are non-empty
         """
-        names = [BareName.create('Peter','Johnstone'),
-                BareName.create('Xing','Li')]
-        pubdate = datetime.date(year=2014,month=9,day=4)
+        names = [BareName.create('Peter', 'Johnstone'),
+                 BareName.create('Xing', 'Li')]
+        pubdate = datetime.date(year=2014, month=9, day=4)
         # No title
         self.assertRaises(ValueError, BarePaper.create,
-                '', names, pubdate)
+                          '', names, pubdate)
         # No authors
         self.assertRaises(ValueError, BarePaper.create,
-                'Excellent title', [], pubdate)
+                          'Excellent title', [], pubdate)
         # No publication date
         self.assertRaises(ValueError, BarePaper.create,
-                'Excellent title', names, None)
+                          'Excellent title', names, None)
         # Invalid visibility
         self.assertRaises(ValueError, BarePaper.create,
-                'Excellent title', names, pubdate, visible="something")
+                          'Excellent title', names, pubdate, visible="something")
         # Not enough affiliations
         self.assertRaises(ValueError, BarePaper.create,
-                'Excellent title', names, pubdate, affiliations=['ENS'])
+                          'Excellent title', names, pubdate, affiliations=['ENS'])
 
     def test_authors(self):
         """
@@ -93,11 +96,11 @@ class BarePaperTest(BareObjectTest):
         """
         p.add_author adds the author at the right place
         """
-        names = [BareName.create('Peter','Johnstone'),
-                BareName.create('Xing','Li'),
-                BareName.create('John', 'Dubuc')]
+        names = [BareName.create('Peter', 'Johnstone'),
+                 BareName.create('Xing', 'Li'),
+                 BareName.create('John', 'Dubuc')]
         p = BarePaper.create('The title', [names[0]],
-                datetime.date(year=2012,month=1,day=9))
+                             datetime.date(year=2012, month=1, day=9))
 
         p.add_author(BareAuthor(name=names[2]))
         self.assertEqual(len(p.authors), 2)
@@ -106,8 +109,9 @@ class BarePaperTest(BareObjectTest):
         self.assertListEqual(p.author_names(), names)
 
         self.assertRaises(ValueError, p.add_author,
-                BareAuthor(name=BareName.create('Cantor','Bernstein')),
-                position=8)
+                          BareAuthor(name=BareName.create(
+                              'Cantor', 'Bernstein')),
+                          position=8)
 
     def test_displayed_authors(self):
         """

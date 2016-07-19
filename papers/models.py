@@ -51,36 +51,54 @@ This module defines most of the models used in the platform.
 """
 
 from __future__ import unicode_literals
-from django.db import models
-from django.core.exceptions import ObjectDoesNotExist
-from django.core.urlresolvers import reverse
+
+from datetime import datetime
+from datetime import timedelta
+import re
+from statistics.models import AccessStatistics
+from statistics.models import combined_status_for_instance
+from statistics.models import STATUS_CHOICES_HELPTEXT
+
+from caching.base import CachingManager
+from caching.base import CachingMixin
+from celery.result import AsyncResult
 from django.contrib.auth.models import User
+from django.contrib.postgres.fields import JSONField
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
+from django.core.exceptions import ObjectDoesNotExist
+from django.core.urlresolvers import reverse
+from django.db import DataError
+from django.db import IntegrityError
+from django.db import models
+from django.db import transaction
 from django.db.models import Q
-from django.db import transaction, DataError, IntegrityError
-from django.contrib.postgres.fields import JSONField
-from django.utils.translation import ugettext_lazy as _
 from django.utils import timezone
-from caching.base import CachingManager, CachingMixin
+from django.utils.translation import ugettext_lazy as _
 from solo.models import SingletonModel
-from celery.result import AsyncResult
 
+from dissemin.settings import POSSIBLE_LANGUAGE_CODES
+from dissemin.settings import PROFILE_REFRESH_ON_LOGIN
 from papers.baremodels import *
-from papers.name import match_names, name_similarity, unify_name_lists
-from papers.utils import remove_diacritics, sanitize_html, validate_orcid, affiliation_is_greater, remove_nones, index_of, iunaccent
-from papers.orcid import OrcidProfile
 from papers.doi import to_doi
 from papers.errors import MetadataSourceException
-
-
-from statistics.models import AccessStatistics, STATUS_CHOICES_HELPTEXT, combined_status_for_instance
-from publishers.models import Publisher, Journal, OA_STATUS_CHOICES, OA_STATUS_PREFERENCE, DummyPublisher
+from papers.name import match_names
+from papers.name import name_similarity
+from papers.name import unify_name_lists
+from papers.orcid import OrcidProfile
+from papers.utils import affiliation_is_greater
+from papers.utils import index_of
+from papers.utils import iunaccent
+from papers.utils import remove_diacritics
+from papers.utils import remove_nones
+from papers.utils import sanitize_html
+from papers.utils import validate_orcid
+from publishers.models import DummyPublisher
+from publishers.models import Journal
+from publishers.models import OA_STATUS_CHOICES
+from publishers.models import OA_STATUS_PREFERENCE
+from publishers.models import Publisher
 from upload.models import UploadedPDF
-from dissemin.settings import PROFILE_REFRESH_ON_LOGIN, POSSIBLE_LANGUAGE_CODES
-
-import hashlib, re
-from datetime import datetime, timedelta
 
 UPLOAD_TYPE_CHOICES = [
    ('preprint', _('Preprint')),
@@ -147,7 +165,8 @@ class Institution(models.Model):
         return reverse('institution', args=[self.pk])
 
     def breadcrumbs(self):
-        return [(unicode(self),self.url)]
+        return [(unicode(self), self.url)]
+
 
 class Department(models.Model):
     """
@@ -196,7 +215,8 @@ class Department(models.Model):
         return reverse('department', args=[self.pk])
 
     def breadcrumbs(self):
-        return self.institution.breadcrumbs()+[(unicode(self),self.url)]
+        return self.institution.breadcrumbs()+[(unicode(self), self.url)]
+
 
 class NameVariant(models.Model):
     """
@@ -213,7 +233,8 @@ class NameVariant(models.Model):
     confidence = models.FloatField(default=1.)
 
     class Meta:
-        unique_together = (('name','researcher'),)
+        unique_together = (('name', 'researcher'),)
+
 
 class Researcher(models.Model):
     """
@@ -229,7 +250,7 @@ class Researcher(models.Model):
 
     # Various info about the researcher (not used internally)
     #: Email address for this researcher
-    email = models.EmailField(blank=True,null=True)
+    email = models.EmailField(blank=True, null=True)
     #: URL of the homepage
     homepage = models.URLField(blank=True, null=True)
     #: Grade (student, post-doc, professor…)
@@ -245,7 +266,8 @@ class Researcher(models.Model):
     #: Task id of the harvester (if any)
     harvester = models.CharField(max_length=512, null=True, blank=True)
     #: Current subtask of the harvester
-    current_task = models.CharField(max_length=64, choices=HARVESTER_TASK_CHOICES, null=True, blank=True)
+    current_task = models.CharField(
+        max_length=64, choices=HARVESTER_TASK_CHOICES, null=True, blank=True)
 
     #: Statistics of papers authored by this researcher
     stats = models.ForeignKey(AccessStatistics, null=True)
@@ -262,7 +284,7 @@ class Researcher(models.Model):
 
     @property
     def url(self):
-        return reverse('researcher', kwargs={'researcher':self.pk, 'slug':self.slug})
+        return reverse('researcher', kwargs={'researcher': self.pk, 'slug': self.slug})
 
     @property
     def papers(self):
@@ -271,7 +293,7 @@ class Researcher(models.Model):
         sorted by decreasing publication date
         """
         return Paper.objects.filter(
-                authors_list__contains=[{'researcher_id':self.id}]
+                authors_list__contains=[{'researcher_id': self.id}]
                           ).order_by('-pubdate')
 
     @property
@@ -318,8 +340,8 @@ class Researcher(models.Model):
 
         last = self.name.last
         for name in self.variants_queryset():
-            sim = name_similarity((name.first,name.last),
-                                  (self.name.first,self.name.last))
+            sim = name_similarity((name.first, name.last),
+                                  (self.name.first, self.name.last))
             if sim > 0 and name.id not in current_name_variants:
                 self.add_name_variant(name, sim, force_update=reset)
 
@@ -334,7 +356,7 @@ class Researcher(models.Model):
         if name.id is None:
             name.save()
         nv = NameVariant.objects.get_or_create(
-                name=name, researcher=self, defaults={'confidence':confidence})
+                name=name, researcher=self, defaults={'confidence': confidence})
         if name.best_confidence < confidence or force_update:
             name.best_confidence = confidence
             name.save(update_fields=['best_confidence'])
@@ -350,7 +372,7 @@ class Researcher(models.Model):
         from backend.tasks import fetch_everything_for_researcher
         self.harvester = fetch_everything_for_researcher.delay(pk=self.id).id
         self.current_task = 'init'
-        self.save(update_fields=['harvester','current_task'])
+        self.save(update_fields=['harvester', 'current_task'])
 
     def fetch_everything_if_outdated(self):
         if self.last_harvest is None or timezone.now() - self.last_harvest > PROFILE_REFRESH_ON_LOGIN:
@@ -385,12 +407,12 @@ class Researcher(models.Model):
             name = profile.name
             homepage = profile.homepage
             email = profile.email
-            researcher = Researcher.create_by_name(name[0],name[1], orcid=orcid,
-                    user=user, homepage=homepage, email=email)
+            researcher = Researcher.create_by_name(name[0], name[1], orcid=orcid,
+                                                   user=user, homepage=homepage, email=email)
 
             # Ensure that extra info is added.
             save = False
-            for kw, val in [('homepage',homepage),('orcid',orcid),('email',email)]:
+            for kw, val in [('homepage', homepage), ('orcid', orcid), ('email', email)]:
                 if not researcher.__dict__[kw] and val:
                     researcher.__dict__[kw] = val
                     save = True
@@ -417,7 +439,8 @@ class Researcher(models.Model):
             orcid = validate_orcid(kwargs['orcid'])
             if kwargs['orcid'] is None:
                 raise ValueError('Invalid ORCiD: "%s"' % orcid)
-            researcher, created = Researcher.objects.get_or_create(name=name, orcid=orcid, defaults=kwargs)
+            researcher, created = Researcher.objects.get_or_create(
+                name=name, orcid=orcid, defaults=kwargs)
         else:
             args = kwargs.copy()
             args['name'] = name
@@ -435,7 +458,7 @@ class Researcher(models.Model):
         return "researcher=%d" % self.pk
 
     def breadcrumbs(self):
-        last =  [(unicode(self), self.url)]
+        last = [(unicode(self), self.url)]
         if not self.department:
             return last
         else:
@@ -455,9 +478,10 @@ class Researcher(models.Model):
         Returns a form to change the affiliation of this researcher
         """
         from papers.forms import ResearcherDepartmentForm
-        data = {'pk':self.id,
-                'department':self.department_id}
+        data = {'pk': self.id,
+                'department': self.department_id}
         return ResearcherDepartmentForm(initial=data)
+
 
 class Name(models.Model, BareName):
     first = models.CharField(max_length=MAX_NAME_LENGTH)
@@ -466,8 +490,8 @@ class Name(models.Model, BareName):
     best_confidence = models.FloatField(default=0.)
 
     class Meta:
-        unique_together = ('first','last')
-        ordering = ['last','first']
+        unique_together = ('first', 'last')
+        ordering = ['last', 'first']
 
     @property
     def is_known(self):
@@ -484,7 +508,7 @@ class Name(models.Model, BareName):
         """
         n = cls.create(first, last)
         return cls.objects.get_or_create(full=n.full,
-                defaults={'first':n.first,'last':n.last})
+                                         defaults={'first': n.first, 'last': n.last})
 
     def variants_queryset(self):
         """
@@ -492,27 +516,29 @@ class Name(models.Model, BareName):
         WARNING: This is to be used on a name that is already associated with a researcher.
         """
         # TODO this could be refined (icontains?)
-        return Researcher.objects.filter(name__last__iexact = self.last)
+        return Researcher.objects.filter(name__last__iexact=self.last)
 
     def update_variants(self):
         """
         Sets the variants of this name to the candidates returned by variants_queryset
         """
         for researcher in self.variants_queryset():
-            sim = name_similarity((researcher.name.first,researcher.name.last), (self.first,self.last))
+            sim = name_similarity(
+                (researcher.name.first, researcher.name.last), (self.first, self.last))
             if sim > 0:
                 old_sim = self.best_confidence
                 self.best_confidence = sim
                 if self.pk is None or old_sim < sim:
                     self.save()
-                NameVariant.objects.get_or_create(name=self,researcher=researcher,
-                        defaults={'confidence':sim})
+                NameVariant.objects.get_or_create(name=self, researcher=researcher,
+                                                  defaults={'confidence': sim})
 
     def update_best_confidence(self):
         """
         A name is considered as known when it belongs to a name variants group of a researcher
         """
-        new_value = max([0.]+[d['confidence'] for d in self.namevariant_set.all().values('confidence')])
+        new_value = max([0.]+[d['confidence']
+                              for d in self.namevariant_set.all().values('confidence')])
         if new_value != self.best_confidence:
             self.best_confidence = new_value
             self.save(update_fields=['best_confidence'])
@@ -543,7 +569,7 @@ class Name(models.Model, BareName):
         Calls `lookup_name` for the given `bare_name`, if it is indeed bare..
         """
         if hasattr(bare_name, 'id'):
-            return bare_name # not so bare…
+            return bare_name  # not so bare…
         return cls.lookup_name((bare_name.first, bare_name.last))
 
     def save_if_not_saved(self):
@@ -551,7 +577,8 @@ class Name(models.Model, BareName):
         Used to save unsaved names after lookup
         """
         if self.pk is None:
-            # the best_confidence field should already be up to date as it is computed in the lookup
+            # the best_confidence field should already be up to date as it is
+            # computed in the lookup
             self.save()
             self.update_variants()
 
@@ -565,7 +592,7 @@ class Name(models.Model, BareName):
 class Paper(models.Model, BarePaper):
     title = models.CharField(max_length=1024)
     fingerprint = models.CharField(max_length=64, unique=True)
-    date_last_ask = models.DateField(null=True) # TODO remove (unused)
+    date_last_ask = models.DateField(null=True)  # TODO remove (unused)
 
     #: Approximate publication date.
     #: For instance if we only know it is in 2014 we'll put 2014-01-01
@@ -583,11 +610,13 @@ class Paper(models.Model, BarePaper):
     visible = models.BooleanField(default=True)
     last_annotation = models.CharField(max_length=32, null=True, blank=True)
 
-    doctype = models.CharField(max_length=64, null=True, blank=True, choices=PAPER_TYPE_CHOICES)
+    doctype = models.CharField(
+        max_length=64, null=True, blank=True, choices=PAPER_TYPE_CHOICES)
 
     # The two following fields need to be updated after the relevant changes
     # using the methods below.
-    oa_status = models.CharField(max_length=32, null=True, blank=True, default='UNK')
+    oa_status = models.CharField(
+        max_length=32, null=True, blank=True, default='UNK')
     pdf_url = models.URLField(max_length=2048, null=True, blank=True)
 
     # Task id of the current task updating the metadata of this article (if any)
@@ -613,7 +642,7 @@ class Paper(models.Model, BarePaper):
         as a queryset.
         """
         return self.oairecord_set.filter(journal_title__isnull=False,
-                publisher_name__isnull=False)
+                                         publisher_name__isnull=False)
 
     @property
     def oairecords(self):
@@ -671,7 +700,7 @@ class Paper(models.Model, BarePaper):
                 self.just_created = False
 
         rec = OaiRecord.new(about=self,
-                **oairecord.__dict__)
+                            **oairecord.__dict__)
         self.just_created = False
         return rec
 
@@ -684,7 +713,8 @@ class Paper(models.Model, BarePaper):
 
         :returns: the corresponding :class:`Paper` instance.
         """
-        p = BarePaper.create(title, author_names, pubdate, visible, affiliations)
+        p = BarePaper.create(title, author_names, pubdate,
+                             visible, affiliations)
         return cls.from_bare(p)
 
     @classmethod
@@ -706,7 +736,7 @@ class Paper(models.Model, BarePaper):
             matches = Paper.find_by_fingerprint(fp)
 
             p = None
-            if matches: # We have found a paper matching the fingerprint
+            if matches:  # We have found a paper matching the fingerprint
                 p = matches[0]
                 if paper.visible and not p.visible:
                     p.visible = True
@@ -715,16 +745,16 @@ class Paper(models.Model, BarePaper):
                         save_now=False)
                 for record in paper.oairecords:
                     p.add_oairecord(record)
-                p.update_availability() # in Paper, this saves to the db
-            else: # Otherwise we create a new paper
+                p.update_availability()  # in Paper, this saves to the db
+            else:  # Otherwise we create a new paper
                 # this already saves the paper in the db
                 p = super(Paper, cls).from_bare(paper)
 
             return p
 
         except DataError as e:
-            raise ValueError('Invalid paper, does not fit in the database schema:\n'+unicode(e))
-
+            raise ValueError(
+                'Invalid paper, does not fit in the database schema:\n'+unicode(e))
 
     ### Other methods, specific to this non-bare subclass ###
 
@@ -743,11 +773,10 @@ class Paper(models.Model, BarePaper):
             return ((datetime.now().date() - self.pubdate) <= timedelta(days=10))
 
     def can_be_asked_for_upload(self):
-        return ((self.pdf_url==None) and
-                (self.oa_status=='OK') and
+        return ((self.pdf_url == None) and
+                (self.oa_status == 'OK') and
                 not(self.already_asked_for_upload()) and
-                not(self.author_set.filter(researcher__isnull=False)==[]))
-
+                not(self.author_set.filter(researcher__isnull=False) == []))
 
     @cached_property
     def owners(self):
@@ -826,7 +855,7 @@ class Paper(models.Model, BarePaper):
         if bare:
             return bare_paper
         elif bare_paper:
-            return Paper.from_bare(bare_paper) # TODO TODO index it?
+            return Paper.from_bare(bare_paper)  # TODO TODO index it?
 
     def successful_deposits(self):
         return self.depositrecord_set.filter(pdf_url__isnull=False)
@@ -843,12 +872,13 @@ class Paper(models.Model, BarePaper):
                 else:
                     rpk = a.researcher_id
             for lang in POSSIBLE_LANGUAGE_CODES:
-                key = make_template_fragment_key('publiListItem', [self.pk, lang, rpk])
+                key = make_template_fragment_key(
+                    'publiListItem', [self.pk, lang, rpk])
                 cache.delete(key)
 
     def update_authors(self,
-            new_authors,
-            save_now=True):
+                       new_authors,
+                       save_now=True):
         """
         Improves the current list of authors by considering a new list of author names.
         Missing authors are added, and names are unified.
@@ -863,10 +893,10 @@ class Paper(models.Model, BarePaper):
         if hasattr(self, 'interesting_authors'):
             del self.interesting_authors
 
-        new_author_names = [(a.name.first,a.name.last) for a in
+        new_author_names = [(a.name.first, a.name.last) for a in
                             new_authors]
 
-        old_names = map(lambda a: (a.name.first,a.name.last), old_authors)
+        old_names = map(lambda a: (a.name.first, a.name.last), old_authors)
         unified_names = unify_name_lists(old_names, new_author_names)
 
         unified_authors = []
@@ -886,10 +916,10 @@ class Paper(models.Model, BarePaper):
 
             # update attributes
             author.name = BareName.create_bare(first=new_name[0],
-                                                last=new_name[1])
+                                               last=new_name[1])
             if new_idx is not None and affiliation_is_greater(
-                new_authors[new_idx].affiliation,
-                author.affiliation):
+                    new_authors[new_idx].affiliation,
+                    author.affiliation):
                 author.affiliation = new_authors[new_idx].affiliation
             if new_idx is not None and new_authors[new_idx].orcid:
                 author.orcid = new_authors[new_idx].orcid
@@ -980,6 +1010,8 @@ class Paper(models.Model, BarePaper):
         return reverse('paper', args=[self.pk, self.slug])
 
 # Rough data extracted through OAI-PMH
+
+
 class OaiSource(CachingMixin, models.Model):
     objects = CachingManager()
 
@@ -987,15 +1019,18 @@ class OaiSource(CachingMixin, models.Model):
     name = models.CharField(max_length=100)
     oa = models.BooleanField(default=False)
     priority = models.IntegerField(default=1)
-    default_pubtype = models.CharField(max_length=64, choices=PAPER_TYPE_CHOICES)
+    default_pubtype = models.CharField(
+        max_length=64, choices=PAPER_TYPE_CHOICES)
 
     # Fetching properties
     last_status_update = models.DateTimeField(auto_now=True)
+
     def __unicode__(self):
         return self.name
 
     class Meta:
         verbose_name = "OAI source"
+
 
 class OaiRecord(models.Model, BareOaiRecord):
     source = models.ForeignKey(OaiSource)
@@ -1004,12 +1039,14 @@ class OaiRecord(models.Model, BareOaiRecord):
     identifier = models.CharField(max_length=512, unique=True)
     splash_url = models.URLField(max_length=1024, null=True, blank=True)
     pdf_url = models.URLField(max_length=1024, null=True, blank=True)
-    description = models.TextField(null=True,blank=True)
-    keywords = models.TextField(null=True,blank=True)
+    description = models.TextField(null=True, blank=True)
+    keywords = models.TextField(null=True, blank=True)
     contributors = models.CharField(max_length=4096, null=True, blank=True)
-    pubtype = models.CharField(max_length=64, null=True, blank=True, choices=PAPER_TYPE_CHOICES)
+    pubtype = models.CharField(
+        max_length=64, null=True, blank=True, choices=PAPER_TYPE_CHOICES)
 
-    journal_title = models.CharField(max_length=512, blank=True, null=True) # this is actually the *journal* title
+    # this is actually the *journal* title
+    journal_title = models.CharField(max_length=512, blank=True, null=True)
     container = models.CharField(max_length=512, blank=True, null=True)
     journal = models.ForeignKey(Journal, blank=True, null=True)
 
@@ -1021,8 +1058,9 @@ class OaiRecord(models.Model, BareOaiRecord):
     pages = models.CharField(max_length=64, blank=True, null=True)
     pubdate = models.DateField(blank=True, null=True)
 
-    doi = models.CharField(max_length=1024, blank=True, null=True, db_index=True) # in theory, there is no limit
-
+    # in theory, there is no limit
+    doi = models.CharField(max_length=1024, blank=True,
+                           null=True, db_index=True)
 
     last_update = models.DateTimeField(auto_now=True)
 
@@ -1102,7 +1140,7 @@ class OaiRecord(models.Model, BareOaiRecord):
                     publisher=kwargs.get('publisher'),
                     journal=kwargs.get('journal'),
                     )
-            #with transaction.atomic():
+            # with transaction.atomic():
             record.save()
             return record
 
@@ -1111,7 +1149,7 @@ class OaiRecord(models.Model, BareOaiRecord):
             changed = False
 
             if pdf_url != None and (match.pdf_url == None or
-                    (match.pdf_url != pdf_url and match.priority < source.priority)):
+                                    (match.pdf_url != pdf_url and match.priority < source.priority)):
                 match.source = source
                 match.priority = source.priority
                 match.pdf_url = pdf_url
@@ -1121,7 +1159,7 @@ class OaiRecord(models.Model, BareOaiRecord):
             def update_field_conditionally(field):
                 new_val = kwargs.get(field, '')
                 if new_val and (not match.__dict__[field] or
-                        len(match.__dict__[field]) < len(new_val)):
+                                len(match.__dict__[field]) < len(new_val)):
                     match.__dict__[field] = new_val
                     changed = True
 
@@ -1144,13 +1182,13 @@ class OaiRecord(models.Model, BareOaiRecord):
                 try:
                     match.save()
                 except DataError as e:
-                    raise ValueError('Unable to create OAI record:\n'+unicode(e))
+                    raise ValueError(
+                        'Unable to create OAI record:\n'+unicode(e))
 
             if about.pk != match.about.pk:
                 match.about.merge(about)
 
             return match
-
 
     @classmethod
     def find_duplicate_records(cls, paper, splash_url, pdf_url):
@@ -1188,7 +1226,7 @@ class OaiRecord(models.Model, BareOaiRecord):
             short_pdf2 = shorten(record.pdf_url)
             if (short_splash == short_splash2 or
                 (short_pdf is not None and
-                short_pdf2 == short_pdf)):
+                 short_pdf2 == short_pdf)):
                 return record
 
     class Meta:
@@ -1218,5 +1256,3 @@ class PaperWorld(SingletonModel):
 
     class Meta:
         verbose_name = "Paper World"
-
-

@@ -30,20 +30,25 @@ importing this module and running the function manually.
 
 from __future__ import unicode_literals
 
-from papers.models import *
-from publishers.models import *
+from collections import defaultdict
+from time import sleep
+
+from django.db import DatabaseError
+from django.db.models import Prefetch
+from django.db.models import Q
+from lxml.html import fromstring
+
 import backend.crossref
-from papers.utils import sanitize_html
+from backend.crossref import fetch_metadata_by_DOI
+from backend.crossref import is_oa_license
+from backend.name_cache import name_lookup_cache
 from backend.romeo import fetch_publisher
 from backend.tasks import change_publisher_oa_status
-from backend.crossref import fetch_metadata_by_DOI, is_oa_license
-from backend.name_cache import name_lookup_cache
-from time import sleep
-from lxml.html import fromstring
-from collections import defaultdict
-from django.db.models import Q, Prefetch
-from django.db import DatabaseError
 from papers.errors import MetadataSourceException
+from papers.models import *
+from papers.utils import sanitize_html
+from publishers.models import *
+
 
 def cleanup_researchers():
     """
@@ -58,7 +63,7 @@ def cleanup_researchers():
     print "Deleted "+str(deleted_count)+" researchers"
 
 
-def cleanup_names(dry_run = False):
+def cleanup_names(dry_run=False):
     """
     Deletes all the names that are not linked to any researcher
     """
@@ -70,13 +75,15 @@ def cleanup_names(dry_run = False):
                 n.delete()
     print "Deleted "+str(deleted_count)+" names"
 
-def merge_names(fro,to):
+
+def merge_names(fro, to):
     """
     Merges the name object 'fro' into 'to
     """
     Researcher.objects.filter(name_id=fro.id).update(name_id=to.id)
     NameVariant.objects.filter(name_id=fro.id).update(name_id=to.id)
     fro.delete()
+
 
 def update_paper_statuses():
     """
@@ -86,6 +93,7 @@ def update_paper_statuses():
     papers = Paper.objects.all()
     for p in papers:
         p.update_availability()
+
 
 def cleanup_titles():
     """
@@ -97,6 +105,7 @@ def cleanup_titles():
     for p in papers:
         p.title = sanitize_html(p.title)
         p.save(update_fields=['title'])
+
 
 def cleanup_abstracts():
     """
@@ -110,6 +119,7 @@ def cleanup_abstracts():
             if new_abstract != p.description:
                 p.description = new_abstract
                 p.save()
+
 
 def recompute_fingerprints():
     """
@@ -126,6 +136,7 @@ def recompute_fingerprints():
         if match is not None:
             merged += 1
     print "%d papers merged" % merged
+
 
 def find_collisions():
     """
@@ -147,35 +158,39 @@ def find_collisions():
                 print paper.title
                 print paper.bare_author_names()
 
+
 def create_publisher_aliases(erase_existing=True):
     # TODO: this might be more efficient with aggregates?
     counts = defaultdict(int)
     for p in OaiRecord.objects.all():
         if p.publisher_id:
-            pair = (p.publisher_name,p.publisher_id)
+            pair = (p.publisher_name, p.publisher_id)
             counts[pair] += 1
 
     if erase_existing:
         AliasPublisher.objects.all().delete()
 
-    for (name,pk) in counts:
+    for (name, pk) in counts:
         if not erase_existing:
-            alias = AliasPublisher.objects.get_or_create(name=name,publisher_id=pk)
+            alias = AliasPublisher.objects.get_or_create(
+                name=name, publisher_id=pk)
         else:
-            alias = AliasPublisher(name=name,publisher_id=pk)
-        alias.count = counts[(name,pk)]
+            alias = AliasPublisher(name=name, publisher_id=pk)
+        alias.count = counts[(name, pk)]
         alias.save()
+
 
 def refetch_publishers():
     """
     Tries to assign publishers to OaiRecords without Journals
     """
-    for p in OaiRecord.objects.filter(publisher__isnull=True,publisher_name__isnull=False):
+    for p in OaiRecord.objects.filter(publisher__isnull=True, publisher_name__isnull=False):
         publisher = fetch_publisher(p.publisher_name)
         if publisher:
             p.publisher = publisher
             p.save(update_fields=['publisher'])
             p.paper.update_availability()
+
 
 def refetch_containers():
     """
@@ -190,6 +205,7 @@ def refetch_containers():
         if p.container:
             p.save()
 
+
 def recompute_publisher_policies():
     """
     Recomputes the publisher policy according to some possibly new criteria
@@ -203,6 +219,3 @@ def prune_name_lookup_cache(threshold):
     Prunes the name lookup cache (removes names which are not looked up often)
     """
     name_lookup_cache.prune(threshold)
-
-
-

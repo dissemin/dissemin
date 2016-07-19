@@ -27,13 +27,16 @@ whether we have already a model instance for it.
 
 from __future__ import unicode_literals
 
-from papers.models import Name
 from collections import defaultdict
+
+from papers.models import Name
+
 
 class NameCache(object):
     """
     Simple cache to save name lookups
     """
+
     def __init__(self):
         self.dct = dict()
         self.cnt = defaultdict(int)
@@ -45,15 +48,15 @@ class NameCache(object):
             if the name is new.
         """
         return Name.lookup_name(name)
-        #if name in self.dct:
+        # if name in self.dct:
         #    self.cnt[name] += 1
         #    return self.dct[name]
         #
         #val = Name.lookup_name(name)
-        #if val.pk is not None:
+        # if val.pk is not None:
         #    self.dct[name] = val
         #    self.cnt[name] += 1
-        #return val
+        # return val
 
     def prune(self, threshold=None):
         """
@@ -78,11 +81,9 @@ class NameCache(object):
         """
         if set(self.dct.keys()) != set(self.cnt.keys()):
             return False
-        if not all(map(lambda (k,v): v > 0, self.cnt.items())):
+        if not all(map(lambda (k, v): v > 0, self.cnt.items())):
             return False
         return True
 
 #: Global name lookup cache, mostly used by the tasks backend.
 name_lookup_cache = NameCache()
-
-

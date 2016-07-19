@@ -20,8 +20,10 @@
 
 from __future__ import unicode_literals
 
-from papers.models import Paper
 import haystack
+
+from papers.models import Paper
+
 
 class PaperSource(object):
     """
@@ -47,7 +49,8 @@ class PaperSource(object):
         Given a researcher, it should yield all the papers it can
         fetch from the source.
         """
-        raise NotImplemented("fetch_papers should be implemented by the subclass")
+        raise NotImplemented(
+            "fetch_papers should be implemented by the subclass")
 
     def fetch_bare(self, researcher):
         """
@@ -90,7 +93,6 @@ class PaperSource(object):
 
         return p
 
-
     def update_empty_orcid(self, researcher, val):
         """
         Updates the empty_orcid_profile field of the provided :class:`Researcher` instance.
@@ -111,4 +113,3 @@ class PaperSource(object):
                 index.update_object(paper, using=using)
             except haystack.exceptions.NotHandled:
                 pass
-

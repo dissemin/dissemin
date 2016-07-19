@@ -20,18 +20,21 @@
 
 from __future__ import unicode_literals
 
+import datetime
 import unittest
-from django.test import TestCase
+
 from django.core.exceptions import ObjectDoesNotExist
+from django.test import TestCase
+
 from backend.crossref import *
-from papers.models import *
 from papers.baremodels import *
 from papers.errors import *
+from papers.models import *
 from publishers.models import *
 
-import datetime
 
 class CrossRefTest(TestCase):
+
     def setUp(self):
         self.api = CrossRefAPI()
 
@@ -42,27 +45,28 @@ class CrossRefTest(TestCase):
 
     def test_affiliations(self):
         p = self.api.create_paper_by_doi('10.4204/eptcs.172.16')
-        self.assertEqual(p.authors[0].affiliation, 'École Normale Supérieure, Paris')
+        self.assertEqual(p.authors[0].affiliation,
+                         'École Normale Supérieure, Paris')
 
     def test_dirty_metadata(self):
         # saving a paper with enough metadata to create a paper, but not
         # an OaiRecord.
         p = self.api.save_doi_metadata({
             "DOI": "10.1007/978-1-4020-7884-2_13",
-            "subtitle": [ ],
+            "subtitle": [],
             "author": [
                 {
-                    "affiliation": [ ],
+                    "affiliation": [],
                     "given": "Haowen",
                     "family": "Chan"
                 },
                 {
-                    "affiliation": [ ],
+                    "affiliation": [],
                     "given": "Adrian",
                     "family": "Perrig"
                 },
                 {
-                    "affiliation": [ ],
+                    "affiliation": [],
                     "given": "Dawn",
                     "family": "Song"
                 }
@@ -85,61 +89,65 @@ class CrossRefTest(TestCase):
         self.assertTrue(p.is_orphan())
         self.assertFalse(p.visible)
 
+
 class CrossRefUnitTest(unittest.TestCase):
+
     def test_fetch_single_doi(self):
         doi = '10.5380/dp.v1i1.1922'
         metadata = fetch_metadata_by_DOI(doi)
         self.assertEqual(metadata,
-                {'publisher': 'Universidade Federal do Parana',
-                 'DOI': '10.5380/dp.v1i1.1922',
-                 'subtitle': [],
-                 'author': [{'given': 'Frederic', 'family': 'Worms'}],
-                 'URL': 'http://dx.doi.org/10.5380/dp.v1i1.1922',
-                 'issued': {'date-parts': [[2005, 3, 18]]},
-                 'reference-count': 0,
-                 'title': 'A concep\xe7\xe3o bergsoniana do tempo',
-                 'volume': '1',
-                 'source': 'CrossRef',
-                 'prefix': 'http://id.crossref.org/prefix/10.5380',
-                 'score': 1.0,
-                 'deposited': {'timestamp': 1421107200000, 'date-parts': [[2015, 1, 13]]},
-                 'type': 'journal-article',
-                 'container-title': 'DoisPontos',
-                 'indexed': {'timestamp': 1421405831942, 'date-parts': [[2015, 1, 16]]},
-                 'issue': '1',
-                 'ISSN': ['2179-7412', '1807-3883'],
-                 'member': 'http://id.crossref.org/member/3785'})
+                         {'publisher': 'Universidade Federal do Parana',
+                          'DOI': '10.5380/dp.v1i1.1922',
+                          'subtitle': [],
+                          'author': [{'given': 'Frederic', 'family': 'Worms'}],
+                          'URL': 'http://dx.doi.org/10.5380/dp.v1i1.1922',
+                          'issued': {'date-parts': [[2005, 3, 18]]},
+                          'reference-count': 0,
+                          'title': 'A concep\xe7\xe3o bergsoniana do tempo',
+                          'volume': '1',
+                          'source': 'CrossRef',
+                          'prefix': 'http://id.crossref.org/prefix/10.5380',
+                          'score': 1.0,
+                          'deposited': {'timestamp': 1421107200000, 'date-parts': [[2015, 1, 13]]},
+                          'type': 'journal-article',
+                          'container-title': 'DoisPontos',
+                          'indexed': {'timestamp': 1421405831942, 'date-parts': [[2015, 1, 16]]},
+                          'issue': '1',
+                          'ISSN': ['2179-7412', '1807-3883'],
+                          'member': 'http://id.crossref.org/member/3785'})
 
     def test_parse_crossref_date_incomplete(self):
         self.assertEqual(parse_crossref_date(None), None)
         self.assertEqual(
-                parse_crossref_date({'date-parts': [[2015,07,06]]}),
-                datetime.date(year=2015,month=07,day=06))
+                parse_crossref_date({'date-parts': [[2015, 07, 06]]}),
+                datetime.date(year=2015, month=07, day=06))
         self.assertEqual(
-                parse_crossref_date({'date-parts': [[2015,07]]}),
-                datetime.date(year=2015,month=07,day=01))
+                parse_crossref_date({'date-parts': [[2015, 07]]}),
+                datetime.date(year=2015, month=07, day=01))
         self.assertEqual(
                 parse_crossref_date({'date-parts': [[2015]]}),
-                datetime.date(year=2015,month=01,day=01))
+                datetime.date(year=2015, month=01, day=01))
 
     def test_parse_crossref_date_raw(self):
         self.assertEqual(
                 parse_crossref_date({'raw': '2015'}),
-                datetime.date(year=2015,month=01,day=01))
+                datetime.date(year=2015, month=01, day=01))
         self.assertEqual(
                 parse_crossref_date({'raw': '2015-07'}),
-                datetime.date(year=2015,month=07,day=01))
+                datetime.date(year=2015, month=07, day=01))
         self.assertEqual(
                 parse_crossref_date({'raw': '2015-07-06'}),
-                datetime.date(year=2015,month=07,day=06))
+                datetime.date(year=2015, month=07, day=06))
 
     def test_get_publication_date(self):
         self.assertEqual(
-                get_publication_date(fetch_metadata_by_DOI('10.5281/zenodo.18898')),
-                datetime.date(year=2015,month=01,day=01))
+                get_publication_date(
+                    fetch_metadata_by_DOI('10.5281/zenodo.18898')),
+                datetime.date(year=2015, month=01, day=01))
         self.assertEqual(
-                get_publication_date(fetch_metadata_by_DOI('10.5380/dp.v1i1.1919')),
-                datetime.date(year=2005,month=03,day=18))
+                get_publication_date(
+                    fetch_metadata_by_DOI('10.5380/dp.v1i1.1919')),
+                datetime.date(year=2005, month=03, day=18))
 
     def test_batch_queries(self):
         dois = [
@@ -171,44 +179,50 @@ class CrossRefUnitTest(unittest.TestCase):
 
     def test_dirty_batches(self):
         with self.assertRaises(MetadataSourceException):
-            fetch_dois_by_batch(['aunirestauniecb898989']) # definitely not a DOI
+            fetch_dois_by_batch(['aunirestauniecb898989']
+                                )  # definitely not a DOI
 
-        dois = ['10.5281/anuirsetacesecesrbl'] # probably not a DOI
+        dois = ['10.5281/anuirsetacesecesrbl']  # probably not a DOI
         results = fetch_dois_by_batch(dois)
         self.assertTrue(all([item is None for item in results]))
 
     def test_mixed_queries(self):
         dois = [
-            '10.1016/0169-5983(88)90079-2', # CrossRef DOI
-            '10.5281/zenodo.12826', # DataCite DOI
+            '10.1016/0169-5983(88)90079-2',  # CrossRef DOI
+            '10.5281/zenodo.12826',  # DataCite DOI
             ]
         results = fetch_dois_by_batch(dois)
         self.assertEqual([item['DOI'] for item in results], dois)
 
     def test_convert_to_name_pair(self):
         self.assertEqual(
-                convert_to_name_pair({'family':'Farge','given':'Marie'}),
-                ('Marie','Farge'))
+                convert_to_name_pair({'family': 'Farge', 'given': 'Marie'}),
+                ('Marie', 'Farge'))
         self.assertEqual(
-                convert_to_name_pair({'literal':'Marie Farge'}),
-                ('Marie','Farge'))
+                convert_to_name_pair({'literal': 'Marie Farge'}),
+                ('Marie', 'Farge'))
         self.assertEqual(
-                convert_to_name_pair({'literal':'Farge, Marie'}),
-                ('Marie','Farge'))
+                convert_to_name_pair({'literal': 'Farge, Marie'}),
+                ('Marie', 'Farge'))
         self.assertEqual(
-                convert_to_name_pair({'family':'Arvind'}),
-                ('','Arvind'))
+                convert_to_name_pair({'family': 'Arvind'}),
+                ('', 'Arvind'))
 
     def test_is_oa_license(self):
         # Creative Commons licenses
-        self.assertTrue(is_oa_license('http://creativecommons.org/licenses/by-nc-nd/2.5/co/'))
-        self.assertTrue(is_oa_license('http://creativecommons.org/licenses/by-nc/3.10/'))
-        self.assertTrue(is_oa_license('https://creativecommons.org/licenses/by-nc-sa/4.0/'))
+        self.assertTrue(is_oa_license(
+            'http://creativecommons.org/licenses/by-nc-nd/2.5/co/'))
+        self.assertTrue(is_oa_license(
+            'http://creativecommons.org/licenses/by-nc/3.10/'))
+        self.assertTrue(is_oa_license(
+            'https://creativecommons.org/licenses/by-nc-sa/4.0/'))
         # Other open licenses
-        self.assertTrue(is_oa_license('http://www.elsevier.com/open-access/userlicense/1.0/'))
+        self.assertTrue(is_oa_license(
+            'http://www.elsevier.com/open-access/userlicense/1.0/'))
         # Closed licenses
-        self.assertFalse(is_oa_license('http://link.aps.org/licenses/aps-default-license'))
-        self.assertFalse(is_oa_license('http://www.acs.org/content/acs/en/copyright.html'))
-        self.assertFalse(is_oa_license('http://www.elsevier.com/tdm/userlicense/1.0/'))
-
-
+        self.assertFalse(is_oa_license(
+            'http://link.aps.org/licenses/aps-default-license'))
+        self.assertFalse(is_oa_license(
+            'http://www.acs.org/content/acs/en/copyright.html'))
+        self.assertFalse(is_oa_license(
+            'http://www.elsevier.com/tdm/userlicense/1.0/'))

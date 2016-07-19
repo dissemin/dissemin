@@ -19,10 +19,13 @@
 #
 
 from __future__ import unicode_literals
+
 from django.contrib import admin
+
 from upload.models import *
 
+
 class UploadedPDFAdmin(admin.ModelAdmin):
-    list_display = ('file','user','timestamp')
+    list_display = ('file', 'user', 'timestamp')
 
 admin.site.register(UploadedPDF, UploadedPDFAdmin)

@@ -20,13 +20,16 @@
 
 from __future__ import unicode_literals
 
-from django.conf.urls import include, url
+from django.conf.urls import include
+from django.conf.urls import url
 
 from deposit import views
 
 urlpatterns = [
-        url(r'^deposit_paper/(?P<pk>\d+)/$', views.start_view, name='upload_paper'),
-        url(r'^ajax/submit-deposit-(?P<pk>\d+)$', views.submitDeposit, name='ajax-submitDeposit'),
+        url(r'^deposit_paper/(?P<pk>\d+)/$',
+            views.start_view, name='upload_paper'),
+        url(r'^ajax/submit-deposit-(?P<pk>\d+)$',
+            views.submitDeposit, name='ajax-submitDeposit'),
         url(r'^ajax/get-metadata-form$',
-                views.get_metadata_form, name='ajax-getMetadataForm'),
+            views.get_metadata_form, name='ajax-getMetadataForm'),
 ]

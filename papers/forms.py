@@ -19,41 +19,54 @@
 #
 
 from __future__ import unicode_literals
+
+from statistics.models import COMBINED_STATUS_CHOICES
+from statistics.models import PDF_STATUS_CHOICES
+
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 from haystack import inputs
 from haystack.forms import SearchForm
-from search import SearchQuerySet
 
 from papers.baremodels import PAPER_TYPE_CHOICES
 from papers.models import *
 from papers.name import *
 from publishers.models import OA_STATUS_CHOICES_WITHOUT_HELPTEXT
-from statistics.models import COMBINED_STATUS_CHOICES, PDF_STATUS_CHOICES
+from search import SearchQuerySet
+
 
 class OrcidField(forms.CharField):
+
     def to_python(self, val):
         if not val:
             return
         cleaned_val = validate_orcid(val)
         if cleaned_val is None:
-            raise forms.ValidationError(_('Invalid ORCID identifier.'), code='invalid')
+            raise forms.ValidationError(
+                _('Invalid ORCID identifier.'), code='invalid')
         return cleaned_val
 
+
 class ResearcherDepartmentForm(forms.Form):
-    value = forms.ModelChoiceField(label=_('Department'), queryset=Department.objects.all())
-    pk = forms.ModelChoiceField(label=_('Researcher'), queryset=Researcher.objects.all(), widget=forms.HiddenInput())
+    value = forms.ModelChoiceField(
+        label=_('Department'), queryset=Department.objects.all())
+    pk = forms.ModelChoiceField(label=_(
+        'Researcher'), queryset=Researcher.objects.all(), widget=forms.HiddenInput())
     name = forms.CharField(widget=forms.HiddenInput(), initial='department_id')
 
+
 class AddUnaffiliatedResearcherForm(forms.Form):
-    first = forms.CharField(label=_('First name'), max_length=256, min_length=2, required=False)
-    last = forms.CharField(label=_('Last name'), max_length=256, min_length=2, required=False)
+    first = forms.CharField(label=_('First name'),
+                            max_length=256, min_length=2, required=False)
+    last = forms.CharField(label=_('Last name'),
+                           max_length=256, min_length=2, required=False)
     force = forms.CharField(max_length=32, required=False)
 
     def clean_first(self):
         first = self.cleaned_data.get('first')
         if first and has_only_initials(first):
-            raise forms.ValidationError(_('Please spell out at least one name.'), code='initials')
+            raise forms.ValidationError(
+                _('Please spell out at least one name.'), code='initials')
         return first
 
     def clean(self):
@@ -61,14 +74,15 @@ class AddUnaffiliatedResearcherForm(forms.Form):
         if not cleaned_data.get('first') or not cleaned_data.get('last'):
             if not cleaned_data.get('last'):
                 self.add_error('last',
-                    forms.ValidationError(_('A last name is required.'), code='required'))
+                               forms.ValidationError(_('A last name is required.'), code='required'))
             else:
                 self.add_error('first',
-                    forms.ValidationError(_('A first name is required.'), code='required'))
+                               forms.ValidationError(_('A first name is required.'), code='required'))
         return cleaned_data
 
 
 class Sloppy(inputs.Exact):
+
     def prepare(self, query_obj):
         exact = super(Sloppy, self).prepare(query_obj)
         return "%s~%d" % (exact, self.kwargs['slop'])
@@ -187,7 +201,6 @@ class PaperForm(SearchForm):
 
     def filter(self, **kwargs):
         self.queryset = self.queryset.filter(**kwargs)
-
 
     def no_query_found(self):
         return self.searchqueryset.all()

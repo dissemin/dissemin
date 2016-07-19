@@ -20,13 +20,18 @@
 Tests statistics update and statistics consistency.
 """
 
-from django.test import TestCase
-from backend.tests import PrefilledTest
-from backend.orcid import OrcidPaperSource
-from papers.models import PaperWorld, Paper
 from statistics.models import *
 
+from django.test import TestCase
+
+from backend.orcid import OrcidPaperSource
+from backend.tests import PrefilledTest
+from papers.models import Paper
+from papers.models import PaperWorld
+
+
 class StatisticsTest(PrefilledTest):
+
     @classmethod
     def setUpClass(self):
         super(StatisticsTest, self).setUpClass()
@@ -42,7 +47,7 @@ class StatisticsTest(PrefilledTest):
 
     def test_from_queryset(self):
         bare_stats = BareAccessStatistics.from_queryset(
-                Paper.objects.filter(authors_list__contains=[{'researcher_id':self.r2.id}]).distinct())
+                Paper.objects.filter(authors_list__contains=[{'researcher_id': self.r2.id}]).distinct())
         stats = self.r2.stats
         self.assertEqual(bare_stats.num_oa, stats.num_oa)
         self.assertEqual(bare_stats.num_ok, stats.num_ok)
@@ -68,4 +73,3 @@ class StatisticsTest(PrefilledTest):
 
 # TODO check journal and publisher stats
 # TODO check that (for instance) department stats add up to institution stats
-

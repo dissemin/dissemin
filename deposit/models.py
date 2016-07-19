@@ -20,15 +20,16 @@
 
 
 from __future__ import unicode_literals
+
+from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from django.db import models
-from papers.models import Paper, OaiSource
-from django.contrib.auth.models import User
-from upload.models import UploadedPDF
 from deposit.protocol import *
 from deposit.registry import *
+from papers.models import OaiSource
+from papers.models import Paper
+from upload.models import UploadedPDF
 
 DEPOSIT_STATUS_CHOICES = [
    ('created', _('Created')),
@@ -36,6 +37,7 @@ DEPOSIT_STATUS_CHOICES = [
    ('document_defective', _('Document defective')),
    ('deposited', _('Deposited')),
    ]
+
 
 class Repository(models.Model):
     """
@@ -118,6 +120,7 @@ class Repository(models.Model):
     class Meta:
         verbose_name_plural = 'Repositories'
 
+
 class DepositRecord(models.Model):
     """
     This model stores the results of a deposit initiated by the user,
@@ -135,7 +138,7 @@ class DepositRecord(models.Model):
     request = models.TextField(null=True, blank=True)
     identifier = models.CharField(max_length=512, null=True, blank=True)
     pdf_url = models.URLField(max_length=1024, null=True, blank=True)
-    date = models.DateTimeField(auto_now=True) # deposit date
+    date = models.DateTimeField(auto_now=True)  # deposit date
     upload_type = models.CharFile = models.FileField(upload_to='deposits')
 
     file = models.ForeignKey(UploadedPDF)
@@ -148,5 +151,3 @@ class DepositRecord(models.Model):
             return self.identifier
         else:
             return unicode(_('Deposit'))
-
-

@@ -21,13 +21,14 @@
 from __future__ import unicode_literals
 
 from django import forms
-
-from django.utils.translation import ugettext as _
 from django.template.defaultfilters import filesizeformat
+from django.utils.translation import ugettext as _
+
 from dissemin.settings import DEPOSIT_MAX_FILE_SIZE
 
+invalid_content_type_message = _(
+    'Invalid file format: only PDF files are accepted.')
 
-invalid_content_type_message = _('Invalid file format: only PDF files are accepted.')
 
 class AjaxUploadForm(forms.Form):
     upl = forms.FileField()
@@ -37,11 +38,11 @@ class AjaxUploadForm(forms.Form):
         print content.content_type
         if content._size > DEPOSIT_MAX_FILE_SIZE:
             raise forms.ValidationError(_('File too large (%(size)s). Maximum size is %(maxsize)s.') %
-                    {'size':filesizeformat(content._size),
-                     'maxsize':filesizeformat(DEPOSIT_MAX_FILE_SIZE)},
-                    code='too_large')
+                                        {'size': filesizeformat(content._size),
+                                         'maxsize': filesizeformat(DEPOSIT_MAX_FILE_SIZE)},
+                                        code='too_large')
         return content
 
-class UrlDownloadForm(forms.Form):
-    url = forms.URLField(label=_('URL'),required=True)
 
+class UrlDownloadForm(forms.Form):
+    url = forms.URLField(label=_('URL'), required=True)

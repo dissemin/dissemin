@@ -20,22 +20,18 @@
 
 from __future__ import unicode_literals
 
-import json
-import requests
-import traceback, sys
 from io import BytesIO
+import traceback
 from zipfile import ZipFile
 
 from django.utils.translation import ugettext as __
 from django.utils.translation import ugettext_lazy as _
-from os.path import basename
-
-from deposit.protocol import *
-from deposit.registry import *
+import requests
 
 from deposit.hal.forms import *
 from deposit.hal.metadataFormatter import AOFRFormatter
-
+from deposit.protocol import *
+from deposit.registry import *
 from papers.errors import MetadataSourceException
 from papers.utils import kill_html
 
@@ -46,8 +42,6 @@ except ImportError:
     import httplib as http_client
 
 
-import logging
-
 #http_client.HTTPConnection.debuglevel = 1
 
 
@@ -55,6 +49,7 @@ class HALProtocol(RepositoryProtocol):
     """
     A protocol to submit using the HAL SWORD API
     """
+
     def __init__(self, repository, **kwargs):
         super(HALProtocol, self).__init__(repository, **kwargs)
         # We let the interface define another API endpoint (sandbox…)
@@ -68,7 +63,8 @@ class HALProtocol(RepositoryProtocol):
         if not topic_text:
             return
         try:
-            r = requests.post('http://haltopics.dissem.in:6377/predict', data={'text':topic_text})
+            r = requests.post(
+                'http://haltopics.dissem.in:6377/predict', data={'text': topic_text})
             return r.json()['decision']['code']
         except (requests.exceptions.RequestException, ValueError, KeyError) as e:
             return None
@@ -76,7 +72,7 @@ class HALProtocol(RepositoryProtocol):
     def get_form(self):
         data = {}
         data['paper_id'] = self.paper.id
-        
+
         # Abstract
         if self.paper.abstract:
             data['abstract'] = kill_html(self.paper.abstract)
@@ -90,7 +86,7 @@ class HALProtocol(RepositoryProtocol):
         else:
             topic_text = self.paper.title
         data['topic'] = self.predict_topic(topic_text)
-        
+
         return HALForm(initial=data)
 
     def get_bound_form(self, data):
@@ -110,7 +106,7 @@ class HALProtocol(RepositoryProtocol):
 
     def encodeUserData(self):
         return "Basic " + (self.username + ":" + self.password
-                ).encode("base64").rstrip()
+                           ).encode("base64").rstrip()
 
     def submit_deposit(self, pdf, form, dry_run=False):
         result = {}
@@ -123,7 +119,7 @@ class HALProtocol(RepositoryProtocol):
             # Creating the metadata
             self.log("### Generating metadata")
             metadata = self.createMetadata(form)
-            
+
             # Bundling the metadata and the PDF
             self.log("### Creating ZIP file")
             zipFile = self.create_zip(pdf, metadata)
@@ -134,12 +130,12 @@ class HALProtocol(RepositoryProtocol):
             host = 'api-preprod.archives-ouvertes.fr'
             conn = http_client.HTTPConnection(host)
             conn.putrequest('POST', '/sword/hal', True, True)
-            zipContent = zipFile.getvalue() 
+            zipContent = zipFile.getvalue()
             headers = {
                 'Authorization': self.encodeUserData(),
                 'Host': host,
-                'X-Packaging':'http://purl.org/net/sword-types/AOfr',
-                'Content-Type':'application/zip',
+                'X-Packaging': 'http://purl.org/net/sword-types/AOfr',
+                'Content-Type': 'application/zip',
                 'Content-Disposition': 'attachment; filename=meta.xml',
                 'Content-Length': len(zipContent),
                 }
@@ -156,7 +152,8 @@ class HALProtocol(RepositoryProtocol):
             receipt = etree.parse(BytesIO(xml_response), parser)
             receipt = receipt.getroot()
             deposition_id = receipt.find('{http://www.w3.org/2005/Atom}id').text
-            password = receipt.find('{http://hal.archives-ouvertes.fr/}password').text
+            password = receipt.find(
+                '{http://hal.archives-ouvertes.fr/}password').text
             document_url = resp.getheader('location')
 
             if not deposition_id:
@@ -167,12 +164,12 @@ class HALProtocol(RepositoryProtocol):
             deposit_result.identifier = deposition_id
             deposit_result.splash_url = document_url
             deposit_result.pdf_url = deposit_result.splash_url + '/document'
-            
+
             if dry_run:
                 conn = http_client.HTTPConnection(host)
                 conn.putrequest('DELETE', '/sword/'+deposition_id)
                 headers = {
-                    'Authorization':self.encodeUserData(),
+                    'Authorization': self.encodeUserData(),
                    # 'Host': host,
                     'Accept': '*/*',
                     'User-Agent': 'dissemin',
@@ -191,7 +188,8 @@ class HALProtocol(RepositoryProtocol):
             self.log("Caught exception:")
             self.log(str(type(e))+': '+str(e)+'')
             self.log(traceback.format_exc())
-            raise DepositError('Connection to HAL failed. Please try again later.')
+            raise DepositError(
+                'Connection to HAL failed. Please try again later.')
 
         return deposit_result
 
@@ -202,4 +200,3 @@ class HALProtocol(RepositoryProtocol):
         return metadata
 
 protocol_registry.register(HALProtocol)
-

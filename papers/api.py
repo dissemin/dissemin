@@ -20,37 +20,50 @@
 
 from __future__ import unicode_literals
 
-from django.conf.urls import include, url
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, HttpResponseNotFound, HttpResponseForbidden, Http404, JsonResponse
-import json, requests
+import json
+
+from django.conf.urls import include
+from django.conf.urls import url
+from django.http import Http404
+from django.http import HttpResponse
+from django.http import HttpResponseForbidden
+from django.http import HttpResponseNotFound
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 from jsonview.decorators import json_view
 from jsonview.exceptions import BadRequest
-from django.views.decorators.http import require_POST
-from django.views.decorators.csrf import csrf_exempt
-
-from papers.models import *
-from papers.name import parse_comma_name
-from papers.utils import tolerant_datestamp_to_datetime
-from papers.errors import MetadataSourceException
-
-from rest_framework import serializers, routers, viewsets, views
-from rest_framework.response import Response
+import requests
+from rest_framework import routers
+from rest_framework import serializers
+from rest_framework import views
+from rest_framework import viewsets
 from rest_framework.decorators import api_view
 from rest_framework.permissions import AllowAny
 from rest_framework.renderers import JSONRenderer
+from rest_framework.response import Response
+
+from papers.errors import MetadataSourceException
+from papers.models import *
+from papers.name import parse_comma_name
+from papers.utils import tolerant_datestamp_to_datetime
+
 
 class JsonSerializer(serializers.BaseSerializer):
+
     def to_representation(self, obj):
         return obj.json()
 
-#class PaperViewSet(viewsets.ReadOnlyModelViewSet):
+# class PaperViewSet(viewsets.ReadOnlyModelViewSet):
 #    queryset = Paper.objects.filter(visibility='VISIBLE')
 #    serializer_class = JsonSerializer
 
+
 class PaperViewSet(viewsets.ViewSet):
-#    def list(self, request, format=None):
-#        return Response([])
+    #    def list(self, request, format=None):
+    #        return Response([])
     permission_classes = (AllowAny,)
 
     def retrieve(self, request, pk, format=None):
@@ -61,13 +74,13 @@ class PaperViewSet(viewsets.ViewSet):
         serializer = JsonSerializer(paper)
         return Response(serializer.data)
 
-    #serializer.data)
+    # serializer.data)
 
 router = routers.DefaultRouter()
 router.register(r'papers', PaperViewSet, base_name='papers')
 
 #@api_view
-#def api_paper(request, pk):
+# def api_paper(request, pk):
 #    paper = get_object_or_404(Paper, pk=pk)
 #    return Response({
 #            'status':'ok',
@@ -76,10 +89,11 @@ router.register(r'papers', PaperViewSet, base_name='papers')
 #            })
 
 #@api_view
-#def api_root(request, format=None):
+# def api_root(request, format=None):
 #    return Response({
 #        'papers': reverse
 #        })
+
 
 @json_view
 def api_paper_doi(request, doi):
@@ -87,9 +101,10 @@ def api_paper_doi(request, doi):
     if p is None:
         raise Http404("The paper you requested could not be found.")
     return {
-            'status':'ok',
-            'paper':p.json()
+            'status': 'ok',
+            'paper': p.json()
             }
+
 
 @json_view
 @csrf_exempt
@@ -109,11 +124,12 @@ def api_paper_query(request):
             pass
         if p is None:
             raise BadRequest('Could not find a paper with this DOI')
-        return {'status':'ok','paper':p.json()}
+        return {'status': 'ok', 'paper': p.json()}
 
     title = fields.get('title')
     if type(title) != unicode or not title or len(title) > 512:
-        raise BadRequest('Invalid title, has to be a non-empty string shorter than 512 characters')
+        raise BadRequest(
+            'Invalid title, has to be a non-empty string shorter than 512 characters')
 
     pubdate = fields.get('date')
 
@@ -139,7 +155,7 @@ def api_paper_query(request):
             if type(a['first']) != unicode or type(a['last']) != unicode or not a['last']:
                 raise BadRequest('Invalid (first,last) name provided')
             else:
-                author = (a['first'],a['last'])
+                author = (a['first'], a['last'])
         elif 'plain' in a:
             if type(a['plain']) != unicode or not a['plain']:
                 raise BadRequest('Invalid plain name provided')
@@ -149,7 +165,7 @@ def api_paper_query(request):
         if author is None:
             raise BadRequest('Invalid author')
 
-        parsed_authors.append(BareName.create(author[0],author[1]))
+        parsed_authors.append(BareName.create(author[0], author[1]))
 
     if not authors:
         raise BadRequest('No authors provided')
@@ -160,15 +176,14 @@ def api_paper_query(request):
         raise BadRequest('Invalid paper')
     import backend.oai as oai
 
-    return {'status':'ok','paper':p.json()}
+    return {'status': 'ok', 'paper': p.json()}
 
 
 urlpatterns = [
     url(r'^', include(router.urls)),
-#    url(r'^paper/(?P<pk>\d+)/$', PaperView.as_view(), name='api-paper'),
+    #    url(r'^paper/(?P<pk>\d+)/$', PaperView.as_view(), name='api-paper'),
     url(r'^(?P<doi>10\..*)$', api_paper_doi, name='api-paper-doi'),
     url(r'^query$', api_paper_query, name='api-paper-query'),
-#    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-#    url(r'^docs/', include('rest_framework_swagger.urls')),
+    #    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    #    url(r'^docs/', include('rest_framework_swagger.urls')),
 ]
-

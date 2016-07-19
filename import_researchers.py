@@ -1,10 +1,12 @@
 # -*- encoding: utf-8 -*-
 from __future__ import unicode_literals
-from papers.models import *
-from backend.create import *
-from papers.utils import iunaccent
-from papers.name import normalize_name_words
+
 from codecs import open
+
+from backend.create import *
+from papers.models import *
+from papers.name import normalize_name_words
+from papers.utils import iunaccent
 
 last_name_f = 0
 first_name_f = 1
@@ -13,6 +15,7 @@ email_f = 3
 role_f = 4
 group_f = 5
 dept_f = 6
+
 
 def import_from_tsv(filename):
     f = open(filename, 'r', 'utf-8')
@@ -23,7 +26,7 @@ def import_from_tsv(filename):
 
         dept = fields[dept_f]
         (department, found) = Department.objects.get_or_create(name__iexact=dept,
-                defaults={'name':dept.strip()})
+                                                               defaults={'name': dept.strip()})
 
         email = fields[email_f]
         if email == '':
@@ -37,7 +40,8 @@ def import_from_tsv(filename):
             homepage = None
 
         try:
-            researcher = Researcher.create_from_scratch(first, last, department, email, role, homepage)
+            researcher = Researcher.create_from_scratch(
+                first, last, department, email, role, homepage)
         except ValueError:
             print "ValueError"
             continue
@@ -49,4 +53,3 @@ def import_from_tsv(filename):
 
 
 import_from_tsv('data/cambridge_researchers')
-

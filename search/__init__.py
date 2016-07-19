@@ -2,14 +2,14 @@
 Custom Haystack backend to use the aggregations framework of Elasticsearch.
 """
 from haystack.backends import SQ
-from haystack.backends.elasticsearch_backend import (
-    ElasticsearchSearchBackend, ElasticsearchSearchQuery,
-    ElasticsearchSearchEngine,
-)
+from haystack.backends.elasticsearch_backend import ElasticsearchSearchBackend
+from haystack.backends.elasticsearch_backend import ElasticsearchSearchEngine
+from haystack.backends.elasticsearch_backend import ElasticsearchSearchQuery
 import haystack.query as haystack
 
 
 class SearchBackend(ElasticsearchSearchBackend):
+
     def build_search_kwargs(self, query_string, extra=None, *args, **kwargs):
         kwargs = super(SearchBackend, self).build_search_kwargs(
             query_string, *args, **kwargs)
@@ -26,6 +26,7 @@ class SearchBackend(ElasticsearchSearchBackend):
 
 
 class SearchQuery(ElasticsearchSearchQuery):
+
     def __init__(self, **kwargs):
         super(SearchQuery, self).__init__(**kwargs)
         self.query_post_filter = None
@@ -95,6 +96,7 @@ class SearchEngine(ElasticsearchSearchEngine):
 
 
 class SearchQuerySet(haystack.SearchQuerySet):
+
     def __init__(self, *args, **kwargs):
         super(SearchQuerySet, self).__init__(*args, **kwargs)
         self._aggregation_results = None

@@ -20,13 +20,15 @@
 
 from __future__ import unicode_literals
 
-from django.conf.urls import include, url
+from django.conf.urls import include
+from django.conf.urls import url
 
 from publishers import views
 
 urlpatterns = [
         url(r'^publishers$', views.PublishersView.as_view(), name='publishers'),
-        url(r'^publisher/(?P<pk>\d+)/$', views.PublisherView.as_view()), # Deprecated URL
-        url(r'^b/(?P<pk>\d+)/(?P<slug>[\w-]*)$', views.PublisherView.as_view(), name='publisher'),
+        url(r'^publisher/(?P<pk>\d+)/$',
+            views.PublisherView.as_view()),  # Deprecated URL
+        url(r'^b/(?P<pk>\d+)/(?P<slug>[\w-]*)$',
+            views.PublisherView.as_view(), name='publisher'),
 ]
-

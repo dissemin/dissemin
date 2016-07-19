@@ -1,10 +1,14 @@
 from django.utils import timezone
 
-from ..base import NotificationBackend
-from ..exceptions import NotificationTypeNotSupported, NotificationDoesNotExist
 from .. import signals
-from ...models import Inbox, Notification, NotificationArchive
+from ...models import Inbox
+from ...models import Notification
+from ...models import NotificationArchive
 from ...settings import notification_settings
+from ..base import NotificationBackend
+from ..exceptions import NotificationDoesNotExist
+from ..exceptions import NotificationTypeNotSupported
+
 
 class DefaultBackend(NotificationBackend):
 
@@ -25,27 +29,34 @@ class DefaultBackend(NotificationBackend):
 
         for user in users:
             Inbox.objects.get_or_create(user=user, notification=notification)
-            signals.inbox_stored.send(sender=self.__class__, user=user, notification=notification)
+            signals.inbox_stored.send(
+                sender=self.__class__, user=user, notification=notification)
 
     def inbox_delete(self, user, notification_id):
         try:
-            Inbox.objects.filter(user=user, notification=notification_id).delete()
-            signals.inbox_deleted.send(sender=self.__class__, user=user, notification_id=notification_id)
+            Inbox.objects.filter(
+                user=user, notification=notification_id).delete()
+            signals.inbox_deleted.send(
+                sender=self.__class__, user=user, notification_id=notification_id)
         except Inbox.DoesNotExist:
-            raise NotificationDoesNotExist("Notification with id {} does not exist".format(notification_id))
+            raise NotificationDoesNotExist(
+                "Notification with id {} does not exist".format(notification_id))
 
     def inbox_clean_per_tag(self, user, tag):
         try:
             Inbox.objects.filter(user=user, notification__tag=tag).delete()
-            signals.inbox_cleaned.send(sender=self.__class__, user=user, tag=tag)
+            signals.inbox_cleaned.send(
+                sender=self.__class__, user=user, tag=tag)
         except Inbox.DoesNotExist:
-            raise NotificationDoesNotExist("Notification(s) with tag {} does not exist".format(tag))
+            raise NotificationDoesNotExist(
+                "Notification(s) with tag {} does not exist".format(tag))
 
     def inbox_get(self, user, notification_id):
         try:
             return Inbox.objects.get(pk=notification_id).notification
         except Inbox.DoesNotExist:
-            raise NotificationDoesNotExist("Notification with id {} does not exist".format(notification_id))
+            raise NotificationDoesNotExist(
+                "Notification with id {} does not exist".format(notification_id))
 
     def create_notification(self, level, payload, tag='', date=None):
         notif_args = {
@@ -64,8 +75,10 @@ class DefaultBackend(NotificationBackend):
             raise NotificationTypeNotSupported
 
         for user in users:
-            NotificationArchive.objects.create(user=user, notification=notification)
-            signals.archive_stored.send(sender=self.__class__, user=user, notification=notification)
+            NotificationArchive.objects.create(
+                user=user, notification=notification)
+            signals.archive_stored.send(
+                sender=self.__class__, user=user, notification=notification)
 
     def archive_list(self, user):
         return list(NotificationArchive.objects.filter(user=user))

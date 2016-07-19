@@ -1,6 +1,11 @@
 # -*- encoding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.contrib import admin
+
+from publishers.models import *
+
+
 # Dissemin: open access policy enforcement tool
 # Copyright (C) 2014 Antonin Delpeuch
 #
@@ -19,17 +24,15 @@ from __future__ import unicode_literals
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from django.contrib import admin
-from publishers.models import *
 
 class JournalAdmin(admin.ModelAdmin):
-    raw_id_fields = ('stats','publisher')
-    list_display = ('title','issn','publisher')
+    raw_id_fields = ('stats', 'publisher')
+    list_display = ('title', 'issn', 'publisher')
+
 
 class PublisherAdmin(admin.ModelAdmin):
     raw_id_fields = ('stats',)
-    list_display = ('name','oa_status')
+    list_display = ('name', 'oa_status')
 
 admin.site.register(Journal, JournalAdmin)
 admin.site.register(Publisher, PublisherAdmin)
-
