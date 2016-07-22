@@ -17,8 +17,8 @@ if 'TRAVIS' in os.environ:
     import urllib3.contrib.pyopenssl
     urllib3.contrib.pyopenssl.inject_into_urllib3()
 
-if 'CORE_API_KEY' in os.environ:
-    CORE_API_KEY = os.environ['CORE_API_KEY']
+if 'PROAIXY_API_KEY' in os.environ:
+    PROAIXY_API_KEY = os.environ['PROAIXY_API_KEY']
 
 if 'ROMEO_API_KEY' in os.environ:
     ROMEO_API_KEY = os.environ['ROMEO_API_KEY']
