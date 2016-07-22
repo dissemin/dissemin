@@ -35,7 +35,6 @@ from django.utils import timezone
 from backend.crossref import *
 import backend.extractors  # to ensure that OaiSources are created
 from backend.orcid import *
-from backend.proxy import BASE_LOCAL_ENDPOINT
 from backend.utils import run_only_once
 from oaipmh.datestamp import tolerant_datestamp_to_datetime
 from oaipmh.error import BadArgumentError
