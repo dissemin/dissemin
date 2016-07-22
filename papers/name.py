@@ -306,10 +306,10 @@ def name_similarity(a, b):
     0
     """
 
-    if not a or not b:
+    if not a or not b or len(a) != 2 or len(b) != 2:
         return False
-    (firstA, lastA) = a
-    (firstB, lastB) = b
+    firstA, lastA = a
+    firstB, lastB = b
     firstA = iunaccent(firstA)
     firstB = iunaccent(firstB)
     lastA = iunaccent(lastA)
@@ -359,7 +359,7 @@ def shallower_name_similarity(a, b):
     This heuristics is more costly but is only used to attribute an ORCID
     affiliation to the right author in papers fetched from ORCID.
     """
-    if not a or not b:
+    if not a or not b or len(a) != 2 or len(b) != 2:
         return False
     firstA, lastA = a
     firstB, lastB = b
@@ -371,6 +371,8 @@ def shallower_name_similarity(a, b):
     wordsB, sepB = split_name_words(lastB)
     wordsA = set(wordsA)
     wordsB = set(wordsB)
+    if not wordsA or not wordsB:
+        return False
     ratio = float(len(wordsA & wordsB)) / len(wordsA | wordsB)
 
     partsA, sepsA = split_name_words(firstA)
