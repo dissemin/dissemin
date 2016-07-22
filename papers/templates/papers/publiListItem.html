@@ -19,21 +19,16 @@
         {% endif %}
     </p>
     <p class="paperTitle">
-    <a href="{% url 'paper' paper.id paper.slug %}" class="paperItemTitle" data-pk="{{ paper.id }}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">{% autoescape off %}{{ paper.title }}{% endautoescape %}</a>
+    <a href="{{ paper.url }}" class="paperItemTitle" data-pk="{{ paper.id }}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">{% autoescape off %}{{ paper.title }}{% endautoescape %}</a>
     </p>
 
-    <p class="pubRef">
-        {% with paper.publications.first as publi %}
-            {% if publi %}
-                {{ publi | publication }}.<br />
-            {% else %}
-            {% for record in paper.unique_prioritary_oai_records %}
-                {{ record.source.name }}{% if record.pdf_url == None %}{% trans " (metadata only)" %}{% endif %}{% if forloop.last %}.{% else %},{% endif %}
-            {% endfor %}
-            <br />
-            {% endif %}
-        {% endwith %}
-    </p>
+    {% with paper.publications.first as publi %}
+	{% if publi %}
+	    <p class="pubRef">
+	    {{ publi | publication }}.<br />
+	    </p>
+	{% endif %}
+    {% endwith %}
 
     <p class="paperDownload">
         {% if paper.pdf_url %}
