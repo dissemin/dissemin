@@ -21,17 +21,22 @@
 
 from __future__ import unicode_literals
 
+import datetime
 import unittest
+
+from django.core.urlresolvers import reverse
 import django.test
 import html5lib
-import datetime
-from papers.utils import overescaped_re
-from django.core.urlresolvers import reverse
-from backend.tests import PrefilledTest
+
 from backend.crossref import CrossRefAPI
 from backend.oai import OaiPaperSource
+from backend.tests import PrefilledTest
 from papers.baremodels import BareName
-from papers.models import OaiRecord, Paper, Researcher
+from papers.models import OaiRecord
+from papers.models import Paper
+from papers.models import Researcher
+from papers.utils import overescaped_re
+
 
 # TODO TO BE TESTED
 
@@ -43,7 +48,9 @@ from papers.models import OaiRecord, Paper, Researcher
 #        # Annotations (to be deleted)
 #        url(r'^annotations/$', views.AnnotationsView.as_view(), name='annotations'),
 
+
 class RenderingTest(PrefilledTest):
+
     def setUp(self):
         super(RenderingTest, self).setUp()
         self.client = django.test.Client()
@@ -79,7 +86,9 @@ class RenderingTest(PrefilledTest):
     def checkUrl(self, url):
         self.checkHtml(self.client.get(url))
 
+
 class InstitutionPagesTest(RenderingTest):
+
     def test_dept(self):
         self.checkUrl(self.d.url)
         self.checkUrl(self.di.url)
@@ -87,17 +96,21 @@ class InstitutionPagesTest(RenderingTest):
     def test_univ(self):
         self.checkUrl(self.i.url)
 
+
 class PaperPagesTest(RenderingTest):
+
     def test_index(self):
         self.checkHtml(self.getPage('index'))
 
     def test_researcher(self):
         for r in [self.r1, self.r2, self.r3, self.r4]:
-            self.checkPage('researcher', kwargs={'researcher':r.pk, 'slug':r.slug})
+            self.checkPage('researcher', kwargs={
+                           'researcher': r.pk, 'slug': r.slug})
             self.checkUrl(r.url)
 
     def test_researcher_orcid(self):
-        self.checkPermanentRedirect('researcher-by-orcid', kwargs={'orcid':self.r4.orcid})
+        self.checkPermanentRedirect(
+            'researcher-by-orcid', kwargs={'orcid': self.r4.orcid})
 
     def test_researcher_with_empty_slug(self):
         """
@@ -109,10 +122,12 @@ class PaperPagesTest(RenderingTest):
         self.checkPage('researcher', args=[r.pk, r.slug])
 
     def test_invalid_orcid(self):
-        self.check404('researcher-by-orcid', kwargs={'orcid':'0000-0002-2803-9724'})
+        self.check404('researcher-by-orcid',
+                      kwargs={'orcid': '0000-0002-2803-9724'})
 
     def test_researcher_blocked_orcid(self):
-        self.check404('researcher-by-orcid', kwargs={'orcid':'9999-9999-9999-9994'})
+        self.check404('researcher-by-orcid',
+                      kwargs={'orcid': '9999-9999-9999-9994'})
 
     def test_search_no_parameters(self):
         self.checkPage('search')
@@ -121,11 +136,11 @@ class PaperPagesTest(RenderingTest):
         self.checkPage('search', getargs={'authors': self.r3.name})
 
     def test_department_papers(self):
-        self.checkPage('department-papers', kwargs={'pk':self.di.pk})
+        self.checkPage('department-papers', kwargs={'pk': self.di.pk})
 
     def test_missing_info_in_pub(self):
         p = Paper.create_by_doi('10.1007/978-3-642-14363-2_7')
-        self.checkPage('paper', kwargs={'pk':p.id, 'slug':p.slug})
+        self.checkPage('paper', kwargs={'pk': p.id, 'slug': p.slug})
 
     def test_publisher_papers(self):
         # TODO checkPage when logged in as superuser.
@@ -135,18 +150,19 @@ class PaperPagesTest(RenderingTest):
         # TODO checkPage when logged in as superuser.
         self.check404('journal', kwargs={'journal': self.lncs.pk})
 
-    # ampersands not escaped in django bootstrap pagination, https://github.com/jmcclell/django-bootstrap-pagination/issues/41
+    # ampersands not escaped in django bootstrap pagination,
+    # https://github.com/jmcclell/django-bootstrap-pagination/issues/41
 
     def test_paper(self):
         for p in self.r3.papers:
-            self.checkPage('paper', kwargs={'pk':p.id, 'slug':p.slug})
+            self.checkPage('paper', kwargs={'pk': p.id, 'slug': p.slug})
             if p.is_orphan() and p.visible:
                 print p
             self.assertTrue(not p.is_orphan())
 
     def test_paper_by_doi(self):
         publi = OaiRecord.objects.filter(doi__isnull=False)[0]
-        self.checkPermanentRedirect('paper-doi', kwargs={'doi':publi.doi})
+        self.checkPermanentRedirect('paper-doi', kwargs={'doi': publi.doi})
 
     def test_paper_with_empty_slug(self):
         """

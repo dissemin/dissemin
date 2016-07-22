@@ -20,40 +20,51 @@
 
 from __future__ import unicode_literals
 
-import itertools
 from datetime import datetime
-from oaipmh.client import Client
-from oaipmh.metadata import MetadataRegistry
-from oaipmh.error import DatestampError, NoRecordsMatchError, BadArgumentError
+import itertools
+import re
+import json
 
-# metadat readers
-from oaipmh.metadata import oai_dc_reader
-from oaipmh.metadata import base_dc_reader
-from backend.proxy import citeproc_reader
 from django.db import transaction
 
-from papers.name import parse_comma_name, name_normalization, name_signature, normalize_name_words
-from papers.models import OaiSource
-from papers.baremodels import BareOaiRecord, BarePaper, BareName
-from papers.doi import to_doi
-from papers.utils import sanitize_html, tolerant_datestamp_to_datetime
-from papers.errors import MetadataSourceException
-
-from backend.papersource import *
-from backend.extractors import *
-from backend.proxy import *
-from backend.crossref import CrossRefAPI
-from backend.name_cache import name_lookup_cache
-from backend.pubtype_translations import OAI_PUBTYPE_TRANSLATIONS
 from backend import crossref
+from backend.crossref import CrossRefAPI
+from backend.extractors import *
+from backend.name_cache import name_lookup_cache
+from backend.papersource import *
+from backend.pubtype_translations import OAI_PUBTYPE_TRANSLATIONS
+from django.conf import settings
+from oaipmh import common
+from oaipmh.client import Client
+from oaipmh.error import BadArgumentError
+from oaipmh.error import DatestampError
+from oaipmh.error import NoRecordsMatchError
+from oaipmh.metadata import base_dc_reader
+from oaipmh.metadata import MetadataRegistry
+from oaipmh.metadata import MetadataReader
+from oaipmh.metadata import oai_dc_reader
+from papers.baremodels import BareName
+from papers.baremodels import BareOaiRecord
+from papers.baremodels import BarePaper
+from papers.doi import to_doi
+from papers.errors import MetadataSourceException
+from papers.models import OaiSource
+from papers.name import name_normalization
+from papers.name import name_signature
+from papers.name import normalize_name_words
+from papers.name import parse_comma_name
+from papers.utils import sanitize_html
+from papers.utils import tolerant_datestamp_to_datetime
 
-import re
+# Set exposed by proaixy to indicate the metadata source
+PROXY_SOURCE_PREFIX = "proaixy:source:"
 
 class OaiTranslator(object):
     """
     A translator takes a metadata record from the OAI-PMH
     proxy and converts it to a :class:`BarePaper`.
     """
+
     def format(self):
         """
         Returns the metadata format expected by the translator
@@ -71,10 +82,25 @@ class OaiTranslator(object):
         """
         raise NotImplemented
 
+class CiteprocReader(MetadataReader):
+
+    def __init__(self):
+        super(CiteprocReader, self).__init__({}, {})
+
+    def __call__(self, element):
+        # extract the Json
+        jsontxt = element.text
+        payload = json.loads(jsontxt)
+
+        return common.Metadata(element, payload)
+
+citeproc_reader = CiteprocReader()
+
 class CiteprocTranslator(object):
     """
     A translator for the JSON-based Citeproc format served by Crossref
     """
+
     def __init__(self):
         self.cr_api = CrossRefAPI()
 
@@ -88,12 +114,12 @@ class CiteprocTranslator(object):
             return
 
 
-
 class OAIDCTranslator(object):
     """
     Translator for the default format supplied by OAI-PMH interfaces,
     called oai_dc.
     """
+
     def format(self):
         return 'oai_dc'
 
@@ -101,8 +127,8 @@ class OAIDCTranslator(object):
         """
         Get the authors names out of a metadata record
         """
-        parsed =  map(parse_comma_name, metadata['creator'])
-        names = [BareName.create_bare(fst,lst) for fst, lst in parsed]
+        parsed = map(parse_comma_name, metadata['creator'])
+        names = [BareName.create_bare(fst, lst) for fst, lst in parsed]
         return names
 
     def find_earliest_oai_date(self, metadata):
@@ -200,16 +226,17 @@ class OAIDCTranslator(object):
         curdesc = ""
         for desc in metadata['description']:
             if len(desc) > len(curdesc):
-                    curdesc = desc
+                curdesc = desc
         curdesc = sanitize_html(curdesc)
 
         # Run extractor to find the URLs
-        splash_url, pdf_url = self.extract_urls(header, metadata, source.identifier)
+        splash_url, pdf_url = self.extract_urls(
+            header, metadata, source.identifier)
 
         keywords = ' '.join(metadata['subject'])
         contributors = ' '.join(metadata['contributor'])[:4096]
 
-        typenorms = ['typenorm:'+tn for tn in metadata.get('typenorm',[])]
+        typenorms = ['typenorm:'+tn for tn in metadata.get('typenorm', [])]
         pubtype_list = metadata.get('type', []) + typenorms
         pubtype = None
         for raw_pubtype in pubtype_list:
@@ -238,16 +265,18 @@ class OAIDCTranslator(object):
                 doi=doi)
         paper.add_oairecord(record)
 
+
 class BASEDCTranslator(OAIDCTranslator):
     """
     base_dc is very similar to oai_dc, so we
     don't have much to change
     """
+
     def format(self):
         return 'base_dc'
 
 
-class OaiPaperSource(PaperSource): # TODO: this should not inherit from PaperSource
+class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSource
     """
     A paper source that fetches records from the OAI-PMH proxy
     (typically: proaixy).
@@ -257,6 +286,7 @@ class OaiPaperSource(PaperSource): # TODO: this should not inherit from PaperSou
     by an :class:`OaiTranslator` that handles the format
     the metadata is served in.
     """
+
     def __init__(self, endpoint, day_granularity=False, *args, **kwargs):
         """
         This sets up the paper source.
@@ -278,9 +308,11 @@ class OaiPaperSource(PaperSource): # TODO: this should not inherit from PaperSou
         self.registry.registerReader('citeproc', citeproc_reader)
         self.client = Client(endpoint, self.registry)
         self.client._day_granularity = day_granularity
+        self.client.extra_parameters = {
+            'key':settings.PROAIXY_API_KEY }
         self.translators = {}
 
-    ### Translator management
+    # Translator management
 
     def add_translator(self, translator):
         """
@@ -294,10 +326,10 @@ class OaiPaperSource(PaperSource): # TODO: this should not inherit from PaperSou
         """
         self.translators[translator.format()] = translator
 
-    ### Record ingestion
+    # Record ingestion
 
     def ingest(self, from_date=None, metadataPrefix='any',
-                resumptionToken=None):
+               resumptionToken=None):
         """
         Main method to fill Dissemin with papers!
 
@@ -325,10 +357,9 @@ class OaiPaperSource(PaperSource): # TODO: this should not inherit from PaperSou
         record = self.client.getRecord(
                     metadataPrefix=metadataPrefix,
                     identifier=identifier)
-        return self.process_record(record[0],record[1]._map)
+        return self.process_record(record[0], record[1]._map)
 
-
-    #### Record search utilities
+    # Record search utilities
 
     def listRecords_or_empty(self, source, *args, **kwargs):
         """
@@ -347,8 +378,8 @@ class OaiPaperSource(PaperSource): # TODO: this should not inherit from PaperSou
         """
         translator = self.translators.get(header.format())
         if translator is None:
-            print ("Warning: unknown metadata format %s, skipping" %
-                    header.format())
+            print("Warning: unknown metadata format %s, skipping" %
+                  header.format())
             return
 
         paper = translator.translate(header, metadata)
@@ -362,7 +393,6 @@ class OaiPaperSource(PaperSource): # TODO: this should not inherit from PaperSou
                 print header.identifier()
                 print e
 
-
     def process_records(self, listRecords):
         """
         Save as :class:`Paper` all the records contained in this list
@@ -370,8 +400,8 @@ class OaiPaperSource(PaperSource): # TODO: this should not inherit from PaperSou
         # check that we have at least one translator, otherwise
         # it's not really worth trying…
         if not self.translators:
-            raise ValueError("No OAI translators have been set up: "+
-                            "We cannot save any record.")
+            raise ValueError("No OAI translators have been set up: " +
+                             "We cannot save any record.")
 
         last_report = datetime.now()
         processed_since_report = 0
@@ -389,8 +419,6 @@ class OaiPaperSource(PaperSource): # TODO: this should not inherit from PaperSou
                 rate = 'infty'
                 if td.seconds:
                     rate = unicode(processed_since_report / td.seconds)
-                print ("current rate: %s records/s" % rate)
+                print("current rate: %s records/s" % rate)
                 processed_since_report = 0
                 last_report = datetime.now()
-
-

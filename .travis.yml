@@ -32,8 +32,8 @@ env:
     - DJANGO=1.9.6
       # RoMEO API key
     - secure: "hQg8tso/Qv4zXhP4A2ahKKhFZQSariIvUr+xqzzoTVtuN/9OuzBFjZ1UF8atM5KKGZ47fFMK2wTjbVOWjSyLH/SF3Wy8bX9oHHg1P8bXcsle6O/tfa3U/2s0UiYtThEdxp+iyQIr6cjBA0gmB0v/vFrQot91GvjlUbi70Xjfcts="
-      # CORE API key
-    - secure: "hUDdROzyWXFmXgPsU37kQeKY72kSC8FYxNyjpQhXIb7UGMbZsemJGpaePwwvJ24dw3im9NTxbMrAw3q2MZZc573mR+Mmnw+4LlWlHwAxZ2cMzFwDKz9v7/n1bJf6QrArbMuyL4qK8OnwjmnrWf4HWG1YfiP4kDm1aAmNbHUxOzQ="
+      # Proaixy API key
+    - secure: "FayAfdusZgzSsAc7HZaCSyhMiwr19Qk/ePmjcBk6HyVWW9EaJiokjMb2DAc9IlBmkZxNg1+DU+ou1L4thPNaFrkTBqtdjQdqNtzsycyMedD6gYGKAdhaOuHNaCkikRHcIR1+STxx2udzOC1yk8xocaYiQFBD6AmRveMGfGN3WZw="
       # Zenodo Sandbox API key
     - secure: "hC9XBvdx96Xcit8xg42k/OGZeDuM76oRa9tB4JiN8PJy7Ij0GuqvZsEmRgV9qgOtmbUdlfcWgCpvTvxB1ejOjLCPrefhmnHnJ2ss1ZYsJCDhnvqNEh6YuZgIjGHj65R11EGJcJCwycReNN9O8m2/6+z6XI1LyBE4xckrGcgeLxM="
       # Gitbot l10n key (for translation notifications)
@@ -57,7 +57,6 @@ install:
   - pip install psycopg2 --quiet
   - pip install -r requirements.txt
   - pip install coveralls
-  - wget http://dev.dissem.in/files/similarity.pkl -O models/similarity.pkl
 
 before_script:
   - psql --version

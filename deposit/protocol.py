@@ -21,25 +21,30 @@
 
 from __future__ import unicode_literals
 
-from django.db import models
-from django import forms
-from django.utils.translation import ugettext as __
-from django.conf import settings
+import traceback
 
-import traceback, sys, requests
+from django import forms
+from django.conf import settings
+from django.db import models
+from django.utils.translation import ugettext as __
+import requests
 
 from papers.models import *
+
 
 class DepositError(Exception):
     """
     The exception to raise when something wrong happens
     during the deposition process
     """
+
     def __init__(self, msg):
         super(DepositError, self).__init__(msg)
 
+
 class EmptyForm(forms.Form):
     pass
+
 
 class DepositResult(object):
     """
@@ -51,8 +56,9 @@ class DepositResult(object):
     "DRY_SUCCESS" for a success in dry mode (everything went well but
     the paper was not actually deposited)
     """
+
     def __init__(self, identifier=None, splash_url=None, pdf_url=None, logs=None,
-            status='SUCCESS', message=None):
+                 status='SUCCESS', message=None):
         self.identifier = identifier
         self.splash_url = splash_url
         self.pdf_url = pdf_url
@@ -65,6 +71,7 @@ class DepositResult(object):
         Returns whether the deposit was successful.
         """
         return self.status == 'SUCCESS'
+
 
 class RepositoryProtocol(object):
     """
@@ -122,7 +129,8 @@ class RepositoryProtocol(object):
         :param dry_run: if True, should
         :returns: a DepositResult object.
         """
-        raise NotImplemented('submit_deposit should be implemented in the RepositoryInterface instance.')
+        raise NotImplemented(
+            'submit_deposit should be implemented in the RepositoryInterface instance.')
 
     def submit_deposit_wrapper(self, *args, **kwargs):
         """
@@ -138,22 +146,21 @@ class RepositoryProtocol(object):
             OaiRecord.new(
                     source=self.repository.oaisource,
                     identifier=('deposition:%d:%s' %
-                        (self.repository.id, unicode(result.identifier))),
+                                (self.repository.id, unicode(result.identifier))),
                     about=self.paper,
                     splash_url=result.splash_url,
                     pdf_url=result.pdf_url)
 
-            self.paper.update_author_stats() # TODO write an unit test for this
+            self.paper.update_author_stats()  # TODO write an unit test for this
             return result
         except DepositError as e:
             self.log('Message: '+e.args[0])
-            return DepositResult(logs=self._logs,status='FAILED',message=e.args[0])
+            return DepositResult(logs=self._logs, status='FAILED', message=e.args[0])
         except Exception as e:
             self.log("Caught exception:")
             self.log(str(type(e))+': '+str(e)+'')
             self.log(traceback.format_exc())
-            return DepositResult(logs=self._logs,status='FAILED',message=__('Failed to connect to the repository. Please try again later.'))
-
+            return DepositResult(logs=self._logs, status='FAILED', message=__('Failed to connect to the repository. Please try again later.'))
 
     def log(self, line):
         """
@@ -166,12 +173,10 @@ class RepositoryProtocol(object):
         Logs an HTTP request and raises an error if the status code is unexpected.
         """
         self.log('--- Request to %s\n' % r.url)
-        self.log('Status code: %d (expected %d)\n' % (r.status_code, expected_status_code))
+        self.log('Status code: %d (expected %d)\n' %
+                 (r.status_code, expected_status_code))
         if r.status_code != expected_status_code:
             self.log('Server response:')
             self.log(r.text)
             self.log('')
             raise DepositError(error_msg)
-
-
-

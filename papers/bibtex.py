@@ -20,12 +20,16 @@
 
 from __future__ import unicode_literals
 
-import re, bibtexparser
+import re
+
+import bibtexparser
 from bibtexparser.bparser import BibTexParser
 from bibtexparser.customization import convert_to_unicode
-from papers.utils import unescape_latex, remove_latex_braces
 
 from papers.name import parse_comma_name
+from papers.utils import remove_latex_braces
+from papers.utils import unescape_latex
+
 
 def parse_bibtex(bibtex):
     """
@@ -34,7 +38,7 @@ def parse_bibtex(bibtex):
     bibtex = insert_newlines_in_bibtex(bibtex)
     parser = BibTexParser()
     parser.customization = convert_to_unicode
-    db = bibtexparser.loads(bibtex)#, parser=parser)
+    db = bibtexparser.loads(bibtex)  # , parser=parser)
 
     if len(db.entries) == 0:
         raise ValueError('No bibtex item was parsed.')
@@ -51,6 +55,7 @@ bibtex_header_no_newline = re.compile(r'^(@\w*\W*{\W*\w+\W*,) *(?=[a-z])')
 bibtex_statement_no_newline = re.compile(r'(},) *([a-zA-Z]+\W*=\W*{)')
 bibtex_end_no_newline = re.compile(r'} *,? *} *$')
 
+
 def insert_newlines_in_bibtex(bib):
     """
     Bibtexparser relies on newlines to parse bibtex records, and ORCiD does not provide
@@ -63,9 +68,10 @@ def insert_newlines_in_bibtex(bib):
     return bib3
 
 et_al_re = re.compile(r'( and )?\s*et\s+al\.?\s*$', re.IGNORECASE | re.UNICODE)
+
+
 def parse_authors_list(authors):
     authors = unescape_latex(authors)
     authors = et_al_re.sub('', authors)
     return map(parse_comma_name,
-                remove_latex_braces(unescape_latex(authors)).split(' and '))
-
+               remove_latex_braces(unescape_latex(authors)).split(' and '))

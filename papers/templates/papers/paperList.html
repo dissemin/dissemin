@@ -16,8 +16,10 @@
     <ul class="withoutTriangles">
  {% endifchanged %}
     <li class="pubItem">
+	{% if paper.pk %}
         {% include "papers/publiListItem.html" with paper=paper with_buttons=request.user.is_authenticated %}
     </li>
+	{% endif %}
         {% if forloop.last %}</ul></div>{% endif %}
  {% endwith %}{% empty %}
     {% if not researcher.current_task %}

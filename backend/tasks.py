@@ -18,32 +18,33 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from __future__ import absolute_import, unicode_literals
-import re
-import datetime
+from __future__ import absolute_import
+from __future__ import unicode_literals
 
+import datetime
+from datetime import datetime
+from datetime import timedelta
+import re
+
+from celery import current_task
 from celery import shared_task
 from celery.utils.log import get_task_logger
-from celery import current_task
-
-from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
-
-from oaipmh.datestamp import tolerant_datestamp_to_datetime
-from oaipmh.error import DatestampError, NoRecordsMatchError, BadArgumentError
-
-from datetime import datetime, timedelta
-
-from papers.models import *
-from papers.doi import to_doi
+from django.utils import timezone
 
 from backend.crossref import *
-from backend.proxy import BASE_LOCAL_ENDPOINT
+import backend.extractors  # to ensure that OaiSources are created
 from backend.orcid import *
-import backend.extractors # to ensure that OaiSources are created
 from backend.utils import run_only_once
+from oaipmh.datestamp import tolerant_datestamp_to_datetime
+from oaipmh.error import BadArgumentError
+from oaipmh.error import DatestampError
+from oaipmh.error import NoRecordsMatchError
+from papers.doi import to_doi
+from papers.models import *
 
 logger = get_task_logger(__name__)
+
 
 def update_researcher_task(r, task_name):
     """
@@ -52,7 +53,8 @@ def update_researcher_task(r, task_name):
     """
     r.current_task = task_name
     r.last_harvest = timezone.now()
-    r.save(update_fields=['current_task','last_harvest'])
+    r.save(update_fields=['current_task', 'last_harvest'])
+
 
 @shared_task(name='init_profile_from_orcid')
 @run_only_once('researcher', keys=['pk'])
@@ -69,20 +71,21 @@ def init_profile_from_orcid(pk):
     update_task('clustering')
     fetch_everything_for_researcher(pk)
 
+
 @shared_task(name='fetch_everything_for_researcher')
 @run_only_once('researcher', keys=['pk'], timeout=15*60)
 def fetch_everything_for_researcher(pk):
     sources = [
-        ('orcid',OrcidPaperSource(max_results=1000)),
+        ('orcid', OrcidPaperSource(max_results=1000)),
        ]
     r = Researcher.objects.get(pk=pk)
 
-    ## If it is the first time we fetch this researcher
-    #if r.stats is None:
+    # If it is the first time we fetch this researcher
+    # if r.stats is None:
     # make sure publications already known are also considered
     update_researcher_task(r, 'clustering')
     try:
-        for key,source in sources:
+        for key, source in sources:
             update_researcher_task(r, key)
             source.fetch_and_save(r)
         update_researcher_task(r, None)
@@ -96,11 +99,13 @@ def fetch_everything_for_researcher(pk):
         r.harvester = None
         update_researcher_task(r, None)
 
+
 @shared_task(name='change_publisher_oa_status')
 def change_publisher_oa_status(pk, status):
     publisher = Publisher.objects.get(pk=pk)
     publisher.change_oa_status(status)
     publisher.update_stats()
+
 
 @shared_task(name='consolidate_paper')
 @run_only_once('consolidate_paper', keys=['pk'], timeout=1*60)
@@ -116,6 +121,7 @@ def consolidate_paper(pk):
     except Paper.DoesNotExist:
         print "consolidate_paper: unknown paper %d" % pk
 
+
 @shared_task(name='update_all_stats')
 @run_only_once('refresh_stats', timeout=3*60)
 def update_all_stats():
@@ -129,6 +135,7 @@ def update_all_stats():
     AccessStatistics.update_all_stats(Institution)
     AccessStatistics.update_all_stats(Department)
 
+
 @shared_task(name='update_all_stats_but_researchers')
 @run_only_once('refresh_stats', timeout=10*60)
 def update_all_stats_but_researchers():
@@ -140,6 +147,7 @@ def update_all_stats_but_researchers():
     AccessStatistics.update_all_stats(Institution)
     AccessStatistics.update_all_stats(Department)
 
+
 @shared_task(name='update_journal_stats')
 @run_only_once('refresh_journal_stats', timeout=10*60)
 def update_journal_stats():
@@ -149,6 +157,7 @@ def update_journal_stats():
     """
     AccessStatistics.update_all_stats(Journal)
 
+
 @shared_task(name='remove_empty_profiles')
 def remove_empty_profiles():
     """
@@ -156,5 +165,4 @@ def remove_empty_profiles():
     """
     date_cap = datetime.datetime.now()-datetime.timedelta(hours=2)
     Researcher.objects.filter(department__isnull=True,
-            stats__num_tot=0,last_harvest__lt=date_cap).delete()
-
+                              stats__num_tot=0, last_harvest__lt=date_cap).delete()

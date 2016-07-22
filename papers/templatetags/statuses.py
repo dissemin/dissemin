@@ -4,10 +4,13 @@ from __future__ import unicode_literals
 from django import template
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
-from papers.models import OA_STATUS_CHOICES, PDF_STATUS_CHOICES
 from django.utils.translation import ugettext as _
 
+from papers.models import OA_STATUS_CHOICES
+from papers.models import PDF_STATUS_CHOICES
+
 register = template.Library()
+
 
 @register.filter(is_safe=True)
 def explain_oa_status(status):
@@ -16,12 +19,14 @@ def explain_oa_status(status):
             return mark_safe(s[1])
     return mark_safe(_('Unknown OA status'))
 
+
 @register.filter(is_safe=True)
 def explain_pdf_status(status):
     for s in PDF_STATUS_CHOICES:
         if status == s[0]:
             return mark_safe(s[1])
     return mark_safe(_('Unknown PDF status'))
+
 
 @register.filter(is_safe=True)
 def explain_policy(status, arg):
@@ -42,7 +47,8 @@ def explain_policy(status, arg):
         ("unclear", "pdfversion"): _('Final version archiving policy unclear.'),
         ("unknown", "pdfversion"): _('Final version archiving policy unknown.'),
         }
-    return mark_safe(explanations.get((status,arg),_("Unknown policy")))
+    return mark_safe(explanations.get((status, arg), _("Unknown policy")))
+
 
 @register.filter(is_safe=True)
 def explain_policy_short(status):
@@ -53,7 +59,8 @@ def explain_policy_short(status):
         ("unclear"): _('policy unclear.'),
         ("unknown"): _('policy unknown.'),
         }
-    return mark_safe(explanations.get((status),_("policy unknown.")))
+    return mark_safe(explanations.get((status), _("policy unknown.")))
+
 
 @register.filter(is_safe=True)
 def explain_policy_short_no_punc(status):
@@ -64,12 +71,14 @@ def explain_policy_short_no_punc(status):
         ("unclear"): _('policy unclear'),
         ("unknown"): _('policy unknown'),
         }
-    return mark_safe(explanations.get((status),_("policy unknown.")))
+    return mark_safe(explanations.get((status), _("policy unknown.")))
+
 
 @register.filter(is_safe=True)
 def helptext_oa_status(status):
     OA_STATUS_ = dict([(s[0], s[2]) for s in OA_STATUS_CHOICES])
     return OA_STATUS_.get(status, _('Unknown OA status'))
+
 
 @register.filter(is_safe=True)
 def logo_oa_status(status):

@@ -111,10 +111,9 @@ EMAIL_USE_TLS = True
 # http://www.sherpa.ac.uk/romeo/apiregistry.php
 ROMEO_API_KEY = None
 
-# CORE API key
-# Used to fetch full text availability. Get one at
-# http://www.sherpa.ac.uk/romeo/apiregistry.php
-CORE_API_KEY = None
+# Proaixy API key
+# Used to fetch paper metadata. Get one by asking developers@dissem.in
+PROAIXY_API_KEY = None
 EOF
 
 # Configure university

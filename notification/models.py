@@ -1,20 +1,18 @@
 from __future__ import unicode_literals
 
-from django.db import models
+import json
 
 from django.conf import settings
+from django.db import models
 from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
-
 from jsonfield import JSONField
-
-from .serializers import NotificationSerializer
 from rest_framework.renderers import JSONRenderer
 
-import json
-
+from .serializers import NotificationSerializer
 from .settings import notification_settings
+
 
 @python_2_unicode_compatible
 class Notification(models.Model):
@@ -47,6 +45,7 @@ class NotificationArchive(models.Model):
     def __str__(self):
         return '[{}] {}'.format(self.user, self.notification)
 
+
 @python_2_unicode_compatible
 class Inbox(models.Model):
     """
@@ -67,7 +66,7 @@ class Inbox(models.Model):
                 days=notification_settings.INBOX_EXPIRE_DAYS)
         return expiration_date <= timezone.now()
 
-    expired.boolean = True # For the admin interface.
+    expired.boolean = True  # For the admin interface.
 
     def __str__(self):
         return '[{}] {}'.format(self.user, self.notification)

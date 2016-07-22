@@ -25,50 +25,56 @@ This module defines a OAfr/TEI exporter, to be used with the SWORD interface to 
 
 from __future__ import unicode_literals
 
-from lxml import etree
 from django.utils.translation import ugettext_lazy as _
+from lxml import etree
 
-from papers.models import Paper, Researcher, Name, OaiRecord
-from deposit.sword.metadataFormatter import MetadataFormatter, addChild
+from deposit.sword.metadataFormatter import addChild
+from deposit.sword.metadataFormatter import MetadataFormatter
+from papers.models import Name
+from papers.models import OaiRecord
+from papers.models import Paper
+from papers.models import Researcher
 
 HAL_TOPIC_CHOICES = [
-    ('CHIM',_('Chemistry')),
-    ('INFO',_('Computer science')),
-    ('MATH',_('Mathematics')),
-    ('PHYS',_('Physics')),
-    ('NLIN',_('Non-linear science')),
-    ('SCCO',_('Cognitive science')),
-    ('SDE',_('Environment sciences')),
-    ('SDU',_('Planet and Universe')),
-    ('SHS',_('Humanities and Social Science')),
-    ('SDV',_('Life sciences')),
-    ('SPI',_('Engineering sciences')),
-    ('STAT',_('Statistics')),
-    ('QFIN',_('Economy and quantitative finance')),
-    ('OTHER',_('Other')),
+    ('CHIM', _('Chemistry')),
+    ('INFO', _('Computer science')),
+    ('MATH', _('Mathematics')),
+    ('PHYS', _('Physics')),
+    ('NLIN', _('Non-linear science')),
+    ('SCCO', _('Cognitive science')),
+    ('SDE', _('Environment sciences')),
+    ('SDU', _('Planet and Universe')),
+    ('SHS', _('Humanities and Social Science')),
+    ('SDV', _('Life sciences')),
+    ('SPI', _('Engineering sciences')),
+    ('STAT', _('Statistics')),
+    ('QFIN', _('Economy and quantitative finance')),
+    ('OTHER', _('Other')),
   ]
 
 ENS_HAL_ID = 59704
 
-XMLLANG_ATTRIB= '{http://www.w3.org/XML/1998/namespace}lang'
+XMLLANG_ATTRIB = '{http://www.w3.org/XML/1998/namespace}lang'
+
 
 def aofrDocumentType(paper):
     tr = {
-            'journal-article':'ART',
-            'proceedings-article':'COMM',
-            'book-chapter':'COUV',
-            'book':'OUV',
-            'journal-issue':'DOUV',
-            'proceedings':'DOUV',
-            'reference-entry':'OTHER',
-            'poster':'POSTER',
-            'report':'REPORT',
-            'thesis':'THESE',
-            'dataset':'OTHER',
-            'preprint':'UNDEFINED',
-            'other':'OTHER',
+            'journal-article': 'ART',
+            'proceedings-article': 'COMM',
+            'book-chapter': 'COUV',
+            'book': 'OUV',
+            'journal-issue': 'DOUV',
+            'proceedings': 'DOUV',
+            'reference-entry': 'OTHER',
+            'poster': 'POSTER',
+            'report': 'REPORT',
+            'thesis': 'THESE',
+            'dataset': 'OTHER',
+            'preprint': 'UNDEFINED',
+            'other': 'OTHER',
          }
     return tr[paper.doctype]
+
 
 class AOFRFormatter(MetadataFormatter):
     """
@@ -81,7 +87,7 @@ class AOFRFormatter(MetadataFormatter):
     def render(self, paper, filename, form):
         xmlns_uri = 'http://www.tei-c.org/ns/1.0'
         xmlns = '{%s}' % xmlns_uri
-        nsmap = {None: xmlns_uri, 'hal':'http://hal.archives-ouvertes.fr'}
+        nsmap = {None: xmlns_uri, 'hal': 'http://hal.archives-ouvertes.fr'}
         tei = etree.Element(xmlns+'TEI', nsmap=nsmap)
         text = addChild(tei, 'text')
         body = addChild(text, 'body')
@@ -102,9 +108,8 @@ class AOFRFormatter(MetadataFormatter):
             date.text = str(paper.pubdate.year)
             ref = addChild(edition, 'ref')
             ref.attrib['type'] = 'file'
-            ref.attrib['subtype'] = 'author' # TODO adapt based on form info
+            ref.attrib['subtype'] = 'author'  # TODO adapt based on form info
             ref.attrib['target'] = filename
-
 
         # publicationStmt
         # publicationStmt = addChild(biblFull, 'publicationStmt')
@@ -144,7 +149,7 @@ class AOFRFormatter(MetadataFormatter):
         profileDesc = addChild(biblFull, 'profileDesc')
         langUsage = addChild(profileDesc, 'langUsage')
         language = addChild(langUsage, 'language')
-        language.attrib['ident'] = 'en' # TODO adapt this?
+        language.attrib['ident'] = 'en'  # TODO adapt this?
         textClass = addChild(profileDesc, 'textClass')
 
         domains = [form.cleaned_data['topic'].lower()]
@@ -170,7 +175,7 @@ class AOFRFormatter(MetadataFormatter):
 
     def renderTitleAuthors(self, root, paper):
         title = addChild(root, 'title')
-        title.attrib[XMLLANG_ATTRIB] = 'en' # TODO: autodetect language?
+        title.attrib[XMLLANG_ATTRIB] = 'en'  # TODO: autodetect language?
         title.text = paper.title
 
         for author in paper.authors:
@@ -190,7 +195,7 @@ class AOFRFormatter(MetadataFormatter):
             lastName.text = name.last
 
             # TODO affiliations come here
-            #if author.researcher_id:
+            # if author.researcher_id:
             affiliation = addChild(node, 'affiliation')
             affiliation.attrib['ref'] = '#struct-'+str(ENS_HAL_ID)
 
@@ -198,7 +203,7 @@ class AOFRFormatter(MetadataFormatter):
         # TODO: handle publication type properly
         root = addChild(biblStruct, 'monogr')
         if publi.journal:
-             self.renderJournal(root, publi.journal)
+            self.renderJournal(root, publi.journal)
 
         title = addChild(root, 'title')
         if halType == 'COUV' or halType == 'OUV' or halType == 'COMM':
@@ -238,19 +243,12 @@ class AOFRFormatter(MetadataFormatter):
         else:
             data.text = str(publi.about.pubdate.year)
 
-
     def renderJournal(self, root, journal):
         pass
 
 
-
 # The following lines are for testing purposes only
 def generate(theId):
-	formatter = AOFRFormatter()
-	paper = Paper.objects.get(pk=theId)
-	return formatter.toString(paper, 'article.pdf', True)
-
-
-
-
-
+    formatter = AOFRFormatter()
+    paper = Paper.objects.get(pk=theId)
+    return formatter.toString(paper, 'article.pdf', True)

@@ -20,20 +20,20 @@
 
 from __future__ import unicode_literals
 
-import unittest
-import django.test
 import json
-from django.core.urlresolvers import reverse
-from backend.tests import PrefilledTest
-from backend.crossref import CrossRefAPI
-from backend.oai import OaiPaperSource
 
 from django.contrib.auth.models import User
-from time import sleep
+from django.core.urlresolvers import reverse
+import django.test
+
+from backend.crossref import CrossRefAPI
+from backend.oai import OaiPaperSource
+from backend.tests import PrefilledTest
 from papers.models import Paper
 
+
 # TODO TO BE TESTED
-#urlpatterns = patterns('',
+# urlpatterns = patterns('',
 ##    url(r'^annotate-paper-(?P<pk>\d+)-(?P<status>\d+)$', annotatePaper, name='ajax-annotatePaper'),
 ##    url(r'^delete-researcher-(?P<pk>\d+)$', deleteResearcher, name='ajax-deleteResearcher'),
 ##    url(r'^change-department$', changeDepartment, name='ajax-changeDepartment'),
@@ -47,7 +47,9 @@ from papers.models import Paper
 #    url(r'^wait-for-consolidated-field$', waitForConsolidatedField, name='ajax-waitForConsolidatedField'),
 #)
 
+
 class JsonRenderingTest(PrefilledTest):
+
     @classmethod
     def setUpClass(self):
         super(JsonRenderingTest, self).setUpClass()
@@ -79,10 +81,11 @@ class JsonRenderingTest(PrefilledTest):
         del urlargs['postargs']
         if 'postkwargs' in urlargs:
             del urlargs['postkwargs']
-        return self.ajaxPost(reverse(*args, **urlargs), kwargs['postargs'], **kwargs.get('postkwargs',{}))
+        return self.ajaxPost(reverse(*args, **urlargs), kwargs['postargs'], **kwargs.get('postkwargs', {}))
 
 
 class PaperAjaxTest(JsonRenderingTest):
+
     @classmethod
     def setUpClass(cls):
         super(PaperAjaxTest, cls).setUpClass()
@@ -97,30 +100,30 @@ class PaperAjaxTest(JsonRenderingTest):
 
     def test_valid_search(self):
         for args in [
-            {'first':'John','last':'Doe'},
-            {'first':'Gilbeto','last':'Gil'},
-            ]:
+                {'first': 'John', 'last': 'Doe'},
+                {'first': 'Gilbeto', 'last': 'Gil'},
+                ]:
             parsed = self.checkJson(self.postPage('ajax-newUnaffiliatedResearcher',
-                postargs=args))
+                                                  postargs=args))
             self.assertTrue('disambiguation' in parsed or 'url' in parsed)
 
     def test_invalid_search(self):
         for args in [
-            {'orcid':'0000-0002-8435-1137'},
-            {'first':'John'},
-            {'last':'Doe'},
-            {},
-            ]:
+                {'orcid': '0000-0002-8435-1137'},
+                {'first': 'John'},
+                {'last': 'Doe'},
+                {},
+                ]:
             parsed = self.checkJson(self.postPage('ajax-newUnaffiliatedResearcher',
-                postargs=args), 403)
+                                                  postargs=args), 403)
             self.assertTrue(len(parsed) > 0)
 
     def test_consolidate_paper(self):
         p = Paper.create_by_doi('10.1175/jas-d-15-0240.1')
-        self.client.login(username='terry',password='yo')
+        self.client.login(username='terry', password='yo')
         result = self.checkJson(self.getPage(
                 'ajax-waitForConsolidatedField', getargs={
-                    'field':'abstract',
+                    'field': 'abstract',
                     'id': p.id}))
         self.client.logout()
         self.assertTrue(result['success'])
@@ -128,6 +131,7 @@ class PaperAjaxTest(JsonRenderingTest):
 
 
 class PublisherAjaxTest(JsonRenderingTest):
+
     @classmethod
     def setUpClass(cls):
         super(PublisherAjaxTest, cls).setUpClass()
@@ -138,23 +142,21 @@ class PublisherAjaxTest(JsonRenderingTest):
     def setUp(self):
         super(PublisherAjaxTest, self).setUp()
         self.papers = map(Paper.create_by_doi,
-                ['10.1038/526052a','10.1038/nchem.1829','10.1038/nchem.1365'])
+                          ['10.1038/526052a', '10.1038/nchem.1829', '10.1038/nchem.1365'])
         self.publisher = self.papers[0].publications[0].publisher
         self.assertEqual(self.publisher.name, 'Nature Publishing Group')
 
     def test_logged_out(self):
         self.client.logout()
         req = self.postPage('ajax-changePublisherStatus',
-                postargs={'pk':self.publisher.pk,'status':'OA'})
+                            postargs={'pk': self.publisher.pk, 'status': 'OA'})
         self.assertEqual(req.status_code, 302)
 
     def test_change_publisher_status(self):
         self.client.login(username='patrick', password='yo')
         p = self.postPage('ajax-changePublisherStatus',
-                postargs={'pk':self.publisher.pk,
-                          'status':'OA'})
+                          postargs={'pk': self.publisher.pk,
+                                    'status': 'OA'})
         self.assertEqual(p.status_code, 200)
         papers = [Paper.objects.get(pk=p.pk) for p in self.papers]
         self.assertTrue(all([p.oa_status == 'OA' for p in papers]))
-
-

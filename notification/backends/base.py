@@ -1,4 +1,5 @@
 class NotificationBackend(object):
+
     def create_message(self, level, payload, date=None):
         """
         Create and return a `Notification` instance.

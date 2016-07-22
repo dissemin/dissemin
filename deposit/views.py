@@ -19,34 +19,41 @@
 
 from __future__ import unicode_literals
 
-import os, json
+import json
+import os
 
-from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse, HttpResponseForbidden
-from django.contrib.auth.decorators import user_passes_test
-from django.shortcuts import render
-from django.utils.translation import ugettext as _
-from django.views.decorators.http import require_POST
-from django.template import RequestContext
-from jsonview.decorators import json_view
 from crispy_forms.templatetags.crispy_forms_filters import as_crispy_form
 from crispy_forms.utils import render_crispy_form
+from django.contrib.auth.decorators import user_passes_test
+from django.http import HttpResponse
+from django.http import HttpResponseForbidden
+from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect
+from django.shortcuts import render
+from django.template import RequestContext
+from django.utils.translation import ugettext as _
+from django.views.decorators.http import require_POST
+from jsonview.decorators import json_view
 
-from dissemin.settings import MEDIA_ROOT, UNIVERSITY_BRANDING, DEPOSIT_MAX_FILE_SIZE
-
-from deposit.models import *
 from deposit.forms import *
+from deposit.models import *
+from dissemin.settings import DEPOSIT_MAX_FILE_SIZE
+from dissemin.settings import MEDIA_ROOT
+from dissemin.settings import UNIVERSITY_BRANDING
 from papers.models import Paper
-from papers.user import is_admin, is_authenticated
+from papers.user import is_admin
+from papers.user import is_authenticated
+
 
 def get_all_repositories_and_protocols(paper, user):
     repositories = Repository.objects.all()
     protocols = []
     for r in repositories:
         implem = r.protocol_for_deposit(paper, user)
-        #if implem is not None:
-        protocols.append((r,implem))
+        # if implem is not None:
+        protocols.append((r, implem))
     return protocols
+
 
 @json_view
 @user_passes_test(is_authenticated)
@@ -56,12 +63,13 @@ def get_metadata_form(request):
     protocol = repo.protocol_for_deposit(paper, request.user)
     if protocol is None:
         print "no protocol"
-        return {'status':'repoNotAvailable',
-                'message':_('This repository is not available for this paper.')}
+        return {'status': 'repoNotAvailable',
+                'message': _('This repository is not available for this paper.')}
 
     form = protocol.get_form()
-    return {'status':'success',
-            'form':as_crispy_form(form)}
+    return {'status': 'success',
+            'form': as_crispy_form(form)}
+
 
 @user_passes_test(is_authenticated)
 def start_view(request, pk):
@@ -75,37 +83,40 @@ def start_view(request, pk):
             selected_protocol = protocol
             break
     breadcrumbs = paper.breadcrumbs()
-    breadcrumbs.append((_('Deposit'),''))
+    breadcrumbs.append((_('Deposit'), ''))
     context = {
-            'paper':paper,
-            'max_file_size':DEPOSIT_MAX_FILE_SIZE,
+            'paper': paper,
+            'max_file_size': DEPOSIT_MAX_FILE_SIZE,
             'available_repositories': repositories,
-            'selected_repository':selected_repository,
-            'selected_protocol':selected_protocol,
-            'is_owner':paper.is_owned_by(request.user),
-            'breadcrumbs':breadcrumbs,
-            'repositoryForm':None,
+            'selected_repository': selected_repository,
+            'selected_protocol': selected_protocol,
+            'is_owner': paper.is_owned_by(request.user),
+            'breadcrumbs': breadcrumbs,
+            'repositoryForm': None,
             }
-    if request.GET.get('type') not in [None,'preprint','postprint','pdfversion']:
+    if request.GET.get('type') not in [None, 'preprint', 'postprint', 'pdfversion']:
         return HttpResponseForbidden()
     return render(request, 'deposit/start.html', context)
+
 
 @json_view
 @require_POST
 @user_passes_test(is_authenticated)
 def submitDeposit(request, pk):
     paper = get_object_or_404(Paper, pk=pk)
-    context = {'status':'error'}
+    context = {'status': 'error'}
     form = PaperDepositForm(request.POST)
     if not form.is_valid():
         context['form'] = form.errors
         return context, 400
 
-    # This validation could take place in the form (but we need access to the paper and user?)
+    # This validation could take place in the form (but we need access to the
+    # paper and user?)
     repository = form.cleaned_data['radioRepository']
     protocol = repository.protocol_for_deposit(paper, request.user)
     if protocol is None:
-        context['radioRepository'] = _("This repository cannot be used for this paper.")
+        context['radioRepository'] = _(
+            "This repository cannot be used for this paper.")
         return context, 400
 
     repositoryForm = protocol.get_bound_form(request.POST)
@@ -151,5 +162,3 @@ def submitDeposit(request, pk):
     # TODO change this (we don't need it)
     context['upload_id'] = d.id
     return context
-
-

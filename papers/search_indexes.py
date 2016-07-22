@@ -1,5 +1,6 @@
-from .models import Paper
 from haystack import indexes
+
+from .models import Paper
 
 
 class PaperIndex(indexes.SearchIndex, indexes.Indexable):

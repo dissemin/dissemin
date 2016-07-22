@@ -21,12 +21,17 @@
 from __future__ import unicode_literals
 
 import re
-from papers.name import split_name_words
-from papers.utils import kill_html, remove_diacritics, ulower
 
-##### Paper fingerprinting
+from papers.name import split_name_words
+from papers.utils import kill_html
+from papers.utils import remove_diacritics
+from papers.utils import ulower
+
+# Paper fingerprinting
 
 stripped_chars = re.compile(r'[^- a-z0-9]')
+
+
 def create_paper_plain_fingerprint(title, authors, year):
     """
     Creates a robust summary of a bibliographic reference.
@@ -52,7 +57,7 @@ def create_paper_plain_fingerprint(title, authors, year):
     """
     title = kill_html(title)
     title = remove_diacritics(title).lower()
-    title = stripped_chars.sub('',title)
+    title = stripped_chars.sub('', title)
     title = title.strip()
     title = re.sub('[ -]+', '-', title)
     buf = title
@@ -62,7 +67,7 @@ def create_paper_plain_fingerprint(title, authors, year):
         return buf
 
     # If the title is very short, we add the year (for "Preface", "Introduction", "New members" cases)
-    #if len(title) <= 16:
+    # if len(title) <= 16:
     if not '-' in title:
         buf += '-'+str(year)
 
@@ -70,14 +75,14 @@ def create_paper_plain_fingerprint(title, authors, year):
     for author in authors:
         if not author:
             continue
-        author = (remove_diacritics(author[0]),remove_diacritics(author[1]))
+        author = (remove_diacritics(author[0]), remove_diacritics(author[1]))
 
         # Last name, without the small words such as "van", "der", "de"…
         last_name_words, last_name_separators = split_name_words(author[1])
         last_words = []
         for i in range(len(last_name_words)):
             if (last_name_words[i][0].isupper() or
-                (i > 0 and last_name_separators[i-1] == '-')):
+                    (i > 0 and last_name_separators[i-1] == '-')):
                 last_words.append(last_name_words[i])
 
         # If no word was uppercased, fall back on all the words
@@ -94,5 +99,3 @@ def create_paper_plain_fingerprint(title, authors, year):
         buf += '/'+fp
 
     return buf
-
-

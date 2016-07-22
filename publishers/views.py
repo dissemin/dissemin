@@ -19,21 +19,25 @@
 
 from __future__ import unicode_literals
 
-from django.shortcuts import render, redirect
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.views import generic
+from django.core.paginator import EmptyPage
+from django.core.paginator import PageNotAnInteger
+from django.core.paginator import Paginator
+from django.shortcuts import redirect
+from django.shortcuts import render
 from django.utils.translation import ugettext as _
-from haystack.generic_views import SearchView
+from django.views import generic
 from haystack.forms import SearchForm
-from dissemin.settings import UNIVERSITY_BRANDING
+from haystack.generic_views import SearchView
 
-from publishers.models import *
+from dissemin.settings import UNIVERSITY_BRANDING
 from publishers.forms import PublisherForm
+from publishers.models import *
 
 # Number of publishers per page in the publishers list
 NB_RESULTS_PER_PAGE = 20
 # Number of journals per page on a Publisher page
 NB_JOURNALS_PER_PAGE = 30
+
 
 def varyQueryArguments(key, args, possibleValues):
     variants = []
@@ -109,5 +113,3 @@ class PublisherView(SlugDetailView):
         context['breadcrumbs'] = publisher.breadcrumbs()
 
         return context
-
-

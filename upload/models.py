@@ -20,12 +20,13 @@
 
 from __future__ import unicode_literals
 
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
 
 MAX_ORIG_NAME_LENGTH = 1024
 THUMBNAIL_MAX_HEIGHT = 297/2
 THUMBNAIL_MAX_WIDTH = 210/2
+
 
 class UploadedPDF(models.Model):
     """
@@ -48,5 +49,3 @@ class UploadedPDF(models.Model):
 
     class Meta:
         verbose_name = 'Uploaded PDF'
-
-

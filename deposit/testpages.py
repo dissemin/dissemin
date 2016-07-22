@@ -20,14 +20,14 @@
 
 from papers.testpages import RenderingTest
 
+
 class DepositPagesTest(RenderingTest):
+
     @classmethod
     def setUpClass(self):
         super(DepositPagesTest, self).setUpClass()
 
     def test_start_deposit_unauthenticated(self):
         paper = self.r3.papers[0]
-        r = self.getPage('upload_paper', kwargs={'pk':paper.pk})
+        r = self.getPage('upload_paper', kwargs={'pk': paper.pk})
         self.assertEqual(r.status_code, 302)
-
-

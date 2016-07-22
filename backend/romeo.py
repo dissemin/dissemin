@@ -20,21 +20,24 @@
 
 from __future__ import unicode_literals
 
+from io import BytesIO
+from io import StringIO
+
 import lxml.etree as ET
 from lxml.html import fromstring
-from io import StringIO, BytesIO
-
 import requests
 import requests.exceptions
 
-from papers.models import *
-from papers.errors import MetadataSourceException
-from papers.utils import nstrip, remove_diacritics, kill_html, sanitize_html
 from backend.utils import cached_urlopen_retry
-
+from dissemin.settings import ROMEO_API_DOMAIN
+from dissemin.settings import ROMEO_API_KEY
+from papers.errors import MetadataSourceException
+from papers.models import *
+from papers.utils import kill_html
+from papers.utils import nstrip
+from papers.utils import remove_diacritics
+from papers.utils import sanitize_html
 from publishers.models import *
-
-from dissemin.settings import ROMEO_API_KEY, ROMEO_API_DOMAIN
 
 # Minimum number of times we have seen a publisher name
 # associated to a publisher to assign this publisher
@@ -46,6 +49,7 @@ PUBLISHER_NAME_ASSOCIATION_THRESHOLD = 32
 # and the second one
 PUBLISHER_NAME_ASSOCIATION_FACTOR = 5
 
+
 def perform_romeo_query(search_terms):
     search_terms = search_terms.copy()
     if ROMEO_API_KEY:
@@ -54,12 +58,13 @@ def perform_romeo_query(search_terms):
 
     # Perform the query
     try:
-        response = cached_urlopen_retry(base_url, data=search_terms).encode('utf-8')
+        response = cached_urlopen_retry(
+            base_url, data=search_terms).encode('utf-8')
     except requests.exceptions.RequestException as e:
-        raise MetadataSourceException('Error while querying RoMEO.\n'+
-                'URL was: '+base_url+'\n'+
-                'Parameters were: '+str(search_terms)+'\n'+
-                'Error is: '+str(e))
+        raise MetadataSourceException('Error while querying RoMEO.\n' +
+                                      'URL was: '+base_url+'\n' +
+                                      'Parameters were: '+str(search_terms)+'\n' +
+                                      'Error is: '+str(e))
 
     # Parse it
     try:
@@ -69,10 +74,10 @@ def perform_romeo_query(search_terms):
         with open('/tmp/romeo_response.xml', 'w') as f:
             f.write(response)
             f.write('\n')
-        raise MetadataSourceException('RoMEO returned an invalid XML response, dumped at /tmp/romeo_response.xml\n'+
-                'URL was: '+base_url+'\n'+
-                'Parameters were: '+str(search_terms)+'\n'+
-                'Error is: '+str(e))
+        raise MetadataSourceException('RoMEO returned an invalid XML response, dumped at /tmp/romeo_response.xml\n' +
+                                      'URL was: '+base_url+'\n' +
+                                      'Parameters were: '+str(search_terms)+'\n' +
+                                      'Error is: '+str(e))
 
     return root
 
@@ -93,21 +98,23 @@ def find_journal_in_model(search_terms):
         if matches:
             return matches[0]
 
-def fetch_journal(search_terms, matching_mode = 'exact'):
+
+def fetch_journal(search_terms, matching_mode='exact'):
     """
     Fetch the journal data from RoMEO. Returns an Journal object.
     search_terms should be a dictionnary object containing at least one of these fields:
     """
     allowed_fields = ['issn', 'jtitle']
     terms = search_terms.copy()
-    # Make the title HTML-safe before searching for it in the database or in the API
+    # Make the title HTML-safe before searching for it in the database or in
+    # the API
     if 'title' in terms:
         terms['title'] = kill_html(terms['title'])
 
     # Check the arguments
     if not all(map(lambda x: x in allowed_fields, (key for key in terms))):
-        raise ValueError('The search terms have to belong to '+str(allowed_fields)+
-                'but the dictionary I got is '+str(terms))
+        raise ValueError('The search terms have to belong to '+str(allowed_fields) +
+                         'but the dictionary I got is '+str(terms))
 
     # Remove diacritics (because it has to be sent in ASCII to ROMEO)
     for key in terms:
@@ -131,18 +138,18 @@ def fetch_journal(search_terms, matching_mode = 'exact'):
     if not journals:
         return None
     elif len(journals) > 1:
-        print ("Warning, "+str(len(journals))+" journals match the RoMEO request, "+
-                "defaulting to the first one")
+        print("Warning, "+str(len(journals))+" journals match the RoMEO request, " +
+              "defaulting to the first one")
         # TODO different behaviour: get the ISSN and try again.
     journal = journals[0]
 
     names = list(journal.findall('./jtitle'))
     if not names:
-        raise MetadataSourceException('RoMEO returned a journal without title.\n'+
-                'URL was: '+request)
+        raise MetadataSourceException('RoMEO returned a journal without title.\n' +
+                                      'URL was: '+request)
     if len(names) > 1:
-        print("Warning, "+str(len(names))+" names provided for one journal, "+
-                "defaulting to the first one")
+        print("Warning, "+str(len(names))+" names provided for one journal, " +
+              "defaulting to the first one")
     name = kill_html(names[0].text)
 
     issn = None
@@ -152,7 +159,7 @@ def fetch_journal(search_terms, matching_mode = 'exact'):
         pass
 
     # Now we may have additional info, so it's worth trying again in the model
-    model_journal = find_journal_in_model({'issn':issn,'jtitle':name})
+    model_journal = find_journal_in_model({'issn': issn, 'jtitle': name})
     if model_journal:
         return model_journal
 
@@ -160,14 +167,16 @@ def fetch_journal(search_terms, matching_mode = 'exact'):
     publishers = root.findall('./publishers/publisher')
     if not publishers:
         return None
-    # TODO here we shouldn't default to the first one but look it up using the <romeopub>
+    # TODO here we shouldn't default to the first one but look it up using the
+    # <romeopub>
     publisher_desc = publishers[0]
 
     publisher = get_or_create_publisher(publisher_desc)
 
-    result = Journal(title=name,issn=issn,publisher=publisher)
+    result = Journal(title=name, issn=issn, publisher=publisher)
     result.save()
     return result
+
 
 def fetch_publisher(publisher_name):
     if publisher_name is None:
@@ -178,8 +187,10 @@ def fetch_publisher(publisher_name):
     if len(matching_publishers) == 1:
         return matching_publishers[0]
 
-    # Second, let's see if the publisher name has often been associated to a known publisher
-    aliases = list(AliasPublisher.objects.filter(name=publisher_name).order_by('-count')[:2])
+    # Second, let's see if the publisher name has often been associated to a
+    # known publisher
+    aliases = list(AliasPublisher.objects.filter(
+        name=publisher_name).order_by('-count')[:2])
     if len(aliases) == 1:
         # Only one publisher found. If it has been seen often enough under that name,
         # keep it!
@@ -191,7 +202,7 @@ def fetch_publisher(publisher_name):
         # results). Then we need to make sure the first one appears a lot more often than
         # the first
         if (aliases[0].count > PUBLISHER_NAME_ASSOCIATION_THRESHOLD and
-            aliases[0].count > PUBLISHER_NAME_ASSOCIATION_FACTOR*aliases[1].count):
+                aliases[0].count > PUBLISHER_NAME_ASSOCIATION_FACTOR*aliases[1].count):
             AliasPublisher.increment(publisher_name, aliases[0].publisher)
             return aliases[0].publisher
 
@@ -215,9 +226,10 @@ def fetch_publisher(publisher_name):
         if len(publishers) != 1:
             return
 
-    publisher =  get_or_create_publisher(publishers[0])
+    publisher = get_or_create_publisher(publishers[0])
     AliasPublisher.increment(publisher_name, publisher)
     return publisher
+
 
 def get_or_create_publisher(romeo_xml_description):
     """
@@ -230,16 +242,16 @@ def get_or_create_publisher(romeo_xml_description):
     try:
         romeo_id = xml.attrib['id']
     except KeyError:
-        raise MetadataSourceException('RoMEO did not provide a publisher id.\n'+
-                'URL was: '+request)
+        raise MetadataSourceException('RoMEO did not provide a publisher id.\n' +
+                                      'URL was: '+request)
 
     name = None
     try:
         raw_name = xml.findall('./name')[0].text.strip()
         name = fromstring(kill_html(sanitize_html(raw_name))).text
     except (KeyError, IndexError, AttributeError):
-        raise MetadataSourceException('RoMEO did not provide the publisher\'s name.\n'+
-                'URL was: '+request)
+        raise MetadataSourceException('RoMEO did not provide the publisher\'s name.\n' +
+                                      'URL was: '+request)
 
     alias = None
     try:
@@ -252,9 +264,11 @@ def get_or_create_publisher(romeo_xml_description):
     # Check if we already have it
     matches = None
     if alias:
-        matches = Publisher.objects.filter(romeo_id=romeo_id, name__iexact=name,alias__iexact=alias)
+        matches = Publisher.objects.filter(
+            romeo_id=romeo_id, name__iexact=name, alias__iexact=alias)
     else:
-        matches = Publisher.objects.filter(romeo_id=romeo_id, name__iexact=name,alias__isnull=True)
+        matches = Publisher.objects.filter(
+            romeo_id=romeo_id, name__iexact=name, alias__isnull=True)
     if matches:
         return matches[0]
 
@@ -269,29 +283,29 @@ def get_or_create_publisher(romeo_xml_description):
     try:
         preprint = xml.findall('./preprints/prearchiving')[0].text.strip()
     except (KeyError, IndexError, AttributeError):
-        raise MetadataSourceException('RoMEO did not provide the preprint policy.\n'+
-                'URL was: '+request)
+        raise MetadataSourceException('RoMEO did not provide the preprint policy.\n' +
+                                      'URL was: '+request)
 
     postprint = None
     try:
         postprint = xml.findall('./postprints/postarchiving')[0].text.strip()
     except (KeyError, IndexError, AttributeError):
-        raise MetadataSourceException('RoMEO did not provide the postprint policy.\n'+
-                'URL was: '+request)
+        raise MetadataSourceException('RoMEO did not provide the postprint policy.\n' +
+                                      'URL was: '+request)
 
     pdfversion = None
     try:
         pdfversion = xml.findall('./pdfversion/pdfarchiving')[0].text.strip()
     except (KeyError, IndexError, AttributeError):
-        raise MetadataSourceException('RoMEO did not provide the pdf archiving policy.\n'+
-                'URL was: '+request)
+        raise MetadataSourceException('RoMEO did not provide the pdf archiving policy.\n' +
+                                      'URL was: '+request)
 
     # Compute OA status of the publisher
     status = 'UNK'
 
     publisher = Publisher(name=name, alias=alias, url=url, preprint=preprint,
-            postprint=postprint, pdfversion=pdfversion, romeo_id=romeo_id,
-            oa_status=status)
+                          postprint=postprint, pdfversion=pdfversion, romeo_id=romeo_id,
+                          oa_status=status)
 
     publisher.save()
 
@@ -307,7 +321,8 @@ def get_or_create_publisher(romeo_xml_description):
 
     for condition in xml.findall('./conditions/condition'):
         if condition.text:
-            c = PublisherCondition(publisher=publisher, text=condition.text.strip())
+            c = PublisherCondition(publisher=publisher,
+                                   text=condition.text.strip())
             c.save()
 
     # Update the publisher status
@@ -324,14 +339,16 @@ def get_or_create_publisher(romeo_xml_description):
         if urls:
             url = nstrip(urls[0].text)
         if url and text:
-            cplink = PublisherCopyrightLink(text=text, url=url, publisher=publisher)
+            cplink = PublisherCopyrightLink(
+                text=text, url=url, publisher=publisher)
             cplink.save()
 
     return publisher
 
+
 def addRestriction(xml, applies_to, publisher):
     text = nstrip(xml.text)
     if text:
-        r = PublisherRestrictionDetail(publisher=publisher, applies_to=applies_to, text=text)
+        r = PublisherRestrictionDetail(
+            publisher=publisher, applies_to=applies_to, text=text)
         r.save()
-
