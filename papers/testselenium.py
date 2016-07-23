@@ -27,7 +27,9 @@ from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from pyvirtualdisplay import Display
 from django.conf import settings
+from sauceclient import SauceClient
 import os
+import sys
 
 RUN_LOCAL = (not os.environ.get('TRAVIS')) or os.environ.get('LOCAL_SELENIUM')
 
@@ -42,7 +44,7 @@ class SeleniumTest(StaticLiveServerTestCase):
             cls.display = Display(visible=0, size=(800,600))
             cls.display.start()
             cls.selenium = webdriver.firefox.webdriver.WebDriver()
-            cls.selenium.implicitly_wait(10) # seconds
+            cls.selenium.implicitly_wait(5) # seconds
         else:
             # inspired from
             # https://github.com/Victory/django-travis-saucelabs/blob/master/mysite/saucetests/tests.py
@@ -61,15 +63,29 @@ class SeleniumTest(StaticLiveServerTestCase):
             username = os.environ.get('SAUCE_USERNAME')
             access_key = os.environ.get('SAUCE_ACCESS_KEY')
             sauce_url = "http://%s:%s@ondemand.saucelabs.com:80/wd/hub"
+            cls.sauce = SauceClient(username, access_key)
             cls.selenium = webdriver.Remote(
                     desired_capabilities=capabilities,
-                    command_executor=sauce_url % (USERNAME, ACCESS_KEY))
+                    command_executor=sauce_url % (username, access_key))
+            cls.selenium.implicitly_wait(5) # seconds
 
     @classmethod
     def tearDownClass(cls):
-        cls.selenium.quit()
         if RUN_LOCAL:
+            cls.selenium.quit()
             cls.display.stop()
+        else:
+            print("\nSauce Labs job:: \n "
+              "https://saucelabs.com/jobs/%s \n" %
+                cls.selenium.session_id)
+            try:
+                if sys.exc_info() == (None, None, None):
+                    cls.sauce.jobs.update_job(cls.selenium.session_id, passed=True)
+                else:
+                    cls.sauce.jobs.update_job(cls.selenium.session_id, passed=False)
+            finally:
+                cls.selenium.quit()
+
         super(SeleniumTest, cls).tearDownClass()
 
     def get_relative(self, relative_url):
