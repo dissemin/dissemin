@@ -274,7 +274,7 @@ def _create_publication(paper, metadata):
             publisher=publisher,
             pdf_url=pdf_url,
             splash_url=splash_url,
-            source=crossref_oai_source,
+            source=OaiSource.objects.get(identifier='crossref'),
             identifier=doi_to_crossref_identifier(doi))
     rec = paper.add_oairecord(barepub)
     paper.update_availability()
