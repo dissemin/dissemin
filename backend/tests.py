@@ -124,12 +124,12 @@ class RomeoTest(TestCase):
 
 @override_settings(HAYSTACK_CONNECTIONS=TEST_INDEX)
 class PrefilledTest(TestCase):
+    fixtures = ['test_dump.json']
 
     @classmethod
-    def setUpClass(self):
+    def setUpTestData(self):
         if self is PrefilledTest:
             raise unittest.SkipTest("Base test")
-        super(PrefilledTest, self).setUpClass()
         haystack.connections.reload('default')
         call_command('update_index', verbosity=0)
         self.i = Institution.objects.get(name='ENS')
@@ -146,8 +146,8 @@ class PrefilledTest(TestCase):
         self.r5 = get_by_name('Terence', 'Tao')
         self.hal = OaiSource.objects.get(identifier='hal')
         self.arxiv = OaiSource.objects.get(identifier='arxiv')
-        self.acm = Publisher.objects.get(alias='ACM')
         self.lncs = Journal.objects.get(issn='0302-9743')
+        self.acm = Journal.objects.get(issn='1529-3785').publisher
 
     @classmethod
     def tearDownClass(self):

@@ -84,8 +84,8 @@ orcid_type_to_pubtype = {
         'data-set': 'dataset',
     }
 
-orcid_oai_source, _ = OaiSource.objects.get_or_create(identifier='orcid',
-                                                      defaults={'name': 'ORCID', 'oa': False, 'priority': 1, 'default_pubtype': 'other'})
+def orcid_oai_source():
+    return OaiSource.objects.get(identifier='orcid')
 
 
 def orcid_to_doctype(typ):
@@ -347,7 +347,7 @@ class OrcidPaperSource(PaperSource):
             orcids=data_paper.orcids,
         )
         record = BareOaiRecord(
-            source=orcid_oai_source,
+            source=orcid_oai_source(),
             identifier=data_paper.identifier,
             splash_url=data_paper.splash_url,
             pubtype=data_paper.doctype
@@ -387,7 +387,7 @@ class OrcidPaperSource(PaperSource):
                     continue
 
                 record = BareOaiRecord(
-                        source=orcid_oai_source,
+                        source=orcid_oai_source(),
                         identifier='orcid:%s:%s' % (orcid_id, metadata['DOI']),
                         splash_url='http://%s/%s' % (
                             settings.ORCID_BASE_DOMAIN, orcid_id),

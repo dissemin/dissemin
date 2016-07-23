@@ -64,10 +64,7 @@ before_script:
 
 script:
   - ./devutils/notify_translations
-  - python manage.py migrate --noinput
-  - python manage.py loaddata dissemin/fixtures/test_dump.json
-  - python manage.py rebuild_index --noinput
-  - coverage run --source=dissemin,papers,backend,deposit,upload,statistics --omit=*/migrations/*,dissemin/settings/* manage.py test --testrunner dissemin.scripts.baretests.BareTestRunner -v 2 --failfast
+  - coverage run --source=dissemin,papers,backend,deposit,upload,statistics --omit=*/migrations/*,dissemin/settings/* manage.py test -v 2
 
 after_success:
   - coveralls
