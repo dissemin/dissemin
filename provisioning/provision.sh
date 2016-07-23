@@ -53,7 +53,7 @@ virtualenv /dissemin/.vm_venv --no-site-packages -p $(which python2.7)
 # We install dependencies in the virtualenv
 req_files=(requirements.txt requirements-dev.txt)
 
-/dissemin/.wm_venv/bin/pip install --upgrade setuptools
+/dissemin/.vm_venv/bin/pip install --upgrade setuptools
 for req in "${req_files[@]}"
 do
         /dissemin/.vm_venv/bin/pip install -r "/dissemin/$req"
