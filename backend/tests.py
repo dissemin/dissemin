@@ -146,7 +146,6 @@ class PrefilledTest(TestCase):
         self.r5 = get_by_name('Terence', 'Tao')
         self.hal = OaiSource.objects.get(identifier='hal')
         self.arxiv = OaiSource.objects.get(identifier='arxiv')
-        self.acm = Publisher.objects.get(alias='ACM')
         self.lncs = Journal.objects.get(issn='0302-9743')
 
     @classmethod
