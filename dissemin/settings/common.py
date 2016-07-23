@@ -36,7 +36,7 @@ import os
 from django.utils.translation import ugettext_lazy as _
 
 try:
-    from .secret import CORE_API_KEY
+    from .secret import PROAIXY_API_KEY
     from .secret import DATABASES
     from .secret import EMAIL_HOST
     from .secret import EMAIL_HOST_PASSWORD

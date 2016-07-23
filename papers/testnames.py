@@ -299,6 +299,15 @@ class ShallowerNameSimilarityTest(unittest.TestCase):
             self.assertAlmostEqual(shallower_name_similarity(
                 a, b), shallower_name_similarity(b, a))
 
+    def test_malformed(self):
+        inputs = [
+            (('  ','  '),('John','Doe')),
+            (('Alfred','Kastler'),('    ','    ')),
+            ('',(None,'')),
+            ]
+        for a, b in inputs:
+            self.assertEqual(shallower_name_similarity(a,b), False)
+
 
 class ParseCommaNameTest(unittest.TestCase):
 

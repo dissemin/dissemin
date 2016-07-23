@@ -606,7 +606,7 @@ class Paper(models.Model, BarePaper):
     #: authors have profiles on dissemin)
     researchers = models.ManyToManyField(Researcher)
 
-    last_modified = models.DateTimeField(auto_now=True)
+    last_modified = models.DateTimeField(auto_now=True, db_index=True)
     visible = models.BooleanField(default=True)
     last_annotation = models.CharField(max_length=32, null=True, blank=True)
 
@@ -1167,6 +1167,11 @@ class OaiRecord(models.Model, BareOaiRecord):
             update_field_conditionally('keywords')
             update_field_conditionally('description')
             update_field_conditionally('doi')
+
+            new_pubdate = kwargs.get('pubdate')
+            if new_pubdate and match.about.pubdate > new_pubdate:
+                match.about.pubdate = new_pubdate
+                match.save(update_fields=['pubdate'])
 
             new_pubtype = kwargs.get('pubtype', source.default_pubtype)
             if new_pubtype in PAPER_TYPE_PREFERENCE:
