@@ -60,13 +60,16 @@ class SeleniumTest(StaticLiveServerTestCase):
                 'browserName':'firefox',
                 'version':'38',
                 }
+            print "Connecting to Sauce"
             username = os.environ.get('SAUCE_USERNAME')
             access_key = os.environ.get('SAUCE_ACCESS_KEY')
             sauce_url = "http://%s:%s@ondemand.saucelabs.com:80/wd/hub"
+            print sauce_url
             cls.sauce = SauceClient(username, access_key)
             cls.selenium = webdriver.Remote(
                     desired_capabilities=capabilities,
                     command_executor=sauce_url % (username, access_key))
+            print "Connected"
             cls.selenium.implicitly_wait(5) # seconds
 
     @classmethod
@@ -85,6 +88,7 @@ class SeleniumTest(StaticLiveServerTestCase):
                     cls.sauce.jobs.update_job(cls.selenium.session_id, passed=False)
             finally:
                 cls.selenium.quit()
+            print "Selenium stopped"
 
         super(SeleniumTest, cls).tearDownClass()
 
