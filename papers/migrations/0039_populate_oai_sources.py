@@ -18,6 +18,7 @@ def populate_oai_sources(apps, schema_editor):
         ('numdam', 'Numdam', False, 10, 'journal-article'),
         ('base', 'BASE', False, -2, 'preprint'),
         ('researchgate', 'ResearchGate', False, -10, 'journal-article'),
+        ('crossref', 'Crossref', False, 20, 'journal-article'),
         ]
 
     # Auto-create all the Oai Sources when this module is imported

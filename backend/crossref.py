@@ -108,11 +108,6 @@ max_crossref_batches_per_researcher = 10
 # Maximum timeout for the CrossRef interface (sometimes it is a bit lazy)
 crossref_timeout = 15
 
-# Source object for Crossref's OAI records
-crossref_oai_source, _ = OaiSource.objects.get_or_create(identifier='crossref',
-                                                         defaults={'name': 'Crossref', 'oa': False, 'priority': 1,
-                                                                   'default_pubtype': 'journal-article'})
-
 
 # Licenses considered OA, as stored by CrossRef
 def is_oa_license(license_url):
