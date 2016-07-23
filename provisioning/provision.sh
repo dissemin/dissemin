@@ -16,7 +16,7 @@ echo "deb https://packages.elastic.co/elasticsearch/2.x/debian stable main" | te
 apt-get update
 apt-get install -y build-essential libxml2-dev libxslt1-dev gettext \
         libjpeg-dev liblapack-dev gfortran libopenblas-dev libmagickwand-dev \
-        default-jre-headless \
+        default-jre-headless libffi-dev \
         pwgen git
 
 # We install Python
@@ -53,6 +53,7 @@ virtualenv /dissemin/.vm_venv --no-site-packages -p $(which python2.7)
 # We install dependencies in the virtualenv
 req_files=(requirements.txt requirements-dev.txt)
 
+/dissemin/.wm_venv/bin/pip install --upgrade setuptools
 for req in "${req_files[@]}"
 do
         /dissemin/.vm_venv/bin/pip install -r "/dissemin/$req"
