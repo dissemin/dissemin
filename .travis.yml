@@ -25,6 +25,7 @@ addons:
        - curl
        - libffi-dev
        - libssl-dev
+    sauce_connect: true
 
 env:
   global:
@@ -37,6 +38,9 @@ env:
     - secure: "KjRrTKrNyhv1xVl2UBtJ/qH0uFGItvxw7/pGFfPrcwxD5YAB5daePDaIGe/tlVy+lrQi0D9x1CA8MB2vm+Lf4jrfO+3ZHCkmb4ecbumPV7DxEbgFsralBx65PRRVUiDW1Oy0RyigxXNNdtNLvTVr1PYrZYD407HZnP6LrJP0ONM="
       # Gitbot l10n key (for translation notifications)
     - secure: "qm+WAH7GpYIjid+q5tVnRgpiIwRmo7C8ou8GAeHJwTxkcmX8+YsYhuuacXO5mW/gcvjb9UNVCDkIKqjIsxJdmC0JovXJJ2dG2g1P39FfOCsF1+FpOqxdjBxdlJCoPb+Wmx7qk5+n+ZgqArgDPFwTWAPqsfshVPLplvaIYfA6H2s="
+      # Sauce Labs credentials
+    - SAUCE_USERNAME=pintoch
+    - secure: "kKh6Bq69LFEg9WcnbvZkPl4vImQcrzrbUmohHAhS+xt3RKpEjAhO2NEYBD8AdDEQj7Sz0y+6WROeJ7rjcez+aDYfjQKN4tdbRVXXKF1c1B8dQC/WENuEoKiAitcpDKszNtObm7Y42ebJgYE/GNAVr3+K7vlqeYO3kCuxd/kOfl0="
 
 
 virtualenv:
