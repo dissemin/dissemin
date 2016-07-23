@@ -132,8 +132,8 @@ def update_all_stats():
     AccessStatistics.update_all_stats(Publisher)
     AccessStatistics.update_all_stats(Journal)
     AccessStatistics.update_all_stats(Researcher)
-    AccessStatistics.update_all_stats(Institution)
     AccessStatistics.update_all_stats(Department)
+    AccessStatistics.update_all_stats(Institution)
 
 
 @shared_task(name='update_all_stats_but_researchers')

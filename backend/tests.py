@@ -147,6 +147,7 @@ class PrefilledTest(TestCase):
         self.hal = OaiSource.objects.get(identifier='hal')
         self.arxiv = OaiSource.objects.get(identifier='arxiv')
         self.lncs = Journal.objects.get(issn='0302-9743')
+        self.acm = Journal.objects.get(issn='1529-3785').publisher
 
     @classmethod
     def tearDownClass(self):
