@@ -195,22 +195,4 @@ REGISTERED_OAI_EXTRACTORS = {
         }
 
 # Set up the model for the sources
-oai_sources = [
-        ('arxiv', 'arXiv', False, 10, 'preprint'),
-        ('hal', 'HAL', False, 10, 'preprint'),
-        ('cairn', 'Cairn', False, 10, 'preprint'),
-        ('pmc', 'PubMed Central', False, 10, 'preprint'),
-        ('doaj', 'DOAJ', True, 10, 'journal-article'),
-        ('persee', 'Persée', True, 10, 'preprint'),
-        ('zenodo', 'Zenodo', False, 15, 'preprint'),
-        ('numdam', 'Numdam', False, 10, 'journal-article'),
-        ('base', 'BASE', False, -2, 'preprint'),
-        ('researchgate', 'ResearchGate', False, -10, 'journal-article'),
-        ]
 
-if os.environ.get('READTHEDOCS', None) != 'True':
-
-    # Auto-create all the Oai Sources when this module is imported
-    for identifier, name, oa, priority, pubtype in oai_sources:
-        OaiSource.objects.get_or_create(identifier=identifier,
-                                        defaults={'name': name, 'oa': oa, 'priority': priority, 'default_pubtype': pubtype})
