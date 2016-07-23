@@ -1,0 +1,3 @@
+[
+{"model": "socialaccount.socialapp", "pk": 1, "fields": {"provider": "orcid", "name": "Orcid sandbox", "client_id": "APP-ZAKE3VEWSG31TWSE", "secret": "5f0464c4-375a-4925-84ff-95b0d410cad8", "key": "", "sites": [1]}}
+]
