@@ -28,13 +28,16 @@ from selenium import webdriver
 from pyvirtualdisplay import Display
 from django.conf import settings
 from sauceclient import SauceClient
+from allauth.socialaccount.models import SocialApp
 import os
 import sys
 
 RUN_LOCAL = (not os.environ.get('TRAVIS')) or os.environ.get('LOCAL_SELENIUM')
 
+
 class SeleniumTest(StaticLiveServerTestCase):
-    fixtures = ['oauth_orcid.json']
+    # fixtures = ['oauth_orcid.json']
+    # replaced by custom creations for now
 
     @classmethod
     def setUpClass(cls):
@@ -60,17 +63,23 @@ class SeleniumTest(StaticLiveServerTestCase):
                 'browserName':'firefox',
                 'version':'38',
                 }
-            print "Connecting to Sauce"
             username = os.environ.get('SAUCE_USERNAME')
             access_key = os.environ.get('SAUCE_ACCESS_KEY')
             sauce_url = "http://%s:%s@ondemand.saucelabs.com:80/wd/hub"
-            print sauce_url
             cls.sauce = SauceClient(username, access_key)
             cls.selenium = webdriver.Remote(
                     desired_capabilities=capabilities,
                     command_executor=sauce_url % (username, access_key))
-            print "Connected"
             cls.selenium.implicitly_wait(5) # seconds
+
+        # Set up ORCID OAuth
+        s = SocialApp.objects.create(
+        **{"provider": "orcid",
+           "name": "Orcid sandbox",
+           "client_id": "APP-ZAKE3VEWSG31TWSE",
+           "secret": "5f0464c4-375a-4925-84ff-95b0d410cad8",
+           "key": ""})
+        s.sites.add(1)
 
     @classmethod
     def tearDownClass(cls):
