@@ -408,6 +408,13 @@ class NameUnificationTest(unittest.TestCase):
             ('H-C Hsieh-Chung', 'Chen'), ('Hsieh-Chung', 'Chen')), ('Hsieh-Chung', 'Chen'))
 
     @unittest.expectedFailure
+    def test_quotes(self):
+        self.assertEqual(name_unification(
+            ('Alessandra',"D’Alessandro"),
+            ('A.', "d'Alessandro")),
+            ('Alessandra', "d'Alessandro"))
+
+    @unittest.expectedFailure
     def test_composite_last_name(self):
         # TODO this should be reasonably easy to get right
         self.assertEqual(name_unification(('F.', 'Zappa Nardelli'),
@@ -480,6 +487,22 @@ class UnifyNameListsTest(unittest.TestCase):
             [('J.', 'Boutier')]),
             [(('Jérémie', 'Boutier'), (0, 0)), (None, (1, None))])
 
+    def test_inverted(self):
+        # in the wild:
+        # http://dx.doi.org/10.1371/journal.pone.0156198
+        # http://hdl.handle.net/11573/870611
+        self.assertEqual(len(filter(lambda x: x[0] != None,
+            unify_name_lists(
+            [
+            ('Sarnelli','Giovanni'),
+            ("d'Alessandro",'Alessandra'),
+            ],
+            [
+            ('Giovanni','Sarnelli'),
+            ('Giovanni', 'Domenico de Palma'),
+            ('Alessandra',"D'Alessandro"),
+            ]))),
+            3)
 
 def load_tests(loader, tests, ignore):
     tests.addTests(doctest.DocTestSuite(papers.name))

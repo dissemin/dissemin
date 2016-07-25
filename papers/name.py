@@ -678,8 +678,10 @@ def unify_name_lists(a, b):
     def make_unique(lst):
         seen = set()
         for name, idx in lst:
-            if name not in seen:
-                seen.add(name)
+            first, last = name
+            [k1,k2] = sorted([first.lower(),last.lower()])
+            if (k1,k2) not in seen: 
+                seen.add((k1,k2))
                 yield (name, idx)
             else:
                 yield (None, idx)
