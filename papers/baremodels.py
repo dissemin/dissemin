@@ -916,6 +916,19 @@ class BareOaiRecord(BareObject):
             return self.publisher.name
         return self.source.name
 
+    def cleanup_description(self):
+        """
+        Removes clutter frequently included in abstracts.
+        Note that this does not save the object (being
+        a method of BareOaiRecord).
+        """
+        if not self.description:
+            return
+        abstract_re = re.compile(
+            r'^\s*(abstract|international audience)\s*(\.|:|;)\s',
+            flags=re.IGNORECASE)
+        self.description = abstract_re.sub('', self.description)
+
     def __unicode__(self):
         """
         The record's identifier

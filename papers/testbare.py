@@ -120,3 +120,16 @@ class BarePaperTest(BareObjectTest):
         self.assertEqual(len(self.ist.displayed_authors()), 2)
         self.ist.MAX_DISPLAYED_AUTHORS = 1
         self.assertEqual(len(self.ist.displayed_authors()), 1)
+
+
+class BareOaiRecordTest(unittest.TestCase):
+    def test_cleanup_desc(self):
+        r = BareOaiRecord()
+
+        r.description = "International audience ; While price and data…"
+        r.cleanup_description()
+        self.assertEqual(r.description, "While price and data…")
+
+        r.description = " Abstract: While price and data…"
+        r.cleanup_description()
+        self.assertEqual(r.description, "While price and data…")
