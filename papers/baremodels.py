@@ -922,6 +922,8 @@ class BareOaiRecord(BareObject):
         Note that this does not save the object (being
         a method of BareOaiRecord).
         """
+        if not self.description:
+            return
         abstract_re = re.compile(
             r'^\s*(abstract|international audience)\s*(\.|:|;)\s',
             flags=re.IGNORECASE)
