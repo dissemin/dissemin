@@ -686,6 +686,9 @@ class Paper(models.Model, BarePaper):
         Adds a record (possibly bare) to the paper, by saving it in
         the database
         """
+        # Clean up the record
+        oairecord.cleanup_description()
+
         # Test first if there is no other record with this DOI
         doi = oairecord.doi
         if doi:
