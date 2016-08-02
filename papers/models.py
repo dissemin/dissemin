@@ -620,12 +620,14 @@ class Paper(models.Model, BarePaper):
         # Test first if there is no publication with this new DOI
         doi = oairecord.doi
         if doi:
-            matches = OaiRecord.objects.filter(doi__iexact=doi)
+            matches = OaiRecord.objects.filter(doi=doi)[:1]
             if matches:
                 rec = matches[0]
                 if rec.about != self:
-                    self.merge(rec.about)
-                return rec
+                    # we delete self
+                    # and keep rec.about, so that the oldest paper
+                    # is kept (otherwise, we break links!)
+                    rec.about.merge(self)
 
         return OaiRecord.new(about=self,
                 **oairecord.__dict__)
@@ -1052,7 +1054,7 @@ class OaiRecord(models.Model, BareOaiRecord):
     pubdate = models.DateField(blank=True, null=True)
     abstract = models.TextField(blank=True, null=True)
 
-    doi = models.CharField(max_length=1024, unique=True, blank=True, null=True) # in theory, there is no limit
+    doi = models.CharField(max_length=1024, db_index=True, blank=True, null=True) # in theory, there is no limit
 
 
     last_update = models.DateTimeField(auto_now=True)
