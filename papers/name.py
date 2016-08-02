@@ -558,7 +558,7 @@ def name_unification(a, b):
     firstA, lastA = a
     firstB, lastB = b
 
-    if lastA.lower() != lastB.lower():
+    if remove_diacritics(lastA).lower() != remove_diacritics(lastB).lower():
         return None
 
     wordsA, sepsA = split_name_words(firstA)

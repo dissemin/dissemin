@@ -114,8 +114,15 @@ def remove_diacritics(s):
     >>> remove_diacritics(u'aéè'.encode('utf-8'))
     'a\\xc3\\xa9\\xc3\\xa8'
     """
-    return unidecode(s) if type(s) == unicode else s
+    if type(s) == unicode:
 
+        # for issue #305
+        # because I have no idea what the general solution for this would be
+        s = s.replace("’","'")
+        
+        return unidecode(s)
+    else:
+        return s
 
 def iunaccent(s):
     """

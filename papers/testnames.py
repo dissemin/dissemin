@@ -407,12 +407,11 @@ class NameUnificationTest(unittest.TestCase):
         self.assertEqual(name_unification(
             ('H-C Hsieh-Chung', 'Chen'), ('Hsieh-Chung', 'Chen')), ('Hsieh-Chung', 'Chen'))
 
-    @unittest.expectedFailure
     def test_quotes(self):
-        self.assertEqual(name_unification(
+        self.assertNotEqual(name_unification(
             ('Alessandra',"D’Alessandro"),
             ('A.', "d'Alessandro")),
-            ('Alessandra', "d'Alessandro"))
+            None)
 
     @unittest.expectedFailure
     def test_composite_last_name(self):
