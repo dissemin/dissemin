@@ -54,6 +54,7 @@ before_install:
   - cp dissemin/settings/university_template.py dissemin/settings/university.py
 
 install:
+  - pip install setuptools --upgrade
   - pip install django==$DJANGO --quiet
   - pip install psycopg2 --quiet
   - pip install -r requirements_frontend_light.txt
