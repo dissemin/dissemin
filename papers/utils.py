@@ -489,12 +489,35 @@ def tolerant_datestamp_to_datetime(datestamp):
 def datetime_to_date(dt):
     """
     Converts a datetime or date object to a date object.
+
+    >>> datetime_to_date(datetime.datetime(2016, 2, 11, 18, 34, 12))
+    datetime.date(2016, 2, 11)
+    >>> datetime_to_date(datetime.date(2015, 3, 1))
+    datetime.date(2015, 3, 1)
     """
     if type(dt) == datetime.datetime:
         return dt.date()
     elif type(dt) == datetime.date:
         return dt
     raise ValueError("Invalid date or datetime")
+
+def valid_publication_date(dt):
+    """
+    Checks that the date is not too far in the future
+    (otherwise it is not a plausible publication date).
+
+    >>> valid_publication_date(datetime.date(6789, 1, 1))
+    False
+    >>> valid_publication_date(datetime.date(2018, 3, 4))
+    True
+    >>> valid_publication_date(None)
+    False
+    """
+    # In 2042, the problem of access to scientific publications
+    # will be solved and Dissemin will autodestroy as a consequence
+    # of this hack.
+    return ((type(dt) == datetime.date or type(dt) == datetime.datetime)
+            and dt.year < 2042)
 
 ### ORCiD utilities ###
 

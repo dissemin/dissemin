@@ -61,6 +61,7 @@ from papers.utils import jpath
 from papers.utils import sanitize_html
 from papers.utils import tolerant_datestamp_to_datetime
 from papers.utils import validate_orcid
+from papers.utils import valid_publication_date
 from publishers.models import *
 
 ######## HOW THIS MODULE WORKS ###########
@@ -168,7 +169,8 @@ def parse_crossref_date(date):
             pass
     if 'raw' in date:
         ret = tolerant_datestamp_to_datetime(date['raw']).date()
-    return ret
+    if valid_publication_date(ret): 
+        return ret
 
 
 def get_publication_date(metadata):

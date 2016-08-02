@@ -133,3 +133,7 @@ class BareOaiRecordTest(unittest.TestCase):
         r.description = " Abstract: While price and data…"
         r.cleanup_description()
         self.assertEqual(r.description, "While price and data…")
+ 
+        r.description = None
+        r.cleanup_description()
+        self.assertEqual(r.description, None)

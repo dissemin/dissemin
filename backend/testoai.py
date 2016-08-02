@@ -204,6 +204,9 @@ class OaiTest(TestCase):
             # No authors
             ('ftcarmelhelios:oai:archive.library.cmu.edu:heinz:box00200/fld00021/bdl0031/doc0001/',
              'base_dc'),
+            # Bad publication date
+            ('ftsehiruniv:oai:earsiv.sehir.edu.tr:11498/28266',
+             'base_dc'),
          ]
         for i, f in identifiers:
             self.assertEqual(
