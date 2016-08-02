@@ -2,6 +2,7 @@ from haystack import indexes
 
 from .models import Paper
 
+from papers.utils import remove_diacritics
 
 class PaperIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, model_attr='title')
@@ -34,11 +35,15 @@ class PaperIndex(indexes.SearchIndex, indexes.Indexable):
     def get_updated_field(self):
         return "last_modified"
 
+    def prepare_text(self, obj):
+        return remove_diacritics(obj.title)
+
     def prepare_authors_full(self, obj):
+        # the 'full' field is already clean (no diacritics)
         return [a['name']['full'] for a in obj.authors_list]
 
     def prepare_authors_last(self, obj):
-        return [a['name']['last'] for a in obj.authors_list]
+        return [remove_diacritics(a['name']['last']) for a in obj.authors_list]
 
     def prepare_availability(self, obj):
         return 'OK' if obj.pdf_url else 'NOK'

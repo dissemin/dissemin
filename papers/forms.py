@@ -31,6 +31,7 @@ from haystack.forms import SearchForm
 from papers.baremodels import PAPER_TYPE_CHOICES
 from papers.models import *
 from papers.name import *
+from papers.utils import remove_diacritics
 from publishers.models import OA_STATUS_CHOICES_WITHOUT_HELPTEXT
 from search import SearchQuerySet
 
@@ -141,7 +142,7 @@ class PaperForm(SearchForm):
     def search(self):
         self.queryset = self.searchqueryset.models(Paper)
 
-        q = self.cleaned_data['q']
+        q = remove_diacritics(self.cleaned_data['q'])
         if q:
             self.queryset = self.queryset.auto_query(q)
 
@@ -174,7 +175,7 @@ class PaperForm(SearchForm):
                 continue
 
             if is_lastname:
-                self.filter(authors_last=name)
+                self.filter(authors_last=remove_diacritics(name))
             else:
                 self.filter(authors_full=Sloppy(name, slop=1))
 
