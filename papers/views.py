@@ -90,7 +90,7 @@ def index(request):
     View for the home page
     """
     context = {
-        'newResearcherForm': AddUnaffiliatedResearcherForm(),
+        'search_form': PaperForm(),
         'combined_status':
             [{'choice_value': v, 'choice_label': l}
              for v, l in COMBINED_STATUS_CHOICES]
