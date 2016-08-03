@@ -55,6 +55,7 @@ from papers.name import normalize_name_words
 from papers.name import parse_comma_name
 from papers.utils import sanitize_html
 from papers.utils import tolerant_datestamp_to_datetime
+from papers.utils import valid_publication_date
 
 # Set exposed by proaixy to indicate the metadata source
 PROXY_SOURCE_PREFIX = "proaixy:source:"
@@ -139,6 +140,8 @@ class OAIDCTranslator(object):
         for date in metadata['date']:
             try:
                 parsed = tolerant_datestamp_to_datetime(date)
+                if not valid_publication_date(parsed):
+                    continue
                 if earliest is None or parsed < earliest:
                     earliest = parsed
             except (DatestampError, ValueError):
