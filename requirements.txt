@@ -22,6 +22,7 @@ django-solo
 django-widget-tweaks
 django-memoize
 django-bulk-update
+django-rest-framework
 elasticsearch
 html5lib==0.999999999
 httplib2
