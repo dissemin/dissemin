@@ -26,8 +26,6 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 import django.test
 
-from backend.crossref import CrossRefAPI
-from backend.oai import OaiPaperSource
 from backend.tests import PrefilledTest
 from papers.models import Paper
 

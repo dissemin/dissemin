@@ -33,7 +33,6 @@ from papers.models import *
 from papers.name import *
 from papers.utils import remove_diacritics
 from publishers.models import OA_STATUS_CHOICES_WITHOUT_HELPTEXT
-from search import SearchQuerySet
 
 
 class OrcidField(forms.CharField):

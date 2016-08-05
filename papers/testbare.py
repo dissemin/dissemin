@@ -23,10 +23,8 @@ from __future__ import unicode_literals
 import datetime
 import unittest
 
-import django.test
 
 from papers.baremodels import *
-import papers.doi
 
 
 class BareObjectTest(unittest.TestCase):

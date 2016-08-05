@@ -31,20 +31,12 @@ importing this module and running the function manually.
 from __future__ import unicode_literals
 
 from collections import defaultdict
-from time import sleep
 
-from django.db import DatabaseError
-from django.db.models import Prefetch
-from django.db.models import Q
-from lxml.html import fromstring
 
 import backend.crossref
-from backend.crossref import fetch_metadata_by_DOI
-from backend.crossref import is_oa_license
 from backend.name_cache import name_lookup_cache
 from backend.romeo import fetch_publisher
 from backend.tasks import change_publisher_oa_status
-from papers.errors import MetadataSourceException
 from papers.models import *
 from papers.utils import sanitize_html
 from publishers.models import *

@@ -69,10 +69,7 @@ from django.core.cache.utils import make_template_fragment_key
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.db import DataError
-from django.db import IntegrityError
 from django.db import models
-from django.db import transaction
-from django.db.models import Q
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from solo.models import SingletonModel
@@ -82,23 +79,13 @@ from dissemin.settings import PROFILE_REFRESH_ON_LOGIN
 from papers.baremodels import *
 from papers.doi import to_doi
 from papers.errors import MetadataSourceException
-from papers.name import match_names
 from papers.name import name_similarity
 from papers.name import unify_name_lists
 from papers.orcid import OrcidProfile
 from papers.utils import affiliation_is_greater
-from papers.utils import index_of
-from papers.utils import iunaccent
-from papers.utils import remove_diacritics
-from papers.utils import remove_nones
-from papers.utils import sanitize_html
 from papers.utils import validate_orcid
-from publishers.models import DummyPublisher
 from publishers.models import Journal
-from publishers.models import OA_STATUS_CHOICES
-from publishers.models import OA_STATUS_PREFERENCE
 from publishers.models import Publisher
-from upload.models import UploadedPDF
 
 UPLOAD_TYPE_CHOICES = [
    ('preprint', _('Preprint')),
@@ -852,7 +839,6 @@ class Paper(models.Model, BarePaper):
         Creates a paper given a DOI
         """
         import backend.crossref as crossref
-        from backend.papersource import PaperSource
         cr_api = crossref.CrossRefAPI()
         bare_paper = cr_api.create_paper_by_doi(doi)
         if bare:

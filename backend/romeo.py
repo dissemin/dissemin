@@ -21,7 +21,6 @@
 from __future__ import unicode_literals
 
 from io import BytesIO
-from io import StringIO
 
 import lxml.etree as ET
 from lxml.html import fromstring

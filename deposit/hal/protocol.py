@@ -25,14 +25,12 @@ import traceback
 from zipfile import ZipFile
 
 from django.utils.translation import ugettext as __
-from django.utils.translation import ugettext_lazy as _
 import requests
 
 from deposit.hal.forms import *
-from deposit.hal.metadataFormatter import AOFRFormatter
+from deposit.hal.metadata import AOFRFormatter
 from deposit.protocol import *
 from deposit.registry import *
-from papers.errors import MetadataSourceException
 from papers.utils import kill_html
 
 try:

@@ -20,33 +20,19 @@
 
 from __future__ import unicode_literals
 
-from django.conf.urls import include
 from django.conf.urls import url
 from django.contrib.auth.decorators import user_passes_test
-from django.core.exceptions import MultipleObjectsReturned
-from django.core.validators import validate_email
-from django.db import IntegrityError
-from django.forms import ValidationError
 from django.http import HttpResponse
-from django.http import HttpResponseForbidden
 from django.http import HttpResponseNotFound
 from django.shortcuts import get_object_or_404
-from django.shortcuts import render
 from django.template import loader
-from django.utils.translation import ugettext as __
-from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from jsonview.decorators import json_view
-import requests
 
-from dissemin.settings import DEPOSIT_MAX_FILE_SIZE
-from dissemin.settings import MEDIA_ROOT
-from dissemin.settings import URL_DEPOSIT_DOWNLOAD_TIMEOUT
 from papers.forms import AddUnaffiliatedResearcherForm
 from papers.models import *
 from papers.name import normalize_name_words
 from papers.user import *
-from papers.utils import iunaccent
 from papers.utils import kill_html
 from papers.utils import sanitize_html
 

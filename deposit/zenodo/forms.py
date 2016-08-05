@@ -21,7 +21,6 @@
 from __future__ import unicode_literals
 
 from django import forms
-from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as __
 
 from deposit.forms import BaseMetadataForm

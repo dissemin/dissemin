@@ -29,14 +29,10 @@ from __future__ import unicode_literals
 
 import hashlib
 import re
-from statistics.models import COMBINED_STATUS_CHOICES
-from statistics.models import PDF_STATUS_CHOICES
-from statistics.models import STATUS_CHOICES_HELPTEXT
 from urllib import quote  # for the Google Scholar and CORE link
 from urllib import urlencode
 
 from django.apps import apps
-from django.core.exceptions import ObjectDoesNotExist
 from django.template.defaultfilters import slugify
 from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
@@ -45,10 +41,8 @@ from papers.fingerprint import create_paper_plain_fingerprint
 from papers.name import to_plain_name
 from papers.utils import *
 from publishers.models import DummyPublisher
-from publishers.models import Journal
 from publishers.models import OA_STATUS_CHOICES
 from publishers.models import OA_STATUS_PREFERENCE
-from publishers.models import Publisher
 
 PAPER_TYPE_CHOICES = [
    ('journal-article', _('Journal article')),

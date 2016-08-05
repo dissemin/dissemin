@@ -21,16 +21,13 @@
 from __future__ import unicode_literals
 
 import json
-from StringIO import StringIO
 
 from django.utils.translation import ugettext as __
-from django.utils.translation import ugettext_lazy as _
 import requests
 
 from deposit.protocol import *
 from deposit.registry import *
 from deposit.zenodo.forms import *
-from papers.errors import MetadataSourceException
 from papers.utils import kill_html
 
 

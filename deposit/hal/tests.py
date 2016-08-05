@@ -21,12 +21,11 @@
 from __future__ import unicode_literals
 
 from os import path
-from unittest import expectedFailure
 
 from django.test import TestCase
 from lxml import etree
 
-from deposit.hal.metadataFormatter import AOFRFormatter
+from deposit.hal.metadata import AOFRFormatter
 from deposit.hal.protocol import HALProtocol
 from deposit.tests import ProtocolTest
 from papers.models import Paper

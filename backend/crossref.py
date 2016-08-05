@@ -22,21 +22,13 @@ from __future__ import unicode_literals
 
 import datetime
 import json
-from urllib2 import build_opener
-from urllib2 import HTTPError
-from urllib2 import URLError
 from urllib import urlencode
 
-from celery import current_task
-from django.core.exceptions import ObjectDoesNotExist
 from django.db import DataError
 from django.utils.http import urlencode
 import requests
 from requests.exceptions import RequestException
-from unidecode import unidecode
 
-from backend.name_cache import name_lookup_cache
-from backend.papersource import PaperSource
 from backend.romeo import fetch_journal
 from backend.romeo import fetch_publisher
 from backend.utils import urlopen_retry
@@ -50,13 +42,9 @@ from papers.doi import doi_to_url
 from papers.doi import to_doi
 from papers.errors import MetadataSourceException
 from papers.models import OaiSource
-from papers.models import Paper
-from papers.name import match_names
 from papers.name import normalize_name_words
 from papers.name import parse_comma_name
-from papers.utils import affiliation_is_greater
 from papers.utils import date_from_dateparts
-from papers.utils import iunaccent
 from papers.utils import jpath
 from papers.utils import sanitize_html
 from papers.utils import tolerant_datestamp_to_datetime

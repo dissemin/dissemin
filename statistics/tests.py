@@ -22,7 +22,6 @@ Tests statistics update and statistics consistency.
 
 from statistics.models import *
 
-from django.test import TestCase
 
 from backend.orcid import OrcidPaperSource
 from backend.tests import PrefilledTest

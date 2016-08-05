@@ -25,24 +25,15 @@ import json
 from django.conf.urls import include
 from django.conf.urls import url
 from django.http import Http404
-from django.http import HttpResponse
-from django.http import HttpResponseForbidden
-from django.http import HttpResponseNotFound
-from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
-from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from jsonview.decorators import json_view
 from jsonview.exceptions import BadRequest
-import requests
 from rest_framework import routers
 from rest_framework import serializers
-from rest_framework import views
 from rest_framework import viewsets
-from rest_framework.decorators import api_view
 from rest_framework.permissions import AllowAny
-from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 
 from papers.errors import MetadataSourceException
@@ -174,7 +165,6 @@ def api_paper_query(request):
         p = BarePaper.create(title, parsed_authors, date)
     except ValueError:
         raise BadRequest('Invalid paper')
-    import backend.oai as oai
 
     return {'status': 'ok', 'paper': p.json()}
 

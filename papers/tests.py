@@ -23,12 +23,9 @@ from __future__ import unicode_literals
 import datetime
 from datetime import date
 import doctest
-import json
-import unittest
 
 import django.test
 
-from backend.orcid import OrcidPaperSource
 import papers.doi
 from papers.models import *
 

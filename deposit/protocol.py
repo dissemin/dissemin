@@ -24,10 +24,7 @@ from __future__ import unicode_literals
 import traceback
 
 from django import forms
-from django.conf import settings
-from django.db import models
 from django.utils.translation import ugettext as __
-import requests
 
 from papers.models import *
 

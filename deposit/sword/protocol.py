@@ -20,23 +20,16 @@
 
 from __future__ import unicode_literals
 
-import json
-from os.path import basename
 from StringIO import StringIO
-import sys
-import traceback
 
 from django.conf import settings
 from django.utils.translation import ugettext as __
-from django.utils.translation import ugettext_lazy as _
 import requests
 import sword2
 
 from deposit.forms import *
 from deposit.protocol import *
 from deposit.registry import protocol_registry
-from deposit.sword import metadataFormatter
-from papers.errors import MetadataSourceException
 from papers.utils import kill_html
 
 

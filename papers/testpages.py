@@ -22,14 +22,11 @@
 from __future__ import unicode_literals
 
 import datetime
-import unittest
 
 from django.core.urlresolvers import reverse
 import django.test
 import html5lib
 
-from backend.crossref import CrossRefAPI
-from backend.oai import OaiPaperSource
 from backend.tests import PrefilledTest
 from papers.baremodels import BareName
 from papers.models import OaiRecord

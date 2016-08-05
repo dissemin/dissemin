@@ -20,17 +20,14 @@
 
 from datetime import date
 from io import BytesIO
-import os
 import unittest
 
 from django.contrib.auth.models import User
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.forms import Form
-from django.test import TestCase
 from django.test.utils import override_settings
 
 from backend.tests import PrefilledTest
-from deposit.models import DepositRecord
 from deposit.models import Repository
 from deposit.protocol import DepositResult
 from papers.models import OaiSource

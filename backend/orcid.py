@@ -20,15 +20,10 @@
 
 from __future__ import unicode_literals
 
-import json
 
 #from requests.exceptions import RequestException
 #import json, requests
-from celery import current_task
 from django.conf import settings
-from django.core.exceptions import ObjectDoesNotExist
-import requests
-from unidecode import unidecode
 
 from backend.crossref import convert_to_name_pair
 from backend.crossref import CrossRefAPI
@@ -44,8 +39,6 @@ from papers.bibtex import parse_bibtex
 from papers.doi import to_doi
 from papers.errors import MetadataSourceException
 from papers.models import OaiSource
-from papers.name import match_names
-from papers.name import normalize_name_words
 from papers.name import parse_comma_name
 from papers.name import shallower_name_similarity
 from papers.orcid import *

@@ -20,10 +20,8 @@
 
 from __future__ import unicode_literals
 
-import os
 import re
 
-from papers.models import OaiSource
 
 
 class URLExtractor(object):

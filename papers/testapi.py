@@ -20,13 +20,7 @@
 
 from __future__ import unicode_literals
 
-from django.core.urlresolvers import reverse
-import django.test
 
-from backend.crossref import CrossRefAPI
-from backend.oai import OaiPaperSource
-from backend.tests import PrefilledTest
-from papers.models import Paper
 from papers.testajax import JsonRenderingTest
 
 

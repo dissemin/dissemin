@@ -24,7 +24,6 @@ from time import sleep
 
 import requests
 import requests.exceptions
-from titlecase import titlecase
 
 from dissemin.settings import redis_client
 from memoize import memoize

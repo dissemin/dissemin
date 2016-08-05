@@ -20,7 +20,6 @@
 
 from __future__ import unicode_literals
 
-import json
 
 from django.utils.http import urlencode
 from lxml import etree
