@@ -145,8 +145,6 @@ INSTALLED_APPS = (
     'bootstrap_pagination',
     'django_js_reverse',
     'solo',
-    'rest_framework',
-    'rest_framework_swagger',
     'haystack',
     'widget_tweaks',
     'capture_tag',

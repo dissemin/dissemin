@@ -5,8 +5,8 @@ from django import template
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 
-from papers.models import OA_STATUS_CHOICES
-from papers.models import PDF_STATUS_CHOICES
+from publishers.models import OA_STATUS_CHOICES
+from statistics.models import PDF_STATUS_CHOICES
 
 register = template.Library()
 

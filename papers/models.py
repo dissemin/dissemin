@@ -70,6 +70,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.db import DataError
 from django.db import models
+from django.utils.functional import cached_property
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from solo.models import SingletonModel
@@ -84,7 +85,8 @@ from papers.orcid import OrcidProfile
 from papers.utils import affiliation_is_greater
 from papers.utils import validate_orcid
 from papers.baremodels import BarePaper, BareName, BareAuthor
-from papers.baremodels import BareOaiRecord
+from papers.baremodels import BareOaiRecord, MAX_NAME_LENGTH
+from papers.baremodels import PAPER_TYPE_CHOICES
 from publishers.models import Journal
 from publishers.models import Publisher
 

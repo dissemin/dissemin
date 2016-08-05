@@ -34,7 +34,7 @@ from papers.forms import AddUnaffiliatedResearcherForm
 from papers.models import Paper
 from papers.models import Name
 from papers.models import Researcher
-from papers.models import OA_STATUS_CHOICES
+from publishers.models import OA_STATUS_CHOICES
 from papers.name import normalize_name_words
 from papers.user import is_admin, is_authenticated
 from papers.utils import kill_html

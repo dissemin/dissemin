@@ -34,6 +34,7 @@ from urllib import urlencode
 
 from django.apps import apps
 from django.template.defaultfilters import slugify
+from django.core.exceptions import ObjectDoesNotExist
 from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
 
@@ -45,7 +46,6 @@ from papers.utils import datetime_to_date
 from papers.utils import remove_diacritics
 from papers.utils import remove_nones
 from papers.utils import iunaccent
-from papers.models import Researcher
 
 from publishers.models import DummyPublisher
 from publishers.models import OA_STATUS_CHOICES
@@ -687,7 +687,7 @@ class BareAuthor(BareObject):
                         researcher=r,
                         name=self.name,
                         defaults={'confidence': default_confidence})
-            except Researcher.DoesNotExist:
+            except ObjectDoesNotExist:
                 pass
 
     # Representations -------------------------------

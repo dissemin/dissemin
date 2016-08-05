@@ -34,7 +34,7 @@ from papers.utils import validate_orcid
 from papers.models import Department
 from papers.models import Researcher
 from papers.models import Paper
-from papers.names import has_only_initials
+from papers.name import has_only_initials
 from publishers.models import OA_STATUS_CHOICES_WITHOUT_HELPTEXT
 
 
