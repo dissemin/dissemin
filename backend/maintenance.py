@@ -34,7 +34,6 @@ from collections import defaultdict
 
 
 import backend.crossref
-from backend.name_cache import name_lookup_cache
 from backend.romeo import fetch_publisher
 from backend.tasks import change_publisher_oa_status
 from papers.models import Paper, Researcher, OaiRecord, Name, NameVariant
@@ -205,8 +204,3 @@ def recompute_publisher_policies():
         change_publisher_oa_status(p.pk, p.classify_oa_status())
 
 
-def prune_name_lookup_cache(threshold):
-    """
-    Prunes the name lookup cache (removes names which are not looked up often)
-    """
-    name_lookup_cache.prune(threshold)

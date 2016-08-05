@@ -28,7 +28,6 @@ from django.conf import settings
 from backend.crossref import convert_to_name_pair
 from backend.crossref import CrossRefAPI
 from backend.crossref import fetch_dois
-from backend.name_cache import name_lookup_cache
 from backend.papersource import PaperSource
 from notification.api import add_notification_for
 from notification.api import delete_notification_per_tag
@@ -38,7 +37,7 @@ from papers.baremodels import BarePaper
 from papers.bibtex import parse_bibtex
 from papers.doi import to_doi
 from papers.errors import MetadataSourceException
-from papers.models import OaiSource
+from papers.models import OaiSource, Name
 from papers.name import parse_comma_name
 from papers.name import shallower_name_similarity
 from papers.orcid import OrcidProfile
@@ -205,7 +204,7 @@ class ORCIDMetadataExtractor(object):
             return []
 
     def convert_authors(self, authors):
-        return map(name_lookup_cache.lookup, authors)
+        return map(Name.lookup_name, authors)
 
     def j(self, path, default=None):
         return jpath(path, self._pub, default)
