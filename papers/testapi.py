@@ -25,14 +25,6 @@ from papers.testajax import JsonRenderingTest
 
 
 class PaperApiTest(JsonRenderingTest):
-
-    def test_valid_paper(self):
-        p = self.r3.papers[0]
-        self.checkJson(self.getPage('papers-detail', args=[p.pk]))
-
-    def test_invalid_paper(self):
-        self.checkJson(self.getPage('papers-detail', args=[123456]), 404)
-
     def test_valid_doi(self):
         self.checkJson(self.getPage('api-paper-doi',
                                     args=['10.1016/0379-6779(91)91572-r']))

@@ -73,6 +73,7 @@ from django.db import models
 from django.utils.functional import cached_property
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from django.template.defaultfilters import slugify
 from solo.models import SingletonModel
 
 from dissemin.settings import POSSIBLE_LANGUAGE_CODES
@@ -86,7 +87,7 @@ from papers.utils import affiliation_is_greater
 from papers.utils import validate_orcid
 from papers.baremodels import BarePaper, BareName, BareAuthor
 from papers.baremodels import BareOaiRecord, MAX_NAME_LENGTH
-from papers.baremodels import PAPER_TYPE_CHOICES
+from papers.baremodels import PAPER_TYPE_CHOICES, PAPER_TYPE_PREFERENCE
 from publishers.models import Journal
 from publishers.models import Publisher
 

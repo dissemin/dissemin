@@ -31,7 +31,7 @@ from backend.crossref import DOI_PROXY_SUPPORTS_BATCH, is_oa_license
 from backend.crossref import fetch_dois_incrementally
 from backend.crossref import fetch_dois_by_batch
 from papers.errors import MetadataSourceException
-from papers.utils import convert_to_name_pair
+from backend.crossref import convert_to_name_pair
 
 class CrossRefTest(TestCase):
 
