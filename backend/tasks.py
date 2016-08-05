@@ -21,18 +21,19 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
-import datetime
 from datetime import datetime
 
 from celery import shared_task
 from celery.utils.log import get_task_logger
 from django.utils import timezone
 
-from backend.crossref import *
-import backend.extractors  # to ensure that OaiSources are created
-from backend.orcid import *
 from backend.utils import run_only_once
-from papers.models import *
+from backend.crossref import consolidate_publication
+from papers.models import PaperWorld, Researcher, Paper, Department, Institution
+from publishers.models import Journal, Publisher
+from papers.errors import MetadataSourceException
+from backend.orcid import OrcidPaperSource
+from statistics.models import AccessStatistics
 
 logger = get_task_logger(__name__)
 

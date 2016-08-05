@@ -58,7 +58,7 @@ class RenderingTest(PrefilledTest):
         # Check that there are no overescaped HTML strings…
         self.assertEqual(overescaped_re.findall(resp.content), [])
         try:
-            parsed = self.parser.parse(resp.content)
+            self.parser.parse(resp.content)
         except html5lib.html5parser.ParseError as e:
             print resp.content
             print "HTML validation error: "+unicode(e)

@@ -28,7 +28,7 @@ class PaperApiTest(JsonRenderingTest):
 
     def test_valid_paper(self):
         p = self.r3.papers[0]
-        parsed = self.checkJson(self.getPage('papers-detail', args=[p.pk]))
+        self.checkJson(self.getPage('papers-detail', args=[p.pk]))
 
     def test_invalid_paper(self):
         self.checkJson(self.getPage('papers-detail', args=[123456]), 404)

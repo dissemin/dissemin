@@ -37,9 +37,9 @@ import backend.crossref
 from backend.name_cache import name_lookup_cache
 from backend.romeo import fetch_publisher
 from backend.tasks import change_publisher_oa_status
-from papers.models import *
+from papers.models import Paper, Researcher, OaiRecord, Name, NameVariant
 from papers.utils import sanitize_html
-from publishers.models import *
+from publishers.models import AliasPublisher, Publisher
 
 
 def cleanup_researchers():
@@ -119,7 +119,6 @@ def recompute_fingerprints():
     those who end up having the same fingerprint
     """
     merged = 0
-    pc = Paper.objects.all().count()
     for idx, p in enumerate(Paper.objects.all()):
         if idx % 100 == 0:
             print idx

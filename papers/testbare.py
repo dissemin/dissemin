@@ -23,9 +23,7 @@ from __future__ import unicode_literals
 import datetime
 import unittest
 
-
-from papers.baremodels import *
-
+from papers.baremodels import BarePaper, BareName, BareAuthor, BareOaiRecord
 
 class BareObjectTest(unittest.TestCase):
     """

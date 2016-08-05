@@ -82,7 +82,7 @@ class CairnExtractor(RegexExtractor):
         super(CairnExtractor, self).__init__(mappings)
 
     def _post_filter(self, urls):
-        if not 'free access' in metadata.get('accessRights'):
+        if not 'free access' in self.metadata.get('accessRights'):
             urls['pdf'] = None
         return urls
 
@@ -93,7 +93,7 @@ class OpenAireExtractor(RegexExtractor):
         super(OpenAireExtractor, self).__init__(mappings)
 
     def _post_filter(self, urls):
-        if 'info:eu-repo/semantics/openAccess' in metadata.get('rights', []):
+        if 'info:eu-repo/semantics/openAccess' in self.metadata.get('rights', []):
             urls['pdf'] = urls.get('splash')
         return urls
 
@@ -192,5 +192,4 @@ REGISTERED_OAI_EXTRACTORS = {
         'researchgate': researchgateExtractor,
         }
 
-# Set up the model for the sources
 

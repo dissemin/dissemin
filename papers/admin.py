@@ -19,13 +19,18 @@
 from django.contrib import admin
 from solo.admin import SingletonModelAdmin
 
-from papers.models import *
-
+from papers.models import Institution
+from papers.models import Name 
+from papers.models import OaiRecord
+from papers.models import Department
+from papers.models import Researcher
+from papers.models import Paper
+from papers.models import OaiSource
+from papers.models import PaperWorld
 
 class NameInline(admin.TabularInline):
     model = Name
     extra = 0
-
 
 class OaiInline(admin.TabularInline):
     model = OaiRecord

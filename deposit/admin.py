@@ -22,8 +22,7 @@ from __future__ import unicode_literals
 
 from django.contrib import admin
 
-from deposit.models import *
-
+from deposit.models import DepositRecord, Repository
 
 class DepositRecordAdmin(admin.ModelAdmin):
     list_display = ('identifier', 'paper', 'user')

@@ -156,5 +156,5 @@ class PublisherAjaxTest(JsonRenderingTest):
                           postargs={'pk': self.publisher.pk,
                                     'status': 'OA'})
         self.assertEqual(p.status_code, 200)
-        papers = [Paper.objects.get(pk=p.pk) for p in self.papers]
-        self.assertTrue(all([p.oa_status == 'OA' for p in papers]))
+        papers = [Paper.objects.get(pk=paper.pk) for paper in self.papers]
+        self.assertTrue(all([paper.oa_status == 'OA' for paper in papers]))

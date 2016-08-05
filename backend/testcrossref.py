@@ -25,12 +25,13 @@ import unittest
 
 from django.test import TestCase
 
-from backend.crossref import *
-from papers.baremodels import *
-from papers.errors import *
-from papers.models import *
-from publishers.models import *
-
+from backend.crossref import CrossRefAPI, fetch_metadata_by_DOI
+from backend.crossref import parse_crossref_date, get_publication_date
+from backend.crossref import DOI_PROXY_SUPPORTS_BATCH, is_oa_license
+from backend.crossref import fetch_dois_incrementally
+from backend.crossref import fetch_dois_by_batch
+from papers.errors import MetadataSourceException
+from papers.utils import convert_to_name_pair
 
 class CrossRefTest(TestCase):
 

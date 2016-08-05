@@ -21,6 +21,7 @@
 from __future__ import unicode_literals
 
 from django.conf.urls import url
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponse
 from django.http import HttpResponseNotFound
@@ -30,12 +31,17 @@ from django.views.decorators.http import require_POST
 from jsonview.decorators import json_view
 
 from papers.forms import AddUnaffiliatedResearcherForm
-from papers.models import *
+from papers.models import Paper
+from papers.models import Name
+from papers.models import Researcher
+from papers.models import OA_STATUS_CHOICES
 from papers.name import normalize_name_words
-from papers.user import *
+from papers.user import is_admin, is_authenticated
 from papers.utils import kill_html
 from papers.utils import sanitize_html
+from papers.orcid import OrcidProfile
 
+from publishers.models import Publisher
 
 @json_view
 @require_POST
@@ -153,17 +159,6 @@ def newUnaffiliatedResearcher(request):
         return form.errors, 403
 
 # paper management
-#@user_passes_test(is_authenticated)
-# def annotatepaper(request, pk, status):
-#    paper = get_object_or_404(Paper, pk=pk)
-#    try:
-#        visible = bool(status)
-#    except valueError:
-#        return HttpResponseForbidden('Invalid visibility status', content_type='text/plain')
-#
-#    annotation.create(paper, visible, request.user)
-#    return httpResponse('OK', content_type='text/plain')
-
 #@user_passes_test(is_admin)
 # def changepaper(request):
 #    allowedFields = ['title']
@@ -275,7 +270,7 @@ def changePublisherStatus(request):
         else:
             raise ObjectDoesNotExist
     except ObjectDoesNotExist:
-        return HttpResponseNotFound('NOK: '+message, content_type='text/plain')
+        return HttpResponseNotFound('NOK', content_type='text/plain')
 
 urlpatterns = [
     #    url(r'^annotate-paper-(?P<pk>\d+)-(?P<status>\d+)$', annotatePaper, name='ajax-annotatePaper'),

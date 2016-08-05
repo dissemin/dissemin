@@ -22,7 +22,6 @@ from __future__ import unicode_literals
 
 import datetime
 import json
-from urllib import urlencode
 
 from django.db import DataError
 from django.utils.http import urlencode
@@ -50,7 +49,7 @@ from papers.utils import sanitize_html
 from papers.utils import tolerant_datestamp_to_datetime
 from papers.utils import validate_orcid
 from papers.utils import valid_publication_date
-from publishers.models import *
+from publishers.models import AliasPublisher
 
 ######## HOW THIS MODULE WORKS ###########
 #
@@ -416,9 +415,8 @@ class CrossRefAPI(object):
             raise ValueError('No title')
 
         # the upstream function ensures that there is a non-empty title
-        if not metadata.get('DOI'):
+        if not to_doi(metadata.get('DOI')):
             raise ValueError("No DOI, skipping")
-        doi = to_doi(metadata['DOI'])
 
         pubdate = get_publication_date(metadata)
 
@@ -489,11 +487,12 @@ class CrossRefAPI(object):
         if filters:
             params['filter'] = ','.join(map(lambda (k, v): k+":"+v, filters.items()))
 
+        url = 'http://api.crossref.org/works'
+
         count = 0
         rows = 20
         offset = 0
         while not max_batches or count < max_batches:
-            url = 'http://api.crossref.org/works'
             params['rows'] = rows
             params['offset'] = offset
 
@@ -512,7 +511,7 @@ class CrossRefAPI(object):
                                               'URL was: %s\nParameters were: %s\nJSON parser error was: %s' % (url, urlencode(params), unicode(e)))
             except requests.exceptions.RequestException as e:
                 raise MetadataSourceException('Error while fetching CrossRef results:\nUnable to open the URL: ' +
-                                              request+'\nError was: '+str(e))
+                                              url+'\nError was: '+str(e))
 
             offset += rows
             count += 1

@@ -544,7 +544,7 @@ def validate_orcid(orcid):
         return
     try:
         orcid = unicode(orcid).strip()
-    except ValueError, TypeError:
+    except (ValueError, TypeError):
         return
 
     match = orcid_re.match(orcid)

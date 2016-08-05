@@ -29,7 +29,8 @@ from haystack.generic_views import SearchView
 
 from dissemin.settings import UNIVERSITY_BRANDING
 from publishers.forms import PublisherForm
-from publishers.models import *
+from publishers.models import Publisher, publishers_breadcrumbs
+from publishers.models import OA_STATUS_CHOICES
 
 # Number of publishers per page in the publishers list
 NB_RESULTS_PER_PAGE = 20

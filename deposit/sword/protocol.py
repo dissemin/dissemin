@@ -20,17 +20,17 @@
 
 from __future__ import unicode_literals
 
-from StringIO import StringIO
-
 from django.conf import settings
 from django.utils.translation import ugettext as __
 import requests
 import sword2
 
-from deposit.forms import *
-from deposit.protocol import *
+from deposit.forms import BaseMetadataForm
+from deposit.protocol import RepositoryProtocol, DepositError
+from deposit.protocol import DepositResult
 from deposit.registry import protocol_registry
 from papers.utils import kill_html
+from sword.metadata import DCFormatter
 
 
 class SwordProtocol(RepositoryProtocol):
@@ -83,8 +83,6 @@ class SwordProtocol(RepositoryProtocol):
         return entry
 
     def submit_deposit(self, pdf, form, dry_run=False):
-        result = {}
-
         conn = None
         try:
             self.log("### Connecting")
@@ -98,8 +96,8 @@ class SwordProtocol(RepositoryProtocol):
             print meta
             self.log(meta)
 
-            f = StringIO(pdf)
             self.log("### Submitting metadata")
+            #f = StringIO(pdf)
             # receipt = conn.create(metadata_entry=entry,mimetype="application/pdf",
             #        payload=f,col_iri=self.repository.api_key)
             #receipt = conn.create(metadata_entry=entry,col_iri=self.repository.api_key)

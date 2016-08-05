@@ -26,8 +26,8 @@ import json
 from django.db import transaction
 
 from backend.crossref import CrossRefAPI
-from backend.extractors import *
-from backend.papersource import *
+from backend.papersource import PaperSource
+from backend.extractors import REGISTERED_OAI_EXTRACTORS
 from backend.pubtype_translations import OAI_PUBTYPE_TRANSLATIONS
 from django.conf import settings
 from oaipmh import common
@@ -39,6 +39,7 @@ from oaipmh.metadata import MetadataRegistry
 from oaipmh.metadata import MetadataReader
 from oaipmh.metadata import oai_dc_reader
 from papers.baremodels import BareName
+from papers.models import Paper
 from papers.baremodels import BareOaiRecord
 from papers.baremodels import BarePaper
 from papers.doi import to_doi

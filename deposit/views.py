@@ -32,8 +32,8 @@ from django.utils.translation import ugettext as _
 from django.views.decorators.http import require_POST
 from jsonview.decorators import json_view
 
-from deposit.forms import *
-from deposit.models import *
+from deposit.models import Repository, DepositRecord
+from deposit.forms import PaperDepositForm
 from dissemin.settings import DEPOSIT_MAX_FILE_SIZE
 from dissemin.settings import MEDIA_ROOT
 from papers.models import Paper

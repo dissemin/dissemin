@@ -26,8 +26,7 @@ import traceback
 from django import forms
 from django.utils.translation import ugettext as __
 
-from papers.models import *
-
+from papers.models import OaiRecord
 
 class DepositError(Exception):
     """

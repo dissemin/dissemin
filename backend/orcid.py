@@ -41,8 +41,9 @@ from papers.errors import MetadataSourceException
 from papers.models import OaiSource
 from papers.name import parse_comma_name
 from papers.name import shallower_name_similarity
-from papers.orcid import *
+from papers.orcid import OrcidProfile
 from papers.utils import parse_int
+from papers.utils import jpath
 from papers.utils import try_date
 from papers.utils import validate_orcid
 
@@ -484,7 +485,8 @@ class OrcidPaperSource(PaperSource):
                     yield paper_or_metadata
                 else:
                     ignored_papers.append(paper_or_metadata)
-                    print('This metadata (%s) yields no paper.' % (metadata))
+                    print('This metadata (%s) yields no paper.' %
+                        (unicode(paper_or_metadata)))
 
             # Let's grab papers with DOIs found in our ORCiD profile.
             # FIXME(RaitoBezarius): if we fail here, we should get back the pub

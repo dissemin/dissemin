@@ -38,8 +38,15 @@ from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
 
 from papers.fingerprint import create_paper_plain_fingerprint
-from papers.name import to_plain_name
-from papers.utils import *
+from papers.utils import sanitize_html
+from papers.utils import maybe_recapitalize_title
+from papers.utils import validate_orcid
+from papers.utils import datetime_to_date
+from papers.utils import remove_diacritics
+from papers.utils import remove_nones
+from papers.utils import iunaccent
+from papers.models import Researcher
+
 from publishers.models import DummyPublisher
 from publishers.models import OA_STATUS_CHOICES
 from publishers.models import OA_STATUS_PREFERENCE
@@ -217,8 +224,6 @@ class BarePaper(BareObject):
                     have the same length as the list of author names.
         :param orcids: same as affiliations, but for ORCID ids.
         """
-        plain_names = map(to_plain_name, author_names)
-
         if not title or not author_names or not pubdate:
             raise ValueError(
                 "A title, pubdate and authors have to be provided to create a paper.")
@@ -678,7 +683,7 @@ class BareAuthor(BareObject):
                 r = self._researcher_model.objects.get(orcid=orcid)
                 NameVariant = apps.get_app_config(
                     'papers').get_model('NameVariant')
-                nv = NameVariant.objects.get_or_create(
+                NameVariant.objects.get_or_create(
                         researcher=r,
                         name=self.name,
                         defaults={'confidence': default_confidence})
@@ -860,7 +865,7 @@ class BareOaiRecord(BareObject):
     def oa_status(self):
         """
         Policy of the publisher for this publication
-        """
+       """
         if self.pdf_url:
             return 'OA'
         elif self.publisher:

@@ -27,8 +27,11 @@ import doctest
 import django.test
 
 import papers.doi
-from papers.models import *
-
+from papers.models import Researcher
+from papers.models import Name
+from papers.models import OaiSource
+from papers.models import OaiRecord, Paper
+from papers.baremodels import BareName
 
 class ResearcherTest(django.test.TestCase):
 
