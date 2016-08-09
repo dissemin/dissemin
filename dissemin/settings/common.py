@@ -142,6 +142,7 @@ INSTALLED_APPS = (
     'deposit.zenodo',
     'deposit.hal',
     'deposit.sword',
+    'autocomplete',
     'notification',
     'bootstrap_pagination',
     'django_js_reverse',
