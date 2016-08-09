@@ -230,4 +230,9 @@ class AOFRFormatter(MetadataFormatter):
 def generate(theId):
     formatter = AOFRFormatter()
     paper = Paper.objects.get(pk=theId)
-    return formatter.toString(paper, 'article.pdf', True)
+    form = HALForm({
+        'topic': 'CHIM',
+        'abstract': 'Here is some info'
+    })
+    form.is_valid()
+    return formatter.toString(paper, 'article.pdf', form, True), paper
