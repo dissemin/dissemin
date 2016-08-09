@@ -74,6 +74,9 @@ class HALProtocol(RepositoryProtocol):
         data = {}
         data['paper_id'] = self.paper.id
 
+        data['first_name'] = self.user.first_name
+        data['last_name'] = self.user.last_name
+
         # Abstract
         if self.paper.abstract:
             data['abstract'] = kill_html(self.paper.abstract)
