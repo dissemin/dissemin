@@ -31,7 +31,7 @@ from django.conf import settings
 from django.utils.translation import ugettext as __
 from papers.utils import kill_html
 import sword2
-from sword.metadata import DCFormatter
+from deposit.sword.metadata import DCFormatter
 
 
 class SwordProtocol(RepositoryProtocol):
