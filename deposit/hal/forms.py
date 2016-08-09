@@ -70,6 +70,7 @@ class HALForm(BaseMetadataForm):
             choices=HAL_TOPIC_CHOICES)
 
     affiliation = forms.CharField(
+        required=False,
         label=__('Affiliation'),
         widget=Select2(forward=['first_name', 'last_name'], url='autocomplete_affiliations')
     )
