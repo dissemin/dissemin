@@ -27,26 +27,9 @@ from __future__ import unicode_literals
 
 from deposit.sword.metadata import addChild
 from deposit.sword.metadata import MetadataFormatter
-from django.utils.translation import ugettext_lazy as _
 from lxml import etree
 from papers.models import Paper
-
-HAL_TOPIC_CHOICES = [
-    ('CHIM', _('Chemistry')),
-    ('INFO', _('Computer science')),
-    ('MATH', _('Mathematics')),
-    ('PHYS', _('Physics')),
-    ('NLIN', _('Non-linear science')),
-    ('SCCO', _('Cognitive science')),
-    ('SDE', _('Environment sciences')),
-    ('SDU', _('Planet and Universe')),
-    ('SHS', _('Humanities and Social Science')),
-    ('SDV', _('Life sciences')),
-    ('SPI', _('Engineering sciences')),
-    ('STAT', _('Statistics')),
-    ('QFIN', _('Economy and quantitative finance')),
-    ('OTHER', _('Other')),
-  ]
+from deposit.hal.forms import HALForm
 
 ENS_HAL_ID = 59704
 
@@ -96,7 +79,7 @@ class AOFRFormatter(MetadataFormatter):
         self.renderTitleAuthors(titleStmt, paper)
 
         # editionStmt
-        if filename != None:
+        if filename is not None:
             editionStmt = addChild(biblFull, 'editionStmt')
             edition = addChild(editionStmt, 'edition')
             date = addChild(edition, 'date')
