@@ -22,20 +22,54 @@ from __future__ import unicode_literals
 
 from crispy_forms.helper import FormHelper
 from deposit.forms import BaseMetadataForm
-from deposit.hal.metadata import HAL_TOPIC_CHOICES
 from django import forms
 from django.utils.translation import ugettext as __
+
+from autocomplete.widgets import Select2
+
+HAL_TOPIC_CHOICES = [
+    ('CHIM', __('Chemistry')),
+    ('INFO', __('Computer science')),
+    ('MATH', __('Mathematics')),
+    ('PHYS', __('Physics')),
+    ('NLIN', __('Non-linear science')),
+    ('SCCO', __('Cognitive science')),
+    ('SDE', __('Environment sciences')),
+    ('SDU', __('Planet and Universe')),
+    ('SHS', __('Humanities and Social Science')),
+    ('SDV', __('Life sciences')),
+    ('SPI', __('Engineering sciences')),
+    ('STAT', __('Statistics')),
+    ('QFIN', __('Economy and quantitative finance')),
+    ('OTHER', __('Other')),
+  ]
 
 
 class HALForm(BaseMetadataForm):
 
-    def __init__(self, *args, **kwargs):
-        super(HALForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper(self)
-        self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-lg-2'
-        self.helper.field_class = 'col-lg-8'
+#    def __init__(self, *args, **kwargs):
+#        super(HALForm, self).__init__(*args, **kwargs)
+#        self.helper = FormHelper(self)
+#        self.helper.form_class = 'form-horizontal'
+#        self.helper.label_class = 'col-lg-2'
+#        self.helper.field_class = 'col-lg-8'
+
+    # Dummy field to store the user name
+    # (required for affiliation autocompletion)
+    first_name = forms.CharField(
+        required=False,
+        widget=forms.HiddenInput
+    )
+    last_name = forms.CharField(
+        required=False,
+        widget=forms.HiddenInput
+    )
 
     topic = forms.ChoiceField(
             label=__('Scientific field'),
             choices=HAL_TOPIC_CHOICES)
+
+    affiliation = forms.CharField(
+        label=__('Affiliation'),
+        widget=Select2(forward=['first_name', 'last_name'], url='autocomplete_affiliations')
+    )
