@@ -20,20 +20,14 @@
 
 from __future__ import unicode_literals
 
-import json
 
 #from requests.exceptions import RequestException
 #import json, requests
-from celery import current_task
 from django.conf import settings
-from django.core.exceptions import ObjectDoesNotExist
-import requests
-from unidecode import unidecode
 
 from backend.crossref import convert_to_name_pair
 from backend.crossref import CrossRefAPI
 from backend.crossref import fetch_dois
-from backend.name_cache import name_lookup_cache
 from backend.papersource import PaperSource
 from notification.api import add_notification_for
 from notification.api import delete_notification_per_tag
@@ -43,13 +37,12 @@ from papers.baremodels import BarePaper
 from papers.bibtex import parse_bibtex
 from papers.doi import to_doi
 from papers.errors import MetadataSourceException
-from papers.models import OaiSource
-from papers.name import match_names
-from papers.name import normalize_name_words
+from papers.models import OaiSource, Name
 from papers.name import parse_comma_name
 from papers.name import shallower_name_similarity
-from papers.orcid import *
+from papers.orcid import OrcidProfile
 from papers.utils import parse_int
+from papers.utils import jpath
 from papers.utils import try_date
 from papers.utils import validate_orcid
 
@@ -211,7 +204,7 @@ class ORCIDMetadataExtractor(object):
             return []
 
     def convert_authors(self, authors):
-        return map(name_lookup_cache.lookup, authors)
+        return map(Name.lookup_name, authors)
 
     def j(self, path, default=None):
         return jpath(path, self._pub, default)
@@ -491,7 +484,8 @@ class OrcidPaperSource(PaperSource):
                     yield paper_or_metadata
                 else:
                     ignored_papers.append(paper_or_metadata)
-                    print('This metadata (%s) yields no paper.' % (metadata))
+                    print('This metadata (%s) yields no paper.' %
+                        (unicode(paper_or_metadata)))
 
             # Let's grab papers with DOIs found in our ORCiD profile.
             # FIXME(RaitoBezarius): if we fail here, we should get back the pub

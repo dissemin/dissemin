@@ -25,8 +25,13 @@ import doctest
 import unittest
 
 import papers.name
-from papers.name import *
-
+from papers.name import match_names
+from papers.name import split_name_words
+from papers.name import normalize_name_words
+from papers.name import recapitalize_word
+from papers.name import name_similarity, unify_name_lists
+from papers.name import shallower_name_similarity
+from papers.name import parse_comma_name, name_unification
 
 class MatchNamesTest(unittest.TestCase):
 

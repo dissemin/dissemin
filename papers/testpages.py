@@ -22,14 +22,11 @@
 from __future__ import unicode_literals
 
 import datetime
-import unittest
 
 from django.core.urlresolvers import reverse
 import django.test
 import html5lib
 
-from backend.crossref import CrossRefAPI
-from backend.oai import OaiPaperSource
 from backend.tests import PrefilledTest
 from papers.baremodels import BareName
 from papers.models import OaiRecord
@@ -61,7 +58,7 @@ class RenderingTest(PrefilledTest):
         # Check that there are no overescaped HTML strings…
         self.assertEqual(overescaped_re.findall(resp.content), [])
         try:
-            parsed = self.parser.parse(resp.content)
+            self.parser.parse(resp.content)
         except html5lib.html5parser.ParseError as e:
             print resp.content
             print "HTML validation error: "+unicode(e)

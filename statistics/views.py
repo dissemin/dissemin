@@ -20,4 +20,3 @@
 This app does not contain any view yet.
 """
 
-from django.shortcuts import render

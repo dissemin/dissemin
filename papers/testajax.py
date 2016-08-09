@@ -26,8 +26,6 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 import django.test
 
-from backend.crossref import CrossRefAPI
-from backend.oai import OaiPaperSource
 from backend.tests import PrefilledTest
 from papers.models import Paper
 
@@ -158,5 +156,5 @@ class PublisherAjaxTest(JsonRenderingTest):
                           postargs={'pk': self.publisher.pk,
                                     'status': 'OA'})
         self.assertEqual(p.status_code, 200)
-        papers = [Paper.objects.get(pk=p.pk) for p in self.papers]
-        self.assertTrue(all([p.oa_status == 'OA' for p in papers]))
+        papers = [Paper.objects.get(pk=paper.pk) for paper in self.papers]
+        self.assertTrue(all([paper.oa_status == 'OA' for paper in papers]))

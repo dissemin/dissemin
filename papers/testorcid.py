@@ -23,7 +23,7 @@ from __future__ import unicode_literals
 
 import unittest
 
-from papers.orcid import *
+from papers.orcid import OrcidProfile
 
 
 class OrcidProfileTest(unittest.TestCase):

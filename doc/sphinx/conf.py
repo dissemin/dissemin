@@ -23,7 +23,6 @@ from django.utils.encoding import force_unicode
 from django.utils.html import strip_tags
 import mock
 
-import dissemin.settings
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the

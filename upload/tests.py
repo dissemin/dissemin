@@ -27,13 +27,11 @@ import unittest
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-import django.test
 import wand.image as image
 
 from papers.testajax import JsonRenderingTest
-from upload.models import *
-from upload.views import *
-
+from upload.models import THUMBNAIL_MAX_WIDTH
+from upload.views import make_thumbnail
 
 class ThumbnailTest(unittest.TestCase):
 
@@ -114,7 +112,7 @@ class UploadTest(JsonRenderingTest):
         self.assertEqual(resp.status_code, 302)
 
     def test_invalid_url(self):
-        resp = self.download('ttp://dissem.in')
+        self.download('ttp://dissem.in')
 
     def test_notfound_url(self):
         resp = self.download('http://httpbin.org/ainrsetcs')

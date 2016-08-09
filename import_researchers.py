@@ -3,18 +3,15 @@ from __future__ import unicode_literals
 
 from codecs import open
 
-from backend.create import *
-from papers.models import *
+from papers.models import Researcher, Department
 from papers.name import normalize_name_words
-from papers.utils import iunaccent
 
 last_name_f = 0
 first_name_f = 1
 url_f = 2
 email_f = 3
 role_f = 4
-group_f = 5
-dept_f = 6
+dept_f = 5
 
 
 def import_from_tsv(filename):
@@ -40,16 +37,11 @@ def import_from_tsv(filename):
             homepage = None
 
         try:
-            researcher = Researcher.create_from_scratch(
+            Researcher.create_from_scratch(
                 first, last, department, email, role, homepage)
         except ValueError:
             print "ValueError"
             continue
-
-        group = fields[group_f]
-        if group:
-            g, created = ResearchGroup.objects.get_or_create(name=group)
-            researcher.groups.add(g)
 
 
 import_from_tsv('data/cambridge_researchers')

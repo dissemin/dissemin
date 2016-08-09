@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.db import models, migrations
+from django.db import migrations
 from papers.utils import validate_orcid
 
 def populate_authors(apps, schema_editor):
-    Author = apps.get_model('papers', 'Author')
-    Name = apps.get_model('papers', 'Name')
     Paper = apps.get_model('papers', 'Paper')
 
     for p in Paper.objects.all():

@@ -18,12 +18,11 @@ django-crispy-forms
 django-js-reverse
 django-jsonview
 django-redis-cache
-django-rest-swagger
 django-solo
 django-widget-tweaks
 django-memoize
-djangorestframework
 django-bulk-update
+djangorestframework
 elasticsearch
 html5lib==0.999999999
 httplib2

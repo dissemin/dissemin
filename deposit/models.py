@@ -25,8 +25,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from deposit.protocol import *
-from deposit.registry import *
+from deposit.registry import protocol_registry
 from papers.models import OaiSource
 from papers.models import Paper
 from upload.models import UploadedPDF

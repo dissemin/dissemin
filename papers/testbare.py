@@ -23,11 +23,7 @@ from __future__ import unicode_literals
 import datetime
 import unittest
 
-import django.test
-
-from papers.baremodels import *
-import papers.doi
-
+from papers.baremodels import BarePaper, BareName, BareAuthor, BareOaiRecord
 
 class BareObjectTest(unittest.TestCase):
     """

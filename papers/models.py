@@ -69,36 +69,27 @@ from django.core.cache.utils import make_template_fragment_key
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.db import DataError
-from django.db import IntegrityError
 from django.db import models
-from django.db import transaction
-from django.db.models import Q
+from django.utils.functional import cached_property
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from django.template.defaultfilters import slugify
 from solo.models import SingletonModel
 
 from dissemin.settings import POSSIBLE_LANGUAGE_CODES
 from dissemin.settings import PROFILE_REFRESH_ON_LOGIN
-from papers.baremodels import *
 from papers.doi import to_doi
 from papers.errors import MetadataSourceException
-from papers.name import match_names
 from papers.name import name_similarity
 from papers.name import unify_name_lists
 from papers.orcid import OrcidProfile
 from papers.utils import affiliation_is_greater
-from papers.utils import index_of
-from papers.utils import iunaccent
-from papers.utils import remove_diacritics
-from papers.utils import remove_nones
-from papers.utils import sanitize_html
 from papers.utils import validate_orcid
-from publishers.models import DummyPublisher
+from papers.baremodels import BarePaper, BareName, BareAuthor
+from papers.baremodels import BareOaiRecord, MAX_NAME_LENGTH
+from papers.baremodels import PAPER_TYPE_CHOICES, PAPER_TYPE_PREFERENCE
 from publishers.models import Journal
-from publishers.models import OA_STATUS_CHOICES
-from publishers.models import OA_STATUS_PREFERENCE
 from publishers.models import Publisher
-from upload.models import UploadedPDF
 
 UPLOAD_TYPE_CHOICES = [
    ('preprint', _('Preprint')),
@@ -338,7 +329,6 @@ class Researcher(models.Model):
         else:
             current_name_variants = set([nv.name_id for nv in nvqs])
 
-        last = self.name.last
         for name in self.variants_queryset():
             sim = name_similarity((name.first, name.last),
                                   (self.name.first, self.name.last))
@@ -355,7 +345,7 @@ class Researcher(models.Model):
         """
         if name.id is None:
             name.save()
-        nv = NameVariant.objects.get_or_create(
+        NameVariant.objects.get_or_create(
                 name=name, researcher=self, defaults={'confidence': confidence})
         if name.best_confidence < confidence or force_update:
             name.best_confidence = confidence
@@ -852,7 +842,6 @@ class Paper(models.Model, BarePaper):
         Creates a paper given a DOI
         """
         import backend.crossref as crossref
-        from backend.papersource import PaperSource
         cr_api = crossref.CrossRefAPI()
         bare_paper = cr_api.create_paper_by_doi(doi)
         if bare:
@@ -945,7 +934,6 @@ class Paper(models.Model, BarePaper):
         if self.pk == paper.pk:
             return
 
-        oldid = paper.id
         self.visible = paper.visible or self.visible
 
         OaiRecord.objects.filter(about=paper.pk).update(about=self.pk)
@@ -1160,6 +1148,7 @@ class OaiRecord(models.Model, BareOaiRecord):
                 changed = True
 
             def update_field_conditionally(field):
+                global changed
                 new_val = kwargs.get(field, '')
                 if new_val and (not match.__dict__[field] or
                                 len(match.__dict__[field]) < len(new_val)):

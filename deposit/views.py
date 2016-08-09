@@ -19,29 +19,24 @@
 
 from __future__ import unicode_literals
 
-import json
 import os
 
 from crispy_forms.templatetags.crispy_forms_filters import as_crispy_form
 from crispy_forms.utils import render_crispy_form
 from django.contrib.auth.decorators import user_passes_test
-from django.http import HttpResponse
 from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404
-from django.shortcuts import redirect
 from django.shortcuts import render
 from django.template import RequestContext
 from django.utils.translation import ugettext as _
 from django.views.decorators.http import require_POST
 from jsonview.decorators import json_view
 
-from deposit.forms import *
-from deposit.models import *
+from deposit.models import Repository, DepositRecord
+from deposit.forms import PaperDepositForm
 from dissemin.settings import DEPOSIT_MAX_FILE_SIZE
 from dissemin.settings import MEDIA_ROOT
-from dissemin.settings import UNIVERSITY_BRANDING
 from papers.models import Paper
-from papers.user import is_admin
 from papers.user import is_authenticated
 
 

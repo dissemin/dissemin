@@ -20,7 +20,6 @@
 
 from __future__ import unicode_literals
 
-import json
 
 from django.utils.http import urlencode
 from lxml import etree
@@ -82,7 +81,7 @@ class OrcidProfile(object):
         except (requests.exceptions.HTTPError, ValueError):
             raise MetadataSourceException(
                 'The ORCiD %s could not be found' % id)
-        except (ValueError, TypeError) as e:
+        except (ValueError, TypeError):
             raise MetadataSourceException(
                 'The ORCiD %s returned invalid JSON.' % id)
 

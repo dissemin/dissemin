@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.db import models, migrations
-from papers.utils import validate_orcid
+from django.db import migrations
 
 def populate_oai_sources(apps, schema_editor):
     OaiSource = apps.get_model('papers', 'OaiSource')

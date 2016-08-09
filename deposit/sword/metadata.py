@@ -27,9 +27,6 @@ from __future__ import unicode_literals
 
 from lxml import etree
 
-from papers.models import OaiRecord
-from papers.models import Paper
-from papers.models import Researcher
 
 XMLLANG_ATTRIB = '{http://www.w3.org/XML/1998/namespace}lang'
 

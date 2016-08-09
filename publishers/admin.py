@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.contrib import admin
 
-from publishers.models import *
+from publishers.models import Journal, Publisher
 
 
 # Dissemin: open access policy enforcement tool

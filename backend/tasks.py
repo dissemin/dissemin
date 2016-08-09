@@ -21,27 +21,19 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
-import datetime
-from datetime import datetime
-from datetime import timedelta
-import re
+from datetime import datetime, timedelta
 
-from celery import current_task
 from celery import shared_task
 from celery.utils.log import get_task_logger
-from django.core.exceptions import ObjectDoesNotExist
 from django.utils import timezone
 
-from backend.crossref import *
-import backend.extractors  # to ensure that OaiSources are created
-from backend.orcid import *
 from backend.utils import run_only_once
-from oaipmh.datestamp import tolerant_datestamp_to_datetime
-from oaipmh.error import BadArgumentError
-from oaipmh.error import DatestampError
-from oaipmh.error import NoRecordsMatchError
-from papers.doi import to_doi
-from papers.models import *
+from backend.crossref import consolidate_publication
+from papers.models import PaperWorld, Researcher, Paper, Department, Institution
+from publishers.models import Journal, Publisher
+from papers.errors import MetadataSourceException
+from backend.orcid import OrcidPaperSource
+from statistics.models import AccessStatistics
 
 logger = get_task_logger(__name__)
 
@@ -163,6 +155,6 @@ def remove_empty_profiles():
     """
     Deletes all researchers without papers and without affiliations
     """
-    date_cap = datetime.datetime.now()-datetime.timedelta(hours=2)
+    date_cap = datetime.now()-timedelta(hours=2)
     Researcher.objects.filter(department__isnull=True,
                               stats__num_tot=0, last_harvest__lt=date_cap).delete()

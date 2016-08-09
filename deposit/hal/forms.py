@@ -21,14 +21,11 @@
 from __future__ import unicode_literals
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout
 from django import forms
-from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as __
 
 from deposit.forms import BaseMetadataForm
-from deposit.hal.metadataFormatter import HAL_TOPIC_CHOICES
-from deposit.zenodo.protocol import ZENODO_LICENSES_CHOICES
+from deposit.hal.metadata import HAL_TOPIC_CHOICES
 
 
 class HALForm(BaseMetadataForm):

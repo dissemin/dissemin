@@ -21,16 +21,14 @@
 from __future__ import unicode_literals
 
 import json
-from StringIO import StringIO
 
 from django.utils.translation import ugettext as __
-from django.utils.translation import ugettext_lazy as _
 import requests
 
-from deposit.protocol import *
-from deposit.registry import *
-from deposit.zenodo.forms import *
-from papers.errors import MetadataSourceException
+from deposit.protocol import RepositoryProtocol, DepositError
+from deposit.protocol import DepositResult
+from deposit.registry import protocol_registry
+from deposit.zenodo.forms import ZenodoForm
 from papers.utils import kill_html
 
 
@@ -59,9 +57,7 @@ class ZenodoProtocol(RepositoryProtocol):
     def get_bound_form(self, data):
         return ZenodoForm(data)
 
-    def submit_deposit(self, pdf, form):
-        result = {}
-
+    def submit_deposit(self, pdf, form, dry_run=False):
         if self.repository.api_key is None:
             raise DepositError(__("No Zenodo API key provided."))
         api_key = self.repository.api_key

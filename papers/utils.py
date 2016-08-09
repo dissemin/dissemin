@@ -21,14 +21,9 @@
 from __future__ import unicode_literals
 
 import datetime
-import hashlib
-from io import StringIO
 import re
 import unicodedata
 
-from lxml import etree
-from lxml.html import _transform_result
-from lxml.html import fromstring
 from lxml.html.clean import Cleaner
 from titlecase import titlecase
 import unicode_tex
@@ -549,7 +544,7 @@ def validate_orcid(orcid):
         return
     try:
         orcid = unicode(orcid).strip()
-    except ValueError, TypeError:
+    except (ValueError, TypeError):
         return
 
     match = orcid_re.match(orcid)
