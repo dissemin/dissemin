@@ -151,6 +151,12 @@ class HALProtocol(RepositoryProtocol):
             parser = etree.XMLParser(encoding='utf-8')
             receipt = etree.parse(BytesIO(xml_response), parser)
             receipt = receipt.getroot()
+            if receipt.tag == '{http://purl.org/net/sword/error/}error':
+                self.log('Error while depositing the content.')
+                self.log('Here is the XML response: {}'.format(xml_response))
+                self.log('Here is the metadata: {}'.format(metadata))
+                raise DepositError(__('HAL rejected the submission'))
+
             deposition_id = receipt.find('{http://www.w3.org/2005/Atom}id').text
             # TODO store the password for the paper:
             # can be used later by the user to modify the upload
@@ -190,8 +196,8 @@ class HALProtocol(RepositoryProtocol):
             self.log("Caught exception:")
             self.log(str(type(e))+': '+str(e)+'')
             self.log(traceback.format_exc())
-            raise DepositError(
-                'Connection to HAL failed. Please try again later.')
+            raise DepositError(__(
+                'Connection to HAL failed. Please try again later.'))
 
         return deposit_result
 
