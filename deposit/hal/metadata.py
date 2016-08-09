@@ -142,7 +142,7 @@ class AOFRFormatter(MetadataFormatter):
 
         abstract = addChild(profileDesc, 'abstract')
         abstract.attrib[XMLLANG_ATTRIB] = 'en'
-        abstract.text = 'No abstract.'
+        abstract.text = 'No abstract.' if not form.cleaned_data['abstract'] else form.cleaned_data['abstract']
         for record in paper.sorted_oai_records:
             if record.description:
                 abstract.text = record.description
