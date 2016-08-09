@@ -310,8 +310,9 @@ def refetchResearcher(request, pk):
 def myProfileView(request):
     try:
         r = Researcher.objects.get(user=request.user)
-        return ResearcherView.as_view(request,
-                                      researcher=r.pk, slug=r.slug)
+        return ResearcherView.as_view()(request,
+                                        researcher=r.pk,
+                                        slug=r.slug)
     except Researcher.DoesNotExist:
         return render(request, 'papers/createProfile.html')
 
