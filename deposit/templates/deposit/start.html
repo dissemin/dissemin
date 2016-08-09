@@ -21,11 +21,14 @@
     <script src="{% static "libs/jquery.iframe-transport.js" %}"></script>
     <script src="{% static "libs/jquery.fileupload.js" %}"></script>
     <script src="{% static "libs/upload.js" %}"></script>
+
     <link rel="stylesheet" href="{% static "css/upload.css" %}" />
     <link rel="stylesheet" href="{% static "css/deposit.css" %}" />
 {% endblock %}
 
 {% block jsScript %}
+yl = {};
+yl.jQuery = $;
 $(function() {
     $('#waitingArea').hide();
     $('#uploadFileId').val('');
@@ -297,4 +300,8 @@ $(function() {
 {% block details %}
 {% include "papers/paperDetails.html" with paper=paper %}
 
+{% endblock %}
+
+{% block footer %}
+        {{ selected_protocol.get_form.media }}
 {% endblock %}
