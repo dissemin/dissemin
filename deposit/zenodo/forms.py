@@ -20,10 +20,9 @@
 
 from __future__ import unicode_literals
 
+from deposit.forms import BaseMetadataForm
 from django import forms
 from django.utils.translation import ugettext as __
-
-from deposit.forms import BaseMetadataForm
 
 ZENODO_LICENSES_CHOICES = [
    ('cc-zero',

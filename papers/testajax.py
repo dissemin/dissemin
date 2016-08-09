@@ -22,11 +22,10 @@ from __future__ import unicode_literals
 
 import json
 
+from backend.tests import PrefilledTest
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 import django.test
-
-from backend.tests import PrefilledTest
 from papers.models import Paper
 
 

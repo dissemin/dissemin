@@ -113,11 +113,12 @@ def remove_diacritics(s):
 
         # for issue #305
         # because I have no idea what the general solution for this would be
-        s = s.replace("’","'")
-        
+        s = s.replace("’", "'")
+
         return unidecode(s)
     else:
         return s
+
 
 def iunaccent(s):
     """
@@ -502,6 +503,7 @@ def datetime_to_date(dt):
     elif type(dt) == datetime.date:
         return dt
     raise ValueError("Invalid date or datetime")
+
 
 def valid_publication_date(dt):
     """

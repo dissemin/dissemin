@@ -23,7 +23,11 @@ from __future__ import unicode_literals
 import datetime
 import unittest
 
-from papers.baremodels import BarePaper, BareName, BareAuthor, BareOaiRecord
+from papers.baremodels import BareAuthor
+from papers.baremodels import BareName
+from papers.baremodels import BareOaiRecord
+from papers.baremodels import BarePaper
+
 
 class BareObjectTest(unittest.TestCase):
     """
@@ -119,6 +123,7 @@ class BarePaperTest(BareObjectTest):
 
 
 class BareOaiRecordTest(unittest.TestCase):
+
     def test_cleanup_desc(self):
         r = BareOaiRecord()
 
@@ -129,7 +134,7 @@ class BareOaiRecordTest(unittest.TestCase):
         r.description = " Abstract: While price and data…"
         r.cleanup_description()
         self.assertEqual(r.description, "While price and data…")
- 
+
         r.description = None
         r.cleanup_description()
         self.assertEqual(r.description, None)

@@ -20,11 +20,11 @@
 
 from __future__ import unicode_literals
 
-
 from papers.testajax import JsonRenderingTest
 
 
 class PaperApiTest(JsonRenderingTest):
+
     def test_valid_doi(self):
         self.checkJson(self.getPage('api-paper-doi',
                                     args=['10.1016/0379-6779(91)91572-r']))

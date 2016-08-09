@@ -21,27 +21,27 @@
 from __future__ import unicode_literals
 
 from django.conf.urls import url
-from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import user_passes_test
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 from django.http import HttpResponseNotFound
 from django.shortcuts import get_object_or_404
 from django.template import loader
 from django.views.decorators.http import require_POST
 from jsonview.decorators import json_view
-
 from papers.forms import AddUnaffiliatedResearcherForm
-from papers.models import Paper
 from papers.models import Name
+from papers.models import Paper
 from papers.models import Researcher
-from publishers.models import OA_STATUS_CHOICES
 from papers.name import normalize_name_words
-from papers.user import is_admin, is_authenticated
+from papers.orcid import OrcidProfile
+from papers.user import is_admin
+from papers.user import is_authenticated
 from papers.utils import kill_html
 from papers.utils import sanitize_html
-from papers.orcid import OrcidProfile
-
+from publishers.models import OA_STATUS_CHOICES
 from publishers.models import Publisher
+
 
 @json_view
 @require_POST

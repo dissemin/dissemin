@@ -21,8 +21,8 @@
 from __future__ import unicode_literals
 
 from django.conf.urls import url
-
-from upload.views import handleAjaxUpload, handleUrlDownload
+from upload.views import handleAjaxUpload
+from upload.views import handleUrlDownload
 
 urlpatterns = [
     url(r'^upload-fulltext$', handleAjaxUpload, name='ajax-uploadFulltext'),

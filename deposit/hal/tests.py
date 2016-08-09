@@ -20,14 +20,14 @@
 
 from __future__ import unicode_literals
 
-#from os import path
-
-from django.test import TestCase
-
 from deposit.hal.metadata import AOFRFormatter
 from deposit.hal.protocol import HALProtocol
 from deposit.tests import ProtocolTest
+from django.test import TestCase
 from papers.models import Paper
+
+
+#from os import path
 
 
 class AOFRTest(TestCase):
@@ -39,7 +39,7 @@ class AOFRTest(TestCase):
         # This currently fails and is unused
 
         #xsd_fname = path.join(path.dirname(__file__), 'aofr-sword.xsd')
-        #with open(xsd_fname, 'r') as f:
+        # with open(xsd_fname, 'r') as f:
         #   elem = etree.parse(f)
         #   cls.xsd = etree.XMLSchema(elem)
 
@@ -51,10 +51,10 @@ class AOFRTest(TestCase):
             Paper.create_by_doi(doi)
             #form = TODO
             #rendered = f.render(p, 'article.pdf', form)
-            #with open('/tmp/xml_validation.xml', 'w') as f:
+            # with open('/tmp/xml_validation.xml', 'w') as f:
             #    f.write(etree.tostring(rendered, pretty_print=True))
             # XSD validation currently fails
-            #self.xsd.assertValid(rendered)
+            # self.xsd.assertValid(rendered)
 
 
 class HALProtocolTest(ProtocolTest):

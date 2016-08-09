@@ -20,12 +20,11 @@
 
 from __future__ import unicode_literals
 
+from deposit.models import Repository
 from django import forms
+from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as __
 from django.utils.translation import ugettext_lazy as _
-from django.core.urlresolvers import reverse
-
-from deposit.models import Repository 
 from papers.models import UPLOAD_TYPE_CHOICES
 from upload.models import UploadedPDF
 

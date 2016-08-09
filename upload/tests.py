@@ -27,11 +27,11 @@ import unittest
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-import wand.image as image
-
 from papers.testajax import JsonRenderingTest
 from upload.models import THUMBNAIL_MAX_WIDTH
 from upload.views import make_thumbnail
+import wand.image as image
+
 
 class ThumbnailTest(unittest.TestCase):
 

@@ -22,25 +22,27 @@ from __future__ import unicode_literals
 
 from StringIO import StringIO
 
+import requests
+from requests.packages.urllib3.exceptions import HTTPError
+from requests.packages.urllib3.exceptions import ReadTimeoutError
+
+from dissemin.settings import DEPOSIT_MAX_FILE_SIZE
+from dissemin.settings import URL_DEPOSIT_DOWNLOAD_TIMEOUT
 from django.contrib.auth.decorators import user_passes_test
 from django.core.files.base import ContentFile
 from django.utils.translation import ugettext as _
 from django.views.decorators.http import require_POST
 from jsonview.decorators import json_view
+from papers.user import is_authenticated
 import PyPDF2
 from PyPDF2.utils import PyPdfError
-import requests
-from requests.packages.urllib3.exceptions import HTTPError
-from requests.packages.urllib3.exceptions import ReadTimeoutError
+from upload.forms import AjaxUploadForm
+from upload.forms import UrlDownloadForm
+from upload.models import MAX_ORIG_NAME_LENGTH
+from upload.models import THUMBNAIL_MAX_WIDTH
+from upload.models import UploadedPDF
 import wand.exceptions
 import wand.image
-
-from dissemin.settings import DEPOSIT_MAX_FILE_SIZE
-from dissemin.settings import URL_DEPOSIT_DOWNLOAD_TIMEOUT
-from papers.user import is_authenticated
-from upload.forms import UrlDownloadForm, AjaxUploadForm
-from upload.models import UploadedPDF, THUMBNAIL_MAX_WIDTH
-from upload.models import MAX_ORIG_NAME_LENGTH
 
 
 # AJAX upload

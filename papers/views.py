@@ -24,6 +24,8 @@ from statistics.models import COMBINED_STATUS_CHOICES
 from statistics.models import combined_status_stats
 
 from allauth.socialaccount.signals import post_social_login
+from deposit.models import DepositRecord
+from dissemin.settings import UNIVERSITY_BRANDING
 from django.contrib.auth.decorators import user_passes_test
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
@@ -41,20 +43,20 @@ from django.utils.translation import ungettext
 from django.views import generic
 from haystack.generic_views import SearchView
 from haystack.query import EmptySearchQuerySet
-
-from deposit.models import DepositRecord
-from dissemin.settings import UNIVERSITY_BRANDING
 from notification.api import get_notifications
 from papers.doi import to_doi
+from papers.errors import MetadataSourceException
 from papers.forms import AddUnaffiliatedResearcherForm
 from papers.forms import PaperForm
-from papers.models import Paper, Department
-from papers.errors import MetadataSourceException
-from papers.models import Researcher, Institution
-from papers.utils import validate_orcid
-from publishers.models import Journal, Publisher
+from papers.models import Department
+from papers.models import Institution
+from papers.models import Paper
+from papers.models import Researcher
 from papers.user import is_admin
 from papers.user import is_authenticated
+from papers.utils import validate_orcid
+from publishers.models import Journal
+from publishers.models import Publisher
 from publishers.views import SlugDetailView
 from search import SearchQuerySet
 
@@ -309,7 +311,7 @@ def myProfileView(request):
     try:
         r = Researcher.objects.get(user=request.user)
         return ResearcherView.as_view(request,
-                                                 researcher=r.pk, slug=r.slug)
+                                      researcher=r.pk, slug=r.slug)
     except Researcher.DoesNotExist:
         return render(request, 'papers/createProfile.html')
 
@@ -382,5 +384,3 @@ class PaperView(SlugDetailView):
             del kwargs['doi']
             kwargs['pk'] = self.object.pk
         return super(PaperView, self).redirect(**kwargs)
-
-

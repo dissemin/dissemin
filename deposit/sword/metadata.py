@@ -27,7 +27,6 @@ from __future__ import unicode_literals
 
 from lxml import etree
 
-
 XMLLANG_ATTRIB = '{http://www.w3.org/XML/1998/namespace}lang'
 
 

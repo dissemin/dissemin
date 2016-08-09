@@ -1,12 +1,12 @@
 # -*- encoding: utf-8 -*-
 from __future__ import unicode_literals
 
+from statistics.models import PDF_STATUS_CHOICES
+
 from django import template
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
-
 from publishers.models import OA_STATUS_CHOICES
-from statistics.models import PDF_STATUS_CHOICES
 
 register = template.Library()
 

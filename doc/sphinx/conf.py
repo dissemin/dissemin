@@ -17,12 +17,12 @@ import inspect
 import os
 import sys
 
+import mock
+
 import django
 from django.db.models.fields.files import FileDescriptor
 from django.utils.encoding import force_unicode
 from django.utils.html import strip_tags
-import mock
-
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the

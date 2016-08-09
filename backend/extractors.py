@@ -23,7 +23,6 @@ from __future__ import unicode_literals
 import re
 
 
-
 class URLExtractor(object):
 
     def __init__(self):
@@ -191,5 +190,3 @@ REGISTERED_OAI_EXTRACTORS = {
         'base': baseExtractor,
         'researchgate': researchgateExtractor,
         }
-
-

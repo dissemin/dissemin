@@ -20,11 +20,10 @@
 
 from __future__ import unicode_literals
 
+import requests
 
 from django.utils.http import urlencode
 from lxml import etree
-import requests
-
 from papers.errors import MetadataSourceException
 from papers.name import normalize_name_words
 from papers.name import parse_comma_name

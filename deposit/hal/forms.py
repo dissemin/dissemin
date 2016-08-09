@@ -21,11 +21,10 @@
 from __future__ import unicode_literals
 
 from crispy_forms.helper import FormHelper
-from django import forms
-from django.utils.translation import ugettext as __
-
 from deposit.forms import BaseMetadataForm
 from deposit.hal.metadata import HAL_TOPIC_CHOICES
+from django import forms
+from django.utils.translation import ugettext as __
 
 
 class HALForm(BaseMetadataForm):

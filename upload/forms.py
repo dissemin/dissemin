@@ -20,11 +20,10 @@
 
 from __future__ import unicode_literals
 
+from dissemin.settings import DEPOSIT_MAX_FILE_SIZE
 from django import forms
 from django.template.defaultfilters import filesizeformat
 from django.utils.translation import ugettext as _
-
-from dissemin.settings import DEPOSIT_MAX_FILE_SIZE
 
 invalid_content_type_message = _(
     'Invalid file format: only PDF files are accepted.')

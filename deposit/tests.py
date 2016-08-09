@@ -22,14 +22,13 @@ from datetime import date
 from io import BytesIO
 import unittest
 
+from backend.tests import PrefilledTest
+from deposit.models import Repository
+from deposit.protocol import DepositResult
 from django.contrib.auth.models import User
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.forms import Form
 from django.test.utils import override_settings
-
-from backend.tests import PrefilledTest
-from deposit.models import Repository
-from deposit.protocol import DepositResult
 from papers.models import OaiSource
 from papers.models import Paper
 

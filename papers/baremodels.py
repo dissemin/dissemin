@@ -33,20 +33,18 @@ from urllib import quote  # for the Google Scholar and CORE link
 from urllib import urlencode
 
 from django.apps import apps
-from django.template.defaultfilters import slugify
 from django.core.exceptions import ObjectDoesNotExist
+from django.template.defaultfilters import slugify
 from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
-
 from papers.fingerprint import create_paper_plain_fingerprint
-from papers.utils import sanitize_html
-from papers.utils import maybe_recapitalize_title
-from papers.utils import validate_orcid
 from papers.utils import datetime_to_date
+from papers.utils import iunaccent
+from papers.utils import maybe_recapitalize_title
 from papers.utils import remove_diacritics
 from papers.utils import remove_nones
-from papers.utils import iunaccent
-
+from papers.utils import sanitize_html
+from papers.utils import validate_orcid
 from publishers.models import DummyPublisher
 from publishers.models import OA_STATUS_CHOICES
 from publishers.models import OA_STATUS_PREFERENCE

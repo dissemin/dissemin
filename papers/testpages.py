@@ -23,11 +23,11 @@ from __future__ import unicode_literals
 
 import datetime
 
-from django.core.urlresolvers import reverse
-import django.test
 import html5lib
 
 from backend.tests import PrefilledTest
+from django.core.urlresolvers import reverse
+import django.test
 from papers.baremodels import BareName
 from papers.models import OaiRecord
 from papers.models import Paper
