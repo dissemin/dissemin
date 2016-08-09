@@ -25,11 +25,10 @@ This module defines a OAfr/TEI exporter, to be used with the SWORD interface to 
 
 from __future__ import unicode_literals
 
-from django.utils.translation import ugettext_lazy as _
-from lxml import etree
-
 from deposit.sword.metadata import addChild
 from deposit.sword.metadata import MetadataFormatter
+from django.utils.translation import ugettext_lazy as _
+from lxml import etree
 from papers.models import Paper
 
 HAL_TOPIC_CHOICES = [

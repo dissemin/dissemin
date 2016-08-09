@@ -23,8 +23,6 @@ from __future__ import unicode_literals
 import datetime
 import json
 
-from django.db import DataError
-from django.utils.http import urlencode
 import requests
 from requests.exceptions import RequestException
 
@@ -33,6 +31,8 @@ from backend.romeo import fetch_publisher
 from backend.utils import urlopen_retry
 from dissemin.settings import DOI_PROXY_DOMAIN
 from dissemin.settings import DOI_PROXY_SUPPORTS_BATCH
+from django.db import DataError
+from django.utils.http import urlencode
 from papers.baremodels import BareName
 from papers.baremodels import BareOaiRecord
 from papers.baremodels import BarePaper
@@ -47,8 +47,8 @@ from papers.utils import date_from_dateparts
 from papers.utils import jpath
 from papers.utils import sanitize_html
 from papers.utils import tolerant_datestamp_to_datetime
-from papers.utils import validate_orcid
 from papers.utils import valid_publication_date
+from papers.utils import validate_orcid
 from publishers.models import AliasPublisher
 
 ######## HOW THIS MODULE WORKS ###########
@@ -156,7 +156,7 @@ def parse_crossref_date(date):
             pass
     if 'raw' in date:
         ret = tolerant_datestamp_to_datetime(date['raw']).date()
-    if valid_publication_date(ret): 
+    if valid_publication_date(ret):
         return ret
 
 

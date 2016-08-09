@@ -28,11 +28,10 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from jsonview.decorators import json_view
 from jsonview.exceptions import BadRequest
-
+from papers.baremodels import BareName
+from papers.baremodels import BarePaper
 from papers.errors import MetadataSourceException
 from papers.models import Paper
-from papers.baremodels import BarePaper
-from papers.baremodels import BareName
 from papers.name import parse_comma_name
 from papers.utils import tolerant_datestamp_to_datetime
 

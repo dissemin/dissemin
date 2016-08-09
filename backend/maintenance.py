@@ -32,13 +32,17 @@ from __future__ import unicode_literals
 
 from collections import defaultdict
 
-
 import backend.crossref
 from backend.romeo import fetch_publisher
 from backend.tasks import change_publisher_oa_status
-from papers.models import Paper, Researcher, OaiRecord, Name, NameVariant
+from papers.models import Name
+from papers.models import NameVariant
+from papers.models import OaiRecord
+from papers.models import Paper
+from papers.models import Researcher
 from papers.utils import sanitize_html
-from publishers.models import AliasPublisher, Publisher
+from publishers.models import AliasPublisher
+from publishers.models import Publisher
 
 
 def cleanup_researchers():
@@ -202,5 +206,3 @@ def recompute_publisher_policies():
     """
     for p in Publisher.objects.all():
         change_publisher_oa_status(p.pk, p.classify_oa_status())
-
-

@@ -27,14 +27,13 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 from haystack import inputs
 from haystack.forms import SearchForm
-
 from papers.baremodels import PAPER_TYPE_CHOICES
+from papers.models import Department
+from papers.models import Paper
+from papers.models import Researcher
+from papers.name import has_only_initials
 from papers.utils import remove_diacritics
 from papers.utils import validate_orcid
-from papers.models import Department
-from papers.models import Researcher
-from papers.models import Paper
-from papers.name import has_only_initials
 from publishers.models import OA_STATUS_CHOICES_WITHOUT_HELPTEXT
 
 

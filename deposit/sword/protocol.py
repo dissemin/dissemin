@@ -20,16 +20,17 @@
 
 from __future__ import unicode_literals
 
-from django.conf import settings
-from django.utils.translation import ugettext as __
 import requests
-import sword2
 
 from deposit.forms import BaseMetadataForm
-from deposit.protocol import RepositoryProtocol, DepositError
+from deposit.protocol import DepositError
 from deposit.protocol import DepositResult
+from deposit.protocol import RepositoryProtocol
 from deposit.registry import protocol_registry
+from django.conf import settings
+from django.utils.translation import ugettext as __
 from papers.utils import kill_html
+import sword2
 from sword.metadata import DCFormatter
 
 

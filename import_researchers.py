@@ -3,7 +3,8 @@ from __future__ import unicode_literals
 
 from codecs import open
 
-from papers.models import Researcher, Department
+from papers.models import Department
+from papers.models import Researcher
 from papers.name import normalize_name_words
 
 last_name_f = 0

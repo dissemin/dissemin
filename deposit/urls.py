@@ -20,9 +20,8 @@
 
 from __future__ import unicode_literals
 
-from django.conf.urls import url
-
 from deposit import views
+from django.conf.urls import url
 
 urlpatterns = [
         url(r'^deposit_paper/(?P<pk>\d+)/$',

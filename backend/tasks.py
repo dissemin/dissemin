@@ -21,19 +21,24 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
-from datetime import datetime, timedelta
+from datetime import datetime
+from datetime import timedelta
+from statistics.models import AccessStatistics
 
+from backend.crossref import consolidate_publication
+from backend.orcid import OrcidPaperSource
+from backend.utils import run_only_once
 from celery import shared_task
 from celery.utils.log import get_task_logger
 from django.utils import timezone
-
-from backend.utils import run_only_once
-from backend.crossref import consolidate_publication
-from papers.models import PaperWorld, Researcher, Paper, Department, Institution
-from publishers.models import Journal, Publisher
 from papers.errors import MetadataSourceException
-from backend.orcid import OrcidPaperSource
-from statistics.models import AccessStatistics
+from papers.models import Department
+from papers.models import Institution
+from papers.models import Paper
+from papers.models import PaperWorld
+from papers.models import Researcher
+from publishers.models import Journal
+from publishers.models import Publisher
 
 logger = get_task_logger(__name__)
 

@@ -19,4 +19,3 @@
 """
 This app does not register any admin interfaces yet.
 """
-

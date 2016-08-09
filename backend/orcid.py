@@ -20,15 +20,13 @@
 
 from __future__ import unicode_literals
 
-
 #from requests.exceptions import RequestException
 #import json, requests
-from django.conf import settings
-
 from backend.crossref import convert_to_name_pair
 from backend.crossref import CrossRefAPI
 from backend.crossref import fetch_dois
 from backend.papersource import PaperSource
+from django.conf import settings
 from notification.api import add_notification_for
 from notification.api import delete_notification_per_tag
 import notification.levels as notification_levels
@@ -37,12 +35,13 @@ from papers.baremodels import BarePaper
 from papers.bibtex import parse_bibtex
 from papers.doi import to_doi
 from papers.errors import MetadataSourceException
-from papers.models import OaiSource, Name
+from papers.models import Name
+from papers.models import OaiSource
 from papers.name import parse_comma_name
 from papers.name import shallower_name_similarity
 from papers.orcid import OrcidProfile
-from papers.utils import parse_int
 from papers.utils import jpath
+from papers.utils import parse_int
 from papers.utils import try_date
 from papers.utils import validate_orcid
 
@@ -76,6 +75,7 @@ orcid_type_to_pubtype = {
         # Intellectual property section: skipped (-> 'other')
         'data-set': 'dataset',
     }
+
 
 def orcid_oai_source():
     return OaiSource.objects.get(identifier='orcid')
@@ -485,7 +485,7 @@ class OrcidPaperSource(PaperSource):
                 else:
                     ignored_papers.append(paper_or_metadata)
                     print('This metadata (%s) yields no paper.' %
-                        (unicode(paper_or_metadata)))
+                          (unicode(paper_or_metadata)))
 
             # Let's grab papers with DOIs found in our ORCiD profile.
             # FIXME(RaitoBezarius): if we fail here, we should get back the pub

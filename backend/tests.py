@@ -23,28 +23,39 @@ from __future__ import unicode_literals
 import datetime
 import unittest
 
+from backend.crossref import CrossRefAPI
+from backend.maintenance import cleanup_names
+from backend.maintenance import cleanup_researchers
+from backend.maintenance import create_publisher_aliases
+from backend.maintenance import recompute_publisher_policies
+from backend.maintenance import refetch_containers
+from backend.maintenance import refetch_publishers
+from backend.maintenance import update_paper_statuses
+from backend.orcid import affiliate_author_with_orcid
+from backend.orcid import OrcidPaperSource
+from backend.romeo import fetch_journal
+from backend.romeo import fetch_publisher
+from backend.romeo import find_journal_in_model
+from backend.romeo import perform_romeo_query
+from backend.tasks import fetch_everything_for_researcher
+from backend.tasks import remove_empty_profiles
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.management import call_command
 from django.test import override_settings
 from django.test import TestCase
 import haystack
 from lxml import etree
-
-from papers.models import Paper, Researcher, Name, OaiSource
-from papers.models import Institution, Department
-from publishers.models import Journal
-from backend.crossref import CrossRefAPI
-from backend.romeo import fetch_journal, find_journal_in_model
-from backend.romeo import perform_romeo_query, fetch_publisher
-from papers.baremodels import BarePaper, BareName, BareAuthor
-from backend.orcid import OrcidPaperSource, affiliate_author_with_orcid
-from backend.maintenance import cleanup_names, cleanup_researchers
-from backend.maintenance import refetch_containers, refetch_publishers
-from backend.maintenance import create_publisher_aliases
-from backend.maintenance import recompute_publisher_policies
-from backend.maintenance import update_paper_statuses
-from backend.tasks import remove_empty_profiles, fetch_everything_for_researcher
+from papers.baremodels import BareAuthor
+from papers.baremodels import BareName
+from papers.baremodels import BarePaper
+from papers.models import Department
+from papers.models import Institution
+from papers.models import Name
 from papers.models import OaiRecord
+from papers.models import OaiSource
+from papers.models import Paper
+from papers.models import Researcher
+from publishers.models import Journal
 
 TEST_INDEX = {
     'default': {
@@ -359,9 +370,9 @@ class MaintenanceTest(PrefilledTest):
         self.assertEqual(p.pdf_url, None)
         pdf_url = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
         OaiRecord.new(source=self.arxiv,
-                                  identifier='oai:arXiv.org:aunrisste',
-                                  about=p,
-                                  splash_url='http://www.perdu.com/',
-                                  pdf_url=pdf_url)
+                      identifier='oai:arXiv.org:aunrisste',
+                      about=p,
+                      splash_url='http://www.perdu.com/',
+                      pdf_url=pdf_url)
         update_paper_statuses()
         self.assertEqual(Paper.objects.get(pk=p.pk).pdf_url, pdf_url)

@@ -20,12 +20,11 @@
 
 from __future__ import unicode_literals
 
-from django.test import TestCase
-
 from backend.oai import BASEDCTranslator
 from backend.oai import CiteprocTranslator
 from backend.oai import OAIDCTranslator
 from backend.oai import OaiPaperSource
+from django.test import TestCase
 from oaipmh.error import BadArgumentError
 from papers.models import OaiRecord
 

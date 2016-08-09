@@ -22,21 +22,24 @@ from __future__ import unicode_literals
 
 from io import BytesIO
 
-import lxml.etree as ET
-from lxml.html import fromstring
 import requests
 import requests.exceptions
 
 from backend.utils import cached_urlopen_retry
 from dissemin.settings import ROMEO_API_DOMAIN
 from dissemin.settings import ROMEO_API_KEY
+import lxml.etree as ET
+from lxml.html import fromstring
 from papers.errors import MetadataSourceException
 from papers.utils import kill_html
 from papers.utils import nstrip
 from papers.utils import remove_diacritics
 from papers.utils import sanitize_html
-from publishers.models import AliasPublisher, Journal, Publisher
-from publishers.models import PublisherCondition, PublisherCopyrightLink
+from publishers.models import AliasPublisher
+from publishers.models import Journal
+from publishers.models import Publisher
+from publishers.models import PublisherCondition
+from publishers.models import PublisherCopyrightLink
 from publishers.models import PublisherRestrictionDetail
 
 # Minimum number of times we have seen a publisher name
@@ -249,7 +252,8 @@ def get_or_create_publisher(romeo_xml_description):
         raw_name = xml.findall('./name')[0].text.strip()
         name = fromstring(kill_html(sanitize_html(raw_name))).text
     except (KeyError, IndexError, AttributeError):
-        raise MetadataSourceException('RoMEO did not provide the publisher\'s name.')
+        raise MetadataSourceException(
+            'RoMEO did not provide the publisher\'s name.')
 
     alias = None
     try:
@@ -281,19 +285,22 @@ def get_or_create_publisher(romeo_xml_description):
     try:
         preprint = xml.findall('./preprints/prearchiving')[0].text.strip()
     except (KeyError, IndexError, AttributeError):
-        raise MetadataSourceException('RoMEO did not provide the preprint policy.')
+        raise MetadataSourceException(
+            'RoMEO did not provide the preprint policy.')
 
     postprint = None
     try:
         postprint = xml.findall('./postprints/postarchiving')[0].text.strip()
     except (KeyError, IndexError, AttributeError):
-        raise MetadataSourceException('RoMEO did not provide the postprint policy.')
+        raise MetadataSourceException(
+            'RoMEO did not provide the postprint policy.')
 
     pdfversion = None
     try:
         pdfversion = xml.findall('./pdfversion/pdfarchiving')[0].text.strip()
     except (KeyError, IndexError, AttributeError):
-        raise MetadataSourceException('RoMEO did not provide the pdf archiving policy.')
+        raise MetadataSourceException(
+            'RoMEO did not provide the pdf archiving policy.')
 
     # Compute OA status of the publisher
     status = 'UNK'

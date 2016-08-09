@@ -21,6 +21,7 @@
 
 import allauth.account.views
 from allauth.socialaccount import providers
+from dissemin.settings import UNIVERSITY_BRANDING
 from django.conf import settings
 from django.conf.urls import include
 from django.conf.urls import url
@@ -31,8 +32,6 @@ from django.shortcuts import redirect
 from django.shortcuts import render
 from django.views import generic
 from django.views.i18n import javascript_catalog
-
-from dissemin.settings import UNIVERSITY_BRANDING
 
 admin.autodiscover()
 

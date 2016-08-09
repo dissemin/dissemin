@@ -21,7 +21,6 @@
 from __future__ import unicode_literals
 
 import haystack
-
 from papers.models import Paper
 
 

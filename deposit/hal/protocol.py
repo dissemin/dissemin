@@ -24,14 +24,16 @@ from io import BytesIO
 import traceback
 from zipfile import ZipFile
 
-from django.utils.translation import ugettext as __
 import requests
-from lxml import etree
 
 from deposit.hal.forms import HALForm
 from deposit.hal.metadata import AOFRFormatter
-from deposit.protocol import RepositoryProtocol, DepositResult, DepositError
+from deposit.protocol import DepositError
+from deposit.protocol import DepositResult
+from deposit.protocol import RepositoryProtocol
 from deposit.registry import protocol_registry
+from django.utils.translation import ugettext as __
+from lxml import etree
 from papers.utils import kill_html
 
 try:

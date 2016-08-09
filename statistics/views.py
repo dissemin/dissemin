@@ -19,4 +19,3 @@
 """
 This app does not contain any view yet.
 """
-

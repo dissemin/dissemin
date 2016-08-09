@@ -62,6 +62,8 @@ from statistics.models import STATUS_CHOICES_HELPTEXT
 from caching.base import CachingManager
 from caching.base import CachingMixin
 from celery.result import AsyncResult
+from dissemin.settings import POSSIBLE_LANGUAGE_CODES
+from dissemin.settings import PROFILE_REFRESH_ON_LOGIN
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import JSONField
 from django.core.cache import cache
@@ -70,14 +72,17 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.db import DataError
 from django.db import models
-from django.utils.functional import cached_property
-from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
 from django.template.defaultfilters import slugify
-from solo.models import SingletonModel
-
-from dissemin.settings import POSSIBLE_LANGUAGE_CODES
-from dissemin.settings import PROFILE_REFRESH_ON_LOGIN
+from django.utils import timezone
+from django.utils.functional import cached_property
+from django.utils.translation import ugettext_lazy as _
+from papers.baremodels import BareAuthor
+from papers.baremodels import BareName
+from papers.baremodels import BareOaiRecord
+from papers.baremodels import BarePaper
+from papers.baremodels import MAX_NAME_LENGTH
+from papers.baremodels import PAPER_TYPE_CHOICES
+from papers.baremodels import PAPER_TYPE_PREFERENCE
 from papers.doi import to_doi
 from papers.errors import MetadataSourceException
 from papers.name import name_similarity
@@ -85,11 +90,9 @@ from papers.name import unify_name_lists
 from papers.orcid import OrcidProfile
 from papers.utils import affiliation_is_greater
 from papers.utils import validate_orcid
-from papers.baremodels import BarePaper, BareName, BareAuthor
-from papers.baremodels import BareOaiRecord, MAX_NAME_LENGTH
-from papers.baremodels import PAPER_TYPE_CHOICES, PAPER_TYPE_PREFERENCE
 from publishers.models import Journal
 from publishers.models import Publisher
+from solo.models import SingletonModel
 
 UPLOAD_TYPE_CHOICES = [
    ('preprint', _('Preprint')),

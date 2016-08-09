@@ -19,6 +19,7 @@
 
 from __future__ import unicode_literals
 
+from dissemin.settings import UNIVERSITY_BRANDING
 from django.core.paginator import EmptyPage
 from django.core.paginator import PageNotAnInteger
 from django.core.paginator import Paginator
@@ -26,11 +27,10 @@ from django.shortcuts import redirect
 from django.utils.translation import ugettext as _
 from django.views import generic
 from haystack.generic_views import SearchView
-
-from dissemin.settings import UNIVERSITY_BRANDING
 from publishers.forms import PublisherForm
-from publishers.models import Publisher, publishers_breadcrumbs
 from publishers.models import OA_STATUS_CHOICES
+from publishers.models import Publisher
+from publishers.models import publishers_breadcrumbs
 
 # Number of publishers per page in the publishers list
 NB_RESULTS_PER_PAGE = 20

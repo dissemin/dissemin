@@ -22,13 +22,14 @@ from __future__ import unicode_literals
 
 import json
 
-from django.utils.translation import ugettext as __
 import requests
 
-from deposit.protocol import RepositoryProtocol, DepositError
+from deposit.protocol import DepositError
 from deposit.protocol import DepositResult
+from deposit.protocol import RepositoryProtocol
 from deposit.registry import protocol_registry
 from deposit.zenodo.forms import ZenodoForm
+from django.utils.translation import ugettext as __
 from papers.utils import kill_html
 
 

@@ -26,12 +26,15 @@ import unittest
 
 import papers.name
 from papers.name import match_names
-from papers.name import split_name_words
+from papers.name import name_similarity
+from papers.name import name_unification
 from papers.name import normalize_name_words
+from papers.name import parse_comma_name
 from papers.name import recapitalize_word
-from papers.name import name_similarity, unify_name_lists
 from papers.name import shallower_name_similarity
-from papers.name import parse_comma_name, name_unification
+from papers.name import split_name_words
+from papers.name import unify_name_lists
+
 
 class MatchNamesTest(unittest.TestCase):
 
@@ -306,12 +309,12 @@ class ShallowerNameSimilarityTest(unittest.TestCase):
 
     def test_malformed(self):
         inputs = [
-            (('  ','  '),('John','Doe')),
-            (('Alfred','Kastler'),('    ','    ')),
-            ('',(None,'')),
+            (('  ', '  '), ('John', 'Doe')),
+            (('Alfred', 'Kastler'), ('    ', '    ')),
+            ('', (None, '')),
             ]
         for a, b in inputs:
-            self.assertEqual(shallower_name_similarity(a,b), False)
+            self.assertEqual(shallower_name_similarity(a, b), False)
 
 
 class ParseCommaNameTest(unittest.TestCase):
@@ -414,7 +417,7 @@ class NameUnificationTest(unittest.TestCase):
 
     def test_quotes(self):
         self.assertNotEqual(name_unification(
-            ('Alessandra',"D’Alessandro"),
+            ('Alessandra', "D’Alessandro"),
             ('A.', "d'Alessandro")),
             None)
 
@@ -496,17 +499,18 @@ class UnifyNameListsTest(unittest.TestCase):
         # http://dx.doi.org/10.1371/journal.pone.0156198
         # http://hdl.handle.net/11573/870611
         self.assertEqual(len(filter(lambda x: x[0] != None,
-            unify_name_lists(
+                                    unify_name_lists(
             [
-            ('Sarnelli','Giovanni'),
-            ("d'Alessandro",'Alessandra'),
+                ('Sarnelli', 'Giovanni'),
+                ("d'Alessandro", 'Alessandra'),
             ],
             [
-            ('Giovanni','Sarnelli'),
-            ('Giovanni', 'Domenico de Palma'),
-            ('Alessandra',"D'Alessandro"),
+                ('Giovanni', 'Sarnelli'),
+                ('Giovanni', 'Domenico de Palma'),
+                ('Alessandra', "D'Alessandro"),
             ]))),
             3)
+
 
 def load_tests(loader, tests, ignore):
     tests.addTests(doctest.DocTestSuite(papers.name))
