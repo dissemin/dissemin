@@ -85,9 +85,9 @@ class BaseMetadataForm(forms.Form):
     # Dummy field to store the paper id (required for dynamic fetching of the
     # abstract)
     paper_id = forms.IntegerField(
-            required=False,
-            widget=forms.HiddenInput
-            )
+        required=False,
+        widget=forms.HiddenInput
+    )
     abstract = forms.CharField(
             label=__('Abstract'),
             required=True,
