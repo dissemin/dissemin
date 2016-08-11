@@ -97,9 +97,10 @@ def combined_status_for_instance(paper):
 
 def combined_status_stats(queryset):
     aggregations = queryset.get_aggregation_results()
+    status = aggregations.get('status', {'buckets':[]})
     buckets = {
         bucket['key']: bucket['doc_count']
-        for bucket in aggregations['status']['buckets']
+        for bucket in status['buckets']
     }
     return BareAccessStatistics.from_dict(buckets)
 
