@@ -66,6 +66,7 @@ from dissemin.settings import POSSIBLE_LANGUAGE_CODES
 from dissemin.settings import PROFILE_REFRESH_ON_LOGIN
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import JSONField
+from django.contrib.postgres.fields import ArrayField
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
 from django.core.exceptions import ObjectDoesNotExist
@@ -599,9 +600,16 @@ class Paper(models.Model, BarePaper):
     #: authors have profiles on dissemin)
     researchers = models.ManyToManyField(Researcher)
 
+    #: List of all identifiers of this paper.
+    #: This includes the fingerprint, DOIs and OAI ids.
+    #: All of these values should be unique to a Paper instance
+    #: (although this is not enforced in the database yet).
+    identifiers = ArrayField(models.CharField(max_length=512), null=True, blank=True)
+
     last_modified = models.DateTimeField(auto_now=True, db_index=True)
     visible = models.BooleanField(default=True)
-    last_annotation = models.CharField(max_length=32, null=True, blank=True)
+    last_annotation = models.CharField(max_length=32, null=True,
+            blank=True) # TODO remove (unused)
 
     doctype = models.CharField(
         max_length=64, null=True, blank=True, choices=PAPER_TYPE_CHOICES)
