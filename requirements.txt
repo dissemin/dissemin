@@ -9,7 +9,7 @@ bibtexparser
 celery[redis]
 cryptography
 czipfile
-django==1.9
+django==1.10
 django-bootstrap-pagination
 django-cache-machine
 django-capture-tag
