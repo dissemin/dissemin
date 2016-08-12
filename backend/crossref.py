@@ -548,5 +548,5 @@ def consolidate_publication(publi):
             if attachment.get('mimeType') == 'application/pdf':
                 publi.pdf_url = attachment.get('url')
                 publi.save(update_fields=['pdf_url'])
-                publi.paper.update_availability()
+                publi.about.update_availability()
     return publi
