@@ -138,7 +138,10 @@ class PaperForm(SearchForm):
         required=False)
 
     def on_statuses(self):
-        return self.cleaned_data['status']
+        if self.is_valid():
+            return self.cleaned_data['status']
+        else:
+            return []
 
     def search(self):
         self.queryset = self.searchqueryset.models(Paper)

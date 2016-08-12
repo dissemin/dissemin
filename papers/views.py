@@ -42,7 +42,6 @@ from django.utils.translation import ugettext as _
 from django.utils.translation import ungettext
 from django.views import generic
 from haystack.generic_views import SearchView
-from haystack.query import EmptySearchQuerySet
 from notification.api import get_notifications
 from papers.doi import to_doi
 from papers.errors import MetadataSourceException
@@ -59,6 +58,7 @@ from publishers.models import Journal
 from publishers.models import Publisher
 from publishers.views import SlugDetailView
 from search import SearchQuerySet
+from search import EmptySearchQuerySet
 
 
 def fetch_on_orcid_login(sender, **kwargs):
