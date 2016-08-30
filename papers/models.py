@@ -606,6 +606,10 @@ class Paper(models.Model, BarePaper):
     #: (although this is not enforced in the database yet).
     identifiers = ArrayField(models.CharField(max_length=512), null=True, blank=True)
 
+    #: List of all records of this paper, stored as a JSON object
+    #: Each record is a dict with all the record information
+    records_list = JSONField(default=list)
+
     last_modified = models.DateTimeField(auto_now=True, db_index=True)
     visible = models.BooleanField(default=True)
     last_annotation = models.CharField(max_length=32, null=True,
@@ -625,7 +629,6 @@ class Paper(models.Model, BarePaper):
 
     def __init__(self, *args, **kwargs):
         super(Paper, self).__init__(*args, **kwargs)
-        self.just_created = False
 
     ### Relations to other models, reimplemented from :class:`BarePaper` ###
 
@@ -648,10 +651,10 @@ class Paper(models.Model, BarePaper):
     @property
     def oairecords(self):
         """
-        The list of OAI records associated with this paper, returned
-        as a queryset.
+        The list of OAI records associated with this paper,
+        returned as a list of :class:`BareOaiRecord` objects.
         """
-        return self.oairecord_set.all()
+        return [BareOaiRecord(**r) for r in self.records]
 
     def add_author(self, author, position=None):
         """
@@ -689,24 +692,7 @@ class Paper(models.Model, BarePaper):
         """
         # Clean up the record
         oairecord.cleanup_description()
-
-        # Test first if there is no other record with this DOI
-        doi = oairecord.doi
-        if doi:
-            matches = OaiRecord.objects.filter(doi=doi)[:1]
-            if matches:
-                rec = matches[0]
-                if rec.about != self:
-                    # we delete self
-                    # and keep rec.about, so that the oldest paper
-                    # is kept (otherwise, we break links!)
-                    rec.about.merge(self)
-                self.just_created = False
-
-        rec = OaiRecord.new(about=self,
-                            **oairecord.__dict__)
-        self.just_created = False
-        return rec
+        self.records_list.append(**oairecord.__dict__)
 
     ### Paper creation ###
 
@@ -729,18 +715,36 @@ class Paper(models.Model, BarePaper):
     def from_bare(cls, paper):
         """
         Saves a paper to the database if it is not already present.
-        The clustering algorithm is run to decide what authors should be
-        attributed to the paper.
 
         :returns: the :class:`Paper` instance created from the bare paper supplied.
         """
         try:
-            # Look up the fingerprint
-            fp = paper.fingerprint
-            matches = Paper.find_by_fingerprint(fp)
+            # Look up the paper in the database
+            paper.update_identifiers()
+            matches = list(Paper.find_by_identifiers(paper.identifiers))
+            
+            # We now have a list of papers whose identifiers overlap with
+            # the identifiers of the papers we are trying to add.
 
-            p = None
-            if matches:  # We have found a paper matching the fingerprint
+            if not matches:
+                # If there are no matches, that's very simple: we just INSERT
+                # the new paper in the database.
+                p = super(Paper, cls).from_bare(paper)
+
+            else:
+                # Otherwise, one or more matching papers were found.
+
+                # For instance, we might already have a paper in the database
+                # with the same DOI, and another paper with the same
+                # fingerprint (but these two are not equal yet, because the
+                # DOI metadata might yield another fingerprint).
+
+                # All these papers need to be merged into the same object.
+                # We choose an arbitrary matching order (because how else
+                # can we choose?)
+                for i in range(1,len(matches)):
+                    matches[0].merge(matches[i])
+                
                 p = matches[0]
                 if paper.visible and not p.visible:
                     p.visible = True
@@ -750,9 +754,6 @@ class Paper(models.Model, BarePaper):
                 for record in paper.oairecords:
                     p.add_oairecord(record)
                 p.update_availability()  # in Paper, this saves to the db
-            else:  # Otherwise we create a new paper
-                # this already saves the paper in the db
-                p = super(Paper, cls).from_bare(paper)
 
             return p
 
@@ -770,6 +771,7 @@ class Paper(models.Model, BarePaper):
             if author.researcher:
                 author.researcher.update_stats()
 
+    # TODO delete these two methods (unused)
     def already_asked_for_upload(self):
         if self.date_last_ask == None:
             return False
@@ -803,19 +805,15 @@ class Paper(models.Model, BarePaper):
     def is_deposited(self):
         return self.successful_deposits().count() > 0
 
-    def update_availability(self, cached_oairecords=[]):
+    def update_availability(self):
         """
         Updates the :class:`Paper`'s own `pdf_url` field
         based on its sources (:class:`OaiRecord`).
 
         This uses a non-trivial logic, hence it is useful to keep this result cached
         in the database row.
-
-        :param cached_oairecords: if the list of oairecords
-                to be considered is already available to the caller,
-                it can pass it to this function to save a db query
         """
-        super(Paper, self).update_availability(cached_oairecords)
+        super(Paper, self).update_availability()
         self.save()
         self.invalidate_cache()
 
@@ -947,7 +945,8 @@ class Paper(models.Model, BarePaper):
 
         self.visible = paper.visible or self.visible
 
-        OaiRecord.objects.filter(about=paper.pk).update(about=self.pk)
+        for r in paper.oairecords:
+            self.add_oairecord(r)
         self.update_authors(paper.authors, save_now=False)
 
         paper.invalidate_cache()
@@ -1104,13 +1103,11 @@ class OaiRecord(models.Model, BareOaiRecord):
         # Has the paper we are trying to add a record to been just
         # created? If so, we should not search for duplicate records in
         # the paper itself.
-        match = None
-        if not about.just_created:
-            # Search for duplicate records
-            match = OaiRecord.find_duplicate_records(
-                    about,
-                    splash_url,
-                    pdf_url)
+        # Search for duplicate records
+        match = OaiRecord.find_duplicate_records(
+                about,
+                splash_url,
+                pdf_url)
 
         # We don't search for records with the same identifier yet,
         # we will rather catch the exception thrown by the DB

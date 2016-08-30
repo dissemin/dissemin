@@ -157,6 +157,8 @@ class BarePaper(BareObject):
         'pdf_url',
         #! Visibility
         'visible',
+        #! The list of identifiers used for deduplication
+        'identifiers',
     ]
 
     _mandatory_fields = [
@@ -183,9 +185,8 @@ class BarePaper(BareObject):
         self.bare_oairecords = {}
         #! If there are lots of authors, how many are we hiding?
         self.nb_remaining_authors = None
-        #! This property is used in Paper to save SQL requests when
-        # adding OaiRecords
-        self.just_created = False
+        #! The 'identifiers' field is a list
+        self.identifiers = []
 
     @classmethod
     def from_bare(cls, bare_obj):
@@ -254,6 +255,7 @@ class BarePaper(BareObject):
             p.add_author(a, position=idx)
 
         p.fingerprint = p.new_fingerprint()
+        p.update_identifiers()
 
         return p
 
@@ -359,6 +361,18 @@ class BarePaper(BareObject):
             if record.source_id not in seen_sources:
                 seen_sources.add(record.source_id)
                 yield record
+
+    def update_identifiers(self):
+        """
+        Refreshes the list of identifiers for this paper
+        """
+        identifiers = set([p.fingerprint])
+        for r in self.oairecords:
+            identifiers.add(r.identifier)
+            if r.doi:
+                identifiers.add(r.doi)
+        self.identifiers = list(identifiers)
+
 
     # Authors ------------------------
 
@@ -602,6 +616,7 @@ class BarePaper(BareObject):
         """
         return 'http://scholar.google.com/scholar?'+urlencode({'q': remove_diacritics(self.title)})
 
+    # TODO delete this
     def core_link(self):
         """
         Link to search for the paper in CORE
