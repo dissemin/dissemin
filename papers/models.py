@@ -1212,9 +1212,9 @@ class OaiRecord(models.Model, BareOaiRecord):
                 return matches[0]
         else:
             matches = OaiRecord.objects.filter(
-                    Q(splash_url__endswith=short_splash) |
-                    Q(pdf_url__endswith=short_pdf) |
-                    Q(pdf_url__isnull=True), about=about)[:1]
+                    Q(splash_url__endswith=short_splash) &
+                    Q(pdf_url__endswith=short_pdf) &
+                    Q(pdf_url__isnull=False), about=about)[:1]
             for m in matches:
                 return m
 
