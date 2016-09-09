@@ -37,7 +37,6 @@ from backend.romeo import fetch_publisher
 from backend.tasks import change_publisher_oa_status
 from papers.models import Name
 from papers.models import NameVariant
-from papers.models import OaiRecord
 from papers.models import Paper
 from papers.models import Researcher
 from papers.utils import sanitize_html
@@ -88,6 +87,7 @@ def update_paper_statuses():
     papers = Paper.objects.all()
     for p in papers:
         p.update_availability()
+        p.save()
 
 
 def cleanup_titles():
@@ -100,21 +100,6 @@ def cleanup_titles():
     for p in papers:
         p.title = sanitize_html(p.title)
         p.save(update_fields=['title'])
-
-
-def cleanup_abstracts():
-    """
-    Run HTML sanitizing on the abstracts
-    (this is normally done on creation of the papers, but
-    not for old dumps of the database)
-    """
-    for p in OaiRecord.objects.all():
-        if p.description:
-            new_abstract = sanitize_html(p.description)
-            if new_abstract != p.description:
-                p.description = new_abstract
-                p.save()
-
 
 def recompute_fingerprints():
     """
@@ -156,10 +141,11 @@ def find_collisions():
 def create_publisher_aliases(erase_existing=True):
     # TODO: this might be more efficient with aggregates?
     counts = defaultdict(int)
-    for p in OaiRecord.objects.all():
-        if p.publisher_id:
-            pair = (p.publisher_name, p.publisher_id)
-            counts[pair] += 1
+    for paper in Paper.objects.all():
+        for p in paper.oairecords:
+            if p.publisher_id:
+                pair = (p.publisher_name, p.publisher_id)
+                counts[pair] += 1
 
     if erase_existing:
         AliasPublisher.objects.all().delete()
@@ -178,26 +164,33 @@ def refetch_publishers():
     """
     Tries to assign publishers to OaiRecords without Journals
     """
-    for p in OaiRecord.objects.filter(publisher__isnull=True, publisher_name__isnull=False):
-        publisher = fetch_publisher(p.publisher_name)
-        if publisher:
-            p.publisher = publisher
-            p.save(update_fields=['publisher'])
-            p.paper.update_availability()
-
+    for paper in Paper.objects.all():
+        for p in paper.oairecords:
+            if p.publisher_id or not p.publisher_name:
+                continue
+            publisher = fetch_publisher(p.publisher_name)
+            if publisher:
+                p.publisher = publisher
+                paper.add_oairecord(p)
+                paper.update_availability()
+                paper.save()
 
 def refetch_containers():
     """
     Tries to assign containers to OaiRecords without containers
     """
     # TODO
-    for p in OaiRecord.objects.filter(container__isnull=True):
-        metadata = backend.crossref.fetch_metadata_by_DOI(p.doi)
-        if metadata is None:
-            continue
-        p.container = metadata.get('container-title')
-        if p.container:
-            p.save()
+    for paper in Paper.objects.all():
+        for p in paper.oairecords:
+            if p.container:
+                continue
+            metadata = backend.crossref.fetch_metadata_by_DOI(p.doi)
+            if metadata is None:
+                continue
+            p.container = metadata.get('container-title')
+            if p.container:
+                paper.add_oairecord(p)
+                paper.save()
 
 
 def recompute_publisher_policies():

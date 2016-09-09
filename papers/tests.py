@@ -28,11 +28,10 @@ import django.test
 from papers.baremodels import BareName
 import papers.doi
 from papers.models import Name
-from papers.models import OaiRecord
 from papers.models import OaiSource
 from papers.models import Paper
 from papers.models import Researcher
-
+from papers.baremodels import BareAuthor
 
 class ResearcherTest(django.test.TestCase):
 
@@ -61,22 +60,6 @@ class ResearcherTest(django.test.TestCase):
         self.assertAlmostEqual(n.best_confidence, 0.)
 
 
-class OaiRecordTest(django.test.TestCase):
-
-    @classmethod
-    def setUpClass(self):
-        super(OaiRecordTest, self).setUpClass()
-        self.source = OaiSource.objects.get_or_create(identifier='arxiv',
-                                                      defaults={'name': 'arXiv', 'oa': False, 'priority': 1, 'default_pubtype': 'preprint'})
-
-    def test_find_duplicate_records_invalid_url(self):
-        paper = Paper.get_or_create('this is a title', [Name.lookup_name(('Jean', 'Saisrien'))],
-                                    datetime.date(year=2015, month=05, day=04))
-        # This used to throw an exception
-        OaiRecord.find_duplicate_records(
-            paper, 'ftp://dissem.in/paper.pdf', None)
-
-
 def load_tests(loader, tests, ignore):
     tests.addTests(doctest.DocTestSuite(papers.doi))
     return tests
@@ -88,22 +71,91 @@ class PaperTest(django.test.TestCase):
     def setUpClass(self):
         super(PaperTest, self).setUpClass()
 
+    def test_create(self):
+        """
+        Paper.create checks its arguments are non-empty
+        """
+        names = [BareName.create('Peter', 'Johnstone'),
+                 BareName.create('Xing', 'Li')]
+        pubdate = datetime.date(year=2014, month=9, day=4)
+        # No title
+        self.assertRaises(ValueError, Paper.create,
+                          '', names, pubdate)
+        # No authors
+        self.assertRaises(ValueError, Paper.create,
+                          'Excellent title', [], pubdate)
+        # No publication date
+        self.assertRaises(ValueError, Paper.create,
+                          'Excellent title', names, None)
+        # Invalid visibility
+        self.assertRaises(ValueError, Paper.create,
+                          'Excellent title', names, pubdate, visible="something")
+        # Not enough affiliations
+        self.assertRaises(ValueError, Paper.create,
+                          'Excellent title', names, pubdate, affiliations=['ENS'])
+
+    def test_authors(self):
+        """
+        p.authors returns a non-empty list of BareAuthors
+        """
+        ist = Paper.create('Groundbreaking Results',
+            [BareName.create('Alfred','Kastler'),
+             BareName.create('John', 'Dubuc')],
+            datetime.date(year=2015, month=3, day=2))
+        self.assertGreater(len(ist.authors), 0)
+        for a in ist.authors:
+            self.assertIsInstance(a, BareAuthor)
+            a.check_mandatory_fields()
+
+    def test_add_author(self):
+        """
+        p.add_author adds the author at the right place
+        """
+        names = [BareName.create('Peter', 'Johnstone'),
+                 BareName.create('Xing', 'Li'),
+                 BareName.create('John', 'Dubuc')]
+        p = Paper.create('The title', [names[0]],
+                             datetime.date(year=2012, month=1, day=9))
+
+        p.add_author(BareAuthor(name=names[2]))
+        self.assertEqual(len(p.authors), 2)
+
+        p.add_author(BareAuthor(name=names[1]), position=1)
+        self.assertListEqual(p.author_names(), names)
+
+        self.assertRaises(ValueError, p.add_author,
+                          BareAuthor(name=BareName.create(
+                              'Cantor', 'Bernstein')),
+                          position=8)
+
+    def test_displayed_authors(self):
+        """
+        p.displayed_authors returns a list of authors.
+        """
+        ist = Paper.create('Groundbreaking Results',
+            [BareName.create('Alfred','Kastler'),
+             BareName.create('John', 'Dubuc')],
+            datetime.date(year=2015, month=3, day=2))
+        self.assertEqual(len(ist.displayed_authors()), 2)
+        ist.MAX_DISPLAYED_AUTHORS = 1
+        self.assertEqual(len(ist.displayed_authors()), 1)
+
+
     def test_create_by_doi(self):
         # we recapitalize the DOI to make sure it is treated in a
         # case-insensitive way internally
         p = Paper.create_by_doi('10.1109/sYnAsc.2010.88')
-        p = Paper.from_bare(p)
+        p.save()
         self.assertEqual(
             p.title, 'Monitoring and Support of Unreliable Services')
         self.assertEqual(p.publications[0].doi, '10.1109/synasc.2010.88')
 
     def test_publication_pdf_url(self):
         # This paper is gold OA
-        p = Paper.create_by_doi('10.1007/BF02702259')
-        p = Paper.from_bare(p)
+        p = Paper.create_by_doi('10.1371/journal.pone.0094783')
+        p.save()
         # so the pdf_url of the publication should be set
-        self.assertEqual(p.publications[0].pdf_url.lower(
-            ), 'http://dx.doi.org/10.1007/BF02702259'.lower())
+        self.assertNotEqual(p.publications[0].pdf_url, None)
 
     def test_create_no_authors(self):
         p = Paper.create_by_doi('10.1021/cen-v043n050.p033')
@@ -116,7 +168,7 @@ class PaperTest(django.test.TestCase):
     def test_merge(self):
         # Get a paper with CrossRef metadata
         p = Paper.create_by_doi('10.1111/j.1744-6570.1953.tb01038.x')
-        p = Paper.from_bare(p)
+        p.save()
         # Create a copy with slight variations
         names = [BareName.create_bare(f, l) for (f, l) in
                  [('M. H.', 'Jones'), ('R. H.', 'Haase'), ('S. F.', 'Hulbert')]]

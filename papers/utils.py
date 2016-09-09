@@ -28,6 +28,7 @@ from lxml.html.clean import Cleaner
 from titlecase import titlecase
 import unicode_tex
 from unidecode import unidecode
+from papers.doi import to_doi
 
 ### General string utilities ###
 
@@ -325,6 +326,29 @@ def urlize(val):
     if val and not val.startswith('http://') and not val.startswith('https://'):
         val = 'http://'+val
     return val
+
+https_re = re.compile(r'https?(.*)')
+def canonicalize_url(url):
+    """
+    Normalizes an URL for equality comparison between URLs:
+    removes the 'https?' prefix or converts to DOI
+
+    >>> canonicalize_url('https://arxiv.org/abs/1307.3832')
+    u'://arxiv.org/abs/1307.3832'
+    >>> canonicalize_url('http://arxiv.org/abs/1307.3832')
+    u'://arxiv.org/abs/1307.3832'
+    >>> canonicalize_url('https://dx.doi.org/10.1007/978-0-387-39940-9_5016')
+    u'10.1007/978-0-387-39940-9_5016'
+    """
+    if not url:
+        return
+    doi = to_doi(url)
+    if doi:
+        return doi
+    match = https_re.match(url.strip())
+    if match:
+        return match.group(1)
+
 
 # JSON utilities !
 

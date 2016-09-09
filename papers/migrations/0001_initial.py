@@ -188,7 +188,7 @@ class Migration(migrations.Migration):
             ],
             options={
             },
-            bases=(models.Model,baremodels.BarePaper),
+            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='Publication',

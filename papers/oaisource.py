@@ -18,32 +18,32 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
+
 from __future__ import unicode_literals
+from django.db import models
+from caching.base import CachingManager
+from caching.base import CachingMixin
 
-from deposit.forms import FormWithAbstract
-from django import forms
-from django.utils.translation import ugettext as __
+from papers.categories import PAPER_TYPE_CHOICES
+from papers.categories import PAPER_TYPE_PREFERENCE
 
-ZENODO_LICENSES_CHOICES = [
-   ('cc-zero',
-    __('Creative Commons CCZero (CC0)')),
-   ('cc-by',
-    __('Creative Commons Attribution (CC-BY)')),
-   ('cc-by-sa',
-    __('Creative Commons Attribution-ShareAlike (CC-BY-SA)')),
-   ('cc-by-nc-4.0',
-    __('Creative Commons Attribution-NonCommercial (CC-BY-NC)')),
-   ('cc-by-nd-4.0',
-    __('Creative Commons Attribution-NoDerivatives (CC-BY-ND)')),
-   ('other-open',
-    __('Other open license')),
- ]
+class OaiSource(CachingMixin, models.Model):
+    objects = CachingManager()
+
+    identifier = models.CharField(max_length=300, unique=True)
+    name = models.CharField(max_length=100)
+    oa = models.BooleanField(default=False)
+    priority = models.IntegerField(default=1)
+    default_pubtype = models.CharField(
+        max_length=64, choices=PAPER_TYPE_CHOICES)
+
+    # Fetching properties
+    last_status_update = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "OAI source"
 
 
-class ZenodoForm(FormWithAbstract):
-    license = forms.ChoiceField(
-            label=__('License'),
-            choices=ZENODO_LICENSES_CHOICES,
-            initial='other-open',
-            widget=forms.RadioSelect(attrs={'class': 'radio-margin'})
-            )

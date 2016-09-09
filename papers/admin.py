@@ -20,7 +20,6 @@ from django.contrib import admin
 from papers.models import Department
 from papers.models import Institution
 from papers.models import Name
-from papers.models import OaiRecord
 from papers.models import OaiSource
 from papers.models import Paper
 from papers.models import PaperWorld
@@ -33,18 +32,10 @@ class NameInline(admin.TabularInline):
     extra = 0
 
 
-class OaiInline(admin.TabularInline):
-    model = OaiRecord
-    extra = 0
-
 
 class PaperAdmin(admin.ModelAdmin):
     fields = ['title', 'pubdate', 'visible', 'doctype', 'oa_status']
     list_display = ('title', 'pubdate', 'visible', 'doctype', 'oa_status')
-
-
-class OaiRecordAdmin(admin.ModelAdmin):
-    raw_id_fields = ('about',)
 
 
 class ResearcherAdmin(admin.ModelAdmin):
@@ -56,5 +47,4 @@ admin.site.register(Researcher, ResearcherAdmin)
 admin.site.register(Name)
 admin.site.register(Paper, PaperAdmin)
 admin.site.register(OaiSource)
-admin.site.register(OaiRecord, OaiRecordAdmin)
 admin.site.register(PaperWorld, SingletonModelAdmin)

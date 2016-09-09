@@ -25,7 +25,7 @@ from datetime import datetime
 from datetime import timedelta
 from statistics.models import AccessStatistics
 
-from backend.crossref import consolidate_publication
+from backend.crossref import prefetch_abstract_for_paper
 from backend.orcid import OrcidPaperSource
 from backend.utils import run_only_once
 from celery import shared_task
@@ -110,11 +110,7 @@ def consolidate_paper(pk):
     p = None
     try:
         p = Paper.objects.get(pk=pk)
-        abstract = p.abstract or ''
-        for pub in p.publications:
-            pub = consolidate_publication(pub)
-            if pub.description and len(pub.description) > len(abstract):
-                break
+        return prefetch_abstract_for_paper(p)
     except Paper.DoesNotExist:
         print "consolidate_paper: unknown paper %d" % pk
 

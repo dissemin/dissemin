@@ -26,7 +26,8 @@ from backend.oai import OAIDCTranslator
 from backend.oai import OaiPaperSource
 from django.test import TestCase
 from oaipmh.error import BadArgumentError
-from papers.models import OaiRecord
+from papers.baremodels import BareOaiRecord
+from papers.models import Paper
 
 
 class OaiTest(TestCase):
@@ -42,14 +43,17 @@ class OaiTest(TestCase):
         return self.oai.create_paper_by_identifier(*args, **kwargs)
 
     def delete(self, identifier):
-        try:
-            r = OaiRecord.objects.get(identifier=identifier)
-            p = r.about
-            r.delete()
-            if p.is_orphan():
-                p.delete()
-        except OaiRecord.DoesNotExist:
-            pass
+        p = None
+        for paper in Paper.find_by_identifiers([identifier]):
+            p = paper
+            break
+        if p is None:
+            return
+        p.remove_oairecord(identifier)
+        if p.is_orphan():
+            p.delete()
+        else:
+            p.save()
 
     def test_create_no_match(self):
         """
@@ -85,8 +89,10 @@ class OaiTest(TestCase):
 
         # It's the same thing!
         self.assertEqual(new_paper, hal_paper)
-        self.assertSetEqual(set(new_paper.oairecords),
-                            set(hal_paper.oairecords))
+        self.assertSetEqual(set([r.identifier for r in
+                            new_paper.oairecords]),
+                            set([r.identifier for r in 
+                            hal_paper.oairecords]))
         self.assertListEqual(new_paper.bare_author_names(),
                              hal_paper.bare_author_names())
         self.assertEqual(new_paper.title, hal_paper.title)
@@ -114,8 +120,8 @@ class OaiTest(TestCase):
         # that they are the same row in the database, i.e. have same id)
         self.assertEqual(new_paper, hal_paper)
         # the new set of records is the old one plus the new record
-        records.add(OaiRecord.objects.get(
-            identifier='ftciteseerx:oai:CiteSeerX.psu:10.1.1.487.869'))
+        records.add(
+            BareOaiRecord(identifier='ftciteseerx:oai:CiteSeerX.psu:10.1.1.487.869'))
         self.assertSetEqual(set(new_paper.oairecords), records)
 
     def test_create_match_doi(self):
@@ -140,7 +146,10 @@ class OaiTest(TestCase):
         # paper remains (otherwise we create broken links!)
         self.assertEqual(first, new_paper)
 
-        records.add(OaiRecord.objects.get(identifier=second_id))
+        new_oairecord = None
+        for r in new_paper.oairecords:
+            if r.identifier == second_id:
+                records.add(r)
         self.assertEqual(set(new_paper.oairecords), records)
 
     def test_update_pdf_url(self):

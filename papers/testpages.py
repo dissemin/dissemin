@@ -29,7 +29,6 @@ from backend.tests import PrefilledTest
 from django.core.urlresolvers import reverse
 import django.test
 from papers.baremodels import BareName
-from papers.models import OaiRecord
 from papers.models import Paper
 from papers.models import Researcher
 from papers.utils import overescaped_re
@@ -158,8 +157,9 @@ class PaperPagesTest(RenderingTest):
             self.assertTrue(not p.is_orphan())
 
     def test_paper_by_doi(self):
-        publi = OaiRecord.objects.filter(doi__isnull=False)[0]
-        self.checkPermanentRedirect('paper-doi', kwargs={'doi': publi.doi})
+        doi = '10.1007/978-3-642-14363-2_7'
+        p = Paper.create_by_doi(doi)
+        self.checkPermanentRedirect('paper-doi', kwargs={'doi': doi})
 
     def test_paper_with_empty_slug(self):
         """

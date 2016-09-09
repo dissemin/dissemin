@@ -27,46 +27,28 @@ without name ambiguity resolution.
 
 from __future__ import unicode_literals
 
-import hashlib
 import re
-from urllib import quote  # for the Google Scholar and CORE link
-from urllib import urlencode
 
 from django.apps import apps
 from django.core.exceptions import ObjectDoesNotExist
 from django.template.defaultfilters import slugify
 from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
-from papers.fingerprint import create_paper_plain_fingerprint
+from papers.utils import sanitize_html
 from papers.utils import datetime_to_date
 from papers.utils import iunaccent
-from papers.utils import maybe_recapitalize_title
 from papers.utils import remove_diacritics
 from papers.utils import remove_nones
-from papers.utils import sanitize_html
 from papers.utils import validate_orcid
+from papers.utils import tolerant_datestamp_to_datetime
+from papers.categories import PAPER_TYPE_CHOICES
+from papers.categories import PAPER_TYPE_PREFERENCE
+from papers.oaisource import OaiSource
 from publishers.models import DummyPublisher
+from publishers.models import Journal
+from publishers.models import Publisher
 from publishers.models import OA_STATUS_CHOICES
 from publishers.models import OA_STATUS_PREFERENCE
-
-PAPER_TYPE_CHOICES = [
-   ('journal-article', _('Journal article')),
-   ('proceedings-article', _('Proceedings article')),
-   ('book-chapter', _('Book chapter')),
-   ('book', _('Book')),
-   ('journal-issue', _('Journal issue')),
-   ('proceedings', _('Proceedings')),
-   ('reference-entry', _('Entry')),
-   ('poster', _('Poster')),
-   ('report', _('Report')),
-   ('thesis', _('Thesis')),
-   ('dataset', _('Dataset')),
-   ('preprint', _('Preprint')),
-   ('other', _('Other document')),
-   ]
-
-PAPER_TYPE_PREFERENCE = [x for (x, y) in PAPER_TYPE_CHOICES]
-
 MAX_NAME_LENGTH = 256
 
 
@@ -78,7 +60,7 @@ class BareObject(object):
     into a Name, use `Name.from_bare(b)`.
     """
     _bare_fields = []
-    _bare_foreign_key_fields = []
+    _bare_foreign_key_fields = {}
     _mandatory_fields = []
 
     def __init__(self, *args, **kwargs):
@@ -86,21 +68,73 @@ class BareObject(object):
         Keyword arguments can be used to set fields of this bare object.
         """
         super(BareObject, self).__init__()
-        for f in self._bare_fields + self._bare_foreign_key_fields:
+        for f in self._bare_fields + self._bare_foreign_key_fields.keys():
             if not hasattr(self, f):
-                self.__dict__[f] = None
+                setattr(self, f, None)
         for f in self._bare_foreign_key_fields:
             if f+'_id' not in self.__dict__:
-                self.__dict__[f+'_id'] = None
+                setattr(self, f+'_id', None)
+                setattr(self, '_%s_cache' % f, None)
+
         for k, v in kwargs.items():
-            if k in self._bare_fields:
-                self.__dict__[k] = v
-            elif k in self._bare_foreign_key_fields:
-                self.__dict__[k] = v
-                if hasattr(v, 'id'):
-                    self.__dict__[k+'_id'] = v.id
-                else:
-                    self.__dict__[k+'_id'] = None
+            self.__setattr__(k, v, restrict_to_fields=True)
+
+    def __setattr__(self, k, v, restrict_to_fields=False):
+        if k in self._bare_fields:
+            object.__setattr__(self, k, v)
+        elif k in self._bare_foreign_key_fields:
+            object.__setattr__(self, '_%s_cache' % k, v)
+            if v is None:
+                object.__setattr__(self, k+'_id', None)
+            elif v.id:
+                object.__setattr__(self, k+'_id', v.id)
+            else:
+                raise ValueError(
+                    'Assigning an unsaved instance to a ForeignKey')
+        elif (k.endswith('_id') and k[:-3] in
+                    self._bare_foreign_key_fields):
+            cached_instance_key = '_%s_cache' % k[:-3]
+            cached_instance = self.__dict__.get(cached_instance_key)
+            self.__dict__[k] = v
+            if cached_instance and cached_instance.id != v:
+                self.__dict__[cached_instance_key] = None
+        elif restrict_to_fields:
+            raise ValueError('Unexpected keyword argument '+k)
+        else:
+            self.__dict__[k] = v
+
+    def __getattr__(self, k):
+        if k in self._bare_foreign_key_fields:
+            cached_value = self.__dict__.get(k)
+            if cached_value:
+                return cached_value
+            else:
+                id = self.__dict__.get(k+'_id')
+                if id:
+                    cls = self._bare_foreign_key_fields[k]
+                    return cls.objects.get(id=id)
+        else:
+            self.__dict__[k]
+
+    def fields_dict(self, foreign_ids=False):
+        """
+        Returns a dict with the fields' values
+        
+        :param foreign_ids: if True, stores values of foreign fields
+            as ids rather than as model instances.
+        """
+        dct = {}
+        fields = self._bare_fields + self._bare_foreign_key_fields.keys()
+        for k, v in self.__dict__.items():
+            if (k in self._bare_fields or
+                (k.endswith('_id') and
+                 k[:-3] in self._bare_foreign_key_fields and
+                 foreign_ids) or
+                (k in self._bare_foreign_key_fields and
+                 not foreign_ids)):
+                dct[k] = v
+                
+        return dct
 
     @classmethod
     def from_bare(cls, bare_obj):
@@ -110,13 +144,7 @@ class BareObject(object):
         in the bare object to an instance of the current class, which
         is expected to be a subclass of the bare object's class.
         """
-        kwargs = {}
-        for k, v in bare_obj.__dict__.items():
-            if k in cls._bare_fields:
-                kwargs[k] = v
-            elif k in cls._bare_foreign_key_fields:
-                kwargs[k] = v
-
+        kwargs = bare_obj.fields_dict()
         ist = cls(**kwargs)
         return ist
 
@@ -132,520 +160,10 @@ class BareObject(object):
         The list of mandatory fields for the class should be stored in `_mandatory_fields`.
         """
         for field in self._mandatory_fields:
-            if not self.__dict__.get(field):
+            if (not hasattr(self, field) and
+                not hasattr(self, field+'_id')):
                 raise ValueError('No %s provided to create a %s.' %
                                  (field, self.__class__.__name__))
-
-
-class BarePaper(BareObject):
-    """
-    This class is the bare analogue to :class:`Paper`. Its authors are
-    lists of :class:`BareName`, and its publications and OAI records are also bare.
-    """
-    _bare_fields = [
-        #! The title of the paper
-        'title',
-        #! The fingerprint (robust version of the title, authors and year)
-        'fingerprint',
-        #! The publication date
-        'pubdate',
-        #! The document type
-        'doctype',
-        #! The OA status
-        'oa_status',
-        #! The url where we think the full text is available
-        'pdf_url',
-        #! Visibility
-        'visible',
-        #! The list of identifiers used for deduplication
-        'identifiers',
-    ]
-
-    _mandatory_fields = [
-        'title',
-        'pubdate',
-        'fingerprint',
-    ]
-
-    # Value above which we consider a paper to have too many authors to be
-    # displayed. See BarePaper.has_many_authors
-    MAX_DISPLAYED_AUTHORS = 15
-
-    @property
-    def slug(self):
-        return slugify(self.title)
-
-    # Creation
-
-    def __init__(self, *args, **kwargs):
-        super(BarePaper, self).__init__(*args, **kwargs)
-        #! The authors: a list of :class:`BareName`
-        self.bare_authors = []
-        #! The OAI records associated with this paper: dict of :class:`BareOaiRecord` indexed by their identifiers
-        self.bare_oairecords = {}
-        #! If there are lots of authors, how many are we hiding?
-        self.nb_remaining_authors = None
-        #! The 'identifiers' field is a list
-        self.identifiers = []
-
-    @classmethod
-    def from_bare(cls, bare_obj):
-        """
-        Creates an instance of this class from a :class:`BarePaper`.
-        """
-        bare_obj.update_availability()
-        bare_obj.fingerprint = bare_obj.new_fingerprint()
-        ist = super(BarePaper, cls).from_bare(bare_obj)
-        for idx, a in enumerate(bare_obj.authors):
-            ist.add_author(a, position=idx)
-        ist.save()
-        ist.just_created = True
-        for r in bare_obj.oairecords:
-            ist.add_oairecord(r)
-        return ist
-
-    @classmethod
-    def create(cls, title, author_names, pubdate, visible=True,
-               affiliations=None, orcids=None):
-        """
-        Creates a (bare) paper. To save it to the database, we
-        need to run the clustering algorithm to resolve Researchers for the authors,
-        using `from_bare` from the (non-bare) :class:`Paper` subclass..
-
-        :param title: The title of the paper (as a string). If it is too long for the database,
-                      ValueError is raised.
-        :param author_names: The ordered list of author names, as Name objects.
-        :param pubdate: The publication date, as a python date object
-        :param visible: The visibility of the paper if it is created. If another paper
-                    exists, the visibility will be set to the maximum of the two possible
-                    visibilities.
-        :param affiliations: A list of (possibly None) affiliations for the authors. It has to
-                    have the same length as the list of author names.
-        :param orcids: same as affiliations, but for ORCID ids.
-        """
-        if not title or not author_names or not pubdate:
-            raise ValueError(
-                "A title, pubdate and authors have to be provided to create a paper.")
-
-        if affiliations is not None and len(author_names) != len(affiliations):
-            raise ValueError(
-                "The number of affiliations and authors have to be equal.")
-        if orcids is not None and len(author_names) != len(orcids):
-            raise ValueError(
-                "The number of ORCIDs (or Nones) and authors have to be equal.")
-        if type(visible) != bool:
-            raise ValueError("Invalid paper visibility: %s" % unicode(visible))
-
-        title = sanitize_html(title)
-        title = maybe_recapitalize_title(title)
-
-        p = cls()
-        p.title = title
-        p.pubdate = pubdate  # pubdate will be checked in fingerprint computation
-        p.visible = visible
-        for idx, n in enumerate(author_names):
-            a = BareAuthor()
-            a.name = n
-            if affiliations is not None:
-                a.affiliation = affiliations[idx]
-            if orcids is not None:
-                orcid = validate_orcid(orcids[idx])
-                if orcid:
-                    a.orcid = orcid
-            p.add_author(a, position=idx)
-
-        p.fingerprint = p.new_fingerprint()
-        p.update_identifiers()
-
-        return p
-
-    ### Properties to be reimplemented by non-bare Paper ###
-    @property
-    def authors(self):
-        """
-        The list of authors. They are bare in :class:`BarePaper`. In
-        other implementations, they can be arbitrary iterables of subclasses
-        of :class:`BareAuthor`.
-        They are sorted in their natural order on paper.
-        """
-        return self.bare_authors
-
-    @property
-    def oairecords(self):
-        """
-        The list of OAI records associated with this paper. It can
-        be arbitrary iterables of subclasses of :class:`BareOaiRecord`.
-        """
-        return self.bare_oairecords.values()
-
-    def add_author(self, author, position=None):
-        """
-        Adds a new author to the paper, at the end of the list.
-
-        :param position: if provided, set the author to the given position.
-
-        :returns: the :class:`BareAuthor` that was added (it can differ in subclasses)
-        """
-        if position is not None:
-            if not (position >= 0 and position <= len(self.bare_authors)):
-                raise ValueError("Invalid author position '%s' of %d" %
-                                 (str(position), len(self.bare_authors)))
-            self.bare_authors.insert(position, author)
-        else:
-            self.bare_authors.append(author)
-        return author
-
-    def set_researcher(self, position, researcher_id):
-        """
-        Sets the researcher_id for the author at the given position
-        (0-indexed)
-        """
-        if position < 0 or position > len(self.authors_list):
-            raise ValueError('Invalid position provided')
-        self.bare_authors[position].researcher_id = researcher_id
-
-    def add_oairecord(self, oairecord):
-        """
-        Adds a new OAI record to the paper
-
-        :returns: the :class:`BareOaiRecord` that was added (it can differ in subclasses)
-        """
-        oairecord.check_mandatory_fields()
-        self.bare_oairecords[oairecord.identifier] = oairecord
-        # update the publication date
-        self.pubdate = datetime_to_date(self.pubdate)
-        if oairecord.pubdate:
-            new_pubdate = datetime_to_date(oairecord.pubdate)
-            if new_pubdate > self.pubdate:
-                self.pubdate = new_pubdate
-
-        self.just_created = False
-        return oairecord
-
-    ### Generic properties that should not need to be reimplemented ###
-    @property
-    def year(self):
-        """
-        Year of publication of the paper.
-        """
-        return self.pubdate.year
-
-    # OAI records -----------------
-
-    @cached_property
-    def sorted_oai_records(self):
-        """
-        OAI records sorted by decreasing order of priority
-        (lower priority means poorer overall quality of the source).
-        """
-        # Ordered in Python because the list of records is typically quite
-        # small (less than 10 items)
-        return sorted(self.oairecords, key=lambda r: -r.priority)
-
-    @cached_property
-    def prioritary_oai_records(self):
-        """
-        OAI records from custom sources we trust (positive priority)
-        """
-        # Filtered in Python because the list of records is typically quite
-        # small (less than 10 items)
-        return filter(lambda r: r.priority > 0, self.sorted_oai_records)
-
-    @property
-    def unique_prioritary_oai_records(self):
-        """
-        OAI records from sources we trust, with unique source.
-        """
-        seen_sources = set()
-        for record in self.prioritary_oai_records:
-            if record.source_id not in seen_sources:
-                seen_sources.add(record.source_id)
-                yield record
-
-    def update_identifiers(self):
-        """
-        Refreshes the list of identifiers for this paper
-        """
-        identifiers = set([p.fingerprint])
-        for r in self.oairecords:
-            identifiers.add(r.identifier)
-            if r.doi:
-                identifiers.add(r.doi)
-        self.identifiers = list(identifiers)
-
-
-    # Authors ------------------------
-
-    def author_names(self):
-        """
-        The list of Name instances of the authors
-        """
-        return [a.name for a in self.authors]
-
-    def affiliations(self):
-        """
-        The list of affiliations of all authors
-        """
-        return [a.affiliation for a in self.authors]
-
-    def orcids(self):
-        """
-        The list of ORCIDs of all authors
-        """
-        return [a.orcid for a in self.authors]
-
-    def bare_author_names(self):
-        """
-        The list of name pairs (first,last) of the authors
-        """
-        return [(name.first, name.last) for name in self.author_names()]
-
-    @property
-    def author_count(self):
-        """
-        Number of authors.
-        """
-        return len(self.authors)
-
-    @property
-    def has_many_authors(self):
-        """
-        When the paper has more than some arbitrary number of authors.
-        """
-        return self.author_count > self.MAX_DISPLAYED_AUTHORS
-
-    @cached_property
-    def interesting_authors(self):
-        """
-        The list of authors to display when the complete list is too long.
-        """
-        # TODO: Better selection
-        lst = self.authors[:self.MAX_DISPLAYED_AUTHORS]
-        self.nb_remaining_authors = self.author_count - len(lst)
-        return lst
-
-    def displayed_authors(self):
-        """
-        Returns the full list of authors if there are not too many of them,
-        otherwise returns only the interesting_authors()
-        """
-        if self.has_many_authors:
-            return self.interesting_authors
-        else:
-            return self.authors
-
-    def check_authors(self):
-        """
-        Check the sanity of authors
-        (for now, only that the list is non-empty)
-        """
-        if not self.authors:
-            raise ValueError("Empty authors list")
-        # TODO more checks here?
-
-    # Publications ---------------------------------------------
-
-    @property
-    def publications(self):
-        """
-        The OAI records with publication metadata (i.e. journal title and
-        publisher name).
-        These records can potentially be associated with publisher policies.
-        """
-        res = []
-        # we don't yield because some functions actually do len( ) on the
-        # output of this method…
-        for r in self.oairecords:
-            if r.has_publication_metadata():
-                res.append(r)
-        return res
-
-    def first_publications(self):
-        """
-        The list of the 3 first OAI records with publication metadata
-        associated with this paper (in most cases, that should return *all*
-        such records, but in some nasty cases many publications end up
-        merged, and it is not very elegant to show all of them
-        to the users).
-        """
-        return list(self.publications)[:3]
-
-    def publications_with_unique_publisher(self):
-        """
-        Iterable of publications where subsequent publications with
-        the same publisher are removed.
-        """
-        seen_publishers = set()
-        for publication in self.publications:
-            if publication.publisher_id and publication.publisher_id not in seen_publishers:
-                seen_publishers.add(publication.publisher_id)
-                yield publication
-            elif publication.publisher_name not in seen_publishers:
-                seen_publishers.add(publication.publisher_name)
-                yield publication
-
-    def publisher(self):
-        """
-        Returns the first publisher we can find for this paper, otherwise
-        a :class:`DummyPublisher`
-        """
-        for publication in self.publications:
-            return publication.publisher_or_default()
-        return DummyPublisher()
-
-    # Fingerprint -----------------------------------------------
-    def plain_fingerprint(self, verbose=False):
-        """
-        Debugging function to display the plain fingerprint
-        """
-        fp = create_paper_plain_fingerprint(
-            self.title, self.bare_author_names(), self.year)
-        if verbose:
-            print fp
-        return fp
-
-    def new_fingerprint(self, verbose=False):
-        """
-        The fingerprint of the paper, taking into account the changes
-        that may have occured since the last computation of the fingerprint.
-        This does not update the `fingerprint` field, just computes its candidate value.
-        """
-        buf = self.plain_fingerprint(verbose)
-        m = hashlib.md5()
-        m.update(buf)
-        return m.hexdigest()
-
-    # Abstract -------------------------------------------------
-    @cached_property
-    def abstract(self):
-        best_abstract = ''
-        for rec in self.oairecords:
-            if rec.description and len(rec.description) > len(best_abstract):
-                best_abstract = rec.description
-        return best_abstract
-
-    # Updates ---------------------------------------------------
-    def update_availability(self, cached_oairecords=[]):
-        """
-        Updates the :class:`BarePaper`'s own `pdf_url` field
-        based on its sources (:class:`BareOaiRecord`).
-
-        This uses a non-trivial logic, hence it is useful to keep this result cached
-        in the database row.
-
-        :param cached_oairecords: the list of OaiRecords if we already have it
-                           from somewhere (otherwise it is fetched)
-        """
-        records = cached_oairecords or self.oairecords
-        records = sorted(records, key=(lambda r: -r.priority))
-
-        self.pdf_url = None
-        oa_idx = len(OA_STATUS_PREFERENCE)-1
-        type_idx = len(PAPER_TYPE_PREFERENCE)-1
-        source_found = False
-
-        if self.doctype in PAPER_TYPE_PREFERENCE:
-            type_idx = PAPER_TYPE_PREFERENCE.index(self.doctype)
-
-        for rec in records:
-            if rec.has_publication_metadata():
-                # OA status
-                cur_status = rec.oa_status()
-                try:
-                    idx = OA_STATUS_PREFERENCE.index(cur_status)
-                except ValueError:
-                    idx = len(OA_STATUS_PREFERENCE)
-                oa_idx = min(idx, oa_idx)
-                if OA_STATUS_CHOICES[oa_idx][0] == 'OA':
-                    self.pdf_url = rec.pdf_url or rec.splash_url
-            else:
-                if not self.pdf_url and rec.pdf_url:
-                    self.pdf_url = rec.pdf_url
-
-            # Pub type
-            cur_type = rec.pubtype
-            try:
-                idx = PAPER_TYPE_PREFERENCE.index(cur_type)
-            except ValueError:
-                idx = len(PAPER_TYPE_PREFERENCE)
-            type_idx = min(idx, type_idx)
-
-            source_found = True
-
-        self.oa_status = OA_STATUS_CHOICES[oa_idx][0]
-
-        # If this paper is not associated with any source, do not display it
-        # This happens when creating the associated OaiRecord
-        # failed due to some missing information.
-        if not source_found:
-            self.visible = False
-
-        self.doctype = PAPER_TYPE_PREFERENCE[type_idx]
-
-    def update_visible(self):
-        """
-        Updates the visibility of the paper. Only papers with at least
-        one source should be visible.
-        """
-        self.visible = not self.is_orphan()
-
-    # Other representations ------------------------------------------
-    def __unicode__(self):
-        """
-        Title of the paper
-        """
-        return self.title
-
-    def json(self):
-        """
-        JSON representation of the paper, for dataset dumping purposes
-        """
-        return remove_nones({
-            'title': self.title,
-            'type': self.doctype,
-            'date': self.pubdate.isoformat(),
-            'authors': [a.json() for a in self.authors],
-            'records': [r.json() for r in self.oairecords],
-            'pdf_url': self.pdf_url,
-            'classification': self.oa_status,
-            })
-
-    def google_scholar_link(self):
-        """
-        Link to search for the paper in Google Scholar
-        """
-        return 'http://scholar.google.com/scholar?'+urlencode({'q': remove_diacritics(self.title)})
-
-    # TODO delete this
-    def core_link(self):
-        """
-        Link to search for the paper in CORE
-        """
-        return 'http://core.ac.uk/search/'+quote(remove_diacritics(self.title))
-
-    def is_orphan(self):
-        """
-        When no OAI record is associated with this paper.
-        """
-        return (len(self.oairecords) == 0)
-
-    def citation(self):
-        """
-        A short citation-like representation of the paper. E.g. Joyal and Street, 1992
-        """
-        result = ''
-        if self.author_count == 1:
-            result = self.authors[0].name.last
-        elif self.author_count == 2:
-            result = "%s and %s" % (
-                self.authors[0].name.last,
-                self.authors[1].name.last)
-        else:
-            result = "%s et al." % (
-                self.authors[0].name.last)
-        result += ', %d' % self.year
-        return result
-
 
 class BareAuthor(BareObject):
     """
@@ -657,8 +175,6 @@ class BareAuthor(BareObject):
         'affiliation',
         'orcid',
         'researcher_id',
-    ]
-    _bare_foreign_key_fields = [
         'name',
     ]
     _mandatory_fields = [
@@ -834,13 +350,20 @@ class BareName(BareObject):
                 'last': self.last,
                }
 
+    def __hash__(self):
+        return self.full.__hash__()
+
+    def __eq__(self, other):
+        return self.full == other.full
+
+
 
 class BareOaiRecord(BareObject):
-    _bare_foreign_key_fields = [
-        'source',  # expected to be an OaiSource
-        'journal',  # expected to be a Journal
-        'publisher',  # expected to be a Publisher
-    ]
+    _bare_foreign_key_fields = {
+        'source': OaiSource,
+        'journal': Journal,
+        'publisher': Publisher,
+    }
 
     _bare_fields = [
         'identifier',
@@ -871,6 +394,12 @@ class BareOaiRecord(BareObject):
         super(BareOaiRecord, self).__init__(*args, **kwargs)
         if self.source:
             self.priority = self.source.priority
+
+    def __hash__(self):
+        return self.identifier.__hash__()
+
+    def __eq__(self, other):
+        return self.identifier == other.identifier
 
     def update_priority(self):
         self.priority = self.source.priority
@@ -949,7 +478,9 @@ class BareOaiRecord(BareObject):
 
     def json(self):
         """
-        Dumps the OAI record as a JSON object (for dataset dumping purposes)
+        Dumps the OAI record as a JSON object (to expose it in the API)
+        Not to be confused with the serialization method to store
+        the record in the database, serialize().
         """
         result = {}
         if self.publisher:
@@ -974,3 +505,26 @@ class BareOaiRecord(BareObject):
                 'pages': self.pages,
                 })
         return remove_nones(result)
+
+    def serialize(self):
+        """
+        Serializes the record for JSON storage in a Paper object.
+        """
+        fields = self.fields_dict(foreign_ids=True)
+        if fields.get('pubdate'):
+            fields['pubdate'] = fields['pubdate'].isoformat()
+        return fields 
+    
+    @classmethod
+    def deserialize(cls, dct):
+        """
+        Returns a BareOaiRecord from the serialized JSON value
+        """
+        newdct = dct.copy()
+        if dct.get('pubdate'):
+            newdct['pubdate'] = datetime_to_date(
+                        tolerant_datestamp_to_datetime(dct['pubdate']))
+        return cls(**newdct)
+
+    def __repr__(self):
+        return "<BareOaiRecord %s>" % unicode(self.identifier)

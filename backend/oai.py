@@ -39,7 +39,7 @@ from oaipmh.metadata import MetadataRegistry
 from oaipmh.metadata import oai_dc_reader
 from papers.baremodels import BareName
 from papers.baremodels import BareOaiRecord
-from papers.baremodels import BarePaper
+from papers.models import Paper
 from papers.doi import to_doi
 from papers.models import OaiSource
 from papers.models import Paper
@@ -55,7 +55,7 @@ PROXY_SOURCE_PREFIX = "proaixy:source:"
 class OaiTranslator(object):
     """
     A translator takes a metadata record from the OAI-PMH
-    proxy and converts it to a :class:`BarePaper`.
+    proxy and converts it to a :class:`Paper`.
     """
 
     def format(self):
@@ -67,11 +67,11 @@ class OaiTranslator(object):
     def translate(self, header, metadata):
         """
         Main method of the translator: translates a metadata
-        record to a :class:`BarePaper`.
+        record to a :class:`Paper`.
 
         :param header: the OAI-PMH header, as returned by pyoai
         :param metadata: the dictionary of the record, as returned by pyoai
-        :returns: a :class:`BarePaper` or None if creation failed
+        :returns: a :class:`Paper` or None if creation failed
         """
         raise NotImplemented
 
@@ -175,7 +175,7 @@ class OAIDCTranslator(object):
 
     def translate(self, header, metadata):
         """
-        Creates a BarePaper
+        Creates a Paper
         """
         # We need three things to create a paper:
         # - publication date
@@ -206,12 +206,13 @@ class OAIDCTranslator(object):
 
         # Create paper and record
         try:
-            paper = BarePaper.create(metadata['title'][0], authors, pubdate)
+            paper = Paper.create(metadata['title'][0], authors, pubdate)
             self.add_oai_record(header, metadata, source, paper)
             return paper
         except ValueError as e:
             print "Warning, OAI record "+header.identifier()+" skipped:\n"+unicode(e)
             paper.update_availability()
+            paper.save()
 
     def add_oai_record(self, header, metadata, source, paper):
         """
@@ -279,7 +280,7 @@ class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSo
     (typically: proaixy).
 
     It uses the ListRecord verb to fetch records from the OAI-PMH
-    source. Each record is then converted to a :class:`BarePaper`
+    source. Each record is then converted to a :class:`Paper`
     by an :class:`OaiTranslator` that handles the format
     the metadata is served in.
     """
@@ -383,8 +384,8 @@ class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSo
         if paper is not None:
             try:
                 with transaction.atomic():
-                    saved = Paper.from_bare(paper)
-                return saved
+                    paper.save()
+                return paper
             except ValueError as e:
                 print "Ignoring invalid paper:"
                 print header.identifier()

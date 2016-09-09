@@ -35,7 +35,7 @@ from django.db import DataError
 from django.utils.http import urlencode
 from papers.baremodels import BareName
 from papers.baremodels import BareOaiRecord
-from papers.baremodels import BarePaper
+from papers.models import Paper
 from papers.doi import doi_to_crossref_identifier
 from papers.doi import doi_to_url
 from papers.doi import to_doi
@@ -194,20 +194,21 @@ def create_publication(paper, metadata):
     except DataError as e:
         print "create_publication: ignored DataError:"
         print e
+        return paper
 
 
 def _create_publication(paper, metadata):
     if not metadata:
-        return
+        return paper
     if not 'container-title' in metadata or not metadata['container-title']:
-        return
+        return paper
     doi = to_doi(metadata.get('DOI', None))
 
     title = metadata['container-title']
     if type(title) == type([]):
         title = title[0]
     title = title[:512]
-
+    
     issn = metadata.get('ISSN', None)
     if issn and type(issn) == type([]):
         issn = issn[0]  # TODO pass all the ISSN to the RoMEO interface
@@ -248,9 +249,11 @@ def _create_publication(paper, metadata):
         AliasPublisher.increment(publisher_name, journal.publisher)
     else:
         publisher = fetch_publisher(publisher_name)
+    
+    if publisher and publisher.oa_status == 'OA':
+        pdf_url = splash_url
 
     barepub = BareOaiRecord(
-            paper=paper,
             journal_title=title,
             issue=issue,
             volume=volume,
@@ -265,9 +268,10 @@ def _create_publication(paper, metadata):
             splash_url=splash_url,
             source=OaiSource.objects.get(identifier='crossref'),
             identifier=doi_to_crossref_identifier(doi))
-    rec = paper.add_oairecord(barepub)
+    paper.add_oairecord(barepub)
     paper.update_availability()
-    return paper, rec
+    paper.save()
+    return paper
 
 # Fetching utilities
 
@@ -457,18 +461,12 @@ class CrossRefAPI(object):
             orcids = new_orcids
         affiliations = map(get_affiliation, metadata['author'])
 
-        paper = BarePaper.create(title, authors, pubdate,
+        paper = Paper.create(title, authors, pubdate,
                                  visible=True, affiliations=affiliations, orcids=orcids)
 
-        result = create_publication(paper, metadata)
+        paper = create_publication(paper, metadata)
 
-        if result is None:  # Creating the publication failed!
-            # Make sure the paper only appears if it is still associated
-            # with another source.
-            paper.update_visible()
-        else:
-            paper = result[0]
-
+        paper.update_visible()
         return paper
 
     ##### CrossRef search API #######
@@ -533,20 +531,25 @@ def fetch_zotero_by_DOI(doi):
                                       'Error: '+str(e))
 
 
-def consolidate_publication(publi):
+def prefetch_abstract_for_paper(paper):
     """
     Fetches the abstract from Zotero and adds it to the publication if it succeeds.
     """
-    zotero = fetch_zotero_by_DOI(publi.doi)
-    if zotero is None:
-        return publi
-    for item in zotero:
-        if 'abstractNote' in item:
-            publi.description = sanitize_html(item['abstractNote'])
-            publi.save(update_fields=['description'])
-        for attachment in item.get('attachments', []):
-            if attachment.get('mimeType') == 'application/pdf':
-                publi.pdf_url = attachment.get('url')
-                publi.save(update_fields=['pdf_url'])
-                publi.paper.update_availability()
-    return publi
+    for publi in paper.publications:
+        zotero = fetch_zotero_by_DOI(publi.doi)
+        if zotero is None:
+            continue
+        changed = False
+        for item in zotero:
+            if 'abstractNote' in item:
+                publi.description = sanitize_html(item['abstractNote'])
+                changed = True
+            for attachment in item.get('attachments', []):
+                if attachment.get('mimeType') == 'application/pdf':
+                    publi.pdf_url = attachment.get('url')
+                    changed = True
+        if changed:
+            paper.add_oairecord(publi)
+            paper.save()
+            break
+    return paper

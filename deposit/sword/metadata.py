@@ -48,14 +48,15 @@ class MetadataFormatter(object):
         """
         return None
 
-    def toString(self, paper, filename, form=None, pretty=False):
+    def toString(self, paper, filename, form=None, pretty=False,
+                xml_declaration=True):
         """
         The metadata as a string
         """
         return etree.tostring(self.render(paper, filename, form),
                               pretty_print=pretty,
                               encoding='UTF-8',
-                              xml_declaration=True)
+                              xml_declaration=xml_declaration)
 
 
 def addChild(elem, childName, text=None):

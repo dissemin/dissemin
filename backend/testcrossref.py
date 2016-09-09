@@ -54,6 +54,7 @@ class CrossRefTest(TestCase):
     def test_dirty_metadata(self):
         # saving a paper with enough metadata to create a paper, but not
         # an OaiRecord.
+        # (because there's no 'container-title')
         p = self.api.save_doi_metadata({
             "DOI": "10.1007/978-1-4020-7884-2_13",
             "subtitle": [],

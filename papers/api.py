@@ -29,7 +29,6 @@ from django.views.decorators.http import require_POST
 from jsonview.decorators import json_view
 from jsonview.exceptions import BadRequest
 from papers.baremodels import BareName
-from papers.baremodels import BarePaper
 from papers.errors import MetadataSourceException
 from papers.models import Paper
 from papers.name import parse_comma_name
@@ -38,7 +37,7 @@ from papers.utils import tolerant_datestamp_to_datetime
 
 @json_view
 def api_paper_doi(request, doi):
-    p = Paper.create_by_doi(doi, bare=True)
+    p = Paper.create_by_doi(doi)
     if p is None:
         raise Http404("The paper you requested could not be found.")
     return {
@@ -60,7 +59,7 @@ def api_paper_query(request):
     if doi:
         p = None
         try:
-            p = Paper.create_by_doi(doi, bare=True)
+            p = Paper.create_by_doi(doi)
         except MetadataSourceException:
             pass
         if p is None:
@@ -110,7 +109,7 @@ def api_paper_query(request):
         raise BadRequest('No authors provided')
 
     try:
-        p = BarePaper.create(title, parsed_authors, date)
+        p = Paper.create(title, parsed_authors, date)
     except ValueError:
         raise BadRequest('Invalid paper')
 

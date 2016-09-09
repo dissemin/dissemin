@@ -73,24 +73,24 @@ class PaperSource(object):
 
             count += 1
 
-    def save_paper(self, bare_paper, researcher):
+    def save_paper(self, paper, researcher):
         # Save the paper as non-bare
-        p = Paper.from_bare(bare_paper)
+        paper.save()
 
         # Check whether this paper is associated with an ORCID id
         # for the target researcher
         if researcher.orcid:
-            for idx, a in enumerate(p.authors_list):
+            for idx, a in enumerate(paper.authors_list):
                 if a['orcid'] == researcher.orcid:
-                    p.authors_list[idx]['researcher_id'] = researcher.id
-                    p.researchers.add(researcher.id)
+                    paper.authors_list[idx]['researcher_id'] = researcher.id
+                    paper.researchers.add(researcher.id)
                     self.update_empty_orcid(researcher, False)
 
-            p.save()
-            self.index_paper(p)
+            paper.save()
+            self.index_paper(paper)
             researcher.update_stats()
 
-        return p
+        return paper
 
     def update_empty_orcid(self, researcher, val):
         """

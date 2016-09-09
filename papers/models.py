@@ -55,12 +55,13 @@ from __future__ import unicode_literals
 from datetime import datetime
 from datetime import timedelta
 import re
+import hashlib
+from urllib import quote  # for the Google Scholar and CORE link
+from urllib import urlencode
 from statistics.models import AccessStatistics
 from statistics.models import combined_status_for_instance
 from statistics.models import STATUS_CHOICES_HELPTEXT
 
-from caching.base import CachingManager
-from caching.base import CachingMixin
 from celery.result import AsyncResult
 from dissemin.settings import POSSIBLE_LANGUAGE_CODES
 from dissemin.settings import PROFILE_REFRESH_ON_LOGIN
@@ -80,10 +81,10 @@ from django.utils.translation import ugettext_lazy as _
 from papers.baremodels import BareAuthor
 from papers.baremodels import BareName
 from papers.baremodels import BareOaiRecord
-from papers.baremodels import BarePaper
 from papers.baremodels import MAX_NAME_LENGTH
-from papers.baremodels import PAPER_TYPE_CHOICES
-from papers.baremodels import PAPER_TYPE_PREFERENCE
+from papers.categories import PAPER_TYPE_CHOICES
+from papers.categories import PAPER_TYPE_PREFERENCE
+from papers.oaisource import OaiSource
 from papers.doi import to_doi
 from papers.errors import MetadataSourceException
 from papers.name import name_similarity
@@ -91,8 +92,18 @@ from papers.name import unify_name_lists
 from papers.orcid import OrcidProfile
 from papers.utils import affiliation_is_greater
 from papers.utils import validate_orcid
+from papers.utils import sanitize_html
+from papers.utils import maybe_recapitalize_title
+from papers.utils import canonicalize_url
+from papers.utils import datetime_to_date
+from papers.utils import remove_diacritics
+from papers.utils import remove_nones
+from papers.fingerprint import create_paper_plain_fingerprint
 from publishers.models import Journal
 from publishers.models import Publisher
+from publishers.models import DummyPublisher
+from publishers.models import OA_STATUS_CHOICES
+from publishers.models import OA_STATUS_PREFERENCE
 from solo.models import SingletonModel
 
 UPLOAD_TYPE_CHOICES = [
@@ -583,7 +594,7 @@ class Name(models.Model, BareName):
 
 
 # Papers matching one or more researchers
-class Paper(models.Model, BarePaper):
+class Paper(models.Model):
     title = models.CharField(max_length=1024)
     fingerprint = models.CharField(max_length=64, unique=True)
     date_last_ask = models.DateField(null=True)  # TODO remove (unused)
@@ -627,34 +638,493 @@ class Paper(models.Model, BarePaper):
     # Task id of the current task updating the metadata of this article (if any)
     task = models.CharField(max_length=512, null=True, blank=True)
 
+    # Value above which we consider a paper to have too many authors to be
+    # displayed. See Paper.has_many_authors
+    MAX_DISPLAYED_AUTHORS = 15
+
+    # Creation
+
     def __init__(self, *args, **kwargs):
         super(Paper, self).__init__(*args, **kwargs)
+        #! If there are lots of authors, how many are we hiding?
+        self.nb_remaining_authors = None
 
-    ### Relations to other models, reimplemented from :class:`BarePaper` ###
+    @classmethod
+    def create(cls, title, author_names, pubdate, visible=True,
+               affiliations=None, orcids=None):
+        """
+        Creates a paper (not saved to the database).
+
+        :param title: The title of the paper (as a string). If it is too long for the database,
+                      ValueError is raised.
+        :param author_names: The ordered list of author names, as Name objects.
+        :param pubdate: The publication date, as a python date object
+        :param visible: The visibility of the paper if it is created. If another paper
+                    exists, the visibility will be set to the maximum of the two possible
+                    visibilities.
+        :param affiliations: A list of (possibly None) affiliations for the authors. It has to
+                    have the same length as the list of author names.
+        :param orcids: same as affiliations, but for ORCID ids.
+        """
+        if not title or not author_names or not pubdate:
+            raise ValueError(
+                "A title, pubdate and authors have to be provided to create a paper.")
+
+        if affiliations is not None and len(author_names) != len(affiliations):
+            raise ValueError(
+                "The number of affiliations and authors have to be equal.")
+        if orcids is not None and len(author_names) != len(orcids):
+            raise ValueError(
+                "The number of ORCIDs (or Nones) and authors have to be equal.")
+        if type(visible) != bool:
+            raise ValueError("Invalid paper visibility: %s" % unicode(visible))
+
+        title = sanitize_html(title)
+        title = maybe_recapitalize_title(title)
+
+        p = cls()
+        p.title = title
+        p.pubdate = pubdate  # pubdate will be checked in fingerprint computation
+        p.visible = visible
+        for idx, n in enumerate(author_names):
+            a = BareAuthor()
+            a.name = n
+            if affiliations is not None:
+                a.affiliation = affiliations[idx]
+            if orcids is not None:
+                orcid = validate_orcid(orcids[idx])
+                if orcid:
+                    a.orcid = orcid
+            p.add_author(a, position=idx)
+
+        p.fingerprint = p.new_fingerprint()
+        p.update_identifiers()
+
+        return p
+
+    @property
+    def slug(self):
+        return slugify(self.title)
+
+    ### Submodels ###
 
     @property
     def authors(self):
         """
-        The author sorted as they should appear. Their names are pre-fetched.
+        The author sorted as they should appear.
         """
         return map(BareAuthor.deserialize, self.authors_list)
 
     @property
-    def publications(self):
-        """
-        The list of publications associated with this paper, returned
-        as a queryset.
-        """
-        return self.oairecord_set.filter(journal_title__isnull=False,
-                                         publisher_name__isnull=False)
-
-    @property
     def oairecords(self):
         """
-        The list of OAI records associated with this paper,
-        returned as a list of :class:`BareOaiRecord` objects.
+        The list of OAI records associated with this paper. It can
+        be arbitrary iterables of subclasses of :class:`BareOaiRecord`.
         """
-        return [BareOaiRecord(**r) for r in self.records]
+        return map(BareOaiRecord.deserialize, self.records_list)
+
+    def add_oairecord(self, oairecord):
+        """
+        Adds a new OAI record to the paper
+
+        :returns: the :class:`BareOaiRecord` that was added (it can differ in subclasses)
+        """
+        oairecord.check_mandatory_fields()
+        oairecord.cleanup_description()
+        
+        # Search for an existing record that would match
+        # the URLs we are trying to add
+        matching_idx = None
+        match = None
+        new_short_splash = canonicalize_url(oairecord.splash_url)
+        new_short_pdf = canonicalize_url(oairecord.pdf_url)
+        for idx, rec in enumerate(self.oairecords):
+            short_splash = canonicalize_url(rec.splash_url)
+            short_pdf = canonicalize_url(rec.pdf_url)
+            if (rec.identifier == oairecord.identifier or
+                new_short_splash == short_splash or
+                (short_pdf and new_short_pdf == short_pdf)):
+                matching_idx = idx
+                match = rec
+                break
+
+        if matching_idx is None:
+            self.records_list.append(oairecord.serialize())
+        else:
+            # Update the matching record with the newer values
+            # (only if needed)
+            splash_url = oairecord.splash_url
+            pdf_url = oairecord.pdf_url            
+            source = oairecord.source
+
+            if (pdf_url != None and (match.pdf_url == None or
+                (match.pdf_url != pdf_url and match.priority <
+                            source.priority))):
+                match.source = source
+                match.priority = source.priority
+                match.pdf_url = pdf_url
+                match.splash_url = splash_url
+
+            def update_field_conditionally(field):
+                new_val = getattr(oairecord, field, '')
+                if new_val and (len(getattr(match, field) or '') < len(new_val)):
+                    setattr(match, field, new_val)
+
+            update_field_conditionally('contributors')
+            update_field_conditionally('keywords')
+            update_field_conditionally('description')
+            update_field_conditionally('doi')
+
+            new_pubtype = oairecord.pubtype
+            if new_pubtype in PAPER_TYPE_PREFERENCE:
+                idx = PAPER_TYPE_PREFERENCE.index(new_pubtype)
+                old_idx = len(PAPER_TYPE_PREFERENCE)-1
+                if match.pubtype in PAPER_TYPE_PREFERENCE:
+                    old_idx = PAPER_TYPE_PREFERENCE.index(match.pubtype)
+                if idx < old_idx:
+                    changed = True
+                    match.pubtype = PAPER_TYPE_PREFERENCE[idx]
+
+            self.records_list[matching_idx] = oairecord.serialize()
+
+        # update the publication date
+        self.pubdate = datetime_to_date(self.pubdate)
+        if oairecord.pubdate:
+            new_pubdate = datetime_to_date(oairecord.pubdate)
+            if new_pubdate > self.pubdate:
+                self.pubdate = new_pubdate
+
+        # update identifiers
+        self.update_identifiers()
+
+    def remove_oairecord(self, identifier):
+        """
+        Remove the OAI record that matches a particular identifier.
+        If there is no such OAI record, does not do anything.
+        """
+        new_records = filter(lambda r: r['identifier'] != identifier,
+                    self.records_list)
+        self.records_list = new_records
+        self.update_identifiers()
+
+    @property
+    def year(self):
+        """
+        Year of publication of the paper.
+        """
+        return self.pubdate.year
+
+    # OAI records -----------------
+
+    @cached_property
+    def sorted_oai_records(self):
+        """
+        OAI records sorted by decreasing order of priority
+        (lower priority means poorer overall quality of the source).
+        """
+        # Ordered in Python because the list of records is typically quite
+        # small (less than 10 items)
+        return sorted(self.oairecords, key=lambda r: -r.priority)
+
+    @cached_property
+    def prioritary_oai_records(self):
+        """
+        OAI records from custom sources we trust (positive priority)
+        """
+        # Filtered in Python because the list of records is typically quite
+        # small (less than 10 items)
+        return filter(lambda r: r.priority > 0, self.sorted_oai_records)
+
+    @property
+    def unique_prioritary_oai_records(self):
+        """
+        OAI records from sources we trust, with unique source.
+        """
+        seen_sources = set()
+        for record in self.prioritary_oai_records:
+            if record.source_id not in seen_sources:
+                seen_sources.add(record.source_id)
+                yield record
+
+    def update_identifiers(self):
+        """
+        Refreshes the list of identifiers for this paper
+        """
+        identifiers = set([self.fingerprint])
+        for r in self.oairecords:
+            identifiers.add(r.identifier)
+            if r.doi:
+                identifiers.add(r.doi)
+        self.identifiers = list(identifiers)
+
+    # Authors ------------------------
+
+    def author_names(self):
+        """
+        The list of Name instances of the authors
+        """
+        return [a.name for a in self.authors]
+
+    def affiliations(self):
+        """
+        The list of affiliations of all authors
+        """
+        return [a.affiliation for a in self.authors]
+
+    def orcids(self):
+        """
+        The list of ORCIDs of all authors
+        """
+        return [a.orcid for a in self.authors]
+
+    def bare_author_names(self):
+        """
+        The list of name pairs (first,last) of the authors
+        """
+        return [(name.first, name.last) for name in self.author_names()]
+
+    @property
+    def author_count(self):
+        """
+        Number of authors.
+        """
+        return len(self.authors)
+
+    @property
+    def has_many_authors(self):
+        """
+        When the paper has more than some arbitrary number of authors.
+        """
+        return self.author_count > self.MAX_DISPLAYED_AUTHORS
+
+    @cached_property
+    def interesting_authors(self):
+        """
+        The list of authors to display when the complete list is too long.
+        """
+        # TODO: Better selection
+        lst = self.authors[:self.MAX_DISPLAYED_AUTHORS]
+        self.nb_remaining_authors = self.author_count - len(lst)
+        return lst
+
+    def displayed_authors(self):
+        """
+        Returns the full list of authors if there are not too many of them,
+        otherwise returns only the interesting_authors()
+        """
+        if self.has_many_authors:
+            return self.interesting_authors
+        else:
+            return self.authors
+
+    def check_authors(self):
+        """
+        Check the sanity of authors
+        (for now, only that the list is non-empty)
+        """
+        if not self.authors:
+            raise ValueError("Empty authors list")
+        # TODO more checks here?
+
+    # Publications ---------------------------------------------
+
+    @property
+    def publications(self):
+        """
+        The OAI records with publication metadata (i.e. journal title and
+        publisher name).
+        These records can potentially be associated with publisher policies.
+        """
+        res = []
+        # we don't yield because some functions actually do len( ) on the
+        # output of this method…
+        for r in self.oairecords:
+            if r.has_publication_metadata():
+                res.append(r)
+        return res
+
+    def first_publications(self):
+        """
+        The list of the 3 first OAI records with publication metadata
+        associated with this paper (in most cases, that should return *all*
+        such records, but in some nasty cases many publications end up
+        merged, and it is not very elegant to show all of them
+        to the users).
+        """
+        return list(self.publications)[:3]
+
+    def publications_with_unique_publisher(self):
+        """
+        Iterable of publications where subsequent publications with
+        the same publisher are removed.
+        """
+        seen_publishers = set()
+        for publication in self.publications:
+            if publication.publisher_id and publication.publisher_id not in seen_publishers:
+                seen_publishers.add(publication.publisher_id)
+                yield publication
+            elif publication.publisher_name not in seen_publishers:
+                seen_publishers.add(publication.publisher_name)
+                yield publication
+
+    def publisher(self):
+        """
+        Returns the first publisher we can find for this paper, otherwise
+        a :class:`DummyPublisher`
+        """
+        for publication in self.publications:
+            return publication.publisher_or_default()
+        return DummyPublisher()
+
+    # Fingerprint -----------------------------------------------
+    def plain_fingerprint(self, verbose=False):
+        """
+        Debugging function to display the plain fingerprint
+        """
+        fp = create_paper_plain_fingerprint(
+            self.title, self.bare_author_names(), self.year)
+        if verbose:
+            print fp
+        return fp
+
+    def new_fingerprint(self, verbose=False):
+        """
+        The fingerprint of the paper, taking into account the changes
+        that may have occured since the last computation of the fingerprint.
+        This does not update the `fingerprint` field, just computes its candidate value.
+        """
+        buf = self.plain_fingerprint(verbose)
+        m = hashlib.md5()
+        m.update(buf)
+        return m.hexdigest()
+
+    # Abstract -------------------------------------------------
+    @cached_property
+    def abstract(self):
+        best_abstract = ''
+        for rec in self.oairecords:
+            if rec.description and len(rec.description) > len(best_abstract):
+                best_abstract = rec.description
+        return best_abstract
+
+    # Updates ---------------------------------------------------
+    def update_availability(self):
+        """
+        Updates the :class:`Paper`'s own `pdf_url` field
+        based on its sources (:class:`BareOaiRecord`).
+
+        This uses a non-trivial logic, hence it is useful to keep this result cached
+        in the database row.
+        """
+        records = self.oairecords
+        records = sorted(records, key=(lambda r: -r.priority))
+
+        self.pdf_url = None
+        oa_idx = len(OA_STATUS_PREFERENCE)-1
+        type_idx = len(PAPER_TYPE_PREFERENCE)-1
+        source_found = False
+
+        if self.doctype in PAPER_TYPE_PREFERENCE:
+            type_idx = PAPER_TYPE_PREFERENCE.index(self.doctype)
+
+        for rec in records:
+            if rec.has_publication_metadata():
+                # OA status
+                cur_status = rec.oa_status()
+                try:
+                    idx = OA_STATUS_PREFERENCE.index(cur_status)
+                except ValueError:
+                    idx = len(OA_STATUS_PREFERENCE)
+                oa_idx = min(idx, oa_idx)
+                if OA_STATUS_CHOICES[oa_idx][0] == 'OA':
+                    self.pdf_url = rec.pdf_url or rec.splash_url
+            else:
+                if not self.pdf_url and rec.pdf_url:
+                    self.pdf_url = rec.pdf_url
+
+            # Pub type
+            cur_type = rec.pubtype
+            try:
+                idx = PAPER_TYPE_PREFERENCE.index(cur_type)
+            except ValueError:
+                idx = len(PAPER_TYPE_PREFERENCE)
+            type_idx = min(idx, type_idx)
+
+            source_found = True
+
+        self.oa_status = OA_STATUS_CHOICES[oa_idx][0]
+
+        # If this paper is not associated with any source, do not display it
+        # This happens when creating the associated OaiRecord
+        # failed due to some missing information.
+        if not source_found:
+            self.visible = False
+
+        self.doctype = PAPER_TYPE_PREFERENCE[type_idx]
+        self.invalidate_cache()
+
+    def update_visible(self):
+        """
+        Updates the visibility of the paper. Only papers with at least
+        one source should be visible.
+        """
+        old_visible = self.visible
+        self.visible = not self.is_orphan()
+        if self.visible != old_visible:
+            self.save(update_fields=['visible'])
+
+    # Other representations ------------------------------------------
+    def __unicode__(self):
+        """
+        Title of the paper
+        """
+        return self.title
+
+    def json(self):
+        """
+        JSON representation of the paper, for dataset dumping purposes
+        """
+        return remove_nones({
+            'title': self.title,
+            'type': self.doctype,
+            'date': self.pubdate.isoformat(),
+            'authors': [a.json() for a in self.authors],
+            'records': [r.json() for r in self.oairecords],
+            'pdf_url': self.pdf_url,
+            'classification': self.oa_status,
+            })
+
+    def google_scholar_link(self):
+        """
+        Link to search for the paper in Google Scholar
+        """
+        return 'http://scholar.google.com/scholar?'+urlencode({'q': remove_diacritics(self.title)})
+
+    def is_orphan(self):
+        """
+        When no OAI record is associated with this paper.
+        """
+        return (len(self.oairecords) == 0)
+
+    def citation(self):
+        """
+        A short citation-like representation of the paper. E.g. Joyal and Street, 1992
+        """
+        result = ''
+        if self.author_count == 1:
+            result = self.authors[0].name.last
+        elif self.author_count == 2:
+            result = "%s and %s" % (
+                self.authors[0].name.last,
+                self.authors[1].name.last)
+        else:
+            result = "%s et al." % (
+                self.authors[0].name.last)
+        result += ', %d' % self.year
+        return result
+
+
+    ### Relations to other models  ###
 
     def add_author(self, author, position=None):
         """
@@ -669,6 +1139,9 @@ class Paper(models.Model, BarePaper):
         author_serialized = author.serialize()
         if position is None:
             position = len(self.authors_list)
+        if not (position >= 0 and position <= len(self.authors_list)):
+            raise ValueError("Invalid author position '%s' of %d" %
+                                (str(position), len(self.authors_list)))
         self.authors_list.insert(position, author_serialized)
         if author.researcher_id:
             self.researchers.add(author.researcher_id)
@@ -685,15 +1158,6 @@ class Paper(models.Model, BarePaper):
         self.save(update_fields=['authors_list'])
         self.researchers.add(researcher_id)
 
-    def add_oairecord(self, oairecord):
-        """
-        Adds a record (possibly bare) to the paper, by saving it in
-        the database
-        """
-        # Clean up the record
-        oairecord.cleanup_description()
-        self.records_list.append(**oairecord.__dict__)
-
     ### Paper creation ###
 
     @classmethod
@@ -703,25 +1167,45 @@ class Paper(models.Model, BarePaper):
 
         :returns: the corresponding :class:`Paper` instance.
         """
-        p = BarePaper.create(title, author_names, pubdate,
+        p = Paper.create(title, author_names, pubdate,
                              visible, affiliations)
-        return cls.from_bare(p)
+        p.save()
+        return p
 
     @classmethod
     def find_by_fingerprint(cls, fp):
         return Paper.objects.filter(fingerprint__exact=fp)
 
     @classmethod
-    def from_bare(cls, paper):
+    def find_by_identifiers(cls, identifiers):
+        """
+        :returns: a QuerySet of Paper instances whose identifiers
+        overlap with the given identifiers list
+        """
+        # we could use
+        # Paper.objects.filter(identifiers__overlap=identifiers)
+        # but this adds a LIMIT on the results and for some reason
+        # postgresql does not get query planning right in that case
+        # (it does not use the index) so we use a custom SQL query here.
+        # 
+        # for more info, see
+        # https://dba.stackexchange.com/questions/146679/forcing-postgres-to-use-a-gin-index-on-a-varchar
+        return Paper.objects.raw(
+            "SELECT * FROM papers_paper WHERE identifiers && %s::varchar(512)[]",
+                [identifiers])
+
+    def save(self, **kwargs):
         """
         Saves a paper to the database if it is not already present.
-
-        :returns: the :class:`Paper` instance created from the bare paper supplied.
         """
+        if self.id:
+            super(Paper, self).save(**kwargs)
+            return
+
         try:
             # Look up the paper in the database
-            paper.update_identifiers()
-            matches = list(Paper.find_by_identifiers(paper.identifiers))
+            self.update_identifiers()
+            matches = list(Paper.find_by_identifiers(self.identifiers))
             
             # We now have a list of papers whose identifiers overlap with
             # the identifiers of the papers we are trying to add.
@@ -729,7 +1213,8 @@ class Paper(models.Model, BarePaper):
             if not matches:
                 # If there are no matches, that's very simple: we just INSERT
                 # the new paper in the database.
-                p = super(Paper, cls).from_bare(paper)
+                self.update_availability()
+                super(Paper, self).save()
 
             else:
                 # Otherwise, one or more matching papers were found.
@@ -746,16 +1231,18 @@ class Paper(models.Model, BarePaper):
                     matches[0].merge(matches[i])
                 
                 p = matches[0]
-                if paper.visible and not p.visible:
+                if self.visible and not p.visible:
                     p.visible = True
                 p.update_authors(
-                        paper.authors,
+                        self.authors,
                         save_now=False)
-                for record in paper.oairecords:
+                for record in self.oairecords:
                     p.add_oairecord(record)
-                p.update_availability()  # in Paper, this saves to the db
+                p.update_availability()
+                p.save()
 
-            return p
+                # set the current instance to p
+                self.__dict__.update(p.__dict__)
 
         except DataError as e:
             raise ValueError(
@@ -770,19 +1257,6 @@ class Paper(models.Model, BarePaper):
         for author in self.authors:
             if author.researcher:
                 author.researcher.update_stats()
-
-    # TODO delete these two methods (unused)
-    def already_asked_for_upload(self):
-        if self.date_last_ask == None:
-            return False
-        else:
-            return ((datetime.now().date() - self.pubdate) <= timedelta(days=10))
-
-    def can_be_asked_for_upload(self):
-        return ((self.pdf_url == None) and
-                (self.oa_status == 'OK') and
-                not(self.already_asked_for_upload()) and
-                not(self.author_set.filter(researcher__isnull=False) == []))
 
     @cached_property
     def owners(self):
@@ -805,18 +1279,6 @@ class Paper(models.Model, BarePaper):
     def is_deposited(self):
         return self.successful_deposits().count() > 0
 
-    def update_availability(self):
-        """
-        Updates the :class:`Paper`'s own `pdf_url` field
-        based on its sources (:class:`OaiRecord`).
-
-        This uses a non-trivial logic, hence it is useful to keep this result cached
-        in the database row.
-        """
-        super(Paper, self).update_availability()
-        self.save()
-        self.invalidate_cache()
-
     def status_helptext(self):
         """
         Helptext displayed next to the paper logo
@@ -834,29 +1296,27 @@ class Paper(models.Model, BarePaper):
         """
         Tries to find an abstract for the paper, if none is available yet,
         possibly by fetching it from Zotero via doi-cache.
+        :returns: the updated version of the paper
         """
+        # TODO move task id to paper (or even discard it??)
         if self.task is None:
             from backend.tasks import consolidate_paper
             task = consolidate_paper.delay(pk=self.id)
             self.task = task.id
-            self.save(update_fields=['task'])
         else:
             task = AsyncResult(self.task)
         if wait:
-            task.get()
+            return task.get()
 
     @classmethod
-    def create_by_doi(self, doi, bare=False):
+    def create_by_doi(self, doi):
         """
         Creates a paper given a DOI
         """
         import backend.crossref as crossref
         cr_api = crossref.CrossRefAPI()
-        bare_paper = cr_api.create_paper_by_doi(doi)
-        if bare:
-            return bare_paper
-        elif bare_paper:
-            return Paper.from_bare(bare_paper)  # TODO TODO index it?
+        paper = cr_api.create_paper_by_doi(doi)
+        return paper
 
     def successful_deposits(self):
         return self.depositrecord_set.filter(pdf_url__isnull=False)
@@ -960,6 +1420,7 @@ class Paper(models.Model, BarePaper):
 
         paper.id = self.id
         self.update_availability()
+        self.save()
 
     def recompute_fingerprint_and_merge_if_needed(self):
         """
@@ -979,15 +1440,6 @@ class Paper(models.Model, BarePaper):
         else:
             match.merge(self)
             return match
-
-    def update_visible(self):
-        """
-        Should this paper be shown to users?
-        """
-        old_visible = self.visible
-        super(Paper, self).update_visible()
-        if self.visible != old_visible:
-            p.save(update_fields=['visible'])
 
     def breadcrumbs(self):
         """
@@ -1010,237 +1462,9 @@ class Paper(models.Model, BarePaper):
     def url(self):
         return reverse('paper', args=[self.pk, self.slug])
 
-# Rough data extracted through OAI-PMH
-
-
-class OaiSource(CachingMixin, models.Model):
-    objects = CachingManager()
-
-    identifier = models.CharField(max_length=300, unique=True)
-    name = models.CharField(max_length=100)
-    oa = models.BooleanField(default=False)
-    priority = models.IntegerField(default=1)
-    default_pubtype = models.CharField(
-        max_length=64, choices=PAPER_TYPE_CHOICES)
-
-    # Fetching properties
-    last_status_update = models.DateTimeField(auto_now=True)
-
-    def __unicode__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = "OAI source"
-
-
-class OaiRecord(models.Model, BareOaiRecord):
-    source = models.ForeignKey(OaiSource)
-    about = models.ForeignKey(Paper)
-
-    identifier = models.CharField(max_length=512, unique=True)
-    splash_url = models.URLField(max_length=1024, null=True, blank=True)
-    pdf_url = models.URLField(max_length=1024, null=True, blank=True)
-    description = models.TextField(null=True, blank=True)
-    keywords = models.TextField(null=True, blank=True)
-    contributors = models.CharField(max_length=4096, null=True, blank=True)
-    pubtype = models.CharField(
-        max_length=64, null=True, blank=True, choices=PAPER_TYPE_CHOICES)
-
-    # this is actually the *journal* title
-    journal_title = models.CharField(max_length=512, blank=True, null=True)
-    container = models.CharField(max_length=512, blank=True, null=True)
-    journal = models.ForeignKey(Journal, blank=True, null=True)
-
-    publisher = models.ForeignKey(Publisher, blank=True, null=True)
-    publisher_name = models.CharField(max_length=512, blank=True, null=True)
-
-    issue = models.CharField(max_length=64, blank=True, null=True)
-    volume = models.CharField(max_length=64, blank=True, null=True)
-    pages = models.CharField(max_length=64, blank=True, null=True)
-    pubdate = models.DateField(blank=True, null=True)
-
-    # in theory, there is no limit
-    doi = models.CharField(max_length=1024, blank=True,
-                           null=True, db_index=True)
-
-    last_update = models.DateTimeField(auto_now=True)
-
-    # Cached version of source.priority
-    priority = models.IntegerField(default=1)
-
-    def update_priority(self):
-        super(OaiRecord, self).update_priority()
-        self.save(update_fields=['priority'])
-
-    @classmethod
-    def new(cls, **kwargs):
-        """
-        Creates a new OAI record by checking first for duplicates and
-        updating them if necessary.
-        """
-        source = None
-        if kwargs.get('source') is None:
-            source_id = kwargs.get('source_id')
-            try:
-                source = OaiSource.objects.get(id=source_id)
-            except ObjectDoesNotExist:
-                pass
-            if source is None:
-                raise ValueError('No source provided to create the OAI record.')
-        else:
-            source = kwargs['source']
-        if kwargs.get('identifier') is None:
-            raise ValueError('No identifier provided to create the OAI record.')
-        identifier = kwargs['identifier']
-        if kwargs.get('about') is None:
-            raise ValueError('No paper provided to create the OAI record.')
-        about = kwargs['about']
-        if kwargs.get('splash_url') is None:
-            raise ValueError('No URL provided to create the OAI record.')
-        splash_url = kwargs['splash_url']
-        pdf_url = kwargs.get('pdf_url')
-
-        # Has the paper we are trying to add a record to been just
-        # created? If so, we should not search for duplicate records in
-        # the paper itself.
-        # Search for duplicate records
-        match = OaiRecord.find_duplicate_records(
-                about,
-                splash_url,
-                pdf_url)
-
-        # We don't search for records with the same identifier yet,
-        # we will rather catch the exception thrown by the DB
-        if not match:
-            same_identifier = OaiRecord.objects.filter(identifier=identifier)
-            if same_identifier:
-                match = same_identifier[0]
-
-        if not match:
-            # Otherwise create a new record
-            record = OaiRecord(
-                    source=source,
-                    identifier=identifier,
-                    splash_url=splash_url,
-                    pdf_url=pdf_url,
-                    about=about,
-                    description=kwargs.get('description'),
-                    keywords=kwargs.get('keywords'),
-                    contributors=kwargs.get('contributors'),
-                    pubtype=kwargs.get('pubtype', source.default_pubtype),
-                    priority=source.priority,
-                    journal_title=kwargs.get('journal_title'),
-                    container=kwargs.get('container'),
-                    publisher_name=kwargs.get('publisher_name'),
-                    issue=kwargs.get('issue'),
-                    volume=kwargs.get('volume'),
-                    pages=kwargs.get('pages'),
-                    doi=kwargs.get('doi'),
-                    publisher=kwargs.get('publisher'),
-                    journal=kwargs.get('journal'),
-                    )
-            # with transaction.atomic():
-            record.save()
-            return record
-
-        # Update the duplicate if necessary
-        if match:
-            changed = False
-
-            if pdf_url != None and (match.pdf_url == None or
-                                    (match.pdf_url != pdf_url and match.priority < source.priority)):
-                match.source = source
-                match.priority = source.priority
-                match.pdf_url = pdf_url
-                match.splash_url = splash_url
-                changed = True
-
-            def update_field_conditionally(field):
-                global changed
-                new_val = kwargs.get(field, '')
-                if new_val and (not match.__dict__[field] or
-                                len(match.__dict__[field]) < len(new_val)):
-                    match.__dict__[field] = new_val
-                    changed = True
-
-            update_field_conditionally('contributors')
-            update_field_conditionally('keywords')
-            update_field_conditionally('description')
-            update_field_conditionally('doi')
-
-            new_pubdate = kwargs.get('pubdate')
-            if new_pubdate and match.about.pubdate > new_pubdate:
-                match.about.pubdate = new_pubdate
-                match.save(update_fields=['pubdate'])
-
-            new_pubtype = kwargs.get('pubtype', source.default_pubtype)
-            if new_pubtype in PAPER_TYPE_PREFERENCE:
-                idx = PAPER_TYPE_PREFERENCE.index(new_pubtype)
-                old_idx = len(PAPER_TYPE_PREFERENCE)-1
-                if match.pubtype in PAPER_TYPE_PREFERENCE:
-                    old_idx = PAPER_TYPE_PREFERENCE.index(match.pubtype)
-                if idx < old_idx:
-                    changed = True
-                    match.pubtype = PAPER_TYPE_PREFERENCE[idx]
-
-            if changed:
-                try:
-                    match.save()
-                except DataError as e:
-                    raise ValueError(
-                        'Unable to create OAI record:\n'+unicode(e))
-
-            if about.pk != match.about.pk:
-                match.about.merge(about)
-
-            return match
-
-    @classmethod
-    def find_duplicate_records(cls, paper, splash_url, pdf_url):
-        """
-        Finds duplicate OAI records. These duplicates can have a different identifier,
-        or slightly different urls (for instance https:// instead of http://).
-
-        :param paper: the :class:`Paper` the record is about
-        :param splash_url: the splash url of the target record (link to the metadata page)
-        :param pdf_url: the url of the PDF, if known (otherwise `None`)
-        """
-        https_re = re.compile(r'https?(.*)')
-
-        def shorten(url):
-            """
-            removes the 'https?' prefix or converts to DOI
-            """
-            if not url:
-                return
-            doi = to_doi(url)
-            if doi:
-                return doi
-            match = https_re.match(url.strip())
-            if match:
-                return match.group(1)
-
-        short_splash = shorten(splash_url)
-        short_pdf = shorten(pdf_url)
-
-        if short_splash == None or paper == None:
-            return
-
-        for record in paper.oairecord_set.all():
-            short_splash2 = shorten(record.splash_url)
-            short_pdf2 = shorten(record.pdf_url)
-            if (short_splash == short_splash2 or
-                (short_pdf is not None and
-                 short_pdf2 == short_pdf)):
-                return record
-
-    class Meta:
-        verbose_name = "OAI record"
-
 
 def create_default_stats():
     return AccessStatistics.objects.create().pk
-
 
 class PaperWorld(SingletonModel):
     """

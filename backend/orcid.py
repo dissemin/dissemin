@@ -31,12 +31,12 @@ from notification.api import add_notification_for
 from notification.api import delete_notification_per_tag
 import notification.levels as notification_levels
 from papers.baremodels import BareOaiRecord
-from papers.baremodels import BarePaper
 from papers.bibtex import parse_bibtex
 from papers.doi import to_doi
 from papers.errors import MetadataSourceException
 from papers.models import Name
 from papers.models import OaiSource
+from papers.models import Paper
 from papers.name import parse_comma_name
 from papers.name import shallower_name_similarity
 from papers.orcid import OrcidProfile
@@ -331,7 +331,7 @@ class OrcidPaperSource(PaperSource):
     def create_paper(self, data_paper):
         assert (not data_paper.skipped)
         # Create paper
-        paper = BarePaper.create(
+        paper = Paper.create(
             data_paper.title,
             data_paper.authors,
             data_paper.pubdate,

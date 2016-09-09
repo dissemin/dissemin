@@ -46,12 +46,11 @@ from django.test import TestCase
 import haystack
 from lxml import etree
 from papers.baremodels import BareAuthor
+from papers.baremodels import BareOaiRecord
 from papers.baremodels import BareName
-from papers.baremodels import BarePaper
 from papers.models import Department
 from papers.models import Institution
 from papers.models import Name
-from papers.models import OaiRecord
 from papers.models import OaiSource
 from papers.models import Paper
 from papers.models import Researcher
@@ -175,7 +174,7 @@ def check_paper(asserter, paper):
     """
     All sorts of tests to ensure a paper is well-behaved
     """
-    asserter.assertIsInstance(paper, BarePaper)
+    asserter.assertIsInstance(paper, Paper)
     # All authors should have valid names
     paper.check_authors()
     # Visible papers should have at least one source
@@ -198,7 +197,7 @@ class PaperSourceTest(PrefilledTest):
         papers = list(self.source.fetch_bare(self.researcher))
         for paper in papers:
             check_paper(self, paper)
-            paper = Paper.from_bare(paper)
+            paper.save()
         self.assertTrue(len(papers) > 1)
         self.check_papers(papers)
 
@@ -255,7 +254,7 @@ class OrcidIntegrationTest(PaperSourceTest):
         pablo = Researcher.get_or_create_by_orcid('0000-0002-6293-3231')
         self.source.fetch_and_save(pablo)
 
-        p = Paper.objects.get(oairecord__doi='10.1007/978-3-642-25516-8_1')
+        p = Paper.create_by_doi('10.1007/978-3-642-25516-8_1')
         self.assertEqual(p.authors[2].orcid, pablo.orcid)
 
         # Now fetch a coauthor of him
@@ -263,7 +262,7 @@ class OrcidIntegrationTest(PaperSourceTest):
         self.source.fetch_and_save(antoine)
 
         # This paper should be attributed to both ORCID ids
-        p = Paper.objects.get(oairecord__doi='10.1007/978-3-642-25516-8_1')
+        p = Paper.create_by_doi('10.1007/978-3-642-25516-8_1')
 
         self.assertEqual(p.authors[0].orcid, antoine.orcid)
         self.assertEqual(p.authors[2].orcid, pablo.orcid)
@@ -288,6 +287,14 @@ class PaperMethodsTest(PrefilledTest):
                            for (f, l) in new_author_names]
             paper.update_authors(new_authors)
             self.assertEqual(paper.bare_author_names(), final)
+
+    def test_fingerprint_in_identifiers(self):
+        date = datetime.date(year=2003, month=4, day=9)
+        paper = Paper.get_or_create('Beta-rays in black pudding',
+                                    map(Name.lookup_name, [
+                                        ('F.', 'Rodrigo'), ('A.', 'Johnson'), ('Pete', 'Blunsom')]),
+                                    date)
+        self.assertTrue(paper.fingerprint in paper.identifiers)
 
     def test_multiple_get_or_create(self):
         date = datetime.date(year=2003, month=4, day=9)
@@ -366,13 +373,14 @@ class MaintenanceTest(PrefilledTest):
 
     def test_update_paper_statuses(self):
         p = self.cr_api.create_paper_by_doi("10.1016/j.bmc.2005.06.035")
-        p = Paper.from_bare(p)
+        p.save()
         self.assertEqual(p.pdf_url, None)
         pdf_url = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
-        OaiRecord.new(source=self.arxiv,
+        r = BareOaiRecord(source=self.arxiv,
                       identifier='oai:arXiv.org:aunrisste',
-                      about=p,
                       splash_url='http://www.perdu.com/',
                       pdf_url=pdf_url)
+        p.add_oairecord(r)
+        p.save()
         update_paper_statuses()
         self.assertEqual(Paper.objects.get(pk=p.pk).pdf_url, pdf_url)

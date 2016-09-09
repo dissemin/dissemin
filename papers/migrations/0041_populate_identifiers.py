@@ -10,7 +10,7 @@ def populate_identifiers(apps, schema_editor):
     Paper = apps.get_model('papers', 'Paper')
     OaiRecord = apps.get_model('papers', 'OaiRecord')
 
-    lastpk = 100000
+    lastpk = 0
     bs = 500
     found = True
     while found:
@@ -31,12 +31,7 @@ def populate_identifiers(apps, schema_editor):
         
         updated = []
         for p in papers:#.select_related('oairecords'):
-            identifiers = set([p.fingerprint])
-            for identifier, doi in records[p.id]:
-                identifiers.add(identifier)
-                if doi:
-                    identifiers.add(doi)
-            p.identifiers = list(identifiers)
+            p.update_identifiers()
             updated.append(p)
         bulk_update(updated, update_fields=['identifiers'])
         lastpk = new_lastpk
@@ -59,7 +54,7 @@ CREATE INDEX gin_idx_identifiers ON
 papers_paper USING gin (identifiers)
 WITH (fastupdate = on);
 ""","""
-DROP INDEX IF EXISTS gin_dix_identifiers;
+DROP INDEX IF EXISTS gin_idx_identifiers;
 """),
     ]
 

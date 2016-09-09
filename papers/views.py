@@ -357,7 +357,9 @@ class PaperView(SlugDetailView):
             if pk is not None:
                 paper = queryset.get(pk=pk)
             elif doi is not None:
-                paper = Paper.objects.get(oairecord__doi=doi)
+                paper = Paper.create_by_doi(doi)
+                if not paper.id:
+                    paper.save()
             else:
                 raise AttributeError("Paper view expects a DOI or a pk")
         except ObjectDoesNotExist:
