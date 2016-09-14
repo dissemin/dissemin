@@ -29,6 +29,8 @@ def move_datestamps(apps, schema_editor):
     
     bulk_update(batch, update_fields=['temp'])
 
+def do_nothing(apps, schema_editor):
+    pass
 
 class Migration(migrations.Migration):
 
@@ -43,5 +45,5 @@ class Migration(migrations.Migration):
             field=models.DateTimeField(auto_now=True, default=datetime.datetime(2016, 7, 13, 6, 41, 37, 900483, tzinfo=utc)),
             preserve_default=False,
         ),
-        migrations.RunPython(move_datestamps, atomic=False),
+        migrations.RunPython(move_datestamps, do_nothing, atomic=False),
     ]
