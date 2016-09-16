@@ -78,6 +78,13 @@ def wrap_with_prefetch_status(baseWidget, get_callback, fieldname):
 
 
 class BaseMetadataForm(forms.Form):
+    def __init__(self, paper, **kwargs):
+        super(BaseMetadataForm, self).__init__(**kwargs)
+        # Subclasses can reimplement this and do things based on the
+        # paper instance (for instance, initializing choices).
+        # The paper_id field is not filled here, because that should
+        # only happen when filling the form with initial data.
+
     # Dummy field to store the paper id (required for dynamic fetching of the
     # abstract)
     paper_id = forms.IntegerField(

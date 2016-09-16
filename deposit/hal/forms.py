@@ -28,33 +28,13 @@ from django.utils.translation import ugettext as __
 
 from autocomplete.widgets import Select2
 
-HAL_TOPIC_CHOICES = [
-    ('CHIM', __('Chemistry')),
-    ('INFO', __('Computer science')),
-    ('MATH', __('Mathematics')),
-    ('PHYS', __('Physics')),
-    ('NLIN', __('Non-linear science')),
-    ('SCCO', __('Cognitive science')),
-    ('SDE', __('Environment sciences')),
-    ('SDU', __('Planet and Universe')),
-    ('SHS', __('Humanities and Social Science')),
-    ('SDV', __('Life sciences')),
-    ('SPI', __('Engineering sciences')),
-    ('STAT', __('Statistics')),
-    ('QFIN', __('Economy and quantitative finance')),
-    ('OTHER', __('Other')),
-  ]
-
-
 class HALForm(FormWithAbstract):
 
-#    def __init__(self, *args, **kwargs):
-#        super(HALForm, self).__init__(*args, **kwargs)
-#        self.helper = FormHelper(self)
-#        self.helper.form_class = 'form-horizontal'
-#        self.helper.label_class = 'col-lg-2'
-#        self.helper.field_class = 'col-lg-8'
-
+    def __init__(self, paper, **kwargs):
+        super(HALForm, self).__init__(paper, **kwargs)
+        self.fields['depositing_author'].choices = enumerate(
+            map(unicode, paper.authors))
+        
     # Dummy field to store the user name
     # (required for affiliation autocompletion)
     first_name = forms.CharField(
@@ -69,6 +49,12 @@ class HALForm(FormWithAbstract):
     topic = forms.ChoiceField(
             label=__('Scientific field'),
             choices=HAL_TOPIC_CHOICES)
+
+    depositing_author = forms.ChoiceField(
+        required=True,
+        label=__('Depositing author'),
+        choices=[], # choices are initialized from the paper later on
+    )
 
     affiliation = forms.CharField(
         required=False,

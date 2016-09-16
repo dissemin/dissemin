@@ -90,6 +90,7 @@ class Repository(models.Model):
         """
         cls = protocol_registry.get(self.protocol)
         if cls is None:
+            print "Warning: protocol not found: "+unicode(self.protocol)
             return
         return cls(self)
 

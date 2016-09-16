@@ -628,6 +628,12 @@ class Paper(models.Model, BarePaper):
         """
         return map(BareAuthor.deserialize, self.authors_list)
 
+    def authors_name_pairs(self):
+        """
+        The authors' names, represented as (first,last) pairs.
+        """
+        return [(a.name.first,a.name.last) for a in self.authors]
+
     @property
     def publications(self):
         """

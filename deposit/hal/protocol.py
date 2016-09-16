@@ -91,6 +91,17 @@ class HALProtocol(RepositoryProtocol):
         else:
             topic_text = self.paper.title
         data['topic'] = self.predict_topic(topic_text)
+
+        # Depositing author
+        most_similar_idx = None
+        first, last = (self.user.first_name, self.user.last_name)
+        if first and last:
+            most_similar_idx = most_similar_author((first,last),
+                paper.author_name_pairs())
+        data['depositing_author'] = most_similar_idx
+        for k, v in data.items():
+            print "%s: %s" % (unicode(k),unicode(v))
+
         return data
 
     def create_zip(self, pdf, metadata):

@@ -29,10 +29,30 @@ from deposit.sword.metadata import addChild
 from deposit.sword.metadata import MetadataFormatter
 from lxml import etree
 from papers.models import Paper
+from django.utils.translation import ugettext as __
 
 ENS_HAL_ID = 59704
 
 XMLLANG_ATTRIB = '{http://www.w3.org/XML/1998/namespace}lang'
+
+HAL_TOPIC_CHOICES = [
+    ('CHIM', __('Chemistry')),
+    ('INFO', __('Computer science')),
+    ('MATH', __('Mathematics')),
+    ('PHYS', __('Physics')),
+    ('NLIN', __('Non-linear science')),
+    ('SCCO', __('Cognitive science')),
+    ('SDE', __('Environment sciences')),
+    ('SDU', __('Planet and Universe')),
+    ('SHS', __('Humanities and Social Science')),
+    ('SDV', __('Life sciences')),
+    ('SPI', __('Engineering sciences')),
+    ('STAT', __('Statistics')),
+    ('QFIN', __('Economy and quantitative finance')),
+    ('OTHER', __('Other')),
+  ]
+
+
 
 
 def aofrDocumentType(paper):
