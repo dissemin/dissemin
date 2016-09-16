@@ -29,7 +29,6 @@ from deposit.sword.metadata import addChild
 from deposit.sword.metadata import MetadataFormatter
 from lxml import etree
 from papers.models import Paper
-from deposit.hal.forms import HALForm
 
 ENS_HAL_ID = 59704
 
