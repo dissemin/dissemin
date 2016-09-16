@@ -6,8 +6,8 @@ import requests
 import json
 
 
-HAL_API_AUTHOR_STRUCTURE = (
-    'https://api.archives-ouvertes.fr/search/authorstructure/'
+HAL_API_STRUCTURE = (
+    'https://api.archives-ouvertes.fr/ref/structure/'
 )
 
 
@@ -22,46 +22,61 @@ class AffiliationAutocomplete(View, ViewMixin, Select2ViewMixin):
     create_field = False
 
     def get_result_value(self, result):
-        return result[1]
+        return result['docid']
 
-    def get_result_label(self, result):
-        return result[0]
+    def get_result_selection(self, result):
+        return result['label_s']
+
+    def get_result_result(self, result):
+        return result['label_html']
+
+    def get_results(self, context):
+        return [
+            {
+                'id': self.get_result_value(result),
+                'selection': self.get_result_selection(result),
+                'result': self.get_result_result(result),
+            }
+            for result in context['object_list']
+        ]
 
     def has_more(self, context):
         return context.get('has_more', False)
 
-    def fetch_affiliations(self, author):
-        r = requests.get(HAL_API_AUTHOR_STRUCTURE, params={
-            'firstName_t': author['first_name'],
-            'lastName_t': author['last_name'],
-            'wt': 'json'
+    def fetch_affiliations(self, q):
+        empty_resp = {
+            'object_list': [],
+            'has_more': False,
+        }
+        if not q:
+            return empty_resp
+        r = requests.get(HAL_API_STRUCTURE, params={
+            'q': q,
+            'wt': 'json',
+            'rows': 20,
+            'fl': 'docid,label_s,label_html',
         })
         r.raise_for_status()
-        affiliations = r.json()['response']['result']
+        affiliations = r.json()['response']['docs']
 
         if not affiliations:
-            return {
-                'object_list': [],
-                'has_more': False
-            }
-
-        affiliations = affiliations['org']
+            return empty_resp
 
         return {
-            'object_list': [(
-                aff['orgName'][0],
-                aff['idno']
-            ) for aff in affiliations
-                if 'idno' in aff],
+            'object_list': [aff for aff in affiliations
+                if 'docid' in aff],
             'has_more': False
         }
 
     def get(self, request, *args, **kwargs):
         context = {}
 
+        # Structure name
+        q = request.GET.get('q')
+
         # Author data
-        first_name = request.GET.get('first_name', None)
-        last_name = request.GET.get('last_name', None)
+        #first_name = request.GET.get('first_name', None)
+        #last_name = request.GET.get('last_name', None)
 
         try:
             forward = request.GET.get('forward', None)
@@ -70,23 +85,24 @@ class AffiliationAutocomplete(View, ViewMixin, Select2ViewMixin):
         except:
             raise SuspiciousOperation('forward is not proper JSON object')
 
-        if not first_name and not last_name and forward:
-            first_name = forward.get('first_name', None)
-            last_name = forward.get('last_name', None)
+        #if not first_name and not last_name and forward:
+        #    first_name = forward.get('first_name', None)
+        #    last_name = forward.get('last_name', None)
 
-        if not first_name:
-            raise SuspiciousOperation(
-                'first_name is missing'
-            )
+        #if not first_name:
+        #    raise SuspiciousOperation(
+        #        'first_name is missing'
+        #    )
 
-        if not last_name:
-            raise SuspiciousOperation(
-                'last_name is missing'
-            )
+        #if not last_name:
+        #    raise SuspiciousOperation(
+        #        'last_name is missing'
+        #    )
 
-        context = self.fetch_affiliations({
-            'first_name': first_name,
-            'last_name': last_name
-        })
+        context = self.fetch_affiliations(q)
+        #{
+        #    'first_name': first_name,
+        #    'last_name': last_name
+        #}
 
         return self.render_to_response(context)

@@ -74,7 +74,8 @@ class HALProtocolTest(ProtocolTest):
         p = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
         r = self.dry_deposit(p,
                              abstract='this is an abstract',
-                             topic='INFO')
+                             topic='INFO',
+                             depositing_author=0)
         self.assertEqual(r.status, 'DRY_SUCCESS')
 
     def test_predict_topic(self):

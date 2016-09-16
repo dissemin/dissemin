@@ -28,6 +28,9 @@ from django.utils.translation import ugettext as __
 
 from autocomplete.widgets import Select2
 
+class AffiliationSelect2(Select2):
+    autocomplete_function = 'select2-customTemplate'
+
 class HALForm(FormWithAbstract):
 
     def __init__(self, paper, **kwargs):
@@ -37,14 +40,14 @@ class HALForm(FormWithAbstract):
         
     # Dummy field to store the user name
     # (required for affiliation autocompletion)
-    first_name = forms.CharField(
-        required=False,
-        widget=forms.HiddenInput
-    )
-    last_name = forms.CharField(
-        required=False,
-        widget=forms.HiddenInput
-    )
+    #first_name = forms.CharField(
+    #    required=False,
+    #    widget=forms.HiddenInput
+    #)
+    #last_name = forms.CharField(
+    #    required=False,
+    #    widget=forms.HiddenInput
+    #)
 
     topic = forms.ChoiceField(
             label=__('Scientific field'),
@@ -59,5 +62,12 @@ class HALForm(FormWithAbstract):
     affiliation = forms.CharField(
         required=False,
         label=__('Affiliation'),
-        widget=Select2(forward=['first_name', 'last_name'], url='autocomplete_affiliations')
+        widget=AffiliationSelect2(
+#            forward=['first_name', 'last_name'],
+            url='autocomplete_affiliations',
+            attrs={
+                #'data-html': 'true',
+                'width': '100%',
+            },
+        )
     )
