@@ -20,7 +20,7 @@
 
 from __future__ import unicode_literals
 
-from deposit.forms import BaseMetadataForm
+from deposit.forms import FormWithAbstract
 from django import forms
 from django.utils.translation import ugettext as __
 
@@ -40,7 +40,7 @@ ZENODO_LICENSES_CHOICES = [
  ]
 
 
-class ZenodoForm(BaseMetadataForm):
+class ZenodoForm(FormWithAbstract):
     license = forms.ChoiceField(
             label=__('License'),
             choices=ZENODO_LICENSES_CHOICES,

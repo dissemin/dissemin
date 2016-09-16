@@ -21,13 +21,13 @@
 from __future__ import unicode_literals
 
 from crispy_forms.helper import FormHelper
-from deposit.forms import BaseMetadataForm
+from deposit.forms import FormWithAbstract
 from deposit.hal.metadata import HAL_TOPIC_CHOICES
 from django import forms
 from django.utils.translation import ugettext as __
 
 
-class HALForm(BaseMetadataForm):
+class HALForm(FormWithAbstract):
 
     def __init__(self, *args, **kwargs):
         super(HALForm, self).__init__(*args, **kwargs)
