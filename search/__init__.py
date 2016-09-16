@@ -128,3 +128,14 @@ class SearchQuerySet(haystack.SearchQuerySet):
         if self._aggregation_results is None:
             self._aggregation_results = self.query.get_aggregation_results()
         return self._aggregation_results
+
+class EmptySearchQuerySet(haystack.EmptySearchQuerySet):
+    """
+    Support for aggregations in the EmptySearchQuerySet
+    """
+
+    def aggregations(self, aggs):
+        return self
+
+    def get_aggregation_results(self):
+        return {}

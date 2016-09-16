@@ -1005,9 +1005,12 @@ class Paper(models.Model, BarePaper):
 
 # Rough data extracted through OAI-PMH
 
+class OaiSourceManager(CachingManager):
+    def get_by_natural_key(self, identifier):
+        return self.get(identifier=identifier)
 
 class OaiSource(CachingMixin, models.Model):
-    objects = CachingManager()
+    objects = OaiSourceManager()
 
     identifier = models.CharField(max_length=300, unique=True)
     name = models.CharField(max_length=100)
@@ -1021,6 +1024,9 @@ class OaiSource(CachingMixin, models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def natural_key(self):
+        return (self.identifier,)
 
     class Meta:
         verbose_name = "OAI source"

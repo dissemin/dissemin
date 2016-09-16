@@ -78,16 +78,18 @@ def wrap_with_prefetch_status(baseWidget, get_callback, fieldname):
 
 
 class BaseMetadataForm(forms.Form):
-    """
-    A simple metadata form, only including the abstract.
-    Repositories can subclass this form to add more fields.
-    """
     # Dummy field to store the paper id (required for dynamic fetching of the
     # abstract)
     paper_id = forms.IntegerField(
         required=False,
         widget=forms.HiddenInput
     )
+
+class FormWithAbstract(BaseMetadataForm):
+    """
+    A simple metadata form, only including the abstract.
+    Repositories can subclass this form to add more fields.
+    """
     abstract = forms.CharField(
             label=__('Abstract'),
             required=True,

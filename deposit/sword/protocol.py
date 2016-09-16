@@ -22,7 +22,7 @@ from __future__ import unicode_literals
 
 import requests
 
-from deposit.forms import BaseMetadataForm
+from deposit.forms import FormWithAbstract
 from deposit.protocol import DepositError
 from deposit.protocol import DepositResult
 from deposit.protocol import RepositoryProtocol
@@ -38,6 +38,7 @@ class SwordProtocol(RepositoryProtocol):
     """
     A generic SWORD protocol using the sword2 library
     """
+    form_class = FormWithAbstract
 
     def get_conn(self):
         if self.repository.endpoint is None:
@@ -46,17 +47,13 @@ class SwordProtocol(RepositoryProtocol):
                                  user_name=self.repository.username,
                                  user_pass=self.repository.password)
 
-    def get_form(self):
-        data = {}
-        data['paper_id'] = self.paper.id
+    def get_form_initial_data(self):
+        data = super(SwordProtocol, self).get_form_initial_data()
         if self.paper.abstract:
             data['abstract'] = kill_html(self.paper.abstract)
         else:
             self.paper.consolidate_metadata(wait=False)
-        return BaseMetadataForm(initial=data)
-
-    def get_bound_form(self, data):
-        return BaseMetadataForm(data)
+        return data
 
     def createMetadata(self, form):
         entry = sword2.Entry()
@@ -93,8 +90,8 @@ class SwordProtocol(RepositoryProtocol):
             # self.log(entry.pretty_print())
 
             formatter = DCFormatter()
-            meta = formatter.toString(self.paper, 'article.pdf', True)
-            print meta
+            meta = formatter.toString(self.paper, 'article.pdf', True,
+xml_declaration=False)
             self.log(meta)
 
             self.log("### Submitting metadata")

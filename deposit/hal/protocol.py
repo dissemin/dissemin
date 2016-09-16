@@ -51,6 +51,8 @@ class HALProtocol(RepositoryProtocol):
     A protocol to submit using the HAL SWORD API
     """
 
+    form_class = HALForm
+
     def __init__(self, repository, **kwargs):
         super(HALProtocol, self).__init__(repository, **kwargs)
         # We let the interface define another API endpoint (sandbox…)
@@ -70,9 +72,8 @@ class HALProtocol(RepositoryProtocol):
         except (requests.exceptions.RequestException, ValueError, KeyError):
             return None
 
-    def get_form(self):
-        data = {}
-        data['paper_id'] = self.paper.id
+    def get_form_initial_data(self):
+        data = super(HALProtocol, self).get_form_initial_data()
 
         data['first_name'] = self.user.first_name
         data['last_name'] = self.user.last_name
@@ -90,11 +91,7 @@ class HALProtocol(RepositoryProtocol):
         else:
             topic_text = self.paper.title
         data['topic'] = self.predict_topic(topic_text)
-
-        return HALForm(initial=data)
-
-    def get_bound_form(self, data):
-        return HALForm(data)
+        return data
 
     def create_zip(self, pdf, metadata):
         s = BytesIO()
@@ -152,6 +149,7 @@ class HALProtocol(RepositoryProtocol):
             conn.close()
 
             parser = etree.XMLParser(encoding='utf-8')
+            print xml_response
             receipt = etree.parse(BytesIO(xml_response), parser)
             receipt = receipt.getroot()
             if receipt.tag == '{http://purl.org/net/sword/error/}error':

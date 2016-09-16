@@ -9,6 +9,12 @@ from .common import *
 DEBUG = True
 DEBUG_TOOLBAR_CONFIG = {'SHOW_TOOLBAR_CALLBACK': lambda r: True}
 
+# If you do not want to use Celery,
+# use this setting to run all asynchronous tasks in the main process
+# (celery will still be required as a dependency, but you do not need
+# to run any other process, and no redis server).
+# CELERY_ALWAYS_EAGER = True
+
 # Cache backend
 # https://docs.djangoproject.com/en/1.8/topics/cache/
 CACHES = {

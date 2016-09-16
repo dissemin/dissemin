@@ -91,13 +91,16 @@ class ProtocolTest(PrefilledTest):
         enabled = self.proto.init_deposit(paper, self.user)
         self.assertTrue(enabled)
 
-        args = form_fields.copy()
-        args['paper_id'] = paper.id
+        args = self.proto.get_form_initial_data()
+        args.update(form_fields)
 
         form = self.proto.get_bound_form(args)
+        if not form.is_valid():
+            print form.errors
         self.assertTrue(form.is_valid())
         pdf = 'mediatest/blank.pdf'
         deposit_result = self.proto.submit_deposit_wrapper(pdf,
                                                            form, dry_run=True)
         self.assertIsInstance(deposit_result, DepositResult)
+        print deposit_result.logs
         return deposit_result

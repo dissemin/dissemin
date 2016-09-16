@@ -37,6 +37,7 @@ class ZenodoProtocol(RepositoryProtocol):
     """
     A protocol to submit using the Zenodo API
     """
+    form_class = ZenodoForm
 
     def __init__(self, repository, **kwargs):
         super(ZenodoProtocol, self).__init__(repository, **kwargs)
@@ -45,18 +46,14 @@ class ZenodoProtocol(RepositoryProtocol):
         if not self.api_url:
             self.api_url = "https://zenodo.org/api/deposit/depositions"
 
-    def get_form(self):
-        data = {}
+    def get_form_initial_data(self):
+        data = super(ZenodoProtocol, self).get_form_initial_data()
         data['license'] = 'other-open'
-        data['paper_id'] = self.paper.id
         if self.paper.abstract:
             data['abstract'] = kill_html(self.paper.abstract)
         else:
             self.paper.consolidate_metadata(wait=False)
-        return ZenodoForm(initial=data)
-
-    def get_bound_form(self, data):
-        return ZenodoForm(data)
+        return data
 
     def submit_deposit(self, pdf, form, dry_run=False):
         if self.repository.api_key is None:
