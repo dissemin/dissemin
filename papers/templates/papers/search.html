@@ -97,7 +97,6 @@ $(function(){
          {% csrf_token %}
          {{ researcher.affiliation_form }}</br>
          </form>
-         <a href="{% url 'recluster-researcher' researcher.pk %}" class="btn btn-default">{% trans "Refresh classification" %}</a>
          {% endif %}
     </div>
 {% elif department %}

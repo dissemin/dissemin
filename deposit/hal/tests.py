@@ -25,6 +25,7 @@ from deposit.hal.protocol import HALProtocol
 from deposit.tests import ProtocolTest
 from django.test import TestCase
 from papers.models import Paper
+from unittest import expectedFailure
 
 
 #from os import path
@@ -67,15 +68,47 @@ class HALProtocolTest(ProtocolTest):
         # f =
         self.proto = HALProtocol(self.repo)
 
+    @expectedFailure
     def test_lncs(self):
         """
-        Submit a paper from LNCS
+        Submit a paper from LNCS (type: book-chapter).
+        This fails with the default test account because
+        it does not have the right to deposit with only one
+        affiliation.
         """
         p = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
         r = self.dry_deposit(p,
-                             abstract='this is an abstract',
-                             topic='INFO',
-                             depositing_author=0)
+            abstract='this is an abstract',
+            topic='INFO',
+            depositing_author=0,
+            affiliation=59704) # ENS
+        self.assertEqual(r.status, 'DRY_SUCCESS')
+
+    def test_lncs_one_author(self):
+        """
+        Same as test_lncs but with only one author
+        """
+        p = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
+        p.authors_list = [p.authors_list[0]]
+        r = self.dry_deposit(p,
+            abstract='this is an abstract',
+            topic='INFO',
+            depositing_author=0,
+            affiliation=59704) # ENS
+        self.assertEqual(r.status, 'DRY_SUCCESS')
+
+
+    def test_lics_one_author(self):
+        """
+        Submit a paper from LICS (type: conference-proceedings)
+        """
+        p = Paper.create_by_doi('10.1109/lics.2015.37')
+        p.authors_list = [p.authors_list[0]]
+        r = self.dry_deposit(p,
+             abstract='here is my great result',
+             topic='NLIN',
+             depositing_author=0,
+             affiliation=128940)
         self.assertEqual(r.status, 'DRY_SUCCESS')
 
     def test_predict_topic(self):

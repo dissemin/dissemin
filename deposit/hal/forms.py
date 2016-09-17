@@ -53,10 +53,11 @@ class HALForm(FormWithAbstract):
             label=__('Scientific field'),
             choices=HAL_TOPIC_CHOICES)
 
-    depositing_author = forms.ChoiceField(
+    depositing_author = forms.TypedChoiceField(
         required=True,
         label=__('Depositing author'),
         choices=[], # choices are initialized from the paper later on
+        coerce=int, # values are indexes of authors
     )
 
     affiliation = forms.CharField(
