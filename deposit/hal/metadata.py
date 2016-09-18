@@ -51,8 +51,6 @@ HAL_TOPIC_CHOICES = [
   ]
 
 
-
-
 def aofrDocumentType(paper):
     tr = {
             'journal-article': 'ART',
@@ -61,7 +59,6 @@ def aofrDocumentType(paper):
             #'proceedings-article': 'COMM')
             'book-chapter': 'COUV',
             'book': 'OUV',
-            'journal-issue': 'DOUV',
             'proceedings': 'DOUV',
             'reference-entry': 'OTHER',
             'poster': 'POSTER',
@@ -95,7 +92,6 @@ class AOFRFormatter(MetadataFormatter):
         # titleStmt
         titleStmt = addChild(biblFull, 'titleStmt')
 
-        print form.cleaned_data
         self.renderTitleAuthors(titleStmt, paper,
                 form.cleaned_data['affiliation'],
                 form.cleaned_data['depositing_author'])
@@ -147,6 +143,11 @@ class AOFRFormatter(MetadataFormatter):
         #    note.attrib['type'] = 'proceedings'
         #    note.attrib['n'] = '1'
 
+        if halType == 'OTHER':
+            note = addChild(notesStmt, 'note')
+            note.attrib['type'] = 'description'
+            note.text = paper.doctype
+
         # sourceDesc
         sourceDesc = addChild(biblFull, 'sourceDesc')
         biblStruct = addChild(sourceDesc, 'biblStruct')
@@ -159,6 +160,16 @@ class AOFRFormatter(MetadataFormatter):
         for publication in paper.publications:
             date = publication.pubdate or paper.pubdate
             self.renderPubli(biblStruct, publication, halType, date)
+            break # stop after the first publication
+
+        if not paper.publications:
+            # we still need to add an <imprint> for
+            # the publication date
+            monogr = addChild(biblStruct, 'monogr')
+            imprint = addChild(monogr, 'imprint')
+            data = addChild(imprint, 'date')
+            data.attrib['type'] = 'datePub'
+            data.text = paper.pubdate.isoformat()
 
         # profileDesc
         profileDesc = addChild(biblFull, 'profileDesc')
@@ -273,8 +284,7 @@ author
 
         data = addChild(imprint, 'date')
         data.attrib['type'] = 'datePub'
-        data.text = 'unknown'
-        data.text = str(pubdate.year)
+        data.text = pubdate.isoformat()
 
     def renderJournal(self, root, journal):
         pass

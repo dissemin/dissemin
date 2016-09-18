@@ -26,6 +26,8 @@ from deposit.tests import ProtocolTest
 from django.test import TestCase
 from papers.models import Paper
 from unittest import expectedFailure
+from backend.oai import OaiPaperSource
+from backend.oai import BASEDCTranslator
 
 
 #from os import path
@@ -69,7 +71,7 @@ class HALProtocolTest(ProtocolTest):
         self.proto = HALProtocol(self.repo)
 
     @expectedFailure
-    def test_lncs(self):
+    def test_lncs_many_authors(self):
         """
         Submit a paper from LNCS (type: book-chapter).
         This fails with the default test account because
@@ -84,7 +86,7 @@ class HALProtocolTest(ProtocolTest):
             affiliation=59704) # ENS
         self.assertEqual(r.status, 'DRY_SUCCESS')
 
-    def test_lncs_one_author(self):
+    def test_lncs(self):
         """
         Same as test_lncs but with only one author
         """
@@ -98,7 +100,7 @@ class HALProtocolTest(ProtocolTest):
         self.assertEqual(r.status, 'DRY_SUCCESS')
 
 
-    def test_lics_one_author(self):
+    def test_lics(self):
         """
         Submit a paper from LICS (type: conference-proceedings)
         """
@@ -107,6 +109,34 @@ class HALProtocolTest(ProtocolTest):
         r = self.dry_deposit(p,
              abstract='here is my great result',
              topic='NLIN',
+             depositing_author=0,
+             affiliation=128940)
+        self.assertEqual(r.status, 'DRY_SUCCESS')
+
+    def test_journal_article(self):
+        """
+        Submit a journal article
+        """
+        p = Paper.create_by_doi('10.1016/j.agee.2004.10.001')
+        p.authors_list = [p.authors_list[0]]
+        r = self.dry_deposit(p,
+             abstract='here is my great result',
+             topic='SDV',
+             depositing_author=0,
+             affiliation=128940)
+        self.assertEqual(r.status, 'DRY_SUCCESS')
+
+    def test_preprint(self):
+        """
+        Submit a preprint
+        """
+        oai = OaiPaperSource(endpoint='http://doai.io/oai')
+        oai.add_translator(BASEDCTranslator())
+        p = oai.create_paper_by_identifier('ftarxivpreprints:oai:arXiv.org:1207.2079', 'base_dc')
+        p.authors_list = [p.authors_list[0]]
+        r = self.dry_deposit(p,
+             abstract='here is my great result',
+             topic='SDV',
              depositing_author=0,
              affiliation=128940)
         self.assertEqual(r.status, 'DRY_SUCCESS')
