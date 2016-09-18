@@ -362,7 +362,7 @@ class PaperView(SlugDetailView):
                 raise AttributeError("Paper view expects a DOI or a pk")
         except ObjectDoesNotExist:
             paper = Paper.create_by_doi(doi)
-            if paper is None:
+            if paper is None or paper.is_orphan():
                 raise Http404(_("No %(verbose_name)s found matching the query") %
                               {'verbose_name': Paper._meta.verbose_name})
         return paper

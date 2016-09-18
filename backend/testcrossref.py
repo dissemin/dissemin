@@ -92,6 +92,12 @@ class CrossRefTest(TestCase):
         self.assertTrue(p.is_orphan())
         self.assertFalse(p.visible)
 
+    def test_doctype_book(self):
+        # Books are ignored
+        # (technically, that's because we currently require a
+        # 'container-title' in the metadata)
+        p = self.api.create_paper_by_doi('10.1385/1592597998')
+        self.assertTrue(p.is_orphan())
 
 class CrossRefUnitTest(unittest.TestCase):
 
@@ -229,3 +235,5 @@ class CrossRefUnitTest(unittest.TestCase):
             'http://www.acs.org/content/acs/en/copyright.html'))
         self.assertFalse(is_oa_license(
             'http://www.elsevier.com/tdm/userlicense/1.0/'))
+
+        
