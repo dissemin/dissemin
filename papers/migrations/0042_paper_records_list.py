@@ -7,43 +7,6 @@ from collections import defaultdict
 import django.contrib.postgres.fields.jsonb
 from django.db import migrations
 
-def populate_records(apps, schema_editor):
-    Paper = apps.get_model('papers', 'Paper')
-    OaiRecord = apps.get_model('papers', 'OaiRecord')
-
-    lastpk = 0
-    bs = 500
-    found = True
-    while found:
-        found = False
-        print lastpk
-    
-        papers = list(Paper.objects.filter(pk__gt=lastpk).order_by('id')[:bs])
-        if not papers:
-            break
-        found = True
-
-        new_lastpk = papers[-1].pk
-
-        records_list = OaiRecord.objects.filter(about_id__gt=lastpk,
-                about_id__lte=new_lastpk)
-        records = defaultdict(list)
-        for record in records_list:
-            records[record.about_id].append(record)
-        
-        updated = []
-        for p in papers:
-            for r in records[p.id]:
-                p.add_oairecord(r)
-            updated.append(p)
-        bulk_update(updated, update_fields=['records_list'])
-        lastpk = new_lastpk
-
-def do_nothing(apps, schema_editor):
-    pass
-
-
-
 class Migration(migrations.Migration):
     atomic = False
 
@@ -57,5 +20,4 @@ class Migration(migrations.Migration):
             name='records_list',
             field=django.contrib.postgres.fields.jsonb.JSONField(default=list),
         ),
-        migrations.RunPython(populate_records, do_nothing),
     ]

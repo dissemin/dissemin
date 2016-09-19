@@ -8,7 +8,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('papers', '0042_paper_records_list'),
+        ('papers', '0043_fill_records_list'),
     ]
 
     operations = [

@@ -160,8 +160,8 @@ class BareObject(object):
         The list of mandatory fields for the class should be stored in `_mandatory_fields`.
         """
         for field in self._mandatory_fields:
-            if (not hasattr(self, field) and
-                not hasattr(self, field+'_id')):
+            if (not getattr(self, field, None) and
+                not getattr(self, field+'_id', None)):
                 raise ValueError('No %s provided to create a %s.' %
                                  (field, self.__class__.__name__))
 
