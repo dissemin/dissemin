@@ -26,7 +26,7 @@ import unittest
 from deposit.tests import lorem_ipsum
 from deposit.tests import ProtocolTest
 from deposit.zenodo.protocol import ZenodoProtocol
-
+from papers.models import Paper
 
 class ZenodoProtocolTest(ProtocolTest):
 
@@ -39,9 +39,10 @@ class ZenodoProtocolTest(ProtocolTest):
         self.repo.api_key = os.environ['ZENODO_SANDBOX_API_KEY']
         self.repo.endpoint = 'https://sandbox.zenodo.org/api/deposit/depositions'
         self.proto = ZenodoProtocol(self.repo)
-        data = {}
-        data['license'] = 'other-open'
-        data['paper_id'] = self.p1.id
-        data['abstract'] = lorem_ipsum
-        self.form = self.proto.get_bound_form(data)
-        self.form.is_valid()
+
+    def test_lncs(self):
+        p = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
+        r = self.dry_deposit(p,
+            abstract = lorem_ipsum,
+            license = 'other-open')
+        self.assertEqual(r.status, 'DRY_SUCCESS')
