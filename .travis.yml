@@ -35,7 +35,7 @@ env:
       # Proaixy API key
     - secure: "FayAfdusZgzSsAc7HZaCSyhMiwr19Qk/ePmjcBk6HyVWW9EaJiokjMb2DAc9IlBmkZxNg1+DU+ou1L4thPNaFrkTBqtdjQdqNtzsycyMedD6gYGKAdhaOuHNaCkikRHcIR1+STxx2udzOC1yk8xocaYiQFBD6AmRveMGfGN3WZw="
       # Zenodo Sandbox API key
-    - secure: "hC9XBvdx96Xcit8xg42k/OGZeDuM76oRa9tB4JiN8PJy7Ij0GuqvZsEmRgV9qgOtmbUdlfcWgCpvTvxB1ejOjLCPrefhmnHnJ2ss1ZYsJCDhnvqNEh6YuZgIjGHj65R11EGJcJCwycReNN9O8m2/6+z6XI1LyBE4xckrGcgeLxM="
+    - secure: "KjRrTKrNyhv1xVl2UBtJ/qH0uFGItvxw7/pGFfPrcwxD5YAB5daePDaIGe/tlVy+lrQi0D9x1CA8MB2vm+Lf4jrfO+3ZHCkmb4ecbumPV7DxEbgFsralBx65PRRVUiDW1Oy0RyigxXNNdtNLvTVr1PYrZYD407HZnP6LrJP0ONM="
       # Gitbot l10n key (for translation notifications)
     - secure: "qm+WAH7GpYIjid+q5tVnRgpiIwRmo7C8ou8GAeHJwTxkcmX8+YsYhuuacXO5mW/gcvjb9UNVCDkIKqjIsxJdmC0JovXJJ2dG2g1P39FfOCsF1+FpOqxdjBxdlJCoPb+Wmx7qk5+n+ZgqArgDPFwTWAPqsfshVPLplvaIYfA6H2s="
 
