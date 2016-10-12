@@ -1,9 +1,11 @@
+import json
+
+import requests
+
 from dal.views import ViewMixin
 from dal_select2.views import Select2ViewMixin
-from django.views.generic import View
 from django.core.exceptions import SuspiciousOperation
-import requests
-import json
+from django.views.generic import View
 
 
 HAL_API_STRUCTURE = (

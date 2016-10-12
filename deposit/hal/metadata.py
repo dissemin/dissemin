@@ -189,7 +189,8 @@ class AOFRFormatter(MetadataFormatter):
 
         abstract = addChild(profileDesc, 'abstract')
         abstract.attrib[XMLLANG_ATTRIB] = 'en'
-        abstract.text = 'No abstract.' if not form.cleaned_data['abstract'] else form.cleaned_data['abstract']
+        abstract.text = 'No abstract.' if not form.cleaned_data[
+            'abstract'] else form.cleaned_data['abstract']
         for record in paper.sorted_oai_records:
             if record.description:
                 abstract.text = record.description
@@ -247,19 +248,19 @@ author
             title.text = publi.full_journal_title()
 
         # 'COMM' is disabled, use 'COUV' instead
-   
+
         #if halType == 'COMM':
         #    meeting = addChild(root, 'meeting')
         #    title = addChild(meeting, 'title')
         #    title.text = publi.full_journal_title()
         #    date = addChild(meeting, 'date')
         #    date.attrib['type'] = 'start'
-        #    date.text = unicode(pubdate.year) 
+        #    date.text = unicode(pubdate.year)
         #    settlement = addChild(meeting, 'settlement')
         #    settlement.text = 'Paris'
         #    country = addChild(meeting, 'country')
         #    country.attrib['key'] = 'FR'
-   
+
         imprint = addChild(root, 'imprint')
 
         if publi.publisher:

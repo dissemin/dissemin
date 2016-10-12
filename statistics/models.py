@@ -107,7 +107,7 @@ def combined_status_stats(queryset):
 
 class BareAccessStatistics(object):
     """
-    A bare (not saved in the DB) summary of the status of publications
+    A bare summary of the status of a set of publications
     """
     @classmethod
     def new(cls):

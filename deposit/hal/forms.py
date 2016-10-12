@@ -20,13 +20,13 @@
 
 from __future__ import unicode_literals
 
+from autocomplete.widgets import Select2
 from crispy_forms.helper import FormHelper
 from deposit.forms import FormWithAbstract
 from deposit.hal.metadata import HAL_TOPIC_CHOICES
 from django import forms
 from django.utils.translation import ugettext as __
 
-from autocomplete.widgets import Select2
 
 class AffiliationSelect2(Select2):
     autocomplete_function = 'select2-customTemplate'
@@ -37,7 +37,7 @@ class HALForm(FormWithAbstract):
         super(HALForm, self).__init__(paper, **kwargs)
         self.fields['depositing_author'].choices = enumerate(
             map(unicode, paper.authors))
-        
+
     # Dummy field to store the user name
     # (required for affiliation autocompletion)
     #first_name = forms.CharField(
