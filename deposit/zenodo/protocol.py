@@ -112,7 +112,8 @@ class ZenodoProtocol(RepositoryProtocol):
                                 (deposition_id, api_key))
             self.log(r.text)
             deposit_result.status = 'DRY_SUCCESS'
-
+            deposit_result.splash_url = 'http://sandbox.zenodo.org/fake'
+            deposit_result.pdf_url = deposit_result.splash_url
         else:
             self.log("### Publishing the deposition")
             r = requests.post(
@@ -122,7 +123,7 @@ class ZenodoProtocol(RepositoryProtocol):
             self.log(r.text)
 
             deposition_object = r.json()
-            deposit_result.splash_url = deposition_object['record_url']
+            deposit_result.splash_url = deposition_object.get('record_url', 'https://zenodo.org/')
             deposit_result.pdf_url = deposit_result.splash_url + '/files/article.pdf'
 
         return deposit_result
@@ -154,10 +155,6 @@ class ZenodoProtocol(RepositoryProtocol):
         metadata['creators'] = map(formatAuthor, self.paper.authors)
 
         # Abstract
-        # If we are currently fetching the abstract, wait for the task to
-        # complete
-        if self.paper.task:
-            self.paper.consolidate_metadata(wait=True)
         abstract = form.cleaned_data[
             'abstract'] or kill_html(self.paper.abstract)
 

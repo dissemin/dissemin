@@ -95,3 +95,10 @@ SET_TO_PUBTYPE = {
         'type:VIDEO': 'other',
 
         }
+
+# By default, pubtype is kept identical
+CROSSREF_PUBTYPE_ALIASES = {
+        'article': 'journal-article',
+        }
+
+

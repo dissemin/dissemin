@@ -27,39 +27,38 @@ from __future__ import unicode_literals
 
 from deposit.sword.metadata import addChild
 from deposit.sword.metadata import MetadataFormatter
-from django.utils.translation import ugettext_lazy as _
 from lxml import etree
 from papers.models import Paper
-
-HAL_TOPIC_CHOICES = [
-    ('CHIM', _('Chemistry')),
-    ('INFO', _('Computer science')),
-    ('MATH', _('Mathematics')),
-    ('PHYS', _('Physics')),
-    ('NLIN', _('Non-linear science')),
-    ('SCCO', _('Cognitive science')),
-    ('SDE', _('Environment sciences')),
-    ('SDU', _('Planet and Universe')),
-    ('SHS', _('Humanities and Social Science')),
-    ('SDV', _('Life sciences')),
-    ('SPI', _('Engineering sciences')),
-    ('STAT', _('Statistics')),
-    ('QFIN', _('Economy and quantitative finance')),
-    ('OTHER', _('Other')),
-  ]
-
-ENS_HAL_ID = 59704
+from django.utils.translation import ugettext as __
 
 XMLLANG_ATTRIB = '{http://www.w3.org/XML/1998/namespace}lang'
+
+HAL_TOPIC_CHOICES = [
+    ('CHIM', __('Chemistry')),
+    ('INFO', __('Computer science')),
+    ('MATH', __('Mathematics')),
+    ('PHYS', __('Physics')),
+    ('NLIN', __('Non-linear science')),
+    ('SCCO', __('Cognitive science')),
+    ('SDE', __('Environment sciences')),
+    ('SDU', __('Planet and Universe')),
+    ('SHS', __('Humanities and Social Science')),
+    ('SDV', __('Life sciences')),
+    ('SPI', __('Engineering sciences')),
+    ('STAT', __('Statistics')),
+    ('QFIN', __('Economy and quantitative finance')),
+    ('OTHER', __('Other')),
+  ]
 
 
 def aofrDocumentType(paper):
     tr = {
             'journal-article': 'ART',
-            'proceedings-article': 'COMM',
+            'proceedings-article': 'COUV',
+            # (sinon les métadonnées sont énervantes avec ça:
+            #'proceedings-article': 'COMM')
             'book-chapter': 'COUV',
             'book': 'OUV',
-            'journal-issue': 'DOUV',
             'proceedings': 'DOUV',
             'reference-entry': 'OTHER',
             'poster': 'POSTER',
@@ -93,15 +92,17 @@ class AOFRFormatter(MetadataFormatter):
         # titleStmt
         titleStmt = addChild(biblFull, 'titleStmt')
 
-        self.renderTitleAuthors(titleStmt, paper)
+        self.renderTitleAuthors(titleStmt, paper,
+                form.cleaned_data['affiliation'],
+                form.cleaned_data['depositing_author'])
 
         # editionStmt
-        if filename != None:
+        if filename is not None:
             editionStmt = addChild(biblFull, 'editionStmt')
             edition = addChild(editionStmt, 'edition')
             date = addChild(edition, 'date')
             date.attrib['type'] = 'whenWritten'
-            date.text = str(paper.pubdate.year)
+            date.text = paper.pubdate.isoformat()
             ref = addChild(edition, 'ref')
             ref.attrib['type'] = 'file'
             ref.attrib['subtype'] = 'author'  # TODO adapt based on form info
@@ -118,6 +119,8 @@ class AOFRFormatter(MetadataFormatter):
         idno.attrib['n'] = 'ENS-PARIS'
         # TODO add other stamps here (based on the institutions)
 
+        halType = aofrDocumentType(paper)
+
         # notesStmt
         notesStmt = addChild(biblFull, 'notesStmt')
         note = addChild(notesStmt, 'note')
@@ -125,21 +128,48 @@ class AOFRFormatter(MetadataFormatter):
         note.attrib['n'] = '0'
         note = addChild(notesStmt, 'note')
         note.attrib['type'] = 'audience'
-        note.attrib['n'] = '3'
+        note.attrib['n'] = '2'
         note = addChild(notesStmt, 'note')
         note.attrib['type'] = 'peer'
         note.attrib['n'] = '1'
+
+        # COMM is disabled (use COUV instead)
+
+        #if halType == 'COMM':
+        #    note = addChild(notesStmt, 'note')
+        #    note.attrib['type'] = 'invited'
+        #    note.attrib['n'] = '0'
+        #    note = addChild(notesStmt, 'note')
+        #    note.attrib['type'] = 'proceedings'
+        #    note.attrib['n'] = '1'
+
+        if halType == 'OTHER':
+            note = addChild(notesStmt, 'note')
+            note.attrib['type'] = 'description'
+            note.text = paper.doctype
 
         # sourceDesc
         sourceDesc = addChild(biblFull, 'sourceDesc')
         biblStruct = addChild(sourceDesc, 'biblStruct')
         analytic = addChild(biblStruct, 'analytic')
 
-        self.renderTitleAuthors(analytic, paper)
+        self.renderTitleAuthors(analytic, paper,
+                form.cleaned_data['affiliation'],
+                form.cleaned_data['depositing_author'])
 
-        halType = aofrDocumentType(paper)
         for publication in paper.publications:
-            self.renderPubli(biblStruct, publication, halType)
+            date = publication.pubdate or paper.pubdate
+            self.renderPubli(biblStruct, publication, halType, date)
+            break # stop after the first publication
+
+        if not paper.publications:
+            # we still need to add an <imprint> for
+            # the publication date
+            monogr = addChild(biblStruct, 'monogr')
+            imprint = addChild(monogr, 'imprint')
+            data = addChild(imprint, 'date')
+            data.attrib['type'] = 'datePub'
+            data.text = paper.pubdate.isoformat()
 
         # profileDesc
         profileDesc = addChild(biblFull, 'profileDesc')
@@ -159,7 +189,8 @@ class AOFRFormatter(MetadataFormatter):
 
         abstract = addChild(profileDesc, 'abstract')
         abstract.attrib[XMLLANG_ATTRIB] = 'en'
-        abstract.text = 'No abstract.'
+        abstract.text = 'No abstract.' if not form.cleaned_data[
+            'abstract'] else form.cleaned_data['abstract']
         for record in paper.sorted_oai_records:
             if record.description:
                 abstract.text = record.description
@@ -169,12 +200,19 @@ class AOFRFormatter(MetadataFormatter):
 
         return tei
 
-    def renderTitleAuthors(self, root, paper):
+    def renderTitleAuthors(self, root, paper,
+            author_structure, depositing_id):
+        """
+        :param author_structure: the structure id of the depositing
+author
+        :param depositing_id: the index of the depositing author
+            in the list of authors
+        """
         title = addChild(root, 'title')
         title.attrib[XMLLANG_ATTRIB] = 'en'  # TODO: autodetect language?
         title.text = paper.title
 
-        for author in paper.authors:
+        for idx, author in enumerate(paper.authors):
             node = addChild(root, 'author')
             node.attrib['role'] = 'aut'
             nameNode = addChild(node, 'persName')
@@ -190,23 +228,38 @@ class AOFRFormatter(MetadataFormatter):
             lastName = addChild(nameNode, 'surname')
             lastName.text = name.last
 
-            # TODO affiliations come here
-            # if author.researcher_id:
-            affiliation = addChild(node, 'affiliation')
-            affiliation.attrib['ref'] = '#struct-'+str(ENS_HAL_ID)
+            if idx == depositing_id:
+                affiliation = addChild(node, 'affiliation')
+                affiliation.attrib['ref'] =('#struct-%s' %
+                        unicode(author_structure))
 
-    def renderPubli(self, biblStruct, publi, halType):
+    def renderPubli(self, biblStruct, publi, halType, pubdate):
         # TODO: handle publication type properly
         root = addChild(biblStruct, 'monogr')
         if publi.journal:
             self.renderJournal(root, publi.journal)
 
-        title = addChild(root, 'title')
-        if halType == 'COUV' or halType == 'OUV' or halType == 'COMM':
-            title.attrib['level'] = 'm'
-        else:
-            title.attrib['level'] = 'j'
-        title.text = publi.full_journal_title()
+        if True:
+            title = addChild(root, 'title')
+            if halType == 'COUV' or halType == 'OUV' or halType == 'COMM':
+                title.attrib['level'] = 'm'
+            else:
+                title.attrib['level'] = 'j'
+            title.text = publi.full_journal_title()
+
+        # 'COMM' is disabled, use 'COUV' instead
+
+        #if halType == 'COMM':
+        #    meeting = addChild(root, 'meeting')
+        #    title = addChild(meeting, 'title')
+        #    title.text = publi.full_journal_title()
+        #    date = addChild(meeting, 'date')
+        #    date.attrib['type'] = 'start'
+        #    date.text = unicode(pubdate.year)
+        #    settlement = addChild(meeting, 'settlement')
+        #    settlement.text = 'Paris'
+        #    country = addChild(meeting, 'country')
+        #    country.attrib['key'] = 'FR'
 
         imprint = addChild(root, 'imprint')
 
@@ -232,19 +285,9 @@ class AOFRFormatter(MetadataFormatter):
 
         data = addChild(imprint, 'date')
         data.attrib['type'] = 'datePub'
-        data.text = 'unknown'
-        if publi.pubdate:
-            # TODO output more precise date if available
-            data.text = str(publi.pubdate.year)
-        else:
-            data.text = str(publi.about.pubdate.year)
+        data.text = pubdate.isoformat()
 
     def renderJournal(self, root, journal):
         pass
 
 
-# The following lines are for testing purposes only
-def generate(theId):
-    formatter = AOFRFormatter()
-    paper = Paper.objects.get(pk=theId)
-    return formatter.toString(paper, 'article.pdf', True)

@@ -38,7 +38,7 @@ from papers.errors import MetadataSourceException
 from papers.models import Name
 from papers.models import OaiSource
 from papers.name import parse_comma_name
-from papers.name import shallower_name_similarity
+from papers.name import most_similar_author
 from papers.orcid import OrcidProfile
 from papers.utils import jpath
 from papers.utils import parse_int
@@ -94,13 +94,7 @@ def affiliate_author_with_orcid(ref_name, orcid, authors, initial_orcids=None):
     This just finds the most similar name and returns the appropriate orcids
     list (None everywhere except for the most similar name where it is the ORCiD).
     """
-    max_sim_idx = None
-    max_sim = 0.
-    for idx, name in enumerate(authors):
-        cur_similarity = shallower_name_similarity(name, ref_name)
-        if cur_similarity > max_sim:
-            max_sim_idx = idx
-            max_sim = cur_similarity
+    max_sim_idx = most_similar_author(ref_name, authors)
     orcids = [None]*len(authors)
     if initial_orcids and len(initial_orcids) == len(authors):
         orcids = initial_orcids

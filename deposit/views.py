@@ -100,7 +100,7 @@ def start_view(request, pk):
 def submitDeposit(request, pk):
     paper = get_object_or_404(Paper, pk=pk)
     context = {'status': 'error'}
-    form = PaperDepositForm(request.POST)
+    form = PaperDepositForm(data=request.POST)
     if not form.is_valid():
         context['form'] = form.errors
         return context, 400

@@ -121,6 +121,8 @@ PROFILE_REFRESH_ON_LOGIN = timedelta(days=1)
 # You should not have to change anything in this section.
 
 INSTALLED_APPS = (
+    'dal',
+    'dal_select2',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -142,6 +144,7 @@ INSTALLED_APPS = (
     'deposit.zenodo',
     'deposit.hal',
     'deposit.sword',
+    'autocomplete',
     'notification',
     'bootstrap_pagination',
     'django_js_reverse',

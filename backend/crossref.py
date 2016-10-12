@@ -50,6 +50,7 @@ from papers.utils import tolerant_datestamp_to_datetime
 from papers.utils import valid_publication_date
 from papers.utils import validate_orcid
 from publishers.models import AliasPublisher
+from backend.pubtype_translations import CROSSREF_PUBTYPE_ALIASES
 
 ######## HOW THIS MODULE WORKS ###########
 #
@@ -175,11 +176,6 @@ def get_publication_date(metadata):
         date = parse_crossref_date(metadata['deposited'])
     return date
 
-CROSSREF_PUBTYPE_ALIASES = {
-        'article': 'journal-article',
-        }
-
-
 def create_publication(paper, metadata):
     """
     Creates a BareOaiRecord entry based on the DOI metadata (as returned by the JSON format
@@ -199,7 +195,7 @@ def create_publication(paper, metadata):
 def _create_publication(paper, metadata):
     if not metadata:
         return
-    if not 'container-title' in metadata or not metadata['container-title']:
+    if not metadata.get('container-title'):
         return
     doi = to_doi(metadata.get('DOI', None))
 

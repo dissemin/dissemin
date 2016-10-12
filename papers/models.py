@@ -628,6 +628,12 @@ class Paper(models.Model, BarePaper):
         """
         return map(BareAuthor.deserialize, self.authors_list)
 
+    def author_name_pairs(self):
+        """
+        The authors' names, represented as (first,last) pairs.
+        """
+        return [(a.name.first,a.name.last) for a in self.authors]
+
     @property
     def publications(self):
         """
@@ -837,7 +843,9 @@ class Paper(models.Model, BarePaper):
         else:
             task = AsyncResult(self.task)
         if wait:
-            task.get()
+            task.get(timeout=10)
+            self.task = None
+            self.save(update_fields=['task'])
 
     @classmethod
     def create_by_doi(self, doi, bare=False):

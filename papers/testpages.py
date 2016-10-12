@@ -161,6 +161,12 @@ class PaperPagesTest(RenderingTest):
         publi = OaiRecord.objects.filter(doi__isnull=False)[0]
         self.checkPermanentRedirect('paper-doi', kwargs={'doi': publi.doi})
 
+    def test_paper_by_doi_orphan(self):
+        # This is the DOI for a book: enough data to create a Paper
+        # object, but not enough to create an OaiRecord, so the paper
+        # is orphan: this should return a 404
+        self.check404('paper-doi', kwargs={'doi': '10.1385/1592597998'})
+
     def test_paper_with_empty_slug(self):
         """
         Papers may have titles with characters that

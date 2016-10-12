@@ -20,6 +20,7 @@
 
 from __future__ import unicode_literals
 
+from autocomplete.widgets import Select2
 from crispy_forms.helper import FormHelper
 from deposit.forms import FormWithAbstract
 from deposit.hal.metadata import HAL_TOPIC_CHOICES
@@ -27,15 +28,47 @@ from django import forms
 from django.utils.translation import ugettext as __
 
 
+class AffiliationSelect2(Select2):
+    autocomplete_function = 'select2-customTemplate'
+
 class HALForm(FormWithAbstract):
 
-    def __init__(self, *args, **kwargs):
-        super(HALForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper(self)
-        self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-lg-2'
-        self.helper.field_class = 'col-lg-8'
+    def __init__(self, paper, **kwargs):
+        super(HALForm, self).__init__(paper, **kwargs)
+        self.fields['depositing_author'].choices = enumerate(
+            map(unicode, paper.authors))
+
+    # Dummy field to store the user name
+    # (required for affiliation autocompletion)
+    #first_name = forms.CharField(
+    #    required=False,
+    #    widget=forms.HiddenInput
+    #)
+    #last_name = forms.CharField(
+    #    required=False,
+    #    widget=forms.HiddenInput
+    #)
 
     topic = forms.ChoiceField(
             label=__('Scientific field'),
             choices=HAL_TOPIC_CHOICES)
+
+    depositing_author = forms.TypedChoiceField(
+        required=True,
+        label=__('Depositing author'),
+        choices=[], # choices are initialized from the paper later on
+        coerce=int, # values are indexes of authors
+    )
+
+    affiliation = forms.CharField(
+        required=False,
+        label=__('Affiliation'),
+        widget=AffiliationSelect2(
+#            forward=['first_name', 'last_name'],
+            url='autocomplete_affiliations',
+            attrs={
+                #'data-html': 'true',
+                'width': '100%',
+            },
+        )
+    )

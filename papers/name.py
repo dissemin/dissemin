@@ -358,6 +358,7 @@ def shallower_name_similarity(a, b):
     Same as name_similarity, but accepts differences in the last names.
     This heuristics is more costly but is only used to attribute an ORCID
     affiliation to the right author in papers fetched from ORCID.
+    (in the next function)
     """
     if not a or not b or len(a) != 2 or len(b) != 2:
         return False
@@ -391,6 +392,22 @@ def shallower_name_similarity(a, b):
 
     maxlen = max(len(partsA), len(partsB))
     return ratio*(len(parts)+1)/(maxlen+1)
+
+def most_similar_author(ref_name, authors):
+    """
+    Given a name, compute the index of the most similar name
+    in the authors list, if there is any compatible name.
+    (None otherwise)
+    """
+    max_sim_idx = None
+    max_sim = 0.
+    for idx, name in enumerate(authors):
+        cur_similarity = shallower_name_similarity(name, ref_name)
+        if cur_similarity > max_sim:
+            max_sim_idx = idx
+            max_sim = cur_similarity
+    return max_sim_idx
+
 
 #### Helpers for the name splitting heuristic ######
 

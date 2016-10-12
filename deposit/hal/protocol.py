@@ -33,6 +33,7 @@ from deposit.protocol import DepositResult
 from deposit.protocol import RepositoryProtocol
 from deposit.registry import protocol_registry
 from django.utils.translation import ugettext as __
+from papers.name import most_similar_author
 from lxml import etree
 from papers.utils import kill_html
 
@@ -75,6 +76,9 @@ class HALProtocol(RepositoryProtocol):
     def get_form_initial_data(self):
         data = super(HALProtocol, self).get_form_initial_data()
 
+        data['first_name'] = self.user.first_name
+        data['last_name'] = self.user.last_name
+
         # Abstract
         if self.paper.abstract:
             data['abstract'] = kill_html(self.paper.abstract)
@@ -88,6 +92,17 @@ class HALProtocol(RepositoryProtocol):
         else:
             topic_text = self.paper.title
         data['topic'] = self.predict_topic(topic_text)
+
+        # Depositing author
+        most_similar_idx = None
+        first, last = (self.user.first_name, self.user.last_name)
+        if first and last:
+            most_similar_idx = most_similar_author((first,last),
+                self.paper.author_name_pairs())
+        data['depositing_author'] = most_similar_idx
+        for k, v in data.items():
+            print "%s: %s" % (unicode(k),unicode(v))
+
         return data
 
     def create_zip(self, pdf, metadata):
@@ -149,6 +164,12 @@ class HALProtocol(RepositoryProtocol):
             print xml_response
             receipt = etree.parse(BytesIO(xml_response), parser)
             receipt = receipt.getroot()
+            if receipt.tag == '{http://purl.org/net/sword/error/}error':
+                self.log('Error while depositing the content.')
+                self.log('Here is the XML response: {}'.format(xml_response))
+                self.log('Here is the metadata: {}'.format(metadata))
+                raise DepositError(__('HAL rejected the submission'))
+
             deposition_id = receipt.find('{http://www.w3.org/2005/Atom}id').text
             # TODO store the password for the paper:
             # can be used later by the user to modify the upload
@@ -188,8 +209,8 @@ class HALProtocol(RepositoryProtocol):
             self.log("Caught exception:")
             self.log(str(type(e))+': '+str(e)+'')
             self.log(traceback.format_exc())
-            raise DepositError(
-                'Connection to HAL failed. Please try again later.')
+            raise DepositError(__(
+                'Connection to HAL failed. Please try again later.'))
 
         return deposit_result
 
