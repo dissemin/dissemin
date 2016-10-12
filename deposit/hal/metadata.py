@@ -102,7 +102,7 @@ class AOFRFormatter(MetadataFormatter):
             edition = addChild(editionStmt, 'edition')
             date = addChild(edition, 'date')
             date.attrib['type'] = 'whenWritten'
-            date.text = str(paper.pubdate.year)
+            date.text = paper.pubdate.isoformat()
             ref = addChild(edition, 'ref')
             ref.attrib['type'] = 'file'
             ref.attrib['subtype'] = 'author'  # TODO adapt based on form info
