@@ -335,10 +335,12 @@ class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSo
         :param metadataPrefix: restrict the ingest for this metadata
                           format
         """
-        records = self.client.listRecords(
-                    metadataPrefix=metadataPrefix,
-                    from_=from_date,
-                    resumptionToken=resumptionToken)
+	args = {'metadataPrefix':metadataPrefix}
+	if from_date:
+	    args['from_'] = from_date
+	if resumptionToken:
+	    args['resumptionToken'] = resumptionToken
+        records = self.client.listRecords(**args)
         self.process_records(records)
 
     def create_paper_by_identifier(self, identifier, metadataPrefix):
