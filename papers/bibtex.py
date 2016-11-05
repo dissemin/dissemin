@@ -25,7 +25,6 @@ import re
 import bibtexparser
 from bibtexparser.bparser import BibTexParser
 from bibtexparser.customization import convert_to_unicode
-
 from papers.name import parse_comma_name
 from papers.utils import remove_latex_braces
 from papers.utils import unescape_latex

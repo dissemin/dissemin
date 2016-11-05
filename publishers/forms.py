@@ -1,9 +1,6 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 from haystack.forms import SearchForm
-from haystack.query import EmptySearchQuerySet
-from haystack.query import SearchQuerySet
-
 from publishers.models import OA_STATUS_CHOICES_WITHOUT_HELPTEXT as OA_STATUS
 from publishers.models import Publisher
 

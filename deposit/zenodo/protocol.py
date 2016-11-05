@@ -21,16 +21,15 @@
 from __future__ import unicode_literals
 
 import json
-from StringIO import StringIO
 
-from django.utils.translation import ugettext as __
-from django.utils.translation import ugettext_lazy as _
 import requests
 
-from deposit.protocol import *
-from deposit.registry import *
-from deposit.zenodo.forms import *
-from papers.errors import MetadataSourceException
+from deposit.protocol import DepositError
+from deposit.protocol import DepositResult
+from deposit.protocol import RepositoryProtocol
+from deposit.registry import protocol_registry
+from deposit.zenodo.forms import ZenodoForm
+from django.utils.translation import ugettext as __
 from papers.utils import kill_html
 
 
@@ -38,6 +37,7 @@ class ZenodoProtocol(RepositoryProtocol):
     """
     A protocol to submit using the Zenodo API
     """
+    form_class = ZenodoForm
 
     def __init__(self, repository, **kwargs):
         super(ZenodoProtocol, self).__init__(repository, **kwargs)
@@ -46,22 +46,16 @@ class ZenodoProtocol(RepositoryProtocol):
         if not self.api_url:
             self.api_url = "https://zenodo.org/api/deposit/depositions"
 
-    def get_form(self):
-        data = {}
+    def get_form_initial_data(self):
+        data = super(ZenodoProtocol, self).get_form_initial_data()
         data['license'] = 'other-open'
-        data['paper_id'] = self.paper.id
         if self.paper.abstract:
             data['abstract'] = kill_html(self.paper.abstract)
         else:
             self.paper.consolidate_metadata(wait=False)
-        return ZenodoForm(initial=data)
+        return data
 
-    def get_bound_form(self, data):
-        return ZenodoForm(data)
-
-    def submit_deposit(self, pdf, form):
-        result = {}
-
+    def submit_deposit(self, pdf, form, dry_run=False):
         if self.repository.api_key is None:
             raise DepositError(__("No Zenodo API key provided."))
         api_key = self.repository.api_key

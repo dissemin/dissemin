@@ -20,12 +20,10 @@
 
 from __future__ import unicode_literals
 
-import json
+import requests
 
 from django.utils.http import urlencode
 from lxml import etree
-import requests
-
 from papers.errors import MetadataSourceException
 from papers.name import normalize_name_words
 from papers.name import parse_comma_name
@@ -82,7 +80,7 @@ class OrcidProfile(object):
         except (requests.exceptions.HTTPError, ValueError):
             raise MetadataSourceException(
                 'The ORCiD %s could not be found' % id)
-        except (ValueError, TypeError) as e:
+        except (ValueError, TypeError):
             raise MetadataSourceException(
                 'The ORCiD %s returned invalid JSON.' % id)
 

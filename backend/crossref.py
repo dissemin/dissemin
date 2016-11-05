@@ -22,26 +22,17 @@ from __future__ import unicode_literals
 
 import datetime
 import json
-from urllib2 import build_opener
-from urllib2 import HTTPError
-from urllib2 import URLError
-from urllib import urlencode
 
-from celery import current_task
-from django.core.exceptions import ObjectDoesNotExist
-from django.db import DataError
-from django.utils.http import urlencode
 import requests
 from requests.exceptions import RequestException
-from unidecode import unidecode
 
-from backend.name_cache import name_lookup_cache
-from backend.papersource import PaperSource
 from backend.romeo import fetch_journal
 from backend.romeo import fetch_publisher
 from backend.utils import urlopen_retry
 from dissemin.settings import DOI_PROXY_DOMAIN
 from dissemin.settings import DOI_PROXY_SUPPORTS_BATCH
+from django.db import DataError
+from django.utils.http import urlencode
 from papers.baremodels import BareName
 from papers.baremodels import BareOaiRecord
 from papers.baremodels import BarePaper
@@ -50,19 +41,15 @@ from papers.doi import doi_to_url
 from papers.doi import to_doi
 from papers.errors import MetadataSourceException
 from papers.models import OaiSource
-from papers.models import Paper
-from papers.name import match_names
 from papers.name import normalize_name_words
 from papers.name import parse_comma_name
-from papers.utils import affiliation_is_greater
 from papers.utils import date_from_dateparts
-from papers.utils import iunaccent
 from papers.utils import jpath
 from papers.utils import sanitize_html
 from papers.utils import tolerant_datestamp_to_datetime
-from papers.utils import validate_orcid
 from papers.utils import valid_publication_date
-from publishers.models import *
+from papers.utils import validate_orcid
+from publishers.models import AliasPublisher
 
 ######## HOW THIS MODULE WORKS ###########
 #
@@ -169,7 +156,7 @@ def parse_crossref_date(date):
             pass
     if 'raw' in date:
         ret = tolerant_datestamp_to_datetime(date['raw']).date()
-    if valid_publication_date(ret): 
+    if valid_publication_date(ret):
         return ret
 
 
@@ -428,9 +415,8 @@ class CrossRefAPI(object):
             raise ValueError('No title')
 
         # the upstream function ensures that there is a non-empty title
-        if not metadata.get('DOI'):
+        if not to_doi(metadata.get('DOI')):
             raise ValueError("No DOI, skipping")
-        doi = to_doi(metadata['DOI'])
 
         pubdate = get_publication_date(metadata)
 
@@ -501,11 +487,12 @@ class CrossRefAPI(object):
         if filters:
             params['filter'] = ','.join(map(lambda (k, v): k+":"+v, filters.items()))
 
+        url = 'http://api.crossref.org/works'
+
         count = 0
         rows = 20
         offset = 0
         while not max_batches or count < max_batches:
-            url = 'http://api.crossref.org/works'
             params['rows'] = rows
             params['offset'] = offset
 
@@ -524,7 +511,7 @@ class CrossRefAPI(object):
                                               'URL was: %s\nParameters were: %s\nJSON parser error was: %s' % (url, urlencode(params), unicode(e)))
             except requests.exceptions.RequestException as e:
                 raise MetadataSourceException('Error while fetching CrossRef results:\nUnable to open the URL: ' +
-                                              request+'\nError was: '+str(e))
+                                              url+'\nError was: '+str(e))
 
             offset += rows
             count += 1
@@ -561,5 +548,5 @@ def consolidate_publication(publi):
             if attachment.get('mimeType') == 'application/pdf':
                 publi.pdf_url = attachment.get('url')
                 publi.save(update_fields=['pdf_url'])
-                publi.paper.update_availability()
+                publi.about.update_availability()
     return publi

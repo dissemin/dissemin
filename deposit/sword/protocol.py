@@ -20,30 +20,25 @@
 
 from __future__ import unicode_literals
 
-import json
-from os.path import basename
-from StringIO import StringIO
-import sys
-import traceback
+import requests
 
+from deposit.forms import FormWithAbstract
+from deposit.protocol import DepositError
+from deposit.protocol import DepositResult
+from deposit.protocol import RepositoryProtocol
+from deposit.registry import protocol_registry
 from django.conf import settings
 from django.utils.translation import ugettext as __
-from django.utils.translation import ugettext_lazy as _
-import requests
-import sword2
-
-from deposit.forms import *
-from deposit.protocol import *
-from deposit.registry import protocol_registry
-from deposit.sword import metadataFormatter
-from papers.errors import MetadataSourceException
 from papers.utils import kill_html
+import sword2
+from deposit.sword.metadata import DCFormatter
 
 
 class SwordProtocol(RepositoryProtocol):
     """
     A generic SWORD protocol using the sword2 library
     """
+    form_class = FormWithAbstract
 
     def get_conn(self):
         if self.repository.endpoint is None:
@@ -52,17 +47,13 @@ class SwordProtocol(RepositoryProtocol):
                                  user_name=self.repository.username,
                                  user_pass=self.repository.password)
 
-    def get_form(self):
-        data = {}
-        data['paper_id'] = self.paper.id
+    def get_form_initial_data(self):
+        data = super(SwordProtocol, self).get_form_initial_data()
         if self.paper.abstract:
             data['abstract'] = kill_html(self.paper.abstract)
         else:
             self.paper.consolidate_metadata(wait=False)
-        return BaseMetadataForm(initial=data)
-
-    def get_bound_form(self, data):
-        return BaseMetadataForm(data)
+        return data
 
     def createMetadata(self, form):
         entry = sword2.Entry()
@@ -90,8 +81,6 @@ class SwordProtocol(RepositoryProtocol):
         return entry
 
     def submit_deposit(self, pdf, form, dry_run=False):
-        result = {}
-
         conn = None
         try:
             self.log("### Connecting")
@@ -101,12 +90,12 @@ class SwordProtocol(RepositoryProtocol):
             # self.log(entry.pretty_print())
 
             formatter = DCFormatter()
-            meta = formatter.toString(self.paper, 'article.pdf', True)
-            print meta
+            meta = formatter.toString(self.paper, 'article.pdf', True,
+xml_declaration=False)
             self.log(meta)
 
-            f = StringIO(pdf)
             self.log("### Submitting metadata")
+            #f = StringIO(pdf)
             # receipt = conn.create(metadata_entry=entry,mimetype="application/pdf",
             #        payload=f,col_iri=self.repository.api_key)
             #receipt = conn.create(metadata_entry=entry,col_iri=self.repository.api_key)

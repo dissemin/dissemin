@@ -23,14 +23,17 @@ from __future__ import unicode_literals
 import datetime
 import unittest
 
-from django.core.exceptions import ObjectDoesNotExist
+from backend.crossref import convert_to_name_pair
+from backend.crossref import CrossRefAPI
+from backend.crossref import DOI_PROXY_SUPPORTS_BATCH
+from backend.crossref import fetch_dois_by_batch
+from backend.crossref import fetch_dois_incrementally
+from backend.crossref import fetch_metadata_by_DOI
+from backend.crossref import get_publication_date
+from backend.crossref import is_oa_license
+from backend.crossref import parse_crossref_date
 from django.test import TestCase
-
-from backend.crossref import *
-from papers.baremodels import *
-from papers.errors import *
-from papers.models import *
-from publishers.models import *
+from papers.errors import MetadataSourceException
 
 
 class CrossRefTest(TestCase):

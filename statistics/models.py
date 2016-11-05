@@ -35,7 +35,6 @@ which computes the status of a particular paper.
 
 from __future__ import unicode_literals
 
-from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
@@ -98,12 +97,15 @@ def combined_status_for_instance(paper):
 
 def combined_status_stats(queryset):
     aggregations = queryset.get_aggregation_results()
-    buckets = {
-        bucket['key']: bucket['doc_count']
-        for bucket in aggregations['status']['buckets']
-    }
-    return BareAccessStatistics.from_dict(buckets)
-
+    if aggregations:
+        status = aggregations.get('status', {'buckets':[]})
+        buckets = {
+            bucket['key']: bucket['doc_count']
+            for bucket in status['buckets']
+        }
+        return BareAccessStatistics.from_dict(buckets)
+    else:
+        return BareAccessStatistics.from_queryset(queryset)
 
 class BareAccessStatistics(object):
     """

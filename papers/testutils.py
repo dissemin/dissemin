@@ -25,8 +25,13 @@ import doctest
 import unittest
 
 import papers.fingerprint
-import papers.utils
-from papers.utils import *
+from papers.utils import affiliation_is_greater
+from papers.utils import jpath
+from papers.utils import kill_double_dollars
+from papers.utils import remove_latex_braces
+from papers.utils import remove_latex_math_dollars
+from papers.utils import unescape_latex
+from papers.utils import validate_orcid
 
 
 class UnescapeLatexTest(unittest.TestCase):

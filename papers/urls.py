@@ -22,7 +22,6 @@ from __future__ import unicode_literals
 
 from django.conf.urls import include
 from django.conf.urls import url
-
 from papers import views
 
 urlpatterns = [
@@ -40,7 +39,6 @@ urlpatterns = [
         url(r'^p/(?P<pk>\d+)/(?P<slug>[\w-]*)$',
             views.PaperView.as_view(), name='paper'),
         url(r'^(?P<doi>10\..*)', views.PaperView.as_view(), name='paper-doi'),
-        url(r'^mail_paper/(?P<pk>\d+)/$', views.mailPaperView, name='mail_paper'),
         url(r'^search/b/(?P<publisher>\d+)/(?P<slug>[\w-]*)$',
             views.PublisherPapersView.as_view(), name='publisher-papers'),
         url(r'^journal/(?P<journal>\d+)/$',
@@ -58,6 +56,4 @@ urlpatterns = [
             views.refetchResearcher, name='refetch-researcher'),
         # API
         url(r'^api/', include('papers.api')),
-        # Annotations (to be deleted)
-        url(r'^annotations/$', views.AnnotationsView.as_view(), name='annotations'),
 ]

@@ -20,32 +20,29 @@
 
 from __future__ import unicode_literals
 
-from datetime import datetime
-import json
 from StringIO import StringIO
 
-from django.contrib.auth.decorators import user_passes_test
-from django.core.files.base import ContentFile
-from django.http import HttpResponse
-from django.http import HttpResponseForbidden
-from django.http import HttpResponseNotFound
-from django.shortcuts import render
-from django.utils.translation import ugettext as _
-from django.views.decorators.http import require_POST
-from jsonview.decorators import json_view
-import PyPDF2
-from PyPDF2.utils import PyPdfError
 import requests
 from requests.packages.urllib3.exceptions import HTTPError
 from requests.packages.urllib3.exceptions import ReadTimeoutError
-import wand.exceptions
-import wand.image
 
 from dissemin.settings import DEPOSIT_MAX_FILE_SIZE
 from dissemin.settings import URL_DEPOSIT_DOWNLOAD_TIMEOUT
-from papers.user import *
-from upload.forms import *
-from upload.models import *
+from django.contrib.auth.decorators import user_passes_test
+from django.core.files.base import ContentFile
+from django.utils.translation import ugettext as _
+from django.views.decorators.http import require_POST
+from jsonview.decorators import json_view
+from papers.user import is_authenticated
+import PyPDF2
+from PyPDF2.utils import PyPdfError
+from upload.forms import AjaxUploadForm
+from upload.forms import UrlDownloadForm
+from upload.models import MAX_ORIG_NAME_LENGTH
+from upload.models import THUMBNAIL_MAX_WIDTH
+from upload.models import UploadedPDF
+import wand.exceptions
+import wand.image
 
 
 # AJAX upload
@@ -84,7 +81,6 @@ def make_thumbnail(pdf_blob):
         resolution = int(THUMBNAIL_MAX_WIDTH / (21/2.54))+1
         num_pages = None
 
-        first_blob = False
         try:  # We try to extract the first page of the PDF
             orig_pdf = StringIO(pdf_blob)
             reader = PyPDF2.PdfFileReader(orig_pdf)
@@ -96,14 +92,12 @@ def make_thumbnail(pdf_blob):
             writer.addPage(reader.getPage(0))
             first_page = StringIO()
             writer.write(first_page)
-            first_blob = first_page.getvalue()
         except PyPdfError as e:
             # PyPDF2 failed (maybe it believes the file is encrypted…)
             # We try to convert the file with ImageMagick (wand) anyway,
             # rendering the whole PDF as we have not been able to
             # select the first page
             print "PyPDF error: "+str(e)
-            first_blob = pdf_blob
 
         # We render the PDF (or only its first page if we succeeded to extract
         # it)
@@ -203,15 +197,15 @@ def handleUrlDownload(request):
             response['message'] = (  # Left as one line for compatibility purposes
                 _('Invalid content type: this link points to a web page, we need a direct link to a PDF file.'))
 
-    except requests.exceptions.SSLError as e:
+    except requests.exceptions.SSLError:
         response['message'] = _('Invalid SSL certificate on the remote server.')
-    except requests.exceptions.Timeout as e:
+    except requests.exceptions.Timeout:
         response['message'] = _('Invalid URL (server timed out).')
-    except requests.exceptions.RequestException as e:
+    except requests.exceptions.RequestException:
         response['message'] = _('Invalid URL.')
-    except ReadTimeoutError as e:
+    except ReadTimeoutError:
         response['message'] = _('Invalid URL (server timed out).')
-    except HTTPError as e:
+    except HTTPError:
         response['message'] = _('Invalid URL.')
 
     if 'message' in response:

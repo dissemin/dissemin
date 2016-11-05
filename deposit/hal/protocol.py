@@ -24,15 +24,16 @@ from io import BytesIO
 import traceback
 from zipfile import ZipFile
 
-from django.utils.translation import ugettext as __
-from django.utils.translation import ugettext_lazy as _
 import requests
 
-from deposit.hal.forms import *
-from deposit.hal.metadataFormatter import AOFRFormatter
-from deposit.protocol import *
-from deposit.registry import *
-from papers.errors import MetadataSourceException
+from deposit.hal.forms import HALForm
+from deposit.hal.metadata import AOFRFormatter
+from deposit.protocol import DepositError
+from deposit.protocol import DepositResult
+from deposit.protocol import RepositoryProtocol
+from deposit.registry import protocol_registry
+from django.utils.translation import ugettext as __
+from lxml import etree
 from papers.utils import kill_html
 
 try:
@@ -50,6 +51,8 @@ class HALProtocol(RepositoryProtocol):
     A protocol to submit using the HAL SWORD API
     """
 
+    form_class = HALForm
+
     def __init__(self, repository, **kwargs):
         super(HALProtocol, self).__init__(repository, **kwargs)
         # We let the interface define another API endpoint (sandbox…)
@@ -66,12 +69,11 @@ class HALProtocol(RepositoryProtocol):
             r = requests.post(
                 'http://haltopics.dissem.in:6377/predict', data={'text': topic_text})
             return r.json()['decision']['code']
-        except (requests.exceptions.RequestException, ValueError, KeyError) as e:
+        except (requests.exceptions.RequestException, ValueError, KeyError):
             return None
 
-    def get_form(self):
-        data = {}
-        data['paper_id'] = self.paper.id
+    def get_form_initial_data(self):
+        data = super(HALProtocol, self).get_form_initial_data()
 
         # Abstract
         if self.paper.abstract:
@@ -86,11 +88,7 @@ class HALProtocol(RepositoryProtocol):
         else:
             topic_text = self.paper.title
         data['topic'] = self.predict_topic(topic_text)
-
-        return HALForm(initial=data)
-
-    def get_bound_form(self, data):
-        return HALForm(data)
+        return data
 
     def create_zip(self, pdf, metadata):
         s = BytesIO()
@@ -109,7 +107,6 @@ class HALProtocol(RepositoryProtocol):
                            ).encode("base64").rstrip()
 
     def submit_deposit(self, pdf, form, dry_run=False):
-        result = {}
         if self.username is None or self.password is None:
             raise DepositError(__("No HAL user credentials provided."))
 
@@ -149,11 +146,14 @@ class HALProtocol(RepositoryProtocol):
             conn.close()
 
             parser = etree.XMLParser(encoding='utf-8')
+            print xml_response
             receipt = etree.parse(BytesIO(xml_response), parser)
             receipt = receipt.getroot()
             deposition_id = receipt.find('{http://www.w3.org/2005/Atom}id').text
-            password = receipt.find(
-                '{http://hal.archives-ouvertes.fr/}password').text
+            # TODO store the password for the paper:
+            # can be used later by the user to modify the upload
+            # password = receipt.find(
+            #    '{http://hal.archives-ouvertes.fr/}password').text
             document_url = resp.getheader('location')
 
             if not deposition_id:

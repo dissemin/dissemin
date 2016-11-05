@@ -27,13 +27,14 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 from haystack import inputs
 from haystack.forms import SearchForm
-
 from papers.baremodels import PAPER_TYPE_CHOICES
-from papers.models import *
-from papers.name import *
+from papers.models import Department
+from papers.models import Paper
+from papers.models import Researcher
+from papers.name import has_only_initials
 from papers.utils import remove_diacritics
+from papers.utils import validate_orcid
 from publishers.models import OA_STATUS_CHOICES_WITHOUT_HELPTEXT
-from search import SearchQuerySet
 
 
 class OrcidField(forms.CharField):
@@ -137,7 +138,10 @@ class PaperForm(SearchForm):
         required=False)
 
     def on_statuses(self):
-        return self.cleaned_data['status']
+        if self.is_valid():
+            return self.cleaned_data['status']
+        else:
+            return []
 
     def search(self):
         self.queryset = self.searchqueryset.models(Paper)

@@ -31,23 +31,18 @@ importing this module and running the function manually.
 from __future__ import unicode_literals
 
 from collections import defaultdict
-from time import sleep
-
-from django.db import DatabaseError
-from django.db.models import Prefetch
-from django.db.models import Q
-from lxml.html import fromstring
 
 import backend.crossref
-from backend.crossref import fetch_metadata_by_DOI
-from backend.crossref import is_oa_license
-from backend.name_cache import name_lookup_cache
 from backend.romeo import fetch_publisher
 from backend.tasks import change_publisher_oa_status
-from papers.errors import MetadataSourceException
-from papers.models import *
+from papers.models import Name
+from papers.models import NameVariant
+from papers.models import OaiRecord
+from papers.models import Paper
+from papers.models import Researcher
 from papers.utils import sanitize_html
-from publishers.models import *
+from publishers.models import AliasPublisher
+from publishers.models import Publisher
 
 
 def cleanup_researchers():
@@ -127,7 +122,6 @@ def recompute_fingerprints():
     those who end up having the same fingerprint
     """
     merged = 0
-    pc = Paper.objects.all().count()
     for idx, p in enumerate(Paper.objects.all()):
         if idx % 100 == 0:
             print idx
@@ -212,10 +206,3 @@ def recompute_publisher_policies():
     """
     for p in Publisher.objects.all():
         change_publisher_oa_status(p.pk, p.classify_oa_status())
-
-
-def prune_name_lookup_cache(threshold):
-    """
-    Prunes the name lookup cache (removes names which are not looked up often)
-    """
-    name_lookup_cache.prune(threshold)

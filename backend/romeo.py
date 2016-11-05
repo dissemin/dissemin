@@ -21,23 +21,26 @@
 from __future__ import unicode_literals
 
 from io import BytesIO
-from io import StringIO
 
-import lxml.etree as ET
-from lxml.html import fromstring
 import requests
 import requests.exceptions
 
 from backend.utils import cached_urlopen_retry
 from dissemin.settings import ROMEO_API_DOMAIN
 from dissemin.settings import ROMEO_API_KEY
+import lxml.etree as ET
+from lxml.html import fromstring
 from papers.errors import MetadataSourceException
-from papers.models import *
 from papers.utils import kill_html
 from papers.utils import nstrip
 from papers.utils import remove_diacritics
 from papers.utils import sanitize_html
-from publishers.models import *
+from publishers.models import AliasPublisher
+from publishers.models import Journal
+from publishers.models import Publisher
+from publishers.models import PublisherCondition
+from publishers.models import PublisherCopyrightLink
+from publishers.models import PublisherRestrictionDetail
 
 # Minimum number of times we have seen a publisher name
 # associated to a publisher to assign this publisher
@@ -146,7 +149,7 @@ def fetch_journal(search_terms, matching_mode='exact'):
     names = list(journal.findall('./jtitle'))
     if not names:
         raise MetadataSourceException('RoMEO returned a journal without title.\n' +
-                                      'URL was: '+request)
+                                      'Terms were: '+unicode(terms))
     if len(names) > 1:
         print("Warning, "+str(len(names))+" names provided for one journal, " +
               "defaulting to the first one")
@@ -155,7 +158,7 @@ def fetch_journal(search_terms, matching_mode='exact'):
     issn = None
     try:
         issn = nstrip(journal.findall('./issn')[0].text)
-    except KeyError, IndexError:
+    except (KeyError, IndexError):
         pass
 
     # Now we may have additional info, so it's worth trying again in the model
@@ -242,16 +245,15 @@ def get_or_create_publisher(romeo_xml_description):
     try:
         romeo_id = xml.attrib['id']
     except KeyError:
-        raise MetadataSourceException('RoMEO did not provide a publisher id.\n' +
-                                      'URL was: '+request)
+        raise MetadataSourceException('RoMEO did not provide a publisher id.')
 
     name = None
     try:
         raw_name = xml.findall('./name')[0].text.strip()
         name = fromstring(kill_html(sanitize_html(raw_name))).text
     except (KeyError, IndexError, AttributeError):
-        raise MetadataSourceException('RoMEO did not provide the publisher\'s name.\n' +
-                                      'URL was: '+request)
+        raise MetadataSourceException(
+            'RoMEO did not provide the publisher\'s name.')
 
     alias = None
     try:
@@ -283,22 +285,22 @@ def get_or_create_publisher(romeo_xml_description):
     try:
         preprint = xml.findall('./preprints/prearchiving')[0].text.strip()
     except (KeyError, IndexError, AttributeError):
-        raise MetadataSourceException('RoMEO did not provide the preprint policy.\n' +
-                                      'URL was: '+request)
+        raise MetadataSourceException(
+            'RoMEO did not provide the preprint policy.')
 
     postprint = None
     try:
         postprint = xml.findall('./postprints/postarchiving')[0].text.strip()
     except (KeyError, IndexError, AttributeError):
-        raise MetadataSourceException('RoMEO did not provide the postprint policy.\n' +
-                                      'URL was: '+request)
+        raise MetadataSourceException(
+            'RoMEO did not provide the postprint policy.')
 
     pdfversion = None
     try:
         pdfversion = xml.findall('./pdfversion/pdfarchiving')[0].text.strip()
     except (KeyError, IndexError, AttributeError):
-        raise MetadataSourceException('RoMEO did not provide the pdf archiving policy.\n' +
-                                      'URL was: '+request)
+        raise MetadataSourceException(
+            'RoMEO did not provide the pdf archiving policy.')
 
     # Compute OA status of the publisher
     status = 'UNK'

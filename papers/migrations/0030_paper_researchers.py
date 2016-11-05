@@ -5,7 +5,6 @@ from __future__ import unicode_literals
 from django.db import migrations, models
 
 def populate_researchers(apps, schema_editor):
-    Researcher = apps.get_model('papers', 'Researcher')
     Paper = apps.get_model('papers', 'Paper')
 
     for p in Paper.objects.all():

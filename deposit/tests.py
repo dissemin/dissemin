@@ -20,19 +20,15 @@
 
 from datetime import date
 from io import BytesIO
-import os
 import unittest
 
+from backend.tests import PrefilledTest
+from deposit.models import Repository
+from deposit.protocol import DepositResult
 from django.contrib.auth.models import User
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.forms import Form
-from django.test import TestCase
 from django.test.utils import override_settings
-
-from backend.tests import PrefilledTest
-from deposit.models import DepositRecord
-from deposit.models import Repository
-from deposit.protocol import DepositResult
 from papers.models import OaiSource
 from papers.models import Paper
 
@@ -95,13 +91,16 @@ class ProtocolTest(PrefilledTest):
         enabled = self.proto.init_deposit(paper, self.user)
         self.assertTrue(enabled)
 
-        args = form_fields.copy()
-        args['paper_id'] = paper.id
+        args = self.proto.get_form_initial_data()
+        args.update(form_fields)
 
         form = self.proto.get_bound_form(args)
+        if not form.is_valid():
+            print form.errors
         self.assertTrue(form.is_valid())
         pdf = 'mediatest/blank.pdf'
         deposit_result = self.proto.submit_deposit_wrapper(pdf,
                                                            form, dry_run=True)
         self.assertIsInstance(deposit_result, DepositResult)
+        print deposit_result.logs
         return deposit_result

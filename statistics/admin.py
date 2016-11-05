@@ -19,5 +19,3 @@
 """
 This app does not register any admin interfaces yet.
 """
-
-from django.contrib import admin

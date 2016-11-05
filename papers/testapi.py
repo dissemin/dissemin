@@ -20,24 +20,10 @@
 
 from __future__ import unicode_literals
 
-from django.core.urlresolvers import reverse
-import django.test
-
-from backend.crossref import CrossRefAPI
-from backend.oai import OaiPaperSource
-from backend.tests import PrefilledTest
-from papers.models import Paper
 from papers.testajax import JsonRenderingTest
 
 
 class PaperApiTest(JsonRenderingTest):
-
-    def test_valid_paper(self):
-        p = self.r3.papers[0]
-        parsed = self.checkJson(self.getPage('papers-detail', args=[p.pk]))
-
-    def test_invalid_paper(self):
-        self.checkJson(self.getPage('papers-detail', args=[123456]), 404)
 
     def test_valid_doi(self):
         self.checkJson(self.getPage('api-paper-doi',

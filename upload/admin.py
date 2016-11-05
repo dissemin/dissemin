@@ -21,8 +21,7 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-
-from upload.models import *
+from upload.models import UploadedPDF
 
 
 class UploadedPDFAdmin(admin.ModelAdmin):

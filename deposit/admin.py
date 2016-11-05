@@ -20,9 +20,9 @@
 
 from __future__ import unicode_literals
 
+from deposit.models import DepositRecord
+from deposit.models import Repository
 from django.contrib import admin
-
-from deposit.models import *
 
 
 class DepositRecordAdmin(admin.ModelAdmin):

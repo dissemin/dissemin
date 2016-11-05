@@ -21,9 +21,9 @@
 
 import allauth.account.views
 from allauth.socialaccount import providers
+from dissemin.settings import UNIVERSITY_BRANDING
 from django.conf import settings
 from django.conf.urls import include
-from django.conf.urls import patterns
 from django.conf.urls import url
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -32,8 +32,7 @@ from django.shortcuts import redirect
 from django.shortcuts import render
 from django.views import generic
 from django.views.i18n import javascript_catalog
-
-from dissemin.settings import UNIVERSITY_BRANDING
+import django_js_reverse.views
 
 admin.autodiscover()
 
@@ -104,7 +103,7 @@ urlpatterns = [
     url(r'^', include('publishers.urls')),
     url(r'^', include('deposit.urls')),
     url(r'^', include('notification.urls')),
-    url(r'^jsreverse/$', 'django_js_reverse.views.urls_js', name='js_reverse'),
+    url(r'^jsreverse/$', django_js_reverse.views.urls_js, name='js_reverse'),
     # Social auth
     url(r'^accounts/login/$', LoginView.as_view(), name='account_login'),
     url(r'^accounts/sandbox_login/$',

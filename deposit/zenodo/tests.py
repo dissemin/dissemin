@@ -23,8 +23,6 @@ from __future__ import unicode_literals
 import os
 import unittest
 
-from django.test import TestCase
-
 from deposit.tests import lorem_ipsum
 from deposit.tests import ProtocolTest
 from deposit.zenodo.protocol import ZenodoProtocol

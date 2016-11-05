@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from collections import defaultdict
 
-from django.db import migrations, models
+from django.db import migrations
 
 def cleanup_publisher_aliases(apps, schema_editor):
     AliasPublisher = apps.get_model("publishers", "AliasPublisher")

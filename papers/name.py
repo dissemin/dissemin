@@ -23,7 +23,6 @@ from __future__ import unicode_literals
 import re
 
 import name_tools
-
 from papers.utils import iunaccent
 from papers.utils import remove_diacritics
 
@@ -92,7 +91,8 @@ def rebuild_name(name_words, separators):
         if idx < len(separators):
             output += separators[idx]
         elif idx < len(name_words)-1:
-            print "WARNING: incorrect name splitting for '"+w+"'"
+            print("WARNING: incorrect name splitting for '%s'" %
+                  unicode(name_words))
             output += ' '
     return output
 
@@ -345,8 +345,8 @@ def name_similarity(a, b):
     # or that of B and included in that of A
     # This prevents ('Amanda P.','Brown') and ('A. Patrick','Brown')
     # frow matching
-    if not (all([a or not b for a, b in expanded]) or
-            all([b or not a for a, b in expanded])):
+    if not (all([wa or not wb for wa, wb in expanded]) or
+            all([wb or not wa for wa, wb in expanded])):
         return 0.
 
     sumscores = max(min(sumscores, 1), 0)
@@ -679,9 +679,9 @@ def unify_name_lists(a, b):
         seen = set()
         for name, idx in lst:
             first, last = name
-            [k1,k2] = sorted([first.lower(),last.lower()])
-            if (k1,k2) not in seen: 
-                seen.add((k1,k2))
+            [k1, k2] = sorted([first.lower(), last.lower()])
+            if (k1, k2) not in seen:
+                seen.add((k1, k2))
                 yield (name, idx)
             else:
                 yield (None, idx)

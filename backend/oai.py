@@ -21,37 +21,28 @@
 from __future__ import unicode_literals
 
 from datetime import datetime
-import itertools
-import re
 import json
 
-from django.db import transaction
-
-from backend import crossref
 from backend.crossref import CrossRefAPI
-from backend.extractors import *
-from backend.name_cache import name_lookup_cache
-from backend.papersource import *
+from backend.extractors import REGISTERED_OAI_EXTRACTORS
+from backend.papersource import PaperSource
 from backend.pubtype_translations import OAI_PUBTYPE_TRANSLATIONS
 from django.conf import settings
+from django.db import transaction
 from oaipmh import common
 from oaipmh.client import Client
-from oaipmh.error import BadArgumentError
 from oaipmh.error import DatestampError
 from oaipmh.error import NoRecordsMatchError
 from oaipmh.metadata import base_dc_reader
-from oaipmh.metadata import MetadataRegistry
 from oaipmh.metadata import MetadataReader
+from oaipmh.metadata import MetadataRegistry
 from oaipmh.metadata import oai_dc_reader
 from papers.baremodels import BareName
 from papers.baremodels import BareOaiRecord
 from papers.baremodels import BarePaper
 from papers.doi import to_doi
-from papers.errors import MetadataSourceException
 from papers.models import OaiSource
-from papers.name import name_normalization
-from papers.name import name_signature
-from papers.name import normalize_name_words
+from papers.models import Paper
 from papers.name import parse_comma_name
 from papers.utils import sanitize_html
 from papers.utils import tolerant_datestamp_to_datetime
@@ -59,6 +50,7 @@ from papers.utils import valid_publication_date
 
 # Set exposed by proaixy to indicate the metadata source
 PROXY_SOURCE_PREFIX = "proaixy:source:"
+
 
 class OaiTranslator(object):
     """
@@ -83,6 +75,7 @@ class OaiTranslator(object):
         """
         raise NotImplemented
 
+
 class CiteprocReader(MetadataReader):
 
     def __init__(self):
@@ -96,6 +89,7 @@ class CiteprocReader(MetadataReader):
         return common.Metadata(element, payload)
 
 citeproc_reader = CiteprocReader()
+
 
 class CiteprocTranslator(object):
     """
@@ -312,7 +306,7 @@ class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSo
         self.client = Client(endpoint, self.registry)
         self.client._day_granularity = day_granularity
         self.client.extra_parameters = {
-            'key':settings.PROAIXY_API_KEY }
+            'key': settings.PROAIXY_API_KEY}
         self.translators = {}
 
     # Translator management

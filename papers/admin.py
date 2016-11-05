@@ -17,9 +17,15 @@
 #
 
 from django.contrib import admin
+from papers.models import Department
+from papers.models import Institution
+from papers.models import Name
+from papers.models import OaiRecord
+from papers.models import OaiSource
+from papers.models import Paper
+from papers.models import PaperWorld
+from papers.models import Researcher
 from solo.admin import SingletonModelAdmin
-
-from papers.models import *
 
 
 class NameInline(admin.TabularInline):

@@ -20,35 +20,27 @@
 
 from __future__ import unicode_literals
 
-from django.conf.urls import include
 from django.conf.urls import url
 from django.contrib.auth.decorators import user_passes_test
-from django.core.exceptions import MultipleObjectsReturned
-from django.core.validators import validate_email
-from django.db import IntegrityError
-from django.forms import ValidationError
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
-from django.http import HttpResponseForbidden
 from django.http import HttpResponseNotFound
 from django.shortcuts import get_object_or_404
-from django.shortcuts import render
 from django.template import loader
-from django.utils.translation import ugettext as __
-from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from jsonview.decorators import json_view
-import requests
-
-from dissemin.settings import DEPOSIT_MAX_FILE_SIZE
-from dissemin.settings import MEDIA_ROOT
-from dissemin.settings import URL_DEPOSIT_DOWNLOAD_TIMEOUT
 from papers.forms import AddUnaffiliatedResearcherForm
-from papers.models import *
+from papers.models import Name
+from papers.models import Paper
+from papers.models import Researcher
 from papers.name import normalize_name_words
-from papers.user import *
-from papers.utils import iunaccent
+from papers.orcid import OrcidProfile
+from papers.user import is_admin
+from papers.user import is_authenticated
 from papers.utils import kill_html
 from papers.utils import sanitize_html
+from publishers.models import OA_STATUS_CHOICES
+from publishers.models import Publisher
 
 
 @json_view
@@ -167,17 +159,6 @@ def newUnaffiliatedResearcher(request):
         return form.errors, 403
 
 # paper management
-#@user_passes_test(is_authenticated)
-# def annotatepaper(request, pk, status):
-#    paper = get_object_or_404(Paper, pk=pk)
-#    try:
-#        visible = bool(status)
-#    except valueError:
-#        return HttpResponseForbidden('Invalid visibility status', content_type='text/plain')
-#
-#    annotation.create(paper, visible, request.user)
-#    return httpResponse('OK', content_type='text/plain')
-
 #@user_passes_test(is_admin)
 # def changepaper(request):
 #    allowedFields = ['title']
@@ -289,7 +270,7 @@ def changePublisherStatus(request):
         else:
             raise ObjectDoesNotExist
     except ObjectDoesNotExist:
-        return HttpResponseNotFound('NOK: '+message, content_type='text/plain')
+        return HttpResponseNotFound('NOK', content_type='text/plain')
 
 urlpatterns = [
     #    url(r'^annotate-paper-(?P<pk>\d+)-(?P<status>\d+)$', annotatePaper, name='ajax-annotatePaper'),

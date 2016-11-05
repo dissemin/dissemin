@@ -23,14 +23,15 @@ from __future__ import unicode_literals
 import datetime
 from datetime import date
 import doctest
-import json
-import unittest
 
 import django.test
-
-from backend.orcid import OrcidPaperSource
+from papers.baremodels import BareName
 import papers.doi
-from papers.models import *
+from papers.models import Name
+from papers.models import OaiRecord
+from papers.models import OaiSource
+from papers.models import Paper
+from papers.models import Researcher
 
 
 class ResearcherTest(django.test.TestCase):

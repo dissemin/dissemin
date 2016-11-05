@@ -21,7 +21,6 @@
 from __future__ import unicode_literals
 
 import haystack
-
 from papers.models import Paper
 
 
@@ -68,7 +67,7 @@ class PaperSource(object):
         """
         count = 0
         for p in self.fetch_bare(researcher):
-            paper = self.save_paper(p, researcher)
+            self.save_paper(p, researcher)
             if self.max_results is not None and count >= self.max_results:
                 break
 
