@@ -20,7 +20,7 @@ django-solo
 django-widget-tweaks
 django-memoize
 django-bulk-update
-django-bootstrap3-datetimepicker
+django-bootstrap3-datepicker
 djangorestframework
 elasticsearch
 html5lib==0.999999999
