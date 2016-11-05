@@ -128,6 +128,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'bootstrap3_datepicker',
     'rest_framework',
     'crispy_forms',
     'allauth',

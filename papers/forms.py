@@ -23,6 +23,7 @@ from __future__ import unicode_literals
 from statistics.models import COMBINED_STATUS_CHOICES
 from statistics.models import PDF_STATUS_CHOICES
 
+from bootstrap3_datepicker.fields import DatePickerField
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 from haystack import inputs
@@ -109,9 +110,9 @@ class PaperForm(SearchForm):
         choices=COMBINED_STATUS_CHOICES,
         widget=forms.CheckboxSelectMultiple,
         required=False)
-    DATE_FORMATS = ['%Y', '%Y-%m', '%Y-%m-%d']
-    pub_after = forms.DateField(input_formats=DATE_FORMATS, required=False)
-    pub_before = forms.DateField(input_formats=DATE_FORMATS, required=False)
+    DATE_FORMATS = ['%Y-%m-%d', '%Y-%m', '%Y']
+    pub_after = DatePickerField(input_formats=DATE_FORMATS, required=False)
+    pub_before = DatePickerField(input_formats=DATE_FORMATS, required=False)
     doctypes = forms.MultipleChoiceField(
         choices=PAPER_TYPE_CHOICES,
         widget=forms.CheckboxSelectMultiple,
