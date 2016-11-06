@@ -36,7 +36,8 @@ class PaperIndex(indexes.SearchIndex, indexes.Indexable):
         return "last_modified"
 
     def prepare_text(self, obj):
-        return remove_diacritics(obj.title)
+        return remove_diacritics(obj.title+' '+(' '.join(
+            self.prepare_authors_full(obj))))
 
     def prepare_authors_full(self, obj):
         # the 'full' field is already clean (no diacritics)
