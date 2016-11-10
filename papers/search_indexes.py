@@ -50,7 +50,8 @@ class PaperIndex(indexes.SearchIndex, indexes.Indexable):
         return 'OK' if obj.pdf_url else 'NOK'
 
     def prepare_researchers(self, obj):
-        return list(obj.researchers.values_list('id', flat=True))
+        return [a['researcher_id'] for a in obj.authors_list
+                if 'researcher_id' in a]
 
     def prepare_departments(self, obj):
         return list(obj.researchers.filter(department__isnull=False)
