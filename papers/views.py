@@ -48,6 +48,7 @@ from papers.doi import to_doi
 from papers.errors import MetadataSourceException
 from papers.forms import AddUnaffiliatedResearcherForm
 from papers.forms import PaperForm
+from papers.forms import FrontPageSearchForm
 from papers.models import Department
 from papers.models import Institution
 from papers.models import Paper
@@ -94,7 +95,7 @@ def index(request):
     View for the home page
     """
     context = {
-        'search_form': PaperForm(),
+        'search_form': FrontPageSearchForm(),
         'combined_status':
             [{'choice_value': v, 'choice_label': l}
              for v, l in COMBINED_STATUS_CHOICES]

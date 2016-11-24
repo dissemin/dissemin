@@ -111,8 +111,8 @@ class PaperForm(SearchForm):
         widget=forms.CheckboxSelectMultiple,
         required=False)
     DATE_FORMATS = ['%Y-%m-%d', '%Y-%m', '%Y']
-    pub_after = DatePickerField(input_formats=DATE_FORMATS, required=False)
-    pub_before = DatePickerField(input_formats=DATE_FORMATS, required=False)
+    pub_after = forms.DateField(input_formats=DATE_FORMATS, required=False)
+    pub_before = forms.DateField(input_formats=DATE_FORMATS, required=False)
     doctypes = forms.MultipleChoiceField(
         choices=PAPER_TYPE_CHOICES,
         widget=forms.CheckboxSelectMultiple,
@@ -168,7 +168,7 @@ class PaperForm(SearchForm):
         # Items with no whitespace of prefixed with 'last:' are considered as
         # last names; others are full names.
         for name in self.cleaned_data['authors'].split(','):
-            name = name.strip()
+            name = remove_diacritics(name.strip())
 
             if name.startswith('last:'):
                 is_lastname = True
@@ -180,7 +180,7 @@ class PaperForm(SearchForm):
                 continue
 
             if is_lastname:
-                self.filter(authors_last=remove_diacritics(name))
+                self.filter(authors_last=name)
             else:
                 self.filter(authors_full=Sloppy(name, slop=1))
 
@@ -210,3 +210,10 @@ class PaperForm(SearchForm):
 
     def no_query_found(self):
         return self.searchqueryset.all()
+
+class FrontPageSearchForm(PaperForm):
+    def __init__(self, *args, **kwargs):
+        super(FrontPageSearchForm, self).__init__(*args, **kwargs)
+        self.fields['authors'].widget.attrs.update({'placeholder':
+        _('Try any author name')})
+
