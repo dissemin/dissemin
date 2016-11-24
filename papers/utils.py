@@ -332,9 +332,9 @@ def extract_domain(url):
     """
     Extracts the domain name of an url
 
-    >>> urlize(u'https://gnu.org/test.html')
+    >>> extract_domain(u'https://gnu.org/test.html')
     u'gnu.org'
-    >>> urlize(u'nonsense') is None
+    >>> extract_domain(u'nonsense') is None
     True
     """
     match = domain_re.match(url)

@@ -190,6 +190,7 @@ class OAIDCTranslator(object):
 
         # - title
         if not metadata.get('title') or not authors or not pubdate:
+            print "no title, authors, or pubdate"
             return
 
         # Find the OAI source

@@ -51,7 +51,7 @@ class ZenodoProtocol(RepositoryProtocol):
         """
         Refuse deposit when the paper is already on Zenodo
         """
-        super(ZenodoProtocol, self).__init__(paper, user)
+        super(ZenodoProtocol, self).init_deposit(paper, user)
         for r in paper.oairecords:
             domain = extract_domain(r.splash_url)
             if domain.endswith('zenodo.org'):
