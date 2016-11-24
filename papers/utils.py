@@ -326,6 +326,23 @@ def urlize(val):
         val = 'http://'+val
     return val
 
+domain_re = re.compile(r'\s*(https?|ftp)://(([a-zA-Z0-9-_]+\.)+[a-zA-Z]+)/?')
+
+def extract_domain(url):
+    """
+    Extracts the domain name of an url
+
+    >>> urlize(u'https://gnu.org/test.html')
+    u'gnu.org'
+    >>> urlize(u'nonsense') is None
+    True
+    """
+    match = domain_re.match(url)
+    if match:
+        return match.group(2)
+
+
+
 # JSON utilities !
 
 

@@ -51,6 +51,11 @@ from papers.utils import valid_publication_date
 # Set exposed by proaixy to indicate the metadata source
 PROXY_SOURCE_PREFIX = "proaixy:source:"
 
+def get_proaixy_instance():
+    proaixy = OaiPaperSource(endpoint='http://doai.io/oai')
+    proaixy.add_translator(BASEDCTranslator())
+    proaixy.add_translator(CiteprocTranslator())
+    return proaixy
 
 class OaiTranslator(object):
     """

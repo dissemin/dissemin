@@ -25,7 +25,7 @@ from deposit.hal.protocol import HALProtocol
 from deposit.tests import ProtocolTest
 from django.test import TestCase
 from papers.models import Paper
-
+from backend.oai import get_proaixy_instance
 
 #from os import path
 
@@ -76,6 +76,12 @@ class HALProtocolTest(ProtocolTest):
                              abstract='this is an abstract',
                              topic='INFO')
         self.assertEqual(r.status, 'DRY_SUCCESS')
+
+    def test_paper_already_in_hal(self):
+        p = get_proaixy_instance().create_paper_by_identifier(
+            'ftunivsavoie:oai:HAL:hal-01062241v1', 'base_dc')
+        enabled = self.proto.init_deposit(p, self.user)
+        self.assertFalse(enabled)
 
     def test_predict_topic(self):
         cases = [
