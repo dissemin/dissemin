@@ -92,72 +92,6 @@ def deleteResearcher(request, pk):
         dept.update_stats()
     return HttpResponse('OK', content_type='text/plain')
 
-
-def researcherCandidatesByName(name):
-    """
-    Given a Name object, find researchers that are potentially meant
-    by this name. They come either from the model (Researcher instances
-    who have this name as NameVariant) or search results from the ORCID
-    API that are compatible with this name.
-
-    Results are returned as a list of HTML elements, to be displayed
-    in the disambiguation dialog.
-    """
-    # TODO add test to check this view!!!!
-
-    # From the model
-    related_researchers = list(
-        map(lambda nv: nv.researcher, name.namevariant_set.all()))
-
-    def renderResearcher(res):
-        return loader.render_to_string('papers/itemResearcher.html',
-                                       {'researcher': res})
-    seen_orcids = set()
-    for researcher in related_researchers:
-        if researcher.orcid:
-            seen_orcids.add(researcher.orcid)
-    rendered = map(renderResearcher, related_researchers)
-
-    # From ORCID
-    related_orcids = OrcidProfile.search_by_name(name.first, name.last)
-
-    def renderProfile(res):
-        rendered_keywords = ', '.join(res.get('keywords', []))
-        res['rendered_keywords'] = rendered_keywords
-        return loader.render_to_string('papers/itemOrcid.html',
-                                       {'profile': res})
-    related_orcids = filter(
-        lambda r: r['orcid'] not in seen_orcids, related_orcids)
-    rendered += map(renderProfile, related_orcids)
-    return rendered
-
-
-@json_view
-@require_POST
-def newUnaffiliatedResearcher(request):
-    """
-    creates a new unaffiliated researcher, or returns
-    a list of possible candidates if the name matches known
-    profiles.
-    """
-    form = AddUnaffiliatedResearcherForm(request.POST)
-    researcher = None
-    if form.is_valid():
-        first = normalize_name_words(form.cleaned_data['first'])
-        last = normalize_name_words(form.cleaned_data['last'])
-        # Check that the researcher is not already known under a different name.
-        if not form.cleaned_data.get('force'):
-            name, created = Name.get_or_create(first, last)
-            candidates = researcherCandidatesByName(name)
-            if candidates:
-                return {'disambiguation': candidates}
-
-        researcher = Researcher.create_by_name(first, last)
-        researcher.fetch_everything_if_outdated()
-        return {'url': researcher.url}
-    else:
-        return form.errors, 403
-
 # paper management
 #@user_passes_test(is_admin)
 # def changepaper(request):
@@ -280,8 +214,6 @@ urlpatterns = [
     #    url(r'^change-paper$', changePaper, name='ajax-changePaper'),
     #    url(r'^change-researcher$', changeResearcher, name='ajax-changeResearcher'),
     #    url(r'^change-author$', changeAuthor, name='ajax-changeAuthor'),
-    url(r'^new-unaffiliated-researcher$', newUnaffiliatedResearcher,
-        name='ajax-newUnaffiliatedResearcher'),
     url(r'^change-publisher-status$', changePublisherStatus,
         name='ajax-changePublisherStatus'),
     #    url(r'^harvesting-status-(?P<pk>\d+)$', harvestingStatus, name='ajax-harvestingStatus'),

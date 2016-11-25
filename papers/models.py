@@ -301,43 +301,6 @@ class Researcher(models.Model):
         """
         return NameVariant.objects.filter(researcher=self)
 
-    def variants_queryset(self):
-        """
-        The set of names with the same last name. This is a larger approximation
-        than the actual name variants to keep the SQL query simple. The method
-        `update_variants` filters out the candidates which are not compatible with the reference
-        name.
-
-        .. todo::
-            This should rather rely on the name variants with confidence 1.0
-        """
-        return Name.objects.filter(last__iexact=self.name.last)
-
-    def update_variants(self, reset=False):
-        """
-        Sets the variants of this name to the candidates returned by variants_queryset
-        and which have a positive name similarity with the reference name.
-
-        .. todo::
-            This should rather rely on the name variants with confidence 1.0
-        """
-        nvqs = self.namevariant_set.all()
-        if reset:
-            for nv in nvqs:
-                name = nv.name
-                nv.delete()
-                name.update_best_confidence()
-
-            current_name_variants = set()
-        else:
-            current_name_variants = set([nv.name_id for nv in nvqs])
-
-        for name in self.variants_queryset():
-            sim = name_similarity((name.first, name.last),
-                                  (self.name.first, self.name.last))
-            if sim > 0 and name.id not in current_name_variants:
-                self.add_name_variant(name, sim, force_update=reset)
-
     def add_name_variant(self, name, confidence, force_update=False):
         """
         Add a name variant with the given confidence and update
@@ -502,41 +465,6 @@ class Name(models.Model, BareName):
         return cls.objects.get_or_create(full=n.full,
                                          defaults={'first': n.first, 'last': n.last})
 
-    def variants_queryset(self):
-        """
-        Returns the queryset of should-be variants.
-        WARNING: This is to be used on a name that is already associated with a researcher.
-        """
-        # TODO this could be refined (icontains?)
-        return Researcher.objects.filter(name__last__iexact=self.last)
-
-    def update_variants(self):
-        """
-        Sets the variants of this name to the candidates returned by variants_queryset
-        """
-        print "Researcher.update_variants should not be used anymore"
-        return
-        for researcher in self.variants_queryset():
-            sim = name_similarity(
-                (researcher.name.first, researcher.name.last), (self.first, self.last))
-            if sim > 0:
-                old_sim = self.best_confidence
-                self.best_confidence = sim
-                if self.pk is None or old_sim < sim:
-                    self.save()
-                NameVariant.objects.get_or_create(name=self, researcher=researcher,
-                                                  defaults={'confidence': sim})
-
-    def update_best_confidence(self):
-        """
-        A name is considered as known when it belongs to a name variants group of a researcher
-        """
-        new_value = max([0.]+[d['confidence']
-                              for d in self.namevariant_set.all().values('confidence')])
-        if new_value != self.best_confidence:
-            self.best_confidence = new_value
-            self.save(update_fields=['best_confidence'])
-
     @classmethod
     def lookup_name(cls, author_name):
         """
@@ -549,12 +477,7 @@ class Name(models.Model, BareName):
         """
         if author_name == None:
             return
-        n, created = cls.get_or_create(author_name[0], author_name[1])
-
-        if created or True:
-            # Actually, this saves the name if it is relevant
-            n.update_variants()
-
+        n, _ = cls.get_or_create(author_name[0], author_name[1])
         return n
 
     @classmethod
@@ -574,7 +497,6 @@ class Name(models.Model, BareName):
             # the best_confidence field should already be up to date as it is
             # computed in the lookup
             self.save()
-            self.update_variants()
 
     @property
     def object_id(self):

@@ -33,12 +33,7 @@ from papers.models import Paper
 # urlpatterns = patterns('',
 ##    url(r'^annotate-paper-(?P<pk>\d+)-(?P<status>\d+)$', annotatePaper, name='ajax-annotatePaper'),
 ##    url(r'^delete-researcher-(?P<pk>\d+)$', deleteResearcher, name='ajax-deleteResearcher'),
-##    url(r'^change-department$', changeDepartment, name='ajax-changeDepartment'),
-##    url(r'^change-paper$', changePaper, name='ajax-changePaper'),
-##    url(r'^change-researcher$', changeResearcher, name='ajax-changeResearcher'),
-##    url(r'^change-author$', changeAuthor, name='ajax-changeAuthor'),
 #    url(r'^add-researcher$', addResearcher, name='ajax-addResearcher'),
-#    url(r'^new-unaffiliated-researcher$', newUnaffiliatedResearcher, name='ajax-newUnaffiliatedResearcher'),
 #    url(r'^change-publisher-status$', changePublisherStatus, name='ajax-changePublisherStatus'),
 ##    url(r'^harvesting-status-(?P<pk>\d+)$', harvestingStatus, name='ajax-harvestingStatus'),
 #    url(r'^wait-for-consolidated-field$', waitForConsolidatedField, name='ajax-waitForConsolidatedField'),
@@ -94,26 +89,6 @@ class PaperAjaxTest(JsonRenderingTest):
                             kwargs={'researcher': self.r1.id,
                                     'slug': self.r1.slug})
         self.checkJson(page)
-
-    def test_valid_search(self):
-        for args in [
-                {'first': 'John', 'last': 'Doe'},
-                {'first': 'Gilbeto', 'last': 'Gil'},
-                ]:
-            parsed = self.checkJson(self.postPage('ajax-newUnaffiliatedResearcher',
-                                                  postargs=args))
-            self.assertTrue('disambiguation' in parsed or 'url' in parsed)
-
-    def test_invalid_search(self):
-        for args in [
-                {'orcid': '0000-0002-8435-1137'},
-                {'first': 'John'},
-                {'last': 'Doe'},
-                {},
-                ]:
-            parsed = self.checkJson(self.postPage('ajax-newUnaffiliatedResearcher',
-                                                  postargs=args), 403)
-            self.assertTrue(len(parsed) > 0)
 
     def test_consolidate_paper(self):
         p = Paper.create_by_doi('10.1175/jas-d-15-0240.1')
