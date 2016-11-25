@@ -1403,7 +1403,7 @@ msgstr "Authentification avec ORCID"
 
 #: templates/dissemin/faq.html:39 templates/dissemin/faq.html:294
 msgid "Why do you need to authenticate users?"
-msgstr "Pourquoi est-ce les utilisateurs doivent s'authentifier ?"
+msgstr "Pourquoi est-ce que les utilisateurs doivent s'authentifier ?"
 
 #: templates/dissemin/faq.html:40 templates/dissemin/faq.html:308
 msgid "What will you do to my ORCID profile if I log in?"
@@ -1507,7 +1507,7 @@ msgstr ""
 "dépôts académiques génériques comme <a href=\"http://zenodo.org\">Zenodo</"
 "a>, dont le périmètre n'est limité qu'aux données issues de la recherche.</"
 "li></ul> Si votre communauté scientifique préfère un dépôt thématique "
-"particulier, il vaut l'utiliser afin d'améliorer votre visibilité. Dans le "
+"particulier, il vaut mieux l'utiliser afin d'améliorer votre visibilité. Dans le "
 "cas contraire, les dépôts institutionnels ou génériques sont également une "
 "option raisonnable."
 
@@ -1755,7 +1755,7 @@ msgid ""
 "your email address when you log in to Dissemin via ORCID."
 msgstr ""
 "Il est nécessaire de vous authentifier afin de pouvoir déposer des articles "
-"dans des dépôts ouverts à votre placee. Par ailleurs, connaître votre "
+"dans des dépôts ouverts à votre place. Par ailleurs, connaître votre "
 "identifiant ORCID nous permet de trouver plus facilement vos publications, "
 "en les distinguant par exemple de publications écrites par un homonyme. En "
 "vous connectant avec ORCID, vous ne donnerez pas accès à Dissemin à vos "
@@ -1814,7 +1814,7 @@ msgid ""
 "a>.</li> </ul>"
 msgstr ""
 "Il y a de nombreuses façons de nous aider : <ul> <li>Encouragez des "
-"checrheurs à utiliser notre service ;</li> <li><a href=\"mailto:"
+"chercheurs à utiliser notre service ;</li> <li><a href=\"mailto:"
 "contact@dissem.in\">Envoyez-nous</a> une liste de chercheurs de votre "
 "université ou département pour qu'on mette en place une instance de Dissemin "
 "pour votre institution ;</li> <li>Aidez-nous à traduire l'interface dans "
@@ -1962,7 +1962,7 @@ msgstr "Qui sommes-nous?"
 
 #: templates/dissemin/skeleton.html:114
 msgid "Donate"
-msgstr "Faire une donation"
+msgstr "Faire un don"
 
 #: templates/dissemin/skeleton.html:126
 msgid "Change language"
