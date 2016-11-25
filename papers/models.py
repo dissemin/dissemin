@@ -442,9 +442,6 @@ class Researcher(models.Model):
             researcher = Researcher.objects.create(**args)
             created = True
 
-        if created:
-            researcher.update_variants()
-            researcher.update_stats()
         return researcher
 
     @property
@@ -517,6 +514,8 @@ class Name(models.Model, BareName):
         """
         Sets the variants of this name to the candidates returned by variants_queryset
         """
+        print "Researcher.update_variants should not be used anymore"
+        return
         for researcher in self.variants_queryset():
             sim = name_similarity(
                 (researcher.name.first, researcher.name.last), (self.first, self.last))
