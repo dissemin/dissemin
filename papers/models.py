@@ -356,10 +356,11 @@ class Researcher(models.Model):
 
     def update_stats(self):
         """Update the access statistics for the papers authored by this researcher"""
-        if not self.stats:
-            self.stats = AccessStatistics.objects.create()
-            self.save()
-        self.stats.update(self.papers)
+        print "Researcher.update_stats should not be used anymore"
+        #if not self.stats:
+        #    self.stats = AccessStatistics.objects.create()
+        #    self.save()
+        #self.stats.update(self.papers)
 
     def fetch_everything(self):
         from backend.tasks import fetch_everything_for_researcher
@@ -373,7 +374,8 @@ class Researcher(models.Model):
 
     def init_from_orcid(self):
         from backend.tasks import init_profile_from_orcid
-        self.harvester = init_profile_from_orcid(pk=self.id).id
+        self.harvester = getattr(init_profile_from_orcid(pk=self.id),
+'id', None)
         self.current_task = 'init'
         self.save(update_fields=['harvester', 'current_task'])
 

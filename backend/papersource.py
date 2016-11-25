@@ -88,7 +88,6 @@ class PaperSource(object):
 
             p.save()
             self.index_paper(p)
-            researcher.update_stats()
 
         return p
 

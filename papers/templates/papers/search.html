@@ -73,16 +73,9 @@ $(function(){
         <p><span class="glyphicon glyphicon-star"></span> <a href="{{ researcher.department.institution.url }}">{{ researcher.department.institution }}</a></p>
         <p><span class="glyphicon glyphicon-star-empty"></span> <a href="{{ researcher.department.url }}">{{ researcher.department }}</a></p>
         {% endif %}
-        <p><span class="glyphicon glyphicon-stats"></span>
-            {% blocktrans count nb_publi=researcher.stats.num_tot|default:0 trimmed %}
-            {{ nb_publi }} publication
-            {% plural %}
-            {{ nb_publi }} publications
-            {% endblocktrans %}
-            {% if researcher.user == request.user or request.user.is_superuser %}
-            (<a href="#" id="refetchPubsButton">{% trans "Refresh" %}</a>)
-            {% endif %}
-        </p>
+	{% if researcher.user == request.user or request.user.is_superuser %}
+	<p><a href="#" id="refetchPubsButton">{% trans "Refresh publications" %}</a></p>
+	{% endif %}
         {% if request.user.is_superuser and researcher.email %}
         <p>{% trans "Address:" %} {{ researcher.email }}</p>
         {% endif %}
@@ -98,7 +91,6 @@ $(function(){
          {% csrf_token %}
          {{ researcher.affiliation_form }}</br>
          </form>
-         <a href="{% url 'recluster-researcher' researcher.pk %}" class="btn btn-default">{% trans "Refresh classification" %}</a>
          {% endif %}
     </div>
 {% elif department %}
