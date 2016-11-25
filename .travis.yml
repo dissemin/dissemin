@@ -57,6 +57,8 @@ install:
   - pip install psycopg2 --quiet
   - pip install -r requirements.txt
   - pip install coveralls
+  - pip install pyflakes
+  - ./pyflakes.sh
 
 before_script:
   - psql --version

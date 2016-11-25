@@ -56,6 +56,9 @@ doc/sphinx/*.migrations.*.rst
 .coverage
 htmlcov/
 
+# Pyflakes
+pyflakes.out
+
 # Vagrant
 .vagrant
 .vm_venv
