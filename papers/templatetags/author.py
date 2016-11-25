@@ -11,13 +11,12 @@ register = template.Library()
 
 @register.filter(is_safe=True)
 def authorlink(author):
+    url = reverse('search')+'?authors='+author.name.full
     if author.researcher_id:
-        return mark_safe('<a href="'+author.researcher.url+'">'+escape(unicode(author.name))+'</a>')
+        url = author.researcher.url
     elif author.orcid:
-        return mark_safe('<a href="'+reverse('researcher-by-orcid',
-            kwargs={'orcid':author.orcid})+'">'+escape(unicode(author.name))+'</a>')
-    else:
-        return mark_safe(escape(unicode(author.name)))
+        url = reverse('researcher-by-orcid', kwargs={'orcid':author.orcid})
+    return mark_safe('<a href="'+url+'">'+escape(unicode(author.name))+'</a>')
 
 
 @register.filter(is_safe=True)
