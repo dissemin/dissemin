@@ -1011,7 +1011,7 @@ class Paper(models.Model, BarePaper):
         old_visible = self.visible
         super(Paper, self).update_visible()
         if self.visible != old_visible:
-            p.save(update_fields=['visible'])
+            self.save(update_fields=['visible'])
 
     def breadcrumbs(self):
         """

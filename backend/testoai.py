@@ -118,8 +118,8 @@ class OaiTest(TestCase):
         records.add(OaiRecord.objects.get(identifier=second_id))
         self.assertSetEqual(set(new_paper.oairecords), records)
 
-   @unittest.expectedFailure
-   def test_create_incomplete_metadata(self):
+    @unittest.expectedFailure
+    def test_create_incomplete_metadata(self):
         """
         When we are trying to create a new paper for an
         incomplete OAI record (in this case, a publication date is
