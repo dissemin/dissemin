@@ -97,6 +97,18 @@ class PaperTest(django.test.TestCase):
             p.title, 'Monitoring and Support of Unreliable Services')
         self.assertEqual(p.publications[0].doi, '10.1109/synasc.2010.88')
 
+    def test_create_by_identifier(self):
+        # Paper has no date
+        p = Paper.create_by_oai_id('ftciteseerx:oai:CiteSeerX.psu:10.1.1.487.869')
+        self.assertEqual(p, None)
+        # Valid paper
+        p = Paper.create_by_oai_id('ftpubmed:oai:pubmedcentral.nih.gov:4131942')
+        self.assertEqual(p.pdf_url, 'http://www.ncbi.nlm.nih.gov/pubmed/24806729')
+
+    def test_create_by_hal_id(self):
+        p = Paper.create_by_hal_id('hal-00830421')
+        self.assertEqual(p.oairecords[0].splash_url, 'http://hal.archives-ouvertes.fr/hal-00830421')
+
     def test_publication_pdf_url(self):
         # This paper is gold OA
         p = Paper.create_by_doi('10.1007/BF02702259')

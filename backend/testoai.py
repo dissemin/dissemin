@@ -20,6 +20,7 @@
 
 from __future__ import unicode_literals
 
+import unittest
 from backend.oai import BASEDCTranslator
 from backend.oai import CiteprocTranslator
 from backend.oai import OAIDCTranslator
@@ -96,27 +97,56 @@ class OaiTest(TestCase):
         Addition of an OAI record when it is matched
         with an existing record by fingerprint.
         """
+        first_id = 'oai:crossref.org:10.1016/j.crma.2012.10.021'
+        second_id = 'ftarxivpreprints:oai:arXiv.org:1112.6130'
+
         # first, make sure the paper isn't there already
-        self.delete('ftccsdartic:oai:hal.archives-ouvertes.fr:hal-00939473')
+        self.delete(first_id)
         # create a paper from BASE
-        hal_paper = self.create(
-            'ftccsdartic:oai:hal.archives-ouvertes.fr:hal-00939473',
-            'base_dc')
+        cr_paper = self.create(first_id, 'citeproc')
 
         # Save the existing records
-        records = set(hal_paper.oairecords)
+        records = set(cr_paper.oairecords)
         # Create a new paper (refers to the same paper, but coming from
         # another source)
-        new_paper = self.create('ftciteseerx:oai:CiteSeerX.psu:10.1.1.487.869',
-                                'base_dc')
+        new_paper = self.create(second_id, 'base_dc')
         # the resulting paper has to be equal to the first one
         # (this does not check that all their attributes are equal, just
         # that they are the same row in the database, i.e. have same id)
-        self.assertEqual(new_paper, hal_paper)
+        self.assertEqual(new_paper, cr_paper)
         # the new set of records is the old one plus the new record
-        records.add(OaiRecord.objects.get(
-            identifier='ftciteseerx:oai:CiteSeerX.psu:10.1.1.487.869'))
+        records.add(OaiRecord.objects.get(identifier=second_id))
         self.assertSetEqual(set(new_paper.oairecords), records)
+
+   @unittest.expectedFailure
+   def test_create_incomplete_metadata(self):
+        """
+        When we are trying to create a new paper for an
+        incomplete OAI record (in this case, a publication date is
+        missing). Ideally we would still like to match it with the
+        first paper via fingerprint, to add the relevant url.
+        """
+        first_id = 'ftccsdartic:oai:hal.archives-ouvertes.fr:hal-00939473'
+        second_id = 'ftciteseerx:oai:CiteSeerX.psu:10.1.1.487.869'
+
+        # first, make sure the paper isn't there already
+        self.delete(first_id)
+        # create a paper from BASE
+        cr_paper = self.create(first_id, 'citeproc')
+
+        # Save the existing records
+        records = set(cr_paper.oairecords)
+        # Create a new paper (refers to the same paper, but coming from
+        # another source)
+        new_paper = self.create(second_id, 'base_dc')
+        # the resulting paper has to be equal to the first one
+        # (this does not check that all their attributes are equal, just
+        # that they are the same row in the database, i.e. have same id)
+        self.assertEqual(new_paper, cr_paper)
+        # the new set of records is the old one plus the new record
+        records.add(OaiRecord.objects.get(identifier=second_id))
+        self.assertSetEqual(set(new_paper.oairecords), records)
+
 
     def test_create_match_doi(self):
         """

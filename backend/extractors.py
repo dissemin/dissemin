@@ -97,6 +97,7 @@ class OpenAireExtractor(RegexExtractor):
         return urls
 
 
+pmc_id_re = re.compile(r'ftpubmed:oai:pubmedcentral\.nih\.gov:([0-9]*)')
 class BaseExtractor(RegexExtractor):
 
     def __init__(self, mappings):
@@ -105,6 +106,17 @@ class BaseExtractor(RegexExtractor):
     def _post_filter(self, urls):
         if '1' in self.metadata.get('oa', []):
             urls['pdf'] = urls.get('splash')
+
+        # Special case for PMC as their metadata includes other urls
+        pmc_match = pmc_id_re.match(self.header.identifier())
+        if pmc_match:
+            pmc_url = None
+            for u in self.metadata.get('identifier',[]):
+                if u.startswith('http://www.ncbi.nlm.nih.gov/pubmed/'):
+                    pmc_url = u
+            urls['splash'] = pmc_url
+            urls['pdf'] = pmc_url
+
         return urls
 
 arxivExtractor = RegexExtractor([

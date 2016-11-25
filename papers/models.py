@@ -866,9 +866,22 @@ class Paper(models.Model, BarePaper):
         """
         Creates a paper given a HAL id (e.g. hal-01227383)
         """
+        return self.create_by_oai_id(
+            'ftccsdartic:oai:hal.archives-ouvertes.fr:'+id,
+            bare=bare)
+
+    @classmethod
+    def create_by_oai_id(self, id, metadataPrefix='base_dc', bare=False):
+        """
+        Creates a paper by its OAI identifier.
+        """
         from backend.oai import get_proaixy_instance
         oai = get_proaixy_instance()
-
+        p = oai.create_paper_by_identifier(id, metadataPrefix)
+        if bare:
+            return p
+        elif p:
+            return Paper.from_bare(p) # TODO TODO index it?
 
     def successful_deposits(self):
         return self.depositrecord_set.filter(pdf_url__isnull=False)
