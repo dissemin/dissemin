@@ -32,7 +32,6 @@ from papers.baremodels import PAPER_TYPE_CHOICES
 from papers.models import Department
 from papers.models import Paper
 from papers.models import Researcher
-from papers.name import has_only_initials
 from papers.utils import remove_diacritics
 from papers.utils import validate_orcid
 from publishers.models import OA_STATUS_CHOICES_WITHOUT_HELPTEXT
@@ -56,32 +55,6 @@ class ResearcherDepartmentForm(forms.Form):
     pk = forms.ModelChoiceField(label=_(
         'Researcher'), queryset=Researcher.objects.all(), widget=forms.HiddenInput())
     name = forms.CharField(widget=forms.HiddenInput(), initial='department_id')
-
-
-class AddUnaffiliatedResearcherForm(forms.Form):
-    first = forms.CharField(label=_('First name'),
-                            max_length=256, min_length=2, required=False)
-    last = forms.CharField(label=_('Last name'),
-                           max_length=256, min_length=2, required=False)
-    force = forms.CharField(max_length=32, required=False)
-
-    def clean_first(self):
-        first = self.cleaned_data.get('first')
-        if first and has_only_initials(first):
-            raise forms.ValidationError(
-                _('Please spell out at least one name.'), code='initials')
-        return first
-
-    def clean(self):
-        cleaned_data = super(AddUnaffiliatedResearcherForm, self).clean()
-        if not cleaned_data.get('first') or not cleaned_data.get('last'):
-            if not cleaned_data.get('last'):
-                self.add_error('last',
-                               forms.ValidationError(_('A last name is required.'), code='required'))
-            else:
-                self.add_error('first',
-                               forms.ValidationError(_('A first name is required.'), code='required'))
-        return cleaned_data
 
 
 class Sloppy(inputs.Exact):
