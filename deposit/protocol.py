@@ -23,7 +23,6 @@ from __future__ import unicode_literals
 
 import traceback
 
-from django import forms
 from django.utils.translation import ugettext as __
 from papers.baremodels import BareOaiRecord
 from deposit.forms import BaseMetadataForm
@@ -103,7 +102,7 @@ class RepositoryProtocol(object):
         """
         Returns the form's initial values.
         """
-        return {'paper_id':self.paper.id}         
+        return {'paper_id':self.paper.id}
 
     def get_form(self):
         """

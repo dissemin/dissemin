@@ -21,8 +21,6 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
-from datetime import datetime
-from datetime import timedelta
 from statistics.models import AccessStatistics
 
 from backend.crossref import consolidate_publication

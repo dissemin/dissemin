@@ -23,7 +23,7 @@ from __future__ import unicode_literals
 from statistics.models import COMBINED_STATUS_CHOICES
 from statistics.models import PDF_STATUS_CHOICES
 
-from bootstrap3_datepicker.fields import DatePickerField
+#from bootstrap3_datepicker.fields import DatePickerField
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 from haystack import inputs

@@ -41,12 +41,10 @@ from django.utils.encoding import escape_uri_path
 from django.utils.translation import ugettext as _
 from django.utils.translation import ungettext
 from django.views import generic
-from django.http.request import QueryDict
 from haystack.generic_views import SearchView
 from notification.api import get_notifications
 from papers.doi import to_doi
 from papers.errors import MetadataSourceException
-from papers.forms import AddUnaffiliatedResearcherForm
 from papers.forms import PaperForm
 from papers.forms import FrontPageSearchForm
 from papers.models import Department
@@ -60,7 +58,6 @@ from publishers.models import Journal
 from publishers.models import Publisher
 from publishers.views import SlugDetailView
 from search import SearchQuerySet
-from search import EmptySearchQuerySet
 
 
 def fetch_on_orcid_login(sender, **kwargs):

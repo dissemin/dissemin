@@ -28,7 +28,6 @@ from __future__ import unicode_literals
 from deposit.sword.metadata import addChild
 from deposit.sword.metadata import MetadataFormatter
 from lxml import etree
-from papers.models import Paper
 from django.utils.translation import ugettext as __
 
 XMLLANG_ATTRIB = '{http://www.w3.org/XML/1998/namespace}lang'

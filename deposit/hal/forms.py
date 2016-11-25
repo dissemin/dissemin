@@ -21,7 +21,6 @@
 from __future__ import unicode_literals
 
 from autocomplete.widgets import Select2
-from crispy_forms.helper import FormHelper
 from deposit.forms import FormWithAbstract
 from deposit.hal.metadata import HAL_TOPIC_CHOICES
 from django import forms

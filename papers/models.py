@@ -441,7 +441,6 @@ class Researcher(models.Model):
             args = kwargs.copy()
             args['name'] = name
             researcher = Researcher.objects.create(**args)
-            created = True
 
         return researcher
 
@@ -861,6 +860,15 @@ class Paper(models.Model, BarePaper):
             return bare_paper
         elif bare_paper:
             return Paper.from_bare(bare_paper)  # TODO TODO index it?
+
+    @classmethod
+    def create_by_hal_id(self, id, bare=False):
+        """
+        Creates a paper given a HAL id (e.g. hal-01227383)
+        """
+        from backend.oai import get_proaixy_instance
+        oai = get_proaixy_instance()
+
 
     def successful_deposits(self):
         return self.depositrecord_set.filter(pdf_url__isnull=False)
