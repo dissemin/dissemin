@@ -113,8 +113,6 @@ class HALProtocol(RepositoryProtocol):
             most_similar_idx = most_similar_author((first,last),
                 self.paper.author_name_pairs())
         data['depositing_author'] = most_similar_idx
-        for k, v in data.items():
-            print "%s: %s" % (unicode(k),unicode(v))
 
         return data
 
