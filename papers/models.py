@@ -374,10 +374,11 @@ class Researcher(models.Model):
 
     def init_from_orcid(self):
         from backend.tasks import init_profile_from_orcid
-        self.harvester = getattr(init_profile_from_orcid(pk=self.id),
-'id', None)
         self.current_task = 'init'
-        self.save(update_fields=['harvester', 'current_task'])
+        self.save(update_fields=['current_task'])
+        self.harvester = getattr(init_profile_from_orcid.delay(pk=self.id),
+'id', None)
+        self.save(update_fields=['harvester'])
 
     @classmethod
     def get_or_create_by_orcid(cls, orcid, profile=None, user=None):
