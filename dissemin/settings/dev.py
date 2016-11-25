@@ -29,7 +29,7 @@ INSTALLED_APPS += (
 )
 
 # Base domain of the ORCiD API.
-ORCID_BASE_DOMAIN = 'sandbox.orcid.org'  # for the sandbox API
+ORCID_BASE_DOMAIN = 'orcid.org'  # for the sandbox API
 
 # ORCiD provider configuration (sandbox)
 SOCIALACCOUNT_PROVIDERS = \
@@ -64,7 +64,8 @@ TEMPLATES = [
                 "django.template.context_processors.media",
                 "django.template.context_processors.static",
                 "django.template.context_processors.tz",
-                "django.template.context_processors.request"
+                "django.template.context_processors.request",
+                "dissemin.tcp.orcid_base_domain",
             ),
             'debug': True
         }

@@ -206,7 +206,8 @@ TEMPLATES = [
                     "django.template.context_processors.media",
                     "django.template.context_processors.static",
                     "django.template.context_processors.tz",
-                    "django.template.context_processors.request"
+                    "django.template.context_processors.request",
+                    "dissemin.tcp.orcid_base_domain",
                 ),
                 'debug': True
             }
@@ -262,10 +263,6 @@ CELERYBEAT_SCHEDULE = {
 #    'update_journal_stats': {
 #        'task': 'update_journal_stats',
 #        'schedule': timedelta(days=1),
-#    },
-#    'remove_empty_profiles': {
-#        'task': 'remove_empty_profiles',
-#        'schedule': timedelta(hours=2),
 #    },
 }
 

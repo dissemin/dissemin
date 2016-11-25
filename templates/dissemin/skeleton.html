@@ -2,7 +2,6 @@
 {% load i18n %}
 {% load socialaccount %}
 {% load users %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,6 +46,7 @@
     <script type="text/javascript" src="{% static "editing.js" %}"></script>
     <script type="text/javascript" src="{% static "name.js" %}"></script>
     <script type="text/javascript">
+        
         {% block jsScript %}{% endblock %}
     </script>
     {% block extra_head %}{% endblock %}
@@ -80,7 +80,15 @@
                                 <ul class="dropdown-menu">
                                     <li><a href="{% url "my-profile" %}">{% trans "My profile" %}</a></li>
                                     <li><a href="{% url "list_deposits" %}">{% trans "My deposits" %}</a></li>
-                                    <li><a href="{% url "account_logout" %}">{% trans "Logout" %}</a></li>
+                                    <li><a onclick="
+$.ajax({ url: 'https://{{ ORCID_BASE_DOMAIN }}/userStatus.json?logUserOut=true', dataType: 'jsonp',
+            success: function(result,status,xhr) {
+                window.location.href = '{% url "account_logout" %}';
+            },
+            error: function (xhr, status, error) {
+                window.location.href = '{% url "account_logout" %}';
+            }
+            })">{% trans "Logout" %}</a></li>
                                 </ul>
                             </li>
                         {% else %}

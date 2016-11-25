@@ -25,7 +25,6 @@ from statistics.models import combined_status_stats
 
 from allauth.socialaccount.signals import post_social_login
 from deposit.models import DepositRecord
-from dissemin.settings import UNIVERSITY_BRANDING
 from django.contrib.auth.decorators import user_passes_test
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
@@ -97,7 +96,6 @@ def index(request):
             [{'choice_value': v, 'choice_label': l}
              for v, l in COMBINED_STATUS_CHOICES]
         }
-    context.update(UNIVERSITY_BRANDING)
     return render(request, 'papers/index.html', context)
 
 
