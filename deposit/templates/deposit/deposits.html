@@ -1,0 +1,26 @@
+{% extends "dissemin/skeleton.html" %}
+
+{% load i18n %}
+
+
+{% block extra_head %}
+{% include 'statistics/headers.html' %}
+{% endblock %}
+
+{% block headTitle %}{% trans "My deposits" %}{% endblock %}
+
+{% block content %}
+<div id="fullPage">
+<h2>{% trans "My deposits" %}</h2>
+<ul class="list-group">
+    {% for deposit in deposits %}
+        {% with deposit.paper as paper %}
+        <li class="list-group-item"><a href="{{ paper.url }}">{{ paper }}</a> in {{ deposit.repository }}</li>
+        {% endwith %}
+    {% empty %}
+        <p>{% trans "You have not made any deposit via Dissemin." %}</p>
+    {% endfor %}
+</ul>
+{% endblock %}
+
+

@@ -79,6 +79,7 @@
                                                                                                                               ><span class="glyphicon glyphicon-user"></span>&nbsp; {{ request.user|fullname }} <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="{% url "my-profile" %}">{% trans "My profile" %}</a></li>
+                                    <li><a href="{% url "list_deposits" %}">{% trans "My deposits" %}</a></li>
                                     <li><a href="{% url "account_logout" %}">{% trans "Logout" %}</a></li>
                                 </ul>
                             </li>

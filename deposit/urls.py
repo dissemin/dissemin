@@ -26,6 +26,8 @@ from django.conf.urls import url
 urlpatterns = [
         url(r'^deposit_paper/(?P<pk>\d+)/$',
             views.start_view, name='upload_paper'),
+        url(r'^deposits$',
+            views.list_deposits, name='list_deposits'),
         url(r'^ajax/submit-deposit-(?P<pk>\d+)$',
             views.submitDeposit, name='ajax-submitDeposit'),
         url(r'^ajax/get-metadata-form$',

@@ -94,7 +94,15 @@ def start_view(request, pk):
     return render(request, 'deposit/start.html', context)
 
 
-@json_view
+@user_passes_test(is_authenticated)
+def list_deposits(request):
+    deposits = DepositRecord.objects.filter(user=request.user,
+    identifier__isnull=False)
+    context = {
+        'deposits': deposits
+    }
+    return render(request, 'deposit/deposits.html', context)
+
 @require_POST
 @user_passes_test(is_authenticated)
 def submitDeposit(request, pk):
