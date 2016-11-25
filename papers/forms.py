@@ -23,6 +23,7 @@ from __future__ import unicode_literals
 from statistics.models import COMBINED_STATUS_CHOICES
 from statistics.models import PDF_STATUS_CHOICES
 
+from bootstrap3_datepicker.fields import DatePickerField
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 from haystack import inputs
@@ -109,7 +110,7 @@ class PaperForm(SearchForm):
         choices=COMBINED_STATUS_CHOICES,
         widget=forms.CheckboxSelectMultiple,
         required=False)
-    DATE_FORMATS = ['%Y', '%Y-%m', '%Y-%m-%d']
+    DATE_FORMATS = ['%Y-%m-%d', '%Y-%m', '%Y']
     pub_after = forms.DateField(input_formats=DATE_FORMATS, required=False)
     pub_before = forms.DateField(input_formats=DATE_FORMATS, required=False)
     doctypes = forms.MultipleChoiceField(
@@ -167,7 +168,7 @@ class PaperForm(SearchForm):
         # Items with no whitespace of prefixed with 'last:' are considered as
         # last names; others are full names.
         for name in self.cleaned_data['authors'].split(','):
-            name = name.strip()
+            name = remove_diacritics(name.strip())
 
             if name.startswith('last:'):
                 is_lastname = True
@@ -179,7 +180,7 @@ class PaperForm(SearchForm):
                 continue
 
             if is_lastname:
-                self.filter(authors_last=remove_diacritics(name))
+                self.filter(authors_last=name)
             else:
                 self.filter(authors_full=Sloppy(name, slop=1))
 
@@ -209,3 +210,10 @@ class PaperForm(SearchForm):
 
     def no_query_found(self):
         return self.searchqueryset.all()
+
+class FrontPageSearchForm(PaperForm):
+    def __init__(self, *args, **kwargs):
+        super(FrontPageSearchForm, self).__init__(*args, **kwargs)
+        self.fields['authors'].widget.attrs.update({'placeholder':
+        _('Try any author name')})
+

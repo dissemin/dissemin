@@ -41,12 +41,14 @@ from django.utils.encoding import escape_uri_path
 from django.utils.translation import ugettext as _
 from django.utils.translation import ungettext
 from django.views import generic
+from django.http.request import QueryDict
 from haystack.generic_views import SearchView
 from notification.api import get_notifications
 from papers.doi import to_doi
 from papers.errors import MetadataSourceException
 from papers.forms import AddUnaffiliatedResearcherForm
 from papers.forms import PaperForm
+from papers.forms import FrontPageSearchForm
 from papers.models import Department
 from papers.models import Institution
 from papers.models import Paper
@@ -93,7 +95,7 @@ def index(request):
     View for the home page
     """
     context = {
-        'newResearcherForm': AddUnaffiliatedResearcherForm(),
+        'search_form': FrontPageSearchForm(),
         'combined_status':
             [{'choice_value': v, 'choice_label': l}
              for v, l in COMBINED_STATUS_CHOICES]
@@ -145,6 +147,18 @@ class PaperSearchView(SearchView):
 
         return context
 
+    def get_form_kwargs(self):
+        """
+        We make sure the search is valid even if no parameter
+        was passed, in which case we add a default empty query.
+        Otherwise the search form is not bound and search fails.
+        """
+        args = super(PaperSearchView, self).get_form_kwargs()
+
+        if 'data' not in args:
+            args['data'] = {self.search_field:''}
+        return args
+
     def render_to_response(self, context, **kwargs):
         if self.request.META.get('CONTENT_TYPE') == 'application/json':
             response = self.raw_response(context, **kwargs)
@@ -164,11 +178,6 @@ class PaperSearchView(SearchView):
             'stats': stats,
             'nb_results': context['nb_results'],
         }
-
-    def form_invalid(self, form):
-        self.object_list = []
-        self.queryset = EmptySearchQuerySet()
-        return self.render_to_response(self.get_context_data(form=form))
 
     def url_with_query_string(self, url=None, query_string=None):
         """

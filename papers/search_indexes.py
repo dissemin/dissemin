@@ -36,7 +36,8 @@ class PaperIndex(indexes.SearchIndex, indexes.Indexable):
         return "last_modified"
 
     def prepare_text(self, obj):
-        return remove_diacritics(obj.title)
+        return remove_diacritics(obj.title+' '+(' '.join(
+            self.prepare_authors_full(obj))))
 
     def prepare_authors_full(self, obj):
         # the 'full' field is already clean (no diacritics)
@@ -49,7 +50,8 @@ class PaperIndex(indexes.SearchIndex, indexes.Indexable):
         return 'OK' if obj.pdf_url else 'NOK'
 
     def prepare_researchers(self, obj):
-        return list(obj.researchers.values_list('id', flat=True))
+        return [a['researcher_id'] for a in obj.authors_list
+                if 'researcher_id' in a]
 
     def prepare_departments(self, obj):
         return list(obj.researchers.filter(department__isnull=False)

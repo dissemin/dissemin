@@ -29,6 +29,7 @@ from unittest import expectedFailure
 from backend.oai import OaiPaperSource
 from backend.oai import BASEDCTranslator
 
+from backend.oai import get_proaixy_instance
 
 #from os import path
 
@@ -140,6 +141,12 @@ class HALProtocolTest(ProtocolTest):
              depositing_author=0,
              affiliation=128940)
         self.assertEqual(r.status, 'DRY_SUCCESS')
+
+    def test_paper_already_in_hal(self):
+        p = get_proaixy_instance().create_paper_by_identifier(
+            'ftunivsavoie:oai:HAL:hal-01062241v1', 'base_dc')
+        enabled = self.proto.init_deposit(p, self.user)
+        self.assertFalse(enabled)
 
     def test_predict_topic(self):
         cases = [

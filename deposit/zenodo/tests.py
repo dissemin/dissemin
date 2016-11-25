@@ -27,6 +27,7 @@ from deposit.tests import lorem_ipsum
 from deposit.tests import ProtocolTest
 from deposit.zenodo.protocol import ZenodoProtocol
 from papers.models import Paper
+from backend.oai import get_proaixy_instance
 
 class ZenodoProtocolTest(ProtocolTest):
 
@@ -46,3 +47,10 @@ class ZenodoProtocolTest(ProtocolTest):
             abstract = lorem_ipsum,
             license = 'other-open')
         self.assertEqual(r.status, 'DRY_SUCCESS')
+
+    def test_deposit_paper_already_on_zenodo(self):
+        p = get_proaixy_instance().create_paper_by_identifier(
+            'ftzenodo:oai:zenodo.org:50134', 'base_dc')
+        enabled = self.proto.init_deposit(p, self.user)
+        self.assertFalse(enabled)
+

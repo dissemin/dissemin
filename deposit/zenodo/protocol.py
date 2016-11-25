@@ -31,6 +31,7 @@ from deposit.registry import protocol_registry
 from deposit.zenodo.forms import ZenodoForm
 from django.utils.translation import ugettext as __
 from papers.utils import kill_html
+from papers.utils import extract_domain
 
 
 class ZenodoProtocol(RepositoryProtocol):
@@ -45,6 +46,17 @@ class ZenodoProtocol(RepositoryProtocol):
         self.api_url = repository.endpoint
         if not self.api_url:
             self.api_url = "https://zenodo.org/api/deposit/depositions"
+
+    def init_deposit(self, paper, user):
+        """
+        Refuse deposit when the paper is already on Zenodo
+        """
+        super(ZenodoProtocol, self).init_deposit(paper, user)
+        for r in paper.oairecords:
+            domain = extract_domain(r.splash_url)
+            if domain.endswith('zenodo.org'):
+                return False
+        return True
 
     def get_form_initial_data(self):
         data = super(ZenodoProtocol, self).get_form_initial_data()

@@ -15,6 +15,7 @@
 {% block extra_head %}
 {% include "statistics/headers.html" %}
 <script type="text/javascript" src="{% static 'papers/refresh.js' %}"></script>
+{{ form.media }}
 {% endblock %}
 
 {% block bodyTitle %}
@@ -72,16 +73,9 @@ $(function(){
         <p><span class="glyphicon glyphicon-star"></span> <a href="{{ researcher.department.institution.url }}">{{ researcher.department.institution }}</a></p>
         <p><span class="glyphicon glyphicon-star-empty"></span> <a href="{{ researcher.department.url }}">{{ researcher.department }}</a></p>
         {% endif %}
-        <p><span class="glyphicon glyphicon-stats"></span>
-            {% blocktrans count nb_publi=researcher.stats.num_tot|default:0 trimmed %}
-            {{ nb_publi }} publication
-            {% plural %}
-            {{ nb_publi }} publications
-            {% endblocktrans %}
-            {% if researcher.user == request.user or request.user.is_superuser %}
-            (<a href="#" id="refetchPubsButton">{% trans "Refresh" %}</a>)
-            {% endif %}
-        </p>
+	{% if researcher.user == request.user or request.user.is_superuser %}
+	<p><a href="#" id="refetchPubsButton">{% trans "Refresh publications" %}</a></p>
+	{% endif %}
         {% if request.user.is_superuser and researcher.email %}
         <p>{% trans "Address:" %} {{ researcher.email }}</p>
         {% endif %}
@@ -266,44 +260,6 @@ $(function(){
 {% block lists %}
 <div id="waitingAreaContainer">
 </div>
-
- {% if researcher and not researcher.orcid %}
- <p></p>
- <div class="alert alert-warning">
-     <p>
-     {% blocktrans trimmed %}
-     This researcher is not associated with any ORCID profile. The publications below
-     match their name but might be irrelevant.
-     {% endblocktrans %}
-     </p>
- </div>
- {% elif researcher.empty_orcid_profile %}
- <p></p>
- <div class="alert alert-warning">
-     {% if researcher.user == request.user %}
-     {% url 'refetch-researcher' researcher.pk as url_refetch %}
-     <p>
-     {% blocktrans trimmed %}
-     Your ORCID profile does not reference any publication. You can add them easily using <a href="http://search.crossref.org">CrossRef Metadata Search</a>.<br />
-     The ones shown below match your name but might be irrelevant or incomplete.
-     {% endblocktrans %}
-     {% if not researcher.current_task %}
-         </p><p>
-         <div style="text-align:center">
-                 <a href="{{ url_refetch }}" class="btn btn-default">
-                         {% trans "Update papers" %}
-                 </a>
-         </div>
-     {% endif %}
-     {% else %}
-     {% blocktrans trimmed %}
-     This ORCID profile does not reference any publication.
-     The ones shown below might be irrelevant or incomplete.
-     {% endblocktrans %}
-     {% endif %}
-     </p>
- </div>
- {% endif %}
 
  <ul class="messages">
  </ul>

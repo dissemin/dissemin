@@ -130,6 +130,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'bootstrap3_datepicker',
     'rest_framework',
     'crispy_forms',
     'allauth',
@@ -254,18 +255,18 @@ CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
 CELERY_IMPORTS = ['backend.tasks']
 
 CELERYBEAT_SCHEDULE = {
-    'update_all_stats_but_researchers': {
-        'task': 'update_all_stats_but_researchers',
-        'schedule': timedelta(minutes=30),
-    },
-    'update_journal_stats': {
-        'task': 'update_journal_stats',
-        'schedule': timedelta(days=1),
-    },
-    'remove_empty_profiles': {
-        'task': 'remove_empty_profiles',
-        'schedule': timedelta(hours=2),
-    },
+#    'update_all_stats_but_researchers': {
+#        'task': 'update_all_stats_but_researchers',
+#        'schedule': timedelta(minutes=30),
+#    },
+#    'update_journal_stats': {
+#        'task': 'update_journal_stats',
+#        'schedule': timedelta(days=1),
+#    },
+#    'remove_empty_profiles': {
+#        'task': 'remove_empty_profiles',
+#        'schedule': timedelta(hours=2),
+#    },
 }
 
 # This is the time in seconds before an unacknowledged task is re-sent to

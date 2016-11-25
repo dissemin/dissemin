@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django import template
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
+from django.urls import reverse
 
 register = template.Library()
 
@@ -12,6 +13,9 @@ register = template.Library()
 def authorlink(author):
     if author.researcher_id:
         return mark_safe('<a href="'+author.researcher.url+'">'+escape(unicode(author.name))+'</a>')
+    elif author.orcid:
+        return mark_safe('<a href="'+reverse('researcher-by-orcid',
+            kwargs={'orcid':author.orcid})+'">'+escape(unicode(author.name))+'</a>')
     else:
         return mark_safe(escape(unicode(author.name)))
 

@@ -356,10 +356,11 @@ class Researcher(models.Model):
 
     def update_stats(self):
         """Update the access statistics for the papers authored by this researcher"""
-        if not self.stats:
-            self.stats = AccessStatistics.objects.create()
-            self.save()
-        self.stats.update(self.papers)
+        print "Researcher.update_stats should not be used anymore"
+        #if not self.stats:
+        #    self.stats = AccessStatistics.objects.create()
+        #    self.save()
+        #self.stats.update(self.papers)
 
     def fetch_everything(self):
         from backend.tasks import fetch_everything_for_researcher
@@ -373,9 +374,11 @@ class Researcher(models.Model):
 
     def init_from_orcid(self):
         from backend.tasks import init_profile_from_orcid
-        self.harvester = init_profile_from_orcid(pk=self.id).id
         self.current_task = 'init'
-        self.save(update_fields=['harvester', 'current_task'])
+        self.save(update_fields=['current_task'])
+        self.harvester = getattr(init_profile_from_orcid.delay(pk=self.id),
+'id', None)
+        self.save(update_fields=['harvester'])
 
     @classmethod
     def get_or_create_by_orcid(cls, orcid, profile=None, user=None):
@@ -440,9 +443,6 @@ class Researcher(models.Model):
             researcher = Researcher.objects.create(**args)
             created = True
 
-        if created:
-            researcher.update_variants()
-            researcher.update_stats()
         return researcher
 
     @property
@@ -515,6 +515,8 @@ class Name(models.Model, BareName):
         """
         Sets the variants of this name to the candidates returned by variants_queryset
         """
+        print "Researcher.update_variants should not be used anymore"
+        return
         for researcher in self.variants_queryset():
             sim = name_similarity(
                 (researcher.name.first, researcher.name.last), (self.first, self.last))

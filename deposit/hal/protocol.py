@@ -23,6 +23,7 @@ from __future__ import unicode_literals
 from io import BytesIO
 import traceback
 from zipfile import ZipFile
+from papers.utils import extract_domain
 
 import requests
 
@@ -62,6 +63,18 @@ class HALProtocol(RepositoryProtocol):
             self.api_url = "https://api.archives-ouvertes.fr/sword/hal/"
         self.username = repository.username
         self.password = repository.password
+
+    def init_deposit(self, paper, user):
+        """
+        We reject in advance papers that are already in HAL
+        """
+        super(HALProtocol, self).init_deposit(paper,user)
+        for r in paper.oairecords:
+            domain = extract_domain(r.splash_url) or ''
+            if ('oai:HAL:' in r.identifier or
+                domain.endswith('archives-ouvertes.fr')):
+                return False
+        return True
 
     def predict_topic(self, topic_text):
         if not topic_text:
