@@ -71,7 +71,7 @@ class OrcidProfileTest(unittest.TestCase):
 
     def test_sandbox(self):
         self.assertEqual(OrcidProfile(
-            id='0000-0001-9882-3387').name, ('Donald', 'Duck'))
+            id='0000-0002-5654-4053').name, ('Peter', 'Lieth'))
 
     def test_search(self):
         results = list(OrcidProfile.search_by_name('John', 'Doe'))

@@ -11,7 +11,7 @@ register = template.Library()
 
 @register.filter(is_safe=True)
 def authorlink(author):
-    url = reverse('search')+'?authors='+author.name.full
+    url = reverse('search')+'?authors='+author.name.full.replace(' ','+')
     if author.researcher_id:
         url = author.researcher.url
     elif author.orcid:
