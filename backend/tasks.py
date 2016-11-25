@@ -155,11 +155,3 @@ def update_journal_stats():
     AccessStatistics.update_all_stats(Journal)
 
 
-@shared_task(name='remove_empty_profiles')
-def remove_empty_profiles():
-    """
-    Deletes all researchers without papers and without affiliations
-    """
-    date_cap = datetime.now()-timedelta(hours=2)
-    Researcher.objects.filter(department__isnull=True,
-                              stats__num_tot=0, last_harvest__lt=date_cap).delete()

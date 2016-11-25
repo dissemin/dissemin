@@ -38,7 +38,6 @@ from backend.romeo import fetch_publisher
 from backend.romeo import find_journal_in_model
 from backend.romeo import perform_romeo_query
 from backend.tasks import fetch_everything_for_researcher
-from backend.tasks import remove_empty_profiles
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.management import call_command
 from django.test import override_settings
@@ -311,19 +310,6 @@ class TasksTest(PrefilledTest):
     def test_fetch_everything_with_orcid(self):
         r = Researcher.get_or_create_by_orcid('0000-0002-6561-5642')
         fetch_everything_for_researcher(r.pk)
-
-    def test_remove_empty_profiles(self):
-        Researcher.objects.update(last_harvest=datetime.datetime.now())
-        nb_researchers = Researcher.objects.all().count()
-        r = Researcher.create_by_name('Franck', 'Behindtree')
-        r.last_harvest = datetime.datetime.now()-datetime.timedelta(hours=4)
-        r.save()
-        r.update_stats()
-        pk = r.pk
-        remove_empty_profiles()
-        with self.assertRaises(ObjectDoesNotExist):
-            Researcher.objects.get(pk=pk)
-        self.assertEqual(Researcher.objects.count(), nb_researchers)
 
 
 class MaintenanceTest(PrefilledTest):
