@@ -40,8 +40,12 @@ def publication(publi):
         result += '<strong>'+escape(unicode(publi.issue))+'</strong>'
     if publi.volume:
         result += '('+escape(unicode(publi.volume))+')'
-    if (publi.issue or publi.volume) and publi.pubdate:
+    if (publi.issue or publi.volume) and (publi.pubdate or publi.pages):
         result += ', '
+    if publi.pages:
+        result += 'p. '+publi.pages
+        if publi.pubdate:
+            result += ', '
     if publi.pubdate:
         result += escape(unicode(str(publi.pubdate.year)))
     return mark_safe(result)
