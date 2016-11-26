@@ -102,5 +102,8 @@ class ProtocolTest(PrefilledTest):
         deposit_result = self.proto.submit_deposit_wrapper(pdf,
                                                            form, dry_run=True)
         self.assertIsInstance(deposit_result, DepositResult)
-        print deposit_result.logs
+        self.assertIsInstance(deposit_result.additional_info, list)
+        for i in deposit_result.additional_info:
+            self.assertNotEqual(i.get('label'), None)
+            self.assertNotEqual(i.get('value'), None)
         return deposit_result

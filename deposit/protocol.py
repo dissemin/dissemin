@@ -26,17 +26,14 @@ import traceback
 from django.utils.translation import ugettext as __
 from papers.baremodels import BareOaiRecord
 from deposit.forms import BaseMetadataForm
+from deposit.models import DEPOSIT_STATUS_CHOICES
 
 class DepositError(Exception):
     """
     The exception to raise when something wrong happens
     during the deposition process
     """
-
-    def __init__(self, msg):
-        super(DepositError, self).__init__(msg)
-
-
+    pass
 
 class DepositResult(object):
     """
@@ -44,26 +41,21 @@ class DepositResult(object):
     This object will be stored in two rows in the database:
     in a BareOaiRecord and in a DepositRecord.
 
-    status should be "SUCCESS" if the deposit was successfully performed,
-    "DRY_SUCCESS" for a success in dry mode (everything went well but
-    the paper was not actually deposited)
+    status should be one of DEPOSIT_STATUS_CHOICES
     """
 
     def __init__(self, identifier=None, splash_url=None, pdf_url=None, logs=None,
-                 status='SUCCESS', message=None):
+                 status='published', message=None):
         self.identifier = identifier
         self.splash_url = splash_url
         self.pdf_url = pdf_url
         self.logs = logs
+        if status not in [x for x,y in DEPOSIT_STATUS_CHOICES]:
+            raise ValueError('invalid status '+unicode(status))
         self.status = status
         self.message = message
-
-    def success(self):
-        """
-        Returns whether the deposit was successful.
-        """
-        return self.status == 'SUCCESS'
-
+        self.oairecord = None
+        self.additional_info = []
 
 class RepositoryProtocol(object):
     """
@@ -143,24 +135,24 @@ class RepositoryProtocol(object):
             result.logs = self._logs
 
             # Create the corresponding OAI record
-            rec = BareOaiRecord(
-                    source=self.repository.oaisource,
-                    identifier=('deposition:%d:%s' %
-                                (self.repository.id, unicode(result.identifier))),
-                    splash_url=result.splash_url,
-                    pdf_url=result.pdf_url)
-            self.paper.add_oairecord(rec)
+            if result.splash_url:
+                rec = BareOaiRecord(
+                        source=self.repository.oaisource,
+                        identifier=('deposition:%d:%s' %
+                                    (self.repository.id, unicode(result.identifier))),
+                        splash_url=result.splash_url,
+                        pdf_url=result.pdf_url)
+                result.oairecord = self.paper.add_oairecord(rec)
 
-            self.paper.update_author_stats()  # TODO write an unit test for this
             return result
         except DepositError as e:
             self.log('Message: '+e.args[0])
-            return DepositResult(logs=self._logs, status='FAILED', message=e.args[0])
+            return DepositResult(logs=self._logs, status='failed', message=e.args[0])
         except Exception as e:
             self.log("Caught exception:")
             self.log(str(type(e))+': '+str(e)+'')
             self.log(traceback.format_exc())
-            return DepositResult(logs=self._logs, status='FAILED', message=__('Failed to connect to the repository. Please try again later.'))
+            return DepositResult(logs=self._logs, status='failed', message=__('Failed to connect to the repository. Please try again later.'))
 
     def log(self, line):
         """

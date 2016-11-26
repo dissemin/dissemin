@@ -25,17 +25,23 @@ from caching.base import CachingManager
 from caching.base import CachingMixin
 from deposit.registry import protocol_registry
 from django.contrib.auth.models import User
+from django.contrib.postgres.fields import JSONField
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from papers.models import OaiSource
 from papers.models import Paper
+from papers.models import OaiRecord
+from papers.models import UPLOAD_TYPE_CHOICES
 from upload.models import UploadedPDF
 
 DEPOSIT_STATUS_CHOICES = [
-   ('created', _('Created')),
-   ('metadata_defective', _('Metadata defective')),
-   ('document_defective', _('Document defective')),
-   ('deposited', _('Deposited')),
+   ('failed', _('Failed')), # we failed to deposit the paper
+   ('faked', _('Faked')), # the deposit was faked (for tests)
+   ('pending', _('Pending publication')), # the deposit has been
+    # submitted but is not publicly visible yet
+   ('published', _('Published')), # the deposit is visible on the repo
+   ('refused', _('Refused by the repository')),
+   ('deleted', _('Deleted')), # deleted by the repository
    ]
 
 class RepositoryManager(CachingManager):
@@ -142,9 +148,11 @@ class DepositRecord(models.Model):
 
     request = models.TextField(null=True, blank=True)
     identifier = models.CharField(max_length=512, null=True, blank=True)
-    pdf_url = models.URLField(max_length=1024, null=True, blank=True)
+    oairecord = models.ForeignKey(OaiRecord, null=True, blank=True)
     date = models.DateTimeField(auto_now=True)  # deposit date
-    upload_type = models.CharFile = models.FileField(upload_to='deposits')
+    upload_type = models.CharField(max_length=64,choices=UPLOAD_TYPE_CHOICES)
+    status = models.CharField(max_length=64,choices=DEPOSIT_STATUS_CHOICES)
+    additional_info = JSONField(null=True, blank=True)
 
     file = models.ForeignKey(UploadedPDF)
 

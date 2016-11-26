@@ -46,7 +46,7 @@ class ZenodoProtocolTest(ProtocolTest):
         r = self.dry_deposit(p,
             abstract = lorem_ipsum,
             license = 'other-open')
-        self.assertEqual(r.status, 'DRY_SUCCESS')
+        self.assertEqual(r.status, 'faked')
 
     def test_deposit_paper_already_on_zenodo(self):
         p = get_proaixy_instance().create_paper_by_identifier(

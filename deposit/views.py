@@ -152,16 +152,19 @@ def submitDeposit(request, pk):
     submitResult = protocol.submit_deposit_wrapper(path, repositoryForm)
 
     d.request = submitResult.logs
-    if not submitResult.success():
+    if submitResult.status == 'failed':
         context['message'] = submitResult.message
         d.save()
         return context, 400
 
     d.identifier = submitResult.identifier
-    d.pdf_url = submitResult.pdf_url
+    d.additional_info = submitResult.additional_info
+    d.status = submitResult.status
+    d.oairecord = submitResult.oairecord
     d.save()
     paper.update_availability()
     paper.save()
+    paper.update_index()
 
     context['status'] = 'success'
     # TODO change this (we don't need it)

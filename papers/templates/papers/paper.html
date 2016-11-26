@@ -85,7 +85,7 @@ $(function(){
 {% endif %}
 </div>
 
-{% if deposit.pdf_url %}
+{% if deposit.status == 'published' or deposit.status == 'pending' %}
 <div class="depositSuccess">{% trans "Paper successfully deposited!" %}</div>
 {% endif %}
 

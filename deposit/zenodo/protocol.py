@@ -123,7 +123,7 @@ class ZenodoProtocol(RepositoryProtocol):
             r = requests.delete(self.api_url+"/%s?access_token=%s" %
                                 (deposition_id, api_key))
             self.log(r.text)
-            deposit_result.status = 'DRY_SUCCESS'
+            deposit_result.status = 'faked'
             deposit_result.splash_url = 'http://sandbox.zenodo.org/fake'
             deposit_result.pdf_url = deposit_result.splash_url
         else:

@@ -20,7 +20,6 @@
 
 from __future__ import unicode_literals
 
-import haystack
 from papers.models import Paper
 
 
@@ -87,7 +86,7 @@ class PaperSource(object):
                     self.update_empty_orcid(researcher, False)
 
             p.save()
-            self.index_paper(p)
+            p.update_index()
 
         return p
 
@@ -99,15 +98,3 @@ class PaperSource(object):
             researcher.empty_orcid_profile = val
             researcher.save(update_fields=['empty_orcid_profile'])
 
-    def index_paper(self, paper):
-        """
-        Updates a paper in the search index
-        """
-        using_backends = haystack.connection_router.for_write(instance=paper)
-        for using in using_backends:
-            try:
-                index = haystack.connections[using].get_unified_index(
-                                        ).get_index(Paper)
-                index.update_object(paper, using=using)
-            except haystack.exceptions.NotHandled:
-                pass

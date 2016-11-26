@@ -177,15 +177,26 @@ class HALProtocol(RepositoryProtocol):
             receipt = receipt.getroot()
             if receipt.tag == '{http://purl.org/net/sword/error/}error':
                 self.log('Error while depositing the content.')
-                self.log('Here is the XML response: {}'.format(xml_response))
-                self.log('Here is the metadata: {}'.format(metadata))
-                raise DepositError(__('HAL rejected the submission'))
+                verbosedesc = receipt.find(
+                    '{http://purl.org/net/sword/error/}verboseDescription')
+
+                # this will happen if a paper has not made its way via
+                # OAI to us, so we could not detect that earlier in the
+                # submission
+                if verbosedesc is not None and 'duplicate-entry' in verbosedesc.text:
+                    raise DepositError(__('This paper already exists in HAL.'))
+
+                # Otherwise this error should not happen: let's dump
+                # everything to check later
+                self.log('Here is the XML response:{}'.format(xml_response.decode('utf-8')))
+                self.log('Here is the metadata:{}'.format(metadata.decode('utf-8')))
+                raise DepositError(__('HAL rejected the submission.'))
+            else:
+                self.log(xml_response)
 
             deposition_id = receipt.find('{http://www.w3.org/2005/Atom}id').text
-            # TODO store the password for the paper:
-            # can be used later by the user to modify the upload
-            # password = receipt.find(
-            #    '{http://hal.archives-ouvertes.fr/}password').text
+            password = receipt.find(
+                '{http://hal.archives-ouvertes.fr/}password').text
             document_url = resp.getheader('location')
 
             if not deposition_id:
@@ -196,6 +207,11 @@ class HALProtocol(RepositoryProtocol):
             deposit_result.identifier = deposition_id
             deposit_result.splash_url = document_url
             deposit_result.pdf_url = deposit_result.splash_url + '/document'
+            deposit_result.status = 'pending' # HAL moderates submissions
+            deposit_result.additional_info = [
+                {'label':__('Password'),
+                 'value':password},
+            ]
 
             if dry_run:
                 conn = http_client.HTTPConnection(host)
@@ -212,7 +228,7 @@ class HALProtocol(RepositoryProtocol):
                 resp = conn.getresponse()
                 self.log(resp.read())
                 conn.close()
-                deposit_result.status = 'DRY_SUCCESS'
+                deposit_result.status = 'faked'
 
         except DepositError as e:
             raise e

@@ -38,13 +38,6 @@ This module defines most of the models used in the platform.
    other names through a :class:`NameVariant` relation (indicating a confidence value
    for the association of the name with this reseracher).
 
-* :class:`Author` objects represent the occurrence of a :class:`Name` in the author list
-   of a :class:`Paper`. When we are confident that this name actually refers to a
-   given :class:`Researcher`, the :class:`Author` object has a link to it.
-   All the authors that could potentially be associated with a given :class:`Researcher`
-   (that is when their name is a :class:`NameVariant` for that researcher) are clustered
-   in groups by merging similar authors (i.e. authors associated to similar papers).
-
 * Researchers can be organized into :class:`Department` instances, which belong to an
   :class:`Institution`.
 
@@ -55,6 +48,7 @@ from __future__ import unicode_literals
 from datetime import datetime
 from datetime import timedelta
 import re
+import haystack
 from statistics.models import AccessStatistics
 from statistics.models import combined_status_for_instance
 from statistics.models import STATUS_CHOICES_HELPTEXT
@@ -806,7 +800,7 @@ class Paper(models.Model, BarePaper):
             return Paper.from_bare(p) # TODO TODO index it?
 
     def successful_deposits(self):
-        return self.depositrecord_set.filter(pdf_url__isnull=False)
+        return self.depositrecord_set.filter(oairecord__isnull=False)
 
     def invalidate_cache(self):
         """
@@ -965,6 +959,19 @@ class Paper(models.Model, BarePaper):
         from deposit.views import get_all_repositories_and_protocols
         l = get_all_repositories_and_protocols(self, user)
         return any([proto for repo, proto in l])
+
+    def update_index(self):
+        """
+        Updates Haystack's index for this paper
+        """
+        using_backends = haystack.connection_router.for_write(instance=self)
+        for using in using_backends:
+            try:
+                index = haystack.connections[using].get_unified_index(
+                                        ).get_index(Paper)
+                index.update_object(self, using=using)
+            except haystack.exceptions.NotHandled:
+                pass
 
 # Rough data extracted through OAI-PMH
 

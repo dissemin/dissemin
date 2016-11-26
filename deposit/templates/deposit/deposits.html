@@ -45,26 +45,52 @@ class="panel-collapse collapse"
                             <td>{{ deposit.date }}</td> 
                         </tr>
                         <tr>
+                            <td>{% trans "Deposit type" %}</td>
+                            <td>{{ deposit.get_upload_type_display }}</td> 
+                        </tr>
+                        <tr>
                             <td>{% trans "Identifier" %}</td>
                             <td>{{ deposit.identifier }}</td>
                         </tr>
-                        {% if deposit.pdf_url %}
+                        {% with deposit.oairecord as r %}
+                        {% if r %}
                         <tr>
-                            <td>{% trans "URL" %}</td>
-                            <td><a href="{{ deposit.pdf_url }}">{{ deposit.pdf_url }}</a></td>
+                            <td>{% trans "Meta URL" %}</td>
+                            <td><a href="{{ r.splash_url }}">{{ r.splash_url }}</a></td>
+                        </tr>
+                        {% if r.pdf_url %}
+                        <tr>
+                            <td>{% trans "PDF URL" %}</td>
+                            <td><a href="{{ r.pdf_url }}">{{ r.pdf_url }}</a></td>
                         </tr>
                         {% endif %}
+                        {% endif %}
+                        {% endwith %}
                         <tr>
                             <td>{% trans "Status" %}</td>
-                            <td>{{ deposit.status }}</td>
+                            <td>{{ deposit.get_status_display }}</td>
                         </tr>
+                        {% with deposit.additional_info as info %}
+                        {% for i in info %}
+                        <tr>
+                            <td>{{ i.label }}</td>
+                            <td>{{ i.value }}</td>
+                        </tr>
+                        {% endfor %}
+                        {% endwith %}
                     </table>
                 </div>
             </div>
         </div>
     {% endwith %}
     {% empty %}
-        <p>{% trans "You have not made any deposit via Dissemin." %}</p>
+        <p class="notFound">
+        {% blocktrans trimmed %}
+        You have not made any deposit via
+        Dissemin. What are you waiting for?
+        Liberate your papers today.
+        {% endblocktrans %}
+        </p>
     {% endfor %}
 </div>
 {% endblock %}
