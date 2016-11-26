@@ -178,6 +178,24 @@ class OAIDCTranslator(object):
             print "Warning, invalid extractor for source "+source_identifier
         return splash_url, pdf_url
 
+    def get_source(self, header, metadata):
+        """
+        Find the OAI source to use for this record
+        """
+        sets = header.setSpec()
+        source_identifier = None
+        for s in sets:
+            if s.startswith(PROXY_SOURCE_PREFIX):
+                source_identifier = s[len(PROXY_SOURCE_PREFIX):]
+                break
+        source = None
+        if source_identifier:
+            try:
+                source = OaiSource.objects.get(identifier=source_identifier)
+            except OaiSource.DoesNotExist:
+                pass
+        return source
+
     def translate(self, header, metadata):
         """
         Creates a BarePaper
@@ -194,18 +212,8 @@ class OAIDCTranslator(object):
             return
 
         # Find the OAI source
-        sets = header.setSpec()
-        source_identifier = None
-        for s in sets:
-            if s.startswith(PROXY_SOURCE_PREFIX):
-                source_identifier = s[len(PROXY_SOURCE_PREFIX):]
-                break
-        source = None
-        if source_identifier:
-            try:
-                source = OaiSource.objects.get(identifier=source_identifier)
-            except OaiSource.DoesNotExist:
-                pass
+        source = self.get_source(header, metadata)
+
         if not source:
             print "Invalid source '"+str(source_identifier)+"' from the proxy, skipping"
             return
@@ -278,6 +286,16 @@ class BASEDCTranslator(OAIDCTranslator):
     def format(self):
         return 'base_dc'
 
+class CustomSourceOAIDCTranslator(OAIDCTranslator):
+    """
+    Just like OAIDCTranslator, but with a custom source
+    (not assuming that the endpoint is proaixy)
+    """
+    def __init__(self, source):
+        self.source = source
+
+    def get_source(self, header, record):
+        return self.source
 
 class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSource
     """
@@ -311,8 +329,9 @@ class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSo
         self.registry.registerReader('citeproc', citeproc_reader)
         self.client = Client(endpoint, self.registry)
         self.client._day_granularity = day_granularity
-        self.client.extra_parameters = {
-            'key': settings.PROAIXY_API_KEY}
+        if settings.PROAIXY_API_KEY:
+            self.client.extra_parameters = {
+                'key': settings.PROAIXY_API_KEY}
         self.translators = {}
 
     # Translator management
