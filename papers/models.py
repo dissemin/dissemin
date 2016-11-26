@@ -956,6 +956,16 @@ class Paper(models.Model, BarePaper):
     def url(self):
         return reverse('paper', args=[self.pk, self.slug])
 
+    def can_be_deposited(self, user):
+        """
+        Returns true when this paper can be deposited
+        in at least one repository configured on this
+        Dissemin instance.
+        """
+        from deposit.views import get_all_repositories_and_protocols
+        l = get_all_repositories_and_protocols(self, user)
+        return any([proto for repo, proto in l])
+
 # Rough data extracted through OAI-PMH
 
 class OaiSourceManager(CachingManager):

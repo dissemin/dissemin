@@ -104,6 +104,7 @@ def list_deposits(request):
     return render(request, 'deposit/deposits.html', context)
 
 @require_POST
+@json_view
 @user_passes_test(is_authenticated)
 def submitDeposit(request, pk):
     paper = get_object_or_404(Paper, pk=pk)

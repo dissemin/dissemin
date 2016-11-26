@@ -305,6 +305,15 @@ data.selection, selected: true, result: data.result})
         {% endblocktrans %}
     </div>
     {% endif %}
+    {% if not selected_protocol %}
+    <div class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign"></span>
+        {% blocktrans trimmed %}
+        This paper cannot be deposited in any repository supported by
+        Dissemin.
+        {% endblocktrans %}
+    </div>
+    {% endif %}
 </div>
 
 <span class="detailsTitle">{% trans "Document" %}</span>

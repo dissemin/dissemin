@@ -382,6 +382,7 @@ class PaperView(SlugDetailView):
                     context['deposit'] = dep
             except (TypeError, ValueError, DepositRecord.DoesNotExist):
                 pass
+        context['can_be_deposited'] = self.object.can_be_deposited(self.request.user)
         return context
 
     def redirect(self, **kwargs):

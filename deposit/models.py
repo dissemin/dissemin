@@ -21,6 +21,8 @@
 
 from __future__ import unicode_literals
 
+from caching.base import CachingManager
+from caching.base import CachingMixin
 from deposit.registry import protocol_registry
 from django.contrib.auth.models import User
 from django.db import models
@@ -36,8 +38,10 @@ DEPOSIT_STATUS_CHOICES = [
    ('deposited', _('Deposited')),
    ]
 
+class RepositoryManager(CachingManager):
+    pass
 
-class Repository(models.Model):
+class Repository(models.Model, CachingMixin):
     """
     This model stores the parameters for a particular repository.
 
@@ -54,6 +58,8 @@ class Repository(models.Model):
     used by the protocol implementation to perform the deposit.
 
     """
+    objects = RepositoryManager()
+
     #: Name
     name = models.CharField(max_length=64)
     #: Description

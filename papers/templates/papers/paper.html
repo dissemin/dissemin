@@ -113,8 +113,10 @@ $(function(){
             {{ psh }}</p>
         {% endif %}
         {% if paper.is_deposited %}
-        <strong>Deposited.</strong>
+        <strong>{% trans "Deposited." %}</strong>
+            {% if can_be_deposited %}
             <a href="{% url 'upload_paper' paper.pk %}" class="btn btn-default btn-xs">{% trans "Deposit again" %}</a>
+            {% endif %}
         {% else %}
             {% include "publishers/detailsPolicy.html" with publisher=psh mode="link" %}
         {% endif %}
