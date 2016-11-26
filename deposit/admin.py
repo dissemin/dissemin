@@ -27,7 +27,7 @@ from django.contrib import admin
 
 class DepositRecordAdmin(admin.ModelAdmin):
     list_display = ('identifier', 'paper', 'user')
-    raw_id_fields = ('paper', 'user')
+    raw_id_fields = ('paper', 'user', 'oairecord')
 
 admin.site.register(DepositRecord, DepositRecordAdmin)
 admin.site.register(Repository)
