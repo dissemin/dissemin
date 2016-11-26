@@ -215,7 +215,7 @@ class OAIDCTranslator(object):
         source = self.get_source(header, metadata)
 
         if not source:
-            print "Invalid source '"+str(source_identifier)+"' from the proxy, skipping"
+            print "Invalid source from the proxy, skipping"
             return
 
         # Create paper and record
