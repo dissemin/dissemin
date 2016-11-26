@@ -177,6 +177,12 @@ class AOFRFormatter(MetadataFormatter):
         language.attrib['ident'] = 'en'  # TODO adapt this?
         textClass = addChild(profileDesc, 'textClass')
 
+        keywords = addChild(textClass, 'keywords')
+        keywords.attrib['scheme'] = 'author'
+        term = addChild(keywords, 'term')
+        term.attrib[XMLLANG_ATTRIB] = 'en'
+        term.text = 'dissemin'
+
         domains = [form.cleaned_data['topic'].lower()]
         for domain in domains:
             classCode = addChild(textClass, 'classCode')

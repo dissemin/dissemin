@@ -127,6 +127,19 @@ class HALProtocolTest(ProtocolTest):
              affiliation=128940)
         self.assertEqual(r.status, 'faked')
 
+    def test_keywords(self):
+        """
+        Keywords are mandatory
+        """
+        p = Paper.create_by_doi('10.1007/s00268-016-3429-x')
+        p.authors_list = [p.authors_list[0]]
+        r = self.dry_deposit(p,
+            abstract='bla ble bli blo blu',
+            topic='SDV',
+            depositing_author=0,
+            affiliation=128940)
+        self.assertEqual(r.status, 'faked')
+
     def test_preprint(self):
         """
         Submit a preprint
