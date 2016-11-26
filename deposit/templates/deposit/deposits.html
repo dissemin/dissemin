@@ -12,15 +12,61 @@
 {% block content %}
 <div id="fullPage">
 <h2>{% trans "My deposits" %}</h2>
-<ul class="list-group">
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
     {% for deposit in deposits %}
         {% with deposit.paper as paper %}
-        <li class="list-group-item"><a href="{{ paper.url }}">{{ paper }}</a> in {{ deposit.repository }}</li>
-        {% endwith %}
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="deposit-heading-{{ deposit.id }}">
+            <span class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion"
+                    href="#deposit-collapse-{{ deposit.id }}"
+                    aria-expanded="false"
+                    aria-controls="deposit-collapse-{{ deposit.id }}">
+                "{{ paper }}" in <strong>{{ deposit.repository }}</strong>
+                </a>
+            </span>
+            </div>
+            <div id="deposit-collapse-{{ deposit.id }}"
+class="panel-collapse collapse"
+            role="tabpanel" aria-labelledby="deposit-heading-{{ deposit.id }}">
+
+                <div class="panel-body no-padding">
+                   <table class="table" style="margin-bottom: 0px">
+                        <tr>
+                            <td>{% trans "Paper" %}</td>
+                            <td><a href="{{ paper.url }}">{{ paper }}</a></td> 
+                        </tr>
+                        <tr>
+                            <td>{% trans "Repository" %}</td>
+                            <td><a href="{{ deposit.repository.url }}" target="blank">{{ deposit.repository }}</td>
+                        </tr>
+                        <tr>
+                            <td>{% trans "Deposit date" %}</td>
+                            <td>{{ deposit.date }}</td> 
+                        </tr>
+                        <tr>
+                            <td>{% trans "Identifier" %}</td>
+                            <td>{{ deposit.identifier }}</td>
+                        </tr>
+                        {% if deposit.pdf_url %}
+                        <tr>
+                            <td>{% trans "URL" %}</td>
+                            <td><a href="{{ deposit.pdf_url }}">{{ deposit.pdf_url }}</a></td>
+                        </tr>
+                        {% endif %}
+                        <tr>
+                            <td>{% trans "Status" %}</td>
+                            <td>{{ deposit.status }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    {% endwith %}
     {% empty %}
         <p>{% trans "You have not made any deposit via Dissemin." %}</p>
     {% endfor %}
-</ul>
+</div>
 {% endblock %}
 
 

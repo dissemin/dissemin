@@ -1304,6 +1304,12 @@ a.stats_caption_line:hover {
     display: block;
 }
 
+/* Bootstrap expandable panels with no padding */
+
+.no-padding {
+    padding: 0px;
+}
+
 /* Not sure we need these anymore */
 
 #paper_uploader input {

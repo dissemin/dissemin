@@ -97,7 +97,7 @@ def start_view(request, pk):
 @user_passes_test(is_authenticated)
 def list_deposits(request):
     deposits = DepositRecord.objects.filter(user=request.user,
-    identifier__isnull=False)
+    identifier__isnull=False).order_by('-date')
     context = {
         'deposits': deposits
     }

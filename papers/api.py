@@ -49,6 +49,11 @@ def api_paper_doi(request, doi):
 
 @json_view
 @csrf_exempt
+def api_search(request):
+    pass
+
+@json_view
+@csrf_exempt
 @require_POST
 def api_paper_query(request):
     try:
