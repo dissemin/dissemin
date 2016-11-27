@@ -12,10 +12,10 @@ Installing the tasks backend requires additional dependencies and is not
 necessary if you want to do light dev that does not require harvesting
 metadata or running author disambiguation.
 
-_New!_ Kickstart your Dissemin in an container or VM using [Vagrant](https://www.vagrantup.com)
+_New!_ Kickstart your Dissemin in an container or VM using `Vagrant <https://www.vagrantup.com>`_
 ----------------------------------------------------------------------------------------------
 
-First, install [Vagrant](https://www.vagrantup.com) and one of the supported providers: Virtual Box (should work fine), LXC (tested), libvirt (try it and tell us!).
+First, install `Vagrant <https://www.vagrantup.com>`_ and one of the supported providers: Virtual Box (should work fine), LXC (tested), libvirt (try it and tell us!).
 
 - ``vagrant up --provider=your_provider`` will create the VM / container and provision the machine once
 - ``vagrant ssh`` will let you poke into the machine and access its services (PostgreSQL, Redis, ElasticSearch)
@@ -27,7 +27,7 @@ Installation instructions for the web frontend
 ----------------------------------------------
 
 First, install the following dependencies (debian packages)
-``postgresql postgresql-server-dev-all postgresql-client python-virtualenv build-essential libxml2-dev libxslt1-dev python-dev gettext libjpeg-dev``
+``postgresql postgresql-server-dev-all postgresql-client python-virtualenv build-essential libxml2-dev libxslt1-dev python-dev gettext libjpeg-dev libffi-dev``
 
 Then, build a virtual environment to isolate all the python
 dependencies::
@@ -35,7 +35,6 @@ dependencies::
    virtualenv .virtualenv
    source .virtualenv/bin/activate
    pip install -r requirements.txt
-   pip install -r requirements-dev.txt
 
 Set up the database
 -------------------
@@ -61,39 +60,19 @@ Edit this file to change the following settings:
 
 - (Optional) Set up the SMTP parameters to send emails to authors, in the ``EMAIL`` section.
 
-- ``ROMEO_API_KEYS`` is required if you want to
+- ``ROMEO_API_KEY`` and ``PROAIXY_API_KEY`` are required if you want to
   import papers automatically from these sources. See :ref:`page-apikeys`
-  about how to get them. The ``ZENODO_KEY`` is required
-  if you want to upload papers to Zenodo.
+  about how to get them.
 
-
-Configure the university-specific settings
------------------------------------------
-
-Copy ``dissemin/settings/university_template.py`` to ``dissemin/settings/university.py``.
-Then, edit this file to change the following settings:
-
-- Set up the university branding, defining:
-    - ``UNIVERSITY_FULL_NAME``: the complete name of the university;
-    - ``UNIVERSITY_SHORT_NAME``: the short name (with determiner);
-    - ``UNIVERSITY_REPOSITORY_URL``: the address of your university's
-      institutional repository, if it has one. This is not intended to
-      be the url of an API, simply the address where to redirect users
-      to when they want to see the repository;
-    - ``UNIVERSITY_URL``: the website of your university.
-
-- Set up the CAS of your university if relevant, it is disabled by default (see  ``ENABLE_CAS``).
-
-Now, your university settings are done.
 
 Install and configure the search engine
 ---------------------------------------
 
-dissem.in uses the [Elasticsearch](https://www.elastic.co/products/elasticsearch)
+dissem.in uses the `Elasticsearch <https://www.elastic.co/products/elasticsearch>`_
 backend for Haystack.
 
-[Download Elasticsearch](https://www.elastic.co/downloads/elasticsearch)
-and unzip it.
+`Download Elasticsearch <https://www.elastic.co/downloads/elasticsearch>`_
+and unzip it::
 
     cd elasticsearch-<version>
     ./bin/elasticsearch    # Add -d to start elasticsearch in the background
@@ -109,7 +88,7 @@ Finally, create a file ``dissemin/settings/__init__.py`` with this content::
    from .prod import *
    # Pick only one.
 
-Depending on your environment, you might want to edit ``STATIC_ROOT`` and ``MEDIA_ROOT``, moreover, you have to create these locations.
+Depending on your environment, you might want to override ``STATIC_ROOT`` and ``MEDIA_ROOT``, in your ``__init__.py`` file. Moreover, you have to create these locations.
 
 Don't forget to edit ``ALLOWED_HOSTS`` for production.
 
@@ -141,7 +120,7 @@ Social Authentication specific: Configuring sandbox ORCID
 
 *You are not forced to configure ORCID to work on Dissemin, just create a super user and use it!*
 
-Create an account on `Sandbox ORCID <sandbox.orcid.org>`
+Create an account on `Sandbox ORCID <sandbox.orcid.org>`_.
 
 Go to "Developer Tools", verify your mail using `Mailinator <mailinator.com>`.
 
@@ -185,12 +164,17 @@ To add a repository, you need the following settings:
 A checkbox allows you to enable or disable the repository without deleting its settings.
 
 
-Optional: installing the tasks backend
---------------------------------------
+Installing or bypassing the tasks backend
+-----------------------------------------
 
-This part is only required if you want to fetch papers from metadata sources.
-This functionality is located in the `backend` module and has separate
-dependencies.
+Some features in Dissemin rely on an asynchronous tasks backend, celery.
+If you want to simplify your installation and ignore this asynchronous
+behaviour, you can add ``CELERY_ALWAYS_EAGER = True`` to your
+``dissemin/settings/__init__.py``. This way, all asynchronous tasks will
+be run from the main thread synchronously.
+
+Otherwise, you need to run celery in a separate process. The rest of this
+section explains how.
 
 The backend communicates with the frontend through a message passing
 infrastructure. We recommend redis for that (and the source code is
@@ -202,17 +186,7 @@ First, install the redis server::
 
    apt-get install redis-server
 
-(this launches the redis server). Install Python dependencies::
-
-   sudo apt-get install libxml2 python-dev libxslt-dev liblapack-dev gfortran libopenblas-dev
-   source .virtualenv/bin/activate
-   pip install -r requirements.txt
-   pip install -r requirements-dev.txt
-
-Optional python dependencies (if you want to debug the learning system)::
-
-   pip install nltk
-   pip install matplotlib
+(this launches the redis server).:
 
 To run the backend (still in the virtualenv)::
 
