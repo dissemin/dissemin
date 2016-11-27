@@ -34,6 +34,7 @@ from papers.errors import MetadataSourceException
 from papers.models import Paper
 from papers.name import parse_comma_name
 from papers.utils import tolerant_datestamp_to_datetime
+from papers.views import PaperSearchView
 
 
 @json_view
@@ -46,6 +47,26 @@ def api_paper_doi(request, doi):
             'paper': p.json()
             }
 
+
+class PaperSearchAPI(PaperSearchView):
+    @json_view
+    @csrf_exempt
+    def dispatch(self, *args, **kwargs):
+        return super(PaperSearchAPI, self).dispatch(*args, **kwargs)
+
+    def render_to_response(self, context, **kwargs):
+        stats = context['search_stats'].pie_data()
+        papers = [
+            result.object.json()
+            for result in context['object_list']
+            ]
+        response = {
+            'messages': context['messages'],
+            'stats': stats,
+            'nb_results': context['nb_results'],
+            'papers': papers,
+        }
+        return response
 
 @json_view
 @csrf_exempt
@@ -124,5 +145,6 @@ def api_paper_query(request):
 
 urlpatterns = [
     url(r'^(?P<doi>10\..*)$', api_paper_doi, name='api-paper-doi'),
-    url(r'^query$', api_paper_query, name='api-paper-query'),
+    url(r'^query/?$', api_paper_query, name='api-paper-query'),
+    url(r'^search/?$', PaperSearchAPI.as_view(), name='api-paper-search'),
 ]
