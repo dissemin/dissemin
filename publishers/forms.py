@@ -27,7 +27,7 @@ class PublisherForm(SearchForm):
 
         q = self.cleaned_data['q']
         if q:
-            self.queryset = self.queryset.auto_query(q)
+            queryset = queryset.auto_query(q)
 
         if self.cleaned_data['oa_status']:
             queryset = queryset.filter(

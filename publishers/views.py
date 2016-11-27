@@ -77,6 +77,18 @@ class PublishersView(SearchView):
     form_class = PublisherForm
     queryset = SearchQuerySet().models(Publisher)
 
+    def get_form_kwargs(self):
+        """
+        We make sure the search is valid even if no parameter
+        was passed, in which case we add a default empty query.
+        Otherwise the search form is not bound and search fails.
+        """
+        args = super(PublishersView, self).get_form_kwargs()
+        if 'data' not in args:
+            args['data'] = {self.search_field:''}
+        return args
+
+
     def get_context_data(self, **kwargs):
         context = super(PublishersView, self).get_context_data(**kwargs)
 
