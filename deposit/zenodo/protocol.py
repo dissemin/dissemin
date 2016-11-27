@@ -92,7 +92,7 @@ class ZenodoProtocol(RepositoryProtocol):
 
         # Uploading the PDF
         self.log("### Uploading the PDF")
-        data = {'filename': 'article.pdf'}
+        data = {'name': 'article.pdf'}
         files = {'file': open(pdf, 'rb')}
         r = requests.post(self.api_url+"/%s/files?access_token=%s" % (deposition_id, api_key),
                           data=data, files=files)
