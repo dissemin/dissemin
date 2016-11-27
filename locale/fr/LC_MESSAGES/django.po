@@ -7,122 +7,115 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-02 17:52+0200\n"
-"PO-Revision-Date: 2016-06-04 22:47+0200\n"
-"Last-Translator: Li-yao Xia <li-yao.xia@ens.fr>\n"
+"POT-Creation-Date: 2016-11-27 22:08+0100\n"
+"PO-Revision-Date: 2016-11-27 22:45+0100\n"
+"Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 1.8.11\n"
 
-#: deposit/forms.py:36
+#: deposit/forms.py:39
 msgid "Upload type"
 msgstr "Type de dépôt"
 
-#: deposit/forms.py:37
+#: deposit/forms.py:40 deposit/templates/deposit/deposits.html:40
 msgid "Repository"
 msgstr "Dépôt"
 
-#: deposit/hal/metadataFormatter.py:35
-msgid "Chemistry"
-msgstr "Chimie"
+#: deposit/models.py:38
+msgid "Failed"
+msgstr "Échoué"
 
-#: deposit/hal/metadataFormatter.py:36
-msgid "Computer science"
-msgstr "Informatique"
+#: deposit/models.py:39
+msgid "Faked"
+msgstr "Imité"
 
-#: deposit/hal/metadataFormatter.py:37
-msgid "Mathematics"
-msgstr "Mathématiques"
+#: deposit/models.py:40
+msgid "Pending publication"
+msgstr "Publication en attente"
 
-#: deposit/hal/metadataFormatter.py:38
-msgid "Physics"
-msgstr "Physique"
+#: deposit/models.py:42
+msgid "Published"
+msgstr "Publiée"
 
-#: deposit/hal/metadataFormatter.py:39
-msgid "Non-linear science"
-msgstr "Science non linéaire"
+#: deposit/models.py:43
+msgid "Refused by the repository"
+msgstr "Refusé par le dépôt"
 
-#: deposit/hal/metadataFormatter.py:40
-msgid "Cognitive science"
-msgstr "Sciences cognitives"
+#: deposit/models.py:44
+msgid "Deleted"
+msgstr "Supprimé"
 
-#: deposit/hal/metadataFormatter.py:41
-msgid "Environment sciences"
-msgstr "Sciences de l'environnement"
-
-#: deposit/hal/metadataFormatter.py:42
-msgid "Planet and Universe"
-msgstr "Planète et Univers"
-
-#: deposit/hal/metadataFormatter.py:43
-msgid "Humanities and Social Science"
-msgstr "Sciences de l'Homme et Société"
-
-#: deposit/hal/metadataFormatter.py:44
-msgid "Life sciences"
-msgstr "Sciences du vivant"
-
-#: deposit/hal/metadataFormatter.py:45
-msgid "Engineering sciences"
-msgstr "Sciences de l'ingénieur"
-
-#: deposit/hal/metadataFormatter.py:46
-msgid "Statistics"
-msgstr "Statistiques"
-
-#: deposit/hal/metadataFormatter.py:47
-msgid "Economy and quantitative finance"
-msgstr "Économie et finance quantitative"
-
-#: deposit/hal/metadataFormatter.py:48
-msgid "Other"
-msgstr "Autre"
-
-#: deposit/models.py:34
-msgid "Created"
-msgstr "Créé"
-
-#: deposit/models.py:35
-msgid "Metadata defective"
-msgstr "Métadonnées défectueuses"
-
-#: deposit/models.py:36
-msgid "Document defective"
-msgstr "Document défectueux"
-
-#: deposit/models.py:37
-msgid "Deposited"
-msgstr "Déposé"
-
-#: deposit/models.py:150 deposit/templates/deposit/start.html:289
-#: deposit/views.py:78
+#: deposit/models.py:166 deposit/templates/deposit/start.html:414
+#: deposit/views.py:81
 msgid "Deposit"
 msgstr "Dépôt"
+
+#: deposit/templates/deposit/deposits.html:10
+#: deposit/templates/deposit/deposits.html:14
+#: templates/dissemin/skeleton.html:82
+msgid "My deposits"
+msgstr "Mes dépôts"
+
+#: deposit/templates/deposit/deposits.html:36
+msgid "Paper"
+msgstr "Article"
+
+#: deposit/templates/deposit/deposits.html:44
+msgid "Deposit date"
+msgstr "Date de dépôt"
+
+#: deposit/templates/deposit/deposits.html:48
+msgid "Deposit type"
+msgstr "Type de dépôt"
+
+#: deposit/templates/deposit/deposits.html:52
+msgid "Identifier"
+msgstr "Identifiant"
+
+#: deposit/templates/deposit/deposits.html:58
+msgid "Meta URL"
+msgstr "URL des métadonnées"
+
+#: deposit/templates/deposit/deposits.html:63
+msgid "PDF URL"
+msgstr "URL du PDF"
+
+#: deposit/templates/deposit/deposits.html:70
+msgid "Status"
+msgstr "État"
+
+#: deposit/templates/deposit/deposits.html:88
+msgid ""
+"You have not made any deposit via Dissemin. What are you waiting for? "
+"Liberate your papers today."
+msgstr ""
+"Vous n'avez pas encore fait de dépôt avec Dissemin. N'attendez plus, libérez "
+"vos papiers dès aujourd'hui !"
 
 #: deposit/templates/deposit/start.html:12
 #: deposit/templates/deposit/start.html:16
 msgid "Depositing"
 msgstr "Dépôt de"
 
-#: deposit/templates/deposit/start.html:34
+#: deposit/templates/deposit/start.html:38
 msgid "Trying to fill this field automatically for you..."
 msgstr "J'essaie de préremplir ce champ..."
 
-#: deposit/templates/deposit/start.html:46
+#: deposit/templates/deposit/start.html:47
 msgid "Sorry, we could not fill this for you."
 msgstr "Désolé, impossible de préremplir ceci"
 
-#: deposit/templates/deposit/start.html:136
+#: deposit/templates/deposit/start.html:253
 #: papers/templates/papers/department.html:30
-#: papers/templates/papers/index.html:46
 msgid "Dissemin encountered an error, please try again later."
 msgstr "Une erreur est survenue, merci de réessayer plus tard."
 
-#: deposit/templates/deposit/start.html:174
+#: deposit/templates/deposit/start.html:290
 #, python-format
 msgid ""
 "\n"
@@ -141,7 +134,7 @@ msgstr ""
 "d'utilisation</a>.\n"
 "        "
 
-#: deposit/templates/deposit/start.html:185
+#: deposit/templates/deposit/start.html:301
 msgid ""
 "You do not appear to be one of the authors of this paper. By using this "
 "form, you certify that you have the permission to upload it on their behalf."
@@ -150,242 +143,206 @@ msgstr ""
 "formulaire, vous nous certifiez que vous avez leur permission pour soumettre "
 "l'article en leur nom."
 
-#: deposit/templates/deposit/start.html:194
+#: deposit/templates/deposit/start.html:311
+msgid "This paper cannot be deposited in any repository supported by Dissemin."
+msgstr "Ce papier ne peut pas être envoyé vers un dépôt supporté par Dissemin."
+
+#: deposit/templates/deposit/start.html:319
 msgid "Document"
 msgstr "Document"
 
-#: deposit/templates/deposit/start.html:202
+#: deposit/templates/deposit/start.html:327
 msgid "Options"
 msgstr "Options"
 
-#: deposit/templates/deposit/start.html:208
+#: deposit/templates/deposit/start.html:333
 msgid "Upload type:"
 msgstr "Type de dépôt:"
 
-#: deposit/templates/deposit/start.html:221
+#: deposit/templates/deposit/start.html:346
 msgid "Repository:"
 msgstr "Dépôt :"
 
-#: deposit/templates/deposit/start.html:238
+#: deposit/templates/deposit/start.html:363
 msgctxt "This repository will be soon available in Dissemin"
 msgid "Coming soon:"
 msgstr "Bientôt disponible :"
 
-#: deposit/templates/deposit/start.html:275
+#: deposit/templates/deposit/start.html:400
 msgid "Metadata"
 msgstr "Métadonnés"
 
-#: deposit/templates/deposit/start.html:291
+#: deposit/templates/deposit/start.html:416
 msgid "Processing deposit..."
 msgstr "Dépôt en cours de traitement..."
 
-#: deposit/templates/deposit/start.html:291
+#: deposit/templates/deposit/start.html:416
 msgid "please wait..."
 msgstr "veuillez patienter..."
 
-#: deposit/views.py:60
+#: deposit/views.py:62
 msgid "This repository is not available for this paper."
 msgstr "Ce dépôt n'est pas disponible pour ce papier."
 
-#: deposit/views.py:108
+#: deposit/views.py:123
 msgid "This repository cannot be used for this paper."
 msgstr "Impossible d'envoyer ce papier vers le dépôt indiqué."
 
-#: deposit/views.py:122
+#: deposit/views.py:137
 msgid "Access to the PDF was denied."
 msgstr "L'accès au PDF a été refusé."
 
-#: deposit/zenodo/protocol.py:32
-msgid "Creative Commons CCZero"
-msgstr "Creative Commons CCZero"
-
-#: deposit/zenodo/protocol.py:33
-msgid "Creative Commons Attribution"
-msgstr "Creative Commons Attribution"
-
-#: deposit/zenodo/protocol.py:34
-msgid "Creative Commons Attribution-ShareAlike"
-msgstr "Creative Commons Attribution-ShareAlike (Partage à l'identique)"
-
-#: deposit/zenodo/protocol.py:35
-msgid "Creative Commons Attribution-NonCommercial"
-msgstr "Creative Commons Attribution-NonCommercial"
-
-#: deposit/zenodo/protocol.py:36
-msgid "Creative Commons Attribution-NoDerivatives"
-msgstr "Creative Commons Attribution-NoDerivatives (Pas de travaux dérivés)"
-
-#: deposit/zenodo/protocol.py:37
-msgid "Other open license"
-msgstr "Autre licence libre"
-
-#: dissemin/settings/common.py:258
+#: dissemin/settings/common.py:279
 msgid "English"
 msgstr "Anglais"
 
-#: dissemin/settings/common.py:259
+#: dissemin/settings/common.py:280
 msgid "French"
 msgstr "Français"
 
-#: notification/models.py:63
+#: notification/models.py:62
 msgid "inboxes"
 msgstr "boîtes de réceptions"
 
-#: papers/baremodels.py:47
+#: papers/baremodels.py:53
 msgid "Journal article"
 msgstr "Article dans une revue"
 
-#: papers/baremodels.py:48
+#: papers/baremodels.py:54
 msgid "Proceedings article"
 msgstr "Communication dans une conférence"
 
-#: papers/baremodels.py:49
+#: papers/baremodels.py:55
 msgid "Book chapter"
 msgstr "Chapitre d'ouvrage"
 
-#: papers/baremodels.py:50
+#: papers/baremodels.py:56
 msgid "Book"
 msgstr "Ouvrage"
 
-#: papers/baremodels.py:51
+#: papers/baremodels.py:57
 msgid "Journal issue"
 msgstr "Numéro d'une revue"
 
-#: papers/baremodels.py:52
+#: papers/baremodels.py:58
 msgid "Proceedings"
 msgstr "Actes de conférence"
 
-#: papers/baremodels.py:53
+#: papers/baremodels.py:59
 msgid "Entry"
 msgstr "Article d'encyclopédie"
 
-#: papers/baremodels.py:54
+#: papers/baremodels.py:60
 msgid "Poster"
 msgstr "Poster"
 
-#: papers/baremodels.py:55
+#: papers/baremodels.py:61
 msgid "Report"
 msgstr "Rapport"
 
-#: papers/baremodels.py:56
+#: papers/baremodels.py:62
 msgid "Thesis"
 msgstr "Thèse"
 
-#: papers/baremodels.py:57
+#: papers/baremodels.py:63
 msgid "Dataset"
 msgstr "Banque de données"
 
-#: papers/baremodels.py:58 papers/models.py:86
+#: papers/baremodels.py:64 papers/models.py:92
 msgid "Preprint"
 msgstr "Préprint"
 
-#: papers/baremodels.py:59
+#: papers/baremodels.py:65
 msgid "Other document"
 msgstr "Autre publication"
 
-#: papers/forms.py:40
+#: papers/forms.py:48
 msgid "Invalid ORCID identifier."
 msgstr "Identifiant ORCID invalide."
 
-#: papers/forms.py:44 papers/templates/papers/department.html:87
-#: papers/templates/papers/search.html:104
+#: papers/forms.py:54 papers/templates/papers/department.html:87
+#: papers/templates/papers/search.html:97
 msgid "Department"
 msgstr "Département"
 
-#: papers/forms.py:45 papers/templates/papers/search.html:52
+#: papers/forms.py:56 papers/templates/papers/search.html:53
 msgid "Researcher"
 msgstr "Personne"
 
-#: papers/forms.py:49
-msgid "First name"
-msgstr "Prénom"
-
-#: papers/forms.py:50
-msgid "Last name"
-msgstr "Nom"
-
-#: papers/forms.py:56
-msgid "Please spell out at least one name."
-msgstr "Veuillez indiquer au moins un nom."
-
-#: papers/forms.py:64
-msgid "A last name is required."
-msgstr "Il faut fournir un nom de famille."
-
-#: papers/forms.py:67
-msgid "A first name is required."
-msgstr "Il faut fournir un prénom."
-
-#: papers/forms.py:85
+#: papers/forms.py:75
 msgid "publication date"
 msgstr "date de publication"
 
-#: papers/forms.py:86
+#: papers/forms.py:76
 msgid "title"
 msgstr "titre"
 
-#: papers/forms.py:89 publishers/forms.py:14
+#: papers/forms.py:79 publishers/forms.py:14
 msgid "decreasing"
 msgstr "décroissant(e)"
 
-#: papers/forms.py:90 publishers/forms.py:15
+#: papers/forms.py:80 publishers/forms.py:15
 msgid "increasing"
 msgstr "croissant(e)"
 
-#: papers/forms.py:110 papers/forms.py:117
+#: papers/forms.py:100 papers/forms.py:107
 msgid "Any"
 msgstr "Tous"
 
-#: papers/forms.py:111
+#: papers/forms.py:101
 msgid "Visible"
 msgstr "Visible"
 
-#: papers/forms.py:112
+#: papers/forms.py:102
 msgid "Invisible"
 msgstr "Invisible"
 
-#: papers/models.py:87
+#: papers/forms.py:191
+msgid "Try any author name"
+msgstr "Essayez n'importe quel nom"
+
+#: papers/models.py:93
 msgid "Postprint"
 msgstr "Postprint"
 
-#: papers/models.py:88
+#: papers/models.py:94
 msgid "Published version"
 msgstr "Version publiée"
 
-#: papers/models.py:92
+#: papers/models.py:98
 msgid "Preparing profile"
 msgstr "Préparation du profil"
 
-#: papers/models.py:93
+#: papers/models.py:99
 msgid "Fetching publications from ORCID"
 msgstr "Récupération des publications à partir d'ORCID"
 
-#: papers/models.py:94
+#: papers/models.py:100
 msgid "Fetching publications from CrossRef"
 msgstr "Récupération des publications à partir de CrossRef"
 
-#: papers/models.py:95
+#: papers/models.py:101
 msgid "Fetching publications from BASE"
 msgstr "Récupération des publications à partir de BASE"
 
-#: papers/models.py:96
+#: papers/models.py:102
 msgid "Fetching publications from CORE"
 msgstr "Récupération des publications à partir de CORE"
 
-#: papers/models.py:97
+#: papers/models.py:103
 msgid "Fetching publications from OAI-PMH"
 msgstr "Récupération des publications à partir d'OAI-PMH"
 
-#: papers/models.py:98
+#: papers/models.py:104
 msgid "Clustering publications"
 msgstr "Regroupement des publications"
 
-#: papers/models.py:99
+#: papers/models.py:105
 msgid "Updating statistics"
 msgstr "Mise à jour des statistiques"
 
-#: papers/models.py:972 papers/views.py:117 papers/views.py:122
-#: papers/views.py:244 papers/views.py:278
+#: papers/models.py:943 papers/views.py:120 papers/views.py:125
+#: papers/views.py:255 papers/views.py:289
 msgid "Papers"
 msgstr "Papiers"
 
@@ -427,7 +384,7 @@ msgstr ""
 
 #: papers/templates/papers/department.html:61
 #: publishers/templates/publishers/list.html:116
-#: publishers/templates/publishers/policy.html:130
+#: publishers/templates/publishers/policy.html:134
 #, python-format
 msgid "(%(num_total)s paper)"
 msgid_plural "(%(num_total)s papers)"
@@ -454,25 +411,12 @@ msgstr "Page web"
 msgid "Members:"
 msgstr "Membres:"
 
-#: papers/templates/papers/index.html:8 templates/dissemin/breadcrumbs.html:3
+#: papers/templates/papers/index.html:10 templates/dissemin/breadcrumbs.html:3
 #: templates/dissemin/skeleton.html:71
 msgid "Home"
 msgstr "Accueil"
 
-#: papers/templates/papers/index.html:40
-msgctxt "alternate text of the waiting picture in the name lookup form"
-msgid "Searching..."
-msgstr "Recherche en cours..."
-
-#: papers/templates/papers/index.html:67
-msgid "Looking for one of these researchers?"
-msgstr "Pensiez-vous à l'un de ces chercheurs ?"
-
-#: papers/templates/papers/index.html:68
-msgid "Looking for this researcher?"
-msgstr "Pensiez-vous à ce chercheur ?"
-
-#: papers/templates/papers/index.html:89
+#: papers/templates/papers/index.html:24
 msgid ""
 "<a href=\"http://dissem.in/\">dissem.in</a> is currently in public beta.  "
 "Please, let us know about any issue you might have, either on <a href="
@@ -484,87 +428,34 @@ msgstr ""
 "rencontrer sur <a href=\"https://github.com/dissemin/dissemin/\">Github</a> "
 "ou par e-mail à <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
 
-#: papers/templates/papers/index.html:102
+#: papers/templates/papers/index.html:33
 msgid "Welcome to dissemin"
 msgstr "Bienvenue sur dissemin"
 
-#: papers/templates/papers/index.html:106
+#: papers/templates/papers/index.html:36
 msgid ""
-"Dissemin helps researchers ensure that their publications are freely "
-"available to their readers. Our free service spots paywalled papers and lets "
-"you upload them in one click to <a href=\"http://zenodo.org\" target=\"_blank"
-"\">Zenodo</a>, an innovative repository backed by the EU."
+"Dissemin detects papers behind pay-walls and invites their authors to upload "
+"them in one click to an open repository."
 msgstr ""
-"Dissemin est un service gratuit pour aider les chercheurs à vérifier que "
-"leurs publications sont librement accessibles pour leurs lecteurs. Notre "
-"service identifie les papiers qui ne peuvent être obtenus qu'avec des "
-"souscriptions payantes, et vous permet de les mettre en ligne en quelques "
-"clics sur <a href=\"http://zenodo.org\" target=\"_blank\">Zenodo</a>, un "
-"dépôt innovant soutenu par l'UE."
+"Dissemin détecte les articles en accès payant et permet à leurs auteurs de "
+"les déposer en un clic vers une archive ouverte"
 
-#: papers/templates/papers/index.html:115
-#, python-format
-msgid ""
-"Still unsure? Read below or check out the <a href=\"%(faq_url)s\">FAQ</a>."
-msgstr ""
-"Vous hésitez toujours ? Lisez ce qui suit ou jetez un œil à la <a href="
-"\"%(faq_url)s\">FAQ</a>."
-
-#: papers/templates/papers/index.html:123
-msgctxt "before name fields in researcher lookup form"
-msgid "Look up a researcher:"
-msgstr "Trouver un chercheur :"
-
-#: papers/templates/papers/index.html:131
-msgid "Firstname"
-msgstr "Prénom"
-
-#: papers/templates/papers/index.html:132
-msgctxt "Placeholder in researcher lookup form"
-msgid "Firstname"
-msgstr "Prénom"
-
-#: papers/templates/papers/index.html:136
-msgctxt "Placeholder in researcher lookup form"
-msgid "Lastname"
-msgstr "Nom"
-
-#: papers/templates/papers/index.html:137
-msgid "Lastname"
-msgstr "Nom"
-
-#: papers/templates/papers/index.html:143
-#: papers/templates/papers/search.html:148
-#: papers/templates/papers/search.html:161
-#: papers/templates/papers/search.html:171
-#: papers/templates/papers/search.html:261
+#: papers/templates/papers/index.html:46
+#: papers/templates/papers/search.html:141
+#: papers/templates/papers/search.html:154
+#: papers/templates/papers/search.html:164
+#: papers/templates/papers/search.html:254
 #: publishers/templates/publishers/list.html:34
 #: publishers/templates/publishers/list.html:50
 #: publishers/templates/publishers/list.html:89
 msgid "Search"
 msgstr "Recherche"
 
-#: papers/templates/papers/index.html:156
-msgid "or"
-msgstr "ou"
-
-#: papers/templates/papers/index.html:156
-msgid "Start with ORCID"
-msgstr "S'inscrire avec ORCID"
-
-#: papers/templates/papers/index.html:174
-msgid "Cancel"
-msgstr "Annuler"
-
-#: papers/templates/papers/index.html:175
-msgid "No, carry on"
-msgstr "Non, continuer"
-
-#: papers/templates/papers/index.html:184
+#: papers/templates/papers/index.html:56
 msgid "Green open access"
 msgstr "Libre accès (voie verte)"
 
-#: papers/templates/papers/index.html:188
+#: papers/templates/papers/index.html:60
 msgid ""
 "Many researchers do not use their right to make their papers freely "
 "available online, in addition to the paywalled version offered by "
@@ -574,7 +465,7 @@ msgstr ""
 "sur le Web, pour compléter la version payante proposée par les éditeurs "
 "traditionnels. Pourtant, tous ne le font pas."
 
-#: papers/templates/papers/index.html:196
+#: papers/templates/papers/index.html:68
 msgid ""
 "This forces libraries to buy overpriced electronic subscriptions to "
 "journals, when they can afford them at all."
@@ -583,11 +474,11 @@ msgstr ""
 "électroniques aux journaux de recherche, ce qui grève leurs finances et "
 "limite leur offre."
 
-#: papers/templates/papers/index.html:212
+#: papers/templates/papers/index.html:84
 msgid "Open repositories"
 msgstr "Dépôts ouverts"
 
-#: papers/templates/papers/index.html:215
+#: papers/templates/papers/index.html:87
 msgid ""
 "Uploading your papers on your own webpage is not enough. Such copies are "
 "less stable and harder to find than documents uploaded to well-indexed "
@@ -598,7 +489,7 @@ msgstr ""
 "difficiles à trouver que celles qui sont déposées dans des dépôts bien "
 "indexés."
 
-#: papers/templates/papers/index.html:223
+#: papers/templates/papers/index.html:95
 msgid ""
 "Dissemin searches for copies of your papers in a large collection of open "
 "repositories and tells you which ones cannot be accessed."
@@ -663,11 +554,11 @@ msgid "Full text:"
 msgstr "Texte intégral:"
 
 #: papers/templates/papers/paper.html:101
-#: papers/templates/papers/publiListItem.html:26
+#: papers/templates/papers/publiListItem.html:35
 msgid "Download"
 msgstr "Télécharger"
 
-#: papers/templates/papers/paper.html:103 statistics/models.py:69
+#: papers/templates/papers/paper.html:103 statistics/models.py:66
 msgid "Unavailable"
 msgstr "Indisponible"
 
@@ -679,11 +570,15 @@ msgstr "Demander la mise en ligne\t"
 msgid "Publisher:"
 msgstr "Maison d'édition:"
 
-#: papers/templates/papers/paper.html:117
+#: papers/templates/papers/paper.html:116
+msgid "Deposited."
+msgstr "Déposé."
+
+#: papers/templates/papers/paper.html:118
 msgid "Deposit again"
 msgstr "Déposer à nouveau"
 
-#: papers/templates/papers/paper.html:127
+#: papers/templates/papers/paper.html:129
 msgid "Abstract"
 msgstr "Résumé"
 
@@ -699,322 +594,271 @@ msgstr "Liens"
 msgid "Tools"
 msgstr "Outils"
 
-#: papers/templates/papers/paperDetails.html:27
-msgid "Search in CORE"
-msgstr "Chercher dans CORE"
-
-#: papers/templates/papers/paperDetails.html:31
+#: papers/templates/papers/paperDetails.html:30
 msgid "Admin zone"
 msgstr "Administration"
 
-#: papers/templates/papers/paperList.html:24
+#: papers/templates/papers/paperList.html:26
 msgid "No paper found."
 msgstr "Aucun papier trouvé"
 
-#: papers/templates/papers/publiListItem.html:15
+#: papers/templates/papers/publiListItem.html:16
 #, python-format
 msgid "and %(remaining_authors)s other authors"
 msgstr "et %(remaining_authors)s autres auteurs"
 
-#: papers/templates/papers/publiListItem.html:28
+#: papers/templates/papers/publiListItem.html:38
 #: publishers/templates/publishers/itemPolicy.html:21
 msgid "Upload"
 msgstr "Mettre en ligne"
 
-#: papers/templates/papers/publiListItem.html:36
-msgid " (metadata only)"
-msgstr " (notice)"
-
-#: papers/templates/papers/search.html:28
+#: papers/templates/papers/search.html:29
 msgid "Refreshing results"
 msgstr "Mise à jour des résultats"
 
-#: papers/templates/papers/search.html:37
+#: papers/templates/papers/search.html:38
 msgid "Refreshing profile"
 msgstr "Mise à jour du profil"
 
-#: papers/templates/papers/search.html:57
+#: papers/templates/papers/search.html:58
 msgid "Is it you?"
 msgstr "Est-ce vous ?"
 
-#: papers/templates/papers/search.html:76
-#, python-format
-msgid "%(nb_publi)s publication"
-msgid_plural "%(nb_publi)s publications"
-msgstr[0] "%(nb_publi)s publication"
-msgstr[1] "%(nb_publi)s publications"
+#: papers/templates/papers/search.html:77
+msgid "Refresh publications"
+msgstr "Rafraîchir les publications"
 
-#: papers/templates/papers/search.html:82
-msgid "Refresh"
-msgstr "Mettre à jour"
-
-#: papers/templates/papers/search.html:86
+#: papers/templates/papers/search.html:80
 msgid "Address:"
 msgstr "Adresse:"
 
-#: papers/templates/papers/search.html:89
+#: papers/templates/papers/search.html:83
 msgid "Names:"
 msgstr "Noms:"
 
-#: papers/templates/papers/search.html:100
-msgid "Refresh classification"
-msgstr "Rafraîchir la classification"
-
-#: papers/templates/papers/search.html:109
+#: papers/templates/papers/search.html:102
 msgid "Journal"
 msgstr "Revue"
 
-#: papers/templates/papers/search.html:112
+#: papers/templates/papers/search.html:105
 msgid "Published by"
 msgstr "Publiée par"
 
-#: papers/templates/papers/search.html:114
+#: papers/templates/papers/search.html:107
 msgid "ISSN:"
 msgstr "ISSN:"
 
-#: papers/templates/papers/search.html:122
+#: papers/templates/papers/search.html:115
 #, python-format
 msgid "%(nb_publi)s paper published in %(journal)s"
 msgid_plural "%(nb_publi)s papers published in %(journal)s"
 msgstr[0] "%(nb_publi)s papier publié dans %(journal)s"
 msgstr[1] "%(nb_publi)s papiers publiés dans %(journal)s"
 
-#: papers/templates/papers/search.html:130
+#: papers/templates/papers/search.html:123
 #: publishers/templates/publishers/policy.html:41
 msgid "Publisher"
 msgstr "Maison d'édition"
 
-#: papers/templates/papers/search.html:139
+#: papers/templates/papers/search.html:132
 #, python-format
 msgid "%(nb_publi)s paper published by %(publisher)s"
 msgid_plural "%(nb_publi)s papers published by %(publisher)s"
 msgstr[0] "%(nb_publi)s papier publié par %(publisher)s"
 msgstr[1] "%(nb_publi)s papiers publiés par %(publisher)s"
 
-#: papers/templates/papers/search.html:166
+#: papers/templates/papers/search.html:159
 msgid "Search by title"
 msgstr "Rechercher par titre"
 
-#: papers/templates/papers/search.html:176
+#: papers/templates/papers/search.html:169
 msgid "By authors"
 msgstr "Par auteurs"
 
-#: papers/templates/papers/search.html:181
+#: papers/templates/papers/search.html:174
 msgid "By publication date"
 msgstr "Par date de publication"
 
-#: papers/templates/papers/search.html:184
+#: papers/templates/papers/search.html:177
 msgid "after"
 msgstr "après"
 
-#: papers/templates/papers/search.html:191
+#: papers/templates/papers/search.html:184
 msgid "before"
 msgstr "avant"
 
-#: papers/templates/papers/search.html:198
+#: papers/templates/papers/search.html:191
 msgid "By document type"
 msgstr "Par type de document"
 
-#: papers/templates/papers/search.html:217
+#: papers/templates/papers/search.html:210
 #: publishers/templates/publishers/list.html:76
 msgid "Sort by"
 msgstr "Trier par"
 
 # "Trier par valeur croissante"
-#: papers/templates/papers/search.html:225
+#: papers/templates/papers/search.html:218
 #: publishers/templates/publishers/list.html:84
 #, python-format
 msgid "%(sort_by)s <div>%(increasing)s %(value)s</div>"
 msgstr "%(sort_by)s <div>%(value)s %(increasing)s</div>"
 
-#: papers/templates/papers/search.html:231
+#: papers/templates/papers/search.html:224
 msgid "By visibility"
 msgstr "Par visibilité"
 
-#: papers/templates/papers/search.html:236
+#: papers/templates/papers/search.html:229
 msgid "By full text availability"
 msgstr "Par disponibilité du texte intégral"
 
-#: papers/templates/papers/search.html:242
+#: papers/templates/papers/search.html:235
 msgid "By publisher policy"
 msgstr "Par politique de publication"
 
-#: papers/templates/papers/search.html:275
-msgid ""
-"This researcher is not associated with any ORCID profile. The publications "
-"below match their name but might be irrelevant."
-msgstr ""
-"Ce chercheur n'est pas associé à un profil ORCID. Les publications ci-"
-"dessous correspondent au nom mais peuvent ne pas être pertinentes."
-
-#: papers/templates/papers/search.html:287
-msgid ""
-"Your ORCID profile does not reference any publication. You can add them "
-"easily using <a href=\"http://search.crossref.org\">CrossRef Metadata "
-"Search</a>.<br /> The ones shown below match your name but might be "
-"irrelevant or incomplete."
-msgstr ""
-"Votre profil ORCID n'indique aucune publication. Vous pouvez les ajouter "
-"facilement à l'aide de <a href=\"http://search.crossref.org\">CrossRef "
-"Metadata Search</a>.<br /> Les publications ci-dessous correspondent à votre "
-"nom mais ne sont pas forcément pertinentes ou complètes."
-
-#: papers/templates/papers/search.html:295
-msgid "Update papers"
-msgstr "Met à jour les publications"
-
-#: papers/templates/papers/search.html:300
-msgid ""
-"This ORCID profile does not reference any publication. The ones shown below "
-"might be irrelevant or incomplete."
-msgstr ""
-"Ce profil ORCID n'indique aucune publication. Celles indiquées ci-dessous "
-"correspondent au nom mais peuvent ne pas être pertinentes ou complètes."
-
-#: papers/templatetags/statuses.py:17 papers/templatetags/statuses.py:72
+#: papers/templatetags/statuses.py:19 papers/templatetags/statuses.py:79
 msgid "Unknown OA status"
 msgstr "État OA inconnu"
 
-#: papers/templatetags/statuses.py:24
+#: papers/templatetags/statuses.py:27
 msgid "Unknown PDF status"
 msgstr "État PDF inconnu"
 
-#: papers/templatetags/statuses.py:29
+#: papers/templatetags/statuses.py:33
 msgid "Preprints can be archived."
 msgstr "Les prépublications peuvent être archivées."
 
-#: papers/templatetags/statuses.py:30
+#: papers/templatetags/statuses.py:34
 msgid "Preprints cannot be archived."
 msgstr "Les prépublications ne peuvent pas être archivées."
 
-#: papers/templatetags/statuses.py:31
+#: papers/templatetags/statuses.py:35
 msgid "Under the restrictions below, preprints can be archived."
 msgstr ""
 "Sous les conditions ci-dessous, les prépublications peuvent être archivées."
 
-#: papers/templatetags/statuses.py:32
+#: papers/templatetags/statuses.py:36
 msgid "Preprints archiving policy unclear"
 msgstr "La politique concernant les prépublications est confuse."
 
-#: papers/templatetags/statuses.py:33
+#: papers/templatetags/statuses.py:37
 msgid "Preprints archiving policy unknown"
 msgstr "La politique concernant les prépublications est inconnue."
 
-#: papers/templatetags/statuses.py:34
+#: papers/templatetags/statuses.py:38
 msgid "Postprints can be archived."
 msgstr "Les postpublications peuvent être archivées."
 
-#: papers/templatetags/statuses.py:35
+#: papers/templatetags/statuses.py:39
 msgid "Postprints cannot be archived."
 msgstr "Les postpublications ne peuvent pas être archivées."
 
-#: papers/templatetags/statuses.py:36
+#: papers/templatetags/statuses.py:40
 msgid "Under the restrictions below, postprints can be archived."
 msgstr ""
 "Sous les conditions ci-dessous, les postpublications peuvent être archivées."
 
-#: papers/templatetags/statuses.py:37
+#: papers/templatetags/statuses.py:41
 msgid "Postprint archiving policy unclear."
 msgstr "La politique concernant les postpublications est confuse."
 
-#: papers/templatetags/statuses.py:38
+#: papers/templatetags/statuses.py:42
 msgid "Postprint archiving policy unknown."
 msgstr "La poltique concernant les postpublications est inconnue."
 
-#: papers/templatetags/statuses.py:39
+#: papers/templatetags/statuses.py:43
 msgid "Final versions can be archived."
 msgstr "Les versions finales peuvent être archivées."
 
-#: papers/templatetags/statuses.py:40
+#: papers/templatetags/statuses.py:44
 msgid "Final versions cannot be archived."
 msgstr "Les versions finales ne peuvent pas être archivées."
 
-#: papers/templatetags/statuses.py:41
+#: papers/templatetags/statuses.py:45
 msgid "Under the restrictions below, final versions can be archived."
 msgstr ""
 "Sous les conditions ci-dessous, les versions finales peuvent être archivées."
 
-#: papers/templatetags/statuses.py:42
+#: papers/templatetags/statuses.py:46
 msgid "Final version archiving policy unclear."
 msgstr "La politique concernant les versions finales est confuse."
 
-#: papers/templatetags/statuses.py:43
+#: papers/templatetags/statuses.py:47
 msgid "Final version archiving policy unknown."
 msgstr "La politique concernant les versions finales est inconnue."
 
-#: papers/templatetags/statuses.py:45
+#: papers/templatetags/statuses.py:49
 msgid "Unknown policy"
 msgstr "Politique inconnue"
 
-#: papers/templatetags/statuses.py:50
+#: papers/templatetags/statuses.py:55
 msgid "archiving allowed."
 msgstr "dépôt autorisé."
 
-#: papers/templatetags/statuses.py:51
+#: papers/templatetags/statuses.py:56
 msgid "archiving forbidden."
 msgstr "dépôt interdit."
 
-#: papers/templatetags/statuses.py:52
+#: papers/templatetags/statuses.py:57
 msgid "archiving restricted:"
 msgstr "dépôt restreint :"
 
-#: papers/templatetags/statuses.py:53
+#: papers/templatetags/statuses.py:58
 msgid "policy unclear."
 msgstr "politique imprécise."
 
-#: papers/templatetags/statuses.py:54 papers/templatetags/statuses.py:56
-#: papers/templatetags/statuses.py:67
+#: papers/templatetags/statuses.py:59 papers/templatetags/statuses.py:61
+#: papers/templatetags/statuses.py:73
 msgid "policy unknown."
 msgstr "politique inconnue."
 
-#: papers/templatetags/statuses.py:61
+#: papers/templatetags/statuses.py:67
 msgid "archiving allowed"
 msgstr "dépôt autorisé"
 
-#: papers/templatetags/statuses.py:62
+#: papers/templatetags/statuses.py:68
 msgid "archiving forbidden"
 msgstr "dépôt interdit"
 
-#: papers/templatetags/statuses.py:63
+#: papers/templatetags/statuses.py:69
 msgid "archiving restricted"
 msgstr "dépôt restreint"
 
-#: papers/templatetags/statuses.py:64
+#: papers/templatetags/statuses.py:70
 msgid "policy unclear"
 msgstr "politique imprécise"
 
-#: papers/templatetags/statuses.py:65
+#: papers/templatetags/statuses.py:71
 msgid "policy unknown"
 msgstr "politique inconnue"
 
-#: papers/views.py:121
+#: papers/views.py:124
 msgid "All papers"
 msgstr "Tous les papiers"
 
-#: papers/views.py:125
+#: papers/views.py:128
 #, python-format
 msgid "%d paper found"
 msgid_plural "%d papers found"
 msgstr[0] "%d papier trouvé"
 msgstr[1] "%d papiers trouvés"
 
-#: papers/views.py:198
+#: papers/views.py:208
 msgid "Invalid ORCID profile."
 msgstr "Profil ORCID invalide."
 
-#: papers/views.py:215
+#: papers/views.py:225
 msgid " authored by "
 msgstr " écrits par "
 
-#: papers/views.py:258
+#: papers/views.py:269
 msgid " published by "
 msgstr " publiés par "
 
-#: papers/views.py:287
+#: papers/views.py:298
 msgid " in "
 msgstr " dans "
 
-#: papers/views.py:356
+#: papers/views.py:370
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr "Aucun %(verbose_name)s ne correspond à la requête"
@@ -1031,19 +875,19 @@ msgstr "nom"
 msgid "Filter by publisher policy"
 msgstr "Filtrer selon la politique de publication"
 
-#: publishers/models.py:36
+#: publishers/models.py:38
 msgid "Open access"
 msgstr "Accès libre"
 
-#: publishers/models.py:36
+#: publishers/models.py:38
 msgid "Freely available from the publisher."
 msgstr "Librement accessible à partir de l'éditeur."
 
-#: publishers/models.py:37
+#: publishers/models.py:39
 msgid "Allows pre/post prints"
 msgstr "Pré/post-publications autorisées"
 
-#: publishers/models.py:37
+#: publishers/models.py:40
 msgid ""
 "The publisher sells copies but allows authors to deposit some version of the "
 "article in a repository."
@@ -1051,48 +895,48 @@ msgstr ""
 "La version de l'éditeur est payante mais les auteurs ont le droit d'envoyer "
 "certaines versions de l'article dans un dépôt."
 
-#: publishers/models.py:38
+#: publishers/models.py:41
 msgid "Forbids pre/post prints"
 msgstr "Pré/post-publications interdites"
 
-#: publishers/models.py:38
+#: publishers/models.py:42
 msgid ""
 "The publisher forbids authors to deposit any version of their article online."
 msgstr ""
 "L'éditeur interdit aux auteurs de mettre en ligne leur article (quelle que "
 "soit la version)."
 
-#: publishers/models.py:39
+#: publishers/models.py:43
 msgid "Policy unclear"
 msgstr "Politique inconnue"
 
-#: publishers/models.py:39
+#: publishers/models.py:44
 msgid "For complicated policies, unknown publishers and unpublished documents."
 msgstr ""
 "Pour les politiques complexes, les éditeurs inconnus, et les documents non "
 "publiés."
 
-#: publishers/models.py:42
+#: publishers/models.py:47
 msgid "Allowed"
 msgstr "Autorisés"
 
-#: publishers/models.py:43
+#: publishers/models.py:48
 msgid "Forbidden"
 msgstr "Interdits"
 
-#: publishers/models.py:44
+#: publishers/models.py:49
 msgid "Restricted"
 msgstr "Restreints"
 
-#: publishers/models.py:45
+#: publishers/models.py:50
 msgid "Unclear"
 msgstr "Ambigü"
 
-#: publishers/models.py:46
+#: publishers/models.py:51
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: publishers/models.py:54 publishers/views.py:80
+#: publishers/models.py:59 publishers/views.py:97
 msgid "Publishers"
 msgstr "Maisons d'édition"
 
@@ -1165,73 +1009,77 @@ msgid "Policy data provided by"
 msgstr "Les politiques d'édition sont fournies par"
 
 #: publishers/templates/publishers/policy.html:62
+msgid "Report any error to them"
+msgstr "Signalez-leur toute erreur directement"
+
+#: publishers/templates/publishers/policy.html:66
 msgid "Availability statistics"
 msgstr "Statistiques de disponibilité"
 
-#: publishers/templates/publishers/policy.html:70
+#: publishers/templates/publishers/policy.html:74
 msgid "Policy"
 msgstr "Politique"
 
-#: publishers/templates/publishers/policy.html:96
+#: publishers/templates/publishers/policy.html:100
 msgid "Conditions"
 msgstr "Conditions"
 
-#: publishers/templates/publishers/policy.html:104
+#: publishers/templates/publishers/policy.html:108
 msgid "Policy details"
 msgstr "Détails de la politique"
 
-#: publishers/templates/publishers/policy.html:113
+#: publishers/templates/publishers/policy.html:117
 msgid "Publications"
 msgstr "Publications"
 
-#: publishers/templates/publishers/policy.html:116
+#: publishers/templates/publishers/policy.html:120
 #, python-format
 msgid "All papers published by %(publisher)s"
 msgstr "Tous les papiers publiés par %(publisher)s"
 
-#: publishers/templates/publishers/policy.html:121
+#: publishers/templates/publishers/policy.html:125
 msgid "Journals"
 msgstr "Revues"
 
-#: publishers/templates/publishers/policy.html:122
+#: publishers/templates/publishers/policy.html:126
 msgid "Only journals with papers written by our users are listed."
 msgstr ""
 "La liste n'indique que les journaux dans lesquels nos utilisateurs ont "
 "publié."
 
-#: publishers/templates/publishers/policy.html:137
+#: publishers/templates/publishers/policy.html:141
 msgid "None."
 msgstr "Aucune."
 
-#: statistics/models.py:51
+#: statistics/models.py:48
 msgid "Available from the publisher"
 msgstr "Accessible à partir de l'éditeur"
 
-#: statistics/models.py:52
+#: statistics/models.py:49
 msgid "Available from the author"
 msgstr "Accessible à partir de l'auteur"
 
-#: statistics/models.py:53
+#: statistics/models.py:50
 msgid "Could be shared by the authors"
 msgstr "Pourrait être partagé par les auteurs"
 
-#: statistics/models.py:54
+#: statistics/models.py:51
 msgid "Unknown/unclear sharing policy"
 msgstr "Politique inconnue ou complexe"
 
-#: statistics/models.py:55
+#: statistics/models.py:52
 msgid "Publisher forbids sharing"
 msgstr "Partage interdit par l'éditeur"
 
-#: statistics/models.py:60
+#: statistics/models.py:57
 msgid "This paper is made freely available by the publisher."
 msgstr "Le texte intégral de l'article est en libre accès chez l'éditeur."
 
-#: statistics/models.py:61
+#: statistics/models.py:58
 msgid "This paper is available in a repository."
 msgstr "Cet article est disponible dans un dépôt."
 
-#: statistics/models.py:62
+#: statistics/models.py:59
 msgid ""
 "This paper was not found in any repository, but could be made available "
 "legally by the author."
@@ -1239,7 +1087,7 @@ msgstr ""
 "Cet article n'a été trouvé dans aucun dépôt, mais ses auteurs ont le droit "
 "de le mettre en ligne."
 
-#: statistics/models.py:63
+#: statistics/models.py:60
 msgid ""
 "This paper was not found in any repository; the policy of its publisher is "
 "unknown or unclear."
@@ -1247,11 +1095,11 @@ msgstr ""
 "Cet article n'a été trouvé dans aucun dépôt, et la politique de l'éditeur "
 "est inconnue ou imprécise."
 
-#: statistics/models.py:64
+#: statistics/models.py:61
 msgid "Distributing this paper is prohibited by the publisher"
 msgstr "L'éditeur interdit la mise en ligne de cet article"
 
-#: statistics/models.py:68
+#: statistics/models.py:65
 msgid "Available"
 msgstr "Disponible"
 
@@ -1507,9 +1355,9 @@ msgstr ""
 "dépôts académiques génériques comme <a href=\"http://zenodo.org\">Zenodo</"
 "a>, dont le périmètre n'est limité qu'aux données issues de la recherche.</"
 "li></ul> Si votre communauté scientifique préfère un dépôt thématique "
-"particulier, il vaut mieux l'utiliser afin d'améliorer votre visibilité. Dans le "
-"cas contraire, les dépôts institutionnels ou génériques sont également une "
-"option raisonnable."
+"particulier, il vaut mieux l'utiliser afin d'améliorer votre visibilité. "
+"Dans le cas contraire, les dépôts institutionnels ou génériques sont "
+"également une option raisonnable."
 
 #: templates/dissemin/faq.html:107
 msgid ""
@@ -1849,7 +1697,7 @@ msgid "Back to top"
 msgstr "Revenir en haut"
 
 #: templates/dissemin/feedback.html:6 templates/dissemin/feedback.html:11
-#: templates/dissemin/skeleton.html:107
+#: templates/dissemin/skeleton.html:116
 msgid "Feedback"
 msgstr "Réactions"
 
@@ -1924,7 +1772,7 @@ msgid "Forgot Password?"
 msgstr "Mot de passe oublié ?"
 
 #: templates/dissemin/partners.html:7 templates/dissemin/partners.html:12
-#: templates/dissemin/skeleton.html:115
+#: templates/dissemin/skeleton.html:124
 msgid "Partners"
 msgstr "Partenaires"
 
@@ -1940,35 +1788,35 @@ msgstr "Afficher/masquer la navigation"
 msgid "My profile"
 msgstr "Mon profil"
 
-#: templates/dissemin/skeleton.html:75 templates/dissemin/skeleton.html:106
+#: templates/dissemin/skeleton.html:75 templates/dissemin/skeleton.html:115
 msgid "FAQ"
 msgstr "FAQ"
 
-#: templates/dissemin/skeleton.html:82
+#: templates/dissemin/skeleton.html:91
 msgid "Logout"
 msgstr "Se déconnecter"
 
-#: templates/dissemin/skeleton.html:86
+#: templates/dissemin/skeleton.html:95
 msgid "Login"
 msgstr "Se connecter"
 
-#: templates/dissemin/skeleton.html:108 templates/dissemin/tos.html:11
+#: templates/dissemin/skeleton.html:117 templates/dissemin/tos.html:11
 msgid "Terms of Service"
 msgstr "Conditions d'utilisation"
 
-#: templates/dissemin/skeleton.html:113
+#: templates/dissemin/skeleton.html:122
 msgid "Who are we?"
 msgstr "Qui sommes-nous?"
 
-#: templates/dissemin/skeleton.html:114
+#: templates/dissemin/skeleton.html:123
 msgid "Donate"
 msgstr "Faire un don"
 
-#: templates/dissemin/skeleton.html:126
+#: templates/dissemin/skeleton.html:135
 msgid "Change language"
 msgstr "Changer la langue"
 
-#: templates/dissemin/skeleton.html:138
+#: templates/dissemin/skeleton.html:147
 msgid "Apply"
 msgstr "Appliquer"
 
@@ -2155,7 +2003,7 @@ msgstr ""
 "d'accueil.</a>\n"
 "           "
 
-#: upload/forms.py:30
+#: upload/forms.py:29
 msgid "Invalid file format: only PDF files are accepted."
 msgstr "Format de fichier invalide : seuls les fichiers PDF sont acceptés."
 
@@ -2165,7 +2013,7 @@ msgid "File too large (%(size)s). Maximum size is %(maxsize)s."
 msgstr ""
 "Fichier trop volumineux (%(size)s). La taille maximale est de %(maxsize)s."
 
-#: upload/forms.py:46
+#: upload/forms.py:47
 msgid "URL"
 msgstr "URL"
 
@@ -2192,19 +2040,19 @@ msgstr "Sinon, entrez un URL :"
 msgid "Or drop a file here:"
 msgstr "Sinon, glissez-déposez un fichier ici :"
 
-#: upload/views.py:148
+#: upload/views.py:150
 msgid "Invalid PDF file."
 msgstr "Fichier PDF invalide."
 
-#: upload/views.py:181
+#: upload/views.py:183
 msgid "Invalid form."
 msgstr "Formulaire invalide."
 
-#: upload/views.py:190
+#: upload/views.py:193
 msgid "File too large."
 msgstr "Fichier trop volumineux."
 
-#: upload/views.py:195
+#: upload/views.py:198
 msgid ""
 "Invalid content type: this link points to a web page, we need a direct link "
 "to a PDF file."
@@ -2212,17 +2060,199 @@ msgstr ""
 "Type MIME invalide : ce lien pointe vers une page Web, il nous faut un lien "
 "direct vers un fichier PDF. "
 
-#: upload/views.py:198
+#: upload/views.py:201
 msgid "Invalid SSL certificate on the remote server."
 msgstr "Certificat SSL invalide sur le serveur distant."
 
-#: upload/views.py:200 upload/views.py:204
+#: upload/views.py:203 upload/views.py:207
 msgid "Invalid URL (server timed out)."
 msgstr "URL invalide (délai de connexion expiré)."
 
-#: upload/views.py:202 upload/views.py:206
+#: upload/views.py:205 upload/views.py:209
 msgid "Invalid URL."
 msgstr "URL invalide."
+
+#~ msgid "Chemistry"
+#~ msgstr "Chimie"
+
+#~ msgid "Computer science"
+#~ msgstr "Informatique"
+
+#~ msgid "Mathematics"
+#~ msgstr "Mathématiques"
+
+#~ msgid "Physics"
+#~ msgstr "Physique"
+
+#~ msgid "Non-linear science"
+#~ msgstr "Science non linéaire"
+
+#~ msgid "Cognitive science"
+#~ msgstr "Sciences cognitives"
+
+#~ msgid "Environment sciences"
+#~ msgstr "Sciences de l'environnement"
+
+#~ msgid "Planet and Universe"
+#~ msgstr "Planète et Univers"
+
+#~ msgid "Humanities and Social Science"
+#~ msgstr "Sciences de l'Homme et Société"
+
+#~ msgid "Life sciences"
+#~ msgstr "Sciences du vivant"
+
+#~ msgid "Engineering sciences"
+#~ msgstr "Sciences de l'ingénieur"
+
+#~ msgid "Economy and quantitative finance"
+#~ msgstr "Économie et finance quantitative"
+
+#~ msgid "Other"
+#~ msgstr "Autre"
+
+#~ msgid "Created"
+#~ msgstr "Créé"
+
+#~ msgid "Metadata defective"
+#~ msgstr "Métadonnées défectueuses"
+
+#~ msgid "Document defective"
+#~ msgstr "Document défectueux"
+
+#~ msgid "Creative Commons CCZero"
+#~ msgstr "Creative Commons CCZero"
+
+#~ msgid "Creative Commons Attribution"
+#~ msgstr "Creative Commons Attribution"
+
+#~ msgid "Creative Commons Attribution-ShareAlike"
+#~ msgstr "Creative Commons Attribution-ShareAlike (Partage à l'identique)"
+
+#~ msgid "Creative Commons Attribution-NonCommercial"
+#~ msgstr "Creative Commons Attribution-NonCommercial"
+
+#~ msgid "Creative Commons Attribution-NoDerivatives"
+#~ msgstr "Creative Commons Attribution-NoDerivatives (Pas de travaux dérivés)"
+
+#~ msgid "Other open license"
+#~ msgstr "Autre licence libre"
+
+#~ msgid "First name"
+#~ msgstr "Prénom"
+
+#~ msgid "Last name"
+#~ msgstr "Nom"
+
+#~ msgid "Please spell out at least one name."
+#~ msgstr "Veuillez indiquer au moins un nom."
+
+#~ msgid "A last name is required."
+#~ msgstr "Il faut fournir un nom de famille."
+
+#~ msgid "A first name is required."
+#~ msgstr "Il faut fournir un prénom."
+
+#~ msgctxt "alternate text of the waiting picture in the name lookup form"
+#~ msgid "Searching..."
+#~ msgstr "Recherche en cours..."
+
+#~ msgid "Looking for one of these researchers?"
+#~ msgstr "Pensiez-vous à l'un de ces chercheurs ?"
+
+#~ msgid "Looking for this researcher?"
+#~ msgstr "Pensiez-vous à ce chercheur ?"
+
+#~ msgid ""
+#~ "Dissemin helps researchers ensure that their publications are freely "
+#~ "available to their readers. Our free service spots paywalled papers and "
+#~ "lets you upload them in one click to <a href=\"http://zenodo.org\" target="
+#~ "\"_blank\">Zenodo</a>, an innovative repository backed by the EU."
+#~ msgstr ""
+#~ "Dissemin est un service gratuit pour aider les chercheurs à vérifier que "
+#~ "leurs publications sont librement accessibles pour leurs lecteurs. Notre "
+#~ "service identifie les papiers qui ne peuvent être obtenus qu'avec des "
+#~ "souscriptions payantes, et vous permet de les mettre en ligne en quelques "
+#~ "clics sur <a href=\"http://zenodo.org\" target=\"_blank\">Zenodo</a>, un "
+#~ "dépôt innovant soutenu par l'UE."
+
+#~ msgid ""
+#~ "Still unsure? Read below or check out the <a href=\"%(faq_url)s\">FAQ</a>."
+#~ msgstr ""
+#~ "Vous hésitez toujours ? Lisez ce qui suit ou jetez un œil à la <a href="
+#~ "\"%(faq_url)s\">FAQ</a>."
+
+#~ msgctxt "before name fields in researcher lookup form"
+#~ msgid "Look up a researcher:"
+#~ msgstr "Trouver un chercheur :"
+
+#~ msgid "Firstname"
+#~ msgstr "Prénom"
+
+#~ msgctxt "Placeholder in researcher lookup form"
+#~ msgid "Firstname"
+#~ msgstr "Prénom"
+
+#~ msgctxt "Placeholder in researcher lookup form"
+#~ msgid "Lastname"
+#~ msgstr "Nom"
+
+#~ msgid "Lastname"
+#~ msgstr "Nom"
+
+#~ msgid "or"
+#~ msgstr "ou"
+
+#~ msgid "Start with ORCID"
+#~ msgstr "S'inscrire avec ORCID"
+
+#~ msgid "Cancel"
+#~ msgstr "Annuler"
+
+#~ msgid "No, carry on"
+#~ msgstr "Non, continuer"
+
+#~ msgid "Search in CORE"
+#~ msgstr "Chercher dans CORE"
+
+#~ msgid " (metadata only)"
+#~ msgstr " (notice)"
+
+#~ msgid "%(nb_publi)s publication"
+#~ msgid_plural "%(nb_publi)s publications"
+#~ msgstr[0] "%(nb_publi)s publication"
+#~ msgstr[1] "%(nb_publi)s publications"
+
+#~ msgid "Refresh"
+#~ msgstr "Mettre à jour"
+
+#~ msgid ""
+#~ "This researcher is not associated with any ORCID profile. The "
+#~ "publications below match their name but might be irrelevant."
+#~ msgstr ""
+#~ "Ce chercheur n'est pas associé à un profil ORCID. Les publications ci-"
+#~ "dessous correspondent au nom mais peuvent ne pas être pertinentes."
+
+#~ msgid ""
+#~ "Your ORCID profile does not reference any publication. You can add them "
+#~ "easily using <a href=\"http://search.crossref.org\">CrossRef Metadata "
+#~ "Search</a>.<br /> The ones shown below match your name but might be "
+#~ "irrelevant or incomplete."
+#~ msgstr ""
+#~ "Votre profil ORCID n'indique aucune publication. Vous pouvez les ajouter "
+#~ "facilement à l'aide de <a href=\"http://search.crossref.org\">CrossRef "
+#~ "Metadata Search</a>.<br /> Les publications ci-dessous correspondent à "
+#~ "votre nom mais ne sont pas forcément pertinentes ou complètes."
+
+#~ msgid "Update papers"
+#~ msgstr "Met à jour les publications"
+
+#~ msgid ""
+#~ "This ORCID profile does not reference any publication. The ones shown "
+#~ "below might be irrelevant or incomplete."
+#~ msgstr ""
+#~ "Ce profil ORCID n'indique aucune publication. Celles indiquées ci-dessous "
+#~ "correspondent au nom mais peuvent ne pas être pertinentes ou complètes."
 
 #~ msgid "No production found."
 #~ msgstr "Aucune production trouvée."
@@ -2232,9 +2262,6 @@ msgstr "URL invalide."
 
 #~ msgid "Not relevant"
 #~ msgstr "Non pertinent"
-
-#~ msgid "Deleted"
-#~ msgstr "Supprimé"
 
 #~ msgid "Hall of fame"
 #~ msgstr "Podium"
