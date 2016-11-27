@@ -46,11 +46,11 @@ from publishers.models import PublisherRestrictionDetail
 # associated to a publisher to assign this publisher
 # to publications where the journal was not found.
 # (when this name has only been associated to one publisher)
-PUBLISHER_NAME_ASSOCIATION_THRESHOLD = 32
+PUBLISHER_NAME_ASSOCIATION_THRESHOLD = 1000
 
 # Minimum ratio between the most commonly matched journal
 # and the second one
-PUBLISHER_NAME_ASSOCIATION_FACTOR = 5
+PUBLISHER_NAME_ASSOCIATION_FACTOR = 10
 
 
 def perform_romeo_query(search_terms):
