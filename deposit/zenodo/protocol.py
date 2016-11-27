@@ -137,7 +137,7 @@ class ZenodoProtocol(RepositoryProtocol):
             deposition_object = r.json()
             links = deposition_object.get('links',{})
             deposit_result.splash_url = links.get('record_html', 'https://zenodo.org/')
-            deposit_result.pdf_url = deposit_result.splash_url+'/files/document.pdf'
+            deposit_result.pdf_url = deposit_result.splash_url+'/files/article.pdf'
 
         return deposit_result
 
