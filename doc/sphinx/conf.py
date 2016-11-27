@@ -20,6 +20,9 @@ import sys
 import mock
 
 import django
+from django.conf import settings
+if not settings.configured:
+    settings.configure()
 from django.db.models.fields.files import FileDescriptor
 from django.utils.encoding import force_unicode
 from django.utils.html import strip_tags
