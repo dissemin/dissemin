@@ -31,6 +31,7 @@ from publishers.forms import PublisherForm
 from publishers.models import OA_STATUS_CHOICES
 from publishers.models import Publisher
 from publishers.models import publishers_breadcrumbs
+from search import SearchQuerySet
 
 # Number of publishers per page in the publishers list
 NB_RESULTS_PER_PAGE = 20
@@ -74,6 +75,7 @@ class PublishersView(SearchView):
     paginate_by = NB_RESULTS_PER_PAGE
     template_name = 'publishers/list.html'
     form_class = PublisherForm
+    queryset = SearchQuerySet().models(Publisher)
 
     def get_context_data(self, **kwargs):
         context = super(PublishersView, self).get_context_data(**kwargs)
