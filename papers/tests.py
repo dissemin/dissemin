@@ -44,6 +44,10 @@ class ResearcherTest(django.test.TestCase):
         r3 = Researcher.get_or_create_by_orcid('0000-0002-4445-8625')
         self.assertNotEqual(r, r3)
 
+    def test_institution(self):
+        r = Researcher.get_or_create_by_orcid('0000-0002-0022-2290')
+        self.assertEqual(r.institution.identifier, 'ringgold-2167')
+
     def test_name_conflict(self):
         # Both are called "John Doe"
         r1 = Researcher.get_or_create_by_orcid('0000-0001-7295-1671')

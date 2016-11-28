@@ -112,6 +112,10 @@ class Institution(models.Model):
     """
     #: The full name of the institution
     name = models.CharField(max_length=300)
+    #: An identifier for the institution (eg: ringgold-2167 for MIT)
+    identifier = models.CharField(max_length=256, null=True, blank=True)
+    #: Country code
+    country = models.CharField(max_length=16, null=True, blank=True)
 
     #: :py:class:`AccessStatistics` about the papers authored in this institution.
     stats = models.ForeignKey(AccessStatistics, null=True, blank=True)
@@ -155,6 +159,14 @@ class Institution(models.Model):
     def breadcrumbs(self):
         return [(unicode(self), self.url)]
 
+    @property
+    def sorted_researchers(self):
+        """
+        List of :py:class:`Researcher` who are directly affiliated to
+        this institution, without department.
+         sorted by last name (prefetches their stats as well)
+        """
+        return self.researcher_set.select_related('name', 'stats').order_by('name')
 
 class Department(models.Model):
     """
@@ -174,7 +186,6 @@ class Department(models.Model):
     def sorted_researchers(self):
         """List of :py:class:`Researcher` in this department sorted by last name (prefetches their stats as well)"""
         return self.researcher_set.select_related('name', 'stats').order_by('name')
-
     def __unicode__(self):
         return self.name
 
@@ -235,6 +246,8 @@ class Researcher(models.Model):
     user = models.ForeignKey(User, null=True, blank=True)
     #: It can be affiliated to a department
     department = models.ForeignKey(Department, null=True)
+    #: Or directly to an institution
+    institution = models.ForeignKey(Institution, null=True)
 
     # Various info about the researcher (not used internally)
     #: Email address for this researcher
@@ -360,8 +373,14 @@ class Researcher(models.Model):
             name = profile.name
             homepage = profile.homepage
             email = profile.email
+            institution = profile.institution
+            if institution:
+                institution, _ = Institution.objects.get_or_create(
+                                    identifier=institution['identifier'],
+                                    defaults=institution)
             researcher = Researcher.create_by_name(name[0], name[1], orcid=orcid,
-                                                   user=user, homepage=homepage, email=email)
+                    user=user, homepage=homepage, email=email,
+                    institution=institution)
 
             # Ensure that extra info is added.
             save = False

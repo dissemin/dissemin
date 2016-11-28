@@ -60,7 +60,6 @@ def init_profile_from_orcid(pk):
     This task is intended to be very quick, so that users
     can see their ORCID publications quickly.
     """
-
     r = Researcher.objects.get(pk=pk)
     update_task = lambda name: update_researcher_task(r, name)
     update_task('clustering')

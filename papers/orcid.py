@@ -100,6 +100,30 @@ class OrcidProfile(object):
             return urlize(jpath('url/value', lst[0])) or None
 
     @property
+    def institution(self):
+        """
+        The name and identifier of the latest institution associated
+        with this researcher
+        """
+        lst = jpath(
+            'orcid-profile/orcid-activities/affiliations/affiliation',
+            self.json, default=[])
+        for affiliation in lst:
+            disamb = jpath('organization/disambiguated-organization',
+                affiliation, default={})
+            source = disamb.get('disambiguation-source')
+            id = disamb.get('disambiguated-organization-identifier')
+            name = jpath('organization/name', affiliation)
+            country = jpath('organization/address/country', affiliation)
+            if source and id and name and country:
+                return {
+                    'identifier':unicode(source).lower()+'-'+unicode(id),
+                    'name':name,
+                    'country':country,
+                    }
+        return None
+
+    @property
     def email(self):
         # TODO
         return None
