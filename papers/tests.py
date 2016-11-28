@@ -48,6 +48,19 @@ class ResearcherTest(django.test.TestCase):
         r = Researcher.get_or_create_by_orcid('0000-0002-0022-2290')
         self.assertEqual(r.institution.identifier, 'ringgold-2167')
 
+    def test_refresh(self):
+        r = Researcher.get_or_create_by_orcid('0000-0002-0022-2290')
+        self.assertEqual(r.institution.identifier, 'ringgold-2167')
+        r.institution = None
+        old_name = r.name
+        r.name = Name.lookup_name(('John','Doe'))
+        r.save()
+        r = Researcher.get_or_create_by_orcid('0000-0002-0022-2290',
+                update=True)
+        self.assertEqual(r.institution.identifier, 'ringgold-2167')
+        self.assertEqual(r.name, old_name)
+        
+
     def test_name_conflict(self):
         # Both are called "John Doe"
         r1 = Researcher.get_or_create_by_orcid('0000-0001-7295-1671')

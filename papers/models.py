@@ -351,50 +351,65 @@ class Researcher(models.Model):
         self.save(update_fields=['harvester'])
 
     @classmethod
-    def get_or_create_by_orcid(cls, orcid, profile=None, user=None):
+    def get_or_create_by_orcid(cls, orcid, profile=None,
+                    user=None, update=False):
         """
         Creates (or returns an existing) researcher from its ORCID id.
 
         :param profile: an :class:`OrcidProfile` object if it has already been fetched
                         from the API (otherwise we will fetch it ourselves)
         :param user: an user to associate with the profile.
+        :param update: refresh researcher attributes even if it already exists
         :returns: a :class:`Researcher` if everything went well, raises MetadataSourceException otherwise
         """
         researcher = None
         if orcid is None:
             raise MetadataSourceException('Invalid ORCID id')
+
+        researcher = None
         try:
             researcher = Researcher.objects.get(orcid=orcid)
         except Researcher.DoesNotExist:
-            if profile is None:
-                profile = OrcidProfile(id=orcid)
-            else:
-                profile = OrcidProfile(json=profile)
-            name = profile.name
-            homepage = profile.homepage
-            email = profile.email
-            institution = profile.institution
-            if institution:
-                institution, _ = Institution.objects.get_or_create(
-                                    identifier=institution['identifier'],
-                                    defaults=institution)
+            pass
+        
+        if researcher and not update:
+            return researcher
+
+        if profile is None:
+            profile = OrcidProfile(id=orcid)
+        else:
+            profile = OrcidProfile(json=profile)
+        name = profile.name
+        homepage = profile.homepage
+        email = profile.email
+        institution = profile.institution
+        if institution:
+            institution, _ = Institution.objects.get_or_create(
+                                identifier=institution['identifier'],
+                                defaults=institution)
+        if not researcher:
             researcher = Researcher.create_by_name(name[0], name[1], orcid=orcid,
                     user=user, homepage=homepage, email=email,
                     institution=institution)
 
-            # Ensure that extra info is added.
-            save = False
-            for kw, val in [('homepage', homepage), ('orcid', orcid), ('email', email)]:
-                if not researcher.__dict__[kw] and val:
-                    researcher.__dict__[kw] = val
-                    save = True
-            if save:
-                researcher.save()
+        # Ensure that extra info is added.
+        name = Name.lookup_name(name)
+        save = False
+        for kw, val in [('homepage', homepage),
+                        ('orcid', orcid),
+                        ('email', email),
+                        ('institution', institution),
+                        ('name', name)]:
+            if getattr(researcher, kw) != val:
+                setattr(researcher, kw, val)
+                save = True
+        if save:
+            researcher.save()
 
-            for variant in profile.other_names:
-                confidence = name_similarity(variant, variant)
-                name = Name.lookup_name(variant)
-                researcher.add_name_variant(name, confidence)
+        for variant in profile.other_names:
+            confidence = name_similarity(variant, variant)
+            name = Name.lookup_name(variant)
+            researcher.add_name_variant(name, confidence)
 
         return researcher
 
