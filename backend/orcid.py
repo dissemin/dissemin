@@ -516,7 +516,6 @@ class OrcidPaperSource(PaperSource):
         dump.
         """
 
-        seen = False
         for root, _, fnames in os.walk(directory):
             for fname in fnames:
                 #if fname == '0000-0003-1349-4524.json':
@@ -539,6 +538,6 @@ class OrcidPaperSource(PaperSource):
                                 use_doi=use_doi)    
                             for p in papers:
                                 self.save_paper(p, r)
-                    except (ValueError, KeyError) as e:
+                    except (ValueError, KeyError):
                         print "Invalid profile: %s" % fname
  
