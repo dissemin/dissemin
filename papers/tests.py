@@ -48,23 +48,40 @@ class ResearcherTest(django.test.TestCase):
         r = Researcher.create_by_name('', '')
         self.assertEqual(r, None)
         # this ORCID has no public name in the sandbox:
-        r = Researcher.get_or_create_by_orcid('0000-0002-6091-2701')
+        r = Researcher.get_or_create_by_orcid('0000-0002-6091-2701',
+            instance='sandbox.orcid.org')
         self.assertEqual(r, None)
 
     def test_institution(self):
-        r = Researcher.get_or_create_by_orcid('0000-0002-0022-2290')
-        self.assertEqual(r.institution.identifier, 'ringgold-2167')
+        r = Researcher.get_or_create_by_orcid('0000-0002-0022-2290',
+            instance='sandbox.orcid.org')
+        self.assertEqual(r.institution.name,
+                'Massachusetts Institute of Technology')
+        self.assertTrue('ringgold-2167' in r.institution.identifiers)
+
+    def test_institution_match(self):
+        # first, load a profile from someone with
+        # a disambiguated institution (from the sandbox)
+        # http://sandbox.orcid.org/0000-0001-7174-97
+        r = Researcher.get_or_create_by_orcid('0000-0001-7174-9738',
+            instance='sandbox.orcid.org')
+        # then, load someone else, with the same institution, but not
+        # disambiguated, and without accents
+        # http://sandbox.orcid.org//0000-0001-6068-024
+        r2 = Researcher.get_or_create_by_orcid('0000-0001-6068-0245',
+            instance='sandbox.orcid.org')
+        self.assertEqual(r.institution, r2.institution)
 
     def test_refresh(self):
         r = Researcher.get_or_create_by_orcid('0000-0002-0022-2290')
-        self.assertEqual(r.institution.identifier, 'ringgold-2167')
+        self.assertTrue('ringgold-2167' in r.institution.identifiers)
         r.institution = None
         old_name = r.name
         r.name = Name.lookup_name(('John','Doe'))
         r.save()
         r = Researcher.get_or_create_by_orcid('0000-0002-0022-2290',
                 update=True)
-        self.assertEqual(r.institution.identifier, 'ringgold-2167')
+        self.assertTrue('ringgold-2167' in r.institution.identifiers)
         self.assertEqual(r.name, old_name)
         
 

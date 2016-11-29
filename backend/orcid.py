@@ -309,6 +309,8 @@ class ORCIDDataPaper(object):
 class OrcidPaperSource(PaperSource):
 
     def fetch_papers(self, researcher):
+        if not researcher:
+            return
         self.researcher = researcher
         if researcher.orcid:
             if researcher.empty_orcid_profile == None:
@@ -390,19 +392,22 @@ class OrcidPaperSource(PaperSource):
                 yield False, metadata
 
     def warn_user_of_ignored_papers(self, ignored_papers):
+        if self.researcher is None:
+            return
         user = self.researcher.user
-        if user is not None:
-            delete_notification_per_tag(user, 'backend_orcid')
-            if ignored_papers:
-                notification = {
-                    'code': 'IGNORED_PAPERS',
-                    'papers': ignored_papers
-                }
-                add_notification_for([user],
-                                     notification_levels.ERROR,
-                                     notification,
-                                     'backend_orcid'
-                                     )
+        if user is None:
+            return
+        delete_notification_per_tag(user, 'backend_orcid')
+        if ignored_papers:
+            notification = {
+                'code': 'IGNORED_PAPERS',
+                'papers': ignored_papers
+            }
+            add_notification_for([user],
+                                    notification_levels.ERROR,
+                                    notification,
+                                    'backend_orcid'
+                                    )
 
     def fetch_orcid_records(self, orcid_identifier, profile=None, use_doi=True):
         """
@@ -434,6 +439,8 @@ class OrcidPaperSource(PaperSource):
         # As we have fetched the profile, let's update the Researcher
         self.researcher = Researcher.get_or_create_by_orcid(orcid_identifier,
                 profile.json, update=True)
+        if not self.researcher:
+            return
 
         # Reference name
         ref_name = profile.name

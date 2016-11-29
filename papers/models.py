@@ -60,6 +60,7 @@ from dissemin.settings import POSSIBLE_LANGUAGE_CODES
 from dissemin.settings import PROFILE_REFRESH_ON_LOGIN
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import JSONField
+from django.contrib.postgres.fields import ArrayField
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
 from django.core.exceptions import ObjectDoesNotExist
@@ -84,6 +85,7 @@ from papers.name import unify_name_lists
 from papers.orcid import OrcidProfile
 from papers.utils import affiliation_is_greater
 from papers.utils import validate_orcid
+from papers.utils import iunaccent
 from publishers.models import Journal
 from publishers.models import Publisher
 from solo.models import SingletonModel
@@ -112,8 +114,8 @@ class Institution(models.Model):
     """
     #: The full name of the institution
     name = models.CharField(max_length=300)
-    #: An identifier for the institution (eg: ringgold-2167 for MIT)
-    identifier = models.CharField(max_length=256, null=True, blank=True)
+    #: A list of identifiers for the institution (eg: ringgold-2167 for MIT)
+    identifiers = ArrayField(models.CharField(max_length=256), null=True, blank=True)
     #: Country code
     country = models.CharField(max_length=16, null=True, blank=True)
 
@@ -156,6 +158,10 @@ class Institution(models.Model):
         """
         return reverse('institution', args=[self.pk])
 
+    @property
+    def slug(self):
+        return slugify(self.name)
+
     def breadcrumbs(self):
         return [(unicode(self), self.url)]
 
@@ -167,6 +173,69 @@ class Institution(models.Model):
          sorted by last name (prefetches their stats as well)
         """
         return self.researcher_set.select_related('name', 'stats').order_by('name')
+    
+    @classmethod
+    def create(cls, dct):
+        """
+        Given a dictionary representing an institution,
+        as returned by OrcidProfile.institution,
+        save the institution in the DB (or return
+        an existing duplicate).
+        
+        The dictionary should contain 'name' and 'country'
+        values, and possibly an identifier (such as a Ringgold one).
+        """
+        # cleanup arguments
+        dct['name'] = dct['name'].strip()
+        dct['country'] = dct['country'].strip()
+
+        # create a list of identifiers for this institution
+        identifiers = []
+        # add the 'fingerprint' for that institution
+        identifiers.append(
+            dct['country']+':'+iunaccent(dct['name']))
+        # maybe add a disambiguated identifier
+        if dct.get('identifier'):
+            identifiers.append(
+                dct.get('identifier'))
+
+        # this uses our GIN index on identitfiers
+        matches = Institution.objects.filter(
+            identifiers__overlap=identifiers)
+        
+        if not matches:
+            i = cls(
+                name=dct['name'],
+                country=dct['country'],
+                identifiers=identifiers)
+            i.save()
+            return i
+        else:
+            # TODO case where there are multiple matches : merge
+            i = matches[0]
+            old_identifiers = set(i.identifiers or [])
+            new_identifiers = old_identifiers | set(identifiers)
+            if old_identifiers != new_identifiers:
+                i.identifiers = list(new_identifiers)
+
+                # shorter names are better
+                if len(dct['name']) < len(i.name):
+                    i.name = dct['name']
+                i.save()
+            return i 
+    
+    def merge(self, i):
+        """
+        Merges another institution into self
+        """
+        if len(i.name) < len(self.name):
+            self.name = i.name
+        self.identifiers = list(set(self.identifiers)|
+                             set(i.identifiers))
+        self.save()
+        i.researcher_set.all().update(institution=self)
+        i.department_set.all().update(institution=self)
+        i.delete()
 
 class Department(models.Model):
     """
@@ -245,9 +314,11 @@ class Researcher(models.Model):
     #: It can be associated to a user
     user = models.ForeignKey(User, null=True, blank=True)
     #: It can be affiliated to a department
-    department = models.ForeignKey(Department, null=True)
+    department = models.ForeignKey(Department, null=True,
+                                on_delete=models.SET_NULL)
     #: Or directly to an institution
-    institution = models.ForeignKey(Institution, null=True)
+    institution = models.ForeignKey(Institution, null=True,
+                                on_delete=models.SET_NULL)
 
     # Various info about the researcher (not used internally)
     #: Email address for this researcher
@@ -352,7 +423,7 @@ class Researcher(models.Model):
 
     @classmethod
     def get_or_create_by_orcid(cls, orcid, profile=None,
-                    user=None, update=False):
+                    user=None, update=False, instance='orcid.org'):
         """
         Creates (or returns an existing) researcher from its ORCID id.
 
@@ -376,7 +447,7 @@ class Researcher(models.Model):
             return researcher
 
         if profile is None:
-            profile = OrcidProfile(id=orcid)
+            profile = OrcidProfile(id=orcid, instance=instance)
         else:
             profile = OrcidProfile(json=profile)
         name = profile.name
@@ -386,9 +457,8 @@ class Researcher(models.Model):
         email = profile.email
         institution = profile.institution
         if institution:
-            institution, _ = Institution.objects.get_or_create(
-                                identifier=institution['identifier'],
-                                defaults=institution)
+            institution  = Institution.create(institution)
+
         if not researcher:
             researcher = Researcher.create_by_name(name[0], name[1], orcid=orcid,
                     user=user, homepage=homepage, email=email,
@@ -417,7 +487,7 @@ class Researcher(models.Model):
         for variant in profile.other_names:
             confidence = name_similarity(variant, variant)
             name = Name.lookup_name(variant)
-            if name:
+            if name is not None:
                 researcher.add_name_variant(name, confidence)
 
         return researcher

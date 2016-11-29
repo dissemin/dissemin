@@ -788,6 +788,8 @@ class BareName(BareObject):
         """
         if self.last:
             return self.last[0]
+        elif self.first:
+            return self.first[0]
 
     def serialize(self):
         """

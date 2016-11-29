@@ -37,13 +37,13 @@ class OrcidProfile(object):
     An orcid profile as returned by the ORCID public API (in JSON)
     """
 
-    def __init__(self, id=None, json=None):
+    def __init__(self, id=None, json=None, instance='orcid.org'):
         """
         Create a profile by ORCID ID or by providing directly the parsed JSON payload.
         """
         self.json = json
         if id is not None:
-            self.fetch(id)
+            self.fetch(id, instance=instance)
 
     def __getitem__(self, key):
         return self.json[key]
@@ -116,9 +116,13 @@ class OrcidProfile(object):
             id = disamb.get('disambiguated-organization-identifier')
             name = jpath('organization/name', affiliation)
             country = jpath('organization/address/country', affiliation)
-            if source and id and name and country:
+            identifier = None
+            if source and country:
+                identifier = unicode(source).lower()+'-'+unicode(id)
+
+            if name and country:
                 return {
-                    'identifier':unicode(source).lower()+'-'+unicode(id),
+                    'identifier':identifier,
                     'name':name,
                     'country':country,
                     }
