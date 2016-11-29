@@ -72,6 +72,10 @@ def fetch_on_orcid_login(sender, **kwargs):
     if '_user_cache' in account.__dict__:
         user = account.user
     r = Researcher.get_or_create_by_orcid(orcid, profile, user)
+
+    if not r: # invalid ORCID profile (e.g. no name provided)
+        return
+
     if r.user_id is None and user is not None:
         r.user = user
         r.save(update_fields=['user'])
@@ -203,6 +207,11 @@ class ResearcherView(PaperSearchView):
                 try:
                     orcid = validate_orcid(kwargs['orcid'])
                     researcher = Researcher.get_or_create_by_orcid(orcid)
+                    if not researcher:
+                        raise Http404(_("""
+                            Invalid ORCID profile.
+                            Please make sure it includes a public name.
+                            """))
                     researcher.init_from_orcid()
                 except MetadataSourceException:
                     raise Http404(_('Invalid ORCID profile.'))

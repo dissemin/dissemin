@@ -44,6 +44,13 @@ class ResearcherTest(django.test.TestCase):
         r3 = Researcher.get_or_create_by_orcid('0000-0002-4445-8625')
         self.assertNotEqual(r, r3)
 
+    def test_empty_name(self):
+        r = Researcher.create_by_name('', '')
+        self.assertEqual(r, None)
+        # this ORCID has no public name in the sandbox:
+        r = Researcher.get_or_create_by_orcid('0000-0002-6091-2701')
+        self.assertEqual(r, None)
+
     def test_institution(self):
         r = Researcher.get_or_create_by_orcid('0000-0002-0022-2290')
         self.assertEqual(r.institution.identifier, 'ringgold-2167')

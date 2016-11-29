@@ -393,6 +393,9 @@ class Researcher(models.Model):
             researcher = Researcher.create_by_name(name[0], name[1], orcid=orcid,
                     user=user, homepage=homepage, email=email,
                     institution=institution)
+        if not researcher:
+            # invalid name?
+            return
 
         # Ensure that extra info is added.
         name = Name.lookup_name(name)
@@ -423,6 +426,8 @@ class Researcher(models.Model):
         this researcher will be returned. In any other case, a new researcher will be created.
         """
         name, created = Name.get_or_create(first, last)
+        if not name:
+            return
 
         if kwargs.get('orcid') is not None:
             orcid = validate_orcid(kwargs['orcid'])
@@ -496,6 +501,8 @@ class Name(models.Model, BareName):
         Replacement for the regular get_or_create, so that the full
         name is built based on first and last
         """
+        if not first and not last:
+            return (None, False)
         n = cls.create(first, last)
         return cls.objects.get_or_create(full=n.full,
                                          defaults={'first': n.first, 'last': n.last})
