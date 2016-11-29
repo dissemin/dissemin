@@ -399,6 +399,9 @@ class Researcher(models.Model):
 
         # Ensure that extra info is added.
         name = Name.lookup_name(name)
+        if not name:
+            return
+
         save = False
         for kw, val in [('homepage', homepage),
                         ('orcid', orcid),
@@ -414,7 +417,8 @@ class Researcher(models.Model):
         for variant in profile.other_names:
             confidence = name_similarity(variant, variant)
             name = Name.lookup_name(variant)
-            researcher.add_name_variant(name, confidence)
+            if name:
+                researcher.add_name_variant(name, confidence)
 
         return researcher
 
@@ -503,8 +507,16 @@ class Name(models.Model, BareName):
         """
         if not first and not last:
             return (None, False)
+
         n = cls.create(first, last)
-        return cls.objects.get_or_create(full=n.full,
+        
+        # Do this check after escaping, because this migth expand the
+        # name.
+        if (len(n.first or '') >= MAX_NAME_LENGTH-1 or
+            len(n.last or '') >= MAX_NAME_LENGTH-1):
+            return (None, False)
+
+        return cls.objects.get_or_create(full=n.full[:255],
                                          defaults={'first': n.first, 'last': n.last})
 
     @classmethod

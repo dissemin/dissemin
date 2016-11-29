@@ -202,7 +202,8 @@ class ORCIDMetadataExtractor(object):
             return []
 
     def convert_authors(self, authors):
-        return map(Name.lookup_name, authors)
+        return filter(lambda n: n is not None,
+                map(Name.lookup_name, authors))
 
     def j(self, path, default=None):
         return jpath(path, self._pub, default)
@@ -451,6 +452,8 @@ class OrcidPaperSource(PaperSource):
                 pub,
                 stop_if_dois_exists=use_doi
             )
+            if not data_paper:
+                continue
 
             if data_paper.dois and use_doi:  # We want to batch it rather than manually do it.
                 dois.extend(data_paper.dois)
@@ -460,10 +463,6 @@ class OrcidPaperSource(PaperSource):
             # We first try to reconcile it with local researcher author name.
             # Then, we consider it missed.
             if data_paper.skipped:
-                print('%s is skipped due to incorrect metadata (%s)' %
-                      (data_paper, data_paper.skip_reason))
-
-                print('Trying to reconcile it with local researcher.')
                 data_paper = self.reconcile_paper(
                     ref_name,
                     orcid_id,
@@ -473,6 +472,9 @@ class OrcidPaperSource(PaperSource):
                     }
                 )
                 if data_paper.skipped:
+                    print('%s is skipped due to incorrect metadata (%s)' %
+                        (data_paper, data_paper.skip_reason))
+
                     ignored_papers.append(data_paper.as_dict())
                     continue
 

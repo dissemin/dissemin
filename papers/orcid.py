@@ -108,6 +108,7 @@ class OrcidProfile(object):
         lst = jpath(
             'orcid-profile/orcid-activities/affiliations/affiliation',
             self.json, default=[])
+
         for affiliation in lst:
             disamb = jpath('organization/disambiguated-organization',
                 affiliation, default={})

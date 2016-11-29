@@ -74,6 +74,20 @@ class ResearcherTest(django.test.TestCase):
         r2 = Researcher.get_or_create_by_orcid('0000-0001-5393-1421')
         self.assertNotEqual(r1, r2)
 
+
+class NameTest(django.test.TestCase):
+    def test_max_length(self):
+        # The long string is shorter than the max name length,
+        # but becomes longer after escaping of the & sign
+        self.assertEqual(
+            Name.lookup_name(("""
+an ISO 9001 Certified Instrumentation
+Company in India manufactures hi-tech Calibration Instruments & Systems
+for Pressure, Temperature & Electrical parameters. Many of our
+Temperature & Pressure Calibrator Models are Certified by DNV. Nagman
+also""", "Nagman")),
+            None)
+
 class OaiRecordTest(django.test.TestCase):
 
     @classmethod
