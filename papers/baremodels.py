@@ -786,7 +786,8 @@ class BareName(BareObject):
         """
         First letter of the last name, for sorting purposes
         """
-        return self.last[0]
+        if self.last:
+            return self.last[0]
 
     def serialize(self):
         """

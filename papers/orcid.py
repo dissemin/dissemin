@@ -152,8 +152,8 @@ class OrcidProfile(object):
         names = []
         credit_name = jpath('credit-name/value', name_item)
         if credit_name is not None:
-            names.append((normalize_name_words(jpath('given-names/value', name_item)),
-                          normalize_name_words(jpath('family-name/value', name_item))))
+            names.append((normalize_name_words(jpath('given-names/value', name_item, '')),
+                          normalize_name_words(jpath('family-name/value', name_item, ''))))
         other_names = jpath('other-names/other-name', name_item, default=[])
         for name in other_names:
             val = name.get('value')

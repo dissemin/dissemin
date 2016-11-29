@@ -22,6 +22,9 @@ from __future__ import unicode_literals
 
 #from requests.exceptions import RequestException
 #import json, requests
+import os
+import os.path as path
+import json
 from backend.crossref import convert_to_name_pair
 from backend.crossref import CrossRefAPI
 from backend.crossref import fetch_dois
@@ -37,6 +40,7 @@ from papers.doi import to_doi
 from papers.errors import MetadataSourceException
 from papers.models import Name
 from papers.models import OaiSource
+from papers.models import Researcher
 from papers.name import parse_comma_name
 from papers.name import most_similar_author
 from papers.orcid import OrcidProfile
@@ -424,7 +428,11 @@ class OrcidPaperSource(PaperSource):
                 profile = OrcidProfile(json=profile)
         except MetadataSourceException as e:
             print e
-            return
+            return 
+
+        # As we have fetched the profile, let's update the Researcher
+        self.researcher = Researcher.get_or_create_by_orcid(orcid_identifier,
+                profile.json, update=True)
 
         # Reference name
         ref_name = profile.name
@@ -473,13 +481,13 @@ class OrcidPaperSource(PaperSource):
         # 2nd attempt with DOIs and CrossRef
         if use_doi:
             # Let's grab papers from CrossRef
-            for success, paper_or_metadata in self.fetch_crossref_incrementally(cr_api, orcid_id):
-                if success:
-                    yield paper_or_metadata
-                else:
-                    ignored_papers.append(paper_or_metadata)
-                    print('This metadata (%s) yields no paper.' %
-                          (unicode(paper_or_metadata)))
+            #for success, paper_or_metadata in self.fetch_crossref_incrementally(cr_api, orcid_id):
+            #    if success:
+            #        yield paper_or_metadata
+            #    else:
+            #        ignored_papers.append(paper_or_metadata)
+            #        print('This metadata (%s) yields no paper.' %
+            #              (unicode(paper_or_metadata)))
 
             # Let's grab papers with DOIs found in our ORCiD profile.
             # FIXME(RaitoBezarius): if we fail here, we should get back the pub
@@ -495,3 +503,40 @@ class OrcidPaperSource(PaperSource):
         self.warn_user_of_ignored_papers(ignored_papers)
         if ignored_papers:
             print('Warning: Total ignored papers: %d' % (len(ignored_papers)))
+
+
+    def bulk_import(self, directory, fetch_papers=True, use_doi=False):
+        """
+        Bulk-imports ORCID profiles from a dmup
+        (warning: this still uses our DOI cache).
+        The directory should contain json versions
+        of orcid profiles, as in the official ORCID
+        dump.
+        """
+
+        seen = False
+        for root, _, fnames in os.walk(directory):
+            for fname in fnames:
+                #if fname == '0000-0003-1349-4524.json':
+                #    seen = True
+                #if not seen:
+                #    continue
+            
+                with open(path.join(root, fname), 'r') as f:
+                    try:
+                        profile = json.load(f)
+                        orcid = profile['orcid-profile'][
+                                        'orcid-identifier'][
+                                        'path']
+                        print orcid
+                        r = Researcher.get_or_create_by_orcid(
+                            orcid, profile, update=True)
+                        if fetch_papers:
+                            papers = self.fetch_orcid_records(orcid,
+                                profile=profile,
+                                use_doi=use_doi)    
+                            for p in papers:
+                                self.save_paper(p, r)
+                    except (ValueError, KeyError) as e:
+                        print "Invalid profile: %s" % fname
+ 

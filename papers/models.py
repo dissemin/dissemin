@@ -253,7 +253,7 @@ class Researcher(models.Model):
     #: Email address for this researcher
     email = models.EmailField(blank=True, null=True)
     #: URL of the homepage
-    homepage = models.URLField(blank=True, null=True)
+    homepage = models.URLField(max_length=1024, blank=True, null=True)
     #: Grade (student, post-doc, professor…)
     role = models.CharField(max_length=128, null=True, blank=True)
     #: ORCiD identifier
@@ -381,6 +381,8 @@ class Researcher(models.Model):
             profile = OrcidProfile(json=profile)
         name = profile.name
         homepage = profile.homepage
+        if homepage:
+            homepage = homepage[:1024]
         email = profile.email
         institution = profile.institution
         if institution:
@@ -441,11 +443,16 @@ class Researcher(models.Model):
         return "researcher=%d" % self.pk
 
     def breadcrumbs(self):
+        """
+        We include the most detailed affiliation for the researcher
+        """
         last = [(unicode(self), self.url)]
-        if not self.department:
-            return last
-        else:
+        if self.department:
             return self.department.breadcrumbs()+last
+        elif self.institution:
+            return self.institution.breadcrumbs()+last
+        else:
+            return last
 
     @cached_property
     def latest_paper(self):
