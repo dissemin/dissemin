@@ -49,7 +49,11 @@ urlpatterns = [
         url(r'^search/department/(?P<pk>\d+)/$',
             views.DepartmentPapersView.as_view(), name='department-papers'),
         url(r'^institution/(?P<pk>\d+)/$',
+            views.InstitutionView.as_view()), # Deprecated URL
+        url(r'^i/(?P<pk>\d+)/(?P<slug>[\w-]*)$',
             views.InstitutionView.as_view(), name='institution'),
+        url(r'^institutions$',
+            views.InstitutionsMapView.as_view(), name='institutions-map'),
         # Tasks, AJAX
         url(r'^ajax/', include('papers.ajax')),
         url(r'^researcher/(?P<pk>\d+)/update/$',

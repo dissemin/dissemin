@@ -340,9 +340,10 @@ class DepartmentView(generic.DetailView):
         return context
 
 
-class InstitutionView(generic.DetailView):
+class InstitutionView(SlugDetailView):
     model = Institution
     template_name = 'papers/institution.html'
+    view_name = 'institution'
 
     def get_context_data(self, **kwargs):
         context = super(InstitutionView, self).get_context_data(**kwargs)
@@ -399,3 +400,7 @@ class PaperView(SlugDetailView):
             del kwargs['doi']
             kwargs['pk'] = self.object.pk
         return super(PaperView, self).redirect(**kwargs)
+
+class InstitutionsMapView(generic.base.TemplateView):
+    template_name = 'papers/institutions.html'
+

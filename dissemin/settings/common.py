@@ -154,6 +154,9 @@ INSTALLED_APPS = (
     'widget_tweaks',
     'capture_tag',
     'memoize',
+    'django_countries',
+    'leaflet',
+    'djgeojson',
 )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
