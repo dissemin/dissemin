@@ -32,6 +32,45 @@ from papers.models import OaiRecord
 from papers.models import OaiSource
 from papers.models import Paper
 from papers.models import Researcher
+from papers.models import Institution
+
+class InstitutionTest(django.test.TestCase):
+    def test_valid(self):
+        institution = {
+            'country': 'FR',
+            'name': '  Université Paris 8 ',
+            'identifier': 'ringgold-23478',
+        }
+        i = Institution.create(institution)
+        self.assertEqual(i.country.code, institution['country'])
+        self.assertEqual(i.name, institution['name'].strip())
+        self.assertTrue(institution['identifier'] in i.identifiers)
+
+    def test_too_long(self):
+        institution = {
+            'country': 'RU',
+            'identifier': None,
+            'name': """
+            Не знаете как вылечить туберкулез - мы вам
+            подскажем, достаточно заказать азиатскую медведку и начать ее принимать.
+            Способ применения достаточно прост, а эффект потрясающий. Не ждите, ведь
+            завтра может быть уже поздно. Звоните по тел +796О8887578 или заходите на
+            сайт http://kypit-medvedki.ru/
+            """}
+        # This institution is too long for our model!
+        self.assertEqual(
+            Institution.create(institution),
+            None)
+
+    def test_invalid_country_code(self):
+        institution = {
+            'country': 'XX',
+            'identifier': None,
+            'name': 'University of planet earth'}
+
+        self.assertEqual(
+            Institution.create(institution),
+            None)
 
 
 class ResearcherTest(django.test.TestCase):
@@ -83,7 +122,7 @@ class ResearcherTest(django.test.TestCase):
                 update=True)
         self.assertTrue('ringgold-2167' in r.institution.identifiers)
         self.assertEqual(r.name, old_name)
-        
+
 
     def test_name_conflict(self):
         # Both are called "John Doe"

@@ -62,6 +62,7 @@ from django.contrib.auth.models import User
 from django.contrib.postgres.fields import JSONField
 from django.contrib.postgres.fields import ArrayField
 from django_countries.fields import CountryField
+from django_countries.fields import countries
 from djgeojson.fields import PointField
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
@@ -188,10 +189,17 @@ class Institution(models.Model):
         
         The dictionary should contain 'name' and 'country'
         values, and possibly an identifier (such as a Ringgold one).
+
+        Returns None if the institution is invalid
+        (invalid country code, name too long…)
         """
         # cleanup arguments
         dct['name'] = dct['name'].strip()
         dct['country'] = dct['country'].strip()
+        # django_countries does not validate the countries
+        # against the list it contains (!?)
+        if dct['country'] not in dict(countries):
+            return
 
         # create a list of identifiers for this institution
         identifiers = []
@@ -207,26 +215,29 @@ class Institution(models.Model):
         matches = Institution.objects.filter(
             identifiers__overlap=identifiers)
         
-        if not matches:
-            i = cls(
-                name=dct['name'],
-                country=dct['country'],
-                identifiers=identifiers)
-            i.save()
-            return i
-        else:
-            # TODO case where there are multiple matches : merge
-            i = matches[0]
-            old_identifiers = set(i.identifiers or [])
-            new_identifiers = old_identifiers | set(identifiers)
-            if old_identifiers != new_identifiers:
-                i.identifiers = list(new_identifiers)
-
-                # shorter names are better
-                if len(dct['name']) < len(i.name):
-                    i.name = dct['name']
+        try:
+            if not matches:
+                i = cls(
+                    name=dct['name'],
+                    country=dct['country'],
+                    identifiers=identifiers)
                 i.save()
-            return i 
+                return i
+            else:
+                # TODO case where there are multiple matches : merge
+                i = matches[0]
+                old_identifiers = set(i.identifiers or [])
+                new_identifiers = old_identifiers | set(identifiers)
+                if old_identifiers != new_identifiers:
+                    i.identifiers = list(new_identifiers)
+
+                    # shorter names are better
+                    if len(dct['name']) < len(i.name):
+                        i.name = dct['name']
+                    i.save()
+                return i 
+        except DataError: # did not fit in the DB
+            pass
     
     def merge(self, i):
         """
