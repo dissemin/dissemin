@@ -169,16 +169,6 @@ AUTHENTICATION_BACKENDS = (
 )
 
 
-if ENABLE_CAS:
-    MIDDLEWARE_CLASSES += (
-        'django_cas_ng.middleware.CASMiddleware',
-    )
-
-    AUTHENTICATION_BACKENDS += (
-        'django_cas_ng.backends.CASBackend',
-    )
-
-
 TEMPLATES = [
         {
             'BACKEND': 'django.template.backends.django.DjangoTemplates',
