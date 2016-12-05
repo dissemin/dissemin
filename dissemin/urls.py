@@ -127,3 +127,10 @@ for provider in providers.registry.get_list():
     prov_urlpatterns = getattr(prov_mod, 'urlpatterns', None)
     if prov_urlpatterns:
         urlpatterns += prov_urlpatterns
+
+# Debug toolbar
+if 'debug_toolbar' in settings.INSTALLED_APPS:
+    import debug_toolbar
+    urlpatterns.append(
+      url(r'^__debug__/', include(debug_toolbar.urls)))
+
