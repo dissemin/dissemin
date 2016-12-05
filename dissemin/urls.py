@@ -21,7 +21,6 @@
 
 import allauth.account.views
 from allauth.socialaccount import providers
-from dissemin.settings import UNIVERSITY_BRANDING
 from django.conf import settings
 from django.conf.urls import include
 from django.conf.urls import url
@@ -72,7 +71,7 @@ def logoutView(request):
 
 def temp(name):
     def handler(request, *args, **kwargs):
-        return render(request, name, UNIVERSITY_BRANDING)
+        return render(request, name, {})
     return handler
 
 js_info_dict = {

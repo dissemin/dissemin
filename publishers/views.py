@@ -19,7 +19,6 @@
 
 from __future__ import unicode_literals
 
-from dissemin.settings import UNIVERSITY_BRANDING
 from django.core.paginator import EmptyPage
 from django.core.paginator import PageNotAnInteger
 from django.core.paginator import Paginator
@@ -91,8 +90,6 @@ class PublishersView(SearchView):
 
     def get_context_data(self, **kwargs):
         context = super(PublishersView, self).get_context_data(**kwargs)
-
-        context.update(UNIVERSITY_BRANDING)
 
         context['search_description'] = _('Publishers')
         context['nb_results'] = self.queryset.count()
