@@ -124,7 +124,7 @@ Create an account on `Sandbox ORCID <sandbox.orcid.org>`_.
 
 Go to "Developer Tools", verify your mail using `Mailinator <mailinator.com>`.
 
-Set up a redirection URI to be `localhost:8000` (supposed to be where your Dissemin instance server is running).
+Set up a redirection URI to be `localhost:8080` (supposed to be where your Dissemin instance server is running).
 
 Take your client ID and your secret key, you'll use them later.
 
@@ -134,7 +134,7 @@ Create a super user::
 
    python manage.py createsuperuser
 
-Browse to ``localhost:8000/admin`` and log in the administration interface.
+Browse to ``localhost:8080/admin`` and log in the administration interface.
 Go to "Social Application" and add a new one. Set the provider to ``orcid.org``.
 
 Here, you can use your app ID as your client ID and the secret key that you were given by ORCID earlier.
@@ -148,7 +148,7 @@ Add deposit interfaces
 If you want to enable deposit of papers to external repositories (such as Zenodo),
 you need to register them in the admin interface.
 
-The page `localhost:8000/admin/deposit/repository/` lists the currently registered
+The page `localhost:8080/admin/deposit/repository/` lists the currently registered
 interfaces and allows you to add one.
 
 To add a repository, you need the following settings:
