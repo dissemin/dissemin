@@ -178,7 +178,7 @@ class Institution(models.Model):
          sorted by last name (prefetches their stats as well)
         """
         return self.researcher_set.select_related('name', 'stats').order_by('name')
-    
+
     @classmethod
     def create(cls, dct):
         """
@@ -186,7 +186,7 @@ class Institution(models.Model):
         as returned by OrcidProfile.institution,
         save the institution in the DB (or return
         an existing duplicate).
-        
+
         The dictionary should contain 'name' and 'country'
         values, and possibly an identifier (such as a Ringgold one).
 
@@ -214,7 +214,7 @@ class Institution(models.Model):
         # this uses our GIN index on identitfiers
         matches = Institution.objects.filter(
             identifiers__overlap=identifiers)
-        
+
         try:
             if not matches:
                 i = cls(
@@ -235,10 +235,10 @@ class Institution(models.Model):
                     if len(dct['name']) < len(i.name):
                         i.name = dct['name']
                     i.save()
-                return i 
+                return i
         except DataError: # did not fit in the DB
             pass
-    
+
     def merge(self, i):
         """
         Merges another institution into self
@@ -271,7 +271,7 @@ class Institution(models.Model):
             self.coords = {'type':'Point','coordinates':
                         [float(latitude),float(longitude)]}
             self.save(update_fields=['coords'])
-        
+
         if sleep_time:
             from time import sleep
             sleep(sleep_time)
@@ -483,7 +483,7 @@ class Researcher(models.Model):
             researcher = Researcher.objects.get(orcid=orcid)
         except Researcher.DoesNotExist:
             pass
-        
+
         if researcher and not update:
             return researcher
 
@@ -620,7 +620,7 @@ class Name(models.Model, BareName):
             return (None, False)
 
         n = cls.create(first, last)
-        
+
         # Do this check after escaping, because this migth expand the
         # name.
         if (len(n.first or '') >= MAX_NAME_LENGTH-1 or
@@ -706,6 +706,7 @@ class Paper(models.Model, BarePaper):
     def __init__(self, *args, **kwargs):
         super(Paper, self).__init__(*args, **kwargs)
         self.just_created = False
+        self.cached_oairecords = None
 
     ### Relations to other models, reimplemented from :class:`BarePaper` ###
 
@@ -737,6 +738,10 @@ class Paper(models.Model, BarePaper):
         The list of OAI records associated with this paper, returned
         as a queryset.
         """
+        if self.cached_oairecords is not None:
+            return self.cached_oairecords
+        # we don't update the cache yet as it would fetch the queryset
+        # straight away
         return self.oairecord_set.all()
 
     def add_author(self, author, position=None):
@@ -1283,6 +1288,10 @@ class OaiRecord(models.Model, BareOaiRecord):
                     )
             # with transaction.atomic():
             record.save()
+
+            if paper.cached_oairecords is not None:
+                paper.cached_oairecords.append(record)
+
             return record
 
         # Update the duplicate if necessary
@@ -1328,6 +1337,12 @@ class OaiRecord(models.Model, BareOaiRecord):
             if changed:
                 try:
                     match.save()
+
+                    if about.cached_oairecords is not None:
+                        for i, rec in enumerate(about.cached_oairecords):
+                            if rec.pk == match.pk:
+                                about.cached_oairecords[i] = rec
+
                 except DataError as e:
                     raise ValueError(
                         'Unable to create OAI record:\n'+unicode(e))
@@ -1368,7 +1383,9 @@ class OaiRecord(models.Model, BareOaiRecord):
         if short_splash == None or paper == None:
             return
 
-        for record in paper.oairecord_set.all():
+        records = list(paper.oairecord_set.all())
+        paper.cached_oairecords = records
+        for record in records:
             short_splash2 = shorten(record.splash_url)
             short_pdf2 = shorten(record.pdf_url)
             if (short_splash == short_splash2 or
