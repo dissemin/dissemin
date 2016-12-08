@@ -83,9 +83,9 @@ class OrcidProfileTest(unittest.TestCase):
     def test_institution(self):
         self.assertEqual(OrcidProfile(
             id='0000-0002-0022-2290').institution,
-            {'name':'Massachusetts Institute of Technology',
-             'identifier':'ringgold-2167',
-             'country':'US'})
+            {'name':'Ecole Normale Superieure',
+             'identifier':None,
+             'country':'FR'})
         self.assertEqual(OrcidProfile(
             id='0000-0002-5654-4053').institution,
             {'country': 'FR',
