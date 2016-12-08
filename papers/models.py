@@ -1289,8 +1289,8 @@ class OaiRecord(models.Model, BareOaiRecord):
             # with transaction.atomic():
             record.save()
 
-            if self.cached_oairecords is not None:
-                self.cached_oairecords.append(record)
+            if about.cached_oairecords is not None:
+                about.cached_oairecords.append(record)
 
             return record
 
