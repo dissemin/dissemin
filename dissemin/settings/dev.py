@@ -28,6 +28,11 @@ INSTALLED_APPS += (
     'debug_toolbar',
 )
 
+
+MIDDLEWARE_CLASSES += (
+     'debug_toolbar.middleware.DebugToolbarMiddleware',
+)
+
 # Base domain of the ORCiD API.
 ORCID_BASE_DOMAIN = 'orcid.org'  # for the sandbox API
 

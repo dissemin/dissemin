@@ -25,6 +25,7 @@ django-memoize
 django-redis-cache
 django-solo
 django-widget-tweaks
+django-debug-toolbar
 djangorestframework
 elasticsearch
 html5lib==0.999999999

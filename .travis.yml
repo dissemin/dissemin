@@ -49,7 +49,6 @@ before_install:
   - export PIP_USE_MIRRORS=true
   - echo "from .travis import *" > dissemin/settings/__init__.py
   - cp dissemin/settings/secret_template.py dissemin/settings/secret.py
-  - cp dissemin/settings/university_template.py dissemin/settings/university.py
 
 install:
   - pip install setuptools --upgrade

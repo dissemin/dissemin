@@ -21,7 +21,6 @@
 
 import allauth.account.views
 from allauth.socialaccount import providers
-from dissemin.settings import UNIVERSITY_BRANDING
 from django.conf import settings
 from django.conf.urls import include
 from django.conf.urls import url
@@ -72,7 +71,7 @@ def logoutView(request):
 
 def temp(name):
     def handler(request, *args, **kwargs):
-        return render(request, name, UNIVERSITY_BRANDING)
+        return render(request, name, {})
     return handler
 
 js_info_dict = {
@@ -128,3 +127,10 @@ for provider in providers.registry.get_list():
     prov_urlpatterns = getattr(prov_mod, 'urlpatterns', None)
     if prov_urlpatterns:
         urlpatterns += prov_urlpatterns
+
+# Debug toolbar
+if 'debug_toolbar' in settings.INSTALLED_APPS:
+    import debug_toolbar
+    urlpatterns.append(
+      url(r'^__debug__/', include(debug_toolbar.urls)))
+
