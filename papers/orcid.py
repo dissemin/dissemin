@@ -117,7 +117,9 @@ class OrcidProfile(object):
             name = jpath('organization/name', affiliation)
             country = jpath('organization/address/country', affiliation)
             identifier = None
-            if source and country:
+            # we skip ringgold identifiers, because they suck:
+            # https://github.com/ORCID/ORCID-Source/issues/3297
+            if source and id and source.lower() != 'ringgold':
                 identifier = unicode(source).lower()+'-'+unicode(id)
 
             if name and country:
