@@ -58,9 +58,11 @@ class PaperIndex(indexes.SearchIndex, indexes.Indexable):
                     .values_list('department', flat=True))
 
     def prepare_publisher(self, obj):
-        oairecord = obj.oairecords.filter(journal__isnull=False).first()
-        return getattr(getattr(oairecord, 'publisher', None), 'id', None)
+        for r in obj.oairecords:
+            if r.publisher_id:
+                return r.publisher_id
 
     def prepare_journal(self, obj):
-        oairecord = obj.oairecords.filter(journal__isnull=False).first()
-        return getattr(getattr(oairecord, 'journal', None), 'id', None)
+        for r in obj.oairecords:
+            if r.journal_id:
+                return r.journal_id

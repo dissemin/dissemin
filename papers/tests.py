@@ -95,8 +95,7 @@ class ResearcherTest(django.test.TestCase):
         r = Researcher.get_or_create_by_orcid('0000-0002-0022-2290',
             instance='sandbox.orcid.org')
         self.assertEqual(r.institution.name,
-                'Massachusetts Institute of Technology')
-        self.assertTrue('ringgold-2167' in r.institution.identifiers)
+                'Ecole Normale Superieure')
 
     def test_institution_match(self):
         # first, load a profile from someone with
@@ -112,16 +111,16 @@ class ResearcherTest(django.test.TestCase):
         self.assertEqual(r.institution, r2.institution)
 
     def test_refresh(self):
-        r = Researcher.get_or_create_by_orcid('0000-0002-0022-2290')
-        self.assertTrue('ringgold-2167' in r.institution.identifiers)
+        r = Researcher.get_or_create_by_orcid('0000-0002-0022-2290',
+                    instance='sandbox.orcid.org')
+        self.assertEqual(r.institution.name, 'Ecole Normale Superieure')
         r.institution = None
-        old_name = r.name
         r.name = Name.lookup_name(('John','Doe'))
         r.save()
         r = Researcher.get_or_create_by_orcid('0000-0002-0022-2290',
+                instance='sandbox.orcid.org',
                 update=True)
-        self.assertTrue('ringgold-2167' in r.institution.identifiers)
-        self.assertEqual(r.name, old_name)
+        self.assertEqual(r.institution.name, 'Ecole Normale Superieure')
 
 
     def test_name_conflict(self):
