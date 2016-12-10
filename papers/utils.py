@@ -174,7 +174,7 @@ def maybe_recapitalize_title(title):
 overescaped_re = re.compile(r'&amp;#(\d+);')
 unicode4_re = re.compile(r'(\\u[0-9A-Z]{4})(?![0-9A-Z])')
 whitespace_re = re.compile(r'\s+')
-ltgt_re = re.compile(r'.*[<>]')
+ltgt_re = re.compile(r'.*[<>&]')
 
 html_cleaner = Cleaner()
 html_cleaner.allow_tags = ['sub', 'sup', 'b', 'span']
@@ -273,13 +273,16 @@ def sanitize_html(s):
     u'$\\u03b1$-conversion'
     >>> sanitize_html('$$\\\\eta + \\\\omega$$')
     u'$\\u03b7 + \\u03c9$'
+    >>> sanitize_html('abc & def')
+    u'abc &amp; def'
     """
     s = overescaped_re.sub(r'&#\1;', s)
     s = unicode4_re.sub(lambda x: x.group(1).decode('unicode-escape'), s)
     s = whitespace_re.sub(r' ', s)
     s = unescape_latex(s)
     s = kill_double_dollars(s)
-    if ltgt_re.match(s): # only run HTML sanitizer if there is a '<' or '>'
+    if ltgt_re.match(s): # only run HTML sanitizer if there is a
+                         # '<', '>' or '&'
         orig = html_cleaner.clean_html('<span>'+s+'</span>')
         s = orig[6:-7] # We cut the <span />
     return s
