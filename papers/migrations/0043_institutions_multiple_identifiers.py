@@ -9,7 +9,10 @@ from papers.utils import iunaccent
 def populate_identifiers(apps, se):
     Institution = apps.get_model('papers', 'Institution')
     for i in Institution.objects.all():
-        i.identifiers = [i.identifier, i.country+':'+iunaccent(i.name)]
+        if i.country and i.name:
+            i.identifiers = [i.identifier, i.country+':'+iunaccent(i.name)]
+        else:
+            i.identifiers = [i.identifier]
         i.save(update_fields=['identifiers'])
 
 def backwards(apps, se):
