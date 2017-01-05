@@ -9,7 +9,7 @@ Using the Dissemin Virtual Machine
 4. Go to the local copy, directory "~/dissemin"
 5. Update the local copy by running ./pull_and_update.sh
 6. Run the server with "./launch.sh"
-7. You can see the result on http://localhost:8000/ (from both the VM and the host)
+7. You can see the result on http://localhost:8080/ (from both the VM and the host)
 
 You can also connect to the guest from the host on port 8022. By default, for
 security reasons, the SSH server and Web server only listen to connections from

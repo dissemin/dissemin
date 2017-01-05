@@ -91,7 +91,9 @@ from backend.pubtype_translations import CROSSREF_PUBTYPE_ALIASES
 #
 
 # Number of results per page we ask the CrossRef search interface
-nb_results_per_request = 100
+nb_results_per_request = 50
+# Same but when fetching metadata for a list of dois
+nb_dois_per_batch = 25
 # Maximum number of pages we request
 max_crossref_batches_per_researcher = 10
 # Maximum timeout for the CrossRef interface (sometimes it is a bit lazy)
@@ -331,9 +333,9 @@ def fetch_dois_by_batch(doi_list):
 
     if len(doi_list) == 0:
         return []
-    elif len(doi_list) > nb_results_per_request:
-        first_dois = fetch_dois_by_batch(doi_list[:nb_results_per_request])
-        last_dois = fetch_dois_by_batch(doi_list[nb_results_per_request:])
+    elif len(doi_list) > nb_dois_per_batch:
+        first_dois = fetch_dois_by_batch(doi_list[:nb_dois_per_batch])
+        last_dois = fetch_dois_by_batch(doi_list[nb_dois_per_batch:])
         return first_dois + last_dois
 
     params = {'filter': ','.join(['doi:'+doi for doi in doi_list])}

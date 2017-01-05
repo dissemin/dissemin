@@ -27,9 +27,11 @@ from django.http import HttpResponse
 from django.http import HttpResponseNotFound
 from django.shortcuts import get_object_or_404
 from django.views.decorators.http import require_POST
+from djgeojson.views import GeoJSONLayerView
 from jsonview.decorators import json_view
 from papers.models import Paper
 from papers.models import Researcher
+from papers.models import Institution
 from papers.user import is_admin
 from papers.user import is_authenticated
 from papers.utils import kill_html
@@ -201,6 +203,13 @@ def changePublisherStatus(request):
     except ObjectDoesNotExist:
         return HttpResponseNotFound('NOK', content_type='text/plain')
 
+class InstitutionsMapView(GeoJSONLayerView):
+    model = Institution
+    geometry_field = 'coords'
+
+    def get_queryset(self):
+        return Institution.objects.filter(coords__isnull=False)
+
 urlpatterns = [
     #    url(r'^annotate-paper-(?P<pk>\d+)-(?P<status>\d+)$', annotatePaper, name='ajax-annotatePaper'),
     url(r'^delete-researcher-(?P<pk>\d+)$',
@@ -216,4 +225,6 @@ urlpatterns = [
         name='ajax-waitForConsolidatedField'),
     url(r'^set-researcher-department$', setResearcherDepartment,
         name='ajax-setResearcherDepartment'),
+    url(r'^institutions.geojson', InstitutionsMapView.as_view(),
+        name='ajax-institutions-geojson'),
 ]

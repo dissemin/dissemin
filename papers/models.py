@@ -60,6 +60,10 @@ from dissemin.settings import POSSIBLE_LANGUAGE_CODES
 from dissemin.settings import PROFILE_REFRESH_ON_LOGIN
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import JSONField
+from django.contrib.postgres.fields import ArrayField
+from django_countries.fields import CountryField
+from django_countries.fields import countries
+from djgeojson.fields import PointField
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
 from django.core.exceptions import ObjectDoesNotExist
@@ -84,6 +88,7 @@ from papers.name import unify_name_lists
 from papers.orcid import OrcidProfile
 from papers.utils import affiliation_is_greater
 from papers.utils import validate_orcid
+from papers.utils import iunaccent
 from publishers.models import Journal
 from publishers.models import Publisher
 from solo.models import SingletonModel
@@ -112,6 +117,12 @@ class Institution(models.Model):
     """
     #: The full name of the institution
     name = models.CharField(max_length=300)
+    #: A list of identifiers for the institution (eg: ringgold-2167 for MIT)
+    identifiers = ArrayField(models.CharField(max_length=256), null=True, blank=True)
+    #: Country code
+    country = CountryField(null=True, blank=True)
+    #: Coordinates
+    coords = PointField(null=True, blank=True)
 
     #: :py:class:`AccessStatistics` about the papers authored in this institution.
     stats = models.ForeignKey(AccessStatistics, null=True, blank=True)
@@ -150,10 +161,121 @@ class Institution(models.Model):
         """
         The URL of the main page (list of departments for this institution).
         """
-        return reverse('institution', args=[self.pk])
+        return reverse('institution', args=[self.pk, self.slug])
+
+    @property
+    def slug(self):
+        return slugify(self.name)
 
     def breadcrumbs(self):
         return [(unicode(self), self.url)]
+
+    @property
+    def sorted_researchers(self):
+        """
+        List of :py:class:`Researcher` who are directly affiliated to
+        this institution, without department.
+         sorted by last name (prefetches their stats as well)
+        """
+        return self.researcher_set.select_related('name', 'stats').order_by('name')
+
+    @classmethod
+    def create(cls, dct):
+        """
+        Given a dictionary representing an institution,
+        as returned by OrcidProfile.institution,
+        save the institution in the DB (or return
+        an existing duplicate).
+
+        The dictionary should contain 'name' and 'country'
+        values, and possibly an identifier (such as a Ringgold one).
+
+        Returns None if the institution is invalid
+        (invalid country code, name too long…)
+        """
+        # cleanup arguments
+        dct['name'] = dct['name'].strip()
+        dct['country'] = dct['country'].strip()
+        # django_countries does not validate the countries
+        # against the list it contains (!?)
+        if dct['country'] not in dict(countries):
+            return
+
+        # create a list of identifiers for this institution
+        identifiers = []
+        # add the 'fingerprint' for that institution
+        identifiers.append(
+            dct['country']+':'+iunaccent(dct['name']))
+        # maybe add a disambiguated identifier
+        if dct.get('identifier'):
+            identifiers.append(
+                dct.get('identifier'))
+
+        # this uses our GIN index on identitfiers
+        matches = Institution.objects.filter(
+            identifiers__overlap=identifiers)
+
+        try:
+            if not matches:
+                i = cls(
+                    name=dct['name'],
+                    country=dct['country'],
+                    identifiers=identifiers)
+                i.save()
+                return i
+            else:
+                # TODO case where there are multiple matches : merge
+                i = matches[0]
+                old_identifiers = set(i.identifiers or [])
+                new_identifiers = old_identifiers | set(identifiers)
+                if old_identifiers != new_identifiers:
+                    i.identifiers = list(new_identifiers)
+
+                    # shorter names are better
+                    if len(dct['name']) < len(i.name):
+                        i.name = dct['name']
+                    i.save()
+                return i
+        except DataError: # did not fit in the DB
+            pass
+
+    def merge(self, i):
+        """
+        Merges another institution into self
+        """
+        if len(i.name) < len(self.name):
+            self.name = i.name
+        self.identifiers = list(set(self.identifiers)|
+                             set(i.identifiers))
+        self.save()
+        i.researcher_set.all().update(institution=self)
+        i.department_set.all().update(institution=self)
+        i.delete()
+
+    def update_coords(self, sleep_time=5):
+        """
+        Attempts to fetch the position of the institution
+        via OpenStreetMap Nominatim.
+        """
+        import requests
+        r = requests.get('http://nominatim.openstreetmap.org/search/',
+            params={
+            'q':self.name,
+            'countrycodes':self.country.code,
+            'format':'json'})
+        data = r.json()
+
+        if(len(data) > 0):
+            longitude = data[0]['lat']
+            latitude = data[0]['lon']
+            self.coords = {'type':'Point','coordinates':
+                        [float(latitude),float(longitude)]}
+            self.save(update_fields=['coords'])
+
+        if sleep_time:
+            from time import sleep
+            sleep(sleep_time)
+
 
 
 class Department(models.Model):
@@ -174,7 +296,6 @@ class Department(models.Model):
     def sorted_researchers(self):
         """List of :py:class:`Researcher` in this department sorted by last name (prefetches their stats as well)"""
         return self.researcher_set.select_related('name', 'stats').order_by('name')
-
     def __unicode__(self):
         return self.name
 
@@ -234,13 +355,17 @@ class Researcher(models.Model):
     #: It can be associated to a user
     user = models.ForeignKey(User, null=True, blank=True)
     #: It can be affiliated to a department
-    department = models.ForeignKey(Department, null=True)
+    department = models.ForeignKey(Department, null=True,
+                                on_delete=models.SET_NULL)
+    #: Or directly to an institution
+    institution = models.ForeignKey(Institution, null=True,
+                                on_delete=models.SET_NULL)
 
     # Various info about the researcher (not used internally)
     #: Email address for this researcher
     email = models.EmailField(blank=True, null=True)
     #: URL of the homepage
-    homepage = models.URLField(blank=True, null=True)
+    homepage = models.URLField(max_length=1024, blank=True, null=True)
     #: Grade (student, post-doc, professor…)
     role = models.CharField(max_length=128, null=True, blank=True)
     #: ORCiD identifier
@@ -338,43 +463,72 @@ class Researcher(models.Model):
         self.save(update_fields=['harvester'])
 
     @classmethod
-    def get_or_create_by_orcid(cls, orcid, profile=None, user=None):
+    def get_or_create_by_orcid(cls, orcid, profile=None,
+                    user=None, update=False, instance='orcid.org'):
         """
         Creates (or returns an existing) researcher from its ORCID id.
 
         :param profile: an :class:`OrcidProfile` object if it has already been fetched
                         from the API (otherwise we will fetch it ourselves)
         :param user: an user to associate with the profile.
+        :param update: refresh researcher attributes even if it already exists
         :returns: a :class:`Researcher` if everything went well, raises MetadataSourceException otherwise
         """
         researcher = None
         if orcid is None:
             raise MetadataSourceException('Invalid ORCID id')
+
+        researcher = None
         try:
             researcher = Researcher.objects.get(orcid=orcid)
         except Researcher.DoesNotExist:
-            if profile is None:
-                profile = OrcidProfile(id=orcid)
-            else:
-                profile = OrcidProfile(json=profile)
-            name = profile.name
-            homepage = profile.homepage
-            email = profile.email
+            pass
+
+        if researcher and not update:
+            return researcher
+
+        if profile is None:
+            profile = OrcidProfile(id=orcid, instance=instance)
+        else:
+            profile = OrcidProfile(json=profile)
+        name = profile.name
+        homepage = profile.homepage
+        if homepage:
+            homepage = homepage[:1024]
+        email = profile.email
+        institution = profile.institution
+        if institution:
+            institution  = Institution.create(institution)
+
+        if not researcher:
             researcher = Researcher.create_by_name(name[0], name[1], orcid=orcid,
-                                                   user=user, homepage=homepage, email=email)
+                    user=user, homepage=homepage, email=email,
+                    institution=institution)
+        if not researcher:
+            # invalid name?
+            return
 
-            # Ensure that extra info is added.
-            save = False
-            for kw, val in [('homepage', homepage), ('orcid', orcid), ('email', email)]:
-                if not researcher.__dict__[kw] and val:
-                    researcher.__dict__[kw] = val
-                    save = True
-            if save:
-                researcher.save()
+        # Ensure that extra info is added.
+        name = Name.lookup_name(name)
+        if not name:
+            return
 
-            for variant in profile.other_names:
-                confidence = name_similarity(variant, variant)
-                name = Name.lookup_name(variant)
+        save = False
+        for kw, val in [('homepage', homepage),
+                        ('orcid', orcid),
+                        ('email', email),
+                        ('institution', institution),
+                        ('name', name)]:
+            if getattr(researcher, kw) != val:
+                setattr(researcher, kw, val)
+                save = True
+        if save:
+            researcher.save()
+
+        for variant in profile.other_names:
+            confidence = name_similarity(variant, variant)
+            name = Name.lookup_name(variant)
+            if name is not None:
                 researcher.add_name_variant(name, confidence)
 
         return researcher
@@ -387,6 +541,8 @@ class Researcher(models.Model):
         this researcher will be returned. In any other case, a new researcher will be created.
         """
         name, created = Name.get_or_create(first, last)
+        if not name:
+            return
 
         if kwargs.get('orcid') is not None:
             orcid = validate_orcid(kwargs['orcid'])
@@ -407,11 +563,16 @@ class Researcher(models.Model):
         return "researcher=%d" % self.pk
 
     def breadcrumbs(self):
+        """
+        We include the most detailed affiliation for the researcher
+        """
         last = [(unicode(self), self.url)]
-        if not self.department:
-            return last
-        else:
+        if self.department:
             return self.department.breadcrumbs()+last
+        elif self.institution:
+            return self.institution.breadcrumbs()+last
+        else:
+            return last
 
     @cached_property
     def latest_paper(self):
@@ -455,8 +616,18 @@ class Name(models.Model, BareName):
         Replacement for the regular get_or_create, so that the full
         name is built based on first and last
         """
+        if not first and not last:
+            return (None, False)
+
         n = cls.create(first, last)
-        return cls.objects.get_or_create(full=n.full,
+
+        # Do this check after escaping, because this migth expand the
+        # name.
+        if (len(n.first or '') >= MAX_NAME_LENGTH-1 or
+            len(n.last or '') >= MAX_NAME_LENGTH-1):
+            return (None, False)
+
+        return cls.objects.get_or_create(full=n.full[:255],
                                          defaults={'first': n.first, 'last': n.last})
 
     @classmethod
@@ -511,11 +682,6 @@ class Paper(models.Model, BarePaper):
     #: Full list of authors for this paper
     authors_list = JSONField(default=list)
 
-    #: Relation to Researcher: all researchers that appear in
-    #: authors_list (not all authors are researchers because not all
-    #: authors have profiles on dissemin)
-    researchers = models.ManyToManyField(Researcher)
-
     last_modified = models.DateTimeField(auto_now=True, db_index=True)
     visible = models.BooleanField(default=True)
     last_annotation = models.CharField(max_length=32, null=True, blank=True)
@@ -535,6 +701,7 @@ class Paper(models.Model, BarePaper):
     def __init__(self, *args, **kwargs):
         super(Paper, self).__init__(*args, **kwargs)
         self.just_created = False
+        self.cached_oairecords = None
 
     ### Relations to other models, reimplemented from :class:`BarePaper` ###
 
@@ -566,7 +733,20 @@ class Paper(models.Model, BarePaper):
         The list of OAI records associated with this paper, returned
         as a queryset.
         """
+        if self.cached_oairecords is not None:
+            return self.cached_oairecords
+        # we don't update the cache yet as it would fetch the queryset
+        # straight away
         return self.oairecord_set.all()
+
+    @property
+    def researchers(self):
+        """
+        The list of researchers associated with this paper, returned
+        as a list.
+        """
+        return [ a['researcher_id'] for a in self.authors_list
+                 if 'researcher_id' in a]
 
     def add_author(self, author, position=None):
         """
@@ -582,20 +762,19 @@ class Paper(models.Model, BarePaper):
         if position is None:
             position = len(self.authors_list)
         self.authors_list.insert(position, author_serialized)
-        if author.researcher_id:
-            self.researchers.add(author.researcher_id)
         return author
 
     def set_researcher(self, position, researcher_id):
         """
         Sets the researcher_id for the author at the given position
-        (0-indexed)
+        (0-indexed).
+        researcher_id can be set to None to unaffiliate an author
+        with a researcher.
         """
         if position < 0 or position > len(self.authors_list):
             raise ValueError('Invalid position provided')
         self.authors_list[position]['researcher_id'] = researcher_id
         self.save(update_fields=['authors_list'])
-        self.researchers.add(researcher_id)
 
     def add_oairecord(self, oairecord):
         """
@@ -1112,6 +1291,10 @@ class OaiRecord(models.Model, BareOaiRecord):
                     )
             # with transaction.atomic():
             record.save()
+
+            if about.cached_oairecords is not None:
+                about.cached_oairecords.append(record)
+
             return record
 
         # Update the duplicate if necessary
@@ -1157,6 +1340,12 @@ class OaiRecord(models.Model, BareOaiRecord):
             if changed:
                 try:
                     match.save()
+
+                    if about.cached_oairecords is not None:
+                        for i, rec in enumerate(about.cached_oairecords):
+                            if rec.pk == match.pk:
+                                about.cached_oairecords[i] = rec
+
                 except DataError as e:
                     raise ValueError(
                         'Unable to create OAI record:\n'+unicode(e))
@@ -1197,7 +1386,9 @@ class OaiRecord(models.Model, BareOaiRecord):
         if short_splash == None or paper == None:
             return
 
-        for record in paper.oairecord_set.all():
+        records = list(paper.oairecord_set.all())
+        paper.cached_oairecords = records
+        for record in records:
             short_splash2 = shorten(record.splash_url)
             short_pdf2 = shorten(record.pdf_url)
             if (short_splash == short_splash2 or

@@ -33,6 +33,7 @@ from urllib import quote  # for the Google Scholar and CORE link
 from urllib import urlencode
 
 from django.apps import apps
+from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
 from django.template.defaultfilters import slugify
 from django.utils.functional import cached_property
@@ -86,6 +87,8 @@ class BareObject(object):
         Keyword arguments can be used to set fields of this bare object.
         """
         super(BareObject, self).__init__()
+        if isinstance(self, models.Model):
+            return
         for f in self._bare_fields + self._bare_foreign_key_fields:
             if not hasattr(self, f):
                 self.__dict__[f] = None
@@ -522,7 +525,7 @@ class BarePaper(BareObject):
         :param cached_oairecords: the list of OaiRecords if we already have it
                            from somewhere (otherwise it is fetched)
         """
-        records = cached_oairecords or self.oairecords
+        records = list(cached_oairecords or self.oairecords)
         records = sorted(records, key=(lambda r: -r.priority))
 
         self.pdf_url = None
@@ -786,7 +789,10 @@ class BareName(BareObject):
         """
         First letter of the last name, for sorting purposes
         """
-        return self.last[0]
+        if self.last:
+            return self.last[0]
+        elif self.first:
+            return self.first[0]
 
     def serialize(self):
         """
@@ -854,7 +860,7 @@ class BareOaiRecord(BareObject):
 
     def __init__(self, *args, **kwargs):
         super(BareOaiRecord, self).__init__(*args, **kwargs)
-        if self.source:
+        if not isinstance(self, models.Model) and self.source:
             self.priority = self.source.priority
 
     def update_priority(self):

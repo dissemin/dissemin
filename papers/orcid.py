@@ -37,13 +37,13 @@ class OrcidProfile(object):
     An orcid profile as returned by the ORCID public API (in JSON)
     """
 
-    def __init__(self, id=None, json=None):
+    def __init__(self, id=None, json=None, instance='orcid.org'):
         """
         Create a profile by ORCID ID or by providing directly the parsed JSON payload.
         """
         self.json = json
         if id is not None:
-            self.fetch(id)
+            self.fetch(id, instance=instance)
 
     def __getitem__(self, key):
         return self.json[key]
@@ -100,6 +100,37 @@ class OrcidProfile(object):
             return urlize(jpath('url/value', lst[0])) or None
 
     @property
+    def institution(self):
+        """
+        The name and identifier of the latest institution associated
+        with this researcher
+        """
+        lst = jpath(
+            'orcid-profile/orcid-activities/affiliations/affiliation',
+            self.json, default=[])
+
+        for affiliation in lst:
+            disamb = jpath('organization/disambiguated-organization',
+                affiliation, default={})
+            source = disamb.get('disambiguation-source')
+            id = disamb.get('disambiguated-organization-identifier')
+            name = jpath('organization/name', affiliation)
+            country = jpath('organization/address/country', affiliation)
+            identifier = None
+            # we skip ringgold identifiers, because they suck:
+            # https://github.com/ORCID/ORCID-Source/issues/3297
+            if source and id and source.lower() != 'ringgold':
+                identifier = unicode(source).lower()+'-'+unicode(id)
+
+            if name and country:
+                return {
+                    'identifier':identifier,
+                    'name':name,
+                    'country':country,
+                    }
+        return None
+
+    @property
     def email(self):
         # TODO
         return None
@@ -128,8 +159,8 @@ class OrcidProfile(object):
         names = []
         credit_name = jpath('credit-name/value', name_item)
         if credit_name is not None:
-            names.append((normalize_name_words(jpath('given-names/value', name_item)),
-                          normalize_name_words(jpath('family-name/value', name_item))))
+            names.append((normalize_name_words(jpath('given-names/value', name_item, '')),
+                          normalize_name_words(jpath('family-name/value', name_item, ''))))
         other_names = jpath('other-names/other-name', name_item, default=[])
         for name in other_names:
             val = name.get('value')

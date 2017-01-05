@@ -117,12 +117,6 @@ ROMEO_API_KEY = None
 PROAIXY_API_KEY = None
 EOF
 
-# Configure university
-if [ ! -f "/dissemin/dissemin/settings/university.py" ]
-then
-        cp /dissemin/dissemin/settings/university_template.py /dissemin/dissemin/settings/university.py
-fi
-
 if [ -f "/dissemin/dissemin/settings/__init__.py" ]
 then
         echo "__init__.py file already exists in settings, moved to __init__.py.user"

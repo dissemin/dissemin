@@ -32,6 +32,45 @@ from papers.models import OaiRecord
 from papers.models import OaiSource
 from papers.models import Paper
 from papers.models import Researcher
+from papers.models import Institution
+
+class InstitutionTest(django.test.TestCase):
+    def test_valid(self):
+        institution = {
+            'country': 'FR',
+            'name': '  Université Paris 8 ',
+            'identifier': 'ringgold-23478',
+        }
+        i = Institution.create(institution)
+        self.assertEqual(i.country.code, institution['country'])
+        self.assertEqual(i.name, institution['name'].strip())
+        self.assertTrue(institution['identifier'] in i.identifiers)
+
+    def test_too_long(self):
+        institution = {
+            'country': 'RU',
+            'identifier': None,
+            'name': """
+            Не знаете как вылечить туберкулез - мы вам
+            подскажем, достаточно заказать азиатскую медведку и начать ее принимать.
+            Способ применения достаточно прост, а эффект потрясающий. Не ждите, ведь
+            завтра может быть уже поздно. Звоните по тел +796О8887578 или заходите на
+            сайт http://kypit-medvedki.ru/
+            """}
+        # This institution is too long for our model!
+        self.assertEqual(
+            Institution.create(institution),
+            None)
+
+    def test_invalid_country_code(self):
+        institution = {
+            'country': 'XX',
+            'identifier': None,
+            'name': 'University of planet earth'}
+
+        self.assertEqual(
+            Institution.create(institution),
+            None)
 
 
 class ResearcherTest(django.test.TestCase):
@@ -44,11 +83,65 @@ class ResearcherTest(django.test.TestCase):
         r3 = Researcher.get_or_create_by_orcid('0000-0002-4445-8625')
         self.assertNotEqual(r, r3)
 
+    def test_empty_name(self):
+        r = Researcher.create_by_name('', '')
+        self.assertEqual(r, None)
+        # this ORCID has no public name in the sandbox:
+        r = Researcher.get_or_create_by_orcid('0000-0002-6091-2701',
+            instance='sandbox.orcid.org')
+        self.assertEqual(r, None)
+
+    def test_institution(self):
+        r = Researcher.get_or_create_by_orcid('0000-0002-0022-2290',
+            instance='sandbox.orcid.org')
+        self.assertEqual(r.institution.name,
+                'Ecole Normale Superieure')
+
+    def test_institution_match(self):
+        # first, load a profile from someone with
+        # a disambiguated institution (from the sandbox)
+        # http://sandbox.orcid.org/0000-0001-7174-97
+        r = Researcher.get_or_create_by_orcid('0000-0001-7174-9738',
+            instance='sandbox.orcid.org')
+        # then, load someone else, with the same institution, but not
+        # disambiguated, and without accents
+        # http://sandbox.orcid.org//0000-0001-6068-024
+        r2 = Researcher.get_or_create_by_orcid('0000-0001-6068-0245',
+            instance='sandbox.orcid.org')
+        self.assertEqual(r.institution, r2.institution)
+
+    def test_refresh(self):
+        r = Researcher.get_or_create_by_orcid('0000-0002-0022-2290',
+                    instance='sandbox.orcid.org')
+        self.assertEqual(r.institution.name, 'Ecole Normale Superieure')
+        r.institution = None
+        r.name = Name.lookup_name(('John','Doe'))
+        r.save()
+        r = Researcher.get_or_create_by_orcid('0000-0002-0022-2290',
+                instance='sandbox.orcid.org',
+                update=True)
+        self.assertEqual(r.institution.name, 'Ecole Normale Superieure')
+
+
     def test_name_conflict(self):
         # Both are called "John Doe"
         r1 = Researcher.get_or_create_by_orcid('0000-0001-7295-1671')
         r2 = Researcher.get_or_create_by_orcid('0000-0001-5393-1421')
         self.assertNotEqual(r1, r2)
+
+
+class NameTest(django.test.TestCase):
+    def test_max_length(self):
+        # The long string is shorter than the max name length,
+        # but becomes longer after escaping of the & sign
+        self.assertEqual(
+            Name.lookup_name(("""
+an ISO 9001 Certified Instrumentation
+Company in India manufactures hi-tech Calibration Instruments & Systems
+for Pressure, Temperature & Electrical parameters. Many of our
+Temperature & Pressure Calibrator Models are Certified by DNV. Nagman
+also""", "Nagman")),
+            None)
 
 class OaiRecordTest(django.test.TestCase):
 
@@ -153,9 +246,16 @@ class PaperTest(django.test.TestCase):
         p1.merge(p2)
 
         p1.check_authors()
-        seen_rids = set()
-        for a in p1.authors:
-            if a.researcher_id:
-                seen_rids.add(a.researcher_id)
-        self.assertEqual(seen_rids,
+
+        self.assertEqual(set(p1.researchers),
                          set([r1.id, r2.id]))
+
+    def test_set_researcher(self):
+        p1 = Paper.create_by_doi('10.4049/jimmunol.167.12.6786')
+        r1 = Researcher.create_by_name('Stephan', 'Hauschildt')
+        # Add the researcher
+        p1.set_researcher(4, r1.id)
+        self.assertEqual(set(p1.researchers), {r1})
+        # Remove the researcher
+        p1.set_researcher(4, None)
+        self.assertEqual(set(p1.researchers), set())

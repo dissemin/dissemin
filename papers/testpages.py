@@ -109,6 +109,12 @@ class PaperPagesTest(RenderingTest):
         self.checkPermanentRedirect(
             'researcher-by-orcid', kwargs={'orcid': self.r4.orcid})
 
+    def test_researcher_no_name(self):
+        # this ORCID profile does not have a public name:
+        self.check404(
+            'researcher-by-orcid', kwargs={'orcid': '0000-0002-6091-2701'})
+
+
     def test_researcher_with_empty_slug(self):
         """
         Researchers may have names with characters that

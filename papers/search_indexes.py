@@ -2,7 +2,7 @@ from haystack import indexes
 from papers.utils import remove_diacritics
 
 from .models import Paper
-
+from .models import Researcher
 
 class PaperIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, model_attr='title')
@@ -20,8 +20,8 @@ class PaperIndex(indexes.SearchIndex, indexes.Indexable):
     #: IDs of researchers
     researchers = indexes.MultiValueField()
 
-    #: IDs of departments of researchers
-    departments = indexes.MultiValueField()
+    #: IDs of institutions of researchers
+    institutions = indexes.MultiValueField()
 
     #: ID of publisher
     publisher = indexes.IntegerField(null=True)
@@ -50,17 +50,19 @@ class PaperIndex(indexes.SearchIndex, indexes.Indexable):
         return 'OK' if obj.pdf_url else 'NOK'
 
     def prepare_researchers(self, obj):
-        return [a['researcher_id'] for a in obj.authors_list
-                if 'researcher_id' in a]
+        return obj.researchers
 
-    def prepare_departments(self, obj):
-        return list(obj.researchers.filter(department__isnull=False)
-                    .values_list('department', flat=True))
+    def prepare_institutions(self, obj):
+        return filter(lambda x: x is not None,
+           [Researcher.objects.get(id=rid).institution_id
+            for rid in obj.researchers])
 
     def prepare_publisher(self, obj):
-        oairecord = obj.oairecords.filter(journal__isnull=False).first()
-        return getattr(getattr(oairecord, 'publisher', None), 'id', None)
+        for r in obj.oairecords:
+            if r.publisher_id:
+                return r.publisher_id
 
     def prepare_journal(self, obj):
-        oairecord = obj.oairecords.filter(journal__isnull=False).first()
-        return getattr(getattr(oairecord, 'journal', None), 'id', None)
+        for r in obj.oairecords:
+            if r.journal_id:
+                return r.journal_id

@@ -79,3 +79,16 @@ class OrcidProfileTest(unittest.TestCase):
             len(x['first']) or len(x['last'])), results)))
         names_returned = map(lambda x: (x['first'], x['last']), results)
         self.assertTrue(('John', 'Doe') in names_returned)
+
+    def test_institution(self):
+        self.assertEqual(OrcidProfile(
+            id='0000-0002-0022-2290').institution,
+            {'name':'Ecole Normale Superieure',
+             'identifier':None,
+             'country':'FR'})
+        self.assertEqual(OrcidProfile(
+            id='0000-0002-5654-4053').institution,
+            {'country': 'FR',
+             'identifier': None,
+             'name': "Polytech'Rambouillet"})
+

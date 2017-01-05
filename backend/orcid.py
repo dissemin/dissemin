@@ -22,6 +22,9 @@ from __future__ import unicode_literals
 
 #from requests.exceptions import RequestException
 #import json, requests
+import os
+import os.path as path
+import json
 from backend.crossref import convert_to_name_pair
 from backend.crossref import CrossRefAPI
 from backend.crossref import fetch_dois
@@ -37,6 +40,7 @@ from papers.doi import to_doi
 from papers.errors import MetadataSourceException
 from papers.models import Name
 from papers.models import OaiSource
+from papers.models import Researcher
 from papers.name import parse_comma_name
 from papers.name import most_similar_author
 from papers.orcid import OrcidProfile
@@ -198,7 +202,8 @@ class ORCIDMetadataExtractor(object):
             return []
 
     def convert_authors(self, authors):
-        return map(Name.lookup_name, authors)
+        return filter(lambda n: n is not None,
+                map(Name.lookup_name, authors))
 
     def j(self, path, default=None):
         return jpath(path, self._pub, default)
@@ -304,6 +309,8 @@ class ORCIDDataPaper(object):
 class OrcidPaperSource(PaperSource):
 
     def fetch_papers(self, researcher):
+        if not researcher:
+            return
         self.researcher = researcher
         if researcher.orcid:
             if researcher.empty_orcid_profile == None:
@@ -385,19 +392,22 @@ class OrcidPaperSource(PaperSource):
                 yield False, metadata
 
     def warn_user_of_ignored_papers(self, ignored_papers):
+        if self.researcher is None:
+            return
         user = self.researcher.user
-        if user is not None:
-            delete_notification_per_tag(user, 'backend_orcid')
-            if ignored_papers:
-                notification = {
-                    'code': 'IGNORED_PAPERS',
-                    'papers': ignored_papers
-                }
-                add_notification_for([user],
-                                     notification_levels.ERROR,
-                                     notification,
-                                     'backend_orcid'
-                                     )
+        if user is None:
+            return
+        delete_notification_per_tag(user, 'backend_orcid')
+        if ignored_papers:
+            notification = {
+                'code': 'IGNORED_PAPERS',
+                'papers': ignored_papers
+            }
+            add_notification_for([user],
+                                    notification_levels.ERROR,
+                                    notification,
+                                    'backend_orcid'
+                                    )
 
     def fetch_orcid_records(self, orcid_identifier, profile=None, use_doi=True):
         """
@@ -424,6 +434,12 @@ class OrcidPaperSource(PaperSource):
                 profile = OrcidProfile(json=profile)
         except MetadataSourceException as e:
             print e
+            return 
+
+        # As we have fetched the profile, let's update the Researcher
+        self.researcher = Researcher.get_or_create_by_orcid(orcid_identifier,
+                profile.json, update=True)
+        if not self.researcher:
             return
 
         # Reference name
@@ -443,6 +459,8 @@ class OrcidPaperSource(PaperSource):
                 pub,
                 stop_if_dois_exists=use_doi
             )
+            if not data_paper:
+                continue
 
             if data_paper.dois and use_doi:  # We want to batch it rather than manually do it.
                 dois.extend(data_paper.dois)
@@ -452,10 +470,6 @@ class OrcidPaperSource(PaperSource):
             # We first try to reconcile it with local researcher author name.
             # Then, we consider it missed.
             if data_paper.skipped:
-                print('%s is skipped due to incorrect metadata (%s)' %
-                      (data_paper, data_paper.skip_reason))
-
-                print('Trying to reconcile it with local researcher.')
                 data_paper = self.reconcile_paper(
                     ref_name,
                     orcid_id,
@@ -465,6 +479,9 @@ class OrcidPaperSource(PaperSource):
                     }
                 )
                 if data_paper.skipped:
+                    print('%s is skipped due to incorrect metadata (%s)' %
+                        (data_paper, data_paper.skip_reason))
+
                     ignored_papers.append(data_paper.as_dict())
                     continue
 
@@ -473,13 +490,13 @@ class OrcidPaperSource(PaperSource):
         # 2nd attempt with DOIs and CrossRef
         if use_doi:
             # Let's grab papers from CrossRef
-            for success, paper_or_metadata in self.fetch_crossref_incrementally(cr_api, orcid_id):
-                if success:
-                    yield paper_or_metadata
-                else:
-                    ignored_papers.append(paper_or_metadata)
-                    print('This metadata (%s) yields no paper.' %
-                          (unicode(paper_or_metadata)))
+            #for success, paper_or_metadata in self.fetch_crossref_incrementally(cr_api, orcid_id):
+            #    if success:
+            #        yield paper_or_metadata
+            #    else:
+            #        ignored_papers.append(paper_or_metadata)
+            #        print('This metadata (%s) yields no paper.' %
+            #              (unicode(paper_or_metadata)))
 
             # Let's grab papers with DOIs found in our ORCiD profile.
             # FIXME(RaitoBezarius): if we fail here, we should get back the pub
@@ -495,3 +512,39 @@ class OrcidPaperSource(PaperSource):
         self.warn_user_of_ignored_papers(ignored_papers)
         if ignored_papers:
             print('Warning: Total ignored papers: %d' % (len(ignored_papers)))
+
+
+    def bulk_import(self, directory, fetch_papers=True, use_doi=False):
+        """
+        Bulk-imports ORCID profiles from a dmup
+        (warning: this still uses our DOI cache).
+        The directory should contain json versions
+        of orcid profiles, as in the official ORCID
+        dump.
+        """
+
+        for root, _, fnames in os.walk(directory):
+            for fname in fnames:
+                #if fname == '0000-0003-1349-4524.json':
+                #    seen = True
+                #if not seen:
+                #    continue
+            
+                with open(path.join(root, fname), 'r') as f:
+                    try:
+                        profile = json.load(f)
+                        orcid = profile['orcid-profile'][
+                                        'orcid-identifier'][
+                                        'path']
+                        print orcid
+                        r = Researcher.get_or_create_by_orcid(
+                            orcid, profile, update=True)
+                        if fetch_papers:
+                            papers = self.fetch_orcid_records(orcid,
+                                profile=profile,
+                                use_doi=use_doi)    
+                            for p in papers:
+                                self.save_paper(p, r)
+                    except (ValueError, KeyError):
+                        print "Invalid profile: %s" % fname
+ 

@@ -52,16 +52,6 @@ except ImportError as e:
     raise RuntimeError(
         'Secret file is missing, did you forget to add a secret.py in your settings folder?')
 
-try:
-    from .university import CAS_LOGOUT_COMPLETELY
-    from .university import CAS_PROVIDE_URL_TO_LOGOUT
-    from .university import CAS_SERVER_URL
-    from .university import ENABLE_CAS
-    from .university import UNIVERSITY_BRANDING
-except ImportError as e:
-    raise RuntimeError(
-        'University-specific file is missing, did you forget to add a university.py in your settings folder?')
-
 # dirname(__file__) → repo/dissemin/settings/common.py
 # .. → repo/dissemin/settings
 # .. → repo/dissemin
@@ -154,6 +144,9 @@ INSTALLED_APPS = (
     'widget_tweaks',
     'capture_tag',
     'memoize',
+    'django_countries',
+    'leaflet',
+    'djgeojson',
 )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
@@ -174,16 +167,6 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
-
-
-if ENABLE_CAS:
-    MIDDLEWARE_CLASSES += (
-        'django_cas_ng.middleware.CASMiddleware',
-    )
-
-    AUTHENTICATION_BACKENDS += (
-        'django_cas_ng.backends.CASBackend',
-    )
 
 
 TEMPLATES = [
