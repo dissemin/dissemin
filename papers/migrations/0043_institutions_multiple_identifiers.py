@@ -37,10 +37,10 @@ class Migration(migrations.Migration):
             name='identifiers',
             field=django.contrib.postgres.fields.ArrayField(base_field=models.CharField(max_length=256), blank=True, null=True, size=None),
         ),
-        migrations.RunSQL([
-            ("CREATE INDEX papers_institution_identifiers_idx ON papers_institution USING gin(identifiers);",
-            "DROP INDEX papers_institution_identifiers_idx;")
-             ]),
+        migrations.RunSQL(
+            ["CREATE INDEX papers_institution_identifiers_idx ON papers_institution USING gin(identifiers);"],
+            ["DROP INDEX papers_institution_identifiers_idx;"],
+             ),
         migrations.RunPython(populate_identifiers, backwards),
         migrations.RemoveField(
             model_name='institution',
