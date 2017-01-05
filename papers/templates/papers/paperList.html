@@ -28,4 +28,14 @@
  {% endfor %}
  {% if page_obj.paginator.num_pages > 1 %}
  <div class="searchPages">{% bootstrap_paginate page_obj range=10 %}</div>
+ {% elif researcher %}
+    {% with researcher.matching_papers_url as matching_papers_url %}
+    <p class="notFound">{% blocktrans trimmed %}
+	Missing publications?
+        <a href="{{ matching_papers_url }}">
+	Search for publications with a matching author name
+	</a>
+	{% endblocktrans %}
+    </p>
+    {% endwith %}
  {% endif %}
