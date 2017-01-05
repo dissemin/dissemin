@@ -651,12 +651,12 @@ def unify_name_lists(a, b):
         if iA == len(a):
             idxB = b[iB][0]
             rankB = (idxB+1)/lenB
-            result.append((b[iB][1], (rankB+1)/lenB, (None, iB)))
+            result.append((b[iB][1], (rankB+1)/lenB, (None, idxB)))
             iB += 1
         elif iB == len(b):
             idxA = a[iA][0]
             rankA = (idxA+1)/lenA
-            result.append((a[iA][1], (rankA+1)/lenA, (iA, None)))
+            result.append((a[iA][1], (rankA+1)/lenA, (idxA, None)))
             iA += 1
         else:
             idxA = a[iA][0]
