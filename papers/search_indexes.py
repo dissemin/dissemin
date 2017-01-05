@@ -50,7 +50,7 @@ class PaperIndex(indexes.SearchIndex, indexes.Indexable):
         return 'OK' if obj.pdf_url else 'NOK'
 
     def prepare_researchers(self, obj):
-        return obj.researchers
+        return obj.researcher_ids
 
     def prepare_institutions(self, obj):
         return filter(lambda x: x is not None,

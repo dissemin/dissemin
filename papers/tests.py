@@ -247,8 +247,8 @@ class PaperTest(django.test.TestCase):
 
         p1.check_authors()
 
-        self.assertEqual(set(p1.researchers),
-                         set([r1.id, r2.id]))
+        self.assertEqual(p1.researchers,
+                         [r2, r1])
 
     def test_set_researcher(self):
         p1 = Paper.create_by_doi('10.4049/jimmunol.167.12.6786')
