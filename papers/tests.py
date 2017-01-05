@@ -246,11 +246,8 @@ class PaperTest(django.test.TestCase):
         p1.merge(p2)
 
         p1.check_authors()
-        seen_rids = set()
-        for a in p1.authors:
-            if a.researcher_id:
-                seen_rids.add(a.researcher_id)
-        self.assertEqual(seen_rids,
+
+        self.assertEqual(set(p1.researchers),
                          set([r1.id, r2.id]))
 
     def test_set_researcher(self):
@@ -258,7 +255,7 @@ class PaperTest(django.test.TestCase):
         r1 = Researcher.create_by_name('Stephan', 'Hauschildt')
         # Add the researcher
         p1.set_researcher(4, r1.id)
-        self.assertEqual(set(p1.researchers.all()), {r1})
+        self.assertEqual(set(p1.researchers), {r1})
         # Remove the researcher
         p1.set_researcher(4, None)
-        self.assertEqual(set(p1.researchers.all()), set())
+        self.assertEqual(set(p1.researchers), set())

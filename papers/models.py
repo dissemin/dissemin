@@ -682,11 +682,6 @@ class Paper(models.Model, BarePaper):
     #: Full list of authors for this paper
     authors_list = JSONField(default=list)
 
-    #: Relation to Researcher: all researchers that appear in
-    #: authors_list (not all authors are researchers because not all
-    #: authors have profiles on dissemin)
-    researchers = models.ManyToManyField(Researcher)
-
     last_modified = models.DateTimeField(auto_now=True, db_index=True)
     visible = models.BooleanField(default=True)
     last_annotation = models.CharField(max_length=32, null=True, blank=True)
@@ -744,6 +739,15 @@ class Paper(models.Model, BarePaper):
         # straight away
         return self.oairecord_set.all()
 
+    @property
+    def researchers(self):
+        """
+        The list of researchers associated with this paper, returned
+        as a list.
+        """
+        return [ a['researcher_id'] for a in self.authors_list
+                 if 'researcher_id' in a]
+
     def add_author(self, author, position=None):
         """
         Add an author at the end of the authors list by default
@@ -758,8 +762,6 @@ class Paper(models.Model, BarePaper):
         if position is None:
             position = len(self.authors_list)
         self.authors_list.insert(position, author_serialized)
-        if author.researcher_id:
-            self.researchers.add(author.researcher_id)
         return author
 
     def set_researcher(self, position, researcher_id):
@@ -774,11 +776,6 @@ class Paper(models.Model, BarePaper):
         old_rid = self.authors_list[position]['researcher_id']
         self.authors_list[position]['researcher_id'] = researcher_id
         self.save(update_fields=['authors_list'])
-        if researcher_id:
-            self.researchers.add(researcher_id)
-        if old_rid:
-            self.researchers.remove(old_rid)
-
 
     def add_oairecord(self, oairecord):
         """
