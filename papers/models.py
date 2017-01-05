@@ -765,13 +765,20 @@ class Paper(models.Model, BarePaper):
     def set_researcher(self, position, researcher_id):
         """
         Sets the researcher_id for the author at the given position
-        (0-indexed)
+        (0-indexed).
+        researcher_id can be set to None to unaffiliate an author
+        with a researcher.
         """
         if position < 0 or position > len(self.authors_list):
             raise ValueError('Invalid position provided')
+        old_rid = self.authors_list[position]['researcher_id']
         self.authors_list[position]['researcher_id'] = researcher_id
         self.save(update_fields=['authors_list'])
-        self.researchers.add(researcher_id)
+        if researcher_id:
+            self.researchers.add(researcher_id)
+        if old_rid:
+            self.researchers.remove(old_rid)
+
 
     def add_oairecord(self, oairecord):
         """

@@ -252,3 +252,13 @@ class PaperTest(django.test.TestCase):
                 seen_rids.add(a.researcher_id)
         self.assertEqual(seen_rids,
                          set([r1.id, r2.id]))
+
+    def test_set_researcher(self):
+        p1 = Paper.create_by_doi('10.4049/jimmunol.167.12.6786')
+        r1 = Researcher.create_by_name('Stephan', 'Hauschildt')
+        # Add the researcher
+        p1.set_researcher(4, r1.id)
+        self.assertEqual(set(p1.researchers.all()), {r1})
+        # Remove the researcher
+        p1.set_researcher(4, None)
+        self.assertEqual(set(p1.researchers.all()), set())
