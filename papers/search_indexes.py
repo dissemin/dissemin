@@ -2,7 +2,6 @@ from haystack import indexes
 from papers.utils import remove_diacritics
 
 from .models import Paper
-from .models import Researcher
 
 class PaperIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, model_attr='title')
@@ -54,8 +53,8 @@ class PaperIndex(indexes.SearchIndex, indexes.Indexable):
 
     def prepare_institutions(self, obj):
         return filter(lambda x: x is not None,
-           [Researcher.objects.get(id=rid).institution_id
-            for rid in obj.researchers])
+           [r.institution_id
+            for r in obj.researchers])
 
     def prepare_publisher(self, obj):
         for r in obj.oairecords:

@@ -740,13 +740,22 @@ class Paper(models.Model, BarePaper):
         return self.oairecord_set.all()
 
     @property
+    def researcher_ids(self):
+        """
+        The list of researcher ids associated with this paper,
+        returned as a list.
+        """
+        return [ a['researcher_id'] for a in self.authors_list
+                 if a.get('researcher_id') is not None]
+
+    @property
     def researchers(self):
         """
         The list of researchers associated with this paper, returned
-        as a list.
+        as a list of Researcher instances.
         """
-        return [ a['researcher_id'] for a in self.authors_list
-                 if 'researcher_id' in a]
+        return [ Researcher.objects.get(id=id)
+                 for id in self.researcher_ids ]
 
     def add_author(self, author, position=None):
         """
