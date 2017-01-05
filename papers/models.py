@@ -773,7 +773,6 @@ class Paper(models.Model, BarePaper):
         """
         if position < 0 or position > len(self.authors_list):
             raise ValueError('Invalid position provided')
-        old_rid = self.authors_list[position]['researcher_id']
         self.authors_list[position]['researcher_id'] = researcher_id
         self.save(update_fields=['authors_list'])
 

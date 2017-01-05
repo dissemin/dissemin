@@ -2,7 +2,7 @@ from haystack import indexes
 from papers.utils import remove_diacritics
 
 from .models import Paper
-
+from .models import Researcher
 
 class PaperIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, model_attr='title')
