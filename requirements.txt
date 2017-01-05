@@ -40,6 +40,7 @@ psycopg2
 pyasn1
 pyopenssl
 requests
+requests_mock
 titlecase
 unicode_tex
 unidecode

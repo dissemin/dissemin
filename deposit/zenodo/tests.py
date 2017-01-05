@@ -21,7 +21,9 @@
 from __future__ import unicode_literals
 
 import os
+import re
 import unittest
+import requests_mock
 
 from deposit.tests import lorem_ipsum
 from deposit.tests import ProtocolTest
@@ -53,4 +55,13 @@ class ZenodoProtocolTest(ProtocolTest):
             'ftzenodo:oai:zenodo.org:50134', 'base_dc')
         enabled = self.proto.init_deposit(p, self.user)
         self.assertFalse(enabled)
+
+    def test_500_error(self):
+        with requests_mock.Mocker(real_http=True) as mocker:
+            mocker.get(re.compile('.*\.zenodo\.org/.*'), status_code=500)
+            p = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
+            r = self.dry_deposit(p,
+                    abstract = lorem_ipsum,
+                    license = 'other-open')
+            self.assertEqual(r.status, 'failed')
 
