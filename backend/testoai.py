@@ -277,3 +277,9 @@ class OaiTest(TestCase):
                 'oai:crossref.org:10.4156/aiss.vol3.issue9.31',
                 'citeproc')
         self.assertEqual(paper, None)
+
+    def test_datacite(self):
+        paper = self.create(
+                'ftdatacite:oai:oai.datacite.org:8558707',
+                'base_dc')
+        self.assertTrue(paper.pdf_url)
