@@ -74,6 +74,7 @@ from django.template.defaultfilters import slugify
 from django.utils import timezone
 from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
+from django.utils.http import urlencode
 from papers.baremodels import BareAuthor
 from papers.baremodels import BareName
 from papers.baremodels import BareOaiRecord
@@ -408,6 +409,13 @@ class Researcher(models.Model):
         return Paper.objects.filter(
                 authors_list__contains=[{'researcher_id': self.id}]
                           ).order_by('-pubdate')
+
+    @property
+    def matching_papers_url(self):
+        """
+        URL of the search page for papers with a matching name
+        """
+        return reverse('search')+'?'+urlencode({'authors': self.name.full})
 
     @property
     def name_variants(self):
