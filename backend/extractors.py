@@ -21,7 +21,8 @@
 from __future__ import unicode_literals
 
 import re
-
+from papers.doi import to_doi
+from backend.doiprefixes import free_doi_prefixes
 
 class URLExtractor(object):
 
@@ -116,6 +117,13 @@ class BaseExtractor(RegexExtractor):
                     pmc_url = u
             urls['splash'] = pmc_url
             urls['pdf'] = pmc_url
+
+        # Special case for DOIs
+        doi = to_doi(urls.get('splash'))
+        if doi:
+            doi_prefix = doi.split('/')[0]
+            if doi_prefix in free_doi_prefixes:
+                urls['pdf'] = urls['splash']
 
         return urls
 
