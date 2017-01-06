@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-05 20:47+0100\n"
-"PO-Revision-Date: 2017-01-05 20:48+0100\n"
+"POT-Creation-Date: 2017-01-06 20:09+0100\n"
+"PO-Revision-Date: 2017-01-06 20:09+0100\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -192,11 +192,11 @@ msgstr "Impossible d'envoyer ce papier vers le dépôt indiqué."
 msgid "Access to the PDF was denied."
 msgstr "L'accès au PDF a été refusé."
 
-#: dissemin/settings/common.py:282
+#: dissemin/settings/common.py:262
 msgid "English"
 msgstr "Anglais"
 
-#: dissemin/settings/common.py:283
+#: dissemin/settings/common.py:263
 msgid "French"
 msgstr "Français"
 
@@ -204,55 +204,55 @@ msgstr "Français"
 msgid "inboxes"
 msgstr "boîtes de réceptions"
 
-#: papers/baremodels.py:53
+#: papers/baremodels.py:54
 msgid "Journal article"
 msgstr "Article dans une revue"
 
-#: papers/baremodels.py:54
+#: papers/baremodels.py:55
 msgid "Proceedings article"
 msgstr "Communication dans une conférence"
 
-#: papers/baremodels.py:55
+#: papers/baremodels.py:56
 msgid "Book chapter"
 msgstr "Chapitre d'ouvrage"
 
-#: papers/baremodels.py:56
+#: papers/baremodels.py:57
 msgid "Book"
 msgstr "Ouvrage"
 
-#: papers/baremodels.py:57
+#: papers/baremodels.py:58
 msgid "Journal issue"
 msgstr "Numéro d'une revue"
 
-#: papers/baremodels.py:58
+#: papers/baremodels.py:59
 msgid "Proceedings"
 msgstr "Actes de conférence"
 
-#: papers/baremodels.py:59
+#: papers/baremodels.py:60
 msgid "Entry"
 msgstr "Article d'encyclopédie"
 
-#: papers/baremodels.py:60
+#: papers/baremodels.py:61
 msgid "Poster"
 msgstr "Poster"
 
-#: papers/baremodels.py:61
+#: papers/baremodels.py:62
 msgid "Report"
 msgstr "Rapport"
 
-#: papers/baremodels.py:62
+#: papers/baremodels.py:63
 msgid "Thesis"
 msgstr "Thèse"
 
-#: papers/baremodels.py:63
+#: papers/baremodels.py:64
 msgid "Dataset"
 msgstr "Banque de données"
 
-#: papers/baremodels.py:64 papers/models.py:96
+#: papers/baremodels.py:65 papers/models.py:98
 msgid "Preprint"
 msgstr "Préprint"
 
-#: papers/baremodels.py:65
+#: papers/baremodels.py:66
 msgid "Other document"
 msgstr "Autre publication"
 
@@ -301,47 +301,47 @@ msgstr "Invisible"
 msgid "Try any author name"
 msgstr "Essayez n'importe quel nom"
 
-#: papers/models.py:97
+#: papers/models.py:99
 msgid "Postprint"
 msgstr "Postprint"
 
-#: papers/models.py:98
+#: papers/models.py:100
 msgid "Published version"
 msgstr "Version publiée"
 
-#: papers/models.py:102
+#: papers/models.py:104
 msgid "Preparing profile"
 msgstr "Préparation du profil"
 
-#: papers/models.py:103
+#: papers/models.py:105
 msgid "Fetching publications from ORCID"
 msgstr "Récupération des publications à partir d'ORCID"
 
-#: papers/models.py:104
+#: papers/models.py:106
 msgid "Fetching publications from CrossRef"
 msgstr "Récupération des publications à partir de CrossRef"
 
-#: papers/models.py:105
+#: papers/models.py:107
 msgid "Fetching publications from BASE"
 msgstr "Récupération des publications à partir de BASE"
 
-#: papers/models.py:106
+#: papers/models.py:108
 msgid "Fetching publications from CORE"
 msgstr "Récupération des publications à partir de CORE"
 
-#: papers/models.py:107
+#: papers/models.py:109
 msgid "Fetching publications from OAI-PMH"
 msgstr "Récupération des publications à partir d'OAI-PMH"
 
-#: papers/models.py:108
+#: papers/models.py:110
 msgid "Clustering publications"
 msgstr "Regroupement des publications"
 
-#: papers/models.py:109
+#: papers/models.py:111
 msgid "Updating statistics"
 msgstr "Mise à jour des statistiques"
 
-#: papers/models.py:1103 papers/views.py:124 papers/views.py:129
+#: papers/models.py:1139 papers/views.py:124 papers/views.py:129
 #: papers/views.py:264 papers/views.py:298
 msgid "Papers"
 msgstr "Papiers"
@@ -601,6 +601,15 @@ msgstr "Administration"
 #: papers/templates/papers/paperList.html:26
 msgid "No paper found."
 msgstr "Aucun papier trouvé"
+
+#: papers/templates/papers/paperList.html:33
+#, python-format
+msgid ""
+"Missing publications? <a href=\"%(matching_papers_url)s\"> Search for "
+"publications with a matching author name </a>"
+msgstr ""
+"S'il manque des travaux, vous pouvez <a href=\"%(matching_papers_url)s"
+"\">chercher des travaux où le nom d'un auteur correspond</a>"
 
 #: papers/templates/papers/publiListItem.html:16
 #, python-format
@@ -948,7 +957,7 @@ msgstr "Ambigü"
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: publishers/models.py:59 publishers/views.py:97
+#: publishers/models.py:59 publishers/views.py:94
 msgid "Publishers"
 msgstr "Maisons d'édition"
 
