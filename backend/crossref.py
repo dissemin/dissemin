@@ -29,6 +29,7 @@ from requests.exceptions import RequestException
 from backend.romeo import fetch_journal
 from backend.romeo import fetch_publisher
 from backend.utils import urlopen_retry
+from backend.doiprefixes import free_doi_prefixes
 from dissemin.settings import DOI_PROXY_DOMAIN
 from dissemin.settings import DOI_PROXY_SUPPORTS_BATCH
 from django.db import DataError
@@ -224,15 +225,15 @@ def _create_publication(paper, metadata):
 
     pubtype = metadata.get('type', 'unknown')
     pubtype = CROSSREF_PUBTYPE_ALIASES.get(pubtype, pubtype)
+    splash_url = doi_to_url(doi)
 
     # PDF availability
     pdf_url = None
     licenses = set([(license or {}).get('URL')
                     for license in metadata.get('license', [])])
-    if any(map(is_oa_license, licenses)):
-        pdf_url = doi_to_url(doi)
-
-    splash_url = doi_to_url(doi)
+    doi_prefix = doi.split('/')[0]
+    if doi_prefix in free_doi_prefixes or any(map(is_oa_license, licenses)):
+        pdf_url = splash_url
 
     # Lookup journal
     search_terms = {'jtitle': title}
@@ -402,9 +403,6 @@ class CrossRefAPI(object):
         """
         # Normalize metadata
         if metadata is None or type(metadata) != dict:
-            if metadata is not None:
-                print "WARNING: Invalid metadata: type is "+str(type(metadata))
-                print "The doi proxy is doing something nasty!"
             raise ValueError('Invalid metadata format, expecting a dict')
         if not metadata.get('author'):
             raise ValueError('No author provided')

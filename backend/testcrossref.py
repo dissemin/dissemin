@@ -236,4 +236,10 @@ class CrossRefUnitTest(unittest.TestCase):
         self.assertFalse(is_oa_license(
             'http://www.elsevier.com/tdm/userlicense/1.0/'))
 
-        
+    def test_doi_open(self):
+        cr = CrossRefAPI()
+        self.assertTrue(cr.create_paper_by_doi('10.15200/winn.145838.88372').pdf_url)
+        self.assertFalse(cr.create_paper_by_doi('10.5061/dryad.b167g').pdf_url)
+        #self.assertTrue(cr.create_paper_by_doi('10.12758/mda.2015.001').pdf_url)
+        #self.assertTrue(cr.create_paper_by_doi('10.5165/hawk-hhg/233').pdf_url)
+        # TODO test these as OaiRecords from Datacite
