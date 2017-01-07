@@ -161,6 +161,25 @@ class HALProtocolTest(ProtocolTest):
              affiliation=128940)
         self.assertEqual(r.status, 'faked')
 
+    def test_bad_journal_article(self):
+        """
+        Submit something that pretends to be a journal article,
+        but for which we fail to find publication metadata.
+        The interface should fall back on something lighter.
+        """
+        oai = OaiPaperSource(endpoint='http://doai.io/oai')
+        oai.add_translator(BASEDCTranslator())
+        p = oai.create_paper_by_identifier(
+            'ftalborguniv:oai:pure.atira.dk:openaire/30feea10-9c2f-11db-8ed6-000ea68e967b',
+            'base_dc')
+        p.authors_list = [p.authors_list[0]]
+        r = self.dry_deposit(p,
+            abstract='hey you, yes you',
+            topic='SDV',
+            depositing_author=0,
+            affiliation=128940)
+        self.assertEqual(r.status, 'faked')
+
     def test_paper_already_in_hal(self):
         p = get_proaixy_instance().create_paper_by_identifier(
             'ftunivsavoie:oai:HAL:hal-01062241v1', 'base_dc')

@@ -563,15 +563,6 @@ h1#paperTitle {
     text-decoration: none;
 }
 
-/* Paper depositing */
-
-.depositSuccess {
-    background-color: #77D177;
-    border: 1px solid #868686;
-    border-radius: 4px;
-    padding: 8px;
-    font-size: 1.2em;
-}
 
 /* Criterions in the side bar */
 

@@ -85,9 +85,23 @@ $(function(){
 {% endif %}
 </div>
 
-{% if deposit.status == 'published' or deposit.status == 'pending' %}
-<div class="depositSuccess">{% trans "Paper successfully deposited!" %}</div>
+{% if deposit.status == 'published' %}
+<div class="alert alert-success">{% trans "<strong>Congratulations!</strong> This paper was successfully deposited." %}</div>
 {% endif %}
+
+{% for deposit in pending_deposits %}
+    <div class="alert alert-success">
+	    {% with deposit.repository.name as repo_name %}
+	    {% with deposit.repository.url as repo_url %}
+	    {% blocktrans trimmed %}
+	    <strong>Almost there!</strong>
+	    This paper has been deposited in <a href="{{ repo_url }}">{{ repo_name }}</a>.
+	    The full text will be available there after validation by the repository administrators.
+	    {% endblocktrans %}
+	    {% endwith %}
+	    {% endwith %}
+    </div>
+{% endfor %}
 
 <div id="paperAvailability">
 
@@ -118,18 +132,7 @@ $(function(){
             <a href="{% url 'upload_paper' paper.pk %}" class="btn btn-default btn-xs">{% trans "Deposit again" %}</a>
             {% endif %}
         {% else %}
-            {% for deposit in pending_deposits %}
-		<div class="depositSuccess">
-			{% with deposit.oairecord.source.name as source_name %}
-			{% blocktrans trimmed %}
-			This paper has been deposited in {{ source_name }}.
-			The full text will be available after validation by the repository administrators.
-			{% endblocktrans %}
-			{% endwith %}
-		</div>
-	    {% empty %}
-		{% include "publishers/detailsPolicy.html" with publisher=psh mode="link" %}
-	    {% endfor %}
+	    {% include "publishers/detailsPolicy.html" with publisher=psh mode="link" %}
         {% endif %}
     {% endwith %}
 </div>
