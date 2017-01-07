@@ -283,3 +283,9 @@ class OaiTest(TestCase):
                 'ftdatacite:oai:oai.datacite.org:8558707',
                 'base_dc')
         self.assertTrue(paper.pdf_url)
+
+    def test_pmc(self):
+        paper = self.create(
+                'ftpubmed:oai:pubmedcentral.nih.gov:1968744',
+                'base_dc')
+        self.assertEqual(paper.pdf_url, 'http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1968744')

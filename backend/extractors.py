@@ -113,7 +113,7 @@ class BaseExtractor(RegexExtractor):
         if pmc_match:
             pmc_url = None
             for u in self.metadata.get('identifier',[]):
-                if u.startswith('http://www.ncbi.nlm.nih.gov/pubmed/'):
+                if u.startswith('http://www.ncbi.nlm.nih.gov/pmc/articles/'):
                     pmc_url = u
             urls['splash'] = pmc_url
             urls['pdf'] = pmc_url
