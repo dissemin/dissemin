@@ -60,7 +60,7 @@ class HALProtocol(RepositoryProtocol):
         # We let the interface define another API endpoint (sandbox…)
         self.api_url = repository.endpoint
         if not self.api_url:
-            self.api_url = "https://api.archives-ouvertes.fr/sword/hal/"
+            self.api_url = "https://api.archives-ouvertes.fr/sword/"
         self.username = repository.username
         self.password = repository.password
 
@@ -141,7 +141,7 @@ class HALProtocol(RepositoryProtocol):
         try:
             # Creating the metadata
             self.log("### Generating metadata")
-            metadata = self.createMetadata(form)
+            metadata = self.create_metadata(form)
 
             # Bundling the metadata and the PDF
             self.log("### Creating ZIP file")
@@ -170,10 +170,21 @@ class HALProtocol(RepositoryProtocol):
 
             xml_response = resp.read()
             conn.close()
+            if resp.status != 201:
+                self.log('Deposit response status: HTTP %d' % resp.status)
+                self.log(xml_response.decode('utf-8'))
+                raise DepositError(
+                    __('HAL refused the deposit (HTTP error %d)') % resp.status)
 
-            parser = etree.XMLParser(encoding='utf-8')
-            print xml_response
-            receipt = etree.parse(BytesIO(xml_response), parser)
+            try:
+                parser = etree.XMLParser(encoding='utf-8')
+                receipt = etree.parse(BytesIO(xml_response), parser)
+            except etree.XMLSyntaxError:
+                self.log('Invalid XML response from HAL:')
+                self.log(xml_response.decode('utf-8'))
+                self.log('(end of the response)')
+                raise DepositError(__('HAL returned an invalid XML response'))
+
             receipt = receipt.getroot()
             if receipt.tag == '{http://purl.org/net/sword/error/}error':
                 self.log('Error while depositing the content.')
@@ -241,10 +252,49 @@ class HALProtocol(RepositoryProtocol):
 
         return deposit_result
 
-    def createMetadata(self, form):
+    def create_metadata(self, form):
         formatter = AOFRFormatter()
         metadata = formatter.toString(self.paper, 'article.pdf',
                                       form, pretty=True)
         return metadata
 
+    def refresh_deposit_status(self, deposit_record):
+        """
+        Only refresh the status if we don't already know that
+        the paper is published - in that case we trust HAL not
+        to delete it. This is to reduce the number of requests
+        on their side.
+        """
+        if deposit_record.status != 'published':
+            new_status = self.get_new_status(deposit_record.identifier)
+            if new_status != deposit_record.status:
+                deposit_record.status = new_status
+                deposit_record.save(update_fields=['status'])
+
+    def get_new_status(self, identifier):
+        """
+        Unconditionnally fetch the new status of a deposit, by ID (e.g.
+        hal-0001234)
+        """
+        deposit_url = '%s%s' % (self.api_url, identifier)
+        req = requests.get(deposit_url,
+                auth=requests.auth.HTTPBasicAuth(self.username,self.password))
+        if req.status_code == 400:
+            return 'deleted'
+        req.raise_for_status()
+
+        parser = etree.XMLParser(encoding='utf-8')
+        receipt = etree.parse(BytesIO(req.text.encode('utf-8')), parser)
+        receipt = receipt.getroot()
+
+        hal_status = receipt.find('status').text
+        if hal_status == 'accept' or hal_status == 'replace':
+            return 'published'
+        elif hal_status == 'verify' or hal_status == 'update':
+            return 'pending'
+        elif hal_status == 'delete':
+            return 'refused'
+
+
 protocol_registry.register(HALProtocol)
+

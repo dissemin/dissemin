@@ -124,6 +124,20 @@ class RepositoryProtocol(object):
         raise NotImplemented(
             'submit_deposit should be implemented in the RepositoryInterface instance.')
 
+    def refresh_deposit_status(self, deposit_record):
+        """
+        Given the DepositRecord created by a previous deposit,
+        update its deposit status. This function will be called
+        regularly, so that we can stay in sync with the deposit
+        while it makes it way through the pipeline in the repository.
+
+        By default this does not do anything (i.e. leaves the
+        DepositRecord unchanged).
+
+        :param deposit_record: the DepositRecord to update
+        """
+        pass
+
     def submit_deposit_wrapper(self, *args, **kwargs):
         """
         Wrapper of the submit_deposit method (that should not need to be

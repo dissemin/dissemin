@@ -24,6 +24,10 @@
 
     <link rel="stylesheet" href="{% static "css/upload.css" %}" />
     <link rel="stylesheet" href="{% static "css/deposit.css" %}" />
+    <!-- repository-specific JS and CSS -->
+    {% for repo_proto in available_repositories %}
+        {{ repo_proto.1.get_form.media }}
+    {% endfor %}
 {% endblock %}
 
 {% block jsScript %}
@@ -95,7 +99,7 @@ $(function() {
     }
 
     $(document).on('autocompleteLightInitialize',
-'[data-autocomplete-light-function=select2-customTemplate]', function() {
+    '[data-autocomplete-light-function=select2-customTemplate]', function() {
         var element = $(this);
 
         // This widget has a clear button
@@ -186,6 +190,7 @@ data.selection, selected: true, result: data.result})
 	$('.prefetchingFieldStatus').each(function(i,prefetch) {
 	    initPrefetch($(prefetch));
 	});
+	$('[data-autocomplete-light-function=select2-customTemplate]').trigger('autocompleteLightInitialize');
     }
     init(); // for the initial repository
 
@@ -424,6 +429,3 @@ data.selection, selected: true, result: data.result})
 
 {% endblock %}
 
-{% block footer %}
-        {{ selected_protocol.get_form.media }}
-{% endblock %}

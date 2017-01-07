@@ -68,6 +68,7 @@ class HALProtocolTest(ProtocolTest):
         super(HALProtocolTest, self).setUpClass()
         self.repo.username = 'test_ws'
         self.repo.password = 'test'
+        self.repo.endpoint = 'https://api-preprod.archives-ouvertes.fr/sword/'
         # f =
         self.proto = HALProtocol(self.repo)
 
@@ -169,3 +170,12 @@ class HALProtocolTest(ProtocolTest):
             ]
         for text, topic in cases:
             self.assertEqual(self.proto.predict_topic(text), topic)
+
+    def test_get_new_status(self):
+        cases = {
+            'hal-01038347':'published',
+            'hal-01038374':'deleted',
+        }
+        for identifier in cases:
+            self.assertEqual(self.proto.get_new_status(identifier),
+                            cases[identifier])
