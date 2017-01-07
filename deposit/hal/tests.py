@@ -20,12 +20,16 @@
 
 from __future__ import unicode_literals
 
+from unittest import expectedFailure
+from django.test import TestCase
+
 from deposit.hal.metadata import AOFRFormatter
 from deposit.hal.protocol import HALProtocol
 from deposit.tests import ProtocolTest
-from django.test import TestCase
+from deposit.models import DepositRecord
 from papers.models import Paper
-from unittest import expectedFailure
+from papers.models import OaiRecord
+from upload.models import UploadedPDF
 from backend.oai import OaiPaperSource
 from backend.oai import BASEDCTranslator
 
@@ -69,6 +73,7 @@ class HALProtocolTest(ProtocolTest):
         self.repo.username = 'test_ws'
         self.repo.password = 'test'
         self.repo.endpoint = 'https://api-preprod.archives-ouvertes.fr/sword/'
+        self.repo.save()
         # f =
         self.proto = HALProtocol(self.repo)
 
@@ -171,10 +176,40 @@ class HALProtocolTest(ProtocolTest):
         for text, topic in cases:
             self.assertEqual(self.proto.predict_topic(text), topic)
 
+    def test_refresh_deposit_status(self):
+        # This is the identifier of a paper which should
+        # currently be published on HAL preprod
+        hal_id = 'hal-01038347'
+        # First, fake the deposition of a paper
+        p = Paper.create_by_doi('10.1109/lics.2015.37')
+        r = OaiRecord.new(source=self.repo.oaisource,
+                        identifier='deposition:1:'+hal_id,
+                        splash_url='https://hal-preprod.archives-ouvertes.fr/'+hal_id,
+                        pdf_url=None,
+                        about=p)
+        f = UploadedPDF.objects.create(
+                user=self.user,
+                orig_name='File.pdf',
+                file='mediatest/blank.pdf',
+                thumbnail='my_thumbnail.png')
+        d = DepositRecord.objects.create(
+                paper=p,
+                oairecord=r,
+                repository=self.repo,
+                user=self.user,
+                status='pending',
+                identifier=hal_id,
+                upload_type='postprint',
+                file=f)
+        self.proto.refresh_deposit_status(d)
+        self.assertEqual(d.status, 'published')
+        self.assertTrue(r.pdf_url)
+
     def test_get_new_status(self):
         cases = {
             'hal-01038347':'published',
             'hal-01038374':'deleted',
+            'hal-01038950':'pending',
         }
         for identifier in cases:
             self.assertEqual(self.proto.get_new_status(identifier),

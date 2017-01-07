@@ -247,6 +247,10 @@ CELERYBEAT_SCHEDULE = {
 #        'task': 'update_journal_stats',
 #        'schedule': timedelta(days=1),
 #    },
+    'refresh_deposit_statuses': {
+          'task': 'refresh_deposit_statuses',
+          'schedule': timedelta(days=1),
+    },
 }
 
 # This is the time in seconds before an unacknowledged task is re-sent to

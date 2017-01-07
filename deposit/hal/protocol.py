@@ -59,8 +59,8 @@ class HALProtocol(RepositoryProtocol):
         super(HALProtocol, self).__init__(repository, **kwargs)
         # We let the interface define another API endpoint (sandbox…)
         self.api_url = repository.endpoint
-        if not self.api_url:
-            self.api_url = "https://api.archives-ouvertes.fr/sword/"
+        # for prod: "https://api.archives-ouvertes.fr/sword/"
+        # for test: "https://api-preprod.archives-ouvertes.fr/sword/"
         self.username = repository.username
         self.password = repository.password
 
@@ -217,7 +217,7 @@ class HALProtocol(RepositoryProtocol):
 
             deposit_result.identifier = deposition_id
             deposit_result.splash_url = document_url
-            deposit_result.pdf_url = deposit_result.splash_url + '/document'
+            deposit_result.pdf_url = None
             deposit_result.status = 'pending' # HAL moderates submissions
             deposit_result.additional_info = [
                 {'label':__('Password'),
@@ -270,6 +270,14 @@ class HALProtocol(RepositoryProtocol):
             if new_status != deposit_record.status:
                 deposit_record.status = new_status
                 deposit_record.save(update_fields=['status'])
+                oairecord = deposit_record.oairecord
+                if new_status == 'published':
+                    oairecord.pdf_url = oairecord.splash_url + '/document'
+                else:
+                    oairecord.pdf_url = None
+                oairecord.save(update_fields=['pdf_url'])
+                oairecord.about.update_availability()
+                oairecord.about.update_index()
 
     def get_new_status(self, identifier):
         """
