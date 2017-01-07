@@ -54,7 +54,6 @@ from papers.models import OaiRecord
 from papers.models import OaiSource
 from papers.models import Paper
 from papers.models import Researcher
-from papers.orcid import OrcidProfile
 from publishers.models import Journal
 
 TEST_INDEX = {

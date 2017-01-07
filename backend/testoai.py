@@ -289,3 +289,7 @@ class OaiTest(TestCase):
                 'ftpubmed:oai:pubmedcentral.nih.gov:1968744',
                 'base_dc')
         self.assertEqual(paper.pdf_url, 'http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1968744')
+        p2 = self.create(
+                'ftpubmed:oai:pubmedcentral.nih.gov:4131942',
+                'base_dc')
+        self.assertEqual(p2.pdf_url,'http://www.ncbi.nlm.nih.gov/pubmed/24806729')
