@@ -118,7 +118,18 @@ $(function(){
             <a href="{% url 'upload_paper' paper.pk %}" class="btn btn-default btn-xs">{% trans "Deposit again" %}</a>
             {% endif %}
         {% else %}
-            {% include "publishers/detailsPolicy.html" with publisher=psh mode="link" %}
+            {% for deposit in pending_deposits %}
+		<div class="depositSuccess">
+			{% with deposit.oairecord.source.name as source_name %}
+			{% blocktrans trimmed %}
+			This paper has been deposited in {{ source_name }}.
+			The full text will be available after validation by the repository administrators.
+			{% endblocktrans %}
+			{% endwith %}
+		</div>
+	    {% empty %}
+		{% include "publishers/detailsPolicy.html" with publisher=psh mode="link" %}
+	    {% endfor %}
         {% endif %}
     {% endwith %}
 </div>

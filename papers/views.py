@@ -393,6 +393,11 @@ class PaperView(SlugDetailView):
             except (TypeError, ValueError, DepositRecord.DoesNotExist):
                 pass
         context['can_be_deposited'] = self.object.can_be_deposited(self.request.user)
+
+        # Pending deposits
+        context['pending_deposits'] = self.object.depositrecord_set.filter(
+            status='pending')
+
         return context
 
     def redirect(self, **kwargs):
