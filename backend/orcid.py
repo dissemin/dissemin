@@ -35,10 +35,10 @@ from notification.api import delete_notification_per_tag
 import notification.levels as notification_levels
 from papers.baremodels import BareOaiRecord
 from papers.baremodels import BarePaper
+from papers.baremodels import BareName
 from papers.bibtex import parse_bibtex
 from papers.doi import to_doi
 from papers.errors import MetadataSourceException
-from papers.models import Name
 from papers.models import OaiSource
 from papers.models import Researcher
 from papers.name import parse_comma_name
@@ -201,9 +201,15 @@ class ORCIDMetadataExtractor(object):
         else:
             return []
 
-    def convert_authors(self, authors):
-        return filter(lambda n: n is not None,
-                map(Name.lookup_name, authors))
+    def convert_authors(self, authors, orcids):
+        names = [BareName.create_bare(first, last)
+                for first, last in authors]
+        names_and_orcids = zip(names, orcids)
+        filtered = filter(lambda (n,o): n is not None,
+                    names_and_orcids)
+        final_names = [n for n, o in filtered]
+        final_orcids = [o for n, o in filtered]
+        return final_names, final_orcids
 
     def j(self, path, default=None):
         return jpath(path, self._pub, default)
@@ -284,7 +290,7 @@ class ORCIDDataPaper(object):
 
             paper.orcids = extractor.orcids(
                 orcid_id, ref_name, paper.authors, paper.orcids)
-            paper.authors = extractor.convert_authors(paper.authors)
+            paper.authors, paper.orcidse = extractor.convert_authors(paper.authors, paper.orcids)
 
             paper.initialize()
             return paper
@@ -434,7 +440,7 @@ class OrcidPaperSource(PaperSource):
                 profile = OrcidProfile(json=profile)
         except MetadataSourceException as e:
             print e
-            return 
+            return
 
         # As we have fetched the profile, let's update the Researcher
         self.researcher = Researcher.get_or_create_by_orcid(orcid_identifier,
@@ -529,7 +535,7 @@ class OrcidPaperSource(PaperSource):
                 #    seen = True
                 #if not seen:
                 #    continue
-            
+
                 with open(path.join(root, fname), 'r') as f:
                     try:
                         profile = json.load(f)
@@ -542,9 +548,9 @@ class OrcidPaperSource(PaperSource):
                         if fetch_papers:
                             papers = self.fetch_orcid_records(orcid,
                                 profile=profile,
-                                use_doi=use_doi)    
+                                use_doi=use_doi)
                             for p in papers:
                                 self.save_paper(p, r)
                     except (ValueError, KeyError):
                         print "Invalid profile: %s" % fname
- 
+

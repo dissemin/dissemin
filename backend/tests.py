@@ -54,6 +54,7 @@ from papers.models import OaiRecord
 from papers.models import OaiSource
 from papers.models import Paper
 from papers.models import Researcher
+from papers.orcid import OrcidProfile
 from publishers.models import Journal
 
 TEST_INDEX = {
@@ -266,6 +267,13 @@ class OrcidIntegrationTest(PaperSourceTest):
 
         self.assertEqual(p.authors[0].orcid, antoine.orcid)
         self.assertEqual(p.authors[2].orcid, pablo.orcid)
+
+    def test_orcid_affiliation(self):
+        # this used to raise an error.
+        # a more focused test might be preferable (focused on the said
+        # paper)
+        papers = list(self.source.fetch_orcid_records('0000-0002-9658-1473'))
+        self.assertTrue(len(papers) > 30)
 
 
 class PaperMethodsTest(PrefilledTest):
