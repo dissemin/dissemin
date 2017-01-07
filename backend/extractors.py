@@ -99,6 +99,9 @@ class OpenAireExtractor(RegexExtractor):
 
 
 pmc_id_re = re.compile(r'ftpubmed:oai:pubmedcentral\.nih\.gov:([0-9]*)')
+pmc_url_re = re.compile(r'https?://www\.ncbi\.nlm\.nih\.gov/pmc/articles/PMC\d+')
+pmid_url_re = re.compile(r'https?://www\.ncbi\.nlm\.nih\.gov/pubmed/\d+')
+
 class BaseExtractor(RegexExtractor):
 
     def __init__(self, mappings):
@@ -113,8 +116,13 @@ class BaseExtractor(RegexExtractor):
         if pmc_match:
             pmc_url = None
             for u in self.metadata.get('identifier',[]):
-                if u.startswith('http://www.ncbi.nlm.nih.gov/pmc/articles/'):
+                # rationale : PMC urls are prioritary
+                # but PMID urls can be used when no PMC url is provided
+                # (because we know they link to PMC eventually, from the
+                # identifier)
+                if pmc_url_re.match(u) or (not pmc_url and pmid_url_re.match(u)):
                     pmc_url = u
+
             urls['splash'] = pmc_url
             urls['pdf'] = pmc_url
 
