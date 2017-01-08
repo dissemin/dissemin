@@ -51,7 +51,7 @@ HAL_TOPIC_CHOICES = [
 
 
 def aofrDocumentType(paper):
-    if all([not p.has_publication_metadata for p in paper.oairecords]):
+    if all([not p.has_publication_metadata() for p in paper.oairecords]):
         return 'OTHER'
     tr = {
             'journal-article': 'ART',
