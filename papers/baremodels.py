@@ -825,6 +825,10 @@ class BareName(BareObject):
                 'last': self.last,
                }
 
+    def __repr__(self):
+        return "<BareName: %s, %s>" % (unicode(self.first),
+                                       unicode(self.last))
+
 
 class BareOaiRecord(BareObject):
     _bare_foreign_key_fields = [

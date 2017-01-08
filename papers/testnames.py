@@ -316,6 +316,11 @@ class ShallowerNameSimilarityTest(unittest.TestCase):
         for a, b in inputs:
             self.assertEqual(shallower_name_similarity(a, b), False)
 
+    def test_hyphen(self):
+        self.assertGreater(
+            shallower_name_similarity(('Clement F.', 'Pit Claudel'),
+                                       ('Clément', u'Pit-Claudel')),
+                                        0)
 
 class ParseCommaNameTest(unittest.TestCase):
 
@@ -383,6 +388,12 @@ class NameUnificationTest(unittest.TestCase):
                          ('Jean Pierre', 'Dupont'))
         self.assertEqual(name_unification(('Jean-Pierre', 'Dupont'), ('Jean', 'Dupont')),
                          ('Jean-Pierre', 'Dupont'))
+
+        # For this one we don't check the output because ideally it
+        # should be ('Clément F.', 'Pit-Claudel') but it is currently
+        # ('Clement F.', 'Pit Claudel') which is still fine.
+        self.assertTrue(name_unification(('Clement F.', 'Pit Claudel'),
+                                            ('Clément', u'Pit-Claudel')))
 
     def test_uncommon_order(self):
         self.assertEqual(name_unification(('W. T.', 'Gowers'),
@@ -486,13 +497,19 @@ class UnifyNameListsTest(unittest.TestCase):
         self.assertEqual(unify_name_lists(
             [('Jérémie', 'Boutier'), ('Alphonse', 'Viger')],
             [('J{é}r{é}mie', 'Boutier'), ('A.', 'Viger')]),
-            [(('Jérémie', 'Boutier'), (0, None)), (('Alphonse', 'Viger'), (1, 1))])
+            [(('Jérémie', 'Boutier'), (0, 0)), (('Alphonse', 'Viger'), (1, 1))])
 
     def test_duplicates(self):
         self.assertEqual(unify_name_lists(
             [('Jérémie', 'Boutier'), ('Jérémie', 'Boutier')],
             [('J.', 'Boutier')]),
             [(('Jérémie', 'Boutier'), (0, 0)), (None, (1, None))])
+
+    def test_shallower_similarity(self):
+        self.assertEqual(unify_name_lists(
+            [('Clement F.', 'Pit Claudel')],
+            [('Clément', u'Pit-Claudel')])[0][1],
+            (0,0))
 
     def test_inverted(self):
         # in the wild:

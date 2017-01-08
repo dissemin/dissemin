@@ -194,6 +194,8 @@ def match_first_names(pair):
     True
     >>> match_first_names((None,'Iryna'))
     True
+    >>> match_first_names(('Clément','Clement'))
+    True
     """
     a, b = pair
     if a is None or b is None:
@@ -203,7 +205,7 @@ def match_first_names(pair):
     elif len(b) == 1 and len(a) > 0:
         return b.lower() == a[0].lower()
     else:
-        return a.lower() == b.lower()
+        return remove_diacritics(a).lower() == remove_diacritics(b).lower()
 
 
 def to_plain_name(name):
@@ -563,6 +565,12 @@ def num_caps(a):
     """
     return sum(map(lambda c: 1 if c.isupper() else 0, a))
 
+def normalize_last_name(last):
+    """
+    Removes diacritics and hyphens from last names
+    for comparison
+    """
+    return remove_diacritics(last.replace('-',' ')).lower()
 
 def name_unification(a, b):
     """
@@ -575,7 +583,7 @@ def name_unification(a, b):
     firstA, lastA = a
     firstB, lastB = b
 
-    if remove_diacritics(lastA).lower() != remove_diacritics(lastB).lower():
+    if normalize_last_name(lastA) != normalize_last_name(lastB):
         return None
 
     wordsA, sepsA = split_name_words(firstA)
@@ -638,7 +646,6 @@ def unify_name_lists(a, b):
               (None when there is no corresponding name in one of the lists).
     """
     # TODO some normalization of last names? for instance case, hyphens…
-
     a = sorted(enumerate(a), key=lambda (idx, (first, last)): (last, first))
     b = sorted(enumerate(b), key=lambda (idx, (first, last)): (last, first))
 
@@ -668,13 +675,16 @@ def unify_name_lists(a, b):
 
             unified = name_unification(nameA, nameB)
             if unified is not None:
+                # Those two names seem to refer to the same person
+                # and we managed to unify the names.
                 result.append((unified, 0.5*(rankA+rankB), (idxA, idxB)))
                 iA += 1
                 iB += 1
             elif shallower_name_similarity(nameA, nameB) > 0.:
-                # Those two names might refer to the same person
-                # default to the first one as unification failed
-                result.append((nameA, rankA, (idxA, None)))
+                # They still look like the same person but for some
+                # reason we fail to unify their name, let's default
+                # to one of them.
+                result.append((nameA, rankA, (idxA, idxB)))
                 iA += 1
                 iB += 1
             elif nameA[1] == nameB[1]:

@@ -274,6 +274,15 @@ class OrcidIntegrationTest(PaperSourceTest):
         papers = list(self.source.fetch_orcid_records('0000-0002-9658-1473'))
         self.assertTrue(len(papers) > 30)
 
+    def test_bibtex_fallback(self):
+        papers = list(self.source.fetch_orcid_records('0000-0002-1900-3901'))
+        titles = [paper.title for paper in papers]
+        for p in papers:
+            print p.title
+            for a in p.authors:
+                print a.name.__repr__().encode('utf-8')
+                print a.orcid
+        self.assertTrue('Company-Coq: Taking Proof General one step closer to a real IDE' in titles)
 
 class PaperMethodsTest(PrefilledTest):
 
