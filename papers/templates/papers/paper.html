@@ -86,23 +86,24 @@ $(function(){
 </div>
 
 {% if deposit.status == 'published' %}
-<div class="alert alert-success">{% trans "<strong>Congratulations!</strong> This paper was successfully deposited." %}</div>
+    <div class="alert alert-success">{% trans "<strong>Congratulations!</strong> This paper was successfully deposited." %}</div>
+{% else %}
+    {% for deposit in pending_deposits %}
+	<div class="alert alert-success">
+		{% with deposit.repository.name as repo_name %}
+		{% with deposit.repository.url as repo_url %}
+		{% with deposit.oairecord.splash_url as deposit_url %}
+		{% blocktrans trimmed %}
+		<strong>Almost there!</strong>
+		This paper has been deposited in <a href="{{ repo_url }}">{{ repo_name }}</a>.
+		The full text will be available at <a href="{{ deposit_url }}">this address</a> after validation by the repository administrators.
+		{% endblocktrans %}
+		{% endwith %}
+		{% endwith %}
+		{% endwith %}
+	</div>
+    {% endfor %}
 {% endif %}
-
-{% for deposit in pending_deposits %}
-    <div class="alert alert-success">
-	    {% with deposit.repository.name as repo_name %}
-	    {% with deposit.repository.url as repo_url %}
-	    {% blocktrans trimmed %}
-	    <strong>Almost there!</strong>
-	    This paper has been deposited in <a href="{{ repo_url }}">{{ repo_name }}</a>.
-	    The full text will be available there after validation by the repository administrators.
-	    {% endblocktrans %}
-	    {% endwith %}
-	    {% endwith %}
-    </div>
-{% endfor %}
-
 <div id="paperAvailability">
 
 <div id="paperAvailabilityLogo">

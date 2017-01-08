@@ -173,6 +173,7 @@ class HALProtocolTest(ProtocolTest):
             'ftalborguniv:oai:pure.atira.dk:openaire/30feea10-9c2f-11db-8ed6-000ea68e967b',
             'base_dc')
         p.authors_list = [p.authors_list[0]]
+        self.assertEqual(p.doctype, 'journal-article')
         r = self.dry_deposit(p,
             abstract='hey you, yes you',
             topic='SDV',
