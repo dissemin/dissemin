@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-06 20:09+0100\n"
-"PO-Revision-Date: 2017-01-06 20:09+0100\n"
+"POT-Creation-Date: 2017-01-07 16:29+0100\n"
+"PO-Revision-Date: 2017-01-08 01:36+0100\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -50,7 +50,7 @@ msgstr "Refusé par le dépôt"
 msgid "Deleted"
 msgstr "Supprimé"
 
-#: deposit/models.py:166 deposit/templates/deposit/start.html:414
+#: deposit/models.py:166 deposit/templates/deposit/start.html:419
 #: deposit/views.py:81
 msgid "Deposit"
 msgstr "Dépôt"
@@ -102,20 +102,20 @@ msgstr ""
 msgid "Depositing"
 msgstr "Dépôt de"
 
-#: deposit/templates/deposit/start.html:38
+#: deposit/templates/deposit/start.html:42
 msgid "Trying to fill this field automatically for you..."
 msgstr "J'essaie de préremplir ce champ..."
 
-#: deposit/templates/deposit/start.html:47
+#: deposit/templates/deposit/start.html:51
 msgid "Sorry, we could not fill this for you."
 msgstr "Désolé, impossible de préremplir ceci"
 
-#: deposit/templates/deposit/start.html:253
+#: deposit/templates/deposit/start.html:258
 #: papers/templates/papers/department.html:30
 msgid "Dissemin encountered an error, please try again later."
 msgstr "Une erreur est survenue, merci de réessayer plus tard."
 
-#: deposit/templates/deposit/start.html:290
+#: deposit/templates/deposit/start.html:295
 #, python-format
 msgid ""
 "\n"
@@ -134,7 +134,7 @@ msgstr ""
 "d'utilisation</a>.\n"
 "        "
 
-#: deposit/templates/deposit/start.html:301
+#: deposit/templates/deposit/start.html:306
 msgid ""
 "You do not appear to be one of the authors of this paper. By using this "
 "form, you certify that you have the permission to upload it on their behalf."
@@ -143,40 +143,40 @@ msgstr ""
 "formulaire, vous nous certifiez que vous avez leur permission pour soumettre "
 "l'article en leur nom."
 
-#: deposit/templates/deposit/start.html:311
+#: deposit/templates/deposit/start.html:316
 msgid "This paper cannot be deposited in any repository supported by Dissemin."
 msgstr "Ce papier ne peut pas être envoyé vers un dépôt supporté par Dissemin."
 
-#: deposit/templates/deposit/start.html:319
+#: deposit/templates/deposit/start.html:324
 msgid "Document"
 msgstr "Document"
 
-#: deposit/templates/deposit/start.html:327
+#: deposit/templates/deposit/start.html:332
 msgid "Options"
 msgstr "Options"
 
-#: deposit/templates/deposit/start.html:333
+#: deposit/templates/deposit/start.html:338
 msgid "Upload type:"
 msgstr "Type de dépôt:"
 
-#: deposit/templates/deposit/start.html:346
+#: deposit/templates/deposit/start.html:351
 msgid "Repository:"
 msgstr "Dépôt :"
 
-#: deposit/templates/deposit/start.html:363
+#: deposit/templates/deposit/start.html:368
 msgctxt "This repository will be soon available in Dissemin"
 msgid "Coming soon:"
 msgstr "Bientôt disponible :"
 
-#: deposit/templates/deposit/start.html:400
+#: deposit/templates/deposit/start.html:405
 msgid "Metadata"
 msgstr "Métadonnés"
 
-#: deposit/templates/deposit/start.html:416
+#: deposit/templates/deposit/start.html:421
 msgid "Processing deposit..."
 msgstr "Dépôt en cours de traitement..."
 
-#: deposit/templates/deposit/start.html:416
+#: deposit/templates/deposit/start.html:421
 msgid "please wait..."
 msgstr "veuillez patienter..."
 
@@ -192,11 +192,11 @@ msgstr "Impossible d'envoyer ce papier vers le dépôt indiqué."
 msgid "Access to the PDF was denied."
 msgstr "L'accès au PDF a été refusé."
 
-#: dissemin/settings/common.py:262
+#: dissemin/settings/common.py:266
 msgid "English"
 msgstr "Anglais"
 
-#: dissemin/settings/common.py:263
+#: dissemin/settings/common.py:267
 msgid "French"
 msgstr "Français"
 
@@ -546,39 +546,53 @@ msgstr ""
 "            "
 
 #: papers/templates/papers/paper.html:89
-msgid "Paper successfully deposited!"
-msgstr "L'article a été correctement déposé !"
+msgid ""
+"<strong>Congratulations!</strong> This paper was successfully deposited."
+msgstr "<strong>Félicitations !</strong> Cet article a été déposé avec succès."
 
-#: papers/templates/papers/paper.html:99
+#: papers/templates/papers/paper.html:96
+#, python-format
+msgid ""
+"<strong>Almost there!</strong> This paper has been deposited in <a href="
+"\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a "
+"href=\"%(deposit_url)s\">this address</a> after validation by the repository "
+"administrators."
+msgstr ""
+"<strong>On y est presque !</strong> Cet article a été déposé dans <a href="
+"\"%(repo_url)s\">%(repo_name)s</a>. Le texte intégral sera disponible à <a "
+"href=\"%(deposit_url)s\">cette adresse</a> une fois validé par les "
+"administrateurs du dépôt."
+
+#: papers/templates/papers/paper.html:114
 msgid "Full text:"
 msgstr "Texte intégral:"
 
-#: papers/templates/papers/paper.html:101
+#: papers/templates/papers/paper.html:116
 #: papers/templates/papers/publiListItem.html:35
 msgid "Download"
 msgstr "Télécharger"
 
-#: papers/templates/papers/paper.html:103 statistics/models.py:66
+#: papers/templates/papers/paper.html:118 statistics/models.py:66
 msgid "Unavailable"
 msgstr "Indisponible"
 
-#: papers/templates/papers/paper.html:105
+#: papers/templates/papers/paper.html:120
 msgid "Ask upload"
 msgstr "Demander la mise en ligne\t"
 
-#: papers/templates/papers/paper.html:109
+#: papers/templates/papers/paper.html:124
 msgid "Publisher:"
 msgstr "Maison d'édition:"
 
-#: papers/templates/papers/paper.html:116
+#: papers/templates/papers/paper.html:131
 msgid "Deposited."
 msgstr "Déposé."
 
-#: papers/templates/papers/paper.html:118
+#: papers/templates/papers/paper.html:133
 msgid "Deposit again"
 msgstr "Déposer à nouveau"
 
-#: papers/templates/papers/paper.html:129
+#: papers/templates/papers/paper.html:144
 msgid "Abstract"
 msgstr "Résumé"
 
@@ -2092,6 +2106,9 @@ msgstr "URL invalide (délai de connexion expiré)."
 #: upload/views.py:205 upload/views.py:209
 msgid "Invalid URL."
 msgstr "URL invalide."
+
+#~ msgid "Paper successfully deposited!"
+#~ msgstr "L'article a été correctement déposé !"
 
 #~ msgid ""
 #~ "The administration has provided us with this list. Please report any "
