@@ -474,13 +474,16 @@ def tolerant_datestamp_to_datetime(datestamp):
     Traceback (most recent call last):
         ...
     ValueError: Invalid datestamp: 20151023371
-
+    >>> tolerant_datestamp_to_datetime('2014T')
+    Traceback (most recent call last):
+        ...
+    ValueError: Invalid datestamp: 2014T
     """
     splitted = datestamp.split('T')
     if len(splitted) == 2:
         d, t = splitted
         # if no Z is present, raise error
-        if t[-1] != 'Z':
+        if not t.endswith('Z'):
             raise ValueError("Invalid datestamp: "+str(datestamp))
         # split off Z at the end
         t = t[:-1]
