@@ -127,11 +127,12 @@ class BaseExtractor(RegexExtractor):
             urls['pdf'] = pmc_url
 
         # Special case for DOIs
-        doi = to_doi(urls.get('splash'))
-        if doi:
-            doi_prefix = doi.split('/')[0]
-            if doi_prefix in free_doi_prefixes:
-                urls['pdf'] = urls['splash']
+        if urls.get('splash'):
+            doi = to_doi(urls.get('splash'))
+            if doi:
+                doi_prefix = doi.split('/')[0]
+                if doi_prefix in free_doi_prefixes:
+                    urls['pdf'] = urls['splash']
 
         return urls
 
