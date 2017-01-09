@@ -95,6 +95,11 @@ class ProtocolTest(PrefilledTest):
         self.assertIsInstance(retval, Form)
 
     def dry_deposit(self, paper, **form_fields):
+        """
+        This is not a test by itself - it's a method
+        subclasses can call to create a fake deposit
+        (if the protocol supports it!)
+        """
         enabled = self.proto.init_deposit(paper, self.user)
         self.assertTrue(enabled)
 
@@ -114,3 +119,13 @@ class ProtocolTest(PrefilledTest):
             self.assertNotEqual(i.get('label'), None)
             self.assertNotEqual(i.get('value'), None)
         return deposit_result
+
+    def assertEqualOrLog(self, a, b):
+        """
+        Same as assertEqual but prints logs before failing
+        if the two quantities are not equal.
+        """
+        if a != b:
+            print self.proto._logs
+        self.assertEqual(a, b)
+

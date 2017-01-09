@@ -91,7 +91,7 @@ class HALProtocolTest(ProtocolTest):
             topic='INFO',
             depositing_author=0,
             affiliation=59704) # ENS
-        self.assertEqual(r.status, 'faked')
+        self.assertEqualOrLog(r.status, 'faked')
 
     def test_lncs(self):
         """
@@ -104,7 +104,7 @@ class HALProtocolTest(ProtocolTest):
             topic='INFO',
             depositing_author=0,
             affiliation=59704) # ENS
-        self.assertEqual(r.status, 'faked')
+        self.assertEqualOrLog(r.status, 'faked')
 
 
     def test_lics(self):
@@ -118,7 +118,7 @@ class HALProtocolTest(ProtocolTest):
              topic='NLIN',
              depositing_author=0,
              affiliation=128940)
-        self.assertEqual(r.status, 'faked')
+        self.assertEqualOrLog(r.status, 'faked')
 
     def test_journal_article(self):
         """
@@ -131,7 +131,7 @@ class HALProtocolTest(ProtocolTest):
              topic='SDV',
              depositing_author=0,
              affiliation=128940)
-        self.assertEqual(r.status, 'faked')
+        self.assertEqualOrLog(r.status, 'faked')
 
     def test_keywords(self):
         """
@@ -144,7 +144,7 @@ class HALProtocolTest(ProtocolTest):
             topic='SDV',
             depositing_author=0,
             affiliation=128940)
-        self.assertEqual(r.status, 'faked')
+        self.assertEqualOrLog(r.status, 'faked')
 
     def test_preprint(self):
         """
@@ -159,7 +159,7 @@ class HALProtocolTest(ProtocolTest):
              topic='SDV',
              depositing_author=0,
              affiliation=128940)
-        self.assertEqual(r.status, 'faked')
+        self.assertEqualOrLog(r.status, 'faked')
 
     def test_bad_journal_article(self):
         """
@@ -180,7 +180,7 @@ class HALProtocolTest(ProtocolTest):
             topic='SDV',
             depositing_author=0,
             affiliation=128940)
-        self.assertEqual(r.status, 'faked')
+        self.assertEqualOrLog(r.status, 'faked')
 
     def test_paper_already_in_hal(self):
         p = get_proaixy_instance().create_paper_by_identifier(

@@ -26,6 +26,7 @@ from zipfile import ZipFile
 from papers.utils import extract_domain
 
 import requests
+from urlparse import urlparse
 
 from deposit.hal.forms import HALForm
 from deposit.hal.metadata import AOFRFormatter
@@ -121,11 +122,6 @@ class HALProtocol(RepositoryProtocol):
         with ZipFile(s, 'w') as zipFile:
             zipFile.writestr("article.pdf", str(pdf))
             zipFile.writestr("meta.xml", str(metadata))
-
-        with open('/tmp/hal.zip', 'wb') as f:
-            with ZipFile(f, 'w') as zipFile:
-                zipFile.writestr("article.pdf", str(pdf))
-                zipFile.writestr("meta.xml", str(metadata))
         return s
 
     def encodeUserData(self):
@@ -150,9 +146,12 @@ class HALProtocol(RepositoryProtocol):
             # Creating a new deposition
             self.log("### Creating a new deposition")
 
-            host = 'api-preprod.archives-ouvertes.fr'
+            parsed_endpoint = urlparse(self.api_url)
+            host = parsed_endpoint.netloc
+            path = parsed_endpoint.path + 'hal'
+
             conn = http_client.HTTPConnection(host)
-            conn.putrequest('POST', '/sword/hal', True, True)
+            conn.putrequest('POST', path, True, True)
             zipContent = zipFile.getvalue()
             headers = {
                 'Authorization': self.encodeUserData(),
