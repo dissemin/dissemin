@@ -20,7 +20,6 @@
 
 from __future__ import unicode_literals
 
-import requests
 import json
 
 from backend.tests import PrefilledTest
