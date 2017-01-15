@@ -20,6 +20,7 @@
 
 from __future__ import unicode_literals
 
+import requests
 import json
 
 from backend.tests import PrefilledTest
@@ -101,6 +102,16 @@ class PaperAjaxTest(JsonRenderingTest):
         self.assertTrue(result['success'])
         self.assertTrue(len(result['value']) > 10)
 
+    def test_consolidate_elsevier_paper(self):
+        p = Paper.create_by_doi('10.1016/0168-5597(91)90120-m')
+        self.client.login(username='terry', password='yo')
+        result = self.checkJson(self.getPage(
+                'ajax-waitForConsolidatedField', getargs={
+                    'field': 'abstract',
+                    'id': p.id}))
+        self.client.logout()
+        self.assertTrue(result['success'])
+        self.assertTrue(len(result['value']) > 10)
 
 class PublisherAjaxTest(JsonRenderingTest):
 
