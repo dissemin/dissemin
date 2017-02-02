@@ -2,9 +2,9 @@ var stats_colors = ["#FCD206", "#B9C909", "#419BE8", "#dddddd", "#122B52"];
 var stats_colors_aggregated = ["#43A000", "#DB1456"];
 
 function readablizeNumber (number) {
-  var units = ['', 'k', 'M', 'G', 'T', 'P'];
+  var units = ['', 'K', 'M', 'G', 'T', 'P'];
   var e = Math.floor(Math.log(number) / Math.log(1000));
-  return (number / Math.pow(1000, e)).toFixed((e > 0) ? 2 : 0) + " " + units[e];
+  return Math.round((number / Math.pow(1000, e))) + " " + units[e];
 }
 
 function preProcessData(data) {
