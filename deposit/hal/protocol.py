@@ -120,7 +120,7 @@ class HALProtocol(RepositoryProtocol):
     def create_zip(self, pdf, metadata):
         s = BytesIO()
         with ZipFile(s, 'w') as zipFile:
-            zipFile.writestr("article.pdf", str(pdf))
+            zipFile.write(pdf, "article.pdf")
             zipFile.writestr("meta.xml", str(metadata))
         return s
 
