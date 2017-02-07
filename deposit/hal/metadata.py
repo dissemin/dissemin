@@ -55,9 +55,9 @@ def aofrDocumentType(paper):
         return 'OTHER'
     tr = {
             'journal-article': 'ART',
-            'proceedings-article': 'COUV',
             # (sinon les métadonnées sont énervantes avec ça:
-            #'proceedings-article': 'COMM')
+            # bypass: 'proceedings-article': 'COUV',
+            'proceedings-article': 'COMM',
             'book-chapter': 'COUV',
             'book': 'OUV',
             'proceedings': 'DOUV',
@@ -134,15 +134,13 @@ class AOFRFormatter(MetadataFormatter):
         note.attrib['type'] = 'peer'
         note.attrib['n'] = '1'
 
-        # COMM is disabled (use COUV instead)
-
-        #if halType == 'COMM':
-        #    note = addChild(notesStmt, 'note')
-        #    note.attrib['type'] = 'invited'
-        #    note.attrib['n'] = '0'
-        #    note = addChild(notesStmt, 'note')
-        #    note.attrib['type'] = 'proceedings'
-        #    note.attrib['n'] = '1'
+        if halType == 'COMM':
+            note = addChild(notesStmt, 'note')
+            note.attrib['type'] = 'invited'
+            note.attrib['n'] = '0'
+            note = addChild(notesStmt, 'note')
+            note.attrib['type'] = 'proceedings'
+            note.attrib['n'] = '1'
 
         if halType == 'OTHER':
             note = addChild(notesStmt, 'note')
@@ -246,27 +244,26 @@ author
         if publi.journal:
             self.renderJournal(root, publi.journal)
 
-        if True:
-            title = addChild(root, 'title')
-            if halType == 'COUV' or halType == 'OUV' or halType == 'COMM':
-                title.attrib['level'] = 'm'
-            else:
-                title.attrib['level'] = 'j'
-            title.text = publi.full_journal_title()
+        title = addChild(root, 'title')
+        if halType == 'COUV' or halType == 'OUV' or halType == 'COMM':
+            title.attrib['level'] = 'm'
+        else:
+            title.attrib['level'] = 'j'
+        title.text = publi.journal_title or publi.full_journal_title()
 
         # 'COMM' is disabled, use 'COUV' instead
 
-        #if halType == 'COMM':
-        #    meeting = addChild(root, 'meeting')
-        #    title = addChild(meeting, 'title')
-        #    title.text = publi.full_journal_title()
-        #    date = addChild(meeting, 'date')
-        #    date.attrib['type'] = 'start'
-        #    date.text = unicode(pubdate.year)
-        #    settlement = addChild(meeting, 'settlement')
-        #    settlement.text = 'Paris'
-        #    country = addChild(meeting, 'country')
-        #    country.attrib['key'] = 'FR'
+        if halType == 'COMM':
+            meeting = addChild(root, 'meeting')
+            title = addChild(meeting, 'title')
+            title.text = publi.journal_title or publi.full_journal_title()
+            date = addChild(meeting, 'date')
+            date.attrib['type'] = 'start'
+            date.text = unicode(pubdate.year)
+            settlement = addChild(meeting, 'settlement')
+            settlement.text = '-'
+            country = addChild(meeting, 'country')
+            country.attrib['key'] = 'FR'
 
         imprint = addChild(root, 'imprint')
 
