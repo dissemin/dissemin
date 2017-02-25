@@ -157,7 +157,7 @@ class BareAccessStatistics(object):
     @classmethod
     def from_search_queryset(cls, qs):
         qs = qs.aggregations({
-         "status": {"terms": {"field": "combined_status"}},
+         "status": {"terms": {"field": "combined_status_exact"}},
         })
         aggregations = qs.get_aggregation_results()
         status = aggregations.get('status', {'buckets':[]})

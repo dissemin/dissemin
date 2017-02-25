@@ -132,7 +132,7 @@ class PaperSearchView(SearchView):
             '%d paper found',
             '%d papers found',
             nb_results) % nb_results
-        context['search_stats'] = BareAccessStatistics.from_searchqueryset(self.queryset)
+        context['search_stats'] = BareAccessStatistics.from_search_queryset(self.queryset)
         context['on_statuses'] = json.dumps(context['form'].on_statuses())
         context['ajax_url'] = self.request.path
 
