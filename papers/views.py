@@ -21,7 +21,7 @@ from __future__ import unicode_literals
 
 import json
 from statistics.models import COMBINED_STATUS_CHOICES
-from statistics.models import combined_status_stats
+from statistics.models import BareAccessStatistics
 
 from allauth.socialaccount.signals import post_social_login
 from deposit.models import DepositRecord
@@ -132,7 +132,7 @@ class PaperSearchView(SearchView):
             '%d paper found',
             '%d papers found',
             nb_results) % nb_results
-        context['search_stats'] = combined_status_stats(self.queryset)
+        context['search_stats'] = BareAccessStatistics.from_searchqueryset(self.queryset)
         context['on_statuses'] = json.dumps(context['form'].on_statuses())
         context['ajax_url'] = self.request.path
 

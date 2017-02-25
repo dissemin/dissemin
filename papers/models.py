@@ -93,6 +93,7 @@ from papers.utils import iunaccent
 from publishers.models import Journal
 from publishers.models import Publisher
 from solo.models import SingletonModel
+from search import SearchQuerySet
 
 UPLOAD_TYPE_CHOICES = [
    ('preprint', _('Preprint')),
@@ -1438,7 +1439,7 @@ class PaperWorld(SingletonModel):
 
     def update_stats(self):
         """Update the access statistics for all papers"""
-        self.stats.update(Paper.objects.filter(visible=True))
+        self.stats.update_from_search_queryset(SearchQuerySet().models(Paper))
 
     @property
     def object_id(self):
