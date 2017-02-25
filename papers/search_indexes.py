@@ -31,6 +31,10 @@ class PaperIndex(indexes.SearchIndex, indexes.Indexable):
     def get_model(self):
         return Paper
 
+    def full_prepare(self, obj):
+        obj.cache_oairecords()
+        return super(PaperIndex, self).full_prepare(obj)
+
     def get_updated_field(self):
         return "last_modified"
 

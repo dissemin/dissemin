@@ -747,6 +747,15 @@ class Paper(models.Model, BarePaper):
         # straight away
         return self.oairecord_set.all()
 
+    def cache_oairecords(self):
+        """
+        Fetches once the cache for child OaiRecords.
+        The reason why we're not doing this explicitly in self.oairecords
+        is that sometimes we need fresh oairecords and so caching is
+        not always desirable.
+        """
+        self.cached_oairecords = list(self.oairecord_set.all())
+
     @property
     def researcher_ids(self):
         """
