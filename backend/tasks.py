@@ -30,8 +30,6 @@ from celery import shared_task
 from celery.utils.log import get_task_logger
 from django.utils import timezone
 from papers.errors import MetadataSourceException
-from papers.models import Department
-from papers.models import Institution
 from papers.models import Paper
 from papers.models import PaperWorld
 from papers.models import Researcher
