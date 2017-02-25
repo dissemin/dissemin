@@ -60,7 +60,7 @@ class HALForm(FormWithAbstract):
     )
 
     affiliation = forms.CharField(
-        required=False,
+        required=True,
         label=__('Affiliation'),
         widget=AffiliationSelect2(
 #            forward=['first_name', 'last_name'],
