@@ -105,23 +105,19 @@
         <h2 id="why-no-deposit">{% trans "Why can't I deposit in my favorite repository yet?" %}</h2>
         <p>
         {% blocktrans trimmed %}
-            At the moment, we only offer the option to deposit in <a
-              href="http://zenodo.org">Zenodo</a>, an innovative repository
-            backed by the EU. Supporting more repositories requires us to write
+            At the moment, you can use Dissemin to deposit in the following repositories:
+            <ul>
+              <li><strong><a href="http://zenodo.org">Zenodo</a></strong>,
+                an innovative repository backed by the EU.</li>
+              <li><strong><a href="https://hal.archives-ouvertes.fr/">HAL</a></strong>,
+                a French repository managed by the
+                <a href="https://www.ccsd.cnrs.fr/">CCSD</a>.</li>
+            </ul>
+            Supporting more repositories requires us to write
             specific code for each repository. More importantly it requires the
             repositories to give us permission to deposit papers in bulk. We
             have been considering integrating the following repositories:
             <ul>
-              <li><strong><a href="https://hal.archives-ouvertes.fr/">HAL</a></strong>,
-                a French repository managed by the <a
-                 href="https://www.ccsd.cnrs.fr/">CCSD</a>. We cannot integrate
-               HAL smoothly without help from the CCSD.
-               In particular, we need the CCSD to allow users to 
-               to deposit in HAL without providing affiliation information
-               for all authors of a paper (Dissemin cannot easily complete this for you).
-               If you would like to deposit in HAL with Dissemin,
-               don't hesitate to let the CSSD know that you are interested
-               (email: contact AT ccsd.cnrs.fr).</li>
               <li><strong><a href="http://arxiv.org/">arXiv</a></strong>, a
                 well-known general-purpose repository. For now, arXiv has
                 declined to allow Dissemin to deposit using their SWORD API, and
@@ -152,7 +148,8 @@
         Dissemin is not a repository as it does not store any full text. When the full text of a publication
         is available, a link to the relevant page is provided.
         The full texts deposited through Dissemin are stored in third-party repositories such as
-        <a href="http://zenodo.org">Zenodo</a>.
+        <a href="http://zenodo.org">Zenodo</a> or
+        <a href="https://hal.archives-ouvertes.fr/">HAL</a>.
         {% endblocktrans %}
         </p>
         <h2 id="running">{% trans "Who runs dissem.in?" %}</h2>
