@@ -112,7 +112,7 @@ function init_paper_module (config) {
         var detailed_papers = message.payload.papers.map(function (paper) {
           if (paper.title) {
             return '<p>' + interpolate(gettext(
-              '"%(name)s" is ignored for the following reason: %(reason)s'
+              '"%(name)s" was ignored for the following reason: %(reason)s'
             ),
             {
               name: paper.title,
@@ -120,7 +120,7 @@ function init_paper_module (config) {
             },
             true) + '</p>'
           } else {
-            return '<p>' + gettext('A paper has been ignored, because it has no name') + '</p>'
+            return '<p>' + gettext('A paper was ignored, because it has no name') + '</p>'
           }
         }).map(function (paper) {
           return '<li>' + paper + '</li>'
