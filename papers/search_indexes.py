@@ -6,10 +6,10 @@ from .models import Paper
 class PaperIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, model_attr='title')
     pubdate = indexes.DateField(model_attr='pubdate')
-    combined_status = indexes.CharField(model_attr='combined_status')
-    doctype = indexes.CharField(model_attr='doctype')
+    combined_status = indexes.CharField(model_attr='combined_status', faceted=True)
+    doctype = indexes.CharField(model_attr='doctype', faceted=True)
     visible = indexes.BooleanField(model_attr='visible')
-    oa_status = indexes.CharField(model_attr='oa_status')
+    oa_status = indexes.CharField(model_attr='oa_status', faceted=True)
     availability = indexes.CharField()
 
     #: Names of the authors

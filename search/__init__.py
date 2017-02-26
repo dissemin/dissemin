@@ -31,6 +31,7 @@ class SearchQuery(ElasticsearchSearchQuery):
         super(SearchQuery, self).__init__(**kwargs)
         self.query_post_filter = None
         self.aggregations = None
+        self._aggregation_results = None
 
     def get_aggregation_results(self):
         if self._aggregation_results is None:

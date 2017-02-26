@@ -30,8 +30,6 @@ from celery import shared_task
 from celery.utils.log import get_task_logger
 from django.utils import timezone
 from papers.errors import MetadataSourceException
-from papers.models import Department
-from papers.models import Institution
 from papers.models import Paper
 from papers.models import PaperWorld
 from papers.models import Researcher
@@ -123,23 +121,12 @@ def update_all_stats():
     Updates the stats for every model using them
     """
     AccessStatistics.update_all_stats(PaperWorld)
-    AccessStatistics.update_all_stats(Publisher)
-    AccessStatistics.update_all_stats(Journal)
-    AccessStatistics.update_all_stats(Researcher)
-    AccessStatistics.update_all_stats(Department)
-    AccessStatistics.update_all_stats(Institution)
+    #AccessStatistics.update_all_stats(Publisher)
+    #AccessStatistics.update_all_stats(Journal)
+    #AccessStatistics.update_all_stats(Researcher)
+    #AccessStatistics.update_all_stats(Department)
+    #AccessStatistics.update_all_stats(Institution)
 
-
-@shared_task(name='update_all_stats_but_researchers')
-@run_only_once('refresh_stats', timeout=10*60)
-def update_all_stats_but_researchers():
-    """
-    Updates the stats for every model using them
-    """
-    AccessStatistics.update_all_stats(PaperWorld)
-    AccessStatistics.update_all_stats(Publisher)
-    AccessStatistics.update_all_stats(Institution)
-    AccessStatistics.update_all_stats(Department)
 
 
 @shared_task(name='update_journal_stats')

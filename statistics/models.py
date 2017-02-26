@@ -95,18 +95,6 @@ def combined_status_for_instance(paper):
     return 'unk'
 
 
-def combined_status_stats(queryset):
-    aggregations = queryset.get_aggregation_results()
-    if aggregations:
-        status = aggregations.get('status', {'buckets':[]})
-        buckets = {
-            bucket['key']: bucket['doc_count']
-            for bucket in status['buckets']
-        }
-        return BareAccessStatistics.from_dict(buckets)
-    else:
-        return BareAccessStatistics.from_queryset(queryset)
-
 class BareAccessStatistics(object):
     """
     A bare summary of the status of a set of publications
@@ -165,6 +153,19 @@ class BareAccessStatistics(object):
             stats.num_tot += count
             setattr(stats, 'num_'+status, count)
         return stats
+
+    @classmethod
+    def from_search_queryset(cls, qs):
+        qs = qs.aggregations({
+         "status": {"terms": {"field": "combined_status_exact"}},
+        })
+        aggregations = qs.get_aggregation_results()
+        status = aggregations.get('status', {'buckets':[]})
+        buckets = {
+            bucket['key']: bucket['doc_count']
+            for bucket in status['buckets']
+        }
+        return cls.from_dict(buckets)
 
     def check_values(self):
         """
@@ -259,6 +260,14 @@ class AccessStatistics(models.Model, BareAccessStatistics):
         for key, modifier in STATUS_QUERYSET_FILTER.items():
             self.__dict__['num_'+key] = modifier(queryset).count()
         self.num_tot = queryset.count()
+        self.save()
+
+    def update_from_search_queryset(self, queryset):
+        """
+        Updates the stats using the search index
+        """
+        self.clear()
+        self.add(BareAccessStatistics.from_search_queryset(queryset))
         self.save()
 
     @classmethod
