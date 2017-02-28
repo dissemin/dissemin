@@ -31,6 +31,7 @@ importing this module and running the function manually.
 from __future__ import unicode_literals
 
 from collections import defaultdict
+from bulk_update.helper import bulk_update
 
 import backend.crossref
 from backend.romeo import fetch_publisher
@@ -206,3 +207,28 @@ def recompute_publisher_policies():
     """
     for p in Publisher.objects.all():
         change_publisher_oa_status(p.pk, p.classify_oa_status())
+
+def cleanup_paper_researcher_ids():
+    """
+    Ensures that all researcher_ids in Papers link to actual researchers
+    """
+    researcher_ids = set(Researcher.objects.all().values_list('id', flat=True))
+    bs = 1000
+    curid = 0
+    found = True
+    while found:
+        found = False
+        batch = []
+        for p in Paper.objects.filter(id__gt=curid).order_by('id')[:bs]:
+            curid = p.id
+            found = True
+            modified = False
+            for i, author in enumerate(p.authors_list):
+                rid = author['researcher_id']
+                if (rid is not None and rid not in researcher_ids):
+                    p.authors_list[i]['researcher_id'] = None
+                modified = True
+            if modified:
+                batch.append(p)
+        print "Updating %d papers" % len(batch)
+        bulk_update(batch)
