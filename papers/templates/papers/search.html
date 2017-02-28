@@ -70,7 +70,7 @@ $(function(){
         <p><a href="{{ researcher.orcid|orcid_to_url }}"><img src="{% static "img/orcid-small.png" %}" alt="ORCID" /> {{ researcher.orcid }}</a></p>
         {% endif %}
         {% if researcher.institution %}
-        <p><span class="glyphicon glyphicon-star"></span> <a href="{{ researcher.institution.url }}">{{ researcher.institution }}</a></p>
+        <p><span class="glyphicon glyphicon-star"></span> {{ researcher.institution }}</p>
         {% endif %}
         {% if researcher.department %}
         <p><span class="glyphicon glyphicon-star-empty"></span> <a href="{{ researcher.department.url }}">{{ researcher.department }}</a></p>
