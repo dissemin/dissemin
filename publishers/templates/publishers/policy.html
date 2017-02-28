@@ -62,13 +62,6 @@ href="http://www.sherpa.ac.uk/romeo/feedback.php?la=en&amp;fIDnum=%7C&amp;mode=s
 >{% trans "Report any error to them" %}</a></p>
 <p>
 
-{% if publisher.stats %}
-<span class="detailsTitle">{% trans "Availability statistics" %}</span>
-<div class="detailsContent">
-  {% include 'statistics/availabilitypct.html' with obj=publisher %}
-</div>
-{% endif %}
-
 {% if request.user.is_superuser %}
 </div>
 <span class="detailsTitle">{% trans "Policy" %}</span>
