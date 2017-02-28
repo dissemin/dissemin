@@ -984,6 +984,15 @@ class Paper(models.Model, BarePaper):
             return Paper.from_bare(bare_paper)  # TODO TODO index it?
 
     @classmethod
+    def get_by_doi(cls, doi):
+        """
+        Finds the paper associated to that DOI (if any)
+        """
+        # there should not be more than one paper in this
+        # queryset
+        return cls.objects.filter(oairecord__doi=doi).first()
+
+    @classmethod
     def create_by_hal_id(self, id, bare=False):
         """
         Creates a paper given a HAL id (e.g. hal-01227383)

@@ -367,14 +367,18 @@ class PaperView(SlugDetailView):
         if doi:
             doi = to_doi(doi)
 
+        paper = None
         try:
             if pk is not None:
                 paper = queryset.get(pk=pk)
             elif doi is not None:
-                paper = Paper.objects.get(oairecord__doi=doi)
+                paper = Paper.get_by_doi(doi)
             else:
                 raise AttributeError("Paper view expects a DOI or a pk")
         except ObjectDoesNotExist:
+            pass
+
+        if not paper:
             paper = Paper.create_by_doi(doi)
             if paper is None or paper.is_orphan():
                 raise Http404(_("No %(verbose_name)s found matching the query") %
