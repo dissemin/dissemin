@@ -103,6 +103,33 @@ def list_deposits(request):
     }
     return render(request, 'deposit/deposits.html', context)
 
+@user_passes_test(is_authenticated)
+def edit_repo_preferences(request, repo_id):
+    repo = get_object_or_404(Repository, pk=repo_id)
+    protocol = repo.get_implementation()
+    context = {
+        'repository': repo,
+        'protocol': protocol,
+    }
+    pref_form = protocol.get_preferences_form(request.user)
+    if request.method == 'POST':
+        pref_form = protocol.get_preferences_form(request.user, request.POST)
+        pref_form.save()
+
+    if request.method == 'GET':
+        # Just displaying the form
+        context['preferencess_form'] = pref_form,
+        return render(request, 'deposit/repo_preferences.html', context)
+
+@require_POST
+@user_passes_test(is_authenticated)
+def save_repo_preferences(request, repo_id):
+    repo = get_object_or_404(Repository, pk=repo_id)
+    protocol = repo.get_implementation()
+    prefs = protocol.get_preferences(request.user)
+    pref_form = protocol.get_preferences_form(request.user, request.POST)
+
+
 @require_POST
 @json_view
 @user_passes_test(is_authenticated)

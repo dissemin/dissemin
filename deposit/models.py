@@ -164,3 +164,46 @@ class DepositRecord(models.Model):
             return self.identifier
         else:
             return unicode(_('Deposit'))
+
+    def __repr__(self):
+        return '<DepositRecord %s>' % unicode(self.identifier)
+
+
+class DepositPreferences(models.Model):
+    """
+    This is an abstract base model to be subclassed
+    by repositories. It stores the preferences one user
+    might have concerning a particular repository, such
+    as default affiliation for HAL, default license, or
+    things we want to fill in automatically for them.
+    """
+    class Meta:
+        abstract = True
+
+    #: The user for which these preferences are stored
+    user = models.ForeignKey(User)
+    #: The repository for which these preferences apply
+    repository = models.ForeignKey(Repository)
+
+    @classmethod
+    def get_form_class(self):
+        """
+        This method should be reimplemented to return
+        the form class to edit these deposit preferences.
+        This is expected to be a ModelForm that get_form
+        will be able to initialize with values from an
+        existing instance.
+        """
+        raise NotImplemented
+
+    def get_form(self):
+        """
+        This method should return the
+        """
+        raise NotImplemented
+
+
+    def __repr__(self):
+        return '<DepositPreferences, user %s, repo %s>' %(
+                    unicode(self.user), unicode(self.repository))
+

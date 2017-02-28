@@ -27,6 +27,7 @@ from django.utils.translation import ugettext as __
 from papers.baremodels import BareOaiRecord
 from deposit.forms import BaseMetadataForm
 from deposit.models import DEPOSIT_STATUS_CHOICES
+from django.contrib.contenttypes.models import ContentType
 
 class DepositError(Exception):
     """
@@ -63,7 +64,16 @@ class RepositoryProtocol(object):
     Actual implementations should inherit from this class.
     """
 
+    #. The class of the form for the deposit
     form_class = BaseMetadataForm
+
+    #: The name of the model for the user preferences
+    #: (set to None if no preferences can be set).
+    #: The format should be (app_label, model_name) otherwise.
+    preferences_model_name = None
+
+    #: The class of the form to edit the user preferences
+    preferences_form_class = None
 
     def __init__(self, repository, **kwargs):
         self.repository = repository
@@ -89,6 +99,10 @@ class RepositoryProtocol(object):
         self.user = user
         self._logs = ''
         return True
+
+    ### Deposit form ###
+    # This section defines the form the user sees when
+    # depositing a paper.
 
     def get_form_initial_data(self):
         """
@@ -168,6 +182,11 @@ class RepositoryProtocol(object):
             self.log(traceback.format_exc())
             return DepositResult(logs=self._logs, status='failed', message=__('Failed to connect to the repository. Please try again later.'))
 
+    ### Logging utilities
+    # This log will be saved in a DepositRecord later on, so make sure
+    # you use this logging so that you can inspect what went wrong
+    # with a particular deposit later on.
+
     def log(self, line):
         """
         Logs a line in the protocol log.
@@ -186,3 +205,40 @@ class RepositoryProtocol(object):
             self.log(r.text)
             self.log('')
             raise DepositError(error_msg)
+
+    ### Repository preferences
+    # This enables you to let users define preferences about their
+    # deposits.
+
+    def get_preferences(self, user):
+        """
+        Returns an instance of the preferences for a user.
+        If the preferences already exist, they will be returned
+        as an existing model instance. Otherwise, they will
+        be returned as a fresh (unsaved) instance of that model.
+        """
+        if self.preferences_model is None:
+            return
+        app_label, model_name = self.preferences_model
+        MyPreferences = ContentType.objects.get(
+            app_label=app_label,
+            model=model_name).model_class()
+        try:
+            return MyPreferences.objects.get(
+                    user=user,
+                    repository=self.repository)
+        except DoesNotExist:
+            return MyPreferences()
+
+    def get_preferences_form(self, user, *args, **kwargs):
+        """
+        Returns the preference form for a user.
+        All other arguments are passed to the form initialization.
+        """
+        if self.preferences_form_class is None:
+            return
+
+        prefs = self.get_preferences(user)
+        kwargs['instance'] = prefs
+        return self.preferences_form_class(*args, **kwargs)
+
