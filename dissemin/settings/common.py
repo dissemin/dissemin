@@ -239,14 +239,10 @@ CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
 CELERY_IMPORTS = ['backend.tasks']
 
 CELERYBEAT_SCHEDULE = {
-#    'update_all_stats_but_researchers': {
-#        'task': 'update_all_stats_but_researchers',
-#        'schedule': timedelta(minutes=30),
-#    },
-#    'update_journal_stats': {
-#        'task': 'update_journal_stats',
-#        'schedule': timedelta(days=1),
-#    },
+    'update_all_stats': {
+        'task': 'update_all_stats',
+        'schedule': timedelta(days=1),
+    },
     'refresh_deposit_statuses': {
           'task': 'refresh_deposit_statuses',
           'schedule': timedelta(days=1),

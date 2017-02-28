@@ -93,6 +93,7 @@ from papers.utils import iunaccent
 from publishers.models import Journal
 from publishers.models import Publisher
 from solo.models import SingletonModel
+from search import SearchQuerySet
 
 UPLOAD_TYPE_CHOICES = [
    ('preprint', _('Preprint')),
@@ -746,6 +747,15 @@ class Paper(models.Model, BarePaper):
         # we don't update the cache yet as it would fetch the queryset
         # straight away
         return self.oairecord_set.all()
+
+    def cache_oairecords(self):
+        """
+        Fetches once the cache for child OaiRecords.
+        The reason why we're not doing this explicitly in self.oairecords
+        is that sometimes we need fresh oairecords and so caching is
+        not always desirable.
+        """
+        self.cached_oairecords = list(self.oairecord_set.all())
 
     @property
     def researcher_ids(self):
@@ -1429,7 +1439,7 @@ class PaperWorld(SingletonModel):
 
     def update_stats(self):
         """Update the access statistics for all papers"""
-        self.stats.update(Paper.objects.filter(visible=True))
+        self.stats.update_from_search_queryset(SearchQuerySet().models(Paper))
 
     @property
     def object_id(self):

@@ -44,6 +44,74 @@ from papers.models import Researcher
 from papers.utils import sanitize_html
 from publishers.models import AliasPublisher
 from publishers.models import Publisher
+from datetime import datetime
+from elasticsearch.helpers import bulk
+import haystack
+from haystack.exceptions import SkipDocument
+from haystack.constants import ID
+
+def update_index_for_model(model, batch_size=256, batches_per_commit=10, firstpk=0):
+    """
+    More efficient update of the search index for large models such as
+    Paper
+
+    :param batch_size: the number of instances to retrieve for each query
+    :param batches_per_commit: the number of batches after which we
+                    should commit to the search engine
+    :param firstpk: the instance to start with.
+    """
+    using_backends = haystack.connection_router.for_write()
+    if len(using_backends) != 1:
+        raise ValueError("Don't know what search index to use")
+    engine = haystack.connections[using_backends[0]]
+    backend = engine.get_backend()
+    index = engine.get_unified_index().get_index(model)
+
+    qs = model.objects.order_by('pk')
+    lastpk_object = list(model.objects.order_by('-pk')[:1])
+
+    if not lastpk_object: # No object in the model
+        return
+
+    lastpk = lastpk_object[0].pk
+
+    batch_number = 0
+
+    # rate reporting
+    indexed = 0
+    starttime = datetime.utcnow()
+
+    while firstpk < lastpk:
+        batch_number += 1
+
+        prepped_docs = []
+        for obj in qs.filter(pk__gt=firstpk)[:batch_size]:
+            firstpk = obj.pk
+
+            try:
+                prepped_data = index.full_prepare(obj)
+                final_data = {}
+
+                # Convert the data to make sure it's happy.
+                for key, value in prepped_data.items():
+                    final_data[key] = backend._from_python(value)
+                final_data['_id'] = final_data[ID]
+
+                prepped_docs.append(final_data)
+            except SkipDocument:
+                continue
+
+        bulk(backend.conn, prepped_docs, index=backend.index_name, doc_type='modelresult')
+        indexed += len(prepped_docs)
+        if batch_number % batches_per_commit == 0:
+            backend.conn.indices.refresh(index=backend.index_name)
+
+        if indexed >= 5000:
+            curtime = datetime.utcnow()
+            rate = int(indexed / (curtime-starttime).total_seconds())
+            print "%d obj/s, %d / %d" % (rate,firstpk,lastpk)
+            starttime = curtime
+            indexed = 0
 
 
 def cleanup_researchers():

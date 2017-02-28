@@ -112,7 +112,7 @@ function init_paper_module (config) {
         var detailed_papers = message.payload.papers.map(function (paper) {
           if (paper.title) {
             return '<p>' + interpolate(gettext(
-              '"%(name)s" is ignored with the following reason: %(reason)s'
+              '"%(name)s" was ignored for the following reason: %(reason)s'
             ),
             {
               name: paper.title,
@@ -120,7 +120,7 @@ function init_paper_module (config) {
             },
             true) + '</p>'
           } else {
-            return '<p>' + gettext('A paper has been ignored, because it has no name') + '</p>'
+            return '<p>' + gettext('A paper was ignored, because it has no name') + '</p>'
           }
         }).map(function (paper) {
           return '<li>' + paper + '</li>'
@@ -132,7 +132,7 @@ function init_paper_module (config) {
         html += detailed_informations
         html += '<div class="message-actions">'
           html += '<button data-id=' + message.id + ' class="btn btn-mark-as-read">' + MARK_AS_READ + '</button>'
-          html += '<button class="btn btn-show-more-informations">' + gettext('Show more informations') + '</button>'
+          html += '<button class="btn btn-show-more-informations">' + gettext('Show more information') + '</button>'
         html += '</div>'
       }
 
@@ -157,10 +157,10 @@ function init_paper_module (config) {
 
       if (!$more_information.hasClass('shown')) {
         $more_information.addClass('shown')
-        $button.text(gettext('Show less informations'))
+        $button.text(gettext('Show less information'))
       } else {
         $more_information.removeClass('shown')
-        $button.text(gettext('Show more informations'))
+        $button.text(gettext('Show more information'))
       }
     })
   }
