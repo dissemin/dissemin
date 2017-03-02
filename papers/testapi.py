@@ -21,11 +21,12 @@
 from __future__ import unicode_literals
 
 from papers.testajax import JsonRenderingTest
-
+from papers.models import Paper
 
 class PaperApiTest(JsonRenderingTest):
 
     def test_valid_doi(self):
+        p = Paper.create_by_doi('10.1016/0379-6779(91)91572-r')
         self.checkJson(self.getPage('api-paper-doi',
                                     args=['10.1016/0379-6779(91)91572-r']))
 

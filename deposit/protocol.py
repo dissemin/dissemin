@@ -152,7 +152,7 @@ class RepositoryProtocol(object):
         notification_payload = {
                 'name':name,
                 'repo':self.repository.name,
-                'paperurl':reverse('paper', args=[self.paper.pk]),
+                'paperurl':self.paper.url,
             }
         try:
             result = self.submit_deposit(*args, **kwargs)
