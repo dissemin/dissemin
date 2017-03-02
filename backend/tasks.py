@@ -33,6 +33,7 @@ from papers.errors import MetadataSourceException
 from papers.models import Paper
 from papers.models import PaperWorld
 from papers.models import Researcher
+from papers.models import Institution
 from publishers.models import Journal
 from publishers.models import Publisher
 

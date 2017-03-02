@@ -145,16 +145,19 @@ class RepositoryProtocol(object):
         reimplemented). It catches DepositErrors raised in the deposit process
         and adds the logs to its return value.
         """
-        # Small hack to get notifications
-        name = getattr(self.user, 'name', None)
-        if name and self.user.first_name and self.user.last_name:
-            name = '%s %s' % (self.user.first_name,self.user.last_name)
-        notification_payload = {
-                'name':unicode(name),
-                'repo':self.repository.name,
-                'paperurl':self.paper.url,
-            }
         try:
+            # Small hack to get notifications
+            name = getattr(self.user, 'name', None)
+            first_name = getattr(self.user, 'first_name', None)
+            last_name = getattr(self.user, 'last_name', None)
+            if first_name and last_name:
+                name = '%s %s' % (first_name,last_name)
+            notification_payload = {
+                    'name':unicode(name),
+                    'repo':self.repository.name,
+                    'paperurl':self.paper.url,
+                }
+
             result = self.submit_deposit(*args, **kwargs)
             result.logs = self._logs
 
