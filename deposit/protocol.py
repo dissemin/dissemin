@@ -146,7 +146,7 @@ class RepositoryProtocol(object):
         and adds the logs to its return value.
         """
         # Small hack to get notifications
-        name = getattr(self.user, 'name')
+        name = getattr(self.user, 'name', None)
         if name and self.user.first_name and self.user.last_name:
             name = '%s %s' % (self.user.first_name,self.user.last_name)
         notification_payload = {
