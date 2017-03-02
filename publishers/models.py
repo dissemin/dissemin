@@ -30,6 +30,7 @@ from django.template.defaultfilters import slugify
 from django.utils.functional import cached_property
 from django.utils.translation import ugettext as __
 from django.utils.translation import ugettext_lazy as _
+from search import SearchQuerySet
 
 get_model = apps.get_model
 
@@ -129,8 +130,9 @@ class Publisher(models.Model):
         if not self.stats:
             self.stats = AccessStatistics.objects.create()
             self.save()
-        self.stats.update(get_model('papers', 'Paper').objects.filter(
-            oairecord__publisher=self).distinct())
+        from papers.models import Paper
+        sqs = SearchQuerySet().models(Paper).filter(publisher=self.id)
+        self.stats.update_from_search_queryset(sqs)
 
     def __unicode__(self):
         if not self.alias:
@@ -226,8 +228,9 @@ class Journal(models.Model):
         if not self.stats:
             self.stats = AccessStatistics.objects.create()
             self.save()
-        self.stats.update(get_model('papers', 'Paper').objects.filter(
-            oairecord__journal=self).distinct())
+        from papers.models import Paper
+        sqs = SearchQuerySet().models(Paper).filter(journal=self.id)
+        self.stats.update_from_search_queryset(sqs)
 
     def breadcrumbs(self):
         return self.publisher.breadcrumbs()+[(unicode(self), '')]

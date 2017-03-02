@@ -146,10 +146,9 @@ class Institution(models.Model):
         if not self.stats:
             self.stats = AccessStatistics.objects.create()
             self.save()
-        self.stats.clear()
-        for d in self.sorted_departments:
-            self.stats.add(d.stats)
-        self.stats.save()
+        from papers.models import Paper
+        sqs = SearchQuerySet().models(Paper).filter(institution=self.id)
+        self.stats.update_from_search_queryset(sqs)
 
     @property
     def object_id(self):
