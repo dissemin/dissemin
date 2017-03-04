@@ -275,17 +275,38 @@
        <h2 id="copy-available">{% trans "There is a freely available copy of my article online but dissem.in does not find it." %}</h2>
        <p>
             {% blocktrans trimmed %}
-            There are two cases:
-            <ul>
-                    <li>Your article is available on a personal homepage or a similar
-                    website. In this case, you should read <a href="#repositories-rock">
-                        why you should also put it in a repository</a>.</li>
-                    <li>Your article is available in a repository but does not appear as
-                     available in dissem.in. In this case you should send a message
-                     to <a href="mailto:contact@dissem.in">contact@dissem.in</a> to fix the problem.</li>
-            </ul>
+            First, note that Dissemin does not account for copies of articles
+            that are only available on a personal homepage or a similar website.
+            This is intentional, because we believe that
+            <a href="#repositories-rock">articles should be hosted in repositories</a>.
             {% endblocktrans %}
-            </p>
+       </p>
+       <p>
+            {% blocktrans trimmed %}
+            Second, at the moment, Dissemin only supports repositories with
+            a crawlable API that follows the
+            <a href="https://www.openarchives.org/OAI/openarchivesprotocol.html">OAI-PMH protocol</a>,
+            and is
+            <a href="https://www.base-search.net/about/en/suggest.php">registered</a>
+            in <a href="https://www.base-search.net/">BASE</a>. We have a
+            <a href="https://github.com/dissemin/croawl">long-term project</a>
+            to support more repositories by crawling them, but for the moment,
+            we do not have the resources to support repositories not
+            covered by BASE.
+            {% endblocktrans %}
+       </p>
+       <p>
+            {% blocktrans trimmed %}
+            If you are a user of a repository and would like it to be supported
+            by Dissemin, please contact the repository administrator and suggest
+            them to implement OAI-PMH support and to 
+            <a href="https://www.base-search.net/about/en/suggest.php">register</a>
+            their repository in BASE. If the repository is registered in BASE
+            but is not properly supported by Dissemin, please 
+            email <a href="mailto:contact@dissem.in">contact@dissem.in</a> and
+            we will investigate the issue.
+            {% endblocktrans %}
+       </p>
 
         <h3>{% trans "Authentication with ORCID" %}</h3>
 
