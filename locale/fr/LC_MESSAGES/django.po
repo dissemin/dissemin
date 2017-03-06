@@ -170,7 +170,7 @@ msgstr "Bientôt disponible :"
 
 #: deposit/templates/deposit/start.html:405
 msgid "Metadata"
-msgstr "Métadonnés"
+msgstr "Métadonnées"
 
 #: deposit/templates/deposit/start.html:421
 msgid "Processing deposit..."
