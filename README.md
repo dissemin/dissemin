@@ -6,7 +6,7 @@ dissem.in
 [![Coverage Status](https://coveralls.io/repos/dissemin/dissemin/badge.svg?branch=beta&service=github)](https://coveralls.io/github/dissemin/dissemin?branch=master)
 [![Dependency Status](https://dependencyci.com/github/dissemin/dissemin/badge)](https://dependencyci.com/github/dissemin/dissemin)
 [[![todofy badge](https://todofy.org/b/dissemin/dissemin)](https://todofy.org/r/dissemin/dissemin) 
-![Donate](https://pennersr.github.io/img/bitcoin-badge.svg)](http://association.dissem.in/#dons)
+[![BountySource](https://www.bountysource.com/badge/tracker?tracker_id=6475570)](https://www.bountysource.com/teams/dissemin/issues?tracker_ids=6475570)
 
 Web platform to help researchers upload their papers to open repositories.
 Released under the [Affero General Public License](http://www.gnu.org/licenses/agpl-3.0.en.html).
