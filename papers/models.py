@@ -147,7 +147,7 @@ class Institution(models.Model):
             self.stats = AccessStatistics.objects.create()
             self.save()
         from papers.models import Paper
-        sqs = SearchQuerySet().models(Paper).filter(institution=self.id)
+        sqs = SearchQuerySet().models(Paper).filter(institutions=self.id)
         self.stats.update_from_search_queryset(sqs)
 
     @property
