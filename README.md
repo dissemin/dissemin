@@ -2,8 +2,8 @@ dissem.in
 ================
 
 [![Documentation Status](https://img.shields.io/badge/docs-latest-brightgreen.svg?style=flat)](http://dev.dissem.in/doc/)
-[![Build Status](https://travis-ci.org/dissemin/dissemin.svg?branch=beta)](https://travis-ci.org/dissemin/dissemin)
-[![Coverage Status](https://coveralls.io/repos/dissemin/dissemin/badge.svg?branch=beta&service=github)](https://coveralls.io/github/dissemin/dissemin?branch=master)
+[![Build Status](https://travis-ci.org/dissemin/dissemin.svg?branch=master)](https://travis-ci.org/dissemin/dissemin)
+[![Coverage Status](https://coveralls.io/repos/dissemin/dissemin/badge.svg?branch=master&service=github)](https://coveralls.io/github/dissemin/dissemin?branch=master)
 [![Dependency Status](https://dependencyci.com/github/dissemin/dissemin/badge)](https://dependencyci.com/github/dissemin/dissemin)
 [[![todofy badge](https://todofy.org/b/dissemin/dissemin)](https://todofy.org/r/dissemin/dissemin) 
 [![BountySource](https://www.bountysource.com/badge/tracker?tracker_id=6475570)](https://www.bountysource.com/teams/dissemin/issues?tracker_ids=6475570)
