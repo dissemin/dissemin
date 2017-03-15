@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-04 21:22+0100\n"
+"POT-Creation-Date: 2017-03-15 14:42+0100\n"
 "PO-Revision-Date: 2017-03-04 21:31+0100\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
@@ -1461,10 +1461,10 @@ msgstr ""
 #: templates/dissemin/faq.html:158
 msgid ""
 "Dissemin is brought to you by the <a href=\"http://association.dissem.in/"
-"#team\">CAPSH association</a>."
+"\">CAPSH association</a>."
 msgstr ""
-"Dissemin est développé par <a href=\"http://dissem.in/#team\">l'association "
-"CAPSH</a>."
+"Dissemin est développé par <a href=\"http://association.dissem.in/"
+"\">l'association CAPSH</a>."
 
 #: templates/dissemin/faq.html:164
 msgid ""
@@ -1744,11 +1744,11 @@ msgstr ""
 
 #: templates/dissemin/faq.html:385
 msgid ""
-"Yes! We even have <a href=\"http://dev.dissem.in/#api\">an API</a>. If it "
-"does not suit your needs, tell us what you need."
+"Yes! We even have <a href=\"http://dev.dissem.in/api.html\">an API</a>. If "
+"it does not suit your needs, tell us what you need."
 msgstr ""
-"Oui ! Nous avons même <a href=\"http://dev.dissem.in/#api\">une API</a>. Si "
-"vous n'êtes pas satisfait par ce qu'elle propose, n'hésitez pas à nous "
+"Oui ! Nous avons même <a href=\"http://dev.dissem.in/api.html\">une API</a>. "
+"Si vous n'êtes pas satisfait par ce qu'elle propose, n'hésitez pas à nous "
 "contacter."
 
 #: templates/dissemin/faq.html:390 templates/dissemin/tos.html:142
@@ -1886,18 +1886,6 @@ msgstr "Sources de données"
 #: templates/dissemin/sources.html:13
 msgid "Primary sources"
 msgstr "Sources primaires"
-
-#: templates/dissemin/sources.html:20
-msgid "Secondary sources"
-msgstr "Sources secondaires"
-
-#: templates/dissemin/sources.html:21
-msgid "Harvested with the OAI-PMH protocol."
-msgstr "Moissonnées avec le protocole OAI-PMH."
-
-#: templates/dissemin/sources.html:32
-msgid "Suggest a data source"
-msgstr "Suggérer l'ajout d'une source"
 
 #: templates/dissemin/tos.html:15 templates/dissemin/tos.html:27
 msgid "In short"
@@ -2130,6 +2118,15 @@ msgstr "URL invalide (délai de connexion expiré)."
 #: upload/views.py:205 upload/views.py:209
 msgid "Invalid URL."
 msgstr "URL invalide."
+
+#~ msgid "Secondary sources"
+#~ msgstr "Sources secondaires"
+
+#~ msgid "Harvested with the OAI-PMH protocol."
+#~ msgstr "Moissonnées avec le protocole OAI-PMH."
+
+#~ msgid "Suggest a data source"
+#~ msgstr "Suggérer l'ajout d'une source"
 
 #~ msgid "Availability statistics"
 #~ msgstr "Statistiques de disponibilité"
