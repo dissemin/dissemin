@@ -677,6 +677,10 @@ class Name(models.Model, BareName):
         return "name=%d" % self.pk
 
 
+# Max number of OaiRecord per Paper:
+# beyond that, we ignore them.
+MAX_OAIRECORDS_PER_PAPER = 100
+
 # Papers matching one or more researchers
 class Paper(models.Model, BarePaper):
     title = models.CharField(max_length=1024)
@@ -1294,6 +1298,11 @@ class OaiRecord(models.Model, BareOaiRecord):
                     splash_url,
                     pdf_url)
 
+        # We check that there are not already too many records in this
+        # paper
+        if about.cached_oairecords and len(about.cached_oairecords) >= MAX_OAIRECORDS_PER_PAPER:
+            raise ValueError('Too many records in paper %d' % about.pk)
+
         # We don't search for records with the same identifier yet,
         # we will rather catch the exception thrown by the DB
         if not match:
@@ -1421,7 +1430,7 @@ class OaiRecord(models.Model, BareOaiRecord):
         if short_splash == None or paper == None:
             return
 
-        records = list(paper.oairecord_set.all())
+        records = list(paper.oairecord_set.all()[:MAX_OAIRECORDS_PER_PAPER])
         paper.cached_oairecords = records
         for record in records:
             short_splash2 = shorten(record.splash_url)
