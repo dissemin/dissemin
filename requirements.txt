@@ -1,0 +1,50 @@
+-e git://github.com/dissemin/django-allauth.git@0.25.2-post_login-orcidv1.2#egg=django-allauth
+-e git://github.com/swordapp/python-client-sword2#egg=sword2
+-e git://github.com/wetneb/pyoai.git@any_metadataPrefix#egg=pyoai
+PyPDF2
+bibtexparser
+celery[redis]
+cryptography
+czipfile
+django==1.10
+django-autocomplete-light
+django-bootstrap-pagination
+django-bulk-update
+django-bootstrap3-datepicker
+django-cache-machine
+django-capture-tag
+django-cas-ng
+django-countries
+django-crispy-forms
+django-geojson
+django-haystack
+django-js-reverse
+django-jsonview
+django-leaflet
+django-memoize
+django-redis-cache
+django-solo
+django-widget-tweaks
+django-debug-toolbar
+djangorestframework
+elasticsearch
+html5lib==0.999999999
+httplib2
+jsonfield
+lxml
+mock
+name_tools
+ndg-httpsclient
+pillow
+psycopg2
+pyasn1
+pyopenssl
+requests
+requests_mock
+titlecase
+unicode_tex
+unidecode
+urllib3
+wand
+python-dateutil # for haystack, as explained here:
+#http://django-haystack.readthedocs.io/en/v2.4.1/management_commands.html

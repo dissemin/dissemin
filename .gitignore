@@ -55,3 +55,14 @@ doc/sphinx/*.migrations.*.rst
 # Coverage
 .coverage
 htmlcov/
+
+# Pyflakes
+pyflakes.out
+
+# Vagrant
+.vagrant
+.vm_venv
+*.user
+
+# Auto-completion
+.ropeproject

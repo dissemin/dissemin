@@ -1,0 +1,41 @@
+{% load staticfiles %}
+{% load bootstrap_pagination %}
+{% load statuses %}
+{% load i18n %}
+
+ {% if page_obj.paginator.num_pages > 1 %}
+<div class="searchPages">{% bootstrap_paginate page_obj range=10 %}</div>
+ {% endif %}
+ {% for result in object_list %}{% with paper=result.object %}
+ {% ifchanged paper.year %}
+ {% if not forloop.first %}</ul></div>{% endif %}
+    <div class="ulContainer">
+    {% if not form.sort_by.value %}
+    <div class="listYear">{{ paper.year }}</div>
+    {% endif %}
+    <ul class="withoutTriangles">
+ {% endifchanged %}
+    <li class="pubItem">
+	{% if paper.pk %}
+        {% include "papers/publiListItem.html" with paper=paper with_buttons=request.user.is_authenticated %}
+    </li>
+	{% endif %}
+        {% if forloop.last %}</ul></div>{% endif %}
+ {% endwith %}{% empty %}
+    {% if not researcher.current_task %}
+    <p class="notFound">{% trans "No paper found." %}</p>
+    {% endif %}
+ {% endfor %}
+ {% if page_obj.paginator.num_pages > 1 %}
+ <div class="searchPages">{% bootstrap_paginate page_obj range=10 %}</div>
+ {% elif researcher %}
+    {% with researcher.matching_papers_url as matching_papers_url %}
+    <p class="notFound">{% blocktrans trimmed %}
+	Missing publications?
+        <a href="{{ matching_papers_url }}">
+	Search for publications with a matching author name
+	</a>
+	{% endblocktrans %}
+    </p>
+    {% endwith %}
+ {% endif %}

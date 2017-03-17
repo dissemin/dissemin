@@ -7,12 +7,12 @@
 # modify it under the terms of the GNU Affero General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU Affero General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU Affero General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -20,27 +20,37 @@
 
 
 from __future__ import unicode_literals
+
+from caching.base import CachingManager
+from caching.base import CachingMixin
+from deposit.registry import protocol_registry
+from django.contrib.auth.models import User
+from django.contrib.postgres.fields import JSONField
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-
-from django.db import models
-from papers.models import Paper, OaiSource
-from django.contrib.auth.models import User
+from papers.models import OaiSource
+from papers.models import Paper
+from papers.models import OaiRecord
+from papers.models import UPLOAD_TYPE_CHOICES
 from upload.models import UploadedPDF
-from deposit.protocol import *
-from deposit.registry import *
 
 DEPOSIT_STATUS_CHOICES = [
-   ('created', _('Created')),
-   ('metadata_defective', _('Metadata defective')),
-   ('document_defective', _('Document defective')),
-   ('deposited', _('Deposited')),
+   ('failed', _('Failed')), # we failed to deposit the paper
+   ('faked', _('Faked')), # the deposit was faked (for tests)
+   ('pending', _('Pending publication')), # the deposit has been
+    # submitted but is not publicly visible yet
+   ('published', _('Published')), # the deposit is visible on the repo
+   ('refused', _('Refused by the repository')),
+   ('deleted', _('Deleted')), # deleted by the repository
    ]
 
-class Repository(models.Model):
+class RepositoryManager(CachingManager):
+    pass
+
+class Repository(models.Model, CachingMixin):
     """
     This model stores the parameters for a particular repository.
-    
+
     The `name`, `description`, `url` and `logo` fields are used in the
     user interface to present the repository.
 
@@ -54,6 +64,8 @@ class Repository(models.Model):
     used by the protocol implementation to perform the deposit.
 
     """
+    objects = RepositoryManager()
+
     #: Name
     name = models.CharField(max_length=64)
     #: Description
@@ -67,7 +79,7 @@ class Repository(models.Model):
     protocol = models.CharField(max_length=32)
     #: The source with which the OaiRecords associated with the deposits are created
     oaisource = models.ForeignKey(OaiSource)
-    
+
     #: The identifier of the account under which papers should be deposited
     username = models.CharField(max_length=64, null=True, blank=True)
     #: The password for that account
@@ -90,6 +102,7 @@ class Repository(models.Model):
         """
         cls = protocol_registry.get(self.protocol)
         if cls is None:
+            print "Warning: protocol not found: "+unicode(self.protocol)
             return
         return cls(self)
 
@@ -97,7 +110,7 @@ class Repository(models.Model):
         """
         Returns an instance of the protocol initialized for the given
         paper and user, if initialization succeeded.
-        
+
         :returns: an instance of the protocol implementation, or `None`
             if the instance failed to initialize with the given paper and user.
         """
@@ -118,6 +131,7 @@ class Repository(models.Model):
     class Meta:
         verbose_name_plural = 'Repositories'
 
+
 class DepositRecord(models.Model):
     """
     This model stores the results of a deposit initiated by the user,
@@ -134,9 +148,11 @@ class DepositRecord(models.Model):
 
     request = models.TextField(null=True, blank=True)
     identifier = models.CharField(max_length=512, null=True, blank=True)
-    pdf_url = models.URLField(max_length=1024, null=True, blank=True)
-    date = models.DateTimeField(auto_now=True) # deposit date
-    upload_type = models.CharFile = models.FileField(upload_to='deposits')
+    oairecord = models.ForeignKey(OaiRecord, null=True, blank=True)
+    date = models.DateTimeField(auto_now=True)  # deposit date
+    upload_type = models.CharField(max_length=64,choices=UPLOAD_TYPE_CHOICES)
+    status = models.CharField(max_length=64,choices=DEPOSIT_STATUS_CHOICES)
+    additional_info = JSONField(null=True, blank=True)
 
     file = models.ForeignKey(UploadedPDF)
 
@@ -148,5 +164,3 @@ class DepositRecord(models.Model):
             return self.identifier
         else:
             return unicode(_('Deposit'))
-
-

@@ -7,12 +7,12 @@
 # modify it under the terms of the GNU Affero General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU Affero General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU Affero General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -21,19 +21,22 @@
 from __future__ import unicode_literals
 
 import re
-import name_tools
 
-from papers.utils import iunaccent, remove_diacritics
+import name_tools
+from papers.utils import iunaccent
+from papers.utils import remove_diacritics
 
 # Name managemement: heuristics to separate a name into (first,last)
 comma_re = re.compile(r',+')
 space_re = re.compile(r'\s+')
 initial_re = re.compile(r'(^|\W)\w(\W|$)', re.UNICODE)
-lowercase_re = re.compile(r'[a-z]') # TODO make this unicode-portable
-# See http://stackoverflow.com/questions/5224835/what-is-the-proper-regular-expression-to-match-all-utf-8-unicode-lowercase-lette
+lowercase_re = re.compile(r'[a-z]')  # TODO make this unicode-portable
+# See
+# http://stackoverflow.com/questions/5224835/what-is-the-proper-regular-expression-to-match-all-utf-8-unicode-lowercase-lette
 letter_re = re.compile(r'\w', re.UNICODE)
 
-def match_names(a,b):
+
+def match_names(a, b):
     """
     Returns a boolean: are these two names compatible?
     Examples:
@@ -43,15 +46,18 @@ def match_names(a,b):
     > ('R. K.', 'Ryder'),('K.', 'Ryder'): False
     > ('Claire', 'Mathieu'),('Claire', 'Kenyon-Mathieu'): False
     """
-    return name_similarity(a,b) > 0.
+    return name_similarity(a, b) > 0.
 
 initial_re = re.compile(r'[A-Z](\.,;)*$')
 final_comma_re = re.compile(r',+( |$)')
+
+
 def remove_final_comma(w):
     """
     Remove all commas following words
     """
     return final_comma_re.sub(r'\1', w)
+
 
 def normalize_name_words(w):
     """
@@ -68,12 +74,13 @@ def normalize_name_words(w):
     name_words = map(remove_final_comma, new_name_words)
     return rebuild_name(name_words, separators)
 
+
 def rebuild_name(name_words, separators):
     """ Reconstructs a name string out of words and separators, as returned by split_name_words.
     len(name_words) = len(separators) + 1 is assumed.
 
     :param name_words: The list of name words (without periods)
-    :param separators: The list of separators ('' or '-'). 
+    :param separators: The list of separators ('' or '-').
     """
     separators = map(lambda x: ' ' if x == '' else x, separators)
     output = ''
@@ -84,12 +91,16 @@ def rebuild_name(name_words, separators):
         if idx < len(separators):
             output += separators[idx]
         elif idx < len(name_words)-1:
-            print "WARNING: incorrect name splitting for '"+w+"'"
+            print("WARNING: incorrect name splitting for '%s'" %
+                  unicode(name_words))
             output += ' '
     return output
 
-common_abbr = set(['st','dr','prof','jr','sr','mr','ms','mrs','mme','fr'])
+common_abbr = set(['st', 'dr', 'prof', 'jr', 'sr',
+                   'mr', 'ms', 'mrs', 'mme', 'fr'])
 name_separator_re = re.compile(r'\w\b((\.*) *(-*) *)(\w|$)', re.UNICODE)
+
+
 def split_name_words(string):
     """
     :returns: A pair of lists. The first one is the list of words, the second is the
@@ -129,11 +140,13 @@ def split_name_words(string):
         match = name_separator_re.search(buf)
     if buf:
         words.append(buf)
-    return (words,separators)
+    return (words, separators)
+
 
 def has_only_initials(string):
     words, separators = split_name_words(string)
     return all(map(lambda x: len(x) == 1, words))
+
 
 def shorten_first_name(string):
     words, separators = split_name_words(string)
@@ -144,6 +157,7 @@ def shorten_first_name(string):
             if i < len(separators):
                 result += separators[i] if separators[i] else ' '
     return result
+
 
 def recapitalize_word(w, force=False):
     """
@@ -164,6 +178,7 @@ def recapitalize_word(w, force=False):
         return res
     return w
 
+
 def match_first_names(pair):
     """
     Returns true when the given pair of first names
@@ -179,8 +194,10 @@ def match_first_names(pair):
     True
     >>> match_first_names((None,'Iryna'))
     True
+    >>> match_first_names(('Clément','Clement'))
+    True
     """
-    a,b = pair
+    a, b = pair
     if a is None or b is None:
         return True
     if len(a) == 1 and len(b) > 0:
@@ -188,14 +205,16 @@ def match_first_names(pair):
     elif len(b) == 1 and len(a) > 0:
         return b.lower() == a[0].lower()
     else:
-        return a.lower() == b.lower()
+        return remove_diacritics(a).lower() == remove_diacritics(b).lower()
+
 
 def to_plain_name(name):
     """
     Converts a :class:`Name` instance to a pair of
     (firstname,lastname)
     """
-    return (name.first,name.last)
+    return (name.first, name.last)
+
 
 def deduplicate_words(words, separators):
     """
@@ -222,20 +241,22 @@ nn_escaping_chars_re = re.compile(r'[\{\}\\]')
 nn_nontext_re = re.compile(r'[^a-z_]+')
 nn_final_nontext_re = re.compile(r'[^a-z_]+$')
 
+
 def name_normalization(ident):
     ident = remove_diacritics(ident).lower()
     ident = ident.strip()
-    ident = nn_separator_re.sub('_',ident)
-    ident = nn_escaping_chars_re.sub('',ident)
-    ident = nn_final_nontext_re.sub('',ident)
-    ident = nn_nontext_re.sub('-',ident)
+    ident = nn_separator_re.sub('_', ident)
+    ident = nn_escaping_chars_re.sub('', ident)
+    ident = nn_final_nontext_re.sub('', ident)
+    ident = nn_nontext_re.sub('-', ident)
     return ident
+
 
 def name_signature(first, last):
     ident = iunaccent(last.strip())
-    ident = nn_escaping_chars_re.sub('',ident)
-    ident = nn_final_nontext_re.sub('',ident)
-    ident = nn_nontext_re.sub('-',ident)
+    ident = nn_escaping_chars_re.sub('', ident)
+    ident = nn_final_nontext_re.sub('', ident)
+    ident = nn_nontext_re.sub('-', ident)
     if len(first):
         ident = iunaccent(first[0])+'-'+ident
     return ident
@@ -244,17 +265,21 @@ def name_signature(first, last):
 
 weight_initial_match = 0.4
 weight_full_match = 0.8
+
+
 def weight_first_name(word):
     if len(word) > 1:
         return weight_full_match
     else:
         return weight_initial_match
 
-def weight_first_names(name_pair):
-    a,b = name_pair
-    return min(weight_first_name(a),weight_first_name(b))
 
-def name_similarity(a,b):
+def weight_first_names(name_pair):
+    a, b = name_pair
+    return min(weight_first_name(a), weight_first_name(b))
+
+
+def name_similarity(a, b):
     """
     Returns a float: how similar are these two names?
     Examples:
@@ -283,10 +308,10 @@ def name_similarity(a,b):
     0
     """
 
-    if not a or not b:
+    if not a or not b or len(a) != 2 or len(b) != 2:
         return False
-    (firstA,lastA) = a
-    (firstB,lastB) = b
+    firstA, lastA = a
+    firstB, lastB = b
     firstA = iunaccent(firstA)
     firstB = iunaccent(firstB)
     lastA = iunaccent(lastA)
@@ -310,32 +335,34 @@ def name_similarity(a,b):
     for i in range(maxlen):
         if i < len(parts):
             sumscores += weight_first_names(parts[i])
-            expanded.append((len(partsA[i])>1, len(partsB[i])>1))
+            expanded.append((len(partsA[i]) > 1, len(partsB[i]) > 1))
         elif i < len(partsA):
             sumscores -= 0.25*weight_first_name(partsA[i])
-            expanded.append((len(partsA[i])>1, False))
+            expanded.append((len(partsA[i]) > 1, False))
         else:
             sumscores -= 0.25*weight_first_name(partsB[i])
-            expanded.append((False, len(partsB[i])>1))
+            expanded.append((False, len(partsB[i]) > 1))
 
     # Make sure expanded first names of A are included in that of B
     # or that of B and included in that of A
     # This prevents ('Amanda P.','Brown') and ('A. Patrick','Brown')
     # frow matching
-    if not (all([a or not b for a,b in expanded]) or
-        all([b or not a for a,b in expanded])):
+    if not (all([wa or not wb for wa, wb in expanded]) or
+            all([wb or not wa for wa, wb in expanded])):
         return 0.
 
     sumscores = max(min(sumscores, 1), 0)
     return sumscores
+
 
 def shallower_name_similarity(a, b):
     """
     Same as name_similarity, but accepts differences in the last names.
     This heuristics is more costly but is only used to attribute an ORCID
     affiliation to the right author in papers fetched from ORCID.
+    (in the next function)
     """
-    if not a or not b:
+    if not a or not b or len(a) != 2 or len(b) != 2:
         return False
     firstA, lastA = a
     firstB, lastB = b
@@ -347,6 +374,8 @@ def shallower_name_similarity(a, b):
     wordsB, sepB = split_name_words(lastB)
     wordsA = set(wordsA)
     wordsB = set(wordsB)
+    if not wordsA or not wordsB:
+        return False
     ratio = float(len(wordsA & wordsB)) / len(wordsA | wordsB)
 
     partsA, sepsA = split_name_words(firstA)
@@ -366,17 +395,39 @@ def shallower_name_similarity(a, b):
     maxlen = max(len(partsA), len(partsB))
     return ratio*(len(parts)+1)/(maxlen+1)
 
+def most_similar_author(ref_name, authors):
+    """
+    Given a name, compute the index of the most similar name
+    in the authors list, if there is any compatible name.
+    (None otherwise)
+    """
+    max_sim_idx = None
+    max_sim = 0.
+    for idx, name in enumerate(authors):
+        cur_similarity = shallower_name_similarity(name, ref_name)
+        if cur_similarity > max_sim:
+            max_sim_idx = idx
+            max_sim = cur_similarity
+    return max_sim_idx
+
+
 #### Helpers for the name splitting heuristic ######
 
 # Is this string a name initial?
+
+
 def contains_initials(s):
     # TODO delete the following commented dead code
-    return len(s) == 1 #initial_re.search(iunaccent(s)) != None
+    return len(s) == 1  # initial_re.search(iunaccent(s)) != None
 
 # Is this word fully capitalized?
+
+
 def is_fully_capitalized(s):
     return lowercase_re.search(remove_diacritics(s)) == None
 # Split a word according to a predicate
+
+
 def predsplit_forward(predicate, words):
     first = []
     last = []
@@ -387,8 +438,10 @@ def predsplit_forward(predicate, words):
         else:
             predHolds = False
             last.append(words[i])
-    return (first,last)
+    return (first, last)
 # The same, but backwards
+
+
 def predsplit_backwards(predicate, words):
     first = []
     last = []
@@ -399,7 +452,7 @@ def predsplit_backwards(predicate, words):
         else:
             predHolds = False
             first.insert(0, words[i])
-    return (first,last)
+    return (first, last)
 
 
 ###### Name splitting heuristic based on name_tools ######
@@ -415,7 +468,7 @@ def parse_comma_name(name):
     else:
         words, separators = split_name_words(name)
         if not words:
-            return ('','')
+            return ('', '')
         first_name = None
         last_name = None
         from_lists = True
@@ -427,21 +480,20 @@ def parse_comma_name(name):
         # CASE 1: the first word is capitalized but not all of them are
         # we assume that it is the first word of the last name
         if not initial[0] and capitalized[0] and not all(capitalized):
-            (last,first) = predsplit_forward(
+            (last, first) = predsplit_forward(
                     (lambda i: capitalized[i] and not initial[i]),
                     words)
-            
 
         # CASE 2: the last word is capitalized but not all of them are
         # we assume that it is the last word of the last name
         elif not initial[-1] and capitalized[-1] and not all(capitalized):
-            (first,last) = predsplit_forward(
+            (first, last) = predsplit_forward(
                     (lambda i: (not capitalized[i]) or initial[i]),
                     words)
 
         # CASE 3: the first word is an initial
         elif initial[0]:
-            (first,last) = predsplit_forward(
+            (first, last) = predsplit_forward(
                     (lambda i: initial[i]),
                     words)
 
@@ -451,7 +503,7 @@ def parse_comma_name(name):
         # For simplicity we assume that all the words in the first
         # name are initials
         elif initial[-1]:
-            (last,first) = predsplit_backwards(
+            (last, first) = predsplit_backwards(
                     (lambda i: initial[i]),
                     words)
 
@@ -471,7 +523,7 @@ def parse_comma_name(name):
         else:
             prefix, first_name, last_name, suffix = name_tools.split(name)
             from_lists = False
-            
+
         if from_lists:
             first_name = ' '.join(first)
             last_name = ' '.join(last)
@@ -484,9 +536,10 @@ def parse_comma_name(name):
     if not last_name:
         first_name, last_name = last_name, first_name
 
-    return (first_name,last_name)
+    return (first_name, last_name)
 
 ### Name unification heuristics ###
+
 
 def zipNone(lstA, lstB):
     """
@@ -494,21 +547,30 @@ def zipNone(lstA, lstB):
     """
     la = len(lstA)
     lb = len(lstB)
+
     def aux():
-        for i in range(max(la,lb)):
+        for i in range(max(la, lb)):
             objA, objB = None, None
             if i < la:
                 objA = lstA[i]
             if i < lb:
                 objB = lstB[i]
-            yield (objA,objB)
+            yield (objA, objB)
     return list(aux())
+
 
 def num_caps(a):
     """
     Number of capitalized letters
     """
     return sum(map(lambda c: 1 if c.isupper() else 0, a))
+
+def normalize_last_name(last):
+    """
+    Removes diacritics and hyphens from last names
+    for comparison
+    """
+    return remove_diacritics(last.replace('-',' ')).lower()
 
 def name_unification(a, b):
     """
@@ -521,14 +583,14 @@ def name_unification(a, b):
     firstA, lastA = a
     firstB, lastB = b
 
-    if lastA.lower() != lastB.lower():
+    if normalize_last_name(lastA) != normalize_last_name(lastB):
         return None
 
-    wordsA, sepsA = split_name_words(firstA) 
+    wordsA, sepsA = split_name_words(firstA)
     wordsB, sepsB = split_name_words(firstB)
 
     def keep_best(pair):
-        a,b = pair
+        a, b = pair
         if a is None:
             return b
         elif b is None:
@@ -573,7 +635,8 @@ def name_unification(a, b):
     # No match
     return None
 
-def unify_name_lists(a,b):
+
+def unify_name_lists(a, b):
     """
     Unify two name lists, by matching compatible names and unifying them, and inserting the other names as they are.
     The names are sorted by average rank in the two lists.
@@ -583,9 +646,8 @@ def unify_name_lists(a,b):
               (None when there is no corresponding name in one of the lists).
     """
     # TODO some normalization of last names? for instance case, hyphens…
-
-    a = sorted(enumerate(a), key=lambda (idx,(first,last)): (last,first))
-    b = sorted(enumerate(b), key=lambda (idx,(first,last)): (last,first))
+    a = sorted(enumerate(a), key=lambda (idx, (first, last)): (last, first))
+    b = sorted(enumerate(b), key=lambda (idx, (first, last)): (last, first))
 
     iA = 0
     iB = 0
@@ -596,12 +658,12 @@ def unify_name_lists(a,b):
         if iA == len(a):
             idxB = b[iB][0]
             rankB = (idxB+1)/lenB
-            result.append((b[iB][1],(rankB+1)/lenB,(None,iB)))
+            result.append((b[iB][1], (rankB+1)/lenB, (None, idxB)))
             iB += 1
         elif iB == len(b):
             idxA = a[iA][0]
             rankA = (idxA+1)/lenA
-            result.append((a[iA][1],(rankA+1)/lenA,(iA,None)))
+            result.append((a[iA][1], (rankA+1)/lenA, (idxA, None)))
             iA += 1
         else:
             idxA = a[iA][0]
@@ -611,40 +673,44 @@ def unify_name_lists(a,b):
             rankA = (idxA+1)/lenA
             rankB = (idxB+1)/lenB
 
-            unified = name_unification(nameA,nameB)
+            unified = name_unification(nameA, nameB)
             if unified is not None:
-                result.append((unified,0.5*(rankA+rankB),(idxA,idxB)))
+                # Those two names seem to refer to the same person
+                # and we managed to unify the names.
+                result.append((unified, 0.5*(rankA+rankB), (idxA, idxB)))
                 iA += 1
                 iB += 1
             elif shallower_name_similarity(nameA, nameB) > 0.:
-                # Those two names might refer to the same person
-                # default to the first one as unification failed
-                result.append((nameA,rankA,(idxA,None)))
+                # They still look like the same person but for some
+                # reason we fail to unify their name, let's default
+                # to one of them.
+                result.append((nameA, rankA, (idxA, idxB)))
                 iA += 1
                 iB += 1
             elif nameA[1] == nameB[1]:
                 # Those two names look incompatible because of their first names
-                result.append((nameA,rankA,(idxA,None)))
-                result.append((nameB,rankB,(None,idxB)))
+                result.append((nameA, rankA, (idxA, None)))
+                result.append((nameB, rankB, (None, idxB)))
                 iA += 1
                 iB += 1
             elif nameA[1] < nameB[1]:
-                result.append((nameA,rankA,(idxA,None)))
+                result.append((nameA, rankA, (idxA, None)))
                 iA += 1
             else:
-                result.append((nameB,rankB,(None,idxB)))
+                result.append((nameB, rankB, (None, idxB)))
                 iB += 1
 
-    result = map(lambda (name,rank,idx):(name,idx), sorted(result, key=lambda x:x[1]))
+    result = map(lambda (name, rank, idx): (name, idx), sorted(result, key=lambda x: x[1]))
 
     def make_unique(lst):
         seen = set()
-        for name,idx in lst:
-            if name not in seen:
-                seen.add(name)
-                yield (name,idx)
+        for name, idx in lst:
+            first, last = name
+            [k1, k2] = sorted([first.lower(), last.lower()])
+            if (k1, k2) not in seen:
+                seen.add((k1, k2))
+                yield (name, idx)
             else:
-                yield (None,idx)
+                yield (None, idx)
 
     return list(make_unique(result))
-    

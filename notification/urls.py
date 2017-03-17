@@ -15,3 +15,5 @@ if 'rest_framework' in settings.INSTALLED_APPS:
     urlpatterns = [
         url(r'^', include(router.urls))
     ]
+else:
+    urlpatterns = []

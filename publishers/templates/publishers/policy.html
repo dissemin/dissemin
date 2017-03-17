@@ -56,14 +56,11 @@
 {% endif %}
 
 <p class="sherpaAcknowledgement">{% trans "Policy data provided by" %}<br />
-<a href="http://www.sherpa.ac.uk/romeo/"><img src="{% static "img/sherpa-romeo.gif" %}" width="210px" alt="SHERPA/RoMEO" /></a></p>
-
-{% if publisher.stats %}
-<span class="detailsTitle">{% trans "Availability statistics" %}</span>
-<div class="detailsContent">
-  {% include 'statistics/availabilitypct.html' with obj=publisher %}
-</div>
-{% endif %}
+<a href="http://www.sherpa.ac.uk/romeo/"><img src="{% static "img/sherpa-romeo.gif" %}" width="210" alt="SHERPA/RoMEO" /></a><br/>
+<a
+href="http://www.sherpa.ac.uk/romeo/feedback.php?la=en&amp;fIDnum=%7C&amp;mode=simple&amp;type=jpnew"
+>{% trans "Report any error to them" %}</a></p>
+<p>
 
 {% if request.user.is_superuser %}
 </div>
@@ -87,7 +84,6 @@
 {% endblock %}
 
 {% block lists %}
-{% url 'search' as search_url %}
 {% with publisher.preprint as policy %}
 <div class="publisher-policy">
 {% include "publishers/detailsPolicy.html" with mode="none" %}
@@ -111,6 +107,14 @@
 {% endif %}
 
 {% if request.user.is_superuser %}
+<h4>{% trans "Publications" %}</h4>
+<ul>
+    <li><a href="{% url 'publisher-papers' publisher.id publisher.slug %}">
+        {% blocktrans trimmed with publisher=publisher.name %}
+        All papers published by {{ publisher }}
+        {% endblocktrans %}
+    </a></li>
+</ul>
 <h4>{% trans "Journals" %}</h4>
 <p>{% trans "Only journals with papers written by our users are listed." %}</p>
 {% if journals.paginator.num_pages > 1 %}

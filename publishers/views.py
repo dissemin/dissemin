@@ -19,22 +19,24 @@
 
 from __future__ import unicode_literals
 
-from django.shortcuts import render, redirect
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.views import generic
+from django.core.paginator import EmptyPage
+from django.core.paginator import PageNotAnInteger
+from django.core.paginator import Paginator
+from django.shortcuts import redirect
 from django.utils.translation import ugettext as _
-from haystack.query import SearchQuerySet
+from django.views import generic
 from haystack.generic_views import SearchView
-from haystack.forms import SearchForm
-from dissemin.settings import UNIVERSITY_BRANDING
-
-from publishers.models import *
 from publishers.forms import PublisherForm
+from publishers.models import OA_STATUS_CHOICES
+from publishers.models import Publisher
+from publishers.models import publishers_breadcrumbs
+from search import SearchQuerySet
 
 # Number of publishers per page in the publishers list
 NB_RESULTS_PER_PAGE = 20
 # Number of journals per page on a Publisher page
 NB_JOURNALS_PER_PAGE = 30
+
 
 def varyQueryArguments(key, args, possibleValues):
     variants = []
@@ -72,11 +74,22 @@ class PublishersView(SearchView):
     paginate_by = NB_RESULTS_PER_PAGE
     template_name = 'publishers/list.html'
     form_class = PublisherForm
+    queryset = SearchQuerySet().models(Publisher)
+
+    def get_form_kwargs(self):
+        """
+        We make sure the search is valid even if no parameter
+        was passed, in which case we add a default empty query.
+        Otherwise the search form is not bound and search fails.
+        """
+        args = super(PublishersView, self).get_form_kwargs()
+        if 'data' not in args:
+            args['data'] = {self.search_field:''}
+        return args
+
 
     def get_context_data(self, **kwargs):
         context = super(PublishersView, self).get_context_data(**kwargs)
-
-        context.update(UNIVERSITY_BRANDING)
 
         context['search_description'] = _('Publishers')
         context['nb_results'] = self.queryset.count()
@@ -110,5 +123,3 @@ class PublisherView(SlugDetailView):
         context['breadcrumbs'] = publisher.breadcrumbs()
 
         return context
-
-

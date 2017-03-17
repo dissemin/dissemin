@@ -49,7 +49,6 @@ function addResearcher() {
 
 {% block lists %}
 <p></p>
-<p>{% trans "The administration has provided us with this list. Please report any problem to contact@dissem.in." %}</p>
 <ul id="membersList" class="noCircle">
     {% for person in department.sorted_researchers %}
     {% ifchanged person.name.first_letter %}
@@ -86,7 +85,7 @@ function addResearcher() {
 {% block details %}
 <span class="detailsTitle">{% trans "Department" %}</span>
 <div class="detailsContent">
-    <p><a href="{% url 'search' %}?department={{ department.id }}">{% trans "Papers of the members" %}</a></p>
+    <p><a href="{% url 'department-papers' pk=department.id %}">{% trans "Papers of the members" %}</a></p>
 
     {% include "statistics/pie.html" with obj=department stats_counter=1 %}
 </div>

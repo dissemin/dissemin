@@ -1,5 +1,0 @@
--e git://github.com/wetneb/pyoai.git@base_dc#egg=pyoai
-czipfile
-httplib2
-bibtexparser
-sklearn

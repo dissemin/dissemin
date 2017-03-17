@@ -1,7 +1,9 @@
-from .settings import notification_settings
-from django.utils.translation import ungettext as _plural
-from django.utils.translation import ugettext as _
 import importlib
+
+from django.utils.translation import ugettext as _
+from django.utils.translation import ungettext as _plural
+
+from .settings import notification_settings
 
 __all__ = (
     'get_notifications',
@@ -12,13 +14,16 @@ __all__ = (
     'delete_notification_per_tag'
 )
 
+
 def get_backend_class():
     module, _, klass = notification_settings['STORAGE_BACKEND'].rpartition('.')
     imported_module = importlib.import_module(module)
     if not hasattr(imported_module, klass):
-        raise RuntimeError('STORAGE_BACKEND {} specified for notification does not exists')
+        raise RuntimeError(
+            'STORAGE_BACKEND {} specified for notification does not exists')
 
     return getattr(importlib.import_module(module), klass)
+
 
 def get_notifications(request):
     """
@@ -31,6 +36,7 @@ def get_notifications(request):
 
     notifications = backend.inbox_list(request.user)
     return notifications
+
 
 def add_notification_for(users, level, payload, tag='', date=None):
     """
@@ -49,6 +55,7 @@ def add_notification_for(users, level, payload, tag='', date=None):
     backend.archive_store(users, notif)
     backend.inbox_store(users, notif)
 
+
 def broadcast_notification(level, payload, tag='', date=None):
     """
     Add a notifiation to all users (a.k.a. broadcast)
@@ -61,6 +68,7 @@ def broadcast_notification(level, payload, tag='', date=None):
     users = get_user_model().objects.all()
     add_notification_for(users, level, payload, tag, date)
 
+
 def mark_read(user, notification):
     """
     Mark the notification instance as read for the user provided.
@@ -72,6 +80,7 @@ def mark_read(user, notification):
     backend = BackendClass()
     backend.inbox_delete(user, notification)
 
+
 def mark_all_read(user):
     """
     Mark all the notifications instances as read for a user provided.
@@ -81,6 +90,7 @@ def mark_all_read(user):
     BackendClass = get_backend_class()
     backend = BackendClass()
     backend.inbox_purge(user)
+
 
 def delete_notification_per_tag(user, tag):
     """

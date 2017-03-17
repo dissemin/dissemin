@@ -1,8 +1,8 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
-from haystack.query import EmptySearchQuerySet, SearchQuerySet
 from haystack.forms import SearchForm
 from publishers.models import OA_STATUS_CHOICES_WITHOUT_HELPTEXT as OA_STATUS
+from publishers.models import Publisher
 
 
 class PublisherForm(SearchForm):
@@ -23,13 +23,15 @@ class PublisherForm(SearchForm):
     reverse_order = forms.ChoiceField(choices=ORDER_CHOICES, required=False)
 
     def search(self):
-        queryset = super(PublisherForm, self).search()
+        queryset = self.searchqueryset.models(Publisher).load_all()
 
-        if not self.is_valid():
-            return EmptySearchQuerySet()
+        q = self.cleaned_data['q']
+        if q:
+            queryset = queryset.auto_query(q)
 
         if self.cleaned_data['oa_status']:
-            queryset = queryset.filter(oa_status__in=self.cleaned_data['oa_status'])
+            queryset = queryset.filter(
+                oa_status__in=self.cleaned_data['oa_status'])
 
         # Default ordering by decreasing popularity
         order = self.cleaned_data['sort_by'] or 'num_papers'
@@ -40,6 +42,3 @@ class PublisherForm(SearchForm):
         queryset = queryset.order_by(order)
 
         return queryset
-
-    def no_query_found(self):
-        return SearchQuerySet()

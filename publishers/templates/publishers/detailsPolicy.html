@@ -17,7 +17,7 @@
 {% include "publishers/itemPolicy.html" with policy=publisher.pdfversion conditions=publisher.pdfversion_conditions type_text=type_text type_explanation=tte typ="pdfversion" type_text_no_punc=ttnp lst=publisher.pk %}
 {% if publisher.pk and mode != "none" %}
     <div class="policyItem lastPolicyItem">
-        <span class="policyReadMoreLink"><a href="{% url "publisher" publisher.pk %}" target="_blank">Policy details</a> (opens in a new window).</span>
+        <span class="policyReadMoreLink"><a href="{% url "publisher" publisher.pk publisher.slug %}" target="_blank">Policy details</a> (opens in a new window).</span>
         <span class="policySherpaLink">Data provided by <a href="http://www.sherpa.ac.uk/romeo/"><img src="{% static "img/sherpa-romeo.gif" %}" alt="SHERPA/RoMEO" height="23" /></a></span>
     </div>
 {% endif %}

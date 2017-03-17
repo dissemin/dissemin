@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.db import models, migrations
+from django.db import migrations
 
 def convert_publications(apps, schema_editor):
     OaiRecord = apps.get_model('papers', 'OaiRecord')
@@ -15,7 +15,7 @@ def convert_publications(apps, schema_editor):
     for p in Publication.objects.all():
         if not p.doi:
             continue
-        r = OaiRecord()
+        r = OaiRecord(source=source)
         r.identifier = 'oai:crossref.org:'+p.doi
         r.splash_url = 'https://doi.org/'+p.doi
         r.pdf_url = p.pdf_url

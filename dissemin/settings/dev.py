@@ -2,17 +2,24 @@
 Development specific settings for Dissemin project.
 """
 
-from .common import *
 import os
+
+from .common import *
 
 DEBUG = True
 DEBUG_TOOLBAR_CONFIG = {'SHOW_TOOLBAR_CALLBACK': lambda r: True}
+
+# If you do not want to use Celery,
+# use this setting to run all asynchronous tasks in the main process
+# (celery will still be required as a dependency, but you do not need
+# to run any other process, and no redis server).
+# CELERY_ALWAYS_EAGER = True
 
 # Cache backend
 # https://docs.djangoproject.com/en/1.8/topics/cache/
 CACHES = {
     'default': {
-	'BACKEND': 'django.core.cache.backends.locmem.LocMemCache'
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache'
     }
 }
 
@@ -21,8 +28,13 @@ INSTALLED_APPS += (
     'debug_toolbar',
 )
 
+
+MIDDLEWARE_CLASSES += (
+     'debug_toolbar.middleware.DebugToolbarMiddleware',
+)
+
 # Base domain of the ORCiD API.
-ORCID_BASE_DOMAIN = 'sandbox.orcid.org' # for the sandbox API
+ORCID_BASE_DOMAIN = 'orcid.org'  # for the sandbox API
 
 # ORCiD provider configuration (sandbox)
 SOCIALACCOUNT_PROVIDERS = \
@@ -30,9 +42,9 @@ SOCIALACCOUNT_PROVIDERS = \
        {
         'BASE_DOMAIN': ORCID_BASE_DOMAIN,
          # Member API or Public API? Default: False (for the public API)
-         'MEMBER_API': False, # for the member API
+         'MEMBER_API': False,  # for the member API
        }
-   }
+    }
 
 
 # Debug Email Backend
@@ -57,7 +69,8 @@ TEMPLATES = [
                 "django.template.context_processors.media",
                 "django.template.context_processors.static",
                 "django.template.context_processors.tz",
-                "django.template.context_processors.request"
+                "django.template.context_processors.request",
+                "dissemin.tcp.orcid_base_domain",
             ),
             'debug': True
         }

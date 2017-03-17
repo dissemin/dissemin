@@ -55,7 +55,7 @@
         more in-depth introduction, we recommend
         <a href="http://www.phdcomics.com/comics.php?f=1533">this video in English</a>
         and
-        <a href="http://pablo.rauzy.name/openaccess/introduction.html">this introduction in French</a>.
+        <a href="https://pablo.rauzy.name/openaccess/introduction.html">this introduction in French</a>.
         {% endblocktrans %}
         </p>
         <h2 id="repositories-rock">{% trans "Why should I upload my papers to a repository?" %}</h2>
@@ -93,10 +93,11 @@
         {% blocktrans trimmed %}
             There are roughly three types of repositories:
             <ul>
-                <li>Subject repositories, restricted to some research fields, such as <a href="http://arxiv.org">arXiv</a>.</li>
+                <li>Subject repositories, restricted to some research fields,
+                  such as <a href="https://arxiv.org">arXiv</a>.</li>
                 <li>Institutional repositories, designated to store the research output of a given institution or country.
                 </li>
-                <li>General-purpose academic repositories such as <a href="http://zenodo.org">Zenodo</a>,
+                <li>General-purpose academic repositories such as <a href="https://zenodo.org">Zenodo</a>,
                     not limited to a particular scope.</li>
             </ul>
             If your research community favours a specific repository, using it makes sense as it will increase your visibility. If not, institutional or general-purpose repositories are also good options.
@@ -105,24 +106,20 @@
         <h2 id="why-no-deposit">{% trans "Why can't I deposit in my favorite repository yet?" %}</h2>
         <p>
         {% blocktrans trimmed %}
-            At the moment, we only offer the option to deposit in <a
-              href="http://zenodo.org">Zenodo</a>, an innovative repository
-            backed by the EU. Supporting more repositories requires us to write
+            At the moment, you can use Dissemin to deposit in the following repositories:
+            <ul>
+              <li><strong><a href="https://zenodo.org">Zenodo</a></strong>,
+                an innovative repository backed by the EU.</li>
+              <li><strong><a href="https://hal.archives-ouvertes.fr/">HAL</a></strong>,
+                a French repository managed by the
+                <a href="https://www.ccsd.cnrs.fr/">CCSD</a>.</li>
+            </ul>
+            Supporting more repositories requires us to write
             specific code for each repository. More importantly it requires the
             repositories to give us permission to deposit papers in bulk. We
             have been considering integrating the following repositories:
             <ul>
-              <li><strong><a href="https://hal.archives-ouvertes.fr/">HAL</a></strong>,
-                a French repository managed by the <a
-                 href="https://www.ccsd.cnrs.fr/">CCSD</a>. We cannot integrate
-               HAL smoothly without help from the CCSD.
-               In particular, we need the CCSD to allow users to 
-               to deposit in HAL without providing affiliation information
-               for all authors of a paper (Dissemin cannot easily complete this for you).
-               If you would like to deposit in HAL with Dissemin,
-               don't hesitate to let the CSSD know that you are interested
-               (email: contact AT ccsd.cnrs.fr).</li>
-              <li><strong><a href="http://arxiv.org/">arXiv</a></strong>, a
+              <li><strong><a href="https://arxiv.org/">arXiv</a></strong>, a
                 well-known general-purpose repository. For now, arXiv has
                 declined to allow Dissemin to deposit using their SWORD API, and
                 wants users to deposit in arXiv manually. If you would like to
@@ -152,14 +149,15 @@
         Dissemin is not a repository as it does not store any full text. When the full text of a publication
         is available, a link to the relevant page is provided.
         The full texts deposited through Dissemin are stored in third-party repositories such as
-        <a href="http://zenodo.org">Zenodo</a>.
+        <a href="https://zenodo.org">Zenodo</a> or
+        <a href="https://hal.archives-ouvertes.fr/">HAL</a>.
         {% endblocktrans %}
         </p>
         <h2 id="running">{% trans "Who runs dissem.in?" %}</h2>
         <p>
         {% blocktrans trimmed %}
         Dissemin is brought to you by the <a
-          href="http://association.dissem.in/#team">CAPSH association</a>.
+          href="http://association.dissem.in/">CAPSH association</a>.
         {% endblocktrans %}
         <h2 id="creating-a-profile">{% trans "Can I create my profile on dissem.in?" %}</h2>
         <p>
@@ -236,7 +234,7 @@
         {% blocktrans trimmed %}
         When we have found it in one of the repositories we harvest. The list of
         these repositories can be found <a href="{{ sources_url }}">here</a>.
-        Thanks to the <a href="http://www.base-search.net">BASE</a> search engine,
+        Thanks to the <a href="https://www.base-search.net">BASE</a> search engine,
         we cover more than 80 millions of preprints.
         {% endblocktrans %}
         </p>
@@ -277,17 +275,38 @@
        <h2 id="copy-available">{% trans "There is a freely available copy of my article online but dissem.in does not find it." %}</h2>
        <p>
             {% blocktrans trimmed %}
-            There are two cases:
-            <ul>
-                    <li>Your article is available on a personal homepage or a similar
-                    website. In this case, you should read <a href="#repositories-rock">
-                        why you should also put it in a repository</a>.</li>
-                    <li>Your article is available in a repository but does not appear as
-                     available in dissem.in. In this case you should send a message
-                     to <a href="mailto:contact@dissem.in">contact@dissem.in</a> to fix the problem.</li>
-            </ul>
+            First, note that Dissemin does not account for copies of articles
+            that are only available on a personal homepage or a similar website.
+            This is intentional, because we believe that
+            <a href="#repositories-rock">articles should be hosted in repositories</a>.
             {% endblocktrans %}
-            </p>
+       </p>
+       <p>
+            {% blocktrans trimmed %}
+            Second, at the moment, Dissemin only supports repositories with
+            a crawlable API that follows the
+            <a href="https://www.openarchives.org/OAI/openarchivesprotocol.html">OAI-PMH protocol</a>,
+            and is
+            <a href="https://www.base-search.net/about/en/suggest.php">registered</a>
+            in <a href="https://www.base-search.net/">BASE</a>. We have a
+            <a href="https://github.com/dissemin/croawl">long-term project</a>
+            to support more repositories by crawling them, but for the moment,
+            we do not have the resources to support repositories not
+            covered by BASE.
+            {% endblocktrans %}
+       </p>
+       <p>
+            {% blocktrans trimmed %}
+            If you are a user of a repository and would like it to be supported
+            by Dissemin, please contact the repository administrator and suggest
+            them to implement OAI-PMH support and to 
+            <a href="https://www.base-search.net/about/en/suggest.php">register</a>
+            their repository in BASE. If the repository is registered in BASE
+            but is not properly supported by Dissemin, please 
+            email <a href="mailto:contact@dissem.in">contact@dissem.in</a> and
+            we will investigate the issue.
+            {% endblocktrans %}
+       </p>
 
         <h3>{% trans "Authentication with ORCID" %}</h3>
 
@@ -348,9 +367,9 @@
             <li><a href="mailto:contact@dissem.in">Send us</a> a list of researchers for your
                 university or department so that we can set up an instance of Dissemin for your institution.</li>
             <li>Help us translate the interface in your language.</li>
-            <li>Contribute to <a href="http://github.com/wetneb/dissemin">the code</a>.</li>
-            <li>Fix any of our listed <a href="http://github.com/wetneb/dissemin/issues">issues</a>.</li>
-            <li>Star <a href="http://github.com/wetneb/dissemin">our github project</a>!</li>
+            <li>Contribute to <a href="https://github.com/wetneb/dissemin">the code</a>.</li>
+            <li>Fix any of our listed <a href="https://github.com/wetneb/dissemin/issues">issues</a>.</li>
+            <li>Star <a href="https://github.com/wetneb/dissemin">our github project</a>!</li>
             <li><a href="http://association.dissem.in/#dons">Donations are accepted</a>.</li>
         </ul>
         {% endblocktrans %}
@@ -358,14 +377,13 @@
         <h2 id="source-code">{% trans "Where is the source code?" %}</h2>
         <p>
         {% blocktrans trimmed %}
-        The source code is available <a href="http://github.com/wetneb/dissemin">on github</a>.
-        <a href="http://dissemin.readthedocs.org/en/latest">A documentation</a> is being written.
+        The source code is available <a href="https://github.com/wetneb/dissemin">on github</a>.
         {% endblocktrans %}
         </p>
         <h2 id="oai">{% trans "Can I harvest your data?" %}</h2>
         <p>
         {% blocktrans trimmed %}
-        Yes! We even have <a href="http://dev.dissem.in/#api">an API</a>. If it does not suit your needs,
+        Yes! We even have <a href="http://dev.dissem.in/api.html">an API</a>. If it does not suit your needs,
         tell us what you need.
         {% endblocktrans %}
         </p>

@@ -7,12 +7,12 @@
 # modify it under the terms of the GNU General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -20,33 +20,38 @@
 
 from __future__ import unicode_literals
 
-from urllib2 import URLError, HTTPError, build_opener
-from urllib import urlencode
-import json, requests
 import datetime
+import json
+
+import requests
 from requests.exceptions import RequestException
-from unidecode import unidecode
 
-from celery import current_task
-
-from django.core.exceptions import ObjectDoesNotExist
-from django.utils.http import urlencode
-from django.db import DataError
-
-from papers.errors import MetadataSourceException
-from papers.doi import to_doi, doi_to_crossref_identifier, doi_to_url
-from papers.name import match_names, normalize_name_words, parse_comma_name
-from papers.utils import iunaccent, tolerant_datestamp_to_datetime, date_from_dateparts, affiliation_is_greater, jpath, validate_orcid, sanitize_html
-from papers.models import Paper, OaiSource
-from papers.baremodels import BareOaiRecord, BarePaper
-from publishers.models import *
-
-from backend.papersource import PaperSource
+from backend.romeo import fetch_journal
+from backend.romeo import fetch_publisher
 from backend.utils import urlopen_retry
-from backend.name_cache import name_lookup_cache
-from backend.romeo import fetch_journal, fetch_publisher
-
-from dissemin.settings import DOI_PROXY_DOMAIN, DOI_PROXY_SUPPORTS_BATCH
+from backend.doiprefixes import free_doi_prefixes
+from dissemin.settings import DOI_PROXY_DOMAIN
+from dissemin.settings import DOI_PROXY_SUPPORTS_BATCH
+from django.db import DataError
+from django.utils.http import urlencode
+from papers.baremodels import BareName
+from papers.baremodels import BareOaiRecord
+from papers.baremodels import BarePaper
+from papers.doi import doi_to_crossref_identifier
+from papers.doi import doi_to_url
+from papers.doi import to_doi
+from papers.errors import MetadataSourceException
+from papers.models import OaiSource
+from papers.name import normalize_name_words
+from papers.name import parse_comma_name
+from papers.utils import date_from_dateparts
+from papers.utils import jpath
+from papers.utils import sanitize_html
+from papers.utils import tolerant_datestamp_to_datetime
+from papers.utils import valid_publication_date
+from papers.utils import validate_orcid
+from publishers.models import AliasPublisher
+from backend.pubtype_translations import CROSSREF_PUBTYPE_ALIASES
 
 ######## HOW THIS MODULE WORKS ###########
 #
@@ -73,25 +78,27 @@ from dissemin.settings import DOI_PROXY_DOMAIN, DOI_PROXY_SUPPORTS_BATCH
 # We do not need to use content negotation to fetch the metadata from CrossRef
 # as it is already provided in the search results.
 #
-# Content negotiation remains useful for other providers (DOIs discovered by 
+# Content negotiation remains useful for other providers (DOIs discovered by
 # other means).
+#
+# 3. How this module is used in dissemin
+#
+# Crossref provides a search interface that can be used (among
+# others) to retrieve the papers associated with a given ORCID id.
+# This is used by the ORCID module.
+#
+# The metadata from Crossref is fetched via the OAI-PMH proxy (proaixy)
+# so the OAI module uses this module to convert the metadata.
 #
 
 # Number of results per page we ask the CrossRef search interface
-# (looks like it does not support more than 20)
-nb_results_per_request = 20
+nb_results_per_request = 50
+# Same but when fetching metadata for a list of dois
+nb_dois_per_batch = 25
+# Maximum number of pages we request
+max_crossref_batches_per_researcher = 10
 # Maximum timeout for the CrossRef interface (sometimes it is a bit lazy)
 crossref_timeout = 15
-# Maximum number of pages looked for a researcher
-max_crossref_batches_per_researcher = 7
-# Maximum number of non-trivially skipped records that do not match any researcher
-crossref_max_skipped_records = 50
-
-# Source object for Crossref's OAI records
-crossref_oai_source, _ = OaiSource.objects.get_or_create(identifier='crossref',
-        defaults={'name':'Crossref','oa':False,'priority':1,
-            'default_pubtype':'journal-article'})
-
 
 
 # Licenses considered OA, as stored by CrossRef
@@ -99,7 +106,7 @@ def is_oa_license(license_url):
     """
     This function returns whether we expect a publication under a given license
     to be freely available from the publisher.
-    
+
     Licenses are as expressed in CrossRef: see http://api.crossref.org/licenses
     """
     if "creativecommons.org/licenses/" in license_url:
@@ -118,29 +125,34 @@ def is_oa_license(license_url):
 
 # Citeproc+json parsing utilities
 
+
 def convert_to_name_pair(dct):
     """ Converts a dictionary {'family':'Last','given':'First'} to ('First','Last') """
     result = None
     if 'family' in dct and 'given' in dct:
-        result = (dct['given'],dct['family'])
-    elif 'family' in dct: # The 'Arvind' case
-        result = ('',dct['family'])
+        result = (dct['given'], dct['family'])
+    elif 'family' in dct:  # The 'Arvind' case
+        result = ('', dct['family'])
     elif 'literal' in dct:
         result = parse_comma_name(dct['literal'])
     if result:
-        result = (normalize_name_words(result[0]), normalize_name_words(result[1]))
+        result = (normalize_name_words(
+            result[0]), normalize_name_words(result[1]))
     return result
+
 
 def parse_crossref_date(date):
     """
     Parse the date representation from CrossRef to a python object
     """
+    if not date:
+        return None
     ret = None
     if 'date-parts' in date:
         try:
             for date in date['date-parts']:
                 ret = date_from_dateparts(date)
-                if ret == datetime.date(year=1970,month=1,day=1):
+                if ret == datetime.date(year=1970, month=1, day=1):
                     ret = None
                 if ret is not None:
                     return ret
@@ -148,7 +160,9 @@ def parse_crossref_date(date):
             pass
     if 'raw' in date:
         ret = tolerant_datestamp_to_datetime(date['raw']).date()
-    return ret
+    if valid_publication_date(ret):
+        return ret
+
 
 def get_publication_date(metadata):
     """
@@ -165,10 +179,6 @@ def get_publication_date(metadata):
         date = parse_crossref_date(metadata['deposited'])
     return date
 
-CROSSREF_PUBTYPE_ALIASES = {
-        'article':'journal-article',
-        }
-
 def create_publication(paper, metadata):
     """
     Creates a BareOaiRecord entry based on the DOI metadata (as returned by the JSON format
@@ -183,27 +193,27 @@ def create_publication(paper, metadata):
     except DataError as e:
         print "create_publication: ignored DataError:"
         print e
-        pass
+
 
 def _create_publication(paper, metadata):
     if not metadata:
         return
-    if not 'container-title' in metadata or not metadata['container-title']:
+    if not metadata.get('container-title'):
         return
-    doi = to_doi(metadata.get('DOI',None))
+    doi = to_doi(metadata.get('DOI', None))
 
     title = metadata['container-title']
     if type(title) == type([]):
         title = title[0]
     title = title[:512]
 
-    issn = metadata.get('ISSN',None)
+    issn = metadata.get('ISSN', None)
     if issn and type(issn) == type([]):
-        issn = issn[0] # TODO pass all the ISSN to the RoMEO interface
-    volume = metadata.get('volume',None)
-    pages = metadata.get('page',None)
-    issue = metadata.get('issue',None)
-    date_dict = metadata.get('issued',dict())
+        issn = issn[0]  # TODO pass all the ISSN to the RoMEO interface
+    volume = metadata.get('volume', None)
+    pages = metadata.get('page', None)
+    issue = metadata.get('issue', None)
+    date_dict = metadata.get('issued', dict())
     pubdate = None
     if 'date-parts' in date_dict:
         dateparts = date_dict.get('date-parts')[0]
@@ -213,19 +223,20 @@ def _create_publication(paper, metadata):
     if publisher_name:
         publisher_name = publisher_name[:512]
 
-    pubtype = metadata.get('type','unknown')
+    pubtype = metadata.get('type', 'unknown')
     pubtype = CROSSREF_PUBTYPE_ALIASES.get(pubtype, pubtype)
+    splash_url = doi_to_url(doi)
 
     # PDF availability
     pdf_url = None
-    licenses = set([(license or {}).get('URL') for license in metadata.get('license', [])])
-    if any(map(is_oa_license, licenses)):
-        pdf_url = doi_to_url(doi)
-
-    splash_url = doi_to_url(doi)
+    licenses = set([(license or {}).get('URL')
+                    for license in metadata.get('license', [])])
+    doi_prefix = doi.split('/')[0]
+    if doi_prefix in free_doi_prefixes or any(map(is_oa_license, licenses)):
+        pdf_url = splash_url
 
     # Lookup journal
-    search_terms = {'jtitle':title}
+    search_terms = {'jtitle': title}
     if issn:
         search_terms['issn'] = issn
     journal = fetch_journal(search_terms)
@@ -251,13 +262,14 @@ def _create_publication(paper, metadata):
             publisher=publisher,
             pdf_url=pdf_url,
             splash_url=splash_url,
-            source=crossref_oai_source,
+            source=OaiSource.objects.get(identifier='crossref'),
             identifier=doi_to_crossref_identifier(doi))
     rec = paper.add_oairecord(barepub)
     paper.update_availability()
     return paper, rec
 
 # Fetching utilities
+
 
 def fetch_metadata_by_DOI(doi):
     """
@@ -267,18 +279,19 @@ def fetch_metadata_by_DOI(doi):
     """
     if doi is None:
         return
-    addheaders = {'Accept':'application/citeproc+json'}
+    addheaders = {'Accept': 'application/citeproc+json'}
     try:
         request = 'http://'+DOI_PROXY_DOMAIN+'/'+doi
         response = urlopen_retry(request,
-                timeout=crossref_timeout,
-                headers=addheaders,
-                retries=0)
+                                 timeout=crossref_timeout,
+                                 headers=addheaders,
+                                 retries=0)
         parsed = json.loads(response)
         return parsed
     except ValueError as e:
-        raise MetadataSourceException('Error while fetching DOI metadata:\nInvalid JSON response.\n'+
-                'Error: '+str(e))
+        raise MetadataSourceException('Error while fetching DOI metadata:\nInvalid JSON response.\n' +
+                                      'Error: '+str(e))
+
 
 def fetch_dois(doi_list):
     """
@@ -289,6 +302,7 @@ def fetch_dois(doi_list):
         return fetch_dois_by_batch(doi_list)
     else:
         return fetch_dois_incrementally(doi_list)
+
 
 def fetch_dois_incrementally(doi_list):
     """
@@ -303,6 +317,7 @@ def fetch_dois_incrementally(doi_list):
             print e
             continue
         yield metadata
+
 
 def fetch_dois_by_batch(doi_list):
     """
@@ -319,24 +334,26 @@ def fetch_dois_by_batch(doi_list):
 
     if len(doi_list) == 0:
         return []
-    elif len(doi_list) > nb_results_per_request:
-        first_dois = fetch_dois_by_batch(doi_list[:nb_results_per_request])
-        last_dois = fetch_dois_by_batch(doi_list[nb_results_per_request:])
+    elif len(doi_list) > nb_dois_per_batch:
+        first_dois = fetch_dois_by_batch(doi_list[:nb_dois_per_batch])
+        last_dois = fetch_dois_by_batch(doi_list[nb_dois_per_batch:])
         return first_dois + last_dois
 
-    params = {'filter':','.join(['doi:'+doi for doi in doi_list])}
+    params = {'filter': ','.join(['doi:'+doi for doi in doi_list])}
     req = None
     try:
-        # First we fetch dois by batch from CrossRef. That's fast, but only works for CrossRef DOIs
+        # First we fetch dois by batch from CrossRef. That's fast, but only
+        # works for CrossRef DOIs
         req = requests.get('http://api.crossref.org/works', params=params)
         req.raise_for_status()
-        results = req.json()['message'].get('items',[])
+        results = req.json()['message'].get('items', [])
         dct = results_list_to_dict(results)
 
         # Some DOIs might not be in the results list, because they are issued by other organizations
         # We fetch them using our proxy (cached content negociation)
         missing_dois = list(set(doi_list) - set(dct.keys()))
-        req = requests.post('http://'+DOI_PROXY_DOMAIN+'/batch', {'dois':json.dumps(missing_dois)})
+        req = requests.post('http://'+DOI_PROXY_DOMAIN +
+                            '/batch', {'dois': json.dumps(missing_dois)})
         req.raise_for_status()
         missing_dois_dct = results_list_to_dict(req.json())
         dct.update(missing_dois_dct)
@@ -344,18 +361,23 @@ def fetch_dois_by_batch(doi_list):
         result = [dct.get(doi) for doi in doi_list]
         return result
     except RequestException as e:
-        raise MetadataSourceException('Connecting to the DOI proxy at '+req.url+' failed: '+str(e))
+        raise MetadataSourceException(
+            'Connecting to the DOI proxy at '+req.url+' failed: '+str(e))
     except ValueError as e:
-        raise MetadataSourceException('Invalid JSON returned by the DOI proxy: '+str(e))
+        raise MetadataSourceException(
+            'Invalid JSON returned by the DOI proxy: '+str(e))
     except KeyError as e:
         return []
     except requests.exceptions.RequestException as e:
-        raise MetadataSourceException('Failed to retrieve batch metadata from the proxy: '+str(e))
+        raise MetadataSourceException(
+            'Failed to retrieve batch metadata from the proxy: '+str(e))
 
-class CrossRefPaperSource(PaperSource):
+
+class CrossRefAPI(object):
     """
     Fetches papers from CrossRef
     """
+
     def create_paper_by_doi(self, doi):
         """
         Fetches the metadata with content-negotiation to create the paper.
@@ -366,44 +388,37 @@ class CrossRefPaperSource(PaperSource):
         p = None
         if metadata:
             try:
-                p = self.save_doi_metadata(metadata, allow_unknown_authors=True)
-                if self.oai:
-                    self.oai.fetch_accessibility(p)
-            except ValueError:
-                pass
+                p = self.save_doi_metadata(metadata)
+            except ValueError as e:
+                print e
         return p
 
-    def save_doi_metadata(self, metadata, extra_affiliations=None, allow_unknown_authors=False):
+    def save_doi_metadata(self, metadata, extra_orcids=None):
         """
         Given the metadata as Citeproc+JSON or from CrossRef, create the associated paper and publication
 
-        :param extra_affiliations: an optional affiliations list, which will be unified
-            with the affiliations extracted from the metadata. This is useful for the ORCID interface.
-        :param allow_unknown_authors: create the paper even if no author matches our researchers
+        :param extra_orcids: an optional orcids list, which will be unified
+            with the orcids extracted from the metadata. This is useful for the ORCID interface.
         :returns: the paper, created if needed
-        """        
+        """
         # Normalize metadata
         if metadata is None or type(metadata) != dict:
-            if metadata is not None:
-                print "WARNING: Invalid metadata: type is "+str(type(metadata))
-                print "The doi proxy is doing something nasty!"
             raise ValueError('Invalid metadata format, expecting a dict')
-        if not 'author' in metadata:
+        if not metadata.get('author'):
             raise ValueError('No author provided')
 
-        if not 'title' in metadata or not metadata['title']:
+        if not metadata.get('title'):
             raise ValueError('No title')
 
         # the upstream function ensures that there is a non-empty title
-        if not 'DOI' in metadata or not metadata['DOI']:
+        if not to_doi(metadata.get('DOI')):
             raise ValueError("No DOI, skipping")
-        doi = to_doi(metadata['DOI'])
 
         pubdate = get_publication_date(metadata)
 
         if pubdate is None:
             raise ValueError('No pubdate')
-        
+
         title = metadata['title']
         # CrossRef metadata stores titles in lists
         if type(title) == list:
@@ -413,37 +428,40 @@ class CrossRefPaperSource(PaperSource):
             if type(subtitle) == list:
                 subtitle = subtitle[0]
             title += ': '+subtitle
-        authors = map(name_lookup_cache.lookup, map(convert_to_name_pair, metadata['author']))
-        authors = filter(lambda x: x != None, authors)
-        if (not allow_unknown_authors and all(not elem.is_known for elem in authors)) or authors == []:
-            raise ValueError('No known author')
+
+        name_pairs = map(convert_to_name_pair, metadata['author'])
+        if None in name_pairs:
+            raise ValueError('Invalid author')
+        authors = [BareName.create_bare(first, last) for first, last in
+                   name_pairs]
 
         def get_affiliation(author_elem):
-            # First, look for an ORCID id
-            orcid = validate_orcid(author_elem.get('ORCID'))
-            if orcid:
-                return orcid
-            # Otherwise return the plain affiliation, if any
             for dct in author_elem.get('affiliation', []):
                 if 'name' in dct:
                     return dct['name']
 
-        affiliations = map(get_affiliation, metadata['author'])
-        if extra_affiliations and len(affiliations) == len(extra_affiliations):
-            for i in range(len(affiliations)):
-                if affiliation_is_greater(extra_affiliations[i],affiliations[i]):
-                    affiliations[i] = extra_affiliations[i]
+        def get_orcid(author_elem):
+            orcid = validate_orcid(author_elem.get('ORCID'))
+            if orcid:
+                return orcid
 
-        paper = BarePaper.create(title, authors, pubdate, 
-                'VISIBLE', affiliations)
+        new_orcids = map(get_orcid, metadata['author'])
+        if extra_orcids:
+            orcids = [new or old for (old, new) in zip(
+                extra_orcids, new_orcids)]
+        else:
+            orcids = new_orcids
+        affiliations = map(get_affiliation, metadata['author'])
+
+        paper = BarePaper.create(title, authors, pubdate,
+                                 visible=True, affiliations=affiliations, orcids=orcids)
 
         result = create_publication(paper, metadata)
 
-        if result is None: # Creating the publication failed!
-            paper.update_visibility()
+        if result is None:  # Creating the publication failed!
             # Make sure the paper only appears if it is still associated
             # with another source.
-            # TODO add unit test for this
+            paper.update_visible()
         else:
             paper = result[0]
 
@@ -463,16 +481,17 @@ class CrossRefPaperSource(PaperSource):
         if query:
             params['query'] = query
         if filters:
-            params['filter'] = ','.join(map(lambda (k,v): k+":"+v, filters.items()))
-        
+            params['filter'] = ','.join(map(lambda (k, v): k+":"+v, filters.items()))
+
+        url = 'http://api.crossref.org/works'
+
         count = 0
         rows = 20
         offset = 0
         while not max_batches or count < max_batches:
-            url = 'http://api.crossref.org/works'
             params['rows'] = rows
             params['offset'] = offset
-            
+
             try:
                 r = requests.get(url, params=params)
                 print "CROSSREF: "+r.url
@@ -484,54 +503,15 @@ class CrossRefPaperSource(PaperSource):
                 if not found:
                     break
             except ValueError as e:
-                raise MetadataSourceException('Error while fetching CrossRef results:\nInvalid response.\n'+
-                        'URL was: %s\nParameters were: %s\nJSON parser error was: %s' % (url,urlencode(params),unicode(e))) 
+                raise MetadataSourceException('Error while fetching CrossRef results:\nInvalid response.\n' +
+                                              'URL was: %s\nParameters were: %s\nJSON parser error was: %s' % (url, urlencode(params), unicode(e)))
             except requests.exceptions.RequestException as e:
-                raise MetadataSourceException('Error while fetching CrossRef results:\nUnable to open the URL: '+
-                        request+'\nError was: '+str(e))
+                raise MetadataSourceException('Error while fetching CrossRef results:\nUnable to open the URL: ' +
+                                              url+'\nError was: '+str(e))
 
             offset += rows
             count += 1
 
-    def fetch_papers_from_crossref_by_researcher_name(self, name, update=False):
-        """
-        The update parameter forces the function to download again
-        the metadata for DOIs that are already in the model
-        """
-        return self.search_for_dois_incrementally(unicode(name))
-
-
-    def fetch_papers(self, researcher):
-        """
-        Fetch and save the publications from CrossRef for a given researcher
-        Users should rather use the "fetch" method from PaperSource.
-        """
-        # TODO: do it for all name variants of confidence 1.0
-        researcher.status = 'Fetching DOI list.'
-        researcher.save()
-        nb_records = 0
-
-        name = researcher.name
-        lst = self.fetch_papers_from_crossref_by_researcher_name(name)
-
-        count = 0
-        skipped = 0
-        for metadata in lst:
-            if skipped > crossref_max_skipped_records:
-                break
-
-            try:
-                yield self.save_doi_metadata(metadata)
-            except ValueError:
-                skipped += 1
-                continue
-
-            count += 1
-            skipped = 0
-        nb_records += count
-
-        researcher.status = 'OK, %d records processed.' % nb_records
-        researcher.save()
 
 ##### Zotero interface #####
 
@@ -541,11 +521,13 @@ def fetch_zotero_by_DOI(doi):
     Works only with the doi_cache proxy.
     """
     try:
+        print('http://'+DOI_PROXY_DOMAIN+'/zotero/'+doi)
         request = requests.get('http://'+DOI_PROXY_DOMAIN+'/zotero/'+doi)
         return request.json()
     except ValueError as e:
-        raise MetadataSourceException('Error while fetching Zotero metadata:\nInvalid JSON response.\n'+
-                'Error: '+str(e))
+        raise MetadataSourceException('Error while fetching Zotero metadata:\nInvalid JSON response.\n' +
+                                      'Error: '+str(e))
+
 
 def consolidate_publication(publi):
     """
@@ -556,13 +538,11 @@ def consolidate_publication(publi):
         return publi
     for item in zotero:
         if 'abstractNote' in item:
-            publi.abstract = sanitize_html(item['abstractNote'])
-            publi.save(update_fields=['abstract'])
+            publi.description = sanitize_html(item['abstractNote'])
+            publi.save(update_fields=['description'])
         for attachment in item.get('attachments', []):
             if attachment.get('mimeType') == 'application/pdf':
                 publi.pdf_url = attachment.get('url')
                 publi.save(update_fields=['pdf_url'])
-                publi.paper.update_availability()
+                publi.about.update_availability()
     return publi
-
-

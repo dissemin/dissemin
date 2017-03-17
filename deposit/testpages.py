@@ -7,30 +7,27 @@
 # modify it under the terms of the GNU Affero General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU Affero General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU Affero General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
 from papers.testpages import RenderingTest
-from backend.crossref import CrossRefPaperSource
+
 
 class DepositPagesTest(RenderingTest):
+
     @classmethod
     def setUpClass(self):
         super(DepositPagesTest, self).setUpClass()
-        crps = CrossRefPaperSource(self.ccf)
-        crps.fetch_and_save(self.r3, incremental=True)
 
     def test_start_deposit_unauthenticated(self):
-        paper = self.r3.author_set.all()[0].paper
-        r = self.getPage('upload_paper', kwargs={'pk':paper.pk})
+        paper = self.r3.papers[0]
+        r = self.getPage('upload_paper', kwargs={'pk': paper.pk})
         self.assertEqual(r.status_code, 302)
-
-

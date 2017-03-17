@@ -7,12 +7,12 @@
 # modify it under the terms of the GNU General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -20,17 +20,21 @@
 
 from __future__ import unicode_literals
 
+from time import sleep
+
 import requests
 import requests.exceptions
-from time import sleep
-from titlecase import titlecase
-from dissemin.settings import redis_client
 
+from dissemin.settings import redis_client
+from memoize import memoize
 from papers.errors import MetadataSourceException
 
-### Run a task at most one at a time
+
+# Run a task at most one at a time
+
 
 class run_only_once(object):
+
     def __init__(self, base_id, **kwargs):
         self.base_id = base_id
         self.keys = kwargs.get('keys', [])
@@ -38,7 +42,8 @@ class run_only_once(object):
 
     def __call__(self, f):
         def inner(*args, **kwargs):
-            id = self.base_id+'-'+('-'.join([str(kwargs.get(key,'none')) for key in self.keys]))
+            id = self.base_id+'-' + \
+                ('-'.join([str(kwargs.get(key, 'none')) for key in self.keys]))
             lock = redis_client.lock(id, timeout=self.timeout)
             have_lock = False
             result = None
@@ -53,10 +58,9 @@ class run_only_once(object):
         return inner
 
 
+# Open an URL with retries
 
-### Open an URL with retries
-
-def urlopen_retry(url, **kwargs):# data, timeout, retries, delay, backoff):
+def urlopen_retry(url, **kwargs):  # data, timeout, retries, delay, backoff):
     data = kwargs.get('data', None)
     timeout = kwargs.get('timeout', 10)
     retries = kwargs.get('retries', 3)
@@ -65,10 +69,10 @@ def urlopen_retry(url, **kwargs):# data, timeout, retries, delay, backoff):
     headers = kwargs.get('headers', {})
     try:
         r = requests.get(url,
-                params=data,
-                timeout=timeout,
-                headers=headers,
-                allow_redirects=True)
+                         params=data,
+                         timeout=timeout,
+                         headers=headers,
+                         allow_redirects=True)
         return r.text
     except requests.exceptions.Timeout as e:
         if retries <= 0:
@@ -83,10 +87,13 @@ def urlopen_retry(url, **kwargs):# data, timeout, retries, delay, backoff):
     print "URL: "+url
     sleep(delay)
     return urlopen_retry(url,
-            data=data,
-            timeout=timeout,
-            retries=retries-1,
-            delay=delay*backoff,
-            backoff=backoff)
+                         data=data,
+                         timeout=timeout,
+                         retries=retries-1,
+                         delay=delay*backoff,
+                         backoff=backoff)
 
 
+@memoize(timeout=86400)  # 1 day
+def cached_urlopen_retry(*args, **kwargs):
+    return urlopen_retry(*args, **kwargs)

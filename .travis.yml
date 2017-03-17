@@ -13,6 +13,7 @@ python:
 services:
   - postgresql
   - redis
+  - elasticsearch
 
 sudo: false
 
@@ -20,8 +21,6 @@ addons:
     postgresql: "9.4"
     apt:
        packages:
-       - python-numpy
-       - python-scipy
        - python-requests
        - python-lxml
        - curl
@@ -33,10 +32,10 @@ env:
     - DJANGO=1.9.6
       # RoMEO API key
     - secure: "hQg8tso/Qv4zXhP4A2ahKKhFZQSariIvUr+xqzzoTVtuN/9OuzBFjZ1UF8atM5KKGZ47fFMK2wTjbVOWjSyLH/SF3Wy8bX9oHHg1P8bXcsle6O/tfa3U/2s0UiYtThEdxp+iyQIr6cjBA0gmB0v/vFrQot91GvjlUbi70Xjfcts="
-      # CORE API key
-    - secure: "hUDdROzyWXFmXgPsU37kQeKY72kSC8FYxNyjpQhXIb7UGMbZsemJGpaePwwvJ24dw3im9NTxbMrAw3q2MZZc573mR+Mmnw+4LlWlHwAxZ2cMzFwDKz9v7/n1bJf6QrArbMuyL4qK8OnwjmnrWf4HWG1YfiP4kDm1aAmNbHUxOzQ="
+      # Proaixy API key
+    - secure: "FayAfdusZgzSsAc7HZaCSyhMiwr19Qk/ePmjcBk6HyVWW9EaJiokjMb2DAc9IlBmkZxNg1+DU+ou1L4thPNaFrkTBqtdjQdqNtzsycyMedD6gYGKAdhaOuHNaCkikRHcIR1+STxx2udzOC1yk8xocaYiQFBD6AmRveMGfGN3WZw="
       # Zenodo Sandbox API key
-    - secure: "hC9XBvdx96Xcit8xg42k/OGZeDuM76oRa9tB4JiN8PJy7Ij0GuqvZsEmRgV9qgOtmbUdlfcWgCpvTvxB1ejOjLCPrefhmnHnJ2ss1ZYsJCDhnvqNEh6YuZgIjGHj65R11EGJcJCwycReNN9O8m2/6+z6XI1LyBE4xckrGcgeLxM="
+    - secure: "KjRrTKrNyhv1xVl2UBtJ/qH0uFGItvxw7/pGFfPrcwxD5YAB5daePDaIGe/tlVy+lrQi0D9x1CA8MB2vm+Lf4jrfO+3ZHCkmb4ecbumPV7DxEbgFsralBx65PRRVUiDW1Oy0RyigxXNNdtNLvTVr1PYrZYD407HZnP6LrJP0ONM="
       # Gitbot l10n key (for translation notifications)
     - secure: "qm+WAH7GpYIjid+q5tVnRgpiIwRmo7C8ou8GAeHJwTxkcmX8+YsYhuuacXO5mW/gcvjb9UNVCDkIKqjIsxJdmC0JovXJJ2dG2g1P39FfOCsF1+FpOqxdjBxdlJCoPb+Wmx7qk5+n+ZgqArgDPFwTWAPqsfshVPLplvaIYfA6H2s="
 
@@ -49,28 +48,31 @@ before_install:
   - export PYTHONPATH=$HOME/builds/wetneb/dissemin
   - export PIP_USE_MIRRORS=true
   - echo "from .travis import *" > dissemin/settings/__init__.py
-  - cp dissemin/settings/search_engine_template.py dissemin/settings/search_engine.py
   - cp dissemin/settings/secret_template.py dissemin/settings/secret.py
-  - cp dissemin/settings/university_template.py dissemin/settings/university.py
 
 install:
+  - pip install setuptools --upgrade
   - pip install django==$DJANGO --quiet
   - pip install psycopg2 --quiet
-  - pip install -r requirements_frontend_light.txt
-  - pip install -r requirements_backend_light.txt
+  - pip install -r requirements.txt
   - pip install coveralls
-  - pip install whoosh
-  - wget http://dev.dissem.in/files/similarity.pkl -O models/similarity.pkl
+  - pip install pyflakes
+  - ./pyflakes.sh
 
 before_script:
+  - psql --version
   - psql -c "CREATE DATABASE dissemin;" -U postgres
 
 script:
   - ./devutils/notify_translations
-  - python manage.py migrate --noinput
-  - python manage.py loaddata dissemin/fixtures/test_dump.json
-  - ./celery.sh &
-  - coverage run --source=dissemin,papers,backend,deposit,upload,statistics --omit=*/migrations/* manage.py test --testrunner dissemin.scripts.baretests.BareTestRunner -v 2 --failfast
+  - coverage run --source=dissemin,papers,backend,deposit,upload,statistics --omit=*/migrations/*,dissemin/settings/* manage.py test -v 2
 
 after_success:
   - coveralls
+
+notifications:
+  irc:
+    channels:
+      - "ulminfo.fr#dissemin"
+    on_success: never
+    on_failure: never

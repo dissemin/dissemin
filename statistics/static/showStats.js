@@ -1,7 +1,38 @@
 var stats_colors = ["#FCD206", "#B9C909", "#419BE8", "#dddddd", "#122B52"];
 var stats_colors_aggregated = ["#43A000", "#DB1456"];
 
-function showStatsPie (detailed_data, aggregated_data, target_id, current_state) {
+function readablizeNumber (number) {
+  var units = ['', 'K', 'M', 'G', 'T', 'P'];
+  var e = Math.floor(Math.log(number) / Math.log(1000));
+  return Math.round((number / Math.pow(1000, e))) + " " + units[e];
+}
+
+function preProcessData(data) {
+    // The pie only shows active OA categories, which have graph_value = value,
+    // while inactive ones have graph_value = 0.
+    data.aggregated[0].graph_value = data.aggregated[1].graph_value = 0
+    for (var i = 0; i < 5; i++) {
+        detail = data.detailed[i]
+        detail.graph_value = 0
+        if (data.on_statuses.length === 0 || -1 !== $.inArray(detail.id, data.on_statuses)) {
+            var j = i < 2 ? 0 : 1
+            data.aggregated[j].graph_value += detail.value
+            detail.graph_value = detail.value
+        }
+    }
+    // Avoid division by zero when there are no results.
+    data.num_tot = data.aggregated[0].graph_value + data.aggregated[1].graph_value
+    if (data.num_tot === 0) {
+        data.detailed[3].dummy = 1
+        data.aggregated[1].dummy = 1
+    }
+}
+
+function showStatsPie (data, target_id) {
+    preProcessData(data)
+
+    var detailed_data = data.detailed
+    var aggregated_data = data.aggregated
     var w = 201, h = 145;
 	var r = 100, mr = 50, imr = 45, ir = 40; // radii
     var color = d3.scale.ordinal().range(stats_colors);
@@ -29,7 +60,7 @@ function showStatsPie (detailed_data, aggregated_data, target_id, current_state)
 		.innerRadius(mr);
 
     var pie = d3.layout.pie()           //this will create arc data for us given a list of values
-        .value(function(d) { return d.value; }) //we must tell it out to access the value of each element in our data array
+        .value(function(d) { return d.dummy || d.graph_value; }) //we must tell it out to access the value of each element in our data array
 		.sort(null)
 		.startAngle(-Math.PI/2)
 		.endAngle(Math.PI/2);
@@ -54,7 +85,7 @@ function showStatsPie (detailed_data, aggregated_data, target_id, current_state)
         return "translate(" + thisArc.centroid(d) + ")";//this gives us a pair of coordinates like [50, 50]
     }
     function textForLabel(d, i) {
-         return (d.value == 0 ? "" : d.value);
+         return (d.data.graph_value === 0 ? "" : readablizeNumber(d.data.graph_value));
     }
 	var arcs_text = d3.select(parts[0][0]).selectAll("g.slicetext")
         .data(pie)
@@ -99,12 +130,17 @@ function showStatsPie (detailed_data, aggregated_data, target_id, current_state)
     function lineY2(d,i) {
         return 2 + i*20;
     }
+    function hideZero(d) {
+        return d.data.graph_value ? null : "none"
+    }
     arcs2_text.append("svg:line")
         .attr("x1", lineX)
         .attr("x2", lineX)
         .attr("y1", lineY1)
         .attr("y2", lineY2)
         .attr("style", "stroke:rgb(0,0,0);stroke-width:1");
+
+    arcs2_text.style("display", hideZero)
 
     function transformAggregatedText(d, i) {
         d.innerRadius = 0;
@@ -114,76 +150,38 @@ function showStatsPie (detailed_data, aggregated_data, target_id, current_state)
     arcs2_text.append("svg:text")
             .attr("transform", transformAggregatedText)
         .attr("text-anchor", "middle")
-        .text(function(d, i) { return (aggregated_data[i].label); });
+        .text(function(d, i) { return aggregated_data[i].label });
 
 	var captions = d3.select("#"+target_id).select(".statspie_caption");
-    makeCaptions(detailed_data, captions, current_state);
 
     function updatePie(data) {
-        var newDetailedData = data.detailed
-        var newAggregatedData = data.aggregated
-        d3.select(parts[0][0]).datum(newDetailedData).selectAll("path")
-         .data(pie)
-         .transition()
-         .attr("d", arc);   
-        d3.select(parts[0][0]).datum(newDetailedData).selectAll("text")
-         .data(pie)
-         .transition()
-         .attr("transform",function(d) { return translateText(arc,d) })
-         .text(textForLabel);
-        d3.select(parts[0][1]).datum(newAggregatedData).selectAll("path")
-         .data(pie)
-         .transition()
-         .attr("d", arc2);   
-        d3.select(parts[0][1]).datum(newAggregatedData).selectAll("line")
-          .data(pie)
-          .transition()
+        preProcessData(data)
+
+        var arcs = d3.select(parts[0][0]).datum(data.detailed)
+        var arcs2 = d3.select(parts[0][1]).datum(data.aggregated)
+        var selectArcs = function(elt) { return arcs.selectAll(elt).data(pie).transition() }
+        var selectArcs2 = function(elt) { return arcs2.selectAll(elt).data(pie).transition() }
+
+        selectArcs("path")
+          .attr("d", arc);
+        selectArcs("text")
+          .attr("transform",function(d) { return translateText(arc,d) })
+          .text(textForLabel);
+        selectArcs2("g.slicetext").style("display", hideZero)
+        selectArcs2("path")
+         .attr("d", arc2)
+        selectArcs2("line")
           .attr("x1", lineX)
           .attr("x2", lineX)
           .attr("y1", lineY1)
           .attr("y2", lineY2);
-        d3.select(parts[0][1]).datum(newAggregatedData).selectAll("text")
-          .data(pie)
-          .transition()
+        selectArcs2("text")
           .attr("transform", transformAggregatedText);
-        captions.datum(newDetailedData).selectAll("span.detail")
+        captions.datum(data.detailed).selectAll("span.detail")
             .data(pie)
             .transition()
-		    .text(function(d) { return " ("+d.value+")"; });
+		    .text(function(d) { return d.data.value; });
     }
 
     return updatePie;
-}
-
-function makeCaptions (data, target, current_state) {
-	var captions = target.selectAll("div")
-		.data(data)
-		.enter()
-			.append("div")
-			.attr("class", "stats_caption_line")
-
-		captions.append("div")
-			.attr("class", "stats_caption_box")
-			.append("span")
-				.attr("class", "stats_caption_color")
-				.style("background-color", function(d, i) {return stats_colors[i]; })
-
-		captions.append("a")
-			.attr("class", function(d) {
-                if(d.id == current_state){
-                    return "stats_caption_label activated";
-                } else {
-                    return "stats_caption_label"; }
-            })
-            .attr("href", function(d) {
-                if(d.id == current_state) {
-                    return d.baseurl;
-                } else {
-                    return d.url;
-                } })
-			.text(function(d) { return d.label; })
-			.append("span")
-				.attr("class", "detail")
-				.text(function(d) { return d.value; });
-    return captions;
 }

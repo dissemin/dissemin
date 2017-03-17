@@ -7,12 +7,12 @@
 # modify it under the terms of the GNU Affero General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU Affero General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU Affero General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -38,9 +38,6 @@ from __future__ import unicode_literals
 from django.db import models
 from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
-from django.core.urlresolvers import reverse
-
-import json
 
 #: Paper status (combined because it takes into account
 #: both the publisher policy and the full text availability).
@@ -55,13 +52,13 @@ COMBINED_STATUS_CHOICES = [
     ('closed', _('Publisher forbids sharing')),
     ]
 
-#: Helptext displayed when a paper logo is hovered 
+#: Helptext displayed when a paper logo is hovered
 STATUS_CHOICES_HELPTEXT = {
     'oa': _('This paper is made freely available by the publisher.'),
-    'ok':_('This paper is available in a repository.'),
-    'couldbe':_('This paper was not found in any repository, but could be made available legally by the author.'),
-    'unk':_('This paper was not found in any repository; the policy of its publisher is unknown or unclear.'),
-    'closed':_('Distributing this paper is prohibited by the publisher'),
+    'ok': _('This paper is available in a repository.'),
+    'couldbe': _('This paper was not found in any repository, but could be made available legally by the author.'),
+    'unk': _('This paper was not found in any repository; the policy of its publisher is unknown or unclear.'),
+    'closed': _('Distributing this paper is prohibited by the publisher'),
     }
 
 #: Availability status choices
@@ -78,6 +75,7 @@ STATUS_QUERYSET_FILTER = {
     'unk': lambda q: q.filter(pdf_url__isnull=True, oa_status='UNK'),
     'closed': lambda q: q.filter(pdf_url__isnull=True, oa_status='NOK'),
     }
+
 
 def combined_status_for_instance(paper):
     """
@@ -96,20 +94,41 @@ def combined_status_for_instance(paper):
             return 'closed'
     return 'unk'
 
+
 class BareAccessStatistics(object):
     """
-    A bare (not saved in the DB) summary of the status of publications
+    A bare summary of the status of a set of publications
     """
     @classmethod
     def new(cls):
+        """
+        Creates an empty object (all counters set to 0)
+        """
         s = cls()
-        s.num_oa = 0
-        s.num_ok = 0
-        s.num_couldbe = 0
-        s.num_unk = 0
-        s.num_closed = 0
-        s.num_tot = 0
+        s.clear()
         return s
+
+    def clear(self):
+        """
+        Sets all counters to zero
+        """
+        self.num_oa = 0
+        self.num_ok = 0
+        self.num_couldbe = 0
+        self.num_unk = 0
+        self.num_closed = 0
+        self.num_tot = 0
+
+    def add(self, other):
+        """
+        Adds the stats of `other` to self (sum of access statistics)
+        """
+        self.num_oa += other.num_oa
+        self.num_ok += other.num_ok
+        self.num_couldbe += other.num_couldbe
+        self.num_unk += other.num_unk
+        self.num_closed += other.num_closed
+        self.num_tot += other.num_tot
 
     @classmethod
     def from_queryset(cls, qs):
@@ -123,9 +142,30 @@ class BareAccessStatistics(object):
         stats = cls.new()
         for paper in qs:
             stats.num_tot += 1
-            attrname = 'num_'+combined_status_for_instance(paper)
+            attrname = 'num_'+paper.combined_status
             setattr(stats, attrname, getattr(stats, attrname) + 1)
         return stats
+
+    @classmethod
+    def from_dict(cls, d):
+        stats = cls.new()
+        for status, count in d.iteritems():
+            stats.num_tot += count
+            setattr(stats, 'num_'+status, count)
+        return stats
+
+    @classmethod
+    def from_search_queryset(cls, qs):
+        qs = qs.aggregations({
+         "status": {"terms": {"field": "combined_status_exact"}},
+        })
+        aggregations = qs.get_aggregation_results()
+        status = aggregations.get('status', {'buckets':[]})
+        buckets = {
+            bucket['key']: bucket['doc_count']
+            for bucket in status['buckets']
+        }
+        return cls.from_dict(buckets)
 
     def check_values(self):
         """
@@ -141,33 +181,25 @@ class BareAccessStatistics(object):
                   self.num_unk + self.num_closed == self.num_tot
                 )
 
-    def pie_data(self, object_id):
+    def pie_data(self):
         """
-        Returns a JSON representation of the data needed to display
+        Returns a dictionary containing the data needed to display
         the statistics as a pie.
         """
-        baseurl = reverse('search')+'?'+object_id
         detailed_data = []
-        for (key,desc) in COMBINED_STATUS_CHOICES:
+        for (key, desc) in COMBINED_STATUS_CHOICES:
             item = {
-                'id':key,
-                'label':unicode(desc),
-                'value':self.__dict__['num_'+key],
-                'url':baseurl+'&state='+key,
-                'baseurl':baseurl,
+                'id': key,
+                'label': unicode(desc),
+                'value': self.__dict__['num_'+key],
                 }
             detailed_data.append(item)
-        aggregated_data = []
-        for (key,desc) in PDF_STATUS_CHOICES:
-            item = {
-                'id':key,
-                'label':unicode(desc),
-                'value':self.num_available if key == 'OK' else self.num_unavailable,
-                'url':baseurl+'&pdf='+key,
-                'baseurl':baseurl,
-                }
-            aggregated_data.append(item)
-        return json.dumps({'detailed':detailed_data,'aggregated':aggregated_data})
+        # Gives the translated label
+        aggregated_labels = []
+        for (key, desc) in PDF_STATUS_CHOICES:
+            item = {'label': unicode(desc)}
+            aggregated_labels.append(item)
+        return {'detailed': detailed_data, 'aggregated': aggregated_labels}
 
     @property
     def num_available(self):
@@ -199,6 +231,7 @@ class BareAccessStatistics(object):
         """
         if self.num_tot:
             return int(100.*(self.num_oa + self.num_ok)/self.num_tot)
+
     @property
     def percentage_unavailable(self):
         """
@@ -206,7 +239,7 @@ class BareAccessStatistics(object):
         """
         if self.num_tot:
             return int(100.*(self.num_couldbe + self.num_unk + self.num_closed)/self.num_tot)
- 
+
 
 class AccessStatistics(models.Model, BareAccessStatistics):
     """
@@ -223,10 +256,18 @@ class AccessStatistics(models.Model, BareAccessStatistics):
         """
         Updates the statistics for papers contained in the given :py:class:`Paper` queryset
         """
-        queryset = queryset.filter(visibility="VISIBLE")
+        queryset = queryset.filter(visible=True)
         for key, modifier in STATUS_QUERYSET_FILTER.items():
             self.__dict__['num_'+key] = modifier(queryset).count()
         self.num_tot = queryset.count()
+        self.save()
+
+    def update_from_search_queryset(self, queryset):
+        """
+        Updates the stats using the search index
+        """
+        self.clear()
+        self.add(BareAccessStatistics.from_search_queryset(queryset))
         self.save()
 
     @classmethod
@@ -241,4 +282,3 @@ class AccessStatistics(models.Model, BareAccessStatistics):
 
     class Meta:
         db_table = 'papers_accessstatistics'
-

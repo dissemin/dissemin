@@ -7,12 +7,12 @@
 # modify it under the terms of the GNU Affero General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU Affero General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU Affero General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -23,9 +23,11 @@ from __future__ import unicode_literals
 
 import unittest
 
-from papers.orcid import *
+from papers.orcid import OrcidProfile
+
 
 class OrcidProfileTest(unittest.TestCase):
+
     @classmethod
     def setUpClass(self):
         self.antonin = OrcidProfile(id='0000-0002-8612-8827')
@@ -33,23 +35,26 @@ class OrcidProfileTest(unittest.TestCase):
         self.sergey = OrcidProfile(id='0000-0003-3397-9895')
 
     def test_simple_name(self):
-        self.assertEqual(self.antonin.name, ('Antonin','Delpeuch'))
-        self.assertEqual(self.thomas.name, ('Thomas','Bourgeat'))
+        self.assertEqual(self.antonin.name, ('Antonin', 'Delpeuch'))
+        self.assertEqual(self.thomas.name, ('Thomas', 'Bourgeat'))
 
     def test_credit_name(self):
-        self.assertEqual(self.sergey.name, ('Sergey M.','Natanzon'))
-        self.assertEqual(OrcidProfile(id='0000-0001-9547-293X').name, ('Darío', 'Álvarez'))
+        self.assertEqual(self.sergey.name, ('Sergey M.', 'Natanzon'))
+        self.assertEqual(OrcidProfile(
+            id='0000-0001-9547-293X').name, ('Darío', 'Álvarez'))
 
     def test_empty_lastname(self):
-        self.assertEqual(OrcidProfile(id='0000-0001-5006-3868').name, ('Qiang',''))
+        self.assertEqual(OrcidProfile(
+            id='0000-0001-5006-3868').name, ('Qiang', ''))
 
     def test_other_names(self):
         self.assertEqual(set(self.sergey.other_names),
-                set([('Sergey', 'Natanzon'), ('S.', 'Natanzon'),
-                    ('S. M.', 'Natanzon'), ('Sergey', 'Natanzon')]))
+                         set([('Sergey', 'Natanzon'), ('S.', 'Natanzon'),
+                              ('S. M.', 'Natanzon'), ('Sergey', 'Natanzon')]))
 
     def test_homepage_without_http(self):
-        self.assertEqual(OrcidProfile(id='0000-0002-5710-3989').homepage, 'http://evrard.perso.enseeiht.fr')
+        self.assertEqual(OrcidProfile(
+            id='0000-0002-5710-3989').homepage, 'http://evrard.perso.enseeiht.fr')
 
     def test_iterable(self):
         for key in self.thomas:
@@ -65,12 +70,25 @@ class OrcidProfileTest(unittest.TestCase):
             p.fetch('0000-0002-2963-7764', 'dissem.in')
 
     def test_sandbox(self):
-        self.assertEqual(OrcidProfile(id='0000-0001-9882-3387').name, ('Donald','Duck'))
+        self.assertEqual(OrcidProfile(
+            id='0000-0002-5654-4053').name, ('Peter', 'Lieth'))
 
     def test_search(self):
-        results = list(OrcidProfile.search_by_name('Maarten','Jacobs'))
-        self.assertTrue(all(map(lambda x: len(x['orcid']) and (len(x['first']) or len(x['last'])), results)))
-        names_returned = map(lambda x: (x['first'],x['last']), results)
-        self.assertTrue(('Maarten','Jacobs') in names_returned)
+        results = list(OrcidProfile.search_by_name('John', 'Doe'))
+        self.assertTrue(all(map(lambda x: len(x['orcid']) and (
+            len(x['first']) or len(x['last'])), results)))
+        names_returned = map(lambda x: (x['first'], x['last']), results)
+        self.assertTrue(('John', 'Doe') in names_returned)
 
+    def test_institution(self):
+        self.assertEqual(OrcidProfile(
+            id='0000-0002-0022-2290').institution,
+            {'name':'Ecole Normale Superieure',
+             'identifier':None,
+             'country':'FR'})
+        self.assertEqual(OrcidProfile(
+            id='0000-0002-5654-4053').institution,
+            {'country': 'FR',
+             'identifier': None,
+             'name': "Polytech'Rambouillet"})
 

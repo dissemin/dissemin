@@ -24,33 +24,13 @@
 <span class="detailsTitle">{% trans "Tools" %}</span>
 <div class="detailsContent">
     <p><a href="{{ paper.google_scholar_link }}">{% trans "Search in Google Scholar" %}</a></p>
-    <p><a href="{{ paper.core_link }}">{% trans "Search in CORE" %}</a></p>
 </div>
 
 {% if request.user.is_superuser %}
 <span class="detailsTitle">{% trans "Admin zone" %}</span>
 <div class="detailsContent">
-    <p><strong>Visibility:</strong> {{ paper.visibility }}</p>
     <p><strong>Fingerprint:</strong> {{ paper.plain_fingerprint }}</p>
     <p><strong>Fingerprint:</strong> <a href="http://doai.dissem.in/oai?verb=ListRecords&metadataPrefix=base_dc&set=proaixy:fingerprint:{{ paper.fingerprint }}">{{ paper.fingerprint }}</a></p>
-    <p><strong>Clusters:</strong></p>
-{% for a in paper.author_set.all %}
-{% if a.cluster %}
-<p>{{a}}: 
-<a href="{% url 'paper' a.cluster.paper.pk a.cluster.paper.slug %}">{{ a.cluster.paper }}</a>
-({{a.cluster.num_children}} authors, score {{a.cluster.cluster_relevance}})
-</p>
-{% endif %}
-{% endfor %}
-<p><strong>Annotations:</strong>
-<ul>
-{% for annot in paper.annotation_set.all %}
-    <li>{{ annot }}</li>
-{% empty %}
-None
-{% endfor %}
-</ul>
-</p>
 </div>
 {% endif %}
 
