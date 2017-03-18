@@ -1,19 +1,16 @@
-.
-=
+dissemin
+========
 
 .. toctree::
    :maxdepth: 4
 
+   autocomplete
    backend
-   dep
    deposit
    dissemin
-   import_ens
-   load_dump
-   manage
+   notification
    papers
    publishers
-   scratch
+   search
    statistics
-   submitPaper
    upload

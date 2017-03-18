@@ -20,9 +20,6 @@ import sys
 import mock
 
 import django
-from django.conf import settings
-if not settings.configured:
-    settings.configure()
 from django.db.models.fields.files import FileDescriptor
 from django.utils.encoding import force_unicode
 from django.utils.html import strip_tags
@@ -62,7 +59,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Dissemin'
-copyright = u'2015, Antonin Delpeuch and others'
+copyright = u'2017, CAPSH'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -215,7 +212,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
   ('index', 'Dissemin.tex', u'Dissemin Documentation',
-   u'Antonin Delpeuch and others', 'manual'),
+   u'CAPSH', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -245,7 +242,7 @@ latex_documents = [
 # (source start file, name, description, authors, manual section).
 man_pages = [
     ('index', 'dissemin', u'Dissemin Documentation',
-     [u'Antonin Delpeuch and others'], 1)
+     [u'CAPSH'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -259,7 +256,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
   ('index', 'Dissemin', u'Dissemin Documentation',
-   u'Antonin Delpeuch and others', 'Dissemin', 'One line description of project.',
+   u'CAPSH', 'Dissemin', 'One line description of project.',
    'Miscellaneous'),
 ]
 
@@ -291,13 +288,14 @@ MOCK_MODULES = [
     'wand', 'wand.image', 'wand.exceptions',
     'PyPDF2', 'PyPDF2.utils',
     'numpy',
-    'sklearn', 'sklearn.metrics', 'sklearn.preprocessing', 'sklearn.svm',
+    'haystack',
     'titlecase', 'titlecase.titlecase',
     'bibtexparser', 'bibtexparser.bparser', 'bibtexparser.customization',
     'psycopg2', 'django.db.backends.postgresql_psycopg2', 'django.db.backends.postgresql_psycopg2.base',
     'django.db.backends.postgresql_psycopg2.client', 'django.db.backends.postgresql_psycopg2.creation',
     'django.db.backends.postgresql_psycopg2.introspection', 'django.db.backends.postgresql_psycopg2.operations',
     'django.db.backends.postgresql_psycopg2.schema', 'django.db.backends.postgresql_psycopg2.versions',
+    'django.contrib.contenttypes',
     ]
 
 # To enable mocking, uncomment the following lines
@@ -311,8 +309,8 @@ MOCK_MODULES = [
 
 FileDescriptor.__get__ = lambda self, *args, **kwargs: self
 
+os.environ['DJANGO_SETTINGS_MODULE'] = 'dissemin.settings'
 django.setup()
-
 
 def process_docstring(app, what, name, obj, options, lines):
     # This causes import errors if left outside the function
