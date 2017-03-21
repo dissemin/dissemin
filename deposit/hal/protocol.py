@@ -21,6 +21,7 @@
 from __future__ import unicode_literals
 
 from io import BytesIO
+import json
 import traceback
 from zipfile import ZipFile
 from papers.utils import extract_domain
@@ -169,15 +170,37 @@ class HALProtocol(RepositoryProtocol):
 
             xml_response = resp.read()
             conn.close()
-            if resp.status != 201:
-                self.log('Deposit response status: HTTP %d' % resp.status)
-                self.log(xml_response.decode('utf-8'))
-                raise DepositError(
-                    __('HAL refused the deposit (HTTP error %d)') % resp.status)
-
             try:
                 parser = etree.XMLParser(encoding='utf-8')
                 receipt = etree.parse(BytesIO(xml_response), parser)
+                if resp.status != 201:
+                    self.log('Deposit response status: HTTP %d' % resp.status)
+                    self.log(xml_response.decode('utf-8'))
+                    # Get the verbose description of the error to output it as well
+                    root = receipt.getroot()
+                    verboseDescription = (
+                        next(
+                            root.iter(
+                                "{http://purl.org/net/sword/error/}verboseDescription"
+                            )
+                        ).text
+                    )
+                    try:
+                        # Give a better error message to the user if the document
+                        # already exists in HAL. See #356.
+                        assert "duplicate-entry" in json.loads(verboseDescription)
+                        raise DepositError(
+                            __(
+                                'This document is already in HAL. '
+                                'HAL refused the deposit.'
+                            )
+                        )
+                    except (ValueError, AssertionError):
+                        raise DepositError(
+                            __(
+                                'HAL refused the deposit (HTTP error %d): %s') %
+                                (resp.status, verboseDescription)
+                            )
             except etree.XMLSyntaxError:
                 self.log('Invalid XML response from HAL:')
                 self.log(xml_response.decode('utf-8'))
