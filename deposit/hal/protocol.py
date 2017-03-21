@@ -21,6 +21,7 @@
 from __future__ import unicode_literals
 
 from io import BytesIO
+import json
 import traceback
 from zipfile import ZipFile
 from papers.utils import extract_domain

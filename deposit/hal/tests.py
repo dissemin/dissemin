@@ -235,3 +235,30 @@ class HALProtocolTest(ProtocolTest):
         for identifier in cases:
             self.assertEqual(self.proto.get_new_status(identifier),
                             cases[identifier])
+
+    def test_paper_already_in_hal_but_not_in_dissemin(self):
+        """
+        In this case, Dissemin missed the paper on HAL
+        (for some reason) and so the deposit interface was
+        enabled. But HAL refuses the deposit! We have to
+        give a good error message to the user.
+        """
+        # this paper is currently in HAL-preprod
+        p = Paper.create_by_doi('10.1051/jphys:01975003607-8060700')
+
+        # this is just to make sure that we are depositing with
+        # a single author (otherwise, the deposit would fail because
+        # we are not providing enough affiliations).
+        p.authors_list = [p.authors_list[0]]
+
+        r = self.dry_deposit(p,
+            abstract='this is an abstract',
+            topic='INFO',
+            depositing_author=0,
+            affiliation=59704) # ENS
+
+        # Deposit fails: a duplicate is found
+        self.assertEqualOrLog(r.status, 'failed')
+
+        # The error message should be specific
+        self.assertTrue('already in HAL' in r.message)
