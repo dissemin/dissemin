@@ -18,10 +18,11 @@ Searching for papers
 --------------------
 
 The search interface is also exposed as an API. The parameters it
-understands are the same as the human-readable version. Statistics about
+understands are the same as the human-readable version at
+http://dissem.in/search . Statistics about
 the results are also returned as well.
 
-http://dissem.in/search/?q=pregroup
+http://dissem.in/api/search/?q=pregroup
 
 Understanding the results
 -------------------------
