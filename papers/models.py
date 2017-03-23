@@ -575,12 +575,12 @@ class Researcher(models.Model):
         We include the most detailed affiliation for the researcher
         """
         last = [(unicode(self), self.url)]
-        if self.department:
-            return self.department.breadcrumbs()+last
-        elif self.institution:
-            return self.institution.breadcrumbs()+last
-        else:
-            return last
+        # Institutions temporarily disabled while they are not populated
+        #if self.department:
+        #    return self.department.breadcrumbs()+last
+        #elif self.institution:
+        #    return self.institution.breadcrumbs()+last
+        return last
 
     @cached_property
     def latest_paper(self):
