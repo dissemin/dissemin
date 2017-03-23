@@ -348,11 +348,7 @@ data.selection, selected: true, result: data.result})
             <span>
                 <a role="button" data-toggle="collapse"
                   data-parent="#uploadOptions" href="#optionRepository" aria-expanded="true"
-                        aria-controls="optionRepository">{% trans "Repository:" %}<span id="RepositoryInline">
-                            {% if selected_repository %}
-                            <span><strong>{{ selected_repository.name }}</strong>
-                            </span>
-                            {% endif %}</span></a>
+                        aria-controls="optionRepository">{% trans "Repository:" %}<span id="RepositoryInline"></span></a>
             </span>
         </div>
         <div id="optionRepository" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingRepository">
