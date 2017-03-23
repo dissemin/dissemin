@@ -244,7 +244,7 @@ class OAIDCTranslator(object):
         splash_url, pdf_url = self.extract_urls(
             header, metadata, source.identifier)
 
-        keywords = ' '.join(metadata['subject'])
+        keywords = ' | '.join(metadata['subject'])
         contributors = ' '.join(metadata['contributor'])[:4096]
 
         typenorms = ['typenorm:'+tn for tn in metadata.get('typenorm', [])]
