@@ -32,4 +32,6 @@ urlpatterns = [
             views.submitDeposit, name='ajax-submitDeposit'),
         url(r'^ajax/get-metadata-form$',
             views.get_metadata_form, name='ajax-getMetadataForm'),
+        url(r'^repository-preferences/(?P<pk>\d+)/$',
+            views.edit_repo_preferences, name='edit-repo-preferences'),
 ]

@@ -30,6 +30,7 @@ from dissemin.settings import DEPOSIT_MAX_FILE_SIZE
 from dissemin.settings import MEDIA_ROOT
 from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponseForbidden
+from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from django.template import RequestContext
@@ -104,27 +105,31 @@ def list_deposits(request):
     return render(request, 'deposit/deposits.html', context)
 
 @user_passes_test(is_authenticated)
-def edit_repo_preferences(request, repo_id):
-    repo = get_object_or_404(Repository, pk=repo_id)
+def edit_repo_preferences(request, pk):
+    repo = get_object_or_404(Repository, pk=pk)
     protocol = repo.get_implementation()
     context = {
         'repository': repo,
         'protocol': protocol,
     }
     pref_form = protocol.get_preferences_form(request.user)
+    if not pref_form:
+        raise Http404(_('This repository does not have any settings.'))
+    print pref_form
+    print protocol.preferences_form_class
     if request.method == 'POST':
         pref_form = protocol.get_preferences_form(request.user, request.POST)
         pref_form.save()
 
     if request.method == 'GET':
         # Just displaying the form
-        context['preferencess_form'] = pref_form,
+        context['preferences_form'] = pref_form
         return render(request, 'deposit/repo_preferences.html', context)
 
 @require_POST
 @user_passes_test(is_authenticated)
-def save_repo_preferences(request, repo_id):
-    repo = get_object_or_404(Repository, pk=repo_id)
+def save_repo_preferences(request, pk):
+    repo = get_object_or_404(Repository, pk=pk)
     protocol = repo.get_implementation()
     prefs = protocol.get_preferences(request.user)
     pref_form = protocol.get_preferences_form(request.user, request.POST)

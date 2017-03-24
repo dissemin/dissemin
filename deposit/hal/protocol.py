@@ -29,6 +29,7 @@ import requests
 from urlparse import urlparse
 
 from deposit.hal.forms import HALForm
+from deposit.hal.forms import HALPreferencesForm
 from deposit.hal.metadata import AOFRFormatter
 from deposit.protocol import DepositError
 from deposit.protocol import DepositResult
@@ -38,6 +39,7 @@ from django.utils.translation import ugettext as __
 from papers.name import most_similar_author
 from lxml import etree
 from papers.utils import kill_html
+from deposit.hal.models import HALDepositPreferences
 
 try:
     import http.client as http_client
@@ -55,6 +57,8 @@ class HALProtocol(RepositoryProtocol):
     """
 
     form_class = HALForm
+    preferences_form_class = HALPreferencesForm
+    preferences_model = HALDepositPreferences
 
     def __init__(self, repository, **kwargs):
         super(HALProtocol, self).__init__(repository, **kwargs)

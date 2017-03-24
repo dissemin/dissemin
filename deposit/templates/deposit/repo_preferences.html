@@ -1,0 +1,30 @@
+{% extends "dissemin/skeleton.html" %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+
+{% block extra_head %}
+{% include 'statistics/headers.html' %}
+<!-- repository-specific JS and CSS -->
+{{ preferences_form.media }}
+{% endblock %}
+
+{% block headTitle %}{% trans "Repository preferences" %}{% endblock %}
+
+{% block content %}
+<div id="fullPage">
+<h2>
+	{% with repository.name as repo_name %}
+	{% blocktrans trimmed %}
+	    Deposit preferences for {{ repo_name }}
+	{% endblocktrans %}
+	{% endwith %}
+</h2>
+ 
+<form method="POST" action="{% url 'submit_repository_preferences'
+repo.id %}" id="repositoryPreferencesForm">
+	{% crispy preferences_form  %}
+</form>
+{% endblock %}
+

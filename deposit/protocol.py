@@ -27,7 +27,6 @@ from django.utils.translation import ugettext as __
 from papers.baremodels import BareOaiRecord
 from deposit.forms import BaseMetadataForm
 from deposit.models import DEPOSIT_STATUS_CHOICES
-from django.contrib.contenttypes.models import ContentType
 
 class DepositError(Exception):
     """
@@ -219,16 +218,11 @@ class RepositoryProtocol(object):
         """
         if self.preferences_model is None:
             return
-        app_label, model_name = self.preferences_model
-        MyPreferences = ContentType.objects.get(
-            app_label=app_label,
-            model=model_name).model_class()
-        try:
-            return MyPreferences.objects.get(
-                    user=user,
-                    repository=self.repository)
-        except DoesNotExist:
-            return MyPreferences()
+        MyPreferences = self.preferences_model
+        preferences, _ = MyPreferences.objects.get_or_create(
+                            user=user,
+                            repository=self.repository)
+        return preferences
 
     def get_preferences_form(self, user, *args, **kwargs):
         """

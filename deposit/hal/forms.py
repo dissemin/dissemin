@@ -25,7 +25,10 @@ from deposit.forms import FormWithAbstract
 from deposit.hal.metadata import HAL_TOPIC_CHOICES
 from django import forms
 from django.utils.translation import ugettext as __
-
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
+from crispy_forms.layout import Div
+from deposit.hal.models import HALDepositPreferences
 
 class AffiliationSelect2(Select2):
     autocomplete_function = 'select2-customTemplate'
@@ -71,3 +74,19 @@ class HALForm(FormWithAbstract):
             },
         )
     )
+
+class HALPreferencesForm(forms.ModelForm):
+    class Meta:
+        model = HALDepositPreferences
+        fields = ['on_behalf_on']
+
+    def __init__(self, *args, **kwargs):
+        super(HALPreferencesForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-lg-2'
+        self.helper.field_class = 'col-lg-8'
+        self.helper.add_input(
+            Submit('submit', __('Save')),
+        )
+
