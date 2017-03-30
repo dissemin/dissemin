@@ -127,15 +127,6 @@ def edit_repo_preferences(request, pk):
         return render(request, 'deposit/repo_preferences.html', context)
 
 @require_POST
-@user_passes_test(is_authenticated)
-def save_repo_preferences(request, pk):
-    repo = get_object_or_404(Repository, pk=pk)
-    protocol = repo.get_implementation()
-    prefs = protocol.get_preferences(request.user)
-    pref_form = protocol.get_preferences_form(request.user, request.POST)
-
-
-@require_POST
 @json_view
 @user_passes_test(is_authenticated)
 def submitDeposit(request, pk):

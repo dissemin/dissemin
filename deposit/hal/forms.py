@@ -27,7 +27,6 @@ from django import forms
 from django.utils.translation import ugettext as __
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
-from crispy_forms.layout import Div
 from deposit.hal.models import HALDepositPreferences
 
 class AffiliationSelect2(Select2):
@@ -39,17 +38,6 @@ class HALForm(FormWithAbstract):
         super(HALForm, self).__init__(paper, **kwargs)
         self.fields['depositing_author'].choices = enumerate(
             map(unicode, paper.authors))
-
-    # Dummy field to store the user name
-    # (required for affiliation autocompletion)
-    #first_name = forms.CharField(
-    #    required=False,
-    #    widget=forms.HiddenInput
-    #)
-    #last_name = forms.CharField(
-    #    required=False,
-    #    widget=forms.HiddenInput
-    #)
 
     topic = forms.ChoiceField(
             label=__('Scientific field'),
@@ -66,7 +54,6 @@ class HALForm(FormWithAbstract):
         required=True,
         label=__('Affiliation'),
         widget=AffiliationSelect2(
-#            forward=['first_name', 'last_name'],
             url='autocomplete_affiliations',
             attrs={
                 #'data-html': 'true',
