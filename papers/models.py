@@ -146,10 +146,9 @@ class Institution(models.Model):
         if not self.stats:
             self.stats = AccessStatistics.objects.create()
             self.save()
-        self.stats.clear()
-        for d in self.sorted_departments:
-            self.stats.add(d.stats)
-        self.stats.save()
+        from papers.models import Paper
+        sqs = SearchQuerySet().models(Paper).filter(institutions=self.id)
+        self.stats.update_from_search_queryset(sqs)
 
     @property
     def object_id(self):
@@ -576,12 +575,12 @@ class Researcher(models.Model):
         We include the most detailed affiliation for the researcher
         """
         last = [(unicode(self), self.url)]
-        if self.department:
-            return self.department.breadcrumbs()+last
-        elif self.institution:
-            return self.institution.breadcrumbs()+last
-        else:
-            return last
+        # Institutions temporarily disabled while they are not populated
+        #if self.department:
+        #    return self.department.breadcrumbs()+last
+        #elif self.institution:
+        #    return self.institution.breadcrumbs()+last
+        return last
 
     @cached_property
     def latest_paper(self):
@@ -677,6 +676,10 @@ class Name(models.Model, BareName):
         """Criteria to use in the search view to filter on this name"""
         return "name=%d" % self.pk
 
+
+# Max number of OaiRecord per Paper:
+# beyond that, we ignore them.
+MAX_OAIRECORDS_PER_PAPER = 100
 
 # Papers matching one or more researchers
 class Paper(models.Model, BarePaper):
@@ -984,6 +987,15 @@ class Paper(models.Model, BarePaper):
             return Paper.from_bare(bare_paper)  # TODO TODO index it?
 
     @classmethod
+    def get_by_doi(cls, doi):
+        """
+        Finds the paper associated to that DOI (if any)
+        """
+        # there should not be more than one paper in this
+        # queryset
+        return cls.objects.filter(oairecord__doi=doi).first()
+
+    @classmethod
     def create_by_hal_id(self, id, bare=False):
         """
         Creates a paper given a HAL id (e.g. hal-01227383)
@@ -1286,6 +1298,11 @@ class OaiRecord(models.Model, BareOaiRecord):
                     splash_url,
                     pdf_url)
 
+        # We check that there are not already too many records in this
+        # paper
+        if about.cached_oairecords and len(about.cached_oairecords) >= MAX_OAIRECORDS_PER_PAPER:
+            raise ValueError('Too many records in paper %d' % about.pk)
+
         # We don't search for records with the same identifier yet,
         # we will rather catch the exception thrown by the DB
         if not match:
@@ -1413,7 +1430,7 @@ class OaiRecord(models.Model, BareOaiRecord):
         if short_splash == None or paper == None:
             return
 
-        records = list(paper.oairecord_set.all())
+        records = list(paper.oairecord_set.all()[:MAX_OAIRECORDS_PER_PAPER])
         paper.cached_oairecords = records
         for record in records:
             short_splash2 = shorten(record.splash_url)

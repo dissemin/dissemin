@@ -113,6 +113,31 @@ def update_index_for_model(model, batch_size=256, batches_per_commit=10, firstpk
             starttime = curtime
             indexed = 0
 
+def enumerate_large_qs(queryset, key='pk', batch_size=256):
+    """
+    Enumerates a large queryset (milions of rows) efficiently
+    """
+    lastval = None
+    found = True
+
+    while found:
+        sliced = queryset.order_by(key)
+        if lastval is not None:
+            sliced = sliced.filter(**{key+'__gt':lastval})
+        print lastval
+        sliced = sliced[:batch_size]
+
+        found = False
+        for elem in sliced:
+            found = True
+            lastval = getattr(elem, key)
+            yield elem
+
+def update_availability():
+    for paper in enumerate_large_qs(Paper.objects.filter(oa_status='UNK')):
+        paper.update_availability()
+        if paper.oa_status != 'UNK':
+            paper.update_index()
 
 def cleanup_researchers():
     """

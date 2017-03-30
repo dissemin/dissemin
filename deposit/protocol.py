@@ -23,6 +23,7 @@ from __future__ import unicode_literals
 
 import traceback
 
+from django.conf import settings
 from django.utils.translation import ugettext as __
 from papers.baremodels import BareOaiRecord
 from deposit.forms import BaseMetadataForm
@@ -158,6 +159,18 @@ class RepositoryProtocol(object):
         and adds the logs to its return value.
         """
         try:
+            # Small hack to get notifications
+            name = getattr(self.user, 'name', None)
+            first_name = getattr(self.user, 'first_name', None)
+            last_name = getattr(self.user, 'last_name', None)
+            if first_name and last_name:
+                name = '%s %s' % (first_name,last_name)
+            notification_payload = {
+                    'name':unicode(name),
+                    'repo':self.repository.name,
+                    'paperurl':self.paper.url,
+                }
+
             result = self.submit_deposit(*args, **kwargs)
             result.logs = self._logs
 
@@ -171,9 +184,13 @@ class RepositoryProtocol(object):
                         pdf_url=result.pdf_url)
                 result.oairecord = self.paper.add_oairecord(rec)
 
+            settings.DEPOSIT_NOTIFICATION_CALLBACK(notification_payload)
+
             return result
         except DepositError as e:
             self.log('Message: '+e.args[0])
+            notification_payload['paperurl'] += ' '+e.args[0]
+            settings.DEPOSIT_NOTIFICATION_CALLBACK(notification_payload)
             return DepositResult(logs=self._logs, status='failed', message=e.args[0])
         except Exception as e:
             self.log("Caught exception:")

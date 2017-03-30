@@ -26,6 +26,7 @@ from crispy_forms.utils import render_crispy_form
 from deposit.forms import PaperDepositForm
 from deposit.models import DepositRecord
 from deposit.models import Repository
+from deposit.models import UserPreferences
 from dissemin.settings import DEPOSIT_MAX_FILE_SIZE
 from dissemin.settings import MEDIA_ROOT
 from django.contrib.auth.decorators import user_passes_test
@@ -71,13 +72,32 @@ def get_metadata_form(request):
 def start_view(request, pk):
     paper = get_object_or_404(Paper, pk=pk)
     repositories = get_all_repositories_and_protocols(paper, request.user)
+    repositories_protocol = {repo.id :proto for repo, proto in repositories}
+
+    # select the most appropriate repository
     selected_repository = None
     selected_protocol = None
-    for repo, protocol in repositories:
-        if protocol is not None:
-            selected_repository = repo
-            selected_protocol = protocol
-            break
+
+    # Try to get the preferred one
+    userprefs = UserPreferences.get_by_user(request.user)
+    if userprefs.preferred_repository:
+        selected_repository = userprefs.preferred_repository
+        selected_protocol = repositories_protocol.get(selected_repository.id)
+
+    # Try to get the last one used by this user
+    print userprefs.last_repository
+    if selected_protocol is None and userprefs.last_repository:
+        selected_repository = userprefs.last_repository
+        selected_protocol = repositories_protocol.get(selected_repository.id)
+
+    # If none of these are available, pick any
+    if selected_protocol is None:
+        for repo, protocol in repositories:
+            if protocol is not None:
+                selected_repository = repo
+                selected_protocol = protocol
+                break
+
     breadcrumbs = paper.breadcrumbs()
     breadcrumbs.append((_('Deposit'), ''))
     context = {
@@ -153,6 +173,11 @@ def submitDeposit(request, pk):
         form_html = render_crispy_form(repositoryForm, context=request_context)
         context['form_html'] = form_html
         return context, 400
+
+    # Store the repository as in the user preferences
+    userprefs = UserPreferences.get_by_user(request.user)
+    userprefs.last_repository = repository
+    userprefs.save(update_fields=['last_repository'])
 
     # Check that the paper has been uploaded by the same user
     pdf = form.cleaned_data['file_id']

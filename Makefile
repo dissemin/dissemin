@@ -1,5 +1,5 @@
 doc:
-	sphinx-apidoc -ef -o doc/sphinx/ . learning/ sword/ */migrations/* import_researchers.py
+	sphinx-apidoc -ef -o doc/sphinx/ . */migrations/*
 	# Regenerates the skeleton files for the documentation
 	# then, you need to `cd doc/sphinx`
 	# and `make html`

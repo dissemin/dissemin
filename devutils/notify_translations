@@ -5,10 +5,10 @@
 # This script expects to be run from the root directory
 # of the project (not from devutils)
 
-if [ "$TRAVIS_BRANCH" = "beta" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then
+if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then
     ./update_translations.sh | grep msgid | wc -l | ./devutils/l10n_to_gitbot
 else
-    echo "Not a commit on $DEFAULT_BRANCH, ignoring."
+    echo "Not a commit on master, ignoring."
     echo "Branch:" "$TRAVIS_BRANCH"
     echo "PR:" "$TRAVIS_PULL_REQUEST"
 fi

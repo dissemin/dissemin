@@ -39,7 +39,7 @@ from papers.views import PaperSearchView
 
 @json_view
 def api_paper_doi(request, doi):
-    p = Paper.create_by_doi(doi, bare=True)
+    p = Paper.get_by_doi(doi)
     if p is None:
         raise Http404("The paper you requested could not be found.")
     return {

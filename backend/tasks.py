@@ -33,6 +33,7 @@ from papers.errors import MetadataSourceException
 from papers.models import Paper
 from papers.models import PaperWorld
 from papers.models import Researcher
+from papers.models import Institution
 from publishers.models import Journal
 from publishers.models import Publisher
 
@@ -121,11 +122,11 @@ def update_all_stats():
     Updates the stats for every model using them
     """
     AccessStatistics.update_all_stats(PaperWorld)
-    #AccessStatistics.update_all_stats(Publisher)
-    #AccessStatistics.update_all_stats(Journal)
+    AccessStatistics.update_all_stats(Publisher)
+    AccessStatistics.update_all_stats(Journal)
+    AccessStatistics.update_all_stats(Institution)
     #AccessStatistics.update_all_stats(Researcher)
     #AccessStatistics.update_all_stats(Department)
-    #AccessStatistics.update_all_stats(Institution)
 
 
 

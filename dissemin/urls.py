@@ -88,7 +88,6 @@ urlpatterns = [
     url(r'^sources$', temp('dissemin/sources.html'), name='sources'),
     url(r'^faq$', temp('dissemin/faq.html'), name='faq'),
     url(r'^tos$', temp('dissemin/tos.html'), name='tos'),
-    url(r'^feedback$', temp('dissemin/feedback.html'), name='feedback'),
     url(r'^partners$', temp('dissemin/partners.html'), name='partners'),
     # Authentication
     #url(r'^admin/logout/$','django_cas_ng.views.logout', name='logout'),

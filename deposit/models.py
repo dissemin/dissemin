@@ -207,3 +207,26 @@ class DepositPreferences(models.Model):
         return '<DepositPreferences, user %s, repo %s>' %(
                     unicode(self.user), unicode(self.repository))
 
+class UserPreferences(models.Model):
+    """
+    Stores the user's global preferences,
+    not the ones specific to a particular repository.
+    """
+    user = models.OneToOneField(User)
+    # The preferred repository, set by the user
+    preferred_repository = models.ForeignKey(Repository,
+        null=True, blank=True,
+        related_name='preferrend_by')
+    # The last repository used by this user
+    last_repository = models.ForeignKey(Repository,
+        null=True, blank=True,
+        related_name='last_used_by')
+
+    @classmethod
+    def get_by_user(cls, user):
+        """
+        Returns a UserPreferences instance for a particular user
+        """
+        userprefs, _ = cls.objects.get_or_create(user=user)
+        return userprefs
+

@@ -66,7 +66,7 @@ class Sloppy(inputs.Exact):
 
 def aggregate_combined_status(queryset):
     return queryset.aggregations({
-        "status": {"terms": {"field": "combined_status"}},
+        "status": {"terms": {"field": "combined_status_exact"}},
     })
 
 

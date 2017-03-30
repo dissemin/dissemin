@@ -14,17 +14,17 @@ This serves as the main location for the documentation. First, you might
 want to :ref:`page-install` or :ref:`page-vm`.
 
 In all cases, you will need to :ref:`page-apikeys` to have access
-to the metadata sources. Then, you can :ref:`page-importresearchers`.
+to the metadata sources..
 
 .. toctree::
    :maxdepth: 2
 
    overview
+   api
    vm
    requirements
    install
    apikeys
-   importresearchers
    deploying
    datasources
    datamodel

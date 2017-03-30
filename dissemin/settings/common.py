@@ -290,3 +290,7 @@ HAYSTACK_CONNECTIONS = {
         'INDEX_NAME': 'dissemin',
     },
 }
+
+# Deposit notification callback, can be overriden to notify an external
+# service on deposit
+DEPOSIT_NOTIFICATION_CALLBACK = (lambda payload: None)

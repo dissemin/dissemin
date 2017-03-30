@@ -5,13 +5,8 @@ src/
 .src/
 # vim 
 .*.swp
-# API keys
-romeo_api_key
-core_api_key
 # ENS data
-data/
 celerybeat-schedule
-repositories
 # Localization
 *.mo
 # Virtualenv
@@ -19,26 +14,10 @@ bin/
 local/
 include/
 lib/
-# SWORD
-sword/generated.xml
-sword/docs/
-# Fiddling
-models/
-learning/dataset/
-learning/evaluate.py
-learning/gengraph.py
-learning/regression.py
-learning/gephi/
-scratch.py
 # Virtual env
 .virtualenv/
 # Proposals
 doc/Makefile
-doc/project.*
-doc/references.bib
-doc/bio.doc
-#Passwords
-dissemin/NOTONGIT*
 # Uploaded files
 media/
 mediatest/repository_logos/
@@ -50,7 +29,7 @@ runfcgi.pid
 
 # build files for doc
 doc/sphinx/_build/
-doc/sphinx/*.migrations.*.rst
+doc/sphinx/*.rst
 
 # Coverage
 .coverage
