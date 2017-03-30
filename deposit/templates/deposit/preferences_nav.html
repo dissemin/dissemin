@@ -1,0 +1,14 @@
+{% load i18n %}
+
+<h2>{% trans "Preferences" %}</h2>
+
+<ul class="nav nav-tabs">
+  <li role="presentation" {% if not repository %}class="active"{% endif %}>
+	<a href="{% url 'edit-global-preferences' %}">{% trans "General" %}</a></li>
+  {% for repo in repositories %}
+	{% if repo.get_implementation.preferences_model %}
+	   <li role="presentation" {% if repository == repo %}class="active"{%endif%}>
+		<a href="{% url 'edit-repo-preferences' repo.pk %}">{{ repo }}</a></li>
+        {% endif %}
+  {% endfor %}
+</ul>

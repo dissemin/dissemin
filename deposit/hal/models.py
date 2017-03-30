@@ -12,6 +12,6 @@ class HALDepositPreferences(DepositPreferences):
                 null=True,
                 blank=True,
                 verbose_name=__('HAL username'),
-                help_text=__('Deposits will be associated to this HAL account'))
+                help_text=__('If set, deposits will be associated to this HAL account.'))
 
 
