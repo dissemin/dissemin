@@ -21,10 +21,13 @@
 from __future__ import unicode_literals
 
 from deposit.models import Repository
+from deposit.models import UserPreferences
 from django import forms
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as __
 from django.utils.translation import ugettext_lazy as _
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
 from papers.models import UPLOAD_TYPE_CHOICES
 from upload.models import UploadedPDF
 
@@ -78,6 +81,9 @@ def wrap_with_prefetch_status(baseWidget, get_callback, fieldname):
 
 
 class BaseMetadataForm(forms.Form):
+    """
+    Base form for repository-specific options
+    """
     def __init__(self, paper, **kwargs):
         super(BaseMetadataForm, self).__init__(**kwargs)
         # Subclasses can reimplement this and do things based on the
@@ -105,3 +111,35 @@ class FormWithAbstract(BaseMetadataForm):
                                                  'ajax-waitForConsolidatedField'),
                                              'paper_id')(attrs={'class': 'form-control'})
             )
+
+
+### Form for global preferences ###
+
+class PreferredRepositoryField(forms.ModelChoiceField):
+    def __init__(self, *args, **kwargs):
+        kwargs['empty_label'] = _('No preferred repository')
+        super(PreferredRepositoryField, self).__init__(*args, **kwargs)
+
+class UserPreferencesForm(forms.ModelForm):
+    class Meta:
+        model = UserPreferences
+        fields = ['preferred_repository']
+        widgets = {
+            'preferred_repository': forms.RadioSelect(attrs={'class':'radio-margin'}),
+        }
+        field_classes = {
+            'preferred_repository': PreferredRepositoryField,
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(UserPreferencesForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-lg-2'
+        self.helper.field_class = 'col-lg-8'
+        self.helper.add_input(
+            Submit('submit', __('Save')),
+        )
+
+
+

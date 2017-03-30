@@ -24,6 +24,7 @@ import os
 from crispy_forms.templatetags.crispy_forms_filters import as_crispy_form
 from crispy_forms.utils import render_crispy_form
 from deposit.forms import PaperDepositForm
+from deposit.forms import UserPreferencesForm
 from deposit.models import DepositRecord
 from deposit.models import Repository
 from deposit.models import UserPreferences
@@ -129,22 +130,40 @@ def edit_repo_preferences(request, pk):
     repo = get_object_or_404(Repository, pk=pk)
     protocol = repo.get_implementation()
     context = {
+        'repositories': Repository.objects.all(),
         'repository': repo,
         'protocol': protocol,
     }
+    if request.method == 'POST':
+        pref_form = protocol.get_preferences_form(request.user, request.POST)
+        if not pref_form:
+            raise Http404(_('This repository does not have any settings.'))
+        pref_form.save()
+
     pref_form = protocol.get_preferences_form(request.user)
     if not pref_form:
         raise Http404(_('This repository does not have any settings.'))
-    print pref_form
-    print protocol.preferences_form_class
+
+    context['preferences_form'] = pref_form
+    return render(request, 'deposit/repo_preferences.html', context)
+
+@user_passes_test(is_authenticated)
+def edit_global_preferences(request):
+    context = {
+        'repositories': Repository.objects.all(),
+    }
+    prefs = UserPreferences.get_by_user(request.user)
     if request.method == 'POST':
-        pref_form = protocol.get_preferences_form(request.user, request.POST)
+        pref_form = UserPreferencesForm(request.POST, instance=prefs)
         pref_form.save()
 
-    if request.method == 'GET':
-        # Just displaying the form
-        context['preferences_form'] = pref_form
-        return render(request, 'deposit/repo_preferences.html', context)
+    pref_form = UserPreferencesForm(instance=prefs)
+    if not pref_form:
+        raise Http404(_('This repository does not have any settings.'))
+
+    context['preferences_form'] = pref_form
+    return render(request, 'deposit/global_preferences.html', context)
+
 
 @require_POST
 @json_view

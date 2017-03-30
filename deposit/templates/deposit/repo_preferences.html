@@ -14,16 +14,11 @@
 
 {% block content %}
 <div id="fullPage">
-<h2>
-	{% with repository.name as repo_name %}
-	{% blocktrans trimmed %}
-	    Deposit preferences for {{ repo_name }}
-	{% endblocktrans %}
-	{% endwith %}
-</h2>
+
+{% include "deposit/preferences_nav.html" %}
  
-<form method="POST" action="{% url 'submit_repository_preferences'
-repo.id %}" id="repositoryPreferencesForm">
+<form method="POST" action="{% url 'edit-repo-preferences' repository.id %}"
+	id="repositoryPreferencesForm">
 	{% crispy preferences_form  %}
 </form>
 {% endblock %}
