@@ -78,7 +78,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
                                                                                                                               ><span class="glyphicon glyphicon-user"></span>&nbsp; {{ request.user|fullname }} <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="{% url "edit-user-preferences" %}">{% trans "Preferences" %}</a></li>
+                                    <li><a href="{% url "edit-global-preferences" %}">{% trans "Preferences" %}</a></li>
                                     <li><a href="{% url "list_deposits" %}">{% trans "My deposits" %}</a></li>
                                     <li><a onclick="
 $.ajax({ url: 'https://{{ ORCID_BASE_DOMAIN }}/userStatus.json?logUserOut=true', dataType: 'jsonp',
