@@ -909,7 +909,6 @@ input[type=checkbox]:checked ~ .stats_caption_label
 .stats_caption_label_text {
     overflow:hidden;
     white-space:nowrap;
-    max-width:204px;
     display:inline-block;
     vertical-align:top;
 }
