@@ -123,7 +123,7 @@ class PreferredRepositoryField(forms.ModelChoiceField):
 class UserPreferencesForm(forms.ModelForm):
     class Meta:
         model = UserPreferences
-        fields = ['preferred_repository']
+        fields = ['email', 'preferred_repository']
         widgets = {
             'preferred_repository': forms.RadioSelect(attrs={'class':'radio-margin'}),
         }
@@ -134,9 +134,9 @@ class UserPreferencesForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(UserPreferencesForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
-        self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-lg-2'
-        self.helper.field_class = 'col-lg-8'
+        #self.helper.form_class = 'form-horizontal'
+        #self.helper.label_class = 'col-lg-2'
+        #self.helper.field_class = 'col-lg-8'
         self.helper.add_input(
             Submit('submit', __('Save')),
         )

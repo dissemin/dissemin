@@ -213,10 +213,16 @@ class UserPreferences(models.Model):
     not the ones specific to a particular repository.
     """
     user = models.OneToOneField(User)
+    # Email address
+    email = models.EmailField(max_length=512, null=True, blank=True,
+       help_text=_(
+        'We will use this email address to notify you when your deposits are accepted.'
+    ))
     # The preferred repository, set by the user
     preferred_repository = models.ForeignKey(Repository,
         null=True, blank=True,
-        related_name='preferrend_by')
+        related_name='preferred_by',
+        help_text=_('This repository will be used by default for your deposits.'))
     # The last repository used by this user
     last_repository = models.ForeignKey(Repository,
         null=True, blank=True,
