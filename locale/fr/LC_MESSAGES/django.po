@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-15 14:54+0100\n"
-"PO-Revision-Date: 2017-03-04 21:31+0100\n"
+"POT-Creation-Date: 2017-04-05 00:08+0200\n"
+"PO-Revision-Date: 2017-04-05 00:10+0200\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -50,8 +50,8 @@ msgstr "Refusé par le dépôt"
 msgid "Deleted"
 msgstr "Supprimé"
 
-#: deposit/models.py:166 deposit/templates/deposit/start.html:419
-#: deposit/views.py:81
+#: deposit/models.py:166 deposit/templates/deposit/start.html:415
+#: deposit/views.py:101
 msgid "Deposit"
 msgstr "Dépôt"
 
@@ -163,32 +163,32 @@ msgstr "Type de dépôt:"
 msgid "Repository:"
 msgstr "Dépôt :"
 
-#: deposit/templates/deposit/start.html:368
+#: deposit/templates/deposit/start.html:364
 msgctxt "This repository will be soon available in Dissemin"
 msgid "Coming soon:"
 msgstr "Bientôt disponible :"
 
-#: deposit/templates/deposit/start.html:405
+#: deposit/templates/deposit/start.html:401
 msgid "Metadata"
 msgstr "Métadonnées"
 
-#: deposit/templates/deposit/start.html:421
+#: deposit/templates/deposit/start.html:417
 msgid "Processing deposit..."
 msgstr "Dépôt en cours de traitement..."
 
-#: deposit/templates/deposit/start.html:421
+#: deposit/templates/deposit/start.html:417
 msgid "please wait..."
 msgstr "veuillez patienter..."
 
-#: deposit/views.py:62
+#: deposit/views.py:63
 msgid "This repository is not available for this paper."
 msgstr "Ce dépôt n'est pas disponible pour ce papier."
 
-#: deposit/views.py:123
+#: deposit/views.py:143
 msgid "This repository cannot be used for this paper."
 msgstr "Impossible d'envoyer ce papier vers le dépôt indiqué."
 
-#: deposit/views.py:137
+#: deposit/views.py:162
 msgid "Access to the PDF was denied."
 msgstr "L'accès au PDF a été refusé."
 
@@ -341,7 +341,7 @@ msgstr "Regroupement des publications"
 msgid "Updating statistics"
 msgstr "Mise à jour des statistiques"
 
-#: papers/models.py:1157 papers/views.py:124 papers/views.py:129
+#: papers/models.py:1161 papers/views.py:124 papers/views.py:129
 #: papers/views.py:264 papers/views.py:298
 msgid "Papers"
 msgstr "Papiers"
@@ -1751,7 +1751,20 @@ msgstr ""
 "Si vous n'êtes pas satisfait par ce qu'elle propose, n'hésitez pas à nous "
 "contacter."
 
-#: templates/dissemin/faq.html:390 templates/dissemin/tos.html:142
+#: templates/dissemin/faq.html:390
+msgid "Can I use the Dissemin logo to refer to the project?"
+msgstr "Puis-je utiliser le logo de Dissemin pour faire référence au projet ?"
+
+#: templates/dissemin/faq.html:392
+msgid ""
+"Yes! See <a href=\"https://association.dissem.in/#logos\">here</a> for links "
+"to our logos and for explanations about how you can reuse them."
+msgstr ""
+"Oui ! <a href=\"https://association.dissem.in/#logos\">Cette page</a> "
+"contient des liens vers nos logos et des explications indiquant comment ils "
+"peuvent être utilisés."
+
+#: templates/dissemin/faq.html:397 templates/dissemin/tos.html:142
 msgid "Back to top"
 msgstr "Revenir en haut"
 
