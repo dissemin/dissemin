@@ -401,7 +401,7 @@ data.selection, selected: true, result: data.result})
                   aria-controls="optionMetadata">{% trans "Metadata" %}</a>
             </span>
         </div>
-        <div id="optionMetadata" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingMetadata">
+        <div id="optionMetadata" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingMetadata">
             <div class="panel-body">
                 <div id="repositoryMetadataForm">
                     {{ selected_protocol.get_form|crispy }}
