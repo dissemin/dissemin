@@ -65,7 +65,7 @@ class HALForm(FormWithAbstract):
 class HALPreferencesForm(forms.ModelForm):
     class Meta:
         model = HALDepositPreferences
-        fields = ['on_behalf_on']
+        fields = ['on_behalf_of']
 
     def __init__(self, *args, **kwargs):
         super(HALPreferencesForm, self).__init__(*args, **kwargs)

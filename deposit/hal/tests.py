@@ -262,3 +262,23 @@ class HALProtocolTest(ProtocolTest):
 
         # The error message should be specific
         self.assertTrue('already in HAL' in r.message)
+
+    def test_on_behalf_of(self):
+        # Set on-behalf-of to some user
+        # Currently we are using "test_ws" as deposit account
+        # and we own "dissemin" so let's deposit on-behalf-of dissemin
+        # although normally this would be replaced by the user's account.
+        preferences = self.proto.get_preferences(self.user)
+        preferences.on_behalf_of = 'dissemin'
+        preferences.save()
+
+        p = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
+        p.authors_list = [p.authors_list[0]]
+        r = self.dry_deposit(p,
+            abstract='this is an abstract',
+            topic='INFO',
+            depositing_author=0,
+            affiliation=59704) # ENS
+        self.assertEqualOrLog(r.status, 'faked')
+
+

@@ -8,7 +8,7 @@ from deposit.models import DepositPreferences
 
 
 class HALDepositPreferences(DepositPreferences):
-    on_behalf_on = models.CharField(max_length=128,
+    on_behalf_of = models.CharField(max_length=128,
                 null=True,
                 blank=True,
                 verbose_name=__('HAL username'),
