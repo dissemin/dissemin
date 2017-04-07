@@ -269,7 +269,7 @@ class HALProtocolTest(ProtocolTest):
         # and we own "dissemin" so let's deposit on-behalf-of dissemin
         # although normally this would be replaced by the user's account.
         preferences = self.proto.get_preferences(self.user)
-        preferences.on_behalf_of = 'dissemin'
+        preferences.on_behalf_of = 'pintochtest'
         preferences.save()
 
         p = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
