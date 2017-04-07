@@ -107,7 +107,7 @@ def start_view(request, pk):
             'available_repositories': repositories,
             'selected_repository': selected_repository,
             'selected_protocol': selected_protocol,
-            'is_owner': paper.is_owned_by(request.user),
+            'is_owner': paper.is_owned_by(request.user, flexible=True),
             'breadcrumbs': breadcrumbs,
             'repositoryForm': None,
             }

@@ -27,6 +27,7 @@ import doctest
 import django.test
 from papers.baremodels import BareName
 import papers.doi
+from django.contrib.auth.models import User
 from papers.models import Name
 from papers.models import OaiRecord
 from papers.models import OaiSource
@@ -259,3 +260,25 @@ class PaperTest(django.test.TestCase):
         # Remove the researcher
         p1.set_researcher(4, None)
         self.assertEqual(set(p1.researchers), set())
+
+    def test_owned_by(self):
+        p1 = Paper.create_by_doi('10.4049/jimmunol.167.12.6786')
+        r1 = Researcher.create_by_name('Stephan', 'Hauschildt')
+        r1.user, _ = User.objects.get_or_create(username='stephan')
+        r1.save()
+        p1.set_researcher(4, r1.id)
+        # The user is associated to the author in the model,
+        # so it is considered an owner.
+        self.assertTrue(p1.is_owned_by(r1.user))
+        other_user, _ = User.objects.get_or_create(
+            username='AndreaThiele',
+            first_name='Andrea',
+            last_name='Thiele')
+        # This other user is not associated to any researcher,
+        # so it isn't associated to the paper.
+        self.assertFalse(p1.is_owned_by(other_user))
+        # But if we ask for a flexible check, as her name matches
+        # one of the author names of the paper, she is recognized.
+        self.assertTrue(p1.is_owned_by(other_user, flexible=True))
+
+
