@@ -24,6 +24,7 @@
 from __future__ import unicode_literals
 
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
+import django.test
 from selenium import webdriver
 from pyvirtualdisplay import Display
 from django.conf import settings
@@ -38,7 +39,7 @@ import sys
 RUN_LOCAL = (not os.environ.get('TRAVIS')) or os.environ.get('LOCAL_SELENIUM')
 
 
-class SeleniumTest(StaticLiveServerTestCase):
+class SeleniumTest(django.test.TestCase):
     # fixtures = ['oauth_orcid.json']
     # replaced by custom creations for now
 
