@@ -30,6 +30,7 @@ import requests
 from urlparse import urlparse
 
 from deposit.hal.forms import HALForm
+from deposit.hal.forms import HALPreferencesForm
 from deposit.hal.metadata import AOFRFormatter
 from deposit.protocol import DepositError
 from deposit.protocol import DepositResult
@@ -39,6 +40,7 @@ from django.utils.translation import ugettext as __
 from papers.name import most_similar_author
 from lxml import etree
 from papers.utils import kill_html
+from deposit.hal.models import HALDepositPreferences
 
 try:
     import http.client as http_client
@@ -56,6 +58,8 @@ class HALProtocol(RepositoryProtocol):
     """
 
     form_class = HALForm
+    preferences_form_class = HALPreferencesForm
+    preferences_model = HALDepositPreferences
 
     def __init__(self, repository, **kwargs):
         super(HALProtocol, self).__init__(repository, **kwargs)
@@ -76,6 +80,8 @@ class HALProtocol(RepositoryProtocol):
             if ('oai:HAL:' in r.identifier or
                 domain.endswith('archives-ouvertes.fr')):
                 return False
+
+        self.hal_preferences = self.get_preferences(user)
         return True
 
     def predict_topic(self, topic_text):
@@ -144,6 +150,11 @@ class HALProtocol(RepositoryProtocol):
             self.log("### Creating ZIP file")
             zipFile = self.create_zip(pdf, metadata)
 
+            # Build the list of users who should own this deposit
+            on_behalf_of = [self.username]
+            if self.hal_preferences.on_behalf_of:
+                on_behalf_of.append(self.hal_preferences.on_behalf_of)
+
             # Creating a new deposition
             self.log("### Creating a new deposition")
 
@@ -161,6 +172,7 @@ class HALProtocol(RepositoryProtocol):
                 'Content-Type': 'application/zip',
                 'Content-Disposition': 'attachment; filename=meta.xml',
                 'Content-Length': len(zipContent),
+                'On-Behalf-Of': ';'.join(on_behalf_of),
                 }
             for header, value in headers.items():
                 conn.putheader(header, value)

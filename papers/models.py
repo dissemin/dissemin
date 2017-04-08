@@ -85,6 +85,7 @@ from papers.baremodels import PAPER_TYPE_PREFERENCE
 from papers.doi import to_doi
 from papers.errors import MetadataSourceException
 from papers.name import name_similarity
+from papers.name import match_names
 from papers.name import unify_name_lists
 from papers.orcid import OrcidProfile
 from papers.utils import affiliation_is_greater
@@ -917,11 +918,19 @@ class Paper(models.Model, BarePaper):
                 users.append(a.researcher.user)
         return users
 
-    def is_owned_by(self, user):
+    def is_owned_by(self, user, flexible=False):
         """
         Is this user one of the owners of that paper?
+
+        :param flexible: if set to true, we will also accept the user
+            as owner if its name matches any of the author names.
         """
-        return user in self.owners
+        owned = user in self.owners
+        if not owned and flexible:
+            user_name = (user.first_name, user.last_name)
+            return any(match_names(a, user_name)
+                   for a in self.author_name_pairs())
+        return owned
 
     @cached_property
     def is_deposited(self):

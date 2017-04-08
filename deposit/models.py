@@ -165,6 +165,47 @@ class DepositRecord(models.Model):
         else:
             return unicode(_('Deposit'))
 
+    def __repr__(self):
+        return '<DepositRecord %s>' % unicode(self.identifier)
+
+
+class DepositPreferences(models.Model):
+    """
+    This is an abstract base model to be subclassed
+    by repositories. It stores the preferences one user
+    might have concerning a particular repository, such
+    as default affiliation for HAL, default license, or
+    things we want to fill in automatically for them.
+    """
+    class Meta:
+        abstract = True
+
+    #: The user for which these preferences are stored
+    user = models.ForeignKey(User)
+    #: The repository for which these preferences apply
+    repository = models.ForeignKey(Repository)
+
+    @classmethod
+    def get_form_class(self):
+        """
+        This method should be reimplemented to return
+        the form class to edit these deposit preferences.
+        This is expected to be a ModelForm that get_form
+        will be able to initialize with values from an
+        existing instance.
+        """
+        raise NotImplemented
+
+    def get_form(self):
+        """
+        This method should return the
+        """
+        raise NotImplemented
+
+
+    def __repr__(self):
+        return '<DepositPreferences, user %s, repo %s>' %(
+                    unicode(self.user), unicode(self.repository))
 
 class UserPreferences(models.Model):
     """
@@ -172,10 +213,16 @@ class UserPreferences(models.Model):
     not the ones specific to a particular repository.
     """
     user = models.OneToOneField(User)
+    # Email address
+    email = models.EmailField(max_length=512, null=True, blank=True,
+       help_text=_(
+        'We will use this email address to notify you when your deposits are accepted.'
+    ))
     # The preferred repository, set by the user
     preferred_repository = models.ForeignKey(Repository,
         null=True, blank=True,
-        related_name='preferrend_by')
+        related_name='preferred_by',
+        help_text=_('This repository will be used by default for your deposits.'))
     # The last repository used by this user
     last_repository = models.ForeignKey(Repository,
         null=True, blank=True,

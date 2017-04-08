@@ -1,0 +1,23 @@
+{% extends "dissemin/skeleton.html" %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+
+{% block extra_head %}
+{% include 'statistics/headers.html' %}
+<!-- repository-specific JS and CSS -->
+{{ preferences_form.media }}
+{% endblock %}
+
+{% block headTitle %}{% trans "Preferences" %}{% endblock %}
+
+{% block content %}
+<div id="fullPage">
+{% include "deposit/preferences_nav.html" %}
+ 
+<form method="POST" action="{% url 'edit-global-preferences' %}" id="repositoryPreferencesForm">
+	{% crispy preferences_form  %}
+</form>
+{% endblock %}
+

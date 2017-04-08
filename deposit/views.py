@@ -24,6 +24,7 @@ import os
 from crispy_forms.templatetags.crispy_forms_filters import as_crispy_form
 from crispy_forms.utils import render_crispy_form
 from deposit.forms import PaperDepositForm
+from deposit.forms import UserPreferencesForm
 from deposit.models import DepositRecord
 from deposit.models import Repository
 from deposit.models import UserPreferences
@@ -31,6 +32,7 @@ from dissemin.settings import DEPOSIT_MAX_FILE_SIZE
 from dissemin.settings import MEDIA_ROOT
 from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponseForbidden
+from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from django.template import RequestContext
@@ -105,7 +107,7 @@ def start_view(request, pk):
             'available_repositories': repositories,
             'selected_repository': selected_repository,
             'selected_protocol': selected_protocol,
-            'is_owner': paper.is_owned_by(request.user),
+            'is_owner': paper.is_owned_by(request.user, flexible=True),
             'breadcrumbs': breadcrumbs,
             'repositoryForm': None,
             }
@@ -122,6 +124,46 @@ def list_deposits(request):
         'deposits': deposits
     }
     return render(request, 'deposit/deposits.html', context)
+
+@user_passes_test(is_authenticated)
+def edit_repo_preferences(request, pk):
+    repo = get_object_or_404(Repository, pk=pk)
+    protocol = repo.get_implementation()
+    context = {
+        'repositories': Repository.objects.all(),
+        'repository': repo,
+        'protocol': protocol,
+    }
+    if request.method == 'POST':
+        pref_form = protocol.get_preferences_form(request.user, request.POST)
+        if not pref_form:
+            raise Http404(_('This repository does not have any settings.'))
+        pref_form.save()
+
+    pref_form = protocol.get_preferences_form(request.user)
+    if not pref_form:
+        raise Http404(_('This repository does not have any settings.'))
+
+    context['preferences_form'] = pref_form
+    return render(request, 'deposit/repo_preferences.html', context)
+
+@user_passes_test(is_authenticated)
+def edit_global_preferences(request):
+    context = {
+        'repositories': Repository.objects.all(),
+    }
+    prefs = UserPreferences.get_by_user(request.user)
+    if request.method == 'POST':
+        pref_form = UserPreferencesForm(request.POST, instance=prefs)
+        pref_form.save()
+
+    pref_form = UserPreferencesForm(instance=prefs)
+    if not pref_form:
+        raise Http404(_('This repository does not have any settings.'))
+
+    context['preferences_form'] = pref_form
+    return render(request, 'deposit/global_preferences.html', context)
+
 
 @require_POST
 @json_view

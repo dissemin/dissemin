@@ -2127,6 +2127,88 @@ msgstr "URL invalide (délai de connexion expiré)."
 msgid "Invalid URL."
 msgstr "URL invalide."
 
+msgid "Biological anthropology"
+msgstr "Anthropologie biologique"
+
+msgid "Social Anthropology and ethnology"
+msgstr "Anthropologie sociale et ethnologie"
+
+msgid "Archaeology and Prehistory"
+msgstr "Archéologie et Préhistoire"
+
+msgid "Architecture, space management"
+msgstr "Architecture, aménagement de l'espace"
+
+msgid "Art and art history"
+msgstr "Art et histoire de l'art"
+
+msgid "Classical studies"
+msgstr "Études classiques"
+
+msgid "Demography"
+msgstr "Démographie"
+
+msgid "Law"
+msgstr "Droit"
+
+msgid "Economies and finances"
+msgstr "Économie et finances"
+
+msgid "Education"
+msgstr "Éducation"
+
+msgid "Environmental studies"
+msgstr "Études de l'environnement"
+
+msgid "Gender studies"
+msgstr "Études sur le genre"
+
+msgid "Geography"
+msgstr "Géographie"
+
+msgid "Business administration"
+msgstr "Gestion et management"
+
+msgid "History, Philosophy and Sociology of Sciences"
+msgstr "Histoire, Philosophie et Sociologie des sciences"
+
+msgid "History"
+msgstr "Histoire"
+
+msgid "Library and information sciences"
+msgstr "Sciences de l'information et de la communication"
+
+msgid "Linguistics"
+msgstr "Linguistique"
+
+msgid "Literature"
+msgstr "Littératures"
+
+msgid "Cultural heritage and museology"
+msgstr "Héritage culturel et muséologie"
+
+msgid "Musicology and performing arts"
+msgstr "Musique, musicologie et arts de la scène"
+
+msgid "Philosophy"
+msgstr "Philosophie"
+
+msgid "Psychology"
+msgstr "Psychologie"
+
+msgid "Religions"
+msgstr "Religions"
+
+msgid "Political science"
+msgstr "Science politique"
+
+msgid "Sociology"
+msgstr "Sociologie"
+
+msgid "Methods and statistics"
+msgstr "Méthodes et statistiques"
+
+
 #~ msgid "Feedback"
 #~ msgstr "Réactions"
 

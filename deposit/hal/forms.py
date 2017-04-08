@@ -25,7 +25,9 @@ from deposit.forms import FormWithAbstract
 from deposit.hal.metadata import HAL_TOPIC_CHOICES
 from django import forms
 from django.utils.translation import ugettext as __
-
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
+from deposit.hal.models import HALDepositPreferences
 
 class AffiliationSelect2(Select2):
     autocomplete_function = 'select2-customTemplate'
@@ -36,17 +38,6 @@ class HALForm(FormWithAbstract):
         super(HALForm, self).__init__(paper, **kwargs)
         self.fields['depositing_author'].choices = enumerate(
             map(unicode, paper.authors))
-
-    # Dummy field to store the user name
-    # (required for affiliation autocompletion)
-    #first_name = forms.CharField(
-    #    required=False,
-    #    widget=forms.HiddenInput
-    #)
-    #last_name = forms.CharField(
-    #    required=False,
-    #    widget=forms.HiddenInput
-    #)
 
     topic = forms.ChoiceField(
             label=__('Scientific field'),
@@ -63,7 +54,6 @@ class HALForm(FormWithAbstract):
         required=True,
         label=__('Affiliation'),
         widget=AffiliationSelect2(
-#            forward=['first_name', 'last_name'],
             url='autocomplete_affiliations',
             attrs={
                 #'data-html': 'true',
@@ -71,3 +61,19 @@ class HALForm(FormWithAbstract):
             },
         )
     )
+
+class HALPreferencesForm(forms.ModelForm):
+    class Meta:
+        model = HALDepositPreferences
+        fields = ['on_behalf_of']
+
+    def __init__(self, *args, **kwargs):
+        super(HALPreferencesForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-lg-2'
+        self.helper.field_class = 'col-lg-8'
+        self.helper.add_input(
+            Submit('submit', __('Save')),
+        )
+
