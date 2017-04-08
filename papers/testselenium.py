@@ -23,7 +23,7 @@
 
 from __future__ import unicode_literals
 
-from django.contrib.staticfiles.testing import StaticLiveServerTestCase
+#from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 import django.test
 from selenium import webdriver
 from pyvirtualdisplay import Display
