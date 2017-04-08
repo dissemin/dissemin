@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-05 00:08+0200\n"
-"PO-Revision-Date: 2017-04-05 00:10+0200\n"
+"POT-Creation-Date: 2017-04-07 01:49+0200\n"
+"PO-Revision-Date: 2017-04-08 10:21+0200\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -18,13 +18,17 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 1.8.11\n"
 
-#: deposit/forms.py:39
+#: deposit/forms.py:42
 msgid "Upload type"
 msgstr "Type de dépôt"
 
-#: deposit/forms.py:40 deposit/templates/deposit/deposits.html:40
+#: deposit/forms.py:43 deposit/templates/deposit/deposits.html:40
 msgid "Repository"
 msgstr "Dépôt"
+
+#: deposit/forms.py:120
+msgid "No preferred repository"
+msgstr "Pas de dépôt préféré"
 
 #: deposit/models.py:38
 msgid "Failed"
@@ -51,9 +55,20 @@ msgid "Deleted"
 msgstr "Supprimé"
 
 #: deposit/models.py:166 deposit/templates/deposit/start.html:415
-#: deposit/views.py:101
+#: deposit/views.py:103
 msgid "Deposit"
 msgstr "Dépôt"
+
+#: deposit/models.py:219
+msgid ""
+"We will use this email address to notify you when your deposits are accepted."
+msgstr ""
+"Nous utiliserons cette adresse de courriel pour vous prévenir une fois que "
+"vos dépôts auront été acceptés."
+
+#: deposit/models.py:225
+msgid "This repository will be used by default for your deposits."
+msgstr "Ce dépôt sera utilisé par défaut pour vos soumissions."
 
 #: deposit/templates/deposit/deposits.html:10
 #: deposit/templates/deposit/deposits.html:14
@@ -96,6 +111,20 @@ msgid ""
 msgstr ""
 "Vous n'avez pas encore fait de dépôt avec Dissemin. N'attendez plus, libérez "
 "vos papiers dès aujourd'hui !"
+
+#: deposit/templates/deposit/global_preferences.html:13
+#: deposit/templates/deposit/preferences_nav.html:3
+#: templates/dissemin/skeleton.html:81
+msgid "Preferences"
+msgstr "Préférences"
+
+#: deposit/templates/deposit/preferences_nav.html:7
+msgid "General"
+msgstr "Général"
+
+#: deposit/templates/deposit/repo_preferences.html:13
+msgid "Repository preferences"
+msgstr "Préférences du dépôt"
 
 #: deposit/templates/deposit/start.html:12
 #: deposit/templates/deposit/start.html:16
@@ -180,15 +209,19 @@ msgstr "Dépôt en cours de traitement..."
 msgid "please wait..."
 msgstr "veuillez patienter..."
 
-#: deposit/views.py:63
+#: deposit/views.py:65
 msgid "This repository is not available for this paper."
 msgstr "Ce dépôt n'est pas disponible pour ce papier."
 
-#: deposit/views.py:143
+#: deposit/views.py:140 deposit/views.py:145 deposit/views.py:162
+msgid "This repository does not have any settings."
+msgstr "Ce dépôt n'a pas de paramètres spécifiques."
+
+#: deposit/views.py:185
 msgid "This repository cannot be used for this paper."
 msgstr "Impossible d'envoyer ce papier vers le dépôt indiqué."
 
-#: deposit/views.py:162
+#: deposit/views.py:204
 msgid "Access to the PDF was denied."
 msgstr "L'accès au PDF a été refusé."
 
@@ -248,7 +281,7 @@ msgstr "Thèse"
 msgid "Dataset"
 msgstr "Banque de données"
 
-#: papers/baremodels.py:65 papers/models.py:99
+#: papers/baremodels.py:65 papers/models.py:100
 msgid "Preprint"
 msgstr "Préprint"
 
@@ -301,47 +334,47 @@ msgstr "Invisible"
 msgid "Try any author name"
 msgstr "Essayez n'importe quel nom"
 
-#: papers/models.py:100
+#: papers/models.py:101
 msgid "Postprint"
 msgstr "Postprint"
 
-#: papers/models.py:101
+#: papers/models.py:102
 msgid "Published version"
 msgstr "Version publiée"
 
-#: papers/models.py:105
+#: papers/models.py:106
 msgid "Preparing profile"
 msgstr "Préparation du profil"
 
-#: papers/models.py:106
+#: papers/models.py:107
 msgid "Fetching publications from ORCID"
 msgstr "Récupération des publications à partir d'ORCID"
 
-#: papers/models.py:107
+#: papers/models.py:108
 msgid "Fetching publications from CrossRef"
 msgstr "Récupération des publications à partir de CrossRef"
 
-#: papers/models.py:108
+#: papers/models.py:109
 msgid "Fetching publications from BASE"
 msgstr "Récupération des publications à partir de BASE"
 
-#: papers/models.py:109
+#: papers/models.py:110
 msgid "Fetching publications from CORE"
 msgstr "Récupération des publications à partir de CORE"
 
-#: papers/models.py:110
+#: papers/models.py:111
 msgid "Fetching publications from OAI-PMH"
 msgstr "Récupération des publications à partir d'OAI-PMH"
 
-#: papers/models.py:111
+#: papers/models.py:112
 msgid "Clustering publications"
 msgstr "Regroupement des publications"
 
-#: papers/models.py:112
+#: papers/models.py:113
 msgid "Updating statistics"
 msgstr "Mise à jour des statistiques"
 
-#: papers/models.py:1161 papers/views.py:124 papers/views.py:129
+#: papers/models.py:1170 papers/views.py:124 papers/views.py:129
 #: papers/views.py:264 papers/views.py:298
 msgid "Papers"
 msgstr "Papiers"
@@ -1847,7 +1880,7 @@ msgstr "SANDBOX Connexion"
 msgid "Toggle navigation"
 msgstr "Afficher/masquer la navigation"
 
-#: templates/dissemin/skeleton.html:73 templates/dissemin/skeleton.html:81
+#: templates/dissemin/skeleton.html:73
 msgid "My profile"
 msgstr "Mon profil"
 
@@ -2127,87 +2160,86 @@ msgstr "URL invalide (délai de connexion expiré)."
 msgid "Invalid URL."
 msgstr "URL invalide."
 
-msgid "Biological anthropology"
-msgstr "Anthropologie biologique"
+#~ msgid "Biological anthropology"
+#~ msgstr "Anthropologie biologique"
 
-msgid "Social Anthropology and ethnology"
-msgstr "Anthropologie sociale et ethnologie"
+#~ msgid "Social Anthropology and ethnology"
+#~ msgstr "Anthropologie sociale et ethnologie"
 
-msgid "Archaeology and Prehistory"
-msgstr "Archéologie et Préhistoire"
+#~ msgid "Archaeology and Prehistory"
+#~ msgstr "Archéologie et Préhistoire"
 
-msgid "Architecture, space management"
-msgstr "Architecture, aménagement de l'espace"
+#~ msgid "Architecture, space management"
+#~ msgstr "Architecture, aménagement de l'espace"
 
-msgid "Art and art history"
-msgstr "Art et histoire de l'art"
+#~ msgid "Art and art history"
+#~ msgstr "Art et histoire de l'art"
 
-msgid "Classical studies"
-msgstr "Études classiques"
+#~ msgid "Classical studies"
+#~ msgstr "Études classiques"
 
-msgid "Demography"
-msgstr "Démographie"
+#~ msgid "Demography"
+#~ msgstr "Démographie"
 
-msgid "Law"
-msgstr "Droit"
+#~ msgid "Law"
+#~ msgstr "Droit"
 
-msgid "Economies and finances"
-msgstr "Économie et finances"
+#~ msgid "Economies and finances"
+#~ msgstr "Économie et finances"
 
-msgid "Education"
-msgstr "Éducation"
+#~ msgid "Education"
+#~ msgstr "Éducation"
 
-msgid "Environmental studies"
-msgstr "Études de l'environnement"
+#~ msgid "Environmental studies"
+#~ msgstr "Études de l'environnement"
 
-msgid "Gender studies"
-msgstr "Études sur le genre"
+#~ msgid "Gender studies"
+#~ msgstr "Études sur le genre"
 
-msgid "Geography"
-msgstr "Géographie"
+#~ msgid "Geography"
+#~ msgstr "Géographie"
 
-msgid "Business administration"
-msgstr "Gestion et management"
+#~ msgid "Business administration"
+#~ msgstr "Gestion et management"
 
-msgid "History, Philosophy and Sociology of Sciences"
-msgstr "Histoire, Philosophie et Sociologie des sciences"
+#~ msgid "History, Philosophy and Sociology of Sciences"
+#~ msgstr "Histoire, Philosophie et Sociologie des sciences"
 
-msgid "History"
-msgstr "Histoire"
+#~ msgid "History"
+#~ msgstr "Histoire"
 
-msgid "Library and information sciences"
-msgstr "Sciences de l'information et de la communication"
+#~ msgid "Library and information sciences"
+#~ msgstr "Sciences de l'information et de la communication"
 
-msgid "Linguistics"
-msgstr "Linguistique"
+#~ msgid "Linguistics"
+#~ msgstr "Linguistique"
 
-msgid "Literature"
-msgstr "Littératures"
+#~ msgid "Literature"
+#~ msgstr "Littératures"
 
-msgid "Cultural heritage and museology"
-msgstr "Héritage culturel et muséologie"
+#~ msgid "Cultural heritage and museology"
+#~ msgstr "Héritage culturel et muséologie"
 
-msgid "Musicology and performing arts"
-msgstr "Musique, musicologie et arts de la scène"
+#~ msgid "Musicology and performing arts"
+#~ msgstr "Musique, musicologie et arts de la scène"
 
-msgid "Philosophy"
-msgstr "Philosophie"
+#~ msgid "Philosophy"
+#~ msgstr "Philosophie"
 
-msgid "Psychology"
-msgstr "Psychologie"
+#~ msgid "Psychology"
+#~ msgstr "Psychologie"
 
-msgid "Religions"
-msgstr "Religions"
+#~ msgid "Religions"
+#~ msgstr "Religions"
 
-msgid "Political science"
-msgstr "Science politique"
+#~ msgid "Political science"
+#~ msgstr "Science politique"
 
-msgid "Sociology"
-msgstr "Sociologie"
+#~ msgid "Sociology"
+#~ msgstr "Sociologie"
 
-msgid "Methods and statistics"
-msgstr "Méthodes et statistiques"
-
+#~ msgid "Methods and statistics"
+#~ msgstr "Méthodes et statistiques"
 
 #~ msgid "Feedback"
 #~ msgstr "Réactions"
