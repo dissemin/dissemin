@@ -29,6 +29,9 @@ from pyvirtualdisplay import Display
 from django.conf import settings
 from sauceclient import SauceClient
 from allauth.socialaccount.models import SocialApp
+from contextlib import contextmanager
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support.expected_conditions import staleness_of
 import os
 import sys
 
@@ -59,9 +62,9 @@ class SeleniumTest(StaticLiveServerTestCase):
                     os.environ.get('TRAVIS_PYTHON_VERSION'),
                     'Travis',
                     ],
-                'platform':'Linux',
-                'browserName':'firefox',
-                'version':'38',
+                'platform':'Windows 10',
+                'browserName':'googlechrome',
+                'version':'57',
                 }
             username = os.environ.get('SAUCE_USERNAME')
             access_key = os.environ.get('SAUCE_ACCESS_KEY')
@@ -70,16 +73,7 @@ class SeleniumTest(StaticLiveServerTestCase):
             cls.selenium = webdriver.Remote(
                     desired_capabilities=capabilities,
                     command_executor=sauce_url % (username, access_key))
-            cls.selenium.implicitly_wait(5) # seconds
-
-        # Set up ORCID OAuth
-        s = SocialApp.objects.create(
-        **{"provider": "orcid",
-           "name": "Orcid sandbox",
-           "client_id": "APP-ZAKE3VEWSG31TWSE",
-           "secret": "5f0464c4-375a-4925-84ff-95b0d410cad8",
-           "key": ""})
-        s.sites.add(1)
+            #cls.selenium.implicitly_wait(5) # seconds
 
     @classmethod
     def tearDownClass(cls):
@@ -102,6 +96,7 @@ class SeleniumTest(StaticLiveServerTestCase):
         super(SeleniumTest, cls).tearDownClass()
 
     def get_relative(self, relative_url):
+        print('%s%s' % (self.live_server_url, relative_url))
         self.selenium.get('%s%s' % (self.live_server_url, relative_url))
 
     def by_css(self, css_selector):
@@ -113,18 +108,50 @@ class SeleniumTest(StaticLiveServerTestCase):
     def by_xpath(self, xp):
         return self.selenium.find_elements_by_xpath(xp)
 
+    @contextmanager
+    def wait_for_page_load(self, timeout=30):
+        """
+        Credit to Tommy Beadle for this solution
+        http://www.obeythetestinggoat.com/how-to-get-selenium-to-wait-for-page-load-after-a-click.html
+        """
+        old_page = self.selenium.find_element_by_tag_name('html')
+        yield
+        WebDriverWait(self.selenium, timeout).until(
+            staleness_of(old_page)
+        )
+
     def test_oauth_login(self):
+        # Set up ORCID OAuth
+        s = SocialApp.objects.create(
+        **{"provider": "orcid",
+           "name": "Orcid sandbox",
+           "client_id": "APP-ZAKE3VEWSG31TWSE",
+           "secret": "5f0464c4-375a-4925-84ff-95b0d410cad8",
+           "key": ""})
+        s.sites.add(1)
+
         # Go to the login page and click login
         self.get_relative('/accounts/login/')
-        login_button = self.by_css('.left .btn-orcid')
-        login_button.click()
-        # Fill the ORCID login form
-        self.by_id('userId').send_keys('liethpeter@mailinator.com')
-        self.by_id('password').send_keys('liethpeter0')
-        # self.by_id('enablePersistentToken').click() # uncheck
-        self.by_id('login-authorize-button').click()
-        # Check that the name of the user is present
-        name_elem = self.by_xpath("//*[contains(text(), 'P. Lieth')]")
-        self.assertTrue(name_elem[0])
+        from time import sleep
+        print('sleeping for 5 sec')
+        sleep(5)
+        with self.wait_for_page_load(timeout=10):
+            print('sleeping for 5 sec')
+            sleep(5)
+            print('done')
+            login_button = self.by_css('.left .btn-orcid')
+            login_button.click()
+
+            with self.wait_for_page_load(timeout=10):
+                # Fill the ORCID login form
+                self.by_id('userId').send_keys('liethpeter@mailinator.com')
+                self.by_id('password').send_keys('liethpeter0')
+                # self.by_id('enablePersistentToken').click() # uncheck
+                self.by_id('login-authorize-button').click()
+
+                with self.wait_for_page_load(timeout=10):
+                    # Check that the name of the user is present
+                    name_elem = self.by_xpath("//*[contains(text(), 'P. Lieth')]")
+                    self.assertTrue(name_elem[0])
 
 
