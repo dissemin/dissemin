@@ -13,7 +13,9 @@ Automatic installation with `Vagrant <https://www.vagrantup.com>`_
 
 First, install `Vagrant <https://www.vagrantup.com>`_ and one of the supported providers: VirtualBox (should work fine), LXC (tested), libvirt (try it and tell us!). Then run the following commands:
 
-- ``git clone https://github.com/dissemin/dissemin`` will clone the repository (download the source code of dissemin)
+- ``git clone https://github.com/dissemin/dissemin`` will clone the repository,
+  i.e., download the source code of Dissemin. You should not reuse an existing
+  copy of the repository, otherwise it may cause errors with Vagrant later.
 - ``cd dissemin`` to go in the repository
 - ``vagrant up --provider=your_provider`` will create the VM / container and provision the machine once
 - ``vagrant ssh`` will let you poke into the machine and access its services (PostgreSQL, Redis, ElasticSearch)
