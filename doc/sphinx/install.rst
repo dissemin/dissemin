@@ -3,30 +3,41 @@
 Installation
 ============
 
-dissem.in is split in two parts:
+There are two ways to install Dissemin. The automatic way uses
+`Vagrant <https://www.vagrantup.com>` to install Dissemin to a container or VM,
+and only takes a few commands. The manual way is more complex and is
+described afterwards.
+
+Automatic installation with `Vagrant <https://www.vagrantup.com>`_
+------------------------------------------------------------------
+
+First, install `Vagrant <https://www.vagrantup.com>`_ and one of the supported providers: VirtualBox (should work fine), LXC (tested), libvirt (try it and tell us!). Then run the following commands:
+
+- ``git clone https://github.com/dissemin/dissemin`` will clone the repository (download the source code of dissemin)
+- ``cd dissemin`` to go in the repository
+- ``vagrant up --provider=your_provider`` will create the VM / container and provision the machine once
+- ``vagrant ssh`` will let you poke into the machine and access its services (PostgreSQL, Redis, ElasticSearch)
+- A tmux session is running so that you can check out the Celery and Django development server, attach it using: ``tmux attach``
+
+Dissemin will be available on your host machine at `localhost:8080`.
+
+Manual installation
+-------------------
+
+This section describes manual installation, if you cannot or do not want to use
+Vagrant as indicated above. dissem.in is split in two parts:
 
 * the web frontend, powered by Django;
 * the tasks backend, powered by Celery.
 
 Installing the tasks backend requires additional dependencies and is not
 necessary if you want to do light dev that does not require harvesting
-metadata or running author disambiguation.
-
-_New!_ Kickstart your Dissemin in an container or VM using `Vagrant <https://www.vagrantup.com>`_
-----------------------------------------------------------------------------------------------
-
-First, install `Vagrant <https://www.vagrantup.com>`_ and one of the supported providers: Virtual Box (should work fine), LXC (tested), libvirt (try it and tell us!).
-
-- ``git clone https://github.com/dissemin/dissemin`` will clone the repository (download the source code of dissemin)
-- ``cd dissemin`` to go in the repository
-- ``vagrant up --provider=your_provider`` will create the VM / container and provision the machine once
-- ``vagrant ssh`` will let you poke into the machine and access its services (PostgreSQL, Redis, ElasticSearch)
-- A tmux session is running so that you can check out Celery and Django development server, attach it using: ``tmux attach``
-
-Dissemin will be available on your host machine at `localhost:8080` !
+metadata or running author disambiguation. The next subsections describe how to
+install the frontend; the last one explains how to install the backend or how to
+bypass it in case you do not want to install it.
 
 Installation instructions for the web frontend
-----------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 First, install the following dependencies (debian packages)
 ``postgresql postgresql-server-dev-all postgresql-client python-virtualenv build-essential libxml2-dev libxslt1-dev python-dev gettext libjpeg-dev libffi-dev``
@@ -39,7 +50,7 @@ dependencies::
    pip install -r requirements.txt
 
 Set up the database
--------------------
+~~~~~~~~~~~~~~~~~~~
 
 Choose a unique database and user name (they can be identical), such as
 ``dissemin_myuni``. Choose a strong password for your user::
@@ -51,7 +62,7 @@ Choose a unique database and user name (they can be identical), such as
    CREATE DATABASE dissemin_myuni WITH OWNER dissemin_myuni;
 
 Configure the secrets
-----------------------
+~~~~~~~~~~~~~~~~~~~~~
 
 Copy ``dissemin/settings/secret_template.py`` to ``dissemin/settings/secret.py``.
 Edit this file to change the following settings:
@@ -68,7 +79,7 @@ Edit this file to change the following settings:
 
 
 Install and configure the search engine
----------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 dissem.in uses the `Elasticsearch <https://www.elastic.co/products/elasticsearch>`_
 backend for Haystack.
@@ -80,7 +91,7 @@ and unzip it::
     ./bin/elasticsearch    # Add -d to start elasticsearch in the background
 
 Configure the application for development or production
--------------------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Finally, create a file ``dissemin/settings/__init__.py`` with this content::
 
@@ -98,7 +109,7 @@ Common settings are available at ``dissemin/settings/common.py``.
 Travis specific settings are available at ``dissemin/settings/travis.py``.
 
 Create the database structure
------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This is done by applying migrations::
 
@@ -109,7 +120,7 @@ Then you can move on to :ref:`page-importresearchers`
 and :ref:`page-deploying`.
 
 Populate the search index
--------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The search engine must be synchronized with the database manually using::
 
@@ -118,7 +129,7 @@ The search engine must be synchronized with the database manually using::
 That command should be run regularly to index new entries.
 
 Social Authentication specific: Configuring sandbox ORCID
----------------------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 *You are not forced to configure ORCID to work on Dissemin, just create a super user and use it!*
 
@@ -145,7 +156,7 @@ You should also activate the default Site object for this provider.
 Now, you can authenticate yourself using the ORCID sandbox!
 
 Add deposit interfaces
-----------------------
+~~~~~~~~~~~~~~~~~~~~~~
 
 If you want to enable deposit of papers to external repositories (such as Zenodo),
 you need to register them in the admin interface.
@@ -167,7 +178,7 @@ A checkbox allows you to enable or disable the repository without deleting its s
 
 
 Installing or bypassing the tasks backend
------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Some features in Dissemin rely on an asynchronous tasks backend, celery.
 If you want to simplify your installation and ignore this asynchronous
@@ -176,7 +187,7 @@ behaviour, you can add ``CELERY_ALWAYS_EAGER = True`` to your
 be run from the main thread synchronously.
 
 Otherwise, you need to run celery in a separate process. The rest of this
-section explains how.
+subsection explains how.
 
 The backend communicates with the frontend through a message passing
 infrastructure. We recommend redis for that (and the source code is
