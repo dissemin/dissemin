@@ -17,6 +17,8 @@ _New!_ Kickstart your Dissemin in an container or VM using `Vagrant <https://www
 
 First, install `Vagrant <https://www.vagrantup.com>`_ and one of the supported providers: Virtual Box (should work fine), LXC (tested), libvirt (try it and tell us!).
 
+- ``git clone https://github.com/dissemin/dissemin`` will clone the repository (download the source code of dissemin)
+- ``cd dissemin`` to go in the repository
 - ``vagrant up --provider=your_provider`` will create the VM / container and provision the machine once
 - ``vagrant ssh`` will let you poke into the machine and access its services (PostgreSQL, Redis, ElasticSearch)
 - A tmux session is running so that you can check out Celery and Django development server, attach it using: ``tmux attach``
