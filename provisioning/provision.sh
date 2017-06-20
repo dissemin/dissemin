@@ -151,6 +151,7 @@ function activate_venv () {
 }
 activate_venv
 python /dissemin/manage.py migrate
+python /dissemin/manage.py loaddata /dissemin/papers/fixtures/test_dump.json
 python /dissemin/manage.py update_index
 
 # We run a new tmux session containing the Dissemin development server.
