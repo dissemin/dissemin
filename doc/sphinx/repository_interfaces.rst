@@ -64,15 +64,7 @@ with `self.paper.title`, or use the JSON representation that we generate for
 `the API <http://dev.dissem.in/api.html>`_, which can be generated using `self.paper.json()`. For instance, `self.paper.json()['title']` gives you the title.
 
 The PDF file is passed as an argument to the `submit_deposit` method. It
-is a string with the content of the PDF file (so it can be quite big).
-If you need to treat it as file descriptor instead, you can use the `StringIO`
-module::
-
-   from StringIO import StringIO
-
-   ...
-
-   pdf_file = StringIO(pdf)
+is a path to the PDF file, which you can open with `open(pdf, 'r')` for instance.
 
 You also have access to the settings for the target repository, as a :class:`~deposit.models.Repository` object, in `self.repository`.
 This should give you all the information you need about how to connect
@@ -151,7 +143,7 @@ add the following lines at the end of `deposit/sword/protocol.py`::
     protocol_registry.register(SwordProtocol)
 
 Next, add your protocol to the enabled apps, by adding `deposit.sword` in
-the `INSTALLED_APPS` list of `dissemin/settings.py`::
+the `INSTALLED_APPS` list of `dissemin/settings/common.py`::
 
     ...
     'deposit',
