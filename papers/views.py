@@ -396,7 +396,8 @@ class PaperView(SlugDetailView):
                     context['deposit'] = dep
             except (TypeError, ValueError, DepositRecord.DoesNotExist):
                 pass
-        context['can_be_deposited'] = self.request.user.is_authenticated and self.object.can_be_deposited(self.request.user)
+        context['can_be_deposited'] = (not self.request.user.is_authenticated
+                    or self.object.can_be_deposited(self.request.user))
 
         # Pending deposits
         context['pending_deposits'] = self.object.depositrecord_set.filter(
