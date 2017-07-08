@@ -23,6 +23,11 @@ First, install `Vagrant <https://www.vagrantup.com>`_ and one of the supported p
 
 Dissemin will be available on your host machine at `localhost:8080`.
 
+Note that, when rebooting the Vagrant VM / container, the Dissemin server will
+not be started automatically. To do it, once you have booted the machine, run 
+``vagrant ssh`` and then ``cd /dissemin`` and ``./launch.sh`` and wait for some
+time until it says that Dissemin has started.
+
 Manual installation
 -------------------
 
