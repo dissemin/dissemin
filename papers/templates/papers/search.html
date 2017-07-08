@@ -80,7 +80,6 @@ $(function(){
                // in which case it is equal to the researcher of the currently
                // logged in user; if it is the profile currently being viewed,
                // we must remove the paper entirely
-               console.log("#paper-" + pk);
                $("#paper-" + pk).fadeOut(300, function() { $(this).remove(); });
 {% endif %}
              }
