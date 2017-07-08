@@ -33,6 +33,7 @@ from unidecode import unidecode
 
 filter_punctuation_alphanum_regex = re.compile(r'.*\w')
 
+year_margin = 3
 
 def filter_punctuation(lst):
     """
@@ -546,11 +547,11 @@ def valid_publication_date(dt):
     >>> valid_publication_date(None)
     False
     """
-    # In 2042, the problem of access to scientific publications
-    # will be solved and Dissemin will autodestroy as a consequence
-    # of this hack.
+    now = datetime.datetime.now()
+    current_year = now.year
+    # some papers are published in the future ("to appear")
     return ((type(dt) == datetime.date or type(dt) == datetime.datetime)
-            and dt.year < 2042)
+            and dt.year < current_year + year_margin)
 
 ### ORCiD utilities ###
 
