@@ -9,7 +9,7 @@
     <img src="/static/img/logos/{{ paper.combined_status }}.png" width="52" height="70" />
 </div>
 
-<div class="pubText">
+<div class="publicationText">
     <p class="paperAuthors">
         {% include "papers/authorList.html" with author_list=paper.displayed_authors %}
         {% if paper.has_many_authors %}

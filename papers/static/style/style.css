@@ -338,7 +338,7 @@ li
 	width:100%;
 }
 
-.pubText, .criterionItem
+.publicationText, .criterionItem
 {
     margin-top: 15px;
     margin-bottom: 15px;
@@ -347,14 +347,14 @@ li
     padding-bottom: 5px;
 }
 
-.pubText
+.publicationText
 {
     margin-left: 60px;
     border-left: 3px solid #8ECC50;
     min-height: 55px;
 }
 
-.pubText p
+.publicationText p
 {
     margin: 0px 0px 5px;
     word-wrap: break-word;
@@ -757,6 +757,11 @@ input[type=checkbox]:checked ~ .stats_caption_label
 #footer, .push
 {
     clear: both;
+}
+
+#change-lang-form-div
+{
+    text-align: center;
 }
 
 /* Departments list */
