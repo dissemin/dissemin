@@ -80,7 +80,7 @@
                                 <ul class="dropdown-menu">
                                     <li><a href="{% url "edit-global-preferences" %}">{% trans "Preferences" %}</a></li>
                                     <li><a href="{% url "list_deposits" %}">{% trans "My deposits" %}</a></li>
-                                    <li><a onclick="
+                                    <li><a href="#" onclick="
 $.ajax({ url: 'https://{{ ORCID_BASE_DOMAIN }}/userStatus.json?logUserOut=true', dataType: 'jsonp',
             success: function(result,status,xhr) {
                 window.location.href = '{% url "account_logout" %}';
