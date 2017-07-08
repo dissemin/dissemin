@@ -759,6 +759,11 @@ input[type=checkbox]:checked ~ .stats_caption_label
     clear: both;
 }
 
+#change-lang-form-div
+{
+    text-align: center;
+}
+
 /* Departments list */
 
 #departmentsList {
