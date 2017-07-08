@@ -17,6 +17,25 @@ class SearchBackend(ElasticsearchSearchBackend):
             kwargs.update(extra)
         return kwargs
 
+    def build_schema(self, fields):
+        # modify build_schema to change analyzer of some fields
+        # to disable stemming, in particular on author names
+        # inspired by https://github.com/django-haystack/django-haystack/issues/621#issuecomment-10833143
+        content_field_name, mapping = super(SearchBackend, self).build_schema(fields)
+        for field_name, field_mapping in mapping.items():
+            if "analyzer" not in field_mapping.keys():
+                # no analyzer to change
+                continue
+            if field_name in ["authors_full", "authors_last"]:
+                # do not use the snowball analyzer but the standard analyzer,
+                # which does not do stemming
+                field_mapping["analyzer"] = "standard"
+            if field_name in ["availability", "oa_status", "combined_status", "doctype"]:
+                # no point in doing any indexing on this field or any analyzing
+                field_mapping["index"] = "not_analyzed"
+                del field_mapping["analyzer"]
+        return content_field_name, mapping
+
     def _process_results(self, raw_results, **kwargs):
         results = super(SearchBackend, self)._process_results(
             raw_results, **kwargs)

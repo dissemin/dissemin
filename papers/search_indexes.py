@@ -3,6 +3,10 @@ from papers.utils import remove_diacritics
 
 from .models import Paper
 
+# from https://github.com/django-haystack/django-haystack/issues/204#issuecomment-544579
+class IntegerMultiValueField(indexes.MultiValueField):
+    field_type = 'integer'
+
 class PaperIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, model_attr='title')
     pubdate = indexes.DateField(model_attr='pubdate')
@@ -17,10 +21,10 @@ class PaperIndex(indexes.SearchIndex, indexes.Indexable):
     authors_last = indexes.MultiValueField()
 
     #: IDs of researchers
-    researchers = indexes.MultiValueField()
+    researchers = IntegerMultiValueField()
 
     #: IDs of institutions of researchers
-    institutions = indexes.MultiValueField()
+    institutions = IntegerMultiValueField()
 
     #: ID of publisher
     publisher = indexes.IntegerField(null=True)
