@@ -34,7 +34,7 @@ MIDDLEWARE_CLASSES += (
 )
 
 # Base domain of the ORCiD API.
-ORCID_BASE_DOMAIN = 'orcid.org'  # for the sandbox API
+ORCID_BASE_DOMAIN = 'sandbox.orcid.org'  # for the sandbox API
 
 # ORCiD provider configuration (sandbox)
 SOCIALACCOUNT_PROVIDERS = \
