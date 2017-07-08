@@ -22,6 +22,7 @@ from __future__ import unicode_literals
 
 import requests
 
+from django.conf import settings
 from django.utils.http import urlencode
 from lxml import etree
 from papers.errors import MetadataSourceException
@@ -37,7 +38,7 @@ class OrcidProfile(object):
     An orcid profile as returned by the ORCID public API (in JSON)
     """
 
-    def __init__(self, id=None, json=None, instance='orcid.org'):
+    def __init__(self, id=None, json=None, instance=settings.ORCID_BASE_DOMAIN):
         """
         Create a profile by ORCID ID or by providing directly the parsed JSON payload.
         """
@@ -57,7 +58,7 @@ class OrcidProfile(object):
     def get(self, *args, **kwargs):
         return self.json.get(*args, **kwargs)
 
-    def fetch(self, id, instance='orcid.org'):
+    def fetch(self, id, instance=settings.ORCID_BASE_DOMAIN):
         """
         Fetches the profile by id using the public API.
 
@@ -178,7 +179,9 @@ class OrcidProfile(object):
         if not last:
             return
         # Perform query
-        baseurl = 'http://pub.orcid.org/v1.2/search/orcid-bio/'
+        base_base = "https://" + settings.ORCID_BASE_DOMAIN + "/"
+        base_base_pub = "https://pub." + settings.ORCID_BASE_DOMAIN + "/"
+        baseurl = base_base_pub + 'v1.2/search/orcid-bio/'
         dct = {
             'rows': 10,
             'start': 0,
@@ -187,7 +190,7 @@ class OrcidProfile(object):
         url = baseurl+'?'+urlencode(dct)
         try:
             r = requests.get(url)
-            ns = {'ns': 'http://www.orcid.org/ns/orcid'}
+            ns = {'ns': base_base + 'ns/orcid'}
             xml = etree.fromstring(r.text.encode('utf-8'))
             for elem in xml.xpath('//ns:orcid-search-result', namespaces=ns):
                 candidateFirst = None

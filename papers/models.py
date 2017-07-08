@@ -64,6 +64,7 @@ from django.contrib.postgres.fields import ArrayField
 from django_countries.fields import CountryField
 from django_countries.fields import countries
 from djgeojson.fields import PointField
+from django.conf import settings
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
 from django.core.exceptions import ObjectDoesNotExist
@@ -473,7 +474,7 @@ class Researcher(models.Model):
 
     @classmethod
     def get_or_create_by_orcid(cls, orcid, profile=None,
-                    user=None, update=False, instance='orcid.org'):
+                    user=None, update=False, instance=settings.ORCID_BASE_DOMAIN):
         """
         Creates (or returns an existing) researcher from its ORCID id.
 

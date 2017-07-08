@@ -556,7 +556,7 @@ def valid_publication_date(dt):
 ### ORCiD utilities ###
 
 orcid_re = re.compile(
-    r'^(http://orcid.org/)?([0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{3}[X0-9])$')
+    r'^(https?://(sandbox.)?orcid.org/)?([0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{3}[X0-9])$')
 
 
 def validate_orcid(orcid):
@@ -582,7 +582,7 @@ def validate_orcid(orcid):
     match = orcid_re.match(orcid)
     if not match:
         return
-    orcid = match.group(2)
+    orcid = match.group(3)
     nums = orcid.replace('-', '')
     total = 0
     for i in range(15):
