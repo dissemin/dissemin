@@ -1195,6 +1195,20 @@ class Paper(models.Model, BarePaper):
         l = get_all_repositories_and_protocols(self, user)
         return any([proto for repo, proto in l])
 
+    def remove_from_index(self):
+        """
+        Remove this paper from Haystack's index
+        (to be called before deleting the paper for real)
+        """
+        using_backends = haystack.connection_router.for_write(instance=self)
+        for using in using_backends:
+            try:
+                index = haystack.connections[using].get_unified_index(
+                                        ).get_index(Paper)
+                index.remove_object(self, using=using)
+            except haystack.exceptions.NotHandled:
+                pass
+
     def update_index(self):
         """
         Updates Haystack's index for this paper
