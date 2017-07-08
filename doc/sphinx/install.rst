@@ -27,7 +27,8 @@ Note that, when rebooting the Vagrant VM / container, the Dissemin server will
 not be started automatically. To do it, once you have booted the machine, run 
 ``vagrant ssh`` and then ``cd /dissemin`` and ``./launch.sh`` and wait for some
 time until it says that Dissemin has started. The same holds for other backend
-services, you can check the ``Vagrantfile`` to find out how to start them.
+services, you can check the ``Vagrantfile`` and ``provisioning/provision.sh``
+to find out how to start them.
 
 Manual installation
 -------------------
