@@ -232,7 +232,7 @@ class ResearcherView(PaperSearchView):
         # researcher corresponding to the currently logged in user
         try:
             context['user_researcher'] = Researcher.objects.get(user=self.request.user)
-        except Researcher.DoesNotExist:
+        except (Researcher.DoesNotExist, TypeError):
             pass # no logged in user
         context['researcher'] = researcher
         context['researcher_id'] = researcher.id
