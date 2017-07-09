@@ -120,7 +120,7 @@ class AOFRFormatter(MetadataFormatter):
         titleStmt = addChild(biblFull, 'titleStmt')
 
         self.renderTitleAuthors(titleStmt, paper,
-                form.cleaned_data['affiliation'],
+                form.cleaned_data['affiliations'],
                 form.cleaned_data['depositing_author'])
 
         # editionStmt
@@ -179,7 +179,7 @@ class AOFRFormatter(MetadataFormatter):
         analytic = addChild(biblStruct, 'analytic')
 
         self.renderTitleAuthors(analytic, paper,
-                form.cleaned_data['affiliation'],
+                form.cleaned_data['affiliations'],
                 form.cleaned_data['depositing_author'])
 
         for publication in paper.publications:
@@ -232,7 +232,7 @@ class AOFRFormatter(MetadataFormatter):
         return tei
 
     def renderTitleAuthors(self, root, paper,
-            author_structure, depositing_id):
+            author_structures, depositing_id):
         """
         :param author_structure: the structure id of the depositing
 author
@@ -260,9 +260,10 @@ author
             lastName.text = name.last
 
             if idx == depositing_id:
-                affiliation = addChild(node, 'affiliation')
-                affiliation.attrib['ref'] =('#struct-%s' %
-                        unicode(author_structure))
+                for author_structure in author_structures:
+                    affiliation = addChild(node, 'affiliation')
+                    affiliation.attrib['ref'] =('#struct-%s' %
+                            unicode(author_structure))
 
     def renderPubli(self, biblStruct, publi, halType, pubdate):
         # TODO: handle publication type properly

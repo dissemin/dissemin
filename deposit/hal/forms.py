@@ -32,6 +32,10 @@ from deposit.hal.models import HALDepositPreferences
 class AffiliationSelect2(Select2):
     autocomplete_function = 'select2-customTemplate'
 
+class AffiliationsField(forms.MultipleChoiceField):
+    def validate(self, value):
+        pass
+
 class HALForm(FormWithAbstract):
 
     def __init__(self, paper, **kwargs):
@@ -50,9 +54,9 @@ class HALForm(FormWithAbstract):
         coerce=int, # values are indexes of authors
     )
 
-    affiliation = forms.CharField(
+    affiliations = AffiliationsField(
         required=True,
-        label=__('Affiliation'),
+        label=__('Affiliation(s)'),
         widget=AffiliationSelect2(
             url='autocomplete_affiliations',
             attrs={
