@@ -24,27 +24,6 @@
 
 {% block jsScript %}
 $(function(){
-       var config = {
-         refreshURL: "{{ ajax_url }}",
-         refreshMessage: "{% trans "Refreshing results" %}",
-         logoHelpNode: $('.logoHelpPopover'),
-         refetchButtonNode: $('#refetchPubsButton'),
-         waitingAreaContainerNode: $('#waitingAreaContainer'),
-         paperSearchResultsNode: $('#paperSearchResults'),
-         nbPapersFoundNode: $('#nbPapersFound'),
-         animatedBirdGIF: "{% static "img/animated-bird.gif" %}",
-{% if researcher %}
-         refetchURL: "{% url "refetch-researcher" researcher.pk %}",
-         refetchMessage: "{% trans "Refreshing profile" %}",
-         currentTask: {% if researcher.current_task %}"{{ researcher.get_current_task_display }}"{% else %} null {% endif %},
-         affiliationForm: $('#affiliationForm'),
-         affiliationFormInput: $('#id_value'),
-         setResearcherDepartmentURL: "{% url 'ajax-setResearcherDepartment' %}",
-{% endif %}
-         isSuperUser: {{ request.user.is_superuser|yesno:"true,false,false" }},
-         initialMessages: {{ messages | safe }}
-       }
-       init_paper_module(config);
        function claim_unclaim (evt) {
          var obj = $(evt.target);
          var pk = obj.attr("data-pk");
@@ -80,7 +59,6 @@ $(function(){
                // in which case it is equal to the researcher of the currently
                // logged in user; if it is the profile currently being viewed,
                // we must remove the paper entirely
-               console.log("#paper-" + pk);
                $("#paper-" + pk).fadeOut(300, function() { $(this).remove(); });
 {% endif %}
              }
@@ -99,8 +77,35 @@ $(function(){
            });
        }
 
-       $(".unclaim-button").click(claim_unclaim);
-       $(".claim-button").click(claim_unclaim);
+       function add_claim_unclaim_handlers () {
+         $(".unclaim-button").click(claim_unclaim);
+         $(".claim-button").click(claim_unclaim);
+       }
+
+       add_claim_unclaim_handlers();
+
+       var config = {
+         refreshURL: "{{ ajax_url }}",
+         refreshMessage: "{% trans "Refreshing results" %}",
+         logoHelpNode: $('.logoHelpPopover'),
+         refetchButtonNode: $('#refetchPubsButton'),
+         hook: add_claim_unclaim_handlers,
+         waitingAreaContainerNode: $('#waitingAreaContainer'),
+         paperSearchResultsNode: $('#paperSearchResults'),
+         nbPapersFoundNode: $('#nbPapersFound'),
+         animatedBirdGIF: "{% static "img/animated-bird.gif" %}",
+{% if researcher %}
+         refetchURL: "{% url "refetch-researcher" researcher.pk %}",
+         refetchMessage: "{% trans "Refreshing profile" %}",
+         currentTask: {% if researcher.current_task %}"{{ researcher.get_current_task_display }}"{% else %} null {% endif %},
+         affiliationForm: $('#affiliationForm'),
+         affiliationFormInput: $('#id_value'),
+         setResearcherDepartmentURL: "{% url 'ajax-setResearcherDepartment' %}",
+{% endif %}
+         isSuperUser: {{ request.user.is_superuser|yesno:"true,false,false" }},
+         initialMessages: {{ messages | safe }}
+       }
+       init_paper_module(config);
     });
 {% endblock %}
 
