@@ -74,11 +74,11 @@ class OrcidProfileTest(unittest.TestCase):
             id='0000-0002-5654-4053').name, ('Peter', 'Lieth'))
 
     def test_search(self):
-        results = list(OrcidProfile.search_by_name('John', 'Doe'))
+        results = list(OrcidProfile.search_by_name('Peter', 'Lieth'))
         self.assertTrue(all(map(lambda x: len(x['orcid']) and (
             len(x['first']) or len(x['last'])), results)))
         names_returned = map(lambda x: (x['first'], x['last']), results)
-        self.assertTrue(('John', 'Doe') in names_returned)
+        self.assertTrue(('Peter', 'Lieth') in names_returned)
 
     def test_institution(self):
         self.assertEqual(OrcidProfile(
