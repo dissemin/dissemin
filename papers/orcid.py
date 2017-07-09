@@ -170,7 +170,7 @@ class OrcidProfile(object):
         return names
 
     @staticmethod
-    def search_by_name(first, last):
+    def search_by_name(first, last, instance=settings.ORCID_BASE_DOMAIN):
         """
         Searches for an ORCID profile matching this (first,last) name.
         Returns a list of such ORCID profiles.
@@ -179,8 +179,8 @@ class OrcidProfile(object):
         if not last:
             return
         # Perform query
-        base_base = "https://" + settings.ORCID_BASE_DOMAIN + "/"
-        base_base_pub = "https://pub." + settings.ORCID_BASE_DOMAIN + "/"
+        base_base = "https://" + instance + "/"
+        base_base_pub = "https://pub." + instance + "/"
         baseurl = base_base_pub + 'v1.2/search/orcid-bio/'
         dct = {
             'rows': 10,
