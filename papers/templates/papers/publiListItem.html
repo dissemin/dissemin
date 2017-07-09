@@ -10,7 +10,6 @@
 </div>
 
 <div class="publicationText">
-    {% cache 60000 publiListItem paper.pk LANGUAGE_CODE researcher_id %}
     <p class="paperAuthors">
         {% include "papers/authorList.html" with author_list=paper.displayed_authors %}
         {% if paper.has_many_authors %}
@@ -19,6 +18,7 @@
             {% endblocktrans %}
         {% endif %}
     </p>
+    {% cache 60000 publiListItem paper.pk LANGUAGE_CODE researcher_id %}
     <p class="paperTitle">
     <a href="{{ paper.url }}" class="paperItemTitle" data-pk="{{ paper.id }}" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}">{% autoescape off %}{{ paper.title }}{% endautoescape %}</a>
     </p>
