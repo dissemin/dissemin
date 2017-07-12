@@ -52,6 +52,11 @@ except ImportError as e:
     raise RuntimeError(
         'Secret file is missing, did you forget to add a secret.py in your settings folder?')
 
+try:
+    from .secret import RAVEN_CONFIG
+except ImportError:
+    pass  # Non-mandatory secrets.
+
 # dirname(__file__) → repo/dissemin/settings/common.py
 # .. → repo/dissemin/settings
 # .. → repo/dissemin
