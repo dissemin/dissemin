@@ -190,7 +190,7 @@ class OrcidProfile(object):
         url = baseurl+'?'+urlencode(dct)
         try:
             r = requests.get(url)
-            ns = {'ns': base_base + 'ns/orcid'}
+            ns = {'ns': 'http://www.orcid.org/ns/orcid'}
             xml = etree.fromstring(r.text.encode('utf-8'))
             for elem in xml.xpath('//ns:orcid-search-result', namespaces=ns):
                 candidateFirst = None
