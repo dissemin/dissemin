@@ -186,11 +186,9 @@ class ORCIDMetadataExtractor(object):
         return self.j('work-citation/citation')
 
     def authors_from_bibtex(self, bibtex):
-        print('authors_from_bibtex')
         if bibtex is not None:
             try:
                 entry = parse_bibtex(bibtex)
-                print(unicode(entry).encode('utf-8'))
 
                 if 'author' not in entry or len(entry['author']) == 0:
                     print("Warning: ORCiD publication with no authors.")
@@ -468,12 +466,10 @@ class OrcidPaperSource(PaperSource):
                 stop_if_dois_exists=use_doi
             )
             if not data_paper:
-                print("no datapaper")
                 continue
 
             if data_paper.dois and use_doi:  # We want to batch it rather than manually do it.
                 dois.extend(data_paper.dois)
-                print("use_dois")
                 continue
 
             # If the paper is skipped due to invalid metadata.
@@ -495,7 +491,6 @@ class OrcidPaperSource(PaperSource):
                     ignored_papers.append(data_paper.as_dict())
                     continue
 
-            print(unicode(data_paper).encode('utf-8'))
             yield self.create_paper(data_paper)
 
         # 2nd attempt with DOIs and CrossRef
@@ -547,7 +542,6 @@ class OrcidPaperSource(PaperSource):
                         orcid = profile['orcid-profile'][
                                         'orcid-identifier'][
                                         'path']
-                        print orcid
                         r = Researcher.get_or_create_by_orcid(
                             orcid, profile, update=True)
                         if fetch_papers:
