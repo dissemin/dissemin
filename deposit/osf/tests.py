@@ -29,24 +29,32 @@ from deposit.osf.protocol import OSFProtocol
 # lorem_ipsum contains a sample abstract you can reuse in your test case
 
 class OSFProtocolTest(ProtocolTest):
-   @classmethod
-   def setUpClass(self):
-        if ''
-      super(OSFProtocolTest, self).setUpClass()
+    @classmethod
+    def setUpClass(self):
+        # if ''
+        super(OSFProtocolTest, self).setUpClass()
 
-      def test_get_form_initial_data(self):
+        # Fill here the details of your test repository
+        self.repo.username = ''
+        self.repo.password = ''
+        self.repo.endpoint = ''
 
+        # Now we set up the protocol for the tests
+        self.proto = OSFProtocol(self.repo)
 
-      # Fill here the details of your test repository
-      self.repo.username = ''
-      self.repo.password = ''
-      self.repo.endpoint = ''
+        # Fill here the details of the metadata form
+        # for your repository
+        data = {'onbehalfof': ''}
+        self.form = self.proto.get_bound_form(data)
+        self.form.is_valid() # this validates our sample data
 
-      # Now we set up the protocol for the tests
-      self.proto = OSFProtocol(self.repo)
+    def test_get_form_initial_data(self):
+        paper = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
+        record = paper.oairecords[0]
+        record_value = "Supercalifragilisticexpialidocious."
+        record.description = record_value
+        record.save()
 
-      # Fill here the details of the metadata form
-      # for your repository
-      data = {'onbehalfof': ''}
-      self.form = self.proto.get_bound_form(data)
-      self.form.is_valid() # this validates our sample data
+        self.proto.init_deposit(paper, self.user)
+        data = self.proto.get_form_initial_data()
+        self.assertEqual(data.get('abstract'), record_value)

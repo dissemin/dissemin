@@ -59,7 +59,10 @@ class OSFProtocol(RepositoryProtocol):
     def get_form_initial_data(self):
         data = super(OSFProtocol, self).get_form_initial_data()
 
-        if self.paper.abstract:
+        if self.paper.abstract and self.paper.abstract != '':
+            # data['abstract'] = kill_html(self.paper.abstract)
+            data['abstract'] = self.paper.abstract
+        else:
             data['abstract'] = kill_html(self.paper.abstract)
 
         return (data)
