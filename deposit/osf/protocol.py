@@ -59,10 +59,7 @@ class OSFProtocol(RepositoryProtocol):
     def get_form_initial_data(self):
         data = super(OSFProtocol, self).get_form_initial_data()
 
-        if self.paper.abstract and self.paper.abstract != '':
-            # data['abstract'] = kill_html(self.paper.abstract)
-            data['abstract'] = self.paper.abstract
-        else:
+        if self.paper.abstract:
             data['abstract'] = kill_html(self.paper.abstract)
 
         return (data)
@@ -272,41 +269,47 @@ class OSFProtocol(RepositoryProtocol):
         def create_preprint():
             license_url = "https://api.osf.io/v2/licenses/"
             license_url = license_url + "{}".format(license_id)
-            min_preprint_structure = {
-                "data": {
-                    "attributes": {
-                        "doi": paper_doi
-                    },
-                    "relationships": {
-                        "node": {
-                            "data": {
-                                "type": "nodes",
-                                "id": node_id
-                            }
-                        },
-                        "primary_file": {
-                            "data": {
-                                "type": "primary_files",
-                                "id": pf_path
-                            }
-                        },
-                        "license": {
-                            "links": {
-                                "related": {
-                                    "href": license_url,
-                                    "meta": {}
-                                }
-                            }
-                        },
-                        "provider": {
-                            "data": {
-                                "type": "providers",
-                                "id": "osf"
-                            }
-                        }
-                    }
-                }
-            }
+
+            # -----------------------------------------------
+            # The following structure will be used
+            # to send a preprint on OSF once the project
+            # has been created there.
+            # -----------------------------------------------
+            # min_preprint_structure = {
+            #     "data": {
+            #         "attributes": {
+            #             "doi": paper_doi
+            #         },
+            #         "relationships": {
+            #             "node": {
+            #                 "data": {
+            #                     "type": "nodes",
+            #                     "id": node_id
+            #                 }
+            #             },
+            #             "primary_file": {
+            #                 "data": {
+            #                     "type": "primary_files",
+            #                     "id": pf_path
+            #                 }
+            #             },
+            #             "license": {
+            #                 "links": {
+            #                     "related": {
+            #                         "href": license_url,
+            #                         "meta": {}
+            #                     }
+            #                 }
+            #             },
+            #             "provider": {
+            #                 "data": {
+            #                     "type": "providers",
+            #                     "id": "osf"
+            #                 }
+            #             }
+            #         }
+            #     }
+            # }
 
         return (deposit_result)
 

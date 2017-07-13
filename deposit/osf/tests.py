@@ -20,11 +20,11 @@
 #
 from __future__ import unicode_literals
 
-import unittest
-from mock import Mock
+# import unittest
+# from mock import Mock
 
 from papers.models import Paper
-from deposit.tests import ProtocolTest, lorem_ipsum
+from deposit.tests import ProtocolTest
 from deposit.osf.protocol import OSFProtocol
 # lorem_ipsum contains a sample abstract you can reuse in your test case
 
