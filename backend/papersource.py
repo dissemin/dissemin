@@ -75,6 +75,7 @@ class PaperSource(object):
     def save_paper(self, bare_paper, researcher):
         # Save the paper as non-bare
         p = Paper.from_bare(bare_paper)
+        print(p.pk)
 
         # Check whether this paper is associated with an ORCID id
         # for the target researcher
