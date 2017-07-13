@@ -201,7 +201,8 @@ class OSFProtocol(RepositoryProtocol):
         self.log_request(primary_file_data, 201,
                          __('Unable to upload the PDF file.'))
         primary_file_data = primary_file_data.json()
-        pf_path = primary_file_data['data']['attributes']['path'][1:]
+        # Uncomment pf_path when time to test the preprint upload has come
+        # pf_path = primary_file_data['data']['attributes']['path'][1:]
 
         # Add contributors
         def add_contributors():
