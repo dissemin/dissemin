@@ -77,8 +77,7 @@ class OrcidProfileTest(unittest.TestCase):
         # for this one we use the production database
         # because test profiles on the sandbox
         # tend to get deleted quite often
-        results = list(OrcidProfile.search_by_name('John', 'Doe',
-                        instance='orcid.org'))
+        results = list(OrcidProfile.search_by_name('John', 'Doe'))
         self.assertTrue(all(map(lambda x: len(x['orcid']) and (
             len(x['first']) or len(x['last'])), results)))
         names_returned = map(lambda x: (x['first'], x['last']), results)
