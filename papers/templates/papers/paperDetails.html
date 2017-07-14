@@ -26,7 +26,7 @@
     <p><a href="{{ paper.google_scholar_link }}">{% trans "Search in Google Scholar" %}</a></p>
     {% with paper.get_doi as doi %}
     {% if doi and not paper.pdf_url %}
-    <p><a href="http://dev.openaccessbutton.org/request?doi={{ doi }}">{% trans "Request with the Open Access Button" %}</a></p>
+    <p><a href="https://openaccessbutton.org/request?doi={{ doi }}">{% trans "Request with the Open Access Button" %}</a></p>
     {% endif %}
     {% endwith %}
 </div>
