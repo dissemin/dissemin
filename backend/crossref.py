@@ -58,7 +58,7 @@ from backend.pubtype_translations import CROSSREF_PUBTYPE_ALIASES
 # 1. Background on DOIs
 #
 # DOIs are managed by the DOI International Foundation. They provide
-# a persistent identifier for objects. dx.doi.org redirects to the current
+# a persistent identifier for objects. doi.org redirects to the current
 # URL for a given DOI (this URL can be updated by the provider).
 #
 # DOIs can be emitted by many different providers: among others, CrossRef,
@@ -274,7 +274,7 @@ def _create_publication(paper, metadata):
 def fetch_metadata_by_DOI(doi):
     """
     Fetch the metadata for a single DOI.
-    This is supported by the standard proxy, dx.doi.org,
+    This is supported by the standard proxy, doi.org,
     as well as more advanced proxies such as doi_cache
     """
     if doi is None:

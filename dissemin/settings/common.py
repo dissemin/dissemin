@@ -74,7 +74,7 @@ BASE_DIR = os.path.dirname(os.path.join(
 # curl -LH "Accept: application/citeproc+json" http://DOI_PROXY_DOMAIN/10.1080/15568318.2012.660115
 # (returns the citation as Citeproc+JSON)
 #
-# This acts as a caching proxy for dx.doi.org
+# This acts as a caching proxy for doi.org
 DOI_PROXY_DOMAIN = 'doi-cache.dissem.in'
 #
 # In addition, if the endpoint supports it, batch requests can be performed:
@@ -86,7 +86,7 @@ DOI_PROXY_SUPPORTS_BATCH = True
 # Uncomment these settings if you rather want
 # to fetch metadata directly from CrossRef (slower as not cached,
 # and more requests as there is no batch support).
-#DOI_PROXY_DOMAIN =  'dx.doi.org'
+#DOI_PROXY_DOMAIN =  'doi.org'
 #DOI_PROXY_SUPPORTS_BATCH = False
 
 

@@ -10,4 +10,4 @@ register = template.Library()
 
 @register.filter(is_safe=True)
 def doi_to_url(doi):
-    return mark_safe('http://dx.doi.org/'+escape(doi.doi))
+    return mark_safe('https://doi.org/'+escape(doi.doi))

@@ -882,7 +882,7 @@ class BareOaiRecord(BareObject):
             return 'OA'
         elif self.publisher:
             if self.publisher.oa_status == 'OA' and self.doi:
-                self.pdf_url = 'http://dx.doi.org/'+self.doi
+                self.pdf_url = 'https://doi.org/'+self.doi
             return self.publisher.oa_status
         else:
             return 'UNK'

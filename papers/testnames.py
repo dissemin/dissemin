@@ -513,7 +513,7 @@ class UnifyNameListsTest(unittest.TestCase):
 
     def test_inverted(self):
         # in the wild:
-        # http://dx.doi.org/10.1371/journal.pone.0156198
+        # https://doi.org/10.1371/journal.pone.0156198
         # http://hdl.handle.net/11573/870611
         self.assertEqual(len(filter(lambda x: x[0] != None,
                                     unify_name_lists(
