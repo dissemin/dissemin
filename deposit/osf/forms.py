@@ -24,14 +24,25 @@ from deposit.forms import FormWithAbstract
 from django import forms
 from django.utils.translation import ugettext as __
 
+# LICENSES ID FOR TEST-API.OSF.IO
 OSF_LICENSES_CHOICES = [
-    ('563c1cf88c5e4a3877f9e96c',
+    ('58fd62fcda3e2400012ca5d3',
         __('Creative Commons CC0 1.0 Universal')),
-    ('563c1cf88c5e4a3877f9e96a',
+    ('58fd62fcda3e2400012ca5d1',
         __('Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)')),
-    ('563c1cf88c5e4a3877f9e965',
+    ('58fd62fcda3e2400012ca5cc',
         __('No license')),
 ]
+
+# ORIGINAL LICENCES ID
+# OSF_LICENSES_CHOICES = [
+#     ('563c1cf88c5e4a3877f9e96c',
+#         __('Creative Commons CC0 1.0 Universal')),
+#     ('563c1cf88c5e4a3877f9e96a',
+#         __('Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)')),
+#     ('563c1cf88c5e4a3877f9e965',
+#         __('No license')),
+# ]
 
 # OSF_DISCIPLINES_CHOICES = [
 #     ('architecture',

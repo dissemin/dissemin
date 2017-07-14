@@ -33,7 +33,8 @@ from django.utils.translation import ugettext as __
 # from django.utils.translation import ugettext_lazy as __
 from papers.utils import kill_html
 
-NO_LICENSE_ID = "563c1cf88c5e4a3877f9e965"
+# NO_LICENSE_ID = "563c1cf88c5e4a3877f9e965"
+NO_LICENSE_ID = "58fd62fcda3e2400012ca5cc" # Test server
 
 
 class OSFProtocol(RepositoryProtocol):
@@ -47,7 +48,8 @@ class OSFProtocol(RepositoryProtocol):
         # we let the interface define another API endpoint (sandbox…)
         self.api_url = repository.endpoint
         if not self.api_url:
-            self.api_url = "https://api.osf.io/v2/nodes/"
+            # self.api_url = "https://api.osf.io/v2/nodes/"
+            self.api_url = "https://test-api.osf.io/v2/nodes/" # test server
 
     def init_deposit(self, paper, user):
         """
@@ -202,7 +204,7 @@ class OSFProtocol(RepositoryProtocol):
                          __('Unable to upload the PDF file.'))
         primary_file_data = primary_file_data.json()
         # Uncomment pf_path when time to test the preprint upload has come
-        # pf_path = primary_file_data['data']['attributes']['path'][1:]
+        pf_path = primary_file_data['data']['attributes']['path'][1:]
 
         # Add contributors
         def add_contributors():
@@ -220,7 +222,8 @@ class OSFProtocol(RepositoryProtocol):
 
         def create_license():
             node_url = self.api_url + node_id + "/"
-            license_url = "https://api.osf.io/v2/licenses/"
+            # license_url = "https://api.osf.io/v2/licenses/"
+            license_url = "https://test-api.osf.io/v2/licenses/" # Test server
             license_url = license_url + "{}".format(license_id) + "/"
             authors_list = [translate_author(author)
                             for author in authors]
@@ -265,52 +268,102 @@ class OSFProtocol(RepositoryProtocol):
             self.log(str(license_req.status_code))
             self.log(license_req.text)
 
+            # return(license_structure)
+
         create_license()
 
         def create_preprint():
             license_url = "https://api.osf.io/v2/licenses/"
             license_url = license_url + "{}".format(license_id)
+            # preprint_node_url = self.api_url + "{}/preprints/".format(node_id)
+            preprint_node_url = "https://test-api.osf.io/v2/preprints/" # Test server
+
+            license_structure = {
+                    "data": {
+                        "type": "nodes",
+                        "id": node_id,
+                        "attributes": {},
+                        "relationships": {
+                            "license": {
+                                "data": {
+                                    "type": "licenses",
+                                    "id": license_id
+                                }
+                            }
+                        }
+                    }
+                }
+
+            if license_id == NO_LICENSE_ID:
+                license_structure['data']['attributes'] = {
+                    "node_license": {
+                        "year": pub_date,
+                        "copyright_holders": authors_list
+                    }
+                }
+            else:
+                license_structure['data']['attributes'] = {
+                    "node_license": {}
+                }
 
             # -----------------------------------------------
             # The following structure will be used
             # to send a preprint on OSF once the project
             # has been created there.
             # -----------------------------------------------
-            # min_preprint_structure = {
-            #     "data": {
-            #         "attributes": {
-            #             "doi": paper_doi
-            #         },
-            #         "relationships": {
-            #             "node": {
-            #                 "data": {
-            #                     "type": "nodes",
-            #                     "id": node_id
-            #                 }
-            #             },
-            #             "primary_file": {
-            #                 "data": {
-            #                     "type": "primary_files",
-            #                     "id": pf_path
-            #                 }
-            #             },
-            #             "license": {
-            #                 "links": {
-            #                     "related": {
-            #                         "href": license_url,
-            #                         "meta": {}
-            #                     }
-            #                 }
-            #             },
-            #             "provider": {
-            #                 "data": {
-            #                     "type": "providers",
-            #                     "id": "osf"
-            #                 }
-            #             }
-            #         }
-            #     }
-            # }
+            min_preprint_structure = {
+                "data": {
+                    "attributes": {
+                        "doi": paper_doi
+                    },
+                    "relationships": {
+                        "node": {
+                            "data": {
+                                "type": "nodes",
+                                "id": node_id
+                            }
+                        },
+                        "primary_file": {
+                            "data": {
+                                "type": "primary_files",
+                                "id": pf_path
+                            }
+                        },
+                        # "license": {
+                        #     "links": {
+                        #         "related": {
+                        #             "href": license_url,
+                        #             "meta": {
+                        #                 "data": {
+                        #                     "type": "licenses",
+                        #                     "id": license_id
+                        #                 }
+                        #             }
+                        #         }
+                        #     }
+                        # },
+                        "license": license_structure,
+                        "provider": {
+                            "data": {
+                                "type": "providers",
+                                "id": "osf"
+                            }
+                        }
+                    }
+                }
+            }
+
+            osf_response = requests.post(preprint_node_url,
+                                         data=json.dumps(min_preprint_structure),
+                                         headers=headers)
+            self.log_request(osf_response, 201,
+                             __('Unable to create the preprint.'))
+
+            # osf_response = osf_response.json()
+
+            # return (osf_response)
+
+        create_preprint()
 
         return (deposit_result)
 
