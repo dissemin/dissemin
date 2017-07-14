@@ -35,7 +35,7 @@ openaire_doi_re = re.compile(
 
 def to_doi(candidate):
     """
-    >>> to_doi('http://doi.org/10.1145/1721837.1721839')
+    >>> to_doi('https://doi.org/10.1145/1721837.1721839')
     u'10.1145/1721837.1721839'
     >>> to_doi('https://doi.org/10.1145/1721837.1721839')
     u'10.1145/1721837.1721839'
