@@ -198,7 +198,7 @@ class PaperTest(django.test.TestCase):
         p = Paper.from_bare(p)
         # so the pdf_url of the publication should be set
         self.assertEqual(p.publications[0].pdf_url.lower(
-            ), 'http://dx.doi.org/10.1007/BF02702259'.lower())
+            ), 'http://doi.org/10.1007/BF02702259'.lower())
 
     def test_create_no_authors(self):
         p = Paper.create_by_doi('10.1021/cen-v043n050.p033')
