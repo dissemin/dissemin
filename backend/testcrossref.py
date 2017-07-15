@@ -113,7 +113,7 @@ class CrossRefUnitTest(unittest.TestCase):
                           'DOI': '10.5380/dp.v1i1.1922',
                           'subtitle': [],
                           'author': [{'given': 'Frederic', 'family': 'Worms'}],
-                          'URL': 'https://doi.org/10.5380/dp.v1i1.1922',
+                          'URL': 'http://dx.doi.org/10.5380/dp.v1i1.1922',
                           'issued': {'date-parts': [[2005, 3, 18]]},
                           'reference-count': 0,
                           'title': 'A concep\xe7\xe3o bergsoniana do tempo',
