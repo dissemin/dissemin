@@ -14,7 +14,7 @@ echo "deb https://packages.elastic.co/elasticsearch/2.x/debian stable main" | te
 
 # We update the apt-get cache
 apt-get update
-apt-get install -y build-essential curl libxml2-dev libxslt1-dev gettext \
+apt-get install -y build-essential curl screen libxml2-dev libxslt1-dev gettext \
         libjpeg-dev liblapack-dev gfortran libopenblas-dev libmagickwand-dev \
         default-jre-headless libffi-dev \
         pwgen git
