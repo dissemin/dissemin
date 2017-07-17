@@ -261,50 +261,17 @@ class OSFProtocol(RepositoryProtocol):
                                          headers=headers)
             self.log_request(license_req, 200,
                              __('Unable to update license.'))
-            # license_response = license_req.json()
 
             # Updating License
             self.log("### Updating License")
             self.log(str(license_req.status_code))
             self.log(license_req.text)
 
-            # return(license_structure)
-
         create_license()
 
         def create_preprint():
-            license_url = "https://api.osf.io/v2/licenses/"
-            license_url = license_url + "{}".format(license_id)
-            # preprint_node_url = self.api_url + "{}/preprints/".format(node_id)
+            # preprint_node_url = "https://api.osf.io/v2/preprints/"
             preprint_node_url = "https://test-api.osf.io/v2/preprints/" # Test server
-
-            license_structure = {
-                    "data": {
-                        "type": "nodes",
-                        "id": node_id,
-                        "attributes": {},
-                        "relationships": {
-                            "license": {
-                                "data": {
-                                    "type": "licenses",
-                                    "id": license_id
-                                }
-                            }
-                        }
-                    }
-                }
-
-            if license_id == NO_LICENSE_ID:
-                license_structure['data']['attributes'] = {
-                    "node_license": {
-                        "year": pub_date,
-                        "copyright_holders": authors_list
-                    }
-                }
-            else:
-                license_structure['data']['attributes'] = {
-                    "node_license": {}
-                }
 
             # -----------------------------------------------
             # The following structure will be used
@@ -329,20 +296,6 @@ class OSFProtocol(RepositoryProtocol):
                                 "id": pf_path
                             }
                         },
-                        # "license": {
-                        #     "links": {
-                        #         "related": {
-                        #             "href": license_url,
-                        #             "meta": {
-                        #                 "data": {
-                        #                     "type": "licenses",
-                        #                     "id": license_id
-                        #                 }
-                        #             }
-                        #         }
-                        #     }
-                        # },
-                        "license": license_structure,
                         "provider": {
                             "data": {
                                 "type": "providers",
@@ -353,17 +306,68 @@ class OSFProtocol(RepositoryProtocol):
                 }
             }
 
+            self.log("### Creating Preprint")
             osf_response = requests.post(preprint_node_url,
                                          data=json.dumps(min_preprint_structure),
                                          headers=headers)
             self.log_request(osf_response, 201,
                              __('Unable to create the preprint.'))
 
-            # osf_response = osf_response.json()
+            self.log(str(osf_response.status_code))
 
-            # return (osf_response)
+            osf_preprint_response = osf_response.json()
 
-        create_preprint()
+            return (osf_preprint_response)
+
+        osf_preprint_response = create_preprint()
+        preprint_id = osf_preprint_response['data']['id']
+
+        def update_preprint_license():
+            authors_list = [translate_author(author)
+                            for author in authors]
+            # preprint_node_url = self.api_url + "{}/preprints/".format(node_id)
+            preprint_node_url = (
+                "https://test-api.osf.io/v2/preprints/{}".format(preprint_id) + "/") # Test server
+
+            updated_preprint_struc = {
+                "data": {
+                    "type": "nodes",
+                    "id": preprint_id,
+                    "attributes": {},
+                    "relationships": {
+                        "license": {
+                            "data": {
+                                "type": "licenses",
+                                "id": license_id
+                            }
+                        }
+                    }
+                }
+            }
+
+            if license_id == NO_LICENSE_ID:
+                updated_preprint_struc['data']['attributes'] = {
+                    "license_record": {
+                        "year": pub_date,
+                        "copyright_holders": authors_list
+                    }
+                }
+            else:
+                updated_preprint_struc['data']['attributes'] = {
+                    "license_record": {}
+                }
+
+            self.log("### Updating the Preprint License")
+            license_req = requests.patch(preprint_node_url,
+                                         data=json.dumps(updated_preprint_struc),
+                                         headers=headers)
+            self.log_request(license_req, 200,
+                             __('Unable to update the Preprint License.'))
+
+            self.log(str(license_req.status_code))
+            self.log(license_req.text)
+
+        update_preprint_license()
 
         return (deposit_result)
 
