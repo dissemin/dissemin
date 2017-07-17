@@ -110,6 +110,215 @@ class OSFProtocol(RepositoryProtocol):
         return (min_node_structure, authors,
                 paper_doi, pub_date)
 
+    # ---------------------------------------------
+    # HERE GO THE DIFFERENT METHODS
+    # NEEDED BY submit_deposit()
+    # ---------------------------------------------
+    # Get a dictionary containing the first and last names
+    # of the authors of a Dissemin paper,
+    # ready to be implemented in an OSF Preprints data dict.
+    def translate_author(dissemin_authors, goal="optional"):
+        author = "{} {}".format(dissemin_authors['name']['first'],
+                                dissemin_authors['name']['last'])
+
+        if goal == "contrib":
+            structure = {
+                "data": {
+                    "type": "contributors",
+                    "attributes": {
+                        "full_name": author
+                    }
+                }
+            }
+            return (structure)
+
+        else:
+            return (author)
+
+    # Extract the OSF Storage link
+    def translate_links(node_links):
+        upload_link = node_links['links']['upload']
+        return (upload_link)
+
+    # Send the min. structure.
+    # The response should contain the node ID.
+    def create_node(self):
+        osf_response = requests.post(self.api_url,
+                                     data=json.dumps(min_node_structure),
+                                     headers=headers)
+        self.log_request(osf_response, 201,
+                         __('Unable to create a project on OSF.'))
+
+        osf_response = osf_response.json()
+        return (osf_response)
+
+    # Get OSF Storage link
+    # to later upload the Preprint PDF file.
+    def get_newnode_osf_storage(node_id):
+        self.storage_url = self.api_url + "{}/files/".format(node_id)
+        osf_storage_data = requests.get(self.storage_url,
+                                        headers=headers)
+        self.log_request(osf_storage_data, 200,
+                         __('Unable to authenticate to OSF.'))
+
+        osf_storage_data = osf_storage_data.json()
+        return (osf_storage_data)
+
+    # Add contributors
+    def add_contributors():
+        contrib_url = self.api_url + node_id + "/contributors/"
+
+        for author in authors:
+            contrib = translate_author(author, "contrib")
+            contrib_response = requests.post(contrib_url,
+                                             data=json.dumps(contrib),
+                                             headers=headers)
+            self.log_request(contrib_response, 201,
+                             __('Unable to add contributors.'))
+
+    def create_license():
+        node_url = self.api_url + node_id + "/"
+        # license_url = "https://api.osf.io/v2/licenses/"
+        license_url = "https://test-api.osf.io/v2/licenses/" # Test server
+        license_url = license_url + "{}".format(license_id) + "/"
+        authors_list = [translate_author(author)
+                        for author in authors]
+
+        license_structure = {
+                "data": {
+                    "type": "nodes",
+                    "id": node_id,
+                    "attributes": {},
+                    "relationships": {
+                        "license": {
+                            "data": {
+                                "type": "licenses",
+                                "id": license_id
+                            }
+                        }
+                    }
+                }
+            }
+
+        if license_id == NO_LICENSE_ID:
+            license_structure['data']['attributes'] = {
+                "node_license": {
+                    "year": pub_date,
+                    "copyright_holders": authors_list
+                }
+            }
+        else:
+            license_structure['data']['attributes'] = {
+                "node_license": {}
+            }
+
+        license_req = requests.patch(node_url,
+                                     data=json.dumps(license_structure),
+                                     headers=headers)
+        self.log_request(license_req, 200,
+                         __('Unable to update license.'))
+
+        # Updating License
+        self.log("### Updating License")
+        self.log(str(license_req.status_code))
+        self.log(license_req.text)
+
+    def create_preprint():
+        # preprint_node_url = "https://api.osf.io/v2/preprints/"
+        preprint_node_url = "https://test-api.osf.io/v2/preprints/" # Test server
+
+        # -----------------------------------------------
+        # The following structure will be used
+        # to send a preprint on OSF once the project
+        # has been created there.
+        # -----------------------------------------------
+        min_preprint_structure = {
+            "data": {
+                "attributes": {
+                    "doi": paper_doi
+                },
+                "relationships": {
+                    "node": {
+                        "data": {
+                            "type": "nodes",
+                            "id": node_id
+                        }
+                    },
+                    "primary_file": {
+                        "data": {
+                            "type": "primary_files",
+                            "id": pf_path
+                        }
+                    },
+                    "provider": {
+                        "data": {
+                            "type": "providers",
+                            "id": "osf"
+                        }
+                    }
+                }
+            }
+        }
+
+        self.log("### Creating Preprint")
+        osf_response = requests.post(preprint_node_url,
+                                     data=json.dumps(min_preprint_structure),
+                                     headers=headers)
+        self.log_request(osf_response, 201,
+                         __('Unable to create the preprint.'))
+
+        self.log(str(osf_response.status_code))
+
+        osf_preprint_response = osf_response.json()
+
+        return (osf_preprint_response)
+
+    def update_preprint_license():
+        authors_list = [translate_author(author)
+                        for author in authors]
+        # preprint_node_url = self.api_url + "{}/preprints/".format(node_id)
+        preprint_node_url = (
+            "https://test-api.osf.io/v2/preprints/{}".format(preprint_id) + "/") # Test server
+
+        updated_preprint_struc = {
+            "data": {
+                "type": "nodes",
+                "id": preprint_id,
+                "attributes": {},
+                "relationships": {
+                    "license": {
+                        "data": {
+                            "type": "licenses",
+                            "id": license_id
+                        }
+                    }
+                }
+            }
+        }
+
+        if license_id == NO_LICENSE_ID:
+            updated_preprint_struc['data']['attributes'] = {
+                "license_record": {
+                    "year": pub_date,
+                    "copyright_holders": authors_list
+                }
+            }
+        else:
+            updated_preprint_struc['data']['attributes'] = {
+                "license_record": {}
+            }
+
+        self.log("### Updating the Preprint License")
+        license_req = requests.patch(preprint_node_url,
+                                     data=json.dumps(updated_preprint_struc),
+                                     headers=headers)
+        self.log_request(license_req, 200,
+                         __('Unable to update the Preprint License.'))
+
+        self.log(str(license_req.status_code))
+        self.log(license_req.text)
+
+    # MAIN FUNCTION
     def submit_deposit(self, pdf, form, dry_run=False):
         if self.repository.api_key is None:
             raise DepositError(__("No OSF token provided."))
@@ -126,31 +335,6 @@ class OSFProtocol(RepositoryProtocol):
         self.log(json.dumps(min_node_structure, indent=4)+'')
         self.log(json.dumps(authors, indent=4)+'')
 
-        # Get a dictionary containing the first and last names
-        # of the authors of a Dissemin paper,
-        # ready to be implemented in an OSF Preprints data dict.
-        def translate_author(dissemin_authors, goal="optional"):
-            author = "{} {}".format(dissemin_authors['name']['first'],
-                                    dissemin_authors['name']['last'])
-
-            if goal == "contrib":
-                structure = {
-                    "data": {
-                        "type": "contributors",
-                        "attributes": {
-                            "full_name": author
-                        }
-                    }
-                }
-                return (structure)
-
-            else:
-                return (author)
-
-        # Extract the OSF Storage link
-        def translate_links(node_links):
-            upload_link = node_links['links']['upload']
-            return (upload_link)
 
         # Creating a new depository
         self.log("### Creating a new depository")
@@ -159,32 +343,8 @@ class OSFProtocol(RepositoryProtocol):
             'Content-Type': 'application/vnd.api+json'
         }
 
-        # Send the min. structure.
-        # The response should contain the node ID.
-        def create_node():
-            osf_response = requests.post(self.api_url,
-                                         data=json.dumps(min_node_structure),
-                                         headers=headers)
-            self.log_request(osf_response, 201,
-                             __('Unable to create a project on OSF.'))
-
-            osf_response = osf_response.json()
-            return (osf_response)
-
-        osf_response = create_node()
+        osf_response = self.create_node()
         node_id = osf_response['data']['id']
-
-        # Get OSF Storage link
-        # to later upload the Preprint PDF file.
-        def get_newnode_osf_storage(node_id):
-            self.storage_url = self.api_url + "{}/files/".format(node_id)
-            osf_storage_data = requests.get(self.storage_url,
-                                            headers=headers)
-            self.log_request(osf_storage_data, 200,
-                             __('Unable to authenticate to OSF.'))
-
-            osf_storage_data = osf_storage_data.json()
-            return (osf_storage_data)
 
         self.osf_storage_data = get_newnode_osf_storage(node_id)
         osf_links = self.osf_storage_data['data']
@@ -206,166 +366,13 @@ class OSFProtocol(RepositoryProtocol):
         # Uncomment pf_path when time to test the preprint upload has come
         pf_path = primary_file_data['data']['attributes']['path'][1:]
 
-        # Add contributors
-        def add_contributors():
-            contrib_url = self.api_url + node_id + "/contributors/"
-
-            for author in authors:
-                contrib = translate_author(author, "contrib")
-                contrib_response = requests.post(contrib_url,
-                                                 data=json.dumps(contrib),
-                                                 headers=headers)
-                self.log_request(contrib_response, 201,
-                                 __('Unable to add contributors.'))
-
         add_contributors()
-
-        def create_license():
-            node_url = self.api_url + node_id + "/"
-            # license_url = "https://api.osf.io/v2/licenses/"
-            license_url = "https://test-api.osf.io/v2/licenses/" # Test server
-            license_url = license_url + "{}".format(license_id) + "/"
-            authors_list = [translate_author(author)
-                            for author in authors]
-
-            license_structure = {
-                    "data": {
-                        "type": "nodes",
-                        "id": node_id,
-                        "attributes": {},
-                        "relationships": {
-                            "license": {
-                                "data": {
-                                    "type": "licenses",
-                                    "id": license_id
-                                }
-                            }
-                        }
-                    }
-                }
-
-            if license_id == NO_LICENSE_ID:
-                license_structure['data']['attributes'] = {
-                    "node_license": {
-                        "year": pub_date,
-                        "copyright_holders": authors_list
-                    }
-                }
-            else:
-                license_structure['data']['attributes'] = {
-                    "node_license": {}
-                }
-
-            license_req = requests.patch(node_url,
-                                         data=json.dumps(license_structure),
-                                         headers=headers)
-            self.log_request(license_req, 200,
-                             __('Unable to update license.'))
-
-            # Updating License
-            self.log("### Updating License")
-            self.log(str(license_req.status_code))
-            self.log(license_req.text)
 
         create_license()
 
-        def create_preprint():
-            # preprint_node_url = "https://api.osf.io/v2/preprints/"
-            preprint_node_url = "https://test-api.osf.io/v2/preprints/" # Test server
-
-            # -----------------------------------------------
-            # The following structure will be used
-            # to send a preprint on OSF once the project
-            # has been created there.
-            # -----------------------------------------------
-            min_preprint_structure = {
-                "data": {
-                    "attributes": {
-                        "doi": paper_doi
-                    },
-                    "relationships": {
-                        "node": {
-                            "data": {
-                                "type": "nodes",
-                                "id": node_id
-                            }
-                        },
-                        "primary_file": {
-                            "data": {
-                                "type": "primary_files",
-                                "id": pf_path
-                            }
-                        },
-                        "provider": {
-                            "data": {
-                                "type": "providers",
-                                "id": "osf"
-                            }
-                        }
-                    }
-                }
-            }
-
-            self.log("### Creating Preprint")
-            osf_response = requests.post(preprint_node_url,
-                                         data=json.dumps(min_preprint_structure),
-                                         headers=headers)
-            self.log_request(osf_response, 201,
-                             __('Unable to create the preprint.'))
-
-            self.log(str(osf_response.status_code))
-
-            osf_preprint_response = osf_response.json()
-
-            return (osf_preprint_response)
-
+        # Create Preprint
         osf_preprint_response = create_preprint()
         preprint_id = osf_preprint_response['data']['id']
-
-        def update_preprint_license():
-            authors_list = [translate_author(author)
-                            for author in authors]
-            # preprint_node_url = self.api_url + "{}/preprints/".format(node_id)
-            preprint_node_url = (
-                "https://test-api.osf.io/v2/preprints/{}".format(preprint_id) + "/") # Test server
-
-            updated_preprint_struc = {
-                "data": {
-                    "type": "nodes",
-                    "id": preprint_id,
-                    "attributes": {},
-                    "relationships": {
-                        "license": {
-                            "data": {
-                                "type": "licenses",
-                                "id": license_id
-                            }
-                        }
-                    }
-                }
-            }
-
-            if license_id == NO_LICENSE_ID:
-                updated_preprint_struc['data']['attributes'] = {
-                    "license_record": {
-                        "year": pub_date,
-                        "copyright_holders": authors_list
-                    }
-                }
-            else:
-                updated_preprint_struc['data']['attributes'] = {
-                    "license_record": {}
-                }
-
-            self.log("### Updating the Preprint License")
-            license_req = requests.patch(preprint_node_url,
-                                         data=json.dumps(updated_preprint_struc),
-                                         headers=headers)
-            self.log_request(license_req, 200,
-                             __('Unable to update the Preprint License.'))
-
-            self.log(str(license_req.status_code))
-            self.log(license_req.text)
 
         update_preprint_license()
 
