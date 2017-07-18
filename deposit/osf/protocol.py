@@ -53,7 +53,7 @@ class OSFProtocol(RepositoryProtocol):
 
     def init_deposit(self, paper, user):
         """
-        Refuse deposit when the paper is already on OSF
+        Refuse deposit when the paper is already on OSF.
         """
         super(OSFProtocol, self).init_deposit(paper, user)
         return (True)
@@ -66,7 +66,7 @@ class OSFProtocol(RepositoryProtocol):
 
         return data
 
-    # Get some basic data needed in different methods
+    # Get some basic data needed in different methods.
     def get_primary_data(self, form):
         paper = self.paper.json()
         # authors = paper['authors']
@@ -78,14 +78,12 @@ class OSFProtocol(RepositoryProtocol):
 
         return (paper, abstract)
 
-    # Creating the metadata
-    self.log("### Creating the metadata")
     paper, abstract = self.get_primary_data(form)
     authors = paper['authors']
     records = paper['records']
     pub_date = paper['date'][:-6]
 
-    def create_tags(self):
+    def create_tags(self, form):
         tags = list(form.cleaned_data['tags'].split(','))
         tags = [item.strip() for item in tags]
         tags = [item for item in tags if item != ""]
@@ -94,57 +92,15 @@ class OSFProtocol(RepositoryProtocol):
 
     tags = self.create_tags()
 
-    # Look for a specific subkey
-    def get_key_data(key):
+    # Look for a specific subkey.
+    def get_key_data(self, key):
         for item in records:
             if item.get(key):
                 return (item[key])
 
         return None
 
-    paper_doi = get_key_data('doi')
-
-    def createMetadata(self, form):
-        paper = self.paper.json()
-        authors = paper['authors']
-        records = paper['records']
-        pub_date = paper['date'][:-6]
-
-        # Look for specific subkey
-        def get_key_data(key):
-            for item in records:
-                if item.get(key):
-                    return (item[key])
-
-            return None
-
-        paper_doi = get_key_data('doi')
-
-        def create_tags():
-            tags = list(form.cleaned_data['tags'].split(','))
-            tags = [item.strip() for item in tags]
-            tags = [item for item in tags if item != ""]
-
-            return tags
-
-        tags = create_tags()
-
-        # Required to create a new node.
-        # The project will then host the preprint.
-        # min_node_structure = {
-        #     "data": {
-        #         "type": "nodes",
-        #         "attributes": {
-        #             "title": paper['title'],
-        #             "category": "project",
-        #             "description": abstract,
-        #             "tags": tags
-        #         }
-        #     }
-        # }
-
-        return (authors, paper_doi, pub_date,
-                abstract, tags)
+    paper_doi = self.get_key_data('doi')
 
     # ---------------------------------------------
     # HERE GO THE DIFFERENT METHODS
@@ -171,16 +127,18 @@ class OSFProtocol(RepositoryProtocol):
         else:
             return author
 
-    # Extract the OSF Storage link
+    # Extract the OSF Storage link.
     def translate_links(node_links):
         upload_link = node_links['links']['upload']
         return upload_link
 
     # Send the min. structure.
     # The response should contain the node ID.
-    def create_node(self, abstract, tags):
-        tags = tags
+    def create_node(self, abstract, tags, authors):
         abstract = abstract
+        tags = tags
+        authors = authors
+
         # Required to create a new node.
         # The project will then host the preprint.
         min_node_structure = {
@@ -194,6 +152,12 @@ class OSFProtocol(RepositoryProtocol):
                 }
             }
         }
+
+        # Creating the metadata
+        self.log("### Creating the metadata")
+        self.log(json.dumps(min_node_structure, indent=4)+'')
+        self.log(json.dumps(authors, indent=4)+'')
+
         osf_response = requests.post(self.api_url,
                                      data=json.dumps(min_node_structure),
                                      headers=headers)
@@ -201,9 +165,10 @@ class OSFProtocol(RepositoryProtocol):
                          __('Unable to create a project on OSF.'))
 
         osf_response = osf_response.json()
+
         return osf_response
 
-    osf_response = create_node(abstract, tags)
+    osf_response = create_node(abstract, tags, authors)
 
     # Get OSF Storage link
     # to later upload the Preprint PDF file.
