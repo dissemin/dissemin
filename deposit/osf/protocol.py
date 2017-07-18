@@ -78,7 +78,7 @@ class OSFProtocol(RepositoryProtocol):
 
         return (paper, abstract)
 
-    paper, abstract = self.get_primary_data(form)
+    paper, abstract = get_primary_data(form)
     authors = paper['authors']
     records = paper['records']
     pub_date = paper['date'][:-6]
@@ -90,7 +90,7 @@ class OSFProtocol(RepositoryProtocol):
 
         return tags
 
-    tags = self.create_tags()
+    tags = create_tags()
 
     # Look for a specific subkey.
     def get_key_data(self, key):
@@ -100,7 +100,7 @@ class OSFProtocol(RepositoryProtocol):
 
         return None
 
-    paper_doi = self.get_key_data('doi')
+    paper_doi = get_key_data('doi')
 
     # ---------------------------------------------
     # HERE GO THE DIFFERENT METHODS
