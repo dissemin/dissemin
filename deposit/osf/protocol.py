@@ -64,7 +64,45 @@ class OSFProtocol(RepositoryProtocol):
         if self.paper.abstract:
             data['abstract'] = kill_html(self.paper.abstract)
 
-        return (data)
+        return data
+
+    # Get some basic data needed in different methods
+    def get_primary_data(self, form):
+        paper = self.paper.json()
+        # authors = paper['authors']
+        # records = paper['records']
+        # pub_date = paper['date'][:-6]
+
+        abstract = (form.cleaned_data['abstract'] or
+                    kill_html(self.paper.abstract))
+
+        return (paper, abstract)
+
+    # Creating the metadata
+    self.log("### Creating the metadata")
+    paper, abstract = self.get_primary_data(form)
+    authors = paper['authors']
+    records = paper['records']
+    pub_date = paper['date'][:-6]
+
+    def create_tags(self):
+        tags = list(form.cleaned_data['tags'].split(','))
+        tags = [item.strip() for item in tags]
+        tags = [item for item in tags if item != ""]
+
+        return tags
+
+    tags = self.create_tags()
+
+    # Look for a specific subkey
+    def get_key_data(key):
+        for item in records:
+            if item.get(key):
+                return (item[key])
+
+        return None
+
+    paper_doi = get_key_data('doi')
 
     def createMetadata(self, form):
         paper = self.paper.json()
@@ -80,8 +118,6 @@ class OSFProtocol(RepositoryProtocol):
 
             return None
 
-        abstract = (form.cleaned_data['abstract'] or
-                    kill_html(self.paper.abstract))
         paper_doi = get_key_data('doi')
 
         def create_tags():
@@ -107,7 +143,8 @@ class OSFProtocol(RepositoryProtocol):
         #     }
         # }
 
-        return (authors, paper_doi, pub_date)
+        return (authors, paper_doi, pub_date,
+                abstract, tags)
 
     # ---------------------------------------------
     # HERE GO THE DIFFERENT METHODS
