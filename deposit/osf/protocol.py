@@ -78,7 +78,7 @@ class OSFProtocol(RepositoryProtocol):
                 if item.get(key):
                     return (item[key])
 
-            return (None)
+            return None
 
         abstract = (form.cleaned_data['abstract'] or
                     kill_html(self.paper.abstract))
@@ -89,26 +89,25 @@ class OSFProtocol(RepositoryProtocol):
             tags = [item.strip() for item in tags]
             tags = [item for item in tags if item != ""]
 
-            return (tags)
+            return tags
 
         tags = create_tags()
 
         # Required to create a new node.
         # The project will then host the preprint.
-        min_node_structure = {
-            "data": {
-                "type": "nodes",
-                "attributes": {
-                    "title": paper['title'],
-                    "category": "project",
-                    "description": abstract,
-                    "tags": tags
-                }
-            }
-        }
+        # min_node_structure = {
+        #     "data": {
+        #         "type": "nodes",
+        #         "attributes": {
+        #             "title": paper['title'],
+        #             "category": "project",
+        #             "description": abstract,
+        #             "tags": tags
+        #         }
+        #     }
+        # }
 
-        return (min_node_structure, authors,
-                paper_doi, pub_date)
+        return (authors, paper_doi, pub_date)
 
     # ---------------------------------------------
     # HERE GO THE DIFFERENT METHODS
@@ -130,19 +129,34 @@ class OSFProtocol(RepositoryProtocol):
                     }
                 }
             }
-            return (structure)
+            return structure
 
         else:
-            return (author)
+            return author
 
     # Extract the OSF Storage link
     def translate_links(node_links):
         upload_link = node_links['links']['upload']
-        return (upload_link)
+        return upload_link
 
     # Send the min. structure.
     # The response should contain the node ID.
-    def create_node(self):
+    def create_node(self, abstract, tags):
+        tags = tags
+        abstract = abstract
+        # Required to create a new node.
+        # The project will then host the preprint.
+        min_node_structure = {
+            "data": {
+                "type": "nodes",
+                "attributes": {
+                    "title": paper['title'],
+                    "category": "project",
+                    "description": abstract,
+                    "tags": tags
+                }
+            }
+        }
         osf_response = requests.post(self.api_url,
                                      data=json.dumps(min_node_structure),
                                      headers=headers)
@@ -150,7 +164,9 @@ class OSFProtocol(RepositoryProtocol):
                          __('Unable to create a project on OSF.'))
 
         osf_response = osf_response.json()
-        return (osf_response)
+        return osf_response
+
+    osf_response = create_node(abstract, tags)
 
     # Get OSF Storage link
     # to later upload the Preprint PDF file.
@@ -162,7 +178,7 @@ class OSFProtocol(RepositoryProtocol):
                          __('Unable to authenticate to OSF.'))
 
         osf_storage_data = osf_storage_data.json()
-        return (osf_storage_data)
+        return osf_storage_data
 
     # Add contributors
     def add_contributors():
