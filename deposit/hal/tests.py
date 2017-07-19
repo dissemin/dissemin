@@ -133,6 +133,20 @@ class HALProtocolTest(ProtocolTest):
              affiliation=128940)
         self.assertEqualOrLog(r.status, 'faked')
 
+    def test_topic_set_to_other(self):
+        """
+        Submit a journal article
+        """
+        p = Paper.create_by_doi('10.1016/j.agee.2004.10.001')
+        p.authors_list = [p.authors_list[0]]
+        r = self.dry_deposit(p,
+             abstract='here is my great result',
+             topic='OTHER',
+             depositing_author=0,
+             affiliation=128940)
+        self.assertEqualOrLog(r.status, 'faked')
+
+
     def test_keywords(self):
         """
         Keywords are mandatory
