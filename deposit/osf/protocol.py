@@ -156,13 +156,14 @@ class OSFProtocol(RepositoryProtocol):
                          __('Unable to create a project on OSF.'))
 
         osf_response = osf_response.json()
+        self.node_id = osf_response['data']['id']
 
         return osf_response
 
     # Get OSF Storage link
     # to later upload the Preprint PDF file.
-    def get_newnode_osf_storage(self, node_id):
-        self.storage_url = self.api_url + "{}/files/".format(node_id)
+    def get_newnode_osf_storage(self):
+        self.storage_url = self.api_url + "{}/files/".format(self.node_id)
         osf_storage_data = requests.get(self.storage_url,
                                         headers=headers)
         self.log_request(osf_storage_data, 200,
@@ -173,7 +174,7 @@ class OSFProtocol(RepositoryProtocol):
 
     # Add contributors
     def add_contributors(self):
-        contrib_url = self.api_url + node_id + "/contributors/"
+        contrib_url = self.api_url + self.node_id + "/contributors/"
 
         for author in authors:
             contrib = self.translate_author(author, "contrib")
@@ -184,7 +185,7 @@ class OSFProtocol(RepositoryProtocol):
                              __('Unable to add contributors.'))
 
     def create_license(self):
-        node_url = self.api_url + node_id + "/"
+        node_url = self.api_url + self.node_id + "/"
         # license_url = "https://api.osf.io/v2/licenses/"
         license_url = "https://test-api.osf.io/v2/licenses/" # Test server
         license_url = license_url + "{}".format(license_id) + "/"
@@ -194,7 +195,7 @@ class OSFProtocol(RepositoryProtocol):
         license_structure = {
                 "data": {
                     "type": "nodes",
-                    "id": node_id,
+                    "id": self.node_id,
                     "attributes": {},
                     "relationships": {
                         "license": {
@@ -249,7 +250,7 @@ class OSFProtocol(RepositoryProtocol):
                     "node": {
                         "data": {
                             "type": "nodes",
-                            "id": node_id
+                            "id": self.node_id
                         }
                     },
                     "primary_file": {
@@ -284,7 +285,7 @@ class OSFProtocol(RepositoryProtocol):
     def update_preprint_license(self):
         authors_list = [self.translate_author(author)
                         for author in authors]
-        # preprint_node_url = self.api_url + "{}/preprints/".format(node_id)
+        # preprint_node_url = self.api_url + "{}/preprints/".format(self.node_id)
         preprint_node_url = (
             "https://test-api.osf.io/v2/preprints/{}".format(preprint_id) + "/") # Test server
 
@@ -345,7 +346,6 @@ class OSFProtocol(RepositoryProtocol):
         # Creating the metadata
         self.log("### Creating the metadata")
         osf_response = self.create_node(abstract, tags, authors)
-        node_id = osf_response['data']['id']
         self.log(json.dumps(min_node_structure, indent=4)+'')
         self.log(json.dumps(authors, indent=4)+'')
 
@@ -357,7 +357,7 @@ class OSFProtocol(RepositoryProtocol):
             'Content-Type': 'application/vnd.api+json'
         }
 
-        osf_storage_data = self.get_newnode_osf_storage(node_id)
+        osf_storage_data = self.get_newnode_osf_storage(self.node_id)
         osf_links = self.osf_storage_data['data']
         osf_upload_link = str(
             list({self.translate_links(entry) for entry in osf_links}))
