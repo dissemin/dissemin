@@ -85,8 +85,6 @@ class OSFProtocol(RepositoryProtocol):
 
         return tags
 
-    tags = self.create_tags()
-
     # Look for a specific subkey.
     def get_key_data(self, key):
         for item in records:
@@ -104,7 +102,7 @@ class OSFProtocol(RepositoryProtocol):
     # Get a dictionary containing the first and last names
     # of the authors of a Dissemin paper,
     # ready to be implemented in an OSF Preprints data dict.
-    def translate_author(dissemin_authors, goal="optional"):
+    def translate_author(self, dissemin_authors, goal="optional"):
         author = "{} {}".format(dissemin_authors['name']['first'],
                                 dissemin_authors['name']['last'])
 
@@ -123,7 +121,7 @@ class OSFProtocol(RepositoryProtocol):
             return author
 
     # Extract the OSF Storage link.
-    def translate_links(node_links):
+    def translate_links(self, node_links):
         upload_link = node_links['links']['upload']
         return upload_link
 
@@ -343,6 +341,7 @@ class OSFProtocol(RepositoryProtocol):
         authors = paper['authors']
         records = paper['records']
         pub_date = paper['date'][:-6]
+        tags = self.create_tags()
 
         deposit_result = DepositResult()
 
@@ -364,10 +363,10 @@ class OSFProtocol(RepositoryProtocol):
         osf_response = self.create_node()
         node_id = osf_response['data']['id']
 
-        self.osf_storage_data = get_newnode_osf_storage(node_id)
+        osf_storage_data = self.get_newnode_osf_storage(node_id)
         osf_links = self.osf_storage_data['data']
         osf_upload_link = str(
-            list({translate_links(entry) for entry in osf_links}))
+            list({self.translate_links(entry) for entry in osf_links}))
         osf_upload_link = osf_upload_link.replace("[u'", '').replace("']", '')
 
         # Uploading the PDF
@@ -384,15 +383,15 @@ class OSFProtocol(RepositoryProtocol):
         # Uncomment pf_path when time to test the preprint upload has come
         pf_path = primary_file_data['data']['attributes']['path'][1:]
 
-        add_contributors()
+        self.add_contributors()
 
-        create_license()
+        self.create_license()
 
         # Create Preprint
-        osf_preprint_response = create_preprint()
+        osf_preprint_response = self.create_preprint()
         preprint_id = osf_preprint_response['data']['id']
 
-        update_preprint_license()
+        self.update_preprint_license()
 
         return (deposit_result)
 
