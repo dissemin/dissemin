@@ -133,6 +133,27 @@ class HALProtocolTest(ProtocolTest):
              affiliation=128940)
         self.assertEqualOrLog(r.status, 'faked')
 
+    def test_topic_set_to_other(self):
+        """
+        Submit a journal article with "OTHER" as topic,
+        which is forbidden by HAL
+        """
+        p = Paper.create_by_doi('10.1016/j.agee.2004.10.001')
+        self.proto.init_deposit(p, self.user)
+
+        # the user is presented with initial data
+        args = self.proto.get_form_initial_data()
+        # they fill the form with an invalid topic
+        form_fields = {'abstract':'here is my great result',
+             'topic':'OTHER',
+             'depositing_author':0,
+             'affiliation':128940}
+        args.update(form_fields)
+
+        # the form should reject the "OTHER" topic
+        form = self.proto.get_bound_form(args)
+        self.assertFalse(form.is_valid())
+
     def test_keywords(self):
         """
         Keywords are mandatory

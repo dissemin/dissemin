@@ -113,6 +113,8 @@ class HALProtocol(RepositoryProtocol):
         else:
             topic_text = self.paper.title
         data['topic'] = self.predict_topic(topic_text)
+        if data['topic'] == 'OTHER':
+            del data['topic']
 
         # Depositing author
         most_similar_idx = None
