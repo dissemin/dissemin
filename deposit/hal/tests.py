@@ -139,14 +139,18 @@ class HALProtocolTest(ProtocolTest):
         which is forbidden by HAL
         """
         p = Paper.create_by_doi('10.1016/j.agee.2004.10.001')
-        p.authors_list = [p.authors_list[0]]
-        r = self.dry_deposit(p,
-             abstract='here is my great result',
-             topic='OTHER',
-             depositing_author=0,
-             affiliation=128940)
-        self.assertEqualOrLog(r.status, 'failed')
+        enabled = self.proto.init_deposit(p, self.user)
 
+        args = self.proto.get_form_initial_data()
+        form_fields = {'abstract':'here is my great result',
+             'topic':'OTHER',
+             'depositing_author':0,
+             'affiliation':128940}
+        args.update(form_fields)
+
+        form = self.proto.get_bound_form(args)
+        # the form should reject the "OTHER" topic
+        self.assertFalse(form.is_valid())
 
     def test_keywords(self):
         """
