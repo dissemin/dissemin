@@ -93,8 +93,6 @@ class OSFProtocol(RepositoryProtocol):
 
         return None
 
-    paper_doi = self.get_key_data('doi')
-
     # ---------------------------------------------
     # HERE GO THE DIFFERENT METHODS
     # NEEDED BY submit_deposit()
@@ -160,8 +158,6 @@ class OSFProtocol(RepositoryProtocol):
         osf_response = osf_response.json()
 
         return osf_response
-
-    osf_response = self.create_node(abstract, tags, authors)
 
     # Get OSF Storage link
     # to later upload the Preprint PDF file.
@@ -237,6 +233,7 @@ class OSFProtocol(RepositoryProtocol):
     def create_preprint(self):
         # preprint_node_url = "https://api.osf.io/v2/preprints/"
         preprint_node_url = "https://test-api.osf.io/v2/preprints/" # Test server
+        paper_doi = self.get_key_data('doi')
 
         # -----------------------------------------------
         # The following structure will be used
@@ -347,8 +344,8 @@ class OSFProtocol(RepositoryProtocol):
 
         # Creating the metadata
         self.log("### Creating the metadata")
-        min_node_structure, authors, paper_doi, pub_date = (
-            self.createMetadata(form))
+        osf_response = self.create_node(abstract, tags, authors)
+        node_id = osf_response['data']['id']
         self.log(json.dumps(min_node_structure, indent=4)+'')
         self.log(json.dumps(authors, indent=4)+'')
 
@@ -359,9 +356,6 @@ class OSFProtocol(RepositoryProtocol):
             'Authorization': 'Bearer %s' % api_key,
             'Content-Type': 'application/vnd.api+json'
         }
-
-        osf_response = self.create_node()
-        node_id = osf_response['data']['id']
 
         osf_storage_data = self.get_newnode_osf_storage(node_id)
         osf_links = self.osf_storage_data['data']
