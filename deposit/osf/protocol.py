@@ -86,7 +86,7 @@ class OSFProtocol(RepositoryProtocol):
         return tags
 
     # Look for a specific subkey.
-    def get_key_data(self, key):
+    def get_key_data(self, key, records):
         for item in records:
             if item.get(key):
                 return (item[key])
@@ -231,10 +231,12 @@ class OSFProtocol(RepositoryProtocol):
         self.log(str(license_req.status_code))
         self.log(license_req.text)
 
-    def create_preprint(self):
+    def create_preprint(self, pf_path, records):
         # preprint_node_url = "https://api.osf.io/v2/preprints/"
         preprint_node_url = "https://test-api.osf.io/v2/preprints/" # Test server
-        paper_doi = self.get_key_data('doi')
+        records = records
+        paper_doi = self.get_key_data('doi', records)
+        pf_path = pf_path
 
         # -----------------------------------------------
         # The following structure will be used
@@ -346,9 +348,6 @@ class OSFProtocol(RepositoryProtocol):
         # Creating the metadata
         self.log("### Creating the metadata")
         osf_response = self.create_node(abstract, tags, authors)
-        self.log(json.dumps(min_node_structure, indent=4)+'')
-        self.log(json.dumps(authors, indent=4)+'')
-
 
         # Creating a new depository
         self.log("### Creating a new depository")
@@ -382,7 +381,7 @@ class OSFProtocol(RepositoryProtocol):
         self.create_license()
 
         # Create Preprint
-        osf_preprint_response = self.create_preprint()
+        osf_preprint_response = self.create_preprint(pf_path, records)
         preprint_id = osf_preprint_response['data']['id']
 
         self.update_preprint_license()
