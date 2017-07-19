@@ -188,7 +188,7 @@ class OSFProtocol(RepositoryProtocol):
         node_url = self.api_url + self.node_id + "/"
         # license_url = "https://api.osf.io/v2/licenses/"
         license_url = "https://test-api.osf.io/v2/licenses/" # Test server
-        license_url = license_url + "{}".format(license_id) + "/"
+        license_url = license_url + "{}".format(self.license_id) + "/"
         authors_list = [self.translate_author(author)
                         for author in authors]
 
@@ -201,17 +201,17 @@ class OSFProtocol(RepositoryProtocol):
                         "license": {
                             "data": {
                                 "type": "licenses",
-                                "id": license_id
+                                "id": self.license_id
                             }
                         }
                     }
                 }
             }
 
-        if license_id == NO_LICENSE_ID:
+        if self.license_id == NO_LICENSE_ID:
             license_structure['data']['attributes'] = {
                 "node_license": {
-                    "year": pub_date,
+                    "year": self.pub_date,
                     "copyright_holders": authors_list
                 }
             }
@@ -284,7 +284,7 @@ class OSFProtocol(RepositoryProtocol):
 
         return osf_preprint_response
 
-    def update_preprint_license(self, authors):
+    def update_preprint_license(self, authors, preprint_id):
         authors_list = [self.translate_author(author)
                         for author in authors]
         # preprint_node_url = self.api_url + "{}/preprints/".format(self.node_id)
@@ -300,17 +300,17 @@ class OSFProtocol(RepositoryProtocol):
                     "license": {
                         "data": {
                             "type": "licenses",
-                            "id": license_id
+                            "id": self.license_id
                         }
                     }
                 }
             }
         }
 
-        if license_id == NO_LICENSE_ID:
+        if self.license_id == NO_LICENSE_ID:
             updated_preprint_struc['data']['attributes'] = {
                 "license_record": {
-                    "year": pub_date,
+                    "year": self.pub_date,
                     "copyright_holders": authors_list
                 }
             }
@@ -335,12 +335,12 @@ class OSFProtocol(RepositoryProtocol):
             raise DepositError(__("No OSF token provided."))
 
         api_key = self.repository.api_key
-        license_id = form.cleaned_data['license']
+        self.license_id = form.cleaned_data['license']
 
         paper, abstract = self.get_primary_data(form)
         authors = paper['authors']
         records = paper['records']
-        pub_date = paper['date'][:-6]
+        self.pub_date = paper['date'][:-6]
         tags = self.create_tags()
 
         deposit_result = DepositResult()
@@ -386,7 +386,7 @@ class OSFProtocol(RepositoryProtocol):
         osf_preprint_response = self.create_preprint(pf_path, records)
         preprint_id = osf_preprint_response['data']['id']
 
-        self.update_preprint_license(authors)
+        self.update_preprint_license(authors, preprint_id)
 
         return (deposit_result)
 
