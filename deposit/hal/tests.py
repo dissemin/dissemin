@@ -135,7 +135,8 @@ class HALProtocolTest(ProtocolTest):
 
     def test_topic_set_to_other(self):
         """
-        Submit a journal article
+        Submit a journal article with "OTHER" as topic,
+        which is forbidden by HAL
         """
         p = Paper.create_by_doi('10.1016/j.agee.2004.10.001')
         p.authors_list = [p.authors_list[0]]
@@ -144,7 +145,7 @@ class HALProtocolTest(ProtocolTest):
              topic='OTHER',
              depositing_author=0,
              affiliation=128940)
-        self.assertEqualOrLog(r.status, 'faked')
+        self.assertEqualOrLog(r.status, 'failed')
 
 
     def test_keywords(self):

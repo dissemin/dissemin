@@ -72,7 +72,6 @@ HAL_TOPIC_CHOICES = [
     ('SPI', __('Engineering sciences')),
     ('STAT', __('Statistics')),
     ('QFIN', __('Economy and quantitative finance')),
-    ('OTHER', __('Other')),
   ]
 
 
