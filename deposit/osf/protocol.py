@@ -78,11 +78,6 @@ class OSFProtocol(RepositoryProtocol):
 
         return (paper, abstract)
 
-    paper, abstract = self.get_primary_data(form)
-    authors = paper['authors']
-    records = paper['records']
-    pub_date = paper['date'][:-6]
-
     def create_tags(self, form):
         tags = list(form.cleaned_data['tags'].split(','))
         tags = [item.strip() for item in tags]
@@ -343,6 +338,11 @@ class OSFProtocol(RepositoryProtocol):
 
         api_key = self.repository.api_key
         license_id = form.cleaned_data['license']
+
+        paper, abstract = self.get_primary_data(form)
+        authors = paper['authors']
+        records = paper['records']
+        pub_date = paper['date'][:-6]
 
         deposit_result = DepositResult()
 
