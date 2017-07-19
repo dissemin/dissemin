@@ -58,7 +58,7 @@ class OSFProtocol(RepositoryProtocol):
         super(OSFProtocol, self).init_deposit(paper, user)
         return (True)
 
-    def get_form_initial_data(self, form):
+    def get_form_initial_data(self):
         data = super(OSFProtocol, self).get_form_initial_data()
 
         if self.paper.abstract:
