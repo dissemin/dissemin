@@ -90,7 +90,7 @@ class OSFProtocol(RepositoryProtocol):
 
         return tags
 
-    tags = create_tags()
+    tags = self.create_tags()
 
     # Look for a specific subkey.
     def get_key_data(self, key):
@@ -100,7 +100,7 @@ class OSFProtocol(RepositoryProtocol):
 
         return None
 
-    self.paper_doi = get_key_data('doi')
+    paper_doi = self.get_key_data('doi')
 
     # ---------------------------------------------
     # HERE GO THE DIFFERENT METHODS
