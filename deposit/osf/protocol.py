@@ -15,8 +15,8 @@
 # GNU Affero General Public License for more details.
 #
 # You should have received a copy of the GNU Affero General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+# along with this program; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 from __future__ import unicode_literals
 
@@ -30,26 +30,29 @@ from deposit.protocol import RepositoryProtocol
 from deposit.registry import protocol_registry
 from deposit.osf.forms import OSFForm
 from django.utils.translation import ugettext as __
-# from django.utils.translation import ugettext_lazy as __
 from papers.utils import kill_html
 
+# == APIS.OSF.IO ==
 # NO_LICENSE_ID = "563c1cf88c5e4a3877f9e965"
-NO_LICENSE_ID = "58fd62fcda3e2400012ca5cc" # Test server
+# == TEST-API.OSF.IO ==
+NO_LICENSE_ID = "58fd62fcda3e2400012ca5cc"
 
 
 class OSFProtocol(RepositoryProtocol):
     """
-    A protocol to submit using the OSF REST API
+    A protocol to submit using the OSF REST API.
     """
     form_class = OSFForm
 
     def __init__(self, repository, **kwargs):
         super(OSFProtocol, self).__init__(repository, **kwargs)
-        # we let the interface define another API endpoint (sandbox…)
+        # We let the interface define another API endpoint (sandbox…).
         self.api_url = repository.endpoint
         if not self.api_url:
+            # == API.OSF.IO ==
             # self.api_url = "https://api.osf.io/v2/nodes/"
-            self.api_url = "https://test-api.osf.io/v2/nodes/" # test server
+            # == TEST-API.OSF.IO ==
+            self.api_url = "https://test-api.osf.io/v2/nodes/"
 
     def init_deposit(self, paper, user):
         """
@@ -69,12 +72,10 @@ class OSFProtocol(RepositoryProtocol):
     # Get some basic data needed in different methods.
     def get_primary_data(self, form):
         paper = self.paper.json()
-        # authors = paper['authors']
-        # records = paper['records']
-        # pub_date = paper['date'][:-6]
 
         abstract = (form.cleaned_data['abstract'] or
-                    kill_html(self.paper.abstract))
+                    kill_html(self.paper.abstract)
+                    )
 
         return (paper, abstract)
 
@@ -94,9 +95,10 @@ class OSFProtocol(RepositoryProtocol):
         return None
 
     # ---------------------------------------------
-    # HERE GO THE DIFFERENT METHODS
+    # HERE AFTER GO THE DIFFERENT METHODS
     # NEEDED BY submit_deposit()
     # ---------------------------------------------
+
     # Get a dictionary containing the first and last names
     # of the authors of a Dissemin paper,
     # ready to be implemented in an OSF Preprints data dict.
@@ -118,7 +120,7 @@ class OSFProtocol(RepositoryProtocol):
         else:
             return author
 
-    # Extract the OSF Storage link.
+    # Extract the OSF storage link.
     def translate_links(self, node_links):
         upload_link = node_links['links']['upload']
         return upload_link
@@ -131,7 +133,7 @@ class OSFProtocol(RepositoryProtocol):
         authors = authors
 
         # Required to create a new node.
-        # The project will then host the preprint.
+        # The project will then host the Preprint.
         min_node_structure = {
             "data": {
                 "type": "nodes",
@@ -144,7 +146,6 @@ class OSFProtocol(RepositoryProtocol):
             }
         }
 
-        # Creating the metadata
         self.log("### Creating the metadata")
         self.log(json.dumps(min_node_structure, indent=4)+'')
         self.log(json.dumps(authors, indent=4)+'')
@@ -158,11 +159,9 @@ class OSFProtocol(RepositoryProtocol):
         osf_response = osf_response.json()
         self.node_id = osf_response['data']['id']
 
-        return osf_response
-
-    # Get OSF Storage link
-    # to later upload the Preprint PDF file.
-    def get_newnode_osf_storage(self):
+    # Get OSF Storage link to later upload
+    # the Preprint PDF file.
+    def get_newnode_osf_storage(self, node_id):
         self.storage_url = self.api_url + "{}/files/".format(self.node_id)
         osf_storage_data = requests.get(self.storage_url,
                                         headers=self.headers)
@@ -172,7 +171,7 @@ class OSFProtocol(RepositoryProtocol):
         osf_storage_data = osf_storage_data.json()
         return osf_storage_data
 
-    # Add contributors
+    # Add contributors.
     def add_contributors(self, authors):
         contrib_url = self.api_url + self.node_id + "/contributors/"
 
@@ -186,9 +185,11 @@ class OSFProtocol(RepositoryProtocol):
 
     def create_license(self, authors):
         node_url = self.api_url + self.node_id + "/"
+        # == API.OSF.IO ==
         # license_url = "https://api.osf.io/v2/licenses/"
-        license_url = "https://test-api.osf.io/v2/licenses/" # Test server
-        license_url = license_url + "{}".format(self.license_id) + "/"
+        # == TEST-API.OSF.IO ==
+        license_url = "https://test-api.osf.io/v2/licenses/"
+        license_url += (self.license_id + "/")
         authors_list = [self.translate_author(author)
                         for author in authors]
 
@@ -226,21 +227,22 @@ class OSFProtocol(RepositoryProtocol):
         self.log_request(license_req, 200,
                          __('Unable to update license.'))
 
-        # Updating License
         self.log("### Updating License")
         self.log(str(license_req.status_code))
         self.log(license_req.text)
 
     def create_preprint(self, pf_path, records):
+        # == API.OSF.IO ==
         # preprint_node_url = "https://api.osf.io/v2/preprints/"
-        preprint_node_url = "https://test-api.osf.io/v2/preprints/" # Test server
+        # == TEST-API.OSF.IO  ==
+        preprint_node_url = "https://test-api.osf.io/v2/preprints/"
         records = records
         paper_doi = self.get_key_data('doi', records)
         pf_path = pf_path
 
         # -----------------------------------------------
         # The following structure will be used
-        # to send a preprint on OSF once the project
+        # to send a Preprint on OSF once the project
         # has been created there.
         # -----------------------------------------------
         min_preprint_structure = {
@@ -287,9 +289,14 @@ class OSFProtocol(RepositoryProtocol):
     def update_preprint_license(self, authors, preprint_id):
         authors_list = [self.translate_author(author)
                         for author in authors]
-        # preprint_node_url = self.api_url + "{}/preprints/".format(self.node_id)
+        # == API.OSF.IO ==
+        # preprint_node_url = (
+        #     self.api_url + "{}/preprints/".format(self.node_id)
+        # )
+        # == TEST-API.OSF.IO ==
         preprint_node_url = (
-            "https://test-api.osf.io/v2/preprints/{}".format(preprint_id) + "/") # Test server
+            "https://test-api.osf.io/v2/preprints/{}/".format(preprint_id)
+        )
 
         updated_preprint_struc = {
             "data": {
@@ -329,7 +336,7 @@ class OSFProtocol(RepositoryProtocol):
         self.log(str(license_req.status_code))
         self.log(license_req.text)
 
-    # MAIN FUNCTION
+    # MAIN METHOD
     def submit_deposit(self, pdf, form, dry_run=False):
         if self.repository.api_key is None:
             raise DepositError(__("No OSF token provided."))
@@ -341,7 +348,7 @@ class OSFProtocol(RepositoryProtocol):
         authors = paper['authors']
         records = paper['records']
         self.pub_date = paper['date'][:-6]
-        tags = self.create_tags()
+        tags = self.create_tags(form)
 
         deposit_result = DepositResult()
 
@@ -351,20 +358,18 @@ class OSFProtocol(RepositoryProtocol):
             'Content-Type': 'application/vnd.api+json'
         }
 
-        # Creating the metadata
-        self.log("### Creating the metadata")
-        osf_response = self.create_node(abstract, tags, authors)
+        # Creating the metadata.
+        # osf_response = self.create_node(abstract, tags, authors)
+        self.create_node(abstract, tags, authors)
 
-        # Creating a new depository
         self.log("### Creating a new depository")
-
         osf_storage_data = self.get_newnode_osf_storage(self.node_id)
-        osf_links = self.osf_storage_data['data']
+        osf_links = osf_storage_data['data']
         osf_upload_link = str(
-            list({self.translate_links(entry) for entry in osf_links}))
+            list({self.translate_links(entry) for entry in osf_links})
+        )
         osf_upload_link = osf_upload_link.replace("[u'", '').replace("']", '')
 
-        # Uploading the PDF
         self.log("### Uploading the PDF")
         upload_url_suffix = "?kind=file&name=article.pdf"
         upload_url = osf_upload_link + upload_url_suffix
@@ -375,14 +380,14 @@ class OSFProtocol(RepositoryProtocol):
         self.log_request(primary_file_data, 201,
                          __('Unable to upload the PDF file.'))
         primary_file_data = primary_file_data.json()
-        # Uncomment pf_path when time to test the preprint upload has come
+
         pf_path = primary_file_data['data']['attributes']['path'][1:]
 
         self.add_contributors(authors)
 
         self.create_license(authors)
 
-        # Create Preprint
+        # Create the Preprint.
         osf_preprint_response = self.create_preprint(pf_path, records)
         preprint_id = osf_preprint_response['data']['id']
 
