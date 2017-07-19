@@ -136,7 +136,7 @@ class OSFProtocol(RepositoryProtocol):
             "data": {
                 "type": "nodes",
                 "attributes": {
-                    "title": paper['title'],
+                    "title": self.paper.title,
                     "category": "project",
                     "description": abstract,
                     "tags": tags
@@ -151,7 +151,7 @@ class OSFProtocol(RepositoryProtocol):
 
         osf_response = requests.post(self.api_url,
                                      data=json.dumps(min_node_structure),
-                                     headers=headers)
+                                     headers=self.headers)
         self.log_request(osf_response, 201,
                          __('Unable to create a project on OSF.'))
 
@@ -165,7 +165,7 @@ class OSFProtocol(RepositoryProtocol):
     def get_newnode_osf_storage(self):
         self.storage_url = self.api_url + "{}/files/".format(self.node_id)
         osf_storage_data = requests.get(self.storage_url,
-                                        headers=headers)
+                                        headers=self.headers)
         self.log_request(osf_storage_data, 200,
                          __('Unable to authenticate to OSF.'))
 
@@ -173,18 +173,18 @@ class OSFProtocol(RepositoryProtocol):
         return osf_storage_data
 
     # Add contributors
-    def add_contributors(self):
+    def add_contributors(self, authors):
         contrib_url = self.api_url + self.node_id + "/contributors/"
 
         for author in authors:
             contrib = self.translate_author(author, "contrib")
             contrib_response = requests.post(contrib_url,
                                              data=json.dumps(contrib),
-                                             headers=headers)
+                                             headers=self.headers)
             self.log_request(contrib_response, 201,
                              __('Unable to add contributors.'))
 
-    def create_license(self):
+    def create_license(self, authors):
         node_url = self.api_url + self.node_id + "/"
         # license_url = "https://api.osf.io/v2/licenses/"
         license_url = "https://test-api.osf.io/v2/licenses/" # Test server
@@ -222,7 +222,7 @@ class OSFProtocol(RepositoryProtocol):
 
         license_req = requests.patch(node_url,
                                      data=json.dumps(license_structure),
-                                     headers=headers)
+                                     headers=self.headers)
         self.log_request(license_req, 200,
                          __('Unable to update license.'))
 
@@ -274,7 +274,7 @@ class OSFProtocol(RepositoryProtocol):
         self.log("### Creating Preprint")
         osf_response = requests.post(preprint_node_url,
                                      data=json.dumps(min_preprint_structure),
-                                     headers=headers)
+                                     headers=self.headers)
         self.log_request(osf_response, 201,
                          __('Unable to create the preprint.'))
 
@@ -284,7 +284,7 @@ class OSFProtocol(RepositoryProtocol):
 
         return osf_preprint_response
 
-    def update_preprint_license(self):
+    def update_preprint_license(self, authors):
         authors_list = [self.translate_author(author)
                         for author in authors]
         # preprint_node_url = self.api_url + "{}/preprints/".format(self.node_id)
@@ -322,7 +322,7 @@ class OSFProtocol(RepositoryProtocol):
         self.log("### Updating the Preprint License")
         license_req = requests.patch(preprint_node_url,
                                      data=json.dumps(updated_preprint_struc),
-                                     headers=headers)
+                                     headers=self.headers)
         self.log_request(license_req, 200,
                          __('Unable to update the Preprint License.'))
 
@@ -345,16 +345,18 @@ class OSFProtocol(RepositoryProtocol):
 
         deposit_result = DepositResult()
 
+        # To connect to the API.
+        self.headers = {
+            'Authorization': 'Bearer %s' % api_key,
+            'Content-Type': 'application/vnd.api+json'
+        }
+
         # Creating the metadata
         self.log("### Creating the metadata")
         osf_response = self.create_node(abstract, tags, authors)
 
         # Creating a new depository
         self.log("### Creating a new depository")
-        headers = {
-            'Authorization': 'Bearer %s' % api_key,
-            'Content-Type': 'application/vnd.api+json'
-        }
 
         osf_storage_data = self.get_newnode_osf_storage(self.node_id)
         osf_links = self.osf_storage_data['data']
@@ -369,22 +371,22 @@ class OSFProtocol(RepositoryProtocol):
         data = open(pdf, 'r')
         primary_file_data = requests.put(upload_url,
                                          data=data,
-                                         headers=headers)
+                                         headers=self.headers)
         self.log_request(primary_file_data, 201,
                          __('Unable to upload the PDF file.'))
         primary_file_data = primary_file_data.json()
         # Uncomment pf_path when time to test the preprint upload has come
         pf_path = primary_file_data['data']['attributes']['path'][1:]
 
-        self.add_contributors()
+        self.add_contributors(authors)
 
-        self.create_license()
+        self.create_license(authors)
 
         # Create Preprint
         osf_preprint_response = self.create_preprint(pf_path, records)
         preprint_id = osf_preprint_response['data']['id']
 
-        self.update_preprint_license()
+        self.update_preprint_license(authors)
 
         return (deposit_result)
 
