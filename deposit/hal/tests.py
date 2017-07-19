@@ -139,17 +139,19 @@ class HALProtocolTest(ProtocolTest):
         which is forbidden by HAL
         """
         p = Paper.create_by_doi('10.1016/j.agee.2004.10.001')
-        enabled = self.proto.init_deposit(p, self.user)
+        self.proto.init_deposit(p, self.user)
 
+        # the user is presented with initial data
         args = self.proto.get_form_initial_data()
+        # they fill the form with an invalid topic
         form_fields = {'abstract':'here is my great result',
              'topic':'OTHER',
              'depositing_author':0,
              'affiliation':128940}
         args.update(form_fields)
 
-        form = self.proto.get_bound_form(args)
         # the form should reject the "OTHER" topic
+        form = self.proto.get_bound_form(args)
         self.assertFalse(form.is_valid())
 
     def test_keywords(self):
