@@ -37,9 +37,8 @@ class OSFProtocolTest(ProtocolTest):
         super(OSFProtocolTest, self).setUpClass()
 
         # Fill here the details of your test repository
-        self.repo.username = ''
-        self.repo.password = ''
-        self.repo.endpoint = ''
+        self.repo.api_key = 'eJMuNoeFvKTIC5A6POx1nrmsiQoMZqwh'
+        self.repo.api_key += 'CgeEXwDgggYWDeR96Y9KbypgVGNuCY5r9qVgan'
 
         # Now we set up the protocol for the tests
         self.proto = OSFProtocol(self.repo)
@@ -77,21 +76,12 @@ class OSFProtocolTest(ProtocolTest):
 
     def test_submit_deposit(self):
         paper = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
-        # record = paper.oairecords[0]
-        # record_value = "Salagadoola menchicka boola bibbidi-bobbidi-boo."
-        # tags_value = "One, Two, Three"
-        # record.description = record_value
-        # record.keywords = tags_value
-        # record.save()
 
-        # self.proto.init_deposit(paper, self.user)
         request = self.dry_deposit(paper,
                   license='58fd62fcda3e2400012ca5d3',
                   abstract='Salagadoola menchicka boola bibbidi-bobbidi-boo.',
                   tags='One, Two, Three')
-        print("JUST TESTING")
-        print(request)
-        print("=====")
-        self.assertEqualOrLog(request.status, 'success')
+
+        self.assertEqualOrLog(request.status, 'published')
 
 
