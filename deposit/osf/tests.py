@@ -26,8 +26,8 @@ from __future__ import unicode_literals
 from papers.models import Paper
 from deposit.tests import ProtocolTest
 from deposit.osf.protocol import OSFProtocol
-from deposit.forms import FormWithAbstract
-from deposit.osf.forms import OSFForm
+# from deposit.forms import FormWithAbstract
+# from deposit.osf.forms import OSFForm
 # lorem_ipsum contains a sample abstract you can reuse in your test case
 
 class OSFProtocolTest(ProtocolTest):
@@ -73,19 +73,25 @@ class OSFProtocolTest(ProtocolTest):
 
         self.assertTrue(form.is_valid())
         tags_list = self.proto.create_tags(form)
-        self.assertEqual(tags_list, ['Un', 'Deux', 'Trois'])
+        self.assertEqual(tags_list, ['One', 'Two', 'Three'])
 
     def test_submit_deposit(self):
         paper = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
         # record = paper.oairecords[0]
         # record_value = "Salagadoola menchicka boola bibbidi-bobbidi-boo."
         # tags_value = "One, Two, Three"
-        # record_description = record_value
-        # record_keywords = tags_value
+        # record.description = record_value
+        # record.keywords = tags_value
+        # record.save()
+
+        # self.proto.init_deposit(paper, self.user)
         request = self.dry_deposit(paper,
                   license='58fd62fcda3e2400012ca5d3',
                   abstract='Salagadoola menchicka boola bibbidi-bobbidi-boo.',
                   tags='One, Two, Three')
+        print("JUST TESTING")
+        print(request)
+        print("=====")
         self.assertEqualOrLog(request.status, 'success')
 
 
