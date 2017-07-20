@@ -69,8 +69,8 @@ class OSFProtocolTest(ProtocolTest):
                         "abstract": "Supercalifragilisticexpialidocious.",
                         "tags": tags})
         form.is_valid()
-        print(form.errors)
+        print(form.errors.as_data())
         self.assertTrue(form.is_valid())
         data = self.proto.create_tags(form)
-        self.assertEqual(form['tags'], tags)
+        self.assertEqual(data['tags'], list['Un', 'Deux', 'Trois'])
 
