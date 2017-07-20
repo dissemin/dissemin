@@ -65,7 +65,7 @@ class OSFProtocolTest(ProtocolTest):
     def test_create_tags(self):
         # Init deposit with default paper and user
         self.proto.init_deposit(self.p1, self.user)
-        tags = " Un,   Deux  ,  ,Trois "
+        tags = " One,   Two  ,  ,Three "
         form = self.proto.get_bound_form(
                         {"license": "58fd62fcda3e2400012ca5d3",
                          "abstract": "Supercalifragilisticexpialidocious.",
@@ -74,4 +74,18 @@ class OSFProtocolTest(ProtocolTest):
         self.assertTrue(form.is_valid())
         tags_list = self.proto.create_tags(form)
         self.assertEqual(tags_list, ['Un', 'Deux', 'Trois'])
+
+    def test_submit_deposit(self):
+        paper = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
+        # record = paper.oairecords[0]
+        # record_value = "Salagadoola menchicka boola bibbidi-bobbidi-boo."
+        # tags_value = "One, Two, Three"
+        # record_description = record_value
+        # record_keywords = tags_value
+        request = self.dry_deposit(paper,
+                  license='58fd62fcda3e2400012ca5d3',
+                  abstract='Salagadoola menchicka boola bibbidi-bobbidi-boo.',
+                  tags='One, Two, Three')
+        self.assertEqualOrLog(request.status, 'success')
+
 
