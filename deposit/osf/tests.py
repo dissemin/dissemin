@@ -26,6 +26,8 @@ from __future__ import unicode_literals
 from papers.models import Paper
 from deposit.tests import ProtocolTest
 from deposit.osf.protocol import OSFProtocol
+from deposit.forms import FormWithAbstract
+from deposit.osf.forms import OSFForm
 # lorem_ipsum contains a sample abstract you can reuse in your test case
 
 class OSFProtocolTest(ProtocolTest):
@@ -57,4 +59,15 @@ class OSFProtocolTest(ProtocolTest):
 
         self.proto.init_deposit(paper, self.user)
         data = self.proto.get_form_initial_data()
+        self.assertIsInstance(data, dict)
         self.assertEqual(data.get('abstract'), record_value)
+
+    def test_create_tags(self):
+        tags = "Un, Deux, Trois"
+        form = OSFForm({"paper_id": 42,
+                        "license": "58fd62fcda3e2400012ca5d3",
+                        "abstract": "Supercalifragilisticexpialidocious.",
+                        "tags": tags})
+
+        self.assertEqual(form['tags'], tags)
+
