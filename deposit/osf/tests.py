@@ -68,6 +68,9 @@ class OSFProtocolTest(ProtocolTest):
                         "license": "58fd62fcda3e2400012ca5d3",
                         "abstract": "Supercalifragilisticexpialidocious.",
                         "tags": tags})
-
+        form.is_valid()
+        print(form.errors)
+        self.assertTrue(form.is_valid())
+        data = self.proto.create_tags(form)
         self.assertEqual(form['tags'], tags)
 
