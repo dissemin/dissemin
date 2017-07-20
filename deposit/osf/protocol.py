@@ -73,9 +73,7 @@ class OSFProtocol(RepositoryProtocol):
     def get_primary_data(self, form):
         paper = self.paper.json()
 
-        abstract = (form.cleaned_data['abstract'] or
-                    kill_html(self.paper.abstract)
-                    )
+        abstract = form.cleaned_data['abstract']
 
         return (paper, abstract)
 
