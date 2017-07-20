@@ -388,8 +388,27 @@ class OSFProtocol(RepositoryProtocol):
         # Create the Preprint.
         osf_preprint_response = self.create_preprint(pf_path, records)
         preprint_id = osf_preprint_response['data']['id']
+        # == API.OSF.IO ==
+        # preprint_public_url = "https://osf.io/" + preprint_id
+        # == TEST-API.OSF.IO ==
+        preprint_public_url = "https://test.osf.io/" + preprint_id
+        preprint_public_pdf = preprint_public_url + "/download"
 
         self.update_preprint_license(authors, preprint_id)
+
+        # == API.OSF.IO ==
+        # projet_public_url = "https://osf.io/" + self.node_id
+        # == TEST-API.OSF.IO ==
+        projet_public_url = "https://test.osf.io/" + self.node_id
+
+        self.log("### FINAL DEBUG")
+        self.log(projet_public_url)
+        self.log(preprint_public_url)
+        self.log(preprint_public_pdf)
+
+        deposit_result.identifier = projet_public_url
+        deposit_result.splash_url = preprint_public_url
+        deposit_result.pdf_url = preprint_public_pdf
 
         return (deposit_result)
 
