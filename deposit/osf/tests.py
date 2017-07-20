@@ -65,13 +65,13 @@ class OSFProtocolTest(ProtocolTest):
     def test_create_tags(self):
         # Init deposit with default paper and user
         self.proto.init_deposit(self.p1, self.user)
-        tags = "Un, Deux, Trois"
+        tags = " Un,   Deux  ,  ,Trois "
         form = self.proto.get_bound_form(
                         {"license": "58fd62fcda3e2400012ca5d3",
                          "abstract": "Supercalifragilisticexpialidocious.",
                          "tags": tags})
 
         self.assertTrue(form.is_valid())
-        data = self.proto.create_tags(form)
-        self.assertEqual(data['tags'], list['Un', 'Deux', 'Trois'])
+        tags_list = self.proto.create_tags(form)
+        self.assertEqual(tags_list, ['Un', 'Deux', 'Trois'])
 
