@@ -385,9 +385,10 @@ class PaperView(SlugDetailView):
 
         if not paper:
             paper = Paper.create_by_doi(doi)
-            if paper is None or paper.is_orphan():
-                raise Http404(_("No %(verbose_name)s found matching the query") %
-                              {'verbose_name': Paper._meta.verbose_name})
+
+        if paper is None or paper.is_orphan() or not paper.visible:
+            raise Http404(_("No %(verbose_name)s found matching the query") %
+                            {'verbose_name': Paper._meta.verbose_name})
         return paper
 
     def get_context_data(self, **kwargs):

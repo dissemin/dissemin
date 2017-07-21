@@ -173,6 +173,17 @@ class PaperPagesTest(RenderingTest):
         # is orphan: this should return a 404
         self.check404('paper-doi', kwargs={'doi': '10.1385/1592597998'})
 
+    def test_paper_not_visible(self):
+        """
+        Create a paper and mark it as invisible: the paper
+        page should return a 404.
+        """
+        p = Paper.create_by_doi('10.1109/sYnAsc.2010.88')
+        p.visible = False
+        p.save()
+        self.check404('paper-doi', kwargs={'doi': '10.1109/sYnAsc.2010.88'})
+        self.check404('paper', kwargs={'pk': p.id, 'slug': p.slug})
+
     def test_paper_with_empty_slug(self):
         """
         Papers may have titles with characters that
