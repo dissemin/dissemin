@@ -75,16 +75,18 @@ class OSFProtocolTest(ProtocolTest):
         self.assertEqual(tags_list, ['One', 'Two', 'Three'])
 
     def test_submit_deposit(self):
-        paper = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
+        self.repo.api_key = None
+        with self.assertRaises(self.repo.api_key):
+            paper = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
 
-        request = self.dry_deposit(paper,
-                  license='58fd62fcda3e2400012ca5d3',
-                  abstract='Salagadoola menchicka boola bibbidi-bobbidi-boo.',
-                  tags='One, Two, Three')
+            request = self.dry_deposit(paper,
+                      license='58fd62fcda3e2400012ca5d3',
+                      abstract='Salagadoola menchicka boola bibbidi-bobbidi-boo.',
+                      tags='One, Two, Three')
 
-        self.assertEqualOrLog(request.status, 'published')
+            self.assertEqualOrLog(request.status, 'published')
 
-    def test_dubmit_deposit_nolicense(self):
+    def test_submit_deposit_nolicense(self):
         paper = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
 
         request = self.dry_deposit(paper,
@@ -93,5 +95,7 @@ class OSFProtocolTest(ProtocolTest):
                   tags='Sword, King, Wizard')
 
         self.assertEqualOrLog(request.status, 'published')
+
+
 
 
