@@ -84,4 +84,14 @@ class OSFProtocolTest(ProtocolTest):
 
         self.assertEqualOrLog(request.status, 'published')
 
+    def test_dubmit_deposit_nolicense(self):
+        paper = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
+
+        request = self.dry_deposit(paper,
+                  license= '58fd62fcda3e2400012ca5cc',
+                  abstract='Higitus Figitus Migitus Mum.',
+                  tags='Sword, King, Wizard')
+
+        self.assertEqualOrLog(request.status, 'published')
+
 

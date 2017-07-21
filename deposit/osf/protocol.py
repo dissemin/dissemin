@@ -228,6 +228,9 @@ class OSFProtocol(RepositoryProtocol):
         self.log("### Updating License")
         self.log(str(license_req.status_code))
         self.log(license_req.text)
+        self.log("==========")
+        self.log("License ID: {}  | NO_LICENSES_ID: {}".format(self.license_id, NO_LICENSE_ID))
+        self.log("==========")
 
     def create_preprint(self, pf_path, records):
         # == API.OSF.IO ==
@@ -406,9 +409,9 @@ class OSFProtocol(RepositoryProtocol):
         self.log(preprint_public_url)
         self.log(preprint_public_pdf)
 
-        deposit_result.identifier = projet_public_url
-        deposit_result.splash_url = preprint_public_url
-        deposit_result.pdf_url = preprint_public_pdf
+        # deposit_result.identifier = projet_public_url
+        # deposit_result.splash_url = preprint_public_url
+        # deposit_result.pdf_url = preprint_public_pdf
 
         return (deposit_result)
 
