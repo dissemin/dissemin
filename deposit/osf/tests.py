@@ -26,6 +26,7 @@ from __future__ import unicode_literals
 from papers.models import Paper
 from deposit.tests import ProtocolTest
 from deposit.osf.protocol import OSFProtocol
+from deposit.protocol import DepositError
 # from deposit.forms import FormWithAbstract
 # from deposit.osf.forms import OSFForm
 # lorem_ipsum contains a sample abstract you can reuse in your test case
@@ -75,16 +76,14 @@ class OSFProtocolTest(ProtocolTest):
         self.assertEqual(tags_list, ['One', 'Two', 'Three'])
 
     def test_submit_deposit(self):
-        self.repo.api_key = None
-        with self.assertRaises(self.repo.api_key):
-            paper = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
+        paper = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
 
-            request = self.dry_deposit(paper,
-                      license='58fd62fcda3e2400012ca5d3',
-                      abstract='Salagadoola menchicka boola bibbidi-bobbidi-boo.',
-                      tags='One, Two, Three')
+        request = self.dry_deposit(paper,
+                  license='58fd62fcda3e2400012ca5d3',
+                  abstract='Salagadoola menchicka boola bibbidi-bobbidi-boo.',
+                  tags='One, Two, Three')
 
-            self.assertEqualOrLog(request.status, 'published')
+        self.assertEqualOrLog(request.status, 'published')
 
     def test_submit_deposit_nolicense(self):
         paper = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
@@ -95,6 +94,20 @@ class OSFProtocolTest(ProtocolTest):
                   tags='Sword, King, Wizard')
 
         self.assertEqualOrLog(request.status, 'published')
+
+    def test_submit_deposit_notoken(self):
+        self.repo.api_key = None
+        self.assertRaises(DepositError(), self.repo.api_key)
+        # self.repo.api_key = None
+        # with self.assertRaises(DepositError()):
+        #     paper = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
+
+            # request = self.dry_deposit(paper,
+            #           license='58fd62fcda3e2400012ca5d3',
+            #           abstract='Salagadoola menchicka boola bibbidi-bobbidi-boo.',
+            #           tags='One, Two, Three')
+
+            # self.assertEqualOrLog(request.status, 'published')
 
 
 
