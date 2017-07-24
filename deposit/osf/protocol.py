@@ -50,9 +50,9 @@ class OSFProtocol(RepositoryProtocol):
         self.api_url = repository.endpoint
         if not self.api_url:
             # == API.OSF.IO ==
-            # self.api_url = "https://api.osf.io/v2/nodes/"
+            # self.api_url = "https://api.osf.io/"
             # == TEST-API.OSF.IO ==
-            self.api_url = "https://test-api.osf.io/v2/nodes/"
+            self.api_url = "https://test-api.osf.io/"
 
     def init_deposit(self, paper, user):
         """
@@ -147,8 +147,9 @@ class OSFProtocol(RepositoryProtocol):
         self.log("### Creating the metadata")
         self.log(json.dumps(min_node_structure, indent=4)+'')
         self.log(json.dumps(authors, indent=4)+'')
+        request_url = self.api_url + "v2/nodes/"
 
-        osf_response = requests.post(self.api_url,
+        osf_response = requests.post(request_url,
                                      data=json.dumps(min_node_structure),
                                      headers=self.headers)
         self.log_request(osf_response, 201,
@@ -160,7 +161,7 @@ class OSFProtocol(RepositoryProtocol):
     # Get OSF Storage link to later upload
     # the Preprint PDF file.
     def get_newnode_osf_storage(self, node_id):
-        self.storage_url = self.api_url + "{}/files/".format(self.node_id)
+        self.storage_url = self.api_url + "v2/nodes/{}/files/".format(self.node_id)
         osf_storage_data = requests.get(self.storage_url,
                                         headers=self.headers)
         self.log_request(osf_storage_data, 200,
@@ -171,7 +172,7 @@ class OSFProtocol(RepositoryProtocol):
 
     # Add contributors.
     def add_contributors(self, authors):
-        contrib_url = self.api_url + self.node_id + "/contributors/"
+        contrib_url = self.api_url + "v2/nodes/" + self.node_id + "/contributors/"
 
         for author in authors:
             contrib = self.translate_author(author, "contrib")
@@ -182,11 +183,11 @@ class OSFProtocol(RepositoryProtocol):
                              __('Unable to add contributors.'))
 
     def create_license(self, authors):
-        node_url = self.api_url + self.node_id + "/"
+        node_url = self.api_url + "v2/nodes/" + self.node_id + "/"
         # == API.OSF.IO ==
         # license_url = "https://api.osf.io/v2/licenses/"
         # == TEST-API.OSF.IO ==
-        license_url = "https://test-api.osf.io/v2/licenses/"
+        license_url = self.api_url + "v2/licenses/"
         license_url += (self.license_id + "/")
         authors_list = [self.translate_author(author)
                         for author in authors]
@@ -236,7 +237,7 @@ class OSFProtocol(RepositoryProtocol):
         # == API.OSF.IO ==
         # preprint_node_url = "https://api.osf.io/v2/preprints/"
         # == TEST-API.OSF.IO  ==
-        preprint_node_url = "https://test-api.osf.io/v2/preprints/"
+        preprint_node_url = self.api_url + "v2/preprints/"
         records = records
         paper_doi = self.get_key_data('doi', records)
         pf_path = pf_path
@@ -292,11 +293,11 @@ class OSFProtocol(RepositoryProtocol):
                         for author in authors]
         # == API.OSF.IO ==
         # preprint_node_url = (
-        #     self.api_url + "{}/preprints/".format(self.node_id)
+        #     self.api_url + "v2/preprints/{}/".format(preprint_id)
         # )
         # == TEST-API.OSF.IO ==
         preprint_node_url = (
-            "https://test-api.osf.io/v2/preprints/{}/".format(preprint_id)
+            self.api_url + "v2/preprints/{}/".format(preprint_id)
         )
 
         updated_preprint_struc = {
