@@ -34,7 +34,6 @@ from deposit.protocol import DepositError
 class OSFProtocolTest(ProtocolTest):
     @classmethod
     def setUpClass(self):
-        # if ''
         super(OSFProtocolTest, self).setUpClass()
 
         # Fill here the details of your test repository
@@ -43,6 +42,7 @@ class OSFProtocolTest(ProtocolTest):
 
         # Now we set up the protocol for the tests
         self.proto = OSFProtocol(self.repo)
+        self.repo_without_token = OSFProtocol(self.repo)
 
         # Fill here the details of the metadata form
         # for your repository
@@ -65,15 +65,15 @@ class OSFProtocolTest(ProtocolTest):
     def test_create_tags(self):
         # Init deposit with default paper and user
         self.proto.init_deposit(self.p1, self.user)
-        tags = " One,   Two  ,  ,Three "
+        tags = " Witch,   Broom  ,  ,Bed "
         form = self.proto.get_bound_form(
                         {"license": "58fd62fcda3e2400012ca5d3",
-                         "abstract": "Supercalifragilisticexpialidocious.",
+                         "abstract": "Treguna Mekoides and Trecorum Satis Dee.",
                          "tags": tags})
 
         self.assertTrue(form.is_valid())
         tags_list = self.proto.create_tags(form)
-        self.assertEqual(tags_list, ['One', 'Two', 'Three'])
+        self.assertEqual(tags_list, ['Witch', 'Broom', 'Bed'])
 
     def test_submit_deposit(self):
         paper = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
@@ -81,7 +81,7 @@ class OSFProtocolTest(ProtocolTest):
         request = self.dry_deposit(paper,
                   license='58fd62fcda3e2400012ca5d3',
                   abstract='Salagadoola menchicka boola bibbidi-bobbidi-boo.',
-                  tags='One, Two, Three')
+                  tags='Pumpkin, Mouse, Godmother')
 
         self.assertEqualOrLog(request.status, 'published')
 
@@ -97,17 +97,15 @@ class OSFProtocolTest(ProtocolTest):
 
     def test_submit_deposit_notoken(self):
         self.repo.api_key = None
-        self.assertRaises(DepositError(), self.repo.api_key)
-        # self.repo.api_key = None
-        # with self.assertRaises(DepositError()):
-        #     paper = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
+        paper = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
+        record = paper.oairecords[0]
+        record.description = "Itchita copita Melaka mystica."
+        record.keywords = "Salem, Black cat, Winnie"
+        record.save()
+        self.repo_without_token.init_deposit(paper, self.user)
 
-            # request = self.dry_deposit(paper,
-            #           license='58fd62fcda3e2400012ca5d3',
-            #           abstract='Salagadoola menchicka boola bibbidi-bobbidi-boo.',
-            #           tags='One, Two, Three')
-
-            # self.assertEqualOrLog(request.status, 'published')
+        with self.assertRaises(DepositError):
+            self.repo_without_token.submit_deposit(pdf=None, form=None)
 
 
 
