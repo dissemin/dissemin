@@ -24,6 +24,7 @@ from __future__ import unicode_literals
 # from mock import Mock
 
 from papers.models import Paper
+from deposit.models import Repository
 from deposit.tests import ProtocolTest
 from deposit.osf.protocol import OSFProtocol
 from deposit.protocol import DepositError
@@ -42,7 +43,6 @@ class OSFProtocolTest(ProtocolTest):
 
         # Now we set up the protocol for the tests
         self.proto = OSFProtocol(self.repo)
-        self.repo_without_token = OSFProtocol(self.repo)
 
         # Fill here the details of the metadata form
         # for your repository
@@ -96,16 +96,22 @@ class OSFProtocolTest(ProtocolTest):
         self.assertEqualOrLog(request.status, 'published')
 
     def test_submit_deposit_notoken(self):
-        self.repo.api_key = None
-        paper = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
-        record = paper.oairecords[0]
-        record.description = "Itchita copita Melaka mystica."
-        record.keywords = "Salem, Black cat, Winnie"
-        record.save()
-        self.repo_without_token.init_deposit(paper, self.user)
+        no_token = Repository()
+        no_token.api_key = None
+        repo_without_token = OSFProtocol(no_token)
+
+        data = {'onbehalfof': ''}
+        repo_without_token.form = repo_without_token.get_bound_form(data)
+        repo_without_token.form.is_valid()
+        # paper = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
+        # record = paper.oairecords[0]
+        # record.description = "Itchita copita Melaka mystica."
+        # record.keywords = "Salem, Black cat, Winnie"
+        # record.save()
+        # self.repo_without_token.init_deposit(paper, self.user)
 
         with self.assertRaises(DepositError):
-            self.repo_without_token.submit_deposit(pdf=None, form=None)
+            repo_without_token.submit_deposit(pdf=None, form=None)
 
 
 
