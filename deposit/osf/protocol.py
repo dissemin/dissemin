@@ -49,16 +49,6 @@ class OSFProtocol(RepositoryProtocol):
         # We let the interface define another API endpoint (sandbox…).
         self.api_url = repository.endpoint
 
-        # Uncomment this to use the OSF sandbox
-        osf_sandbox_url = "https://test-api.osf.io/"
-        if self.api_url != osf_sandbox_url:
-            self.api_url = osf_sandbox_url
-        # if not self.api_url:
-        #     # == API.OSF.IO ==
-        #     # self.api_url = "https://api.osf.io/"
-        #     # == TEST-API.OSF.IO ==
-        #     self.api_url = "https://test-api.osf.io/"
-
     def init_deposit(self, paper, user):
         """
         Refuse deposit when the paper is already on OSF.
