@@ -32,11 +32,6 @@ from deposit.osf.forms import OSFForm
 from django.utils.translation import ugettext as __
 from papers.utils import kill_html
 
-# == APIS.OSF.IO ==
-# NO_LICENSE_ID = "563c1cf88c5e4a3877f9e965"
-# == TEST-API.OSF.IO ==
-NO_LICENSE_ID = "58fd62fcda3e2400012ca5cc"
-
 
 class OSFProtocol(RepositoryProtocol):
     """
@@ -48,6 +43,11 @@ class OSFProtocol(RepositoryProtocol):
         super(OSFProtocol, self).__init__(repository, **kwargs)
         # We let the interface define another API endpoint (sandbox…).
         self.api_url = repository.endpoint
+
+        if self.api_url == "https://test-api.osf.io/":
+            self.no_license_id = "58fd62fcda3e2400012ca5cc"
+        else:
+            self.no_license_id = "563c1cf88c5e4a3877f9e965"
 
     def init_deposit(self, paper, user):
         """
@@ -203,7 +203,7 @@ class OSFProtocol(RepositoryProtocol):
                 }
             }
 
-        if self.license_id == NO_LICENSE_ID:
+        if self.license_id == self.no_license_id:
             license_structure['data']['attributes'] = {
                 "node_license": {
                     "year": self.pub_date,
@@ -225,7 +225,7 @@ class OSFProtocol(RepositoryProtocol):
         self.log(str(license_req.status_code))
         self.log(license_req.text)
         self.log("==========")
-        self.log("License ID: {}  | NO_LICENSES_ID: {}".format(self.license_id, NO_LICENSE_ID))
+        self.log("License ID: {}  | NO_LICENSES_ID: {}".format(self.license_id, self.no_license_id))
         self.log("==========")
 
     def create_preprint(self, pf_path, records):
@@ -311,7 +311,7 @@ class OSFProtocol(RepositoryProtocol):
             }
         }
 
-        if self.license_id == NO_LICENSE_ID:
+        if self.license_id == self.no_license_id:
             updated_preprint_struc['data']['attributes'] = {
                 "license_record": {
                     "year": self.pub_date,
