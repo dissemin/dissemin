@@ -156,7 +156,9 @@ class OSFProtocol(RepositoryProtocol):
     # Get OSF Storage link to later upload
     # the Preprint PDF file.
     def get_newnode_osf_storage(self, node_id):
-        self.storage_url = self.api_url + "v2/nodes/{}/files/".format(self.node_id)
+        self.storage_url = (
+            self.api_url + "v2/nodes/{}/files/".format(self.node_id)
+        )
         osf_storage_data = requests.get(self.storage_url,
                                         headers=self.headers)
         self.log_request(osf_storage_data, 200,
@@ -165,9 +167,11 @@ class OSFProtocol(RepositoryProtocol):
         osf_storage_data = osf_storage_data.json()
         return osf_storage_data
 
-    # Add contributors.
     def add_contributors(self, authors):
-        contrib_url = self.api_url + "v2/nodes/" + self.node_id + "/contributors/"
+        contrib_url = (
+            self.api_url + "v2/nodes/" +
+            self.node_id + "/contributors/"
+        )
 
         for author in authors:
             contrib = self.translate_author(author, "contrib")
@@ -179,9 +183,6 @@ class OSFProtocol(RepositoryProtocol):
 
     def create_license(self, authors):
         node_url = self.api_url + "v2/nodes/" + self.node_id + "/"
-        # == API.OSF.IO ==
-        # license_url = "https://api.osf.io/v2/licenses/"
-        # == TEST-API.OSF.IO ==
         license_url = self.api_url + "v2/licenses/"
         license_url += (self.license_id + "/")
         authors_list = [self.translate_author(author)
@@ -225,13 +226,11 @@ class OSFProtocol(RepositoryProtocol):
         self.log(str(license_req.status_code))
         self.log(license_req.text)
         self.log("==========")
-        self.log("License ID: {}  | NO_LICENSES_ID: {}".format(self.license_id, self.no_license_id))
+        self.log("self.license_id: {}  | ".format(self.license_id) +
+                 "self.no_license_id: {}".format(self.no_license_id))
         self.log("==========")
 
     def create_preprint(self, pf_path, records):
-        # == API.OSF.IO ==
-        # preprint_node_url = "https://api.osf.io/v2/preprints/"
-        # == TEST-API.OSF.IO  ==
         preprint_node_url = self.api_url + "v2/preprints/"
         records = records
         paper_doi = self.get_key_data('doi', records)
@@ -286,11 +285,7 @@ class OSFProtocol(RepositoryProtocol):
     def update_preprint_license(self, authors, preprint_id):
         authors_list = [self.translate_author(author)
                         for author in authors]
-        # == API.OSF.IO ==
-        # preprint_node_url = (
-        #     self.api_url + "v2/preprints/{}/".format(preprint_id)
-        # )
-        # == TEST-API.OSF.IO ==
+
         preprint_node_url = (
             self.api_url + "v2/preprints/{}/".format(preprint_id)
         )
@@ -359,7 +354,6 @@ class OSFProtocol(RepositoryProtocol):
         }
 
         # Creating the metadata.
-        # osf_response = self.create_node(abstract, tags, authors)
         self.create_node(abstract, tags, authors)
 
         self.log("### Creating a new depository")
@@ -390,21 +384,23 @@ class OSFProtocol(RepositoryProtocol):
         # Create the Preprint.
         osf_preprint_response = self.create_preprint(pf_path, records)
         preprint_id = osf_preprint_response['data']['id']
-        # == API.OSF.IO ==
-        # preprint_public_url = "https://osf.io/" + preprint_id
-        # == TEST-API.OSF.IO ==
-        preprint_public_url = "https://test.osf.io/" + preprint_id
+
+        if self.api_url == "https://test-api.osf.io/":
+            preprint_public_url = "https://test.osf.io/" + preprint_id
+        else:
+            preprint_public_url = "https://osf.io" + preprint_id
+
         preprint_public_pdf = preprint_public_url + "/download"
 
         self.update_preprint_license(authors, preprint_id)
 
-        # == API.OSF.IO ==
-        # projet_public_url = "https://osf.io/" + self.node_id
-        # == TEST-API.OSF.IO ==
-        projet_public_url = "https://test.osf.io/" + self.node_id
+        if self.api_url == "https://test-api.osf.io/":
+            project_public_url = "https://test.osf.io/" + self.node_id
+        else:
+            project_public_url = "https://osf.io/" + self.node_id
 
         self.log("### FINAL DEBUG")
-        self.log(projet_public_url)
+        self.log(project_public_url)
         self.log(preprint_public_url)
         self.log(preprint_public_pdf)
 
