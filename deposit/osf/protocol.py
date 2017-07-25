@@ -48,11 +48,16 @@ class OSFProtocol(RepositoryProtocol):
         super(OSFProtocol, self).__init__(repository, **kwargs)
         # We let the interface define another API endpoint (sandbox…).
         self.api_url = repository.endpoint
-        if not self.api_url:
-            # == API.OSF.IO ==
-            # self.api_url = "https://api.osf.io/"
-            # == TEST-API.OSF.IO ==
-            self.api_url = "https://test-api.osf.io/"
+
+        # Uncomment this to use the OSF sandbox
+        osf_sandbox_url = "https://test-api.osf.io/"
+        if self.api_url != osf_sandbox_url:
+            self.api_url = osf_sandbox_url
+        # if not self.api_url:
+        #     # == API.OSF.IO ==
+        #     # self.api_url = "https://api.osf.io/"
+        #     # == TEST-API.OSF.IO ==
+        #     self.api_url = "https://test-api.osf.io/"
 
     def init_deposit(self, paper, user):
         """
@@ -340,6 +345,9 @@ class OSFProtocol(RepositoryProtocol):
 
     # MAIN METHOD
     def submit_deposit(self, pdf, form, dry_run=False):
+        if not self.api_url:
+            raise DepositError(__("No Repository endpoint provided."))
+
         if self.repository.api_key is None:
             raise DepositError(__("No OSF token provided."))
 
