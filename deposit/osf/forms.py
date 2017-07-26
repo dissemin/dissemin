@@ -25,7 +25,7 @@ from django import forms
 from django.utils.translation import ugettext as __
 
 # LICENSES ID FOR TEST-API.OSF.IO
-OSF_LICENSES_CHOICES = [
+OSF_SANDBOX_LICENSES_CHOICES = [
     ('58fd62fcda3e2400012ca5d3',
         __('Creative Commons CC0 1.0 Universal')),
     ('58fd62fcda3e2400012ca5d1',
@@ -34,20 +34,20 @@ OSF_LICENSES_CHOICES = [
         __('No license')),
 ]
 
-# ORIGINAL LICENCES ID
-# OSF_LICENSES_CHOICES = [
-#     ('563c1cf88c5e4a3877f9e96c',
-#         __('Creative Commons CC0 1.0 Universal')),
-#     ('563c1cf88c5e4a3877f9e96a',
-#         __('Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)')),
-#     ('563c1cf88c5e4a3877f9e965',
-#         __('No license')),
-# ]
+#ORIGINAL LICENCES ID
+OSF_LICENSES_CHOICES = [
+    ('563c1cf88c5e4a3877f9e96c',
+        __('Creative Commons CC0 1.0 Universal')),
+    ('563c1cf88c5e4a3877f9e96a',
+        __('Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)')),
+    ('563c1cf88c5e4a3877f9e965',
+        __('No license')),
+]
 
 # OSF_DISCIPLINES_CHOICES = [
-#     ('architecture',
+#     ('584240d954be81056ceca9e5',
 #         __('Architecture')),
-#     ('arts_humanities',
+#     ('584240da54be81056cecaab4',
 #         __('Arts and Humanities')),
 #     ('business',
 #         __('Business')),
@@ -66,20 +66,30 @@ OSF_LICENSES_CHOICES = [
 # ]
 
 class OSFForm(FormWithAbstract):
-    license = forms.ChoiceField(
-        label=__('License'),
-        choices=OSF_LICENSES_CHOICES,
-        initial='563c1cf88c5e4a3877f9e965',
-        widget=forms.RadioSelect(attrs={'class': 'radio-margin'}))
+    def __init__(self, paper, endpoint, **kwargs):
+        super(OSFForm, self).__init__(endpoint, **kwargs)
 
-    abstract = forms.CharField(
-        min_length=20,
-        widget=forms.Textarea)
+        self.endpoint = endpoint
 
-    tags = forms.CharField( help_text="Separate tags with commas")
+        if self.endpoint == "https://test-api.osf.io/":
+            self.choices = OSF_SANDBOX_LICENSES_CHOICES
+        else:
+            self.choices = OSF_LICENSES_CHOICES
 
-    # discipline = forms.MultipleChoiceField(
-    #     required=False,
-    #     widget=forms.CheckboxSelectMultiple,
-    #     choices=OSF_DISCIPLINES_CHOICES,
-    # )
+        license = forms.ChoiceField(
+            label=__('License'),
+            choices=self.choices,
+            initial='563c1cf88c5e4a3877f9e965',
+            widget=forms.RadioSelect(attrs={'class': 'radio-margin'}))
+
+        abstract = forms.CharField(
+            min_length=20,
+            widget=forms.Textarea)
+
+        tags = forms.CharField(help_text="Separate tags with commas")
+
+        # discipline = forms.MultipleChoiceField(
+        #     required=False,
+        #     widget=forms.CheckboxSelectMultiple(),
+        #     choices=OSF_DISCIPLINES_CHOICES,
+        # )
