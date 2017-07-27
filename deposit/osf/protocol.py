@@ -469,7 +469,7 @@ class OSFProtocol(RepositoryProtocol):
                                              data=json.dumps(public_project),
                                              headers=self.headers)
 
-            self.log_request(publishing_req, 200,
+            self.log_request(project_pub_req, 200,
                              __('Unable to make the project public.'))
 
             self.log("### Make the preprint public")
