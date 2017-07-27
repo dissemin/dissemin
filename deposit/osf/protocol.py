@@ -160,6 +160,7 @@ class OSFProtocol(RepositoryProtocol):
                     "title": self.paper.title,
                     "category": "project",
                     "description": abstract,
+                    "public": "false",
                     "tags": tags
                 }
             }
@@ -208,7 +209,7 @@ class OSFProtocol(RepositoryProtocol):
                              __('Unable to add contributors.'))
 
     def create_license(self, authors):
-        node_url = self.api_url + "v2/nodes/" + self.node_id + "/"
+        self.node_url = self.api_url + "v2/nodes/" + self.node_id + "/"
         license_url = self.api_url + "v2/licenses/"
         license_url += (self.license_id + "/")
         authors_list = [self.translate_author(author)
@@ -247,7 +248,7 @@ class OSFProtocol(RepositoryProtocol):
         self.log("Requested License ID: " + self.license_id)
         # ===============
 
-        license_req = requests.patch(node_url,
+        license_req = requests.patch(self.node_url,
                                      data=json.dumps(license_structure),
                                      headers=self.headers)
         self.log_request(license_req, 200,
@@ -317,7 +318,7 @@ class OSFProtocol(RepositoryProtocol):
         authors_list = [self.translate_author(author)
                         for author in authors]
 
-        preprint_node_url = (
+        self.preprint_node_url = (
             self.api_url + "v2/preprints/{}/".format(preprint_id)
         )
 
@@ -350,7 +351,7 @@ class OSFProtocol(RepositoryProtocol):
             }
 
         self.log("### Updating the Preprint License")
-        license_req = requests.patch(preprint_node_url,
+        license_req = requests.patch(self.preprint_node_url,
                                      data=json.dumps(updated_preprint_struc),
                                      headers=self.headers)
         self.log_request(license_req, 200,
@@ -435,10 +436,54 @@ class OSFProtocol(RepositoryProtocol):
         self.log(preprint_public_url)
         self.log(preprint_public_pdf)
 
+        if dry_run:
+            self.log("### Deleting the deposition")
+            deletion_req = requests.delete(self.node_url,
+                                           headers=self.headers)
+            self.log_request(deletion_req, 204,
+                             __('Unable to delete the project.'))
+            self.log(str(deletion_req.status_code))
+            self.log(deletion_req.text)
+        else:
+            self.log("### Publishing the deposition")
+            public_project = {
+                "data": {
+                    "type": "nodes",
+                    "id": self.node_id,
+                    "attributes": {
+                        "public": "true"
+                    }
+                }
+            }
+
+            public_preprint = {
+                "data": {
+                    "id": preprint_id,
+                    "attributes": {
+                        "is_published": "true"
+                    }
+                }
+            }
+            self.log("### Make the project public")
+            project_pub_req = requests.patch(self.node_url,
+                                             data=json.dumps(public_project),
+                                             headers=self.headers)
+
+            self.log_request(publishing_req, 200,
+                             __('Unable to make the project public.'))
+
+            self.log("### Make the preprint public")
+            preprint_pub_req = requests.patch(self.preprint_node_url,
+                                              data=json.dumps(public_preprint),
+                                              headers=self.headers)
+
+            self.log_request(preprint_pub_req, 200,
+                             __('Unable to make the project public.'))
+
         # deposit_result.identifier = projet_public_url
         # deposit_result.splash_url = preprint_public_url
         # deposit_result.pdf_url = preprint_public_pdf
 
-        return (deposit_result)
+        return deposit_result
 
 protocol_registry.register(OSFProtocol)
