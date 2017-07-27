@@ -66,30 +66,28 @@ OSF_LICENSES_CHOICES = [
 # ]
 
 class OSFForm(FormWithAbstract):
+    license = forms.ChoiceField(
+        label=__('License'),
+        choices=OSF_SANDBOX_LICENSES_CHOICES,
+        initial='563c1cf88c5e4a3877f9e965',
+        widget=forms.RadioSelect(attrs={'class': 'radio-margin'}))
+
+    abstract = forms.CharField(
+        min_length=20,
+        widget=forms.Textarea)
+
+    tags = forms.CharField(help_text="Separate tags with commas")
+
     def __init__(self, paper, endpoint, **kwargs):
         super(OSFForm, self).__init__(endpoint, **kwargs)
 
         self.endpoint = endpoint
 
-        if self.endpoint == "https://test-api.osf.io/":
-            self.choices = OSF_SANDBOX_LICENSES_CHOICES
-        else:
-            self.choices = OSF_LICENSES_CHOICES
+        if self.endpoint == "https://api.osf.io/":
+            self.fields['license'].choices = OSF_LICENSES_CHOICES
 
-        license = forms.ChoiceField(
-            label=__('License'),
-            choices=self.choices,
-            initial='563c1cf88c5e4a3877f9e965',
-            widget=forms.RadioSelect(attrs={'class': 'radio-margin'}))
-
-        abstract = forms.CharField(
-            min_length=20,
-            widget=forms.Textarea)
-
-        tags = forms.CharField(help_text="Separate tags with commas")
-
-        # discipline = forms.MultipleChoiceField(
-        #     required=False,
-        #     widget=forms.CheckboxSelectMultiple(),
-        #     choices=OSF_DISCIPLINES_CHOICES,
-        # )
+    # discipline = forms.MultipleChoiceField(
+    #     required=False,
+    #     widget=forms.CheckboxSelectMultiple(),
+    #     choices=OSF_DISCIPLINES_CHOICES,
+    # )

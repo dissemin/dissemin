@@ -242,6 +242,11 @@ class OSFProtocol(RepositoryProtocol):
                 "node_license": {}
             }
 
+        # ==== DEBUG ====
+        self.log("### License Debug")
+        self.log("Requested License ID: " + self.license_id)
+        # ===============
+
         license_req = requests.patch(node_url,
                                      data=json.dumps(license_structure),
                                      headers=self.headers)
