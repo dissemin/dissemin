@@ -40,6 +40,7 @@ class OSFProtocolTest(ProtocolTest):
         # Fill here the details of your test repository
         self.repo.api_key = 'eJMuNoeFvKTIC5A6POx1nrmsiQoMZqwh'
         self.repo.api_key += 'CgeEXwDgggYWDeR96Y9KbypgVGNuCY5r9qVgan'
+        self.repo.endpoint = "https://test-api.osf.io/"
 
         # Now we set up the protocol for the tests
         self.proto = OSFProtocol(self.repo)
