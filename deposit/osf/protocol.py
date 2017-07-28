@@ -105,6 +105,20 @@ class OSFProtocol(RepositoryProtocol):
 
         return tags
 
+    def create_subjects(self, form):
+        # s = form.cleaned_data['subjects']
+        # subjects = [[{"text": subject, "id": id}] for id, subject in s.items()]
+        s = form.cleaned_data['subjects']
+        subjects = filter(lambda c: c[0] in s, form.fields['subjects'].choices)
+        subjects = dict(subjects)
+        subjects = dict((value, key) for key, value in subjects.iteritems())
+        subjects = [[{"text": subject, "id": id}] for subject, id in subjects.items()]
+
+        self.log("### What are the subjects?")
+        self.log(str(subjects))
+
+        return subjects
+
     # Look for a specific subkey.
     def get_key_data(self, key, records):
         for item in records:
@@ -262,9 +276,10 @@ class OSFProtocol(RepositoryProtocol):
                  "self.no_license_id: {}".format(self.no_license_id))
         self.log("==========")
 
-    def create_preprint(self, pf_path, records):
+    def create_preprint(self, pf_path, records, subjects):
         preprint_node_url = self.api_url + "v2/preprints/"
         records = records
+        subjects = subjects
         paper_doi = self.get_key_data('doi', records)
         pf_path = pf_path
 
@@ -276,7 +291,8 @@ class OSFProtocol(RepositoryProtocol):
         min_preprint_structure = {
             "data": {
                 "attributes": {
-                    "doi": paper_doi
+                    "doi": paper_doi,
+                    "subjects": subjects
                 },
                 "relationships": {
                     "node": {
@@ -302,6 +318,7 @@ class OSFProtocol(RepositoryProtocol):
         }
 
         self.log("### Creating Preprint")
+        self.log(json.dumps(min_preprint_structure, indent=4)+'')
         osf_response = requests.post(preprint_node_url,
                                      data=json.dumps(min_preprint_structure),
                                      headers=self.headers)
@@ -376,6 +393,7 @@ class OSFProtocol(RepositoryProtocol):
         records = paper['records']
         self.pub_date = paper['date'][:-6]
         tags = self.create_tags(form)
+        subjects = self.create_subjects(form)
 
         deposit_result = DepositResult()
 
@@ -414,7 +432,7 @@ class OSFProtocol(RepositoryProtocol):
         self.create_license(authors)
 
         # Create the Preprint.
-        osf_preprint_response = self.create_preprint(pf_path, records)
+        osf_preprint_response = self.create_preprint(pf_path, records, subjects)
         preprint_id = osf_preprint_response['data']['id']
 
         if self.api_url == "https://test-api.osf.io/":
@@ -436,49 +454,49 @@ class OSFProtocol(RepositoryProtocol):
         self.log(preprint_public_url)
         self.log(preprint_public_pdf)
 
-        if dry_run:
-            self.log("### Deleting the deposition")
-            deletion_req = requests.delete(self.node_url,
-                                           headers=self.headers)
-            self.log_request(deletion_req, 204,
-                             __('Unable to delete the project.'))
-            self.log(str(deletion_req.status_code))
-            self.log(deletion_req.text)
-        else:
-            self.log("### Publishing the deposition")
-            public_project = {
-                "data": {
-                    "type": "nodes",
-                    "id": self.node_id,
-                    "attributes": {
-                        "public": "true"
-                    }
-                }
-            }
+        # if dry_run:
+        #     self.log("### Deleting the deposition")
+        #     deletion_req = requests.delete(self.node_url,
+        #                                    headers=self.headers)
+        #     self.log_request(deletion_req, 204,
+        #                      __('Unable to delete the project.'))
+        #     self.log(str(deletion_req.status_code))
+        #     self.log(deletion_req.text)
+        # else:
+        #     self.log("### Publishing the deposition")
+        #     public_project = {
+        #         "data": {
+        #             "type": "nodes",
+        #             "id": self.node_id,
+        #             "attributes": {
+        #                 "public": "true"
+        #             }
+        #         }
+        #     }
 
-            public_preprint = {
-                "data": {
-                    "id": preprint_id,
-                    "attributes": {
-                        "is_published": "true"
-                    }
-                }
-            }
-            self.log("### Make the project public")
-            project_pub_req = requests.patch(self.node_url,
-                                             data=json.dumps(public_project),
-                                             headers=self.headers)
+        #     public_preprint = {
+        #         "data": {
+        #             "id": preprint_id,
+        #             "attributes": {
+        #                 "is_published": "true"
+        #             }
+        #         }
+        #     }
+        #     self.log("### Make the project public")
+        #     project_pub_req = requests.patch(self.node_url,
+        #                                      data=json.dumps(public_project),
+        #                                      headers=self.headers)
 
-            self.log_request(project_pub_req, 200,
-                             __('Unable to make the project public.'))
+        #     self.log_request(project_pub_req, 200,
+        #                      __('Unable to make the project public.'))
 
-            self.log("### Make the preprint public")
-            preprint_pub_req = requests.patch(self.preprint_node_url,
-                                              data=json.dumps(public_preprint),
-                                              headers=self.headers)
+        #     self.log("### Make the preprint public")
+        #     preprint_pub_req = requests.patch(self.preprint_node_url,
+        #                                       data=json.dumps(public_preprint),
+        #                                       headers=self.headers)
 
-            self.log_request(preprint_pub_req, 200,
-                             __('Unable to make the project public.'))
+        #     self.log_request(preprint_pub_req, 200,
+        #                      __('Unable to make the project public.'))
 
         # deposit_result.identifier = projet_public_url
         # deposit_result.splash_url = preprint_public_url

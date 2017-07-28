@@ -44,26 +44,52 @@ OSF_LICENSES_CHOICES = [
         __('No license')),
 ]
 
-# OSF_DISCIPLINES_CHOICES = [
-#     ('584240d954be81056ceca9e5',
-#         __('Architecture')),
-#     ('584240da54be81056cecaab4',
-#         __('Arts and Humanities')),
-#     ('business',
-#         __('Business')),
-#     ('education',
-#         __('Education')),
-#     ('law',
-#         __('Law')),
-#     ('life_sciences',
-#         __('Life Sciences')),
-#     ('medicine',
-#         __('Medicine and Health Sciences')),
-#     ('phy_sci_maths',
-#         __('Physical Sciences and Mathematics')),
-#     ('social',
-#         __('Social and Behavioral Sciences')),
-# ]
+# SUBJECTS ID FOR TEST-API.OSF.IO
+OSF_SANDBOX_SUBJECTS_CHOICES = [
+    ('59552883da3e240081ba32ab',
+        __('Architecture')),
+    ('59552881da3e240081ba3203',
+        __('Arts and Humanities')),
+    ('59552881da3e240081ba3207',
+        __('Business')),
+    ('59552883da3e240081ba3289',
+        __('Education')),
+    ('59552884da3e240081ba32de',
+        __('Engineering')),
+    ('59552881da3e240081ba31ee',
+        __('Law')),
+    ('59552881da3e240081ba3210',
+        __('Life Sciences')),
+    ('59552881da3e240081ba3231',
+        __('Medicine and Health Sciences')),
+    ('59552883da3e240081ba32aa',
+        __('Physical Sciences and Mathematics')),
+    ('59552882da3e240081ba327a',
+        __('Social and Behavioral Sciences')),
+]
+
+OSF_SUBJECTS_CHOICES = [
+    ('584240d954be81056ceca9e5',
+        __('Architecture')),
+    ('584240da54be81056cecaab4',
+        __('Arts and Humanities')),
+    ('584240d954be81056ceca84d',
+        __('Business')),
+    ('584240da54be81056cecaae5',
+        __('Education')),
+    ('584240da54be81056cecaca9',
+        __('Engineering')),
+    ('584240db54be81056cecacd3',
+        __('Law')),
+    ('584240da54be81056cecaab0',
+        __('Life Sciences')),
+    ('584240da54be81056cecaaaa',
+        __('Medicine and Health Sciences')),
+    ('584240d954be81056ceca9a1',
+        __('Physical Sciences and Mathematics')),
+    ('584240da54be81056cecac48',
+        __('Social and Behavioral Sciences')),
+]
 
 class OSFForm(FormWithAbstract):
     license = forms.ChoiceField(
@@ -78,6 +104,12 @@ class OSFForm(FormWithAbstract):
 
     tags = forms.CharField(help_text="Separate tags with commas")
 
+    subjects = forms.MultipleChoiceField(
+        required=False,
+        widget=forms.CheckboxSelectMultiple(),
+        choices=OSF_SANDBOX_SUBJECTS_CHOICES,
+    )
+
     def __init__(self, paper, endpoint, **kwargs):
         super(OSFForm, self).__init__(endpoint, **kwargs)
 
@@ -85,9 +117,4 @@ class OSFForm(FormWithAbstract):
 
         if self.endpoint == "https://api.osf.io/":
             self.fields['license'].choices = OSF_LICENSES_CHOICES
-
-    # discipline = forms.MultipleChoiceField(
-    #     required=False,
-    #     widget=forms.CheckboxSelectMultiple(),
-    #     choices=OSF_DISCIPLINES_CHOICES,
-    # )
+            self.fields['subjects'].choises = OSF_SUBJECTS_CHOICES
