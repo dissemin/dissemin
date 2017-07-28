@@ -46,6 +46,8 @@ from publishers.models import AliasPublisher
 from publishers.models import Publisher
 from datetime import datetime
 from elasticsearch.helpers import bulk
+from elasticsearch.exceptions import ConnectionTimeout
+from time import sleep
 import haystack
 from haystack.exceptions import SkipDocument
 from haystack.constants import ID
@@ -101,7 +103,14 @@ def update_index_for_model(model, batch_size=256, batches_per_commit=10, firstpk
             except SkipDocument:
                 continue
 
-        bulk(backend.conn, prepped_docs, index=backend.index_name, doc_type='modelresult')
+        documents_sent = False
+        while not documents_sent:
+            try:
+                bulk(backend.conn, prepped_docs, index=backend.index_name, doc_type='modelresult')
+                documents_sent = True
+            except ConnectionTimeout as e:
+                sleep(30)
+
         indexed += len(prepped_docs)
         if batch_number % batches_per_commit == 0:
             backend.conn.indices.refresh(index=backend.index_name)
