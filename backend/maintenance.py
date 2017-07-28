@@ -109,6 +109,8 @@ def update_index_for_model(model, batch_size=256, batches_per_commit=10, firstpk
                 bulk(backend.conn, prepped_docs, index=backend.index_name, doc_type='modelresult')
                 documents_sent = True
             except ConnectionTimeout as e:
+                print(e)
+                print('retrying...')
                 sleep(30)
 
         indexed += len(prepped_docs)
