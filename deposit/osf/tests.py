@@ -28,6 +28,7 @@ from deposit.models import Repository
 from deposit.tests import ProtocolTest
 from deposit.osf.protocol import OSFProtocol
 from deposit.protocol import DepositError
+from django.test import TestCase
 # from deposit.forms import FormWithAbstract
 # from deposit.osf.forms import OSFForm
 # lorem_ipsum contains a sample abstract you can reuse in your test case
@@ -114,6 +115,25 @@ class OSFProtocolTest(ProtocolTest):
         with self.assertRaises(DepositError):
             repo_without_token.submit_deposit(pdf=None, form=None)
 
+    def test_form_with_no_subject(self):
+        """
+            Submit a preprint with no subject selected,
+            which is a problem if we want to make it public.
+        """
+        paper = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
+        self.proto.init_deposit(paper, self.user)
 
+        # These are the initial data. No subject given.
+        data = self.proto.get_form_initial_data()
+        form_fields = {'licence': '563c1cf88c5e4a3877f9e965',
+                       'abstract': 'This is a fake abstract.',
+                       'tags': 'One, Two, Three, Four',
+                       'subjects': []}
+        data.update(form_fields)
 
+        form = self.proto.get_bound_form(data)
+        self.assertFieldOutput(MultipleChoiceField,
+                               {['584240da54be81056cecaca9']:['584240da54be81056cecaca9']},
+                               {['']:['At least one subject is required.']})
+        self.assertFalse(form.is_valid())
 

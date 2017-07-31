@@ -109,10 +109,12 @@ class OSFProtocol(RepositoryProtocol):
         # s = form.cleaned_data['subjects']
         # subjects = [[{"text": subject, "id": id}] for id, subject in s.items()]
         s = form.cleaned_data['subjects']
-        subjects = filter(lambda c: c[0] in s, form.fields['subjects'].choices)
-        subjects = dict(subjects)
-        subjects = dict((value, key) for key, value in subjects.iteritems())
-        subjects = [[{"text": subject, "id": id}] for subject, id in subjects.items()]
+        ## subjects = filter(lambda c: c[0] in s, form.fields['subjects'].choices)
+        # subjects = dict(subjects)
+        # subjects = dict((value, key) for key, value in subjects.iteritems())
+        # subjects = [[{"text": subject, "id": id}] for subject, id in subjects.items()]
+        my_dict = dict(form.fields['subjects'].choices)
+        subjects = [[{"text": my_dict[id], "id": id}] for id in s]
 
         self.log("### What are the subjects?")
         self.log(str(subjects))
