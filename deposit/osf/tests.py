@@ -137,5 +137,6 @@ class OSFProtocolTest(ProtocolTest):
         #                        {['']:['At least one subject is required.']})
         self.assertEqual(form.has_error('subjects',code=None), True)
         print(form.errors['subjects'])
+        self.assertEqual(form.errors['subjects'], ['At least one subject is required.'])
         self.assertFalse(form.is_valid())
 
