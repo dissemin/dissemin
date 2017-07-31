@@ -132,8 +132,10 @@ class OSFProtocolTest(ProtocolTest):
         data.update(form_fields)
 
         form = self.proto.get_bound_form(data)
-        self.assertFieldOutput(MultipleChoiceField,
-                               {['584240da54be81056cecaca9']:['584240da54be81056cecaca9']},
-                               {['']:['At least one subject is required.']})
+        # self.assertFieldOutput(MultipleChoiceField,
+        #                        {['584240da54be81056cecaca9']:['584240da54be81056cecaca9']},
+        #                        {['']:['At least one subject is required.']})
+        self.assertEqual(form.has_error('subjects',code=None), True)
+        print(form.errors['subjects'])
         self.assertFalse(form.is_valid())
 
