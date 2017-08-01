@@ -105,9 +105,9 @@ class OSFForm(FormWithAbstract):
     tags = forms.CharField(help_text="Separate tags with commas")
 
     subjects = forms.MultipleChoiceField(
-        required=True,
+        # required=True,
         widget=forms.CheckboxSelectMultiple(),
-        error_messages={'required': 'At least one subject is required.'},
+        # error_messages={'required': 'At least one subject is required.'},
         choices=OSF_SANDBOX_SUBJECTS_CHOICES
     )
 
