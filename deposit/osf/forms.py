@@ -15,9 +15,9 @@
 # GNU Affero General Public License for more details.
 #
 # You should have received a copy of the GNU Affero General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-
+# along with this program; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+#
 from __future__ import unicode_literals
 
 from deposit.forms import FormWithAbstract
@@ -29,17 +29,19 @@ OSF_SANDBOX_LICENSES_CHOICES = [
     ('58fd62fcda3e2400012ca5d3',
         __('Creative Commons CC0 1.0 Universal')),
     ('58fd62fcda3e2400012ca5d1',
-        __('Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)')),
+        __('Creative Commons CC-By ' +
+            'Attribution 4.0 International (CC BY 4.0)')),
     ('58fd62fcda3e2400012ca5cc',
         __('No license')),
 ]
 
-#ORIGINAL LICENCES ID
+# ORIGINAL LICENCES ID
 OSF_LICENSES_CHOICES = [
     ('563c1cf88c5e4a3877f9e96c',
         __('Creative Commons CC0 1.0 Universal')),
     ('563c1cf88c5e4a3877f9e96a',
-        __('Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)')),
+        __('Creative Commons CC-By ' +
+            'Attribution 4.0 International (CC BY 4.0)')),
     ('563c1cf88c5e4a3877f9e965',
         __('No license')),
 ]
@@ -91,6 +93,7 @@ OSF_SUBJECTS_CHOICES = [
         __('Social and Behavioral Sciences')),
 ]
 
+
 class OSFForm(FormWithAbstract):
     license = forms.ChoiceField(
         label=__('License'),
@@ -105,9 +108,9 @@ class OSFForm(FormWithAbstract):
     tags = forms.CharField(help_text="Separate tags with commas")
 
     subjects = forms.MultipleChoiceField(
-        # required=True,
+        required=True,
         widget=forms.CheckboxSelectMultiple(),
-        # error_messages={'required': 'At least one subject is required.'},
+        error_messages={'required': 'At least one subject is required.'},
         choices=OSF_SANDBOX_SUBJECTS_CHOICES
     )
 

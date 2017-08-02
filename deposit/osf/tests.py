@@ -15,8 +15,8 @@
 # GNU Affero General Public License for more details.
 #
 # You should have received a copy of the GNU Affero General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+# along with this program; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 from __future__ import unicode_literals
 
@@ -28,10 +28,7 @@ from deposit.models import Repository
 from deposit.tests import ProtocolTest
 from deposit.osf.protocol import OSFProtocol
 from deposit.protocol import DepositError
-from django.test import TestCase
-# from deposit.forms import FormWithAbstract
-# from deposit.osf.forms import OSFForm
-# lorem_ipsum contains a sample abstract you can reuse in your test case
+
 
 class OSFProtocolTest(ProtocolTest):
     @classmethod
@@ -50,7 +47,7 @@ class OSFProtocolTest(ProtocolTest):
         # for your repository
         data = {'onbehalfof': ''}
         self.form = self.proto.get_bound_form(data)
-        self.form.is_valid() # this validates our sample data
+        self.form.is_valid()  # this validates our sample data
 
     def test_get_form_initial_data(self):
         paper = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
@@ -70,7 +67,7 @@ class OSFProtocolTest(ProtocolTest):
         tags = " Witch,   Broom  ,  ,Bed "
         form = self.proto.get_bound_form(
                         {"license": "58fd62fcda3e2400012ca5d3",
-                         "abstract": "Treguna Mekoides and Trecorum Satis Dee.",
+                         "abstract": "Treguna Mekoides Trecorum Satis Dee.",
                          "tags": tags})
 
         self.assertTrue(form.is_valid())
@@ -80,7 +77,8 @@ class OSFProtocolTest(ProtocolTest):
     def test_submit_deposit(self):
         paper = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
 
-        request = self.dry_deposit(paper,
+        request = self.dry_deposit(
+                  paper,
                   license='58fd62fcda3e2400012ca5d3',
                   abstract='Salagadoola menchicka boola bibbidi-bobbidi-boo.',
                   tags='Pumpkin, Mouse, Godmother')
@@ -90,8 +88,9 @@ class OSFProtocolTest(ProtocolTest):
     def test_submit_deposit_nolicense(self):
         paper = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
 
-        request = self.dry_deposit(paper,
-                  license= '58fd62fcda3e2400012ca5cc',
+        request = self.dry_deposit(
+                  paper,
+                  license='58fd62fcda3e2400012ca5cc',
                   abstract='Higitus Figitus Migitus Mum.',
                   tags='Sword, King, Wizard')
 
@@ -135,8 +134,8 @@ class OSFProtocolTest(ProtocolTest):
         # self.assertFieldOutput(MultipleChoiceField,
         #                        {['584240da54be81056cecaca9']:['584240da54be81056cecaca9']},
         #                        {['']:['At least one subject is required.']})
-        self.assertEqual(form.has_error('subjects',code=None), True)
+        self.assertEqual(form.has_error('subjects', code=None), True)
         print(form.errors['subjects'])
-        self.assertEqual(form.errors['subjects'], ['At least one subject is required.'])
+        self.assertEqual(form.errors['subjects'],
+                         ['At least one subject is required.'])
         self.assertFalse(form.is_valid())
-

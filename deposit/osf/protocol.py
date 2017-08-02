@@ -35,8 +35,8 @@ from papers.utils import kill_html
 
 class OSFProtocol(RepositoryProtocol):
     """
-    A protocol to submit using the OSF REST API.  """
-
+    A protocol to submit using the OSF REST API.
+    """
     form_class = OSFForm
 
     def __init__(self, repository, **kwargs):
@@ -106,19 +106,7 @@ class OSFProtocol(RepositoryProtocol):
         return tags
 
     def create_subjects(self, form):
-        # s = form.cleaned_data['subjects']
-        # subjects = [[{"text": subject, "id": id}] for id, subject in s.items()]
-        # =======================================
         s = form.cleaned_data['subjects']
-        # =======================================
-        ## subjects = filter(lambda c: c[0] in s, form.fields['subjects'].choices)
-        # subjects = dict(subjects)
-        # subjects = dict((value, key) for key, value in subjects.iteritems())
-        # subjects = [[{"text": subject, "id": id}] for subject, id in subjects.items()]
-        # ========================================================
-        # my_dict = dict(form.fields['subjects'].choices)
-        # subjects = [[{"text": my_dict[id], "id": id}] for id in s]
-        # ========================================================
         subjects = [[id] for id in s]
 
         self.log("### What are the subjects?")
@@ -439,7 +427,9 @@ class OSFProtocol(RepositoryProtocol):
         self.create_license(authors)
 
         # Create the Preprint.
-        osf_preprint_response = self.create_preprint(pf_path, records, subjects)
+        osf_preprint_response = (
+            self.create_preprint(pf_path, records, subjects)
+        )
         preprint_id = osf_preprint_response['data']['id']
 
         if self.api_url == "https://test-api.osf.io/":
@@ -505,9 +495,9 @@ class OSFProtocol(RepositoryProtocol):
             self.log_request(preprint_pub_req, 200,
                              __('Unable to make the project public.'))
 
-        # deposit_result.identifier = projet_public_url
-        # deposit_result.splash_url = preprint_public_url
-        # deposit_result.pdf_url = preprint_public_pdf
+        deposit_result.identifier = projet_public_url
+        deposit_result.splash_url = preprint_public_url
+        deposit_result.pdf_url = preprint_public_pdf
 
         return deposit_result
 
