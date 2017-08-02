@@ -433,22 +433,22 @@ class OSFProtocol(RepositoryProtocol):
         preprint_id = osf_preprint_response['data']['id']
 
         if self.api_url == "https://test-api.osf.io/":
-            preprint_public_url = "https://test.osf.io/" + preprint_id
+            self.preprint_public_url = "https://test.osf.io/" + preprint_id
         else:
-            preprint_public_url = "https://osf.io" + preprint_id
+            self.preprint_public_url = "https://osf.io" + preprint_id
 
-        preprint_public_pdf = preprint_public_url + "/download"
+        preprint_public_pdf = self.preprint_public_url + "/download"
 
         self.update_preprint_license(authors, preprint_id)
 
         if self.api_url == "https://test-api.osf.io/":
-            project_public_url = "https://test.osf.io/" + self.node_id
+            self.project_public_url = "https://test.osf.io/" + self.node_id
         else:
-            project_public_url = "https://osf.io/" + self.node_id
+            self.project_public_url = "https://osf.io/" + self.node_id
 
         self.log("### FINAL DEBUG")
-        self.log(project_public_url)
-        self.log(preprint_public_url)
+        self.log(self.project_public_url)
+        self.log(self.preprint_public_url)
         self.log(preprint_public_pdf)
 
         if dry_run:
@@ -495,8 +495,8 @@ class OSFProtocol(RepositoryProtocol):
             self.log_request(preprint_pub_req, 200,
                              __('Unable to make the project public.'))
 
-        deposit_result.identifier = projet_public_url
-        deposit_result.splash_url = preprint_public_url
+        deposit_result.identifier = self.projet_public_url
+        deposit_result.splash_url = self.preprint_public_url
         deposit_result.pdf_url = preprint_public_pdf
 
         return deposit_result
