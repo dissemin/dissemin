@@ -495,7 +495,7 @@ class OSFProtocol(RepositoryProtocol):
             self.log_request(preprint_pub_req, 200,
                              __('Unable to make the project public.'))
 
-        deposit_result.identifier = self.projet_public_url
+        deposit_result.identifier = self.project_public_url
         deposit_result.splash_url = self.preprint_public_url
         deposit_result.pdf_url = preprint_public_pdf
 

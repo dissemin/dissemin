@@ -68,6 +68,7 @@ class OSFProtocolTest(ProtocolTest):
         form = self.proto.get_bound_form(
                         {"license": "58fd62fcda3e2400012ca5d3",
                          "abstract": "Treguna Mekoides Trecorum Satis Dee.",
+                         "subjects": ['59552884da3e240081ba32de'],
                          "tags": tags})
 
         self.assertTrue(form.is_valid())
@@ -81,6 +82,7 @@ class OSFProtocolTest(ProtocolTest):
                   paper,
                   license='58fd62fcda3e2400012ca5d3',
                   abstract='Salagadoola menchicka boola bibbidi-bobbidi-boo.',
+                  subjects=['59552884da3e240081ba32de'],
                   tags='Pumpkin, Mouse, Godmother')
 
         self.assertEqualOrLog(request.status, 'published')
@@ -92,6 +94,7 @@ class OSFProtocolTest(ProtocolTest):
                   paper,
                   license='58fd62fcda3e2400012ca5cc',
                   abstract='Higitus Figitus Migitus Mum.',
+                  subjects=['59552884da3e240081ba32de'],
                   tags='Sword, King, Wizard')
 
         self.assertEqualOrLog(request.status, 'published')
@@ -104,12 +107,6 @@ class OSFProtocolTest(ProtocolTest):
         data = {'onbehalfof': ''}
         repo_without_token.form = repo_without_token.get_bound_form(data)
         repo_without_token.form.is_valid()
-        # paper = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
-        # record = paper.oairecords[0]
-        # record.description = "Itchita copita Melaka mystica."
-        # record.keywords = "Salem, Black cat, Winnie"
-        # record.save()
-        # self.repo_without_token.init_deposit(paper, self.user)
 
         with self.assertRaises(DepositError):
             repo_without_token.submit_deposit(pdf=None, form=None)
@@ -131,9 +128,6 @@ class OSFProtocolTest(ProtocolTest):
         data.update(form_fields)
 
         form = self.proto.get_bound_form(data)
-        # self.assertFieldOutput(MultipleChoiceField,
-        #                        {['584240da54be81056cecaca9']:['584240da54be81056cecaca9']},
-        #                        {['']:['At least one subject is required.']})
         self.assertEqual(form.has_error('subjects', code=None), True)
         print(form.errors['subjects'])
         self.assertEqual(form.errors['subjects'],
