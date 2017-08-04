@@ -81,7 +81,7 @@ class OrcidProfile(object):
         except (requests.exceptions.HTTPError, ValueError):
             raise MetadataSourceException(
                 'The ORCiD %s could not be found' % orcid_id)
-        except (ValueError, TypeError):
+        except TypeError:
             raise MetadataSourceException(
                 'The ORCiD %s returned invalid JSON.' % orcid_id)
 

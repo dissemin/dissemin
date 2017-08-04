@@ -25,11 +25,6 @@ import unittest
 
 from backend.crossref import CrossRefAPI
 from backend.maintenance import cleanup_names
-from backend.maintenance import cleanup_researchers
-from backend.maintenance import create_publisher_aliases
-from backend.maintenance import recompute_publisher_policies
-from backend.maintenance import refetch_containers
-from backend.maintenance import refetch_publishers
 from backend.maintenance import update_paper_statuses
 from backend.orcid import affiliate_author_with_orcid
 from backend.orcid import OrcidPaperSource
@@ -334,21 +329,6 @@ class MaintenanceTest(PrefilledTest):
     def setUpClass(self):
         super(MaintenanceTest, self).setUpClass()
         self.cr_api = CrossRefAPI()
-
-    def test_create_publisher_aliases(self):
-        create_publisher_aliases()
-
-    def test_refetch_publishers(self):
-        refetch_publishers()
-
-    def test_refetch_containers(self):
-        refetch_containers()
-
-    def test_recompute_publisher_policies(self):
-        recompute_publisher_policies()
-
-    def test_cleanup_researchers(self):
-        cleanup_researchers()
 
     def test_cleanup_names(self):
         n = Name.lookup_name(('Anaruic', 'Leclescuantebrste'))
