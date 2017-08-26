@@ -435,7 +435,7 @@ class OSFProtocol(RepositoryProtocol):
         if self.api_url == "https://test-api.osf.io/":
             self.preprint_public_url = "https://test.osf.io/" + preprint_id
         else:
-            self.preprint_public_url = "https://osf.io" + preprint_id
+            self.preprint_public_url = "https://osf.io/" + preprint_id
 
         preprint_public_pdf = self.preprint_public_url + "/download"
 
