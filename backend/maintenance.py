@@ -196,8 +196,11 @@ def cleanup_paper_researcher_ids():
                 rid = author['researcher_id']
                 if (rid is not None and rid not in researcher_ids):
                     p.authors_list[i]['researcher_id'] = None
-                modified = True
+                    modified = True
             if modified:
                 batch.append(p)
-        print "Updating %d papers" % len(batch)
-        bulk_update(batch)
+        if batch:
+            print "Updating {} papers, from {}".format(len(batch), curid)
+            bulk_update(batch)
+        else:
+            print(curid)
