@@ -31,7 +31,7 @@ from deposit.registry import protocol_registry
 from deposit.osf.forms import OSFForm
 from django.utils.translation import ugettext as __
 from papers.utils import kill_html
-
+from papers.utils import extract_domain
 
 class OSFProtocol(RepositoryProtocol):
     """
@@ -54,6 +54,10 @@ class OSFProtocol(RepositoryProtocol):
         Refuse deposit when the paper is already on OSF.
         """
         super(OSFProtocol, self).init_deposit(paper, user)
+        for r in paper.oairecords:
+            domain = extract_domain(r.splash_url)
+            if domain.endswith('osf.io'):
+                return False
         return (True)
 
     def get_form_initial_data(self):
