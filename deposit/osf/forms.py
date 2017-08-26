@@ -121,4 +121,4 @@ class OSFForm(FormWithAbstract):
 
         if self.endpoint == "https://api.osf.io/":
             self.fields['license'].choices = OSF_LICENSES_CHOICES
-            self.fields['subjects'].choises = OSF_SUBJECTS_CHOICES
+            self.fields['subjects'].choices = OSF_SUBJECTS_CHOICES
