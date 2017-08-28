@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-08 06:38+0200\n"
-"PO-Revision-Date: 2017-07-09 00:35+0200\n"
+"POT-Creation-Date: 2017-08-28 12:31+0200\n"
+"PO-Revision-Date: 2017-08-28 12:31+0200\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 2.0.2\n"
+"X-Generator: Poedit 2.0.3\n"
 
 #: deposit/forms.py:42
 msgid "Upload type"
@@ -29,6 +29,22 @@ msgstr "Dépôt"
 #: deposit/forms.py:120
 msgid "No preferred repository"
 msgstr "Pas de dépôt préféré"
+
+#: deposit/hal/forms.py:43
+msgid "Scientific field"
+msgstr "Domaine de recherche"
+
+#: deposit/hal/forms.py:48
+msgid "Depositing author"
+msgstr "Auteur responsable du dépôt"
+
+#: deposit/hal/forms.py:55
+msgid "Affiliation"
+msgstr "Affiliation"
+
+#: deposit/hal/forms.py:77
+msgid "Save"
+msgstr "Enregistrer"
 
 #: deposit/models.py:38
 msgid "Failed"
@@ -225,11 +241,51 @@ msgstr "Impossible d'envoyer ce papier vers le dépôt indiqué."
 msgid "Access to the PDF was denied."
 msgstr "L'accès au PDF a été refusé."
 
-#: dissemin/settings/common.py:262
+#: deposit/zenodo/protocol.py:72
+msgid "No Zenodo API key provided."
+msgstr "Aucune clé pour l'API Zenodo n'a été fournie."
+
+#: deposit/zenodo/protocol.py:81
+msgid ""
+"This happens when Zenodo has hiccups. Please try again in a few minutes or "
+"use a different repository in the menu above."
+msgstr ""
+"Le problème est sans doute du côté de Zenodo. Vous pouvez réessayer dans "
+"quelques minutes, ou bien choisir un autre dépôt dans le menu ci-dessus."
+
+#: deposit/zenodo/protocol.py:82
+msgid "Unable to authenticate to Zenodo."
+msgstr "Échec de l'authentification avec Zenodo."
+
+#: deposit/zenodo/protocol.py:89
+msgid "Unable to create a new deposition on Zenodo."
+msgstr "Échec de la création d'une nouvelle déposition dans Zenodo."
+
+#: deposit/zenodo/protocol.py:101
+msgid "Unable to transfer the document to Zenodo."
+msgstr "Échec du transfert du document vers Zenodo."
+
+#: deposit/zenodo/protocol.py:111
+msgid ""
+"No abstract is available for this paper but Zenodo requires one. Please "
+"provide it using the metadata panel."
+msgstr ""
+"Cet article n'a pas de résumé, mais Zenodo en demande un. Merci de fournir "
+"un résumé à l'aide du panneau \"Métadonnées\"."
+
+#: deposit/zenodo/protocol.py:119
+msgid "Unable to submit paper metadata to Zenodo."
+msgstr "Échec de la soumission des métadonnées de l'article à Zenodo."
+
+#: deposit/zenodo/protocol.py:135
+msgid "Unable to publish the deposition on Zenodo."
+msgstr "Échec de la publication de la déposition dans Zenodo."
+
+#: dissemin/settings/common.py:269
 msgid "English"
 msgstr "Anglais"
 
-#: dissemin/settings/common.py:263
+#: dissemin/settings/common.py:270
 msgid "French"
 msgstr "Français"
 
@@ -420,7 +476,7 @@ msgstr[1] "(%(num_total)s papiers)"
 #: papers/templates/papers/department.html:71
 #: papers/templates/papers/institution.html:48
 msgid "Researcher deleted. "
-msgstr "Chercheur supprimé."
+msgstr "Chercheur supprimé. "
 
 #: papers/templates/papers/department.html:75
 #: papers/templates/papers/institution.html:52
@@ -445,23 +501,11 @@ msgstr "Membres :"
 msgid "Home"
 msgstr "Accueil"
 
-#: papers/templates/papers/index.html:24
-msgid ""
-"<a href=\"http://dissem.in/\">dissem.in</a> is currently in public beta.  "
-"Please, let us know about any issue you might have, either on <a href="
-"\"https://github.com/dissemin/dissemin/\">Github</a> or by email at <a href="
-"\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
-msgstr ""
-"<a href=\"http://dissem.in/\">dissem.in</a> est actuellement en beta "
-"publique. N'hésitez pas à nous signaler tout problème que vous pourriez "
-"rencontrer sur <a href=\"https://github.com/dissemin/dissemin/\">Github</a> "
-"ou par e-mail à <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
-
-#: papers/templates/papers/index.html:33
+#: papers/templates/papers/index.html:23
 msgid "Welcome to dissemin"
 msgstr "Bienvenue sur dissemin"
 
-#: papers/templates/papers/index.html:36
+#: papers/templates/papers/index.html:26
 msgid ""
 "Dissemin detects papers behind pay-walls and invites their authors to upload "
 "them in one click to an open repository."
@@ -469,7 +513,7 @@ msgstr ""
 "Dissemin détecte les articles en accès payant et permet à leurs auteurs de "
 "les déposer en un clic vers une archive ouverte."
 
-#: papers/templates/papers/index.html:46
+#: papers/templates/papers/index.html:36
 #: papers/templates/papers/search.html:204
 #: papers/templates/papers/search.html:217
 #: papers/templates/papers/search.html:227
@@ -480,11 +524,11 @@ msgstr ""
 msgid "Search"
 msgstr "Recherche"
 
-#: papers/templates/papers/index.html:56
+#: papers/templates/papers/index.html:46
 msgid "Green open access"
 msgstr "Libre accès (voie verte)"
 
-#: papers/templates/papers/index.html:60
+#: papers/templates/papers/index.html:50
 msgid ""
 "Many researchers do not use their right to make their papers freely "
 "available online, in addition to the paywalled version offered by "
@@ -494,7 +538,7 @@ msgstr ""
 "sur le Web, pour compléter la version payante proposée par les éditeurs "
 "traditionnels. Pourtant, tous ne le font pas."
 
-#: papers/templates/papers/index.html:68
+#: papers/templates/papers/index.html:58
 msgid ""
 "This forces libraries to buy overpriced electronic subscriptions to "
 "journals, when they can afford them at all."
@@ -503,11 +547,11 @@ msgstr ""
 "électroniques aux journaux de recherche, ce qui grève leurs finances et "
 "limite leur offre."
 
-#: papers/templates/papers/index.html:84
+#: papers/templates/papers/index.html:74
 msgid "Open repositories"
 msgstr "Dépôts ouverts"
 
-#: papers/templates/papers/index.html:87
+#: papers/templates/papers/index.html:77
 msgid ""
 "Uploading your papers on your own webpage is not enough. Such copies are "
 "less stable and harder to find than documents uploaded to well-indexed "
@@ -518,7 +562,7 @@ msgstr ""
 "difficiles à trouver que celles qui sont déposées dans des dépôts bien "
 "indexés."
 
-#: papers/templates/papers/index.html:95
+#: papers/templates/papers/index.html:85
 msgid ""
 "Dissemin searches for copies of your papers in a large collection of open "
 "repositories and tells you which ones cannot be accessed."
@@ -611,7 +655,7 @@ msgstr "Indisponible"
 
 #: papers/templates/papers/paper.html:120
 msgid "Ask upload"
-msgstr "Demander la mise en ligne\t"
+msgstr "Demander la mise en ligne"
 
 #: papers/templates/papers/paper.html:124
 msgid "Publisher:"
@@ -662,7 +706,7 @@ msgstr ""
 "S'il manque des travaux, vous pouvez <a href=\"%(matching_papers_url)s"
 "\">chercher des travaux où le nom d'un auteur correspond</a>"
 
-#: papers/templates/papers/publiListItem.html:17
+#: papers/templates/papers/publiListItem.html:16
 #, python-format
 msgid "and %(remaining_authors)s other authors"
 msgstr "et %(remaining_authors)s autres auteurs"
@@ -824,11 +868,11 @@ msgstr ""
 
 #: papers/templatetags/statuses.py:36
 msgid "Preprints archiving policy unclear"
-msgstr "La politique concernant les prépublications est confuse."
+msgstr "La politique concernant les prépublications n'est pas claire"
 
 #: papers/templatetags/statuses.py:37
 msgid "Preprints archiving policy unknown"
-msgstr "La politique concernant les prépublications est inconnue."
+msgstr "La politique concernant les prépublications est inconnue"
 
 #: papers/templatetags/statuses.py:38
 msgid "Postprints can be archived."
@@ -1069,7 +1113,7 @@ msgstr ""
 
 #: publishers/templates/publishers/detailsPolicy.html:12
 msgid "postprint"
-msgstr "Postdocument"
+msgstr "postdocument"
 
 #: publishers/templates/publishers/detailsPolicy.html:14
 msgid "Published version:"
@@ -1100,7 +1144,7 @@ msgstr "Données fournies par"
 
 #: publishers/templates/publishers/list.html:129
 msgid "No publisher found."
-msgstr "Aucune maison d'édition trouvée"
+msgstr "Aucune maison d'édition trouvée."
 
 #: publishers/templates/publishers/policy.html:58
 msgid "Policy data provided by"
@@ -1596,7 +1640,7 @@ msgstr ""
 "maison d'édition interdit de façon générale la mise en ligne dans les "
 "dépôts. Les auteurs peuvent cependant avoir le droit de déposer leurs "
 "articles au terme d'une période d'exclusivité (embargo), ou si les agences "
-"qui financent leur recherche ont un accord avec l'éditeur. "
+"qui financent leur recherche ont un accord avec l'éditeur."
 
 #: templates/dissemin/faq.html:234
 #, python-format
@@ -1633,7 +1677,7 @@ msgstr ""
 "comme indisponible alors qu'il est en fait disponible ;</li> <li>Certains "
 "articles peuvent être indiqués comme disponibles alors qu'ils ne le sont pas "
 "vraiment (par exemple, le contenu peut avoir été supprimé) ;</li> <li>Bien "
-"d'autres problèmes techniques peuvent se produire.</li> </ul> "
+"d'autres problèmes techniques peuvent se produire.</li> </ul>"
 
 #: templates/dissemin/faq.html:258
 #, python-format
@@ -2176,7 +2220,7 @@ msgid ""
 "to a PDF file."
 msgstr ""
 "Type MIME invalide : ce lien pointe vers une page Web, il nous faut un lien "
-"direct vers un fichier PDF. "
+"direct vers un fichier PDF."
 
 #: upload/views.py:201
 msgid "Invalid SSL certificate on the remote server."
@@ -2189,6 +2233,17 @@ msgstr "URL invalide (délai de connexion expiré)."
 #: upload/views.py:205 upload/views.py:209
 msgid "Invalid URL."
 msgstr "URL invalide."
+
+#~ msgid ""
+#~ "<a href=\"http://dissem.in/\">dissem.in</a> is currently in public beta.  "
+#~ "Please, let us know about any issue you might have, either on <a href="
+#~ "\"https://github.com/dissemin/dissemin/\">Github</a> or by email at <a "
+#~ "href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
+#~ msgstr ""
+#~ "<a href=\"http://dissem.in/\">dissem.in</a> est actuellement en beta "
+#~ "publique. N'hésitez pas à nous signaler tout problème que vous pourriez "
+#~ "rencontrer sur <a href=\"https://github.com/dissemin/dissemin/\">Github</"
+#~ "a> ou par e-mail à <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
 
 #~ msgid "Biological anthropology"
 #~ msgstr "Anthropologie biologique"

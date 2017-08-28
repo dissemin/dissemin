@@ -109,7 +109,7 @@ class ZenodoProtocol(RepositoryProtocol):
         if data['metadata'].get('description', '') == '':
             self.log('No abstract found, aborting.')
             raise DepositError(_('No abstract is available for this paper but ' +
-                                  'Zenodo requires to attach one. Please use the metadata panel to provide one.'))
+                                  'Zenodo requires one. Please provide it using the metadata panel.'))
 
         # Submitting the metadata
         self.log("### Submitting the metadata")
