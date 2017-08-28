@@ -218,3 +218,12 @@ The -B option starts the scheduler for periodic tasks, the -l option sets the de
 to INFO.
 
 
+Importing papers
+~~~~~~~~~~~~~~~~
+
+When running a test instance on Dissemin on your local machine, the database
+should be preconfigured to contain some papers. However, if you would like to
+test different papers, you can easily import more papers in the database of the
+test instance by visiting ``localhost:8080/DOI`` where ``DOI`` is the DOI of the
+paper that you would like to create.
+
