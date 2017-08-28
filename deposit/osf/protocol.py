@@ -221,6 +221,30 @@ class OSFProtocol(RepositoryProtocol):
             self.log_request(contrib_response, 201,
                              __('Unable to add contributors.'))
 
+    def mask_dissemin_contributor(self):
+        """
+        Mark the dissemin account as non-bibliographic contributor,
+        so that it does not appear as author of the preprint
+        """
+        contrib_url = (
+            self.api_url + "v2/nodes/" +
+            self.node_id + "/contributors/" +
+            self.user_id + "/"
+        )
+
+        payload = {
+            "data" : {
+                "attributes" : {
+                    "bibliographic": False
+                },
+            }
+        }
+        mask_request = requests.put(contrib_url,
+            data=json.dumps(payload),
+            headers=self.headers)
+        self.log_request(mask_request, 201,
+                __('Unable to update the contributors of the paper.'))
+
     def create_license(self, authors):
         self.node_url = self.api_url + "v2/nodes/" + self.node_id + "/"
         license_url = self.api_url + "v2/licenses/"
@@ -401,6 +425,7 @@ class OSFProtocol(RepositoryProtocol):
             'Authorization': 'Bearer %s' % api_key,
             'Content-Type': 'application/vnd.api+json'
         }
+        self.user_id = self.repository.username
 
         # Creating the metadata.
         self.create_node(abstract, tags, authors)
@@ -427,6 +452,7 @@ class OSFProtocol(RepositoryProtocol):
         pf_path = primary_file_data['data']['attributes']['path'][1:]
 
         self.add_contributors(authors)
+        self.mask_dissemin_contributor()
 
         self.create_license(authors)
 
