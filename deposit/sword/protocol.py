@@ -28,7 +28,7 @@ from deposit.protocol import DepositResult
 from deposit.protocol import RepositoryProtocol
 from deposit.registry import protocol_registry
 from django.conf import settings
-from django.utils.translation import ugettext as __
+from django.utils.translation import ugettext as _
 from papers.utils import kill_html
 import sword2
 from deposit.sword.metadata import DCFormatter
@@ -42,7 +42,7 @@ class SwordProtocol(RepositoryProtocol):
 
     def get_conn(self):
         if self.repository.endpoint is None:
-            raise DepositError(__("No servicedocument provided."))
+            raise DepositError(_("No servicedocument provided."))
         return sword2.Connection(self.repository.endpoint,
                                  user_name=self.repository.username,
                                  user_pass=self.repository.password)
@@ -106,7 +106,7 @@ xml_declaration=False)
                 self.repository.username, self.repository.password)
             r = requests.post(self.repository.api_key, files=files, headers=headers,
                               auth=auth)
-            self.log_request(r, 201, __(
+            self.log_request(r, 201, _(
                 'Unable to submit the paper to the collection.'))
 
             self.log(unicode(r.text))
@@ -117,7 +117,7 @@ xml_declaration=False)
         except sword2.exceptions.HTTPResponseError as e:
             if conn is not None:
                 self.log(unicode(conn.history))
-            raise DepositError(__('Failed to connect to the SWORD server.'))
+            raise DepositError(_('Failed to connect to the SWORD server.'))
 
         return deposit_result
 

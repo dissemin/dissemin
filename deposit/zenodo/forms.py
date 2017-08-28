@@ -22,27 +22,27 @@ from __future__ import unicode_literals
 
 from deposit.forms import FormWithAbstract
 from django import forms
-from django.utils.translation import ugettext as __
+from django.utils.translation import ugettext as _
 
 ZENODO_LICENSES_CHOICES = [
    ('cc-zero',
-    __('Creative Commons CCZero (CC0)')),
+    _('Creative Commons CCZero (CC0)')),
    ('cc-by',
-    __('Creative Commons Attribution (CC-BY)')),
+    _('Creative Commons Attribution (CC-BY)')),
    ('cc-by-sa',
-    __('Creative Commons Attribution-ShareAlike (CC-BY-SA)')),
+    _('Creative Commons Attribution-ShareAlike (CC-BY-SA)')),
    ('cc-by-nc-4.0',
-    __('Creative Commons Attribution-NonCommercial (CC-BY-NC)')),
+    _('Creative Commons Attribution-NonCommercial (CC-BY-NC)')),
    ('cc-by-nd-4.0',
-    __('Creative Commons Attribution-NoDerivatives (CC-BY-ND)')),
+    _('Creative Commons Attribution-NoDerivatives (CC-BY-ND)')),
    ('other-open',
-    __('Other open license')),
+    _('Other open license')),
  ]
 
 
 class ZenodoForm(FormWithAbstract):
     license = forms.ChoiceField(
-            label=__('License'),
+            label=_('License'),
             choices=ZENODO_LICENSES_CHOICES,
             initial='other-open',
             widget=forms.RadioSelect(attrs={'class': 'radio-margin'})

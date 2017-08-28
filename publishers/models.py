@@ -28,8 +28,7 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.functional import cached_property
-from django.utils.translation import ugettext as __
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext as _
 from search import SearchQuerySet
 
 get_model = apps.get_model
@@ -77,7 +76,7 @@ class DummyPublisher(object):
         if name is not None:
             self.name = name
         else:
-            self.name = __('Unknown publisher')
+            self.name = _('Unknown publisher')
 
     def __unicode__(self):
         return self.name
