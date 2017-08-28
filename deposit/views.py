@@ -134,15 +134,19 @@ def edit_repo_preferences(request, pk):
         'repository': repo,
         'protocol': protocol,
     }
+    if not protocol:
+        raise Http404(_('This repository could not be found.'))
+
     if request.method == 'POST':
         pref_form = protocol.get_preferences_form(request.user, request.POST)
         if not pref_form:
             raise Http404(_('This repository does not have any settings.'))
-        pref_form.save()
-
-    pref_form = protocol.get_preferences_form(request.user)
-    if not pref_form:
-        raise Http404(_('This repository does not have any settings.'))
+        if pref_form.is_valid():
+            pref_form.save()
+    else:
+        pref_form = protocol.get_preferences_form(request.user)
+        if not pref_form:
+            raise Http404(_('This repository does not have any settings.'))
 
     context['preferences_form'] = pref_form
     return render(request, 'deposit/repo_preferences.html', context)

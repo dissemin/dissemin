@@ -29,7 +29,7 @@ from deposit.protocol import DepositResult
 from deposit.protocol import RepositoryProtocol
 from deposit.registry import protocol_registry
 from deposit.zenodo.forms import ZenodoForm
-from django.utils.translation import ugettext as __
+from django.utils.translation import ugettext as _
 from papers.utils import kill_html
 from papers.utils import extract_domain
 
@@ -69,7 +69,7 @@ class ZenodoProtocol(RepositoryProtocol):
 
     def submit_deposit(self, pdf, form, dry_run=False):
         if self.repository.api_key is None:
-            raise DepositError(__("No Zenodo API key provided."))
+            raise DepositError(_("No Zenodo API key provided."))
         api_key = self.repository.api_key
         api_url_with_key = self.api_url+'?access_token='+api_key
 
@@ -78,14 +78,15 @@ class ZenodoProtocol(RepositoryProtocol):
         # Checking the access token
         self.log("### Checking the access token")
         r = requests.get(api_url_with_key)
-        self.log_request(r, 200, __('Unable to authenticate to Zenodo.'))
+        hiccups_message = ' '+ _('This happens when Zenodo has hiccups. Please try again in a few minutes or use a different repository in the menu above.')
+        self.log_request(r, 200, _('Unable to authenticate to Zenodo.')+hiccups_message)
 
         # Creating a new deposition
         self.log("### Creating a new deposition")
         headers = {"Content-Type": "application/json"}
         r = requests.post(api_url_with_key, data=str("{}"), headers=headers)
-        self.log_request(r, 201, __(
-            'Unable to create a new deposition on Zenodo.'))
+        self.log_request(r, 201, _(
+            'Unable to create a new deposition on Zenodo.')+hiccups_message)
         deposition_id = r.json()['id']
         deposit_result.identifier = deposition_id
         self.log("Deposition id: %d" % deposition_id)
@@ -96,8 +97,8 @@ class ZenodoProtocol(RepositoryProtocol):
         files = {'file': open(pdf, 'rb')}
         r = requests.post(self.api_url+"/%s/files?access_token=%s" % (deposition_id, api_key),
                           data=data, files=files)
-        self.log_request(r, 201, __(
-            'Unable to transfer the document to Zenodo.'))
+        self.log_request(r, 201, _(
+            'Unable to transfer the document to Zenodo.')+hiccups_message)
 
         # Creating the metadata
         self.log("### Generating the metadata")
@@ -107,14 +108,14 @@ class ZenodoProtocol(RepositoryProtocol):
         # Check that there is an abstract
         if data['metadata'].get('description', '') == '':
             self.log('No abstract found, aborting.')
-            raise DepositError(__('No abstract is available for this paper but ' +
-                                  'Zenodo requires to attach one. Please use the metadata panel to provide one.'))
+            raise DepositError(_('No abstract is available for this paper but ' +
+                                  'Zenodo requires one. Please provide it using the metadata panel.'))
 
         # Submitting the metadata
         self.log("### Submitting the metadata")
         r = requests.put(self.api_url+"/%s?access_token=%s" % (deposition_id, api_key),
                          data=json.dumps(data), headers=headers)
-        self.log_request(r, 200, __(
+        self.log_request(r, 200, _(
             'Unable to submit paper metadata to Zenodo.'))
 
         if dry_run:
@@ -130,7 +131,7 @@ class ZenodoProtocol(RepositoryProtocol):
             self.log("### Publishing the deposition")
             r = requests.post(
                 self.api_url+"/%s/actions/publish?access_token=%s" % (deposition_id, api_key))
-            self.log_request(r, 202, __(
+            self.log_request(r, 202, _(
                 'Unable to publish the deposition on Zenodo.'))
             self.log(r.text)
 

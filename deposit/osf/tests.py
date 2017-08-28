@@ -24,6 +24,7 @@ from __future__ import unicode_literals
 # from mock import Mock
 
 from papers.models import Paper
+from papers.baremodels import BareAuthor, BareName
 from deposit.models import Repository
 from deposit.tests import ProtocolTest
 from deposit.osf.protocol import OSFProtocol
@@ -39,6 +40,9 @@ class OSFProtocolTest(ProtocolTest):
         self.repo.api_key = 'eJMuNoeFvKTIC5A6POx1nrmsiQoMZqwh'
         self.repo.api_key += 'CgeEXwDgggYWDeR96Y9KbypgVGNuCY5r9qVgan'
         self.repo.endpoint = "https://test-api.osf.io/"
+        self.repo.username = "pdcky"
+        # go to https://api.osf.io/v2/users/me/ (once logged in) to get
+        # this identifier. (it is returned as "id" in the JSON response)
 
         # Now we set up the protocol for the tests
         self.proto = OSFProtocol(self.repo)
@@ -133,3 +137,22 @@ class OSFProtocolTest(ProtocolTest):
         self.assertEqual(form.errors['subjects'],
                          ['At least one subject is required.'])
         self.assertFalse(form.is_valid())
+
+    def test_deposit_on_behalf_of(self):
+        paper = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
+        prefs = self.proto.get_preferences(self.user)
+        prefs.on_behalf_of = 'mweg3' # sample user id on the sandbox
+        # with name "Jean Saisrien"
+        paper.add_author(BareAuthor(name=BareName.create_bare('Jean', 'Saisrien')))
+        paper.save()
+
+        request = self.dry_deposit(
+                paper,
+                license='58fd62fcda3e2400012ca5d3',
+                abstract='Salagadoola menchicka boola bibbidi-bobbidi-boo.',
+                subjects=['59552884da3e240081ba32de'],
+                tags='Pumpkin, Mouse, Godmother')
+
+        self.assertEqualOrLog(request.status, 'published')
+
+
