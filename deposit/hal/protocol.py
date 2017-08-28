@@ -36,7 +36,7 @@ from deposit.protocol import DepositError
 from deposit.protocol import DepositResult
 from deposit.protocol import RepositoryProtocol
 from deposit.registry import protocol_registry
-from django.utils.translation import ugettext as __
+from django.utils.translation import ugettext as _
 from papers.name import most_similar_author
 from lxml import etree
 from papers.utils import kill_html
@@ -139,7 +139,7 @@ class HALProtocol(RepositoryProtocol):
 
     def submit_deposit(self, pdf, form, dry_run=False):
         if self.username is None or self.password is None:
-            raise DepositError(__("No HAL user credentials provided."))
+            raise DepositError(_("No HAL user credentials provided."))
 
         deposit_result = DepositResult()
 
@@ -204,14 +204,14 @@ class HALProtocol(RepositoryProtocol):
                         # already exists in HAL. See #356.
                         assert "duplicate-entry" in json.loads(verboseDescription)
                         raise DepositError(
-                            __(
+                            _(
                                 'This document is already in HAL. '
                                 'HAL refused the deposit.'
                             )
                         )
                     except (ValueError, AssertionError):
                         raise DepositError(
-                            __(
+                            _(
                                 'HAL refused the deposit (HTTP error %d): %s') %
                                 (resp.status, verboseDescription)
                             )
@@ -219,7 +219,7 @@ class HALProtocol(RepositoryProtocol):
                 self.log('Invalid XML response from HAL:')
                 self.log(xml_response.decode('utf-8'))
                 self.log('(end of the response)')
-                raise DepositError(__('HAL returned an invalid XML response'))
+                raise DepositError(_('HAL returned an invalid XML response'))
 
             receipt = receipt.getroot()
             if receipt.tag == '{http://purl.org/net/sword/error/}error':
@@ -231,13 +231,13 @@ class HALProtocol(RepositoryProtocol):
                 # OAI to us, so we could not detect that earlier in the
                 # submission
                 if verbosedesc is not None and 'duplicate-entry' in verbosedesc.text:
-                    raise DepositError(__('This paper already exists in HAL.'))
+                    raise DepositError(_('This paper already exists in HAL.'))
 
                 # Otherwise this error should not happen: let's dump
                 # everything to check later
                 self.log('Here is the XML response:{}'.format(xml_response.decode('utf-8')))
                 self.log('Here is the metadata:{}'.format(metadata.decode('utf-8')))
-                raise DepositError(__('HAL rejected the submission.'))
+                raise DepositError(_('HAL rejected the submission.'))
             else:
                 self.log(xml_response)
 
@@ -247,7 +247,7 @@ class HALProtocol(RepositoryProtocol):
             document_url = resp.getheader('location')
 
             if not deposition_id:
-                raise DepositError(__('HAL rejected the submission'))
+                raise DepositError(_('HAL rejected the submission'))
 
             self.log("Deposition id: %s" % deposition_id)
 
@@ -256,7 +256,7 @@ class HALProtocol(RepositoryProtocol):
             deposit_result.pdf_url = None
             deposit_result.status = 'pending' # HAL moderates submissions
             deposit_result.additional_info = [
-                {'label':__('Password'),
+                {'label':_('Password'),
                  'value':password},
             ]
 
@@ -283,7 +283,7 @@ class HALProtocol(RepositoryProtocol):
             self.log("Caught exception:")
             self.log(str(type(e))+': '+str(e)+'')
             self.log(traceback.format_exc())
-            raise DepositError(__(
+            raise DepositError(_(
                 'Connection to HAL failed. Please try again later.'))
 
         return deposit_result

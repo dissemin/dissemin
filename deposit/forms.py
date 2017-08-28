@@ -24,7 +24,6 @@ from deposit.models import Repository
 from deposit.models import UserPreferences
 from django import forms
 from django.core.urlresolvers import reverse
-from django.utils.translation import ugettext as __
 from django.utils.translation import ugettext_lazy as _
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
@@ -49,7 +48,7 @@ class PaperDepositForm(forms.Form):
             uploadedPDF = UploadedPDF.objects.get(pk=file_id)
         except UploadedPDF.NotFound:
             raise forms.ValidationError(
-                __("Invalid full text identifier."), code='invalid_file_id')
+                _("Invalid full text identifier."), code='invalid_file_id')
         return uploadedPDF
 
 
@@ -104,7 +103,7 @@ class FormWithAbstract(BaseMetadataForm):
     Repositories can subclass this form to add more fields.
     """
     abstract = forms.CharField(
-            label=__('Abstract'),
+            label=_('Abstract'),
             required=True,
             widget=wrap_with_prefetch_status(forms.Textarea,
                                              lambda: reverse(
@@ -138,7 +137,7 @@ class UserPreferencesForm(forms.ModelForm):
         #self.helper.label_class = 'col-lg-2'
         #self.helper.field_class = 'col-lg-8'
         self.helper.add_input(
-            Submit('submit', __('Save')),
+            Submit('submit', _('Save')),
         )
 
 
