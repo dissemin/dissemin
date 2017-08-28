@@ -28,16 +28,20 @@ from deposit.protocol import DepositError
 from deposit.protocol import DepositResult
 from deposit.protocol import RepositoryProtocol
 from deposit.registry import protocol_registry
-from deposit.osf.forms import OSFForm
-from django.utils.translation import ugettext as __
+from deposit.osf.forms import OSFForm, OSFPreferencesForm
+from deposit.osf.models import OSFDepositPreferences
+from django.utils.translation import ugettext as _
 from papers.utils import kill_html
 from papers.utils import extract_domain
+from papers.name import match_names
 
 class OSFProtocol(RepositoryProtocol):
     """
     A protocol to submit using the OSF REST API.
     """
     form_class = OSFForm
+    preferences_model = OSFDepositPreferences
+    preferences_form_class = OSFPreferencesForm
 
     def __init__(self, repository, **kwargs):
         super(OSFProtocol, self).__init__(repository, **kwargs)
@@ -134,9 +138,11 @@ class OSFProtocol(RepositoryProtocol):
     # Get a dictionary containing the first and last names
     # of the authors of a Dissemin paper,
     # ready to be implemented in an OSF Preprints data dict.
-    def translate_author(self, dissemin_authors, goal="optional"):
-        author = "{} {}".format(dissemin_authors['name']['first'],
-                                dissemin_authors['name']['last'])
+    def translate_author(self, dissemin_author, goal="optional"):
+        first_name = dissemin_author['name']['first']
+        last_name = dissemin_author['name']['last']
+        author = "{} {}".format(first_name,
+                                last_name)
 
         if goal == "contrib":
             structure = {
@@ -147,6 +153,16 @@ class OSFProtocol(RepositoryProtocol):
                     }
                 }
             }
+
+            # check if the author is the user doing the deposit
+            user_name = (self.user.first_name, self.user.last_name)
+            is_user = match_names((first_name, last_name), user_name)
+
+            if is_user and self.user_id_on_osf:
+                profile_url = (
+                    self.api_url + "v2/users/" + self.user_id_on_osf)
+                structure['links'] = {
+                    "self": profile_url }
             return structure
 
         else:
@@ -188,7 +204,7 @@ class OSFProtocol(RepositoryProtocol):
                                      data=json.dumps(min_node_structure),
                                      headers=self.headers)
         self.log_request(osf_response, 201,
-                         __('Unable to create a project on OSF.'))
+                         _('Unable to create a project on OSF.'))
 
         osf_response = osf_response.json()
         self.node_id = osf_response['data']['id']
@@ -202,7 +218,7 @@ class OSFProtocol(RepositoryProtocol):
         osf_storage_data = requests.get(self.storage_url,
                                         headers=self.headers)
         self.log_request(osf_storage_data, 200,
-                         __('Unable to authenticate to OSF.'))
+                         _('Unable to authenticate to OSF.'))
 
         osf_storage_data = osf_storage_data.json()
         return osf_storage_data
@@ -219,7 +235,7 @@ class OSFProtocol(RepositoryProtocol):
                                              data=json.dumps(contrib),
                                              headers=self.headers)
             self.log_request(contrib_response, 201,
-                             __('Unable to add contributors.'))
+                             _('Unable to add contributors.'))
 
     def mask_dissemin_contributor(self):
         """
@@ -246,7 +262,7 @@ class OSFProtocol(RepositoryProtocol):
             data=json.dumps(payload),
             headers=self.headers)
         self.log_request(mask_request, 200,
-                __('Unable to update the contributors of the paper.'))
+                _('Unable to update the contributors of the paper.'))
 
     def create_license(self, authors):
         self.node_url = self.api_url + "v2/nodes/" + self.node_id + "/"
@@ -292,7 +308,7 @@ class OSFProtocol(RepositoryProtocol):
                                      data=json.dumps(license_structure),
                                      headers=self.headers)
         self.log_request(license_req, 200,
-                         __('Unable to update license.'))
+                         _('Unable to update license.'))
 
         self.log("### Updating License")
         self.log(str(license_req.status_code))
@@ -349,7 +365,7 @@ class OSFProtocol(RepositoryProtocol):
                                      data=json.dumps(min_preprint_structure),
                                      headers=self.headers)
         self.log_request(osf_response, 201,
-                         __('Unable to create the preprint.'))
+                         _('Unable to create the preprint.'))
 
         self.log(str(osf_response.status_code))
 
@@ -398,7 +414,7 @@ class OSFProtocol(RepositoryProtocol):
                                      data=json.dumps(updated_preprint_struc),
                                      headers=self.headers)
         self.log_request(license_req, 200,
-                         __('Unable to update the Preprint License.'))
+                         _('Unable to update the preprint license.'))
 
         self.log(str(license_req.status_code))
         self.log(license_req.text)
@@ -406,13 +422,14 @@ class OSFProtocol(RepositoryProtocol):
     # MAIN METHOD
     def submit_deposit(self, pdf, form, dry_run=False):
         if not self.api_url:
-            raise DepositError(__("No Repository endpoint provided."))
+            raise DepositError(_("No Repository endpoint provided."))
 
         if self.repository.api_key is None:
-            raise DepositError(__("No OSF token provided."))
+            raise DepositError(_("No OSF token provided."))
 
         api_key = self.repository.api_key
         self.license_id = form.cleaned_data['license']
+        self.user_id_on_osf = self.get_preferences(self.user).on_behalf_of
 
         paper, abstract = self.get_primary_data(form)
         authors = paper['authors']
@@ -433,7 +450,7 @@ class OSFProtocol(RepositoryProtocol):
         # Creating the metadata.
         self.create_node(abstract, tags, authors)
 
-        self.log("### Creating a new depository")
+        self.log("### Creating a new deposition")
         osf_storage_data = self.get_newnode_osf_storage(self.node_id)
         osf_links = osf_storage_data['data']
         osf_upload_link = str(
@@ -449,13 +466,12 @@ class OSFProtocol(RepositoryProtocol):
                                          data=data,
                                          headers=self.headers)
         self.log_request(primary_file_data, 201,
-                         __('Unable to upload the PDF file.'))
+                         _('Unable to upload the PDF file.'))
         primary_file_data = primary_file_data.json()
 
         pf_path = primary_file_data['data']['attributes']['path'][1:]
 
         self.add_contributors(authors)
-        self.mask_dissemin_contributor()
 
         self.create_license(authors)
 
@@ -473,6 +489,7 @@ class OSFProtocol(RepositoryProtocol):
         preprint_public_pdf = self.preprint_public_url + "/download"
 
         self.update_preprint_license(authors, preprint_id)
+        self.mask_dissemin_contributor()
 
         if self.api_url == "https://test-api.osf.io/":
             self.project_public_url = "https://test.osf.io/" + self.node_id
@@ -489,7 +506,7 @@ class OSFProtocol(RepositoryProtocol):
             deletion_req = requests.delete(self.node_url,
                                            headers=self.headers)
             self.log_request(deletion_req, 204,
-                             __('Unable to delete the project.'))
+                             _('Unable to delete the project.'))
             self.log(str(deletion_req.status_code))
             self.log(deletion_req.text)
         else:
@@ -518,7 +535,7 @@ class OSFProtocol(RepositoryProtocol):
                                              headers=self.headers)
 
             self.log_request(project_pub_req, 200,
-                             __('Unable to make the project public.'))
+                             _('Unable to make the project public.'))
 
             self.log("### Make the preprint public")
             preprint_pub_req = requests.patch(self.preprint_node_url,
@@ -526,7 +543,7 @@ class OSFProtocol(RepositoryProtocol):
                                               headers=self.headers)
 
             self.log_request(preprint_pub_req, 200,
-                             __('Unable to make the project public.'))
+                             _('Unable to make the project public.'))
 
         deposit_result.identifier = self.project_public_url
         deposit_result.splash_url = self.preprint_public_url

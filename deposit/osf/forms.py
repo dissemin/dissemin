@@ -20,9 +20,15 @@
 #
 from __future__ import unicode_literals
 
+import re
 from deposit.forms import FormWithAbstract
 from django import forms
+from django.forms.utils import ValidationError
 from django.utils.translation import ugettext as __
+from deposit.osf.models import OSFDepositPreferences
+from django.utils.translation import ugettext as _
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
 
 # LICENSES ID FOR TEST-API.OSF.IO
 OSF_SANDBOX_LICENSES_CHOICES = [
@@ -122,3 +128,27 @@ class OSFForm(FormWithAbstract):
         if self.endpoint == "https://api.osf.io/":
             self.fields['license'].choices = OSF_LICENSES_CHOICES
             self.fields['subjects'].choices = OSF_SUBJECTS_CHOICES
+
+class OSFPreferencesForm(forms.ModelForm):
+    class Meta:
+        model = OSFDepositPreferences
+        fields = ['on_behalf_of']
+
+    def __init__(self, *args, **kwargs):
+        super(OSFPreferencesForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-lg-2'
+        self.helper.field_class = 'col-lg-8'
+        self.helper.add_input(
+            Submit('submit', _('Save')),
+        )
+
+    def clean_on_behalf_of(self):
+        r = re.compile('^[0-9a-z]+$')
+        username = self.cleaned_data['on_behalf_of']
+        if not r.match(username):
+            raise ValidationError(_('Invalid OSF identifier.'), code='invalid-osf-id')
+        return username
+
+
