@@ -78,14 +78,15 @@ class ZenodoProtocol(RepositoryProtocol):
         # Checking the access token
         self.log("### Checking the access token")
         r = requests.get(api_url_with_key)
-        self.log_request(r, 200, __('Unable to authenticate to Zenodo.'))
+        hiccups_message = ' '+ __('This happens when Zenodo has hiccups. Please try again in a few minutes or use a different repository in the menu above.')
+        self.log_request(r, 200, __('Unable to authenticate to Zenodo.')+hiccups_message)
 
         # Creating a new deposition
         self.log("### Creating a new deposition")
         headers = {"Content-Type": "application/json"}
         r = requests.post(api_url_with_key, data=str("{}"), headers=headers)
         self.log_request(r, 201, __(
-            'Unable to create a new deposition on Zenodo.'))
+            'Unable to create a new deposition on Zenodo.')+hiccups_message)
         deposition_id = r.json()['id']
         deposit_result.identifier = deposition_id
         self.log("Deposition id: %d" % deposition_id)
@@ -97,7 +98,7 @@ class ZenodoProtocol(RepositoryProtocol):
         r = requests.post(self.api_url+"/%s/files?access_token=%s" % (deposition_id, api_key),
                           data=data, files=files)
         self.log_request(r, 201, __(
-            'Unable to transfer the document to Zenodo.'))
+            'Unable to transfer the document to Zenodo.')+hiccups_message)
 
         # Creating the metadata
         self.log("### Generating the metadata")
