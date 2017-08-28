@@ -235,14 +235,17 @@ class OSFProtocol(RepositoryProtocol):
         payload = {
             "data" : {
                 "attributes" : {
-                    "bibliographic": False
+                    "bibliographic": False,
+                    "permission": "admin",
                 },
+                "type": "contributors",
+                "id": self.node_id + "-" + self.user_id,
             }
         }
         mask_request = requests.put(contrib_url,
             data=json.dumps(payload),
             headers=self.headers)
-        self.log_request(mask_request, 201,
+        self.log_request(mask_request, 200,
                 __('Unable to update the contributors of the paper.'))
 
     def create_license(self, authors):
