@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-28 20:34+0200\n"
-"PO-Revision-Date: 2017-08-28 20:43+0200\n"
+"POT-Creation-Date: 2017-08-28 21:15+0200\n"
+"PO-Revision-Date: 2017-08-28 21:20+0200\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -18,17 +18,29 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 2.0.3\n"
 
-#: deposit/forms.py:42
+#: deposit/forms.py:41
 msgid "Upload type"
 msgstr "Type de dépôt"
 
-#: deposit/forms.py:43 deposit/templates/deposit/deposits.html:40
+#: deposit/forms.py:42 deposit/templates/deposit/deposits.html:40
 msgid "Repository"
 msgstr "Dépôt"
 
-#: deposit/forms.py:120
+#: deposit/forms.py:51
+msgid "Invalid full text identifier."
+msgstr "Identifiant de texte intégral incorrect."
+
+#: deposit/forms.py:106 papers/templates/papers/paper.html:144
+msgid "Abstract"
+msgstr "Résumé"
+
+#: deposit/forms.py:119
 msgid "No preferred repository"
 msgstr "Pas de dépôt préféré"
+
+#: deposit/forms.py:140 deposit/hal/forms.py:77 deposit/osf/forms.py:143
+msgid "Save"
+msgstr "Enregistrer"
 
 #: deposit/hal/forms.py:43
 msgid "Scientific field"
@@ -42,9 +54,200 @@ msgstr "Auteur responsable du dépôt"
 msgid "Affiliation"
 msgstr "Affiliation"
 
-#: deposit/hal/forms.py:77 deposit/osf/forms.py:144
-msgid "Save"
-msgstr "Enregistrer"
+#: deposit/hal/metadata.py:36
+msgid "Chemistry"
+msgstr "Chimie"
+
+#: deposit/hal/metadata.py:37
+msgid "Computer science"
+msgstr "Informatique"
+
+#: deposit/hal/metadata.py:38
+msgid "Mathematics"
+msgstr "Mathématiques"
+
+#: deposit/hal/metadata.py:39
+msgid "Physics"
+msgstr "Physique"
+
+#: deposit/hal/metadata.py:40
+msgid "Non-linear science"
+msgstr "Science non linéaire"
+
+#: deposit/hal/metadata.py:41
+msgid "Cognitive science"
+msgstr "Sciences cognitives"
+
+#: deposit/hal/metadata.py:42
+msgid "Environment sciences"
+msgstr "Sciences de l'environnement"
+
+#: deposit/hal/metadata.py:43
+msgid "Planet and Universe"
+msgstr "Planète et Univers"
+
+#: deposit/hal/metadata.py:44
+msgid "Biological anthropology"
+msgstr "Anthropologie biologique"
+
+#: deposit/hal/metadata.py:45
+msgid "Social Anthropology and ethnology"
+msgstr "Anthropologie sociale et ethnologie"
+
+#: deposit/hal/metadata.py:46
+msgid "Archaeology and Prehistory"
+msgstr "Archéologie et Préhistoire"
+
+#: deposit/hal/metadata.py:47
+msgid "Architecture, space management"
+msgstr "Architecture, aménagement de l'espace"
+
+#: deposit/hal/metadata.py:48
+msgid "Art and art history"
+msgstr "Art et histoire de l'art"
+
+#: deposit/hal/metadata.py:49
+msgid "Classical studies"
+msgstr "Études classiques"
+
+#: deposit/hal/metadata.py:50
+msgid "Demography"
+msgstr "Démographie"
+
+#: deposit/hal/metadata.py:51 deposit/osf/forms.py:67 deposit/osf/forms.py:90
+msgid "Law"
+msgstr "Droit"
+
+#: deposit/hal/metadata.py:52
+msgid "Economies and finances"
+msgstr "Économie et finances"
+
+#: deposit/hal/metadata.py:53 deposit/osf/forms.py:63 deposit/osf/forms.py:86
+msgid "Education"
+msgstr "Éducation"
+
+#: deposit/hal/metadata.py:54
+msgid "Environmental studies"
+msgstr "Études de l'environnement"
+
+#: deposit/hal/metadata.py:55
+msgid "Gender studies"
+msgstr "Études sur le genre"
+
+#: deposit/hal/metadata.py:56
+msgid "Geography"
+msgstr "Géographie"
+
+#: deposit/hal/metadata.py:57
+msgid "Business administration"
+msgstr "Gestion et management"
+
+#: deposit/hal/metadata.py:58
+msgid "History, Philosophy and Sociology of Sciences"
+msgstr "Histoire, Philosophie et Sociologie des sciences"
+
+#: deposit/hal/metadata.py:59
+msgid "History"
+msgstr "Histoire"
+
+#: deposit/hal/metadata.py:60
+msgid "Library and information sciences"
+msgstr "Sciences de l'information et de la communication"
+
+#: deposit/hal/metadata.py:61
+msgid "Linguistics"
+msgstr "Linguistique"
+
+#: deposit/hal/metadata.py:62
+msgid "Literature"
+msgstr "Littératures"
+
+#: deposit/hal/metadata.py:63
+msgid "Cultural heritage and museology"
+msgstr "Héritage culturel et muséologie"
+
+#: deposit/hal/metadata.py:64
+msgid "Musicology and performing arts"
+msgstr "Musique, musicologie et arts de la scène"
+
+#: deposit/hal/metadata.py:65
+msgid "Philosophy"
+msgstr "Philosophie"
+
+#: deposit/hal/metadata.py:66
+msgid "Psychology"
+msgstr "Psychologie"
+
+#: deposit/hal/metadata.py:67
+msgid "Religions"
+msgstr "Religions"
+
+#: deposit/hal/metadata.py:68
+msgid "Political science"
+msgstr "Science politique"
+
+#: deposit/hal/metadata.py:69
+msgid "Sociology"
+msgstr "Sociologie"
+
+#: deposit/hal/metadata.py:70
+msgid "Methods and statistics"
+msgstr "Méthodes et statistiques"
+
+#: deposit/hal/metadata.py:71
+msgid "Life sciences"
+msgstr "Sciences du vivant"
+
+#: deposit/hal/metadata.py:72
+msgid "Engineering sciences"
+msgstr "Sciences de l'ingénieur"
+
+#: deposit/hal/metadata.py:73
+msgid "Statistics"
+msgstr "Statistiques"
+
+#: deposit/hal/metadata.py:74
+msgid "Economy and quantitative finance"
+msgstr "Économie et finance quantitative"
+
+#: deposit/hal/protocol.py:142
+msgid "No HAL user credentials provided."
+msgstr "Les informations de connexion à HAL n'ont pas été fournies."
+
+#: deposit/hal/protocol.py:208
+msgid "This document is already in HAL. HAL refused the deposit."
+msgstr ""
+"Le dépôt a été refusé par HAL parce que ce document est déjà présent dans "
+"HAL."
+
+#: deposit/hal/protocol.py:215
+#, python-format
+msgid "HAL refused the deposit (HTTP error %d): %s"
+msgstr "HAL a refusé le dépôt (erreur HTTP %d): %s"
+
+#: deposit/hal/protocol.py:222
+msgid "HAL returned an invalid XML response"
+msgstr "HAL a renvoyé une réponse XML invalide"
+
+#: deposit/hal/protocol.py:234
+msgid "This paper already exists in HAL."
+msgstr "Ce papier existe déjà dans HAL."
+
+#: deposit/hal/protocol.py:240
+msgid "HAL rejected the submission."
+msgstr "HAL a rejeté la soumission."
+
+#: deposit/hal/protocol.py:250
+msgid "HAL rejected the submission"
+msgstr "HAL a rejeté la soumission"
+
+#: deposit/hal/protocol.py:259
+msgid "Password"
+msgstr "Mot de passe"
+
+#: deposit/hal/protocol.py:287
+msgid "Connection to HAL failed. Please try again later."
+msgstr "Échec de la connexion à HAL, merci de réessayer plus tard."
 
 #: deposit/models.py:38
 msgid "Failed"
@@ -86,7 +289,55 @@ msgstr ""
 msgid "This repository will be used by default for your deposits."
 msgstr "Ce dépôt sera utilisé par défaut pour vos soumissions."
 
-#: deposit/osf/forms.py:151
+#: deposit/osf/forms.py:35 deposit/osf/forms.py:46
+msgid "Creative Commons CC0 1.0 Universal"
+msgstr "Creative Commons CC0 1.0 Universal"
+
+#: deposit/osf/forms.py:37 deposit/osf/forms.py:48
+msgid "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
+msgstr "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
+
+#: deposit/osf/forms.py:40 deposit/osf/forms.py:51
+msgid "No license"
+msgstr "Pas de licence"
+
+#: deposit/osf/forms.py:57 deposit/osf/forms.py:80
+msgid "Architecture"
+msgstr "Architecture"
+
+#: deposit/osf/forms.py:59 deposit/osf/forms.py:82
+msgid "Arts and Humanities"
+msgstr "Arts et humanités"
+
+#: deposit/osf/forms.py:61 deposit/osf/forms.py:84
+msgid "Business"
+msgstr "Business"
+
+#: deposit/osf/forms.py:65 deposit/osf/forms.py:88
+msgid "Engineering"
+msgstr "Sciences de l'ingénieur"
+
+#: deposit/osf/forms.py:69 deposit/osf/forms.py:92
+msgid "Life Sciences"
+msgstr "Sciences du vivant"
+
+#: deposit/osf/forms.py:71 deposit/osf/forms.py:94
+msgid "Medicine and Health Sciences"
+msgstr "Médecine et santé"
+
+#: deposit/osf/forms.py:73 deposit/osf/forms.py:96
+msgid "Physical Sciences and Mathematics"
+msgstr "Sciences physiques et mathématiques"
+
+#: deposit/osf/forms.py:75 deposit/osf/forms.py:98
+msgid "Social and Behavioral Sciences"
+msgstr "Sciences sociales et comportementales"
+
+#: deposit/osf/forms.py:104 deposit/zenodo/forms.py:45
+msgid "License"
+msgstr "Licence"
+
+#: deposit/osf/forms.py:150
 msgid "Invalid OSF identifier."
 msgstr "Identifiant OSF invalide."
 
@@ -151,6 +402,18 @@ msgstr "Échec de la suppression du projet."
 #: deposit/osf/protocol.py:538 deposit/osf/protocol.py:546
 msgid "Unable to make the project public."
 msgstr "Échec lors du paramétrage des droits d'accès au projet."
+
+#: deposit/sword/protocol.py:45
+msgid "No servicedocument provided."
+msgstr "Aucun servicedocument n'a été fourni."
+
+#: deposit/sword/protocol.py:110
+msgid "Unable to submit the paper to the collection."
+msgstr "Échec de la soumission de l'article à la collection."
+
+#: deposit/sword/protocol.py:120
+msgid "Failed to connect to the SWORD server."
+msgstr "Échec de la connexion au serveur SWORD."
 
 #: deposit/templates/deposit/deposits.html:10
 #: deposit/templates/deposit/deposits.html:14
@@ -310,6 +573,32 @@ msgstr "Impossible d'envoyer ce papier vers le dépôt indiqué."
 #: deposit/views.py:208
 msgid "Access to the PDF was denied."
 msgstr "L'accès au PDF a été refusé."
+
+#: deposit/zenodo/forms.py:29
+msgid "Creative Commons CCZero (CC0)"
+msgstr "Creative Commons CCZero (CC0)"
+
+#: deposit/zenodo/forms.py:31
+msgid "Creative Commons Attribution (CC-BY)"
+msgstr "Creative Commons Attribution (CC-BY)"
+
+#: deposit/zenodo/forms.py:33
+msgid "Creative Commons Attribution-ShareAlike (CC-BY-SA)"
+msgstr ""
+"Creative Commons Attribution-ShareAlike (Partage à l'identique, CC-BY-SA)"
+
+#: deposit/zenodo/forms.py:35
+msgid "Creative Commons Attribution-NonCommercial (CC-BY-NC)"
+msgstr "Creative Commons Attribution-NonCommercial (CC-BY-NC)"
+
+#: deposit/zenodo/forms.py:37
+msgid "Creative Commons Attribution-NoDerivatives (CC-BY-ND)"
+msgstr ""
+"Creative Commons Attribution-NoDerivatives (Pas de travaux dérivés, CC-BY-ND)"
+
+#: deposit/zenodo/forms.py:39
+msgid "Other open license"
+msgstr "Autre licence libre"
 
 #: deposit/zenodo/protocol.py:72
 msgid "No Zenodo API key provided."
@@ -739,10 +1028,6 @@ msgstr "Déposé."
 msgid "Deposit again"
 msgstr "Déposer à nouveau"
 
-#: papers/templates/papers/paper.html:144
-msgid "Abstract"
-msgstr "Résumé"
-
 #: papers/templates/papers/paperDetails.html:7
 msgid "Published in"
 msgstr "Publié dans"
@@ -1087,19 +1372,19 @@ msgstr "nom"
 msgid "Filter by publisher policy"
 msgstr "Filtrer selon la politique de publication"
 
-#: publishers/models.py:39
+#: publishers/models.py:38
 msgid "Open access"
 msgstr "Accès libre"
 
-#: publishers/models.py:39
+#: publishers/models.py:38
 msgid "Freely available from the publisher."
 msgstr "Librement accessible à partir de l'éditeur."
 
-#: publishers/models.py:40
+#: publishers/models.py:39
 msgid "Allows pre/post prints"
 msgstr "Pré/post-publications autorisées"
 
-#: publishers/models.py:41
+#: publishers/models.py:40
 msgid ""
 "The publisher sells copies but allows authors to deposit some version of the "
 "article in a repository."
@@ -1107,50 +1392,54 @@ msgstr ""
 "La version de l'éditeur est payante mais les auteurs ont le droit d'envoyer "
 "certaines versions de l'article dans un dépôt."
 
-#: publishers/models.py:42
+#: publishers/models.py:41
 msgid "Forbids pre/post prints"
 msgstr "Pré/post-publications interdites"
 
-#: publishers/models.py:43
+#: publishers/models.py:42
 msgid ""
 "The publisher forbids authors to deposit any version of their article online."
 msgstr ""
 "L'éditeur interdit aux auteurs de mettre en ligne leur article (quelle que "
 "soit la version)."
 
-#: publishers/models.py:44
+#: publishers/models.py:43
 msgid "Policy unclear"
 msgstr "Politique inconnue"
 
-#: publishers/models.py:45
+#: publishers/models.py:44
 msgid "For complicated policies, unknown publishers and unpublished documents."
 msgstr ""
 "Pour les politiques complexes, les éditeurs inconnus, et les documents non "
 "publiés."
 
-#: publishers/models.py:48
+#: publishers/models.py:47
 msgid "Allowed"
 msgstr "Autorisés"
 
-#: publishers/models.py:49
+#: publishers/models.py:48
 msgid "Forbidden"
 msgstr "Interdits"
 
-#: publishers/models.py:50
+#: publishers/models.py:49
 msgid "Restricted"
 msgstr "Restreints"
 
-#: publishers/models.py:51
+#: publishers/models.py:50
 msgid "Unclear"
 msgstr "Ambigü"
 
-#: publishers/models.py:52
+#: publishers/models.py:51
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: publishers/models.py:60 publishers/views.py:94
+#: publishers/models.py:59 publishers/views.py:94
 msgid "Publishers"
 msgstr "Maisons d'édition"
+
+#: publishers/models.py:79
+msgid "Unknown publisher"
+msgstr "Éditeur inconnu"
 
 #: publishers/templates/publishers/detailsPolicy.html:6
 msgid "Preprint:"
@@ -2323,87 +2612,6 @@ msgstr "URL invalide."
 #~ "rencontrer sur <a href=\"https://github.com/dissemin/dissemin/\">Github</"
 #~ "a> ou par e-mail à <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
 
-#~ msgid "Biological anthropology"
-#~ msgstr "Anthropologie biologique"
-
-#~ msgid "Social Anthropology and ethnology"
-#~ msgstr "Anthropologie sociale et ethnologie"
-
-#~ msgid "Archaeology and Prehistory"
-#~ msgstr "Archéologie et Préhistoire"
-
-#~ msgid "Architecture, space management"
-#~ msgstr "Architecture, aménagement de l'espace"
-
-#~ msgid "Art and art history"
-#~ msgstr "Art et histoire de l'art"
-
-#~ msgid "Classical studies"
-#~ msgstr "Études classiques"
-
-#~ msgid "Demography"
-#~ msgstr "Démographie"
-
-#~ msgid "Law"
-#~ msgstr "Droit"
-
-#~ msgid "Economies and finances"
-#~ msgstr "Économie et finances"
-
-#~ msgid "Education"
-#~ msgstr "Éducation"
-
-#~ msgid "Environmental studies"
-#~ msgstr "Études de l'environnement"
-
-#~ msgid "Gender studies"
-#~ msgstr "Études sur le genre"
-
-#~ msgid "Geography"
-#~ msgstr "Géographie"
-
-#~ msgid "Business administration"
-#~ msgstr "Gestion et management"
-
-#~ msgid "History, Philosophy and Sociology of Sciences"
-#~ msgstr "Histoire, Philosophie et Sociologie des sciences"
-
-#~ msgid "History"
-#~ msgstr "Histoire"
-
-#~ msgid "Library and information sciences"
-#~ msgstr "Sciences de l'information et de la communication"
-
-#~ msgid "Linguistics"
-#~ msgstr "Linguistique"
-
-#~ msgid "Literature"
-#~ msgstr "Littératures"
-
-#~ msgid "Cultural heritage and museology"
-#~ msgstr "Héritage culturel et muséologie"
-
-#~ msgid "Musicology and performing arts"
-#~ msgstr "Musique, musicologie et arts de la scène"
-
-#~ msgid "Philosophy"
-#~ msgstr "Philosophie"
-
-#~ msgid "Psychology"
-#~ msgstr "Psychologie"
-
-#~ msgid "Religions"
-#~ msgstr "Religions"
-
-#~ msgid "Political science"
-#~ msgstr "Science politique"
-
-#~ msgid "Sociology"
-#~ msgstr "Sociologie"
-
-#~ msgid "Methods and statistics"
-#~ msgstr "Méthodes et statistiques"
-
 #~ msgid "Feedback"
 #~ msgstr "Réactions"
 
@@ -2449,42 +2657,6 @@ msgstr "URL invalide."
 #~ "Cette liste nous a été fournie par l'administration. Merci de nous "
 #~ "signaler tout problème à contact@dissem.in."
 
-#~ msgid "Chemistry"
-#~ msgstr "Chimie"
-
-#~ msgid "Computer science"
-#~ msgstr "Informatique"
-
-#~ msgid "Mathematics"
-#~ msgstr "Mathématiques"
-
-#~ msgid "Physics"
-#~ msgstr "Physique"
-
-#~ msgid "Non-linear science"
-#~ msgstr "Science non linéaire"
-
-#~ msgid "Cognitive science"
-#~ msgstr "Sciences cognitives"
-
-#~ msgid "Environment sciences"
-#~ msgstr "Sciences de l'environnement"
-
-#~ msgid "Planet and Universe"
-#~ msgstr "Planète et Univers"
-
-#~ msgid "Humanities and Social Science"
-#~ msgstr "Sciences de l'Homme et Société"
-
-#~ msgid "Life sciences"
-#~ msgstr "Sciences du vivant"
-
-#~ msgid "Engineering sciences"
-#~ msgstr "Sciences de l'ingénieur"
-
-#~ msgid "Economy and quantitative finance"
-#~ msgstr "Économie et finance quantitative"
-
 #~ msgid "Other"
 #~ msgstr "Autre"
 
@@ -2496,24 +2668,6 @@ msgstr "URL invalide."
 
 #~ msgid "Document defective"
 #~ msgstr "Document défectueux"
-
-#~ msgid "Creative Commons CCZero"
-#~ msgstr "Creative Commons CCZero"
-
-#~ msgid "Creative Commons Attribution"
-#~ msgstr "Creative Commons Attribution"
-
-#~ msgid "Creative Commons Attribution-ShareAlike"
-#~ msgstr "Creative Commons Attribution-ShareAlike (Partage à l'identique)"
-
-#~ msgid "Creative Commons Attribution-NonCommercial"
-#~ msgstr "Creative Commons Attribution-NonCommercial"
-
-#~ msgid "Creative Commons Attribution-NoDerivatives"
-#~ msgstr "Creative Commons Attribution-NoDerivatives (Pas de travaux dérivés)"
-
-#~ msgid "Other open license"
-#~ msgstr "Autre licence libre"
 
 #~ msgid "First name"
 #~ msgstr "Prénom"
