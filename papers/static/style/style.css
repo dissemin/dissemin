@@ -1254,15 +1254,6 @@ a.stats_caption_line:hover {
 
 /* Login page */
 
-.regularLogin {
-    width: 48%;
-    float: right;
-    display: inline-block;
-    border-left: 1px solid #CCC;
-    padding: 5px;
-    padding-left: 7px;
-}
-
 .socialLogin {
     width: 48%;
     float: left;

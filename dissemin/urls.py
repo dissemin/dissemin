@@ -20,6 +20,10 @@
 
 
 import allauth.account.views
+import allauth.account.forms
+from django import forms
+from django.utils.translation import ugettext_lazy as _
+
 from allauth.socialaccount import providers
 from django.conf import settings
 from django.conf.urls import include
@@ -52,13 +56,22 @@ def handler500(request):
     response.status_code = 500
     return response
 
+class SignupForm(allauth.account.forms.SignupForm):
+    first_name = forms.CharField(max_length=50, label=_("First name:"))
+    last_name = forms.CharField(max_length=50, label=_("Last name:"))
 
-class LoginView(generic.TemplateView):
+class LoginView(allauth.account.views.LoginView):
     template_name = 'dissemin/login.html'
-
 
 class SandboxLoginView(allauth.account.views.LoginView):
     template_name = 'dissemin/sandbox.html'
+
+class SignupView(allauth.account.views.SignupView):
+    template_name = 'dissemin/signup.html'
+    form_class = SignupForm
+
+class PasswordResetView(allauth.account.views.PasswordResetView):
+    template_name = 'dissemin/password_reset.html'
 
 
 def logoutView(request):
@@ -105,9 +118,11 @@ urlpatterns = [
     url(r'^jsreverse/$', django_js_reverse.views.urls_js, name='js_reverse'),
     # Social auth
     url(r'^accounts/login/$', LoginView.as_view(), name='account_login'),
+    url(r'^accounts/signup/$', SignupView.as_view(), name='account_signup'),
     url(r'^accounts/sandbox_login/$',
         SandboxLoginView.as_view(), name='sandbox-login'),
     url(r'^accounts/logout/$', logoutView, name='account_logout'),
+    url(r'^accounts/reset_password/$', SignupView.as_view(), name='account_reset_password'),
     url(r'^accounts/social/', include('allauth.socialaccount.urls')),
     # JavaScript i18n
     url(r'^jsi18n/$', javascript_catalog, js_info_dict, name='javascript-catalog'),

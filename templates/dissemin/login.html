@@ -1,9 +1,7 @@
 {% extends "dissemin/skeleton.html" %}
 
 {% load i18n %}
-{% load account %}
-{% load static %}
-{% load socialaccount %}
+{% load crispy_forms_tags %}
 
 {% block headTitle %}{% trans "Sign In" %}{% endblock %}
 
@@ -11,65 +9,31 @@
 <div id="fullPage">
 <h1>{% trans "Sign in" %}</h1>
 
-{% get_providers as socialaccount_providers %}
-{% if socialaccount_providers %}
-
-<img src="{% static "img/orcid-big.png" %}" alt="ORCID" style="float: right" />
 <p>
 {% blocktrans trimmed %}
-Dissemin uses ORCID to authenticate its users.
-ORCID is an independent non-profit effort to provide an open registry of unique researcher identifiers. It also offers open
-services to link research activities and organizations to these identifiers. Learn more at <a href="http://orcid.org">orcid.org</a>.
+Don't have an account yet? <a href="{{ signup_url }}">Sign up</a> instead.
 {% endblocktrans %}
 </p>
 
 <div id="siteSummaries">
 <div class="siteSummary left">
-    <h3>{% trans "Log in" %}</h3>
-    <p>
-    {% blocktrans trimmed %}
-    If you already have an ORCID account, you can use it with Dissemin.
-    We will not make any changes to your profile.
-    {% endblocktrans %}
-    </p>
-    <p style="text-align: center">
-    <a href="{% provider_login_url "orcid" auth_params="show_login=True" %}" class="btn btn-orcid">{% trans "Log in" %}</a>
-    </p>
-
-</div>
-
-<div class="siteSummary right">
-    <h3>{% trans "Sign up" %}</h3>
-    <p>
-    {% blocktrans trimmed %}
-    Not an ORCID user yet? Create an account,
-    it is free and takes a few seconds.
-    {% endblocktrans %}
-    </p>
-
-    <p style="text-align: center">
-    <a href="{% provider_login_url "orcid" auth_params="show_login=False" %}" class="btn btn-orcid">{% trans "Sign up" %}</a>
-    </p>
-
-</div>
-</div>
-
-{% else %}
-<div class="regularLogin">
-<h3>{% trans "Dissemin account" %}</h3>
-<p>{% blocktrans %}If you have not created an account yet, then please
-<a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+    <h3>{% trans "Sign in" %}</h3>
 
 <form class="login" method="POST" action="{% url 'account_login' %}">
   {% csrf_token %}
-  {{ form.as_p }}
+  {{ form|crispy }}
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
   {% endif %}
   <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-  <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
+  <p style="text-align: center"><button class="primaryAction btn btn-default" type="submit">{% trans "Sign in" %}</button></p>
 </form>
+
 </div>
-{% endif %}
+
+{% include "dissemin/orcid_login_pane.html" %}
+
+</div>
+
 </div>
 {% endblock %}
