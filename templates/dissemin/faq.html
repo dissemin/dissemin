@@ -61,10 +61,13 @@
         <p>
         {% blocktrans trimmed %}
         You should do it because:
+        {% endblocktrans %}
+        </p>
+        {% blocktrans trimmed %}
         <ul>
-            <li>It makes your research <strong>more accessible</strong> and <strong>more visible</strong>.
-            Many researchers routinely check papers in topic repositories such as arXiv, and
-            it is less likely that these researchers check your homepage regularly.
+              <li>It makes your research <strong>more accessible</strong> and <strong>more visible</strong>.
+              Many researchers routinely check papers in topic repositories such as arXiv, and
+              it is less likely that these researchers check your homepage regularly.
               </li>
               <li>You can even do it before publication. You can get <strong>valuable feedback</strong>
 	      to improve your paper before the actual peer-reviewing process.
@@ -86,11 +89,13 @@
               </li>
           </ul>
         {% endblocktrans %}
-        </p>
         <h2 id="what-repository">{% trans "What repository should I use?" %}</h2>
         <p>
         {% blocktrans trimmed %}
             There are roughly three types of repositories:
+        {% endblocktrans %}
+        </p>
+        {% blocktrans trimmed %}
             <ul>
                 <li>Subject repositories, restricted to some research fields,
                   such as <a href="https://arxiv.org">arXiv</a>.</li>
@@ -99,6 +104,9 @@
                 <li>General-purpose academic repositories such as <a href="https://zenodo.org">Zenodo</a>,
                     not limited to a particular scope.</li>
             </ul>
+        {% endblocktrans %}
+        <p>
+        {% blocktrans trimmed %}
             If your research community favours a specific repository, using it makes sense as it will increase your visibility. If not, institutional or general-purpose repositories are also good options.
         {% endblocktrans %}
         </p>
@@ -106,6 +114,9 @@
         <p>
         {% blocktrans trimmed %}
             At the moment, you can use Dissemin to deposit in the following repositories:
+        {% endblocktrans %}
+        </p>
+        {% blocktrans trimmed %}
             <ul>
               <li><strong><a href="https://zenodo.org">Zenodo</a></strong>,
                 an innovative repository backed by the EU.</li>
@@ -116,10 +127,16 @@
 		a preprint server run by the <a href="https://cos.io/">Center for Open Science</a> on
 		top of their <a href="https://osf.io/">Open Science Framework</a>.</li>
             </ul>
+        {% endblocktrans %}
+        <p>
+        {% blocktrans trimmed %}
             Supporting more repositories requires us to write
             specific code for each repository. More importantly it requires the
             repositories to give us permission to deposit papers in bulk. We
             have been considering integrating the following repositories:
+        {% endblocktrans %}
+        </p>
+        {% blocktrans trimmed %}
             <ul>
               <li><strong><a href="https://arxiv.org/">arXiv</a></strong>, a
                 well-known general-purpose repository. For now, arXiv has
@@ -130,7 +147,6 @@
                 with "Dear arXiv,").</li>
             </ul>
         {% endblocktrans %}
-        </p>
 
         <h3>dissem.in</h3>
 
@@ -239,6 +255,9 @@
         <p>
         {% blocktrans trimmed %}
         There are a few caveats concerning our data:
+        {% endblocktrans %}
+        </p>
+        {% blocktrans trimmed %}
         <ul>
             <li>Some papers are not present in any of our metadata sources, so they are not counted at all.</li>
             <li>Some entries in our system do not correspond to proper research papers.</li>
@@ -248,7 +267,6 @@
             <li>And many other technical issues.</li>
         </ul>
         {% endblocktrans %}
-        </p>
 
         <h3>{% trans "Omissions and errors" %}</h3>
         <h2 id="missing-paper">{% trans "One of my papers is missing. Why?" %}</h2>
@@ -336,12 +354,18 @@
             {% blocktrans trimmed %}
             ORCID supports various methods to claim publications. Our preferred one is
             via CrossRef's search interface. Here is how to use it:
-            <ul>
-                <li>Go to <a href="https://search.crossref.org/">CrossRef Metadata Search</a>;</li>
-                <li>Click "Log in" in the top right corner and go through the ORCID login process;</li>
-                <li>Search for your publications, for instance by typing your name in CrossRef's search interface;</li>
-                <li>Add publications that are yours to your ORCID record by clicking "Add to ORCID".</li>
-            </ul>
+            {% endblocktrans %}
+        </p>
+        {% blocktrans trimmed %}
+        <ul>
+            <li>Go to <a href="https://search.crossref.org/">CrossRef Metadata Search</a>;</li>
+            <li>Click "Log in" in the top right corner and go through the ORCID login process;</li>
+            <li>Search for your publications, for instance by typing your name in CrossRef's search interface;</li>
+            <li>Add publications that are yours to your ORCID record by clicking "Add to ORCID".</li>
+        </ul>
+        {% endblocktrans %}
+        <p>
+            {% blocktrans trimmed %}
             In the future, we hope to enable you to do this from Dissemin itself.
             {% endblocktrans %}
         </p>
@@ -359,6 +383,9 @@
         <p>
         {% blocktrans trimmed %}
         There are many ways to get involved:
+        {% endblocktrans %}
+        </p>
+        {% blocktrans trimmed %}
         <ul>
             <li>Encourage researchers to use this service.</li>
             <li><a href="mailto:contact@dissem.in">Send us</a> a list of researchers for your
@@ -370,7 +397,6 @@
             <li><a href="http://association.dissem.in/#dons">Donations are accepted</a>.</li>
         </ul>
         {% endblocktrans %}
-        </p>
         <h2 id="source-code">{% trans "Where is the source code?" %}</h2>
         <p>
         {% blocktrans trimmed %}
