@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-28 21:24+0200\n"
-"PO-Revision-Date: 2017-08-28 21:20+0200\n"
+"POT-Creation-Date: 2017-10-08 17:04+0200\n"
+"PO-Revision-Date: 2017-10-08 17:12+0200\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 2.0.3\n"
+"X-Generator: Poedit 2.0.4\n"
 
 #: deposit/forms.py:41
 msgid "Upload type"
@@ -1605,7 +1605,7 @@ msgid "of the papers by this publisher are available"
 msgstr "des articles de cet éditeur sont disponibles"
 
 #: statistics/templates/statistics/histogram.html:5
-#: templates/dissemin/faq.html:49
+#: templates/dissemin/faq.html:48
 msgid "Open Access"
 msgstr "Accès libre"
 
@@ -1670,63 +1670,59 @@ msgstr "Administration de Dissemin"
 msgid "Frequently Asked Questions"
 msgstr "Foire aux questions"
 
-#: templates/dissemin/faq.html:16 templates/dissemin/faq.html:51
+#: templates/dissemin/faq.html:16 templates/dissemin/faq.html:50
 msgid "What is Open Access?"
 msgstr "Qu'est-ce que le libre accès ?"
 
-#: templates/dissemin/faq.html:17 templates/dissemin/faq.html:61
+#: templates/dissemin/faq.html:17 templates/dissemin/faq.html:60
 msgid "Why should I upload my papers to a repository?"
 msgstr "Pourquoi mettre en ligne mes papiers dans un dépôt ?"
 
-#: templates/dissemin/faq.html:18 templates/dissemin/faq.html:91
+#: templates/dissemin/faq.html:18 templates/dissemin/faq.html:92
 msgid "What repository should I use?"
 msgstr "Quel dépôt utiliser ?"
 
-#: templates/dissemin/faq.html:19 templates/dissemin/faq.html:106
+#: templates/dissemin/faq.html:19 templates/dissemin/faq.html:113
 msgid "Why can't I deposit in my favorite repository yet?"
 msgstr "Pourquoi ne puis-je pas déposer dans mon dépôt favori pour l'instant ?"
 
-#: templates/dissemin/faq.html:22 templates/dissemin/faq.html:138
+#: templates/dissemin/faq.html:22 templates/dissemin/faq.html:153
 msgid "What is dissem.in?"
 msgstr "Qu'est-ce que dissem.in ?"
 
-#: templates/dissemin/faq.html:23 templates/dissemin/faq.html:149
+#: templates/dissemin/faq.html:23 templates/dissemin/faq.html:164
 msgid "Is dissem.in a repository?"
 msgstr "Dissem.in est-il un dépôt ?"
 
-#: templates/dissemin/faq.html:24 templates/dissemin/faq.html:159
+#: templates/dissemin/faq.html:24 templates/dissemin/faq.html:174
 msgid "Who runs dissem.in?"
 msgstr "Qui sommes-nous ?"
 
-#: templates/dissemin/faq.html:25 templates/dissemin/faq.html:165
+#: templates/dissemin/faq.html:25 templates/dissemin/faq.html:181
 msgid "Can I create my profile on dissem.in?"
 msgstr "Puis-je me créer un profil sur dissem.in ?"
 
-#: templates/dissemin/faq.html:26
-msgid "Can I use dissem.in for my institution?"
-msgstr "Puis-je utiliser dissem.in pour mon institution ?"
-
-#: templates/dissemin/faq.html:28 templates/dissemin/faq.html:179
+#: templates/dissemin/faq.html:27 templates/dissemin/faq.html:189
 msgid "Policies and full-text availability"
 msgstr "Par disponibilité du texte intégral"
 
-#: templates/dissemin/faq.html:29 templates/dissemin/faq.html:180
+#: templates/dissemin/faq.html:28 templates/dissemin/faq.html:190
 msgid "What do your policy classes mean?"
 msgstr "Que signifient les différentes politiques d'accès ?"
 
-#: templates/dissemin/faq.html:30 templates/dissemin/faq.html:235
+#: templates/dissemin/faq.html:29 templates/dissemin/faq.html:243
 msgid "When is a paper considered available?"
 msgstr "Quand considérez-vous qu'un papier est disponible ?"
 
-#: templates/dissemin/faq.html:31 templates/dissemin/faq.html:244
+#: templates/dissemin/faq.html:30 templates/dissemin/faq.html:252
 msgid "Should I trust your statistics?"
 msgstr "Vos statistiques sont-elles fiables ?"
 
-#: templates/dissemin/faq.html:33 templates/dissemin/faq.html:259
+#: templates/dissemin/faq.html:32 templates/dissemin/faq.html:269
 msgid "Omissions and errors"
 msgstr "Erreurs et oublis"
 
-#: templates/dissemin/faq.html:34 templates/dissemin/faq.html:278
+#: templates/dissemin/faq.html:33 templates/dissemin/faq.html:288
 msgid ""
 "There is a freely available copy of my article online but dissem.in does not "
 "find it."
@@ -1734,51 +1730,51 @@ msgstr ""
 "Il y a une copie de mon papier librement accessible en ligne, mais dissem.in "
 "ne le trouve pas."
 
-#: templates/dissemin/faq.html:35 templates/dissemin/faq.html:260
+#: templates/dissemin/faq.html:34 templates/dissemin/faq.html:270
 msgid "One of my papers is missing. Why?"
 msgstr "Pourquoi manque-t-il certains de mes papiers ?"
 
-#: templates/dissemin/faq.html:36 templates/dissemin/faq.html:270
+#: templates/dissemin/faq.html:35 templates/dissemin/faq.html:280
 msgid "Some details of my paper are incorrect. What can I do?"
 msgstr "Certaines informations sur mon papier sont incorrectes. Que faire ?"
 
-#: templates/dissemin/faq.html:38 templates/dissemin/faq.html:314
+#: templates/dissemin/faq.html:37 templates/dissemin/faq.html:324
 msgid "Authentication with ORCID"
 msgstr "Authentification avec ORCID"
 
-#: templates/dissemin/faq.html:39 templates/dissemin/faq.html:316
+#: templates/dissemin/faq.html:38 templates/dissemin/faq.html:326
 msgid "Why do you need to authenticate users?"
 msgstr "Pourquoi est-ce que les utilisateurs doivent s'authentifier ?"
 
-#: templates/dissemin/faq.html:40 templates/dissemin/faq.html:330
+#: templates/dissemin/faq.html:39 templates/dissemin/faq.html:340
 msgid "What will you do to my ORCID profile if I log in?"
 msgstr "Que comptez-vous faire avec mon profil ORCID si je me connecte ?"
 
-#: templates/dissemin/faq.html:41 templates/dissemin/faq.html:339
+#: templates/dissemin/faq.html:40 templates/dissemin/faq.html:349
 msgid "How do I add publications to my ORCID profile?"
 msgstr "Comment puis-je ajouter des publications à mon profil ORCID ?"
 
-#: templates/dissemin/faq.html:43 templates/dissemin/faq.html:355
+#: templates/dissemin/faq.html:42 templates/dissemin/faq.html:371
 msgid "Behind the scenes"
 msgstr "En coulisses"
 
-#: templates/dissemin/faq.html:44 templates/dissemin/faq.html:357
+#: templates/dissemin/faq.html:43 templates/dissemin/faq.html:373
 msgid "Where do you get the data from?"
 msgstr "D'où proviennent vos données ?"
 
-#: templates/dissemin/faq.html:45 templates/dissemin/faq.html:364
+#: templates/dissemin/faq.html:44 templates/dissemin/faq.html:380
 msgid "How can I help?"
 msgstr "Comment puis-je aider ?"
 
-#: templates/dissemin/faq.html:46 templates/dissemin/faq.html:380
+#: templates/dissemin/faq.html:45 templates/dissemin/faq.html:398
 msgid "Where is the source code?"
 msgstr "Où est le code source ?"
 
-#: templates/dissemin/faq.html:47 templates/dissemin/faq.html:386
+#: templates/dissemin/faq.html:46 templates/dissemin/faq.html:404
 msgid "Can I harvest your data?"
 msgstr "Puis-je récolter vos données ?"
 
-#: templates/dissemin/faq.html:53
+#: templates/dissemin/faq.html:52
 msgid ""
 "In a nutshell, the Open Access movement promotes free access to the "
 "scientific literature. For a more in-depth introduction, we recommend <a "
@@ -1792,31 +1788,35 @@ msgstr ""
 "introduction.html\">cette introduction en français</a> ou <a href=\"http://"
 "www.phdcomics.com/comics.php?f=1533\">cette vidéo en anglais</a>."
 
-#: templates/dissemin/faq.html:63
+#: templates/dissemin/faq.html:62
+msgid "You should do it because:"
+msgstr "Voici quelques raisons de le faire :"
+
+#: templates/dissemin/faq.html:66
 msgid ""
-"You should do it because: <ul> <li>It makes your research <strong>more "
-"accessible</strong> and <strong>more visible</strong>. Many researchers "
-"routinely check papers in topic repositories such as arXiv, and it is less "
-"likely that these researchers check your homepage regularly. </li> <li>You "
-"can even do it before publication. You can get <strong>valuable feedback</"
-"strong> to improve your paper before the actual peer-reviewing process. It "
-"may also be useful to establish priority if it takes a long time for your "
-"paper to get published.</li> <li> It provides you a <strong>durable storage</"
-"strong>. Your homepage is likely to change or to disappear, for instance if "
-"you leave your current institution. </li> <li>Librarians around the world "
-"cannot check whether all the papers in a given journal are available on "
-"homepages: in doubt, they subscribe to this journal to make sure their "
-"researchers have access to it. This costs a lot of money for research "
-"institutions. Papers stored in repositories are <strong>easier to detect</"
-"strong> and can help academia save money.</li> <li> Finally, for all these "
-"reasons, an increasing number of <strong>funding bodies</strong> require the "
-"outcomes of their projects to be made available in a repository. </li> </ul>"
+"<ul> <li>It makes your research <strong>more accessible</strong> and "
+"<strong>more visible</strong>. Many researchers routinely check papers in "
+"topic repositories such as arXiv, and it is less likely that these "
+"researchers check your homepage regularly. </li> <li>You can even do it "
+"before publication. You can get <strong>valuable feedback</strong> to "
+"improve your paper before the actual peer-reviewing process. It may also be "
+"useful to establish priority if it takes a long time for your paper to get "
+"published.</li> <li> It provides you a <strong>durable storage</strong>. "
+"Your homepage is likely to change or to disappear, for instance if you leave "
+"your current institution. </li> <li>Librarians around the world cannot check "
+"whether all the papers in a given journal are available on homepages: in "
+"doubt, they subscribe to this journal to make sure their researchers have "
+"access to it. This costs a lot of money for research institutions. Papers "
+"stored in repositories are <strong>easier to detect</strong> and can help "
+"academia save money.</li> <li> Finally, for all these reasons, an increasing "
+"number of <strong>funding bodies</strong> require the outcomes of their "
+"projects to be made available in a repository. </li> </ul>"
 msgstr ""
-"Voici quelques raisons : <ul> <li>Ça rend votre recherche <strong>plus "
-"accessible</strong> et <strong>plus visible</strong>. Beaucoup de chercheurs "
-"suivent les soumissions dans des dépôts thématiques comme arXiv; il y en a "
-"probablement moins qui vérifient régulièrement votre page personnelle. </li> "
-"<li>Vous pouvez même le faire avant de publier. Vous pouvez obtenir des "
+"<ul> <li>Ça rend votre recherche <strong>plus accessible</strong> et "
+"<strong>plus visible</strong>. Beaucoup de chercheurs suivent les "
+"soumissions dans des dépôts thématiques comme arXiv; il y en a probablement "
+"moins qui vérifient régulièrement votre page personnelle. </li> <li>Vous "
+"pouvez même le faire avant de publier. Vous pouvez obtenir des "
 "<strong>commentaires très utiles</strong> pour améliorer votre papier avant "
 "la revue par les pairs proprement dite. Cela peut aussi vous servir à "
 "prouver l'antériorité de vos idées, sans attendre la publication finale.</"
@@ -1833,76 +1833,92 @@ msgstr ""
 "les publications des projets qu'elles financent soient disponibles dans un "
 "dépôt. </li> </ul>"
 
-#: templates/dissemin/faq.html:93
-msgid ""
-"There are roughly three types of repositories: <ul> <li>Subject "
-"repositories, restricted to some research fields, such as <a href=\"https://"
-"arxiv.org\">arXiv</a>.</li> <li>Institutional repositories, designated to "
-"store the research output of a given institution or country. </li> "
-"<li>General-purpose academic repositories such as <a href=\"https://zenodo."
-"org\">Zenodo</a>, not limited to a particular scope.</li> </ul> If your "
-"research community favours a specific repository, using it makes sense as it "
-"will increase your visibility. If not, institutional or general-purpose "
-"repositories are also good options."
-msgstr ""
-"Il y a en gros trois types de dépôts : <ul> <li>Les dépôts thématiques, qui "
-"se limitent à certains domaines précis, comme <a href=\"https://arxiv.org"
-"\">arXiv</a>.</li> <li>Les dépôts institutionnels, dédiés à l'archivage de "
-"la production scientifique d'une institution ou d'un pays. </li> <li>Les "
-"dépôts académiques génériques comme <a href=\"https://zenodo.org\">Zenodo</"
-"a>, dont le périmètre n'est limité qu'aux données issues de la recherche.</"
-"li></ul> Si votre communauté scientifique préfère un dépôt thématique "
-"particulier, il vaut mieux l'utiliser afin d'améliorer votre visibilité. "
-"Dans le cas contraire, les dépôts institutionnels ou génériques sont "
-"également une option raisonnable."
+#: templates/dissemin/faq.html:94
+msgid "There are roughly three types of repositories:"
+msgstr "On peut distinguer trois types de dépôts :"
 
-#: templates/dissemin/faq.html:108
+#: templates/dissemin/faq.html:98
 msgid ""
-"At the moment, you can use Dissemin to deposit in the following "
-"repositories: <ul> <li><strong><a href=\"https://zenodo.org\">Zenodo</a></"
-"strong>, an innovative repository backed by the EU.</li> <li><strong><a href="
-"\"https://hal.archives-ouvertes.fr/\">HAL</a></strong>, a French repository "
-"managed by the <a href=\"https://www.ccsd.cnrs.fr/\">CCSD</a>.</li> "
-"<li><strong><a href=\"https://osf.io/preprints/\">OSF preprints</a></"
-"strong>, a preprint server run by the <a href=\"https://cos.io/\">Center for "
-"Open Science</a> on top of their <a href=\"https://osf.io/\">Open Science "
-"Framework</a>.</li> </ul> Supporting more repositories requires us to write "
-"specific code for each repository. More importantly it requires the "
-"repositories to give us permission to deposit papers in bulk. We have been "
-"considering integrating the following repositories: <ul> <li><strong><a href="
-"\"https://arxiv.org/\">arXiv</a></strong>, a well-known general-purpose "
-"repository. For now, arXiv has declined to allow Dissemin to deposit using "
-"their SWORD API, and wants users to deposit in arXiv manually. If you would "
-"like to deposit in arXiv with Dissemin, you can let them know that you are "
-"interested (email: help AT arxiv.org, and start your message with \"Dear "
-"arXiv,\").</li> </ul>"
+"<ul> <li>Subject repositories, restricted to some research fields, such as "
+"<a href=\"https://arxiv.org\">arXiv</a>.</li> <li>Institutional "
+"repositories, designated to store the research output of a given institution "
+"or country. </li> <li>General-purpose academic repositories such as <a href="
+"\"https://zenodo.org\">Zenodo</a>, not limited to a particular scope.</li> </"
+"ul>"
 msgstr ""
-"Pour l'instant, nous vous proposons seulement de déposer vos articles dans "
-"les dépôts suivants :\n"
-"<ul><li><strong><a href=\"https://zenodo.org\">Zenodo</a></strong>, un dépôt "
-"innovant soutenu par l'UE.</li>\n"
-"<li><strong><a href=\"https://hal.archives-ouvertes.fr/\">HAL</a></strong>, "
-"un dépôt français géré par le <a href=\"https://www.ccsd.cnrs.fr/\">CCSD</"
-"a></li>\n"
-"<li><strong><a href=\"https://osf.io/preprints/\">OSF preprints</a></"
-"strong>, un serveur de préprints géré par le <a href=\"https://cos.io/"
-"\">Center for Open Science</a> et qui s'appuie sur leur <a href=\"https://"
-"osf.io/\">Open Science Framework</a>.</li>\n"
-"</ul>\n"
+"<ul> <li>Les dépôts thématiques, qui se limitent à certains domaines précis, "
+"comme <a href=\"https://arxiv.org\">arXiv</a>.</li> <li>Les dépôts "
+"institutionnels, dédiés à l'archivage de la production scientifique d'une "
+"institution ou d'un pays. </li> <li>Les dépôts académiques génériques comme "
+"<a href=\"https://zenodo.org\">Zenodo</a>, dont le périmètre n'est limité "
+"qu'aux données issues de la recherche.</li></ul>"
+
+#: templates/dissemin/faq.html:109
+msgid ""
+"If your research community favours a specific repository, using it makes "
+"sense as it will increase your visibility. If not, institutional or general-"
+"purpose repositories are also good options."
+msgstr ""
+"Si votre communauté scientifique préfère un dépôt thématique particulier, il "
+"vaut mieux l'utiliser afin d'améliorer votre visibilité. Dans le cas "
+"contraire, les dépôts institutionnels ou génériques sont également une "
+"option raisonnable."
+
+#: templates/dissemin/faq.html:115
+msgid ""
+"At the moment, you can use Dissemin to deposit in the following repositories:"
+msgstr ""
+"Pour l'instant, Dissemin vous permet de déposer dans les dépôts suivants :"
+
+#: templates/dissemin/faq.html:119
+msgid ""
+"<ul> <li><strong><a href=\"https://zenodo.org\">Zenodo</a></strong>, an "
+"innovative repository backed by the EU.</li> <li><strong><a href=\"https://"
+"hal.archives-ouvertes.fr/\">HAL</a></strong>, a French repository managed by "
+"the <a href=\"https://www.ccsd.cnrs.fr/\">CCSD</a>.</li> <li><strong><a href="
+"\"https://osf.io/preprints/\">OSF preprints</a></strong>, a preprint server "
+"run by the <a href=\"https://cos.io/\">Center for Open Science</a> on top of "
+"their <a href=\"https://osf.io/\">Open Science Framework</a>.</li> </ul>"
+msgstr ""
+"<ul> <li><strong><a href=\"https://zenodo.org\">Zenodo</a></strong>, un "
+"dépôt innovant soutenu par l'UE.</li> <li><strong><a href=\"https://hal."
+"archives-ouvertes.fr/\">HAL</a></strong>, un dépôt français géré par le <a "
+"href=\"https://www.ccsd.cnrs.fr/\">CCSD</a>.</li> <li><strong><a href="
+"\"https://osf.io/preprints/\">OSF preprints</a></strong>, un serveur de "
+"préprints géré par le <a href=\"https://cos.io/\">Center for Open Science</"
+"a> et qui s'appuie sur leur <a href=\"https://osf.io/\">Open Science "
+"Framework</a>.</li> </ul>"
+
+#: templates/dissemin/faq.html:132
+msgid ""
+"Supporting more repositories requires us to write specific code for each "
+"repository. More importantly it requires the repositories to give us "
+"permission to deposit papers in bulk. We have been considering integrating "
+"the following repositories:"
+msgstr ""
 "Pour proposer davantage de dépôts, il faut que nous écrivions du code "
 "spécifique à chaque dépôt, mais il faut surtout que ces dépôts nous donnent "
-"l'autorisation de déposer des papiers en masse. Nous avons envisagé "
-"d'intégrer les dépôts suivants :\n"
-"<ul>\n"
-"<li><strong><a href=\"https://arxiv.org/\">arXiv</a></strong>, un dépôt "
+"l'autorisation de déposer des articles en masse. Nous avons envisagé "
+"d'intégrer les dépôts suivants :"
+
+#: templates/dissemin/faq.html:139
+msgid ""
+"<ul> <li><strong><a href=\"https://arxiv.org/\">arXiv</a></strong>, a well-"
+"known general-purpose repository. For now, arXiv has declined to allow "
+"Dissemin to deposit using their SWORD API, and wants users to deposit in "
+"arXiv manually. If you would like to deposit in arXiv with Dissemin, you can "
+"let them know that you are interested (email: help AT arxiv.org, and start "
+"your message with \"Dear arXiv,\").</li> </ul>"
+msgstr ""
+"<ul> <li><strong><a href=\"https://arxiv.org/\">arXiv</a></strong>, un dépôt "
 "généraliste bien connu. Pour l'instant, arXiv n'autorise pas Dissemin à "
 "déposer en utilisant leur API SWORD, et demande aux utilisateurs de déposer "
 "dans arXiv manuellement. Si vous voudriez utiliser Dissemin pour déposer vos "
 "articles dans arXiv, n'hésitez pas à les contacter (par courriel en anglais "
-"à help AT arxiv.org, en commençant votre message par \"Dear arXiv,\").</li>\n"
+"à help AT arxiv.org, en commençant votre message par \"Dear arXiv,\").</li> "
 "</ul>"
 
-#: templates/dissemin/faq.html:142
+#: templates/dissemin/faq.html:157
 #, python-format
 msgid ""
 "Dissemin is a web platform gathering metadata from <a href=\"%(sources_url)s"
@@ -1918,7 +1934,7 @@ msgstr ""
 "personnelles), et ce pour de <a href=\"#repositories-rock\">nombreuses "
 "raisons</a>."
 
-#: templates/dissemin/faq.html:151
+#: templates/dissemin/faq.html:166
 msgid ""
 "Dissemin is not a repository as it does not store any full text. When the "
 "full text of a publication is available, a link to the relevant page is "
@@ -1932,7 +1948,7 @@ msgstr ""
 "hébergés par des dépôts tiers tels que <a href=\"https://zenodo.org"
 "\">Zenodo</a> ou <a href=\"https://hal.archives-ouvertes.fr/\">HAL</a>."
 
-#: templates/dissemin/faq.html:161
+#: templates/dissemin/faq.html:176
 msgid ""
 "Dissemin is brought to you by the <a href=\"http://association.dissem.in/"
 "\">CAPSH association</a>."
@@ -1940,7 +1956,7 @@ msgstr ""
 "Dissemin est développé par <a href=\"http://association.dissem.in/"
 "\">l'association CAPSH</a>."
 
-#: templates/dissemin/faq.html:167
+#: templates/dissemin/faq.html:183
 msgid ""
 "Yes you can. We will ask you to create an ORCID profile if you do not have "
 "one yet. This only takes a few seconds."
@@ -1948,22 +1964,7 @@ msgstr ""
 "Oui, vous pouvez. Le système vous demandera de créer un profil ORCID si vous "
 "n'en avez pas encore un. Ça ne prend que quelques secondes."
 
-#: templates/dissemin/faq.html:172
-msgid ""
-"Can I use dissem.in as Current Research Information System for my "
-"institution?"
-msgstr ""
-"Puis-je utiliser dissemin comme base de données (CRIS) pour la recherche de "
-"mon institution ?"
-
-#: templates/dissemin/faq.html:174
-msgid ""
-"Yes, just ask <a href=\"mailto:contact@dissem.in\">contact@dissem.in</a>."
-msgstr ""
-"Oui, adressez-vous à <a href=\"mailto:contact@dissem.in\">contact@dissem.in</"
-"a>."
-
-#: templates/dissemin/faq.html:187
+#: templates/dissemin/faq.html:196
 msgid ""
 "<strong>Open access:</strong><br /> The full text is made freely available "
 "by the publisher (in a fully open access or hybrid journal)."
@@ -1972,7 +1973,7 @@ msgstr ""
 "à disposition de tous par la maison d'édition (dans une revue entièrement en "
 "libre accès ou dans une revue hybride)."
 
-#: templates/dissemin/faq.html:199
+#: templates/dissemin/faq.html:208
 msgid ""
 "<strong>Pre/post prints allowed and full text available:</strong><br /> The "
 "full text is available in a repository, but might not be freely available "
@@ -1985,7 +1986,7 @@ msgstr ""
 "Ceci se conforme à la politique de la maison d'édition et s'appelle le "
 "\"green open-access\" ou auto-archivage."
 
-#: templates/dissemin/faq.html:212
+#: templates/dissemin/faq.html:221
 msgid ""
 "<strong>Pre/post prints allowed but full text unavailable:</strong><br /> "
 "The full text could be made available in a repository (as above) according "
@@ -1996,7 +1997,7 @@ msgstr ""
 "dans un dépôt (comme plus haut) suivant la politique de la maison d'édition. "
 "Nous encourageons les auteurs à le faire."
 
-#: templates/dissemin/faq.html:225
+#: templates/dissemin/faq.html:234
 msgid ""
 "<strong>Pre/post prints forbidden:</strong><br /> The publisher forbids "
 "deposits in repositories, in general. Authors might still be allowed to "
@@ -2009,7 +2010,7 @@ msgstr ""
 "articles au terme d'une période d'exclusivité (embargo), ou si les agences "
 "qui financent leur recherche ont un accord avec l'éditeur."
 
-#: templates/dissemin/faq.html:237
+#: templates/dissemin/faq.html:245
 #, python-format
 msgid ""
 "When we have found it in one of the repositories we harvest. The list of "
@@ -2022,20 +2023,23 @@ msgstr ""
 "moteur de recherche <a href=\"https://www.base-search.net\">BASE</a>, nous "
 "avons accès à plus de 80 millions de preprints."
 
-#: templates/dissemin/faq.html:246
+#: templates/dissemin/faq.html:254
+msgid "There are a few caveats concerning our data:"
+msgstr "Nos données peuvent être inexactes, à plusieurs titres :"
+
+#: templates/dissemin/faq.html:258
 msgid ""
-"There are a few caveats concerning our data: <ul> <li>Some papers are not "
-"present in any of our metadata sources, so they are not counted at all.</li> "
-"<li>Some entries in our system do not correspond to proper research papers.</"
-"li> <li>Some of them have been incorrectly classified by our homonym "
-"disambiguation system.</li> <li>Some repositories might not be covered by "
-"any of our sources, so a paper might be marked as unavailable while it is "
-"available.</li> <li>Some papers might be marked as available but actually, "
-"they are not (for instance because the content has been deleted).</li> "
-"<li>And many other technical issues.</li> </ul>"
+"<ul> <li>Some papers are not present in any of our metadata sources, so they "
+"are not counted at all.</li> <li>Some entries in our system do not "
+"correspond to proper research papers.</li> <li>Some of them have been "
+"incorrectly classified by our homonym disambiguation system.</li> <li>Some "
+"repositories might not be covered by any of our sources, so a paper might be "
+"marked as unavailable while it is available.</li> <li>Some papers might be "
+"marked as available but actually, they are not (for instance because the "
+"content has been deleted).</li> <li>And many other technical issues.</li> </"
+"ul>"
 msgstr ""
-"Nos données ont plusieurs défauts dont il faut tenir compte : <ul> "
-"<li>Certains articles ne sont pas présents du tout dans nos sources de "
+"<ul> <li>Certains articles ne sont pas présents du tout dans nos sources de "
 "métadonnées, donc ils ne sont pas pris en compte ;</li> <li>Certaines "
 "entrées ne correspondent pas à de véritables travaux de recherche ;</li> "
 "<li>Certaines n'ont pas été correctement classifiées par notre système de "
@@ -2046,7 +2050,7 @@ msgstr ""
 "vraiment (par exemple, le contenu peut avoir été supprimé) ;</li> <li>Bien "
 "d'autres problèmes techniques peuvent se produire.</li> </ul>"
 
-#: templates/dissemin/faq.html:261
+#: templates/dissemin/faq.html:271
 #, python-format
 msgid ""
 "<p>There are many possible reasons: maybe it is not available from any of <a "
@@ -2062,7 +2066,7 @@ msgstr ""
 "supprimé par l'un de vos co-auteurs.</p> <p>Quoi qu'il en soit, il vous sera "
 "bientôt possible de l'ajouter manuellement.</p>"
 
-#: templates/dissemin/faq.html:272
+#: templates/dissemin/faq.html:282
 msgid ""
 "In a near future, you should be able to create an account and fix it by "
 "yourself. If it is really urgent, send a message to <a href=\"mailto:"
@@ -2072,7 +2076,7 @@ msgstr ""
 "erreurs par vous-même. En cas d'urgence, adressez-vous à <a href=\"mailto:"
 "contact@dissem.in\">contact@dissem.in</a>."
 
-#: templates/dissemin/faq.html:280
+#: templates/dissemin/faq.html:290
 msgid ""
 "First, note that Dissemin does not account for copies of articles that are "
 "only available on a personal homepage or a similar website. This is "
@@ -2085,7 +2089,7 @@ msgstr ""
 "que <a href=\"#repositories-rock\">les articles doivent être hébergés dans "
 "des dépôts pérennes</a>."
 
-#: templates/dissemin/faq.html:288
+#: templates/dissemin/faq.html:298
 msgid ""
 "Second, at the moment, Dissemin only supports repositories with a crawlable "
 "API that follows the <a href=\"https://www.openarchives.org/OAI/"
@@ -2108,7 +2112,7 @@ msgstr ""
 "d'œuvre nécessaire pour couvrir les dépôts qui ne sont pas répertoriés dans "
 "BASE."
 
-#: templates/dissemin/faq.html:302
+#: templates/dissemin/faq.html:312
 msgid ""
 "If you are a user of a repository and would like it to be supported by "
 "Dissemin, please contact the repository administrator and suggest them to "
@@ -2127,7 +2131,7 @@ msgstr ""
 "courriel à <a href=\"mailto:contact@dissem.in\">contact@dissem.in</a> pour "
 "que nous puissions déterminer l'origine du problème."
 
-#: templates/dissemin/faq.html:318
+#: templates/dissemin/faq.html:328
 msgid ""
 "Authenticating users is necessary to deposit papers on their behalf in open "
 "repositories. Besides, knowing a user's ORCID id helps us find its "
@@ -2147,7 +2151,7 @@ msgstr ""
 "ORCID, nous ne pouvons même pas obtenir votre adresse email, à moins que "
 "vous ayez expressément indiqué qu'elle était publique."
 
-#: templates/dissemin/faq.html:333
+#: templates/dissemin/faq.html:343
 msgid ""
 "Nothing. When you log in via ORCID to Dissemin, this does not grant us any "
 "permission to change anything in your ORCID record."
@@ -2155,60 +2159,71 @@ msgstr ""
 "Rien de spécial. Quand vous vous connectez à Dissemin via ORCID, cela ne "
 "nous permet pas de changer quoi que ce soit sur votre compte ORCID."
 
-#: templates/dissemin/faq.html:342
+#: templates/dissemin/faq.html:352
 msgid ""
 "ORCID supports various methods to claim publications. Our preferred one is "
-"via CrossRef's search interface. Here is how to use it: <ul> <li>Go to <a "
-"href=\"https://search.crossref.org/\">CrossRef Metadata Search</a>;</li> "
-"<li>Click \"Log in\" in the top right corner and go through the ORCID login "
-"process;</li> <li>Search for your publications, for instance by typing your "
-"name in CrossRef's search interface;</li> <li>Add publications that are "
-"yours to your ORCID record by clicking \"Add to ORCID\".</li> </ul> In the "
-"future, we hope to enable you to do this from Dissemin itself."
+"via CrossRef's search interface. Here is how to use it:"
 msgstr ""
 "ORCID propose différentes manières d'indiquer qu'une publication vous "
 "appartient. Celle que nous préférons, c'est l'interface de recherche de "
-"CrossRef. Voici comment l'utiliser : <ul> <li>Allez sur <a href=\"https://"
-"search.crossref.org/\">CrossRef Metadata Search</a> ;</li> <li>Cliquez sur "
-"\"Log in\" en haut à droite et connectez-vous avec ORCID ;</li> <li>Cherchez "
-"vos publications, par exemple en tapant votre nom dans l'interface de "
-"recherche de CrossRef ;</li> <li>Ajoutez à votre compte ORCID les "
-"publications qui vous appartiennent en cliquant sur \"Add to ORCID\".</li> </"
-"ul> À terme, nous espérons faire en sorte que vous puissiez effectuer cette "
+"CrossRef. Voici comment l'utiliser :"
+
+#: templates/dissemin/faq.html:357
+msgid ""
+"<ul> <li>Go to <a href=\"https://search.crossref.org/\">CrossRef Metadata "
+"Search</a>;</li> <li>Click \"Log in\" in the top right corner and go through "
+"the ORCID login process;</li> <li>Search for your publications, for instance "
+"by typing your name in CrossRef's search interface;</li> <li>Add "
+"publications that are yours to your ORCID record by clicking \"Add to ORCID"
+"\".</li> </ul>"
+msgstr ""
+"<ul> <li>Allez sur <a href=\"https://search.crossref.org/\">CrossRef "
+"Metadata Search</a> ;</li> <li>Cliquez sur \"Log in\" en haut à droite et "
+"connectez-vous avec ORCID ;</li> <li>Cherchez vos publications, par exemple "
+"en tapant votre nom dans l'interface de recherche de CrossRef ;</li> "
+"<li>Ajoutez à votre compte ORCID les publications qui vous appartiennent en "
+"cliquant sur \"Add to ORCID\".</li> </ul>"
+
+#: templates/dissemin/faq.html:366
+msgid "In the future, we hope to enable you to do this from Dissemin itself."
+msgstr ""
+"À terme, nous espérons faire en sorte que vous puissiez effectuer cette "
 "opération directement depuis Dissemin."
 
-#: templates/dissemin/faq.html:359
+#: templates/dissemin/faq.html:375
 #, python-format
 msgid "Our sources are listed on <a href=\"%(sources_url)s\">this page</a>."
 msgstr ""
 "Une liste de nos sources est <a href=\"%(sources_url)s\">disponible</a>."
 
-#: templates/dissemin/faq.html:366
+#: templates/dissemin/faq.html:382
+msgid "There are many ways to get involved:"
+msgstr "Il y a plusieurs moyens de nous aider :"
+
+#: templates/dissemin/faq.html:386
 msgid ""
-"There are many ways to get involved: <ul> <li>Encourage researchers to use "
-"this service.</li> <li><a href=\"mailto:contact@dissem.in\">Send us</a> a "
-"list of researchers for your university or department so that we can set up "
-"an instance of Dissemin for your institution.</li> <li>Help us translate the "
-"interface in your language.</li> <li>Contribute to <a href=\"https://github."
-"com/wetneb/dissemin\">the code</a>.</li> <li>Fix any of our listed <a href="
-"\"https://github.com/wetneb/dissemin/issues\">issues</a>.</li> <li>Star <a "
-"href=\"https://github.com/wetneb/dissemin\">our github project</a>!</li> "
-"<li><a href=\"http://association.dissem.in/#dons\">Donations are accepted</"
-"a>.</li> </ul>"
+"<ul> <li>Encourage researchers to use this service.</li> <li><a href="
+"\"mailto:contact@dissem.in\">Send us</a> a list of researchers for your "
+"university or department so that we can set up an instance of Dissemin for "
+"your institution.</li> <li>Help us translate the interface in your language."
+"</li> <li>Contribute to <a href=\"https://github.com/wetneb/dissemin\">the "
+"code</a>.</li> <li>Fix any of our listed <a href=\"https://github.com/wetneb/"
+"dissemin/issues\">issues</a>.</li> <li>Star <a href=\"https://github.com/"
+"wetneb/dissemin\">our github project</a>!</li> <li><a href=\"http://"
+"association.dissem.in/#dons\">Donations are accepted</a>.</li> </ul>"
 msgstr ""
-"Il y a de nombreuses façons de nous aider : <ul> <li>Encouragez des "
-"chercheurs à utiliser notre service ;</li> <li><a href=\"mailto:"
-"contact@dissem.in\">Envoyez-nous</a> une liste de chercheurs de votre "
-"université ou département pour qu'on mette en place une instance de Dissemin "
-"pour votre institution ;</li> <li>Aidez-nous à traduire l'interface dans "
-"votre langue ;</li> <li>Contribuez au <a href=\"https://github.com/wetneb/"
-"dissemin\">code</a> ;</li> <li>Aidez à corriger l'un des <a href=\"https://"
-"github.com/wetneb/dissemin/issues\">problèmes répertoriés</a> ;</li> "
-"<li>Décernez une étoile à <a href=\"https://github.com/wetneb/dissemin"
+"<ul> <li>Encouragez des chercheurs à utiliser notre service ;</li> <li><a "
+"href=\"mailto:contact@dissem.in\">Envoyez-nous</a> une liste de chercheurs "
+"de votre université ou département pour qu'on mette en place une instance de "
+"Dissemin pour votre institution ;</li> <li>Aidez-nous à traduire l'interface "
+"dans votre langue ;</li> <li>Contribuez au <a href=\"https://github.com/"
+"wetneb/dissemin\">code</a> ;</li> <li>Aidez à corriger l'un des <a href="
+"\"https://github.com/wetneb/dissemin/issues\">problèmes répertoriés</a> ;</"
+"li> <li>Décernez une étoile à <a href=\"https://github.com/wetneb/dissemin"
 "\">notre projet github</a> !</li><li><a href=\"http://association.dissem.in/"
 "#dons\">Nous acceptons les dons.</a>.</li> </ul>"
 
-#: templates/dissemin/faq.html:382
+#: templates/dissemin/faq.html:400
 msgid ""
 "The source code is available <a href=\"https://github.com/wetneb/dissemin"
 "\">on github</a>."
@@ -2216,7 +2231,7 @@ msgstr ""
 "Le code source est disponible <a href=\"https://github.com/wetneb/dissemin"
 "\">sur github</a>."
 
-#: templates/dissemin/faq.html:388
+#: templates/dissemin/faq.html:406
 msgid ""
 "Yes! We even have <a href=\"http://dev.dissem.in/api.html\">an API</a>. If "
 "it does not suit your needs, tell us what you need."
@@ -2225,11 +2240,11 @@ msgstr ""
 "Si vous n'êtes pas satisfait par ce qu'elle propose, n'hésitez pas à nous "
 "contacter."
 
-#: templates/dissemin/faq.html:393
+#: templates/dissemin/faq.html:411
 msgid "Can I use the Dissemin logo to refer to the project?"
 msgstr "Puis-je utiliser le logo de Dissemin pour faire référence au projet ?"
 
-#: templates/dissemin/faq.html:395
+#: templates/dissemin/faq.html:413
 msgid ""
 "Yes! See <a href=\"https://association.dissem.in/#logos\">here</a> for links "
 "to our logos and for explanations about how you can reuse them."
@@ -2238,7 +2253,7 @@ msgstr ""
 "contient des liens vers nos logos et des explications indiquant comment ils "
 "peuvent être utilisés."
 
-#: templates/dissemin/faq.html:400 templates/dissemin/tos.html:142
+#: templates/dissemin/faq.html:418 templates/dissemin/tos.html:150
 msgid "Back to top"
 msgstr "Revenir en haut"
 
@@ -2515,6 +2530,25 @@ msgstr ""
 msgid "Misuse can be reported to support@dissem.in."
 msgstr "Merci d'adresser tout abus à support@dissem.in."
 
+#: templates/dissemin/tos.html:128
+msgid ""
+"The <a href=\"https://dissem.in\">dissem.in</a> website has been registered "
+"with <a href=\"https://www.cnil.fr/\">CNIL</a> under declaration n°1895382 "
+"v0."
+msgstr ""
+"Le site <a href=\"https://dissem.in\">dissem.in</a> a fait l'objet de la "
+"déclaration CNIL n°1895382 v0."
+
+#: templates/dissemin/tos.html:136
+msgid ""
+"You have the right to access, modify, and delete the personal information "
+"that we hold about you. To exercise this right, please contact us at "
+"support@dissem.in, or by postal mail at the following addresss:"
+msgstr ""
+"Pour exercer vos droits d'accès, de rectification et de suppression des "
+"données personnelles, vous pouvez nous contactez en écrivant à "
+"support@dissem.in, ou par courrier postal à l'adresse suivante :"
+
 #: templates/socialaccount/authentication_error.html:6
 #: templates/socialaccount/authentication_error.html:12
 msgid "Authentication error"
@@ -2600,6 +2634,68 @@ msgstr "URL invalide (délai de connexion expiré)."
 #: upload/views.py:205 upload/views.py:209
 msgid "Invalid URL."
 msgstr "URL invalide."
+
+#~ msgid "Can I use dissem.in for my institution?"
+#~ msgstr "Puis-je utiliser dissem.in pour mon institution ?"
+
+#~ msgid ""
+#~ "At the moment, you can use Dissemin to deposit in the following "
+#~ "repositories: <ul> <li><strong><a href=\"https://zenodo.org\">Zenodo</a></"
+#~ "strong>, an innovative repository backed by the EU.</li> <li><strong><a "
+#~ "href=\"https://hal.archives-ouvertes.fr/\">HAL</a></strong>, a French "
+#~ "repository managed by the <a href=\"https://www.ccsd.cnrs.fr/\">CCSD</a>."
+#~ "</li> <li><strong><a href=\"https://osf.io/preprints/\">OSF preprints</"
+#~ "a></strong>, a preprint server run by the <a href=\"https://cos.io/"
+#~ "\">Center for Open Science</a> on top of their <a href=\"https://osf.io/"
+#~ "\">Open Science Framework</a>.</li> </ul> Supporting more repositories "
+#~ "requires us to write specific code for each repository. More importantly "
+#~ "it requires the repositories to give us permission to deposit papers in "
+#~ "bulk. We have been considering integrating the following repositories: "
+#~ "<ul> <li><strong><a href=\"https://arxiv.org/\">arXiv</a></strong>, a "
+#~ "well-known general-purpose repository. For now, arXiv has declined to "
+#~ "allow Dissemin to deposit using their SWORD API, and wants users to "
+#~ "deposit in arXiv manually. If you would like to deposit in arXiv with "
+#~ "Dissemin, you can let them know that you are interested (email: help AT "
+#~ "arxiv.org, and start your message with \"Dear arXiv,\").</li> </ul>"
+#~ msgstr ""
+#~ "Pour l'instant, nous vous proposons seulement de déposer vos articles "
+#~ "dans les dépôts suivants :\n"
+#~ "<ul><li><strong><a href=\"https://zenodo.org\">Zenodo</a></strong>, un "
+#~ "dépôt innovant soutenu par l'UE.</li>\n"
+#~ "<li><strong><a href=\"https://hal.archives-ouvertes.fr/\">HAL</a></"
+#~ "strong>, un dépôt français géré par le <a href=\"https://www.ccsd.cnrs.fr/"
+#~ "\">CCSD</a></li>\n"
+#~ "<li><strong><a href=\"https://osf.io/preprints/\">OSF preprints</a></"
+#~ "strong>, un serveur de préprints géré par le <a href=\"https://cos.io/"
+#~ "\">Center for Open Science</a> et qui s'appuie sur leur <a href=\"https://"
+#~ "osf.io/\">Open Science Framework</a>.</li>\n"
+#~ "</ul>\n"
+#~ "Pour proposer davantage de dépôts, il faut que nous écrivions du code "
+#~ "spécifique à chaque dépôt, mais il faut surtout que ces dépôts nous "
+#~ "donnent l'autorisation de déposer des papiers en masse. Nous avons "
+#~ "envisagé d'intégrer les dépôts suivants :\n"
+#~ "<ul>\n"
+#~ "<li><strong><a href=\"https://arxiv.org/\">arXiv</a></strong>, un dépôt "
+#~ "généraliste bien connu. Pour l'instant, arXiv n'autorise pas Dissemin à "
+#~ "déposer en utilisant leur API SWORD, et demande aux utilisateurs de "
+#~ "déposer dans arXiv manuellement. Si vous voudriez utiliser Dissemin pour "
+#~ "déposer vos articles dans arXiv, n'hésitez pas à les contacter (par "
+#~ "courriel en anglais à help AT arxiv.org, en commençant votre message par "
+#~ "\"Dear arXiv,\").</li>\n"
+#~ "</ul>"
+
+#~ msgid ""
+#~ "Can I use dissem.in as Current Research Information System for my "
+#~ "institution?"
+#~ msgstr ""
+#~ "Puis-je utiliser dissemin comme base de données (CRIS) pour la recherche "
+#~ "de mon institution ?"
+
+#~ msgid ""
+#~ "Yes, just ask <a href=\"mailto:contact@dissem.in\">contact@dissem.in</a>."
+#~ msgstr ""
+#~ "Oui, adressez-vous à <a href=\"mailto:contact@dissem.in\">contact@dissem."
+#~ "in</a>."
 
 #~ msgid ""
 #~ "<a href=\"http://dissem.in/\">dissem.in</a> is currently in public beta.  "
