@@ -22,7 +22,9 @@ from __future__ import unicode_literals
 
 from django.conf.urls import include
 from django.conf.urls import url
+from django.views.generic.base import RedirectView, TemplateView
 from papers import views
+from django.conf import settings
 
 urlpatterns = [
         url(r'^$', views.index, name='index'),
@@ -60,4 +62,13 @@ urlpatterns = [
             views.refetchResearcher, name='refetch-researcher'),
         # API
         url(r'^api/', include('papers.api')),
+        # robots.txt
+        # from https://stackoverflow.com/a/10149452
+        url(r'^robots\.txt$', TemplateView.as_view(template_name="robots.txt",
+                                        content_type='text/plain')),
+        # favicon
+        # from https://stackoverflow.com/a/10149452
+        url(r'^favicon\.ico$', RedirectView.as_view(
+                            url=settings.STATIC_URL + 'favicon/favicon.ico')),
+
 ]
