@@ -72,7 +72,10 @@ class RenderingTest(PrefilledTest):
         return self.client.get(reverse(*args, **kwargs))
 
     def checkPage(self, *args, **kwargs):
-        self.checkHtml(self.getPage(*args, **kwargs))
+        # make sure there's no toolbar, as it may break the tests
+        with self.settings(DEBUG_TOOLBAR_CONFIG = {'SHOW_TOOLBAR_CALLBACK':
+                (lambda r: False)}):
+            return self.checkHtml(self.getPage(*args, **kwargs))
 
     def checkPermanentRedirect(self, *args, **kwargs):
         self.assertEqual(self.getPage(*args, **kwargs).status_code, 301)
