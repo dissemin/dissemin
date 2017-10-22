@@ -45,3 +45,6 @@ pyflakes.out
 
 # Auto-completion
 .ropeproject
+
+# uploads, when testing in vagrant
+dissemin_media/
