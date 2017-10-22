@@ -12,17 +12,17 @@ Querying by DOI
 
 You can retrieve Dissemin's metadata for a specific paper by DOI:
 
-http://dissem.in/api/10.1016/j.paid.2009.02.013.
+https://dissem.in/api/10.1016/j.paid.2009.02.013.
 
 Searching for papers
 --------------------
 
 The search interface is also exposed as an API. The parameters it
 understands are the same as the human-readable version at
-http://dissem.in/search . Statistics about
+https://dissem.in/search . Statistics about
 the results are also returned as well.
 
-http://dissem.in/api/search/?q=pregroup
+https://dissem.in/api/search/?q=pregroup
 
 Understanding the results
 -------------------------

@@ -16,9 +16,9 @@ You should also already have installed Dissem.in (if you didn't already, [follow
 
 Think of dissemin as data staying in a server and a user that clicks here and there.
 
-The clicks of a user on the interface trigger a request to the internal API (which is not the REST API, for which documentation can be found [here](http://dev.dissem.in/api.html)). These requests look like http://dissem.in/my-profile. One has to map a URI pattern to some code to execute (called _views_). This is done in the url.py of each app ([url.py of the _papers_ app](https://github.com/dissemin/dissemin/blob/master/papers/urls.py#L27)).
+The clicks of a user on the interface trigger a request to the internal API (which is not the REST API, for which documentation can be found [here](http://dev.dissem.in/api.html)). These requests look like https://dissem.in/my-profile. One has to map a URI pattern to some code to execute (called _views_). This is done in the url.py of each app ([url.py of the _papers_ app](https://github.com/dissemin/dissemin/blob/master/papers/urls.py#L27)).
 
-For example, when a user clicks on "Search" on the homepage or enters the URL http://dissem.in/search/ the view _views.PaperSearchView.as_view()_ is executed.
+For example, when a user clicks on "Search" on the homepage or enters the URL https://dissem.in/search/ the view _views.PaperSearchView.as_view()_ is executed.
 
 Views are classes in the views.py file of each app. Let's stay in the same example and have a look at [views.py](https://github.com/dissemin/dissemin/blob/master/papers/views.py) of the papers app.
 
@@ -48,7 +48,7 @@ By adding, right after `data-last="{{ author.name.last }}"` the following line: 
 
 ## Let's see the results!
 
-Run dissemin with `./manage.py` and search for an author and check that there has been some change in the [source of the page](view-source:http://dissem.in/search/?authors=albert+einstein).
+Run dissemin with `./manage.py` and search for an author and check that there has been some change in the [source of the page](view-source:https://dissem.in/search/?authors=albert+einstein).
 
 That may not be so interesting to have such a nickname visible on the actual page. And anyhow, I – the author of this tutorial — am still learning how dissemin works so for the moment I can't tell you ;).
 
