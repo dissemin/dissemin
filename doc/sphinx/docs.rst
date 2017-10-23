@@ -9,6 +9,10 @@ and with some additional documentation files.
 There are two steps to generate the docs: first, auto-generate the
 reStructuredText sources of the docs with sphinx-apidoc::
 
+     # first, make sure you are in an environment where
+     # the requirements are available
+     source .venv/bin/activate
+     # then, invoke sphinx-apidoc via make
      make -B doc
 
 
