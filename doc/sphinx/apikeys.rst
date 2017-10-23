@@ -24,7 +24,7 @@ The key should then be written in ``dissemin/settings.py``, as ``ROMEO_API_KEY``
 Zenodo
 ------
 
-`Zenodo <http://zenodo.org>`_ is a repository hosted by CERN, storing publications as well as
+`Zenodo <https://zenodo.org>`_ is a repository hosted by CERN, storing publications as well as
 research data. Dissemin uses it to upload papers on behalf of users.
 
 To use Zenodo, you need `an account <https://zenodo.org/youraccount/register>`_. You can

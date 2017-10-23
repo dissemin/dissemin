@@ -1,7 +1,7 @@
 dissem.in
 ================
 
-[![Documentation Status](https://img.shields.io/badge/docs-latest-brightgreen.svg?style=flat)](http://dev.dissem.in/doc/)
+[![Documentation Status](https://img.shields.io/badge/docs-latest-brightgreen.svg?style=flat)](https://dev.dissem.in/doc/)
 [![Build Status](https://travis-ci.org/dissemin/dissemin.svg?branch=master)](https://travis-ci.org/dissemin/dissemin)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e8d7f47263fd4cfa9afb5ef5ebe95668)](https://www.codacy.com/app/dissemin/dissemin)
 [![Coverage status](https://api.codacy.com/project/badge/Coverage/e8d7f47263fd4cfa9afb5ef5ebe95668)](https://www.codacy.com/app/dissemin/dissemin)
@@ -13,6 +13,5 @@ Released under the [Affero General Public License](http://www.gnu.org/licenses/a
 
 * [Project's homepage](http://dissem.in)
 * [Live support on IRC](irc://irc.ulminfo.fr/#openaccess)
-* [Developers' home](http://dev.dissem.in/)
-* [Documentation](http://dev.dissem.in/doc)
+* [Documentation](https://dev.dissem.in/)
 * [To do list](https://github.com/wetneb/dissemin/issues)

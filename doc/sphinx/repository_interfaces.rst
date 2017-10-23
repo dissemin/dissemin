@@ -11,7 +11,7 @@ First, check that the repository you want to create an interface for
 has an API that allows that.
 
 In this tutorial we will write an interface for a DSpace repository, using
-the `DSpace Demo <http://demo.dspace.org/>`_ as a test instance. This repository
+the `DSpace Demo <https://demo.dspace.org/>`_ as a test instance. This repository
 supports the `SWORD <http://swordapp.org>`_ protocol, so let's write a SWORD
 adapter for Dissemin.
 
@@ -61,7 +61,7 @@ The paper to be deposited is available in `self.paper`, as a :class:`~papers.mod
 sources, bibliographic information, identifiers, publisher's policy, and so on.
 You can either access it directly from the attributes of the paper, for instance
 with `self.paper.title`, or use the JSON representation that we generate for
-`the API <http://dev.dissem.in/api.html>`_, which can be generated using `self.paper.json()`. For instance, `self.paper.json()['title']` gives you the title.
+`the API <https://dev.dissem.in/api.html>`_, which can be generated using `self.paper.json()`. For instance, `self.paper.json()['title']` gives you the title.
 
 The PDF file is passed as an argument to the `submit_deposit` method. It
 is a path to the PDF file, which you can open with `open(pdf, 'r')` for instance.
