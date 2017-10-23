@@ -11,7 +11,7 @@ their online availability as well as publisher policy. This documentation
 explains how it works and how to use it.
 
 This serves as the main location for the documentation. First, you might
-want to :ref:`page-install` or :ref:`page-vm`.
+want to refer to :ref:`page-install`.
 
 In all cases, you will need to :ref:`page-apikeys` to have access
 to the metadata sources..
@@ -21,7 +21,6 @@ to the metadata sources..
 
    overview
    api
-   vm
    requirements
    install
    apikeys
