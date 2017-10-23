@@ -72,7 +72,10 @@ class RenderingTest(PrefilledTest):
         return self.client.get(reverse(*args, **kwargs))
 
     def checkPage(self, *args, **kwargs):
-        self.checkHtml(self.getPage(*args, **kwargs))
+        # make sure there's no toolbar, as it may break the tests
+        with self.settings(DEBUG_TOOLBAR_CONFIG = {'SHOW_TOOLBAR_CALLBACK':
+                (lambda r: False)}):
+            return self.checkHtml(self.getPage(*args, **kwargs))
 
     def checkPermanentRedirect(self, *args, **kwargs):
         self.assertEqual(self.getPage(*args, **kwargs).status_code, 301)
@@ -95,9 +98,6 @@ class InstitutionPagesTest(RenderingTest):
 
 
 class PaperPagesTest(RenderingTest):
-
-    def test_index(self):
-        self.checkHtml(self.getPage('index'))
 
     def test_researcher(self):
         for r in [self.r1, self.r2, self.r3, self.r4]:
@@ -184,3 +184,26 @@ class PaperPagesTest(RenderingTest):
             datetime.date(2016, 7, 2))
         self.assertEqual(p.slug, '')
         self.checkPage('paper', args=[p.pk, p.slug])
+
+
+class MiscPagesTest(RenderingTest):
+
+    def test_index(self):
+        self.checkPage('index')
+
+    def test_sources(self):
+        self.checkPage('sources')
+
+    def test_faq(self):
+        self.checkPage('faq')
+
+    def test_tos(self):
+        self.checkPage('tos')
+
+    def test_partners(self):
+        self.checkPage('partners')
+
+    def test_account_login(self):
+        self.checkPage('account_login')
+
+
