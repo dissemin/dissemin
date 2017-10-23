@@ -125,8 +125,7 @@ This is done by applying migrations::
    python manage.py migrate
 
 (this should be done every time the source code is updated).
-Then you can move on to :ref:`page-importresearchers`
-and :ref:`page-deploying`.
+Then you can move on to :ref:`page-deploying`.
 
 Populate the search index
 ~~~~~~~~~~~~~~~~~~~~~~~~~

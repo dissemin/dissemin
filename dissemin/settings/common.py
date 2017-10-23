@@ -23,7 +23,7 @@
 Django settings for dissemin project.
 
 See the doc for details of usage:
-http://dev.dissem.in/install.html
+https://dev.dissem.in/install.html
 
 For the full list of Django settings and their values, see
 https://docs.djangoproject.com/en/1.8/ref/settings/
