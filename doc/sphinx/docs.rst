@@ -11,7 +11,7 @@ reStructuredText sources of the docs with sphinx-apidoc::
 
      # first, make sure you are in an environment where
      # the requirements are available
-     source .venv/bin/activate
+     source .virtualenv/bin/activate
      # then, invoke sphinx-apidoc via make
      make -B doc
 
