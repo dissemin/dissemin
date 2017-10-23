@@ -108,7 +108,7 @@ EMAIL_USE_TLS = True
 
 ### API keys ###
 # These keys are used to communicate with various interfaces. See
-# http://dissemin.readthedocs.org/en/latest/apikeys.html 
+# https://dev.dissem.in/apikeys.html
 
 # RoMEO API KEY
 # Used to fetch publisher policies. Get one at
