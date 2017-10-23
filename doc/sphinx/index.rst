@@ -14,7 +14,7 @@ This serves as the main location for the documentation. First, you might
 want to refer to :ref:`page-install`.
 
 In all cases, you will need to :ref:`page-apikeys` to have access
-to the metadata sources..
+to the metadata sources.
 
 .. toctree::
    :maxdepth: 2
