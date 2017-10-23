@@ -56,6 +56,7 @@ dependencies::
 
    virtualenv .virtualenv
    source .virtualenv/bin/activate
+   pip install --upgrade setuptools
    pip install -r requirements.txt
 
 Set up the database
