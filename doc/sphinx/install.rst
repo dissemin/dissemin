@@ -4,7 +4,7 @@ Installation
 ============
 
 There are two ways to install Dissemin. The automatic way uses
-`Vagrant <https://www.vagrantup.com>` to install Dissemin to a container or VM,
+`Vagrant <https://www.vagrantup.com>`_ to install Dissemin to a container or VM,
 and only takes a few commands. The manual way is more complex and is
 described afterwards.
 
@@ -83,8 +83,8 @@ Edit this file to change the following settings:
 - (Optional) Set up the SMTP parameters to send emails to authors, in the ``EMAIL`` section.
 
 - ``ROMEO_API_KEY`` and ``PROAIXY_API_KEY`` are required if you want to
-  import papers automatically from these sources. See :ref:`page-apikeys`
-  about how to get them.
+  import papers automatically from these sources.
+  See :ref:`page-apikeys` about how to get them.
 
 
 Install and configure the search engine
