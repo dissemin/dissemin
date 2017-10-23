@@ -30,6 +30,7 @@ to the metadata sources..
    datamodel
    development
    modules
+   docs
 
 
 Indices and tables
