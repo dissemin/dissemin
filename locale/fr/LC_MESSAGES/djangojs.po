@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-16 00:46+0200\n"
+"POT-Creation-Date: 2017-10-24 15:09+0200\n"
 "PO-Revision-Date: 2016-05-16 00:48+0200\n"
 "Last-Translator: Ryan Lahfa <masterancpp@gmail.com>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
@@ -18,40 +18,96 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
+#: doc/sphinx/_build/html/_static/doctools.js:167
+msgid "Permalink to this headline"
+msgstr ""
+
+#: doc/sphinx/_build/html/_static/doctools.js:173
+msgid "Permalink to this definition"
+msgstr ""
+
+#: doc/sphinx/_build/html/_static/doctools.js:206
+msgid "Hide Search Matches"
+msgstr ""
+
+#: doc/sphinx/_build/html/_static/searchtools.js:400
+msgid "Searching"
+msgstr ""
+
+#: doc/sphinx/_build/html/_static/searchtools.js:405
+msgid "Preparing search..."
+msgstr ""
+
+#: doc/sphinx/_build/html/_static/searchtools.js:566
+msgid "Search Results"
+msgstr ""
+
+#: doc/sphinx/_build/html/_static/searchtools.js:568
+msgid ""
+"Your search did not match any documents. Please make sure that all words are "
+"spelled correctly and that you've selected enough categories."
+msgstr ""
+
+#: doc/sphinx/_build/html/_static/searchtools.js:570
+#, javascript-format
+msgid "Search finished, found %s page(s) matching the search query."
+msgstr ""
+
+#: doc/sphinx/_build/html/_static/searchtools.js:623
+msgid ", in "
+msgstr ""
+
+#: doc/sphinx/_build/html/_static/sidebar.js:77
+msgid "Expand sidebar"
+msgstr ""
+
+#: doc/sphinx/_build/html/_static/sidebar.js:90
+#: doc/sphinx/_build/html/_static/sidebar.js:118
+msgid "Collapse sidebar"
+msgstr ""
+
 #: papers/static/papers/refresh.js:35
 msgid "Do not show this message anymore"
 msgstr "Ne plus montrer ce message"
 
-#: papers/static/papers/refresh.js:63
+#: papers/static/papers/refresh.js:66
 msgid "No author"
 msgstr "Pas d'auteur"
 
-#: papers/static/papers/refresh.js:65
+#: papers/static/papers/refresh.js:68
 msgid "No title"
 msgstr "Pas de titre"
 
-#: papers/static/papers/refresh.js:67
+#: papers/static/papers/refresh.js:70
 msgid "Invalid publication date"
 msgstr "Date de publication invalide"
 
-#: papers/static/papers/refresh.js:102
+#: papers/static/papers/refresh.js:105
 msgid "We ignored %(count)s paper from your ORCiD profile."
 msgid_plural "We ignored %(count)s papers from your ORCiD profile."
 msgstr[0] "Nous avons ignoré %(count)s publication de votre profil ORCiD"
 msgstr[1] "Nous avons ignoré %(count)s publications de votre profil ORCiD"
 
-#: papers/static/papers/refresh.js:112
-msgid "\"%(name)s\" is ignored with the following reason: %(reason)s"
+#: papers/static/papers/refresh.js:115
+#, fuzzy
+#| msgid "\"%(name)s\" is ignored with the following reason: %(reason)s"
+msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
 msgstr "« %(name)s » est ignoré pour la raison suivante: %(reason)s"
 
-#: papers/static/papers/refresh.js:120
-msgid "A paper has been ignored, because it has no name"
+#: papers/static/papers/refresh.js:123
+#, fuzzy
+#| msgid "A paper has been ignored, because it has no name"
+msgid "A paper was ignored, because it has no name"
 msgstr "Un papier a été ignoré, car il n'a pas de titre"
 
-#: papers/static/papers/refresh.js:131 papers/static/papers/refresh.js:158
-msgid "Show more informations"
+#: papers/static/papers/refresh.js:135 papers/static/papers/refresh.js:163
+#, fuzzy
+#| msgid "Show more informations"
+msgid "Show more information"
 msgstr "Montrer plus d'informations"
 
-#: papers/static/papers/refresh.js:155
-msgid "Show less informations"
+#: papers/static/papers/refresh.js:160
+#, fuzzy
+#| msgid "Show less informations"
+msgid "Show less information"
 msgstr "Montrer moins d'informations"
