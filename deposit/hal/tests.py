@@ -20,7 +20,7 @@
 
 from __future__ import unicode_literals
 
-from unittest import expectedFailure
+from unittest import expectedFailure, skip
 from django.test import TestCase
 
 from deposit.hal.metadata import AOFRFormatter
@@ -65,9 +65,13 @@ class AOFRTest(TestCase):
             # self.xsd.assertValid(rendered)
 
 
+@skip("""
+HAL tests are currently disabled because of deletion issues in
+hal-preprod. Feel free to reactivate once this has been solved.
+(2017-10-23)
+""")
 class HALProtocolTest(ProtocolTest):
 
-    @classmethod
     def setUpClass(self):
         super(HALProtocolTest, self).setUpClass()
         self.repo.username = 'test_ws'
