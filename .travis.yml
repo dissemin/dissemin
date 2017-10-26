@@ -68,7 +68,6 @@ before_script:
   - psql -c "CREATE DATABASE dissemin;" -U postgres
 
 script:
-  - ./devutils/notify_translations
   - coverage run --source=dissemin,papers,backend,deposit,upload,statistics --omit=*/migrations/*,dissemin/settings/* manage.py test -v 2
 
 after_success:
