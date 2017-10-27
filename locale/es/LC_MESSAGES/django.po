@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2017-10-25 08:11:00+0000\n"
+"PO-Revision-Date: 2017-10-27 02:45:07+0000\n"
 "X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -537,7 +537,7 @@ msgstr ""
 
 #: deposit/views.py:208
 msgid "Access to the PDF was denied."
-msgstr ""
+msgstr "Se denegó el acceso al PDF."
 
 #: deposit/zenodo/forms.py:29
 msgid "Creative Commons CCZero (CC0)"
@@ -747,15 +747,15 @@ msgstr ""
 #: papers/models.py:1255 papers/views.py:124 papers/views.py:129
 #: papers/views.py:269 papers/views.py:303
 msgid "Papers"
-msgstr ""
+msgstr "Documentos"
 
 #: papers/templates/papers/annotButtons.html:8
 msgid "Right"
-msgstr ""
+msgstr "Correcto"
 
 #: papers/templates/papers/annotButtons.html:13
 msgid "Wrong"
-msgstr ""
+msgstr "Incorrecto"
 
 #: papers/templates/papers/annotButtons.html:16
 #: papers/templates/papers/paperDetails.html:26
@@ -765,11 +765,11 @@ msgstr "Buscar en Google Académico"
 #: papers/templates/papers/createProfile.html:8
 #: papers/templates/papers/createProfile.html:12
 msgid "Create your profile"
-msgstr ""
+msgstr "Crear perfil personal"
 
 #: papers/templates/papers/createProfile.html:15
 msgid "\nTo fetch your publications, we need one last piece of information: your name.\n"
-msgstr ""
+msgstr "Para recuperar tus publicaciones, necesitamos un último dato: tu nombre.\n"
 
 #: papers/templates/papers/department.html:60
 #: papers/templates/papers/institution.html:37
@@ -789,7 +789,7 @@ msgstr ""
 #: papers/templates/papers/department.html:75
 #: papers/templates/papers/institution.html:52
 msgid "Delete"
-msgstr ""
+msgstr "Eliminar"
 
 #: papers/templates/papers/department.html:88
 msgid "Papers of the members"
@@ -797,21 +797,21 @@ msgstr ""
 
 #: papers/templates/papers/group.html:14
 msgid "Website"
-msgstr ""
+msgstr "Sitio web"
 
 #: papers/templates/papers/group.html:18
 msgid "Members:"
-msgstr ""
+msgstr "Miembros:"
 
 #: papers/templates/papers/index.html:10
 #: papers/templates/papers/institutions.html:11
 #: templates/dissemin/breadcrumbs.html:3 templates/dissemin/skeleton.html:71
 msgid "Home"
-msgstr ""
+msgstr "Inicio"
 
 #: papers/templates/papers/index.html:23
 msgid "Welcome to dissemin"
-msgstr ""
+msgstr "Te damos la bienvenida a Dissemin"
 
 #: papers/templates/papers/index.html:26
 msgid "Dissemin detects papers behind pay-walls and invites their authors to upload them in one click to an open repository."
@@ -826,7 +826,7 @@ msgstr ""
 #: publishers/templates/publishers/list.html:50
 #: publishers/templates/publishers/list.html:89
 msgid "Search"
-msgstr ""
+msgstr "Buscar"
 
 #: papers/templates/papers/index.html:46
 msgid "Green open access"
@@ -854,27 +854,27 @@ msgstr ""
 
 #: papers/templates/papers/institutions.html:25
 msgid "Institutions"
-msgstr ""
+msgstr "Instituciones"
 
 #: papers/templates/papers/itemOrcid.html:16
 #: papers/templates/papers/itemResearcher.html:16
 msgid "Yes"
-msgstr ""
+msgstr "Sí"
 
 #: papers/templates/papers/itemResearcher.html:13
 msgid "(empty profile)"
-msgstr ""
+msgstr "(perfil vacío)"
 
 #: papers/templates/papers/paper.html:62
 #, python-format
 msgctxt "as in: _Journal article by_ Tom Smith, Nicole Allen"
 msgid " \n    <span class=\"paperDocType\">%(doctype)s</span> by\n    "
-msgstr ""
+msgstr " \n    <span class=\"paperDocType\">%(doctype)s</span> por\n    "
 
 #: papers/templates/papers/paper.html:70
 #, python-format
 msgid "\n            and <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s other authors</a>\n            "
-msgstr ""
+msgstr "\n            y <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s otros autores</a>\n            "
 
 #: papers/templates/papers/paper.html:77
 #, python-format
@@ -897,11 +897,11 @@ msgstr "Texto completo:"
 #: papers/templates/papers/paper.html:116
 #: papers/templates/papers/publiListItem.html:37
 msgid "Download"
-msgstr ""
+msgstr "Descargar"
 
 #: papers/templates/papers/paper.html:118 statistics/models.py:66
 msgid "Unavailable"
-msgstr ""
+msgstr "No disponible"
 
 #: papers/templates/papers/paper.html:120
 msgid "Ask upload"
@@ -909,7 +909,7 @@ msgstr ""
 
 #: papers/templates/papers/paper.html:124
 msgid "Publisher:"
-msgstr ""
+msgstr "Editorial:"
 
 #: papers/templates/papers/paper.html:131
 msgid "Deposited."
@@ -1041,32 +1041,32 @@ msgstr[1] ""
 
 #: papers/templates/papers/search.html:222
 msgid "Search by title"
-msgstr ""
+msgstr "Buscar por título"
 
 #: papers/templates/papers/search.html:232
 msgid "By authors"
-msgstr ""
+msgstr "Por autores"
 
 #: papers/templates/papers/search.html:237
 msgid "By publication date"
-msgstr ""
+msgstr "Por fecha de publicación"
 
 #: papers/templates/papers/search.html:240
 msgid "after"
-msgstr ""
+msgstr "después"
 
 #: papers/templates/papers/search.html:247
 msgid "before"
-msgstr ""
+msgstr "antes"
 
 #: papers/templates/papers/search.html:254
 msgid "By document type"
-msgstr ""
+msgstr "Por tipo de documento"
 
 #: papers/templates/papers/search.html:273
 #: publishers/templates/publishers/list.html:76
 msgid "Sort by"
-msgstr ""
+msgstr "Ordenar por"
 
 #: papers/templates/papers/search.html:281
 #: publishers/templates/publishers/list.html:84
@@ -1076,15 +1076,15 @@ msgstr ""
 
 #: papers/templates/papers/search.html:287
 msgid "By visibility"
-msgstr ""
+msgstr "Por visibilidad"
 
 #: papers/templates/papers/search.html:292
 msgid "By full text availability"
-msgstr ""
+msgstr "Por disponibilidad de texto completo"
 
 #: papers/templates/papers/search.html:298
 msgid "By publisher policy"
-msgstr ""
+msgstr "Por normativa de editorial"
 
 #: papers/templatetags/statuses.py:19 papers/templatetags/statuses.py:79
 msgid "Unknown OA status"
@@ -1100,7 +1100,7 @@ msgstr "Se pueden archivar las versiones originales."
 
 #: papers/templatetags/statuses.py:34
 msgid "Preprints cannot be archived."
-msgstr ""
+msgstr "No se pueden archivar las versiones originales."
 
 #: papers/templatetags/statuses.py:35
 msgid "Under the restrictions below, preprints can be archived."
@@ -1108,7 +1108,7 @@ msgstr "En función de las restricciones siguientes, se pueden archivar las vers
 
 #: papers/templatetags/statuses.py:36
 msgid "Preprints archiving policy unclear"
-msgstr ""
+msgstr "La normativa de archivado de versiones originales no es clara"
 
 #: papers/templatetags/statuses.py:37
 msgid "Preprints archiving policy unknown"
@@ -1120,7 +1120,7 @@ msgstr "Se pueden archivar las versiones revisadas."
 
 #: papers/templatetags/statuses.py:39
 msgid "Postprints cannot be archived."
-msgstr ""
+msgstr "No se pueden archivar las versiones revisadas."
 
 #: papers/templatetags/statuses.py:40
 msgid "Under the restrictions below, postprints can be archived."
@@ -1128,7 +1128,7 @@ msgstr "En función de las restricciones siguientes, se pueden archivar las vers
 
 #: papers/templatetags/statuses.py:41
 msgid "Postprint archiving policy unclear."
-msgstr ""
+msgstr "La normativa de archivado de versiones revisadas no es clara."
 
 #: papers/templatetags/statuses.py:42
 msgid "Postprint archiving policy unknown."
@@ -1136,27 +1136,27 @@ msgstr "Se desconoce la normativa de archivado de versiones revisadas."
 
 #: papers/templatetags/statuses.py:43
 msgid "Final versions can be archived."
-msgstr ""
+msgstr "Se pueden archivar las versiones finales."
 
 #: papers/templatetags/statuses.py:44
 msgid "Final versions cannot be archived."
-msgstr ""
+msgstr "No se pueden archivar las versiones finales."
 
 #: papers/templatetags/statuses.py:45
 msgid "Under the restrictions below, final versions can be archived."
-msgstr ""
+msgstr "En función de las restricciones siguientes, se pueden archivar las versiones finales."
 
 #: papers/templatetags/statuses.py:46
 msgid "Final version archiving policy unclear."
-msgstr ""
+msgstr "La normativa de archivado de versiones finales no es clara."
 
 #: papers/templatetags/statuses.py:47
 msgid "Final version archiving policy unknown."
-msgstr ""
+msgstr "La normativa de archivado de versiones finales no es clara."
 
 #: papers/templatetags/statuses.py:49
 msgid "Unknown policy"
-msgstr ""
+msgstr "Normativa desconocida"
 
 #: papers/templatetags/statuses.py:55
 msgid "archiving allowed."
@@ -1193,11 +1193,11 @@ msgstr ""
 
 #: papers/templatetags/statuses.py:70
 msgid "policy unclear"
-msgstr ""
+msgstr "normativa no clara"
 
 #: papers/templatetags/statuses.py:71
 msgid "policy unknown"
-msgstr ""
+msgstr "normativa desconocida"
 
 #: papers/views.py:128
 msgid "All papers"
@@ -1241,7 +1241,7 @@ msgstr ""
 
 #: publishers/forms.py:11
 msgid "name"
-msgstr ""
+msgstr "nombre"
 
 #: publishers/forms.py:19 publishers/templates/publishers/list.html:55
 msgid "Filter by publisher policy"
@@ -1352,7 +1352,7 @@ msgstr[1] ""
 
 #: publishers/templates/publishers/list.html:94
 msgid "Data provided by"
-msgstr ""
+msgstr "Datos provistos por"
 
 #: publishers/templates/publishers/list.html:129
 msgid "No publisher found."

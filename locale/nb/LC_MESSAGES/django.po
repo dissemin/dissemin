@@ -1,7 +1,7 @@
-# Translation of Dissemin website to Simplified Chinese (中文（简体）‎)
+# Translation of Dissemin website to Norwegian Bokmål (norsk bokmål)
 # Exported from translatewiki.net
 #
-# Author: Liuxinyu970226
+# Author: Jon Harald Søby
 # --
 # This file is part of the Dissemin Project
 # This file is distributed under the same license as the Dissemin package.
@@ -9,812 +9,813 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2017-10-27 02:45:09+0000\n"
+"PO-Revision-Date: 2017-10-27 02:45:08+0000\n"
 "X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: zh-Hans\n"
+"Language: nb\n"
 "X-Generator: MediaWiki 1.31.0-alpha; Translate 2017-07-25\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: deposit/forms.py:41
 msgid "Upload type"
-msgstr "上传类型"
+msgstr "Opplastingstype"
 
 #: deposit/forms.py:42 deposit/templates/deposit/deposits.html:40
 msgid "Repository"
-msgstr "存储库"
+msgstr ""
 
 #: deposit/forms.py:51
 msgid "Invalid full text identifier."
-msgstr "无效的全文标识符。"
+msgstr "Ugyldig fulltekstidentifikator."
 
 #: deposit/forms.py:106 papers/templates/papers/paper.html:144
 msgid "Abstract"
-msgstr "摘要"
+msgstr "Sammendrag"
 
 #: deposit/forms.py:119
 msgid "No preferred repository"
-msgstr "没有首选存储库"
+msgstr ""
 
 #: deposit/forms.py:140 deposit/hal/forms.py:77 deposit/osf/forms.py:143
 msgid "Save"
-msgstr "保存"
+msgstr "Lagre"
 
 #: deposit/hal/forms.py:43
 msgid "Scientific field"
-msgstr "系统字段"
+msgstr ""
 
 #: deposit/hal/forms.py:48
 msgid "Depositing author"
-msgstr "存放作者"
+msgstr ""
 
 #: deposit/hal/forms.py:55
 msgid "Affiliation"
-msgstr "附属机构"
+msgstr ""
 
 #: deposit/hal/metadata.py:36
 msgid "Chemistry"
-msgstr "化学"
+msgstr "Kjemi"
 
 #: deposit/hal/metadata.py:37
 msgid "Computer science"
-msgstr "计算机科学"
+msgstr ""
 
 #: deposit/hal/metadata.py:38
 msgid "Mathematics"
-msgstr "数学"
+msgstr "Matematikk"
 
 #: deposit/hal/metadata.py:39
 msgid "Physics"
-msgstr "物理学"
+msgstr "Fysikk"
 
 #: deposit/hal/metadata.py:40
 msgid "Non-linear science"
-msgstr "非线性科学"
+msgstr "Ikke-lineær vitenskap"
 
 #: deposit/hal/metadata.py:41
 msgid "Cognitive science"
-msgstr "认知科学"
+msgstr ""
 
 #: deposit/hal/metadata.py:42
 msgid "Environment sciences"
-msgstr "环境科学"
+msgstr "Kognisjonsvitenskap"
 
 #: deposit/hal/metadata.py:43
 msgid "Planet and Universe"
-msgstr "行星与宇宙"
+msgstr "Planeten og universet"
 
 #: deposit/hal/metadata.py:44
 msgid "Biological anthropology"
-msgstr "生物人类学"
+msgstr "Biologisk antropologi"
 
 #: deposit/hal/metadata.py:45
 msgid "Social Anthropology and ethnology"
-msgstr "社会人类学与人种学"
+msgstr "Sosialantropologi og etnologi"
 
 #: deposit/hal/metadata.py:46
 msgid "Archaeology and Prehistory"
-msgstr "考古学与史前"
+msgstr "Arkeologi og førhistorie"
 
 #: deposit/hal/metadata.py:47
 msgid "Architecture, space management"
-msgstr "建筑学、空间管理"
+msgstr ""
 
 #: deposit/hal/metadata.py:48
 msgid "Art and art history"
-msgstr "艺术与艺术史"
+msgstr "Kunst og kunsthistorie"
 
 #: deposit/hal/metadata.py:49
 msgid "Classical studies"
-msgstr "古典研究"
+msgstr "Klassiske studier"
 
 #: deposit/hal/metadata.py:50
 msgid "Demography"
-msgstr "人口学"
+msgstr "Demografi"
 
 #: deposit/hal/metadata.py:51 deposit/osf/forms.py:67 deposit/osf/forms.py:90
 msgid "Law"
-msgstr "法律"
+msgstr "Juss"
 
 #: deposit/hal/metadata.py:52
 msgid "Economies and finances"
-msgstr "经济与金融"
+msgstr "Økonomi og finans"
 
 #: deposit/hal/metadata.py:53 deposit/osf/forms.py:63 deposit/osf/forms.py:86
 msgid "Education"
-msgstr "教育"
+msgstr "Pedagogikk"
 
 #: deposit/hal/metadata.py:54
 msgid "Environmental studies"
-msgstr "环境研究"
+msgstr "Miljøstudier"
 
 #: deposit/hal/metadata.py:55
 msgid "Gender studies"
-msgstr "性别研究"
+msgstr "Kjønnsstudier"
 
 #: deposit/hal/metadata.py:56
 msgid "Geography"
-msgstr "地理"
+msgstr "Geografi"
 
 #: deposit/hal/metadata.py:57
 msgid "Business administration"
-msgstr "企业管理"
+msgstr ""
 
 #: deposit/hal/metadata.py:58
 msgid "History, Philosophy and Sociology of Sciences"
-msgstr "历史、哲学与科学社会学"
+msgstr ""
 
 #: deposit/hal/metadata.py:59
 msgid "History"
-msgstr "历史"
+msgstr "Historie"
 
 #: deposit/hal/metadata.py:60
 msgid "Library and information sciences"
-msgstr "图书馆与信息科学"
+msgstr ""
 
 #: deposit/hal/metadata.py:61
 msgid "Linguistics"
-msgstr "语言学"
+msgstr "Lingvistikk"
 
 #: deposit/hal/metadata.py:62
 msgid "Literature"
-msgstr "文献"
+msgstr "Litteratur"
 
 #: deposit/hal/metadata.py:63
 msgid "Cultural heritage and museology"
-msgstr "文化遗产与博物馆学"
+msgstr "Kulturarv og museologi"
 
 #: deposit/hal/metadata.py:64
 msgid "Musicology and performing arts"
-msgstr "音乐学与表演艺术"
+msgstr ""
 
 #: deposit/hal/metadata.py:65
 msgid "Philosophy"
-msgstr "哲学"
+msgstr "Filosofi"
 
 #: deposit/hal/metadata.py:66
 msgid "Psychology"
-msgstr "心理学"
+msgstr "Psykologi"
 
 #: deposit/hal/metadata.py:67
 msgid "Religions"
-msgstr "宗教"
+msgstr "Religionsvitenskap"
 
 #: deposit/hal/metadata.py:68
 msgid "Political science"
-msgstr "政治学"
+msgstr "Statsvitenskap"
 
 #: deposit/hal/metadata.py:69
 msgid "Sociology"
-msgstr "社会学"
+msgstr "Sosiologi"
 
 #: deposit/hal/metadata.py:70
 msgid "Methods and statistics"
-msgstr "方法与统计"
+msgstr ""
 
 #: deposit/hal/metadata.py:71
 msgid "Life sciences"
-msgstr "生命科学"
+msgstr ""
 
 #: deposit/hal/metadata.py:72
 msgid "Engineering sciences"
-msgstr "工程学"
+msgstr ""
 
 #: deposit/hal/metadata.py:73
 msgid "Statistics"
-msgstr "统计"
+msgstr "Statistikk"
 
 #: deposit/hal/metadata.py:74
 msgid "Economy and quantitative finance"
-msgstr "经济与计量金融学"
+msgstr "Økonomi og kvantitativ finans"
 
 #: deposit/hal/protocol.py:142
 msgid "No HAL user credentials provided."
-msgstr "没有提供HAL用户凭据。"
+msgstr ""
 
 #: deposit/hal/protocol.py:208
 msgid "This document is already in HAL. HAL refused the deposit."
-msgstr "此文档已存在于HAL。HAL拒绝存放。"
+msgstr ""
 
 #: deposit/hal/protocol.py:215
 #, python-format
 msgid "HAL refused the deposit (HTTP error %d): %s"
-msgstr "HAL拒绝存放（HTTP错误%d）：%s"
+msgstr ""
 
 #: deposit/hal/protocol.py:222
 msgid "HAL returned an invalid XML response"
-msgstr "HAL返回了无效的XML响应"
+msgstr ""
 
 #: deposit/hal/protocol.py:234
 msgid "This paper already exists in HAL."
-msgstr "此论文已存在于HAL。"
+msgstr ""
 
 #: deposit/hal/protocol.py:240
 msgid "HAL rejected the submission."
-msgstr "HAL拒绝提交。"
+msgstr ""
 
 #: deposit/hal/protocol.py:250
 msgid "HAL rejected the submission"
-msgstr "HAL拒绝提交"
+msgstr ""
 
 #: deposit/hal/protocol.py:259
 msgid "Password"
-msgstr "密码"
+msgstr "Passord"
 
 #: deposit/hal/protocol.py:287
 msgid "Connection to HAL failed. Please try again later."
-msgstr "连接到HAL失败。请稍后重试。"
+msgstr "Tilkoblingen til HAL feilet. Prøv igjen senere."
 
 #: deposit/models.py:38
 msgid "Failed"
-msgstr "失败"
+msgstr ""
 
 #: deposit/models.py:39
 msgid "Faked"
-msgstr "假的"
+msgstr ""
 
 #: deposit/models.py:40
 msgid "Pending publication"
-msgstr "等待发布"
+msgstr ""
 
 #: deposit/models.py:42
 msgid "Published"
-msgstr "已发布"
+msgstr "Publisert"
 
 #: deposit/models.py:43
 msgid "Refused by the repository"
-msgstr "被存储库拒绝"
+msgstr ""
 
 #: deposit/models.py:44
 msgid "Deleted"
-msgstr "已删除"
+msgstr "Slettet"
 
 #: deposit/models.py:166 deposit/templates/deposit/start.html:415
 #: deposit/views.py:103
 msgid "Deposit"
-msgstr "存放"
+msgstr ""
 
 #: deposit/models.py:219
 msgid "We will use this email address to notify you when your deposits are accepted."
-msgstr "当您的存放内容被接受时，我们将使用该电子邮件地址通知您。"
+msgstr ""
 
 #: deposit/models.py:225
 msgid "This repository will be used by default for your deposits."
-msgstr "该存储库将默认用作您存放材料的存储库。"
+msgstr ""
 
 #: deposit/osf/forms.py:35 deposit/osf/forms.py:46
 msgid "Creative Commons CC0 1.0 Universal"
-msgstr "知识共享CC0 1.0通用"
+msgstr "Creative Commons CC0 1.0 Universal"
 
 #: deposit/osf/forms.py:37 deposit/osf/forms.py:48
 msgid "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
-msgstr "知识共享署名-相同方式共享4.0国际（CC BY 4.0）"
+msgstr "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
 
 #: deposit/osf/forms.py:40 deposit/osf/forms.py:51
 msgid "No license"
-msgstr "无许可协议"
+msgstr "Ingen lisens"
 
 #: deposit/osf/forms.py:57 deposit/osf/forms.py:80
 msgid "Architecture"
-msgstr "建筑学"
+msgstr "Arkitektur"
 
 #: deposit/osf/forms.py:59 deposit/osf/forms.py:82
 msgid "Arts and Humanities"
-msgstr "艺术与人文学"
+msgstr "Kunst og humaniora"
 
 #: deposit/osf/forms.py:61 deposit/osf/forms.py:84
 msgid "Business"
-msgstr "商务"
+msgstr ""
 
 #: deposit/osf/forms.py:65 deposit/osf/forms.py:88
 msgid "Engineering"
-msgstr "工程"
+msgstr ""
 
 #: deposit/osf/forms.py:69 deposit/osf/forms.py:92
 msgid "Life Sciences"
-msgstr "生命科学"
+msgstr ""
 
 #: deposit/osf/forms.py:71 deposit/osf/forms.py:94
 msgid "Medicine and Health Sciences"
-msgstr "医学与健康科学"
+msgstr "Medisin og helsevitenskap"
 
 #: deposit/osf/forms.py:73 deposit/osf/forms.py:96
 msgid "Physical Sciences and Mathematics"
-msgstr "物理科学与数学"
+msgstr ""
 
 #: deposit/osf/forms.py:75 deposit/osf/forms.py:98
 msgid "Social and Behavioral Sciences"
-msgstr "社会与行为科学"
+msgstr ""
 
 #: deposit/osf/forms.py:104 deposit/zenodo/forms.py:45
 msgid "License"
-msgstr "许可协议"
+msgstr "Lisens"
 
 #: deposit/osf/forms.py:150
 msgid "Invalid OSF identifier."
-msgstr "无效的OSF标识符。"
+msgstr "Ugyldig OSF-identifikator."
 
 #: deposit/osf/models.py:13
 msgid "OSF identifier"
-msgstr "OSF标识符"
+msgstr "OSF-identifikator"
 
 #: deposit/osf/models.py:14
 msgid "If set, your deposits will be associated to this OSF account. This identifier is a string of letters and numbers which can be found in your OSF public profile URL."
-msgstr "如果设置，您的存放内容将于该OSF账户关联。此标识符是字母和数字字符串，这可以在您的OSF公开资料URL中找到。"
+msgstr ""
 
 #: deposit/osf/protocol.py:207
 msgid "Unable to create a project on OSF."
-msgstr "无法在OSF创建项目。"
+msgstr "Kunne ikke opprette prosjekt på OSF."
 
 #: deposit/osf/protocol.py:221
 msgid "Unable to authenticate to OSF."
-msgstr "无法验证OSF。"
+msgstr "Kunne ikke autentisere til OSF."
 
 #: deposit/osf/protocol.py:238
 msgid "Unable to add contributors."
-msgstr "无法添加贡献者。"
+msgstr "Kunne ikke legge til bidragsytere."
 
 #: deposit/osf/protocol.py:265
 msgid "Unable to update the contributors of the paper."
-msgstr "无法更新论文的贡献者。"
+msgstr ""
 
 #: deposit/osf/protocol.py:311
 msgid "Unable to update license."
-msgstr "无法更新许可协议。"
+msgstr "Kunne ikke oppdatere lisens."
 
 #: deposit/osf/protocol.py:368
 msgid "Unable to create the preprint."
-msgstr "无法创建预印本。"
+msgstr ""
 
 #: deposit/osf/protocol.py:417
 msgid "Unable to update the preprint license."
-msgstr "无法更新预印本的许可协议。"
+msgstr ""
 
 #: deposit/osf/protocol.py:425
 msgid "No Repository endpoint provided."
-msgstr "没有提供存储库终端。"
+msgstr ""
 
 #: deposit/osf/protocol.py:428
 msgid "No OSF token provided."
-msgstr "没有提供OSF令牌。"
+msgstr ""
 
 #: deposit/osf/protocol.py:469
 msgid "Unable to upload the PDF file."
-msgstr "无法上传PDF文件。"
+msgstr "Kunne ikke laste opp PDF-filen."
 
 #: deposit/osf/protocol.py:509
 msgid "Unable to delete the project."
-msgstr "无法删除项目。"
+msgstr "Kunne ikke slette prosjektet."
 
 #: deposit/osf/protocol.py:538 deposit/osf/protocol.py:546
 msgid "Unable to make the project public."
-msgstr "无法将项目公开化。"
+msgstr "Kunne ikke gjøre prosjektet offentlig."
 
 #: deposit/sword/protocol.py:45
 msgid "No servicedocument provided."
-msgstr "没有提供服务文档。"
+msgstr ""
 
 #: deposit/sword/protocol.py:110
 msgid "Unable to submit the paper to the collection."
-msgstr "无法提交论文至收藏。"
+msgstr ""
 
 #: deposit/sword/protocol.py:120
 msgid "Failed to connect to the SWORD server."
-msgstr "连接到SWORD服务器失败。"
+msgstr "Kunne ikke koble til SWORD-tjeneren."
 
 #: deposit/templates/deposit/deposits.html:10
 #: deposit/templates/deposit/deposits.html:14
 #: templates/dissemin/skeleton.html:82
 msgid "My deposits"
-msgstr "我的存放"
+msgstr ""
 
 #: deposit/templates/deposit/deposits.html:36
 msgid "Paper"
-msgstr "论文"
+msgstr ""
 
 #: deposit/templates/deposit/deposits.html:44
 msgid "Deposit date"
-msgstr "存放日期"
+msgstr ""
 
 #: deposit/templates/deposit/deposits.html:48
 msgid "Deposit type"
-msgstr "存放类型"
+msgstr ""
 
 #: deposit/templates/deposit/deposits.html:52
 msgid "Identifier"
-msgstr "标识符"
+msgstr "Identifikator"
 
 #: deposit/templates/deposit/deposits.html:58
 msgid "Meta URL"
-msgstr "元URL"
+msgstr "Meta-URL"
 
 #: deposit/templates/deposit/deposits.html:63
 msgid "PDF URL"
-msgstr "PDF URL"
+msgstr "PDF-URL"
 
 #: deposit/templates/deposit/deposits.html:70
 msgid "Status"
-msgstr "状态"
+msgstr "Status"
 
 #: deposit/templates/deposit/deposits.html:88
 msgid "You have not made any deposit via Dissemin. What are you waiting for? Liberate your papers today."
-msgstr "您没有通过Dissemin做出任何存放。您在等什么？今天就存放您的论文吧。"
+msgstr ""
 
 #: deposit/templates/deposit/global_preferences.html:13
 #: deposit/templates/deposit/preferences_nav.html:3
 #: templates/dissemin/skeleton.html:81
 msgid "Preferences"
-msgstr "参数设置"
+msgstr "Innstillinger"
 
 #: deposit/templates/deposit/preferences_nav.html:7
 msgid "General"
-msgstr "一般"
+msgstr "Generelt"
 
 #: deposit/templates/deposit/repo_preferences.html:13
 msgid "Repository preferences"
-msgstr "存储库设置"
+msgstr ""
 
 #: deposit/templates/deposit/start.html:12
 #: deposit/templates/deposit/start.html:16
 msgid "Depositing"
-msgstr "存放"
+msgstr ""
 
 #: deposit/templates/deposit/start.html:42
 msgid "Trying to fill this field automatically for you..."
-msgstr "正在为您自动填写该字段..."
+msgstr "Prøver å fylle inn dette feltet automatisk for deg …"
 
 #: deposit/templates/deposit/start.html:51
 msgid "Sorry, we could not fill this for you."
-msgstr "对不起，我们不能为您填写该字段。"
+msgstr "Beklager, vi klarte ikke å fylle det inn for deg."
 
 #: deposit/templates/deposit/start.html:258
 #: papers/templates/papers/department.html:30
 msgid "Dissemin encountered an error, please try again later."
-msgstr "Dissemin遇到错误，请稍后再试。"
+msgstr ""
 
 #: deposit/templates/deposit/start.html:295
 #, python-format
 msgid "\n            You can deposit the full text of your article. Dissemin will\n            send it to a repository where it will be made freely available.\n            By depositing your article via Dissemin,\n            you agree to our <a href=\"%(tosurl)s\">terms of service</a>.\n        "
-msgstr "\n            您可以存放您的文章全文。Dissemin将发送它到其能够自由展示的存储库。通过使用Dissemin存放您的文章，您同意我们的<a href=\"%(tosurl)s\">服务条款</a>。\n        "
+msgstr ""
 
 #: deposit/templates/deposit/start.html:306
 msgid "You do not appear to be one of the authors of this paper. By using this form, you certify that you have the permission to upload it on their behalf."
-msgstr "您并不是该论文的作者之一。通过使用该表单，您保证您有权代表作者上传它。"
+msgstr ""
 
 #: deposit/templates/deposit/start.html:316
 msgid "This paper cannot be deposited in any repository supported by Dissemin."
-msgstr "此页面不能存放至任何Dissemin支持的存储库。"
+msgstr ""
 
 #: deposit/templates/deposit/start.html:324
 msgid "Document"
-msgstr "文档"
+msgstr "Dokument"
 
 #: deposit/templates/deposit/start.html:332
 msgid "Options"
-msgstr "选项"
+msgstr "Valg"
 
 #: deposit/templates/deposit/start.html:338
 msgid "Upload type:"
-msgstr "上传类型："
+msgstr "Opplastingstype:"
 
 #: deposit/templates/deposit/start.html:351
 msgid "Repository:"
-msgstr "存储库："
+msgstr ""
 
 #: deposit/templates/deposit/start.html:364
 msgctxt "This repository will be soon available in Dissemin"
 msgid "Coming soon:"
-msgstr "即将到来："
+msgstr "Kommer snart:"
 
 #: deposit/templates/deposit/start.html:401
 msgid "Metadata"
-msgstr "元数据"
+msgstr "Metadata"
 
 #: deposit/templates/deposit/start.html:417
 msgid "Processing deposit..."
-msgstr "正在处理存放..."
+msgstr ""
 
 #: deposit/templates/deposit/start.html:417
 msgid "please wait..."
-msgstr "请稍等..."
+msgstr "vennligst vent …"
 
 #: deposit/views.py:65
 msgid "This repository is not available for this paper."
-msgstr "此存储库不适用于该论文。"
+msgstr ""
 
 #: deposit/views.py:138
 msgid "This repository could not be found."
-msgstr "找不到此存储库。"
+msgstr ""
 
 #: deposit/views.py:143 deposit/views.py:149 deposit/views.py:166
 msgid "This repository does not have any settings."
-msgstr "此存储库没有任何设置。"
+msgstr ""
 
 #: deposit/views.py:189
 msgid "This repository cannot be used for this paper."
-msgstr "此存储库不能用于该论文。"
+msgstr ""
 
 #: deposit/views.py:208
 msgid "Access to the PDF was denied."
-msgstr "访问PDF被拒绝。"
+msgstr "Tilgang til PDF-filen ble nektet."
 
 #: deposit/zenodo/forms.py:29
 msgid "Creative Commons CCZero (CC0)"
-msgstr "知识共享CCZero（CC0）"
+msgstr "Creative Commons CCZero (CC0)"
 
 #: deposit/zenodo/forms.py:31
 msgid "Creative Commons Attribution (CC-BY)"
-msgstr "知识共享署名（CC-BY）"
+msgstr "Creative Commons Attribution (CC-BY)"
 
 #: deposit/zenodo/forms.py:33
 msgid "Creative Commons Attribution-ShareAlike (CC-BY-SA)"
-msgstr "知识共享署名-相同方式共享（CC-BY-SA）"
+msgstr "Creative Commons Attribution-ShareAlike (CC-BY-SA)"
 
 #: deposit/zenodo/forms.py:35
 msgid "Creative Commons Attribution-NonCommercial (CC-BY-NC)"
-msgstr "知识共享署名-非商业性使用（CC-BY-NC）"
+msgstr "Creative Commons Attribution-NonCommercial (CC-BY-NC)"
 
 #: deposit/zenodo/forms.py:37
 msgid "Creative Commons Attribution-NoDerivatives (CC-BY-ND)"
-msgstr "知识共享署名-禁止演绎（CC-BY-ND）"
+msgstr "Creative Commons Attribution-NoDerivatives (CC-BY-ND)"
 
 #: deposit/zenodo/forms.py:39
 msgid "Other open license"
-msgstr "其他开放许可协议"
+msgstr "Annen åpen lisens"
 
 #: deposit/zenodo/protocol.py:72
 msgid "No Zenodo API key provided."
-msgstr "没有提供Zenodo API key。"
+msgstr "Ingen Zenodo API-nøkkel oppgitt."
 
 #: deposit/zenodo/protocol.py:81
 msgid "This happens when Zenodo has hiccups. Please try again in a few minutes or use a different repository in the menu above."
-msgstr "这会在Zenodo出现问题时发生。请等待几分钟再试，或使用上面菜单中的不同存储库。"
+msgstr ""
 
 #: deposit/zenodo/protocol.py:82
 msgid "Unable to authenticate to Zenodo."
-msgstr "无法验证Zenodo。"
+msgstr ""
 
 #: deposit/zenodo/protocol.py:89
 msgid "Unable to create a new deposition on Zenodo."
-msgstr "无法在Zenodo创建新的存放。"
+msgstr ""
 
 #: deposit/zenodo/protocol.py:101
 msgid "Unable to transfer the document to Zenodo."
-msgstr "无法转移文档至Zenodo。"
+msgstr ""
 
 #: deposit/zenodo/protocol.py:111
 msgid "No abstract is available for this paper but Zenodo requires one. Please provide it using the metadata panel."
-msgstr "没有此论文的摘要，但Zenodo要求一个。请使用元数据面板提供它。"
+msgstr ""
 
 #: deposit/zenodo/protocol.py:119
 msgid "Unable to submit paper metadata to Zenodo."
-msgstr "无法提交论文元数据至Zenodo。"
+msgstr ""
 
 #: deposit/zenodo/protocol.py:135
 msgid "Unable to publish the deposition on Zenodo."
-msgstr "无法在Zenodo发布存放。"
+msgstr ""
 
 #: dissemin/settings/common.py:269
 msgid "English"
-msgstr "英语"
+msgstr "Engelsk"
 
 #: dissemin/settings/common.py:270
 msgid "French"
-msgstr "法语"
+msgstr "Fransk"
 
 #: notification/models.py:62
 msgid "inboxes"
-msgstr "收件箱"
+msgstr "innbokser"
 
 #: papers/baremodels.py:54
 msgid "Journal article"
-msgstr "期刊文章"
+msgstr ""
 
 #: papers/baremodels.py:55
 msgid "Proceedings article"
-msgstr "学术文章"
+msgstr ""
 
 #: papers/baremodels.py:56
 msgid "Book chapter"
-msgstr "图书章节"
+msgstr "Bokkapittel"
 
 #: papers/baremodels.py:57
 msgid "Book"
-msgstr "书籍"
+msgstr "Bok"
 
 #: papers/baremodels.py:58
 msgid "Journal issue"
-msgstr "发行期刊"
+msgstr ""
 
 #: papers/baremodels.py:59
 msgid "Proceedings"
-msgstr "议程"
+msgstr ""
 
 #: papers/baremodels.py:60
 msgid "Entry"
-msgstr "条目"
+msgstr ""
 
 #: papers/baremodels.py:61
 msgid "Poster"
-msgstr "海报"
+msgstr ""
 
 #: papers/baremodels.py:62
 msgid "Report"
-msgstr "报告"
+msgstr "Rapport"
 
 #: papers/baremodels.py:63
 msgid "Thesis"
-msgstr "论题"
+msgstr "Avhandling"
 
 #: papers/baremodels.py:64
 msgid "Dataset"
-msgstr "数据集"
+msgstr "Datasett"
 
 #: papers/baremodels.py:65 papers/models.py:101
 msgid "Preprint"
-msgstr "预印本"
+msgstr ""
 
 #: papers/baremodels.py:66
 msgid "Other document"
-msgstr "其他文档"
+msgstr "Annet dokument"
 
 #: papers/forms.py:48
 msgid "Invalid ORCID identifier."
-msgstr "无效的ORCID标识符。"
+msgstr "Ugyldig ORCID-identifikator."
 
 #: papers/forms.py:54 papers/templates/papers/department.html:86
 #: papers/templates/papers/search.html:160
 msgid "Department"
-msgstr "部门"
+msgstr "Avdeling"
 
 #: papers/forms.py:56 papers/templates/papers/search.html:114
 msgid "Researcher"
-msgstr "研究员"
+msgstr ""
 
 #: papers/forms.py:75
 msgid "publication date"
-msgstr "出版日期"
+msgstr "publiseringsdato"
 
 #: papers/forms.py:76
 msgid "title"
-msgstr "标题"
+msgstr "tittel"
 
 #: papers/forms.py:79 publishers/forms.py:14
 msgid "decreasing"
-msgstr "减少中"
+msgstr "synkende"
 
 #: papers/forms.py:80 publishers/forms.py:15
 msgid "increasing"
-msgstr "增加中"
+msgstr "stigende"
 
 #: papers/forms.py:100 papers/forms.py:107
 msgid "Any"
-msgstr "任何"
+msgstr ""
 
 #: papers/forms.py:101
 msgid "Visible"
-msgstr "可见"
+msgstr "Synlig"
 
 #: papers/forms.py:102
 msgid "Invisible"
-msgstr "不可见"
+msgstr "Usynlig"
 
 #: papers/forms.py:191
 msgid "Try any author name"
-msgstr "尝试另一作者名"
+msgstr ""
 
 #: papers/models.py:102
 msgid "Postprint"
-msgstr "后印本"
+msgstr ""
 
 #: papers/models.py:103
 msgid "Published version"
-msgstr "发行版本"
+msgstr "Publisert versjon"
 
 #: papers/models.py:107
 msgid "Preparing profile"
-msgstr "发行详情"
+msgstr ""
 
 #: papers/models.py:108
 msgid "Fetching publications from ORCID"
-msgstr "正在从ORCID检索出版物"
+msgstr "Henter publikasjoner fra ORCID"
 
 #: papers/models.py:109
 msgid "Fetching publications from CrossRef"
-msgstr "正在从CrossRef检索出版物"
+msgstr "Henter publikasjoner fra CrossRef"
 
 #: papers/models.py:110
 msgid "Fetching publications from BASE"
-msgstr "正在从BASE检索出版物"
+msgstr "Henter publikasjoner fra BASE"
 
 #: papers/models.py:111
 msgid "Fetching publications from CORE"
-msgstr "正在从CORE检索出版物"
+msgstr "Henter publikasjoner fra CORE"
 
 #: papers/models.py:112
 msgid "Fetching publications from OAI-PMH"
-msgstr "正在从OAI-PMH检索出版物"
+msgstr "Henter publikasjoner fra OAI-PMH"
 
 #: papers/models.py:113
 msgid "Clustering publications"
-msgstr "正在聚集出版物"
+msgstr ""
 
 #: papers/models.py:114
 msgid "Updating statistics"
-msgstr "正在更新统计"
+msgstr "Oppdaterer statistikk"
 
 #: papers/models.py:1255 papers/views.py:124 papers/views.py:129
 #: papers/views.py:269 papers/views.py:303
 msgid "Papers"
-msgstr "论文"
+msgstr ""
 
 #: papers/templates/papers/annotButtons.html:8
 msgid "Right"
-msgstr "对"
+msgstr "Riktig"
 
 #: papers/templates/papers/annotButtons.html:13
 msgid "Wrong"
-msgstr "错"
+msgstr "Galt"
 
 #: papers/templates/papers/annotButtons.html:16
 #: papers/templates/papers/paperDetails.html:26
 msgid "Search in Google Scholar"
-msgstr "在Google学术中搜索"
+msgstr "Søk i Google Scholar"
 
 #: papers/templates/papers/createProfile.html:8
 #: papers/templates/papers/createProfile.html:12
 msgid "Create your profile"
-msgstr "创建您的详情"
+msgstr "Opprett profilen din"
 
 #: papers/templates/papers/createProfile.html:15
 msgid "\nTo fetch your publications, we need one last piece of information: your name.\n"
-msgstr "\n要检索您的出版物，我们需要您的少量信息：您的姓名。\n"
+msgstr ""
 
 #: papers/templates/papers/department.html:60
 #: papers/templates/papers/institution.html:37
 #: publishers/templates/publishers/list.html:116
 #: publishers/templates/publishers/policy.html:127
-#, python-format
+#, invalid-plural, python-format
 msgid "(%(num_total)s paper)"
 msgid_plural "(%(num_total)s papers)"
-msgstr[0] "（%(num_total)s篇论文）"
+msgstr[0] ""
+msgstr[1] ""
 
 #: papers/templates/papers/department.html:71
 #: papers/templates/papers/institution.html:48
 msgid "Researcher deleted. "
-msgstr "研究员已删除。\\"
+msgstr ""
 
 #: papers/templates/papers/department.html:75
 #: papers/templates/papers/institution.html:52
 msgid "Delete"
-msgstr "删除"
+msgstr "Slett"
 
 #: papers/templates/papers/department.html:88
 msgid "Papers of the members"
-msgstr "成员的论文"
+msgstr ""
 
 #: papers/templates/papers/group.html:14
 msgid "Website"
-msgstr "网站"
+msgstr "Nettsted"
 
 #: papers/templates/papers/group.html:18
 msgid "Members:"
-msgstr "成员："
+msgstr "Medlemmer:"
 
 #: papers/templates/papers/index.html:10
 #: papers/templates/papers/institutions.html:11
 #: templates/dissemin/breadcrumbs.html:3 templates/dissemin/skeleton.html:71
 msgid "Home"
-msgstr "首页"
+msgstr "Hjem"
 
 #: papers/templates/papers/index.html:23
 msgid "Welcome to dissemin"
-msgstr "欢迎来到dissemin"
+msgstr "Velkommen til dissemin"
 
 #: papers/templates/papers/index.html:26
 msgid "Dissemin detects papers behind pay-walls and invites their authors to upload them in one click to an open repository."
-msgstr "Dissemin在付费墙后面查找论文，并邀请作者一键上传它们到开放存储库。"
+msgstr ""
 
 #: papers/templates/papers/index.html:36
 #: papers/templates/papers/search.html:204
@@ -825,789 +826,792 @@ msgstr "Dissemin在付费墙后面查找论文，并邀请作者一键上传它�
 #: publishers/templates/publishers/list.html:50
 #: publishers/templates/publishers/list.html:89
 msgid "Search"
-msgstr "搜索"
+msgstr "Søk"
 
 #: papers/templates/papers/index.html:46
 msgid "Green open access"
-msgstr "绿色开放访问"
+msgstr ""
 
 #: papers/templates/papers/index.html:50
 msgid "Many researchers do not use their right to make their papers freely available online, in addition to the paywalled version offered by traditional publishers."
-msgstr "很多研究员不利用其权利来使它们的论文在线自由使用，此外还存在传统发行方提供的付费墙版本。"
+msgstr ""
 
 #: papers/templates/papers/index.html:58
 msgid "This forces libraries to buy overpriced electronic subscriptions to journals, when they can afford them at all."
-msgstr "这强制了图书馆购买定价高昂的电子订阅至期刊，只要它们负担得起。"
+msgstr ""
 
 #: papers/templates/papers/index.html:74
 msgid "Open repositories"
-msgstr "开放存储库"
+msgstr ""
 
 #: papers/templates/papers/index.html:77
 msgid "Uploading your papers on your own webpage is not enough. Such copies are less stable and harder to find than documents uploaded to well-indexed repositories."
-msgstr "上传您的论文至您自己的网页是不够的。这种复制不稳定，并且与专业索引的存储库相比更难找到合适的文档。"
+msgstr ""
 
 #: papers/templates/papers/index.html:85
 msgid "Dissemin searches for copies of your papers in a large collection of open repositories and tells you which ones cannot be accessed."
-msgstr "Dissemin在巨大的开放存储库收藏中搜索您的论文中的一些拷贝，并告诉您哪些不能访问。"
+msgstr ""
 
 #: papers/templates/papers/institutions.html:25
 msgid "Institutions"
-msgstr "学院"
+msgstr "Institusjoner"
 
 #: papers/templates/papers/itemOrcid.html:16
 #: papers/templates/papers/itemResearcher.html:16
 msgid "Yes"
-msgstr "是"
+msgstr "Ja"
 
 #: papers/templates/papers/itemResearcher.html:13
 msgid "(empty profile)"
-msgstr "（空白详情）"
+msgstr "(tom profil)"
 
 #: papers/templates/papers/paper.html:62
 #, python-format
 msgctxt "as in: _Journal article by_ Tom Smith, Nicole Allen"
 msgid " \n    <span class=\"paperDocType\">%(doctype)s</span> by\n    "
-msgstr " \n    <span class=\"paperDocType\">%(doctype)s</span>由\n    "
+msgstr ""
 
 #: papers/templates/papers/paper.html:70
 #, python-format
 msgid "\n            and <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s other authors</a>\n            "
-msgstr "\n            以及<a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s位其他作者</a>\n            "
+msgstr ""
 
 #: papers/templates/papers/paper.html:77
 #, python-format
 msgid "\n            All %(nb_authors)s authors (<a href=\"#\" id=\"show_less_authors\">show less</a>):<br />\n            "
-msgstr "\n            所有%(nb_authors)s位作者（<a href=\"#\" id=\"show_less_authors\">显示更少</a>）：<br />\n            "
+msgstr ""
 
 #: papers/templates/papers/paper.html:89
 msgid "<strong>Congratulations!</strong> This paper was successfully deposited."
-msgstr "<strong>祝贺！</strong>此论文已成功存放。"
+msgstr ""
 
 #: papers/templates/papers/paper.html:96
 #, python-format
 msgid "<strong>Almost there!</strong> This paper has been deposited in <a href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a href=\"%(deposit_url)s\">this address</a> after validation by the repository administrators."
-msgstr "<strong>就快完成了！</strong>这篇论文已存放于<a href=\"%(repo_url)s\">%(repo_name)s</a>。在存储库的管理员验证后，全文将在<a href=\"%(deposit_url)s\">此地址</a>提供。"
+msgstr ""
 
 #: papers/templates/papers/paper.html:114
 msgid "Full text:"
-msgstr "全文："
+msgstr "Full tekst:"
 
 #: papers/templates/papers/paper.html:116
 #: papers/templates/papers/publiListItem.html:37
 msgid "Download"
-msgstr "下载"
+msgstr "Last ned"
 
 #: papers/templates/papers/paper.html:118 statistics/models.py:66
 msgid "Unavailable"
-msgstr "不可用"
+msgstr "Utilgjengelig"
 
 #: papers/templates/papers/paper.html:120
 msgid "Ask upload"
-msgstr "询问上传"
+msgstr ""
 
 #: papers/templates/papers/paper.html:124
 msgid "Publisher:"
-msgstr "发布者："
+msgstr "Utgiver:"
 
 #: papers/templates/papers/paper.html:131
 msgid "Deposited."
-msgstr "已存放。"
+msgstr ""
 
 #: papers/templates/papers/paper.html:133
 msgid "Deposit again"
-msgstr "再次存放"
+msgstr ""
 
 #: papers/templates/papers/paperDetails.html:7
 msgid "Published in"
-msgstr "出版于"
+msgstr "Publisert i"
 
 #: papers/templates/papers/paperDetails.html:19
 msgid "Links"
-msgstr "链接"
+msgstr "Lenker"
 
 #: papers/templates/papers/paperDetails.html:24
 msgid "Tools"
-msgstr "工具"
+msgstr "Verktøy"
 
 #: papers/templates/papers/paperDetails.html:29
 msgid "Request with the Open Access Button"
-msgstr "使用开放访问按钮请求"
+msgstr ""
 
 #: papers/templates/papers/paperDetails.html:35
 msgid "Admin zone"
-msgstr "管理区"
+msgstr "Adminsonen"
 
 #: papers/templates/papers/paperList.html:26
 msgid "No paper found."
-msgstr "找不到论文。"
+msgstr ""
 
 #: papers/templates/papers/paperList.html:33
 #, python-format
 msgid "Missing publications? <a href=\"%(matching_papers_url)s\"> Search for publications with a matching author name </a>"
-msgstr "缺少出版物？<a href=\"%(matching_papers_url)s\">使用匹配的作者名搜索出版物</a>"
+msgstr ""
 
 #: papers/templates/papers/publiListItem.html:16
 #, python-format
 msgid "and %(remaining_authors)s other authors"
-msgstr "以及%(remaining_authors)s位其他作者"
+msgstr ""
 
 #: papers/templates/papers/publiListItem.html:40
 #: publishers/templates/publishers/itemPolicy.html:21
 msgid "Upload"
-msgstr "上传"
+msgstr "Last opp"
 
 #: papers/templates/papers/publiListItem.html:45
 #: papers/templates/papers/search.html:52
 msgid "Exclude from my profile"
-msgstr "从我的详情中排除"
+msgstr "Ekskluder fra profilen min"
 
 #: papers/templates/papers/publiListItem.html:52
 #: papers/templates/papers/search.html:55
 msgid "Include in my profile"
-msgstr "包括在我的详情中"
+msgstr "Inkluder i profilen min"
 
 #: papers/templates/papers/search.html:37
 msgid "Claiming..."
-msgstr "正在声称..."
+msgstr ""
 
 #: papers/templates/papers/search.html:40
 msgid "Unclaiming..."
-msgstr "正在取消声称..."
+msgstr ""
 
 #: papers/templates/papers/search.html:71
 msgid "Claiming failed!"
-msgstr "声称失败！"
+msgstr ""
 
 #: papers/templates/papers/search.html:73
 msgid "Unclaiming failed!"
-msgstr "取消声称失败！"
+msgstr ""
 
 #: papers/templates/papers/search.html:89
 msgid "Refreshing results"
-msgstr "正在刷新结果"
+msgstr ""
 
 #: papers/templates/papers/search.html:99
 msgid "Refreshing profile"
-msgstr "正在刷新详情"
+msgstr "Oppdaterer profil"
 
 #: papers/templates/papers/search.html:119
 msgid "Is it you?"
-msgstr "是您么？"
+msgstr "Er det deg?"
 
 #: papers/templates/papers/search.html:140
 msgid "Refresh publications"
-msgstr "刷新出版物"
+msgstr "Oppdater publikasjoner"
 
 #: papers/templates/papers/search.html:143
 msgid "Address:"
-msgstr "地址："
+msgstr "Adresse:"
 
 #: papers/templates/papers/search.html:146
 msgid "Names:"
-msgstr "名称："
+msgstr "Navn:"
 
 #: papers/templates/papers/search.html:165
 msgid "Journal"
-msgstr "期刊"
+msgstr ""
 
 #: papers/templates/papers/search.html:168
 msgid "Published by"
-msgstr "出版方"
+msgstr "Publisert av"
 
 #: papers/templates/papers/search.html:170
 msgid "ISSN:"
-msgstr "ISSN："
+msgstr "ISSN:"
 
 #: papers/templates/papers/search.html:178
-#, python-format
+#, invalid-plural, python-format
 msgid "%(nb_publi)s paper published in %(journal)s"
 msgid_plural "%(nb_publi)s papers published in %(journal)s"
-msgstr[0] "%(nb_publi)s篇论文发表于%(journal)s"
+msgstr[0] ""
+msgstr[1] ""
 
 #: papers/templates/papers/search.html:186
 #: publishers/templates/publishers/policy.html:41
 msgid "Publisher"
-msgstr "发布者"
+msgstr "Utgiver"
 
 #: papers/templates/papers/search.html:195
-#, python-format
+#, invalid-plural, python-format
 msgid "%(nb_publi)s paper published by %(publisher)s"
 msgid_plural "%(nb_publi)s papers published by %(publisher)s"
-msgstr[0] "%(nb_publi)s篇论文由%(publisher)s发表"
+msgstr[0] ""
+msgstr[1] ""
 
 #: papers/templates/papers/search.html:222
 msgid "Search by title"
-msgstr "按标题搜索"
+msgstr "Søk etter tittel"
 
 #: papers/templates/papers/search.html:232
 msgid "By authors"
-msgstr "按 作者"
+msgstr "Etter forfattere"
 
 #: papers/templates/papers/search.html:237
 msgid "By publication date"
-msgstr "按出版日期"
+msgstr "Etter publiseringsdato"
 
 #: papers/templates/papers/search.html:240
 msgid "after"
-msgstr "晚于"
+msgstr "etter"
 
 #: papers/templates/papers/search.html:247
 msgid "before"
-msgstr "早于"
+msgstr "før"
 
 #: papers/templates/papers/search.html:254
 msgid "By document type"
-msgstr "按文档类型"
+msgstr "Etter dokumenttype"
 
 #: papers/templates/papers/search.html:273
 #: publishers/templates/publishers/list.html:76
 msgid "Sort by"
-msgstr "排序方式"
+msgstr "Sorter etter"
 
 #: papers/templates/papers/search.html:281
 #: publishers/templates/publishers/list.html:84
 #, python-format
 msgid "%(sort_by)s <div>%(increasing)s %(value)s</div>"
-msgstr "%(sort_by)s <div>%(increasing)s %(value)s</div>"
+msgstr ""
 
 #: papers/templates/papers/search.html:287
 msgid "By visibility"
-msgstr "按可见性"
+msgstr "Etter synlighet"
 
 #: papers/templates/papers/search.html:292
 msgid "By full text availability"
-msgstr "按全文可用性"
+msgstr "Etter fullteksttilgjengelighet"
 
 #: papers/templates/papers/search.html:298
 msgid "By publisher policy"
-msgstr "按出版商方针"
+msgstr ""
 
 #: papers/templatetags/statuses.py:19 papers/templatetags/statuses.py:79
 msgid "Unknown OA status"
-msgstr "未知OA状态"
+msgstr "Ukjent OA-status"
 
 #: papers/templatetags/statuses.py:27
 msgid "Unknown PDF status"
-msgstr "未知PDF状态"
+msgstr "Ukjent PDF-status"
 
 #: papers/templatetags/statuses.py:33
 msgid "Preprints can be archived."
-msgstr "预印本可以存档。"
+msgstr ""
 
 #: papers/templatetags/statuses.py:34
 msgid "Preprints cannot be archived."
-msgstr "预印本不能存档。"
+msgstr ""
 
 #: papers/templatetags/statuses.py:35
 msgid "Under the restrictions below, preprints can be archived."
-msgstr "在下方提到的限制之下，预印本可以存档。"
+msgstr ""
 
 #: papers/templatetags/statuses.py:36
 msgid "Preprints archiving policy unclear"
-msgstr "预印本存档方针不清楚"
+msgstr ""
 
 #: papers/templatetags/statuses.py:37
 msgid "Preprints archiving policy unknown"
-msgstr "预印本存档方针未知"
+msgstr ""
 
 #: papers/templatetags/statuses.py:38
 msgid "Postprints can be archived."
-msgstr "后印本可以存档。"
+msgstr ""
 
 #: papers/templatetags/statuses.py:39
 msgid "Postprints cannot be archived."
-msgstr "后印本不能存档。"
+msgstr ""
 
 #: papers/templatetags/statuses.py:40
 msgid "Under the restrictions below, postprints can be archived."
-msgstr "在下方提到的限制之下，后印本可以存档。"
+msgstr ""
 
 #: papers/templatetags/statuses.py:41
 msgid "Postprint archiving policy unclear."
-msgstr "后印本存档方针不清楚。"
+msgstr ""
 
 #: papers/templatetags/statuses.py:42
 msgid "Postprint archiving policy unknown."
-msgstr "后印本存档方针未知。"
+msgstr ""
 
 #: papers/templatetags/statuses.py:43
 msgid "Final versions can be archived."
-msgstr "最终版本可以存档。"
+msgstr ""
 
 #: papers/templatetags/statuses.py:44
 msgid "Final versions cannot be archived."
-msgstr "最终版本不能存档。"
+msgstr ""
 
 #: papers/templatetags/statuses.py:45
 msgid "Under the restrictions below, final versions can be archived."
-msgstr "在下方提到的限制之下，最终版本可以存档。"
+msgstr ""
 
 #: papers/templatetags/statuses.py:46
 msgid "Final version archiving policy unclear."
-msgstr "最终版本存档方针不清楚。"
+msgstr ""
 
 #: papers/templatetags/statuses.py:47
 msgid "Final version archiving policy unknown."
-msgstr "最终版本存档方针未知。"
+msgstr ""
 
 #: papers/templatetags/statuses.py:49
 msgid "Unknown policy"
-msgstr "未知方针"
+msgstr ""
 
 #: papers/templatetags/statuses.py:55
 msgid "archiving allowed."
-msgstr "允许存档。"
+msgstr "arkivering tillatt."
 
 #: papers/templatetags/statuses.py:56
 msgid "archiving forbidden."
-msgstr "禁止存档。"
+msgstr "arkivering forbudt."
 
 #: papers/templatetags/statuses.py:57
 msgid "archiving restricted:"
-msgstr "存档受限："
+msgstr "arkivering begrenset:"
 
 #: papers/templatetags/statuses.py:58
 msgid "policy unclear."
-msgstr "方针不清楚。"
+msgstr ""
 
 #: papers/templatetags/statuses.py:59 papers/templatetags/statuses.py:61
 #: papers/templatetags/statuses.py:73
 msgid "policy unknown."
-msgstr "方针未知。"
+msgstr ""
 
 #: papers/templatetags/statuses.py:67
 msgid "archiving allowed"
-msgstr "允许存档"
+msgstr "arkivering tillatt"
 
 #: papers/templatetags/statuses.py:68
 msgid "archiving forbidden"
-msgstr "禁止存档"
+msgstr "arkivering forbudt"
 
 #: papers/templatetags/statuses.py:69
 msgid "archiving restricted"
-msgstr "存档受限"
+msgstr "arkivering begrenset"
 
 #: papers/templatetags/statuses.py:70
 msgid "policy unclear"
-msgstr "方针不清楚"
+msgstr ""
 
 #: papers/templatetags/statuses.py:71
 msgid "policy unknown"
-msgstr "方针未知"
+msgstr ""
 
 #: papers/views.py:128
 msgid "All papers"
-msgstr "所有论文"
+msgstr ""
 
 #: papers/views.py:132
-#, python-format
+#, invalid-plural, python-format
 msgid "%d paper found"
 msgid_plural "%d papers found"
-msgstr[0] "找到%d篇论文"
+msgstr[0] ""
+msgstr[1] ""
 
 #: papers/views.py:211
 msgid "\n                            Invalid ORCID profile.\n                            Please make sure it includes a public name.\n                            "
-msgstr "\n                            无效的ORCID详情。请确保它包含公开名称。\n                            "
+msgstr ""
 
 #: papers/views.py:217
 msgid "Invalid ORCID profile."
-msgstr "无效的ORCID详情。"
+msgstr "Ugyldig ORCID-profil."
 
 #: papers/views.py:239
 msgid " authored by "
-msgstr "作者：\\"
+msgstr "forfattet av "
 
 #: papers/views.py:283
 msgid " published by "
-msgstr "发行者：\\"
+msgstr "publisert av "
 
 #: papers/views.py:312
 msgid " in "
-msgstr " 在\\"
+msgstr "i "
 
 #: papers/views.py:389
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
-msgstr "找不到匹配查询的%(verbose_name)s"
+msgstr ""
 
 #: publishers/forms.py:10
 msgid "popularity"
-msgstr "普及度"
+msgstr "popularitet"
 
 #: publishers/forms.py:11
 msgid "name"
-msgstr "名称"
+msgstr "navn"
 
 #: publishers/forms.py:19 publishers/templates/publishers/list.html:55
 msgid "Filter by publisher policy"
-msgstr "按发布者方针过滤"
+msgstr ""
 
 #: publishers/models.py:38
 msgid "Open access"
-msgstr "开放访问"
+msgstr "Åpen tilgang"
 
 #: publishers/models.py:38
 msgid "Freely available from the publisher."
-msgstr "可从发行者免费获得。"
+msgstr "Fritt tilgjengelig fra utgiveren."
 
 #: publishers/models.py:39
 msgid "Allows pre/post prints"
-msgstr "允许预印/后印"
+msgstr ""
 
 #: publishers/models.py:40
 msgid "The publisher sells copies but allows authors to deposit some version of the article in a repository."
-msgstr "发行者销售拷贝，但允许作者存放一些文章版本至存储库。"
+msgstr ""
 
 #: publishers/models.py:41
 msgid "Forbids pre/post prints"
-msgstr "禁止预印/后印"
+msgstr ""
 
 #: publishers/models.py:42
 msgid "The publisher forbids authors to deposit any version of their article online."
-msgstr "发行者禁止作者在线存放其文章的任何版本。"
+msgstr ""
 
 #: publishers/models.py:43
 msgid "Policy unclear"
-msgstr "方针不清楚"
+msgstr ""
 
 #: publishers/models.py:44
 msgid "For complicated policies, unknown publishers and unpublished documents."
-msgstr "用于复杂方针、未知发行者和未发表文档。"
+msgstr ""
 
 #: publishers/models.py:47
 msgid "Allowed"
-msgstr "允许"
+msgstr "Tillatt"
 
 #: publishers/models.py:48
 msgid "Forbidden"
-msgstr "禁止"
+msgstr "Forbudt"
 
 #: publishers/models.py:49
 msgid "Restricted"
-msgstr "受限"
+msgstr "Begrenset"
 
 #: publishers/models.py:50
 msgid "Unclear"
-msgstr "不清楚"
+msgstr "Uklar"
 
 #: publishers/models.py:51
 msgid "Unknown"
-msgstr "未知"
+msgstr "Ukjent"
 
 #: publishers/models.py:59 publishers/views.py:94
 msgid "Publishers"
-msgstr "发布者"
+msgstr "Utgivere"
 
 #: publishers/models.py:79
 msgid "Unknown publisher"
-msgstr "未知发布者"
+msgstr "Ukjent utgiver"
 
 #: publishers/templates/publishers/detailsPolicy.html:6
 msgid "Preprint:"
-msgstr "预印本："
+msgstr ""
 
 #: publishers/templates/publishers/detailsPolicy.html:7
 msgid "A preprint is a document produced by the authors without any interaction with the peer-reviewing process."
-msgstr "预印本是由作者在没有相互作用的情况下，提供用作同行监督过程的文档。"
+msgstr ""
 
 #: publishers/templates/publishers/detailsPolicy.html:8
 msgid "preprint"
-msgstr "预印本"
+msgstr ""
 
 #: publishers/templates/publishers/detailsPolicy.html:10
 msgid "Postprint:"
-msgstr "后印本："
+msgstr ""
 
 #: publishers/templates/publishers/detailsPolicy.html:11
 msgid "Postprints differ from preprints in that they include the changes suggested by the reviewers. They are not edited by the publisher."
-msgstr "后印本与预印本的不同之处在于其包含由审阅人建议的更改。这些不是由发行者编辑的。"
+msgstr ""
 
 #: publishers/templates/publishers/detailsPolicy.html:12
 msgid "postprint"
-msgstr "后印本"
+msgstr ""
 
 #: publishers/templates/publishers/detailsPolicy.html:14
 msgid "Published version:"
-msgstr "发行版本："
+msgstr "Publisert versjon:"
 
 #: publishers/templates/publishers/detailsPolicy.html:15
 msgid "The published version is the final version of the paper, as formatted by the publisher."
-msgstr "发行版本是由发行者格式化的，论文的最终版本。"
+msgstr ""
 
 #: publishers/templates/publishers/detailsPolicy.html:16
 msgid "published version"
-msgstr "发行版本"
+msgstr ""
 
 #: publishers/templates/publishers/list.html:38
 #, python-format
 msgid "%(counter)s publisher found"
 msgid_plural "%(counter)s publishers found"
-msgstr[0] "找到%(counter)s位发行者"
+msgstr[0] "%(counter)s utgiver"
+msgstr[1] "%(counter)s utgivere"
 
 #: publishers/templates/publishers/list.html:94
 msgid "Data provided by"
-msgstr "数据提供方"
+msgstr ""
 
 #: publishers/templates/publishers/list.html:129
 msgid "No publisher found."
-msgstr "找不到发行者。"
+msgstr "Ingen utgiver funnet."
 
 #: publishers/templates/publishers/policy.html:58
 msgid "Policy data provided by"
-msgstr "方针数据提供方"
+msgstr ""
 
 #: publishers/templates/publishers/policy.html:62
 msgid "Report any error to them"
-msgstr "向他们报告任意错误"
+msgstr ""
 
 #: publishers/templates/publishers/policy.html:67
 msgid "Policy"
-msgstr "方针"
+msgstr ""
 
 #: publishers/templates/publishers/policy.html:93
 msgid "Conditions"
-msgstr "条件"
+msgstr ""
 
 #: publishers/templates/publishers/policy.html:101
 msgid "Policy details"
-msgstr "方针详情"
+msgstr ""
 
 #: publishers/templates/publishers/policy.html:110
 msgid "Publications"
-msgstr "出版物"
+msgstr "Publikasjoner"
 
 #: publishers/templates/publishers/policy.html:113
 #, python-format
 msgid "All papers published by %(publisher)s"
-msgstr "所有论文由%(publisher)s发行"
+msgstr ""
 
 #: publishers/templates/publishers/policy.html:118
 msgid "Journals"
-msgstr "期刊"
+msgstr ""
 
 #: publishers/templates/publishers/policy.html:119
 msgid "Only journals with papers written by our users are listed."
-msgstr "只列举带有我们用户撰写的论文的期刊。"
+msgstr ""
 
 #: publishers/templates/publishers/policy.html:134
 msgid "None."
-msgstr "无。"
+msgstr "Ingen"
 
 #: statistics/models.py:48
 msgid "Available from the publisher"
-msgstr "可从发行者获得"
+msgstr "Tilgjengelig fra utgiveren"
 
 #: statistics/models.py:49
 msgid "Available from the author"
-msgstr "可从作者获得"
+msgstr "Tilgjengelig fra forfatteren"
 
 #: statistics/models.py:50
 msgid "Could be shared by the authors"
-msgstr "可由作者分享"
+msgstr "Kan deles av forfatterne"
 
 #: statistics/models.py:51
 msgid "Unknown/unclear sharing policy"
-msgstr "未知/不清楚的分享方针"
+msgstr ""
 
 #: statistics/models.py:52
 msgid "Publisher forbids sharing"
-msgstr "发行者禁止分享"
+msgstr "Utgiveren forbyr deling"
 
 #: statistics/models.py:57
 msgid "This paper is made freely available by the publisher."
-msgstr "此论文由发行者自由提供。"
+msgstr ""
 
 #: statistics/models.py:58
 msgid "This paper is available in a repository."
-msgstr "此论文在存储库中提供。"
+msgstr ""
 
 #: statistics/models.py:59
 msgid "This paper was not found in any repository, but could be made available legally by the author."
-msgstr "在任何存储库都找不到此论文，但可由作者依法提供。"
+msgstr ""
 
 #: statistics/models.py:60
 msgid "This paper was not found in any repository; the policy of its publisher is unknown or unclear."
-msgstr "在任何存储库都找不到此论文；其发行者的方针未知或不清楚。"
+msgstr ""
 
 #: statistics/models.py:61
 msgid "Distributing this paper is prohibited by the publisher"
-msgstr "发行者禁止分发此论文"
+msgstr ""
 
 #: statistics/models.py:65
 msgid "Available"
-msgstr "可用"
+msgstr "Tilgjengelig"
 
 #: statistics/templates/statistics/availabilitypct.html:10
 msgid "of the papers by this publisher are available"
-msgstr "篇此发行者的论文可用"
+msgstr ""
 
 #: statistics/templates/statistics/histogram.html:5
 #: templates/dissemin/faq.html:48
 msgid "Open Access"
-msgstr "开放访问"
+msgstr "Åpen tilgang"
 
 #: statistics/templates/statistics/histogram.html:8
 msgid "Publications are available"
-msgstr "出版物可用"
+msgstr "Publikasjoner er tilgjengelige"
 
 #: statistics/templates/statistics/histogram.html:11
 msgid "Publications could be online"
-msgstr "出版物可以在线"
+msgstr "Publikasjoner kan være online"
 
 #: statistics/templates/statistics/histogram.html:14
 msgid "Policy unknown"
-msgstr "方针未知"
+msgstr ""
 
 #: statistics/templates/statistics/histogram.html:17
 msgid "Upload is forbidden"
-msgstr "上传禁止"
+msgstr "Opplasting er forbudt"
 
 #: templates/404.html:6 templates/404.html:12
 msgid "Page not found"
-msgstr "找不到页面"
+msgstr "Side ikke funnet"
 
 #: templates/404.html:13
 msgid "\n            The page you requested could not be found. <a href=\"/\">Go back to the home page.</a>\n           "
-msgstr "\n            找不到您请求的页面。<a href=\"/\">返回首页。</a>\n           "
+msgstr ""
 
 #: templates/500.html:6 templates/500.html:12
 msgid "Internal error"
-msgstr "内部错误"
+msgstr "Intern feil"
 
 #: templates/500.html:13
 msgid "\n            Your request triggered an internal error. <a href=\"/\">Go back to the home page.</a>\n           "
-msgstr "\n            您的请求触发了内部错误。<a href=\"/\">返回首页。</a>\n           "
+msgstr ""
 
 #: templates/admin/base_site.html:4
 msgid "Dissemin site admin"
-msgstr "Dissemin网站管理员"
+msgstr ""
 
 #: templates/admin/base_site.html:7
 msgid "Dissemin administration"
-msgstr "Dissemin管理"
+msgstr "Dissemin-administrasjon"
 
 #: templates/dissemin/faq.html:6 templates/dissemin/faq.html:11
 #: templates/dissemin/tos.html:6
 msgid "Frequently Asked Questions"
-msgstr "常见问题"
+msgstr "Ofte stilte spørsmål"
 
 #: templates/dissemin/faq.html:16 templates/dissemin/faq.html:50
 msgid "What is Open Access?"
-msgstr "什么是开放访问？"
+msgstr "Hva er åpen tilgang?"
 
 #: templates/dissemin/faq.html:17 templates/dissemin/faq.html:60
 msgid "Why should I upload my papers to a repository?"
-msgstr "为什么我应该上传我的论文至存储库？"
+msgstr ""
 
 #: templates/dissemin/faq.html:18 templates/dissemin/faq.html:92
 msgid "What repository should I use?"
-msgstr "我应该使用哪个存储库？"
+msgstr ""
 
 #: templates/dissemin/faq.html:19 templates/dissemin/faq.html:113
 msgid "Why can't I deposit in my favorite repository yet?"
-msgstr "为什么我现在还不能存放至我感兴趣的存储库？"
+msgstr ""
 
 #: templates/dissemin/faq.html:22 templates/dissemin/faq.html:153
 msgid "What is dissem.in?"
-msgstr "什么是dissem.in？"
+msgstr "Hva er dissem.in?"
 
 #: templates/dissemin/faq.html:23 templates/dissemin/faq.html:164
 msgid "Is dissem.in a repository?"
-msgstr "dissem.in是存储库么？"
+msgstr ""
 
 #: templates/dissemin/faq.html:24 templates/dissemin/faq.html:174
 msgid "Who runs dissem.in?"
-msgstr "谁运行dissem.in？"
+msgstr "Hvem driver dissem.in?"
 
 #: templates/dissemin/faq.html:25 templates/dissemin/faq.html:181
 msgid "Can I create my profile on dissem.in?"
-msgstr "我能在dissem.in创建我的详情么？"
+msgstr "Kan jeg opprette profilen min på dissem.in?"
 
 #: templates/dissemin/faq.html:27 templates/dissemin/faq.html:189
 msgid "Policies and full-text availability"
-msgstr "方针与全文可见性"
+msgstr ""
 
 #: templates/dissemin/faq.html:28 templates/dissemin/faq.html:190
 msgid "What do your policy classes mean?"
-msgstr "您的方针等级意思是什么？"
+msgstr ""
 
 #: templates/dissemin/faq.html:29 templates/dissemin/faq.html:243
 msgid "When is a paper considered available?"
-msgstr "论文何时会被认为可用？"
+msgstr ""
 
 #: templates/dissemin/faq.html:30 templates/dissemin/faq.html:252
 msgid "Should I trust your statistics?"
-msgstr "我应该信任您的统计信息么？"
+msgstr "Kan jeg stole på statistikken deres?"
 
 #: templates/dissemin/faq.html:32 templates/dissemin/faq.html:269
 msgid "Omissions and errors"
-msgstr "疏忽与错误"
+msgstr ""
 
 #: templates/dissemin/faq.html:33 templates/dissemin/faq.html:288
 msgid "There is a freely available copy of my article online but dissem.in does not find it."
-msgstr "这里存在我的文章的自由拷贝，但dissem.in找不到。"
+msgstr ""
 
 #: templates/dissemin/faq.html:34 templates/dissemin/faq.html:270
 msgid "One of my papers is missing. Why?"
-msgstr "一个或多个我的论文丢失了。为什么？"
+msgstr ""
 
 #: templates/dissemin/faq.html:35 templates/dissemin/faq.html:280
 msgid "Some details of my paper are incorrect. What can I do?"
-msgstr "我的论文里有些详情是错误的。我怎么办？"
+msgstr ""
 
 #: templates/dissemin/faq.html:37 templates/dissemin/faq.html:324
 msgid "Authentication with ORCID"
-msgstr "与ORCID验证"
+msgstr "Autentisering med ORCID"
 
 #: templates/dissemin/faq.html:38 templates/dissemin/faq.html:326
 msgid "Why do you need to authenticate users?"
-msgstr "为什么您需要验证用户？"
+msgstr "Hvorfor må dere autentisere brukere?"
 
 #: templates/dissemin/faq.html:39 templates/dissemin/faq.html:340
 msgid "What will you do to my ORCID profile if I log in?"
-msgstr "如果我登录了，您将对我的ORCID详情做什么？"
+msgstr "Hva gjør dere med ORCID-profilen min om jeg logger inn?"
 
 #: templates/dissemin/faq.html:40 templates/dissemin/faq.html:349
 msgid "How do I add publications to my ORCID profile?"
-msgstr "我如何添加出版物至我的ORCID详情？"
+msgstr "Hvordan legger jeg til publikasjoner til ORCID-profilen min?"
 
 #: templates/dissemin/faq.html:42 templates/dissemin/faq.html:371
 msgid "Behind the scenes"
-msgstr "在幕后"
+msgstr "I kulissene"
 
 #: templates/dissemin/faq.html:43 templates/dissemin/faq.html:373
 msgid "Where do you get the data from?"
-msgstr "您是从何处获取数据的？"
+msgstr "Hvor får dere dataene fra?"
 
 #: templates/dissemin/faq.html:44 templates/dissemin/faq.html:380
 msgid "How can I help?"
-msgstr "我如何帮助？"
+msgstr "Hvordan kan jeg hjelpe til?"
 
 #: templates/dissemin/faq.html:45 templates/dissemin/faq.html:398
 msgid "Where is the source code?"
-msgstr "源代码在哪？"
+msgstr "Hvor er kildekoden?"
 
 #: templates/dissemin/faq.html:46 templates/dissemin/faq.html:404
 msgid "Can I harvest your data?"
-msgstr "我可以获得您的数据么？"
+msgstr "Kan jeg høste inn dataene deres?"
 
 #: templates/dissemin/faq.html:52
 msgid "In a nutshell, the Open Access movement promotes free access to the scientific literature. For a more in-depth introduction, we recommend <a href=\"http://www.phdcomics.com/comics.php?f=1533\">this video in English</a> and <a href=\"https://pablo.rauzy.name/openaccess/introduction.html\">this introduction in French</a>."
-msgstr "简单的讲，开放访问运动促进自由访问科学文献。有关更全面的介绍，我们建议您观看介绍视频：<a href=\"http://www.phdcomics.com/comics.php?f=1533\">英语版</a>和<a href=\"https://pablo.rauzy.name/openaccess/introduction.html\">法语版</a>。"
+msgstr ""
 
 #: templates/dissemin/faq.html:62
 msgid "You should do it because:"
-msgstr "因为以下原因，您应该这样做："
+msgstr "Du bør gjøre det fordi:"
 
 #: templates/dissemin/faq.html:66
-#, fuzzy
 msgid "<ul> <li>It makes your research <strong>more accessible</strong> and <strong>more visible</strong>. Many researchers routinely check papers in topic repositories such as arXiv, and it is less likely that these researchers check your homepage regularly. </li> <li>You can even do it before publication. You can get <strong>valuable feedback</strong> to improve your paper before the actual peer-reviewing process. It may also be useful to establish priority if it takes a long time for your paper to get published.</li> <li> It provides you a <strong>durable storage</strong>. Your homepage is likely to change or to disappear, for instance if you leave your current institution. </li> <li>Librarians around the world cannot check whether all the papers in a given journal are available on homepages: in doubt, they subscribe to this journal to make sure their researchers have access to it. This costs a lot of money for research institutions. Papers stored in repositories are <strong>easier to detect</strong> and can help academia save money.</li> <li> Finally, for all these reasons, an increasing number of <strong>funding bodies</strong> require the outcomes of their projects to be made available in a repository. </li> </ul>"
-msgstr "<ul> <li>这使您的研究<strong>访问量更大</strong>，并<strong>更显要</strong>。很多研究员老一套地使用主题存储库（例如arXiv）查阅论文，这使得研究员们很难定期检查您的首页。</li> <li>您也可以在发布前这样做。您可以获得<strong>有价值的反馈</strong>，这有助于在实际同行监督前改进您的论文。同样也对建立优先级有所帮助，如果您的论文要等一段实际才会发布的话。</li> <li> It provides you a <strong>durable storage</strong>. Your homepage is likely to change or to disappear, for instance if you leave your current institution. </li> <li>Librarians around the world cannot check whether all the papers in a given journal are available on homepages: in doubt, they subscribe to this journal to make sure their researchers have access to it. This costs a lot of money for research institutions. Papers stored in repositories are <strong>easier to detect</strong> and can help academia save money.</li> <li> Finally, for all these reasons, an increasing number of <strong>funding bodies</strong> require the outcomes of their projects to be made available in a repository. </li> </ul>"
+msgstr ""
 
 #: templates/dissemin/faq.html:94
 msgid "There are roughly three types of repositories:"
-msgstr "粗略的讲，有三种存储库："
+msgstr ""
 
 #: templates/dissemin/faq.html:98
 msgid "<ul> <li>Subject repositories, restricted to some research fields, such as <a href=\"https://arxiv.org\">arXiv</a>.</li> <li>Institutional repositories, designated to store the research output of a given institution or country. </li> <li>General-purpose academic repositories such as <a href=\"https://zenodo.org\">Zenodo</a>, not limited to a particular scope.</li> </ul>"
@@ -1619,11 +1623,11 @@ msgstr ""
 
 #: templates/dissemin/faq.html:115
 msgid "At the moment, you can use Dissemin to deposit in the following repositories:"
-msgstr "目前，您可以使用Dissemin来存放至以下存储库中："
+msgstr ""
 
 #: templates/dissemin/faq.html:119
 msgid "<ul> <li><strong><a href=\"https://zenodo.org\">Zenodo</a></strong>, an innovative repository backed by the EU.</li> <li><strong><a href=\"https://hal.archives-ouvertes.fr/\">HAL</a></strong>, a French repository managed by the <a href=\"https://www.ccsd.cnrs.fr/\">CCSD</a>.</li> <li><strong><a href=\"https://osf.io/preprints/\">OSF preprints</a></strong>, a preprint server run by the <a href=\"https://cos.io/\">Center for Open Science</a> on top of their <a href=\"https://osf.io/\">Open Science Framework</a>.</li> </ul>"
-msgstr "<ul> <li><strong><a href=\"https://zenodo.org\">Zenodo</a></strong>，一个依靠欧盟的创新存储库。</li> <li><strong><a href=\"https://hal.archives-ouvertes.fr/\">HAL</a></strong>，由<a href=\"https://www.ccsd.cnrs.fr/\">CCSD</a>管理的法语存储库。</li> <li><strong><a href=\"https://osf.io/preprints/\">OSF预印本</a></strong>，由<a href=\"https://cos.io/\">开放科学中心</a>（Center for Open Science）运行的预印本服务器，基于其<a href=\"https://osf.io/\">开放科学框架</a>（Open Science Framework）项目之上。</li> </ul>"
+msgstr ""
 
 #: templates/dissemin/faq.html:132
 msgid "Supporting more repositories requires us to write specific code for each repository. More importantly it requires the repositories to give us permission to deposit papers in bulk. We have been considering integrating the following repositories:"
@@ -1644,11 +1648,11 @@ msgstr ""
 
 #: templates/dissemin/faq.html:176
 msgid "Dissemin is brought to you by the <a href=\"https://association.dissem.in/\">CAPSH association</a>."
-msgstr "Dissemin提供<a href=\"https://association.dissem.in/\">CAPSH协会</a>为您呈现。"
+msgstr ""
 
 #: templates/dissemin/faq.html:183
 msgid "Yes you can. We will ask you to create an ORCID profile if you do not have one yet. This only takes a few seconds."
-msgstr "是的，您可以。我们将要求您创建ORCID详情，如果您还没有的话。这只花几秒钟。"
+msgstr ""
 
 #: templates/dissemin/faq.html:196
 msgid "<strong>Open access:</strong><br /> The full text is made freely available by the publisher (in a fully open access or hybrid journal)."
@@ -1673,7 +1677,7 @@ msgstr ""
 
 #: templates/dissemin/faq.html:254
 msgid "There are a few caveats concerning our data:"
-msgstr "这里有与我们数据相关的几条忠告："
+msgstr ""
 
 #: templates/dissemin/faq.html:258
 msgid "<ul> <li>Some papers are not present in any of our metadata sources, so they are not counted at all.</li> <li>Some entries in our system do not correspond to proper research papers.</li> <li>Some of them have been incorrectly classified by our homonym disambiguation system.</li> <li>Some repositories might not be covered by any of our sources, so a paper might be marked as unavailable while it is available.</li> <li>Some papers might be marked as available but actually, they are not (for instance because the content has been deleted).</li> <li>And many other technical issues.</li> </ul>"
@@ -1686,7 +1690,7 @@ msgstr ""
 
 #: templates/dissemin/faq.html:282
 msgid "In a near future, you should be able to create an account and fix it by yourself. If it is really urgent, send a message to <a href=\"mailto:contact@dissem.in\">contact@dissem.in</a>."
-msgstr "在不久的将来，您应当创建账户，并由您自己修复它。如果这真的很紧急，请向<a href=\"mailto:contact@dissem.in\">contact@dissem.in</a>发送消息。"
+msgstr ""
 
 #: templates/dissemin/faq.html:290
 msgid "First, note that Dissemin does not account for copies of articles that are only available on a personal homepage or a similar website. This is intentional, because we believe that <a href=\"#repositories-rock\">articles should be hosted in repositories</a>."
@@ -1718,16 +1722,16 @@ msgstr ""
 
 #: templates/dissemin/faq.html:366
 msgid "In the future, we hope to enable you to do this from Dissemin itself."
-msgstr "在今后，我们希望使用Dissemin本身让您这样。"
+msgstr ""
 
 #: templates/dissemin/faq.html:375
 #, python-format
 msgid "Our sources are listed on <a href=\"%(sources_url)s\">this page</a>."
-msgstr "我们的来源在<a href=\"%(sources_url)s\">此页面</a>列举。"
+msgstr ""
 
 #: templates/dissemin/faq.html:382
 msgid "There are many ways to get involved:"
-msgstr "有多种方法可以参与："
+msgstr ""
 
 #: templates/dissemin/faq.html:386
 msgid "<ul> <li>Encourage researchers to use this service.</li> <li><a href=\"mailto:contact@dissem.in\">Send us</a> a list of researchers for your university or department so that we can set up an instance of Dissemin for your institution.</li> <li>Help us translate the interface in your language.</li> <li>Contribute to <a href=\"https://github.com/wetneb/dissemin\">the code</a>.</li> <li>Fix any of our listed <a href=\"https://github.com/wetneb/dissemin/issues\">issues</a>.</li> <li>Star <a href=\"https://github.com/wetneb/dissemin\">our github project</a>!</li> <li><a href=\"http://association.dissem.in/#dons\">Donations are accepted</a>.</li> </ul>"
@@ -1735,96 +1739,96 @@ msgstr ""
 
 #: templates/dissemin/faq.html:400
 msgid "The source code is available <a href=\"https://github.com/wetneb/dissemin\">on github</a>."
-msgstr "源代码位于<a href=\"https://github.com/wetneb/dissemin\">github</a>。"
+msgstr ""
 
 #: templates/dissemin/faq.html:406
 msgid "Yes! We even have <a href=\"https://dev.dissem.in/api.html\">an API</a>. If it does not suit your needs, tell us what you need."
-msgstr "是的！我们也有<a href=\"https://dev.dissem.in/api.html\">API</a>。如果这不符合您的需求，请告诉我们您需要什么。"
+msgstr ""
 
 #: templates/dissemin/faq.html:411
 msgid "Can I use the Dissemin logo to refer to the project?"
-msgstr "我可以使用Dissemin标志引用项目么？"
+msgstr ""
 
 #: templates/dissemin/faq.html:413
 msgid "Yes! See <a href=\"https://association.dissem.in/#logos\">here</a> for links to our logos and for explanations about how you can reuse them."
-msgstr "是的！<a href=\"https://association.dissem.in/#logos\">在此</a>查看我们的标志链接，并查阅有关您可以以何种形式复用它的解释。"
+msgstr ""
 
 #: templates/dissemin/faq.html:418 templates/dissemin/tos.html:150
 msgid "Back to top"
-msgstr "返回顶部"
+msgstr "Tilbake til toppen"
 
 #: templates/dissemin/login.html:8 templates/dissemin/login.html:70
 #: templates/dissemin/sandbox.html:8 templates/dissemin/sandbox.html:72
 msgid "Sign In"
-msgstr "登录"
+msgstr "Logg inn"
 
 #: templates/dissemin/login.html:12
 msgid "Sign in"
-msgstr "登录"
+msgstr "Logg inn"
 
 #: templates/dissemin/login.html:19 templates/dissemin/sandbox.html:19
 msgid "Dissemin uses ORCID to authenticate its users. ORCID is an independent non-profit effort to provide an open registry of unique researcher identifiers. It also offers open services to link research activities and organizations to these identifiers. Learn more at <a href=\"https://orcid.org\">orcid.org</a>."
-msgstr "Dissemin使用ORCID验证其用户。ORCID是为每一位独立研究员提供开放注册标识符的非营利性机构。它也提供开放服务链接研究实体与组织到这些标识符。在<a href=\"https://orcid.org\">orcid.org</a>了解更多。"
+msgstr ""
 
 #: templates/dissemin/login.html:28 templates/dissemin/login.html:36
 #: templates/dissemin/sandbox.html:30
 msgid "Log in"
-msgstr "登录"
+msgstr "Logg inn"
 
 #: templates/dissemin/login.html:30 templates/dissemin/sandbox.html:32
 msgid "If you already have an ORCID account, you can use it with Dissemin. We will not make any changes to your profile."
-msgstr "如果您已拥有ORCID账户，您可以使用它登录Dissemin。我们将不会对您的详情做出任何更改。"
+msgstr "Om du allerede har en ORCID-konto, kan du bruke den med Dissemin. Vi vil ikke gjøre noen endringer i profilen din."
 
 #: templates/dissemin/login.html:42 templates/dissemin/login.html:51
 #: templates/dissemin/sandbox.html:44
 msgid "Sign up"
-msgstr "注册"
+msgstr "Registrer deg"
 
 #: templates/dissemin/login.html:44 templates/dissemin/sandbox.html:46
 msgid "Not an ORCID user yet? Create an account, it is free and takes a few seconds."
-msgstr "还不是ORCID用户么？创建账户，这是免费的，并只花几秒钟。"
+msgstr "Ikke en ORCID-bruker ennå? Opprett en konto! Det er gratis og tar bare noen sekunder."
 
 #: templates/dissemin/login.html:59 templates/dissemin/sandbox.html:61
 msgid "Dissemin account"
-msgstr "Dissemin账户"
+msgstr "Dissemin-konto"
 
 #: templates/dissemin/login.html:60 templates/dissemin/sandbox.html:62
 #, python-format
 msgid "If you have not created an account yet, then please\n<a href=\"%(signup_url)s\">sign up</a> first."
-msgstr "如果您尚未创建账户，请首先<a href=\"%(signup_url)s\">注册</a>。"
+msgstr "Om du ikke har opprettet en konto ennå må du <a href=\"%(signup_url)s\">registrere deg</a> først."
 
 #: templates/dissemin/login.html:69 templates/dissemin/sandbox.html:71
 msgid "Forgot Password?"
-msgstr "忘记密码？"
+msgstr "Glemt passord?"
 
 #: templates/dissemin/partners.html:7 templates/dissemin/partners.html:12
 #: templates/dissemin/skeleton.html:124
 msgid "Partners"
-msgstr "合作伙伴"
+msgstr "Partnere"
 
 #: templates/dissemin/sandbox.html:12
 msgid "SANDBOX Sign in"
-msgstr "沙盒登录"
+msgstr "SANDBOX-innlogging"
 
 #: templates/dissemin/skeleton.html:62
 msgid "Toggle navigation"
-msgstr "开关导航"
+msgstr ""
 
 #: templates/dissemin/skeleton.html:73
 msgid "My profile"
-msgstr "我的详情"
+msgstr "Profilen min"
 
 #: templates/dissemin/skeleton.html:75 templates/dissemin/skeleton.html:115
 msgid "FAQ"
-msgstr "常见问题"
+msgstr "OSS"
 
 #: templates/dissemin/skeleton.html:91
 msgid "Logout"
-msgstr "退出"
+msgstr "Logg ut"
 
 #: templates/dissemin/skeleton.html:95
 msgid "Login"
-msgstr "登录"
+msgstr "Logg inn"
 
 #: templates/dissemin/skeleton.html:116
 msgid "API"
@@ -1832,63 +1836,63 @@ msgstr "API"
 
 #: templates/dissemin/skeleton.html:117 templates/dissemin/tos.html:11
 msgid "Terms of Service"
-msgstr "服务条款"
+msgstr "Tjenestevilkår"
 
 #: templates/dissemin/skeleton.html:122
 msgid "Who are we?"
-msgstr "我们是谁？"
+msgstr "Hvem er vi?"
 
 #: templates/dissemin/skeleton.html:123
 msgid "Donate"
-msgstr "捐款"
+msgstr "Doner"
 
 #: templates/dissemin/skeleton.html:136
 msgid "Change language"
-msgstr "更改语言"
+msgstr "Endre språk"
 
 #: templates/dissemin/skeleton.html:148
 msgid "Apply"
-msgstr "应用"
+msgstr ""
 
 #: templates/dissemin/sources.html:11
 msgid "Data sources"
-msgstr "数据源"
+msgstr "Datakilder"
 
 #: templates/dissemin/sources.html:13
 msgid "Primary sources"
-msgstr "主要来源"
+msgstr "Primærkilder"
 
 #: templates/dissemin/tos.html:15 templates/dissemin/tos.html:27
 msgid "In short"
-msgstr "简短的讲"
+msgstr ""
 
 #: templates/dissemin/tos.html:16 templates/dissemin/tos.html:29
 msgid "Scope of the service"
-msgstr "服务范围"
+msgstr ""
 
 #: templates/dissemin/tos.html:17 templates/dissemin/tos.html:42
 msgid "Privacy"
-msgstr "隐私"
+msgstr "Personvern"
 
 #: templates/dissemin/tos.html:18 templates/dissemin/tos.html:60
 msgid "Deposits through Dissemin"
-msgstr "通过Dissemin存放"
+msgstr ""
 
 #: templates/dissemin/tos.html:20 templates/dissemin/tos.html:82
 msgid "In full"
-msgstr "完整"
+msgstr ""
 
 #: templates/dissemin/tos.html:21 templates/dissemin/tos.html:83
 msgid "Personal data"
-msgstr "个人数据"
+msgstr "Personlige data"
 
 #: templates/dissemin/tos.html:22 templates/dissemin/tos.html:101
 msgid "Full text storage"
-msgstr "全文存储"
+msgstr ""
 
 #: templates/dissemin/tos.html:23 templates/dissemin/tos.html:117
 msgid "Reporting misuse"
-msgstr "报告滥用"
+msgstr "Rapporter misbruk"
 
 #: templates/dissemin/tos.html:32
 msgid "This platform offers an analysis of the accessibility of scholarly publications. It can also deposit publications on behalf of their authors in repositories. The accessibility and self-archiving policies of the papers on this platform can be incorrect and should not be relied upon for legal advice. When in doubt, users are advised to check from authoritative sources."
@@ -1904,11 +1908,11 @@ msgstr ""
 
 #: templates/dissemin/tos.html:74
 msgid "Contact"
-msgstr "联络"
+msgstr "Kontakt"
 
 #: templates/dissemin/tos.html:77
 msgid "Please address any inquiry to support@dissem.in."
-msgstr "请向support@dissem.in提出任何咨询。"
+msgstr ""
 
 #: templates/dissemin/tos.html:86
 msgid "Dissemin uses ORCID's public OAuth interface to authenticate its users. This interface only transmits information marked as public in the user's ORCID profile. This means that ORCID passwords are never transmitted and email addresses are not transmitted when they are marked as private, which is the default setting. When logging in to Dissemin from ORCID, Dissemin acquires the user's ORCID id, as well as all public information attached to the ORCID record. Dissemin can store any information input by its users on the platform. Users can ask for a copy of the personal information Dissemin stores about them by writing an email to support@dissem.in."
@@ -1920,7 +1924,7 @@ msgstr ""
 
 #: templates/dissemin/tos.html:120
 msgid "Misuse can be reported to support@dissem.in."
-msgstr "滥用可在support@dissem.in报告。"
+msgstr ""
 
 #: templates/dissemin/tos.html:128
 msgid "The <a href=\"https://dissem.in\">dissem.in</a> website has been registered with <a href=\"https://www.cnil.fr/\">CNIL</a> under declaration n°1895382 v0."
@@ -1933,20 +1937,20 @@ msgstr ""
 #: templates/socialaccount/authentication_error.html:6
 #: templates/socialaccount/authentication_error.html:12
 msgid "Authentication error"
-msgstr "验证错误"
+msgstr ""
 
 #: templates/socialaccount/authentication_error.html:16
 msgid "\n            Authentication has failed. <a href=\"/\">Go back to the login page.</a>\n           "
-msgstr "\n            验证失败。<a href=\"/\">返回登录页面。</a>\n           "
+msgstr ""
 
 #: upload/forms.py:29
 msgid "Invalid file format: only PDF files are accepted."
-msgstr "无效的文件格式：只接受PDF文件。"
+msgstr ""
 
 #: upload/forms.py:39
 #, python-format
 msgid "File too large (%(size)s). Maximum size is %(maxsize)s."
-msgstr "文件太大（%(size)s）最大大小是%(maxsize)s。"
+msgstr ""
 
 #: upload/forms.py:47
 msgid "URL"
@@ -1954,49 +1958,49 @@ msgstr "URL"
 
 #: upload/templates/upload/widget.html:4
 msgid "Select here the full text of your article. PDF files only, maximum size:"
-msgstr "在此选择您的文章的全文。仅限PDF文件，最大大小："
+msgstr ""
 
 #: upload/templates/upload/widget.html:9
 msgid "Select a file:"
-msgstr "搜索文件："
+msgstr "Velg ei fil:"
 
 #: upload/templates/upload/widget.html:10
 msgid "Browse"
-msgstr "浏览"
+msgstr "Bla gjennom"
 
 #: upload/templates/upload/widget.html:17
 msgid "Or enter an URL:"
-msgstr "或输入一个URL："
+msgstr "Eller skriv inn en URL:"
 
 #: upload/templates/upload/widget.html:28
 msgid "Or drop a file here:"
-msgstr "或在此拖放文件："
+msgstr "Eller slipp ei fil her:"
 
 #: upload/views.py:150
 msgid "Invalid PDF file."
-msgstr "无效的PDF文件。"
+msgstr "Ugyldig PDF-fil."
 
 #: upload/views.py:183
 msgid "Invalid form."
-msgstr "无效的表单。"
+msgstr ""
 
 #: upload/views.py:193
 msgid "File too large."
-msgstr "文件太大。"
+msgstr "Fila er for stor."
 
 #: upload/views.py:198
 msgid "Invalid content type: this link points to a web page, we need a direct link to a PDF file."
-msgstr "无效的内容类型：此链接指向网页，我们需要至PDF文件的直接链接。"
+msgstr "Ugyldig innholdstype: denne lenka viser til ei nettside, vi trenger ei direkte lenke til ei PDF-fil."
 
 #: upload/views.py:201
 msgid "Invalid SSL certificate on the remote server."
-msgstr "远程服务器的SSL证书无效。"
+msgstr "Ugyldig SSL-sertifikat på den eksterne tjeneren."
 
 #: upload/views.py:203 upload/views.py:207
 msgid "Invalid URL (server timed out)."
-msgstr "无效的URL（服务器超时）。"
+msgstr ""
 
 #: upload/views.py:205 upload/views.py:209
 msgid "Invalid URL."
-msgstr "无效的URL。"
+msgstr "Ugyldig URL."
 

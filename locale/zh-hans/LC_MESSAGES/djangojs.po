@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2017-10-25 08:11:01+0000\n"
+"PO-Revision-Date: 2017-10-27 02:45:09+0000\n"
 "X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -76,18 +76,17 @@ msgid "Invalid publication date"
 msgstr "无效的发行日期"
 
 #: papers/static/papers/refresh.js:105
-#, invalid-plural
 msgid "We ignored %(count)s paper from your ORCiD profile."
 msgid_plural "We ignored %(count)s papers from your ORCiD profile."
-msgstr[0] ""
+msgstr[0] "我们从您的ORCiD详情中忽略了%(count)s篇论文。"
 
 #: papers/static/papers/refresh.js:115
 msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
-msgstr ""
+msgstr "“%(name)s”因以下原因而被忽略：%(reason)s"
 
 #: papers/static/papers/refresh.js:123
 msgid "A paper was ignored, because it has no name"
-msgstr ""
+msgstr "忽略了一篇论文，因为它没有名称"
 
 #: papers/static/papers/refresh.js:135 papers/static/papers/refresh.js:163
 msgid "Show more information"

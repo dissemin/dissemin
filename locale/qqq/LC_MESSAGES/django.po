@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2017-10-25 08:11:03+0000\n"
+"PO-Revision-Date: 2017-10-27 02:45:11+0000\n"
 "X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,7 +24,7 @@ msgstr ""
 
 #: deposit/forms.py:42 deposit/templates/deposit/deposits.html:40
 msgid "Repository"
-msgstr ""
+msgstr "{{Identical|Repository}}"
 
 #: deposit/forms.py:51
 msgid "Invalid full text identifier."
@@ -40,7 +40,7 @@ msgstr ""
 
 #: deposit/forms.py:140 deposit/hal/forms.py:77 deposit/osf/forms.py:143
 msgid "Save"
-msgstr ""
+msgstr "{{Identical|Save}}"
 
 #: deposit/hal/forms.py:43
 msgid "Scientific field"
@@ -269,7 +269,7 @@ msgstr ""
 
 #: deposit/models.py:44
 msgid "Deleted"
-msgstr ""
+msgstr "{{Identical|Deleted}}"
 
 #: deposit/models.py:166 deposit/templates/deposit/start.html:415
 #: deposit/views.py:103
@@ -489,7 +489,7 @@ msgstr ""
 
 #: deposit/templates/deposit/start.html:324
 msgid "Document"
-msgstr ""
+msgstr "{{Identical|Document}}"
 
 #: deposit/templates/deposit/start.html:332
 msgid "Options"

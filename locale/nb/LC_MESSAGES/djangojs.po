@@ -1,25 +1,25 @@
-# Translation of Dissemin papers to Message documentation (Message documentation)
+# Translation of Dissemin papers to Norwegian Bokmål (norsk bokmål)
 # Exported from translatewiki.net
 #
-# Author: Liuxinyu970226
+# Author: Jon Harald Søby
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2017-10-27 02:45:11+0000\n"
+"PO-Revision-Date: 2017-10-27 02:45:09+0000\n"
 "X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: qqq\n"
+"Language: nb\n"
 "X-Generator: MediaWiki 1.31.0-alpha; Translate 2017-07-25\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: doc/sphinx/_build/html/_static/doctools.js:167
 msgid "Permalink to this headline"
-msgstr ""
+msgstr "Permanent lenke til denne overskriften"
 
 #: doc/sphinx/_build/html/_static/doctools.js:173
 msgid "Permalink to this definition"
-msgstr ""
+msgstr "Permanent lenke til denne definisajonen"
 
 #: doc/sphinx/_build/html/_static/doctools.js:206
 msgid "Hide Search Matches"
@@ -27,15 +27,15 @@ msgstr ""
 
 #: doc/sphinx/_build/html/_static/searchtools.js:400
 msgid "Searching"
-msgstr ""
+msgstr "Søker"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:405
 msgid "Preparing search..."
-msgstr ""
+msgstr "Forbereder søk …"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:566
 msgid "Search Results"
-msgstr ""
+msgstr "Søkeresultater"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:568
 msgid "Your search did not match any documents. Please make sure that all words are spelled correctly and that you've selected enough categories."
@@ -48,7 +48,7 @@ msgstr ""
 
 #: doc/sphinx/_build/html/_static/searchtools.js:623
 msgid ", in "
-msgstr "{{Identical|In}}"
+msgstr ", i "
 
 #: doc/sphinx/_build/html/_static/sidebar.js:77
 msgid "Expand sidebar"
@@ -61,19 +61,19 @@ msgstr ""
 
 #: papers/static/papers/refresh.js:35
 msgid "Do not show this message anymore"
-msgstr ""
+msgstr "Ikke vis denne beskjeden igjen"
 
 #: papers/static/papers/refresh.js:66
 msgid "No author"
-msgstr ""
+msgstr "Ingen forfatter"
 
 #: papers/static/papers/refresh.js:68
 msgid "No title"
-msgstr ""
+msgstr "Ingen titttel"
 
 #: papers/static/papers/refresh.js:70
 msgid "Invalid publication date"
-msgstr ""
+msgstr "Ugyldig publiseringsdato"
 
 #: papers/static/papers/refresh.js:105
 #, invalid-plural
@@ -84,7 +84,7 @@ msgstr[1] ""
 
 #: papers/static/papers/refresh.js:115
 msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
-msgstr ""
+msgstr "«%(name)s» ble ignorert av følgende årsak: %(reason)s"
 
 #: papers/static/papers/refresh.js:123
 msgid "A paper was ignored, because it has no name"
@@ -92,9 +92,9 @@ msgstr ""
 
 #: papers/static/papers/refresh.js:135 papers/static/papers/refresh.js:163
 msgid "Show more information"
-msgstr ""
+msgstr "Vis mer informasjon"
 
 #: papers/static/papers/refresh.js:160
 msgid "Show less information"
-msgstr ""
+msgstr "Vis mindre informasjon"
 

@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2017-10-25 08:11:00+0000\n"
+"PO-Revision-Date: 2017-10-27 02:45:07+0000\n"
 "X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -55,7 +55,7 @@ msgstr ""
 
 #: deposit/hal/metadata.py:36
 msgid "Chemistry"
-msgstr ""
+msgstr "화학"
 
 #: deposit/hal/metadata.py:37
 msgid "Computer science"
@@ -103,7 +103,7 @@ msgstr ""
 
 #: deposit/hal/metadata.py:48
 msgid "Art and art history"
-msgstr ""
+msgstr "미술과 미술사"
 
 #: deposit/hal/metadata.py:49
 msgid "Classical studies"
@@ -115,7 +115,7 @@ msgstr "인구학"
 
 #: deposit/hal/metadata.py:51 deposit/osf/forms.py:67 deposit/osf/forms.py:90
 msgid "Law"
-msgstr ""
+msgstr "법"
 
 #: deposit/hal/metadata.py:52
 msgid "Economies and finances"
@@ -127,7 +127,7 @@ msgstr "교육"
 
 #: deposit/hal/metadata.py:54
 msgid "Environmental studies"
-msgstr ""
+msgstr "환경 연구"
 
 #: deposit/hal/metadata.py:55
 msgid "Gender studies"
@@ -260,7 +260,7 @@ msgstr ""
 
 #: deposit/models.py:42
 msgid "Published"
-msgstr ""
+msgstr "게시함"
 
 #: deposit/models.py:43
 msgid "Refused by the repository"
@@ -533,7 +533,7 @@ msgstr "이 저장소에 설정이 없습니다."
 
 #: deposit/views.py:189
 msgid "This repository cannot be used for this paper."
-msgstr ""
+msgstr "이 저장소는 이 논문에 대해 사용할 수 없습니다."
 
 #: deposit/views.py:208
 msgid "Access to the PDF was denied."
@@ -710,7 +710,7 @@ msgstr ""
 
 #: papers/models.py:103
 msgid "Published version"
-msgstr ""
+msgstr "게시된 판"
 
 #: papers/models.py:107
 msgid "Preparing profile"
@@ -878,7 +878,7 @@ msgstr ""
 #: papers/templates/papers/paper.html:77
 #, python-format
 msgid "\n            All %(nb_authors)s authors (<a href=\"#\" id=\"show_less_authors\">show less</a>):<br />\n            "
-msgstr ""
+msgstr "\n            모든 %(nb_authors)s명의 저자 (<a href=\"#\" id=\"show_less_authors\">덜 보기</a>):<br />\n            "
 
 #: papers/templates/papers/paper.html:89
 msgid "<strong>Congratulations!</strong> This paper was successfully deposited."
@@ -932,7 +932,7 @@ msgstr "도구"
 
 #: papers/templates/papers/paperDetails.html:29
 msgid "Request with the Open Access Button"
-msgstr ""
+msgstr "오픈 액세스 버튼으로 요청하기"
 
 #: papers/templates/papers/paperDetails.html:35
 msgid "Admin zone"
@@ -1133,11 +1133,11 @@ msgstr ""
 
 #: papers/templatetags/statuses.py:43
 msgid "Final versions can be archived."
-msgstr ""
+msgstr "마지막 판들을 보관할 수 있습니다."
 
 #: papers/templatetags/statuses.py:44
 msgid "Final versions cannot be archived."
-msgstr ""
+msgstr "마지막 판들은 보관할 수 없습니다."
 
 #: papers/templatetags/statuses.py:45
 msgid "Under the restrictions below, final versions can be archived."
@@ -1169,7 +1169,7 @@ msgstr ""
 
 #: papers/templatetags/statuses.py:58
 msgid "policy unclear."
-msgstr ""
+msgstr "정책 알 수 없음."
 
 #: papers/templatetags/statuses.py:59 papers/templatetags/statuses.py:61
 #: papers/templatetags/statuses.py:73
@@ -1190,21 +1190,21 @@ msgstr ""
 
 #: papers/templatetags/statuses.py:70
 msgid "policy unclear"
-msgstr ""
+msgstr "정책 알 수 없음"
 
 #: papers/templatetags/statuses.py:71
 msgid "policy unknown"
-msgstr ""
+msgstr "정책 알 수 없음"
 
 #: papers/views.py:128
 msgid "All papers"
 msgstr "모든 논문"
 
 #: papers/views.py:132
-#, invalid-plural, python-format
+#, python-format
 msgid "%d paper found"
 msgid_plural "%d papers found"
-msgstr[0] ""
+msgstr[0] "%d개 논문을 찾았음"
 
 #: papers/views.py:211
 msgid "\n                            Invalid ORCID profile.\n                            Please make sure it includes a public name.\n                            "
@@ -1220,7 +1220,7 @@ msgstr ""
 
 #: papers/views.py:283
 msgid " published by "
-msgstr ""
+msgstr "게시자 "
 
 #: papers/views.py:312
 msgid " in "
@@ -1237,7 +1237,7 @@ msgstr ""
 
 #: publishers/forms.py:11
 msgid "name"
-msgstr ""
+msgstr "이름"
 
 #: publishers/forms.py:19 publishers/templates/publishers/list.html:55
 msgid "Filter by publisher policy"
@@ -1245,7 +1245,7 @@ msgstr "게시가 정책별 필터"
 
 #: publishers/models.py:38
 msgid "Open access"
-msgstr ""
+msgstr "오픈 액세스"
 
 #: publishers/models.py:38
 msgid "Freely available from the publisher."
@@ -1329,7 +1329,7 @@ msgstr ""
 
 #: publishers/templates/publishers/detailsPolicy.html:14
 msgid "Published version:"
-msgstr ""
+msgstr "게시된 판:"
 
 #: publishers/templates/publishers/detailsPolicy.html:15
 msgid "The published version is the final version of the paper, as formatted by the publisher."
@@ -1340,10 +1340,10 @@ msgid "published version"
 msgstr ""
 
 #: publishers/templates/publishers/list.html:38
-#, invalid-plural, python-format
+#, python-format
 msgid "%(counter)s publisher found"
 msgid_plural "%(counter)s publishers found"
-msgstr[0] ""
+msgstr[0] "%(counter)s명의 게시자를 찾음"
 
 #: publishers/templates/publishers/list.html:94
 msgid "Data provided by"
@@ -1408,7 +1408,7 @@ msgstr ""
 
 #: statistics/models.py:51
 msgid "Unknown/unclear sharing policy"
-msgstr ""
+msgstr "알 수 없는 불분명한 공유 정책"
 
 #: statistics/models.py:52
 msgid "Publisher forbids sharing"
@@ -1428,7 +1428,7 @@ msgstr ""
 
 #: statistics/models.py:60
 msgid "This paper was not found in any repository; the policy of its publisher is unknown or unclear."
-msgstr ""
+msgstr "이 논문은 저장소에서 발견되지 않았습니다. 게시자의 정책을 알 수 없거나 분명하지 않습니다."
 
 #: statistics/models.py:61
 msgid "Distributing this paper is prohibited by the publisher"
@@ -1457,7 +1457,7 @@ msgstr ""
 
 #: statistics/templates/statistics/histogram.html:14
 msgid "Policy unknown"
-msgstr ""
+msgstr "정책 알 수 없음"
 
 #: statistics/templates/statistics/histogram.html:17
 msgid "Upload is forbidden"
@@ -1494,11 +1494,11 @@ msgstr "자주 묻는 질문"
 
 #: templates/dissemin/faq.html:16 templates/dissemin/faq.html:50
 msgid "What is Open Access?"
-msgstr ""
+msgstr "오픈 액세스가 무엇입니까?"
 
 #: templates/dissemin/faq.html:17 templates/dissemin/faq.html:60
 msgid "Why should I upload my papers to a repository?"
-msgstr ""
+msgstr "제 논문을 저장소에 왜 업로드해야 하나요?"
 
 #: templates/dissemin/faq.html:18 templates/dissemin/faq.html:92
 msgid "What repository should I use?"
@@ -1598,7 +1598,7 @@ msgstr ""
 
 #: templates/dissemin/faq.html:62
 msgid "You should do it because:"
-msgstr ""
+msgstr "해야하는 이유:"
 
 #: templates/dissemin/faq.html:66
 msgid "<ul> <li>It makes your research <strong>more accessible</strong> and <strong>more visible</strong>. Many researchers routinely check papers in topic repositories such as arXiv, and it is less likely that these researchers check your homepage regularly. </li> <li>You can even do it before publication. You can get <strong>valuable feedback</strong> to improve your paper before the actual peer-reviewing process. It may also be useful to establish priority if it takes a long time for your paper to get published.</li> <li> It provides you a <strong>durable storage</strong>. Your homepage is likely to change or to disappear, for instance if you leave your current institution. </li> <li>Librarians around the world cannot check whether all the papers in a given journal are available on homepages: in doubt, they subscribe to this journal to make sure their researchers have access to it. This costs a lot of money for research institutions. Papers stored in repositories are <strong>easier to detect</strong> and can help academia save money.</li> <li> Finally, for all these reasons, an increasing number of <strong>funding bodies</strong> require the outcomes of their projects to be made available in a repository. </li> </ul>"
@@ -1803,7 +1803,7 @@ msgstr "파트너"
 
 #: templates/dissemin/sandbox.html:12
 msgid "SANDBOX Sign in"
-msgstr ""
+msgstr "SANDBOX 로그인"
 
 #: templates/dissemin/skeleton.html:62
 msgid "Toggle navigation"
@@ -1907,7 +1907,7 @@ msgstr ""
 
 #: templates/dissemin/tos.html:77
 msgid "Please address any inquiry to support@dissem.in."
-msgstr ""
+msgstr "문의는 support@dissem.in으로 해 주십시오."
 
 #: templates/dissemin/tos.html:86
 msgid "Dissemin uses ORCID's public OAuth interface to authenticate its users. This interface only transmits information marked as public in the user's ORCID profile. This means that ORCID passwords are never transmitted and email addresses are not transmitted when they are marked as private, which is the default setting. When logging in to Dissemin from ORCID, Dissemin acquires the user's ORCID id, as well as all public information attached to the ORCID record. Dissemin can store any information input by its users on the platform. Users can ask for a copy of the personal information Dissemin stores about them by writing an email to support@dissem.in."
@@ -1919,7 +1919,7 @@ msgstr ""
 
 #: templates/dissemin/tos.html:120
 msgid "Misuse can be reported to support@dissem.in."
-msgstr ""
+msgstr "악용 신고는 support@dissem.in으로 보고할 수 있습니다."
 
 #: templates/dissemin/tos.html:128
 msgid "The <a href=\"https://dissem.in\">dissem.in</a> website has been registered with <a href=\"https://www.cnil.fr/\">CNIL</a> under declaration n°1895382 v0."
@@ -1927,7 +1927,7 @@ msgstr ""
 
 #: templates/dissemin/tos.html:136
 msgid "You have the right to access, modify, and delete the personal information that we hold about you. To exercise this right, please contact us at support@dissem.in, or by postal mail at the following addresss:"
-msgstr ""
+msgstr "저희가 보유한 개인 정보를 접근, 수정, 삭제할 권한이 있습니다. 이 권한을 수행하려면 support@dissem.in를 통해 저희에게 연락하시거나 다음의 주소로 우편물을 보내주십시오:"
 
 #: templates/socialaccount/authentication_error.html:6
 #: templates/socialaccount/authentication_error.html:12
@@ -1953,7 +1953,7 @@ msgstr "URL"
 
 #: upload/templates/upload/widget.html:4
 msgid "Select here the full text of your article. PDF files only, maximum size:"
-msgstr ""
+msgstr "여기의 문서의 전문을 선택하십시오. PDF 파일 전용, 최대 크기:"
 
 #: upload/templates/upload/widget.html:9
 msgid "Select a file:"
@@ -1977,7 +1977,7 @@ msgstr "유효하지 않은 PDF 파일입니다."
 
 #: upload/views.py:183
 msgid "Invalid form."
-msgstr ""
+msgstr "유요하지 않은 양식입니다."
 
 #: upload/views.py:193
 msgid "File too large."
@@ -1985,7 +1985,7 @@ msgstr "파일이 너무 큽니다."
 
 #: upload/views.py:198
 msgid "Invalid content type: this link points to a web page, we need a direct link to a PDF file."
-msgstr ""
+msgstr "유효하지 않은 콘텐츠 유형: 이 링크는 웹 페이지를 가리킵니다. PDF 파일에 대한 직접적인 링크가 필요합니다."
 
 #: upload/views.py:201
 msgid "Invalid SSL certificate on the remote server."

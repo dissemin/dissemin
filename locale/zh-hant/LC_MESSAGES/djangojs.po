@@ -1,17 +1,17 @@
-# Translation of Dissemin papers to Message documentation (Message documentation)
+# Translation of Dissemin papers to Traditional Chinese (中文（繁體）‎)
 # Exported from translatewiki.net
 #
-# Author: Liuxinyu970226
+# Author: Kly
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2017-10-27 02:45:11+0000\n"
+"PO-Revision-Date: 2017-10-27 02:45:09+0000\n"
 "X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: qqq\n"
+"Language: zh-Hant\n"
 "X-Generator: MediaWiki 1.31.0-alpha; Translate 2017-07-25\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: doc/sphinx/_build/html/_static/doctools.js:167
 msgid "Permalink to this headline"
@@ -27,7 +27,7 @@ msgstr ""
 
 #: doc/sphinx/_build/html/_static/searchtools.js:400
 msgid "Searching"
-msgstr ""
+msgstr "搜尋中"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:405
 msgid "Preparing search..."
@@ -35,7 +35,7 @@ msgstr ""
 
 #: doc/sphinx/_build/html/_static/searchtools.js:566
 msgid "Search Results"
-msgstr ""
+msgstr "搜尋結果"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:568
 msgid "Your search did not match any documents. Please make sure that all words are spelled correctly and that you've selected enough categories."
@@ -48,28 +48,28 @@ msgstr ""
 
 #: doc/sphinx/_build/html/_static/searchtools.js:623
 msgid ", in "
-msgstr "{{Identical|In}}"
+msgstr ""
 
 #: doc/sphinx/_build/html/_static/sidebar.js:77
 msgid "Expand sidebar"
-msgstr ""
+msgstr "展開側邊工具欄"
 
 #: doc/sphinx/_build/html/_static/sidebar.js:90
 #: doc/sphinx/_build/html/_static/sidebar.js:118
 msgid "Collapse sidebar"
-msgstr ""
+msgstr "摺疊側邊工具欄"
 
 #: papers/static/papers/refresh.js:35
 msgid "Do not show this message anymore"
-msgstr ""
+msgstr "不再顯示此訊息"
 
 #: papers/static/papers/refresh.js:66
 msgid "No author"
-msgstr ""
+msgstr "沒有作者"
 
 #: papers/static/papers/refresh.js:68
 msgid "No title"
-msgstr ""
+msgstr "沒有標題"
 
 #: papers/static/papers/refresh.js:70
 msgid "Invalid publication date"
@@ -80,7 +80,6 @@ msgstr ""
 msgid "We ignored %(count)s paper from your ORCiD profile."
 msgid_plural "We ignored %(count)s papers from your ORCiD profile."
 msgstr[0] ""
-msgstr[1] ""
 
 #: papers/static/papers/refresh.js:115
 msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
@@ -92,9 +91,9 @@ msgstr ""
 
 #: papers/static/papers/refresh.js:135 papers/static/papers/refresh.js:163
 msgid "Show more information"
-msgstr ""
+msgstr "顯示更多資訊"
 
 #: papers/static/papers/refresh.js:160
 msgid "Show less information"
-msgstr ""
+msgstr "顯示較少資訊"
 

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2017-10-25 08:11:01+0000\n"
+"PO-Revision-Date: 2017-10-27 02:45:09+0000\n"
 "X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -15,7 +15,7 @@ msgstr ""
 
 #: doc/sphinx/_build/html/_static/doctools.js:167
 msgid "Permalink to this headline"
-msgstr "헤드라인의 고유링크"
+msgstr "이 헤드라인의 고유링크"
 
 #: doc/sphinx/_build/html/_static/doctools.js:173
 msgid "Permalink to this definition"
@@ -39,7 +39,7 @@ msgstr "검색 결과"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:568
 msgid "Your search did not match any documents. Please make sure that all words are spelled correctly and that you've selected enough categories."
-msgstr ""
+msgstr "검색과 일치하는 문서가 없습니다. 모든 단어의 철자가 올바른지, 또 충분한 분류를 선택했는지 확인해 주십시오."
 
 #: doc/sphinx/_build/html/_static/searchtools.js:570
 #, javascript-format
@@ -83,7 +83,7 @@ msgstr[0] ""
 
 #: papers/static/papers/refresh.js:115
 msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
-msgstr ""
+msgstr "\"%(name)s\"은(는) 다음의 이유로 무시되었습니다: %(reason)s"
 
 #: papers/static/papers/refresh.js:123
 msgid "A paper was ignored, because it has no name"

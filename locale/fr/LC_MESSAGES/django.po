@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-08 17:04+0200\n"
-"PO-Revision-Date: 2017-10-25 08:11:00+0000\n"
+"PO-Revision-Date: 2017-10-27 02:45:07+0000\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -396,7 +396,7 @@ msgstr "Échec de la suppression du projet."
 
 #: deposit/osf/protocol.py:538 deposit/osf/protocol.py:546
 msgid "Unable to make the project public."
-msgstr "Échec lors du paramétrage des droits d'accès au projet."
+msgstr "Échec lors du paramétrage des droits d'accès publiques du projet."
 
 #: deposit/sword/protocol.py:45
 msgid "No servicedocument provided."
@@ -1332,7 +1332,7 @@ msgstr "Postdocument :"
 
 #: publishers/templates/publishers/detailsPolicy.html:11
 msgid "Postprints differ from preprints in that they include the changes suggested by the reviewers. They are not edited by the publisher."
-msgstr "Les postdocuments, au contraire des prépublications, intègrent les changements proposés par les relecteurs. Elles n'ont pas encore été modifiées par l'éditeur."
+msgstr "Les postdocuments intègrent les changements proposés par les relecteurs, au contraire des prépublications. Ces dernières n'ayant pas encore été modifiées par l'éditeur."
 
 #: publishers/templates/publishers/detailsPolicy.html:12
 msgid "postprint"
@@ -1566,7 +1566,7 @@ msgstr "Pourquoi manque-t-il certains de mes papiers ?"
 
 #: templates/dissemin/faq.html:35 templates/dissemin/faq.html:280
 msgid "Some details of my paper are incorrect. What can I do?"
-msgstr "Certaines informations sur mon papier sont incorrectes. Que faire ?"
+msgstr "Certaines informations sur mon article sont incorrectes. Que faire ?"
 
 #: templates/dissemin/faq.html:37 templates/dissemin/faq.html:324
 msgid "Authentication with ORCID"
@@ -1793,7 +1793,7 @@ msgstr "Inscription"
 
 #: templates/dissemin/login.html:44 templates/dissemin/sandbox.html:46
 msgid "Not an ORCID user yet? Create an account, it is free and takes a few seconds."
-msgstr "Si vous n'utilisez pas encore ORCID, créer un compte ne prend que quelques secondes."
+msgstr "Pas encore utilisateur de ORCID ? Créez un compte, c'est gratuit et prend quelques secondes."
 
 #: templates/dissemin/login.html:59 templates/dissemin/sandbox.html:61
 msgid "Dissemin account"
@@ -1802,7 +1802,7 @@ msgstr "Compte Dissemin"
 #: templates/dissemin/login.html:60 templates/dissemin/sandbox.html:62
 #, python-format
 msgid "If you have not created an account yet, then please\n<a href=\"%(signup_url)s\">sign up</a> first."
-msgstr "Si vous n'avez pas encore de compte, essayez de vous\n<a href=\"%(signup_url)s\">inscrire</a> d'abord."
+msgstr "Si vous n'avez pas encore créé de compte, veuillez <a href=\"%(signup_url)s\">vous inscrire</a> d'abord."
 
 #: templates/dissemin/login.html:69 templates/dissemin/sandbox.html:71
 msgid "Forgot Password?"
