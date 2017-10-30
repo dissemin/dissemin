@@ -8,12 +8,13 @@
 #
 msgid ""
 msgstr ""
-""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-10-30 10:57+0100\n"
 "PO-Revision-Date: 2017-10-30 08:00:48+0000\n"
-"X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
+"Language: zh-Hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: zh-Hans\n"
+"X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
 "X-Generator: MediaWiki 1.31.0-alpha; Translate 2017-07-25\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
@@ -209,6 +210,14 @@ msgstr "统计"
 msgid "Economy and quantitative finance"
 msgstr "经济与计量金融学"
 
+#: deposit/hal/models.py:14
+msgid "HAL username"
+msgstr ""
+
+#: deposit/hal/models.py:15
+msgid "If set, deposits will be associated to this HAL account."
+msgstr ""
+
 #: deposit/hal/protocol.py:142
 msgid "No HAL user credentials provided."
 msgstr "没有提供HAL用户凭据。"
@@ -276,7 +285,8 @@ msgid "Deposit"
 msgstr "存放"
 
 #: deposit/models.py:219
-msgid "We will use this email address to notify you when your deposits are accepted."
+msgid ""
+"We will use this email address to notify you when your deposits are accepted."
 msgstr "当您的存放内容被接受时，我们将使用该电子邮件地址通知您。"
 
 #: deposit/models.py:225
@@ -340,8 +350,13 @@ msgid "OSF identifier"
 msgstr "OSF标识符"
 
 #: deposit/osf/models.py:14
-msgid "If set, your deposits will be associated to this OSF account. This identifier is a string of letters and numbers which can be found in your OSF public profile URL."
-msgstr "如果设置，您的存放内容将于该OSF账户关联。此标识符是字母和数字字符串，这可以在您的OSF公开资料URL中找到。"
+msgid ""
+"If set, your deposits will be associated to this OSF account. This "
+"identifier is a string of letters and numbers which can be found in your OSF "
+"public profile URL."
+msgstr ""
+"如果设置，您的存放内容将于该OSF账户关联。此标识符是字母和数字字符串，这可以在"
+"您的OSF公开资料URL中找到。"
 
 #: deposit/osf/protocol.py:207
 msgid "Unable to create a project on OSF."
@@ -391,6 +406,12 @@ msgstr "无法删除项目。"
 msgid "Unable to make the project public."
 msgstr "无法将项目公开化。"
 
+#: deposit/protocol.py:199
+#, fuzzy
+#| msgid "Connection to HAL failed. Please try again later."
+msgid "Failed to connect to the repository. Please try again later."
+msgstr "连接到HAL失败。请稍后重试。"
+
 #: deposit/sword/protocol.py:45
 msgid "No servicedocument provided."
 msgstr "没有提供服务文档。"
@@ -438,7 +459,9 @@ msgid "Status"
 msgstr "状态"
 
 #: deposit/templates/deposit/deposits.html:88
-msgid "You have not made any deposit via Dissemin. What are you waiting for? Liberate your papers today."
+msgid ""
+"You have not made any deposit via Dissemin. What are you waiting for? "
+"Liberate your papers today."
 msgstr "您没有通过Dissemin做出任何存放。您在等什么？今天就存放您的论文吧。"
 
 #: deposit/templates/deposit/global_preferences.html:13
@@ -475,11 +498,24 @@ msgstr "Dissemin遇到错误，请稍后再试。"
 
 #: deposit/templates/deposit/start.html:295
 #, python-format
-msgid "\n            You can deposit the full text of your article. Dissemin will\n            send it to a repository where it will be made freely available.\n            By depositing your article via Dissemin,\n            you agree to our <a href=\"%(tosurl)s\">terms of service</a>.\n        "
-msgstr "\n            您可以存放您的文章全文。Dissemin将发送它到其能够自由展示的存储库。通过使用Dissemin存放您的文章，您同意我们的<a href=\"%(tosurl)s\">服务条款</a>。\n        "
+msgid ""
+"\n"
+"            You can deposit the full text of your article. Dissemin will\n"
+"            send it to a repository where it will be made freely available.\n"
+"            By depositing your article via Dissemin,\n"
+"            you agree to our <a href=\"%(tosurl)s\">terms of service</a>.\n"
+"        "
+msgstr ""
+"\n"
+"            您可以存放您的文章全文。Dissemin将发送它到其能够自由展示的存储"
+"库。通过使用Dissemin存放您的文章，您同意我们的<a href=\"%(tosurl)s\">服务条款"
+"</a>。\n"
+"        "
 
 #: deposit/templates/deposit/start.html:306
-msgid "You do not appear to be one of the authors of this paper. By using this form, you certify that you have the permission to upload it on their behalf."
+msgid ""
+"You do not appear to be one of the authors of this paper. By using this "
+"form, you certify that you have the permission to upload it on their behalf."
 msgstr "您并不是该论文的作者之一。通过使用该表单，您保证您有权代表作者上传它。"
 
 #: deposit/templates/deposit/start.html:316
@@ -568,8 +604,11 @@ msgid "No Zenodo API key provided."
 msgstr "没有提供Zenodo API key。"
 
 #: deposit/zenodo/protocol.py:81
-msgid "This happens when Zenodo has hiccups. Please try again in a few minutes or use a different repository in the menu above."
-msgstr "这会在Zenodo出现问题时发生。请等待几分钟再试，或使用上面菜单中的不同存储库。"
+msgid ""
+"This happens when Zenodo has hiccups. Please try again in a few minutes or "
+"use a different repository in the menu above."
+msgstr ""
+"这会在Zenodo出现问题时发生。请等待几分钟再试，或使用上面菜单中的不同存储库。"
 
 #: deposit/zenodo/protocol.py:82
 msgid "Unable to authenticate to Zenodo."
@@ -584,7 +623,9 @@ msgid "Unable to transfer the document to Zenodo."
 msgstr "无法转移文档至Zenodo。"
 
 #: deposit/zenodo/protocol.py:111
-msgid "No abstract is available for this paper but Zenodo requires one. Please provide it using the metadata panel."
+msgid ""
+"No abstract is available for this paper but Zenodo requires one. Please "
+"provide it using the metadata panel."
 msgstr "没有此论文的摘要，但Zenodo要求一个。请使用元数据面板提供它。"
 
 #: deposit/zenodo/protocol.py:119
@@ -595,13 +636,21 @@ msgstr "无法提交论文元数据至Zenodo。"
 msgid "Unable to publish the deposition on Zenodo."
 msgstr "无法在Zenodo发布存放。"
 
-#: dissemin/settings/common.py:269
+#: dissemin/settings/common.py:275
 msgid "English"
 msgstr "英语"
 
-#: dissemin/settings/common.py:270
+#: dissemin/settings/common.py:276
 msgid "French"
 msgstr "法语"
+
+#: dissemin/settings/common.py:277
+msgid "Simplified Chinese"
+msgstr ""
+
+#: dissemin/settings/common.py:278
+msgid "Macedonian"
+msgstr ""
 
 #: notification/models.py:62
 msgid "inboxes"
@@ -768,8 +817,13 @@ msgid "Create your profile"
 msgstr "创建您的详情"
 
 #: papers/templates/papers/createProfile.html:15
-msgid "\nTo fetch your publications, we need one last piece of information: your name.\n"
-msgstr "\n要检索您的出版物，我们需要您的少量信息：您的姓名。\n"
+msgid ""
+"\n"
+"To fetch your publications, we need one last piece of information: your "
+"name.\n"
+msgstr ""
+"\n"
+"要检索您的出版物，我们需要您的少量信息：您的姓名。\n"
 
 #: papers/templates/papers/department.html:60
 #: papers/templates/papers/institution.html:37
@@ -813,7 +867,9 @@ msgid "Welcome to dissemin"
 msgstr "欢迎来到dissemin"
 
 #: papers/templates/papers/index.html:26
-msgid "Dissemin detects papers behind pay-walls and invites their authors to upload them in one click to an open repository."
+msgid ""
+"Dissemin detects papers behind pay-walls and invites their authors to upload "
+"them in one click to an open repository."
 msgstr "Dissemin在付费墙后面查找论文，并邀请作者一键上传它们到开放存储库。"
 
 #: papers/templates/papers/index.html:36
@@ -832,11 +888,18 @@ msgid "Green open access"
 msgstr "绿色开放访问"
 
 #: papers/templates/papers/index.html:50
-msgid "Many researchers do not use their right to make their papers freely available online, in addition to the paywalled version offered by traditional publishers."
-msgstr "很多研究员不利用其权利来使它们的论文在线自由使用，此外还存在传统发行方提供的付费墙版本。"
+msgid ""
+"Many researchers do not use their right to make their papers freely "
+"available online, in addition to the paywalled version offered by "
+"traditional publishers."
+msgstr ""
+"很多研究员不利用其权利来使它们的论文在线自由使用，此外还存在传统发行方提供的"
+"付费墙版本。"
 
 #: papers/templates/papers/index.html:58
-msgid "This forces libraries to buy overpriced electronic subscriptions to journals, when they can afford them at all."
+msgid ""
+"This forces libraries to buy overpriced electronic subscriptions to "
+"journals, when they can afford them at all."
 msgstr "这强制了图书馆购买定价高昂的电子订阅至期刊，只要它们负担得起。"
 
 #: papers/templates/papers/index.html:74
@@ -844,12 +907,21 @@ msgid "Open repositories"
 msgstr "开放存储库"
 
 #: papers/templates/papers/index.html:77
-msgid "Uploading your papers on your own webpage is not enough. Such copies are less stable and harder to find than documents uploaded to well-indexed repositories."
-msgstr "上传您的论文至您自己的网页是不够的。这种复制不稳定，并且与专业索引的存储库相比更难找到合适的文档。"
+msgid ""
+"Uploading your papers on your own webpage is not enough. Such copies are "
+"less stable and harder to find than documents uploaded to well-indexed "
+"repositories."
+msgstr ""
+"上传您的论文至您自己的网页是不够的。这种复制不稳定，并且与专业索引的存储库相"
+"比更难找到合适的文档。"
 
 #: papers/templates/papers/index.html:85
-msgid "Dissemin searches for copies of your papers in a large collection of open repositories and tells you which ones cannot be accessed."
-msgstr "Dissemin在巨大的开放存储库收藏中搜索您的论文中的一些拷贝，并告诉您哪些不能访问。"
+msgid ""
+"Dissemin searches for copies of your papers in a large collection of open "
+"repositories and tells you which ones cannot be accessed."
+msgstr ""
+"Dissemin在巨大的开放存储库收藏中搜索您的论文中的一些拷贝，并告诉您哪些不能访"
+"问。"
 
 #: papers/templates/papers/institutions.html:25
 msgid "Institutions"
@@ -867,27 +939,57 @@ msgstr "（空白详情）"
 #: papers/templates/papers/paper.html:62
 #, python-format
 msgctxt "as in: _Journal article by_ Tom Smith, Nicole Allen"
-msgid " \n    <span class=\"paperDocType\">%(doctype)s</span> by\n    "
-msgstr " \n    <span class=\"paperDocType\">%(doctype)s</span>由\n    "
+msgid ""
+" \n"
+"    <span class=\"paperDocType\">%(doctype)s</span> by\n"
+"    "
+msgstr ""
+" \n"
+"    <span class=\"paperDocType\">%(doctype)s</span>由\n"
+"    "
 
 #: papers/templates/papers/paper.html:70
 #, python-format
-msgid "\n            and <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s other authors</a>\n            "
-msgstr "\n            以及<a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s位其他作者</a>\n            "
+msgid ""
+"\n"
+"            and <a href=\"#\" id=\"show_all_authors\">"
+"%(nb_remaining_authors)s other authors</a>\n"
+"            "
+msgstr ""
+"\n"
+"            以及<a href=\"#\" id=\"show_all_authors\">"
+"%(nb_remaining_authors)s位其他作者</a>\n"
+"            "
 
 #: papers/templates/papers/paper.html:77
 #, python-format
-msgid "\n            All %(nb_authors)s authors (<a href=\"#\" id=\"show_less_authors\">show less</a>):<br />\n            "
-msgstr "\n            所有%(nb_authors)s位作者（<a href=\"#\" id=\"show_less_authors\">显示更少</a>）：<br />\n            "
+msgid ""
+"\n"
+"            All %(nb_authors)s authors (<a href=\"#\" id=\"show_less_authors"
+"\">show less</a>):<br />\n"
+"            "
+msgstr ""
+"\n"
+"            所有%(nb_authors)s位作者（<a href=\"#\" id=\"show_less_authors\">"
+"显示更少</a>）：<br />\n"
+"            "
 
 #: papers/templates/papers/paper.html:89
-msgid "<strong>Congratulations!</strong> This paper was successfully deposited."
+msgid ""
+"<strong>Congratulations!</strong> This paper was successfully deposited."
 msgstr "<strong>祝贺！</strong>此论文已成功存放。"
 
 #: papers/templates/papers/paper.html:96
 #, python-format
-msgid "<strong>Almost there!</strong> This paper has been deposited in <a href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a href=\"%(deposit_url)s\">this address</a> after validation by the repository administrators."
-msgstr "<strong>就快完成了！</strong>这篇论文已存放于<a href=\"%(repo_url)s\">%(repo_name)s</a>。在存储库的管理员验证后，全文将在<a href=\"%(deposit_url)s\">此地址</a>提供。"
+msgid ""
+"<strong>Almost there!</strong> This paper has been deposited in <a href="
+"\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a "
+"href=\"%(deposit_url)s\">this address</a> after validation by the repository "
+"administrators."
+msgstr ""
+"<strong>就快完成了！</strong>这篇论文已存放于<a href=\"%(repo_url)s\">"
+"%(repo_name)s</a>。在存储库的管理员验证后，全文将在<a href=\"%(deposit_url)s"
+"\">此地址</a>提供。"
 
 #: papers/templates/papers/paper.html:114
 msgid "Full text:"
@@ -944,8 +1046,12 @@ msgstr "找不到论文。"
 
 #: papers/templates/papers/paperList.html:33
 #, python-format
-msgid "Missing publications? <a href=\"%(matching_papers_url)s\"> Search for publications with a matching author name </a>"
-msgstr "缺少出版物？<a href=\"%(matching_papers_url)s\">使用匹配的作者名搜索出版物</a>"
+msgid ""
+"Missing publications? <a href=\"%(matching_papers_url)s\"> Search for "
+"publications with a matching author name </a>"
+msgstr ""
+"缺少出版物？<a href=\"%(matching_papers_url)s\">使用匹配的作者名搜索出版物</"
+"a>"
 
 #: papers/templates/papers/publiListItem.html:16
 #, python-format
@@ -1207,8 +1313,15 @@ msgid_plural "%d papers found"
 msgstr[0] "找到%d篇论文"
 
 #: papers/views.py:211
-msgid "\n                            Invalid ORCID profile.\n                            Please make sure it includes a public name.\n                            "
-msgstr "\n                            无效的ORCID详情。请确保它包含公开名称。\n                            "
+msgid ""
+"\n"
+"                            Invalid ORCID profile.\n"
+"                            Please make sure it includes a public name.\n"
+"                            "
+msgstr ""
+"\n"
+"                            无效的ORCID详情。请确保它包含公开名称。\n"
+"                            "
 
 #: papers/views.py:217
 msgid "Invalid ORCID profile."
@@ -1256,7 +1369,9 @@ msgid "Allows pre/post prints"
 msgstr "允许预印/后印"
 
 #: publishers/models.py:40
-msgid "The publisher sells copies but allows authors to deposit some version of the article in a repository."
+msgid ""
+"The publisher sells copies but allows authors to deposit some version of the "
+"article in a repository."
 msgstr "发行者销售拷贝，但允许作者存放一些文章版本至存储库。"
 
 #: publishers/models.py:41
@@ -1264,7 +1379,8 @@ msgid "Forbids pre/post prints"
 msgstr "禁止预印/后印"
 
 #: publishers/models.py:42
-msgid "The publisher forbids authors to deposit any version of their article online."
+msgid ""
+"The publisher forbids authors to deposit any version of their article online."
 msgstr "发行者禁止作者在线存放其文章的任何版本。"
 
 #: publishers/models.py:43
@@ -1308,7 +1424,9 @@ msgid "Preprint:"
 msgstr "预印本："
 
 #: publishers/templates/publishers/detailsPolicy.html:7
-msgid "A preprint is a document produced by the authors without any interaction with the peer-reviewing process."
+msgid ""
+"A preprint is a document produced by the authors without any interaction "
+"with the peer-reviewing process."
 msgstr "预印本是由作者在没有相互作用的情况下，提供用作同行监督过程的文档。"
 
 #: publishers/templates/publishers/detailsPolicy.html:8
@@ -1320,8 +1438,12 @@ msgid "Postprint:"
 msgstr "后印本："
 
 #: publishers/templates/publishers/detailsPolicy.html:11
-msgid "Postprints differ from preprints in that they include the changes suggested by the reviewers. They are not edited by the publisher."
-msgstr "后印本与预印本的不同之处在于其包含由审阅人建议的更改。这些不是由发行者编辑的。"
+msgid ""
+"Postprints differ from preprints in that they include the changes suggested "
+"by the reviewers. They are not edited by the publisher."
+msgstr ""
+"后印本与预印本的不同之处在于其包含由审阅人建议的更改。这些不是由发行者编辑"
+"的。"
 
 #: publishers/templates/publishers/detailsPolicy.html:12
 msgid "postprint"
@@ -1332,7 +1454,9 @@ msgid "Published version:"
 msgstr "发行版本："
 
 #: publishers/templates/publishers/detailsPolicy.html:15
-msgid "The published version is the final version of the paper, as formatted by the publisher."
+msgid ""
+"The published version is the final version of the paper, as formatted by the "
+"publisher."
 msgstr "发行版本是由发行者格式化的，论文的最终版本。"
 
 #: publishers/templates/publishers/detailsPolicy.html:16
@@ -1423,11 +1547,15 @@ msgid "This paper is available in a repository."
 msgstr "此论文在存储库中提供。"
 
 #: statistics/models.py:59
-msgid "This paper was not found in any repository, but could be made available legally by the author."
+msgid ""
+"This paper was not found in any repository, but could be made available "
+"legally by the author."
 msgstr "在任何存储库都找不到此论文，但可由作者依法提供。"
 
 #: statistics/models.py:60
-msgid "This paper was not found in any repository; the policy of its publisher is unknown or unclear."
+msgid ""
+"This paper was not found in any repository; the policy of its publisher is "
+"unknown or unclear."
 msgstr "在任何存储库都找不到此论文；其发行者的方针未知或不清楚。"
 
 #: statistics/models.py:61
@@ -1443,7 +1571,7 @@ msgid "of the papers by this publisher are available"
 msgstr "篇此发行者的论文可用"
 
 #: statistics/templates/statistics/histogram.html:5
-#: templates/dissemin/faq.html:48
+#: templates/dissemin/faq.html:49
 msgid "Open Access"
 msgstr "开放访问"
 
@@ -1468,16 +1596,30 @@ msgid "Page not found"
 msgstr "找不到页面"
 
 #: templates/404.html:13
-msgid "\n            The page you requested could not be found. <a href=\"/\">Go back to the home page.</a>\n           "
-msgstr "\n            找不到您请求的页面。<a href=\"/\">返回首页。</a>\n           "
+msgid ""
+"\n"
+"            The page you requested could not be found. <a href=\"/\">Go back "
+"to the home page.</a>\n"
+"           "
+msgstr ""
+"\n"
+"            找不到您请求的页面。<a href=\"/\">返回首页。</a>\n"
+"           "
 
 #: templates/500.html:6 templates/500.html:12
 msgid "Internal error"
 msgstr "内部错误"
 
 #: templates/500.html:13
-msgid "\n            Your request triggered an internal error. <a href=\"/\">Go back to the home page.</a>\n           "
-msgstr "\n            您的请求触发了内部错误。<a href=\"/\">返回首页。</a>\n           "
+msgid ""
+"\n"
+"            Your request triggered an internal error. <a href=\"/\">Go back "
+"to the home page.</a>\n"
+"           "
+msgstr ""
+"\n"
+"            您的请求触发了内部错误。<a href=\"/\">返回首页。</a>\n"
+"           "
 
 #: templates/admin/base_site.html:4
 msgid "Dissemin site admin"
@@ -1492,264 +1634,618 @@ msgstr "Dissemin管理"
 msgid "Frequently Asked Questions"
 msgstr "常见问题"
 
-#: templates/dissemin/faq.html:16 templates/dissemin/faq.html:50
+#: templates/dissemin/faq.html:16 templates/dissemin/faq.html:51
 msgid "What is Open Access?"
 msgstr "什么是开放访问？"
 
-#: templates/dissemin/faq.html:17 templates/dissemin/faq.html:60
+#: templates/dissemin/faq.html:17 templates/dissemin/faq.html:61
 msgid "Why should I upload my papers to a repository?"
 msgstr "为什么我应该上传我的论文至存储库？"
 
-#: templates/dissemin/faq.html:18 templates/dissemin/faq.html:92
+#: templates/dissemin/faq.html:18 templates/dissemin/faq.html:106
 msgid "What repository should I use?"
 msgstr "我应该使用哪个存储库？"
 
-#: templates/dissemin/faq.html:19 templates/dissemin/faq.html:113
+#: templates/dissemin/faq.html:19 templates/dissemin/faq.html:136
 msgid "Why can't I deposit in my favorite repository yet?"
 msgstr "为什么我现在还不能存放至我感兴趣的存储库？"
 
-#: templates/dissemin/faq.html:22 templates/dissemin/faq.html:153
+#: templates/dissemin/faq.html:22 templates/dissemin/faq.html:188
 msgid "What is dissem.in?"
 msgstr "什么是dissem.in？"
 
-#: templates/dissemin/faq.html:23 templates/dissemin/faq.html:164
+#: templates/dissemin/faq.html:23 templates/dissemin/faq.html:199
 msgid "Is dissem.in a repository?"
 msgstr "dissem.in是存储库么？"
 
-#: templates/dissemin/faq.html:24 templates/dissemin/faq.html:174
+#: templates/dissemin/faq.html:24 templates/dissemin/faq.html:209
 msgid "Who runs dissem.in?"
 msgstr "谁运行dissem.in？"
 
-#: templates/dissemin/faq.html:25 templates/dissemin/faq.html:181
+#: templates/dissemin/faq.html:25 templates/dissemin/faq.html:216
 msgid "Can I create my profile on dissem.in?"
 msgstr "我能在dissem.in创建我的详情么？"
 
-#: templates/dissemin/faq.html:27 templates/dissemin/faq.html:189
+#: templates/dissemin/faq.html:27 templates/dissemin/faq.html:226
 msgid "Policies and full-text availability"
 msgstr "方针与全文可见性"
 
-#: templates/dissemin/faq.html:28 templates/dissemin/faq.html:190
+#: templates/dissemin/faq.html:28 templates/dissemin/faq.html:227
 msgid "What do your policy classes mean?"
 msgstr "您的方针等级意思是什么？"
 
-#: templates/dissemin/faq.html:29 templates/dissemin/faq.html:243
+#: templates/dissemin/faq.html:29 templates/dissemin/faq.html:280
 msgid "When is a paper considered available?"
 msgstr "论文何时会被认为可用？"
 
-#: templates/dissemin/faq.html:30 templates/dissemin/faq.html:252
+#: templates/dissemin/faq.html:30 templates/dissemin/faq.html:289
 msgid "Should I trust your statistics?"
 msgstr "我应该信任您的统计信息么？"
 
-#: templates/dissemin/faq.html:32 templates/dissemin/faq.html:269
+#: templates/dissemin/faq.html:32 templates/dissemin/faq.html:330
 msgid "Omissions and errors"
 msgstr "疏忽与错误"
 
-#: templates/dissemin/faq.html:33 templates/dissemin/faq.html:288
-msgid "There is a freely available copy of my article online but dissem.in does not find it."
-msgstr "这里存在我的文章的自由拷贝，但dissem.in找不到。"
-
-#: templates/dissemin/faq.html:34 templates/dissemin/faq.html:270
+#: templates/dissemin/faq.html:33 templates/dissemin/faq.html:331
 msgid "One of my papers is missing. Why?"
 msgstr "一个或多个我的论文丢失了。为什么？"
 
-#: templates/dissemin/faq.html:35 templates/dissemin/faq.html:280
+#: templates/dissemin/faq.html:34 templates/dissemin/faq.html:367
 msgid "Some details of my paper are incorrect. What can I do?"
 msgstr "我的论文里有些详情是错误的。我怎么办？"
 
-#: templates/dissemin/faq.html:37 templates/dissemin/faq.html:324
+#: templates/dissemin/faq.html:35 templates/dissemin/faq.html:393
+msgid ""
+"There is a freely available copy of my article online but dissem.in does not "
+"find it."
+msgstr "这里存在我的文章的自由拷贝，但dissem.in找不到。"
+
+#: templates/dissemin/faq.html:37 templates/dissemin/faq.html:433
 msgid "Authentication with ORCID"
 msgstr "与ORCID验证"
 
-#: templates/dissemin/faq.html:38 templates/dissemin/faq.html:326
+#: templates/dissemin/faq.html:38 templates/dissemin/faq.html:435
 msgid "Why do you need to authenticate users?"
 msgstr "为什么您需要验证用户？"
 
-#: templates/dissemin/faq.html:39 templates/dissemin/faq.html:340
+#: templates/dissemin/faq.html:39 templates/dissemin/faq.html:449
 msgid "What will you do to my ORCID profile if I log in?"
 msgstr "如果我登录了，您将对我的ORCID详情做什么？"
 
-#: templates/dissemin/faq.html:40 templates/dissemin/faq.html:349
+#: templates/dissemin/faq.html:40 templates/dissemin/faq.html:458
 msgid "How do I add publications to my ORCID profile?"
 msgstr "我如何添加出版物至我的ORCID详情？"
 
-#: templates/dissemin/faq.html:42 templates/dissemin/faq.html:371
+#: templates/dissemin/faq.html:41 templates/dissemin/faq.html:501
+msgid "My ORCID details on Dissemin are outdated."
+msgstr ""
+
+#: templates/dissemin/faq.html:43 templates/dissemin/faq.html:514
 msgid "Behind the scenes"
 msgstr "在幕后"
 
-#: templates/dissemin/faq.html:43 templates/dissemin/faq.html:373
+#: templates/dissemin/faq.html:44 templates/dissemin/faq.html:516
 msgid "Where do you get the data from?"
 msgstr "您是从何处获取数据的？"
 
-#: templates/dissemin/faq.html:44 templates/dissemin/faq.html:380
+#: templates/dissemin/faq.html:45 templates/dissemin/faq.html:523
 msgid "How can I help?"
 msgstr "我如何帮助？"
 
-#: templates/dissemin/faq.html:45 templates/dissemin/faq.html:398
+#: templates/dissemin/faq.html:46 templates/dissemin/faq.html:563
 msgid "Where is the source code?"
 msgstr "源代码在哪？"
 
-#: templates/dissemin/faq.html:46 templates/dissemin/faq.html:404
+#: templates/dissemin/faq.html:47 templates/dissemin/faq.html:569
 msgid "Can I harvest your data?"
 msgstr "我可以获得您的数据么？"
 
-#: templates/dissemin/faq.html:52
-msgid "In a nutshell, the Open Access movement promotes free access to the scientific literature. For a more in-depth introduction, we recommend <a href=\"http://www.phdcomics.com/comics.php?f=1533\">this video in English</a> and <a href=\"https://pablo.rauzy.name/openaccess/introduction.html\">this introduction in French</a>."
-msgstr "简单的讲，开放访问运动促进自由访问科学文献。有关更全面的介绍，我们建议您观看介绍视频：<a href=\"http://www.phdcomics.com/comics.php?f=1533\">英语版</a>和<a href=\"https://pablo.rauzy.name/openaccess/introduction.html\">法语版</a>。"
+#: templates/dissemin/faq.html:53
+msgid ""
+"In a nutshell, the Open Access movement promotes free access to the "
+"scientific literature. For a more in-depth introduction, we recommend <a "
+"href=\"http://www.phdcomics.com/comics.php?f=1533\">this video in English</"
+"a> and <a href=\"https://pablo.rauzy.name/openaccess/introduction.html"
+"\">this introduction in French</a>."
+msgstr ""
+"简单的讲，开放访问运动促进自由访问科学文献。有关更全面的介绍，我们建议您观看"
+"介绍视频：<a href=\"http://www.phdcomics.com/comics.php?f=1533\">英语版</a>和"
+"<a href=\"https://pablo.rauzy.name/openaccess/introduction.html\">法语版</"
+"a>。"
 
-#: templates/dissemin/faq.html:62
+#: templates/dissemin/faq.html:63
 msgid "You should do it because:"
 msgstr "因为以下原因，您应该这样做："
 
-#: templates/dissemin/faq.html:66
-#, fuzzy
-msgid "<ul> <li>It makes your research <strong>more accessible</strong> and <strong>more visible</strong>. Many researchers routinely check papers in topic repositories such as arXiv, and it is less likely that these researchers check your homepage regularly. </li> <li>You can even do it before publication. You can get <strong>valuable feedback</strong> to improve your paper before the actual peer-reviewing process. It may also be useful to establish priority if it takes a long time for your paper to get published.</li> <li> It provides you a <strong>durable storage</strong>. Your homepage is likely to change or to disappear, for instance if you leave your current institution. </li> <li>Librarians around the world cannot check whether all the papers in a given journal are available on homepages: in doubt, they subscribe to this journal to make sure their researchers have access to it. This costs a lot of money for research institutions. Papers stored in repositories are <strong>easier to detect</strong> and can help academia save money.</li> <li> Finally, for all these reasons, an increasing number of <strong>funding bodies</strong> require the outcomes of their projects to be made available in a repository. </li> </ul>"
-msgstr "<ul> <li>这使您的研究<strong>访问量更大</strong>，并<strong>更显要</strong>。很多研究员老一套地使用主题存储库（例如arXiv）查阅论文，这使得研究员们很难定期检查您的首页。</li> <li>您也可以在发布前这样做。您可以获得<strong>有价值的反馈</strong>，这有助于在实际同行监督前改进您的论文。同样也对建立优先级有所帮助，如果您的论文要等一段实际才会发布的话。</li> <li> It provides you a <strong>durable storage</strong>. Your homepage is likely to change or to disappear, for instance if you leave your current institution. </li> <li>Librarians around the world cannot check whether all the papers in a given journal are available on homepages: in doubt, they subscribe to this journal to make sure their researchers have access to it. This costs a lot of money for research institutions. Papers stored in repositories are <strong>easier to detect</strong> and can help academia save money.</li> <li> Finally, for all these reasons, an increasing number of <strong>funding bodies</strong> require the outcomes of their projects to be made available in a repository. </li> </ul>"
+#: templates/dissemin/faq.html:69
+msgid ""
+"It makes your research <strong>more accessible</strong> and <strong>more "
+"visible</strong>. Many researchers routinely check papers in topic "
+"repositories such as arXiv, and it is less likely that these researchers "
+"check your homepage regularly."
+msgstr ""
 
-#: templates/dissemin/faq.html:94
+#: templates/dissemin/faq.html:76
+msgid ""
+"You can even do it before publication. You can get <strong>valuable "
+"feedback</strong> to improve your paper before the actual peer-reviewing "
+"process. It may also be useful to establish priority if it takes a long time "
+"for your paper to get published."
+msgstr ""
+
+#: templates/dissemin/faq.html:84
+msgid ""
+"It provides you a <strong>durable storage</strong>. Your homepage is likely "
+"to change or to disappear, for instance if you leave your current "
+"institution."
+msgstr ""
+
+#: templates/dissemin/faq.html:90
+msgid ""
+"Librarians around the world cannot check whether all the papers in a given "
+"journal are available on homepages: in doubt, they subscribe to this journal "
+"to make sure their researchers have access to it. This costs a lot of money "
+"for research institutions. Papers stored in repositories are <strong>easier "
+"to detect</strong> and can help academia save money."
+msgstr ""
+
+#: templates/dissemin/faq.html:99
+msgid ""
+"Finally, for all these reasons, an increasing number of <strong>funding "
+"bodies</strong> require the outcomes of their projects to be made available "
+"in a repository."
+msgstr ""
+
+#: templates/dissemin/faq.html:108
 msgid "There are roughly three types of repositories:"
 msgstr "粗略的讲，有三种存储库："
 
-#: templates/dissemin/faq.html:98
-msgid "<ul> <li>Subject repositories, restricted to some research fields, such as <a href=\"https://arxiv.org\">arXiv</a>.</li> <li>Institutional repositories, designated to store the research output of a given institution or country. </li> <li>General-purpose academic repositories such as <a href=\"https://zenodo.org\">Zenodo</a>, not limited to a particular scope.</li> </ul>"
+#: templates/dissemin/faq.html:114
+msgid ""
+"Subject repositories, restricted to some research fields, such as <a href="
+"\"https://arxiv.org\">arXiv</a>."
 msgstr ""
 
-#: templates/dissemin/faq.html:109
-msgid "If your research community favours a specific repository, using it makes sense as it will increase your visibility. If not, institutional or general-purpose repositories are also good options."
+#: templates/dissemin/faq.html:120
+msgid ""
+"Institutional repositories, designated to store the research output of a "
+"given institution or country."
 msgstr ""
 
-#: templates/dissemin/faq.html:115
-msgid "At the moment, you can use Dissemin to deposit in the following repositories:"
-msgstr "目前，您可以使用Dissemin来存放至以下存储库中："
-
-#: templates/dissemin/faq.html:119
-msgid "<ul> <li><strong><a href=\"https://zenodo.org\">Zenodo</a></strong>, an innovative repository backed by the EU.</li> <li><strong><a href=\"https://hal.archives-ouvertes.fr/\">HAL</a></strong>, a French repository managed by the <a href=\"https://www.ccsd.cnrs.fr/\">CCSD</a>.</li> <li><strong><a href=\"https://osf.io/preprints/\">OSF preprints</a></strong>, a preprint server run by the <a href=\"https://cos.io/\">Center for Open Science</a> on top of their <a href=\"https://osf.io/\">Open Science Framework</a>.</li> </ul>"
-msgstr "<ul> <li><strong><a href=\"https://zenodo.org\">Zenodo</a></strong>，一个依靠欧盟的创新存储库。</li> <li><strong><a href=\"https://hal.archives-ouvertes.fr/\">HAL</a></strong>，由<a href=\"https://www.ccsd.cnrs.fr/\">CCSD</a>管理的法语存储库。</li> <li><strong><a href=\"https://osf.io/preprints/\">OSF预印本</a></strong>，由<a href=\"https://cos.io/\">开放科学中心</a>（Center for Open Science）运行的预印本服务器，基于其<a href=\"https://osf.io/\">开放科学框架</a>（Open Science Framework）项目之上。</li> </ul>"
+#: templates/dissemin/faq.html:125
+msgid ""
+"General-purpose academic repositories such as <a href=\"https://zenodo.org"
+"\">Zenodo</a>, not limited to a particular scope."
+msgstr ""
 
 #: templates/dissemin/faq.html:132
-msgid "Supporting more repositories requires us to write specific code for each repository. More importantly it requires the repositories to give us permission to deposit papers in bulk. We have been considering integrating the following repositories:"
+msgid ""
+"If your research community favours a specific repository, using it makes "
+"sense as it will increase your visibility. If not, institutional or general-"
+"purpose repositories are also good options."
 msgstr ""
 
-#: templates/dissemin/faq.html:139
-msgid "<ul> <li><strong><a href=\"https://arxiv.org/\">arXiv</a></strong>, a well-known general-purpose repository. For now, arXiv has declined to allow Dissemin to deposit using their SWORD API, and wants users to deposit in arXiv manually. If you would like to deposit in arXiv with Dissemin, you can let them know that you are interested (email: help AT arxiv.org, and start your message with \"Dear arXiv,\").</li> </ul>"
+#: templates/dissemin/faq.html:138
+msgid ""
+"At the moment, you can use Dissemin to deposit in the following repositories:"
+msgstr "目前，您可以使用Dissemin来存放至以下存储库中："
+
+#: templates/dissemin/faq.html:144
+msgid ""
+"<strong><a href=\"https://zenodo.org\">Zenodo</a></strong>, an innovative "
+"repository backed by the EU."
+msgstr ""
+
+#: templates/dissemin/faq.html:150
+msgid ""
+"<strong><a href=\"https://hal.archives-ouvertes.fr/\">HAL</a></strong>, a "
+"French repository managed by the <a href=\"https://www.ccsd.cnrs.fr/\">CCSD</"
+"a>."
 msgstr ""
 
 #: templates/dissemin/faq.html:157
+#, fuzzy
+#| msgid ""
+#| "<ul> <li><strong><a href=\"https://zenodo.org\">Zenodo</a></strong>, an "
+#| "innovative repository backed by the EU.</li> <li><strong><a href="
+#| "\"https://hal.archives-ouvertes.fr/\">HAL</a></strong>, a French "
+#| "repository managed by the <a href=\"https://www.ccsd.cnrs.fr/\">CCSD</a>."
+#| "</li> <li><strong><a href=\"https://osf.io/preprints/\">OSF preprints</"
+#| "a></strong>, a preprint server run by the <a href=\"https://cos.io/"
+#| "\">Center for Open Science</a> on top of their <a href=\"https://osf.io/"
+#| "\">Open Science Framework</a>.</li> </ul>"
+msgid ""
+"<strong><a href=\"https://osf.io/preprints/\">OSF preprints</a></strong>, a "
+"preprint server run by the <a href=\"https://cos.io/\">Center for Open "
+"Science</a> on top of their <a href=\"https://osf.io/\">Open Science "
+"Framework</a>."
+msgstr ""
+"<ul> <li><strong><a href=\"https://zenodo.org\">Zenodo</a></strong>，一个依靠"
+"欧盟的创新存储库。</li> <li><strong><a href=\"https://hal.archives-ouvertes."
+"fr/\">HAL</a></strong>，由<a href=\"https://www.ccsd.cnrs.fr/\">CCSD</a>管理"
+"的法语存储库。</li> <li><strong><a href=\"https://osf.io/preprints/\">OSF预印"
+"本</a></strong>，由<a href=\"https://cos.io/\">开放科学中心</a>（Center for "
+"Open Science）运行的预印本服务器，基于其<a href=\"https://osf.io/\">开放科学"
+"框架</a>（Open Science Framework）项目之上。</li> </ul>"
+
+#: templates/dissemin/faq.html:165
+msgid ""
+"Supporting more repositories requires us to write specific code for each "
+"repository. More importantly it requires the repositories to give us "
+"permission to deposit papers in bulk. We have been considering integrating "
+"the following repositories:"
+msgstr ""
+
+#: templates/dissemin/faq.html:174
+msgid ""
+"<strong><a href=\"https://arxiv.org/\">arXiv</a></strong>, a well-known "
+"general-purpose repository. For now, arXiv has declined to allow Dissemin to "
+"deposit using their SWORD API, and wants users to deposit in arXiv manually. "
+"If you would like to deposit in arXiv with Dissemin, you can let them know "
+"that you are interested (email: help AT arxiv.org, and start your message "
+"with \"Dear arXiv,\")."
+msgstr ""
+
+#: templates/dissemin/faq.html:192
 #, python-format
-msgid "Dissemin is a web platform gathering metadata from <a href=\"%(sources_url)s\">many sources</a> and analyzing the full text availability of publications of researchers. It has been designed to foster the use of repositories (rather than preprints posted on personal homepages), <a href=\"#repositories-rock\">for numerous reasons</a>."
+msgid ""
+"Dissemin is a web platform gathering metadata from <a href=\"%(sources_url)s"
+"\">many sources</a> and analyzing the full text availability of publications "
+"of researchers. It has been designed to foster the use of repositories "
+"(rather than preprints posted on personal homepages), <a href="
+"\"#repositories-rock\">for numerous reasons</a>."
 msgstr ""
 
-#: templates/dissemin/faq.html:166
-msgid "Dissemin is not a repository as it does not store any full text. When the full text of a publication is available, a link to the relevant page is provided. The full texts deposited through Dissemin are stored in third-party repositories such as <a href=\"https://zenodo.org\">Zenodo</a> or <a href=\"https://hal.archives-ouvertes.fr/\">HAL</a>."
+#: templates/dissemin/faq.html:201
+msgid ""
+"Dissemin is not a repository as it does not store any full text. When the "
+"full text of a publication is available, a link to the relevant page is "
+"provided. The full texts deposited through Dissemin are stored in third-"
+"party repositories such as <a href=\"https://zenodo.org\">Zenodo</a> or <a "
+"href=\"https://hal.archives-ouvertes.fr/\">HAL</a>."
 msgstr ""
 
-#: templates/dissemin/faq.html:176
-msgid "Dissemin is brought to you by the <a href=\"https://association.dissem.in/\">CAPSH association</a>."
-msgstr "Dissemin提供<a href=\"https://association.dissem.in/\">CAPSH协会</a>为您呈现。"
+#: templates/dissemin/faq.html:211
+msgid ""
+"Dissemin is brought to you by the <a href=\"https://association.dissem.in/"
+"\">CAPSH association</a>."
+msgstr ""
+"Dissemin提供<a href=\"https://association.dissem.in/\">CAPSH协会</a>为您呈"
+"现。"
 
-#: templates/dissemin/faq.html:183
-msgid "Yes you can. We will ask you to create an ORCID profile if you do not have one yet. This only takes a few seconds."
-msgstr "是的，您可以。我们将要求您创建ORCID详情，如果您还没有的话。这只花几秒钟。"
-
-#: templates/dissemin/faq.html:196
-msgid "<strong>Open access:</strong><br /> The full text is made freely available by the publisher (in a fully open access or hybrid journal)."
-msgstr "<strong>开放访问：</strong><br />全文由发行者自由提供（以一个完全开放的访问或混合日记）。"
-
-#: templates/dissemin/faq.html:208
-msgid "<strong>Pre/post prints allowed and full text available:</strong><br /> The full text is available in a repository, but might not be freely available from the publisher itself. This is in line with the publishing policy and is called green open access or self-archiving."
+#: templates/dissemin/faq.html:218
+msgid ""
+"Yes, you can do it, by first <a href=\"https://orcid.org/register"
+"\">registering on ORCID</a> if you do not have an ORCID identifier yet. This "
+"only takes a few seconds, and you can then use your ORCID identifier to log "
+"into Dissemin."
 msgstr ""
 
-#: templates/dissemin/faq.html:221
-msgid "<strong>Pre/post prints allowed but full text unavailable:</strong><br /> The full text could be made available in a repository (as above) according to the publishing policy. We encourage their authors to do so."
+#: templates/dissemin/faq.html:233
+msgid ""
+"<strong>Open access:</strong><br /> The full text is made freely available "
+"by the publisher (in a fully open access or hybrid journal)."
 msgstr ""
-
-#: templates/dissemin/faq.html:234
-msgid "<strong>Pre/post prints forbidden:</strong><br /> The publisher forbids deposits in repositories, in general. Authors might still be allowed to deposit their works after some embargo period or if their funder has an agreement with this publisher."
-msgstr ""
+"<strong>开放访问：</strong><br />全文由发行者自由提供（以一个完全开放的访问或"
+"混合日记）。"
 
 #: templates/dissemin/faq.html:245
-#, python-format
-msgid "When we have found it in one of the repositories we harvest. The list of these repositories can be found <a href=\"%(sources_url)s\">here</a>. Thanks to the <a href=\"https://www.base-search.net\">BASE</a> search engine, we cover more than 80 millions of preprints."
+msgid ""
+"<strong>Pre/post prints allowed and full text available:</strong><br /> The "
+"full text is available in a repository, but might not be freely available "
+"from the publisher itself. This is in line with the publishing policy and is "
+"called green open access or self-archiving."
 msgstr ""
 
-#: templates/dissemin/faq.html:254
-msgid "There are a few caveats concerning our data:"
-msgstr "这里有与我们数据相关的几条忠告："
-
 #: templates/dissemin/faq.html:258
-msgid "<ul> <li>Some papers are not present in any of our metadata sources, so they are not counted at all.</li> <li>Some entries in our system do not correspond to proper research papers.</li> <li>Some of them have been incorrectly classified by our homonym disambiguation system.</li> <li>Some repositories might not be covered by any of our sources, so a paper might be marked as unavailable while it is available.</li> <li>Some papers might be marked as available but actually, they are not (for instance because the content has been deleted).</li> <li>And many other technical issues.</li> </ul>"
+msgid ""
+"<strong>Pre/post prints allowed but full text unavailable:</strong><br /> "
+"The full text could be made available in a repository (as above) according "
+"to the publishing policy. We encourage their authors to do so."
 msgstr ""
 
 #: templates/dissemin/faq.html:271
-#, python-format
-msgid "<p>There are many possible reasons: maybe it is not available from any of <a href=\"%(sources_url)s\">our sources</a>, your name is spelt differently or partially in the authors list, our algorithms estimated that it has been written by an homonym researcher, or it has been deleted by one of your co-authors.</p> <p>In any case, you should be able to add it manually soon.</p>"
+msgid ""
+"<strong>Pre/post prints forbidden:</strong><br /> The publisher forbids "
+"deposits in repositories, in general. Authors might still be allowed to "
+"deposit their works after some embargo period or if their funder has an "
+"agreement with this publisher."
 msgstr ""
 
 #: templates/dissemin/faq.html:282
-msgid "In a near future, you should be able to create an account and fix it by yourself. If it is really urgent, send a message to <a href=\"mailto:contact@dissem.in\">contact@dissem.in</a>."
-msgstr "在不久的将来，您应当创建账户，并由您自己修复它。如果这真的很紧急，请向<a href=\"mailto:contact@dissem.in\">contact@dissem.in</a>发送消息。"
-
-#: templates/dissemin/faq.html:290
-msgid "First, note that Dissemin does not account for copies of articles that are only available on a personal homepage or a similar website. This is intentional, because we believe that <a href=\"#repositories-rock\">articles should be hosted in repositories</a>."
+#, python-format
+msgid ""
+"When we have found it in one of the repositories we harvest. The list of "
+"these repositories can be found <a href=\"%(sources_url)s\">here</a>. Thanks "
+"to the <a href=\"https://www.base-search.net\">BASE</a> search engine, we "
+"cover more than 80 millions of preprints."
 msgstr ""
 
-#: templates/dissemin/faq.html:298
-msgid "Second, at the moment, Dissemin only supports repositories with a crawlable API that follows the <a href=\"https://www.openarchives.org/OAI/openarchivesprotocol.html\">OAI-PMH protocol</a>, and is <a href=\"https://www.base-search.net/about/en/suggest.php\">registered</a> in <a href=\"https://www.base-search.net/\">BASE</a>. We have a <a href=\"https://github.com/dissemin/croawl\">long-term project</a> to support more repositories by crawling them, but for the moment, we do not have the resources to support repositories not covered by BASE."
+#: templates/dissemin/faq.html:291
+msgid "There are a few caveats concerning our data:"
+msgstr "这里有与我们数据相关的几条忠告："
+
+#: templates/dissemin/faq.html:297
+msgid ""
+"Some papers are not present in any of our metadata sources, so they are not "
+"counted at all."
 msgstr ""
 
-#: templates/dissemin/faq.html:312
-msgid "If you are a user of a repository and would like it to be supported by Dissemin, please contact the repository administrator and suggest them to implement OAI-PMH support and to <a href=\"https://www.base-search.net/about/en/suggest.php\">register</a> their repository in BASE. If the repository is registered in BASE but is not properly supported by Dissemin, please email <a href=\"mailto:contact@dissem.in\">contact@dissem.in</a> and we will investigate the issue."
+#: templates/dissemin/faq.html:302
+msgid "Some entries in our system do not correspond to proper research papers."
 msgstr ""
 
-#: templates/dissemin/faq.html:328
-msgid "Authenticating users is necessary to deposit papers on their behalf in open repositories. Besides, knowing a user's ORCID id helps us find its publications, avoiding articles authored by namesakes for instance. Logging in via ORCID will not expose any private information to Dissemin: we only have access to the public part of your ORCID record. For instance, unless you have explicitly marked your email address as public, we do not even know your email address when you log in to Dissemin via ORCID."
+#: templates/dissemin/faq.html:307
+msgid ""
+"Because there are many researchers with the same name, some papers may be "
+"misattributed to a homonym."
 msgstr ""
 
-#: templates/dissemin/faq.html:343
-msgid "Nothing. When you log in via ORCID to Dissemin, this does not grant us any permission to change anything in your ORCID record."
-msgstr "没有。当您通过ORCID登录至Dissemin，这不会授权我们更改您的ORCID记录中的任何内容。"
-
-#: templates/dissemin/faq.html:352
-msgid "ORCID supports various methods to claim publications. Our preferred one is via CrossRef's search interface. Here is how to use it:"
+#: templates/dissemin/faq.html:313
+msgid ""
+"Some repositories might not be covered by any of our sources, so a paper "
+"might be marked as unavailable while it is available."
 msgstr ""
 
-#: templates/dissemin/faq.html:357
-msgid "<ul> <li>Go to <a href=\"https://search.crossref.org/\">CrossRef Metadata Search</a>;</li> <li>Click \"Log in\" in the top right corner and go through the ORCID login process;</li> <li>Search for your publications, for instance by typing your name in CrossRef's search interface;</li> <li>Add publications that are yours to your ORCID record by clicking \"Add to ORCID\".</li> </ul>"
+#: templates/dissemin/faq.html:318
+msgid ""
+"Some papers might be marked as available but actually are not, for instance "
+"because they have been deleted."
 msgstr ""
 
-#: templates/dissemin/faq.html:366
-msgid "In the future, we hope to enable you to do this from Dissemin itself."
-msgstr "在今后，我们希望使用Dissemin本身让您这样。"
+#: templates/dissemin/faq.html:324
+msgid "All sorts of other technical issues."
+msgstr ""
 
-#: templates/dissemin/faq.html:375
+#: templates/dissemin/faq.html:333
+#, python-format
+msgid ""
+"Please first check whether the paper is available in one of <a href="
+"\"%(sources_url)s\">our sources</a>. If it is not, Dissemin cannot harvest "
+"it, and you should report the problem to the source where it should appear."
+msgstr ""
+
+#: templates/dissemin/faq.html:341
+msgid ""
+"Now, if your paper does appear in one of the sources but not on Dissemin, "
+"please check that your name is not spelt incorrectly on the source, and that "
+"the spelling matches your ORCID record. If there is a misspelling, again, "
+"you should report the problem to the source that contains the mistake."
+msgstr ""
+
+#: templates/dissemin/faq.html:350
+msgid ""
+"If the name matches but the paper is not in Dissemin, then maybe one of your "
+"co-authors asked us to delete it? Or it may be a bug. In this case, please "
+"file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> "
+"describing the problem, or send a message to <a href=\"mailto:bugs@dissem.in"
+"\">bugs@dissem.in</a>."
+msgstr ""
+
+#: templates/dissemin/faq.html:360
+msgid ""
+"Note that, in the longer term, we hope to design a way for our users to edit "
+"their profiles on Dissemin to add missing papers and fix these problems; but "
+"we do not have such a system yet."
+msgstr ""
+
+#: templates/dissemin/faq.html:369
+msgid ""
+"In most cases, the errors that you see on Dissemin have not been introduced "
+"by Dissemin, but are already present in the <a href="
+"\"{{ sources_url }}\">public sources</a> that Dissemin harvests. Hence, "
+"please first check if the error that you have seen is already present in our "
+"data sources, by looking at the \"Links\" section in the top right of the "
+"page. If one of these pages contain the error, you should report the problem "
+"to them and not to us, otherwise the mistake will persist in the source."
+msgstr ""
+
+#: templates/dissemin/faq.html:381
+msgid ""
+"If the error is not present in any of the sources and you believe that "
+"Dissemin may have introduced the problem, please file an <a href=\"https://"
+"github.com/dissemin/dissemin/issues\">issue</a> with details of the problem, "
+"or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. "
+"Note that you cannot yet fix the problem yourself, although we hope in the "
+"longer term to develop a system to allow our users to edit details of their "
+"papers themselves."
+msgstr ""
+
+#: templates/dissemin/faq.html:395
+msgid ""
+"First, note that Dissemin does not account for copies of articles that are "
+"only available on a personal homepage or a similar website. This is "
+"deliberate, because we believe that <a href=\"#repositories-rock\">articles "
+"should be hosted in repositories</a>."
+msgstr ""
+
+#: templates/dissemin/faq.html:403
+msgid ""
+"Second, at the moment, Dissemin only supports repositories with a crawlable "
+"API that follows the <a href=\"https://www.openarchives.org/OAI/"
+"openarchivesprotocol.html\">OAI-PMH protocol</a>, and is <a href=\"https://"
+"www.base-search.net/about/en/suggest.php\">registered</a> in <a href="
+"\"https://www.base-search.net/\">BASE</a>. We have a <a href=\"https://"
+"github.com/dissemin/croawl\">long-term project</a> to support more "
+"repositories by crawling them, but for the moment, we do not have the "
+"resources to support repositories not covered by BASE. Hence, if you are a "
+"user of a repository and would like it to be supported by Dissemin, please "
+"contact the repository administrator and suggest them to implement OAI-PMH "
+"support and to <a href=\"https://www.base-search.net/about/en/suggest.php"
+"\">register</a> their repository in BASE."
+msgstr ""
+
+#: templates/dissemin/faq.html:422
+msgid ""
+"If the repository is registered in BASE, please <a href=\"https://www.base-"
+"search.net/\">search in BASE</a> to check that your article is there. If it "
+"is, then this may be a bug of Dissemin; please file an <a href=\"https://"
+"github.com/dissemin/dissemin/issues\">issue</a> describing the problem, or "
+"send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
+msgstr ""
+
+#: templates/dissemin/faq.html:437
+msgid ""
+"Authenticating users is necessary to deposit papers on their behalf in open "
+"repositories. Besides, knowing a user's ORCID id helps us find its "
+"publications, avoiding articles authored by namesakes for instance. Logging "
+"in via ORCID will not expose any private information to Dissemin: we only "
+"have access to the public part of your ORCID record. For instance, unless "
+"you have explicitly marked your email address as public, we do not even know "
+"your email address when you log in to Dissemin via ORCID."
+msgstr ""
+
+#: templates/dissemin/faq.html:452
+msgid ""
+"Nothing. When you log in via ORCID to Dissemin, this does not grant us any "
+"permission to change anything in your ORCID record."
+msgstr ""
+"没有。当您通过ORCID登录至Dissemin，这不会授权我们更改您的ORCID记录中的任何内"
+"容。"
+
+#: templates/dissemin/faq.html:461
+msgid ""
+"ORCID supports various methods to claim publications. Our preferred one is "
+"via CrossRef's search interface. Here is how to use it:"
+msgstr ""
+
+#: templates/dissemin/faq.html:468
+msgid ""
+"Go to <a href=\"https://search.crossref.org/\">CrossRef Metadata Search</a>;"
+msgstr ""
+
+#: templates/dissemin/faq.html:473
+msgid ""
+"Click \"Log in\" in the top right corner and go through the ORCID login "
+"process;"
+msgstr ""
+
+#: templates/dissemin/faq.html:478
+msgid ""
+"Search for your publications, for instance by typing your name in CrossRef's "
+"search interface;"
+msgstr ""
+
+#: templates/dissemin/faq.html:483
+msgid ""
+"Add publications that are yours to your ORCID record by clicking \"Add to "
+"ORCID\"."
+msgstr ""
+
+#: templates/dissemin/faq.html:489
+msgid ""
+"You can also add publications to your profile <em>on Dissemin</em>, by "
+"clicking the button \"Include in my profile\" in search results on Dissemin. "
+"(This button is only visible when you are logged in, and next to papers that "
+"Dissemin thinks you have authored.) You can also exclude articles from your "
+"profile in this way. Please note that these changes are local to Dissemin "
+"and are <em>not</em> propagated to your ORCID profile, because ORCID does "
+"not have a free API allowing us to propagate them."
+msgstr ""
+
+#: templates/dissemin/faq.html:504
+msgid ""
+"If you change some details in your ORCID profile (name, homepage, etc.), the "
+"changes will not automatically be picked up in your profile on Dissemin. To "
+"update your profile on Dissemin accordingly, once you have logged in to "
+"Dissemin, you can go to your <a href=\"/my-profile\">profile page</a> and "
+"click \"Refresh publications\"."
+msgstr ""
+
+#: templates/dissemin/faq.html:518
 #, python-format
 msgid "Our sources are listed on <a href=\"%(sources_url)s\">this page</a>."
 msgstr "我们的来源在<a href=\"%(sources_url)s\">此页面</a>列举。"
 
-#: templates/dissemin/faq.html:382
+#: templates/dissemin/faq.html:525
 msgid "There are many ways to get involved:"
 msgstr "有多种方法可以参与："
 
-#: templates/dissemin/faq.html:386
-msgid "<ul> <li>Encourage researchers to use this service.</li> <li><a href=\"mailto:contact@dissem.in\">Send us</a> a list of researchers for your university or department so that we can set up an instance of Dissemin for your institution.</li> <li>Help us translate the interface in your language.</li> <li>Contribute to <a href=\"https://github.com/wetneb/dissemin\">the code</a>.</li> <li>Fix any of our listed <a href=\"https://github.com/wetneb/dissemin/issues\">issues</a>.</li> <li>Star <a href=\"https://github.com/wetneb/dissemin\">our github project</a>!</li> <li><a href=\"http://association.dissem.in/#dons\">Donations are accepted</a>.</li> </ul>"
-msgstr ""
-
-#: templates/dissemin/faq.html:400
-msgid "The source code is available <a href=\"https://github.com/wetneb/dissemin\">on github</a>."
+#: templates/dissemin/faq.html:531
+#, fuzzy
+#| msgid ""
+#| "The source code is available <a href=\"https://github.com/wetneb/dissemin"
+#| "\">on github</a>."
+msgid ""
+"Contribute to <a href=\"https://github.com/wetneb/dissemin\">the code</a>."
 msgstr "源代码位于<a href=\"https://github.com/wetneb/dissemin\">github</a>。"
 
-#: templates/dissemin/faq.html:406
-msgid "Yes! We even have <a href=\"https://dev.dissem.in/api.html\">an API</a>. If it does not suit your needs, tell us what you need."
-msgstr "是的！我们也有<a href=\"https://dev.dissem.in/api.html\">API</a>。如果这不符合您的需求，请告诉我们您需要什么。"
+#: templates/dissemin/faq.html:536
+#, fuzzy
+#| msgid ""
+#| "The source code is available <a href=\"https://github.com/wetneb/dissemin"
+#| "\">on github</a>."
+msgid ""
+"Fix any of our listed <a href=\"https://github.com/wetneb/dissemin/issues"
+"\">issues</a>."
+msgstr "源代码位于<a href=\"https://github.com/wetneb/dissemin\">github</a>。"
 
-#: templates/dissemin/faq.html:411
+#: templates/dissemin/faq.html:541
+msgid ""
+"Help us <a href=\"https://translatewiki.net/wiki/Translating:Dissemin"
+"\">translate</a> the interface in your language."
+msgstr ""
+
+#: templates/dissemin/faq.html:548
+msgid "Encourage researchers to use this service."
+msgstr ""
+
+#: templates/dissemin/faq.html:553
+#, fuzzy
+#| msgid ""
+#| "The source code is available <a href=\"https://github.com/wetneb/dissemin"
+#| "\">on github</a>."
+msgid ""
+"Star <a href=\"https://github.com/wetneb/dissemin\">our GitHub project</a>!"
+msgstr "源代码位于<a href=\"https://github.com/wetneb/dissemin\">github</a>。"
+
+#: templates/dissemin/faq.html:558
+#, fuzzy
+#| msgid ""
+#| "Dissemin is brought to you by the <a href=\"https://association.dissem.in/"
+#| "\">CAPSH association</a>."
+msgid ""
+"<a href=\"https://association.dissem.in/#dons\">Donations are accepted</a>."
+msgstr ""
+"Dissemin提供<a href=\"https://association.dissem.in/\">CAPSH协会</a>为您呈"
+"现。"
+
+#: templates/dissemin/faq.html:565
+#, fuzzy
+#| msgid ""
+#| "The source code is available <a href=\"https://github.com/wetneb/dissemin"
+#| "\">on github</a>."
+msgid ""
+"The source code is available <a href=\"https://github.com/wetneb/dissemin"
+"\">on GitHub</a>."
+msgstr "源代码位于<a href=\"https://github.com/wetneb/dissemin\">github</a>。"
+
+#: templates/dissemin/faq.html:571
+#, fuzzy
+#| msgid ""
+#| "Yes! We even have <a href=\"https://dev.dissem.in/api.html\">an API</a>. "
+#| "If it does not suit your needs, tell us what you need."
+msgid ""
+"Yes! We even have <a href=\"https://dev.dissem.in/api.html\">an API</a>. If "
+"it does not suit your needs, please don't hesitate to get in touch by "
+"writing to <a href=\"mailto:hello@dissem.in\">hello@dissem.in</a>"
+msgstr ""
+"是的！我们也有<a href=\"https://dev.dissem.in/api.html\">API</a>。如果这不符"
+"合您的需求，请告诉我们您需要什么。"
+
+#: templates/dissemin/faq.html:578
 msgid "Can I use the Dissemin logo to refer to the project?"
 msgstr "我可以使用Dissemin标志引用项目么？"
 
-#: templates/dissemin/faq.html:413
-msgid "Yes! See <a href=\"https://association.dissem.in/#logos\">here</a> for links to our logos and for explanations about how you can reuse them."
-msgstr "是的！<a href=\"https://association.dissem.in/#logos\">在此</a>查看我们的标志链接，并查阅有关您可以以何种形式复用它的解释。"
+#: templates/dissemin/faq.html:580
+msgid ""
+"Yes! See <a href=\"https://association.dissem.in/#logos\">here</a> for links "
+"to our logos and for explanations about how you can reuse them."
+msgstr ""
+"是的！<a href=\"https://association.dissem.in/#logos\">在此</a>查看我们的标志"
+"链接，并查阅有关您可以以何种形式复用它的解释。"
 
-#: templates/dissemin/faq.html:418 templates/dissemin/tos.html:150
+#: templates/dissemin/faq.html:585 templates/dissemin/tos.html:150
 msgid "Back to top"
 msgstr "返回顶部"
 
@@ -1763,8 +2259,16 @@ msgid "Sign in"
 msgstr "登录"
 
 #: templates/dissemin/login.html:19 templates/dissemin/sandbox.html:19
-msgid "Dissemin uses ORCID to authenticate its users. ORCID is an independent non-profit effort to provide an open registry of unique researcher identifiers. It also offers open services to link research activities and organizations to these identifiers. Learn more at <a href=\"https://orcid.org\">orcid.org</a>."
-msgstr "Dissemin使用ORCID验证其用户。ORCID是为每一位独立研究员提供开放注册标识符的非营利性机构。它也提供开放服务链接研究实体与组织到这些标识符。在<a href=\"https://orcid.org\">orcid.org</a>了解更多。"
+msgid ""
+"Dissemin uses ORCID to authenticate its users. ORCID is an independent non-"
+"profit effort to provide an open registry of unique researcher identifiers. "
+"It also offers open services to link research activities and organizations "
+"to these identifiers. Learn more at <a href=\"https://orcid.org\">orcid.org</"
+"a>."
+msgstr ""
+"Dissemin使用ORCID验证其用户。ORCID是为每一位独立研究员提供开放注册标识符的非"
+"营利性机构。它也提供开放服务链接研究实体与组织到这些标识符。在<a href="
+"\"https://orcid.org\">orcid.org</a>了解更多。"
 
 #: templates/dissemin/login.html:28 templates/dissemin/login.html:36
 #: templates/dissemin/sandbox.html:30
@@ -1772,8 +2276,12 @@ msgid "Log in"
 msgstr "登录"
 
 #: templates/dissemin/login.html:30 templates/dissemin/sandbox.html:32
-msgid "If you already have an ORCID account, you can use it with Dissemin. We will not make any changes to your profile."
-msgstr "如果您已拥有ORCID账户，您可以使用它登录Dissemin。我们将不会对您的详情做出任何更改。"
+msgid ""
+"If you already have an ORCID account, you can use it with Dissemin. We will "
+"not make any changes to your profile."
+msgstr ""
+"如果您已拥有ORCID账户，您可以使用它登录Dissemin。我们将不会对您的详情做出任何"
+"更改。"
 
 #: templates/dissemin/login.html:42 templates/dissemin/login.html:51
 #: templates/dissemin/sandbox.html:44
@@ -1781,7 +2289,8 @@ msgid "Sign up"
 msgstr "注册"
 
 #: templates/dissemin/login.html:44 templates/dissemin/sandbox.html:46
-msgid "Not an ORCID user yet? Create an account, it is free and takes a few seconds."
+msgid ""
+"Not an ORCID user yet? Create an account, it is free and takes a few seconds."
 msgstr "还不是ORCID用户么？创建账户，这是免费的，并只花几秒钟。"
 
 #: templates/dissemin/login.html:59 templates/dissemin/sandbox.html:61
@@ -1790,7 +2299,9 @@ msgstr "Dissemin账户"
 
 #: templates/dissemin/login.html:60 templates/dissemin/sandbox.html:62
 #, python-format
-msgid "If you have not created an account yet, then please\n<a href=\"%(signup_url)s\">sign up</a> first."
+msgid ""
+"If you have not created an account yet, then please\n"
+"<a href=\"%(signup_url)s\">sign up</a> first."
 msgstr "如果您尚未创建账户，请首先<a href=\"%(signup_url)s\">注册</a>。"
 
 #: templates/dissemin/login.html:69 templates/dissemin/sandbox.html:71
@@ -1891,15 +2402,33 @@ msgid "Reporting misuse"
 msgstr "报告滥用"
 
 #: templates/dissemin/tos.html:32
-msgid "This platform offers an analysis of the accessibility of scholarly publications. It can also deposit publications on behalf of their authors in repositories. The accessibility and self-archiving policies of the papers on this platform can be incorrect and should not be relied upon for legal advice. When in doubt, users are advised to check from authoritative sources."
+msgid ""
+"This platform offers an analysis of the accessibility of scholarly "
+"publications. It can also deposit publications on behalf of their authors in "
+"repositories. The accessibility and self-archiving policies of the papers on "
+"this platform can be incorrect and should not be relied upon for legal "
+"advice. When in doubt, users are advised to check from authoritative sources."
 msgstr ""
 
 #: templates/dissemin/tos.html:45
-msgid "Unauthenticated users are not tracked as the platform does not include any third-party analytics or advertisement services. Authenticated users are logged-in via ORCID, a third-party service. The platform has no access to the private information they provide to ORCID. In particular, we do not store any ORCID passwords, and we do not have access to email addresses that are marked as private in the ORCID record. We need to set cookies to authenticate our users, therefore by logging in on this platform, users accept these cookies."
+msgid ""
+"Unauthenticated users are not tracked as the platform does not include any "
+"third-party analytics or advertisement services. Authenticated users are "
+"logged-in via ORCID, a third-party service. The platform has no access to "
+"the private information they provide to ORCID. In particular, we do not "
+"store any ORCID passwords, and we do not have access to email addresses that "
+"are marked as private in the ORCID record. We need to set cookies to "
+"authenticate our users, therefore by logging in on this platform, users "
+"accept these cookies."
 msgstr ""
 
 #: templates/dissemin/tos.html:63
-msgid "The platform can perform mandated publication deposit to repositories. Users are only allowed to upload papers that they have authored themselves, or papers whose authors have consented to the deposit. In addition to these terms of service, users are required to abide by the policies of these repositories."
+msgid ""
+"The platform can perform mandated publication deposit to repositories. Users "
+"are only allowed to upload papers that they have authored themselves, or "
+"papers whose authors have consented to the deposit. In addition to these "
+"terms of service, users are required to abide by the policies of these "
+"repositories."
 msgstr ""
 
 #: templates/dissemin/tos.html:74
@@ -1911,11 +2440,29 @@ msgid "Please address any inquiry to support@dissem.in."
 msgstr "请向support@dissem.in提出任何咨询。"
 
 #: templates/dissemin/tos.html:86
-msgid "Dissemin uses ORCID's public OAuth interface to authenticate its users. This interface only transmits information marked as public in the user's ORCID profile. This means that ORCID passwords are never transmitted and email addresses are not transmitted when they are marked as private, which is the default setting. When logging in to Dissemin from ORCID, Dissemin acquires the user's ORCID id, as well as all public information attached to the ORCID record. Dissemin can store any information input by its users on the platform. Users can ask for a copy of the personal information Dissemin stores about them by writing an email to support@dissem.in."
+msgid ""
+"Dissemin uses ORCID's public OAuth interface to authenticate its users. This "
+"interface only transmits information marked as public in the user's ORCID "
+"profile. This means that ORCID passwords are never transmitted and email "
+"addresses are not transmitted when they are marked as private, which is the "
+"default setting. When logging in to Dissemin from ORCID, Dissemin acquires "
+"the user's ORCID id, as well as all public information attached to the ORCID "
+"record. Dissemin can store any information input by its users on the "
+"platform. Users can ask for a copy of the personal information Dissemin "
+"stores about them by writing an email to support@dissem.in."
 msgstr ""
 
 #: templates/dissemin/tos.html:104
-msgid "Documents deposited in repositories via Dissemin can be stored on the platform, but are not available for download on the platform. They can be stored internally for logging purposes, and to make sure failed deposits can be fixed later. Dissemin does not commit to store any of the files it receives from its users. Users can write to support@dissem.in if they want one of their uploads to be deleted from our internal storage space, or from the repository they have deposited to. Note that deletion policies vary accross repositories: we provide no guarantee that deposits can be deleted from the target repositories."
+msgid ""
+"Documents deposited in repositories via Dissemin can be stored on the "
+"platform, but are not available for download on the platform. They can be "
+"stored internally for logging purposes, and to make sure failed deposits can "
+"be fixed later. Dissemin does not commit to store any of the files it "
+"receives from its users. Users can write to support@dissem.in if they want "
+"one of their uploads to be deleted from our internal storage space, or from "
+"the repository they have deposited to. Note that deletion policies vary "
+"accross repositories: we provide no guarantee that deposits can be deleted "
+"from the target repositories."
 msgstr ""
 
 #: templates/dissemin/tos.html:120
@@ -1923,11 +2470,19 @@ msgid "Misuse can be reported to support@dissem.in."
 msgstr "滥用可在support@dissem.in报告。"
 
 #: templates/dissemin/tos.html:128
-msgid "The <a href=\"https://dissem.in\">dissem.in</a> website has been registered with <a href=\"https://www.cnil.fr/\">CNIL</a> under declaration n°1895382 v0."
-msgstr "<a href=\"https://dissem.in\">dissem.in</a>网站已登记在<a href=\"https://www.cnil.fr/\">CNIL</a>，申报号n°1895382 v0。"
+msgid ""
+"The <a href=\"https://dissem.in\">dissem.in</a> website has been registered "
+"with <a href=\"https://www.cnil.fr/\">CNIL</a> under declaration n°1895382 "
+"v0."
+msgstr ""
+"<a href=\"https://dissem.in\">dissem.in</a>网站已登记在<a href=\"https://www."
+"cnil.fr/\">CNIL</a>，申报号n°1895382 v0。"
 
 #: templates/dissemin/tos.html:136
-msgid "You have the right to access, modify, and delete the personal information that we hold about you. To exercise this right, please contact us at support@dissem.in, or by postal mail at the following addresss:"
+msgid ""
+"You have the right to access, modify, and delete the personal information "
+"that we hold about you. To exercise this right, please contact us at "
+"support@dissem.in, or by postal mail at the following addresss:"
 msgstr ""
 
 #: templates/socialaccount/authentication_error.html:6
@@ -1936,8 +2491,15 @@ msgid "Authentication error"
 msgstr "验证错误"
 
 #: templates/socialaccount/authentication_error.html:16
-msgid "\n            Authentication has failed. <a href=\"/\">Go back to the login page.</a>\n           "
-msgstr "\n            验证失败。<a href=\"/\">返回登录页面。</a>\n           "
+msgid ""
+"\n"
+"            Authentication has failed. <a href=\"/\">Go back to the login "
+"page.</a>\n"
+"           "
+msgstr ""
+"\n"
+"            验证失败。<a href=\"/\">返回登录页面。</a>\n"
+"           "
 
 #: upload/forms.py:29
 msgid "Invalid file format: only PDF files are accepted."
@@ -1953,7 +2515,8 @@ msgid "URL"
 msgstr "URL"
 
 #: upload/templates/upload/widget.html:4
-msgid "Select here the full text of your article. PDF files only, maximum size:"
+msgid ""
+"Select here the full text of your article. PDF files only, maximum size:"
 msgstr "在此选择您的文章的全文。仅限PDF文件，最大大小："
 
 #: upload/templates/upload/widget.html:9
@@ -1972,31 +2535,87 @@ msgstr "或输入一个URL："
 msgid "Or drop a file here:"
 msgstr "或在此拖放文件："
 
-#: upload/views.py:150
+#: upload/views.py:132
 msgid "Invalid PDF file."
 msgstr "无效的PDF文件。"
 
-#: upload/views.py:183
+#: upload/views.py:165
 msgid "Invalid form."
 msgstr "无效的表单。"
 
-#: upload/views.py:193
+#: upload/views.py:175
 msgid "File too large."
 msgstr "文件太大。"
 
-#: upload/views.py:198
-msgid "Invalid content type: this link points to a web page, we need a direct link to a PDF file."
+#: upload/views.py:180
+msgid ""
+"Invalid content type: this link points to a web page, we need a direct link "
+"to a PDF file."
 msgstr "无效的内容类型：此链接指向网页，我们需要至PDF文件的直接链接。"
 
-#: upload/views.py:201
+#: upload/views.py:183
 msgid "Invalid SSL certificate on the remote server."
 msgstr "远程服务器的SSL证书无效。"
 
-#: upload/views.py:203 upload/views.py:207
+#: upload/views.py:185 upload/views.py:189
 msgid "Invalid URL (server timed out)."
 msgstr "无效的URL（服务器超时）。"
 
-#: upload/views.py:205 upload/views.py:209
+#: upload/views.py:187 upload/views.py:191
 msgid "Invalid URL."
 msgstr "无效的URL。"
 
+#, fuzzy
+#~ msgid ""
+#~ "<ul> <li>It makes your research <strong>more accessible</strong> and "
+#~ "<strong>more visible</strong>. Many researchers routinely check papers in "
+#~ "topic repositories such as arXiv, and it is less likely that these "
+#~ "researchers check your homepage regularly. </li> <li>You can even do it "
+#~ "before publication. You can get <strong>valuable feedback</strong> to "
+#~ "improve your paper before the actual peer-reviewing process. It may also "
+#~ "be useful to establish priority if it takes a long time for your paper to "
+#~ "get published.</li> <li> It provides you a <strong>durable storage</"
+#~ "strong>. Your homepage is likely to change or to disappear, for instance "
+#~ "if you leave your current institution. </li> <li>Librarians around the "
+#~ "world cannot check whether all the papers in a given journal are "
+#~ "available on homepages: in doubt, they subscribe to this journal to make "
+#~ "sure their researchers have access to it. This costs a lot of money for "
+#~ "research institutions. Papers stored in repositories are <strong>easier "
+#~ "to detect</strong> and can help academia save money.</li> <li> Finally, "
+#~ "for all these reasons, an increasing number of <strong>funding bodies</"
+#~ "strong> require the outcomes of their projects to be made available in a "
+#~ "repository. </li> </ul>"
+#~ msgstr ""
+#~ "<ul> <li>这使您的研究<strong>访问量更大</strong>，并<strong>更显要</"
+#~ "strong>。很多研究员老一套地使用主题存储库（例如arXiv）查阅论文，这使得研究"
+#~ "员们很难定期检查您的首页。</li> <li>您也可以在发布前这样做。您可以获得"
+#~ "<strong>有价值的反馈</strong>，这有助于在实际同行监督前改进您的论文。同样"
+#~ "也对建立优先级有所帮助，如果您的论文要等一段实际才会发布的话。</li> <li> "
+#~ "It provides you a <strong>durable storage</strong>. Your homepage is "
+#~ "likely to change or to disappear, for instance if you leave your current "
+#~ "institution. </li> <li>Librarians around the world cannot check whether "
+#~ "all the papers in a given journal are available on homepages: in doubt, "
+#~ "they subscribe to this journal to make sure their researchers have access "
+#~ "to it. This costs a lot of money for research institutions. Papers stored "
+#~ "in repositories are <strong>easier to detect</strong> and can help "
+#~ "academia save money.</li> <li> Finally, for all these reasons, an "
+#~ "increasing number of <strong>funding bodies</strong> require the outcomes "
+#~ "of their projects to be made available in a repository. </li> </ul>"
+
+#~ msgid ""
+#~ "Yes you can. We will ask you to create an ORCID profile if you do not "
+#~ "have one yet. This only takes a few seconds."
+#~ msgstr ""
+#~ "是的，您可以。我们将要求您创建ORCID详情，如果您还没有的话。这只花几秒钟。"
+
+#~ msgid ""
+#~ "In a near future, you should be able to create an account and fix it by "
+#~ "yourself. If it is really urgent, send a message to <a href=\"mailto:"
+#~ "contact@dissem.in\">contact@dissem.in</a>."
+#~ msgstr ""
+#~ "在不久的将来，您应当创建账户，并由您自己修复它。如果这真的很紧急，请向<a "
+#~ "href=\"mailto:contact@dissem.in\">contact@dissem.in</a>发送消息。"
+
+#~ msgid ""
+#~ "In the future, we hope to enable you to do this from Dissemin itself."
+#~ msgstr "在今后，我们希望使用Dissemin本身让您这样。"
