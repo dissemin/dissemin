@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2017-10-27 02:45:08+0000\n"
+"PO-Revision-Date: 2017-10-30 08:00:48+0000\n"
 "X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -471,7 +471,7 @@ msgstr "Desculpe, não conseguimos preenchê-lo."
 #: deposit/templates/deposit/start.html:258
 #: papers/templates/papers/department.html:30
 msgid "Dissemin encountered an error, please try again later."
-msgstr ""
+msgstr "Dissemin encontrou um erro, tente novamente mais tarde."
 
 #: deposit/templates/deposit/start.html:295
 #, python-format
@@ -480,11 +480,11 @@ msgstr "\n            Você pode depositar o texto completo do seu artigo. Disse
 
 #: deposit/templates/deposit/start.html:306
 msgid "You do not appear to be one of the authors of this paper. By using this form, you certify that you have the permission to upload it on their behalf."
-msgstr ""
+msgstr "Você não parece ser um dos autores deste artigo. Ao usar este formulário, você certifica que você tem permissão para carregá-lo em seu nome."
 
 #: deposit/templates/deposit/start.html:316
 msgid "This paper cannot be deposited in any repository supported by Dissemin."
-msgstr ""
+msgstr "Este documento não pode ser depositado em qualquer repositório suportado pela Dissemin."
 
 #: deposit/templates/deposit/start.html:324
 msgid "Document"
@@ -521,7 +521,7 @@ msgstr "por favor, espere..."
 
 #: deposit/views.py:65
 msgid "This repository is not available for this paper."
-msgstr ""
+msgstr "Este repositório não está disponível para este documento."
 
 #: deposit/views.py:138
 msgid "This repository could not be found."
@@ -533,67 +533,67 @@ msgstr "Este repositório não possui configurações."
 
 #: deposit/views.py:189
 msgid "This repository cannot be used for this paper."
-msgstr ""
+msgstr "Este repositório não pode ser usado para este documento."
 
 #: deposit/views.py:208
 msgid "Access to the PDF was denied."
-msgstr ""
+msgstr "O acesso ao PDF foi negado."
 
 #: deposit/zenodo/forms.py:29
 msgid "Creative Commons CCZero (CC0)"
-msgstr ""
+msgstr "Creative Commons CCZero (CC0)"
 
 #: deposit/zenodo/forms.py:31
 msgid "Creative Commons Attribution (CC-BY)"
-msgstr ""
+msgstr "Creative Commons Attribution (CC-BY)"
 
 #: deposit/zenodo/forms.py:33
 msgid "Creative Commons Attribution-ShareAlike (CC-BY-SA)"
-msgstr ""
+msgstr "Creative Commons Attribution-ShareAlike (CC-BY-SA)"
 
 #: deposit/zenodo/forms.py:35
 msgid "Creative Commons Attribution-NonCommercial (CC-BY-NC)"
-msgstr ""
+msgstr "Creative Commons Attribution-NonCommercial (CC-BY-NC)"
 
 #: deposit/zenodo/forms.py:37
 msgid "Creative Commons Attribution-NoDerivatives (CC-BY-ND)"
-msgstr ""
+msgstr "Creative Commons Attribution-NoDerivatives (CC-BY-ND)"
 
 #: deposit/zenodo/forms.py:39
 msgid "Other open license"
-msgstr ""
+msgstr "Outra licença aberta"
 
 #: deposit/zenodo/protocol.py:72
 msgid "No Zenodo API key provided."
-msgstr ""
+msgstr "Nenhuma chave da API do Zenodo fornecida."
 
 #: deposit/zenodo/protocol.py:81
 msgid "This happens when Zenodo has hiccups. Please try again in a few minutes or use a different repository in the menu above."
-msgstr ""
+msgstr "Isso acontece quando Zenodo tem soluços. Tente novamente em alguns minutos ou use um repositório diferente no menu acima."
 
 #: deposit/zenodo/protocol.py:82
 msgid "Unable to authenticate to Zenodo."
-msgstr ""
+msgstr "Não é possível autenticar o Zenodo."
 
 #: deposit/zenodo/protocol.py:89
 msgid "Unable to create a new deposition on Zenodo."
-msgstr ""
+msgstr "Incapaz de criar uma nova deposição no Zenodo."
 
 #: deposit/zenodo/protocol.py:101
 msgid "Unable to transfer the document to Zenodo."
-msgstr ""
+msgstr "Não foi possível transferir o documento para o Zenodo."
 
 #: deposit/zenodo/protocol.py:111
 msgid "No abstract is available for this paper but Zenodo requires one. Please provide it using the metadata panel."
-msgstr ""
+msgstr "Nenhum resumo está disponível para este trabalho, mas o Zenodo requer um. Forneça isso usando o painel de metadados."
 
 #: deposit/zenodo/protocol.py:119
 msgid "Unable to submit paper metadata to Zenodo."
-msgstr ""
+msgstr "Não é possível enviar metadados em papel para o Zenodo."
 
 #: deposit/zenodo/protocol.py:135
 msgid "Unable to publish the deposition on Zenodo."
-msgstr ""
+msgstr "Incapaz de publicar a deposição no Zenodo."
 
 #: dissemin/settings/common.py:269
 msgid "English"
@@ -605,7 +605,7 @@ msgstr "Francês"
 
 #: notification/models.py:62
 msgid "inboxes"
-msgstr ""
+msgstr "inboxes"
 
 #: papers/baremodels.py:54
 msgid "Journal article"
@@ -617,7 +617,7 @@ msgstr ""
 
 #: papers/baremodels.py:56
 msgid "Book chapter"
-msgstr ""
+msgstr "Capítulo de livro"
 
 #: papers/baremodels.py:57
 msgid "Book"
@@ -625,48 +625,48 @@ msgstr "Livro"
 
 #: papers/baremodels.py:58
 msgid "Journal issue"
-msgstr ""
+msgstr "Problema de revista"
 
 #: papers/baremodels.py:59
 msgid "Proceedings"
-msgstr ""
+msgstr "Procedimentos"
 
 #: papers/baremodels.py:60
 msgid "Entry"
-msgstr ""
+msgstr "Entrada"
 
 #: papers/baremodels.py:61
 msgid "Poster"
-msgstr ""
+msgstr "Poster"
 
 #: papers/baremodels.py:62
 msgid "Report"
-msgstr ""
+msgstr "Reportar"
 
 #: papers/baremodels.py:63
 msgid "Thesis"
-msgstr ""
+msgstr "Tese"
 
 #: papers/baremodels.py:64
 msgid "Dataset"
-msgstr ""
+msgstr "Conjunto de dados"
 
 #: papers/baremodels.py:65 papers/models.py:101
 msgid "Preprint"
-msgstr ""
+msgstr "Versão original"
 
 #: papers/baremodels.py:66
 msgid "Other document"
-msgstr ""
+msgstr "Outro documento"
 
 #: papers/forms.py:48
 msgid "Invalid ORCID identifier."
-msgstr ""
+msgstr "Identificador ORCID inválido."
 
 #: papers/forms.py:54 papers/templates/papers/department.html:86
 #: papers/templates/papers/search.html:160
 msgid "Department"
-msgstr ""
+msgstr "Departamento"
 
 #: papers/forms.py:56 papers/templates/papers/search.html:114
 msgid "Researcher"
@@ -674,7 +674,7 @@ msgstr "Pesquisador"
 
 #: papers/forms.py:75
 msgid "publication date"
-msgstr ""
+msgstr "data de publicação"
 
 #: papers/forms.py:76
 msgid "title"
@@ -682,15 +682,15 @@ msgstr "título"
 
 #: papers/forms.py:79 publishers/forms.py:14
 msgid "decreasing"
-msgstr ""
+msgstr "diminuindo"
 
 #: papers/forms.py:80 publishers/forms.py:15
 msgid "increasing"
-msgstr ""
+msgstr "aumentando"
 
 #: papers/forms.py:100 papers/forms.py:107
 msgid "Any"
-msgstr ""
+msgstr "Qualquer"
 
 #: papers/forms.py:101
 msgid "Visible"
@@ -702,47 +702,47 @@ msgstr "Invisível"
 
 #: papers/forms.py:191
 msgid "Try any author name"
-msgstr ""
+msgstr "Experimente qualquer nome de autor"
 
 #: papers/models.py:102
 msgid "Postprint"
-msgstr ""
+msgstr "Versão revisada"
 
 #: papers/models.py:103
 msgid "Published version"
-msgstr ""
+msgstr "Versão publicada"
 
 #: papers/models.py:107
 msgid "Preparing profile"
-msgstr ""
+msgstr "Preparando o perfil"
 
 #: papers/models.py:108
 msgid "Fetching publications from ORCID"
-msgstr ""
+msgstr "Obtendo publicações da ORCID"
 
 #: papers/models.py:109
 msgid "Fetching publications from CrossRef"
-msgstr ""
+msgstr "Obtendo publicações da CrossRef"
 
 #: papers/models.py:110
 msgid "Fetching publications from BASE"
-msgstr ""
+msgstr "Obtendo publicações de BASE"
 
 #: papers/models.py:111
 msgid "Fetching publications from CORE"
-msgstr ""
+msgstr "Obtendo publicações da CORE"
 
 #: papers/models.py:112
 msgid "Fetching publications from OAI-PMH"
-msgstr ""
+msgstr "Obtendo publicações de OAI-PMH"
 
 #: papers/models.py:113
 msgid "Clustering publications"
-msgstr ""
+msgstr "Publicações agrupadas"
 
 #: papers/models.py:114
 msgid "Updating statistics"
-msgstr ""
+msgstr "Atualizando estatísticas"
 
 #: papers/models.py:1255 papers/views.py:124 papers/views.py:129
 #: papers/views.py:269 papers/views.py:303
@@ -765,11 +765,11 @@ msgstr "Pesquisar em Google Acadêmico"
 #: papers/templates/papers/createProfile.html:8
 #: papers/templates/papers/createProfile.html:12
 msgid "Create your profile"
-msgstr ""
+msgstr "Criar seu perfil"
 
 #: papers/templates/papers/createProfile.html:15
 msgid "\nTo fetch your publications, we need one last piece of information: your name.\n"
-msgstr ""
+msgstr "Para buscar suas publicações, precisamos de uma última informação: seu nome.\n"
 
 #: papers/templates/papers/department.html:60
 #: papers/templates/papers/institution.html:37
@@ -863,27 +863,27 @@ msgstr "Sim"
 
 #: papers/templates/papers/itemResearcher.html:13
 msgid "(empty profile)"
-msgstr ""
+msgstr "(perfil vazio)"
 
 #: papers/templates/papers/paper.html:62
 #, python-format
 msgctxt "as in: _Journal article by_ Tom Smith, Nicole Allen"
 msgid " \n    <span class=\"paperDocType\">%(doctype)s</span> by\n    "
-msgstr ""
+msgstr " \n    <span class=\"paperDocType\">%(doctype)s</span> por\n    "
 
 #: papers/templates/papers/paper.html:70
 #, python-format
 msgid "\n            and <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s other authors</a>\n            "
-msgstr ""
+msgstr "\n            and <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s outros autores</a>\n            "
 
 #: papers/templates/papers/paper.html:77
 #, python-format
 msgid "\n            All %(nb_authors)s authors (<a href=\"#\" id=\"show_less_authors\">show less</a>):<br />\n            "
-msgstr ""
+msgstr "\n            All %(nb_authors)s authors (<a href=\"#\" id=\"show_less_authors\">mostre menos</a>):<br />\n            "
 
 #: papers/templates/papers/paper.html:89
 msgid "<strong>Congratulations!</strong> This paper was successfully deposited."
-msgstr ""
+msgstr "<strong>Parabéns!</strong> Este artigo foi depositado com sucesso."
 
 #: papers/templates/papers/paper.html:96
 #, python-format
@@ -892,7 +892,7 @@ msgstr ""
 
 #: papers/templates/papers/paper.html:114
 msgid "Full text:"
-msgstr ""
+msgstr "Texto completo:"
 
 #: papers/templates/papers/paper.html:116
 #: papers/templates/papers/publiListItem.html:37
@@ -901,11 +901,11 @@ msgstr "Baixar"
 
 #: papers/templates/papers/paper.html:118 statistics/models.py:66
 msgid "Unavailable"
-msgstr ""
+msgstr "Indisponível"
 
 #: papers/templates/papers/paper.html:120
 msgid "Ask upload"
-msgstr ""
+msgstr "Pedir upload"
 
 #: papers/templates/papers/paper.html:124
 msgid "Publisher:"
@@ -913,15 +913,15 @@ msgstr "Editor:"
 
 #: papers/templates/papers/paper.html:131
 msgid "Deposited."
-msgstr ""
+msgstr "Depositado."
 
 #: papers/templates/papers/paper.html:133
 msgid "Deposit again"
-msgstr ""
+msgstr "Depositar novamente"
 
 #: papers/templates/papers/paperDetails.html:7
 msgid "Published in"
-msgstr ""
+msgstr "Publicado em"
 
 #: papers/templates/papers/paperDetails.html:19
 msgid "Links"
@@ -933,11 +933,11 @@ msgstr "Ferramentas"
 
 #: papers/templates/papers/paperDetails.html:29
 msgid "Request with the Open Access Button"
-msgstr ""
+msgstr "Pedido com o botão de acesso aberto"
 
 #: papers/templates/papers/paperDetails.html:35
 msgid "Admin zone"
-msgstr ""
+msgstr "Zona de administração"
 
 #: papers/templates/papers/paperList.html:26
 msgid "No paper found."
@@ -951,38 +951,38 @@ msgstr "Faltando publicações? <a href=\"%(matching_papers_url)s\"> Procure pub
 #: papers/templates/papers/publiListItem.html:16
 #, python-format
 msgid "and %(remaining_authors)s other authors"
-msgstr ""
+msgstr "e %(remaining_authors)s outros autores"
 
 #: papers/templates/papers/publiListItem.html:40
 #: publishers/templates/publishers/itemPolicy.html:21
 msgid "Upload"
-msgstr ""
+msgstr "Enviar"
 
 #: papers/templates/papers/publiListItem.html:45
 #: papers/templates/papers/search.html:52
 msgid "Exclude from my profile"
-msgstr ""
+msgstr "Excluir do meu perfil"
 
 #: papers/templates/papers/publiListItem.html:52
 #: papers/templates/papers/search.html:55
 msgid "Include in my profile"
-msgstr ""
+msgstr "Incluir no meu perfil"
 
 #: papers/templates/papers/search.html:37
 msgid "Claiming..."
-msgstr ""
+msgstr "Reivindicando ..."
 
 #: papers/templates/papers/search.html:40
 msgid "Unclaiming..."
-msgstr ""
+msgstr "Reclamando ..."
 
 #: papers/templates/papers/search.html:71
 msgid "Claiming failed!"
-msgstr ""
+msgstr "A reclamação falhou!"
 
 #: papers/templates/papers/search.html:73
 msgid "Unclaiming failed!"
-msgstr ""
+msgstr "Falha na reclamação!"
 
 #: papers/templates/papers/search.html:89
 msgid "Refreshing results"
@@ -990,35 +990,35 @@ msgstr "Resultados refrescantes"
 
 #: papers/templates/papers/search.html:99
 msgid "Refreshing profile"
-msgstr ""
+msgstr "Atualizando perfil"
 
 #: papers/templates/papers/search.html:119
 msgid "Is it you?"
-msgstr ""
+msgstr "É você?"
 
 #: papers/templates/papers/search.html:140
 msgid "Refresh publications"
-msgstr ""
+msgstr "Atualizar publicações"
 
 #: papers/templates/papers/search.html:143
 msgid "Address:"
-msgstr ""
+msgstr "Endereço:"
 
 #: papers/templates/papers/search.html:146
 msgid "Names:"
-msgstr ""
+msgstr "Nome:"
 
 #: papers/templates/papers/search.html:165
 msgid "Journal"
-msgstr ""
+msgstr "Revista acadêmica"
 
 #: papers/templates/papers/search.html:168
 msgid "Published by"
-msgstr ""
+msgstr "Publicado em"
 
 #: papers/templates/papers/search.html:170
 msgid "ISSN:"
-msgstr ""
+msgstr "ISSN:"
 
 #: papers/templates/papers/search.html:178
 #, invalid-plural, python-format
@@ -1030,7 +1030,7 @@ msgstr[1] ""
 #: papers/templates/papers/search.html:186
 #: publishers/templates/publishers/policy.html:41
 msgid "Publisher"
-msgstr ""
+msgstr "Publicado"
 
 #: papers/templates/papers/search.html:195
 #, invalid-plural, python-format
@@ -1076,51 +1076,51 @@ msgstr ""
 
 #: papers/templates/papers/search.html:287
 msgid "By visibility"
-msgstr ""
+msgstr "Por visibilidade"
 
 #: papers/templates/papers/search.html:292
 msgid "By full text availability"
-msgstr ""
+msgstr "Por disponibilidade de texto completo"
 
 #: papers/templates/papers/search.html:298
 msgid "By publisher policy"
-msgstr ""
+msgstr "Pela política do editor"
 
 #: papers/templatetags/statuses.py:19 papers/templatetags/statuses.py:79
 msgid "Unknown OA status"
-msgstr ""
+msgstr "Status OA desconhecido"
 
 #: papers/templatetags/statuses.py:27
 msgid "Unknown PDF status"
-msgstr ""
+msgstr "Status do PDF desconhecido"
 
 #: papers/templatetags/statuses.py:33
 msgid "Preprints can be archived."
-msgstr ""
+msgstr "As pré-impressões podem ser arquivadas."
 
 #: papers/templatetags/statuses.py:34
 msgid "Preprints cannot be archived."
-msgstr ""
+msgstr "As pré-impressões não podem ser arquivadas."
 
 #: papers/templatetags/statuses.py:35
 msgid "Under the restrictions below, preprints can be archived."
-msgstr ""
+msgstr "Sob as restrições abaixo, as pré-impressões podem ser arquivadas."
 
 #: papers/templatetags/statuses.py:36
 msgid "Preprints archiving policy unclear"
-msgstr ""
+msgstr "Política de arquivamento de pré-impressões não está clara"
 
 #: papers/templatetags/statuses.py:37
 msgid "Preprints archiving policy unknown"
-msgstr ""
+msgstr "Política de arquivamento de pré-impressões desconhecida"
 
 #: papers/templatetags/statuses.py:38
 msgid "Postprints can be archived."
-msgstr ""
+msgstr "As impressões pós-impressão podem ser arquivadas."
 
 #: papers/templatetags/statuses.py:39
 msgid "Postprints cannot be archived."
-msgstr ""
+msgstr "As impressões pós-impressão não podem ser arquivadas."
 
 #: papers/templatetags/statuses.py:40
 msgid "Under the restrictions below, postprints can be archived."
@@ -1241,7 +1241,7 @@ msgstr ""
 
 #: publishers/forms.py:11
 msgid "name"
-msgstr ""
+msgstr "nome"
 
 #: publishers/forms.py:19 publishers/templates/publishers/list.html:55
 msgid "Filter by publisher policy"
@@ -1281,15 +1281,15 @@ msgstr ""
 
 #: publishers/models.py:47
 msgid "Allowed"
-msgstr ""
+msgstr "Autorizado"
 
 #: publishers/models.py:48
 msgid "Forbidden"
-msgstr ""
+msgstr "Proibido"
 
 #: publishers/models.py:49
 msgid "Restricted"
-msgstr ""
+msgstr "Restrito"
 
 #: publishers/models.py:50
 msgid "Unclear"
@@ -1297,11 +1297,11 @@ msgstr ""
 
 #: publishers/models.py:51
 msgid "Unknown"
-msgstr ""
+msgstr "Desconhecido"
 
 #: publishers/models.py:59 publishers/views.py:94
 msgid "Publishers"
-msgstr ""
+msgstr "Publicado"
 
 #: publishers/models.py:79
 msgid "Unknown publisher"
@@ -1372,7 +1372,7 @@ msgstr ""
 
 #: publishers/templates/publishers/policy.html:93
 msgid "Conditions"
-msgstr ""
+msgstr "Condições"
 
 #: publishers/templates/publishers/policy.html:101
 msgid "Policy details"
@@ -1389,7 +1389,7 @@ msgstr "Todos os artigos publicados por %(publisher)s"
 
 #: publishers/templates/publishers/policy.html:118
 msgid "Journals"
-msgstr ""
+msgstr "Revistas"
 
 #: publishers/templates/publishers/policy.html:119
 msgid "Only journals with papers written by our users are listed."
@@ -1397,7 +1397,7 @@ msgstr "Apenas são publicados periódicos com documentos escritos por nossos us
 
 #: publishers/templates/publishers/policy.html:134
 msgid "None."
-msgstr ""
+msgstr "Nenhum."
 
 #: statistics/models.py:48
 msgid "Available from the publisher"
