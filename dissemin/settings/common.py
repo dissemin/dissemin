@@ -274,6 +274,7 @@ POSSIBLE_LANGUAGE_CODES = ['en', 'fr', 'zh-hans', 'mk']
 LANGUAGES = [
     ('en', _('English')),
     ('fr', _('French')),
+    ('ar', _('Arabic')),
     ('zh-hans', _('Simplified Chinese')),
     ('mk', _('Macedonian')),
 ]
