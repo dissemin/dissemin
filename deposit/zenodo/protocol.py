@@ -29,6 +29,7 @@ from deposit.protocol import DepositResult
 from deposit.protocol import RepositoryProtocol
 from deposit.registry import protocol_registry
 from deposit.zenodo.forms import ZenodoForm
+from deposit.zenodo.forms import ZENODO_DEFAULT_LICENSE_CHOICE
 from django.utils.translation import ugettext as _
 from papers.utils import kill_html
 from papers.utils import extract_domain
@@ -60,7 +61,7 @@ class ZenodoProtocol(RepositoryProtocol):
 
     def get_form_initial_data(self):
         data = super(ZenodoProtocol, self).get_form_initial_data()
-        data['license'] = 'other-open'
+        data['license'] = ZENODO_DEFAULT_LICENSE_CHOICE
         if self.paper.abstract:
             data['abstract'] = kill_html(self.paper.abstract)
         else:

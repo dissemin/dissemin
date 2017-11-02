@@ -24,6 +24,8 @@ from deposit.forms import FormWithAbstract
 from django import forms
 from django.utils.translation import ugettext as _
 
+ZENODO_DEFAULT_LICENSE_CHOICE = 'zenodo-freetoread-1.0'
+
 ZENODO_LICENSES_CHOICES = [
    ('cc-zero',
     _('Creative Commons CCZero (CC0)')),
@@ -46,6 +48,6 @@ class ZenodoForm(FormWithAbstract):
     license = forms.ChoiceField(
             label=_('License'),
             choices=ZENODO_LICENSES_CHOICES,
-            initial='zenodo-freetoread-1.0',
+            initial=ZENODO_DEFAULT_LICENSE_CHOICE,
             widget=forms.RadioSelect(attrs={'class': 'radio-margin'})
             )

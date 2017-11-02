@@ -28,6 +28,7 @@ import requests_mock
 from deposit.tests import lorem_ipsum
 from deposit.tests import ProtocolTest
 from deposit.zenodo.protocol import ZenodoProtocol
+from deposit.zenodo.forms import ZENODO_DEFAULT_LICENSE_CHOICE
 from papers.models import Paper
 from backend.oai import get_proaixy_instance
 
@@ -47,7 +48,7 @@ class ZenodoProtocolTest(ProtocolTest):
         p = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
         r = self.dry_deposit(p,
             abstract = lorem_ipsum,
-            license = 'zenodo-freetoread-1.0')
+            license = ZENODO_DEFAULT_LICENSE_CHOICE)
         self.assertEqual(r.status, 'faked')
 
     def test_deposit_paper_already_on_zenodo(self):
@@ -62,6 +63,6 @@ class ZenodoProtocolTest(ProtocolTest):
             p = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
             r = self.dry_deposit(p,
                     abstract = lorem_ipsum,
-                    license = 'zenodo-freetoread-1.0')
+                    license = ZENODO_DEFAULT_LICENSE_CHOICE)
             self.assertEqual(r.status, 'failed')
 
