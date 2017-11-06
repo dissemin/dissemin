@@ -11,7 +11,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-30 10:57+0100\n"
-"PO-Revision-Date: 2017-11-02 07:10:34+0000\n"
+"PO-Revision-Date: 2017-11-06 07:58:47+0000\n"
 "Language: zh-Hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1734,7 +1734,7 @@ msgstr "这里有与我们数据相关的几条忠告："
 
 #: templates/dissemin/faq.html:297
 msgid "Some papers are not present in any of our metadata sources, so they are not counted at all."
-msgstr ""
+msgstr "一些论文没有提供我们任何元数据来源，因此它们完全不会记入。"
 
 #: templates/dissemin/faq.html:302
 msgid "Some entries in our system do not correspond to proper research papers."

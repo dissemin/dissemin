@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 #
 # Author: Fitoschido
+# Author: KATRINE1992
 # Author: Macofe
 # --
 # This file is part of the Dissemin Project
@@ -12,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-30 10:57+0100\n"
-"PO-Revision-Date: 2017-11-02 07:10:32+0000\n"
+"PO-Revision-Date: 2017-11-06 07:58:44+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -218,7 +219,7 @@ msgstr "Nombre de usuario de HAL"
 
 #: deposit/hal/models.py:15
 msgid "If set, deposits will be associated to this HAL account."
-msgstr ""
+msgstr "Si es instalado, los depositos seran conectado a la cuenta HAL."
 
 #: deposit/hal/protocol.py:142
 msgid "No HAL user credentials provided."
@@ -1638,7 +1639,7 @@ msgstr ""
 
 #: templates/dissemin/faq.html:76
 msgid "You can even do it before publication. You can get <strong>valuable feedback</strong> to improve your paper before the actual peer-reviewing process. It may also be useful to establish priority if it takes a long time for your paper to get published."
-msgstr ""
+msgstr "Puede hacerlo mismo antes la publicacion. Puede tener una <strong>opinion preciosa</strong> para mejorar el documento antes de la revision actual. Seria tambien util de tomar priorodad si su documento necesita mas tiempo para ser publicado"
 
 #: templates/dissemin/faq.html:84
 msgid "It provides you a <strong>durable storage</strong>. Your homepage is likely to change or to disappear, for instance if you leave your current institution."
@@ -1646,11 +1647,11 @@ msgstr ""
 
 #: templates/dissemin/faq.html:90
 msgid "Librarians around the world cannot check whether all the papers in a given journal are available on homepages: in doubt, they subscribe to this journal to make sure their researchers have access to it. This costs a lot of money for research institutions. Papers stored in repositories are <strong>easier to detect</strong> and can help academia save money."
-msgstr ""
+msgstr "Los operadores de bibliotecas por todo el mundo no pueden testar si todos documentos de periodicos en un dia sean disponibles en paginas iniciales: en duda, van registrarse e este periodico para asegurar que los buscadores tienen aceso a el. Esto es caro para institutos de busqueda. Los documentos que estan almacenados en repositorios son mas faciles a detectar y pueden ayudar l'academia de ahorrar dinero."
 
 #: templates/dissemin/faq.html:99
 msgid "Finally, for all these reasons, an increasing number of <strong>funding bodies</strong> require the outcomes of their projects to be made available in a repository."
-msgstr ""
+msgstr "Finanlmente, para todas estas razones, un nombre ascendiente de <strong> de Institutos de credito</strong> necesitan los resultados de sus proyectos de ser disponibles en un repositorio."
 
 #: templates/dissemin/faq.html:108
 msgid "There are roughly three types of repositories:"
@@ -1658,7 +1659,7 @@ msgstr ""
 
 #: templates/dissemin/faq.html:114
 msgid "Subject repositories, restricted to some research fields, such as <a href=\"https://arxiv.org\">arXiv</a>."
-msgstr ""
+msgstr "Los repositorios de sujetos, limitados a unos campos de busqueda, como <a href=''https://arxiv.org'' arXIv</a>."
 
 #: templates/dissemin/faq.html:120
 msgid "Institutional repositories, designated to store the research output of a given institution or country."
@@ -1666,7 +1667,7 @@ msgstr ""
 
 #: templates/dissemin/faq.html:125
 msgid "General-purpose academic repositories such as <a href=\"https://zenodo.org\">Zenodo</a>, not limited to a particular scope."
-msgstr ""
+msgstr "Documentos generales academicos almacenados como <a href=''https://zenodo.org''>Zenodo</a>, no limitados a un scopo particular."
 
 #: templates/dissemin/faq.html:132
 msgid "If your research community favours a specific repository, using it makes sense as it will increase your visibility. If not, institutional or general-purpose repositories are also good options."
@@ -1740,11 +1741,11 @@ msgstr ""
 
 #: templates/dissemin/faq.html:297
 msgid "Some papers are not present in any of our metadata sources, so they are not counted at all."
-msgstr ""
+msgstr "Unos documentos no existen en nuestros fuentes de metadados, asi no seran contado de todo."
 
 #: templates/dissemin/faq.html:302
 msgid "Some entries in our system do not correspond to proper research papers."
-msgstr ""
+msgstr "Unas entradas del sistema no corresponden a los documentos buscados."
 
 #: templates/dissemin/faq.html:307
 msgid "Because there are many researchers with the same name, some papers may be misattributed to a homonym."
@@ -1756,7 +1757,7 @@ msgstr ""
 
 #: templates/dissemin/faq.html:318
 msgid "Some papers might be marked as available but actually are not, for instance because they have been deleted."
-msgstr ""
+msgstr "Unos documentos pueden ser marcados como disponibles, pero no son, por ejemplo porque son eliminados."
 
 #: templates/dissemin/faq.html:324
 msgid "All sorts of other technical issues."
@@ -1781,11 +1782,11 @@ msgstr ""
 
 #: templates/dissemin/faq.html:369
 msgid "In most cases, the errors that you see on Dissemin have not been introduced by Dissemin, but are already present in the <a href=\"{{ sources_url }}\">public sources</a> that Dissemin harvests. Hence, please first check if the error that you have seen is already present in our data sources, by looking at the \"Links\" section in the top right of the page. If one of these pages contain the error, you should report the problem to them and not to us, otherwise the mistake will persist in the source."
-msgstr ""
+msgstr "En la mayoria de casos, los errores que ves en Dissemin non han sido introducido por Dissemin, mas estan ja presentes en  that you see on Dissemin have not been introduced by Dissemin, b <a href=\"{{ sources_url }}\">fuentes publicas</a> coleccionadas por Dissemin. En el futuro debera testar,si el error visto esta ja presente en las fuentes de dados,mirando la seccion de los ''Enlaces'' en la parte derecha superior de la pagina. Si ha un error en una pagina, debe reportar al problema a ellos y no a nosotros, otramente la error va persisitir en la fuente."
 
 #: templates/dissemin/faq.html:381
 msgid "If the error is not present in any of the sources and you believe that Dissemin may have introduced the problem, please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> with details of the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. Note that you cannot yet fix the problem yourself, although we hope in the longer term to develop a system to allow our users to edit details of their papers themselves."
-msgstr ""
+msgstr "Si un error no es presente en unas fuentes y Usted cree que Dissemin ha causado el problema, por favor archivar el <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a>con detalles del problema, o enviar un mensaje a  <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. Tome en cuenta que no puede fixar al error por si, bienque nosotros  esperamos de poder crear un sistema que va permitir a los usuarios de editar dados de sus propios documentos."
 
 #: templates/dissemin/faq.html:395
 msgid "First, note that Dissemin does not account for copies of articles that are only available on a personal homepage or a similar website. This is deliberate, because we believe that <a href=\"#repositories-rock\">articles should be hosted in repositories</a>."
@@ -1817,11 +1818,11 @@ msgstr ""
 
 #: templates/dissemin/faq.html:473
 msgid "Click \"Log in\" in the top right corner and go through the ORCID login process;"
-msgstr ""
+msgstr "Haz clic a ''Log in'' en la parte derecha superior para ver al proceso ORCID de conexion."
 
 #: templates/dissemin/faq.html:478
 msgid "Search for your publications, for instance by typing your name in CrossRef's search interface;"
-msgstr ""
+msgstr "Buscar a tus publicaciones, por ejemplo escribir tu nombre en el interfaz de la busqueda de CrossRef."
 
 #: templates/dissemin/faq.html:483
 msgid "Add publications that are yours to your ORCID record by clicking \"Add to ORCID\"."
@@ -1850,7 +1851,7 @@ msgstr "Contribuye con el <a href=\"https://github.com/wetneb/dissemin\">código
 
 #: templates/dissemin/faq.html:536
 msgid "Fix any of our listed <a href=\"https://github.com/wetneb/dissemin/issues\">issues</a>."
-msgstr ""
+msgstr "Fija cualquieraos problemas listados  <a href=\"https://github.com/wetneb/dissemin/issues\">issues</a>."
 
 #: templates/dissemin/faq.html:541
 msgid "Help us <a href=\"https://translatewiki.net/wiki/Translating:Dissemin\">translate</a> the interface in your language."
@@ -1862,7 +1863,7 @@ msgstr ""
 
 #: templates/dissemin/faq.html:553
 msgid "Star <a href=\"https://github.com/wetneb/dissemin\">our GitHub project</a>!"
-msgstr ""
+msgstr "Dar puntaje de Estrellas a"
 
 #: templates/dissemin/faq.html:558
 msgid "<a href=\"https://association.dissem.in/#dons\">Donations are accepted</a>."

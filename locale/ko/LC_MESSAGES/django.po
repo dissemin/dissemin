@@ -11,7 +11,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-30 10:57+0100\n"
-"PO-Revision-Date: 2017-11-02 07:10:32+0000\n"
+"PO-Revision-Date: 2017-11-06 07:58:44+0000\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -623,7 +623,7 @@ msgstr "중국어 간체"
 
 #: dissemin/settings/common.py:278
 msgid "Macedonian"
-msgstr ""
+msgstr "마케도니아어"
 
 #: notification/models.py:62
 msgid "inboxes"

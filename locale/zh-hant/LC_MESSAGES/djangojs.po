@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2017-11-02 07:10:36+0000\n"
+"PO-Revision-Date: 2017-11-06 07:58:48+0000\n"
 "X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,7 +23,7 @@ msgstr ""
 
 #: doc/sphinx/_build/html/_static/doctools.js:206
 msgid "Hide Search Matches"
-msgstr ""
+msgstr "隱藏搜尋符合內容"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:400
 msgid "Searching"
@@ -31,7 +31,7 @@ msgstr "搜尋中"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:405
 msgid "Preparing search..."
-msgstr ""
+msgstr "正在準備搜尋..."
 
 #: doc/sphinx/_build/html/_static/searchtools.js:566
 msgid "Search Results"
@@ -44,7 +44,7 @@ msgstr ""
 #: doc/sphinx/_build/html/_static/searchtools.js:570
 #, javascript-format
 msgid "Search finished, found %s page(s) matching the search query."
-msgstr ""
+msgstr "搜尋結束，找出 %s 個符合搜尋查詢的頁面。"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:623
 msgid ", in "
@@ -83,11 +83,11 @@ msgstr[0] ""
 
 #: papers/static/papers/refresh.js:115
 msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
-msgstr ""
+msgstr "「%(name)s」因為下列原因被忽略掉：%(reason)s"
 
 #: papers/static/papers/refresh.js:123
 msgid "A paper was ignored, because it has no name"
-msgstr ""
+msgstr "有論文被忽略掉，因為沒有名稱"
 
 #: papers/static/papers/refresh.js:135 papers/static/papers/refresh.js:163
 msgid "Show more information"
