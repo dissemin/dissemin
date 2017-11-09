@@ -5,21 +5,21 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2017-11-06 07:58:48+0000\n"
+"PO-Revision-Date: 2017-11-09 07:07:56+0000\n"
 "X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: zh-Hant\n"
-"X-Generator: MediaWiki 1.31.0-alpha; Translate 2017-07-25\n"
+"X-Generator: MediaWiki 1.31.0-alpha; Translate 2017-10-30\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: doc/sphinx/_build/html/_static/doctools.js:167
 msgid "Permalink to this headline"
-msgstr ""
+msgstr "至此章節標題的固定連結"
 
 #: doc/sphinx/_build/html/_static/doctools.js:173
 msgid "Permalink to this definition"
-msgstr ""
+msgstr "至此定義的固定連結"
 
 #: doc/sphinx/_build/html/_static/doctools.js:206
 msgid "Hide Search Matches"
@@ -39,7 +39,7 @@ msgstr "搜尋結果"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:568
 msgid "Your search did not match any documents. Please make sure that all words are spelled correctly and that you've selected enough categories."
-msgstr ""
+msgstr "您的搜尋未找出任何符合文件。請確認所有的字詞都有拼寫正確，並且您已經有選擇足夠的分類項目。"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:570
 #, javascript-format
@@ -76,10 +76,9 @@ msgid "Invalid publication date"
 msgstr "無效發表日期"
 
 #: papers/static/papers/refresh.js:105
-#, invalid-plural
 msgid "We ignored %(count)s paper from your ORCiD profile."
 msgid_plural "We ignored %(count)s papers from your ORCiD profile."
-msgstr[0] ""
+msgstr[0] "我們從您的 ORCiD 個人檔案裡忽略了 %(count)s 篇論文。"
 
 #: papers/static/papers/refresh.js:115
 msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"

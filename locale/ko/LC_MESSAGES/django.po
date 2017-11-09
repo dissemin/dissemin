@@ -11,12 +11,12 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-30 10:57+0100\n"
-"PO-Revision-Date: 2017-11-06 07:58:44+0000\n"
+"PO-Revision-Date: 2017-11-09 07:07:53+0000\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
-"X-Generator: MediaWiki 1.31.0-alpha; Translate 2017-07-25\n"
+"X-Generator: MediaWiki 1.31.0-alpha; Translate 2017-10-30\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: deposit/forms.py:41
@@ -37,7 +37,7 @@ msgstr ""
 
 #: deposit/forms.py:119
 msgid "No preferred repository"
-msgstr ""
+msgstr "선호하는 저장소 없음"
 
 #: deposit/forms.py:140 deposit/hal/forms.py:77 deposit/osf/forms.py:143
 msgid "Save"
@@ -121,7 +121,7 @@ msgstr "법"
 
 #: deposit/hal/metadata.py:52
 msgid "Economies and finances"
-msgstr ""
+msgstr "경제학과 금융"
 
 #: deposit/hal/metadata.py:53 deposit/osf/forms.py:63 deposit/osf/forms.py:86
 msgid "Education"
@@ -805,7 +805,7 @@ msgstr[0] ""
 #: papers/templates/papers/department.html:71
 #: papers/templates/papers/institution.html:48
 msgid "Researcher deleted. "
-msgstr ""
+msgstr "연구원이 삭제되었습니다. "
 
 #: papers/templates/papers/department.html:75
 #: papers/templates/papers/institution.html:52
@@ -1291,7 +1291,7 @@ msgstr ""
 
 #: publishers/models.py:43
 msgid "Policy unclear"
-msgstr ""
+msgstr "정책이 분명하지 않음"
 
 #: publishers/models.py:44
 msgid "For complicated policies, unknown publishers and unpublished documents."
@@ -1467,7 +1467,7 @@ msgstr ""
 #: statistics/templates/statistics/histogram.html:5
 #: templates/dissemin/faq.html:49
 msgid "Open Access"
-msgstr ""
+msgstr "오픈 액세스"
 
 #: statistics/templates/statistics/histogram.html:8
 msgid "Publications are available"
@@ -1734,7 +1734,7 @@ msgstr ""
 
 #: templates/dissemin/faq.html:297
 msgid "Some papers are not present in any of our metadata sources, so they are not counted at all."
-msgstr ""
+msgstr "일부 논문은 저희 메타데이터 출전에 존재하지 않으므로 모두 계수되지는 않습니다."
 
 #: templates/dissemin/faq.html:302
 msgid "Some entries in our system do not correspond to proper research papers."
