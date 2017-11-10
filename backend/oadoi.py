@@ -71,5 +71,7 @@ class OadoiAPI(object):
             pdf_url=record['url'])
         try:
             paper.add_oairecord(record)
-        except DataError:
+            paper.update_availability()
+            paper.update_index()
+        except (DataError, ValueError):
             print('Record does not fit in the DB')
