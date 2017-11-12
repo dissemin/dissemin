@@ -344,7 +344,7 @@ def fetch_dois_by_batch(doi_list):
     try:
         # First we fetch dois by batch from CrossRef. That's fast, but only
         # works for CrossRef DOIs
-        req = requests.get('http://api.crossref.org/works', params=params)
+        req = requests.get('https://api.crossref.org/works', params=params)
         req.raise_for_status()
         results = req.json()['message'].get('items', [])
         dct = results_list_to_dict(results)
@@ -484,7 +484,7 @@ class CrossRefAPI(object):
         if filters:
             params['filter'] = ','.join(k+":"+v for k, v in filters.items())
 
-        url = 'http://api.crossref.org/works'
+        url = 'https://api.crossref.org/works'
 
         rows = 20
         next_cursor = cursor
