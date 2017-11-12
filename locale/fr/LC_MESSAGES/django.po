@@ -1642,7 +1642,7 @@ msgstr "Il rend votre recherche <strong>plus accessible</strong> et <strong>plus
 
 #: templates/dissemin/faq.html:76
 msgid "You can even do it before publication. You can get <strong>valuable feedback</strong> to improve your paper before the actual peer-reviewing process. It may also be useful to establish priority if it takes a long time for your paper to get published."
-msgstr "Vous pouvez même le faire avant la publication. Vous pouvez obtenir de <strong>précieux commentaires</ strong> pour améliorer votre document avant le processus d'évaluation par les pairs. Il peut également être utile d'établir la priorité si la publication de votre article prend beaucoup de temps."
+msgstr "Vous pouvez même le faire avant la publication. Vous pouvez obtenir de <strong>précieux commentaires</strong> pour améliorer votre document avant le processus d'évaluation par les pairs. Il peut également être utile d'établir la priorité si la publication de votre article prend beaucoup de temps."
 
 #: templates/dissemin/faq.html:84
 msgid "It provides you a <strong>durable storage</strong>. Your homepage is likely to change or to disappear, for instance if you leave your current institution."
