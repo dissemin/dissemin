@@ -276,11 +276,14 @@ BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 43200}
 LANGUAGE_CODE = 'en-us'
 POSSIBLE_LANGUAGE_CODES = ['en', 'fr', 'zh-hans', 'mk']
 LANGUAGES = [
+    ('ar', _('Arabic')),
     ('en', _('English')),
     ('fr', _('French')),
-    ('ar', _('Arabic')),
+    ('es', _('Spanish')),
     ('zh-hans', _('Simplified Chinese')),
     ('mk', _('Macedonian')),
+    ('de', _('German')),
+    ('pt-br', _('Brazilian Portuguese')),
 ]
 TIME_ZONE = 'Europe/Paris'
 USE_I18N = True
