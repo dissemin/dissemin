@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-30 10:57+0100\n"
-"PO-Revision-Date: 2017-11-02 07:10:32+0000\n"
+"PO-Revision-Date: 2017-11-09 07:07:53+0000\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: MediaWiki 1.31.0-alpha; Translate 2017-07-25\n"
+"X-Generator: MediaWiki 1.31.0-alpha; Translate 2017-10-30\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 
 #: deposit/forms.py:41
@@ -1642,7 +1642,7 @@ msgstr "Il rend votre recherche <strong>plus accessible</strong> et <strong>plus
 
 #: templates/dissemin/faq.html:76
 msgid "You can even do it before publication. You can get <strong>valuable feedback</strong> to improve your paper before the actual peer-reviewing process. It may also be useful to establish priority if it takes a long time for your paper to get published."
-msgstr "Vous pouvez même le faire avant la publication. Vous pouvez obtenir de <strong>précieux commentaires</ strong> pour améliorer votre document avant le processus d'évaluation par les pairs. Il peut également être utile d'établir la priorité si la publication de votre article prend beaucoup de temps."
+msgstr "Vous pouvez même le faire avant la publication. Vous pouvez obtenir de <strong>précieux commentaires</strong> pour améliorer votre document avant le processus d'évaluation par les pairs. Il peut également être utile d'établir la priorité si la publication de votre article prend beaucoup de temps."
 
 #: templates/dissemin/faq.html:84
 msgid "It provides you a <strong>durable storage</strong>. Your homepage is likely to change or to disappear, for instance if you leave your current institution."
@@ -1650,7 +1650,7 @@ msgstr "Il vous offre un <strong>stockage durable</strong>. Il se peut que votre
 
 #: templates/dissemin/faq.html:90
 msgid "Librarians around the world cannot check whether all the papers in a given journal are available on homepages: in doubt, they subscribe to this journal to make sure their researchers have access to it. This costs a lot of money for research institutions. Papers stored in repositories are <strong>easier to detect</strong> and can help academia save money."
-msgstr "Les bibliothécaires du monde entier ne peuvent pas vérifier si tous les articles d'un journal donné sont disponibles sur les pages d'accueil: en cas de doute, ils s'abonnent à ce journal pour s'assurer que leurs chercheurs y ont accès. Cela coûte beaucoup d'argent pour les institutions de recherche. Les documents stockés dans des dépôts sont <strong> plus faciles à détecter </ strong> et peuvent aider les universités à économiser de l'argent."
+msgstr "Les bibliothécaires du monde entier ne peuvent pas vérifier si tous les articles d'un journal donné sont disponibles sur les pages d'accueil: en cas de doute, ils s'abonnent à ce journal pour s'assurer que leurs chercheurs y ont accès. Cela coûte beaucoup d'argent pour les institutions de recherche. Les documents stockés dans des dépôts sont <strong> plus faciles à détecter </strong> et peuvent aider les universités à économiser de l'argent."
 
 #: templates/dissemin/faq.html:99
 msgid "Finally, for all these reasons, an increasing number of <strong>funding bodies</strong> require the outcomes of their projects to be made available in a repository."
@@ -1833,7 +1833,7 @@ msgstr "Ajoutez à votre enregistrement ORCID vos propres publications, en cliqu
 
 #: templates/dissemin/faq.html:489
 msgid "You can also add publications to your profile <em>on Dissemin</em>, by clicking the button \"Include in my profile\" in search results on Dissemin. (This button is only visible when you are logged in, and next to papers that Dissemin thinks you have authored.) You can also exclude articles from your profile in this way. Please note that these changes are local to Dissemin and are <em>not</em> propagated to your ORCID profile, because ORCID does not have a free API allowing us to propagate them."
-msgstr "Vous pouvez également ajouter des publications à votre profil <em>sur Dissemin</ em>, en cliquant sur le bouton \"Inclure dans mon profil\" dans les résultats de recherche sur Dissemin. (Ce bouton n'est visible que lorsque vous êtes connecté, et à côté des documents que Dissemin pense vous avez rédigés). Vous pouvez également exclure des articles de votre profil de cette manière. Notez que ces modifications sont locales à Dissemin et  ne sont <em>pas</ em> propagées dans votre profil ORCID, car ORCID ne possède pas d'API gratuite nous permettant de les propager."
+msgstr "Vous pouvez également ajouter des publications à votre profil <em>sur Dissemin</em>, en cliquant sur le bouton \"Inclure dans mon profil\" dans les résultats de recherche sur Dissemin. (Ce bouton n'est visible que lorsque vous êtes connecté, et à côté des documents que Dissemin pense vous avez rédigés). Vous pouvez également exclure des articles de votre profil de cette manière. Notez que ces modifications sont locales à Dissemin et  ne sont <em>pas</em> propagées dans votre profil ORCID, car ORCID ne possède pas d'API gratuite nous permettant de les propager."
 
 #: templates/dissemin/faq.html:504
 msgid "If you change some details in your ORCID profile (name, homepage, etc.), the changes will not automatically be picked up in your profile on Dissemin. To update your profile on Dissemin accordingly, once you have logged in to Dissemin, you can go to your <a href=\"/my-profile\">profile page</a> and click \"Refresh publications\"."

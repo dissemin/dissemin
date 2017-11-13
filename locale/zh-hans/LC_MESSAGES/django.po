@@ -11,12 +11,12 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-30 10:57+0100\n"
-"PO-Revision-Date: 2017-11-06 07:58:47+0000\n"
+"PO-Revision-Date: 2017-11-13 08:05:45+0000\n"
 "Language: zh-Hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
-"X-Generator: MediaWiki 1.31.0-alpha; Translate 2017-07-25\n"
+"X-Generator: MediaWiki 1.31.0-alpha; Translate 2017-10-30\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: deposit/forms.py:41
@@ -1652,7 +1652,7 @@ msgstr "粗略的讲，有三种存储库："
 
 #: templates/dissemin/faq.html:114
 msgid "Subject repositories, restricted to some research fields, such as <a href=\"https://arxiv.org\">arXiv</a>."
-msgstr ""
+msgstr "对象存储库，限制于一些研究字段，例如<a href=\"https://arxiv.org\">arXiv</a>。"
 
 #: templates/dissemin/faq.html:120
 msgid "Institutional repositories, designated to store the research output of a given institution or country."

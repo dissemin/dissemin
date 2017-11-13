@@ -42,11 +42,11 @@ from papers.doi import doi_to_url
 from papers.doi import to_doi
 from papers.errors import MetadataSourceException
 from papers.models import OaiSource
+from papers.models import Paper
 from papers.name import normalize_name_words
 from papers.name import parse_comma_name
 from papers.utils import date_from_dateparts
 from papers.utils import jpath
-from papers.utils import sanitize_html
 from papers.utils import tolerant_datestamp_to_datetime
 from papers.utils import valid_publication_date
 from papers.utils import validate_orcid
@@ -344,7 +344,7 @@ def fetch_dois_by_batch(doi_list):
     try:
         # First we fetch dois by batch from CrossRef. That's fast, but only
         # works for CrossRef DOIs
-        req = requests.get('http://api.crossref.org/works', params=params)
+        req = requests.get('https://api.crossref.org/works', params=params)
         req.raise_for_status()
         results = req.json()['message'].get('items', [])
         dct = results_list_to_dict(results)
@@ -352,11 +352,12 @@ def fetch_dois_by_batch(doi_list):
         # Some DOIs might not be in the results list, because they are issued by other organizations
         # We fetch them using our proxy (cached content negociation)
         missing_dois = list(set(doi_list) - set(dct.keys()))
-        req = requests.post('http://'+DOI_PROXY_DOMAIN +
-                            '/batch', {'dois': json.dumps(missing_dois)})
-        req.raise_for_status()
-        missing_dois_dct = results_list_to_dict(req.json())
-        dct.update(missing_dois_dct)
+        if missing_dois:
+            req = requests.post('http://'+DOI_PROXY_DOMAIN +
+                                '/batch', {'dois': json.dumps(missing_dois)})
+            req.raise_for_status()
+            missing_dois_dct = results_list_to_dict(req.json())
+            dct.update(missing_dois_dct)
 
         result = [dct.get(doi) for doi in doi_list]
         return result
@@ -467,84 +468,72 @@ class CrossRefAPI(object):
 
         return paper
 
-    ##### CrossRef search API #######
+    ##### CrossRef search API #######
 
-    def search_for_dois_incrementally(self, query, filters=None, max_batches=max_crossref_batches_per_researcher):
+    def fetch_all_records(self, filters=None,cursor="*"):
         """
-        Searches for DOIs for the given query and yields their metadata as it finds them.
+        Fetches all Crossref records from their API, starting at a given date.
 
-        :param query: the search query to pass to CrossRef
         :param filters: filters as specified by the REST API (as a dictionary)
-        :param max_batches: maximum number of queries to send to CrossRef
+        :param cursor: the initial cursor where to start the fetching
+            (useful to resume failed ingestions)
         """
         if filters is None:
             filters = {}
         params = {}
-        if query:
-            params['query'] = query
         if filters:
             params['filter'] = ','.join(k+":"+v for k, v in filters.items())
 
-        url = 'http://api.crossref.org/works'
+        url = 'https://api.crossref.org/works'
 
-        count = 0
         rows = 20
-        offset = 0
-        while not max_batches or count < max_batches:
+        next_cursor = cursor
+        while next_cursor:
             params['rows'] = rows
-            params['offset'] = offset
+            params['cursor'] = next_cursor
 
             try:
                 r = requests.get(url, params=params)
-                print "CROSSREF: "+r.url
                 js = r.json()
+                if js['status'] == 'failed':
+                    raise MetadataSourceException(
+                    'Querying Crossrsef with {} failed.'.format(r.url))
                 found = False
                 for item in jpath('message/items', js, default=[]):
                     found = True
                     yield item
                 if not found:
                     break
+                next_cursor = jpath('message/next-cursor', js)
+                print('Next cursor: '+next_cursor) # to ease recovery
             except ValueError as e:
-                raise MetadataSourceException('Error while fetching CrossRef results:\nInvalid response.\n' +
-                                              'URL was: %s\nParameters were: %s\nJSON parser error was: %s' % (url, urlencode(params), unicode(e)))
+                raise MetadataSourceException(
+                    'Error while fetching CrossRef results:\nInvalid response.\n' +
+                    'URL was: %s\nParameters were: %s\nJSON parser error was: %s' % (url, urlencode(params), unicode(e)))
             except requests.exceptions.RequestException as e:
                 raise MetadataSourceException('Error while fetching CrossRef results:\nUnable to open the URL: ' +
                                               url+'\nError was: '+str(e))
 
-            offset += rows
-            count += 1
+
+    def fetch_and_save_new_records(self, starting_cursor='*'):
+        """
+        Fetches and stores all new Crossref records updated since the
+        last update time of the associated OaiSource.
+        """
+        source = OaiSource.objects.get(identifier='crossref')
+        last_updated = source.last_update
+
+        to_update = self.fetch_all_records(filters={'from-update-date':last_updated.date().isoformat()},
+                cursor=starting_cursor)
+        for record in to_update:
+            try:
+                bare_paper = self.save_doi_metadata(record)
+                p = Paper.from_bare(bare_paper)
+                p.update_index()
+            except ValueError as e:
+                print(e)
+
+        source.last_update = datetime.datetime.now()
+        source.save()
 
 
-##### Zotero interface #####
-
-def fetch_zotero_by_DOI(doi):
-    """
-    Fetch Zotero metadata for a given DOI.
-    Works only with the doi_cache proxy.
-    """
-    try:
-        print('http://'+DOI_PROXY_DOMAIN+'/zotero/'+doi)
-        request = requests.get('http://'+DOI_PROXY_DOMAIN+'/zotero/'+doi)
-        return request.json()
-    except ValueError as e:
-        raise MetadataSourceException('Error while fetching Zotero metadata:\nInvalid JSON response.\n' +
-                                      'Error: '+str(e))
-
-
-def consolidate_publication(publi):
-    """
-    Fetches the abstract from Zotero and adds it to the publication if it succeeds.
-    """
-    zotero = fetch_zotero_by_DOI(publi.doi)
-    if zotero is None:
-        return publi
-    for item in zotero:
-        if 'abstractNote' in item:
-            publi.description = sanitize_html(item['abstractNote'])
-            publi.save(update_fields=['description'])
-        for attachment in item.get('attachments', []):
-            if attachment.get('mimeType') == 'application/pdf':
-                publi.pdf_url = attachment.get('url')
-                publi.save(update_fields=['pdf_url'])
-                publi.about.update_availability()
-    return publi

@@ -260,6 +260,10 @@ CELERYBEAT_SCHEDULE = {
           'task': 'refresh_deposit_statuses',
           'schedule': timedelta(days=1),
     },
+    'update_crossref': {
+          'task': 'update_crossref',
+          'schedule': timedelta(days=1),
+    },
 }
 
 # This is the time in seconds before an unacknowledged task is re-sent to
@@ -272,11 +276,14 @@ BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 43200}
 LANGUAGE_CODE = 'en-us'
 POSSIBLE_LANGUAGE_CODES = ['en', 'fr', 'zh-hans', 'mk']
 LANGUAGES = [
+    ('ar', _('Arabic')),
     ('en', _('English')),
     ('fr', _('French')),
-    ('ar', _('Arabic')),
+    ('es', _('Spanish')),
     ('zh-hans', _('Simplified Chinese')),
     ('mk', _('Macedonian')),
+    ('de', _('German')),
+    ('pt-br', _('Brazilian Portuguese')),
 ]
 TIME_ZONE = 'Europe/Paris'
 USE_I18N = True

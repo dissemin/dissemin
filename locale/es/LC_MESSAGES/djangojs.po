@@ -2,32 +2,34 @@
 # Exported from translatewiki.net
 #
 # Author: Fitoschido
+# Author: KATRINE1992
+# Author: Pato
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2017-10-27 02:45:09+0000\n"
+"PO-Revision-Date: 2017-11-13 08:05:47+0000\n"
 "X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: es\n"
-"X-Generator: MediaWiki 1.31.0-alpha; Translate 2017-07-25\n"
+"X-Generator: MediaWiki 1.31.0-alpha; Translate 2017-10-30\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: doc/sphinx/_build/html/_static/doctools.js:167
 msgid "Permalink to this headline"
-msgstr ""
+msgstr "Permalink a este titular"
 
 #: doc/sphinx/_build/html/_static/doctools.js:173
 msgid "Permalink to this definition"
-msgstr ""
+msgstr "Enlace permanente a esta definición"
 
 #: doc/sphinx/_build/html/_static/doctools.js:206
 msgid "Hide Search Matches"
-msgstr ""
+msgstr "Ocultar los Resultados de la Búsqueda"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:400
 msgid "Searching"
-msgstr ""
+msgstr "Buscando"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:405
 msgid "Preparing search..."
@@ -39,25 +41,25 @@ msgstr "Resultados de la búsqueda"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:568
 msgid "Your search did not match any documents. Please make sure that all words are spelled correctly and that you've selected enough categories."
-msgstr ""
+msgstr "Ningún documento coincide con su búsqueda. Por favor revise la ortografía y asegurese que ha seleccionado suficientes categorías."
 
 #: doc/sphinx/_build/html/_static/searchtools.js:570
 #, javascript-format
 msgid "Search finished, found %s page(s) matching the search query."
-msgstr ""
+msgstr "Búsqueda completa, se encontraron %s página(s) que concide(n) con la búsqueda."
 
 #: doc/sphinx/_build/html/_static/searchtools.js:623
 msgid ", in "
-msgstr ""
+msgstr ", en "
 
 #: doc/sphinx/_build/html/_static/sidebar.js:77
 msgid "Expand sidebar"
-msgstr ""
+msgstr "Expandir barra lateral"
 
 #: doc/sphinx/_build/html/_static/sidebar.js:90
 #: doc/sphinx/_build/html/_static/sidebar.js:118
 msgid "Collapse sidebar"
-msgstr ""
+msgstr "Colapsar barra lateral"
 
 #: papers/static/papers/refresh.js:35
 msgid "Do not show this message anymore"
@@ -76,11 +78,10 @@ msgid "Invalid publication date"
 msgstr "La fecha de publicación no es válida"
 
 #: papers/static/papers/refresh.js:105
-#, invalid-plural
 msgid "We ignored %(count)s paper from your ORCiD profile."
 msgid_plural "We ignored %(count)s papers from your ORCiD profile."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ignoramos %(count)s papel de su perfil ORCiD."
+msgstr[1] "Ignoramos %(count)s papeles de su perfil ORCiD."
 
 #: papers/static/papers/refresh.js:115
 msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
@@ -88,7 +89,7 @@ msgstr "Se ignoró «%(name)s» por el motivo siguiente: %(reason)s"
 
 #: papers/static/papers/refresh.js:123
 msgid "A paper was ignored, because it has no name"
-msgstr ""
+msgstr "Hemos ignorado un documento, porque no tiene nombre"
 
 #: papers/static/papers/refresh.js:135 papers/static/papers/refresh.js:163
 msgid "Show more information"
