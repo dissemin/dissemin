@@ -385,10 +385,10 @@ class OrcidWorkSummary(object):
         return self.json.get('put-code')
 
     def __unicode__(self):
-        return self.title
+        return self.title or '(no title)'
 
     def __repr__(self):
-        return '<OrcidWorkSummary for "{title}">'.format(title=self.title)
+        return '<OrcidWorkSummary for "{title}">'.format(title=self.title or '(no title)')
 
 class SkippedPaper(Exception):
     pass
@@ -531,7 +531,7 @@ class OrcidWork(object):
             raise SkippedPaper('NO_PUBDATE')
 
     def __repr__(self):
-        return '<ORCIDDataPaper %s written by %s>' % (self.title, ', '.join(self.authors))
+        return '<OrcidWord %s written by %s>' % (self.title or '(no title)', ', '.join(self.authors))
 
     def __str__(self):
         return self.title
@@ -541,6 +541,8 @@ class OrcidWork(object):
         return 'https://{}/{}'.format(settings.ORCID_BASE_DOMAIN, self.id)
 
     def as_dict(self):
-        return self.__dict__
+        return {'json':self.json,
+                'skipped':self.skipped,
+                'skip_reason':self.skip_reason}
 
 

@@ -67,7 +67,7 @@ def fetch_on_orcid_login(sender, **kwargs):
     if not orcid:
         return
 
-    profile = account.extra_data
+    profile = None # disabled account.extra_data because of API version mismatches
     user = None
     if '_user_cache' in account.__dict__:
         user = account.user
