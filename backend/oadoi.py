@@ -32,7 +32,6 @@ class OadoiAPI(object):
         with gzip.open(filename, 'r') as f:
             headers = []
             for line in f:
-                from time import sleep
                 fields = line.decode('utf-8').strip().split(',')
                 if not headers:
                     headers = fields
