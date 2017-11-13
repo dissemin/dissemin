@@ -204,3 +204,56 @@ def cleanup_paper_researcher_ids():
             bulk_update(batch)
         else:
             print(curid)
+
+def fix_duplicate_orcids(p):
+    from collections import defaultdict
+    from papers.name import most_similar_author
+    counts = defaultdict(int)
+    for a in p.authors:
+        if a.orcid:
+            counts[a.orcid] += 1
+
+    author_name_pairs = p.author_name_pairs()
+    best_indices = {}
+    for orcid, count in counts.items():
+        if count >= 2:
+            try:
+                n = Name.objects.get(researcher__orcid=orcid)
+                best_author = most_similar_author(n.pair, author_name_pairs)
+                best_indices[best_author] = orcid
+            except Name.DoesNotExist:
+                print('DUPLICATE ORCID WITH NO RESEARCHER_ID')
+
+    print(best_indices)
+    for idx, a in enumerate(p.authors):
+        if a.orcid and counts[a.orcid] >= 2:
+            if best_indices.get(idx) != a.orcid:
+                # delete
+                p.authors_list[idx]['orcid'] = None
+                p.authors_list[idx]['researcher_id'] = None
+
+    if best_indices:
+        p.save()
+        p.update_index()
+
+def report_dubious_orcids():
+    """
+    Finds ORCID ids which don't match the researcher's name at all
+    """
+    from papers.name import match_names
+    for idx, p in enumerate(Paper.objects.all().iterator()):
+        if idx % 100000 == 0:
+            print(idx)
+        seen_orcids = set()
+        for a in p.authors:
+            if not a.orcid:
+                continue
+
+            bad_orcid = a.orcid in seen_orcids
+            seen_orcids.add(a.orcid)
+            if bad_orcid:
+                print('\t'.join([
+                    'https://dissem.in'+p.url,
+                    a.orcid,
+                ])+'\n')
+
