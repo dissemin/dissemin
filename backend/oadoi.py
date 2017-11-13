@@ -48,7 +48,7 @@ class OadoiAPI(object):
         doi = record['doi']
         paper = Paper.get_by_doi(doi)
         if not paper:
-            print('no such paper for doi {doi}'.format(doi))
+            print('no such paper for doi {doi}'.format(doi=doi))
             return
 
         url = record['url']
