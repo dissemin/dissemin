@@ -339,7 +339,8 @@ def fetch_dois_by_batch(doi_list):
         last_dois = fetch_dois_by_batch(doi_list[nb_dois_per_batch:])
         return first_dois + last_dois
 
-    params = {'filter': ','.join(['doi:'+doi for doi in doi_list])}
+    # Given how we are joining the DOIs, they cannot contain commas
+    params = {'filter': ','.join(['doi:'+doi for doi in doi_list if ',' not in doi])}
     req = None
     try:
         # First we fetch dois by batch from CrossRef. That's fast, but only

@@ -196,6 +196,16 @@ class CrossRefUnitTest(unittest.TestCase):
             self.assertEqual([item['DOI'] for item in incremental],
                              [item['DOI'] for item in batch])
 
+    def test_batch_with_comma(self):
+        """
+        Having a comma in a DOI should not fail the whole batch, just ignore
+        that particular DOI
+        """
+        dois = ['10.1016/j.acta,at.2005.01.046','10.1080/14786430410001678217']
+        batch = fetch_dois_by_batch(dois)
+        fetched_dois = [ item['DOI'] for item in batch if item ]
+        self.assertTrue('10.1080/14786430410001678217' in fetched_dois)
+
     def test_dirty_batches(self):
         with self.assertRaises(MetadataSourceException):
             fetch_dois_by_batch(['aunirestauniecb898989']

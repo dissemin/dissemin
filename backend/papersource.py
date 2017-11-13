@@ -66,7 +66,10 @@ class PaperSource(object):
         """
         count = 0
         for p in self.fetch_bare(researcher):
-            self.save_paper(p, researcher)
+            try:
+                self.save_paper(p, researcher)
+            except ValueError:
+                continue
             if self.max_results is not None and count >= self.max_results:
                 break
 

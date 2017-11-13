@@ -135,7 +135,7 @@ class OrcidPaperSource(PaperSource):
         if ignored_papers:
             notification = {
                 'code': 'IGNORED_PAPERS',
-                'papers': ignored_papers
+                'papers': ignored_papers,
             }
             add_notification_for([user],
                                     notification_levels.ERROR,
@@ -212,8 +212,10 @@ class OrcidPaperSource(PaperSource):
             # We first try to reconcile it with local researcher author name.
             # Then, we consider it missed.
             if work.skipped:
-                print('%s is skipped due to incorrect metadata (%s)' %
-                    (work, work.skip_reason))
+                print(work.json)
+                print(work.skip_reason)
+                print('work skipped due to incorrect metadata (%s)' %
+                    (work.skip_reason))
 
                 ignored_papers.append(work.as_dict())
                 continue
