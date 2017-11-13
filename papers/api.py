@@ -81,7 +81,9 @@ def api_paper_query(request):
     if doi:
         p = None
         try:
-            p = Paper.create_by_doi(doi, bare=True)
+            p = Paper.get_by_doi(doi)
+            if not p:
+                p = Paper.create_by_doi(doi)
         except MetadataSourceException:
             pass
         if p is None:
