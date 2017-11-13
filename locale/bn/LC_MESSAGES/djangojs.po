@@ -1,101 +1,101 @@
-# Translation of Dissemin papers to Spanish (español)
+# Translation of Dissemin papers to Bangla (বাংলা)
 # Exported from translatewiki.net
 #
-# Author: Fitoschido
-# Author: KATRINE1992
-# Author: Pato
+# Author: Aftabuzzaman
+# Author: Rasal Lia
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2017-11-13 08:05:47+0000\n"
+"PO-Revision-Date: 2017-11-13 08:05:46+0000\n"
 "X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: es\n"
+"Language: bn\n"
 "X-Generator: MediaWiki 1.31.0-alpha; Translate 2017-10-30\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: doc/sphinx/_build/html/_static/doctools.js:167
 msgid "Permalink to this headline"
-msgstr "Permalink a este titular"
+msgstr ""
 
 #: doc/sphinx/_build/html/_static/doctools.js:173
 msgid "Permalink to this definition"
-msgstr "Enlace permanente a esta definición"
+msgstr ""
 
 #: doc/sphinx/_build/html/_static/doctools.js:206
 msgid "Hide Search Matches"
-msgstr "Ocultar los Resultados de la Búsqueda"
+msgstr ""
 
 #: doc/sphinx/_build/html/_static/searchtools.js:400
 msgid "Searching"
-msgstr "Buscando"
+msgstr "অনুসন্ধান চলছে"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:405
 msgid "Preparing search..."
-msgstr "Preparando la búsqueda…"
+msgstr "অনুসন্ধানের প্রস্তুতি..."
 
 #: doc/sphinx/_build/html/_static/searchtools.js:566
 msgid "Search Results"
-msgstr "Resultados de la búsqueda"
+msgstr "অনুসন্ধানের ফলাফল"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:568
 msgid "Your search did not match any documents. Please make sure that all words are spelled correctly and that you've selected enough categories."
-msgstr "Ningún documento coincide con su búsqueda. Por favor revise la ortografía y asegurese que ha seleccionado suficientes categorías."
+msgstr "আপনার অনুসন্ধানে কোন তথ্যাদি মিলেনি। অনুগ্রহ করে নিশ্চিত হউন যে শব্দগুলি সঠিক ভাবে লেখা হয়েছে এবং আপনি যথেষ্ট সংখ্যক বিষয়শ্রেণী নির্বাচন করেছেন।"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:570
 #, javascript-format
 msgid "Search finished, found %s page(s) matching the search query."
-msgstr "Búsqueda completa, se encontraron %s página(s) que concide(n) con la búsqueda."
+msgstr ""
 
 #: doc/sphinx/_build/html/_static/searchtools.js:623
 msgid ", in "
-msgstr ", en "
+msgstr ""
 
 #: doc/sphinx/_build/html/_static/sidebar.js:77
 msgid "Expand sidebar"
-msgstr "Expandir barra lateral"
+msgstr "পার্শ্বদ্বন্ড সম্প্রসারিত করুন"
 
 #: doc/sphinx/_build/html/_static/sidebar.js:90
 #: doc/sphinx/_build/html/_static/sidebar.js:118
 msgid "Collapse sidebar"
-msgstr "Colapsar barra lateral"
+msgstr "পার্শ্বদ্বন্ড সঙ্কুচিত করুন"
 
 #: papers/static/papers/refresh.js:35
 msgid "Do not show this message anymore"
-msgstr "No volver a mostrar este mensaje"
+msgstr "এই বার্তাটি আবার দেখাবেন না"
 
 #: papers/static/papers/refresh.js:66
 msgid "No author"
-msgstr "Sin autor"
+msgstr "কোন লেখক নেই"
 
 #: papers/static/papers/refresh.js:68
 msgid "No title"
-msgstr "Sin título"
+msgstr "কোন শিরোনাম নেই"
 
 #: papers/static/papers/refresh.js:70
 msgid "Invalid publication date"
-msgstr "La fecha de publicación no es válida"
+msgstr "অকার্যকর প্রকাশনা তারিখ"
 
 #: papers/static/papers/refresh.js:105
+#, invalid-plural
 msgid "We ignored %(count)s paper from your ORCiD profile."
 msgid_plural "We ignored %(count)s papers from your ORCiD profile."
-msgstr[0] "Ignoramos %(count)s papel de su perfil ORCiD."
-msgstr[1] "Ignoramos %(count)s papeles de su perfil ORCiD."
+msgstr[0] ""
+msgstr[1] ""
 
 #: papers/static/papers/refresh.js:115
 msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
-msgstr "Se ignoró «%(name)s» por el motivo siguiente: %(reason)s"
+msgstr "নিন্মলিখিত কারণে \"%(name)s\" প্রত্যাখ্যাত হয়েছে: %(reason)s"
 
 #: papers/static/papers/refresh.js:123
 msgid "A paper was ignored, because it has no name"
-msgstr "Hemos ignorado un documento, porque no tiene nombre"
+msgstr "একটি কাগজ প্রত্যাখ্যাত হয়েছে, কারন কাগজটির কোন নাম নেই"
 
 #: papers/static/papers/refresh.js:135 papers/static/papers/refresh.js:163
 msgid "Show more information"
-msgstr "Mostrar más información"
+msgstr "বিস্তারিত তথ্য"
 
 #: papers/static/papers/refresh.js:160
 msgid "Show less information"
-msgstr "Mostrar menos información"
+msgstr "সংক্ষিপ্ত তথ্য"
 

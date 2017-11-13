@@ -1,9 +1,7 @@
-# Translation of Dissemin papers to Spanish (español)
+# Translation of Dissemin papers to German (Deutsch)
 # Exported from translatewiki.net
 #
-# Author: Fitoschido
-# Author: KATRINE1992
-# Author: Pato
+# Author: Danielbeerbonn
 msgid ""
 msgstr ""
 ""
@@ -11,91 +9,91 @@ msgstr ""
 "X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: es\n"
+"Language: de\n"
 "X-Generator: MediaWiki 1.31.0-alpha; Translate 2017-10-30\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: doc/sphinx/_build/html/_static/doctools.js:167
 msgid "Permalink to this headline"
-msgstr "Permalink a este titular"
+msgstr ""
 
 #: doc/sphinx/_build/html/_static/doctools.js:173
 msgid "Permalink to this definition"
-msgstr "Enlace permanente a esta definición"
+msgstr ""
 
 #: doc/sphinx/_build/html/_static/doctools.js:206
 msgid "Hide Search Matches"
-msgstr "Ocultar los Resultados de la Búsqueda"
+msgstr ""
 
 #: doc/sphinx/_build/html/_static/searchtools.js:400
 msgid "Searching"
-msgstr "Buscando"
+msgstr ""
 
 #: doc/sphinx/_build/html/_static/searchtools.js:405
 msgid "Preparing search..."
-msgstr "Preparando la búsqueda…"
+msgstr ""
 
 #: doc/sphinx/_build/html/_static/searchtools.js:566
 msgid "Search Results"
-msgstr "Resultados de la búsqueda"
+msgstr "Suchergebnisse"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:568
 msgid "Your search did not match any documents. Please make sure that all words are spelled correctly and that you've selected enough categories."
-msgstr "Ningún documento coincide con su búsqueda. Por favor revise la ortografía y asegurese que ha seleccionado suficientes categorías."
+msgstr ""
 
 #: doc/sphinx/_build/html/_static/searchtools.js:570
 #, javascript-format
 msgid "Search finished, found %s page(s) matching the search query."
-msgstr "Búsqueda completa, se encontraron %s página(s) que concide(n) con la búsqueda."
+msgstr ""
 
 #: doc/sphinx/_build/html/_static/searchtools.js:623
 msgid ", in "
-msgstr ", en "
+msgstr ", in "
 
 #: doc/sphinx/_build/html/_static/sidebar.js:77
 msgid "Expand sidebar"
-msgstr "Expandir barra lateral"
+msgstr ""
 
 #: doc/sphinx/_build/html/_static/sidebar.js:90
 #: doc/sphinx/_build/html/_static/sidebar.js:118
 msgid "Collapse sidebar"
-msgstr "Colapsar barra lateral"
+msgstr ""
 
 #: papers/static/papers/refresh.js:35
 msgid "Do not show this message anymore"
-msgstr "No volver a mostrar este mensaje"
+msgstr "Diese Nachricht nicht wieder anzeigen"
 
 #: papers/static/papers/refresh.js:66
 msgid "No author"
-msgstr "Sin autor"
+msgstr "Kein Verfasser"
 
 #: papers/static/papers/refresh.js:68
 msgid "No title"
-msgstr "Sin título"
+msgstr "Kein Titel"
 
 #: papers/static/papers/refresh.js:70
 msgid "Invalid publication date"
-msgstr "La fecha de publicación no es válida"
+msgstr "Ungültiges Veröffentlichungsdatum"
 
 #: papers/static/papers/refresh.js:105
 msgid "We ignored %(count)s paper from your ORCiD profile."
 msgid_plural "We ignored %(count)s papers from your ORCiD profile."
-msgstr[0] "Ignoramos %(count)s papel de su perfil ORCiD."
-msgstr[1] "Ignoramos %(count)s papeles de su perfil ORCiD."
+msgstr[0] "Wir haben eine Abhandlung aus Deinem ORCiD-Profil ignoriert."
+msgstr[1] "Wir haben %(count)s Abhandlungen aus Deinem ORCiD-Profil ignoriert."
 
 #: papers/static/papers/refresh.js:115
 msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
-msgstr "Se ignoró «%(name)s» por el motivo siguiente: %(reason)s"
+msgstr ""
 
 #: papers/static/papers/refresh.js:123
 msgid "A paper was ignored, because it has no name"
-msgstr "Hemos ignorado un documento, porque no tiene nombre"
+msgstr "Eine Abhandlung wurde ignoriert, weil sie keinen Namen hat"
 
 #: papers/static/papers/refresh.js:135 papers/static/papers/refresh.js:163
 msgid "Show more information"
-msgstr "Mostrar más información"
+msgstr "Weitere Informationen anzeigen"
 
 #: papers/static/papers/refresh.js:160
 msgid "Show less information"
-msgstr "Mostrar menos información"
+msgstr "Weniger Informationen anzeigen"
 

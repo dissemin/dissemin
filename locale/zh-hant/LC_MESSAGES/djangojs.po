@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2017-11-09 07:07:56+0000\n"
+"PO-Revision-Date: 2017-11-13 08:05:47+0000\n"
 "X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -73,7 +73,7 @@ msgstr "沒有標題"
 
 #: papers/static/papers/refresh.js:70
 msgid "Invalid publication date"
-msgstr "無效發表日期"
+msgstr "無效出版日期"
 
 #: papers/static/papers/refresh.js:105
 msgid "We ignored %(count)s paper from your ORCiD profile."

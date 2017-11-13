@@ -13,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-30 10:57+0100\n"
-"PO-Revision-Date: 2017-11-09 07:07:52+0000\n"
+"PO-Revision-Date: 2017-11-13 08:05:42+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -970,7 +970,7 @@ msgstr ""
 #: papers/templates/papers/paperList.html:33
 #, python-format
 msgid "Missing publications? <a href=\"%(matching_papers_url)s\"> Search for publications with a matching author name </a>"
-msgstr "No hay publicaciones? <a href=\"%(matching_papers_url)s\"> Buscar publicaciones con un nombre de autor adaptado </a>"
+msgstr "No hay publicaciones? <a href=\"%(matching_papers_url)s\"> Buscar para publicaciones con el nombre del autor relativo </a>"
 
 #: papers/templates/papers/publiListItem.html:16
 #, python-format
