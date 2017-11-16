@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2017-11-13 08:05:41+0000\n"
+"PO-Revision-Date: 2017-11-16 09:52:18+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -347,59 +347,59 @@ msgstr ""
 
 #: deposit/osf/models.py:13
 msgid "OSF identifier"
-msgstr ""
+msgstr "OSF নির্দেশক"
 
 #: deposit/osf/models.py:14
 msgid "If set, your deposits will be associated to this OSF account. This identifier is a string of letters and numbers which can be found in your OSF public profile URL."
-msgstr ""
+msgstr "যদি যুক্ত করেন, অাপনার জমা এই OSF হিসাবে সংযুক্ত হবে। এই নির্দেশক কতগুলো অক্ষর ও সংখ্যার বন্ধন যা পাওয়া যায় অাপনার OSF পাবলিক বৃত্তান্ত URL এ।"
 
 #: deposit/osf/protocol.py:207
 msgid "Unable to create a project on OSF."
-msgstr ""
+msgstr "OSF এ প্রকল্প তৈরিতে ব্যর্থ।"
 
 #: deposit/osf/protocol.py:221
 msgid "Unable to authenticate to OSF."
-msgstr ""
+msgstr "OSF এ সত্যায়ন করতে ব্যর্থ।"
 
 #: deposit/osf/protocol.py:238
 msgid "Unable to add contributors."
-msgstr ""
+msgstr "অবদানকারী যুক্ত করতে ব্যর্থ।"
 
 #: deposit/osf/protocol.py:265
 msgid "Unable to update the contributors of the paper."
-msgstr ""
+msgstr "পেপারটিতে অবদানকারী হালনাগাদ করতে ব্যর্থ।"
 
 #: deposit/osf/protocol.py:311
 msgid "Unable to update license."
-msgstr ""
+msgstr "লাইসেন্স হালনাগাদ করণে ব্যর্থ।"
 
 #: deposit/osf/protocol.py:368
 msgid "Unable to create the preprint."
-msgstr ""
+msgstr "অনানুষ্ঠানিক প্রকাশের পূর্বাবস্থা তৈরিতে ব্যর্থ।"
 
 #: deposit/osf/protocol.py:417
 msgid "Unable to update the preprint license."
-msgstr ""
+msgstr "অনানুষ্ঠানিক প্রকাশের লাইসেন্স হালনাগাদে ব্যর্থ।"
 
 #: deposit/osf/protocol.py:425
 msgid "No Repository endpoint provided."
-msgstr ""
+msgstr "কোন চূড়ান্ত তথ্যভান্ডার দেয়া নেই।"
 
 #: deposit/osf/protocol.py:428
 msgid "No OSF token provided."
-msgstr ""
+msgstr "কোন OSF টোকেন দেয়া নেই।"
 
 #: deposit/osf/protocol.py:469
 msgid "Unable to upload the PDF file."
-msgstr ""
+msgstr "PDF ফাইল হালনাগাদে অক্ষম।"
 
 #: deposit/osf/protocol.py:509
 msgid "Unable to delete the project."
-msgstr ""
+msgstr "প্রকল্প বাতিল করতে ব্যর্থ।"
 
 #: deposit/osf/protocol.py:538 deposit/osf/protocol.py:546
 msgid "Unable to make the project public."
-msgstr ""
+msgstr "প্রকল্প সবার জন্য উন্মুক্ত করতে ব্যর্থ।"
 
 #: deposit/protocol.py:199
 msgid "Failed to connect to the repository. Please try again later."
@@ -411,11 +411,11 @@ msgstr ""
 
 #: deposit/sword/protocol.py:110
 msgid "Unable to submit the paper to the collection."
-msgstr ""
+msgstr "পেপারটি সংগৃহীত হিসাবে দাখিলে ব্যর্থ।"
 
 #: deposit/sword/protocol.py:120
 msgid "Failed to connect to the SWORD server."
-msgstr ""
+msgstr "SWORD সার্ভারে যুক্ত হতে ব্যর্থ।"
 
 #: deposit/templates/deposit/deposits.html:10
 #: deposit/templates/deposit/deposits.html:14
@@ -445,11 +445,11 @@ msgstr ""
 
 #: deposit/templates/deposit/deposits.html:63
 msgid "PDF URL"
-msgstr ""
+msgstr "PDF URL"
 
 #: deposit/templates/deposit/deposits.html:70
 msgid "Status"
-msgstr ""
+msgstr "অবস্থা"
 
 #: deposit/templates/deposit/deposits.html:88
 msgid "You have not made any deposit via Dissemin. What are you waiting for? Liberate your papers today."
@@ -472,7 +472,7 @@ msgstr "ভান্ডার পছন্দকরণ"
 #: deposit/templates/deposit/start.html:12
 #: deposit/templates/deposit/start.html:16
 msgid "Depositing"
-msgstr ""
+msgstr "জমারত"
 
 #: deposit/templates/deposit/start.html:42
 msgid "Trying to fill this field automatically for you..."
@@ -485,7 +485,7 @@ msgstr "দু:খিত, অামরা আপনার জন্য এটা
 #: deposit/templates/deposit/start.html:258
 #: papers/templates/papers/department.html:30
 msgid "Dissemin encountered an error, please try again later."
-msgstr ""
+msgstr "Dissemin একটা ভুল দেখছে, অনুগ্রহ করে পরে অাবার চেষ্টা করুন।"
 
 #: deposit/templates/deposit/start.html:295
 #, python-format
@@ -696,7 +696,7 @@ msgstr "গবেষক"
 
 #: papers/forms.py:75
 msgid "publication date"
-msgstr "প্রকাশন তারিখ"
+msgstr "প্রকাশনার তারিখ"
 
 #: papers/forms.py:76
 msgid "title"

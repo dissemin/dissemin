@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2017-11-13 08:05:44+0000\n"
+"PO-Revision-Date: 2017-11-16 09:52:20+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -789,45 +789,45 @@ msgstr "Creé sò profil"
 
 #: papers/templates/papers/createProfile.html:15
 msgid "\nTo fetch your publications, we need one last piece of information: your name.\n"
-msgstr ""
+msgstr "Për arcuperé soe publicassion, i l'oma damanca ëd n'ùltima anformassion: sò nòm."
 
 #: papers/templates/papers/department.html:60
 #: papers/templates/papers/institution.html:37
 #: publishers/templates/publishers/list.html:116
 #: publishers/templates/publishers/policy.html:127
-#, invalid-plural, python-format
+#, python-format
 msgid "(%(num_total)s paper)"
 msgid_plural "(%(num_total)s papers)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "(%(num_total)s artìcol)"
+msgstr[1] "(%(num_total)s artìcoj)"
 
 #: papers/templates/papers/department.html:71
 #: papers/templates/papers/institution.html:48
 msgid "Researcher deleted. "
-msgstr ""
+msgstr "Arsercador eliminà. "
 
 #: papers/templates/papers/department.html:75
 #: papers/templates/papers/institution.html:52
 msgid "Delete"
-msgstr ""
+msgstr "Eliminé"
 
 #: papers/templates/papers/department.html:88
 msgid "Papers of the members"
-msgstr ""
+msgstr "Artìcoj dij mèmber"
 
 #: papers/templates/papers/group.html:14
 msgid "Website"
-msgstr ""
+msgstr "Sit an sl'aragnà"
 
 #: papers/templates/papers/group.html:18
 msgid "Members:"
-msgstr ""
+msgstr "Mèmber:"
 
 #: papers/templates/papers/index.html:10
 #: papers/templates/papers/institutions.html:11
 #: templates/dissemin/breadcrumbs.html:3 templates/dissemin/skeleton.html:71
 msgid "Home"
-msgstr ""
+msgstr "Pàgina d'intrada"
 
 #: papers/templates/papers/index.html:23
 msgid "Welcome to dissemin"

@@ -11,7 +11,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-30 10:57+0100\n"
-"PO-Revision-Date: 2017-11-09 07:07:54+0000\n"
+"PO-Revision-Date: 2017-11-16 09:52:21+0000\n"
 "Language: pt-BR\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1722,11 +1722,11 @@ msgstr "<strong>Pre/Postagens permitidas e texto completo disponível:</strong><
 
 #: templates/dissemin/faq.html:258
 msgid "<strong>Pre/post prints allowed but full text unavailable:</strong><br /> The full text could be made available in a repository (as above) according to the publishing policy. We encourage their authors to do so."
-msgstr ""
+msgstr "<strong>Impressão pré/pós permitida, mas texto completo indisponível:</strong><br />  O texto completo pode ser disponibilizado em um repositório (conforme descrito acima) de acordo com a política de publicação. Encorajamos os autores a fazê-lo."
 
 #: templates/dissemin/faq.html:271
 msgid "<strong>Pre/post prints forbidden:</strong><br /> The publisher forbids deposits in repositories, in general. Authors might still be allowed to deposit their works after some embargo period or if their funder has an agreement with this publisher."
-msgstr ""
+msgstr "<strong>Impressão pré/pós proibida:</strong><br /> O editor proíbe depósitos em repositórios, em geral. Os autores ainda podem ser autorizados a depositar seus trabalhos após algum período de embargo ou se seu financiador tiver concordado com este editor."
 
 #: templates/dissemin/faq.html:282
 #, python-format
@@ -1764,7 +1764,7 @@ msgstr "Todas as outras questões técnicas."
 #: templates/dissemin/faq.html:333
 #, python-format
 msgid "Please first check whether the paper is available in one of <a href=\"%(sources_url)s\">our sources</a>. If it is not, Dissemin cannot harvest it, and you should report the problem to the source where it should appear."
-msgstr ""
+msgstr "Primeiro verifique se o papel está disponível em um dos <a href=\"%(sources_url)s\">our sources</a>. Se não estiver, Dissemin não pode colhê-lo, e você deve denunciar o problema à fonte onde deve aparecer."
 
 #: templates/dissemin/faq.html:341
 msgid "Now, if your paper does appear in one of the sources but not on Dissemin, please check that your name is not spelt incorrectly on the source, and that the spelling matches your ORCID record. If there is a misspelling, again, you should report the problem to the source that contains the mistake."
@@ -1772,7 +1772,7 @@ msgstr "Agora, se o seu papel aparecer em uma das fontes, mas não em Dissemin, 
 
 #: templates/dissemin/faq.html:350
 msgid "If the name matches but the paper is not in Dissemin, then maybe one of your co-authors asked us to delete it? Or it may be a bug. In this case, please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> describing the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
-msgstr ""
+msgstr "Se o nome corresponder, mas o papel não está em Dissemin, talvez um dos seus co-autores nos pedisse que o eliminássemos? Ou pode ser um bug. Neste caso, envie um <a href=\"https://github.com/dissemin/dissemin/issues\">problema</a> descrevendo o problema ou envie uma mensagem para <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
 
 #: templates/dissemin/faq.html:360
 msgid "Note that, in the longer term, we hope to design a way for our users to edit their profiles on Dissemin to add missing papers and fix these problems; but we do not have such a system yet."
@@ -1780,11 +1780,11 @@ msgstr "Note-se que, a longo prazo, esperamos criar uma maneira para os nossos u
 
 #: templates/dissemin/faq.html:369
 msgid "In most cases, the errors that you see on Dissemin have not been introduced by Dissemin, but are already present in the <a href=\"{{ sources_url }}\">public sources</a> that Dissemin harvests. Hence, please first check if the error that you have seen is already present in our data sources, by looking at the \"Links\" section in the top right of the page. If one of these pages contain the error, you should report the problem to them and not to us, otherwise the mistake will persist in the source."
-msgstr ""
+msgstr "Na maioria dos casos, os erros que você vê na Dissemin não foram introduzidos pela Dissemin, mas já estão presentes na <a href=\"{{ sources_url }}\">fontes públicas</a> que Dissemin colhe. Portanto, primeiro verifique se o erro que você viu já está presente em nossas fontes de dados, observando o \"Links\" na parte superior direita da página. Se uma dessas páginas contiver o erro, você deve denunciar o problema para eles e não para nós, caso contrário o erro persistirá na fonte."
 
 #: templates/dissemin/faq.html:381
 msgid "If the error is not present in any of the sources and you believe that Dissemin may have introduced the problem, please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> with details of the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. Note that you cannot yet fix the problem yourself, although we hope in the longer term to develop a system to allow our users to edit details of their papers themselves."
-msgstr ""
+msgstr "Se o erro não estiver presente em nenhuma das fontes e você acredita que Dissemin pode ter apresentado o problema, por favor, envie um <a href=\"https://github.com/dissemin/dissemin/issues\">problema</a> com detalhes do problema ou envie uma mensagem para <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. Observe que você ainda não pode corrigir o problema sozinho, embora esperemos, a longo prazo, desenvolver um sistema que permita aos nossos usuários editar detalhes de seus próprios artigos."
 
 #: templates/dissemin/faq.html:395
 msgid "First, note that Dissemin does not account for copies of articles that are only available on a personal homepage or a similar website. This is deliberate, because we believe that <a href=\"#repositories-rock\">articles should be hosted in repositories</a>."
@@ -1792,11 +1792,11 @@ msgstr "Primeiro, note que a Dissemin não conta as cópias de artigos que estã
 
 #: templates/dissemin/faq.html:403
 msgid "Second, at the moment, Dissemin only supports repositories with a crawlable API that follows the <a href=\"https://www.openarchives.org/OAI/openarchivesprotocol.html\">OAI-PMH protocol</a>, and is <a href=\"https://www.base-search.net/about/en/suggest.php\">registered</a> in <a href=\"https://www.base-search.net/\">BASE</a>. We have a <a href=\"https://github.com/dissemin/croawl\">long-term project</a> to support more repositories by crawling them, but for the moment, we do not have the resources to support repositories not covered by BASE. Hence, if you are a user of a repository and would like it to be supported by Dissemin, please contact the repository administrator and suggest them to implement OAI-PMH support and to <a href=\"https://www.base-search.net/about/en/suggest.php\">register</a> their repository in BASE."
-msgstr ""
+msgstr "Em segundo lugar, no momento, a Dissemin só suporta repositórios com uma API rastreável que segue o <a href=\"https://www.openarchives.org/OAI/openarchivesprotocol.html\">OAI-PMH protocol</a>, e <a href=\"https://www.base-search.net/about/en/suggest.php\">registered</a> no <a href=\"https://www.base-search.net/\">BASE</a>.Nós temos um <a href=\"https://github.com/dissemin/croawl\">projeto de longo prazo</a> para suportar mais repositórios rastreando-os, mas, por enquanto, não temos recursos para suportar depósitos não cobertos pelo BASE. Assim, se você é um usuário de um repositório e gostaria que ele fosse suportado pela Dissemin, entre em contato com o administrador do repositório e sugeri-los para implementar o suporte OAI-PMH e para <a href=\"https://www.base-search.net/about/en/suggest.php\">registo</a> seu repositório em BASE."
 
 #: templates/dissemin/faq.html:422
 msgid "If the repository is registered in BASE, please <a href=\"https://www.base-search.net/\">search in BASE</a> to check that your article is there. If it is, then this may be a bug of Dissemin; please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> describing the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
-msgstr ""
+msgstr "Se o repositório estiver registrado na BASE, por favor <a href=\"https://www.base-search.net/\">search na BASE</a> para verificar se o seu artigo está lá. Se for, então isso pode ser um erro de Dissemin; por favor, arquive um <a href=\"https://github.com/dissemin/dissemin/issues\">problema</a> descrevendo o problema ou envie uma mensagem para <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
 
 #: templates/dissemin/faq.html:437
 msgid "Authenticating users is necessary to deposit papers on their behalf in open repositories. Besides, knowing a user's ORCID id helps us find its publications, avoiding articles authored by namesakes for instance. Logging in via ORCID will not expose any private information to Dissemin: we only have access to the public part of your ORCID record. For instance, unless you have explicitly marked your email address as public, we do not even know your email address when you log in to Dissemin via ORCID."
@@ -1812,7 +1812,7 @@ msgstr "O ORCID suporta vários métodos para reivindicar publicações. Nosso p
 
 #: templates/dissemin/faq.html:468
 msgid "Go to <a href=\"https://search.crossref.org/\">CrossRef Metadata Search</a>;"
-msgstr ""
+msgstr "Vamos para <a href=\"https://search.crossref.org/\">CrossRef Metadata Search</a>;"
 
 #: templates/dissemin/faq.html:473
 msgid "Click \"Log in\" in the top right corner and go through the ORCID login process;"
@@ -1828,11 +1828,11 @@ msgstr "Adicione publicações que são suas para o seu registro ORCID, clicando
 
 #: templates/dissemin/faq.html:489
 msgid "You can also add publications to your profile <em>on Dissemin</em>, by clicking the button \"Include in my profile\" in search results on Dissemin. (This button is only visible when you are logged in, and next to papers that Dissemin thinks you have authored.) You can also exclude articles from your profile in this way. Please note that these changes are local to Dissemin and are <em>not</em> propagated to your ORCID profile, because ORCID does not have a free API allowing us to propagate them."
-msgstr ""
+msgstr "Você também pode adicionar publicações ao seu perfil <em>no Dissemin</em>, clicando no botão \"Incluir no meu perfil\" nos resultados da pesquisa em Dissemin. (Este botão só é visível quando você está logado e ao lado de documentos que a Dissemin acha que você é autoria). Você também pode excluir artigos do seu perfil desta maneira. Observe que essas mudanças são locais para Dissemin e são <em>não</em> propagado para o seu perfil ORCID, porque o ORCID não possui uma API gratuita que nos permita propagá-los."
 
 #: templates/dissemin/faq.html:504
 msgid "If you change some details in your ORCID profile (name, homepage, etc.), the changes will not automatically be picked up in your profile on Dissemin. To update your profile on Dissemin accordingly, once you have logged in to Dissemin, you can go to your <a href=\"/my-profile\">profile page</a> and click \"Refresh publications\"."
-msgstr ""
+msgstr "Se você alterar alguns detalhes em seu perfil ORCID (nome, página inicial, etc.), as mudanças não serão automaticamente retiradas no seu perfil no Dissemin. Para atualizar seu perfil na Dissemin de acordo, uma vez que você tenha efetuado o login para Dissemin, você pode ir para o seu <a href=\"/my-profile\">página de perfil</a> e clique em \"Atualizar publicações\"."
 
 #: templates/dissemin/faq.html:518
 #, python-format

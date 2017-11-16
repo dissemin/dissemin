@@ -4,6 +4,7 @@
 # Author: Fitoschido
 # Author: KATRINE1992
 # Author: Macofe
+# Author: Pato
 # --
 # This file is part of the Dissemin Project
 # This file is distributed under the same license as the Dissemin package.
@@ -13,7 +14,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-30 10:57+0100\n"
-"PO-Revision-Date: 2017-11-13 08:05:42+0000\n"
+"PO-Revision-Date: 2017-11-16 09:52:18+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -51,7 +52,7 @@ msgstr "Ámbito científico"
 
 #: deposit/hal/forms.py:48
 msgid "Depositing author"
-msgstr ""
+msgstr "Autor depositante"
 
 #: deposit/hal/forms.py:55
 msgid "Affiliation"
@@ -75,7 +76,7 @@ msgstr "Física"
 
 #: deposit/hal/metadata.py:40
 msgid "Non-linear science"
-msgstr ""
+msgstr "Ciencia no lineal"
 
 #: deposit/hal/metadata.py:41
 msgid "Cognitive science"
@@ -155,7 +156,7 @@ msgstr "Historia"
 
 #: deposit/hal/metadata.py:60
 msgid "Library and information sciences"
-msgstr ""
+msgstr "Biblioteca y ciencias de la información"
 
 #: deposit/hal/metadata.py:61
 msgid "Linguistics"
@@ -203,7 +204,7 @@ msgstr "Biociencias"
 
 #: deposit/hal/metadata.py:72
 msgid "Engineering sciences"
-msgstr ""
+msgstr "Ciencias de la ingeniería"
 
 #: deposit/hal/metadata.py:73
 msgid "Statistics"
@@ -211,7 +212,7 @@ msgstr "Estadística"
 
 #: deposit/hal/metadata.py:74
 msgid "Economy and quantitative finance"
-msgstr ""
+msgstr "Economía y matemática financiera"
 
 #: deposit/hal/models.py:14
 msgid "HAL username"
@@ -500,7 +501,7 @@ msgstr ""
 
 #: deposit/templates/deposit/start.html:316
 msgid "This paper cannot be deposited in any repository supported by Dissemin."
-msgstr ""
+msgstr "Este artículo no se puede depositar en ningún repositorio compatible con Dissemin."
 
 #: deposit/templates/deposit/start.html:324
 msgid "Document"
@@ -537,7 +538,7 @@ msgstr "espera un momento…"
 
 #: deposit/views.py:65
 msgid "This repository is not available for this paper."
-msgstr ""
+msgstr "Este repositorio no está disponible para este artículo."
 
 #: deposit/views.py:138
 msgid "This repository could not be found."
@@ -601,7 +602,7 @@ msgstr "No se puede transferir el documento a Zenodo."
 
 #: deposit/zenodo/protocol.py:111
 msgid "No abstract is available for this paper but Zenodo requires one. Please provide it using the metadata panel."
-msgstr "Ningun abstracto es disponible para este documento, pero Zenodo necesita un. Por favor suministrarlo utilizando el tablero de metadata."
+msgstr "No hay ningún resumen disponible para este artículo, pero Zenodo necesita uno. Proporciónalo mediante el panel de metadatos."
 
 #: deposit/zenodo/protocol.py:119
 msgid "Unable to submit paper metadata to Zenodo."
@@ -653,7 +654,7 @@ msgstr "Número de revista"
 
 #: papers/baremodels.py:59
 msgid "Proceedings"
-msgstr ""
+msgstr "Actas"
 
 #: papers/baremodels.py:60
 msgid "Entry"
@@ -661,7 +662,7 @@ msgstr "Entrada"
 
 #: papers/baremodels.py:61
 msgid "Poster"
-msgstr ""
+msgstr "Póster"
 
 #: papers/baremodels.py:62
 msgid "Report"
@@ -669,7 +670,7 @@ msgstr "Informe"
 
 #: papers/baremodels.py:63
 msgid "Thesis"
-msgstr ""
+msgstr "Tesis"
 
 #: papers/baremodels.py:64
 msgid "Dataset"
@@ -746,7 +747,7 @@ msgstr ""
 
 #: papers/models.py:109
 msgid "Fetching publications from CrossRef"
-msgstr "Llevado a publicaciones de CrossRef"
+msgstr "Obteniendo publicaciones de CrossRef"
 
 #: papers/models.py:110
 msgid "Fetching publications from BASE"
@@ -766,7 +767,7 @@ msgstr ""
 
 #: papers/models.py:114
 msgid "Updating statistics"
-msgstr ""
+msgstr "Actualizando las estadísticas"
 
 #: papers/models.py:1255 papers/views.py:124 papers/views.py:129
 #: papers/views.py:269 papers/views.py:303
@@ -858,15 +859,15 @@ msgstr ""
 
 #: papers/templates/papers/index.html:50
 msgid "Many researchers do not use their right to make their papers freely available online, in addition to the paywalled version offered by traditional publishers."
-msgstr ""
+msgstr "Muchos investigadores no utilizan su derecho de disponibilizar sus artículos libremente en línea, como complemento a la versión de pago ofrecida por las editoriales tradicionales."
 
 #: papers/templates/papers/index.html:58
 msgid "This forces libraries to buy overpriced electronic subscriptions to journals, when they can afford them at all."
-msgstr "Esto va forzar bibliotecas de comprar suscripciones electronicas en periodicos, si ellos pueden pagarlas."
+msgstr "Ello fuerza a las bibliotecas a comprar suscripciones sobrevaluadas a revistas, si acaso pueden permitírselas."
 
 #: papers/templates/papers/index.html:74
 msgid "Open repositories"
-msgstr ""
+msgstr "Repositorios abiertos"
 
 #: papers/templates/papers/index.html:77
 msgid "Uploading your papers on your own webpage is not enough. Such copies are less stable and harder to find than documents uploaded to well-indexed repositories."
@@ -970,7 +971,7 @@ msgstr ""
 #: papers/templates/papers/paperList.html:33
 #, python-format
 msgid "Missing publications? <a href=\"%(matching_papers_url)s\"> Search for publications with a matching author name </a>"
-msgstr "No hay publicaciones? <a href=\"%(matching_papers_url)s\"> Buscar para publicaciones con el nombre del autor relativo </a>"
+msgstr "¿Faltan publicaciones? <a href=\"%(matching_papers_url)s\">Buscar publicaciones que correspondan a un nombre de autor</a>"
 
 #: papers/templates/papers/publiListItem.html:16
 #, python-format
@@ -1116,7 +1117,7 @@ msgstr "Estado de OA desconocido"
 
 #: papers/templatetags/statuses.py:27
 msgid "Unknown PDF status"
-msgstr ""
+msgstr "Estado de PDF desconocido"
 
 #: papers/templatetags/statuses.py:33
 msgid "Preprints can be archived."
@@ -1231,8 +1232,8 @@ msgstr "Todos los documentos"
 #, python-format
 msgid "%d paper found"
 msgid_plural "%d papers found"
-msgstr[0] "%d paper found"
-msgstr[1] "%d papers found"
+msgstr[0] "encontró %d artículo"
+msgstr[1] "encontraron %d artículos"
 
 #: papers/views.py:211
 msgid "\n                            Invalid ORCID profile.\n                            Please make sure it includes a public name.\n                            "
@@ -1280,6 +1281,7 @@ msgid "Freely available from the publisher."
 msgstr ""
 
 #: publishers/models.py:39
+#, fuzzy
 msgid "Allows pre/post prints"
 msgstr "Permite los prints pre/postados"
 
@@ -1567,7 +1569,7 @@ msgstr ""
 
 #: templates/dissemin/faq.html:30 templates/dissemin/faq.html:289
 msgid "Should I trust your statistics?"
-msgstr "Debo confiar sus estadisticas?"
+msgstr "¿Debo confiar en sus estadísticas?"
 
 #: templates/dissemin/faq.html:32 templates/dissemin/faq.html:330
 msgid "Omissions and errors"
@@ -1579,7 +1581,7 @@ msgstr ""
 
 #: templates/dissemin/faq.html:34 templates/dissemin/faq.html:367
 msgid "Some details of my paper are incorrect. What can I do?"
-msgstr "Unos dados de mi documento son incorrectos. Que puedo hacer?"
+msgstr "Algunos detalles de mi documento son incorrectos. ¿Qué puedo hacer?"
 
 #: templates/dissemin/faq.html:35 templates/dissemin/faq.html:393
 msgid "There is a freely available copy of my article online but dissem.in does not find it."
@@ -1595,7 +1597,7 @@ msgstr ""
 
 #: templates/dissemin/faq.html:39 templates/dissemin/faq.html:449
 msgid "What will you do to my ORCID profile if I log in?"
-msgstr "Que hara con mi perfil ORCID si yo registro en?"
+msgstr "¿Qué le sucederá a mi perfil de ORCID si accedo?"
 
 #: templates/dissemin/faq.html:40 templates/dissemin/faq.html:458
 msgid "How do I add publications to my ORCID profile?"
@@ -1603,7 +1605,7 @@ msgstr "¿Cómo añado publicaciones a mi perfil de ORCID?"
 
 #: templates/dissemin/faq.html:41 templates/dissemin/faq.html:501
 msgid "My ORCID details on Dissemin are outdated."
-msgstr "Mis detalles en Dissemin es post-actualizado."
+msgstr "Mis detalles de ORCID en Dissemin no están al día."
 
 #: templates/dissemin/faq.html:43 templates/dissemin/faq.html:514
 msgid "Behind the scenes"
@@ -1737,7 +1739,7 @@ msgstr ""
 
 #: templates/dissemin/faq.html:291
 msgid "There are a few caveats concerning our data:"
-msgstr "Hay unos caveats con respecto a los dados:"
+msgstr "Existen algunos problemas con nuestros datos:"
 
 #: templates/dissemin/faq.html:297
 msgid "Some papers are not present in any of our metadata sources, so they are not counted at all."
@@ -1761,7 +1763,7 @@ msgstr "Es posible que algunos documentos estén marcados como disponibles sin q
 
 #: templates/dissemin/faq.html:324
 msgid "All sorts of other technical issues."
-msgstr "Todos tipos de otros problemas tecnicos."
+msgstr "Cualesquier otros tipos de problemas técnicos."
 
 #: templates/dissemin/faq.html:333
 #, python-format
@@ -1859,7 +1861,7 @@ msgstr "Ayúdanos a <a href=\"https://translatewiki.net/wiki/Translating:Dissemi
 
 #: templates/dissemin/faq.html:548
 msgid "Encourage researchers to use this service."
-msgstr "Encorajear los buscadores de usar este servicio."
+msgstr "Anima a los investigadores a que utilicen este servicio."
 
 #: templates/dissemin/faq.html:553
 msgid "Star <a href=\"https://github.com/wetneb/dissemin\">our GitHub project</a>!"
@@ -2073,7 +2075,7 @@ msgstr "Error de autenticación"
 
 #: templates/socialaccount/authentication_error.html:16
 msgid "\n            Authentication has failed. <a href=\"/\">Go back to the login page.</a>\n           "
-msgstr ""
+msgstr "\n            Falló la autenticación. <a href=\"/\">Volver a la página de acceso.</a>\n           "
 
 #: upload/forms.py:29
 msgid "Invalid file format: only PDF files are accepted."
