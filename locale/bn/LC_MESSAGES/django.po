@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2017-11-16 09:52:18+0000\n"
+"PO-Revision-Date: 2017-11-20 08:05:37+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -351,15 +351,15 @@ msgstr "OSF নির্দেশক"
 
 #: deposit/osf/models.py:14
 msgid "If set, your deposits will be associated to this OSF account. This identifier is a string of letters and numbers which can be found in your OSF public profile URL."
-msgstr "যদি যুক্ত করেন, অাপনার জমা এই OSF হিসাবে সংযুক্ত হবে। এই নির্দেশক কতগুলো অক্ষর ও সংখ্যার বন্ধন যা পাওয়া যায় অাপনার OSF পাবলিক বৃত্তান্ত URL এ।"
+msgstr "যদি যুক্ত করেন, অাপনার জমা এই OSF হিসাবে সংযুক্ত হবে। এই নির্দেশক কতগুলো অক্ষর ও সংখ্যার বন্ধন যা অাপনার OSF-এর প্রকাশ্য বৃত্তান্তের URLতে পাওয়া যাবে।"
 
 #: deposit/osf/protocol.py:207
 msgid "Unable to create a project on OSF."
-msgstr "OSF এ প্রকল্প তৈরিতে ব্যর্থ।"
+msgstr "OSF-এ প্রকল্প তৈরিতে ব্যর্থ।"
 
 #: deposit/osf/protocol.py:221
 msgid "Unable to authenticate to OSF."
-msgstr "OSF এ সত্যায়ন করতে ব্যর্থ।"
+msgstr "OSF-এ সত্যায়ন করতে ব্যর্থ।"
 
 #: deposit/osf/protocol.py:238
 msgid "Unable to add contributors."
@@ -367,7 +367,7 @@ msgstr "অবদানকারী যুক্ত করতে ব্যর্
 
 #: deposit/osf/protocol.py:265
 msgid "Unable to update the contributors of the paper."
-msgstr "পেপারটিতে অবদানকারী হালনাগাদ করতে ব্যর্থ।"
+msgstr "কাগজটির অবদানকারী হালনাগাদ করতে ব্যর্থ।"
 
 #: deposit/osf/protocol.py:311
 msgid "Unable to update license."
@@ -387,11 +387,11 @@ msgstr "কোন চূড়ান্ত তথ্যভান্ডার দ
 
 #: deposit/osf/protocol.py:428
 msgid "No OSF token provided."
-msgstr "কোন OSF টোকেন দেয়া নেই।"
+msgstr "কোন OSF টোকেন প্রদান করা হয়নি।"
 
 #: deposit/osf/protocol.py:469
 msgid "Unable to upload the PDF file."
-msgstr "PDF ফাইল হালনাগাদে অক্ষম।"
+msgstr "PDF ফাইল আপলোডে অক্ষম।"
 
 #: deposit/osf/protocol.py:509
 msgid "Unable to delete the project."
@@ -411,7 +411,7 @@ msgstr ""
 
 #: deposit/sword/protocol.py:110
 msgid "Unable to submit the paper to the collection."
-msgstr "পেপারটি সংগৃহীত হিসাবে দাখিলে ব্যর্থ।"
+msgstr "সংগ্রহে কাগজ জমা দিতে ব্যর্থ।"
 
 #: deposit/sword/protocol.py:120
 msgid "Failed to connect to the SWORD server."

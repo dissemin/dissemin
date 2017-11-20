@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2017-11-16 09:52:20+0000\n"
+"PO-Revision-Date: 2017-11-20 08:05:39+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -831,11 +831,11 @@ msgstr "Pàgina d'intrada"
 
 #: papers/templates/papers/index.html:23
 msgid "Welcome to dissemin"
-msgstr ""
+msgstr "Bin-ëvnù su dissemin"
 
 #: papers/templates/papers/index.html:26
 msgid "Dissemin detects papers behind pay-walls and invites their authors to upload them in one click to an open repository."
-msgstr ""
+msgstr "Dissemin a treuva j'artìcoj a acess a pagament e a anvita ij sò autor a carieje con në sgnacament ant un depòsit duvert."
 
 #: papers/templates/papers/index.html:36
 #: papers/templates/papers/search.html:204
@@ -846,110 +846,110 @@ msgstr ""
 #: publishers/templates/publishers/list.html:50
 #: publishers/templates/publishers/list.html:89
 msgid "Search"
-msgstr ""
+msgstr "Arserca"
 
 #: papers/templates/papers/index.html:46
 msgid "Green open access"
-msgstr ""
+msgstr "Acess lìber (verd)"
 
 #: papers/templates/papers/index.html:50
 msgid "Many researchers do not use their right to make their papers freely available online, in addition to the paywalled version offered by traditional publishers."
-msgstr ""
+msgstr "Tanti arsercador a deuvro nen sò drit ëd buté ij sò artìcoj an acess lìber an sl'aragnà, an dzorpì dla version a pagament proponùa da j'editor tradissionaj."
 
 #: papers/templates/papers/index.html:58
 msgid "This forces libraries to buy overpriced electronic subscriptions to journals, when they can afford them at all."
-msgstr ""
+msgstr "Sòn a òbliga le biblioteche a paghé un përfond j'abonament eletrònich ai giornaj, sempe ch'a peulo permëts-lo."
 
 #: papers/templates/papers/index.html:74
 msgid "Open repositories"
-msgstr ""
+msgstr "Depòsit duvert"
 
 #: papers/templates/papers/index.html:77
 msgid "Uploading your papers on your own webpage is not enough. Such copies are less stable and harder to find than documents uploaded to well-indexed repositories."
-msgstr ""
+msgstr "Carié ij sò artìcoj ansima a soa pàgina dl'aragnà a basta nen. Coste còpie a son meno stàbij e pi difìcij da trové che ij document carià an s'dij depòsit bin andicisà."
 
 #: papers/templates/papers/index.html:85
 msgid "Dissemin searches for copies of your papers in a large collection of open repositories and tells you which ones cannot be accessed."
-msgstr ""
+msgstr "Dissemin a sërca dle còpie dij sò artìcoj an na gran colession ëd depòsit duvert e a-j dis coj ch'a son inacessìbij."
 
 #: papers/templates/papers/institutions.html:25
 msgid "Institutions"
-msgstr ""
+msgstr "Anstitussion"
 
 #: papers/templates/papers/itemOrcid.html:16
 #: papers/templates/papers/itemResearcher.html:16
 msgid "Yes"
-msgstr ""
+msgstr "É"
 
 #: papers/templates/papers/itemResearcher.html:13
 msgid "(empty profile)"
-msgstr ""
+msgstr "(profil veuid)"
 
 #: papers/templates/papers/paper.html:62
 #, python-format
 msgctxt "as in: _Journal article by_ Tom Smith, Nicole Allen"
 msgid " \n    <span class=\"paperDocType\">%(doctype)s</span> by\n    "
-msgstr ""
+msgstr " \n    <span class=\"paperDocType\">%(doctype)s</span> by\n    "
 
 #: papers/templates/papers/paper.html:70
 #, python-format
 msgid "\n            and <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s other authors</a>\n            "
-msgstr ""
+msgstr "\n            e <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s d'àutri autor</a>\n            "
 
 #: papers/templates/papers/paper.html:77
 #, python-format
 msgid "\n            All %(nb_authors)s authors (<a href=\"#\" id=\"show_less_authors\">show less</a>):<br />\n            "
-msgstr ""
+msgstr "\n            Tuti ij %(nb_authors)s autor (<a href=\"#\" id=\"show_less_authors\">smon-e ëd men</a>):<br />\n            "
 
 #: papers/templates/papers/paper.html:89
 msgid "<strong>Congratulations!</strong> This paper was successfully deposited."
-msgstr ""
+msgstr "<strong>Compliment!</strong> S'artìcol a l'é stàit deposità për da bin."
 
 #: papers/templates/papers/paper.html:96
 #, python-format
 msgid "<strong>Almost there!</strong> This paper has been deposited in <a href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a href=\"%(deposit_url)s\">this address</a> after validation by the repository administrators."
-msgstr ""
+msgstr "<strong>I-i soma scasi!</strong> S'artìcol a l'é stàit deposità an <a href=\"%(repo_url)s\">%(repo_name)s</a>. Ël test complet a sarà disponìbil a <a href=\"%(deposit_url)s\">cost'adrëssa</a> na vira convalidà da j'aministrator dël depòsit."
 
 #: papers/templates/papers/paper.html:114
 msgid "Full text:"
-msgstr ""
+msgstr "Test complet:"
 
 #: papers/templates/papers/paper.html:116
 #: papers/templates/papers/publiListItem.html:37
 msgid "Download"
-msgstr ""
+msgstr "Dëscarié"
 
 #: papers/templates/papers/paper.html:118 statistics/models.py:66
 msgid "Unavailable"
-msgstr ""
+msgstr "Indisponìbil"
 
 #: papers/templates/papers/paper.html:120
 msgid "Ask upload"
-msgstr ""
+msgstr "Ciamé ël cariament"
 
 #: papers/templates/papers/paper.html:124
 msgid "Publisher:"
-msgstr ""
+msgstr "Ca editris:"
 
 #: papers/templates/papers/paper.html:131
 msgid "Deposited."
-msgstr ""
+msgstr "Deposità."
 
 #: papers/templates/papers/paper.html:133
 msgid "Deposit again"
-msgstr ""
+msgstr "Deposité torna"
 
 #: papers/templates/papers/paperDetails.html:7
 msgid "Published in"
-msgstr ""
+msgstr "Publicà an"
 
 #: papers/templates/papers/paperDetails.html:19
 msgid "Links"
-msgstr ""
+msgstr "Liure"
 
 #: papers/templates/papers/paperDetails.html:24
 msgid "Tools"
-msgstr ""
+msgstr "Utiss"
 
 #: papers/templates/papers/paperDetails.html:29
 msgid "Request with the Open Access Button"
