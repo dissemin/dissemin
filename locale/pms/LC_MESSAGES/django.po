@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2017-11-20 08:05:39+0000\n"
+"PO-Revision-Date: 2017-11-23 06:32:31+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -953,88 +953,88 @@ msgstr "Utiss"
 
 #: papers/templates/papers/paperDetails.html:29
 msgid "Request with the Open Access Button"
-msgstr ""
+msgstr "Ciamé con l'Open Access Button"
 
 #: papers/templates/papers/paperDetails.html:35
 msgid "Admin zone"
-msgstr ""
+msgstr "Aministrassion"
 
 #: papers/templates/papers/paperList.html:26
 msgid "No paper found."
-msgstr ""
+msgstr "Gnun artìcol trovà."
 
 #: papers/templates/papers/paperList.html:33
 #, python-format
 msgid "Missing publications? <a href=\"%(matching_papers_url)s\"> Search for publications with a matching author name </a>"
-msgstr ""
+msgstr "A-i manco dle publicassion? <a href=\"%(matching_papers_url)s\"> Ch'a sërca dle publicassion a parte d'un nòm d'autor </a>"
 
 #: papers/templates/papers/publiListItem.html:16
 #, python-format
 msgid "and %(remaining_authors)s other authors"
-msgstr ""
+msgstr "e %(remaining_authors)s d'àutri autor"
 
 #: papers/templates/papers/publiListItem.html:40
 #: publishers/templates/publishers/itemPolicy.html:21
 msgid "Upload"
-msgstr ""
+msgstr "Carié"
 
 #: papers/templates/papers/publiListItem.html:45
 #: papers/templates/papers/search.html:52
 msgid "Exclude from my profile"
-msgstr ""
+msgstr "Gavé da mè profil"
 
 #: papers/templates/papers/publiListItem.html:52
 #: papers/templates/papers/search.html:55
 msgid "Include in my profile"
-msgstr ""
+msgstr "Buté an mè profil"
 
 #: papers/templates/papers/search.html:37
 msgid "Claiming..."
-msgstr ""
+msgstr "Anclusion an cors..."
 
 #: papers/templates/papers/search.html:40
 msgid "Unclaiming..."
-msgstr ""
+msgstr "Esclusion an cors..."
 
 #: papers/templates/papers/search.html:71
 msgid "Claiming failed!"
-msgstr ""
+msgstr "Anclusion falìa!"
 
 #: papers/templates/papers/search.html:73
 msgid "Unclaiming failed!"
-msgstr ""
+msgstr "Esclusion falìa!"
 
 #: papers/templates/papers/search.html:89
 msgid "Refreshing results"
-msgstr ""
+msgstr "Agiornament ëd j'arzultà"
 
 #: papers/templates/papers/search.html:99
 msgid "Refreshing profile"
-msgstr ""
+msgstr "Agiornament dël profil"
 
 #: papers/templates/papers/search.html:119
 msgid "Is it you?"
-msgstr ""
+msgstr "É-lo chiel?"
 
 #: papers/templates/papers/search.html:140
 msgid "Refresh publications"
-msgstr ""
+msgstr "Agiorné le publicassion"
 
 #: papers/templates/papers/search.html:143
 msgid "Address:"
-msgstr ""
+msgstr "Adrëssa:"
 
 #: papers/templates/papers/search.html:146
 msgid "Names:"
-msgstr ""
+msgstr "Nòm:"
 
 #: papers/templates/papers/search.html:165
 msgid "Journal"
-msgstr ""
+msgstr "Giornal"
 
 #: papers/templates/papers/search.html:168
 msgid "Published by"
-msgstr ""
+msgstr "Publicà da"
 
 #: papers/templates/papers/search.html:170
 msgid "ISSN:"
