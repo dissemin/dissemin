@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2017-11-23 06:32:31+0000\n"
+"PO-Revision-Date: 2017-11-27 06:55:19+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1038,129 +1038,129 @@ msgstr "Publicà da"
 
 #: papers/templates/papers/search.html:170
 msgid "ISSN:"
-msgstr ""
+msgstr "ISSN:"
 
 #: papers/templates/papers/search.html:178
-#, invalid-plural, python-format
+#, python-format
 msgid "%(nb_publi)s paper published in %(journal)s"
 msgid_plural "%(nb_publi)s papers published in %(journal)s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%(nb_publi)s artìcol publicà an %(journal)s"
+msgstr[1] "%(nb_publi)s artìcoj publicà an %(journal)s"
 
 #: papers/templates/papers/search.html:186
 #: publishers/templates/publishers/policy.html:41
 msgid "Publisher"
-msgstr ""
+msgstr "Ca editris"
 
 #: papers/templates/papers/search.html:195
-#, invalid-plural, python-format
+#, python-format
 msgid "%(nb_publi)s paper published by %(publisher)s"
 msgid_plural "%(nb_publi)s papers published by %(publisher)s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%(nb_publi)s artìcol publicà da %(publisher)s"
+msgstr[1] "%(nb_publi)s artìcoj publicà da %(publisher)s"
 
 #: papers/templates/papers/search.html:222
 msgid "Search by title"
-msgstr ""
+msgstr "Sërché për tìtol"
 
 #: papers/templates/papers/search.html:232
 msgid "By authors"
-msgstr ""
+msgstr "Për autor"
 
 #: papers/templates/papers/search.html:237
 msgid "By publication date"
-msgstr ""
+msgstr "Për dàita ëd publicassion"
 
 #: papers/templates/papers/search.html:240
 msgid "after"
-msgstr ""
+msgstr "apress"
 
 #: papers/templates/papers/search.html:247
 msgid "before"
-msgstr ""
+msgstr "prima"
 
 #: papers/templates/papers/search.html:254
 msgid "By document type"
-msgstr ""
+msgstr "Për sòrt ëd document"
 
 #: papers/templates/papers/search.html:273
 #: publishers/templates/publishers/list.html:76
 msgid "Sort by"
-msgstr ""
+msgstr "Ordiné për"
 
 #: papers/templates/papers/search.html:281
 #: publishers/templates/publishers/list.html:84
 #, python-format
 msgid "%(sort_by)s <div>%(increasing)s %(value)s</div>"
-msgstr ""
+msgstr "%(sort_by)s <div>%(increasing)s %(value)s</div>"
 
 #: papers/templates/papers/search.html:287
 msgid "By visibility"
-msgstr ""
+msgstr "Për visibilità"
 
 #: papers/templates/papers/search.html:292
 msgid "By full text availability"
-msgstr ""
+msgstr "Për disponibilità dël test complet"
 
 #: papers/templates/papers/search.html:298
 msgid "By publisher policy"
-msgstr ""
+msgstr "Për régole ëd publicassion"
 
 #: papers/templatetags/statuses.py:19 papers/templatetags/statuses.py:79
 msgid "Unknown OA status"
-msgstr ""
+msgstr "Stat AD sconossù"
 
 #: papers/templatetags/statuses.py:27
 msgid "Unknown PDF status"
-msgstr ""
+msgstr "Stat PDF sconossù"
 
 #: papers/templatetags/statuses.py:33
 msgid "Preprints can be archived."
-msgstr ""
+msgstr "Le prepublicassion a peulo esse archivià."
 
 #: papers/templatetags/statuses.py:34
 msgid "Preprints cannot be archived."
-msgstr ""
+msgstr "Le prepublicassion a peulo nen esse archivià."
 
 #: papers/templatetags/statuses.py:35
 msgid "Under the restrictions below, preprints can be archived."
-msgstr ""
+msgstr "Con le restrission sì-sota, le prepublicassion a peulo esse archivià."
 
 #: papers/templatetags/statuses.py:36
 msgid "Preprints archiving policy unclear"
-msgstr ""
+msgstr "Le régole an sl'archiviassion dle prepublicassion a son nen ciàire"
 
 #: papers/templatetags/statuses.py:37
 msgid "Preprints archiving policy unknown"
-msgstr ""
+msgstr "Le régole an sl'archiviassion dle prepublicassion a son nen conossùe"
 
 #: papers/templatetags/statuses.py:38
 msgid "Postprints can be archived."
-msgstr ""
+msgstr "Le pòst-publicassion a peulo esse archivià."
 
 #: papers/templatetags/statuses.py:39
 msgid "Postprints cannot be archived."
-msgstr ""
+msgstr "Le pòst-publicassion a peulo nen esse archivià."
 
 #: papers/templatetags/statuses.py:40
 msgid "Under the restrictions below, postprints can be archived."
-msgstr ""
+msgstr "Con le restrission sì-sota, le pòst-publicassion a peulo esse archivià."
 
 #: papers/templatetags/statuses.py:41
 msgid "Postprint archiving policy unclear."
-msgstr ""
+msgstr "Lé régola an sl'archiviassion dle pòst-publicassion a son nen ciàire."
 
 #: papers/templatetags/statuses.py:42
 msgid "Postprint archiving policy unknown."
-msgstr ""
+msgstr "Le régole an sl'archiviassion dle pòst-publicassion a son nen ciàire."
 
 #: papers/templatetags/statuses.py:43
 msgid "Final versions can be archived."
-msgstr ""
+msgstr "Le version finaj a peulo esse archivià."
 
 #: papers/templatetags/statuses.py:44
 msgid "Final versions cannot be archived."
-msgstr ""
+msgstr "Le version finaj a peulo nen esse archivià."
 
 #: papers/templatetags/statuses.py:45
 msgid "Under the restrictions below, final versions can be archived."

@@ -14,7 +14,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-30 10:57+0100\n"
-"PO-Revision-Date: 2017-11-16 09:52:18+0000\n"
+"PO-Revision-Date: 2017-11-27 06:55:17+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -156,7 +156,7 @@ msgstr "Historia"
 
 #: deposit/hal/metadata.py:60
 msgid "Library and information sciences"
-msgstr "Biblioteca y ciencias de la información"
+msgstr "Ciencias de la información y biblioteconomía"
 
 #: deposit/hal/metadata.py:61
 msgid "Linguistics"

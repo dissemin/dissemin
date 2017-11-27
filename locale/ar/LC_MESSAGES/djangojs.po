@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2017-11-09 07:07:55+0000\n"
+"PO-Revision-Date: 2017-11-27 06:55:21+0000\n"
 "X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -66,7 +66,7 @@ msgstr "لا تظهر هذه الرسالة بعد الآن"
 
 #: papers/static/papers/refresh.js:66
 msgid "No author"
-msgstr "بلا مؤلفين"
+msgstr "بلا مؤلف"
 
 #: papers/static/papers/refresh.js:68
 msgid "No title"
@@ -96,7 +96,7 @@ msgstr "تم تجاهل ورقة; لأنه ليس لها اسم"
 
 #: papers/static/papers/refresh.js:135 papers/static/papers/refresh.js:163
 msgid "Show more information"
-msgstr "وضح معلومات اكثر"
+msgstr "عرض معلومات اكثر"
 
 #: papers/static/papers/refresh.js:160
 msgid "Show less information"

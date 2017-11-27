@@ -12,7 +12,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-30 10:57+0100\n"
-"PO-Revision-Date: 2017-11-09 07:07:52+0000\n"
+"PO-Revision-Date: 2017-11-27 06:55:16+0000\n"
 "Language: ar\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -218,11 +218,11 @@ msgstr "اسم مستخدم هال"
 
 #: deposit/hal/models.py:15
 msgid "If set, deposits will be associated to this HAL account."
-msgstr "إذا تم تعيين، سيتم ربط الودائع بحساب هال هذا."
+msgstr "إذا تم التعيين، سيتم ربط الودائع بحساب هال هذا."
 
 #: deposit/hal/protocol.py:142
 msgid "No HAL user credentials provided."
-msgstr "لم يتم تقديم بيانات اعتماد المستخدم هال."
+msgstr "لم يتم تقديم بيانات اعتماد مستخدم هال."
 
 #: deposit/hal/protocol.py:208
 msgid "This document is already in HAL. HAL refused the deposit."
@@ -255,7 +255,7 @@ msgstr "كلمة السر"
 
 #: deposit/hal/protocol.py:287
 msgid "Connection to HAL failed. Please try again later."
-msgstr "فشل الاتصال بهال. الرجاء معاودة المحاولة في وقت لاحق."
+msgstr "فشل الاتصال بهال; الرجاء معاودة المحاولة في وقت لاحق."
 
 #: deposit/models.py:38
 msgid "Failed"
@@ -316,7 +316,7 @@ msgstr "الفنون والعلوم الإنسانية"
 
 #: deposit/osf/forms.py:61 deposit/osf/forms.py:84
 msgid "Business"
-msgstr "ادارة الاعمال"
+msgstr "عمل"
 
 #: deposit/osf/forms.py:65 deposit/osf/forms.py:88
 msgid "Engineering"
@@ -403,9 +403,8 @@ msgid "Unable to make the project public."
 msgstr "تعذر جعل المشروع عاما."
 
 #: deposit/protocol.py:199
-#, fuzzy
 msgid "Failed to connect to the repository. Please try again later."
-msgstr "فشل الاتصال بهال. الرجاء معاودة المحاولة في وقت لاحق."
+msgstr "فشل الاتصال بالمستودع; الرجاء معاودة المحاولة في وقت لاحق."
 
 #: deposit/sword/protocol.py:45
 msgid "No servicedocument provided."
@@ -533,7 +532,7 @@ msgstr "تجري معالجة الإيداع ..."
 
 #: deposit/templates/deposit/start.html:417
 msgid "please wait..."
-msgstr "الرجاء الانتظار"
+msgstr "الرجاء الانتظار..."
 
 #: deposit/views.py:65
 msgid "This repository is not available for this paper."
@@ -581,7 +580,7 @@ msgstr "ترخيص مفتوح آخر"
 
 #: deposit/zenodo/protocol.py:72
 msgid "No Zenodo API key provided."
-msgstr "لم يتم توفير مفتاح واجهة برمجة التطبيقات زينودو."
+msgstr "لم يتم توفير مفتاح واجهة برمجة تطبيقات زينودو."
 
 #: deposit/zenodo/protocol.py:81
 msgid "This happens when Zenodo has hiccups. Please try again in a few minutes or use a different repository in the menu above."
@@ -843,7 +842,7 @@ msgstr "مرحبا بكم في ديسيمين"
 
 #: papers/templates/papers/index.html:26
 msgid "Dissemin detects papers behind pay-walls and invites their authors to upload them in one click to an open repository."
-msgstr "ديسمين يكتشف الأوراق وراء حظر الاشتراك غير المدفوع ويدعو المؤلفين لتحميلها بنقرة واحدة إلى مستودع مفتوح."
+msgstr "ديسمين يكتشف الأوراق وراء حظر الاشتراك غير المدفوع ويدعو مؤلفيها لتحميلها بنقرة واحدة إلى مستودع مفتوح."
 
 #: papers/templates/papers/index.html:36
 #: papers/templates/papers/search.html:204
@@ -874,7 +873,7 @@ msgstr "المستودعات المفتوحة"
 
 #: papers/templates/papers/index.html:77
 msgid "Uploading your papers on your own webpage is not enough. Such copies are less stable and harder to find than documents uploaded to well-indexed repositories."
-msgstr "لا يكفي تحميل أوراقك على صفحتك على الويب، وهذه النسخ أقل استقرارا وأصعب من أن يتم العثور عليها من الوثائق التي يتم تحميلها على مستودعات مفهرسة جيدا."
+msgstr "لا يكفي تحميل أوراقك على صفحتك على الويب، وهذه النسخ أقل استقرارا وأصعب في العثور عليها من الوثائق التي يتم تحميلها على مستودعات مفهرسة جيدا."
 
 #: papers/templates/papers/index.html:85
 msgid "Dissemin searches for copies of your papers in a large collection of open repositories and tells you which ones cannot be accessed."
@@ -1441,7 +1440,7 @@ msgstr "يتم سرد المجلات ذات الأوراق التي كتبها �
 
 #: publishers/templates/publishers/policy.html:134
 msgid "None."
-msgstr "لا احد\nلا يوجد\nبدون"
+msgstr "لا شيء."
 
 #: statistics/models.py:48
 msgid "Available from the publisher"
@@ -1599,11 +1598,11 @@ msgstr "إحدى أوراقي مفقودة، لماذا؟"
 
 #: templates/dissemin/faq.html:34 templates/dissemin/faq.html:367
 msgid "Some details of my paper are incorrect. What can I do?"
-msgstr "بعض التفاصيل من ورقتي غير صحيحة، ماذا أفعل؟"
+msgstr "بعض تفاصيل ورقتي غير صحيحة، ماذا أفعل؟"
 
 #: templates/dissemin/faq.html:35 templates/dissemin/faq.html:393
 msgid "There is a freely available copy of my article online but dissem.in does not find it."
-msgstr "هناك نسخة متاحة مجانا من مقالتي على الإنترنت ولكن publish.in لا يجد ذلك."
+msgstr "هناك نسخة متاحة مجانا من مقالتي على الإنترنت ولكن publish.in لا يجدها."
 
 #: templates/dissemin/faq.html:37 templates/dissemin/faq.html:433
 msgid "Authentication with ORCID"
@@ -1623,7 +1622,7 @@ msgstr "كيف يمكنني إضافة منشورات إلى ملف تعريف O
 
 #: templates/dissemin/faq.html:41 templates/dissemin/faq.html:501
 msgid "My ORCID details on Dissemin are outdated."
-msgstr "تفاصيل أورسيد على ديسمين قديمة."
+msgstr "تفاصيل أورسيد الخاصة بي على ديسمين قديمة."
 
 #: templates/dissemin/faq.html:43 templates/dissemin/faq.html:514
 msgid "Behind the scenes"
@@ -1715,7 +1714,7 @@ msgstr "يتطلب دعم المزيد من المستودعات منا كتاب
 
 #: templates/dissemin/faq.html:174
 msgid "<strong><a href=\"https://arxiv.org/\">arXiv</a></strong>, a well-known general-purpose repository. For now, arXiv has declined to allow Dissemin to deposit using their SWORD API, and wants users to deposit in arXiv manually. If you would like to deposit in arXiv with Dissemin, you can let them know that you are interested (email: help AT arxiv.org, and start your message with \"Dear arXiv,\")."
-msgstr "<ul> <li><strong><a href=\"https://arxiv.org/\">أرخايف</a></strong>هو مستودع معروف للأغراض العامة، في الوقت الراهن، لقد رفض أرخايف السماح لديسمين بالإيداع باستخدام أبي سورد، ويريد من المستخدمين الإيداع في أرخايف يدويا، إذا كنت ترغب في الإيداع في أرخايف باستخدام ديسيمين، يمكنك أن تجعلهم يعرفون أنك مهتم (أرسل رسالة إلكترونية إلى: help AT arxiv.org وابدأ رسالتك ب\"عزيزي أرخايف، \").</li> </ul>"
+msgstr "<ul> <li><strong><a href=\"https://arxiv.org/\">أرخايف</a></strong>هو مستودع معروف للأغراض العامة، في الوقت الراهن، لقد رفض أرخايف السماح لديسمين بالإيداع باستخدام SWORD API، ويريد من المستخدمين الإيداع في أرخايف يدويا، إذا كنت ترغب في الإيداع في أرخايف باستخدام ديسيمين، يمكنك أن تجعلهم يعرفون أنك مهتم (أرسل رسالة إلكترونية إلى: help AT arxiv.org وابدأ رسالتك ب\"عزيزي أرخايف، \").</li> </ul>"
 
 #: templates/dissemin/faq.html:192
 #, python-format
@@ -1732,7 +1731,7 @@ msgstr "يتم جلب ديسيمين لك من قبل <a href=\"https://associat
 
 #: templates/dissemin/faq.html:218
 msgid "Yes, you can do it, by first <a href=\"https://orcid.org/register\">registering on ORCID</a> if you do not have an ORCID identifier yet. This only takes a few seconds, and you can then use your ORCID identifier to log into Dissemin."
-msgstr "نعم، يمكنك القيام بذلك، من خلال <a href=\"https://orcid.org/register\">التسجيل في أورسيد> أولا </a> إذا لم يكن لديك معرف أورسيد حتى الآن، هذا لن يستغرق سوى بضع ثوانٍ، ويمكنك بعد ذلك استخدام معرف أورسيد الخاص بك لتسجيل الدخول إلى ديسيمين."
+msgstr "نعم، يمكنك القيام بذلك، من خلال <a href=\"https://orcid.org/register\">التسجيل في أورسيد> أولا</a> إذا لم يكن لديك معرف أورسيد حتى الآن، هذا لن يستغرق سوى بضع ثوانٍ، ويمكنك بعد ذلك استخدام معرف أورسيد الخاص بك لتسجيل الدخول إلى ديسيمين."
 
 #: templates/dissemin/faq.html:233
 msgid "<strong>Open access:</strong><br /> The full text is made freely available by the publisher (in a fully open access or hybrid journal)."
@@ -1753,7 +1752,7 @@ msgstr "<strong>المطبوعات قبل النشر/بعد النشر محظو�
 #: templates/dissemin/faq.html:282
 #, python-format
 msgid "When we have found it in one of the repositories we harvest. The list of these repositories can be found <a href=\"%(sources_url)s\">here</a>. Thanks to the <a href=\"https://www.base-search.net\">BASE</a> search engine, we cover more than 80 millions of preprints."
-msgstr "عندما نجدها في أحد المستودعات التي نحصدها، يمكن العثور على قائمة هذه المستودعات <a href=\"%(sources_url)s\">هنا</a>، بفضل <a href=\"https://www.base-search.net\">محرك بحث</a>، نغطي أكثر من 80 مليون نسخة مسبقة."
+msgstr "عندما نجدها في أحد المستودعات التي نحصدها، يمكن العثور على قائمة هذه المستودعات <a href=\"%(sources_url)s\">هنا</a>، بفضل محرك البحث< <a href=\"https://www.base-search.net\">BASE/a>، نغطي أكثر من 80 مليون نسخة مسبقة."
 
 #: templates/dissemin/faq.html:291
 msgid "There are a few caveats concerning our data:"
@@ -1769,7 +1768,7 @@ msgstr "بعض الإدخالات في نظامنا لا تتوافق مع ال�
 
 #: templates/dissemin/faq.html:307
 msgid "Because there are many researchers with the same name, some papers may be misattributed to a homonym."
-msgstr "لأن هناك العديد من الباحثين الذين يحملون نفس الاسم، بعض الأوراق يمكن إرجاعها لمجانسة."
+msgstr "لأن هناك العديد من الباحثين الذين يحملون نفس الاسم؛ بعض الأوراق يمكن إرجاعها لمجانسة."
 
 #: templates/dissemin/faq.html:313
 msgid "Some repositories might not be covered by any of our sources, so a paper might be marked as unavailable while it is available."
@@ -1777,7 +1776,7 @@ msgstr "قد لا تتم تغطية بعض المستودعات من قبل أي
 
 #: templates/dissemin/faq.html:318
 msgid "Some papers might be marked as available but actually are not, for instance because they have been deleted."
-msgstr "يمكن وضع علامة على بعض الأوراق على أنها متاحة ولكنها في الواقع ليست كذلك; على سبيل المثال لأنها قد حذفت."
+msgstr "يمكن وضع علامة على بعض الأوراق على أنها متاحة ولكنها في الواقع ليست كذلك; على سبيل المثال لأنها قد حُذفت."
 
 #: templates/dissemin/faq.html:324
 msgid "All sorts of other technical issues."
@@ -1794,7 +1793,7 @@ msgstr "الآن، إذا ظهرت ورقة في أحد المصادر ولكن 
 
 #: templates/dissemin/faq.html:350
 msgid "If the name matches but the paper is not in Dissemin, then maybe one of your co-authors asked us to delete it? Or it may be a bug. In this case, please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> describing the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
-msgstr "إذا كان الاسم يطابق ولكن الورقة ليست في ديسمين، إذًا ربما واحد من المؤلفين المشاركين طلب منا حذفه؟ أو قد تكون هناك علة، في هذه الحالة، يُرجَى تقديم <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> تصف المشكلة أو إرسال رسالة إلكترونية إلى <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
+msgstr "إذا كان الاسم يطابق ولكن الورقة ليست في ديسمين، إذًا ربما واحد من المؤلفين المشاركين طلب منا حذفها؟ أو قد تكون هناك علة، في هذه الحالة، يُرجَى تقديم <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> تصف المشكلة أو إرسال رسالة إلكترونية إلى <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
 
 #: templates/dissemin/faq.html:360
 msgid "Note that, in the longer term, we hope to design a way for our users to edit their profiles on Dissemin to add missing papers and fix these problems; but we do not have such a system yet."
@@ -1810,7 +1809,7 @@ msgstr "إذا كان الخطأ غير موجود في أي من المصادر
 
 #: templates/dissemin/faq.html:395
 msgid "First, note that Dissemin does not account for copies of articles that are only available on a personal homepage or a similar website. This is deliberate, because we believe that <a href=\"#repositories-rock\">articles should be hosted in repositories</a>."
-msgstr "أولا، لاحظ أن ديسمين لا يمثل نسخا من المقالات التي لا تتوفر إلا على الصفحة الرئيسية الشخصية أو موقع ويب مماثل، هذا متعمد; لأننا نعتقد أن <a href=\"#repositories-rock\">ينبغي استضافة المقالات في مستودعات</a>."
+msgstr "أولا، لاحظ أن ديسمين لا يمثل نسخا من المقالات التي لا تتوفر إلا على الصفحة الرئيسية الشخصية أو موقع ويب مماثل، هذا متعمد; لأننا نعتقد أنه <a href=\"#repositories-rock\">تنبغي استضافة المقالات في مستودعات</a>."
 
 #: templates/dissemin/faq.html:403
 msgid "Second, at the moment, Dissemin only supports repositories with a crawlable API that follows the <a href=\"https://www.openarchives.org/OAI/openarchivesprotocol.html\">OAI-PMH protocol</a>, and is <a href=\"https://www.base-search.net/about/en/suggest.php\">registered</a> in <a href=\"https://www.base-search.net/\">BASE</a>. We have a <a href=\"https://github.com/dissemin/croawl\">long-term project</a> to support more repositories by crawling them, but for the moment, we do not have the resources to support repositories not covered by BASE. Hence, if you are a user of a repository and would like it to be supported by Dissemin, please contact the repository administrator and suggest them to implement OAI-PMH support and to <a href=\"https://www.base-search.net/about/en/suggest.php\">register</a> their repository in BASE."
@@ -1818,7 +1817,7 @@ msgstr "ثانيا، في الوقت الحالي، يدعم ديسيمين فق
 
 #: templates/dissemin/faq.html:422
 msgid "If the repository is registered in BASE, please <a href=\"https://www.base-search.net/\">search in BASE</a> to check that your article is there. If it is, then this may be a bug of Dissemin; please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> describing the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
-msgstr "إذا كنت مستخدما للمستودع وترغب في أن يكون مدعوما من قبل ديسيمين، فيُرجَى الاتصال بمسؤول المستودع واقتراح تنفيذ دعم OAI-PMH و<a href=\"https://www.base-search.net/about/en/suggest.php\">لتسجيل</a> مستودع التخزين في بيس، إذا كان المستودع مسجلا في بيس ولكن لم يتم دعمه بشكل صحيح من قبل ديسمين، يُرجَى إرسال بريد إلكتروني إلى <a href=\"mailto:contact@dissem.in\">contact@dissem.in</a> وسنقوم بالتحقيق في هذه المشكلة."
+msgstr "إذا كان المستودع مسجلا في بيس، فيُرجَى <a href=\"https://www.base-search.net/\">البحث في بيس</a> للتأكد من وجود مقالتك، إذا كانت هي، إذًا قد تكون هذه علة من ديسمين; فُيرجَى تقديم <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> تصف المشكلة أو إرسال رسالة إلى <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
 
 #: templates/dissemin/faq.html:437
 msgid "Authenticating users is necessary to deposit papers on their behalf in open repositories. Besides, knowing a user's ORCID id helps us find its publications, avoiding articles authored by namesakes for instance. Logging in via ORCID will not expose any private information to Dissemin: we only have access to the public part of your ORCID record. For instance, unless you have explicitly marked your email address as public, we do not even know your email address when you log in to Dissemin via ORCID."
@@ -1854,7 +1853,7 @@ msgstr "يمكنك أيضا إضافة منشورات إلى ملفك الشخص
 
 #: templates/dissemin/faq.html:504
 msgid "If you change some details in your ORCID profile (name, homepage, etc.), the changes will not automatically be picked up in your profile on Dissemin. To update your profile on Dissemin accordingly, once you have logged in to Dissemin, you can go to your <a href=\"/my-profile\">profile page</a> and click \"Refresh publications\"."
-msgstr "إذا قمت بتغيير بعض التفاصيل في ملف تعريف أورسيد (الاسم، أو الصفحة الرئيسية، وما إلى ذلك)، لن يتم التقاط التغييرات تلقائيا في ملفك الشخصي على ديسيمين، لتحديث ملفك الشخصي على ديسيمين وفقا لذلك، بمجرد تسجيل الدخول إلى ديسيمين، يمكنك الانتقال إلى <a href=\"/my-profile\">صفحة الملف الشخصي</a> والنقر على \"تحديث المنشورات\"."
+msgstr "إذا قمت بتغيير بعض التفاصيل في ملف تعريف أورسيد (الاسم، أو الصفحة الرئيسية، وما إلى ذلك)، لن يتم التقاط التغييرات تلقائيا في ملفك الشخصي على ديسيمين، لتحديث ملفك الشخصي على ديسيمين وفقا لذلك، بمجرد تسجيل الدخول إلى ديسيمين؛ يمكنك الانتقال إلى <a href=\"/my-profile\">صفحة الملف الشخصي</a> والنقر على \"تحديث المنشورات\"."
 
 #: templates/dissemin/faq.html:518
 #, python-format
@@ -1895,7 +1894,7 @@ msgstr "شفرة المصدر متاحة <a href=\"https://github.com/wetneb/dis
 
 #: templates/dissemin/faq.html:571
 msgid "Yes! We even have <a href=\"https://dev.dissem.in/api.html\">an API</a>. If it does not suit your needs, please don't hesitate to get in touch by writing to <a href=\"mailto:hello@dissem.in\">hello@dissem.in</a>"
-msgstr "نعم! لدينا حتى <a href=\"https://dev.dissem.in/api.html\">واجهة برمجة تطبيقات</a>. إذا كانت لا تناسب احتياجاتك، فيٌرجَى عدم التردد في الاتصال بنا عن طريق الكتابة إلى <a href=\"mailto:hello@dissem.in\">hello@dissem.in</a>."
+msgstr "نعم! لدينا حتى <a href=\"https://dev.dissem.in/api.html\">واجهة برمجة تطبيقات</a>، إذا كانت لا تناسب احتياجاتك، فيٌرجَى عدم التردد في الاتصال بنا عن طريق الكتابة إلى <a href=\"mailto:hello@dissem.in\">hello@dissem.in</a>."
 
 #: templates/dissemin/faq.html:578
 msgid "Can I use the Dissemin logo to refer to the project?"
@@ -2068,7 +2067,7 @@ msgstr "يُرجَى توجيه أي استفسار إلى support@dissem.in."
 
 #: templates/dissemin/tos.html:86
 msgid "Dissemin uses ORCID's public OAuth interface to authenticate its users. This interface only transmits information marked as public in the user's ORCID profile. This means that ORCID passwords are never transmitted and email addresses are not transmitted when they are marked as private, which is the default setting. When logging in to Dissemin from ORCID, Dissemin acquires the user's ORCID id, as well as all public information attached to the ORCID record. Dissemin can store any information input by its users on the platform. Users can ask for a copy of the personal information Dissemin stores about them by writing an email to support@dissem.in."
-msgstr "يستخدم ديسيمين واجهة أووث العامة لأورسيد لمصادقة مستخدميها، تقوم هذه الواجهة بنقل المعلومات التي تم وضع علامة عليها كعامة فقط في ملف تعريف أورسيد للمستخدم: وهذا يعني أن كلمات مرور أورسيد لا تنتقل أبدا ولا يتم إرسال عناوين البريد الإلكتروني عندما يتم وضع علامة عليها كخاصة، وهو الإعداد الافتراضي. عند تسجيل الدخول إلى ديسيمين من أورسيد، يكتسب ديسمين معرف أورسيد للمستخدم، وكذلك جميع المعلومات العامة التي ترتبط بسجل أورسيد. يمكن لديسيمين تخزين أي معلومات مدخلة من قبل مستخدميها على المنصة. يمكن للمستخدمين طلب نسخة من المعلومات الشخصية في مخازن ديسيمين عنهم عن طريق إرسال بريد إلكتروني إلى support@dissem.in."
+msgstr "يستخدم ديسيمين واجهة أووث العامة لأورسيد لمصادقة مستخدميه، تقوم هذه الواجهة بنقل المعلومات التي تم وضع علامة عليها كعامة فقط في ملف تعريف أورسيد للمستخدم: وهذا يعني أن كلمات مرور أورسيد لا تنتقل أبدا ولا يتم إرسال عناوين البريد الإلكتروني عندما يتم وضع علامة عليها كخاصة، وهو الإعداد الافتراضي. عند تسجيل الدخول إلى ديسيمين من أورسيد، يكتسب ديسمين معرف أورسيد للمستخدم، وكذلك جميع المعلومات العامة التي ترتبط بسجل أورسيد. يمكن لديسيمين تخزين أي معلومات مدخلة من قبل مستخدميها على المنصة. يمكن للمستخدمين طلب نسخة من المعلومات الشخصية في مخازن ديسيمين عنهم عن طريق إرسال بريد إلكتروني إلى support@dissem.in."
 
 #: templates/dissemin/tos.html:104
 msgid "Documents deposited in repositories via Dissemin can be stored on the platform, but are not available for download on the platform. They can be stored internally for logging purposes, and to make sure failed deposits can be fixed later. Dissemin does not commit to store any of the files it receives from its users. Users can write to support@dissem.in if they want one of their uploads to be deleted from our internal storage space, or from the repository they have deposited to. Note that deletion policies vary accross repositories: we provide no guarantee that deposits can be deleted from the target repositories."
