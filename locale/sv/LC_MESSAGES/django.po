@@ -12,7 +12,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-30 10:57+0100\n"
-"PO-Revision-Date: 2017-11-09 07:07:54+0000\n"
+"PO-Revision-Date: 2017-11-30 07:32:02+0000\n"
 "Language: sv\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1887,16 +1887,16 @@ msgstr ""
 
 #: templates/dissemin/faq.html:585 templates/dissemin/tos.html:150
 msgid "Back to top"
-msgstr ""
+msgstr "Tillbaka till början"
 
 #: templates/dissemin/login.html:8 templates/dissemin/login.html:70
 #: templates/dissemin/sandbox.html:8 templates/dissemin/sandbox.html:72
 msgid "Sign In"
-msgstr ""
+msgstr "Logga in"
 
 #: templates/dissemin/login.html:12
 msgid "Sign in"
-msgstr ""
+msgstr "Logga in"
 
 #: templates/dissemin/login.html:19 templates/dissemin/sandbox.html:19
 msgid "Dissemin uses ORCID to authenticate its users. ORCID is an independent non-profit effort to provide an open registry of unique researcher identifiers. It also offers open services to link research activities and organizations to these identifiers. Learn more at <a href=\"https://orcid.org\">orcid.org</a>."
@@ -1905,7 +1905,7 @@ msgstr ""
 #: templates/dissemin/login.html:28 templates/dissemin/login.html:36
 #: templates/dissemin/sandbox.html:30
 msgid "Log in"
-msgstr ""
+msgstr "Logga in"
 
 #: templates/dissemin/login.html:30 templates/dissemin/sandbox.html:32
 msgid "If you already have an ORCID account, you can use it with Dissemin. We will not make any changes to your profile."
@@ -1914,7 +1914,7 @@ msgstr ""
 #: templates/dissemin/login.html:42 templates/dissemin/login.html:51
 #: templates/dissemin/sandbox.html:44
 msgid "Sign up"
-msgstr ""
+msgstr "Registrera"
 
 #: templates/dissemin/login.html:44 templates/dissemin/sandbox.html:46
 msgid "Not an ORCID user yet? Create an account, it is free and takes a few seconds."
@@ -1931,7 +1931,7 @@ msgstr ""
 
 #: templates/dissemin/login.html:69 templates/dissemin/sandbox.html:71
 msgid "Forgot Password?"
-msgstr ""
+msgstr "Glömt lösenordet?"
 
 #: templates/dissemin/partners.html:7 templates/dissemin/partners.html:12
 #: templates/dissemin/skeleton.html:124
@@ -1948,51 +1948,51 @@ msgstr ""
 
 #: templates/dissemin/skeleton.html:73
 msgid "My profile"
-msgstr ""
+msgstr "Min profil"
 
 #: templates/dissemin/skeleton.html:75 templates/dissemin/skeleton.html:115
 msgid "FAQ"
-msgstr ""
+msgstr "Vanliga frågor"
 
 #: templates/dissemin/skeleton.html:91
 msgid "Logout"
-msgstr ""
+msgstr "Logga ut"
 
 #: templates/dissemin/skeleton.html:95
 msgid "Login"
-msgstr ""
+msgstr "Logga in"
 
 #: templates/dissemin/skeleton.html:116
 msgid "API"
-msgstr ""
+msgstr "API"
 
 #: templates/dissemin/skeleton.html:117 templates/dissemin/tos.html:11
 msgid "Terms of Service"
-msgstr ""
+msgstr "Användarvillkor"
 
 #: templates/dissemin/skeleton.html:122
 msgid "Who are we?"
-msgstr ""
+msgstr "Vem är vi?"
 
 #: templates/dissemin/skeleton.html:123
 msgid "Donate"
-msgstr ""
+msgstr "Donera"
 
 #: templates/dissemin/skeleton.html:136
 msgid "Change language"
-msgstr ""
+msgstr "Byt språk"
 
 #: templates/dissemin/skeleton.html:148
 msgid "Apply"
-msgstr ""
+msgstr "Verkställ"
 
 #: templates/dissemin/sources.html:11
 msgid "Data sources"
-msgstr ""
+msgstr "Datakällor"
 
 #: templates/dissemin/sources.html:13
 msgid "Primary sources"
-msgstr ""
+msgstr "Primära källor"
 
 #: templates/dissemin/tos.html:15 templates/dissemin/tos.html:27
 msgid "In short"
@@ -2004,7 +2004,7 @@ msgstr ""
 
 #: templates/dissemin/tos.html:17 templates/dissemin/tos.html:42
 msgid "Privacy"
-msgstr ""
+msgstr "Integritet"
 
 #: templates/dissemin/tos.html:18 templates/dissemin/tos.html:60
 msgid "Deposits through Dissemin"
@@ -2016,7 +2016,7 @@ msgstr ""
 
 #: templates/dissemin/tos.html:21 templates/dissemin/tos.html:83
 msgid "Personal data"
-msgstr ""
+msgstr "Personlig data"
 
 #: templates/dissemin/tos.html:22 templates/dissemin/tos.html:101
 msgid "Full text storage"
@@ -2040,7 +2040,7 @@ msgstr ""
 
 #: templates/dissemin/tos.html:74
 msgid "Contact"
-msgstr ""
+msgstr "Kontakt"
 
 #: templates/dissemin/tos.html:77
 msgid "Please address any inquiry to support@dissem.in."
@@ -2094,31 +2094,31 @@ msgstr ""
 
 #: upload/templates/upload/widget.html:9
 msgid "Select a file:"
-msgstr ""
+msgstr "Välj en fil:"
 
 #: upload/templates/upload/widget.html:10
 msgid "Browse"
-msgstr ""
+msgstr "Bläddra"
 
 #: upload/templates/upload/widget.html:17
 msgid "Or enter an URL:"
-msgstr ""
+msgstr "Eller ange en URL:"
 
 #: upload/templates/upload/widget.html:28
 msgid "Or drop a file here:"
-msgstr ""
+msgstr "Eller släpp en fil här:"
 
 #: upload/views.py:132
 msgid "Invalid PDF file."
-msgstr ""
+msgstr "Ogiltigt PDF-fil."
 
 #: upload/views.py:165
 msgid "Invalid form."
-msgstr ""
+msgstr "Ogiltigt formulär."
 
 #: upload/views.py:175
 msgid "File too large."
-msgstr ""
+msgstr "Filen är för stor."
 
 #: upload/views.py:180
 msgid "Invalid content type: this link points to a web page, we need a direct link to a PDF file."

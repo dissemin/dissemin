@@ -1,80 +1,80 @@
-# Translation of Dissemin papers to Bangla (বাংলা)
+# Translation of Dissemin papers to Swedish (svenska)
 # Exported from translatewiki.net
 #
-# Author: Aftabuzzaman
-# Author: Rasal Lia
+# Author: Dan Koehl
+# Author: WikiPhoenix
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2017-11-30 07:31:58+0000\n"
+"PO-Revision-Date: 2017-11-30 07:32:00+0000\n"
 "X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: bn\n"
+"Language: sv\n"
 "X-Generator: MediaWiki 1.31.0-alpha; Translate 2017-10-30\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: doc/sphinx/_build/html/_static/doctools.js:167
 msgid "Permalink to this headline"
-msgstr "এই শিরোনামে যাবার বিশেষ সংযোগ"
+msgstr ""
 
 #: doc/sphinx/_build/html/_static/doctools.js:173
 msgid "Permalink to this definition"
-msgstr "এই সংজ্ঞায় যাবার বিশেষ সংযোগ"
+msgstr ""
 
 #: doc/sphinx/_build/html/_static/doctools.js:206
 msgid "Hide Search Matches"
-msgstr ""
+msgstr "Dölj sökmatchningar"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:400
 msgid "Searching"
-msgstr "অনুসন্ধান চলছে"
+msgstr "Söker"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:405
 msgid "Preparing search..."
-msgstr "অনুসন্ধানের প্রস্তুতি..."
+msgstr "Förbereder sökning..."
 
 #: doc/sphinx/_build/html/_static/searchtools.js:566
 msgid "Search Results"
-msgstr "অনুসন্ধানের ফলাফল"
+msgstr "Sökresultat"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:568
 msgid "Your search did not match any documents. Please make sure that all words are spelled correctly and that you've selected enough categories."
-msgstr "আপনার অনুসন্ধানে কোন তথ্যাদি মিলেনি। অনুগ্রহ করে নিশ্চিত হউন যে শব্দগুলি সঠিক ভাবে লেখা হয়েছে এবং আপনি যথেষ্ট সংখ্যক বিষয়শ্রেণী নির্বাচন করেছেন।"
+msgstr ""
 
 #: doc/sphinx/_build/html/_static/searchtools.js:570
 #, javascript-format
 msgid "Search finished, found %s page(s) matching the search query."
-msgstr ""
+msgstr "Sökningen är färdig, hittade %s sidor som matchar sökfrågan."
 
 #: doc/sphinx/_build/html/_static/searchtools.js:623
 msgid ", in "
-msgstr ""
+msgstr ", i "
 
 #: doc/sphinx/_build/html/_static/sidebar.js:77
 msgid "Expand sidebar"
-msgstr "পার্শ্বদ্বন্ড সম্প্রসারিত করুন"
+msgstr "Expandera sidofält"
 
 #: doc/sphinx/_build/html/_static/sidebar.js:90
 #: doc/sphinx/_build/html/_static/sidebar.js:118
 msgid "Collapse sidebar"
-msgstr "পার্শ্বদ্বন্ড সঙ্কুচিত করুন"
+msgstr "Stäng sidofält"
 
 #: papers/static/papers/refresh.js:35
 msgid "Do not show this message anymore"
-msgstr "এই বার্তাটি আবার দেখাবেন না"
+msgstr "Visa inte detta meddelande igen"
 
 #: papers/static/papers/refresh.js:66
 msgid "No author"
-msgstr "কোন লেখক নেই"
+msgstr "Ingen författare"
 
 #: papers/static/papers/refresh.js:68
 msgid "No title"
-msgstr "কোন শিরোনাম নেই"
+msgstr "Ingen titel"
 
 #: papers/static/papers/refresh.js:70
 msgid "Invalid publication date"
-msgstr "অকার্যকর প্রকাশনা তারিখ"
+msgstr "Ogiltigt publiceringsdatum"
 
 #: papers/static/papers/refresh.js:105
 #, invalid-plural
@@ -85,17 +85,17 @@ msgstr[1] ""
 
 #: papers/static/papers/refresh.js:115
 msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
-msgstr "নিন্মলিখিত কারণে \"%(name)s\" প্রত্যাখ্যাত হয়েছে: %(reason)s"
+msgstr "\"%(name)s\" ignorerades av följande anledning: %(reason)s"
 
 #: papers/static/papers/refresh.js:123
 msgid "A paper was ignored, because it has no name"
-msgstr "একটি কাগজ প্রত্যাখ্যাত হয়েছে, কারন কাগজটির কোন নাম নেই"
+msgstr ""
 
 #: papers/static/papers/refresh.js:135 papers/static/papers/refresh.js:163
 msgid "Show more information"
-msgstr "বিস্তারিত তথ্য"
+msgstr "Visa mer information"
 
 #: papers/static/papers/refresh.js:160
 msgid "Show less information"
-msgstr "সংক্ষিপ্ত তথ্য"
+msgstr "Visa mindre information"
 

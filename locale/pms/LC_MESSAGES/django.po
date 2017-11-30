@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2017-11-27 06:55:19+0000\n"
+"PO-Revision-Date: 2017-11-30 07:32:01+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1164,124 +1164,124 @@ msgstr "Le version finaj a peulo nen esse archivià."
 
 #: papers/templatetags/statuses.py:45
 msgid "Under the restrictions below, final versions can be archived."
-msgstr ""
+msgstr "Con le restrission sì-sota, le version finaj a peulo esse archivià."
 
 #: papers/templatetags/statuses.py:46
 msgid "Final version archiving policy unclear."
-msgstr ""
+msgstr "Lé régole an sl'archiviassion dle version finaj a son nen ciàire."
 
 #: papers/templatetags/statuses.py:47
 msgid "Final version archiving policy unknown."
-msgstr ""
+msgstr "Lé régole an sl'archiviassion dle version finaj as conòsso nen."
 
 #: papers/templatetags/statuses.py:49
 msgid "Unknown policy"
-msgstr ""
+msgstr "Régole sconossùe"
 
 #: papers/templatetags/statuses.py:55
 msgid "archiving allowed."
-msgstr ""
+msgstr "archiviassion autorisà."
 
 #: papers/templatetags/statuses.py:56
 msgid "archiving forbidden."
-msgstr ""
+msgstr "archiviassion vietà."
 
 #: papers/templatetags/statuses.py:57
 msgid "archiving restricted:"
-msgstr ""
+msgstr "archiviassion limità:"
 
 #: papers/templatetags/statuses.py:58
 msgid "policy unclear."
-msgstr ""
+msgstr "régole nen ciàire."
 
 #: papers/templatetags/statuses.py:59 papers/templatetags/statuses.py:61
 #: papers/templatetags/statuses.py:73
 msgid "policy unknown."
-msgstr ""
+msgstr "régole sconossùe."
 
 #: papers/templatetags/statuses.py:67
 msgid "archiving allowed"
-msgstr ""
+msgstr "archiviassion autorisà"
 
 #: papers/templatetags/statuses.py:68
 msgid "archiving forbidden"
-msgstr ""
+msgstr "archiviassion vietà"
 
 #: papers/templatetags/statuses.py:69
 msgid "archiving restricted"
-msgstr ""
+msgstr "archiviassion limità"
 
 #: papers/templatetags/statuses.py:70
 msgid "policy unclear"
-msgstr ""
+msgstr "régole nen ciàire"
 
 #: papers/templatetags/statuses.py:71
 msgid "policy unknown"
-msgstr ""
+msgstr "régole sconossùe"
 
 #: papers/views.py:128
 msgid "All papers"
-msgstr ""
+msgstr "Tuti j'artìcoj"
 
 #: papers/views.py:132
-#, invalid-plural, python-format
+#, python-format
 msgid "%d paper found"
 msgid_plural "%d papers found"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d artìcol trovà"
+msgstr[1] "%d artìcoj trovà"
 
 #: papers/views.py:211
 msgid "\n                            Invalid ORCID profile.\n                            Please make sure it includes a public name.\n                            "
-msgstr ""
+msgstr "\n                            Profil ORCID nen vàlid.\n                            Për piasì, ch'as sigura ch'a anclud un nòm pùblich.\n                            "
 
 #: papers/views.py:217
 msgid "Invalid ORCID profile."
-msgstr ""
+msgstr "Profil ORCID nen vàlid."
 
 #: papers/views.py:239
 msgid " authored by "
-msgstr ""
+msgstr "scrivù da "
 
 #: papers/views.py:283
 msgid " published by "
-msgstr ""
+msgstr " publicà da "
 
 #: papers/views.py:312
 msgid " in "
-msgstr ""
+msgstr " an "
 
 #: papers/views.py:389
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
-msgstr ""
+msgstr "Gnun %(verbose_name)s a rëspond a l'arcesta"
 
 #: publishers/forms.py:10
 msgid "popularity"
-msgstr ""
+msgstr "popolarità"
 
 #: publishers/forms.py:11
 msgid "name"
-msgstr ""
+msgstr "nòm"
 
 #: publishers/forms.py:19 publishers/templates/publishers/list.html:55
 msgid "Filter by publisher policy"
-msgstr ""
+msgstr "Filtré conforma a le régole ëd publicassion"
 
 #: publishers/models.py:38
 msgid "Open access"
-msgstr ""
+msgstr "Acess lìber"
 
 #: publishers/models.py:38
 msgid "Freely available from the publisher."
-msgstr ""
+msgstr "Liberaman acessìbil a parte da la ca editris."
 
 #: publishers/models.py:39
 msgid "Allows pre/post prints"
-msgstr ""
+msgstr "Prepublicassion e pòst-publicassion autorisà"
 
 #: publishers/models.py:40
 msgid "The publisher sells copies but allows authors to deposit some version of the article in a repository."
-msgstr ""
+msgstr "La ca editris a buta soe còpie a pagament ma a përmet a j'autor ëd buté chèiche version ëd l'artìcol ant un depòsit."
 
 #: publishers/models.py:41
 msgid "Forbids pre/post prints"
