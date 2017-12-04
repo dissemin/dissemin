@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2017-11-30 07:31:58+0000\n"
+"PO-Revision-Date: 2017-12-04 08:24:12+0000\n"
 "X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -16,11 +16,11 @@ msgstr ""
 
 #: doc/sphinx/_build/html/_static/doctools.js:167
 msgid "Permalink to this headline"
-msgstr "এই শিরোনামে যাবার বিশেষ সংযোগ"
+msgstr "এই শিরোনামের স্থায়ীসংযোগ"
 
 #: doc/sphinx/_build/html/_static/doctools.js:173
 msgid "Permalink to this definition"
-msgstr "এই সংজ্ঞায় যাবার বিশেষ সংযোগ"
+msgstr "এই সংজ্ঞার স্থায়ীসংযোগ"
 
 #: doc/sphinx/_build/html/_static/doctools.js:206
 msgid "Hide Search Matches"

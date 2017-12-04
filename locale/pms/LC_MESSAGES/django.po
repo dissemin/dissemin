@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2017-11-30 07:32:01+0000\n"
+"PO-Revision-Date: 2017-12-04 08:24:15+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1285,90 +1285,90 @@ msgstr "La ca editris a buta soe còpie a pagament ma a përmet a j'autor ëd bu
 
 #: publishers/models.py:41
 msgid "Forbids pre/post prints"
-msgstr ""
+msgstr "Prepublicassion e pòst-publicassion vietà"
 
 #: publishers/models.py:42
 msgid "The publisher forbids authors to deposit any version of their article online."
-msgstr ""
+msgstr "La ca editris a ampediss a j'autor ëd deposité qualsëssìa version ëd sò artìcol an sl'aragnà."
 
 #: publishers/models.py:43
 msgid "Policy unclear"
-msgstr ""
+msgstr "Régole nen ciàire"
 
 #: publishers/models.py:44
 msgid "For complicated policies, unknown publishers and unpublished documents."
-msgstr ""
+msgstr "Për le régole complicà, le ca editris ësconossùe e ij document nen publicà."
 
 #: publishers/models.py:47
 msgid "Allowed"
-msgstr ""
+msgstr "Autorisà"
 
 #: publishers/models.py:48
 msgid "Forbidden"
-msgstr ""
+msgstr "Vietà"
 
 #: publishers/models.py:49
 msgid "Restricted"
-msgstr ""
+msgstr "Limità"
 
 #: publishers/models.py:50
 msgid "Unclear"
-msgstr ""
+msgstr "Nen ciàir"
 
 #: publishers/models.py:51
 msgid "Unknown"
-msgstr ""
+msgstr "Nen conossù"
 
 #: publishers/models.py:59 publishers/views.py:94
 msgid "Publishers"
-msgstr ""
+msgstr "Ca editris"
 
 #: publishers/models.py:79
 msgid "Unknown publisher"
-msgstr ""
+msgstr "Ca editris ësconossùa"
 
 #: publishers/templates/publishers/detailsPolicy.html:6
 msgid "Preprint:"
-msgstr ""
+msgstr "Prepublicassion:"
 
 #: publishers/templates/publishers/detailsPolicy.html:7
 msgid "A preprint is a document produced by the authors without any interaction with the peer-reviewing process."
-msgstr ""
+msgstr "Na prepublicassion a l'é un papé produvù da j'autor sensa antërassion con ël process ëd revision antra 'd par."
 
 #: publishers/templates/publishers/detailsPolicy.html:8
 msgid "preprint"
-msgstr ""
+msgstr "prepublicassion"
 
 #: publishers/templates/publishers/detailsPolicy.html:10
 msgid "Postprint:"
-msgstr ""
+msgstr "Pòst-publicassion:"
 
 #: publishers/templates/publishers/detailsPolicy.html:11
 msgid "Postprints differ from preprints in that they include the changes suggested by the reviewers. They are not edited by the publisher."
-msgstr ""
+msgstr "Le pòst-publicassion a son diferente da le prepublicassion përchè a comprendo le modìfiche sugerìe dai revisor. A son nen coregiùe da l'editor."
 
 #: publishers/templates/publishers/detailsPolicy.html:12
 msgid "postprint"
-msgstr ""
+msgstr "pòst-publicassion"
 
 #: publishers/templates/publishers/detailsPolicy.html:14
 msgid "Published version:"
-msgstr ""
+msgstr "Version publicà:"
 
 #: publishers/templates/publishers/detailsPolicy.html:15
 msgid "The published version is the final version of the paper, as formatted by the publisher."
-msgstr ""
+msgstr "La version publicà a l'é la version final ëd l'artìcol, coma ampaginà da l'editor."
 
 #: publishers/templates/publishers/detailsPolicy.html:16
 msgid "published version"
-msgstr ""
+msgstr "version publicà"
 
 #: publishers/templates/publishers/list.html:38
-#, invalid-plural, python-format
+#, python-format
 msgid "%(counter)s publisher found"
 msgid_plural "%(counter)s publishers found"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%(counter)s ca editris trovà"
+msgstr[1] "%(counter)s ca editris trovà"
 
 #: publishers/templates/publishers/list.html:94
 msgid "Data provided by"
