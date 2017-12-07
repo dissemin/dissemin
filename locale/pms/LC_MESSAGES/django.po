@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2017-12-04 08:24:15+0000\n"
+"PO-Revision-Date: 2017-12-07 07:56:39+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1372,35 +1372,35 @@ msgstr[1] "%(counter)s ca editris trovà"
 
 #: publishers/templates/publishers/list.html:94
 msgid "Data provided by"
-msgstr ""
+msgstr "Dàit fornì da"
 
 #: publishers/templates/publishers/list.html:129
 msgid "No publisher found."
-msgstr ""
+msgstr "Gnun-a ca editris trovà."
 
 #: publishers/templates/publishers/policy.html:58
 msgid "Policy data provided by"
-msgstr ""
+msgstr "Ij dàit an sle régole a son fornì da"
 
 #: publishers/templates/publishers/policy.html:62
 msgid "Report any error to them"
-msgstr ""
+msgstr "Ch'a signala s'a-i é d'eror"
 
 #: publishers/templates/publishers/policy.html:67
 msgid "Policy"
-msgstr ""
+msgstr "Régole"
 
 #: publishers/templates/publishers/policy.html:93
 msgid "Conditions"
-msgstr ""
+msgstr "Condission"
 
 #: publishers/templates/publishers/policy.html:101
 msgid "Policy details"
-msgstr ""
+msgstr "Detaj dle régole"
 
 #: publishers/templates/publishers/policy.html:110
 msgid "Publications"
-msgstr ""
+msgstr "Publicassion"
 
 #: publishers/templates/publishers/policy.html:113
 #, python-format
