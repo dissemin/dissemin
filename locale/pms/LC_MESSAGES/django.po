@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2017-12-11 06:50:44+0000\n"
+"PO-Revision-Date: 2017-12-14 07:26:26+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1486,23 +1486,23 @@ msgstr "Régole sconossùe"
 
 #: statistics/templates/statistics/histogram.html:17
 msgid "Upload is forbidden"
-msgstr ""
+msgstr "Ël cariament a l'é vietà"
 
 #: templates/404.html:6 templates/404.html:12
 msgid "Page not found"
-msgstr ""
+msgstr "Pàgina nen trovà"
 
 #: templates/404.html:13
 msgid "\n            The page you requested could not be found. <a href=\"/\">Go back to the home page.</a>\n           "
-msgstr ""
+msgstr "\n            La pàgina ch'a l'ha ciamà as treuva nen. <a href=\"/\">Torné a la pàgina d'intrada.</a>\n           "
 
 #: templates/500.html:6 templates/500.html:12
 msgid "Internal error"
-msgstr ""
+msgstr "Eror antern"
 
 #: templates/500.html:13
 msgid "\n            Your request triggered an internal error. <a href=\"/\">Go back to the home page.</a>\n           "
-msgstr ""
+msgstr "\n            Soa arcesta a l'ha causà n'eror antern. <a href=\"/\">Torné a la pàgina d'intrada.</a>\n           "
 
 #: templates/admin/base_site.html:4
 msgid "Dissemin site admin"
