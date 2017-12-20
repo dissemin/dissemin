@@ -182,7 +182,7 @@ def editUrl(request):
     # interrogate the endpoint
     try:
         json = fetch_zotero_for_URL(url)
-    except ValueError as e:
+    except ValueError:
         return {'status': 'error_api'}, 400
     if not json:
         return {'status': 'error_api'}, 400
