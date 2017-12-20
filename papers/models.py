@@ -1086,6 +1086,8 @@ class Paper(models.Model, BarePaper):
         Finds the paper associated to that DOI (if any)
         """
         doi = to_doi(doi)
+        if doi is None:
+            return None
         # there should not be more than one paper in this
         # queryset
         return cls.objects.filter(oairecord__doi=doi).first()
