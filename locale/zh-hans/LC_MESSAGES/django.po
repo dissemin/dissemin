@@ -11,7 +11,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-30 10:57+0100\n"
-"PO-Revision-Date: 2017-11-13 08:05:45+0000\n"
+"PO-Revision-Date: 2017-12-18 16:40:21+0000\n"
 "Language: zh-Hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1750,7 +1750,7 @@ msgstr ""
 
 #: templates/dissemin/faq.html:318
 msgid "Some papers might be marked as available but actually are not, for instance because they have been deleted."
-msgstr ""
+msgstr "一些论文可能已标记为可用，但实际不可用，例如因为他们已被删除。"
 
 #: templates/dissemin/faq.html:324
 msgid "All sorts of other technical issues."

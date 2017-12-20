@@ -1,7 +1,7 @@
-# Translation of Dissemin website to Piedmontese (Piemontèis)
+# Translation of Dissemin website to Danish (dansk)
 # Exported from translatewiki.net
 #
-# Author: Borichèt
+# Author: Joedalton
 # --
 # This file is part of the Dissemin Project
 # This file is distributed under the same license as the Dissemin package.
@@ -9,287 +9,287 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2017-12-14 07:26:26+0000\n"
+"PO-Revision-Date: 2017-12-11 06:50:40+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: pms\n"
+"Language: da\n"
 "X-Generator: MediaWiki 1.31.0-alpha; Translate 2017-10-30\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: deposit/forms.py:41
 msgid "Upload type"
-msgstr "Sòrt ëd cariament"
+msgstr "Overførselstype"
 
 #: deposit/forms.py:42 deposit/templates/deposit/deposits.html:40
 msgid "Repository"
-msgstr "Depòsit"
+msgstr "Arkiv"
 
 #: deposit/forms.py:51
 msgid "Invalid full text identifier."
-msgstr "Identificativ ëd test antregh nen bon."
+msgstr "Ugyldig fuldtekstidentifikator."
 
 #: deposit/forms.py:106 papers/templates/papers/paper.html:144
 msgid "Abstract"
-msgstr "Resumé"
+msgstr "Sammendrag"
 
 #: deposit/forms.py:119
 msgid "No preferred repository"
-msgstr "Gnun depòsit preferì"
+msgstr "Intet foretrukne arkiv"
 
 #: deposit/forms.py:140 deposit/hal/forms.py:77 deposit/osf/forms.py:143
 msgid "Save"
-msgstr "Argistré"
+msgstr "Gem"
 
 #: deposit/hal/forms.py:43
 msgid "Scientific field"
-msgstr "Domini sientìfich"
+msgstr "Videnskabeligt område"
 
 #: deposit/hal/forms.py:48
 msgid "Depositing author"
-msgstr "Autor depositant"
+msgstr "Indskyderforfatter"
 
 #: deposit/hal/forms.py:55
 msgid "Affiliation"
-msgstr "Afiliassion"
+msgstr "Tilknytning"
 
 #: deposit/hal/metadata.py:36
 msgid "Chemistry"
-msgstr "Chìmica"
+msgstr "Kemi"
 
 #: deposit/hal/metadata.py:37
 msgid "Computer science"
-msgstr "Anformàtica"
+msgstr "Computervidenskab"
 
 #: deposit/hal/metadata.py:38
 msgid "Mathematics"
-msgstr "Matemàtica"
+msgstr "Matematik"
 
 #: deposit/hal/metadata.py:39
 msgid "Physics"
-msgstr "Fìsica"
+msgstr "Fysik"
 
 #: deposit/hal/metadata.py:40
 msgid "Non-linear science"
-msgstr "Siensa nen linear"
+msgstr "Ikke-lineær videnskab"
 
 #: deposit/hal/metadata.py:41
 msgid "Cognitive science"
-msgstr "Siense cognitive"
+msgstr "Kognitiv videnskab"
 
 #: deposit/hal/metadata.py:42
 msgid "Environment sciences"
-msgstr "Siense ambientaj"
+msgstr "Miljøvidenskaber"
 
 #: deposit/hal/metadata.py:43
 msgid "Planet and Universe"
-msgstr "Pianeta e Univers"
+msgstr "Planeter og universet"
 
 #: deposit/hal/metadata.py:44
 msgid "Biological anthropology"
-msgstr "Antropologìa biològica"
+msgstr "Biologisk antropologi"
 
 #: deposit/hal/metadata.py:45
 msgid "Social Anthropology and ethnology"
-msgstr "Antropologìa sossial e etnologìa"
+msgstr "Socialantropologi og etnologi"
 
 #: deposit/hal/metadata.py:46
 msgid "Archaeology and Prehistory"
-msgstr "Archeologìa e Preistòria"
+msgstr "Arkæologi og tidlig historie"
 
 #: deposit/hal/metadata.py:47
 msgid "Architecture, space management"
-msgstr "Architetura, organisasssion ëd lë spassi"
+msgstr "Arkitektur, rumindretning"
 
 #: deposit/hal/metadata.py:48
 msgid "Art and art history"
-msgstr "Art e stòria ëd l'art"
+msgstr "Kunst og kunsthistorie"
 
 #: deposit/hal/metadata.py:49
 msgid "Classical studies"
-msgstr "Studi clàssich"
+msgstr "Klassiske studier"
 
 #: deposit/hal/metadata.py:50
 msgid "Demography"
-msgstr "Demografìa"
+msgstr "Demografi"
 
 #: deposit/hal/metadata.py:51 deposit/osf/forms.py:67 deposit/osf/forms.py:90
 msgid "Law"
-msgstr "Drit"
+msgstr "Jura"
 
 #: deposit/hal/metadata.py:52
 msgid "Economies and finances"
-msgstr "Conomìa e finansa"
+msgstr "Økonomi og finans"
 
 #: deposit/hal/metadata.py:53 deposit/osf/forms.py:63 deposit/osf/forms.py:86
 msgid "Education"
-msgstr "Educassion"
+msgstr "Uddannelse"
 
 #: deposit/hal/metadata.py:54
 msgid "Environmental studies"
-msgstr "Studi ambientaj"
+msgstr "Miljøstudier"
 
 #: deposit/hal/metadata.py:55
 msgid "Gender studies"
-msgstr "Studi ëd géner"
+msgstr "Kønsstudier"
 
 #: deposit/hal/metadata.py:56
 msgid "Geography"
-msgstr "Geografìa"
+msgstr "Geografi"
 
 #: deposit/hal/metadata.py:57
 msgid "Business administration"
-msgstr "Aministrassion ëd j'afé"
+msgstr "Forretningsadministration"
 
 #: deposit/hal/metadata.py:58
 msgid "History, Philosophy and Sociology of Sciences"
-msgstr "Stòria, Filosofìa e Sossiologìa dle siense"
+msgstr "Historie, filosofi og sociologi"
 
 #: deposit/hal/metadata.py:59
 msgid "History"
-msgstr "Stòria"
+msgstr "Historie"
 
 #: deposit/hal/metadata.py:60
 msgid "Library and information sciences"
-msgstr "Siense librarie e dl'anformassion"
+msgstr "Biblioteks- og informationsvidenskaber"
 
 #: deposit/hal/metadata.py:61
 msgid "Linguistics"
-msgstr "Lenghìstica"
+msgstr "Lingvistik"
 
 #: deposit/hal/metadata.py:62
 msgid "Literature"
-msgstr "Literatura"
+msgstr "Litteratur"
 
 #: deposit/hal/metadata.py:63
 msgid "Cultural heritage and museology"
-msgstr "Ardità coltural e museologìa"
+msgstr "Kulturarv og museologi"
 
 #: deposit/hal/metadata.py:64
 msgid "Musicology and performing arts"
-msgstr "Musicologìa e art ëd lë spitàcol"
+msgstr "Musikvidenskab og scenekunst"
 
 #: deposit/hal/metadata.py:65
 msgid "Philosophy"
-msgstr "Filosofìa"
+msgstr "Filosofi"
 
 #: deposit/hal/metadata.py:66
 msgid "Psychology"
-msgstr "Psicologìa"
+msgstr "Psykologi"
 
 #: deposit/hal/metadata.py:67
 msgid "Religions"
-msgstr "Religion"
+msgstr "Religioner"
 
 #: deposit/hal/metadata.py:68
 msgid "Political science"
-msgstr "Siense polìtiche"
+msgstr "Statsvidenskab"
 
 #: deposit/hal/metadata.py:69
 msgid "Sociology"
-msgstr "Sossiologìa"
+msgstr "Sociologi"
 
 #: deposit/hal/metadata.py:70
 msgid "Methods and statistics"
-msgstr "Métod e statìstica"
+msgstr "Metoder og statistik"
 
 #: deposit/hal/metadata.py:71
 msgid "Life sciences"
-msgstr "Siense dla vita"
+msgstr "Biovidenskab"
 
 #: deposit/hal/metadata.py:72
 msgid "Engineering sciences"
-msgstr "Siense dl'angignerìa"
+msgstr "Ingeniørvidenskab"
 
 #: deposit/hal/metadata.py:73
 msgid "Statistics"
-msgstr "Statìstica"
+msgstr "Statistik"
 
 #: deposit/hal/metadata.py:74
 msgid "Economy and quantitative finance"
-msgstr "Conomìa e finansa quantitativa"
+msgstr "Økonomi og kvantitativ finans"
 
 #: deposit/hal/models.py:14
 msgid "HAL username"
-msgstr "Stranòm HAL"
+msgstr "HAL-brugernavn"
 
 #: deposit/hal/models.py:15
 msgid "If set, deposits will be associated to this HAL account."
-msgstr "Si selessionà, ij depòsit a saran assossià a cost cont HAL."
+msgstr "Hvis angivet, så vil indskud blive associeret med denne HAL-konto."
 
 #: deposit/hal/protocol.py:142
 msgid "No HAL user credentials provided."
-msgstr "Gnun-e credensiaj d'utent HAL fornìe."
+msgstr "Ingen HAL-brugerakkreditiver angivet."
 
 #: deposit/hal/protocol.py:208
 msgid "This document is already in HAL. HAL refused the deposit."
-msgstr "Ës document a l'é già an HAL. HAL a l'ha arfudà ël depòsit."
+msgstr "Dette dokument er allerede i HAL. HAL afviste indskuddet."
 
 #: deposit/hal/protocol.py:215
 #, python-format
 msgid "HAL refused the deposit (HTTP error %d): %s"
-msgstr "HAL a l'ha arfudà ël depòsit (eror HTTP %d): %s"
+msgstr "HAL afviste indskuddet (HTTP-fejl %d): %s"
 
 #: deposit/hal/protocol.py:222
 msgid "HAL returned an invalid XML response"
-msgstr "HAL a l'ha dàit na rispòsta XML nen vàlida"
+msgstr "HAL returnerede et ugyldigt XML-svar"
 
 #: deposit/hal/protocol.py:234
 msgid "This paper already exists in HAL."
-msgstr "Cost artìcol a esist già an HAL."
+msgstr "Denne artikel findes allerede i HAL."
 
 #: deposit/hal/protocol.py:240
 msgid "HAL rejected the submission."
-msgstr "HAL a l'ha arfudà la spedission."
+msgstr "HAL afviste indsendelsen."
 
 #: deposit/hal/protocol.py:250
 msgid "HAL rejected the submission"
-msgstr "HAL a l'ha arfudà la spedission"
+msgstr "HAL afviste indsendelsen"
 
 #: deposit/hal/protocol.py:259
 msgid "Password"
-msgstr "Ciav"
+msgstr "Adgangskode"
 
 #: deposit/hal/protocol.py:287
 msgid "Connection to HAL failed. Please try again later."
-msgstr "Faliment ëd la conession a HAL. Për piasì, ch'a preuva torna pi tard."
+msgstr "Forbindelse til HAL mislykkedes. Prøv igen senere."
 
 #: deposit/models.py:38
 msgid "Failed"
-msgstr "Falì"
+msgstr "Mislykkedes"
 
 #: deposit/models.py:39
 msgid "Faked"
-msgstr "Fàuss"
+msgstr "Forfalsket"
 
 #: deposit/models.py:40
 msgid "Pending publication"
-msgstr "Publicassion an atèisa"
+msgstr "Afventer udgivelse"
 
 #: deposit/models.py:42
 msgid "Published"
-msgstr "Publicà"
+msgstr "Udgivet"
 
 #: deposit/models.py:43
 msgid "Refused by the repository"
-msgstr "Arfudà dal depòsit"
+msgstr "Afvist af arkivet"
 
 #: deposit/models.py:44
 msgid "Deleted"
-msgstr "Eliminà"
+msgstr "Slettet"
 
 #: deposit/models.py:166 deposit/templates/deposit/start.html:415
 #: deposit/views.py:103
 msgid "Deposit"
-msgstr "Depòsit"
+msgstr "Depositum"
 
 #: deposit/models.py:219
 msgid "We will use this email address to notify you when your deposits are accepted."
-msgstr "I dovrëroma s'adrëssa ëd pòsta eletrònica për aviselo cand ij sò depòsit a saran acetà."
+msgstr "Vi vil bruge denne e-postadresse til at give dig besked, når dit depositum accepteres."
 
 #: deposit/models.py:225
 msgid "This repository will be used by default for your deposits."
-msgstr "Ës depòsit a sarà dovrà tanme stàndard për soe spedission."
+msgstr "Dette arkiv vil blive brugt til dine deposita."
 
 #: deposit/osf/forms.py:35 deposit/osf/forms.py:46
 msgid "Creative Commons CC0 1.0 Universal"
@@ -297,259 +297,259 @@ msgstr "Creative Commons CC0 1.0 Universal"
 
 #: deposit/osf/forms.py:37 deposit/osf/forms.py:48
 msgid "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
-msgstr "Creative Commons CC-By Attribution 4.0 Antërnassional (CC BY 4.0)"
+msgstr "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
 
 #: deposit/osf/forms.py:40 deposit/osf/forms.py:51
 msgid "No license"
-msgstr "Gnun-a licensa"
+msgstr "Ingen licens"
 
 #: deposit/osf/forms.py:57 deposit/osf/forms.py:80
 msgid "Architecture"
-msgstr "Architetura"
+msgstr "Arkitektur"
 
 #: deposit/osf/forms.py:59 deposit/osf/forms.py:82
 msgid "Arts and Humanities"
-msgstr "Art e siense uman-e"
+msgstr "Kunst og humaniora"
 
 #: deposit/osf/forms.py:61 deposit/osf/forms.py:84
 msgid "Business"
-msgstr "Afé"
+msgstr "Forretning"
 
 #: deposit/osf/forms.py:65 deposit/osf/forms.py:88
 msgid "Engineering"
-msgstr "Angignerìa"
+msgstr "Ingeniørarbejde"
 
 #: deposit/osf/forms.py:69 deposit/osf/forms.py:92
 msgid "Life Sciences"
-msgstr "Siense dla vita"
+msgstr "Biovidenskab"
 
 #: deposit/osf/forms.py:71 deposit/osf/forms.py:94
 msgid "Medicine and Health Sciences"
-msgstr "Medzin-a e siense dla salute"
+msgstr "Medicin og helbredvidenskab"
 
 #: deposit/osf/forms.py:73 deposit/osf/forms.py:96
 msgid "Physical Sciences and Mathematics"
-msgstr "Siense fìsiche e matemàtica"
+msgstr "Fysik og matematik"
 
 #: deposit/osf/forms.py:75 deposit/osf/forms.py:98
 msgid "Social and Behavioral Sciences"
-msgstr "Siense sossiaj e comportamentaj"
+msgstr "Social- og adfærdsvidenskab"
 
 #: deposit/osf/forms.py:104 deposit/zenodo/forms.py:45
 msgid "License"
-msgstr "Licensa"
+msgstr "Licens"
 
 #: deposit/osf/forms.py:150
 msgid "Invalid OSF identifier."
-msgstr "Identificativ OSF nen bon."
+msgstr "Ugyldig OSF-identifikator."
 
 #: deposit/osf/models.py:13
 msgid "OSF identifier"
-msgstr "Identificativ OSF"
+msgstr "OSF-identifikator"
 
 #: deposit/osf/models.py:14
 msgid "If set, your deposits will be associated to this OSF account. This identifier is a string of letters and numbers which can be found in your OSF public profile URL."
-msgstr "Si presselessionà, sò depòsit a sarà assossià a 's cont OSF. St'identificativ a l'é na stringa ëd litre e nùmer ch'a peul esse trovà ant l'adrëssa ëd sò profil pùblich OSF."
+msgstr "Hvis angivet så vil dine deposita blive associeret med denne OSF-konto. Denne identifikator er en bogstavs- og talstreng, som kan findes din OSF-offentlige profiladresse."
 
 #: deposit/osf/protocol.py:207
 msgid "Unable to create a project on OSF."
-msgstr "Falì a creé un proget su OSF."
+msgstr "Kunne ikke oprette et projekt på OSF."
 
 #: deposit/osf/protocol.py:221
 msgid "Unable to authenticate to OSF."
-msgstr "Impossìbil autentichesse an OSF."
+msgstr "Kunne ikke godkende mod OSF."
 
 #: deposit/osf/protocol.py:238
 msgid "Unable to add contributors."
-msgstr "Impossìbil gionté dij contributor."
+msgstr "Kunne ikke tilføje bidragydere."
 
 #: deposit/osf/protocol.py:265
 msgid "Unable to update the contributors of the paper."
-msgstr "Impossìbil agiorné ij contributor ëd l'artìcol."
+msgstr "Kunne ikke opdatere bidragydere for artiklen."
 
 #: deposit/osf/protocol.py:311
 msgid "Unable to update license."
-msgstr "Impossìbil agiorné la licensa."
+msgstr "Kunne ikke opdatere licens."
 
 #: deposit/osf/protocol.py:368
 msgid "Unable to create the preprint."
-msgstr "Impossìbil creé la prepublicassion."
+msgstr "Kunne ikke oprette preprint."
 
 #: deposit/osf/protocol.py:417
 msgid "Unable to update the preprint license."
-msgstr "Impossìbil agiorné la licensa dla prepublicassion."
+msgstr "Kunne ikke opdatere preprint-licens."
 
 #: deposit/osf/protocol.py:425
 msgid "No Repository endpoint provided."
-msgstr "Gnun pont final dël depòsit fornì."
+msgstr "Intet arkivslutpunkt angivet."
 
 #: deposit/osf/protocol.py:428
 msgid "No OSF token provided."
-msgstr "Gnun geton OSF fornì."
+msgstr "Intet OSF-symbol angivet."
 
 #: deposit/osf/protocol.py:469
 msgid "Unable to upload the PDF file."
-msgstr "Impossìbil carié l'archivi PDF."
+msgstr "Kunne ikke overføre PDF-filen."
 
 #: deposit/osf/protocol.py:509
 msgid "Unable to delete the project."
-msgstr "Impossìbil dëscancelé ël proget."
+msgstr "Kunne ikke slette projektet."
 
 #: deposit/osf/protocol.py:538 deposit/osf/protocol.py:546
 msgid "Unable to make the project public."
-msgstr "Impossìbil rende ël proget pùblich."
+msgstr "Kunne ikke gøre projektet offentligt."
 
 #: deposit/protocol.py:199
 msgid "Failed to connect to the repository. Please try again later."
-msgstr "Falì a coleghesse al depòsit. Për piasì, ch'a preuva torna pi tard."
+msgstr "Kunne ikke forbinde til arkivet. Prøv igen senere."
 
 #: deposit/sword/protocol.py:45
 msgid "No servicedocument provided."
-msgstr "Gnun servicedocument fornì."
+msgstr "Intet tjenestedokument angivet."
 
 #: deposit/sword/protocol.py:110
 msgid "Unable to submit the paper to the collection."
-msgstr "Impossìbil mandé l'artìcol a la colession."
+msgstr "Kunne ikke indsende artiklen til samlingen."
 
 #: deposit/sword/protocol.py:120
 msgid "Failed to connect to the SWORD server."
-msgstr "Falì a coleghesse al servent SWORD."
+msgstr "Kunne ikke forbinde til SWORD-serveren."
 
 #: deposit/templates/deposit/deposits.html:10
 #: deposit/templates/deposit/deposits.html:14
 #: templates/dissemin/skeleton.html:82
 msgid "My deposits"
-msgstr "Ij mè depòsit"
+msgstr "Mine deposita"
 
 #: deposit/templates/deposit/deposits.html:36
 msgid "Paper"
-msgstr "Artìcol"
+msgstr "Artikel"
 
 #: deposit/templates/deposit/deposits.html:44
 msgid "Deposit date"
-msgstr "Dàita ëd depòsit"
+msgstr "Depositumdato"
 
 #: deposit/templates/deposit/deposits.html:48
 msgid "Deposit type"
-msgstr "Sòrt ëd depòsit"
+msgstr "Depositumtype"
 
 #: deposit/templates/deposit/deposits.html:52
 msgid "Identifier"
-msgstr "Identificativ"
+msgstr "Identifikator"
 
 #: deposit/templates/deposit/deposits.html:58
 msgid "Meta URL"
-msgstr "Adrëssa dij metadàit"
+msgstr "Metaadresse"
 
 #: deposit/templates/deposit/deposits.html:63
 msgid "PDF URL"
-msgstr "Adrëssa dël PDF"
+msgstr "PDF-adresse"
 
 #: deposit/templates/deposit/deposits.html:70
 msgid "Status"
-msgstr "Stat"
+msgstr "Status"
 
 #: deposit/templates/deposit/deposits.html:88
 msgid "You have not made any deposit via Dissemin. What are you waiting for? Liberate your papers today."
-msgstr "A l'ha fàit ancor gnun depòsit con Dissemin. Lòn ch'a speta? Ch'a lìbera ij sò artìcoj ancheuj."
+msgstr "Du har ikke foretaget nogle deposita via Dissemin. Hvad venter du på? Befri dine artikler i dag."
 
 #: deposit/templates/deposit/global_preferences.html:13
 #: deposit/templates/deposit/preferences_nav.html:3
 #: templates/dissemin/skeleton.html:81
 msgid "Preferences"
-msgstr "Gust"
+msgstr "Præferencer"
 
 #: deposit/templates/deposit/preferences_nav.html:7
 msgid "General"
-msgstr "General"
+msgstr "Generelt"
 
 #: deposit/templates/deposit/repo_preferences.html:13
 msgid "Repository preferences"
-msgstr "Gust dël depòsit"
+msgstr "Arkivpræferencer"
 
 #: deposit/templates/deposit/start.html:12
 #: deposit/templates/deposit/start.html:16
 msgid "Depositing"
-msgstr "Depositant"
+msgstr ""
 
 #: deposit/templates/deposit/start.html:42
 msgid "Trying to fill this field automatically for you..."
-msgstr "I sërcoma ëd compilé ës camp an automàtich për chiel..."
+msgstr "Prøver at udfylde dette felt automatisk for dig ..."
 
 #: deposit/templates/deposit/start.html:51
 msgid "Sorry, we could not fill this for you."
-msgstr "An dëspias, i podoma nen compilé sòn për chiel."
+msgstr "Beklager, vi kunne ikke udfylde feltet for dig."
 
 #: deposit/templates/deposit/start.html:258
 #: papers/templates/papers/department.html:30
 msgid "Dissemin encountered an error, please try again later."
-msgstr "Dissemin a l'ha rancontrà n'eror, për piasì ch'a preuva torna pi tard."
+msgstr "Dissemin blev ramt af en fejl, prøv igen senere."
 
 #: deposit/templates/deposit/start.html:295
 #, python-format
 msgid "\n            You can deposit the full text of your article. Dissemin will\n            send it to a repository where it will be made freely available.\n            By depositing your article via Dissemin,\n            you agree to our <a href=\"%(tosurl)s\">terms of service</a>.\n        "
-msgstr "\n            A peul deposité ël test complet ëd sò artìcol. Dissemin a\n            lo mandrà a 'n depòsit anté ch'a sarà butà a disposission ëd tuti.\n            An depositand sò artìcol con Dissemin,\n            chiel a aceta nòstre <a href=\"%(tosurl)s\">condission ëd servissi</a>.\n        "
+msgstr ""
 
 #: deposit/templates/deposit/start.html:306
 msgid "You do not appear to be one of the authors of this paper. By using this form, you certify that you have the permission to upload it on their behalf."
-msgstr "A smija che chiel a sia nen un ëd j'autor ëd s'artìcol. An dovrand ës formolari, chiel a sertìfica ch'a l'ha ël përmess ëd carielo a nòm ëd j'autor."
+msgstr ""
 
 #: deposit/templates/deposit/start.html:316
 msgid "This paper cannot be deposited in any repository supported by Dissemin."
-msgstr "St'artìcol a peul nen esse deposità ant un depòsit masentà da Dissemin."
+msgstr ""
 
 #: deposit/templates/deposit/start.html:324
 msgid "Document"
-msgstr "Document"
+msgstr "Dokument"
 
 #: deposit/templates/deposit/start.html:332
 msgid "Options"
-msgstr "Opsion"
+msgstr "Indstillinger"
 
 #: deposit/templates/deposit/start.html:338
 msgid "Upload type:"
-msgstr "Sòrt ëd cariamen"
+msgstr "Overførselstype:"
 
 #: deposit/templates/deposit/start.html:351
 msgid "Repository:"
-msgstr "Depòsit:"
+msgstr "Arkiv:"
 
 #: deposit/templates/deposit/start.html:364
 msgctxt "This repository will be soon available in Dissemin"
 msgid "Coming soon:"
-msgstr "Tòst disponìbil:"
+msgstr "Kommer snart:"
 
 #: deposit/templates/deposit/start.html:401
 msgid "Metadata"
-msgstr "Metadàit"
+msgstr "Metadata"
 
 #: deposit/templates/deposit/start.html:417
 msgid "Processing deposit..."
-msgstr "Depòsit an cors ëd tratament..."
+msgstr "Behandler depot ..."
 
 #: deposit/templates/deposit/start.html:417
 msgid "please wait..."
-msgstr "ch'a l'abia passiensa..."
+msgstr "vent venligst ..."
 
 #: deposit/views.py:65
 msgid "This repository is not available for this paper."
-msgstr "Ës depòsit a l'é nen disponìbil për s'artìcol."
+msgstr "Arkivet er ikke tilgængeligt for denne artikel."
 
 #: deposit/views.py:138
 msgid "This repository could not be found."
-msgstr "Ës depòsit a l'é introvàbil."
+msgstr "Arkivet kunne ikke findes."
 
 #: deposit/views.py:143 deposit/views.py:149 deposit/views.py:166
 msgid "This repository does not have any settings."
-msgstr "Ës depòsit a l'ha gnun paràmeter ëspessificà."
+msgstr "Dette arkiv har ingen indstillinger."
 
 #: deposit/views.py:189
 msgid "This repository cannot be used for this paper."
-msgstr "Ës depòsit a peul nen esse dovrà për s'artìcol."
+msgstr "Arkivet kan ikke bruges til denne artikel."
 
 #: deposit/views.py:208
 msgid "Access to the PDF was denied."
-msgstr "L'acess al PDF a l'é stàit arfudà"
+msgstr "Adgang til PDF'en blev nægtet."
 
 #: deposit/zenodo/forms.py:29
 msgid "Creative Commons CCZero (CC0)"
@@ -561,7 +561,7 @@ msgstr "Creative Commons Attribution (CC-BY)"
 
 #: deposit/zenodo/forms.py:33
 msgid "Creative Commons Attribution-ShareAlike (CC-BY-SA)"
-msgstr "Creative Commons partage an part uguaj (CC-BY-SA)"
+msgstr "Creative Commons Attribution-ShareAlike (CC-BY-SA)"
 
 #: deposit/zenodo/forms.py:35
 msgid "Creative Commons Attribution-NonCommercial (CC-BY-NC)"
@@ -569,273 +569,273 @@ msgstr "Creative Commons Attribution-NonCommercial (CC-BY-NC)"
 
 #: deposit/zenodo/forms.py:37
 msgid "Creative Commons Attribution-NoDerivatives (CC-BY-ND)"
-msgstr "Creative Commons Attribution-gnun travaj derivà (CC-BY-ND)"
+msgstr "Creative Commons Attribution-NoDerivatives (CC-BY-ND)"
 
 #: deposit/zenodo/forms.py:39
 msgid "Other open license"
-msgstr "Àutra licensa lìbera"
+msgstr "Anden åben licens"
 
 #: deposit/zenodo/protocol.py:72
 msgid "No Zenodo API key provided."
-msgstr "Gnun-a ciav për l'API Zenodo fornìa."
+msgstr "Ingen Zenodo API-nøgle angivet."
 
 #: deposit/zenodo/protocol.py:81
 msgid "This happens when Zenodo has hiccups. Please try again in a few minutes or use a different repository in the menu above."
-msgstr "Sòn a-i riva cand Zenodo a l'ha dij problema. Për piasì, ch'a preuva torna da-sì chèiche minute o ch'a deuvra n'àutr depòsit ant lë mnù ëdzora."
+msgstr ""
 
 #: deposit/zenodo/protocol.py:82
 msgid "Unable to authenticate to Zenodo."
-msgstr "Impossìbil autentichesse con Zenodo."
+msgstr ""
 
 #: deposit/zenodo/protocol.py:89
 msgid "Unable to create a new deposition on Zenodo."
-msgstr "Impossìbil creé un neuv depòsit su Zenodo."
+msgstr ""
 
 #: deposit/zenodo/protocol.py:101
 msgid "Unable to transfer the document to Zenodo."
-msgstr "Impossìbil trasferì ël document a Zenodo."
+msgstr "Kan ikke overføre dokumentet til Zenodo."
 
 #: deposit/zenodo/protocol.py:111
 msgid "No abstract is available for this paper but Zenodo requires one. Please provide it using the metadata panel."
-msgstr "A-i é gnun resumé disponìbil për s'artìcol, ma Zenodo a na ciama un. Për piasì, ch'a lo fornissa an dovrand ël panel ëd metadàit."
+msgstr ""
 
 #: deposit/zenodo/protocol.py:119
 msgid "Unable to submit paper metadata to Zenodo."
-msgstr "Impossìbil mandé ij metadàit ëd l'artìcol a Zenodo."
+msgstr ""
 
 #: deposit/zenodo/protocol.py:135
 msgid "Unable to publish the deposition on Zenodo."
-msgstr "Impossìbil publiché ël depòsit su Zenodo."
+msgstr ""
 
 #: dissemin/settings/common.py:275
 msgid "English"
-msgstr "Anglèis"
+msgstr "Engelsk"
 
 #: dissemin/settings/common.py:276
 msgid "French"
-msgstr "Fransèis"
+msgstr "Fransk"
 
 #: dissemin/settings/common.py:277
 msgid "Simplified Chinese"
-msgstr "Cinèis semplificà"
+msgstr "Forenklet kinesisk"
 
 #: dissemin/settings/common.py:278
 msgid "Macedonian"
-msgstr "Macédon"
+msgstr "Makedonsk"
 
 #: notification/models.py:62
 msgid "inboxes"
-msgstr "casiëtta dla pòsta"
+msgstr ""
 
 #: papers/baremodels.py:54
 msgid "Journal article"
-msgstr "Artìcol ant un giornal"
+msgstr ""
 
 #: papers/baremodels.py:55
 msgid "Proceedings article"
-msgstr "Artìcol ëd rendicont"
+msgstr ""
 
 #: papers/baremodels.py:56
 msgid "Book chapter"
-msgstr "Capìtol d'un lìber"
+msgstr ""
 
 #: papers/baremodels.py:57
 msgid "Book"
-msgstr "Lìber"
+msgstr ""
 
 #: papers/baremodels.py:58
 msgid "Journal issue"
-msgstr "Nùmer d'un giornal"
+msgstr ""
 
 #: papers/baremodels.py:59
 msgid "Proceedings"
-msgstr "Rendicont"
+msgstr ""
 
 #: papers/baremodels.py:60
 msgid "Entry"
-msgstr "Vos"
+msgstr ""
 
 #: papers/baremodels.py:61
 msgid "Poster"
-msgstr "Tilèt"
+msgstr ""
 
 #: papers/baremodels.py:62
 msgid "Report"
-msgstr "Rapòrt"
+msgstr "Rapport"
 
 #: papers/baremodels.py:63
 msgid "Thesis"
-msgstr "Tesi"
+msgstr "Afhandling"
 
 #: papers/baremodels.py:64
 msgid "Dataset"
-msgstr "Ansem ëd dàit"
+msgstr "Datasæt"
 
 #: papers/baremodels.py:65 papers/models.py:101
 msgid "Preprint"
-msgstr "Prepublicassion"
+msgstr ""
 
 #: papers/baremodels.py:66
 msgid "Other document"
-msgstr "Àutr document"
+msgstr "Andet dokument"
 
 #: papers/forms.py:48
 msgid "Invalid ORCID identifier."
-msgstr "Identificativ ORCID nen bon."
+msgstr "Ugyldig ORCID-identifikator."
 
 #: papers/forms.py:54 papers/templates/papers/department.html:86
 #: papers/templates/papers/search.html:160
 msgid "Department"
-msgstr "Dipartiment"
+msgstr "Afdeling"
 
 #: papers/forms.py:56 papers/templates/papers/search.html:114
 msgid "Researcher"
-msgstr "Arsercador"
+msgstr "Forsker"
 
 #: papers/forms.py:75
 msgid "publication date"
-msgstr "dàita ëd publicassion"
+msgstr "udgivelsesdato"
 
 #: papers/forms.py:76
 msgid "title"
-msgstr "tìtol"
+msgstr "titel"
 
 #: papers/forms.py:79 publishers/forms.py:14
 msgid "decreasing"
-msgstr "dechërsent"
+msgstr "faldende"
 
 #: papers/forms.py:80 publishers/forms.py:15
 msgid "increasing"
-msgstr "chërsent"
+msgstr "øgende"
 
 #: papers/forms.py:100 papers/forms.py:107
 msgid "Any"
-msgstr "Qualsëssìa"
+msgstr "Alle"
 
 #: papers/forms.py:101
 msgid "Visible"
-msgstr "Visìbil"
+msgstr "Synlig"
 
 #: papers/forms.py:102
 msgid "Invisible"
-msgstr "Invisìbil"
+msgstr "Usynlig"
 
 #: papers/forms.py:191
 msgid "Try any author name"
-msgstr "Prové un nòm d'autor qualsëssìa"
+msgstr "Prøv et forfatternavn"
 
 #: papers/models.py:102
 msgid "Postprint"
-msgstr "Apress publicassion"
+msgstr ""
 
 #: papers/models.py:103
 msgid "Published version"
-msgstr "Version publicà"
+msgstr "Udgivet version"
 
 #: papers/models.py:107
 msgid "Preparing profile"
-msgstr "Preparassion dël profil"
+msgstr "Forbereder profil"
 
 #: papers/models.py:108
 msgid "Fetching publications from ORCID"
-msgstr "Arcuperassion dle publicassion da ORCID"
+msgstr "Henter publikationer fra ORCID"
 
 #: papers/models.py:109
 msgid "Fetching publications from CrossRef"
-msgstr "Arcuperassion dle publicassion da CrossRef"
+msgstr "Henter publikationer fra CrossRef"
 
 #: papers/models.py:110
 msgid "Fetching publications from BASE"
-msgstr "Arcuperassion dle publicassion da BASE"
+msgstr "Henter publikationer fra BASE"
 
 #: papers/models.py:111
 msgid "Fetching publications from CORE"
-msgstr "Arcuperassion dle publicassion da CORE"
+msgstr "Henter publikationer fra CORE"
 
 #: papers/models.py:112
 msgid "Fetching publications from OAI-PMH"
-msgstr "Arcuperassion dle publicassion da OAI-PMH"
+msgstr "Henter publikationer fra OAI-PMH"
 
 #: papers/models.py:113
 msgid "Clustering publications"
-msgstr "Argropament ëd le publicassion"
+msgstr ""
 
 #: papers/models.py:114
 msgid "Updating statistics"
-msgstr "Agiornament ëd le statìstiche"
+msgstr "Opdaterer statistik"
 
 #: papers/models.py:1255 papers/views.py:124 papers/views.py:129
 #: papers/views.py:269 papers/views.py:303
 msgid "Papers"
-msgstr "Artìcoj"
+msgstr "Artikler"
 
 #: papers/templates/papers/annotButtons.html:8
 msgid "Right"
-msgstr "Giust"
+msgstr "Korrekt"
 
 #: papers/templates/papers/annotButtons.html:13
 msgid "Wrong"
-msgstr "Sbalià"
+msgstr "Forkert"
 
 #: papers/templates/papers/annotButtons.html:16
 #: papers/templates/papers/paperDetails.html:26
 msgid "Search in Google Scholar"
-msgstr "Sërché an Google Scholar"
+msgstr "Søg i Google Scholar"
 
 #: papers/templates/papers/createProfile.html:8
 #: papers/templates/papers/createProfile.html:12
 msgid "Create your profile"
-msgstr "Creé sò profil"
+msgstr "Opret din profil"
 
 #: papers/templates/papers/createProfile.html:15
 msgid "\nTo fetch your publications, we need one last piece of information: your name.\n"
-msgstr "Për arcuperé soe publicassion, i l'oma damanca ëd n'ùltima anformassion: sò nòm."
+msgstr ""
 
 #: papers/templates/papers/department.html:60
 #: papers/templates/papers/institution.html:37
 #: publishers/templates/publishers/list.html:116
 #: publishers/templates/publishers/policy.html:127
-#, python-format
+#, invalid-plural, python-format
 msgid "(%(num_total)s paper)"
 msgid_plural "(%(num_total)s papers)"
-msgstr[0] "(%(num_total)s artìcol)"
-msgstr[1] "(%(num_total)s artìcoj)"
+msgstr[0] ""
+msgstr[1] ""
 
 #: papers/templates/papers/department.html:71
 #: papers/templates/papers/institution.html:48
 msgid "Researcher deleted. "
-msgstr "Arsercador eliminà. "
+msgstr ""
 
 #: papers/templates/papers/department.html:75
 #: papers/templates/papers/institution.html:52
 msgid "Delete"
-msgstr "Eliminé"
+msgstr "Slet"
 
 #: papers/templates/papers/department.html:88
 msgid "Papers of the members"
-msgstr "Artìcoj dij mèmber"
+msgstr ""
 
 #: papers/templates/papers/group.html:14
 msgid "Website"
-msgstr "Sit an sl'aragnà"
+msgstr "Hjemmeside"
 
 #: papers/templates/papers/group.html:18
 msgid "Members:"
-msgstr "Mèmber:"
+msgstr "Medlemmer:"
 
 #: papers/templates/papers/index.html:10
 #: papers/templates/papers/institutions.html:11
 #: templates/dissemin/breadcrumbs.html:3 templates/dissemin/skeleton.html:71
 msgid "Home"
-msgstr "Pàgina d'intrada"
+msgstr "Hjem"
 
 #: papers/templates/papers/index.html:23
 msgid "Welcome to dissemin"
-msgstr "Bin-ëvnù su dissemin"
+msgstr "Velkommen til Dissemin"
 
 #: papers/templates/papers/index.html:26
 msgid "Dissemin detects papers behind pay-walls and invites their authors to upload them in one click to an open repository."
-msgstr "Dissemin a treuva j'artìcoj a acess a pagament e a anvita ij sò autor a carieje con në sgnacament ant un depòsit duvert."
+msgstr "Dissemin finder artikler bag betalingsmure og inviterer deres forfattere til at sende dem via et klik til et frit arkiv."
 
 #: papers/templates/papers/index.html:36
 #: papers/templates/papers/search.html:204
@@ -846,247 +846,247 @@ msgstr "Dissemin a treuva j'artìcoj a acess a pagament e a anvita ij sò autor 
 #: publishers/templates/publishers/list.html:50
 #: publishers/templates/publishers/list.html:89
 msgid "Search"
-msgstr "Arserca"
+msgstr "Søg"
 
 #: papers/templates/papers/index.html:46
 msgid "Green open access"
-msgstr "Acess lìber (verd)"
+msgstr "Grøn åben adgang"
 
 #: papers/templates/papers/index.html:50
 msgid "Many researchers do not use their right to make their papers freely available online, in addition to the paywalled version offered by traditional publishers."
-msgstr "Tanti arsercador a deuvro nen sò drit ëd buté ij sò artìcoj an acess lìber an sl'aragnà, an dzorpì dla version a pagament proponùa da j'editor tradissionaj."
+msgstr ""
 
 #: papers/templates/papers/index.html:58
 msgid "This forces libraries to buy overpriced electronic subscriptions to journals, when they can afford them at all."
-msgstr "Sòn a òbliga le biblioteche a paghé un përfond j'abonament eletrònich ai giornaj, sempe ch'a peulo permëts-lo."
+msgstr ""
 
 #: papers/templates/papers/index.html:74
 msgid "Open repositories"
-msgstr "Depòsit duvert"
+msgstr ""
 
 #: papers/templates/papers/index.html:77
 msgid "Uploading your papers on your own webpage is not enough. Such copies are less stable and harder to find than documents uploaded to well-indexed repositories."
-msgstr "Carié ij sò artìcoj ansima a soa pàgina dl'aragnà a basta nen. Coste còpie a son meno stàbij e pi difìcij da trové che ij document carià an s'dij depòsit bin andicisà."
+msgstr ""
 
 #: papers/templates/papers/index.html:85
 msgid "Dissemin searches for copies of your papers in a large collection of open repositories and tells you which ones cannot be accessed."
-msgstr "Dissemin a sërca dle còpie dij sò artìcoj an na gran colession ëd depòsit duvert e a-j dis coj ch'a son inacessìbij."
+msgstr ""
 
 #: papers/templates/papers/institutions.html:25
 msgid "Institutions"
-msgstr "Anstitussion"
+msgstr "Institutioner"
 
 #: papers/templates/papers/itemOrcid.html:16
 #: papers/templates/papers/itemResearcher.html:16
 msgid "Yes"
-msgstr "É"
+msgstr "Ja"
 
 #: papers/templates/papers/itemResearcher.html:13
 msgid "(empty profile)"
-msgstr "(profil veuid)"
+msgstr "(tom profil)"
 
 #: papers/templates/papers/paper.html:62
 #, python-format
 msgctxt "as in: _Journal article by_ Tom Smith, Nicole Allen"
 msgid " \n    <span class=\"paperDocType\">%(doctype)s</span> by\n    "
-msgstr " \n    <span class=\"paperDocType\">%(doctype)s</span> by\n    "
+msgstr ""
 
 #: papers/templates/papers/paper.html:70
 #, python-format
 msgid "\n            and <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s other authors</a>\n            "
-msgstr "\n            e <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s d'àutri autor</a>\n            "
+msgstr ""
 
 #: papers/templates/papers/paper.html:77
 #, python-format
 msgid "\n            All %(nb_authors)s authors (<a href=\"#\" id=\"show_less_authors\">show less</a>):<br />\n            "
-msgstr "\n            Tuti ij %(nb_authors)s autor (<a href=\"#\" id=\"show_less_authors\">smon-e ëd men</a>):<br />\n            "
+msgstr ""
 
 #: papers/templates/papers/paper.html:89
 msgid "<strong>Congratulations!</strong> This paper was successfully deposited."
-msgstr "<strong>Compliment!</strong> S'artìcol a l'é stàit deposità për da bin."
+msgstr ""
 
 #: papers/templates/papers/paper.html:96
 #, python-format
 msgid "<strong>Almost there!</strong> This paper has been deposited in <a href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a href=\"%(deposit_url)s\">this address</a> after validation by the repository administrators."
-msgstr "<strong>I-i soma scasi!</strong> S'artìcol a l'é stàit deposità an <a href=\"%(repo_url)s\">%(repo_name)s</a>. Ël test complet a sarà disponìbil a <a href=\"%(deposit_url)s\">cost'adrëssa</a> na vira convalidà da j'aministrator dël depòsit."
+msgstr ""
 
 #: papers/templates/papers/paper.html:114
 msgid "Full text:"
-msgstr "Test complet:"
+msgstr ""
 
 #: papers/templates/papers/paper.html:116
 #: papers/templates/papers/publiListItem.html:37
 msgid "Download"
-msgstr "Dëscarié"
+msgstr ""
 
 #: papers/templates/papers/paper.html:118 statistics/models.py:66
 msgid "Unavailable"
-msgstr "Indisponìbil"
+msgstr "Utilgængelig"
 
 #: papers/templates/papers/paper.html:120
 msgid "Ask upload"
-msgstr "Ciamé ël cariament"
+msgstr ""
 
 #: papers/templates/papers/paper.html:124
 msgid "Publisher:"
-msgstr "Ca editris:"
+msgstr "Udgiver:"
 
 #: papers/templates/papers/paper.html:131
 msgid "Deposited."
-msgstr "Deposità."
+msgstr ""
 
 #: papers/templates/papers/paper.html:133
 msgid "Deposit again"
-msgstr "Deposité torna"
+msgstr ""
 
 #: papers/templates/papers/paperDetails.html:7
 msgid "Published in"
-msgstr "Publicà an"
+msgstr ""
 
 #: papers/templates/papers/paperDetails.html:19
 msgid "Links"
-msgstr "Liure"
+msgstr ""
 
 #: papers/templates/papers/paperDetails.html:24
 msgid "Tools"
-msgstr "Utiss"
+msgstr "Værktøjer"
 
 #: papers/templates/papers/paperDetails.html:29
 msgid "Request with the Open Access Button"
-msgstr "Ciamé con l'Open Access Button"
+msgstr ""
 
 #: papers/templates/papers/paperDetails.html:35
 msgid "Admin zone"
-msgstr "Aministrassion"
+msgstr "Adminzone"
 
 #: papers/templates/papers/paperList.html:26
 msgid "No paper found."
-msgstr "Gnun artìcol trovà."
+msgstr ""
 
 #: papers/templates/papers/paperList.html:33
 #, python-format
 msgid "Missing publications? <a href=\"%(matching_papers_url)s\"> Search for publications with a matching author name </a>"
-msgstr "A-i manco dle publicassion? <a href=\"%(matching_papers_url)s\"> Ch'a sërca dle publicassion a parte d'un nòm d'autor </a>"
+msgstr ""
 
 #: papers/templates/papers/publiListItem.html:16
 #, python-format
 msgid "and %(remaining_authors)s other authors"
-msgstr "e %(remaining_authors)s d'àutri autor"
+msgstr ""
 
 #: papers/templates/papers/publiListItem.html:40
 #: publishers/templates/publishers/itemPolicy.html:21
 msgid "Upload"
-msgstr "Carié"
+msgstr "Overfør"
 
 #: papers/templates/papers/publiListItem.html:45
 #: papers/templates/papers/search.html:52
 msgid "Exclude from my profile"
-msgstr "Gavé da mè profil"
+msgstr "Ekskluder fra min profil"
 
 #: papers/templates/papers/publiListItem.html:52
 #: papers/templates/papers/search.html:55
 msgid "Include in my profile"
-msgstr "Buté an mè profil"
+msgstr "Inkluder i min profil"
 
 #: papers/templates/papers/search.html:37
 msgid "Claiming..."
-msgstr "Anclusion an cors..."
+msgstr ""
 
 #: papers/templates/papers/search.html:40
 msgid "Unclaiming..."
-msgstr "Esclusion an cors..."
+msgstr ""
 
 #: papers/templates/papers/search.html:71
 msgid "Claiming failed!"
-msgstr "Anclusion falìa!"
+msgstr ""
 
 #: papers/templates/papers/search.html:73
 msgid "Unclaiming failed!"
-msgstr "Esclusion falìa!"
+msgstr ""
 
 #: papers/templates/papers/search.html:89
 msgid "Refreshing results"
-msgstr "Agiornament ëd j'arzultà"
+msgstr ""
 
 #: papers/templates/papers/search.html:99
 msgid "Refreshing profile"
-msgstr "Agiornament dël profil"
+msgstr ""
 
 #: papers/templates/papers/search.html:119
 msgid "Is it you?"
-msgstr "É-lo chiel?"
+msgstr "Er det dig?"
 
 #: papers/templates/papers/search.html:140
 msgid "Refresh publications"
-msgstr "Agiorné le publicassion"
+msgstr ""
 
 #: papers/templates/papers/search.html:143
 msgid "Address:"
-msgstr "Adrëssa:"
+msgstr "Adresse:"
 
 #: papers/templates/papers/search.html:146
 msgid "Names:"
-msgstr "Nòm:"
+msgstr "Navne:"
 
 #: papers/templates/papers/search.html:165
 msgid "Journal"
-msgstr "Giornal"
+msgstr "Journal"
 
 #: papers/templates/papers/search.html:168
 msgid "Published by"
-msgstr "Publicà da"
+msgstr "Udgivet af"
 
 #: papers/templates/papers/search.html:170
 msgid "ISSN:"
 msgstr "ISSN:"
 
 #: papers/templates/papers/search.html:178
-#, python-format
+#, invalid-plural, python-format
 msgid "%(nb_publi)s paper published in %(journal)s"
 msgid_plural "%(nb_publi)s papers published in %(journal)s"
-msgstr[0] "%(nb_publi)s artìcol publicà an %(journal)s"
-msgstr[1] "%(nb_publi)s artìcoj publicà an %(journal)s"
+msgstr[0] ""
+msgstr[1] ""
 
 #: papers/templates/papers/search.html:186
 #: publishers/templates/publishers/policy.html:41
 msgid "Publisher"
-msgstr "Ca editris"
+msgstr ""
 
 #: papers/templates/papers/search.html:195
-#, python-format
+#, invalid-plural, python-format
 msgid "%(nb_publi)s paper published by %(publisher)s"
 msgid_plural "%(nb_publi)s papers published by %(publisher)s"
-msgstr[0] "%(nb_publi)s artìcol publicà da %(publisher)s"
-msgstr[1] "%(nb_publi)s artìcoj publicà da %(publisher)s"
+msgstr[0] ""
+msgstr[1] ""
 
 #: papers/templates/papers/search.html:222
 msgid "Search by title"
-msgstr "Sërché për tìtol"
+msgstr "Søgning efter titel"
 
 #: papers/templates/papers/search.html:232
 msgid "By authors"
-msgstr "Për autor"
+msgstr "Efter forfattere"
 
 #: papers/templates/papers/search.html:237
 msgid "By publication date"
-msgstr "Për dàita ëd publicassion"
+msgstr "Efter udgivelsesdato"
 
 #: papers/templates/papers/search.html:240
 msgid "after"
-msgstr "apress"
+msgstr "efter"
 
 #: papers/templates/papers/search.html:247
 msgid "before"
-msgstr "prima"
+msgstr "før"
 
 #: papers/templates/papers/search.html:254
 msgid "By document type"
-msgstr "Për sòrt ëd document"
+msgstr "Efter dokumenttype"
 
 #: papers/templates/papers/search.html:273
 #: publishers/templates/publishers/list.html:76
 msgid "Sort by"
-msgstr "Ordiné për"
+msgstr "Sorter efter"
 
 #: papers/templates/papers/search.html:281
 #: publishers/templates/publishers/list.html:84
@@ -1096,413 +1096,413 @@ msgstr "%(sort_by)s <div>%(increasing)s %(value)s</div>"
 
 #: papers/templates/papers/search.html:287
 msgid "By visibility"
-msgstr "Për visibilità"
+msgstr "Efter synlighed"
 
 #: papers/templates/papers/search.html:292
 msgid "By full text availability"
-msgstr "Për disponibilità dël test complet"
+msgstr "Efter fuldteksttilgængelighed"
 
 #: papers/templates/papers/search.html:298
 msgid "By publisher policy"
-msgstr "Për régole ëd publicassion"
+msgstr "Efter udgiverpolitik"
 
 #: papers/templatetags/statuses.py:19 papers/templatetags/statuses.py:79
 msgid "Unknown OA status"
-msgstr "Stat AD sconossù"
+msgstr "Ukendt OA-status"
 
 #: papers/templatetags/statuses.py:27
 msgid "Unknown PDF status"
-msgstr "Stat PDF sconossù"
+msgstr "Ukendt PDF-status"
 
 #: papers/templatetags/statuses.py:33
 msgid "Preprints can be archived."
-msgstr "Le prepublicassion a peulo esse archivià."
+msgstr ""
 
 #: papers/templatetags/statuses.py:34
 msgid "Preprints cannot be archived."
-msgstr "Le prepublicassion a peulo nen esse archivià."
+msgstr ""
 
 #: papers/templatetags/statuses.py:35
 msgid "Under the restrictions below, preprints can be archived."
-msgstr "Con le restrission sì-sota, le prepublicassion a peulo esse archivià."
+msgstr ""
 
 #: papers/templatetags/statuses.py:36
 msgid "Preprints archiving policy unclear"
-msgstr "Le régole an sl'archiviassion dle prepublicassion a son nen ciàire"
+msgstr ""
 
 #: papers/templatetags/statuses.py:37
 msgid "Preprints archiving policy unknown"
-msgstr "Le régole an sl'archiviassion dle prepublicassion a son nen conossùe"
+msgstr ""
 
 #: papers/templatetags/statuses.py:38
 msgid "Postprints can be archived."
-msgstr "Le pòst-publicassion a peulo esse archivià."
+msgstr ""
 
 #: papers/templatetags/statuses.py:39
 msgid "Postprints cannot be archived."
-msgstr "Le pòst-publicassion a peulo nen esse archivià."
+msgstr ""
 
 #: papers/templatetags/statuses.py:40
 msgid "Under the restrictions below, postprints can be archived."
-msgstr "Con le restrission sì-sota, le pòst-publicassion a peulo esse archivià."
+msgstr ""
 
 #: papers/templatetags/statuses.py:41
 msgid "Postprint archiving policy unclear."
-msgstr "Lé régola an sl'archiviassion dle pòst-publicassion a son nen ciàire."
+msgstr ""
 
 #: papers/templatetags/statuses.py:42
 msgid "Postprint archiving policy unknown."
-msgstr "Le régole an sl'archiviassion dle pòst-publicassion a son nen ciàire."
+msgstr ""
 
 #: papers/templatetags/statuses.py:43
 msgid "Final versions can be archived."
-msgstr "Le version finaj a peulo esse archivià."
+msgstr ""
 
 #: papers/templatetags/statuses.py:44
 msgid "Final versions cannot be archived."
-msgstr "Le version finaj a peulo nen esse archivià."
+msgstr ""
 
 #: papers/templatetags/statuses.py:45
 msgid "Under the restrictions below, final versions can be archived."
-msgstr "Con le restrission sì-sota, le version finaj a peulo esse archivià."
+msgstr ""
 
 #: papers/templatetags/statuses.py:46
 msgid "Final version archiving policy unclear."
-msgstr "Lé régole an sl'archiviassion dle version finaj a son nen ciàire."
+msgstr ""
 
 #: papers/templatetags/statuses.py:47
 msgid "Final version archiving policy unknown."
-msgstr "Lé régole an sl'archiviassion dle version finaj as conòsso nen."
+msgstr ""
 
 #: papers/templatetags/statuses.py:49
 msgid "Unknown policy"
-msgstr "Régole sconossùe"
+msgstr ""
 
 #: papers/templatetags/statuses.py:55
 msgid "archiving allowed."
-msgstr "archiviassion autorisà."
+msgstr ""
 
 #: papers/templatetags/statuses.py:56
 msgid "archiving forbidden."
-msgstr "archiviassion vietà."
+msgstr ""
 
 #: papers/templatetags/statuses.py:57
 msgid "archiving restricted:"
-msgstr "archiviassion limità:"
+msgstr ""
 
 #: papers/templatetags/statuses.py:58
 msgid "policy unclear."
-msgstr "régole nen ciàire."
+msgstr ""
 
 #: papers/templatetags/statuses.py:59 papers/templatetags/statuses.py:61
 #: papers/templatetags/statuses.py:73
 msgid "policy unknown."
-msgstr "régole sconossùe."
+msgstr ""
 
 #: papers/templatetags/statuses.py:67
 msgid "archiving allowed"
-msgstr "archiviassion autorisà"
+msgstr ""
 
 #: papers/templatetags/statuses.py:68
 msgid "archiving forbidden"
-msgstr "archiviassion vietà"
+msgstr ""
 
 #: papers/templatetags/statuses.py:69
 msgid "archiving restricted"
-msgstr "archiviassion limità"
+msgstr ""
 
 #: papers/templatetags/statuses.py:70
 msgid "policy unclear"
-msgstr "régole nen ciàire"
+msgstr ""
 
 #: papers/templatetags/statuses.py:71
 msgid "policy unknown"
-msgstr "régole sconossùe"
+msgstr ""
 
 #: papers/views.py:128
 msgid "All papers"
-msgstr "Tuti j'artìcoj"
+msgstr ""
 
 #: papers/views.py:132
-#, python-format
+#, invalid-plural, python-format
 msgid "%d paper found"
 msgid_plural "%d papers found"
-msgstr[0] "%d artìcol trovà"
-msgstr[1] "%d artìcoj trovà"
+msgstr[0] ""
+msgstr[1] ""
 
 #: papers/views.py:211
 msgid "\n                            Invalid ORCID profile.\n                            Please make sure it includes a public name.\n                            "
-msgstr "\n                            Profil ORCID nen vàlid.\n                            Për piasì, ch'as sigura ch'a anclud un nòm pùblich.\n                            "
+msgstr ""
 
 #: papers/views.py:217
 msgid "Invalid ORCID profile."
-msgstr "Profil ORCID nen vàlid."
+msgstr ""
 
 #: papers/views.py:239
 msgid " authored by "
-msgstr "scrivù da "
+msgstr ""
 
 #: papers/views.py:283
 msgid " published by "
-msgstr " publicà da "
+msgstr ""
 
 #: papers/views.py:312
 msgid " in "
-msgstr " an "
+msgstr ""
 
 #: papers/views.py:389
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
-msgstr "Gnun %(verbose_name)s a rëspond a l'arcesta"
+msgstr ""
 
 #: publishers/forms.py:10
 msgid "popularity"
-msgstr "popolarità"
+msgstr ""
 
 #: publishers/forms.py:11
 msgid "name"
-msgstr "nòm"
+msgstr ""
 
 #: publishers/forms.py:19 publishers/templates/publishers/list.html:55
 msgid "Filter by publisher policy"
-msgstr "Filtré conforma a le régole ëd publicassion"
+msgstr ""
 
 #: publishers/models.py:38
 msgid "Open access"
-msgstr "Acess lìber"
+msgstr ""
 
 #: publishers/models.py:38
 msgid "Freely available from the publisher."
-msgstr "Liberaman acessìbil a parte da la ca editris."
+msgstr ""
 
 #: publishers/models.py:39
 msgid "Allows pre/post prints"
-msgstr "Prepublicassion e pòst-publicassion autorisà"
+msgstr ""
 
 #: publishers/models.py:40
 msgid "The publisher sells copies but allows authors to deposit some version of the article in a repository."
-msgstr "La ca editris a buta soe còpie a pagament ma a përmet a j'autor ëd buté chèiche version ëd l'artìcol ant un depòsit."
+msgstr ""
 
 #: publishers/models.py:41
 msgid "Forbids pre/post prints"
-msgstr "Prepublicassion e pòst-publicassion vietà"
+msgstr ""
 
 #: publishers/models.py:42
 msgid "The publisher forbids authors to deposit any version of their article online."
-msgstr "La ca editris a ampediss a j'autor ëd deposité qualsëssìa version ëd sò artìcol an sl'aragnà."
+msgstr ""
 
 #: publishers/models.py:43
 msgid "Policy unclear"
-msgstr "Régole nen ciàire"
+msgstr ""
 
 #: publishers/models.py:44
 msgid "For complicated policies, unknown publishers and unpublished documents."
-msgstr "Për le régole complicà, le ca editris ësconossùe e ij document nen publicà."
+msgstr ""
 
 #: publishers/models.py:47
 msgid "Allowed"
-msgstr "Autorisà"
+msgstr ""
 
 #: publishers/models.py:48
 msgid "Forbidden"
-msgstr "Vietà"
+msgstr ""
 
 #: publishers/models.py:49
 msgid "Restricted"
-msgstr "Limità"
+msgstr ""
 
 #: publishers/models.py:50
 msgid "Unclear"
-msgstr "Nen ciàir"
+msgstr ""
 
 #: publishers/models.py:51
 msgid "Unknown"
-msgstr "Nen conossù"
+msgstr ""
 
 #: publishers/models.py:59 publishers/views.py:94
 msgid "Publishers"
-msgstr "Ca editris"
+msgstr ""
 
 #: publishers/models.py:79
 msgid "Unknown publisher"
-msgstr "Ca editris ësconossùa"
+msgstr ""
 
 #: publishers/templates/publishers/detailsPolicy.html:6
 msgid "Preprint:"
-msgstr "Prepublicassion:"
+msgstr ""
 
 #: publishers/templates/publishers/detailsPolicy.html:7
 msgid "A preprint is a document produced by the authors without any interaction with the peer-reviewing process."
-msgstr "Na prepublicassion a l'é un papé produvù da j'autor sensa antërassion con ël process ëd revision antra 'd par."
+msgstr ""
 
 #: publishers/templates/publishers/detailsPolicy.html:8
 msgid "preprint"
-msgstr "prepublicassion"
+msgstr ""
 
 #: publishers/templates/publishers/detailsPolicy.html:10
 msgid "Postprint:"
-msgstr "Pòst-publicassion:"
+msgstr ""
 
 #: publishers/templates/publishers/detailsPolicy.html:11
 msgid "Postprints differ from preprints in that they include the changes suggested by the reviewers. They are not edited by the publisher."
-msgstr "Le pòst-publicassion a son diferente da le prepublicassion përchè a comprendo le modìfiche sugerìe dai revisor. A son nen coregiùe da l'editor."
+msgstr ""
 
 #: publishers/templates/publishers/detailsPolicy.html:12
 msgid "postprint"
-msgstr "pòst-publicassion"
+msgstr ""
 
 #: publishers/templates/publishers/detailsPolicy.html:14
 msgid "Published version:"
-msgstr "Version publicà:"
+msgstr ""
 
 #: publishers/templates/publishers/detailsPolicy.html:15
 msgid "The published version is the final version of the paper, as formatted by the publisher."
-msgstr "La version publicà a l'é la version final ëd l'artìcol, coma ampaginà da l'editor."
+msgstr ""
 
 #: publishers/templates/publishers/detailsPolicy.html:16
 msgid "published version"
-msgstr "version publicà"
+msgstr ""
 
 #: publishers/templates/publishers/list.html:38
-#, python-format
+#, invalid-plural, python-format
 msgid "%(counter)s publisher found"
 msgid_plural "%(counter)s publishers found"
-msgstr[0] "%(counter)s ca editris trovà"
-msgstr[1] "%(counter)s ca editris trovà"
+msgstr[0] ""
+msgstr[1] ""
 
 #: publishers/templates/publishers/list.html:94
 msgid "Data provided by"
-msgstr "Dàit fornì da"
+msgstr ""
 
 #: publishers/templates/publishers/list.html:129
 msgid "No publisher found."
-msgstr "Gnun-a ca editris trovà."
+msgstr ""
 
 #: publishers/templates/publishers/policy.html:58
 msgid "Policy data provided by"
-msgstr "Ij dàit an sle régole a son fornì da"
+msgstr ""
 
 #: publishers/templates/publishers/policy.html:62
 msgid "Report any error to them"
-msgstr "Ch'a signala s'a-i é d'eror"
+msgstr ""
 
 #: publishers/templates/publishers/policy.html:67
 msgid "Policy"
-msgstr "Régole"
+msgstr ""
 
 #: publishers/templates/publishers/policy.html:93
 msgid "Conditions"
-msgstr "Condission"
+msgstr ""
 
 #: publishers/templates/publishers/policy.html:101
 msgid "Policy details"
-msgstr "Detaj dle régole"
+msgstr ""
 
 #: publishers/templates/publishers/policy.html:110
 msgid "Publications"
-msgstr "Publicassion"
+msgstr ""
 
 #: publishers/templates/publishers/policy.html:113
 #, python-format
 msgid "All papers published by %(publisher)s"
-msgstr "Tuti j'artìcoj publicà da %(publisher)s"
+msgstr ""
 
 #: publishers/templates/publishers/policy.html:118
 msgid "Journals"
-msgstr "Giornaj"
+msgstr ""
 
 #: publishers/templates/publishers/policy.html:119
 msgid "Only journals with papers written by our users are listed."
-msgstr "A son listà mach ij giornaj con d'artìcoj scrivù dai nòstri utent."
+msgstr ""
 
 #: publishers/templates/publishers/policy.html:134
 msgid "None."
-msgstr "Gnun."
+msgstr ""
 
 #: statistics/models.py:48
 msgid "Available from the publisher"
-msgstr "Disponìbil a parte da l'editor"
+msgstr ""
 
 #: statistics/models.py:49
 msgid "Available from the author"
-msgstr "Disponìbil a parte da l'autor"
+msgstr ""
 
 #: statistics/models.py:50
 msgid "Could be shared by the authors"
-msgstr "A podrìa esse partagià da j'autor"
+msgstr ""
 
 #: statistics/models.py:51
 msgid "Unknown/unclear sharing policy"
-msgstr "Régole ëd partagi sconossùe o nen ciàire"
+msgstr ""
 
 #: statistics/models.py:52
 msgid "Publisher forbids sharing"
-msgstr "La ca editris a vieta ël partagi"
+msgstr ""
 
 #: statistics/models.py:57
 msgid "This paper is made freely available by the publisher."
-msgstr "S'artìcol a l'é rendù disponìbil liberaman da l'editor."
+msgstr ""
 
 #: statistics/models.py:58
 msgid "This paper is available in a repository."
-msgstr "S'artìcol a l'é disponìbil ant un depòsit."
+msgstr ""
 
 #: statistics/models.py:59
 msgid "This paper was not found in any repository, but could be made available legally by the author."
-msgstr "S'articol a l'é stàit trovà an gnun depòsit, ma a podrìa esse rendù disponìbil legalman da j'autor."
+msgstr ""
 
 #: statistics/models.py:60
 msgid "This paper was not found in any repository; the policy of its publisher is unknown or unclear."
-msgstr "S'artìcol a l'é stàit trovà an gnun depòsit; le régole dla ca editris a son ësconossùe o nen ciàire."
+msgstr ""
 
 #: statistics/models.py:61
 msgid "Distributing this paper is prohibited by the publisher"
-msgstr "La ca editris a proibiss la distribussion ëd s'artìcol"
+msgstr ""
 
 #: statistics/models.py:65
 msgid "Available"
-msgstr "Disponìbil"
+msgstr ""
 
 #: statistics/templates/statistics/availabilitypct.html:10
 msgid "of the papers by this publisher are available"
-msgstr "dj'artìcoj ëd sa ca editris a son disponìbij"
+msgstr ""
 
 #: statistics/templates/statistics/histogram.html:5
 #: templates/dissemin/faq.html:49
 msgid "Open Access"
-msgstr "Acess lìber e a gràtis"
+msgstr ""
 
 #: statistics/templates/statistics/histogram.html:8
 msgid "Publications are available"
-msgstr "Le publicassion a son disponìbij"
+msgstr ""
 
 #: statistics/templates/statistics/histogram.html:11
 msgid "Publications could be online"
-msgstr "Le publicassion a podrìo esse an sl'aragnà"
+msgstr ""
 
 #: statistics/templates/statistics/histogram.html:14
 msgid "Policy unknown"
-msgstr "Régole sconossùe"
+msgstr ""
 
 #: statistics/templates/statistics/histogram.html:17
 msgid "Upload is forbidden"
-msgstr "Ël cariament a l'é vietà"
+msgstr ""
 
 #: templates/404.html:6 templates/404.html:12
 msgid "Page not found"
-msgstr "Pàgina nen trovà"
+msgstr ""
 
 #: templates/404.html:13
 msgid "\n            The page you requested could not be found. <a href=\"/\">Go back to the home page.</a>\n           "
-msgstr "\n            La pàgina ch'a l'ha ciamà as treuva nen. <a href=\"/\">Torné a la pàgina d'intrada.</a>\n           "
+msgstr ""
 
 #: templates/500.html:6 templates/500.html:12
 msgid "Internal error"
-msgstr "Eror antern"
+msgstr ""
 
 #: templates/500.html:13
 msgid "\n            Your request triggered an internal error. <a href=\"/\">Go back to the home page.</a>\n           "
-msgstr "\n            Soa arcesta a l'ha causà n'eror antern. <a href=\"/\">Torné a la pàgina d'intrada.</a>\n           "
+msgstr ""
 
 #: templates/admin/base_site.html:4
 msgid "Dissemin site admin"

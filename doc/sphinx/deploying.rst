@@ -48,11 +48,6 @@ Here is a sample VirtualHost, assuming that the root of the Dissemin source code
             <Location /robots.txt>
             Require all granted
             </Location>
-            # Favicon at the root
-            Alias /favicon.ico /home/dissemin/www/static/favicon/favicon.ico
-            <Location /favicon.ico>
-            Require all granted
-            </Location>
             # Thumbnails of PDF files uploaded by users
             Alias /media/thumbnails/ /home/dissemin/media/thumbnails/
             <Directory /home/dissemin/media/thumbnails>
@@ -66,11 +61,6 @@ Here is a sample VirtualHost, assuming that the root of the Dissemin source code
             # Generic static files (CSS, JS, images)
             Alias /static/ /home/dissemin/www/static/
             <Directory /home/dissemin/www/static>
-            Require all granted
-            </Directory>
-            # More detailed favicons
-            Alias /favicon/ /home/dissemin/www/static/favicon/
-            <Directory /home/dissemin/www/static/favicon>
             Require all granted
             </Directory>
 
