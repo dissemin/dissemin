@@ -89,6 +89,12 @@ DOI_PROXY_SUPPORTS_BATCH = True
 #DOI_PROXY_DOMAIN =  'doi.org'
 #DOI_PROXY_SUPPORTS_BATCH = False
 
+### CrossRef politeness options ###
+# These options determine how we identify ourselves to CrossRef.
+# It is not mandatory to provide them but it helps get a better service.
+CROSSREF_MAILTO = 'dev@dissem.in'
+CROSSREF_USER_AGENT = 'Dissemin/0.1 (https://dissem.in/; mailto:dev@dissem.in)'
+
 # Proaixy API key
 # Used to fetch paper metadata. Get one by asking developers@dissem.in
 # This is a default key that should only be used for tests

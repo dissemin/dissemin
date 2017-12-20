@@ -32,6 +32,8 @@ from backend.utils import urlopen_retry
 from backend.doiprefixes import free_doi_prefixes
 from dissemin.settings import DOI_PROXY_DOMAIN
 from dissemin.settings import DOI_PROXY_SUPPORTS_BATCH
+from dissemin.settings import CROSSREF_USER_AGENT
+from dissemin.settings import CROSSREF_MAILTO
 from django.db import DataError
 from django.utils.http import urlencode
 from papers.baremodels import BareName
@@ -318,6 +320,18 @@ def fetch_dois_incrementally(doi_list):
             continue
         yield metadata
 
+def make_crossref_call(endpoint, params=None, headers=None):
+    """
+    Wrapper that adds politeness parameters to CrossRef calls
+    """
+    if params is None:
+        params = {}
+    if headers is None:
+        headers = {}
+    params['mailto'] = CROSSREF_MAILTO
+    headers['User-Agent'] = CROSSREF_USER_AGENT
+    return requests.get('https://api.crossref.org'+endpoint,
+            params=params, headers=headers)
 
 def fetch_dois_by_batch(doi_list):
     """
@@ -340,12 +354,13 @@ def fetch_dois_by_batch(doi_list):
         return first_dois + last_dois
 
     # Given how we are joining the DOIs, they cannot contain commas
-    params = {'filter': ','.join(['doi:'+doi for doi in doi_list if ',' not in doi])}
+    params = {'filter': ','.join(['doi:'+doi for doi in doi_list if ',' not in doi]),
+              'mailto': CROSSREF_MAILTO}
     req = None
     try:
         # First we fetch dois by batch from CrossRef. That's fast, but only
         # works for CrossRef DOIs
-        req = requests.get('https://api.crossref.org/works', params=params)
+        req = make_crossref_call('/works', params=params)
         req.raise_for_status()
         results = req.json()['message'].get('items', [])
         dct = results_list_to_dict(results)
@@ -490,16 +505,16 @@ class CrossRefAPI(object):
         if filters:
             params['filter'] = ','.join(k+":"+v for k, v in filters.items())
 
-        url = 'https://api.crossref.org/works'
-
         rows = 20
         next_cursor = cursor
         while next_cursor:
             params['rows'] = rows
             params['cursor'] = next_cursor
+            params['mailto'] = CROSSREF_MAILTO
 
             try:
-                r = requests.get(url, params=params)
+                r = make_crossref_call('/works', params=params)
+                r.raise_for_status()
                 js = r.json()
                 if js['status'] == 'failed':
                     raise MetadataSourceException(
