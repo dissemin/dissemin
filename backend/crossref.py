@@ -530,10 +530,9 @@ class CrossRefAPI(object):
             except ValueError as e:
                 raise MetadataSourceException(
                     'Error while fetching CrossRef results:\nInvalid response.\n' +
-                    'URL was: %s\nParameters were: %s\nJSON parser error was: %s' % (url, urlencode(params), unicode(e)))
+                    'Parameters were: %s\nJSON parser error was: %s' % (urlencode(params), unicode(e)))
             except requests.exceptions.RequestException as e:
-                raise MetadataSourceException('Error while fetching CrossRef results:\nUnable to open the URL: ' +
-                                              url+'\nError was: '+str(e))
+                raise MetadataSourceException('Error while fetching CrossRef results:\nError was: '+str(e))
 
 
     def fetch_and_save_new_records(self, starting_cursor='*'):
