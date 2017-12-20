@@ -449,6 +449,11 @@ class CrossRefAPI(object):
 
         new_orcids = map(get_orcid, metadata['author'])
         if extra_orcids:
+            # remove the extra_orcids if they already exist on different authors
+            set_of_extra_orcids = set(x for x in extra_orcids if x != None)
+            new_orcids = [(x if x not in set_of_extra_orcids else None)
+                    for x in new_orcids]
+            # now do the union
             orcids = [new or old for (old, new) in zip(
                 extra_orcids, new_orcids)]
         else:

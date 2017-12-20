@@ -19,7 +19,7 @@ The API key is not required but encoraged as unauthenticated users
 can perform a limited number of queries daily.
 
 To get an API key, visit `this page <http://www.sherpa.ac.uk/romeo/apiregistry.php>`_.
-The key should then be written in ``dissemin/settings.py``, as ``ROMEO_API_KEY``.
+The key should then be written in ``dissemin/settings/secrets.py``, as ``ROMEO_API_KEY``.
 
 Zenodo
 ------
