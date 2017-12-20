@@ -245,6 +245,7 @@ $(function(){
         {% trans "Add link to existing copy" %}
       </a>
       {% endif %}
+    </p>
       <div id="editlinkform" style="display: none;">
         {% blocktrans trimmed %}
         <p>Please enter a <em>stable</em> URL at which the paper can be
@@ -262,7 +263,6 @@ $(function(){
           {% trans "Save" %}
         </a>
       </div>
-    </p>
 
     {% with paper.publisher as psh %}
         <p><strong>{% trans "Publisher:" %}</strong>
