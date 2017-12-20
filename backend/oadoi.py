@@ -66,7 +66,7 @@ class OadoiAPI(object):
         if not paper:
             try:
                 paper = Paper.create_by_doi(doi)
-            except (MetadataSourceException, ValueError) as e:
+            except (MetadataSourceException, ValueError):
                 return
             if not paper:
                 print('no such paper for doi {doi}'.format(doi=doi))

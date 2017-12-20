@@ -293,3 +293,9 @@ class OaiTest(TestCase):
                 'ftpubmed:oai:pubmedcentral.nih.gov:4131942',
                 'base_dc')
         self.assertEqual(p2.pdf_url,'http://www.ncbi.nlm.nih.gov/pubmed/24806729')
+
+    def test_doi_prefix(self):
+        paper = self.create(
+                'ftdatacite:oai:oai.datacite.org:3505359',
+                'base_dc')
+        self.assertTrue(paper.pdf_url is not None)

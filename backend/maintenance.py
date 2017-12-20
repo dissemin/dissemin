@@ -240,7 +240,6 @@ def report_dubious_orcids():
     """
     Finds ORCID ids which don't match the researcher's name at all
     """
-    from papers.name import match_names
     for idx, p in enumerate(Paper.objects.all().iterator()):
         if idx % 100000 == 0:
             print(idx)
