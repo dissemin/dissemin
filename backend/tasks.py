@@ -23,6 +23,7 @@ from __future__ import unicode_literals
 
 from statistics.models import AccessStatistics
 
+from datetime import timedelta
 from backend.zotero import consolidate_publication
 from backend.orcid import OrcidPaperSource
 from backend.crossref import CrossRefAPI
@@ -52,7 +53,7 @@ def update_researcher_task(r, task_name):
 
 
 @shared_task(name='init_profile_from_orcid')
-@run_only_once('researcher', keys=['pk'])
+@run_only_once('researcher', keys=['pk'], timeout=60*60)
 def init_profile_from_orcid(pk):
     """
     Populates the profile from ORCID and Crossref
@@ -67,7 +68,7 @@ def init_profile_from_orcid(pk):
 
 
 @shared_task(name='fetch_everything_for_researcher')
-@run_only_once('researcher', keys=['pk'], timeout=15*60)
+@run_only_once('researcher', keys=['pk'], timeout=60*60)
 def fetch_everything_for_researcher(pk):
     sources = [
         ('orcid', OrcidPaperSource(max_results=1000)),
@@ -92,6 +93,11 @@ def fetch_everything_for_researcher(pk):
         r.update_stats()
         r.harvester = None
         update_researcher_task(r, None)
+
+def refetch_researchers(start_time=timezone.now() - timedelta(days=30*6)):
+    for r in Researcher.objects.filter(last_harvest__gt=start_time).order_by('last_harvest'):
+        print(r.url)
+        fetch_everything_for_researcher(r.pk)
 
 
 @shared_task(name='change_publisher_oa_status')
