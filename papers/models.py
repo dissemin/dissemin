@@ -1154,6 +1154,18 @@ class Paper(models.Model, BarePaper):
         unified_names = unify_name_lists(old_names, new_author_names)
 
         unified_authors = []
+
+        # preprocess old authors to remove orcids that will be added
+        set_of_new_orcids = set()
+        for new_author in new_authors:
+            if new_author.orcid:
+                set_of_new_orcids.add(new_author.orcid)
+        for old_author in old_authors:
+            if old_author.orcid in set_of_new_orcids:
+                old_author.orcid = None
+                # also erase the researcher_id for this orcid
+                old_author.researcher_id = None
+
         for new_name, (old_idx, new_idx) in unified_names:
             if new_name is None:
                 # skip duplicate names

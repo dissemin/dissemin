@@ -21,6 +21,7 @@
 from __future__ import unicode_literals
 
 from papers.models import Paper
+from papers.models import Researcher
 
 
 class PaperSource(object):
@@ -76,16 +77,19 @@ class PaperSource(object):
         # Save the paper as non-bare
         p = Paper.from_bare(bare_paper)
 
-        # Check whether this paper is associated with an ORCID id
-        # for the target researcher
-        if researcher.orcid:
-            for idx, a in enumerate(p.authors_list):
-                if a['orcid'] == researcher.orcid:
+        # Associate known ORCIDs to the corresponding researchers
+        for idx, author in enumerate(p.authors_list):
+            if author['orcid']:
+                try:
+                    researcher = Researcher.objects.get(orcid=author['orcid'])
                     p.set_researcher(idx, researcher.id)
-                    self.update_empty_orcid(researcher, False)
+                except Researcher.DoesNotExist:
+                    p.set_researcher(idx, None)
+            else:
+                p.set_researcher(idx, None)
 
-            p.save()
-            p.update_index()
+        p.save()
+        p.update_index()
 
         return p
 

@@ -83,3 +83,16 @@ class OrcidIntegrationTest(PaperSourceTest):
         papers = list(self.source.fetch_orcid_records('0000-0002-1900-3901'))
         titles = [paper.title for paper in papers]
         self.assertTrue('Company-Coq: Taking Proof General one step closer to a real IDE' in titles)
+
+    def test_import_with_crossref_error(self):
+        stergios = Researcher.get_or_create_by_orcid('0000-0001-9232-4042')
+        self.source.fetch_and_save(stergios)
+        p = Paper.objects.get(oairecord__doi='10.1016/j.metabol.2017.10.007')
+        # crossref claims that the ORCID should be associated to author 2
+        # but it should actually be associated to author 0
+        self.assertEqual(p.authors[0].orcid, '0000-0001-9232-4042')
+        self.assertEqual(p.authors[2].orcid, None)
+        self.assertEqual(p.authors[0].researcher_id, stergios.id)
+        self.assertEqual(p.authors[2].researcher_id, None)
+
+
