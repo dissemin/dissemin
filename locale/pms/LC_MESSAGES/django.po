@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2017-12-14 07:26:26+0000\n"
+"PO-Revision-Date: 2017-12-25 14:04:27+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1506,100 +1506,100 @@ msgstr "\n            Soa arcesta a l'ha causà n'eror antern. <a href=\"/\">Tor
 
 #: templates/admin/base_site.html:4
 msgid "Dissemin site admin"
-msgstr ""
+msgstr "Aministrassion dël sit Dissemin"
 
 #: templates/admin/base_site.html:7
 msgid "Dissemin administration"
-msgstr ""
+msgstr "Aministrassion ëd Dissemin"
 
 #: templates/dissemin/faq.html:6 templates/dissemin/faq.html:11
 #: templates/dissemin/tos.html:6
 msgid "Frequently Asked Questions"
-msgstr ""
+msgstr "Chestion frequente"
 
 #: templates/dissemin/faq.html:16 templates/dissemin/faq.html:51
 msgid "What is Open Access?"
-msgstr ""
+msgstr "Lòn ch'a l'é l'acess lìber?"
 
 #: templates/dissemin/faq.html:17 templates/dissemin/faq.html:61
 msgid "Why should I upload my papers to a repository?"
-msgstr ""
+msgstr "Përché i dovrìa carié mè artìcoj ant un depòsit?"
 
 #: templates/dissemin/faq.html:18 templates/dissemin/faq.html:106
 msgid "What repository should I use?"
-msgstr ""
+msgstr "Che depòsit i dovrìa dovré?"
 
 #: templates/dissemin/faq.html:19 templates/dissemin/faq.html:136
 msgid "Why can't I deposit in my favorite repository yet?"
-msgstr ""
+msgstr "Përché peuss-ne ancor nen deposité an mè depòsit preferì?"
 
 #: templates/dissemin/faq.html:22 templates/dissemin/faq.html:188
 msgid "What is dissem.in?"
-msgstr ""
+msgstr "Lòn ch'a l'é dissem.in?"
 
 #: templates/dissemin/faq.html:23 templates/dissemin/faq.html:199
 msgid "Is dissem.in a repository?"
-msgstr ""
+msgstr "É-lo dissem.in a depòsit?"
 
 #: templates/dissemin/faq.html:24 templates/dissemin/faq.html:209
 msgid "Who runs dissem.in?"
-msgstr ""
+msgstr "Chi a masenta dissem.in?"
 
 #: templates/dissemin/faq.html:25 templates/dissemin/faq.html:216
 msgid "Can I create my profile on dissem.in?"
-msgstr ""
+msgstr "Peuss-ne creé nè profil su dissem.in?"
 
 #: templates/dissemin/faq.html:27 templates/dissemin/faq.html:226
 msgid "Policies and full-text availability"
-msgstr ""
+msgstr "Régole e disponibilità dël test complet"
 
 #: templates/dissemin/faq.html:28 templates/dissemin/faq.html:227
 msgid "What do your policy classes mean?"
-msgstr ""
+msgstr "Lòn ch'a veulo dì le vàire régole ch'i l'eve?"
 
 #: templates/dissemin/faq.html:29 templates/dissemin/faq.html:280
 msgid "When is a paper considered available?"
-msgstr ""
+msgstr "Cand ch'a l'é che n'artìcol a l'é considerà disponìbil?"
 
 #: templates/dissemin/faq.html:30 templates/dissemin/faq.html:289
 msgid "Should I trust your statistics?"
-msgstr ""
+msgstr "A venta fidesse ëd vòstre statìstiche?"
 
 #: templates/dissemin/faq.html:32 templates/dissemin/faq.html:330
 msgid "Omissions and errors"
-msgstr ""
+msgstr "Omission e eror"
 
 #: templates/dissemin/faq.html:33 templates/dissemin/faq.html:331
 msgid "One of my papers is missing. Why?"
-msgstr ""
+msgstr "Un dij mè artìcoj a manca. Përchè?"
 
 #: templates/dissemin/faq.html:34 templates/dissemin/faq.html:367
 msgid "Some details of my paper are incorrect. What can I do?"
-msgstr ""
+msgstr "Chèich detaj ëd mè artìcol a son nen giust. Lòn ch'i peuss fé?"
 
 #: templates/dissemin/faq.html:35 templates/dissemin/faq.html:393
 msgid "There is a freely available copy of my article online but dissem.in does not find it."
-msgstr ""
+msgstr "A-i é na còpia ëd mè artìcol a acess lìber an sl'aragnà, ma dissem.in a la treuva nen."
 
 #: templates/dissemin/faq.html:37 templates/dissemin/faq.html:433
 msgid "Authentication with ORCID"
-msgstr ""
+msgstr "Autentificassion con ORCID"
 
 #: templates/dissemin/faq.html:38 templates/dissemin/faq.html:435
 msgid "Why do you need to authenticate users?"
-msgstr ""
+msgstr "Përchè i l'eve da manca che j'utent as identìfico?"
 
 #: templates/dissemin/faq.html:39 templates/dissemin/faq.html:449
 msgid "What will you do to my ORCID profile if I log in?"
-msgstr ""
+msgstr "Lòn ch'i fareve con mè profil ORCID s'i rintro ant ël sistema?"
 
 #: templates/dissemin/faq.html:40 templates/dissemin/faq.html:458
 msgid "How do I add publications to my ORCID profile?"
-msgstr ""
+msgstr "'Me ch'i peuss gionté dle publicassion a mè profil ORCID?"
 
 #: templates/dissemin/faq.html:41 templates/dissemin/faq.html:501
 msgid "My ORCID details on Dissemin are outdated."
-msgstr ""
+msgstr "Ij mè detaj ORCID su Dissemin a son nen agiornà."
 
 #: templates/dissemin/faq.html:43 templates/dissemin/faq.html:514
 msgid "Behind the scenes"
