@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2017-12-25 14:04:27+0000\n"
+"PO-Revision-Date: 2017-12-28 07:54:04+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1603,100 +1603,100 @@ msgstr "Ij mè detaj ORCID su Dissemin a son nen agiornà."
 
 #: templates/dissemin/faq.html:43 templates/dissemin/faq.html:514
 msgid "Behind the scenes"
-msgstr ""
+msgstr "Darera 'l ridò"
 
 #: templates/dissemin/faq.html:44 templates/dissemin/faq.html:516
 msgid "Where do you get the data from?"
-msgstr ""
+msgstr "D'anté ch'a rivo vòstri dàit?"
 
 #: templates/dissemin/faq.html:45 templates/dissemin/faq.html:523
 msgid "How can I help?"
-msgstr ""
+msgstr "'Me ch'i peuss giuté?"
 
 #: templates/dissemin/faq.html:46 templates/dissemin/faq.html:563
 msgid "Where is the source code?"
-msgstr ""
+msgstr "Andoa a l'é ël còdes sorgiss?"
 
 #: templates/dissemin/faq.html:47 templates/dissemin/faq.html:569
 msgid "Can I harvest your data?"
-msgstr ""
+msgstr "Peuss-ne cheuje ij vòstri dàit?"
 
 #: templates/dissemin/faq.html:53
 msgid "In a nutshell, the Open Access movement promotes free access to the scientific literature. For a more in-depth introduction, we recommend <a href=\"http://www.phdcomics.com/comics.php?f=1533\">this video in English</a> and <a href=\"https://pablo.rauzy.name/openaccess/introduction.html\">this introduction in French</a>."
-msgstr ""
+msgstr "Për fela curta, ël moviment për l'acess lìber a sosten l'acess a gràtis a la literatura sientìfica. Për n'antrodussion pi detajà, i arcomandoma <a href=\"http://www.phdcomics.com/comics.php?f=1533\">ës filmà an anglèis</a> e <a href=\"https://pablo.rauzy.name/openaccess/introduction.html\">costa antrodussion an fransèis</a>."
 
 #: templates/dissemin/faq.html:63
 msgid "You should do it because:"
-msgstr ""
+msgstr "A dovrìa felo, dagià che:"
 
 #: templates/dissemin/faq.html:69
 msgid "It makes your research <strong>more accessible</strong> and <strong>more visible</strong>. Many researchers routinely check papers in topic repositories such as arXiv, and it is less likely that these researchers check your homepage regularly."
-msgstr ""
+msgstr "A rend soa arserca <strong>pi acessìbil</strong> e <strong>pi visìbil</strong>. Vàire arsercador a l'han la costuma ëd sërché j'artìcoj ant ij depòsit dël setor tanme arXiv, e a l'é men probàbil che si arsercador a verìfico soa pàgina an sl'aragnà ëd fasson regolar."
 
 #: templates/dissemin/faq.html:76
 msgid "You can even do it before publication. You can get <strong>valuable feedback</strong> to improve your paper before the actual peer-reviewing process. It may also be useful to establish priority if it takes a long time for your paper to get published."
-msgstr ""
+msgstr "A peul ëdcò felo prima dla publicassion. A peul oten-e dij <strong>coment pressios</strong> për amelioré sò artìcol prima dl'efetiv process ëd valutassion antra 'd par. A peul ëdcò ven-e a taj pr'ëstabilì la priorità s'a-i va tant temp prima che sò artìcol a sia publicà."
 
 #: templates/dissemin/faq.html:84
 msgid "It provides you a <strong>durable storage</strong>. Your homepage is likely to change or to disappear, for instance if you leave your current institution."
-msgstr ""
+msgstr "A-j forniss un <strong>depòsit durèivol</strong>. Soa pàgina an sl'aragnà a podrìa esse modificà o sparì, për esempi si chiel a chita soa anstitussion atual."
 
 #: templates/dissemin/faq.html:90
 msgid "Librarians around the world cannot check whether all the papers in a given journal are available on homepages: in doubt, they subscribe to this journal to make sure their researchers have access to it. This costs a lot of money for research institutions. Papers stored in repositories are <strong>easier to detect</strong> and can help academia save money."
-msgstr ""
+msgstr "Ij bibliotecari dël mond antregh a peulo nen controlé si tuti j'artìcoj d'un dàit giornal a son disponìbij an sle pàgine dj'autor: ant ël dùbit, as abon-o a 's giornal për esse sigur che ij sò arsercador a-i abio acess. Sòn a costa un baron ëd sòld a j'anstitussion d'arserca. J'artìcoj butà ant ij depòsit a son <strong>pi fàcil da trové</strong> e a peulo giuté j'università a risparmié dl'arzan."
 
 #: templates/dissemin/faq.html:99
 msgid "Finally, for all these reasons, an increasing number of <strong>funding bodies</strong> require the outcomes of their projects to be made available in a repository."
-msgstr ""
+msgstr "Për finì, për tute se rason, un nùmer chërsent d'<strong>organism ëd finansiament</strong> a ciamo che j'arzultà dij sò proget a sio butà a disposission ant un depòsit."
 
 #: templates/dissemin/faq.html:108
 msgid "There are roughly three types of repositories:"
-msgstr ""
+msgstr "Ëd fasson grossera, as arconòsso tre sòrt ëd depòsit:"
 
 #: templates/dissemin/faq.html:114
 msgid "Subject repositories, restricted to some research fields, such as <a href=\"https://arxiv.org\">arXiv</a>."
-msgstr ""
+msgstr "Depòsit për argoment, limità a chèich camp d'arserca, tanme <a href=\"https://arxiv.org\">arXiv</a>."
 
 #: templates/dissemin/faq.html:120
 msgid "Institutional repositories, designated to store the research output of a given institution or country."
-msgstr ""
+msgstr "Depòsit anstitussionaj, progetà për conservé j'arzultà d'arserca d'un dàit anstitussion o pais."
 
 #: templates/dissemin/faq.html:125
 msgid "General-purpose academic repositories such as <a href=\"https://zenodo.org\">Zenodo</a>, not limited to a particular scope."
-msgstr ""
+msgstr "Depòsit académich d'anteresse general tanme <a href=\"https://zenodo.org\">Zenodo</a>, nen limità a 'n domini particolar."
 
 #: templates/dissemin/faq.html:132
 msgid "If your research community favours a specific repository, using it makes sense as it will increase your visibility. If not, institutional or general-purpose repositories are also good options."
-msgstr ""
+msgstr "Si soa comunità d'arserca a preferiss un depòsit ëspessìfich, a l'é giust dovrelo përchè a aumentërà soa visibilità. Dësnò, ij depòsit anstitussionaj o genérich a son ëdcò dj'opsion bon-e."
 
 #: templates/dissemin/faq.html:138
 msgid "At the moment, you can use Dissemin to deposit in the following repositories:"
-msgstr ""
+msgstr "Al moment, a peul dovré Dissemin për deposité ant ij depòsit sì-dapress:"
 
 #: templates/dissemin/faq.html:144
 msgid "<strong><a href=\"https://zenodo.org\">Zenodo</a></strong>, an innovative repository backed by the EU."
-msgstr ""
+msgstr "<strong><a href=\"https://zenodo.org\">Zenodo</a></strong>, un depòsit inovativ ospità da l'UE."
 
 #: templates/dissemin/faq.html:150
 msgid "<strong><a href=\"https://hal.archives-ouvertes.fr/\">HAL</a></strong>, a French repository managed by the <a href=\"https://www.ccsd.cnrs.fr/\">CCSD</a>."
-msgstr ""
+msgstr "<strong><a href=\"https://hal.archives-ouvertes.fr/\">HAL</a></strong>, un depòsit fransèis masentà dal <a href=\"https://www.ccsd.cnrs.fr/\">CCSD</a>."
 
 #: templates/dissemin/faq.html:157
 msgid "<strong><a href=\"https://osf.io/preprints/\">OSF preprints</a></strong>, a preprint server run by the <a href=\"https://cos.io/\">Center for Open Science</a> on top of their <a href=\"https://osf.io/\">Open Science Framework</a>."
-msgstr ""
+msgstr "<strong><a href=\"https://osf.io/preprints/\">OSF preprints</a></strong>, un servent ëd prepublicassion masentà dal <a href=\"https://cos.io/\">Center for Open Science</a> ch'as apògia su sò <a href=\"https://osf.io/\">Open Science Framework</a>."
 
 #: templates/dissemin/faq.html:165
 msgid "Supporting more repositories requires us to write specific code for each repository. More importantly it requires the repositories to give us permission to deposit papers in bulk. We have been considering integrating the following repositories:"
-msgstr ""
+msgstr "Për podèj dovré pi 'd depòsit, i l'oma da manca dë scrive un còdes ëspessìfich për minca 'n depòsit. Ma dzortut a-i é da manca che ij depòsit an dago ël përmess ëd deposité j'artìcoj a baron. I l'oma pensà d'antëgré ij depòsit sì-dapress:"
 
 #: templates/dissemin/faq.html:174
 msgid "<strong><a href=\"https://arxiv.org/\">arXiv</a></strong>, a well-known general-purpose repository. For now, arXiv has declined to allow Dissemin to deposit using their SWORD API, and wants users to deposit in arXiv manually. If you would like to deposit in arXiv with Dissemin, you can let them know that you are interested (email: help AT arxiv.org, and start your message with \"Dear arXiv,\")."
-msgstr ""
+msgstr "<strong><a href=\"https://arxiv.org/\">arXiv</a></strong>, un depòsit generalista bin conossù. Për adess, arXiv a l'ha nen autorisà Dissemin a deposité dovrand sò API SWORD, e a veul che j'utent a depòsito an arXiv a man. Si chiel a veul deposité an arXiv con Dissemin, a peul feje savèj che a l'é anteressà (pòsta eletrònica: help AT arxiv.org, e ch'a ancamin-a so mësssagi con \"Dear arXiv,\")."
 
 #: templates/dissemin/faq.html:192
 #, python-format
 msgid "Dissemin is a web platform gathering metadata from <a href=\"%(sources_url)s\">many sources</a> and analyzing the full text availability of publications of researchers. It has been designed to foster the use of repositories (rather than preprints posted on personal homepages), <a href=\"#repositories-rock\">for numerous reasons</a>."
-msgstr ""
+msgstr "Dissemin a l'é na piataforma an sl'aragnà ch'a cheuj dij metadàit a parte da <a href=\"%(sources_url)s\">vàire sorgiss</a> e ch'a analisa la disponibilità dël test complet dle publicassion dj'arsercador. A l'é stàit progetà për ancoragé l'usagi dij depòsit (pitòst che la divulgassion dle prepublicassion an sle pàgine përsonaj), <a href=\"#repositories-rock\">për vàire rason</a>."
 
 #: templates/dissemin/faq.html:201
 msgid "Dissemin is not a repository as it does not store any full text. When the full text of a publication is available, a link to the relevant page is provided. The full texts deposited through Dissemin are stored in third-party repositories such as <a href=\"https://zenodo.org\">Zenodo</a> or <a href=\"https://hal.archives-ouvertes.fr/\">HAL</a>."
