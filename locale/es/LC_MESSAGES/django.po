@@ -14,7 +14,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-30 10:57+0100\n"
-"PO-Revision-Date: 2017-12-14 07:26:24+0000\n"
+"PO-Revision-Date: 2018-01-01 14:24:23+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1545,15 +1545,15 @@ msgstr ""
 
 #: templates/dissemin/faq.html:23 templates/dissemin/faq.html:199
 msgid "Is dissem.in a repository?"
-msgstr ""
+msgstr "¿dissem.in es un repositorio?"
 
 #: templates/dissemin/faq.html:24 templates/dissemin/faq.html:209
 msgid "Who runs dissem.in?"
-msgstr ""
+msgstr "¿Quiénes están detrás de dissem.in?"
 
 #: templates/dissemin/faq.html:25 templates/dissemin/faq.html:216
 msgid "Can I create my profile on dissem.in?"
-msgstr ""
+msgstr "¿Puedo crear un perfil para mí en dissem.in?"
 
 #: templates/dissemin/faq.html:27 templates/dissemin/faq.html:226
 msgid "Policies and full-text availability"

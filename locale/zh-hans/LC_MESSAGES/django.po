@@ -11,7 +11,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-30 10:57+0100\n"
-"PO-Revision-Date: 2017-12-18 16:40:21+0000\n"
+"PO-Revision-Date: 2018-01-01 14:24:26+0000\n"
 "Language: zh-Hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1628,7 +1628,7 @@ msgstr "因为以下原因，您应该这样做："
 
 #: templates/dissemin/faq.html:69
 msgid "It makes your research <strong>more accessible</strong> and <strong>more visible</strong>. Many researchers routinely check papers in topic repositories such as arXiv, and it is less likely that these researchers check your homepage regularly."
-msgstr ""
+msgstr "这使您的研究<strong>更容易访问</strong>以及<strong>更加可见</strong>。很多研究员例行地检查话题存储库（例如arXiv）中的论文，并且这些研究员很少定期检查您的首页。"
 
 #: templates/dissemin/faq.html:76
 msgid "You can even do it before publication. You can get <strong>valuable feedback</strong> to improve your paper before the actual peer-reviewing process. It may also be useful to establish priority if it takes a long time for your paper to get published."
