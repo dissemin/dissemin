@@ -14,7 +14,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-30 10:57+0100\n"
-"PO-Revision-Date: 2018-01-01 14:24:23+0000\n"
+"PO-Revision-Date: 2018-01-04 09:06:15+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -976,12 +976,12 @@ msgstr "¿Faltan publicaciones? <a href=\"%(matching_papers_url)s\">Buscar publi
 #: papers/templates/papers/publiListItem.html:16
 #, python-format
 msgid "and %(remaining_authors)s other authors"
-msgstr ""
+msgstr "y %(remaining_authors)s autores más"
 
 #: papers/templates/papers/publiListItem.html:40
 #: publishers/templates/publishers/itemPolicy.html:21
 msgid "Upload"
-msgstr ""
+msgstr "Cargar"
 
 #: papers/templates/papers/publiListItem.html:45
 #: papers/templates/papers/search.html:52
@@ -991,7 +991,7 @@ msgstr "Excluir de mi perfil"
 #: papers/templates/papers/publiListItem.html:52
 #: papers/templates/papers/search.html:55
 msgid "Include in my profile"
-msgstr ""
+msgstr "Incluir en mi perfil"
 
 #: papers/templates/papers/search.html:37
 msgid "Claiming..."
@@ -1541,7 +1541,7 @@ msgstr ""
 
 #: templates/dissemin/faq.html:22 templates/dissemin/faq.html:188
 msgid "What is dissem.in?"
-msgstr ""
+msgstr "¿Qué es dissem.in?"
 
 #: templates/dissemin/faq.html:23 templates/dissemin/faq.html:199
 msgid "Is dissem.in a repository?"
@@ -1561,7 +1561,7 @@ msgstr "Normativas y disponibilidad de texto completo"
 
 #: templates/dissemin/faq.html:28 templates/dissemin/faq.html:227
 msgid "What do your policy classes mean?"
-msgstr ""
+msgstr "¿Qué significan sus clases de normativas?"
 
 #: templates/dissemin/faq.html:29 templates/dissemin/faq.html:280
 msgid "When is a paper considered available?"
@@ -1589,11 +1589,11 @@ msgstr ""
 
 #: templates/dissemin/faq.html:37 templates/dissemin/faq.html:433
 msgid "Authentication with ORCID"
-msgstr ""
+msgstr "Autenticación con ORCID"
 
 #: templates/dissemin/faq.html:38 templates/dissemin/faq.html:435
 msgid "Why do you need to authenticate users?"
-msgstr ""
+msgstr "¿Por qué necesitan autenticar a los usuarios?"
 
 #: templates/dissemin/faq.html:39 templates/dissemin/faq.html:449
 msgid "What will you do to my ORCID profile if I log in?"

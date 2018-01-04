@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-01-01 14:24:25+0000\n"
+"PO-Revision-Date: 2018-01-04 09:06:18+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1790,43 +1790,43 @@ msgstr "Ch'a nòta, për ancaminé, che Dissemin a pija nen an considerassion le
 
 #: templates/dissemin/faq.html:403
 msgid "Second, at the moment, Dissemin only supports repositories with a crawlable API that follows the <a href=\"https://www.openarchives.org/OAI/openarchivesprotocol.html\">OAI-PMH protocol</a>, and is <a href=\"https://www.base-search.net/about/en/suggest.php\">registered</a> in <a href=\"https://www.base-search.net/\">BASE</a>. We have a <a href=\"https://github.com/dissemin/croawl\">long-term project</a> to support more repositories by crawling them, but for the moment, we do not have the resources to support repositories not covered by BASE. Hence, if you are a user of a repository and would like it to be supported by Dissemin, please contact the repository administrator and suggest them to implement OAI-PMH support and to <a href=\"https://www.base-search.net/about/en/suggest.php\">register</a> their repository in BASE."
-msgstr ""
+msgstr "Scond, për adess, Dissemin a pija an considerassion mach ij depòsit ch'a l'han n'API esploràbil ch'a deuvra ël <a href=\"https://www.openarchives.org/OAI/openarchivesprotocol.html\">protocòl OAI-PMH</a>, e a l'é <a href=\"https://www.base-search.net/about/en/suggest.php\">argistrà</a> an <a href=\"https://www.base-search.net/\">BASE</a>. I l'oma un <a href=\"https://github.com/dissemin/croawl\">proget a longa durà</a> për pijé an considerassion pi 'd depòsit an esplorandje ma, për el moment, i l'oma nen j'arsorse për pijé an considerassion ij depòsit nen coatà da BASE. Donca, si chiel a l'é n'utent d'un depòsit e a veul ch'a sia pijà an considerassion da Dissemin, për piasì ch'a contata l'aministrator d'ës depòsit e ch'a-j sugerissa ëd realisé ël supòrt OAI-PMH e d'<a href=\"https://www.base-search.net/about/en/suggest.php\">argistré</a> sò depòsit an BASE."
 
 #: templates/dissemin/faq.html:422
 msgid "If the repository is registered in BASE, please <a href=\"https://www.base-search.net/\">search in BASE</a> to check that your article is there. If it is, then this may be a bug of Dissemin; please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> describing the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
-msgstr ""
+msgstr "Si ël depòsit a l'é argistrà an BASE, për piasì <a href=\"https://www.base-search.net/\">ch'a sërca an BASE</a> për verifiché si sò artìcol a-i é. Ant ës cas-sì, antlora a peul esse un givo ëd Dissemin; për piasì, ch'a signala n'<a href=\"https://github.com/dissemin/dissemin/issues\">eror</a> an descrivend ël problema, o ch'a manda un mëssagi a <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
 
 #: templates/dissemin/faq.html:437
 msgid "Authenticating users is necessary to deposit papers on their behalf in open repositories. Besides, knowing a user's ORCID id helps us find its publications, avoiding articles authored by namesakes for instance. Logging in via ORCID will not expose any private information to Dissemin: we only have access to the public part of your ORCID record. For instance, unless you have explicitly marked your email address as public, we do not even know your email address when you log in to Dissemin via ORCID."
-msgstr ""
+msgstr "L'autentificassion ëd j'utent a l'é necessaria për deposité dj'artìcoj a nòm ëd costi-sì an dij depòsit duvert. An dzorpì, conòsse n'identificativ d'utent ORCID a giuta a trové soe publicassion, evitant për esempi j'artìcoj d'omònim. Rintré ant ël sistema a travers d'ORCID a smon gnun-e anformassion privà a Dissemin: i l'oma mach acess a la part pùblica ëd sò cont ORCID. Për esempi, gavà che chiel a l'abia marcà ëd fasson esplìssita soa adrëssa ëd pòsta eletrònica tanme pùblica, nojàutri i la conossoma nen cand chiel a rintra an Dissemin a travers ORCID."
 
 #: templates/dissemin/faq.html:452
 msgid "Nothing. When you log in via ORCID to Dissemin, this does not grant us any permission to change anything in your ORCID record."
-msgstr ""
+msgstr "Gnente. Cand a rintra a travers ORCID an Dissemin, sòn an da gnun përmess ëd modifiché dle ròbe an sò cont ORCID."
 
 #: templates/dissemin/faq.html:461
 msgid "ORCID supports various methods to claim publications. Our preferred one is via CrossRef's search interface. Here is how to use it:"
-msgstr ""
+msgstr "ORCID a propon vàire manere ëd fortì che na publicassion a l'é soa. Cola ch'i preferioma a l'é a travers l'antërfassa d'arserca ëd CrossRef. Valà coma dovrela:"
 
 #: templates/dissemin/faq.html:468
 msgid "Go to <a href=\"https://search.crossref.org/\">CrossRef Metadata Search</a>;"
-msgstr ""
+msgstr "Andé a l'<a href=\"https://search.crossref.org/\">arserca ancrosià dij metadàit</a>;"
 
 #: templates/dissemin/faq.html:473
 msgid "Click \"Log in\" in the top right corner and go through the ORCID login process;"
-msgstr ""
+msgstr "Ch'a sgnaca su «Rintré ant ël sistema» ant ël canton an àut a drita e ch'a-j vada dapress a la procedura ëd conession ORCID;"
 
 #: templates/dissemin/faq.html:478
 msgid "Search for your publications, for instance by typing your name in CrossRef's search interface;"
-msgstr ""
+msgstr "Sërché soe publicassion, për esempi an butand sò nòm ant l'antërfassa d'arserca ëd CrossRef;"
 
 #: templates/dissemin/faq.html:483
 msgid "Add publications that are yours to your ORCID record by clicking \"Add to ORCID\"."
-msgstr ""
+msgstr "Ch'a gionta soe publicassion a sò cont ORCID an ësgnacand su \"Gionté su ORCID\"."
 
 #: templates/dissemin/faq.html:489
 msgid "You can also add publications to your profile <em>on Dissemin</em>, by clicking the button \"Include in my profile\" in search results on Dissemin. (This button is only visible when you are logged in, and next to papers that Dissemin thinks you have authored.) You can also exclude articles from your profile in this way. Please note that these changes are local to Dissemin and are <em>not</em> propagated to your ORCID profile, because ORCID does not have a free API allowing us to propagate them."
-msgstr ""
+msgstr "A peul ëdcò gionté dle publicassion a sò profil <em>su Dissemin</em>, an ësgnacand an sël boton «Anclude su mè profil» ant j'arzultà d'arserca su Dissemin. (Ës boton a l'é visìbil mach cand a l'é ant ël sistema, davzin a j'artìcoj che Dissemin a pensa che chiel a l'ha scrivù.) A peul ëdcò esclude parèj d'artìcoj da sò profil. Ch'a ten-a da ment che se modìfiche a son locaj su Dissemin e a son <em>nen</em> esportà su sò profil ORCID, përchè ORCID a l'ha pa d'API lìber ch'a përmëtta d'esporteje."
 
 #: templates/dissemin/faq.html:504
 msgid "If you change some details in your ORCID profile (name, homepage, etc.), the changes will not automatically be picked up in your profile on Dissemin. To update your profile on Dissemin accordingly, once you have logged in to Dissemin, you can go to your <a href=\"/my-profile\">profile page</a> and click \"Refresh publications\"."
