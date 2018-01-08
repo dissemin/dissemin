@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-01-04 09:06:18+0000\n"
+"PO-Revision-Date: 2018-01-08 08:01:23+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1830,56 +1830,56 @@ msgstr "A peul ëdcò gionté dle publicassion a sò profil <em>su Dissemin</em>
 
 #: templates/dissemin/faq.html:504
 msgid "If you change some details in your ORCID profile (name, homepage, etc.), the changes will not automatically be picked up in your profile on Dissemin. To update your profile on Dissemin accordingly, once you have logged in to Dissemin, you can go to your <a href=\"/my-profile\">profile page</a> and click \"Refresh publications\"."
-msgstr ""
+msgstr "Si chiel a modìfica chèich detaj an sò profil ORCID (nòm, pàgina përsonal e via fòrt), se modìfiche a saran nen arcuperà an automàtich an sò profil su Dissemin. Për agiorné sò profil su Dissemin, na vira ch'a l'é intraje, a peul andé su soa <a href=\"/my-profile\">pàgina ëd profil</a> e sgnaché su \"Rinfrësché le publicassion\"."
 
 #: templates/dissemin/faq.html:518
 #, python-format
 msgid "Our sources are listed on <a href=\"%(sources_url)s\">this page</a>."
-msgstr ""
+msgstr "Le nòstre sorgiss a son listà an <a href=\"%(sources_url)s\">costa pàgina</a>."
 
 #: templates/dissemin/faq.html:525
 msgid "There are many ways to get involved:"
-msgstr ""
+msgstr "A-i é vàire manere për amplichesse:"
 
 #: templates/dissemin/faq.html:531
 msgid "Contribute to <a href=\"https://github.com/wetneb/dissemin\">the code</a>."
-msgstr ""
+msgstr "Ch'a contribuissa <a href=\"https://github.com/wetneb/dissemin\">al còdes</a>."
 
 #: templates/dissemin/faq.html:536
 msgid "Fix any of our listed <a href=\"https://github.com/wetneb/dissemin/issues\">issues</a>."
-msgstr ""
+msgstr "Ch'a coregia cheidun ëd nòstra lista d'<a href=\"https://github.com/wetneb/dissemin/issues\">eror</a>."
 
 #: templates/dissemin/faq.html:541
 msgid "Help us <a href=\"https://translatewiki.net/wiki/Translating:Dissemin\">translate</a> the interface in your language."
-msgstr ""
+msgstr "Ch'an giuta a <a href=\"https://translatewiki.net/wiki/Translating:Dissemin\">volté</a> l'antërfassa an soa lenga."
 
 #: templates/dissemin/faq.html:548
 msgid "Encourage researchers to use this service."
-msgstr ""
+msgstr "Ch'a ancoragia j'arsercador a dovré ës servissi."
 
 #: templates/dissemin/faq.html:553
 msgid "Star <a href=\"https://github.com/wetneb/dissemin\">our GitHub project</a>!"
-msgstr ""
+msgstr "Ch'a valuta <a href=\"https://github.com/wetneb/dissemin\">nòstr proget GitHub</a>!"
 
 #: templates/dissemin/faq.html:558
 msgid "<a href=\"https://association.dissem.in/#dons\">Donations are accepted</a>."
-msgstr ""
+msgstr "<a href=\"https://association.dissem.in/#dons\">Le donassion a son acetà</a>."
 
 #: templates/dissemin/faq.html:565
 msgid "The source code is available <a href=\"https://github.com/wetneb/dissemin\">on GitHub</a>."
-msgstr ""
+msgstr "Ël còdes sorgiss a l'é disponìbil <a href=\"https://github.com/wetneb/dissemin\">su GitHub</a>."
 
 #: templates/dissemin/faq.html:571
 msgid "Yes! We even have <a href=\"https://dev.dissem.in/api.html\">an API</a>. If it does not suit your needs, please don't hesitate to get in touch by writing to <a href=\"mailto:hello@dissem.in\">hello@dissem.in</a>"
-msgstr ""
+msgstr "Bò! I l'oma ëdcò <a href=\"https://dev.dissem.in/api.html\">n'API</a>. S'a fà nen për chiel, ch'as gena nen a contatene an ëscrivend-ne a <a href=\"mailto:hello@dissem.in\">hello@dissem.in</a>"
 
 #: templates/dissemin/faq.html:578
 msgid "Can I use the Dissemin logo to refer to the project?"
-msgstr ""
+msgstr "Peuss-ne dovré la marca ëd Dissemin për fé arferiment al proget?"
 
 #: templates/dissemin/faq.html:580
 msgid "Yes! See <a href=\"https://association.dissem.in/#logos\">here</a> for links to our logos and for explanations about how you can reuse them."
-msgstr ""
+msgstr "Bò! Vëdde <a href=\"https://association.dissem.in/#logos\">sì</a> për dle liure a nòstre marche e për dle spiegassion su coma chiel a peul dovreje."
 
 #: templates/dissemin/faq.html:585 templates/dissemin/tos.html:150
 msgid "Back to top"
