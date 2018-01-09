@@ -287,6 +287,7 @@ LANGUAGES = [
     ('fr', _('French')),
     ('es', _('Spanish')),
     ('zh-hans', _('Simplified Chinese')),
+    ('zh-hant', _('Traditional Chinese')),
     ('mk', _('Macedonian')),
     ('de', _('German')),
     ('pt-br', _('Brazilian Portuguese')),
