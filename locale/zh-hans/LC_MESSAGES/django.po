@@ -11,7 +11,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-30 10:57+0100\n"
-"PO-Revision-Date: 2018-01-01 14:24:26+0000\n"
+"PO-Revision-Date: 2018-01-11 06:52:19+0000\n"
 "Language: zh-Hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2025,7 +2025,7 @@ msgstr ""
 
 #: templates/dissemin/tos.html:45
 msgid "Unauthenticated users are not tracked as the platform does not include any third-party analytics or advertisement services. Authenticated users are logged-in via ORCID, a third-party service. The platform has no access to the private information they provide to ORCID. In particular, we do not store any ORCID passwords, and we do not have access to email addresses that are marked as private in the ORCID record. We need to set cookies to authenticate our users, therefore by logging in on this platform, users accept these cookies."
-msgstr ""
+msgstr "未获验证的用户不予追踪，因为平台不包含任何第三方分析或广告服务。验证用户会通过第三方服务ORCID登录。平台没有对他们提供给ORCID的私有信息的访问权。基本上我们不存储任何ORCID密码，并且我们没有对在ORCID记录中标记为私有的电子邮件地址的访问权。我们需要设置cookie以验证我们用户，因此通过登录此平台，用户会接受这些cookie。"
 
 #: templates/dissemin/tos.html:63
 msgid "The platform can perform mandated publication deposit to repositories. Users are only allowed to upload papers that they have authored themselves, or papers whose authors have consented to the deposit. In addition to these terms of service, users are required to abide by the policies of these repositories."

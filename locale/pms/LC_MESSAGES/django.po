@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-01-08 08:01:23+0000\n"
+"PO-Revision-Date: 2018-01-11 06:52:18+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1883,34 +1883,34 @@ msgstr "Bò! Vëdde <a href=\"https://association.dissem.in/#logos\">sì</a> pë
 
 #: templates/dissemin/faq.html:585 templates/dissemin/tos.html:150
 msgid "Back to top"
-msgstr ""
+msgstr "Torné an àut"
 
 #: templates/dissemin/login.html:8 templates/dissemin/login.html:70
 #: templates/dissemin/sandbox.html:8 templates/dissemin/sandbox.html:72
 msgid "Sign In"
-msgstr ""
+msgstr "Rintré ant ël sistema"
 
 #: templates/dissemin/login.html:12
 msgid "Sign in"
-msgstr ""
+msgstr "Rintré ant ël sistema"
 
 #: templates/dissemin/login.html:19 templates/dissemin/sandbox.html:19
 msgid "Dissemin uses ORCID to authenticate its users. ORCID is an independent non-profit effort to provide an open registry of unique researcher identifiers. It also offers open services to link research activities and organizations to these identifiers. Learn more at <a href=\"https://orcid.org\">orcid.org</a>."
-msgstr ""
+msgstr "Dissemin a deuvra ORCID për autentiché sò utent. ORCID a l'é në sfòrs indipendent sensa but lucrativ për fornì n'argistr duvert d'identificativ ùnich për j'arsercador. A eufr ëdcò dij servissi duvert për lijé j'atività e j'organisassion d'arserca a costi identificativ. Për savèjne 'd pi, <a href=\"https://orcid.org\">orcid.org</a>."
 
 #: templates/dissemin/login.html:28 templates/dissemin/login.html:36
 #: templates/dissemin/sandbox.html:30
 msgid "Log in"
-msgstr ""
+msgstr "Rintré ant ël sistema"
 
 #: templates/dissemin/login.html:30 templates/dissemin/sandbox.html:32
 msgid "If you already have an ORCID account, you can use it with Dissemin. We will not make any changes to your profile."
-msgstr ""
+msgstr "Si chiel a l'ha già un cont ORCID, a peul dovrelo con Dissemi. Nojàutri i faroma gnun-e modìfiche a sò profil."
 
 #: templates/dissemin/login.html:42 templates/dissemin/login.html:51
 #: templates/dissemin/sandbox.html:44
 msgid "Sign up"
-msgstr ""
+msgstr "Anscrission"
 
 #: templates/dissemin/login.html:44 templates/dissemin/sandbox.html:46
 msgid "Not an ORCID user yet? Create an account, it is free and takes a few seconds."
