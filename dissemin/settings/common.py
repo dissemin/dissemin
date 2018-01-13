@@ -291,6 +291,7 @@ LANGUAGES = [
     ('mk', _('Macedonian')),
     ('de', _('German')),
     ('pt-br', _('Brazilian Portuguese')),
+    ('pt', _('European Portuguese')),
 ]
 TIME_ZONE = 'Europe/Paris'
 USE_I18N = True
