@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-01-11 06:52:18+0000\n"
+"PO-Revision-Date: 2018-01-15 06:55:15+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1914,73 +1914,73 @@ msgstr "Anscrission"
 
 #: templates/dissemin/login.html:44 templates/dissemin/sandbox.html:46
 msgid "Not an ORCID user yet? Create an account, it is free and takes a few seconds."
-msgstr ""
+msgstr "Ancor nen n'utent d'ORCID? Ch'a crea un cont, a l'é a gràtis e a-i va mach chèich second."
 
 #: templates/dissemin/login.html:59 templates/dissemin/sandbox.html:61
 msgid "Dissemin account"
-msgstr ""
+msgstr "Cont Dissemin"
 
 #: templates/dissemin/login.html:60 templates/dissemin/sandbox.html:62
 #, python-format
 msgid "If you have not created an account yet, then please\n<a href=\"%(signup_url)s\">sign up</a> first."
-msgstr ""
+msgstr "S'a l'ha ancor nen creà un cont, për prima còsa për piasì\n<a href=\"%(signup_url)s\">ch'as anscriva</a>."
 
 #: templates/dissemin/login.html:69 templates/dissemin/sandbox.html:71
 msgid "Forgot Password?"
-msgstr ""
+msgstr "Ciav dësmentià?"
 
 #: templates/dissemin/partners.html:7 templates/dissemin/partners.html:12
 #: templates/dissemin/skeleton.html:124
 msgid "Partners"
-msgstr ""
+msgstr "Cambrada"
 
 #: templates/dissemin/sandbox.html:12
 msgid "SANDBOX Sign in"
-msgstr ""
+msgstr "SANDBOX Conession"
 
 #: templates/dissemin/skeleton.html:62
 msgid "Toggle navigation"
-msgstr ""
+msgstr "Smon-e o stërmé la navigassion"
 
 #: templates/dissemin/skeleton.html:73
 msgid "My profile"
-msgstr ""
+msgstr "Mè profil"
 
 #: templates/dissemin/skeleton.html:75 templates/dissemin/skeleton.html:115
 msgid "FAQ"
-msgstr ""
+msgstr "Chestion frequente"
 
 #: templates/dissemin/skeleton.html:91
 msgid "Logout"
-msgstr ""
+msgstr "Seurte dal sistema"
 
 #: templates/dissemin/skeleton.html:95
 msgid "Login"
-msgstr ""
+msgstr "Rintré ant ël sistema"
 
 #: templates/dissemin/skeleton.html:116
 msgid "API"
-msgstr ""
+msgstr "API"
 
 #: templates/dissemin/skeleton.html:117 templates/dissemin/tos.html:11
 msgid "Terms of Service"
-msgstr ""
+msgstr "Condission ëd servissi"
 
 #: templates/dissemin/skeleton.html:122
 msgid "Who are we?"
-msgstr ""
+msgstr "Chi som-ne?"
 
 #: templates/dissemin/skeleton.html:123
 msgid "Donate"
-msgstr ""
+msgstr "Doné"
 
 #: templates/dissemin/skeleton.html:136
 msgid "Change language"
-msgstr ""
+msgstr "Cangé la lenga"
 
 #: templates/dissemin/skeleton.html:148
 msgid "Apply"
-msgstr ""
+msgstr "Apliché"
 
 #: templates/dissemin/sources.html:11
 msgid "Data sources"
