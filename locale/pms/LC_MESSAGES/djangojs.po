@@ -1,100 +1,99 @@
-# Translation of Dissemin papers to Greek (Ελληνικά)
+# Translation of Dissemin papers to Piedmontese (Piemontèis)
 # Exported from translatewiki.net
 #
-# Author: Kly
-# Author: Nikosgranturismogt
+# Author: Borichèt
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-01-22 14:02:16+0000\n"
+"PO-Revision-Date: 2018-01-22 14:02:17+0000\n"
 "X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: el\n"
+"Language: pms\n"
 "X-Generator: MediaWiki 1.31.0-alpha; Translate 2017-10-30\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: doc/sphinx/_build/html/_static/doctools.js:167
 msgid "Permalink to this headline"
-msgstr "Μόνιμος σύνδεσμος προς αυτή την επικεφαλίδα"
+msgstr "Liura përmanenta a 's tìtol"
 
 #: doc/sphinx/_build/html/_static/doctools.js:173
 msgid "Permalink to this definition"
-msgstr "Μόνιμος σύνδεσμος προς αυτό τον ορισμό"
+msgstr "Liura përmanenta a sa definission"
 
 #: doc/sphinx/_build/html/_static/doctools.js:206
 msgid "Hide Search Matches"
-msgstr "Απόκρυψη αντιστοιχισμάτων αναζητήσεων"
+msgstr "Stërmé j'arzultà d'arserca"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:400
 msgid "Searching"
-msgstr "Γίνεται αναζήτηση..."
+msgstr "Arserca an cors"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:405
 msgid "Preparing search..."
-msgstr "Προετοιμασία για αναζήτηση..."
+msgstr "Preparassion ëd l'arserca..."
 
 #: doc/sphinx/_build/html/_static/searchtools.js:566
 msgid "Search Results"
-msgstr "Αποτελέσματα αναζήτησης"
+msgstr "Arzultà d'arserca"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:568
 msgid "Your search did not match any documents. Please make sure that all words are spelled correctly and that you've selected enough categories."
-msgstr "Η αναζήτησή σας δεν επέστρεψε αποτελέσματα. Σιγουρευτείτε ότι όλες οι λέξεις είναι σωστά γραμμένες και ότι έχετε επιλέξει αρκετές κατηγορίες."
+msgstr "Soa arserca a corëspond a gnun document. Ch'a contròla che tute le paròle a son ëscrite për da bin e ch'a l'ha selessionà bastansa 'd categorìe."
 
 #: doc/sphinx/_build/html/_static/searchtools.js:570
 #, javascript-format
 msgid "Search finished, found %s page(s) matching the search query."
-msgstr "Η αναζήτηση ολοκληρώθηκε, βρέθηκαν %s σελίδα(-ες) που αντιστοιχούν στο ερώτημα αναζήτησης."
+msgstr "Arserca livrà, %s pàgine ch'a corëspondo a l'arserca fàita."
 
 #: doc/sphinx/_build/html/_static/searchtools.js:623
 msgid ", in "
-msgstr ", σε "
+msgstr ", an "
 
 #: doc/sphinx/_build/html/_static/sidebar.js:77
 msgid "Expand sidebar"
-msgstr "Επέκταση πλευρικής γραμμής"
+msgstr "Slarghé la bara lateral"
 
 #: doc/sphinx/_build/html/_static/sidebar.js:90
 #: doc/sphinx/_build/html/_static/sidebar.js:118
 msgid "Collapse sidebar"
-msgstr "Σύμπτυξη πλευρικής γραμμής"
+msgstr "Strenze la bara lateral"
 
 #: papers/static/papers/refresh.js:35
 msgid "Do not show this message anymore"
-msgstr "Να μην εμφανιστεί ξανά αυτό το μήνυμα"
+msgstr "Pi nen ësmon-e 's mëssagi"
 
 #: papers/static/papers/refresh.js:66
 msgid "No author"
-msgstr "Κανένας συντάκτης"
+msgstr "Gnun autor"
 
 #: papers/static/papers/refresh.js:68
 msgid "No title"
-msgstr "Χωρίς τίτλο"
+msgstr "Gnun tìtol"
 
 #: papers/static/papers/refresh.js:70
 msgid "Invalid publication date"
-msgstr "Άκυρη ημερομηνία δημοσίευσης."
+msgstr "Dàita ëd publicassion nen bon-a"
 
 #: papers/static/papers/refresh.js:105
 msgid "We ignored %(count)s paper from your ORCiD profile."
 msgid_plural "We ignored %(count)s papers from your ORCiD profile."
-msgstr[0] "Αγνοήσαμε %(μέτρηση)-εις χαρτιού από το προφίλ σας στο ORCiD."
-msgstr[1] "Αγνοήσαμε %(μέτρηση)-εις χαρτιού από το προφίλ σας στο ORCiD."
+msgstr[0] "I l'oma ignorà %(count)s artìcol da sò profil ORCiD."
+msgstr[1] "I l'oma ignorà %(count)s artìcoj da sò profil ORCiD."
 
 #: papers/static/papers/refresh.js:115
 msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
-msgstr "\"%(όνομα)-τα\" αγνοήθηκαν για την ακόλουθη αιτία: %(αιτία)-ες"
+msgstr "«%(name)s» a l'é stàit ignorà për costa rason: %(reason)s"
 
 #: papers/static/papers/refresh.js:123
 msgid "A paper was ignored, because it has no name"
-msgstr "Ένα χαρτί αγνοήθηκε, γιατί δεν έχει όνομα"
+msgstr "N'artìcol a l'é stàit ignorà, përchè a l'ha gnun tìtol"
 
 #: papers/static/papers/refresh.js:135 papers/static/papers/refresh.js:163
 msgid "Show more information"
-msgstr "Εμφάνιση περισσότερων πληροφοριών"
+msgstr "Smon-e pi d'anformassion"
 
 #: papers/static/papers/refresh.js:160
 msgid "Show less information"
-msgstr "Εμφάνιση λιγότερων πληροφοριών"
+msgstr "Smon-e men anformassion"
 

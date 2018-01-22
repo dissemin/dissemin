@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 #
 # Author: Aftabuzzaman
+# Author: Kly
 # Author: Rasal Lia
 # Author: আজিজ
 # --
@@ -11,7 +12,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2017-11-20 08:05:37+0000\n"
+"PO-Revision-Date: 2018-01-22 14:02:16+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -791,7 +792,7 @@ msgstr "অাপনার প্রোফাইল তৈরি করুন"
 
 #: papers/templates/papers/createProfile.html:15
 msgid "\nTo fetch your publications, we need one last piece of information: your name.\n"
-msgstr "অাপনার প্রকাশনাগুলো এনে দিতে, অামাদের অার একটি মাত্র তথ্য প্রয়োজন: আপনার নাম।\n"
+msgstr "\nঅাপনার প্রকাশনাগুলো এনে দিতে, অামাদের অার একটি মাত্র তথ্য প্রয়োজন: আপনার নাম।\n"
 
 #: papers/templates/papers/department.html:60
 #: papers/templates/papers/institution.html:37
@@ -1496,7 +1497,7 @@ msgstr "পাতাটি পাওয়া যাচ্ছেনা"
 
 #: templates/404.html:13
 msgid "\n            The page you requested could not be found. <a href=\"/\">Go back to the home page.</a>\n           "
-msgstr "আপনার অনুরোধকৃত পাতাটি পাওয়া গেল না। <a href=\"/\">মূল পাতায় ফিরে যান।</a>"
+msgstr "\n            আপনার অনুরোধকৃত পাতাটি পাওয়া গেল না। <a href=\"/\">মূল পাতায় ফিরে যান।</a>\n           "
 
 #: templates/500.html:6 templates/500.html:12
 msgid "Internal error"

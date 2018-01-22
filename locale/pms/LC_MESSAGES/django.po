@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 #
 # Author: Borichèt
+# Author: Kly
 # --
 # This file is part of the Dissemin Project
 # This file is distributed under the same license as the Dissemin package.
@@ -9,7 +10,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-01-18 07:30:21+0000\n"
+"PO-Revision-Date: 2018-01-22 14:02:18+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -789,7 +790,7 @@ msgstr "Creé sò profil"
 
 #: papers/templates/papers/createProfile.html:15
 msgid "\nTo fetch your publications, we need one last piece of information: your name.\n"
-msgstr "Për arcuperé soe publicassion, i l'oma damanca ëd n'ùltima anformassion: sò nòm."
+msgstr "\nPër arcuperé soe publicassion, i l'oma damanca ëd n'ùltima anformassion: sò nòm.\n"
 
 #: papers/templates/papers/department.html:60
 #: papers/templates/papers/institution.html:37
@@ -2040,95 +2041,95 @@ msgstr "Contat"
 
 #: templates/dissemin/tos.html:77
 msgid "Please address any inquiry to support@dissem.in."
-msgstr ""
+msgstr "Për piasì, mandé le chestion a support@dissem.in."
 
 #: templates/dissemin/tos.html:86
 msgid "Dissemin uses ORCID's public OAuth interface to authenticate its users. This interface only transmits information marked as public in the user's ORCID profile. This means that ORCID passwords are never transmitted and email addresses are not transmitted when they are marked as private, which is the default setting. When logging in to Dissemin from ORCID, Dissemin acquires the user's ORCID id, as well as all public information attached to the ORCID record. Dissemin can store any information input by its users on the platform. Users can ask for a copy of the personal information Dissemin stores about them by writing an email to support@dissem.in."
-msgstr ""
+msgstr "Dissemin a deuvra l'antërfassa pùblica OAuth d'ORCID për autentiché ij sò utent. S'antërfassa a manda mach j'anformassion marcà tanme pùbliche ant ël profil ORCID ëd l'utent. Sòn a veul dì che le ciav d'ORCID a son mai mandà e j'adrësse ëd pòsta eletrònica a son nen mandà cand a son marcà tanme privà, lòn ch'a l'é la situassion ëstàndard. Cand un a rintra an Dissemin da ORCID, Dissemin a arcùpera l'identificativ ORCID ëd l'utent e tute j'anformassion pùbliche associà a l'argistrassion ORCID. Dissemin a peul goerné tute j'anformassion butà dai sò utent an sla piataforma. J'utent a peulo ciamé na còpia dj'anformassion përsonaj che Dissemin a goerna su 'd lor an ëscrivend un mëssagi a support@dissem.in."
 
 #: templates/dissemin/tos.html:104
 msgid "Documents deposited in repositories via Dissemin can be stored on the platform, but are not available for download on the platform. They can be stored internally for logging purposes, and to make sure failed deposits can be fixed later. Dissemin does not commit to store any of the files it receives from its users. Users can write to support@dissem.in if they want one of their uploads to be deleted from our internal storage space, or from the repository they have deposited to. Note that deletion policies vary accross repositories: we provide no guarantee that deposits can be deleted from the target repositories."
-msgstr ""
+msgstr "Ij document butà ant ij depòsit a travers Dissemin a peulo esse conservà an sla piataforma, ma a son nen disponìbij për dëscarieje da la piataforma. A peulo esse conservà an antern për dj'argistrassion e për esse sigur che ij depòsit falà a peulo esse rangià pi tard. Dissemin as angagia pa a goerné j'archivi ch'a arsèiv dai sò utent. J'utent a peulo scrive a support@dissem.in s'a veulo che cheidun dij dò cariament a sio dëscancelà da nòstr ëspassi ëd conservassion antern, o dal depòsit anté ch'a son ëstàit butà. Ch'a armarca che le régole ëd dëscancelassion a vario da 'n depòsit a n'àutr: i garantioma pa che lòn ch'a l'é stàit deposità a sia dëscancelà dal depòsit final."
 
 #: templates/dissemin/tos.html:120
 msgid "Misuse can be reported to support@dissem.in."
-msgstr ""
+msgstr "J'abus a peulo esse signalà a support@dissem.in."
 
 #: templates/dissemin/tos.html:128
 msgid "The <a href=\"https://dissem.in\">dissem.in</a> website has been registered with <a href=\"https://www.cnil.fr/\">CNIL</a> under declaration n°1895382 v0."
-msgstr ""
+msgstr "Ël sit <a href=\"https://dissem.in\">dissem.in</a> a l'é stàit argistrà a la <a href=\"https://www.cnil.fr/\">CNIL</a> con la diciairassion nùmer 1895382 v0."
 
 #: templates/dissemin/tos.html:136
 msgid "You have the right to access, modify, and delete the personal information that we hold about you. To exercise this right, please contact us at support@dissem.in, or by postal mail at the following addresss:"
-msgstr ""
+msgstr "A l'ha ël drit d'acede, modifiché e dëscancelé j'anformassion përsonaj ch'i goernoma su 'd chiel. Për dovré ës drit, për piasì ch'an contata a support@dissem.in, o për pòsta a cost'adrëssa:"
 
 #: templates/socialaccount/authentication_error.html:6
 #: templates/socialaccount/authentication_error.html:12
 msgid "Authentication error"
-msgstr ""
+msgstr "Eror d'autentificassion"
 
 #: templates/socialaccount/authentication_error.html:16
 msgid "\n            Authentication has failed. <a href=\"/\">Go back to the login page.</a>\n           "
-msgstr ""
+msgstr "\n            L'autentificassion a l'ha falì. <a href=\"/\">Torné a la pàgina d'intrada.</a>\n           "
 
 #: upload/forms.py:29
 msgid "Invalid file format: only PDF files are accepted."
-msgstr ""
+msgstr "Formà d'archivi nen bon: mach j'archivi PDF a son acetà."
 
 #: upload/forms.py:39
 #, python-format
 msgid "File too large (%(size)s). Maximum size is %(maxsize)s."
-msgstr ""
+msgstr "Archivi tròp gròss (%(size)s). La taja màssima a l'é ëd %(maxsize)s."
 
 #: upload/forms.py:47
 msgid "URL"
-msgstr ""
+msgstr "Adrëssa an sl'aragnà"
 
 #: upload/templates/upload/widget.html:4
 msgid "Select here the full text of your article. PDF files only, maximum size:"
-msgstr ""
+msgstr "Ch'a selession-a ambelessì ël test complet ëd sò artìcol. Mach j'archivi PDF a son acetà, taja màssima:"
 
 #: upload/templates/upload/widget.html:9
 msgid "Select a file:"
-msgstr ""
+msgstr "Selessioné n'archivi:"
 
 #: upload/templates/upload/widget.html:10
 msgid "Browse"
-msgstr ""
+msgstr "Përcore"
 
 #: upload/templates/upload/widget.html:17
 msgid "Or enter an URL:"
-msgstr ""
+msgstr "Dësnò, ch'a buta na liura an sl'aragnà:"
 
 #: upload/templates/upload/widget.html:28
 msgid "Or drop a file here:"
-msgstr ""
+msgstr "Dësnò, ch'a fasa sghijé n'archivi ambelessì:"
 
 #: upload/views.py:132
 msgid "Invalid PDF file."
-msgstr ""
+msgstr "Archivi PDF nen bon."
 
 #: upload/views.py:165
 msgid "Invalid form."
-msgstr ""
+msgstr "Formolari nen bon."
 
 #: upload/views.py:175
 msgid "File too large."
-msgstr ""
+msgstr "Archivi tròp gròss."
 
 #: upload/views.py:180
 msgid "Invalid content type: this link points to a web page, we need a direct link to a PDF file."
-msgstr ""
+msgstr "Sòrt ëd contnù nen bon-a: sa liura a manda a na pàgina an sl'aragnà, i l'oma da manca ëd na liura direta a n'archivi PDF."
 
 #: upload/views.py:183
 msgid "Invalid SSL certificate on the remote server."
-msgstr ""
+msgstr "Sertificà SSL nen vàlid an sël servent leugn."
 
 #: upload/views.py:185 upload/views.py:189
 msgid "Invalid URL (server timed out)."
-msgstr ""
+msgstr "Adrëssa nen vàlida (perìod ëd conession ëscadù)."
 
 #: upload/views.py:187 upload/views.py:191
 msgid "Invalid URL."
-msgstr ""
+msgstr "Adrëssa nen bon-a."
 

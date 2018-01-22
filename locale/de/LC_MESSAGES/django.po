@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 #
 # Author: Danielbeerbonn
+# Author: Kly
 # Author: Metalhead64
 # Author: Zuphilip
 # --
@@ -11,7 +12,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2017-11-13 08:05:41+0000\n"
+"PO-Revision-Date: 2018-01-22 14:02:16+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -791,7 +792,7 @@ msgstr "Profil erstellen"
 
 #: papers/templates/papers/createProfile.html:15
 msgid "\nTo fetch your publications, we need one last piece of information: your name.\n"
-msgstr "Um Deine Veröffentlichungen zu holen, fehlt uns noch eine letzte Information: Dein Name. "
+msgstr "\nUm Deine Veröffentlichungen zu holen, fehlt uns noch eine letzte Information: Dein Name.\n"
 
 #: papers/templates/papers/department.html:60
 #: papers/templates/papers/institution.html:37
@@ -896,12 +897,12 @@ msgstr "<span class=\"paperDocType\">%(doctype)s</span> von "
 #: papers/templates/papers/paper.html:70
 #, python-format
 msgid "\n            and <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s other authors</a>\n            "
-msgstr "und <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s weiteren Verfassern</a> "
+msgstr "\n            und <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s weiteren Verfassern</a>\n            "
 
 #: papers/templates/papers/paper.html:77
 #, python-format
 msgid "\n            All %(nb_authors)s authors (<a href=\"#\" id=\"show_less_authors\">show less</a>):<br />\n            "
-msgstr "Alle %(nb_authors)s Verfasser (<a href=\"#\" id=\"show_less_authors\">weniger anzeigen</a>):<br /> "
+msgstr "\n            Alle %(nb_authors)s Verfasser (<a href=\"#\" id=\"show_less_authors\">weniger anzeigen</a>):<br />\n            "
 
 #: papers/templates/papers/paper.html:89
 msgid "<strong>Congratulations!</strong> This paper was successfully deposited."
@@ -1229,12 +1230,12 @@ msgstr "Alle Abhandlungen"
 #, python-format
 msgid "%d paper found"
 msgid_plural "%d papers found"
-msgstr[0] "Eine Abhandlung gefunden"
+msgstr[0] "%d Abhandlung gefunden"
 msgstr[1] "%d Abhandlungen gefunden"
 
 #: papers/views.py:211
 msgid "\n                            Invalid ORCID profile.\n                            Please make sure it includes a public name.\n                            "
-msgstr "Ungültiges ORCID-Profil.\nBitte stelle sicher, dass es einen öffentlichen Namen enthält. "
+msgstr "\n                            Ungültiges ORCID-Profil.\nBitte stelle sicher, dass es einen öffentlichen Namen enthält.\n                            "
 
 #: papers/views.py:217
 msgid "Invalid ORCID profile."
@@ -1369,8 +1370,8 @@ msgstr "Endversion"
 #, python-format
 msgid "%(counter)s publisher found"
 msgid_plural "%(counter)s publishers found"
-msgstr[0] "Ein Herausgeber gefunden"
-msgstr[1] "%(counter) Herausgeber gefunden"
+msgstr[0] "%(counter)s Herausgeber gefunden"
+msgstr[1] "%(counter)s Herausgeber gefunden"
 
 #: publishers/templates/publishers/list.html:94
 msgid "Data provided by"
@@ -1496,7 +1497,7 @@ msgstr "Seite nicht gefunden"
 
 #: templates/404.html:13
 msgid "\n            The page you requested could not be found. <a href=\"/\">Go back to the home page.</a>\n           "
-msgstr "Die gesuchte Seite konnte nicht gefunden werden. <a href=\"/\">Zurück zur Startseite.</a> "
+msgstr "\n            Die gesuchte Seite konnte nicht gefunden werden. <a href=\"/\">Zurück zur Startseite.</a>\n           "
 
 #: templates/500.html:6 templates/500.html:12
 msgid "Internal error"
@@ -1504,7 +1505,7 @@ msgstr "Interner Fehler"
 
 #: templates/500.html:13
 msgid "\n            Your request triggered an internal error. <a href=\"/\">Go back to the home page.</a>\n           "
-msgstr "Deine Anfrage hat einen internen Fehler verursacht. <a href=\"/\">Zurück zur Startseite.</a> "
+msgstr "\n            Deine Anfrage hat einen internen Fehler verursacht. <a href=\"/\">Zurück zur Startseite.</a>\n           "
 
 #: templates/admin/base_site.html:4
 msgid "Dissemin site admin"
