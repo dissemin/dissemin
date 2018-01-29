@@ -1,0 +1,99 @@
+# Translation of Dissemin papers to Hindi (हिन्दी)
+# Exported from translatewiki.net
+#
+# Author: Innocentbunny
+msgid ""
+msgstr ""
+""
+"PO-Revision-Date: 2018-01-29 08:03:50+0000\n"
+"X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: hi\n"
+"X-Generator: MediaWiki 1.31.0-alpha; Translate 2017-10-30\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: doc/sphinx/_build/html/_static/doctools.js:167
+msgid "Permalink to this headline"
+msgstr "इस शीर्षक पर स्थाईकड़ी"
+
+#: doc/sphinx/_build/html/_static/doctools.js:173
+msgid "Permalink to this definition"
+msgstr "इस परिभाषा पर स्थाईकड़ी"
+
+#: doc/sphinx/_build/html/_static/doctools.js:206
+msgid "Hide Search Matches"
+msgstr "खोज के प्रकरणों को छुपाएँ"
+
+#: doc/sphinx/_build/html/_static/searchtools.js:400
+msgid "Searching"
+msgstr "अन्वेषण जारी है..."
+
+#: doc/sphinx/_build/html/_static/searchtools.js:405
+msgid "Preparing search..."
+msgstr "खोज सज्जिकरण"
+
+#: doc/sphinx/_build/html/_static/searchtools.js:566
+msgid "Search Results"
+msgstr "खोज परिणाम"
+
+#: doc/sphinx/_build/html/_static/searchtools.js:568
+msgid "Your search did not match any documents. Please make sure that all words are spelled correctly and that you've selected enough categories."
+msgstr "आपका अन्वेषण किसी भी डॉक्यूमेंट से मेल नहीं खाती है। कृपया सुनिश्चित करें की सभी शब्दों की वर्तनी सही है, तथा यह भी सुनिश्चित करें की आपने  यथोष्ट श्रेणियाँ चुनी हैं।"
+
+#: doc/sphinx/_build/html/_static/searchtools.js:570
+#, javascript-format
+msgid "Search finished, found %s page(s) matching the search query."
+msgstr "खोज समाप्त, अन्वेषण पृच्छा से मिलते हुए %s पृष्ठ पाए गए"
+
+#: doc/sphinx/_build/html/_static/searchtools.js:623
+msgid ", in "
+msgstr ", in "
+
+#: doc/sphinx/_build/html/_static/sidebar.js:77
+msgid "Expand sidebar"
+msgstr "साइडबार विस्तृण करें"
+
+#: doc/sphinx/_build/html/_static/sidebar.js:90
+#: doc/sphinx/_build/html/_static/sidebar.js:118
+msgid "Collapse sidebar"
+msgstr "साइडबार संकुचित करें"
+
+#: papers/static/papers/refresh.js:35
+msgid "Do not show this message anymore"
+msgstr "इस संदेश को पुनः न दिखाएँ"
+
+#: papers/static/papers/refresh.js:66
+msgid "No author"
+msgstr "कोई रचैता नहीं"
+
+#: papers/static/papers/refresh.js:68
+msgid "No title"
+msgstr "कोई शीर्षक नहीं"
+
+#: papers/static/papers/refresh.js:70
+msgid "Invalid publication date"
+msgstr "अमान्य प्रकासन तिथि"
+
+#: papers/static/papers/refresh.js:105
+msgid "We ignored %(count)s paper from your ORCiD profile."
+msgid_plural "We ignored %(count)s papers from your ORCiD profile."
+msgstr[0] "हमनें आपके ORCiD प्रोफ़ाइल से %(count)s पन्ने को नज़रअन्दाज़ किया।"
+msgstr[1] "हमनें आपके OCRiD प्रोफ़ाइल से %(count)s पन्नों को नज़रअन्दाज़ किया।"
+
+#: papers/static/papers/refresh.js:115
+msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
+msgstr "\"%(name)s\" को इस कारण हेतु ध्यानुपेक्ष रखा गया: %(reason)s"
+
+#: papers/static/papers/refresh.js:123
+msgid "A paper was ignored, because it has no name"
+msgstr "एक पन्ने को नामहीन होने के कारण नज़रअन्दाज़ किया गया"
+
+#: papers/static/papers/refresh.js:135 papers/static/papers/refresh.js:163
+msgid "Show more information"
+msgstr "अधिक जानकारी दिखाएँ"
+
+#: papers/static/papers/refresh.js:160
+msgid "Show less information"
+msgstr "काम जानकारी दिखाएँ"
+
