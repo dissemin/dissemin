@@ -14,7 +14,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-30 10:57+0100\n"
-"PO-Revision-Date: 2018-01-04 09:06:15+0000\n"
+"PO-Revision-Date: 2018-02-12 07:26:46+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -743,7 +743,7 @@ msgstr "Preparando el perfil"
 
 #: papers/models.py:108
 msgid "Fetching publications from ORCID"
-msgstr ""
+msgstr "Recuperando publicaciones de ORCID"
 
 #: papers/models.py:109
 msgid "Fetching publications from CrossRef"
@@ -755,15 +755,15 @@ msgstr "Llevar publicaciones de BASE"
 
 #: papers/models.py:111
 msgid "Fetching publications from CORE"
-msgstr ""
+msgstr "Recuperando publicaciones de CORE"
 
 #: papers/models.py:112
 msgid "Fetching publications from OAI-PMH"
-msgstr ""
+msgstr "Recuperando publicaciones de OAI-PMH"
 
 #: papers/models.py:113
 msgid "Clustering publications"
-msgstr ""
+msgstr "Agrupando publicaciones"
 
 #: papers/models.py:114
 msgid "Updating statistics"
