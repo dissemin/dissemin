@@ -14,7 +14,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-30 10:57+0100\n"
-"PO-Revision-Date: 2018-02-15 08:47:26+0000\n"
+"PO-Revision-Date: 2018-02-22 11:07:26+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -497,7 +497,7 @@ msgstr "\n             Puede depositar el texto entero de su articulo. Dissemin 
 
 #: deposit/templates/deposit/start.html:306
 msgid "You do not appear to be one of the authors of this paper. By using this form, you certify that you have the permission to upload it on their behalf."
-msgstr ""
+msgstr "Parece que usted no es autor de este artículo. Al utilizar este formulario, certifica que tiene el permiso de subirlo en su nombre."
 
 #: deposit/templates/deposit/start.html:316
 msgid "This paper cannot be deposited in any repository supported by Dissemin."
@@ -809,7 +809,7 @@ msgstr[1] ""
 #: papers/templates/papers/department.html:71
 #: papers/templates/papers/institution.html:48
 msgid "Researcher deleted. "
-msgstr ""
+msgstr "Se eliminó el investigador. "
 
 #: papers/templates/papers/department.html:75
 #: papers/templates/papers/institution.html:52
@@ -818,7 +818,7 @@ msgstr "Eliminar"
 
 #: papers/templates/papers/department.html:88
 msgid "Papers of the members"
-msgstr ""
+msgstr "Artículos de los miembros"
 
 #: papers/templates/papers/group.html:14
 msgid "Website"
@@ -840,7 +840,7 @@ msgstr "Te damos la bienvenida a Dissemin"
 
 #: papers/templates/papers/index.html:26
 msgid "Dissemin detects papers behind pay-walls and invites their authors to upload them in one click to an open repository."
-msgstr ""
+msgstr "Dissemin detecta documentos detrás de los muros de pago e invita a sus autores a subirlos con un solo clic a un repositorio abierto."
 
 #: papers/templates/papers/index.html:36
 #: papers/templates/papers/search.html:204
@@ -871,11 +871,11 @@ msgstr "Repositorios abiertos"
 
 #: papers/templates/papers/index.html:77
 msgid "Uploading your papers on your own webpage is not enough. Such copies are less stable and harder to find than documents uploaded to well-indexed repositories."
-msgstr ""
+msgstr "Publicar sus documentos en su propia página web no es suficiente. Dichas copias son menos estables y más difíciles de encontrar que los documentos publicados en repositorios bien indexados."
 
 #: papers/templates/papers/index.html:85
 msgid "Dissemin searches for copies of your papers in a large collection of open repositories and tells you which ones cannot be accessed."
-msgstr ""
+msgstr "Dissemin busca copias de sus publicaciones en una gran colección de repositorios abiertos y le dice a cuáles no se puede acceder."
 
 #: papers/templates/papers/institutions.html:25
 msgid "Institutions"
