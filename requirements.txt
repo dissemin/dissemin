@@ -1,4 +1,4 @@
--e git://github.com/dissemin/django-allauth.git@0.25.2-post_login-orcidv1.2#egg=django-allauth
+-e git://github.com/dissemin/django-allauth.git@used_by_dissemin#egg=django-allauth
 -e git://github.com/swordapp/python-client-sword2#egg=sword2
 -e git://github.com/wetneb/pyoai.git@any_metadataPrefix#egg=pyoai
 PyPDF2
