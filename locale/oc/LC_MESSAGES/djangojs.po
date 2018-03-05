@@ -1,10 +1,7 @@
-# Translation of Dissemin papers to Russian (русский)
+# Translation of Dissemin papers to Occitan (occitan)
 # Exported from translatewiki.net
 #
-# Author: Mouse21
-# Author: Okras
-# Author: Smigles
-# Author: Wirbel78
+# Author: Cedric31
 msgid ""
 msgstr ""
 ""
@@ -12,93 +9,92 @@ msgstr ""
 "X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ru\n"
+"Language: oc\n"
 "X-Generator: MediaWiki 1.31.0-alpha; Translate 2018-01-30\n"
-"Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11) ? 0 : ( (n%10 >= 2 && n%10 <= 4 && (n%100 < 10 || n%100 >= 20)) ? 1 : 2 );\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: doc/sphinx/_build/html/_static/doctools.js:167
 msgid "Permalink to this headline"
-msgstr "Постоянная ссылка на этот заголовок"
+msgstr ""
 
 #: doc/sphinx/_build/html/_static/doctools.js:173
 msgid "Permalink to this definition"
-msgstr "Постоянная ссылка на это определение"
+msgstr ""
 
 #: doc/sphinx/_build/html/_static/doctools.js:206
 msgid "Hide Search Matches"
-msgstr "Скрыть поисковые матчи"
+msgstr ""
 
 #: doc/sphinx/_build/html/_static/searchtools.js:400
 msgid "Searching"
-msgstr "Поиск"
+msgstr "recèrca en cors"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:405
 msgid "Preparing search..."
-msgstr "Подготовка к поиску..."
+msgstr ""
 
 #: doc/sphinx/_build/html/_static/searchtools.js:566
 msgid "Search Results"
-msgstr "Результаты поиска"
+msgstr ""
 
 #: doc/sphinx/_build/html/_static/searchtools.js:568
 msgid "Your search did not match any documents. Please make sure that all words are spelled correctly and that you've selected enough categories."
-msgstr "Ваш поиск не соответствовал каким-либо документам. Убедитесь, что все слова написаны правильно и что вы выбрали достаточно категорий."
+msgstr ""
 
 #: doc/sphinx/_build/html/_static/searchtools.js:570
 #, javascript-format
 msgid "Search finished, found %s page(s) matching the search query."
-msgstr "Поиск закончен, найден %s страница(ы) сопоставляя поисковый запрос."
+msgstr ""
 
 #: doc/sphinx/_build/html/_static/searchtools.js:623
 msgid ", in "
-msgstr ", в "
+msgstr " dins "
 
 #: doc/sphinx/_build/html/_static/sidebar.js:77
 msgid "Expand sidebar"
-msgstr "Развернуть боковую панель"
+msgstr ""
 
 #: doc/sphinx/_build/html/_static/sidebar.js:90
 #: doc/sphinx/_build/html/_static/sidebar.js:118
 msgid "Collapse sidebar"
-msgstr "Свернуть боковую панель"
+msgstr ""
 
 #: papers/static/papers/refresh.js:35
 msgid "Do not show this message anymore"
-msgstr "Не показывать это сообщение больше"
+msgstr ""
 
 #: papers/static/papers/refresh.js:66
 msgid "No author"
-msgstr "Нет автора"
+msgstr "Pas d'autor"
 
 #: papers/static/papers/refresh.js:68
 msgid "No title"
-msgstr "Без названия"
+msgstr "Pas de títol"
 
 #: papers/static/papers/refresh.js:70
 msgid "Invalid publication date"
-msgstr "Недействительная дата публикации"
+msgstr ""
 
 #: papers/static/papers/refresh.js:105
-#, fuzzy
+#, invalid-plural
 msgid "We ignored %(count)s paper from your ORCiD profile."
 msgid_plural "We ignored %(count)s papers from your ORCiD profile."
-msgstr[0] "Мы проигнорировали %(счет)ы бумага из вашего профиля ORCiD."
-msgstr[1] "Мы проигнорировали %(счет)ы бумаги из вашего профиля ORCiD."
-msgstr[2] ""
+msgstr[0] ""
+msgstr[1] ""
 
 #: papers/static/papers/refresh.js:115
 msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
-msgstr "\"%(имя)ена\" был проигнорирован по следующей причине: %(причина)ы"
+msgstr ""
 
 #: papers/static/papers/refresh.js:123
 msgid "A paper was ignored, because it has no name"
-msgstr "Документ был проигнорирован, поскольку он не имеет названия"
+msgstr ""
 
 #: papers/static/papers/refresh.js:135 papers/static/papers/refresh.js:163
 msgid "Show more information"
-msgstr "Показать больше информации"
+msgstr "Mostrar mai d'informacions"
 
 #: papers/static/papers/refresh.js:160
 msgid "Show less information"
-msgstr "Показать меньше информации"
+msgstr "Mostrar mens d'informacions"
 
