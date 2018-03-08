@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-02-15 08:47:27+0000\n"
+"PO-Revision-Date: 2018-03-08 08:26:50+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -287,7 +287,7 @@ msgstr "Tallenna"
 
 #: deposit/models.py:219
 msgid "We will use this email address to notify you when your deposits are accepted."
-msgstr ""
+msgstr "Käytämme tätä sähköpostiosoitetta ilmoittaaksemme sinulle, kun talletuksesi on hyväksytty."
 
 #: deposit/models.py:225
 msgid "This repository will be used by default for your deposits."
@@ -425,7 +425,7 @@ msgstr "Talletukseni"
 
 #: deposit/templates/deposit/deposits.html:36
 msgid "Paper"
-msgstr "Dokumentti"
+msgstr "Artikkeli"
 
 #: deposit/templates/deposit/deposits.html:44
 msgid "Deposit date"
@@ -467,7 +467,7 @@ msgstr "Yleinen"
 
 #: deposit/templates/deposit/repo_preferences.html:13
 msgid "Repository preferences"
-msgstr ""
+msgstr "Ensisijaiset koodivarannot"
 
 #: deposit/templates/deposit/start.html:12
 #: deposit/templates/deposit/start.html:16
@@ -514,7 +514,7 @@ msgstr "Tallennustyyppi:"
 
 #: deposit/templates/deposit/start.html:351
 msgid "Repository:"
-msgstr "Säilytyspaikka:"
+msgstr "Koodivaranto:"
 
 #: deposit/templates/deposit/start.html:364
 msgctxt "This repository will be soon available in Dissemin"
@@ -535,7 +535,7 @@ msgstr "odota hetki..."
 
 #: deposit/views.py:65
 msgid "This repository is not available for this paper."
-msgstr "Tämä säilytyspaikka ei ole käytettävissä tälle asiakirjalle."
+msgstr "Tämä koodivaranto ei ole käytettävissä tälle asiakirjalle."
 
 #: deposit/views.py:138
 msgid "This repository could not be found."
@@ -639,7 +639,7 @@ msgstr ""
 
 #: papers/baremodels.py:56
 msgid "Book chapter"
-msgstr ""
+msgstr "Kirjan luku"
 
 #: papers/baremodels.py:57
 msgid "Book"
@@ -663,7 +663,7 @@ msgstr "Juliste"
 
 #: papers/baremodels.py:62
 msgid "Report"
-msgstr ""
+msgstr "Tutkimus"
 
 #: papers/baremodels.py:63
 msgid "Thesis"
@@ -692,11 +692,11 @@ msgstr ""
 
 #: papers/forms.py:56 papers/templates/papers/search.html:114
 msgid "Researcher"
-msgstr ""
+msgstr "Tutkija"
 
 #: papers/forms.py:75
 msgid "publication date"
-msgstr ""
+msgstr "julkaisupäivä"
 
 #: papers/forms.py:76
 msgid "title"
@@ -769,7 +769,7 @@ msgstr ""
 #: papers/models.py:1255 papers/views.py:124 papers/views.py:129
 #: papers/views.py:269 papers/views.py:303
 msgid "Papers"
-msgstr "Dokumentit"
+msgstr "Artikkelit"
 
 #: papers/templates/papers/annotButtons.html:8
 msgid "Right"
@@ -806,7 +806,7 @@ msgstr[1] ""
 #: papers/templates/papers/department.html:71
 #: papers/templates/papers/institution.html:48
 msgid "Researcher deleted. "
-msgstr ""
+msgstr "Tutkija poistettu. "
 
 #: papers/templates/papers/department.html:75
 #: papers/templates/papers/institution.html:52
@@ -837,7 +837,7 @@ msgstr "Tervetuloa disseminiin"
 
 #: papers/templates/papers/index.html:26
 msgid "Dissemin detects papers behind pay-walls and invites their authors to upload them in one click to an open repository."
-msgstr ""
+msgstr "Dissemin havaitsee artikkelit maksumuurien takaa ja kutsuu niiden tekijät lähettämään ne yhdellä klikkauksella avoimeen koodivarantoon."
 
 #: papers/templates/papers/index.html:36
 #: papers/templates/papers/search.html:204
@@ -864,15 +864,15 @@ msgstr ""
 
 #: papers/templates/papers/index.html:74
 msgid "Open repositories"
-msgstr "Avoimet arkistot"
+msgstr "Avoimet koodivarannot"
 
 #: papers/templates/papers/index.html:77
 msgid "Uploading your papers on your own webpage is not enough. Such copies are less stable and harder to find than documents uploaded to well-indexed repositories."
-msgstr ""
+msgstr "Artikkeliesi lähettäminen omalla nettisivullasi ei riitä. Sellaiset kopiot ovat vähemmän vakaita ja vaikeampia löytää, kuin artikkelit jotka ladattu hyvin indeksoituihin koodivarantoihin."
 
 #: papers/templates/papers/index.html:85
 msgid "Dissemin searches for copies of your papers in a large collection of open repositories and tells you which ones cannot be accessed."
-msgstr ""
+msgstr "Dissemin etsii asiakirjojesi kopioita suuressa avoimien koodivarantojen kokoelmassa ja kertoo sinulle mitä niistä ei voida käyttää."
 
 #: papers/templates/papers/institutions.html:25
 msgid "Institutions"
@@ -923,7 +923,7 @@ msgstr "Lataa"
 
 #: papers/templates/papers/paper.html:118 statistics/models.py:66
 msgid "Unavailable"
-msgstr "Ei käytettävissä"
+msgstr "Ei saatavissa"
 
 #: papers/templates/papers/paper.html:120
 msgid "Ask upload"
@@ -943,7 +943,7 @@ msgstr ""
 
 #: papers/templates/papers/paperDetails.html:7
 msgid "Published in"
-msgstr ""
+msgstr "Julkaistu paikassa"
 
 #: papers/templates/papers/paperDetails.html:19
 msgid "Links"
@@ -963,12 +963,12 @@ msgstr ""
 
 #: papers/templates/papers/paperList.html:26
 msgid "No paper found."
-msgstr "Dokumenttia ei löytynyt."
+msgstr "Artikkelia ei löytynyt."
 
 #: papers/templates/papers/paperList.html:33
 #, python-format
 msgid "Missing publications? <a href=\"%(matching_papers_url)s\"> Search for publications with a matching author name </a>"
-msgstr ""
+msgstr "Puuttuvia julkaisuja? <a href=\"%(matching_papers_url)s\"> Hae julkaisuja vastaavan tekijän nimellä </a>"
 
 #: papers/templates/papers/publiListItem.html:16
 #, python-format
@@ -1106,7 +1106,7 @@ msgstr "Tekstin koko saatavuuden mukaan"
 
 #: papers/templates/papers/search.html:298
 msgid "By publisher policy"
-msgstr "Kustantajan käytännön mukaan"
+msgstr "Julkaisijan käytännön mukaan"
 
 #: papers/templatetags/statuses.py:19 papers/templatetags/statuses.py:79
 msgid "Unknown OA status"
@@ -1182,15 +1182,15 @@ msgstr "Tuntematon käytäntö"
 
 #: papers/templatetags/statuses.py:55
 msgid "archiving allowed."
-msgstr ""
+msgstr "arkistointi sallittu."
 
 #: papers/templatetags/statuses.py:56
 msgid "archiving forbidden."
-msgstr ""
+msgstr "arkistointi kielletty."
 
 #: papers/templatetags/statuses.py:57
 msgid "archiving restricted:"
-msgstr ""
+msgstr "arkistointi rajoitettu:"
 
 #: papers/templatetags/statuses.py:58
 msgid "policy unclear."
@@ -1203,15 +1203,15 @@ msgstr "käytäntö tuntematon"
 
 #: papers/templatetags/statuses.py:67
 msgid "archiving allowed"
-msgstr ""
+msgstr "arkistointi sallittu"
 
 #: papers/templatetags/statuses.py:68
 msgid "archiving forbidden"
-msgstr ""
+msgstr "arkistointi kielletty"
 
 #: papers/templatetags/statuses.py:69
 msgid "archiving restricted"
-msgstr ""
+msgstr "arkistointi rajoitettu"
 
 #: papers/templatetags/statuses.py:70
 msgid "policy unclear"
@@ -1223,14 +1223,14 @@ msgstr ""
 
 #: papers/views.py:128
 msgid "All papers"
-msgstr "Kaikki dokumentit"
+msgstr "Kaikki artikkelit"
 
 #: papers/views.py:132
-#, invalid-plural, python-format
+#, python-format
 msgid "%d paper found"
 msgid_plural "%d papers found"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d artikkeli löytyi"
+msgstr[1] "%d artikkelia löytyi"
 
 #: papers/views.py:211
 msgid "\n                            Invalid ORCID profile.\n                            Please make sure it includes a public name.\n                            "
@@ -1307,7 +1307,7 @@ msgstr ""
 
 #: publishers/models.py:48
 msgid "Forbidden"
-msgstr ""
+msgstr "Kielletty"
 
 #: publishers/models.py:49
 msgid "Restricted"
@@ -1374,7 +1374,7 @@ msgstr[1] ""
 
 #: publishers/templates/publishers/list.html:94
 msgid "Data provided by"
-msgstr ""
+msgstr "Tiedot toimittanut"
 
 #: publishers/templates/publishers/list.html:129
 msgid "No publisher found."
@@ -1407,7 +1407,7 @@ msgstr "Julkaisut"
 #: publishers/templates/publishers/policy.html:113
 #, python-format
 msgid "All papers published by %(publisher)s"
-msgstr "Kaikki dokumentit julkaissut %(publisher)s"
+msgstr "Kaikki artikkelit julkaissut %(publisher)s"
 
 #: publishers/templates/publishers/policy.html:118
 msgid "Journals"
@@ -1423,11 +1423,11 @@ msgstr ""
 
 #: statistics/models.py:48
 msgid "Available from the publisher"
-msgstr ""
+msgstr "Saatavissa julkaisijalta"
 
 #: statistics/models.py:49
 msgid "Available from the author"
-msgstr ""
+msgstr "Saatavissa tekijältä"
 
 #: statistics/models.py:50
 msgid "Could be shared by the authors"
@@ -1439,7 +1439,7 @@ msgstr ""
 
 #: statistics/models.py:52
 msgid "Publisher forbids sharing"
-msgstr ""
+msgstr "Julkaisija kieltää jakamisen"
 
 #: statistics/models.py:57
 msgid "This paper is made freely available by the publisher."
@@ -1476,7 +1476,7 @@ msgstr "Avoin pääsy"
 
 #: statistics/templates/statistics/histogram.html:8
 msgid "Publications are available"
-msgstr "Julkaisut ovat saatavilla"
+msgstr "Julkaisut ovat saatavissa"
 
 #: statistics/templates/statistics/histogram.html:11
 msgid "Publications could be online"
@@ -1525,7 +1525,7 @@ msgstr "Mikä on avoin pääsy?"
 
 #: templates/dissemin/faq.html:17 templates/dissemin/faq.html:61
 msgid "Why should I upload my papers to a repository?"
-msgstr ""
+msgstr "Miksi minun pitäisi tallentaa artikkelini koodivarantoon?"
 
 #: templates/dissemin/faq.html:18 templates/dissemin/faq.html:106
 msgid "What repository should I use?"
@@ -1541,11 +1541,11 @@ msgstr "Mikä on dissem.in?"
 
 #: templates/dissemin/faq.html:23 templates/dissemin/faq.html:199
 msgid "Is dissem.in a repository?"
-msgstr ""
+msgstr "Onko dissem.in koodivaranto?"
 
 #: templates/dissemin/faq.html:24 templates/dissemin/faq.html:209
 msgid "Who runs dissem.in?"
-msgstr ""
+msgstr "Kuka ajaa dissem.in -sivustoa?"
 
 #: templates/dissemin/faq.html:25 templates/dissemin/faq.html:216
 msgid "Can I create my profile on dissem.in?"
@@ -1565,19 +1565,19 @@ msgstr ""
 
 #: templates/dissemin/faq.html:30 templates/dissemin/faq.html:289
 msgid "Should I trust your statistics?"
-msgstr ""
+msgstr "Pitäisikö minun luottaa tilastoihisi?"
 
 #: templates/dissemin/faq.html:32 templates/dissemin/faq.html:330
 msgid "Omissions and errors"
-msgstr ""
+msgstr "Poisjätöt ja virheet"
 
 #: templates/dissemin/faq.html:33 templates/dissemin/faq.html:331
 msgid "One of my papers is missing. Why?"
-msgstr "Yksi dokumenteistani puuttuu. Miksi?"
+msgstr "Yksi artikkeleistani puuttuu. Miksi?"
 
 #: templates/dissemin/faq.html:34 templates/dissemin/faq.html:367
 msgid "Some details of my paper are incorrect. What can I do?"
-msgstr ""
+msgstr "Jotkin artikelini tiedot ovat virheellisiä. Mitä voin tehdä?"
 
 #: templates/dissemin/faq.html:35 templates/dissemin/faq.html:393
 msgid "There is a freely available copy of my article online but dissem.in does not find it."
@@ -1589,7 +1589,7 @@ msgstr ""
 
 #: templates/dissemin/faq.html:38 templates/dissemin/faq.html:435
 msgid "Why do you need to authenticate users?"
-msgstr ""
+msgstr "Miksi sinun pitää todentaa käyttäjät?"
 
 #: templates/dissemin/faq.html:39 templates/dissemin/faq.html:449
 msgid "What will you do to my ORCID profile if I log in?"
@@ -1621,7 +1621,7 @@ msgstr "Missä on lähdekoodi?"
 
 #: templates/dissemin/faq.html:47 templates/dissemin/faq.html:569
 msgid "Can I harvest your data?"
-msgstr ""
+msgstr "Voiko kerätä tietojasi?"
 
 #: templates/dissemin/faq.html:53
 msgid "In a nutshell, the Open Access movement promotes free access to the scientific literature. For a more in-depth introduction, we recommend <a href=\"http://www.phdcomics.com/comics.php?f=1533\">this video in English</a> and <a href=\"https://pablo.rauzy.name/openaccess/introduction.html\">this introduction in French</a>."
@@ -1994,11 +1994,11 @@ msgstr "Ensisijaiset lähteet"
 
 #: templates/dissemin/tos.html:15 templates/dissemin/tos.html:27
 msgid "In short"
-msgstr ""
+msgstr "Lyhyesti"
 
 #: templates/dissemin/tos.html:16 templates/dissemin/tos.html:29
 msgid "Scope of the service"
-msgstr ""
+msgstr "Palvelun laajuus"
 
 #: templates/dissemin/tos.html:17 templates/dissemin/tos.html:42
 msgid "Privacy"
@@ -2010,11 +2010,11 @@ msgstr "Talletukset Disseminin kautta"
 
 #: templates/dissemin/tos.html:20 templates/dissemin/tos.html:82
 msgid "In full"
-msgstr ""
+msgstr "Kokonaan"
 
 #: templates/dissemin/tos.html:21 templates/dissemin/tos.html:83
 msgid "Personal data"
-msgstr ""
+msgstr "Henkilökohtaiset tiedot"
 
 #: templates/dissemin/tos.html:22 templates/dissemin/tos.html:101
 msgid "Full text storage"
@@ -2022,7 +2022,7 @@ msgstr ""
 
 #: templates/dissemin/tos.html:23 templates/dissemin/tos.html:117
 msgid "Reporting misuse"
-msgstr ""
+msgstr "Ilmoita väärinkäytöstä"
 
 #: templates/dissemin/tos.html:32
 msgid "This platform offers an analysis of the accessibility of scholarly publications. It can also deposit publications on behalf of their authors in repositories. The accessibility and self-archiving policies of the papers on this platform can be incorrect and should not be relied upon for legal advice. When in doubt, users are advised to check from authoritative sources."
@@ -2042,7 +2042,7 @@ msgstr "Ota yhteyttä"
 
 #: templates/dissemin/tos.html:77
 msgid "Please address any inquiry to support@dissem.in."
-msgstr ""
+msgstr "Kohdista kaikki kyselyt osoitteeseen support@dissem.in."
 
 #: templates/dissemin/tos.html:86
 msgid "Dissemin uses ORCID's public OAuth interface to authenticate its users. This interface only transmits information marked as public in the user's ORCID profile. This means that ORCID passwords are never transmitted and email addresses are not transmitted when they are marked as private, which is the default setting. When logging in to Dissemin from ORCID, Dissemin acquires the user's ORCID id, as well as all public information attached to the ORCID record. Dissemin can store any information input by its users on the platform. Users can ask for a copy of the personal information Dissemin stores about them by writing an email to support@dissem.in."
@@ -2054,7 +2054,7 @@ msgstr ""
 
 #: templates/dissemin/tos.html:120
 msgid "Misuse can be reported to support@dissem.in."
-msgstr ""
+msgstr "Väärinkäytökset voidaan ilmoittaa osoitteeseen support@dissem.in."
 
 #: templates/dissemin/tos.html:128
 msgid "The <a href=\"https://dissem.in\">dissem.in</a> website has been registered with <a href=\"https://www.cnil.fr/\">CNIL</a> under declaration n°1895382 v0."

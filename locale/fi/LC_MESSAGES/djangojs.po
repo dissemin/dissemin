@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-02-15 08:47:26+0000\n"
+"PO-Revision-Date: 2018-03-08 08:26:48+0000\n"
 "X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -40,7 +40,7 @@ msgstr "Hakutulokset"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:568
 msgid "Your search did not match any documents. Please make sure that all words are spelled correctly and that you've selected enough categories."
-msgstr "Haulla ei löytynyt yhtään dokumenttia. Varmista, että kaikki sanat on kirjoitettu oikein ja että olet valinnut tarpeeksi luokkia."
+msgstr "Haulla ei löytynyt yhtään artikkelia. Varmista, että kaikki sanat on kirjoitettu oikein ja että olet valinnut tarpeeksi luokkia."
 
 #: doc/sphinx/_build/html/_static/searchtools.js:570
 #, javascript-format
@@ -79,8 +79,8 @@ msgstr "Virheellinen julkaisupäivä."
 #: papers/static/papers/refresh.js:105
 msgid "We ignored %(count)s paper from your ORCiD profile."
 msgid_plural "We ignored %(count)s papers from your ORCiD profile."
-msgstr[0] "Emme huomioineet %(count)s dokumenttia ORCiD-profiilistasi."
-msgstr[1] "Emme huomioineet %(count)s dokumenttia ORCiD-profiilistasi."
+msgstr[0] "Emme huomioineet %(count)s artikkelia ORCiD-profiilistasi."
+msgstr[1] "Emme huomioineet %(count)s artikkelia ORCiD-profiilistasi."
 
 #: papers/static/papers/refresh.js:115
 msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
