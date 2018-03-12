@@ -1,6 +1,7 @@
 # Translation of Dissemin website to Luxembourgish (Lëtzebuergesch)
 # Exported from translatewiki.net
 #
+# Author: Les Meloures
 # Author: Robby
 # --
 # This file is part of the Dissemin Project
@@ -9,7 +10,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-02-15 08:47:27+0000\n"
+"PO-Revision-Date: 2018-03-12 07:56:06+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1595,7 +1596,7 @@ msgstr ""
 
 #: templates/dissemin/faq.html:40 templates/dissemin/faq.html:458
 msgid "How do I add publications to my ORCID profile?"
-msgstr "Wéi setzen ech Publikatiounen a mäin ORCID-Profil dobäi?"
+msgstr "Wéi setzen ech Publikatiounen a mäin ORCID-Profil derbäi?"
 
 #: templates/dissemin/faq.html:41 templates/dissemin/faq.html:501
 msgid "My ORCID details on Dissemin are outdated."
