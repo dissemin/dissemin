@@ -11,7 +11,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-30 10:57+0100\n"
-"PO-Revision-Date: 2018-02-15 08:47:28+0000\n"
+"PO-Revision-Date: 2018-03-19 19:57:04+0000\n"
 "Language: mk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -359,19 +359,19 @@ msgstr "Не можев да го создадам проектот на OSF."
 
 #: deposit/osf/protocol.py:221
 msgid "Unable to authenticate to OSF."
-msgstr ""
+msgstr "Не можев да се заверам на OSF."
 
 #: deposit/osf/protocol.py:238
 msgid "Unable to add contributors."
-msgstr ""
+msgstr "Не можам да додадам учесници."
 
 #: deposit/osf/protocol.py:265
 msgid "Unable to update the contributors of the paper."
-msgstr ""
+msgstr "Не можам да ги подновам учесниците во трудот."
 
 #: deposit/osf/protocol.py:311
 msgid "Unable to update license."
-msgstr ""
+msgstr "Не можам да ја сменам лиценцата."
 
 #: deposit/osf/protocol.py:368
 msgid "Unable to create the preprint."
