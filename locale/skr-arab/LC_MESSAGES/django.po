@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-03-08 08:26:53+0000\n"
+"PO-Revision-Date: 2018-03-22 07:08:23+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -301,7 +301,7 @@ msgstr ""
 
 #: deposit/osf/forms.py:40 deposit/osf/forms.py:51
 msgid "No license"
-msgstr ""
+msgstr "لائسنس کائنی"
 
 #: deposit/osf/forms.py:57 deposit/osf/forms.py:80
 msgid "Architecture"
@@ -625,7 +625,7 @@ msgstr ""
 
 #: notification/models.py:62
 msgid "inboxes"
-msgstr ""
+msgstr "انباکس"
 
 #: papers/baremodels.py:54
 msgid "Journal article"
@@ -673,7 +673,7 @@ msgstr ""
 
 #: papers/baremodels.py:65 papers/models.py:101
 msgid "Preprint"
-msgstr ""
+msgstr "چھپݨ کنے پہلے"
 
 #: papers/baremodels.py:66
 msgid "Other document"
@@ -1086,7 +1086,7 @@ msgstr ""
 #: papers/templates/papers/search.html:273
 #: publishers/templates/publishers/list.html:76
 msgid "Sort by"
-msgstr ""
+msgstr "چھانٹی بمطابق"
 
 #: papers/templates/papers/search.html:281
 #: publishers/templates/publishers/list.html:84
@@ -1329,7 +1329,7 @@ msgstr ""
 
 #: publishers/templates/publishers/detailsPolicy.html:6
 msgid "Preprint:"
-msgstr ""
+msgstr "چھپݨ کنے پہلے:"
 
 #: publishers/templates/publishers/detailsPolicy.html:7
 msgid "A preprint is a document produced by the authors without any interaction with the peer-reviewing process."
@@ -1337,11 +1337,11 @@ msgstr ""
 
 #: publishers/templates/publishers/detailsPolicy.html:8
 msgid "preprint"
-msgstr ""
+msgstr "چھپݨ کنے پہلے"
 
 #: publishers/templates/publishers/detailsPolicy.html:10
 msgid "Postprint:"
-msgstr ""
+msgstr "چھپݨ دے بعد:"
 
 #: publishers/templates/publishers/detailsPolicy.html:11
 msgid "Postprints differ from preprints in that they include the changes suggested by the reviewers. They are not edited by the publisher."
@@ -1349,7 +1349,7 @@ msgstr ""
 
 #: publishers/templates/publishers/detailsPolicy.html:12
 msgid "postprint"
-msgstr ""
+msgstr "چھپݨ دے بعد"
 
 #: publishers/templates/publishers/detailsPolicy.html:14
 msgid "Published version:"
