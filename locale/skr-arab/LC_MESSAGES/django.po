@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-03-22 07:08:23+0000\n"
+"PO-Revision-Date: 2018-03-26 06:09:14+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -75,7 +75,7 @@ msgstr "غیر خطی سانئس"
 
 #: deposit/hal/metadata.py:41
 msgid "Cognitive science"
-msgstr ""
+msgstr "ادراکی سائنس"
 
 #: deposit/hal/metadata.py:42
 msgid "Environment sciences"
@@ -83,15 +83,15 @@ msgstr "ماحولیاتی سائنس"
 
 #: deposit/hal/metadata.py:43
 msgid "Planet and Universe"
-msgstr ""
+msgstr "سیارہ تے کائنات"
 
 #: deposit/hal/metadata.py:44
 msgid "Biological anthropology"
-msgstr ""
+msgstr "حیاتیاتی بشریات"
 
 #: deposit/hal/metadata.py:45
 msgid "Social Anthropology and ethnology"
-msgstr ""
+msgstr "معاشرتی بشریات تے نسلی علوم"
 
 #: deposit/hal/metadata.py:46
 msgid "Archaeology and Prehistory"
