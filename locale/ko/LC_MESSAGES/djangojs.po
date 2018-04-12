@@ -1,11 +1,12 @@
 # Translation of Dissemin papers to Korean (한국어)
 # Exported from translatewiki.net
 #
+# Author: Revi
 # Author: Ykhwong
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-02-15 08:47:27+0000\n"
+"PO-Revision-Date: 2018-04-12 07:11:05+0000\n"
 "X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -73,7 +74,7 @@ msgstr "제목 없음"
 
 #: papers/static/papers/refresh.js:70
 msgid "Invalid publication date"
-msgstr ""
+msgstr "잘못된 발행 날짜"
 
 #: papers/static/papers/refresh.js:105
 #, invalid-plural
