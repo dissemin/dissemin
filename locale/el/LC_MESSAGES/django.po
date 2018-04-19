@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-04-05 07:16:20+0000\n"
+"PO-Revision-Date: 2018-04-19 07:18:58+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -220,11 +220,11 @@ msgstr "Αν το βάλετε, οι καταθέσεις θα συνδεθού�
 
 #: deposit/hal/protocol.py:142
 msgid "No HAL user credentials provided."
-msgstr ""
+msgstr "Δεν παράσχηκαν πιστοποιητικά χρήστη HAL."
 
 #: deposit/hal/protocol.py:208
 msgid "This document is already in HAL. HAL refused the deposit."
-msgstr ""
+msgstr "Αυτό το έγγραφο είναι ήδη στο HAL. Το HAL αρνήθηκε το κοίτασμα."
 
 #: deposit/hal/protocol.py:215
 #, python-format
@@ -233,11 +233,11 @@ msgstr ""
 
 #: deposit/hal/protocol.py:222
 msgid "HAL returned an invalid XML response"
-msgstr ""
+msgstr "Το HAL επέστρεψε μια άκυρη απάντηση XML"
 
 #: deposit/hal/protocol.py:234
 msgid "This paper already exists in HAL."
-msgstr ""
+msgstr "Αυτό το χαρτί υπάρχει ήδη στο HAL."
 
 #: deposit/hal/protocol.py:240
 msgid "HAL rejected the submission."
@@ -261,19 +261,19 @@ msgstr "Απέτυχε"
 
 #: deposit/models.py:39
 msgid "Faked"
-msgstr ""
+msgstr "Ψεύτικο"
 
 #: deposit/models.py:40
 msgid "Pending publication"
-msgstr ""
+msgstr "Η δημοσίευση εκκρεμεί"
 
 #: deposit/models.py:42
 msgid "Published"
-msgstr ""
+msgstr "Δημοσιεύθηκε"
 
 #: deposit/models.py:43
 msgid "Refused by the repository"
-msgstr ""
+msgstr "Το αποθετήριο το αρνήθηκε"
 
 #: deposit/models.py:44
 msgid "Deleted"
@@ -282,7 +282,7 @@ msgstr "Διεγράφη"
 #: deposit/models.py:166 deposit/templates/deposit/start.html:415
 #: deposit/views.py:103
 msgid "Deposit"
-msgstr ""
+msgstr "Απόθεμα"
 
 #: deposit/models.py:219
 msgid "We will use this email address to notify you when your deposits are accepted."
@@ -294,7 +294,7 @@ msgstr ""
 
 #: deposit/osf/forms.py:35 deposit/osf/forms.py:46
 msgid "Creative Commons CC0 1.0 Universal"
-msgstr ""
+msgstr "Creative Commons CC0 1.0 Universal"
 
 #: deposit/osf/forms.py:37 deposit/osf/forms.py:48
 msgid "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
@@ -310,7 +310,7 @@ msgstr "Αρχιτεκτονική"
 
 #: deposit/osf/forms.py:59 deposit/osf/forms.py:82
 msgid "Arts and Humanities"
-msgstr ""
+msgstr "Τέχνες και Ανθρωπιστικές Επιστήμες"
 
 #: deposit/osf/forms.py:61 deposit/osf/forms.py:84
 msgid "Business"
@@ -342,11 +342,11 @@ msgstr "Άδεια"
 
 #: deposit/osf/forms.py:150
 msgid "Invalid OSF identifier."
-msgstr ""
+msgstr "Άκυρο αναγνωριστικό OSF."
 
 #: deposit/osf/models.py:13
 msgid "OSF identifier"
-msgstr ""
+msgstr "Αναγνωριστικό OSF"
 
 #: deposit/osf/models.py:14
 msgid "If set, your deposits will be associated to this OSF account. This identifier is a string of letters and numbers which can be found in your OSF public profile URL."
@@ -466,7 +466,7 @@ msgstr "Γενικά"
 
 #: deposit/templates/deposit/repo_preferences.html:13
 msgid "Repository preferences"
-msgstr ""
+msgstr "Προτιμήσεις αποθετηρίου"
 
 #: deposit/templates/deposit/start.html:12
 #: deposit/templates/deposit/start.html:16
@@ -578,7 +578,7 @@ msgstr "Άλλη ανοιχτή άδεια"
 
 #: deposit/zenodo/protocol.py:72
 msgid "No Zenodo API key provided."
-msgstr ""
+msgstr "Δεν παράσχηκε κλειδί Zenodo API."
 
 #: deposit/zenodo/protocol.py:81
 msgid "This happens when Zenodo has hiccups. Please try again in a few minutes or use a different repository in the menu above."
@@ -594,7 +594,7 @@ msgstr ""
 
 #: deposit/zenodo/protocol.py:101
 msgid "Unable to transfer the document to Zenodo."
-msgstr ""
+msgstr "Η μεταφορά του εγγράφου στο Zenodo απέτυχε."
 
 #: deposit/zenodo/protocol.py:111
 msgid "No abstract is available for this paper but Zenodo requires one. Please provide it using the metadata panel."
@@ -630,7 +630,7 @@ msgstr ""
 
 #: papers/baremodels.py:54
 msgid "Journal article"
-msgstr ""
+msgstr "Άρθρο περιοδικού"
 
 #: papers/baremodels.py:55
 msgid "Proceedings article"
@@ -638,7 +638,7 @@ msgstr ""
 
 #: papers/baremodels.py:56
 msgid "Book chapter"
-msgstr ""
+msgstr "Τμήμα βιβλίου"
 
 #: papers/baremodels.py:57
 msgid "Book"
@@ -646,7 +646,7 @@ msgstr "Βιβλίο"
 
 #: papers/baremodels.py:58
 msgid "Journal issue"
-msgstr ""
+msgstr "Έκδοση περιοδικού"
 
 #: papers/baremodels.py:59
 msgid "Proceedings"
@@ -682,7 +682,7 @@ msgstr "Άλλο έγγραφο"
 
 #: papers/forms.py:48
 msgid "Invalid ORCID identifier."
-msgstr ""
+msgstr "Άκυρο αναγνωριστικό ORCID."
 
 #: papers/forms.py:54 papers/templates/papers/department.html:86
 #: papers/templates/papers/search.html:160
@@ -731,11 +731,11 @@ msgstr ""
 
 #: papers/models.py:103
 msgid "Published version"
-msgstr ""
+msgstr "Δημοσιευμένη έκδοση"
 
 #: papers/models.py:107
 msgid "Preparing profile"
-msgstr ""
+msgstr "Προετοιμασία προφίλ"
 
 #: papers/models.py:108
 msgid "Fetching publications from ORCID"
@@ -763,7 +763,7 @@ msgstr ""
 
 #: papers/models.py:114
 msgid "Updating statistics"
-msgstr ""
+msgstr "Ενημέρωση στατιστικών"
 
 #: papers/models.py:1255 papers/views.py:124 papers/views.py:129
 #: papers/views.py:269 papers/views.py:303
@@ -781,7 +781,7 @@ msgstr "Λάθος"
 #: papers/templates/papers/annotButtons.html:16
 #: papers/templates/papers/paperDetails.html:26
 msgid "Search in Google Scholar"
-msgstr ""
+msgstr "Αναζήτηση στο Google Scholar"
 
 #: papers/templates/papers/createProfile.html:8
 #: papers/templates/papers/createProfile.html:12
@@ -805,7 +805,7 @@ msgstr[1] ""
 #: papers/templates/papers/department.html:71
 #: papers/templates/papers/institution.html:48
 msgid "Researcher deleted. "
-msgstr ""
+msgstr "Ο ερευνητής διαγράφηκε. "
 
 #: papers/templates/papers/department.html:75
 #: papers/templates/papers/institution.html:52
@@ -934,11 +934,11 @@ msgstr "Εκδότης:"
 
 #: papers/templates/papers/paper.html:131
 msgid "Deposited."
-msgstr ""
+msgstr "Αποτέθηκε."
 
 #: papers/templates/papers/paper.html:133
 msgid "Deposit again"
-msgstr ""
+msgstr "Απόθεση ξανά."
 
 #: papers/templates/papers/paperDetails.html:7
 msgid "Published in"
@@ -954,7 +954,7 @@ msgstr "Εργαλεία"
 
 #: papers/templates/papers/paperDetails.html:29
 msgid "Request with the Open Access Button"
-msgstr ""
+msgstr "Αίτημα με το κουμπί ανοιχτής πρόσβασης"
 
 #: papers/templates/papers/paperDetails.html:35
 msgid "Admin zone"
@@ -1101,31 +1101,31 @@ msgstr "Ανά επισκεψιμότητα"
 
 #: papers/templates/papers/search.html:292
 msgid "By full text availability"
-msgstr ""
+msgstr "Ανά πλήρη διαθεσιμότητα κειμένου"
 
 #: papers/templates/papers/search.html:298
 msgid "By publisher policy"
-msgstr ""
+msgstr "Ανά πολιτική εκδότη"
 
 #: papers/templatetags/statuses.py:19 papers/templatetags/statuses.py:79
 msgid "Unknown OA status"
-msgstr ""
+msgstr "Άγνωστη κατάσταση OA"
 
 #: papers/templatetags/statuses.py:27
 msgid "Unknown PDF status"
-msgstr ""
+msgstr "Άγνωστη κατάσταση PDF"
 
 #: papers/templatetags/statuses.py:33
 msgid "Preprints can be archived."
-msgstr ""
+msgstr "Οι προεκτυπώσεις μπορούν να αρχειοθετηθούν."
 
 #: papers/templatetags/statuses.py:34
 msgid "Preprints cannot be archived."
-msgstr ""
+msgstr "Οι προεκτυπώσεις δεν μπορούν να αρχειοθετηθούν."
 
 #: papers/templatetags/statuses.py:35
 msgid "Under the restrictions below, preprints can be archived."
-msgstr ""
+msgstr "Υπό τους παρακάτω περιορισμούς, οι προεκτυπώσεις μπορούν να αρχειοθετηθούν."
 
 #: papers/templatetags/statuses.py:36
 msgid "Preprints archiving policy unclear"
@@ -1177,19 +1177,19 @@ msgstr ""
 
 #: papers/templatetags/statuses.py:49
 msgid "Unknown policy"
-msgstr ""
+msgstr "Άγνωστη πολιτική"
 
 #: papers/templatetags/statuses.py:55
 msgid "archiving allowed."
-msgstr ""
+msgstr "η αρχειοθέτηση επιτρέπεται."
 
 #: papers/templatetags/statuses.py:56
 msgid "archiving forbidden."
-msgstr ""
+msgstr "η αρχειοθέτηση απαγορεύεται."
 
 #: papers/templatetags/statuses.py:57
 msgid "archiving restricted:"
-msgstr ""
+msgstr "η αρχειοθέτηση είναι περιορισμένη:"
 
 #: papers/templatetags/statuses.py:58
 msgid "policy unclear."
@@ -1198,15 +1198,15 @@ msgstr ""
 #: papers/templatetags/statuses.py:59 papers/templatetags/statuses.py:61
 #: papers/templatetags/statuses.py:73
 msgid "policy unknown."
-msgstr ""
+msgstr "Άγνωστη πολιτική."
 
 #: papers/templatetags/statuses.py:67
 msgid "archiving allowed"
-msgstr ""
+msgstr "η αρχειοθέτηση επιτρέπεται"
 
 #: papers/templatetags/statuses.py:68
 msgid "archiving forbidden"
-msgstr ""
+msgstr "η αρχειοθέτηση απαγορεύεται"
 
 #: papers/templatetags/statuses.py:69
 msgid "archiving restricted"
@@ -1222,7 +1222,7 @@ msgstr ""
 
 #: papers/views.py:128
 msgid "All papers"
-msgstr ""
+msgstr "Όλα τα χαρτιά"
 
 #: papers/views.py:132
 #, invalid-plural, python-format
@@ -1237,19 +1237,19 @@ msgstr ""
 
 #: papers/views.py:217
 msgid "Invalid ORCID profile."
-msgstr ""
+msgstr "Άκυρο προφίλ ORCID."
 
 #: papers/views.py:239
 msgid " authored by "
-msgstr ""
+msgstr "συγγράφηκε από "
 
 #: papers/views.py:283
 msgid " published by "
-msgstr ""
+msgstr "δημοσιεύτηκε από "
 
 #: papers/views.py:312
 msgid " in "
-msgstr ""
+msgstr "στο "
 
 #: papers/views.py:389
 #, python-format
@@ -1330,7 +1330,7 @@ msgstr "Άγνωστος εκδότης"
 
 #: publishers/templates/publishers/detailsPolicy.html:6
 msgid "Preprint:"
-msgstr ""
+msgstr "Προεκτύπωση:"
 
 #: publishers/templates/publishers/detailsPolicy.html:7
 msgid "A preprint is a document produced by the authors without any interaction with the peer-reviewing process."
@@ -1338,7 +1338,7 @@ msgstr ""
 
 #: publishers/templates/publishers/detailsPolicy.html:8
 msgid "preprint"
-msgstr ""
+msgstr "Προεκτύπωση"
 
 #: publishers/templates/publishers/detailsPolicy.html:10
 msgid "Postprint:"
@@ -1373,7 +1373,7 @@ msgstr[1] ""
 
 #: publishers/templates/publishers/list.html:94
 msgid "Data provided by"
-msgstr ""
+msgstr "Τα δεδομένα παρέχονται από"
 
 #: publishers/templates/publishers/list.html:129
 msgid "No publisher found."
@@ -1385,7 +1385,7 @@ msgstr ""
 
 #: publishers/templates/publishers/policy.html:62
 msgid "Report any error to them"
-msgstr ""
+msgstr "Αναφέρετε οποιοδήποτε σφάλμα σε αυτούς"
 
 #: publishers/templates/publishers/policy.html:67
 msgid "Policy"
@@ -1410,7 +1410,7 @@ msgstr ""
 
 #: publishers/templates/publishers/policy.html:118
 msgid "Journals"
-msgstr ""
+msgstr "Περιοδικά"
 
 #: publishers/templates/publishers/policy.html:119
 msgid "Only journals with papers written by our users are listed."
@@ -1430,7 +1430,7 @@ msgstr "Διαθέσιμα από τον συγγραφέα"
 
 #: statistics/models.py:50
 msgid "Could be shared by the authors"
-msgstr ""
+msgstr "Μπορεί να μοιραστεί από τους συγγραφείς"
 
 #: statistics/models.py:51
 msgid "Unknown/unclear sharing policy"
@@ -1540,11 +1540,11 @@ msgstr "Τι είναι το dissem.in;"
 
 #: templates/dissemin/faq.html:23 templates/dissemin/faq.html:199
 msgid "Is dissem.in a repository?"
-msgstr ""
+msgstr "Το dissem.in είναι αποθετήριο;"
 
 #: templates/dissemin/faq.html:24 templates/dissemin/faq.html:209
 msgid "Who runs dissem.in?"
-msgstr ""
+msgstr "Ποιος τρέχει το dissem.in;"
 
 #: templates/dissemin/faq.html:25 templates/dissemin/faq.html:216
 msgid "Can I create my profile on dissem.in?"
@@ -2009,7 +2009,7 @@ msgstr ""
 
 #: templates/dissemin/tos.html:20 templates/dissemin/tos.html:82
 msgid "In full"
-msgstr ""
+msgstr "σε πλήρη"
 
 #: templates/dissemin/tos.html:21 templates/dissemin/tos.html:83
 msgid "Personal data"
@@ -2083,7 +2083,7 @@ msgstr ""
 
 #: upload/forms.py:47
 msgid "URL"
-msgstr ""
+msgstr "Διεύθυνση URL"
 
 #: upload/templates/upload/widget.html:4
 msgid "Select here the full text of your article. PDF files only, maximum size:"
@@ -2091,31 +2091,31 @@ msgstr ""
 
 #: upload/templates/upload/widget.html:9
 msgid "Select a file:"
-msgstr ""
+msgstr "Επιλέξτε ένα αρχείο:"
 
 #: upload/templates/upload/widget.html:10
 msgid "Browse"
-msgstr ""
+msgstr "Αναζήτηση"
 
 #: upload/templates/upload/widget.html:17
 msgid "Or enter an URL:"
-msgstr ""
+msgstr "Ή εισαγάγετε μια διεύθυνση URL:"
 
 #: upload/templates/upload/widget.html:28
 msgid "Or drop a file here:"
-msgstr ""
+msgstr "Ή σύρτε ένα αρχείο εδώ:"
 
 #: upload/views.py:132
 msgid "Invalid PDF file."
-msgstr ""
+msgstr "Άκυρο αρχείο PDF."
 
 #: upload/views.py:165
 msgid "Invalid form."
-msgstr ""
+msgstr "Άκυρη μορφή."
 
 #: upload/views.py:175
 msgid "File too large."
-msgstr ""
+msgstr "Το αρχείο είναι πολύ μεγάλο."
 
 #: upload/views.py:180
 msgid "Invalid content type: this link points to a web page, we need a direct link to a PDF file."
@@ -2131,5 +2131,5 @@ msgstr ""
 
 #: upload/views.py:187 upload/views.py:191
 msgid "Invalid URL."
-msgstr ""
+msgstr "Μη έγκυρη διεύθυνση URL"
 
