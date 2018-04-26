@@ -10,12 +10,12 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-03-12 07:56:06+0000\n"
+"PO-Revision-Date: 2018-04-26 05:52:02+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: lb\n"
-"X-Generator: MediaWiki 1.31.0-alpha; Translate 2018-01-30\n"
+"X-Generator: MediaWiki 1.32.0-alpha; Translate 2018-04-10\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: deposit/forms.py:41
