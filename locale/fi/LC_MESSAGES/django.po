@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-04-26 05:52:01+0000\n"
+"PO-Revision-Date: 2018-04-30 06:20:35+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -213,7 +213,7 @@ msgstr "Talous ja määrällinen rahoitus"
 
 #: deposit/hal/models.py:14
 msgid "HAL username"
-msgstr "HAL käyttäjänimi"
+msgstr "HAL-käyttäjänimi"
 
 #: deposit/hal/models.py:15
 msgid "If set, deposits will be associated to this HAL account."
@@ -291,7 +291,7 @@ msgstr "Käytämme tätä sähköpostiosoitetta ilmoittaaksemme sinulle, kun tal
 
 #: deposit/models.py:225
 msgid "This repository will be used by default for your deposits."
-msgstr ""
+msgstr "Tätä koodivarantoa käytetään oletuksena talletuksillesi."
 
 #: deposit/osf/forms.py:35 deposit/osf/forms.py:46
 msgid "Creative Commons CC0 1.0 Universal"
@@ -459,7 +459,7 @@ msgstr ""
 #: deposit/templates/deposit/preferences_nav.html:3
 #: templates/dissemin/skeleton.html:81
 msgid "Preferences"
-msgstr "Viitteet"
+msgstr "Asetukset"
 
 #: deposit/templates/deposit/preferences_nav.html:7
 msgid "General"
@@ -1118,7 +1118,7 @@ msgstr "Tuntematon PDF-tila"
 
 #: papers/templatetags/statuses.py:33
 msgid "Preprints can be archived."
-msgstr ""
+msgstr "Koevedokset voidaan arkistoida."
 
 #: papers/templatetags/statuses.py:34
 msgid "Preprints cannot be archived."
