@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-04-30 06:20:35+0000\n"
+"PO-Revision-Date: 2018-05-07 05:54:50+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1040,7 +1040,7 @@ msgstr "Julkaissut"
 
 #: papers/templates/papers/search.html:170
 msgid "ISSN:"
-msgstr ""
+msgstr "ISSN:"
 
 #: papers/templates/papers/search.html:178
 #, invalid-plural, python-format
@@ -2112,7 +2112,7 @@ msgstr "Virheellinen PDF-tiedosto."
 
 #: upload/views.py:165
 msgid "Invalid form."
-msgstr ""
+msgstr "Virheellinen muoto."
 
 #: upload/views.py:175
 msgid "File too large."
