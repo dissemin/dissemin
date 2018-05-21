@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-05-07 05:54:50+0000\n"
+"PO-Revision-Date: 2018-05-21 14:01:02+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -852,7 +852,7 @@ msgstr "Hae"
 
 #: papers/templates/papers/index.html:46
 msgid "Green open access"
-msgstr ""
+msgstr "Vihreä avoin pääsy"
 
 #: papers/templates/papers/index.html:50
 msgid "Many researchers do not use their right to make their papers freely available online, in addition to the paywalled version offered by traditional publishers."
@@ -1275,7 +1275,7 @@ msgstr "Avoin pääsy"
 
 #: publishers/models.py:38
 msgid "Freely available from the publisher."
-msgstr ""
+msgstr "Vapaasti saatavissa julkaisijalta."
 
 #: publishers/models.py:39
 msgid "Allows pre/post prints"

@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-04-26 05:52:00+0000\n"
+"PO-Revision-Date: 2018-05-21 14:01:02+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -298,7 +298,7 @@ msgstr "Creative Commons CC0 1.0 Universal"
 
 #: deposit/osf/forms.py:37 deposit/osf/forms.py:48
 msgid "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
-msgstr ""
+msgstr "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
 
 #: deposit/osf/forms.py:40 deposit/osf/forms.py:51
 msgid "No license"
@@ -314,7 +314,7 @@ msgstr "Τέχνες και Ανθρωπιστικές Επιστήμες"
 
 #: deposit/osf/forms.py:61 deposit/osf/forms.py:84
 msgid "Business"
-msgstr ""
+msgstr "Επιχείριση"
 
 #: deposit/osf/forms.py:65 deposit/osf/forms.py:88
 msgid "Engineering"
@@ -354,7 +354,7 @@ msgstr ""
 
 #: deposit/osf/protocol.py:207
 msgid "Unable to create a project on OSF."
-msgstr ""
+msgstr "Αποτυχία δημιουργίας εγχειρήματος στο OSF."
 
 #: deposit/osf/protocol.py:221
 msgid "Unable to authenticate to OSF."
@@ -394,7 +394,7 @@ msgstr ""
 
 #: deposit/osf/protocol.py:509
 msgid "Unable to delete the project."
-msgstr ""
+msgstr "Αποτυχία διαγραφής του εγχειρήματος."
 
 #: deposit/osf/protocol.py:538 deposit/osf/protocol.py:546
 msgid "Unable to make the project public."
