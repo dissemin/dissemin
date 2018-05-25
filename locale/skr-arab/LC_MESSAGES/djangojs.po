@@ -1,11 +1,11 @@
-# Translation of Dissemin papers to سرائیکی (سرائیکی)
+# Translation of Dissemin papers to Saraiki (Arabic script) (سرائیکی)
 # Exported from translatewiki.net
 #
 # Author: Saraiki
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-04-26 05:52:01+0000\n"
+"PO-Revision-Date: 2018-05-25 09:43:23+0000\n"
 "X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"

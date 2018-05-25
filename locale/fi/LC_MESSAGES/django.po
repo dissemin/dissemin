@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-05-21 14:01:02+0000\n"
+"PO-Revision-Date: 2018-05-25 09:43:23+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1238,7 +1238,7 @@ msgstr ""
 
 #: papers/views.py:217
 msgid "Invalid ORCID profile."
-msgstr ""
+msgstr "Virheellinen ORCID-profiili."
 
 #: papers/views.py:239
 msgid " authored by "
