@@ -1,11 +1,12 @@
 # Translation of Dissemin papers to Japanese (日本語)
 # Exported from translatewiki.net
 #
+# Author: Omotecho
 # Author: Yusuke1109
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-04-26 05:51:59+0000\n"
+"PO-Revision-Date: 2018-05-31 06:22:00+0000\n"
 "X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -15,15 +16,15 @@ msgstr ""
 
 #: doc/sphinx/_build/html/_static/doctools.js:167
 msgid "Permalink to this headline"
-msgstr ""
+msgstr "この標題のパーマリンク"
 
 #: doc/sphinx/_build/html/_static/doctools.js:173
 msgid "Permalink to this definition"
-msgstr ""
+msgstr "この定義のパーマリンク"
 
 #: doc/sphinx/_build/html/_static/doctools.js:206
 msgid "Hide Search Matches"
-msgstr ""
+msgstr "ヒットした検索を非表示"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:400
 msgid "Searching"
@@ -48,7 +49,7 @@ msgstr "検索が完了し、検索クエリと一致する%sページが見つ�
 
 #: doc/sphinx/_build/html/_static/searchtools.js:623
 msgid ", in "
-msgstr ""
+msgstr "、\\に"
 
 #: doc/sphinx/_build/html/_static/sidebar.js:77
 msgid "Expand sidebar"
@@ -73,21 +74,20 @@ msgstr "タイトルなし"
 
 #: papers/static/papers/refresh.js:70
 msgid "Invalid publication date"
-msgstr ""
+msgstr "無効な発行日"
 
 #: papers/static/papers/refresh.js:105
-#, invalid-plural
 msgid "We ignored %(count)s paper from your ORCiD profile."
 msgid_plural "We ignored %(count)s papers from your ORCiD profile."
-msgstr[0] ""
+msgstr[0] "We ignored %(count)s paper from your ORCiD profile."
 
 #: papers/static/papers/refresh.js:115
 msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
-msgstr "次の理由により、\"%(name)s\"が無視されました:%(reason)s"
+msgstr "次の理由により「%(name)」を除外しました：%(reason)"
 
 #: papers/static/papers/refresh.js:123
 msgid "A paper was ignored, because it has no name"
-msgstr ""
+msgstr "標題のない論文1件を除外"
 
 #: papers/static/papers/refresh.js:135 papers/static/papers/refresh.js:163
 msgid "Show more information"
