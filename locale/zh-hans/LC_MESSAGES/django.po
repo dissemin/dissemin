@@ -1,6 +1,7 @@
 # Translation of Dissemin website to Simplified Chinese (中文（简体）‎)
 # Exported from translatewiki.net
 #
+# Author: Deathkon
 # Author: Liuxinyu970226
 # Author: Wmr
 # --
@@ -12,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-30 10:57+0100\n"
-"PO-Revision-Date: 2018-04-26 05:52:05+0000\n"
+"PO-Revision-Date: 2018-06-25 06:11:16+0000\n"
 "Language: zh-Hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1633,19 +1634,19 @@ msgstr "这使您的研究<strong>更容易访问</strong>以及<strong>更加�
 
 #: templates/dissemin/faq.html:76
 msgid "You can even do it before publication. You can get <strong>valuable feedback</strong> to improve your paper before the actual peer-reviewing process. It may also be useful to establish priority if it takes a long time for your paper to get published."
-msgstr ""
+msgstr "你甚至可以在出版之前做到这一点。在实际的同行评审过程之前，您可以获得<strong>有价值的反馈</strong>以改进您的论文。如果您的论文需要很长时间才能发布，那么确定优先级可能会很有用。"
 
 #: templates/dissemin/faq.html:84
 msgid "It provides you a <strong>durable storage</strong>. Your homepage is likely to change or to disappear, for instance if you leave your current institution."
-msgstr ""
+msgstr "它提供给您<strong>可靠的存储空间</strong>。您的主页有可能会改变或消失，假如您离开现有的机构的话。"
 
 #: templates/dissemin/faq.html:90
 msgid "Librarians around the world cannot check whether all the papers in a given journal are available on homepages: in doubt, they subscribe to this journal to make sure their researchers have access to it. This costs a lot of money for research institutions. Papers stored in repositories are <strong>easier to detect</strong> and can help academia save money."
-msgstr ""
+msgstr "世界各地的图书管理员无法检查某一期刊中的所有论文是否可以在主页上找到：为此，他们订阅期刊以确保他们的研究人员能够访问该期刊。这对研究机构来说是一笔很大的开销。论文存储在存储库中能<strong>更易于检测</strong>，并且可以帮助学术界节省资金。"
 
 #: templates/dissemin/faq.html:99
 msgid "Finally, for all these reasons, an increasing number of <strong>funding bodies</strong> require the outcomes of their projects to be made available in a repository."
-msgstr ""
+msgstr "总而言之，由于上述所有这些原因，越来越多的<strong>资助机构</strong>需要将他们的项目成果存储在存储库中。"
 
 #: templates/dissemin/faq.html:108
 msgid "There are roughly three types of repositories:"
@@ -1657,15 +1658,15 @@ msgstr "对象存储库，限制于一些研究字段，例如<a href=\"https://
 
 #: templates/dissemin/faq.html:120
 msgid "Institutional repositories, designated to store the research output of a given institution or country."
-msgstr ""
+msgstr "机构知识库，专门用于存储特定机构或国家的研究成果。"
 
 #: templates/dissemin/faq.html:125
 msgid "General-purpose academic repositories such as <a href=\"https://zenodo.org\">Zenodo</a>, not limited to a particular scope."
-msgstr ""
+msgstr "通用的学术资源库，例如<a href=\"https://zenodo.org\">Zenodo</a>，并不局限于特定领域。"
 
 #: templates/dissemin/faq.html:132
 msgid "If your research community favours a specific repository, using it makes sense as it will increase your visibility. If not, institutional or general-purpose repositories are also good options."
-msgstr ""
+msgstr "如果您的研究团体倾向于特定的存储库，那么使用它是有道理的，因为它会增加你的知名度。若非如此，机构存储库或通用存储库也是不错的选择。"
 
 #: templates/dissemin/faq.html:138
 msgid "At the moment, you can use Dissemin to deposit in the following repositories:"
@@ -1694,7 +1695,7 @@ msgstr "<strong><a href=\"https://arxiv.org/\">arXiv</a></strong>，知名的多
 #: templates/dissemin/faq.html:192
 #, python-format
 msgid "Dissemin is a web platform gathering metadata from <a href=\"%(sources_url)s\">many sources</a> and analyzing the full text availability of publications of researchers. It has been designed to foster the use of repositories (rather than preprints posted on personal homepages), <a href=\"#repositories-rock\">for numerous reasons</a>."
-msgstr ""
+msgstr "Dissemin是一个网络平台，收集来自<a href=\"%(sources_url)s\">许多来源</a>的元数据并分析研究人员出版物的全文可用性。它旨在促进存储库的使用（而不是个人主页上发布的预印本），<a href=\"#repositories-rock\">出于各种原因</a>。"
 
 #: templates/dissemin/faq.html:201
 msgid "Dissemin is not a repository as it does not store any full text. When the full text of a publication is available, a link to the relevant page is provided. The full texts deposited through Dissemin are stored in third-party repositories such as <a href=\"https://zenodo.org\">Zenodo</a> or <a href=\"https://hal.archives-ouvertes.fr/\">HAL</a>."
@@ -1714,15 +1715,15 @@ msgstr "<strong>开放访问：</strong><br />全文由发行者自由提供（�
 
 #: templates/dissemin/faq.html:245
 msgid "<strong>Pre/post prints allowed and full text available:</strong><br /> The full text is available in a repository, but might not be freely available from the publisher itself. This is in line with the publishing policy and is called green open access or self-archiving."
-msgstr ""
+msgstr "<strong>允许发表前/后打印并提供全文：</strong> <br/>全文可在存储库中使用，但可能无法从发布者处自由获取。这符合发布政策，被称为绿色开放访问或自存档。"
 
 #: templates/dissemin/faq.html:258
 msgid "<strong>Pre/post prints allowed but full text unavailable:</strong><br /> The full text could be made available in a repository (as above) according to the publishing policy. We encourage their authors to do so."
-msgstr ""
+msgstr "<strong>允许发表前/后打印，但全文不可用：</strong> <br/>根据发布政策，可以在存储库中提供全文（如上所述）。我们鼓励他们的作者这样做。"
 
 #: templates/dissemin/faq.html:271
 msgid "<strong>Pre/post prints forbidden:</strong><br /> The publisher forbids deposits in repositories, in general. Authors might still be allowed to deposit their works after some embargo period or if their funder has an agreement with this publisher."
-msgstr ""
+msgstr "<strong>禁止发表前/后打印：</strong><br/>出版商一般禁止在存储库中存档。作者可能仍被允许在禁止期后或其出资者与该出版商达成协议后存放作品。"
 
 #: templates/dissemin/faq.html:282
 #, python-format
@@ -1743,11 +1744,11 @@ msgstr "我们系统的一些记录不对应适当的研究论文。"
 
 #: templates/dissemin/faq.html:307
 msgid "Because there are many researchers with the same name, some papers may be misattributed to a homonym."
-msgstr ""
+msgstr "由于许多研究人员的姓名相同，因此有些论文可能会被误认为同音词。"
 
 #: templates/dissemin/faq.html:313
 msgid "Some repositories might not be covered by any of our sources, so a paper might be marked as unavailable while it is available."
-msgstr ""
+msgstr "某些存储库可能不会被我们的任何来源所覆盖到，因此可能会在论文可用时标记为不可用。"
 
 #: templates/dissemin/faq.html:318
 msgid "Some papers might be marked as available but actually are not, for instance because they have been deleted."
@@ -1760,27 +1761,27 @@ msgstr "各种其他技术问题。"
 #: templates/dissemin/faq.html:333
 #, python-format
 msgid "Please first check whether the paper is available in one of <a href=\"%(sources_url)s\">our sources</a>. If it is not, Dissemin cannot harvest it, and you should report the problem to the source where it should appear."
-msgstr ""
+msgstr "请首先检查该论文是否可以在<a href=\"%(sources_url)s\">我们的来源</a>中找到。如果不能，Dissemin就不能收录它，你应该将问题报告给其所在的来源机构。"
 
 #: templates/dissemin/faq.html:341
 msgid "Now, if your paper does appear in one of the sources but not on Dissemin, please check that your name is not spelt incorrectly on the source, and that the spelling matches your ORCID record. If there is a misspelling, again, you should report the problem to the source that contains the mistake."
-msgstr ""
+msgstr "现在，如果您的论文确实出现在其中一个来源但未出现在Dissemin上，请检查您的姓名在来源上拼写是否正确，并且检查拼写与您的ORCID记录是否匹配。如果出现拼写错误，您应该再次向造成此错误的来源机构报告。"
 
 #: templates/dissemin/faq.html:350
 msgid "If the name matches but the paper is not in Dissemin, then maybe one of your co-authors asked us to delete it? Or it may be a bug. In this case, please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> describing the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
-msgstr ""
+msgstr "如果姓名相符，但论文不在Dissemin中，那么可能是有一位共同作者要求我们删除了它？或者它可能是我们的失误。在这种情况下，请提交描述问题的<a href=\"https://github.com/dissemin/dissemin/issues\">问题说明</a>，或发送邮件至<a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>。"
 
 #: templates/dissemin/faq.html:360
 msgid "Note that, in the longer term, we hope to design a way for our users to edit their profiles on Dissemin to add missing papers and fix these problems; but we do not have such a system yet."
-msgstr ""
+msgstr "请注意，从长远来看，我们希望为我们的用户设计一种方法来编辑Dissemin上的配置文件以添加缺失的论文并解决这些问题; 但我们目前还没有这样的系统。"
 
 #: templates/dissemin/faq.html:369
 msgid "In most cases, the errors that you see on Dissemin have not been introduced by Dissemin, but are already present in the <a href=\"{{ sources_url }}\">public sources</a> that Dissemin harvests. Hence, please first check if the error that you have seen is already present in our data sources, by looking at the \"Links\" section in the top right of the page. If one of these pages contain the error, you should report the problem to them and not to us, otherwise the mistake will persist in the source."
-msgstr ""
+msgstr "在大多数情况下，您在Dissemin上看到的错误并非由Dissemin造成，而是已在Dissemin收录的<a href=\"{{ sources_url }}\">公开资源</a>中产生。因此，请先查看页面右上角的“链接”，检查您所看到的错误是否已经存在于我们的数据来源中。如果其中一个页面包含错误，您应该向他们报告问题，而不是向我们报告，否则错误会一直存在。"
 
 #: templates/dissemin/faq.html:381
 msgid "If the error is not present in any of the sources and you believe that Dissemin may have introduced the problem, please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> with details of the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. Note that you cannot yet fix the problem yourself, although we hope in the longer term to develop a system to allow our users to edit details of their papers themselves."
-msgstr ""
+msgstr "如果错误不在任何来源中，并且您认为Dissemin可能造成了该问题，请提交<a href=\"https://github.com/dissemin/dissemin/issues\">问题说明</a> 并详细描述问题，或发送邮件至<a href=\"mailto:bugs@dissem.in\"> bugs@dissem.in </a>。请注意，虽然我们希望能够在未来开发一个系统，以便我们的用户自己编辑他们的论文的详细信息，但您目前仍然无法自己解决这些问题。"
 
 #: templates/dissemin/faq.html:395
 msgid "First, note that Dissemin does not account for copies of articles that are only available on a personal homepage or a similar website. This is deliberate, because we believe that <a href=\"#repositories-rock\">articles should be hosted in repositories</a>."
@@ -1792,11 +1793,11 @@ msgstr "第二，目前Dissemin只支持有爬虫API（遵循<a href=\"https://w
 
 #: templates/dissemin/faq.html:422
 msgid "If the repository is registered in BASE, please <a href=\"https://www.base-search.net/\">search in BASE</a> to check that your article is there. If it is, then this may be a bug of Dissemin; please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> describing the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
-msgstr ""
+msgstr "如果存储库已在BASE中注册，请<a href=\"https://www.base-search.net/\">在BASE中搜索</a>以检查您的文章是否在那里。如果它在，那么这可能是一个Dissemin造成的失误;请提出描述问题的<a href=\"https://github.com/dissemin/dissemin/issues\">问题说明</a>，或发送邮件至<a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</A>。"
 
 #: templates/dissemin/faq.html:437
 msgid "Authenticating users is necessary to deposit papers on their behalf in open repositories. Besides, knowing a user's ORCID id helps us find its publications, avoiding articles authored by namesakes for instance. Logging in via ORCID will not expose any private information to Dissemin: we only have access to the public part of your ORCID record. For instance, unless you have explicitly marked your email address as public, we do not even know your email address when you log in to Dissemin via ORCID."
-msgstr ""
+msgstr "对用户进行身份验证对于以开放存储库的形式存储论文是必要的。此外，得知用户的ORCID编号可以帮助我们确认他本人的出版物，避免出现同名作者的问题。通过ORCID登录不会将任何隐私信息暴露给Dissemin：我们只能访问ORCID记录的公共部分。例如，除非您明确将您的电子邮件地址标记为公开，否则当您通过ORCID登录到Dissemin时，我们甚至不知道您的电子邮件地址。"
 
 #: templates/dissemin/faq.html:452
 msgid "Nothing. When you log in via ORCID to Dissemin, this does not grant us any permission to change anything in your ORCID record."
@@ -1804,7 +1805,7 @@ msgstr "没有。当您通过ORCID登录至Dissemin，这不会授权我们更�
 
 #: templates/dissemin/faq.html:461
 msgid "ORCID supports various methods to claim publications. Our preferred one is via CrossRef's search interface. Here is how to use it:"
-msgstr ""
+msgstr "ORCID支持各种方法来声明出版物。我们首选的是通过CrossRef的搜索界面。以下是使用它的方法："
 
 #: templates/dissemin/faq.html:468
 msgid "Go to <a href=\"https://search.crossref.org/\">CrossRef Metadata Search</a>;"
@@ -1824,11 +1825,11 @@ msgstr "通过点击“添加至ORCID”，添加您的出版物至您的ORCID�
 
 #: templates/dissemin/faq.html:489
 msgid "You can also add publications to your profile <em>on Dissemin</em>, by clicking the button \"Include in my profile\" in search results on Dissemin. (This button is only visible when you are logged in, and next to papers that Dissemin thinks you have authored.) You can also exclude articles from your profile in this way. Please note that these changes are local to Dissemin and are <em>not</em> propagated to your ORCID profile, because ORCID does not have a free API allowing us to propagate them."
-msgstr ""
+msgstr "您也可以在Dissemin的搜索结果中点击“包含在我的个人资料中”按钮，将发布内容添加到您的个人资料<em>上的Dissemin</em>里。（此按钮仅在您登录时显示，并且在Dissemin认为您已撰写的论文旁可见。）您也可以通过这种方式从您的个人资料中排除文章。请注意，这些更改是Dissemin本地的，并且<em>不</em>会传播到您的ORCID配置文件，因为ORCID没有免费的API允许我们传播它们。"
 
 #: templates/dissemin/faq.html:504
 msgid "If you change some details in your ORCID profile (name, homepage, etc.), the changes will not automatically be picked up in your profile on Dissemin. To update your profile on Dissemin accordingly, once you have logged in to Dissemin, you can go to your <a href=\"/my-profile\">profile page</a> and click \"Refresh publications\"."
-msgstr ""
+msgstr "如果您更改ORCID配置文件（名称，主页等）中的某些详细信息，则更改不会自动在您的配置文件中的Dissemin中生效。若要更新您在Dissemin的个人资料，您可以登录到Dissemin，并访问<a href=\"/my-profile\">个人资料页面</a>，点击“刷新出版物”。"
 
 #: templates/dissemin/faq.html:518
 #, python-format
@@ -2022,7 +2023,7 @@ msgstr "报告滥用"
 
 #: templates/dissemin/tos.html:32
 msgid "This platform offers an analysis of the accessibility of scholarly publications. It can also deposit publications on behalf of their authors in repositories. The accessibility and self-archiving policies of the papers on this platform can be incorrect and should not be relied upon for legal advice. When in doubt, users are advised to check from authoritative sources."
-msgstr ""
+msgstr "该平台提供了对学术出版物的可访问性的分析。它也可以代表作者在存储库中存放出版物。该平台上文章的可访问性和自存档政策可能不正确，不应作为法律咨询的证据。如有疑问，建议用户查询权威来源。"
 
 #: templates/dissemin/tos.html:45
 msgid "Unauthenticated users are not tracked as the platform does not include any third-party analytics or advertisement services. Authenticated users are logged-in via ORCID, a third-party service. The platform has no access to the private information they provide to ORCID. In particular, we do not store any ORCID passwords, and we do not have access to email addresses that are marked as private in the ORCID record. We need to set cookies to authenticate our users, therefore by logging in on this platform, users accept these cookies."
@@ -2030,7 +2031,7 @@ msgstr "未获验证的用户不予追踪，因为平台不包含任何第三方
 
 #: templates/dissemin/tos.html:63
 msgid "The platform can perform mandated publication deposit to repositories. Users are only allowed to upload papers that they have authored themselves, or papers whose authors have consented to the deposit. In addition to these terms of service, users are required to abide by the policies of these repositories."
-msgstr ""
+msgstr "该平台可以将被授权的出版物存储到存储库。用户只能上传他们自己撰写的论文或作者同意存档的论文。除了这些服务条款之外，用户还必须遵守这些存储库的政策。"
 
 #: templates/dissemin/tos.html:74
 msgid "Contact"
@@ -2042,11 +2043,11 @@ msgstr "请向support@dissem.in提出任何咨询。"
 
 #: templates/dissemin/tos.html:86
 msgid "Dissemin uses ORCID's public OAuth interface to authenticate its users. This interface only transmits information marked as public in the user's ORCID profile. This means that ORCID passwords are never transmitted and email addresses are not transmitted when they are marked as private, which is the default setting. When logging in to Dissemin from ORCID, Dissemin acquires the user's ORCID id, as well as all public information attached to the ORCID record. Dissemin can store any information input by its users on the platform. Users can ask for a copy of the personal information Dissemin stores about them by writing an email to support@dissem.in."
-msgstr ""
+msgstr "Dissemin使用ORCID的公共OAuth界面对其用户进行身份验证。该接口仅传输在用户的ORCID配置文件中标记为公共的信息。这意味着ORCID密码永远不会被传输，并且电子邮件地址在被标记为私有时不会被传输，这是默认设置。当从ORCID登录到Dissemin时，Dissemin获取用户的ORCID编号以及ORCID记录附带的所有公共信息。Dissemin可以存储用户在平台上输入的任何信息。用户可以通过写邮件到support@dissem.in，索取他们的个人信息在Dissemin存储的副本。"
 
 #: templates/dissemin/tos.html:104
 msgid "Documents deposited in repositories via Dissemin can be stored on the platform, but are not available for download on the platform. They can be stored internally for logging purposes, and to make sure failed deposits can be fixed later. Dissemin does not commit to store any of the files it receives from its users. Users can write to support@dissem.in if they want one of their uploads to be deleted from our internal storage space, or from the repository they have deposited to. Note that deletion policies vary accross repositories: we provide no guarantee that deposits can be deleted from the target repositories."
-msgstr ""
+msgstr "通过Dissemin存储在存储库中的文档可以被存储在平台上，但不能在平台上下载。它们可以存储在内部用于记录目的，并确保以后可以修复失败的存档。Dissemin不承诺存储从用户那里收到的任何文件。如果用户希望从我们的内部存储空间或从存储库中删除其上传的内容，可以发邮件至support@dissem.in。请注意，删除策略在存储库之间有所不同：我们不保证可以从目标存储库中删除存档。"
 
 #: templates/dissemin/tos.html:120
 msgid "Misuse can be reported to support@dissem.in."
