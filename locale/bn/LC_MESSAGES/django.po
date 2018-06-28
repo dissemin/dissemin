@@ -5,6 +5,7 @@
 # Author: Kly
 # Author: Rasal Lia
 # Author: আজিজ
+# Author: আফতাবুজ্জামান
 # --
 # This file is part of the Dissemin Project
 # This file is distributed under the same license as the Dissemin package.
@@ -12,7 +13,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-04-26 05:51:59+0000\n"
+"PO-Revision-Date: 2018-06-28 05:19:56+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
