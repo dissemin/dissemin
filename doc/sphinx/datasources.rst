@@ -160,7 +160,8 @@ Proaixy
 -------
 
 `Proaixy <https://github.com/wetneb/proaixy>`_ is our own `OAI-PMH <http://www.openarchives.org/OAI/openarchivesprotocol.html>`_ proxy. We use it to discover preprints.
-It harvests papers from various OAI-PMH sources (notably `BASE <http://www.base-search.net>`_) and re-exposes the result in OAI-PMH, adding a few functionalities.
+It harvests papers from various OAI-PMH sources (notably the sources handled by `BASE <http://www.base-search.net>`_, see 
+`complete list <https://www.base-search.net/about/en/about_sources_date.php>`_) and re-exposes the result in OAI-PMH, adding a few functionalities.
 
 * Search by fingerprint: each paper in Dissemin has a fingerprint, a robust representation of the title, and sometimes the year of publication or the last names of the
   authors. Proaixy enables to fetch all records that match a given fingerprint.
