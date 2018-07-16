@@ -6,12 +6,12 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-06-04 05:54:30+0000\n"
+"PO-Revision-Date: 2018-07-16 14:50:49+0000\n"
 "X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: ja\n"
-"X-Generator: MediaWiki 1.32.0-alpha; Translate 2018-04-10\n"
+"X-Generator: MediaWiki 1.32.0-alpha; Translate 2018-07-10\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: doc/sphinx/_build/html/_static/doctools.js:167
