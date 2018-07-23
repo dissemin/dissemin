@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 #
 # Author: Danielbeerbonn
+# Author: FF11
 # Author: Kly
 # Author: Metalhead64
 # Author: Zuphilip
@@ -12,7 +13,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-07-16 14:50:49+0000\n"
+"PO-Revision-Date: 2018-07-23 07:32:56+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -30,7 +31,7 @@ msgstr "Sammlung"
 
 #: deposit/forms.py:51
 msgid "Invalid full text identifier."
-msgstr ""
+msgstr "Ungültiger Volltext - Identifikator"
 
 #: deposit/forms.py:106 papers/templates/papers/paper.html:144
 msgid "Abstract"
@@ -74,7 +75,7 @@ msgstr "Physik"
 
 #: deposit/hal/metadata.py:40
 msgid "Non-linear science"
-msgstr ""
+msgstr "Nichtlineare Wissenschaft"
 
 #: deposit/hal/metadata.py:41
 msgid "Cognitive science"
@@ -222,7 +223,7 @@ msgstr ""
 
 #: deposit/hal/protocol.py:142
 msgid "No HAL user credentials provided."
-msgstr ""
+msgstr "Keine HAL - Zugangsdaten angegeben"
 
 #: deposit/hal/protocol.py:208
 msgid "This document is already in HAL. HAL refused the deposit."
@@ -263,11 +264,11 @@ msgstr "Fehlgeschlagen"
 
 #: deposit/models.py:39
 msgid "Faked"
-msgstr ""
+msgstr "Gefälscht"
 
 #: deposit/models.py:40
 msgid "Pending publication"
-msgstr ""
+msgstr "Noch nicht veröffentlicht"
 
 #: deposit/models.py:42
 msgid "Published"
@@ -296,11 +297,11 @@ msgstr ""
 
 #: deposit/osf/forms.py:35 deposit/osf/forms.py:46
 msgid "Creative Commons CC0 1.0 Universal"
-msgstr ""
+msgstr "Creative Commons CC0 1.0 Universal"
 
 #: deposit/osf/forms.py:37 deposit/osf/forms.py:48
 msgid "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
-msgstr ""
+msgstr "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
 
 #: deposit/osf/forms.py:40 deposit/osf/forms.py:51
 msgid "No license"
@@ -332,7 +333,7 @@ msgstr "Medizin und Gesundheitswissenschaften"
 
 #: deposit/osf/forms.py:73 deposit/osf/forms.py:96
 msgid "Physical Sciences and Mathematics"
-msgstr ""
+msgstr "Physik und Mathematik"
 
 #: deposit/osf/forms.py:75 deposit/osf/forms.py:98
 msgid "Social and Behavioral Sciences"
@@ -344,11 +345,11 @@ msgstr "Lizenz"
 
 #: deposit/osf/forms.py:150
 msgid "Invalid OSF identifier."
-msgstr ""
+msgstr "Ungültiger OSF - Identifikator."
 
 #: deposit/osf/models.py:13
 msgid "OSF identifier"
-msgstr ""
+msgstr "OSF - Identifikator"
 
 #: deposit/osf/models.py:14
 msgid "If set, your deposits will be associated to this OSF account. This identifier is a string of letters and numbers which can be found in your OSF public profile URL."
@@ -356,7 +357,7 @@ msgstr ""
 
 #: deposit/osf/protocol.py:207
 msgid "Unable to create a project on OSF."
-msgstr ""
+msgstr "Konnte kein Projekt auf OSF erstellen."
 
 #: deposit/osf/protocol.py:221
 msgid "Unable to authenticate to OSF."
@@ -364,11 +365,11 @@ msgstr ""
 
 #: deposit/osf/protocol.py:238
 msgid "Unable to add contributors."
-msgstr ""
+msgstr "Konnte keine Beiträge hinzufügen"
 
 #: deposit/osf/protocol.py:265
 msgid "Unable to update the contributors of the paper."
-msgstr ""
+msgstr "Konnte die Beiträge des Papieres nicht aktualisieren."
 
 #: deposit/osf/protocol.py:311
 msgid "Unable to update license."
@@ -388,7 +389,7 @@ msgstr ""
 
 #: deposit/osf/protocol.py:428
 msgid "No OSF token provided."
-msgstr ""
+msgstr "Es wurde kein OSF - TOken angegeben"
 
 #: deposit/osf/protocol.py:469
 msgid "Unable to upload the PDF file."
@@ -450,7 +451,7 @@ msgstr "PDF-URL"
 
 #: deposit/templates/deposit/deposits.html:70
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: deposit/templates/deposit/deposits.html:88
 msgid "You have not made any deposit via Dissemin. What are you waiting for? Liberate your papers today."
@@ -477,16 +478,16 @@ msgstr ""
 
 #: deposit/templates/deposit/start.html:42
 msgid "Trying to fill this field automatically for you..."
-msgstr ""
+msgstr "Wir versuchen, dieses Feld für Sie automatisch zu füllen..."
 
 #: deposit/templates/deposit/start.html:51
 msgid "Sorry, we could not fill this for you."
-msgstr ""
+msgstr "Entschuldigung, wir konnten das nicht automatisch füllen."
 
 #: deposit/templates/deposit/start.html:258
 #: papers/templates/papers/department.html:30
 msgid "Dissemin encountered an error, please try again later."
-msgstr ""
+msgstr "Dissermin hat einen Fehler, bitte versuche es später erneut."
 
 #: deposit/templates/deposit/start.html:295
 #, python-format
@@ -572,7 +573,7 @@ msgstr "Creative Commons „Namensnennung, nicht kommerziell“ (CC BY-NC)"
 
 #: deposit/zenodo/forms.py:37
 msgid "Creative Commons Attribution-NoDerivatives (CC-BY-ND)"
-msgstr ""
+msgstr "Creative Commons Attribution-NoDerivatives (CC-BY-ND)"
 
 #: deposit/zenodo/forms.py:39
 msgid "Other open license"
@@ -588,7 +589,7 @@ msgstr "Das passiert, wenn Zenodo Schluckauf hat. Bitte versuche es in ein paar 
 
 #: deposit/zenodo/protocol.py:82
 msgid "Unable to authenticate to Zenodo."
-msgstr ""
+msgstr "Authentifizierung zu Zendo fehlgeschlagen."
 
 #: deposit/zenodo/protocol.py:89
 msgid "Unable to create a new deposition on Zenodo."
@@ -628,7 +629,7 @@ msgstr "Mazedonisch"
 
 #: notification/models.py:62
 msgid "inboxes"
-msgstr ""
+msgstr "Posteingänge"
 
 #: papers/baremodels.py:54
 msgid "Journal article"
@@ -737,27 +738,27 @@ msgstr "Veröffentlichte Version"
 
 #: papers/models.py:107
 msgid "Preparing profile"
-msgstr ""
+msgstr "Profil wird vorbereitet"
 
 #: papers/models.py:108
 msgid "Fetching publications from ORCID"
-msgstr ""
+msgstr "Hole Veröffentlichungen von ORCID"
 
 #: papers/models.py:109
 msgid "Fetching publications from CrossRef"
-msgstr ""
+msgstr "Hole Veröffentlichungen von CrossRef"
 
 #: papers/models.py:110
 msgid "Fetching publications from BASE"
-msgstr ""
+msgstr "Hole Veröffentlichungen von BASE"
 
 #: papers/models.py:111
 msgid "Fetching publications from CORE"
-msgstr ""
+msgstr "Hole Veröffentlichungen von CORE"
 
 #: papers/models.py:112
 msgid "Fetching publications from OAI-PMH"
-msgstr ""
+msgstr "Hole Veröffentlichungen von OAI-PMH"
 
 #: papers/models.py:113
 msgid "Clustering publications"
@@ -1586,15 +1587,15 @@ msgstr "Es gibt eine online frei verfügbare Kopie meines Artikels, aber dissem.
 
 #: templates/dissemin/faq.html:37 templates/dissemin/faq.html:433
 msgid "Authentication with ORCID"
-msgstr ""
+msgstr "Authenzifierung mit ORCID"
 
 #: templates/dissemin/faq.html:38 templates/dissemin/faq.html:435
 msgid "Why do you need to authenticate users?"
-msgstr ""
+msgstr "Wieso musst du Nutzer authenzifieren"
 
 #: templates/dissemin/faq.html:39 templates/dissemin/faq.html:449
 msgid "What will you do to my ORCID profile if I log in?"
-msgstr ""
+msgstr "Was werden Sie mit meinem ORCID - Profil tun, wenn  ich mich anmelde?"
 
 #: templates/dissemin/faq.html:40 templates/dissemin/faq.html:458
 msgid "How do I add publications to my ORCID profile?"
