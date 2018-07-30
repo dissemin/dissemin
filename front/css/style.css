@@ -244,3 +244,7 @@ h1
 {
     color: black;
 }
+
+#footer ul {
+    padding-left: 0;
+}
