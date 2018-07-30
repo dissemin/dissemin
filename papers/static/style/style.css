@@ -764,6 +764,13 @@ input[type=checkbox]:checked ~ .stats_caption_label
     text-align: center;
 }
 
+#change-lang-form label {
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
 /* Departments list */
 
 #departmentsList {
