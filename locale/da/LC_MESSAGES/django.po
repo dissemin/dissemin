@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 #
 # Author: Joedalton
+# Author: Saederup92
 # --
 # This file is part of the Dissemin Project
 # This file is distributed under the same license as the Dissemin package.
@@ -9,7 +10,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-07-16 14:50:49+0000\n"
+"PO-Revision-Date: 2018-08-09 07:20:58+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -641,7 +642,7 @@ msgstr ""
 
 #: papers/baremodels.py:57
 msgid "Book"
-msgstr ""
+msgstr "Bog"
 
 #: papers/baremodels.py:58
 msgid "Journal issue"
@@ -657,7 +658,7 @@ msgstr ""
 
 #: papers/baremodels.py:61
 msgid "Poster"
-msgstr ""
+msgstr "Plakat"
 
 #: papers/baremodels.py:62
 msgid "Report"
@@ -1261,7 +1262,7 @@ msgstr ""
 
 #: publishers/forms.py:11
 msgid "name"
-msgstr ""
+msgstr "navn"
 
 #: publishers/forms.py:19 publishers/templates/publishers/list.html:55
 msgid "Filter by publisher policy"
@@ -1301,11 +1302,11 @@ msgstr ""
 
 #: publishers/models.py:47
 msgid "Allowed"
-msgstr ""
+msgstr "Tilladt"
 
 #: publishers/models.py:48
 msgid "Forbidden"
-msgstr ""
+msgstr "Forbudt"
 
 #: publishers/models.py:49
 msgid "Restricted"
@@ -1417,7 +1418,7 @@ msgstr ""
 
 #: publishers/templates/publishers/policy.html:134
 msgid "None."
-msgstr ""
+msgstr "Ingen."
 
 #: statistics/models.py:48
 msgid "Available from the publisher"
@@ -1461,7 +1462,7 @@ msgstr ""
 
 #: statistics/models.py:65
 msgid "Available"
-msgstr ""
+msgstr "Tilgængelig"
 
 #: statistics/templates/statistics/availabilitypct.html:10
 msgid "of the papers by this publisher are available"
@@ -1490,7 +1491,7 @@ msgstr ""
 
 #: templates/404.html:6 templates/404.html:12
 msgid "Page not found"
-msgstr ""
+msgstr "Siden blev ikke fundet"
 
 #: templates/404.html:13
 msgid "\n            The page you requested could not be found. <a href=\"/\">Go back to the home page.</a>\n           "
@@ -1611,15 +1612,15 @@ msgstr ""
 
 #: templates/dissemin/faq.html:45 templates/dissemin/faq.html:523
 msgid "How can I help?"
-msgstr ""
+msgstr "Hvordan kan jeg hjælpe til?"
 
 #: templates/dissemin/faq.html:46 templates/dissemin/faq.html:563
 msgid "Where is the source code?"
-msgstr ""
+msgstr "Hvor er kildekoden?"
 
 #: templates/dissemin/faq.html:47 templates/dissemin/faq.html:569
 msgid "Can I harvest your data?"
-msgstr ""
+msgstr "Kan jeg høste jeres data?"
 
 #: templates/dissemin/faq.html:53
 msgid "In a nutshell, the Open Access movement promotes free access to the scientific literature. For a more in-depth introduction, we recommend <a href=\"http://www.phdcomics.com/comics.php?f=1533\">this video in English</a> and <a href=\"https://pablo.rauzy.name/openaccess/introduction.html\">this introduction in French</a>."
@@ -1883,16 +1884,16 @@ msgstr ""
 
 #: templates/dissemin/faq.html:585 templates/dissemin/tos.html:150
 msgid "Back to top"
-msgstr ""
+msgstr "Tilbage til toppen"
 
 #: templates/dissemin/login.html:8 templates/dissemin/login.html:70
 #: templates/dissemin/sandbox.html:8 templates/dissemin/sandbox.html:72
 msgid "Sign In"
-msgstr ""
+msgstr "Log ind"
 
 #: templates/dissemin/login.html:12
 msgid "Sign in"
-msgstr ""
+msgstr "Log ind"
 
 #: templates/dissemin/login.html:19 templates/dissemin/sandbox.html:19
 msgid "Dissemin uses ORCID to authenticate its users. ORCID is an independent non-profit effort to provide an open registry of unique researcher identifiers. It also offers open services to link research activities and organizations to these identifiers. Learn more at <a href=\"https://orcid.org\">orcid.org</a>."
@@ -1901,7 +1902,7 @@ msgstr ""
 #: templates/dissemin/login.html:28 templates/dissemin/login.html:36
 #: templates/dissemin/sandbox.html:30
 msgid "Log in"
-msgstr ""
+msgstr "Log ind"
 
 #: templates/dissemin/login.html:30 templates/dissemin/sandbox.html:32
 msgid "If you already have an ORCID account, you can use it with Dissemin. We will not make any changes to your profile."
@@ -1927,7 +1928,7 @@ msgstr ""
 
 #: templates/dissemin/login.html:69 templates/dissemin/sandbox.html:71
 msgid "Forgot Password?"
-msgstr ""
+msgstr "Glemt adgangskode?"
 
 #: templates/dissemin/partners.html:7 templates/dissemin/partners.html:12
 #: templates/dissemin/skeleton.html:124
@@ -1944,39 +1945,39 @@ msgstr ""
 
 #: templates/dissemin/skeleton.html:73
 msgid "My profile"
-msgstr ""
+msgstr "Min profil"
 
 #: templates/dissemin/skeleton.html:75 templates/dissemin/skeleton.html:115
 msgid "FAQ"
-msgstr ""
+msgstr "OSS"
 
 #: templates/dissemin/skeleton.html:91
 msgid "Logout"
-msgstr ""
+msgstr "Log af"
 
 #: templates/dissemin/skeleton.html:95
 msgid "Login"
-msgstr ""
+msgstr "Log på"
 
 #: templates/dissemin/skeleton.html:116
 msgid "API"
-msgstr ""
+msgstr "API"
 
 #: templates/dissemin/skeleton.html:117 templates/dissemin/tos.html:11
 msgid "Terms of Service"
-msgstr ""
+msgstr "Servicevilkår"
 
 #: templates/dissemin/skeleton.html:122
 msgid "Who are we?"
-msgstr ""
+msgstr "Hvem er vi?"
 
 #: templates/dissemin/skeleton.html:123
 msgid "Donate"
-msgstr ""
+msgstr "Donér"
 
 #: templates/dissemin/skeleton.html:136
 msgid "Change language"
-msgstr ""
+msgstr "Skift sprog"
 
 #: templates/dissemin/skeleton.html:148
 msgid "Apply"
@@ -2000,7 +2001,7 @@ msgstr ""
 
 #: templates/dissemin/tos.html:17 templates/dissemin/tos.html:42
 msgid "Privacy"
-msgstr ""
+msgstr "Privatliv"
 
 #: templates/dissemin/tos.html:18 templates/dissemin/tos.html:60
 msgid "Deposits through Dissemin"
@@ -2012,7 +2013,7 @@ msgstr ""
 
 #: templates/dissemin/tos.html:21 templates/dissemin/tos.html:83
 msgid "Personal data"
-msgstr ""
+msgstr "Personlige data"
 
 #: templates/dissemin/tos.html:22 templates/dissemin/tos.html:101
 msgid "Full text storage"
@@ -2036,7 +2037,7 @@ msgstr ""
 
 #: templates/dissemin/tos.html:74
 msgid "Contact"
-msgstr ""
+msgstr "Kontakt"
 
 #: templates/dissemin/tos.html:77
 msgid "Please address any inquiry to support@dissem.in."
@@ -2090,7 +2091,7 @@ msgstr ""
 
 #: upload/templates/upload/widget.html:9
 msgid "Select a file:"
-msgstr ""
+msgstr "Vælg en fil:"
 
 #: upload/templates/upload/widget.html:10
 msgid "Browse"
@@ -2098,7 +2099,7 @@ msgstr ""
 
 #: upload/templates/upload/widget.html:17
 msgid "Or enter an URL:"
-msgstr ""
+msgstr "Eller indtast et URL:"
 
 #: upload/templates/upload/widget.html:28
 msgid "Or drop a file here:"
@@ -2114,7 +2115,7 @@ msgstr ""
 
 #: upload/views.py:175
 msgid "File too large."
-msgstr ""
+msgstr "Filen er for stor."
 
 #: upload/views.py:180
 msgid "Invalid content type: this link points to a web page, we need a direct link to a PDF file."
