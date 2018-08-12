@@ -115,7 +115,7 @@ ROMEO_API_DOMAIN = 'romeo-cache.dissem.in'
 # 10MB - 10485760
 # 20MB - 20971520
 # 50MB - 5242880
-DEPOSIT_MAX_FILE_SIZE = 1024*1024*20  # 20 MB
+DEPOSIT_MAX_FILE_SIZE = 1024*1024*200  # 20 MB
 # Max download time when the file is downloaded from an URL (in seconds)
 URL_DEPOSIT_DOWNLOAD_TIMEOUT = 10
 
