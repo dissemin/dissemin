@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-08-09 07:20:58+0000\n"
+"PO-Revision-Date: 2018-08-13 06:09:11+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -913,7 +913,7 @@ msgstr ""
 
 #: papers/templates/papers/paper.html:114
 msgid "Full text:"
-msgstr ""
+msgstr "Fuld tekst:"
 
 #: papers/templates/papers/paper.html:116
 #: papers/templates/papers/publiListItem.html:37
@@ -942,7 +942,7 @@ msgstr ""
 
 #: papers/templates/papers/paperDetails.html:7
 msgid "Published in"
-msgstr ""
+msgstr "Udgivet i"
 
 #: papers/templates/papers/paperDetails.html:19
 msgid "Links"
@@ -1051,7 +1051,7 @@ msgstr[1] ""
 #: papers/templates/papers/search.html:186
 #: publishers/templates/publishers/policy.html:41
 msgid "Publisher"
-msgstr ""
+msgstr "Udgiver"
 
 #: papers/templates/papers/search.html:195
 #, invalid-plural, python-format
@@ -1177,7 +1177,7 @@ msgstr ""
 
 #: papers/templatetags/statuses.py:49
 msgid "Unknown policy"
-msgstr ""
+msgstr "Ukendt politik"
 
 #: papers/templatetags/statuses.py:55
 msgid "archiving allowed."
@@ -1314,19 +1314,19 @@ msgstr ""
 
 #: publishers/models.py:50
 msgid "Unclear"
-msgstr ""
+msgstr "Uklar"
 
 #: publishers/models.py:51
 msgid "Unknown"
-msgstr ""
+msgstr "Ukendt"
 
 #: publishers/models.py:59 publishers/views.py:94
 msgid "Publishers"
-msgstr ""
+msgstr "Udgivere"
 
 #: publishers/models.py:79
 msgid "Unknown publisher"
-msgstr ""
+msgstr "Ukendt udgiver"
 
 #: publishers/templates/publishers/detailsPolicy.html:6
 msgid "Preprint:"
@@ -1389,7 +1389,7 @@ msgstr ""
 
 #: publishers/templates/publishers/policy.html:67
 msgid "Policy"
-msgstr ""
+msgstr "Politik"
 
 #: publishers/templates/publishers/policy.html:93
 msgid "Conditions"
@@ -1536,7 +1536,7 @@ msgstr ""
 
 #: templates/dissemin/faq.html:22 templates/dissemin/faq.html:188
 msgid "What is dissem.in?"
-msgstr ""
+msgstr "Hvad er dissem.in?"
 
 #: templates/dissemin/faq.html:23 templates/dissemin/faq.html:199
 msgid "Is dissem.in a repository?"
@@ -1628,7 +1628,7 @@ msgstr ""
 
 #: templates/dissemin/faq.html:63
 msgid "You should do it because:"
-msgstr ""
+msgstr "Du bør gøre det fordi:"
 
 #: templates/dissemin/faq.html:69
 msgid "It makes your research <strong>more accessible</strong> and <strong>more visible</strong>. Many researchers routinely check papers in topic repositories such as arXiv, and it is less likely that these researchers check your homepage regularly."
@@ -1933,7 +1933,7 @@ msgstr "Glemt adgangskode?"
 #: templates/dissemin/partners.html:7 templates/dissemin/partners.html:12
 #: templates/dissemin/skeleton.html:124
 msgid "Partners"
-msgstr ""
+msgstr "Partnere"
 
 #: templates/dissemin/sandbox.html:12
 msgid "SANDBOX Sign in"
