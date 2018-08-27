@@ -1,6 +1,7 @@
 # Translation of Dissemin website to Message documentation (Message documentation)
 # Exported from translatewiki.net
 #
+# Author: Dr Lotus Black
 # Author: FF11
 # Author: Kly
 # Author: Liuxinyu970226
@@ -15,7 +16,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-30 10:57+0100\n"
-"PO-Revision-Date: 2018-07-23 07:33:00+0000\n"
+"PO-Revision-Date: 2018-08-27 05:40:32+0000\n"
 "Language: qqq\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -61,19 +62,19 @@ msgstr ""
 
 #: deposit/hal/metadata.py:36
 msgid "Chemistry"
-msgstr ""
+msgstr "ဓာတုဗေဒ"
 
 #: deposit/hal/metadata.py:37
 msgid "Computer science"
-msgstr ""
+msgstr "ကွန်ပျူတာသိပ္ပံ"
 
 #: deposit/hal/metadata.py:38
 msgid "Mathematics"
-msgstr ""
+msgstr "သင်္ချာ"
 
 #: deposit/hal/metadata.py:39
 msgid "Physics"
-msgstr ""
+msgstr "ရူပဗေဒ"
 
 #: deposit/hal/metadata.py:40
 msgid "Non-linear science"
@@ -89,7 +90,7 @@ msgstr ""
 
 #: deposit/hal/metadata.py:43
 msgid "Planet and Universe"
-msgstr ""
+msgstr "ဂြိုဟ်နှင့် စကြာဝဠာ"
 
 #: deposit/hal/metadata.py:44
 msgid "Biological anthropology"
@@ -129,7 +130,7 @@ msgstr ""
 
 #: deposit/hal/metadata.py:53 deposit/osf/forms.py:63 deposit/osf/forms.py:86
 msgid "Education"
-msgstr ""
+msgstr "ပညာရေး"
 
 #: deposit/hal/metadata.py:54
 msgid "Environmental studies"
@@ -141,7 +142,7 @@ msgstr ""
 
 #: deposit/hal/metadata.py:56
 msgid "Geography"
-msgstr ""
+msgstr "ပထဝီဝင်"
 
 #: deposit/hal/metadata.py:57
 msgid "Business administration"
@@ -153,7 +154,7 @@ msgstr ""
 
 #: deposit/hal/metadata.py:59
 msgid "History"
-msgstr ""
+msgstr "သမိုင်း"
 
 #: deposit/hal/metadata.py:60
 msgid "Library and information sciences"
@@ -165,7 +166,7 @@ msgstr ""
 
 #: deposit/hal/metadata.py:62
 msgid "Literature"
-msgstr ""
+msgstr "စာပေ"
 
 #: deposit/hal/metadata.py:63
 msgid "Cultural heritage and museology"
@@ -319,11 +320,11 @@ msgstr ""
 
 #: deposit/osf/forms.py:61 deposit/osf/forms.py:84
 msgid "Business"
-msgstr ""
+msgstr "စီးပွားရေး"
 
 #: deposit/osf/forms.py:65 deposit/osf/forms.py:88
 msgid "Engineering"
-msgstr ""
+msgstr "အင်ဂျင်နီယာဘာသာရပ်"
 
 #: deposit/osf/forms.py:69 deposit/osf/forms.py:92
 msgid "Life Sciences"
@@ -467,7 +468,7 @@ msgstr "{{Identical|Preferences}}"
 
 #: deposit/templates/deposit/preferences_nav.html:7
 msgid "General"
-msgstr ""
+msgstr "အထွေထွေ"
 
 #: deposit/templates/deposit/repo_preferences.html:13
 msgid "Repository preferences"
