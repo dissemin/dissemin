@@ -332,6 +332,7 @@ class OSFProtocol(RepositoryProtocol):
         # -----------------------------------------------
         min_preprint_structure = {
             "data": {
+                "type" : "preprints",
                 "attributes": {
                     "doi": paper_doi,
                     "subjects": subjects
