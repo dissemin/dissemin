@@ -332,6 +332,7 @@ class OSFProtocol(RepositoryProtocol):
         # -----------------------------------------------
         min_preprint_structure = {
             "data": {
+                "type" : "preprints",
                 "attributes": {
                     "doi": paper_doi,
                     "subjects": subjects
@@ -522,6 +523,7 @@ class OSFProtocol(RepositoryProtocol):
             }
 
             public_preprint = {
+                "type": "preprints",
                 "data": {
                     "id": preprint_id,
                     "attributes": {

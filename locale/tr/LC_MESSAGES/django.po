@@ -3,6 +3,7 @@
 #
 # Author: Chansey
 # Author: Incelemeelemani
+# Author: TmY e12
 # --
 # This file is part of the Dissemin Project
 # This file is distributed under the same license as the Dissemin package.
@@ -10,7 +11,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-07-16 14:50:51+0000\n"
+"PO-Revision-Date: 2018-08-13 06:09:14+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -827,7 +828,7 @@ msgstr "Üyeler:"
 #: papers/templates/papers/institutions.html:11
 #: templates/dissemin/breadcrumbs.html:3 templates/dissemin/skeleton.html:71
 msgid "Home"
-msgstr "Ana sayfa"
+msgstr "Anasayfa"
 
 #: papers/templates/papers/index.html:23
 msgid "Welcome to dissemin"

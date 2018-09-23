@@ -1,41 +1,41 @@
-# Translation of Dissemin papers to Saraiki (Arabic script) (سرائیکی)
+# Translation of Dissemin papers to Basque (euskara)
 # Exported from translatewiki.net
 #
-# Author: Saraiki
+# Author: Amaia
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-09-20 09:04:00+0000\n"
+"PO-Revision-Date: 2018-08-02 08:13:25+0000\n"
 "X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: skr-Arab\n"
+"Language: eu\n"
 "X-Generator: MediaWiki 1.32.0-alpha; Translate 2018-07-10\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: doc/sphinx/_build/html/_static/doctools.js:167
 msgid "Permalink to this headline"
-msgstr "ایں سرخی دا پکا لنک"
+msgstr ""
 
 #: doc/sphinx/_build/html/_static/doctools.js:173
 msgid "Permalink to this definition"
-msgstr "ایں تعریف دا پکا لنک"
+msgstr ""
 
 #: doc/sphinx/_build/html/_static/doctools.js:206
 msgid "Hide Search Matches"
-msgstr "ہکو سنویاں لبھتاں لکاؤ"
+msgstr "Bilaketaren emaitzak ezkutatu"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:400
 msgid "Searching"
-msgstr "ڳولیندا پئے"
+msgstr "Bilatzen"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:405
 msgid "Preparing search..."
-msgstr "ڳول کیتے تیار تھیندا پئے۔۔۔"
+msgstr "Bilaketa prestatzen..."
 
 #: doc/sphinx/_build/html/_static/searchtools.js:566
 msgid "Search Results"
-msgstr "ڳولݨ دے نتیجے"
+msgstr "Bilaketaren emaitzak"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:568
 msgid "Your search did not match any documents. Please make sure that all words are spelled correctly and that you've selected enough categories."
@@ -48,32 +48,32 @@ msgstr ""
 
 #: doc/sphinx/_build/html/_static/searchtools.js:623
 msgid ", in "
-msgstr "،وچ/"
+msgstr ""
 
 #: doc/sphinx/_build/html/_static/sidebar.js:77
 msgid "Expand sidebar"
-msgstr "نال آلی پٹی کھولو"
+msgstr ""
 
 #: doc/sphinx/_build/html/_static/sidebar.js:90
 #: doc/sphinx/_build/html/_static/sidebar.js:118
 msgid "Collapse sidebar"
-msgstr "نال آلی پٹی کٹھی کرو"
+msgstr ""
 
 #: papers/static/papers/refresh.js:35
 msgid "Do not show this message anymore"
-msgstr ""
+msgstr "Ez erakutsi mezu hau berriro"
 
 #: papers/static/papers/refresh.js:66
 msgid "No author"
-msgstr "کوئی مصنف کائنی"
+msgstr "Egilerik gabe"
 
 #: papers/static/papers/refresh.js:68
 msgid "No title"
-msgstr "عنوان کائنی"
+msgstr "Izenbururik gabe"
 
 #: papers/static/papers/refresh.js:70
 msgid "Invalid publication date"
-msgstr "شائع تھیوݨ دی غلط تریخ"
+msgstr "Argitalpen data okerra."
 
 #: papers/static/papers/refresh.js:105
 #, invalid-plural
@@ -88,13 +88,13 @@ msgstr ""
 
 #: papers/static/papers/refresh.js:123
 msgid "A paper was ignored, because it has no name"
-msgstr ""
+msgstr "Ezikusiarena egin dugu dokumentu batekin, ez daukalako izenik"
 
 #: papers/static/papers/refresh.js:135 papers/static/papers/refresh.js:163
 msgid "Show more information"
-msgstr "ٻیاں معلومات ݙکھاؤ"
+msgstr "Informazio gehiago erakutsi"
 
 #: papers/static/papers/refresh.js:160
 msgid "Show less information"
-msgstr "گھٹ معلومات ݙکھاؤ"
+msgstr "Informazio gutxiago erakutsi"
 
