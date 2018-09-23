@@ -523,6 +523,7 @@ class OSFProtocol(RepositoryProtocol):
             }
 
             public_preprint = {
+                "type": "preprints",
                 "data": {
                     "id": preprint_id,
                     "attributes": {
