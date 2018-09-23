@@ -266,10 +266,10 @@ CELERYBEAT_SCHEDULE = {
           'task': 'refresh_deposit_statuses',
           'schedule': timedelta(days=1),
     },
-    'update_crossref': {
-          'task': 'update_crossref',
-          'schedule': timedelta(days=1),
-    },
+#    'update_crossref': {
+#          'task': 'update_crossref',
+#          'schedule': timedelta(days=1),
+#    },
 }
 
 # This is the time in seconds before an unacknowledged task is re-sent to
@@ -284,7 +284,9 @@ POSSIBLE_LANGUAGE_CODES = ['en', 'fr', 'zh-hans', 'mk']
 LANGUAGES = [
     ('ar', _('Arabic')),
     ('en', _('English')),
+    ('fi', _('Finnish')),
     ('fr', _('French')),
+    ('ko', _('Korean')),
     ('es', _('Spanish')),
     ('zh-hans', _('Simplified Chinese')),
     ('zh-hant', _('Traditional Chinese')),
@@ -292,7 +294,9 @@ LANGUAGES = [
     ('de', _('German')),
     ('pt-br', _('Brazilian Portuguese')),
     ('pt', _('European Portuguese')),
+    ('sv', _('Swedish')),
 ]
+
 TIME_ZONE = 'Europe/Paris'
 USE_I18N = True
 USE_L10N = True
