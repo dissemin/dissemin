@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 #
 # Author: Acamicamacaraca
+# Author: BadDog
 # Author: Obsuser
 # Author: Zoranzoki21
 # --
@@ -11,7 +12,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-07-16 14:50:51+0000\n"
+"PO-Revision-Date: 2018-10-03 20:02:00+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -21,23 +22,23 @@ msgstr ""
 
 #: deposit/forms.py:41
 msgid "Upload type"
-msgstr "Врста отпремања"
+msgstr "Тип отпремања"
 
 #: deposit/forms.py:42 deposit/templates/deposit/deposits.html:40
 msgid "Repository"
-msgstr "Репозиторијум"
+msgstr "Складиште"
 
 #: deposit/forms.py:51
 msgid "Invalid full text identifier."
-msgstr ""
+msgstr "Неважећи идентификатор потпуног текста."
 
 #: deposit/forms.py:106 papers/templates/papers/paper.html:144
 msgid "Abstract"
-msgstr ""
+msgstr "Апстрактно"
 
 #: deposit/forms.py:119
 msgid "No preferred repository"
-msgstr ""
+msgstr "Нема жељеног складишта"
 
 #: deposit/forms.py:140 deposit/hal/forms.py:77 deposit/osf/forms.py:143
 msgid "Save"
@@ -45,15 +46,15 @@ msgstr "Сачувај"
 
 #: deposit/hal/forms.py:43
 msgid "Scientific field"
-msgstr ""
+msgstr "Научно поље"
 
 #: deposit/hal/forms.py:48
 msgid "Depositing author"
-msgstr ""
+msgstr "Аутор депоновања"
 
 #: deposit/hal/forms.py:55
 msgid "Affiliation"
-msgstr ""
+msgstr "Припадност"
 
 #: deposit/hal/metadata.py:36
 msgid "Chemistry"
@@ -73,15 +74,15 @@ msgstr "Физика"
 
 #: deposit/hal/metadata.py:40
 msgid "Non-linear science"
-msgstr ""
+msgstr "Нелинеарна наука"
 
 #: deposit/hal/metadata.py:41
 msgid "Cognitive science"
-msgstr ""
+msgstr "Когнитивна наука"
 
 #: deposit/hal/metadata.py:42
 msgid "Environment sciences"
-msgstr ""
+msgstr "Еколошке науке"
 
 #: deposit/hal/metadata.py:43
 msgid "Planet and Universe"
@@ -89,19 +90,19 @@ msgstr "Планета и универзум"
 
 #: deposit/hal/metadata.py:44
 msgid "Biological anthropology"
-msgstr ""
+msgstr "Биолошка антропологија"
 
 #: deposit/hal/metadata.py:45
 msgid "Social Anthropology and ethnology"
-msgstr ""
+msgstr "Друштвена антропологија и етнологија"
 
 #: deposit/hal/metadata.py:46
 msgid "Archaeology and Prehistory"
-msgstr ""
+msgstr "Археологија и праисторија"
 
 #: deposit/hal/metadata.py:47
 msgid "Architecture, space management"
-msgstr ""
+msgstr "Архитектура, управљање простором"
 
 #: deposit/hal/metadata.py:48
 msgid "Art and art history"
@@ -109,7 +110,7 @@ msgstr "Уметност и историја уметности"
 
 #: deposit/hal/metadata.py:49
 msgid "Classical studies"
-msgstr ""
+msgstr "Класичне студије"
 
 #: deposit/hal/metadata.py:50
 msgid "Demography"
@@ -129,11 +130,11 @@ msgstr "Образовање"
 
 #: deposit/hal/metadata.py:54
 msgid "Environmental studies"
-msgstr ""
+msgstr "Еколошке студије"
 
 #: deposit/hal/metadata.py:55
 msgid "Gender studies"
-msgstr ""
+msgstr "Родне студије"
 
 #: deposit/hal/metadata.py:56
 msgid "Geography"
@@ -145,7 +146,7 @@ msgstr "Бизнис администрација"
 
 #: deposit/hal/metadata.py:58
 msgid "History, Philosophy and Sociology of Sciences"
-msgstr "Историја, филозофија и социологија природних наука"
+msgstr "Историја, филозофија и социологија наука"
 
 #: deposit/hal/metadata.py:59
 msgid "History"
@@ -153,7 +154,7 @@ msgstr "Историја"
 
 #: deposit/hal/metadata.py:60
 msgid "Library and information sciences"
-msgstr ""
+msgstr "Библиотека и информационе науке"
 
 #: deposit/hal/metadata.py:61
 msgid "Linguistics"
@@ -165,11 +166,11 @@ msgstr "Литература"
 
 #: deposit/hal/metadata.py:63
 msgid "Cultural heritage and museology"
-msgstr ""
+msgstr "Културно наслеђе и музејологија"
 
 #: deposit/hal/metadata.py:64
 msgid "Musicology and performing arts"
-msgstr ""
+msgstr "Музикологија и извођачке уметности"
 
 #: deposit/hal/metadata.py:65
 msgid "Philosophy"
@@ -193,15 +194,15 @@ msgstr "Социологија"
 
 #: deposit/hal/metadata.py:70
 msgid "Methods and statistics"
-msgstr ""
+msgstr "Методе и статистике"
 
 #: deposit/hal/metadata.py:71
 msgid "Life sciences"
-msgstr ""
+msgstr "Науке о животу"
 
 #: deposit/hal/metadata.py:72
 msgid "Engineering sciences"
-msgstr ""
+msgstr "Науке о инжињерству"
 
 #: deposit/hal/metadata.py:73
 msgid "Statistics"
@@ -209,11 +210,11 @@ msgstr "Статистике"
 
 #: deposit/hal/metadata.py:74
 msgid "Economy and quantitative finance"
-msgstr ""
+msgstr "Економија и квантитативно финансирање"
 
 #: deposit/hal/models.py:14
 msgid "HAL username"
-msgstr ""
+msgstr "HAL корисничко име"
 
 #: deposit/hal/models.py:15
 msgid "If set, deposits will be associated to this HAL account."
@@ -278,12 +279,12 @@ msgstr ""
 
 #: deposit/models.py:44
 msgid "Deleted"
-msgstr "Обрисано"
+msgstr "Избрисано"
 
 #: deposit/models.py:166 deposit/templates/deposit/start.html:415
 #: deposit/views.py:103
 msgid "Deposit"
-msgstr ""
+msgstr "Депозит"
 
 #: deposit/models.py:219
 msgid "We will use this email address to notify you when your deposits are accepted."
@@ -319,7 +320,7 @@ msgstr "Бизнис"
 
 #: deposit/osf/forms.py:65 deposit/osf/forms.py:88
 msgid "Engineering"
-msgstr "Инжењеринг"
+msgstr "Инжењерство"
 
 #: deposit/osf/forms.py:69 deposit/osf/forms.py:92
 msgid "Life Sciences"
@@ -343,11 +344,11 @@ msgstr "Лиценца"
 
 #: deposit/osf/forms.py:150
 msgid "Invalid OSF identifier."
-msgstr ""
+msgstr "Неважећи OSF идентификатор."
 
 #: deposit/osf/models.py:13
 msgid "OSF identifier"
-msgstr ""
+msgstr "OSF идентификатор"
 
 #: deposit/osf/models.py:14
 msgid "If set, your deposits will be associated to this OSF account. This identifier is a string of letters and numbers which can be found in your OSF public profile URL."
@@ -355,31 +356,31 @@ msgstr ""
 
 #: deposit/osf/protocol.py:207
 msgid "Unable to create a project on OSF."
-msgstr ""
+msgstr "Није могуће направити пројекат на OSF-у."
 
 #: deposit/osf/protocol.py:221
 msgid "Unable to authenticate to OSF."
-msgstr ""
+msgstr "Није могуће потврдити идентитет на OSF-у."
 
 #: deposit/osf/protocol.py:238
 msgid "Unable to add contributors."
-msgstr ""
+msgstr "Није могуће додати сараднике."
 
 #: deposit/osf/protocol.py:265
 msgid "Unable to update the contributors of the paper."
-msgstr ""
+msgstr "Није могуће ажурирати сараднике папира."
 
 #: deposit/osf/protocol.py:311
 msgid "Unable to update license."
-msgstr ""
+msgstr "Није могуће ажурирати лиценсу."
 
 #: deposit/osf/protocol.py:368
 msgid "Unable to create the preprint."
-msgstr ""
+msgstr "Није могуће направити предштаму."
 
 #: deposit/osf/protocol.py:417
 msgid "Unable to update the preprint license."
-msgstr ""
+msgstr "Није могуће ажурирати лиценсу предштампе."
 
 #: deposit/osf/protocol.py:425
 msgid "No Repository endpoint provided."
@@ -387,23 +388,23 @@ msgstr ""
 
 #: deposit/osf/protocol.py:428
 msgid "No OSF token provided."
-msgstr ""
+msgstr "Није наведен OSF токен."
 
 #: deposit/osf/protocol.py:469
 msgid "Unable to upload the PDF file."
-msgstr ""
+msgstr "Није могуће ажурирати PDF датотеку."
 
 #: deposit/osf/protocol.py:509
 msgid "Unable to delete the project."
-msgstr ""
+msgstr "Није могуће избрисати пројекат."
 
 #: deposit/osf/protocol.py:538 deposit/osf/protocol.py:546
 msgid "Unable to make the project public."
-msgstr ""
+msgstr "Није могуће начинити пројект јавним."
 
 #: deposit/protocol.py:199
 msgid "Failed to connect to the repository. Please try again later."
-msgstr ""
+msgstr "Повезивање са складиштем није успело. Покушајте поново касније."
 
 #: deposit/sword/protocol.py:45
 msgid "No servicedocument provided."
@@ -411,7 +412,7 @@ msgstr ""
 
 #: deposit/sword/protocol.py:110
 msgid "Unable to submit the paper to the collection."
-msgstr ""
+msgstr "Није могуће послати папир у збирку."
 
 #: deposit/sword/protocol.py:120
 msgid "Failed to connect to the SWORD server."
@@ -445,7 +446,7 @@ msgstr ""
 
 #: deposit/templates/deposit/deposits.html:63
 msgid "PDF URL"
-msgstr ""
+msgstr "URL адреса PDF-а"
 
 #: deposit/templates/deposit/deposits.html:70
 msgid "Status"
@@ -506,11 +507,11 @@ msgstr "Документ"
 
 #: deposit/templates/deposit/start.html:332
 msgid "Options"
-msgstr "Подешавања"
+msgstr "Опције"
 
 #: deposit/templates/deposit/start.html:338
 msgid "Upload type:"
-msgstr "Врста отпремања:"
+msgstr "Тип отпремања:"
 
 #: deposit/templates/deposit/start.html:351
 msgid "Repository:"
@@ -675,15 +676,15 @@ msgstr "Скуп података"
 
 #: papers/baremodels.py:65 papers/models.py:101
 msgid "Preprint"
-msgstr ""
+msgstr "Предштампа"
 
 #: papers/baremodels.py:66
 msgid "Other document"
-msgstr ""
+msgstr "Други документ"
 
 #: papers/forms.py:48
 msgid "Invalid ORCID identifier."
-msgstr ""
+msgstr "Неважећи ORCID идентификатор."
 
 #: papers/forms.py:54 papers/templates/papers/department.html:86
 #: papers/templates/papers/search.html:160
@@ -696,7 +697,7 @@ msgstr "Истраживач"
 
 #: papers/forms.py:75
 msgid "publication date"
-msgstr "Датум објављивања"
+msgstr "датум објављивања"
 
 #: papers/forms.py:76
 msgid "title"
@@ -728,35 +729,35 @@ msgstr ""
 
 #: papers/models.py:102
 msgid "Postprint"
-msgstr ""
+msgstr "Постштампа"
 
 #: papers/models.py:103
 msgid "Published version"
-msgstr "Објављено издање"
+msgstr "Објављена верзија"
 
 #: papers/models.py:107
 msgid "Preparing profile"
-msgstr ""
+msgstr "Припремање профила"
 
 #: papers/models.py:108
 msgid "Fetching publications from ORCID"
-msgstr ""
+msgstr "Добављање публикација из ORCID-а"
 
 #: papers/models.py:109
 msgid "Fetching publications from CrossRef"
-msgstr ""
+msgstr "Добављање публикација из CrossRef-а"
 
 #: papers/models.py:110
 msgid "Fetching publications from BASE"
-msgstr ""
+msgstr "Добављање публикација из BASE-а"
 
 #: papers/models.py:111
 msgid "Fetching publications from CORE"
-msgstr ""
+msgstr "Добављање публикација из CORE-а"
 
 #: papers/models.py:112
 msgid "Fetching publications from OAI-PMH"
-msgstr ""
+msgstr "Добављање публикација из OAI-PMH-а"
 
 #: papers/models.py:113
 msgid "Clustering publications"
@@ -787,7 +788,7 @@ msgstr ""
 #: papers/templates/papers/createProfile.html:8
 #: papers/templates/papers/createProfile.html:12
 msgid "Create your profile"
-msgstr "Направите профил"
+msgstr "Направите свој профил"
 
 #: papers/templates/papers/createProfile.html:15
 msgid "\nTo fetch your publications, we need one last piece of information: your name.\n"
@@ -811,7 +812,7 @@ msgstr ""
 #: papers/templates/papers/department.html:75
 #: papers/templates/papers/institution.html:52
 msgid "Delete"
-msgstr "Обриши"
+msgstr "Избриши"
 
 #: papers/templates/papers/department.html:88
 msgid "Papers of the members"
@@ -947,7 +948,7 @@ msgstr "Објављено у"
 
 #: papers/templates/papers/paperDetails.html:19
 msgid "Links"
-msgstr "Везе"
+msgstr "Линкови"
 
 #: papers/templates/papers/paperDetails.html:24
 msgid "Tools"
@@ -959,7 +960,7 @@ msgstr ""
 
 #: papers/templates/papers/paperDetails.html:35
 msgid "Admin zone"
-msgstr "Административна зона"
+msgstr "Административно подручје"
 
 #: papers/templates/papers/paperList.html:26
 msgid "No paper found."
@@ -1016,7 +1017,7 @@ msgstr ""
 
 #: papers/templates/papers/search.html:119
 msgid "Is it you?"
-msgstr "Да ли сте то ви"
+msgstr "Јесте ли то ви?"
 
 #: papers/templates/papers/search.html:140
 msgid "Refresh publications"
@@ -1028,11 +1029,11 @@ msgstr "Адреса:"
 
 #: papers/templates/papers/search.html:146
 msgid "Names:"
-msgstr "Називи:"
+msgstr "Имена:"
 
 #: papers/templates/papers/search.html:165
 msgid "Journal"
-msgstr "Часопис"
+msgstr "Дневник"
 
 #: papers/templates/papers/search.html:168
 msgid "Published by"
@@ -1246,11 +1247,11 @@ msgstr ""
 
 #: papers/views.py:283
 msgid " published by "
-msgstr "објављено од стране"
+msgstr "објавио/ла "
 
 #: papers/views.py:312
 msgid " in "
-msgstr "у"
+msgstr "у "
 
 #: papers/views.py:389
 #, python-format
@@ -1355,7 +1356,7 @@ msgstr ""
 
 #: publishers/templates/publishers/detailsPolicy.html:14
 msgid "Published version:"
-msgstr "Објављено издање:"
+msgstr "Објављена верзија:"
 
 #: publishers/templates/publishers/detailsPolicy.html:15
 msgid "The published version is the final version of the paper, as formatted by the publisher."
@@ -1363,7 +1364,7 @@ msgstr ""
 
 #: publishers/templates/publishers/detailsPolicy.html:16
 msgid "published version"
-msgstr "објављено издање"
+msgstr "објављена верзија"
 
 #: publishers/templates/publishers/list.html:38
 #, invalid-plural, python-format
@@ -1890,11 +1891,11 @@ msgstr "Назад на врх"
 #: templates/dissemin/login.html:8 templates/dissemin/login.html:70
 #: templates/dissemin/sandbox.html:8 templates/dissemin/sandbox.html:72
 msgid "Sign In"
-msgstr "Региструј се"
+msgstr "Пријави ме"
 
 #: templates/dissemin/login.html:12
 msgid "Sign in"
-msgstr "Региструј ме"
+msgstr "Пријави ме"
 
 #: templates/dissemin/login.html:19 templates/dissemin/sandbox.html:19
 msgid "Dissemin uses ORCID to authenticate its users. ORCID is an independent non-profit effort to provide an open registry of unique researcher identifiers. It also offers open services to link research activities and organizations to these identifiers. Learn more at <a href=\"https://orcid.org\">orcid.org</a>."
@@ -1912,7 +1913,7 @@ msgstr ""
 #: templates/dissemin/login.html:42 templates/dissemin/login.html:51
 #: templates/dissemin/sandbox.html:44
 msgid "Sign up"
-msgstr "Региструј ме"
+msgstr "Отвори налог"
 
 #: templates/dissemin/login.html:44 templates/dissemin/sandbox.html:46
 msgid "Not an ORCID user yet? Create an account, it is free and takes a few seconds."
@@ -2092,19 +2093,19 @@ msgstr ""
 
 #: upload/templates/upload/widget.html:9
 msgid "Select a file:"
-msgstr "Изабери датотеку:"
+msgstr "Изаберите датотеку:"
 
 #: upload/templates/upload/widget.html:10
 msgid "Browse"
-msgstr "Претражи"
+msgstr "Прегледај"
 
 #: upload/templates/upload/widget.html:17
 msgid "Or enter an URL:"
-msgstr "Или унеси URL:"
+msgstr "Или унесите URL адресу:"
 
 #: upload/templates/upload/widget.html:28
 msgid "Or drop a file here:"
-msgstr "Или превуци датотеку овде:"
+msgstr "Или превуците датотеку овде:"
 
 #: upload/views.py:132
 msgid "Invalid PDF file."
@@ -2132,5 +2133,5 @@ msgstr ""
 
 #: upload/views.py:187 upload/views.py:191
 msgid "Invalid URL."
-msgstr "Неисправан URL"
+msgstr "Неважећа URL адреса"
 
