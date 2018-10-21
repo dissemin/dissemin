@@ -218,7 +218,7 @@ class ResearcherView(PaperSearchView):
 
         if not researcher.visible:
             name = researcher.name.full
-            return HttpResponsePermanentRedirect(reverse('search', {'authors':name}))
+            return HttpResponsePermanentRedirect(reverse('search', kwargs={'authors':name}))
 
         if kwargs.get('slug') != researcher.slug:
             view_args = {'researcher': researcher.id, 'slug': researcher.slug}
