@@ -39,6 +39,7 @@ from django.template import loader
 from django.utils.encoding import escape_uri_path
 from django.utils.translation import ugettext as _
 from django.utils.translation import ungettext
+from django.utils.http import urlencode
 from django.views import generic
 from haystack.generic_views import SearchView
 from notification.api import get_notifications
@@ -218,7 +219,7 @@ class ResearcherView(PaperSearchView):
 
         if not researcher.visible:
             name = researcher.name.full
-            return HttpResponsePermanentRedirect(reverse('search', kwargs={'authors':name}))
+            return HttpResponsePermanentRedirect(reverse('search')+'?'+urlencode({'authors':name}))
 
         if kwargs.get('slug') != researcher.slug:
             view_args = {'researcher': researcher.id, 'slug': researcher.slug}
