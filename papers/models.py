@@ -358,7 +358,7 @@ class Researcher(models.Model):
     #: It can be associated to a user
     user = models.ForeignKey(User, null=True, blank=True)
     #: It can be affiliated to a department
-    department = models.ForeignKey(Department, null=True,
+    department = models.ForeignKey(Department, null=True, blank=True,
                                 on_delete=models.SET_NULL)
     #: Or directly to an institution
     institution = models.ForeignKey(Institution, null=True,
@@ -386,7 +386,7 @@ class Researcher(models.Model):
         max_length=64, choices=HARVESTER_TASK_CHOICES, null=True, blank=True)
 
     #: Statistics of papers authored by this researcher
-    stats = models.ForeignKey(AccessStatistics, null=True)
+    stats = models.ForeignKey(AccessStatistics, null=True, blank=True)
 
     #: Should we hide the profile for this researcher?
     visible = models.BooleanField(default=True)
