@@ -132,6 +132,11 @@ class PaperPagesTest(RenderingTest):
         self.check404('researcher-by-orcid',
                       kwargs={'orcid': '9999-9999-9999-9994'})
 
+    def test_researcher_not_visible(self):
+        self.r1.visible = False
+        self.r1.save()
+        self.checkPermanentRedirect('researcher', kwargs={'researcher':self.r1.pk, 'slug': self.r1.slug})
+
     def test_search_no_parameters(self):
         self.checkPage('search')
 

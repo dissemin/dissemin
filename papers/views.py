@@ -216,6 +216,10 @@ class ResearcherView(PaperSearchView):
                 except MetadataSourceException:
                     raise Http404(_('Invalid ORCID profile.'))
 
+        if not researcher.visible:
+            name = researcher.name.full
+            return HttpResponsePermanentRedirect(reverse('search', {'authors':name}))
+
         if kwargs.get('slug') != researcher.slug:
             view_args = {'researcher': researcher.id, 'slug': researcher.slug}
             url = reverse('researcher', kwargs=view_args)

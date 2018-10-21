@@ -388,6 +388,9 @@ class Researcher(models.Model):
     #: Statistics of papers authored by this researcher
     stats = models.ForeignKey(AccessStatistics, null=True)
 
+    #: Should we hide the profile for this researcher?
+    visible = models.BooleanField(default=True)
+
     @property
     def slug(self):
         return slugify(self.name)
