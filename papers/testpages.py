@@ -168,6 +168,15 @@ class PaperPagesTest(RenderingTest):
                 print p
             self.assertTrue(not p.is_orphan())
 
+    def test_invisible_paper(self):
+        """
+        If a paper is marked as invisible, then accessing it returns 404
+        """
+        p = Paper.create_by_doi('10.1007/978-3-642-14363-2_7')
+        p.visible = False
+        p.save()
+        self.check404('paper', kwargs={'pk': p.id, 'slug': p.slug})
+
     def test_paper_by_doi(self):
         publi = OaiRecord.objects.filter(doi__isnull=False)[0]
         self.checkPermanentRedirect('paper-doi', kwargs={'doi': publi.doi})
