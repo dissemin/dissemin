@@ -1,99 +1,99 @@
-# Translation of Dissemin papers to Kabyle (Taqbaylit)
+# Translation of Dissemin papers to Dutch (Nederlands)
 # Exported from translatewiki.net
 #
-# Author: Belkacem77
+# Author: Elroy
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-11-22 06:25:32+0000\n"
+"PO-Revision-Date: 2018-11-22 06:25:33+0000\n"
 "X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: kab\n"
+"Language: nl\n"
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2018-11-05\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: doc/sphinx/_build/html/_static/doctools.js:167
 msgid "Permalink to this headline"
-msgstr "Aseɣwen ameɣlal ar uzwel-a"
+msgstr ""
 
 #: doc/sphinx/_build/html/_static/doctools.js:173
 msgid "Permalink to this definition"
-msgstr "Aseɣwen ameɣlal ar  tbadut-a"
+msgstr ""
 
 #: doc/sphinx/_build/html/_static/doctools.js:206
 msgid "Hide Search Matches"
-msgstr "Ffer igmaḍ n unadi"
+msgstr "Overeenkomsten verbergen"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:400
 msgid "Searching"
-msgstr "Anadi iteddu"
+msgstr "Zoeken"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:405
 msgid "Preparing search..."
-msgstr "Aheggi n unadi..."
+msgstr "Zoeken voorbereiden..."
 
 #: doc/sphinx/_build/html/_static/searchtools.js:566
 msgid "Search Results"
-msgstr "Nadi igmaḍ"
+msgstr "Zoekresultaten"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:568
 msgid "Your search did not match any documents. Please make sure that all words are spelled correctly and that you've selected enough categories."
-msgstr "Anadi-ik ur d-yerri ara agmuḍ. Ma ulac aɣilif, wali ma yella akk awalen-ik uran akken iwata udiɣ tferneḍ taggayin ilaqen."
+msgstr "Je zoekopdracht heeft geen overeenkomende documenten opgeleverd. Zorg ervoor dat alle woorden juist zijn gespeld en dat je voldoende rubrieken hebt gekozen."
 
 #: doc/sphinx/_build/html/_static/searchtools.js:570
 #, javascript-format
 msgid "Search finished, found %s page(s) matching the search query."
-msgstr "Anadi yemmed: %s page(s) n yisebtar ttwafen deg unadi-agi."
+msgstr "Zoeken voltooid, %s pagina('s) gevonden die met de zoekopdracht overeenkomen."
 
 #: doc/sphinx/_build/html/_static/searchtools.js:623
 msgid ", in "
-msgstr ", deg "
+msgstr ", in "
 
 #: doc/sphinx/_build/html/_static/sidebar.js:77
 msgid "Expand sidebar"
-msgstr "Sken afeggag adisan"
+msgstr "Zijbalk uitbreiden"
 
 #: doc/sphinx/_build/html/_static/sidebar.js:90
 #: doc/sphinx/_build/html/_static/sidebar.js:118
 msgid "Collapse sidebar"
-msgstr "Ffer afeggag adisan"
+msgstr "Zijbalk samenvouwen"
 
 #: papers/static/papers/refresh.js:35
 msgid "Do not show this message anymore"
-msgstr "UR d-skan ara izen-agi"
+msgstr "Niet opnieuw weergeven"
 
 #: papers/static/papers/refresh.js:66
 msgid "No author"
-msgstr "Ulac ameskar"
+msgstr "Geen auteur"
 
 #: papers/static/papers/refresh.js:68
 msgid "No title"
-msgstr "Ulac azwel"
+msgstr "Geen titel"
 
 #: papers/static/papers/refresh.js:70
 msgid "Invalid publication date"
-msgstr "Yir azemz n usuffeɣ"
+msgstr "Ongeldige datum van publiceren"
 
 #: papers/static/papers/refresh.js:105
 msgid "We ignored %(count)s paper from your ORCiD profile."
 msgid_plural "We ignored %(count)s papers from your ORCiD profile."
-msgstr[0] "Nezgel %(count)s n teẓrigt n umaɣnu-ik ORCiD"
-msgstr[1] "Nezgel %(count)s n teẓrigin n umaɣnu-ik ORCiD"
+msgstr[0] "Er is %(count)s document van je ORCiD-profiel genegeerd."
+msgstr[1] "Er zijn %(count)s documenten van je ORCiD-profiel genegeerd."
 
 #: papers/static/papers/refresh.js:115
 msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
-msgstr "\"%(name)s\" yettwazgel ɣef sebba-agi: %(reason)s"
+msgstr "\"%(name)s\" is wegens de volgende reden genegeerd: %(reason)s"
 
 #: papers/static/papers/refresh.js:123
 msgid "A paper was ignored, because it has no name"
-msgstr "Yiwen n umagrad yettwazgel, acku ulac ɣur-s azwel"
+msgstr "Een document had geen naam en is daarom genegeerd"
 
 #: papers/static/papers/refresh.js:135 papers/static/papers/refresh.js:163
 msgid "Show more information"
-msgstr "Sken ugar n telɣut"
+msgstr "Meer gegevens weergeven"
 
 #: papers/static/papers/refresh.js:160
 msgid "Show less information"
-msgstr "Sken drus n telɣut"
+msgstr "Minder gegevens weergeven"
 

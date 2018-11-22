@@ -5,6 +5,7 @@
 # Author: BadDog
 # Author: Obsuser
 # Author: Zoranzoki21
+# Author: Милан Јелисавчић
 # --
 # This file is part of the Dissemin Project
 # This file is distributed under the same license as the Dissemin package.
@@ -12,17 +13,17 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-11-01 07:06:32+0000\n"
+"PO-Revision-Date: 2018-11-22 06:25:35+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: sr-Cyrl\n"
-"X-Generator: MediaWiki 1.33.0-alpha; Translate 2018-10-26\n"
+"X-Generator: MediaWiki 1.33.0-alpha; Translate 2018-11-05\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: deposit/forms.py:41
 msgid "Upload type"
-msgstr "Тип отпремања"
+msgstr "Врста отпремања"
 
 #: deposit/forms.py:42 deposit/templates/deposit/deposits.html:40
 msgid "Repository"
@@ -162,11 +163,11 @@ msgstr "Лингвистика"
 
 #: deposit/hal/metadata.py:62
 msgid "Literature"
-msgstr "Литература"
+msgstr "Књижевност"
 
 #: deposit/hal/metadata.py:63
 msgid "Cultural heritage and museology"
-msgstr "Културно наслеђе и музејологија"
+msgstr "Културно наслеђе и музеологија"
 
 #: deposit/hal/metadata.py:64
 msgid "Musicology and performing arts"
@@ -194,15 +195,15 @@ msgstr "Социологија"
 
 #: deposit/hal/metadata.py:70
 msgid "Methods and statistics"
-msgstr "Методе и статистике"
+msgstr "Методе и статистика"
 
 #: deposit/hal/metadata.py:71
 msgid "Life sciences"
-msgstr "Науке о животу"
+msgstr "Природне науке"
 
 #: deposit/hal/metadata.py:72
 msgid "Engineering sciences"
-msgstr "Науке о инжињерству"
+msgstr "Инжењерство"
 
 #: deposit/hal/metadata.py:73
 msgid "Statistics"
@@ -267,7 +268,7 @@ msgstr "Лажно"
 
 #: deposit/models.py:40
 msgid "Pending publication"
-msgstr ""
+msgstr "Публикација на чекању"
 
 #: deposit/models.py:42
 msgid "Published"
@@ -312,11 +313,11 @@ msgstr "Архитектура"
 
 #: deposit/osf/forms.py:59 deposit/osf/forms.py:82
 msgid "Arts and Humanities"
-msgstr ""
+msgstr "Уметност и хуманистичке науке"
 
 #: deposit/osf/forms.py:61 deposit/osf/forms.py:84
 msgid "Business"
-msgstr "Бизнис"
+msgstr "Предузетништво"
 
 #: deposit/osf/forms.py:65 deposit/osf/forms.py:88
 msgid "Engineering"
@@ -324,19 +325,19 @@ msgstr "Инжењерство"
 
 #: deposit/osf/forms.py:69 deposit/osf/forms.py:92
 msgid "Life Sciences"
-msgstr ""
+msgstr "Природне науке"
 
 #: deposit/osf/forms.py:71 deposit/osf/forms.py:94
 msgid "Medicine and Health Sciences"
-msgstr ""
+msgstr "Медицина и здравствене науке"
 
 #: deposit/osf/forms.py:73 deposit/osf/forms.py:96
 msgid "Physical Sciences and Mathematics"
-msgstr ""
+msgstr "Физичке науке и математика"
 
 #: deposit/osf/forms.py:75 deposit/osf/forms.py:98
 msgid "Social and Behavioral Sciences"
-msgstr ""
+msgstr "Друштвене и бихевиористичке науке"
 
 #: deposit/osf/forms.py:104 deposit/zenodo/forms.py:45
 msgid "License"
@@ -473,7 +474,7 @@ msgstr ""
 #: deposit/templates/deposit/start.html:12
 #: deposit/templates/deposit/start.html:16
 msgid "Depositing"
-msgstr ""
+msgstr "Складиштење"
 
 #: deposit/templates/deposit/start.html:42
 msgid "Trying to fill this field automatically for you..."
@@ -481,12 +482,12 @@ msgstr ""
 
 #: deposit/templates/deposit/start.html:51
 msgid "Sorry, we could not fill this for you."
-msgstr ""
+msgstr "Нисмо могли попунити ово за вас."
 
 #: deposit/templates/deposit/start.html:258
 #: papers/templates/papers/department.html:30
 msgid "Dissemin encountered an error, please try again later."
-msgstr ""
+msgstr "Дисемин је наишао на грешку, покушајте поново касније."
 
 #: deposit/templates/deposit/start.html:295
 #, python-format
@@ -511,11 +512,11 @@ msgstr "Опције"
 
 #: deposit/templates/deposit/start.html:338
 msgid "Upload type:"
-msgstr "Тип отпремања:"
+msgstr "Врста отпремања:"
 
 #: deposit/templates/deposit/start.html:351
 msgid "Repository:"
-msgstr ""
+msgstr "Складиште:"
 
 #: deposit/templates/deposit/start.html:364
 msgctxt "This repository will be soon available in Dissemin"
@@ -528,7 +529,7 @@ msgstr "Метаподаци"
 
 #: deposit/templates/deposit/start.html:417
 msgid "Processing deposit..."
-msgstr ""
+msgstr "Обрада складиштења…"
 
 #: deposit/templates/deposit/start.html:417
 msgid "please wait..."
@@ -556,27 +557,27 @@ msgstr ""
 
 #: deposit/zenodo/forms.py:29
 msgid "Creative Commons CCZero (CC0)"
-msgstr ""
+msgstr "Creative Commons CCZero (CC0)"
 
 #: deposit/zenodo/forms.py:31
 msgid "Creative Commons Attribution (CC-BY)"
-msgstr ""
+msgstr "Ауторство Creative Commons (CC-BY)"
 
 #: deposit/zenodo/forms.py:33
 msgid "Creative Commons Attribution-ShareAlike (CC-BY-SA)"
-msgstr ""
+msgstr "Ауторство Creative Commons-ShareAlike (CC-BY-SA)"
 
 #: deposit/zenodo/forms.py:35
 msgid "Creative Commons Attribution-NonCommercial (CC-BY-NC)"
-msgstr ""
+msgstr "Ауторство Creative Commons-NonCommercial (CC-BY-NC)"
 
 #: deposit/zenodo/forms.py:37
 msgid "Creative Commons Attribution-NoDerivatives (CC-BY-ND)"
-msgstr ""
+msgstr "Ауторство Creative Commons-NoDerivatives (CC-BY-ND)"
 
 #: deposit/zenodo/forms.py:39
 msgid "Other open license"
-msgstr ""
+msgstr "Друга отворена лиценца"
 
 #: deposit/zenodo/protocol.py:72
 msgid "No Zenodo API key provided."
@@ -620,7 +621,7 @@ msgstr "француски"
 
 #: dissemin/settings/common.py:277
 msgid "Simplified Chinese"
-msgstr ""
+msgstr "Поједностављени кинески"
 
 #: dissemin/settings/common.py:278
 msgid "Macedonian"
@@ -632,15 +633,15 @@ msgstr ""
 
 #: papers/baremodels.py:54
 msgid "Journal article"
-msgstr ""
+msgstr "Рад у часопису"
 
 #: papers/baremodels.py:55
 msgid "Proceedings article"
-msgstr ""
+msgstr "Рад у зборнику"
 
 #: papers/baremodels.py:56
 msgid "Book chapter"
-msgstr ""
+msgstr "Поглавље књиге"
 
 #: papers/baremodels.py:57
 msgid "Book"
@@ -648,11 +649,11 @@ msgstr "Књига"
 
 #: papers/baremodels.py:58
 msgid "Journal issue"
-msgstr ""
+msgstr "Издање часописа"
 
 #: papers/baremodels.py:59
 msgid "Proceedings"
-msgstr ""
+msgstr "Зборник"
 
 #: papers/baremodels.py:60
 msgid "Entry"
@@ -668,7 +669,7 @@ msgstr "Извештај"
 
 #: papers/baremodels.py:63
 msgid "Thesis"
-msgstr ""
+msgstr "Теза"
 
 #: papers/baremodels.py:64
 msgid "Dataset"
@@ -713,7 +714,7 @@ msgstr ""
 
 #: papers/forms.py:100 papers/forms.py:107
 msgid "Any"
-msgstr ""
+msgstr "Било који"
 
 #: papers/forms.py:101
 msgid "Visible"
@@ -816,7 +817,7 @@ msgstr "Избриши"
 
 #: papers/templates/papers/department.html:88
 msgid "Papers of the members"
-msgstr ""
+msgstr "Радови чланова"
 
 #: papers/templates/papers/group.html:14
 msgid "Website"
@@ -834,7 +835,7 @@ msgstr "Почетна"
 
 #: papers/templates/papers/index.html:23
 msgid "Welcome to dissemin"
-msgstr ""
+msgstr "Добро дошли на дисемин"
 
 #: papers/templates/papers/index.html:26
 msgid "Dissemin detects papers behind pay-walls and invites their authors to upload them in one click to an open repository."
@@ -865,7 +866,7 @@ msgstr ""
 
 #: papers/templates/papers/index.html:74
 msgid "Open repositories"
-msgstr ""
+msgstr "Отворена складишта"
 
 #: papers/templates/papers/index.html:77
 msgid "Uploading your papers on your own webpage is not enough. Such copies are less stable and harder to find than documents uploaded to well-indexed repositories."
@@ -886,7 +887,7 @@ msgstr "Да"
 
 #: papers/templates/papers/itemResearcher.html:13
 msgid "(empty profile)"
-msgstr ""
+msgstr "(празан профил)"
 
 #: papers/templates/papers/paper.html:62
 #, python-format
@@ -964,7 +965,7 @@ msgstr "Административно подручје"
 
 #: papers/templates/papers/paperList.html:26
 msgid "No paper found."
-msgstr ""
+msgstr "Ниједан рад није пронађен."
 
 #: papers/templates/papers/paperList.html:33
 #, python-format
@@ -1084,7 +1085,7 @@ msgstr "пре"
 
 #: papers/templates/papers/search.html:254
 msgid "By document type"
-msgstr "Према типу документа"
+msgstr "Према врсти документа"
 
 #: papers/templates/papers/search.html:273
 #: publishers/templates/publishers/list.html:76
@@ -1099,23 +1100,23 @@ msgstr ""
 
 #: papers/templates/papers/search.html:287
 msgid "By visibility"
-msgstr ""
+msgstr "Према видљивости"
 
 #: papers/templates/papers/search.html:292
 msgid "By full text availability"
-msgstr ""
+msgstr "Према доступности текста"
 
 #: papers/templates/papers/search.html:298
 msgid "By publisher policy"
-msgstr ""
+msgstr "Према правилима издавача"
 
 #: papers/templatetags/statuses.py:19 papers/templatetags/statuses.py:79
 msgid "Unknown OA status"
-msgstr ""
+msgstr "Непознат статус приступа"
 
 #: papers/templatetags/statuses.py:27
 msgid "Unknown PDF status"
-msgstr ""
+msgstr "Непознат PDF статус"
 
 #: papers/templatetags/statuses.py:33
 msgid "Preprints can be archived."
@@ -1179,59 +1180,59 @@ msgstr ""
 
 #: papers/templatetags/statuses.py:49
 msgid "Unknown policy"
-msgstr ""
+msgstr "Непозната правила"
 
 #: papers/templatetags/statuses.py:55
 msgid "archiving allowed."
-msgstr ""
+msgstr "архивирање је дозвољено."
 
 #: papers/templatetags/statuses.py:56
 msgid "archiving forbidden."
-msgstr ""
+msgstr "архивирање је забрањено."
 
 #: papers/templatetags/statuses.py:57
 msgid "archiving restricted:"
-msgstr ""
+msgstr "архивирање је ограничено:"
 
 #: papers/templatetags/statuses.py:58
 msgid "policy unclear."
-msgstr ""
+msgstr "нејасна правила."
 
 #: papers/templatetags/statuses.py:59 papers/templatetags/statuses.py:61
 #: papers/templatetags/statuses.py:73
 msgid "policy unknown."
-msgstr ""
+msgstr "непозната правила."
 
 #: papers/templatetags/statuses.py:67
 msgid "archiving allowed"
-msgstr ""
+msgstr "архивирање је дозвољено"
 
 #: papers/templatetags/statuses.py:68
 msgid "archiving forbidden"
-msgstr ""
+msgstr "архивирање је забрањено"
 
 #: papers/templatetags/statuses.py:69
 msgid "archiving restricted"
-msgstr ""
+msgstr "архивирање је ограничено"
 
 #: papers/templatetags/statuses.py:70
 msgid "policy unclear"
-msgstr ""
+msgstr "нејасна правила"
 
 #: papers/templatetags/statuses.py:71
 msgid "policy unknown"
-msgstr ""
+msgstr "непозната правила"
 
 #: papers/views.py:128
 msgid "All papers"
-msgstr ""
+msgstr "Сви радови"
 
 #: papers/views.py:132
-#, invalid-plural, python-format
+#, python-format
 msgid "%d paper found"
 msgid_plural "%d papers found"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d рад је пронађен"
+msgstr[1] "%d рада је пронађено"
 
 #: papers/views.py:211
 msgid "\n                            Invalid ORCID profile.\n                            Please make sure it includes a public name.\n                            "
@@ -1239,7 +1240,7 @@ msgstr ""
 
 #: papers/views.py:217
 msgid "Invalid ORCID profile."
-msgstr ""
+msgstr "Неважећи ORCID профил."
 
 #: papers/views.py:239
 msgid " authored by "
@@ -1260,7 +1261,7 @@ msgstr ""
 
 #: publishers/forms.py:10
 msgid "popularity"
-msgstr ""
+msgstr "популарност"
 
 #: publishers/forms.py:11
 msgid "name"
@@ -1272,7 +1273,7 @@ msgstr ""
 
 #: publishers/models.py:38
 msgid "Open access"
-msgstr ""
+msgstr "Отворен приступ"
 
 #: publishers/models.py:38
 msgid "Freely available from the publisher."
@@ -1296,7 +1297,7 @@ msgstr ""
 
 #: publishers/models.py:43
 msgid "Policy unclear"
-msgstr ""
+msgstr "Нејасна правила"
 
 #: publishers/models.py:44
 msgid "For complicated policies, unknown publishers and unpublished documents."
@@ -1328,11 +1329,11 @@ msgstr "Објавили"
 
 #: publishers/models.py:79
 msgid "Unknown publisher"
-msgstr ""
+msgstr "Непознат издавач"
 
 #: publishers/templates/publishers/detailsPolicy.html:6
 msgid "Preprint:"
-msgstr ""
+msgstr "Предштампа:"
 
 #: publishers/templates/publishers/detailsPolicy.html:7
 msgid "A preprint is a document produced by the authors without any interaction with the peer-reviewing process."
@@ -1340,11 +1341,11 @@ msgstr ""
 
 #: publishers/templates/publishers/detailsPolicy.html:8
 msgid "preprint"
-msgstr ""
+msgstr "предштампа"
 
 #: publishers/templates/publishers/detailsPolicy.html:10
 msgid "Postprint:"
-msgstr ""
+msgstr "Постштампа:"
 
 #: publishers/templates/publishers/detailsPolicy.html:11
 msgid "Postprints differ from preprints in that they include the changes suggested by the reviewers. They are not edited by the publisher."
@@ -1352,7 +1353,7 @@ msgstr ""
 
 #: publishers/templates/publishers/detailsPolicy.html:12
 msgid "postprint"
-msgstr ""
+msgstr "постштампа"
 
 #: publishers/templates/publishers/detailsPolicy.html:14
 msgid "Published version:"
@@ -1375,11 +1376,11 @@ msgstr[1] ""
 
 #: publishers/templates/publishers/list.html:94
 msgid "Data provided by"
-msgstr ""
+msgstr "Податке обезбеђује"
 
 #: publishers/templates/publishers/list.html:129
 msgid "No publisher found."
-msgstr ""
+msgstr "Ниједан издавач није пронађен."
 
 #: publishers/templates/publishers/policy.html:58
 msgid "Policy data provided by"
@@ -1391,19 +1392,19 @@ msgstr ""
 
 #: publishers/templates/publishers/policy.html:67
 msgid "Policy"
-msgstr ""
+msgstr "Правила"
 
 #: publishers/templates/publishers/policy.html:93
 msgid "Conditions"
-msgstr ""
+msgstr "Услови"
 
 #: publishers/templates/publishers/policy.html:101
 msgid "Policy details"
-msgstr ""
+msgstr "Детаљи правила"
 
 #: publishers/templates/publishers/policy.html:110
 msgid "Publications"
-msgstr ""
+msgstr "Публикације"
 
 #: publishers/templates/publishers/policy.html:113
 #, python-format
@@ -1412,7 +1413,7 @@ msgstr ""
 
 #: publishers/templates/publishers/policy.html:118
 msgid "Journals"
-msgstr ""
+msgstr "Часописи"
 
 #: publishers/templates/publishers/policy.html:119
 msgid "Only journals with papers written by our users are listed."
@@ -2068,7 +2069,7 @@ msgstr ""
 #: templates/socialaccount/authentication_error.html:6
 #: templates/socialaccount/authentication_error.html:12
 msgid "Authentication error"
-msgstr ""
+msgstr "Грешка при потврди идентитета"
 
 #: templates/socialaccount/authentication_error.html:16
 msgid "\n            Authentication has failed. <a href=\"/\">Go back to the login page.</a>\n           "
@@ -2076,7 +2077,7 @@ msgstr ""
 
 #: upload/forms.py:29
 msgid "Invalid file format: only PDF files are accepted."
-msgstr ""
+msgstr "Неважећи формат датотеке: прихватају се само PDF датотеке."
 
 #: upload/forms.py:39
 #, python-format
@@ -2129,7 +2130,7 @@ msgstr ""
 
 #: upload/views.py:185 upload/views.py:189
 msgid "Invalid URL (server timed out)."
-msgstr ""
+msgstr "Неважећа URL адреса (серверу је истекло време)."
 
 #: upload/views.py:187 upload/views.py:191
 msgid "Invalid URL."
