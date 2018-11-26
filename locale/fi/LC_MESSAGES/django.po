@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-11-22 06:25:33+0000\n"
+"PO-Revision-Date: 2018-11-26 06:53:15+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -927,7 +927,7 @@ msgstr "Ei saatavissa"
 
 #: papers/templates/papers/paper.html:120
 msgid "Ask upload"
-msgstr ""
+msgstr "Kysy lähettämistä"
 
 #: papers/templates/papers/paper.html:124
 msgid "Publisher:"
@@ -1877,7 +1877,7 @@ msgstr ""
 
 #: templates/dissemin/faq.html:578
 msgid "Can I use the Dissemin logo to refer to the project?"
-msgstr ""
+msgstr "Voinko käyttää Dissemin-logoa viitatakseni projektiin?"
 
 #: templates/dissemin/faq.html:580
 msgid "Yes! See <a href=\"https://association.dissem.in/#logos\">here</a> for links to our logos and for explanations about how you can reuse them."
