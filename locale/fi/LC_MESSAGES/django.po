@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-11-26 06:53:15+0000\n"
+"PO-Revision-Date: 2018-11-29 16:48:40+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -837,7 +837,7 @@ msgstr "Tervetuloa disseminiin"
 
 #: papers/templates/papers/index.html:26
 msgid "Dissemin detects papers behind pay-walls and invites their authors to upload them in one click to an open repository."
-msgstr "Dissemin havaitsee artikkelit maksumuurien takaa ja kutsuu niiden tekijät lähettämään ne yhdellä klikkauksella avoimeen koodivarantoon."
+msgstr "Dissemin havaitsee artikkelit maksumuurien takaa ja kutsuu niiden tekijät tallentamaan ne yhdellä klikkauksella avoimeen koodivarantoon."
 
 #: papers/templates/papers/index.html:36
 #: papers/templates/papers/search.html:204
@@ -868,7 +868,7 @@ msgstr "Avoimet koodivarannot"
 
 #: papers/templates/papers/index.html:77
 msgid "Uploading your papers on your own webpage is not enough. Such copies are less stable and harder to find than documents uploaded to well-indexed repositories."
-msgstr "Artikkeliesi lähettäminen omalla nettisivullasi ei riitä. Sellaiset kopiot ovat vähemmän vakaita ja vaikeampia löytää, kuin artikkelit jotka ladattu hyvin indeksoituihin koodivarantoihin."
+msgstr "Artikkeliesi lähettäminen omalla nettisivullasi ei riitä. Sellaiset kopiot ovat vähemmän vakaita ja vaikeampia löytää, kuin artikkelit jotka on tallennettu hyvin indeksoituihin koodivarantoihin."
 
 #: papers/templates/papers/index.html:85
 msgid "Dissemin searches for copies of your papers in a large collection of open repositories and tells you which ones cannot be accessed."
@@ -927,7 +927,7 @@ msgstr "Ei saatavissa"
 
 #: papers/templates/papers/paper.html:120
 msgid "Ask upload"
-msgstr "Kysy lähettämistä"
+msgstr "Kysy tallentamista"
 
 #: papers/templates/papers/paper.html:124
 msgid "Publisher:"
@@ -978,7 +978,7 @@ msgstr ""
 #: papers/templates/papers/publiListItem.html:40
 #: publishers/templates/publishers/itemPolicy.html:21
 msgid "Upload"
-msgstr "Lähetä"
+msgstr "Tallenna"
 
 #: papers/templates/papers/publiListItem.html:45
 #: papers/templates/papers/search.html:52
@@ -1488,7 +1488,7 @@ msgstr "Käytäntö tuntematon"
 
 #: statistics/templates/statistics/histogram.html:17
 msgid "Upload is forbidden"
-msgstr "Lähettäminen on kielletty"
+msgstr "Tallentaminen on kielletty"
 
 #: templates/404.html:6 templates/404.html:12
 msgid "Page not found"

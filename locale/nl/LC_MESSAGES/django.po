@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-11-22 06:25:34+0000\n"
+"PO-Revision-Date: 2018-11-29 16:48:41+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -908,7 +908,7 @@ msgstr "<strong>Gefeliciteerd!</strong>\nDocument overboeken gelukt."
 #: papers/templates/papers/paper.html:96
 #, python-format
 msgid "<strong>Almost there!</strong> This paper has been deposited in <a href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a href=\"%(deposit_url)s\">this address</a> after validation by the repository administrators."
-msgstr ""
+msgstr "<strong>Je bent er bijna!</strong> Dit document is naar <a href=\"%(repo_url)s\">%(repo_name)s</a> overgeboekt. De volledige tekst is beschikbaar op <a href=\"%(deposit_url)s\">dit adres</a> nadat deze door de beheerders van de opslagplaats is gecontroleerd."
 
 #: papers/templates/papers/paper.html:114
 msgid "Full text:"
@@ -966,12 +966,12 @@ msgstr "Geen document gevonden."
 #: papers/templates/papers/paperList.html:33
 #, python-format
 msgid "Missing publications? <a href=\"%(matching_papers_url)s\"> Search for publications with a matching author name </a>"
-msgstr ""
+msgstr "Ontbreken er publicaties? <a href=\"%(matching_papers_url)s\">Naar publicaties met een overeenkomende auteursnaam zoeken</a>"
 
 #: papers/templates/papers/publiListItem.html:16
 #, python-format
 msgid "and %(remaining_authors)s other authors"
-msgstr ""
+msgstr "en %(remaining_authors)s andere auteurs"
 
 #: papers/templates/papers/publiListItem.html:40
 #: publishers/templates/publishers/itemPolicy.html:21
@@ -981,12 +981,12 @@ msgstr "Plaatsen"
 #: papers/templates/papers/publiListItem.html:45
 #: papers/templates/papers/search.html:52
 msgid "Exclude from my profile"
-msgstr ""
+msgstr "Uit mijn profiel verwijderen"
 
 #: papers/templates/papers/publiListItem.html:52
 #: papers/templates/papers/search.html:55
 msgid "Include in my profile"
-msgstr ""
+msgstr "Aan mijn profiel toevoegen"
 
 #: papers/templates/papers/search.html:37
 msgid "Claiming..."
@@ -1041,11 +1041,11 @@ msgid "ISSN:"
 msgstr "ISSN:"
 
 #: papers/templates/papers/search.html:178
-#, invalid-plural, python-format
+#, python-format
 msgid "%(nb_publi)s paper published in %(journal)s"
 msgid_plural "%(nb_publi)s papers published in %(journal)s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Er is %(nb_publi)s document in %(journal)s geplaatst"
+msgstr[1] "Er zijn %(nb_publi)s documenten in %(journal)s geplaatst"
 
 #: papers/templates/papers/search.html:186
 #: publishers/templates/publishers/policy.html:41
@@ -1053,11 +1053,11 @@ msgid "Publisher"
 msgstr "Uitgever"
 
 #: papers/templates/papers/search.html:195
-#, invalid-plural, python-format
+#, python-format
 msgid "%(nb_publi)s paper published by %(publisher)s"
 msgid_plural "%(nb_publi)s papers published by %(publisher)s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Er is %(nb_publi)s document door %(publisher)s geplaatst"
+msgstr[1] "Er zijn %(nb_publi)s documenten door %(publisher)s geplaatst"
 
 #: papers/templates/papers/search.html:222
 msgid "Search by title"
@@ -1092,7 +1092,7 @@ msgstr "Rangschikken op"
 #: publishers/templates/publishers/list.html:84
 #, python-format
 msgid "%(sort_by)s <div>%(increasing)s %(value)s</div>"
-msgstr ""
+msgstr "%(sort_by)s <div>%(increasing)s %(value)s</div>"
 
 #: papers/templates/papers/search.html:287
 msgid "By visibility"
@@ -1253,7 +1253,7 @@ msgstr "in "
 #: papers/views.py:389
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
-msgstr ""
+msgstr "Er komen geen %(verbose_name)s met deze zoekopdracht overeen"
 
 #: publishers/forms.py:10
 msgid "popularity"
@@ -1273,7 +1273,7 @@ msgstr "Vrije toegang"
 
 #: publishers/models.py:38
 msgid "Freely available from the publisher."
-msgstr ""
+msgstr "Gratis beschikbaar bij de uitgever."
 
 #: publishers/models.py:39
 msgid "Allows pre/post prints"
@@ -1293,7 +1293,7 @@ msgstr ""
 
 #: publishers/models.py:43
 msgid "Policy unclear"
-msgstr ""
+msgstr "Wazig beleid"
 
 #: publishers/models.py:44
 msgid "For complicated policies, unknown publishers and unpublished documents."
@@ -1627,7 +1627,7 @@ msgstr ""
 
 #: templates/dissemin/faq.html:63
 msgid "You should do it because:"
-msgstr ""
+msgstr "Je moet dit doen omdat:"
 
 #: templates/dissemin/faq.html:69
 msgid "It makes your research <strong>more accessible</strong> and <strong>more visible</strong>. Many researchers routinely check papers in topic repositories such as arXiv, and it is less likely that these researchers check your homepage regularly."
@@ -1757,7 +1757,7 @@ msgstr ""
 
 #: templates/dissemin/faq.html:324
 msgid "All sorts of other technical issues."
-msgstr ""
+msgstr "Allerlei soorten technische problemen."
 
 #: templates/dissemin/faq.html:333
 #, python-format
@@ -1984,7 +1984,7 @@ msgstr "Toepassen"
 
 #: templates/dissemin/sources.html:11
 msgid "Data sources"
-msgstr ""
+msgstr "Gegevensbronnen"
 
 #: templates/dissemin/sources.html:13
 msgid "Primary sources"
@@ -2126,7 +2126,7 @@ msgstr ""
 
 #: upload/views.py:185 upload/views.py:189
 msgid "Invalid URL (server timed out)."
-msgstr ""
+msgstr "Ongeldige URL (wachttijd voor server verlopen)."
 
 #: upload/views.py:187 upload/views.py:191
 msgid "Invalid URL."
