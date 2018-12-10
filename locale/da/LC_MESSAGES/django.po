@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-11-22 06:25:32+0000\n"
+"PO-Revision-Date: 2018-12-10 07:06:42+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -626,7 +626,7 @@ msgstr "Makedonsk"
 
 #: notification/models.py:62
 msgid "inboxes"
-msgstr ""
+msgstr "indbakker"
 
 #: papers/baremodels.py:54
 msgid "Journal article"
@@ -1258,7 +1258,7 @@ msgstr ""
 
 #: publishers/forms.py:10
 msgid "popularity"
-msgstr ""
+msgstr "popularitet"
 
 #: publishers/forms.py:11
 msgid "name"
@@ -1270,7 +1270,7 @@ msgstr ""
 
 #: publishers/models.py:38
 msgid "Open access"
-msgstr ""
+msgstr "Åben tilgang"
 
 #: publishers/models.py:38
 msgid "Freely available from the publisher."
@@ -1410,7 +1410,7 @@ msgstr ""
 
 #: publishers/templates/publishers/policy.html:118
 msgid "Journals"
-msgstr ""
+msgstr "Journaler"
 
 #: publishers/templates/publishers/policy.html:119
 msgid "Only journals with papers written by our users are listed."
@@ -1499,7 +1499,7 @@ msgstr ""
 
 #: templates/500.html:6 templates/500.html:12
 msgid "Internal error"
-msgstr ""
+msgstr "Intern fejl"
 
 #: templates/500.html:13
 msgid "\n            Your request triggered an internal error. <a href=\"/\">Go back to the home page.</a>\n           "
@@ -1516,7 +1516,7 @@ msgstr ""
 #: templates/dissemin/faq.html:6 templates/dissemin/faq.html:11
 #: templates/dissemin/tos.html:6
 msgid "Frequently Asked Questions"
-msgstr ""
+msgstr "Ofte stillede spørgsmål"
 
 #: templates/dissemin/faq.html:16 templates/dissemin/faq.html:51
 msgid "What is Open Access?"
@@ -1985,11 +1985,11 @@ msgstr ""
 
 #: templates/dissemin/sources.html:11
 msgid "Data sources"
-msgstr ""
+msgstr "Datakilder"
 
 #: templates/dissemin/sources.html:13
 msgid "Primary sources"
-msgstr ""
+msgstr "Primære kilder"
 
 #: templates/dissemin/tos.html:15 templates/dissemin/tos.html:27
 msgid "In short"
