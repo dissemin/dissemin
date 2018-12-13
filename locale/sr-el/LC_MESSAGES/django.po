@@ -11,13 +11,13 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-11-22 06:25:35+0000\n"
+"PO-Revision-Date: 2018-12-13 08:02:33+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: sr-Latn\n"
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2018-11-05\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11) ? 0 : ( (n%10 >= 2 && n%10 <= 4 && (n%100 < 10 || n%100 >= 20)) ? 1 : 2 );\n"
 
 #: deposit/forms.py:41
 msgid "Upload type"
@@ -802,6 +802,7 @@ msgid "(%(num_total)s paper)"
 msgid_plural "(%(num_total)s papers)"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: papers/templates/papers/department.html:71
 #: papers/templates/papers/institution.html:48
@@ -1048,6 +1049,7 @@ msgid "%(nb_publi)s paper published in %(journal)s"
 msgid_plural "%(nb_publi)s papers published in %(journal)s"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: papers/templates/papers/search.html:186
 #: publishers/templates/publishers/policy.html:41
@@ -1060,6 +1062,7 @@ msgid "%(nb_publi)s paper published by %(publisher)s"
 msgid_plural "%(nb_publi)s papers published by %(publisher)s"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: papers/templates/papers/search.html:222
 msgid "Search by title"
@@ -1231,6 +1234,7 @@ msgid "%d paper found"
 msgid_plural "%d papers found"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: papers/views.py:211
 msgid "\n                            Invalid ORCID profile.\n                            Please make sure it includes a public name.\n                            "
@@ -1371,6 +1375,7 @@ msgid "%(counter)s publisher found"
 msgid_plural "%(counter)s publishers found"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: publishers/templates/publishers/list.html:94
 msgid "Data provided by"

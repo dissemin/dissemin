@@ -6,13 +6,13 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-11-22 06:25:34+0000\n"
+"PO-Revision-Date: 2018-12-13 08:02:30+0000\n"
 "X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: sr-Cyrl\n"
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2018-11-05\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11) ? 0 : ( (n%10 >= 2 && n%10 <= 4 && (n%100 < 10 || n%100 >= 20)) ? 1 : 2 );\n"
 
 #: doc/sphinx/_build/html/_static/doctools.js:167
 msgid "Permalink to this headline"
@@ -82,6 +82,7 @@ msgid "We ignored %(count)s paper from your ORCiD profile."
 msgid_plural "We ignored %(count)s papers from your ORCiD profile."
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #: papers/static/papers/refresh.js:115
 msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"

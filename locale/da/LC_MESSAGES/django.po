@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-12-10 07:06:42+0000\n"
+"PO-Revision-Date: 2018-12-13 08:02:29+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1193,12 +1193,12 @@ msgstr ""
 
 #: papers/templatetags/statuses.py:58
 msgid "policy unclear."
-msgstr ""
+msgstr "politik uklar."
 
 #: papers/templatetags/statuses.py:59 papers/templatetags/statuses.py:61
 #: papers/templatetags/statuses.py:73
 msgid "policy unknown."
-msgstr ""
+msgstr "politik ukendt."
 
 #: papers/templatetags/statuses.py:67
 msgid "archiving allowed"
@@ -1214,11 +1214,11 @@ msgstr ""
 
 #: papers/templatetags/statuses.py:70
 msgid "policy unclear"
-msgstr ""
+msgstr "politik uklar"
 
 #: papers/templatetags/statuses.py:71
 msgid "policy unknown"
-msgstr ""
+msgstr "politik ukendt"
 
 #: papers/views.py:128
 msgid "All papers"
@@ -1483,7 +1483,7 @@ msgstr ""
 
 #: statistics/templates/statistics/histogram.html:14
 msgid "Policy unknown"
-msgstr ""
+msgstr "Politik ukendt"
 
 #: statistics/templates/statistics/histogram.html:17
 msgid "Upload is forbidden"
@@ -1564,7 +1564,7 @@ msgstr ""
 
 #: templates/dissemin/faq.html:30 templates/dissemin/faq.html:289
 msgid "Should I trust your statistics?"
-msgstr ""
+msgstr "Burde jeg stole på jeres statistik?"
 
 #: templates/dissemin/faq.html:32 templates/dissemin/faq.html:330
 msgid "Omissions and errors"
@@ -1604,11 +1604,11 @@ msgstr ""
 
 #: templates/dissemin/faq.html:43 templates/dissemin/faq.html:514
 msgid "Behind the scenes"
-msgstr ""
+msgstr "Bag kulisserne"
 
 #: templates/dissemin/faq.html:44 templates/dissemin/faq.html:516
 msgid "Where do you get the data from?"
-msgstr ""
+msgstr "Hvor får du din data fra?"
 
 #: templates/dissemin/faq.html:45 templates/dissemin/faq.html:523
 msgid "How can I help?"
@@ -1911,7 +1911,7 @@ msgstr ""
 #: templates/dissemin/login.html:42 templates/dissemin/login.html:51
 #: templates/dissemin/sandbox.html:44
 msgid "Sign up"
-msgstr ""
+msgstr "Tilmeld dig"
 
 #: templates/dissemin/login.html:44 templates/dissemin/sandbox.html:46
 msgid "Not an ORCID user yet? Create an account, it is free and takes a few seconds."
@@ -2107,11 +2107,11 @@ msgstr ""
 
 #: upload/views.py:132
 msgid "Invalid PDF file."
-msgstr ""
+msgstr "Ugyldig PDF-fil"
 
 #: upload/views.py:165
 msgid "Invalid form."
-msgstr ""
+msgstr "Ugyldig formular."
 
 #: upload/views.py:175
 msgid "File too large."
