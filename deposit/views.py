@@ -41,7 +41,7 @@ from django.views.decorators.http import require_POST
 from jsonview.decorators import json_view
 from papers.models import Paper
 from papers.user import is_authenticated
-
+from ratelimit.decorators import ratelimit
 
 def get_all_repositories_and_protocols(paper, user):
     repositories = Repository.objects.all()
@@ -172,6 +172,7 @@ def edit_global_preferences(request):
 @require_POST
 @json_view
 @user_passes_test(is_authenticated)
+@ratelimit(key='ip', rate='200/d')
 def submitDeposit(request, pk):
     paper = get_object_or_404(Paper, pk=pk)
     context = {'status': 'error'}
