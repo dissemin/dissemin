@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-11-29 16:48:40+0000\n"
+"PO-Revision-Date: 2018-12-27 09:46:48+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -234,7 +234,7 @@ msgstr ""
 
 #: deposit/hal/protocol.py:222
 msgid "HAL returned an invalid XML response"
-msgstr ""
+msgstr "HAL palautti virheellisen XML-vastauksen"
 
 #: deposit/hal/protocol.py:234
 msgid "This paper already exists in HAL."
@@ -683,7 +683,7 @@ msgstr "Muu asiakirja"
 
 #: papers/forms.py:48
 msgid "Invalid ORCID identifier."
-msgstr ""
+msgstr "Virheellinen ORCID-tunniste."
 
 #: papers/forms.py:54 papers/templates/papers/department.html:86
 #: papers/templates/papers/search.html:160
@@ -1275,7 +1275,7 @@ msgstr "Avoin pääsy"
 
 #: publishers/models.py:38
 msgid "Freely available from the publisher."
-msgstr "Vapaasti saatavissa julkaisijalta."
+msgstr "Vapaasti saatavana julkaisijalta."
 
 #: publishers/models.py:39
 msgid "Allows pre/post prints"
@@ -1423,7 +1423,7 @@ msgstr ""
 
 #: statistics/models.py:48
 msgid "Available from the publisher"
-msgstr "Saatavissa julkaisijalta"
+msgstr "Saatavana julkaisijalta"
 
 #: statistics/models.py:49
 msgid "Available from the author"
