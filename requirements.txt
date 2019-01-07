@@ -24,6 +24,7 @@ django-leaflet
 django-memoize
 django-redis-cache
 django-solo
+django-ratelimit
 django-widget-tweaks
 django-debug-toolbar
 djangorestframework

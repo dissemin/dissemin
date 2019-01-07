@@ -41,6 +41,7 @@ from upload.forms import UrlDownloadForm
 from upload.models import MAX_ORIG_NAME_LENGTH
 from upload.models import THUMBNAIL_MAX_WIDTH
 from upload.models import UploadedPDF
+from ratelimit.decorators import ratelimit
 import wand.exceptions
 import wand.image
 
@@ -51,6 +52,7 @@ import wand.image
 @json_view
 @require_POST
 @user_passes_test(is_authenticated)
+@ratelimit(key='ip', rate='300/d')
 def handleAjaxUpload(request):
     form = AjaxUploadForm(request.POST, request.FILES)
     if form.is_valid():
@@ -158,6 +160,7 @@ def save_pdf(user, orig_name, pdf_blob):
 @json_view
 @require_POST
 @user_passes_test(is_authenticated)
+@ratelimit(key='ip', rate='300/d')
 def handleUrlDownload(request):
     response = {'status': 'error'}
     form = UrlDownloadForm(request.POST)
