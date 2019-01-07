@@ -1,14 +1,18 @@
 #!/bin/bash
+# Stop execution on first error
+set -e
+# Show commands as they are executed
+set -x
 
 # We update the apt-get cache
 apt-get update
+# We update the system
+apt-get dist-upgrade -y
 
 # Install method HTTPS
 apt-get install -y apt-transport-https
 
-# Add new repositories for services
-
-# ElasticSearch
+# Add repository for ElasticSearch
 wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | apt-key add -
 echo "deb https://packages.elastic.co/elasticsearch/2.x/debian stable main" | tee -a /etc/apt/sources.list.d/elasticsearch-2.x.list
 
@@ -27,6 +31,9 @@ apt-get install -y postgresql postgresql-server-dev-all postgresql-client
 apt-get install -y elasticsearch
 # We install moreutils
 apt-get install -y moreutils
+# We install required geo libraries
+# https://docs.djangoproject.com/en/2.1/ref/contrib/gis/install/geolibs/
+apt-get install -y binutils libproj-dev gdal-bin
 # We setup a Dissemin user
 DB_PASSWORD=$(pwgen -s 60 -1)
 sudo -u postgres -H bash <<EOF
@@ -53,10 +60,15 @@ systemctl restart elasticsearch
 apt-get install -y tmux vim-nox
 # We create a virtualenv for Dissemin
 virtualenv /dissemin/.vm_venv --no-site-packages -p $(which python2.7)
+
+# Update setuptools
+# Fix for a weird setuptools bug, see
+# https://github.com/pypa/setuptools/issues/299#issuecomment-441898332
+/dissemin/.vm_venv/bin/pip uninstall -y setuptools
+/dissemin/.vm_venv/bin/pip install --upgrade setuptools
+
 # We install dependencies in the virtualenv
 req_files=(requirements.txt requirements-dev.txt)
-
-/dissemin/.vm_venv/bin/pip install --upgrade setuptools
 for req in "${req_files[@]}"
 do
         /dissemin/.vm_venv/bin/pip install -r "/dissemin/$req"
@@ -74,7 +86,7 @@ cat <<EOF > /dissemin/dissemin/settings/secret.py
 # coding: utf-8
 
 ### Security key ###
-# This is used by django to generate various things (mainly for 
+# This is used by django to generate various things (mainly for
 # authentication). Just pick a fairly random string and keep it
 # secret.
 SECRET_KEY = "$(pwgen -s 60 -1)"
