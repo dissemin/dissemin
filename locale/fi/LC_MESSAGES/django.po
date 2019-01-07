@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-12-27 09:46:48+0000\n"
+"PO-Revision-Date: 2019-01-07 09:05:01+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -868,7 +868,7 @@ msgstr "Avoimet koodivarannot"
 
 #: papers/templates/papers/index.html:77
 msgid "Uploading your papers on your own webpage is not enough. Such copies are less stable and harder to find than documents uploaded to well-indexed repositories."
-msgstr "Artikkeliesi lähettäminen omalla nettisivullasi ei riitä. Sellaiset kopiot ovat vähemmän vakaita ja vaikeampia löytää, kuin artikkelit jotka on tallennettu hyvin indeksoituihin koodivarantoihin."
+msgstr "Artikkeliesi tallentaminen omalla nettisivullesi ei ole tarpeeksi. Sellaiset kopiot ovat vähemmän vakaita ja vaikeampia löytää, kuin artikkelit jotka on tallennettu hyvin indeksoituihin koodivarantoihin."
 
 #: papers/templates/papers/index.html:85
 msgid "Dissemin searches for copies of your papers in a large collection of open repositories and tells you which ones cannot be accessed."
@@ -1553,7 +1553,7 @@ msgstr "Voinko luoda profiilini dissem.in:issä?"
 
 #: templates/dissemin/faq.html:27 templates/dissemin/faq.html:226
 msgid "Policies and full-text availability"
-msgstr ""
+msgstr "Käytännöt ja koko tekstin saatavuus"
 
 #: templates/dissemin/faq.html:28 templates/dissemin/faq.html:227
 msgid "What do your policy classes mean?"
@@ -1589,19 +1589,19 @@ msgstr ""
 
 #: templates/dissemin/faq.html:38 templates/dissemin/faq.html:435
 msgid "Why do you need to authenticate users?"
-msgstr "Miksi sinun pitää todentaa käyttäjät?"
+msgstr "Miksi teidän täytyy todentaa käyttäjät?"
 
 #: templates/dissemin/faq.html:39 templates/dissemin/faq.html:449
 msgid "What will you do to my ORCID profile if I log in?"
-msgstr ""
+msgstr "Mitä teette ORCID-profiililleni jos kirjaudun sisään?"
 
 #: templates/dissemin/faq.html:40 templates/dissemin/faq.html:458
 msgid "How do I add publications to my ORCID profile?"
-msgstr ""
+msgstr "Miten lisään julkaisuni ORCID-profiiliini?"
 
 #: templates/dissemin/faq.html:41 templates/dissemin/faq.html:501
 msgid "My ORCID details on Dissemin are outdated."
-msgstr ""
+msgstr "ORCID-tietoni Disseminissa ovat vanhentuneita."
 
 #: templates/dissemin/faq.html:43 templates/dissemin/faq.html:514
 msgid "Behind the scenes"
@@ -1837,7 +1837,7 @@ msgstr ""
 #: templates/dissemin/faq.html:518
 #, python-format
 msgid "Our sources are listed on <a href=\"%(sources_url)s\">this page</a>."
-msgstr ""
+msgstr "Lähteemme on listattu <a href=\"%(sources_url)s\">tällä sivulla</a>."
 
 #: templates/dissemin/faq.html:525
 msgid "There are many ways to get involved:"
@@ -1881,7 +1881,7 @@ msgstr "Voinko käyttää Dissemin-logoa viitatakseni projektiin?"
 
 #: templates/dissemin/faq.html:580
 msgid "Yes! See <a href=\"https://association.dissem.in/#logos\">here</a> for links to our logos and for explanations about how you can reuse them."
-msgstr ""
+msgstr "Kyllä! Katso <a href=\"https://association.dissem.in/#logos\">täältä</a> linkit logoihimme ja selityksiä siitä miten voit uudelleenkäyttää niitä."
 
 #: templates/dissemin/faq.html:585 templates/dissemin/tos.html:150
 msgid "Back to top"
