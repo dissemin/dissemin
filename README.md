@@ -59,6 +59,10 @@ incomplete.
 
 ### Localization
 
+Translations are hosted at
+[TranslateWiki](https://translatewiki.net/wiki/Translating:Dissemin) for an
+easy-to-use interface for translations and statistics.
+
 Dissem.in uses the [Django's standard localization
 system](https://docs.djangoproject.com/en/1.8/topics/i18n/), which makes it
 easy to contribute new translations.

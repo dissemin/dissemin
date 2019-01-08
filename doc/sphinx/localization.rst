@@ -3,6 +3,10 @@
 Localization
 ------------
 
+Translations are hosted at `TranslateWiki
+<https://translatewiki.net/wiki/Translating:Dissemin>`_, for an easy-to-use
+interface for translations and statistics.
+
 We use `Django's standard localization system <https://docs.djangoproject.com/en/1.8/topics/i18n/>`_, based on i18n.
 To generate the PO file, let's say for french, run::
 
