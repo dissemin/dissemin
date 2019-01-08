@@ -5,7 +5,6 @@
 {% load statuses %}
 {% load i18n %}
 {% load widget_tweaks %}
-{% load choice_tags %}
 {% load capture_tags %}
 
 {% block headTitle %}
@@ -54,10 +53,10 @@ $(function(){
             {{ form.oa_status.errors }}
             <label for="{{ form.oa_status.id_for_label }}">{% trans "Filter by publisher policy" %}</label>
             {% for checkbox in form.oa_status %}
-            {% with value=checkbox.choice_value %}
+            {% with value=checkbox.data.value %}
             <div class="logoHelpPopover" data-content="{{ value|helptext_oa_status }}">
             <div class="checkbox publisherCriterion">
-                {{ checkbox|tag:'onchange="submit()"' }}
+                {{ checkbox.tag }}
                 <div class="publisherCriterionBox">
                 <label for="{{ checkbox.id_for_label }}">
                     <img alt="" src="{% static value|logo_oa_status %}" height="70px" width="52px" class="pubLogo publisherCriterionLogo">
@@ -123,7 +122,7 @@ $(function(){
                </span>
            </div>
         </div>
-    </li>    
+    </li>
         {% if forloop.last %}</ul>{% endif %}
  {% endwith %}{% empty %}
  <p class="notFound">{% trans "No publisher found." %}</p>
