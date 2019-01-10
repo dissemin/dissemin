@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2019-01-07 09:05:01+0000\n"
+"PO-Revision-Date: 2019-01-10 07:45:39+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1504,7 +1504,7 @@ msgstr "Sisäinen virhe"
 
 #: templates/500.html:13
 msgid "\n            Your request triggered an internal error. <a href=\"/\">Go back to the home page.</a>\n           "
-msgstr ""
+msgstr "\n            Pyyntösi laukaisi sisäisen virheen. <a href=\"/\">Takaisin etusivulle</a>\n           "
 
 #: templates/admin/base_site.html:4
 msgid "Dissemin site admin"
