@@ -87,4 +87,6 @@ def logo_oa_status(status):
         'NOK': 'closed',
         'UNK': 'unk',
     }
-    return 'img/logos/' + OA_STATUS_IMG[status] + '.png'
+    if status in OA_STATUS_IMG:
+        return 'img/logos/' + OA_STATUS_IMG[status] + '.png'
+    return ''

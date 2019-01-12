@@ -17,7 +17,7 @@ class PublisherForm(SearchForm):
     oa_status = forms.MultipleChoiceField(
         choices=OA_STATUS,
         label=_('Filter by publisher policy'),
-        widget=forms.CheckboxSelectMultiple,
+        widget=forms.CheckboxSelectMultiple(attrs={'onchange': 'submit()'}),
         required=False)
     sort_by = forms.ChoiceField(choices=SORT_CHOICES, required=False)
     reverse_order = forms.ChoiceField(choices=ORDER_CHOICES, required=False)
