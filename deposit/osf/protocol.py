@@ -59,7 +59,7 @@ class OSFProtocol(RepositoryProtocol):
         """
         super(OSFProtocol, self).init_deposit(paper, user)
         for r in paper.oairecords:
-            domain = extract_domain(r.splash_url)
+            domain = extract_domain(r.splash_url) or ''
             if domain.endswith('osf.io'):
                 return False
         return (True)
