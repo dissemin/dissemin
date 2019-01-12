@@ -159,7 +159,7 @@ class BareAccessStatistics(object):
         qs = qs.aggregations({
          "status": {"terms": {"field": "combined_status_exact"}},
         })
-        aggregations = qs.get_aggregation_results()
+        aggregations = qs.get_aggregation_results() or {}
         status = aggregations.get('status', {'buckets':[]})
         buckets = {
             bucket['key']: bucket['doc_count']
