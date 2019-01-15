@@ -384,7 +384,7 @@ class PaperView(SlugDetailView):
             elif doi is not None:
                 paper = Paper.get_by_doi(doi)
             else:
-                raise AttributeError("Paper view expects a DOI or a pk")
+                raise Http404(_("Paper view expects a DOI or a pk"))
         except ObjectDoesNotExist:
             pass
 
