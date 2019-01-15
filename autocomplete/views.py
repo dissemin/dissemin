@@ -58,8 +58,11 @@ class AffiliationAutocomplete(View, ViewMixin, Select2ViewMixin):
             'rows': 20,
             'fl': 'docid,label_s,label_html',
         })
-        r.raise_for_status()
-        affiliations = r.json()['response']['docs']
+        try:
+            r.raise_for_status()
+            affiliations = r.json()['response']['docs']
+        except (requests.exceptions.HTTPError, KeyError):
+            return empty_resp
 
         if not affiliations:
             return empty_resp
