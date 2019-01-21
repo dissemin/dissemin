@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2019-01-10 07:45:39+0000\n"
+"PO-Revision-Date: 2019-01-21 08:54:55+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -391,7 +391,7 @@ msgstr ""
 
 #: deposit/osf/protocol.py:469
 msgid "Unable to upload the PDF file."
-msgstr ""
+msgstr "PDF-tiedoston tallentaminen ei onnistunut."
 
 #: deposit/osf/protocol.py:509
 msgid "Unable to delete the project."
@@ -403,7 +403,7 @@ msgstr "Projektia ei voitu julkistaa."
 
 #: deposit/protocol.py:199
 msgid "Failed to connect to the repository. Please try again later."
-msgstr ""
+msgstr "Yhteyden muodostaminen koodivarantoon epäonnistui. Yritä myöhemmin uudelleen."
 
 #: deposit/sword/protocol.py:45
 msgid "No servicedocument provided."
