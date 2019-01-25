@@ -48,6 +48,50 @@ class ZenodoProtocol(RepositoryProtocol):
         if not self.api_url:
             self.api_url = "https://zenodo.org/api/deposit/depositions"
 
+    def log_request(self, r, expected_status_code, error_msg):
+        """
+        Logs an HTTP request and raises an error if the status code is unexpected.
+        """
+        # Call the generic log_request handler to check if there is any error
+        super_exc = None
+        try:
+            super(ZenodoProtocol, self).log_request(
+                r, expected_status_code, error_msg
+            )
+        except DepositError as exc:
+            super_exc = exc
+
+        # No error (request went as expected), we can just return
+        if super_exc is None:
+            return
+
+        # If there was an error, do the Zenodo-specific error handling here.
+        try:
+            error = r.json()
+            # Check for validation errors because the DOI already exists
+            if (
+                r.status_code == 400
+                and 'Validation error' in error.get('message')
+                and any([
+                    'DOI already exists' in item.get('message')
+                    for item in error.get('errors', [])
+                ])
+            ):
+                raise DepositError(
+                    __(
+                        'This document is already in Zenodo. '
+                        'Zenodo refused the deposit.'
+                    )
+                )
+        except Exception as e
+            if isinstance(e, DepositError):
+                # Any DepositError is simply kept as is
+                raise e
+            else:
+                # There was an error within error handling code, just return
+                # the super exception
+                raise super_exc
+
     def init_deposit(self, paper, user):
         """
         Refuse deposit when the paper is already on Zenodo
