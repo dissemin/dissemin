@@ -23,7 +23,8 @@ import json
 from statistics.models import COMBINED_STATUS_CHOICES
 from statistics.models import BareAccessStatistics
 
-from allauth.socialaccount.signals import post_social_login
+from allauth.exceptions import ImmediateHttpResponse
+from allauth.socialaccount.signals import pre_social_login
 from deposit.models import DepositRecord
 from django.contrib.auth.decorators import user_passes_test
 from django.core.exceptions import ObjectDoesNotExist
@@ -66,7 +67,9 @@ def fetch_on_orcid_login(sender, **kwargs):
     # Only prefetch if the social login refers to a valid ORCID account
     orcid = validate_orcid(account.uid)
     if not orcid:
-        return
+        raise ImmediateHttpResponse(HttpResponse(
+            'Invalid ORCID identifier.'
+        ))
 
     profile = None # disabled account.extra_data because of API version mismatches
     user = None
@@ -75,7 +78,9 @@ def fetch_on_orcid_login(sender, **kwargs):
     r = Researcher.get_or_create_by_orcid(orcid, profile, user)
 
     if not r: # invalid ORCID profile (e.g. no name provided)
-        return
+        raise ImmediateHttpResponse(HttpResponse(
+            'Dissemin requires access to your ORCID name.'
+        ))
 
     if r.user_id is None and user is not None:
         r.user = user
@@ -85,7 +90,7 @@ def fetch_on_orcid_login(sender, **kwargs):
     else:
         r.fetch_everything_if_outdated()
 
-post_social_login.connect(fetch_on_orcid_login)
+pre_social_login.connect(fetch_on_orcid_login)
 
 # Number of papers shown on a search results page
 NB_RESULTS_PER_PAGE = 20
@@ -337,7 +342,9 @@ def myProfileView(request):
                                         researcher=r.pk,
                                         slug=r.slug)
     except Researcher.DoesNotExist:
-        return render(request, 'papers/createProfile.html')
+        return HttpResponse(
+            'Dissemin requires access to your ORCID name.'
+        )
 
 
 class DepartmentView(generic.DetailView):
