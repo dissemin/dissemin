@@ -56,7 +56,11 @@
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
     });
     </script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async>
+    {% if settings.MATHJAX_SELFHOST_URL %}
+        <script type="text/javascript" src="{{ settings.MATHJAX_SELFHOST_URL }}" async>
+    {% else %}
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async>
+    {% endif %}
     </script>
     <script type="text/javascript" src="{% static "editing.js" %}"></script>
     <script type="text/javascript" src="{% static "name.js" %}"></script>

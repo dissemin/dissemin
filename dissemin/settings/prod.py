@@ -54,3 +54,8 @@ STATIC_ROOT = '/home/dissemin/dissemin/www/static/'
 # Absolute path to the directory where we store user uploads
 # This is what you should change!
 MEDIA_ROOT = '/home/dissemin/dissemin/media/'
+
+
+# Uncomment to use a selfhosted version of Mathjax.
+# Mathjax should be downloaded and installed manually to this URL.
+# MATHJAX_SELFHOST_URL = 'http://domain.example.com/static/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML'

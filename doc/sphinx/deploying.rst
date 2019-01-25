@@ -32,6 +32,30 @@ the translation files.
 Make sure that your `media/` directory is writable by the user under which the application will run
 (`www-data` on Debian).
 
+Self-hosting MathJax
+--------------------
+
+Dissemin requires `MathJax <https://www.mathjax.org/>` for rendering LaTeX
+formatting in the abstracts. Out of the box, Dissemin will use a CDN-hosted
+version of MathJax. This has the downside of `preventing deposit when disabling
+third-party JS <https://github.com/dissemin/dissemin/issues/454>`.
+
+An easy solution to this is to self-host MathJax. You can follow the
+`installation instructions
+<https://docs.mathjax.org/en/latest/start.html#downloading-and-installing-mathjax>`
+from MathJax to get a local copy. Ideally, you should put it in the static
+directory (under ``/home/dissemin/www/static/`` in the example below).
+
+Note that MathJax consists of many small files which can slow down a lot the
+built-in Django webserver. Hence, it is better to serve it directly by Apache
+and avoid having all these files in the ``papers/static/libs`` directory of
+Dissemin.
+
+Once MathJax is downloaded and available by your webserver, you can use the
+setting ``MATHJAX_SELFHOST_URL`` (in `dissemin/settings`) to specify a location
+to load MathJax from. In the example below, this would be
+``//dissemin.myuni.edu/static/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML``.
+
 Apache with WSGI
 ----------------
 
@@ -40,7 +64,7 @@ Here is a sample VirtualHost, assuming that the root of the Dissemin source code
     <VirtualHost *:80>
             ServerAdmin webmaster@localhost
             ServerName dissemin.myuni.edu
-            
+
             ### STATIC FILES ###
 
             # Instructions for robots
