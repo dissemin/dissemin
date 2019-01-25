@@ -3,7 +3,7 @@
 build/
 src/
 .src/
-# vim 
+# vim
 .*.swp
 # ENS data
 celerybeat-schedule
@@ -30,6 +30,7 @@ runfcgi.pid
 # build files for doc
 doc/sphinx/_build/
 doc/sphinx/*.rst
+doc/sphinx/modules
 
 # Coverage
 .coverage

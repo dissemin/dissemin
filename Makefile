@@ -1,5 +1,5 @@
 doc:
-	sphinx-apidoc -ef -o doc/sphinx/ . */migrations/*
+	sphinx-apidoc -ef -o doc/sphinx/modules/ . */migrations/*
 	# Regenerates the skeleton files for the documentation
 	# then, you need to `cd doc/sphinx`
 	# and `make html`
