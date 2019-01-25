@@ -174,7 +174,12 @@ def waitForConsolidatedField(request):
         return {'success': success, 'message': 'Invalid paper id'}, 404
     field = request.GET.get('field')
     value = None
-    paper.consolidate_metadata(wait=True)
+    try:
+        paper.consolidate_metadata(wait=True)
+    except TimeoutError:
+        # Zotero instance is down / slow / failing, consolidation failed. Not
+        # a big deal.
+        pass
     if field == 'abstract':
         value = kill_html(paper.abstract)
         success = len(paper.abstract) > 64
