@@ -1058,9 +1058,12 @@ class Paper(models.Model, BarePaper):
         else:
             task = AsyncResult(self.task)
         if wait:
-            task.get(timeout=10)
-            self.task = None
-            self.save(update_fields=['task'])
+            try:
+                task.get(timeout=10)
+            finally:
+                # Clear task if timeout expired.
+                self.task = None
+                self.save(update_fields=['task'])
 
     def get_doi(self):
         """
