@@ -2,7 +2,7 @@
 -e git://github.com/swordapp/python-client-sword2#egg=sword2
 -e git://github.com/wetneb/pyoai.git@any_metadataPrefix#egg=pyoai
 PyPDF2
-bibtexparser
+bibtexparser>=1.1.0
 celery[redis]
 cryptography
 czipfile

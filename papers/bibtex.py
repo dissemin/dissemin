@@ -15,62 +15,71 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-#
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+# USA.
 
 from __future__ import unicode_literals
-
 import re
 
 import bibtexparser
+import bibtexparser.customization
+
 from bibtexparser.bparser import BibTexParser
-from bibtexparser.customization import convert_to_unicode
 from papers.name import parse_comma_name
-from papers.utils import remove_latex_braces
-from papers.utils import unescape_latex
+
+# There should not be "et al" in Bibtex but we encounter it from time to time
+ET_AL_RE = re.compile(r'( and )?\s*et\s+al\.?\s*$', re.IGNORECASE | re.UNICODE)
+# Others is a reserved Bibtex keyword
+OTHERS_RE = re.compile(r'( and )?\s*others\.?\s*$', re.IGNORECASE | re.UNICODE)
+
+
+def parse_authors_list(record):
+    """
+    Split author field into a list of (First name, Last name)
+    """
+    if 'author' in record:
+        if record['author']:
+            # Handle "et al"
+            record['author'] = ET_AL_RE.sub('', record['author'])
+            # Handle "others"
+            record['author'] = OTHERS_RE.sub('', record['author'])
+            # Normalizations
+            record['author'] = record['author'].replace('\n', ' ')
+            # Split author field into list of first and last names
+            record['author'] = [
+                parse_comma_name(author.strip())
+                for author in record['author'].split(' and ')
+            ]
+        else:
+            del record['author']
+    return record
+
+
+def customizations(record):
+    """
+    Parser customizations for Bibtexparser
+    """
+    record = bibtexparser.customization.convert_to_unicode(record)
+    record = parse_authors_list(record)
+    return record
 
 
 def parse_bibtex(bibtex):
     """
     Parse a single bibtex record represented as a string to a dict
     """
-    bibtex = insert_newlines_in_bibtex(bibtex)
     parser = BibTexParser()
-    parser.customization = convert_to_unicode
-    db = bibtexparser.loads(bibtex)  # , parser=parser)
+    parser.customization = customizations
+    db = bibtexparser.loads(bibtex, parser=parser)
 
     if len(db.entries) == 0:
         raise ValueError('No bibtex item was parsed.')
     if len(db.entries) > 1:
-        print "Warning: %d Bibtex items in parse_bibtex, defaulting to the first one" % len(db.entries)
+        print(
+            (
+                "Warning: %d Bibtex items in parse_bibtex, "
+                "defaulting to the first one"
+            ) % len(db.entries)
+        )
 
-    entry = db.entries[0]
-    entry['author'] = parse_authors_list(entry.get('author', ''))
-    return entry
-
-### Bibtex utilites ###
-
-bibtex_header_no_newline = re.compile(r'^(@\w*\W*{\W*\w+\W*,) *(?=[a-z])')
-bibtex_statement_no_newline = re.compile(r'(},) *([a-zA-Z]+\W*=\W*{)')
-bibtex_end_no_newline = re.compile(r'} *,? *} *$')
-
-
-def insert_newlines_in_bibtex(bib):
-    """
-    Bibtexparser relies on newlines to parse bibtex records, and ORCiD does not provide
-    them, so we need to insert them. This is probably plain wrong, but hey! I have
-    no intension to write a full-blown bibtex parser.
-    """
-    bib1 = bibtex_header_no_newline.sub(r'\1\n', bib)
-    bib2 = bibtex_statement_no_newline.sub(r'\1\n\2', bib1)
-    bib3 = bibtex_end_no_newline.sub('}\n}', bib2)
-    return bib3
-
-et_al_re = re.compile(r'( and )?\s*et\s+al\.?\s*$', re.IGNORECASE | re.UNICODE)
-
-
-def parse_authors_list(authors):
-    authors = unescape_latex(authors)
-    authors = et_al_re.sub('', authors)
-    return map(parse_comma_name,
-               remove_latex_braces(unescape_latex(authors)).split(' and '))
+    return db.entries[0]
