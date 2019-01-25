@@ -53,7 +53,8 @@ class PaperSource(object):
 
     def fetch_bare(self, researcher):
         """
-        This function returns a generator of :class:`BarePaper`s fetched for the given researcher.
+        This function returns a generator of :class:`BarePaper` fetched for the
+        given researcher.
         """
         return self.fetch_papers(researcher)
 

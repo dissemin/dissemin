@@ -14,24 +14,23 @@
 # GNU Affero General Public License for more details.
 #
 # You should have received a copy of the GNU Affero General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+# along with this program; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
 """
 This module defines most of the models used in the platform.
 
 * :class:`Paper` represents a (deduplicated) paper.
-   The sources it has been discovered from are witnessed
-   by two types of records:
-    * :class:`OaiRecord` instances are created by OAI-PMH sources, or
-      metadata sources not originally in OAI-PMH but wrapped in this format
-      by proaixy. They indicate the availability of the paper in repositories.
-      They link to an :class:`OaiSource` object that indicates what data source
-      we have got this record from.
-   Multiple :class:`OaiRecord` can (and typically are) associated
-   with a paper, when the metadata they contain yield the same paper fingerprint.
-   These records are stored inside the Paper object in a JSON field.
+   The sources it has been discovered from are witnessed by :class:`OaiRecord`
+   instances which are created by OAI-PMH sources, or metadata sources not
+   originally in OAI-PMH but wrapped in this format by proaixy. They indicate
+   the availability of the paper in repositories. They link to an
+   :class:`OaiSource` object that indicates what data source we have got this
+   record from. Multiple :class:`OaiRecord` can (and typically are) associated
+   with a paper, when the metadata they contain yield the same paper
+   fingerprint. These records are stored inside the Paper object in a JSON
+   field.
 
 * :class:`Researcher` represents a researcher profile (a physical person).
    This person has a cannonical :class:`Name`, but can also be associated with
@@ -177,8 +176,8 @@ class Institution(models.Model):
     def sorted_researchers(self):
         """
         List of :py:class:`Researcher` who are directly affiliated to
-        this institution, without department.
-         sorted by last name (prefetches their stats as well)
+        this institution, without department. It is sorted by last name
+        (prefetches their stats as well).
         """
         return self.researcher_set.select_related('name', 'stats').order_by('name')
 

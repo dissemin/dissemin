@@ -6,8 +6,9 @@ Contributing to dissemin
 This section explains how to do some development tasks on the source code.
 
 
-* :doc:`localization`
-* :doc:`repository_interfaces`
+.. toctree::
+   :maxdepth: 2
 
-
+   localization
+   repository_interfaces
 

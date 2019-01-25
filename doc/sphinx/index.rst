@@ -19,16 +19,14 @@ to the metadata sources.
 .. toctree::
    :maxdepth: 2
 
-   overview
    api
-   requirements
    install
    apikeys
    deploying
    datasources
    datamodel
    development
-   modules
+   modules/modules
    docs
 
 

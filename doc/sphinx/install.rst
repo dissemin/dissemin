@@ -24,7 +24,7 @@ First, install `Vagrant <https://www.vagrantup.com>`_ and one of the supported p
 Dissemin will be available on your host machine at `localhost:8080`.
 
 Note that, when rebooting the Vagrant VM / container, the Dissemin server will
-not be started automatically. To do it, once you have booted the machine, run 
+not be started automatically. To do it, once you have booted the machine, run
 ``vagrant ssh`` and then ``cd /dissemin`` and ``./launch.sh`` and wait for some
 time until it says that Dissemin has started. The same holds for other backend
 services, you can check the ``Vagrantfile`` and ``provisioning/provision.sh``
@@ -174,6 +174,7 @@ The page `localhost:8080/admin/deposit/repository/` lists the currently register
 interfaces and allows you to add one.
 
 To add a repository, you need the following settings:
+
 - A name, description and logo. They will be shown to the user on the deposit page.
 - A protocol: this is the internal name of the protocol Dissemin should use
   to perform the deposit. For now, only `ZenodoProtocol` is available: it can

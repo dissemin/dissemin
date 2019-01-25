@@ -234,7 +234,7 @@ class AOFRFormatter(MetadataFormatter):
             author_structure, depositing_id):
         """
         :param author_structure: the structure id of the depositing
-author
+            author
         :param depositing_id: the index of the depositing author
             in the list of authors
         """
