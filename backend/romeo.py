@@ -275,7 +275,7 @@ def get_or_create_publisher(romeo_xml_description):
     url = None
     try:
         url = nstrip(xml.findall('./homeurl')[0].text)
-    except KeyError, IndexError:
+    except (KeyError, IndexError):
         pass
 
     preprint = None

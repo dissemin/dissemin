@@ -28,6 +28,7 @@ from django.http import HttpResponseNotFound
 from django.shortcuts import get_object_or_404
 from django.views.decorators.http import require_POST
 from djgeojson.views import GeoJSONLayerView
+from celery.exceptions import TimeoutError
 from jsonview.decorators import json_view
 from papers.models import Paper
 from papers.models import Researcher
