@@ -9,6 +9,10 @@ from .common import *
 DEBUG = True
 DEBUG_TOOLBAR_CONFIG = {'SHOW_TOOLBAR_CALLBACK': lambda r: True}
 
+# They are the domains under which your dissemin instance should
+# be reachable. Leave empty if you run on localhost.
+ALLOWED_HOSTS = []
+
 # If you do not want to use Celery,
 # use this setting to run all asynchronous tasks in the main process
 # (celery will still be required as a dependency, but you do not need

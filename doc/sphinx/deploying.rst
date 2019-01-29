@@ -21,7 +21,7 @@ Production settings
 
 As any Django website, Dissemin can be served by various web servers.
 These settings are not specific to dissemin itself so you should refer
-to `the relevant Django documentation <https://docs.djangoproject.com/en/1.8/howto/deployment/>`_.
+to `the relevant Django documentation <https://docs.djangoproject.com/en/1.11/howto/deployment/>`_.
 
 No matter what web server you use,
 you need to run ``python manage.py collectstatic`` to copy the static files from

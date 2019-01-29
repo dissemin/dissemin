@@ -63,6 +63,7 @@ dependencies::
    virtualenv .virtualenv
    source .virtualenv/bin/activate
    pip install --upgrade setuptools
+   pip install --upgrade pip
    pip install -r requirements.txt
 
 Set up the database
@@ -98,13 +99,17 @@ Install and configure the search engine
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 dissem.in uses the `Elasticsearch <https://www.elastic.co/products/elasticsearch>`_
-backend for Haystack.
+backend for Haystack. The current supported version is **5.x.x**.
 
 `Download Elasticsearch <https://www.elastic.co/downloads/elasticsearch>`_
 and unzip it::
 
     cd elasticsearch-<version>
     ./bin/elasticsearch    # Add -d to start elasticsearch in the background
+
+Alternatively you can install the .rpm or .deb package, see the documentation of Elasticsearch for further information.
+
+Make sure to set the initial `heapsize https://www.elastic.co/guide/en/elasticsearch/reference/5.6/heap-size.html` accordingly.
 
 Configure the application for development or production
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -119,7 +124,7 @@ Finally, create a file ``dissemin/settings/__init__.py`` with this content::
 
 Depending on your environment, you might want to override ``STATIC_ROOT`` and ``MEDIA_ROOT``, in your ``__init__.py`` file. Moreover, you have to create these locations.
 
-Don't forget to edit ``ALLOWED_HOSTS`` for production.
+Don't forget to edit ``ALLOWED_HOSTS`` for production or if your django server does not run on *localhost:8000*.
 
 Common settings are available at ``dissemin/settings/common.py``.
 Travis specific settings are available at ``dissemin/settings/travis.py``.
@@ -133,6 +138,15 @@ This is done by applying migrations::
 
 (this should be done every time the source code is updated).
 Then you can move on to :ref:`page-deploying`.
+
+Populate the database with test data
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Dissemin comes with some sample data for development. You can use djangos *loaddata*::
+
+    django-admin loaddata
+
+Note that this overwrites existing primary keys in your database.
 
 Populate the search index
 ~~~~~~~~~~~~~~~~~~~~~~~~~
