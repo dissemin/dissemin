@@ -1,6 +1,7 @@
 # Translation of Dissemin website to Greek (Ελληνικά)
 # Exported from translatewiki.net
 #
+# Author: Becks
 # Author: KATRINE1992
 # Author: Nikosgranturismogt
 # --
@@ -10,12 +11,12 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-11-22 06:25:32+0000\n"
+"PO-Revision-Date: 2019-01-30 22:39:36+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: el\n"
-"X-Generator: MediaWiki 1.33.0-alpha; Translate 2018-11-05\n"
+"X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: deposit/forms.py:41
@@ -1763,7 +1764,7 @@ msgstr "Όλα τα είδη άλλων τεχνικών προβλημάτων.
 #: templates/dissemin/faq.html:333
 #, python-format
 msgid "Please first check whether the paper is available in one of <a href=\"%(sources_url)s\">our sources</a>. If it is not, Dissemin cannot harvest it, and you should report the problem to the source where it should appear."
-msgstr "Παρακαλώ ελέγξτε εάν το έγγραφο είναι διαθέσιμο σε <a href=''%(sources_url)''s> οι πηγές μας </a>.Αν όχι, το Dissemin δεν μπορεί να το συγκεντρώσει, και θα πρέπει α αναφέρει το πρόβλημα στην πηγή που πρέπει να εμφανιστεί."
+msgstr "Παρακαλώ ελέγξτε εάν το έγγραφο είναι διαθέσιμο σε <a href=\\\"%(sources_url)s\\\"> οι πηγές μας </a>.Αν όχι, το Dissemin δεν μπορεί να το συγκεντρώσει, και θα πρέπει α αναφέρει το πρόβλημα στην πηγή που πρέπει να εμφανιστεί."
 
 #: templates/dissemin/faq.html:341
 msgid "Now, if your paper does appear in one of the sources but not on Dissemin, please check that your name is not spelt incorrectly on the source, and that the spelling matches your ORCID record. If there is a misspelling, again, you should report the problem to the source that contains the mistake."

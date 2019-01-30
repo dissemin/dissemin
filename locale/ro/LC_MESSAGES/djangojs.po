@@ -1,100 +1,100 @@
-# Translation of Dissemin papers to Finnish (suomi)
+# Translation of Dissemin papers to Romanian (română)
 # Exported from translatewiki.net
 #
-# Author: Kly
-# Author: Pyscowicz
+# Author: MSClaudiu
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2019-01-30 22:39:36+0000\n"
+"PO-Revision-Date: 2019-01-30 22:39:37+0000\n"
 "X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fi\n"
+"Language: ro\n"
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ( (n == 0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2 );\n"
 
 #: doc/sphinx/_build/html/_static/doctools.js:167
 msgid "Permalink to this headline"
-msgstr "Ikilinkki tähän otsikkoon"
+msgstr "Permalink la acest titlu"
 
 #: doc/sphinx/_build/html/_static/doctools.js:173
 msgid "Permalink to this definition"
-msgstr "Ikilinkki tähän määritelmään"
+msgstr "Permalink la această definiție"
 
 #: doc/sphinx/_build/html/_static/doctools.js:206
 msgid "Hide Search Matches"
-msgstr "Piilota hakutulokset"
+msgstr "Ascundeți potrivirile de căutare"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:400
 msgid "Searching"
-msgstr "Haetaan"
+msgstr "Se caută..."
 
 #: doc/sphinx/_build/html/_static/searchtools.js:405
 msgid "Preparing search..."
-msgstr "Valmistellaan hakua..."
+msgstr "Pregătiți căutarea ..."
 
 #: doc/sphinx/_build/html/_static/searchtools.js:566
 msgid "Search Results"
-msgstr "Hakutulokset"
+msgstr "Rezultatele căutării"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:568
 msgid "Your search did not match any documents. Please make sure that all words are spelled correctly and that you've selected enough categories."
-msgstr "Haulla ei löytynyt yhtään artikkelia. Varmista, että kaikki sanat on kirjoitettu oikein ja että olet valinnut tarpeeksi luokkia."
+msgstr "Căutarea dvs. nu a corespuns nici unui document. Asigurați-vă că toate cuvintele sunt scrise corect și că ați selectat suficiente categorii."
 
 #: doc/sphinx/_build/html/_static/searchtools.js:570
 #, javascript-format
 msgid "Search finished, found %s page(s) matching the search query."
-msgstr "Haku päättyi, löytyi %s sivu(a), joka vastaa hakulauseketta."
+msgstr "Căutarea a fost terminată, au fost găsite %s paginile care corespund interogării de căutare."
 
 #: doc/sphinx/_build/html/_static/searchtools.js:623
 msgid ", in "
-msgstr ""
+msgstr ", în "
 
 #: doc/sphinx/_build/html/_static/sidebar.js:77
 msgid "Expand sidebar"
-msgstr "Laajenna sivupalkki"
+msgstr "Extindeți bara laterală"
 
 #: doc/sphinx/_build/html/_static/sidebar.js:90
 #: doc/sphinx/_build/html/_static/sidebar.js:118
 msgid "Collapse sidebar"
-msgstr "Kutista sivupalkki"
+msgstr "Restrângeți bara laterală"
 
 #: papers/static/papers/refresh.js:35
 msgid "Do not show this message anymore"
-msgstr "Älä näytä tätä viestiä uudelleen"
+msgstr "Nu mai afișa acest mesaj"
 
 #: papers/static/papers/refresh.js:66
 msgid "No author"
-msgstr "Ei kirjoittajaa"
+msgstr "Niciun autor"
 
 #: papers/static/papers/refresh.js:68
 msgid "No title"
-msgstr "Ei otsikkoa"
+msgstr "Niciun titlu"
 
 #: papers/static/papers/refresh.js:70
 msgid "Invalid publication date"
-msgstr "Virheellinen julkaisupäivä."
+msgstr "Data publicării incorectă."
 
 #: papers/static/papers/refresh.js:105
 msgid "We ignored %(count)s paper from your ORCiD profile."
 msgid_plural "We ignored %(count)s papers from your ORCiD profile."
-msgstr[0] "Emme huomioineet %(count)s artikkelia ORCiD-profiilistasi."
-msgstr[1] "Emme huomioineet %(count)s artikkelia ORCiD-profiilistasi."
+msgstr[0] "Am ignorat %(count) lucrările de la profilul ORCiD."
+msgstr[1] "Am ignorat %(count)s lucrările de la profilul ORCiD."
+msgstr[2] ""
 
 #: papers/static/papers/refresh.js:115
 msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
-msgstr "\"%(name)s\" jätettiin huomiotta seuraavasta syystä: %(reason)s"
+msgstr "\"%(name)s\" a fost ignorată din următorul motiv: %(reason)s"
 
 #: papers/static/papers/refresh.js:123
 msgid "A paper was ignored, because it has no name"
-msgstr "Asiakirjaa ei otettu huomioon, koska sillä ei ole nimeä"
+msgstr "O lucrare a fost ignorată, pentru că nu are nume"
 
 #: papers/static/papers/refresh.js:135 papers/static/papers/refresh.js:163
 msgid "Show more information"
-msgstr "Näytä lisää tietoja"
+msgstr "Adăugare mai multe informații"
 
 #: papers/static/papers/refresh.js:160
 msgid "Show less information"
-msgstr "Näytä vähemmän tietoja"
+msgstr "Afișați mai puține informații"
 
