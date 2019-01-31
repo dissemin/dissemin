@@ -99,7 +99,7 @@ Install and configure the search engine
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 dissem.in uses the `Elasticsearch <https://www.elastic.co/products/elasticsearch>`_
-backend for Haystack. The current supported version is **5.x.x**.
+backend for Haystack. The current supported version is **2.x.x**.
 
 `Download Elasticsearch <https://www.elastic.co/downloads/elasticsearch>`_
 and unzip it::
@@ -109,7 +109,7 @@ and unzip it::
 
 Alternatively you can install the .rpm or .deb package, see the documentation of Elasticsearch for further information.
 
-Make sure to set the initial `heapsize https://www.elastic.co/guide/en/elasticsearch/reference/5.6/heap-size.html` accordingly.
+Make sure to set the initial `heapsize <https://www.elastic.co/guide/en/elasticsearch/reference/2.4/setup-configuration.html#_environment_variables>` accordingly.
 
 Configure the application for development or production
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -124,7 +124,7 @@ Finally, create a file ``dissemin/settings/__init__.py`` with this content::
 
 Depending on your environment, you might want to override ``STATIC_ROOT`` and ``MEDIA_ROOT``, in your ``__init__.py`` file. Moreover, you have to create these locations.
 
-Don't forget to edit ``ALLOWED_HOSTS`` for production or if your django server does not run on *localhost:8000*.
+Don't forget to edit ``ALLOWED_HOSTS`` for production or if your django server does not run on *localhost:8080*.
 
 Common settings are available at ``dissemin/settings/common.py``.
 Travis specific settings are available at ``dissemin/settings/travis.py``.
