@@ -10,7 +10,7 @@ Development settings
 --------------------
 
 Simply run ``./launch.sh``. This uses the default Django server (unsuitable
-for production) and serves the website locally on the port 8080.
+for production) and serves the website locally on the port 8080. Note that the standard port for django-admins runserver-command is _8000_, but this ensures compatibility with the Vagrant installation.
 
 This runs with ``DEBUG = True``, which means that Django will report to the user
 any internal error in a transparent way. This is useful to debug your installation
