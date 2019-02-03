@@ -67,9 +67,9 @@ def fetch_on_orcid_login(sender, **kwargs):
     # Only prefetch if the social login refers to a valid ORCID account
     orcid = validate_orcid(account.uid)
     if not orcid:
-        raise ImmediateHttpResponse(HttpResponse(
-            'Invalid ORCID identifier.'
-        ))
+        raise ImmediateHttpResponse(
+            render(kwargs['request'], 'dissemin/error.html', {'message':_('Invalid ORCID identifier.')})
+        )
 
     profile = None # disabled account.extra_data because of API version mismatches
     user = None
@@ -78,9 +78,10 @@ def fetch_on_orcid_login(sender, **kwargs):
     r = Researcher.get_or_create_by_orcid(orcid, profile, user)
 
     if not r: # invalid ORCID profile (e.g. no name provided)
-        raise ImmediateHttpResponse(HttpResponse(
-            'Dissemin requires access to your ORCID name.'
-        ))
+        raise ImmediateHttpResponse(
+            render(kwargs['request'], 'dissemin/error.html', {'message':
+            _('Dissemin requires access to your ORCID name, which is marked as private in your ORCID profile.')})
+        )
 
     if r.user_id is None and user is not None:
         r.user = user
