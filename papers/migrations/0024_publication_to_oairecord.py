@@ -69,7 +69,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='oairecord',
             name='journal',
-            field=models.ForeignKey(blank=True, to='publishers.Journal', null=True),
+            field=models.ForeignKey(blank=True, to='publishers.Journal', null=True, on_delete=models.CASCADE),
         ),
         migrations.AddField(
             model_name='oairecord',
@@ -89,7 +89,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='oairecord',
             name='publisher',
-            field=models.ForeignKey(blank=True, to='publishers.Publisher', null=True),
+            field=models.ForeignKey(blank=True, to='publishers.Publisher', null=True, on_delete=models.CASCADE),
         ),
         migrations.AddField(
             model_name='oairecord',

@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='depositrecord',
             name='repository',
-            field=models.ForeignKey(default=0, to='deposit.Repository'),
+            field=models.ForeignKey(default=0, to='deposit.Repository', on_delete=models.CASCADE),
             preserve_default=False,
         ),
     ]

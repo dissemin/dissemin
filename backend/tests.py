@@ -23,7 +23,6 @@ from __future__ import unicode_literals
 import datetime
 import unittest
 
-
 from backend.crossref import CrossRefAPI
 from backend.maintenance import cleanup_names
 from backend.maintenance import update_paper_statuses
@@ -33,22 +32,19 @@ from backend.romeo import find_journal_in_model
 from backend.romeo import perform_romeo_query
 from backend.tasks import fetch_everything_for_researcher
 from django.core.exceptions import ObjectDoesNotExist
-from django.core.management import call_command
-from django.test import override_settings
 from django.test import TestCase
-import haystack
+import pytest
+
 from lxml import etree
 from papers.baremodels import BareAuthor
 from papers.baremodels import BareName
 from papers.baremodels import BarePaper
-from papers.models import Department
-from papers.models import Institution
 from papers.models import Name
 from papers.models import OaiRecord
-from papers.models import OaiSource
 from papers.models import Paper
 from papers.models import Researcher
 from publishers.models import Journal
+from papers.testorcid import OrcidProfileStub
 
 TEST_INDEX = {
     'default': {
@@ -58,6 +54,9 @@ TEST_INDEX = {
     },
 }
 
+def get_researcher_by_name(first, last):
+    n = Name.lookup_name((first, last))
+    return Researcher.objects.get(name=n)
 
 # SHERPA/RoMEO interface
 class RomeoTest(TestCase):
@@ -102,7 +101,7 @@ class RomeoTest(TestCase):
     def test_too_long(self):
         terms = {'jtitle': ("Volume 3: Industrial Applications; Modeling "
                             "for Oil and Gas, Control and Validation, Estimation, and Control of "
-                            "Automotive Systems; Multi-Agent and Networked Systems; Control System "
+                            "Automotive Systems; "
                             "Design; Physical Human-Robot Interaction; "
                             "Rehabilitation Robotics; Sensing and Actuation for Control; Biomedical "
                             "Systems; Time Delay Systems and Stability; Unmanned Ground and Surface "
@@ -128,41 +127,6 @@ class RomeoTest(TestCase):
         self.assertEqual(fetch_journal(
             {'issn': '0036-8075'}).publisher.oa_status, 'OK')
 
-# Generic test case that requires some example DB
-
-
-@override_settings(HAYSTACK_CONNECTIONS=TEST_INDEX)
-class PrefilledTest(TestCase):
-    fixtures = ['test_dump.json']
-
-    @classmethod
-    def setUpTestData(self):
-        if self is PrefilledTest:
-            raise unittest.SkipTest("Base test")
-        haystack.connections.reload('default')
-        call_command('update_index', verbosity=0)
-        self.i = Institution.objects.get(name='ENS')
-        self.d = Department.objects.get(name='Chemistry dept')
-        self.di = Department.objects.get(name='Comp sci dept')
-
-        def get_by_name(first, last):
-            n = Name.lookup_name((first, last))
-            return Researcher.objects.get(name=n)
-        self.r1 = get_by_name('Isabelle', 'Aujard')
-        self.r2 = get_by_name('Ludovic', 'Jullien')
-        self.r3 = get_by_name('Antoine', 'Amarilli')
-        self.r4 = get_by_name('Antonin', 'Delpeuch')
-        self.r5 = get_by_name('Terence', 'Tao')
-        self.hal = OaiSource.objects.get(identifier='hal')
-        self.arxiv = OaiSource.objects.get(identifier='arxiv')
-        self.lncs = Journal.objects.get(issn='0302-9743')
-        self.acm = Journal.objects.get(issn='1529-3785').publisher
-
-    @classmethod
-    def tearDownClass(self):
-        haystack.connections['default'].get_backend().clear()
-        super(PrefilledTest, self).tearDownClass()
-
 
 def check_paper(asserter, paper):
     """
@@ -176,21 +140,18 @@ def check_paper(asserter, paper):
 
 # Generic test series for a PaperSource instance
 
+@pytest.mark.usefixtures("load_test_data")
+class PaperSourceTest(TestCase):
 
-class PaperSourceTest(PrefilledTest):
-
-    @classmethod
-    def setUpClass(self):
-        if self is PaperSourceTest:
+    def setUp(self):
+        if type(self) is PaperSourceTest:
             raise unittest.SkipTest("Base test")
-        super(PaperSourceTest, self).setUpClass()
         self.source = None
         self.researcher = self.r4
 
     def test_fetch(self):
-        papers = list(self.source.fetch_bare(self.researcher))
+        papers = list(self.source.fetch_papers(self.researcher))
         for paper in papers:
-            check_paper(self, paper)
             paper = Paper.from_bare(paper)
         self.assertTrue(len(papers) > 1)
         self.check_papers(papers)
@@ -206,8 +167,8 @@ class PaperSourceTest(PrefilledTest):
         papers = list(self.source.fetch_papers(emptyres))
         self.assertEqual(papers, [])
 
-
-class PaperMethodsTest(PrefilledTest):
+@pytest.mark.usefixtures("load_test_data")
+class PaperMethodsTest(TestCase):
 
     def test_update_authors(self):
         for old_author_names, new_author_names, final in [
@@ -243,15 +204,15 @@ class PaperMethodsTest(PrefilledTest):
         self.assertEqual(Paper.objects.get(pk=paper.pk).bare_author_names(),
                          [('Frank', 'Rodrigo'), ('A. L.', 'Johnson'), ('Pete', 'Blunsom')])
 
-
-class TasksTest(PrefilledTest):
+class TasksTest(TestCase):
 
     def test_fetch_everything_with_orcid(self):
-        r = Researcher.get_or_create_by_orcid('0000-0002-6561-5642')
+        profile = OrcidProfileStub('0000-0002-9658-1473', instance='orcid.org')
+        r = Researcher.get_or_create_by_orcid('0000-0002-9658-1473', profile=profile)
         fetch_everything_for_researcher(r.pk)
 
-
-class MaintenanceTest(PrefilledTest):
+@pytest.mark.usefixtures("load_test_data")
+class MaintenanceTest(TestCase):
 
     @classmethod
     def setUpClass(self):

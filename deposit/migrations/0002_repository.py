@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
                 ('password', models.CharField(max_length=128, null=True, blank=True)),
                 ('api_key', models.CharField(max_length=256, null=True, blank=True)),
                 ('endpoint', models.CharField(max_length=256, null=True, blank=True)),
-                ('oaisource', models.ForeignKey(to='papers.OaiSource')),
+                ('oaisource', models.ForeignKey(to='papers.OaiSource', on_delete=models.CASCADE)),
             ],
             options={
             },

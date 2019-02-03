@@ -25,9 +25,9 @@ from deposit.sword.protocol import SwordProtocol
 from unittest import expectedFailure
 
 class SwordProtocolTest(ProtocolTest):
-    @classmethod
-    def setUpClass(self):
-        super(SwordProtocolTest, self).setUpClass()
+
+    def setUp(self):
+        super(SwordProtocolTest, self).setUp()
         self.repo.username = 'dspacedemo+submit@gmail.com'
         self.repo.password = 'dspace'
         self.repo.endpoint = 'http://demo.dspace.org/swordv2/servicedocument'

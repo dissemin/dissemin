@@ -21,24 +21,27 @@ Tests statistics update and statistics consistency.
 """
 
 from statistics.models import BareAccessStatistics
+from django.core.management import call_command
+import haystack
+import pytest
+from django.test import TestCase
 
-from backend.orcid import OrcidPaperSource
-from backend.tests import PrefilledTest
 from papers.models import Paper
 from papers.models import PaperWorld
-
-
-class StatisticsTest(PrefilledTest):
-
-    @classmethod
-    def setUpClass(self):
-        super(StatisticsTest, self).setUpClass()
-        cr_api = OrcidPaperSource()
-        cr_api.fetch_and_save(self.r3)
-
-    @classmethod
-    def tearDownClass(cls):
-        pass
+        
+@pytest.mark.usefixtures('fetch_crossref_profile')
+class StatisticsTest(TestCase):
+    
+    @pytest.fixture(autouse=True)
+    def haystack_index(self, django_db_blocker):
+        with django_db_blocker.unblock():
+            self.r3.institution = self.i
+            self.r3.department = self.d
+            self.r3.save()
+            haystack.connections.reload('default')
+            call_command('update_index', verbosity=0)
+            yield
+            haystack.connections['default'].get_backend().clear()
 
     def validStats(self, stats):
         self.assertTrue(stats.check_values())
@@ -59,8 +62,6 @@ class StatisticsTest(PrefilledTest):
         self.assertEqual(bare_stats.num_tot, stats.num_tot)
 
     def test_department(self):
-        self.r3.department = self.d
-        self.r3.save()
         self.d.update_stats()
         self.validStats(self.d.stats)
 

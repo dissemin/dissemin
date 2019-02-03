@@ -1,11 +1,14 @@
 # -*- encoding: utf-8 -*-
 from __future__ import unicode_literals
 
-from backend.tests import PrefilledTest
+import pytest
+import django.test
 from backend.oadoi import OadoiAPI
 from papers.models import Paper
 
-class OadoiAPITest(PrefilledTest):
+@pytest.mark.usefixtures("load_test_data")
+class OadoiAPITest(django.test.TestCase):
+    
     def test_ingest_dump(self):
         doi = '10.1016/j.reval.2012.02.143'
         p = Paper.create_by_doi(doi)

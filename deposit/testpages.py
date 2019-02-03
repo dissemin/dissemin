@@ -19,8 +19,9 @@
 #
 
 from papers.testpages import RenderingTest
+import pytest
 
-
+@pytest.mark.usefixtures("load_test_data")
 class DepositPagesTest(RenderingTest):
 
     @classmethod

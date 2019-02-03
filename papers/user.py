@@ -25,4 +25,4 @@ def is_admin(user):
 
 
 def is_authenticated(user):
-    return user.is_authenticated()
+    return user.is_authenticated

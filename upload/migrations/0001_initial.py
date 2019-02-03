@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 ('orig_name', models.CharField(max_length=1024)),
                 ('file', models.FileField(upload_to='uploads/%Y/%m/%d')),
                 ('thumbnail', models.FileField(upload_to='thumbnails/')),
-                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
+                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)),
             ],
             options={
             },

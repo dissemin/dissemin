@@ -21,13 +21,15 @@
 from __future__ import unicode_literals
 
 import json
+import pytest
 
-from backend.tests import PrefilledTest
+from backend.tests import get_researcher_by_name
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 import django.test
 import unittest
 from papers.models import Paper
+from dissemin.celery import app as celery_app
 
 
 # TODO TO BE TESTED
@@ -41,11 +43,9 @@ from papers.models import Paper
 #)
 
 
-class JsonRenderingTest(PrefilledTest):
+class JsonRenderingTest(django.test.TestCase):
 
-    @classmethod
-    def setUpClass(self):
-        super(JsonRenderingTest, self).setUpClass()
+    def setUp(self):
         self.client = django.test.Client()
 
     def checkJson(self, resp, expected_status=200):
@@ -79,14 +79,14 @@ class JsonRenderingTest(PrefilledTest):
             del urlargs['postkwargs']
         return self.ajaxPost(reverse(*args, **urlargs), kwargs['postargs'], **kwargs.get('postkwargs', {}))
 
-
+@pytest.mark.usefixtures("load_test_data")
 class PaperAjaxTest(JsonRenderingTest):
-
-    @classmethod
-    def setUpClass(cls):
-        super(PaperAjaxTest, cls).setUpClass()
+    
+    def setUp(self):
+        super(PaperAjaxTest, self).setUp()
         u = User.objects.create_user('terry', 'pit@mat.io', 'yo')
         u.save()
+        self.r1 = get_researcher_by_name('Isabelle', 'Aujard')
 
     def test_researcher_papers(self):
         page = self.getPage('researcher',
@@ -129,10 +129,11 @@ class PublisherAjaxTest(JsonRenderingTest):
 
     def setUp(self):
         super(PublisherAjaxTest, self).setUp()
-        self.papers = map(Paper.create_by_doi,
-                          ['10.1038/526052a', '10.1038/nchem.1829', '10.1038/nchem.1365'])
+        self.papers = map(Paper.create_by_doi, 
+                        ['10.1109/TFUZZ.2018.2852307', '10.1109/TFUZZ.2018.2857720'])
         self.publisher = self.papers[0].publications[0].publisher
-        self.assertEqual(self.publisher.name, 'Nature Publishing Group')
+        self.assertEqual(self.publisher, self.papers[1].publications[0].publisher)
+        celery_app.conf.task_always_eager = True # run all tasks synchronously
 
     def test_logged_out(self):
         self.client.logout()
@@ -142,6 +143,7 @@ class PublisherAjaxTest(JsonRenderingTest):
 
     def test_change_publisher_status(self):
         self.client.login(username='patrick', password='yo')
+        self.assertEqual('OK', self.publisher.oa_status)
         p = self.postPage('ajax-changePublisherStatus',
                           postargs={'pk': self.publisher.pk,
                                     'status': 'OA'})

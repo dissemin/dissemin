@@ -1,4 +1,5 @@
 from dissemin.settings import *
+from dissemin.celery import app
 
 DEBUG_TOOLBAR_CONFIG = {'SHOW_TOOLBAR_CALLBACK': lambda r: False}
-CELERY_ALWAYS_EAGER = True
+app.conf.task_always_eager = True

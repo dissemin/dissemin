@@ -49,7 +49,7 @@ class Migration(migrations.Migration):
                 ('postprint', models.CharField(default='unknown', max_length=32, choices=[('can', 'Allowed'), ('cannot', 'Forbidden'), ('restricted', 'Restricted'), ('unclear', 'Unclear'), ('unknown', 'Unknown')])),
                 ('pdfversion', models.CharField(default='unknown', max_length=32, choices=[('can', 'Allowed'), ('cannot', 'Forbidden'), ('restricted', 'Restricted'), ('unclear', 'Unclear'), ('unknown', 'Unknown')])),
                 ('oa_status', models.CharField(default='UNK', max_length=32, choices=[('OA', 'Open access'), ('OK', 'Allows pre/post prints'), ('NOK', 'Forbids pre/post prints'), ('UNK', 'Policy unclear')])),
-                ('stats', models.ForeignKey(to='statistics.AccessStatistics', null=True)),
+                ('stats', models.ForeignKey(to='statistics.AccessStatistics', null=True, on_delete=models.CASCADE)),
             ],
             options={
                 'db_table': 'papers_publisher',
@@ -61,7 +61,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('text', models.CharField(max_length=1024)),
-                ('publisher', models.ForeignKey(to='publishers.Publisher')),
+                ('publisher', models.ForeignKey(to='publishers.Publisher', on_delete=models.CASCADE)),
             ],
             options={
                 'db_table': 'papers_publishercondition',
@@ -74,7 +74,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('text', models.CharField(max_length=256)),
                 ('url', models.URLField()),
-                ('publisher', models.ForeignKey(to='publishers.Publisher')),
+                ('publisher', models.ForeignKey(to='publishers.Publisher', on_delete=models.CASCADE)),
             ],
             options={
                 'db_table': 'papers_publishercopyrightlink',
@@ -87,7 +87,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('text', models.CharField(max_length=256)),
                 ('applies_to', models.CharField(max_length=32)),
-                ('publisher', models.ForeignKey(to='publishers.Publisher')),
+                ('publisher', models.ForeignKey(to='publishers.Publisher', on_delete=models.CASCADE)),
             ],
             options={
                 'db_table': 'papers_publisherrestrictiondetail',
@@ -97,19 +97,19 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='journal',
             name='publisher',
-            field=models.ForeignKey(to='publishers.Publisher'),
+            field=models.ForeignKey(to='publishers.Publisher', on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='journal',
             name='stats',
-            field=models.ForeignKey(to='statistics.AccessStatistics', null=True),
+            field=models.ForeignKey(to='statistics.AccessStatistics', null=True, on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='aliaspublisher',
             name='publisher',
-            field=models.ForeignKey(to='publishers.Publisher'),
+            field=models.ForeignKey(to='publishers.Publisher', on_delete=models.CASCADE),
             preserve_default=True,
         ),
     ]

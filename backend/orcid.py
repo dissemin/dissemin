@@ -52,14 +52,14 @@ def orcid_oai_source():
 
 class OrcidPaperSource(PaperSource):
 
-    def fetch_papers(self, researcher):
+    def fetch_papers(self, researcher, profile=None):
         if not researcher:
             return
         self.researcher = researcher
         if researcher.orcid:
             if researcher.empty_orcid_profile == None:
                 self.update_empty_orcid(researcher, True)
-            return self.fetch_orcid_records(researcher.orcid)
+            return self.fetch_orcid_records(researcher.orcid, profile=profile)
         return []
 
     def create_paper(self, work):
@@ -164,8 +164,6 @@ class OrcidPaperSource(PaperSource):
         try:
             if profile is None:
                 profile = OrcidProfile(orcid_id=orcid_id)
-            else:
-                profile = OrcidProfile(json=profile)
         except MetadataSourceException as e:
             print e
             return
@@ -225,6 +223,25 @@ class OrcidPaperSource(PaperSource):
         self.warn_user_of_ignored_papers(ignored_papers)
         if ignored_papers:
             print('Warning: Total ignored papers: %d' % (len(ignored_papers)))
+    
+    def fetch_and_save(self, researcher, profile=None):
+        """
+        Fetch papers and save them to the database.
+
+        :param incremental: When set to true, papers are clustered
+            and commited one after the other. This is useful when
+            papers are fetched on the fly for an user.
+        """
+        count = 0
+        for p in self.fetch_papers(researcher, profile=profile):
+            try:
+                self.save_paper(p, researcher)
+            except ValueError:
+                continue
+            if self.max_results is not None and count >= self.max_results:
+                break
+
+            count += 1
 
 
     def bulk_import(self, directory, fetch_papers=True, use_doi=False):
@@ -253,7 +270,7 @@ class OrcidPaperSource(PaperSource):
                             orcid, profile, update=True)
                         if fetch_papers:
                             papers = self.fetch_orcid_records(orcid,
-                                profile=profile,
+                                profile=OrcidProfile(json=profile),
                                 use_doi=use_doi)
                             for p in papers:
                                 self.save_paper(p, r)

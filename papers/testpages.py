@@ -22,10 +22,9 @@
 from __future__ import unicode_literals
 
 import datetime
-
+import pytest
 import html5lib
 
-from backend.tests import PrefilledTest
 from django.core.urlresolvers import reverse
 import django.test
 from papers.baremodels import BareName
@@ -46,7 +45,7 @@ from papers.utils import overescaped_re
 #        url(r'^annotations/$', views.AnnotationsView.as_view(), name='annotations'),
 
 
-class RenderingTest(PrefilledTest):
+class RenderingTest(django.test.TestCase):
 
     def setUp(self):
         super(RenderingTest, self).setUp()
@@ -86,7 +85,7 @@ class RenderingTest(PrefilledTest):
     def checkUrl(self, url):
         self.checkHtml(self.client.get(url))
 
-
+@pytest.mark.usefixtures("load_test_data")
 class InstitutionPagesTest(RenderingTest):
 
     def test_dept(self):
@@ -96,7 +95,7 @@ class InstitutionPagesTest(RenderingTest):
     def test_univ(self):
         self.checkUrl(self.i.url)
 
-
+@pytest.mark.usefixtures("load_test_data")
 class PaperPagesTest(RenderingTest):
 
     def test_researcher(self):
@@ -167,6 +166,13 @@ class PaperPagesTest(RenderingTest):
             if p.is_orphan() and p.visible:
                 print p
             self.assertTrue(not p.is_orphan())
+            
+    def test_visible_paper(self):
+        """
+        By default, a paper accessed with its pk and slug is visible
+        """
+        p = Paper.create_by_doi('10.1007/978-3-642-14363-2_7')
+        self.checkPage('paper', kwargs={'pk': p.id, 'slug': p.slug})
 
     def test_invisible_paper(self):
         """
@@ -196,6 +202,8 @@ class PaperPagesTest(RenderingTest):
             '!@#$%^*()',
             [BareName.create('Jean', 'Saisrien')],
             datetime.date(2016, 7, 2))
+        p.visible = True # Force paper to be visible even if it an orphan
+        p.save()
         self.assertEqual(p.slug, '')
         self.checkPage('paper', args=[p.pk, p.slug])
 

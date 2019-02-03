@@ -77,11 +77,12 @@ class InstitutionTest(django.test.TestCase):
 class ResearcherTest(django.test.TestCase):
 
     def test_creation(self):
-        r = Researcher.create_by_name('Marie', 'Farge')
-        r2 = Researcher.create_by_name(' Marie', ' Farge')
+        r = Researcher.create_by_name('George', 'Banks')
+        r2 = Researcher.create_by_name(' George', ' Banks')
         self.assertNotEqual(r, r2)
 
-        r3 = Researcher.get_or_create_by_orcid('0000-0002-4445-8625')
+        r3 = Researcher.get_or_create_by_orcid('0000-0003-2306-6531',
+            instance='sandbox.orcid.org')
         self.assertNotEqual(r, r3)
 
     def test_empty_name(self):
@@ -126,8 +127,10 @@ class ResearcherTest(django.test.TestCase):
 
     def test_name_conflict(self):
         # Both are called "John Doe"
-        r1 = Researcher.get_or_create_by_orcid('0000-0001-7295-1671')
-        r2 = Researcher.get_or_create_by_orcid('0000-0001-5393-1421')
+        r1 = Researcher.get_or_create_by_orcid('0000-0002-3037-8851',
+            instance='sandbox.orcid.org')
+        r2 = Researcher.get_or_create_by_orcid('0000-0003-2295-9629',
+            instance='sandbox.orcid.org')
         self.assertNotEqual(r1, r2)
 
 

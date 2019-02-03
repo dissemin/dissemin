@@ -22,8 +22,8 @@ from datetime import date
 from io import BytesIO
 import unittest
 import django.test
+import pytest
 
-from backend.tests import PrefilledTest
 from deposit.models import Repository
 from deposit.protocol import DepositResult
 from deposit.protocol import RepositoryProtocol
@@ -48,7 +48,8 @@ class DepositTest(django.test.TestCase):
         # so that this task actually does something
         refresh_deposit_statuses()
 
-class ProtocolTest(PrefilledTest):
+@pytest.mark.usefixtures("load_test_data")
+class ProtocolTest(django.test.TestCase):
     """
     Set of generic tests that any protocol should pass.
     """
@@ -56,12 +57,10 @@ class ProtocolTest(PrefilledTest):
     def __init__(self, *args, **kwargs):
         super(ProtocolTest, self).__init__(*args, **kwargs)
 
-    @classmethod
     @override_settings(MEDIA_ROOT='mediatest/')
-    def setUpClass(self):
-        if self is ProtocolTest:
+    def setUp(self):
+        if type(self) is ProtocolTest:
             raise unittest.SkipTest("Base test")
-        super(ProtocolTest, self).setUpClass()
         self.p1 = Paper.get_or_create(
                 "This is a test paper",
                 [self.r1.name, self.r2.name, self.r4.name],
@@ -79,7 +78,7 @@ class ProtocolTest(PrefilledTest):
                 name='Repository Sandbox',
                 description='babebibobu',
                 logo=logo,
-                protocol=self.__name__,
+                protocol=type(self).__name__,
                 oaisource=self.oaisource)
         self.proto = None
         self.form = None

@@ -20,7 +20,7 @@
 #
 from __future__ import unicode_literals
 
-# import unittest
+from unittest import skip
 # from mock import Mock
 
 from papers.models import Paper
@@ -30,11 +30,13 @@ from deposit.tests import ProtocolTest
 from deposit.osf.protocol import OSFProtocol
 from deposit.protocol import DepositError
 
-
+@skip("""
+OSF tests are currently disabled as the OSF sandbox is no longer accessible.
+(2019-01-24)
+""")
 class OSFProtocolTest(ProtocolTest):
-    @classmethod
-    def setUpClass(self):
-        super(OSFProtocolTest, self).setUpClass()
+    def setUp(self):
+        super(OSFProtocolTest, self).setUp()
 
         # Fill here the details of your test repository
         self.repo.api_key = 'eJMuNoeFvKTIC5A6POx1nrmsiQoMZqwh'

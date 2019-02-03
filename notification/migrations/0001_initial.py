@@ -36,18 +36,18 @@ class Migration(migrations.Migration):
             name='NotificationArchive',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('notification', models.ForeignKey(to='notification.Notification')),
-                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
+                ('notification', models.ForeignKey(to='notification.Notification', on_delete=models.CASCADE)),
+                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)),
             ],
         ),
         migrations.AddField(
             model_name='inbox',
             name='notification',
-            field=models.ForeignKey(to='notification.Notification'),
+            field=models.ForeignKey(to='notification.Notification', on_delete=models.CASCADE),
         ),
         migrations.AddField(
             model_name='inbox',
             name='user',
-            field=models.ForeignKey(to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE),
         ),
     ]

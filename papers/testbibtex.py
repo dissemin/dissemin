@@ -22,8 +22,14 @@ from __future__ import unicode_literals
 
 import unittest
 
-from papers.bibtex import parse_authors_list, parse_bibtex
+from papers.bibtex import parse_authors_list
+from papers.bibtex import parse_bibtex
 
+class ParseBibTexTest(unittest.TestCase):
+    def test_no_newlines(self):
+        bibtex = "@article{DBLP:journals/corr/abs-1804-07832, author= {Antonin Delpeuch and Jamie Vicary}, title= {Normal forms for planar connected string diagrams}, journal= {CoRR}, volume= {abs/1804.07832}, year= {2018}, url= {http://arxiv.org/abs/1804.07832}, archivePrefix= {arXiv}, eprint= {1804.07832}, timestamp= {Wed, 02 May 2018 15:55:01 +0200}, biburl= {https://dblp.org/rec/bib/journals/corr/abs-1804-07832}, bibsource= {dblp computer science bibliography, https://dblp.org}}"
+        rec = parse_bibtex(bibtex)
+        self.assertEqual(rec['author'], [('Antonin','Delpeuch'), ('Jamie','Vicary')])
 
 class ParseAuthorsListTest(unittest.TestCase):
     def test_simple(self):

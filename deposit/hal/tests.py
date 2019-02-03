@@ -40,9 +40,8 @@ from backend.oai import get_proaixy_instance
 
 class AOFRTest(TestCase):
 
-    @classmethod
-    def setUpClass(cls):
-        super(AOFRTest, cls).setUpClass()
+    def setUp(self):
+        super(AOFRTest, self).setUp()
 
         # This currently fails and is unused
 
@@ -72,8 +71,8 @@ hal-preprod. Feel free to reactivate once this has been solved.
 """)
 class HALProtocolTest(ProtocolTest):
 
-    def setUpClass(self):
-        super(HALProtocolTest, self).setUpClass()
+    def setUp(self):
+        super(HALProtocolTest, self).setUp()
         self.repo.username = 'test_ws'
         self.repo.password = 'test'
         self.repo.endpoint = 'https://api-preprod.archives-ouvertes.fr/sword/'

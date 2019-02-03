@@ -23,13 +23,10 @@ from __future__ import unicode_literals
 import requests
 
 from django.conf import settings
-from django.utils.http import urlencode
 from django.utils.functional import cached_property
-from lxml import etree
 from papers.errors import MetadataSourceException
 from papers.name import normalize_name_words
 from papers.name import parse_comma_name
-from papers.name import shallower_name_similarity
 from papers.name import most_similar_author
 from papers.utils import jpath
 from papers.utils import urlize
@@ -105,7 +102,7 @@ class OrcidProfile(object):
         if self.instance not in ['orcid.org', 'sandbox.orcid.org']:
             raise ValueError('Unexpected instance')
 
-        if orcid_id is not None:
+        if orcid_id is not None and not json:
             self.fetch()
 
     def __getitem__(self, key):
@@ -154,7 +151,7 @@ class OrcidProfile(object):
             self.json = parsed
         except (requests.exceptions.HTTPError, ValueError):
             raise MetadataSourceException(
-                'The ORCiD {id} could not be found'.format(id=self.id))
+                'The ORCiD {id} could not be found from {instance}'.format(id=self.id, instance=self.instance))
         except TypeError:
             raise MetadataSourceException(
                 'The ORCiD {id} returned invalid JSON.'.format(id=self.id))
@@ -273,79 +270,6 @@ class OrcidProfile(object):
             for work in works_meta.get('bulk') or []:
                 yield OrcidWork(self, work)
 
-    @staticmethod
-    def search_by_name(first, last, instance=settings.ORCID_BASE_DOMAIN):
-        """
-        Searches for an ORCID profile matching this (first,last) name.
-        Returns a list of such ORCID profiles.
-        """
-        # Validate arguments
-        if not last:
-            return
-        # Perform query
-        base_base_pub = "https://pub." + instance + "/"
-        baseurl = base_base_pub + 'v1.2/search/orcid-bio/'
-        dct = {
-            'rows': 10,
-            'start': 0,
-            'q': 'family-name:%s given-names:%s' % (last, first),
-            }
-        url = baseurl+'?'+urlencode(dct)
-        try:
-            r = requests.get(url)
-            # the namespace is the same for both the production and the
-            # sandbox versions.
-            ns = {'ns': 'http://www.orcid.org/ns/orcid'}
-            xml = etree.fromstring(r.text.encode('utf-8'))
-            for elem in xml.xpath('//ns:orcid-search-result', namespaces=ns):
-                candidateFirst = None
-                candidateLast = None
-                # Get name
-                pers_details = elem.xpath(
-                    './/ns:personal-details', namespaces=ns)
-                if not pers_details:
-                    continue
-                for item in pers_details[0]:
-                    if item.tag.endswith('given-names'):
-                        candidateFirst = item.text
-                    elif item.tag.endswith('family-name'):
-                        candidateLast = item.text
-                if not candidateFirst or not candidateLast:
-                    continue
-                # Check that the names are compatible
-                if shallower_name_similarity((first, last), (candidateFirst, candidateLast)) == 0:
-                    continue
-
-                # Get ORCID iD
-                orcid_elem = elem.xpath(
-                    './ns:orcid-profile/ns:orcid-identifier/ns:path', namespaces=ns)
-                if not orcid_elem:
-                    continue
-                orcid = orcid_elem[0].text
-
-                # Add other things
-                lst = elem.xpath(
-                    './ns:orcid-profile/ns:orcid-bio/ns:researcher-urls/ns:researcher-url/ns:url/text()', namespaces=ns)
-                homepage = None
-                for url in lst:
-                    homepage = urlize(url)
-                    break
-
-                keywords = elem.xpath(
-                    './ns:orcid-profile/ns:orcid-bio/ns:keywords/ns:keyword/text()', namespaces=ns)
-
-                yield {
-                        'first': candidateFirst,
-                        'last': candidateLast,
-                        'orcid': orcid,
-                        'homepage': homepage,
-                        'keywords': keywords,
-                      }
-
-        except etree.XMLSyntaxError as e:
-            print e
-        except requests.exceptions.RequestException as e:
-            print e
 
 class OrcidWorkSummary(object):
     """

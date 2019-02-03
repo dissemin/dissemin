@@ -34,12 +34,12 @@ from backend.oai import get_proaixy_instance
 
 class ZenodoProtocolTest(ProtocolTest):
 
-    @classmethod
-    def setUpClass(self):
+    def setUp(self):
+        super(ZenodoProtocolTest, self).setUp()
         if 'ZENODO_SANDBOX_API_KEY' not in os.environ:
             raise unittest.SkipTest(
                 "Environment variable ZENODO_SANDBOX_API_KEY is undefined")
-        super(ZenodoProtocolTest, self).setUpClass()
+        super(ZenodoProtocolTest, self).setUp()
         self.repo.api_key = os.environ['ZENODO_SANDBOX_API_KEY']
         self.repo.endpoint = 'https://sandbox.zenodo.org/api/deposit/depositions'
         self.proto = ZenodoProtocol(self.repo)

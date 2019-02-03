@@ -26,8 +26,9 @@ to the metadata sources.
    datasources
    datamodel
    development
-   modules/modules
+   testing
    docs
+   modules/modules
 
 
 Indices and tables

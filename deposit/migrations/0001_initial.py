@@ -23,9 +23,9 @@ class Migration(migrations.Migration):
                 ('pdf_url', models.URLField(max_length=1024, null=True, blank=True)),
                 ('date', models.DateTimeField(auto_now=True)),
                 ('upload_type', models.FileField(upload_to='deposits')),
-                ('file', models.ForeignKey(to='upload.UploadedPDF')),
-                ('paper', models.ForeignKey(to='papers.Paper')),
-                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
+                ('file', models.ForeignKey(to='upload.UploadedPDF', on_delete=models.CASCADE)),
+                ('paper', models.ForeignKey(to='papers.Paper', on_delete=models.CASCADE)),
+                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)),
             ],
             options={
                 'db_table': 'papers_depositrecord',

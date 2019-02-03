@@ -60,7 +60,7 @@ class Migration(migrations.Migration):
                 ('num_children', models.IntegerField(default=1)),
                 ('cluster_relevance', models.FloatField(default=0)),
                 ('affiliation', models.CharField(max_length=512, null=True, blank=True)),
-                ('cluster', models.ForeignKey(related_name='clusterrel', blank=True, to='papers.Author', null=True)),
+                ('cluster', models.ForeignKey(related_name='clusterrel', blank=True, to='papers.Author', null=True, on_delete=models.CASCADE)),
             ],
             options={
             },
@@ -71,7 +71,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(max_length=300)),
-                ('stats', models.ForeignKey(to='statistics.AccessStatistics', null=True)),
+                ('stats', models.ForeignKey(to='statistics.AccessStatistics', null=True, on_delete=models.CASCADE)),
             ],
             options={
             },
@@ -94,7 +94,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('title', models.CharField(max_length=512)),
                 ('issn', models.CharField(max_length=128)),
-                ('about', models.ForeignKey(to='papers.Disambiguation')),
+                ('about', models.ForeignKey(to='papers.Disambiguation', on_delete=models.CASCADE)),
             ],
             options={
             },
@@ -132,7 +132,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('confidence', models.FloatField(default=1.0)),
-                ('name', models.ForeignKey(to='papers.Name')),
+                ('name', models.ForeignKey(to='papers.Name', on_delete=models.CASCADE)),
             ],
             options={
             },
@@ -203,8 +203,8 @@ class Migration(migrations.Migration):
                 ('pages', models.CharField(max_length=64, null=True, blank=True)),
                 ('pubdate', models.DateField(null=True, blank=True)),
                 ('doi', models.CharField(max_length=1024, unique=True, null=True, blank=True)),
-                ('journal', models.ForeignKey(blank=True, to='publishers.Journal', null=True)),
-                ('paper', models.ForeignKey(to='papers.Paper')),
+                ('journal', models.ForeignKey(blank=True, to='publishers.Journal', null=True, on_delete=models.CASCADE)),
+                ('paper', models.ForeignKey(to='papers.Paper', on_delete=models.CASCADE)),
             ],
             options={
             },
@@ -273,7 +273,7 @@ class Migration(migrations.Migration):
                 ('last_doi_search', models.DateTimeField(null=True, blank=True)),
                 ('status', models.CharField(max_length=512, null=True, blank=True)),
                 ('last_status_update', models.DateTimeField(auto_now=True)),
-                ('department', models.ForeignKey(to='papers.Department')),
+                ('department', models.ForeignKey(to='papers.Department', on_delete=models.CASCADE)),
             ],
             options={
             },
@@ -298,37 +298,37 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='researcher',
             name='name',
-            field=models.ForeignKey(to='papers.Name'),
+            field=models.ForeignKey(to='papers.Name', on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='researcher',
             name='stats',
-            field=models.ForeignKey(to='statistics.AccessStatistics', null=True),
+            field=models.ForeignKey(to='statistics.AccessStatistics', null=True, on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='publication',
             name='publisher',
-            field=models.ForeignKey(blank=True, to='publishers.Publisher', null=True),
+            field=models.ForeignKey(blank=True, to='publishers.Publisher', null=True, on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='oairecord',
             name='about',
-            field=models.ForeignKey(to='papers.Paper'),
+            field=models.ForeignKey(to='papers.Paper', on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='oairecord',
             name='source',
-            field=models.ForeignKey(to='papers.OaiSource'),
+            field=models.ForeignKey(to='papers.OaiSource', on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='namevariant',
             name='researcher',
-            field=models.ForeignKey(to='papers.Researcher'),
+            field=models.ForeignKey(to='papers.Researcher', on_delete=models.CASCADE),
             preserve_default=True,
         ),
 #        migrations.AddField(
@@ -352,13 +352,13 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='author',
             name='name',
-            field=models.ForeignKey(to='papers.Name'),
+            field=models.ForeignKey(to='papers.Name', on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='author',
             name='paper',
-            field=models.ForeignKey(to='papers.Paper'),
+            field=models.ForeignKey(to='papers.Paper', on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AddField(
@@ -370,19 +370,19 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='author',
             name='similar',
-            field=models.ForeignKey(related_name='similarrel', blank=True, to='papers.Author', null=True),
+            field=models.ForeignKey(related_name='similarrel', blank=True, to='papers.Author', null=True, on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='annotation',
             name='paper',
-            field=models.ForeignKey(to='papers.Paper'),
+            field=models.ForeignKey(to='papers.Paper', on_delete=models.CASCADE),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='annotation',
             name='user',
-            field=models.ForeignKey(to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE),
             preserve_default=True,
         ),
 #        migrations.AddField(

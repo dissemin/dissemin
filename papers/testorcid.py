@@ -22,22 +22,50 @@
 from __future__ import unicode_literals
 
 import unittest
+import json
+import requests
 
 from papers.orcid import OrcidProfile
 from papers.orcid import OrcidWorkSummary
 
+class OrcidProfileStub(OrcidProfile):
+    def __init__(self, orcid_id, instance='orcid.org'):
+        super(OrcidProfileStub, self).__init__(orcid_id=orcid_id, instance=instance,
+              json=self.request_or_load(orcid_id, instance))
+        
+    @classmethod
+    def request_or_load(cls, path, instance):
+        url = 'https://pub.{instance}/v2.1/{path}'.format(instance=instance, path=path)
+        full_path = 'papers/fixtures/orcid/{}.json'.format(path.replace('/','-'))
+        try:
+            with open(full_path, 'r') as f:
+                response = json.load(f)
+            return response
+        except Exception as e:
+            print(e)
+            r = requests.get(url,headers={'Accept':'application/json'})
+            j = r.json()
+            print(r.json())
+            with open(full_path, 'w') as f:
+                f.write(json.dumps(j))
+            return j
+
+        
+    def request_element(self, path):
+        return self.request_or_load(self.id + '/'+ path, self.instance)
+
 class OrcidProfileTest(unittest.TestCase):
-    """
-    TODO: duplicate all these profiles to the ORCID sandbox
-    to be sure they will not be modified!
-    """
+    
+    @classmethod
+    def loadProfile(cls, id):
+        return OrcidProfileStub(id)
 
     @classmethod
     def setUpClass(self):
-        self.antonin = OrcidProfile(orcid_id='0000-0002-8612-8827')
-        self.thomas = OrcidProfile(orcid_id='0000-0003-0524-631X')
-        self.sergey = OrcidProfile(orcid_id='0000-0003-3397-9895')
-        self.marco = OrcidProfile(orcid_id='0000-0002-6561-5642')
+        self.antonin = self.loadProfile(id='0000-0002-8612-8827')
+        self.thomas = self.loadProfile(id='0000-0003-0524-631X')
+        self.sergey = self.loadProfile(id='0000-0003-3397-9895')
+        self.marco = self.loadProfile(id='0000-0002-6561-5642')
 
     def test_simple_name(self):
         self.assertEqual(self.antonin.name, ('Antonin', 'Delpeuch'))
@@ -46,12 +74,10 @@ class OrcidProfileTest(unittest.TestCase):
 
     def test_credit_name(self):
         self.assertEqual(self.sergey.name, ('Sergey M.', 'Natanzon'))
-        self.assertEqual(OrcidProfile(
-            orcid_id='0000-0001-9547-293X').name, ('Darío', 'Álvarez'))
+        self.assertEqual(self.loadProfile(id='0000-0001-9547-293X').name, ('Darío', 'Álvarez'))
 
     def test_empty_lastname(self):
-        self.assertEqual(OrcidProfile(
-            orcid_id='0000-0001-5006-3868').name, ('Qiang', ''))
+        self.assertEqual(self.loadProfile(id='0000-0001-5006-3868').name, ('Qiang', ''))
 
     def test_other_names(self):
         self.assertEqual(set(self.sergey.other_names),
@@ -59,8 +85,8 @@ class OrcidProfileTest(unittest.TestCase):
                               ('S. M.', 'Natanzon'), ('Sergey', 'Natanzon')]))
 
     def test_homepage_without_http(self):
-        self.assertEqual(OrcidProfile(
-            orcid_id='0000-0002-5710-3989').homepage, 'http://evrard.perso.enseeiht.fr')
+        self.assertEqual(self.loadProfile(
+            id='0000-0002-5710-3989').homepage, 'http://evrard.perso.enseeiht.fr')
 
     def test_iterable(self):
         for key in self.thomas:
@@ -79,24 +105,14 @@ class OrcidProfileTest(unittest.TestCase):
         self.assertEqual(OrcidProfile(
             orcid_id='0000-0002-5654-4053').name, ('Peter', 'Lieth'))
 
-    def test_search(self):
-        # for this one we use the production database
-        # because test profiles on the sandbox
-        # tend to get deleted quite often
-        results = list(OrcidProfile.search_by_name('John', 'Doe'))
-        self.assertTrue(all(map(lambda x: len(x['orcid']) and (
-            len(x['first']) or len(x['last'])), results)))
-        names_returned = map(lambda x: (x['first'], x['last']), results)
-        self.assertTrue(('John', 'Doe') in names_returned)
-
     def test_institution(self):
-        self.assertEqual(OrcidProfile(
-            orcid_id='0000-0002-0022-2290').institution,
+        self.assertEqual(self.loadProfile(
+            id='0000-0002-0022-2290').institution,
             {'name':'Ecole Normale Superieure',
              'identifier':None,
              'country':'FR'})
-        self.assertEqual(OrcidProfile(
-            orcid_id='0000-0002-5654-4053').institution,
+        self.assertEqual(self.loadProfile(
+            id='0000-0002-5654-4053').institution,
             {'country': 'FR',
              'identifier': None,
              'name': "École nationale supérieure de céramique industrielle"})
@@ -110,7 +126,8 @@ class OrcidProfileTest(unittest.TestCase):
         self.assertTrue(None not in [summary.put_code for summary in summaries])
 
     def test_philipp(self):
-        p = OrcidProfile(orcid_id='0000-0001-6723-6833')
+        p = self.loadProfile(id='0000-0001-6723-6833')
+        
         summaries = p.work_summaries
         dois = [summary.doi for summary in summaries]
         self.assertTrue('10.3354/meps09890' in dois)
