@@ -1,0 +1,19 @@
+{% extends "dissemin/skeleton.html" %}
+
+{% load i18n %}
+
+{% block headTitle %}
+{% trans "Error" %}
+{% endblock %}
+
+{% block content %}
+<div id="fullPage">
+    <div style="text-align: center; padding-top: 50px;">
+        <h2>{% trans "Error" %}</h2>
+        <p>{{ message }}
+
+{% blocktrans %}<a href="/">Go back to the home page.</a>{% endblocktrans %}
+        </p>
+    </div>
+</div>
+{% endblock %}
