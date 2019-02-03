@@ -151,7 +151,6 @@ INSTALLED_APPS = (
     'deposit',
     'deposit.zenodo',
     'deposit.hal',
-    'deposit.sword',
     'deposit.osf',
     'autocomplete',
     'notification',
