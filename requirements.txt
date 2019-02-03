@@ -3,6 +3,7 @@
 -e git://github.com/wetneb/pyoai.git@any_metadataPrefix#egg=pyoai
 PyPDF2
 bibtexparser>=1.1.0
+redis<3
 celery[redis]
 cryptography
 czipfile
