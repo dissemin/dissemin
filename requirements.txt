@@ -6,7 +6,6 @@ bibtexparser>=1.1.0
 redis<3
 celery[redis]
 cryptography
-czipfile
 django>=1.11.16
 django-autocomplete-light
 django-bootstrap-pagination
