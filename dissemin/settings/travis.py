@@ -13,7 +13,12 @@ from .common import *
 # https://docs.djangoproject.com/en/1.8/topics/cache/
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache'
+        'BACKEND': 'redis_cache.RedisCache',
+        'LOCATION': ('%s:%d' % (REDIS_HOST, REDIS_PORT)),
+        'OPTIONS': {
+            'DB': REDIS_DB,
+            'PASSWORD': REDIS_PASSWORD,
+        },
     }
 }
 
