@@ -186,6 +186,9 @@ class PaperPagesTest(RenderingTest):
     def test_paper_by_doi(self):
         publi = OaiRecord.objects.filter(doi__isnull=False)[0]
         self.checkPermanentRedirect('paper-doi', kwargs={'doi': publi.doi})
+        
+    def test_invalid_doi(self):
+        self.check404('paper-doi', kwargs={'doi':'10.1blabla'})
 
     def test_paper_by_doi_orphan(self):
         # This is the DOI for a book: enough data to create a Paper
