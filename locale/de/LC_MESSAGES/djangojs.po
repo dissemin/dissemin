@@ -1,37 +1,39 @@
 # Translation of Dissemin papers to German (Deutsch)
 # Exported from translatewiki.net
 #
+# Author: Becks
 # Author: Danielbeerbonn
+# Author: Metalhead64
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-11-22 06:25:31+0000\n"
+"PO-Revision-Date: 2019-01-30 22:39:36+0000\n"
 "X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: de\n"
-"X-Generator: MediaWiki 1.33.0-alpha; Translate 2018-11-05\n"
+"X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: doc/sphinx/_build/html/_static/doctools.js:167
 msgid "Permalink to this headline"
-msgstr ""
+msgstr "Permanentlink auf diese Überschrift"
 
 #: doc/sphinx/_build/html/_static/doctools.js:173
 msgid "Permalink to this definition"
-msgstr ""
+msgstr "Permanentlink auf diese Definition"
 
 #: doc/sphinx/_build/html/_static/doctools.js:206
 msgid "Hide Search Matches"
-msgstr ""
+msgstr "Suchtreffer ausblenden"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:400
 msgid "Searching"
-msgstr ""
+msgstr "Suchen"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:405
 msgid "Preparing search..."
-msgstr ""
+msgstr "Bereite Suche vor …"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:566
 msgid "Search Results"
@@ -52,12 +54,12 @@ msgstr ", in "
 
 #: doc/sphinx/_build/html/_static/sidebar.js:77
 msgid "Expand sidebar"
-msgstr ""
+msgstr "Seitenleiste ausklappen"
 
 #: doc/sphinx/_build/html/_static/sidebar.js:90
 #: doc/sphinx/_build/html/_static/sidebar.js:118
 msgid "Collapse sidebar"
-msgstr ""
+msgstr "Seitenleiste einklappen"
 
 #: papers/static/papers/refresh.js:35
 msgid "Do not show this message anymore"
@@ -78,8 +80,8 @@ msgstr "Ungültiges Veröffentlichungsdatum"
 #: papers/static/papers/refresh.js:105
 msgid "We ignored %(count)s paper from your ORCiD profile."
 msgid_plural "We ignored %(count)s papers from your ORCiD profile."
-msgstr[0] "Wir haben eine Abhandlung aus Deinem ORCiD-Profil ignoriert."
-msgstr[1] "Wir haben %(count)s Abhandlungen aus Deinem ORCiD-Profil ignoriert."
+msgstr[0] "Wir haben eine Publikation aus Deinem ORCiD-Profil ignoriert."
+msgstr[1] "Wir haben %(count)s Publikationen aus Deinem ORCiD-Profil ignoriert."
 
 #: papers/static/papers/refresh.js:115
 msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
@@ -87,7 +89,7 @@ msgstr ""
 
 #: papers/static/papers/refresh.js:123
 msgid "A paper was ignored, because it has no name"
-msgstr "Eine Abhandlung wurde ignoriert, weil sie keinen Namen hat"
+msgstr "Eine Publikation wurde ignoriert, weil sie keinen Namen hat"
 
 #: papers/static/papers/refresh.js:135 papers/static/papers/refresh.js:163
 msgid "Show more information"

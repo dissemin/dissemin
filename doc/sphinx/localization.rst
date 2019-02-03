@@ -7,7 +7,7 @@ Translations are hosted at `TranslateWiki
 <https://translatewiki.net/wiki/Translating:Dissemin>`_, for an easy-to-use
 interface for translations and statistics.
 
-We use `Django's standard localization system <https://docs.djangoproject.com/en/1.8/topics/i18n/>`_, based on i18n.
+We use `Django's standard localization system <https://docs.djangoproject.com/en/1.11/topics/i18n/>`_, based on i18n.
 To generate the PO file, let's say for french, run::
 
     python manage.py makemessages -l fr
@@ -20,4 +20,7 @@ compile them so that they can be displayed on the website::
 That's it! The translations should show up in your browser if it indicates
 the target language as your preferred one.
 
+Available Languages
+-------------------
 
+You can change the set of available languages for your installation in ``dissemin/settings/common.py`` by changing the ``LANGUAGES`` list, e.g. by commenting or uncommenting the corresponding lines.

@@ -1,6 +1,7 @@
 # Translation of Dissemin website to Breton (brezhoneg)
 # Exported from translatewiki.net
 #
+# Author: Becks
 # Author: Gwenn-Ael
 # --
 # This file is part of the Dissemin Project
@@ -9,12 +10,12 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-11-22 06:25:32+0000\n"
+"PO-Revision-Date: 2019-01-30 22:39:36+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: br\n"
-"X-Generator: MediaWiki 1.33.0-alpha; Translate 2018-11-05\n"
+"X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: deposit/forms.py:41
@@ -1253,7 +1254,7 @@ msgstr " e "
 #: papers/views.py:389
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
-msgstr "%(verbose_name) ebet na glot gant ar reked"
+msgstr "%(verbose_name)s ebet na glot gant ar reked"
 
 #: publishers/forms.py:10
 msgid "popularity"

@@ -11,12 +11,12 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2019-01-21 08:54:55+0000\n"
+"PO-Revision-Date: 2019-01-30 22:39:37+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fi\n"
-"X-Generator: MediaWiki 1.33.0-alpha; Translate 2018-11-05\n"
+"X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: deposit/forms.py:41
@@ -371,7 +371,7 @@ msgstr ""
 
 #: deposit/osf/protocol.py:311
 msgid "Unable to update license."
-msgstr "Lisenssiä ei voi päivittää."
+msgstr "Lisenssiä ei voitu päivittää."
 
 #: deposit/osf/protocol.py:368
 msgid "Unable to create the preprint."
@@ -391,11 +391,11 @@ msgstr ""
 
 #: deposit/osf/protocol.py:469
 msgid "Unable to upload the PDF file."
-msgstr "PDF-tiedoston tallentaminen ei onnistunut."
+msgstr "PDF-tiedostoa ei voitu tallentaa."
 
 #: deposit/osf/protocol.py:509
 msgid "Unable to delete the project."
-msgstr "Projektia ei voi poistaa."
+msgstr "Projektia ei voitu poistaa."
 
 #: deposit/osf/protocol.py:538 deposit/osf/protocol.py:546
 msgid "Unable to make the project public."
@@ -531,7 +531,7 @@ msgstr "Käsitellään talletusta..."
 
 #: deposit/templates/deposit/start.html:417
 msgid "please wait..."
-msgstr "odota hetki..."
+msgstr "odota..."
 
 #: deposit/views.py:65
 msgid "This repository is not available for this paper."
@@ -797,11 +797,11 @@ msgstr ""
 #: papers/templates/papers/institution.html:37
 #: publishers/templates/publishers/list.html:116
 #: publishers/templates/publishers/policy.html:127
-#, invalid-plural, python-format
+#, python-format
 msgid "(%(num_total)s paper)"
 msgid_plural "(%(num_total)s papers)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "(%(num_total)s artikkeli)"
+msgstr[1] "(%(num_total)s artikkelia)"
 
 #: papers/templates/papers/department.html:71
 #: papers/templates/papers/institution.html:48
@@ -852,15 +852,15 @@ msgstr "Hae"
 
 #: papers/templates/papers/index.html:46
 msgid "Green open access"
-msgstr "Vihreä avoin pääsy"
+msgstr "Vihreä open access"
 
 #: papers/templates/papers/index.html:50
 msgid "Many researchers do not use their right to make their papers freely available online, in addition to the paywalled version offered by traditional publishers."
-msgstr ""
+msgstr "Monet tutkijat eivät käytä oikeuttaan tehdä asiakirjoistaan vapaasti verkossa saatavia, perinteisten kustantajien tarjoaman paywalled-version lisäksi."
 
 #: papers/templates/papers/index.html:58
 msgid "This forces libraries to buy overpriced electronic subscriptions to journals, when they can afford them at all."
-msgstr ""
+msgstr "Tämä pakottaa kirjastoja ostamaan ylihinnoiteltuja sähköisiä tilauslehtiä, jos heillä on niihin varaa."
 
 #: papers/templates/papers/index.html:74
 msgid "Open repositories"
@@ -868,11 +868,11 @@ msgstr "Avoimet koodivarannot"
 
 #: papers/templates/papers/index.html:77
 msgid "Uploading your papers on your own webpage is not enough. Such copies are less stable and harder to find than documents uploaded to well-indexed repositories."
-msgstr "Artikkeliesi tallentaminen omalla nettisivullesi ei ole tarpeeksi. Sellaiset kopiot ovat vähemmän vakaita ja vaikeampia löytää, kuin artikkelit jotka on tallennettu hyvin indeksoituihin koodivarantoihin."
+msgstr "Artikkeliesi tallentaminen omalla verkkosivullasi ei riitä. Sellaiset kopiot ovat vähemmän vakaita ja vaikeampia löytää, kuin artikkelit jotka on tallennettu hyvin indeksoituihin koodivarantoihin."
 
 #: papers/templates/papers/index.html:85
 msgid "Dissemin searches for copies of your papers in a large collection of open repositories and tells you which ones cannot be accessed."
-msgstr "Dissemin etsii asiakirjojesi kopioita suuressa avoimien koodivarantojen kokoelmassa ja kertoo sinulle mitä niistä ei voida käyttää."
+msgstr "Dissemin etsii asiakirjojesi kopioita suuressa avoimien koodivarantojen kokoelmassa ja kertoo, mitkä niistä eivät ole saatavana."
 
 #: papers/templates/papers/institutions.html:25
 msgid "Institutions"
@@ -891,17 +891,17 @@ msgstr "(tyhjä profiili)"
 #, python-format
 msgctxt "as in: _Journal article by_ Tom Smith, Nicole Allen"
 msgid " \n    <span class=\"paperDocType\">%(doctype)s</span> by\n    "
-msgstr ""
+msgstr " \n<span class=\"paperDocType\">%(doctype)s</span>, tehnyt\n    "
 
 #: papers/templates/papers/paper.html:70
 #, python-format
 msgid "\n            and <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s other authors</a>\n            "
-msgstr ""
+msgstr "\n            ja <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s muuta tekijää</a>\n            "
 
 #: papers/templates/papers/paper.html:77
 #, python-format
 msgid "\n            All %(nb_authors)s authors (<a href=\"#\" id=\"show_less_authors\">show less</a>):<br />\n            "
-msgstr ""
+msgstr "\nKaikki %(nb_authors)s tekijää (<a href=\"#\" id=\"show_less_authors\">näytä vähemmän</a>):<br />\n            "
 
 #: papers/templates/papers/paper.html:89
 msgid "<strong>Congratulations!</strong> This paper was successfully deposited."
@@ -973,7 +973,7 @@ msgstr "Puuttuvia julkaisuja? <a href=\"%(matching_papers_url)s\"> Hae julkaisuj
 #: papers/templates/papers/publiListItem.html:16
 #, python-format
 msgid "and %(remaining_authors)s other authors"
-msgstr ""
+msgstr "ja %(remaining_authors)s muuta tekijää"
 
 #: papers/templates/papers/publiListItem.html:40
 #: publishers/templates/publishers/itemPolicy.html:21
@@ -1008,7 +1008,7 @@ msgstr ""
 
 #: papers/templates/papers/search.html:89
 msgid "Refreshing results"
-msgstr ""
+msgstr "Päivitetään tuloksia"
 
 #: papers/templates/papers/search.html:99
 msgid "Refreshing profile"
@@ -1020,7 +1020,7 @@ msgstr "Oletko se sinä?"
 
 #: papers/templates/papers/search.html:140
 msgid "Refresh publications"
-msgstr "Päivitä julkaisuja"
+msgstr "Päivitä julkaisut"
 
 #: papers/templates/papers/search.html:143
 msgid "Address:"
@@ -1032,7 +1032,7 @@ msgstr "Nimet:"
 
 #: papers/templates/papers/search.html:165
 msgid "Journal"
-msgstr ""
+msgstr "Lehtiartikkeli"
 
 #: papers/templates/papers/search.html:168
 msgid "Published by"
@@ -1194,7 +1194,7 @@ msgstr "arkistointi rajoitettu:"
 
 #: papers/templatetags/statuses.py:58
 msgid "policy unclear."
-msgstr ""
+msgstr "käytäntö epäselvä."
 
 #: papers/templatetags/statuses.py:59 papers/templatetags/statuses.py:61
 #: papers/templatetags/statuses.py:73
@@ -1215,11 +1215,11 @@ msgstr "arkistointi rajoitettu"
 
 #: papers/templatetags/statuses.py:70
 msgid "policy unclear"
-msgstr ""
+msgstr "käytäntö epäselvä"
 
 #: papers/templatetags/statuses.py:71
 msgid "policy unknown"
-msgstr ""
+msgstr "käytäntö tuntematon"
 
 #: papers/views.py:128
 msgid "All papers"
@@ -1271,7 +1271,7 @@ msgstr ""
 
 #: publishers/models.py:38
 msgid "Open access"
-msgstr "Avoin pääsy"
+msgstr "Open access"
 
 #: publishers/models.py:38
 msgid "Freely available from the publisher."
@@ -1427,15 +1427,15 @@ msgstr "Saatavana julkaisijalta"
 
 #: statistics/models.py:49
 msgid "Available from the author"
-msgstr "Saatavissa tekijältä"
+msgstr "Saatavana tekijältä"
 
 #: statistics/models.py:50
 msgid "Could be shared by the authors"
-msgstr ""
+msgstr "Tekijät voisivat jakaa sen"
 
 #: statistics/models.py:51
 msgid "Unknown/unclear sharing policy"
-msgstr ""
+msgstr "Tuntematon/epäselvä jakamiskäytäntö"
 
 #: statistics/models.py:52
 msgid "Publisher forbids sharing"
@@ -1455,7 +1455,7 @@ msgstr ""
 
 #: statistics/models.py:60
 msgid "This paper was not found in any repository; the policy of its publisher is unknown or unclear."
-msgstr ""
+msgstr "Tätä paperia ei löytynyt missään koodivarannossa; sen julkaisijan käytäntö on tuntematon tai epäselvä."
 
 #: statistics/models.py:61
 msgid "Distributing this paper is prohibited by the publisher"
@@ -1472,11 +1472,11 @@ msgstr ""
 #: statistics/templates/statistics/histogram.html:5
 #: templates/dissemin/faq.html:49
 msgid "Open Access"
-msgstr "Avoin pääsy"
+msgstr "Open access"
 
 #: statistics/templates/statistics/histogram.html:8
 msgid "Publications are available"
-msgstr "Julkaisut ovat saatavissa"
+msgstr "Julkaisut ovat saatavilla"
 
 #: statistics/templates/statistics/histogram.html:11
 msgid "Publications could be online"
@@ -1521,7 +1521,7 @@ msgstr "Usein Kysytyt Kysymykset"
 
 #: templates/dissemin/faq.html:16 templates/dissemin/faq.html:51
 msgid "What is Open Access?"
-msgstr "Mikä on avoin pääsy?"
+msgstr "Mikä on Open access?"
 
 #: templates/dissemin/faq.html:17 templates/dissemin/faq.html:61
 msgid "Why should I upload my papers to a repository?"
@@ -1557,7 +1557,7 @@ msgstr "Käytännöt ja koko tekstin saatavuus"
 
 #: templates/dissemin/faq.html:28 templates/dissemin/faq.html:227
 msgid "What do your policy classes mean?"
-msgstr ""
+msgstr "Mitä käytäntöluokkasi tarkoittavat?"
 
 #: templates/dissemin/faq.html:29 templates/dissemin/faq.html:280
 msgid "When is a paper considered available?"
@@ -1565,7 +1565,7 @@ msgstr ""
 
 #: templates/dissemin/faq.html:30 templates/dissemin/faq.html:289
 msgid "Should I trust your statistics?"
-msgstr "Pitäisikö minun luottaa tilastoihisi?"
+msgstr "Pitäisikö minun luottaa tilastoihinne?"
 
 #: templates/dissemin/faq.html:32 templates/dissemin/faq.html:330
 msgid "Omissions and errors"
@@ -1581,11 +1581,11 @@ msgstr "Jotkin artikelini tiedot ovat virheellisiä. Mitä voin tehdä?"
 
 #: templates/dissemin/faq.html:35 templates/dissemin/faq.html:393
 msgid "There is a freely available copy of my article online but dissem.in does not find it."
-msgstr ""
+msgstr "Artikkelistani on vapaavasti saatavana oleva kopio netissä mutta dissem.in ei löydä sitä."
 
 #: templates/dissemin/faq.html:37 templates/dissemin/faq.html:433
 msgid "Authentication with ORCID"
-msgstr ""
+msgstr "Todennus ORCID-tunnuksella"
 
 #: templates/dissemin/faq.html:38 templates/dissemin/faq.html:435
 msgid "Why do you need to authenticate users?"
@@ -1609,7 +1609,7 @@ msgstr "Kulissien takana"
 
 #: templates/dissemin/faq.html:44 templates/dissemin/faq.html:516
 msgid "Where do you get the data from?"
-msgstr ""
+msgstr "Mistä saatte tietoja?"
 
 #: templates/dissemin/faq.html:45 templates/dissemin/faq.html:523
 msgid "How can I help?"
@@ -1621,11 +1621,11 @@ msgstr "Missä on lähdekoodi?"
 
 #: templates/dissemin/faq.html:47 templates/dissemin/faq.html:569
 msgid "Can I harvest your data?"
-msgstr "Voiko kerätä tietojasi?"
+msgstr "Voinko kerätä tietojanne?"
 
 #: templates/dissemin/faq.html:53
 msgid "In a nutshell, the Open Access movement promotes free access to the scientific literature. For a more in-depth introduction, we recommend <a href=\"http://www.phdcomics.com/comics.php?f=1533\">this video in English</a> and <a href=\"https://pablo.rauzy.name/openaccess/introduction.html\">this introduction in French</a>."
-msgstr ""
+msgstr "Pähkinänkuoressa, Open Access -liike edistää vapaata pääsyä tieteelliseen kirjallisuuteen. Syvällisempää esittelyä varten, suosittelemme <a href=\"http://www.phdcomics.com/comics.php?f=1533\">tätä videota englanniksi</a> ja <a href=\"https://pablo.rauzy.name/openaccess/introduction.html\">tätä esittelyä ranskaksi</a>."
 
 #: templates/dissemin/faq.html:63
 msgid "You should do it because:"
@@ -1657,15 +1657,15 @@ msgstr "On olemassa noin kolmen tyyppisiä arkistoja:"
 
 #: templates/dissemin/faq.html:114
 msgid "Subject repositories, restricted to some research fields, such as <a href=\"https://arxiv.org\">arXiv</a>."
-msgstr ""
+msgstr "Aihekoodivarannot, rajoitettu tietyille tutkimusaloille, kuten <a href=\"https://arxiv.org\">arXiv</a>."
 
 #: templates/dissemin/faq.html:120
 msgid "Institutional repositories, designated to store the research output of a given institution or country."
-msgstr ""
+msgstr "Institutionaaliset koodivarannot, määrätty tallentamaan tietyn instituution tai maan tutkimustulokset."
 
 #: templates/dissemin/faq.html:125
 msgid "General-purpose academic repositories such as <a href=\"https://zenodo.org\">Zenodo</a>, not limited to a particular scope."
-msgstr ""
+msgstr "Yleistarkoitukselliset akateemiset koodivarannot, kuten <a href=\"https://zenodo.org\">Zenodo</a>, ei rajoitu tiettyyn laajuuteen."
 
 #: templates/dissemin/faq.html:132
 msgid "If your research community favours a specific repository, using it makes sense as it will increase your visibility. If not, institutional or general-purpose repositories are also good options."
@@ -1706,11 +1706,11 @@ msgstr ""
 
 #: templates/dissemin/faq.html:211
 msgid "Dissemin is brought to you by the <a href=\"https://association.dissem.in/\">CAPSH association</a>."
-msgstr ""
+msgstr "Disseminin teille tuottaa <a href=\"https://association.dissem.in/\">CAPSH-yhdistys</a>."
 
 #: templates/dissemin/faq.html:218
 msgid "Yes, you can do it, by first <a href=\"https://orcid.org/register\">registering on ORCID</a> if you do not have an ORCID identifier yet. This only takes a few seconds, and you can then use your ORCID identifier to log into Dissemin."
-msgstr ""
+msgstr "Kyllä, voit tehdä sen, ensin <a href=\"https://orcid.org/register\">rekisteröitymällä ORCIDiin</a> jos sinulla ei vielä ole ORCID-tunnistetta. Tämä kestää vain muutaman sekunnin, ja voit sitten käyttää ORCID-tunnistetta Disseminiin kirjautumiseen."
 
 #: templates/dissemin/faq.html:233
 msgid "<strong>Open access:</strong><br /> The full text is made freely available by the publisher (in a fully open access or hybrid journal)."
@@ -1832,7 +1832,7 @@ msgstr ""
 
 #: templates/dissemin/faq.html:504
 msgid "If you change some details in your ORCID profile (name, homepage, etc.), the changes will not automatically be picked up in your profile on Dissemin. To update your profile on Dissemin accordingly, once you have logged in to Dissemin, you can go to your <a href=\"/my-profile\">profile page</a> and click \"Refresh publications\"."
-msgstr ""
+msgstr "Jos muutat joitakin ORCID-profiilisi tietoja (nimi, kotisivu, yms.) muutoksia ei automaattisesti oteta profiiliisi Disseminissä. Päivittääksesi profiilisi Disseminissä sen mukaisesti, kun olet kirjautunut sisään Disseminiin, voit mennä <a href=\"/my-profile\">profiilisivullesi</a> ja klikata \"Päivitä julkaisut\"."
 
 #: templates/dissemin/faq.html:518
 #, python-format
@@ -1849,7 +1849,7 @@ msgstr "Edistä <a href=\"https://github.com/wetneb/dissemin\">koodia</a>."
 
 #: templates/dissemin/faq.html:536
 msgid "Fix any of our listed <a href=\"https://github.com/wetneb/dissemin/issues\">issues</a>."
-msgstr ""
+msgstr "Korjaa mikä tahansa listatuista <a href=\"https://github.com/wetneb/dissemin/issues\">ongelmistamme</a>."
 
 #: templates/dissemin/faq.html:541
 msgid "Help us <a href=\"https://translatewiki.net/wiki/Translating:Dissemin\">translate</a> the interface in your language."
@@ -1857,11 +1857,11 @@ msgstr "Auta meitä <a href=\"https://translatewiki.net/wiki/Translating:Dissemi
 
 #: templates/dissemin/faq.html:548
 msgid "Encourage researchers to use this service."
-msgstr ""
+msgstr "Kannusta tutkijoita käyttämään tätä palvelua."
 
 #: templates/dissemin/faq.html:553
 msgid "Star <a href=\"https://github.com/wetneb/dissemin\">our GitHub project</a>!"
-msgstr ""
+msgstr "Tähditä <a href=\"https://github.com/wetneb/dissemin\">GitHub-projektimme</a>!"
 
 #: templates/dissemin/faq.html:558
 msgid "<a href=\"https://association.dissem.in/#dons\">Donations are accepted</a>."
@@ -1907,7 +1907,7 @@ msgstr "Kirjaudu sisään"
 
 #: templates/dissemin/login.html:30 templates/dissemin/sandbox.html:32
 msgid "If you already have an ORCID account, you can use it with Dissemin. We will not make any changes to your profile."
-msgstr "Jos sinulla on jo ORCID-tili, voit käyttää sitä Disseminin kanssa. Emme tee mitään muutoksia profiiliisi."
+msgstr "Jos sinulla on jo ORCID-tunnus, voit käyttää sitä Disseminin kanssa. Emme tee mitään muutoksia profiiliisi."
 
 #: templates/dissemin/login.html:42 templates/dissemin/login.html:51
 #: templates/dissemin/sandbox.html:44
@@ -1970,7 +1970,7 @@ msgstr "Käyttöehdot"
 
 #: templates/dissemin/skeleton.html:122
 msgid "Who are we?"
-msgstr "Keitä me olemme?"
+msgstr "Keitä olemme?"
 
 #: templates/dissemin/skeleton.html:123
 msgid "Donate"

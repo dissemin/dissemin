@@ -10,7 +10,7 @@ Development settings
 --------------------
 
 Simply run ``./launch.sh``. This uses the default Django server (unsuitable
-for production) and serves the website locally on the port 8080.
+for production) and serves the website locally on the port 8080. Note that the standard port for django-admins runserver-command is _8000_, but this ensures compatibility with the Vagrant installation.
 
 This runs with ``DEBUG = True``, which means that Django will report to the user
 any internal error in a transparent way. This is useful to debug your installation
@@ -21,7 +21,7 @@ Production settings
 
 As any Django website, Dissemin can be served by various web servers.
 These settings are not specific to dissemin itself so you should refer
-to `the relevant Django documentation <https://docs.djangoproject.com/en/1.8/howto/deployment/>`_.
+to `the relevant Django documentation <https://docs.djangoproject.com/en/1.11/howto/deployment/>`_.
 
 No matter what web server you use,
 you need to run ``python manage.py collectstatic`` to copy the static files from

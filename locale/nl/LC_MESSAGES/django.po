@@ -1,6 +1,7 @@
 # Translation of Dissemin website to Dutch (Nederlands)
 # Exported from translatewiki.net
 #
+# Author: Becks
 # Author: Elroy
 # --
 # This file is part of the Dissemin Project
@@ -9,12 +10,12 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2018-11-29 16:48:41+0000\n"
+"PO-Revision-Date: 2019-01-30 22:39:38+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: nl\n"
-"X-Generator: MediaWiki 1.33.0-alpha; Translate 2018-11-05\n"
+"X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: deposit/forms.py:41
@@ -297,7 +298,7 @@ msgstr "Creative Commons CC0 1.0 Universeel"
 
 #: deposit/osf/forms.py:37 deposit/osf/forms.py:48
 msgid "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
-msgstr "\nCreative Commons CC-By Attribution 4.0 Internationaal (CC BY 4.0)"
+msgstr "Creative Commons CC-By Attribution 4.0 Internationaal (CC BY 4.0)"
 
 #: deposit/osf/forms.py:40 deposit/osf/forms.py:51
 msgid "No license"
