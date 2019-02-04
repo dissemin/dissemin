@@ -68,6 +68,10 @@ function init_paper_module (config) {
       return gettext('No title')
     } else if (reason === 'INVALID_PUB_DATE') {
       return gettext('Invalid publication date')
+    } else if (reason === 'NO_PUBDATE') {
+      return gettext('No publication date')
+    } else {
+      return gettext('Paper is invalid')
     }
   }
 
@@ -105,8 +109,8 @@ function init_paper_module (config) {
           'We ignored %(count)s paper from your ORCiD profile.',
           'We ignored %(count)s papers from your ORCiD profile.',
           message.payload.papers.length
-        ), 
-        { count: message.payload.papers.length }, 
+        ),
+        { count: message.payload.papers.length },
         true)
 
         var detailed_papers = message.payload.papers.map(function (paper) {
@@ -137,7 +141,7 @@ function init_paper_module (config) {
       }
 
       html += '</div>'
-      
+
       // Insert new message one by one.
       $(html).appendTo('.messages')
     }
