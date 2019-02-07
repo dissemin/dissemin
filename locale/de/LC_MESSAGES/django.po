@@ -5,6 +5,7 @@
 # Author: Danielbeerbonn
 # Author: FF11
 # Author: Kly
+# Author: Leslie Neumann
 # Author: Metalhead64
 # Author: Zuphilip
 # --
@@ -14,7 +15,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2019-01-30 22:39:36+0000\n"
+"PO-Revision-Date: 2019-02-07 14:54:33+0000\n"
 "X-POT-Import-Date: 2017-10-30 11:52:56+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -100,11 +101,11 @@ msgstr "Sozialanthropologie und Ethnologie"
 
 #: deposit/hal/metadata.py:46
 msgid "Archaeology and Prehistory"
-msgstr "Archäologie und Vorgeschichte"
+msgstr "Archäologie und Prähistorie"
 
 #: deposit/hal/metadata.py:47
 msgid "Architecture, space management"
-msgstr "Architektur und Raumordnung"
+msgstr "Architektur, Flächenmanagement"
 
 #: deposit/hal/metadata.py:48
 msgid "Art and art history"
@@ -124,11 +125,11 @@ msgstr "Rechtswissenschaften"
 
 #: deposit/hal/metadata.py:52
 msgid "Economies and finances"
-msgstr "Wirtschafts- und Finanzwissenschaften"
+msgstr "Wirtschafts- und Finanzwesen"
 
 #: deposit/hal/metadata.py:53 deposit/osf/forms.py:63 deposit/osf/forms.py:86
 msgid "Education"
-msgstr "Pädagogik"
+msgstr "Bildung"
 
 #: deposit/hal/metadata.py:54
 msgid "Environmental studies"
@@ -136,7 +137,7 @@ msgstr "Umweltwissenschaften"
 
 #: deposit/hal/metadata.py:55
 msgid "Gender studies"
-msgstr "Gender Studies"
+msgstr "Geschlechterforschung"
 
 #: deposit/hal/metadata.py:56
 msgid "Geography"
@@ -148,7 +149,7 @@ msgstr "Betriebswirtschaftslehre"
 
 #: deposit/hal/metadata.py:58
 msgid "History, Philosophy and Sociology of Sciences"
-msgstr "Geschichte, Philosophie und Soziologie der Wissenschaften"
+msgstr "Geschichte, Philosophie und Wissenschaftssoziologie"
 
 #: deposit/hal/metadata.py:59
 msgid "History"
@@ -168,7 +169,7 @@ msgstr "Literaturwissenschaft"
 
 #: deposit/hal/metadata.py:63
 msgid "Cultural heritage and museology"
-msgstr "Kulturelles Erbe und Museologie"
+msgstr "Kulturerbe und Museologie"
 
 #: deposit/hal/metadata.py:64
 msgid "Musicology and performing arts"
@@ -188,7 +189,7 @@ msgstr "Religionswissenschaften"
 
 #: deposit/hal/metadata.py:68
 msgid "Political science"
-msgstr "Politikwissenschaften"
+msgstr "Politikwissenschaft"
 
 #: deposit/hal/metadata.py:69
 msgid "Sociology"
@@ -200,11 +201,11 @@ msgstr "Methoden und Statistik"
 
 #: deposit/hal/metadata.py:71
 msgid "Life sciences"
-msgstr "Lebenswissenschaften"
+msgstr "Biowissenschaften"
 
 #: deposit/hal/metadata.py:72
 msgid "Engineering sciences"
-msgstr "Ingenieurswissenschaften"
+msgstr "Ingenieurwissenschaften"
 
 #: deposit/hal/metadata.py:73
 msgid "Statistics"
@@ -220,7 +221,7 @@ msgstr "HAL-Benutzername"
 
 #: deposit/hal/models.py:15
 msgid "If set, deposits will be associated to this HAL account."
-msgstr ""
+msgstr "Falls festgelegt, werden Ablagen diesem HAL-Benutzerkonto zugeordnet."
 
 #: deposit/hal/protocol.py:142
 msgid "No HAL user credentials provided."
@@ -228,12 +229,12 @@ msgstr "Keine HAL-Zugangsdaten angegeben"
 
 #: deposit/hal/protocol.py:208
 msgid "This document is already in HAL. HAL refused the deposit."
-msgstr "Dieses Dokument ist bereits in HAL und wurde daher abgelehnt."
+msgstr "Dieses Dokument ist bereits in HAL. HAL lehnt daher den Upload ab."
 
 #: deposit/hal/protocol.py:215
 #, python-format
 msgid "HAL refused the deposit (HTTP error %d): %s"
-msgstr "HAL hat den Upload zurückgewiesen (HTTP error %d): %s"
+msgstr "HAL hat den Upload abgelehnt (HTTP error %d): %s"
 
 #: deposit/hal/protocol.py:222
 msgid "HAL returned an invalid XML response"
@@ -245,11 +246,11 @@ msgstr "Diese Publikation ist in HAL bereits vorhanden."
 
 #: deposit/hal/protocol.py:240
 msgid "HAL rejected the submission."
-msgstr "HAL hat die Übermittlung zurückgewiesen."
+msgstr "HAL hat die Eingabe abgelehnt."
 
 #: deposit/hal/protocol.py:250
 msgid "HAL rejected the submission"
-msgstr "HAL hat die Übermittlung zurückgewiesen"
+msgstr "HAL hat die Eingabe abgelehnt"
 
 #: deposit/hal/protocol.py:259
 msgid "Password"
@@ -257,7 +258,7 @@ msgstr "Passwort"
 
 #: deposit/hal/protocol.py:287
 msgid "Connection to HAL failed. Please try again later."
-msgstr "Verbindung zu HAL konnte nicht ausgebaut werden. Bitte versuche es später nochmal."
+msgstr "Verbindung zu HAL konnte nicht aufgebaut werden. Bitte versuche es später nochmal."
 
 #: deposit/models.py:38
 msgid "Failed"
@@ -269,7 +270,7 @@ msgstr "Gefälscht"
 
 #: deposit/models.py:40
 msgid "Pending publication"
-msgstr "Noch nicht veröffentlicht"
+msgstr "Anstehende Veröffentlichung"
 
 #: deposit/models.py:42
 msgid "Published"
@@ -290,7 +291,7 @@ msgstr "Ablegen"
 
 #: deposit/models.py:219
 msgid "We will use this email address to notify you when your deposits are accepted."
-msgstr "Die angegebene E-Mail-Adresse wird genutzt, um Dir mitzuteilen, wenn dein Upload akzeptiert wurde."
+msgstr "\n\nWir werden diese E-Mail-Adresse verwenden, um Dir mitzuteilen, wenn dein Upload akzeptiert wurde."
 
 #: deposit/models.py:225
 msgid "This repository will be used by default for your deposits."
@@ -314,7 +315,7 @@ msgstr "Architektur"
 
 #: deposit/osf/forms.py:59 deposit/osf/forms.py:82
 msgid "Arts and Humanities"
-msgstr "Kunst und Geisteswissenschaften"
+msgstr "Kunst- und Geisteswissenschaften"
 
 #: deposit/osf/forms.py:61 deposit/osf/forms.py:84
 msgid "Business"
@@ -326,7 +327,7 @@ msgstr "Ingenieurwesen"
 
 #: deposit/osf/forms.py:69 deposit/osf/forms.py:92
 msgid "Life Sciences"
-msgstr "Lebenswissenschaften"
+msgstr "Biowissenschaften"
 
 #: deposit/osf/forms.py:71 deposit/osf/forms.py:94
 msgid "Medicine and Health Sciences"
@@ -334,7 +335,7 @@ msgstr "Medizin und Gesundheitswissenschaften"
 
 #: deposit/osf/forms.py:73 deposit/osf/forms.py:96
 msgid "Physical Sciences and Mathematics"
-msgstr "Physik und Mathematik"
+msgstr "Physikalische Wissenschaften und Mathematik"
 
 #: deposit/osf/forms.py:75 deposit/osf/forms.py:98
 msgid "Social and Behavioral Sciences"
@@ -354,11 +355,11 @@ msgstr "OSF-Identifikator"
 
 #: deposit/osf/models.py:14
 msgid "If set, your deposits will be associated to this OSF account. This identifier is a string of letters and numbers which can be found in your OSF public profile URL."
-msgstr ""
+msgstr "Sofern festgelegt, wird Deine Ablage mit diesem OSF-Konto verknüpft. Diese Kennung ist eine Zeichenfolge aus Buchstaben und Zahlen, die Du in der URL Deines öffentlichen OSF-Profils findest."
 
 #: deposit/osf/protocol.py:207
 msgid "Unable to create a project on OSF."
-msgstr "Konnte kein Projekt auf OSF erstellen."
+msgstr "\nErstellen eines Projekt auf OSF nicht möglich."
 
 #: deposit/osf/protocol.py:221
 msgid "Unable to authenticate to OSF."
@@ -366,11 +367,11 @@ msgstr "Authentifikation bei OSF fehlgeschlagen."
 
 #: deposit/osf/protocol.py:238
 msgid "Unable to add contributors."
-msgstr "Konnte keine Autoren hinzufügen"
+msgstr "Hinzufügen der Autoren nicht möglich."
 
 #: deposit/osf/protocol.py:265
 msgid "Unable to update the contributors of the paper."
-msgstr "Konnte die Autoren der Publikationen nicht aktualisieren."
+msgstr "Aktualisieren der Autoren der Publikationen nicht möglich."
 
 #: deposit/osf/protocol.py:311
 msgid "Unable to update license."
@@ -410,7 +411,7 @@ msgstr "Verbindung zum Repositorium konnte nicht hergestellt werden. Bitte versu
 
 #: deposit/sword/protocol.py:45
 msgid "No servicedocument provided."
-msgstr ""
+msgstr "Keine Serviceunterlagen hinterlegt."
 
 #: deposit/sword/protocol.py:110
 msgid "Unable to submit the paper to the collection."
@@ -440,7 +441,7 @@ msgstr "Ablagetyp"
 
 #: deposit/templates/deposit/deposits.html:52
 msgid "Identifier"
-msgstr "Bezeichner"
+msgstr "Kennung"
 
 #: deposit/templates/deposit/deposits.html:58
 msgid "Meta URL"
@@ -488,16 +489,16 @@ msgstr "Entschuldigung, wir konnten das Feld nicht automatisch ausfüllen."
 #: deposit/templates/deposit/start.html:258
 #: papers/templates/papers/department.html:30
 msgid "Dissemin encountered an error, please try again later."
-msgstr "Dissemin hat einen Fehler verursacht, bitte versuche es später erneut."
+msgstr "Dissemin ist auf einen Fehler gestoßen, bitte versuche es später erneut."
 
 #: deposit/templates/deposit/start.html:295
 #, python-format
 msgid "\n            You can deposit the full text of your article. Dissemin will\n            send it to a repository where it will be made freely available.\n            By depositing your article via Dissemin,\n            you agree to our <a href=\"%(tosurl)s\">terms of service</a>.\n        "
-msgstr "Du kannst den Volltext deiner Publikation ablegen. Dissemin transferiert sie zu einem Repositorium, wo frei darauf zugegriffen werden kann. Mit der deiner Ablage über Dissemin stimmst du den <a href=\"%(tosurl)s\">tNutzungsbedingungen</a> zu."
+msgstr "Du kannst den Volltext Deiner Publikation ablegen. Dissemin transferiert sie zu einem Repositorium, wo frei darauf zugegriffen werden kann. Mit der Ablage Deines Artikels über Dissemin stimmst du den <a href=\"%(tosurl)s\">tNutzungsbedingungen</a> zu."
 
 #: deposit/templates/deposit/start.html:306
 msgid "You do not appear to be one of the authors of this paper. By using this form, you certify that you have the permission to upload it on their behalf."
-msgstr "Es sieht so aus, als seist du kein Autor dieser Publikation. Mit der Ablage bestätigst du, dass du berechtigt bist, die Publikation hochzuladen."
+msgstr "Es sieht so aus, als seist Du kein Autor dieser Publikation. Mit der Ablage bestätigst Du, dass du berechtigt bist, die Publikation hochzuladen."
 
 #: deposit/templates/deposit/start.html:316
 msgid "This paper cannot be deposited in any repository supported by Dissemin."
@@ -538,7 +539,7 @@ msgstr "Bitte warten..."
 
 #: deposit/views.py:65
 msgid "This repository is not available for this paper."
-msgstr "Das Repositorium ist für die Publikation nicht geeignet."
+msgstr "Das Repositorium ist für die Publikation nicht verfügbar."
 
 #: deposit/views.py:138
 msgid "This repository could not be found."
@@ -562,15 +563,15 @@ msgstr "Creative Commons CCZero (CC0)"
 
 #: deposit/zenodo/forms.py:31
 msgid "Creative Commons Attribution (CC-BY)"
-msgstr "Creative Commons „Namensnennung“ (CC BY)"
+msgstr "Creative Commons Attribution (CC BY)"
 
 #: deposit/zenodo/forms.py:33
 msgid "Creative Commons Attribution-ShareAlike (CC-BY-SA)"
-msgstr "Creative Commons „Namensnennung, Weitergabe unter gleichen Bedingungen“ (CC BY-SA)"
+msgstr "Creative Commons Attribution-ShareAlike (CC BY-SA)"
 
 #: deposit/zenodo/forms.py:35
 msgid "Creative Commons Attribution-NonCommercial (CC-BY-NC)"
-msgstr "Creative Commons „Namensnennung, nicht kommerziell“ (CC BY-NC)"
+msgstr "Creative Commons Attribution-NonCommercial (CC BY-NC)"
 
 #: deposit/zenodo/forms.py:37
 msgid "Creative Commons Attribution-NoDerivatives (CC-BY-ND)"
@@ -586,7 +587,7 @@ msgstr "Kein Zenodo-API-Schlüssel angegeben."
 
 #: deposit/zenodo/protocol.py:81
 msgid "This happens when Zenodo has hiccups. Please try again in a few minutes or use a different repository in the menu above."
-msgstr "Das passiert, wenn Zenodo Schluckauf hat. Bitte versuche es in ein paar Minuten nochmal oder wähle eine anderes Repositorium aus dem Menü aus."
+msgstr "Das passiert, wenn Zenodo Schluckauf hat. Bitte versuche es in ein paar Minuten nochmal oder wähle eine anderes Repositorium oben aus dem Menü aus."
 
 #: deposit/zenodo/protocol.py:82
 msgid "Unable to authenticate to Zenodo."
@@ -670,7 +671,7 @@ msgstr "Bericht"
 
 #: papers/baremodels.py:63
 msgid "Thesis"
-msgstr "Dissertation"
+msgstr "Abschlussarbeit"
 
 #: papers/baremodels.py:64
 msgid "Dataset"
@@ -686,7 +687,7 @@ msgstr "Anderes Dokument"
 
 #: papers/forms.py:48
 msgid "Invalid ORCID identifier."
-msgstr "Ungültige ORCID."
+msgstr "Ungültige ORCID-Kennung."
 
 #: papers/forms.py:54 papers/templates/papers/department.html:86
 #: papers/templates/papers/search.html:160
@@ -695,7 +696,7 @@ msgstr "Fachbereich"
 
 #: papers/forms.py:56 papers/templates/papers/search.html:114
 msgid "Researcher"
-msgstr "Wissenschaftler"
+msgstr "Forscher"
 
 #: papers/forms.py:75
 msgid "publication date"
@@ -707,11 +708,11 @@ msgstr "Titel"
 
 #: papers/forms.py:79 publishers/forms.py:14
 msgid "decreasing"
-msgstr "absteigend"
+msgstr "rückläufig"
 
 #: papers/forms.py:80 publishers/forms.py:15
 msgid "increasing"
-msgstr "aufsteigend"
+msgstr "steigend"
 
 #: papers/forms.py:100 papers/forms.py:107
 msgid "Any"
@@ -723,7 +724,7 @@ msgstr "Sichtbar"
 
 #: papers/forms.py:102
 msgid "Invisible"
-msgstr "Versteckt"
+msgstr "Nicht sichtbar"
 
 #: papers/forms.py:191
 msgid "Try any author name"
@@ -739,27 +740,27 @@ msgstr "Veröffentlichte Version"
 
 #: papers/models.py:107
 msgid "Preparing profile"
-msgstr "Profil wird vorbereitet"
+msgstr "Profil wird erstellt"
 
 #: papers/models.py:108
 msgid "Fetching publications from ORCID"
-msgstr "Hole Veröffentlichungen von ORCID"
+msgstr "Rufe Veröffentlichungen von ORCID ab"
 
 #: papers/models.py:109
 msgid "Fetching publications from CrossRef"
-msgstr "Hole Veröffentlichungen von CrossRef"
+msgstr "Rufe Veröffentlichungen von CrossRef ab"
 
 #: papers/models.py:110
 msgid "Fetching publications from BASE"
-msgstr "Hole Veröffentlichungen von BASE"
+msgstr "Rufe Veröffentlichungen von BASE ab"
 
 #: papers/models.py:111
 msgid "Fetching publications from CORE"
-msgstr "Hole Veröffentlichungen von CORE"
+msgstr "Rufe Veröffentlichungen von CORE ab"
 
 #: papers/models.py:112
 msgid "Fetching publications from OAI-PMH"
-msgstr "Hole Veröffentlichungen von OAI-PMH"
+msgstr "Rufe Veröffentlichungen von OAI-PMH ab"
 
 #: papers/models.py:113
 msgid "Clustering publications"
@@ -794,7 +795,7 @@ msgstr "Profil erstellen"
 
 #: papers/templates/papers/createProfile.html:15
 msgid "\nTo fetch your publications, we need one last piece of information: your name.\n"
-msgstr "\nUm Deine Veröffentlichungen zu holen, fehlt uns noch eine letzte Information: Dein Name.\n"
+msgstr "\nUm Deine Veröffentlichungen abzurufen, fehlt uns noch eine letzte Information: Dein Name.\n"
 
 #: papers/templates/papers/department.html:60
 #: papers/templates/papers/institution.html:37
@@ -840,7 +841,7 @@ msgstr "Willkommen bei dissemin"
 
 #: papers/templates/papers/index.html:26
 msgid "Dissemin detects papers behind pay-walls and invites their authors to upload them in one click to an open repository."
-msgstr "Dissemin erkennt Publikationen hinter Bezahlwänden (\"Paywall\") und lädt ihre Verfasser dazu ein, sie mit einem Klick in ein freies Repositorium hochzuladen."
+msgstr "Dissemin erkennt Publikationen hinter Bezahlschranken (\"Paywall\") und lädt ihre Verfasser dazu ein, sie mit einem Klick in ein freies Repositorium hochzuladen."
 
 #: papers/templates/papers/index.html:36
 #: papers/templates/papers/search.html:204
@@ -863,19 +864,19 @@ msgstr "Viele Wissenschaftler nutzen nicht ihr Recht, ihre Publikationen zusätz
 
 #: papers/templates/papers/index.html:58
 msgid "This forces libraries to buy overpriced electronic subscriptions to journals, when they can afford them at all."
-msgstr "Dies zwingt Bibliotheken überteuerte Zeitschriftenabonnements zu kaufen, falls sie sich diese überhaupt leisten können."
+msgstr "Dies zwingt Bibliotheken überteuerte Zeitschriftenabonnements zu kaufen, sofern sie sich diese überhaupt leisten können."
 
 #: papers/templates/papers/index.html:74
 msgid "Open repositories"
-msgstr "Freie Repositorien"
+msgstr "Offene Repositorien"
 
 #: papers/templates/papers/index.html:77
 msgid "Uploading your papers on your own webpage is not enough. Such copies are less stable and harder to find than documents uploaded to well-indexed repositories."
-msgstr "Das Hochladen Deiner Publikationen auf Deiner eigenen Webseite reicht nicht. Solche Kopien sind weniger stabil und schwerer zu finden als Dokumente in gut indizierten Repositorien."
+msgstr "Das Hochladen Deiner Publikationen auf Deiner eigenen Webseite ist nicht ausreichend. Solche Kopien sind weniger stabil und schwerer zu finden als Dokumente in gut indizierten Repositorien."
 
 #: papers/templates/papers/index.html:85
 msgid "Dissemin searches for copies of your papers in a large collection of open repositories and tells you which ones cannot be accessed."
-msgstr "Dissemin sucht nach Kopien Deiner Publikationen in einer großen Zahl von freien Repositorien und sagt Dir, auf welche nicht zugegriffen werden können."
+msgstr "Dissemin sucht nach Kopien Deiner Publikationen in einer großen Zahl von offenen Repositorien und sagt Dir, auf welche nicht zugegriffen werden können."
 
 #: papers/templates/papers/institutions.html:25
 msgid "Institutions"
@@ -913,7 +914,7 @@ msgstr "<strong>Gratulation!</strong> Die Publikation wurde erfolgreich abgelegt
 #: papers/templates/papers/paper.html:96
 #, python-format
 msgid "<strong>Almost there!</strong> This paper has been deposited in <a href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a href=\"%(deposit_url)s\">this address</a> after validation by the repository administrators."
-msgstr "<strong>Fast geschafft!</strong> Die Publikation wurde erfolgreich bei <a href=\"%(repo_url)s\">%(repo_name)s</a> eingereicht. Der Volltext wird nach Überprüfung durch die Repositoriumsverwalter unter <a href=\"%(deposit_url)s\">dieser Adresse</a> verfügbar sein."
+msgstr "<strong>Fast geschafft!</strong> Die Publikation wurde erfolgreich bei <a href=\"%(repo_url)s\">%(repo_name)s</a> eingereicht. Der Volltext wird nach Überprüfung durch die Repositoriumsverwaltung unter <a href=\"%(deposit_url)s\">dieser Adresse</a> verfügbar sein."
 
 #: papers/templates/papers/paper.html:114
 msgid "Full text:"
@@ -2025,19 +2026,19 @@ msgstr "Volltextspeicher"
 
 #: templates/dissemin/tos.html:23 templates/dissemin/tos.html:117
 msgid "Reporting misuse"
-msgstr "Mißbrauch melden"
+msgstr "Missbräuchliche Verwendung melden"
 
 #: templates/dissemin/tos.html:32
 msgid "This platform offers an analysis of the accessibility of scholarly publications. It can also deposit publications on behalf of their authors in repositories. The accessibility and self-archiving policies of the papers on this platform can be incorrect and should not be relied upon for legal advice. When in doubt, users are advised to check from authoritative sources."
-msgstr ""
+msgstr "Diese Plattform bietet eine Analyse der Zugänglichkeit wissenschaftlicher Publikationen.Sie kann auch Publikationen für ihre Autor_innen in Repositorien hinterlegen.Die Zugänglichkeits- und Selbstarchivierungsrichtlinien der Veröffentlichungen auf dieser Plattform können falsch sein und sollten nicht zur Rechtsberatung herangezogen werden.Im Zweifelsfall wird Benutzer_innen empfohlen, autorisierenden Quellen zu überprüfen."
 
 #: templates/dissemin/tos.html:45
 msgid "Unauthenticated users are not tracked as the platform does not include any third-party analytics or advertisement services. Authenticated users are logged-in via ORCID, a third-party service. The platform has no access to the private information they provide to ORCID. In particular, we do not store any ORCID passwords, and we do not have access to email addresses that are marked as private in the ORCID record. We need to set cookies to authenticate our users, therefore by logging in on this platform, users accept these cookies."
-msgstr ""
+msgstr "Nicht authentifizierte Benutzer_innen werden nicht verfolgt, da die Plattform keine Analyse- oder Werbedienste von Drittanbietern enthält.Authentifizierte Benutzer_innen werden über ORCID, einen Dienst eines Drittanbieters, angemeldet. Die Plattform hat keinen Zugriff auf die privaten Informationen, die sie für ORCID bereitstellen. Insbesondere speichern wir keine ORCID-Passwörter und wir haben keinen Zugriff auf E-Mail-Adressen, die im ORCID-Datensatz als privat gekennzeichnet sind. Wir müssen Cookies benutzen, um unsere Benutzer_innen zu authentifizieren. Mit Anmeldung auf dieser Plattform, akzeptieren die Benutzer_innen diese Cookies."
 
 #: templates/dissemin/tos.html:63
 msgid "The platform can perform mandated publication deposit to repositories. Users are only allowed to upload papers that they have authored themselves, or papers whose authors have consented to the deposit. In addition to these terms of service, users are required to abide by the policies of these repositories."
-msgstr ""
+msgstr "Die Plattform kann mandatierte Veröffentlichungsablagen bei Repositorien durchführen. Benutzer sind nur dazu berechtigt, Publikationen hochzuladen, die sie selber verfasst haben oder Publikationen, deren Autoren der Ablage zugestimmt haben. Über diese Nutzungsbedingungen hinaus müssen Benutzer die Richtlinien dieser Repositorien einhalten."
 
 #: templates/dissemin/tos.html:74
 msgid "Contact"
@@ -2049,23 +2050,23 @@ msgstr "Bitte richte alle Anfragen an support@dissem.in."
 
 #: templates/dissemin/tos.html:86
 msgid "Dissemin uses ORCID's public OAuth interface to authenticate its users. This interface only transmits information marked as public in the user's ORCID profile. This means that ORCID passwords are never transmitted and email addresses are not transmitted when they are marked as private, which is the default setting. When logging in to Dissemin from ORCID, Dissemin acquires the user's ORCID id, as well as all public information attached to the ORCID record. Dissemin can store any information input by its users on the platform. Users can ask for a copy of the personal information Dissemin stores about them by writing an email to support@dissem.in."
-msgstr ""
+msgstr "Dissemin verwendet die öffentliche OAuth-Schnittstelle von ORCID, um seine Benutzer zu authentifizieren. Diese Schnittstelle übermittelt nur Informationen, die im ORCID-Profil des Benutzers als öffentlich markiert wurden. Das bedeutet, dass niemals ORCID-Passwörter übermittelt werden. E-Mail-Adressen werden ebenfalls nicht übermittelt, wenn sie als privat markiert wurden, was der Standardeinstellung entspricht. Bei der Anmeldung bei Dissemin von ORCID erhält Dissemin sowohl die Benutzerkennung von ORCID als auch alle öffentlichen Informationen deines ORCID-Profils. Dissemin kann alle Benutzereingaben von Informationen auf der Plattform speichern. Benutzer können um eine Kopie der persönlichen Informationen bitten, die Dissemin über sie speichert, indem sie eine E-Mail an support@dissem.in schreiben."
 
 #: templates/dissemin/tos.html:104
 msgid "Documents deposited in repositories via Dissemin can be stored on the platform, but are not available for download on the platform. They can be stored internally for logging purposes, and to make sure failed deposits can be fixed later. Dissemin does not commit to store any of the files it receives from its users. Users can write to support@dissem.in if they want one of their uploads to be deleted from our internal storage space, or from the repository they have deposited to. Note that deletion policies vary accross repositories: we provide no guarantee that deposits can be deleted from the target repositories."
-msgstr ""
+msgstr "In Repositorien über Dissemin abgelegte Dokumente können auf der Plattform gespeichert werden, sind jedoch nicht zum Herunterladen auf der Plattform verfügbar. Sie können intern zu Protokollierungszwecken gespeichert werden und um sicherzustellen, dass fehlgeschlagene Ablagen später korrigiert werden können. Dissemin übermittelt nicht, um die Dateien zu speichern, die es von seinen Benutzern erhält. Benutzer können an support@dissem.in schreiben, falls sie einen ihrer Uploads von unserem internen Speicherplatz oder dem Repositorium löschen möchten, auf dem sie abgelegt wurden. Beachte, dass Löschrichtlinien auf den Repositorien variieren können: Wir bieten keine Garantie, dass Ablagen von den Ziel-Repositorien gelöscht werden können."
 
 #: templates/dissemin/tos.html:120
 msgid "Misuse can be reported to support@dissem.in."
-msgstr "Mißbrauch kann an support@dissem.in gemeldet werden."
+msgstr "Missbräuchliche Verwendung kann an support@dissem.in gemeldet werden."
 
 #: templates/dissemin/tos.html:128
 msgid "The <a href=\"https://dissem.in\">dissem.in</a> website has been registered with <a href=\"https://www.cnil.fr/\">CNIL</a> under declaration n°1895382 v0."
-msgstr ""
+msgstr "Die <a href=\"https://dissem.in\">dissem.in</a>-Website wurde bei <a href=\"https://www.cnil.fr/\">CNIL</a> unter der Erklärung n°1895382 v0 registriert."
 
 #: templates/dissemin/tos.html:136
 msgid "You have the right to access, modify, and delete the personal information that we hold about you. To exercise this right, please contact us at support@dissem.in, or by postal mail at the following addresss:"
-msgstr ""
+msgstr "Du hast das Recht auf den Zugang, die Veränderung und Löschung der persönlichen Informationen, die wir über dich erheben. Um dieses Recht auszuüben, kontaktiere uns bitte unter support@dissem.in oder per Post an die folgende Adresse:"
 
 #: templates/socialaccount/authentication_error.html:6
 #: templates/socialaccount/authentication_error.html:12
@@ -2074,16 +2075,16 @@ msgstr "Authentifizierungsfehler"
 
 #: templates/socialaccount/authentication_error.html:16
 msgid "\n            Authentication has failed. <a href=\"/\">Go back to the login page.</a>\n           "
-msgstr ""
+msgstr "Authentifizierung fehlgeschlagen. <a href=\"/\"> Gehe zurück zur Anmeldeseite.</a> \n           "
 
 #: upload/forms.py:29
 msgid "Invalid file format: only PDF files are accepted."
-msgstr ""
+msgstr "Ungültiges Dateiformat: Es werden nur PDF-Dateien akzeptiert."
 
 #: upload/forms.py:39
 #, python-format
 msgid "File too large (%(size)s). Maximum size is %(maxsize)s."
-msgstr ""
+msgstr "Datei zu groß (%(size)s). Maximalgröße %(maxsize)s."
 
 #: upload/forms.py:47
 msgid "URL"
@@ -2091,7 +2092,7 @@ msgstr "URL"
 
 #: upload/templates/upload/widget.html:4
 msgid "Select here the full text of your article. PDF files only, maximum size:"
-msgstr ""
+msgstr "Wähle hier den Volltext Deines Artikels. Nur PDF-Dateien, maximale Größe:"
 
 #: upload/templates/upload/widget.html:9
 msgid "Select a file:"
@@ -2107,7 +2108,7 @@ msgstr "Oder eine URL angeben:"
 
 #: upload/templates/upload/widget.html:28
 msgid "Or drop a file here:"
-msgstr "Oder eine Datei reinziehen:"
+msgstr "Oder hier eine Datei reinziehen:"
 
 #: upload/views.py:132
 msgid "Invalid PDF file."
@@ -2123,15 +2124,15 @@ msgstr "Datei zu groß."
 
 #: upload/views.py:180
 msgid "Invalid content type: this link points to a web page, we need a direct link to a PDF file."
-msgstr ""
+msgstr "Ungültiger Content-Typ: Dieser Link weist auf eine Webseite hin, wir benötigen einen direkten Link zu einer PDF-Datei."
 
 #: upload/views.py:183
 msgid "Invalid SSL certificate on the remote server."
-msgstr ""
+msgstr "Ungültiges SSL Zertifikat auf dem Remote-Server."
 
 #: upload/views.py:185 upload/views.py:189
 msgid "Invalid URL (server timed out)."
-msgstr ""
+msgstr "Ungültige URL (Zeitüberschreitung des Servers)."
 
 #: upload/views.py:187 upload/views.py:191
 msgid "Invalid URL."
