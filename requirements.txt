@@ -5,7 +5,7 @@ bibtexparser>=1.1.0
 redis<3
 celery[redis]
 cryptography
-django>=1.11.16,<1.11.19
+django==1.11.20
 django-autocomplete-light
 django-bootstrap-pagination
 django-bulk-update
