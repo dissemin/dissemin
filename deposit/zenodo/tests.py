@@ -51,11 +51,35 @@ class ZenodoProtocolTest(ProtocolTest):
             license = ZENODO_DEFAULT_LICENSE_CHOICE)
         self.assertEqualOrLog(r.status, 'faked')
 
-    def test_deposit_paper_already_on_zenodo(self):
+    def test_try_deposit_paper_already_on_zenodo(self):
+        """
+        If the paper is already known to be on Zenodo by Dissemin,
+        ``init_deposit`` should return ``False`` to prevent any new deposit.
+        """
         p = get_proaixy_instance().create_paper_by_identifier(
             'ftzenodo:oai:zenodo.org:50134', 'base_dc')
         enabled = self.proto.init_deposit(p, self.user)
         self.assertFalse(enabled)
+
+    def test_paper_already_on_zenodo(self):
+        """
+        In this case, Dissemin missed the paper on Zenodo
+        (for some reason) and so the deposit interface was
+        enabled. But Zenodo refuses the deposit! We have to
+        give a good error message to the user.
+        """
+        p = Paper.create_by_doi('10.5281/zenodo.50134')
+        r = self.dry_deposit(
+            p,
+            abstract = lorem_ipsum,
+            license = ZENODO_DEFAULT_LICENSE_CHOICE
+        )
+
+        # Deposit fails: a duplicate is found
+        self.assertEqualOrLog(r.status, 'failed')
+
+        # The error message should be specific
+        self.assertTrue('already in Zenodo' in r.message)
 
     def test_500_error(self):
         with requests_mock.Mocker(real_http=True) as mocker:

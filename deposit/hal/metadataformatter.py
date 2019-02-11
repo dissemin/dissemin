@@ -70,40 +70,4 @@ def addChild(elem, childName, text=None):
     return node
 
 
-class DCFormatter(MetadataFormatter):
-    """
-    Generic SWORD formatter
-    """
 
-    def formatName(self):
-        return "dc"
-
-    def render(self, paper, filename, form=None):
-        xmlns_uri = 'http://www.w3.org/2005/Atom'
-        dcterms_uri = "http://purl.org/dc/terms/"
-        xmlns = '{%s}' % xmlns_uri
-        dcterms = '{%s}' % dcterms_uri
-        nsmap = {None: xmlns_uri, 'dcterms': dcterms_uri}
-        entry = etree.Element(xmlns+'entry', nsmap=nsmap)
-
-        addChild(entry, 'title', paper.title)
-
-        addChild(entry, 'id', 'paper/%d' % paper.id)
-
-        addChild(entry, 'updated', paper.last_modified.isoformat())
-
-        # Here comes the actual metadata
-
-        addChild(entry, dcterms+'title', paper.title)
-        if paper.abstract:
-            addChild(entry, dcterms+'abstract', paper.abstract)
-        addChild(entry, dcterms+'type', paper.doctype)
-
-        for a in paper.authors:
-            addChild(entry, dcterms+'contributor', unicode(a))
-
-        for p in paper.oairecords:
-            if p.doi:
-                addChild(entry, dcterms+'identifier', p.doi)
-
-        return entry

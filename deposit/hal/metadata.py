@@ -25,8 +25,8 @@ This module defines a OAfr/TEI exporter, to be used with the SWORD interface to 
 
 from __future__ import unicode_literals
 
-from deposit.sword.metadata import addChild
-from deposit.sword.metadata import MetadataFormatter
+from deposit.hal.metadataformatter import addChild
+from deposit.hal.metadataformatter import MetadataFormatter
 from lxml import etree
 from django.utils.translation import ugettext as _
 

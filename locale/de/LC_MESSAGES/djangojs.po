@@ -3,11 +3,12 @@
 #
 # Author: Becks
 # Author: Danielbeerbonn
+# Author: Leslie Neumann
 # Author: Metalhead64
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2019-01-30 22:39:36+0000\n"
+"PO-Revision-Date: 2019-02-07 14:54:32+0000\n"
 "X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -41,12 +42,12 @@ msgstr "Suchergebnisse"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:568
 msgid "Your search did not match any documents. Please make sure that all words are spelled correctly and that you've selected enough categories."
-msgstr ""
+msgstr "Deine Suche stimmt mit keinem Dokument überein. Bitte stelle sicher, dass alle Wörter richtig geschrieben und ausreichend Kategorien ausgewählt sind."
 
 #: doc/sphinx/_build/html/_static/searchtools.js:570
 #, javascript-format
 msgid "Search finished, found %s page(s) matching the search query."
-msgstr ""
+msgstr "Suche abgeschlossen, gefunden wurde(n) %s Seite(n), die der Suchanfrage entspricht/entsprechen."
 
 #: doc/sphinx/_build/html/_static/searchtools.js:623
 msgid ", in "
@@ -63,11 +64,11 @@ msgstr "Seitenleiste einklappen"
 
 #: papers/static/papers/refresh.js:35
 msgid "Do not show this message anymore"
-msgstr "Diese Nachricht nicht wieder anzeigen"
+msgstr "Diese Nachricht nicht mehr anzeigen"
 
 #: papers/static/papers/refresh.js:66
 msgid "No author"
-msgstr "Kein Verfasser"
+msgstr "Kein_e Verfasser_in"
 
 #: papers/static/papers/refresh.js:68
 msgid "No title"
@@ -85,7 +86,7 @@ msgstr[1] "Wir haben %(count)s Publikationen aus Deinem ORCiD-Profil ignoriert."
 
 #: papers/static/papers/refresh.js:115
 msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
-msgstr ""
+msgstr "\"%(name)s\" wurde aus folgenden Gründen ignoriert: %(reason)s"
 
 #: papers/static/papers/refresh.js:123
 msgid "A paper was ignored, because it has no name"

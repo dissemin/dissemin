@@ -1,11 +1,10 @@
 -e git://github.com/dissemin/django-allauth.git@used_by_dissemin#egg=django-allauth
--e git://github.com/swordapp/python-client-sword2#egg=sword2
 -e git://github.com/wetneb/pyoai.git@any_metadataPrefix#egg=pyoai
 PyPDF2
 bibtexparser>=1.1.0
+redis<3
 celery[redis]
 cryptography
-czipfile
 django>=1.11.16
 django-autocomplete-light
 django-bootstrap-pagination
