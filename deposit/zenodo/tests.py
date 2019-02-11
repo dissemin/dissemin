@@ -61,6 +61,12 @@ class ZenodoProtocolTest(ProtocolTest):
         enabled = self.proto.init_deposit(p, self.user)
         self.assertFalse(enabled)
 
+    @unittest.skip("""
+    It seems that Zenodo have changed their logic here.
+    Now, depositing a paper with a DOI that is already in Zenodo
+    will result in the new deposition being still created,
+    but with the DOI ignored (so, a Zenodo DOI assigned).
+    """)
     def test_paper_already_on_zenodo(self):
         """
         In this case, Dissemin missed the paper on Zenodo
@@ -69,7 +75,7 @@ class ZenodoProtocolTest(ProtocolTest):
         give a good error message to the user.
         """
         p = Paper.create_by_doi('10.5281/zenodo.50134')
-        r = self.dry_deposit(
+        r = self.deposit(
             p,
             abstract = lorem_ipsum,
             license = ZENODO_DEFAULT_LICENSE_CHOICE

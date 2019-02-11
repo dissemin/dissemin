@@ -101,6 +101,9 @@ class ProtocolTest(django.test.TestCase):
         subclasses can call to create a fake deposit
         (if the protocol supports it!)
         """
+        return self.deposit(paper, dry_run=True, **form_fields)
+        
+    def deposit(self, paper, dry_run=False, **form_fields):
         enabled = self.proto.init_deposit(paper, self.user)
         self.assertTrue(enabled)
 
@@ -113,7 +116,7 @@ class ProtocolTest(django.test.TestCase):
         self.assertTrue(form.is_valid())
         pdf = 'mediatest/blank.pdf'
         deposit_result = self.proto.submit_deposit_wrapper(pdf,
-                                                           form, dry_run=True)
+                                                           form, dry_run=dry_run)
         self.assertIsInstance(deposit_result, DepositResult)
         self.assertIsInstance(deposit_result.additional_info, list)
         for i in deposit_result.additional_info:
