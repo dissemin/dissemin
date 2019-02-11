@@ -36,6 +36,7 @@ from dissemin.settings import CROSSREF_USER_AGENT
 from dissemin.settings import CROSSREF_MAILTO
 from django.db import DataError
 from django.utils.http import urlencode
+from django.utils import timezone
 from papers.baremodels import BareName
 from papers.baremodels import BareOaiRecord
 from papers.baremodels import BarePaper
@@ -535,25 +536,35 @@ class CrossRefAPI(object):
                 raise MetadataSourceException('Error while fetching CrossRef results:\nError was: '+str(e))
 
 
-    def fetch_and_save_new_records(self, starting_cursor='*'):
+    def fetch_and_save_new_records(self, starting_cursor='*', batch_time=datetime.timedelta(days=1)):
         """
         Fetches and stores all new Crossref records updated since the
         last update time of the associated OaiSource.
         """
         source = OaiSource.objects.get(identifier='crossref')
-        last_updated = source.last_update
 
-        to_update = self.fetch_all_records(filters={'from-update-date':last_updated.date().isoformat()},
-                cursor=starting_cursor)
-        for record in to_update:
-            try:
-                bare_paper = self.save_doi_metadata(record)
-                p = Paper.from_bare(bare_paper)
-                p.update_index()
-            except ValueError as e:
-                print(e)
+        # We substract one day to 'until-update-date' parameter as it is inclusive
+        one_day = datetime.timedelta(days=1)
 
-        source.last_update = datetime.datetime.now()
-        source.save()
+        while source.last_update + batch_time < timezone.now():
+            last_updated = source.last_update
+
+            until_date = (last_updated + batch_time - one_day).date()
+
+            to_update = self.fetch_all_records(
+                filters={'from-update-date':last_updated.date().isoformat(),
+                         'until-update-date':until_date.isoformat()},
+                    cursor=starting_cursor)
+            for record in to_update:
+                try:
+                    bare_paper = self.save_doi_metadata(record)
+                    p = Paper.from_bare(bare_paper)
+                    p.update_index()
+                except ValueError as e:
+                    print((record.get('DOI') or 'unknown DOI') + ': '+unicode(e))
+
+            print('Updated up to '+until_date.isoformat())
+            source.last_update += batch_time
+            source.save()
 
 
