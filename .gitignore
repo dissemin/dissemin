@@ -49,3 +49,13 @@ pyflakes.out
 
 # uploads, when testing in vagrant
 dissemin_media/
+
+
+# Eclipse PyDev settings
+.idea
+.project
+.pydevproject
+.settings/
+
+# API keys
+*_api_key
