@@ -10,15 +10,15 @@ from papers.models import Paper
 class OadoiAPITest(django.test.TestCase):
     
     def test_ingest_dump(self):
-        doi = '10.1016/j.reval.2012.02.143'
+        doi = '10.1080/21645515.2017.1330236'
         p = Paper.create_by_doi(doi)
         self.assertEqual(p.pdf_url, None)
         Paper.create_by_doi(doi)
 
         # then load an OAdoi dump
         oadoi = OadoiAPI()
-        oadoi.load_dump('devutils/sample_oadoi_dump.csv.gz')
+        oadoi.load_dump('devutils/sample_unpaywall_snapshot.jsonl.gz')
 
         # the paper is now OA, yay!
         p = Paper.get_by_doi(doi)
-        self.assertEqual(p.pdf_url, 'http://prodinra.inra.fr/ft/CC06E77F-B3EE-4BD2-890D-067243B8ACAF')
+        self.assertEqual(p.pdf_url, 'http://europepmc.org/articles/pmc5718814?pdf=render')
