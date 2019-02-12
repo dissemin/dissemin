@@ -91,7 +91,6 @@ class OadoiAPI(object):
             try:
                 paper.add_oairecord(record)
                 paper.update_availability()
-                # TODO re-enable this
-                #paper.update_index()
+                paper.update_index()
             except (DataError, ValueError):
                 print('Record does not fit in the DB')
