@@ -78,6 +78,9 @@ class RenderingTest(django.test.TestCase):
 
     def checkPermanentRedirect(self, *args, **kwargs):
         self.assertEqual(self.getPage(*args, **kwargs).status_code, 301)
+        
+    def checkTemporaryRedirect(self, *args, **kwargs):
+        self.assertEqual(self.getPage(*args, **kwargs).status_code, 302)
 
     def check404(self, *args, **kwargs):
         self.assertEqual(self.getPage(*args, **kwargs).status_code, 404)
@@ -107,6 +110,10 @@ class PaperPagesTest(RenderingTest):
     def test_researcher_orcid(self):
         self.checkPermanentRedirect(
             'researcher-by-orcid', kwargs={'orcid': self.r4.orcid})
+        
+    def test_update_researcher(self):
+        self.checkTemporaryRedirect(
+            'refetch-researcher', kwargs={'pk':self.r4.id})
 
     def test_researcher_no_name(self):
         # this ORCID profile does not have a public name:

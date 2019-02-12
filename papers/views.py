@@ -333,10 +333,7 @@ def refetchResearcher(request, pk):
     from backend.tasks import fetch_everything_for_researcher
     fetch_everything_for_researcher.delay(pk=pk)
 
-    if 'HTTP_REFERER' in request.META:
-        return redirect(request.META['HTTP_REFERER'])
-    else:
-        return redirect(reverse('researcher', researcher=pk))
+    return redirect(reverse('researcher', researcher=pk))
 
 
 @user_passes_test(is_authenticated)
