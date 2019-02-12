@@ -332,7 +332,11 @@ def refetchResearcher(request, pk):
         return HttpResponseForbidden("Not authorized to update papers for this researcher.")
     from backend.tasks import fetch_everything_for_researcher
     fetch_everything_for_researcher.delay(pk=pk)
-    return redirect(request.META['HTTP_REFERER'])
+
+    if 'HTTP_REFERER' in request.META:
+        return redirect(request.META['HTTP_REFERER'])
+    else:
+        return redirect(reverse('researcher', researcher=pk))
 
 
 @user_passes_test(is_authenticated)
