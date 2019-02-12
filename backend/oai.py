@@ -282,6 +282,15 @@ class BASEDCTranslator(OAIDCTranslator):
     base_dc is very similar to oai_dc, so we
     don't have much to change
     """
+    
+    def __init__(self, source=None):
+        super(BASEDCTranslator, self).__init__()
+        self.source = source
+        
+    def get_source(self, header, record):
+        if self.source:
+            return self.source
+        return super(BASEDCTranslator, self).get_source(header, record)
 
     def format(self):
         return 'base_dc'
@@ -360,11 +369,11 @@ class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSo
         :param metadataPrefix: restrict the ingest for this metadata
                           format
         """
-	args = {'metadataPrefix':metadataPrefix}
-	if from_date:
-	    args['from_'] = from_date
-	if resumptionToken:
-	    args['resumptionToken'] = resumptionToken
+        args = {'metadataPrefix':metadataPrefix}
+        if from_date:
+            args['from_'] = from_date
+        if resumptionToken:
+            args['resumptionToken'] = resumptionToken
         records = self.client.listRecords(**args)
         self.process_records(records)
 

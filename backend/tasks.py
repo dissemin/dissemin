@@ -24,6 +24,7 @@ from __future__ import unicode_literals
 from statistics.models import AccessStatistics
 
 from datetime import timedelta
+from datetime import datetime
 from backend.zotero import consolidate_publication
 from backend.orcid import OrcidPaperSource
 from backend.crossref import CrossRefAPI
@@ -36,8 +37,11 @@ from papers.models import Paper
 from papers.models import PaperWorld
 from papers.models import Researcher
 from papers.models import Institution
+from papers.models import OaiSource
 from publishers.models import Journal
 from publishers.models import Publisher
+from backend.oai import OaiPaperSource
+from backend.oai import BASEDCTranslator
 
 logger = get_task_logger(__name__)
 
@@ -156,3 +160,12 @@ def update_crossref():
     c = CrossRefAPI()
     c.fetch_and_save_new_records()
 
+@shared_task(name='update_base')
+@run_only_once('update_base', timeout=24*3600)
+def update_base():
+    b = OaiSource.objects.get(identifier='base')
+    oai = OaiPaperSource(endpoint='http://oai.base-search.net/oai')
+    oai.add_translator(BASEDCTranslator(b))
+    oai.ingest(b.last_update)
+    b.last_update = datetime.now()
+    b.save()
