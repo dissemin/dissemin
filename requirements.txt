@@ -33,6 +33,7 @@ httplib2
 jsonfield
 lxml
 mock
+multiprocessing_generator
 name_tools
 ndg-httpsclient
 pillow

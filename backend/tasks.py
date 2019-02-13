@@ -166,6 +166,6 @@ def update_base():
     b = OaiSource.objects.get(identifier='base')
     oai = OaiPaperSource(endpoint='http://oai.base-search.net/oai')
     oai.add_translator(BASEDCTranslator(b))
-    oai.ingest(b.last_update)
+    oai.ingest(b.last_update.replace(tzinfo=None), metadataPrefix='base_dc')
     b.last_update = datetime.now()
     b.save()

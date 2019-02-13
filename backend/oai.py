@@ -29,6 +29,7 @@ from backend.papersource import PaperSource
 from backend.pubtype_translations import OAI_PUBTYPE_TRANSLATIONS
 from django.conf import settings
 from django.db import transaction
+from multiprocessing_generator import ParallelGenerator
 from oaipmh import common
 from oaipmh.client import Client
 from oaipmh.error import DatestampError
@@ -282,11 +283,11 @@ class BASEDCTranslator(OAIDCTranslator):
     base_dc is very similar to oai_dc, so we
     don't have much to change
     """
-    
+
     def __init__(self, source=None):
         super(BASEDCTranslator, self).__init__()
         self.source = source
-        
+
     def get_source(self, header, record):
         if self.source:
             return self.source
@@ -338,9 +339,6 @@ class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSo
         self.registry.registerReader('citeproc', citeproc_reader)
         self.client = Client(endpoint, self.registry)
         self.client._day_granularity = day_granularity
-        if settings.PROAIXY_API_KEY:
-            self.client.extra_parameters = {
-                'key': settings.PROAIXY_API_KEY}
         self.translators = {}
 
     # Translator management
@@ -439,19 +437,20 @@ class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSo
         last_report = datetime.now()
         processed_since_report = 0
 
-        for record in listRecords:
-            header = record[0]
-            metadata = record[1]._map
+        with ParallelGenerator(listRecords, max_lookahead=1000) as g:
+            for record in g:
+                header = record[0]
+                metadata = record[1]._map
 
-            self.process_record(header, metadata)
+                self.process_record(header, metadata)
 
-            # rate reporting
-            processed_since_report += 1
-            if processed_since_report >= 1000:
-                td = datetime.now() - last_report
-                rate = 'infty'
-                if td.seconds:
-                    rate = unicode(processed_since_report / td.seconds)
-                print("current rate: %s records/s" % rate)
-                processed_since_report = 0
-                last_report = datetime.now()
+                # rate reporting
+                processed_since_report += 1
+                if processed_since_report >= 1000:
+                    td = datetime.now() - last_report
+                    rate = 'infty'
+                    if td.seconds:
+                        rate = unicode(processed_since_report / td.seconds)
+                    print("current rate: %s records/s" % rate)
+                    processed_since_report = 0
+                    last_report = datetime.now()
