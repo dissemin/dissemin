@@ -22,6 +22,7 @@ from __future__ import unicode_literals
 
 import datetime
 import json
+import bz2
 
 import requests
 from requests.exceptions import RequestException
@@ -555,5 +556,19 @@ class CrossRefAPI(object):
 
         source.last_update = datetime.datetime.now()
         source.save()
-
-
+        
+    def ingest_dump(self, filename):
+        """
+        Imports a dump of Crossref metadata records stored as a bz2'ed
+        file where each line is a JSON record.
+        """
+        with bz2.BZ2File(filename, 'r') as f:
+            for line in f:
+                try:
+                    record = json.loads(line)
+                    bare_paper = self.save_doi_metadata(record)
+                    p = Paper.from_bare(bare_paper)
+                    p.update_index()
+                except ValueError as e:
+                    print(e)
+                    

@@ -34,6 +34,7 @@ from backend.crossref import is_oa_license
 from backend.crossref import parse_crossref_date
 from django.test import TestCase
 from papers.errors import MetadataSourceException
+from papers.models import Paper
 
 
 class CrossRefTest(TestCase):
@@ -108,6 +109,12 @@ class CrossRefTest(TestCase):
         for i in range(30):
             metadata = next(generator)
             self.assertTrue(metadata['DOI'].startswith('10.1007/'))
+            
+    def test_import_dump(self):
+        self.api.ingest_dump('devutils/sample_crossref_dump.json.bz2')
+        p = Paper.get_by_doi('10.1016/j.jadohealth.2015.10.045')
+        self.assertEqual("Sources, Type and Use of Social Support during Early Sexual Development of Black Gay and Bisexual Adolescent Males",
+                         p.title)
 
 class CrossRefUnitTest(unittest.TestCase):
 
