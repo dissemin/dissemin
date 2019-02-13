@@ -27,7 +27,6 @@ from backend.crossref import CrossRefAPI
 from backend.extractors import REGISTERED_OAI_EXTRACTORS
 from backend.papersource import PaperSource
 from backend.pubtype_translations import OAI_PUBTYPE_TRANSLATIONS
-from django.conf import settings
 from django.db import transaction
 from multiprocessing_generator import ParallelGenerator
 from oaipmh import common
