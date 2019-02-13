@@ -580,6 +580,6 @@ class CrossRefAPI(object):
                     bare_paper = self.save_doi_metadata(record)
                     p = Paper.from_bare(bare_paper)
                     p.update_index()
-                except ValueError as e:
-                    print(e)
+                except (MetadataSourceException, ValueError) as e:
+                    print((record.get('DOI') or 'unknown DOI') + ': ' + unicode(e))
 
