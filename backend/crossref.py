@@ -38,6 +38,7 @@ from dissemin.settings import CROSSREF_MAILTO
 from django.db import DataError
 from django.utils.http import urlencode
 from django.utils import timezone
+from elasticsearch.exceptions import ConnectionTimeout
 from papers.baremodels import BareName
 from papers.baremodels import BareOaiRecord
 from papers.baremodels import BarePaper
@@ -56,6 +57,7 @@ from papers.utils import valid_publication_date
 from papers.utils import validate_orcid
 from publishers.models import AliasPublisher
 from backend.pubtype_translations import CROSSREF_PUBTYPE_ALIASES
+from time import sleep
 
 ######## HOW THIS MODULE WORKS ###########
 #
@@ -568,18 +570,31 @@ class CrossRefAPI(object):
             source.last_update += batch_time
             source.save()
 
-    def ingest_dump(self, filename):
+    def ingest_dump(self, filename, start_doi=None):
         """
         Imports a dump of Crossref metadata records stored as a bz2'ed
         file where each line is a JSON record.
         """
         with bz2.BZ2File(filename, 'r') as f:
+            first_doi_seen = start_doi is None
             for line in f:
                 try:
                     record = json.loads(line)
+                    if start_doi and record.get('DOI') == start_doi:
+                        first_doi_seen = True
+                    if not first_doi_seen:
+                        continue
+
                     bare_paper = self.save_doi_metadata(record)
                     p = Paper.from_bare(bare_paper)
-                    p.update_index()
+
+                    for i in range(3):
+                        try:
+                            p.update_index()
+                            break
+                        except ConnectionTimeout as e:
+                            print(e)
+                            sleep(10*i)
                 except (MetadataSourceException, ValueError) as e:
                     print((record.get('DOI') or 'unknown DOI') + ': ' + unicode(e))
 
