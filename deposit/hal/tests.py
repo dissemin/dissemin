@@ -31,11 +31,7 @@ from papers.models import Paper
 from papers.models import OaiRecord
 from upload.models import UploadedPDF
 from backend.oai import OaiPaperSource
-from backend.oai import BASEDCTranslator
-
-from backend.oai import get_proaixy_instance
-
-#from os import path
+from backend.translators import BASEDCTranslator
 
 
 class AOFRTest(TestCase):
@@ -209,8 +205,8 @@ class HALProtocolTest(ProtocolTest):
         self.assertEqualOrLog(r.status, 'faked')
 
     def test_paper_already_in_hal(self):
-        p = get_proaixy_instance().create_paper_by_identifier(
-            'ftunivsavoie:oai:HAL:hal-01062241v1', 'base_dc')
+        p = Paper.create_by_hal_id(
+            'hal-01062241v1')
         enabled = self.proto.init_deposit(p, self.user)
         self.assertFalse(enabled)
 

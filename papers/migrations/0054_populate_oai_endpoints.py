@@ -6,6 +6,7 @@ from django.db import migrations
 oai_sources = {
     'arxiv':'http://export.arxiv.org/oai2',
     'hal':'https://api.archives-ouvertes.fr/oai/hal/',
+    'pmc':'https://www.ncbi.nlm.nih.gov/pmc/oai/oai.cgi',
     }
 
 

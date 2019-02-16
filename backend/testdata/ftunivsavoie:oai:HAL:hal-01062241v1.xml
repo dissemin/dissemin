@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?xml-stylesheet type="text/xsl" href="/static/oai2.xsl"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2019-02-16T16:55:54Z</responseDate>
+    <request verb="GetRecord" identifier="ftunivsavoie:oai:HAL:hal-01062241v1" metadataPrefix="base_dc">http://doai.io/oai?key=2b2b97d581a08b6833d3&amp;verb=GetRecord&amp;metadataPrefix=base_dc&amp;identifier=ftunivsavoie%3Aoai%3AHAL%3Ahal-01062241v1</request>
+    
+<GetRecord>
+    
+<record>
+    <header>
+        <identifier>ftunivsavoie:oai:HAL:hal-01062241v1</identifier>
+        <datestamp>2016-11-28T10:39:57Z</datestamp>
+        <setSpec>proaixy:source:base</setSpec>
+    </header>
+    <metadata xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <base_dc:dc xmlns:base_dc="http://oai.base-search.net/base_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xsi:schemaLocation="http://oai.base-search.net/base_dc/ http://oai.base-search.net/base_dc/base_dc.xsd">
+          <dc:title>"Model and measurements of a Transmission Line with Integrated Symmetrical 1-kV HBM Broadband ESD Protection in Advanced CMOS Technologies",Sept. 24-26, 2012, Grenoble, France.</dc:title>
+          <dc:creator>Lim, T.</dc:creator>
+          <dc:creator>Jimenez, J.</dc:creator>
+          <dc:creator>Benech, P.</dc:creator>
+          <dc:creator>Fournier, J.-M.</dc:creator>
+          <dc:creator>Heitz, B.</dc:creator>
+          <dc:creator>Galy, P.</dc:creator>
+          <dc:description>International audience</dc:description>
+          <dc:language>en</dc:language>
+          <dc:date>2012-09-24</dc:date>
+          <dc:identifier>https://hal.archives-ouvertes.fr/hal-01062241</dc:identifier>
+          <dc:subject>[SPI.NANO] Engineering Sciences [physics]/Micro and nanotechnologies/Microelectronics</dc:subject>
+          <dc:publisher>HAL CCSD</dc:publisher>
+          <dc:contributor>Laboratoire de Probabilit&#233;s et Mod&#232;les Al&#233;atoires (LPMA)</dc:contributor>
+          <dc:contributor>Universit&#233; Pierre et Marie Curie - Paris 6 (UPMC) - Universit&#233; Paris Diderot - Paris 7 (UP7) - Centre National de la Recherche Scientifique (CNRS)</dc:contributor>
+          <dc:contributor>Departomento Tecnologia Electronice, ETSI de Telecomunicacion, Universitad Politecnica de Madrid, Spain</dc:contributor>
+          <dc:contributor>Departomento Tecnologia Electronice, ETSI de Telecomunicacion, Universitad Politecnica de Madrid, Spain</dc:contributor>
+          <dc:contributor>Radio Fr&#233;quences et Millim&#233;trique (RFM)</dc:contributor>
+          <dc:contributor>Institut de Micro&#233;lectronique, Electromagn&#233;tisme et Photonique - Laboratoire d'Hyperfr&#233;quences et Caract&#233;risation (IMEP-LAHC)</dc:contributor>
+          <dc:contributor>Universit&#233; Joseph Fourier - Grenoble 1 (UJF) - Institut National Polytechnique de Grenoble (INPG) - Universit&#233; Savoie Mont Blanc (USMB Universit&#233; de Savoie Universit&#233; de Chamb&#233;ry ) - Centre National de la Recherche Scientifique (CNRS) - Universit&#233; Joseph Fourier - Grenoble 1 (UJF) - Institut National Polytechnique de Grenoble (INPG) - Universit&#233; Savoie Mont Blanc (USMB Universit&#233; de Savoie Universit&#233; de Chamb&#233;ry ) - Centre National de la Recherche Scientifique (CNRS)</dc:contributor>
+          <dc:type>info:eu-repo/semantics/conferenceObject</dc:type>
+          <dc:type>Conference papers</dc:type>
+          <dc:source>International Semiconductor Conference Dresden-Grenoble, ISCDG 2012, ; https://hal.archives-ouvertes.fr/hal-01062241 ; International Semiconductor Conference Dresden-Grenoble, ISCDG 2012,, Sep 2012, grenoble, France. 2012</dc:source>
+          <dc:coverage>grenoble, France</dc:coverage>
+          <base_dc:collection>ftunivsavoie</base_dc:collection>
+          <base_dc:collname>Universit&#233; Savoie Mont Blanc: HAL</base_dc:collname>
+          <base_dc:continent>ceu</base_dc:continent>
+          <base_dc:country>fr</base_dc:country>
+          <base_dc:lang>eng</base_dc:lang>
+          <base_dc:link>https://hal.archives-ouvertes.fr/hal-01062241</base_dc:link>
+          <base_dc:oa>2</base_dc:oa>
+          <base_dc:typenorm>13</base_dc:typenorm>
+          <base_dc:year>2012</base_dc:year>
+        </base_dc:dc>
+      </metadata>
+    
+
+</record>
+
+</GetRecord>
+</OAI-PMH>

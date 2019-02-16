@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?xml-stylesheet type="text/xsl" href="/static/oai2.xsl"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2019-02-16T16:28:54Z</responseDate>
+    <request verb="GetRecord" identifier="ftsehiruniv:oai:earsiv.sehir.edu.tr:11498/28266" metadataPrefix="base_dc">http://doai.io/oai?key=2b2b97d581a08b6833d3&amp;verb=GetRecord&amp;metadataPrefix=base_dc&amp;identifier=ftsehiruniv%3Aoai%3Aearsiv.sehir.edu.tr%3A11498%2F28266</request>
+    
+<GetRecord>
+    
+<record>
+    <header>
+        <identifier>ftsehiruniv:oai:earsiv.sehir.edu.tr:11498/28266</identifier>
+        <datestamp>2017-03-13T12:24:11Z</datestamp>
+        <setSpec>proaixy:source:base</setSpec>
+    </header>
+    <metadata xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <base_dc:dc xmlns:base_dc="http://oai.base-search.net/base_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xsi:schemaLocation="http://oai.base-search.net/base_dc/ http://oai.base-search.net/base_dc/base_dc.xsd">
+          <dc:title>Ya&#351;amlar&#305;nda ilklerle sanat&#231;&#305;lar&#305;m&#305;z:Haldun Taner</dc:title>
+          <dc:creator>Taner, Haldun</dc:creator>
+          <dc:description>Taha Toros Ar&#351;ivi, Dosya No: 34-Haldun Taner</dc:description>
+          <dc:language>tur</dc:language>
+          <dc:date>9999</dc:date>
+          <dc:identifier>http://hdl.handle.net/11498/28266</dc:identifier>
+          <dc:subject>Taner</dc:subject>
+          <dc:subject>Haldun</dc:subject>
+          <dc:subject>1915-1986</dc:subject>
+          <dc:subject>Yazarlar</dc:subject>
+          <dc:subject>T&#252;rk</dc:subject>
+          <dc:subject>20. Y&#252;zy&#305;l</dc:subject>
+          <dc:subject>T&#252;rkiye</dc:subject>
+          <dc:subject>Otobiyografi</dc:subject>
+          <dc:subject>An&#305;</dc:subject>
+          <dc:subject>Authors</dc:subject>
+          <dc:subject>Turkish</dc:subject>
+          <dc:subject>20th Century</dc:subject>
+          <dc:subject>Turkey</dc:subject>
+          <dc:subject>Autobiography</dc:subject>
+          <dc:subject>Memory</dc:subject>
+          <dc:subject>Makale</dc:subject>
+          <dc:type>Article</dc:type>
+          <dc:rights>info:eu-repo/semantics/openAccess</dc:rights>
+          <base_dc:collection>ftsehiruniv</base_dc:collection>
+          <base_dc:collname>&#304;stanbul &#350;ehir University: e-ar&#351;ive</base_dc:collname>
+          <base_dc:continent>ceu</base_dc:continent>
+          <base_dc:country>tr</base_dc:country>
+          <base_dc:lang>tur</base_dc:lang>
+          <base_dc:link>http://hdl.handle.net/11498/28266</base_dc:link>
+          <base_dc:oa>1</base_dc:oa>
+          <base_dc:typenorm>121</base_dc:typenorm>
+          <base_dc:year>9999</base_dc:year>
+        </base_dc:dc>
+      </metadata>
+    
+
+</record>
+
+</GetRecord>
+</OAI-PMH>

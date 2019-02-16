@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?xml-stylesheet type="text/xsl" href="/static/oai2.xsl"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2019-02-16T16:27:57Z</responseDate>
+    <request verb="GetRecord" identifier="ftartxiker:oai:HAL:hal-00845819v1" metadataPrefix="base_dc">http://doai.io/oai?key=2b2b97d581a08b6833d3&amp;verb=GetRecord&amp;metadataPrefix=base_dc&amp;identifier=ftartxiker%3Aoai%3AHAL%3Ahal-00845819v1</request>
+    
+<GetRecord>
+    
+<record>
+    <header>
+        <identifier>ftartxiker:oai:HAL:hal-00845819v1</identifier>
+        <datestamp>2015-11-02T00:00:02Z</datestamp>
+        <setSpec>proaixy:source:base</setSpec>
+    </header>
+    <metadata xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <base_dc:dc xmlns:base_dc="http://oai.base-search.net/base_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xsi:schemaLocation="http://oai.base-search.net/base_dc/         http://oai.base-search.net/base_dc/base_dc.xsd">
+          <dc:title>Optical properties of analogs of Titan's aerosols produced by dusty plasma</dc:title>
+          <dc:creator>Hadamcik, Edith</dc:creator>
+          <dc:creator>Renard, J.-B.</dc:creator>
+          <dc:creator>Mahjoub, Ahmed</dc:creator>
+          <dc:creator>Gautier, Thomas</dc:creator>
+          <dc:creator>Carrasco, Nathalie</dc:creator>
+          <dc:creator>Cernogora, Guy</dc:creator>
+          <dc:creator>Szopa, Cyril</dc:creator>
+          <dc:description>International audience ; Analogs of Titan's aerosols are produced in the laboratory as grains in a gas mixture, or as layers on a substrate. This production procedure enables the methane-nitrogen mixture composition to be changed. The aim of this paper is to understand the variations observed on the linear polarization of the scattered light as a function of the production conditions. The influence of the concentration of methane injected in the plasma will be discussed and compared with the previous work of Hadamcik et al. (2009a). The diameter of the grains are measured by SEM-FEG images. The decrease of absorption with increasing wavelength, measured by spectroscopic ellipsometry on layers, is observed for a decreasing initial methane ratio and analyzed in terms of an increasing 'amine' content in the materials. The phase function parameters of the linear polarization of the scattered light are discussed in terms of the diameters of the aggregates and of the constituent grains, and the variation of the refractive indices (mainly absorption). The polarization is found to be highly correlated with the constituent grain size. Finally, the experimental results are compared to polarization measurements from space of the Titan's atmosphere.</dc:description>
+          <dc:language>en</dc:language>
+          <dc:date>2013</dc:date>
+          <dc:identifier>https://hal.archives-ouvertes.fr/hal-00845819</dc:identifier>
+          <dc:subject>Tholins</dc:subject>
+          <dc:subject>Titan</dc:subject>
+          <dc:subject>Aerosol</dc:subject>
+          <dc:subject>Refractive indices</dc:subject>
+          <dc:subject>Polarization</dc:subject>
+          <dc:subject>Light scattering</dc:subject>
+          <dc:subject>[SDU.ASTR.EP] Sciences of the Universe/Astrophysics/Earth and Planetary Astrophysics</dc:subject>
+          <dc:subject>[PHYS.ASTR.EP] Physics/Astrophysics/Earth and Planetary Astrophysics</dc:subject>
+          <dc:publisher>HAL CCSD</dc:publisher>
+          <dc:type>Journal articles</dc:type>
+          <base_dc:autoclasscode type="ddc">535</base_dc:autoclasscode>
+          <base_dc:typenorm>0001</base_dc:typenorm>
+          <base_dc:oa>2</base_dc:oa>
+          <base_dc:collection>ftartxiker</base_dc:collection>
+          <base_dc:collname>Archive ARTXIKER Artxiboa (CCSD - Centre pour la Communication Scientifique Directe)</base_dc:collname>
+          <base_dc:continent>ceu</base_dc:continent>
+          <base_dc:contributor>IMPEC - LATMOS</base_dc:contributor>
+          <base_dc:contributor>Laboratoire Atmosph&#232;res, Milieux, Observations Spatiales (LATMOS)</base_dc:contributor>
+          <base_dc:contributor>Universit&#233; Versailles Saint-Quentin en Yvelines (UVSQ) - Universit&#233; Pierre et Marie Curie - Paris 6 (UPMC) - INSU - CNRS - Universit&#233; Versailles Saint-Quentin en Yvelines (UVSQ) - Universit&#233; Pierre et Marie Curie - Paris 6 (UPMC) - INSU - CNRS</base_dc:contributor>
+          <base_dc:contributor>Laboratoire de physique et chimie de l'environnement (LPCE)</base_dc:contributor>
+          <base_dc:contributor>CNRS - INSU - Universit&#233; d'Orl&#233;ans (UO)</base_dc:contributor>
+          <base_dc:contributor>ANR-09-JCJC-0038, CAT, Physico-Chimie organique de l'atmosph&#232;re de Titan(2009)</base_dc:contributor>
+          <base_dc:country>fr</base_dc:country>
+          <base_dc:lang>eng</base_dc:lang>
+          <base_dc:year>2013</base_dc:year>
+          <base_dc:link>https://hal.archives-ouvertes.fr/hal-00845819</base_dc:link>
+          <base_dc:source>Earth, Planets and Space ; https://hal.archives-ouvertes.fr/hal-00845819 ; Earth, Planets and Space, 2013, 65 (10), pp.1175-1184. &lt;10.5047/eps.2013.05.019&gt;</base_dc:source>
+        </base_dc:dc>
+      </metadata>
+    
+
+</record>
+
+</GetRecord>
+</OAI-PMH>

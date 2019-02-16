@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-stylesheet type="text/xsl" href="/static/xsl/oai2.xsl"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+  <responseDate>2019-02-16T15:11:21Z</responseDate>
+  <request verb="GetRecord" metadataPrefix="oai_dc" identifier="oai:zenodo.org:50134">https://zenodo.org/oai2d</request>
+  <GetRecord>
+    <record>
+      <header>
+        <identifier>oai:zenodo.org:50134</identifier>
+        <datestamp>2017-11-02T23:05:08Z</datestamp>
+        <setSpec>software</setSpec>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:creator>Alexander Kubisch</dc:creator>
+          <dc:date>2016-04-20</dc:date>
+          <dc:description>This is the first release of our sources.</dc:description>
+          <dc:identifier>https://zenodo.org/record/50134</dc:identifier>
+          <dc:identifier>10.5281/zenodo.50134</dc:identifier>
+          <dc:identifier>oai:zenodo.org:50134</dc:identifier>
+          <dc:relation>url:https://github.com/akubisch/smart_disp/tree/v1.0</dc:relation>
+          <dc:rights>info:eu-repo/semantics/openAccess</dc:rights>
+          <dc:rights>http://www.opensource.org/licenses/MIT</dc:rights>
+          <dc:title>smart_disp: smart_disp Release v1.0</dc:title>
+          <dc:type>info:eu-repo/semantics/other</dc:type>
+          <dc:type>software</dc:type>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+  </GetRecord>
+</OAI-PMH>

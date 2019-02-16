@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="/oai/xsl"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+  <responseDate>2019-02-16T14:50:56Z</responseDate>
+  <request verb="GetRecord" metadataPrefix="oai_dc" identifier="oai:hal.archives-ouvertes.fr:hal-00830421">https://api.archives-ouvertes.fr/oai/hal/</request>
+  <GetRecord xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <record>
+      <header>
+  <identifier>oai:HAL:hal-00830421v1</identifier>
+  <datestamp>2019-02-07</datestamp>
+  <setSpec>type:ART</setSpec>
+  <setSpec>subject:phys</setSpec>
+  <setSpec>collection:M2P2</setSpec>
+  <setSpec>collection:CNRS</setSpec>
+  <setSpec>collection:EC-MARSEILLE</setSpec>
+  <setSpec>collection:UNIV-AMU</setSpec>
+  <setSpec>collection:X</setSpec>
+  <setSpec>collection:INSU</setSpec>
+  <setSpec>collection:X-LMD</setSpec>
+  <setSpec>collection:UPMC</setSpec>
+  <setSpec>collection:LMD</setSpec>
+  <setSpec>collection:ENS-PARIS</setSpec>
+  <setSpec>collection:PSL</setSpec>
+  <setSpec>collection:PARISTECH</setSpec>
+  <setSpec>collection:UPMC_POLE_3</setSpec>
+  <setSpec>collection:ENPC-LMD</setSpec>
+  <setSpec>collection:ENPC</setSpec>
+  <setSpec>collection:TEST-AMU</setSpec>
+  <setSpec>collection:X-DEP</setSpec>
+  <setSpec>collection:X-DEP-MECA</setSpec>
+  <setSpec>collection:SORBONNE-UNIVERSITE</setSpec>
+</header>
+      <metadata xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/"><oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:tei="http://www.tei-c.org/ns/1.0">
+  <dc:publisher>HAL CCSD</dc:publisher>
+  <dc:title xml:lang="en">Wavelet methods to eliminate resonances in the Galerkin-truncated Burgers and Euler equations</dc:title>
+  <dc:creator>Pereira
+, 
+Rodrigo M.</dc:creator>
+  <dc:creator>Nguyen-Van-Yen
+, 
+Romain</dc:creator>
+  <dc:creator>Farge
+, 
+Marie</dc:creator>
+  <dc:creator>Schneider
+, 
+Kai</dc:creator>
+  <dc:contributor>Laboratoire de Météorologie Dynamique (UMR 8539)
+ (
+LMD
+)
+
+ ; 
+Université Pierre et Marie Curie - Paris 6
+ (
+UPMC
+)
+-Institut national des sciences de l'Univers 
+ (
+INSU - CNRS
+)
+-École polytechnique
+ (
+X
+)
+-École des Ponts ParisTech
+ (
+ENPC
+)
+-Centre National de la Recherche Scientifique
+ (
+CNRS
+)
+-Département des Géosciences - ENS Paris
+ ; 
+École normale supérieure - Paris
+ (
+ENS Paris
+)
+-École normale supérieure - Paris
+ (
+ENS Paris
+)
+</dc:contributor>
+  <dc:contributor>Laboratoire de Mécanique, Modélisation et Procédés Propres
+ (
+M2P2
+)
+
+ ; 
+Aix Marseille Université
+ (
+AMU
+)
+-Ecole Centrale de Marseille
+ (
+ECM
+)
+-Centre National de la Recherche Scientifique
+ (
+CNRS
+)
+</dc:contributor>
+  <dc:description>
+International audience
+</dc:description>
+  <dc:source>
+ISSN: 
+1539-3755</dc:source>
+  <dc:source>
+EISSN: 
+1550-2376</dc:source>
+  <dc:source>Physical Review E : Statistical, Nonlinear, and Soft Matter Physics</dc:source>
+  <dc:publisher>American Physical Society</dc:publisher>
+  <dc:identifier>hal-00830421</dc:identifier>
+  <dc:identifier>https://hal.archives-ouvertes.fr/hal-00830421</dc:identifier>
+  <dc:source>https://hal.archives-ouvertes.fr/hal-00830421</dc:source>
+  <dc:source>Physical Review E : Statistical, Nonlinear, and Soft Matter Physics, American Physical Society, 2013, 87 (3), pp.033017. &amp;#x3008;10.1103/PhysRevE.87.033017&amp;#x3009;</dc:source>
+  <dc:identifier>ARXIV
+ : 
+1303.0980</dc:identifier>
+  <dc:relation>info:eu-repo/semantics/altIdentifier/arxiv/1303.0980</dc:relation>
+  <dc:identifier>DOI
+ : 
+10.1103/PhysRevE.87.033017</dc:identifier>
+  <dc:relation>info:eu-repo/semantics/altIdentifier/doi/10.1103/PhysRevE.87.033017</dc:relation>
+  <dc:language>en</dc:language>
+  <dc:subject>
+[
+PHYS.PHYS.PHYS-COMP-PH
+] 
+Physics [physics]/Physics [physics]/Computational Physics [physics.comp-ph]</dc:subject>
+  <dc:type>
+info:eu-repo/semantics/article
+</dc:type>
+  <dc:type>Journal articles</dc:type>
+  <dc:description xml:lang="en">It is well known that solutions to the Fourier-Galerkin truncation of the inviscid Burgers equation (and other hyperbolic conservation laws) do not converge to the physically relevant entropy solution after the formation of the first shock. This loss of convergence was recently studied in detail in [S. S. Ray et al., Phys. Rev. E 84, 016301 (2011)], and traced back to the appearance of a spatially localized resonance phenomenon perturbing the solution. In this work, we propose a way to remove this resonance by filtering a wavelet representation of the Galerkin-truncated equations. A method previously developed with a complex-valued wavelet frame is applied and expanded to embrace the use of real-valued orthogonal wavelet basis, which we show to yield satisfactory results only under the condition of adding a safety zone in wavelet space. We also apply the complex-valued wavelet based method to the 2D Euler equation problem, showing that it is able to filter the resonances in this case as well.</dc:description>
+  <dc:date>2013</dc:date>
+</oai_dc:dc>
+</metadata>
+    </record>
+  </GetRecord>
+</OAI-PMH>

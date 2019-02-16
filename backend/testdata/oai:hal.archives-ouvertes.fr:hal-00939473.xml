@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?xml-stylesheet type="text/xsl" href="/static/oai2.xsl"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2019-02-16T16:28:00Z</responseDate>
+    <request verb="GetRecord" identifier="oai:hal.archives-ouvertes.fr:hal-00939473" metadataPrefix="base_dc">http://doai.io/oai?key=2b2b97d581a08b6833d3&amp;verb=GetRecord&amp;metadataPrefix=base_dc&amp;identifier=oai%3Ahal.archives-ouvertes.fr%3Ahal-00939473</request>
+    
+<error code="badArgument">The record &quot;oai:hal.archives-ouvertes.fr:hal-00939473&quot; does not exist.</error>
+
+</OAI-PMH>

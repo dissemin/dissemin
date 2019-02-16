@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><OAI-PMH
+	xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd"><responseDate>2019-02-16T14:47:53Z</responseDate><request verb="GetRecord" identifier="oai:pubmedcentral.nih.gov:4131942" metadataPrefix="oai_dc">https:/www.ncbi.nlm.nih.gov/pmc/oai/oai.cgi</request><GetRecord><record><header><identifier>oai:pubmedcentral.nih.gov:4131942</identifier><datestamp>2014-08-14</datestamp><setSpec>lwwopen</setSpec><setSpec>pmc-open</setSpec></header><metadata><oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+  <dc:title>Is the Aluminum Hypothesis Dead?</dc:title>
+  <dc:creator>Lidsky, Theodore I.</dc:creator>
+  <dc:subject>Reviews</dc:subject>
+  <dc:description/>
+  <dc:publisher>American College of Occupational and Environmental Medicine</dc:publisher>
+  <dc:date>2014-05</dc:date>
+  <dc:date>2014-05-08</dc:date>
+  <dc:identifier>/pmc/articles/PMC4131942/</dc:identifier>
+  <dc:identifier>/pubmed/24806729</dc:identifier>
+  <dc:identifier>http://dx.doi.org/10.1097/JOM.0000000000000063</dc:identifier>
+  <dc:type>Text</dc:type>
+  <dc:language>en</dc:language>
+  <dc:rights>© 2014 by American College of Occupational and Environmental Medicine</dc:rights>
+  <dc:rights>http://creativecommons.org/licenses/by-nc-nd/3.0</dc:rights>
+  <dc:rights>This is an open-access article distributed under the terms of the Creative Commons Attribution-NonCommercial-NoDerivitives 3.0 License, where it is permissible to download and share the work provided it is properly cited. The work cannot be changed in any way or used commercially.</dc:rights>
+</oai_dc:dc>
+
+</metadata></record></GetRecord></OAI-PMH>

@@ -1,5 +1,5 @@
 -e git://github.com/dissemin/django-allauth.git@used_by_dissemin#egg=django-allauth
--e git://github.com/wetneb/pyoai.git@any_metadataPrefix#egg=pyoai
+pyoai
 PyPDF2
 bibtexparser>=1.1.0
 redis<3

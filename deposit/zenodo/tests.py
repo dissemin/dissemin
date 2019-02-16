@@ -24,13 +24,15 @@ import os
 import re
 import unittest
 import requests_mock
+from mock import patch
+from oaipmh.client import Client
 
 from deposit.tests import lorem_ipsum
 from deposit.tests import ProtocolTest
 from deposit.zenodo.protocol import ZenodoProtocol
 from deposit.zenodo.forms import ZENODO_DEFAULT_LICENSE_CHOICE
 from papers.models import Paper
-from backend.oai import get_proaixy_instance
+from papers.models import OaiSource
 
 class ZenodoProtocolTest(ProtocolTest):
 
@@ -43,6 +45,9 @@ class ZenodoProtocolTest(ProtocolTest):
         self.repo.api_key = os.environ['ZENODO_SANDBOX_API_KEY']
         self.repo.endpoint = 'https://sandbox.zenodo.org/api/deposit/depositions'
         self.proto = ZenodoProtocol(self.repo)
+        self.testdir = os.path.dirname(os.path.abspath(__file__))
+        with open(os.path.join(self.testdir, 'testdata/zenodo_record.xml'), 'r') as f:
+            self.zenodo_record = f.read()
 
     def test_lncs(self):
         p = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
@@ -51,13 +56,19 @@ class ZenodoProtocolTest(ProtocolTest):
             license = ZENODO_DEFAULT_LICENSE_CHOICE)
         self.assertEqualOrLog(r.status, 'faked')
 
-    def test_try_deposit_paper_already_on_zenodo(self):
+    @patch.object(Client, 'makeRequest')
+    def test_try_deposit_paper_already_on_zenodo(self, mock_makeRequest):
         """
         If the paper is already known to be on Zenodo by Dissemin,
         ``init_deposit`` should return ``False`` to prevent any new deposit.
         """
-        p = get_proaixy_instance().create_paper_by_identifier(
-            'ftzenodo:oai:zenodo.org:50134', 'base_dc')
+        oaisource = OaiSource.objects.get(identifier='zenodo')
+        oaisource.endpoint = 'http://example.com/' # not actually used as we are mocking the HTTP call
+        oaisource.save()
+        
+        mock_makeRequest.return_value = self.zenodo_record
+        
+        p = Paper.create_by_oai_id('oai:pubmedcentral.nih.gov:4131942', source=oaisource)
         enabled = self.proto.init_deposit(p, self.user)
         self.assertFalse(enabled)
 

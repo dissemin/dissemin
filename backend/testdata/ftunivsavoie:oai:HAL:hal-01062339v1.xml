@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?xml-stylesheet type="text/xsl" href="/static/oai2.xsl"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2019-02-16T16:28:50Z</responseDate>
+    <request verb="GetRecord" identifier="ftunivsavoie:oai:HAL:hal-01062339v1" metadataPrefix="base_dc">http://doai.io/oai?key=2b2b97d581a08b6833d3&amp;verb=GetRecord&amp;metadataPrefix=base_dc&amp;identifier=ftunivsavoie%3Aoai%3AHAL%3Ahal-01062339v1</request>
+    
+<GetRecord>
+    
+<record>
+    <header>
+        <identifier>ftunivsavoie:oai:HAL:hal-01062339v1</identifier>
+        <datestamp>2015-11-06T00:00:03Z</datestamp>
+        <setSpec>proaixy:source:base</setSpec>
+    </header>
+    <metadata xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <base_dc:dc xmlns:base_dc="http://oai.base-search.net/base_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xsi:schemaLocation="http://oai.base-search.net/base_dc/         http://oai.base-search.net/base_dc/base_dc.xsd">
+          <dc:title>Une composante des conflits environnementaux : la querelle de l&#233;gitimit&#233;</dc:title>
+          <dc:creator>Gauchon, Christophe</dc:creator>
+          <dc:language>fr</dc:language>
+          <dc:date>2014</dc:date>
+          <dc:identifier>https://hal.archives-ouvertes.fr/hal-01062339</dc:identifier>
+          <dc:subject>[SHS.GEO] Humanities and Social Sciences/Geography</dc:subject>
+          <dc:subject>[SDE.ES] Environmental Sciences/Environmental and Society</dc:subject>
+          <dc:publisher>HAL CCSD</dc:publisher>
+          <dc:publisher>Belin</dc:publisher>
+          <dc:type>info:eu-repo/semantics/bookPart</dc:type>
+          <dc:type>Book sections</dc:type>
+          <base_dc:typenorm>0002</base_dc:typenorm>
+          <base_dc:oa>2</base_dc:oa>
+          <base_dc:collection>ftunivsavoie</base_dc:collection>
+          <base_dc:collname>Universit&#233; Savoie Mont Blanc: HAL</base_dc:collname>
+          <base_dc:continent>ceu</base_dc:continent>
+          <base_dc:contributor>Environnements, Dynamiques et Territoires de la Montagne (EDYTEM)</base_dc:contributor>
+          <base_dc:contributor>CNRS - Universit&#233; de Savoie</base_dc:contributor>
+          <base_dc:country>fr</base_dc:country>
+          <base_dc:lang>fre</base_dc:lang>
+          <base_dc:year>2014</base_dc:year>
+          <base_dc:link>https://hal.archives-ouvertes.fr/hal-01062339</base_dc:link>
+          <base_dc:source>Les espaces prot&#233;g&#233;s et territoires. Entre conflits et acceptation ; https://hal.archives-ouvertes.fr/hal-01062339 ; Les espaces prot&#233;g&#233;s et territoires. Entre conflits et acceptation, Belin, pp. 86-102, 2014</base_dc:source>
+        </base_dc:dc>
+      </metadata>
+    
+
+</record>
+
+</GetRecord>
+</OAI-PMH>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?xml-stylesheet type="text/xsl" href="/static/oai2.xsl"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2019-02-16T16:28:01Z</responseDate>
+    <request verb="GetRecord" identifier="ftpubmed:oai:pubmedcentral.nih.gov:1968744" metadataPrefix="base_dc">http://doai.io/oai?key=2b2b97d581a08b6833d3&amp;verb=GetRecord&amp;metadataPrefix=base_dc&amp;identifier=ftpubmed%3Aoai%3Apubmedcentral.nih.gov%3A1968744</request>
+    
+<GetRecord>
+    
+<record>
+    <header>
+        <identifier>ftpubmed:oai:pubmedcentral.nih.gov:1968744</identifier>
+        <datestamp>2015-11-01T12:56:09Z</datestamp>
+        <setSpec>proaixy:source:base</setSpec>
+    </header>
+    <metadata xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <base_dc:dc xmlns:base_dc="http://oai.base-search.net/base_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xsi:schemaLocation="http://oai.base-search.net/base_dc/         http://oai.base-search.net/base_dc/base_dc.xsd">
+          <dc:title>Reply to the letter from Dr Meenan</dc:title>
+          <dc:creator>Davis, Alan E.</dc:creator>
+          <dc:creator>Patterson, Frankie</dc:creator>
+          <dc:language>en</dc:language>
+          <dc:date>1993-11</dc:date>
+          <dc:identifier>http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1968744</dc:identifier>
+          <dc:subject>Correspondence</dc:subject>
+          <dc:type>Text</dc:type>
+          <base_dc:typenorm>0000</base_dc:typenorm>
+          <base_dc:oa>1</base_dc:oa>
+          <base_dc:collection>ftpubmed</base_dc:collection>
+          <base_dc:collname>PubMed Central (PMC)</base_dc:collname>
+          <base_dc:continent>cna</base_dc:continent>
+          <base_dc:country>us</base_dc:country>
+          <base_dc:lang>eng</base_dc:lang>
+          <base_dc:year>1993</base_dc:year>
+          <base_dc:link>http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1968744</base_dc:link>
+        </base_dc:dc>
+      </metadata>
+    
+
+</record>
+
+</GetRecord>
+</OAI-PMH>

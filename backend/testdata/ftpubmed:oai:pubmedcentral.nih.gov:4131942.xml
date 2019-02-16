@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?xml-stylesheet type="text/xsl" href="/static/oai2.xsl"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2019-02-16T16:55:57Z</responseDate>
+    <request verb="GetRecord" identifier="ftpubmed:oai:pubmedcentral.nih.gov:4131942" metadataPrefix="base_dc">http://doai.io/oai?key=2b2b97d581a08b6833d3&amp;verb=GetRecord&amp;metadataPrefix=base_dc&amp;identifier=ftpubmed%3Aoai%3Apubmedcentral.nih.gov%3A4131942</request>
+    
+<GetRecord>
+    
+<record>
+    <header>
+        <identifier>ftpubmed:oai:pubmedcentral.nih.gov:4131942</identifier>
+        <datestamp>2015-11-02T01:27:13Z</datestamp>
+        <setSpec>proaixy:source:base</setSpec>
+    </header>
+    <metadata xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <base_dc:dc xmlns:base_dc="http://oai.base-search.net/base_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xsi:schemaLocation="http://oai.base-search.net/base_dc/         http://oai.base-search.net/base_dc/base_dc.xsd">
+          <dc:title>Is the Aluminum Hypothesis Dead?</dc:title>
+          <dc:creator>Lidsky, Theodore I.</dc:creator>
+          <dc:description>The Aluminum Hypothesis, the idea that aluminum exposure is involved in the etiology of Alzheimer disease, dates back to a 1965 demonstration that aluminum causes neurofibrillary tangles in the brains of rabbits. Initially the focus of intensive research, the Aluminum Hypothesis has gradually been abandoned by most researchers. Yet, despite this current indifference, the Aluminum Hypothesis continues to attract the attention of a small group of scientists and aluminum continues to be viewed with concern by some of the public. This review article discusses reasons that mainstream science has largely abandoned the Aluminum Hypothesis and explores a possible reason for some in the general public continuing to view aluminum with mistrust.</dc:description>
+          <dc:language>en</dc:language>
+          <dc:date>2014-05</dc:date>
+          <dc:identifier>http://www.ncbi.nlm.nih.gov/pmc/articles/PMC</dc:identifier>
+          <dc:identifier>http://www.ncbi.nlm.nih.gov/pubmed/24806729</dc:identifier>
+          <dc:identifier>http://dx.doi.org/10.1097/JOM.0000000000000063</dc:identifier>
+          <dc:subject>Reviews</dc:subject>
+          <dc:publisher>American College of Occupational and Environmental Medicine</dc:publisher>
+          <dc:type>Text</dc:type>
+          <base_dc:typenorm>0000</base_dc:typenorm>
+          <base_dc:oa>1</base_dc:oa>
+          <base_dc:collection>ftpubmed</base_dc:collection>
+          <base_dc:collname>PubMed Central (PMC)</base_dc:collname>
+          <base_dc:continent>cna</base_dc:continent>
+          <base_dc:country>us</base_dc:country>
+          <base_dc:lang>eng</base_dc:lang>
+          <base_dc:year>2014</base_dc:year>
+          <base_dc:link>http://www.ncbi.nlm.nih.gov/pmc/articles/PMC</base_dc:link>
+          <base_dc:rights>&#169; 2014 by American College of Occupational and Environmental Medicine ; http://creativecommons.org/licenses/by-nc-nd/3.0 ; This is an open-access article distributed under the terms of the Creative Commons Attribution-NonCommercial-NoDerivitives 3.0 License, where it is permissible to download and share the work provided it is properly cited. The work cannot be changed in any way or used commercially.</base_dc:rights>
+        </base_dc:dc>
+      </metadata>
+    
+
+</record>
+
+</GetRecord>
+</OAI-PMH>

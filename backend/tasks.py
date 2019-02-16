@@ -41,7 +41,6 @@ from papers.models import OaiSource
 from publishers.models import Journal
 from publishers.models import Publisher
 from backend.oai import OaiPaperSource
-from backend.oai import BASEDCTranslator
 
 logger = get_task_logger(__name__)
 
@@ -160,12 +159,15 @@ def update_crossref():
     c = CrossRefAPI()
     c.fetch_and_save_new_records()
 
-@shared_task(name='update_base')
-@run_only_once('update_base', timeout=24*3600)
-def update_base():
-    b = OaiSource.objects.get(identifier='base')
-    oai = OaiPaperSource(endpoint='http://oai.base-search.net/oai')
-    oai.add_translator(BASEDCTranslator(b))
-    oai.ingest(b.last_update.replace(tzinfo=None), metadataPrefix='base_dc')
-    b.last_update = datetime.now()
-    b.save()
+@shared_task(name='update_oai_sources')
+@run_only_once('update_oai_sources', timeout=24*3600)
+def update_oai_sources():
+    """
+    Fetches new and updated records from all configured OAI sources since
+    their last update.
+    """
+    for source in OaiSource.objects.filter(endpoint__isnull=False):
+        oai = OaiPaperSource(source)
+        oai.ingest(source.last_update.replace(tzinfo=None), metadataPrefix='base_dc')
+        source.last_update = datetime.now()
+        source.save()

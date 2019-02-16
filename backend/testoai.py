@@ -20,27 +20,41 @@
 
 from __future__ import unicode_literals
 
+from mock import patch
 import unittest
-from backend.oai import BASEDCTranslator
-from backend.oai import CiteprocTranslator
-from backend.oai import OAIDCTranslator
+import os
+import codecs
 from backend.oai import OaiPaperSource
 from django.test import TestCase
-from oaipmh.error import BadArgumentError
+from oaipmh.error import CannotDisseminateFormatError
+from oaipmh.error import IdDoesNotExistError
+from oaipmh.client import Client
 from papers.models import OaiRecord
+from papers.models import OaiSource
+from papers.models import Paper
 
 
 class OaiTest(TestCase):
 
     def setUp(self):
-        self.oai = OaiPaperSource(endpoint='http://doai.io/oai')
-        self.oai.add_translator(BASEDCTranslator())
-        self.oai.add_translator(OAIDCTranslator())
-        self.oai.add_translator(CiteprocTranslator())
+        oaisource = OaiSource.objects.get(identifier='hal')
+        self.oai = OaiPaperSource(oaisource)
+        self.testdir = os.path.dirname(os.path.abspath(__file__))
+        base_oaisource = OaiSource.objects.get(identifier='base')
+        base_oaisource.endpoint = 'https://some_endpoint'
+        self.base_oai = OaiPaperSource(base_oaisource)
 
     def create(self, *args, **kwargs):
         # Shortcut for the tests
-        return self.oai.create_paper_by_identifier(*args, **kwargs)
+        if args[1] != 'base_dc':
+            return self.oai.create_paper_by_identifier(*args, **kwargs)
+        else:
+            identifier = args[0]
+            fname = identifier.replace('/', '_') + '.xml'
+            with codecs.open(os.path.join(self.testdir, 'testdata', fname), 'r', 'utf-8') as f:
+                oai_record = f.read()
+            with patch.object(Client, 'makeRequest', return_value=oai_record.encode('utf-8')):
+                return self.base_oai.create_paper_by_identifier(*args, **kwargs)
 
     def delete(self, identifier):
         try:
@@ -57,12 +71,12 @@ class OaiTest(TestCase):
         Creation of a paper from an OAI record,
         when the paper does not exist yet.
         """
-        oai_id = 'ftunivsavoie:oai:HAL:hal-01063697v1'
+        oai_id = 'oai:HAL:hal-01063697v1'
 
         # first, make sure the paper isn't there already
         self.delete(oai_id)
         # create a paper from BASE
-        hal_paper = self.create(oai_id, 'base_dc')
+        hal_paper = self.create(oai_id, 'oai_dc')
         self.assertEqual(len(hal_paper.oairecords), 1)
         self.assertNotEqual(hal_paper.pdf_url, None)
         self.assertEqual(hal_paper.fingerprint,
@@ -74,15 +88,15 @@ class OaiTest(TestCase):
         when the exact same OAI record already exists.
         """
         # TODO we could repeat this for various papers
-        oai_id = 'ftccsdartic:oai:hal.archives-ouvertes.fr:hal-00830421'
+        oai_id = 'oai:hal.archives-ouvertes.fr:hal-00830421'
 
         # first, make sure the paper isn't there already
         self.delete(oai_id)
         # create a paper from BASE
-        hal_paper = self.create(oai_id, 'base_dc')
+        hal_paper = self.create(oai_id, 'oai_dc')
 
         # Create it again!
-        new_paper = self.create(oai_id, 'base_dc')
+        new_paper = self.create(oai_id, 'oai_dc')
 
         # It's the same thing!
         self.assertEqual(new_paper, hal_paper)
@@ -97,25 +111,25 @@ class OaiTest(TestCase):
         Addition of an OAI record when it is matched
         with an existing record by fingerprint.
         """
-        first_id = 'oai:crossref.org:10.1016/j.crma.2012.10.021'
-        second_id = 'ftarxivpreprints:oai:arXiv.org:1112.6130'
+        doi = '10.1016/j.crma.2012.10.021'
+        oai_id = 'ftarxivpreprints:oai:arXiv.org:1112.6130'
 
         # first, make sure the paper isn't there already
-        self.delete(first_id)
+        Paper.objects.filter(oairecord__doi=doi).delete()
         # create a paper from BASE
-        cr_paper = self.create(first_id, 'citeproc')
+        cr_paper = Paper.create_by_doi(doi)
 
         # Save the existing records
         records = set(cr_paper.oairecords)
         # Create a new paper (refers to the same paper, but coming from
         # another source)
-        new_paper = self.create(second_id, 'base_dc')
+        new_paper = self.create(oai_id, 'base_dc')
         # the resulting paper has to be equal to the first one
         # (this does not check that all their attributes are equal, just
         # that they are the same row in the database, i.e. have same id)
         self.assertEqual(new_paper, cr_paper)
         # the new set of records is the old one plus the new record
-        records.add(OaiRecord.objects.get(identifier=second_id))
+        records.add(OaiRecord.objects.get(identifier=oai_id))
         self.assertSetEqual(set(new_paper.oairecords), records)
 
     @unittest.expectedFailure
@@ -132,7 +146,7 @@ class OaiTest(TestCase):
         # first, make sure the paper isn't there already
         self.delete(first_id)
         # create a paper from BASE
-        cr_paper = self.create(first_id, 'citeproc')
+        cr_paper = self.create(first_id, 'base_dc')
 
         # Save the existing records
         records = set(cr_paper.oairecords)
@@ -154,23 +168,22 @@ class OaiTest(TestCase):
         to an existing paper by DOI
         """
         first_id = 'ftunivmacedonia:oai:dspace.lib.uom.gr:2159/6240'
-        second_id = 'oai:crossref.org:10.1111/j.1574-0862.2005.00325.x'
+        doi = '10.1111/j.1574-0862.2005.00325.x'
 
         # first, make sure the paper isn't there already
         self.delete(first_id)
         # Create a paper from BASE
-        first = self.create(first_id, 'base_dc')
+        first = Paper.create_by_doi(doi)
 
-        self.assertEqual(first.oairecords[0].doi,
-                         '10.1111/j.1574-0862.2005.00325.x')
+        self.assertEqual(first.oairecords[0].doi, doi)
         records = set(first.oairecords)
-        new_paper = self.create(second_id, 'citeproc')
+        new_paper = self.create(first_id, 'base_dc')
 
         # Make sure that, if a merge happens, the oldest
         # paper remains (otherwise we create broken links!)
         self.assertEqual(first, new_paper)
 
-        records.add(OaiRecord.objects.get(identifier=second_id))
+        records.add(OaiRecord.objects.get(identifier=first_id))
         self.assertEqual(set(new_paper.oairecords), records)
 
     def test_update_pdf_url(self):
@@ -182,9 +195,7 @@ class OaiTest(TestCase):
         # first, make sure the paper isn't there already
         self.delete('oai:crossref.org:10.1007/s10858-015-9994-8')
         # Create a paper from Crossref
-        first = self.create(
-            'oai:crossref.org:10.1007/s10858-015-9994-8',
-            'citeproc')
+        first = Paper.create_by_doi('10.1007/s10858-015-9994-8')
         # initially the PDF url should be empty
         self.assertEqual(first.oairecords[0].pdf_url, None)
 
@@ -243,7 +254,7 @@ class OaiTest(TestCase):
         """
         Fetching an invalid identifier from OAI
         """
-        with self.assertRaises(BadArgumentError):
+        with self.assertRaises(IdDoesNotExistError):
             self.create('aiunrsecauiebleuiest', 'oai_dc')
 
     def test_create_invalid_format(self):
@@ -251,7 +262,7 @@ class OaiTest(TestCase):
         Fetching with an invalid format from OAI
         """
         # Format not available from the interface
-        with self.assertRaises(BadArgumentError):
+        with self.assertRaises(CannotDisseminateFormatError):
             self.create('aiunrsecauiebleuiest', 'unknown_format')
 
     # tests of particular translators
@@ -270,13 +281,6 @@ class OaiTest(TestCase):
         for ident, typ in mappings.items():
             paper = self.create(ident, 'base_dc')
             self.assertEqual(paper.doctype, typ)
-
-    def test_crossref_invalid_metadata(self):
-        # authors with no family name
-        paper = self.create(
-                'oai:crossref.org:10.4156/aiss.vol3.issue9.31',
-                'citeproc')
-        self.assertEqual(paper, None)
 
     def test_datacite(self):
         paper = self.create(

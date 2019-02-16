@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?xml-stylesheet type="text/xsl" href="/static/oai2.xsl"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2019-02-16T16:32:18Z</responseDate>
+    <request verb="GetRecord" identifier="ftarxivpreprints:oai:arXiv.org:1112.6130" metadataPrefix="base_dc">http://doai.io/oai?key=2b2b97d581a08b6833d3&amp;verb=GetRecord&amp;metadataPrefix=base_dc&amp;identifier=ftarxivpreprints%3Aoai%3AarXiv.org%3A1112.6130</request>
+    
+<GetRecord>
+    
+<record>
+    <header>
+        <identifier>ftarxivpreprints:oai:arXiv.org:1112.6130</identifier>
+        <datestamp>2015-11-01T15:07:29Z</datestamp>
+        <setSpec>proaixy:source:base</setSpec>
+    </header>
+    <metadata xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <base_dc:dc xmlns:base_dc="http://oai.base-search.net/base_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xsi:schemaLocation="http://oai.base-search.net/base_dc/         http://oai.base-search.net/base_dc/base_dc.xsd">
+          <dc:title>A construction of conformal-harmonic maps</dc:title>
+          <dc:creator>Biquard, Olivier</dc:creator>
+          <dc:creator>Madani, Farid</dc:creator>
+          <dc:description>Conformal harmonic maps from a 4-dimensional conformal manifold to a Riemannian manifold are maps satisfying a certain conformally invariant fourth order equation. We prove a general existence result for conformal harmonic maps, analogous to the Eells-Sampson theorem for harmonic maps. The proof uses a geometric flow and relies on results of Gursky-Viaclovsky and Lamm.</dc:description>
+          <dc:date>2011-12-28</dc:date>
+          <dc:identifier>http://arxiv.org/abs/1112.6130</dc:identifier>
+          <dc:subject>Mathematics - Differential Geometry</dc:subject>
+          <dc:subject>58E20</dc:subject>
+          <dc:type>text</dc:type>
+          <base_dc:typenorm>0000</base_dc:typenorm>
+          <base_dc:oa>1</base_dc:oa>
+          <base_dc:collection>ftarxivpreprints</base_dc:collection>
+          <base_dc:collname>ArXiv.org (Cornell University Library)</base_dc:collname>
+          <base_dc:continent>cna</base_dc:continent>
+          <base_dc:country>us</base_dc:country>
+          <base_dc:lang>unknown</base_dc:lang>
+          <base_dc:year>2011</base_dc:year>
+          <base_dc:link>http://arxiv.org/abs/1112.6130</base_dc:link>
+        </base_dc:dc>
+      </metadata>
+    
+
+</record>
+
+</GetRecord>
+</OAI-PMH>
