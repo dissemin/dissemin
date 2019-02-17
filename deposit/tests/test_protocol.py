@@ -39,9 +39,6 @@ from deposit.tasks import refresh_deposit_statuses
 # 1x1 px image used as default logo for the repository
 simple_png_image = b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01\x08\x02\x00\x00\x00\x90wS\xde\x00\x00\x00\tpHYs\x00\x00\x0b\x13\x00\x00\x0b\x13\x01\x00\x9a\x9c\x18\x00\x00\x00\x07tIME\x07\xdf\n\x12\x0c+\x19\x84\x1d/"\x00\x00\x00\x19tEXtComment\x00Created with GIMPW\x81\x0e\x17\x00\x00\x00\x0cIDAT\x08\xd7c\xa8\xa9\xa9\x01\x00\x02\xec\x01u\x90\x90\x1eL\x00\x00\x00\x00IEND\xaeB`\x82'
 
-# for sample abstracts
-lorem_ipsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-
 class DepositTest(django.test.TestCase):
     def test_refresh_deposit_statuses(self):
         # TODO: set up some DepositRecords + repository and protocol, to
@@ -102,7 +99,7 @@ class ProtocolTest(django.test.TestCase):
         (if the protocol supports it!)
         """
         return self.deposit(paper, dry_run=True, **form_fields)
-        
+
     def deposit(self, paper, dry_run=False, **form_fields):
         enabled = self.proto.init_deposit(paper, self.user)
         self.assertTrue(enabled)

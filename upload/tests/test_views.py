@@ -18,16 +18,13 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-
-
-
 import os
 import unittest
 
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from papers.testajax import JsonRenderingTest
+from papers.tests.test_ajax import JsonRenderingTest
 from upload.models import THUMBNAIL_MAX_WIDTH
 from upload.views import make_thumbnail
 import wand.image as image
@@ -35,8 +32,13 @@ import wand.image as image
 
 class ThumbnailTest(unittest.TestCase):
 
+    @classmethod
+    def setUpClass(cls):
+        super(ThumbnailTest, cls).setUpClass()
+        cls.testdir = os.path.dirname(os.path.abspath(__file__))
+
     def thumbnail(self, fname):
-        with open(fname, 'rb') as f:
+        with open(os.path.join(self.testdir, 'data', fname), 'rb') as f:
             pdf = f.read()
         ret = make_thumbnail(pdf)
         if ret is not None:
@@ -50,23 +52,24 @@ class ThumbnailTest(unittest.TestCase):
         self.assertTrue(img.width <= 2*THUMBNAIL_MAX_WIDTH)
 
     def test_valid_pdf(self):
-        self.assertValidPng(self.thumbnail('mediatest/blank.pdf'))
+        self.assertValidPng(self.thumbnail('blank.pdf'))
 
     def test_invalid_pdf(self):
-        self.assertEqual(self.thumbnail('mediatest/invalid.pdf'), None)
+        self.assertEqual(self.thumbnail('invalid.pdf'), None)
 
     def test_empty_pdf(self):
-        self.assertEqual(self.thumbnail('mediatest/empty.pdf'), None)
+        self.assertEqual(self.thumbnail('empty.pdf'), None)
 
     def test_wrong_file_format(self):
-        self.assertEqual(self.thumbnail('mediatest/red-circle.png'), None)
+        self.assertEqual(self.thumbnail('red-circle.png'), None)
 
 
 class UploadTest(JsonRenderingTest):
 
     @classmethod
-    def setUpClass(self):
-        super(UploadTest, self).setUpClass()
+    def setUpClass(cls):
+        super(UploadTest, cls).setUpClass()
+        cls.testdir = os.path.dirname(os.path.abspath(__file__))
         settings.MEDIA_ROOT = os.path.join(os.getcwd(), 'mediatest')
         User.objects.create_user('john', 'john@google.com', 'doe')
 
@@ -74,7 +77,7 @@ class UploadTest(JsonRenderingTest):
         self.client.login(username='john', password='doe')
 
     def upload(self, fname):
-        with open(fname, 'rb') as f:
+        with open(os.path.join(self.testdir, 'data', fname), 'rb') as f:
             return self.ajaxPost(reverse('ajax-uploadFulltext'), {'upl': f})
 
     def download(self, url):
@@ -86,18 +89,18 @@ class UploadTest(JsonRenderingTest):
 
     def test_logged_out(self):
         self.client.logout()
-        resp = self.upload('mediatest/blank.pdf')
+        resp = self.upload('blank.pdf')
         self.assertEqual(resp.status_code, 302)
 
     def test_valid_upload(self):
-        resp = self.upload('mediatest/blank.pdf')
+        resp = self.upload('blank.pdf')
         if resp.status_code != 200:
             print("Invalid status code %d, response was:\n%s" %
                     (resp.status_code, resp.content))
         self.assertEqual(resp.status_code, 200)
 
     def test_invalid_format(self):
-        resp = self.upload('mediatest/invalid.pdf')
+        resp = self.upload('invalid.pdf')
         if resp.status_code != 200:
             print(("Invalid status code %d, response was:\n%s" %
                     (resp.status_code, resp.content)))

@@ -25,7 +25,7 @@ from django.test import TestCase
 
 from deposit.hal.metadata import AOFRFormatter
 from deposit.hal.protocol import HALProtocol
-from deposit.tests import ProtocolTest
+from deposit.tests.test_protocol import ProtocolTest
 from deposit.models import DepositRecord
 from papers.models import Paper
 from papers.models import OaiRecord

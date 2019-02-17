@@ -44,7 +44,7 @@ from papers.models import OaiRecord
 from papers.models import Paper
 from papers.models import Researcher
 from publishers.models import Journal
-from papers.testorcid import OrcidProfileStub
+from papers.tests.test_orcid import OrcidProfileStub
 
 TEST_INDEX = {
     'default': {

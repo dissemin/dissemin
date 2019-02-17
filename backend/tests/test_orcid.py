@@ -7,8 +7,8 @@ from backend.orcid import affiliate_author_with_orcid
 from backend.orcid import OrcidPaperSource
 from papers.models import Paper
 from papers.models import Researcher
-from backend.tests import PaperSourceTest
-from papers.testorcid import OrcidProfileStub
+from backend.tests.test_generic import PaperSourceTest
+from papers.tests.test_orcid import OrcidProfileStub
 
 class OrcidUnitTest(unittest.TestCase):
 
@@ -29,11 +29,11 @@ class OrcidUnitTest(unittest.TestCase):
 
 @pytest.mark.usefixtures("load_test_data")
 class OrcidIntegrationTest(PaperSourceTest):
-    
+
     def setUp(self):
         super(OrcidIntegrationTest, self).setUp()
         self.source = OrcidPaperSource()
-        
+
     def test_fetch(self):
         profile = OrcidProfileStub('0000-0002-8612-8827', instance='orcid.org')
         papers = list(self.source.fetch_papers(self.researcher, profile=profile))

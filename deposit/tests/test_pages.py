@@ -18,7 +18,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from papers.testpages import RenderingTest
+from papers.tests.test_pages import RenderingTest
 import pytest
 
 @pytest.mark.usefixtures("load_test_data")

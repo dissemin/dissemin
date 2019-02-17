@@ -51,7 +51,7 @@ class OaiTest(TestCase):
         else:
             identifier = args[0]
             fname = identifier.replace('/', '_') + '.xml'
-            with codecs.open(os.path.join(self.testdir, 'testdata', fname), 'r', 'utf-8') as f:
+            with codecs.open(os.path.join(self.testdir, 'data', fname), 'r', 'utf-8') as f:
                 oai_record = f.read()
             with patch.object(Client, 'makeRequest', return_value=oai_record.encode('utf-8')):
                 return self.base_oai.create_paper_by_identifier(*args, **kwargs)

@@ -23,7 +23,7 @@
 import json
 import pytest
 
-from backend.tests import get_researcher_by_name
+from backend.tests.test_generic import get_researcher_by_name
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 import django.test
