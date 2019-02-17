@@ -1,9 +1,5 @@
 -e git://github.com/dissemin/django-allauth.git@used_by_dissemin#egg=django-allauth
-
-# 2018-02-17: We need the upcoming version of Celery to be compatible with Python 3.7.
-# The following line should be replaced by celery==4.3.* as soon as it becomes available
--e git://github.com/celery/celery.git@76d10453ab9267c45b12d7c60b5ee0e4113b4369#egg=celery
-
+celery[redis]
 pyoai
 PyPDF2
 bibtexparser>=1.1.0
