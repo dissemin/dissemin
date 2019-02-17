@@ -251,8 +251,8 @@ def report_dubious_orcids():
             bad_orcid = a.orcid in seen_orcids
             seen_orcids.add(a.orcid)
             if bad_orcid:
-                print(('\t'.join([
+                print('\t'.join([
                     'https://dissem.in'+p.url,
                     a.orcid,
-                ])+'\n'))
+                ])+'\n')
 

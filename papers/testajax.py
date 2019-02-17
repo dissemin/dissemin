@@ -50,8 +50,8 @@ class JsonRenderingTest(django.test.TestCase):
 
     def checkJson(self, resp, expected_status=200):
         if resp.status_code != expected_status:
-            print(("Invalid status code %d, response was:\n%s" %
-                (resp.status_code, resp.content)))
+            print("Invalid status code %d, response was:\n%s" %
+                (resp.status_code, resp.content))
         self.assertEqual(resp.status_code, expected_status)
         parsed = json.loads(resp.content)
         return parsed
@@ -81,7 +81,7 @@ class JsonRenderingTest(django.test.TestCase):
 
 @pytest.mark.usefixtures("load_test_data")
 class PaperAjaxTest(JsonRenderingTest):
-    
+
     def setUp(self):
         super(PaperAjaxTest, self).setUp()
         u = User.objects.create_user('terry', 'pit@mat.io', 'yo')
@@ -129,7 +129,7 @@ class PublisherAjaxTest(JsonRenderingTest):
 
     def setUp(self):
         super(PublisherAjaxTest, self).setUp()
-        self.papers = list(map(Paper.create_by_doi, 
+        self.papers = list(map(Paper.create_by_doi,
                         ['10.1109/TFUZZ.2018.2852307', '10.1109/TFUZZ.2018.2857720']))
         self.publisher = self.papers[0].publications[0].publisher
         self.assertEqual(self.publisher, self.papers[1].publications[0].publisher)

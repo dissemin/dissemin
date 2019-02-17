@@ -46,7 +46,7 @@ class CrossRefTest(TestCase):
         # This DOI has an empty 'issued' date
         p = self.api.create_paper_by_doi('10.1007/978-1-4020-7884-2_13')
         self.assertEqual(p.pubdate.year, 2006)
-        
+
     def test_invalid_metadata(self):
         # authors with no family name
         paper = self.api.create_paper_by_doi('10.4156/aiss.vol3.issue9.31')
@@ -114,7 +114,7 @@ class CrossRefTest(TestCase):
         for i in range(30):
             metadata = next(generator)
             self.assertTrue(metadata['DOI'].startswith('10.1007/'))
-            
+
     def test_import_dump(self):
         self.api.ingest_dump('devutils/sample_crossref_dump.json.bz2')
         p = Paper.get_by_doi('10.1016/j.jadohealth.2015.10.045')
@@ -150,35 +150,35 @@ class CrossRefUnitTest(unittest.TestCase):
     def test_parse_crossref_date_incomplete(self):
         self.assertEqual(parse_crossref_date(None), None)
         self.assertEqual(
-                parse_crossref_date({'date-parts': [[2015, 0o7, 0o6]]}),
-                datetime.date(year=2015, month=0o7, day=0o6))
+                parse_crossref_date({'date-parts': [[2015, 7, 6]]}),
+                datetime.date(year=2015, month=7, day=6))
         self.assertEqual(
-                parse_crossref_date({'date-parts': [[2015, 0o7]]}),
-                datetime.date(year=2015, month=0o7, day=0o1))
+                parse_crossref_date({'date-parts': [[2015, 7]]}),
+                datetime.date(year=2015, month=7, day=1))
         self.assertEqual(
                 parse_crossref_date({'date-parts': [[2015]]}),
-                datetime.date(year=2015, month=0o1, day=0o1))
+                datetime.date(year=2015, month=1, day=1))
 
     def test_parse_crossref_date_raw(self):
         self.assertEqual(
                 parse_crossref_date({'raw': '2015'}),
-                datetime.date(year=2015, month=0o1, day=0o1))
+                datetime.date(year=2015, month=1, day=1))
         self.assertEqual(
                 parse_crossref_date({'raw': '2015-07'}),
-                datetime.date(year=2015, month=0o7, day=0o1))
+                datetime.date(year=2015, month=7, day=1))
         self.assertEqual(
                 parse_crossref_date({'raw': '2015-07-06'}),
-                datetime.date(year=2015, month=0o7, day=0o6))
+                datetime.date(year=2015, month=7, day=6))
 
     def test_get_publication_date(self):
         self.assertEqual(
                 get_publication_date(
                     fetch_metadata_by_DOI('10.5281/zenodo.18898')),
-                datetime.date(year=2015, month=0o1, day=0o1))
+                datetime.date(year=2015, month=1, day=1))
         self.assertEqual(
                 get_publication_date(
                     fetch_metadata_by_DOI('10.5380/dp.v1i1.1919')),
-                datetime.date(year=2005, month=0o3, day=18))
+                datetime.date(year=2005, month=3, day=18))
 
     def test_batch_queries(self):
         dois = [

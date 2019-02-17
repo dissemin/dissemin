@@ -75,11 +75,11 @@ def parse_bibtex(bibtex):
     if len(db.entries) == 0:
         raise ValueError('No bibtex item was parsed.')
     if len(db.entries) > 1:
-        print((
+        print(
             (
                 "Warning: %d Bibtex items in parse_bibtex, "
                 "defaulting to the first one"
             ) % len(db.entries)
-        ))
+        )
 
     return db.entries[0]

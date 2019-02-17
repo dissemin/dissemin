@@ -64,7 +64,7 @@ class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSo
         super(OaiPaperSource, self).__init__(*args, **kwargs)
         if not oaisource.endpoint:
             raise ValueError('No OAI endpoint was configured for this OAI source.')
-        
+
         self.registry = MetadataRegistry()
         self.registry.registerReader('oai_dc', oai_dc_reader)
         self.registry.registerReader('base_dc', base_dc_reader)
@@ -143,8 +143,8 @@ class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSo
         """
         translator = self.translators.get(format)
         if translator is None:
-            print(("Warning: unknown metadata format %s, skipping" %
-                  header.format()))
+            print("Warning: unknown metadata format %s, skipping" %
+                  header.format())
             return
 
         paper = translator.translate(header, metadata)
@@ -185,6 +185,6 @@ class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSo
                     rate = 'infty'
                     if td.seconds:
                         rate = str(processed_since_report / td.seconds)
-                    print(("current rate: %s records/s" % rate))
+                    print("current rate: %s records/s" % rate)
                     processed_since_report = 0
                     last_report = datetime.now()

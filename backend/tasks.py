@@ -99,7 +99,7 @@ def fetch_everything_for_researcher(pk):
 
 def refetch_researchers(start_time=timezone.now() - timedelta(days=30*6)):
     for r in Researcher.objects.filter(last_harvest__gt=start_time).order_by('last_harvest'):
-        print((r.url))
+        print(r.url)
         fetch_everything_for_researcher(r.pk)
 
 

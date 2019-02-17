@@ -210,10 +210,10 @@ class OrcidPaperSource(PaperSource):
             # We first try to reconcile it with local researcher author name.
             # Then, we consider it missed.
             if work.skipped:
-                print((work.json))
-                print((work.skip_reason))
-                print(('work skipped due to incorrect metadata (%s)' %
-                    (work.skip_reason)))
+                print(work.json)
+                print(work.skip_reason)
+                print('work skipped due to incorrect metadata (%s)' %
+                    (work.skip_reason))
 
                 ignored_papers.append(work.as_dict())
                 continue
@@ -222,8 +222,8 @@ class OrcidPaperSource(PaperSource):
 
         self.warn_user_of_ignored_papers(ignored_papers)
         if ignored_papers:
-            print(('Warning: Total ignored papers: %d' % (len(ignored_papers))))
-    
+            print('Warning: Total ignored papers: %d' % (len(ignored_papers)))
+
     def fetch_and_save(self, researcher, profile=None):
         """
         Fetch papers and save them to the database.

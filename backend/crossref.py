@@ -530,7 +530,7 @@ class CrossRefAPI(object):
                 if not found:
                     break
                 next_cursor = jpath('message/next-cursor', js)
-                print(('Next cursor: '+next_cursor)) # to ease recovery
+                print('Next cursor: '+next_cursor) # to ease recovery
             except ValueError as e:
                 raise MetadataSourceException(
                     'Error while fetching CrossRef results:\nInvalid response.\n' +
@@ -564,9 +564,9 @@ class CrossRefAPI(object):
                     p = Paper.from_bare(bare_paper)
                     p.update_index()
                 except ValueError as e:
-                    print(((record.get('DOI') or 'unknown DOI') + ': '+str(e)))
+                    print((record.get('DOI') or 'unknown DOI') + ': '+str(e))
 
-            print(('Updated up to '+until_date.isoformat()))
+            print('Updated up to '+until_date.isoformat())
             source.last_update += batch_time
             source.save()
 
@@ -596,5 +596,5 @@ class CrossRefAPI(object):
                             print(e)
                             sleep(10*i)
                 except (MetadataSourceException, ValueError) as e:
-                    print(((record.get('DOI') or 'unknown DOI') + ': ' + str(e)))
+                    print((record.get('DOI') or 'unknown DOI') + ': ' + str(e))
 

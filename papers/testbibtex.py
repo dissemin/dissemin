@@ -121,7 +121,7 @@ class ParseBibtexTest(unittest.TestCase):
     title = "My Article",
     year = "2006" }
         """
-        print((parse_bibtex(bibtex)['author'][0][0]))
+        print(parse_bibtex(bibtex)['author'][0][0])
         self.assertEqual(
             parse_bibtex(bibtex),
             {

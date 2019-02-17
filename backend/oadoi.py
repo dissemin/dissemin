@@ -62,24 +62,24 @@ class OadoiAPI(object):
             except (MetadataSourceException, ValueError):
                 return
             if not paper:
-                print(('no such paper for doi {doi}'.format(doi=doi)))
+                print('no such paper for doi {doi}'.format(doi=doi))
                 return
 
         for oa_location in record.get('oa_locations') or []:
             url = oa_location['url']
-    
+
             # just to speed things up a bit...
             if paper.pdf_url == url:
                 return
-    
+
             identifier='oadoi:'+url
             source = self.oadoi_source
-    
+
             if oa_location['host_type'] == 'publisher':
                 url = doi_to_url(doi)
                 identifier = doi_to_crossref_identifier(doi)
                 source = self.crossref_source
-    
+
             record = BareOaiRecord(
                 paper=paper,
                 doi=doi,

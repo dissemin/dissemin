@@ -93,12 +93,12 @@ def make_thumbnail(pdf_blob):
             writer.addPage(reader.getPage(0))
             first_page = BytesIO()
             writer.write(first_page)
-        except PyPdfError as e:
+        except PyPdfError:
             # PyPDF2 failed (maybe it believes the file is encrypted…)
             # We try to convert the file with ImageMagick (wand) anyway,
             # rendering the whole PDF as we have not been able to
             # select the first page
-            print(("PyPDF error: "+str(e)))
+            pass
 
         # We render the PDF
         with wand.image.Image(blob=pdf_blob, format='pdf', resolution=resolution) as image:
@@ -112,11 +112,11 @@ def make_thumbnail(pdf_blob):
 
             image.format = 'png'
             return (num_pages, image.make_blob())
-    except wand.exceptions.WandException as e:
+    except wand.exceptions.WandException:
         # Wand failed: we consider the PDF file as invalid
-        print(("Wand exception: "+str(e)))
-    except ValueError as e:
-        print(("ValueError: "+str(e)))
+        pass
+    except ValueError:
+        pass
 
 
 def save_pdf(user, orig_name, pdf_blob):

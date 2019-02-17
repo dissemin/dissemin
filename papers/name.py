@@ -91,8 +91,8 @@ def rebuild_name(name_words, separators):
         if idx < len(separators):
             output += separators[idx]
         elif idx < len(name_words)-1:
-            print(("WARNING: incorrect name splitting for '%s'" %
-                  str(name_words)))
+            print("WARNING: incorrect name splitting for '%s'" %
+                  str(name_words))
             output += ' '
     return output
 

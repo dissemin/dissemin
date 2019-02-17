@@ -138,8 +138,8 @@ def fetch_journal(search_terms, matching_mode='exact'):
     if not journals:
         return None
     elif len(journals) > 1:
-        print(("Warning, "+str(len(journals))+" journals match the RoMEO request, " +
-              "defaulting to the first one"))
+        print("Warning, "+str(len(journals))+" journals match the RoMEO request, " +
+              "defaulting to the first one")
         # TODO different behaviour: get the ISSN and try again.
     journal = journals[0]
 
@@ -148,8 +148,8 @@ def fetch_journal(search_terms, matching_mode='exact'):
         raise MetadataSourceException('RoMEO returned a journal without title.\n' +
                                       'Terms were: '+str(terms))
     if len(names) > 1:
-        print(("Warning, "+str(len(names))+" names provided for one journal, " +
-              "defaulting to the first one"))
+        print("Warning, "+str(len(names))+" names provided for one journal, " +
+              "defaulting to the first one")
     name = kill_html(names[0].text)
 
     issn = None
