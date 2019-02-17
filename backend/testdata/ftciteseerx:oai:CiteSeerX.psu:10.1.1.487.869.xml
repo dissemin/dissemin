@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?xml-stylesheet type="text/xsl" href="/static/oai2.xsl"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2019-02-16T16:33:26Z</responseDate>
+    <request verb="GetRecord" identifier="ftciteseerx:oai:CiteSeerX.psu:10.1.1.487.869" metadataPrefix="base_dc">http://doai.io/oai?key=2b2b97d581a08b6833d3&amp;verb=GetRecord&amp;metadataPrefix=base_dc&amp;identifier=ftciteseerx%3Aoai%3ACiteSeerX.psu%3A10.1.1.487.869</request>
+    
+<GetRecord>
+    
+<record>
+    <header>
+        <identifier>ftciteseerx:oai:CiteSeerX.psu:10.1.1.487.869</identifier>
+        <datestamp>2016-10-28T14:36:21Z</datestamp>
+        <setSpec>proaixy:source:base</setSpec>
+    </header>
+    <metadata xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <base_dc:dc xmlns:base_dc="http://oai.base-search.net/base_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xsi:schemaLocation="http://oai.base-search.net/base_dc/ http://oai.base-search.net/base_dc/base_dc.xsd">
+          <dc:title>Formal Analysis of CRT-RSA Vigilant&#8217;s Countermeasure Against the BellCoRe Attack A Pledge for Formal Methods in the Field of Implementation Security</dc:title>
+          <dc:creator>Pablo Rauzy</dc:creator>
+          <dc:creator>Sylvain Guilley</dc:creator>
+          <dc:description>In our paper at PROOFS 2013, we formally studied a few known countermeasures to protect CRT-RSA against the BellCoRe fault injection attack. However, we left Vigilant&#8217;s countermeasure and its alleged repaired version by Coron et al. as future work, because the arithmetical framework of our tool was not sufficiently powerful. In this paper we bridge this gap and then use the same methodology to formally study both versions of the countermeasure. We obtain surprising results, which we believe demonstrate the importance of formal analysis in the field of implementation security. Indeed, the original version of Vigilant&#8217;s countermeasure is actually broken, but not as much as Coron et al. thought it was. As a consequence, the repaired version they proposed can be simplified. It can actually be simplified even further as two of the nine modular verifications happen to be unnecessary. Fortunately, we could formally prove the simplified repaired version to be resistant to the BellCoRe attack, which was considered a &#8220;challenging issue &#8221; by the authors of the countermeasure themselves.</dc:description>
+          <dc:language>en</dc:language>
+          <dc:identifier>http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.487.869</dc:identifier>
+          <dc:identifier>http://eprint.iacr.org/2013/810.pdf</dc:identifier>
+          <dc:contributor>The Pennsylvania State University CiteSeerX Archives</dc:contributor>
+          <dc:format>application/pdf</dc:format>
+          <dc:type>text</dc:type>
+          <dc:source>http://eprint.iacr.org/2013/810.pdf</dc:source>
+          <dc:rights>Metadata may be used without restrictions as long as the oai identifier remains attached to it.</dc:rights>
+          <base_dc:autoclasscode type="ddc">005</base_dc:autoclasscode>
+          <base_dc:collection>ftciteseerx</base_dc:collection>
+          <base_dc:collname>CiteSeerX</base_dc:collname>
+          <base_dc:continent>cna</base_dc:continent>
+          <base_dc:country>us</base_dc:country>
+          <base_dc:lang>eng</base_dc:lang>
+          <base_dc:link>http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.487.869</base_dc:link>
+          <base_dc:oa>1</base_dc:oa>
+          <base_dc:typenorm>1</base_dc:typenorm>
+        </base_dc:dc>
+      </metadata>
+    
+
+</record>
+
+</GetRecord>
+</OAI-PMH>

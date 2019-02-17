@@ -46,6 +46,11 @@ class CrossRefTest(TestCase):
         # This DOI has an empty 'issued' date
         p = self.api.create_paper_by_doi('10.1007/978-1-4020-7884-2_13')
         self.assertEqual(p.pubdate.year, 2006)
+        
+    def test_invalid_metadata(self):
+        # authors with no family name
+        paper = self.api.create_paper_by_doi('10.4156/aiss.vol3.issue9.31')
+        self.assertEqual(paper, None)
 
     def test_affiliations(self):
         p = self.api.create_paper_by_doi('10.4204/eptcs.172.16')

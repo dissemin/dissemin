@@ -1100,24 +1100,27 @@ class Paper(models.Model, BarePaper):
     @classmethod
     def create_by_hal_id(self, hal_id, bare=False):
         """
-        Creates a paper given a HAL id (e.g. hal-01227383)
+        Creates a paper given a HAL id (e.g. hal-01227383).
+        
+        This is just a helper created for https://github.com/dissemin/dissemin/issues/316
         """
         return self.create_by_oai_id(
-            'ftccsdartic:oai:hal.archives-ouvertes.fr:'+hal_id,
-            bare=bare)
+            'oai:hal.archives-ouvertes.fr:'+hal_id,
+            bare=bare, source=OaiSource.objects.get(identifier='hal'))
 
     @classmethod
-    def create_by_oai_id(self, oai_id, metadataPrefix='base_dc', bare=False):
+    def create_by_oai_id(self, oai_id, source, metadataPrefix='oai_dc', bare=False):
         """
         Creates a paper by its OAI identifier.
+        This is mostly used in tests, this functionality is not exposed in the interface.
         """
-        from backend.oai import get_proaixy_instance
-        oai = get_proaixy_instance()
+        from backend.oai import OaiPaperSource
+        oai = OaiPaperSource(source)
         p = oai.create_paper_by_identifier(oai_id, metadataPrefix)
         if bare:
             return p
         elif p:
-            return Paper.from_bare(p) # TODO index it?
+            return Paper.from_bare(p)
 
     def successful_deposits(self):
         return self.depositrecord_set.filter(oairecord__isnull=False)
@@ -1326,15 +1329,41 @@ class OaiSourceManager(CachingManager):
         return self.get(identifier=identifier)
 
 class OaiSource(CachingMixin, models.Model):
+    """
+    Represents an OAI-PMH endpoint that dissemin harvests from.
+    """
     objects = OaiSourceManager()
 
+    #: a string to identify the source
     identifier = models.CharField(max_length=300, unique=True)
+    
+    #: the URL of the OAI endpoint.
+    #: This can be null if we cannot actually harvest from this
+    #: source via OAI - some other code is then responsible for
+    #: creating records from this source.
+    endpoint = models.URLField(max_length=300, null=True)
+    
+    #: an OAI set to restrict the harvesting to. If null, we harvest
+    #: the entire source, with no restriction.
+    restrict_set = models.CharField(max_length=300, null=True)
+    
+    #: A human-readable name for the source, which will be shown
+    #: to users in the UI when displaying OAI records from a paper.
     name = models.CharField(max_length=100)
+    
+    #: Are all papers from this source free to read from the source?
     oa = models.BooleanField(default=False)
+    
+    #: This is used to sort the OAI records: the higher the priority,
+    #: the higher up the record will show. The highest priority OAI record
+    #: is used to determine the preferred PDF url for the paper.
     priority = models.IntegerField(default=1)
+    
+    #: Default publication type for papers created from this source.
     default_pubtype = models.CharField(
         max_length=64, choices=PAPER_TYPE_CHOICES)
 
+    #: Last time we harvested this source.
     last_update = models.DateTimeField(default=datetime(1970,1,1,0,0,0))
 
     def __unicode__(self):

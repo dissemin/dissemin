@@ -161,7 +161,11 @@ pmcExtractor = RegexExtractor([
     ('identifier', re.compile(r'(https?://www\.ncbi\.nlm\.nih\.gov/pubmed/[0-9]+)$'),
         'splash', r'\1'),
     ('identifier', re.compile(r'https?://www\.ncbi\.nlm\.nih\.gov/pubmed/([0-9]+)$'),
-        'pdf', r'http://www.ncbi.nlm.nih.gov/pmc/articles/pmid/\1')
+        'pdf', r'http://www.ncbi.nlm.nih.gov/pmc/articles/pmid/\1'),
+    ('identifier', re.compile(r'.*/pmc/articles/PMC(\d+)/$'),
+        'splash', r'http://www.ncbi.nlm.nih.gov/pmc/articles/PMC\1/'),
+    ('identifier', re.compile(r'.*/pmc/articles/PMC(\d+)/$'),
+        'pdf', r'http://www.ncbi.nlm.nih.gov/pmc/articles/PMC\1/'),
     ])
 
 doajExtractor = RegexExtractor([
@@ -206,6 +210,9 @@ baseExtractor = BaseExtractor([
     ('link', re.compile(r'(https?://.*\.pdf)'), 'pdf', r'\1'),
     ])
 
+defaultExtractor = RegexExtractor([
+    ('source', re.compile(r'(https?://[^ ]*)'),
+        'splash', r'\1')])
 
 REGISTERED_OAI_EXTRACTORS = {
         'arxiv': arxivExtractor,

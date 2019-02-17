@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?xml-stylesheet type="text/xsl" href="/static/oai2.xsl"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2019-02-16T16:27:59Z</responseDate>
+    <request verb="GetRecord" identifier="ftbnfgallica:oai:bnf.fr:gallica/ark:/12148/btv1b8621766k" metadataPrefix="base_dc">http://doai.io/oai?key=2b2b97d581a08b6833d3&amp;verb=GetRecord&amp;metadataPrefix=base_dc&amp;identifier=ftbnfgallica%3Aoai%3Abnf.fr%3Agallica%2Fark%3A%2F12148%2Fbtv1b8621766k</request>
+    
+<GetRecord>
+    
+<record>
+    <header>
+        <identifier>ftbnfgallica:oai:bnf.fr:gallica/ark:/12148/btv1b8621766k</identifier>
+        <datestamp>2015-11-01T10:56:33Z</datestamp>
+        <setSpec>proaixy:source:base</setSpec>
+    </header>
+    <metadata xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <base_dc:dc xmlns:base_dc="http://oai.base-search.net/base_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xsi:schemaLocation="http://oai.base-search.net/base_dc/         http://oai.base-search.net/base_dc/base_dc.xsd">
+          <dc:title>Arrest du conseil d'estat du Roy, par lequel Sa Majest&#233; fait d&#233;fenses &#224; tous ses sujets domicili&#233;s en Franche-comt&#233;, d'aller en Lorraine ou d'y envoyer leurs procurations pour passer des actes entre eux pour causes mobiliaires, ou de biens r&#233;els situ&#233;s en France, &#224; peine de nullit&#233; desdits actes et de 300 liv. d'amende pour chacune contravention, &#224; l'exception du seul cas o&#249; l'une des parties contractantes se trouverait domicili&#233;e et actuellement en Lorraine lors de la passation de l'acte qui y serait fait ??? un domicili&#233; de France ou le porteur de sa procuration ; accorde sadite Majest&#233; &#224; tous ses sujets domicili&#233;s en Franche-Comt&#233;, un d&#233;lai de trois mois pour pr&#233;senter aux bureaux de Pierre le Blanc, fermier des domaines de ladite province les exp&#233;ditions des actes pass&#233;s entr'eux pardevant les notaires de Lorraine, pour &#234;tre les droits d'iceux, pendant ledit d&#233;lai, pay&#233;s aux bureaux de la situation du domicile des parties ; et faute par lesdites parties de profiter dudit d&#233;lai de gr&#226;ce, et icelui pass&#233;, lesdits actes demeureront nuls et de nul effet, et les particuliers pourront &#234;tre poursuivis pour le payement d'amendes port&#233;e par les r&#233;glemens ; enjoint Sa Majest&#233; aux Intendans des provinces et g&#233;n&#233;ralit&#233;s du royaume, de tenir la main &#224; l'ex&#233;cution du pr&#233;sent arrest, etc.</dc:title>
+          <dc:creator>France. Conseil d'Etat (13.-1791)</dc:creator>
+          <dc:description>[Acte. 1742-06-26. Versailles] ; Appartient &#224; l&#8217;ensemble documentaire : FrancComt1</dc:description>
+          <dc:language>fre</dc:language>
+          <dc:date>1743</dc:date>
+          <dc:identifier>http://gallica.bnf.fr/ark:/12148/btv1b8621766k</dc:identifier>
+          <dc:relation>Notice du catalogue : http://catalogue.bnf.fr/ark:/12148/cb33694129n</dc:relation>
+          <dc:publisher>impr. de P. Prault (Paris)</dc:publisher>
+          <dc:format>In-4&#176;, 8 p.</dc:format>
+          <dc:format>application/pdf</dc:format>
+          <dc:type>text</dc:type>
+          <dc:type>monographie imprim&#233;e</dc:type>
+          <dc:type>printed monograph</dc:type>
+          <base_dc:typenorm>0000</base_dc:typenorm>
+          <base_dc:oa>1</base_dc:oa>
+          <base_dc:collection>ftbnfgallica</base_dc:collection>
+          <base_dc:collname>Gallica - Digital Library of the Biblioth&#232;que Nationale de France (BnF)</base_dc:collname>
+          <base_dc:continent>ceu</base_dc:continent>
+          <base_dc:country>fr</base_dc:country>
+          <base_dc:lang>fre</base_dc:lang>
+          <base_dc:year>1743</base_dc:year>
+          <base_dc:link>http://gallica.bnf.fr/ark:/12148/btv1b8621766k</base_dc:link>
+          <base_dc:rights>domaine public ; public domain</base_dc:rights>
+          <base_dc:source>Biblioth&#232;que nationale de France, d&#233;partement Droit, &#233;conomie, politique, F-21134 (42)</base_dc:source>
+        </base_dc:dc>
+      </metadata>
+    
+
+</record>
+
+</GetRecord>
+</OAI-PMH>

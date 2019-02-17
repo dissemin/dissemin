@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?xml-stylesheet type="text/xsl" href="/static/oai2.xsl"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2019-02-16T16:30:56Z</responseDate>
+    <request verb="GetRecord" identifier="ftccsdartic:oai:hal.archives-ouvertes.fr:hal-00939473" metadataPrefix="base_dc">http://doai.io/oai?key=2b2b97d581a08b6833d3&amp;verb=GetRecord&amp;metadataPrefix=base_dc&amp;identifier=ftccsdartic%3Aoai%3Ahal.archives-ouvertes.fr%3Ahal-00939473</request>
+    
+<GetRecord>
+    
+<record>
+    <header>
+        <identifier>ftccsdartic:oai:hal.archives-ouvertes.fr:hal-00939473</identifier>
+        <datestamp>2015-11-01T15:05:00Z</datestamp>
+        <setSpec>proaixy:source:base</setSpec>
+    </header>
+    <metadata xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <base_dc:dc xmlns:base_dc="http://oai.base-search.net/base_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xsi:schemaLocation="http://oai.base-search.net/base_dc/         http://oai.base-search.net/base_dc/base_dc.xsd">
+          <dc:title>Formal Analysis of CRT-RSA Vigilant's Countermeasure Against the BellCoRe Attack: A Pledge for Formal Methods in the Field of Implementation Security</dc:title>
+          <dc:creator>Rauzy, Pablo</dc:creator>
+          <dc:creator>Guilley, Sylvain</dc:creator>
+          <dc:description>In our paper at PROOFS 2013, we formally studied a few known countermeasures to protect CRT-RSA against the BellCoRe fault injection attack. However, we left Vigilant's countermeasure and its alleged repaired version by Coron et al. as future work, because the arithmetical framework of our tool was not sufficiently powerful. In this paper we bridge this gap and then use the same methodology to formally study both versions of the countermeasure. We obtain surprising results, which we believe demonstrate the importance of formal analysis in the field of implementation security. Indeed, the original version of Vigilant's countermeasure is actually broken, but not as much as Coron et al. thought it was. As a consequence, the repaired version they proposed can be simplified. It can actually be simplified even further as two of the nine modular verifications happen to be unnecessary. Fortunately, we could formally prove the simplified repaired version to be resistant to the BellCoRe attack, which was considered a "challenging issue" by the authors of the countermeasure themselves.</dc:description>
+          <dc:language>eng</dc:language>
+          <dc:date>2014-01-29</dc:date>
+          <dc:identifier>http://hal.archives-ouvertes.fr/hal-00939473</dc:identifier>
+          <dc:identifier>http://hal.archives-ouvertes.fr/docs/00/99/57/67/PDF/bellcore_vigilant-hal.pdf</dc:identifier>
+          <dc:subject>[INFO:INFO_CR] Computer Science/Cryptography and Security</dc:subject>
+          <dc:subject>[INFO:INFO_CR] Informatique/Cryptographie et s&#233;curit&#233;</dc:subject>
+          <dc:subject>RSA</dc:subject>
+          <dc:subject>CRT</dc:subject>
+          <dc:subject>fault injection</dc:subject>
+          <dc:subject>BellCoRe attack</dc:subject>
+          <dc:subject>formal proof</dc:subject>
+          <dc:subject>OCaml</dc:subject>
+          <dc:subject>rewriting system</dc:subject>
+          <dc:subject>static analysis</dc:subject>
+          <dc:subject>symbolic execution</dc:subject>
+          <dc:type>conference proceeding</dc:type>
+          <base_dc:autoclasscode type="ddc">005</base_dc:autoclasscode>
+          <base_dc:typenorm>0003</base_dc:typenorm>
+          <base_dc:oa>2</base_dc:oa>
+          <base_dc:collection>ftccsdartic</base_dc:collection>
+          <base_dc:collname>HAL - Hyper Article en Ligne (CCSD - Centre pour la Communication Scientifique Directe)</base_dc:collname>
+          <base_dc:continent>ceu</base_dc:continent>
+          <base_dc:country>fr</base_dc:country>
+          <base_dc:lang>eng</base_dc:lang>
+          <base_dc:year>2014</base_dc:year>
+          <base_dc:link>http://hal.archives-ouvertes.fr/hal-00939473</base_dc:link>
+          <base_dc:source>Proceedings of ACM SIGPLAN on Program Protection and Reverse Engineering Workshop 2014 ; Formal Analysis of CRT-RSA Vigilant's Countermeasure Against the BellCoRe Attack: A Pledge for Formal Methods in the Field of Implementation Security ; Program Protection and Reverse Engineering Workshop 2014</base_dc:source>
+        </base_dc:dc>
+      </metadata>
+    
+
+</record>
+
+</GetRecord>
+</OAI-PMH>

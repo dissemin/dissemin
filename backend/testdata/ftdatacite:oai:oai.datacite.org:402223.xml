@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?xml-stylesheet type="text/xsl" href="/static/oai2.xsl"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2019-02-16T16:28:51Z</responseDate>
+    <request verb="GetRecord" identifier="ftdatacite:oai:oai.datacite.org:402223" metadataPrefix="base_dc">http://doai.io/oai?key=2b2b97d581a08b6833d3&amp;verb=GetRecord&amp;metadataPrefix=base_dc&amp;identifier=ftdatacite%3Aoai%3Aoai.datacite.org%3A402223</request>
+    
+<GetRecord>
+    
+<record>
+    <header>
+        <identifier>ftdatacite:oai:oai.datacite.org:402223</identifier>
+        <datestamp>2015-11-02T04:00:00Z</datestamp>
+        <setSpec>proaixy:source:base</setSpec>
+    </header>
+    <metadata xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <base_dc:dc xmlns:base_dc="http://oai.base-search.net/base_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xsi:schemaLocation="http://oai.base-search.net/base_dc/         http://oai.base-search.net/base_dc/base_dc.xsd">
+          <dc:title>Physical oceanography measured on water bottle samples at station MI5619850000300211 during cruise SEPTEMBRE_1985</dc:title>
+          <dc:creator>Zouiri, Mohamed</dc:creator>
+          <dc:creator>MEDAR Group</dc:creator>
+          <dc:language>eng</dc:language>
+          <dc:date>2006</dc:date>
+          <dc:identifier>http://dx.doi.org/10.1594/PANGAEA.514364</dc:identifier>
+          <dc:subject>Pressure</dc:subject>
+          <dc:subject>water</dc:subject>
+          <dc:subject>Temperature</dc:subject>
+          <dc:subject>water</dc:subject>
+          <dc:subject>CTD</dc:subject>
+          <dc:subject>SEPTEMBRE_1985</dc:subject>
+          <dc:subject>Ibn Sina</dc:subject>
+          <dc:subject>Mediterranean Data Archaeology and Rescue (MEDAR/MEDATLAS)</dc:subject>
+          <dc:publisher>PANGAEA - Data Publisher for Earth &amp; Environmental Science</dc:publisher>
+          <dc:format>8 data points</dc:format>
+          <dc:format>text/tab-separated-values</dc:format>
+          <dc:type>Dataset</dc:type>
+          <dc:type>Dataset</dc:type>
+          <base_dc:typenorm>0106</base_dc:typenorm>
+          <base_dc:oa>2</base_dc:oa>
+          <base_dc:collection>ftdatacite</base_dc:collection>
+          <base_dc:collname>DataCite Metadata Store (German National Library of Science and Technology)</base_dc:collname>
+          <base_dc:continent>ceu</base_dc:continent>
+          <base_dc:contributor>Institut National de Recherche Halieutique</base_dc:contributor>
+          <base_dc:country>de</base_dc:country>
+          <base_dc:lang>eng</base_dc:lang>
+          <base_dc:year>2006</base_dc:year>
+          <base_dc:link>http://dx.doi.org/10.1594/PANGAEA.514364</base_dc:link>
+          <base_dc:rights>Creative Commons Attribution 3.0 Unported (CC-BY)</base_dc:rights>
+        </base_dc:dc>
+      </metadata>
+    
+
+</record>
+
+</GetRecord>
+</OAI-PMH>

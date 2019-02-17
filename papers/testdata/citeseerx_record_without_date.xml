@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+  <responseDate>2019-02-16T09:00:54Z</responseDate>
+  <request identifier="oai:CiteSeerX.psu:10.1.1.487.869" metadataPrefix="oai_dc" verb="GetRecord">http://citeseerx.ist.psu.edu/oai2</request>
+  <GetRecord>
+    <record>
+      <header>
+        <identifier>oai:CiteSeerX.psu:10.1.1.487.869</identifier>
+        <datestamp>2014-12-19</datestamp>
+      </header>
+      <metadata>
+        <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Formal Analysis of CRT-RSA Vigilant’s Countermeasure Against the BellCoRe Attack A Pledge for Formal Methods in the Field of Implementation Security</dc:title>
+          <dc:creator>Pablo Rauzy</dc:creator>
+          <dc:creator>Sylvain Guilley</dc:creator>
+          <dc:description>In our paper at PROOFS 2013, we formally studied a few known countermeasures to protect CRT-RSA against the BellCoRe fault injection attack. However, we left Vigilant’s countermeasure and its alleged repaired version by Coron et al. as future work, because the arithmetical framework of our tool was not sufficiently powerful. In this paper we bridge this gap and then use the same methodology to formally study both versions of the countermeasure. We obtain surprising results, which we believe demonstrate the importance of formal analysis in the field of implementation security. Indeed, the original version of Vigilant’s countermeasure is actually broken, but not as much as Coron et al. thought it was. As a consequence, the repaired version they proposed can be simplified. It can actually be simplified even further as two of the nine modular verifications happen to be unnecessary. Fortunately, we could formally prove the simplified repaired version to be resistant to the BellCoRe attack, which was considered a “challenging issue ” by the authors of the countermeasure themselves.</dc:description>
+          <dc:contributor>The Pennsylvania State University CiteSeerX Archives</dc:contributor>
+          <dc:publisher/>
+          <dc:format>application/pdf</dc:format>
+          <dc:type>text</dc:type>
+          <dc:identifier>http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.487.869</dc:identifier>
+          <dc:source>http://eprint.iacr.org/2013/810.pdf</dc:source>
+          <dc:language>en</dc:language>
+          <dc:rights>Metadata may be used without restrictions as long as the oai identifier remains attached to it.</dc:rights>
+        </oai_dc:dc>
+      </metadata>
+    </record>
+  </GetRecord>
+</OAI-PMH>

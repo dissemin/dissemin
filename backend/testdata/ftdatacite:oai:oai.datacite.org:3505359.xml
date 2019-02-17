@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?xml-stylesheet type="text/xsl" href="/static/oai2.xsl"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2019-02-16T16:28:01Z</responseDate>
+    <request verb="GetRecord" identifier="ftdatacite:oai:oai.datacite.org:3505359" metadataPrefix="base_dc">http://doai.io/oai?key=2b2b97d581a08b6833d3&amp;verb=GetRecord&amp;metadataPrefix=base_dc&amp;identifier=ftdatacite%3Aoai%3Aoai.datacite.org%3A3505359</request>
+    
+<GetRecord>
+    
+<record>
+    <header>
+        <identifier>ftdatacite:oai:oai.datacite.org:3505359</identifier>
+        <datestamp>2015-11-01T18:13:02Z</datestamp>
+        <setSpec>proaixy:source:base</setSpec>
+    </header>
+    <metadata xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <base_dc:dc xmlns:base_dc="http://oai.base-search.net/base_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xsi:schemaLocation="http://oai.base-search.net/base_dc/         http://oai.base-search.net/base_dc/base_dc.xsd">
+          <dc:title>The khmer software package: enabling efficient sequence analysis</dc:title>
+          <dc:creator>C. Titus Brown</dc:creator>
+          <dc:creator>Michael R. Crusoe</dc:creator>
+          <dc:date>2014</dc:date>
+          <dc:identifier>http://dx.doi.org/10.6084/M9.FIGSHARE.979190</dc:identifier>
+          <dc:publisher>Figshare</dc:publisher>
+          <dc:type>Dataset</dc:type>
+          <dc:type>Dataset</dc:type>
+          <base_dc:typenorm>0106</base_dc:typenorm>
+          <base_dc:oa>2</base_dc:oa>
+          <base_dc:collection>ftdatacite</base_dc:collection>
+          <base_dc:collname>DataCite Metadata Store (German National Library of Science and Technology)</base_dc:collname>
+          <base_dc:continent>ceu</base_dc:continent>
+          <base_dc:country>de</base_dc:country>
+          <base_dc:lang>unknown</base_dc:lang>
+          <base_dc:year>2014</base_dc:year>
+          <base_dc:link>http://dx.doi.org/10.6084/M9.FIGSHARE.979190</base_dc:link>
+          <base_dc:rights>CC-BY ; http://creativecommons.org/licenses/by/3.0/us/</base_dc:rights>
+        </base_dc:dc>
+      </metadata>
+    
+
+</record>
+
+</GetRecord>
+</OAI-PMH>

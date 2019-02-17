@@ -37,6 +37,8 @@ from dissemin.settings import CROSSREF_USER_AGENT
 from dissemin.settings import CROSSREF_MAILTO
 from django.db import DataError
 from django.utils.http import urlencode
+from django.utils import timezone
+from elasticsearch.exceptions import ConnectionTimeout
 from papers.baremodels import BareName
 from papers.baremodels import BareOaiRecord
 from papers.baremodels import BarePaper
@@ -55,6 +57,7 @@ from papers.utils import valid_publication_date
 from papers.utils import validate_orcid
 from publishers.models import AliasPublisher
 from backend.pubtype_translations import CROSSREF_PUBTYPE_ALIASES
+from time import sleep
 
 ######## HOW THIS MODULE WORKS ###########
 #
@@ -536,39 +539,62 @@ class CrossRefAPI(object):
                 raise MetadataSourceException('Error while fetching CrossRef results:\nError was: '+str(e))
 
 
-    def fetch_and_save_new_records(self, starting_cursor='*'):
+    def fetch_and_save_new_records(self, starting_cursor='*', batch_time=datetime.timedelta(days=1)):
         """
         Fetches and stores all new Crossref records updated since the
         last update time of the associated OaiSource.
         """
         source = OaiSource.objects.get(identifier='crossref')
-        last_updated = source.last_update
 
-        to_update = self.fetch_all_records(filters={'from-update-date':last_updated.date().isoformat()},
-                cursor=starting_cursor)
-        for record in to_update:
-            try:
-                bare_paper = self.save_doi_metadata(record)
-                p = Paper.from_bare(bare_paper)
-                p.update_index()
-            except ValueError as e:
-                print(e)
+        # We substract one day to 'until-update-date' parameter as it is inclusive
+        one_day = datetime.timedelta(days=1)
 
-        source.last_update = datetime.datetime.now()
-        source.save()
-        
-    def ingest_dump(self, filename):
+        while source.last_update + batch_time < timezone.now():
+            last_updated = source.last_update
+
+            until_date = (last_updated + batch_time - one_day).date()
+
+            to_update = self.fetch_all_records(
+                filters={'from-update-date':last_updated.date().isoformat(),
+                         'until-update-date':until_date.isoformat()},
+                    cursor=starting_cursor)
+            for record in to_update:
+                try:
+                    bare_paper = self.save_doi_metadata(record)
+                    p = Paper.from_bare(bare_paper)
+                    p.update_index()
+                except ValueError as e:
+                    print((record.get('DOI') or 'unknown DOI') + ': '+unicode(e))
+
+            print('Updated up to '+until_date.isoformat())
+            source.last_update += batch_time
+            source.save()
+
+    def ingest_dump(self, filename, start_doi=None):
         """
         Imports a dump of Crossref metadata records stored as a bz2'ed
         file where each line is a JSON record.
         """
         with bz2.BZ2File(filename, 'r') as f:
+            first_doi_seen = start_doi is None
             for line in f:
                 try:
                     record = json.loads(line)
+                    if start_doi and record.get('DOI') == start_doi:
+                        first_doi_seen = True
+                    if not first_doi_seen:
+                        continue
+
                     bare_paper = self.save_doi_metadata(record)
                     p = Paper.from_bare(bare_paper)
-                    p.update_index()
-                except ValueError as e:
-                    print(e)
-                    
+
+                    for i in range(3):
+                        try:
+                            p.update_index()
+                            break
+                        except ConnectionTimeout as e:
+                            print(e)
+                            sleep(10*i)
+                except (MetadataSourceException, ValueError) as e:
+                    print((record.get('DOI') or 'unknown DOI') + ': ' + unicode(e))
+

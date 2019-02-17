@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?xml-stylesheet type="text/xsl" href="/static/oai2.xsl"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2019-02-16T16:28:00Z</responseDate>
+    <request verb="GetRecord" identifier="ftdatacite:oai:oai.datacite.org:8558707" metadataPrefix="base_dc">http://doai.io/oai?key=2b2b97d581a08b6833d3&amp;verb=GetRecord&amp;metadataPrefix=base_dc&amp;identifier=ftdatacite%3Aoai%3Aoai.datacite.org%3A8558707</request>
+    
+<GetRecord>
+    
+<record>
+    <header>
+        <identifier>ftdatacite:oai:oai.datacite.org:8558707</identifier>
+        <datestamp>2016-11-17T04:23:00Z</datestamp>
+        <setSpec>proaixy:source:base</setSpec>
+    </header>
+    <metadata xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <base_dc:dc xmlns:base_dc="http://oai.base-search.net/base_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xsi:schemaLocation="http://oai.base-search.net/base_dc/ http://oai.base-search.net/base_dc/base_dc.xsd">
+          <dc:title>The four pillars of open science</dc:title>
+          <dc:creator>Nikolaus Kriegeskorte</dc:creator>
+          <dc:description>Abstract ; Open review and perspective on the four pillars open science: open data, open code, open papers, and open reviews.</dc:description>
+          <dc:date>2016</dc:date>
+          <dc:identifier>http://dx.doi.org/10.6084/M9.FIGSHARE.3462809.V1</dc:identifier>
+          <dc:relation>doi:10.6084/m9.figshare.3462809</dc:relation>
+          <dc:subject>Neuroscience</dc:subject>
+          <dc:publisher>Figshare</dc:publisher>
+          <dc:format>1850175 Bytes</dc:format>
+          <dc:type>Text</dc:type>
+          <dc:type>Paper</dc:type>
+          <dc:rights>CC-BY ; http://creativecommons.org/licenses/by/3.0/us/</dc:rights>
+          <base_dc:collection>ftdatacite</base_dc:collection>
+          <base_dc:collname>DataCite Metadata Store (German National Library of Science and Technology)</base_dc:collname>
+          <base_dc:continent>ceu</base_dc:continent>
+          <base_dc:country>de</base_dc:country>
+          <base_dc:lang>unknown</base_dc:lang>
+          <base_dc:link>http://dx.doi.org/10.6084/M9.FIGSHARE.3462809.V1</base_dc:link>
+          <base_dc:oa>1</base_dc:oa>
+          <base_dc:rightsnorm>CC-BY</base_dc:rightsnorm>
+          <base_dc:typenorm>14</base_dc:typenorm>
+          <base_dc:year>2016</base_dc:year>
+        </base_dc:dc>
+      </metadata>
+    
+
+</record>
+
+</GetRecord>
+</OAI-PMH>

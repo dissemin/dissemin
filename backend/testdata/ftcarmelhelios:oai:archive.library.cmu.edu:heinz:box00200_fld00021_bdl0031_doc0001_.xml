@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?xml-stylesheet type="text/xsl" href="/static/oai2.xsl"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2019-02-16T16:28:54Z</responseDate>
+    <request verb="GetRecord" identifier="ftcarmelhelios:oai:archive.library.cmu.edu:heinz:box00200/fld00021/bdl0031/doc0001/" metadataPrefix="base_dc">http://doai.io/oai?key=2b2b97d581a08b6833d3&amp;verb=GetRecord&amp;metadataPrefix=base_dc&amp;identifier=ftcarmelhelios%3Aoai%3Aarchive.library.cmu.edu%3Aheinz%3Abox00200%2Ffld00021%2Fbdl0031%2Fdoc0001%2F</request>
+    
+<GetRecord>
+    
+<record>
+    <header>
+        <identifier>ftcarmelhelios:oai:archive.library.cmu.edu:heinz:box00200/fld00021/bdl0031/doc0001/</identifier>
+        <datestamp>2015-11-01T10:53:49Z</datestamp>
+        <setSpec>proaixy:source:base</setSpec>
+    </header>
+    <metadata xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <base_dc:dc xmlns:base_dc="http://oai.base-search.net/base_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xsi:schemaLocation="http://oai.base-search.net/base_dc/         http://oai.base-search.net/base_dc/base_dc.xsd">
+          <dc:title>Article -- N.D. (Clipping/Articles -- National Press File -- 1976-1981) ; Press Secretary -- 1977-1991</dc:title>
+          <dc:language>en</dc:language>
+          <dc:date>N.D.</dc:date>
+          <dc:identifier>http://diva.library.cmu.edu/webapp/helios/item.jsp?q=box00200/fld00021/bdl0031/doc0001/</dc:identifier>
+          <dc:identifier>http://shelf1.library.cmu.edu/cgi-bin/tiff2pdf/heinz/box00200/fld00021/bdl0031/doc0001/heinz.pdf</dc:identifier>
+          <dc:relation>isPartOf http://diva.library.cmu.edu/HELIOS/</dc:relation>
+          <dc:subject>Clipping/Articles</dc:subject>
+          <dc:publisher>Senator H. John Heinz III Archives; Carnegie Mellon University</dc:publisher>
+          <dc:publisher>Carnegie Mellon University. Pittsburgh, Pennsylvania</dc:publisher>
+          <dc:publisher>http://www.library.cmu.edu</dc:publisher>
+          <dc:type>Article</dc:type>
+          <base_dc:typenorm>0001</base_dc:typenorm>
+          <base_dc:oa>2</base_dc:oa>
+          <base_dc:collection>ftcarmelhelios</base_dc:collection>
+          <base_dc:collname>Carnegie Mellon Univ.: HELIOS (Heinz Electronic Library Interactive Online System)</base_dc:collname>
+          <base_dc:continent>cna</base_dc:continent>
+          <base_dc:country>us</base_dc:country>
+          <base_dc:lang>eng</base_dc:lang>
+          <base_dc:link>http://diva.library.cmu.edu/webapp/helios/item.jsp?q=box00200/fld00021/bdl0031/doc0001/</base_dc:link>
+        </base_dc:dc>
+      </metadata>
+    
+
+</record>
+
+</GetRecord>
+</OAI-PMH>

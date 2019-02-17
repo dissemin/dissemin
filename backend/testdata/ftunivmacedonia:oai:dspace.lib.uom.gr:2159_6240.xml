@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?xml-stylesheet type="text/xsl" href="/static/oai2.xsl"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2019-02-16T16:33:27Z</responseDate>
+    <request verb="GetRecord" identifier="ftunivmacedonia:oai:dspace.lib.uom.gr:2159/6240" metadataPrefix="base_dc">http://doai.io/oai?key=2b2b97d581a08b6833d3&amp;verb=GetRecord&amp;metadataPrefix=base_dc&amp;identifier=ftunivmacedonia%3Aoai%3Adspace.lib.uom.gr%3A2159%2F6240</request>
+    
+<GetRecord>
+    
+<record>
+    <header>
+        <identifier>ftunivmacedonia:oai:dspace.lib.uom.gr:2159/6240</identifier>
+        <datestamp>2015-11-04T00:00:21Z</datestamp>
+        <setSpec>proaixy:source:base</setSpec>
+    </header>
+    <metadata xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <base_dc:dc xmlns:base_dc="http://oai.base-search.net/base_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xsi:schemaLocation="http://oai.base-search.net/base_dc/         http://oai.base-search.net/base_dc/base_dc.xsd">
+          <dc:title>The Demand for Selected Nutrients by Greek Households:An Empirical Analysis with Quantile Regressions</dc:title>
+          <dc:creator>&#934;&#959;&#965;&#963;&#941;&#954;&#951;&#962;, &#928;&#945;&#957;&#945;&#947;&#953;&#974;&#964;&#951;&#962;</dc:creator>
+          <dc:creator>Fousekis, Panagiotis</dc:creator>
+          <dc:language>en</dc:language>
+          <dc:language>el</dc:language>
+          <dc:date>2004</dc:date>
+          <dc:identifier>http://hdl.handle.net/2159/6240</dc:identifier>
+          <dc:identifier>http://dx.doi.org/10.1111/j.1574-0862.2005.00325.x</dc:identifier>
+          <dc:format>1164 bytes</dc:format>
+          <dc:format>text/plain</dc:format>
+          <dc:type>&#902;&#961;&#952;&#961;&#945; &#963;&#949; &#948;&#953;&#949;&#952;&#957;&#942; &#949;&#960;&#953;&#963;&#964;&#951;&#956;&#959;&#957;&#953;&#954;&#940; &#960;&#949;&#961;&#953;&#959;&#948;&#953;&#954;&#940; (&#956;&#949; &#954;&#961;&#953;&#964;&#941;&#962;)</dc:type>
+          <base_dc:typenorm>9999</base_dc:typenorm>
+          <base_dc:oa>2</base_dc:oa>
+          <base_dc:collection>ftunivmacedonia</base_dc:collection>
+          <base_dc:collname>University of Macedonia: Psepheda - Digital Library &amp; Institutional Repository</base_dc:collname>
+          <base_dc:continent>ceu</base_dc:continent>
+          <base_dc:contributor>&#932;&#956;&#942;&#956;&#945; &#916;&#953;&#949;&#952;&#957;&#974;&#957; &#917;&#965;&#961;&#969;&#960;&#945;&#970;&#954;&#974;&#957; &#931;&#960;&#959;&#965;&#948;&#974;&#957;</base_dc:contributor>
+          <base_dc:country>gr</base_dc:country>
+          <base_dc:lang>eng</base_dc:lang>
+          <base_dc:lang>gre</base_dc:lang>
+          <base_dc:year>2004</base_dc:year>
+          <base_dc:link>http://hdl.handle.net/2159/6240</base_dc:link>
+          <base_dc:rights>&#932;&#959; &#964;&#949;&#954;&#956;&#942;&#961;&#953;&#959; &#965;&#960;&#972;&#954;&#949;&#953;&#964;&#945;&#953; &#963;&#964;&#951; &#963;&#967;&#949;&#964;&#953;&#954;&#942; &#956;&#949; &#964;&#945; &#928;&#957;&#949;&#965;&#956;&#945;&#964;&#953;&#954;&#940; &#916;&#953;&#954;&#945;&#953;&#974;&#956;&#945;&#964;&#945; &#957;&#959;&#956;&#959;&#952;&#949;&#963;&#943;&#945; / This item is protected by copyright legislation</base_dc:rights>
+        </base_dc:dc>
+      </metadata>
+    
+
+</record>
+
+</GetRecord>
+</OAI-PMH>

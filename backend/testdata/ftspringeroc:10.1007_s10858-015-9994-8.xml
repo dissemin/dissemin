@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?xml-stylesheet type="text/xsl" href="/static/oai2.xsl"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2019-02-16T16:28:01Z</responseDate>
+    <request verb="GetRecord" identifier="ftspringeroc:10.1007/s10858-015-9994-8" metadataPrefix="base_dc">http://doai.io/oai?key=2b2b97d581a08b6833d3&amp;verb=GetRecord&amp;metadataPrefix=base_dc&amp;identifier=ftspringeroc%3A10.1007%2Fs10858-015-9994-8</request>
+    
+<GetRecord>
+    
+<record>
+    <header>
+        <identifier>ftspringeroc:10.1007/s10858-015-9994-8</identifier>
+        <datestamp>2016-10-18T21:51:03Z</datestamp>
+        <setSpec>proaixy:source:base</setSpec>
+    </header>
+    <metadata xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <base_dc:dc xmlns:base_dc="http://oai.base-search.net/base_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xsi:schemaLocation="http://oai.base-search.net/base_dc/ http://oai.base-search.net/base_dc/base_dc.xsd">
+          <dc:title>Cross-correlated relaxation measurements under adiabatic sweeps: determination of local order in proteins</dc:title>
+          <dc:creator>Pavel Kade&#345;&#225;vek</dc:creator>
+          <dc:creator>Sarina Grutsch</dc:creator>
+          <dc:creator>Nicola Salvi</dc:creator>
+          <dc:creator>Martin Tollinger</dc:creator>
+          <dc:creator>Luk&#225;&#353; &#381;&#237;dek</dc:creator>
+          <dc:creator>Geoffrey Bodenhausen</dc:creator>
+          <dc:creator>Fabien Ferrage</dc:creator>
+          <dc:description>Adiabatically swept pulses were originally designed for the purpose of broadband spin inversion. Later, unexpected advantages of their utilization were also found in other applications, such as refocusing to excite spin echoes, studies of chemical exchange or fragment-based drug design. Here, we present new experiments to characterize fast (ps&#8211;ns) protein dynamics, which benefit from little-known properties of adiabatic pulses. We developed a strategy for measuring cross-correlated cross-relaxation (CCCR) rates during adiabatic pulses. This experiment provides a linear combination of longitudinal and transverse CCCR rates, which is offset-independent across a typical amide $$^{15}\hbox {N}$$                    15N                   spectrum. The pulse sequence can be recast to provide accurate transverse CCCR rates weighted by the populations of exchanging states. Sensitivity can be improved in systems in slow exchange. Finally, the experiments can be easily modified to yield residue-specific correlation times. The average correlation time of motions can be determined with a single experiment while at least two different experiments had to be recorded until now.</dc:description>
+          <dc:language>En</dc:language>
+          <dc:date>2015-12-01</dc:date>
+          <dc:identifier>http://dx.doi.org/10.1007/s10858-015-9994-8</dc:identifier>
+          <dc:subject>NMR</dc:subject>
+          <dc:subject>Protein dynamics</dc:subject>
+          <dc:subject>Adiabatic sweep</dc:subject>
+          <dc:subject>Cross-correlated cross relaxation</dc:subject>
+          <dc:publisher>Springer Netherlands</dc:publisher>
+          <dc:type>Article</dc:type>
+          <dc:source>Journal of Biomolecular NMR, 2015-12-01, Volume 63, pp 353-365</dc:source>
+          <dc:rights>Open Access This article is distributed under the terms of the Creative Commons Attribution 4.0 International License (http://creativecommons.org/licenses/by/4.0/), which permits unrestricted use, distribution, and reproduction in any medium, provided you give appropriate credit to the original author(s) and the source, provide a link to the Creative Commons license, and indicate if changes were made.</dc:rights>
+          <base_dc:collection>ftspringeroc</base_dc:collection>
+          <base_dc:collname>Springer Open Choice</base_dc:collname>
+          <base_dc:continent>cww</base_dc:continent>
+          <base_dc:country>org</base_dc:country>
+          <base_dc:lang>eng</base_dc:lang>
+          <base_dc:link>http://dx.doi.org/10.1007/s10858-015-9994-8</base_dc:link>
+          <base_dc:oa>1</base_dc:oa>
+          <base_dc:typenorm>12</base_dc:typenorm>
+          <base_dc:year>2015</base_dc:year>
+        </base_dc:dc>
+      </metadata>
+    
+
+</record>
+
+</GetRecord>
+</OAI-PMH>
