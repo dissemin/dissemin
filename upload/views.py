@@ -20,7 +20,7 @@
 
 
 
-from io import StringIO
+from io import BytesIO
 
 import requests
 from requests.packages.urllib3.exceptions import HTTPError
@@ -84,14 +84,14 @@ def make_thumbnail(pdf_blob):
         num_pages = None
 
         try:  # We try to extract the first page of the PDF
-            orig_pdf = StringIO(pdf_blob)
+            orig_pdf = BytesIO(pdf_blob)
             reader = PyPDF2.PdfFileReader(orig_pdf)
             num_pages = reader.getNumPages()
             if not reader.isEncrypted and num_pages == 0:
                 return
             writer = PyPDF2.PdfFileWriter()
             writer.addPage(reader.getPage(0))
-            first_page = StringIO()
+            first_page = BytesIO()
             writer.write(first_page)
         except PyPdfError as e:
             # PyPDF2 failed (maybe it believes the file is encrypted…)

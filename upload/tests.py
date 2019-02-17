@@ -36,7 +36,7 @@ import wand.image as image
 class ThumbnailTest(unittest.TestCase):
 
     def thumbnail(self, fname):
-        with open(fname, 'r') as f:
+        with open(fname, 'rb') as f:
             pdf = f.read()
         ret = make_thumbnail(pdf)
         if ret is not None:
@@ -58,7 +58,6 @@ class ThumbnailTest(unittest.TestCase):
     def test_empty_pdf(self):
         self.assertEqual(self.thumbnail('mediatest/empty.pdf'), None)
 
-    @unittest.expectedFailure
     def test_wrong_file_format(self):
         self.assertEqual(self.thumbnail('mediatest/red-circle.png'), None)
 
@@ -75,7 +74,7 @@ class UploadTest(JsonRenderingTest):
         self.client.login(username='john', password='doe')
 
     def upload(self, fname):
-        with open(fname, 'r') as f:
+        with open(fname, 'rb') as f:
             return self.ajaxPost(reverse('ajax-uploadFulltext'), {'upl': f})
 
     def download(self, url):
