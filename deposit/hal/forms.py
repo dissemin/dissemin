@@ -18,7 +18,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from __future__ import unicode_literals
+
 
 from autocomplete.widgets import Select2
 from deposit.forms import FormWithAbstract
@@ -37,7 +37,7 @@ class HALForm(FormWithAbstract):
     def __init__(self, paper, **kwargs):
         super(HALForm, self).__init__(paper, **kwargs)
         self.fields['depositing_author'].choices = enumerate(
-            map(unicode, paper.authors))
+            map(str, paper.authors))
 
     topic = forms.ChoiceField(
             label=_('Scientific field'),

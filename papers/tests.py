@@ -18,7 +18,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from __future__ import unicode_literals
+
 
 import datetime
 from datetime import date
@@ -160,7 +160,7 @@ class OaiRecordTest(django.test.TestCase):
 
     def test_find_duplicate_records_invalid_url(self):
         paper = Paper.get_or_create('this is a title', [Name.lookup_name(('Jean', 'Saisrien'))],
-                                    datetime.date(year=2015, month=05, day=04))
+                                    datetime.date(year=2015, month=0o5, day=0o4))
         # This used to throw an exception
         OaiRecord.find_duplicate_records(
             paper, 'ftp://dissem.in/paper.pdf', None)
@@ -243,7 +243,7 @@ class PaperTest(django.test.TestCase):
                  [('M. H.', 'Jones'), ('R. H.', 'Haase'), ('S. F.', 'Hulbert')]]
         p2 = Paper.get_or_create(
                 'A Survey of the Literature on Technical Positions', names,
-                date(year=2011, month=01, day=01))
+                date(year=2011, month=0o1, day=0o1))
         # The two are not merged because of the difference in the title
         self.assertNotEqual(p, p2)
         # Fix the title of the second one

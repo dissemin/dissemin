@@ -33,7 +33,7 @@ The different states a paper can have are defined in :py:obj:`COMBINED_STATUS_CH
 which computes the status of a particular paper.
 """
 
-from __future__ import unicode_literals
+
 
 from django.db import models
 from django.db.models import Q
@@ -149,7 +149,7 @@ class BareAccessStatistics(object):
     @classmethod
     def from_dict(cls, d):
         stats = cls.new()
-        for status, count in d.iteritems():
+        for status, count in d.items():
             stats.num_tot += count
             setattr(stats, 'num_'+status, count)
         return stats
@@ -190,14 +190,14 @@ class BareAccessStatistics(object):
         for (key, desc) in COMBINED_STATUS_CHOICES:
             item = {
                 'id': key,
-                'label': unicode(desc),
+                'label': str(desc),
                 'value': self.__dict__['num_'+key],
                 }
             detailed_data.append(item)
         # Gives the translated label
         aggregated_labels = []
         for (key, desc) in PDF_STATUS_CHOICES:
-            item = {'label': unicode(desc)}
+            item = {'label': str(desc)}
             aggregated_labels.append(item)
         return {'detailed': detailed_data, 'aggregated': aggregated_labels}
 
@@ -257,7 +257,7 @@ class AccessStatistics(models.Model, BareAccessStatistics):
         Updates the statistics for papers contained in the given :py:class:`Paper` queryset
         """
         queryset = queryset.filter(visible=True)
-        for key, modifier in STATUS_QUERYSET_FILTER.items():
+        for key, modifier in list(STATUS_QUERYSET_FILTER.items()):
             self.__dict__['num_'+key] = modifier(queryset).count()
         self.num_tot = queryset.count()
         self.save()

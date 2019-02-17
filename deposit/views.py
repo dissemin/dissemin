@@ -17,7 +17,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from __future__ import unicode_literals
+
 
 import os
 
@@ -60,7 +60,7 @@ def get_metadata_form(request):
     repo = get_object_or_404(Repository, pk=request.GET.get('repository'))
     protocol = repo.protocol_for_deposit(paper, request.user)
     if protocol is None:
-        print "no protocol"
+        print("no protocol")
         return {'status': 'repoNotAvailable',
                 'message': _('This repository is not available for this paper.')}
 
@@ -86,7 +86,7 @@ def start_view(request, pk):
         selected_protocol = repositories_protocol.get(selected_repository.id)
 
     # Try to get the last one used by this user
-    print userprefs.last_repository
+    print(userprefs.last_repository)
     if selected_protocol is None and userprefs.last_repository:
         selected_repository = userprefs.last_repository
         selected_protocol = repositories_protocol.get(selected_repository.id)

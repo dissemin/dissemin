@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-from __future__ import unicode_literals
+
 
 import gzip
 import json
@@ -67,19 +67,19 @@ class OadoiAPI(object):
 
         for oa_location in record.get('oa_locations') or []:
             url = oa_location['url']
-    
+
             # just to speed things up a bit...
             if paper.pdf_url == url:
                 return
-    
+
             identifier='oadoi:'+url
             source = self.oadoi_source
-    
+
             if oa_location['host_type'] == 'publisher':
                 url = doi_to_url(doi)
                 identifier = doi_to_crossref_identifier(doi)
                 source = self.crossref_source
-    
+
             record = BareOaiRecord(
                 paper=paper,
                 doi=doi,

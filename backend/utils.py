@@ -18,7 +18,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from __future__ import unicode_literals
+
 
 from time import sleep
 
@@ -83,8 +83,8 @@ def urlopen_retry(url, **kwargs):  # data, timeout, retries, delay, backoff):
     except requests.exceptions.RequestException as e:
         raise MetadataSourceException('Request error: '+str(e))
 
-    print "Retrying in "+str(delay)+" seconds..."
-    print "URL: "+url
+    print("Retrying in "+str(delay)+" seconds...")
+    print("URL: "+url)
     sleep(delay)
     return urlopen_retry(url,
                          data=data,

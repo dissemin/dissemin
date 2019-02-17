@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-from __future__ import unicode_literals
+
 
 # These DOI prefixes were taken from Impactstory:
 # https://github.com/Impactstory/oadoi/blob/ce1e51109151674e9a6c69b448cebacc9c19eb1e/oa_local.py

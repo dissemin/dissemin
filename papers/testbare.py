@@ -18,7 +18,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from __future__ import unicode_literals
+
 
 import datetime
 import unittest
@@ -42,8 +42,8 @@ class BareObjectTest(unittest.TestCase):
 
     def test_breadcrumbs(self):
         for name, url in self.ist.breadcrumbs():
-            self.assertIsInstance(name, unicode)
-            self.assertIsInstance(url, unicode)
+            self.assertIsInstance(name, str)
+            self.assertIsInstance(url, str)
 
     def test_mandatory_fields(self):
         self.ist.check_mandatory_fields()

@@ -18,9 +18,9 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from __future__ import unicode_literals
 
-from StringIO import StringIO
+
+from io import BytesIO
 
 import requests
 from requests.packages.urllib3.exceptions import HTTPError
@@ -84,21 +84,21 @@ def make_thumbnail(pdf_blob):
         num_pages = None
 
         try:  # We try to extract the first page of the PDF
-            orig_pdf = StringIO(pdf_blob)
+            orig_pdf = BytesIO(pdf_blob)
             reader = PyPDF2.PdfFileReader(orig_pdf)
             num_pages = reader.getNumPages()
             if not reader.isEncrypted and num_pages == 0:
                 return
             writer = PyPDF2.PdfFileWriter()
             writer.addPage(reader.getPage(0))
-            first_page = StringIO()
+            first_page = BytesIO()
             writer.write(first_page)
-        except PyPdfError as e:
+        except PyPdfError:
             # PyPDF2 failed (maybe it believes the file is encrypted…)
             # We try to convert the file with ImageMagick (wand) anyway,
             # rendering the whole PDF as we have not been able to
             # select the first page
-            print("PyPDF error: "+str(e))
+            pass
 
         # We render the PDF
         with wand.image.Image(blob=pdf_blob, format='pdf', resolution=resolution) as image:
@@ -112,11 +112,11 @@ def make_thumbnail(pdf_blob):
 
             image.format = 'png'
             return (num_pages, image.make_blob())
-    except wand.exceptions.WandException as e:
+    except wand.exceptions.WandException:
         # Wand failed: we consider the PDF file as invalid
-        print("Wand exception: "+unicode(e))
-    except ValueError as e:
-        print("ValueError: "+unicode(e))
+        pass
+    except ValueError:
+        pass
 
 
 def save_pdf(user, orig_name, pdf_blob):

@@ -20,7 +20,7 @@
 
 # This is inspired from django-allauth's ProviderRegistry
 
-from __future__ import unicode_literals
+
 
 import re
 
@@ -55,8 +55,8 @@ class ProtocolRegistry(object):
                     try:
                         importlib.import_module(app+'.protocol')
                     except ImportError as e:
-                        print "ImportError in "+app+'.protocol'
-                        print e
+                        print("ImportError in "+app+'.protocol')
+                        print(e)
         self.loaded = True
 
 protocol_registry = ProtocolRegistry()

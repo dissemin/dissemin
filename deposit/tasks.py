@@ -18,8 +18,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from __future__ import absolute_import
-from __future__ import unicode_literals
+
+
 
 from celery import shared_task
 from backend.utils import run_only_once
@@ -32,7 +32,7 @@ def refresh_deposit_statuses():
     # ignore 'failed' and 'faked' statuses
     for d in DepositRecord.objects.filter(status__in=
             ['pending','published','refused','deleted']).select_related('repository'):
-        print d.status
+        print(d.status)
         protocol = d.repository.get_implementation()
         if protocol:
             protocol.refresh_deposit_status(d)

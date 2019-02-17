@@ -18,7 +18,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from __future__ import unicode_literals
+
 
 import re
 
@@ -71,7 +71,7 @@ def normalize_name_words(w):
     for idx, word in enumerate(name_words):
         force = all_lower or (idx > 0 and separators[idx-1])
         new_name_words.append(recapitalize_word(word, force))
-    name_words = map(remove_final_comma, new_name_words)
+    name_words = list(map(remove_final_comma, new_name_words))
     return rebuild_name(name_words, separators)
 
 
@@ -92,7 +92,7 @@ def rebuild_name(name_words, separators):
             output += separators[idx]
         elif idx < len(name_words)-1:
             print("WARNING: incorrect name splitting for '%s'" %
-                  unicode(name_words))
+                  str(name_words))
             output += ' '
     return output
 
@@ -320,12 +320,12 @@ def name_similarity(a, b):
         return 0.
     partsA, sepsA = split_name_words(firstA)
     partsB, sepsB = split_name_words(firstB)
-    parts = zip(partsA, partsB)
+    parts = list(zip(partsA, partsB))
     if not all(map(match_first_names, parts)):
         # Try to match in reverse
         partsA.reverse()
         partsB.reverse()
-        parts = zip(partsA, partsB)
+        parts = list(zip(partsA, partsB))
         if not all(map(match_first_names, parts)):
             return 0.
 
@@ -383,12 +383,12 @@ def shallower_name_similarity(a, b):
     partsA = [ p[0] for p in partsA ]
     partsB = [ p[0] for p in partsB ]
 
-    parts = zip(partsA, partsB)
+    parts = list(zip(partsA, partsB))
     if not all(map(match_first_names, parts)):
         # Try to match in reverse
         partsA.reverse()
         partsB.reverse()
-        parts = zip(partsA, partsB)
+        parts = list(zip(partsA, partsB))
         if not all(map(match_first_names, parts)):
             return 0.
 
@@ -448,7 +448,7 @@ def predsplit_backwards(predicate, words):
     first = []
     last = []
     predHolds = True
-    for i in reversed(range(len(words))):
+    for i in reversed(list(range(len(words)))):
         if predicate(i) and predHolds:
             last.insert(0, words[i])
         else:
@@ -476,8 +476,8 @@ def parse_comma_name(name):
         from_lists = True
 
         # Search for initials in the words
-        initial = map(contains_initials, words)
-        capitalized = map(is_fully_capitalized, words)
+        initial = list(map(contains_initials, words))
+        capitalized = list(map(is_fully_capitalized, words))
 
         # CASE 1: the first word is capitalized but not all of them are
         # we assume that it is the first word of the last name
@@ -613,8 +613,8 @@ def name_unification(a, b):
     best_words = None
     if all(map(match_first_names, words)):
         # Forward match
-        best_words = map(keep_best, words)
-        best_seps = map(keep_best, seps)
+        best_words = list(map(keep_best, words))
+        best_seps = list(map(keep_best, seps))
     else:
         wordsA.reverse()
         wordsB.reverse()
@@ -624,10 +624,10 @@ def name_unification(a, b):
         seps = zipNone(sepsA, sepsB)
         if all(map(match_first_names, words)):
             # Backward match
-            best_words = map(keep_best, words)
+            best_words = list(map(keep_best, words))
             best_words.reverse()
             seps.reverse()
-            best_seps = map(keep_best, seps)
+            best_seps = list(map(keep_best, seps))
 
     if best_words is not None:
         best_words, best_seps = deduplicate_words(best_words, best_seps)
@@ -648,8 +648,8 @@ def unify_name_lists(a, b):
               (None when there is no corresponding name in one of the lists).
     """
     # TODO some normalization of last names? for instance case, hyphens…
-    a = sorted(enumerate(a), key=lambda (idx, (first, last)): (last, first))
-    b = sorted(enumerate(b), key=lambda (idx, (first, last)): (last, first))
+    a = sorted(enumerate(a), key=lambda idx_first_last: (idx_first_last[1][1], idx_first_last[1][0]))
+    b = sorted(enumerate(b), key=lambda idx_first_last1: (idx_first_last1[1][1], idx_first_last1[1][0]))
 
     iA = 0
     iB = 0

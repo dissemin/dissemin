@@ -23,7 +23,7 @@ This module defines a OAfr/TEI exporter, to be used with the SWORD interface to 
 
 """
 
-from __future__ import unicode_literals
+
 
 from deposit.hal.metadataformatter import addChild
 from deposit.hal.metadataformatter import MetadataFormatter
@@ -261,7 +261,7 @@ class AOFRFormatter(MetadataFormatter):
             if idx == depositing_id:
                 affiliation = addChild(node, 'affiliation')
                 affiliation.attrib['ref'] =('#struct-%s' %
-                        unicode(author_structure))
+                        str(author_structure))
 
     def renderPubli(self, biblStruct, publi, halType, pubdate):
         # TODO: handle publication type properly
@@ -284,7 +284,7 @@ class AOFRFormatter(MetadataFormatter):
             title.text = publi.journal_title or publi.full_journal_title()
             date = addChild(meeting, 'date')
             date.attrib['type'] = 'start'
-            date.text = unicode(pubdate.year)
+            date.text = str(pubdate.year)
             settlement = addChild(meeting, 'settlement')
             settlement.text = '-'
             country = addChild(meeting, 'country')
@@ -294,7 +294,7 @@ class AOFRFormatter(MetadataFormatter):
 
         if publi.publisher:
             publisher = addChild(imprint, 'publisher')
-            publisher.text = unicode(publi.publisher)
+            publisher.text = str(publi.publisher)
         if publi.issue:
             biblScope = addChild(imprint, 'biblScope')
             biblScope.attrib['unit'] = 'issue'

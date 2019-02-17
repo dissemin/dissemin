@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+
 
 from django.db import migrations
 
@@ -13,13 +13,13 @@ oai_sources = {
 def populate_oai_endpoints(apps, schema_editor):
     OaiSource = apps.get_model('papers', 'OaiSource')
 
-    for identifier, endpoint in oai_sources.items():
+    for identifier, endpoint in list(oai_sources.items()):
         OaiSource.objects.filter(identifier=identifier).update(endpoint=endpoint)
 
 def do_nothing(apps, schema_editor):
     OaiSource = apps.get_model('papers', 'OaiSource')
 
-    for identifier, endpoint in oai_sources.items():
+    for identifier, endpoint in list(oai_sources.items()):
         OaiSource.objects.filter(identifier=identifier).update(endpoint=None)
 
 

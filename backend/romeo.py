@@ -18,7 +18,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from __future__ import unicode_literals
+
 
 from io import BytesIO
 
@@ -146,7 +146,7 @@ def fetch_journal(search_terms, matching_mode='exact'):
     names = list(journal.findall('./jtitle'))
     if not names:
         raise MetadataSourceException('RoMEO returned a journal without title.\n' +
-                                      'Terms were: '+unicode(terms))
+                                      'Terms were: '+str(terms))
     if len(names) > 1:
         print("Warning, "+str(len(names))+" names provided for one journal, " +
               "defaulting to the first one")

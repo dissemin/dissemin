@@ -19,7 +19,7 @@
 #
 
 
-from __future__ import unicode_literals
+
 
 import doctest
 import unittest
@@ -278,7 +278,7 @@ class ShallowerNameSimilarityTest(unittest.TestCase):
 
     def test_unicode(self):
         self.assertGreater(
-            shallower_name_similarity((u'Cl\u0102\u0160ment', 'Pit-Claudel'), ('Clément', 'Pit-Claudel')), 0)
+            shallower_name_similarity(('Cl\u0102\u0160ment', 'Pit-Claudel'), ('Clément', 'Pit-Claudel')), 0)
 
     def test_reverse(self):
         self.assertGreater(
@@ -319,7 +319,7 @@ class ShallowerNameSimilarityTest(unittest.TestCase):
     def test_hyphen(self):
         self.assertGreater(
             shallower_name_similarity(('Clement F.', 'Pit Claudel'),
-                                       ('Clément', u'Pit-Claudel')),
+                                       ('Clément', 'Pit-Claudel')),
                                         0)
 
 class ParseCommaNameTest(unittest.TestCase):
@@ -393,7 +393,7 @@ class NameUnificationTest(unittest.TestCase):
         # should be ('Clément F.', 'Pit-Claudel') but it is currently
         # ('Clement F.', 'Pit Claudel') which is still fine.
         self.assertTrue(name_unification(('Clement F.', 'Pit Claudel'),
-                                            ('Clément', u'Pit-Claudel')))
+                                            ('Clément', 'Pit-Claudel')))
 
     def test_uncommon_order(self):
         self.assertEqual(name_unification(('W. T.', 'Gowers'),
@@ -508,15 +508,14 @@ class UnifyNameListsTest(unittest.TestCase):
     def test_shallower_similarity(self):
         self.assertEqual(unify_name_lists(
             [('Clement F.', 'Pit Claudel')],
-            [('Clément', u'Pit-Claudel')])[0][1],
+            [('Clément', 'Pit-Claudel')])[0][1],
             (0,0))
 
     def test_inverted(self):
         # in the wild:
         # https://doi.org/10.1371/journal.pone.0156198
         # http://hdl.handle.net/11573/870611
-        self.assertEqual(len(filter(lambda x: x[0] != None,
-                                    unify_name_lists(
+        self.assertEqual(len([x for x in unify_name_lists(
             [
                 ('Sarnelli', 'Giovanni'),
                 ("d'Alessandro", 'Alessandra'),
@@ -525,7 +524,7 @@ class UnifyNameListsTest(unittest.TestCase):
                 ('Giovanni', 'Sarnelli'),
                 ('Giovanni', 'Domenico de Palma'),
                 ('Alessandra', "D'Alessandro"),
-            ]))),
+            ]) if x[0] != None]),
             3)
 
 

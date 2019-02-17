@@ -19,7 +19,7 @@
 #
 
 
-from __future__ import unicode_literals
+
 
 import unittest
 import json
@@ -32,7 +32,7 @@ class OrcidProfileStub(OrcidProfile):
     def __init__(self, orcid_id, instance='orcid.org'):
         super(OrcidProfileStub, self).__init__(orcid_id=orcid_id, instance=instance,
               json=self.request_or_load(orcid_id, instance))
-        
+
     @classmethod
     def request_or_load(cls, path, instance):
         url = 'https://pub.{instance}/v2.1/{path}'.format(instance=instance, path=path)
@@ -50,12 +50,12 @@ class OrcidProfileStub(OrcidProfile):
                 f.write(json.dumps(j))
             return j
 
-        
+
     def request_element(self, path):
         return self.request_or_load(self.id + '/'+ path, self.instance)
 
 class OrcidProfileTest(unittest.TestCase):
-    
+
     @classmethod
     def loadProfile(cls, id):
         return OrcidProfileStub(id)
@@ -90,7 +90,7 @@ class OrcidProfileTest(unittest.TestCase):
 
     def test_iterable(self):
         for key in self.thomas:
-            self.assertEqual(type(key), unicode)
+            self.assertEqual(type(key), str)
 
     def test_attr(self):
         self.assertTrue('orcid-identifier' in self.thomas)
@@ -127,7 +127,7 @@ class OrcidProfileTest(unittest.TestCase):
 
     def test_philipp(self):
         p = self.loadProfile(id='0000-0001-6723-6833')
-        
+
         summaries = p.work_summaries
         dois = [summary.doi for summary in summaries]
         self.assertTrue('10.3354/meps09890' in dois)

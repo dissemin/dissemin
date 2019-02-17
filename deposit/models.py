@@ -19,7 +19,7 @@
 #
 
 
-from __future__ import unicode_literals
+
 
 from caching.base import CachingManager
 from caching.base import CachingMixin
@@ -102,7 +102,7 @@ class Repository(models.Model, CachingMixin):
         """
         cls = protocol_registry.get(self.protocol)
         if cls is None:
-            print "Warning: protocol not found: "+unicode(self.protocol)
+            print("Warning: protocol not found: "+str(self.protocol))
             return
         return cls(self)
 
@@ -122,7 +122,7 @@ class Repository(models.Model, CachingMixin):
         if instance.init_deposit(paper, user):
             return instance
 
-    def __unicode__(self):
+    def __str__(self):
         """
         The unicode representation is just the name of the repository.
         """
@@ -159,14 +159,14 @@ class DepositRecord(models.Model):
     class Meta:
         db_table = 'papers_depositrecord'
 
-    def __unicode__(self):
+    def __str__(self):
         if self.identifier:
             return self.identifier
         else:
-            return unicode(_('Deposit'))
+            return str(_('Deposit'))
 
     def __repr__(self):
-        return '<DepositRecord %s>' % unicode(self.identifier)
+        return '<DepositRecord %s>' % str(self.identifier)
 
 
 class DepositPreferences(models.Model):
@@ -205,7 +205,7 @@ class DepositPreferences(models.Model):
 
     def __repr__(self):
         return '<DepositPreferences, user %s, repo %s>' %(
-                    unicode(self.user), unicode(self.repository))
+                    str(self.user), str(self.repository))
 
 class UserPreferences(models.Model):
     """

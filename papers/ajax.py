@@ -18,7 +18,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from __future__ import unicode_literals
+
 
 from django.conf.urls import url
 from django.contrib.auth.decorators import user_passes_test
@@ -54,7 +54,7 @@ def process_ajax_change(request, model, allowedFields):
         if field in allowedFields:
             val = request.POST.get('value')
             # TODO check that 'value' is actually present
-            if isinstance(val, unicode):
+            if isinstance(val, str):
                 val = sanitize_html(val)
             setattr(instance, field, val)
             instance.save(update_fields=[field])

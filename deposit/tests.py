@@ -64,7 +64,7 @@ class ProtocolTest(django.test.TestCase):
         self.p1 = Paper.get_or_create(
                 "This is a test paper",
                 [self.r1.name, self.r2.name, self.r4.name],
-                date(year=2014, month=02, day=15))
+                date(year=2014, month=0o2, day=15))
         self.user, _ = User.objects.get_or_create(username='myuser')
         self.oaisource, _ = OaiSource.objects.get_or_create(
             identifier='deposit_oaisource',
@@ -112,7 +112,7 @@ class ProtocolTest(django.test.TestCase):
 
         form = self.proto.get_bound_form(args)
         if not form.is_valid():
-            print form.errors
+            print(form.errors)
         self.assertTrue(form.is_valid())
         pdf = 'mediatest/blank.pdf'
         deposit_result = self.proto.submit_deposit_wrapper(pdf,
@@ -130,7 +130,7 @@ class ProtocolTest(django.test.TestCase):
         if the two quantities are not equal.
         """
         if a != b:
-            print self.proto._logs
+            print(self.proto._logs)
         self.assertEqual(a, b)
 
 class ProtocolRegistryTest(django.test.TestCase):

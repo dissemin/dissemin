@@ -19,7 +19,7 @@
 #
 
 
-from __future__ import unicode_literals
+
 
 import datetime
 import pytest
@@ -55,12 +55,12 @@ class RenderingTest(django.test.TestCase):
     def checkHtml(self, resp):
         self.assertEqual(resp.status_code, 200)
         # Check that there are no overescaped HTML strings…
-        self.assertEqual(overescaped_re.findall(resp.content), [])
+        self.assertEqual(overescaped_re.findall(resp.content.decode('utf-8')), [])
         try:
             self.parser.parse(resp.content)
         except html5lib.html5parser.ParseError as e:
-            print resp.content
-            print "HTML validation error: "+unicode(e)
+            print(resp.content)
+            print("HTML validation error: "+str(e))
             raise e
 
     def getPage(self, *args, **kwargs):
@@ -78,7 +78,7 @@ class RenderingTest(django.test.TestCase):
 
     def checkPermanentRedirect(self, *args, **kwargs):
         self.assertEqual(self.getPage(*args, **kwargs).status_code, 301)
-        
+
     def checkTemporaryRedirect(self, *args, **kwargs):
         self.assertEqual(self.getPage(*args, **kwargs).status_code, 302)
 
@@ -110,7 +110,7 @@ class PaperPagesTest(RenderingTest):
     def test_researcher_orcid(self):
         self.checkPermanentRedirect(
             'researcher-by-orcid', kwargs={'orcid': self.r4.orcid})
-        
+
     def test_update_researcher(self):
         self.checkTemporaryRedirect(
             'refetch-researcher', kwargs={'pk':self.r4.id})
@@ -171,9 +171,9 @@ class PaperPagesTest(RenderingTest):
         for p in self.r3.papers:
             self.checkPage('paper', kwargs={'pk': p.id, 'slug': p.slug})
             if p.is_orphan() and p.visible:
-                print p
+                print(p)
             self.assertTrue(not p.is_orphan())
-            
+
     def test_visible_paper(self):
         """
         By default, a paper accessed with its pk and slug is visible
@@ -193,7 +193,7 @@ class PaperPagesTest(RenderingTest):
     def test_paper_by_doi(self):
         publi = OaiRecord.objects.filter(doi__isnull=False)[0]
         self.checkPermanentRedirect('paper-doi', kwargs={'doi': publi.doi})
-        
+
     def test_invalid_doi(self):
         self.check404('paper-doi', kwargs={'doi':'10.1blabla'})
 

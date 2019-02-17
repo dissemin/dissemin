@@ -6,9 +6,8 @@
 
 language: python
 
-
 python:
-  - 2.7
+  - 3.6
 
 sudo: false
 
@@ -41,9 +40,6 @@ env:
       # Gitbot l10n key (for translation notifications)
     - secure: "qm+WAH7GpYIjid+q5tVnRgpiIwRmo7C8ou8GAeHJwTxkcmX8+YsYhuuacXO5mW/gcvjb9UNVCDkIKqjIsxJdmC0JovXJJ2dG2g1P39FfOCsF1+FpOqxdjBxdlJCoPb+Wmx7qk5+n+ZgqArgDPFwTWAPqsfshVPLplvaIYfA6H2s="
 
-
-virtualenv:
-  system_site_packages: true
 
 before_install:
   - export DJANGO_SETTINGS_MODULE=dissemin.settings
@@ -78,7 +74,8 @@ notifications:
     on_success: never
     on_failure: never
 
-cache:
-  directories:
-  - $HOME/virtualenv/python2.7_with_system_site_packages/lib
-  - $HOME/virtualenv/python2.7_with_system_site_packages/bin
+# cache:
+#  directories:
+#  - $HOME/virtualenv/python2.7_with_system_site_packages/lib
+#  - $HOME/virtualenv/python2.7_with_system_site_packages/bin
+

@@ -19,7 +19,7 @@
 #
 
 
-from __future__ import unicode_literals
+
 
 from statistics.models import AccessStatistics
 
@@ -78,7 +78,7 @@ class DummyPublisher(object):
         else:
             self.name = _('Unknown publisher')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 # Publisher associated with a journal
@@ -115,7 +115,7 @@ class Publisher(models.Model):
         lst = [self.preprint, self.postprint, self.pdfversion]
         if 'can' in lst:
             status = 'OK'
-        elif 'cannot' in lst and all(map(lambda x: x == 'cannot' or x == 'unknown', lst)):
+        elif 'cannot' in lst and all([x == 'cannot' or x == 'unknown' for x in lst]):
             status = 'NOK'
 
         for c in self.publishercondition_set.all():
@@ -133,7 +133,7 @@ class Publisher(models.Model):
         sqs = SearchQuerySet().models(Paper).filter(publisher=self.id)
         self.stats.update_from_search_queryset(sqs)
 
-    def __unicode__(self):
+    def __str__(self):
         if not self.alias:
             return self.name
         else:
@@ -192,7 +192,7 @@ class Publisher(models.Model):
 
     def breadcrumbs(self):
         result = publishers_breadcrumbs()
-        result.append((unicode(self), self.canonical_url))
+        result.append((str(self), self.canonical_url))
         return result
 
     def json(self):
@@ -232,9 +232,9 @@ class Journal(models.Model):
         self.stats.update_from_search_queryset(sqs)
 
     def breadcrumbs(self):
-        return self.publisher.breadcrumbs()+[(unicode(self), '')]
+        return self.publisher.breadcrumbs()+[(str(self), '')]
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     class Meta:
@@ -246,7 +246,7 @@ class PublisherCondition(models.Model):
     publisher = models.ForeignKey(Publisher)
     text = models.CharField(max_length=1024)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.text
 
     class Meta:
@@ -258,7 +258,7 @@ class PublisherCopyrightLink(models.Model):
     text = models.CharField(max_length=256)
     url = models.URLField()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.text
 
     class Meta:
@@ -270,7 +270,7 @@ class PublisherRestrictionDetail(models.Model):
     text = models.CharField(max_length=256)
     applies_to = models.CharField(max_length=32)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.text
 
     class Meta:
@@ -286,8 +286,8 @@ class AliasPublisher(models.Model):
     count = models.IntegerField(default=0)
     unique_together = ('name', 'publisher')
 
-    def __unicode__(self):
-        return self.name + ' --'+str(self.count)+'--> '+unicode(self.publisher)
+    def __str__(self):
+        return self.name + ' --'+str(self.count)+'--> '+str(self.publisher)
 
     @classmethod
     def increment(cls, name, publisher):

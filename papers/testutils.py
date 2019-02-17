@@ -19,7 +19,7 @@
 #
 
 
-from __future__ import unicode_literals
+
 
 import doctest
 import unittest

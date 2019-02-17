@@ -18,7 +18,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from __future__ import unicode_literals
+
 
 from io import BytesIO
 import json
@@ -27,7 +27,7 @@ from zipfile import ZipFile
 from papers.utils import extract_domain
 
 import requests
-from urlparse import urlparse
+from urllib.parse import urlparse
 
 from deposit.hal.forms import HALForm
 from deposit.hal.forms import HALPreferencesForm
@@ -46,7 +46,7 @@ try:
     import http.client as http_client
 except ImportError:
     # Python 2
-    import httplib as http_client
+    import http.client as http_client
 
 
 #http_client.HTTPConnection.debuglevel = 1
@@ -176,7 +176,7 @@ class HALProtocol(RepositoryProtocol):
                 'Content-Length': len(zipContent),
                 'On-Behalf-Of': ';'.join(on_behalf_of),
                 }
-            for header, value in headers.items():
+            for header, value in list(headers.items()):
                 conn.putheader(header, value)
             conn.endheaders()
             conn.send(zipContent)
@@ -269,7 +269,7 @@ class HALProtocol(RepositoryProtocol):
                     'Accept': '*/*',
                     'User-Agent': 'dissemin',
                 }
-                for header, value in headers.items():
+                for header, value in list(headers.items()):
                     conn.putheader(header, value)
                 conn.endheaders()
                 resp = conn.getresponse()

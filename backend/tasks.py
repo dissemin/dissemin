@@ -18,8 +18,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from __future__ import absolute_import
-from __future__ import unicode_literals
+
+
 
 from statistics.models import AccessStatistics
 
@@ -122,7 +122,7 @@ def consolidate_paper(pk):
             if pub.description and len(pub.description) > len(abstract):
                 break
     except Paper.DoesNotExist:
-        print "consolidate_paper: unknown paper %d" % pk
+        print("consolidate_paper: unknown paper %d" % pk)
 
 
 @shared_task(name='update_all_stats')

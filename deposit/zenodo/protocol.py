@@ -19,7 +19,7 @@
 # USA.
 #
 
-from __future__ import unicode_literals
+
 
 import json
 
@@ -235,7 +235,7 @@ class ZenodoProtocol(RepositoryProtocol):
                 res['orcid'] = author.researcher.orcid
             # TODO: affiliation
             return res
-        metadata['creators'] = map(formatAuthor, self.paper.authors)
+        metadata['creators'] = list(map(formatAuthor, self.paper.authors))
 
         # Abstract
         abstract = form.cleaned_data[
@@ -270,13 +270,10 @@ class ZenodoProtocol(RepositoryProtocol):
                 break
 
         # Related identifiers
-        idents = map(
-            lambda r: {
+        idents = [{
                 'relation': 'isAlternateIdentifier',
                 'identifier': r.splash_url
-            },
-            oairecords
-        )
+            } for r in oairecords]
         for publi in publications:
             if publi.journal and publi.journal.issn:
                 idents.append(

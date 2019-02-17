@@ -18,7 +18,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from __future__ import unicode_literals
+
 
 import json
 import pytest
@@ -81,7 +81,7 @@ class JsonRenderingTest(django.test.TestCase):
 
 @pytest.mark.usefixtures("load_test_data")
 class PaperAjaxTest(JsonRenderingTest):
-    
+
     def setUp(self):
         super(PaperAjaxTest, self).setUp()
         u = User.objects.create_user('terry', 'pit@mat.io', 'yo')
@@ -129,8 +129,8 @@ class PublisherAjaxTest(JsonRenderingTest):
 
     def setUp(self):
         super(PublisherAjaxTest, self).setUp()
-        self.papers = map(Paper.create_by_doi, 
-                        ['10.1109/TFUZZ.2018.2852307', '10.1109/TFUZZ.2018.2857720'])
+        self.papers = list(map(Paper.create_by_doi,
+                        ['10.1109/TFUZZ.2018.2852307', '10.1109/TFUZZ.2018.2857720']))
         self.publisher = self.papers[0].publications[0].publisher
         self.assertEqual(self.publisher, self.papers[1].publications[0].publisher)
         celery_app.conf.task_always_eager = True # run all tasks synchronously

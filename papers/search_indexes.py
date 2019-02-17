@@ -60,9 +60,8 @@ class PaperIndex(indexes.SearchIndex, indexes.Indexable):
         return obj.researcher_ids
 
     def prepare_institutions(self, obj):
-        return filter(lambda x: x is not None,
-           [r.institution_id
-            for r in obj.researchers])
+        return [x for x in [r.institution_id
+            for r in obj.researchers] if x is not None]
 
     def prepare_publisher(self, obj):
         for r in obj.oairecords:

@@ -1,7 +1,7 @@
 # This file has been copy-pasted from the docs of celery
 # http://celery.readthedocs.org/en/latest/django/first-steps-with-django.html
 
-from __future__ import absolute_import
+
 
 import os
 

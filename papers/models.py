@@ -42,7 +42,7 @@ This module defines most of the models used in the platform.
 
 """
 
-from __future__ import unicode_literals
+
 
 from datetime import datetime
 from datetime import timedelta
@@ -137,7 +137,7 @@ class Institution(models.Model):
         """
         return self.department_set.order_by('name')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     def update_stats(self):
@@ -170,7 +170,7 @@ class Institution(models.Model):
         return slugify(self.name)
 
     def breadcrumbs(self):
-        return [(unicode(self), self.url)]
+        return [(str(self), self.url)]
 
     @property
     def sorted_researchers(self):
@@ -298,7 +298,7 @@ class Department(models.Model):
     def sorted_researchers(self):
         """List of :py:class:`Researcher` in this department sorted by last name (prefetches their stats as well)"""
         return self.researcher_set.select_related('name', 'stats').order_by('name')
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     def update_stats(self):
@@ -326,7 +326,7 @@ class Department(models.Model):
         return reverse('department', args=[self.pk])
 
     def breadcrumbs(self):
-        return self.institution.breadcrumbs()+[(unicode(self), self.url)]
+        return self.institution.breadcrumbs()+[(str(self), self.url)]
 
 
 class NameVariant(models.Model):
@@ -394,9 +394,9 @@ class Researcher(models.Model):
     def slug(self):
         return slugify(self.name)
 
-    def __unicode__(self):
+    def __str__(self):
         if self.name_id:
-            return unicode(self.name)
+            return str(self.name)
         else:
             return 'Unnamed researcher'
 
@@ -450,7 +450,7 @@ class Researcher(models.Model):
 
     def update_stats(self):
         """Update the access statistics for the papers authored by this researcher"""
-        print "Researcher.update_stats should not be used anymore"
+        print("Researcher.update_stats should not be used anymore")
         #if not self.stats:
         #    self.stats = AccessStatistics.objects.create()
         #    self.save()
@@ -578,7 +578,7 @@ class Researcher(models.Model):
         """
         We include the most detailed affiliation for the researcher
         """
-        last = [(unicode(self), self.url)]
+        last = [(str(self), self.url)]
         # Institutions temporarily disabled while they are not populated
         #if self.department:
         #    return self.department.breadcrumbs()+last
@@ -680,6 +680,12 @@ class Name(models.Model, BareName):
         """Criteria to use in the search view to filter on this name"""
         return "name=%d" % self.pk
 
+    def __str__(self):
+        """
+        String representation: first name followed by last name.
+        """
+        return '{} {}'.format(self.first, self.last)
+
 
 # Max number of OaiRecord per Paper:
 # beyond that, we ignore them.
@@ -726,7 +732,7 @@ class Paper(models.Model, BarePaper):
         """
         The author sorted as they should appear. Their names are pre-fetched.
         """
-        return map(BareAuthor.deserialize, self.authors_list)
+        return list(map(BareAuthor.deserialize, self.authors_list))
 
     def author_name_pairs(self):
         """
@@ -886,7 +892,7 @@ class Paper(models.Model, BarePaper):
 
         except DataError as e:
             raise ValueError(
-                'Invalid paper, does not fit in the database schema:\n'+unicode(e))
+                'Invalid paper, does not fit in the database schema:\n'+str(e))
 
     ### Other methods, specific to this non-bare subclass ###
 
@@ -1101,7 +1107,7 @@ class Paper(models.Model, BarePaper):
     def create_by_hal_id(self, hal_id, bare=False):
         """
         Creates a paper given a HAL id (e.g. hal-01227383).
-        
+
         This is just a helper created for https://github.com/dissemin/dissemin/issues/316
         """
         return self.create_by_oai_id(
@@ -1277,7 +1283,7 @@ class Paper(models.Model, BarePaper):
         if first_researcher is None:
             result.append((_('Papers'), reverse('search')))
         else:
-            result.append((unicode(first_researcher), first_researcher.url))
+            result.append((str(first_researcher), first_researcher.url))
         result.append((self.citation, self.url))
         return result
 
@@ -1336,29 +1342,29 @@ class OaiSource(CachingMixin, models.Model):
 
     #: a string to identify the source
     identifier = models.CharField(max_length=300, unique=True)
-    
+
     #: the URL of the OAI endpoint.
     #: This can be null if we cannot actually harvest from this
     #: source via OAI - some other code is then responsible for
     #: creating records from this source.
     endpoint = models.URLField(max_length=300, null=True)
-    
+
     #: an OAI set to restrict the harvesting to. If null, we harvest
     #: the entire source, with no restriction.
     restrict_set = models.CharField(max_length=300, null=True)
-    
+
     #: A human-readable name for the source, which will be shown
     #: to users in the UI when displaying OAI records from a paper.
     name = models.CharField(max_length=100)
-    
+
     #: Are all papers from this source free to read from the source?
     oa = models.BooleanField(default=False)
-    
+
     #: This is used to sort the OAI records: the higher the priority,
     #: the higher up the record will show. The highest priority OAI record
     #: is used to determine the preferred PDF url for the paper.
     priority = models.IntegerField(default=1)
-    
+
     #: Default publication type for papers created from this source.
     default_pubtype = models.CharField(
         max_length=64, choices=PAPER_TYPE_CHOICES)
@@ -1366,7 +1372,7 @@ class OaiSource(CachingMixin, models.Model):
     #: Last time we harvested this source.
     last_update = models.DateTimeField(default=datetime(1970,1,1,0,0,0))
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     def natural_key(self):
@@ -1548,7 +1554,7 @@ class OaiRecord(models.Model, BareOaiRecord):
 
                 except DataError as e:
                     raise ValueError(
-                        'Unable to create OAI record:\n'+unicode(e))
+                        'Unable to create OAI record:\n'+str(e))
 
             if about.pk != match.about.pk:
                 match.about.merge(about)
@@ -1618,7 +1624,7 @@ class PaperWorld(SingletonModel):
     def object_id(self):
         return ''
 
-    def __unicode__(self):
+    def __str__(self):
         return "All papers"
 
     class Meta(object):

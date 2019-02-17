@@ -18,7 +18,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from __future__ import unicode_literals
+
 
 from datetime import datetime
 
@@ -64,7 +64,7 @@ class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSo
         super(OaiPaperSource, self).__init__(*args, **kwargs)
         if not oaisource.endpoint:
             raise ValueError('No OAI endpoint was configured for this OAI source.')
-        
+
         self.registry = MetadataRegistry()
         self.registry.registerReader('oai_dc', oai_dc_reader)
         self.registry.registerReader('base_dc', base_dc_reader)
@@ -154,9 +154,9 @@ class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSo
                     saved = Paper.from_bare(paper)
                 return saved
             except ValueError as e:
-                print "Ignoring invalid paper:"
-                print header.identifier()
-                print e
+                print("Ignoring invalid paper:")
+                print(header.identifier())
+                print(e)
 
     def process_records(self, listRecords, format):
         """
@@ -184,7 +184,7 @@ class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSo
                     td = datetime.now() - last_report
                     rate = 'infty'
                     if td.seconds:
-                        rate = unicode(processed_since_report / td.seconds)
+                        rate = str(processed_since_report / td.seconds)
                     print("current rate: %s records/s" % rate)
                     processed_since_report = 0
                     last_report = datetime.now()

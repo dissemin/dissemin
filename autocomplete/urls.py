@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 
-from __future__ import unicode_literals
+
 from autocomplete import views
 from django.conf.urls import url
 

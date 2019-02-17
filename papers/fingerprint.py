@@ -18,7 +18,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from __future__ import unicode_literals
+
 
 import re
 
@@ -90,7 +90,7 @@ def create_paper_plain_fingerprint(title, authors, year):
             last_words = last_name_words
 
         # Lowercase
-        last_words = map(ulower, last_words)
+        last_words = list(map(ulower, last_words))
         fp = '-'.join(last_words)
         author_names_list.append(fp)
 

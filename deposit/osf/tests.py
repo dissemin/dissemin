@@ -18,7 +18,7 @@
 # along with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
-from __future__ import unicode_literals
+
 
 from unittest import skip
 # from mock import Mock
@@ -135,7 +135,6 @@ class OSFProtocolTest(ProtocolTest):
 
         form = self.proto.get_bound_form(data)
         self.assertEqual(form.has_error('subjects', code=None), True)
-        print(form.errors['subjects'])
         self.assertEqual(form.errors['subjects'],
                          ['At least one subject is required.'])
         self.assertFalse(form.is_valid())
