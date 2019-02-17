@@ -16,6 +16,7 @@ include/
 lib/
 # Virtual env
 .virtualenv/
+.venv/
 # Proposals
 doc/Makefile
 # Uploaded files
@@ -25,7 +26,6 @@ mediatest/thumbnails/
 mediatest/uploads/
 www/
 runfcgi.pid
-.virtualenv
 
 # build files for doc
 doc/sphinx/_build/
