@@ -46,7 +46,7 @@ class OaiTest(TestCase):
 
     def create(self, *args, **kwargs):
         # Shortcut for the tests
-        if args[1] != 'base_dc':
+        if args[1] == 'oai_dc':
             return self.oai.create_paper_by_identifier(*args, **kwargs)
         else:
             identifier = args[0]
@@ -263,7 +263,7 @@ class OaiTest(TestCase):
         """
         # Format not available from the interface
         with self.assertRaises(CannotDisseminateFormatError):
-            self.create('aiunrsecauiebleuiest', 'unknown_format')
+            self.create('oai:arXiv.org:0704.0001', 'unknown_format')
 
     # tests of particular translators
     # TODO: translate them as tests of the translators and not the
