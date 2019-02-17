@@ -501,7 +501,7 @@ class BarePaper(BareObject):
         """
         buf = self.plain_fingerprint(verbose)
         m = hashlib.md5()
-        m.update(buf)
+        m.update(buf.encode('utf-8'))
         return m.hexdigest()
 
     # Abstract -------------------------------------------------
