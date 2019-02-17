@@ -5,7 +5,7 @@
 # Taken from https://gist.github.com/ndarville/3625246
 
 language: python
-
+dist: xenial
 
 python:
   - 3.7
