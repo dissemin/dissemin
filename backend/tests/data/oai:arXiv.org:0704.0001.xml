@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+<responseDate>2019-02-17T22:30:33Z</responseDate>
+<request verb="GetRecord" identifier="oai:arXiv.org:0704.0001" metadataPrefix="oai_dc2">http://export.arxiv.org/oai2</request>
+<error code="cannotDisseminateFormat">The metadataPrefix `oai_dc2' is not supported by this repository.</error>
+</OAI-PMH>

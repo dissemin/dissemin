@@ -53,7 +53,7 @@ class JsonRenderingTest(django.test.TestCase):
             print("Invalid status code %d, response was:\n%s" %
                 (resp.status_code, resp.content))
         self.assertEqual(resp.status_code, expected_status)
-        parsed = json.loads(resp.content)
+        parsed = json.loads(resp.content.decode('utf-8'))
         return parsed
 
     def ajaxGet(self, *args, **kwargs):
