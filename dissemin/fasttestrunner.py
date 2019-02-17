@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-from __future__ import unicode_literals
+
 
 # taken from https://www.caktusgroup.com/blog/2013/10/02/skipping-test-db-creation/
 

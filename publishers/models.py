@@ -19,7 +19,7 @@
 #
 
 
-from __future__ import unicode_literals
+
 
 from statistics.models import AccessStatistics
 
@@ -115,7 +115,7 @@ class Publisher(models.Model):
         lst = [self.preprint, self.postprint, self.pdfversion]
         if 'can' in lst:
             status = 'OK'
-        elif 'cannot' in lst and all(map(lambda x: x == 'cannot' or x == 'unknown', lst)):
+        elif 'cannot' in lst and all([x == 'cannot' or x == 'unknown' for x in lst]):
             status = 'NOK'
 
         for c in self.publishercondition_set.all():
@@ -192,7 +192,7 @@ class Publisher(models.Model):
 
     def breadcrumbs(self):
         result = publishers_breadcrumbs()
-        result.append((unicode(self), self.canonical_url))
+        result.append((str(self), self.canonical_url))
         return result
 
     def json(self):
@@ -232,7 +232,7 @@ class Journal(models.Model):
         self.stats.update_from_search_queryset(sqs)
 
     def breadcrumbs(self):
-        return self.publisher.breadcrumbs()+[(unicode(self), '')]
+        return self.publisher.breadcrumbs()+[(str(self), '')]
 
     def __unicode__(self):
         return self.title
@@ -287,7 +287,7 @@ class AliasPublisher(models.Model):
     unique_together = ('name', 'publisher')
 
     def __unicode__(self):
-        return self.name + ' --'+str(self.count)+'--> '+unicode(self.publisher)
+        return self.name + ' --'+str(self.count)+'--> '+str(self.publisher)
 
     @classmethod
     def increment(cls, name, publisher):

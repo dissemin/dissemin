@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-from __future__ import unicode_literals
+
 
 from django import template
 from django.utils.html import escape
@@ -16,4 +16,4 @@ def fullname(user):
         firstname = user.first_name or ''
         shortened = shorten_first_name(firstname)
         result = shortened+' '+user.last_name
-    return mark_safe(escape(unicode(result)))
+    return mark_safe(escape(str(result)))

@@ -18,7 +18,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from __future__ import unicode_literals
+
 
 import datetime
 import unittest
@@ -150,35 +150,35 @@ class CrossRefUnitTest(unittest.TestCase):
     def test_parse_crossref_date_incomplete(self):
         self.assertEqual(parse_crossref_date(None), None)
         self.assertEqual(
-                parse_crossref_date({'date-parts': [[2015, 07, 06]]}),
-                datetime.date(year=2015, month=07, day=06))
+                parse_crossref_date({'date-parts': [[2015, 0o7, 0o6]]}),
+                datetime.date(year=2015, month=0o7, day=0o6))
         self.assertEqual(
-                parse_crossref_date({'date-parts': [[2015, 07]]}),
-                datetime.date(year=2015, month=07, day=01))
+                parse_crossref_date({'date-parts': [[2015, 0o7]]}),
+                datetime.date(year=2015, month=0o7, day=0o1))
         self.assertEqual(
                 parse_crossref_date({'date-parts': [[2015]]}),
-                datetime.date(year=2015, month=01, day=01))
+                datetime.date(year=2015, month=0o1, day=0o1))
 
     def test_parse_crossref_date_raw(self):
         self.assertEqual(
                 parse_crossref_date({'raw': '2015'}),
-                datetime.date(year=2015, month=01, day=01))
+                datetime.date(year=2015, month=0o1, day=0o1))
         self.assertEqual(
                 parse_crossref_date({'raw': '2015-07'}),
-                datetime.date(year=2015, month=07, day=01))
+                datetime.date(year=2015, month=0o7, day=0o1))
         self.assertEqual(
                 parse_crossref_date({'raw': '2015-07-06'}),
-                datetime.date(year=2015, month=07, day=06))
+                datetime.date(year=2015, month=0o7, day=0o6))
 
     def test_get_publication_date(self):
         self.assertEqual(
                 get_publication_date(
                     fetch_metadata_by_DOI('10.5281/zenodo.18898')),
-                datetime.date(year=2015, month=01, day=01))
+                datetime.date(year=2015, month=0o1, day=0o1))
         self.assertEqual(
                 get_publication_date(
                     fetch_metadata_by_DOI('10.5380/dp.v1i1.1919')),
-                datetime.date(year=2005, month=03, day=18))
+                datetime.date(year=2005, month=0o3, day=18))
 
     def test_batch_queries(self):
         dois = [

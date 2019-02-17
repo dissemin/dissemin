@@ -25,12 +25,12 @@ They are only stored in memory. This is useful for the API, where lookups are do
 without name ambiguity resolution.
 """
 
-from __future__ import unicode_literals
+
 
 import hashlib
 import re
-from urllib import quote  # for the Google Scholar and CORE link
-from urllib import urlencode
+from urllib.parse import quote  # for the Google Scholar and CORE link
+from urllib.parse import urlencode
 
 from django.apps import apps
 from django.db import models
@@ -95,7 +95,7 @@ class BareObject(object):
         for f in self._bare_foreign_key_fields:
             if f+'_id' not in self.__dict__:
                 self.__dict__[f+'_id'] = None
-        for k, v in kwargs.items():
+        for k, v in list(kwargs.items()):
             if k in self._bare_fields:
                 self.__dict__[k] = v
             elif k in self._bare_foreign_key_fields:
@@ -114,7 +114,7 @@ class BareObject(object):
         is expected to be a subclass of the bare object's class.
         """
         kwargs = {}
-        for k, v in bare_obj.__dict__.items():
+        for k, v in list(bare_obj.__dict__.items()):
             if k in cls._bare_fields:
                 kwargs[k] = v
             elif k in cls._bare_foreign_key_fields:
@@ -127,7 +127,7 @@ class BareObject(object):
         """
         Breadcrumbs of bare objects are empty by default.
         """
-        return [(unicode(self), '#')]
+        return [(str(self), '#')]
 
     def check_mandatory_fields(self):
         """
@@ -236,7 +236,7 @@ class BarePaper(BareObject):
             raise ValueError(
                 "The number of ORCIDs (or Nones) and authors have to be equal.")
         if not isinstance(visible, bool):
-            raise ValueError("Invalid paper visibility: %s" % unicode(visible))
+            raise ValueError("Invalid paper visibility: %s" % str(visible))
 
         title = sanitize_html(title)
         title = maybe_recapitalize_title(title)
@@ -277,7 +277,7 @@ class BarePaper(BareObject):
         The list of OAI records associated with this paper. It can
         be arbitrary iterables of subclasses of :class:`BareOaiRecord`.
         """
-        return self.bare_oairecords.values()
+        return list(self.bare_oairecords.values())
 
     def add_author(self, author, position=None):
         """
@@ -490,7 +490,7 @@ class BarePaper(BareObject):
         fp = create_paper_plain_fingerprint(
             self.title, self.bare_author_names(), self.year)
         if verbose:
-            print fp
+            print(fp)
         return fp
 
     def new_fingerprint(self, verbose=False):
@@ -698,7 +698,7 @@ class BareAuthor(BareObject):
         """
         Unicode representation: name of the author
         """
-        return unicode(self.name)
+        return str(self.name)
 
     def serialize(self):
         """
@@ -832,8 +832,8 @@ class BareName(BareObject):
                }
 
     def __repr__(self):
-        return "<BareName: %s, %s>" % (unicode(self.first),
-                                       unicode(self.last))
+        return "<BareName: %s, %s>" % (str(self.first),
+                                       str(self.last))
 
 
 class BareOaiRecord(BareObject):

@@ -18,7 +18,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from __future__ import unicode_literals
+
 
 from backend.extractors import REGISTERED_OAI_EXTRACTORS
 from backend.extractors import defaultExtractor
@@ -77,7 +77,7 @@ class OAIDCTranslator(OaiTranslator):
         """
         Get the authors names out of a metadata record
         """
-        parsed = map(parse_comma_name, metadata['creator'])
+        parsed = list(map(parse_comma_name, metadata['creator']))
         names = [BareName.create_bare(fst, lst) for fst, lst in parsed]
         return names
 
@@ -144,7 +144,7 @@ class OAIDCTranslator(OaiTranslator):
             self.add_oai_record(header, metadata, paper)
             return paper
         except ValueError as e:
-            print "Warning, OAI record "+header.identifier()+" skipped:\n"+unicode(e)
+            print("Warning, OAI record "+header.identifier()+" skipped:\n"+str(e))
             paper.update_availability()
 
     def add_oai_record(self, header, metadata, paper):

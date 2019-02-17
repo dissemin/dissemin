@@ -17,7 +17,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from __future__ import unicode_literals
+
 
 import json
 from statistics.models import COMBINED_STATUS_CHOICES
@@ -146,9 +146,7 @@ class PaperSearchView(SearchView):
         # Notifications
         # TODO: unefficient query.
         notifications = get_notifications(self.request)
-        selected_messages = map(
-            lambda n: n.serialize_to_json(),
-            sorted(notifications, key=lambda msg: msg.level)[:3])
+        selected_messages = [n.serialize_to_json() for n in sorted(notifications, key=lambda msg: msg.level)[:3]]
         context['messages'] = selected_messages
 
         return context
@@ -247,8 +245,8 @@ class ResearcherView(PaperSearchView):
             pass # no logged in user
         context['researcher'] = researcher
         context['researcher_id'] = researcher.id
-        context['search_description'] += _(' authored by ')+unicode(researcher)
-        context['head_search_description'] = unicode(researcher)
+        context['search_description'] += _(' authored by ')+str(researcher)
+        context['head_search_description'] = str(researcher)
         context['breadcrumbs'] = researcher.breadcrumbs()
         return context
 
@@ -276,7 +274,7 @@ class DepartmentPapersView(PaperSearchView):
         context = super(DepartmentPapersView, self).get_context_data(**kwargs)
         context['department'] = self.dept
         context['search_description'] = context['head_search_description'] = (
-            unicode(self.dept))
+            str(self.dept))
         context['breadcrumbs'] = self.dept.breadcrumbs()+[(_('Papers'), '')]
         return context
 
@@ -309,8 +307,8 @@ class PublisherPapersView(PaperSearchView):
         context = super(PublisherPapersView, self)\
             .get_context_data(**kwargs)
         context[self.publisher_key] = publisher
-        context['search_description'] += self.published_by+unicode(publisher)
-        context['head_search_description'] = unicode(publisher)
+        context['search_description'] += self.published_by+str(publisher)
+        context['head_search_description'] = str(publisher)
         context['breadcrumbs'] = publisher.breadcrumbs()+[(_('Papers'), '')]
         return context
 

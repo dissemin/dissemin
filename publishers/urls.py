@@ -18,7 +18,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from __future__ import unicode_literals
+
 
 from django.conf.urls import url
 from publishers import views

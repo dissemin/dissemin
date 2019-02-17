@@ -18,7 +18,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from __future__ import unicode_literals
+
 
 import datetime
 import json
@@ -197,8 +197,8 @@ def create_publication(paper, metadata):
     try:
         return _create_publication(paper, metadata)
     except DataError as e:
-        print "create_publication: ignored DataError:"
-        print e
+        print("create_publication: ignored DataError:")
+        print(e)
 
 
 def _create_publication(paper, metadata):
@@ -319,8 +319,8 @@ def fetch_dois_incrementally(doi_list):
         try:
             metadata = fetch_metadata_by_DOI(doi)
         except MetadataSourceException as e:
-            print "MetadataSourceException ignored:"
-            print e
+            print("MetadataSourceException ignored:")
+            print(e)
             continue
         yield metadata
 
@@ -411,7 +411,7 @@ class CrossRefAPI(object):
             try:
                 p = self.save_doi_metadata(metadata)
             except ValueError as e:
-                print e
+                print(e)
         return p
 
     def save_doi_metadata(self, metadata, extra_orcids=None):
@@ -450,7 +450,7 @@ class CrossRefAPI(object):
                 subtitle = subtitle[0]
             title += ': '+subtitle
 
-        name_pairs = map(convert_to_name_pair, metadata['author'])
+        name_pairs = list(map(convert_to_name_pair, metadata['author']))
         if None in name_pairs:
             raise ValueError('Invalid author')
         authors = [BareName.create_bare(first, last) for first, last in
@@ -466,7 +466,7 @@ class CrossRefAPI(object):
             if orcid:
                 return orcid
 
-        new_orcids = map(get_orcid, metadata['author'])
+        new_orcids = list(map(get_orcid, metadata['author']))
         if extra_orcids:
             # remove the extra_orcids if they already exist on different authors
             set_of_extra_orcids = set(x for x in extra_orcids if x != None)
@@ -477,7 +477,7 @@ class CrossRefAPI(object):
                 extra_orcids, new_orcids)]
         else:
             orcids = new_orcids
-        affiliations = map(get_affiliation, metadata['author'])
+        affiliations = list(map(get_affiliation, metadata['author']))
 
         paper = BarePaper.create(title, authors, pubdate,
                                  visible=True, affiliations=affiliations, orcids=orcids)
@@ -507,7 +507,7 @@ class CrossRefAPI(object):
             filters = {}
         params = {}
         if filters:
-            params['filter'] = ','.join(k+":"+v for k, v in filters.items())
+            params['filter'] = ','.join(k+":"+v for k, v in list(filters.items()))
 
         rows = 20
         next_cursor = cursor
@@ -530,11 +530,11 @@ class CrossRefAPI(object):
                 if not found:
                     break
                 next_cursor = jpath('message/next-cursor', js)
-                print('Next cursor: '+next_cursor) # to ease recovery
+                print(('Next cursor: '+next_cursor)) # to ease recovery
             except ValueError as e:
                 raise MetadataSourceException(
                     'Error while fetching CrossRef results:\nInvalid response.\n' +
-                    'Parameters were: %s\nJSON parser error was: %s' % (urlencode(params), unicode(e)))
+                    'Parameters were: %s\nJSON parser error was: %s' % (urlencode(params), str(e)))
             except requests.exceptions.RequestException as e:
                 raise MetadataSourceException('Error while fetching CrossRef results:\nError was: '+str(e))
 
@@ -564,9 +564,9 @@ class CrossRefAPI(object):
                     p = Paper.from_bare(bare_paper)
                     p.update_index()
                 except ValueError as e:
-                    print((record.get('DOI') or 'unknown DOI') + ': '+unicode(e))
+                    print(((record.get('DOI') or 'unknown DOI') + ': '+str(e)))
 
-            print('Updated up to '+until_date.isoformat())
+            print(('Updated up to '+until_date.isoformat()))
             source.last_update += batch_time
             source.save()
 
@@ -596,5 +596,5 @@ class CrossRefAPI(object):
                             print(e)
                             sleep(10*i)
                 except (MetadataSourceException, ValueError) as e:
-                    print((record.get('DOI') or 'unknown DOI') + ': ' + unicode(e))
+                    print(((record.get('DOI') or 'unknown DOI') + ': ' + str(e)))
 

@@ -18,9 +18,9 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from __future__ import unicode_literals
 
-from StringIO import StringIO
+
+from io import StringIO
 
 import requests
 from requests.packages.urllib3.exceptions import HTTPError
@@ -98,7 +98,7 @@ def make_thumbnail(pdf_blob):
             # We try to convert the file with ImageMagick (wand) anyway,
             # rendering the whole PDF as we have not been able to
             # select the first page
-            print("PyPDF error: "+str(e))
+            print(("PyPDF error: "+str(e)))
 
         # We render the PDF
         with wand.image.Image(blob=pdf_blob, format='pdf', resolution=resolution) as image:
@@ -114,9 +114,9 @@ def make_thumbnail(pdf_blob):
             return (num_pages, image.make_blob())
     except wand.exceptions.WandException as e:
         # Wand failed: we consider the PDF file as invalid
-        print("Wand exception: "+unicode(e))
+        print(("Wand exception: "+str(e)))
     except ValueError as e:
-        print("ValueError: "+unicode(e))
+        print(("ValueError: "+str(e)))
 
 
 def save_pdf(user, orig_name, pdf_blob):

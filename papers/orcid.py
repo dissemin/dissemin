@@ -18,7 +18,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from __future__ import unicode_literals
+
 
 import requests
 
@@ -208,7 +208,7 @@ class OrcidProfile(object):
             # we skip ringgold identifiers, because they suck:
             # https://github.com/ORCID/ORCID-Source/issues/3297
             if source and inst_id and source.lower() != 'ringgold':
-                identifier = unicode(source).lower()+'-'+unicode(inst_id)
+                identifier = str(source).lower()+'-'+str(inst_id)
 
             if name and country:
                 return {
@@ -348,12 +348,12 @@ class OrcidWork(object):
                     'name': jpath('credit-name/value', js),
             }
 
-        return map(get_contrib, self.j('work/contributors/contributor', []))
+        return list(map(get_contrib, self.j('work/contributors/contributor', [])))
 
     @property
     def authors_from_contributors(self):
         author_names = [c['name'] for c in self.contributors if c['name'] is not None]
-        return map(parse_comma_name, author_names)
+        return list(map(parse_comma_name, author_names))
 
     @property
     def authors(self):
@@ -435,7 +435,7 @@ class OrcidWork(object):
         orcids = affiliate_author_with_orcid(self.profile.name, self.id, authors)
         names = [BareName.create_bare(first, last)
                 for first, last in self.authors]
-        names_and_orcids = zip(names, orcids)
+        names_and_orcids = list(zip(names, orcids))
         filtered = [(n,o) for n, o in names_and_orcids if  n is not None ]
         final_names = [n for n, o in filtered]
         final_orcids = [o for n, o in filtered]

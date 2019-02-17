@@ -28,7 +28,7 @@ so running them involves starting a Django shell ("python manage.py shell"),
 importing this module and running the function manually.
 """
 
-from __future__ import unicode_literals
+
 
 from bulk_update.helper import bulk_update
 
@@ -87,7 +87,7 @@ def update_index_for_model(model, batch_size=256, batches_per_commit=10, firstpk
                 final_data = {}
 
                 # Convert the data to make sure it's happy.
-                for key, value in prepped_data.items():
+                for key, value in list(prepped_data.items()):
                     final_data[key] = backend._from_python(value)
                 final_data['_id'] = final_data[ID]
 
@@ -112,7 +112,7 @@ def update_index_for_model(model, batch_size=256, batches_per_commit=10, firstpk
         if indexed >= 5000:
             curtime = datetime.utcnow()
             rate = int(indexed / (curtime-starttime).total_seconds())
-            print "%d obj/s, %d / %d" % (rate,firstpk,lastpk)
+            print("%d obj/s, %d / %d" % (rate,firstpk,lastpk))
             starttime = curtime
             indexed = 0
 
@@ -127,7 +127,7 @@ def enumerate_large_qs(queryset, key='pk', batch_size=256):
         sliced = queryset.order_by(key)
         if lastval is not None:
             sliced = sliced.filter(**{key+'__gt':lastval})
-        print lastval
+        print(lastval)
         sliced = sliced[:batch_size]
 
         found = False
@@ -152,7 +152,7 @@ def cleanup_researchers():
         if not nb_papers:
             deleted_count += 1
             p.delete()
-    print "Deleted "+str(deleted_count)+" researchers"
+    print("Deleted "+str(deleted_count)+" researchers")
 
 
 def cleanup_names(dry_run=False):
@@ -165,7 +165,7 @@ def cleanup_names(dry_run=False):
             deleted_count += 1
             if not dry_run:
                 n.delete()
-    print "Deleted "+str(deleted_count)+" names"
+    print("Deleted "+str(deleted_count)+" names")
 
 
 def update_paper_statuses():
@@ -200,7 +200,7 @@ def cleanup_paper_researcher_ids():
             if modified:
                 batch.append(p)
         if batch:
-            print "Updating {} papers, from {}".format(len(batch), curid)
+            print("Updating {} papers, from {}".format(len(batch), curid))
             bulk_update(batch)
         else:
             print(curid)
@@ -215,7 +215,7 @@ def fix_duplicate_orcids(p):
 
     author_name_pairs = p.author_name_pairs()
     best_indices = {}
-    for orcid, count in counts.items():
+    for orcid, count in list(counts.items()):
         if count >= 2:
             try:
                 n = Name.objects.get(researcher__orcid=orcid)
@@ -251,8 +251,8 @@ def report_dubious_orcids():
             bad_orcid = a.orcid in seen_orcids
             seen_orcids.add(a.orcid)
             if bad_orcid:
-                print('\t'.join([
+                print(('\t'.join([
                     'https://dissem.in'+p.url,
                     a.orcid,
-                ])+'\n')
+                ])+'\n'))
 

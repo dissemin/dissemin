@@ -19,7 +19,7 @@
 #
 
 
-from __future__ import unicode_literals
+
 
 import unittest
 import json
@@ -45,7 +45,7 @@ class OrcidProfileStub(OrcidProfile):
             print(e)
             r = requests.get(url,headers={'Accept':'application/json'})
             j = r.json()
-            print(r.json())
+            print((r.json()))
             with open(full_path, 'w') as f:
                 f.write(json.dumps(j))
             return j
@@ -90,7 +90,7 @@ class OrcidProfileTest(unittest.TestCase):
 
     def test_iterable(self):
         for key in self.thomas:
-            self.assertEqual(type(key), unicode)
+            self.assertEqual(type(key), str)
 
     def test_attr(self):
         self.assertTrue('orcid-identifier' in self.thomas)

@@ -18,7 +18,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from __future__ import unicode_literals
+
 
 import datetime
 import unittest
@@ -182,7 +182,7 @@ class PaperMethodsTest(TestCase):
             paper = Paper.get_or_create('This is a test paper',
                                         [BareName.create_bare(f, l) for (
                                             f, l) in old_author_names],
-                                        datetime.date(year=2015, month=04, day=05))
+                                        datetime.date(year=2015, month=0o4, day=0o5))
             new_authors = [BareAuthor(name=BareName.create_bare(f, l))
                            for (f, l) in new_author_names]
             paper.update_authors(new_authors)
@@ -191,13 +191,13 @@ class PaperMethodsTest(TestCase):
     def test_multiple_get_or_create(self):
         date = datetime.date(year=2003, month=4, day=9)
         paper = Paper.get_or_create('Beta-rays in black pudding',
-                                    map(Name.lookup_name, [
-                                        ('F.', 'Rodrigo'), ('A.', 'Johnson'), ('Pete', 'Blunsom')]),
+                                    list(map(Name.lookup_name, [
+                                        ('F.', 'Rodrigo'), ('A.', 'Johnson'), ('Pete', 'Blunsom')])),
                                     date)
 
         paper2 = Paper.get_or_create('Beta-rays in black pudding',
-                                     map(Name.lookup_name, [
-                                         ('Frank', 'Rodrigo'), ('A. L.', 'Johnson'), ('P.', 'Blunsom')]),
+                                     list(map(Name.lookup_name, [
+                                         ('Frank', 'Rodrigo'), ('A. L.', 'Johnson'), ('P.', 'Blunsom')])),
                                      date)
 
         self.assertEqual(paper.pk, paper2.pk)

@@ -19,7 +19,7 @@
 #
 
 
-from __future__ import unicode_literals
+
 
 import datetime
 import pytest
@@ -59,8 +59,8 @@ class RenderingTest(django.test.TestCase):
         try:
             self.parser.parse(resp.content)
         except html5lib.html5parser.ParseError as e:
-            print resp.content
-            print "HTML validation error: "+unicode(e)
+            print(resp.content)
+            print("HTML validation error: "+str(e))
             raise e
 
     def getPage(self, *args, **kwargs):
@@ -171,7 +171,7 @@ class PaperPagesTest(RenderingTest):
         for p in self.r3.papers:
             self.checkPage('paper', kwargs={'pk': p.id, 'slug': p.slug})
             if p.is_orphan() and p.visible:
-                print p
+                print(p)
             self.assertTrue(not p.is_orphan())
             
     def test_visible_paper(self):

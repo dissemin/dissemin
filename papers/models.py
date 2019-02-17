@@ -42,7 +42,7 @@ This module defines most of the models used in the platform.
 
 """
 
-from __future__ import unicode_literals
+
 
 from datetime import datetime
 from datetime import timedelta
@@ -170,7 +170,7 @@ class Institution(models.Model):
         return slugify(self.name)
 
     def breadcrumbs(self):
-        return [(unicode(self), self.url)]
+        return [(str(self), self.url)]
 
     @property
     def sorted_researchers(self):
@@ -326,7 +326,7 @@ class Department(models.Model):
         return reverse('department', args=[self.pk])
 
     def breadcrumbs(self):
-        return self.institution.breadcrumbs()+[(unicode(self), self.url)]
+        return self.institution.breadcrumbs()+[(str(self), self.url)]
 
 
 class NameVariant(models.Model):
@@ -396,7 +396,7 @@ class Researcher(models.Model):
 
     def __unicode__(self):
         if self.name_id:
-            return unicode(self.name)
+            return str(self.name)
         else:
             return 'Unnamed researcher'
 
@@ -450,7 +450,7 @@ class Researcher(models.Model):
 
     def update_stats(self):
         """Update the access statistics for the papers authored by this researcher"""
-        print "Researcher.update_stats should not be used anymore"
+        print("Researcher.update_stats should not be used anymore")
         #if not self.stats:
         #    self.stats = AccessStatistics.objects.create()
         #    self.save()
@@ -578,7 +578,7 @@ class Researcher(models.Model):
         """
         We include the most detailed affiliation for the researcher
         """
-        last = [(unicode(self), self.url)]
+        last = [(str(self), self.url)]
         # Institutions temporarily disabled while they are not populated
         #if self.department:
         #    return self.department.breadcrumbs()+last
@@ -726,7 +726,7 @@ class Paper(models.Model, BarePaper):
         """
         The author sorted as they should appear. Their names are pre-fetched.
         """
-        return map(BareAuthor.deserialize, self.authors_list)
+        return list(map(BareAuthor.deserialize, self.authors_list))
 
     def author_name_pairs(self):
         """
@@ -886,7 +886,7 @@ class Paper(models.Model, BarePaper):
 
         except DataError as e:
             raise ValueError(
-                'Invalid paper, does not fit in the database schema:\n'+unicode(e))
+                'Invalid paper, does not fit in the database schema:\n'+str(e))
 
     ### Other methods, specific to this non-bare subclass ###
 
@@ -1277,7 +1277,7 @@ class Paper(models.Model, BarePaper):
         if first_researcher is None:
             result.append((_('Papers'), reverse('search')))
         else:
-            result.append((unicode(first_researcher), first_researcher.url))
+            result.append((str(first_researcher), first_researcher.url))
         result.append((self.citation, self.url))
         return result
 
@@ -1548,7 +1548,7 @@ class OaiRecord(models.Model, BareOaiRecord):
 
                 except DataError as e:
                     raise ValueError(
-                        'Unable to create OAI record:\n'+unicode(e))
+                        'Unable to create OAI record:\n'+str(e))
 
             if about.pk != match.about.pk:
                 match.about.merge(about)

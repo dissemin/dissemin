@@ -18,7 +18,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
 # USA.
 #
-from __future__ import unicode_literals
+
 
 import unittest
 
@@ -106,7 +106,7 @@ class ParseBibtexTest(unittest.TestCase):
             {
                 'ENTRYTYPE': 'misc',
                 'ID': 'Nobody06',
-                'author': [(u'Adrià Martin', u'Mor')],
+                'author': [('Adrià Martin', 'Mor')],
                 'title': 'My Article',
                 'year': '2006'
             }
@@ -121,7 +121,7 @@ class ParseBibtexTest(unittest.TestCase):
     title = "My Article",
     year = "2006" }
         """
-        print(parse_bibtex(bibtex)['author'][0][0])
+        print((parse_bibtex(bibtex)['author'][0][0]))
         self.assertEqual(
             parse_bibtex(bibtex),
             {

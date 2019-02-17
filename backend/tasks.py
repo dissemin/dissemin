@@ -18,8 +18,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from __future__ import absolute_import
-from __future__ import unicode_literals
+
+
 
 from statistics.models import AccessStatistics
 
@@ -99,7 +99,7 @@ def fetch_everything_for_researcher(pk):
 
 def refetch_researchers(start_time=timezone.now() - timedelta(days=30*6)):
     for r in Researcher.objects.filter(last_harvest__gt=start_time).order_by('last_harvest'):
-        print(r.url)
+        print((r.url))
         fetch_everything_for_researcher(r.pk)
 
 
@@ -122,7 +122,7 @@ def consolidate_paper(pk):
             if pub.description and len(pub.description) > len(abstract):
                 break
     except Paper.DoesNotExist:
-        print "consolidate_paper: unknown paper %d" % pk
+        print("consolidate_paper: unknown paper %d" % pk)
 
 
 @shared_task(name='update_all_stats')

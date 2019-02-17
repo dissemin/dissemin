@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-from __future__ import unicode_literals
+
 
 import gzip
 import json
@@ -62,7 +62,7 @@ class OadoiAPI(object):
             except (MetadataSourceException, ValueError):
                 return
             if not paper:
-                print('no such paper for doi {doi}'.format(doi=doi))
+                print(('no such paper for doi {doi}'.format(doi=doi)))
                 return
 
         for oa_location in record.get('oa_locations') or []:

@@ -18,7 +18,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from __future__ import unicode_literals
+
 
 import datetime
 import re
@@ -80,7 +80,7 @@ def ulower(s):
     >>> ulower(89)
     u'89'
     """
-    return unicode(s).lower()
+    return str(s).lower()
 
 
 def nstrip(s):
@@ -109,7 +109,7 @@ def remove_diacritics(s):
     >>> remove_diacritics(u'aéè'.encode('utf-8'))
     'a\\xc3\\xa9\\xc3\\xa8'
     """
-    if isinstance(s, unicode):
+    if isinstance(s, str):
         # for issue #305
         # because I have no idea what the general solution for this would be
         s = s.replace("’", "'")
@@ -387,7 +387,7 @@ def remove_nones(dct):
     >>> remove_nones({None:1})
     {None: 1}
     """
-    return dict((k,v) for k,v in  dct.items() if v is not None)
+    return dict((k,v) for k,v in  list(dct.items()) if v is not None)
 
 # Partial date representation
 
@@ -438,8 +438,8 @@ def date_from_dateparts(dateparts):
     ValueError: day is out of range for month
     """
     year = 1970 if len(dateparts) < 1 else parse_int(dateparts[0], 1970)
-    month = 01 if len(dateparts) < 2 else parse_int(dateparts[1], 01)
-    day = 01 if len(dateparts) < 3 else parse_int(dateparts[2], 01)
+    month = 0o1 if len(dateparts) < 2 else parse_int(dateparts[1], 0o1)
+    day = 0o1 if len(dateparts) < 3 else parse_int(dateparts[2], 0o1)
     return datetime.date(year=year, month=month, day=day)
 
 
@@ -573,7 +573,7 @@ def validate_orcid(orcid):
     if not orcid:
         return
     try:
-        orcid = unicode(orcid).strip()
+        orcid = str(orcid).strip()
     except (ValueError, TypeError):
         return
 

@@ -19,7 +19,7 @@
 #
 
 
-from __future__ import unicode_literals
+
 
 import traceback
 
@@ -52,7 +52,7 @@ class DepositResult(object):
         self.pdf_url = pdf_url
         self.logs = logs
         if status not in [x for x,y in DEPOSIT_STATUS_CHOICES]:
-            raise ValueError('invalid status '+unicode(status))
+            raise ValueError('invalid status '+str(status))
         self.status = status
         self.message = message
         self.oairecord = None
@@ -166,7 +166,7 @@ class RepositoryProtocol(object):
             if first_name and last_name:
                 name = '%s %s' % (first_name,last_name)
             notification_payload = {
-                    'name':unicode(name),
+                    'name':str(name),
                     'repo':self.repository.name,
                     'paperurl':self.paper.url,
                 }
@@ -179,7 +179,7 @@ class RepositoryProtocol(object):
                 rec = BareOaiRecord(
                         source=self.repository.oaisource,
                         identifier=('deposition:%d:%s' %
-                                    (self.repository.id, unicode(result.identifier))),
+                                    (self.repository.id, str(result.identifier))),
                         splash_url=result.splash_url,
                         pdf_url=result.pdf_url)
                 result.oairecord = self.paper.add_oairecord(rec)

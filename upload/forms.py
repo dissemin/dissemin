@@ -18,7 +18,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from __future__ import unicode_literals
+
 
 from dissemin.settings import DEPOSIT_MAX_FILE_SIZE
 from django import forms
@@ -34,7 +34,7 @@ class AjaxUploadForm(forms.Form):
 
     def clean_upl(self):
         content = self.cleaned_data['upl']
-        print content.content_type
+        print(content.content_type)
         if content._size > DEPOSIT_MAX_FILE_SIZE:
             raise forms.ValidationError(_('File too large (%(size)s). Maximum size is %(maxsize)s.') %
                                         {'size': filesizeformat(content._size),

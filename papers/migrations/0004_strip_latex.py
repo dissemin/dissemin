@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+
 
 from django.db import migrations
 from papers.utils import unescape_latex
@@ -16,7 +16,7 @@ def strip_latex(apps, schema_editor):
         for paper in papers:
             new_title = unescape_latex(paper.title)
             if new_title != paper.title:
-                print '"%s" -> "%s"' % (paper.title,new_title)
+                print('"%s" -> "%s"' % (paper.title,new_title))
                 paper.title = new_title
                 paper.save(update_fields=['title'])
 

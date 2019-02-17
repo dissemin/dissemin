@@ -18,7 +18,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from __future__ import unicode_literals
+
 
 from mock import patch
 import unittest
@@ -278,7 +278,7 @@ class OaiTest(TestCase):
             'ftdatacite:oai:oai.datacite.org:402223': 'dataset',
         }
 
-        for ident, typ in mappings.items():
+        for ident, typ in list(mappings.items()):
             paper = self.create(ident, 'base_dc')
             self.assertEqual(paper.doctype, typ)
 

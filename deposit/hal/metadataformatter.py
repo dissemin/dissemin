@@ -23,7 +23,7 @@ This module defines a OAfr/TEI exporter, to be used with the SWORD interface to 
 
 """
 
-from __future__ import unicode_literals
+
 
 from lxml import etree
 

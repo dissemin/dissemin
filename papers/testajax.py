@@ -18,7 +18,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from __future__ import unicode_literals
+
 
 import json
 import pytest
@@ -50,8 +50,8 @@ class JsonRenderingTest(django.test.TestCase):
 
     def checkJson(self, resp, expected_status=200):
         if resp.status_code != expected_status:
-            print("Invalid status code %d, response was:\n%s" %
-                (resp.status_code, resp.content))
+            print(("Invalid status code %d, response was:\n%s" %
+                (resp.status_code, resp.content)))
         self.assertEqual(resp.status_code, expected_status)
         parsed = json.loads(resp.content)
         return parsed
@@ -129,8 +129,8 @@ class PublisherAjaxTest(JsonRenderingTest):
 
     def setUp(self):
         super(PublisherAjaxTest, self).setUp()
-        self.papers = map(Paper.create_by_doi, 
-                        ['10.1109/TFUZZ.2018.2852307', '10.1109/TFUZZ.2018.2857720'])
+        self.papers = list(map(Paper.create_by_doi, 
+                        ['10.1109/TFUZZ.2018.2852307', '10.1109/TFUZZ.2018.2857720']))
         self.publisher = self.papers[0].publications[0].publisher
         self.assertEqual(self.publisher, self.papers[1].publications[0].publisher)
         celery_app.conf.task_always_eager = True # run all tasks synchronously
