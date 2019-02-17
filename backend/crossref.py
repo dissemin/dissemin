@@ -579,7 +579,7 @@ class CrossRefAPI(object):
             first_doi_seen = start_doi is None
             for line in f:
                 try:
-                    record = json.loads(line)
+                    record = json.loads(line.decode('utf-8'))
                     if start_doi and record.get('DOI') == start_doi:
                         first_doi_seen = True
                     if not first_doi_seen:
