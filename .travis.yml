@@ -5,7 +5,6 @@
 # Taken from https://gist.github.com/ndarville/3625246
 
 language: python
-dist: xenial
 
 python:
   - 3.6
@@ -41,9 +40,6 @@ env:
       # Gitbot l10n key (for translation notifications)
     - secure: "qm+WAH7GpYIjid+q5tVnRgpiIwRmo7C8ou8GAeHJwTxkcmX8+YsYhuuacXO5mW/gcvjb9UNVCDkIKqjIsxJdmC0JovXJJ2dG2g1P39FfOCsF1+FpOqxdjBxdlJCoPb+Wmx7qk5+n+ZgqArgDPFwTWAPqsfshVPLplvaIYfA6H2s="
 
-
-virtualenv:
-  system_site_packages: true
 
 before_install:
   - export DJANGO_SETTINGS_MODULE=dissemin.settings
