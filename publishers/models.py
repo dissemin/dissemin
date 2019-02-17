@@ -78,7 +78,7 @@ class DummyPublisher(object):
         else:
             self.name = _('Unknown publisher')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 # Publisher associated with a journal
@@ -133,7 +133,7 @@ class Publisher(models.Model):
         sqs = SearchQuerySet().models(Paper).filter(publisher=self.id)
         self.stats.update_from_search_queryset(sqs)
 
-    def __unicode__(self):
+    def __str__(self):
         if not self.alias:
             return self.name
         else:
@@ -234,7 +234,7 @@ class Journal(models.Model):
     def breadcrumbs(self):
         return self.publisher.breadcrumbs()+[(str(self), '')]
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     class Meta:
@@ -246,7 +246,7 @@ class PublisherCondition(models.Model):
     publisher = models.ForeignKey(Publisher)
     text = models.CharField(max_length=1024)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.text
 
     class Meta:
@@ -258,7 +258,7 @@ class PublisherCopyrightLink(models.Model):
     text = models.CharField(max_length=256)
     url = models.URLField()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.text
 
     class Meta:
@@ -270,7 +270,7 @@ class PublisherRestrictionDetail(models.Model):
     text = models.CharField(max_length=256)
     applies_to = models.CharField(max_length=32)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.text
 
     class Meta:
@@ -286,7 +286,7 @@ class AliasPublisher(models.Model):
     count = models.IntegerField(default=0)
     unique_together = ('name', 'publisher')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name + ' --'+str(self.count)+'--> '+str(self.publisher)
 
     @classmethod

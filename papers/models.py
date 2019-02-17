@@ -137,7 +137,7 @@ class Institution(models.Model):
         """
         return self.department_set.order_by('name')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     def update_stats(self):
@@ -298,7 +298,7 @@ class Department(models.Model):
     def sorted_researchers(self):
         """List of :py:class:`Researcher` in this department sorted by last name (prefetches their stats as well)"""
         return self.researcher_set.select_related('name', 'stats').order_by('name')
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     def update_stats(self):
@@ -394,7 +394,7 @@ class Researcher(models.Model):
     def slug(self):
         return slugify(self.name)
 
-    def __unicode__(self):
+    def __str__(self):
         if self.name_id:
             return str(self.name)
         else:
@@ -679,6 +679,12 @@ class Name(models.Model, BareName):
     def object_id(self):
         """Criteria to use in the search view to filter on this name"""
         return "name=%d" % self.pk
+
+    def __str__(self):
+        """
+        String representation: first name followed by last name.
+        """
+        return '{} {}'.format(self.first, self.last)
 
 
 # Max number of OaiRecord per Paper:
@@ -1101,7 +1107,7 @@ class Paper(models.Model, BarePaper):
     def create_by_hal_id(self, hal_id, bare=False):
         """
         Creates a paper given a HAL id (e.g. hal-01227383).
-        
+
         This is just a helper created for https://github.com/dissemin/dissemin/issues/316
         """
         return self.create_by_oai_id(
@@ -1336,29 +1342,29 @@ class OaiSource(CachingMixin, models.Model):
 
     #: a string to identify the source
     identifier = models.CharField(max_length=300, unique=True)
-    
+
     #: the URL of the OAI endpoint.
     #: This can be null if we cannot actually harvest from this
     #: source via OAI - some other code is then responsible for
     #: creating records from this source.
     endpoint = models.URLField(max_length=300, null=True)
-    
+
     #: an OAI set to restrict the harvesting to. If null, we harvest
     #: the entire source, with no restriction.
     restrict_set = models.CharField(max_length=300, null=True)
-    
+
     #: A human-readable name for the source, which will be shown
     #: to users in the UI when displaying OAI records from a paper.
     name = models.CharField(max_length=100)
-    
+
     #: Are all papers from this source free to read from the source?
     oa = models.BooleanField(default=False)
-    
+
     #: This is used to sort the OAI records: the higher the priority,
     #: the higher up the record will show. The highest priority OAI record
     #: is used to determine the preferred PDF url for the paper.
     priority = models.IntegerField(default=1)
-    
+
     #: Default publication type for papers created from this source.
     default_pubtype = models.CharField(
         max_length=64, choices=PAPER_TYPE_CHOICES)
@@ -1366,7 +1372,7 @@ class OaiSource(CachingMixin, models.Model):
     #: Last time we harvested this source.
     last_update = models.DateTimeField(default=datetime(1970,1,1,0,0,0))
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     def natural_key(self):
@@ -1618,7 +1624,7 @@ class PaperWorld(SingletonModel):
     def object_id(self):
         return ''
 
-    def __unicode__(self):
+    def __str__(self):
         return "All papers"
 
     class Meta(object):

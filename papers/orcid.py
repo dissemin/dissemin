@@ -308,7 +308,7 @@ class OrcidWorkSummary(object):
     def put_code(self):
         return self.json.get('put-code')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title or '(no title)'
 
     def __repr__(self):

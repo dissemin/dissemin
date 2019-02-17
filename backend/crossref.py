@@ -387,7 +387,7 @@ def fetch_dois_by_batch(doi_list):
     except ValueError as e:
         raise MetadataSourceException(
             'Invalid JSON returned by the DOI proxy: '+str(e))
-    except KeyError as e:
+    except KeyError:
         return []
     except requests.exceptions.RequestException as e:
         raise MetadataSourceException(

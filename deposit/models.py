@@ -122,7 +122,7 @@ class Repository(models.Model, CachingMixin):
         if instance.init_deposit(paper, user):
             return instance
 
-    def __unicode__(self):
+    def __str__(self):
         """
         The unicode representation is just the name of the repository.
         """
@@ -159,7 +159,7 @@ class DepositRecord(models.Model):
     class Meta:
         db_table = 'papers_depositrecord'
 
-    def __unicode__(self):
+    def __str__(self):
         if self.identifier:
             return self.identifier
         else:

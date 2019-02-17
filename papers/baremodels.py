@@ -581,7 +581,7 @@ class BarePaper(BareObject):
         self.visible = not self.is_orphan()
 
     # Other representations ------------------------------------------
-    def __unicode__(self):
+    def __str__(self):
         """
         Title of the paper
         """
@@ -694,7 +694,7 @@ class BareAuthor(BareObject):
                 pass
 
     # Representations -------------------------------
-    def __unicode__(self):
+    def __str__(self):
         """
         Unicode representation: name of the author
         """
@@ -781,7 +781,7 @@ class BareName(BareObject):
         instance.full = iunaccent(instance.first+' '+instance.last)
         return instance
 
-    def __unicode__(self):
+    def __str__(self):
         """
         Unicode representation: first name followed by last name
         """
@@ -942,7 +942,7 @@ class BareOaiRecord(BareObject):
             flags=re.IGNORECASE)
         self.description = abstract_re.sub('', self.description)
 
-    def __unicode__(self):
+    def __str__(self):
         """
         The record's identifier
         """
