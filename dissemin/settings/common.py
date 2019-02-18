@@ -324,6 +324,9 @@ HAYSTACK_CONNECTIONS = {
 # service on deposit
 DEPOSIT_NOTIFICATION_CALLBACK = (lambda payload: None)
 
+# URL to a self-hosted version of Mathjax
+MATHJAX_SELFHOST_URL = None
+
 # Settings to make available in the templates
 # See https://github.com/jakubroztocil/django-settings-export#usage
 SETTINGS_EXPORT = [

@@ -57,9 +57,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # Relative path from the project to store the uploads
 MEDIA_ROOT = os.path.join(BASE_DIR, 'dissemin_media')
 
-# URL to a self-hosted version of Mathjax
-MATHJAX_SELFHOST_URL = None
-
 # Disable caching in dev
 TEMPLATES = [
     {
