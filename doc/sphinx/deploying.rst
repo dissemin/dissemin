@@ -35,14 +35,14 @@ Make sure that your `media/` directory is writable by the user under which the a
 Self-hosting MathJax
 --------------------
 
-Dissemin requires `MathJax <https://www.mathjax.org/>` for rendering LaTeX
+Dissemin requires `MathJax <https://www.mathjax.org/>`_ for rendering LaTeX
 formatting in the abstracts. Out of the box, Dissemin will use a CDN-hosted
 version of MathJax. This has the downside of `preventing deposit when disabling
-third-party JS <https://github.com/dissemin/dissemin/issues/454>`.
+third-party JS <https://github.com/dissemin/dissemin/issues/454>`_.
 
 An easy solution to this is to self-host MathJax. You can follow the
 `installation instructions
-<https://docs.mathjax.org/en/latest/start.html#downloading-and-installing-mathjax>`
+<https://docs.mathjax.org/en/latest/start.html#downloading-and-installing-mathjax>`_
 from MathJax to get a local copy. Ideally, you should put it in the static
 directory (under ``/home/dissemin/www/static/`` in the example below).
 
@@ -52,7 +52,7 @@ and avoid having all these files in the ``papers/static/libs`` directory of
 Dissemin.
 
 Once MathJax is downloaded and available by your webserver, you can use the
-setting ``MATHJAX_SELFHOST_URL`` (in `dissemin/settings`) to specify a location
+setting ``MATHJAX_SELFHOST_URL`` (in ``dissemin/settings``) to specify a location
 to load MathJax from. In the example below, this would be
 ``//dissemin.myuni.edu/static/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML``.
 
