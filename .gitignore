@@ -46,6 +46,7 @@ pyflakes.out
 .vagrant
 .vm_venv
 *.user
+*.db
 
 # Auto-completion
 .ropeproject

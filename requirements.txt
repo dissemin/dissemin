@@ -22,6 +22,7 @@ django-jsonview
 django-leaflet
 django-memoize
 django-redis-cache
+django-settings-export
 django-solo
 django-ratelimit
 django-widget-tweaks
