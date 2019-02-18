@@ -24,6 +24,3 @@ Then, compile these RST sources to HTML::
 
 The HTML output is then available in ``doc/sphinx/_build/html/``.
 
-See also the script ``update_docs.sh`` in the repository root which automates
-this.
-
