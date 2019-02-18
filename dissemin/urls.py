@@ -22,15 +22,15 @@
 import allauth.account.views
 from allauth.socialaccount import providers
 from django.conf import settings
-from django.conf.urls import include
-from django.conf.urls import url
+from django.urls import include
+from django.urls import path
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.views import generic
-from django.views.i18n import javascript_catalog
+from django.views.i18n import JavaScriptCatalog
 import django_js_reverse.views
 
 admin.autodiscover()
@@ -41,14 +41,14 @@ except ImportError:
     from django.utils import importlib
 
 
-def handler404(request):
-    response = render(request, '404.html')
+def handler404(request, exception=None):
+    response = render(request, '404.html', {'exception':exception})
     response.status_code = 404
     return response
 
 
-def handler500(request):
-    response = render(request, '500.html')
+def handler500(request, exception=None):
+    response = render(request, '500.html', {'exception':exception})
     response.status_code = 500
     return response
 
@@ -82,36 +82,32 @@ js_info_dict = {
 
 urlpatterns = [
     # Errors
-    url(r'^404-error$', temp('404.html')),
-    url(r'^500-error$', temp('500.html')),
+    path(r'^404-error$', temp('404.html')),
+    path(r'^500-error$', temp('500.html')),
     # Static views
-    url(r'^sources$', temp('dissemin/sources.html'), name='sources'),
-    url(r'^faq$', temp('dissemin/faq.html'), name='faq'),
-    url(r'^tos$', temp('dissemin/tos.html'), name='tos'),
-    url(r'^partners$', temp('dissemin/partners.html'), name='partners'),
-    # Authentication
-    #url(r'^admin/logout/$','django_cas_ng.views.logout', name='logout'),
-    url(r'^admin/', include(admin.site.urls)),
-    #url(r'^accounts/login/$', 'django_cas_ng.views.login', name='login'),
-    #url(r'^accounts/logout/$','django_cas_ng.views.logout', name='logout'),
-    #url(r'^logout/$', 'django_cas_ng.views.logout'),
+    path(r'^sources$', temp('dissemin/sources.html'), name='sources'),
+    path(r'^faq$', temp('dissemin/faq.html'), name='faq'),
+    path(r'^tos$', temp('dissemin/tos.html'), name='tos'),
+    path(r'^partners$', temp('dissemin/partners.html'), name='partners'),
+    # Admin interface
+    path(r'^admin/', admin.site.urls),
     # Apps
-    url(r'^ajax-upload/', include('upload.urls')),
-    url(r'^', include('papers.urls')),
-    url(r'^', include('publishers.urls')),
-    url(r'^', include('deposit.urls')),
-    url(r'^', include('notification.urls')),
-    url(r'^', include('autocomplete.urls')),
-    url(r'^jsreverse/$', django_js_reverse.views.urls_js, name='js_reverse'),
+    path(r'^ajax-upload/', include('upload.urls')),
+    path(r'^', include('papers.urls')),
+    path(r'^', include('publishers.urls')),
+    path(r'^', include('deposit.urls')),
+    path(r'^', include('notification.urls')),
+    path(r'^', include('autocomplete.urls')),
+    path(r'^jsreverse/$', django_js_reverse.views.urls_js, name='js_reverse'),
     # Social auth
-    url(r'^accounts/login/$', LoginView.as_view(), name='account_login'),
-    url(r'^accounts/sandbox_login/$',
+    path(r'^accounts/login/$', LoginView.as_view(), name='account_login'),
+    path(r'^accounts/sandbox_login/$',
         SandboxLoginView.as_view(), name='sandbox-login'),
-    url(r'^accounts/logout/$', logoutView, name='account_logout'),
-    url(r'^accounts/social/', include('allauth.socialaccount.urls')),
+    path(r'^accounts/logout/$', logoutView, name='account_logout'),
+    path(r'^accounts/social/', include('allauth.socialaccount.urls')),
     # JavaScript i18n
-    url(r'^jsi18n/$', javascript_catalog, js_info_dict, name='javascript-catalog'),
-    url(r'^lang/', include('django.conf.urls.i18n'), name='set_language'),
+    path(r'^jsi18n/$', JavaScriptCatalog, js_info_dict, name='javascript-catalog'),
+    path(r'^lang/', include('django.conf.urls.i18n'), name='set_language'),
     # Remove this in production
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT
            ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
@@ -131,5 +127,5 @@ for provider in providers.registry.get_list():
 if 'debug_toolbar' in settings.INSTALLED_APPS:
     import debug_toolbar
     urlpatterns.append(
-      url(r'^__debug__/', include(debug_toolbar.urls)))
+      path(r'^__debug__/', include(debug_toolbar.urls)))
 

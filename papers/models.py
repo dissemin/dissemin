@@ -48,6 +48,7 @@ from datetime import datetime
 from datetime import timedelta
 import re
 import haystack
+import pytz
 from statistics.models import AccessStatistics
 from statistics.models import combined_status_for_instance
 from statistics.models import STATUS_CHOICES_HELPTEXT
@@ -1368,7 +1369,7 @@ class OaiSource(CachingMixin, models.Model):
         max_length=64, choices=PAPER_TYPE_CHOICES)
 
     #: Last time we harvested this source.
-    last_update = models.DateTimeField(default=datetime(1970,1,1,0,0,0))
+    last_update = models.DateTimeField(default=datetime(1970,1,1,0,0,0,tzinfo=pytz.UTC))
 
     def __str__(self):
         return self.name
