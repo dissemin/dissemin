@@ -65,7 +65,7 @@ from django.conf import settings
 from django.core.cache import cache
 from django.core.cache.utils import make_template_fragment_key
 from django.core.exceptions import ObjectDoesNotExist
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.db import DataError
 from django.db import models
 from django.template.defaultfilters import slugify

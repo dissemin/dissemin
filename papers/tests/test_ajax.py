@@ -25,7 +25,7 @@ import pytest
 
 from backend.tests.test_generic import get_researcher_by_name
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 import django.test
 import unittest
 from papers.models import Paper

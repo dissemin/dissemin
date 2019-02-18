@@ -25,7 +25,7 @@ import datetime
 import pytest
 import html5lib
 
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 import django.test
 from papers.baremodels import BareName
 from papers.models import OaiRecord

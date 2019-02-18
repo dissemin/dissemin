@@ -23,7 +23,7 @@
 from deposit.models import Repository
 from deposit.models import UserPreferences
 from django import forms
-from django.core.urlresolvers import reverse
+from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
@@ -105,10 +105,10 @@ class FormWithAbstract(BaseMetadataForm):
     abstract = forms.CharField(
             label=_('Abstract'),
             required=True,
-            widget=wrap_with_prefetch_status(forms.Textarea,
-                                             lambda: reverse(
-                                                 'ajax-waitForConsolidatedField'),
-                                             'paper_id')(attrs={'class': 'form-control'})
+            widget=wrap_with_prefetch_status(
+                forms.Textarea,
+                reverse_lazy('ajax-waitForConsolidatedField'),
+                'paper_id')(attrs={'class': 'form-control'})
             )
 
 
