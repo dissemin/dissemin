@@ -25,7 +25,7 @@ import requests_mock
 
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from papers.tests.test_ajax import JsonRenderingTest
 from upload.models import THUMBNAIL_MAX_WIDTH
 from upload.views import make_thumbnail
@@ -115,7 +115,7 @@ class UploadTest(JsonRenderingTest):
             http_mocker.get('http://my.awesome.http.repository/',
                 content=self.blankpdf,
                 headers={'content-type':'application/pdf'})
-            
+
             resp = self.download('http://my.awesome.http.repository/')
             self.assertEqual(resp.status_code, 200)
 
@@ -124,7 +124,7 @@ class UploadTest(JsonRenderingTest):
             http_mocker.get('https://my.awesome.https.repository/',
                 content=self.blankpdf,
                 headers={'content-type':'application/pdf'})
-            
+
             resp = self.download('https://my.awesome.https.repository/')
             self.assertEqual(resp.status_code, 200)
 
@@ -133,18 +133,18 @@ class UploadTest(JsonRenderingTest):
             http_mocker.get('http://my.awesome.http.repository/some_page.html',
                 text='<html><head><title>Hello world</title></head><body></body></html>',
                 headers={'content-type':'application/html'})
-            
+
             resp = self.download('http://my.awesome.http.repository/some_page.html')
             self.assertEqual(resp.status_code, 403)
 
     def test_loggedout_download(self):
         self.client.logout()
-        
+
         with requests_mock.mock() as http_mocker:
             http_mocker.get('https://my.awesome.https.repository/',
                 content=self.blankpdf,
                 headers={'content-type':'application/pdf'})
-            
+
             resp = self.download('https://my.awesome.https.repository/')
             self.assertEqual(resp.status_code, 302)
 
@@ -156,7 +156,7 @@ class UploadTest(JsonRenderingTest):
             http_mocker.get('http://my.awesome.http.repository/not_found.html',
                 status_code=404,
                 headers={'content-type':'application/html'})
-            
+
             resp = self.download('http://my.awesome.http.repository/not_found.html')
             self.assertEqual(resp.status_code, 403)
 

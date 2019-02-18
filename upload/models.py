@@ -34,7 +34,7 @@ class UploadedPDF(models.Model):
     """
 
     #: The user who uploaded that file
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     #: When it was uploaded
     timestamp = models.DateTimeField(auto_now=True)
     #: How it was uploaded: either filename or URL

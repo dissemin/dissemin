@@ -1,7 +1,6 @@
 django-debug-toolbar
 pytest==4.1.1
 pytest-django
-django<2
 sphinx
 coverage
 pyflakes

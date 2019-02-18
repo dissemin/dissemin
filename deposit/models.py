@@ -78,7 +78,7 @@ class Repository(models.Model, CachingMixin):
     #: The identifier of the interface (protocol) used for that repository
     protocol = models.CharField(max_length=32)
     #: The source with which the OaiRecords associated with the deposits are created
-    oaisource = models.ForeignKey(OaiSource)
+    oaisource = models.ForeignKey(OaiSource, on_delete=models.CASCADE)
 
     #: The identifier of the account under which papers should be deposited
     username = models.CharField(max_length=64, null=True, blank=True)
@@ -141,20 +141,20 @@ class DepositRecord(models.Model):
     and :class:`~deposit.protocol.DepositError` exceptions, depending
     on the success of the deposit.
     """
-    paper = models.ForeignKey(Paper)
-    user = models.ForeignKey(User)
+    paper = models.ForeignKey(Paper, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    repository = models.ForeignKey(Repository)
+    repository = models.ForeignKey(Repository, on_delete=models.CASCADE)
 
     request = models.TextField(null=True, blank=True)
     identifier = models.CharField(max_length=512, null=True, blank=True)
-    oairecord = models.ForeignKey(OaiRecord, null=True, blank=True)
+    oairecord = models.ForeignKey(OaiRecord, null=True, blank=True, on_delete=models.SET_NULL)
     date = models.DateTimeField(auto_now=True)  # deposit date
     upload_type = models.CharField(max_length=64,choices=UPLOAD_TYPE_CHOICES)
     status = models.CharField(max_length=64,choices=DEPOSIT_STATUS_CHOICES)
     additional_info = JSONField(null=True, blank=True)
 
-    file = models.ForeignKey(UploadedPDF)
+    file = models.ForeignKey(UploadedPDF, on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'papers_depositrecord'
@@ -181,9 +181,9 @@ class DepositPreferences(models.Model):
         abstract = True
 
     #: The user for which these preferences are stored
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     #: The repository for which these preferences apply
-    repository = models.ForeignKey(Repository)
+    repository = models.ForeignKey(Repository, on_delete=models.CASCADE)
 
     @classmethod
     def get_form_class(self):
@@ -212,7 +212,7 @@ class UserPreferences(models.Model):
     Stores the user's global preferences,
     not the ones specific to a particular repository.
     """
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     # Email address
     email = models.EmailField(max_length=512, null=True, blank=True,
        help_text=_(
@@ -222,11 +222,13 @@ class UserPreferences(models.Model):
     preferred_repository = models.ForeignKey(Repository,
         null=True, blank=True,
         related_name='preferred_by',
-        help_text=_('This repository will be used by default for your deposits.'))
+        help_text=_('This repository will be used by default for your deposits.'),
+        on_delete=models.SET_NULL)
     # The last repository used by this user
     last_repository = models.ForeignKey(Repository,
         null=True, blank=True,
-        related_name='last_used_by')
+        related_name='last_used_by',
+        on_delete=models.SET_NULL)
 
     @classmethod
     def get_by_user(cls, user):

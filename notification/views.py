@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from rest_framework import viewsets
-from rest_framework.decorators import detail_route
+from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from .api import get_backend_class
@@ -33,7 +33,7 @@ class InboxViewSet(viewsets.ViewSet):
             serializer = NotificationSerializer(notification)
             return Response(serializer.data)
 
-    @detail_route(methods=['POST'])
+    @action(methods=['POST'], detail=True)
     def read(self, request, pk=None):
         """
         Mark the message as read.

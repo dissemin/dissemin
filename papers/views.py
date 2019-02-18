@@ -28,7 +28,7 @@ from allauth.socialaccount.signals import pre_social_login
 from deposit.models import DepositRecord
 from django.contrib.auth.decorators import user_passes_test
 from django.core.exceptions import ObjectDoesNotExist
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.http import Http404
 from django.http import HttpResponse
 from django.http import HttpResponseForbidden
