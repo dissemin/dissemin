@@ -22,9 +22,6 @@ CACHES = {
     }
 }
 
-if 'PROAIXY_API_KEY' in os.environ:
-    PROAIXY_API_KEY = os.environ['PROAIXY_API_KEY']
-
 if 'ROMEO_API_KEY' in os.environ:
     ROMEO_API_KEY = os.environ['ROMEO_API_KEY']
 
