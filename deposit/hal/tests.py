@@ -20,6 +20,7 @@
 
 
 
+import os
 from unittest import expectedFailure, skip
 from django.test import TestCase
 
@@ -73,7 +74,6 @@ class HALProtocolTest(ProtocolTest):
         self.repo.password = 'test'
         self.repo.endpoint = 'https://api-preprod.archives-ouvertes.fr/sword/'
         self.repo.save()
-        # f =
         self.proto = HALProtocol(self.repo)
 
     @expectedFailure
@@ -233,7 +233,7 @@ class HALProtocolTest(ProtocolTest):
         f = UploadedPDF.objects.create(
                 user=self.user,
                 orig_name='File.pdf',
-                file='mediatest/blank.pdf',
+                file=os.path.join(self.testdir, 'testdata/blank.pdf'),
                 thumbnail='my_thumbnail.png')
         d = DepositRecord.objects.create(
                 paper=p,

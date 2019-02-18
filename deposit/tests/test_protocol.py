@@ -24,6 +24,7 @@ import unittest
 import django.test
 import pytest
 import os
+import shutil
 
 from deposit.models import Repository
 from deposit.protocol import DepositResult
@@ -82,6 +83,9 @@ class ProtocolTest(django.test.TestCase):
         self.form = None
         self.testdir = os.path.dirname(os.path.abspath(__file__))
         self.pdfpath = os.path.join(self.testdir, 'data/blank.pdf')
+
+    def tearDown(self):
+        shutil.rmtree('mediatest/')
 
     def test_protocol_identifier(self):
         self.assertTrue(len(self.proto.protocol_identifier()) > 1)
