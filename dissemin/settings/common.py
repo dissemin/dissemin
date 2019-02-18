@@ -200,6 +200,7 @@ TEMPLATES = [
                     "django.template.context_processors.static",
                     "django.template.context_processors.tz",
                     "django.template.context_processors.request",
+                    "django_settings_export.settings_export",
                     "dissemin.tcp.orcid_base_domain",
                 ),
                 'debug': True
@@ -322,3 +323,9 @@ HAYSTACK_CONNECTIONS = {
 # Deposit notification callback, can be overriden to notify an external
 # service on deposit
 DEPOSIT_NOTIFICATION_CALLBACK = (lambda payload: None)
+
+# Settings to make available in the templates
+# See https://github.com/jakubroztocil/django-settings-export#usage
+SETTINGS_EXPORT = [
+    'MATHJAX_SELFHOST_URL',
+]
