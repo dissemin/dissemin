@@ -327,8 +327,13 @@ DEPOSIT_NOTIFICATION_CALLBACK = (lambda payload: None)
 # URL to a self-hosted version of Mathjax
 MATHJAX_SELFHOST_URL = None
 
+# Should we display a ribbon indicating that we are not in production?
+DISPLAY_BETA_RIBBON = True
+
 # Settings to make available in the templates
 # See https://github.com/jakubroztocil/django-settings-export#usage
 SETTINGS_EXPORT = [
     'MATHJAX_SELFHOST_URL',
+    'DISPLAY_BETA_RIBBON',
 ]
+

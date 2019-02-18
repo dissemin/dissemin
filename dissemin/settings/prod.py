@@ -55,6 +55,8 @@ STATIC_ROOT = '/home/dissemin/dissemin/www/static/'
 # This is what you should change!
 MEDIA_ROOT = '/home/dissemin/dissemin/media/'
 
+# Do not display a beta ribbon
+DISPLAY_BETA_RIBBON = False
 
 # Uncomment to use a selfhosted version of Mathjax.
 # Mathjax should be downloaded and installed manually to this URL.
