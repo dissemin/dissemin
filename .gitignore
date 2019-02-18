@@ -1,12 +1,15 @@
 # python files
 *.pyc
 build/
+dist/
 src/
 .src/
+dissemin.egg-info/
+celerybeat-schedule.db
+
 # vim
 .*.swp
-# ENS data
-celerybeat-schedule
+
 # Localization
 *.mo
 # Virtualenv
