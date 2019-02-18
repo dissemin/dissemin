@@ -26,7 +26,6 @@ import os
 
 from backend.crossref import convert_to_name_pair
 from backend.crossref import CrossRefAPI
-from backend.crossref import DOI_PROXY_SUPPORTS_BATCH
 from backend.crossref import fetch_dois_by_batch
 from backend.crossref import fetch_dois_incrementally
 from backend.crossref import fetch_metadata_by_DOI
@@ -34,6 +33,7 @@ from backend.crossref import get_publication_date
 from backend.crossref import is_oa_license
 from backend.crossref import parse_crossref_date
 from django.test import TestCase
+from django.conf import settings
 from papers.errors import MetadataSourceException
 from papers.models import Paper
 
@@ -209,7 +209,7 @@ class CrossRefUnitTest(unittest.TestCase):
             '10.1007/978-1-4020-6472-2_35']
         incremental = list(fetch_dois_incrementally(dois))
         self.assertEqual(len(incremental), len(dois))
-        if DOI_PROXY_SUPPORTS_BATCH:
+        if settings.DOI_PROXY_SUPPORTS_BATCH:
             batch = fetch_dois_by_batch(dois)
             self.assertEqual([item['DOI'] for item in incremental],
                              [item['DOI'] for item in batch])
