@@ -23,6 +23,7 @@ from io import BytesIO
 import unittest
 import django.test
 import pytest
+import os
 
 from deposit.models import Repository
 from deposit.protocol import DepositResult
@@ -61,7 +62,7 @@ class ProtocolTest(django.test.TestCase):
         self.p1 = Paper.get_or_create(
                 "This is a test paper",
                 [self.r1.name, self.r2.name, self.r4.name],
-                date(year=2014, month=0o2, day=15))
+                date(year=2014, month=2, day=15))
         self.user, _ = User.objects.get_or_create(username='myuser')
         self.oaisource, _ = OaiSource.objects.get_or_create(
             identifier='deposit_oaisource',
@@ -79,6 +80,8 @@ class ProtocolTest(django.test.TestCase):
                 oaisource=self.oaisource)
         self.proto = None
         self.form = None
+        self.testdir = os.path.dirname(os.path.abspath(__file__))
+        self.pdfpath = os.path.join(self.testdir, 'data/blank.pdf')
 
     def test_protocol_identifier(self):
         self.assertTrue(len(self.proto.protocol_identifier()) > 1)
@@ -111,7 +114,7 @@ class ProtocolTest(django.test.TestCase):
         if not form.is_valid():
             print(form.errors)
         self.assertTrue(form.is_valid())
-        pdf = 'mediatest/blank.pdf'
+        pdf = self.pdfpath
         deposit_result = self.proto.submit_deposit_wrapper(pdf,
                                                            form, dry_run=dry_run)
         self.assertIsInstance(deposit_result, DepositResult)
