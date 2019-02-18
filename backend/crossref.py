@@ -31,13 +31,10 @@ from backend.romeo import fetch_journal
 from backend.romeo import fetch_publisher
 from backend.utils import urlopen_retry
 from backend.doiprefixes import free_doi_prefixes
-from dissemin.settings import DOI_PROXY_DOMAIN
-from dissemin.settings import DOI_PROXY_SUPPORTS_BATCH
-from dissemin.settings import CROSSREF_USER_AGENT
-from dissemin.settings import CROSSREF_MAILTO
 from django.db import DataError
 from django.utils.http import urlencode
 from django.utils import timezone
+from django.conf import settings
 from elasticsearch.exceptions import ConnectionTimeout
 from papers.baremodels import BareName
 from papers.baremodels import BareOaiRecord
@@ -287,7 +284,7 @@ def fetch_metadata_by_DOI(doi):
         return
     addheaders = {'Accept': 'application/citeproc+json'}
     try:
-        request = 'http://'+DOI_PROXY_DOMAIN+'/'+doi
+        request = 'http://'+settings.DOI_PROXY_DOMAIN+'/'+doi
         response = urlopen_retry(request,
                                  timeout=crossref_timeout,
                                  headers=addheaders,
@@ -304,7 +301,7 @@ def fetch_dois(doi_list):
     Fetch the metadata of a list of DOIs from CrossRef,
     by batch if the server supports it, otherwise incrementally.
     """
-    if DOI_PROXY_SUPPORTS_BATCH:
+    if settings.DOI_PROXY_SUPPORTS_BATCH:
         return fetch_dois_by_batch(doi_list)
     else:
         return fetch_dois_incrementally(doi_list)
@@ -332,8 +329,8 @@ def make_crossref_call(endpoint, params=None, headers=None):
         params = {}
     if headers is None:
         headers = {}
-    params['mailto'] = CROSSREF_MAILTO
-    headers['User-Agent'] = CROSSREF_USER_AGENT
+    params['mailto'] = settings.CROSSREF_MAILTO
+    headers['User-Agent'] = settings.CROSSREF_USER_AGENT
     return requests.get('https://api.crossref.org'+endpoint,
             params=params, headers=headers)
 
@@ -359,7 +356,7 @@ def fetch_dois_by_batch(doi_list):
 
     # Given how we are joining the DOIs, they cannot contain commas
     params = {'filter': ','.join(['doi:'+doi for doi in doi_list if ',' not in doi]),
-              'mailto': CROSSREF_MAILTO}
+              'mailto': settings.CROSSREF_MAILTO}
     req = None
     try:
         # First we fetch dois by batch from CrossRef. That's fast, but only
@@ -373,7 +370,7 @@ def fetch_dois_by_batch(doi_list):
         # We fetch them using our proxy (cached content negociation)
         missing_dois = list(set(doi_list) - set(dct.keys()))
         if missing_dois:
-            req = requests.post('http://'+DOI_PROXY_DOMAIN +
+            req = requests.post('http://'+settings.DOI_PROXY_DOMAIN +
                                 '/batch', {'dois': json.dumps(missing_dois)})
             req.raise_for_status()
             missing_dois_dct = results_list_to_dict(req.json())
@@ -514,7 +511,7 @@ class CrossRefAPI(object):
         while next_cursor:
             params['rows'] = rows
             params['cursor'] = next_cursor
-            params['mailto'] = CROSSREF_MAILTO
+            params['mailto'] = settings.CROSSREF_MAILTO
 
             try:
                 r = make_crossref_call('/works', params=params)

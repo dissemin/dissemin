@@ -26,8 +26,7 @@ import requests
 from requests.packages.urllib3.exceptions import HTTPError
 from requests.packages.urllib3.exceptions import ReadTimeoutError
 
-from dissemin.settings import DEPOSIT_MAX_FILE_SIZE
-from dissemin.settings import URL_DEPOSIT_DOWNLOAD_TIMEOUT
+from django.conf import settings
 from django.contrib.auth.decorators import user_passes_test
 from django.core.files.base import ContentFile
 from django.utils.translation import ugettext as _
@@ -170,11 +169,11 @@ def handleUrlDownload(request):
     content = None
     try:
         r = requests.get(form.cleaned_data[
-                         'url'], timeout=URL_DEPOSIT_DOWNLOAD_TIMEOUT, stream=True)
+                         'url'], timeout=settings.URL_DEPOSIT_DOWNLOAD_TIMEOUT, stream=True)
         r.raise_for_status()
-        content = r.raw.read(DEPOSIT_MAX_FILE_SIZE+1, decode_content=False)
+        content = r.raw.read(settings.DEPOSIT_MAX_FILE_SIZE+1, decode_content=False)
 
-        if len(content) > DEPOSIT_MAX_FILE_SIZE:
+        if len(content) > settings.DEPOSIT_MAX_FILE_SIZE:
             response['message'] = _('File too large.')
 
         content_type = r.headers.get('content-type')

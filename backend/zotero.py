@@ -1,7 +1,6 @@
 # -*- encoding: utf-8 -*-
 
-
-from dissemin.settings import DOI_PROXY_DOMAIN
+from django.conf import settings
 from papers.errors import MetadataSourceException
 from papers.utils import sanitize_html
 
@@ -15,7 +14,7 @@ def fetch_zotero_by_DOI(doi):
     Works only with the doi_cache proxy.
     """
     try:
-        request = requests.get('http://'+DOI_PROXY_DOMAIN+'/zotero/'+doi)
+        request = requests.get('http://'+settings.DOI_PROXY_DOMAIN+'/zotero/'+doi)
         return request.json()
     except ValueError as e:
         raise MetadataSourceException('Error while fetching Zotero metadata:\nInvalid JSON response.\n' +

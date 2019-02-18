@@ -36,7 +36,6 @@ import os
 from django.utils.translation import ugettext_lazy as _
 
 try:
-    from .secret import PROAIXY_API_KEY
     from .secret import DATABASES
     from .secret import EMAIL_HOST
     from .secret import EMAIL_HOST_PASSWORD
@@ -94,13 +93,6 @@ DOI_PROXY_SUPPORTS_BATCH = True
 # It is not mandatory to provide them but it helps get a better service.
 CROSSREF_MAILTO = 'dev@dissem.in'
 CROSSREF_USER_AGENT = 'Dissemin/0.1 (https://dissem.in/; mailto:dev@dissem.in)'
-
-# Proaixy API key
-# Used to fetch paper metadata. Get one by asking developers@dissem.in
-# This is a default key that should only be used for tests
-if PROAIXY_API_KEY is None:
-    PROAIXY_API_KEY = '46f664aaae8d25826ff6'
-
 
 ### RoMEO proxy ###
 # Set this to 'sherpa.ac.uk' if our custom mirror is not up anymore.

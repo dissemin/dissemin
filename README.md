@@ -1,12 +1,11 @@
 dissem.in
 =========
 
-[![Documentation Status](https://img.shields.io/badge/docs-latest-brightgreen.svg?style=flat)](https://dev.dissem.in/doc/)
+[![Documentation Status](https://readthedocs.org/projects/dissemin/badge/?version=latest)](https://dissemin.readthedocs.io/en/latest/?badge=latest)
 [![Build Status](https://travis-ci.org/dissemin/dissemin.svg?branch=master)](https://travis-ci.org/dissemin/dissemin)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e8d7f47263fd4cfa9afb5ef5ebe95668)](https://www.codacy.com/app/dissemin/dissemin)
 [![Coverage Status](https://coveralls.io/repos/dissemin/dissemin/badge.svg?branch=master&service=github)](https://coveralls.io/github/dissemin/dissemin?branch=master)
 [![Dependency Status](https://dependencyci.com/github/dissemin/dissemin/badge)](https://dependencyci.com/github/dissemin/dissemin)
-[![BountySource](https://www.bountysource.com/badge/tracker?tracker_id=6475570)](https://www.bountysource.com/teams/dissemin/issues?tracker_ids=6475570)
 
 Web platform to help researchers upload their papers to open repositories.
 
@@ -38,8 +37,8 @@ services, you can check the very last lines of the
 to find out how to start them.
 
 
-Full instruction on installation, including alternative methods, is available
-at [dev.dissem.in](https://dev.dissem.in/install.html).
+See the [full installation instructions](https://dissemin.readthedocs.io/en/latest/install.html),
+which include alternative methods.
 
 
 ## Contributing
@@ -67,8 +66,8 @@ Dissem.in uses the [Django's standard localization
 system](https://docs.djangoproject.com/en/1.8/topics/i18n/), which makes it
 easy to contribute new translations.
 
-Full details on how to contribute translations are available at
-[dev.dissem.in](https://dev.dissem.in/localization.html).
+See the
+[full details on how to contribute translations](https://dissemin.readthedocs.io/en/latest/localization.html).
 
 
 ### Writing an interface for a new repository
@@ -76,15 +75,15 @@ Full details on how to contribute translations are available at
 Writing an interface for a new repository, so that Dissem.in could upload to
 this repository, is very easy!
 
-A full tutorial is available at
-[dev.dissem.in](https://dev.dissem.in/repository_interfaces.html).
+A 
+[full tutorial](https://dissemin.readthedocs.io/en/latest/repository_interfaces.html) is available.
 
 
 ## Links
 
 * [Project's homepage](http://dissem.in)
 * Live support (English/French) on IRC: [irc://irc.ulminfo.fr/#openaccess](irc://irc.ulminfo.fr/#openaccess)
-* [Documentation](https://dev.dissem.in/)
+* [Documentation](https://dissemin.readthedocs.io/en/latest/)
 * [To do list](https://github.com/wetneb/dissemin/issues)
 
 

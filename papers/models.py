@@ -55,8 +55,6 @@ from statistics.models import STATUS_CHOICES_HELPTEXT
 from caching.base import CachingManager
 from caching.base import CachingMixin
 from celery.result import AsyncResult
-from dissemin.settings import POSSIBLE_LANGUAGE_CODES
-from dissemin.settings import PROFILE_REFRESH_ON_LOGIN
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import JSONField
 from django.contrib.postgres.fields import ArrayField
@@ -463,7 +461,7 @@ class Researcher(models.Model):
         self.save(update_fields=['harvester', 'current_task'])
 
     def fetch_everything_if_outdated(self):
-        if self.last_harvest is None or timezone.now() - self.last_harvest > PROFILE_REFRESH_ON_LOGIN:
+        if self.last_harvest is None or timezone.now() - self.last_harvest > settings.PROFILE_REFRESH_ON_LOGIN:
             self.fetch_everything()
 
     def init_from_orcid(self):
@@ -1142,7 +1140,7 @@ class Paper(models.Model, BarePaper):
                     continue
                 else:
                     rpk = a.researcher_id
-            for lang in POSSIBLE_LANGUAGE_CODES:
+            for lang in settings.POSSIBLE_LANGUAGE_CODES:
                 key = make_template_fragment_key(
                     'publiListItem', [self.pk, lang, rpk])
                 cache.delete(key)
