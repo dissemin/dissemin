@@ -20,6 +20,8 @@
 
 import os
 import unittest
+import requests
+import requests_mock
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -70,6 +72,8 @@ class UploadTest(JsonRenderingTest):
     def setUpClass(cls):
         super(UploadTest, cls).setUpClass()
         cls.testdir = os.path.dirname(os.path.abspath(__file__))
+        with open(os.path.join(cls.testdir, 'data/blank.pdf'), 'rb') as blank_pdf:
+            cls.blankpdf = blank_pdf.read()
         settings.MEDIA_ROOT = os.path.join(os.getcwd(), 'mediatest')
         User.objects.create_user('john', 'john@google.com', 'doe')
 
@@ -107,29 +111,57 @@ class UploadTest(JsonRenderingTest):
         self.assertEqual(resp.status_code, 403)
 
     def test_download_nohttps(self):
-        resp = self.download('http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.696.3395&rep=rep1&type=pdf')
-        self.assertEqual(resp.status_code, 200)
+        with requests_mock.mock() as http_mocker:
+            http_mocker.get('http://my.awesome.http.repository/',
+                content=self.blankpdf,
+                headers={'content-type':'application/pdf'})
+            
+            resp = self.download('http://my.awesome.http.repository/')
+            self.assertEqual(resp.status_code, 200)
 
-    def test_download(self):
-        resp = self.download('http://arxiv.org/pdf/1410.1454v2')
-        self.assertEqual(resp.status_code, 200)
+    def test_download_https(self):
+         with requests_mock.mock() as http_mocker:
+            http_mocker.get('https://my.awesome.https.repository/',
+                content=self.blankpdf,
+                headers={'content-type':'application/pdf'})
+            
+            resp = self.download('https://my.awesome.https.repository/')
+            self.assertEqual(resp.status_code, 200)
 
     def test_html_download(self):
-        resp = self.download('http://httpbin.org/')
-        self.assertEqual(resp.status_code, 403)
+        with requests_mock.mock() as http_mocker:
+            http_mocker.get('http://my.awesome.http.repository/some_page.html',
+                text='<html><head><title>Hello world</title></head><body></body></html>',
+                headers={'content-type':'application/html'})
+            
+            resp = self.download('http://my.awesome.http.repository/some_page.html')
+            self.assertEqual(resp.status_code, 403)
 
     def test_loggedout_download(self):
         self.client.logout()
-        resp = self.download('http://arxiv.org/pdf/1410.1454v2')
-        self.assertEqual(resp.status_code, 302)
+        
+        with requests_mock.mock() as http_mocker:
+            http_mocker.get('https://my.awesome.https.repository/',
+                content=self.blankpdf,
+                headers={'content-type':'application/pdf'})
+            
+            resp = self.download('https://my.awesome.https.repository/')
+            self.assertEqual(resp.status_code, 302)
 
     def test_invalid_url(self):
         self.download('ttp://dissem.in')
 
     def test_notfound_url(self):
-        resp = self.download('http://httpbin.org/ainrsetcs')
-        self.assertEqual(resp.status_code, 403)
+        with requests_mock.mock() as http_mocker:
+            http_mocker.get('http://my.awesome.http.repository/not_found.html',
+                status_code=404,
+                headers={'content-type':'application/html'})
+            
+            resp = self.download('http://my.awesome.http.repository/not_found.html')
+            self.assertEqual(resp.status_code, 403)
 
     def test_timeout(self):
-        resp = self.download('https://httpbin.org/delay/20')
-        self.assertEqual(resp.status_code, 403)
+        with requests_mock.mock() as http_mocker:
+            http_mocker.get('http://my.slow.repo/big.pdf', exc=requests.exceptions.ConnectTimeout)
+            resp = self.download('http://my.slow.repo/big.pdf')
+            self.assertEqual(resp.status_code, 403)
