@@ -82,32 +82,32 @@ js_info_dict = {
 
 urlpatterns = [
     # Errors
-    path(r'^404-error$', temp('404.html')),
-    path(r'^500-error$', temp('500.html')),
+    path('404-error', temp('404.html')),
+    path('500-error', temp('500.html')),
     # Static views
-    path(r'^sources$', temp('dissemin/sources.html'), name='sources'),
-    path(r'^faq$', temp('dissemin/faq.html'), name='faq'),
-    path(r'^tos$', temp('dissemin/tos.html'), name='tos'),
-    path(r'^partners$', temp('dissemin/partners.html'), name='partners'),
+    path('sources', temp('dissemin/sources.html'), name='sources'),
+    path('faq', temp('dissemin/faq.html'), name='faq'),
+    path('tos', temp('dissemin/tos.html'), name='tos'),
+    path('partners', temp('dissemin/partners.html'), name='partners'),
     # Admin interface
-    path(r'^admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     # Apps
-    path(r'^ajax-upload/', include('upload.urls')),
-    path(r'^', include('papers.urls')),
-    path(r'^', include('publishers.urls')),
-    path(r'^', include('deposit.urls')),
-    path(r'^', include('notification.urls')),
-    path(r'^', include('autocomplete.urls')),
-    path(r'^jsreverse/$', django_js_reverse.views.urls_js, name='js_reverse'),
+    path('ajax-upload/', include('upload.urls')),
+    path('', include('papers.urls')),
+    path('', include('publishers.urls')),
+    path('', include('deposit.urls')),
+    path('', include('notification.urls')),
+    path('', include('autocomplete.urls')),
+    path('jsreverse/', django_js_reverse.views.urls_js, name='js_reverse'),
     # Social auth
-    path(r'^accounts/login/$', LoginView.as_view(), name='account_login'),
-    path(r'^accounts/sandbox_login/$',
+    path('accounts/login/', LoginView.as_view(), name='account_login'),
+    path('accounts/sandbox_login/',
         SandboxLoginView.as_view(), name='sandbox-login'),
-    path(r'^accounts/logout/$', logoutView, name='account_logout'),
-    path(r'^accounts/social/', include('allauth.socialaccount.urls')),
+    path('accounts/logout/', logoutView, name='account_logout'),
+    path('accounts/social/', include('allauth.socialaccount.urls')),
     # JavaScript i18n
-    path(r'^jsi18n/$', JavaScriptCatalog, js_info_dict, name='javascript-catalog'),
-    path(r'^lang/', include('django.conf.urls.i18n'), name='set_language'),
+    path('jsi18n/', JavaScriptCatalog, js_info_dict, name='javascript-catalog'),
+    path('lang/', include('django.conf.urls.i18n'), name='set_language'),
     # Remove this in production
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT
            ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
