@@ -308,7 +308,8 @@ MOCK_MODULES = [
 
 FileDescriptor.__get__ = lambda self, *args, **kwargs: self
 
-os.environ['DJANGO_SETTINGS_MODULE'] = 'dissemin.settings'
+
+os.environ['DJANGO_SETTINGS_MODULE'] = 'dissemin.settings.sphinx'
 django.setup()
 
 def process_docstring(app, what, name, obj, options, lines):
