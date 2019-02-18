@@ -28,8 +28,7 @@ from deposit.forms import UserPreferencesForm
 from deposit.models import DepositRecord
 from deposit.models import Repository
 from deposit.models import UserPreferences
-from dissemin.settings import DEPOSIT_MAX_FILE_SIZE
-from dissemin.settings import MEDIA_ROOT
+from django.conf import settings
 from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponseForbidden
 from django.http import Http404
@@ -103,7 +102,7 @@ def start_view(request, pk):
     breadcrumbs.append((_('Deposit'), ''))
     context = {
             'paper': paper,
-            'max_file_size': DEPOSIT_MAX_FILE_SIZE,
+            'max_file_size': settings.DEPOSIT_MAX_FILE_SIZE,
             'available_repositories': repositories,
             'selected_repository': selected_repository,
             'selected_protocol': selected_protocol,
@@ -210,7 +209,7 @@ def submitDeposit(request, pk):
         return context, 400
 
     # Submit the paper to the repository
-    path = os.path.join(MEDIA_ROOT, pdf.file.name)
+    path = os.path.join(settings.MEDIA_ROOT, pdf.file.name)
 
     # Create initial record
     d = DepositRecord(

@@ -26,8 +26,7 @@ import requests
 import requests.exceptions
 
 from backend.utils import cached_urlopen_retry
-from dissemin.settings import ROMEO_API_DOMAIN
-from dissemin.settings import ROMEO_API_KEY
+from django.conf import settings
 from lxml import etree as ET
 from lxml.html import fromstring
 from papers.errors import MetadataSourceException
@@ -55,9 +54,9 @@ PUBLISHER_NAME_ASSOCIATION_FACTOR = 10
 
 def perform_romeo_query(search_terms):
     search_terms = search_terms.copy()
-    if ROMEO_API_KEY:
-        search_terms['ak'] = ROMEO_API_KEY
-    base_url = 'http://'+ROMEO_API_DOMAIN+'/romeo/api29.php'
+    if settings.ROMEO_API_KEY:
+        search_terms['ak'] = settings.ROMEO_API_KEY
+    base_url = 'http://'+settings.ROMEO_API_DOMAIN+'/romeo/api29.php'
 
     # Perform the query
     try:

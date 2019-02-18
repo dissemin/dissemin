@@ -6,8 +6,10 @@ as they are not actually used.
 """
 
 import os
+from datetime import timedelta
 
-from .common import *
+BASE_DIR = os.path.dirname(os.path.join(
+    os.path.dirname(__file__), '..', '..', '..'))
 
 DEBUG = False
 
