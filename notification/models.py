@@ -39,8 +39,8 @@ class NotificationArchive(models.Model):
     This model holds all the notifications that users received.
     """
 
-    user = models.ForeignKey(settings.AUTH_USER_MODEL)
-    notification = models.ForeignKey(Notification)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    notification = models.ForeignKey(Notification, on_delete=models.CASCADE)
 
     def __str__(self):
         return '[{}] {}'.format(self.user, self.notification)
@@ -55,8 +55,8 @@ class Inbox(models.Model):
     After that, they'll be automatically removed by Django.
     """
 
-    user = models.ForeignKey(settings.AUTH_USER_MODEL)
-    notification = models.ForeignKey(Notification)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    notification = models.ForeignKey(Notification, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name_plural = _('inboxes')

@@ -101,7 +101,7 @@ class Publisher(models.Model):
     oa_status = models.CharField(
         max_length=32, choices=OA_STATUS_CHOICES_WITHOUT_HELPTEXT, default='UNK')
 
-    stats = models.ForeignKey(AccessStatistics, null=True)
+    stats = models.ForeignKey(AccessStatistics, null=True, on_delete=models.SET_NULL)
 
     class Meta:
         db_table = 'papers_publisher'
@@ -219,9 +219,9 @@ class Journal(models.Model):
     title = models.CharField(max_length=256, db_index=True)
     last_updated = models.DateTimeField(auto_now=True)
     issn = models.CharField(max_length=10, blank=True, null=True, unique=True)
-    publisher = models.ForeignKey(Publisher)
+    publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
 
-    stats = models.ForeignKey(AccessStatistics, null=True)
+    stats = models.ForeignKey(AccessStatistics, null=True, on_delete=models.SET_NULL)
 
     def update_stats(self):
         if not self.stats:
@@ -243,7 +243,7 @@ class Journal(models.Model):
 
 
 class PublisherCondition(models.Model):
-    publisher = models.ForeignKey(Publisher)
+    publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
     text = models.CharField(max_length=1024)
 
     def __str__(self):
@@ -254,7 +254,7 @@ class PublisherCondition(models.Model):
 
 
 class PublisherCopyrightLink(models.Model):
-    publisher = models.ForeignKey(Publisher)
+    publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
     text = models.CharField(max_length=256)
     url = models.URLField()
 
@@ -266,7 +266,7 @@ class PublisherCopyrightLink(models.Model):
 
 
 class PublisherRestrictionDetail(models.Model):
-    publisher = models.ForeignKey(Publisher)
+    publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
     text = models.CharField(max_length=256)
     applies_to = models.CharField(max_length=32)
 
@@ -281,7 +281,7 @@ class PublisherRestrictionDetail(models.Model):
 
 
 class AliasPublisher(models.Model):
-    publisher = models.ForeignKey(Publisher)
+    publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
     name = models.CharField(max_length=512)
     count = models.IntegerField(default=0)
     unique_together = ('name', 'publisher')

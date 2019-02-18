@@ -1396,9 +1396,9 @@ class OaiRecord(models.Model, BareOaiRecord):
     # this is actually the *journal* title
     journal_title = models.CharField(max_length=512, blank=True, null=True)
     container = models.CharField(max_length=512, blank=True, null=True)
-    journal = models.ForeignKey(Journal, blank=True, null=True, on_delete=models.CASCADE)
+    journal = models.ForeignKey(Journal, blank=True, null=True, on_delete=models.SET_NULL)
 
-    publisher = models.ForeignKey(Publisher, blank=True, null=True, on_delete=models.CASCADE)
+    publisher = models.ForeignKey(Publisher, blank=True, null=True, on_delete=models.SET_NULL)
     publisher_name = models.CharField(max_length=512, blank=True, null=True)
 
     issue = models.CharField(max_length=64, blank=True, null=True)
@@ -1612,7 +1612,7 @@ class PaperWorld(SingletonModel):
     """
     A singleton to link to a special instance of AccessStatistics for all papers
     """
-    stats = models.ForeignKey(AccessStatistics, default=create_default_stats)
+    stats = models.ForeignKey(AccessStatistics, default=create_default_stats, on_delete=models.SET_DEFAULT)
 
     def update_stats(self):
         """Update the access statistics for all papers"""
