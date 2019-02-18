@@ -177,11 +177,11 @@ class PaperTest(django.test.TestCase):
     def setUpClass(self):
         super(PaperTest, self).setUpClass()
         self.testdir = os.path.dirname(os.path.abspath(__file__))
-        with open(os.path.join(self.testdir, 'testdata/citeseerx_record_without_date.xml'), 'r') as f:
+        with open(os.path.join(self.testdir, 'data/citeseerx_record_without_date.xml'), 'r') as f:
             self.citeseerx_record_without_date = f.read()
-        with open(os.path.join(self.testdir, 'testdata/pmc_record.xml'), 'r') as f:
+        with open(os.path.join(self.testdir, 'data/pmc_record.xml'), 'r') as f:
             self.pmc_record = f.read()
-        with open(os.path.join(self.testdir, 'testdata/hal_record.xml'), 'r') as f:
+        with open(os.path.join(self.testdir, 'data/hal_record.xml'), 'r') as f:
             self.hal_record = f.read()
 
     def test_create_by_doi(self):
@@ -198,23 +198,23 @@ class PaperTest(django.test.TestCase):
         citeseerx = OaiSource(identifier='citeseerx', name='CiteSeerX', endpoint='http://example.com/')
         citeseerx.save()
         mock_makeRequest.return_value = self.citeseerx_record_without_date
-            
+
         # Paper has no date
         p = Paper.create_by_oai_id('oai:CiteSeerX.psu:10.1.1.487.869', source=citeseerx)
         self.assertEqual(p, None)
-    
+
     @patch.object(Client, 'makeRequest')
     def test_create_by_identifier_valid_paper(self, mock_makeRequest):
         pmc = OaiSource.objects.get(identifier='pmc')
         mock_makeRequest.return_value = self.pmc_record
-        
+
         p = Paper.create_by_oai_id('oai:pubmedcentral.nih.gov:4131942', source=pmc)
         self.assertEqual(p.pdf_url, 'http://www.ncbi.nlm.nih.gov/pmc/articles/PMC4131942/')
 
     @patch.object(Client, 'makeRequest')
     def test_create_by_hal_id(self, mock_makeRequest):
         mock_makeRequest.return_value = self.hal_record
-        
+
         p = Paper.create_by_hal_id('hal-00830421')
         self.assertEqual(p.oairecords[0].splash_url, 'https://hal.archives-ouvertes.fr/hal-00830421')
 

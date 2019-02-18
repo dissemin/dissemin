@@ -20,7 +20,7 @@
 
 
 
-from papers.testajax import JsonRenderingTest
+from papers.tests.test_ajax import JsonRenderingTest
 from papers.models import Paper
 
 class PaperApiTest(JsonRenderingTest):

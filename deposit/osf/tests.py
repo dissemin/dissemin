@@ -26,7 +26,7 @@ from unittest import skip
 from papers.models import Paper
 from papers.baremodels import BareAuthor, BareName
 from deposit.models import Repository
-from deposit.tests import ProtocolTest
+from deposit.tests.test_protocol import ProtocolTest
 from deposit.osf.protocol import OSFProtocol
 from deposit.protocol import DepositError
 

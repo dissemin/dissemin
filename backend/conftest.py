@@ -4,7 +4,7 @@ from django.core.management import call_command
 from papers.models import OaiSource
 from papers.models import Department
 from papers.models import Institution
-from backend.tests import get_researcher_by_name
+from backend.tests.test_generic import get_researcher_by_name
 from publishers.models import Journal
 
 @pytest.fixture(scope='class')

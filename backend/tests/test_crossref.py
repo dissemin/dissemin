@@ -22,6 +22,7 @@
 
 import datetime
 import unittest
+import os
 
 from backend.crossref import convert_to_name_pair
 from backend.crossref import CrossRefAPI
@@ -38,6 +39,11 @@ from papers.models import Paper
 
 
 class CrossRefTest(TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        super(CrossRefTest, cls).setUpClass()
+        cls.testdir = os.path.dirname(os.path.abspath(__file__))
 
     def setUp(self):
         self.api = CrossRefAPI()
@@ -116,7 +122,7 @@ class CrossRefTest(TestCase):
             self.assertTrue(metadata['DOI'].startswith('10.1007/'))
 
     def test_import_dump(self):
-        self.api.ingest_dump('devutils/sample_crossref_dump.json.bz2')
+        self.api.ingest_dump(os.path.join(self.testdir, 'data/sample_crossref_dump.json.bz2'))
         p = Paper.get_by_doi('10.1016/j.jadohealth.2015.10.045')
         self.assertEqual("Sources, Type and Use of Social Support during Early Sexual Development of Black Gay and Bisexual Adolescent Males",
                          p.title)

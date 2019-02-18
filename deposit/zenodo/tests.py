@@ -28,7 +28,7 @@ from mock import patch
 from oaipmh.client import Client
 
 from deposit.tests import lorem_ipsum
-from deposit.tests import ProtocolTest
+from deposit.tests.test_protocol import ProtocolTest
 from deposit.zenodo.protocol import ZenodoProtocol
 from deposit.zenodo.forms import ZENODO_DEFAULT_LICENSE_CHOICE
 from papers.models import Paper
@@ -65,9 +65,9 @@ class ZenodoProtocolTest(ProtocolTest):
         oaisource = OaiSource.objects.get(identifier='zenodo')
         oaisource.endpoint = 'http://example.com/' # not actually used as we are mocking the HTTP call
         oaisource.save()
-        
+
         mock_makeRequest.return_value = self.zenodo_record
-        
+
         p = Paper.create_by_oai_id('oai:pubmedcentral.nih.gov:4131942', source=oaisource)
         enabled = self.proto.init_deposit(p, self.user)
         self.assertFalse(enabled)
