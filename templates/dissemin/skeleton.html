@@ -1,179 +1,122 @@
+
+{% extends "dissemin/root_skeleton.html" %}
+
 {% load static %}
 {% load i18n %}
 {% load socialaccount %}
 {% load users %}
-<!DOCTYPE html>
-{% get_current_language as LANGUAGE_CODE %}
-<html lang="{{ LANGUAGE_CODE }}">
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    {% block metaTags %}
-    {% endblock metaTags %}
-    <link rel="stylesheet" href="{% static "libs/bootstrap/css/bootstrap.min.css" %}" />
-    <link rel="stylesheet" href="{% static "libs/editable/css/bootstrap-editable.css" %}" />
-    <link rel="stylesheet" href="{% static "style/style.css" %}" />
-    <link rel="stylesheet" href="{% static "style/mobile.css" %}" media="screen and (max-width: 800px)" />
-    <link rel="apple-touch-icon" sizes="57x57"
-                           href="{% static "favicon/apple-icon-57x57.png" %}" />
-    <link rel="apple-touch-icon" sizes="60x60"
-                           href="{% static "favicon/apple-icon-60x60.png" %}" />
-    <link rel="apple-touch-icon" sizes="72x72"
-                           href="{% static "favicon/apple-icon-72x72.png" %}" />
-    <link rel="apple-touch-icon" sizes="76x76"
-                           href="{% static "favicon/apple-icon-76x76.png" %}" />
-    <link rel="apple-touch-icon" sizes="114x114"
-                           href="{% static "favicon/apple-icon-114x114.png" %}"/>
-    <link rel="apple-touch-icon" sizes="120x120"
-                           href="{% static "favicon/apple-icon-120x120.png" %}"/>
-    <link rel="apple-touch-icon" sizes="144x144"
-                           href="{% static "favicon/apple-icon-144x144.png" %}"/>
-    <link rel="apple-touch-icon" sizes="152x152"
-                           href="{% static "favicon/apple-icon-152x152.png" %}"/>
-    <link rel="apple-touch-icon" sizes="180x180"
-                           href="{% static "favicon/apple-icon-180x180.png" %}"/>
-    <link rel="icon" type="image/png" sizes="192x192"
-                           href="{% static "favicon/android-icon-192x192.png" %}" />
-    <link rel="icon" type="image/png" sizes="32x32"
-                           href="{% static "favicon/favicon-32x32.png" %}" />
-    <link rel="icon" type="image/png" sizes="96x96"
-                           href="{% static "favicon/favicon-96x96.png" %}" />
-    <link rel="icon" type="image/png" sizes="16x16"
-                           href="{% static "favicon/favicon-16x16.png" %}" />
-    <link rel="manifest" href="{% static "favicon/manifest.json" %}" />
-    <meta name="msapplication-TileImage" content="{% static "favicon/ms-icon-144x144.png" %}" />
-    <meta name="msapplication-TileColor" content="#ffffff" />
-    <script src="{% static "libs/jquery.min.js" %}"></script>
-    <script src="{% static "libs/bootstrap/js/bootstrap.min.js" %}"></script>
-    <script src="{% static "libs/editable/js/bootstrap-editable.min.js" %}"></script>
-    <script src="{% url 'js_reverse' %}" type="text/javascript"></script>
-    <script type="text/javascript" src="{% url 'javascript-catalog' %}"></script>
-    <script type="text/javascript" src="{% static "libs/es6-promise.min.js" %}"></script>
-    <script type="text/javascript" src="{% static "libs/fetch.min.js" %}"></script>
-    <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
-    });
-    </script>
-    {% if settings.MATHJAX_SELFHOST_URL %}
-        <script type="text/javascript" src="{{ settings.MATHJAX_SELFHOST_URL }}" async>
-    {% else %}
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async>
-    {% endif %}
-    </script>
-    <script type="text/javascript" src="{% static "editing.js" %}"></script>
-    <script type="text/javascript" src="{% static "name.js" %}"></script>
-    <script type="text/javascript">
 
-        {% block jsScript %}{% endblock %}
-    </script>
-    {% block extra_head %}{% endblock %}
-    <title>{% block headTitle %}{% endblock %} - dissemin</title>
-</head>
-<body>
-    <div id="wrapper">
-        <div id="header">
-            <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
-                            <span class="sr-only">{% trans "Toggle navigation" %}</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="/">dissemin</a>
-                    </div>
-                    <div class="collapse navbar-collapse" id="navbar-collapse">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="/">{% trans "Home" %}</a></li>
-                        {% if request.user.is_authenticated %}
-                        <li><a href="{% url 'my-profile' %}">{% trans "My profile" %}</a></li>
-                        {% endif %}
-                        <li><a href="{% url 'faq' %}">{% trans "FAQ" %}</a></li>
-                        {% if request.user.is_authenticated %}
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
-                                                                                                                              ><span class="glyphicon glyphicon-user"></span>&nbsp; {{ request.user|fullname }} <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="{% url "edit-global-preferences" %}">{% trans "Preferences" %}</a></li>
-                                    <li><a href="{% url "list_deposits" %}">{% trans "My deposits" %}</a></li>
-                                    <li><a href="#" onclick="
-$.ajax({ url: 'https://{{ ORCID_BASE_DOMAIN }}/userStatus.json?logUserOut=true', dataType: 'jsonp',
-            success: function(result,status,xhr) {
-                window.location.href = '{% url "account_logout" %}';
-            },
-            error: function (xhr, status, error) {
-                window.location.href = '{% url "account_logout" %}';
-            }
-            })">{% trans "Logout" %}</a></li>
-                                </ul>
-                            </li>
-                        {% else %}
-                        <li><a href="{% url "account_login" %}?next={{ request.get_full_path |urlencode}}">{% trans "Login" %}</a></li>
-                        {% endif %}
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </div>
-        <div id="content">
-            {% if breadcrumbs %}
-                {% include "dissemin/breadcrumbs.html" %}
-            {% endif %}
-            {% block content %}
-            {% endblock %}
-        <div class="push"></div>
-        </div>
-    </div>
-    <div id="footer" class="container">
-      <div id="subfooter" class="row">
-           <div class="col-xs-12 col-sm-4 col-md-3">
-               <ul>
-                   <li><a href="{% url 'faq' %}">{% trans "FAQ" %}</a></li>
-                   <li><a href="https://dev.dissem.in/api.html">{% trans "API" %}</a></li>
-                   <li><a href="{% url 'tos' %}">{% trans "Terms of Service" %}</a></li>
-               </ul>
-           </div>
-           <div class="col-xs-12 col-sm-4 col-md-3">
-               <ul>
-                   <li><a href="http://association.dissem.in/">{% trans "Who are we?" %}</a></li>
-                   <li><a href="http://association.dissem.in/#dons">{% trans "Donate" %}</a></li>
-                   <li><a href="{% url 'partners' %}">{% trans "Partners" %}</a></li>
-               </ul>
-           </div>
-           <div class="col-xs-12 col-sm-4 col-md-3">
-               <ul>
-                   <li><a href="mailto:hello@dissem.in">hello@dissem.in</a></li>
-                   <li><a href="https://twitter.com/disseminOA">@disseminOA</a></li>
-                   <li><a href="https://github.com/wetneb/dissemin">GitHub</a></li>
-               </ul>
-           </div>
-           <div class="clearfix visible-xs"></div>
-           <div class="col-xs-6 col-xs-offset-3 col-sm-4 col-sm-offset-4 col-md-3 col-md-offset-0" id="change-lang-form-div">
-               {% get_current_language as LANGUAGE_CODE %}
-               <form action="{% url 'set_language' %}" method="post" id="change-lang-form" class="form-inline">
-                   {% csrf_token %}
-                    <label for="set-language">{% trans "Change language" %} <i class=" glyphicon glyphicon-globe"></i></label>
-                   <select name="language" id="set-language" class="form-control" onchange="$('#change-lang-form').submit();">
-                       {% get_available_languages as LANGUAGES %}
-                       {% get_language_info_list for LANGUAGES as languages %}
-                       {% for language in languages %}
-                           <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %}
-                                   selected="selected"{% endif %}>{{ language.name_local.title }}</option>
-                       {% endfor %}
-                   </select>
-                   <noscript><input type="submit" class="btn btn-default" value="{% trans "Apply" %}"/></noscript>
-               </form>
-           </div>
-      </div>
-    </div>
-
-    {% if settings.DISPLAY_BETA_RIBBON %}
-    <img style="position:absolute; top:0; left:0; border:0; opacity: 0.8; pointer-events: none;" src="{% static "img/beta-ribbon.png" %}" alt="Beta version" />
-    {% endif %}
-</body>
-{% block footer %}
+{% block opengraph %}
+    <meta name="description" content="{% trans "Dissemin detects papers behind pay-walls and invites their authors to upload them in one click to an open repository." %}">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:creator" content="@disseminOA" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{% block headTitle %}{% endblock %} - Dissemin" />
+    <meta property="og:description" content="{% trans "Dissemin detects papers behind pay-walls and invites their authors to upload them in one click to an open repository." %}" />
+    <meta property="og:url" content="{{ request.get_full_path }}" />
+    <meta property="og:image" content="{% static "favicon/apple-icon-57x57.png" %}" />
 {% endblock %}
-</html>
+
+{% block body %}
+<div id="wrapper">
+    <div id="header">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+                        <span class="sr-only">{% trans "Toggle navigation" %}</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">dissemin</a>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/">{% trans "Home" %}</a></li>
+                    {% if request.user.is_authenticated %}
+                    <li><a href="{% url 'my-profile' %}">{% trans "My profile" %}</a></li>
+                    {% endif %}
+                    <li><a href="{% url 'faq' %}">{% trans "FAQ" %}</a></li>
+                    {% if request.user.is_authenticated %}
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
+                                                                                                                            ><span class="glyphicon glyphicon-user"></span>&nbsp; {{ request.user|fullname }} <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{% url "edit-global-preferences" %}">{% trans "Preferences" %}</a></li>
+                                <li><a href="{% url "list_deposits" %}">{% trans "My deposits" %}</a></li>
+                                <li><a href="#" onclick="
+$.ajax({ url: 'https://{{ ORCID_BASE_DOMAIN }}/userStatus.json?logUserOut=true', dataType: 'jsonp',
+        success: function(result,status,xhr) {
+            window.location.href = '{% url "account_logout" %}';
+        },
+        error: function (xhr, status, error) {
+            window.location.href = '{% url "account_logout" %}';
+        }
+        })">{% trans "Logout" %}</a></li>
+                            </ul>
+                        </li>
+                    {% else %}
+                    <li><a href="{% url "account_login" %}?next={{ request.get_full_path |urlencode}}">{% trans "Login" %}</a></li>
+                    {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div id="content">
+        {% if breadcrumbs %}
+            {% include "dissemin/breadcrumbs.html" %}
+        {% endif %}
+        {% block content %}
+        {% endblock %}
+    <div class="push"></div>
+    </div>
+</div>
+<div id="footer" class="container">
+    <div id="subfooter" class="row">
+        <div class="col-xs-12 col-sm-4 col-md-3">
+            <ul>
+                <li><a href="{% url 'faq' %}">{% trans "FAQ" %}</a></li>
+                <li><a href="https://dev.dissem.in/api.html">{% trans "API" %}</a></li>
+                <li><a href="{% url 'tos' %}">{% trans "Terms of Service" %}</a></li>
+            </ul>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3">
+            <ul>
+                <li><a href="http://association.dissem.in/">{% trans "Who are we?" %}</a></li>
+                <li><a href="http://association.dissem.in/#dons">{% trans "Donate" %}</a></li>
+                <li><a href="{% url 'partners' %}">{% trans "Partners" %}</a></li>
+            </ul>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-3">
+            <ul>
+                <li><a href="mailto:hello@dissem.in">hello@dissem.in</a></li>
+                <li><a href="https://twitter.com/disseminOA">@disseminOA</a></li>
+                <li><a href="https://github.com/wetneb/dissemin">GitHub</a></li>
+            </ul>
+        </div>
+        <div class="clearfix visible-xs"></div>
+        <div class="col-xs-6 col-xs-offset-3 col-sm-4 col-sm-offset-4 col-md-3 col-md-offset-0" id="change-lang-form-div">
+            {% get_current_language as LANGUAGE_CODE %}
+            <form action="{% url 'set_language' %}" method="post" id="change-lang-form" class="form-inline">
+                {% csrf_token %}
+                <label for="set-language">{% trans "Change language" %} <i class=" glyphicon glyphicon-globe"></i></label>
+                <select name="language" id="set-language" class="form-control" onchange="$('#change-lang-form').submit();">
+                    {% get_available_languages as LANGUAGES %}
+                    {% get_language_info_list for LANGUAGES as languages %}
+                    {% for language in languages %}
+                        <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %}
+                                selected="selected"{% endif %}>{{ language.name_local.title }}</option>
+                    {% endfor %}
+                </select>
+                <noscript><input type="submit" class="btn btn-default" value="{% trans "Apply" %}"/></noscript>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% if settings.DISPLAY_BETA_RIBBON %}
+<img style="position:absolute; top:0; left:0; border:0; opacity: 0.8; pointer-events: none;" src="{% static "img/beta-ribbon.png" %}" alt="Beta version" />
+{% endif %}
+{% endblock %}

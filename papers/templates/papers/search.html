@@ -8,9 +8,7 @@
 {% load widget_tweaks %}
 {% load capture_tags %}
 
-{% block headTitle %}
-{{ head_search_description }}
-{% endblock %}
+{% block headTitle %}{{ head_search_description }}{% endblock %}
 
 {% block extra_head %}
 {% include "statistics/headers.html" %}
