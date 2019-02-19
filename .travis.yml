@@ -1,9 +1,3 @@
-#   A basic travis.yml boilerplate for Django projects
-#
-#   The set-up assumes a postgreSQL database.
-#
-# Taken from https://gist.github.com/ndarville/3625246
-
 language: python
 
 python:
@@ -32,16 +26,12 @@ services:
   - redis
   - elasticsearch
 
-
 env:
   global:
       # RoMEO API key
     - secure: "hQg8tso/Qv4zXhP4A2ahKKhFZQSariIvUr+xqzzoTVtuN/9OuzBFjZ1UF8atM5KKGZ47fFMK2wTjbVOWjSyLH/SF3Wy8bX9oHHg1P8bXcsle6O/tfa3U/2s0UiYtThEdxp+iyQIr6cjBA0gmB0v/vFrQot91GvjlUbi70Xjfcts="
       # Zenodo Sandbox API key
     - secure: "KjRrTKrNyhv1xVl2UBtJ/qH0uFGItvxw7/pGFfPrcwxD5YAB5daePDaIGe/tlVy+lrQi0D9x1CA8MB2vm+Lf4jrfO+3ZHCkmb4ecbumPV7DxEbgFsralBx65PRRVUiDW1Oy0RyigxXNNdtNLvTVr1PYrZYD407HZnP6LrJP0ONM="
-      # Gitbot l10n key (for translation notifications)
-    - secure: "qm+WAH7GpYIjid+q5tVnRgpiIwRmo7C8ou8GAeHJwTxkcmX8+YsYhuuacXO5mW/gcvjb9UNVCDkIKqjIsxJdmC0JovXJJ2dG2g1P39FfOCsF1+FpOqxdjBxdlJCoPb+Wmx7qk5+n+ZgqArgDPFwTWAPqsfshVPLplvaIYfA6H2s="
-
 
 before_install:
   - export DJANGO_SETTINGS_MODULE=dissemin.settings
@@ -65,19 +55,13 @@ before_script:
 
 script:
   - coverage run --source=dissemin,papers,backend,deposit,upload,statistics --omit="*/migrations/*,dissemin/settings/*" -m py.test 
+  - python manage.py compilemessages
 
 after_success:
   - coveralls
 
-notifications:
-  irc:
-    channels:
-      - "ulminfo.fr#dissemin"
-    on_success: never
-    on_failure: never
-
-# cache:
-#  directories:
-#  - $HOME/virtualenv/python2.7_with_system_site_packages/lib
-#  - $HOME/virtualenv/python2.7_with_system_site_packages/bin
+cache:
+  directories:
+  - $HOME/virtualenv/python3.4.6/lib/python3.4/site-packages
+  - $HOME/virtualenv/python3.4.6/lib/python3.4/site-packages
 
