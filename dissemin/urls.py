@@ -106,7 +106,7 @@ urlpatterns = [
     path('accounts/logout/', logoutView, name='account_logout'),
     path('accounts/social/', include('allauth.socialaccount.urls')),
     # JavaScript i18n
-    path('jsi18n/', JavaScriptCatalog, js_info_dict, name='javascript-catalog'),
+    path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
     path('lang/', include('django.conf.urls.i18n'), name='set_language'),
     # Remove this in production
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT
@@ -127,5 +127,5 @@ for provider in providers.registry.get_list():
 if 'debug_toolbar' in settings.INSTALLED_APPS:
     import debug_toolbar
     urlpatterns.append(
-      path(r'^__debug__/', include(debug_toolbar.urls)))
+      path('__debug__/', include(debug_toolbar.urls)))
 
