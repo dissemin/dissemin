@@ -67,14 +67,14 @@ $(function(){
 {% if paper.has_many_authors %}
         {% include "papers/authorList.html" with author_list=paper.interesting_authors %}
          {% with paper.nb_remaining_authors as nb_remaining_authors %}
-            {% blocktrans %}
+            {% blocktrans trimmed %}
             and <a href="#" id="show_all_authors">{{ nb_remaining_authors }} other authors</a>
             {% endblocktrans %}
         {% endwith %}
     </div>
     <div id="authorFull">
         {% with paper.author_count as nb_authors %}
-            {% blocktrans %}
+            {% blocktrans trimmed %}
             All {{ nb_authors }} authors (<a href="#" id="show_less_authors">show less</a>):<br />
             {% endblocktrans %}
         {% endwith %}
