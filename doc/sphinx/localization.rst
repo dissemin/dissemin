@@ -8,11 +8,25 @@ Translations are hosted at `TranslateWiki
 interface for translations and statistics.
 
 We use `Django's standard localization system <https://docs.djangoproject.com/en/1.11/topics/i18n/>`_, based on i18n.
-To generate the PO file, let's say for french, run::
+This lets us translate strings in various places:
 
-    python manage.py makemessages -l fr
+* in Python code, use ``_("some translatable text")``, where ``_`` is imported by ``from django.utils.translation import ugettext_lazy as _``
+* in Javascript code, use ``gettext("some translatable text")``
+* in HTML templates, use either ``{% trans "some translatable text" %}`` for inline translations, or, for longer blocks of text::
 
-Once you haved filled the translations in ``locale/fr/LC_MESSAGES/django.po``,
+     {% blocktrans trimmed %}
+     My longer translatable text.
+     {% endblocktrans %}
+
+
+  The ``trimmed`` argument is important as it ensures leading and trailing whitespace and newlines are not included in the translation strings (they mess up the translation system).
+
+To generate the PO files, run::
+
+    python manage.py makemessages --keep-pot --ignore doc
+
+This will generate a PO template `locale/django.pot` that can be used to create translated files for each language,
+such as ``locale/fr/LC_MESSAGES/django.po``. You can then
 compile them so that they can be displayed on the website::
 
     python manage.py compilemessages

@@ -13,7 +13,7 @@
         {% if request.user.is_authenticated %}
             <script type="text/javascript">window.location.replace('/');</script>
         {% endif %}
-        <p>{% blocktrans %}
+        <p>{% blocktrans trimmed %}
             Authentication has failed. <a href="/">Go back to the login page.</a>
            {% endblocktrans %}
         </p>

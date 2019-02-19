@@ -213,10 +213,7 @@ class ResearcherView(PaperSearchView):
                     orcid = validate_orcid(kwargs['orcid'])
                     researcher = Researcher.get_or_create_by_orcid(orcid)
                     if not researcher:
-                        raise Http404(_("""
-                            Invalid ORCID profile.
-                            Please make sure it includes a public name.
-                            """))
+                        raise Http404(_("Invalid ORCID profile. Please make sure it includes a public name."))
                     researcher.init_from_orcid()
                 except MetadataSourceException:
                     raise Http404(_('Invalid ORCID profile.'))
