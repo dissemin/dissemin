@@ -76,7 +76,7 @@ class RomeoAPI(object):
     
         # Parse it
         try:
-            parser = ET.XMLParser(encoding='utf-8')
+            parser = ET.XMLParser(encoding='ISO-8859-1')
             root = ET.parse(BytesIO(response), parser)
         except ET.ParseError as e:
             raise MetadataSourceException('RoMEO returned an invalid XML response.\n' +

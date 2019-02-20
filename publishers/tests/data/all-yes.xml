@@ -1,0 +1,990 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE romeoapi SYSTEM "http://www.sherpa.ac.uk/romeo/romeoapi293.dtd">
+<romeoapi version="2.9.9">
+  <header>
+    <parameters>
+      <parameter source="specified">
+        <parametername>all</parametername>
+        <parametervalue>yes</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>showfunder</parametername>
+        <parametervalue>none</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>fIDnum</parametername>
+        <parametervalue>|</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>la</parametername>
+        <parametervalue>en</parametervalue>
+      </parameter>
+    </parameters>
+    <numhits>3008</numhits>
+    <apicontrol>all</apicontrol>
+    <outcome>publisherFound</outcome>
+    <message />
+    <licence>SHERPA/RoMEO data is available for re-use under a Creative Commons Attribution-Non-Commercial-Share Alike 2.5 licence. For more details, please see the 'conditions for re-use' at the &lt;licenceurl /&gt;, and linked-to from the SHERPA/RoMEO home page.</licence>
+    <licenceurl>http://www.sherpa.ac.uk/romeoreuse.html</licenceurl>
+    <disclaimer>All SHERPA/RoMEO information is correct to the best of our knowledge but should not be relied upon for legal advice. SHERPA cannot be held responsible for the re-use of RoMEO data, or for alternative interpretations which are derived from this information.</disclaimer>
+    <timestamp>20-Feb-2019:03:17:22</timestamp>
+  </header>
+  <journals />
+  <publishers>
+    <publisher id="3031">
+      <name>&amp;#1040;&amp;#1041;&amp;#1042;-&amp;#1087;&amp;#1088;&amp;#1077;&amp;#1089;&amp;#1089;</name>
+      <alias>ABV-press</alias>
+      <homeurl>http://abvpress.ru/</homeurl>
+      <preprints>
+        <prearchiving>can</prearchiving>
+        <prerestrictions />
+      </preprints>
+      <postprints>
+        <postarchiving>can</postarchiving>
+        <postrestrictions />
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>can</pdfarchiving>
+        <pdfrestrictions />
+      </pdfversion>
+      <conditions>
+        <condition>On author's personal website and institutional repository</condition>
+        <condition>Creative Commons Attribution License 3.0</condition>
+        <condition>Publisher's version/PDF may be used</condition>
+        <condition>Authors retain copyright</condition>
+      </conditions>
+      <mandates />
+      <paidaccess>
+        <paidaccessurl />
+        <paidaccessname />
+        <paidaccessnotes />
+      </paidaccess>
+      <copyrightlinks>
+        <copyrightlink>
+          <copyrightlinktext>Policy</copyrightlinktext>
+          <copyrightlinkurl>http://agx.abvpress.ru/jour/about/submissions#copyrightNotice</copyrightlinkurl>
+        </copyrightlink>
+      </copyrightlinks>
+      <romeocolour>green</romeocolour>
+      <dateadded>2017-06-16 11:47:44</dateadded>
+      <dateupdated>2017-06-16 11:47:44</dateupdated>
+    </publisher>
+    <publisher id="2014">
+      <name>&amp;#268;eská pedagogická spole&amp;#269;nost</name>
+      <alias>Czech Pedagogical Society</alias>
+      <homeurl>http://www.cpds.cz/</homeurl>
+      <preprints>
+        <prearchiving>cannot</prearchiving>
+        <prerestrictions />
+      </preprints>
+      <postprints>
+        <postarchiving>can</postarchiving>
+        <postrestrictions />
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>can</pdfarchiving>
+        <pdfrestrictions />
+      </pdfversion>
+      <conditions>
+        <condition>On open access repositories</condition>
+        <condition>Creative Commons Attribution Non-Commercial No Derivatives License</condition>
+        <condition>Published source must be acknowledged</condition>
+        <condition>On a non-profit server</condition>
+        <condition>Publisher's version/PDF may be used (preferred)</condition>
+        <condition>Publisher last contacted on 30/05/2014</condition>
+        <condition>All titles are open access journals</condition>
+      </conditions>
+      <mandates />
+      <paidaccess>
+        <paidaccessurl />
+        <paidaccessname />
+        <paidaccessnotes />
+      </paidaccess>
+      <copyrightlinks>
+        <copyrightlink>
+          <copyrightlinktext>Policy</copyrightlinktext>
+          <copyrightlinkurl>http://www.ped.muni.cz/pedor/index.php?option=com_content&amp;view=article&amp;id=119</copyrightlinkurl>
+        </copyrightlink>
+      </copyrightlinks>
+      <romeocolour>blue</romeocolour>
+      <dateadded>2014-07-24 11:17:17</dateadded>
+      <dateupdated>2015-07-30 13:55:28</dateupdated>
+    </publisher>
+    <publisher id="2425">
+      <name>&amp;#268;eské vysoké u&amp;#269;ení technické v Praze</name>
+      <alias>Czech Technical University in Prague</alias>
+      <homeurl>http://intranet.cvut.cz/</homeurl>
+      <preprints>
+        <prearchiving>can</prearchiving>
+        <prerestrictions />
+      </preprints>
+      <postprints>
+        <postarchiving>can</postarchiving>
+        <postrestrictions />
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>can</pdfarchiving>
+        <pdfrestrictions />
+      </pdfversion>
+      <conditions>
+        <condition>Publisher's version/PDF may be used</condition>
+        <condition>On author's personal web site and institutional repository</condition>
+        <condition>Published source must be acknowledged</condition>
+        <condition>Creative Commons Attribution License</condition>
+        <condition>Publisher last reviewed on 22/07/2015</condition>
+        <condition>All titles are open access journals</condition>
+      </conditions>
+      <mandates />
+      <paidaccess>
+        <paidaccessurl />
+        <paidaccessname />
+        <paidaccessnotes />
+      </paidaccess>
+      <copyrightlinks>
+        <copyrightlink>
+          <copyrightlinktext>Policy</copyrightlinktext>
+          <copyrightlinkurl>https://ojs.cvut.cz/ojs/index.php/gi/about/submissions#copyrightNotice</copyrightlinkurl>
+        </copyrightlink>
+      </copyrightlinks>
+      <romeocolour>green</romeocolour>
+      <dateadded>2015-07-22 16:07:04</dateadded>
+      <dateupdated>2015-07-27 09:06:34</dateupdated>
+    </publisher>
+    <publisher id="2489">
+      <name>&amp;#350;tefan cel Mare University of Suceava</name>
+      <alias />
+      <homeurl>http://www.usv.ro/index.php/en</homeurl>
+      <preprints>
+        <prearchiving>cannot</prearchiving>
+        <prerestrictions />
+      </preprints>
+      <postprints>
+        <postarchiving>restricted</postarchiving>
+        <postrestrictions>
+          <postrestriction>&lt;num&gt;6&lt;/num&gt; &lt;period units=&quot;month&quot;&gt;months&lt;/period&gt; embargo</postrestriction>
+        </postrestrictions>
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>cannot</pdfarchiving>
+        <pdfrestrictions />
+      </pdfversion>
+      <conditions>
+        <condition>Publisher's version/PDF cannot be used</condition>
+        <condition>On author's personal website or employer's website only</condition>
+        <condition>Publisher copyright and source must be acknowledged with a DOI link</condition>
+        <condition>Publisher last reviewed on 03/08/2015</condition>
+      </conditions>
+      <mandates />
+      <paidaccess>
+        <paidaccessurl />
+        <paidaccessname />
+        <paidaccessnotes />
+      </paidaccess>
+      <copyrightlinks>
+        <copyrightlink>
+          <copyrightlinktext>Policy</copyrightlinktext>
+          <copyrightlinkurl>http://www.aece.ro/files/copyright_transfer_form.pdf</copyrightlinkurl>
+        </copyrightlink>
+      </copyrightlinks>
+      <romeocolour>white</romeocolour>
+      <dateadded>2015-08-13 10:11:37</dateadded>
+      <dateupdated>2015-09-28 14:45:26</dateupdated>
+    </publisher>
+    <publisher id="2201">
+      <name>&amp;#917;&amp;#952;&amp;#957;&amp;#953;&amp;#954;&amp;#972; &amp;#922;&amp;#941;&amp;#957;&amp;#964;&amp;#961;&amp;#959; &amp;#922;&amp;#959;&amp;#953;&amp;#957;&amp;#969;&amp;#957;&amp;#953;&amp;#954;&amp;#974;&amp;#957; &amp;#917;&amp;#961;&amp;#949;&amp;#965;&amp;#957;&amp;#974;&amp;#957;</name>
+      <alias>Greek National Center of Social Research</alias>
+      <homeurl>http://www.ekke.gr/</homeurl>
+      <preprints>
+        <prearchiving>can</prearchiving>
+        <prerestrictions />
+      </preprints>
+      <postprints>
+        <postarchiving>can</postarchiving>
+        <postrestrictions />
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>can</pdfarchiving>
+        <pdfrestrictions />
+      </pdfversion>
+      <conditions>
+        <condition>Author's pre-print and author's post-print on author's personal website or institutional repository</condition>
+        <condition>Publisher's version/PDF may be used</condition>
+        <condition>Publisher's version/PDF on institutional repository or subject repository</condition>
+        <condition>Creative Commons Attribution Non-Commercial Share Alike 3.0 License</condition>
+        <condition>All titles are open access journals</condition>
+        <condition>Publisher last contacted on 19/11/2014</condition>
+      </conditions>
+      <mandates />
+      <paidaccess>
+        <paidaccessurl />
+        <paidaccessname />
+        <paidaccessnotes />
+      </paidaccess>
+      <copyrightlinks>
+        <copyrightlink>
+          <copyrightlinktext>Policy</copyrightlinktext>
+          <copyrightlinkurl>http://www.grsr.gr/index.php/ekke/about/submissions#copyrightNotice</copyrightlinkurl>
+        </copyrightlink>
+      </copyrightlinks>
+      <romeocolour>green</romeocolour>
+      <dateadded>2015-01-08 09:49:31</dateadded>
+      <dateupdated>2015-01-08 09:49:31</dateupdated>
+    </publisher>
+    <publisher id="2010"  parentid="1000">
+      <name>Philosophy Documentation Center</name>
+      <alias>Res Philosophica</alias>
+      <homeurl>http://www.pdcnet.org/</homeurl>
+      <preprints>
+        <prearchiving>can</prearchiving>
+        <prerestrictions />
+      </preprints>
+      <postprints>
+        <postarchiving>restricted</postarchiving>
+        <postrestrictions>
+          <postrestriction>&lt;num&gt;12&lt;/num&gt; &lt;period units=&quot;month&quot;&gt;months&lt;/period&gt; embargo</postrestriction>
+        </postrestrictions>
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>cannot</pdfarchiving>
+        <pdfrestrictions />
+      </pdfversion>
+      <conditions>
+        <condition>On author's personal website</condition>
+        <condition>Publisher's version/PDF cannot be used</condition>
+        <condition>Publisher last contacted on 23/07/2014</condition>
+        <condition>This policy is an exception to the default policies of ''</condition>
+      </conditions>
+      <mandates />
+      <paidaccess>
+        <paidaccessurl />
+        <paidaccessname />
+        <paidaccessnotes />
+      </paidaccess>
+      <copyrightlinks>
+        <copyrightlink>
+          <copyrightlinktext>Policy</copyrightlinktext>
+          <copyrightlinkurl>http://www.resphilosophica.org/policies/copyright/</copyrightlinkurl>
+        </copyrightlink>
+      </copyrightlinks>
+      <romeocolour>yellow</romeocolour>
+      <dateadded>2014-07-23 16:24:53</dateadded>
+      <dateupdated>2014-07-23 16:24:53</dateupdated>
+    </publisher>
+    <publisher id="3105"  parentid="100">
+      <name>Hindawi Publishing Corporation</name>
+      <alias>Wiley Hindawi Partnership</alias>
+      <homeurl>https://www.hindawi.com/wiley.hindawi/</homeurl>
+      <preprints>
+        <prearchiving>can</prearchiving>
+        <prerestrictions />
+      </preprints>
+      <postprints>
+        <postarchiving>can</postarchiving>
+        <postrestrictions />
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>can</pdfarchiving>
+        <pdfrestrictions />
+      </pdfversion>
+      <conditions>
+        <condition>Publisher's version/PDF may be used</condition>
+        <condition>Creative Commons Attribution License</condition>
+        <condition>Eligible UK authors may deposit in &lt;a href=&quot;http://opendepot.org/&quot; target=&quot;_blank&quot;&gt;OpenDepot&lt;/a&gt;</condition>
+        <condition>All titles are open access journals</condition>
+        <condition>Prior to January 2017, these titles may have used a different policy, please see Wiley for details</condition>
+        <condition>This policy is an exception to the default policies of ''</condition>
+      </conditions>
+      <mandates />
+      <paidaccess>
+        <paidaccessurl />
+        <paidaccessname />
+        <paidaccessnotes />
+      </paidaccess>
+      <copyrightlinks>
+        <copyrightlink>
+          <copyrightlinktext>Example Policy</copyrightlinktext>
+          <copyrightlinkurl>http://www.hindawi.com/journals/apm/guidelines/</copyrightlinkurl>
+        </copyrightlink>
+      </copyrightlinks>
+      <romeocolour>green</romeocolour>
+      <dateadded>2017-10-04 09:49:34</dateadded>
+      <dateupdated>2017-10-04 09:50:45</dateupdated>
+    </publisher>
+    <publisher id="1445"  parentid="1032">
+      <name>Wiley Open Access</name>
+      <alias>Creative Commons Attribution Non-Commercial</alias>
+      <homeurl>http://www.wileyopenaccess.com/view/index.html</homeurl>
+      <preprints>
+        <prearchiving>can</prearchiving>
+        <prerestrictions />
+      </preprints>
+      <postprints>
+        <postarchiving>can</postarchiving>
+        <postrestrictions />
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>can</pdfarchiving>
+        <pdfrestrictions />
+      </pdfversion>
+      <conditions>
+        <condition>Creative Commons Attribution Non-Commercial License</condition>
+        <condition>Authors retain copyright</condition>
+        <condition>On open access repositories and any website</condition>
+        <condition>Hosting site must incorporate publisher-supplied amendments or retractions issued</condition>
+        <condition>Published source must be acknowledged including article DOI</condition>
+        <condition>Non-commercial</condition>
+        <condition>Publisher's version/PDF may be used</condition>
+        <condition>Research Councils UK and Wellcome Trust funded authors may use a Creative Commons Attribution License</condition>
+        <condition>Publisher automatically deposits in PubMed Central on behalf of authors</condition>
+        <condition>All titles are open access journals</condition>
+        <condition>This policy is an exception to the default policies of ''</condition>
+      </conditions>
+      <mandates />
+      <paidaccess>
+        <paidaccessurl />
+        <paidaccessname />
+        <paidaccessnotes />
+      </paidaccess>
+      <copyrightlinks>
+        <copyrightlink>
+          <copyrightlinktext>Example Policy</copyrightlinktext>
+          <copyrightlinkurl>http://onlinelibrary.wiley.com/journal/10.1002/%28ISSN%292045-8827/homepage/open_access_license_and_copyright.htm</copyrightlinkurl>
+        </copyrightlink>
+        <copyrightlink>
+          <copyrightlinktext>Copyright &amp; License</copyrightlinktext>
+          <copyrightlinkurl>http://www.wileyopenaccess.com/details/content/12f25db4c87/Copyright--License.html</copyrightlinkurl>
+        </copyrightlink>
+      </copyrightlinks>
+      <romeocolour>green</romeocolour>
+      <dateadded>2013-02-25 10:09:57</dateadded>
+      <dateupdated>2016-10-27 09:18:53</dateupdated>
+    </publisher>
+    <publisher id="1761"  parentid="1032">
+      <name>Wiley Open Access</name>
+      <alias>Creative Commons Attribution Non-Commercial No Derivatives</alias>
+      <homeurl>http://www.wileyopenaccess.com/view/index.html</homeurl>
+      <preprints>
+        <prearchiving>can</prearchiving>
+        <prerestrictions />
+      </preprints>
+      <postprints>
+        <postarchiving>can</postarchiving>
+        <postrestrictions />
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>can</pdfarchiving>
+        <pdfrestrictions />
+      </pdfversion>
+      <conditions>
+        <condition>Creative Commons Attribution Non-Commercial No Derivatives License</condition>
+        <condition>Authors retain copyright</condition>
+        <condition>On open access repositories and any website</condition>
+        <condition>Hosting site must incorporate publisher-supplied amendments or retractions issued</condition>
+        <condition>Published source must be acknowledged including article DOI</condition>
+        <condition>Research Councils UK and Wellcome Trust funded authors may use a Creative Commons Attribution License</condition>
+        <condition>Non-commercial</condition>
+        <condition>Publisher automatically deposits in PubMed Central on behalf of authors</condition>
+        <condition>Publisher's version/PDF may be used</condition>
+        <condition>All titles are open access journals</condition>
+        <condition>This policy is an exception to the default policies of ''</condition>
+      </conditions>
+      <mandates />
+      <paidaccess>
+        <paidaccessurl />
+        <paidaccessname />
+        <paidaccessnotes />
+      </paidaccess>
+      <copyrightlinks>
+        <copyrightlink>
+          <copyrightlinktext>Example Policy</copyrightlinktext>
+          <copyrightlinkurl>http://onlinelibrary.wiley.com/journal/10.1002/%28ISSN%292045-8827/homepage/open_access_license_and_copyright.htm</copyrightlinkurl>
+        </copyrightlink>
+        <copyrightlink>
+          <copyrightlinktext>Copyright &amp; License</copyrightlinktext>
+          <copyrightlinkurl>http://www.wileyopenaccess.com/details/content/12f25db4c87/Copyright--License.html</copyrightlinkurl>
+        </copyrightlink>
+      </copyrightlinks>
+      <romeocolour>green</romeocolour>
+      <dateadded>2014-01-09 10:08:45</dateadded>
+      <dateupdated>2017-11-21 13:35:14</dateupdated>
+    </publisher>
+    <publisher id="1760"  parentid="1032">
+      <name>Wiley Open Access</name>
+      <alias>Various Creative Commons Licenses</alias>
+      <homeurl>http://www.wileyopenaccess.com/view/index.html</homeurl>
+      <preprints>
+        <prearchiving>unclear</prearchiving>
+        <prerestrictions />
+      </preprints>
+      <postprints>
+        <postarchiving>can</postarchiving>
+        <postrestrictions />
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>can</pdfarchiving>
+        <pdfrestrictions />
+      </pdfversion>
+      <conditions>
+        <condition>Authors retain copyright</condition>
+        <condition>Creative Commons Attribution Non-Commercial License or Creative Commons Attribution Non-Commercial No Derivatives License available</condition>
+        <condition>On repositories and websites</condition>
+        <condition>Hosting site must incorporate publisher-supplied amendments or retractions issued</condition>
+        <condition>Published source must be acknowledged including article DOI</condition>
+        <condition>Research Councils UK and Wellcome Trust funded authors may use a Creative Commons Attribution License</condition>
+        <condition>Publisher's version/PDF may be used</condition>
+        <condition>Publisher automatically deposits in PubMed Central on behalf of authors</condition>
+        <condition>All titles are open access journals</condition>
+        <condition>This policy is an exception to the default policies of ''</condition>
+      </conditions>
+      <mandates />
+      <paidaccess>
+        <paidaccessurl />
+        <paidaccessname />
+        <paidaccessnotes />
+      </paidaccess>
+      <copyrightlinks>
+        <copyrightlink>
+          <copyrightlinktext>Example Policy</copyrightlinktext>
+          <copyrightlinkurl>http://onlinelibrary.wiley.com/journal/10.1002/%28ISSN%292045-8827/homepage/open_access_license_and_copyright.htm</copyrightlinkurl>
+        </copyrightlink>
+        <copyrightlink>
+          <copyrightlinktext>Copyright &amp; License</copyrightlinktext>
+          <copyrightlinkurl>http://www.wileyopenaccess.com/details/content/12f25db4c87/Copyright--License.html</copyrightlinkurl>
+        </copyrightlink>
+      </copyrightlinks>
+      <romeocolour>blue</romeocolour>
+      <dateadded>2014-01-06 16:23:03</dateadded>
+      <dateupdated>2016-10-27 09:18:37</dateupdated>
+    </publisher>
+    <publisher id="1127"  parentid="1037">
+      <name>Association for Information Science and Technology (ASIS&amp;T)</name>
+      <alias>Bulletin</alias>
+      <homeurl>http://www.asis.org/</homeurl>
+      <preprints>
+        <prearchiving>cannot</prearchiving>
+        <prerestrictions />
+      </preprints>
+      <postprints>
+        <postarchiving>can</postarchiving>
+        <postrestrictions />
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>cannot</pdfarchiving>
+        <pdfrestrictions />
+      </pdfversion>
+      <conditions>
+        <condition>On author's personal website only</condition>
+        <condition>Pre-print must not be updated with Post-print</condition>
+        <condition>Publisher's version/PDF cannot be used</condition>
+        <condition>Must link to article on publisher site</condition>
+        <condition>Set statements to accompany authors post-print, both before and after publication (see policy).</condition>
+        <condition>This policy is an exception to the default policies of ''</condition>
+      </conditions>
+      <mandates />
+      <paidaccess>
+        <paidaccessurl />
+        <paidaccessname />
+        <paidaccessnotes />
+      </paidaccess>
+      <copyrightlinks>
+        <copyrightlink>
+          <copyrightlinktext>Bulletin of the ASIS&amp;T Policy</copyrightlinktext>
+          <copyrightlinkurl>http://www.asis.org/Bulletin/bulletinpermissionslip.pdf</copyrightlinkurl>
+        </copyrightlink>
+      </copyrightlinks>
+      <romeocolour>blue</romeocolour>
+      <dateadded>2011-11-17 14:40:44</dateadded>
+      <dateupdated>2011-11-17 14:40:44</dateupdated>
+    </publisher>
+    <publisher id="1128"  parentid="1037">
+      <name>Association for Information Science and Technology (ASIS&amp;T)</name>
+      <alias>JASIS&amp;T</alias>
+      <homeurl>http://www.asis.org/</homeurl>
+      <preprints>
+        <prearchiving>can</prearchiving>
+        <prerestrictions />
+      </preprints>
+      <postprints>
+        <postarchiving>can</postarchiving>
+        <postrestrictions />
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>cannot</pdfarchiving>
+        <pdfrestrictions />
+      </pdfversion>
+      <conditions>
+        <condition>On author's personal website or institutional repository</condition>
+        <condition>Pre-print must not be updated with Post-print</condition>
+        <condition>Publisher's version/PDF cannot be used</condition>
+        <condition>Must link to article on publisher site</condition>
+        <condition>Set statements to accompany authors post-print, both before and after publication (see policy).</condition>
+        <condition>This policy is an exception to the default policies of ''</condition>
+      </conditions>
+      <mandates />
+      <paidaccess>
+        <paidaccessurl>http://olabout.wiley.com/WileyCDA/Section/id-406241.html#OnlineOpen_Terms</paidaccessurl>
+        <paidaccessname>Wiley OnlineOpen</paidaccessname>
+        <paidaccessnotes />
+      </paidaccess>
+      <copyrightlinks>
+        <copyrightlink>
+          <copyrightlinktext>Journal of the ASIS&amp;T Policy</copyrightlinktext>
+          <copyrightlinkurl>http://onlinelibrary.wiley.com/journal/10.1002/%28ISSN%291532-2890/homepage/ForAuthors.html</copyrightlinkurl>
+        </copyrightlink>
+      </copyrightlinks>
+      <romeocolour>green</romeocolour>
+      <dateadded>2011-11-17 14:41:48</dateadded>
+      <dateupdated>2015-03-13 12:14:09</dateupdated>
+    </publisher>
+    <publisher id="1644"  parentid="1047">
+      <name>University of Arizona</name>
+      <alias>Creative Commons Attribution Non-Commercial Share Alike</alias>
+      <homeurl>https://journals.uair.arizona.edu/index.php/</homeurl>
+      <preprints>
+        <prearchiving>unclear</prearchiving>
+        <prerestrictions />
+      </preprints>
+      <postprints>
+        <postarchiving>can</postarchiving>
+        <postrestrictions />
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>unknown</pdfarchiving>
+        <pdfrestrictions />
+      </pdfversion>
+      <conditions>
+        <condition>Creative Commons Attribution Non-Commercial Share Alike License</condition>
+        <condition>Authors retain copyright</condition>
+        <condition>Published source must be acknowledged</condition>
+        <condition>On a non-profit server</condition>
+        <condition>Applies to Issues and Trends in Educational Technology</condition>
+        <condition>All titles are open access journals</condition>
+        <condition>This policy is an exception to the default policies of ''</condition>
+      </conditions>
+      <mandates />
+      <paidaccess>
+        <paidaccessurl />
+        <paidaccessname />
+        <paidaccessnotes />
+      </paidaccess>
+      <copyrightlinks>
+        <copyrightlink>
+          <copyrightlinktext>Policy</copyrightlinktext>
+          <copyrightlinkurl>https://journals.uair.arizona.edu/index.php/itet/about/submissions#copyrightNotice</copyrightlinkurl>
+        </copyrightlink>
+      </copyrightlinks>
+      <romeocolour>blue</romeocolour>
+      <dateadded>2013-09-09 14:58:23</dateadded>
+      <dateupdated>2013-09-09 14:58:23</dateupdated>
+    </publisher>
+    <publisher id="1937"  parentid="1047">
+      <name>University of Arizona</name>
+      <alias>Radiocarbon</alias>
+      <homeurl>https://journals.uair.arizona.edu/index.php/</homeurl>
+      <preprints>
+        <prearchiving>can</prearchiving>
+        <prerestrictions />
+      </preprints>
+      <postprints>
+        <postarchiving>can</postarchiving>
+        <postrestrictions />
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>restricted</pdfarchiving>
+        <pdfrestrictions />
+      </pdfversion>
+      <conditions>
+        <condition>On author's personal website or institutional repository</condition>
+        <condition>Publisher's version/PDF may be used after &lt;num&gt;12&lt;/num&gt; &lt;period units=&quot;month&quot;&gt;months&lt;/period&gt; embargo</condition>
+        <condition>Authors retain copyright</condition>
+        <condition>Published source must be acknowledged</condition>
+        <condition>Creative Commons Attribution License after &lt;num&gt;12&lt;/num&gt; &lt;period units=&quot;month&quot;&gt;months&lt;/period&gt; embargo</condition>
+        <condition>Reviewed on 02/02/2014</condition>
+        <condition>This policy is an exception to the default policies of ''</condition>
+      </conditions>
+      <mandates />
+      <paidaccess>
+        <paidaccessurl />
+        <paidaccessname />
+        <paidaccessnotes />
+      </paidaccess>
+      <copyrightlinks>
+        <copyrightlink>
+          <copyrightlinktext>Policy</copyrightlinktext>
+          <copyrightlinkurl>https://journals.uair.arizona.edu/index.php/radiocarbon/about/submissions#copyrightNotice</copyrightlinkurl>
+        </copyrightlink>
+      </copyrightlinks>
+      <romeocolour>green</romeocolour>
+      <dateadded>2014-05-23 15:03:01</dateadded>
+      <dateupdated>2014-06-03 09:16:02</dateupdated>
+    </publisher>
+    <publisher id="2951"  parentid="105">
+      <name>Geological Society of America</name>
+      <alias>GSA Today</alias>
+      <homeurl>http://www.geosociety.org/GSA/Publications/GSA_Today/GSA/GSAToday/home.aspx</homeurl>
+      <preprints>
+        <prearchiving>can</prearchiving>
+        <prerestrictions />
+      </preprints>
+      <postprints>
+        <postarchiving>can</postarchiving>
+        <postrestrictions />
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>can</pdfarchiving>
+        <pdfrestrictions />
+      </pdfversion>
+      <conditions>
+        <condition>On institutional repository</condition>
+        <condition>Creative Commons Attribution Non-Commercial License</condition>
+        <condition>Published source must be acknowledged</condition>
+        <condition>Publisher's version/PDF may be used</condition>
+        <condition>All titles are open access journals</condition>
+        <condition>Publisher last contacted on 02/02/2017</condition>
+        <condition>This policy is an exception to the default policies of ''</condition>
+      </conditions>
+      <mandates />
+      <paidaccess>
+        <paidaccessurl />
+        <paidaccessname />
+        <paidaccessnotes />
+      </paidaccess>
+      <copyrightlinks>
+        <copyrightlink>
+          <copyrightlinktext>Policy</copyrightlinktext>
+          <copyrightlinkurl>http://www.geosociety.org/GSA/GSAToday/Author_Info/Home.aspx</copyrightlinkurl>
+        </copyrightlink>
+      </copyrightlinks>
+      <romeocolour>green</romeocolour>
+      <dateadded>2017-02-06 13:40:40</dateadded>
+      <dateupdated>2019-02-14 14:05:19</dateupdated>
+    </publisher>
+    <publisher id="3221"  parentid="105">
+      <name>Geological Society of America</name>
+      <alias>Open Access</alias>
+      <homeurl>http://www.geosociety.org/</homeurl>
+      <preprints>
+        <prearchiving>unclear</prearchiving>
+        <prerestrictions />
+      </preprints>
+      <postprints>
+        <postarchiving>can</postarchiving>
+        <postrestrictions />
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>can</pdfarchiving>
+        <pdfrestrictions />
+      </pdfversion>
+      <conditions>
+        <condition>Publisher's version/PDF may be used</condition>
+        <condition>On any website</condition>
+        <condition>Creative Commons Attribution License of Creative Commons Attribution Non-Commercial License</condition>
+        <condition>All titles are open access journals</condition>
+        <condition>This policy is an exception to the default policies of ''</condition>
+      </conditions>
+      <mandates />
+      <paidaccess>
+        <paidaccessurl />
+        <paidaccessname />
+        <paidaccessnotes />
+      </paidaccess>
+      <copyrightlinks>
+        <copyrightlink>
+          <copyrightlinktext>Policy</copyrightlinktext>
+          <copyrightlinkurl>http://www.geosociety.org/gsa/pubs/openaccess.aspx</copyrightlinkurl>
+        </copyrightlink>
+      </copyrightlinks>
+      <romeocolour>blue</romeocolour>
+      <dateadded>2018-03-12 16:18:20</dateadded>
+      <dateupdated>2018-03-12 16:18:20</dateupdated>
+    </publisher>
+    <publisher id="1939">
+      <name>1066 Tidsskrift for historie</name>
+      <alias />
+      <homeurl>http://www.universitypress.dk/shop/1066-tidsskrift-for-73c1.html</homeurl>
+      <preprints>
+        <prearchiving>cannot</prearchiving>
+        <prerestrictions />
+      </preprints>
+      <postprints>
+        <postarchiving>cannot</postarchiving>
+        <postrestrictions />
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>cannot</pdfarchiving>
+        <pdfrestrictions />
+      </pdfversion>
+      <conditions>
+        <condition>Publisher's version/PDF cannot be used</condition>
+      </conditions>
+      <mandates />
+      <paidaccess>
+        <paidaccessurl />
+        <paidaccessname />
+        <paidaccessnotes />
+      </paidaccess>
+      <copyrightlinks />
+      <romeocolour>white</romeocolour>
+      <dateadded>2014-05-29 09:09:37</dateadded>
+      <dateupdated>2014-05-29 09:09:37</dateupdated>
+    </publisher>
+    <publisher id="2750"  parentid="1067">
+      <name>Presses de l'Ifpo</name>
+      <alias>Syria</alias>
+      <homeurl>http://www.ifporient.org/node/64</homeurl>
+      <preprints>
+        <prearchiving>can</prearchiving>
+        <prerestrictions />
+      </preprints>
+      <postprints>
+        <postarchiving>restricted</postarchiving>
+        <postrestrictions>
+          <postrestriction>&lt;num&gt;3&lt;/num&gt; &lt;period units=&quot;year&quot;&gt;years&lt;/period&gt; embargo</postrestriction>
+        </postrestrictions>
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>restricted</pdfarchiving>
+        <pdfrestrictions>
+          <pdfrestriction>&lt;num&gt;3&lt;/num&gt; &lt;period units=&quot;year&quot;&gt;years&lt;/period&gt; embargo</pdfrestriction>
+        </pdfrestrictions>
+      </pdfversion>
+      <conditions>
+        <condition>On institutional repository, national repository</condition>
+        <condition>Publisher copyright and source must be acknowledged</condition>
+        <condition>Must link to publisher version</condition>
+        <condition>Publisher's version/PDF may be used</condition>
+        <condition>This policy is an exception to the default policies of ''</condition>
+      </conditions>
+      <mandates />
+      <paidaccess>
+        <paidaccessurl />
+        <paidaccessname />
+        <paidaccessnotes />
+      </paidaccess>
+      <copyrightlinks>
+        <copyrightlink>
+          <copyrightlinktext>Policy</copyrightlinktext>
+          <copyrightlinkurl>http://www.ifporient.org/node/1035</copyrightlinkurl>
+        </copyrightlink>
+      </copyrightlinks>
+      <romeocolour>yellow</romeocolour>
+      <dateadded>2016-03-11 09:43:26</dateadded>
+      <dateupdated>2016-03-11 09:43:26</dateupdated>
+    </publisher>
+    <publisher id="2521"  parentid="107">
+      <name>University of California Press</name>
+      <alias>Collabra</alias>
+      <homeurl>http://www.collabra.org/</homeurl>
+      <preprints>
+        <prearchiving>can</prearchiving>
+        <prerestrictions />
+      </preprints>
+      <postprints>
+        <postarchiving>can</postarchiving>
+        <postrestrictions />
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>can</pdfarchiving>
+        <pdfrestrictions />
+      </pdfversion>
+      <conditions>
+        <condition>On author's personal website and institutional repositories</condition>
+        <condition>Publisher's version/PDF may be used</condition>
+        <condition>Creative Commons Attribution License 4.0</condition>
+        <condition>Authors retain copyright</condition>
+        <condition>All titles are open access journals</condition>
+        <condition>Publisher last contacted on 27/07/2015</condition>
+        <condition>This policy is an exception to the default policies of ''</condition>
+      </conditions>
+      <mandates />
+      <paidaccess>
+        <paidaccessurl />
+        <paidaccessname />
+        <paidaccessnotes />
+      </paidaccess>
+      <copyrightlinks>
+        <copyrightlink>
+          <copyrightlinktext>Policy</copyrightlinktext>
+          <copyrightlinkurl>http://www.collabra.org/about/submissions/</copyrightlinkurl>
+        </copyrightlink>
+      </copyrightlinks>
+      <romeocolour>green</romeocolour>
+      <dateadded>2015-08-17 15:00:46</dateadded>
+      <dateupdated>2017-02-21 10:00:51</dateupdated>
+    </publisher>
+    <publisher id="2306"  parentid="108">
+      <name>Optical Society of America</name>
+      <alias>No Paid Open Access</alias>
+      <homeurl>http://www.osa.org/</homeurl>
+      <preprints>
+        <prearchiving>can</prearchiving>
+        <prerestrictions />
+      </preprints>
+      <postprints>
+        <postarchiving>can</postarchiving>
+        <postrestrictions />
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>cannot</pdfarchiving>
+        <pdfrestrictions />
+      </pdfversion>
+      <conditions>
+        <condition>On author's personal website, institutional website or e-print servers, including in arXiv</condition>
+        <condition>Non-Commercial</condition>
+        <condition>Publisher copyright and source must be acknowledged with set statement (see policy)</condition>
+        <condition>Publisher automatically deposits in PubMed Central</condition>
+        <condition>Must link to publisher version</condition>
+        <condition>Authors may comply with government funding agency requirements, after &lt;num&gt;12&lt;/num&gt; &lt;period units=&quot;month&quot;&gt;months&lt;/period&gt; embargo</condition>
+        <condition>This policy is an exception to the default policies of ''</condition>
+      </conditions>
+      <mandates />
+      <paidaccess>
+        <paidaccessurl />
+        <paidaccessname />
+        <paidaccessnotes />
+      </paidaccess>
+      <copyrightlinks>
+        <copyrightlink>
+          <copyrightlinktext>Posting Policy</copyrightlinktext>
+          <copyrightlinkurl>https://www.osapublishing.org/submit/review/copyright_permissions.cfm#posting</copyrightlinkurl>
+        </copyrightlink>
+        <copyrightlink>
+          <copyrightlinktext>Copyright Transfer Agreement</copyrightlinktext>
+          <copyrightlinkurl>https://www.osapublishing.org/submit/forms/copyxfer.pdf</copyrightlinkurl>
+        </copyrightlink>
+      </copyrightlinks>
+      <romeocolour>green</romeocolour>
+      <dateadded>2015-06-10 10:47:50</dateadded>
+      <dateupdated>2015-06-11 09:20:50</dateupdated>
+    </publisher>
+    <publisher id="2305"  parentid="108">
+      <name>Optical Society of America</name>
+      <alias>Open Access Journals</alias>
+      <homeurl>http://www.osa.org/</homeurl>
+      <preprints>
+        <prearchiving>can</prearchiving>
+        <prerestrictions />
+      </preprints>
+      <postprints>
+        <postarchiving>can</postarchiving>
+        <postrestrictions />
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>can</pdfarchiving>
+        <pdfrestrictions />
+      </pdfversion>
+      <conditions>
+        <condition>On author's personal website, open access repository or arXiv.</condition>
+        <condition>Non-Commercial</condition>
+        <condition>Publisher copyright and source must be acknowledged with set statement (see policy)</condition>
+        <condition>Publisher automatically deposited in PubMed Central</condition>
+        <condition>Must link to publisher version with DOI</condition>
+        <condition>Creative Commons Attribution License available</condition>
+        <condition>Publisher's version/PDF may be used</condition>
+        <condition>All titles are open access journals</condition>
+        <condition>Publisher last reviewed on 05/10/2017</condition>
+        <condition>This policy is an exception to the default policies of ''</condition>
+      </conditions>
+      <mandates />
+      <paidaccess>
+        <paidaccessurl />
+        <paidaccessname />
+        <paidaccessnotes />
+      </paidaccess>
+      <copyrightlinks>
+        <copyrightlink>
+          <copyrightlinktext>Posting Policy</copyrightlinktext>
+          <copyrightlinkurl>https://www.osapublishing.org/submit/review/copyright_permissions.cfm#posting</copyrightlinkurl>
+        </copyrightlink>
+        <copyrightlink>
+          <copyrightlinktext>Copyright Transfer Agreement</copyrightlinktext>
+          <copyrightlinkurl>https://www.osapublishing.org/submit/forms/copyxfer.pdf</copyrightlinkurl>
+        </copyrightlink>
+        <copyrightlink>
+          <copyrightlinktext>Open Access Policy</copyrightlinktext>
+          <copyrightlinkurl>https://www.osapublishing.org/submit/review/open-access-policy-statement.cfm</copyrightlinkurl>
+        </copyrightlink>
+      </copyrightlinks>
+      <romeocolour>green</romeocolour>
+      <dateadded>2015-06-10 10:47:07</dateadded>
+      <dateupdated>2017-10-05 13:42:26</dateupdated>
+    </publisher>
+    <publisher id="2935"  parentid="1133">
+      <name>Amsterdam University Press</name>
+      <alias>Open Access Titles</alias>
+      <homeurl>http://www.aup.nl/</homeurl>
+      <preprints>
+        <prearchiving>can</prearchiving>
+        <prerestrictions />
+      </preprints>
+      <postprints>
+        <postarchiving>can</postarchiving>
+        <postrestrictions />
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>can</pdfarchiving>
+        <pdfrestrictions />
+      </pdfversion>
+      <conditions>
+        <condition>On author's personal website, institutional repositories, Mendeley, Research Gate and Academia.edu</condition>
+        <condition>Creative Commons Attribution Non-Commercial No-Derivative License</condition>
+        <condition>Must link to publisher version with DOI</condition>
+        <condition>Author retains copyright</condition>
+        <condition>Publisher's version/PDF may be used</condition>
+        <condition>All titles are open access journals</condition>
+        <condition>Publisher last contacted on 31/10/2016</condition>
+        <condition>This policy is an exception to the default policies of ''</condition>
+      </conditions>
+      <mandates />
+      <paidaccess>
+        <paidaccessurl />
+        <paidaccessname />
+        <paidaccessnotes />
+      </paidaccess>
+      <copyrightlinks>
+        <copyrightlink>
+          <copyrightlinktext>Policy</copyrightlinktext>
+          <copyrightlinkurl>http://en.aup.nl/en/journals/open-access.html</copyrightlinkurl>
+        </copyrightlink>
+      </copyrightlinks>
+      <romeocolour>green</romeocolour>
+      <dateadded>2016-12-16 10:10:58</dateadded>
+      <dateupdated>2016-12-16 10:10:58</dateupdated>
+    </publisher>
+    <publisher id="1155"  parentid="1154">
+      <name>Laboratório Nacional de Energia e Geologia (LNEG)</name>
+      <alias>Corrosão e Protecção de Materiais</alias>
+      <homeurl>http://www.lneg.pt/</homeurl>
+      <preprints>
+        <prearchiving>cannot</prearchiving>
+        <prerestrictions />
+      </preprints>
+      <postprints>
+        <postarchiving>cannot</postarchiving>
+        <postrestrictions />
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>restricted</pdfarchiving>
+        <pdfrestrictions>
+          <pdfrestriction>&lt;num&gt;6&lt;/num&gt; &lt;period units=&quot;month&quot;&gt;months&lt;/period&gt; embargo</pdfrestriction>
+        </pdfrestrictions>
+      </pdfversion>
+      <conditions>
+        <condition>Publisher's version/PDF must be used</condition>
+        <condition>On Institutional Repositories</condition>
+        <condition>RoMEO information provided by Blimunda Project</condition>
+        <condition>This policy is an exception to the default policies of ''</condition>
+      </conditions>
+      <mandates />
+      <paidaccess>
+        <paidaccessurl />
+        <paidaccessname />
+        <paidaccessnotes />
+      </paidaccess>
+      <copyrightlinks />
+      <romeocolour>white</romeocolour>
+      <dateadded>2011-12-13 15:17:37</dateadded>
+      <dateupdated>2011-12-13 15:17:37</dateupdated>
+    </publisher>
+  </publishers>
+</romeoapi>

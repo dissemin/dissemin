@@ -95,10 +95,8 @@ CROSSREF_MAILTO = 'dev@dissem.in'
 CROSSREF_USER_AGENT = 'Dissemin/0.1 (https://dissem.in/; mailto:dev@dissem.in)'
 
 ### RoMEO proxy ###
-# Set this to 'sherpa.ac.uk' if our custom mirror is not up anymore.
-# Otherwise our proxy caches results and is more reliable than the
-# original endpoint.
-ROMEO_API_DOMAIN = 'romeo-cache.dissem.in'
+# Set this to 'romeo-cache.dissem.in' for our own cache of their API
+ROMEO_API_DOMAIN = 'www.sherpa.ac.uk'
 
 ### Paper deposits ###
 # Max size of the PDFs (in bytes)

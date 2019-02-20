@@ -22,6 +22,7 @@ import requests_mock
 from django.test import TestCase
 from publishers.romeo import RomeoAPI
 from publishers.models import Journal
+from publishers.models import Publisher
 from lxml import etree
 
 class RomeoAPIStub(RomeoAPI):
@@ -33,7 +34,7 @@ class RomeoAPIStub(RomeoAPI):
         filename = '_'.join(sorted('{}-{}'.format(key, val.replace(' ','_')) for key, val in search_terms.items())) + '.xml'
         try:
             with open(os.path.join(self.datadir, filename), 'rb') as response_file:
-                parser = etree.XMLParser(encoding='utf-8')
+                parser = etree.XMLParser(encoding='ISO-8859-1')
                 return etree.parse(response_file, parser)
         except IOError:
             xml = super(RomeoAPIStub, self).perform_romeo_query(search_terms)
@@ -78,7 +79,15 @@ class RomeoTest(TestCase):
 
     def test_fetch_publisher(self):
         self.assertEqual(self.api.fetch_publisher(None), None)
-        # TODO: more tests!
+        self.assertEqual(self.api.fetch_publisher('Harvard University Press').romeo_id, "3243")
+        
+    def test_fetch_publisher_long_copyrightlink(self):
+        publisher = self.api.fetch_publisher('Presses Universitaires de Nancy - Editions Universitaires de Lorraine')
+        self.assertEqual(publisher.romeo_id, 'some_id')
+        
+    def test_fetch_publisher_dump(self):
+        self.api.fetch_all_publishers()
+        self.assertEqual(Publisher.objects.get(name='1066 Tidsskrift for historie').romeo_id, '1939')
 
     def test_unicode(self):
         terms = {'issn': '0375-0906'}
