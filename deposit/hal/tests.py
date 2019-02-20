@@ -28,6 +28,7 @@ from deposit.hal.metadata import AOFRFormatter
 from deposit.hal.protocol import HALProtocol
 from deposit.tests.test_protocol import ProtocolTest
 from deposit.models import DepositRecord
+from deposit.models import Repository
 from papers.models import Paper
 from papers.models import OaiRecord
 from upload.models import UploadedPDF
@@ -70,11 +71,10 @@ class HALProtocolTest(ProtocolTest):
 
     def setUp(self):
         super(HALProtocolTest, self).setUp()
-        self.repo.username = 'test_ws'
-        self.repo.password = 'test'
-        self.repo.endpoint = 'https://api-preprod.archives-ouvertes.fr/sword/'
-        self.repo.save()
-        self.proto = HALProtocol(self.repo)
+        self.setUpForProtocol(HALProtocol, Repository(
+            username='test_ws',
+            password='test',
+            endpoint='https://api-preprod.archives-ouvertes.fr/sword/'))
 
     @expectedFailure
     def test_lncs_many_authors(self):
