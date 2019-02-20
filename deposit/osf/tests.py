@@ -37,17 +37,15 @@ OSF tests are currently disabled as the OSF sandbox is no longer accessible.
 class OSFProtocolTest(ProtocolTest):
     def setUp(self):
         super(OSFProtocolTest, self).setUp()
+        api_key = 'eJMuNoeFvKTIC5A6POx1nrmsiQoMZqwh'
+        api_key += 'CgeEXwDgggYWDeR96Y9KbypgVGNuCY5r9qVgan'
+        
+        self.setUpForProtocol(OSFProtocol, Repository(api_key=api_key,
+                                                      endpoint="https://test-api.osf.io/",
+                                                      username="pdcky"))
 
-        # Fill here the details of your test repository
-        self.repo.api_key = 'eJMuNoeFvKTIC5A6POx1nrmsiQoMZqwh'
-        self.repo.api_key += 'CgeEXwDgggYWDeR96Y9KbypgVGNuCY5r9qVgan'
-        self.repo.endpoint = "https://test-api.osf.io/"
-        self.repo.username = "pdcky"
         # go to https://api.osf.io/v2/users/me/ (once logged in) to get
         # this identifier. (it is returned as "id" in the JSON response)
-
-        # Now we set up the protocol for the tests
-        self.proto = OSFProtocol(self.repo)
 
         # Fill here the details of the metadata form
         # for your repository

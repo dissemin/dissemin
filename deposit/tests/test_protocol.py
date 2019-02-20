@@ -24,9 +24,7 @@ import unittest
 import django.test
 import pytest
 import os
-import shutil
 
-from deposit.models import Repository
 from deposit.protocol import DepositResult
 from deposit.protocol import RepositoryProtocol
 from deposit.registry import protocol_registry
@@ -64,7 +62,15 @@ class ProtocolTest(django.test.TestCase):
                 "This is a test paper",
                 [self.r1.name, self.r2.name, self.r4.name],
                 date(year=2014, month=2, day=15))
-        self.user, _ = User.objects.get_or_create(username='myuser')
+
+        self.username = 'mydepositinguser'
+        self.password = 'supersecret'
+        self.user = User.objects.create_user(username=self.username, email="my@email.com", password=self.password)
+        self.testdir = os.path.dirname(os.path.abspath(__file__))
+        self.pdfpath = os.path.join(self.testdir, 'data/blank.pdf')
+
+    def setUpForProtocol(self, protocol_class, repository):
+
         self.oaisource, _ = OaiSource.objects.get_or_create(
             identifier='deposit_oaisource',
             name='Repository OAI source',
@@ -73,19 +79,19 @@ class ProtocolTest(django.test.TestCase):
                 BytesIO(simple_png_image),
                 None, 'logo.png',
                 'image/png', len(simple_png_image), None, None)
-        self.repo = Repository.objects.create(
-                name='Repository Sandbox',
-                description='babebibobu',
-                logo=logo,
-                protocol=type(self).__name__,
-                oaisource=self.oaisource)
-        self.proto = None
+        self.repo = repository
+        self.repo.oaisource = self.oaisource
+        self.repo.logo = logo
+        if not self.repo.description:
+            self.repo.description = 'brsuatiercs'
+        if not self.repo.name:
+            self.repo.name = 'Test Repository'
+        self.repo.protocol = protocol_class.__name__
+        self.repo.save()
+        protocol_registry.register(protocol_class)
+        self.proto = protocol_class(self.repo)
         self.form = None
-        self.testdir = os.path.dirname(os.path.abspath(__file__))
-        self.pdfpath = os.path.join(self.testdir, 'data/blank.pdf')
 
-    def tearDown(self):
-        shutil.rmtree('mediatest/')
 
     def test_protocol_identifier(self):
         self.assertTrue(len(self.proto.protocol_identifier()) > 1)
@@ -98,6 +104,12 @@ class ProtocolTest(django.test.TestCase):
         self.proto.init_deposit(self.p1, self.user)
         retval = self.proto.get_form()
         self.assertIsInstance(retval, Form)
+
+    def test_deposit_page(self):
+        self.assertEqual(self.user.username, self.username)
+        self.assertTrue(self.client.login(username=self.username, password=self.password))
+        r = self.getPage('upload_paper', kwargs={'pk': self.p1.pk})
+        self.assertEqual(r.status_code, 200)
 
     def dry_deposit(self, paper, **form_fields):
         """

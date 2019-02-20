@@ -31,20 +31,24 @@ from deposit.tests import lorem_ipsum
 from deposit.tests.test_protocol import ProtocolTest
 from deposit.zenodo.protocol import ZenodoProtocol
 from deposit.zenodo.forms import ZENODO_DEFAULT_LICENSE_CHOICE
+from deposit.models import Repository
 from papers.models import Paper
 from papers.models import OaiSource
+from papers.tests.test_pages import RenderingTest
 
-class ZenodoProtocolTest(ProtocolTest):
+class ZenodoProtocolTest(ProtocolTest, RenderingTest):
 
     def setUp(self):
         super(ZenodoProtocolTest, self).setUp()
         if 'ZENODO_SANDBOX_API_KEY' not in os.environ:
             raise unittest.SkipTest(
                 "Environment variable ZENODO_SANDBOX_API_KEY is undefined")
-        super(ZenodoProtocolTest, self).setUp()
-        self.repo.api_key = os.environ['ZENODO_SANDBOX_API_KEY']
-        self.repo.endpoint = 'https://sandbox.zenodo.org/api/deposit/depositions'
-        self.proto = ZenodoProtocol(self.repo)
+        self.setUpForProtocol(ZenodoProtocol, Repository(
+            name='Zenodo Sandbox',
+            endpoint='https://sandbox.zenodo.org/api/deposit/depositions',
+            api_key=os.environ['ZENODO_SANDBOX_API_KEY'],
+        ))
+
         self.testdir = os.path.dirname(os.path.abspath(__file__))
         with open(os.path.join(self.testdir, 'testdata/zenodo_record.xml'), 'r') as f:
             self.zenodo_record = f.read()
@@ -106,4 +110,5 @@ class ZenodoProtocolTest(ProtocolTest):
                     abstract = lorem_ipsum,
                     license = ZENODO_DEFAULT_LICENSE_CHOICE)
             self.assertEqual(r.status, 'failed')
+            
 
