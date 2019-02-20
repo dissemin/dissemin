@@ -1,0 +1,50 @@
+<!DOCTYPE romeoapi SYSTEM "http://www.sherpa.ac.uk/romeo/romeoapi293.dtd">
+<romeoapi version="2.9.9">
+  <header>
+    <parameters>
+      <parameter source="specified">
+        <parametername>jtitle</parametername>
+        <parametervalue>Physical Review E</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>qtype</parametername>
+        <parametervalue>exact</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>showfunder</parametername>
+        <parametervalue>none</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>fIDnum</parametername>
+        <parametervalue>|</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>la</parametername>
+        <parametervalue>en</parametervalue>
+      </parameter>
+    </parameters>
+    <numhits>2</numhits>
+    <apicontrol>journal</apicontrol>
+    <outcome>manyJournals</outcome>
+    <message/>
+    <licence>SHERPA/RoMEO data is available for re-use under a Creative Commons Attribution-Non-Commercial-Share Alike 2.5 licence. For more details, please see the 'conditions for re-use' at the &lt;licenceurl /&gt;, and linked-to from the SHERPA/RoMEO home page.</licence>
+    <licenceurl>http://www.sherpa.ac.uk/romeoreuse.html</licenceurl>
+    <disclaimer>All SHERPA/RoMEO information is correct to the best of our knowledge but should not be relied upon for legal advice. SHERPA cannot be held responsible for the re-use of RoMEO data, or for alternative interpretations which are derived from this information.</disclaimer>
+    <timestamp>29-Nov-2018:16:54:35</timestamp>
+  </header>
+  <journals>
+    <journal>
+      <jtitle>Physical Review E</jtitle>
+      <issn>1539-3755</issn>
+      <zetocpub>American Physical Society</zetocpub>
+      <romeopub>American Physical Society</romeopub>
+    </journal>
+    <journal>
+      <jtitle>Physical Review E</jtitle>
+      <issn>2470-0045</issn>
+      <zetocpub>American Physical Society</zetocpub>
+      <romeopub>American Physical Society</romeopub>
+    </journal>
+  </journals>
+  <publishers/>
+</romeoapi>

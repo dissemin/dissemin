@@ -1,0 +1,93 @@
+<!DOCTYPE romeoapi SYSTEM "http://www.sherpa.ac.uk/romeo/romeoapi293.dtd">
+<romeoapi version="2.9.9">
+  <header>
+    <parameters>
+      <parameter source="specified">
+        <parametername>issn</parametername>
+        <parametervalue>0099-2240</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>showfunder</parametername>
+        <parametervalue>none</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>fIDnum</parametername>
+        <parametervalue>|</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>la</parametername>
+        <parametervalue>en</parametervalue>
+      </parameter>
+    </parameters>
+    <numhits>1</numhits>
+    <apicontrol>journal</apicontrol>
+    <outcome>singleJournal</outcome>
+    <message/>
+    <licence>SHERPA/RoMEO data is available for re-use under a Creative Commons Attribution-Non-Commercial-Share Alike 2.5 licence. For more details, please see the 'conditions for re-use' at the &lt;licenceurl /&gt;, and linked-to from the SHERPA/RoMEO home page.</licence>
+    <licenceurl>http://www.sherpa.ac.uk/romeoreuse.html</licenceurl>
+    <disclaimer>All SHERPA/RoMEO information is correct to the best of our knowledge but should not be relied upon for legal advice. SHERPA cannot be held responsible for the re-use of RoMEO data, or for alternative interpretations which are derived from this information.</disclaimer>
+    <timestamp>29-Nov-2018:16:54:33</timestamp>
+  </header>
+  <journals>
+    <journal>
+      <jtitle>Applied and Environmental Microbiology</jtitle>
+      <issn>0099-2240</issn>
+      <zetocpub>American Society for Microbiology</zetocpub>
+      <romeopub>American Society for Microbiology</romeopub>
+    </journal>
+  </journals>
+  <publishers>
+    <publisher id="16">
+      <name>American Society for Microbiology</name>
+      <alias/>
+      <homeurl>http://www.asm.org/</homeurl>
+      <preprints>
+        <prearchiving>can</prearchiving>
+        <prerestrictions/>
+      </preprints>
+      <postprints>
+        <postarchiving>can</postarchiving>
+        <postrestrictions/>
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>restricted</pdfarchiving>
+        <pdfrestrictions/>
+      </pdfversion>
+      <conditions>
+        <condition>Author's pre-print on recognised non profit pre-print archives</condition>
+        <condition>Author's post-print on funder's repositories, institutional repository or subject-based repositories</condition>
+        <condition>Non-commercial</condition>
+        <condition>Publisher's version/PDF may be used</condition>
+        <condition>Publisher's version/PDF may be used after &lt;num&gt;6&lt;/num&gt; &lt;period units="month"&gt;months&lt;/period&gt; embargo</condition>
+        <condition>Publisher's version/PDF may be used on author's personal website or employers website</condition>
+        <condition>Recommended that author's post-prints submitted to PubMed or institutional repositories are made available 6 months after publication</condition>
+        <condition>Author's pre-print must be updated with citation and DOI upon publication</condition>
+        <condition>Publisher last contacted on 21/05/2015</condition>
+        <condition>Publisher last reviewed on 15/09/2015</condition>
+      </conditions>
+      <mandates/>
+      <paidaccess>
+        <paidaccessurl>https://journals.asm.org/content/open-access-policy</paidaccessurl>
+        <paidaccessname>Open Access</paidaccessname>
+        <paidaccessnotes>A paid open access option is available for this journal.</paidaccessnotes>
+      </paidaccess>
+      <copyrightlinks>
+        <copyrightlink>
+          <copyrightlinktext>Authors Rights</copyrightlinktext>
+          <copyrightlinkurl>http://journals.asm.org/site/misc/ASM_Author_Statement.xhtml</copyrightlinkurl>
+        </copyrightlink>
+        <copyrightlink>
+          <copyrightlinktext>Instructions for Authors (Example)</copyrightlinktext>
+          <copyrightlinkurl>http://aac.asm.org/site/misc/journal-ita_edi.xhtml#02</copyrightlinkurl>
+        </copyrightlink>
+        <copyrightlink>
+          <copyrightlinktext>Pre-print policy</copyrightlinktext>
+          <copyrightlinkurl>http://journals.asm.org/site/misc/announcements_March2015.xhtml</copyrightlinkurl>
+        </copyrightlink>
+      </copyrightlinks>
+      <romeocolour>green</romeocolour>
+      <dateadded>2004-01-10 00:00:00</dateadded>
+      <dateupdated>2018-05-02 13:38:03</dateupdated>
+    </publisher>
+  </publishers>
+</romeoapi>

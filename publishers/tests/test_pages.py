@@ -16,18 +16,24 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
+import os
 
-from publishers.romeo import fetch_journal
+from publishers.tests.test_romeo import RomeoAPIStub
 from papers.models import Paper
 from papers.tests.test_pages import RenderingTest
 
 
 class JournalPageTest(RenderingTest):
+    @classmethod
+    def setUpClass(cls):
+        super(JournalPageTest, cls).setUpClass()
+        cls.testdir = os.path.dirname(os.path.abspath(__file__))
+        cls.api = RomeoAPIStub(os.path.join(cls.testdir, 'data'))
 
     def test_escaping(self):
         # issue #115
         # in the meantime the journal has been deleted from sherpa
-        journal = fetch_journal({'issn': '0302-9743'})
+        journal = self.api.fetch_journal({'issn': '0302-9743'})
         # Small hack to make the journal appear in the publisher's journal list
         journal.update_stats()
         journal.stats.num_tot = 1

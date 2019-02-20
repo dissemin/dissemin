@@ -1,0 +1,92 @@
+<!DOCTYPE romeoapi SYSTEM "http://www.sherpa.ac.uk/romeo/romeoapi293.dtd">
+<romeoapi version="2.9.9">
+  <header>
+    <parameters>
+      <parameter source="specified">
+        <parametername>issn</parametername>
+        <parametervalue>1471-2105</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>showfunder</parametername>
+        <parametervalue>none</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>fIDnum</parametername>
+        <parametervalue>|</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>la</parametername>
+        <parametervalue>en</parametervalue>
+      </parameter>
+    </parameters>
+    <numhits>1</numhits>
+    <apicontrol>journal</apicontrol>
+    <outcome>singleJournal</outcome>
+    <message/>
+    <licence>SHERPA/RoMEO data is available for re-use under a Creative Commons Attribution-Non-Commercial-Share Alike 2.5 licence. For more details, please see the 'conditions for re-use' at the &lt;licenceurl /&gt;, and linked-to from the SHERPA/RoMEO home page.</licence>
+    <licenceurl>http://www.sherpa.ac.uk/romeoreuse.html</licenceurl>
+    <disclaimer>All SHERPA/RoMEO information is correct to the best of our knowledge but should not be relied upon for legal advice. SHERPA cannot be held responsible for the re-use of RoMEO data, or for alternative interpretations which are derived from this information.</disclaimer>
+    <timestamp>29-Nov-2018:16:54:34</timestamp>
+  </header>
+  <journals>
+    <journal>
+      <jtitle>BMC Bioinformatics</jtitle>
+      <issn>1471-2105</issn>
+      <zetocpub>BMC (part of Springer Nature)</zetocpub>
+      <romeopub>BMC (part of Springer Nature)</romeopub>
+    </journal>
+  </journals>
+  <publishers>
+    <publisher id="22" parentid="74">
+      <name>BMC</name>
+      <alias>part of Springer Nature</alias>
+      <homeurl>http://www.biomedcentral.com/</homeurl>
+      <preprints>
+        <prearchiving>can</prearchiving>
+        <prerestrictions/>
+      </preprints>
+      <postprints>
+        <postarchiving>can</postarchiving>
+        <postrestrictions/>
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>can</pdfarchiving>
+        <pdfrestrictions/>
+      </pdfversion>
+      <conditions>
+        <condition>Author's pre-print on pre-print server such as ArXiv, bioRxiv, Peer J PrePrints, or similar platforms (both commercial and non-commercial)</condition>
+        <condition>Authors post-print and Publisher's version/PDF on any website</condition>
+        <condition>Publisher's version/PDF may be used</condition>
+        <condition>Creative Commons Attribution License</condition>
+        <condition>Copy of License must accompany any deposit.</condition>
+        <condition>Authors retain copyright</condition>
+        <condition>Published source must be acknowledged</condition>
+        <condition>Must link to publisher version with DOI</condition>
+        <condition>All titles are open access journals</condition>
+      </conditions>
+      <mandates/>
+      <paidaccess>
+        <paidaccessurl/>
+        <paidaccessname/>
+        <paidaccessnotes/>
+      </paidaccess>
+      <copyrightlinks>
+        <copyrightlink>
+          <copyrightlinktext>Duplicate Publication Policy</copyrightlinktext>
+          <copyrightlinkurl>https://www.biomedcentral.com/getpublished/editorial-policies#duplicate+publication</copyrightlinkurl>
+        </copyrightlink>
+        <copyrightlink>
+          <copyrightlinktext>Journal Policies</copyrightlinktext>
+          <copyrightlinkurl>https://www.biomedcentral.com/getpublished/editorial-policies#duplicate+publication</copyrightlinkurl>
+        </copyrightlink>
+        <copyrightlink>
+          <copyrightlinktext>Publication Costs and Funding</copyrightlinktext>
+          <copyrightlinkurl>https://www.biomedcentral.com/about/publication-costs-and-funding;</copyrightlinkurl>
+        </copyrightlink>
+      </copyrightlinks>
+      <romeocolour>green</romeocolour>
+      <dateadded>2004-01-10 00:00:00</dateadded>
+      <dateupdated>2018-09-03 11:44:01</dateupdated>
+    </publisher>
+  </publishers>
+</romeoapi>

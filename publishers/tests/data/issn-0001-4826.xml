@@ -1,0 +1,73 @@
+<!DOCTYPE romeoapi SYSTEM "http://www.sherpa.ac.uk/romeo/romeoapi293.dtd">
+<romeoapi version="2.9.9">
+  <header>
+    <parameters>
+      <parameter source="specified">
+        <parametername>issn</parametername>
+        <parametervalue>0001-4826</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>showfunder</parametername>
+        <parametervalue>none</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>fIDnum</parametername>
+        <parametervalue>|</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>la</parametername>
+        <parametervalue>en</parametervalue>
+      </parameter>
+    </parameters>
+    <numhits>1</numhits>
+    <apicontrol>journal</apicontrol>
+    <outcome>singleJournal</outcome>
+    <message/>
+    <licence>SHERPA/RoMEO data is available for re-use under a Creative Commons Attribution-Non-Commercial-Share Alike 2.5 licence. For more details, please see the 'conditions for re-use' at the &lt;licenceurl /&gt;, and linked-to from the SHERPA/RoMEO home page.</licence>
+    <licenceurl>http://www.sherpa.ac.uk/romeoreuse.html</licenceurl>
+    <disclaimer>All SHERPA/RoMEO information is correct to the best of our knowledge but should not be relied upon for legal advice. SHERPA cannot be held responsible for the re-use of RoMEO data, or for alternative interpretations which are derived from this information.</disclaimer>
+    <timestamp>29-Nov-2018:16:54:31</timestamp>
+  </header>
+  <journals>
+    <journal>
+      <jtitle>Accounting Review</jtitle>
+      <issn>0001-4826</issn>
+      <zetocpub>American Accounting Association</zetocpub>
+      <romeopub>American Accounting Association</romeopub>
+    </journal>
+  </journals>
+  <publishers>
+    <publisher id="633">
+      <name>American Accounting Association</name>
+      <alias/>
+      <homeurl>http://aaahq.org/</homeurl>
+      <preprints>
+        <prearchiving>cannot</prearchiving>
+        <prerestrictions/>
+      </preprints>
+      <postprints>
+        <postarchiving>cannot</postarchiving>
+        <postrestrictions/>
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>cannot</pdfarchiving>
+        <pdfrestrictions/>
+      </pdfversion>
+      <conditions>
+        <condition>Authors and their institutions may post summary of abstract of article online</condition>
+        <condition>Must link to publisher version</condition>
+        <condition>Publisher last reviewed on 28/07/2016</condition>
+      </conditions>
+      <mandates/>
+      <paidaccess>
+        <paidaccessurl/>
+        <paidaccessname/>
+        <paidaccessnotes/>
+      </paidaccess>
+      <copyrightlinks/>
+      <romeocolour>white</romeocolour>
+      <dateadded>2009-05-12 10:10:52</dateadded>
+      <dateupdated>2016-07-28 10:02:24</dateupdated>
+    </publisher>
+  </publishers>
+</romeoapi>

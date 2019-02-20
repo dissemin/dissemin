@@ -1,0 +1,98 @@
+<!DOCTYPE romeoapi SYSTEM "http://www.sherpa.ac.uk/romeo/romeoapi293.dtd">
+<romeoapi version="2.9.9">
+  <header>
+    <parameters>
+      <parameter source="specified">
+        <parametername>issn</parametername>
+        <parametervalue>0036-8075</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>showfunder</parametername>
+        <parametervalue>none</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>fIDnum</parametername>
+        <parametervalue>|</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>la</parametername>
+        <parametervalue>en</parametervalue>
+      </parameter>
+    </parameters>
+    <numhits>1</numhits>
+    <apicontrol>journal</apicontrol>
+    <outcome>singleJournal</outcome>
+    <message/>
+    <licence>SHERPA/RoMEO data is available for re-use under a Creative Commons Attribution-Non-Commercial-Share Alike 2.5 licence. For more details, please see the 'conditions for re-use' at the &lt;licenceurl /&gt;, and linked-to from the SHERPA/RoMEO home page.</licence>
+    <licenceurl>http://www.sherpa.ac.uk/romeoreuse.html</licenceurl>
+    <disclaimer>All SHERPA/RoMEO information is correct to the best of our knowledge but should not be relied upon for legal advice. SHERPA cannot be held responsible for the re-use of RoMEO data, or for alternative interpretations which are derived from this information.</disclaimer>
+    <timestamp>29-Nov-2018:16:54:33</timestamp>
+  </header>
+  <journals>
+    <journal>
+      <jtitle>Science</jtitle>
+      <issn>0036-8075</issn>
+      <zetocpub>American Association for the Advancement of Science</zetocpub>
+      <romeopub>American Association for the Advancement of Science</romeopub>
+    </journal>
+  </journals>
+  <publishers>
+    <publisher id="3">
+      <name>American Association for the Advancement of Science</name>
+      <alias/>
+      <homeurl>http://www.aaas.org/</homeurl>
+      <preprints>
+        <prearchiving>can</prearchiving>
+        <prerestrictions/>
+      </preprints>
+      <postprints>
+        <postarchiving>can</postarchiving>
+        <postrestrictions/>
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>cannot</pdfarchiving>
+        <pdfrestrictions/>
+      </pdfversion>
+      <conditions>
+        <condition>Pre-print may be considered prior publication</condition>
+        <condition>Pre-print on not-for-profit preprint servers where allowed, please contact editors for clarification</condition>
+        <condition>Cannot archive until publication</condition>
+        <condition>Authors retain copyright</condition>
+        <condition>On author's personal website or institutional repository</condition>
+        <condition>Publisher's version/PDF cannot be used</condition>
+        <condition>Must link to publisher version</condition>
+        <condition>Set statement must accompany post-print (see policy)</condition>
+        <condition>Published source must be acknowledged with DOI</condition>
+        <condition>Authors covered by funding agency rules, may post author's post-print in PubMed Central or funder's designated repository after a 6 month embargo</condition>
+        <condition>Authors covered by funding agency rules, must state on submission, for article to be released in PubMed Central or funder's designated repository after 6 months after publication.</condition>
+      </conditions>
+      <mandates/>
+      <paidaccess>
+        <paidaccessurl/>
+        <paidaccessname/>
+        <paidaccessnotes/>
+      </paidaccess>
+      <copyrightlinks>
+        <copyrightlink>
+          <copyrightlinktext>License Agreement</copyrightlinktext>
+          <copyrightlinkurl>http://www.sciencemag.org/site/feature/contribinfo/prep/lic_info.pdf</copyrightlinkurl>
+        </copyrightlink>
+        <copyrightlink>
+          <copyrightlinktext>PMC policy</copyrightlinktext>
+          <copyrightlinkurl>http://www.sciencemag.org/site/help/authors/pmc.xhtml</copyrightlinkurl>
+        </copyrightlink>
+        <copyrightlink>
+          <copyrightlinktext>Pre-print comment</copyrightlinktext>
+          <copyrightlinkurl>http://www.sciencemag.org/site/feature/contribinfo/faq/index.xhtml#prioronline_faq</copyrightlinkurl>
+        </copyrightlink>
+        <copyrightlink>
+          <copyrightlinktext>General Information for Authors</copyrightlinktext>
+          <copyrightlinkurl>http://www.sciencemag.org/site/feature/contribinfo/prep/gen_info.xhtml</copyrightlinkurl>
+        </copyrightlink>
+      </copyrightlinks>
+      <romeocolour>green</romeocolour>
+      <dateadded>2004-01-10 00:00:00</dateadded>
+      <dateupdated>2016-04-22 13:12:10</dateupdated>
+    </publisher>
+  </publishers>
+</romeoapi>

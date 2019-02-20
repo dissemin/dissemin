@@ -1,0 +1,108 @@
+<!DOCTYPE romeoapi SYSTEM "http://www.sherpa.ac.uk/romeo/romeoapi293.dtd">
+<romeoapi version="2.9.9">
+  <header>
+    <parameters>
+      <parameter source="specified">
+        <parametername>issn</parametername>
+        <parametervalue>0022-328X</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>showfunder</parametername>
+        <parametervalue>none</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>fIDnum</parametername>
+        <parametervalue>|</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>la</parametername>
+        <parametervalue>en</parametervalue>
+      </parameter>
+    </parameters>
+    <numhits>1</numhits>
+    <apicontrol>journal</apicontrol>
+    <outcome>singleJournal</outcome>
+    <message/>
+    <licence>SHERPA/RoMEO data is available for re-use under a Creative Commons Attribution-Non-Commercial-Share Alike 2.5 licence. For more details, please see the 'conditions for re-use' at the &lt;licenceurl /&gt;, and linked-to from the SHERPA/RoMEO home page.</licence>
+    <licenceurl>http://www.sherpa.ac.uk/romeoreuse.html</licenceurl>
+    <disclaimer>All SHERPA/RoMEO information is correct to the best of our knowledge but should not be relied upon for legal advice. SHERPA cannot be held responsible for the re-use of RoMEO data, or for alternative interpretations which are derived from this information.</disclaimer>
+    <timestamp>29-Nov-2018:16:54:32</timestamp>
+  </header>
+  <journals>
+    <journal>
+      <jtitle>Journal of Organometallic Chemistry</jtitle>
+      <issn>0022-328X</issn>
+      <zetocpub>Elsevier</zetocpub>
+      <romeopub>Elsevier</romeopub>
+    </journal>
+  </journals>
+  <publishers>
+    <publisher id="30">
+      <name>Elsevier</name>
+      <alias/>
+      <homeurl>http://www.elsevier.com/</homeurl>
+      <preprints>
+        <prearchiving>can</prearchiving>
+        <prerestrictions/>
+      </preprints>
+      <postprints>
+        <postarchiving>can</postarchiving>
+        <postrestrictions/>
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>cannot</pdfarchiving>
+        <pdfrestrictions/>
+      </pdfversion>
+      <conditions>
+        <condition>Authors pre-print on any website, including arXiv and RePEC</condition>
+        <condition>Author's post-print on author's personal website immediately</condition>
+        <condition>Author's post-print on open access repository after an embargo period of between &lt;num&gt;12&lt;/num&gt; &lt;period units="month"&gt;months&lt;/period&gt; and &lt;num&gt;48&lt;/num&gt; &lt;period units="month"&gt;months&lt;/period&gt;</condition>
+        <condition>Permitted deposit due to Funding Body, Institutional and Governmental policy or mandate, may be required to comply with embargo periods of &lt;num&gt;12&lt;/num&gt; &lt;period units="month"&gt;months&lt;/period&gt; to &lt;num&gt;48&lt;/num&gt; &lt;period units="month"&gt;months&lt;/period&gt;</condition>
+        <condition>Author's post-print may be used to update arXiv and RepEC</condition>
+        <condition>Publisher's version/PDF cannot be used</condition>
+        <condition>Must link to publisher version with DOI</condition>
+        <condition>Author's post-print must be released with a Creative Commons Attribution Non-Commercial No Derivatives License</condition>
+        <condition>Publisher last reviewed on 03/06/2015</condition>
+      </conditions>
+      <mandates/>
+      <paidaccess>
+        <paidaccessurl>http://www.elsevier.com/about/open-access/sponsored-articles</paidaccessurl>
+        <paidaccessname>Open Access</paidaccessname>
+        <paidaccessnotes>A paid open access option is available for this journal.</paidaccessnotes>
+      </paidaccess>
+      <copyrightlinks>
+        <copyrightlink>
+          <copyrightlinktext>Unleashing the power of academic sharing</copyrightlinktext>
+          <copyrightlinkurl>http://www.elsevier.com/connect/elsevier-updates-its-policies-perspectives-and-services-on-article-sharing</copyrightlinkurl>
+        </copyrightlink>
+        <copyrightlink>
+          <copyrightlinktext>Sharing Policy</copyrightlinktext>
+          <copyrightlinkurl>http://www.elsevier.com/about/company-information/policies/sharing</copyrightlinkurl>
+        </copyrightlink>
+        <copyrightlink>
+          <copyrightlinktext>Sharing and Hosting Policy FAQ</copyrightlinktext>
+          <copyrightlinkurl>https://www.elsevier.com/about/our-business/policies/sharing/policy-faq</copyrightlinkurl>
+        </copyrightlink>
+        <copyrightlink>
+          <copyrightlinktext>Green open access</copyrightlinktext>
+          <copyrightlinkurl>http://www.elsevier.com/about/open-access/green-open-access</copyrightlinkurl>
+        </copyrightlink>
+        <copyrightlink>
+          <copyrightlinktext>Journal Embargo Period List</copyrightlinktext>
+          <copyrightlinkurl>https://www.elsevier.com/__data/assets/pdf_file/0005/78476/external-embargo-list.pdf</copyrightlinkurl>
+        </copyrightlink>
+        <copyrightlink>
+          <copyrightlinktext>Journal Embargo List for UK Authors&lt;a/&gt; - &lt;a href=https://www.elsevier.com/about/our-business/policies/sharing/how-to-attach-a-user-license&gt;Attaching a User License</copyrightlinktext>
+          <copyrightlinkurl>https://www.elsevier.com/__data/assets/pdf_file/0011/78473/UK-embargo-periods.pdf</copyrightlinkurl>
+        </copyrightlink>
+        <copyrightlink>
+          <copyrightlinktext>Funding Body Agreements</copyrightlinktext>
+          <copyrightlinkurl>https://www.elsevier.com/about/open-science/open-access/agreements</copyrightlinkurl>
+        </copyrightlink>
+      </copyrightlinks>
+      <romeocolour>green</romeocolour>
+      <dateadded>2004-01-10 00:00:00</dateadded>
+      <dateupdated>2015-05-01 09:50:58</dateupdated>
+    </publisher>
+  </publishers>
+</romeoapi>

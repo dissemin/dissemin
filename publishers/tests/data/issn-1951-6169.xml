@@ -1,0 +1,81 @@
+<!DOCTYPE romeoapi SYSTEM "http://www.sherpa.ac.uk/romeo/romeoapi293.dtd">
+<romeoapi version="2.9.9">
+  <header>
+    <parameters>
+      <parameter source="specified">
+        <parametername>issn</parametername>
+        <parametervalue>1951-6169</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>showfunder</parametername>
+        <parametervalue>none</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>fIDnum</parametername>
+        <parametervalue>|</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>la</parametername>
+        <parametervalue>en</parametervalue>
+      </parameter>
+    </parameters>
+    <numhits>1</numhits>
+    <apicontrol>journal</apicontrol>
+    <outcome>singleJournal</outcome>
+    <message/>
+    <licence>SHERPA/RoMEO data is available for re-use under a Creative Commons Attribution-Non-Commercial-Share Alike 2.5 licence. For more details, please see the 'conditions for re-use' at the &lt;licenceurl /&gt;, and linked-to from the SHERPA/RoMEO home page.</licence>
+    <licenceurl>http://www.sherpa.ac.uk/romeoreuse.html</licenceurl>
+    <disclaimer>All SHERPA/RoMEO information is correct to the best of our knowledge but should not be relied upon for legal advice. SHERPA cannot be held responsible for the re-use of RoMEO data, or for alternative interpretations which are derived from this information.</disclaimer>
+    <timestamp>29-Nov-2018:16:54:34</timestamp>
+  </header>
+  <journals>
+    <journal>
+      <jtitle>E-Spania</jtitle>
+      <issn>1951-6169</issn>
+      <zetocpub>Civilisations et Litt&#233;ratures d'Espagne et d'Am&#233;rique du Moyen &#194;ge aux Lumi&#232;res (CLEA) - Paris Sorbonne</zetocpub>
+      <romeopub>Civilisations et Litt&#233;ratures d'Espagne et d'Am&#233;rique du Moyen &#194;ge aux Lumi&#232;res (CLEA) - Paris Sorbonne</romeopub>
+    </journal>
+  </journals>
+  <publishers>
+    <publisher id="DOAJ">
+      <name>Civilisations et Litt&#233;ratures d'Espagne et d'Am&#233;rique du Moyen &#194;ge aux Lumi&#232;res (CLEA) - Paris Sorbonne</name>
+      <alias/>
+      <homeurl>http://e-spania.revues.org/</homeurl>
+      <preprints>
+        <prearchiving>unknown</prearchiving>
+        <prerestrictions/>
+      </preprints>
+      <postprints>
+        <postarchiving>unknown</postarchiving>
+        <postrestrictions/>
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>unknown</pdfarchiving>
+        <pdfrestrictions/>
+      </pdfversion>
+      <conditions>
+        <condition>This publisher's policies have not been checked by RoMEO.</condition>
+        <condition>DOAJ says it is an open access journal, but this may only mean that it is freely available to read.</condition>
+        <condition>Most open access publishers also permit self-archiving and re-use, but some do not.</condition>
+        <condition>Do not assume that self-archiving is allowed, unless it is published under a &lt;a href="http://creativecommons.org/" target="_blank"&gt;Creative Commons&lt;/a&gt; license.</condition>
+        <condition>Please contact the publisher for further information if necessary</condition>
+        <condition>Email &lt;a href="mailto:romeo@jisc.ac.uk"&gt;romeo@jisc.ac.uk&lt;/a&gt; if you wish to suggest adding this publisher properly to RoMEO.</condition>
+      </conditions>
+      <mandates/>
+      <paidaccess>
+        <paidaccessurl/>
+        <paidaccessname/>
+        <paidaccessnotes/>
+      </paidaccess>
+      <copyrightlinks>
+        <copyrightlink>
+          <copyrightlinktext>See the publisher/journal website</copyrightlinktext>
+          <copyrightlinkurl>http://e-spania.revues.org/</copyrightlinkurl>
+        </copyrightlink>
+      </copyrightlinks>
+      <romeocolour>gray</romeocolour>
+      <dateadded>2018-11-12 15:21:21</dateadded>
+      <dateupdated>2018-11-12 15:21:21</dateupdated>
+    </publisher>
+  </publishers>
+</romeoapi>
