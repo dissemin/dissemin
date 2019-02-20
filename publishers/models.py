@@ -244,7 +244,7 @@ class Journal(models.Model):
 
 class PublisherCondition(models.Model):
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
-    text = models.CharField(max_length=1024)
+    text = models.TextField()
 
     def __str__(self):
         return self.text
@@ -255,7 +255,7 @@ class PublisherCondition(models.Model):
 
 class PublisherCopyrightLink(models.Model):
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
-    text = models.CharField(max_length=256)
+    text = models.TextField()
     url = models.URLField()
 
     def __str__(self):
@@ -267,7 +267,7 @@ class PublisherCopyrightLink(models.Model):
 
 class PublisherRestrictionDetail(models.Model):
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
-    text = models.CharField(max_length=256)
+    text = models.TextField()
     applies_to = models.CharField(max_length=32)
 
     def __str__(self):
