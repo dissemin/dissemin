@@ -55,6 +55,8 @@ class RomeoTest(TestCase):
             cls.issn_response = issn_file.read()
         with open(os.path.join(cls.testdir, 'data/jtitle-Physical_Review_E.xml'), 'rb') as jtitle_file:
             cls.jtitle_response = jtitle_file.read()
+        with open(os.path.join(cls.testdir, 'data/sample_journals.tsv'), 'rb') as journals_dump_file:
+            cls.journals_dump_response = journals_dump_file.read()
 
     def test_perform_query(self):
         api = RomeoAPI(domain='www.sherpa.ac.uk', api_key=None)
@@ -91,11 +93,22 @@ class RomeoTest(TestCase):
         publisher = self.api.fetch_publisher('Presses Universitaires de Nancy - Editions Universitaires de Lorraine')
         self.assertEqual(publisher.romeo_id, '2047')
         
-    def test_fetch_publisher_dump(self):
+    def test_fetch_dump(self):
         self.api.fetch_all_publishers()
-        self.assertEqual(Publisher.objects.get(name='1066 Tidsskrift for historie').romeo_id, '1939')
+        self.assertEqual(Publisher.objects.get(alias='Greek National Center of Social Research').romeo_id, '2201')
         
-    def test_subsequent_update(self):
+        # mocked separately as a different endpoint is used
+        with requests_mock.mock() as http_mocker:
+            http_mocker.get('http://www.sherpa.ac.uk/downloads/journal-title-issns.php?ak=my_key&format=tsv',
+                content=self.journals_dump_response)
+            self.api.fetch_all_journals(api_key='my_key')
+            
+        j = Journal.objects.get(issn='0013-9696')
+        self.assertEqual(j.title, 'Greek Review of Social Research')
+        self.assertEqual(j.publisher.romeo_id, '2201')
+        
+        
+    def test_subsequent_publisher_update(self):
         # Fetch a publisher once
         self.api.fetch_all_publishers(modified_since=dateutil.parser.parse('2016-01-01'))
         p = Publisher.objects.get(alias='Czech Technical University in Prague')

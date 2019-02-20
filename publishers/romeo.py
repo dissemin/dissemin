@@ -55,16 +55,16 @@ PUBLISHER_NAME_ASSOCIATION_FACTOR = 10
 
 
 class RomeoAPI(object):
-    
+
     def __init__(self, domain=settings.ROMEO_API_DOMAIN, api_key=settings.ROMEO_API_KEY):
         self.base_url = 'http://'+domain+'/romeo/api29.php'
         self.api_key = api_key
-        
+
     def perform_romeo_query(self, search_terms):
         search_terms = search_terms.copy()
         if self.api_key:
             search_terms['ak'] = self.api_key
-    
+
         # Perform the query
         try:
             response = cached_urlopen_retry(
@@ -74,7 +74,7 @@ class RomeoAPI(object):
                                           'URL was: '+self.base_url+'\n' +
                                           'Parameters were: '+str(search_terms)+'\n' +
                                           'Error is: '+str(e))
-    
+
         # Parse it
         try:
             parser = ET.XMLParser(encoding='ISO-8859-1')
@@ -84,7 +84,7 @@ class RomeoAPI(object):
                                           'URL was: '+self.base_url+'\n' +
                                           'Parameters were: '+str(search_terms)+'\n' +
                                           'Error is: '+str(e))
-    
+
         return root
 
 
@@ -97,14 +97,14 @@ class RomeoAPI(object):
             matches = Journal.objects.filter(issn=issn)
             if matches:
                 return matches[0]
-    
+
         # By title
         if title:
             matches = Journal.objects.filter(title__iexact=title)
             if matches:
                 return matches[0]
-    
-    
+
+
     def fetch_journal(self, search_terms, matching_mode='exact'):
         """
         Fetch the journal data from RoMEO. Returns an Journal object.
@@ -116,31 +116,31 @@ class RomeoAPI(object):
         # the API
         if 'jtitle' in terms:
             terms['jtitle'] = kill_html(terms['jtitle'])
-    
+
         # Check the arguments
         if not all(key in allowed_fields for key in terms):
             raise ValueError('The search terms have to belong to '+str(allowed_fields) +
                              'but the dictionary I got is '+str(terms))
-    
+
         # Remove diacritics (because it has to be sent in ASCII to ROMEO)
         for key in terms:
             terms[key] = remove_diacritics(terms[key])
             if len(terms[key]) > 256:
                 return None
-    
+
         # First check we don't have it already
         journal = self.find_journal_in_model(terms)
         if journal:
             return journal
-    
+
         # Perform the query
         if matching_mode != 'exact':
             terms['qtype'] = matching_mode
         root = self.perform_romeo_query(terms)
-    
+
         # Find the matching journals (if any)
         journals = list(root.findall('./journals/journal'))
-    
+
         if not journals:
             return None
         elif len(journals) > 1:
@@ -148,7 +148,7 @@ class RomeoAPI(object):
                   "defaulting to the first one")
             # TODO different behaviour: get the ISSN and try again.
         journal = journals[0]
-    
+
         names = list(journal.findall('./jtitle'))
         if not names:
             raise MetadataSourceException('RoMEO returned a journal without title.\n' +
@@ -157,18 +157,18 @@ class RomeoAPI(object):
             print("Warning, "+str(len(names))+" names provided for one journal, " +
                   "defaulting to the first one")
         name = kill_html(names[0].text)
-    
+
         issn = None
         try:
             issn = nstrip(journal.findall('./issn')[0].text)
         except (KeyError, IndexError):
             pass
-    
+
         # Now we may have additional info, so it's worth trying again in the model
         model_journal = self.find_journal_in_model({'issn': issn, 'jtitle': name})
         if model_journal:
             return model_journal
-    
+
         # Otherwise we need to find the publisher
         publishers = root.findall('./publishers/publisher')
         if not publishers:
@@ -176,23 +176,23 @@ class RomeoAPI(object):
         # TODO here we shouldn't default to the first one but look it up using the
         # <romeopub>
         publisher_desc = publishers[0]
-    
+
         publisher = self.get_or_create_publisher(publisher_desc)
-    
+
         result = Journal(title=name, issn=issn, publisher=publisher)
         result.save()
         return result
-    
-    
+
+
     def fetch_publisher(self, publisher_name):
         if publisher_name is None:
             return
-    
+
         # First, let's see if we have a publisher with that name
         matching_publishers = Publisher.objects.filter(name=publisher_name)
         if len(matching_publishers) == 1:
             return matching_publishers[0]
-    
+
         # Second, let's see if the publisher name has often been associated to a
         # known publisher
         aliases = list(AliasPublisher.objects.filter(
@@ -211,16 +211,16 @@ class RomeoAPI(object):
                     aliases[0].count > PUBLISHER_NAME_ASSOCIATION_FACTOR*aliases[1].count):
                 AliasPublisher.increment(publisher_name, aliases[0].publisher)
                 return aliases[0].publisher
-    
+
         # Otherwise, let's try to fetch the publisher from RoMEO!
-    
+
         # Prepare the query
         search_terms = dict()
         search_terms['pub'] = remove_diacritics(publisher_name)
         search_terms['qtype'] = 'all'
-    
+
         root = self.perform_romeo_query(search_terms)
-    
+
         # Find the publisher
         publishers = root.findall('./publishers/publisher')
         if len(publishers) == 0:
@@ -231,11 +231,11 @@ class RomeoAPI(object):
             publishers = root.findall('./publishers/publisher')
             if len(publishers) != 1:
                 return
-    
+
         publisher = self.get_or_create_publisher(publishers[0])
         AliasPublisher.increment(publisher_name, publisher)
         return publisher
-    
+
     def fetch_all_publishers(self, modified_since=None):
         """
         Fetches all the publishers from RoMEO, optionally modified
@@ -253,13 +253,50 @@ class RomeoAPI(object):
                 self.get_or_create_publisher(publisher)
             except MetadataSourceException as exception:
                 print(exception)
-    
+
+    def fetch_all_journals(self, domain=settings.ROMEO_API_DOMAIN, api_key=settings.ROMEO_API_KEY):
+        """
+        Fetches all the journals from RoMEO.
+        """
+        r = requests.get('http://{}/downloads/journal-title-issns.php'.format(domain),
+                         {'ak':api_key, 'format':'tsv'})
+        # r.encoding = 'ISO-8859-1'
+        headers = None
+        lines = r.text.split('\n')
+        for line in lines:
+            if not line:
+                continue
+            fields = line.split('\t')
+            if headers is None:
+                headers = fields
+            else:
+                [title, issn, essn, romeo_id, _] = fields
+                issn = issn or None
+                essn = essn or None
+                match = self.find_journal_in_model({'issn':issn or essn,'jtitle': title})
+
+                if match and match.publisher.romeo_id != romeo_id:
+                    # Fix the publisher
+                    try:
+                        correct_publisher = Publisher.objects.get(romeo_id=romeo_id)
+                        match.publisher = correct_publisher
+                        match.save()
+                    except Publisher.DoesNotExist:
+                        pass
+                elif match is None:
+                    try:
+                        publisher = Publisher.objects.get(romeo_id=romeo_id)
+                        journal = Journal(title=title, issn=issn, publisher=publisher)
+                        journal.save()
+                    except Publisher.DoesNotExist:
+                        pass
+
     def get_or_create_publisher(self, romeo_xml_description):
         """
         Retrieves from the model, or creates into the model,
         the publisher corresponding to the <publisher> description
         from RoMEO.
-        
+
         If the data from RoMEO is more fresh than what we have
         in cache, we update our model.
         """
@@ -269,7 +306,7 @@ class RomeoAPI(object):
             romeo_id = xml.attrib['id']
         except KeyError:
             raise MetadataSourceException('RoMEO did not provide a publisher id.')
-    
+
         name = None
         try:
             raw_name = xml.findall('./name')[0].text.strip()
@@ -277,7 +314,7 @@ class RomeoAPI(object):
         except (KeyError, IndexError, AttributeError):
             raise MetadataSourceException(
                 'RoMEO did not provide the publisher\'s name.')
-    
+
         alias = None
         try:
             alias = nstrip(xml.findall('./alias')[0].text)
@@ -291,7 +328,7 @@ class RomeoAPI(object):
             last_update = dateutil.parser.parse(dateupdated[0].text.strip().replace(' ', 'T')+'Z')
         else:
             last_update = None
-    
+
         # Check if we already have it.
         # Sadly the romeo_id is not unique (as publishers imported from doaj
         # all get the same id, so we have to use the name too).
@@ -308,43 +345,43 @@ class RomeoAPI(object):
             first_match = matches[0]
             if first_match.last_updated >= last_update:
                 return matches[0]
-    
+
         # Otherwise, create it
         url = None
         try:
             url = nstrip(xml.findall('./homeurl')[0].text)
         except (KeyError, IndexError):
             pass
-    
+
         preprint = None
         try:
             preprint = xml.findall('./preprints/prearchiving')[0].text.strip()
         except (KeyError, IndexError, AttributeError):
             raise MetadataSourceException(
                 'RoMEO did not provide the preprint policy.')
-    
+
         postprint = None
         try:
             postprint = xml.findall('./postprints/postarchiving')[0].text.strip()
         except (KeyError, IndexError, AttributeError):
             raise MetadataSourceException(
                 'RoMEO did not provide the postprint policy.')
-    
+
         pdfversion = None
         try:
             pdfversion = xml.findall('./pdfversion/pdfarchiving')[0].text.strip()
         except (KeyError, IndexError, AttributeError):
             raise MetadataSourceException(
                 'RoMEO did not provide the pdf archiving policy.')
-    
+
         # Compute OA status of the publisher
         status = 'UNK'
-    
+
         if not matches:
             publisher = Publisher()
         else:
             publisher = matches[0]
-        
+
         publisher.name = name
         publisher.alias = alias
         publisher.url = url
@@ -355,35 +392,35 @@ class RomeoAPI(object):
         publisher.oa_status = status
         publisher.last_updated = last_update
         publisher.save()
-        
+
         if matches:
             publisher.publishercopyrightlink_set.all().delete()
             publisher.publisherrestrictiondetail_set.all().delete()
             publisher.publishercondition_set.all().delete()
-    
+
         # Add the conditions, restrictions, and copyright
         for restriction in xml.findall('./preprints/prerestrictions/prerestriction'):
             self.add_restriction(restriction, 'preprint', publisher)
-    
+
         for restriction in xml.findall('./postprints/postrestrictions/postrestriction'):
             self.add_restriction(restriction, 'postprint', publisher)
-    
+
         for restriction in xml.findall('./pdfversion/pdfrestrictions/pdfrestriction'):
             self.add_restriction(restriction, 'pdfversion', publisher)
-    
+
         for condition in xml.findall('./conditions/condition'):
             if condition.text:
                 c = PublisherCondition(publisher=publisher,
                                        text=condition.text.strip())
                 c.save()
-    
+
         # Update the publisher status
         publisher.oa_status = publisher.classify_oa_status()
         publisher.save(update_fields=['oa_status'])
-        
+
         # TODO: if the OA status has changed, then we should update the journals and papers accordingly with the
         # adequate task
-    
+
         for link in xml.findall('./copyrightlinks/copyrightlink'):
             text = None
             url = None
@@ -397,10 +434,10 @@ class RomeoAPI(object):
                 cplink = PublisherCopyrightLink(
                     text=text, url=url[:1024], publisher=publisher)
                 cplink.save()
-    
+
         return publisher
-    
-    
+
+
     def add_restriction(self, xml, applies_to, publisher):
         """
         Creates a sharing restriction (SAD!) for a publisher
