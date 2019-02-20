@@ -365,7 +365,7 @@ class RomeoAPI(object):
                 url = nstrip(urls[0].text)
             if url and text:
                 cplink = PublisherCopyrightLink(
-                    text=text, url=url, publisher=publisher)
+                    text=text, url=url[:1024], publisher=publisher)
                 cplink.save()
     
         return publisher

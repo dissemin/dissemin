@@ -256,7 +256,7 @@ class PublisherCondition(models.Model):
 class PublisherCopyrightLink(models.Model):
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
     text = models.TextField()
-    url = models.URLField()
+    url = models.URLField(max_length=1024)
 
     def __str__(self):
         return self.text
