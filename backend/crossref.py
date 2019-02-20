@@ -27,8 +27,8 @@ import bz2
 import requests
 from requests.exceptions import RequestException
 
-from backend.romeo import fetch_journal
-from backend.romeo import fetch_publisher
+from publishers.romeo import fetch_journal
+from publishers.romeo import fetch_publisher
 from backend.utils import urlopen_retry
 from backend.doiprefixes import free_doi_prefixes
 from django.db import DataError

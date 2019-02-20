@@ -26,16 +26,11 @@ import unittest
 from backend.crossref import CrossRefAPI
 from backend.maintenance import cleanup_names
 from backend.maintenance import update_paper_statuses
-from backend.romeo import fetch_journal
-from backend.romeo import fetch_publisher
-from backend.romeo import find_journal_in_model
-from backend.romeo import perform_romeo_query
 from backend.tasks import fetch_everything_for_researcher
 from django.core.exceptions import ObjectDoesNotExist
 from django.test import TestCase
 import pytest
 
-from lxml import etree
 from papers.baremodels import BareAuthor
 from papers.baremodels import BareName
 from papers.baremodels import BarePaper
@@ -43,7 +38,7 @@ from papers.models import Name
 from papers.models import OaiRecord
 from papers.models import Paper
 from papers.models import Researcher
-from publishers.models import Journal
+
 from papers.tests.test_orcid import OrcidProfileStub
 
 TEST_INDEX = {
@@ -57,75 +52,6 @@ TEST_INDEX = {
 def get_researcher_by_name(first, last):
     n = Name.lookup_name((first, last))
     return Researcher.objects.get(name=n)
-
-# SHERPA/RoMEO interface
-class RomeoTest(TestCase):
-
-    def test_perform_query(self):
-        self.assertIsInstance(perform_romeo_query(
-            {'issn': '0022-328X'}), etree._ElementTree)
-        self.assertIsInstance(perform_romeo_query(
-            {'jtitle': 'Physical Review E'}), etree._ElementTree)
-
-    def test_fetch_journal(self):
-        terms = {'issn': '0022-328X'}
-        orig_terms = terms.copy()
-        self.assertIsInstance(fetch_journal(terms), Journal)
-        self.assertEqual(terms, orig_terms)
-        journal = find_journal_in_model(terms)
-        self.assertIsInstance(journal, Journal)
-        self.assertEqual(journal.issn, terms['issn'])
-
-    def test_fetch_publisher(self):
-        self.assertEqual(fetch_publisher(None), None)
-        # TODO: more tests!
-
-    def test_unicode(self):
-        terms = {'issn': '0375-0906'}
-        journal = fetch_journal(terms)
-        self.assertEqual(
-            journal.title, 'Revista de Gastroenterología de México')
-        self.assertEqual(journal.publisher.name, 'Elsevier España')
-
-    def test_ampersand(self):
-        terms = {'issn': '0003-1305'}
-        journal = fetch_journal(terms)
-        self.assertEqual(journal.publisher.name, 'Taylor & Francis')
-
-    def test_overescaped(self):
-        terms = {'issn': '2310-0133'}
-        journal = fetch_journal(terms)
-        self.assertEqual(journal.publisher.alias,
-                         'Научный издательский дом Исследов')
-
-    def test_too_long(self):
-        terms = {'jtitle': ("Volume 3: Industrial Applications; Modeling "
-                            "for Oil and Gas, Control and Validation, Estimation, and Control of "
-                            "Automotive Systems; "
-                            "Design; Physical Human-Robot Interaction; "
-                            "Rehabilitation Robotics; Sensing and Actuation for Control; Biomedical "
-                            "Systems; Time Delay Systems and Stability; Unmanned Ground and Surface "
-                            "Robotics; Vehicle Motion Controls; Vibration Analysis and Isolation; "
-                            "Vibration and Control for Energy Harvesting; Wind Energy")}
-        self.assertEqual(fetch_journal(terms), None)
-
-    def test_openaccess(self):
-        self.assertEqual(fetch_journal(
-            {'issn': '1471-2105'}).publisher.oa_status, 'OA')
-        self.assertEqual(fetch_journal(
-            {'issn': '1951-6169'}).publisher.oa_status, 'OA')
-
-    def test_closed(self):
-        self.assertEqual(fetch_journal(
-            {'issn': '0001-4826'}).publisher.oa_status, 'NOK')
-
-    def test_open(self):
-        self.assertEqual(fetch_journal(
-            {'issn': '1631-073X'}).publisher.oa_status, 'OK')
-        self.assertEqual(fetch_journal(
-            {'issn': '0099-2240'}).publisher.oa_status, 'OK')
-        self.assertEqual(fetch_journal(
-            {'issn': '0036-8075'}).publisher.oa_status, 'OK')
 
 
 def check_paper(asserter, paper):

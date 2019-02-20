@@ -17,7 +17,7 @@
 #
 
 
-from backend.romeo import fetch_journal
+from publishers.romeo import fetch_journal
 from papers.models import Paper
 from papers.tests.test_pages import RenderingTest
 
