@@ -21,7 +21,7 @@ Production settings
 
 As any Django website, Dissemin can be served by various web servers.
 These settings are not specific to dissemin itself so you should refer
-to `the relevant Django documentation <https://docs.djangoproject.com/en/1.11/howto/deployment/>`_.
+to `the relevant Django documentation <https://docs.djangoproject.com/en/2.2/howto/deployment/>`_.
 
 No matter what web server you use,
 you need to run ``python manage.py collectstatic`` to copy the static files from
@@ -59,7 +59,7 @@ to load MathJax from. In the example below, this would be
 Apache with WSGI
 ----------------
 
-Here is a sample VirtualHost, assuming that the root of the Dissemin source code is at ``/home/dissemin``.::
+Here is a sample VirtualHost, assuming that the root of the Dissemin source code is at ``/home/dissemin`` and you use ``python3.6``.::
 
     <VirtualHost *:80>
             ServerAdmin webmaster@localhost
@@ -93,7 +93,7 @@ Here is a sample VirtualHost, assuming that the root of the Dissemin source code
             # Path to the WSGI application for the website
             WSGIScriptAlias / /home/dissemin/dissemin/wsgi.py
             # Python path for the application
-            WSGIDaemonProcess dissemin.myuni.edu python-path=/home/dissemin:/home/dissemin/.virtualenv/lib/python2.7/site-packages
+            WSGIDaemonProcess dissemin.myuni.edu python-path=/home/dissemin:/home/dissemin/.virtualenv/lib/python3.6/site-packages
 
             WSGIProcessGroup dissemin.myuni.edu
 
