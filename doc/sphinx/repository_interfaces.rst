@@ -177,7 +177,7 @@ Dissemin does not always provide? We need to add a field in the deposit form
 to let the user fill this gap.
 
 Fortunately, Django has `a very convenient interface to deal with
-forms <https://docs.djangoproject.com/en/1.9/topics/forms/#building-a-form-in-django>`_,
+forms <https://docs.djangoproject.com/en/2.2/topics/forms/#building-a-form-in-django>`_,
 so it should be quite straightforward to add the fields you need.
 
 Let's say that the repository we want to deposit into takes two additional
@@ -207,7 +207,7 @@ All we need to do is to define a form with these two fields::
             label=_('Topic'), # the label that will be displayed on the field
             choices=MYREPO_TOPIC_CHOICES, # the possible choices for the user
             required=True, # is this field mandatory?
-            # other arguments are possible, see https://docs.djangoproject.com/en/1.9/ref/forms/fields/
+            # other arguments are possible, see https://docs.djangoproject.com/en/2.2/ref/forms/fields/
             )
 
         comment = forms.CharField(

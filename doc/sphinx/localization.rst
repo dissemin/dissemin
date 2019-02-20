@@ -7,7 +7,7 @@ Translations are hosted at `TranslateWiki
 <https://translatewiki.net/wiki/Translating:Dissemin>`_, for an easy-to-use
 interface for translations and statistics.
 
-We use `Django's standard localization system <https://docs.djangoproject.com/en/1.11/topics/i18n/>`_, based on i18n.
+We use `Django's standard localization system <https://docs.djangoproject.com/en/2.2/topics/i18n/>`_, based on i18n.
 This lets us translate strings in various places:
 
 * in Python code, use ``_("some translatable text")``, where ``_`` is imported by ``from django.utils.translation import ugettext_lazy as _``

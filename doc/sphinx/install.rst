@@ -55,12 +55,12 @@ Installation instructions for the web frontend
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 First, install the following dependencies (debian packages)
-``postgresql postgresql-server-dev-all postgresql-client python-virtualenv build-essential libxml2-dev libxslt1-dev python-dev gettext libjpeg-dev libffi-dev``
+``postgresql postgresql-server-dev-all postgresql-client python3-venv build-essential libxml2-dev libxslt1-dev python3-dev gettext libjpeg-dev libffi-dev``
 
 Then, build a virtual environment to isolate all the python
 dependencies::
 
-   virtualenv .virtualenv
+   python3 -m venv .virtualenv
    source .virtualenv/bin/activate
    pip install --upgrade setuptools
    pip install --upgrade pip
