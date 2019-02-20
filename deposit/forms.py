@@ -52,7 +52,7 @@ class PaperDepositForm(forms.Form):
         return uploadedPDF
 
 
-def wrap_with_prefetch_status(baseWidget, get_callback, fieldname):
+def wrap_with_prefetch_status(baseWidget, callback, fieldname):
     """
     Add a status text above the widget to display the prefetching status
     of the data in the field.
@@ -69,9 +69,8 @@ def wrap_with_prefetch_status(baseWidget, get_callback, fieldname):
     """
     orig_render = baseWidget.render
 
-    def new_render(self, name, value, attrs=None):
-        base_html = orig_render(self, name, value, attrs)
-        callback = get_callback()
+    def new_render(self, name, value, attrs=None, renderer=None):
+        base_html = orig_render(self, name, value, attrs, renderer)
         if value:
             return base_html
         return ('<span class="prefetchingFieldStatus" data-callback="%s" data-fieldid="%s" data-fieldname="%s" data-objfieldname="%s"></span>' % (callback, attrs['id'], name, fieldname))+base_html
