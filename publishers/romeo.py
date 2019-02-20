@@ -22,6 +22,7 @@
 
 from io import BytesIO
 
+import dateutil.parser
 import re
 import requests.exceptions
 
@@ -257,7 +258,10 @@ class RomeoAPI(object):
         """
         Retrieves from the model, or creates into the model,
         the publisher corresponding to the <publisher> description
-        from RoMEO
+        from RoMEO.
+        
+        If the data from RoMEO is more fresh than what we have
+        in cache, we update our model.
         """
         xml = romeo_xml_description
         romeo_id = None
@@ -281,12 +285,14 @@ class RomeoAPI(object):
                 alias = fromstring(kill_html(sanitize_html(alias))).text
         except (KeyError, IndexError):
             pass
+        
+        last_update = dateutil.parser.parse(xml.findall('./dateupdated')[0].text.strip().replace(' ', 'T')+'Z')
     
         # Check if we already have it.
         # Sadly the romeo_id is not unique (as publishers imported from doaj
         # all get the same id, so we have to use the name too).
         matches = None
-        if re.match('\d+', romeo_id):
+        if re.match('\d+', romeo_id): # numeric ids are unambiguous
             matches = Publisher.objects.filter(romeo_id=romeo_id)
         elif alias:
             matches = Publisher.objects.filter(
@@ -295,7 +301,9 @@ class RomeoAPI(object):
             matches = Publisher.objects.filter(
                 romeo_id=romeo_id, name__iexact=name, alias__isnull=True)
         if matches:
-            return matches[0]
+            first_match = matches[0]
+            if first_match.last_update >= last_update:
+                return matches[0]
     
         # Otherwise, create it
         url = None
@@ -328,11 +336,26 @@ class RomeoAPI(object):
         # Compute OA status of the publisher
         status = 'UNK'
     
-        publisher = Publisher(name=name, alias=alias, url=url, preprint=preprint,
-                              postprint=postprint, pdfversion=pdfversion, romeo_id=romeo_id,
-                              oa_status=status)
-    
+        if not matches:
+            publisher = Publisher()
+        else:
+            publisher = matches[0]
+        
+        publisher.name = name
+        publisher.alias = alias
+        publisher.url = url
+        publisher.preprint = preprint,
+        publisher.postprint = postprint
+        publisher.pdfversion = pdfversion
+        publisher.romeo_id = romeo_id,
+        publisher.oa_status = status
+        publisher.last_update = last_update
         publisher.save()
+        
+        if matches:
+            publisher.publishercopyrightlink_set.delete()
+            publisher.publisherrestrictiondetail_set.delete()
+            publisher.publishercondition_set.delete()
     
         # Add the conditions, restrictions, and copyright
         for restriction in xml.findall('./preprints/prerestrictions/prerestriction'):
@@ -353,6 +376,9 @@ class RomeoAPI(object):
         # Update the publisher status
         publisher.oa_status = publisher.classify_oa_status()
         publisher.save(update_fields=['oa_status'])
+        
+        # TODO: if the OA status has changed, then we should update the journals and papers accordingly with the
+        # adequate task
     
         for link in xml.findall('./copyrightlinks/copyrightlink'):
             text = None

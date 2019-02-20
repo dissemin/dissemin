@@ -100,6 +100,7 @@ class Publisher(models.Model):
         max_length=32, choices=POLICY_CHOICES, default='unknown')
     oa_status = models.CharField(
         max_length=32, choices=OA_STATUS_CHOICES_WITHOUT_HELPTEXT, default='UNK')
+    last_updated = models.DateTimeField(null=True, help_text="last update as reported by RoMEO")
 
     stats = models.ForeignKey(AccessStatistics, null=True, on_delete=models.SET_NULL)
 
