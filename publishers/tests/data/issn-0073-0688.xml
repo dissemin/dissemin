@@ -1,0 +1,79 @@
+<!DOCTYPE romeoapi SYSTEM "http://www.sherpa.ac.uk/romeo/romeoapi293.dtd">
+<romeoapi version="2.9.9">
+  <header>
+    <parameters>
+      <parameter source="specified">
+        <parametername>issn</parametername>
+        <parametervalue>0073-0688</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>showfunder</parametername>
+        <parametervalue>none</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>fIDnum</parametername>
+        <parametervalue>|</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>la</parametername>
+        <parametervalue>en</parametervalue>
+      </parameter>
+    </parameters>
+    <numhits>1</numhits>
+    <apicontrol>journal</apicontrol>
+    <outcome>singleJournal</outcome>
+    <message/>
+    <licence>SHERPA/RoMEO data is available for re-use under a Creative Commons Attribution-Non-Commercial-Share Alike 2.5 licence. For more details, please see the 'conditions for re-use' at the &lt;licenceurl /&gt;, and linked-to from the SHERPA/RoMEO home page.</licence>
+    <licenceurl>http://www.sherpa.ac.uk/romeoreuse.html</licenceurl>
+    <disclaimer>All SHERPA/RoMEO information is correct to the best of our knowledge but should not be relied upon for legal advice. SHERPA cannot be held responsible for the re-use of RoMEO data, or for alternative interpretations which are derived from this information.</disclaimer>
+    <timestamp>20-Feb-2019:19:20:48</timestamp>
+  </header>
+  <journals>
+    <journal>
+      <jtitle>Harvard Studies in Classical Philology</jtitle>
+      <issn>0073-0688</issn>
+      <zetocpub>Harvard University Press</zetocpub>
+      <romeopub>Harvard University Press</romeopub>
+    </journal>
+  </journals>
+  <publishers>
+    <publisher id="3243">
+      <name>Harvard University Press</name>
+      <alias/>
+      <homeurl>http://www.hup.harvard.edu/</homeurl>
+      <preprints>
+        <prearchiving>unclear</prearchiving>
+        <prerestrictions/>
+      </preprints>
+      <postprints>
+        <postarchiving>cannot</postarchiving>
+        <postrestrictions/>
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>can</pdfarchiving>
+        <pdfrestrictions/>
+      </pdfversion>
+      <conditions>
+        <condition>Creative Commons Attribution Non-Commercial License 3.0</condition>
+        <condition>Authors retain copyright</condition>
+        <condition>Publisher's version/PDF must be used</condition>
+        <condition>Applies to Health and Human Rights only</condition>
+      </conditions>
+      <mandates/>
+      <paidaccess>
+        <paidaccessurl/>
+        <paidaccessname/>
+        <paidaccessnotes/>
+      </paidaccess>
+      <copyrightlinks>
+        <copyrightlink>
+          <copyrightlinktext>Policy</copyrightlinktext>
+          <copyrightlinkurl>https://www.hhrjournal.org/about-hhr/peer-review-process-competing-interest-policy-data-sharing-policy/</copyrightlinkurl>
+        </copyrightlink>
+      </copyrightlinks>
+      <romeocolour>blue</romeocolour>
+      <dateadded>2018-05-10 10:48:27</dateadded>
+      <dateupdated>2018-05-10 10:48:27</dateupdated>
+    </publisher>
+  </publishers>
+</romeoapi>

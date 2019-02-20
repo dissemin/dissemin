@@ -246,7 +246,7 @@ class RomeoAPI(object):
             if isinstance(modified_since, datetime):
                 modified_since = modified_since.date()
             search_terms['pdate'] = modified_since.isoformat()
-        root = self.perform_romeo_query({'all':'yes'})
+        root = self.perform_romeo_query(search_terms)
         publishers = root.findall('./publishers/publisher')
         for publisher in publishers:
             try:
@@ -285,8 +285,12 @@ class RomeoAPI(object):
                 alias = fromstring(kill_html(sanitize_html(alias))).text
         except (KeyError, IndexError):
             pass
-        
-        last_update = dateutil.parser.parse(xml.findall('./dateupdated')[0].text.strip().replace(' ', 'T')+'Z')
+
+        dateupdated = xml.findall('./dateupdated')
+        if dateupdated and dateupdated[0].text:
+            last_update = dateutil.parser.parse(dateupdated[0].text.strip().replace(' ', 'T')+'Z')
+        else:
+            last_update = None
     
         # Check if we already have it.
         # Sadly the romeo_id is not unique (as publishers imported from doaj
@@ -302,7 +306,7 @@ class RomeoAPI(object):
                 romeo_id=romeo_id, name__iexact=name, alias__isnull=True)
         if matches:
             first_match = matches[0]
-            if first_match.last_update >= last_update:
+            if first_match.last_updated >= last_update:
                 return matches[0]
     
         # Otherwise, create it
@@ -344,18 +348,18 @@ class RomeoAPI(object):
         publisher.name = name
         publisher.alias = alias
         publisher.url = url
-        publisher.preprint = preprint,
+        publisher.preprint = preprint
         publisher.postprint = postprint
         publisher.pdfversion = pdfversion
-        publisher.romeo_id = romeo_id,
+        publisher.romeo_id = romeo_id
         publisher.oa_status = status
-        publisher.last_update = last_update
+        publisher.last_updated = last_update
         publisher.save()
         
         if matches:
-            publisher.publishercopyrightlink_set.delete()
-            publisher.publisherrestrictiondetail_set.delete()
-            publisher.publishercondition_set.delete()
+            publisher.publishercopyrightlink_set.all().delete()
+            publisher.publisherrestrictiondetail_set.all().delete()
+            publisher.publishercondition_set.all().delete()
     
         # Add the conditions, restrictions, and copyright
         for restriction in xml.findall('./preprints/prerestrictions/prerestriction'):

@@ -16,6 +16,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
+import dateutil.parser
 import os
 import requests_mock
 
@@ -79,15 +80,36 @@ class RomeoTest(TestCase):
 
     def test_fetch_publisher(self):
         self.assertEqual(self.api.fetch_publisher(None), None)
-        self.assertEqual(self.api.fetch_publisher('Harvard University Press').romeo_id, "3243")
+        
+        harvard = self.api.fetch_publisher('Harvard University Press')
+        self.assertEqual(harvard.romeo_id, "3243")
+        
+        journal = self.api.fetch_journal({'issn':'0073-0688'})
+        self.assertEqual(journal.publisher, harvard)
         
     def test_fetch_publisher_long_copyrightlink(self):
         publisher = self.api.fetch_publisher('Presses Universitaires de Nancy - Editions Universitaires de Lorraine')
-        self.assertEqual(publisher.romeo_id, 'some_id')
+        self.assertEqual(publisher.romeo_id, '2047')
         
     def test_fetch_publisher_dump(self):
         self.api.fetch_all_publishers()
         self.assertEqual(Publisher.objects.get(name='1066 Tidsskrift for historie').romeo_id, '1939')
+        
+    def test_subsequent_update(self):
+        # Fetch a publisher once
+        self.api.fetch_all_publishers(modified_since=dateutil.parser.parse('2016-01-01'))
+        p = Publisher.objects.get(alias='Czech Technical University in Prague')
+        self.assertEqual(p.last_updated, dateutil.parser.parse('2015-07-22T09:06:34Z'))
+        self.assertEqual(p.pdfversion, 'can')
+        self.assertTrue('Publisher last reviewed on 22/07/2015' in map(str, p.conditions))
+        
+        # Refetch it later with updated metadata
+        self.api.fetch_all_publishers(modified_since=dateutil.parser.parse('2017-01-01'))
+        p = Publisher.objects.get(alias='Czech Technical University in Prague')
+        self.assertEqual(p.last_updated, dateutil.parser.parse('2016-08-29T15:22:01Z'))
+        self.assertEqual(p.pdfversion, 'cannot')
+        self.assertTrue('Publisher last reviewed on 29/08/2016' in map(str, p.conditions))
+        self.assertFalse('Publisher last reviewed on 22/07/2015' in map(str, p.conditions))
 
     def test_unicode(self):
         terms = {'issn': '0375-0906'}
