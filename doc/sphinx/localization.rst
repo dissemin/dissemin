@@ -25,9 +25,11 @@ To generate the PO files, run::
 
     python manage.py makemessages --keep-pot --ignore doc
 
-This will generate a PO template `locale/django.pot` that can be used to create translated files for each language,
-such as ``locale/fr/LC_MESSAGES/django.po``. You can then
-compile them so that they can be displayed on the website::
+This will generate a PO template `locale/django.pot` that can be used to update the translated files for each language,
+such as ``locale/fr/LC_MESSAGES/django.po``. Note that in some circumstances Django can generate new translation files
+for languages not yet covered. In this case these new files should be deleted, as they will break Translatewiki.
+
+You can then compile them so that they can be displayed on the website::
 
     python manage.py compilemessages
 
