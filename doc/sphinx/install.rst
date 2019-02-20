@@ -238,6 +238,69 @@ To run the backend (still in the virtualenv)::
 The -B option starts the scheduler for periodic tasks, the -l option sets the debug level
 to INFO.
 
+In production you want to run ``celery`` and ``celerybeat`` as a daemon and be controlled by ``systemd``. ``celery`` and ``celerybeat`` are installed in the virtual environment of dissemin, so you have to take care, to use this environment. In particular you should use the same user for dissemin and celery.
+
+You can use the following sample files. Put this into ``/etc/default/celery`` and change ``CELERY_BIN`` path.::
+
+    # See
+    # http://docs.celeryproject.org/en/latest/tutorials/daemonizing.html#available-options
+
+    CELERY_APP="dissemin.celery:app"
+    CELERYD_NODES="dissem"
+    CELERYD_OPTS=""
+    CELERY_BIN="/path/to/venv/env/bin/celery"
+    CELERYD_PID_FILE="/var/run/celery/%n.pid"
+    CELERYD_LOG_FILE="/var/log/celery/%n.log"
+    CELERYD_LOG_LEVEL="INFO"
+
+    CELERYBEAT_SCHEDULE_FILE="/var/run/celery/beat-schedule"
+    CELERYBEAT_PID_FILE="/var/run/celery/beat.pid"
+    CELERYBEAT_LOG_FILE="/var/log/celery/beat.log"
+
+
+For ``celeryd`` systemd service put the following in ``/etc/systemd/system/celery.service`` and change ``WorkingDirectory`` to your dissemin root.::
+
+    [Unit]
+    Description=Celery Service
+    After=network.target
+
+    [Service]
+    Type=forking
+    User=dissemin
+    Group=dissemin
+    EnvironmentFile=-/etc/default/celery
+    WorkingDirectory=/path/to/dissemin/
+    ExecStart=/bin/sh -c '${CELERY_BIN} multi start ${CELERYD_NODES} -A ${CELERY_APP} --pidfile=${CELERYD_PID_FILE} --logfile=${CELERYD_LOG_FILE} --loglevel=${CELERYD_LOG_LEVEL} ${CELERYD_OPTS}'
+    ExecStop=/bin/sh -c '${CELERY_BIN} multi stopwait ${CELERYD_NODES} --pidfile=${CELERYD_PID_FILE}'
+    ExecReload=/bin/sh -c '${CELERY_BIN} multi restart ${CELERYD_NODES} -A ${CELERY_APP} --pidfile=${CELERYD_PID_FILE} --logfile=${CELERYD_LOG_FILE} --loglevel=${CELERYD_LOG_LEVEL} ${CELERYD_OPTS}'
+
+    [Install]
+    WantedBy=multi-user.target
+
+For ``celeryd`` systemd service put the following in ``/etc/systemd/system/celerybeat.service`` and change ``WorkingDirectory`` to your dissemin root.::
+
+    [Unit]
+    Description=Celerybeat Service
+    After=network.target
+
+    [Service]
+    Type=simple
+    User=dissemin
+    Group=dissemin
+    EnvironmentFile=-/etc/default/celery
+    WorkingDirectory=/path/to/dissemin/
+    ExecStart=/bin/sh -c 'PYTHONPATH=$(pwd) ${CELERY_BIN} beat -A ${CELERY_APP} --pidfile=${CELERYBEAT_PID_FILE} --logfile=${CELERYBEAT_LOG_FILE} --loglevel=${CELERYD_LOG_LEVEL} -s ${CELERYBEAT_SCHEDULE_FILE}'
+    ExecStop=/bin/kill -s TERM $MAINPID
+
+    [Install]
+    WantedBy=multi-user.target
+
+To make systemd create the necessary directories with permissions put the follwing into ``/etc/tmpfiles.d/celery.conf``::
+
+    d /var/run/celery 0755 dissemin dissemin
+    d /var/log/celery 0755 dissemin dissemin
+
+After that run ``systemctl daemon-reload`` to reload systemd service files and you are ready to use ``celery`` and ``celerybeat`` with systemd.
 
 Importing papers
 ~~~~~~~~~~~~~~~~
