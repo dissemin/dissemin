@@ -41,11 +41,6 @@ msgstr "ရှာဖွေမှု ရလာဒ်များ"
 msgid "Your search did not match any documents. Please make sure that all words are spelled correctly and that you've selected enough categories."
 msgstr ""
 
-#: doc/sphinx/_build/html/_static/searchtools.js:570
-#, javascript-format
-msgid "Search finished, found %s page(s) matching the search query."
-msgstr "ရှာဖွေမှု ပြီးပါပြီ၊ ရှာဖွေမှုနှင့် ကိုက်ညီသော စာမျက်နှာ % ကို တွေ့ပါသည်။"
-
 #: doc/sphinx/_build/html/_static/searchtools.js:623
 msgid ", in "
 msgstr ""
