@@ -18,32 +18,6 @@
 $(function(){
     makeTextEditable($('#department_name'), '/ajax/change-department', '{{ department.pk }}', 'name');
 });
-
-function addResearcher() {
-    var data = $('#addResearcherForm').serialize();
-    $('#addResearcherForm .formErrorDiv').each(function () {
-        $(this).text('');
-        });
-
-   $.post('{% url 'ajax-addResearcher' %}', data, null, 'json').fail(function(data) {
-            if(!data.responseJSON) {
-                {% trans "Dissemin encountered an error, please try again later." as errormsg %}
-                $('#globalError').text('{{ errormsg|escapejs }}');
-            } else {
-                error = data.responseJSON;
-                for(field in error) {
-                    if(field == 'message') {
-                        $('#globalError').text(error[field]);
-                    } else {
-                        $('#error-'+field).text(error[field]);
-                    }
-                }
-            }
-        }).done(function(data) {
-        $('#membersList').append('<li><a href="/researcher/'+data["id"]+'/">'+data['name']+'</a></li>');
-        $('#addResearcherForm .form-control').trigger("reset");
-    });
-}
 {% endif %}
 {% endblock %}
 
