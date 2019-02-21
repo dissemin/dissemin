@@ -26,6 +26,7 @@ from statistics.models import AccessStatistics
 from django.apps import apps
 from django.urls import reverse
 from django.db import models
+from django.db.models import Q
 from django.template.defaultfilters import slugify
 from django.utils.functional import cached_property
 from django.utils.translation import ugettext as _
@@ -100,11 +101,21 @@ class Publisher(models.Model):
         max_length=32, choices=POLICY_CHOICES, default='unknown')
     oa_status = models.CharField(
         max_length=32, choices=OA_STATUS_CHOICES_WITHOUT_HELPTEXT, default='UNK')
+    last_updated = models.DateTimeField(null=True, help_text="last update as reported by RoMEO")
 
     stats = models.ForeignKey(AccessStatistics, null=True, on_delete=models.SET_NULL)
 
     class Meta:
         db_table = 'papers_publisher'
+        
+    @classmethod
+    def find(cls, publisher_name):
+        """
+        Lookup a publisher by name. Return None if could not be found.
+        """
+        matches = cls.objects.filter(name__iexact=publisher_name)
+        if matches:
+            return matches[0]
 
     def classify_oa_status(self):
         """
@@ -216,12 +227,41 @@ class Publisher(models.Model):
 
 
 class Journal(models.Model):
+    """
+    A journal as represented by SERPA/RoMEO
+    """
     title = models.CharField(max_length=256, db_index=True)
     last_updated = models.DateTimeField(auto_now=True)
     issn = models.CharField(max_length=10, blank=True, null=True, unique=True)
+    essn = models.CharField(max_length=10, blank=True, null=True, unique=True)
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
 
     stats = models.ForeignKey(AccessStatistics, null=True, on_delete=models.SET_NULL)
+    
+    @classmethod
+    def find(cls, issn=None, essn=None, title=None):
+        """
+        Lookup a journal by title and issn.
+        If an issn is provided, it will be used in priority.
+        Otherwise we resort to case-insensitive title matching.
+        """
+        # Look up the journal in the model
+        issns = []
+        if issn:
+            issns.append(issn)
+        if essn:
+            issns.append(essn)
+        # By ISSN
+        if issns:
+            matches = cls.objects.filter(Q(issn__in=issns) | Q(essn__in=issns))
+            if matches:
+                return matches[0]
+
+        # By title
+        if title:
+            matches = cls.objects.filter(title__iexact=title.lower())
+            if matches:
+                return matches[0]
 
     def update_stats(self):
         if not self.stats:
@@ -244,7 +284,7 @@ class Journal(models.Model):
 
 class PublisherCondition(models.Model):
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
-    text = models.CharField(max_length=1024)
+    text = models.TextField()
 
     def __str__(self):
         return self.text
@@ -255,8 +295,8 @@ class PublisherCondition(models.Model):
 
 class PublisherCopyrightLink(models.Model):
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
-    text = models.CharField(max_length=256)
-    url = models.URLField()
+    text = models.TextField()
+    url = models.URLField(max_length=1024)
 
     def __str__(self):
         return self.text
@@ -267,7 +307,7 @@ class PublisherCopyrightLink(models.Model):
 
 class PublisherRestrictionDetail(models.Model):
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
-    text = models.CharField(max_length=256)
+    text = models.TextField()
     applies_to = models.CharField(max_length=32)
 
     def __str__(self):

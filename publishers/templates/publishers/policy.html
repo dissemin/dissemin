@@ -54,11 +54,18 @@
 {% endif %}
 
 <p class="sherpaAcknowledgement">{% trans "Policy data provided by" %}<br />
-<a href="http://www.sherpa.ac.uk/romeo/"><img src="{% static "img/sherpa-romeo.gif" %}" width="210" alt="SHERPA/RoMEO" /></a><br/>
-<a
-href="http://www.sherpa.ac.uk/romeo/feedback.php?la=en&amp;fIDnum=%7C&amp;mode=simple&amp;type=jpnew"
->{% trans "Report any error to them" %}</a></p>
+    <a href="http://www.sherpa.ac.uk/romeo/"><img src="{% static "img/sherpa-romeo.gif" %}" width="210" alt="SHERPA/RoMEO" /></a><br/>
+    {% with "http://www.sherpa.ac.uk/romeo/feedback.php?la=en&amp;fIDnum=%7C&amp;mode=simple&amp;type=jpnew" as feedback_url %}
+    {% if publisher.last_updated %}
+        {% blocktrans trimmed with last_updated=publisher.last_updated|date:"SHORT_DATE_FORMAT" %}
+        Last updated on {{ last_updated }}, <a href="{{ feedback_url }}">report any error to them</a>
+        {% endblocktrans %}
+    {% else %}
+        <a href="{{ feedback_url }}">{% trans "Report any error to them" %}</a>
+    {% endif %}
+</p>
 <p>
+{% endwith %}
 
 {% if request.user.is_superuser %}
 </div>

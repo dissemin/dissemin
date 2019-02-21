@@ -1,0 +1,104 @@
+<!DOCTYPE romeoapi SYSTEM "http://www.sherpa.ac.uk/romeo/romeoapi293.dtd">
+<romeoapi version="2.9.9">
+  <header>
+    <parameters>
+      <parameter source="specified">
+        <parametername>issn</parametername>
+        <parametervalue>1063-6706</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>showfunder</parametername>
+        <parametervalue>none</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>fIDnum</parametername>
+        <parametervalue>|</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>la</parametername>
+        <parametervalue>en</parametervalue>
+      </parameter>
+    </parameters>
+    <numhits>1</numhits>
+    <apicontrol>journal</apicontrol>
+    <outcome>singleJournal</outcome>
+    <message/>
+    <licence>SHERPA/RoMEO data is available for re-use under a Creative Commons Attribution-Non-Commercial-Share Alike 2.5 licence. For more details, please see the 'conditions for re-use' at the &lt;licenceurl /&gt;, and linked-to from the SHERPA/RoMEO home page.</licence>
+    <licenceurl>http://www.sherpa.ac.uk/romeoreuse.html</licenceurl>
+    <disclaimer>All SHERPA/RoMEO information is correct to the best of our knowledge but should not be relied upon for legal advice. SHERPA cannot be held responsible for the re-use of RoMEO data, or for alternative interpretations which are derived from this information.</disclaimer>
+    <timestamp>21-Feb-2019:11:41:17</timestamp>
+  </header>
+  <journals>
+    <journal>
+      <jtitle>IEEE Transactions on Fuzzy Systems</jtitle>
+      <issn>1063-6706</issn>
+      <zetocpub>Institute of Electrical and Electronics Engineers (IEEE)</zetocpub>
+      <romeopub>Institute of Electrical and Electronics Engineers (IEEE)</romeopub>
+    </journal>
+  </journals>
+  <publishers>
+    <publisher id="38">
+      <name>Institute of Electrical and Electronics Engineers</name>
+      <alias>IEEE</alias>
+      <homeurl>http://www.ieee.org/index.html</homeurl>
+      <preprints>
+        <prearchiving>can</prearchiving>
+        <prerestrictions/>
+      </preprints>
+      <postprints>
+        <postarchiving>can</postarchiving>
+        <postrestrictions/>
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>cannot</pdfarchiving>
+        <pdfrestrictions/>
+      </pdfversion>
+      <conditions>
+        <condition>Author's pre-print on any website or pre-print server</condition>
+        <condition>Author's post-print on author's personal website or employer's website or IEEE approved not-for-profit third party (8.1.9.G.2 ) website</condition>
+        <condition>Author's pre-print must be replaced by the accepted version, if on the author's personal website, employer's websites, arXiv, IEEE-approved third-party, not-for profit server, funder repository</condition>
+        <condition>Author's pre-print must removed on third-party servers</condition>
+        <condition>Author's pre-print must be accompanied with set phrase (see policy) before acceptance</condition>
+        <condition>Author's pre-print must be accompanied with set phrase (see policy) when accepted for publication</condition>
+        <condition>If funding agency rules apply, authors may post author's post-print version on funder's designated repository or institutional repository, in compliance with their funding agency rules. They may be required to comply with embargo periods of 0  to 24 months</condition>
+        <condition>Publisher copyright and source must be acknowledged with citation (see policy)</condition>
+        <condition>Must link to publisher version with DOI</condition>
+        <condition>Publisher's version/PDF cannot be used</condition>
+        <condition>Author's post-print on scholarly collaboration networks that have signed STM Sharing Principles</condition>
+        <condition>Publisher retains copyright</condition>
+        <condition>Publisher last contacted on 24/01/2018</condition>
+      </conditions>
+      <mandates/>
+      <paidaccess>
+        <paidaccessurl>http://open.ieee.org/</paidaccessurl>
+        <paidaccessname>IEEE Open Access Publishing Options</paidaccessname>
+        <paidaccessnotes>A paid open access option is available for this journal.</paidaccessnotes>
+      </paidaccess>
+      <copyrightlinks>
+        <copyrightlink>
+          <copyrightlinktext>Electronic information dissemination policy</copyrightlinktext>
+          <copyrightlinkurl>http://www.ieee.org/publications_standards/publications/rights/rights_policies.html</copyrightlinkurl>
+        </copyrightlink>
+        <copyrightlink>
+          <copyrightlinktext>copyright form</copyrightlinktext>
+          <copyrightlinkurl>http://www.ieee.org/documents/ieeecopyrightform.pdf</copyrightlinkurl>
+        </copyrightlink>
+        <copyrightlink>
+          <copyrightlinktext>Copyright Policy</copyrightlinktext>
+          <copyrightlinkurl>http://www.ieee.org/publications_standards/publications/rights/copyrightpolicy.html</copyrightlinkurl>
+        </copyrightlink>
+        <copyrightlink>
+          <copyrightlinktext>Author Posting of IEEE Copyrighted Papers Online</copyrightlinktext>
+          <copyrightlinkurl>https://www.ieee.org/publications_standards/publications/rights/paperversionpolicy.html</copyrightlinkurl>
+        </copyrightlink>
+        <copyrightlink>
+          <copyrightlinktext>Policy: Posting Your Article</copyrightlinktext>
+          <copyrightlinkurl>http://ieeeauthorcenter.ieee.org/publish-with-ieee/author-education-resources/guidelines-and-policies/policy-posting-your-article/</copyrightlinkurl>
+        </copyrightlink>
+      </copyrightlinks>
+      <romeocolour>green</romeocolour>
+      <dateadded>2004-01-10 00:00:00</dateadded>
+      <dateupdated>2018-06-08 09:40:24</dateupdated>
+    </publisher>
+  </publishers>
+</romeoapi>

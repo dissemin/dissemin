@@ -95,10 +95,8 @@ CROSSREF_MAILTO = 'dev@dissem.in'
 CROSSREF_USER_AGENT = 'Dissemin/0.1 (https://dissem.in/; mailto:dev@dissem.in)'
 
 ### RoMEO proxy ###
-# Set this to 'sherpa.ac.uk' if our custom mirror is not up anymore.
-# Otherwise our proxy caches results and is more reliable than the
-# original endpoint.
-ROMEO_API_DOMAIN = 'romeo-cache.dissem.in'
+# Set this to 'romeo-cache.dissem.in' for our own cache of their API
+ROMEO_API_DOMAIN = 'www.sherpa.ac.uk'
 
 ### Paper deposits ###
 # Max size of the PDFs (in bytes)
@@ -275,20 +273,17 @@ LANGUAGE_CODE = 'en-us'
 POSSIBLE_LANGUAGE_CODES = ['ar', 'bt-br', 'nl', 'en', 'fi', 'pt', 'fr', 'de', 'hi', 'ko', 'mk', 'pms', 'es', 'zh-hans', 'zh-hant', 'sv']
 LANGUAGES = [
     ('ar', _('Arabic')),
-    ('pt-br', _('Brazilian Portuguese')),
-    ('nl', _('Dutch')),
     ('en', _('English')),
     ('fi', _('Finnish')),
-    ('pt', _('European Portuguese')),
     ('fr', _('French')),
-    ('de', _('German')),
-    ('hi', _('Hindi')),
     ('ko', _('Korean')),
-    ('mk', _('Macedonian')),
-    ('pms', _('Piedmontese')),
     ('es', _('Spanish')),
     ('zh-hans', _('Simplified Chinese')),
     ('zh-hant', _('Traditional Chinese')),
+    ('mk', _('Macedonian')),
+    ('de', _('German')),
+    ('pt-br', _('Brazilian Portuguese')),
+    ('pt', _('European Portuguese')),
     ('sv', _('Swedish')),
 ]
 

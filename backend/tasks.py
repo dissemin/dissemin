@@ -103,12 +103,6 @@ def refetch_researchers(start_time=timezone.now() - timedelta(days=30*6)):
         fetch_everything_for_researcher(r.pk)
 
 
-@shared_task(name='change_publisher_oa_status')
-def change_publisher_oa_status(pk, status):
-    publisher = Publisher.objects.get(pk=pk)
-    publisher.change_oa_status(status)
-    publisher.update_stats()
-
 
 @shared_task(name='consolidate_paper')
 @run_only_once('consolidate_paper', keys=['pk'], timeout=1*60)
@@ -137,17 +131,6 @@ def update_all_stats():
     AccessStatistics.update_all_stats(Institution)
     #AccessStatistics.update_all_stats(Researcher)
     #AccessStatistics.update_all_stats(Department)
-
-
-
-@shared_task(name='update_journal_stats')
-@run_only_once('refresh_journal_stats', timeout=10*60)
-def update_journal_stats():
-    """
-    Updates statistics for journals (only visible to admins, so
-    not too frequently please)
-    """
-    AccessStatistics.update_all_stats(Journal)
 
 
 @shared_task(name='update_crossref')

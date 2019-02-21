@@ -1,0 +1,89 @@
+<!DOCTYPE romeoapi SYSTEM "http://www.sherpa.ac.uk/romeo/romeoapi293.dtd">
+<romeoapi version="2.9.9">
+  <header>
+    <parameters>
+      <parameter source="specified">
+        <parametername>issn</parametername>
+        <parametervalue>0001-3455</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>showfunder</parametername>
+        <parametervalue>none</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>fIDnum</parametername>
+        <parametervalue>|</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>la</parametername>
+        <parametervalue>en</parametervalue>
+      </parameter>
+    </parameters>
+    <numhits>1</numhits>
+    <apicontrol>journal</apicontrol>
+    <outcome>singleJournal</outcome>
+    <message/>
+    <licence>SHERPA/RoMEO data is available for re-use under a Creative Commons Attribution-Non-Commercial-Share Alike 2.5 licence. For more details, please see the 'conditions for re-use' at the &lt;licenceurl /&gt;, and linked-to from the SHERPA/RoMEO home page.</licence>
+    <licenceurl>http://www.sherpa.ac.uk/romeoreuse.html</licenceurl>
+    <disclaimer>All SHERPA/RoMEO information is correct to the best of our knowledge but should not be relied upon for legal advice. SHERPA cannot be held responsible for the re-use of RoMEO data, or for alternative interpretations which are derived from this information.</disclaimer>
+    <timestamp>21-Feb-2019:17:58:00</timestamp>
+  </header>
+  <journals>
+    <journal>
+      <jtitle>Abstracts in Anthropology</jtitle>
+      <issn>0001-3455</issn>
+      <zetocpub>SAGE Publications (UK and US)</zetocpub>
+      <romeopub>SAGE Publications (UK and US)</romeopub>
+    </journal>
+  </journals>
+  <publishers>
+    <publisher id="65">
+      <name>SAGE Publications</name>
+      <alias>UK and US</alias>
+      <homeurl>http://www.uk.sagepub.com/home.nav</homeurl>
+      <preprints>
+        <prearchiving>can</prearchiving>
+        <prerestrictions/>
+      </preprints>
+      <postprints>
+        <postarchiving>can</postarchiving>
+        <postrestrictions/>
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>cannot</pdfarchiving>
+        <pdfrestrictions/>
+      </pdfversion>
+      <conditions>
+        <condition>Authors retain copyright</condition>
+        <condition>Pre-print on any website</condition>
+        <condition>Author's post-print on author's personal website, departmental website, institutional website or institutional repository</condition>
+        <condition>On other repositories including PubMed Central after 12 months embargo</condition>
+        <condition>Publisher copyright and source must be acknowledged</condition>
+        <condition>Publisher's version/PDF cannot be used</condition>
+        <condition>Post-print version with changes from referees comments can be used</condition>
+        <condition>"as published" final version with layout and copy-editing changes cannot be archived but can be used on secure institutional intranet</condition>
+        <condition>Must link to publisher version with DOI</condition>
+        <condition>Publisher last reviewed on 29/07/2015</condition>
+      </conditions>
+      <mandates/>
+      <paidaccess>
+        <paidaccessurl>https://us.sagepub.com/en-us/nam/sage-choice</paidaccessurl>
+        <paidaccessname>SAGE Choice</paidaccessname>
+        <paidaccessnotes>A paid open access option is available for this journal.</paidaccessnotes>
+      </paidaccess>
+      <copyrightlinks>
+        <copyrightlink>
+          <copyrightlinktext>SAGE and Open Access</copyrightlinktext>
+          <copyrightlinkurl>https://us.sagepub.com/en-us/nam/Open-access-at-sage</copyrightlinkurl>
+        </copyrightlink>
+        <copyrightlink>
+          <copyrightlinktext>Posting to an Institutional Repository</copyrightlinktext>
+          <copyrightlinkurl>https://uk.sagepub.com/en-gb/eur/posting-to-an-institutional-repository</copyrightlinkurl>
+        </copyrightlink>
+      </copyrightlinks>
+      <romeocolour>green</romeocolour>
+      <dateadded>2004-01-10 00:00:00</dateadded>
+      <dateupdated>2013-03-11 11:27:37</dateupdated>
+    </publisher>
+  </publishers>
+</romeoapi>

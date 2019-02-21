@@ -1,0 +1,75 @@
+<!DOCTYPE romeoapi SYSTEM "http://www.sherpa.ac.uk/romeo/romeoapi293.dtd">
+<romeoapi version="2.9.9">
+  <header>
+    <parameters>
+      <parameter source="specified">
+        <parametername>issn</parametername>
+        <parametervalue>2310-0133</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>showfunder</parametername>
+        <parametervalue>none</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>fIDnum</parametername>
+        <parametervalue>|</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>la</parametername>
+        <parametervalue>en</parametervalue>
+      </parameter>
+    </parameters>
+    <numhits>1</numhits>
+    <apicontrol>journal</apicontrol>
+    <outcome>singleJournal</outcome>
+    <message/>
+    <licence>SHERPA/RoMEO data is available for re-use under a Creative Commons Attribution-Non-Commercial-Share Alike 2.5 licence. For more details, please see the 'conditions for re-use' at the &lt;licenceurl /&gt;, and linked-to from the SHERPA/RoMEO home page.</licence>
+    <licenceurl>http://www.sherpa.ac.uk/romeoreuse.html</licenceurl>
+    <disclaimer>All SHERPA/RoMEO information is correct to the best of our knowledge but should not be relied upon for legal advice. SHERPA cannot be held responsible for the re-use of RoMEO data, or for alternative interpretations which are derived from this information.</disclaimer>
+    <timestamp>27-Dec-2018:09:49:38</timestamp>
+  </header>
+  <journals>
+    <journal>
+      <jtitle>European Journal of Physical Education and Sport</jtitle>
+      <issn>2310-0133</issn>
+      <zetocpub>Academic Publishing House Researcher (&amp;#1053;&amp;#1072;&amp;#1091;&amp;#1095;&amp;#1085;&amp;#1099;&amp;#1081; &amp;#1080;&amp;#1079;&amp;#1076;&amp;#1072;&amp;#1090;&amp;#1077;&amp;#1083;&amp;#1100;&amp;#1089;&amp;#1082;&amp;#1080;&amp;#1081; &amp;#1076;&amp;#1086;&amp;#1084; &amp;#1048;&amp;#1089;&amp;#1089;&amp;#1083;&amp;#1077;&amp;#1076;&amp;#1086;&amp;#1074;)</zetocpub>
+      <romeopub>Academic Publishing House Researcher (&amp;#1053;&amp;#1072;&amp;#1091;&amp;#1095;&amp;#1085;&amp;#1099;&amp;#1081; &amp;#1080;&amp;#1079;&amp;#1076;&amp;#1072;&amp;#1090;&amp;#1077;&amp;#1083;&amp;#1100;&amp;#1089;&amp;#1082;&amp;#1080;&amp;#1081; &amp;#1076;&amp;#1086;&amp;#1084; &amp;#1048;&amp;#1089;&amp;#1089;&amp;#1083;&amp;#1077;&amp;#1076;&amp;#1086;&amp;#1074;)</romeopub>
+    </journal>
+  </journals>
+  <publishers>
+    <publisher id="1771">
+      <name>Academic Publishing House Researcher</name>
+      <alias>&amp;#1053;&amp;#1072;&amp;#1091;&amp;#1095;&amp;#1085;&amp;#1099;&amp;#1081; &amp;#1080;&amp;#1079;&amp;#1076;&amp;#1072;&amp;#1090;&amp;#1077;&amp;#1083;&amp;#1100;&amp;#1089;&amp;#1082;&amp;#1080;&amp;#1081; &amp;#1076;&amp;#1086;&amp;#1084; &amp;#1048;&amp;#1089;&amp;#1089;&amp;#1083;&amp;#1077;&amp;#1076;&amp;#1086;&amp;#1074;</alias>
+      <homeurl>http://www.aphr.ru/</homeurl>
+      <preprints>
+        <prearchiving>can</prearchiving>
+        <prerestrictions/>
+      </preprints>
+      <postprints>
+        <postarchiving>cannot</postarchiving>
+        <postrestrictions/>
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>can</pdfarchiving>
+        <pdfrestrictions/>
+      </pdfversion>
+      <conditions>
+        <condition>On open access repositories</condition>
+        <condition>Publisher's version/PDF must be used</condition>
+        <condition>Publisher copyright and source must be acknowledged</condition>
+        <condition>Publisher last contacted on 09/01/2014</condition>
+        <condition>All titles are open access journals</condition>
+      </conditions>
+      <mandates/>
+      <paidaccess>
+        <paidaccessurl/>
+        <paidaccessname/>
+        <paidaccessnotes/>
+      </paidaccess>
+      <copyrightlinks/>
+      <romeocolour>green</romeocolour>
+      <dateadded>2014-01-22 11:36:57</dateadded>
+      <dateupdated>2014-01-22 11:36:57</dateupdated>
+    </publisher>
+  </publishers>
+</romeoapi>

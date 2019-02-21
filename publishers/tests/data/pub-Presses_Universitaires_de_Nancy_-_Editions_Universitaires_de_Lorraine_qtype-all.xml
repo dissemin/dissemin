@@ -1,0 +1,89 @@
+<!DOCTYPE romeoapi SYSTEM "http://www.sherpa.ac.uk/romeo/romeoapi293.dtd">
+<romeoapi version="2.9.9">
+  <header>
+    <parameters>
+      <parameter source="specified">
+        <parametername>pub</parametername>
+        <parametervalue>Presses Universitaires de Nancy - Editions Universitaires de Lorraine</parametervalue>
+      </parameter>
+      <parameter source="specified">
+        <parametername>qtype</parametername>
+        <parametervalue>all</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>showfunder</parametername>
+        <parametervalue>none</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>fIDnum</parametername>
+        <parametervalue>|</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>la</parametername>
+        <parametervalue>en</parametervalue>
+      </parameter>
+    </parameters>
+    <numhits>1</numhits>
+    <apicontrol>publisher</apicontrol>
+    <outcome>publisherFound</outcome>
+    <message/>
+    <licence>SHERPA/RoMEO data is available for re-use under a Creative Commons Attribution-Non-Commercial-Share Alike 2.5 licence. For more details, please see the 'conditions for re-use' at the &lt;licenceurl /&gt;, and linked-to from the SHERPA/RoMEO home page.</licence>
+    <licenceurl>http://www.sherpa.ac.uk/romeoreuse.html</licenceurl>
+    <disclaimer>All SHERPA/RoMEO information is correct to the best of our knowledge but should not be relied upon for legal advice. SHERPA cannot be held responsible for the re-use of RoMEO data, or for alternative interpretations which are derived from this information.</disclaimer>
+    <timestamp>20-Feb-2019:06:16:34</timestamp>
+  </header>
+  <journals/>
+  <publishers>
+    <publisher id="2047">
+      <name>Presses Universitaires de Nancy - Editions Universitaires de Lorraine</name>
+      <alias/>
+      <homeurl>http://www.univ-lorraine.fr/content/presses-universitaires-de-nancy-editions-universitaires-de-lorraine</homeurl>
+      <preprints>
+        <prearchiving>cannot</prearchiving>
+        <prerestrictions/>
+      </preprints>
+      <postprints>
+        <postarchiving>restricted</postarchiving>
+        <postrestrictions>
+          <postrestriction>&lt;num&gt;12&lt;/num&gt; &lt;period units="month"&gt;months&lt;/period&gt; embargo for Author's post-print</postrestriction>
+          <postrestriction>&lt;num&gt;2&lt;/num&gt; &lt;period units="year"&gt;years&lt;/period&gt; embargo for Published Version</postrestriction>
+        </postrestrictions>
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>restricted</pdfarchiving>
+        <pdfrestrictions>
+          <pdfrestriction>&lt;num&gt;12&lt;/num&gt; &lt;period units="month"&gt;months&lt;/period&gt; embargo for Author's post-print</pdfrestriction>
+          <pdfrestriction>&lt;num&gt;2&lt;/num&gt; &lt;period units="year"&gt;years&lt;/period&gt; embargo for Published Version</pdfrestriction>
+        </pdfrestrictions>
+      </pdfversion>
+      <conditions>
+        <condition>On open access repositories</condition>
+        <condition>Publisher's version/PDF may be used after &lt;num&gt;2&lt;/num&gt; &lt;period units="year"&gt;years&lt;/period&gt; embargo</condition>
+        <condition>Publisher copyright and source must be acknowledged</condition>
+        <condition>Must link to journal home page or articles' DOI</condition>
+        <condition>Creative Commons Attribution Non-Commercial No Derivatives License 3.0</condition>
+        <condition>Applies to Questions de Communication</condition>
+        <condition>Publisher last contacted on 18/03/2017</condition>
+      </conditions>
+      <mandates/>
+      <paidaccess>
+        <paidaccessurl/>
+        <paidaccessname/>
+        <paidaccessnotes/>
+      </paidaccess>
+      <copyrightlinks>
+        <copyrightlink>
+          <copyrightlinktext>Politiques de publication</copyrightlinktext>
+          <copyrightlinkurl>http://questionsdecommunication.revues.org/?page=informations</copyrightlinkurl>
+        </copyrightlink>
+        <copyrightlink>
+          <copyrightlinktext>LOI n&#194;&#176; 2016-1321 du 7 octobre 2016 pour une R&#195;&#169;publique num&#195;&#169;rique - Article 30</copyrightlinktext>
+          <copyrightlinkurl>https://www.legifrance.gouv.fr/affichTexteArticle.do;jsessionid=E7769589F0E2851C932A1DC40626D9D6.tpdila15v_2?idArticle=JORFARTI000033202841&amp;cidTexte=JORFTEXT000033202746&amp;dateTexte=29990101&amp;categorieLien=id</copyrightlinkurl>
+        </copyrightlink>
+      </copyrightlinks>
+      <romeocolour>white</romeocolour>
+      <dateadded>2014-08-07 10:14:49</dateadded>
+      <dateupdated>2017-05-31 14:21:32</dateupdated>
+    </publisher>
+  </publishers>
+</romeoapi>

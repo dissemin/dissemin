@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE romeoapi SYSTEM "http://www.sherpa.ac.uk/romeo/romeoapi293.dtd">
+<romeoapi version="2.9.9">
+  <header>
+    <parameters>
+      <parameter source="specified">
+        <parametername>all</parametername>
+        <parametervalue>yes</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>showfunder</parametername>
+        <parametervalue>none</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>fIDnum</parametername>
+        <parametervalue>|</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>la</parametername>
+        <parametervalue>en</parametervalue>
+      </parameter>
+    </parameters>
+    <numhits>3008</numhits>
+    <apicontrol>all</apicontrol>
+    <outcome>publisherFound</outcome>
+    <message />
+    <licence>SHERPA/RoMEO data is available for re-use under a Creative Commons Attribution-Non-Commercial-Share Alike 2.5 licence. For more details, please see the 'conditions for re-use' at the &lt;licenceurl /&gt;, and linked-to from the SHERPA/RoMEO home page.</licence>
+    <licenceurl>http://www.sherpa.ac.uk/romeoreuse.html</licenceurl>
+    <disclaimer>All SHERPA/RoMEO information is correct to the best of our knowledge but should not be relied upon for legal advice. SHERPA cannot be held responsible for the re-use of RoMEO data, or for alternative interpretations which are derived from this information.</disclaimer>
+    <timestamp>20-Feb-2019:03:17:22</timestamp>
+  </header>
+  <journals />
+  <publishers>
+    <publisher id="2425">
+      <name>&amp;#268;eské vysoké u&amp;#269;ení technické v Praze</name>
+      <alias>Czech Technical University in Prague</alias>
+      <homeurl>http://intranet.cvut.cz/</homeurl>
+      <preprints>
+        <prearchiving>can</prearchiving>
+        <prerestrictions />
+      </preprints>
+      <postprints>
+        <postarchiving>can</postarchiving>
+        <postrestrictions />
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>cannot</pdfarchiving>
+        <pdfrestrictions />
+      </pdfversion>
+      <conditions>
+        <condition>Publisher's version/PDF may be used</condition>
+        <condition>On author's personal web site and institutional repository</condition>
+        <condition>Published source must be acknowledged</condition>
+        <condition>Creative Commons Attribution License</condition>
+        <condition>Publisher last reviewed on 29/08/2016</condition>
+        <condition>All titles are open access journals</condition>
+      </conditions>
+      <mandates />
+      <paidaccess>
+        <paidaccessurl />
+        <paidaccessname />
+        <paidaccessnotes />
+      </paidaccess>
+      <copyrightlinks>
+        <copyrightlink>
+          <copyrightlinktext>Policy</copyrightlinktext>
+          <copyrightlinkurl>https://ojs.cvut.cz/ojs/index.php/gi/about/submissions#copyrightNotice</copyrightlinkurl>
+        </copyrightlink>
+      </copyrightlinks>
+      <romeocolour>green</romeocolour>
+      <dateadded>2015-07-22 16:07:04</dateadded>
+      <dateupdated>2016-08-29 15:22:01</dateupdated>
+    </publisher>
+  </publishers>
+</romeoapi>

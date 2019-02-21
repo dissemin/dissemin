@@ -21,6 +21,7 @@
 
 
 from django.conf.urls import url
+from django.conf.urls import include
 from publishers import views
 
 urlpatterns = [
@@ -29,4 +30,5 @@ urlpatterns = [
             views.PublisherView.as_view()),  # Deprecated URL
         url(r'^b/(?P<pk>\d+)/(?P<slug>[\w-]*)$',
             views.PublisherView.as_view(), name='publisher'),
+        url(r'^ajax/', include('publishers.ajax')),
 ]

@@ -37,6 +37,7 @@ from papers.models import Paper
 from papers.models import Researcher
 from papers.models import Institution
 from oaipmh.client import Client
+from publishers.tests.test_romeo import RomeoAPIStub
 
 class InstitutionTest(django.test.TestCase):
     def test_valid(self):
@@ -219,9 +220,13 @@ class PaperTest(django.test.TestCase):
         self.assertEqual(p.oairecords[0].splash_url, 'https://hal.archives-ouvertes.fr/hal-00830421')
 
     def test_publication_pdf_url(self):
-        # This paper is gold OA
+        # This journal is open access
+        romeo = RomeoAPIStub()
+        journal = romeo.fetch_journal({'issn':'0250-6335'})
+        # Therefore any paper in it is available from the publisher
         p = Paper.create_by_doi('10.1007/BF02702259')
         p = Paper.from_bare(p)
+        self.assertEqual(p.publications[0].journal, journal)
         # so the pdf_url of the publication should be set
         self.assertEqual(p.publications[0].pdf_url.lower(
             ), 'https://doi.org/10.1007/BF02702259'.lower())

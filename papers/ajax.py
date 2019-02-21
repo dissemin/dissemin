@@ -19,12 +19,10 @@
 #
 
 
-
 from django.conf.urls import url
 from django.contrib.auth.decorators import user_passes_test
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
-from django.http import HttpResponseNotFound
 from django.shortcuts import get_object_or_404
 from django.views.decorators.http import require_POST
 from djgeojson.views import GeoJSONLayerView
@@ -37,8 +35,6 @@ from papers.user import is_admin
 from papers.user import is_authenticated
 from papers.utils import kill_html
 from papers.utils import sanitize_html
-from publishers.models import OA_STATUS_CHOICES
-from publishers.models import Publisher
 
 
 @json_view
@@ -230,23 +226,6 @@ def waitForConsolidatedField(request):
 # Publisher management
 
 
-@user_passes_test(is_admin)
-@require_POST
-def changePublisherStatus(request):
-    allowedStatuses = [s[0] for s in OA_STATUS_CHOICES]
-    try:
-        pk = request.POST.get('pk')
-        publisher = Publisher.objects.get(pk=pk)
-        status = request.POST.get('status')
-        if status in allowedStatuses and status != publisher.oa_status:
-            from backend.tasks import change_publisher_oa_status
-            change_publisher_oa_status.delay(pk=pk, status=status)
-            return HttpResponse('OK', content_type='text/plain')
-        else:
-            raise ObjectDoesNotExist
-    except ObjectDoesNotExist:
-        return HttpResponseNotFound('NOK', content_type='text/plain')
-
 class InstitutionsMapView(GeoJSONLayerView):
     model = Institution
     geometry_field = 'coords'
@@ -262,8 +241,6 @@ urlpatterns = [
     #    url(r'^change-paper$', changePaper, name='ajax-changePaper'),
     #    url(r'^change-researcher$', changeResearcher, name='ajax-changeResearcher'),
     #    url(r'^change-author$', changeAuthor, name='ajax-changeAuthor'),
-    url(r'^change-publisher-status$', changePublisherStatus,
-        name='ajax-changePublisherStatus'),
     #    url(r'^harvesting-status-(?P<pk>\d+)$', harvestingStatus, name='ajax-harvestingStatus'),
     url(r'^wait-for-consolidated-field$', waitForConsolidatedField,
         name='ajax-waitForConsolidatedField'),
