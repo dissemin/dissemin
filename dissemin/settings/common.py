@@ -272,22 +272,41 @@ BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 43200}
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 LANGUAGE_CODE = 'en-us'
-POSSIBLE_LANGUAGE_CODES = ['en', 'fr', 'zh-hans', 'mk']
+POSSIBLE_LANGUAGE_CODES = ['ar', 'bt-br', 'nl', 'en', 'fi', 'pt', 'fr', 'de', 'hi', 'ko', 'mk', 'pms', 'es', 'zh-hans', 'zh-hant', 'sv']
 LANGUAGES = [
     ('ar', _('Arabic')),
+    ('pt-br', _('Brazilian Portuguese')),
+    ('nl', _('Dutch')),
     ('en', _('English')),
     ('fi', _('Finnish')),
+    ('pt', _('European Portuguese')),
     ('fr', _('French')),
+    ('de', _('German')),
+    ('hi', _('Hindi')),
     ('ko', _('Korean')),
+    ('mk', _('Macedonian')),
+    ('pms', _('Piedmontese')),
     ('es', _('Spanish')),
     ('zh-hans', _('Simplified Chinese')),
     ('zh-hant', _('Traditional Chinese')),
-    ('mk', _('Macedonian')),
-    ('de', _('German')),
-    ('pt-br', _('Brazilian Portuguese')),
-    ('pt', _('European Portuguese')),
     ('sv', _('Swedish')),
 ]
+
+EXTRA_LANG_INFO = {
+    'pms': {
+        'bidi': False,
+        'code': 'pms',
+        'fallback': ['it'],
+        'name': 'Piedmontese',
+        'name_local': 'Lenga piemontèisa',
+    },
+}
+
+# Add custom languages not provided by Django
+import django.conf.locale
+LANG_INFO = dict(django.conf.locale.LANG_INFO, **EXTRA_LANG_INFO)
+django.conf.locale.LANG_INFO = LANG_INFO
+
 
 TIME_ZONE = 'Europe/Paris'
 USE_I18N = True
