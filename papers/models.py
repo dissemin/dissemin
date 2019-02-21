@@ -657,10 +657,12 @@ class Name(models.Model, BareName):
         return n
 
     @classmethod
-    def from_bare(cls, bare_name):
+    def from_bare(cls, bare_obj):
         """
-        Calls `lookup_name` for the given `bare_name`, if it is indeed bare..
+        Calls `lookup_name` for the given bare name `bare_obj`, if it is indeed
+        bare.
         """
+        bare_name = bare_obj
         if hasattr(bare_name, 'id'):
             return bare_name  # not so bare…
         return cls.lookup_name((bare_name.first, bare_name.last))
@@ -859,7 +861,7 @@ class Paper(models.Model, BarePaper):
         return Paper.objects.filter(fingerprint__exact=fp)
 
     @classmethod
-    def from_bare(cls, paper):
+    def from_bare(cls, bare_obj):
         """
         Saves a paper to the database if it is not already present.
         The clustering algorithm is run to decide what authors should be
@@ -867,6 +869,7 @@ class Paper(models.Model, BarePaper):
 
         :returns: the :class:`Paper` instance created from the bare paper supplied.
         """
+        paper = bare_obj
         try:
             # Look up the fingerprint
             fp = paper.fingerprint
@@ -970,7 +973,7 @@ class Paper(models.Model, BarePaper):
                 self.update_index()
                 return True
         # nothing was done, paper cannot be unclaimed
-        raise False
+        return False
 
     def claim_for(self, user):
         """

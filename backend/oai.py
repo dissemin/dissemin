@@ -51,8 +51,7 @@ class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSo
         """
         This sets up the paper source.
 
-        :param endpoint: the address of the OAI-PMH endpoint
-            to fetch from.
+        :param oaisource: the OAISource to fetch from.
         :param day_granularity: should we use day-granular timestamps
             to fetch from the proxy or full timestamps (default: False,
             full timestamps)

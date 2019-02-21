@@ -39,14 +39,14 @@ from publishers.models import OA_STATUS_CHOICES_WITHOUT_HELPTEXT
 
 class OrcidField(forms.CharField):
 
-    def to_python(self, val):
-        if not val:
+    def to_python(self, value):
+        if not value:
             return
-        cleaned_val = validate_orcid(val)
-        if cleaned_val is None:
+        cleaned_value = validate_orcid(value)
+        if cleaned_value is None:
             raise forms.ValidationError(
                 _('Invalid ORCID identifier.'), code='invalid')
-        return cleaned_val
+        return cleaned_value
 
 
 class ResearcherDepartmentForm(forms.Form):

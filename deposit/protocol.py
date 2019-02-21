@@ -246,7 +246,10 @@ class RepositoryProtocol(object):
         Returns the preference form for a user.
         All other arguments are passed to the form initialization.
         """
-        if self.preferences_form_class is None:
+        if (
+            self.preferences_form_class is None or not
+            callable(self.preferences_form_class)
+        ):
             return
 
         prefs = self.get_preferences(user)

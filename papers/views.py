@@ -374,8 +374,9 @@ class PaperView(SlugDetailView):
         paper = self.object
         return Department.objects.filter(researcher__author__paper=paper).distinct()
 
-    def get_object(self):
-        queryset = self.get_queryset()
+    def get_object(self, queryset=None):
+        if queryset is None:
+            queryset = self.get_queryset()
         pk = self.kwargs.get('pk', None)
         doi = self.kwargs.get('doi', None)
         if doi:

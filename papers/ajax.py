@@ -160,8 +160,7 @@ def unclaimPaper(request):
     except (KeyError, ValueError, Paper.DoesNotExist):
         return {'success': success, 'message': 'Invalid paper id'}, 404
     # returns true or false depending on whether something was actually changed
-    paper.unclaim_for(request.user)
-    success = True
+    success = paper.unclaim_for(request.user)
     return {'success': success}
 
 
