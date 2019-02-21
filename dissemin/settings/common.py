@@ -272,10 +272,10 @@ BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 43200}
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 LANGUAGE_CODE = 'en-us'
-POSSIBLE_LANGUAGE_CODES = ['ar', 'bt-br', 'nl', 'en', 'fi', 'pt', 'fr', 'de', 'hi', 'ko', 'mk', 'pms', 'es', 'zh-hans', 'zh-hant', 'sv']
+POSSIBLE_LANGUAGE_CODES = ['ar', 'bt_BR', 'nl', 'en', 'fi', 'pt', 'fr', 'de', 'hi', 'ko', 'mk', 'pms', 'es', 'zh_Hans', 'zh_Hant', 'sv']
 LANGUAGES = [
     ('ar', _('Arabic')),
-    ('pt-br', _('Brazilian Portuguese')),
+    ('pt_BR', _('Brazilian Portuguese')),
     ('nl', _('Dutch')),
     ('en', _('English')),
     ('fi', _('Finnish')),
@@ -287,8 +287,8 @@ LANGUAGES = [
     ('mk', _('Macedonian')),
     ('pms', _('Piedmontese')),
     ('es', _('Spanish')),
-    ('zh-hans', _('Simplified Chinese')),
-    ('zh-hant', _('Traditional Chinese')),
+    ('zh_Hans', _('Simplified Chinese')),
+    ('zh_Hant', _('Traditional Chinese')),
     ('sv', _('Swedish')),
 ]
 
@@ -300,13 +300,6 @@ EXTRA_LANG_INFO = {
         'name': 'Piedmontese',
         'name_local': 'Lenga piemontèisa',
     },
-#    'pt-BR': {
-#        'bidi': False,
-#        'code': 'pt-BR',
-#        'fallback': ['pt'],
-#        'name': 'Brazilian Portuguese',
-#        'name_local': 'português do Brasil',
-#    },
 }
 
 # Add custom languages not provided by Django
