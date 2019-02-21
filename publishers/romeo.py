@@ -294,6 +294,26 @@ class RomeoAPI(object):
             'journals': self._get_romeo_date(root, './journals/latestupdate')
         }
         
+    def fetch_updates(self):
+        """
+        Update the publishers and journals in the model,
+        only fetching the publishers which have been updated since the last update.
+        
+        The first time this is run, this fetches everything from RoMEO.
+        """
+        # First, determine latest update date for publishers in the model
+        latest_update_in_model = None
+        latest_updates = list(Publisher.objects.order_by('-last_updated').values_list('last_updated', flat=True)[:1])
+        if latest_updates:
+            latest_update_in_model = latest_updates[0]
+        
+        # Second, fetch the date of RoMEO's own last update
+        latest_update_in_romeo = self.get_romeo_latest_update_date()['publishers']
+        
+        if latest_update_in_model is None or latest_update_in_model < latest_update_in_romeo:
+            self.fetch_all_publishers(latest_update_in_model)
+    
+        self.fetch_all_journals()
 
     def get_or_create_publisher(self, romeo_xml_description):
         """

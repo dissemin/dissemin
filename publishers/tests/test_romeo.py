@@ -111,13 +111,12 @@ class RomeoTest(TestCase):
         
         journal = self.api.fetch_journal({'issn':'0073-0688'})
         self.assertEqual(journal.publisher, harvard)
-        self.assertEqual(journal.publisher.last_updated, dateutil)
         
     def test_fetch_publisher_long_copyrightlink(self):
         publisher = self.api.fetch_publisher('Presses Universitaires de Nancy - Editions Universitaires de Lorraine')
         self.assertEqual(publisher.romeo_id, '2047')
         
-    def test_fetch_dump(self):
+    def test_fetch_dumps(self):
         self.api.fetch_all_publishers()
         self.assertEqual(Publisher.objects.get(alias='Greek National Center of Social Research').romeo_id, '2201')
         
@@ -131,6 +130,26 @@ class RomeoTest(TestCase):
         self.assertEqual(j.title, 'Greek Review of Social Research')
         self.assertEqual(j.publisher.romeo_id, '2201')
         
+    def test_fetch_updates(self):
+        with requests_mock.mock() as http_mocker:
+            http_mocker.get('http://www.sherpa.ac.uk/downloads/journal-title-issns.php?ak=api_key&format=tsv',
+                content=self.journals_dump_response)
+            http_mocker.get('http://www.sherpa.ac.uk/downloads/download-dates.php?format=xml',
+                content=self.latest_update_response)
+
+            # Fetch all publishers initially
+            self.api.fetch_updates()
+            p = Publisher.objects.get(alias='GSA Today')
+            self.assertEqual(p.last_updated, dateutil.parser.parse('2019-02-14T14:05:19Z'))
+            p = Publisher.objects.get(romeo_id='2425')
+            self.assertEqual(p.url, 'http://intranet.cvut.cz/')
+            
+            # Fetch updates again
+            self.api.fetch_updates()
+            
+            # A publisher was updated
+            p = Publisher.objects.get(romeo_id='2425')
+            self.assertEqual(p.url, 'https://intranet.cvut.cz/')
         
     def test_subsequent_publisher_update(self):
         # Fetch a publisher once
