@@ -270,13 +270,19 @@ class RomeoAPI(object):
                 match = Journal.find(issn=issn, essn=essn, title=title)
 
                 if match and match.publisher.romeo_id != romeo_id:
-                    # Fix the publisher
-                    try:
-                        correct_publisher = Publisher.objects.get(romeo_id=romeo_id)
-                        match.publisher = correct_publisher
-                        match.save()
-                    except Publisher.DoesNotExist:
-                        pass
+                    if re.match('\d+', match.publisher.romeo_id):
+                        # This journal has changed publisher!
+                        try:
+                            correct_publisher = Publisher.objects.get(romeo_id=romeo_id)
+                            match.publisher = correct_publisher
+                            match.save()
+                        except Publisher.DoesNotExist:
+                            pass
+                    else:
+                        # The existing RoMEO id is buggy (imported from a previous version of the API)
+                        # so we just update it
+                        match.publisher.romeo_id = romeo_id
+                        match.publisher.save(update_fields=['romeo_id'])
                 elif match is None:
                     try:
                         publisher = Publisher.objects.get(romeo_id=romeo_id)

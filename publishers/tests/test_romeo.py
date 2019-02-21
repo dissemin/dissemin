@@ -132,6 +132,26 @@ class RomeoTest(TestCase):
         self.assertEqual(j.essn, '1234-5678')
         self.assertEqual(j.publisher.romeo_id, '2201')
         
+    def test_fix_buggy_romeo_ids(self):
+        """
+        A long time ago, the SHERPA API returned "DOAJ" or "journal" as publisher id for
+        some journals… so we need to update them appropriately.
+        """
+        publisher = Publisher(romeo_id='DOAJ', preprint='can', postprint='can', pdfversion='can')
+        publisher.save()
+        journal = Journal(issn='0013-9696', title='Greek Review of Social Research', publisher=publisher)
+        journal.save()
+
+        # mocked separately as a different endpoint is used
+        with requests_mock.mock() as http_mocker:
+            http_mocker.get('http://www.sherpa.ac.uk/downloads/journal-title-issns.php?ak=api_key&format=tsv',
+                content=self.journals_dump_response)
+            self.api.fetch_all_journals()
+            
+        new_publisher = Journal.objects.get(issn='0013-9696').publisher
+        self.assertEqual(new_publisher.pk, publisher.pk)
+        self.assertEqual(new_publisher.romeo_id, '2201')
+        
     def test_fetch_updates(self):
         with requests_mock.mock() as http_mocker:
             http_mocker.get('http://www.sherpa.ac.uk/downloads/journal-title-issns.php?ak=api_key&format=tsv',
