@@ -75,12 +75,13 @@ class RomeoTest(TestCase):
                 {'jtitle': 'Physical Review E'}), etree._ElementTree)
 
     def test_fetch_journal(self):
-        terms = {'issn': '0022-328X'}
+        terms = {'issn': '0001-3455'}
         orig_terms = terms.copy()
         journal = self.api.fetch_journal(terms)
         self.assertIsInstance(journal, Journal)
         self.assertEqual(journal.issn, terms['issn'])
-        self.assertEqual(journal.publisher.last_updated, dateutil.parser.parse('2015-05-01T09:50:58Z'))
+        self.assertEqual(journal.essn, None) # Sadly RoMEO does not provide ESSNs vîa this API endpoint
+        self.assertEqual(journal.publisher.last_updated, dateutil.parser.parse('2013-03-11T11:27:37Z'))
         self.assertEqual(terms, orig_terms)
         
         from_model = Journal.find(issn=terms['issn'])
@@ -128,6 +129,7 @@ class RomeoTest(TestCase):
             
         j = Journal.objects.get(issn='0013-9696')
         self.assertEqual(j.title, 'Greek Review of Social Research')
+        self.assertEqual(j.essn, '1234-5678')
         self.assertEqual(j.publisher.romeo_id, '2201')
         
     def test_fetch_updates(self):

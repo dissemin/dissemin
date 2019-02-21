@@ -26,6 +26,7 @@ from statistics.models import AccessStatistics
 from django.apps import apps
 from django.urls import reverse
 from django.db import models
+from django.db.models import Q
 from django.template.defaultfilters import slugify
 from django.utils.functional import cached_property
 from django.utils.translation import ugettext as _
@@ -232,27 +233,33 @@ class Journal(models.Model):
     title = models.CharField(max_length=256, db_index=True)
     last_updated = models.DateTimeField(auto_now=True)
     issn = models.CharField(max_length=10, blank=True, null=True, unique=True)
+    essn = models.CharField(max_length=10, blank=True, null=True, unique=True)
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
 
     stats = models.ForeignKey(AccessStatistics, null=True, on_delete=models.SET_NULL)
     
     @classmethod
-    def find(cls, issn=None, title=None):
+    def find(cls, issn=None, essn=None, title=None):
         """
         Lookup a journal by title and issn.
         If an issn is provided, it will be used in priority.
         Otherwise we resort to case-insensitive title matching.
         """
         # Look up the journal in the model
-        # By ISSN
+        issns = []
         if issn:
-            matches = cls.objects.filter(issn=issn)
+            issns.append(issn)
+        if essn:
+            issns.append(essn)
+        # By ISSN
+        if issns:
+            matches = cls.objects.filter(Q(issn__in=issns) | Q(essn__in=issns))
             if matches:
                 return matches[0]
 
         # By title
         if title:
-            matches = cls.objects.filter(title__iexact=title)
+            matches = cls.objects.filter(title__iexact=title.lower())
             if matches:
                 return matches[0]
 

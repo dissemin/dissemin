@@ -146,11 +146,17 @@ class RomeoAPI(object):
             issn = nstrip(journal.findall('./issn')[0].text)
         except (KeyError, IndexError):
             pass
+        
+        essn = None
+        try:
+            issn = nstrip(journal.findall('./essn')[0].text)
+        except (KeyError, IndexError):
+            pass
 
         # Now we may have additional info (ISSN from Romeo), so it's worth trying again in the model
         model_journal = journal
-        if issn != terms.get('issn') or name != terms.get('jtitle'):
-            model_journal = Journal.find(issn=issn, title=name)
+        if issn != terms.get('issn') or essn or name != terms.get('jtitle'):
+            model_journal = Journal.find(issn=issn, essn=essn, title=name)
         if model_journal:
             return model_journal
 
@@ -164,7 +170,7 @@ class RomeoAPI(object):
 
         publisher = self.get_or_create_publisher(publisher_desc)
 
-        result = Journal(title=name, issn=issn, publisher=publisher)
+        result = Journal(title=name, issn=issn, essn=essn, publisher=publisher)
         result.save()
         return result
 
@@ -261,7 +267,7 @@ class RomeoAPI(object):
                 [title, issn, essn, romeo_id, _] = fields
                 issn = issn or None
                 essn = essn or None
-                match = Journal.find(issn=issn or essn, title=title)
+                match = Journal.find(issn=issn, essn=essn, title=title)
 
                 if match and match.publisher.romeo_id != romeo_id:
                     # Fix the publisher
@@ -274,7 +280,7 @@ class RomeoAPI(object):
                 elif match is None:
                     try:
                         publisher = Publisher.objects.get(romeo_id=romeo_id)
-                        journal = Journal(title=title, issn=issn, publisher=publisher)
+                        journal = Journal(title=title, issn=issn, essn=essn, publisher=publisher)
                         journal.save()
                     except Publisher.DoesNotExist:
                         pass
