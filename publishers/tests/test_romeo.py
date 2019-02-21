@@ -75,20 +75,41 @@ class RomeoTest(TestCase):
     def test_fetch_journal(self):
         terms = {'issn': '0022-328X'}
         orig_terms = terms.copy()
-        self.assertIsInstance(self.api.fetch_journal(terms), Journal)
-        self.assertEqual(terms, orig_terms)
-        journal = Journal.find(issn=terms['issn'])
+        journal = self.api.fetch_journal(terms)
         self.assertIsInstance(journal, Journal)
         self.assertEqual(journal.issn, terms['issn'])
+        self.assertEqual(journal.publisher.last_updated, dateutil.parser.parse('2015-05-01T09:50:58Z'))
+        self.assertEqual(terms, orig_terms)
+        
+        from_model = Journal.find(issn=terms['issn'])
+        self.assertEqual(from_model, journal)
+        
+    def test_fetch_journal_updates_publisher(self):
+        # First we have an old version of a publisher record
+        p = Publisher(name='Harvard University Press', romeo_id='3243',
+                      preprint='can', postprint='can', pdfversion='can', last_updated=None)
+        p.classify_oa_status()
+        p.save()
+        
+        # Then we fetch one of its journals
+        journal = self.api.fetch_journal({'issn':'0073-0688'})
+        
+        # That updates the publisher object
+        publisher = Publisher.objects.get(id=journal.publisher.id)
+        self.assertEqual(publisher.id, p.id)
+        self.assertEqual(publisher.preprint, 'unclear')
+        self.assertEqual(publisher.last_updated, dateutil.parser.parse('2018-05-10T10:48:27Z'))
 
     def test_fetch_publisher(self):
         self.assertEqual(self.api.fetch_publisher(None), None)
         
         harvard = self.api.fetch_publisher('Harvard University Press')
         self.assertEqual(harvard.romeo_id, "3243")
+        self.assertEqual(harvard.last_updated, dateutil.parser.parse('2018-05-10T10:48:27Z'))
         
         journal = self.api.fetch_journal({'issn':'0073-0688'})
         self.assertEqual(journal.publisher, harvard)
+        self.assertEqual(journal.publisher.last_updated, dateutil)
         
     def test_fetch_publisher_long_copyrightlink(self):
         publisher = self.api.fetch_publisher('Presses Universitaires de Nancy - Editions Universitaires de Lorraine')
@@ -124,6 +145,9 @@ class RomeoTest(TestCase):
         self.assertEqual(p.pdfversion, 'cannot')
         self.assertTrue('Publisher last reviewed on 29/08/2016' in map(str, p.conditions))
         self.assertFalse('Publisher last reviewed on 22/07/2015' in map(str, p.conditions))
+        
+    # def test_publisher_updated_after_fetched_from_journal(self):
+        
 
     def test_unicode(self):
         terms = {'issn': '0375-0906'}

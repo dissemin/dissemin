@@ -327,7 +327,7 @@ class RomeoAPI(object):
                 romeo_id=romeo_id, name__iexact=name, alias__isnull=True)
         if matches:
             first_match = matches[0]
-            if first_match.last_updated >= last_update:
+            if first_match.last_updated is not None and first_match.last_updated >= last_update:
                 return matches[0]
 
         # Otherwise, create it
