@@ -5,6 +5,12 @@ FAQ for contributing to Dissemin
 
 Here are some frequently asked questions and tips for getting started to work and contribute to Dissemin. The best idea to start hacking on Dissemin is probably to use the VM (Vagrant method from :ref:`page-install`).
 
+Fetching a specific paper by DOI
+--------------------------------
+
+The Dissemin VM is quite empty by default. If you want to inspect particular paper, it is possible to fetch
+it by DOI by visiting ``http://localhost:8080/<DOI>``.
+
 Fetching a specific ORCID profile
 ---------------------------------
 
