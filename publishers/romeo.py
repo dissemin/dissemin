@@ -57,6 +57,7 @@ PUBLISHER_NAME_ASSOCIATION_FACTOR = 10
 class RomeoAPI(object):
 
     def __init__(self, domain=settings.ROMEO_API_DOMAIN, api_key=settings.ROMEO_API_KEY):
+        self.domain = domain
         self.base_url = 'http://'+domain+'/romeo/api29.php'
         self.api_key = api_key
 
@@ -169,6 +170,9 @@ class RomeoAPI(object):
 
 
     def fetch_publisher(self, publisher_name):
+        """
+        Retrieve a publisher from the RoMEO API.
+        """
         if publisher_name is None:
             return
 
@@ -238,12 +242,12 @@ class RomeoAPI(object):
             except MetadataSourceException as exception:
                 print(exception)
 
-    def fetch_all_journals(self, domain=settings.ROMEO_API_DOMAIN, api_key=settings.ROMEO_API_KEY):
+    def fetch_all_journals(self):
         """
         Fetches all the journals from RoMEO.
         """
-        r = requests.get('http://{}/downloads/journal-title-issns.php'.format(domain),
-                         {'ak':api_key, 'format':'tsv'})
+        r = requests.get('http://{}/downloads/journal-title-issns.php'.format(self.domain),
+                         {'ak':self.api_key, 'format':'tsv'})
         # r.encoding = 'ISO-8859-1'
         headers = None
         lines = r.text.split('\n')
@@ -274,6 +278,22 @@ class RomeoAPI(object):
                         journal.save()
                     except Publisher.DoesNotExist:
                         pass
+                    
+    def get_romeo_latest_update_date(self):
+        """
+        Fetches the dates of the latest updates on the RoMEO service.
+        This returns a dict: the dates can be accessed via the 'publishers' and 'journals'
+        keys.
+        """
+        r = requests.get('http://{}/downloads/download-dates.php'.format(self.domain),
+                         {'ak':self.api_key, 'format':'xml'})
+        parser = ET.XMLParser(encoding='ISO-8859-1')
+        root = ET.parse(BytesIO(r.content), parser)
+        return {
+            'publishers': self._get_romeo_date(root, './publisherspolicies/latestupdate'),
+            'journals': self._get_romeo_date(root, './journals/latestupdate')
+        }
+        
 
     def get_or_create_publisher(self, romeo_xml_description):
         """
@@ -307,11 +327,7 @@ class RomeoAPI(object):
         except (KeyError, IndexError):
             pass
 
-        dateupdated = xml.findall('./dateupdated')
-        if dateupdated and dateupdated[0].text:
-            last_update = dateutil.parser.parse(dateupdated[0].text.strip().replace(' ', 'T')+'Z')
-        else:
-            last_update = None
+        last_update = self._get_romeo_date(xml, './dateupdated')
 
         # Check if we already have it.
         # Sadly the romeo_id is not unique (as publishers imported from doaj
@@ -431,3 +447,12 @@ class RomeoAPI(object):
             r = PublisherRestrictionDetail(
                 publisher=publisher, applies_to=applies_to, text=text)
             r.save()
+            
+    def _get_romeo_date(self, xml, xpath):
+        """
+        Given an xml element and an XPath expression, return the parsed
+        date contained in that element.
+        """
+        element = xml.findall(xpath)
+        if element and element[0].text:
+            return dateutil.parser.parse(element[0].text.strip().replace(' ', 'T')+'Z')

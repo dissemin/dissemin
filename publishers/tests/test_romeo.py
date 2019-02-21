@@ -28,7 +28,7 @@ from lxml import etree
 
 class RomeoAPIStub(RomeoAPI):
     def __init__(self):
-        super(RomeoAPIStub, self).__init__()
+        super(RomeoAPIStub, self).__init__(api_key='api_key', domain='www.sherpa.ac.uk')
         testdir = os.path.dirname(os.path.abspath(__file__))
         self.datadir = os.path.join(testdir, 'data')
         
@@ -58,6 +58,8 @@ class RomeoTest(TestCase):
             cls.jtitle_response = jtitle_file.read()
         with open(os.path.join(cls.testdir, 'data/sample_journals.tsv'), 'rb') as journals_dump_file:
             cls.journals_dump_response = journals_dump_file.read()
+        with open(os.path.join(cls.testdir, 'data/latest_update.xml'), 'rb') as latest_update_file:
+            cls.latest_update_response = latest_update_file.read()
 
     def test_perform_query(self):
         api = RomeoAPI(domain='www.sherpa.ac.uk', api_key=None)
@@ -121,9 +123,9 @@ class RomeoTest(TestCase):
         
         # mocked separately as a different endpoint is used
         with requests_mock.mock() as http_mocker:
-            http_mocker.get('http://www.sherpa.ac.uk/downloads/journal-title-issns.php?ak=my_key&format=tsv',
+            http_mocker.get('http://www.sherpa.ac.uk/downloads/journal-title-issns.php?ak=api_key&format=tsv',
                 content=self.journals_dump_response)
-            self.api.fetch_all_journals(api_key='my_key')
+            self.api.fetch_all_journals()
             
         j = Journal.objects.get(issn='0013-9696')
         self.assertEqual(j.title, 'Greek Review of Social Research')
@@ -144,10 +146,7 @@ class RomeoTest(TestCase):
         self.assertEqual(p.last_updated, dateutil.parser.parse('2016-08-29T15:22:01Z'))
         self.assertEqual(p.pdfversion, 'cannot')
         self.assertTrue('Publisher last reviewed on 29/08/2016' in map(str, p.conditions))
-        self.assertFalse('Publisher last reviewed on 22/07/2015' in map(str, p.conditions))
-        
-    # def test_publisher_updated_after_fetched_from_journal(self):
-        
+        self.assertFalse('Publisher last reviewed on 22/07/2015' in map(str, p.conditions))      
 
     def test_unicode(self):
         terms = {'issn': '0375-0906'}
@@ -195,4 +194,15 @@ class RomeoTest(TestCase):
             {'issn': '0099-2240'}).publisher.oa_status, 'OK')
         self.assertEqual(self.api.fetch_journal(
             {'issn': '0036-8075'}).publisher.oa_status, 'OK')
-
+        
+    def test_get_romeo_latest_update_date(self):
+        with requests_mock.mock() as http_mocker:
+            http_mocker.get('http://www.sherpa.ac.uk/downloads/download-dates.php?ak=api_key&format=xml',
+                content=self.latest_update_response)
+            
+            latest_updates = self.api.get_romeo_latest_update_date()
+            
+            self.assertEqual(latest_updates, {
+                'journals': dateutil.parser.parse('2019-02-20T09:18:52Z'),
+                'publishers': dateutil.parser.parse('2019-02-15T10:57:11Z'),
+                })
