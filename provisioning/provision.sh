@@ -24,7 +24,7 @@ apt-get install -y build-essential curl screen libxml2-dev libxslt1-dev gettext 
         pwgen git
 
 # We install Python
-apt-get install -y python3 python3-dev python3-virtualenv virtualenv
+apt-get install -y python3 python3-dev python3-venv
 # We install PostgreSQL now
 apt-get install -y postgresql postgresql-server-dev-all postgresql-client
 # We install ElasticSearch now
@@ -59,15 +59,10 @@ systemctl restart elasticsearch
 # We install some dev tools (tmux and vim)
 apt-get install -y tmux vim-nox
 # We create a virtualenv for Dissemin
-virtualenv /dissemin/.vm_venv --no-site-packages -p $(which python3)
+python3 -m venv /dissemin/.vm_venv
 
-# Update setuptools
-# Fix for a weird setuptools bug, see
-# https://github.com/pypa/setuptools/issues/299#issuecomment-441898332
-/dissemin/.vm_venv/bin/pip uninstall -y setuptools
-/dissemin/.vm_venv/bin/pip install --upgrade setuptools
-# Update pip
-/dissemin/.vm_venv/bin/pip install --upgrade pip
+# Update pip and setuptools
+/dissemin/.vm_venv/bin/pip install --upgrade pip setuptools
 
 # We install dependencies in the virtualenv
 req_files=(requirements.txt requirements-dev.txt)
