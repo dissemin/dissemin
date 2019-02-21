@@ -926,7 +926,7 @@ msgstr " \n    <span class=\"paperDocType\">%(doctype)s</span> de\n    "
 #: papers/templates/papers/paper.html:70
 #, python-format
 msgid "and <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s other authors</a>"
-msgstr "et <a href=\"#\" id=\"show_all_authors\">%nb_remaining_authors)s autres auteurs</a>"
+msgstr "et <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s autres auteurs</a>"
 
 #: papers/templates/papers/paper.html:77
 #, python-format
