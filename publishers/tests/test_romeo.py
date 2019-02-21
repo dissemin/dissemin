@@ -27,9 +27,10 @@ from publishers.models import Publisher
 from lxml import etree
 
 class RomeoAPIStub(RomeoAPI):
-    def __init__(self, datadir):
+    def __init__(self):
         super(RomeoAPIStub, self).__init__()
-        self.datadir = datadir
+        testdir = os.path.dirname(os.path.abspath(__file__))
+        self.datadir = os.path.join(testdir, 'data')
         
     def perform_romeo_query(self, search_terms):
         filename = '_'.join(sorted('{}-{}'.format(key, val.replace(' ','_')) for key, val in search_terms.items())) + '.xml'
@@ -49,7 +50,7 @@ class RomeoTest(TestCase):
     def setUpClass(cls):
         super(RomeoTest, cls).setUpClass()
         cls.testdir = os.path.dirname(os.path.abspath(__file__))
-        cls.api = RomeoAPIStub(os.path.join(cls.testdir, 'data'))
+        cls.api = RomeoAPIStub()
         
         with open(os.path.join(cls.testdir, 'data/issn-0022-328X.xml'), 'rb') as issn_file:
             cls.issn_response = issn_file.read()
@@ -76,7 +77,7 @@ class RomeoTest(TestCase):
         orig_terms = terms.copy()
         self.assertIsInstance(self.api.fetch_journal(terms), Journal)
         self.assertEqual(terms, orig_terms)
-        journal = self.api.find_journal_in_model(terms)
+        journal = Journal.find(issn=terms['issn'])
         self.assertIsInstance(journal, Journal)
         self.assertEqual(journal.issn, terms['issn'])
 

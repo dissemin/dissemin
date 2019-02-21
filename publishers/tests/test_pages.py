@@ -28,7 +28,7 @@ class JournalPageTest(RenderingTest):
     def setUpClass(cls):
         super(JournalPageTest, cls).setUpClass()
         cls.testdir = os.path.dirname(os.path.abspath(__file__))
-        cls.api = RomeoAPIStub(os.path.join(cls.testdir, 'data'))
+        cls.api = RomeoAPIStub()
 
     def test_escaping(self):
         # issue #115
@@ -44,6 +44,7 @@ class JournalPageTest(RenderingTest):
         self.checkHtml(r)
 
     def test_publisher_url(self):
+        self.api.fetch_journal({'issn':'1860-949X'})
         p = Paper.create_by_doi('10.1007/978-3-642-14363-2_7')
         for publi in p.publications:
             self.checkPage('publisher', kwargs={

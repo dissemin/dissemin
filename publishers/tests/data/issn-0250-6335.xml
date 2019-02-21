@@ -1,0 +1,78 @@
+<!DOCTYPE romeoapi SYSTEM "http://www.sherpa.ac.uk/romeo/romeoapi293.dtd">
+<romeoapi version="2.9.9">
+  <header>
+    <parameters>
+      <parameter source="specified">
+        <parametername>issn</parametername>
+        <parametervalue>0250-6335</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>showfunder</parametername>
+        <parametervalue>none</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>fIDnum</parametername>
+        <parametervalue>|</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>la</parametername>
+        <parametervalue>en</parametervalue>
+      </parameter>
+    </parameters>
+    <numhits>1</numhits>
+    <apicontrol>journal</apicontrol>
+    <outcome>singleJournal</outcome>
+    <message/>
+    <licence>SHERPA/RoMEO data is available for re-use under a Creative Commons Attribution-Non-Commercial-Share Alike 2.5 licence. For more details, please see the 'conditions for re-use' at the &lt;licenceurl /&gt;, and linked-to from the SHERPA/RoMEO home page.</licence>
+    <licenceurl>http://www.sherpa.ac.uk/romeoreuse.html</licenceurl>
+    <disclaimer>All SHERPA/RoMEO information is correct to the best of our knowledge but should not be relied upon for legal advice. SHERPA cannot be held responsible for the re-use of RoMEO data, or for alternative interpretations which are derived from this information.</disclaimer>
+    <timestamp>21-Feb-2019:11:45:41</timestamp>
+  </header>
+  <journals>
+    <journal>
+      <jtitle>Journal of Astrophysics and Astronomy</jtitle>
+      <issn>0250-6335</issn>
+      <zetocpub>Indian Academy of Sciences</zetocpub>
+      <romeopub>Indian Academy of Sciences</romeopub>
+    </journal>
+  </journals>
+  <publishers>
+    <publisher id="1313">
+      <name>Indian Academy of Sciences</name>
+      <alias/>
+      <homeurl>http://www.ias.ac.in/</homeurl>
+      <preprints>
+        <prearchiving>can</prearchiving>
+        <prerestrictions/>
+      </preprints>
+      <postprints>
+        <postarchiving>cannot</postarchiving>
+        <postrestrictions/>
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>can</pdfarchiving>
+        <pdfrestrictions/>
+      </pdfversion>
+      <conditions>
+        <condition>Publisher's version/PDF must be used</condition>
+        <condition>On author's personal website and/or institutional repository</condition>
+        <condition>All titles are open access journals</condition>
+      </conditions>
+      <mandates/>
+      <paidaccess>
+        <paidaccessurl/>
+        <paidaccessname/>
+        <paidaccessnotes/>
+      </paidaccess>
+      <copyrightlinks>
+        <copyrightlink>
+          <copyrightlinktext>Example PACT Form</copyrightlinktext>
+          <copyrightlinkurl>http://www.ias.ac.in/resonance/Guide_PACT.pdf</copyrightlinkurl>
+        </copyrightlink>
+      </copyrightlinks>
+      <romeocolour>green</romeocolour>
+      <dateadded>2012-07-30 11:20:36</dateadded>
+      <dateupdated>2013-09-17 13:29:09</dateupdated>
+    </publisher>
+  </publishers>
+</romeoapi>

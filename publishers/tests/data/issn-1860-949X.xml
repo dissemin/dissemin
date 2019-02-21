@@ -1,0 +1,92 @@
+<!DOCTYPE romeoapi SYSTEM "http://www.sherpa.ac.uk/romeo/romeoapi293.dtd">
+<romeoapi version="2.9.9">
+  <header>
+    <parameters>
+      <parameter source="specified">
+        <parametername>issn</parametername>
+        <parametervalue>1860-949X</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>showfunder</parametername>
+        <parametervalue>none</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>fIDnum</parametername>
+        <parametervalue>|</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>la</parametername>
+        <parametervalue>en</parametervalue>
+      </parameter>
+    </parameters>
+    <numhits>1</numhits>
+    <apicontrol>journal</apicontrol>
+    <outcome>singleJournal</outcome>
+    <message/>
+    <licence>SHERPA/RoMEO data is available for re-use under a Creative Commons Attribution-Non-Commercial-Share Alike 2.5 licence. For more details, please see the 'conditions for re-use' at the &lt;licenceurl /&gt;, and linked-to from the SHERPA/RoMEO home page.</licence>
+    <licenceurl>http://www.sherpa.ac.uk/romeoreuse.html</licenceurl>
+    <disclaimer>All SHERPA/RoMEO information is correct to the best of our knowledge but should not be relied upon for legal advice. SHERPA cannot be held responsible for the re-use of RoMEO data, or for alternative interpretations which are derived from this information.</disclaimer>
+    <timestamp>21-Feb-2019:11:49:46</timestamp>
+  </header>
+  <journals>
+    <journal>
+      <jtitle>Studies in Computational Intelligence</jtitle>
+      <issn>1860-949X</issn>
+      <zetocpub>Springer Verlag (Germany)</zetocpub>
+      <romeopub>Springer Verlag (Germany)</romeopub>
+    </journal>
+  </journals>
+  <publishers>
+    <publisher id="74">
+      <name>Springer Verlag</name>
+      <alias>Germany</alias>
+      <homeurl>http://www.springerlink.com/?MUD=MP</homeurl>
+      <preprints>
+        <prearchiving>can</prearchiving>
+        <prerestrictions/>
+      </preprints>
+      <postprints>
+        <postarchiving>can</postarchiving>
+        <postrestrictions/>
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>cannot</pdfarchiving>
+        <pdfrestrictions/>
+      </pdfversion>
+      <conditions>
+        <condition>Author's pre-print on pre-print servers such as arXiv.org</condition>
+        <condition>Author's post-print on author's personal website immediately</condition>
+        <condition>Author's post-print on any open access repository after &lt;num&gt;12&lt;/num&gt; &lt;period units="month"&gt;months&lt;/period&gt; after publication</condition>
+        <condition>Publisher's version/PDF cannot be used</condition>
+        <condition>Published source must be acknowledged</condition>
+        <condition>Must link to publisher version</condition>
+        <condition>Set phrase to accompany link to published version (see policy)</condition>
+        <condition>Articles in some journals can be made Open Access on payment of additional charge</condition>
+        <condition>Publisher last reviewed on 26/07/2016</condition>
+      </conditions>
+      <mandates/>
+      <paidaccess>
+        <paidaccessurl>http://www.springer.com/gp/open-access/springer-open-choice</paidaccessurl>
+        <paidaccessname>Open Choice</paidaccessname>
+        <paidaccessnotes>A paid open access option is available for this journal.</paidaccessnotes>
+      </paidaccess>
+      <copyrightlinks>
+        <copyrightlink>
+          <copyrightlinktext>Self-archiving policy</copyrightlinktext>
+          <copyrightlinkurl>http://www.springer.com/gp/open-access/authors-rights/self-archiving-policy/2124</copyrightlinkurl>
+        </copyrightlink>
+        <copyrightlink>
+          <copyrightlinktext>Authors Rights</copyrightlinktext>
+          <copyrightlinkurl>http://www.springer.com/gp/open-access/authors-rights</copyrightlinkurl>
+        </copyrightlink>
+        <copyrightlink>
+          <copyrightlinktext>Funder Compliance</copyrightlinktext>
+          <copyrightlinkurl>http://www.springer.com/gp/open-access/authors-rights/funder-compliance/6332</copyrightlinkurl>
+        </copyrightlink>
+      </copyrightlinks>
+      <romeocolour>green</romeocolour>
+      <dateadded>2004-01-10 00:00:00</dateadded>
+      <dateupdated>2014-05-16 15:39:42</dateupdated>
+    </publisher>
+  </publishers>
+</romeoapi>
