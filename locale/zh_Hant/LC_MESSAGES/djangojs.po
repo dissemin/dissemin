@@ -5,25 +5,25 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2017-10-27 02:45:09+0000\n"
+"PO-Revision-Date: 2019-02-21 13:56:09+0000\n"
 "X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: zh-Hant\n"
-"X-Generator: MediaWiki 1.31.0-alpha; Translate 2017-07-25\n"
+"Language: zh_hant\n"
+"X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: doc/sphinx/_build/html/_static/doctools.js:167
 msgid "Permalink to this headline"
-msgstr ""
+msgstr "至此章節標題的固定連結"
 
 #: doc/sphinx/_build/html/_static/doctools.js:173
 msgid "Permalink to this definition"
-msgstr ""
+msgstr "至此定義的固定連結"
 
 #: doc/sphinx/_build/html/_static/doctools.js:206
 msgid "Hide Search Matches"
-msgstr ""
+msgstr "隱藏搜尋符合內容"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:400
 msgid "Searching"
@@ -31,7 +31,7 @@ msgstr "搜尋中"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:405
 msgid "Preparing search..."
-msgstr ""
+msgstr "正在準備搜尋..."
 
 #: doc/sphinx/_build/html/_static/searchtools.js:566
 msgid "Search Results"
@@ -39,16 +39,16 @@ msgstr "搜尋結果"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:568
 msgid "Your search did not match any documents. Please make sure that all words are spelled correctly and that you've selected enough categories."
-msgstr ""
+msgstr "您的搜尋未找出任何符合文件。請確認所有的字詞都有拼寫正確，並且您已經有選擇足夠的分類項目。"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:570
 #, javascript-format
 msgid "Search finished, found %s page(s) matching the search query."
-msgstr ""
+msgstr "搜尋結束，找出 %s 個符合搜尋查詢的頁面。"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:623
 msgid ", in "
-msgstr ""
+msgstr "，在 "
 
 #: doc/sphinx/_build/html/_static/sidebar.js:77
 msgid "Expand sidebar"
@@ -73,21 +73,20 @@ msgstr "沒有標題"
 
 #: papers/static/papers/refresh.js:70
 msgid "Invalid publication date"
-msgstr ""
+msgstr "無效出版日期"
 
 #: papers/static/papers/refresh.js:105
-#, invalid-plural
 msgid "We ignored %(count)s paper from your ORCiD profile."
 msgid_plural "We ignored %(count)s papers from your ORCiD profile."
-msgstr[0] ""
+msgstr[0] "我們從您的 ORCiD 個人檔案裡忽略了 %(count)s 篇論文。"
 
 #: papers/static/papers/refresh.js:115
 msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
-msgstr ""
+msgstr "「%(name)s」因為下列原因被忽略掉：%(reason)s"
 
 #: papers/static/papers/refresh.js:123
 msgid "A paper was ignored, because it has no name"
-msgstr ""
+msgstr "有論文被忽略掉，因為沒有名稱"
 
 #: papers/static/papers/refresh.js:135 papers/static/papers/refresh.js:163
 msgid "Show more information"
