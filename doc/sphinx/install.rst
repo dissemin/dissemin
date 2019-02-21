@@ -240,7 +240,7 @@ to INFO.
 
 In production you want to run ``celery`` and ``celerybeat`` as a daemon and be controlled by ``systemd``. ``celery`` and ``celerybeat`` are installed in the virtual environment of dissemin, so you have to take care, to use this environment. In particular you should use the same user for dissemin and celery.
 
-You can use the following sample files. Put this into ``/etc/default/celery`` and change ``CELERY_BIN`` path.::
+You should use the following sample files that are similar to the `official sample files <https://github.com/celery/celery/tree/master/extra/systemd>`_. The main differences are a different ``PYTHONPATH``, respect of the virtual environment and ``stop`` command for celerybeat. Put this into ``/etc/default/celery`` and change ``CELERY_BIN`` path.::
 
     # See
     # http://docs.celeryproject.org/en/latest/tutorials/daemonizing.html#available-options
@@ -268,6 +268,7 @@ For ``celeryd`` systemd service put the following in ``/etc/systemd/system/celer
     Type=forking
     User=dissemin
     Group=dissemin
+    Restart=always
     EnvironmentFile=-/etc/default/celery
     WorkingDirectory=/path/to/dissemin/
     ExecStart=/bin/sh -c '${CELERY_BIN} multi start ${CELERYD_NODES} -A ${CELERY_APP} --pidfile=${CELERYD_PID_FILE} --logfile=${CELERYD_LOG_FILE} --loglevel=${CELERYD_LOG_LEVEL} ${CELERYD_OPTS}'
@@ -287,6 +288,7 @@ For ``celeryd`` systemd service put the following in ``/etc/systemd/system/celer
     Type=simple
     User=dissemin
     Group=dissemin
+    Restart=always
     EnvironmentFile=-/etc/default/celery
     WorkingDirectory=/path/to/dissemin/
     ExecStart=/bin/sh -c 'PYTHONPATH=$(pwd) ${CELERY_BIN} beat -A ${CELERY_APP} --pidfile=${CELERYBEAT_PID_FILE} --logfile=${CELERYBEAT_LOG_FILE} --loglevel=${CELERYD_LOG_LEVEL} -s ${CELERYBEAT_SCHEDULE_FILE}'
@@ -295,12 +297,22 @@ For ``celeryd`` systemd service put the following in ``/etc/systemd/system/celer
     [Install]
     WantedBy=multi-user.target
 
+Note that we use ``/Bin/sh -c`` to process the ``PYTHONPATH`` and ``${CELERY_BIN}``.
+
 To make systemd create the necessary directories with permissions put the follwing into ``/etc/tmpfiles.d/celery.conf``::
 
     d /var/run/celery 0755 dissemin dissemin
     d /var/log/celery 0755 dissemin dissemin
 
-After that run ``systemctl daemon-reload`` to reload systemd service files and you are ready to use ``celery`` and ``celerybeat`` with systemd.
+After that run ``systemctl daemon-reload`` to reload systemd service files and you are ready to use ``celery`` and ``celerybeat`` with systemd by calling::
+
+    systemctl start celery.service
+    systemctl start celerybeat.service
+
+To make them start on boot call::
+
+    systemctl enable celery.service
+    systemctl enable celerybeat.service
 
 Importing papers
 ~~~~~~~~~~~~~~~~
