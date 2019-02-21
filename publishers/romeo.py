@@ -87,24 +87,6 @@ class RomeoAPI(object):
 
         return root
 
-
-    def find_journal_in_model(self, search_terms):
-        issn = search_terms.get('issn', None)
-        title = search_terms.get('jtitle', None)
-        # Look up the journal in the model
-        # By ISSN
-        if issn:
-            matches = Journal.objects.filter(issn=issn)
-            if matches:
-                return matches[0]
-
-        # By title
-        if title:
-            matches = Journal.objects.filter(title__iexact=title)
-            if matches:
-                return matches[0]
-
-
     def fetch_journal(self, search_terms, matching_mode='exact'):
         """
         Fetch the journal data from RoMEO. Returns an Journal object.
@@ -129,7 +111,7 @@ class RomeoAPI(object):
                 return None
 
         # First check we don't have it already
-        journal = self.find_journal_in_model(terms)
+        journal = Journal.find(issn=terms.get('issn'), title=terms.get('jtitle'))
         if journal:
             return journal
 
@@ -164,8 +146,10 @@ class RomeoAPI(object):
         except (KeyError, IndexError):
             pass
 
-        # Now we may have additional info, so it's worth trying again in the model
-        model_journal = self.find_journal_in_model({'issn': issn, 'jtitle': name})
+        # Now we may have additional info (ISSN from Romeo), so it's worth trying again in the model
+        model_journal = journal
+        if issn != terms.get('issn') or name != terms.get('jtitle'):
+            model_journal = Journal.find(issn=issn, title=name)
         if model_journal:
             return model_journal
 
@@ -189,9 +173,9 @@ class RomeoAPI(object):
             return
 
         # First, let's see if we have a publisher with that name
-        matching_publishers = Publisher.objects.filter(name=publisher_name)
-        if len(matching_publishers) == 1:
-            return matching_publishers[0]
+        matching_publisher = Publisher.find(publisher_name)
+        if matching_publisher:
+            return matching_publisher
 
         # Second, let's see if the publisher name has often been associated to a
         # known publisher
@@ -273,7 +257,7 @@ class RomeoAPI(object):
                 [title, issn, essn, romeo_id, _] = fields
                 issn = issn or None
                 essn = essn or None
-                match = self.find_journal_in_model({'issn':issn or essn,'jtitle': title})
+                match = Journal.find(issn=issn or essn, title=title)
 
                 if match and match.publisher.romeo_id != romeo_id:
                     # Fix the publisher

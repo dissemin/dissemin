@@ -106,6 +106,15 @@ class Publisher(models.Model):
 
     class Meta:
         db_table = 'papers_publisher'
+        
+    @classmethod
+    def find(cls, publisher_name):
+        """
+        Lookup a publisher by name. Return None if could not be found.
+        """
+        matches = cls.objects.filter(name__iexact=publisher_name)
+        if matches:
+            return matches[0]
 
     def classify_oa_status(self):
         """
@@ -217,12 +226,35 @@ class Publisher(models.Model):
 
 
 class Journal(models.Model):
+    """
+    A journal as represented by SERPA/RoMEO
+    """
     title = models.CharField(max_length=256, db_index=True)
     last_updated = models.DateTimeField(auto_now=True)
     issn = models.CharField(max_length=10, blank=True, null=True, unique=True)
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
 
     stats = models.ForeignKey(AccessStatistics, null=True, on_delete=models.SET_NULL)
+    
+    @classmethod
+    def find(cls, issn=None, title=None):
+        """
+        Lookup a journal by title and issn.
+        If an issn is provided, it will be used in priority.
+        Otherwise we resort to case-insensitive title matching.
+        """
+        # Look up the journal in the model
+        # By ISSN
+        if issn:
+            matches = cls.objects.filter(issn=issn)
+            if matches:
+                return matches[0]
+
+        # By title
+        if title:
+            matches = cls.objects.filter(title__iexact=title)
+            if matches:
+                return matches[0]
 
     def update_stats(self):
         if not self.stats:

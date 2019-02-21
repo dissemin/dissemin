@@ -27,7 +27,6 @@ import bz2
 import requests
 from requests.exceptions import RequestException
 
-from publishers.romeo import RomeoAPI
 from backend.utils import urlopen_retry
 from backend.doiprefixes import free_doi_prefixes
 from django.db import DataError
@@ -52,6 +51,8 @@ from papers.utils import tolerant_datestamp_to_datetime
 from papers.utils import valid_publication_date
 from papers.utils import validate_orcid
 from publishers.models import AliasPublisher
+from publishers.models import Journal
+from publishers.models import Publisher
 from backend.pubtype_translations import CROSSREF_PUBTYPE_ALIASES
 from time import sleep
 
@@ -237,20 +238,15 @@ def _create_publication(paper, metadata):
     if doi_prefix in free_doi_prefixes or any(map(is_oa_license, licenses)):
         pdf_url = splash_url
 
-    romeo = RomeoAPI()
-
     # Lookup journal
-    search_terms = {'jtitle': title}
-    if issn:
-        search_terms['issn'] = issn
-    journal = romeo.fetch_journal(search_terms)
+    journal = Journal.find(issn=issn, title=title)
 
     publisher = None
     if journal:
         publisher = journal.publisher
         AliasPublisher.increment(publisher_name, journal.publisher)
     else:
-        publisher = romeo.fetch_publisher(publisher_name)
+        publisher = Publisher.find(publisher_name)
 
     barepub = BareOaiRecord(
             paper=paper,
