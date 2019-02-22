@@ -25,10 +25,11 @@ from publishers.romeo import RomeoAPI
 from publishers.models import Journal
 from publishers.models import Publisher
 from lxml import etree
+from unittest.mock import patch
 
 class RomeoAPIStub(RomeoAPI):
     def __init__(self):
-        super(RomeoAPIStub, self).__init__(api_key='api_key', domain='www.sherpa.ac.uk')
+        super(RomeoAPIStub, self).__init__(domain='www.sherpa.ac.uk')
         testdir = os.path.dirname(os.path.abspath(__file__))
         self.datadir = os.path.join(testdir, 'data')
         
@@ -123,7 +124,7 @@ class RomeoTest(TestCase):
         
         # mocked separately as a different endpoint is used
         with requests_mock.mock() as http_mocker:
-            http_mocker.get('http://www.sherpa.ac.uk/downloads/journal-title-issns.php?ak=api_key&format=tsv',
+            http_mocker.get('http://www.sherpa.ac.uk/downloads/journal-title-issns.php?format=tsv',
                 content=self.journals_dump_response)
             self.api.fetch_all_journals()
             
@@ -144,17 +145,45 @@ class RomeoTest(TestCase):
 
         # mocked separately as a different endpoint is used
         with requests_mock.mock() as http_mocker:
-            http_mocker.get('http://www.sherpa.ac.uk/downloads/journal-title-issns.php?ak=api_key&format=tsv',
+            http_mocker.get('http://www.sherpa.ac.uk/downloads/journal-title-issns.php?format=tsv',
                 content=self.journals_dump_response)
-            self.api.fetch_all_journals()
             
-        new_publisher = Journal.objects.get(issn='0013-9696').publisher
-        self.assertEqual(new_publisher.pk, publisher.pk)
-        self.assertEqual(new_publisher.romeo_id, '2201')
+            with patch.object(Journal, 'change_publisher') as mock_change_publisher:
+                self.api.fetch_all_journals()
+                
+                new_publisher = Journal.objects.get(issn='0013-9696').publisher
+                
+                mock_change_publisher.assert_not_called()
+            
+                self.assertEqual(new_publisher.pk, publisher.pk)
+                self.assertEqual(new_publisher.romeo_id, '2201')
+        
+    def test_publisher_change(self):
+        """
+        If the publisher associated with a journal changes, we need to change it too,
+        but also update the associated papers!
+        """
+        journal = self.api.fetch_journal({'issn':'0013-9696'})
+        original_publisher = journal.publisher
+        
+        new_publisher = Publisher(romeo_id='12345', preprint='cannot', postprint='cannot', pdfversion='cannot')
+        new_publisher.save()
+        journal.publisher = new_publisher
+        journal.save()
+        
+        # Fetching the updates from romeo should revert to the original (true) publisher
+        with requests_mock.mock() as http_mocker:
+            http_mocker.get('http://www.sherpa.ac.uk/downloads/journal-title-issns.php?format=tsv',
+                content=self.journals_dump_response)
+            
+            with patch.object(Journal, 'change_publisher') as mock_change_publisher:
+                self.api.fetch_all_journals()
+                mock_change_publisher.assert_called_once_with(original_publisher)
+        
         
     def test_fetch_updates(self):
         with requests_mock.mock() as http_mocker:
-            http_mocker.get('http://www.sherpa.ac.uk/downloads/journal-title-issns.php?ak=api_key&format=tsv',
+            http_mocker.get('http://www.sherpa.ac.uk/downloads/journal-title-issns.php?format=tsv',
                 content=self.journals_dump_response)
             http_mocker.get('http://www.sherpa.ac.uk/downloads/download-dates.php?format=xml',
                 content=self.latest_update_response)
@@ -238,7 +267,7 @@ class RomeoTest(TestCase):
         
     def test_get_romeo_latest_update_date(self):
         with requests_mock.mock() as http_mocker:
-            http_mocker.get('http://www.sherpa.ac.uk/downloads/download-dates.php?ak=api_key&format=xml',
+            http_mocker.get('http://www.sherpa.ac.uk/downloads/download-dates.php?format=xml',
                 content=self.latest_update_response)
             
             latest_updates = self.api.get_romeo_latest_update_date()

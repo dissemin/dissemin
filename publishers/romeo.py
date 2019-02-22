@@ -235,8 +235,7 @@ class RomeoAPI(object):
                         # This journal has changed publisher!
                         try:
                             correct_publisher = Publisher.objects.get(romeo_id=romeo_id)
-                            match.publisher = correct_publisher
-                            match.save()
+                            match.change_publisher(correct_publisher)
                         except Publisher.DoesNotExist:
                             pass
                     else:
@@ -245,8 +244,7 @@ class RomeoAPI(object):
                         try:
                             correct_publisher = Publisher.objects.get(romeo_id=romeo_id)
                             correct_publisher.merge(match.publisher)
-                            match.publisher = correct_publisher
-                            match.save()
+                            match.change_publisher(correct_publisher)
                         except Publisher.DoesNotExist:
                             match.publisher.romeo_id = romeo_id
                             match.publisher.save(update_fields=['romeo_id'])

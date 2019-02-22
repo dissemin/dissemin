@@ -5,7 +5,9 @@ Created on 21 févr. 2019
 '''
 
 from publishers.models import Journal
+from publishers.models import Publisher
 from django.test import TestCase
+from papers.models import Paper
 from publishers.tests.test_romeo import RomeoAPIStub
 
 class JournalTest(TestCase):
@@ -56,4 +58,26 @@ class JournalTest(TestCase):
         # Check that the journal was redirected
         journal = Journal.objects.get(id=journal.id)
         self.assertEqual(journal.publisher_id, self.publisher.id)
+        
+    def test_change_publisher(self):
+        """
+        Changing the publisher of a journal should update the 
+        associated papers.
+        """
+        journal = RomeoAPIStub().fetch_journal({'issn':'0892-7537'})
+        paper = Paper.create_by_doi('10.1007/bf02221836')
+        self.assertEqual(paper.oairecords[0].journal, journal)
+        self.assertEqual(paper.oairecords[0].publisher.oa_status, 'OK')
+        self.assertEqual(paper.oa_status, 'OK')
+        
+        closed_publisher = Publisher(romeo_id='249384', preprint='cannot', postprint='cannot', pdfversion='cannot')
+        closed_publisher.save()
+        
+        journal.change_publisher(closed_publisher)
+        paper = Paper.objects.get(id=paper.id)
+        journal = Journal.objects.get(id=journal.id)
+        self.assertEqual(paper.oa_status, 'UNK')
+        self.assertEqual(paper.publisher(), closed_publisher)
+        self.assertEqual(journal.publisher, closed_publisher)
+        
         

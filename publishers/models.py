@@ -309,6 +309,23 @@ class Journal(models.Model):
             matches = cls.objects.filter(title__iexact=title.lower())
             if matches:
                 return matches[0]
+            
+    def change_publisher(self, new_publisher):
+        """
+        Changing the publisher of a Journal is a heavy task:
+        we need to update all the OaiRecords associated with
+        this Journal to map to the new publisher
+        """
+        oa_status_changed = self.publisher.oa_status != new_publisher.oa_status
+        self.publisher = new_publisher
+        self.save()
+        self.oairecord_set.all().update(publisher = new_publisher)
+        if oa_status_changed:
+            papers = get_model('papers', 'Paper').objects.filter(
+                oairecord__journal=self.pk)
+            for p in papers:
+                p.update_availability()
+                p.invalidate_cache()
 
     def update_stats(self):
         if not self.stats:
