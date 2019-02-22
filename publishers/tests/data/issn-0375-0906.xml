@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE romeoapi SYSTEM "http://www.sherpa.ac.uk/romeo/romeoapi293.dtd">
 <romeoapi version="2.9.9">
   <header>
@@ -22,49 +23,49 @@
     <numhits>1</numhits>
     <apicontrol>journal</apicontrol>
     <outcome>singleJournal</outcome>
-    <message/>
+    <message />
     <licence>SHERPA/RoMEO data is available for re-use under a Creative Commons Attribution-Non-Commercial-Share Alike 2.5 licence. For more details, please see the 'conditions for re-use' at the &lt;licenceurl /&gt;, and linked-to from the SHERPA/RoMEO home page.</licence>
     <licenceurl>http://www.sherpa.ac.uk/romeoreuse.html</licenceurl>
     <disclaimer>All SHERPA/RoMEO information is correct to the best of our knowledge but should not be relied upon for legal advice. SHERPA cannot be held responsible for the re-use of RoMEO data, or for alternative interpretations which are derived from this information.</disclaimer>
-    <timestamp>29-Nov-2018:16:54:35</timestamp>
+    <timestamp>22-Feb-2019:10:09:57</timestamp>
   </header>
   <journals>
     <journal>
-      <jtitle>Revista de Gastroenterolog&#237;a de M&#233;xico</jtitle>
+      <jtitle>Revista de Gastroenterología de México</jtitle>
       <issn>0375-0906</issn>
-      <zetocpub>Elsevier Espa&#241;a (Elsevier Doyma)</zetocpub>
-      <romeopub>Elsevier Espa&#241;a (Elsevier Doyma)</romeopub>
+      <zetocpub>Elsevier España (Elsevier Doyma)</zetocpub>
+      <romeopub>Elsevier España (Elsevier Doyma)</romeopub>
     </journal>
   </journals>
   <publishers>
-    <publisher id="990" parentid="30">
-      <name>Elsevier Espa&#241;a</name>
+    <publisher id="990"  parentid="30">
+      <name>Elsevier España</name>
       <alias>Elsevier Doyma</alias>
       <homeurl>http://www.elsevier.com/</homeurl>
       <preprints>
         <prearchiving>can</prearchiving>
-        <prerestrictions/>
+        <prerestrictions />
       </preprints>
       <postprints>
         <postarchiving>can</postarchiving>
-        <postrestrictions/>
+        <postrestrictions />
       </postprints>
       <pdfversion>
         <pdfarchiving>cannot</pdfarchiving>
-        <pdfrestrictions/>
+        <pdfrestrictions />
       </pdfversion>
       <conditions>
         <condition>Authors pre-print on any website, including arXiv and RePEC</condition>
         <condition>Author's post-print on author's personal website immediately</condition>
-        <condition>Author's post-print on open access repository after an embargo period of between &lt;num&gt;12&lt;/num&gt; &lt;period units="month"&gt;months&lt;/period&gt; and &lt;num&gt;48&lt;/num&gt; &lt;period units="month"&gt;months&lt;/period&gt;</condition>
-        <condition>Permitted deposit due to Funding Body, Institutional and Governmental policy or mandate, may be required to comply with embargo periods of &lt;num&gt;12&lt;/num&gt; &lt;period units="month"&gt;months&lt;/period&gt; to &lt;num&gt;48&lt;/num&gt; &lt;period units="month"&gt;months&lt;/period&gt;</condition>
+        <condition>Author's post-print on open access repository after an embargo period of between &lt;num&gt;12&lt;/num&gt; &lt;period units=&quot;month&quot;&gt;months&lt;/period&gt; and &lt;num&gt;48&lt;/num&gt; &lt;period units=&quot;month&quot;&gt;months&lt;/period&gt;</condition>
+        <condition>Permitted deposit due to Funding Body, Institutional and Governmental policy or mandate, may be required to comply with embargo periods of &lt;num&gt;12&lt;/num&gt; &lt;period units=&quot;month&quot;&gt;months&lt;/period&gt; to &lt;num&gt;48&lt;/num&gt; &lt;period units=&quot;month&quot;&gt;months&lt;/period&gt;</condition>
         <condition>Author's post-print may be used to update arXiv and RepEC</condition>
         <condition>Publisher's version/PDF cannot be used</condition>
         <condition>Must link to publisher version with DOI</condition>
         <condition>Author's post-print must be released with a Creative Commons Attribution Non-Commercial No Derivatives License</condition>
         <condition>Publisher last reviewed on 01/05/2015</condition>
       </conditions>
-      <mandates/>
+      <mandates />
       <paidaccess>
         <paidaccessurl>http://www.elsevier.com/about/open-access/sponsored-articles</paidaccessurl>
         <paidaccessname>Open Access</paidaccessname>
@@ -93,7 +94,7 @@
         </copyrightlink>
         <copyrightlink>
           <copyrightlinktext>Journal Embargo List for UK Authors&lt;a/&gt; - &lt;a href=http://www.elsevier.com/about/company-information/policies/sharing/how-to-attach-a-user-license&gt;Attaching a User License</copyrightlinktext>
-          <copyrightlinkurl>https://www.elsevier.com/__data/assets/pdf_file/0011/78473/UK-embargo-periods.pdf</copyrightlinkurl>
+          <copyrightlinkurl>hhttps://www.elsevier.com/__data/assets/pdf_file/0011/78473/UK_Embargo_Periods.pdf</copyrightlinkurl>
         </copyrightlink>
         <copyrightlink>
           <copyrightlinktext>Funding Body Agreements</copyrightlinktext>

@@ -26,7 +26,6 @@ import dateutil.parser
 import re
 import requests.exceptions
 
-from backend.utils import cached_urlopen_retry
 from datetime import datetime
 from django.conf import settings
 from lxml import etree as ET
@@ -68,8 +67,7 @@ class RomeoAPI(object):
 
         # Perform the query
         try:
-            response = cached_urlopen_retry(
-                self.base_url, data=search_terms, timeout=20).encode('utf-8')
+            req = requests.get(self.base_url, params=search_terms, timeout=20)
         except requests.exceptions.RequestException as e:
             raise MetadataSourceException('Error while querying RoMEO.\n' +
                                           'URL was: '+self.base_url+'\n' +
@@ -79,7 +77,7 @@ class RomeoAPI(object):
         # Parse it
         try:
             parser = ET.XMLParser(encoding='ISO-8859-1')
-            root = ET.parse(BytesIO(response), parser)
+            root = ET.parse(BytesIO(req.content), parser)
         except ET.ParseError as e:
             raise MetadataSourceException('RoMEO returned an invalid XML response.\n' +
                                           'URL was: '+self.base_url+'\n' +
@@ -260,7 +258,7 @@ class RomeoAPI(object):
         for line in lines:
             if not line:
                 continue
-            fields = line.split('\t')
+            fields = line.strip().split('\t')
             if headers is None:
                 headers = fields
             else:
