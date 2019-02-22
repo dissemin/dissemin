@@ -1,0 +1,81 @@
+<!DOCTYPE romeoapi SYSTEM "http://www.sherpa.ac.uk/romeo/romeoapi293.dtd">
+<romeoapi version="2.9.9">
+  <header>
+    <parameters>
+      <parameter source="specified">
+        <parametername>issn</parametername>
+        <parametervalue>0013-9696</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>showfunder</parametername>
+        <parametervalue>none</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>fIDnum</parametername>
+        <parametervalue>|</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>la</parametername>
+        <parametervalue>en</parametervalue>
+      </parameter>
+    </parameters>
+    <numhits>1</numhits>
+    <apicontrol>journal</apicontrol>
+    <outcome>singleJournal</outcome>
+    <message/>
+    <licence>SHERPA/RoMEO data is available for re-use under a Creative Commons Attribution-Non-Commercial-Share Alike 2.5 licence. For more details, please see the 'conditions for re-use' at the &lt;licenceurl /&gt;, and linked-to from the SHERPA/RoMEO home page.</licence>
+    <licenceurl>http://www.sherpa.ac.uk/romeoreuse.html</licenceurl>
+    <disclaimer>All SHERPA/RoMEO information is correct to the best of our knowledge but should not be relied upon for legal advice. SHERPA cannot be held responsible for the re-use of RoMEO data, or for alternative interpretations which are derived from this information.</disclaimer>
+    <timestamp>22-Feb-2019:11:52:39</timestamp>
+  </header>
+  <journals>
+    <journal>
+      <jtitle>Greek Review of Social Research</jtitle>
+      <issn>0013-9696</issn>
+      <zetocpub>&amp;#917;&amp;#952;&amp;#957;&amp;#953;&amp;#954;&amp;#972; &amp;#922;&amp;#941;&amp;#957;&amp;#964;&amp;#961;&amp;#959; &amp;#922;&amp;#959;&amp;#953;&amp;#957;&amp;#969;&amp;#957;&amp;#953;&amp;#954;&amp;#974;&amp;#957; &amp;#917;&amp;#961;&amp;#949;&amp;#965;&amp;#957;&amp;#974;&amp;#957; (Greek National Center of Social Research) / EKKE</zetocpub>
+      <romeopub>&amp;#917;&amp;#952;&amp;#957;&amp;#953;&amp;#954;&amp;#972; &amp;#922;&amp;#941;&amp;#957;&amp;#964;&amp;#961;&amp;#959; &amp;#922;&amp;#959;&amp;#953;&amp;#957;&amp;#969;&amp;#957;&amp;#953;&amp;#954;&amp;#974;&amp;#957; &amp;#917;&amp;#961;&amp;#949;&amp;#965;&amp;#957;&amp;#974;&amp;#957; (Greek National Center of Social Research)</romeopub>
+    </journal>
+  </journals>
+  <publishers>
+    <publisher id="2201">
+      <name>&amp;#917;&amp;#952;&amp;#957;&amp;#953;&amp;#954;&amp;#972; &amp;#922;&amp;#941;&amp;#957;&amp;#964;&amp;#961;&amp;#959; &amp;#922;&amp;#959;&amp;#953;&amp;#957;&amp;#969;&amp;#957;&amp;#953;&amp;#954;&amp;#974;&amp;#957; &amp;#917;&amp;#961;&amp;#949;&amp;#965;&amp;#957;&amp;#974;&amp;#957;</name>
+      <alias>Greek National Center of Social Research</alias>
+      <homeurl>http://www.ekke.gr/</homeurl>
+      <preprints>
+        <prearchiving>can</prearchiving>
+        <prerestrictions/>
+      </preprints>
+      <postprints>
+        <postarchiving>can</postarchiving>
+        <postrestrictions/>
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>can</pdfarchiving>
+        <pdfrestrictions/>
+      </pdfversion>
+      <conditions>
+        <condition>Author's pre-print and author's post-print on author's personal website or institutional repository</condition>
+        <condition>Publisher's version/PDF may be used</condition>
+        <condition>Publisher's version/PDF on institutional repository or subject repository</condition>
+        <condition>Creative Commons Attribution Non-Commercial Share Alike 3.0 License</condition>
+        <condition>All titles are open access journals</condition>
+        <condition>Publisher last contacted on 19/11/2014</condition>
+      </conditions>
+      <mandates/>
+      <paidaccess>
+        <paidaccessurl/>
+        <paidaccessname/>
+        <paidaccessnotes/>
+      </paidaccess>
+      <copyrightlinks>
+        <copyrightlink>
+          <copyrightlinktext>Policy</copyrightlinktext>
+          <copyrightlinkurl>http://www.grsr.gr/index.php/ekke/about/submissions#copyrightNotice</copyrightlinkurl>
+        </copyrightlink>
+      </copyrightlinks>
+      <romeocolour>green</romeocolour>
+      <dateadded>2015-01-08 09:49:31</dateadded>
+      <dateupdated>2015-01-08 09:49:31</dateupdated>
+    </publisher>
+  </publishers>
+</romeoapi>

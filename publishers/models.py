@@ -52,6 +52,17 @@ POLICY_CHOICES = [('can', _('Allowed')),
                   ('unknown', _('Unknown'))]
 
 
+# Minimum number of times we have seen a publisher name
+# associated to a publisher to assign this publisher
+# to publications where the journal was not found.
+# (when this name has only been associated to one publisher)
+PUBLISHER_NAME_ASSOCIATION_THRESHOLD = 1000
+
+# Minimum ratio between the most commonly matched journal
+# and the second one
+PUBLISHER_NAME_ASSOCIATION_FACTOR = 10
+
+
 OA_STATUS_PREFERENCE = [x[0] for x in OA_STATUS_CHOICES]
 OA_STATUS_CHOICES_WITHOUT_HELPTEXT = [(x[0], x[1]) for x in OA_STATUS_CHOICES]
 
@@ -87,9 +98,11 @@ class DummyPublisher(object):
 
 class Publisher(models.Model):
     """
-    A publisher, as represented by SHERPA/RoMEO
+    A publisher, as represented by SHERPA/RoMEO.
+    See http://www.sherpa.ac.uk/downloads/ for their data model
     """
-    romeo_id = models.CharField(max_length=64)
+    romeo_id = models.CharField(max_length=64, db_index=True)
+    romeo_parent_id = models.CharField(max_length=64, null=True, blank=True)
     name = models.CharField(max_length=256, db_index=True)
     alias = models.CharField(max_length=256, null=True, blank=True)
     url = models.URLField(null=True, blank=True)
@@ -107,15 +120,36 @@ class Publisher(models.Model):
 
     class Meta:
         db_table = 'papers_publisher'
-        
+
     @classmethod
     def find(cls, publisher_name):
         """
         Lookup a publisher by name. Return None if could not be found.
+        This restricts the search to default policies (those with romeo_parent_id=None)
         """
-        matches = cls.objects.filter(name__iexact=publisher_name)
-        if matches:
-            return matches[0]
+        try:
+            return cls.objects.get(name__iexact=publisher_name, romeo_parent_id__isnull=True)
+        except (cls.DoesNotExist, cls.MultipleObjectsReturned):
+            pass
+
+        # Second, let's see if the publisher name has often been associated to a
+        # known publisher
+        aliases = list(AliasPublisher.objects
+            .filter(name=publisher_name, publisher__romeo_parent_id__isnull=True)
+            .order_by('-count')[:2])
+        if len(aliases) == 1:
+            # Only one publisher found. If it has been seen often enough under that name,
+            # keep it!
+            if aliases[0].count > PUBLISHER_NAME_ASSOCIATION_THRESHOLD:
+                return aliases[0].publisher
+        elif len(aliases) == 2:
+            # More than one publisher found (two aliases returned as we limited to the two first
+            # results). Then we need to make sure the first one appears a lot more often than
+            # the first
+            if (aliases[0].count > PUBLISHER_NAME_ASSOCIATION_THRESHOLD and
+                    aliases[0].count > PUBLISHER_NAME_ASSOCIATION_FACTOR*aliases[1].count):
+                return aliases[0].publisher
+
 
     def classify_oa_status(self):
         """
@@ -201,6 +235,19 @@ class Publisher(models.Model):
             p.update_availability()
             p.invalidate_cache()
 
+    def merge(self, other):
+        """
+        Merge two Publishers together. The other
+        one will be deleted and all links to it
+        will be updated to point to self.
+        """
+        from papers.models import OaiRecord
+        Journal.objects.filter(publisher_id = other.id).update(publisher_id=self.id)
+        OaiRecord.objects.filter(publisher_id = other.id).update(publisher_id=self.id)
+        if other.stats:
+            other.stats.delete()
+        other.delete()
+
     def breadcrumbs(self):
         result = publishers_breadcrumbs()
         result.append((str(self), self.canonical_url))
@@ -237,7 +284,7 @@ class Journal(models.Model):
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
 
     stats = models.ForeignKey(AccessStatistics, null=True, on_delete=models.SET_NULL)
-    
+
     @classmethod
     def find(cls, issn=None, essn=None, title=None):
         """
@@ -262,6 +309,23 @@ class Journal(models.Model):
             matches = cls.objects.filter(title__iexact=title.lower())
             if matches:
                 return matches[0]
+            
+    def change_publisher(self, new_publisher):
+        """
+        Changing the publisher of a Journal is a heavy task:
+        we need to update all the OaiRecords associated with
+        this Journal to map to the new publisher
+        """
+        oa_status_changed = self.publisher.oa_status != new_publisher.oa_status
+        self.publisher = new_publisher
+        self.save()
+        self.oairecord_set.all().update(publisher = new_publisher)
+        if oa_status_changed:
+            papers = get_model('papers', 'Paper').objects.filter(
+                oairecord__journal=self.pk)
+            for p in papers:
+                p.update_availability()
+                p.invalidate_cache()
 
     def update_stats(self):
         if not self.stats:
