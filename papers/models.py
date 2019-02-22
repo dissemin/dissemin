@@ -745,8 +745,12 @@ class Paper(models.Model, BarePaper):
         The list of publications associated with this paper, returned
         as a queryset.
         """
-        return self.oairecord_set.filter(journal_title__isnull=False,
-                                         publisher_name__isnull=False)
+        # We could do this:
+        # return self.oairecord_set.filter(journal_title__isnull=False,
+        #                                publisher_name__isnull=False)
+        # but generally there is a small number of oairecords anyway
+        # so we should rather rely of the cached oairecords.
+        return super(Paper, self).publications
 
     @property
     def oairecords(self):
