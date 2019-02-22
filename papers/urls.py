@@ -59,7 +59,7 @@ urlpatterns = [
         # Tasks, AJAX
         url(r'^ajax/', include('papers.ajax')),
         url(r'^researcher/(?P<pk>\d+)/update/$',
-            views.refetchResearcher, name='refetch-researcher'),
+            views.refetch_researcher, name='refetch-researcher'),
         # API
         url(r'^api/', include('papers.api')),
         # robots.txt

@@ -321,14 +321,15 @@ class JournalPapersView(PublisherPapersView):
 
 
 @user_passes_test(is_authenticated)
-def refetchResearcher(request, pk):
+def refetch_researcher(request, pk):
     researcher = get_object_or_404(Researcher, pk=pk)
-    if researcher.user != request.user and not request.user.is_staff:
+    if researcher.user != request.user and not (request.user.is_staff or request.user.is_superuser):
         return HttpResponseForbidden("Not authorized to update papers for this researcher.")
     from backend.tasks import fetch_everything_for_researcher
     fetch_everything_for_researcher.delay(pk=pk)
 
-    return redirect(reverse('researcher', researcher=pk))
+    view_args = {'researcher': researcher.id, 'slug': researcher.slug}
+    return redirect(reverse('researcher', kwargs=view_args))
 
 
 @user_passes_test(is_authenticated)

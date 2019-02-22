@@ -24,6 +24,7 @@
 import datetime
 import pytest
 import html5lib
+from mock import patch
 
 from django.urls import reverse
 import django.test
@@ -32,6 +33,7 @@ from papers.models import OaiRecord
 from papers.models import Paper
 from papers.models import Researcher
 from papers.utils import overescaped_re
+from django.contrib.auth.models import User
 
 
 # TODO TO BE TESTED
@@ -39,7 +41,6 @@ from papers.utils import overescaped_re
 #        # Paper views
 #        url(r'^mail_paper/(?P<pk>\d+)/$', views.mailPaperView, name='mail_paper'),
 #        # Tasks, AJAX
-#        url(r'^researcher/(?P<pk>\d+)/update/$', views.refetchResearcher, name='refetch-researcher'),
 #        url(r'^researcher/(?P<pk>\d+)/recluster/$', views.reclusterResearcher, name='recluster-researcher'),
 #        # Annotations (to be deleted)
 #        url(r'^annotations/$', views.AnnotationsView.as_view(), name='annotations'),
@@ -82,6 +83,9 @@ class RenderingTest(django.test.TestCase):
     def checkTemporaryRedirect(self, *args, **kwargs):
         self.assertEqual(self.getPage(*args, **kwargs).status_code, 302)
 
+    def checkForbidden(self, *args, **kwargs):
+        self.assertEqual(self.getPage(*args, **kwargs).status_code, 403)
+
     def check404(self, *args, **kwargs):
         self.assertEqual(self.getPage(*args, **kwargs).status_code, 404)
 
@@ -111,9 +115,35 @@ class PaperPagesTest(RenderingTest):
         self.checkPermanentRedirect(
             'researcher-by-orcid', kwargs={'orcid': self.r4.orcid})
 
-    def test_update_researcher(self):
+    def test_update_researcher_not_logged_in(self):
         self.checkTemporaryRedirect(
             'refetch-researcher', kwargs={'pk':self.r4.id})
+
+    def test_update_researcher_wrong_user(self):
+        """
+        We currently don't allow any user to refresh any profile.
+        Only superusers can do that. Maybe it's something we could reconsider though.
+        """
+        User.objects.create_user('superuser', 'email@domain.com', 'mypass')
+        self.client.login(username='superuser', password='mypass')
+        self.checkForbidden(
+            'refetch-researcher', kwargs={'pk':self.r4.id})
+
+    def test_update_researcher_superuser(self):
+        """
+        Superusers can refetch any researcher, yay!
+        """
+        user = User.objects.create_user('superuser', 'email@domain.com', 'mypass')
+        user.is_superuser = True
+        user.save()
+        self.client.login(username='superuser', password='mypass')
+
+        from backend.tasks import fetch_everything_for_researcher
+        with patch.object(fetch_everything_for_researcher, 'delay') as task_mock:
+            self.checkTemporaryRedirect(
+                'refetch-researcher', kwargs={'pk':self.r4.id})
+
+            task_mock.assert_called_once_with(pk=str(self.r4.id))
 
     def test_researcher_no_name(self):
         # this ORCID profile does not have a public name:
@@ -141,7 +171,7 @@ class PaperPagesTest(RenderingTest):
     def test_researcher_not_visible(self):
         self.r1.visible = False
         self.r1.save()
-        self.checkPermanentRedirect('researcher', kwargs={'researcher':self.r1.pk, 'slug': self.r1.slug})
+        self.checkPermanentRedirect('researcher', kwargs={'researcher': self.r1.pk, 'slug': self.r1.slug})
 
     def test_search_no_parameters(self):
         self.checkPage('search')
