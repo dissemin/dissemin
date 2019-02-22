@@ -52,6 +52,17 @@ POLICY_CHOICES = [('can', _('Allowed')),
                   ('unknown', _('Unknown'))]
 
 
+# Minimum number of times we have seen a publisher name
+# associated to a publisher to assign this publisher
+# to publications where the journal was not found.
+# (when this name has only been associated to one publisher)
+PUBLISHER_NAME_ASSOCIATION_THRESHOLD = 1000
+
+# Minimum ratio between the most commonly matched journal
+# and the second one
+PUBLISHER_NAME_ASSOCIATION_FACTOR = 10
+
+
 OA_STATUS_PREFERENCE = [x[0] for x in OA_STATUS_CHOICES]
 OA_STATUS_CHOICES_WITHOUT_HELPTEXT = [(x[0], x[1]) for x in OA_STATUS_CHOICES]
 
@@ -119,7 +130,26 @@ class Publisher(models.Model):
         try:
             return cls.objects.get(name__iexact=publisher_name, romeo_parent_id__isnull=True)
         except (cls.DoesNotExist, cls.MultipleObjectsReturned):
-            return None
+            pass
+
+        # Second, let's see if the publisher name has often been associated to a
+        # known publisher
+        aliases = list(AliasPublisher.objects
+            .filter(name=publisher_name, publisher__romeo_parent_id__isnull=True)
+            .order_by('-count')[:2])
+        if len(aliases) == 1:
+            # Only one publisher found. If it has been seen often enough under that name,
+            # keep it!
+            if aliases[0].count > PUBLISHER_NAME_ASSOCIATION_THRESHOLD:
+                return aliases[0].publisher
+        elif len(aliases) == 2:
+            # More than one publisher found (two aliases returned as we limited to the two first
+            # results). Then we need to make sure the first one appears a lot more often than
+            # the first
+            if (aliases[0].count > PUBLISHER_NAME_ASSOCIATION_THRESHOLD and
+                    aliases[0].count > PUBLISHER_NAME_ASSOCIATION_FACTOR*aliases[1].count):
+                return aliases[0].publisher
+
 
     def classify_oa_status(self):
         """

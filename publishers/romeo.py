@@ -35,23 +35,11 @@ from papers.utils import kill_html
 from papers.utils import nstrip
 from papers.utils import remove_diacritics
 from papers.utils import sanitize_html
-from publishers.models import AliasPublisher
 from publishers.models import Journal
 from publishers.models import Publisher
 from publishers.models import PublisherCondition
 from publishers.models import PublisherCopyrightLink
 from publishers.models import PublisherRestrictionDetail
-
-# Minimum number of times we have seen a publisher name
-# associated to a publisher to assign this publisher
-# to publications where the journal was not found.
-# (when this name has only been associated to one publisher)
-PUBLISHER_NAME_ASSOCIATION_THRESHOLD = 1000
-
-# Minimum ratio between the most commonly matched journal
-# and the second one
-PUBLISHER_NAME_ASSOCIATION_FACTOR = 10
-
 
 class RomeoAPI(object):
 
@@ -180,32 +168,6 @@ class RomeoAPI(object):
         if publisher_name is None:
             return
 
-        # First, let's see if we have a publisher with that name
-        matching_publisher = Publisher.find(publisher_name)
-        if matching_publisher:
-            return matching_publisher
-
-        # Second, let's see if the publisher name has often been associated to a
-        # known publisher
-        aliases = list(AliasPublisher.objects.filter(
-            name=publisher_name).order_by('-count')[:2])
-        if len(aliases) == 1:
-            # Only one publisher found. If it has been seen often enough under that name,
-            # keep it!
-            if aliases[0].count > PUBLISHER_NAME_ASSOCIATION_THRESHOLD:
-                AliasPublisher.increment(publisher_name, aliases[0].publisher)
-                return aliases[0].publisher
-        elif len(aliases) == 2:
-            # More than one publisher found (two aliases returned as we limited to the two first
-            # results). Then we need to make sure the first one appears a lot more often than
-            # the first
-            if (aliases[0].count > PUBLISHER_NAME_ASSOCIATION_THRESHOLD and
-                    aliases[0].count > PUBLISHER_NAME_ASSOCIATION_FACTOR*aliases[1].count):
-                AliasPublisher.increment(publisher_name, aliases[0].publisher)
-                return aliases[0].publisher
-
-        # Otherwise, let's try to fetch the publisher from RoMEO!
-
         # Prepare the query
         search_terms = dict()
         search_terms['pub'] = remove_diacritics(publisher_name)
@@ -225,7 +187,6 @@ class RomeoAPI(object):
                 return
 
         publisher = self.get_or_create_publisher(publishers[0])
-        AliasPublisher.increment(publisher_name, publisher)
         return publisher
 
     def fetch_all_publishers(self, modified_since=None):

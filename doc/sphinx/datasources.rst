@@ -129,15 +129,22 @@ SHERPA/RoMEO
 They offer `an API <http://www.sherpa.ac.uk/romeo/apimanual.php?la=en&fIDnum=|&mode=simple>`_, whose functionality is very similar to the search service they offer to their regular users.
 You can search for a policy by journal or by publisher. Since some publishers have multiple archiving policies, RoMEO recommends to search by journal because it ensures that you will
 get the policy in place for this specific journal.
+The ``publishers`` app replicates most of RoMEO's data model, by defining ``Journal`` and ``Publisher`` models with fields
+taken from SHERPA. We synchronize our model with SHERPA's data every two weeks using `their dumps <http://www.sherpa.ac.uk/downloads>`_.
 
 For many journal articles and all conference papers, RoMEO knows the publisher but not the journal, and the metadata returned by CrossRef contains both the journal (or the proceedings title) and the publisher.
 We use therefore a two-step approach:
 
-* We search for the journal: if it succeeds, we assign the policy to the paper.
-* If it fails, we search for the publisher. If it returns a single result, we assign the policy to the paper.
+* We search for the journal: if it succeeds, we assign the journal and the corresponding policy to the paper.
+* If it fails, we search for the a default policy from the publisher. Default policies are those which have a null ``romeo_parent_id``.
 
-This is only the big picture: RoMEO has various matching modes (we try first the most restrictive ones), and we also maintain a mapping from CrossRef's publisher names to RoMEO's publisher names (they tend to differ).
-TODO describe this
+Because the publisher names are not always the same in Crossref and SHERPA, we add heuristics to disambiguate publishers.
+We use the papers for which a corresponding journal was found in SHERPA and collect their publisher names as seen in Crossref.
+If we see that a given Crossref publisher name is overwhelmingly associated to a given SHERPA Publisher which is a default publisher
+policy (``romeo_parent_id`` is null), then we also link Crossref papers with this publisher name but no matching journal to this SHERPA Publisher.
+
+The task to update SHEPA policies is ``fetch_updates_from_romeo``, from ``publishers.tasks``. The first time it is run, it fetches the entire dump. The next time, it will only fetch the publishers which were updated since the last update. To force a full
+ingestion, nullify all the update dates on the RoMEO publishers with ``Publisher.objects.update(last_updated=None)``, and then run ``fetch_updates_from_romeo``.
 
 ORCID
 -----

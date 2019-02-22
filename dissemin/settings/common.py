@@ -256,6 +256,10 @@ CELERYBEAT_SCHEDULE = {
           'task': 'refresh_deposit_statuses',
           'schedule': timedelta(days=1),
     },
+    'fetch_updates_from_romeo': {
+           'task': 'fetch_updates_from_romeo',
+           'schedule': timedelta(days=14),
+    }
 #    'update_crossref': {
 #          'task': 'update_crossref',
 #          'schedule': timedelta(days=1),
