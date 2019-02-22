@@ -39,7 +39,6 @@ from papers.utils import overescaped_re
 #        # Paper views
 #        url(r'^mail_paper/(?P<pk>\d+)/$', views.mailPaperView, name='mail_paper'),
 #        # Tasks, AJAX
-#        url(r'^researcher/(?P<pk>\d+)/update/$', views.refetchResearcher, name='refetch-researcher'),
 #        url(r'^researcher/(?P<pk>\d+)/recluster/$', views.reclusterResearcher, name='recluster-researcher'),
 #        # Annotations (to be deleted)
 #        url(r'^annotations/$', views.AnnotationsView.as_view(), name='annotations'),
@@ -114,6 +113,7 @@ class PaperPagesTest(RenderingTest):
     def test_update_researcher(self):
         self.checkTemporaryRedirect(
             'refetch-researcher', kwargs={'pk':self.r4.id})
+        # TODO: Test when researcher is logged in
 
     def test_researcher_no_name(self):
         # this ORCID profile does not have a public name:
@@ -141,7 +141,7 @@ class PaperPagesTest(RenderingTest):
     def test_researcher_not_visible(self):
         self.r1.visible = False
         self.r1.save()
-        self.checkPermanentRedirect('researcher', kwargs={'researcher':self.r1.pk, 'slug': self.r1.slug})
+        self.checkPermanentRedirect('researcher', kwargs={'researcher': self.r1.pk, 'slug': self.r1.slug})
 
     def test_search_no_parameters(self):
         self.checkPage('search')

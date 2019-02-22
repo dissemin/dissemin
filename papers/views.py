@@ -328,7 +328,8 @@ def refetchResearcher(request, pk):
     from backend.tasks import fetch_everything_for_researcher
     fetch_everything_for_researcher.delay(pk=pk)
 
-    return redirect(reverse('researcher', researcher=pk))
+    view_args = {'researcher': researcher.id, 'slug': researcher.slug}
+    return redirect(reverse('researcher', kwargs=view_args))
 
 
 @user_passes_test(is_authenticated)
