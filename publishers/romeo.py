@@ -69,7 +69,7 @@ class RomeoAPI(object):
         # Perform the query
         try:
             response = cached_urlopen_retry(
-                self.base_url, data=search_terms).encode('utf-8')
+                self.base_url, data=search_terms, timeout=20).encode('utf-8')
         except requests.exceptions.RequestException as e:
             raise MetadataSourceException('Error while querying RoMEO.\n' +
                                           'URL was: '+self.base_url+'\n' +
@@ -281,8 +281,14 @@ class RomeoAPI(object):
                     else:
                         # The existing RoMEO id is buggy (imported from a previous version of the API)
                         # so we just update it
-                        match.publisher.romeo_id = romeo_id
-                        match.publisher.save(update_fields=['romeo_id'])
+                        try:
+                            correct_publisher = Publisher.objects.get(romeo_id=romeo_id)
+                            correct_publisher.merge(match.publisher)
+                            match.publisher = correct_publisher
+                            match.save()
+                        except Publisher.DoesNotExist:
+                            match.publisher.romeo_id = romeo_id
+                            match.publisher.save(update_fields=['romeo_id'])
                 elif match is None:
                     try:
                         publisher = Publisher.objects.get(romeo_id=romeo_id)

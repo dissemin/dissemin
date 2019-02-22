@@ -34,3 +34,26 @@ class JournalTest(TestCase):
         self.assertEqual(Journal.find(issn='4353-2894'), j2)
         self.assertEqual(Journal.find(essn='4353-2894'), j2)
         self.assertEqual(Journal.find(title='nonsense'), None)
+        
+    def test_merge(self):
+        # Temporarily fake the romeo_id of our publisher
+        correct_romeo_id = self.publisher.romeo_id
+        self.publisher.romeo_id = '12345'
+        self.publisher.save()
+        
+        # Fetch a journal from the publisher: this creates a duplicate publisher
+        journal = RomeoAPIStub().fetch_journal({'issn':'0073-0688'})
+        new_publisher = journal.publisher
+        self.assertNotEqual(self.publisher.id, new_publisher.id)
+        
+        # Restore the romeo_id of our original publisher
+        self.publisher.romeo_id = correct_romeo_id
+        self.publisher.save()
+        
+        # Merge 
+        self.publisher.merge(new_publisher)
+        
+        # Check that the journal was redirected
+        journal = Journal.objects.get(id=journal.id)
+        self.assertEqual(journal.publisher_id, self.publisher.id)
+        

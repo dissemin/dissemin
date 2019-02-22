@@ -200,6 +200,19 @@ class Publisher(models.Model):
         for p in papers:
             p.update_availability()
             p.invalidate_cache()
+            
+    def merge(self, other):
+        """
+        Merge two Publishers together. The other
+        one will be deleted and all links to it
+        will be updated to point to self.
+        """
+        from papers.models import OaiRecord
+        Journal.objects.filter(publisher_id = other.id).update(publisher_id=self.id)
+        OaiRecord.objects.filter(publisher_id = other.id).update(publisher_id=self.id)
+        if other.stats:
+            other.stats.delete()
+        other.delete()
 
     def breadcrumbs(self):
         result = publishers_breadcrumbs()
