@@ -87,9 +87,11 @@ class DummyPublisher(object):
 
 class Publisher(models.Model):
     """
-    A publisher, as represented by SHERPA/RoMEO
+    A publisher, as represented by SHERPA/RoMEO.
+    See http://www.sherpa.ac.uk/downloads/ for their data model
     """
-    romeo_id = models.CharField(max_length=64)
+    romeo_id = models.CharField(max_length=64, db_index=True)
+    romeo_parent_id = models.CharField(max_length=64, null=True, blank=True)
     name = models.CharField(max_length=256, db_index=True)
     alias = models.CharField(max_length=256, null=True, blank=True)
     url = models.URLField(null=True, blank=True)
@@ -112,10 +114,12 @@ class Publisher(models.Model):
     def find(cls, publisher_name):
         """
         Lookup a publisher by name. Return None if could not be found.
+        This restricts the search to default policies (those w
         """
-        matches = cls.objects.filter(name__iexact=publisher_name)
-        if matches:
-            return matches[0]
+        try:
+            return cls.objects.get(name__iexact=publisher_name, romeo_parent_id__isnull=True)
+        except (cls.DoesNotExist, cls.MultipleObjectsReturned):
+            return None
 
     def classify_oa_status(self):
         """

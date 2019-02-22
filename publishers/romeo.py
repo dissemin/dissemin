@@ -348,6 +348,12 @@ class RomeoAPI(object):
             romeo_id = xml.attrib['id']
         except KeyError:
             raise MetadataSourceException('RoMEO did not provide a publisher id.')
+        
+        romeo_parent_id = None
+        try:
+            romeo_parent_id = xml.attrib['parentid']
+        except KeyError:
+            pass
 
         name = None
         try:
@@ -427,6 +433,7 @@ class RomeoAPI(object):
         publisher.postprint = postprint
         publisher.pdfversion = pdfversion
         publisher.romeo_id = romeo_id
+        publisher.romeo_parent_id = romeo_parent_id
         publisher.oa_status = status
         publisher.last_updated = last_update
         publisher.save()
