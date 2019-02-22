@@ -144,7 +144,7 @@ class RomeoAPI(object):
             issn = nstrip(journal.findall('./issn')[0].text)
         except (KeyError, IndexError):
             pass
-        
+
         essn = None
         try:
             issn = nstrip(journal.findall('./essn')[0].text)
@@ -261,6 +261,8 @@ class RomeoAPI(object):
             fields = line.strip().split('\t')
             if headers is None:
                 headers = fields
+            elif len(fields) != 5:
+                continue
             else:
                 [title, issn, essn, romeo_id, _] = fields
                 issn = issn or None
@@ -294,7 +296,7 @@ class RomeoAPI(object):
                         journal.save()
                     except Publisher.DoesNotExist:
                         pass
-                    
+
     def get_romeo_latest_update_date(self):
         """
         Fetches the dates of the latest updates on the RoMEO service.
@@ -309,12 +311,12 @@ class RomeoAPI(object):
             'publishers': self._get_romeo_date(root, './publisherspolicies/latestupdate'),
             'journals': self._get_romeo_date(root, './journals/latestupdate')
         }
-        
+
     def fetch_updates(self):
         """
         Update the publishers and journals in the model,
         only fetching the publishers which have been updated since the last update.
-        
+
         The first time this is run, this fetches everything from RoMEO.
         """
         # First, determine latest update date for publishers in the model
@@ -322,13 +324,13 @@ class RomeoAPI(object):
         latest_updates = list(Publisher.objects.order_by('-last_updated').values_list('last_updated', flat=True)[:1])
         if latest_updates:
             latest_update_in_model = latest_updates[0]
-        
+
         # Second, fetch the date of RoMEO's own last update
         latest_update_in_romeo = self.get_romeo_latest_update_date()['publishers']
-        
+
         if latest_update_in_model is None or latest_update_in_model < latest_update_in_romeo:
             self.fetch_all_publishers(latest_update_in_model)
-    
+
         self.fetch_all_journals()
 
     def get_or_create_publisher(self, romeo_xml_description):
@@ -346,7 +348,7 @@ class RomeoAPI(object):
             romeo_id = xml.attrib['id']
         except KeyError:
             raise MetadataSourceException('RoMEO did not provide a publisher id.')
-        
+
         romeo_parent_id = None
         try:
             romeo_parent_id = xml.attrib['parentid']
@@ -490,7 +492,7 @@ class RomeoAPI(object):
             r = PublisherRestrictionDetail(
                 publisher=publisher, applies_to=applies_to, text=text)
             r.save()
-            
+
     def _get_romeo_date(self, xml, xpath):
         """
         Given an xml element and an XPath expression, return the parsed
