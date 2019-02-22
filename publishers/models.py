@@ -120,12 +120,12 @@ class Publisher(models.Model):
 
     class Meta:
         db_table = 'papers_publisher'
-        
+
     @classmethod
     def find(cls, publisher_name):
         """
         Lookup a publisher by name. Return None if could not be found.
-        This restricts the search to default policies (those w
+        This restricts the search to default policies (those with romeo_parent_id=None)
         """
         try:
             return cls.objects.get(name__iexact=publisher_name, romeo_parent_id__isnull=True)
@@ -234,7 +234,7 @@ class Publisher(models.Model):
         for p in papers:
             p.update_availability()
             p.invalidate_cache()
-            
+
     def merge(self, other):
         """
         Merge two Publishers together. The other
@@ -284,7 +284,7 @@ class Journal(models.Model):
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
 
     stats = models.ForeignKey(AccessStatistics, null=True, on_delete=models.SET_NULL)
-    
+
     @classmethod
     def find(cls, issn=None, essn=None, title=None):
         """
