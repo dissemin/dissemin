@@ -37,3 +37,12 @@ PyCharm's Django integration is not available in the Community edition.
 However, because we use Pytest to run tests, it might be possible to use the Community edition anyway.
 If you try, please let us know how it goes so that we can update this documentation.
 
+Using a standard text editor
+----------------------------
+
+That works too, of course. In that case you might want to make sure you run `./pyflakes.sh` to check
+for import errors and other syntactical issues before you commit or push. This can easily done by
+adding a git hook::
+
+    ln -s pyflakes.sh .git/hooks/pre-commit
+
