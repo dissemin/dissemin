@@ -4,60 +4,15 @@
 # Author: Xuacu
 msgid ""
 msgstr ""
-""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-25 12:06+0100\n"
 "PO-Revision-Date: 2019-01-30 22:39:36+0000\n"
-"X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
+"Language: ast\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ast\n"
+"X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#: doc/sphinx/_build/html/_static/doctools.js:167
-msgid "Permalink to this headline"
-msgstr "Enllaz permanente a esti titular"
-
-#: doc/sphinx/_build/html/_static/doctools.js:173
-msgid "Permalink to this definition"
-msgstr "Enllaz permanente a esta definición"
-
-#: doc/sphinx/_build/html/_static/doctools.js:206
-msgid "Hide Search Matches"
-msgstr "Tapecer les guetes que casen"
-
-#: doc/sphinx/_build/html/_static/searchtools.js:400
-msgid "Searching"
-msgstr "Buscando"
-
-#: doc/sphinx/_build/html/_static/searchtools.js:405
-msgid "Preparing search..."
-msgstr "Preparando la gueta..."
-
-#: doc/sphinx/_build/html/_static/searchtools.js:566
-msgid "Search Results"
-msgstr "Resultaos de la gueta"
-
-#: doc/sphinx/_build/html/_static/searchtools.js:568
-msgid "Your search did not match any documents. Please make sure that all words are spelled correctly and that you've selected enough categories."
-msgstr "La gueta nun casó con documentu dalu. Asegúrate de que toles palabres tán correutamente escrites y de qu'esbillasti categoríes abondo."
-
-#: doc/sphinx/_build/html/_static/searchtools.js:570
-#, javascript-format
-msgid "Search finished, found %s page(s) matching the search query."
-msgstr "Acabó la gueta, alcontráronse %s páxina(es) que casen cola consulta de la gueta."
-
-#: doc/sphinx/_build/html/_static/searchtools.js:623
-msgid ", in "
-msgstr ", en "
-
-#: doc/sphinx/_build/html/_static/sidebar.js:77
-msgid "Expand sidebar"
-msgstr "Espander la barra llateral"
-
-#: doc/sphinx/_build/html/_static/sidebar.js:90
-#: doc/sphinx/_build/html/_static/sidebar.js:118
-msgid "Collapse sidebar"
-msgstr "Contraer la barra llateral"
 
 #: papers/static/papers/refresh.js:35
 msgid "Do not show this message anymore"
@@ -75,25 +30,73 @@ msgstr "Ensin títulu"
 msgid "Invalid publication date"
 msgstr "Fecha de publicación inválida."
 
-#: papers/static/papers/refresh.js:105
+#: papers/static/papers/refresh.js:72
+#, fuzzy
+#| msgid "Invalid publication date"
+msgid "No publication date"
+msgstr "Fecha de publicación inválida."
+
+#: papers/static/papers/refresh.js:74
+msgid "Paper is invalid"
+msgstr ""
+
+#: papers/static/papers/refresh.js:109
 msgid "We ignored %(count)s paper from your ORCiD profile."
 msgid_plural "We ignored %(count)s papers from your ORCiD profile."
 msgstr[0] "Inoramos %(count)s artículu del to perfil ORCiD."
 msgstr[1] "Inoramos %(count)s artículos del to perfil ORCiD."
 
-#: papers/static/papers/refresh.js:115
+#: papers/static/papers/refresh.js:119
 msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
 msgstr "\"%(name)s\" inoróse pol siguiente motivu: %(reason)s"
 
-#: papers/static/papers/refresh.js:123
+#: papers/static/papers/refresh.js:127
 msgid "A paper was ignored, because it has no name"
 msgstr "Inoróse un artículu porque nun tien nome"
 
-#: papers/static/papers/refresh.js:135 papers/static/papers/refresh.js:163
+#: papers/static/papers/refresh.js:139 papers/static/papers/refresh.js:167
 msgid "Show more information"
 msgstr "Ver más información"
 
-#: papers/static/papers/refresh.js:160
+#: papers/static/papers/refresh.js:164
 msgid "Show less information"
 msgstr "Ver menos información"
 
+#~ msgid "Permalink to this headline"
+#~ msgstr "Enllaz permanente a esti titular"
+
+#~ msgid "Permalink to this definition"
+#~ msgstr "Enllaz permanente a esta definición"
+
+#~ msgid "Hide Search Matches"
+#~ msgstr "Tapecer les guetes que casen"
+
+#~ msgid "Searching"
+#~ msgstr "Buscando"
+
+#~ msgid "Preparing search..."
+#~ msgstr "Preparando la gueta..."
+
+#~ msgid "Search Results"
+#~ msgstr "Resultaos de la gueta"
+
+#~ msgid ""
+#~ "Your search did not match any documents. Please make sure that all words "
+#~ "are spelled correctly and that you've selected enough categories."
+#~ msgstr ""
+#~ "La gueta nun casó con documentu dalu. Asegúrate de que toles palabres tán "
+#~ "correutamente escrites y de qu'esbillasti categoríes abondo."
+
+#~ msgid "Search finished, found %s page(s) matching the search query."
+#~ msgstr ""
+#~ "Acabó la gueta, alcontráronse %s páxina(es) que casen cola consulta de la "
+#~ "gueta."
+
+#~ msgid ", in "
+#~ msgstr ", en "
+
+#~ msgid "Expand sidebar"
+#~ msgstr "Espander la barra llateral"
+
+#~ msgid "Collapse sidebar"
+#~ msgstr "Contraer la barra llateral"

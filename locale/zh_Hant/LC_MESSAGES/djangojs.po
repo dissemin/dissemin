@@ -4,60 +4,15 @@
 # Author: Kly
 msgid ""
 msgstr ""
-""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-25 12:06+0100\n"
 "PO-Revision-Date: 2019-02-21 13:56:09+0000\n"
-"X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
+"Language: zh_hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: zh_hant\n"
+"X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-
-#: doc/sphinx/_build/html/_static/doctools.js:167
-msgid "Permalink to this headline"
-msgstr "至此章節標題的固定連結"
-
-#: doc/sphinx/_build/html/_static/doctools.js:173
-msgid "Permalink to this definition"
-msgstr "至此定義的固定連結"
-
-#: doc/sphinx/_build/html/_static/doctools.js:206
-msgid "Hide Search Matches"
-msgstr "隱藏搜尋符合內容"
-
-#: doc/sphinx/_build/html/_static/searchtools.js:400
-msgid "Searching"
-msgstr "搜尋中"
-
-#: doc/sphinx/_build/html/_static/searchtools.js:405
-msgid "Preparing search..."
-msgstr "正在準備搜尋..."
-
-#: doc/sphinx/_build/html/_static/searchtools.js:566
-msgid "Search Results"
-msgstr "搜尋結果"
-
-#: doc/sphinx/_build/html/_static/searchtools.js:568
-msgid "Your search did not match any documents. Please make sure that all words are spelled correctly and that you've selected enough categories."
-msgstr "您的搜尋未找出任何符合文件。請確認所有的字詞都有拼寫正確，並且您已經有選擇足夠的分類項目。"
-
-#: doc/sphinx/_build/html/_static/searchtools.js:570
-#, javascript-format
-msgid "Search finished, found %s page(s) matching the search query."
-msgstr "搜尋結束，找出 %s 個符合搜尋查詢的頁面。"
-
-#: doc/sphinx/_build/html/_static/searchtools.js:623
-msgid ", in "
-msgstr "，在 "
-
-#: doc/sphinx/_build/html/_static/sidebar.js:77
-msgid "Expand sidebar"
-msgstr "展開側邊工具欄"
-
-#: doc/sphinx/_build/html/_static/sidebar.js:90
-#: doc/sphinx/_build/html/_static/sidebar.js:118
-msgid "Collapse sidebar"
-msgstr "摺疊側邊工具欄"
 
 #: papers/static/papers/refresh.js:35
 msgid "Do not show this message anymore"
@@ -75,24 +30,70 @@ msgstr "沒有標題"
 msgid "Invalid publication date"
 msgstr "無效出版日期"
 
-#: papers/static/papers/refresh.js:105
+#: papers/static/papers/refresh.js:72
+#, fuzzy
+#| msgid "Invalid publication date"
+msgid "No publication date"
+msgstr "無效出版日期"
+
+#: papers/static/papers/refresh.js:74
+msgid "Paper is invalid"
+msgstr ""
+
+#: papers/static/papers/refresh.js:109
 msgid "We ignored %(count)s paper from your ORCiD profile."
 msgid_plural "We ignored %(count)s papers from your ORCiD profile."
 msgstr[0] "我們從您的 ORCiD 個人檔案裡忽略了 %(count)s 篇論文。"
 
-#: papers/static/papers/refresh.js:115
+#: papers/static/papers/refresh.js:119
 msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
 msgstr "「%(name)s」因為下列原因被忽略掉：%(reason)s"
 
-#: papers/static/papers/refresh.js:123
+#: papers/static/papers/refresh.js:127
 msgid "A paper was ignored, because it has no name"
 msgstr "有論文被忽略掉，因為沒有名稱"
 
-#: papers/static/papers/refresh.js:135 papers/static/papers/refresh.js:163
+#: papers/static/papers/refresh.js:139 papers/static/papers/refresh.js:167
 msgid "Show more information"
 msgstr "顯示更多資訊"
 
-#: papers/static/papers/refresh.js:160
+#: papers/static/papers/refresh.js:164
 msgid "Show less information"
 msgstr "顯示較少資訊"
 
+#~ msgid "Permalink to this headline"
+#~ msgstr "至此章節標題的固定連結"
+
+#~ msgid "Permalink to this definition"
+#~ msgstr "至此定義的固定連結"
+
+#~ msgid "Hide Search Matches"
+#~ msgstr "隱藏搜尋符合內容"
+
+#~ msgid "Searching"
+#~ msgstr "搜尋中"
+
+#~ msgid "Preparing search..."
+#~ msgstr "正在準備搜尋..."
+
+#~ msgid "Search Results"
+#~ msgstr "搜尋結果"
+
+#~ msgid ""
+#~ "Your search did not match any documents. Please make sure that all words "
+#~ "are spelled correctly and that you've selected enough categories."
+#~ msgstr ""
+#~ "您的搜尋未找出任何符合文件。請確認所有的字詞都有拼寫正確，並且您已經有選擇"
+#~ "足夠的分類項目。"
+
+#~ msgid "Search finished, found %s page(s) matching the search query."
+#~ msgstr "搜尋結束，找出 %s 個符合搜尋查詢的頁面。"
+
+#~ msgid ", in "
+#~ msgstr "，在 "
+
+#~ msgid "Expand sidebar"
+#~ msgstr "展開側邊工具欄"
+
+#~ msgid "Collapse sidebar"
+#~ msgstr "摺疊側邊工具欄"

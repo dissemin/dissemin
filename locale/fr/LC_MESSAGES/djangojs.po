@@ -5,10 +5,9 @@
 # Author: Wladek92
 msgid ""
 msgstr ""
-""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-24 15:09+0200\n"
+"POT-Creation-Date: 2019-02-25 12:06+0100\n"
 "PO-Revision-Date: 2019-01-30 22:39:36+0000\n"
 "Last-Translator: Ryan Lahfa <masterancpp@gmail.com>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
@@ -19,52 +18,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
 "X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
-
-#: doc/sphinx/_build/html/_static/doctools.js:167
-msgid "Permalink to this headline"
-msgstr "Lien permanent vers ce titre"
-
-#: doc/sphinx/_build/html/_static/doctools.js:173
-msgid "Permalink to this definition"
-msgstr "Lien permanent vers cette définition"
-
-#: doc/sphinx/_build/html/_static/doctools.js:206
-msgid "Hide Search Matches"
-msgstr "Cacher les résultats de recherche"
-
-#: doc/sphinx/_build/html/_static/searchtools.js:400
-msgid "Searching"
-msgstr "Recherche en cours"
-
-#: doc/sphinx/_build/html/_static/searchtools.js:405
-msgid "Preparing search..."
-msgstr "Préparation de la recherche..."
-
-#: doc/sphinx/_build/html/_static/searchtools.js:566
-msgid "Search Results"
-msgstr "Résultats de recherche"
-
-#: doc/sphinx/_build/html/_static/searchtools.js:568
-msgid "Your search did not match any documents. Please make sure that all words are spelled correctly and that you've selected enough categories."
-msgstr "Votre recherche ne correspond à aucun document. Veuillez vérifier que tous les mots sont orthographiés correctement et que vous avez sélectionné suffisamment de catégories."
-
-#: doc/sphinx/_build/html/_static/searchtools.js:570
-#, javascript-format
-msgid "Search finished, found %s page(s) matching the search query."
-msgstr "Recherche terminée: %s page(s) trouvées pour cette recherche."
-
-#: doc/sphinx/_build/html/_static/searchtools.js:623
-msgid ", in "
-msgstr ", dans "
-
-#: doc/sphinx/_build/html/_static/sidebar.js:77
-msgid "Expand sidebar"
-msgstr "Afficher la barre latérale"
-
-#: doc/sphinx/_build/html/_static/sidebar.js:90
-#: doc/sphinx/_build/html/_static/sidebar.js:118
-msgid "Collapse sidebar"
-msgstr "Masquer la barre latérale"
 
 #: papers/static/papers/refresh.js:35
 msgid "Do not show this message anymore"
@@ -82,25 +35,72 @@ msgstr "Pas de titre"
 msgid "Invalid publication date"
 msgstr "Date de publication invalide"
 
-#: papers/static/papers/refresh.js:105
+#: papers/static/papers/refresh.js:72
+#, fuzzy
+#| msgid "Invalid publication date"
+msgid "No publication date"
+msgstr "Date de publication invalide"
+
+#: papers/static/papers/refresh.js:74
+msgid "Paper is invalid"
+msgstr ""
+
+#: papers/static/papers/refresh.js:109
 msgid "We ignored %(count)s paper from your ORCiD profile."
 msgid_plural "We ignored %(count)s papers from your ORCiD profile."
 msgstr[0] "Nous avons ignoré %(count)s publication de votre profil ORCiD"
 msgstr[1] "Nous avons ignoré %(count)s publications de votre profil ORCiD"
 
-#: papers/static/papers/refresh.js:115
+#: papers/static/papers/refresh.js:119
 msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
 msgstr "« %(name)s » a été ignoré pour la raison suivante : %(reason)s"
 
-#: papers/static/papers/refresh.js:123
+#: papers/static/papers/refresh.js:127
 msgid "A paper was ignored, because it has no name"
 msgstr "Un article a été ignoré, car il n'a pas de titre"
 
-#: papers/static/papers/refresh.js:135 papers/static/papers/refresh.js:163
+#: papers/static/papers/refresh.js:139 papers/static/papers/refresh.js:167
 msgid "Show more information"
 msgstr "Montrer plus d'informations"
 
-#: papers/static/papers/refresh.js:160
+#: papers/static/papers/refresh.js:164
 msgid "Show less information"
 msgstr "Montrer moins d'informations"
 
+#~ msgid "Permalink to this headline"
+#~ msgstr "Lien permanent vers ce titre"
+
+#~ msgid "Permalink to this definition"
+#~ msgstr "Lien permanent vers cette définition"
+
+#~ msgid "Hide Search Matches"
+#~ msgstr "Cacher les résultats de recherche"
+
+#~ msgid "Searching"
+#~ msgstr "Recherche en cours"
+
+#~ msgid "Preparing search..."
+#~ msgstr "Préparation de la recherche..."
+
+#~ msgid "Search Results"
+#~ msgstr "Résultats de recherche"
+
+#~ msgid ""
+#~ "Your search did not match any documents. Please make sure that all words "
+#~ "are spelled correctly and that you've selected enough categories."
+#~ msgstr ""
+#~ "Votre recherche ne correspond à aucun document. Veuillez vérifier que "
+#~ "tous les mots sont orthographiés correctement et que vous avez "
+#~ "sélectionné suffisamment de catégories."
+
+#~ msgid "Search finished, found %s page(s) matching the search query."
+#~ msgstr "Recherche terminée: %s page(s) trouvées pour cette recherche."
+
+#~ msgid ", in "
+#~ msgstr ", dans "
+
+#~ msgid "Expand sidebar"
+#~ msgstr "Afficher la barre latérale"
+
+#~ msgid "Collapse sidebar"
+#~ msgstr "Masquer la barre latérale"

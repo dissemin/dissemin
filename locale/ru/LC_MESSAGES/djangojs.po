@@ -7,60 +7,16 @@
 # Author: Wirbel78
 msgid ""
 msgstr ""
-""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-25 12:06+0100\n"
 "PO-Revision-Date: 2019-01-30 22:39:37+0000\n"
-"X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
+"Language: ru\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ru\n"
+"X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
-"Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11) ? 0 : ( (n%10 >= 2 && n%10 <= 4 && (n%100 < 10 || n%100 >= 20)) ? 1 : 2 );\n"
-
-#: doc/sphinx/_build/html/_static/doctools.js:167
-msgid "Permalink to this headline"
-msgstr "Постоянная ссылка на этот заголовок"
-
-#: doc/sphinx/_build/html/_static/doctools.js:173
-msgid "Permalink to this definition"
-msgstr "Постоянная ссылка на это определение"
-
-#: doc/sphinx/_build/html/_static/doctools.js:206
-msgid "Hide Search Matches"
-msgstr "Скрыть поисковые матчи"
-
-#: doc/sphinx/_build/html/_static/searchtools.js:400
-msgid "Searching"
-msgstr "Поиск"
-
-#: doc/sphinx/_build/html/_static/searchtools.js:405
-msgid "Preparing search..."
-msgstr "Подготовка к поиску..."
-
-#: doc/sphinx/_build/html/_static/searchtools.js:566
-msgid "Search Results"
-msgstr "Результаты поиска"
-
-#: doc/sphinx/_build/html/_static/searchtools.js:568
-msgid "Your search did not match any documents. Please make sure that all words are spelled correctly and that you've selected enough categories."
-msgstr "Ваш поиск не соответствовал каким-либо документам. Убедитесь, что все слова написаны правильно и что вы выбрали достаточно категорий."
-
-#: doc/sphinx/_build/html/_static/searchtools.js:570
-#, javascript-format
-msgid "Search finished, found %s page(s) matching the search query."
-msgstr "Поиск закончен, найден %s страница(ы) сопоставляя поисковый запрос."
-
-#: doc/sphinx/_build/html/_static/searchtools.js:623
-msgid ", in "
-msgstr ", в "
-
-#: doc/sphinx/_build/html/_static/sidebar.js:77
-msgid "Expand sidebar"
-msgstr "Развернуть боковую панель"
-
-#: doc/sphinx/_build/html/_static/sidebar.js:90
-#: doc/sphinx/_build/html/_static/sidebar.js:118
-msgid "Collapse sidebar"
-msgstr "Свернуть боковую панель"
+"Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11) ? 0 : ( (n%10 >= "
+"2 && n%10 <= 4 && (n%100 < 10 || n%100 >= 20)) ? 1 : 2 );\n"
 
 #: papers/static/papers/refresh.js:35
 msgid "Do not show this message anymore"
@@ -78,26 +34,72 @@ msgstr "Без названия"
 msgid "Invalid publication date"
 msgstr "Недействительная дата публикации"
 
-#: papers/static/papers/refresh.js:105
+#: papers/static/papers/refresh.js:72
+#, fuzzy
+#| msgid "Invalid publication date"
+msgid "No publication date"
+msgstr "Недействительная дата публикации"
+
+#: papers/static/papers/refresh.js:74
+msgid "Paper is invalid"
+msgstr ""
+
+#: papers/static/papers/refresh.js:109
 msgid "We ignored %(count)s paper from your ORCiD profile."
 msgid_plural "We ignored %(count)s papers from your ORCiD profile."
 msgstr[0] "%(count)s бумагу"
 msgstr[1] "%(count)s бумаги"
 msgstr[2] "%(count)s бумаг"
 
-#: papers/static/papers/refresh.js:115
+#: papers/static/papers/refresh.js:119
 msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
 msgstr "\"%(имя)ена\" был проигнорирован по следующей причине: %(причина)ы"
 
-#: papers/static/papers/refresh.js:123
+#: papers/static/papers/refresh.js:127
 msgid "A paper was ignored, because it has no name"
 msgstr "Документ был проигнорирован, поскольку он не имеет названия"
 
-#: papers/static/papers/refresh.js:135 papers/static/papers/refresh.js:163
+#: papers/static/papers/refresh.js:139 papers/static/papers/refresh.js:167
 msgid "Show more information"
 msgstr "Показать больше информации"
 
-#: papers/static/papers/refresh.js:160
+#: papers/static/papers/refresh.js:164
 msgid "Show less information"
 msgstr "Показать меньше информации"
 
+#~ msgid "Permalink to this headline"
+#~ msgstr "Постоянная ссылка на этот заголовок"
+
+#~ msgid "Permalink to this definition"
+#~ msgstr "Постоянная ссылка на это определение"
+
+#~ msgid "Hide Search Matches"
+#~ msgstr "Скрыть поисковые матчи"
+
+#~ msgid "Searching"
+#~ msgstr "Поиск"
+
+#~ msgid "Preparing search..."
+#~ msgstr "Подготовка к поиску..."
+
+#~ msgid "Search Results"
+#~ msgstr "Результаты поиска"
+
+#~ msgid ""
+#~ "Your search did not match any documents. Please make sure that all words "
+#~ "are spelled correctly and that you've selected enough categories."
+#~ msgstr ""
+#~ "Ваш поиск не соответствовал каким-либо документам. Убедитесь, что все "
+#~ "слова написаны правильно и что вы выбрали достаточно категорий."
+
+#~ msgid "Search finished, found %s page(s) matching the search query."
+#~ msgstr "Поиск закончен, найден %s страница(ы) сопоставляя поисковый запрос."
+
+#~ msgid ", in "
+#~ msgstr ", в "
+
+#~ msgid "Expand sidebar"
+#~ msgstr "Развернуть боковую панель"
+
+#~ msgid "Collapse sidebar"
+#~ msgstr "Свернуть боковую панель"

@@ -5,60 +5,15 @@
 # Author: Nikosgranturismogt
 msgid ""
 msgstr ""
-""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-02-25 12:06+0100\n"
 "PO-Revision-Date: 2019-01-30 22:39:36+0000\n"
-"X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
+"Language: el\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: el\n"
+"X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#: doc/sphinx/_build/html/_static/doctools.js:167
-msgid "Permalink to this headline"
-msgstr "Μόνιμος σύνδεσμος προς αυτή την επικεφαλίδα"
-
-#: doc/sphinx/_build/html/_static/doctools.js:173
-msgid "Permalink to this definition"
-msgstr "Μόνιμος σύνδεσμος προς αυτό τον ορισμό"
-
-#: doc/sphinx/_build/html/_static/doctools.js:206
-msgid "Hide Search Matches"
-msgstr "Απόκρυψη αντιστοιχισμάτων αναζητήσεων"
-
-#: doc/sphinx/_build/html/_static/searchtools.js:400
-msgid "Searching"
-msgstr "Γίνεται αναζήτηση..."
-
-#: doc/sphinx/_build/html/_static/searchtools.js:405
-msgid "Preparing search..."
-msgstr "Προετοιμασία για αναζήτηση..."
-
-#: doc/sphinx/_build/html/_static/searchtools.js:566
-msgid "Search Results"
-msgstr "Αποτελέσματα αναζήτησης"
-
-#: doc/sphinx/_build/html/_static/searchtools.js:568
-msgid "Your search did not match any documents. Please make sure that all words are spelled correctly and that you've selected enough categories."
-msgstr "Η αναζήτησή σας δεν επέστρεψε αποτελέσματα. Σιγουρευτείτε ότι όλες οι λέξεις είναι σωστά γραμμένες και ότι έχετε επιλέξει αρκετές κατηγορίες."
-
-#: doc/sphinx/_build/html/_static/searchtools.js:570
-#, javascript-format
-msgid "Search finished, found %s page(s) matching the search query."
-msgstr "Η αναζήτηση ολοκληρώθηκε, βρέθηκαν %s σελίδα(-ες) που αντιστοιχούν στο ερώτημα αναζήτησης."
-
-#: doc/sphinx/_build/html/_static/searchtools.js:623
-msgid ", in "
-msgstr ", σε "
-
-#: doc/sphinx/_build/html/_static/sidebar.js:77
-msgid "Expand sidebar"
-msgstr "Επέκταση πλευρικής γραμμής"
-
-#: doc/sphinx/_build/html/_static/sidebar.js:90
-#: doc/sphinx/_build/html/_static/sidebar.js:118
-msgid "Collapse sidebar"
-msgstr "Σύμπτυξη πλευρικής γραμμής"
 
 #: papers/static/papers/refresh.js:35
 msgid "Do not show this message anymore"
@@ -76,25 +31,73 @@ msgstr "Χωρίς τίτλο"
 msgid "Invalid publication date"
 msgstr "Άκυρη ημερομηνία δημοσίευσης."
 
-#: papers/static/papers/refresh.js:105
+#: papers/static/papers/refresh.js:72
+#, fuzzy
+#| msgid "Invalid publication date"
+msgid "No publication date"
+msgstr "Άκυρη ημερομηνία δημοσίευσης."
+
+#: papers/static/papers/refresh.js:74
+msgid "Paper is invalid"
+msgstr ""
+
+#: papers/static/papers/refresh.js:109
 msgid "We ignored %(count)s paper from your ORCiD profile."
 msgid_plural "We ignored %(count)s papers from your ORCiD profile."
 msgstr[0] "Αγνοήσαμε %(μέτρηση)-εις χαρτιού από το προφίλ σας στο ORCiD."
 msgstr[1] "Αγνοήσαμε %(μέτρηση)-εις χαρτιού από το προφίλ σας στο ORCiD."
 
-#: papers/static/papers/refresh.js:115
+#: papers/static/papers/refresh.js:119
 msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
 msgstr "\"%(όνομα)-τα\" αγνοήθηκαν για την ακόλουθη αιτία: %(αιτία)-ες"
 
-#: papers/static/papers/refresh.js:123
+#: papers/static/papers/refresh.js:127
 msgid "A paper was ignored, because it has no name"
 msgstr "Ένα χαρτί αγνοήθηκε, γιατί δεν έχει όνομα"
 
-#: papers/static/papers/refresh.js:135 papers/static/papers/refresh.js:163
+#: papers/static/papers/refresh.js:139 papers/static/papers/refresh.js:167
 msgid "Show more information"
 msgstr "Εμφάνιση περισσότερων πληροφοριών"
 
-#: papers/static/papers/refresh.js:160
+#: papers/static/papers/refresh.js:164
 msgid "Show less information"
 msgstr "Εμφάνιση λιγότερων πληροφοριών"
 
+#~ msgid "Permalink to this headline"
+#~ msgstr "Μόνιμος σύνδεσμος προς αυτή την επικεφαλίδα"
+
+#~ msgid "Permalink to this definition"
+#~ msgstr "Μόνιμος σύνδεσμος προς αυτό τον ορισμό"
+
+#~ msgid "Hide Search Matches"
+#~ msgstr "Απόκρυψη αντιστοιχισμάτων αναζητήσεων"
+
+#~ msgid "Searching"
+#~ msgstr "Γίνεται αναζήτηση..."
+
+#~ msgid "Preparing search..."
+#~ msgstr "Προετοιμασία για αναζήτηση..."
+
+#~ msgid "Search Results"
+#~ msgstr "Αποτελέσματα αναζήτησης"
+
+#~ msgid ""
+#~ "Your search did not match any documents. Please make sure that all words "
+#~ "are spelled correctly and that you've selected enough categories."
+#~ msgstr ""
+#~ "Η αναζήτησή σας δεν επέστρεψε αποτελέσματα. Σιγουρευτείτε ότι όλες οι "
+#~ "λέξεις είναι σωστά γραμμένες και ότι έχετε επιλέξει αρκετές κατηγορίες."
+
+#~ msgid "Search finished, found %s page(s) matching the search query."
+#~ msgstr ""
+#~ "Η αναζήτηση ολοκληρώθηκε, βρέθηκαν %s σελίδα(-ες) που αντιστοιχούν στο "
+#~ "ερώτημα αναζήτησης."
+
+#~ msgid ", in "
+#~ msgstr ", σε "
+
+#~ msgid "Expand sidebar"
+#~ msgstr "Επέκταση πλευρικής γραμμής"
+
+#~ msgid "Collapse sidebar"
+#~ msgstr "Σύμπτυξη πλευρικής γραμμής"

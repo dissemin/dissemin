@@ -57,7 +57,7 @@ $(function(){
 <div id="authorSummary">
     {% if paper.doctype != "other" %}
     {% with paper.get_doctype_display as doctype %}
-    {% blocktrans context "as in: _Journal article by_ Tom Smith, Nicole Allen" %}
+    {% blocktrans context "as in: _Journal article by_ Tom Smith, Nicole Allen" trimmed %}
     <span class="paperDocType">{{ doctype }}</span> by
     {% endblocktrans %}
     {% endwith %}

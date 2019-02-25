@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-21 19:29+0100\n"
+"POT-Creation-Date: 2019-02-25 11:56+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -621,55 +621,55 @@ msgstr ""
 msgid "Unable to publish the deposition on Zenodo."
 msgstr ""
 
-#: dissemin/settings/common.py:275
+#: dissemin/settings/common.py:279
 msgid "Arabic"
 msgstr ""
 
-#: dissemin/settings/common.py:276
+#: dissemin/settings/common.py:280
 msgid "English"
 msgstr ""
 
-#: dissemin/settings/common.py:277
+#: dissemin/settings/common.py:281
 msgid "Finnish"
 msgstr ""
 
-#: dissemin/settings/common.py:278
+#: dissemin/settings/common.py:282
 msgid "French"
 msgstr ""
 
-#: dissemin/settings/common.py:279
+#: dissemin/settings/common.py:283
 msgid "Korean"
 msgstr ""
 
-#: dissemin/settings/common.py:280
+#: dissemin/settings/common.py:284
 msgid "Spanish"
 msgstr ""
 
-#: dissemin/settings/common.py:281
+#: dissemin/settings/common.py:285
 msgid "Simplified Chinese"
 msgstr ""
 
-#: dissemin/settings/common.py:282
+#: dissemin/settings/common.py:286
 msgid "Traditional Chinese"
 msgstr ""
 
-#: dissemin/settings/common.py:283
+#: dissemin/settings/common.py:287
 msgid "Macedonian"
 msgstr ""
 
-#: dissemin/settings/common.py:284
+#: dissemin/settings/common.py:288
 msgid "German"
 msgstr ""
 
-#: dissemin/settings/common.py:285
+#: dissemin/settings/common.py:289
 msgid "Brazilian Portuguese"
 msgstr ""
 
-#: dissemin/settings/common.py:286
+#: dissemin/settings/common.py:290
 msgid "European Portuguese"
 msgstr ""
 
-#: dissemin/settings/common.py:287
+#: dissemin/settings/common.py:291
 msgid "Swedish"
 msgstr ""
 
@@ -942,10 +942,7 @@ msgstr ""
 #: papers/templates/papers/paper.html:60
 #, python-format
 msgctxt "as in: _Journal article by_ Tom Smith, Nicole Allen"
-msgid ""
-"\n"
-"    <span class=\"paperDocType\">%(doctype)s</span> by\n"
-"    "
+msgid "<span class=\"paperDocType\">%(doctype)s</span> by"
 msgstr ""
 
 #: papers/templates/papers/paper.html:68
@@ -1324,16 +1321,16 @@ msgstr ""
 msgid " in "
 msgstr ""
 
-#: papers/views.py:391
+#: papers/views.py:392
 msgid "Paper view expects a DOI or a pk"
 msgstr ""
 
-#: papers/views.py:398
+#: papers/views.py:399
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr ""
 
-#: papers/views.py:402
+#: papers/views.py:403
 msgid "This paper has been deleted."
 msgstr ""
 
@@ -1349,66 +1346,66 @@ msgstr ""
 msgid "Filter by publisher policy"
 msgstr ""
 
-#: publishers/models.py:38
+#: publishers/models.py:39
 msgid "Open access"
 msgstr ""
 
-#: publishers/models.py:38
+#: publishers/models.py:39
 msgid "Freely available from the publisher."
 msgstr ""
 
-#: publishers/models.py:39
+#: publishers/models.py:40
 msgid "Allows pre/post prints"
 msgstr ""
 
-#: publishers/models.py:40
+#: publishers/models.py:41
 msgid ""
 "The publisher sells copies but allows authors to deposit some version of the "
 "article in a repository."
 msgstr ""
 
-#: publishers/models.py:41
+#: publishers/models.py:42
 msgid "Forbids pre/post prints"
 msgstr ""
 
-#: publishers/models.py:42
+#: publishers/models.py:43
 msgid ""
 "The publisher forbids authors to deposit any version of their article online."
 msgstr ""
 
-#: publishers/models.py:43
+#: publishers/models.py:44
 msgid "Policy unclear"
 msgstr ""
 
-#: publishers/models.py:44
+#: publishers/models.py:45
 msgid "For complicated policies, unknown publishers and unpublished documents."
 msgstr ""
 
-#: publishers/models.py:47
+#: publishers/models.py:48
 msgid "Allowed"
 msgstr ""
 
-#: publishers/models.py:48
+#: publishers/models.py:49
 msgid "Forbidden"
 msgstr ""
 
-#: publishers/models.py:49
+#: publishers/models.py:50
 msgid "Restricted"
 msgstr ""
 
-#: publishers/models.py:50
+#: publishers/models.py:51
 msgid "Unclear"
 msgstr ""
 
-#: publishers/models.py:51
+#: publishers/models.py:52
 msgid "Unknown"
 msgstr ""
 
-#: publishers/models.py:59 publishers/views.py:94
+#: publishers/models.py:71 publishers/views.py:94
 msgid "Publishers"
 msgstr ""
 
-#: publishers/models.py:79
+#: publishers/models.py:91
 msgid "Unknown publisher"
 msgstr ""
 
