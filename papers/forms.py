@@ -141,6 +141,21 @@ class PaperForm(SearchForm):
         # Items with no whitespace of prefixed with 'last:' are considered as
         # last names; others are full names.
         for name in self.cleaned_data['authors'].split(','):
+            name = name.strip()
+
+            # If part of this author name matches ORCID identifiers, consider
+            # these as orcid ids and do the filtering
+            orcid_ids = [x for x in name.split(' ') if validate_orcid(x)]
+            for orcid_id in orcid_ids:
+                try:
+                    researcher = Researcher.objects.get(orcid=orcid_id)
+                    self.filter(researchers=researcher.id)
+                except Researcher.DoesNotExist:
+                    pass
+                continue
+            # Rebuild a full name excluding the ORCID id terms
+            name = ' '.join([x for x in name.split(' ') if x not in orcid_ids])
+
             name = remove_diacritics(name.strip())
 
             if name.startswith('last:'):
