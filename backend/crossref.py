@@ -564,7 +564,7 @@ class CrossRefAPI(object):
             source.last_update += batch_time
             source.save()
 
-    def ingest_dump(self, filename, start_doi=None):
+    def ingest_dump(self, filename, start_doi=None, update_index=True):
         """
         Imports a dump of Crossref metadata records stored as a bz2'ed
         file where each line is a JSON record.
@@ -581,6 +581,9 @@ class CrossRefAPI(object):
 
                     bare_paper = self.save_doi_metadata(record)
                     p = Paper.from_bare(bare_paper)
+
+                    if not update_index:
+                        continue
 
                     for i in range(3):
                         try:
