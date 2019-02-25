@@ -8,13 +8,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-21 19:29+0100\n"
-"PO-Revision-Date: 2019-02-21 13:56:09+0000\n"
+"PO-Revision-Date: 2019-02-25 09:40:10+0000\n"
 "Language: pt_br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-02-20 09:02:59+0000\n"
+"X-POT-Import-Date: 2019-02-22 07:37:28+0000\n"
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
@@ -285,11 +286,8 @@ msgid "Deposit"
 msgstr "Depósito"
 
 #: deposit/models.py:219
-msgid ""
-"We will use this email address to notify you when your deposits are accepted."
-msgstr ""
-"Usaremos este endereço de e-mail para notificá-lo quando seus depósitos "
-"forem aceitos."
+msgid "We will use this email address to notify you when your deposits are accepted."
+msgstr "Usaremos este endereço de e-mail para notificá-lo quando seus depósitos forem aceitos."
 
 #: deposit/models.py:225
 msgid "This repository will be used by default for your deposits."
@@ -352,14 +350,8 @@ msgid "OSF identifier"
 msgstr "Identificador OSF"
 
 #: deposit/osf/models.py:14
-msgid ""
-"If set, your deposits will be associated to this OSF account. This "
-"identifier is a string of letters and numbers which can be found in your OSF "
-"public profile URL."
-msgstr ""
-"Se configurado, seus depósitos serão associados a essa conta OSF. Este "
-"identificador é uma série de letras e números que podem ser encontrados em "
-"seu URL de perfil público OSF."
+msgid "If set, your deposits will be associated to this OSF account. This identifier is a string of letters and numbers which can be found in your OSF public profile URL."
+msgstr "Se configurado, seus depósitos serão associados a essa conta OSF. Este identificador é uma série de letras e números que podem ser encontrados em seu URL de perfil público OSF."
 
 #: deposit/osf/protocol.py:207
 msgid "Unable to create a project on OSF."
@@ -411,8 +403,7 @@ msgstr "Não é possível tornar público o projeto."
 
 #: deposit/protocol.py:199
 msgid "Failed to connect to the repository. Please try again later."
-msgstr ""
-"Falha ao conectar-se ao repositório. Por favor, tente novamente mais tarde."
+msgstr "Falha ao conectar-se ao repositório. Por favor, tente novamente mais tarde."
 
 #: deposit/templates/deposit/deposits.html:10
 #: deposit/templates/deposit/deposits.html:14
@@ -449,12 +440,8 @@ msgid "Status"
 msgstr "Status"
 
 #: deposit/templates/deposit/deposits.html:88
-msgid ""
-"You have not made any deposit via Dissemin. What are you waiting for? "
-"Liberate your papers today."
-msgstr ""
-"Você não fez nenhum depósito via Dissemin. O que você está esperando? "
-"Liberte seus documentos hoje."
+msgid "You have not made any deposit via Dissemin. What are you waiting for? Liberate your papers today."
+msgstr "Você não fez nenhum depósito via Dissemin. O que você está esperando? Liberte seus documentos hoje."
 
 #: deposit/templates/deposit/global_preferences.html:13
 #: deposit/templates/deposit/preferences_nav.html:3
@@ -489,35 +476,16 @@ msgstr "Dissemin encontrou um erro, tente novamente mais tarde."
 
 #: deposit/templates/deposit/start.html:295
 #, fuzzy, python-format
-msgid ""
-"You can deposit the full text of your article. Dissemin will send it to a "
-"repository where it will be made freely available. By depositing your "
-"article via Dissemin, you agree to our <a href=\"%(tosurl)s\">terms of "
-"service</a>."
-msgstr ""
-"\n"
-"            Você pode depositar o texto completo do seu artigo. Dissemin "
-"irá\n"
-"             envie-o para um repositório onde será disponibilizado "
-"gratuitamente.\n"
-"             Ao depositar seu artigo via Dissemin,\n"
-"            você concorda com o nosso <a href=\"%(tosurl)s\">termos de "
-"serviço</a>.\n"
-"        "
+msgid "You can deposit the full text of your article. Dissemin will send it to a repository where it will be made freely available. By depositing your article via Dissemin, you agree to our <a href=\"%(tosurl)s\">terms of service</a>."
+msgstr "\n            Você pode depositar o texto completo do seu artigo. Dissemin irá\n             envie-o para um repositório onde será disponibilizado gratuitamente.\n             Ao depositar seu artigo via Dissemin,\n            você concorda com o nosso <a href=\"%(tosurl)s\">termos de serviço</a>.\n        "
 
 #: deposit/templates/deposit/start.html:306
-msgid ""
-"You do not appear to be one of the authors of this paper. By using this "
-"form, you certify that you have the permission to upload it on their behalf."
-msgstr ""
-"Você não parece ser um dos autores deste artigo. Ao usar este formulário, "
-"você certifica que você tem permissão para carregá-lo em seu nome."
+msgid "You do not appear to be one of the authors of this paper. By using this form, you certify that you have the permission to upload it on their behalf."
+msgstr "Você não parece ser um dos autores deste artigo. Ao usar este formulário, você certifica que você tem permissão para carregá-lo em seu nome."
 
 #: deposit/templates/deposit/start.html:316
 msgid "This paper cannot be deposited in any repository supported by Dissemin."
-msgstr ""
-"Este documento não pode ser depositado em qualquer repositório suportado "
-"pela Dissemin."
+msgstr "Este documento não pode ser depositado em qualquer repositório suportado pela Dissemin."
 
 #: deposit/templates/deposit/start.html:324
 msgid "Document"
@@ -593,12 +561,8 @@ msgid "Creative Commons Attribution-NoDerivatives (CC-BY-ND)"
 msgstr "Creative Commons Attribution-NoDerivatives (CC-BY-ND)"
 
 #: deposit/zenodo/forms.py:41
-msgid ""
-"Free for private use; right holder retains other rights, including "
-"distribution"
-msgstr ""
-"Gratuito para uso privado; titular do direito retém outros direitos, "
-"incluindo a distribuição"
+msgid "Free for private use; right holder retains other rights, including distribution"
+msgstr "Gratuito para uso privado; titular do direito retém outros direitos, incluindo a distribuição"
 
 #: deposit/zenodo/forms.py:43
 msgid "Other open license"
@@ -614,12 +578,8 @@ msgid "No Zenodo API key provided."
 msgstr "Nenhuma chave da API do Zenodo fornecida."
 
 #: deposit/zenodo/protocol.py:128
-msgid ""
-"This happens when Zenodo has hiccups. Please try again in a few minutes or "
-"use a different repository in the menu above."
-msgstr ""
-"Isso acontece quando Zenodo tem soluços. Tente novamente em alguns minutos "
-"ou use um repositório diferente no menu acima."
+msgid "This happens when Zenodo has hiccups. Please try again in a few minutes or use a different repository in the menu above."
+msgstr "Isso acontece quando Zenodo tem soluços. Tente novamente em alguns minutos ou use um repositório diferente no menu acima."
 
 #: deposit/zenodo/protocol.py:134
 msgid "Unable to authenticate to Zenodo."
@@ -634,12 +594,8 @@ msgid "Unable to transfer the document to Zenodo."
 msgstr "Não foi possível transferir o documento para o Zenodo."
 
 #: deposit/zenodo/protocol.py:170
-msgid ""
-"No abstract is available for this paper but Zenodo requires one. Please "
-"provide it using the metadata panel."
-msgstr ""
-"Nenhum resumo está disponível para este trabalho, mas o Zenodo requer um. "
-"Forneça isso usando o painel de metadados."
+msgid "No abstract is available for this paper but Zenodo requires one. Please provide it using the metadata panel."
+msgstr "Nenhum resumo está disponível para este trabalho, mas o Zenodo requer um. Forneça isso usando o painel de metadados."
 
 #: deposit/zenodo/protocol.py:182
 msgid "Unable to submit paper metadata to Zenodo."
@@ -904,12 +860,8 @@ msgstr "Bem-vindo à dissemin"
 
 #: papers/templates/papers/index.html:24 templates/dissemin/skeleton.html:10
 #: templates/dissemin/skeleton.html:15
-msgid ""
-"Dissemin detects papers behind pay-walls and invites their authors to upload "
-"them in one click to an open repository."
-msgstr ""
-"Dissemin detecta documentos por trás das paredes de pagamento e convida seus "
-"autores a enviá-los em um clique para um repositório aberto."
+msgid "Dissemin detects papers behind pay-walls and invites their authors to upload them in one click to an open repository."
+msgstr "Dissemin detecta documentos por trás das paredes de pagamento e convida seus autores a enviá-los em um clique para um repositório aberto."
 
 #: papers/templates/papers/index.html:34
 #: papers/templates/papers/search.html:202
@@ -927,44 +879,24 @@ msgid "Green open access"
 msgstr "Acesso aberto verde"
 
 #: papers/templates/papers/index.html:48
-msgid ""
-"Many researchers do not use their right to make their papers freely "
-"available online, in addition to the paywalled version offered by "
-"traditional publishers."
-msgstr ""
-"Muitos pesquisadores não usam seu direito de disponibilizar gratuitamente "
-"seus papéis em linha, além da versão paywalled oferecida pelos editores "
-"tradicionais."
+msgid "Many researchers do not use their right to make their papers freely available online, in addition to the paywalled version offered by traditional publishers."
+msgstr "Muitos pesquisadores não usam seu direito de disponibilizar gratuitamente seus papéis em linha, além da versão paywalled oferecida pelos editores tradicionais."
 
 #: papers/templates/papers/index.html:56
-msgid ""
-"This forces libraries to buy overpriced electronic subscriptions to "
-"journals, when they can afford them at all."
-msgstr ""
-"Isso obriga as bibliotecas a comprar inscrições eletrônicas de alta "
-"qualidade para revistas, quando elas podem pagar por elas."
+msgid "This forces libraries to buy overpriced electronic subscriptions to journals, when they can afford them at all."
+msgstr "Isso obriga as bibliotecas a comprar inscrições eletrônicas de alta qualidade para revistas, quando elas podem pagar por elas."
 
 #: papers/templates/papers/index.html:72
 msgid "Open repositories"
 msgstr "Lista de repositórios"
 
 #: papers/templates/papers/index.html:75
-msgid ""
-"Uploading your papers on your own webpage is not enough. Such copies are "
-"less stable and harder to find than documents uploaded to well-indexed "
-"repositories."
-msgstr ""
-"Carregar seus papéis em sua própria página não é suficiente. Essas cópias "
-"são menos estáveis e difíceis de encontrar do que os documentos carregados "
-"para repositórios bem indexados."
+msgid "Uploading your papers on your own webpage is not enough. Such copies are less stable and harder to find than documents uploaded to well-indexed repositories."
+msgstr "Carregar seus papéis em sua própria página não é suficiente. Essas cópias são menos estáveis e difíceis de encontrar do que os documentos carregados para repositórios bem indexados."
 
 #: papers/templates/papers/index.html:83
-msgid ""
-"Dissemin searches for copies of your papers in a large collection of open "
-"repositories and tells you which ones cannot be accessed."
-msgstr ""
-"A Dissemin procura cópias de seus documentos em uma grande coleção de "
-"repositórios abertos e informa quais não podem ser acessados."
+msgid "Dissemin searches for copies of your papers in a large collection of open repositories and tells you which ones cannot be accessed."
+msgstr "A Dissemin procura cópias de seus documentos em uma grande coleção de repositórios abertos e informa quais não podem ser acessados."
 
 #: papers/templates/papers/institutions.html:25
 msgid "Institutions"
@@ -981,60 +913,28 @@ msgstr "(perfil vazio)"
 
 #: papers/templates/papers/paper.html:60
 #, fuzzy, python-format
-#| msgctxt "as in: _Journal article by_ Tom Smith, Nicole Allen"
-#| msgid ""
-#| " \n"
-#| "    <span class=\"paperDocType\">%(doctype)s</span> by\n"
-#| "    "
 msgctxt "as in: _Journal article by_ Tom Smith, Nicole Allen"
-msgid ""
-"\n"
-"    <span class=\"paperDocType\">%(doctype)s</span> by\n"
-"    "
-msgstr ""
-" \n"
-"    <span class=\"paperDocType\">%(doctype)s</span> por\n"
-"    "
+msgid "\n    <span class=\"paperDocType\">%(doctype)s</span> by\n    "
+msgstr " \n    <span class=\"paperDocType\">%(doctype)s</span> por\n    "
 
 #: papers/templates/papers/paper.html:68
 #, fuzzy, python-format
-msgid ""
-"and <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s other "
-"authors</a>"
-msgstr ""
-"\n"
-"            and <a href=\"#\" id=\"show_all_authors\">"
-"%(nb_remaining_authors)s outros autores</a>\n"
-"            "
+msgid "and <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s other authors</a>"
+msgstr "\n            and <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s outros autores</a>\n            "
 
 #: papers/templates/papers/paper.html:75
 #, fuzzy, python-format
-msgid ""
-"All %(nb_authors)s authors (<a href=\"#\" id=\"show_less_authors\">show "
-"less</a>):<br />"
-msgstr ""
-"\n"
-"            All %(nb_authors)s authors (<a href=\"#\" id=\"show_less_authors"
-"\">mostre menos</a>):<br />\n"
-"            "
+msgid "All %(nb_authors)s authors (<a href=\"#\" id=\"show_less_authors\">show less</a>):<br />"
+msgstr "\n            All %(nb_authors)s authors (<a href=\"#\" id=\"show_less_authors\">mostre menos</a>):<br />\n            "
 
 #: papers/templates/papers/paper.html:87
-msgid ""
-"<strong>Congratulations!</strong> This paper was successfully deposited."
+msgid "<strong>Congratulations!</strong> This paper was successfully deposited."
 msgstr "<strong>Parabéns!</strong> Este artigo foi depositado com sucesso."
 
 #: papers/templates/papers/paper.html:94
 #, python-format
-msgid ""
-"<strong>Almost there!</strong> This paper has been deposited in <a href="
-"\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a "
-"href=\"%(deposit_url)s\">this address</a> after validation by the repository "
-"administrators."
-msgstr ""
-"<strong>Quase lá!</strong> Este artigo foi depositado em <a href="
-"\"%(repo_url)s\">%(repo_name)s</a>. O texto completo estará disponível <a "
-"href=\"%(deposit_url)s\">nesse endereço</a> após a validação pelos "
-"administradores do repositório."
+msgid "<strong>Almost there!</strong> This paper has been deposited in <a href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a href=\"%(deposit_url)s\">this address</a> after validation by the repository administrators."
+msgstr "<strong>Quase lá!</strong> Este artigo foi depositado em <a href=\"%(repo_url)s\">%(repo_name)s</a>. O texto completo estará disponível <a href=\"%(deposit_url)s\">nesse endereço</a> após a validação pelos administradores do repositório."
 
 #: papers/templates/papers/paper.html:112
 msgid "Full text:"
@@ -1091,12 +991,8 @@ msgstr "Nenhum papel encontrado."
 
 #: papers/templates/papers/paperList.html:33
 #, python-format
-msgid ""
-"Missing publications? <a href=\"%(matching_papers_url)s\"> Search for "
-"publications with a matching author name </a>"
-msgstr ""
-"Faltando publicações? <a href=\"%(matching_papers_url)s\"> Procure "
-"publicações com um nome de autor correspondente </a>"
+msgid "Missing publications? <a href=\"%(matching_papers_url)s\"> Search for publications with a matching author name </a>"
+msgstr "Faltando publicações? <a href=\"%(matching_papers_url)s\"> Procure publicações com um nome de autor correspondente </a>"
 
 #: papers/templates/papers/publiListItem.html:16
 #, python-format
@@ -1274,9 +1170,7 @@ msgstr "As impressões pós-impressão não podem ser arquivadas."
 
 #: papers/templatetags/statuses.py:40
 msgid "Under the restrictions below, postprints can be archived."
-msgstr ""
-"Dependendo das seguintes restrições, as versões revisadas podem ser "
-"arquivadas."
+msgstr "Dependendo das seguintes restrições, as versões revisadas podem ser arquivadas."
 
 #: papers/templatetags/statuses.py:41
 msgid "Postprint archiving policy unclear."
@@ -1352,12 +1246,8 @@ msgid "policy unknown"
 msgstr "política desconhecida"
 
 #: papers/views.py:83
-msgid ""
-"Dissemin requires access to your ORCID name, which is marked as private in "
-"your ORCID profile."
-msgstr ""
-"Dissemin requer acesso ao seu nome ORCID, que é marcado como privado em seu "
-"perfil ORCID."
+msgid "Dissemin requires access to your ORCID name, which is marked as private in your ORCID profile."
+msgstr "Dissemin requer acesso ao seu nome ORCID, que é marcado como privado em seu perfil ORCID."
 
 #: papers/views.py:135
 msgid "All papers"
@@ -1373,11 +1263,7 @@ msgstr[1] "%d documentos encontrados"
 #: papers/views.py:216
 #, fuzzy
 msgid "Invalid ORCID profile. Please make sure it includes a public name."
-msgstr ""
-"\n"
-"                            Perfil ORCID inválido.\n"
-"                             Certifique-se de que inclui um nome público.\n"
-"                            "
+msgstr "\n                            Perfil ORCID inválido.\n                             Certifique-se de que inclui um nome público.\n                            "
 
 #: papers/views.py:219
 msgid "Invalid ORCID profile."
@@ -1433,22 +1319,16 @@ msgid "Allows pre/post prints"
 msgstr "Permite impressões pré/pós"
 
 #: publishers/models.py:40
-msgid ""
-"The publisher sells copies but allows authors to deposit some version of the "
-"article in a repository."
-msgstr ""
-"O editor vende cópias, mas permite aos autores depositar alguma versão do "
-"artigo em um repositório."
+msgid "The publisher sells copies but allows authors to deposit some version of the article in a repository."
+msgstr "O editor vende cópias, mas permite aos autores depositar alguma versão do artigo em um repositório."
 
 #: publishers/models.py:41
 msgid "Forbids pre/post prints"
 msgstr "Proíbe pré/pós impressões"
 
 #: publishers/models.py:42
-msgid ""
-"The publisher forbids authors to deposit any version of their article online."
-msgstr ""
-"A editora proíbe aos autores depositar qualquer versão do artigo on-line."
+msgid "The publisher forbids authors to deposit any version of their article online."
+msgstr "A editora proíbe aos autores depositar qualquer versão do artigo on-line."
 
 #: publishers/models.py:43
 msgid "Policy unclear"
@@ -1456,9 +1336,7 @@ msgstr "Política pouco clara"
 
 #: publishers/models.py:44
 msgid "For complicated policies, unknown publishers and unpublished documents."
-msgstr ""
-"Para políticas complicadas, editores desconhecidos e documentos não "
-"publicados."
+msgstr "Para políticas complicadas, editores desconhecidos e documentos não publicados."
 
 #: publishers/models.py:47
 msgid "Allowed"
@@ -1493,12 +1371,8 @@ msgid "Preprint:"
 msgstr "Versão original:"
 
 #: publishers/templates/publishers/detailsPolicy.html:7
-msgid ""
-"A preprint is a document produced by the authors without any interaction "
-"with the peer-reviewing process."
-msgstr ""
-"Uma pré-impressão é um documento produzido pelos autores sem qualquer "
-"interação com o processo de revisão por pares."
+msgid "A preprint is a document produced by the authors without any interaction with the peer-reviewing process."
+msgstr "Uma pré-impressão é um documento produzido pelos autores sem qualquer interação com o processo de revisão por pares."
 
 #: publishers/templates/publishers/detailsPolicy.html:8
 msgid "preprint"
@@ -1509,12 +1383,8 @@ msgid "Postprint:"
 msgstr "Versão revisada:"
 
 #: publishers/templates/publishers/detailsPolicy.html:11
-msgid ""
-"Postprints differ from preprints in that they include the changes suggested "
-"by the reviewers. They are not edited by the publisher."
-msgstr ""
-"As versões revisadas diferem das originais porque incluem modificações "
-"sugeridas pelos pares. Os editores não os modificaram."
+msgid "Postprints differ from preprints in that they include the changes suggested by the reviewers. They are not edited by the publisher."
+msgstr "As versões revisadas diferem das originais porque incluem modificações sugeridas pelos pares. Os editores não os modificaram."
 
 #: publishers/templates/publishers/detailsPolicy.html:12
 msgid "postprint"
@@ -1525,12 +1395,8 @@ msgid "Published version:"
 msgstr "Versão publicada:"
 
 #: publishers/templates/publishers/detailsPolicy.html:15
-msgid ""
-"The published version is the final version of the paper, as formatted by the "
-"publisher."
-msgstr ""
-"A versão publicada é a versão final do documento, conforme formatado pelo "
-"editor."
+msgid "The published version is the final version of the paper, as formatted by the publisher."
+msgstr "A versão publicada é a versão final do documento, conforme formatado pelo editor."
 
 #: publishers/templates/publishers/detailsPolicy.html:16
 msgid "published version"
@@ -1557,10 +1423,8 @@ msgstr "Dados de política fornecidos por"
 
 #: publishers/templates/publishers/policy.html:60
 #, python-format
-msgid ""
-"Last updated on %(last_updated)s, <a href=\"%(feedback_url)s\">report any "
-"error to them</a>"
-msgstr ""
+msgid "Last updated on %(last_updated)s, <a href=\"%(feedback_url)s\">report any error to them</a>"
+msgstr "Última atualização em %(last_updated)s, <a href=\"%(feedback_url)s\">relatar qualquer erro para eles</a>"
 
 #: publishers/templates/publishers/policy.html:64
 msgid "Report any error to them"
@@ -1593,8 +1457,7 @@ msgstr "Revistas"
 
 #: publishers/templates/publishers/policy.html:124
 msgid "Only journals with papers written by our users are listed."
-msgstr ""
-"Apenas são publicados periódicos com documentos escritos por nossos usuários."
+msgstr "Apenas são publicados periódicos com documentos escritos por nossos usuários."
 
 #: publishers/templates/publishers/policy.html:139
 msgid "None."
@@ -1629,20 +1492,12 @@ msgid "This paper is available in a repository."
 msgstr "Este documento está disponível em um repositório."
 
 #: statistics/models.py:59
-msgid ""
-"This paper was not found in any repository, but could be made available "
-"legally by the author."
-msgstr ""
-"Este artigo não foi encontrado em nenhum repositório, mas poderia ser "
-"disponibilizado legalmente pelo autor."
+msgid "This paper was not found in any repository, but could be made available legally by the author."
+msgstr "Este artigo não foi encontrado em nenhum repositório, mas poderia ser disponibilizado legalmente pelo autor."
 
 #: statistics/models.py:60
-msgid ""
-"This paper was not found in any repository; the policy of its publisher is "
-"unknown or unclear."
-msgstr ""
-"Este documento não foi encontrado em nenhum repositório; A política de seu "
-"editor é desconhecida ou não está clara."
+msgid "This paper was not found in any repository; the policy of its publisher is unknown or unclear."
+msgstr "Este documento não foi encontrado em nenhum repositório; A política de seu editor é desconhecida ou não está clara."
 
 #: statistics/models.py:61
 msgid "Distributing this paper is prohibited by the publisher"
@@ -1683,14 +1538,8 @@ msgstr "Página não encontrada"
 
 #: templates/404.html:13
 #, fuzzy
-msgid ""
-"The page you requested could not be found. <a href=\"/\">Go back to the home "
-"page.</a>"
-msgstr ""
-"\n"
-"            A página solicitada não pôde ser encontrada. <a href=\"/\">Volte "
-"para a página inicial.</a>\n"
-"           "
+msgid "The page you requested could not be found. <a href=\"/\">Go back to the home page.</a>"
+msgstr "\n            A página solicitada não pôde ser encontrada. <a href=\"/\">Volte para a página inicial.</a>\n           "
 
 #: templates/500.html:6 templates/500.html:12
 msgid "Internal error"
@@ -1698,14 +1547,8 @@ msgstr "Erro interno"
 
 #: templates/500.html:13
 #, fuzzy
-msgid ""
-"Your request triggered an internal error. <a href=\"/\">Go back to the home "
-"page.</a>"
-msgstr ""
-"\n"
-"            O seu pedido provocou um erro interno. <a href=\"/\">Go Voltar a "
-"página inicial.</a>\n"
-"           "
+msgid "Your request triggered an internal error. <a href=\"/\">Go back to the home page.</a>"
+msgstr "\n            O seu pedido provocou um erro interno. <a href=\"/\">Go Voltar a página inicial.</a>\n           "
 
 #: templates/admin/base_site.html:4
 msgid "Dissemin site admin"
@@ -1789,12 +1632,8 @@ msgid "Some details of my paper are incorrect. What can I do?"
 msgstr "Alguns detalhes do meu artigo estão incorretos. O que eu posso fazer?"
 
 #: templates/dissemin/faq.html:35 templates/dissemin/faq.html:394
-msgid ""
-"There is a freely available copy of my article online but dissem.in does not "
-"find it."
-msgstr ""
-"Há uma cópia gratuita disponível do meu artigo online, mas dissemin.in não a "
-"encontra."
+msgid "There is a freely available copy of my article online but dissem.in does not find it."
+msgstr "Há uma cópia gratuita disponível do meu artigo online, mas dissemin.in não a encontra."
 
 #: templates/dissemin/faq.html:37 templates/dissemin/faq.html:434
 msgid "Authentication with ORCID"
@@ -1837,335 +1676,138 @@ msgid "Can I harvest your data?"
 msgstr "Posso colher seus dados?"
 
 #: templates/dissemin/faq.html:53
-msgid ""
-"In a nutshell, the Open Access movement promotes free access to the "
-"scientific literature. For a more in-depth introduction, we recommend <a "
-"href=\"http://www.phdcomics.com/comics.php?f=1533\">this video in English</"
-"a> and <a href=\"https://pablo.rauzy.name/openaccess/introduction.html"
-"\">this introduction in French</a>."
-msgstr ""
-"Em poucas palavras, o movimento de acesso aberto promove o acesso gratuito à "
-"literatura científica. Para uma introdução mais aprofundada, recomendamos <a "
-"href=\"http://www.phdcomics.com/comics.php?f=1533\">este video em inglês</a> "
-"and <a href=\"https://pablo.rauzy.name/openaccess/introduction.html\">this "
-"introduction em Francês</a>."
+msgid "In a nutshell, the Open Access movement promotes free access to the scientific literature. For a more in-depth introduction, we recommend <a href=\"http://www.phdcomics.com/comics.php?f=1533\">this video in English</a> and <a href=\"https://pablo.rauzy.name/openaccess/introduction.html\">this introduction in French</a>."
+msgstr "Em poucas palavras, o movimento de acesso aberto promove o acesso gratuito à literatura científica. Para uma introdução mais aprofundada, recomendamos <a href=\"http://www.phdcomics.com/comics.php?f=1533\">este video em inglês</a> and <a href=\"https://pablo.rauzy.name/openaccess/introduction.html\">this introduction em Francês</a>."
 
 #: templates/dissemin/faq.html:63
 msgid "You should do it because:"
 msgstr "Você deve fazê-lo porque:"
 
 #: templates/dissemin/faq.html:69
-msgid ""
-"It makes your research <strong>more accessible</strong> and <strong>more "
-"visible</strong>. Many researchers routinely check papers in topic "
-"repositories such as arXiv, and it is less likely that these researchers "
-"check your homepage regularly."
-msgstr ""
-"Isso faz sua pesquisa <strong>mais acessível</strong> e <strong>mais "
-"visível</strong>. Muitos pesquisadores rotineiramente verificam papéis em "
-"repositórios de tópicos, como arXiv, e é menos provável que esses "
-"pesquisadores verifiquem sua página inicial regularmente."
+msgid "It makes your research <strong>more accessible</strong> and <strong>more visible</strong>. Many researchers routinely check papers in topic repositories such as arXiv, and it is less likely that these researchers check your homepage regularly."
+msgstr "Isso faz sua pesquisa <strong>mais acessível</strong> e <strong>mais visível</strong>. Muitos pesquisadores rotineiramente verificam papéis em repositórios de tópicos, como arXiv, e é menos provável que esses pesquisadores verifiquem sua página inicial regularmente."
 
 #: templates/dissemin/faq.html:76
-msgid ""
-"You can even do it before publication. You can get <strong>valuable "
-"feedback</strong> to improve your paper before the actual peer-reviewing "
-"process. It may also be useful to establish priority if it takes a long time "
-"for your paper to get published."
-msgstr ""
-"Você pode até mesmo fazer isso antes da publicação. Você pode ter "
-"<strong>feedback valioso</strong> para melhorar o seu trabalho antes do "
-"processo real de revisão por pares. Também pode ser útil estabelecer "
-"prioridade se demorar muito para que seu artigo seja publicado."
+msgid "You can even do it before publication. You can get <strong>valuable feedback</strong> to improve your paper before the actual peer-reviewing process. It may also be useful to establish priority if it takes a long time for your paper to get published."
+msgstr "Você pode até mesmo fazer isso antes da publicação. Você pode ter <strong>feedback valioso</strong> para melhorar o seu trabalho antes do processo real de revisão por pares. Também pode ser útil estabelecer prioridade se demorar muito para que seu artigo seja publicado."
 
 #: templates/dissemin/faq.html:84
-msgid ""
-"It provides you a <strong>durable storage</strong>. Your homepage is likely "
-"to change or to disappear, for instance if you leave your current "
-"institution."
-msgstr ""
-"Ele fornece um <strong>armazenamento durável</strong>. Sua página inicial "
-"provavelmente mudará ou desaparecerá, por exemplo, se você deixar sua "
-"instituição atual."
+msgid "It provides you a <strong>durable storage</strong>. Your homepage is likely to change or to disappear, for instance if you leave your current institution."
+msgstr "Ele fornece um <strong>armazenamento durável</strong>. Sua página inicial provavelmente mudará ou desaparecerá, por exemplo, se você deixar sua instituição atual."
 
 #: templates/dissemin/faq.html:90
-msgid ""
-"Librarians around the world cannot check whether all the papers in a given "
-"journal are available on homepages: in doubt, they subscribe to this journal "
-"to make sure their researchers have access to it. This costs a lot of money "
-"for research institutions. Papers stored in repositories are <strong>easier "
-"to detect</strong> and can help academia save money."
-msgstr ""
-"Bibliotecários em todo o mundo não podem verificar se todos os artigos em um "
-"diário específico estão disponíveis em páginas de início de sessão: em "
-"dúvida, eles se inscrevem nesta revista para garantir que seus pesquisadores "
-"tenham acesso a ela. Isso custa muito dinheiro para instituições de "
-"pesquisa. Os documentos armazenados em repositórios são <strong>mais fácil "
-"de detectar</strong> e pode ajudar a academia a economizar dinheiro."
+msgid "Librarians around the world cannot check whether all the papers in a given journal are available on homepages: in doubt, they subscribe to this journal to make sure their researchers have access to it. This costs a lot of money for research institutions. Papers stored in repositories are <strong>easier to detect</strong> and can help academia save money."
+msgstr "Bibliotecários em todo o mundo não podem verificar se todos os artigos em um diário específico estão disponíveis em páginas de início de sessão: em dúvida, eles se inscrevem nesta revista para garantir que seus pesquisadores tenham acesso a ela. Isso custa muito dinheiro para instituições de pesquisa. Os documentos armazenados em repositórios são <strong>mais fácil de detectar</strong> e pode ajudar a academia a economizar dinheiro."
 
 #: templates/dissemin/faq.html:99
-msgid ""
-"Finally, for all these reasons, an increasing number of <strong>funding "
-"bodies</strong> require the outcomes of their projects to be made available "
-"in a repository."
-msgstr ""
-"Finalmente, por todas estas razões, um número crescente de <strong>órgãos de "
-"financiamento</strong> exigir que os resultados de seus projetos sejam "
-"disponibilizados em um repositório."
+msgid "Finally, for all these reasons, an increasing number of <strong>funding bodies</strong> require the outcomes of their projects to be made available in a repository."
+msgstr "Finalmente, por todas estas razões, um número crescente de <strong>órgãos de financiamento</strong> exigir que os resultados de seus projetos sejam disponibilizados em um repositório."
 
 #: templates/dissemin/faq.html:108
 msgid "There are roughly three types of repositories:"
 msgstr "Existem aproximadamente três tipos de repositórios:"
 
 #: templates/dissemin/faq.html:114
-msgid ""
-"Subject repositories, restricted to some research fields, such as <a href="
-"\"https://arxiv.org\">arXiv</a>."
-msgstr ""
-"Repositórios de assuntos, restritos a alguns campos de pesquisa, como <a "
-"href=\"https://arxiv.org\">arXiv</a>."
+msgid "Subject repositories, restricted to some research fields, such as <a href=\"https://arxiv.org\">arXiv</a>."
+msgstr "Repositórios de assuntos, restritos a alguns campos de pesquisa, como <a href=\"https://arxiv.org\">arXiv</a>."
 
 #: templates/dissemin/faq.html:120
-msgid ""
-"Institutional repositories, designated to store the research output of a "
-"given institution or country."
-msgstr ""
-"Repositórios institucionais, designados para armazenar o resultado da "
-"pesquisa de uma determinada instituição ou país."
+msgid "Institutional repositories, designated to store the research output of a given institution or country."
+msgstr "Repositórios institucionais, designados para armazenar o resultado da pesquisa de uma determinada instituição ou país."
 
 #: templates/dissemin/faq.html:125
-msgid ""
-"General-purpose academic repositories such as <a href=\"https://zenodo.org"
-"\">Zenodo</a>, not limited to a particular scope."
-msgstr ""
-"Repositórios acadêmicos de propósito geral, como <a href=\"https://zenodo.org"
-"\">Zenodo</a>, não limitado a um escopo particular."
+msgid "General-purpose academic repositories such as <a href=\"https://zenodo.org\">Zenodo</a>, not limited to a particular scope."
+msgstr "Repositórios acadêmicos de propósito geral, como <a href=\"https://zenodo.org\">Zenodo</a>, não limitado a um escopo particular."
 
 #: templates/dissemin/faq.html:132
-msgid ""
-"If your research community favours a specific repository, using it makes "
-"sense as it will increase your visibility. If not, institutional or general-"
-"purpose repositories are also good options."
-msgstr ""
-"Se sua comunidade de pesquisa favorece um repositório específico, usar isso "
-"faz sentido, pois aumentará sua visibilidade. Caso contrário, repositórios "
-"institucionais ou de propósito geral também são boas opções."
+msgid "If your research community favours a specific repository, using it makes sense as it will increase your visibility. If not, institutional or general-purpose repositories are also good options."
+msgstr "Se sua comunidade de pesquisa favorece um repositório específico, usar isso faz sentido, pois aumentará sua visibilidade. Caso contrário, repositórios institucionais ou de propósito geral também são boas opções."
 
 #: templates/dissemin/faq.html:138
-msgid ""
-"At the moment, you can use Dissemin to deposit in the following repositories:"
-msgstr ""
-"No momento, você pode usar Dissemin para depositar nos seguintes "
-"repositórios:"
+msgid "At the moment, you can use Dissemin to deposit in the following repositories:"
+msgstr "No momento, você pode usar Dissemin para depositar nos seguintes repositórios:"
 
 #: templates/dissemin/faq.html:144
-msgid ""
-"<strong><a href=\"https://zenodo.org\">Zenodo</a></strong>, an innovative "
-"repository backed by the EU."
-msgstr ""
-"<strong><a href=\"https://zenodo.org\">Zenodo</a></strong>, um repositório "
-"inovador apoiado pela UE."
+msgid "<strong><a href=\"https://zenodo.org\">Zenodo</a></strong>, an innovative repository backed by the EU."
+msgstr "<strong><a href=\"https://zenodo.org\">Zenodo</a></strong>, um repositório inovador apoiado pela UE."
 
 #: templates/dissemin/faq.html:150
-msgid ""
-"<strong><a href=\"https://hal.archives-ouvertes.fr/\">HAL</a></strong>, a "
-"French repository managed by the <a href=\"https://www.ccsd.cnrs.fr/\">CCSD</"
-"a>."
-msgstr ""
-"<strong><a href=\"https://hal.archives-ouvertes.fr/\">HAL</a></strong>, um "
-"repositório francês gerenciado pelo <a href=\"https://www.ccsd.cnrs.fr/"
-"\">CCSD</a>."
+msgid "<strong><a href=\"https://hal.archives-ouvertes.fr/\">HAL</a></strong>, a French repository managed by the <a href=\"https://www.ccsd.cnrs.fr/\">CCSD</a>."
+msgstr "<strong><a href=\"https://hal.archives-ouvertes.fr/\">HAL</a></strong>, um repositório francês gerenciado pelo <a href=\"https://www.ccsd.cnrs.fr/\">CCSD</a>."
 
 #: templates/dissemin/faq.html:157
-msgid ""
-"<strong><a href=\"https://osf.io/preprints/\">OSF preprints</a></strong>, a "
-"preprint server run by the <a href=\"https://cos.io/\">Center for Open "
-"Science</a> on top of their <a href=\"https://osf.io/\">Open Science "
-"Framework</a>."
-msgstr ""
-"<strong><a href=\"https://osf.io/preprints/\">OSF preprints</a></strong>, um "
-"servidor de pré-impressão executado pelo <a href=\"https://cos.io/\">Center "
-"for Open Science</a> em cima da <a href=\"https://osf.io/\">Open Science "
-"Framework</a>."
+msgid "<strong><a href=\"https://osf.io/preprints/\">OSF preprints</a></strong>, a preprint server run by the <a href=\"https://cos.io/\">Center for Open Science</a> on top of their <a href=\"https://osf.io/\">Open Science Framework</a>."
+msgstr "<strong><a href=\"https://osf.io/preprints/\">OSF preprints</a></strong>, um servidor de pré-impressão executado pelo <a href=\"https://cos.io/\">Center for Open Science</a> em cima da <a href=\"https://osf.io/\">Open Science Framework</a>."
 
 #: templates/dissemin/faq.html:165
-msgid ""
-"Supporting more repositories requires us to write specific code for each "
-"repository. More importantly it requires the repositories to give us "
-"permission to deposit papers in bulk. We have been considering integrating "
-"the following repositories:"
-msgstr ""
-"O suporte a mais repositórios exige que escrevemos um código específico para "
-"cada repositório. Mais importante, requer que os repositórios nos dê "
-"permissão para depositar papéis em massa. Temos pensado em integrar os "
-"seguintes repositórios:"
+msgid "Supporting more repositories requires us to write specific code for each repository. More importantly it requires the repositories to give us permission to deposit papers in bulk. We have been considering integrating the following repositories:"
+msgstr "O suporte a mais repositórios exige que escrevemos um código específico para cada repositório. Mais importante, requer que os repositórios nos dê permissão para depositar papéis em massa. Temos pensado em integrar os seguintes repositórios:"
 
 #: templates/dissemin/faq.html:174
-msgid ""
-"<strong><a href=\"https://arxiv.org/\">arXiv</a></strong>, a well-known "
-"general-purpose repository. For now, arXiv has declined to allow Dissemin to "
-"deposit using their SWORD API, and wants users to deposit in arXiv manually. "
-"If you would like to deposit in arXiv with Dissemin, you can let them know "
-"that you are interested (email: help AT arxiv.org, and start your message "
-"with \"Dear arXiv,\")."
-msgstr ""
-"<strong><a href=\"https://arxiv.org/\">arXiv</a></strong>, um repositório de "
-"propósito geral bem conhecido. Por agora, o arXiv se recusou a permitir que "
-"a Dissemin deposite usando sua API SWORD e quer que os usuários depositem no "
-"arXiv manualmente. Se você deseja depositar no arXiv com a Dissemin, pode "
-"informá-los de que está interessado (e-mail: help AT arxiv.org e comece sua "
-"mensagem com \"Dear arXiv\")."
+msgid "<strong><a href=\"https://arxiv.org/\">arXiv</a></strong>, a well-known general-purpose repository. For now, arXiv has declined to allow Dissemin to deposit using their SWORD API, and wants users to deposit in arXiv manually. If you would like to deposit in arXiv with Dissemin, you can let them know that you are interested (email: help AT arxiv.org, and start your message with \"Dear arXiv,\")."
+msgstr "<strong><a href=\"https://arxiv.org/\">arXiv</a></strong>, um repositório de propósito geral bem conhecido. Por agora, o arXiv se recusou a permitir que a Dissemin deposite usando sua API SWORD e quer que os usuários depositem no arXiv manualmente. Se você deseja depositar no arXiv com a Dissemin, pode informá-los de que está interessado (e-mail: help AT arxiv.org e comece sua mensagem com \"Dear arXiv\")."
 
 #: templates/dissemin/faq.html:192
 #, python-format
-msgid ""
-"Dissemin is a web platform gathering metadata from <a href=\"%(sources_url)s"
-"\">many sources</a> and analyzing the full text availability of publications "
-"of researchers. It has been designed to foster the use of repositories "
-"(rather than preprints posted on personal homepages), <a href="
-"\"#repositories-rock\">for numerous reasons</a>."
-msgstr ""
-"Dissemin é uma plataforma web que contém metadados de <a href="
-"\"%(sources_url)s\">muitas fontes</a> ae analisando a disponibilidade de "
-"texto completo de publicações de pesquisadores. Ele foi projetado para "
-"promover o uso de repositórios (em vez de pré-impressões postadas em "
-"homepages pessoais), <a href=\"#repositories-rock\">por vários motivos</a>."
+msgid "Dissemin is a web platform gathering metadata from <a href=\"%(sources_url)s\">many sources</a> and analyzing the full text availability of publications of researchers. It has been designed to foster the use of repositories (rather than preprints posted on personal homepages), <a href=\"#repositories-rock\">for numerous reasons</a>."
+msgstr "Dissemin é uma plataforma web que contém metadados de <a href=\"%(sources_url)s\">muitas fontes</a> ae analisando a disponibilidade de texto completo de publicações de pesquisadores. Ele foi projetado para promover o uso de repositórios (em vez de pré-impressões postadas em homepages pessoais), <a href=\"#repositories-rock\">por vários motivos</a>."
 
 #: templates/dissemin/faq.html:201
-msgid ""
-"Dissemin is not a repository as it does not store any full text. When the "
-"full text of a publication is available, a link to the relevant page is "
-"provided. The full texts deposited through Dissemin are stored in third-"
-"party repositories such as <a href=\"https://zenodo.org\">Zenodo</a> or <a "
-"href=\"https://hal.archives-ouvertes.fr/\">HAL</a>."
-msgstr ""
-"Dissemin não é um repositório, pois não armazena nenhum texto completo. "
-"Quando o texto completo de uma publicação está disponível, é fornecido um "
-"link para a página relevante. Os textos completos depositados através da "
-"Dissemin são armazenados em repositórios de terceiros, como <a href="
-"\"https://zenodo.org\">Zenodo</a> ou <a href=\"https://hal.archives-ouvertes."
-"fr/\">HAL</a>."
+msgid "Dissemin is not a repository as it does not store any full text. When the full text of a publication is available, a link to the relevant page is provided. The full texts deposited through Dissemin are stored in third-party repositories such as <a href=\"https://zenodo.org\">Zenodo</a> or <a href=\"https://hal.archives-ouvertes.fr/\">HAL</a>."
+msgstr "Dissemin não é um repositório, pois não armazena nenhum texto completo. Quando o texto completo de uma publicação está disponível, é fornecido um link para a página relevante. Os textos completos depositados através da Dissemin são armazenados em repositórios de terceiros, como <a href=\"https://zenodo.org\">Zenodo</a> ou <a href=\"https://hal.archives-ouvertes.fr/\">HAL</a>."
 
 #: templates/dissemin/faq.html:211
-msgid ""
-"Dissemin is brought to you by the <a href=\"https://association.dissem.in/"
-"\">CAPSH association</a>."
-msgstr ""
-"Dissemin é trazido a você pela <a href=\"https://association.dissem.in/"
-"\">Associação CAPSH</a>."
+msgid "Dissemin is brought to you by the <a href=\"https://association.dissem.in/\">CAPSH association</a>."
+msgstr "Dissemin é trazido a você pela <a href=\"https://association.dissem.in/\">Associação CAPSH</a>."
 
 #: templates/dissemin/faq.html:218
-msgid ""
-"Yes, you can do it, by first <a href=\"https://orcid.org/register"
-"\">registering on ORCID</a> if you do not have an ORCID identifier yet. This "
-"only takes a few seconds, and you can then use your ORCID identifier to log "
-"into Dissemin."
-msgstr ""
-"Sim, você pode fazê-lo, primeiro <a href=\"https://orcid.org/registo"
-"\">registering on ORCID</a> se ainda não tiver um identificador ORCID. Isso "
-"leva apenas alguns segundos, e você pode usar o seu identificador ORCID para "
-"fazer login Dissemin."
+msgid "Yes, you can do it, by first <a href=\"https://orcid.org/register\">registering on ORCID</a> if you do not have an ORCID identifier yet. This only takes a few seconds, and you can then use your ORCID identifier to log into Dissemin."
+msgstr "Sim, você pode fazê-lo, primeiro <a href=\"https://orcid.org/registo\">registering on ORCID</a> se ainda não tiver um identificador ORCID. Isso leva apenas alguns segundos, e você pode usar o seu identificador ORCID para fazer login Dissemin."
 
 #: templates/dissemin/faq.html:233
-msgid ""
-"<strong>Open access:</strong><br /> The full text is made freely available "
-"by the publisher (in a fully open access or hybrid journal)."
-msgstr ""
-"<strong>Acesso livre:</strong><br /> O texto completo é disponibilizado "
-"gratuitamente pelo editor (em um acesso totalmente aberto ou em um diário "
-"híbrido)."
+msgid "<strong>Open access:</strong><br /> The full text is made freely available by the publisher (in a fully open access or hybrid journal)."
+msgstr "<strong>Acesso livre:</strong><br /> O texto completo é disponibilizado gratuitamente pelo editor (em um acesso totalmente aberto ou em um diário híbrido)."
 
 #: templates/dissemin/faq.html:245
-msgid ""
-"<strong>Pre/post prints allowed and full text available:</strong><br /> The "
-"full text is available in a repository, but might not be freely available "
-"from the publisher itself. This is in line with the publishing policy and is "
-"called green open access or self-archiving."
-msgstr ""
-"<strong>Pre/Postagens permitidas e texto completo disponível:</strong><br /> "
-"O texto completo está disponível em um repositório, mas pode não estar "
-"disponível gratuitamente no próprio editor. Isso está de acordo com a "
-"política de publicação e é chamado de acesso aberto verde ou auto-"
-"arquivamento."
+msgid "<strong>Pre/post prints allowed and full text available:</strong><br /> The full text is available in a repository, but might not be freely available from the publisher itself. This is in line with the publishing policy and is called green open access or self-archiving."
+msgstr "<strong>Pre/Postagens permitidas e texto completo disponível:</strong><br /> O texto completo está disponível em um repositório, mas pode não estar disponível gratuitamente no próprio editor. Isso está de acordo com a política de publicação e é chamado de acesso aberto verde ou auto-arquivamento."
 
 #: templates/dissemin/faq.html:258
-msgid ""
-"<strong>Pre/post prints allowed but full text unavailable:</strong><br /> "
-"The full text could be made available in a repository (as above) according "
-"to the publishing policy. We encourage their authors to do so."
-msgstr ""
-"<strong>Impressão pré/pós permitida, mas texto completo indisponível:</"
-"strong><br />  O texto completo pode ser disponibilizado em um repositório "
-"(conforme descrito acima) de acordo com a política de publicação. "
-"Encorajamos os autores a fazê-lo."
+msgid "<strong>Pre/post prints allowed but full text unavailable:</strong><br /> The full text could be made available in a repository (as above) according to the publishing policy. We encourage their authors to do so."
+msgstr "<strong>Impressão pré/pós permitida, mas texto completo indisponível:</strong><br />  O texto completo pode ser disponibilizado em um repositório (conforme descrito acima) de acordo com a política de publicação. Encorajamos os autores a fazê-lo."
 
 #: templates/dissemin/faq.html:271
-msgid ""
-"<strong>Pre/post prints forbidden:</strong><br /> The publisher forbids "
-"deposits in repositories, in general. Authors might still be allowed to "
-"deposit their works after some embargo period or if their funder has an "
-"agreement with this publisher."
-msgstr ""
-"<strong>Impressão pré/pós proibida:</strong><br /> O editor proíbe depósitos "
-"em repositórios, em geral. Os autores ainda podem ser autorizados a "
-"depositar seus trabalhos após algum período de embargo ou se seu financiador "
-"tiver concordado com este editor."
+msgid "<strong>Pre/post prints forbidden:</strong><br /> The publisher forbids deposits in repositories, in general. Authors might still be allowed to deposit their works after some embargo period or if their funder has an agreement with this publisher."
+msgstr "<strong>Impressão pré/pós proibida:</strong><br /> O editor proíbe depósitos em repositórios, em geral. Os autores ainda podem ser autorizados a depositar seus trabalhos após algum período de embargo ou se seu financiador tiver concordado com este editor."
 
 #: templates/dissemin/faq.html:282
 #, python-format
-msgid ""
-"When we have found it in one of the repositories we harvest. The list of "
-"these repositories can be found <a href=\"%(sources_url)s\">here</a>. Thanks "
-"to the <a href=\"https://www.base-search.net\">BASE</a> search engine, we "
-"cover more than 80 millions of preprints."
-msgstr ""
-"Quando o encontramos em um dos repositórios que colhemos. A lista desses "
-"repositórios pode ser encontrada <a href=\"%(sources_url)s\">aqui</a>. "
-"Graças ao <a href=\"https://www.base-search.net\">BASE</a> Search Engine, "
-"cobrimos mais de 80 milhões de pré-impressões."
+msgid "When we have found it in one of the repositories we harvest. The list of these repositories can be found <a href=\"%(sources_url)s\">here</a>. Thanks to the <a href=\"https://www.base-search.net\">BASE</a> search engine, we cover more than 80 millions of preprints."
+msgstr "Quando o encontramos em um dos repositórios que colhemos. A lista desses repositórios pode ser encontrada <a href=\"%(sources_url)s\">aqui</a>. Graças ao <a href=\"https://www.base-search.net\">BASE</a> Search Engine, cobrimos mais de 80 milhões de pré-impressões."
 
 #: templates/dissemin/faq.html:291
 msgid "There are a few caveats concerning our data:"
 msgstr "Existem algumas ressalvas em relação aos nossos dados:"
 
 #: templates/dissemin/faq.html:297
-msgid ""
-"Some papers are not present in any of our metadata sources, so they are not "
-"counted at all."
-msgstr ""
-"Alguns documentos não estão presentes em nenhuma das nossas fontes de "
-"metadados, portanto não são contados."
+msgid "Some papers are not present in any of our metadata sources, so they are not counted at all."
+msgstr "Alguns documentos não estão presentes em nenhuma das nossas fontes de metadados, portanto não são contados."
 
 #: templates/dissemin/faq.html:302
 msgid "Some entries in our system do not correspond to proper research papers."
-msgstr ""
-"Algumas entradas no nosso sistema não correspondem a documentos de pesquisa "
-"adequados."
+msgstr "Algumas entradas no nosso sistema não correspondem a documentos de pesquisa adequados."
 
 #: templates/dissemin/faq.html:307
-msgid ""
-"Because there are many researchers with the same name, some papers may be "
-"misattributed to a homonym."
-msgstr ""
-"Como há muitos pesquisadores com o mesmo nome, é possível que alguns "
-"documentos sejam incorretamente atribuídos a outra pessoa."
+msgid "Because there are many researchers with the same name, some papers may be misattributed to a homonym."
+msgstr "Como há muitos pesquisadores com o mesmo nome, é possível que alguns documentos sejam incorretamente atribuídos a outra pessoa."
 
 #: templates/dissemin/faq.html:313
-msgid ""
-"Some repositories might not be covered by any of our sources, so a paper "
-"might be marked as unavailable while it is available."
-msgstr ""
-"Alguns repositórios podem não estar cobertos por nenhuma das nossas fontes, "
-"portanto, um documento pode estar marcado como indisponível enquanto estiver "
-"disponível."
+msgid "Some repositories might not be covered by any of our sources, so a paper might be marked as unavailable while it is available."
+msgstr "Alguns repositórios podem não estar cobertos por nenhuma das nossas fontes, portanto, um documento pode estar marcado como indisponível enquanto estiver disponível."
 
 #: templates/dissemin/faq.html:318
-msgid ""
-"Some papers might be marked as available but actually are not, for instance "
-"because they have been deleted."
-msgstr ""
-"Alguns papéis podem ser marcados como disponíveis, mas na verdade não são, "
-"por exemplo, porque eles foram excluídos."
+msgid "Some papers might be marked as available but actually are not, for instance because they have been deleted."
+msgstr "Alguns papéis podem ser marcados como disponíveis, mas na verdade não são, por exemplo, porque eles foram excluídos."
 
 #: templates/dissemin/faq.html:324
 msgid "All sorts of other technical issues."
@@ -2173,322 +1815,126 @@ msgstr "Todas as outras questões técnicas."
 
 #: templates/dissemin/faq.html:333
 #, python-format
-msgid ""
-"Please first check whether the paper is available in one of <a href="
-"\"%(sources_url)s\">our sources</a>. If it is not, Dissemin cannot harvest "
-"it, and you should report the problem to the source where it should appear."
-msgstr ""
-"Primeiro verifique se o papel está disponível em um dos <a href="
-"\"%(sources_url)s\">our sources</a>. Se não estiver, Dissemin não pode colhê-"
-"lo, e você deve denunciar o problema à fonte onde deve aparecer."
+msgid "Please first check whether the paper is available in one of <a href=\"%(sources_url)s\">our sources</a>. If it is not, Dissemin cannot harvest it, and you should report the problem to the source where it should appear."
+msgstr "Primeiro verifique se o papel está disponível em um dos <a href=\"%(sources_url)s\">our sources</a>. Se não estiver, Dissemin não pode colhê-lo, e você deve denunciar o problema à fonte onde deve aparecer."
 
 #: templates/dissemin/faq.html:341
-msgid ""
-"Now, if your paper does appear in one of the sources but not on Dissemin, "
-"please check that your name is not spelt incorrectly on the source, and that "
-"the spelling matches your ORCID record. If there is a misspelling, again, "
-"you should report the problem to the source that contains the mistake."
-msgstr ""
-"Agora, se o seu papel aparecer em uma das fontes, mas não em Dissemin, "
-"verifique se o seu nome não está escrito incorretamente na fonte e que a "
-"ortografia corresponde ao seu registro ORCID. Se houver um erro de "
-"ortografia, novamente, você deve denunciar o problema à fonte que contém o "
-"erro."
+msgid "Now, if your paper does appear in one of the sources but not on Dissemin, please check that your name is not spelt incorrectly on the source, and that the spelling matches your ORCID record. If there is a misspelling, again, you should report the problem to the source that contains the mistake."
+msgstr "Agora, se o seu papel aparecer em uma das fontes, mas não em Dissemin, verifique se o seu nome não está escrito incorretamente na fonte e que a ortografia corresponde ao seu registro ORCID. Se houver um erro de ortografia, novamente, você deve denunciar o problema à fonte que contém o erro."
 
 #: templates/dissemin/faq.html:350
-msgid ""
-"If the name matches but the paper is not in Dissemin, then maybe one of your "
-"co-authors asked us to delete it? Or it may be a bug. In this case, please "
-"file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> "
-"describing the problem, or send a message to <a href=\"mailto:bugs@dissem.in"
-"\">bugs@dissem.in</a>."
-msgstr ""
-"Se o nome corresponder, mas o papel não está em Dissemin, talvez um dos seus "
-"co-autores nos pedisse que o eliminássemos? Ou pode ser um bug. Neste caso, "
-"envie um <a href=\"https://github.com/dissemin/dissemin/issues\">problema</"
-"a> descrevendo o problema ou envie uma mensagem para <a href=\"mailto:"
-"bugs@dissem.in\">bugs@dissem.in</a>."
+msgid "If the name matches but the paper is not in Dissemin, then maybe one of your co-authors asked us to delete it? Or it may be a bug. In this case, please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> describing the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
+msgstr "Se o nome corresponder, mas o papel não está em Dissemin, talvez um dos seus co-autores nos pedisse que o eliminássemos? Ou pode ser um bug. Neste caso, envie um <a href=\"https://github.com/dissemin/dissemin/issues\">problema</a> descrevendo o problema ou envie uma mensagem para <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
 
 #: templates/dissemin/faq.html:360
-msgid ""
-"Note that, in the longer term, we hope to design a way for our users to edit "
-"their profiles on Dissemin to add missing papers and fix these problems; but "
-"we do not have such a system yet."
-msgstr ""
-"Note-se que, a longo prazo, esperamos criar uma maneira para os nossos "
-"usuários editar seus perfis na Dissemin para adicionar papéis faltantes e "
-"corrigir esses problemas; mas ainda não temos esse sistema."
+msgid "Note that, in the longer term, we hope to design a way for our users to edit their profiles on Dissemin to add missing papers and fix these problems; but we do not have such a system yet."
+msgstr "Note-se que, a longo prazo, esperamos criar uma maneira para os nossos usuários editar seus perfis na Dissemin para adicionar papéis faltantes e corrigir esses problemas; mas ainda não temos esse sistema."
 
 #: templates/dissemin/faq.html:369
 #, fuzzy, python-format
-msgid ""
-"In most cases, the errors that you see on Dissemin have not been introduced "
-"by Dissemin, but are already present in the <a href=\"%(sources_url)s"
-"\">public sources</a> that Dissemin harvests. Hence, please first check if "
-"the error that you have seen is already present in our data sources, by "
-"looking at the \"Links\" section in the top right of the page. If one of "
-"these pages contain the error, you should report the problem to them and not "
-"to us, otherwise the mistake will persist in the source."
-msgstr ""
-"Na maioria dos casos, os erros que você vê na Dissemin não foram "
-"introduzidos pela Dissemin, mas já estão presentes na <a href="
-"\"{{ sources_url }}\">fontes públicas</a> que Dissemin colhe. Portanto, "
-"primeiro verifique se o erro que você viu já está presente em nossas fontes "
-"de dados, observando o \"Links\" na parte superior direita da página. Se uma "
-"dessas páginas contiver o erro, você deve denunciar o problema para eles e "
-"não para nós, caso contrário o erro persistirá na fonte."
+msgid "In most cases, the errors that you see on Dissemin have not been introduced by Dissemin, but are already present in the <a href=\"%(sources_url)s\">public sources</a> that Dissemin harvests. Hence, please first check if the error that you have seen is already present in our data sources, by looking at the \"Links\" section in the top right of the page. If one of these pages contain the error, you should report the problem to them and not to us, otherwise the mistake will persist in the source."
+msgstr "Na maioria dos casos, os erros que você vê na Dissemin não foram introduzidos pela Dissemin, mas já estão presentes na <a href=\"{{ sources_url }}\">fontes públicas</a> que Dissemin colhe. Portanto, primeiro verifique se o erro que você viu já está presente em nossas fontes de dados, observando o \"Links\" na parte superior direita da página. Se uma dessas páginas contiver o erro, você deve denunciar o problema para eles e não para nós, caso contrário o erro persistirá na fonte."
 
 #: templates/dissemin/faq.html:382
-msgid ""
-"If the error is not present in any of the sources and you believe that "
-"Dissemin may have introduced the problem, please file an <a href=\"https://"
-"github.com/dissemin/dissemin/issues\">issue</a> with details of the problem, "
-"or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. "
-"Note that you cannot yet fix the problem yourself, although we hope in the "
-"longer term to develop a system to allow our users to edit details of their "
-"papers themselves."
-msgstr ""
-"Se o erro não estiver presente em nenhuma das fontes e você acredita que "
-"Dissemin pode ter apresentado o problema, por favor, envie um <a href="
-"\"https://github.com/dissemin/dissemin/issues\">problema</a> com detalhes do "
-"problema ou envie uma mensagem para <a href=\"mailto:bugs@dissem.in"
-"\">bugs@dissem.in</a>. Observe que você ainda não pode corrigir o problema "
-"sozinho, embora esperemos, a longo prazo, desenvolver um sistema que permita "
-"aos nossos usuários editar detalhes de seus próprios artigos."
+msgid "If the error is not present in any of the sources and you believe that Dissemin may have introduced the problem, please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> with details of the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. Note that you cannot yet fix the problem yourself, although we hope in the longer term to develop a system to allow our users to edit details of their papers themselves."
+msgstr "Se o erro não estiver presente em nenhuma das fontes e você acredita que Dissemin pode ter apresentado o problema, por favor, envie um <a href=\"https://github.com/dissemin/dissemin/issues\">problema</a> com detalhes do problema ou envie uma mensagem para <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. Observe que você ainda não pode corrigir o problema sozinho, embora esperemos, a longo prazo, desenvolver um sistema que permita aos nossos usuários editar detalhes de seus próprios artigos."
 
 #: templates/dissemin/faq.html:396
-msgid ""
-"First, note that Dissemin does not account for copies of articles that are "
-"only available on a personal homepage or a similar website. This is "
-"deliberate, because we believe that <a href=\"#repositories-rock\">articles "
-"should be hosted in repositories</a>."
-msgstr ""
-"Primeiro, note que a Dissemin não conta as cópias de artigos que estão "
-"disponíveis apenas em uma página pessoal ou em um site similar. Isso é "
-"deliberado, porque acreditamos que <a href=\"#repositories-rock\">os artigos "
-"devem ser hospedados em repositórios</a>."
+msgid "First, note that Dissemin does not account for copies of articles that are only available on a personal homepage or a similar website. This is deliberate, because we believe that <a href=\"#repositories-rock\">articles should be hosted in repositories</a>."
+msgstr "Primeiro, note que a Dissemin não conta as cópias de artigos que estão disponíveis apenas em uma página pessoal ou em um site similar. Isso é deliberado, porque acreditamos que <a href=\"#repositories-rock\">os artigos devem ser hospedados em repositórios</a>."
 
 #: templates/dissemin/faq.html:404
-msgid ""
-"Second, at the moment, Dissemin only supports repositories with a crawlable "
-"API that follows the <a href=\"https://www.openarchives.org/OAI/"
-"openarchivesprotocol.html\">OAI-PMH protocol</a>, and is <a href=\"https://"
-"www.base-search.net/about/en/suggest.php\">registered</a> in <a href="
-"\"https://www.base-search.net/\">BASE</a>. We have a <a href=\"https://"
-"github.com/dissemin/croawl\">long-term project</a> to support more "
-"repositories by crawling them, but for the moment, we do not have the "
-"resources to support repositories not covered by BASE. Hence, if you are a "
-"user of a repository and would like it to be supported by Dissemin, please "
-"contact the repository administrator and suggest them to implement OAI-PMH "
-"support and to <a href=\"https://www.base-search.net/about/en/suggest.php"
-"\">register</a> their repository in BASE."
-msgstr ""
-"Em segundo lugar, no momento, a Dissemin só suporta repositórios com uma API "
-"rastreável que segue o <a href=\"https://www.openarchives.org/OAI/"
-"openarchivesprotocol.html\">OAI-PMH protocol</a>, e <a href=\"https://www."
-"base-search.net/about/en/suggest.php\">registered</a> no <a href=\"https://"
-"www.base-search.net/\">BASE</a>.Nós temos um <a href=\"https://github.com/"
-"dissemin/croawl\">projeto de longo prazo</a> para suportar mais repositórios "
-"rastreando-os, mas, por enquanto, não temos recursos para suportar depósitos "
-"não cobertos pelo BASE. Assim, se você é um usuário de um repositório e "
-"gostaria que ele fosse suportado pela Dissemin, entre em contato com o "
-"administrador do repositório e sugeri-los para implementar o suporte OAI-PMH "
-"e para <a href=\"https://www.base-search.net/about/en/suggest.php\">registo</"
-"a> seu repositório em BASE."
+msgid "Second, at the moment, Dissemin only supports repositories with a crawlable API that follows the <a href=\"https://www.openarchives.org/OAI/openarchivesprotocol.html\">OAI-PMH protocol</a>, and is <a href=\"https://www.base-search.net/about/en/suggest.php\">registered</a> in <a href=\"https://www.base-search.net/\">BASE</a>. We have a <a href=\"https://github.com/dissemin/croawl\">long-term project</a> to support more repositories by crawling them, but for the moment, we do not have the resources to support repositories not covered by BASE. Hence, if you are a user of a repository and would like it to be supported by Dissemin, please contact the repository administrator and suggest them to implement OAI-PMH support and to <a href=\"https://www.base-search.net/about/en/suggest.php\">register</a> their repository in BASE."
+msgstr "Em segundo lugar, no momento, a Dissemin só suporta repositórios com uma API rastreável que segue o <a href=\"https://www.openarchives.org/OAI/openarchivesprotocol.html\">OAI-PMH protocol</a>, e <a href=\"https://www.base-search.net/about/en/suggest.php\">registered</a> no <a href=\"https://www.base-search.net/\">BASE</a>.Nós temos um <a href=\"https://github.com/dissemin/croawl\">projeto de longo prazo</a> para suportar mais repositórios rastreando-os, mas, por enquanto, não temos recursos para suportar depósitos não cobertos pelo BASE. Assim, se você é um usuário de um repositório e gostaria que ele fosse suportado pela Dissemin, entre em contato com o administrador do repositório e sugeri-los para implementar o suporte OAI-PMH e para <a href=\"https://www.base-search.net/about/en/suggest.php\">registo</a> seu repositório em BASE."
 
 #: templates/dissemin/faq.html:423
-msgid ""
-"If the repository is registered in BASE, please <a href=\"https://www.base-"
-"search.net/\">search in BASE</a> to check that your article is there. If it "
-"is, then this may be a bug of Dissemin; please file an <a href=\"https://"
-"github.com/dissemin/dissemin/issues\">issue</a> describing the problem, or "
-"send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
-msgstr ""
-"Se o repositório estiver registrado na BASE, por favor <a href=\"https://www."
-"base-search.net/\">search na BASE</a> para verificar se o seu artigo está "
-"lá. Se for, então isso pode ser um erro de Dissemin; por favor, arquive um "
-"<a href=\"https://github.com/dissemin/dissemin/issues\">problema</a> "
-"descrevendo o problema ou envie uma mensagem para <a href=\"mailto:"
-"bugs@dissem.in\">bugs@dissem.in</a>."
+msgid "If the repository is registered in BASE, please <a href=\"https://www.base-search.net/\">search in BASE</a> to check that your article is there. If it is, then this may be a bug of Dissemin; please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> describing the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
+msgstr "Se o repositório estiver registrado na BASE, por favor <a href=\"https://www.base-search.net/\">search na BASE</a> para verificar se o seu artigo está lá. Se for, então isso pode ser um erro de Dissemin; por favor, arquive um <a href=\"https://github.com/dissemin/dissemin/issues\">problema</a> descrevendo o problema ou envie uma mensagem para <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
 
 #: templates/dissemin/faq.html:438
-msgid ""
-"Authenticating users is necessary to deposit papers on their behalf in open "
-"repositories. Besides, knowing a user's ORCID id helps us find its "
-"publications, avoiding articles authored by namesakes for instance. Logging "
-"in via ORCID will not expose any private information to Dissemin: we only "
-"have access to the public part of your ORCID record. For instance, unless "
-"you have explicitly marked your email address as public, we do not even know "
-"your email address when you log in to Dissemin via ORCID."
-msgstr ""
-"A autenticação de usuários é necessária para depositar documentos em seu "
-"nome em repositórios abertos. Além disso, conhecer o ID do ORCID de um "
-"usuário nos ajuda a encontrar suas publicações, evitando artigos escritos "
-"por nomes. Fazer logon via ORCID não irá expor nenhuma informação privada ao "
-"Dissemin: só temos acesso à parte pública do seu registro ORCID. Por "
-"exemplo, a menos que você tenha explicitamente marcado seu endereço de e-"
-"mail como público, nem sequer conhecemos seu endereço de e-mail quando você "
-"efetua o login na Dissemin via ORCID."
+msgid "Authenticating users is necessary to deposit papers on their behalf in open repositories. Besides, knowing a user's ORCID id helps us find its publications, avoiding articles authored by namesakes for instance. Logging in via ORCID will not expose any private information to Dissemin: we only have access to the public part of your ORCID record. For instance, unless you have explicitly marked your email address as public, we do not even know your email address when you log in to Dissemin via ORCID."
+msgstr "A autenticação de usuários é necessária para depositar documentos em seu nome em repositórios abertos. Além disso, conhecer o ID do ORCID de um usuário nos ajuda a encontrar suas publicações, evitando artigos escritos por nomes. Fazer logon via ORCID não irá expor nenhuma informação privada ao Dissemin: só temos acesso à parte pública do seu registro ORCID. Por exemplo, a menos que você tenha explicitamente marcado seu endereço de e-mail como público, nem sequer conhecemos seu endereço de e-mail quando você efetua o login na Dissemin via ORCID."
 
 #: templates/dissemin/faq.html:453
-msgid ""
-"Nothing. When you log in via ORCID to Dissemin, this does not grant us any "
-"permission to change anything in your ORCID record."
-msgstr ""
-"Nada. Quando você efetua o login via ORCID para Dissemin, isso não nos "
-"concede permissão para alterar nada em seu registro ORCID."
+msgid "Nothing. When you log in via ORCID to Dissemin, this does not grant us any permission to change anything in your ORCID record."
+msgstr "Nada. Quando você efetua o login via ORCID para Dissemin, isso não nos concede permissão para alterar nada em seu registro ORCID."
 
 #: templates/dissemin/faq.html:462
-msgid ""
-"ORCID supports various methods to claim publications. Our preferred one is "
-"via CrossRef's search interface. Here is how to use it:"
-msgstr ""
-"O ORCID suporta vários métodos para reivindicar publicações. Nosso preferido "
-"é através da interface de pesquisa do CrossRef. Aqui é como usá-lo:"
+msgid "ORCID supports various methods to claim publications. Our preferred one is via CrossRef's search interface. Here is how to use it:"
+msgstr "O ORCID suporta vários métodos para reivindicar publicações. Nosso preferido é através da interface de pesquisa do CrossRef. Aqui é como usá-lo:"
 
 #: templates/dissemin/faq.html:469
-msgid ""
-"Go to <a href=\"https://search.crossref.org/\">CrossRef Metadata Search</a>;"
-msgstr ""
-"Vamos para <a href=\"https://search.crossref.org/\">CrossRef Metadata "
-"Search</a>;"
+msgid "Go to <a href=\"https://search.crossref.org/\">CrossRef Metadata Search</a>;"
+msgstr "Vamos para <a href=\"https://search.crossref.org/\">CrossRef Metadata Search</a>;"
 
 #: templates/dissemin/faq.html:474
-msgid ""
-"Click \"Log in\" in the top right corner and go through the ORCID login "
-"process;"
-msgstr ""
-"Clique em \"Log in\" no canto superior direito e passe pelo processo de "
-"login ORCID;"
+msgid "Click \"Log in\" in the top right corner and go through the ORCID login process;"
+msgstr "Clique em \"Log in\" no canto superior direito e passe pelo processo de login ORCID;"
 
 #: templates/dissemin/faq.html:479
-msgid ""
-"Search for your publications, for instance by typing your name in CrossRef's "
-"search interface;"
-msgstr ""
-"Procure suas publicações, por exemplo digitando seu nome na interface de "
-"pesquisa do CrossRef;"
+msgid "Search for your publications, for instance by typing your name in CrossRef's search interface;"
+msgstr "Procure suas publicações, por exemplo digitando seu nome na interface de pesquisa do CrossRef;"
 
 #: templates/dissemin/faq.html:484
-msgid ""
-"Add publications that are yours to your ORCID record by clicking \"Add to "
-"ORCID\"."
-msgstr ""
-"Adicione publicações que são suas para o seu registro ORCID, clicando em "
-"\"Adicionar ao ORCID\"."
+msgid "Add publications that are yours to your ORCID record by clicking \"Add to ORCID\"."
+msgstr "Adicione publicações que são suas para o seu registro ORCID, clicando em \"Adicionar ao ORCID\"."
 
 #: templates/dissemin/faq.html:490
-msgid ""
-"You can also add publications to your profile <em>on Dissemin</em>, by "
-"clicking the button \"Include in my profile\" in search results on Dissemin. "
-"(This button is only visible when you are logged in, and next to papers that "
-"Dissemin thinks you have authored.) You can also exclude articles from your "
-"profile in this way. Please note that these changes are local to Dissemin "
-"and are <em>not</em> propagated to your ORCID profile, because ORCID does "
-"not have a free API allowing us to propagate them."
-msgstr ""
-"Você também pode adicionar publicações ao seu perfil <em>no Dissemin</em>, "
-"clicando no botão \"Incluir no meu perfil\" nos resultados da pesquisa em "
-"Dissemin. (Este botão só é visível quando você está logado e ao lado de "
-"documentos que a Dissemin acha que você é autoria). Você também pode excluir "
-"artigos do seu perfil desta maneira. Observe que essas mudanças são locais "
-"para Dissemin e são <em>não</em> propagado para o seu perfil ORCID, porque o "
-"ORCID não possui uma API gratuita que nos permita propagá-los."
+msgid "You can also add publications to your profile <em>on Dissemin</em>, by clicking the button \"Include in my profile\" in search results on Dissemin. (This button is only visible when you are logged in, and next to papers that Dissemin thinks you have authored.) You can also exclude articles from your profile in this way. Please note that these changes are local to Dissemin and are <em>not</em> propagated to your ORCID profile, because ORCID does not have a free API allowing us to propagate them."
+msgstr "Você também pode adicionar publicações ao seu perfil <em>no Dissemin</em>, clicando no botão \"Incluir no meu perfil\" nos resultados da pesquisa em Dissemin. (Este botão só é visível quando você está logado e ao lado de documentos que a Dissemin acha que você é autoria). Você também pode excluir artigos do seu perfil desta maneira. Observe que essas mudanças são locais para Dissemin e são <em>não</em> propagado para o seu perfil ORCID, porque o ORCID não possui uma API gratuita que nos permita propagá-los."
 
 #: templates/dissemin/faq.html:505
-msgid ""
-"If you change some details in your ORCID profile (name, homepage, etc.), the "
-"changes will not automatically be picked up in your profile on Dissemin. To "
-"update your profile on Dissemin accordingly, once you have logged in to "
-"Dissemin, you can go to your <a href=\"/my-profile\">profile page</a> and "
-"click \"Refresh publications\"."
-msgstr ""
-"Se você alterar alguns detalhes em seu perfil ORCID (nome, página inicial, "
-"etc.), as mudanças não serão automaticamente retiradas no seu perfil no "
-"Dissemin. Para atualizar seu perfil na Dissemin de acordo, uma vez que você "
-"tenha efetuado o login para Dissemin, você pode ir para o seu <a href=\"/my-"
-"profile\">página de perfil</a> e clique em \"Atualizar publicações\"."
+msgid "If you change some details in your ORCID profile (name, homepage, etc.), the changes will not automatically be picked up in your profile on Dissemin. To update your profile on Dissemin accordingly, once you have logged in to Dissemin, you can go to your <a href=\"/my-profile\">profile page</a> and click \"Refresh publications\"."
+msgstr "Se você alterar alguns detalhes em seu perfil ORCID (nome, página inicial, etc.), as mudanças não serão automaticamente retiradas no seu perfil no Dissemin. Para atualizar seu perfil na Dissemin de acordo, uma vez que você tenha efetuado o login para Dissemin, você pode ir para o seu <a href=\"/my-profile\">página de perfil</a> e clique em \"Atualizar publicações\"."
 
 #: templates/dissemin/faq.html:519
 #, python-format
 msgid "Our sources are listed on <a href=\"%(sources_url)s\">this page</a>."
-msgstr ""
-"Nossas fontes estão listadas <a href=\"%(sources_url)s\">nessa página</a>."
+msgstr "Nossas fontes estão listadas <a href=\"%(sources_url)s\">nessa página</a>."
 
 #: templates/dissemin/faq.html:526
 msgid "There are many ways to get involved:"
 msgstr "Há muitas maneiras de se envolver:"
 
 #: templates/dissemin/faq.html:532
-msgid ""
-"Contribute to <a href=\"https://github.com/wetneb/dissemin\">the code</a>."
-msgstr ""
-"Contribuir para o <a href=\"https://github.com/wetneb/dissemin\">o código</"
-"a>."
+msgid "Contribute to <a href=\"https://github.com/wetneb/dissemin\">the code</a>."
+msgstr "Contribuir para o <a href=\"https://github.com/wetneb/dissemin\">o código</a>."
 
 #: templates/dissemin/faq.html:537
-msgid ""
-"Fix any of our listed <a href=\"https://github.com/wetneb/dissemin/issues"
-"\">issues</a>."
-msgstr ""
-"Corrija qualquer um dos nossos listados <a href=\"https://github.com/wetneb/"
-"dissemin/issues\">problemas</a>."
+msgid "Fix any of our listed <a href=\"https://github.com/wetneb/dissemin/issues\">issues</a>."
+msgstr "Corrija qualquer um dos nossos listados <a href=\"https://github.com/wetneb/dissemin/issues\">problemas</a>."
 
 #: templates/dissemin/faq.html:542
-msgid ""
-"Help us <a href=\"https://translatewiki.net/wiki/Translating:Dissemin"
-"\">translate</a> the interface in your language."
-msgstr ""
-"Ajude-nos <a href=\"https://translatewiki.net/wiki/Translating:Dissemin"
-"\">traduzir</a> a interface em seu idioma."
+msgid "Help us <a href=\"https://translatewiki.net/wiki/Translating:Dissemin\">translate</a> the interface in your language."
+msgstr "Ajude-nos <a href=\"https://translatewiki.net/wiki/Translating:Dissemin\">traduzir</a> a interface em seu idioma."
 
 #: templates/dissemin/faq.html:549
 msgid "Encourage researchers to use this service."
 msgstr "Incentive os pesquisadores a usar esse serviço."
 
 #: templates/dissemin/faq.html:554
-msgid ""
-"Star <a href=\"https://github.com/wetneb/dissemin\">our GitHub project</a>!"
-msgstr ""
-"Estrela <a href=\"https://github.com/wetneb/dissemin\">nosso projeto GitHub</"
-"a>!"
+msgid "Star <a href=\"https://github.com/wetneb/dissemin\">our GitHub project</a>!"
+msgstr "Estrela <a href=\"https://github.com/wetneb/dissemin\">nosso projeto GitHub</a>!"
 
 #: templates/dissemin/faq.html:559
-msgid ""
-"<a href=\"https://association.dissem.in/#dons\">Donations are accepted</a>."
-msgstr ""
-"<a href=\"https://association.dissem.in/#dons\">Doações são aceitas</a>."
+msgid "<a href=\"https://association.dissem.in/#dons\">Donations are accepted</a>."
+msgstr "<a href=\"https://association.dissem.in/#dons\">Doações são aceitas</a>."
 
 #: templates/dissemin/faq.html:566
-msgid ""
-"The source code is available <a href=\"https://github.com/wetneb/dissemin"
-"\">on GitHub</a>."
-msgstr ""
-"O código fonte está disponível <a href=\"https://github.com/wetneb/dissemin"
-"\">no GitHub</a>."
+msgid "The source code is available <a href=\"https://github.com/wetneb/dissemin\">on GitHub</a>."
+msgstr "O código fonte está disponível <a href=\"https://github.com/wetneb/dissemin\">no GitHub</a>."
 
 #: templates/dissemin/faq.html:572
-msgid ""
-"Yes! We even have <a href=\"https://dev.dissem.in/api.html\">an API</a>. If "
-"it does not suit your needs, please don't hesitate to get in touch by "
-"writing to <a href=\"mailto:hello@dissem.in\">hello@dissem.in</a>"
-msgstr ""
-"Sim! Nós até temos <a href=\"https://dev.dissem.in/api.html\">an API</a>. Se "
-"não atender às suas necessidades, não hesite em entrar em contato, "
-"escrevendo para <a href=\"mailto:hello@dissem.in\">hello@dissem.in</a>"
+msgid "Yes! We even have <a href=\"https://dev.dissem.in/api.html\">an API</a>. If it does not suit your needs, please don't hesitate to get in touch by writing to <a href=\"mailto:hello@dissem.in\">hello@dissem.in</a>"
+msgstr "Sim! Nós até temos <a href=\"https://dev.dissem.in/api.html\">an API</a>. Se não atender às suas necessidades, não hesite em entrar em contato, escrevendo para <a href=\"mailto:hello@dissem.in\">hello@dissem.in</a>"
 
 #: templates/dissemin/faq.html:579
 msgid "Can I use the Dissemin logo to refer to the project?"
 msgstr "Posso usar o logotipo Dissemin para se referir ao projeto?"
 
 #: templates/dissemin/faq.html:581
-msgid ""
-"Yes! See <a href=\"https://association.dissem.in/#logos\">here</a> for links "
-"to our logos and for explanations about how you can reuse them."
-msgstr ""
-"Sim! Veja <a href=\"https://association.dissem.in/#logos\">aqui</a> para "
-"links para nossos logotipos e para explicações sobre como você pode "
-"reutilizá-los."
+msgid "Yes! See <a href=\"https://association.dissem.in/#logos\">here</a> for links to our logos and for explanations about how you can reuse them."
+msgstr "Sim! Veja <a href=\"https://association.dissem.in/#logos\">aqui</a> para links para nossos logotipos e para explicações sobre como você pode reutilizá-los."
 
 #: templates/dissemin/faq.html:586 templates/dissemin/tos.html:150
 msgid "Back to top"
@@ -2504,18 +1950,8 @@ msgid "Sign in"
 msgstr "Entrar"
 
 #: templates/dissemin/login.html:19 templates/dissemin/sandbox.html:19
-msgid ""
-"Dissemin uses ORCID to authenticate its users. ORCID is an independent non-"
-"profit effort to provide an open registry of unique researcher identifiers. "
-"It also offers open services to link research activities and organizations "
-"to these identifiers. Learn more at <a href=\"https://orcid.org\">orcid.org</"
-"a>."
-msgstr ""
-"A Dissemin usa o ORCID para autenticar seus usuários. O ORCID é um esforço "
-"independente sem fins lucrativos para fornecer um registro aberto de "
-"identificadores de pesquisadores exclusivos. Ele também oferece serviços "
-"abertos para ligar atividades e organizações de pesquisa a esses "
-"identificadores. Saiba mais em <a href=\"https://orcid.org\">orcid.org</a>."
+msgid "Dissemin uses ORCID to authenticate its users. ORCID is an independent non-profit effort to provide an open registry of unique researcher identifiers. It also offers open services to link research activities and organizations to these identifiers. Learn more at <a href=\"https://orcid.org\">orcid.org</a>."
+msgstr "A Dissemin usa o ORCID para autenticar seus usuários. O ORCID é um esforço independente sem fins lucrativos para fornecer um registro aberto de identificadores de pesquisadores exclusivos. Ele também oferece serviços abertos para ligar atividades e organizações de pesquisa a esses identificadores. Saiba mais em <a href=\"https://orcid.org\">orcid.org</a>."
 
 #: templates/dissemin/login.html:28 templates/dissemin/login.html:36
 #: templates/dissemin/sandbox.html:30
@@ -2523,12 +1959,8 @@ msgid "Log in"
 msgstr "Entrar"
 
 #: templates/dissemin/login.html:30 templates/dissemin/sandbox.html:32
-msgid ""
-"If you already have an ORCID account, you can use it with Dissemin. We will "
-"not make any changes to your profile."
-msgstr ""
-"Se você já possui uma conta ORCID, pode usá-la com Dissemin. Não faremos "
-"alterações no seu perfil."
+msgid "If you already have an ORCID account, you can use it with Dissemin. We will not make any changes to your profile."
+msgstr "Se você já possui uma conta ORCID, pode usá-la com Dissemin. Não faremos alterações no seu perfil."
 
 #: templates/dissemin/login.html:42 templates/dissemin/login.html:51
 #: templates/dissemin/sandbox.html:44
@@ -2536,11 +1968,8 @@ msgid "Sign up"
 msgstr "Registar-se"
 
 #: templates/dissemin/login.html:44 templates/dissemin/sandbox.html:46
-msgid ""
-"Not an ORCID user yet? Create an account, it is free and takes a few seconds."
-msgstr ""
-"Ainda não é um usuário ORCID? Crie uma conta, é grátis e demora alguns "
-"segundos."
+msgid "Not an ORCID user yet? Create an account, it is free and takes a few seconds."
+msgstr "Ainda não é um usuário ORCID? Crie uma conta, é grátis e demora alguns segundos."
 
 #: templates/dissemin/login.html:59 templates/dissemin/sandbox.html:61
 msgid "Dissemin account"
@@ -2548,12 +1977,8 @@ msgstr "Conta Dissemin"
 
 #: templates/dissemin/login.html:60 templates/dissemin/sandbox.html:62
 #, python-format
-msgid ""
-"If you have not created an account yet, then please\n"
-"<a href=\"%(signup_url)s\">sign up</a> first."
-msgstr ""
-"Se você ainda não criou uma conta, então por favor\n"
-"<a href=\"%(signup_url)s\">inscrever-se</a> primeiro."
+msgid "If you have not created an account yet, then please\n<a href=\"%(signup_url)s\">sign up</a> first."
+msgstr "Se você ainda não criou uma conta, então por favor\n<a href=\"%(signup_url)s\">inscrever-se</a> primeiro."
 
 #: templates/dissemin/login.html:69 templates/dissemin/sandbox.html:71
 msgid "Forgot Password?"
@@ -2653,52 +2078,16 @@ msgid "Reporting misuse"
 msgstr "Reportar uso indevido"
 
 #: templates/dissemin/tos.html:32
-msgid ""
-"This platform offers an analysis of the accessibility of scholarly "
-"publications. It can also deposit publications on behalf of their authors in "
-"repositories. The accessibility and self-archiving policies of the papers on "
-"this platform can be incorrect and should not be relied upon for legal "
-"advice. When in doubt, users are advised to check from authoritative sources."
-msgstr ""
-"Esta plataforma oferece uma análise da acessibilidade das publicações "
-"acadêmicas. Também pode depositar publicações em nome de seus autores em "
-"repositórios. As políticas de acessibilidade e auto-arquivamento dos "
-"documentos nesta plataforma podem ser incorretas e não devem ser invocadas "
-"para aconselhamento jurídico. Em caso de dúvida, os usuários são "
-"aconselhados a verificar a partir de fontes autorizadas."
+msgid "This platform offers an analysis of the accessibility of scholarly publications. It can also deposit publications on behalf of their authors in repositories. The accessibility and self-archiving policies of the papers on this platform can be incorrect and should not be relied upon for legal advice. When in doubt, users are advised to check from authoritative sources."
+msgstr "Esta plataforma oferece uma análise da acessibilidade das publicações acadêmicas. Também pode depositar publicações em nome de seus autores em repositórios. As políticas de acessibilidade e auto-arquivamento dos documentos nesta plataforma podem ser incorretas e não devem ser invocadas para aconselhamento jurídico. Em caso de dúvida, os usuários são aconselhados a verificar a partir de fontes autorizadas."
 
 #: templates/dissemin/tos.html:45
-msgid ""
-"Unauthenticated users are not tracked as the platform does not include any "
-"third-party analytics or advertisement services. Authenticated users are "
-"logged-in via ORCID, a third-party service. The platform has no access to "
-"the private information they provide to ORCID. In particular, we do not "
-"store any ORCID passwords, and we do not have access to email addresses that "
-"are marked as private in the ORCID record. We need to set cookies to "
-"authenticate our users, therefore by logging in on this platform, users "
-"accept these cookies."
-msgstr ""
-"Os usuários não autenticados não são rastreados, pois a plataforma não "
-"inclui nenhuma análise de terceiros ou serviços de publicidade. Usuários "
-"autenticados estão logados via ORCID, um serviço de terceiros. A plataforma "
-"não tem acesso à informação privada que eles fornecem à ORCID. Em "
-"particular, não armazenamos senhas ORCID, e não temos acesso a endereços de "
-"e-mail marcados como privados no registro ORCID. Precisamos configurar "
-"cookies para autenticar nossos usuários, portanto, iniciando sessão nesta "
-"plataforma, os usuários aceitam esses cookies."
+msgid "Unauthenticated users are not tracked as the platform does not include any third-party analytics or advertisement services. Authenticated users are logged-in via ORCID, a third-party service. The platform has no access to the private information they provide to ORCID. In particular, we do not store any ORCID passwords, and we do not have access to email addresses that are marked as private in the ORCID record. We need to set cookies to authenticate our users, therefore by logging in on this platform, users accept these cookies."
+msgstr "Os usuários não autenticados não são rastreados, pois a plataforma não inclui nenhuma análise de terceiros ou serviços de publicidade. Usuários autenticados estão logados via ORCID, um serviço de terceiros. A plataforma não tem acesso à informação privada que eles fornecem à ORCID. Em particular, não armazenamos senhas ORCID, e não temos acesso a endereços de e-mail marcados como privados no registro ORCID. Precisamos configurar cookies para autenticar nossos usuários, portanto, iniciando sessão nesta plataforma, os usuários aceitam esses cookies."
 
 #: templates/dissemin/tos.html:63
-msgid ""
-"The platform can perform mandated publication deposit to repositories. Users "
-"are only allowed to upload papers that they have authored themselves, or "
-"papers whose authors have consented to the deposit. In addition to these "
-"terms of service, users are required to abide by the policies of these "
-"repositories."
-msgstr ""
-"A plataforma pode executar depósito de publicação obrigatório em "
-"repositórios. Os usuários só podem enviar papéis que eles mesmos criaram, ou "
-"papéis cujos autores concordaram com o depósito. Além desses termos de "
-"serviço, os usuários devem cumprir as políticas desses repositórios."
+msgid "The platform can perform mandated publication deposit to repositories. Users are only allowed to upload papers that they have authored themselves, or papers whose authors have consented to the deposit. In addition to these terms of service, users are required to abide by the policies of these repositories."
+msgstr "A plataforma pode executar depósito de publicação obrigatório em repositórios. Os usuários só podem enviar papéis que eles mesmos criaram, ou papéis cujos autores concordaram com o depósito. Além desses termos de serviço, os usuários devem cumprir as políticas desses repositórios."
 
 #: templates/dissemin/tos.html:74
 msgid "Contact"
@@ -2709,73 +2098,24 @@ msgid "Please address any inquiry to support@dissem.in."
 msgstr "Por favor, envie qualquer consulta para support@dissem.in."
 
 #: templates/dissemin/tos.html:86
-msgid ""
-"Dissemin uses ORCID's public OAuth interface to authenticate its users. This "
-"interface only transmits information marked as public in the user's ORCID "
-"profile. This means that ORCID passwords are never transmitted and email "
-"addresses are not transmitted when they are marked as private, which is the "
-"default setting. When logging in to Dissemin from ORCID, Dissemin acquires "
-"the user's ORCID id, as well as all public information attached to the ORCID "
-"record. Dissemin can store any information input by its users on the "
-"platform. Users can ask for a copy of the personal information Dissemin "
-"stores about them by writing an email to support@dissem.in."
-msgstr ""
-"A Dissemin usa a interface OAuth pública da ORCID para autenticar seus "
-"usuários. Esta interface apenas transmite informações marcadas como públicas "
-"no perfil ORCID do usuário. Isso significa que as senhas ORCID nunca são "
-"transmitidas e os endereços de email não são transmitidos quando são "
-"marcados como privados, que é a configuração padrão. Ao efetuar o login na "
-"Dissemin da ORCID, a Dissemin adquire a ID ORCID do usuário, bem como todas "
-"as informações públicas anexadas ao registro ORCID. A Dissemin pode "
-"armazenar qualquer informação fornecida pelos usuários na plataforma. Os "
-"usuários podem solicitar uma cópia das informações pessoais das lojas da "
-"Dissemin, escrevendo um e-mail para support@dissem.in."
+msgid "Dissemin uses ORCID's public OAuth interface to authenticate its users. This interface only transmits information marked as public in the user's ORCID profile. This means that ORCID passwords are never transmitted and email addresses are not transmitted when they are marked as private, which is the default setting. When logging in to Dissemin from ORCID, Dissemin acquires the user's ORCID id, as well as all public information attached to the ORCID record. Dissemin can store any information input by its users on the platform. Users can ask for a copy of the personal information Dissemin stores about them by writing an email to support@dissem.in."
+msgstr "A Dissemin usa a interface OAuth pública da ORCID para autenticar seus usuários. Esta interface apenas transmite informações marcadas como públicas no perfil ORCID do usuário. Isso significa que as senhas ORCID nunca são transmitidas e os endereços de email não são transmitidos quando são marcados como privados, que é a configuração padrão. Ao efetuar o login na Dissemin da ORCID, a Dissemin adquire a ID ORCID do usuário, bem como todas as informações públicas anexadas ao registro ORCID. A Dissemin pode armazenar qualquer informação fornecida pelos usuários na plataforma. Os usuários podem solicitar uma cópia das informações pessoais das lojas da Dissemin, escrevendo um e-mail para support@dissem.in."
 
 #: templates/dissemin/tos.html:104
-msgid ""
-"Documents deposited in repositories via Dissemin can be stored on the "
-"platform, but are not available for download on the platform. They can be "
-"stored internally for logging purposes, and to make sure failed deposits can "
-"be fixed later. Dissemin does not commit to store any of the files it "
-"receives from its users. Users can write to support@dissem.in if they want "
-"one of their uploads to be deleted from our internal storage space, or from "
-"the repository they have deposited to. Note that deletion policies vary "
-"accross repositories: we provide no guarantee that deposits can be deleted "
-"from the target repositories."
-msgstr ""
-"Os documentos depositados em repositórios via Dissemin podem ser armazenados "
-"na plataforma, mas não estão disponíveis para download na plataforma. Eles "
-"podem ser armazenados internamente para fins de registro e para garantir que "
-"os depósitos com falha possam ser corrigidos posteriormente. Dissemin não se "
-"compromete a armazenar nenhum dos arquivos que recebe de seus usuários. Os "
-"usuários podem escrever para support@dissem.in se quiserem que um de seus "
-"carregamentos seja excluído do nosso espaço de armazenamento interno ou do "
-"depósito que depositaram. Observe que as políticas de exclusão variam em "
-"relação aos repositórios: não fornecemos garantia de que os depósitos possam "
-"ser excluídos dos repositórios de destino."
+msgid "Documents deposited in repositories via Dissemin can be stored on the platform, but are not available for download on the platform. They can be stored internally for logging purposes, and to make sure failed deposits can be fixed later. Dissemin does not commit to store any of the files it receives from its users. Users can write to support@dissem.in if they want one of their uploads to be deleted from our internal storage space, or from the repository they have deposited to. Note that deletion policies vary accross repositories: we provide no guarantee that deposits can be deleted from the target repositories."
+msgstr "Os documentos depositados em repositórios via Dissemin podem ser armazenados na plataforma, mas não estão disponíveis para download na plataforma. Eles podem ser armazenados internamente para fins de registro e para garantir que os depósitos com falha possam ser corrigidos posteriormente. Dissemin não se compromete a armazenar nenhum dos arquivos que recebe de seus usuários. Os usuários podem escrever para support@dissem.in se quiserem que um de seus carregamentos seja excluído do nosso espaço de armazenamento interno ou do depósito que depositaram. Observe que as políticas de exclusão variam em relação aos repositórios: não fornecemos garantia de que os depósitos possam ser excluídos dos repositórios de destino."
 
 #: templates/dissemin/tos.html:120
 msgid "Misuse can be reported to support@dissem.in."
 msgstr "Para denunciar usos impróprios, use o e-mail support@dissem.in."
 
 #: templates/dissemin/tos.html:128
-msgid ""
-"The <a href=\"https://dissem.in\">dissem.in</a> website has been registered "
-"with <a href=\"https://www.cnil.fr/\">CNIL</a> under declaration n°1895382 "
-"v0."
-msgstr ""
-"O <a href=\"https://dissem.in\">dissem.in</a> o site foi registrado com <a "
-"href=\"https://www.cnil.fr/\">CNIL</a> sob declaração n°1895382 v0."
+msgid "The <a href=\"https://dissem.in\">dissem.in</a> website has been registered with <a href=\"https://www.cnil.fr/\">CNIL</a> under declaration n°1895382 v0."
+msgstr "O <a href=\"https://dissem.in\">dissem.in</a> o site foi registrado com <a href=\"https://www.cnil.fr/\">CNIL</a> sob declaração n°1895382 v0."
 
 #: templates/dissemin/tos.html:136
-msgid ""
-"You have the right to access, modify, and delete the personal information "
-"that we hold about you. To exercise this right, please contact us at "
-"support@dissem.in, or by postal mail at the following addresss:"
-msgstr ""
-"Você tem o direito de acessar, modificar e excluir as informações pessoais "
-"que possuímos sobre você. Para exercer esse direito, entre em contato "
-"conosco no support@dissem.in, ou por correio postal no seguinte endereço:"
+msgid "You have the right to access, modify, and delete the personal information that we hold about you. To exercise this right, please contact us at support@dissem.in, or by postal mail at the following addresss:"
+msgstr "Você tem o direito de acessar, modificar e excluir as informações pessoais que possuímos sobre você. Para exercer esse direito, entre em contato conosco no support@dissem.in, ou por correio postal no seguinte endereço:"
 
 #: templates/socialaccount/authentication_error.html:6
 #: templates/socialaccount/authentication_error.html:12
@@ -2785,11 +2125,7 @@ msgstr "Erro de autenticação"
 #: templates/socialaccount/authentication_error.html:16
 #, fuzzy
 msgid "Authentication has failed. <a href=\"/\">Go back to the login page.</a>"
-msgstr ""
-"\n"
-"            A autenticação falhou. <a href=\"/\">Volte para a página de "
-"login.</a>\n"
-"           "
+msgstr "\n            A autenticação falhou. <a href=\"/\">Volte para a página de login.</a>\n           "
 
 #: upload/forms.py:29
 msgid "Invalid file format: only PDF files are accepted."
@@ -2805,11 +2141,8 @@ msgid "URL"
 msgstr "URL"
 
 #: upload/templates/upload/widget.html:4
-msgid ""
-"Select here the full text of your article. PDF files only, maximum size:"
-msgstr ""
-"Selecione aqui o texto completo do seu artigo. Somente arquivos PDF, tamanho "
-"máximo:"
+msgid "Select here the full text of your article. PDF files only, maximum size:"
+msgstr "Selecione aqui o texto completo do seu artigo. Somente arquivos PDF, tamanho máximo:"
 
 #: upload/templates/upload/widget.html:9
 msgid "Select a file:"
@@ -2840,12 +2173,8 @@ msgid "File too large."
 msgstr "O arquivo é muito grande."
 
 #: upload/views.py:182
-msgid ""
-"Invalid content type: this link points to a web page, we need a direct link "
-"to a PDF file."
-msgstr ""
-"Tipo de conteúdo inválido: este link aponta para uma página da Web, "
-"precisamos de um link direto para um arquivo PDF."
+msgid "Invalid content type: this link points to a web page, we need a direct link to a PDF file."
+msgstr "Tipo de conteúdo inválido: este link aponta para uma página da Web, precisamos de um link direto para um arquivo PDF."
 
 #: upload/views.py:185
 msgid "Invalid SSL certificate on the remote server."
@@ -2858,3 +2187,4 @@ msgstr "URL inválido (o servidor expirou)."
 #: upload/views.py:189 upload/views.py:193
 msgid "Invalid URL."
 msgstr "URL Inválido."
+

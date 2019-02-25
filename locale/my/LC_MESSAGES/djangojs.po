@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2019-02-21 13:56:07+0000\n"
+"PO-Revision-Date: 2019-02-25 09:40:07+0000\n"
 "X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -40,6 +40,11 @@ msgstr "ရှာဖွေမှု ရလာဒ်များ"
 #: doc/sphinx/_build/html/_static/searchtools.js:568
 msgid "Your search did not match any documents. Please make sure that all words are spelled correctly and that you've selected enough categories."
 msgstr ""
+
+#: doc/sphinx/_build/html/_static/searchtools.js:570
+#, javascript-format
+msgid "Search finished, found %s page(s) matching the search query."
+msgstr "ရှာဖွေမှု ပြီးပါပြီ၊ ရှာဖွေမှုနှင့် ကိုက်ညီသော စာမျက်နှာ % ကို တွေ့ပါသည်။"
 
 #: doc/sphinx/_build/html/_static/searchtools.js:623
 msgid ", in "
