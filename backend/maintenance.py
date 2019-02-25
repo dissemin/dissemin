@@ -116,11 +116,10 @@ def update_index_for_model(model, batch_size=256, batches_per_commit=10, firstpk
             starttime = curtime
             indexed = 0
 
-def enumerate_large_qs(queryset, key='pk', batch_size=256):
+def enumerate_large_qs(queryset, key='pk', batch_size=256, lastval=None):
     """
     Enumerates a large queryset (milions of rows) efficiently
     """
-    lastval = None
     found = True
 
     while found:
