@@ -7,13 +7,14 @@
 # Author: Metalhead64
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 12:06+0100\n"
-"PO-Revision-Date: 2019-02-07 14:54:32+0000\n"
+"PO-Revision-Date: 2019-03-07 15:08:19+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
+"X-POT-Import-Date: 2019-02-25 13:41:23+0000\n"
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -34,21 +35,18 @@ msgid "Invalid publication date"
 msgstr "Ungültiges Veröffentlichungsdatum"
 
 #: papers/static/papers/refresh.js:72
-#, fuzzy
-#| msgid "Invalid publication date"
 msgid "No publication date"
-msgstr "Ungültiges Veröffentlichungsdatum"
+msgstr "Kein Veröffentlichungsdatum"
 
 #: papers/static/papers/refresh.js:74
 msgid "Paper is invalid"
-msgstr ""
+msgstr "Publikation ist ungültig"
 
 #: papers/static/papers/refresh.js:109
 msgid "We ignored %(count)s paper from your ORCiD profile."
 msgid_plural "We ignored %(count)s papers from your ORCiD profile."
 msgstr[0] "Wir haben eine Publikation aus Deinem ORCiD-Profil ignoriert."
-msgstr[1] ""
-"Wir haben %(count)s Publikationen aus Deinem ORCiD-Profil ignoriert."
+msgstr[1] "Wir haben %(count)s Publikationen aus Deinem ORCiD-Profil ignoriert."
 
 #: papers/static/papers/refresh.js:119
 msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
@@ -66,42 +64,3 @@ msgstr "Weitere Informationen anzeigen"
 msgid "Show less information"
 msgstr "Weniger Informationen anzeigen"
 
-#~ msgid "Permalink to this headline"
-#~ msgstr "Permanentlink auf diese Überschrift"
-
-#~ msgid "Permalink to this definition"
-#~ msgstr "Permanentlink auf diese Definition"
-
-#~ msgid "Hide Search Matches"
-#~ msgstr "Suchtreffer ausblenden"
-
-#~ msgid "Searching"
-#~ msgstr "Suchen"
-
-#~ msgid "Preparing search..."
-#~ msgstr "Bereite Suche vor …"
-
-#~ msgid "Search Results"
-#~ msgstr "Suchergebnisse"
-
-#~ msgid ""
-#~ "Your search did not match any documents. Please make sure that all words "
-#~ "are spelled correctly and that you've selected enough categories."
-#~ msgstr ""
-#~ "Deine Suche stimmt mit keinem Dokument überein. Bitte stelle sicher, dass "
-#~ "alle Wörter richtig geschrieben und ausreichend Kategorien ausgewählt "
-#~ "sind."
-
-#~ msgid "Search finished, found %s page(s) matching the search query."
-#~ msgstr ""
-#~ "Suche abgeschlossen, gefunden wurde(n) %s Seite(n), die der Suchanfrage "
-#~ "entspricht/entsprechen."
-
-#~ msgid ", in "
-#~ msgstr ", in "
-
-#~ msgid "Expand sidebar"
-#~ msgstr "Seitenleiste ausklappen"
-
-#~ msgid "Collapse sidebar"
-#~ msgstr "Seitenleiste einklappen"

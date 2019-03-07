@@ -4,13 +4,14 @@
 # Author: Eduardo Addad de Oliveira
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 12:06+0100\n"
-"PO-Revision-Date: 2019-02-21 13:56:08+0000\n"
+"PO-Revision-Date: 2019-03-07 15:08:20+0000\n"
 "Language: pt_br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
+"X-POT-Import-Date: 2019-02-25 13:41:23+0000\n"
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
@@ -32,13 +33,12 @@ msgstr "Data de publicação inválida"
 
 #: papers/static/papers/refresh.js:72
 #, fuzzy
-#| msgid "Invalid publication date"
 msgid "No publication date"
 msgstr "Data de publicação inválida"
 
 #: papers/static/papers/refresh.js:74
 msgid "Paper is invalid"
-msgstr ""
+msgstr "O papel é inválido"
 
 #: papers/static/papers/refresh.js:109
 msgid "We ignored %(count)s paper from your ORCiD profile."
@@ -62,42 +62,3 @@ msgstr "Mostrar mais informações"
 msgid "Show less information"
 msgstr "Mostre menos informações"
 
-#~ msgid "Permalink to this headline"
-#~ msgstr "Link permanente para esta manchete"
-
-#~ msgid "Permalink to this definition"
-#~ msgstr "Link permanente para esta definição"
-
-#~ msgid "Hide Search Matches"
-#~ msgstr "Ocultar pesquisa em correspondências"
-
-#~ msgid "Searching"
-#~ msgstr "Procurando"
-
-#~ msgid "Preparing search..."
-#~ msgstr "Preparando a pesquisa ..."
-
-#~ msgid "Search Results"
-#~ msgstr "Resultados da Busca"
-
-#~ msgid ""
-#~ "Your search did not match any documents. Please make sure that all words "
-#~ "are spelled correctly and that you've selected enough categories."
-#~ msgstr ""
-#~ "Sua pesquisa não corresponde a nenhum documento. Certifique-se de que "
-#~ "todas as palavras estão escritas corretamente e que você selecionou "
-#~ "categorias suficientes."
-
-#~ msgid "Search finished, found %s page(s) matching the search query."
-#~ msgstr ""
-#~ "Pesquisa concluída, encontrada %s página(s) combinando a consulta de "
-#~ "pesquisa."
-
-#~ msgid ", in "
-#~ msgstr ", em "
-
-#~ msgid "Expand sidebar"
-#~ msgstr "Expandir barra lateral"
-
-#~ msgid "Collapse sidebar"
-#~ msgstr "Fechar barra lateral"

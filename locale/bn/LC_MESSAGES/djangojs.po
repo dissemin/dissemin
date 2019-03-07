@@ -6,13 +6,14 @@
 # Author: আফতাবুজ্জামান
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 12:06+0100\n"
-"PO-Revision-Date: 2019-01-30 22:39:36+0000\n"
+"PO-Revision-Date: 2019-03-07 15:08:18+0000\n"
 "Language: bn\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
+"X-POT-Import-Date: 2019-02-25 13:41:23+0000\n"
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -34,7 +35,6 @@ msgstr "অকার্যকর প্রকাশনা তারিখ"
 
 #: papers/static/papers/refresh.js:72
 #, fuzzy
-#| msgid "Invalid publication date"
 msgid "No publication date"
 msgstr "অকার্যকর প্রকাশনা তারিখ"
 
@@ -43,6 +43,7 @@ msgid "Paper is invalid"
 msgstr ""
 
 #: papers/static/papers/refresh.js:109
+#, invalid-plural
 msgid "We ignored %(count)s paper from your ORCiD profile."
 msgid_plural "We ignored %(count)s papers from your ORCiD profile."
 msgstr[0] ""
@@ -64,30 +65,3 @@ msgstr "বিস্তারিত তথ্য"
 msgid "Show less information"
 msgstr "সংক্ষিপ্ত তথ্য"
 
-#~ msgid "Permalink to this headline"
-#~ msgstr "এই শিরোনামের স্থায়ীসংযোগ"
-
-#~ msgid "Permalink to this definition"
-#~ msgstr "এই সংজ্ঞার স্থায়ীসংযোগ"
-
-#~ msgid "Searching"
-#~ msgstr "অনুসন্ধান চলছে"
-
-#~ msgid "Preparing search..."
-#~ msgstr "অনুসন্ধানের প্রস্তুতি..."
-
-#~ msgid "Search Results"
-#~ msgstr "অনুসন্ধানের ফলাফল"
-
-#~ msgid ""
-#~ "Your search did not match any documents. Please make sure that all words "
-#~ "are spelled correctly and that you've selected enough categories."
-#~ msgstr ""
-#~ "আপনার অনুসন্ধানে কোন তথ্যাদি মিলেনি। অনুগ্রহ করে নিশ্চিত হউন যে শব্দগুলি সঠিক "
-#~ "ভাবে লেখা হয়েছে এবং আপনি যথেষ্ট সংখ্যক বিষয়শ্রেণী নির্বাচন করেছেন।"
-
-#~ msgid "Expand sidebar"
-#~ msgstr "পার্শ্বদ্বন্ড সম্প্রসারিত করুন"
-
-#~ msgid "Collapse sidebar"
-#~ msgstr "পার্শ্বদ্বন্ড সঙ্কুচিত করুন"

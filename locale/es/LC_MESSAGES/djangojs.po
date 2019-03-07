@@ -6,13 +6,14 @@
 # Author: Pato
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 12:06+0100\n"
-"PO-Revision-Date: 2019-01-30 22:39:36+0000\n"
+"PO-Revision-Date: 2019-03-07 15:08:19+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
+"X-POT-Import-Date: 2019-02-25 13:41:23+0000\n"
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -34,7 +35,6 @@ msgstr "La fecha de publicación no es válida"
 
 #: papers/static/papers/refresh.js:72
 #, fuzzy
-#| msgid "Invalid publication date"
 msgid "No publication date"
 msgstr "La fecha de publicación no es válida"
 
@@ -64,41 +64,3 @@ msgstr "Mostrar más información"
 msgid "Show less information"
 msgstr "Mostrar menos información"
 
-#~ msgid "Permalink to this headline"
-#~ msgstr "Enlace permanente a este titular"
-
-#~ msgid "Permalink to this definition"
-#~ msgstr "Enlace permanente a esta definición"
-
-#~ msgid "Hide Search Matches"
-#~ msgstr "Ocultar resultados de la búsqueda"
-
-#~ msgid "Searching"
-#~ msgstr "Buscando"
-
-#~ msgid "Preparing search..."
-#~ msgstr "Preparando la búsqueda…"
-
-#~ msgid "Search Results"
-#~ msgstr "Resultados de la búsqueda"
-
-#~ msgid ""
-#~ "Your search did not match any documents. Please make sure that all words "
-#~ "are spelled correctly and that you've selected enough categories."
-#~ msgstr ""
-#~ "Ningún documento coincide con la búsqueda. Revisa la ortografía y "
-#~ "cerciórate de que hayas seleccionado suficientes categorías."
-
-#~ msgid "Search finished, found %s page(s) matching the search query."
-#~ msgstr ""
-#~ "Búsqueda completa, se encontraron %s página(s) que concide(n) con la "
-#~ "búsqueda."
-
-#~ msgid ", in "
-#~ msgstr ", en "
-
-#~ msgid "Expand sidebar"
-#~ msgstr "Expandir barra lateral"
-
-#~ msgid "Collapse sidebar"
-#~ msgstr "Contraer barra lateral"

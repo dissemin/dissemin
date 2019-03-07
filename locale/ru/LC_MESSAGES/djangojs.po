@@ -4,19 +4,20 @@
 # Author: Mouse21
 # Author: Okras
 # Author: Smigles
+# Author: Vlad5250
 # Author: Wirbel78
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 12:06+0100\n"
-"PO-Revision-Date: 2019-01-30 22:39:37+0000\n"
+"PO-Revision-Date: 2019-03-07 15:08:20+0000\n"
 "Language: ru\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
+"X-POT-Import-Date: 2019-02-25 13:41:23+0000\n"
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
-"Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11) ? 0 : ( (n%10 >= "
-"2 && n%10 <= 4 && (n%100 < 10 || n%100 >= 20)) ? 1 : 2 );\n"
+"Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11) ? 0 : ( (n%10 >= 2 && n%10 <= 4 && (n%100 < 10 || n%100 >= 20)) ? 1 : 2 );\n"
 
 #: papers/static/papers/refresh.js:35
 msgid "Do not show this message anymore"
@@ -35,10 +36,8 @@ msgid "Invalid publication date"
 msgstr "Недействительная дата публикации"
 
 #: papers/static/papers/refresh.js:72
-#, fuzzy
-#| msgid "Invalid publication date"
 msgid "No publication date"
-msgstr "Недействительная дата публикации"
+msgstr "Отсутствует дата публикации"
 
 #: papers/static/papers/refresh.js:74
 msgid "Paper is invalid"
@@ -67,39 +66,3 @@ msgstr "Показать больше информации"
 msgid "Show less information"
 msgstr "Показать меньше информации"
 
-#~ msgid "Permalink to this headline"
-#~ msgstr "Постоянная ссылка на этот заголовок"
-
-#~ msgid "Permalink to this definition"
-#~ msgstr "Постоянная ссылка на это определение"
-
-#~ msgid "Hide Search Matches"
-#~ msgstr "Скрыть поисковые матчи"
-
-#~ msgid "Searching"
-#~ msgstr "Поиск"
-
-#~ msgid "Preparing search..."
-#~ msgstr "Подготовка к поиску..."
-
-#~ msgid "Search Results"
-#~ msgstr "Результаты поиска"
-
-#~ msgid ""
-#~ "Your search did not match any documents. Please make sure that all words "
-#~ "are spelled correctly and that you've selected enough categories."
-#~ msgstr ""
-#~ "Ваш поиск не соответствовал каким-либо документам. Убедитесь, что все "
-#~ "слова написаны правильно и что вы выбрали достаточно категорий."
-
-#~ msgid "Search finished, found %s page(s) matching the search query."
-#~ msgstr "Поиск закончен, найден %s страница(ы) сопоставляя поисковый запрос."
-
-#~ msgid ", in "
-#~ msgstr ", в "
-
-#~ msgid "Expand sidebar"
-#~ msgstr "Развернуть боковую панель"
-
-#~ msgid "Collapse sidebar"
-#~ msgstr "Свернуть боковую панель"

@@ -4,13 +4,14 @@
 # Author: Liuxinyu970226
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 12:06+0100\n"
-"PO-Revision-Date: 2019-02-21 13:56:09+0000\n"
+"PO-Revision-Date: 2019-03-07 15:08:21+0000\n"
 "Language: zh_hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
+"X-POT-Import-Date: 2019-02-25 13:41:23+0000\n"
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
@@ -32,7 +33,6 @@ msgstr "无效的发行日期"
 
 #: papers/static/papers/refresh.js:72
 #, fuzzy
-#| msgid "Invalid publication date"
 msgid "No publication date"
 msgstr "无效的发行日期"
 
@@ -61,38 +61,3 @@ msgstr "显示更多信息"
 msgid "Show less information"
 msgstr "显示更少信息"
 
-#~ msgid "Permalink to this headline"
-#~ msgstr "至此大标题的固定链接"
-
-#~ msgid "Permalink to this definition"
-#~ msgstr "至此定义的固定链接"
-
-#~ msgid "Hide Search Matches"
-#~ msgstr "隐藏搜索匹配"
-
-#~ msgid "Searching"
-#~ msgstr "正在搜索"
-
-#~ msgid "Preparing search..."
-#~ msgstr "正在准备搜索..."
-
-#~ msgid "Search Results"
-#~ msgstr "搜索结果"
-
-#~ msgid ""
-#~ "Your search did not match any documents. Please make sure that all words "
-#~ "are spelled correctly and that you've selected enough categories."
-#~ msgstr ""
-#~ "您的搜索并不匹配任何文档。请确保所有单词正确拼写，并且您选择了足够的分类。"
-
-#~ msgid "Search finished, found %s page(s) matching the search query."
-#~ msgstr "搜索结束，找到%s篇匹配搜索查询的论文。"
-
-#~ msgid ", in "
-#~ msgstr "，在\\"
-
-#~ msgid "Expand sidebar"
-#~ msgstr "展开边栏"
-
-#~ msgid "Collapse sidebar"
-#~ msgstr "折叠边栏"

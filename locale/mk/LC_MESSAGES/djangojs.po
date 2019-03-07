@@ -4,13 +4,14 @@
 # Author: Bjankuloski06
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 12:06+0100\n"
-"PO-Revision-Date: 2019-01-30 22:39:37+0000\n"
+"PO-Revision-Date: 2019-03-07 15:08:19+0000\n"
 "Language: mk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
+"X-POT-Import-Date: 2019-02-25 13:41:23+0000\n"
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
 "Plural-Forms: nplurals=2; plural=(n == 1 || n%10 == 1) ? 0 : 1;\n"
 
@@ -32,7 +33,6 @@ msgstr "Погрешен датум на објавување"
 
 #: papers/static/papers/refresh.js:72
 #, fuzzy
-#| msgid "Invalid publication date"
 msgid "No publication date"
 msgstr "Погрешен датум на објавување"
 
@@ -62,40 +62,3 @@ msgstr "Повеќе информации"
 msgid "Show less information"
 msgstr "Помалку информации"
 
-#~ msgid "Permalink to this headline"
-#~ msgstr "Постојана врска до ова заглавие"
-
-#~ msgid "Permalink to this definition"
-#~ msgstr "Постојана врска до оваа определба"
-
-#~ msgid "Hide Search Matches"
-#~ msgstr "Скриј совпаднати"
-
-#~ msgid "Searching"
-#~ msgstr "Пребарувам"
-
-#~ msgid "Preparing search..."
-#~ msgstr "Го подготвувам пребарувањето..."
-
-#~ msgid "Search Results"
-#~ msgstr "Исход од пребарувањето"
-
-#~ msgid ""
-#~ "Your search did not match any documents. Please make sure that all words "
-#~ "are spelled correctly and that you've selected enough categories."
-#~ msgstr ""
-#~ "Не најдов документи шт оодговараат на бараното. Проверете дали сите "
-#~ "зборови се напишани правилно и дали сте избрале доволно категории."
-
-#~ msgid "Search finished, found %s page(s) matching the search query."
-#~ msgstr ""
-#~ "Пребарувањето заврши. Пронајдов %s страница/и што одговараат на бараното."
-
-#~ msgid ", in "
-#~ msgstr ", во "
-
-#~ msgid "Expand sidebar"
-#~ msgstr "Отвори страничник"
-
-#~ msgid "Collapse sidebar"
-#~ msgstr "Собери страничник"

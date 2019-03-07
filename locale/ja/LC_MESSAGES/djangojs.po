@@ -5,13 +5,14 @@
 # Author: Yusuke1109
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 12:06+0100\n"
-"PO-Revision-Date: 2019-01-30 22:39:36+0000\n"
+"PO-Revision-Date: 2019-03-07 15:08:19+0000\n"
 "Language: ja\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
+"X-POT-Import-Date: 2019-02-25 13:41:23+0000\n"
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
@@ -33,7 +34,6 @@ msgstr "無効な発行日"
 
 #: papers/static/papers/refresh.js:72
 #, fuzzy
-#| msgid "Invalid publication date"
 msgid "No publication date"
 msgstr "無効な発行日"
 
@@ -62,39 +62,3 @@ msgstr "詳細を表示"
 msgid "Show less information"
 msgstr "詳細を閉じる"
 
-#~ msgid "Permalink to this headline"
-#~ msgstr "この標題のパーマリンク"
-
-#~ msgid "Permalink to this definition"
-#~ msgstr "この定義のパーマリンク"
-
-#~ msgid "Hide Search Matches"
-#~ msgstr "ヒットした検索を非表示"
-
-#~ msgid "Searching"
-#~ msgstr "検索中..."
-
-#~ msgid "Preparing search..."
-#~ msgstr "検索の準備中..."
-
-#~ msgid "Search Results"
-#~ msgstr "検索結果"
-
-#~ msgid ""
-#~ "Your search did not match any documents. Please make sure that all words "
-#~ "are spelled correctly and that you've selected enough categories."
-#~ msgstr ""
-#~ "問い合わせに合致する検索結果はありませんでした。すべての単語が正しく入力さ"
-#~ "れ、十分なカテゴリが選択されていることを確認してください。"
-
-#~ msgid "Search finished, found %s page(s) matching the search query."
-#~ msgstr "検索が完了し、検索クエリと一致する%sページが見つかりました。"
-
-#~ msgid ", in "
-#~ msgstr "、\\に"
-
-#~ msgid "Expand sidebar"
-#~ msgstr "サイドバーを開く"
-
-#~ msgid "Collapse sidebar"
-#~ msgstr "サイドバーを折りたたむ"

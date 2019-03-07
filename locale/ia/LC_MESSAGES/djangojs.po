@@ -4,13 +4,14 @@
 # Author: McDutchie
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 12:06+0100\n"
-"PO-Revision-Date: 2019-01-30 22:39:36+0000\n"
+"PO-Revision-Date: 2019-03-07 15:08:19+0000\n"
 "Language: ia\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
+"X-POT-Import-Date: 2019-02-25 13:41:23+0000\n"
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -32,7 +33,6 @@ msgstr "Data de publication invalide"
 
 #: papers/static/papers/refresh.js:72
 #, fuzzy
-#| msgid "Invalid publication date"
 msgid "No publication date"
 msgstr "Data de publication invalide"
 
@@ -62,39 +62,3 @@ msgstr "Monstrar plus information"
 msgid "Show less information"
 msgstr "Monstrar minus information"
 
-#~ msgid "Permalink to this headline"
-#~ msgstr "Ligamine permanente a iste titulo"
-
-#~ msgid "Permalink to this definition"
-#~ msgstr "Ligamine permanente a iste definition"
-
-#~ msgid "Hide Search Matches"
-#~ msgstr "Celar resultatos de recerca"
-
-#~ msgid "Searching"
-#~ msgstr "Recerca in curso"
-
-#~ msgid "Preparing search..."
-#~ msgstr "Preparation del recerca..."
-
-#~ msgid "Search Results"
-#~ msgstr "Resultatos del recerca"
-
-#~ msgid ""
-#~ "Your search did not match any documents. Please make sure that all words "
-#~ "are spelled correctly and that you've selected enough categories."
-#~ msgstr ""
-#~ "Le recerca non produceva alcun documento. Verifica que tote le parolas es "
-#~ "orthographate correctemente e que tu ha seligite sufficiente categorias."
-
-#~ msgid "Search finished, found %s page(s) matching the search query."
-#~ msgstr "Recerca complete, %s pagina(s) trovate."
-
-#~ msgid ", in "
-#~ msgstr ", in "
-
-#~ msgid "Expand sidebar"
-#~ msgstr "Displicar barra lateral"
-
-#~ msgid "Collapse sidebar"
-#~ msgstr "Plicar barra lateral"

@@ -4,13 +4,14 @@
 # Author: Athena in Wonderland
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 12:06+0100\n"
-"PO-Revision-Date: 2019-01-30 22:39:37+0000\n"
+"PO-Revision-Date: 2019-03-07 15:08:20+0000\n"
 "Language: pt\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
+"X-POT-Import-Date: 2019-02-25 13:41:23+0000\n"
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -32,7 +33,6 @@ msgstr "A data de publicação não é válida"
 
 #: papers/static/papers/refresh.js:72
 #, fuzzy
-#| msgid "Invalid publication date"
 msgid "No publication date"
 msgstr "A data de publicação não é válida"
 
@@ -62,42 +62,3 @@ msgstr "Mostrar mais informações"
 msgid "Show less information"
 msgstr "Mostrar menos informações"
 
-#~ msgid "Permalink to this headline"
-#~ msgstr "Ligação permanente para esta manchete"
-
-#~ msgid "Permalink to this definition"
-#~ msgstr "Ligação permanente para esta definição"
-
-#~ msgid "Hide Search Matches"
-#~ msgstr "Ocultar resultados da procura"
-
-#~ msgid "Searching"
-#~ msgstr "A procurar"
-
-#~ msgid "Preparing search..."
-#~ msgstr "A preparar a procura..."
-
-#~ msgid "Search Results"
-#~ msgstr "Resultados da procura"
-
-#~ msgid ""
-#~ "Your search did not match any documents. Please make sure that all words "
-#~ "are spelled correctly and that you've selected enough categories."
-#~ msgstr ""
-#~ "A sua procura não corresponde a nenhum documento. Por favor, certifique-"
-#~ "se de que todas as palavras estão escritas corretamente e que selecionou "
-#~ "as categorias suficientes."
-
-#~ msgid "Search finished, found %s page(s) matching the search query."
-#~ msgstr ""
-#~ "A procura foi concluída, há %s página(s) encontrada(s) que coincide(m) "
-#~ "com a consulta da procura."
-
-#~ msgid ", in "
-#~ msgstr ", em "
-
-#~ msgid "Expand sidebar"
-#~ msgstr "Expandir barra lateral"
-
-#~ msgid "Collapse sidebar"
-#~ msgstr "Fechar barra lateral"

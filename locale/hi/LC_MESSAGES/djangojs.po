@@ -4,13 +4,14 @@
 # Author: Innocentbunny
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 12:06+0100\n"
-"PO-Revision-Date: 2019-01-30 22:39:36+0000\n"
+"PO-Revision-Date: 2019-03-07 15:08:19+0000\n"
 "Language: hi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
+"X-POT-Import-Date: 2019-02-25 13:41:23+0000\n"
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -32,7 +33,6 @@ msgstr "अमान्य प्रकासन तिथि"
 
 #: papers/static/papers/refresh.js:72
 #, fuzzy
-#| msgid "Invalid publication date"
 msgid "No publication date"
 msgstr "अमान्य प्रकासन तिथि"
 
@@ -62,39 +62,3 @@ msgstr "अधिक जानकारी दिखाएँ"
 msgid "Show less information"
 msgstr "काम जानकारी दिखाएँ"
 
-#~ msgid "Permalink to this headline"
-#~ msgstr "इस शीर्षक पर स्थाईकड़ी"
-
-#~ msgid "Permalink to this definition"
-#~ msgstr "इस परिभाषा पर स्थाईकड़ी"
-
-#~ msgid "Hide Search Matches"
-#~ msgstr "खोज के प्रकरणों को छुपाएँ"
-
-#~ msgid "Searching"
-#~ msgstr "अन्वेषण जारी है..."
-
-#~ msgid "Preparing search..."
-#~ msgstr "खोज सज्जिकरण"
-
-#~ msgid "Search Results"
-#~ msgstr "खोज परिणाम"
-
-#~ msgid ""
-#~ "Your search did not match any documents. Please make sure that all words "
-#~ "are spelled correctly and that you've selected enough categories."
-#~ msgstr ""
-#~ "आपका अन्वेषण किसी भी डॉक्यूमेंट से मेल नहीं खाती है। कृपया सुनिश्चित करें की सभी शब्दों की "
-#~ "वर्तनी सही है, तथा यह भी सुनिश्चित करें की आपने  यथोष्ट श्रेणियाँ चुनी हैं।"
-
-#~ msgid "Search finished, found %s page(s) matching the search query."
-#~ msgstr "खोज समाप्त, अन्वेषण पृच्छा से मिलते हुए %s पृष्ठ पाए गए"
-
-#~ msgid ", in "
-#~ msgstr ", in "
-
-#~ msgid "Expand sidebar"
-#~ msgstr "साइडबार विस्तृण करें"
-
-#~ msgid "Collapse sidebar"
-#~ msgstr "साइडबार संकुचित करें"

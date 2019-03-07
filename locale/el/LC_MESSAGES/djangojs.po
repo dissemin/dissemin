@@ -5,13 +5,14 @@
 # Author: Nikosgranturismogt
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 12:06+0100\n"
-"PO-Revision-Date: 2019-01-30 22:39:36+0000\n"
+"PO-Revision-Date: 2019-03-07 15:08:19+0000\n"
 "Language: el\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
+"X-POT-Import-Date: 2019-02-25 13:41:23+0000\n"
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -33,7 +34,6 @@ msgstr "Άκυρη ημερομηνία δημοσίευσης."
 
 #: papers/static/papers/refresh.js:72
 #, fuzzy
-#| msgid "Invalid publication date"
 msgid "No publication date"
 msgstr "Άκυρη ημερομηνία δημοσίευσης."
 
@@ -63,41 +63,3 @@ msgstr "Εμφάνιση περισσότερων πληροφοριών"
 msgid "Show less information"
 msgstr "Εμφάνιση λιγότερων πληροφοριών"
 
-#~ msgid "Permalink to this headline"
-#~ msgstr "Μόνιμος σύνδεσμος προς αυτή την επικεφαλίδα"
-
-#~ msgid "Permalink to this definition"
-#~ msgstr "Μόνιμος σύνδεσμος προς αυτό τον ορισμό"
-
-#~ msgid "Hide Search Matches"
-#~ msgstr "Απόκρυψη αντιστοιχισμάτων αναζητήσεων"
-
-#~ msgid "Searching"
-#~ msgstr "Γίνεται αναζήτηση..."
-
-#~ msgid "Preparing search..."
-#~ msgstr "Προετοιμασία για αναζήτηση..."
-
-#~ msgid "Search Results"
-#~ msgstr "Αποτελέσματα αναζήτησης"
-
-#~ msgid ""
-#~ "Your search did not match any documents. Please make sure that all words "
-#~ "are spelled correctly and that you've selected enough categories."
-#~ msgstr ""
-#~ "Η αναζήτησή σας δεν επέστρεψε αποτελέσματα. Σιγουρευτείτε ότι όλες οι "
-#~ "λέξεις είναι σωστά γραμμένες και ότι έχετε επιλέξει αρκετές κατηγορίες."
-
-#~ msgid "Search finished, found %s page(s) matching the search query."
-#~ msgstr ""
-#~ "Η αναζήτηση ολοκληρώθηκε, βρέθηκαν %s σελίδα(-ες) που αντιστοιχούν στο "
-#~ "ερώτημα αναζήτησης."
-
-#~ msgid ", in "
-#~ msgstr ", σε "
-
-#~ msgid "Expand sidebar"
-#~ msgstr "Επέκταση πλευρικής γραμμής"
-
-#~ msgid "Collapse sidebar"
-#~ msgstr "Σύμπτυξη πλευρικής γραμμής"

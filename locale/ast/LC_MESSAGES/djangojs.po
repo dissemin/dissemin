@@ -4,13 +4,14 @@
 # Author: Xuacu
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 12:06+0100\n"
-"PO-Revision-Date: 2019-01-30 22:39:36+0000\n"
+"PO-Revision-Date: 2019-03-07 15:08:18+0000\n"
 "Language: ast\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
+"X-POT-Import-Date: 2019-02-25 13:41:23+0000\n"
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -32,7 +33,6 @@ msgstr "Fecha de publicación inválida."
 
 #: papers/static/papers/refresh.js:72
 #, fuzzy
-#| msgid "Invalid publication date"
 msgid "No publication date"
 msgstr "Fecha de publicación inválida."
 
@@ -62,41 +62,3 @@ msgstr "Ver más información"
 msgid "Show less information"
 msgstr "Ver menos información"
 
-#~ msgid "Permalink to this headline"
-#~ msgstr "Enllaz permanente a esti titular"
-
-#~ msgid "Permalink to this definition"
-#~ msgstr "Enllaz permanente a esta definición"
-
-#~ msgid "Hide Search Matches"
-#~ msgstr "Tapecer les guetes que casen"
-
-#~ msgid "Searching"
-#~ msgstr "Buscando"
-
-#~ msgid "Preparing search..."
-#~ msgstr "Preparando la gueta..."
-
-#~ msgid "Search Results"
-#~ msgstr "Resultaos de la gueta"
-
-#~ msgid ""
-#~ "Your search did not match any documents. Please make sure that all words "
-#~ "are spelled correctly and that you've selected enough categories."
-#~ msgstr ""
-#~ "La gueta nun casó con documentu dalu. Asegúrate de que toles palabres tán "
-#~ "correutamente escrites y de qu'esbillasti categoríes abondo."
-
-#~ msgid "Search finished, found %s page(s) matching the search query."
-#~ msgstr ""
-#~ "Acabó la gueta, alcontráronse %s páxina(es) que casen cola consulta de la "
-#~ "gueta."
-
-#~ msgid ", in "
-#~ msgstr ", en "
-
-#~ msgid "Expand sidebar"
-#~ msgstr "Espander la barra llateral"
-
-#~ msgid "Collapse sidebar"
-#~ msgstr "Contraer la barra llateral"

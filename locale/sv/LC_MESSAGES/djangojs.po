@@ -5,13 +5,14 @@
 # Author: WikiPhoenix
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 12:06+0100\n"
-"PO-Revision-Date: 2019-01-30 22:39:38+0000\n"
+"PO-Revision-Date: 2019-03-07 15:08:20+0000\n"
 "Language: sv\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
+"X-POT-Import-Date: 2019-02-25 13:41:23+0000\n"
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -33,7 +34,6 @@ msgstr "Ogiltigt publiceringsdatum"
 
 #: papers/static/papers/refresh.js:72
 #, fuzzy
-#| msgid "Invalid publication date"
 msgid "No publication date"
 msgstr "Ogiltigt publiceringsdatum"
 
@@ -42,6 +42,7 @@ msgid "Paper is invalid"
 msgstr ""
 
 #: papers/static/papers/refresh.js:109
+#, invalid-plural
 msgid "We ignored %(count)s paper from your ORCiD profile."
 msgid_plural "We ignored %(count)s papers from your ORCiD profile."
 msgstr[0] ""
@@ -63,26 +64,3 @@ msgstr "Visa mer information"
 msgid "Show less information"
 msgstr "Visa mindre information"
 
-#~ msgid "Hide Search Matches"
-#~ msgstr "Dölj sökmatchningar"
-
-#~ msgid "Searching"
-#~ msgstr "Söker"
-
-#~ msgid "Preparing search..."
-#~ msgstr "Förbereder sökning..."
-
-#~ msgid "Search Results"
-#~ msgstr "Sökresultat"
-
-#~ msgid "Search finished, found %s page(s) matching the search query."
-#~ msgstr "Sökningen är färdig, hittade %s sidor som matchar sökfrågan."
-
-#~ msgid ", in "
-#~ msgstr ", i "
-
-#~ msgid "Expand sidebar"
-#~ msgstr "Expandera sidofält"
-
-#~ msgid "Collapse sidebar"
-#~ msgstr "Stäng sidofält"

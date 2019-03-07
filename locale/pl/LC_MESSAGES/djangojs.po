@@ -4,16 +4,16 @@
 # Author: DeRudySoulStorm
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 12:06+0100\n"
-"PO-Revision-Date: 2019-01-30 22:39:37+0000\n"
+"PO-Revision-Date: 2019-03-07 15:08:20+0000\n"
 "Language: pl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
+"X-POT-Import-Date: 2019-02-25 13:41:23+0000\n"
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
-"Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ( (n%10 >= 2 && n%10 <= 4 && "
-"(n%100 < 10 || n%100 >= 20)) ? 1 : 2 );\n"
+"Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ( (n%10 >= 2 && n%10 <= 4 && (n%100 < 10 || n%100 >= 20)) ? 1 : 2 );\n"
 
 #: papers/static/papers/refresh.js:35
 msgid "Do not show this message anymore"
@@ -33,7 +33,6 @@ msgstr "Nieprawidłowa data publikacji"
 
 #: papers/static/papers/refresh.js:72
 #, fuzzy
-#| msgid "Invalid publication date"
 msgid "No publication date"
 msgstr "Nieprawidłowa data publikacji"
 
@@ -42,6 +41,7 @@ msgid "Paper is invalid"
 msgstr ""
 
 #: papers/static/papers/refresh.js:109
+#, invalid-plural
 msgid "We ignored %(count)s paper from your ORCiD profile."
 msgid_plural "We ignored %(count)s papers from your ORCiD profile."
 msgstr[0] ""
@@ -64,31 +64,3 @@ msgstr "Pokaż więcej informacji"
 msgid "Show less information"
 msgstr "Pokaż mniej informacji"
 
-#~ msgid "Permalink to this headline"
-#~ msgstr "Bezpośredni odnośnik do tego nagłówka"
-
-#~ msgid "Permalink to this definition"
-#~ msgstr "Bezpośredni odnośnik do tej definicji"
-
-#~ msgid "Searching"
-#~ msgstr "Wyszukiwanie..."
-
-#~ msgid "Search Results"
-#~ msgstr "Wyniki wyszukiwania"
-
-#~ msgid ""
-#~ "Your search did not match any documents. Please make sure that all words "
-#~ "are spelled correctly and that you've selected enough categories."
-#~ msgstr ""
-#~ "Twoje wyszukiwanie nie pasowało do żadnych dokumentów. Upewnij się, że "
-#~ "wszystkie słowa zostały poprawnie napisane i że wybrałeś wystarczającą "
-#~ "liczbę kategorii."
-
-#~ msgid ", in "
-#~ msgstr ", w "
-
-#~ msgid "Expand sidebar"
-#~ msgstr "Rozwiń pasek boczny"
-
-#~ msgid "Collapse sidebar"
-#~ msgstr "Zwiń pasek boczny"

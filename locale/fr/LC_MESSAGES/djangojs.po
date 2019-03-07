@@ -5,10 +5,11 @@
 # Author: Wladek92
 msgid ""
 msgstr ""
+""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 12:06+0100\n"
-"PO-Revision-Date: 2019-01-30 22:39:36+0000\n"
+"PO-Revision-Date: 2019-03-07 15:08:19+0000\n"
 "Last-Translator: Ryan Lahfa <masterancpp@gmail.com>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
-"X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
+"X-POT-Import-Date: 2019-02-25 13:41:23+0000\n"
 
 #: papers/static/papers/refresh.js:35
 msgid "Do not show this message anymore"
@@ -36,14 +37,12 @@ msgid "Invalid publication date"
 msgstr "Date de publication invalide"
 
 #: papers/static/papers/refresh.js:72
-#, fuzzy
-#| msgid "Invalid publication date"
 msgid "No publication date"
-msgstr "Date de publication invalide"
+msgstr "Date de publication absente"
 
 #: papers/static/papers/refresh.js:74
 msgid "Paper is invalid"
-msgstr ""
+msgstr "L'article est invalide"
 
 #: papers/static/papers/refresh.js:109
 msgid "We ignored %(count)s paper from your ORCiD profile."
@@ -67,40 +66,3 @@ msgstr "Montrer plus d'informations"
 msgid "Show less information"
 msgstr "Montrer moins d'informations"
 
-#~ msgid "Permalink to this headline"
-#~ msgstr "Lien permanent vers ce titre"
-
-#~ msgid "Permalink to this definition"
-#~ msgstr "Lien permanent vers cette définition"
-
-#~ msgid "Hide Search Matches"
-#~ msgstr "Cacher les résultats de recherche"
-
-#~ msgid "Searching"
-#~ msgstr "Recherche en cours"
-
-#~ msgid "Preparing search..."
-#~ msgstr "Préparation de la recherche..."
-
-#~ msgid "Search Results"
-#~ msgstr "Résultats de recherche"
-
-#~ msgid ""
-#~ "Your search did not match any documents. Please make sure that all words "
-#~ "are spelled correctly and that you've selected enough categories."
-#~ msgstr ""
-#~ "Votre recherche ne correspond à aucun document. Veuillez vérifier que "
-#~ "tous les mots sont orthographiés correctement et que vous avez "
-#~ "sélectionné suffisamment de catégories."
-
-#~ msgid "Search finished, found %s page(s) matching the search query."
-#~ msgstr "Recherche terminée: %s page(s) trouvées pour cette recherche."
-
-#~ msgid ", in "
-#~ msgstr ", dans "
-
-#~ msgid "Expand sidebar"
-#~ msgstr "Afficher la barre latérale"
-
-#~ msgid "Collapse sidebar"
-#~ msgstr "Masquer la barre latérale"

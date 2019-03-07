@@ -1,31 +1,29 @@
-# Translation of Dissemin papers to Abkhazian (Аҧсшәа)
+# Translation of Dissemin papers to Zazaki (Zazaki)
 # Exported from translatewiki.net
 #
-# Author: Андрей
+# Author: Orbot707
 msgid ""
 msgstr ""
 ""
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-25 12:06+0100\n"
-"PO-Revision-Date: 2019-03-07 15:08:18+0000\n"
-"Language: ab\n"
+"PO-Revision-Date: 2019-03-07 15:08:19+0000\n"
+"X-POT-Import-Date: 2019-02-25 13:41:23+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-02-25 13:41:23+0000\n"
+"Language: diq\n"
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: papers/static/papers/refresh.js:35
 msgid "Do not show this message anymore"
-msgstr ""
+msgstr "Ena mesaci qet fına measne"
 
 #: papers/static/papers/refresh.js:66
 msgid "No author"
-msgstr "Автор дыҟам"
+msgstr "Nuştekar çıniyo"
 
 #: papers/static/papers/refresh.js:68
 msgid "No title"
-msgstr "Хьӡыда"
+msgstr "Sername çıniyo"
 
 #: papers/static/papers/refresh.js:70
 msgid "Invalid publication date"
@@ -56,9 +54,9 @@ msgstr ""
 
 #: papers/static/papers/refresh.js:139 papers/static/papers/refresh.js:167
 msgid "Show more information"
-msgstr "Иаарҧштәуп еиҳаны аинформациа"
+msgstr "Zêde melumati bımocne"
 
 #: papers/static/papers/refresh.js:164
 msgid "Show less information"
-msgstr "Иаарҧштәуп еиҵаны аинформациа"
+msgstr "Dehana tay melumati bımocne"
 

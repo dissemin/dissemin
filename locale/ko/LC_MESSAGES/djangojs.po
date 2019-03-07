@@ -5,13 +5,14 @@
 # Author: Ykhwong
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 12:06+0100\n"
-"PO-Revision-Date: 2019-01-30 22:39:37+0000\n"
+"PO-Revision-Date: 2019-03-07 15:08:19+0000\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
+"X-POT-Import-Date: 2019-02-25 13:41:23+0000\n"
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
@@ -33,7 +34,6 @@ msgstr "잘못된 발행 날짜"
 
 #: papers/static/papers/refresh.js:72
 #, fuzzy
-#| msgid "Invalid publication date"
 msgid "No publication date"
 msgstr "잘못된 발행 날짜"
 
@@ -42,6 +42,7 @@ msgid "Paper is invalid"
 msgstr ""
 
 #: papers/static/papers/refresh.js:109
+#, invalid-plural
 msgid "We ignored %(count)s paper from your ORCiD profile."
 msgid_plural "We ignored %(count)s papers from your ORCiD profile."
 msgstr[0] ""
@@ -62,36 +63,3 @@ msgstr "더 많은 정보 표시"
 msgid "Show less information"
 msgstr "더 적은 정보 표시"
 
-#~ msgid "Permalink to this headline"
-#~ msgstr "이 헤드라인의 고유링크"
-
-#~ msgid "Permalink to this definition"
-#~ msgstr "이 정의의 고유링크"
-
-#~ msgid "Hide Search Matches"
-#~ msgstr "검색 일치 항목 숨기기"
-
-#~ msgid "Searching"
-#~ msgstr "검색 중"
-
-#~ msgid "Preparing search..."
-#~ msgstr "검색을 준비하는 중..."
-
-#~ msgid "Search Results"
-#~ msgstr "검색 결과"
-
-#~ msgid ""
-#~ "Your search did not match any documents. Please make sure that all words "
-#~ "are spelled correctly and that you've selected enough categories."
-#~ msgstr ""
-#~ "검색과 일치하는 문서가 없습니다. 모든 단어의 철자가 올바른지, 또 충분한 분"
-#~ "류를 선택했는지 확인해 주십시오."
-
-#~ msgid "Search finished, found %s page(s) matching the search query."
-#~ msgstr "검색이 완료되었으며, 검색 쿼리와 일치하는 문서 %s개를 찾았습니다."
-
-#~ msgid "Expand sidebar"
-#~ msgstr "사이드바 펼치기"
-
-#~ msgid "Collapse sidebar"
-#~ msgstr "사이드바 축소"

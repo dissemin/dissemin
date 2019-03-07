@@ -4,16 +4,16 @@
 # Author: MSClaudiu
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 12:06+0100\n"
-"PO-Revision-Date: 2019-01-30 22:39:37+0000\n"
+"PO-Revision-Date: 2019-03-07 15:08:20+0000\n"
 "Language: ro\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
+"X-POT-Import-Date: 2019-02-25 13:41:23+0000\n"
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
-"Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ( (n == 0 || (n%100 > 0 && n"
-"%100 < 20)) ? 1 : 2 );\n"
+"Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ( (n == 0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2 );\n"
 
 #: papers/static/papers/refresh.js:35
 msgid "Do not show this message anymore"
@@ -33,7 +33,6 @@ msgstr "Data publicării incorectă."
 
 #: papers/static/papers/refresh.js:72
 #, fuzzy
-#| msgid "Invalid publication date"
 msgid "No publication date"
 msgstr "Data publicării incorectă."
 
@@ -64,41 +63,3 @@ msgstr "Adăugare mai multe informații"
 msgid "Show less information"
 msgstr "Afișați mai puține informații"
 
-#~ msgid "Permalink to this headline"
-#~ msgstr "Permalink la acest titlu"
-
-#~ msgid "Permalink to this definition"
-#~ msgstr "Permalink la această definiție"
-
-#~ msgid "Hide Search Matches"
-#~ msgstr "Ascundeți potrivirile de căutare"
-
-#~ msgid "Searching"
-#~ msgstr "Se caută..."
-
-#~ msgid "Preparing search..."
-#~ msgstr "Pregătiți căutarea ..."
-
-#~ msgid "Search Results"
-#~ msgstr "Rezultatele căutării"
-
-#~ msgid ""
-#~ "Your search did not match any documents. Please make sure that all words "
-#~ "are spelled correctly and that you've selected enough categories."
-#~ msgstr ""
-#~ "Căutarea dvs. nu a corespuns nici unui document. Asigurați-vă că toate "
-#~ "cuvintele sunt scrise corect și că ați selectat suficiente categorii."
-
-#~ msgid "Search finished, found %s page(s) matching the search query."
-#~ msgstr ""
-#~ "Căutarea a fost terminată, au fost găsite %s paginile care corespund "
-#~ "interogării de căutare."
-
-#~ msgid ", in "
-#~ msgstr ", în "
-
-#~ msgid "Expand sidebar"
-#~ msgstr "Extindeți bara laterală"
-
-#~ msgid "Collapse sidebar"
-#~ msgstr "Restrângeți bara laterală"

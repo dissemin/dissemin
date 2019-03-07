@@ -5,17 +5,16 @@
 # Author: ديفيد
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 12:06+0100\n"
-"PO-Revision-Date: 2019-01-30 22:39:35+0000\n"
+"PO-Revision-Date: 2019-03-07 15:08:18+0000\n"
 "Language: ar\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
+"X-POT-Import-Date: 2019-02-25 13:41:23+0000\n"
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
-"Plural-Forms: nplurals=6; plural=(n == 0) ? 0 : ( (n == 1) ? 1 : ( (n == "
-"2) ? 2 : ( (n%100 >= 3 && n%100 <= 10) ? 3 : ( (n%100 >= 11 && n%100 <= "
-"99) ? 4 : 5 ) ) ) );\n"
+"Plural-Forms: nplurals=6; plural=(n == 0) ? 0 : ( (n == 1) ? 1 : ( (n == 2) ? 2 : ( (n%100 >= 3 && n%100 <= 10) ? 3 : ( (n%100 >= 11 && n%100 <= 99) ? 4 : 5 ) ) ) );\n"
 
 #: papers/static/papers/refresh.js:35
 msgid "Do not show this message anymore"
@@ -35,13 +34,12 @@ msgstr "تاريخ النشر غير صالح"
 
 #: papers/static/papers/refresh.js:72
 #, fuzzy
-#| msgid "Invalid publication date"
 msgid "No publication date"
 msgstr "تاريخ النشر غير صالح"
 
 #: papers/static/papers/refresh.js:74
 msgid "Paper is invalid"
-msgstr ""
+msgstr "الورقة غير صالحة"
 
 #: papers/static/papers/refresh.js:109
 msgid "We ignored %(count)s paper from your ORCiD profile."
@@ -69,40 +67,3 @@ msgstr "عرض معلومات اكثر"
 msgid "Show less information"
 msgstr "عرض معلومات أقل"
 
-#~ msgid "Permalink to this headline"
-#~ msgstr "رابط ثابت لهذا العنوان"
-
-#~ msgid "Permalink to this definition"
-#~ msgstr "رابط ثابت لهذا التعريف"
-
-#~ msgid "Hide Search Matches"
-#~ msgstr "إخفاء تطابقات البحث"
-
-#~ msgid "Searching"
-#~ msgstr "جارٍ البحث"
-
-#~ msgid "Preparing search..."
-#~ msgstr "جارٍ إعداد البحث..."
-
-#~ msgid "Search Results"
-#~ msgstr "نتائج البحث"
-
-#~ msgid ""
-#~ "Your search did not match any documents. Please make sure that all words "
-#~ "are spelled correctly and that you've selected enough categories."
-#~ msgstr ""
-#~ "بحثك لم تطابق أي وثائق; الرجاء التأكد من أن جميع الكلمات مكتوبة بشكل صحيح "
-#~ "وأنك حددت فئات كافية."
-
-#~ msgid "Search finished, found %s page(s) matching the search query."
-#~ msgstr ""
-#~ "تم الانتهاء من البحث، ووُجِد %s page(s) من الصفحات المتطابقة مع طلب البحث."
-
-#~ msgid ", in "
-#~ msgstr ", في "
-
-#~ msgid "Expand sidebar"
-#~ msgstr "وسع الشريط الجانبي"
-
-#~ msgid "Collapse sidebar"
-#~ msgstr "تصغير الشريط الجانبي"

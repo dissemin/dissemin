@@ -4,13 +4,14 @@
 # Author: Joedalton
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 12:06+0100\n"
-"PO-Revision-Date: 2019-01-30 22:39:36+0000\n"
+"PO-Revision-Date: 2019-03-07 15:08:19+0000\n"
 "Language: da\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2017-10-24 16:17:29+0000\n"
+"X-POT-Import-Date: 2019-02-25 13:41:23+0000\n"
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -32,7 +33,6 @@ msgstr "Ugyldig udgivelsesdato"
 
 #: papers/static/papers/refresh.js:72
 #, fuzzy
-#| msgid "Invalid publication date"
 msgid "No publication date"
 msgstr "Ugyldig udgivelsesdato"
 
@@ -62,39 +62,3 @@ msgstr "Vis yderligere information"
 msgid "Show less information"
 msgstr "Vis mindre information"
 
-#~ msgid "Permalink to this headline"
-#~ msgstr "Permanent henvisning til denne overskrift"
-
-#~ msgid "Permalink to this definition"
-#~ msgstr "Permanent henvisning til denne definition"
-
-#~ msgid "Hide Search Matches"
-#~ msgstr "Skjul søgematch"
-
-#~ msgid "Searching"
-#~ msgstr "Søger"
-
-#~ msgid "Preparing search..."
-#~ msgstr "Forbereder søgning ..."
-
-#~ msgid "Search Results"
-#~ msgstr "Søgeresultater"
-
-#~ msgid ""
-#~ "Your search did not match any documents. Please make sure that all words "
-#~ "are spelled correctly and that you've selected enough categories."
-#~ msgstr ""
-#~ "Din søgning fandt  ingen dokumenter. Kontroller stavning for alle ord og "
-#~ "at du har valgt nok kategorier."
-
-#~ msgid "Search finished, found %s page(s) matching the search query."
-#~ msgstr "Søgning færdig, fandt %s sider, der matcher forespørgslen."
-
-#~ msgid ", in "
-#~ msgstr ", i "
-
-#~ msgid "Expand sidebar"
-#~ msgstr "Udvide sidebjælke"
-
-#~ msgid "Collapse sidebar"
-#~ msgstr "Saml sidebjælke"
