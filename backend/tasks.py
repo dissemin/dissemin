@@ -36,9 +36,7 @@ from papers.errors import MetadataSourceException
 from papers.models import Paper
 from papers.models import PaperWorld
 from papers.models import Researcher
-from papers.models import Institution
 from papers.models import OaiSource
-from publishers.models import Journal
 from publishers.models import Publisher
 from backend.oai import OaiPaperSource
 
@@ -127,10 +125,6 @@ def update_all_stats():
     """
     AccessStatistics.update_all_stats(PaperWorld)
     AccessStatistics.update_all_stats(Publisher)
-    AccessStatistics.update_all_stats(Journal)
-    AccessStatistics.update_all_stats(Institution)
-    #AccessStatistics.update_all_stats(Researcher)
-    #AccessStatistics.update_all_stats(Department)
 
 
 @shared_task(name='update_crossref')
