@@ -34,7 +34,7 @@ which computes the status of a particular paper.
 """
 
 
-
+from time import sleep
 from django.db import models
 from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
@@ -271,13 +271,15 @@ class AccessStatistics(models.Model, BareAccessStatistics):
         self.save()
 
     @classmethod
-    def update_all_stats(self, _class):
+    def update_all_stats(self, _class, delay=1):
         """
         Update all statistics for the objects of a given class.
         This calls the underlying :py:meth:`!update_stats()` function for each instance
         of the model.
         """
         for x in _class.objects.all():
+            if delay:
+                sleep(delay)
             x.update_stats()
 
     class Meta:
