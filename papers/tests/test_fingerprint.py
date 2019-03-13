@@ -3,7 +3,7 @@ from papers.fingerprint import create_paper_plain_fingerprint
 
 class FingerprintTest(TestCase):
     def test_plain_fingerprint(self):
-        self.assertEqual(create_paper_plain_fingerprint(' It  cleans whitespace And Case\\n',[('John','Doe')], 2015),
+        self.assertEqual(create_paper_plain_fingerprint(' It  cleans whitespace And Case\n',[('John','Doe')], 2015),
                          'it-cleans-whitespace-and-case/doe')
         self.assertEqual(create_paper_plain_fingerprint('HTML tags are <emph>removed</emph>',[('John','Doe')], 2015),
                          'html-tags-are-removed/doe')
