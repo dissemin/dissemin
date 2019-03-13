@@ -282,30 +282,6 @@ def weight_first_names(name_pair):
 def name_similarity(a, b):
     """
     Returns a float: how similar are these two names?
-    Examples:
-
-    >>> int(10*name_similarity(('Robin', 'Ryder'),('Robin', 'Ryder')))
-    8
-    >>> int(10*name_similarity(('Robin', 'Ryder'),('R.', 'Ryder')))
-    4
-    >>> int(10*name_similarity(('R.', 'Ryder'),('R.', 'Ryder')))
-    4
-    >>> int(10*name_similarity(('Robin J.', 'Ryder'),('R.', 'Ryder')))
-    3
-    >>> int(10*name_similarity(('Robin J.', 'Ryder'),('R. J.', 'Ryder')))
-    8
-    >>> int(10*name_similarity(('R. J.', 'Ryder'),('J.', 'Ryder')))
-    3
-    >>> int(10*name_similarity(('Robin', 'Ryder'),('Robin J.', 'Ryder')))
-    7
-    >>> int(10*name_similarity(('W. Timothy','Gowers'), ('Timothy','Gowers')))
-    7
-    >>> int(10*name_similarity(('Robin K.','Ryder'), ('Robin J.', 'Ryder')))
-    0
-    >>> int(10*name_similarity(('Claire', 'Mathieu'),('Claire', 'Kenyon-Mathieu')))
-    0
-    >>> int(10*name_similarity(('Amanda P.','Brown'),('Patrick','Brown')))
-    0
     """
 
     if not a or not b or len(a) != 2 or len(b) != 2:

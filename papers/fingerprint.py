@@ -45,15 +45,15 @@ def create_paper_plain_fingerprint(title, authors, year):
     :param year: the year of publication of the paper
 
     >>> create_paper_plain_fingerprint(' It  cleans whitespace And Case\\n',[('John','Doe')], 2015)
-    u'it-cleans-whitespace-and-case/doe'
+    'it-cleans-whitespace-and-case/doe'
     >>> create_paper_plain_fingerprint('HTML tags are <emph>removed</emph>',[('John','Doe')], 2015)
-    u'html-tags-are-removed/doe'
+    'html-tags-are-removed/doe'
     >>> create_paper_plain_fingerprint('Les accents sont supprimés', [('John','Doe')],2015)
-    u'les-accents-sont-supprimes/doe'
+    'les-accents-sont-supprimes/doe'
     >>> create_paper_plain_fingerprint('Long titles are unambiguous enough to be unique by themselves, no need for authors', [('John','Doe')], 2015)
-    u'long-titles-are-unambiguous-enough-to-be-unique-by-themselves-no-need-for-authors'
+    'long-titles-are-unambiguous-enough-to-be-unique-by-themselves-no-need-for-authors'
     >>> create_paper_plain_fingerprint('Ambiguity', [('John','Doe')], 2014)
-    u'ambiguity-2014/doe'
+    'ambiguity-2014/doe'
     """
     title = kill_html(title)
     title = remove_diacritics(title).lower()

@@ -36,17 +36,17 @@ openaire_doi_re = re.compile(
 def to_doi(candidate):
     """
     >>> to_doi('https://doi.org/10.1145/1721837.1721839')
-    u'10.1145/1721837.1721839'
+    '10.1145/1721837.1721839'
     >>> to_doi('https://doi.org/10.1145/1721837.1721839')
-    u'10.1145/1721837.1721839'
+    '10.1145/1721837.1721839'
     >>> to_doi('10.1145/1721837.1721839')
-    u'10.1145/1721837.1721839'
+    '10.1145/1721837.1721839'
     >>> to_doi('DOI: 10.1145/1721837.1721839')
-    u'10.1145/1721837.1721839'
+    '10.1145/1721837.1721839'
     >>> to_doi('info:eu-repo/semantics/altIdentifier/doi/10.1145/1721837.1721839')
-    u'10.1145/1721837.1721839'
+    '10.1145/1721837.1721839'
     >>> to_doi('10.1093/jhmas/XXXI.4.480')
-    u'10.1093/jhmas/xxxi.4.480'
+    '10.1093/jhmas/xxxi.4.480'
     """
     m = doi_re.match(candidate)
     if m:
@@ -60,8 +60,8 @@ def to_doi(candidate):
 def doi_to_url(doi):
     """
     Takes a (valid) doi and returns its resolving URL
-    >>> doi_to_url(u'10.1093/jhmas/xxxi.4.480')
-    u'https://doi.org/10.1093/jhmas/xxxi.4.480'
+    >>> doi_to_url('10.1093/jhmas/xxxi.4.480')
+    'https://doi.org/10.1093/jhmas/xxxi.4.480'
     """
     return 'https://doi.org/'+doi
 
@@ -69,7 +69,7 @@ def doi_to_url(doi):
 def doi_to_crossref_identifier(doi):
     """
     Returns an internal OAI identifier for the DOI.
-    >>> doi_to_crossref_identifier(u'10.1093/jhmas/xxxi.4.480')
-    u'oai:crossref.org:10.1093/jhmas/xxxi.4.480'
+    >>> doi_to_crossref_identifier('10.1093/jhmas/xxxi.4.480')
+    'oai:crossref.org:10.1093/jhmas/xxxi.4.480'
     """
     return 'oai:crossref.org:'+doi

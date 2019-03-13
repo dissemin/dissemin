@@ -23,6 +23,7 @@
 import datetime
 import re
 import unicodedata
+import codecs
 
 from lxml.html.clean import Cleaner
 from titlecase import titlecase
@@ -274,11 +275,11 @@ def sanitize_html(s):
     '$\\u03b7 + \\u03c9$'
     >>> sanitize_html('abc & def')
     'abc &amp; def'
-    >>> sanitize_html('Universitat Aut\\uFFFDnoma de Barcelona')
+    >>> sanitize_html('Universitat Aut\\\\uFFFDnoma de Barcelona')
     'Universitat Aut�noma de Barcelona'
     """
     s = overescaped_re.sub(r'&#\1;', s)
-    s = unicode4_re.sub(lambda x: x.group(1).decode('unicode-escape'), s)
+    s = unicode4_re.sub(lambda x: codecs.decode(x.group(1), 'unicode-escape'), s)
     s = whitespace_re.sub(r' ', s)
     s = unescape_latex(s)
     s = kill_double_dollars(s)
