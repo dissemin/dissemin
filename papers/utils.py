@@ -23,6 +23,7 @@
 import datetime
 import re
 import unicodedata
+import codecs
 
 from lxml.html.clean import Cleaner
 from titlecase import titlecase
@@ -40,8 +41,8 @@ def filter_punctuation(lst):
     :param lst: list of strings
     :returns: all the strings that contain at least one alphanumeric character
 
-    >>> filter_punctuation([u'abc',u'ab.',u'/,',u'a-b',u'#=', u'0'])
-    [u'abc', u'ab.', u'a-b', u'0']
+    >>> filter_punctuation(['abc','ab.','/,','a-b','#=', '0'])
+    ['abc', 'ab.', 'a-b', '0']
     """
     return [ c for c in lst if filter_punctuation_alphanum_regex.match(c) is not None ]
 
@@ -55,12 +56,12 @@ def nocomma(lst):
     :returns: these strings joined by commas, ensuring they do not contain
         commas themselves
 
-    >>> nocomma([u'a',u'b',u'cd'])
-    u'a,b,cd'
-    >>> nocomma([u'a,',u'b'])
-    u'a,b'
-    >>> nocomma([u'abc',u'',u'\\n',u'def'])
-    u'abc, , ,def'
+    >>> nocomma(['a','b','cd'])
+    'a,b,cd'
+    >>> nocomma(['a,','b'])
+    'a,b'
+    >>> nocomma(['abc','','\\n','def'])
+    'abc, , ,def'
     """
     lst = [str(x).replace(',', '').replace('\n', '') for x in lst]
     lst = [x or ' ' for x in lst]
@@ -74,11 +75,11 @@ def ulower(s):
     :return: unicode(s).lower()
 
     >>> ulower('abSc')
-    u'absc'
+    'absc'
     >>> ulower(None)
-    u'none'
+    'none'
     >>> ulower(89)
-    u'89'
+    '89'
     """
     return str(s).lower()
 
@@ -89,10 +90,10 @@ def nstrip(s):
 
     >>> nstrip(None) is None
     True
-    >>> nstrip(u'aa')
-    u'aa'
-    >>> nstrip(u'  aa \\n')
-    u'aa'
+    >>> nstrip('aa')
+    'aa'
+    >>> nstrip('  aa \\n')
+    'aa'
     """
     return s.strip() if s else None
 
@@ -102,12 +103,12 @@ def remove_diacritics(s):
     Removes diacritics using the `unidecode` package.
 
     :param: an str or unicode string
-    :returns: if str: the same string. if unicode: the unidecoded string.
+    :returns: if bytes: the same string. if str: the unidecoded string.
 
-    >>> remove_diacritics(u'aéèï')
+    >>> remove_diacritics('aéèï')
     'aeei'
-    >>> remove_diacritics(u'aéè'.encode('utf-8'))
-    'a\\xc3\\xa9\\xc3\\xa8'
+    >>> remove_diacritics('aéè'.encode('utf-8'))
+    b'a\\xc3\\xa9\\xc3\\xa8'
     """
     if isinstance(s, str):
         # for issue #305
@@ -123,7 +124,7 @@ def iunaccent(s):
     """
     Removes diacritics and case.
 
-    >>> iunaccent(u'BÉPO forever')
+    >>> iunaccent('BÉPO forever')
     'bepo forever'
     """
     return remove_diacritics(s).lower()
@@ -136,10 +137,10 @@ def tokenize(l):
     """
     A (very very simple) tokenizer.
 
-    >>> tokenize(u'Hello world!')
-    [u'Hello', u'world!']
-    >>> tokenize(u'99\\tbottles\\nof  beeron \\tThe Wall')
-    [u'99', u'bottles', u'of', u'beeron', u'The', u'Wall']
+    >>> tokenize('Hello world!')
+    ['Hello', 'world!']
+    >>> tokenize('99\\tbottles\\nof  beeron \\tThe Wall')
+    ['99', 'bottles', 'of', 'beeron', 'The', 'Wall']
     """
     return tokenize_space_re.split(l)
 
@@ -149,12 +150,12 @@ def maybe_recapitalize_title(title):
     Recapitalize a title if it is mostly uppercase
     (number of uppercase letters > number of lowercase letters)
 
-    >>> maybe_recapitalize_title(u'THIS IS CALLED SCREAMING')
-    u'This Is Called Screaming'
-    >>> maybe_recapitalize_title(u'This is just a normal title')
-    u'This is just a normal title'
-    >>> maybe_recapitalize_title(u'THIS IS JUST QUITE Awkward')
-    u'THIS IS JUST QUITE Awkward'
+    >>> maybe_recapitalize_title('THIS IS CALLED SCREAMING')
+    'This Is Called Screaming'
+    >>> maybe_recapitalize_title('This is just a normal title')
+    'This is just a normal title'
+    >>> maybe_recapitalize_title('THIS IS JUST QUITE Awkward')
+    'THIS IS JUST QUITE Awkward'
     """
     nb_upper, nb_lower = 0, 0
     for letter in title:
@@ -190,14 +191,14 @@ def remove_latex_math_dollars(string):
     """
     Removes LaTeX dollar tags.
 
-    >>> remove_latex_math_dollars(u'This is $\\\\beta$-reduction explained')
-    u'This is \\\\beta-reduction explained'
-    >>> remove_latex_math_dollars(u'Compare $\\\\frac{2}{3}$ to $\\\\pi$')
-    u'Compare \\\\frac{2}{3} to \\\\pi'
-    >>> remove_latex_math_dollars(u'Click here to win $100')
-    u'Click here to win $100'
-    >>> remove_latex_math_dollars(u'What do you prefer, $50 or $100?')
-    u'What do you prefer, $50 or $100?'
+    >>> remove_latex_math_dollars('This is $\\\\beta$-reduction explained')
+    'This is \\\\beta-reduction explained'
+    >>> remove_latex_math_dollars('Compare $\\\\frac{2}{3}$ to $\\\\pi$')
+    'Compare \\\\frac{2}{3} to \\\\pi'
+    >>> remove_latex_math_dollars('Click here to win $100')
+    'Click here to win $100'
+    >>> remove_latex_math_dollars('What do you prefer, $50 or $100?')
+    'What do you prefer, $50 or $100?'
     """
     return latexmath_re.sub(r'\1', string)
 
@@ -210,10 +211,10 @@ def unescape_latex(s):
     Replaces LaTeX symbols by their unicode counterparts using
     the `unicode_tex` package.
 
-    >>> unescape_latex(u'the $\\\\alpha$-rays of $\\\\Sigma$-algebras')
-    u'the $\\u03b1$-rays of $\\u03a3$-algebras'
-    >>> unescape_latex(u'$\\textit{K}$ -trivial')
-    u'$\\textit{K}$ -trivial'
+    >>> unescape_latex('the $\\\\alpha$-rays of $\\\\Sigma$-algebras')
+    'the $\\u03b1$-rays of $\\u03a3$-algebras'
+    >>> unescape_latex('$\\textit{K}$ -trivial')
+    '$\\textit{K}$ -trivial'
     """
     def conditional_replace(fragment):
         cmd = fragment.group('command')
@@ -243,14 +244,14 @@ def remove_latex_braces(s):
     Removes spurious braces such as in "Th{é}odore" or "a {CADE} conference"
     This should be run *after* unescape_latex
 
-    >>> remove_latex_braces(u'Th{é}odore')
-    u'Th\\xe9odore'
-    >>> remove_latex_braces(u'the {CADE} conference')
-    u'the CADE conference'
-    >>> remove_latex_braces(u'consider 2^{a+b}')
-    u'consider 2^{a+b}'
-    >>> remove_latex_braces(u'{why these braces?}')
-    u'why these braces?'
+    >>> remove_latex_braces('Th{é}odore')
+    'Th\\xe9odore'
+    >>> remove_latex_braces('the {CADE} conference')
+    'the CADE conference'
+    >>> remove_latex_braces('consider 2^{a+b}')
+    'consider 2^{a+b}'
+    >>> remove_latex_braces('{why these braces?}')
+    'why these braces?'
     """
     s = latex_full_line_braces_re.sub(r'\1', s)
     s = latex_word_braces_re.sub(r'\1\2\3', s)
@@ -267,16 +268,18 @@ def sanitize_html(s):
     fixes overescaped HTML characters, and a few other fixes.
 
     >>> sanitize_html('My title<sub>is</sub><a href="http://dissem.in"><sup>nice</sup></a>')
-    u'My title<sub>is</sub><sup>nice</sup>'
+    'My title<sub>is</sub><sup>nice</sup>'
     >>> sanitize_html('$\\\\alpha$-conversion')
-    u'$\\u03b1$-conversion'
+    '$\\u03b1$-conversion'
     >>> sanitize_html('$$\\\\eta + \\\\omega$$')
-    u'$\\u03b7 + \\u03c9$'
+    '$\\u03b7 + \\u03c9$'
     >>> sanitize_html('abc & def')
-    u'abc &amp; def'
+    'abc &amp; def'
+    >>> sanitize_html('Universitat Aut\\\\uFFFDnoma de Barcelona')
+    'Universitat Aut�noma de Barcelona'
     """
     s = overescaped_re.sub(r'&#\1;', s)
-    s = unicode4_re.sub(lambda x: x.group(1).decode('unicode-escape'), s)
+    s = unicode4_re.sub(lambda x: codecs.decode(x.group(1), 'unicode-escape'), s)
     s = whitespace_re.sub(r' ', s)
     s = unescape_latex(s)
     s = kill_double_dollars(s)
@@ -293,7 +296,7 @@ def kill_html(s):
     <div> in titles as sanitize_html removes them)
 
     >>> kill_html('My title<sub>is</sub><a href="http://dissem.in"><sup>nice</sup>    </a>')
-    u'My titleisnice'
+    'My titleisnice'
     """
     if ltgt_re.match(s): # only run HTML sanitizer if there is a '<' or '>'
         orig = html_killer.clean_html('<div>'+s+'</div>')
@@ -310,7 +313,7 @@ def kill_double_dollars(s):
     This is included in the sanitize_html function.
 
     >>> kill_double_dollars('This equation $$\\\\mathrm{P} = \\\\mathrm{NP}$$ breaks my design')
-    u'This equation $\\\\mathrm{P} = \\\\mathrm{NP}$ breaks my design'
+    'This equation $\\\\mathrm{P} = \\\\mathrm{NP}$ breaks my design'
     """
     s = latex_double_dollar_re.sub(r'$\1$', s)
     return s
@@ -323,12 +326,12 @@ def urlize(val):
     :param val: the URL
     :returns: the cleaned URL
 
-    >>> urlize(u'gnu.org')
-    u'http://gnu.org'
+    >>> urlize('gnu.org')
+    'http://gnu.org'
     >>> urlize(None) is None
     True
     >>> urlize(u'https://gnu.org')
-    u'https://gnu.org'
+    'https://gnu.org'
     """
     if val and not val.startswith('http://') and not val.startswith('https://'):
         val = 'http://'+val
@@ -340,9 +343,9 @@ def extract_domain(url):
     """
     Extracts the domain name of an url
 
-    >>> extract_domain(u'https://gnu.org/test.html')
-    u'gnu.org'
-    >>> extract_domain(u'nonsense') is None
+    >>> extract_domain('https://gnu.org/test.html')
+    'gnu.org'
+    >>> extract_domain('nonsense') is None
     True
     """
     match = domain_re.match(url)
@@ -362,8 +365,8 @@ def jpath(path, js, default=None):
                 separated by forward slashes
     :param default: the default value to return when the key is not found
 
-    >>> jpath(u'message/items', {u'message':{u'items':u'hello'}})
-    u'hello'
+    >>> jpath('message/items', {'message':{'items':'hello'}})
+    'hello'
     """
     def _walk(lst, js):
         if js is None:
@@ -380,10 +383,10 @@ def remove_nones(dct):
     """
     Return a dict, without the None values
 
-    >>> remove_nones({u'orcid':None,u'wtf':u'pl'})
-    {u'wtf': u'pl'}
-    >>> remove_nones({u'orcid':u'blah',u'hey':u'you'})
-    {u'orcid': u'blah', u'hey': u'you'}
+    >>> remove_nones({'orcid':None,'wtf':'pl'})
+    {'wtf': 'pl'}
+    >>> remove_nones({'orcid':'blah','hey':'you'})
+    {'orcid': 'blah', 'hey': 'you'}
     >>> remove_nones({None:1})
     {None: 1}
     """
@@ -426,13 +429,13 @@ def date_from_dateparts(dateparts):
     datetime.date(1970, 1, 1)
     >>> date_from_dateparts([2015])
     datetime.date(2015, 1, 1)
-    >>> date_from_dateparts([2015,02])
+    >>> date_from_dateparts([2015,2])
     datetime.date(2015, 2, 1)
-    >>> date_from_dateparts([2015,02,16])
+    >>> date_from_dateparts([2015,2,16])
     datetime.date(2015, 2, 16)
-    >>> date_from_dateparts([2015,02,16])
+    >>> date_from_dateparts([2015,2,16])
     datetime.date(2015, 2, 16)
-    >>> date_from_dateparts([2015,02,35])
+    >>> date_from_dateparts([2015,2,35])
     Traceback (most recent call last):
         ...
     ValueError: day is out of range for month
@@ -567,8 +570,8 @@ def validate_orcid(orcid):
 
     See the test suite for a more complete set of examples
 
-    >>> validate_orcid(u' 0000-0001-8633-6098\\n')
-    u'0000-0001-8633-6098'
+    >>> validate_orcid(' 0000-0001-8633-6098\\n')
+    '0000-0001-8633-6098'
     """
     if not orcid:
         return

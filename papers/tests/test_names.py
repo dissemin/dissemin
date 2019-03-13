@@ -34,6 +34,7 @@ from papers.name import recapitalize_word
 from papers.name import shallower_name_similarity
 from papers.name import split_name_words
 from papers.name import unify_name_lists
+from papers.name import match_first_names
 
 
 class MatchNamesTest(unittest.TestCase):
@@ -526,6 +527,14 @@ class UnifyNameListsTest(unittest.TestCase):
                 ('Alessandra', "D'Alessandro"),
             ]) if x[0] != None]),
             3)
+
+    def test_match_first_names(self):
+        self.assertTrue(match_first_names(('A','Amanda')))
+        self.assertTrue(match_first_names(('Amanda','Amanda')))
+        self.assertFalse(match_first_names(('Alfred','Amanda')))
+        self.assertTrue(match_first_names(('patrick','P')))
+        self.assertTrue(match_first_names((None,'Iryna')))
+        self.assertTrue(match_first_names(('Clément','Clement')))
 
 
 def load_tests(loader, tests, ignore):
