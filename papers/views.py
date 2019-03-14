@@ -124,6 +124,7 @@ class PaperSearchView(SearchView):
             request.GET.pop('visible', None)
             request.GET.pop('availability', None)
             request.GET.pop('oa_status', None)
+
         return super(PaperSearchView, self).get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -160,7 +161,8 @@ class PaperSearchView(SearchView):
         args = super(PaperSearchView, self).get_form_kwargs()
 
         if 'data' not in args:
-            args['data'] = {self.search_field:''}
+            args['data'] = {self.search_field: ''}
+
         return args
 
     def render_to_response(self, context, **kwargs):
