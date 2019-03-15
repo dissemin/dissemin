@@ -280,7 +280,7 @@ class RomeoAPI(object):
         """
         # First, determine latest update date for publishers in the model
         latest_update_in_model = None
-        latest_updates = list(Publisher.objects.order_by('-last_updated').values_list('last_updated', flat=True)[:1])
+        latest_updates = list(Publisher.objects.filter(last_updated__isnull=False).order_by('-last_updated').values_list('last_updated', flat=True)[:1])
         if latest_updates:
             latest_update_in_model = latest_updates[0]
 
