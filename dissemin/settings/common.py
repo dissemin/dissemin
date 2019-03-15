@@ -123,6 +123,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.humanize',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
@@ -310,7 +311,6 @@ django.conf.locale.LANG_INFO = LANG_INFO
 TIME_ZONE = 'Europe/Paris'
 USE_I18N = True
 USE_L10N = True
-USE_THOUSAND_SEPARATOR = True
 USE_TZ = True
 LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'),)
 

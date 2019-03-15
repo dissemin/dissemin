@@ -1,4 +1,5 @@
 {% load get_pie_data %}
+{% load humanize %}
 {% load i18n %}
 <div class="access-statistics" id="statspie_n{{ stats_counter }}">
   <div class="statspie_graph"></div>
@@ -23,7 +24,8 @@
         <span class="stats_caption_label">
           <span class="stats_caption_label_text">{{ status.choice_label }}</span>
           <span class="detail">
-            {% cycle stats.num_oa stats.num_ok stats.num_couldbe stats.num_unk stats.num_closed %}
+            {% cycle stats.num_oa stats.num_ok stats.num_couldbe stats.num_unk stats.num_closed as stats_number silent %}
+            {{ stats_number | intcomma }}
           </span>
         </span>
       {% if combined_status_form %}
