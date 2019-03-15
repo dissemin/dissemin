@@ -16,7 +16,7 @@ def authorlink(author):
         url = author.researcher.url
     elif author.orcid:
         url = reverse('researcher-by-orcid', kwargs={'orcid':author.orcid})
-    return mark_safe('<a href="'+url+'">'+escape(str(author.name))+'</a>')
+    return mark_safe('<a href="'+url+'" rel="nofollow">'+escape(str(author.name))+'</a>')
 
 
 @register.filter(is_safe=True)
