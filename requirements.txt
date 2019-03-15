@@ -48,6 +48,6 @@ unicode_tex
 unidecode
 urllib3
 wand
-raven
+sentry-sdk
 python-dateutil # for haystack, as explained here:
 #http://django-haystack.readthedocs.io/en/v2.4.1/management_commands.html

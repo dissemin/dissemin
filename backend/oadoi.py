@@ -29,21 +29,23 @@ class OadoiAPI(object):
 
         self.crossref_source = OaiSource.objects.get(identifier='crossref')
 
-    def load_dump(self, filename, start_doi=None):
+    def load_dump(self, filename, start_doi=None, update_index=False, create_missing_dois=True):
         """
         Reads a dump from the disk and loads it to the db
         """
         with gzip.open(filename, 'r') as f:
             start_doi_seen = start_doi is None
-            for line in f:
+            for idx, line in enumerate(f):
                 record = json.loads(line.decode('utf-8'))
                 if not start_doi_seen and record.get('doi') == start_doi:
                     start_doi_seen = True
+                if idx % 10000 == 0:
+                    print(idx, record.get('doi'))
 
                 if start_doi_seen:
-                    self.create_oairecord(record)
+                    self.create_oairecord(record, update_index, create_missing_dois)
 
-    def create_oairecord(self, record):
+    def create_oairecord(self, record, update_index=True, create_missing_dois=True):
         """
         Given one line of the dump (represented as a dict),
         add it to the corresponding paper (if it exists)
@@ -57,6 +59,8 @@ class OadoiAPI(object):
 
         paper = Paper.get_by_doi(doi)
         if not paper:
+            if not create_missing_dois:
+                return
             try:
                 paper = Paper.create_by_doi(doi)
             except (MetadataSourceException, ValueError):
@@ -91,6 +95,7 @@ class OadoiAPI(object):
             try:
                 paper.add_oairecord(record)
                 paper.update_availability()
-                paper.update_index()
+                if update_index:
+                    paper.update_index()
             except (DataError, ValueError):
                 print('Record does not fit in the DB')

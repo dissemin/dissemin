@@ -579,6 +579,7 @@ class CrossRefAPI(object):
                     if not first_doi_seen:
                         continue
 
+                    print(record.get('DOI'))
                     bare_paper = self.save_doi_metadata(record)
                     p = Paper.from_bare(bare_paper)
 
