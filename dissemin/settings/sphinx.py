@@ -103,7 +103,6 @@ INSTALLED_APPS = (
     'django_countries',
     'leaflet',
     'djgeojson',
-    'raven.contrib.django.raven_compat'
 )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
