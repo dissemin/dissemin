@@ -1104,7 +1104,8 @@ class Paper(models.Model, BarePaper):
             return None
         # there should not be more than one paper in this
         # queryset
-        return cls.objects.filter(oairecord__doi=doi).first()
+        for paper in cls.objects.filter(oairecord__doi=doi)[:1]:
+            return paper
 
     @classmethod
     def create_by_hal_id(self, hal_id, bare=False):
