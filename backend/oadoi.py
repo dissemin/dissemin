@@ -56,6 +56,8 @@ class OadoiAPI(object):
         prefix = doi.split('/')[0]
         if prefix in free_doi_prefixes:
             return
+        if not record.get('oa_locations'):
+            return
 
         paper = Paper.get_by_doi(doi)
         if not paper:
@@ -68,6 +70,7 @@ class OadoiAPI(object):
             if not paper:
                 print('no such paper for doi {doi}'.format(doi=doi))
                 return
+        print(doi)
 
         for oa_location in record.get('oa_locations') or []:
             url = oa_location['url']
