@@ -4,6 +4,7 @@
 import gzip
 import json
 from django.db import DataError
+from datetime import datetime
 
 from papers.models import Paper
 from papers.models import OaiSource
@@ -33,14 +34,22 @@ class OadoiAPI(object):
         """
         Reads a dump from the disk and loads it to the db
         """
+        last_rate_report = None
+        report_batch_size = 1000
         with gzip.open(filename, 'r') as f:
             start_doi_seen = start_doi is None
             for idx, line in enumerate(f):
                 record = json.loads(line.decode('utf-8'))
                 if not start_doi_seen and record.get('doi') == start_doi:
                     start_doi_seen = True
-                if idx % 10000 == 0:
+                if idx % report_batch_size == 0:
                     print(idx, record.get('doi'))
+                    if last_rate_report:
+                        td = (datetime.utcnow() - last_rate_report).total_seconds()
+                        if td:
+                            print('importing speed: {} lines/sec'.format(report_batch_size/float(td)))
+                    last_rate_report = datetime.utcnow()
+
 
                 if start_doi_seen:
                     self.create_oairecord(record, update_index, create_missing_dois)
