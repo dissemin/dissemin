@@ -57,7 +57,7 @@ $.ajax({ url: 'https://{{ ORCID_BASE_DOMAIN }}/userStatus.json?logUserOut=true',
                             </ul>
                         </li>
                     {% else %}
-                    <li><a href="{% url "account_login" %}?next={{ request.get_full_path |urlencode}}">{% trans "Login" %}</a></li>
+                    <li><a href="{% url "account_login" %}?next={{ request.get_full_path |urlencode}}" rel="nofollow">{% trans "Login" %}</a></li>
                     {% endif %}
                     </ul>
                 </div>
