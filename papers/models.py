@@ -819,7 +819,7 @@ class Paper(models.Model, BarePaper):
         self.authors_list[position]['researcher_id'] = researcher_id
         self.save(update_fields=['authors_list'])
 
-    def add_oairecord(self, oairecord):
+    def add_oairecord(self, oairecord, check_by_doi=True):
         """
         Adds a record (possibly bare) to the paper, by saving it in
         the database
@@ -829,7 +829,7 @@ class Paper(models.Model, BarePaper):
 
         # Test first if there is no other record with this DOI
         doi = oairecord.doi
-        if doi:
+        if doi and check_by_doi:
             matches = OaiRecord.objects.filter(doi=doi)[:1]
             if matches:
                 rec = matches[0]
@@ -1104,8 +1104,8 @@ class Paper(models.Model, BarePaper):
             return None
         # there should not be more than one paper in this
         # queryset
-        for paper in cls.objects.filter(oairecord__doi=doi)[:1]:
-            return paper
+        for record in OaiRecord.objects.filter(doi=doi)[:1]:
+            return record.about
 
     @classmethod
     def create_by_hal_id(self, hal_id, bare=False):

@@ -71,6 +71,7 @@ class OadoiAPI(object):
                 print('no such paper for doi {doi}'.format(doi=doi))
                 return
         print(doi)
+        paper.cache_oairecords()
 
         for oa_location in record.get('oa_locations') or []:
             url = oa_location['url']
@@ -96,9 +97,13 @@ class OadoiAPI(object):
                 splash_url=url,
                 pdf_url=oa_location['url'])
             try:
-                paper.add_oairecord(record)
-                paper.update_availability()
-                if update_index:
-                    paper.update_index()
+                # We disable checks by DOI since we know the paper has been looked up by DOI already.
+                old_pdf_url = paper.pdf_url
+                paper.add_oairecord(record, check_by_doi=False)
+                super(Paper, paper).update_availability()
+                if old_pdf_url != paper.pdf_url:
+                    paper.save()
+                    if update_index:
+                        paper.update_index()
             except (DataError, ValueError):
                 print('Record does not fit in the DB')
