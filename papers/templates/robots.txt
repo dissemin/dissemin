@@ -1,2 +1,18 @@
 User-Agent: MJ12bot
 Crawl-Delay:   10
+Disallow: /0000-*
+Disallow: /deposit_paper/*
+Disallow: /accounts/*
+Disallow: /search/?authors=*
+Disallow: /orcid/*
+
+User-Agent: 360Spider
+Disallow: /
+
+User-Agent: *
+Crawl-Delay: 3
+Disallow: /0000-*
+Disallow: /deposit_paper/*
+Disallow: /accounts/*
+Disallow: /search/?authors=*
+Disallow: /orcid/*
