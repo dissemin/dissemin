@@ -384,6 +384,7 @@ class PaperView(SlugDetailView):
         pk = self.kwargs.get('pk', None)
         doi = self.kwargs.get('doi', None)
         if doi:
+            doi = unquote(doi)
             doi = to_doi(doi)
 
         paper = None

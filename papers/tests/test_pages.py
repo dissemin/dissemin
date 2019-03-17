@@ -229,7 +229,19 @@ class PaperPagesTest(RenderingTest):
 
     def test_paper_by_doi(self):
         publi = OaiRecord.objects.filter(doi__isnull=False)[0]
-        self.checkPermanentRedirect('paper-doi', kwargs={'doi': publi.doi})
+        self.checkPermanentRedirect('paper-doi', kwargs={'doi': publi.doi},
+            url=publi.about.url)
+
+    def test_paper_by_doi_escaped(self):
+        """
+        Automatically unescape DOIs, for issue
+        https://github.com/dissemin/dissemin/issues/517
+        """
+        paper = Paper.create_by_doi('10.1175/1520-0426(2003)020<0383%3ARCAACO>2.0.CO%3B2')
+        paper.save()
+        self.checkPermanentRedirect('paper-doi',
+            kwargs={'doi':'10.1175%2F1520-0426%282003%29020%3C0383%3ARCAACO%3E2.0.CO%3B2'},
+            url=paper.url)
 
     def test_invalid_doi(self):
         self.check404('paper-doi', kwargs={'doi':'10.1blabla'})
