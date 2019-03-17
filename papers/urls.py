@@ -41,6 +41,7 @@ urlpatterns = [
         url(r'^p/(?P<pk>\d+)/(?P<slug>[\w-]*)$',
             views.PaperView.as_view(), name='paper'),
         url(r'^(?P<doi>10\..*)', views.PaperView.as_view(), name='paper-doi'),
+        url(r'^p/direct/(?P<doi>10\..*)', views.redirect_by_doi, name='paper-redirect-doi'),
         url(r'^search/b/(?P<publisher>\d+)/(?P<slug>[\w-]*)$',
             views.PublisherPapersView.as_view(), name='publisher-papers'),
         url(r'^journal/(?P<journal>\d+)/$',

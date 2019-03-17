@@ -41,10 +41,12 @@ from django.utils.encoding import escape_uri_path
 from django.utils.translation import ugettext as _
 from django.utils.translation import ungettext
 from django.utils.http import urlencode
+from django.utils.six.moves.urllib.parse import unquote
 from django.views import generic
 from haystack.generic_views import SearchView
 from notification.api import get_notifications
 from papers.doi import to_doi
+from papers.doi import doi_to_url
 from papers.errors import MetadataSourceException
 from papers.forms import PaperForm
 from papers.forms import FrontPageSearchForm
@@ -434,4 +436,19 @@ class PaperView(SlugDetailView):
 
 class InstitutionsMapView(generic.base.TemplateView):
     template_name = 'papers/institutions.html'
+
+def redirect_by_doi(request, doi):
+    """
+    This view is inherited from doai.io, migrated to this code base
+    to preserve the existing behaviour. We could instead
+    redirect to unpaywall, but that would not include ResearchGate urls.
+    """
+    doi = unquote(doi)
+    doi = to_doi(doi)
+    if not doi:
+        raise Http404(_("Invalid DOI."))
+    paper = Paper.get_by_doi(doi)
+    if paper and paper.pdf_url:
+        return HttpResponsePermanentRedirect(paper.pdf_url)
+    return HttpResponsePermanentRedirect(doi_to_url(doi))
 

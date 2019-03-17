@@ -34,6 +34,7 @@ from papers.models import Paper
 from papers.models import Researcher
 from papers.utils import overescaped_re
 from django.contrib.auth.models import User
+from papers.doi import doi_to_url
 
 
 # TODO TO BE TESTED
@@ -78,7 +79,13 @@ class RenderingTest(django.test.TestCase):
             return self.checkHtml(self.getPage(*args, **kwargs))
 
     def checkPermanentRedirect(self, *args, **kwargs):
-        self.assertEqual(self.getPage(*args, **kwargs).status_code, 301)
+        target_url = kwargs.get('url')
+        if target_url:
+            del kwargs['url']
+        response = self.getPage(*args, **kwargs)
+        self.assertEqual(response.status_code, 301)
+        if target_url:
+            self.assertEqual(response.url, target_url)
 
     def checkTemporaryRedirect(self, *args, **kwargs):
         self.assertEqual(self.getPage(*args, **kwargs).status_code, 302)
@@ -247,6 +254,21 @@ class PaperPagesTest(RenderingTest):
         self.assertEqual(p.slug, '')
         self.checkPage('paper', args=[p.pk, p.slug])
 
+@pytest.mark.usefixtures("load_test_data")
+class DoaiTest(RenderingTest):
+    def test_redirect_pdf(self):
+        p = Paper.get_by_doi('10.1145/2767109.2767116')
+        p.pdf_url = 'http://my.fantastic.repository/'
+        p.save()
+        self.checkPermanentRedirect('paper-redirect-doi', kwargs={'doi':'10.1145/2767109.2767116'},
+            url=p.pdf_url)
+
+    def test_404(self):
+        self.check404('paper-redirect-doi', kwargs={'doi':'10.1blabla'})
+
+    def test_fallback(self):
+        self.checkPermanentRedirect('paper-redirect-doi', kwargs={'doi': '10.1385/1592597998'},
+            url=doi_to_url('10.1385/1592597998'))
 
 class MiscPagesTest(RenderingTest):
 
