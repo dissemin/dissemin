@@ -172,7 +172,11 @@ function init_paper_module (config) {
   function updateData (data) {
     config.paperSearchResultsNode.html(data.listPapers)
     updateStats(data.stats)
-    config.nbPapersFoundNode.text(data.nb_results)
+    var thousandSeparator = get_format('THOUSAND_SEPARATOR')
+    // Formatting with thousand separator is coming from
+    // https://stackoverflow.com/a/2901298
+    var formattedNbResults = data.nb_results.toString().replace(/\B(?=(\d{3})+(?!\d))/g, thousandSeparator)
+    config.nbPapersFoundNode.text(formattedNbResults)
     flashMessages(parseMessages(data.messages))
     config.hook()
   }
