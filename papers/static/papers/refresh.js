@@ -275,7 +275,7 @@ function init_paper_module (config) {
     _refreshPapers(1500)
   }
 
-  if (config.isSuperUser) {
+  if (config.isSuperUser && config.affiliationForm) {
     config.affiliationForm.change(
       updateResearcherDepartment(config.setResearcherDepartmentURL)
     )
