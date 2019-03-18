@@ -2,12 +2,13 @@
 # Exported from translatewiki.net
 #
 # Author: Eduardo Addad de Oliveira
+# Author: Fitoschido
 msgid ""
 msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 12:06+0100\n"
-"PO-Revision-Date: 2019-03-07 15:08:20+0000\n"
+"PO-Revision-Date: 2019-03-18 07:45:41+0000\n"
 "Language: pt_br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -32,9 +33,8 @@ msgid "Invalid publication date"
 msgstr "Data de publicação inválida"
 
 #: papers/static/papers/refresh.js:72
-#, fuzzy
 msgid "No publication date"
-msgstr "Data de publicação inválida"
+msgstr "Não há data de publicação"
 
 #: papers/static/papers/refresh.js:74
 msgid "Paper is invalid"

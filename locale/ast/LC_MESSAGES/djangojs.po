@@ -1,13 +1,14 @@
 # Translation of Dissemin papers to Asturian (asturianu)
 # Exported from translatewiki.net
 #
+# Author: Fitoschido
 # Author: Xuacu
 msgid ""
 msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 12:06+0100\n"
-"PO-Revision-Date: 2019-03-07 15:08:18+0000\n"
+"PO-Revision-Date: 2019-03-18 07:45:39+0000\n"
 "Language: ast\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -32,9 +33,8 @@ msgid "Invalid publication date"
 msgstr "Fecha de publicación inválida."
 
 #: papers/static/papers/refresh.js:72
-#, fuzzy
 msgid "No publication date"
-msgstr "Fecha de publicación inválida."
+msgstr "Nun hai data d'espublizamientu"
 
 #: papers/static/papers/refresh.js:74
 msgid "Paper is invalid"
