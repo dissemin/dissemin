@@ -39,7 +39,6 @@ from django.shortcuts import render
 from django.template import loader
 from django.utils.encoding import escape_uri_path
 from django.utils.translation import ugettext as _
-from django.utils.translation import ungettext
 from django.utils.http import urlencode
 from django.utils.six.moves.urllib.parse import unquote
 from django.views import generic
@@ -137,11 +136,7 @@ class PaperSearchView(SearchView):
         context['search_description'] = (
             search_description if query_string else _('All papers'))
         context['head_search_description'] = _('Papers')
-        nb_results = self.queryset.count()
-        context['nb_results'] = ungettext(
-            '%d paper found',
-            '%d papers found',
-            nb_results) % nb_results
+        context['nb_results'] = self.queryset.count()
         context['search_stats'] = BareAccessStatistics.from_search_queryset(self.queryset)
         context['on_statuses'] = json.dumps(context['form'].on_statuses())
         context['ajax_url'] = self.request.path

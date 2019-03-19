@@ -172,7 +172,16 @@ function init_paper_module (config) {
   function updateData (data) {
     config.paperSearchResultsNode.html(data.listPapers)
     updateStats(data.stats)
-    config.nbPapersFoundNode.text(data.nb_results)
+    config.nbPapersFoundNode.text(
+      interpolate(
+        ngettext(
+          '%s paper found',
+          '%s papers found',
+          data.nb_results
+        ),
+        [formatNumbersThousands(data.nb_results)]
+      )
+    )
     flashMessages(parseMessages(data.messages))
     config.hook()
   }
@@ -271,7 +280,7 @@ function init_paper_module (config) {
     _refreshPapers(1500)
   }
 
-  if (config.isSuperUser) {
+  if (config.isSuperUser && config.affiliationForm) {
     config.affiliationForm.change(
       updateResearcherDepartment(config.setResearcherDepartmentURL)
     )

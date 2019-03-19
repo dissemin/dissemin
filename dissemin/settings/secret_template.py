@@ -43,3 +43,7 @@ EMAIL_USE_TLS = True
 # http://www.sherpa.ac.uk/romeo/apiregistry.php
 ROMEO_API_KEY = None
 
+# Sentry DSN KEY
+# Used to enable error reporting in Sentry. You should install the sentry-sdk
+# Python module as well.
+SENTRY_DSN = None

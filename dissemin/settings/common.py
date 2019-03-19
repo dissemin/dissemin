@@ -47,14 +47,18 @@ try:
     from .secret import REDIS_PORT
     from .secret import ROMEO_API_KEY
     from .secret import SECRET_KEY
-except ImportError as e:
-    raise RuntimeError(
-        'Secret file is missing, did you forget to add a secret.py in your settings folder?')
-
-try:
-    from .secret import RAVEN_CONFIG
+    from .secret import SENTRY_DSN
 except ImportError:
-    pass  # Non-mandatory secrets.
+    raise RuntimeError(
+        'A secret variable is missing, did you forget to add/update secret.py in your settings folder?')
+
+if SENTRY_DSN:
+    try:
+        import sentry_sdk
+        sentry_sdk.init(SENTRY_DSN)
+    except ImportError:
+        print('Sentry module is not available although a Sentry DSN was set. '
+              'Disabling Sentry reporting...')
 
 # dirname(__file__) → repo/dissemin/settings/common.py
 # .. → repo/dissemin/settings
@@ -349,5 +353,6 @@ DISPLAY_BETA_RIBBON = True
 SETTINGS_EXPORT = [
     'MATHJAX_SELFHOST_URL',
     'DISPLAY_BETA_RIBBON',
+    'SENTRY_DSN',
 ]
 
