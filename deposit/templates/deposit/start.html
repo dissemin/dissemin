@@ -8,9 +8,7 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
-{% block headTitle %}
-{% trans "Depositing" %} "{{ paper.title }}"
-{% endblock %}
+{% block headTitle %}{% trans "Depositing" %} "{{ paper.title }}"{% endblock %}
 
 {% block bodyTitle %}
 {% trans "Depositing" %} "{{ paper.title }}"
