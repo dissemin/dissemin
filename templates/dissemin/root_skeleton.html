@@ -1,5 +1,4 @@
 {% load static %}
-{% load raven %}
 {% load i18n %}
 {% load socialaccount %}
 {% load users %}
@@ -52,8 +51,10 @@
     <script type="text/javascript" src="{% url 'javascript-catalog' %}"></script>
     <script type="text/javascript" src="{% static "libs/es6-promise.min.js" %}"></script>
     <script type="text/javascript" src="{% static "libs/fetch.min.js" %}"></script>
-    <script type="text/javascript" src="{% static "libs/sentry.min.js" %}"></script>
-    <script>Sentry.init({ dsn: '{% sentry_public_dsn %}'})</script>
+    {% if settings.SENTRY_DSN %}
+        <script type="text/javascript" src="{% static "libs/sentry.min.js" %}"></script>
+        <script>Sentry.init({ dsn: '{{ settings.SENTRY_DSN }}'})</script>
+    {% endif %}
     <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
@@ -70,9 +71,6 @@
     <script type="text/javascript">
 
         {% block jsScript %}{% endblock %}
-    </script>
-    <script type="text/javascript">
-        Sentry.init({ dsn: 'https://78c3b30cb31e4e52a85ef64e2807cf71@sentry.io/189330' });
     </script>
     {% block extra_head %}{% endblock %}
     <title>{% block headTitle %}{% endblock %} - Dissemin</title>

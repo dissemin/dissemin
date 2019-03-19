@@ -41,7 +41,6 @@ pillow
 psycopg2
 pyasn1
 pyopenssl>=0.14
-raven
 requests[security]
 requests_mock
 titlecase
