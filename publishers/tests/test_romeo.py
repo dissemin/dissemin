@@ -29,10 +29,10 @@ from unittest.mock import patch
 
 class RomeoAPIStub(RomeoAPI):
     def __init__(self):
-        super(RomeoAPIStub, self).__init__(domain='www.sherpa.ac.uk')
+        super(RomeoAPIStub, self).__init__()
         testdir = os.path.dirname(os.path.abspath(__file__))
         self.datadir = os.path.join(testdir, 'data')
-        
+
     def perform_romeo_query(self, search_terms):
         filename = '_'.join(sorted('{}-{}'.format(key, val.replace(' ','_')) for key, val in search_terms.items())) + '.xml'
         try:
@@ -52,7 +52,7 @@ class RomeoTest(TestCase):
         super(RomeoTest, cls).setUpClass()
         cls.testdir = os.path.dirname(os.path.abspath(__file__))
         cls.api = RomeoAPIStub()
-        
+
         with open(os.path.join(cls.testdir, 'data/issn-0022-328X.xml'), 'rb') as issn_file:
             cls.issn_response = issn_file.read()
         with open(os.path.join(cls.testdir, 'data/jtitle-Physical_Review_E.xml'), 'rb') as jtitle_file:
@@ -63,13 +63,13 @@ class RomeoTest(TestCase):
             cls.latest_update_response = latest_update_file.read()
 
     def test_perform_query(self):
-        api = RomeoAPI(domain='www.sherpa.ac.uk', api_key=None)
+        api = RomeoAPI(api_key=None)
         with requests_mock.mock() as http_mocker:
             http_mocker.get('http://www.sherpa.ac.uk/romeo/api29.php?issn=0022-328X',
                 content=self.issn_response)
             http_mocker.get('http://www.sherpa.ac.uk/romeo/api29.php?jtitle=Physical%20Review%20E',
                 content=self.jtitle_response)
-            
+
             self.assertIsInstance(api.perform_romeo_query(
                 {'issn': '0022-328X'}), etree._ElementTree)
             self.assertIsInstance(api.perform_romeo_query(
@@ -84,20 +84,20 @@ class RomeoTest(TestCase):
         self.assertEqual(journal.essn, None) # Sadly RoMEO does not provide ESSNs vîa this API endpoint
         self.assertEqual(journal.publisher.last_updated, dateutil.parser.parse('2013-03-11T11:27:37Z'))
         self.assertEqual(terms, orig_terms)
-        
+
         from_model = Journal.find(issn=terms['issn'])
         self.assertEqual(from_model, journal)
-        
+
     def test_fetch_journal_updates_publisher(self):
         # First we have an old version of a publisher record
         p = Publisher(name='Harvard University Press', romeo_id='3243',
                       preprint='can', postprint='can', pdfversion='can', last_updated=None)
         p.classify_oa_status()
         p.save()
-        
+
         # Then we fetch one of its journals
         journal = self.api.fetch_journal({'issn':'0073-0688'})
-        
+
         # That updates the publisher object
         publisher = Publisher.objects.get(id=journal.publisher.id)
         self.assertEqual(publisher.id, p.id)
@@ -106,33 +106,33 @@ class RomeoTest(TestCase):
 
     def test_fetch_publisher(self):
         self.assertEqual(self.api.fetch_publisher(None), None)
-        
+
         harvard = self.api.fetch_publisher('Harvard University Press')
         self.assertEqual(harvard.romeo_id, "3243")
         self.assertEqual(harvard.last_updated, dateutil.parser.parse('2018-05-10T10:48:27Z'))
-        
+
         journal = self.api.fetch_journal({'issn':'0073-0688'})
         self.assertEqual(journal.publisher, harvard)
-        
+
     def test_fetch_publisher_long_copyrightlink(self):
         publisher = self.api.fetch_publisher('Presses Universitaires de Nancy - Editions Universitaires de Lorraine')
         self.assertEqual(publisher.romeo_id, '2047')
-        
+
     def test_fetch_dumps(self):
         self.api.fetch_all_publishers()
         self.assertEqual(Publisher.objects.get(alias='Greek National Center of Social Research').romeo_id, '2201')
-        
+
         # mocked separately as a different endpoint is used
         with requests_mock.mock() as http_mocker:
             http_mocker.get('http://www.sherpa.ac.uk/downloads/journal-title-issns.php?format=tsv',
                 content=self.journals_dump_response)
             self.api.fetch_all_journals()
-            
+
         j = Journal.objects.get(issn='0013-9696')
         self.assertEqual(j.title, 'Greek Review of Social Research')
         self.assertEqual(j.essn, '1234-5678')
         self.assertEqual(j.publisher.romeo_id, '2201')
-        
+
     def test_fix_buggy_romeo_ids(self):
         """
         A long time ago, the SHERPA API returned "DOAJ" or "journal" as publisher id for
@@ -147,17 +147,17 @@ class RomeoTest(TestCase):
         with requests_mock.mock() as http_mocker:
             http_mocker.get('http://www.sherpa.ac.uk/downloads/journal-title-issns.php?format=tsv',
                 content=self.journals_dump_response)
-            
+
             with patch.object(Journal, 'change_publisher') as mock_change_publisher:
                 self.api.fetch_all_journals()
-                
+
                 new_publisher = Journal.objects.get(issn='0013-9696').publisher
-                
+
                 mock_change_publisher.assert_not_called()
-            
+
                 self.assertEqual(new_publisher.pk, publisher.pk)
                 self.assertEqual(new_publisher.romeo_id, '2201')
-        
+
     def test_publisher_change(self):
         """
         If the publisher associated with a journal changes, we need to change it too,
@@ -165,22 +165,22 @@ class RomeoTest(TestCase):
         """
         journal = self.api.fetch_journal({'issn':'0013-9696'})
         original_publisher = journal.publisher
-        
+
         new_publisher = Publisher(romeo_id='12345', preprint='cannot', postprint='cannot', pdfversion='cannot')
         new_publisher.save()
         journal.publisher = new_publisher
         journal.save()
-        
+
         # Fetching the updates from romeo should revert to the original (true) publisher
         with requests_mock.mock() as http_mocker:
             http_mocker.get('http://www.sherpa.ac.uk/downloads/journal-title-issns.php?format=tsv',
                 content=self.journals_dump_response)
-            
+
             with patch.object(Journal, 'change_publisher') as mock_change_publisher:
                 self.api.fetch_all_journals()
                 mock_change_publisher.assert_called_once_with(original_publisher)
-        
-        
+
+
     def test_fetch_updates(self):
         with requests_mock.mock() as http_mocker:
             http_mocker.get('http://www.sherpa.ac.uk/downloads/journal-title-issns.php?format=tsv',
@@ -194,14 +194,14 @@ class RomeoTest(TestCase):
             self.assertEqual(p.last_updated, dateutil.parser.parse('2019-02-14T14:05:19Z'))
             p = Publisher.objects.get(romeo_id='2425')
             self.assertEqual(p.url, 'http://intranet.cvut.cz/')
-            
+
             # Fetch updates again
             self.api.fetch_updates()
-            
+
             # A publisher was updated
             p = Publisher.objects.get(romeo_id='2425')
             self.assertEqual(p.url, 'https://intranet.cvut.cz/')
-        
+
     def test_subsequent_publisher_update(self):
         # Fetch a publisher once
         self.api.fetch_all_publishers(modified_since=dateutil.parser.parse('2016-01-01'))
@@ -209,14 +209,14 @@ class RomeoTest(TestCase):
         self.assertEqual(p.last_updated, dateutil.parser.parse('2015-07-22T09:06:34Z'))
         self.assertEqual(p.pdfversion, 'can')
         self.assertTrue('Publisher last reviewed on 22/07/2015' in map(str, p.conditions))
-        
+
         # Refetch it later with updated metadata
         self.api.fetch_all_publishers(modified_since=dateutil.parser.parse('2017-01-01'))
         p = Publisher.objects.get(alias='Czech Technical University in Prague')
         self.assertEqual(p.last_updated, dateutil.parser.parse('2016-08-29T15:22:01Z'))
         self.assertEqual(p.pdfversion, 'cannot')
         self.assertTrue('Publisher last reviewed on 29/08/2016' in map(str, p.conditions))
-        self.assertFalse('Publisher last reviewed on 22/07/2015' in map(str, p.conditions))      
+        self.assertFalse('Publisher last reviewed on 22/07/2015' in map(str, p.conditions))
 
     def test_unicode(self):
         terms = {'issn': '0375-0906'}
@@ -264,14 +264,14 @@ class RomeoTest(TestCase):
             {'issn': '0099-2240'}).publisher.oa_status, 'OK')
         self.assertEqual(self.api.fetch_journal(
             {'issn': '0036-8075'}).publisher.oa_status, 'OK')
-        
+
     def test_get_romeo_latest_update_date(self):
         with requests_mock.mock() as http_mocker:
             http_mocker.get('http://www.sherpa.ac.uk/downloads/download-dates.php?format=xml',
                 content=self.latest_update_response)
-            
+
             latest_updates = self.api.get_romeo_latest_update_date()
-            
+
             self.assertEqual(latest_updates, {
                 'journals': dateutil.parser.parse('2019-02-20T09:18:52Z'),
                 'publishers': dateutil.parser.parse('2019-02-15T10:57:11Z'),

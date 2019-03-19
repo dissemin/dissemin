@@ -59,8 +59,6 @@ DOI_PROXY_SUPPORTS_BATCH = True
 CROSSREF_MAILTO = 'dev@dissem.in'
 CROSSREF_USER_AGENT = 'Dissemin/0.1 (https://dissem.in/; mailto:dev@dissem.in)'
 
-ROMEO_API_DOMAIN = 'romeo-cache.dissem.in'
-
 DEPOSIT_MAX_FILE_SIZE = 1024*1024*200  # 20 MB
 URL_DEPOSIT_DOWNLOAD_TIMEOUT = 10
 

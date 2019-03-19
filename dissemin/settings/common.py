@@ -94,10 +94,6 @@ DOI_PROXY_SUPPORTS_BATCH = True
 CROSSREF_MAILTO = 'dev@dissem.in'
 CROSSREF_USER_AGENT = 'Dissemin/0.1 (https://dissem.in/; mailto:dev@dissem.in)'
 
-### RoMEO proxy ###
-# Set this to 'romeo-cache.dissem.in' for our own cache of their API
-ROMEO_API_DOMAIN = 'www.sherpa.ac.uk'
-
 ### Paper deposits ###
 # Max size of the PDFs (in bytes)
 # 2.5MB - 2621440
