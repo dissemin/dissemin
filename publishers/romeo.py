@@ -43,9 +43,8 @@ from publishers.models import PublisherRestrictionDetail
 
 class RomeoAPI(object):
 
-    def __init__(self, domain=settings.ROMEO_API_DOMAIN, api_key=settings.ROMEO_API_KEY):
-        self.domain = domain
-        self.base_url = 'http://'+domain+'/romeo/api29.php'
+    def __init__(self, api_key=settings.ROMEO_API_KEY):
+        self.base_url = 'http://www.sherpa.ac.uk/romeo/api29.php'
         self.api_key = api_key
 
     def perform_romeo_query(self, search_terms):
@@ -211,7 +210,7 @@ class RomeoAPI(object):
         """
         Fetches all the journals from RoMEO.
         """
-        r = requests.get('http://{}/downloads/journal-title-issns.php'.format(self.domain),
+        r = requests.get('http://www.sherpa.ac.uk/downloads/journal-title-issns.php',
                          {'ak':self.api_key, 'format':'tsv'})
         # r.encoding = 'ISO-8859-1'
         headers = None
@@ -262,7 +261,7 @@ class RomeoAPI(object):
         This returns a dict: the dates can be accessed via the 'publishers' and 'journals'
         keys.
         """
-        r = requests.get('http://{}/downloads/download-dates.php'.format(self.domain),
+        r = requests.get('http://www.sherpa.ac.uk/downloads/download-dates.php',
                          {'ak':self.api_key, 'format':'xml'})
         parser = ET.XMLParser(encoding='ISO-8859-1')
         root = ET.parse(BytesIO(r.content), parser)
