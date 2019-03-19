@@ -105,7 +105,7 @@ class AOFRFormatter(MetadataFormatter):
     def formatName(self):
         return "AOfr"
 
-    def render(self, paper, filename, form):
+    def render(self, paper, filename, form=None):
         xmlns_uri = 'http://www.tei-c.org/ns/1.0'
         xmlns = '{%s}' % xmlns_uri
         nsmap = {None: xmlns_uri, 'hal': 'http://hal.archives-ouvertes.fr'}

@@ -68,7 +68,6 @@ hal-preprod. Feel free to reactivate once this has been solved.
 (2017-10-23)
 """)
 class HALProtocolTest(ProtocolTest):
-
     def setUp(self):
         super(HALProtocolTest, self).setUp()
         self.setUpForProtocol(HALProtocol, Repository(
@@ -172,8 +171,8 @@ class HALProtocolTest(ProtocolTest):
         """
         Submit a preprint
         """
-        oai = OaiPaperSource(endpoint='http://doai.io/oai')
-        oai.add_translator(BASEDCTranslator())
+        oai = OaiPaperSource(self.oaisource)
+        oai.add_translator(BASEDCTranslator(self.oaisource))
         p = oai.create_paper_by_identifier('ftarxivpreprints:oai:arXiv.org:1207.2079', 'base_dc')
         p.authors_list = [p.authors_list[0]]
         r = self.dry_deposit(p,
@@ -189,8 +188,8 @@ class HALProtocolTest(ProtocolTest):
         but for which we fail to find publication metadata.
         The interface should fall back on something lighter.
         """
-        oai = OaiPaperSource(endpoint='http://doai.io/oai')
-        oai.add_translator(BASEDCTranslator())
+        oai = OaiPaperSource(self.oaisource)
+        oai.add_translator(BASEDCTranslator(self.oaisource))
         p = oai.create_paper_by_identifier(
             'ftalborguniv:oai:pure.atira.dk:openaire/30feea10-9c2f-11db-8ed6-000ea68e967b',
             'base_dc')
