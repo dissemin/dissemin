@@ -18,8 +18,10 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from papers.tests.test_pages import RenderingTest
 import pytest
+from django.contrib.auth.models import User
+
+from papers.tests.test_pages import RenderingTest
 
 @pytest.mark.usefixtures("load_test_data")
 class DepositPagesTest(RenderingTest):
@@ -32,3 +34,10 @@ class DepositPagesTest(RenderingTest):
         paper = self.r3.papers[0]
         r = self.getPage('upload_paper', kwargs={'pk': paper.pk})
         self.assertEqual(r.status_code, 302)
+
+    def test_start_deposit_authenticated(self):
+        paper = self.r3.papers[0]
+        User.objects.create_user('superuser', 'email@domain.com', 'mypass')
+        self.client.login(username='superuser', password='mypass')
+        self.checkPage('upload_paper', kwargs={'pk': paper.pk})
+
