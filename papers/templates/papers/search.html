@@ -4,6 +4,7 @@
 {% load statuses %}
 {% load domain %}
 {% load orcid %}
+{% load humanize %}
 {% load i18n %}
 {% load widget_tweaks %}
 {% load capture_tags %}
@@ -147,7 +148,7 @@ $(function(){
             <li><a href="{% url 'search' %}?authors={{ nv.name_id }}">{{ nv.name }}</a> ({{ nv.confidence }})</li>
             {% endfor %}
          </ul></p>
-         
+
          <form method="POST" id="affiliationForm">
          {% csrf_token %}
          {{ researcher.affiliation_form }}</br>
@@ -201,7 +202,13 @@ $(function(){
 
 <span class="detailsTitle">{% trans "Search" %}</span>
 <div class="detailsContent">
-<p id="nbPapersFound">{{ nb_results }}</p>
+    <p id="nbPapersFound">
+        {% blocktrans trimmed with formattedCounter=nb_results|intcomma count counter=nb_results|default:0 %}
+            {{ formattedCounter }} paper found
+            {% plural %}
+            {{ formattedCounter }} papers found
+        {% endblocktrans %}
+    </p>
 
 <form method="get" action="." id="searchPapers" onChange="$(this).submit()">
     <div class="form-group" id="searchPaperCombinedStatus">

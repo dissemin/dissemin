@@ -37,9 +37,9 @@ function showStatsPie (data, target_id) {
 	var r = 100, mr = 50, imr = 45, ir = 40; // radii
     var color = d3.scale.ordinal().range(stats_colors);
     var color_agg = d3.scale.ordinal().range(stats_colors_aggregated);
-	
+
 	// Create the svg element
-	
+
     var vis = d3.select("#"+target_id).select(".statspie_graph")
         .append("svg:svg")
             .attr("width", w)
@@ -48,13 +48,13 @@ function showStatsPie (data, target_id) {
             .attr("transform", "translate(" + r + "," + r + ")");    //move the center of the pie chart from 0, 0 to radius, radius
 
 	var parts = vis.selectAll("g.chart")
-		.data([detailed_data, aggregated_data])  
+		.data([detailed_data, aggregated_data])
 		.enter()
 			.append("svg:g")
 				.attr("class", "chart");
 
 	// Outer detailed statistics
-				
+
     var arc = d3.svg.arc()              //this will create <path> elements for us using arc data
         .outerRadius(r)
 		.innerRadius(mr);
@@ -66,7 +66,7 @@ function showStatsPie (data, target_id) {
 		.endAngle(Math.PI/2);
 
     var arcs = d3.select(parts[0][0]).selectAll("g.slice")     //this selects all <g> elements with class slice (there aren't any yet)
-        .data(pie)                          //associate the generated pie data (an array of arcs, each having startAngle, endAngle and value properties) 
+        .data(pie)                          //associate the generated pie data (an array of arcs, each having startAngle, endAngle and value properties)
         .enter()                            //this will create <g> elements for every "extra" data element that should be associated with a selection. The result is creating a <g> for every object in the data array
             .append("svg:g")                //create a group to hold each slice (we will have a <path> and a <text> element associated with each slice)
                 .attr("class", "slice")    //allow us to style things in the slices (like text)
@@ -77,7 +77,7 @@ function showStatsPie (data, target_id) {
                 .attr("d", arc);                                    //this creates the actual SVG path using the associated data (pie) with the arc drawing function
 
 	// Outer labels
-    function translateText(thisArc, d) {				
+    function translateText(thisArc, d) {
         //set the label's origin to the center of the arc
         //we have to make sure to set these before calling arc.centroid
         d.innerRadius = mr;
@@ -92,18 +92,18 @@ function showStatsPie (data, target_id) {
         .enter()
             .append("svg:g")
                 .attr("class", "slicetext");
-		
+
     arcs_text.append("svg:text")                                     //add a label to each slice
             .attr("transform", function(d) { return translateText(arc,d); })
             .attr("text-anchor", "middle")                          //center the text on it's origin
             .text(textForLabel);
 
-	// Inner aggregated statistics		
-	
+	// Inner aggregated statistics
+
 	var arc2 = d3.svg.arc()
         .outerRadius(imr)
 		.innerRadius(ir);
-		
+
 	var arcs2 = d3.select(parts[0][1]).selectAll("g.slice")
             .data(pie)
             .enter()
@@ -114,13 +114,13 @@ function showStatsPie (data, target_id) {
             .attr("fill", function(d, i) { return color_agg(i); } )
             .attr("d", arc2);
 
-	
+
 	var arcs2_text = d3.select(parts[0][1]).selectAll("g.slicetext")
         .data(pie)
         .enter()
         .append("svg:g")
         .attr("class", "slicetext");
-		
+
     function lineX(d,i) {
         return arc2.centroid(d)[0];
     }
@@ -180,8 +180,18 @@ function showStatsPie (data, target_id) {
         captions.datum(data.detailed).selectAll("span.detail")
             .data(pie)
             .transition()
-		    .text(function(d) { return d.data.value; });
+		    .text(function(d) { return formatNumbersThousands(d.data.value); });
     }
 
     return updatePie;
+}
+
+/**
+ * Format numbers with thousands separators.
+ */
+function formatNumbersThousands(value) {
+    var thousandSeparator = get_format('THOUSAND_SEPARATOR');
+    // Formatting with thousand separator is coming from
+    // https://stackoverflow.com/a/2901298
+    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, thousandSeparator);
 }

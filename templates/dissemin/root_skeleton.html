@@ -51,6 +51,10 @@
     <script type="text/javascript" src="{% url 'javascript-catalog' %}"></script>
     <script type="text/javascript" src="{% static "libs/es6-promise.min.js" %}"></script>
     <script type="text/javascript" src="{% static "libs/fetch.min.js" %}"></script>
+    {% if settings.SENTRY_DSN %}
+        <script type="text/javascript" src="{% static "libs/sentry.min.js" %}"></script>
+        <script>Sentry.init({ dsn: '{{ settings.SENTRY_DSN }}'})</script>
+    {% endif %}
     <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
       tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
