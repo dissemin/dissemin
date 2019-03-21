@@ -356,3 +356,40 @@ SETTINGS_EXPORT = [
     'SENTRY_DSN',
 ]
 
+# Logging is very important thing. Here we define some standards. We use Django logging system, so there it is easy to custimze your logging preferences.
+# To switch for 'console' to level 'DEBUG' please use prod.py resp. dev.py
+# To get a logger use logger = logging.getLogger('dissemin.' + __name__) to make sure that it is catched by the dissemin logger.
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'console': {
+            'format': '%(asctime)s %(levelname)s %(name)s:%(lineno)s  %(message)s',
+            'datefmt': '%Y-%m-%d %H:%M:%S',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'console',
+        },
+        'sentry': {
+            'level': 'WARNING',
+            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
+        },
+    },
+    'loggers': {
+    # root logger, includes also third party packages. To omit them them, put in 'django' to get just django related logging
+        '': {
+            'level': 'WARNING',
+            'handlers': ['console', 'sentry'],
+        },
+    # dissemin logger
+        'dissemin' : {
+            'level': None,
+            'handlers': ['console', 'sentry'],
+            'propagate': False,
+        },
+    },
+}

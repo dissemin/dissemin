@@ -9,6 +9,8 @@ from .common import *
 DEBUG = True
 DEBUG_TOOLBAR_CONFIG = {'SHOW_TOOLBAR_CALLBACK': lambda r: True}
 
+LOGGING['loggers']['dissemin']['level'] = DEBUG
+
 # They are the domains under which your dissemin instance should
 # be reachable. Leave empty if you run on localhost.
 ALLOWED_HOSTS = []

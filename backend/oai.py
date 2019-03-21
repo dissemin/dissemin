@@ -19,6 +19,7 @@
 #
 
 
+import logging
 
 from datetime import datetime
 
@@ -35,6 +36,8 @@ from papers.models import Paper
 from backend.translators import OAIDCTranslator
 from backend.translators import BASEDCTranslator
 from backend.oaireader import base_dc_reader
+
+logger = logging.getLogger('dissemin.' + __name__)
 
 class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSource
     """
@@ -142,8 +145,7 @@ class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSo
         """
         translator = self.translators.get(format)
         if translator is None:
-            print("Warning: unknown metadata format %s, skipping" %
-                  header.format())
+            logger.warning("Unknown metadata format %s, skipping" % header.format())
             return
 
         paper = translator.translate(header, metadata)
@@ -152,10 +154,8 @@ class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSo
                 with transaction.atomic():
                     saved = Paper.from_bare(paper)
                 return saved
-            except ValueError as e:
-                print("Ignoring invalid paper:")
-                print(header.identifier())
-                print(e)
+            except ValueError:
+                logger.exception("Ignoring invalid paper with header %s" % header.idendifier())
 
     def process_records(self, listRecords, format):
         """
@@ -184,6 +184,6 @@ class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSo
                     rate = 'infty'
                     if td.seconds:
                         rate = str(processed_since_report / td.seconds)
-                    print("current rate: %s records/s" % rate)
+                    logger.info("current rate: %s records/s" % rate)
                     processed_since_report = 0
                     last_report = datetime.now()

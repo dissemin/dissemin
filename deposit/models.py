@@ -21,6 +21,7 @@
 
 
 
+import logging
 from caching.base import CachingManager
 from caching.base import CachingMixin
 from deposit.registry import protocol_registry
@@ -33,6 +34,8 @@ from papers.models import Paper
 from papers.models import OaiRecord
 from papers.models import UPLOAD_TYPE_CHOICES
 from upload.models import UploadedPDF
+
+logger = logging.getLogger('dissemin.' + __name__)
 
 DEPOSIT_STATUS_CHOICES = [
    ('failed', _('Failed')), # we failed to deposit the paper
@@ -102,7 +105,7 @@ class Repository(models.Model, CachingMixin):
         """
         cls = protocol_registry.get(self.protocol)
         if cls is None:
-            print("Warning: protocol not found: "+str(self.protocol))
+            logger.warning("Protocol not found: "+str(self.protocol))
             return
         return cls(self)
 

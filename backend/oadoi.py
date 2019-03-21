@@ -3,6 +3,7 @@
 
 import gzip
 import json
+import logging
 from django.db import DataError
 from datetime import datetime
 
@@ -14,6 +15,8 @@ from papers.doi import doi_to_url
 from papers.doi import to_doi
 from backend.doiprefixes import free_doi_prefixes
 from papers.errors import MetadataSourceException
+
+logger = logging.getLogger('dissemin.' + __name__)
 
 class OadoiAPI(object):
     """
@@ -43,11 +46,11 @@ class OadoiAPI(object):
                 if not start_doi_seen and record.get('doi') == start_doi:
                     start_doi_seen = True
                 if idx % report_batch_size == 0:
-                    print(idx, record.get('doi'))
+                    logger.info(idx, record.get('doi'))
                     if last_rate_report:
                         td = (datetime.utcnow() - last_rate_report).total_seconds()
                         if td:
-                            print('importing speed: {} lines/sec'.format(report_batch_size/float(td)))
+                            logger.info('importing speed: {} lines/sec'.format(report_batch_size/float(td)))
                     last_rate_report = datetime.utcnow()
 
 
@@ -77,9 +80,9 @@ class OadoiAPI(object):
             except (MetadataSourceException, ValueError):
                 return
             if not paper:
-                print('no such paper for doi {doi}'.format(doi=doi))
+                logger.info('no such paper for doi {doi}'.format(doi=doi))
                 return
-        print(doi)
+        logger.info(doi)
         paper.cache_oairecords()
 
         for oa_location in record.get('oa_locations') or []:
@@ -115,4 +118,4 @@ class OadoiAPI(object):
                     if update_index:
                         paper.update_index()
             except (DataError, ValueError):
-                print('Record does not fit in the DB')
+                logger.warning('Record does not fit in the DB')

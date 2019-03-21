@@ -32,6 +32,9 @@ from papers.utils import tolerant_datestamp_to_datetime
 from papers.utils import valid_publication_date
 from oaipmh.error import DatestampError
 from backend.pubtype_translations import OAI_PUBTYPE_TRANSLATIONS
+import logging
+
+logger = logging.getLogger('dissemin.' + __name__)
 
 class OaiTranslator(object):
     """
@@ -135,7 +138,7 @@ class OAIDCTranslator(OaiTranslator):
 
         # - title
         if not metadata.get('title') or not authors or not pubdate:
-            #print "no title, authors, or pubdate"
+            logger.debug("No title, authors or pubdate")
             return
 
         # Create paper and record
@@ -144,7 +147,7 @@ class OAIDCTranslator(OaiTranslator):
             self.add_oai_record(header, metadata, paper)
             return paper
         except ValueError as e:
-            print("Warning, OAI record "+header.identifier()+" skipped:\n"+str(e))
+            logger.warning("OAI record "+header.identifier()+" skipped:\n", e, exc_info=True)
             paper.update_availability()
 
     def add_oai_record(self, header, metadata, paper):

@@ -40,7 +40,7 @@ from papers.models import OaiSource
 from publishers.models import Publisher
 from backend.oai import OaiPaperSource
 
-logger = get_task_logger(__name__)
+logger = get_task_logger('dissemin.' + __name__)
 
 
 def update_researcher_task(r, task_name):
@@ -97,7 +97,7 @@ def fetch_everything_for_researcher(pk):
 
 def refetch_researchers(start_time=timezone.now() - timedelta(days=30*6)):
     for r in Researcher.objects.filter(last_harvest__gt=start_time).order_by('last_harvest'):
-        print(r.url)
+        logger.info(r.url)
         fetch_everything_for_researcher(r.pk)
 
 
@@ -114,7 +114,7 @@ def consolidate_paper(pk):
             if pub.description and len(pub.description) > len(abstract):
                 break
     except Paper.DoesNotExist:
-        print("consolidate_paper: unknown paper %d" % pk)
+        logger.exception("consolidate_paper: unknown paper %d" % pk)
 
 
 @shared_task(name='update_all_stats')

@@ -22,6 +22,7 @@
 
 
 
+import logging
 import re
 
 from django.conf import settings
@@ -31,6 +32,8 @@ try:
 except ImportError:
     from django.utils import importlib
 
+
+logger = logging.getLogger('dissemin.' + __name__)
 
 protocol_module_re = re.compile(r'deposit.\w+')
 
@@ -54,9 +57,8 @@ class ProtocolRegistry(object):
                 if protocol_module_re.match(app):
                     try:
                         importlib.import_module(app+'.protocol')
-                    except ImportError as e:
-                        print("ImportError in "+app+'.protocol')
-                        print(e)
+                    except ImportError:
+                        logger.exception()
         self.loaded = True
 
 protocol_registry = ProtocolRegistry()

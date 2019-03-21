@@ -11,6 +11,8 @@ from .common import *
 
 DEBUG = False
 
+LOGGING['loggers']['dissemin']['level'] = DEBUG
+
 # They are the domains under which your dissemin instance should
 # be reachable
 ALLOWED_HOSTS = ['dissem.in']

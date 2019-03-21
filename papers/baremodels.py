@@ -28,6 +28,7 @@ without name ambiguity resolution.
 
 
 import hashlib
+import logging
 import re
 from urllib.parse import quote  # for the Google Scholar and CORE link
 from urllib.parse import urlencode
@@ -49,6 +50,8 @@ from papers.utils import validate_orcid
 from publishers.models import DummyPublisher
 from publishers.models import OA_STATUS_CHOICES
 from publishers.models import OA_STATUS_PREFERENCE
+
+logger = logging.getLogger('dissemin.' + __name__)
 
 PAPER_TYPE_CHOICES = [
    ('journal-article', _('Journal article')),
@@ -490,7 +493,7 @@ class BarePaper(BareObject):
         fp = create_paper_plain_fingerprint(
             self.title, self.bare_author_names(), self.year)
         if verbose:
-            print(fp)
+            logger.debug(fp)
         return fp
 
     def new_fingerprint(self, verbose=False):

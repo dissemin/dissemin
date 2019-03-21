@@ -23,6 +23,7 @@
 from io import BytesIO
 
 import dateutil.parser
+import logging
 import re
 import requests.exceptions
 
@@ -40,6 +41,8 @@ from publishers.models import Publisher
 from publishers.models import PublisherCondition
 from publishers.models import PublisherCopyrightLink
 from publishers.models import PublisherRestrictionDetail
+
+logger = logging.getLogger('dissemin.' + __name__)
 
 class RomeoAPI(object):
 
@@ -112,8 +115,7 @@ class RomeoAPI(object):
         if not journals:
             return None
         elif len(journals) > 1:
-            print("Warning, "+str(len(journals))+" journals match the RoMEO request, " +
-                  "defaulting to the first one")
+            logger.warning("%d journals match the RoMEO request, defaulting to the first one" % len(journals))
             # TODO different behaviour: get the ISSN and try again.
         journal = journals[0]
 
@@ -122,8 +124,7 @@ class RomeoAPI(object):
             raise MetadataSourceException('RoMEO returned a journal without title.\n' +
                                           'Terms were: '+str(terms))
         if len(names) > 1:
-            print("Warning, "+str(len(names))+" names provided for one journal, " +
-                  "defaulting to the first one")
+            logger.warning("%d names provided for one journal, defaulting to the first one" % len(names))
         name = kill_html(names[0].text)
 
         issn = None
@@ -203,8 +204,8 @@ class RomeoAPI(object):
         for publisher in publishers:
             try:
                 self.get_or_create_publisher(publisher)
-            except MetadataSourceException as exception:
-                print(exception)
+            except MetadataSourceException:
+                logger.exception()
 
     def fetch_all_journals(self):
         """

@@ -3,6 +3,8 @@
 
 # taken from https://www.caktusgroup.com/blog/2013/10/02/skipping-test-db-creation/
 
+import logging
+
 from django.test import TransactionTestCase
 try:
     from django.test.runner import DiscoverRunner as BaseRunner
@@ -12,6 +14,7 @@ except ImportError:
 
 from mock import patch
 
+logger = logging.getLogger('dissemin.' + __name__)
 
 class NoDatabaseMixin(object):
     """
@@ -36,7 +39,7 @@ class NoDatabaseMixin(object):
         if self._needs_db:
             return super(NoDatabaseMixin, self).setup_databases(*args, **kwargs)
         if self.verbosity >= 1:
-            print('No DB tests detected. Skipping Test DB creation...')
+            logger.info('No DB tests detected. Skipping Test DB creation...')
         self._db_patch = patch('django.db.backends.utils.CursorWrapper')
         self._db_mock = self._db_patch.start()
         self._db_mock.side_effect = RuntimeError('No testing the database!')

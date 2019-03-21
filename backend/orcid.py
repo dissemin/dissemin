@@ -25,6 +25,7 @@
 import os
 import os.path as path
 import json
+import logging
 from backend.crossref import convert_to_name_pair
 from backend.crossref import CrossRefAPI
 from backend.crossref import fetch_dois
@@ -41,6 +42,8 @@ from papers.models import Researcher
 from papers.orcid import OrcidProfile
 from papers.orcid import affiliate_author_with_orcid
 from papers.utils import validate_orcid
+
+logger = logging.getLogger('dissemin.' + __name__)
 
 ### Metadata manipulation utilities ####
 
@@ -99,8 +102,8 @@ class OrcidPaperSource(PaperSource):
                     yield True, paper
                 else:
                     yield False, metadata
-            except ValueError as e:
-                print("Saving CrossRef record from ORCID failed: %s" % str(e))
+            except ValueError:
+                logger.exception("Saving CrossRef record from ORCID with id %s failed" % orcid_id)
 
     def fetch_metadata_from_dois(self, cr_api, ref_name, orcid_id, dois):
         doi_metadata = fetch_dois(dois)
@@ -164,8 +167,8 @@ class OrcidPaperSource(PaperSource):
         try:
             if profile is None:
                 profile = OrcidProfile(orcid_id=orcid_id)
-        except MetadataSourceException as e:
-            print(e)
+        except MetadataSourceException:
+            logger.exception()
             return
 
         # As we have fetched the profile, let's update the Researcher
@@ -210,10 +213,7 @@ class OrcidPaperSource(PaperSource):
             # We first try to reconcile it with local researcher author name.
             # Then, we consider it missed.
             if work.skipped:
-                print(work.json)
-                print(work.skip_reason)
-                print('work skipped due to incorrect metadata (%s)' %
-                    (work.skip_reason))
+                logger.warning("Work skipped due to incorrect metadata. \n %s \n %s" % (work.reason, work.skip_reason))
 
                 ignored_papers.append(work.as_dict())
                 continue
@@ -222,7 +222,7 @@ class OrcidPaperSource(PaperSource):
 
         self.warn_user_of_ignored_papers(ignored_papers)
         if ignored_papers:
-            print('Warning: Total ignored papers: %d' % (len(ignored_papers)))
+            logger.warning("Total ignored papers: %d" % (len(ignored_papers)))
 
     def fetch_and_save(self, researcher, profile=None):
         """
@@ -275,5 +275,5 @@ class OrcidPaperSource(PaperSource):
                             for p in papers:
                                 self.save_paper(p, r)
                     except (ValueError, KeyError):
-                        print("Invalid profile: %s" % fname)
+                        logger.warning("Invalid profile: %s" % fname)
 

@@ -19,8 +19,9 @@
 #
 
 
-
+import logging
 import requests
+
 
 from django.conf import settings
 from django.utils.functional import cached_property
@@ -35,6 +36,8 @@ from papers.utils import try_date
 from papers.baremodels import BareName
 from papers.bibtex import parse_bibtex
 from papers.doi import to_doi
+
+logger = logging.getLogger('dissemin.' + __name__)
 
 orcid_type_to_pubtype = {
         'book': 'book',
@@ -380,7 +383,7 @@ class OrcidWork(object):
         pubdate = try_date(year, month, day) or try_date(
             year, month, 1) or try_date(year, 1, 1)
         if pubdate is None:
-            print("Invalid publication date in ORCID publication, skipping")
+            logger.info("Invalid publication date in ORCID publication, skipping")
             raise SkippedPaper("INVALID_PUB_DATE")
         else:
             return pubdate
