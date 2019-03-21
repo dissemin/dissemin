@@ -374,22 +374,31 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'console',
         },
-        'sentry': {
-            'level': 'WARNING',
-            'class': 'raven.contrib.django.raven_compat.handlers.SentryHandler',
-        },
     },
     'loggers': {
     # root logger, includes also third party packages. To omit them them, put in 'django' to get just django related logging
         '': {
             'level': 'WARNING',
-            'handlers': ['console', 'sentry'],
+            'handlers': ['console'],
         },
     # dissemin logger
         'dissemin' : {
             'level': None,
-            'handlers': ['console', 'sentry'],
+            'handlers': ['console'],
             'propagate': False,
         },
     },
 }
+
+# If sentry is set, we send all important logs to sentry.
+SENTRY_DSN = True
+if SENTRY_DSN:
+    LOGGING['handlers'] = {**{
+        'sentry': {
+            'level': 'WARNING',
+            'class': 'sentry_sdk.integrations.logging.EventHandler',
+            }
+        }, ** LOGGING['handlers']}
+
+    LOGGING['loggers']['']['handlers'] += ['sentry']
+    LOGGING['loggers']['dissemin']['handlers'] += ['sentry']
