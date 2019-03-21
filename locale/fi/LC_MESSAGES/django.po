@@ -13,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 11:56+0100\n"
-"PO-Revision-Date: 2019-03-07 15:08:20+0000\n"
+"PO-Revision-Date: 2019-03-21 09:56:37+0000\n"
 "Language: fi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -411,7 +411,7 @@ msgstr "Yhteyden muodostaminen koodivarantoon epäonnistui. Yritä myöhemmin uu
 #: deposit/templates/deposit/deposits.html:14
 #: templates/dissemin/skeleton.html:47
 msgid "My deposits"
-msgstr "Talletukseni"
+msgstr "Omat talletukset"
 
 #: deposit/templates/deposit/deposits.html:36
 msgid "Paper"
@@ -1999,7 +1999,7 @@ msgstr "Vaihda navigointi"
 
 #: templates/dissemin/skeleton.html:38
 msgid "My profile"
-msgstr "Profiilini"
+msgstr "Oma profiili"
 
 #: templates/dissemin/skeleton.html:40 templates/dissemin/skeleton.html:80
 msgid "FAQ"
