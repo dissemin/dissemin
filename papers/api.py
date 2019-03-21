@@ -23,7 +23,7 @@
 import json
 
 from django.conf.urls import url
-from django.http import Http404
+from django.http import Http404, HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from jsonview.decorators import json_view
@@ -37,15 +37,18 @@ from papers.utils import tolerant_datestamp_to_datetime
 from papers.views import PaperSearchView
 
 
-@json_view
 def api_paper_doi(request, doi):
     p = Paper.get_by_doi(doi)
     if p is None:
         raise Http404("The paper you requested could not be found.")
-    return {
+
+    if 'format' in request.GET and request.GET['format'] == 'bibtex':
+        return HttpResponse(p.bibtex(), content_type='application/x-bibtex')
+    else:
+        return JsonResponse({
             'status': 'ok',
             'paper': p.json()
-            }
+        })
 
 
 class PaperSearchAPI(PaperSearchView):
