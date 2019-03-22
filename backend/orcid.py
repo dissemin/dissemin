@@ -168,7 +168,7 @@ class OrcidPaperSource(PaperSource):
             if profile is None:
                 profile = OrcidProfile(orcid_id=orcid_id)
         except MetadataSourceException:
-            logger.exception()
+            logger.exception("ORCID Profile Error")
             return
 
         # As we have fetched the profile, let's update the Researcher

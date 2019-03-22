@@ -391,14 +391,14 @@ LOGGING = {
 }
 
 # If sentry is set, we send all important logs to sentry.
-SENTRY_DSN = True
+
 if SENTRY_DSN:
-    LOGGING['handlers'] = {**{
+    LOGGING['handlers'].update({
         'sentry': {
             'level': 'WARNING',
             'class': 'sentry_sdk.integrations.logging.EventHandler',
             }
-        }, ** LOGGING['handlers']}
+        })
 
     LOGGING['loggers']['']['handlers'] += ['sentry']
     LOGGING['loggers']['dissemin']['handlers'] += ['sentry']

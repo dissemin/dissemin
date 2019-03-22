@@ -155,7 +155,7 @@ class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSo
                     saved = Paper.from_bare(paper)
                 return saved
             except ValueError:
-                logger.exception("Ignoring invalid paper with header %s" % header.idendifier())
+                logger.exception("Ignoring invalid paper with header %s" % header.identifier())
 
     def process_records(self, listRecords, format):
         """
