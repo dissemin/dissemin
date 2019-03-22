@@ -42,6 +42,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.template.defaultfilters import slugify
 from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
+from papers.bibtex import PAPER_TYPE_TO_BIBTEX
 from papers.doi import doi_to_url
 from papers.fingerprint import create_paper_plain_fingerprint
 from papers.utils import datetime_to_date
@@ -612,8 +613,13 @@ class BarePaper(BareObject):
         """
         BibTeX representation of the paper, for citation purposes
         """
+        entrytype = 'misc'
+        for pubtype, bibtex_type in PAPER_TYPE_TO_BIBTEX:
+            if pubtype == self.pubtype:
+                entrytype = bibtex_type
+                break
         entry = {
-            'ENTRYTYPE': 'article',
+            'ENTRYTYPE': entrytype,
             'ID': (
                 '%s%s' % (
                     self.authors[0].name.last,
@@ -633,7 +639,9 @@ class BarePaper(BareObject):
             if publi.pages:
                 entry['pages'] = publi.pages
             if publi.journal:
-                entry['journal'] = publi.journal
+                entry['journal'] = publi.journal.title
+            elif publi.journal_title:
+                entry['journal'] = publi.journal_title
 
         if self.pubdate:
             entry['month'] = self.pubdate.strftime('%b').lower()

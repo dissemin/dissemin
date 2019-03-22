@@ -35,6 +35,22 @@ ET_AL_RE = re.compile(r'( and )?\s*et\s+al\.?\s*$', re.IGNORECASE | re.UNICODE)
 # Others is a reserved Bibtex keyword
 OTHERS_RE = re.compile(r'( and )?\s*others\.?\s*$', re.IGNORECASE | re.UNICODE)
 
+PAPER_TYPE_TO_BIBTEX = [
+   ('journal-article', 'article'),
+   ('proceedings-article', 'inproceedings'),
+   ('book-chapter', 'book'),
+   ('book', 'book'),
+   ('journal-issue', 'book'),
+   ('proceedings', 'proceedings'),
+   ('reference-entry', 'misc'),
+   ('poster', 'misc'),
+   ('report', 'article'),
+   ('thesis', 'phdthesis'),
+   ('dataset', 'misc'),
+   ('preprint', 'article'),
+   ('other', 'misc'),
+]
+
 
 def parse_authors_list(record):
     """
