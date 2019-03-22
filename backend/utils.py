@@ -22,6 +22,7 @@
 
 from time import sleep
 
+import logging
 import requests
 import requests.exceptions
 
@@ -29,6 +30,8 @@ from dissemin.settings import redis_client
 from memoize import memoize
 from papers.errors import MetadataSourceException
 
+
+logger = logging.getLogger('dissemin.' + __name__)
 
 # Run a task at most one at a time
 
@@ -83,8 +86,7 @@ def urlopen_retry(url, **kwargs):  # data, timeout, retries, delay, backoff):
     except requests.exceptions.RequestException as e:
         raise MetadataSourceException('Request error: '+str(e))
 
-    print("Retrying in "+str(delay)+" seconds...")
-    print("URL: "+url)
+    logger.info("Retrying in "+str(delay)+" seconds with url "+url)
     sleep(delay)
     return urlopen_retry(url,
                          data=data,

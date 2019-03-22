@@ -21,10 +21,13 @@
 
 
 import re
+import logging
 
 import name_tools
 from papers.utils import iunaccent
 from papers.utils import remove_diacritics
+
+logger = logging.getLogger('dissemin.' + __name__)
 
 # Name managemement: heuristics to separate a name into (first,last)
 comma_re = re.compile(r',+')
@@ -91,8 +94,7 @@ def rebuild_name(name_words, separators):
         if idx < len(separators):
             output += separators[idx]
         elif idx < len(name_words)-1:
-            print("WARNING: incorrect name splitting for '%s'" %
-                  str(name_words))
+            logger.warning("Incorrect name splitting for '%s'" % str(name_words))
             output += ' '
     return output
 

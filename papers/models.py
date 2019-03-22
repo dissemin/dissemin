@@ -49,6 +49,7 @@ from datetime import timedelta
 import re
 import haystack
 import pytz
+import logging
 from statistics.models import AccessStatistics
 from statistics.models import combined_status_for_instance
 from statistics.models import STATUS_CHOICES_HELPTEXT
@@ -94,6 +95,8 @@ from publishers.models import Journal
 from publishers.models import Publisher
 from solo.models import SingletonModel
 from search import SearchQuerySet
+
+logger = logging.getLogger('dissemin.' + __name__)
 
 UPLOAD_TYPE_CHOICES = [
    ('preprint', _('Preprint')),
@@ -449,7 +452,7 @@ class Researcher(models.Model):
 
     def update_stats(self):
         """Update the access statistics for the papers authored by this researcher"""
-        print("Researcher.update_stats should not be used anymore")
+        logger.info("Researcher.update_stats should not be used anymore")
         #if not self.stats:
         #    self.stats = AccessStatistics.objects.create()
         #    self.save()

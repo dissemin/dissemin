@@ -43,6 +43,9 @@ from time import sleep
 import haystack
 from haystack.exceptions import SkipDocument
 from haystack.constants import ID
+import logging
+
+logger = logging.getLogger('dissemin.' + __name__)
 
 def update_index_for_model(model, batch_size=256, batches_per_commit=10, firstpk=0):
     """
@@ -101,8 +104,8 @@ def update_index_for_model(model, batch_size=256, batches_per_commit=10, firstpk
                 bulk(backend.conn, prepped_docs, index=backend.index_name, doc_type='modelresult')
                 documents_sent = True
             except ConnectionTimeout as e:
-                print(e)
-                print('retrying...')
+                logger.warning(e)
+                logger.info('retrying')
                 sleep(30)
 
         indexed += len(prepped_docs)
@@ -112,7 +115,7 @@ def update_index_for_model(model, batch_size=256, batches_per_commit=10, firstpk
         if indexed >= 5000:
             curtime = datetime.utcnow()
             rate = int(indexed / (curtime-starttime).total_seconds())
-            print("%d obj/s, %d / %d" % (rate,firstpk,lastpk))
+            logger.info("%d obj/s, %d / %d" % (rate,firstpk,lastpk))
             starttime = curtime
             indexed = 0
 
@@ -126,7 +129,7 @@ def enumerate_large_qs(queryset, key='pk', batch_size=256, lastval=None):
         sliced = queryset.order_by(key)
         if lastval is not None:
             sliced = sliced.filter(**{key+'__gt':lastval})
-        print(lastval)
+        logger.info(lastval)
         sliced = sliced[:batch_size]
 
         found = False
@@ -151,7 +154,7 @@ def cleanup_researchers():
         if not nb_papers:
             deleted_count += 1
             p.delete()
-    print("Deleted "+str(deleted_count)+" researchers")
+    logger.ingo("Deleted "+str(deleted_count)+" researchers")
 
 
 def cleanup_names(dry_run=False):
@@ -164,7 +167,7 @@ def cleanup_names(dry_run=False):
             deleted_count += 1
             if not dry_run:
                 n.delete()
-    print("Deleted "+str(deleted_count)+" names")
+    logger.info("Deleted "+str(deleted_count)+" names")
 
 
 def update_paper_statuses():
@@ -199,10 +202,10 @@ def cleanup_paper_researcher_ids():
             if modified:
                 batch.append(p)
         if batch:
-            print("Updating {} papers, from {}".format(len(batch), curid))
+            logger.info("Updating {} papers, from {}".format(len(batch), curid))
             bulk_update(batch)
         else:
-            print(curid)
+            logger.info(curid)
 
 def fix_duplicate_orcids(p):
     from collections import defaultdict
@@ -221,9 +224,9 @@ def fix_duplicate_orcids(p):
                 best_author = most_similar_author(n.pair, author_name_pairs)
                 best_indices[best_author] = orcid
             except Name.DoesNotExist:
-                print('DUPLICATE ORCID WITH NO RESEARCHER_ID')
+                logger.exception('DUPLICATE ORCID WITH NO RESEARCHER_ID')
 
-    print(best_indices)
+    logger.info(best_indices)
     for idx, a in enumerate(p.authors):
         if a.orcid and counts[a.orcid] >= 2:
             if best_indices.get(idx) != a.orcid:
@@ -241,7 +244,7 @@ def report_dubious_orcids():
     """
     for idx, p in enumerate(Paper.objects.all().iterator()):
         if idx % 100000 == 0:
-            print(idx)
+            logger.info(idx)
         seen_orcids = set()
         for a in p.authors:
             if not a.orcid:
@@ -250,7 +253,7 @@ def report_dubious_orcids():
             bad_orcid = a.orcid in seen_orcids
             seen_orcids.add(a.orcid)
             if bad_orcid:
-                print('\t'.join([
+                logger.info('\t'.join([
                     'https://dissem.in'+p.url,
                     a.orcid,
                 ])+'\n')

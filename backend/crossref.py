@@ -23,6 +23,7 @@
 import datetime
 import json
 import bz2
+import logging
 
 import requests
 from requests.exceptions import RequestException
@@ -55,6 +56,8 @@ from publishers.models import Journal
 from publishers.models import Publisher
 from backend.pubtype_translations import CROSSREF_PUBTYPE_ALIASES
 from time import sleep
+
+logger = logging.getLogger('dissemin.' + __name__)
 
 ######## HOW THIS MODULE WORKS ###########
 #
@@ -193,9 +196,8 @@ def create_publication(paper, metadata):
     """
     try:
         return _create_publication(paper, metadata)
-    except DataError as e:
-        print("create_publication: ignored DataError:")
-        print(e)
+    except DataError:
+        logger.exception("Ignored DataError")
 
 
 def _create_publication(paper, metadata):
@@ -312,9 +314,8 @@ def fetch_dois_incrementally(doi_list):
     for doi in doi_list:
         try:
             metadata = fetch_metadata_by_DOI(doi)
-        except MetadataSourceException as e:
-            print("MetadataSourceException ignored:")
-            print(e)
+        except MetadataSourceException:
+            logger.exception("MetadataSourceException ignored")
             continue
         yield metadata
 
@@ -405,7 +406,7 @@ class CrossRefAPI(object):
             try:
                 p = self.save_doi_metadata(metadata)
             except ValueError as e:
-                print(e)
+                logger.info("Returning 'None'", exc_info=e)
         return p
 
     def save_doi_metadata(self, metadata, extra_orcids=None):
@@ -524,7 +525,7 @@ class CrossRefAPI(object):
                 if not found:
                     break
                 next_cursor = jpath('message/next-cursor', js)
-                print('Next cursor: '+next_cursor) # to ease recovery
+                logger.info("Next cursor: " + next_cursor) # to ease recovery
             except ValueError as e:
                 raise MetadataSourceException(
                     'Error while fetching CrossRef results:\nInvalid response.\n' +
@@ -558,9 +559,9 @@ class CrossRefAPI(object):
                     p = Paper.from_bare(bare_paper)
                     p.update_index()
                 except ValueError as e:
-                    print((record.get('DOI') or 'unknown DOI') + ': '+str(e))
+                    logger.info(record.get('DOI', 'unkown DOI') + ': %s' % e)
 
-            print('Updated up to '+until_date.isoformat())
+            logger.info("Updated up to" + until_date.isoformat())
             source.last_update += batch_time
             source.save()
 
@@ -579,7 +580,7 @@ class CrossRefAPI(object):
                     if not first_doi_seen:
                         continue
 
-                    print(record.get('DOI'))
+                    logger.info(record.get('DOI'))
                     bare_paper = self.save_doi_metadata(record)
                     p = Paper.from_bare(bare_paper)
 
@@ -591,8 +592,8 @@ class CrossRefAPI(object):
                             p.update_index()
                             break
                         except ConnectionTimeout as e:
-                            print(e)
+                            logger.warning(e)
                             sleep(10*i)
-                except (MetadataSourceException, ValueError) as e:
-                    print((record.get('DOI') or 'unknown DOI') + ': ' + str(e))
+                except (MetadataSourceException, ValueError):
+                    logger.exception((record.get('DOI') or 'unknown DOI'))
 

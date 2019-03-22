@@ -20,10 +20,14 @@
 
 
 
+import logging
+
 from dissemin.settings import DEPOSIT_MAX_FILE_SIZE
 from django import forms
 from django.template.defaultfilters import filesizeformat
 from django.utils.translation import ugettext as _
+
+logger = logging.getLogger('dissemin.' + __name__)
 
 invalid_content_type_message = _(
     'Invalid file format: only PDF files are accepted.')
@@ -34,7 +38,7 @@ class AjaxUploadForm(forms.Form):
 
     def clean_upl(self):
         content = self.cleaned_data['upl']
-        print(content.content_type)
+        logger.info(content.content_type)
         if content.size > DEPOSIT_MAX_FILE_SIZE:
             raise forms.ValidationError(_('File too large (%(size)s). Maximum size is %(maxsize)s.') %
                                         {'size': filesizeformat(content._size),

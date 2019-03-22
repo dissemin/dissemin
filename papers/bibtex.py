@@ -20,12 +20,15 @@
 
 
 import re
+import logging
 
 import bibtexparser
 import bibtexparser.customization
 
 from bibtexparser.bparser import BibTexParser
 from papers.name import parse_comma_name
+
+logger = logging.getLogger('dissemin.' + __name__)
 
 # There should not be "et al" in Bibtex but we encounter it from time to time
 ET_AL_RE = re.compile(r'( and )?\s*et\s+al\.?\s*$', re.IGNORECASE | re.UNICODE)
@@ -75,11 +78,6 @@ def parse_bibtex(bibtex):
     if len(db.entries) == 0:
         raise ValueError('No bibtex item was parsed.')
     if len(db.entries) > 1:
-        print(
-            (
-                "Warning: %d Bibtex items in parse_bibtex, "
-                "defaulting to the first one"
-            ) % len(db.entries)
-        )
+        logger.warning("%d bibtex items, defaulting to first one" % len(db.entries)) 
 
     return db.entries[0]
