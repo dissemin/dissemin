@@ -368,7 +368,7 @@ def fetch_dois_by_batch(doi_list):
         # We fetch them using our proxy (cached content negociation)
         missing_dois = list(set(doi_list) - set(dct.keys()))
         if missing_dois:
-            req = requests.post('http://'+settings.DOI_PROXY_DOMAIN +
+            req = requests.post('https://'+settings.DOI_PROXY_DOMAIN +
                                 '/batch', {'dois': json.dumps(missing_dois)})
             req.raise_for_status()
             missing_dois_dct = results_list_to_dict(req.json())
