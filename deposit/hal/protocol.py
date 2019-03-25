@@ -135,7 +135,8 @@ class HALProtocol(RepositoryProtocol):
         return s
 
     def encodeUserData(self):
-        return "Basic " + codecs.encode(self.username + ":" + self.password, "base64").rstrip()
+        credentials_bytes = "{}:{}".format(self.username, self.password).encode('utf-8')
+        return b"Basic "+codecs.encode(credentials_bytes, "base64").rstrip()
 
     def submit_deposit(self, pdf, form, dry_run=False):
         if self.username is None or self.password is None:
