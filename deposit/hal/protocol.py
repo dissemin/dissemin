@@ -27,6 +27,7 @@ from zipfile import ZipFile
 from papers.utils import extract_domain
 
 import requests
+import codecs
 from urllib.parse import urlparse
 
 from deposit.hal.forms import HALForm
@@ -134,8 +135,8 @@ class HALProtocol(RepositoryProtocol):
         return s
 
     def encodeUserData(self):
-        return "Basic " + (self.username + ":" + self.password
-                           ).encode("base64").rstrip()
+        credentials_bytes = "{}:{}".format(self.username, self.password).encode('utf-8')
+        return b"Basic "+codecs.encode(credentials_bytes, "base64").rstrip()
 
     def submit_deposit(self, pdf, form, dry_run=False):
         if self.username is None or self.password is None:
