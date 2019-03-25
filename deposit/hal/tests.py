@@ -75,6 +75,9 @@ class HALProtocolTest(ProtocolTest):
             password='test',
             endpoint='https://api-preprod.archives-ouvertes.fr/sword/'))
 
+    def test_encode(self):
+        self.assertEqual(self.protocol.encodeUserData('myuser', 'mypassword'), '')
+
     @expectedFailure
     def test_lncs_many_authors(self):
         """
