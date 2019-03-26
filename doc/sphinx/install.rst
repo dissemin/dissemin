@@ -55,7 +55,7 @@ Installation instructions for the web frontend
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 First, install the following dependencies (debian packages)
-``postgresql postgresql-server-dev-all postgresql-client python3-venv build-essential libxml2-dev libxslt1-dev python3-dev gettext libjpeg-dev libffi-dev``
+``postgresql postgresql-server-dev-all postgresql-client python3-venv build-essential libxml2-dev libxslt1-dev python3-dev gettext libjpeg-dev libffi-dev libmagickwand-dev``
 
 Then, build a virtual environment to isolate all the python
 dependencies::
@@ -238,12 +238,12 @@ To run the backend (still in the virtualenv)::
 The -B option starts the scheduler for periodic tasks, the -l option sets the debug level
 to INFO.
 
-In production you want to run ``celery`` and ``celerybeat`` as a daemon and be controlled by ``systemd``. ``celery`` and ``celerybeat`` are installed in the virtual environment of dissemin, so you have to take care, to use this environment. In particular you should use the same user for dissemin and celery.
+In production you want to run ``celery`` and ``celerybeat`` as a daemon and be controlled by ``systemd``. ``celery`` and ``celerybeat`` are installed in the virtual environment of dissemin, so you have to take care to use this environment. In particular you should use the same user for dissemin and celery.
 
 You should use the following sample files that are similar to the `official sample files <https://github.com/celery/celery/tree/master/extra/systemd>`_. The main differences are a different ``PYTHONPATH``, respect of the virtual environment and ``stop`` command for celerybeat. Put this into ``/etc/default/celery`` and change ``CELERY_BIN`` path.::
 
     # See
-    # http://docs.celeryproject.org/en/latest/tutorials/daemonizing.html#available-options
+    # http://docs.celeryproject.org/en/latest/userguide/daemonizing.html
 
     CELERY_APP="dissemin.celery:app"
     CELERYD_NODES="dissem"
@@ -258,10 +258,10 @@ You should use the following sample files that are similar to the `official samp
     CELERYBEAT_LOG_FILE="/var/log/celery/beat.log"
 
 
-For ``celeryd`` systemd service put the following in ``/etc/systemd/system/celery.service`` and change ``WorkingDirectory`` to your dissemin root.::
+For the ``celeryd`` systemd service put the following in ``/etc/systemd/system/celery.service`` and change ``WorkingDirectory`` to your dissemin root.::
 
     [Unit]
-    Description=Celery Service
+    Description=Celery service
     After=network.target
 
     [Service]
@@ -278,10 +278,10 @@ For ``celeryd`` systemd service put the following in ``/etc/systemd/system/celer
     [Install]
     WantedBy=multi-user.target
 
-For ``celeryd`` systemd service put the following in ``/etc/systemd/system/celerybeat.service`` and change ``WorkingDirectory`` to your dissemin root.::
+For the ``celerybeatd`` systemd service put the following in ``/etc/systemd/system/celerybeat.service`` and change ``WorkingDirectory`` to your dissemin root.::
 
     [Unit]
-    Description=Celerybeat Service
+    Description=Celerybeat service
     After=network.target
 
     [Service]
@@ -297,7 +297,7 @@ For ``celeryd`` systemd service put the following in ``/etc/systemd/system/celer
     [Install]
     WantedBy=multi-user.target
 
-Note that we use ``/Bin/sh -c`` to process the ``PYTHONPATH`` and ``${CELERY_BIN}``.
+Note that we use ``/bin/sh -c`` to process the ``PYTHONPATH`` and ``${CELERY_BIN}``.
 
 To make systemd create the necessary directories with permissions put the follwing into ``/etc/tmpfiles.d/celery.conf``::
 
