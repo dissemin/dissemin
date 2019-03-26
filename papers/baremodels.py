@@ -627,17 +627,15 @@ class BarePaper(BareObject):
                 for a in self.authors
             ])
         }
+        try:
+            entry['ENTRYTYPE'] = next(
+                b for p, b in PAPER_TYPE_TO_BIBTEX
+                if p == self.doctype
+            )
+        except StopIteration:
+            pass
 
         for publi in self.publications[:3]:
-            try:
-                bibtex_type = next(
-                    b for p, b in PAPER_TYPE_TO_BIBTEX
-                    if p == publi.pubtype
-                )
-                entry['ENTRYTYPE'] = bibtex_type
-            except StopIteration:
-                pass
-
             if publi.volume:
                 entry['volume'] = publi.volume
             if publi.pages:
