@@ -28,17 +28,22 @@ without name ambiguity resolution.
 
 
 import hashlib
+import io
 import logging
 import re
 from urllib.parse import quote  # for the Google Scholar and CORE link
 from urllib.parse import urlencode
 
+from bibtexparser.bwriter import BibTexWriter
+from bibtexparser.bibdatabase import BibDatabase
 from django.apps import apps
 from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
 from django.template.defaultfilters import slugify
 from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
+from papers.bibtex import PAPER_TYPE_TO_BIBTEX
+from papers.doi import doi_to_url
 from papers.fingerprint import create_paper_plain_fingerprint
 from papers.utils import datetime_to_date
 from papers.utils import iunaccent
@@ -603,6 +608,57 @@ class BarePaper(BareObject):
             'pdf_url': self.pdf_url,
             'classification': self.oa_status,
             })
+
+    def bibtex(self):
+        """
+        BibTeX representation of the paper, for citation purposes
+        """
+        entry = {
+            'ENTRYTYPE': PAPER_TYPE_TO_BIBTEX.get(self.doctype, 'misc'),
+            'ID': (
+                '%s%s' % (
+                    self.authors[0].name.last,
+                    self.pubdate.year
+                )
+            ),
+            'title': self.title,
+            'author': ' and '.join([
+                '%s, %s' % (a.name.last, a.name.first)
+                for a in self.authors
+            ])
+        }
+
+        for publi in self.publications[:3]:
+            if publi.volume:
+                entry['volume'] = publi.volume
+            if publi.pages:
+                entry['pages'] = publi.pages
+            if publi.journal:
+                entry['journal'] = publi.journal.title
+            elif publi.journal_title:
+                entry['journal'] = publi.journal_title
+
+        if self.pubdate:
+            entry['month'] = self.pubdate.strftime('%b').lower()
+            entry['year'] = self.pubdate.strftime('%Y')
+
+        if self.abstract:
+            entry['abstract'] = self.abstract
+
+        doi = self.get_doi()
+        if self.pdf_url:
+            entry['url'] = self.pdf_url
+        if doi:
+            entry['doi'] = doi
+            if not self.pdf_url:
+                entry['url'] = doi_to_url(doi)
+
+        writer = BibTexWriter()
+        with io.StringIO('') as bibfile:
+            db = BibDatabase()
+            db.entries = [entry]
+            bibfile.write(writer.write(db))
+            return bibfile.getvalue()
 
     def google_scholar_link(self):
         """
