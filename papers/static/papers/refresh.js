@@ -19,11 +19,11 @@ function init_paper_module (config) {
   function call_api(url, user_config) {
     var csrftoken = getCookie('csrftoken');
     var config = user_config || {}
-    return fetch(url, Object.assign(
+    return fetch(url, $.extend(
       {},
       config,
       {
-        headers: Object.assign({}, config.headers || {}, {
+        headers: $.extend({}, config.headers || {}, {
           'X-CSRFToken': csrftoken,
           'Content-Type': 'application/json'
         }),
