@@ -59,3 +59,54 @@ class PaperApiTest(JsonRenderingTest):
         for payload in valid_payloads:
             self.checkJson(self.postPage('api-paper-query', postargs=payload,
                                          postkwargs={'content_type': 'application/json'}), 200)
+
+    def test_bibtex_formatting(self):
+        dois_bibtex = {
+            '10.1007/978-3-662-49214-7_4': '''@book{Tang2016,
+ author = {Tang, Ruiming and Amarilli, Antoine and Senellart, Pierre and Bressan, Stéphane},
+ doi = {10.1007/978-3-662-49214-7_4},
+ journal = {Transactions on Large-Scale Data- and Knowledge-Centered Systems XXIV},
+ month = {jan},
+ pages = {116-138},
+ title = {A Framework for Sampling-Based XML Data Pricing},
+ url = {https://doi.org/10.1007/978-3-662-49214-7_4},
+ year = {2016}
+}''',
+            '10.1145/3034786.3056121': '''@misc{Amarilli2017,
+ author = {Amarilli, Antoine and Monet, Mikaël and Senellart, Pierre},
+ doi = {10.1145/3034786.3056121},
+ journal = {Proceedings of the 36th ACM SIGMOD-SIGACT-SIGAI Symposium on Principles of Database Systems  - PODS '17},
+ month = {jan},
+ title = {Conjunctive Queries on Probabilistic Graphs: Combined Complexity},
+ url = {https://doi.org/10.1145/3034786.3056121},
+ year = {2017}
+}''',
+            '10.1007/978-3-319-45856-4_22': '''@book{Amarilli2016,
+ author = {Amarilli, Antoine and Maniu, Silviu and Monet, Mikaël},
+ doi = {10.1007/978-3-319-45856-4_22},
+ journal = {Lecture Notes in Computer Science},
+ month = {jan},
+ pages = {323-330},
+ title = {Challenges for Efficient Query Evaluation on Structured Probabilistic Data},
+ url = {https://doi.org/10.1007/978-3-319-45856-4_22},
+ year = {2016}
+}''',
+            '10.1103/physrevapplied.11.024003': '''@misc{Verney2019,
+ author = {Verney, Lucas and Lescanne, Raphaël and Devoret, Michel H. and Leghtas, Zaki and Mirrahimi, Mazyar},
+ doi = {10.1103/physrevapplied.11.024003},
+ journal = {Physical Review Applied},
+ month = {feb},
+ title = {Structural Instability of Driven Josephson Circuits Prevented by an Inductive Shunt},
+ url = {https://doi.org/10.1103/physrevapplied.11.024003},
+ volume = {11},
+ year = {2019}
+}''',
+        }
+        for doi, bibtex in dois_bibtex.items():
+            Paper.create_by_doi(doi)
+            resp = self.getPage('api-paper-doi',
+                                args=[doi], getargs={'format': 'bibtex'})
+
+            self.assertEqual(resp.status_code, 200)
+            self.assertEqual(resp.content.decode('utf-8').strip(),
+                             bibtex.strip())

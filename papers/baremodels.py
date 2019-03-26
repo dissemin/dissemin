@@ -613,13 +613,8 @@ class BarePaper(BareObject):
         """
         BibTeX representation of the paper, for citation purposes
         """
-        entrytype = 'misc'
-        for pubtype, bibtex_type in PAPER_TYPE_TO_BIBTEX:
-            if pubtype == self.pubtype:
-                entrytype = bibtex_type
-                break
         entry = {
-            'ENTRYTYPE': entrytype,
+            'ENTRYTYPE': 'misc',
             'ID': (
                 '%s%s' % (
                     self.authors[0].name.last,
@@ -634,6 +629,15 @@ class BarePaper(BareObject):
         }
 
         for publi in self.publications[:3]:
+            try:
+                bibtex_type = next(
+                    b for p, b in PAPER_TYPE_TO_BIBTEX
+                    if p == publi.pubtype
+                )
+                entry['ENTRYTYPE'] = bibtex_type
+            except StopIteration:
+                pass
+
             if publi.volume:
                 entry['volume'] = publi.volume
             if publi.pages:
