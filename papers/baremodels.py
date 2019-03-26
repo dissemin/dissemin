@@ -614,7 +614,7 @@ class BarePaper(BareObject):
         BibTeX representation of the paper, for citation purposes
         """
         entry = {
-            'ENTRYTYPE': 'misc',
+            'ENTRYTYPE': PAPER_TYPE_TO_BIBTEX.get(self.doctype, 'misc'),
             'ID': (
                 '%s%s' % (
                     self.authors[0].name.last,
@@ -627,13 +627,6 @@ class BarePaper(BareObject):
                 for a in self.authors
             ])
         }
-        try:
-            entry['ENTRYTYPE'] = next(
-                b for p, b in PAPER_TYPE_TO_BIBTEX
-                if p == self.doctype
-            )
-        except StopIteration:
-            pass
 
         for publi in self.publications[:3]:
             if publi.volume:

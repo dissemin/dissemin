@@ -35,21 +35,21 @@ ET_AL_RE = re.compile(r'( and )?\s*et\s+al\.?\s*$', re.IGNORECASE | re.UNICODE)
 # Others is a reserved Bibtex keyword
 OTHERS_RE = re.compile(r'( and )?\s*others\.?\s*$', re.IGNORECASE | re.UNICODE)
 
-PAPER_TYPE_TO_BIBTEX = [
-   ('journal-article', 'article'),
-   ('proceedings-article', 'inproceedings'),
-   ('book-chapter', 'book'),
-   ('book', 'book'),
-   ('journal-issue', 'book'),
-   ('proceedings', 'proceedings'),
-   ('reference-entry', 'misc'),
-   ('poster', 'misc'),
-   ('report', 'article'),
-   ('thesis', 'phdthesis'),
-   ('dataset', 'misc'),
-   ('preprint', 'article'),
-   ('other', 'misc'),
-]
+PAPER_TYPE_TO_BIBTEX = {
+   'journal-article': 'article',
+   'proceedings-article': 'inproceedings',
+   'book-chapter': 'incollection',
+   'book': 'book',
+   'journal-issue': 'book',
+   'proceedings': 'proceedings',
+   'reference-entry': 'misc',
+   'poster': 'misc',
+   'report': 'article',
+   'thesis': 'phdthesis',
+   'dataset': 'misc',
+   'preprint': 'article',
+   'other': 'misc',
+}
 
 
 def parse_authors_list(record):
@@ -94,6 +94,6 @@ def parse_bibtex(bibtex):
     if len(db.entries) == 0:
         raise ValueError('No bibtex item was parsed.')
     if len(db.entries) > 1:
-        logger.warning("%d bibtex items, defaulting to first one" % len(db.entries)) 
+        logger.warning("%d bibtex items, defaulting to first one" % len(db.entries))
 
     return db.entries[0]

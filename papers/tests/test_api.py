@@ -62,7 +62,7 @@ class PaperApiTest(JsonRenderingTest):
 
     def test_bibtex_formatting(self):
         dois_bibtex = {
-            '10.1007/978-3-662-49214-7_4': '''@book{Tang2016,
+            '10.1007/978-3-662-49214-7_4': '''@incollection{Tang2016,
  author = {Tang, Ruiming and Amarilli, Antoine and Senellart, Pierre and Bressan, Stéphane},
  doi = {10.1007/978-3-662-49214-7_4},
  journal = {Transactions on Large-Scale Data- and Knowledge-Centered Systems XXIV},
@@ -81,7 +81,7 @@ class PaperApiTest(JsonRenderingTest):
  url = {https://doi.org/10.1145/3034786.3056121},
  year = {2017}
 }''',
-            '10.1007/978-3-319-45856-4_22': '''@book{Amarilli2016,
+            '10.1007/978-3-319-45856-4_22': '''@incollection{Amarilli2016,
  author = {Amarilli, Antoine and Maniu, Silviu and Monet, Mikaël},
  doi = {10.1007/978-3-319-45856-4_22},
  journal = {Lecture Notes in Computer Science},
