@@ -34,7 +34,7 @@ yl.jQuery = $;
 $(function() {
     $('#waitingArea').hide();
     $('#uploadFileId').val('');
-    
+
     /* Prefetched fields */
     function initPrefetch(p) {
         {% trans "Trying to fill this field automatically for you..." as trying_fill %}
@@ -60,7 +60,7 @@ $(function() {
                 field.prop('disabled', false);
                 field.val(data['value']);
             }
-        );        
+        );
     }
 
     /* Autocomplete */
@@ -72,8 +72,8 @@ $(function() {
     function customTemplateSelection(x) {
 	return x.selection;
     }
-    
-    // taken from django-autocomplete-light	
+
+    // taken from django-autocomplete-light
     function add_forwards(element) {
         var forward = element.attr('data-autocomplete-light-forward');
         if (forward !== undefined) {
@@ -263,7 +263,7 @@ data.selection, selected: true, result: data.result})
                     if('form' in error) {
                         errors = error['form']
                         if('file_id' in errors) {
-                            $('#globalError').addClass('error').text(errors['file_id'][0]); 
+                            $('#globalError').addClass('error').text(errors['file_id'][0]);
                         }
                         if('radioUploadType' in errors) {
                             $('#error-radioUploadType').addClass('error').text(errors['radioUploadType'][0]);
@@ -331,9 +331,8 @@ data.selection, selected: true, result: data.result})
 <div id="uploadOptions" class="panel-group detailsContent" role="tablist" aria-multiselectable="true">
     <div id="error-radioUploadType"></div>
     <div class="panel panel-default">
-        <div class="panel-heading" role="tab" id="headingUploadType">
-            <a role="button" data-toggle="collapse" data-parent="#UploadTypeOptions"
-            href="#optionUploadType">{% trans "Upload type:" %}<span id="UploadTypeInline"></span></a>
+        <div class="panel-heading pointer" role="tab" id="headingUploadType" data-toggle="collapse" data-target="#optionUploadType" data-parent="uploadTypeOptions">
+            {% trans "Upload type:" %}<span id="UploadTypeInline"></span>
         </div>
         <div id="optionUploadType" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingUploadType">
             <div class="panel-body">
@@ -342,12 +341,8 @@ data.selection, selected: true, result: data.result})
         </div>
     </div>
     <div class="panel panel-default">
-        <div class="panel-heading" role="tab" id="headingRepository">
-            <span>
-                <a role="button" data-toggle="collapse"
-                  data-parent="#uploadOptions" href="#optionRepository" aria-expanded="true"
-                        aria-controls="optionRepository">{% trans "Repository:" %}<span id="RepositoryInline"></span></a>
-            </span>
+        <div class="panel-heading pointer" role="tab" id="headingRepository" data-toggle="collapse" data-target="#optionRepository" data-parent="uploadOptions">
+            {% trans "Repository:" %}<span id="RepositoryInline"></span>
         </div>
         <div id="optionRepository" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingRepository">
             <div class="panel-body">
@@ -355,7 +350,7 @@ data.selection, selected: true, result: data.result})
                 {% for repository in available_repositories %}
                 {% with repository.0 as repo %}
                 {% with repository.1 as proto %}
-                <div class="repositoryItem {% if forloop.first %}firstItem{% endif %} {% if not proto %}disabledRepositoryItem{% endif %}">
+                <label class="repositoryItem {% if forloop.first %}firstItem{% endif %} {% if not proto %}disabledRepositoryItem{% endif %}">
 
                     {% if not repo.enabled %}
                     <div style="text-align: center">
@@ -369,21 +364,19 @@ data.selection, selected: true, result: data.result})
                         </span>
                     </div>
                     <div class="repositoryLogo">
-                        <a href="#" target="_blank">
-                            <img src="{{ repo.logo.url }}" alt="{{ repo.name }}" />
-                        </a>
+                        <img src="{{ repo.logo.url }}" alt="{{ repo.name }}" />
                     </div>
-                        <div class="repositoryChoiceRadio">
-                            <input id="radiorepo{{ repository.pk}}" type="radio" value="{{repo.pk}}"
-                                name="radioRepository" {% if not proto %}disabled="disabled"{% endif %}
-                                {% if repo == selected_repository %}checked="checked"{% endif %} />
-                        </div>
+                    <div class="repositoryChoiceRadio">
+                        <input id="radiorepo{{ repository.pk}}" type="radio" value="{{repo.pk}}"
+                            name="radioRepository" {% if not proto %}disabled="disabled"{% endif %}
+                            {% if repo == selected_repository %}checked="checked"{% endif %} />
+                    </div>
                     <p>
                         {{ repository.0.description }}
                     </p>
 
                     <div style="clear:left"></div>
-                </div>
+                </label>
                 {% endwith %}
                 {% endwith %}
                 {% endfor %}
@@ -392,12 +385,8 @@ data.selection, selected: true, result: data.result})
         </div>
     </div>
     <div class="panel panel-default">
-        <div class="panel-heading" role="tab" id="headingMetadata">
-            <span>
-                 <a role="button" data-toggle="collapse"
-                  data-parent="#uploadOptions" href="#optionMetadata" aria-expanded="true"
-                  aria-controls="optionMetadata">{% trans "Metadata" %}</a>
-            </span>
+        <div class="panel-heading pointer" role="tab" id="headingMetadata" data-toggle="collapse" data-target="#optionMetadata" data-parent="uploadOptions">
+            {% trans "Metadata" %}
         </div>
         <div id="optionMetadata" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingMetadata">
             <div class="panel-body">
