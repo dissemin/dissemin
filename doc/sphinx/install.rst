@@ -130,6 +130,7 @@ Dissemin comes with a predefined log system. You can change the settings in ``di
 
     export DISSEMIN_LOGLEVEL='YOUR_LOG_LEVEL'
 
+When using in production make sure that apache collects all your log message. Alternatively you can send them to a separate file by changing log settings.
 
 Common settings are available at ``dissemin/settings/common.py``.
 Travis specific settings are available at ``dissemin/settings/travis.py``.
