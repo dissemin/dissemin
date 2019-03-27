@@ -74,9 +74,12 @@ label[class="radio"] {
     margin: auto;
 }
 
-.repositoryItem {
+label.repositoryItem {
+    display: block;
+    margin-bottom: auto !important;
     border-top: 1px solid #CCC;
     padding-right: 10px;
+    font-weight: normal;
 }
 
 .disabledRepositoryItem p {

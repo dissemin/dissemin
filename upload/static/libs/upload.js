@@ -44,14 +44,15 @@ $(function(){
             tpl.prepend(
                 '<img src="'+data['thumbnail']+'" class="uploadThumbnail" alt="Thumbnail" />');
 
-            $('#uploadFileId').val(data['file_id']);
+            $('#uploadFileId').val(data['file_id']).change();
 
-            tpl.removeClass('uploadWorking');           
+            tpl.removeClass('uploadWorking');
 
             $('#changeFile').click(function(){
                 var uploadFileItem = tpl;
                 uploadFileItem.fadeOut(function(){
-                   uploadFileItem.remove(); 
+                  $('#uploadFileId').val('').change();
+                   uploadFileItem.remove();
                    uploadInputs.show();
                 });
         });
@@ -156,7 +157,7 @@ $(function(){
     // Function triggered when an URL is submitted
     function uploadUrl() {
         var data = $('#urlForm').serialize();
-        
+
         var tpl = addFileWidget($('#uploadUrl').val(),0);
 
         updateProgress(tpl, 10);
@@ -181,7 +182,8 @@ $(function(){
         });
     }
 
-    $('#submitUploadUrl').click(function() {
+    $('#submitUploadUrl').click(function(event) {
+        event.preventDefault();
         uploadUrl();
     });
 

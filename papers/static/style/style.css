@@ -46,6 +46,10 @@ body
     background-color: #2A6496;
 }
 
+.pointer {
+    cursor: pointer;
+}
+
 /* boilerplate for links */
 
 a
