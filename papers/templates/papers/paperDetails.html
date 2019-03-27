@@ -40,13 +40,9 @@
                                 <option value="bibtex" selected>BibTeX</option>
                             </select>
                         </div>
-                        {% with paper.get_doi as doi %}
-                        {% if doi %}
                         <div class="col-xs-6 text-right">
-                            <a class="btn btn-primary" role="button" href="{% url 'api-paper-doi' doi=doi %}?format=bibtex" download="{{ paper.slug }}.bib"><span class="glyphicon glyphicon-download" aria-hidden="true"></span> {% trans "Download" %}</a>
+                            <a class="btn btn-primary" role="button" href="{% url 'api-paper-pk' pk=paper.id %}?format=bibtex" download="{{ paper.slug }}.bib"><span class="glyphicon glyphicon-download" aria-hidden="true"></span> {% trans "Download" %}</a>
                         </div>
-                        {% endif %}
-                        {% endwith %}
                     </div>
                     <div class="form-group row">
                         <div class="col-xs-12">
@@ -64,10 +60,8 @@
 
 <span class="detailsTitle">{% trans "Tools" %}</span>
 <div class="detailsContent">
+    <p><a href="#" data-toggle="modal" data-target="#exportCitationModal">{% trans "Export citation" %}</a></p>
     {% with paper.get_doi as doi %}
-    {% if doi %}
-        <p><a href="#" data-toggle="modal" data-target="#exportCitationModal">{% trans "Export citation" %}</a></p>
-    {% endif %}
     <p><a href="{{ paper.google_scholar_link }}">{% trans "Search in Google Scholar" %}</a></p>
     {% if doi and not paper.pdf_url %}
     <p><a href="https://openaccessbutton.org/request?doi={{ doi }}">{% trans "Request with the Open Access Button" %}</a></p>
