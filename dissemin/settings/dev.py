@@ -9,7 +9,9 @@ from .common import *
 DEBUG = True
 DEBUG_TOOLBAR_CONFIG = {'SHOW_TOOLBAR_CALLBACK': lambda r: True}
 
-LOGGING['loggers']['dissemin']['level'] = DEBUG
+# Set the log level with LOGLEVEL. If exists, this value is overwritten by the environment variable DISSEMIN_LOGLEVEL
+LOGLEVEL = 'DEBUG'
+LOGGING['loggers']['dissemin']['level'] = os.environ.get('DISSEMIN_LOGLEVEL', LOGLEVEL).upper()
 
 # They are the domains under which your dissemin instance should
 # be reachable. Leave empty if you run on localhost.
