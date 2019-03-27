@@ -44,13 +44,14 @@ $(function(){
             tpl.prepend(
                 '<img src="'+data['thumbnail']+'" class="uploadThumbnail" alt="Thumbnail" />');
 
-            $('#uploadFileId').val(data['file_id']);
+            $('#uploadFileId').val(data['file_id']).change();
 
             tpl.removeClass('uploadWorking');
 
             $('#changeFile').click(function(){
                 var uploadFileItem = tpl;
                 uploadFileItem.fadeOut(function(){
+                  $('#uploadFileId').val('').change();
                    uploadFileItem.remove();
                    uploadInputs.show();
                 });
