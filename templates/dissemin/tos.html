@@ -3,7 +3,7 @@
 {% load i18n %}
 
 {% block headTitle %}
-{% trans "Frequently Asked Questions" %}
+{% trans "Terms of Service" %}
 {% endblock %}
 
 {% block content %}
@@ -43,8 +43,11 @@
 
         <p>
         {% blocktrans trimmed %}
-        Unauthenticated users are not tracked as the platform does not include any third-party
-        analytics or advertisement services.
+        The platform does not include any analytics, advertisement or tracking
+        services. We are however using the <a href="https://sentry.io/privacy/">Sentry service</a> for error
+        tracking on this platform. Our webserver configuration stores basic
+        access information (URL requested and IP address) for error monitoring,
+        which are kept for fourteen days.
 
         Authenticated users are logged-in via ORCID, a third-party service.
         The platform has no access to the
@@ -91,6 +94,11 @@
 
         When logging in to Dissemin from ORCID, Dissemin acquires the user's ORCID id,
         as well as all public information attached to the ORCID record.
+
+        We are using the <a href="https://sentry.io/privacy/">Sentry service</a> for error
+        tracking on this platform. Our webserver configuration stores basic
+        access information (URL requested and IP address) for error monitoring,
+        which are kept for fourteen days.
 
         Dissemin can store any information input by its users on the platform. Users
         can ask for a copy of the personal information Dissemin stores about them by
@@ -139,7 +147,7 @@
         at support@dissem.in, or by postal mail at the following addresss:
         {% endblocktrans %}
         </p>
-    
+
         <p>
         Association CAPSH<br />
         34 rue de la Chanaise<br />
