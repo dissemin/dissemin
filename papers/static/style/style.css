@@ -447,6 +447,17 @@ h1#paperTitle {
     line-height: 40px;
 }
 
+/* Export citation modal */
+
+#exportCitationModal #exportCitationFormatLabel {
+    margin-right: 1em;
+}
+
+#exportCitationModal #exportCitationFormat {
+    width: auto;
+    display: inline;
+}
+
 /* Policy choices pics */
 
 .policyPic

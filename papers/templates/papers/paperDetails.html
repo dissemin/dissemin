@@ -21,11 +21,52 @@
     {% include 'papers/paperSources.html' with paper=paper %}
 </div>
 
+<!-- Export citation modal -->
+<div class="modal fade" id="exportCitationModal" tabindex="-1" role="dialog" aria-labelledby="exportCitationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label='{% trans "Close" %}'>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="exportCitationModalLabel">{% trans "Export citation" %}</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group row">
+                        <div class="col-xs-6">
+                            <label for="exportCitationFormat" id="exportCitationFormatLabel">{% trans "Format" %}</label>
+                            <select id="exportCitationFormat" class="form-control">
+                                <option value="bibtex" selected>BibTeX</option>
+                            </select>
+                        </div>
+                        {% with paper.get_doi as doi %}
+                        {% if doi %}
+                        <div class="col-xs-6 text-right">
+                            <a class="btn btn-primary" role="button" href="{% url 'api-paper-doi' doi=doi %}?format=bibtex" download="{{ paper.slug }}.bib"><span class="glyphicon glyphicon-download" aria-hidden="true"></span> {% trans "Download" %}</a>
+                        </div>
+                        {% endif %}
+                        {% endwith %}
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-12">
+                            <textarea id="exportCitation-Citation" class="form-control" rows="20">{{ paper.bibtex.strip }}</textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans "Close" %}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <span class="detailsTitle">{% trans "Tools" %}</span>
 <div class="detailsContent">
     {% with paper.get_doi as doi %}
     {% if doi %}
-        <p><a href="{% url 'api-paper-doi' doi=doi %}?format=bibtex">{% trans "Export citation" %}</a></p>
+        <p><a href="#" data-toggle="modal" data-target="#exportCitationModal">{% trans "Export citation" %}</a></p>
     {% endif %}
     <p><a href="{{ paper.google_scholar_link }}">{% trans "Search in Google Scholar" %}</a></p>
     {% if doi and not paper.pdf_url %}
