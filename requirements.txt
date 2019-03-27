@@ -38,7 +38,7 @@ multiprocessing_generator
 name_tools
 ndg-httpsclient
 pillow
-psycopg2
+psycopg2-binary
 pyasn1
 pyopenssl>=0.14
 requests[security]
