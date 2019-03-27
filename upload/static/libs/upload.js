@@ -46,12 +46,12 @@ $(function(){
 
             $('#uploadFileId').val(data['file_id']);
 
-            tpl.removeClass('uploadWorking');           
+            tpl.removeClass('uploadWorking');
 
             $('#changeFile').click(function(){
                 var uploadFileItem = tpl;
                 uploadFileItem.fadeOut(function(){
-                   uploadFileItem.remove(); 
+                   uploadFileItem.remove();
                    uploadInputs.show();
                 });
         });
@@ -156,7 +156,7 @@ $(function(){
     // Function triggered when an URL is submitted
     function uploadUrl() {
         var data = $('#urlForm').serialize();
-        
+
         var tpl = addFileWidget($('#uploadUrl').val(),0);
 
         updateProgress(tpl, 10);
@@ -181,7 +181,8 @@ $(function(){
         });
     }
 
-    $('#submitUploadUrl').click(function() {
+    $('#submitUploadUrl').click(function(event) {
+        event.preventDefault();
         uploadUrl();
     });
 

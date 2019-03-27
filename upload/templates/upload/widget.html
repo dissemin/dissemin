@@ -12,7 +12,7 @@
     </div>
     <div class="uploadModeUrl">
 
-        <form id="urlForm" method="post" action="javascript:uploadUrl()">
+        <form id="urlForm" method="post" action="{% url 'ajax-downloadUrl' %}">
             {% csrf_token %}
             <label for="url">{% trans "Or enter an URL:" %}</label>
             <div>
