@@ -36,22 +36,40 @@ from papers.name import parse_comma_name
 from papers.utils import tolerant_datestamp_to_datetime
 from papers.views import PaperSearchView
 
+def api_paper_common(request, paper):
+    if 'format' in request.GET and request.GET['format'] == 'bibtex':
+        return HttpResponse(paper.bibtex(), content_type='application/x-bibtex')
+    else:
+        return JsonResponse({
+            'status': 'ok',
+            'paper': paper.json()
+        })
+
+
+def api_paper_pk(request, pk):
+    p = Paper.objects.filter(pk=pk).first()
+    if p is None:
+        return JsonResponse({
+            'error': 404,
+            'message': 'The paper you requested could not be found.',
+        }, status=404)
+    return api_paper_common(request, p)
 
 def api_paper_doi(request, doi):
-    p = Paper.get_by_doi(doi)
+    p = None
+    try:
+        p = Paper.get_by_doi(doi)
+        if not p:
+            p = Paper.create_by_doi(doi)
+    except MetadataSourceException:
+        pass
     if p is None:
         return JsonResponse({
             'error': 404,
             'message': 'The paper you requested could not be found.',
         }, status=404)
 
-    if 'format' in request.GET and request.GET['format'] == 'bibtex':
-        return HttpResponse(p.bibtex(), content_type='application/x-bibtex')
-    else:
-        return JsonResponse({
-            'status': 'ok',
-            'paper': p.json()
-        })
+    return api_paper_common(request, p)
 
 
 class PaperSearchAPI(PaperSearchView):
@@ -147,6 +165,7 @@ def api_paper_query(request):
 
 
 urlpatterns = [
+    url(r'^p/(?P<pk>\d+)$', api_paper_pk, name='api-paper-pk'),
     url(r'^(?P<doi>10\..*)$', api_paper_doi, name='api-paper-doi'),
     url(r'^query/?$', api_paper_query, name='api-paper-query'),
     url(r'^search/?$', PaperSearchAPI.as_view(), name='api-paper-search'),

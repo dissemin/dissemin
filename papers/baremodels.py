@@ -653,6 +653,7 @@ class BarePaper(BareObject):
                 entry['url'] = doi_to_url(doi)
 
         writer = BibTexWriter()
+        writer.indent = '  '
         with io.StringIO('') as bibfile:
             db = BibDatabase()
             db.entries = [entry]

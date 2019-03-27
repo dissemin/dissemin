@@ -30,9 +30,18 @@ class PaperApiTest(JsonRenderingTest):
         self.checkJson(self.getPage('api-paper-doi',
                                     args=['10.1016/0379-6779(91)91572-r']))
 
+    def test_valid_pk(self):
+        paper = Paper.create_by_doi('10.1016/0379-6779(91)91572-r')
+        self.checkJson(self.getPage('api-paper-pk',
+                                    args=[paper.id]))
+
     def test_invalid_doi(self):
         self.checkJson(self.getPage('api-paper-doi',
                                     args=['10.10.10.10.10']), 404)
+
+    def test_invalid_pk(self):
+        self.checkJson(self.getPage('api-paper-pk',
+                                    args=['999999999']), 404)
 
     def test_query(self):
         invalid_payloads = [
@@ -103,9 +112,16 @@ class PaperApiTest(JsonRenderingTest):
 }''',
         }
         for doi, bibtex in dois_bibtex.items():
-            Paper.create_by_doi(doi)
+            p = Paper.create_by_doi(doi)
             resp = self.getPage('api-paper-doi',
                                 args=[doi], getargs={'format': 'bibtex'})
+
+            self.assertEqual(resp.status_code, 200)
+            self.assertEqual(resp.content.decode('utf-8').strip(),
+                             bibtex.strip())
+
+            resp = self.getPage('api-paper-pk',
+                                args=[p.id], getargs={'format': 'bibtex'})
 
             self.assertEqual(resp.status_code, 200)
             self.assertEqual(resp.content.decode('utf-8').strip(),
