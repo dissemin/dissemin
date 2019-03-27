@@ -62,7 +62,7 @@
 <div class="detailsContent">
     <p><a href="#" data-toggle="modal" data-target="#exportCitationModal">{% trans "Export citation" %}</a></p>
     {% with paper.get_doi as doi %}
-    <p><a href="{{ paper.google_scholar_link }}">{% trans "Search in Google Scholar" %}</a></p>
+    <p><a href="{{ paper.google_scholar_link }}">{% trans "Search in Google Scholar" %} <img src="/static/extlink.png" alt="[^]"></a></p>
     {% if doi and not paper.pdf_url %}
     <p><a href="https://openaccessbutton.org/request?doi={{ doi }}">{% trans "Request with the Open Access Button" %}</a></p>
     {% endif %}
@@ -73,7 +73,7 @@
 <span class="detailsTitle">{% trans "Admin zone" %}</span>
 <div class="detailsContent">
     <p><strong>Fingerprint:</strong> {{ paper.plain_fingerprint }}</p>
-    <p><strong>Fingerprint:</strong> <a href="http://doai.dissem.in/oai?verb=ListRecords&metadataPrefix=base_dc&set=proaixy:fingerprint:{{ paper.fingerprint }}">{{ paper.fingerprint }}</a></p>
+    <p><strong>Fingerprint:</strong> {{ paper.fingerprint }}</p>
 </div>
 {% endif %}
 
