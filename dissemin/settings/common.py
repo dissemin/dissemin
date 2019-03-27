@@ -383,7 +383,7 @@ LOGGING = {
         },
     # dissemin logger
         'dissemin' : {
-            'level': None,
+            'level': None, # Change this value in prod.py resp dev.py
             'handlers': ['console'],
             'propagate': False,
         },
