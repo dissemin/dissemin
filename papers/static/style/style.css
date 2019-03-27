@@ -46,6 +46,10 @@ body
     background-color: #2A6496;
 }
 
+.pointer {
+    cursor: pointer;
+}
+
 /* boilerplate for links */
 
 a
@@ -445,6 +449,17 @@ h1#paperTitle {
 .undoDeletePaper
 {
     line-height: 40px;
+}
+
+/* Export citation modal */
+
+#exportCitationModal #exportCitationFormatLabel {
+    margin-right: 1em;
+}
+
+#exportCitationModal #exportCitationFormat {
+    width: auto;
+    display: inline;
 }
 
 /* Policy choices pics */

@@ -126,6 +126,12 @@ Depending on your environment, you might want to override ``STATIC_ROOT`` and ``
 
 Don't forget to edit ``ALLOWED_HOSTS`` for production or if your django server does not run on *localhost:8080*.
 
+Dissemin comes with a predefined log system. You can change the settings in ``dissemin/settings/common.py`` and change the default log level for production and development in the corresponding files. When using dissemin from the shell with ``./manage shell`` you can set the log level for console output as environment variable with::
+
+    export DISSEMIN_LOGLEVEL='YOUR_LOG_LEVEL'
+
+When using in production make sure that apache collects all your log message. Alternatively you can send them to a separate file by changing log settings.
+
 Common settings are available at ``dissemin/settings/common.py``.
 Travis specific settings are available at ``dissemin/settings/travis.py``.
 
