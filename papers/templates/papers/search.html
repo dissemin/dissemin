@@ -219,7 +219,11 @@ $(function(){
         </div>
     </div>
     <div class="form-group" id="searchAuthorsName">
+        {% if researcher %}
+        <label for="{{ form.authors.id_for_label }}">{% trans "By co-authors" %}</label>
+        {% else %}
         <label for="{{ form.authors.id_for_label }}">{% trans "By authors" %}</label>
+        {% endif %}
         {{ form.authors.errors }}
         {% render_field form.authors class="form-control" %}
     </div>
