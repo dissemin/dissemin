@@ -30,6 +30,7 @@ urlpatterns = [
         url(r'^$', views.index, name='index'),
         # Paper views
         url(r'^search/$', views.PaperSearchView.as_view(), name='search'),
+        url(r'^search/advanced$', views.PaperSearchView.as_view(), name='search'),
         url(r'^r/(?P<researcher>\d+)/(?P<slug>[\w-]*)$',
             views.ResearcherView.as_view(), name='researcher'),
         url(r'^researcher/(?P<researcher>\d+)$',
