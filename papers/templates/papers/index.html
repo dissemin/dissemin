@@ -18,7 +18,7 @@
 {% block content %}
 <div id="fullPage">
   <div id="welcome">
-    <h2>{% trans "Welcome to dissemin" %}</h2>
+    <h2 class="text-center">{% trans "Welcome to dissemin" %}</h2>
 
     <p class="startButton">
     {% blocktrans trimmed %}
@@ -26,7 +26,7 @@
     upload them in one click to an open repository.
     {% endblocktrans %}
     </p>
-    
+
     <form method="get" action="{% url 'search' %}">
         <div class="input-group" id="searchPapersTitle">
             {% render_field search_form.authors class="form-control" %}

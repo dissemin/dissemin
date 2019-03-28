@@ -886,6 +886,10 @@ input[type=checkbox]:checked ~ .stats_caption_label
 	margin-right:20px;
 }
 
+.oaPanel .access-statistics {
+    text-align: center;
+}
+
 #sidebar .statspie_graph, #sidebar .statspie_caption {
     display:block;
     margin:auto;
