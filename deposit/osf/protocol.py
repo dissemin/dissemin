@@ -239,7 +239,7 @@ class OSFProtocol(RepositoryProtocol):
 
     def mask_dissemin_contributor(self):
         """
-        Mark the dissemin account as non-bibliographic contributor,
+        Mark the Dissemin account as non-bibliographic contributor,
         so that it does not appear as author of the preprint
         """
         contrib_url = (
