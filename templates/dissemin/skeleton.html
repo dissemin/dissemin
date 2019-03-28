@@ -101,7 +101,7 @@ $.ajax({ url: 'https://{{ ORCID_BASE_DOMAIN }}/userStatus.json?logUserOut=true',
             {% get_current_language as LANGUAGE_CODE %}
             <form action="{% url 'set_language' %}" method="post" id="change-lang-form" class="form-inline">
                 {% csrf_token %}
-                <label for="set-language">{% trans "Change language" %} <i class=" glyphicon glyphicon-globe"></i></label>
+                <label for="set-language">{% trans "Change language" %}&nbsp;<i class=" glyphicon glyphicon-globe"></i></label>
                 <select name="language" id="set-language" class="form-control" onchange="$('#change-lang-form').submit();">
                     {% get_available_languages as LANGUAGES %}
                     {% get_language_info_list for LANGUAGES as languages %}
