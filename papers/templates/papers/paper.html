@@ -20,7 +20,7 @@
     {% endif %}
 {% endblock %}
 
-{% block headTitle %}{{ paper.title }} - {{ paper.authors | join:', ' }}{% endblock %}
+{% block headTitle %}{{ paper.title }} - {{ paper.interesting_authors | join:', ' }}{% endblock %}
 
 {% block bodyTitle %}
 <h1 id="paperTitle" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}" data-pk="{{ paper.pk }}">
