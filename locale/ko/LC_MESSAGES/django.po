@@ -1092,7 +1092,7 @@ msgstr[0] ""
 #, fuzzy, python-format
 msgid "%(formattedCounter)s paper found"
 msgid_plural "%(formattedCounter)s papers found"
-msgstr[0] "게시자 %(counter)s명을 찾음"
+msgstr[0] "게시자 %(formattedCounter)s명을 찾음"
 
 #: papers/templates/papers/search.html:212
 msgid "Search by title"

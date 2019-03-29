@@ -1094,11 +1094,11 @@ msgstr[0] "%(nb_publi)s напис објавен од %(publisher)s"
 msgstr[1] "%(nb_publi)s написи објавени од %(publisher)s"
 
 #: papers/templates/papers/search.html:191
-#, fuzzy, python-format
+#, python-format
 msgid "%(formattedCounter)s paper found"
 msgid_plural "%(formattedCounter)s papers found"
-msgstr[0] "Пронајдов %(counter)s издавач"
-msgstr[1] "Пронајдов %(counter)s издавачи"
+msgstr[0] "Пронајдов %(formattedCounter)s издавач"
+msgstr[1] "Пронајдов %(formattedCounter)s издавачи"
 
 #: papers/templates/papers/search.html:212
 msgid "Search by title"

@@ -1094,11 +1094,11 @@ msgstr[0] "Er is %(nb_publi)s document door %(publisher)s geplaatst"
 msgstr[1] "Er zijn %(nb_publi)s documenten door %(publisher)s geplaatst"
 
 #: papers/templates/papers/search.html:191
-#, fuzzy, python-format
+#, python-format
 msgid "%(formattedCounter)s paper found"
 msgid_plural "%(formattedCounter)s papers found"
-msgstr[0] "%(counter)s uitgever gevonden"
-msgstr[1] "%(counter)s uitgevers gevonden"
+msgstr[0] "%(formattedCounter)s uitgever gevonden"
+msgstr[1] "%(formattedCounter)s uitgevers gevonden"
 
 #: papers/templates/papers/search.html:212
 msgid "Search by title"

@@ -920,7 +920,7 @@ msgstr "(leeres Profil)"
 #, python-format
 msgctxt "as in: _Journal article published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "<span class=\"paperDocType\">%(doctype)s</span> published in %(year)s by"
-msgstr "<span class=\"paperDocType\">%(doctype)s</span> von"
+msgstr "<span class=\"paperDocType\">%(doctype)s</span> %(year)s veröffentlicht von"
 
 #: papers/templates/papers/paper.html:66
 #, python-format
@@ -1100,8 +1100,8 @@ msgstr[1] "%(nb_publi)s Publikationen herausgegeben von %(publisher)s"
 #, python-format
 msgid "%(formattedCounter)s paper found"
 msgid_plural "%(formattedCounter)s papers found"
-msgstr[0] "%(counter)s Herausgeber_in gefunden"
-msgstr[1] "%(counter)s Herausgeber_innen gefunden"
+msgstr[0] "%(formattedCounter)s Herausgeber_in gefunden"
+msgstr[1] "%(formattedCounter)s Herausgeber_innen gefunden"
 
 #: papers/templates/papers/search.html:212
 msgid "Search by title"

@@ -915,13 +915,13 @@ msgstr "(profil veuid)"
 #, python-format
 msgctxt "as in: _Journal article published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "<span class=\"paperDocType\">%(doctype)s</span> published in %(year)s by"
-msgstr "<span class=\"paperDocType\">%(doctype)s</span> ëd"
+msgstr "<span class=\"paperDocType\">%(doctype)s</span> (%(year)s) ëd"
 
 #: papers/templates/papers/paper.html:66
 #, python-format
 msgctxt "as in: _Published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "Published in %(year)s by"
-msgstr "Publicà an"
+msgstr "Publicà in %(year)s an"
 
 #: papers/templates/papers/paper.html:74
 #, python-format
@@ -1095,8 +1095,8 @@ msgstr[1] "%(nb_publi)s artìcoj publicà da %(publisher)s"
 #, python-format
 msgid "%(formattedCounter)s paper found"
 msgid_plural "%(formattedCounter)s papers found"
-msgstr[0] "%(counter)s ca editris trovà"
-msgstr[1] "%(counter)s ca editris trovà"
+msgstr[0] "%(formattedCounter)s ca editris trovà"
+msgstr[1] "%(formattedCounter)s ca editris trovà"
 
 #: papers/templates/papers/search.html:212
 msgid "Search by title"

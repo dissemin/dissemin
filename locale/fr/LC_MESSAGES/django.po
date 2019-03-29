@@ -1098,11 +1098,11 @@ msgstr[0] "%(nb_publi)s papier publié par %(publisher)s"
 msgstr[1] "%(nb_publi)s papiers publiés par %(publisher)s"
 
 #: papers/templates/papers/search.html:191
-#, fuzzy, python-format
+#, python-format
 msgid "%(formattedCounter)s paper found"
 msgid_plural "%(formattedCounter)s papers found"
-msgstr[0] "%(counter)s maison d'édition trouvée"
-msgstr[1] "%(counter)s maisons d'édition trouvées"
+msgstr[0] "%(formattedCounter)s maison d'édition trouvée"
+msgstr[1] "%(formattedCounter)s maisons d'édition trouvées"
 
 #: papers/templates/papers/search.html:212
 msgid "Search by title"

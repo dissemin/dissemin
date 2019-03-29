@@ -1098,8 +1098,8 @@ msgstr[1] ""
 #, fuzzy, python-format
 msgid "%(formattedCounter)s paper found"
 msgid_plural "%(formattedCounter)s papers found"
-msgstr[0] "%(counter)s utgivare hittades"
-msgstr[1] "%(counter)s utgivare hittades"
+msgstr[0] "%(formattedCounter)s utgivare hittades"
+msgstr[1] "%(formattedCounter)s utgivare hittades"
 
 #: papers/templates/papers/search.html:212
 msgid "Search by title"

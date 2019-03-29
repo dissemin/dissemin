@@ -1108,7 +1108,7 @@ msgstr[5] ""
 #, fuzzy, python-format
 msgid "%(formattedCounter)s paper found"
 msgid_plural "%(formattedCounter)s papers found"
-msgstr[0] "تم العثور على %(counter)s ناشر"
+msgstr[0] "تم العثور على %(formattedCounter)s ناشر"
 msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""

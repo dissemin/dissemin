@@ -1092,10 +1092,10 @@ msgid_plural "%(nb_publi)s papers published by %(publisher)s"
 msgstr[0] "%(nb_publi)s篇论文由%(publisher)s发表"
 
 #: papers/templates/papers/search.html:191
-#, fuzzy, python-format
+#, python-format
 msgid "%(formattedCounter)s paper found"
 msgid_plural "%(formattedCounter)s papers found"
-msgstr[0] "找到%(counter)s位发行者"
+msgstr[0] "找到%(formattedCounter)s位发行者"
 
 #: papers/templates/papers/search.html:212
 msgid "Search by title"

@@ -1093,11 +1093,11 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: papers/templates/papers/search.html:191
-#, fuzzy, python-format
+#, python-format
 msgid "%(formattedCounter)s paper found"
 msgid_plural "%(formattedCounter)s papers found"
-msgstr[0] "%(counter)s utgiver"
-msgstr[1] "%(counter)s utgivere"
+msgstr[0] "%(formattedCounter)s utgiver"
+msgstr[1] "%(formattedCounter)s utgivere"
 
 #: papers/templates/papers/search.html:212
 msgid "Search by title"
