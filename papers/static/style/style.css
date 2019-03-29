@@ -609,6 +609,13 @@ ul.compactList
     column-width: 100px;
 }
 
+#advancedSearchPapers ul.compactList
+{
+    -moz-column-width: 200px;
+    -webkit-column-width: 200px;
+    column-width: 200px;
+}
+
 .compactList li
 {
     list-style: none;
@@ -1157,13 +1164,13 @@ a.stats_caption_line:hover {
     height: 40px;
 }
 
-#welcome #searchPapersTitle .btn {
+.btn-search {
     background-color: #a9b502;
     border-color: #879001;
     height: 40px;
 }
 
-#welcome #searchPapersTitle .btn:hover {
+.btn-search:hover, .btn-search:focus {
     background-color: #879001;
     border-color: #879001;
 }
