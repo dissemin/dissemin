@@ -45,14 +45,12 @@
         {{ form.doctypes.errors }}
         <ul class="compactList">
             {% for checkbox in form.doctypes %}
-            {% with value=checkbox.choice_value %}
             <li class="checkbox">
                 <label class="doctype">
                     {{ checkbox.tag }}
                     {{ checkbox.choice_label }}
                 </label>
             </li>
-            {% endwith %}
             {% endfor %}
         </ul>
     </div>
@@ -71,8 +69,7 @@
         {{ form.oa_status.errors }}
         <label for="{{ form.oa_status.id_for_label }}">{% trans "By publisher policy" %}</label>
         {% for checkbox in form.oa_status %}
-        {% with value=checkbox.choice_value %}
-	{% if value %}
+        {% with value=checkbox.data.value %}
         <div class="logoHelpPopover" data-content="{{ value|helptext_oa_status }}">
         <div class="checkbox publisherCriterion">
             {{ checkbox.tag }}
@@ -84,7 +81,6 @@
             </div>
         </div>
         </div>
-	{% endif %}
         {% endwith %}
         {% endfor %}
     </div>
