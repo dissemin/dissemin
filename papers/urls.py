@@ -24,7 +24,6 @@ from django.conf.urls import include
 from django.conf.urls import url
 from django.views.generic.base import RedirectView, TemplateView
 from django.conf import settings
-from dissemin.urls import temp
 from papers import views
 
 urlpatterns = [
