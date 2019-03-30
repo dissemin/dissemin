@@ -26,7 +26,6 @@ class OrcidUnitTest(unittest.TestCase):
                     [('Antonin', 'Delpeuch'), ('Anne', 'Preller')]),
                 ['0000-0002-8612-8827', None])
 
-
 @pytest.mark.usefixtures("load_test_data")
 class OrcidIntegrationTest(PaperSourceTest):
 
@@ -113,5 +112,13 @@ class OrcidIntegrationTest(PaperSourceTest):
         self.assertEqual(p.authors[2].orcid, None)
         self.assertEqual(p.authors[0].researcher_id, stergios.id)
         self.assertEqual(p.authors[2].researcher_id, None)
+
+    def test_bibtex_not_ignored(self):
+        profile = OrcidProfileStub('0000-0003-2888-1770', instance='orcid.org')
+        adrien = Researcher.get_or_create_by_orcid('0000-0003-2888-1770', profile=profile)
+        self.source.fetch_and_save(adrien, profile=profile)
+        p1 = Paper.objects.get(title='A Fuzzy Take on Graded Beliefs')
+        p2 = Paper.objects.get(title='Information quality and uncertainty')
+        self.assertTrue(p1 != p2)
 
 
