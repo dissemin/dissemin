@@ -21,7 +21,7 @@
 
 import logging
 import requests
-
+import json
 
 from django.conf import settings
 from django.utils.functional import cached_property
@@ -322,9 +322,9 @@ class SkippedPaper(Exception):
 
 class OrcidWork(object):
 
-    def __init__(self, orcid_profile, json):
+    def __init__(self, orcid_profile, json_representation):
         self.profile = orcid_profile
-        self.json = json
+        self.json = json_representation
         self.id = orcid_profile.id
 
         self.skipped = False
@@ -393,7 +393,7 @@ class OrcidWork(object):
         """
         ORCiD internal id for the work
         """
-        return self.j('put-code')
+        return self.j('work/put-code')
 
     @property
     def api_uri(self):

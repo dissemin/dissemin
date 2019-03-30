@@ -45,15 +45,13 @@ from papers.utils import validate_orcid
 
 logger = logging.getLogger('dissemin.' + __name__)
 
-### Metadata manipulation utilities ####
-
-def orcid_oai_source():
-    return OaiSource.objects.get(identifier='orcid')
-
-
 ### Paper fetching ####
 
 class OrcidPaperSource(PaperSource):
+    
+    def __init__(self, *args, **kwargs):
+        super(OrcidPaperSource, self).__init__(*args, **kwargs)
+        self.oai_source = OaiSource.objects.get(identifier='orcid')
 
     def fetch_papers(self, researcher, profile=None):
         if not researcher:
@@ -78,7 +76,7 @@ class OrcidPaperSource(PaperSource):
             orcids=orcids,
         )
         record = BareOaiRecord(
-            source=orcid_oai_source(),
+            source=self.oai_source,
             identifier=work.api_uri,
             splash_url=work.splash_url,
             pubtype=work.pubtype
@@ -118,7 +116,7 @@ class OrcidPaperSource(PaperSource):
                     continue
 
                 record = BareOaiRecord(
-                        source=orcid_oai_source(),
+                        source=self.oai_source,
                         identifier='orcid:%s:%s' % (orcid_id, metadata['DOI']),
                         splash_url='https://%s/%s' % (
                             settings.ORCID_BASE_DOMAIN, orcid_id),
@@ -199,7 +197,7 @@ class OrcidPaperSource(PaperSource):
             dois = [doi for doi, put_code in dois_and_putcodes]
             for idx, (success, paper_or_metadata) in enumerate(self.fetch_metadata_from_dois(cr_api, ref_name, orcid_id, dois)):
                 if success:
-                    yield paper_or_metadata
+                    yield paper_or_metadata # We know that this is a paper
                 else:
                     put_codes.append(dois_and_putcodes[idx][1])
 
