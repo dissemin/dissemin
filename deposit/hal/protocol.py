@@ -131,7 +131,7 @@ class HALProtocol(RepositoryProtocol):
         s = BytesIO()
         with ZipFile(s, 'w') as zipFile:
             zipFile.write(pdf, "article.pdf")
-            zipFile.writestr("meta.xml", str(metadata))
+            zipFile.writestr("meta.xml", metadata)
         return s
 
     def encodeUserData(self):
@@ -191,6 +191,8 @@ class HALProtocol(RepositoryProtocol):
                 if resp.status != 201:
                     self.log('Deposit response status: HTTP %d' % resp.status)
                     self.log(xml_response.decode('utf-8'))
+                    self.log('Metadata payload was:')
+                    self.log(metadata.decode('utf-8'))
                     # Get the verbose description of the error to output it as well
                     root = receipt.getroot()
                     verboseDescription = (
@@ -240,7 +242,7 @@ class HALProtocol(RepositoryProtocol):
                 self.log('Here is the metadata:{}'.format(metadata.decode('utf-8')))
                 raise DepositError(_('HAL rejected the submission.'))
             else:
-                self.log(xml_response)
+                self.log(xml_response.decode('utf-8'))
 
             deposition_id = receipt.find('{http://www.w3.org/2005/Atom}id').text
             password = receipt.find(
