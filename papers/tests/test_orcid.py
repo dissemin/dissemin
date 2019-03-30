@@ -25,7 +25,6 @@ import unittest
 import json
 import requests
 import os
-from unittest.mock import MagicMock
 
 from papers.orcid import OrcidProfile
 from papers.orcid import OrcidWorkSummary
@@ -283,24 +282,24 @@ class OrcidProfileTest(unittest.TestCase):
         self.assertTrue('Complexity of Grammar Induction for Quantum Types' in titles)
         pubtypes = [work.pubtype for work in works]
         self.assertTrue('journal-article' in pubtypes)
-        
+
 
 class OrcidWorkTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.testdir = os.path.dirname(os.path.abspath(__file__))
-        
+
     def load_work(self, orcid_id, filename):
         profile = OrcidProfileStub(orcid_id)
         with open(os.path.join(self.testdir, 'data', filename), 'r') as f:
             return OrcidWork(profile, json.load(f))
-        
+
     def test_authors_from_bibtex(self):
         work = self.load_work('0000-0003-2888-1770', 'Negation_of_graded_beliefs.json')
         self.assertEqual([('Bénédicte', 'Legastelois'), ('Marie-Jeanne', 'Lesot'),('Adrien', "Revault d'Allonnes")], work.authors)
-        
+
     def test_put_code(self):
         work = self.load_work('0000-0003-2888-1770', 'Vertex-centred_Method_to_Detect_Communities_in_Evolving_Networks.json')
         self.assertEqual(work.put_code, 55549876)
         self.assertEqual(work.api_uri, "https://pub.orcid.org/v2.1/0000-0003-2888-1770/work/55549876")
-        
+

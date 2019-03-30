@@ -9,7 +9,6 @@ from papers.models import Paper
 from papers.models import Researcher
 from backend.tests.test_generic import PaperSourceTest
 from papers.tests.test_orcid import OrcidProfileStub
-from papers.orcid import OrcidWork
 
 class OrcidUnitTest(unittest.TestCase):
 
@@ -113,7 +112,7 @@ class OrcidIntegrationTest(PaperSourceTest):
         self.assertEqual(p.authors[2].orcid, None)
         self.assertEqual(p.authors[0].researcher_id, stergios.id)
         self.assertEqual(p.authors[2].researcher_id, None)
-        
+
     def test_bibtex_not_ignored(self):
         profile = OrcidProfileStub('0000-0003-2888-1770', instance='orcid.org')
         adrien = Researcher.get_or_create_by_orcid('0000-0003-2888-1770', profile=profile)

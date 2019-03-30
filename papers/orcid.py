@@ -21,7 +21,6 @@
 
 import logging
 import requests
-import json
 
 from django.conf import settings
 from django.utils.functional import cached_property
