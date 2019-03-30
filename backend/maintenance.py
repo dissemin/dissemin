@@ -35,6 +35,8 @@ from bulk_update.helper import bulk_update
 from papers.models import Name
 from papers.models import Paper
 from papers.models import Researcher
+from papers.models import OaiRecord
+from papers.models import OaiSource
 from datetime import datetime
 from elasticsearch.helpers import bulk
 from elasticsearch.exceptions import ConnectionTimeout
@@ -243,3 +245,28 @@ def report_dubious_orcids():
                     a.orcid,
                 ])+'\n')
 
+def unmerge_paper_by_dois(paper):
+    """
+    Given a paper that was merged by mistake, delete it and re-create
+    it with each DOI found in it.
+    """
+    dois = [record.doi for record in paper.oairecords if record.doi]
+    paper.delete()
+    new_papers = [Paper.create_by_doi(doi) for doi in dois]
+    return new_papers
+
+def unmerge_orcid_nones():
+    """
+    Bespoke procedure to unmerge papers which were incorrectly merged
+    after an issue with invalid OAI ids being generated for OaiRecords
+    from ORCID.
+    """
+    oai_source = OaiSource.objects.get(identifier='orcid')
+    logger.info('Retrieving paper ids')
+    paper_ids = set(OaiRecord.objects.filter(source=oai_source, identifier__endswith='/None').values_list('about_id', flat=True))
+    logger.info('{} papers to fix'.format(len(paper_ids)))
+    for paper_id in sorted(paper_ids):
+        paper = Paper.objects.get(id=paper_id)
+        if paper.depositrecord_set.count():
+            continue
+        unmerge_paper_by_dois(paper)

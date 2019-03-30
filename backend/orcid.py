@@ -102,6 +102,9 @@ class OrcidPaperSource(PaperSource):
                     yield False, metadata
             except ValueError:
                 logger.exception("Saving CrossRef record from ORCID with id %s failed" % orcid_id)
+    
+    def _oai_id_for_doi(self, orcid_id, doi):
+        return 'orcid:{}:{}'.format(orcid_id, doi)
 
     def fetch_metadata_from_dois(self, cr_api, ref_name, orcid_id, dois):
         doi_metadata = fetch_dois(dois)
@@ -117,7 +120,7 @@ class OrcidPaperSource(PaperSource):
 
                 record = BareOaiRecord(
                         source=self.oai_source,
-                        identifier='orcid:%s:%s' % (orcid_id, metadata['DOI']),
+                        identifier=self._oai_id_for_doi(orcid_id, metadata['DOI']),
                         splash_url='https://%s/%s' % (
                             settings.ORCID_BASE_DOMAIN, orcid_id),
                         pubtype=paper.doctype)

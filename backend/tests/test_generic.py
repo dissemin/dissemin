@@ -23,8 +23,6 @@
 import datetime
 import unittest
 
-from backend.crossref import CrossRefAPI
-from backend.maintenance import update_paper_statuses
 from backend.tasks import fetch_everything_for_researcher
 from django.test import TestCase
 import pytest
@@ -33,7 +31,6 @@ from papers.baremodels import BareAuthor
 from papers.baremodels import BareName
 from papers.baremodels import BarePaper
 from papers.models import Name
-from papers.models import OaiRecord
 from papers.models import Paper
 from papers.models import Researcher
 
@@ -134,30 +131,3 @@ class TasksTest(TestCase):
         profile = OrcidProfileStub('0000-0002-9658-1473', instance='orcid.org')
         r = Researcher.get_or_create_by_orcid('0000-0002-9658-1473', profile=profile)
         fetch_everything_for_researcher(r.pk)
-
-@pytest.mark.usefixtures("load_test_data")
-class MaintenanceTest(TestCase):
-
-    @classmethod
-    def setUpClass(self):
-        super(MaintenanceTest, self).setUpClass()
-        self.cr_api = CrossRefAPI()
-
-    def test_name_initial(self):
-        n = self.r2.name
-        p = Paper.create_by_doi("10.1002/ange.19941062339")
-        n1 = p.authors[0].name
-        self.assertEqual((n1.first, n1.last), (n.first, n.last))
-
-    def test_update_paper_statuses(self):
-        p = self.cr_api.create_paper_by_doi("10.1016/j.bmc.2005.06.035")
-        p = Paper.from_bare(p)
-        self.assertEqual(p.pdf_url, None)
-        pdf_url = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
-        OaiRecord.new(source=self.arxiv,
-                      identifier='oai:arXiv.org:aunrisste',
-                      about=p,
-                      splash_url='http://www.perdu.com/',
-                      pdf_url=pdf_url)
-        update_paper_statuses()
-        self.assertEqual(Paper.objects.get(pk=p.pk).pdf_url, pdf_url)
