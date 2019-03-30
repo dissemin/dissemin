@@ -252,8 +252,11 @@ def unmerge_paper_by_dois(paper):
     """
     dois = [record.doi for record in paper.oairecords if record.doi]
     paper.delete()
-    new_papers = [Paper.create_by_doi(doi) for doi in dois]
-    return new_papers
+    for doi in dois:
+        try:
+            Paper.create_by_doi(doi)
+        except ValueError:
+            continue
 
 def unmerge_orcid_nones():
     """
@@ -268,5 +271,7 @@ def unmerge_orcid_nones():
     for paper_id in sorted(paper_ids):
         paper = Paper.objects.get(id=paper_id)
         if paper.depositrecord_set.count():
+            logger.info('Skipping {}'.format(paper.url))
             continue
+        logger.info('Fixing {}'.format(paper.url))
         unmerge_paper_by_dois(paper)

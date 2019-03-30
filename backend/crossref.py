@@ -595,5 +595,5 @@ class CrossRefAPI(object):
                             logger.warning(e)
                             sleep(10*i)
                 except (MetadataSourceException, ValueError):
-                    logger.exception((record.get('DOI') or 'unknown DOI'))
+                    logger.info((record.get('DOI') or 'unknown DOI'))
 
