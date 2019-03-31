@@ -395,7 +395,7 @@ LOGGING = {
 if SENTRY_DSN:
     LOGGING['handlers'].update({
         'sentry': {
-            'level': 'WARNING',
+            'level': 'ERROR',
             'class': 'sentry_sdk.integrations.logging.EventHandler',
             }
         })
