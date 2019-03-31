@@ -39,9 +39,11 @@ from papers.baremodels import BarePaper
 from papers.errors import MetadataSourceException
 from papers.models import OaiSource
 from papers.models import Researcher
+from papers.models import Paper
 from papers.orcid import OrcidProfile
 from papers.orcid import affiliate_author_with_orcid
 from papers.utils import validate_orcid
+from search import SearchQuerySet
 
 logger = logging.getLogger('dissemin.' + __name__)
 
@@ -146,6 +148,22 @@ class OrcidPaperSource(PaperSource):
                                     notification,
                                     'backend_orcid'
                                     )
+            
+    def link_existing_papers(self, researcher):
+        """
+        Search for papers which bear the ORCID id of the researcher,
+        but which are not linked to the researcher itself, and updates them
+        to link to the researcher.
+        """
+        queryset = SearchQuerySet().models(Paper).filter(orcids=researcher.orcid)
+        for paper in queryset:
+            if researcher.id not in paper.researcher_ids:
+                new_authors = paper.authors
+                for author in new_authors:
+                    if author.orcid == researcher.orcid:
+                        author.researcher_id = researcher.id
+                paper.update_authors(new_authors)
+                
 
     def fetch_orcid_records(self, orcid_identifier, profile=None, use_doi=True):
         """
@@ -247,7 +265,7 @@ class OrcidPaperSource(PaperSource):
 
     def bulk_import(self, directory, fetch_papers=True, use_doi=False):
         """
-        Bulk-imports ORCID profiles from a dmup
+        Bulk-imports ORCID profiles from a dump
         (warning: this still uses our DOI cache).
         The directory should contain json versions
         of orcid profiles, as in the official ORCID

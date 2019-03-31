@@ -148,12 +148,8 @@ class PaperForm(SearchForm):
             # these as orcid ids and do the filtering
             orcid_ids = [x for x in name.split(' ') if validate_orcid(x)]
             for orcid_id in orcid_ids:
-                try:
-                    researcher = Researcher.objects.get(orcid=orcid_id)
-                    self.filter(researchers=researcher.id)
-                except Researcher.DoesNotExist:
-                    pass
-                continue
+                self.filter(orcids=orcid_id)
+
             # Rebuild a full name excluding the ORCID id terms
             name = ' '.join([x for x in name.split(' ') if x not in orcid_ids])
 
