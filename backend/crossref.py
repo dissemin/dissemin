@@ -569,10 +569,11 @@ class CrossRefAPI(object):
             source.last_update += batch_time
             source.save()
 
-    def ingest_dump(self, filename, start_doi=None, update_index=True):
+    @report_speed('Crossref importing speed')
+    def read_dump(self, filename, start_doi=None):
         """
-        Imports a dump of Crossref metadata records stored as a bz2'ed
-        file where each line is a JSON record.
+        Reads a Crossref medatada dump stored as a bz2'ed file
+        where each line is a JSON record.
         """
         with bz2.BZ2File(filename, 'r') as f:
             first_doi_seen = start_doi is None
@@ -583,21 +584,29 @@ class CrossRefAPI(object):
                         first_doi_seen = True
                     if not first_doi_seen:
                         continue
+                    yield record
+                except ValueError:
+                    continue
 
-                    logger.info(record.get('DOI'))
-                    bare_paper = self.save_doi_metadata(record)
-                    p = Paper.from_bare(bare_paper)
+    def ingest_dump(self, filename, start_doi=None, update_index=True):
+        """
+        Imports a dump of Crossref metadata records stored as a bz2'ed
+        file where each line is a JSON record.
+        """
+        for record in self.read_dump(filename, start_doi=start_doi):
+            bare_paper = self.save_doi_metadata(record)
+            p = Paper.from_bare(bare_paper)
 
-                    if not update_index:
-                        continue
+            if not update_index:
+                continue
 
-                    for i in range(3):
-                        try:
-                            p.update_index()
-                            break
-                        except ConnectionTimeout as e:
-                            logger.warning(e)
-                            sleep(10*i)
+            for i in range(3):
+                try:
+                    p.update_index()
+                    break
+                except ConnectionTimeout as e:
+                    logger.warning(e)
+                    sleep(10*i)
                 except (MetadataSourceException, ValueError):
                     logger.info((record.get('DOI') or 'unknown DOI'))
 
