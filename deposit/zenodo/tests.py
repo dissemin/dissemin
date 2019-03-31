@@ -104,11 +104,11 @@ class ZenodoProtocolTest(ProtocolTest, RenderingTest):
 
     def test_500_error(self):
         with requests_mock.Mocker(real_http=True) as mocker:
-            mocker.get(re.compile('.*\.zenodo\.org/.*'), status_code=500)
+            mocker.get(re.compile(r'.*\.zenodo\.org/.*'), status_code=500)
             p = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
             r = self.dry_deposit(p,
                     abstract = lorem_ipsum,
                     license = ZENODO_DEFAULT_LICENSE_CHOICE)
             self.assertEqual(r.status, 'failed')
-            
+
 

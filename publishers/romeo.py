@@ -231,7 +231,7 @@ class RomeoAPI(object):
                 match = Journal.find(issn=issn, essn=essn, title=title)
 
                 if match and match.publisher.romeo_id != romeo_id:
-                    if re.match('\d+', match.publisher.romeo_id):
+                    if re.match(r'\d+', match.publisher.romeo_id):
                         # This journal has changed publisher!
                         try:
                             correct_publisher = Publisher.objects.get(romeo_id=romeo_id)
@@ -336,7 +336,7 @@ class RomeoAPI(object):
         # Sadly the romeo_id is not unique (as publishers imported from doaj
         # all get the same id, so we have to use the name too).
         matches = None
-        if re.match('\d+', romeo_id): # numeric ids are unambiguous
+        if re.match(r'\d+', romeo_id): # numeric ids are unambiguous
             matches = Publisher.objects.filter(romeo_id=romeo_id)
         elif alias:
             matches = Publisher.objects.filter(
