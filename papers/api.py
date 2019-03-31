@@ -35,6 +35,7 @@ from papers.models import Paper
 from papers.name import parse_comma_name
 from papers.utils import tolerant_datestamp_to_datetime
 from papers.views import PaperSearchView
+from ratelimit.decorators import ratelimit
 
 def api_paper_common(request, paper):
     if 'format' in request.GET and request.GET['format'] == 'bibtex':
@@ -45,7 +46,7 @@ def api_paper_common(request, paper):
             'paper': paper.json()
         })
 
-
+@ratelimit(key='ip',rate='300/m', block=True)
 def api_paper_pk(request, pk):
     p = Paper.objects.filter(pk=pk).first()
     if p is None:
@@ -55,6 +56,7 @@ def api_paper_pk(request, pk):
         }, status=404)
     return api_paper_common(request, p)
 
+@ratelimit(key='ip',rate='300/m', block=True)
 def api_paper_doi(request, doi):
     p = None
     try:
@@ -95,6 +97,7 @@ class PaperSearchAPI(PaperSearchView):
 @json_view
 @csrf_exempt
 @require_POST
+@ratelimit(key='ip',rate='300/m', block=True)
 def api_paper_query(request):
     try:
         fields = json.loads(request.body.decode('utf-8'))
