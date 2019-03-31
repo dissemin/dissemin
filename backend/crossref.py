@@ -28,7 +28,7 @@ import logging
 import requests
 from requests.exceptions import RequestException
 
-from backend.utils import urlopen_retry
+from backend.utils import urlopen_retry, request_retry
 from backend.doiprefixes import free_doi_prefixes
 from django.db import DataError
 from django.utils.http import urlencode
@@ -55,6 +55,7 @@ from publishers.models import AliasPublisher
 from publishers.models import Journal
 from publishers.models import Publisher
 from backend.pubtype_translations import CROSSREF_PUBTYPE_ALIASES
+from backend.utils import report_speed
 from time import sleep
 
 logger = logging.getLogger('dissemin.' + __name__)
@@ -329,8 +330,10 @@ def make_crossref_call(endpoint, params=None, headers=None):
         headers = {}
     params['mailto'] = settings.CROSSREF_MAILTO
     headers['User-Agent'] = settings.CROSSREF_USER_AGENT
-    return requests.get('https://api.crossref.org'+endpoint,
-            params=params, headers=headers)
+    request = request_retry('https://api.crossref.org'+endpoint,
+            data=params, headers=headers)
+    logger.debug(request.url)
+    return request
 
 def fetch_dois_by_batch(doi_list):
     """
@@ -490,6 +493,7 @@ class CrossRefAPI(object):
 
     ##### CrossRef search API #######
 
+    @report_speed(name='fetch Crossref records')
     def fetch_all_records(self, filters=None,cursor="*"):
         """
         Fetches all Crossref records from their API, starting at a given date.
@@ -504,7 +508,7 @@ class CrossRefAPI(object):
         if filters:
             params['filter'] = ','.join(k+":"+v for k, v in list(filters.items()))
 
-        rows = 20
+        rows = 100
         next_cursor = cursor
         while next_cursor:
             params['rows'] = rows
@@ -525,7 +529,7 @@ class CrossRefAPI(object):
                 if not found:
                     break
                 next_cursor = jpath('message/next-cursor', js)
-                logger.info("Next cursor: " + next_cursor) # to ease recovery
+                logger.info("Next cursor: {}".format(next_cursor)) # to ease recovery
             except ValueError as e:
                 raise MetadataSourceException(
                     'Error while fetching CrossRef results:\nInvalid response.\n' +
