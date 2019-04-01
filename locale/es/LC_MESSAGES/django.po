@@ -14,7 +14,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-27 13:00+0100\n"
-"PO-Revision-Date: 2019-03-28 18:31:56+0000\n"
+"PO-Revision-Date: 2019-04-01 18:24:39+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -988,7 +988,7 @@ msgstr "Herramientas"
 
 #: papers/templates/papers/paperDetails.html:28
 msgid "Export citation"
-msgstr ""
+msgstr "Exportar cita"
 
 #: papers/templates/papers/paperDetails.html:32
 msgid "Request with the Open Access Button"
@@ -1303,9 +1303,8 @@ msgid "This paper has been deleted."
 msgstr ""
 
 #: papers/views.py:446
-#, fuzzy
 msgid "Invalid DOI."
-msgstr "El URL no es válido."
+msgstr "El DOI no es válido."
 
 #: publishers/forms.py:10
 msgid "popularity"

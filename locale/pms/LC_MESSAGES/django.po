@@ -12,7 +12,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-27 13:00+0100\n"
-"PO-Revision-Date: 2019-03-28 18:31:58+0000\n"
+"PO-Revision-Date: 2019-04-01 18:24:40+0000\n"
 "Language: pms\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -921,7 +921,7 @@ msgstr "<span class=\"paperDocType\">%(doctype)s</span> (%(year)s) ëd"
 #, python-format
 msgctxt "as in: _Published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "Published in %(year)s by"
-msgstr "Publicà in %(year)s an"
+msgstr "Publicà an %(year)s da"
 
 #: papers/templates/papers/paper.html:74
 #, python-format
@@ -985,7 +985,7 @@ msgstr "Utiss"
 
 #: papers/templates/papers/paperDetails.html:28
 msgid "Export citation"
-msgstr ""
+msgstr "Esporté la sitassion"
 
 #: papers/templates/papers/paperDetails.html:32
 msgid "Request with the Open Access Button"
