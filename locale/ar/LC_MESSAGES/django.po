@@ -13,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-27 13:00+0100\n"
-"PO-Revision-Date: 2019-03-28 18:31:55+0000\n"
+"PO-Revision-Date: 2019-04-01 18:24:38+0000\n"
 "Language: ar\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -990,7 +990,7 @@ msgstr "أدوات"
 
 #: papers/templates/papers/paperDetails.html:28
 msgid "Export citation"
-msgstr ""
+msgstr "تصدير الاقتباس"
 
 #: papers/templates/papers/paperDetails.html:32
 msgid "Request with the Open Access Button"
@@ -1105,11 +1105,11 @@ msgstr[4] ""
 msgstr[5] ""
 
 #: papers/templates/papers/search.html:191
-#, fuzzy, python-format
+#, python-format
 msgid "%(formattedCounter)s paper found"
 msgid_plural "%(formattedCounter)s papers found"
-msgstr[0] "تم العثور على %(formattedCounter)s ناشر"
-msgstr[1] ""
+msgstr[0] "%(formattedCounter)s وقة"
+msgstr[1] "%(formattedCounter)s أوراق"
 msgstr[2] ""
 msgstr[3] ""
 msgstr[4] ""
@@ -2128,9 +2128,8 @@ msgid "Please address any inquiry to support@dissem.in."
 msgstr "يُرجَى توجيه أي استفسار إلى support@dissem.in."
 
 #: templates/dissemin/tos.html:89
-#, fuzzy
 msgid "Dissemin uses ORCID's public OAuth interface to authenticate its users. This interface only transmits information marked as public in the user's ORCID profile. This means that ORCID passwords are never transmitted and email addresses are not transmitted when they are marked as private, which is the default setting. When logging in to Dissemin from ORCID, Dissemin acquires the user's ORCID id, as well as all public information attached to the ORCID record. We are using the <a href=\"https://sentry.io/privacy/\">Sentry service</a> for error tracking on this platform. Our webserver configuration stores basic access information (URL requested and IP address) for error monitoring, which are kept for fourteen days. Dissemin can store any information input by its users on the platform. Users can ask for a copy of the personal information Dissemin stores about them by writing an email to support@dissem.in."
-msgstr "يستخدم ديسيمين واجهة أووث العامة لأورسيد لمصادقة مستخدميه، تقوم هذه الواجهة بنقل المعلومات التي تم وضع علامة عليها كعامة فقط في ملف تعريف أورسيد للمستخدم: وهذا يعني أن كلمات مرور أورسيد لا تنتقل أبدا ولا يتم إرسال عناوين البريد الإلكتروني عندما يتم وضع علامة عليها كخاصة، وهو الإعداد الافتراضي. عند تسجيل الدخول إلى ديسيمين من أورسيد، يكتسب ديسمين معرف أورسيد للمستخدم، وكذلك جميع المعلومات العامة التي ترتبط بسجل أورسيد. يمكن لديسيمين تخزين أي معلومات مدخلة من قبل مستخدميها على المنصة. يمكن للمستخدمين طلب نسخة من المعلومات الشخصية في مخازن ديسيمين عنهم عن طريق إرسال بريد إلكتروني إلى support@dissem.in."
+msgstr "يستخدم ديسيمين واجهة أووث العامة لأورسيد لمصادقة مستخدميه، تقوم هذه الواجهة بنقل المعلومات التي تم وضع علامة عليها كعامة فقط في ملف تعريف أورسيد للمستخدم: وهذا يعني أن كلمات مرور أورسيد لا تنتقل أبدا ولا يتم إرسال عناوين البريد الإلكتروني عندما يتم وضع علامة عليها كخاصة، وهو الإعداد الافتراضي. عند تسجيل الدخول إلى ديسيمين من أورسيد، يكتسب ديسمين معرف أورسيد للمستخدم، وكذلك جميع المعلومات العامة التي ترتبط بسجل أورسيد. نحن نستخدم <a href=\"https://sentry.io/privacy/\">خدمة ترقب</a> لتتبع الأخطاء على هذه المنصة. يقوم تكوين خادم الويب الخاص بنا بتخزين معلومات الوصول الأساسية (المسار المطلوب وعنوان الآيبي) لمراقبة الخطأ، والتي يتم الاحتفاظ بها لمدة أربعة عشر يوما. يمكن لديسيمين تخزين أي معلومات مدخلة من قبل مستخدميها على المنصة. يمكن للمستخدمين طلب نسخة من المعلومات الشخصية في مخازن ديسيمين عنهم عن طريق إرسال بريد إلكتروني إلى support@dissem.in."
 
 #: templates/dissemin/tos.html:112
 msgid "Documents deposited in repositories via Dissemin can be stored on the platform, but are not available for download on the platform. They can be stored internally for logging purposes, and to make sure failed deposits can be fixed later. Dissemin does not commit to store any of the files it receives from its users. Users can write to support@dissem.in if they want one of their uploads to be deleted from our internal storage space, or from the repository they have deposited to. Note that deletion policies vary accross repositories: we provide no guarantee that deposits can be deleted from the target repositories."

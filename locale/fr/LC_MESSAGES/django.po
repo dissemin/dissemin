@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-27 13:00+0100\n"
-"PO-Revision-Date: 2019-03-28 18:31:57+0000\n"
+"PO-Revision-Date: 2019-04-01 18:24:40+0000\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -918,16 +918,16 @@ msgid "(empty profile)"
 msgstr "(profil vide)"
 
 #: papers/templates/papers/paper.html:60
-#, fuzzy, python-format
+#, python-format
 msgctxt "as in: _Journal article published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "<span class=\"paperDocType\">%(doctype)s</span> published in %(year)s by"
-msgstr "<span class=\"paperDocType\">%(doctype)s</span> de"
+msgstr "<span class=\"paperDocType\">%(doctype)s</span> publié en %(year)s par"
 
 #: papers/templates/papers/paper.html:66
-#, fuzzy, python-format
+#, python-format
 msgctxt "as in: _Published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "Published in %(year)s by"
-msgstr "Publié dans"
+msgstr "Publié en %(year)s par"
 
 #: papers/templates/papers/paper.html:74
 #, python-format
@@ -991,7 +991,7 @@ msgstr "Outils"
 
 #: papers/templates/papers/paperDetails.html:28
 msgid "Export citation"
-msgstr ""
+msgstr "Exporter la citation"
 
 #: papers/templates/papers/paperDetails.html:32
 msgid "Request with the Open Access Button"
@@ -1101,8 +1101,8 @@ msgstr[1] "%(nb_publi)s papiers publiés par %(publisher)s"
 #, python-format
 msgid "%(formattedCounter)s paper found"
 msgid_plural "%(formattedCounter)s papers found"
-msgstr[0] "%(formattedCounter)s maison d'édition trouvée"
-msgstr[1] "%(formattedCounter)s maisons d'édition trouvées"
+msgstr[0] "%(formattedCounter)s article trouvé"
+msgstr[1] "%(formattedCounter)s articles trouvés"
 
 #: papers/templates/papers/search.html:212
 msgid "Search by title"
@@ -1306,9 +1306,8 @@ msgid "This paper has been deleted."
 msgstr "Ce papier a été détruit."
 
 #: papers/views.py:446
-#, fuzzy
 msgid "Invalid DOI."
-msgstr "URL invalide."
+msgstr "DOI non valide."
 
 #: publishers/forms.py:10
 msgid "popularity"
@@ -2113,9 +2112,8 @@ msgid "Please address any inquiry to support@dissem.in."
 msgstr "Merci d'adresser toute demande à support@dissem.in."
 
 #: templates/dissemin/tos.html:89
-#, fuzzy
 msgid "Dissemin uses ORCID's public OAuth interface to authenticate its users. This interface only transmits information marked as public in the user's ORCID profile. This means that ORCID passwords are never transmitted and email addresses are not transmitted when they are marked as private, which is the default setting. When logging in to Dissemin from ORCID, Dissemin acquires the user's ORCID id, as well as all public information attached to the ORCID record. We are using the <a href=\"https://sentry.io/privacy/\">Sentry service</a> for error tracking on this platform. Our webserver configuration stores basic access information (URL requested and IP address) for error monitoring, which are kept for fourteen days. Dissemin can store any information input by its users on the platform. Users can ask for a copy of the personal information Dissemin stores about them by writing an email to support@dissem.in."
-msgstr "Dissemin utilise l'interface publique OAuth d'ORCID pour authentifier ses utilisateurs. Cette interface ne permet d'accéder qu'aux informations indiquées comme publiques dans le profil ORCID de l'utilisateur. Ainsi, les mots de passe ORCID ne sont jamais transmis et les adresses email ne sont pas transmises quand elles sont indiquées comme privées (le réglage par défaut). Lorsqu'un utilisateur se connecte à Dissemin avec ORCID, Dissemin récupère son l'identifiant ORCID, et toutes les informations publiques attachées à l'enregistrement ORCID. Dissemin s'autorise à conserver une copie de toute information que ses utilisateurs saisissent sur la plateforme. Pour obtenir une copie des informations personnelles que Dissemin conserve sur vous, vous pouvez écrire un courriel à support@dissem.in."
+msgstr "Dissemin utilise l’interface publique OAuth d’ORCID pour authentifier ses utilisateurs. Cette interface ne permet d’accéder qu’aux informations indiquées comme publiques dans le profil ORCID de l’utilisateur. Ainsi, les mots de passe ORCID ne sont jamais transmis et les adresses de messagerie ne sont pas transmises quand elles sont indiquées comme privées (le réglage par défaut). Lorsqu’un utilisateur se connecte à Dissemin avec ORCID, Dissemin récupère son identifiant ORCID, et toutes les informations publiques attachées à l’enregistrement ORCID. Nous utilisons le <a href=\"https://sentry.io/privacy/\">service Sentry</a> pour tracer els erreurs sur cette plateforme. La configuration de notre serveur web stocke les informations d’accès de base (URL demandée et adresse IP) pour la surveillance des erreurs, et les conserve quatorze jours. Dissemin peut stocker toute information saisie par ses utilisateurs sur la plateforme. Les utilisateurs peuvent demander une copie de leurs informations personnelles que Dissemin stocke sur eux en envoyant un courriel à support@dissem.in."
 
 #: templates/dissemin/tos.html:112
 msgid "Documents deposited in repositories via Dissemin can be stored on the platform, but are not available for download on the platform. They can be stored internally for logging purposes, and to make sure failed deposits can be fixed later. Dissemin does not commit to store any of the files it receives from its users. Users can write to support@dissem.in if they want one of their uploads to be deleted from our internal storage space, or from the repository they have deposited to. Note that deletion policies vary accross repositories: we provide no guarantee that deposits can be deleted from the target repositories."
