@@ -1293,7 +1293,7 @@ class OaiSourceManager(CachingManager):
 
 class OaiSource(CachingMixin, models.Model):
     """
-    Represents an OAI-PMH endpoint that dissemin harvests from.
+    Represents an OAI-PMH endpoint that Dissemin harvests from.
     """
     objects = OaiSourceManager()
 

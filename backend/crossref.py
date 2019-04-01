@@ -88,7 +88,7 @@ logger = logging.getLogger('dissemin.' + __name__)
 # Content negotiation remains useful for other providers (DOIs discovered by
 # other means).
 #
-# 3. How this module is used in dissemin
+# 3. How this module is used in Dissemin
 #
 # Crossref provides a search interface that can be used (among
 # others) to retrieve the papers associated with a given ORCID id.

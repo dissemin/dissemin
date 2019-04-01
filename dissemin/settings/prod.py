@@ -15,7 +15,7 @@ DEBUG = False
 LOGLEVEL = 'INFO'
 LOGGING['loggers']['dissemin']['level'] = os.environ.get('DISSEMIN_LOGLEVEL', LOGLEVEL).upper()
 
-# They are the domains under which your dissemin instance should
+# They are the domains under which your Dissemin instance should
 # be reachable
 ALLOWED_HOSTS = ['dissem.in']
 
