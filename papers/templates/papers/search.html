@@ -21,7 +21,14 @@
 
 {% block jsScript %}
 $(function(){
-    $('[data-toggle="tooltip"]').tooltip()
+    $('[data-toggle="tooltip"]').tooltip();
+    // Trigger onChange events on the date pickers
+    $('#id_pub_after').on('dp.change', function (ev) {
+        $('#searchPapers').change();
+    });
+    $('#id_pub_before').on('dp.change', function (ev) {
+        $('#searchPapers').change();
+    });
 
        function claim_unclaim (evt) {
          var obj = $(evt.target);
