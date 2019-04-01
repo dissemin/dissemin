@@ -1,6 +1,7 @@
 {% load doi %}
 {% load i18n %}
 {% load author %}
+{% load citation %}
 {% load statuses %}
 {% for publi in paper.first_publications %}
 {% if forloop.first %}
@@ -46,7 +47,7 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-xs-12">
-                            <textarea id="exportCitation-Citation" class="form-control" rows="20">{{ paper.bibtex.strip }}</textarea>
+                            <textarea id="exportCitation-Citation" class="form-control" rows="20">{{ paper | bibtex }}</textarea>
                         </div>
                     </div>
                 </form>

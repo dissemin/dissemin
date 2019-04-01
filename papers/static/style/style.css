@@ -281,6 +281,11 @@ li
     margin-right: 15px;
 }
 
+.searchFilters + .ulContainer,
+.searchPages + .ulContainer {
+    margin-top: 20px;
+}
+
 .listYear
 {
     float:right;
@@ -997,11 +1002,23 @@ a.stats_caption_line:hover {
     font-weight: bold;
 }
 
+#searchPapersSortBy select {
+    width: auto;
+    display: inline-block;
+}
 
 /* Search pages buttons */
-.searchPages
-{
+.searchFilters .dropdown {
+    display: inline-block;
+}
+
+.searchPages {
     text-align: center;
+}
+
+.searchPages .pagination {
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 /* Editables */

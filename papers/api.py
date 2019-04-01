@@ -30,11 +30,12 @@ from jsonview.decorators import json_view
 from jsonview.exceptions import BadRequest
 from papers.baremodels import BareName
 from papers.baremodels import BarePaper
+from papers.bibtex import format_paper_citation_dict
 from papers.errors import MetadataSourceException
 from papers.models import Paper
 from papers.name import parse_comma_name
 from papers.utils import tolerant_datestamp_to_datetime
-from papers.views import PaperSearchView
+from papers.views import PaperSearchView, ResearcherView
 from ratelimit.decorators import ratelimit
 
 def api_paper_common(request, paper):
@@ -75,24 +76,58 @@ def api_paper_doi(request, doi):
 
 
 class PaperSearchAPI(PaperSearchView):
-    @json_view
     @csrf_exempt
     def dispatch(self, *args, **kwargs):
         return super(PaperSearchAPI, self).dispatch(*args, **kwargs)
 
     def render_to_response(self, context, **kwargs):
-        stats = context['search_stats'].pie_data()
-        papers = [
-            result.object.json()
-            for result in context['object_list']
+        if 'format' in self.request.GET and self.request.GET['format'] == 'bibtex':
+            bibtex = format_paper_citation_dict(
+                [r.object.citation_dict() for r in context['object_list']]
+            )
+            return HttpResponse(bibtex, content_type='application/x-bibtex')
+        else:
+            stats = context['search_stats'].pie_data()
+            papers = [
+                result.object.json()
+                for result in context['object_list']
             ]
-        response = {
-            'messages': context['messages'],
-            'stats': stats,
-            'nb_results': context['nb_results'],
-            'papers': papers,
-        }
-        return response
+            response = {
+                'messages': context['messages'],
+                'stats': stats,
+                'nb_results': context['nb_results'],
+                'papers': papers,
+            }
+            return JsonResponse(response)
+
+
+class ResearcherAPI(ResearcherView):
+    @csrf_exempt
+    def dispatch(self, *args, **kwargs):
+        return super(ResearcherAPI, self).dispatch(*args, **kwargs)
+
+    def render_to_response(self, context, **kwargs):
+        if 'format' in self.request.GET and self.request.GET['format'] == 'bibtex':
+            bibtex = format_paper_citation_dict(
+                [r.object.citation_dict() for r in context['object_list']]
+            )
+            return HttpResponse(bibtex, content_type='application/x-bibtex')
+        else:
+            # TODO: Export the full researcher object (not just the papers) as
+            # JSON?
+            stats = context['search_stats'].pie_data()
+            papers = [
+                result.object.json()
+                for result in context['object_list']
+            ]
+            response = {
+                'messages': context['messages'],
+                'stats': stats,
+                'nb_results': context['nb_results'],
+                'papers': papers,
+            }
+            return JsonResponse(response)
+
 
 @json_view
 @csrf_exempt
@@ -169,6 +204,8 @@ def api_paper_query(request):
 
 urlpatterns = [
     url(r'^p/(?P<pk>\d+)$', api_paper_pk, name='api-paper-pk'),
+    url(r'^r/(?P<researcher>\d+)/(?P<slug>[\w-]*)$', ResearcherAPI.as_view(),
+        name='api-researcher-id'),
     url(r'^(?P<doi>10\..*)$', api_paper_doi, name='api-paper-doi'),
     url(r'^query/?$', api_paper_query, name='api-paper-query'),
     url(r'^search/?$', PaperSearchAPI.as_view(), name='api-paper-search'),

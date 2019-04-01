@@ -85,22 +85,6 @@
         {% endfor %}
     </div>
     {% endif %}
-    <div class="form-group form-inline" id="searchPapersSortBy">
-        {{ form.reverse_order.errors }}
-        {{ form.sort_by.errors }}
-        {% capture as sort_by silent %}
-        <label for="{{ form.sort_by.id_for_label }}">{% trans "Sort by" %}</label>
-        {% endcapture %}
-        {% capture as increasing silent %}
-        {% render_field form.reverse_order class="form-control tightForm" %}
-        {% endcapture %}
-        {% capture as value silent %}
-        {% render_field form.sort_by class="form-control tightForm" %}
-        {% endcapture %}
-        {% blocktrans trimmed %}
-        {{ sort_by }} <div>{{ increasing }} {{ value }}</div>
-        {% endblocktrans %}
-    </div>
     <div class="form-group text-center">
         <button type="submit" class="btn btn-primary btn-search">
             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;{% trans "Search" %}

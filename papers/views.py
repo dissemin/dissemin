@@ -148,6 +148,30 @@ class PaperSearchView(SearchView):
         context['on_statuses'] = json.dumps(context['form'].on_statuses())
         context['ajax_url'] = self.request.path
 
+        # Eventually remove sort by parameter
+        search_params_without_sort_by = self.request.GET.copy()
+        try:
+            del search_params_without_sort_by['sort_by']
+        except KeyError:
+            pass
+        context['search_params_without_sort_by'] = (
+            search_params_without_sort_by.urlencode()
+        )
+        # Get current sort_by value
+        current_sort_by_value = self.request.GET.get(
+            'sort_by',
+            None
+        )
+        try:
+            current_sort_by = next(
+                v
+                for k, v in self.form_class.SORT_CHOICES
+                if k == current_sort_by_value
+            )
+        except StopIteration:
+            current_sort_by = self.form_class.SORT_CHOICES[0][1]
+        context['current_sort_by'] = current_sort_by
+
         # Notifications
         # TODO: unefficient query.
         notifications = get_notifications(self.request)
