@@ -101,7 +101,7 @@ def request_retry(url, **kwargs):
 
     logger.info("Retrying in "+str(delay)+" seconds with url "+url)
     sleep(delay)
-    return urlopen_retry(url,
+    return request_retry(url,
                          data=data,
                          timeout=timeout,
                          retries=retries-1,
@@ -135,6 +135,7 @@ def with_speed_report(generator, name=None, report_delay=timedelta(seconds=10)):
             rate = nb_records_since_last_report / float((now - last_report).total_seconds())
             logger.info('{}: {}, {} records/sec'.format(name, idx, rate))
             last_report = now
+            nb_records_since_last_report = 0
 
 def report_speed(name=None, report_delay=timedelta(seconds=10)):
     """

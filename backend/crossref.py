@@ -331,7 +331,7 @@ def make_crossref_call(endpoint, params=None, headers=None):
     params['mailto'] = settings.CROSSREF_MAILTO
     headers['User-Agent'] = settings.CROSSREF_USER_AGENT
     request = request_retry('https://api.crossref.org'+endpoint,
-            data=params, headers=headers)
+            data=params, headers=headers, retries=5)
     logger.debug(request.url)
     return request
 
