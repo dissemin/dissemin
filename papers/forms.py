@@ -89,12 +89,18 @@ class PaperForm(SearchForm):
     DATE_FORMATS = ['%Y-%m-%d', '%Y-%m', '%Y']
     pub_after = forms.DateField(
         input_formats=DATE_FORMATS,
-        widget=DatePickerInput(format=DATE_FORMATS[0]),
+        widget=DatePickerInput(
+            format=DATE_FORMATS[0],
+            options={'useCurrent': False}
+        ),
         required=False
     )
     pub_before = forms.DateField(
         input_formats=DATE_FORMATS,
-        widget=DatePickerInput(format=DATE_FORMATS[0]),
+        widget=DatePickerInput(
+            format=DATE_FORMATS[0],
+            options={'useCurrent': False}
+        ),
         required=False
     )
     doctypes = forms.MultipleChoiceField(

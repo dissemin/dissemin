@@ -216,10 +216,14 @@ function init_paper_module (config) {
           fadeOutWaitingArea()
         }
 
-        if (window.location.search === this_query)
-          window.history.replaceState(data, "", document.location.search)
-        else
-          window.history.pushState(data, "", this_query)
+        // Handle empty query string case nicely
+        // See https://stackoverflow.com/questions/46805986/replacestate-with-empty-string-javascript
+        if (window.location.search === this_query) {
+          window.history.replaceState(data, "", document.location.search || window.location.pathname)
+        } else {
+          window.history.pushState(data, "", this_query || window.location.pathname)
+        }
+
       })
       .catch(function (error) {
         console.error('Paper refresh has failed', error)
@@ -267,7 +271,7 @@ function init_paper_module (config) {
   }
 
   function refreshWithQuery(_query) {
-    query = _query ? '?' + _query : ''
+    query = _query ? '?' + _query : '';
     refreshPapers()
   }
 
