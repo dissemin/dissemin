@@ -9,7 +9,7 @@ django-allauth
 -e git+https://github.com/dissemin/django-autocomplete-light.git@78b587a481ff29bc62145fe04af7e0608b026675#egg=django-autocomplete-light
 django-bootstrap-pagination
 django-bulk-update
-django-bootstrap3-datepicker
+django-bootstrap-datepicker-plus
 django-cache-machine
 django-capture-tag
 django-cas-ng

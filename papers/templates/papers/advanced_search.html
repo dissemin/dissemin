@@ -1,0 +1,24 @@
+{% extends "dissemin/skeleton.html" %}
+
+{% load i18n %}
+
+{% block headTitle %}{% trans "Advanced search" %}{% endblock %}
+
+{% block extra_head %}
+{{ form.media }}
+{% endblock %}
+
+{% block jsScript %}
+$(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+{% endblock %}
+
+{% block content %}
+<div id="fullPage">
+    <h2 class="text-center">{% trans "Advanced search" %}</h2>
+    <form method="get" action="{% url "search" %}" id="advancedSearchPapers">
+        {% include "papers/search_fields.html" %}
+    </form>
+</div>
+{% endblock %}

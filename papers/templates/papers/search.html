@@ -6,8 +6,6 @@
 {% load orcid %}
 {% load humanize %}
 {% load i18n %}
-{% load widget_tweaks %}
-{% load capture_tags %}
 
 {% block headTitle %}{{ head_search_description }}{% endblock %}
 
@@ -23,6 +21,8 @@
 
 {% block jsScript %}
 $(function(){
+    $('[data-toggle="tooltip"]').tooltip()
+
        function claim_unclaim (evt) {
          var obj = $(evt.target);
          var pk = obj.attr("data-pk");
@@ -208,110 +208,7 @@ $(function(){
     </div>
     </noscript>
     </div>
-    <div class="form-group" id="searchPapersName">
-        <label>{% trans "Search by title" %}</label>
-        <div class="input-group">
-        {{ form.q.errors }}
-        {% render_field form.q class="form-control" %}
-        <label class="input-group-btn">
-            <button type="submit" class="btn btn-default">{% trans "Search" %}</button>
-        </label>
-        </div>
-    </div>
-    <div class="form-group" id="searchAuthorsName">
-        {% if researcher %}
-        <label for="{{ form.authors.id_for_label }}">{% trans "By co-authors" %}</label>
-        {% else %}
-        <label for="{{ form.authors.id_for_label }}">{% trans "By authors" %}</label>
-        {% endif %}
-        {{ form.authors.errors }}
-        {% render_field form.authors class="form-control" %}
-    </div>
-    <div class="form-horizontal">
-        <label>{% trans "By publication date" %}</label>
-        <div class="form-group" id="searchPaperPubDateAfter">
-            {{ form.pub_after.errors }}
-            <label class="col-xs-2 col-sm-3 control-label tightLabel" for="{{ form.pub_after.id_for_label }}">{% trans "after" %}</label>
-            <div class="col-xs-10 col-sm-9 tightInput">
-                {% render_field form.pub_after class="form-control" %}
-            </div>
-        </div>
-        <div class="form-group" id="searchPaperPubDateBefore">
-            {{ form.pub_before.errors }}
-            <label class="col-xs-2 col-sm-3 control-label tightLabel" for="{{ form.pub_before.id_for_label }}">{% trans "before" %}</label>
-            <div class="col-xs-10 col-sm-9 tightInput">
-            {% render_field form.pub_before class="form-control" %}
-            </div>
-        </div>
-    </div>
-    <div class="form-group" id="searchPapersDoctype">
-        <label>{% trans "By document type" %}</label>
-        {{ form.doctypes.errors }}
-        <ul class="compactList">
-            {% for checkbox in form.doctypes %}
-            {% with value=checkbox.choice_value %}
-            <li class="checkbox">
-                <label class="doctype">
-                    {{ checkbox.tag }}
-                    {{ checkbox.choice_label }}
-                </label>
-            </li>
-            {% endwith %}
-            {% endfor %}
-        </ul>
-    </div>
-    <div class="form-group form-inline" id="searchPapersSortBy">
-        {{ form.reverse_order.errors }}
-        {{ form.sort_by.errors }}
-        {% capture as sort_by silent %}
-        <label for="{{ form.sort_by.id_for_label }}">{% trans "Sort by" %}</label>
-        {% endcapture %}
-        {% capture as increasing silent %}
-        {% render_field form.reverse_order class="form-control tightForm" %}
-        {% endcapture %}
-        {% capture as value silent %}
-        {% render_field form.sort_by class="form-control tightForm" %}
-        {% endcapture %}
-        {% blocktrans trimmed %}
-        {{ sort_by }} <div>{{ increasing }} {{ value }}</div>
-        {% endblocktrans %}
-    </div>
-    {% if request.user.is_superuser %}
-    <div class="form-group" id="searchPapersVisibility">
-        <label for="{{ form.visibility.id_for_label }}">{% trans "By visibility" %}</label>
-        {{ form.visibility.errors }}
-        {% render_field form.visibility class="form-control" %}
-    </div>
-    <div class="form-group" id="searchPapersPDFAvailability">
-        <label for="{{ form.availability.id_for_label }}">{% trans "By full text availability" %}</label>
-        {{ form.availability.errors }}
-        {% render_field form.availability class="form-control" %}
-    </div>
-    <div class="form-group" id="searchPapersOAStatus">
-        {{ form.oa_status.errors }}
-        <label for="{{ form.oa_status.id_for_label }}">{% trans "By publisher policy" %}</label>
-        {% for checkbox in form.oa_status %}
-        {% with value=checkbox.choice_value %}
-	{% if value %}
-        <div class="logoHelpPopover" data-content="{{ value|helptext_oa_status }}">
-        <div class="checkbox publisherCriterion">
-            {{ checkbox.tag }}
-            <div class="publisherCriterionBox">
-            <label for="{{ checkbox.id_for_label }}">
-                <img alt="" src="{% static value|logo_oa_status %}" height="70px" width="52px" class="pubLogo publisherCriterionLogo">
-                <span class="criterionItem">{{ checkbox.choice_label }}</span>
-            </label>
-            </div>
-        </div>
-        </div>
-	{% endif %}
-        {% endwith %}
-        {% endfor %}
-    </div>
-    {% endif %}
-    <div class="form-group">
-        <button type="submit" class="btn btn-default">{% trans "Search" %}</button>
-    </div>
+    {% include "papers/search_fields.html" %}
 </form>
 </div>
 {% endblock %}

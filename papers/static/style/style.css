@@ -151,6 +151,12 @@ h4
     background-color: white;
 }
 
+#header .navbar .navbar-brand > img {
+    display: inline-block;
+    height: 25px;
+    margin-right: 1em;
+}
+
 #content, #subfooter
 {
     max-width: 1030px;
@@ -601,6 +607,13 @@ ul.compactList
     -moz-column-width: 100px;
     -webkit-column-width: 100px;
     column-width: 100px;
+}
+
+#advancedSearchPapers ul.compactList
+{
+    -moz-column-width: 200px;
+    -webkit-column-width: 200px;
+    column-width: 200px;
 }
 
 .compactList li
@@ -1141,6 +1154,27 @@ a.stats_caption_line:hover {
 	max-width:100%;
 }
 
+#welcome #advancedSearchP {
+    width: 100%;
+    text-align: right;
+    margin-top: 10px;
+}
+
+#welcome #id_authors {
+    height: 40px;
+}
+
+.btn-search {
+    background-color: #a9b502;
+    border-color: #879001;
+    height: 40px;
+}
+
+.btn-search:hover, .btn-search:focus {
+    background-color: #879001;
+    border-color: #879001;
+}
+
 #smallPaperList {
 	border:1px solid #ccc;
 	border-radius:10px;
@@ -1226,10 +1260,6 @@ a.stats_caption_line:hover {
     margin-right: 5px;
 }
 
-#statsExplanations {
-    float:left;
-    margin-left: 5px;
-}
 
 /* FAQ */
 #faqSummary {

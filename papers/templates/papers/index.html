@@ -18,7 +18,7 @@
 {% block content %}
 <div id="fullPage">
   <div id="welcome">
-    <h2 class="text-center">{% trans "Welcome to dissemin" %}</h2>
+    <h2 class="text-center">{% trans "Welcome to Dissemin" %}</h2>
 
     <p class="startButton">
     {% blocktrans trimmed %}
@@ -31,10 +31,15 @@
         <div class="input-group" id="searchPapersTitle">
             {% render_field search_form.authors class="form-control" %}
             <label class="input-group-btn">
-                <button type="submit" class="btn btn-default">{% trans "Search" %}</button>
+                <button type="submit" class="btn btn-primary btn-search" aria-label="{% trans "Search" %}">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                </button>
             </label>
         </div>
 
+        <p id="advancedSearchP">
+            <small><a href="{% url 'advanced-search' %}">{% trans "Advanced search" %}</a></small>
+        </p>
     </form>
   </div>
 

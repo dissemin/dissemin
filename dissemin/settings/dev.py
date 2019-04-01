@@ -13,7 +13,7 @@ DEBUG_TOOLBAR_CONFIG = {'SHOW_TOOLBAR_CALLBACK': lambda r: True}
 LOGLEVEL = 'DEBUG'
 LOGGING['loggers']['dissemin']['level'] = os.environ.get('DISSEMIN_LOGLEVEL', LOGLEVEL).upper()
 
-# They are the domains under which your dissemin instance should
+# They are the domains under which your Dissemin instance should
 # be reachable. Leave empty if you run on localhost.
 ALLOWED_HOSTS = []
 

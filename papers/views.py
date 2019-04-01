@@ -42,6 +42,7 @@ from django.utils.translation import ugettext as _
 from django.utils.http import urlencode
 from django.utils.six.moves.urllib.parse import unquote
 from django.views import generic
+from django.views.generic.edit import FormView
 from haystack.generic_views import SearchView
 from notification.api import get_notifications
 from papers.doi import to_doi
@@ -109,6 +110,12 @@ def index(request):
              for v, l in COMBINED_STATUS_CHOICES]
         }
     return render(request, 'papers/index.html', context)
+
+
+class AdvancedPaperSearchView(FormView):
+    """Displays the full search form."""
+    template_name = 'papers/advanced_search.html'
+    form_class = PaperForm
 
 
 class PaperSearchView(SearchView):

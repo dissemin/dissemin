@@ -74,7 +74,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'bootstrap3_datepicker',
     'rest_framework',
     'crispy_forms',
     'allauth',
@@ -101,6 +100,7 @@ INSTALLED_APPS = (
     'django_countries',
     'leaflet',
     'djgeojson',
+    'bootstrap_datepicker_plus',
 )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'

@@ -20,7 +20,7 @@
 
 
 """
-Django settings for dissemin project.
+Django settings for Dissemin project.
 
 See the doc for details of usage:
 https://dev.dissem.in/install.html
@@ -128,7 +128,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'bootstrap3_datepicker',
     'rest_framework',
     'crispy_forms',
     'allauth',
@@ -155,6 +154,7 @@ INSTALLED_APPS = (
     'django_countries',
     'leaflet',
     'djgeojson',
+    'bootstrap_datepicker_plus',
 )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
@@ -358,7 +358,7 @@ SETTINGS_EXPORT = [
 
 # Logging is very important thing. Here we define some standards. We use Django logging system, so there it is easy to custimze your logging preferences.
 # To switch for 'console' to level 'DEBUG' please use prod.py resp. dev.py
-# To get a logger use logger = logging.getLogger('dissemin.' + __name__) to make sure that it is catched by the dissemin logger.
+# To get a logger use logger = logging.getLogger('dissemin.' + __name__) to make sure that it is catched by the Dissemin logger.
 
 LOGGING = {
     'version': 1,
@@ -381,7 +381,7 @@ LOGGING = {
             'level': 'WARNING',
             'handlers': ['console'],
         },
-    # dissemin logger
+    # Dissemin logger
         'dissemin' : {
             'level': None, # Change this value in prod.py resp dev.py
             'handlers': ['console'],
