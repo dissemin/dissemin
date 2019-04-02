@@ -62,28 +62,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'dissemin_media')
 
 # Disable caching in dev
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            os.path.join(BASE_DIR, 'templates')
-        ],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': (
-                "django.contrib.auth.context_processors.auth",
-                "django.template.context_processors.debug",
-                "django.template.context_processors.i18n",
-                "django.template.context_processors.media",
-                "django.template.context_processors.static",
-                "django.template.context_processors.tz",
-                "django.template.context_processors.request",
-                "django_settings_export.settings_export",
-                "dissemin.tcp.orcid_base_domain",
-            ),
-            'debug': True
-        }
-    }
-]
+del TEMPLATES[0]['OPTIONS']['loaders']
+TEMPLATES[0]['APP_DIRS'] = True
 
 

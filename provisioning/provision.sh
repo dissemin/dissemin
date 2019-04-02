@@ -59,16 +59,16 @@ systemctl restart elasticsearch
 # We install some dev tools (tmux and vim)
 apt-get install -y tmux vim-nox
 # We create a virtualenv for Dissemin
-python3 -m venv /dissemin/.vm_venv
+python3 -m venv /home/vagrant/.vm_venv
 
 # Update pip and setuptools
-/dissemin/.vm_venv/bin/pip install --upgrade pip setuptools
+/home/vagrant/.vm_venv/bin/pip install --upgrade pip setuptools
 
 # We install dependencies in the virtualenv
 req_files=(requirements.txt requirements-dev.txt)
 for req in "${req_files[@]}"
 do
-        /dissemin/.vm_venv/bin/pip install -r "/dissemin/$req"
+        /home/vagrant/.vm_venv/bin/pip install -r "/dissemin/$req"
 done
 
 # Configure secrets
@@ -79,55 +79,9 @@ then
         mv /dissemin/dissemin/settings/secret.py /dissemin/dissemin/settings/secret.py.user
 fi
 
-cat <<EOF > /dissemin/dissemin/settings/secret.py
-# coding: utf-8
-
-### Security key ###
-# This is used by django to generate various things (mainly for
-# authentication). Just pick a fairly random string and keep it
-# secret.
-SECRET_KEY = "$(pwgen -s 60 -1)"
-
-# Database
-# https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dissemin',
-        'USER': 'dissemin',
-        'PASSWORD': '${DB_PASSWORD}',
-        'HOST': 'localhost'
-    }
-}
-
-# Redis (if you use it)
-REDIS_HOST = 'localhost'
-REDIS_PORT = 6379
-REDIS_DB = 0
-REDIS_PASSWORD = ''
-
-### Emailing settings ###
-# These are used to send messages to the researchers.
-# This is still a very experimental feature. We recommend you leave these
-# settings as they are for now.
-EMAIL_HOST = ''
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
-EMAIL_USE_TLS = True
-
-### API keys ###
-# These keys are used to communicate with various interfaces. See
-# https://dev.dissem.in/apikeys.html
-
-# RoMEO API KEY
-# Used to fetch publisher policies. Get one at
-# http://www.sherpa.ac.uk/romeo/apiregistry.php
-ROMEO_API_KEY = None
-
-# Proaixy API key
-# Used to fetch paper metadata. Get one by asking developers@dissem.in
-PROAIXY_API_KEY = None
-EOF
+cp /dissemin/dissemin/settings/secret_template.py /dissemin/dissemin/settings/secret.py
+sed -i -e "s/^SECRET_KEY = .*/SECRET_KEY = '$(pwgen -s 60 -1)'/" /dissemin/dissemin/settings/secret.py
+sed -i -e "s/^        'PASSWORD': .*/        'PASSWORD': '${DB_PASSWORD}',/" /dissemin/dissemin/settings/secret.py
 
 if [ -f "/dissemin/dissemin/settings/__init__.py" ]
 then
@@ -159,7 +113,7 @@ EOF
 echo 'from .dev import *' > /dissemin/dissemin/settings/__init__.py
 
 function activate_venv () {
-  . /dissemin/.vm_venv/bin/activate
+  . /home/vagrant/.vm_venv/bin/activate
 }
 activate_venv
 python /dissemin/manage.py migrate
@@ -171,7 +125,7 @@ _SNAME=Django
 
 sudo -u vagrant -H bash <<EOF
 cat >> /home/vagrant/.bash_profile <<LOL
-source /dissemin/.vm_venv/bin/activate
+source /home/vagrant/.vm_venv/bin/activate
 LOL
 
 tmux start-server
@@ -179,9 +133,9 @@ tmux new-session -d -s $_SNAME
 # Remain on exit
 tmux set-option -t $_SNAME set-remain-on-exit on
 # Django development server
-tmux new-window -t $_SNAME -n django -c '/dissemin' -d '/dissemin/.vm_venv/bin/python /dissemin/manage.py runserver 0.0.0.0:8080'
+tmux new-window -t $_SNAME -n django -c '/dissemin' -d '/home/vagrant/.vm_venv/bin/python /dissemin/manage.py runserver 0.0.0.0:8080'
 # Celery backend
-tmux new-window -t $_SNAME -n celery -c '/dissemin' -d 'PYTHONPATH=/dissemin /dissemin/.vm_venv/bin/celery --app=dissemin.celery:app worker -B -l INFO'
+tmux new-window -t $_SNAME -n celery -c '/dissemin' -d 'PYTHONPATH=/dissemin /home/vagrant/.vm_venv/bin/celery --app=dissemin.celery:app worker -B -l INFO'
 # Super user prompt
-tmux new-window -t $_SNAME -n superuser -c '/dissemin' -d '/dissemin/.vm_venv/bin/python /dissemin/manage.py createsuperuser'
+tmux new-window -t $_SNAME -n superuser -c '/dissemin' -d '/home/vagrant/.vm_venv/bin/python /dissemin/manage.py createsuperuser'
 EOF
