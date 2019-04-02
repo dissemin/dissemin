@@ -520,6 +520,33 @@ h1#paperTitle {
     background-image: url('../question-circle.png');
 }
 
+@media print {
+    .policyPic-can
+    {
+        background-image: url('../green-circle.png') !important;
+    }
+
+    .policyPic-cannot
+    {
+        background-image: url('../red-circle.png') !important;
+    }
+
+    .policyPic-restricted
+    {
+        background-image: url('../orange-circle.png') !important;
+    }
+
+    .policyPic-unclear
+    {
+        background-image: url('../white-circle.png') !important;
+    }
+
+    .policyPic-unknown
+    {
+        background-image: url('../question-circle.png') !important;
+    }
+}
+
 .policyText
 {
     margin-left: 25px;
@@ -1209,6 +1236,7 @@ a.stats_caption_line:hover {
     background-color: #a9b502;
     border-color: #879001;
     height: 40px;
+    z-index: 10;
 }
 
 .btn-search:hover, .btn-search:focus {

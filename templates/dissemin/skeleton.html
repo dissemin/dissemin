@@ -78,29 +78,29 @@ $.ajax({ url: 'https://{{ ORCID_BASE_DOMAIN }}/userStatus.json?logUserOut=true',
 </div>
 <div id="footer" class="container">
     <div id="subfooter" class="row">
-        <div class="col-xs-12 col-sm-4 col-md-3">
+        <div class="col-xs-12 col-sm-4 col-md-3 hidden-print">
             <ul>
                 <li><a href="{% url 'faq' %}">{% trans "FAQ" %}</a></li>
                 <li><a href="https://dev.dissem.in/api.html">{% trans "API" %}</a></li>
                 <li><a href="{% url 'tos' %}">{% trans "Terms of Service" %}</a></li>
             </ul>
         </div>
-        <div class="col-xs-12 col-sm-4 col-md-3">
+        <div class="col-xs-12 col-sm-4 col-md-3 hidden-print">
             <ul>
                 <li><a href="http://association.dissem.in/">{% trans "Who are we?" %}</a></li>
                 <li><a href="http://association.dissem.in/#dons">{% trans "Donate" %}</a></li>
                 <li><a href="{% url 'partners' %}">{% trans "Partners" %}</a></li>
             </ul>
         </div>
-        <div class="col-xs-12 col-sm-4 col-md-3">
+        <div class="col-xs-12 col-sm-4 col-md-3 footerContactInfos">
             <ul>
                 <li><a href="mailto:hello@dissem.in">hello@dissem.in</a></li>
                 <li><a href="https://twitter.com/disseminOA">@disseminOA</a></li>
-                <li><a href="https://github.com/dissemin/dissemin">GitHub</a></li>
+                <li><a href="https://github.com/dissemin/dissemin" class="showHrefPrint">GitHub</a></li>
             </ul>
         </div>
-        <div class="clearfix visible-xs"></div>
-        <div class="col-xs-6 col-xs-offset-3 col-sm-4 col-sm-offset-4 col-md-3 col-md-offset-0" id="change-lang-form-div">
+        <div class="clearfix visible-xs hidden-print"></div>
+        <div class="col-xs-6 col-xs-offset-3 col-sm-4 col-sm-offset-4 col-md-3 col-md-offset-0 hidden-print" id="change-lang-form-div">
             {% get_current_language as LANGUAGE_CODE %}
             <form action="{% url 'set_language' %}" method="post" id="change-lang-form" class="form-inline">
                 {% csrf_token %}

@@ -33,8 +33,8 @@
 {% endcapture %}
 {% include 'papers/exportCitationsModal.html' with slug=citation_slug url=citation_url bibtex=paper|bibtex %}
 
-<span class="detailsTitle">{% trans "Tools" %}</span>
-<div class="detailsContent">
+<span class="detailsTitle hidden-print">{% trans "Tools" %}</span>
+<div class="detailsContent hidden-print">
     <p><a href="#" data-toggle="modal" data-target="#exportCitationModal">{% trans "Export citation" %}</a></p>
     {% with paper.get_doi as doi %}
     <p><a href="{{ paper.google_scholar_link }}">{% trans "Search in Google Scholar" %} <img src="/static/extlink.png" alt="[^]"></a></p>

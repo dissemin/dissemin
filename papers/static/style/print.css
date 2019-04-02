@@ -1,0 +1,107 @@
+@page {
+    size: A4;
+    margins: 0;
+}
+
+html, body {
+    /* A4 paper with 15mm margins */
+    width: 195mm;
+    height: 282mm;
+    overflow: visible;
+}
+
+body {
+    /* Print background colors */
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+}
+
+.flex {
+    /* Work arounds a print bug with display: flex items in Firefox
+     * https://bugzilla.mozilla.org/show_bug.cgi?id=1089549 */
+    display: block;
+}
+
+/* Don't print link hrefs */
+a[href]:after {
+    content: none
+}
+
+a.showHrefPrint[href]:after {
+    content: " (" attr(href) ")";
+}
+
+#content > .flex {
+    flex-direction: column;
+}
+
+#sidebar, #summaryLists {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+}
+
+#top-breadcrumb, #sidebar, #summaryLists, #fullPage {
+    border: 1px solid rgba(192,188,206,1);
+}
+
+#sidebar {
+    order: 0;
+}
+
+#sidebar .statspie_caption > div {
+    margin: auto;
+}
+
+#sidebar .statspie_caption .stats_caption_label {
+    width: auto;
+}
+
+/* Papers list */
+.ulContainer {
+    display: table;
+    width: 100%;
+    page-break-inside:auto
+}
+
+.pubLogo {
+    margin-top: 10px;
+}
+
+.pubItem {
+    display: table-row;
+    page-break-inside:avoid; page-break-after:auto
+}
+
+.printTableCell {
+    display: table-cell;
+    vertical-align: top;
+    padding-top: 10px;
+}
+
+.publicationText {
+    margin-left: 10px;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+/* Footer */
+#footer #subfooter {
+    padding: 0;
+}
+
+#footer #subfooter .footerContactInfos {
+    width: 100%;
+    padding: 10px 20px;
+}
+
+#footer #subfooter .footerContactInfos ul {
+    padding-left: 0;
+}
+
+#footer #subfooter .footerContactInfos li {
+    display: inline-block;
+    width: 30%;
+    text-align: center;
+    list-style-type: none;
+}

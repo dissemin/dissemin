@@ -115,7 +115,7 @@
         <div id="paperDetails">
             <p><strong>{% trans "Full text:" %}</strong>
             {% if paper.pdf_url %}
-                <a href="{{ paper.pdf_url }}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-save"></span> {% trans "Download" %}</a>
+                <a class="showHrefPrint" href="{{ paper.pdf_url }}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-save"></span> {% trans "Download" %}</a>
             {% else %}
                 {% trans "Unavailable" %}
                 {% if paper.can_be_asked_for_upload and request.user.is_authenticated %}
