@@ -46,28 +46,30 @@
     </div>
 </div>
 
-<div class="row searchFilters">
-    <div class="col-xs-6">
-        {% trans "Sort by" %}
-        <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                {{ current_sort_by }}
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                {% for option in form.sort_by %}
-                <li><a href="?{{ search_params_without_sort_by }}&amp;sort_by={{ option.data.value }}">{{ option.data.label }}</a></li>
-                {% endfor %}
-            </ul>
+<div class="searchToolbox">
+    <div class="row searchFilters">
+        <div class="col-xs-6">
+            {% trans "Sort by" %}
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    {{ current_sort_by }}
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    {% for option in form.sort_by %}
+                    <li><a href="?{{ search_params_without_sort_by }}&amp;sort_by={{ option.data.value }}">{{ option.data.label }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="col-xs-6 text-right">
+            <a href="#" data-toggle="modal" data-target="#exportCitationModal" class="btn btn-primary">{% trans "Export citations" %}</a>
         </div>
     </div>
-    <div class="col-xs-6 text-right">
-        <a href="#" data-toggle="modal" data-target="#exportCitationModal" class="btn btn-primary">{% trans "Export citations" %}</a>
-    </div>
+    {% if page_obj.paginator.num_pages > 1 %}
+    <div class="searchPages">{% bootstrap_paginate page_obj range=10 %}</div>
+    {% endif %}
 </div>
- {% if page_obj.paginator.num_pages > 1 %}
-<div class="searchPages">{% bootstrap_paginate page_obj range=10 %}</div>
- {% endif %}
  {% for result in object_list %}{% with paper=result.object %}
  {% ifchanged paper.year %}
  {% if not forloop.first %}</ul></div>{% endif %}
