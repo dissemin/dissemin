@@ -28,7 +28,7 @@ import logging
 import requests
 from requests.exceptions import RequestException
 
-from backend.utils import urlopen_retry
+from backend.utils import urlopen_retry, request_retry
 from backend.doiprefixes import free_doi_prefixes
 from django.db import DataError
 from django.utils.http import urlencode
@@ -55,6 +55,7 @@ from publishers.models import AliasPublisher
 from publishers.models import Journal
 from publishers.models import Publisher
 from backend.pubtype_translations import CROSSREF_PUBTYPE_ALIASES
+from backend.utils import report_speed
 from time import sleep
 
 logger = logging.getLogger('dissemin.' + __name__)
@@ -87,7 +88,7 @@ logger = logging.getLogger('dissemin.' + __name__)
 # Content negotiation remains useful for other providers (DOIs discovered by
 # other means).
 #
-# 3. How this module is used in dissemin
+# 3. How this module is used in Dissemin
 #
 # Crossref provides a search interface that can be used (among
 # others) to retrieve the papers associated with a given ORCID id.
@@ -329,8 +330,10 @@ def make_crossref_call(endpoint, params=None, headers=None):
         headers = {}
     params['mailto'] = settings.CROSSREF_MAILTO
     headers['User-Agent'] = settings.CROSSREF_USER_AGENT
-    return requests.get('https://api.crossref.org'+endpoint,
-            params=params, headers=headers)
+    request = request_retry('https://api.crossref.org'+endpoint,
+            data=params, headers=headers, retries=5)
+    logger.debug(request.url)
+    return request
 
 def fetch_dois_by_batch(doi_list):
     """
@@ -490,6 +493,7 @@ class CrossRefAPI(object):
 
     ##### CrossRef search API #######
 
+    @report_speed(name='fetch Crossref records')
     def fetch_all_records(self, filters=None,cursor="*"):
         """
         Fetches all Crossref records from their API, starting at a given date.
@@ -504,7 +508,7 @@ class CrossRefAPI(object):
         if filters:
             params['filter'] = ','.join(k+":"+v for k, v in list(filters.items()))
 
-        rows = 20
+        rows = 100
         next_cursor = cursor
         while next_cursor:
             params['rows'] = rows
@@ -525,7 +529,7 @@ class CrossRefAPI(object):
                 if not found:
                     break
                 next_cursor = jpath('message/next-cursor', js)
-                logger.info("Next cursor: " + next_cursor) # to ease recovery
+                logger.info("Next cursor: {}".format(next_cursor)) # to ease recovery
             except ValueError as e:
                 raise MetadataSourceException(
                     'Error while fetching CrossRef results:\nInvalid response.\n' +
@@ -565,10 +569,11 @@ class CrossRefAPI(object):
             source.last_update += batch_time
             source.save()
 
-    def ingest_dump(self, filename, start_doi=None, update_index=True):
+    @report_speed('Crossref importing speed')
+    def read_dump(self, filename, start_doi=None):
         """
-        Imports a dump of Crossref metadata records stored as a bz2'ed
-        file where each line is a JSON record.
+        Reads a Crossref medatada dump stored as a bz2'ed file
+        where each line is a JSON record.
         """
         with bz2.BZ2File(filename, 'r') as f:
             first_doi_seen = start_doi is None
@@ -579,21 +584,29 @@ class CrossRefAPI(object):
                         first_doi_seen = True
                     if not first_doi_seen:
                         continue
+                    yield record
+                except ValueError:
+                    continue
 
-                    logger.info(record.get('DOI'))
-                    bare_paper = self.save_doi_metadata(record)
-                    p = Paper.from_bare(bare_paper)
+    def ingest_dump(self, filename, start_doi=None, update_index=True):
+        """
+        Imports a dump of Crossref metadata records stored as a bz2'ed
+        file where each line is a JSON record.
+        """
+        for record in self.read_dump(filename, start_doi=start_doi):
+            bare_paper = self.save_doi_metadata(record)
+            p = Paper.from_bare(bare_paper)
 
-                    if not update_index:
-                        continue
+            if not update_index:
+                continue
 
-                    for i in range(3):
-                        try:
-                            p.update_index()
-                            break
-                        except ConnectionTimeout as e:
-                            logger.warning(e)
-                            sleep(10*i)
+            for i in range(3):
+                try:
+                    p.update_index()
+                    break
+                except ConnectionTimeout as e:
+                    logger.warning(e)
+                    sleep(10*i)
                 except (MetadataSourceException, ValueError):
                     logger.info((record.get('DOI') or 'unknown DOI'))
 

@@ -23,12 +23,13 @@
 from statistics.models import COMBINED_STATUS_CHOICES
 from statistics.models import PDF_STATUS_CHOICES
 
-#from bootstrap3_datepicker.fields import DatePickerField
+from bootstrap_datepicker_plus import DatePickerInput
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 from haystack import inputs
 from haystack.forms import SearchForm
 from haystack.query import SQ
+
 from papers.baremodels import PAPER_TYPE_CHOICES
 from papers.models import Department
 from papers.models import Paper
@@ -84,9 +85,24 @@ class PaperForm(SearchForm):
         choices=COMBINED_STATUS_CHOICES,
         widget=forms.CheckboxSelectMultiple,
         required=False)
+    # Should be ordered from more precise to least precise
     DATE_FORMATS = ['%Y-%m-%d', '%Y-%m', '%Y']
-    pub_after = forms.DateField(input_formats=DATE_FORMATS, required=False)
-    pub_before = forms.DateField(input_formats=DATE_FORMATS, required=False)
+    pub_after = forms.DateField(
+        input_formats=DATE_FORMATS,
+        widget=DatePickerInput(
+            format=DATE_FORMATS[0],
+            options={'useCurrent': False}
+        ),
+        required=False
+    )
+    pub_before = forms.DateField(
+        input_formats=DATE_FORMATS,
+        widget=DatePickerInput(
+            format=DATE_FORMATS[0],
+            options={'useCurrent': False}
+        ),
+        required=False
+    )
     doctypes = forms.MultipleChoiceField(
         choices=PAPER_TYPE_CHOICES,
         widget=forms.CheckboxSelectMultiple,

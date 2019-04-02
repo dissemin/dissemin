@@ -5,7 +5,6 @@ import gzip
 import json
 import logging
 from django.db import DataError
-from datetime import datetime
 
 from papers.models import Paper
 from papers.models import OaiSource
@@ -15,6 +14,7 @@ from papers.doi import doi_to_url
 from papers.doi import to_doi
 from backend.doiprefixes import free_doi_prefixes
 from papers.errors import MetadataSourceException
+from backend.utils import report_speed
 
 logger = logging.getLogger('dissemin.' + __name__)
 
@@ -33,29 +33,27 @@ class OadoiAPI(object):
 
         self.crossref_source = OaiSource.objects.get(identifier='crossref')
 
-    def load_dump(self, filename, start_doi=None, update_index=False, create_missing_dois=True):
+    @report_speed(name='oadoi importing speed')
+    def read_dump(self, filename, start_doi=None):
         """
-        Reads a dump from the disk and loads it to the db
+        Enumerates the JSON objects in the dump, optionally starting from the given DOI
         """
-        last_rate_report = None
-        report_batch_size = 1000
         with gzip.open(filename, 'r') as f:
             start_doi_seen = start_doi is None
-            for idx, line in enumerate(f):
+            for line in f:
                 record = json.loads(line.decode('utf-8'))
                 if not start_doi_seen and record.get('doi') == start_doi:
                     start_doi_seen = True
-                if idx % report_batch_size == 0:
-                    logger.info(idx, record.get('doi'))
-                    if last_rate_report:
-                        td = (datetime.utcnow() - last_rate_report).total_seconds()
-                        if td:
-                            logger.info('importing speed: {} lines/sec'.format(report_batch_size/float(td)))
-                    last_rate_report = datetime.utcnow()
-
-
                 if start_doi_seen:
-                    self.create_oairecord(record, update_index, create_missing_dois)
+                    yield record
+
+
+    def load_dump(self, filename, start_doi=None, update_index=False, create_missing_dois=True):
+        """
+        Reads a dump from the disk and loads it to the database.
+        """
+        for record in self.read_dump(filename, start_doi=start_doi):
+            self.create_oairecord(record, update_index, create_missing_dois)
 
     def create_oairecord(self, record, update_index=True, create_missing_dois=True):
         """

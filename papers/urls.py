@@ -23,13 +23,15 @@
 from django.conf.urls import include
 from django.conf.urls import url
 from django.views.generic.base import RedirectView, TemplateView
-from papers import views
 from django.conf import settings
+from papers import views
 
 urlpatterns = [
         url(r'^$', views.index, name='index'),
         # Paper views
         url(r'^search/$', views.PaperSearchView.as_view(), name='search'),
+        url(r'^search/advanced$', views.AdvancedPaperSearchView.as_view(),
+            name='advanced-search'),
         url(r'^r/(?P<researcher>\d+)/(?P<slug>[\w-]*)$',
             views.ResearcherView.as_view(), name='researcher'),
         url(r'^researcher/(?P<researcher>\d+)$',
