@@ -2,7 +2,7 @@ celery[redis]
 pyoai
 PyPDF2
 bibtexparser>=1.1.0
-redis<3
+redis
 cryptography
 django>=1.11.20,<2.3.0
 django-allauth

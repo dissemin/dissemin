@@ -12,15 +12,7 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "debian/jessie64"
-
-  config.vm.provider "virtualbox" do |v, override|
-    override.vm.box = "debian/contrib-jessie64"
-  end
-
-  config.vm.provider "lxc" do |l, override|
-    override.vm.box = "glenux/jessie64-lxc"
-  end
+  config.vm.box = "debian/stretch64"
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
