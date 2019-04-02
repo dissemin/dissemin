@@ -26,9 +26,9 @@
                         </div>
                         <div class="col-xs-6 text-right">
                             {% if not researcher %}
-                                <a class="btn btn-primary" role="button" href="{% url 'api-paper-search' %}?format=bibtex&{{ request.GET.urlencode }}" download="export.bib">
+                                <a class="btn btn-primary" role="button" href="{% url 'api-paper-search' %}?format=bibtex&amp;{{ request.GET.urlencode }}" download="export.bib">
                             {% else %}
-                                <a class="btn btn-primary" role="button" href="{% url 'api-researcher-id' researcher=researcher.id slug=researcher.slug %}?format=bibtex&{{ request.GET.urlencode }}" download="export.bib">
+                                <a class="btn btn-primary" role="button" href="{% url 'api-researcher-id' researcher=researcher.id slug=researcher.slug %}?format=bibtex&amp;{{ request.GET.urlencode }}" download="export.bib">
                             {% endif %}<span class="glyphicon glyphicon-download" aria-hidden="true"></span> {% trans "Download" %}</a>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                 {% for option in form.sort_by %}
-                <li><a href="?{{ search_params_without_sort_by }}&sort_by={{ option.data.value }}">{{ option.data.label }}</a></li>
+                <li><a href="?{{ search_params_without_sort_by }}&amp;sort_by={{ option.data.value }}">{{ option.data.label }}</a></li>
                 {% endfor %}
             </ul>
         </div>

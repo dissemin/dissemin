@@ -83,7 +83,14 @@ class PaperSearchAPI(PaperSearchView):
     def render_to_response(self, context, **kwargs):
         if 'format' in self.request.GET and self.request.GET['format'] == 'bibtex':
             bibtex = format_paper_citation_dict(
-                [r.object.citation_dict() for r in context['object_list']]
+                [
+                    r.object.citation_dict()
+                    for r in sorted(
+                        context['object_list'],
+                        key=lambda x: (x.object.pubdate, x.object.title)
+                    )
+                ],
+                indent='  '
             )
             return HttpResponse(bibtex, content_type='application/x-bibtex')
         else:
@@ -109,7 +116,14 @@ class ResearcherAPI(ResearcherView):
     def render_to_response(self, context, **kwargs):
         if 'format' in self.request.GET and self.request.GET['format'] == 'bibtex':
             bibtex = format_paper_citation_dict(
-                [r.object.citation_dict() for r in context['object_list']]
+                [
+                    r.object.citation_dict()
+                    for r in sorted(
+                        context['object_list'],
+                        key=lambda x: (x.object.pubdate, x.object.title)
+                    )
+                ],
+                indent='  '
             )
             return HttpResponse(bibtex, content_type='application/x-bibtex')
         else:

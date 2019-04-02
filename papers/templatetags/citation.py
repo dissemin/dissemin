@@ -12,7 +12,13 @@ register = template.Library()
 def bibtex(results_or_paper):
     if isinstance(results_or_paper, list):
         return format_paper_citation_dict(
-            [r.object.citation_dict() for r in results_or_paper],
+            [
+                r.object.citation_dict()
+                for r in sorted(
+                    results_or_paper,
+                    key=lambda x: (x.object.pubdate, x.object.title)
+                )
+            ],
             indent='  '
         )
     else:
