@@ -89,6 +89,7 @@ def request_retry(url, **kwargs):
                          timeout=timeout,
                          headers=headers,
                          allow_redirects=True)
+        r.raise_for_status()
         return r
     except requests.exceptions.Timeout as e:
         if retries <= 0:
@@ -97,7 +98,8 @@ def request_retry(url, **kwargs):
         if retries <= 0:
             raise MetadataSourceException('Connection error: '+str(e))
     except requests.exceptions.RequestException as e:
-        raise MetadataSourceException('Request error: '+str(e))
+        if retries <= 0:
+            raise MetadataSourceException('Request error: '+str(e))
 
     logger.info("Retrying in "+str(delay)+" seconds with url "+url)
     sleep(delay)
