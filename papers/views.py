@@ -154,6 +154,10 @@ class PaperSearchView(SearchView):
             del search_params_without_sort_by['sort_by']
         except KeyError:
             pass
+        # Make a clean URL with useless GET params
+        for key in list(search_params_without_sort_by.keys()):
+            if not search_params_without_sort_by[key]:
+                del search_params_without_sort_by[key]
         context['search_params_without_sort_by'] = (
             search_params_without_sort_by.urlencode()
         )

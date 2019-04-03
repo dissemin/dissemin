@@ -5,71 +5,10 @@
 {% load widget_tweaks %}
 {% load citation %}
 
-<!-- Export citations modal -->
-<div class="modal fade" id="exportCitationModal" tabindex="-1" role="dialog" aria-labelledby="exportCitationModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label='{% trans "Close" %}'>
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="exportCitationModalLabel">{% trans "Export citations" %}</h4>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-group row">
-                        <div class="col-xs-6">
-                            <label for="exportCitationFormat" id="exportCitationFormatLabel">{% trans "Format" %}</label>
-                            <select id="exportCitationFormat" class="form-control">
-                                <option value="bibtex" selected>BibTeX</option>
-                            </select>
-                        </div>
-                        <div class="col-xs-6 text-right">
-                            {% if not researcher %}
-                                <a class="btn btn-primary" role="button" href="{% url 'api-paper-search' %}?format=bibtex&amp;{{ request.GET.urlencode }}" download="export.bib">
-                            {% else %}
-                                <a class="btn btn-primary" role="button" href="{% url 'api-researcher-id' researcher=researcher.id slug=researcher.slug %}?format=bibtex&amp;{{ request.GET.urlencode }}" download="export.bib">
-                            {% endif %}<span class="glyphicon glyphicon-download" aria-hidden="true"></span> {% trans "Download" %}</a>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-xs-12">
-                            <textarea id="exportCitation-Citation" class="form-control" rows="20">{{ object_list | bibtex }}</textarea>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans "Close" %}</button>
-            </div>
-        </div>
-    </div>
-</div>
 
-<div class="searchToolbox">
-    <div class="row searchFilters">
-        <div class="col-xs-6">
-            {% trans "Sort by" %}
-            <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    {{ current_sort_by }}
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    {% for option in form.sort_by %}
-                    <li><a href="?{{ search_params_without_sort_by }}&amp;sort_by={{ option.data.value }}">{{ option.data.label }}</a></li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-        <div class="col-xs-6 text-right">
-            <a href="#" data-toggle="modal" data-target="#exportCitationModal" class="btn btn-primary">{% trans "Export citations" %}</a>
-        </div>
-    </div>
-    {% if page_obj.paginator.num_pages > 1 %}
-    <div class="searchPages">{% bootstrap_paginate page_obj range=10 %}</div>
-    {% endif %}
-</div>
+{% if page_obj.paginator.num_pages > 1 %}
+<div class="searchPages">{% bootstrap_paginate page_obj range=10 %}</div>
+{% endif %}
  {% for result in object_list %}{% with paper=result.object %}
  {% ifchanged paper.year %}
  {% if not forloop.first %}</ul></div>{% endif %}
