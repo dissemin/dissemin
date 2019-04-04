@@ -15,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-27 13:00+0100\n"
-"PO-Revision-Date: 2019-03-28 18:31:59+0000\n"
+"PO-Revision-Date: 2019-04-04 17:58:03+0000\n"
 "Language: sr-Cyrl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1307,9 +1307,8 @@ msgid "This paper has been deleted."
 msgstr ""
 
 #: papers/views.py:446
-#, fuzzy
 msgid "Invalid DOI."
-msgstr "Неважећа URL адреса"
+msgstr "Неважећи DOI."
 
 #: publishers/forms.py:10
 msgid "popularity"

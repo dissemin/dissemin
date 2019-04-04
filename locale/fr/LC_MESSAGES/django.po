@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-27 13:00+0100\n"
-"PO-Revision-Date: 2019-04-01 18:24:40+0000\n"
+"PO-Revision-Date: 2019-04-04 17:58:01+0000\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -2095,9 +2095,8 @@ msgid "This platform offers an analysis of the accessibility of scholarly public
 msgstr "Notre plateforme permet d'analyser la disponibilité des publications scientifiques. Elle peut également envoyer des publications à des dépôts pour le compte de leurs auteurs. Les politiques d'auto-archivage et de disponibilité indiquées pour les papiers peuvent être incorrectes et sont fournies sans valeur légale. En cas de doute, les utilisateurs sont priés de se référer aux sources qui font autorité."
 
 #: templates/dissemin/tos.html:45
-#, fuzzy
 msgid "The platform does not include any analytics, advertisement or tracking services. We are however using the <a href=\"https://sentry.io/privacy/\">Sentry service</a> for error tracking on this platform. Our webserver configuration stores basic access information (URL requested and IP address) for error monitoring, which are kept for fourteen days. Authenticated users are logged-in via ORCID, a third-party service. The platform has no access to the private information they provide to ORCID. In particular, we do not store any ORCID passwords, and we do not have access to email addresses that are marked as private in the ORCID record. We need to set cookies to authenticate our users, therefore by logging in on this platform, users accept these cookies."
-msgstr "Les utilisateurs non authentifiés ne font l'objet d'aucun suivi : notre plateforme n'inclut aucune publicité et aucun service tiers de mesure d'audience. Les utilisateurs authentifiés le sont au travers d'ORCID, un service tiers. Notre plateforme n'a pas accès aux informations privées que les utilisateurs fournissent à ORCID. En particulier, nous ne stockons jamais le mot de passe ORCID, et nous n'avons pas accès aux adresses de courrier électronique si l'enregistrement ORCID indique qu'elles sont privées. Nous devons utiliser des témoins de connexion (<em>cookies</em>) pour authentifier nos utilisateurs : en vous connectant à notre plateforme, vous autorisez cet usage des cookies."
+msgstr "La plateforme ne contient aucun service de mesure d'audience, de publicité ou de suivi. Néanmoins nous utilisons le <a href=\"https://sentry.io/privacy/\">service Sentry</a> pour le suivi des erreurs sur cette plateforme. La configuration de notre serveur web contient les informations d'accès de base (URL demandée et adresse IP) pour le suivi des erreurs, qui sont gardées pendant quatorze jours. Les utilisateurs authentifiés sont connectés au travers d'ORCID, un service tiers. La plateforme n'a pas accès aux informations privées que les utilisateurs fournissent à ORCID. En particulier, nous ne stockons jamais le mot de passe ORCID, et nous n'avons pas accès aux adresses de courrier électronique si l'enregistrement ORCID indique qu'elles sont privées. Nous devons utiliser les témoins de connexion (<em>cookies</em>) pour authentifier nos utilisateurs : en vous connectant à cette plateforme, vous acceptez ces cookies."
 
 #: templates/dissemin/tos.html:66
 msgid "The platform can perform mandated publication deposit to repositories. Users are only allowed to upload papers that they have authored themselves, or papers whose authors have consented to the deposit. In addition to these terms of service, users are required to abide by the policies of these repositories."

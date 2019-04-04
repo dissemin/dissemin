@@ -17,7 +17,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-27 13:00+0100\n"
-"PO-Revision-Date: 2019-03-28 18:31:56+0000\n"
+"PO-Revision-Date: 2019-04-04 17:58:00+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -920,13 +920,13 @@ msgstr "(leeres Profil)"
 #, python-format
 msgctxt "as in: _Journal article published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "<span class=\"paperDocType\">%(doctype)s</span> published in %(year)s by"
-msgstr "<span class=\"paperDocType\">%(doctype)s</span> %(year)s veröffentlicht von"
+msgstr "<span class=\"paperDocType\">%(doctype)s</span> veröffentlicht in %(year)s von"
 
 #: papers/templates/papers/paper.html:66
 #, python-format
 msgctxt "as in: _Published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "Published in %(year)s by"
-msgstr "%(year)s veröffentlicht von"
+msgstr "Veröffentlicht in %(year)s von"
 
 #: papers/templates/papers/paper.html:74
 #, python-format
@@ -990,7 +990,7 @@ msgstr "Werkzeuge"
 
 #: papers/templates/papers/paperDetails.html:28
 msgid "Export citation"
-msgstr "Zitat exportieren"
+msgstr "Zitation exportieren"
 
 #: papers/templates/papers/paperDetails.html:32
 msgid "Request with the Open Access Button"
@@ -1100,8 +1100,8 @@ msgstr[1] "%(nb_publi)s Publikationen herausgegeben von %(publisher)s"
 #, python-format
 msgid "%(formattedCounter)s paper found"
 msgid_plural "%(formattedCounter)s papers found"
-msgstr[0] "%(formattedCounter)s Herausgeber_in gefunden"
-msgstr[1] "%(formattedCounter)s Herausgeber_innen gefunden"
+msgstr[0] "%(formattedCounter)s Publikation gefunden"
+msgstr[1] "%(formattedCounter)s Publikationen gefunden"
 
 #: papers/templates/papers/search.html:212
 msgid "Search by title"
@@ -1306,7 +1306,7 @@ msgstr "Diese Publikation wurde gelöscht."
 
 #: papers/views.py:446
 msgid "Invalid DOI."
-msgstr "Ungültige DOI"
+msgstr "Ungültige DOI."
 
 #: publishers/forms.py:10
 msgid "popularity"
@@ -2094,9 +2094,8 @@ msgid "This platform offers an analysis of the accessibility of scholarly public
 msgstr "Diese Plattform bietet eine Analyse der Zugänglichkeit wissenschaftlicher Publikationen. Sie kann auch Publikationen für ihre Autor_innen in Repositorien hinterlegen. Die Zugänglichkeits- und Selbstarchivierungsrichtlinien der Veröffentlichungen auf dieser Plattform können falsch sein und sollten nicht zur Rechtsberatung herangezogen werden. Im Zweifelsfall wird Benutzer_innen empfohlen, verlässliche Quellen zu überprüfen."
 
 #: templates/dissemin/tos.html:45
-#, fuzzy
 msgid "The platform does not include any analytics, advertisement or tracking services. We are however using the <a href=\"https://sentry.io/privacy/\">Sentry service</a> for error tracking on this platform. Our webserver configuration stores basic access information (URL requested and IP address) for error monitoring, which are kept for fourteen days. Authenticated users are logged-in via ORCID, a third-party service. The platform has no access to the private information they provide to ORCID. In particular, we do not store any ORCID passwords, and we do not have access to email addresses that are marked as private in the ORCID record. We need to set cookies to authenticate our users, therefore by logging in on this platform, users accept these cookies."
-msgstr "Nicht authentifizierte Benutzer_innen werden nicht verfolgt, da die Plattform keine Analyse- oder Werbedienste von Drittanbietern enthält. Authentifizierte Benutzer_innen werden über ORCID, einen Dienst eines Drittanbieters, angemeldet. Die Plattform hat keinen Zugriff auf die privaten Informationen, die sie für ORCID bereitstellen. Insbesondere speichern wir keine ORCID-Passwörter und wir haben keinen Zugriff auf E-Mail-Adressen, die im ORCID-Datensatz als privat gekennzeichnet sind. Wir müssen Cookies benutzen, um unsere Benutzer_innen zu authentifizieren. Mit Anmeldung auf dieser Plattform, akzeptieren die Benutzer_innen diese Cookies."
+msgstr "Die Plattform verwendet keine Analyse-, Werbe- oder Verfolgungsdienste. Wir setzen <a href=\"https://sentry.io/privacy/\">Sentry service</a> für die Fehlerprotokollierung ein. Unser Webserver speichert elementare Zugriffsinformationen (Aufgerufene URL und IP-Adresse) zur Fehlerüberwachung, welche maximal 14 Tage gespeichert werden. Authentifizierte Benutzer_innen werden über ORCID, einen Dienst eines Drittanbieters, angemeldet. Die Plattform hat keinen Zugriff auf die privaten Informationen, die sie für ORCID bereitstellen. Insbesondere speichern wir keine ORCID-Passwörter und wir haben keinen Zugriff auf E-Mail-Adressen, die im ORCID-Datensatz als privat gekennzeichnet sind. Wir müssen Cookies benutzen, um unsere Benutzer_innen zu authentifizieren. Mit Anmeldung auf dieser Plattform, akzeptieren die Benutzer_innen diese Cookies."
 
 #: templates/dissemin/tos.html:66
 msgid "The platform can perform mandated publication deposit to repositories. Users are only allowed to upload papers that they have authored themselves, or papers whose authors have consented to the deposit. In addition to these terms of service, users are required to abide by the policies of these repositories."
@@ -2112,7 +2111,7 @@ msgstr "Bitte richte alle Anfragen an support@dissem.in."
 
 #: templates/dissemin/tos.html:89
 msgid "Dissemin uses ORCID's public OAuth interface to authenticate its users. This interface only transmits information marked as public in the user's ORCID profile. This means that ORCID passwords are never transmitted and email addresses are not transmitted when they are marked as private, which is the default setting. When logging in to Dissemin from ORCID, Dissemin acquires the user's ORCID id, as well as all public information attached to the ORCID record. We are using the <a href=\"https://sentry.io/privacy/\">Sentry service</a> for error tracking on this platform. Our webserver configuration stores basic access information (URL requested and IP address) for error monitoring, which are kept for fourteen days. Dissemin can store any information input by its users on the platform. Users can ask for a copy of the personal information Dissemin stores about them by writing an email to support@dissem.in."
-msgstr "Dissemin verwendet die öffentliche OAuth-Schnittstelle von ORCID, um seine Benutzer_innen zu authentifizieren. Diese Schnittstelle übermittelt nur Informationen, die im ORCID-Profil des Benutzers bzw. der Benutzerin als öffentlich markiert wurden. Das bedeutet, dass niemals ORCID-Passwörter übermittelt werden. E-Mail-Adressen werden ebenfalls nicht übermittelt, wenn sie als privat markiert wurden, was der Standardeinstellung entspricht. Bei der Anmeldung bei Dissemin von ORCID erhält Dissemin sowohl die Benutzerkennung von ORCID als auch alle öffentlichen Informationen Deines ORCID-Profils. Wir benutzen den Dienst <a href=\"https://sentry.io/privacy/\">Sentry</a> zum Fehlertracking auf dieser Plattform. Unsere Webserver-Konfiguration speichert Basisinformationen zum Zugriff (die angeforderte URL sowie die IP-Adresse) zur Fehlerüberwachung, die vierzehn Tage lang behalten werden. Dissemin kann alle Benutzereingaben von Informationen auf der Plattform speichern. Benutzer_innen können um eine Kopie der persönlichen Informationen bitten, die Dissemin über sie speichert, indem sie eine E-Mail an support@dissem.in schreiben."
+msgstr "Dissemin verwendet die öffentliche OAuth-Schnittstelle von ORCID, um seine Benutzer_innen zu authentifizieren. Diese Schnittstelle übermittelt nur Informationen, die im ORCID-Profil des Benutzers bzw. der Benutzerin als öffentlich markiert wurden. Das bedeutet, dass niemals ORCID-Passwörter übermittelt werden. E-Mail-Adressen werden ebenfalls nicht übermittelt, wenn sie als privat markiert wurden, was der Standardeinstellung entspricht. Bei der Anmeldung bei Dissemin von ORCID erhält Dissemin sowohl die Benutzerkennung von ORCID als auch alle öffentlichen Informationen Deines ORCID-Profils. Wir benutzen den Dienst <a href=\"https://sentry.io/privacy/\">Sentry</a> zum Fehlertracking auf dieser Plattform. Unsere Webserver-Konfiguration speichert Basisinformationen zum Zugriff (die angeforderte URL sowie die IP-Adresse) zur Fehlerüberwachung, die 14 Tage gespeichert werden. Dissemin kann alle Benutzereingaben von Informationen auf der Plattform speichern. Benutzer_innen können um eine Kopie der persönlichen Informationen bitten, die Dissemin über sie speichert, indem sie eine E-Mail an support@dissem.in schreiben."
 
 #: templates/dissemin/tos.html:112
 msgid "Documents deposited in repositories via Dissemin can be stored on the platform, but are not available for download on the platform. They can be stored internally for logging purposes, and to make sure failed deposits can be fixed later. Dissemin does not commit to store any of the files it receives from its users. Users can write to support@dissem.in if they want one of their uploads to be deleted from our internal storage space, or from the repository they have deposited to. Note that deletion policies vary accross repositories: we provide no guarantee that deposits can be deleted from the target repositories."
