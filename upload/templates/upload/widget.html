@@ -6,15 +6,17 @@
     <div class="uploadModeBrowse">
         <form id="uploadForm" method="post" action="{% url 'ajax-uploadFulltext' %}" enctype="multipart/form-data">
             {% csrf_token %}
-            <label for="upl">{% trans "Select a file:" %}</label>
-            <p><a class="btn btn-success" id="browseButton"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> {% trans "Browse" %}</a><input type="file" name="upl" style="display:none" /></p>
+            <label>{% trans "Select a file:" %}
+                <a class="btn btn-success" id="browseButton"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> {% trans "Browse" %}</a>
+                <input type="file" name="upl" style="display:none" />
+            </label>
         </form>
     </div>
     <div class="uploadModeUrl">
 
         <form id="urlForm" method="post" action="{% url 'ajax-downloadUrl' %}">
             {% csrf_token %}
-            <label for="url">{% trans "Or enter an URL:" %}</label>
+            <label for="uploadUrl">{% trans "Or enter an URL:" %}</label>
             <div>
                 <button type="submit" id="submitUploadUrl" class="btn btn-success"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
                 <div class="urlContainer">

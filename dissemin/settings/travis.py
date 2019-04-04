@@ -9,6 +9,10 @@ import urllib3.contrib.pyopenssl
 
 from .common import *
 
+# They are the domains under which your Dissemin instance should
+# be reachable.
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+
 # Cache backend
 # https://docs.djangoproject.com/en/1.8/topics/cache/
 CACHES = {

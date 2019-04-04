@@ -4,8 +4,7 @@
 {% load canclaim %}
 {% load domain %}
 {% get_current_language as LANGUAGE_CODE %}
-<div class="pubLogo logoHelpPopover" data-content="{{ paper.status_helptext }}" rel="popover"
-    data-placement="bottom">
+<div class="pubLogo logoHelpPopover" data-content="{{ paper.status_helptext }}" data-placement="bottom">
     <img alt="{{ paper.status_helptext }}" src="/static/img/logos/{{ paper.combined_status }}.png" width="52" height="70" />
 </div>
 

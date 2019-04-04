@@ -12,10 +12,12 @@
 <div id="fullPage">
     <h2>{{ institution }}</h2>
 
+    {% if institution.country %}
     <p><img src="{{ institution.country.flag }}"
 	alt="{{ institution.country.code }}" />&nbsp;
 	{{ institution.country.name }}</p>
-  
+    {% endif %}
+
   <ul id="departmentsList">
   {% for dept in institution.sorted_departments %}
     <li>
@@ -55,6 +57,6 @@
     {% endfor %}
     </ul>
 
- 
+
 </div>
 {% endblock %}

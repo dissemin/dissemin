@@ -14,6 +14,7 @@ addons:
        - elasticsearch-2.x
        packages:
        - elasticsearch=2.4.5
+       - openjdk-8-jre
        - python-requests
        - python-lxml
        - curl
@@ -35,6 +36,11 @@ env:
     - PIP_DOWNLOAD_CACHE=$HOME/.pip-cache
 
 before_install:
+  # Install latest tidy-html5
+  - sudo apt-get remove libtidy-0.99-0
+  - wget https://github.com/htacg/tidy-html5/releases/download/5.4.0/tidy-5.4.0-64bit.deb
+  - sudo dpkg -i tidy-5.4.0-64bit.deb
+  # Rest
   - export DJANGO_SETTINGS_MODULE=dissemin.settings
   - export PYTHONPATH=$HOME/builds/dissemin/dissemin
   - export PIP_USE_MIRRORS=true
@@ -55,7 +61,7 @@ before_script:
   - psql -c "CREATE DATABASE dissemin;" -U postgres
 
 script:
-  - coverage run --source=dissemin,papers,backend,deposit,upload,statistics --omit="*/migrations/*,dissemin/settings/*" -m py.test 
+  - coverage run --source=dissemin,papers,backend,deposit,upload,statistics --omit="*/migrations/*,dissemin/settings/*" -m py.test
   - python manage.py compilemessages
 
 after_success:

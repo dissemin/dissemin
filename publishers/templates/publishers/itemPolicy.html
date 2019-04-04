@@ -15,13 +15,13 @@
     <div class="policyText">
         <p>
         {% if mode == "radio" %}<label>{% endif %}
-            <span class="helpPopover" data-content="{{ type_explanation }}" rel="popover" data-placement="bottom">{{ type_text }}</span> {{ policy | explain_policy_short }}
+            <span class="helpPopover" data-content="{{ type_explanation }}" data-placement="bottom">{{ type_text }}</span> {{ policy | explain_policy_short }}
             <span class="policyDetailUpload">
             {% if mode == "link" and can_be_deposited %}
             <a href="{% url 'upload_paper' paper.pk %}?type={{ typ }}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-open"></span> {% trans "Upload" %}</a>
             {% elif mode == "radio" %}
             <input type="radio" name="radioUploadType" value="{{ typ }}" id="radio{{ typ }}"
-                {% if request.GET.type == typ %}checked="checked"{% endif %} />   
+                {% if request.GET.type == typ %}checked="checked"{% endif %} />
             {% endif %}
             </span>
         {% if mode == "radio" %}</label>{% endif %}

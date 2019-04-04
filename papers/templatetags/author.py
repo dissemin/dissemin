@@ -32,7 +32,7 @@ def publication(publi):
     if publi.pubtype == 'book-chapter' and publi.journal and publi.container and publi.container != str(publi.journal):
         result += escape(str(publi.container))+', '
     if publi.journal:
-        result += '<emph>'+escape(str(publi.journal.title))+'</emph>'
+        result += '<em>'+escape(str(publi.journal.title))+'</em>'
     else:
         result = escape(str(publi.journal_title))
     if publi.issue or publi.volume or publi.pages or publi.pubdate:

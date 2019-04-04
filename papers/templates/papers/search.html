@@ -292,7 +292,7 @@ $(function(){
                         {% trans "By authors" %}
                     {% endif %}
                     <span class="caret"></span>
-                </a><span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="bottom" data-html="true"  title="{% trans "<ul><li>Use author names or ORCID identifiers.</li><li>Use commas as name separator.</li><li>Prefix with <code>last:</code> to enforce last name search.</li></ul>" %}" tabindex="0"></span>
+                </a><span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="bottom" data-html="true"  title="{% filter force_escape %}{% trans "<ul><li>Use author names or ORCID identifiers.</li><li>Use commas as name separator.</li><li>Prefix with <code>last:</code> to enforce last name search.</li></ul>" %}{% endfilter %}" tabindex="0"></span>
             </label>
             {{ form.authors.errors }}
             {% if form.authors.value %}
