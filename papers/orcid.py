@@ -135,6 +135,7 @@ class OrcidProfile(object):
         """
         headers = {'Accept': 'application/orcid+json'}
         url = self.api_uri + path
+        logger.info(url)
         return requests.get(url, headers=headers).json()
 
     def fetch(self):

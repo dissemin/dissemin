@@ -26,10 +26,12 @@ import os
 import os.path as path
 import json
 import logging
+from time import sleep
 from backend.crossref import convert_to_name_pair
 from backend.crossref import CrossRefAPI
 from backend.crossref import fetch_dois
 from backend.papersource import PaperSource
+from backend.utils import report_speed
 from django.conf import settings
 from notification.api import add_notification_for
 from notification.api import delete_notification_per_tag
@@ -176,6 +178,7 @@ class OrcidPaperSource(PaperSource):
         self.researcher = Researcher.get_or_create_by_orcid(orcid_identifier,
                 profile.json, update=True)
         if not self.researcher:
+            logger.warning('No researcher found with ORCID {}'.format(orcid_id))
             return
 
         # Reference name
@@ -254,27 +257,42 @@ class OrcidPaperSource(PaperSource):
         dump.
         """
 
-        for root, _, fnames in os.walk(directory):
-            for fname in fnames:
-                #if fname == '0000-0003-1349-4524.json':
-                #    seen = True
-                #if not seen:
-                #    continue
+        @report_speed('orcid profiles')
+        def generate_paths():
+            for root, _, fnames in os.walk(directory):
+                for fname in fnames:
+                    yield path.join(root, fname)
 
-                with open(path.join(root, fname), 'r') as f:
-                    try:
-                        profile = json.load(f)
-                        orcid = profile['orcid-profile'][
-                                        'orcid-identifier'][
-                                        'path']
+        for profile_path in generate_paths():
+            #if fname == '0000-0003-1349-4524.json':
+            #    seen = True
+            #if not seen:
+            #    continue
+
+            with open(profile_path, 'r') as f:
+                try:
+                    profile = json.load(f)
+                    if 'error-code' in profile:
+                        continue
+                    if not 'orcid_profile' in profile:
+                        profile = {'orcid-profile':profile}
+                    orcid = profile['orcid-profile'][
+                                    'orcid-identifier'][
+                                    'path']
+                    if fetch_papers:
+                        papers = self.fetch_orcid_records(orcid,
+#                            profile=OrcidProfile(json=profile),
+                            use_doi=use_doi)
+                        r = None
+                        for p in papers:
+                            if r is None:
+                                r = Researcher.objects.get(orcid=orcid)
+                            self.save_paper(p, r)
+                        sleep(1)
+                    else:
                         r = Researcher.get_or_create_by_orcid(
                             orcid, profile, update=True)
-                        if fetch_papers:
-                            papers = self.fetch_orcid_records(orcid,
-                                profile=OrcidProfile(json=profile),
-                                use_doi=use_doi)
-                            for p in papers:
-                                self.save_paper(p, r)
-                    except (ValueError, KeyError):
-                        logger.warning("Invalid profile: %s" % fname)
+                except (ValueError, KeyError) as e:
+                    logger.warning("Invalid profile: %s" % fname)
+                    logger.warning(e)
 
