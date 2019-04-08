@@ -17,7 +17,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-27 13:00+0100\n"
-"PO-Revision-Date: 2019-04-04 17:58:00+0000\n"
+"PO-Revision-Date: 2019-04-08 14:41:30+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -761,7 +761,7 @@ msgstr "Nicht sichtbar"
 
 #: papers/forms.py:211
 msgid "Try any author name"
-msgstr "Beliebigen Verfassernamen ausprobieren"
+msgstr "Beliebigen Verfassernamen eingeben"
 
 #: papers/models.py:100
 msgid "Postprint"

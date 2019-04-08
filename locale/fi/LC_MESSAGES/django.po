@@ -14,7 +14,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-27 13:00+0100\n"
-"PO-Revision-Date: 2019-04-01 18:24:39+0000\n"
+"PO-Revision-Date: 2019-04-08 14:41:31+0000\n"
 "Language: fi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1094,11 +1094,11 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: papers/templates/papers/search.html:191
-#, fuzzy, python-format
+#, python-format
 msgid "%(formattedCounter)s paper found"
 msgid_plural "%(formattedCounter)s papers found"
-msgstr[0] "%d artikkeli löytyi"
-msgstr[1] "%d artikkelia löytyi"
+msgstr[0] "%(formattedCounter)s artikkeli löytyi"
+msgstr[1] "%(formattedCounter)s artikkelia löytyi"
 
 #: papers/templates/papers/search.html:212
 msgid "Search by title"
@@ -1572,7 +1572,7 @@ msgstr "Dissemin ylläpitäjä"
 
 #: templates/dissemin/error.html:6 templates/dissemin/error.html:12
 msgid "Error"
-msgstr ""
+msgstr "Virhe"
 
 #: templates/dissemin/error.html:15
 msgid "<a href=\"/\">Go back to the home page.</a>"
