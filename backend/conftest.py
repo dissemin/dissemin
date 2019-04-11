@@ -9,6 +9,9 @@ from publishers.models import Journal
 
 @pytest.fixture(scope='class')
 def load_test_data(request, django_db_setup, django_db_blocker):
+    rebuild_index = (
+        lambda: call_command('rebuild_index', interactive=False)
+    )
     with django_db_blocker.unblock():
         call_command('loaddata', 'test_dump.json')
         self = request.cls
@@ -25,3 +28,14 @@ def load_test_data(request, django_db_setup, django_db_blocker):
         self.arxiv = OaiSource.objects.get(identifier='arxiv')
         self.lncs = Journal.objects.get(issn='0302-9743')
         self.acm = Journal.objects.get(issn='1529-3785').publisher
+    rebuild_index()
+    request.addfinalizer(rebuild_index)
+
+
+@pytest.fixture(scope='function')
+def rebuild_index(request):
+    rebuild_index = (
+        lambda: call_command('rebuild_index', interactive=False)
+    )
+    rebuild_index()
+    request.addfinalizer(rebuild_index)

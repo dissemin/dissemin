@@ -15,33 +15,30 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+# USA.
 #
 
 """
 This module defines *bare* versions of the regular models: these
 are classes whose instances do not correspond to an object in the database.
-They are only stored in memory. This is useful for the API, where lookups are done online,
+They are only stored in memory. This is useful for the API, where lookups are
+done online,
 without name ambiguity resolution.
 """
 
-
-
 import hashlib
-import io
 import logging
 import re
 from urllib.parse import quote  # for the Google Scholar and CORE link
 from urllib.parse import urlencode
 
-from bibtexparser.bwriter import BibTexWriter
-from bibtexparser.bibdatabase import BibDatabase
 from django.apps import apps
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
-from papers.bibtex import PAPER_TYPE_TO_BIBTEX
+from papers.bibtex import PAPER_TYPE_TO_BIBTEX, format_paper_citation_dict
 from papers.doi import doi_to_url
 from papers.fingerprint import create_paper_plain_fingerprint
 from papers.utils import datetime_to_date
@@ -58,20 +55,20 @@ from publishers.models import OA_STATUS_PREFERENCE
 logger = logging.getLogger('dissemin.' + __name__)
 
 PAPER_TYPE_CHOICES = [
-   ('journal-article', _('Journal article')),
-   ('proceedings-article', _('Proceedings article')),
-   ('book-chapter', _('Book chapter')),
-   ('book', _('Book')),
-   ('journal-issue', _('Journal issue')),
-   ('proceedings', _('Proceedings')),
-   ('reference-entry', _('Entry')),
-   ('poster', _('Poster')),
-   ('report', _('Report')),
-   ('thesis', _('Thesis')),
-   ('dataset', _('Dataset')),
-   ('preprint', _('Preprint')),
-   ('other', _('Other document')),
-   ]
+    ('journal-article', _('Journal article')),
+    ('proceedings-article', _('Proceedings article')),
+    ('book-chapter', _('Book chapter')),
+    ('book', _('Book')),
+    ('journal-issue', _('Journal issue')),
+    ('proceedings', _('Proceedings')),
+    ('reference-entry', _('Entry')),
+    ('poster', _('Poster')),
+    ('report', _('Report')),
+    ('thesis', _('Thesis')),
+    ('dataset', _('Dataset')),
+    ('preprint', _('Preprint')),
+    ('other', _('Other document')),
+]
 
 PAPER_TYPE_PREFERENCE = [x for (x, y) in PAPER_TYPE_CHOICES]
 
@@ -81,9 +78,10 @@ MAX_NAME_LENGTH = 256
 class BareObject(object):
     """
     A Bare object contains the skeleton for a non-bare (Django model) class.
-    Its fields are stored in memory only and it does not correspond to a DB entry.
-    To convert a bare object to its non-bare counterpart, for instance a BareName `b`
-    into a Name, use `Name.from_bare(b)`.
+    Its fields are stored in memory only and it does not correspond to a DB
+    entry.
+    To convert a bare object to its non-bare counterpart, for instance a
+    BareName `b` into a Name, use `Name.from_bare(b)`.
     """
     _bare_fields = []
     _bare_foreign_key_fields = []
@@ -139,7 +137,8 @@ class BareObject(object):
     def check_mandatory_fields(self):
         """
         Raises `ValueError` if any field is missing.
-        The list of mandatory fields for the class should be stored in `_mandatory_fields`.
+        The list of mandatory fields for the class should be stored in
+        `_mandatory_fields`.
         """
         for field in self._mandatory_fields:
             if not self.__dict__.get(field):
@@ -150,7 +149,8 @@ class BareObject(object):
 class BarePaper(BareObject):
     """
     This class is the bare analogue to :class:`Paper`. Its authors are
-    lists of :class:`BareName`, and its publications and OAI records are also bare.
+    lists of :class:`BareName`, and its publications and OAI records are also
+    bare.
     """
     _bare_fields = [
         #! The title of the paper
@@ -182,6 +182,14 @@ class BarePaper(BareObject):
     @property
     def slug(self):
         return slugify(self.title)
+
+    def get_doi(self):
+        """
+        Returns any DOI associated to this Paper, None otherwise
+        """
+        for rec in self.oairecords:
+            if rec.doi:
+                return rec.doi
 
     # Creation
 
@@ -608,9 +616,10 @@ class BarePaper(BareObject):
             'classification': self.oa_status,
             })
 
-    def bibtex(self):
+    def citation_dict(self):
         """
-        BibTeX representation of the paper, for citation purposes
+        Dictionary representation of the paper, for citation purposes, based on
+        the internal model used by Python-bibtexparser.
         """
         entry = {
             'ENTRYTYPE': PAPER_TYPE_TO_BIBTEX.get(self.doctype, 'misc'),
@@ -652,13 +661,13 @@ class BarePaper(BareObject):
             if not self.pdf_url:
                 entry['url'] = doi_to_url(doi)
 
-        writer = BibTexWriter()
-        writer.indent = '  '
-        with io.StringIO('') as bibfile:
-            db = BibDatabase()
-            db.entries = [entry]
-            bibfile.write(writer.write(db))
-            return bibfile.getvalue()
+        return entry
+
+    def bibtex(self):
+        """
+        Export the citation of this paper to a BibTeX record string.
+        """
+        return format_paper_citation_dict(self.citation_dict())
 
     def google_scholar_link(self):
         """

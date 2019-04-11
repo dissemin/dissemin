@@ -1026,14 +1026,6 @@ class Paper(models.Model, BarePaper):
                 self.task = None
                 self.save(update_fields=['task'])
 
-    def get_doi(self):
-        """
-        Returns any DOI associated to this Paper, None otherwise
-        """
-        for rec in self.oairecords:
-            if rec.doi:
-                return rec.doi
-
     @classmethod
     def create_by_doi(self, doi, bare=False):
         """

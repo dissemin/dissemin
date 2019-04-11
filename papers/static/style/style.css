@@ -50,6 +50,10 @@ body
     cursor: pointer;
 }
 
+.display-inline-block {
+    display: inline-block;
+}
+
 /* boilerplate for links */
 
 a
@@ -997,11 +1001,35 @@ a.stats_caption_line:hover {
     font-weight: bold;
 }
 
-
-/* Search pages buttons */
-.searchPages
-{
+/* Search features */
+.searchPages {
     text-align: center;
+}
+
+.sort-by-dropdown {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+#searchPapersName {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#searchAuthorsName {
+    margin-bottom: 5px;
+}
+
+#searchPapersName input.collapse.in, #searchAuthorsName input.collapse.in {
+    margin-bottom: 15px;
+}
+
+#searchPaperPubDateGroup {
+    margin-top: 10px;
+}
+
+#searchPapersDoctype {
+    margin-top: 15px;
 }
 
 /* Editables */

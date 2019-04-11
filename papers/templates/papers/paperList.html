@@ -2,17 +2,18 @@
 {% load bootstrap_pagination %}
 {% load statuses %}
 {% load i18n %}
+{% load widget_tweaks %}
+{% load citation %}
 
- {% if page_obj.paginator.num_pages > 1 %}
+
+{% if page_obj.paginator.num_pages > 1 %}
 <div class="searchPages">{% bootstrap_paginate page_obj range=10 %}</div>
- {% endif %}
+{% endif %}
  {% for result in object_list %}{% with paper=result.object %}
  {% ifchanged paper.year %}
  {% if not forloop.first %}</ul></div>{% endif %}
     <div class="ulContainer">
-    {% if not form.sort_by.value %}
     <div class="listYear">{{ paper.year }}</div>
-    {% endif %}
     <ul class="withoutTriangles">
  {% endifchanged %}
     <li class="pubItem" id="paper-{{ paper.id }}">

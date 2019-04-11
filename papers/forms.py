@@ -74,12 +74,8 @@ def aggregate_combined_status(queryset):
 
 class PaperForm(SearchForm):
     SORT_CHOICES = [
-        ('', _('publication date')),
-        ('text', _('title')),
-    ]
-    ORDER_CHOICES = [
-        ('', _('decreasing')),
-        ('inc', _('increasing')),
+        ('', _('newest first')),
+        ('pubdate', _('oldest first')),
     ]
     status = forms.MultipleChoiceField(
         choices=COMBINED_STATUS_CHOICES,
@@ -109,7 +105,6 @@ class PaperForm(SearchForm):
         required=False)
     authors = forms.CharField(max_length=200, required=False)
     sort_by = forms.ChoiceField(choices=SORT_CHOICES, required=False)
-    reverse_order = forms.ChoiceField(choices=ORDER_CHOICES, required=False)
 
     # Superuser only
     visible = forms.ChoiceField(
@@ -201,10 +196,7 @@ class PaperForm(SearchForm):
                 combined_status__in=status)
 
         # Default ordering by decreasing publication date
-        order = self.cleaned_data['sort_by'] or 'pubdate'
-        reverse_order = not self.cleaned_data['reverse_order']
-        if reverse_order:
-            order = '-' + order
+        order = self.cleaned_data['sort_by'] or '-pubdate'
         self.queryset = self.queryset.order_by(order).load_all()
 
         return self.queryset

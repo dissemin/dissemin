@@ -32,6 +32,34 @@ function init_paper_module (config) {
     ))
   }
 
+  // Taken from https://gist.github.com/kares/956897#gistcomment-802666
+  function parseParams (query) {
+    var re = /([^&=]+)=?([^&]*)/g;
+    var decode = function(str) {
+      return decodeURIComponent(str.replace(/\+/g, ' '));
+    };
+    var params = {}, e;
+    if (query) {
+      if (query.substr(0, 1) == '?') {
+        query = query.substr(1);
+      }
+
+      while (e = re.exec(query)) {
+        var k = decode(e[1]);
+        var v = decode(e[2]);
+        if (params[k] !== undefined) {
+          if (!$.isArray(params[k])) {
+            params[k] = [params[k]];
+          }
+          params[k].push(v);
+        } else {
+          params[k] = v;
+        }
+      }
+    }
+    return params;
+  };
+
   var MARK_AS_READ = gettext('Do not show this message anymore')
 
   function addWaitingArea () {
@@ -184,6 +212,20 @@ function init_paper_module (config) {
     )
     flashMessages(parseMessages(data.messages))
     config.hook()
+
+    var parsedQuery = parseParams(query);
+    fillForm('#searchPapers', parsedQuery)
+    fillForm('#searchPapersStatistics', parsedQuery)
+    $('a[data-sort-by]').each(function() {
+      var sortByQuery = jQuery.extend({}, parsedQuery);
+      sortByQuery['sort_by'] = $(this).attr('data-sort-by');
+      // Update dropdown links hrefs
+      $(this).attr('href', $.param(sortByQuery, true));
+      // Update button label
+      if ($(this).attr('data-sort-by') === parsedQuery['sort_by']) {
+        $('#sortByDropdown .btn-label').text($(this).text());
+      }
+    });
   }
 
   var refreshTask
@@ -275,25 +317,43 @@ function init_paper_module (config) {
     refreshPapers()
   }
 
-  function fillForm(form, query) {
-    var test = function (re) {
-      return (new RegExp(re)).test(query)
-    }
-    var find = function (re) {
-      var m = (new RegExp(re)).exec(query)
-      return m ? m[1].replace('+', ' ') : ''
+  function fillForm(form, parsedQuery) {
+    var test = function (name, shouldBe) {
+      var value = parsedQuery[name];
+      if (value instanceof Array) {
+        return value.indexOf(shouldBe) !== -1;
+      }
+      return value === shouldBe
     }
     $(form + ' :input, :input[form="' + form + '"]').each(function () {
       switch (this.type) {
         case 'checkbox':
-          this.checked = test(this.name + '=' + this.value)
+          this.checked = test(this.name, this.value);
           break
         case 'search':
         case 'text':
-          $(this).val(find(this.name + '=([^&#]+)'))
+          $(this).val(parsedQuery[this.name] || '')
           break
       }
     })
+
+    // Update hidden fields
+    $(form + ' :input.getStorage[type="hidden"]').val('');
+    Object.keys(parsedQuery).forEach(function (key) {
+      var value = parsedQuery[key];
+      var hiddenFields = $(form + ' :input.getStorage[type="hidden"][name="' + key + '"]');
+      if (hiddenFields.length > 1) {
+        if (! (value instanceof Array)) {
+          value = [value];
+        }
+        hiddenFields.each(function(idx) {
+          $(this).val(value[idx] || '');
+        });
+      }
+      else {
+        hiddenFields.val(value);
+      }
+    });
   }
 
   window.onpopstate = function (e) {
@@ -303,10 +363,9 @@ function init_paper_module (config) {
     } else {
       refreshPapers()
     }
-    fillForm('#searchPapers', query)
   }
 
-  $('#searchPapers').submit(function (e) {
+  $('#searchPapers, #searchPapersStatistics').submit(function (e) {
     e.preventDefault()
     var $inputs = $(':input', this)
     // Remove empty parameters from queries for cleaner URLs.
@@ -320,5 +379,20 @@ function init_paper_module (config) {
     notifyWaitingArea(config.refreshMessage)
     refreshWithQuery($.param($(this).serializeArray()))
     disableEmptyInputs(false)
-  })
+  });
+
+  $('.sort-by-dropdown a').on('click', function (e) {
+    e.preventDefault();
+    notifyWaitingArea(config.refreshMessage)
+    var href = $(this).attr('href');
+    if (href[0] == '?') {
+      // Remove leading '?' character
+      href = href.slice(1);
+    }
+    if (href[0] == '&') {
+      // Remove a leading '&' character afterwards
+      href = href.slice(1);
+    }
+    refreshWithQuery(href);
+  });
 }

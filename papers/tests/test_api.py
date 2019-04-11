@@ -17,13 +17,13 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
-
-
+import pytest
 
 from papers.tests.test_ajax import JsonRenderingTest
-from papers.models import Paper
+from papers.models import Paper, Researcher
 
 class PaperApiTest(JsonRenderingTest):
+    maxDiff = None  # Full BibTeX diff output
 
     def test_valid_doi(self):
         Paper.create_by_doi('10.1016/0379-6779(91)91572-r')
@@ -126,3 +126,81 @@ class PaperApiTest(JsonRenderingTest):
             self.assertEqual(resp.status_code, 200)
             self.assertEqual(resp.content.decode('utf-8').strip(),
                              bibtex.strip())
+
+    @pytest.mark.usefixtures("rebuild_index")
+    def test_bibtex_formatting_researcher(self):
+        bibtex_output = """@inproceedings{Amarilli2015,
+  author = {Amarilli, Antoine},
+  doi = {10.1145/2744680.2744690},
+  journal = {Proceedings of the 2015 ACM SIGMOD on PhD Symposium - SIGMOD '15 PhD Symposium},
+  month = {jan},
+  title = {Structurally Tractable Uncertain Data},
+  url = {https://doi.org/10.1145/2744680.2744690},
+  year = {2015}
+}
+
+@inproceedings{Amarilli2015_2,
+  author = {Amarilli, Antoine and Benedikt, Michael},
+  doi = {10.1109/lics.2015.37},
+  journal = {2015 30th Annual ACM/IEEE Symposium on Logic in Computer Science},
+  month = {jul},
+  title = {Finite Open-World Query Answering with Number Restrictions},
+  url = {https://doi.org/10.1109/lics.2015.37},
+  year = {2015}
+}"""
+        r1 = Researcher.create_by_name('Antoine', 'Amarilli')
+        p1 = Paper.create_by_doi('10.1109/lics.2015.37')
+        p1.set_researcher(0, r1.id)
+        p1.update_index()  # Ensure index is updated
+        p2 = Paper.create_by_doi('10.1145/2744680.2744690')
+        p2.set_researcher(0, r1.id)
+        p2.update_index()  # Ensure index is updated
+
+        resp = self.getPage(
+            'api-researcher-id',
+            args=[r1.id, r1.slug], getargs={'format': 'bibtex'}
+        )
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(
+            resp.content.decode('utf-8').strip(),
+            bibtex_output.strip()
+        )
+
+    @pytest.mark.usefixtures("rebuild_index")
+    def test_bibtex_formatting_search(self):
+        bibtex_output = """@inproceedings{Amarilli2015,
+  author = {Amarilli, Antoine},
+  doi = {10.1145/2744680.2744690},
+  journal = {Proceedings of the 2015 ACM SIGMOD on PhD Symposium - SIGMOD '15 PhD Symposium},
+  month = {jan},
+  title = {Structurally Tractable Uncertain Data},
+  url = {https://doi.org/10.1145/2744680.2744690},
+  year = {2015}
+}
+
+@inproceedings{Amarilli2015_2,
+  author = {Amarilli, Antoine and Benedikt, Michael},
+  doi = {10.1109/lics.2015.37},
+  journal = {2015 30th Annual ACM/IEEE Symposium on Logic in Computer Science},
+  month = {jul},
+  title = {Finite Open-World Query Answering with Number Restrictions},
+  url = {https://doi.org/10.1109/lics.2015.37},
+  year = {2015}
+}"""
+        r1 = Researcher.create_by_name('John', 'Doe')
+        p1 = Paper.create_by_doi('10.1109/lics.2015.37')
+        p1.set_researcher(0, r1.id)
+        p1.update_index()  # Ensure index is updated
+        p2 = Paper.create_by_doi('10.1145/2744680.2744690')
+        p2.set_researcher(0, r1.id)
+        p2.update_index()  # Ensure index is updated
+
+        resp = self.getPage(
+            'api-paper-search',
+            getargs={'authors': 'amarilli', 'format': 'bibtex'}
+        )
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(
+            resp.content.decode('utf-8').strip(),
+            bibtex_output.strip()
+        )
