@@ -12,7 +12,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-27 13:00+0100\n"
-"PO-Revision-Date: 2019-03-28 18:31:57+0000\n"
+"PO-Revision-Date: 2019-04-11 15:43:50+0000\n"
 "Language: lb\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -918,10 +918,10 @@ msgid "<span class=\"paperDocType\">%(doctype)s</span> published in %(year)s by"
 msgstr ""
 
 #: papers/templates/papers/paper.html:66
-#, fuzzy, python-format
+#, python-format
 msgctxt "as in: _Published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "Published in %(year)s by"
-msgstr "Publizéiert vum"
+msgstr "Publizéiert an %(year)s vum"
 
 #: papers/templates/papers/paper.html:74
 #, python-format

@@ -17,7 +17,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-27 13:00+0100\n"
-"PO-Revision-Date: 2019-04-08 14:41:30+0000\n"
+"PO-Revision-Date: 2019-04-11 15:43:48+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -966,7 +966,7 @@ msgstr "Hochladen erbitten"
 
 #: papers/templates/papers/paper.html:126
 msgid "Publisher:"
-msgstr "Herausgeber_in:"
+msgstr "Herausgeber:"
 
 #: papers/templates/papers/paper.html:133
 msgid "Deposited."
@@ -1087,7 +1087,7 @@ msgstr[1] "%(nb_publi)s Publikationen veröffentlicht in %(journal)s"
 #: papers/templates/papers/search.html:170
 #: publishers/templates/publishers/policy.html:39
 msgid "Publisher"
-msgstr "Herausgeber_in"
+msgstr "Herausgeber"
 
 #: papers/templates/papers/search.html:179
 #, python-format
@@ -1326,7 +1326,7 @@ msgstr "Open Access"
 
 #: publishers/models.py:39
 msgid "Freely available from the publisher."
-msgstr "Frei verfügbar durch Herausgeber_in."
+msgstr "Frei verfügbar durch den Herausgeber."
 
 #: publishers/models.py:40
 msgid "Allows pre/post prints"
@@ -1334,7 +1334,7 @@ msgstr "Erlaubt Pre- und Postprints"
 
 #: publishers/models.py:41
 msgid "The publisher sells copies but allows authors to deposit some version of the article in a repository."
-msgstr "Der bzw. die Herausgeber_in verkauft Kopien, aber erlaubt den Verfasser_innen, einige Versionen des Artikels in einem Repositorium einzureichen."
+msgstr "Der Herausgeber verkauft Kopien, aber erlaubt den Verfasser_innen, einige Versionen des Artikels in einem Repositorium einzureichen."
 
 #: publishers/models.py:42
 msgid "Forbids pre/post prints"
@@ -1342,7 +1342,7 @@ msgstr "Verbietet Pre- und Postprints"
 
 #: publishers/models.py:43
 msgid "The publisher forbids authors to deposit any version of their article online."
-msgstr "Der bzw. die Herausgeber_in verbietet Verfasser_innen sämtliche Versionen ihres Artikels online verfügbar zu machen."
+msgstr "Der Herausgeber verbietet Verfasser_innen sämtliche Versionen ihres Artikels online verfügbar zu machen."
 
 #: publishers/models.py:44
 msgid "Policy unclear"
@@ -1350,7 +1350,7 @@ msgstr "Richtlinie unklar"
 
 #: publishers/models.py:45
 msgid "For complicated policies, unknown publishers and unpublished documents."
-msgstr "Für komplizierte Richtlinien, unbekannte Herausgeber_innen und unveröffentlichte Dokumente."
+msgstr "Für komplizierte Richtlinien, unbekannte Herausgeber und unveröffentlichte Dokumente."
 
 #: publishers/models.py:48
 msgid "Allowed"
@@ -1374,11 +1374,11 @@ msgstr "Unbekannt"
 
 #: publishers/models.py:71 publishers/views.py:94
 msgid "Publishers"
-msgstr "Herausgeber_innen"
+msgstr "Herausgeber"
 
 #: publishers/models.py:91
 msgid "Unknown publisher"
-msgstr "Herausgeber_in unbekannt"
+msgstr "Herausgeber unbekannt"
 
 #: publishers/templates/publishers/detailsPolicy.html:6
 msgid "Preprint:"
@@ -1398,7 +1398,7 @@ msgstr "Postprint:"
 
 #: publishers/templates/publishers/detailsPolicy.html:11
 msgid "Postprints differ from preprints in that they include the changes suggested by the reviewers. They are not edited by the publisher."
-msgstr "Postprints unterscheiden sich von Preprints darin, dass sie die vorgeschlagenen Änderungen der Gutachter_innen beinhalten. Sie sind noch nicht durch die bzw. den Herausgeber_in überarbeitet."
+msgstr "Postprints unterscheiden sich von Preprints darin, dass sie die vorgeschlagenen Änderungen der Gutachter_innen beinhalten. Sie sind noch nicht durch den Herausgeber überarbeitet."
 
 #: publishers/templates/publishers/detailsPolicy.html:12
 msgid "postprint"
@@ -1410,7 +1410,7 @@ msgstr "Veröffentlichte Version:"
 
 #: publishers/templates/publishers/detailsPolicy.html:15
 msgid "The published version is the final version of the paper, as formatted by the publisher."
-msgstr "Die veröffentlichte Version ist die letzte Version der Publikation, wie sie durch die bzw. den Herausgeber_in formatiert worden ist."
+msgstr "Die veröffentlichte Version ist die letzte Version der Publikation, wie sie durch die bzw. den Herausgeber formatiert worden ist."
 
 #: publishers/templates/publishers/detailsPolicy.html:16
 msgid "published version"
@@ -1420,8 +1420,8 @@ msgstr "veröffentlichte Version"
 #, python-format
 msgid "%(counter)s publisher found"
 msgid_plural "%(counter)s publishers found"
-msgstr[0] "%(counter)s Herausgeber_in gefunden"
-msgstr[1] "%(counter)s Herausgeber_innen gefunden"
+msgstr[0] "%(counter)s Herausgeber gefunden"
+msgstr[1] "%(counter)s Herausgeber gefunden"
 
 #: publishers/templates/publishers/list.html:91
 msgid "Data provided by"
@@ -1429,7 +1429,7 @@ msgstr "Daten zur Verfügung gestellt von"
 
 #: publishers/templates/publishers/list.html:126
 msgid "No publisher found."
-msgstr "Kein_e Herausgeber_in gefunden."
+msgstr "Kein Herausgeber gefunden."
 
 #: publishers/templates/publishers/policy.html:56
 msgid "Policy data provided by"
@@ -1479,7 +1479,7 @@ msgstr "Keine."
 
 #: statistics/models.py:48
 msgid "Available from the publisher"
-msgstr "Frei verfügbar durch Herausgeber_in."
+msgstr "Frei verfügbar durch Herausgeber."
 
 #: statistics/models.py:49
 msgid "Available from the author"
@@ -1495,11 +1495,11 @@ msgstr "Unbekannte/unklare Weitergaberichtlinie"
 
 #: statistics/models.py:52
 msgid "Publisher forbids sharing"
-msgstr "Herausgeber_in verbietet Weitergabe"
+msgstr "Herausgeber verbietet Weitergabe"
 
 #: statistics/models.py:57
 msgid "This paper is made freely available by the publisher."
-msgstr "Diese Publikation ist durch die bzw. den Herausgeber_in frei verfügbar gemacht worden."
+msgstr "Diese Publikation ist durch den Herausgeber frei verfügbar gemacht worden."
 
 #: statistics/models.py:58
 msgid "This paper is available in a repository."
@@ -1511,11 +1511,11 @@ msgstr "Diese Publikation wurde in keinem Repositorium gefunden, könnte aber du
 
 #: statistics/models.py:60
 msgid "This paper was not found in any repository; the policy of its publisher is unknown or unclear."
-msgstr "Diese Publikation wurde in keinem Repositorium gefunden; die Bedingungen des Herausgebers bzw. der Herausgeberin sind unbekannt oder unklar."
+msgstr "Diese Publikation wurde in keinem Repositorium gefunden; die Bedingungen des Herausgebers sind unbekannt oder unklar."
 
 #: statistics/models.py:61
 msgid "Distributing this paper is prohibited by the publisher"
-msgstr "Das Anbieten dieser Publikation ist durch die bzw. den  Herausgeber_in untersagt"
+msgstr "Das Anbieten dieser Publikation ist durch den  Herausgeber untersagt"
 
 #: statistics/models.py:65
 msgid "Available"
@@ -1523,7 +1523,7 @@ msgstr "Verfügbar"
 
 #: statistics/templates/statistics/availabilitypct.html:10
 msgid "of the papers by this publisher are available"
-msgstr "der Publikationen von diesem bzw. dieser Herausgeber_in sind verfügbar"
+msgstr "der Publikationen von diesem Herausgeber sind verfügbar"
 
 #: statistics/templates/statistics/histogram.html:5
 #: templates/dissemin/faq.html:49
