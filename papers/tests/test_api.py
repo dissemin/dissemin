@@ -17,7 +17,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
-
+import pytest
 
 from papers.tests.test_ajax import JsonRenderingTest
 from papers.models import Paper, Researcher
@@ -127,6 +127,7 @@ class PaperApiTest(JsonRenderingTest):
             self.assertEqual(resp.content.decode('utf-8').strip(),
                              bibtex.strip())
 
+    @pytest.mark.usefixtures("rebuild_index")
     def test_bibtex_formatting_researcher(self):
         bibtex_output = """@inproceedings{Amarilli2015,
   author = {Amarilli, Antoine},
@@ -165,6 +166,7 @@ class PaperApiTest(JsonRenderingTest):
             bibtex_output.strip()
         )
 
+    @pytest.mark.usefixtures("rebuild_index")
     def test_bibtex_formatting_search(self):
         bibtex_output = """@inproceedings{Amarilli2015,
   author = {Amarilli, Antoine},
@@ -185,7 +187,7 @@ class PaperApiTest(JsonRenderingTest):
   url = {https://doi.org/10.1109/lics.2015.37},
   year = {2015}
 }"""
-        r1 = Researcher.create_by_name('Antoine', 'Amarilli')
+        r1 = Researcher.create_by_name('John', 'Doe')
         p1 = Paper.create_by_doi('10.1109/lics.2015.37')
         p1.set_researcher(0, r1.id)
         p1.update_index()  # Ensure index is updated
