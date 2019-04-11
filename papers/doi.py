@@ -63,7 +63,16 @@ def doi_to_url(doi):
     >>> doi_to_url('10.1093/jhmas/xxxi.4.480')
     'https://doi.org/10.1093/jhmas/xxxi.4.480'
     """
-    return 'https://doi.org/'+doi
+    return 'https://doi.org/' + doi
+
+
+def doi_to_oadoi_url(doi):
+    """
+    Takes a (valid) doi and returns its resolving OADOI URL
+    >>> doi_to_oadoi_url('10.1093/jhmas/xxxi.4.480')
+    'https://oadoi.org/10.1093/jhmas/xxxi.4.480'
+    """
+    return 'https://oadoi.org/' + doi
 
 
 def doi_to_crossref_identifier(doi):
