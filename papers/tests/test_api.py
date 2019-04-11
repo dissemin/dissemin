@@ -78,7 +78,7 @@ class PaperApiTest(JsonRenderingTest):
   month = {jan},
   pages = {116-138},
   title = {A Framework for Sampling-Based XML Data Pricing},
-  url = {https://doi.org/10.1007/978-3-662-49214-7_4},
+  url = {https://oadoi.org/10.1007/978-3-662-49214-7_4},
   year = {2016}
 }''',
             '10.1145/3034786.3056121': '''@misc{Amarilli2017,
@@ -87,7 +87,7 @@ class PaperApiTest(JsonRenderingTest):
   journal = {Proceedings of the 36th ACM SIGMOD-SIGACT-SIGAI Symposium on Principles of Database Systems  - PODS '17},
   month = {jan},
   title = {Conjunctive Queries on Probabilistic Graphs: Combined Complexity},
-  url = {https://doi.org/10.1145/3034786.3056121},
+  url = {https://oadoi.org/10.1145/3034786.3056121},
   year = {2017}
 }''',
             '10.1007/978-3-319-45856-4_22': '''@incollection{Amarilli2016,
@@ -97,7 +97,7 @@ class PaperApiTest(JsonRenderingTest):
   month = {jan},
   pages = {323-330},
   title = {Challenges for Efficient Query Evaluation on Structured Probabilistic Data},
-  url = {https://doi.org/10.1007/978-3-319-45856-4_22},
+  url = {https://oadoi.org/10.1007/978-3-319-45856-4_22},
   year = {2016}
 }''',
             '10.1103/physrevapplied.11.024003': '''@misc{Verney2019,
@@ -106,7 +106,7 @@ class PaperApiTest(JsonRenderingTest):
   journal = {Physical Review Applied},
   month = {feb},
   title = {Structural Instability of Driven Josephson Circuits Prevented by an Inductive Shunt},
-  url = {https://doi.org/10.1103/physrevapplied.11.024003},
+  url = {https://oadoi.org/10.1103/physrevapplied.11.024003},
   volume = {11},
   year = {2019}
 }''',
@@ -135,7 +135,7 @@ class PaperApiTest(JsonRenderingTest):
   journal = {Proceedings of the 2015 ACM SIGMOD on PhD Symposium - SIGMOD '15 PhD Symposium},
   month = {jan},
   title = {Structurally Tractable Uncertain Data},
-  url = {https://doi.org/10.1145/2744680.2744690},
+  url = {https://oadoi.org/10.1145/2744680.2744690},
   year = {2015}
 }
 
@@ -145,7 +145,7 @@ class PaperApiTest(JsonRenderingTest):
   journal = {2015 30th Annual ACM/IEEE Symposium on Logic in Computer Science},
   month = {jul},
   title = {Finite Open-World Query Answering with Number Restrictions},
-  url = {https://doi.org/10.1109/lics.2015.37},
+  url = {https://oadoi.org/10.1109/lics.2015.37},
   year = {2015}
 }"""
         r1 = Researcher.create_by_name('Antoine', 'Amarilli')
@@ -174,7 +174,7 @@ class PaperApiTest(JsonRenderingTest):
   journal = {Proceedings of the 2015 ACM SIGMOD on PhD Symposium - SIGMOD '15 PhD Symposium},
   month = {jan},
   title = {Structurally Tractable Uncertain Data},
-  url = {https://doi.org/10.1145/2744680.2744690},
+  url = {https://oadoi.org/10.1145/2744680.2744690},
   year = {2015}
 }
 
@@ -184,7 +184,7 @@ class PaperApiTest(JsonRenderingTest):
   journal = {2015 30th Annual ACM/IEEE Symposium on Logic in Computer Science},
   month = {jul},
   title = {Finite Open-World Query Answering with Number Restrictions},
-  url = {https://doi.org/10.1109/lics.2015.37},
+  url = {https://oadoi.org/10.1109/lics.2015.37},
   year = {2015}
 }"""
         r1 = Researcher.create_by_name('John', 'Doe')

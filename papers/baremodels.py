@@ -39,7 +39,7 @@ from django.template.defaultfilters import slugify
 from django.utils.functional import cached_property
 from django.utils.translation import ugettext_lazy as _
 from papers.bibtex import PAPER_TYPE_TO_BIBTEX, format_paper_citation_dict
-from papers.doi import doi_to_url
+from papers.doi import doi_to_oadoi_url
 from papers.fingerprint import create_paper_plain_fingerprint
 from papers.utils import datetime_to_date
 from papers.utils import iunaccent
@@ -659,7 +659,7 @@ class BarePaper(BareObject):
         if doi:
             entry['doi'] = doi
             if not self.pdf_url:
-                entry['url'] = doi_to_url(doi)
+                entry['url'] = doi_to_oadoi_url(doi)
 
         return entry
 
