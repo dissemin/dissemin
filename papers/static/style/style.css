@@ -1020,6 +1020,16 @@ a.stats_caption_line:hover {
     margin-bottom: 5px;
 }
 
+#searchAuthorsName .tooltip ul {
+    text-align: left;
+    padding-left: 20px;
+    list-style-image: url('../lightblue-triangle.png');
+}
+
+#searchAuthorsName .tooltip ul li {
+    margin-top: 5px;
+}
+
 #searchPapersName input.collapse.in, #searchAuthorsName input.collapse.in {
     margin-bottom: 15px;
 }
