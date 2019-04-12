@@ -145,7 +145,7 @@ $(function(){
         <p><span class="glyphicon glyphicon-home"></span> <a href="{{ researcher.homepage }}">{{ researcher.homepage|domain }}</a></p>
         {% endif %}
         {% if researcher.orcid %}
-        <p><a href="{{ researcher.orcid|orcid_to_url }}"><img src="{% static "img/orcid-small.png" %}" alt="ORCID" /> {{ researcher.orcid }}</a></p>
+        <p><a href="{{ researcher.orcid|orcid_to_url }}" target="_blank" data-toggle="tooltip" title="{% blocktrans with first_name=researcher.name.first last_name=researcher.name.last %} {{ first_name }} {{ last_name }} uses ORCID.{% endblocktrans %}"><img src="{% static "img/orcid-small.png" %}" alt="ORCID" /> {{ researcher.orcid }}</a></p>
         {% endif %}
         {% if researcher.institution %}
         <p><span class="glyphicon glyphicon-star"></span> {{ researcher.institution }}</p>
