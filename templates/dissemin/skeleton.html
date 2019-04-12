@@ -36,6 +36,19 @@
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <form action="{% url 'set_language' %}" method="post" id="change-lang-form" class="navbar-form">
+                                {% csrf_token %}
+                                <select name="language" id="set-language" class="form-control" onchange="$('#change-lang-form').submit();">
+                                    {% get_available_languages as LANGUAGES %}
+                                    {% get_language_info_list for LANGUAGES as languages %}
+                                    {% for language in languages %}
+                                        <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>{{ language.name_local.title }}</option>
+                                    {% endfor %}
+                                </select>
+                            </form>
+                        </li>
+
                         <li><a href="{% url 'faq' %}">{% trans "FAQ" %}</a></li>
                         {% if request.user.is_authenticated %}
                             <li><a href="{% url 'my-profile' %}">{% trans "My profile" %}</a></li>
@@ -73,43 +86,26 @@
 </div>
 <div id="footer" class="container">
     <div id="subfooter" class="row">
-        <div class="col-xs-12 col-sm-4 col-md-3 hidden-print">
+        <div class="col-xs-12 col-sm-4 col-md-4 hidden-print">
             <ul>
                 <li><a href="{% url 'faq' %}">{% trans "FAQ" %}</a></li>
                 <li><a href="https://dev.dissem.in/api.html">{% trans "API" %}</a></li>
                 <li><a href="{% url 'tos' %}">{% trans "Terms of Service" %}</a></li>
             </ul>
         </div>
-        <div class="col-xs-12 col-sm-4 col-md-3 hidden-print">
+        <div class="col-xs-12 col-sm-4 col-md-4 hidden-print">
             <ul>
                 <li><a href="http://association.dissem.in/">{% trans "Who are we?" %}</a></li>
                 <li><a href="http://association.dissem.in/#dons">{% trans "Donate" %}</a></li>
                 <li><a href="{% url 'partners' %}">{% trans "Partners" %}</a></li>
             </ul>
         </div>
-        <div class="col-xs-12 col-sm-4 col-md-3 footerContactInfos">
+        <div class="col-xs-12 col-sm-4 col-md-4 footerContactInfos">
             <ul>
                 <li><a href="mailto:hello@dissem.in">hello@dissem.in</a></li>
                 <li><a href="https://twitter.com/disseminOA">@disseminOA</a></li>
                 <li><a href="https://github.com/dissemin/dissemin" class="showHrefPrint">GitHub</a></li>
             </ul>
-        </div>
-        <div class="clearfix visible-xs hidden-print"></div>
-        <div class="col-xs-6 col-xs-offset-3 col-sm-4 col-sm-offset-4 col-md-3 col-md-offset-0 hidden-print" id="change-lang-form-div">
-            {% get_current_language as LANGUAGE_CODE %}
-            <form action="{% url 'set_language' %}" method="post" id="change-lang-form" class="form-inline">
-                {% csrf_token %}
-                <label for="set-language">{% trans "Change language" %}&nbsp;<i class=" glyphicon glyphicon-globe"></i></label>
-                <select name="language" id="set-language" class="form-control" onchange="$('#change-lang-form').submit();">
-                    {% get_available_languages as LANGUAGES %}
-                    {% get_language_info_list for LANGUAGES as languages %}
-                    {% for language in languages %}
-                        <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %}
-                                selected="selected"{% endif %}>{{ language.name_local.title }}</option>
-                    {% endfor %}
-                </select>
-                <noscript><input type="submit" class="btn btn-default" value="{% trans "Apply" %}"/></noscript>
-            </form>
         </div>
     </div>
 </div>
