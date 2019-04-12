@@ -12,7 +12,7 @@ register = template.Library()
 
 @register.filter(is_safe=True)
 def orcid_to_url(orcid):
-    return mark_safe('http://{}/{}'.format(settings.ORCID_BASE_DOMAIN, escape(orcid)))
+    return mark_safe('https://{}/{}'.format(settings.ORCID_BASE_DOMAIN, escape(orcid)))
 
 
 @register.filter(is_safe=True)
