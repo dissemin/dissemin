@@ -30,13 +30,11 @@ $(function(){
             </div>
             <div class="form-group" id="searchAuthorsName">
                 <label for="{{ form.authors.id_for_label }}">
-                    <label for="{{ form.authors.id_for_label }}">
-                        {% if researcher %}
-                            {% trans "By co-authors" %}
-                        {% else %}
-                            {% trans "By authors" %}
-                        {% endif %}
-                    </label>&nbsp;<span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="bottom" data-html="true"  title="{% trans "<ul><li>Use author names or ORCID identifiers.</li><li>Use commas to force different names separation.</li><li>Prefix with <code>last:</code> to enforce last name search.</li></ul>" %}" tabindex="0"></span>
+                    {% if researcher %}
+                        {% trans "By co-authors" %}
+                    {% else %}
+                        {% trans "By authors" %}
+                    {% endif %}&nbsp;<span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="bottom" data-html="true"  title="{% trans "<ul><li>Use author names or ORCID identifiers.</li><li>Use commas as name separator.</li><li>Prefix with <code>last:</code> to enforce last name search.</li></ul>" %}" tabindex="0"></span>
                 </label>
                 {{ form.authors.errors }}
                 {% render_field form.authors class="form-control" %}
@@ -85,7 +83,7 @@ $(function(){
             </div>
             <div class="form-group" id="searchPapersOAStatus">
                 {{ form.oa_status.errors }}
-                <label for="{{ form.oa_status.id_for_label }}">{% trans "By publisher policy" %}</label>
+                <span class="span-label">{% trans "By publisher policy" %}</span>
                 {% for checkbox in form.oa_status %}
                 {% with value=checkbox.data.value %}
                 <div class="logoHelpPopover" data-content="{{ value|helptext_oa_status }}">
@@ -93,7 +91,7 @@ $(function(){
                     {{ checkbox.tag }}
                     <div class="publisherCriterionBox">
                     <label for="{{ checkbox.id_for_label }}">
-                        <img alt="" src="{% static value|logo_oa_status %}" height="70px" width="52px" class="pubLogo publisherCriterionLogo">
+                        <img alt="{{ value|helptext_oa_status }}" src="{% static value|logo_oa_status %}" height="70" width="52" class="pubLogo publisherCriterionLogo">
                         <span class="criterionItem">{{ checkbox.choice_label }}</span>
                     </label>
                     </div>

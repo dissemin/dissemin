@@ -274,7 +274,7 @@ $(function(){
         <!-- Actual refine search fields -->
         <div class="form-group" id="searchPapersName">
             <label for="{{ form.q.id_for_label }}">
-                <a data-toggle="collapse" href="#{{ form.q.id_for_label }}" role="button" {% if form.q.value %}aria-expanded="true"{% else %}aria-expanded="false"{%endif%} aria-controls="#{{ form.q.id_for_label }}">{% trans "By title" %}<span class="caret"></span></a>
+                <a data-toggle="collapse" href="#{{ form.q.id_for_label }}" role="button" {% if form.q.value %}aria-expanded="true"{% else %}aria-expanded="false"{%endif%} aria-controls="{{ form.q.id_for_label }}">{% trans "By title" %}<span class="caret"></span></a>
             </label>
             {{ form.q.errors }}
             {% if form.q.value %}
@@ -285,13 +285,14 @@ $(function(){
         </div>
         <div class="form-group" id="searchAuthorsName">
             <label for="{{ form.authors.id_for_label }}">
-                <a data-toggle="collapse" href="#{{ form.authors.id_for_label }}" role="button" {% if form.authors.value %}aria-expanded="true"{% else %}aria-expanded="false"{%endif%} aria-controls="#{{ form.authors.id_for_label }}">
+                <a data-toggle="collapse" href="#{{ form.authors.id_for_label }}" role="button" {% if form.authors.value %}aria-expanded="true"{% else %}aria-expanded="false"{%endif%} aria-controls="{{ form.authors.id_for_label }}">
                     {% if researcher %}
                         {% trans "By co-authors" %}
                     {% else %}
                         {% trans "By authors" %}
-                    {% endif %}&nbsp;<span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="bottom" data-html="true"  title="{% trans "<ul><li>Use author names or ORCID identifiers.</li><li>Use commas as name separator.</li><li>Prefix with <code>last:</code> to enforce last name search.</li></ul>" %}" tabindex="0"></span><span class="caret"></span>
-                </a>
+                    {% endif %}
+                    <span class="caret"></span>
+                </a><span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="bottom" data-html="true"  title="{% trans "<ul><li>Use author names or ORCID identifiers.</li><li>Use commas as name separator.</li><li>Prefix with <code>last:</code> to enforce last name search.</li></ul>" %}" tabindex="0"></span>
             </label>
             {{ form.authors.errors }}
             {% if form.authors.value %}
@@ -301,7 +302,7 @@ $(function(){
             {% endif %}
         </div>
         <div class="form-horizontal">
-            <a class="linkLabel" data-toggle="collapse" href="#searchPaperPubDateGroup" role="button" aria-expanded="{% if form.pub_after.value or form.pub_before.value %}true{% else %}false{% endif %}" aria-controls="#searchPaperPubDateGroup">{% trans "By publication date" %}<span class="caret"></span></a>
+            <a class="linkLabel" data-toggle="collapse" href="#searchPaperPubDateGroup" role="button" aria-expanded="{% if form.pub_after.value or form.pub_before.value %}true{% else %}false{% endif %}" aria-controls="searchPaperPubDateGroup">{% trans "By publication date" %}<span class="caret"></span></a>
             <div class="collapse {% if form.pub_after.value or form.pub_before.value %}in{% endif %}" id="searchPaperPubDateGroup">
                 <div class="form-group" id="searchPaperPubDateAfter">
                     {{ form.pub_after.errors }}
@@ -320,7 +321,7 @@ $(function(){
             </div>
         </div>
         <div class="form-group" id="searchPapersDoctype">
-            <label><a data-toggle="collapse" href="#searchPaperDoctypeList" role="button" aria-expanded="{% if form.doctypes.value %}true{% else %}false{% endif %}" aria-controls="#searchPaperDoctypeList">{% trans "By document type" %}<span class="caret"></span></a></label>
+            <label><a data-toggle="collapse" href="#searchPaperDoctypeList" role="button" aria-expanded="{% if form.doctypes.value %}true{% else %}false{% endif %}" aria-controls="searchPaperDoctypeList">{% trans "By document type" %}<span class="caret"></span></a></label>
             {{ form.doctypes.errors }}
 
             <ul class="compactList collapse {% if form.doctypes.value %}in{% endif %}" id="searchPaperDoctypeList">
@@ -347,7 +348,7 @@ $(function(){
         </div>
         <div class="form-group" id="searchPapersOAStatus">
             {{ form.oa_status.errors }}
-            <label for="{{ form.oa_status.id_for_label }}">{% trans "By publisher policy" %}</label>
+            <span class="span-label">{% trans "By publisher policy" %}</span>
             {% for checkbox in form.oa_status %}
             {% with value=checkbox.data.value %}
             <div class="logoHelpPopover" data-content="{{ value|helptext_oa_status }}">
@@ -355,7 +356,7 @@ $(function(){
                 {{ checkbox.tag }}
                 <div class="publisherCriterionBox">
                 <label for="{{ checkbox.id_for_label }}">
-                    <img alt="" src="{% static value|logo_oa_status %}" height="70px" width="52px" class="pubLogo publisherCriterionLogo">
+                    <img alt="{{ value|helptext_oa_status }}" src="{% static value|logo_oa_status %}" height="70" width="52" class="pubLogo publisherCriterionLogo">
                     <span class="criterionItem">{{ checkbox.choice_label }}</span>
                 </label>
                 </div>
