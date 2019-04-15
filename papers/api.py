@@ -213,7 +213,11 @@ def api_paper_query(request):
     except ValueError:
         raise BadRequest('Invalid paper')
 
-    return {'status': 'ok', 'paper': p.json()}
+    try:
+        model_paper = Paper.objects.get(fingerprint=p.fingerprint)
+        return {'status': 'ok', 'paper': model_paper.json()}
+    except Paper.DoesNotExist:
+        return {'status': 'not found'}, 404
 
 
 urlpatterns = [

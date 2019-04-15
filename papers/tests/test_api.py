@@ -61,13 +61,18 @@ class PaperApiTest(JsonRenderingTest):
             self.checkJson(self.postPage('api-paper-query', postargs=payload,
                                          postkwargs={'content_type': 'application/json'}), 400)
 
-        valid_payloads = [
-            '{"title":"Strange resonances measured in Al+Al collisions at sqrt {S_ NN }= 2.65 GeV with the FOPI detector","date":"2015","authors":[{"plain":"Lopez, X."}]}',
-            '{"doi":"10.1016/j.paid.2009.02.013"}',
-                ]
-        for payload in valid_payloads:
-            self.checkJson(self.postPage('api-paper-query', postargs=payload,
-                                         postkwargs={'content_type': 'application/json'}), 200)
+        # Paper not found
+        payload = '{"title":"Refining the Conceptualization of a Future-Oriented Self-Regulatory Behavior: Proactive Coping", "date":"2009-07-01","authors":[{"first":"Stephanie Jean","last":"Sohl"},{"first":"Anne","last":"Moyer"}]}'
+        self.checkJson(self.postPage('api-paper-query', postargs=payload,
+                                        postkwargs={'content_type': 'application/json'}), 404)
+
+
+        Paper.create_by_doi('10.1016/j.paid.2009.02.013')
+        # Paper now found
+        self.checkJson(self.postPage('api-paper-query', postargs=payload,
+                                        postkwargs={'content_type': 'application/json'}), 200)
+        self.checkJson(self.postPage('api-paper-query', postargs='{"doi":"10.1016/j.paid.2009.02.013"}',
+                                        postkwargs={'content_type': 'application/json'}), 200)
 
     def test_bibtex_formatting(self):
         dois_bibtex = {
