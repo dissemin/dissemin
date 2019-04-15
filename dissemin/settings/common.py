@@ -31,6 +31,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 from datetime import timedelta
+from dealer.git import git
 import os
 
 from django.utils.translation import ugettext_lazy as _
@@ -55,10 +56,11 @@ except ImportError:
 if SENTRY_DSN:
     try:
         import sentry_sdk
-        sentry_sdk.init(SENTRY_DSN)
     except ImportError:
         print('Sentry module is not available although a Sentry DSN was set. '
               'Disabling Sentry reporting...')
+    else: 
+        sentry_sdk.init(dsn=SENTRY_DSN, release=git.revision)
 
 # dirname(__file__) → repo/dissemin/settings/common.py
 # .. → repo/dissemin/settings
