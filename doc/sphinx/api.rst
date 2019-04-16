@@ -14,6 +14,32 @@ You can retrieve Dissemin's metadata for a specific paper by DOI:
 
 https://dissem.in/api/10.1016/j.paid.2009.02.013.
 
+Querying by Dissemin paper ID
+-----------------------------
+
+Dissemin stores internal numeric identifiers for its papers. These identifiers are exposed
+in the URLs of the paper pages, for instance. It is possible to retrieve metadata from these
+identifiers:
+
+https://dissem.in/api/p/6859902
+
+Querying by metadata fields
+---------------------------
+
+When the DOI or the Dissemin ID are not known, it is possible to retrieve a paper by title,
+authors and publication date. This is done by posting a JSON object encoding this medatata
+to https://dissem.in/api/query, as follows::
+
+    curl -H "Content-Type: application/json" -d '{"title":"Refining the Conceptualization of an Important Future-Oriented Self-Regulatory Behavior: Proactive Coping", "date":"2009-07-01","authors":[{"first":"Stephanie Jean","last":"Sohl"},{"first":"Anne","last":"Moyer"}]}' https://dissem.in/api/query
+
+The date field can contain coarser dates such as ``2009-07`` or ``2009``, and authors can also be specified
+as plain text with ``{"plain":"Anne Moyer"}`` instead of ``{"first":"Anne","last":"Moyer"}``.
+
+This API method uses the internal paper deduplication strategy in Dissemin to match the bibliographic
+reference to a known paper in the database. This deduplication is done by computing a unique key (called fingerprint)
+from the title, authors and publication date. Therefore, this API method will always return at most one paper, 
+unlike the search endpoint below which works like traditional search engines.
+
 Searching for papers
 --------------------
 

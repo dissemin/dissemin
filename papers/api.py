@@ -209,11 +209,19 @@ def api_paper_query(request):
         raise BadRequest('No authors provided')
 
     try:
+        # Validate the metadata against our data model,
+        # and compute the fingerprint to look up the paper in the DB.
+        # This does NOT create a paper in the database - we do not want
+        # to create papers for every search query we get!
         p = BarePaper.create(title, parsed_authors, date)
-    except ValueError:
-        raise BadRequest('Invalid paper')
+    except ValueError as e:
+        raise BadRequest('Invalid paper: {}'.format(e))
 
-    return {'status': 'ok', 'paper': p.json()}
+    try:
+        model_paper = Paper.objects.get(fingerprint=p.fingerprint)
+        return {'status': 'ok', 'paper': model_paper.json()}
+    except Paper.DoesNotExist:
+        return {'status': 'not found'}, 404
 
 
 urlpatterns = [
