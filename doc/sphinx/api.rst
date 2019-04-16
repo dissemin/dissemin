@@ -62,10 +62,10 @@ Understanding the results
             "classification": "UNK",
             "title": "Refining the Conceptualization of an Important
     Future-Oriented Self-Regulatory Behavior: Proactive Coping",
-            "pdf\_url": "http://www.ncbi.nlm.nih.gov/pubmed/19578529",
+            "pdf_url": "http://www.ncbi.nlm.nih.gov/pubmed/19578529",
             "records": [
                 {
-                    "splash\_url":
+                    "splash_url":
     "https://doi.org/10.1016/j.paid.2009.02.013",
                     "doi": "10.1016/j.paid.2009.02.013",
                     "publisher": "Elsevier BV",
@@ -75,7 +75,7 @@ Understanding the results
                     "volume": "47",
                     "source": "crossref",
                     "policy": {
-                        "romeo\_id": "30",
+                        "romeo_id": "30",
                         "preprint": "can",
                         "postprint": "can",
                         "published": "cannot"
@@ -86,8 +86,8 @@ Understanding the results
                     "pages": "139-144"
                 },
                 {
-                    "splash\_url":
-    "https://www.researchgate.net/publication/26648440\_Refining\_the\_Conceptualization\_of\_an\_Important\_Future-Oriented\_Self-Regulatory\_Behavior\_Proactive\_Coping",
+                    "splash_url":
+    "https://www.researchgate.net/publication/26648440_Refining_the_Conceptualization_of_an_Important_Future-Oriented_Self-Regulatory_Behavior_Proactive_Coping",
                     "doi": "10.1016/j.paid.2009.02.013",
                     "contributors": "",
                     "abstract": "Proactive coping, directed at an upcoming as
@@ -111,15 +111,15 @@ Understanding the results
     positive future is distinctly predictive of well-being and that research
     should focus on accumulating resources and goal setting in designing
     interventions to promote proactive coping.",
-                    "pdf\_url":
-    "https://www.researchgate.net/profile/Stephanie\_Sohl2/publication/26648440\_Refining\_the\_Conceptualization\_of\_an\_Important\_Future-Oriented\_Self-Regulatory\_Behavior\_Proactive\_Coping/links/55e463c008ae2fac47227a76.pdf",
+                    "pdf_url":
+    "https://www.researchgate.net/profile/Stephanie_Sohl2/publication/26648440_Refining_the_Conceptualization_of_an_Important_Future-Oriented_Self-Regulatory_Behavior_Proactive_Coping/links/55e463c008ae2fac47227a76.pdf",
                     "source": "researchgate",
                     "keywords": "",
                     "identifier": "oai:researchgate.net:26648440",
                     "type": "journal-article"
                 },
                 {
-                    "splash\_url":
+                    "splash_url":
     "http://www.ncbi.nlm.nih.gov/pubmed/19578529",
                     "doi": "10.1016/j.paid.2009.02.013",
                     "contributors": "",
@@ -144,7 +144,7 @@ Understanding the results
     positive future is distinctly predictive of well-being and that research
     should focus on accumulating resources and goal setting in designing
     interventions to promote proactive coping.",
-                    "pdf\_url": "http://www.ncbi.nlm.nih.gov/pubmed/19578529",
+                    "pdf_url": "http://www.ncbi.nlm.nih.gov/pubmed/19578529",
                     "source": "base",
                     "keywords": "Article",
                     "identifier":
