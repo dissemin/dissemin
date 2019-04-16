@@ -30,9 +30,6 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     # Paper views
     url(r'^search/$', views.PaperSearchView.as_view(), name='search'),
-    # This AJAX view is a trick to avoid displaying JSON output in browser when
-    # going backwards, see #198.
-    url(r'^ajax/search$', views.PaperSearchView.as_view(), name='ajax-search'),
     url(r'^search/advanced$', views.AdvancedPaperSearchView.as_view(),
         name='advanced-search'),
     url(r'^r/(?P<researcher>\d+)/(?P<slug>[\w-]*)$',
@@ -51,6 +48,11 @@ urlpatterns = [
         views.PublisherPapersView.as_view(), name='publisher-papers'),
     url(r'^journal/(?P<journal>\d+)/$',
         views.JournalPapersView.as_view(), name='journal'),
+    # These AJAX views are a trick to avoid displaying JSON output in browser
+    # when going backwards, see #198.
+    url(r'^ajax/search$', views.PaperSearchView.as_view(), name='ajax-search'),
+    url(r'^ajax/r/(?P<researcher>\d+)/(?P<slug>[\w-]*)$', views.ResearcherView.as_view(),
+        name='ajax-researcher'),
     # Institution-specific views
     url(r'^department/(?P<pk>\d+)/$',
         views.DepartmentView.as_view(), name='department'),
