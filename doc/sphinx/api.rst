@@ -27,7 +27,7 @@ Querying by metadata fields
 ---------------------------
 
 When the DOI or the Dissemin ID are not known, it is possible to retrieve a paper by title,
-authors and publication date. This is done by posting a JSON object encoding this medatata
+authors and publication date. This is done by posting a JSON object encoding this metadata
 to https://dissem.in/api/query, as follows::
 
     curl -H "Content-Type: application/json" -d '{"title":"Refining the Conceptualization of an Important Future-Oriented Self-Regulatory Behavior: Proactive Coping", "date":"2009-07-01","authors":[{"first":"Stephanie Jean","last":"Sohl"},{"first":"Anne","last":"Moyer"}]}' https://dissem.in/api/query
@@ -45,8 +45,8 @@ Searching for papers
 
 The search interface is also exposed as an API. The parameters it
 understands are the same as the human-readable version at
-https://dissem.in/search . Statistics about
-the results are also returned as well.
+https://dissem.in/search. Statistics about
+the results are also returned.
 
 https://dissem.in/api/search/?q=pregroup
 
@@ -179,7 +179,7 @@ other ones:
    publisher "OA" (available from the publisher), "OK" (some version can
    be shared), "UNK" (unknown/unclear sharing policy), "NOK"
    (restrictive sharing policy).
--  ***pdf\_url*** is the URL where dissemin thinks the full text can be
+-  ***pdf\_url*** is the URL where Dissemin thinks the full text can be
    accessed for free. This is rarely a direct link to an actual PDF
    file. It is set to ``null`` if we could not find a free source for
    this paper.
