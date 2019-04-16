@@ -35,6 +35,11 @@ to https://dissem.in/api/query, as follows::
 The date field can contain coarser dates such as ``2009-07`` or ``2009``, and authors can also be specified
 as plain text with ``{"plain":"Anne Moyer"}`` instead of ``{"first":"Anne","last":"Moyer"}``.
 
+This API method uses the internal paper deduplication strategy in Dissemin to match the bibliographic
+reference to a known paper in the database. This deduplication is done by computing a unique key (called fingerprint)
+from the title, authors and publication date. Therefore, this API method will always return at most one paper, 
+unlike the search endpoint below which works like traditional search engines.
+
 Searching for papers
 --------------------
 
