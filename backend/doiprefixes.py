@@ -31,6 +31,7 @@
 #10.4123
 #10.12759
 #10.1513
+#10.1515
 
 free_doi_prefixes = (lambda l: set(l.split('\n')))(
 """10.1184
