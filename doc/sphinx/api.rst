@@ -175,24 +175,24 @@ Understanding the results
 Most fields are self-explanatory, here is a quick description of the
 other ones:
 
--  ***classification*** is the code for the self-archiving policy of the
+-  **classification** is the code for the self-archiving policy of the
    publisher "OA" (available from the publisher), "OK" (some version can
    be shared), "UNK" (unknown/unclear sharing policy), "NOK"
    (restrictive sharing policy).
--  ***splash\_url*** is a URL where Dissemin thinks that the paper is described,
+-  **splash\_url** is a URL where Dissemin thinks that the paper is described,
    without being necessarily available. This can be a publisher webpage (with
    the article available behind a paywall), a page about the paper without a
    copy of the full text (e.g., a HAL page like
    https://hal.archives-ouvertes.fr/hal-01664049), or a page from which the
    paper was discovered (e.g., the profile of a user on ORCID).
--  ***pdf\_url*** is a URL where Dissemin thinks the full text can be
+-  **pdf\_url** is a URL where Dissemin thinks the full text can be
    accessed for free. This is rarely a direct link to an actual PDF
    file, i.e., it is often a link to a landing page (e.g., https://arxiv.org/abs/1708.00363).
    It is set to ``null`` if we could not find a free source for this paper.
--  ***records*** gives a list of the places where the full text has been
+-  **records** gives a list of the places where the full text has been
    made available (so: repositories, homepages or social networks).
    Sometimes, these repositories only contain a bibliographical record
-   and not the full text. The ***pdf\_url*** field of each record
+   and not the full text. The **pdf\_url** field of each record
    indicates our assessment of the availability of that record. If the
    publisher has been found in RoMEO, it also indicates the summary of
    its policy, using the codes drawn from `the RoMEO
