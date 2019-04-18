@@ -179,10 +179,16 @@ other ones:
    publisher "OA" (available from the publisher), "OK" (some version can
    be shared), "UNK" (unknown/unclear sharing policy), "NOK"
    (restrictive sharing policy).
--  ***pdf\_url*** is the URL where Dissemin thinks the full text can be
+-  ***splash\_url*** is a URL where Dissemin thinks that the paper is described,
+   without being necessarily available. This can be a publisher webpage (with
+   the article available behind a paywall), a page about the paper without a
+   copy of the full text (e.g., a HAL page like
+   https://hal.archives-ouvertes.fr/hal-01664049), or a page from which the
+   paper was discovered (e.g., the profile of a user on ORCID).
+-  ***pdf\_url*** is a URL where Dissemin thinks the full text can be
    accessed for free. This is rarely a direct link to an actual PDF
-   file. It is set to ``null`` if we could not find a free source for
-   this paper.
+   file, i.e., it is often a link to a landing page (e.g., https://arxiv.org/abs/1708.00363).
+   It is set to ``null`` if we could not find a free source for this paper.
 -  ***records*** gives a list of the places where the full text has been
    made available (so: repositories, homepages or social networks).
    Sometimes, these repositories only contain a bibliographical record
