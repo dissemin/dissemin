@@ -279,6 +279,13 @@ class ResearcherView(PaperSearchView):
         context['search_description'] += _(' authored by ')+str(researcher)
         context['head_search_description'] = str(researcher)
         context['breadcrumbs'] = researcher.breadcrumbs()
+        context['ajax_url'] = reverse(
+            'ajax-researcher',
+            kwargs={
+                'researcher': researcher.id,
+                'slug': researcher.slug
+            }
+        )
         return context
 
     def raw_response(self, context, **kwargs):
