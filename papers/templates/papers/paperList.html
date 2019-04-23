@@ -4,6 +4,7 @@
 {% load i18n %}
 {% load widget_tweaks %}
 {% load citation %}
+{% load capture_tags %}
 
 
 {% if page_obj.paginator.num_pages > 1 %}
@@ -41,10 +42,14 @@
         {% endwith %}
     </p>
 {% else %}
-    <p class="notFound">
+    <p class="notFound hidden-print">
         {% url 'faq' as faq_url %}
         {% blocktrans trimmed %}
             Missing publications? <a href="{{ faq_url }}#missing-paper">Read more about our data sources.</a>
         {% endblocktrans %}
+    </p>
+    <p class="hidden visible-print-block notFound">{% capture as href silent %}{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.META.HTTP_HOST }}{{ researcher.url }}{% endcapture %}{% blocktrans trimmed with href=href %}
+        Missing publications? Search for additional ones on <a class="showHrefPrint" href="{{ href }}">Dissem.in</a>.
+    {% endblocktrans %}
     </p>
 {% endif %}
