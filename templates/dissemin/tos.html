@@ -3,7 +3,7 @@
 {% load i18n %}
 
 {% block headTitle %}
-{% trans "Terms of Service" %}
+{% filter force_escape %}{% trans "Terms of Service" %}{% endfilter %}
 {% endblock %}
 
 {% block content %}

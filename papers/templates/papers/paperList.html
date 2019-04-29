@@ -34,22 +34,22 @@
 {% endif %}
 
 {% if researcher %}
-    <p class="notFound notFoundWithMargin">
+    <p class="notFound notFoundWithMargin hidden-print">
         {% with researcher.matching_papers_url as matching_papers_url %}
             {% blocktrans trimmed %}
                 Missing publications? <a href="{{ matching_papers_url }}">Search for publications with a matching author name</a>
             {% endblocktrans %}
         {% endwith %}
     </p>
-{% else %}
-    <p class="notFound hidden-print">
-        {% url 'faq' as faq_url %}
-        {% blocktrans trimmed %}
-            Missing publications? <a href="{{ faq_url }}#missing-paper">Read more about our data sources.</a>
-        {% endblocktrans %}
-    </p>
     <p class="hidden visible-print-block notFound">{% capture as href silent %}{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.META.HTTP_HOST }}{{ researcher.url }}{% endcapture %}{% blocktrans trimmed with href=href %}
         Missing publications? Search for additional ones on <a class="showHrefPrint" href="{{ href }}">Dissem.in</a>.
     {% endblocktrans %}
+    </p>
+{% else %}
+    <p class="notFound">
+        {% url 'faq' as faq_url %}
+        {% blocktrans trimmed %}
+            Missing publications? <a class="showHrefPrint" href="{{ faq_url }}#missing-paper">Read more about our data sources.</a>
+        {% endblocktrans %}
     </p>
 {% endif %}

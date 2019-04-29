@@ -14,8 +14,8 @@ LOGLEVEL = 'DEBUG'
 LOGGING['loggers']['dissemin']['level'] = os.environ.get('DISSEMIN_LOGLEVEL', LOGLEVEL).upper()
 
 # They are the domains under which your Dissemin instance should
-# be reachable. Leave empty if you run on localhost.
-ALLOWED_HOSTS = []
+# be reachable. Leave as is if you run on localhost.
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # If you do not want to use Celery,
 # use this setting to run all asynchronous tasks in the main process

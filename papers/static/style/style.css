@@ -54,6 +54,13 @@ body
     display: inline-block;
 }
 
+.span-label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
 /* boilerplate for links */
 
 a
@@ -621,7 +628,7 @@ h1#paperTitle {
 
 /* Criterions in the side bar */
 
-.detailsContent label
+.detailsContent label, .detailsContent .span-label
 {
     margin-bottom: 10px;
 }

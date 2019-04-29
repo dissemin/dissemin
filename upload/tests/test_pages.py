@@ -15,31 +15,17 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+# USA.
 #
-
-import pytest
-from django.contrib.auth.models import User
 
 from papers.tests.test_pages import RenderingTest
 
-@pytest.mark.usefixtures("load_test_data")
-class DepositPagesTest(RenderingTest):
 
+class UploadPagesTest(RenderingTest):
     @classmethod
     def setUpClass(self):
-        super(DepositPagesTest, self).setUpClass()
-
-    def test_start_deposit_unauthenticated(self):
-        paper = self.r3.papers[0]
-        r = self.getPage('upload_paper', kwargs={'pk': paper.pk})
-        self.assertEqual(r.status_code, 302)
-
-    def test_start_deposit_authenticated(self):
-        paper = self.r3.papers[0]
-        User.objects.create_user('superuser', 'email@domain.com', 'mypass')
-        self.client.login(username='superuser', password='mypass')
-        self.checkPage('upload_paper', kwargs={'pk': paper.pk})
+        super(UploadPagesTest, self).setUpClass()
 
     def test_css_validity(self):
-        self.checkCss('deposit/static/css')
+        self.checkCss('upload/static/css')

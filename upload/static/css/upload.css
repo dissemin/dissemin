@@ -1,3 +1,6 @@
+#browseButton {
+    margin-top: 10px;
+}
 
 .uploadModeBrowse, .uploadModeUrl, .uploadModeDrop {
     width: 32%;

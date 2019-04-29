@@ -22,8 +22,10 @@
 
 
 import datetime
+import html5validator
+import os
 import pytest
-import html5lib
+import tempfile
 from mock import patch
 
 from django.urls import reverse
@@ -48,22 +50,49 @@ from papers.doi import doi_to_url
 
 
 class RenderingTest(django.test.TestCase):
-
     def setUp(self):
         super(RenderingTest, self).setUp()
-        self.client = django.test.Client()
-        self.parser = html5lib.HTMLParser(strict=True)
+        # Django test client does not set HTTP_HOST by default, therefore
+        # having an empty request.META.HTTP_HOST variable which is an issue for
+        # some tests (HTML validity of links URLs). We therefore force it to be
+        # "localhost" in tests.
+        self.client = django.test.Client(HTTP_HOST='localhost')
+        self.validator = html5validator.Validator(
+            errors_only=True,
+            # Django Bootstrap DatetimePicker uses this extra attribute which
+            # is considered invalid by W3C validator.
+            ignore_re=['Attribute "dp_config" not allowed on element'],
+        )
 
     def checkHtml(self, resp):
         self.assertEqual(resp.status_code, 200)
         # Check that there are no overescaped HTML strings…
-        self.assertEqual(overescaped_re.findall(resp.content.decode('utf-8')), [])
+        self.assertEqual(
+            overescaped_re.findall(resp.content.decode('utf-8')),
+            []
+        )
+        # Check HTML markup with W3C HTML5 validator
+        fh = tempfile.NamedTemporaryFile(delete=False)
+        fh.write(resp.content)
+        fh.close()
+        self.assertEqual(
+            self.validator.validate([fh.name]),
+            0
+        )
         try:
-            self.parser.parse(resp.content)
-        except html5lib.html5parser.ParseError as e:
-            print(resp.content)
-            print("HTML validation error: "+str(e))
-            raise e
+            os.remove(fh.name)
+        except OSError:
+            pass
+
+    def checkCss(self, directory):
+        self.assertEqual(
+            self.validator.validate([
+                x
+                for x in os.listdir(directory)
+                if x.endswith('.css')
+            ]),
+            0
+        )
 
     def getPage(self, *args, **kwargs):
         urlargs = kwargs.copy()
@@ -98,6 +127,9 @@ class RenderingTest(django.test.TestCase):
 
     def checkUrl(self, url):
         self.checkHtml(self.client.get(url))
+
+    def checkCSSFiles(self):
+        self.checkCss('papers/static/style')
 
 @pytest.mark.usefixtures("load_test_data")
 class InstitutionPagesTest(RenderingTest):
