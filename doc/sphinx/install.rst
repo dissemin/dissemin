@@ -17,6 +17,8 @@ First, install `Vagrant <https://www.vagrantup.com>`_ and one of the supported p
   i.e., download the source code of Dissemin. You should not reuse an existing
   copy of the repository, otherwise it may cause errors with Vagrant later.
 - ``cd dissemin`` to go in the repository
+- If using the VirtualBox provider, run `vagrant plugin install vagrant-vbguest`
+  to install the VirtualBox guest additions plugin for Vagrant
 - ``vagrant up --provider=your_provider`` will create the VM / container and
   provision the machine once
 - ``vagrant ssh`` will let you poke into the machine and access its services

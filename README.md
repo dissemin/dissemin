@@ -19,6 +19,8 @@ hacking on the code.
 
 * `git clone https://github.com/dissemin/dissemin`
 * `cd dissemin`
+* `vagrant plugin install vagrant-vbguest` to install the VirtualBox guest additions
+  plugin for Vagrant (if using VirtualBox)
 * `vagrant up` to create and provision the VM
 * `vagrant ssh` will let you poke into the machine and access its services
 (PostgreSQL, Redis, ElasticSearch). A tmux session is running so that you
