@@ -168,7 +168,7 @@ Social Authentication specific: Configuring sandbox ORCID
 
 *You are not forced to configure ORCID to work on Dissemin, just create a super user and use it!*
 
-Create an account on `Sandbox ORCID <sandbox.orcid.org>`_.
+Create an account on `Sandbox ORCID <https://sandbox.orcid.org>`_.
 
 Go to "Developer Tools", verify your mail using `Mailinator <mailinator.com>`.
 
