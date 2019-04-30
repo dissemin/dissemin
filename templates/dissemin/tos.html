@@ -8,25 +8,29 @@
 
 {% block content %}
 <div id="fullPage" class="faq">
-    <div id="contentTitle">{% trans "Terms of Service" %}</div>
+    <h2 id="contentTitle">{% trans "Terms of Service" %}</h2>
     <div id="actualContent">
 
-	  <div id="faqSummary">
-        <h4>{% trans "In short" %}</h4>
-        <p><a href="#scope">{% trans "Scope of the service" %}</a></p>
-        <p><a href="#privacy">{% trans "Privacy" %}</a></p>
-        <p><a href="#deposits">{% trans "Deposits through Dissemin" %}</a></p>
+	  <nav id="faqSummary">
+        <h3>{% trans "In short" %}</h3>
+        <ul>
+            <li><a href="#scope">{% trans "Scope of the service" %}</a></li>
+            <li><a href="#privacy">{% trans "Privacy" %}</a></li>
+            <li><a href="#deposits">{% trans "Deposits through Dissemin" %}</a></li>
+        </ul>
 
-        <h4>{% trans "In full" %}</h4>
-        <p><a href="#personal-data">{% trans "Personal data" %}</a></p>
-        <p><a href="#full-text-storage">{% trans "Full text storage" %}</a></p>
-        <p><a href="#reporting-misuse">{% trans "Reporting misuse" %}</a></p>
-        <p><a href="#cnil">Déclaration CNIL</a></p>
-      </div>
+        <h3>{% trans "In full" %}</h3>
+        <ul>
+            <li><a href="#personal-data">{% trans "Personal data" %}</a></li>
+            <li><a href="#full-text-storage">{% trans "Full text storage" %}</a></li>
+            <li><a href="#reporting-misuse">{% trans "Reporting misuse" %}</a></li>
+            <li><a href="#cnil">Déclaration CNIL</a></li>
+        </ul>
+      </nav>
 
         <h3>{% trans "In short" %}</h3>
 
-        <h2 id="scope">{% trans "Scope of the service" %}</h2>
+        <h4 id="scope">{% trans "Scope of the service" %}</h4>
 
         <p>
         {% blocktrans trimmed %}
@@ -39,7 +43,7 @@
         {% endblocktrans %}
         </p>
 
-        <h2 id="privacy">{% trans "Privacy" %}</h2>
+        <h4 id="privacy">{% trans "Privacy" %}</h4>
 
         <p>
         {% blocktrans trimmed %}
@@ -60,7 +64,7 @@
         {% endblocktrans %}
         </p>
 
-        <h2 id="deposits">{% trans "Deposits through Dissemin" %}</h2>
+        <h4 id="deposits">{% trans "Deposits through Dissemin" %}</h4>
 
         <p>
         {% blocktrans trimmed %}
@@ -74,16 +78,16 @@
         {% endblocktrans %}
         </p>
 
-        <h2 id="abuse">{% trans "Contact" %}</h2>
+        <h4 id="abuse">{% trans "Contact" %}</h4>
 
         <p>
         {% blocktrans trimmed %}
-        Please address any inquiry to support@dissem.in.
+        Please address any inquiry to <a href="mailto:support@dissem.in">support@dissem.in</a>.
         {% endblocktrans %}
         </p>
 
         <h3>{% trans "In full" %}</h3>
-        <h2 id="personal-data">{% trans "Personal data" %}</h2>
+        <h4 id="personal-data">{% trans "Personal data" %}</h4>
 
         <p>
         {% blocktrans trimmed %}
@@ -102,11 +106,11 @@
 
         Dissemin can store any information input by its users on the platform. Users
         can ask for a copy of the personal information Dissemin stores about them by
-        writing an email to support@dissem.in.
+        writing an email to <a href="mailto:support@dissem.in">support@dissem.in</a>.
         {% endblocktrans %}
         </p>
 
-        <h2 id="full-text-storage">{% trans "Full text storage" %}</h2>
+        <h4 id="full-text-storage">{% trans "Full text storage" %}</h4>
 
         <p>
         {% blocktrans trimmed %}
@@ -115,22 +119,22 @@
         for logging purposes, and to make sure failed deposits can be fixed later.
         Dissemin does not commit to store any of the files it receives from its users.
 
-        Users can write to support@dissem.in if they want one of their uploads to be deleted
+        Users can write to <a href="mailto:support@dissem.in">support@dissem.in</a> if they want one of their uploads to be deleted
         from our internal storage space, or from the repository they have deposited to.
         Note that deletion policies vary accross repositories: we provide no guarantee that
         deposits can be deleted from the target repositories.
         {% endblocktrans %}
         </p>
 
-        <h2 id="reporting-misuse">{% trans "Reporting misuse" %}</h2>
+        <h4 id="reporting-misuse">{% trans "Reporting misuse" %}</h4>
 
         <p>
         {% blocktrans trimmed %}
-        Misuse can be reported to support@dissem.in.
+        Misuse can be reported to <a href="mailto:support@dissem.in">support@dissem.in</a>.
         {% endblocktrans %}
         </p>
 
-        <h2 id="cnil">Déclaration CNIL</h2>
+        <h4 id="cnil">Déclaration CNIL</h4>
 
         <p>
         {% blocktrans trimmed %}
@@ -144,7 +148,7 @@
         {% blocktrans trimmed %}
         You have the right to access, modify, and delete the personal
         information that we hold about you. To exercise this right, please contact us
-        at support@dissem.in, or by postal mail at the following addresss:
+        at <a href="mailto:support@dissem.in">support@dissem.in</a>, or by postal mail at the following addresss:
         {% endblocktrans %}
         </p>
 
@@ -155,7 +159,7 @@
         France
         </p>
 
-        <p class="hidden-print"><a href="#">{% trans "Back to top" %}</a></p>
+        <p class="hidden-print text-right"><a href="#">{% trans "Back to top" %}</a></p>
     </div>
 </div>
 {% endblock %}

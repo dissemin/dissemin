@@ -24,7 +24,7 @@ $(function(){
     <h2 class="text-center">{% trans "Advanced search" %}</h2>
     <form method="get" action="{% url "search" %}" id="advancedSearchPapers">
         <div class="form-group" id="searchPapersName">
-                <label>{% trans "By title" %}</label>
+            <label for="{{ form.q.id_for_label}}">{% trans "By title" %}</label>
                 {{ form.q.errors }}
                 {% render_field form.q class="form-control" %}
             </div>
@@ -40,7 +40,7 @@ $(function(){
                 {% render_field form.authors class="form-control" %}
             </div>
             <div class="form-horizontal">
-                <label>{% trans "By publication date" %}</label>
+                <p class="labelP">{% trans "By publication date" %}</p>
                 <div class="form-group" id="searchPaperPubDateAfter">
                     {{ form.pub_after.errors }}
                     <label class="col-xs-2 col-sm-3 control-label tightLabel" for="{{ form.pub_after.id_for_label }}">{% trans "after" %}</label>
@@ -57,18 +57,20 @@ $(function(){
                 </div>
             </div>
             <div class="form-group" id="searchPapersDoctype">
-                <label>{% trans "By document type" %}</label>
                 {{ form.doctypes.errors }}
-                <ul class="compactList">
-                    {% for checkbox in form.doctypes %}
-                    <li class="checkbox">
-                        <label class="doctype">
-                            {{ checkbox.tag }}
-                            {{ checkbox.choice_label }}
-                        </label>
-                    </li>
-                    {% endfor %}
-                </ul>
+                <fieldset>
+                    <legend class="labelP">{% trans "By document type" %}</legend>
+                    <ul class="compactList">
+                        {% for checkbox in form.doctypes %}
+                        <li class="checkbox">
+                            <label class="doctype">
+                                {{ checkbox.tag }}
+                                {{ checkbox.choice_label }}
+                            </label>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </fieldset>
             </div>
             {% if request.user.is_superuser %}
             <div class="form-group" id="searchPapersVisibility">

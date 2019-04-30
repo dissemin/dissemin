@@ -30,11 +30,11 @@
     <form method="get" action="{% url 'search' %}">
         <div class="input-group" id="searchPapersTitle">
             {% render_field search_form.authors class="form-control" %}
-            <label class="input-group-btn">
+            <span class="input-group-btn">
                 <button type="submit" class="btn btn-primary btn-search" aria-label="{% trans "Search" %}">
                     <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                 </button>
-            </label>
+            </span>
         </div>
 
         <p id="advancedSearchP">
