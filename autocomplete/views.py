@@ -32,12 +32,16 @@ class AffiliationAutocomplete(View, ViewMixin, Select2ViewMixin):
     def get_result_result(self, result):
         return result['label_html']
 
+    def get_result_valid(self, result):
+        return result['valid_s']
+
     def get_results(self, context):
         return [
             {
                 'id': self.get_result_value(result),
                 'selection': self.get_result_selection(result),
                 'result': self.get_result_result(result),
+                'valid': self.get_result_valid(result)
             }
             for result in context['object_list']
         ]
@@ -56,7 +60,7 @@ class AffiliationAutocomplete(View, ViewMixin, Select2ViewMixin):
             'q': q,
             'wt': 'json',
             'rows': 20,
-            'fl': 'docid,label_s,label_html',
+            'fl': 'docid,label_s,label_html,valid_s',
         })
         try:
             r.raise_for_status()
