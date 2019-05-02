@@ -22,7 +22,7 @@
                     href="#deposit-collapse-{{ deposit.id }}"
                     aria-expanded="false"
                     aria-controls="deposit-collapse-{{ deposit.id }}">
-                "{{ paper }}" in <strong>{{ deposit.repository }}</strong>
+                "{{ paper.title }}" in <strong>{{ deposit.repository }}</strong>
                 </a>
             </span>
             </div>
@@ -34,7 +34,7 @@ class="panel-collapse collapse"
                    <table class="table" style="margin-bottom: 0px">
                         <tr>
                             <td>{% trans "Paper" %}</td>
-                            <td><a href="{{ paper.url }}">{{ paper }}</a></td> 
+                            <td><a href="{{ paper.url }}">{{ paper.title }}</a></td>
                         </tr>
                         <tr>
                             <td>{% trans "Repository" %}</td>
@@ -42,11 +42,11 @@ class="panel-collapse collapse"
                         </tr>
                         <tr>
                             <td>{% trans "Deposit date" %}</td>
-                            <td>{{ deposit.date }}</td> 
+                            <td>{{ deposit.date }}</td>
                         </tr>
                         <tr>
                             <td>{% trans "Deposit type" %}</td>
-                            <td>{{ deposit.get_upload_type_display }}</td> 
+                            <td>{{ deposit.get_upload_type_display }}</td>
                         </tr>
                         <tr>
                             <td>{% trans "Identifier" %}</td>
