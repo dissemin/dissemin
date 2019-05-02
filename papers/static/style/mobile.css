@@ -2,6 +2,25 @@
 
 #content { min-width: 300px; }
 
+#header #change-lang-form {
+    margin: auto;
+    border: none;
+    box-shadow: none;
+}
+
+#header .navbar .select2-container {
+    text-align: left;
+    width: 100% !important;
+}
+
+#header .navbar .select2-selection__rendered {
+    padding-left: 0;
+}
+
+#select2-set-language-results {
+    text-align: left;
+}
+
 #welcome #institutionblock {
   float: none;
   margin: 0 auto;

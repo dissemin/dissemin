@@ -39,13 +39,17 @@
                         <li>
                             <form action="{% url 'set_language' %}" method="post" id="change-lang-form" class="navbar-form">
                                 {% csrf_token %}
-                                <select name="language" id="set-language" class="form-control" onchange="$('#change-lang-form').submit();">
+                                <label for="set-language" class="sr-only">{% trans "Language" %}</label>
+                                <select name="language" id="set-language" class="form-control">
                                     {% get_available_languages as LANGUAGES %}
                                     {% get_language_info_list for LANGUAGES as languages %}
                                     {% for language in languages %}
                                         <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>{{ language.name_local.title }}</option>
                                     {% endfor %}
                                 </select>
+                                <noscript>
+                                    <input type="submit" value="{% trans "Translate" %}"/>
+                                </noscript>
                             </form>
                         </li>
 
@@ -113,4 +117,17 @@
 {% if settings.DISPLAY_BETA_RIBBON %}
 <img style="position:absolute; top:0; left:0; border:0; opacity: 0.8; pointer-events: none;" src="{% static "img/beta-ribbon.png" %}" alt="Beta version" />
 {% endif %}
+{% endblock %}
+
+{% block jsScriptRoot %}
+    $(document).ready(function() {
+        $('#set-language').select2({
+            minimumResultsForSearch: Infinity,
+            closeOnSelect: true,
+        });
+        $('#set-language').on('select2:select', function (e) {
+            $('#change-lang-form').submit();
+        });
+    });
+    {% block jsScript %}{% endblock %}
 {% endblock %}

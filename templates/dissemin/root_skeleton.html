@@ -49,6 +49,8 @@
     <script src="{% static "libs/bootstrap/js/popper.min.js" %}"></script>
     <script src="{% static "libs/bootstrap/js/bootstrap.min.js" %}"></script>
     <script src="{% static "libs/editable/js/bootstrap-editable.min.js" %}"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.min.js"></script>
     <script src="{% url 'js_reverse' %}" type="text/javascript"></script>
     <script type="text/javascript" src="{% url 'javascript-catalog' %}"></script>
     <script type="text/javascript" src="{% static "libs/es6-promise.min.js" %}"></script>
@@ -71,8 +73,7 @@
     <script type="text/javascript" src="{% static "editing.js" %}"></script>
     <script type="text/javascript" src="{% static "name.js" %}"></script>
     <script type="text/javascript">
-
-        {% block jsScript %}{% endblock %}
+        {% block jsScriptRoot %}{% endblock %}
     </script>
     {% block extra_head %}{% endblock %}
     <title>{% block headTitle %}{% endblock %} - Dissemin</title>
