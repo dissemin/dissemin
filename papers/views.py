@@ -382,9 +382,9 @@ def myProfileView(request):
                                         slug=r.slug)
     except Researcher.DoesNotExist:
         return HttpResponse(
-            'Dissemin requires access to your ORCID name.'
+            render(request, 'dissemin/error.html', {'message':
+            _('Dissemin requires access to your ORCID name.')})
         )
-
 
 class DepartmentView(generic.DetailView):
     model = Department
