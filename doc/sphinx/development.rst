@@ -11,6 +11,5 @@ This section explains how to do some development tasks on the source code.
 
    ide
    localization
-   repository_interfaces
    contributing_faq
 

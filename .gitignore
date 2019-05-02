@@ -32,7 +32,6 @@ runfcgi.pid
 
 # build files for doc
 doc/sphinx/_build/
-doc/sphinx/*.rst
 doc/sphinx/modules
 
 # Coverage
