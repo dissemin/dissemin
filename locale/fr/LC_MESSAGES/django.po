@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-27 13:00+0100\n"
-"PO-Revision-Date: 2019-04-04 17:58:01+0000\n"
+"PO-Revision-Date: 2019-05-02 15:58:15+0000\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -1828,7 +1828,7 @@ msgstr "Tout autre problème technique."
 #: templates/dissemin/faq.html:333
 #, python-format
 msgid "Please first check whether the paper is available in one of <a href=\"%(sources_url)s\">our sources</a>. If it is not, Dissemin cannot harvest it, and you should report the problem to the source where it should appear."
-msgstr "Veuillez d'abord vérifier si le document est disponible dans l'une de nos <a href=\"%(sources_url)s\">sources</a>. Si ce n'est pas le cas, Dissemin ne peut pas le récupérer, et vous devriez signaler le problème à l'endroit où il devrait apparaître."
+msgstr "Veuillez d'abord vérifier si le document est disponible dans l'une de nos <a href=\"%(sources_url)s\">sources</a>. Si ce n'est pas le cas, Dissemin ne peut pas le récupérer, et vous devriez signaler le problème à la source où il devrait apparaître."
 
 #: templates/dissemin/faq.html:341
 msgid "Now, if your paper does appear in one of the sources but not on Dissemin, please check that your name is not spelt incorrectly on the source, and that the spelling matches your ORCID record. If there is a misspelling, again, you should report the problem to the source that contains the mistake."
