@@ -205,8 +205,10 @@ To add a repository, you need the following settings:
 
 - A name, description and logo. They will be shown to the user on the deposit page.
 - A protocol: this is the internal name of the protocol Dissemin should use
-  to perform the deposit. For now, only `ZenodoProtocol` is available: it can
-  be used to deposit to Zenodo (both production and sandbox).
+  to perform the deposit. For now, there are three possibilities:
+   - `ZenodoProtocol`, which can be used to deposit to Zenodo (both production and sandbox).
+   - `HALProtocol`, for `HAL <https://hal.archives-ouvertes.fr/>`
+   - `OSFProtocol`, for `OSF <https://osf.io/>`
 - Some other settings, such as the endpoint of the deposit interface,
   depending on what the protocol you have chosen requires.
   In the case of Zenodo, you need the endpoint (such as `https://zenodo.org/api/deposit/depositions` or `https://sandbox.zenodo.org/api/deposit/depositions`) and the API
