@@ -6,17 +6,17 @@
 {% load capture_tags %}
 
 {% for publi in paper.first_publications %}
-{% if forloop.first %}
-  <span class="detailsTitle">{% trans "Published in" %}</span>
-  <div class="detailsContent">
-{% endif %}
-<p>{{ publi | publication }}</p>
-{% if publi.doi %}
-<p>DOI: <a href="{{ publi | doi_to_url }}">{{ publi.doi }}</a></p>
-{% endif %}
-{% if forloop.last %}
-</div>
-{% endif %}
+    {% if forloop.first %}
+        <span class="detailsTitle">{% trans "Published in" %}</span>
+        <div class="detailsContent">
+    {% endif %}
+    <p>{{ publi | publication }}</p>
+    {% if publi.doi %}
+        <p>DOI: <a href="{{ publi | doi_to_url }}">{{ publi.doi }}</a></p>
+    {% endif %}
+    {% if forloop.last %}
+        </div>
+    {% endif %}
 {% endfor %}
 
 <span class="detailsTitle">{% trans "Links" %}</span>
@@ -38,9 +38,6 @@
     <p><a href="#" data-toggle="modal" data-target="#exportCitationModal">{% trans "Export citation" %}</a></p>
     {% with paper.get_doi as doi %}
     <p><a href="{{ paper.google_scholar_link }}">{% trans "Search in Google Scholar" %} <img src="/static/extlink.png" alt="[^]"></a></p>
-    {% if doi and not paper.pdf_url %}
-    <p><a href="https://openaccessbutton.org/request?doi={{ doi }}">{% trans "Request with the Open Access Button" %}</a></p>
-    {% endif %}
     {% endwith %}
 </div>
 

@@ -527,6 +527,11 @@ h1#paperTitle {
     background-image: url('../question-circle.png');
 }
 
+.policyPic-ask
+{
+    background-image: url('../blue-circle.png');
+}
+
 @media print {
     .policyPic-can
     {
