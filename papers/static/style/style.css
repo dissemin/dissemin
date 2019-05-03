@@ -212,6 +212,10 @@ h4
     text-align: right;
 }
 
+#select2-set-language-results .select2-results__option {
+    padding-right: 1em;
+}
+
 #content, #subfooter
 {
     max-width: 1030px;
