@@ -128,7 +128,7 @@ $(function(){
 {% include 'papers/exportCitationsModal.html' with slug='export.bib' url=citation_url bibtex=object_list|bibtex %}
 
 {% if researcher %}
-<span class="detailsTitle">{% trans "Researcher" %}</span>
+<h3 class="detailsTitle">{% trans "Researcher" %}</h3>
     <div class="detailsContent">
         <p id="detail-name">{{ researcher }}</p>
         {% if not request.user.is_authenticated and not researcher.orcid %}
@@ -161,12 +161,12 @@ $(function(){
         {% endif %}
     </div>
 {% elif department %}
-<span class="detailsTitle">{% trans "Department" %}</span>
+<h3 class="detailsTitle">{% trans "Department" %}</h3>
     <div class="detailsContent">
         <p id="detail-name">{{ department }}</p>
     </div>
 {% elif journal %}
-<span class="detailsTitle">{% trans "Journal" %}</span>
+<h3 class="detailsTitle">{% trans "Journal" %}</h3>
     <div class="detailsContent">
         <p id="detail-name">{{ journal }}</p>
         <p>{% trans "Published by" %} <a href="{{ journal.publisher.canonical_url }}">{{ journal.publisher }}</a></p>
@@ -187,7 +187,7 @@ $(function(){
     </p>
     </div>
 {% elif publisher %}
-<span class="detailsTitle">{% trans "Publisher" %}</span>
+<h3 class="detailsTitle">{% trans "Publisher" %}</h3>
     <div class="detailsContent">
         <p><a href="{{ publisher.canonical_url }}">{{ publisher }}</a></p>
         <div class="unselectedCriterion">
@@ -205,7 +205,7 @@ $(function(){
     </div>
 {% endif %}
 
-<span class="detailsTitle">{% trans "Statistics" %}</span>
+<h3 class="detailsTitle">{% trans "Statistics" %}</h3>
 <div class="detailsContent">
     <p id="nbPapersFound">
         {% blocktrans trimmed with formattedCounter=nb_results|intcomma count counter=nb_results|default:0 %}
@@ -247,7 +247,7 @@ $(function(){
     </form>
 </div>
 
-<span class="detailsTitle">{% trans "Tools" %}</span>
+<h3 class="detailsTitle">{% trans "Tools" %}</h3>
 <div class="detailsContent">
     <p class="display-inline-block">{% trans "Sort by" %}</p>
     <div class="dropdown display-inline-block sort-by-dropdown">
@@ -263,7 +263,7 @@ $(function(){
     <p><a href="#" data-toggle="modal" data-target="#exportCitationModal">{% trans "Export citations for current page" %}</a></p>
 </div>
 
-<span class="detailsTitle">{% trans "Refine" %}</span>
+<h3 class="detailsTitle">{% trans "Refine" %}</h3>
 <div class="detailsContent">
     <form method="get" action="." id="searchPapers" onChange="$(this).submit()">
         <!-- Keep track of external GET parameters -->

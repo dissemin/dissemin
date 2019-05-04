@@ -23,11 +23,11 @@
 {% block headTitle %}{{ paper.title }} - {{ paper.interesting_authors | join:', ' }}{% endblock %}
 
 {% block bodyTitle %}
-<h1 id="paperTitle" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}" data-pk="{{ paper.pk }}">
+<span id="paperTitle" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}" data-pk="{{ paper.pk }}">
     {% autoescape off %}
         {{ paper.title }}
     {% endautoescape %}
-</h1>
+</span>
 {% endblock %}
 
 {% block jsScript %}
