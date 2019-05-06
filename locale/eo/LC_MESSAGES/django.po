@@ -1,10 +1,7 @@
-# Translation of Dissemin website to Swedish (svenska)
+# Translation of Dissemin website to Esperanto (Esperanto)
 # Exported from translatewiki.net
 #
-# Author: Abijeet Patro
-# Author: Dan Koehl
-# Author: Sturban
-# Author: WikiPhoenix
+# Author: Mirin
 # --
 # This file is part of the Dissemin Project
 # This file is distributed under the same license as the Dissemin package.
@@ -12,31 +9,29 @@
 msgid ""
 msgstr ""
 ""
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-03 13:40+0200\n"
-"PO-Revision-Date: 2019-05-06 14:37:45+0000\n"
-"Language: sv\n"
+"PO-Revision-Date: 2019-05-06 14:37:42+0000\n"
+"X-POT-Import-Date: 2019-05-05 17:44:21+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-05-05 17:44:21+0000\n"
+"Language: eo\n"
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: deposit/forms.py:41
 msgid "Upload type"
-msgstr "Uppladdningstyp"
+msgstr "Tipo de alŝuto"
 
 #: deposit/forms.py:42 deposit/templates/deposit/deposits.html:40
 msgid "Repository"
-msgstr ""
+msgstr "Deponejo"
 
 #: deposit/forms.py:51
 msgid "Invalid full text identifier."
-msgstr "Ogiltig fulltextidentifierare."
+msgstr ""
 
 #: deposit/forms.py:105 papers/templates/papers/paper.html:145
 msgid "Abstract"
-msgstr "Sammanfattning"
+msgstr ""
 
 #: deposit/forms.py:118
 msgid "No preferred repository"
@@ -44,179 +39,179 @@ msgstr ""
 
 #: deposit/forms.py:139 deposit/hal/forms.py:77 deposit/osf/forms.py:143
 msgid "Save"
-msgstr "Spara"
+msgstr "Konservi"
 
 #: deposit/hal/forms.py:43
 msgid "Scientific field"
-msgstr "Vetenskapligt område"
+msgstr "Scienca fako"
 
 #: deposit/hal/forms.py:48
 msgid "Depositing author"
-msgstr ""
+msgstr "Deponinta aŭtoro"
 
 #: deposit/hal/forms.py:55
 msgid "Affiliation"
-msgstr "Anknytning"
+msgstr ""
 
 #: deposit/hal/metadata.py:36
 msgid "Chemistry"
-msgstr "Kemi"
+msgstr "Kemio"
 
 #: deposit/hal/metadata.py:37
 msgid "Computer science"
-msgstr "Datavetenskap"
+msgstr "Komputiko"
 
 #: deposit/hal/metadata.py:38
 msgid "Mathematics"
-msgstr "Matematik"
+msgstr "Matematiko"
 
 #: deposit/hal/metadata.py:39
 msgid "Physics"
-msgstr "Fysik"
+msgstr "Fiziko"
 
 #: deposit/hal/metadata.py:40
 msgid "Non-linear science"
-msgstr "Icke-linjär vetenskap"
+msgstr "Nelineara scienco"
 
 #: deposit/hal/metadata.py:41
 msgid "Cognitive science"
-msgstr "Kognitiv vetenskap"
+msgstr "Kogna scienco"
 
 #: deposit/hal/metadata.py:42
 msgid "Environment sciences"
-msgstr "Miljövetenskap"
+msgstr "Mediaj sciencoj"
 
 #: deposit/hal/metadata.py:43
 msgid "Planet and Universe"
-msgstr "Planeten och universum"
+msgstr "Planedo kaj Universo"
 
 #: deposit/hal/metadata.py:44
 msgid "Biological anthropology"
-msgstr "Biologisk antropologi"
+msgstr "Biologia antropologio"
 
 #: deposit/hal/metadata.py:45
 msgid "Social Anthropology and ethnology"
-msgstr "Socialantropologi och etnologi"
+msgstr "Socia Antropologio kaj etnologio"
 
 #: deposit/hal/metadata.py:46
 msgid "Archaeology and Prehistory"
-msgstr "Arkeologi och fornhistoria"
+msgstr "Arkeologio kaj Prahistorio"
 
 #: deposit/hal/metadata.py:47
 msgid "Architecture, space management"
-msgstr ""
+msgstr "Arkitekturo kaj spaca mastrumado"
 
 #: deposit/hal/metadata.py:48
 msgid "Art and art history"
-msgstr "Konst och konsthistoria"
+msgstr "Arto kaj arta historio"
 
 #: deposit/hal/metadata.py:49
 msgid "Classical studies"
-msgstr "Klassiska studier"
+msgstr "Klasikaj studoj"
 
 #: deposit/hal/metadata.py:50
 msgid "Demography"
-msgstr "Demografi"
+msgstr "Demografio"
 
 #: deposit/hal/metadata.py:51 deposit/osf/forms.py:67 deposit/osf/forms.py:90
 msgid "Law"
-msgstr "Juridik"
+msgstr "Juro"
 
 #: deposit/hal/metadata.py:52
 msgid "Economies and finances"
-msgstr "Ekonomi och finans"
+msgstr "Ekonomioj kaj financoj"
 
 #: deposit/hal/metadata.py:53 deposit/osf/forms.py:63 deposit/osf/forms.py:86
 msgid "Education"
-msgstr "Utbildning"
+msgstr "Eduko"
 
 #: deposit/hal/metadata.py:54
 msgid "Environmental studies"
-msgstr "Miljöstudier"
+msgstr "Ekologiaj studoj"
 
 #: deposit/hal/metadata.py:55
 msgid "Gender studies"
-msgstr "Könsstudier"
+msgstr "Genraj studoj"
 
 #: deposit/hal/metadata.py:56
 msgid "Geography"
-msgstr "Geografi"
+msgstr "Geografio"
 
 #: deposit/hal/metadata.py:57
 msgid "Business administration"
-msgstr ""
+msgstr "Negoca administrado"
 
 #: deposit/hal/metadata.py:58
 msgid "History, Philosophy and Sociology of Sciences"
-msgstr ""
+msgstr "Historio, Filozofio, kaj Sociologio de Sciencoj"
 
 #: deposit/hal/metadata.py:59
 msgid "History"
-msgstr "Historia"
+msgstr "Historio"
 
 #: deposit/hal/metadata.py:60
 msgid "Library and information sciences"
-msgstr ""
+msgstr "Bibliotekaj kaj informaj sciencoj"
 
 #: deposit/hal/metadata.py:61
 msgid "Linguistics"
-msgstr "Lingvistik"
+msgstr "Lingvistiko"
 
 #: deposit/hal/metadata.py:62
 msgid "Literature"
-msgstr "Litteratur"
+msgstr "Literaturo"
 
 #: deposit/hal/metadata.py:63
 msgid "Cultural heritage and museology"
-msgstr "Kulturarv och museologi"
+msgstr "Kultura heredaĵo kaj muzeologio"
 
 #: deposit/hal/metadata.py:64
 msgid "Musicology and performing arts"
-msgstr ""
+msgstr "Muzikologio kaj teatraj artoj"
 
 #: deposit/hal/metadata.py:65
 msgid "Philosophy"
-msgstr "Filosofi"
+msgstr "Filozofio"
 
 #: deposit/hal/metadata.py:66
 msgid "Psychology"
-msgstr "Psykologi"
+msgstr "Psikologio"
 
 #: deposit/hal/metadata.py:67
 msgid "Religions"
-msgstr "Religion"
+msgstr "Religioj"
 
 #: deposit/hal/metadata.py:68
 msgid "Political science"
-msgstr "Statsvetenskap"
+msgstr "Politika scienco"
 
 #: deposit/hal/metadata.py:69
 msgid "Sociology"
-msgstr "Sociologi"
+msgstr "Sociologio"
 
 #: deposit/hal/metadata.py:70
 msgid "Methods and statistics"
-msgstr "Metoder och statistik"
+msgstr "Metodoj kaj statistiko"
 
 #: deposit/hal/metadata.py:71
 msgid "Life sciences"
-msgstr "Livsvetenskap"
+msgstr "Vivsciencoj"
 
 #: deposit/hal/metadata.py:72
 msgid "Engineering sciences"
-msgstr "Ingenjörsvetenskap"
+msgstr "Inĝenieriaj sciencoj"
 
 #: deposit/hal/metadata.py:73 papers/templates/papers/search.html:208
 msgid "Statistics"
-msgstr "Statistik"
+msgstr "Statistiko"
 
 #: deposit/hal/metadata.py:74
 msgid "Economy and quantitative finance"
-msgstr "Ekonomi och kvantitativ finans"
+msgstr ""
 
 #: deposit/hal/models.py:14
 msgid "HAL username"
-msgstr ""
+msgstr "uzantnomo de HAL"
 
 #: deposit/hal/models.py:15
 msgid "If set, deposits will be associated to this HAL account."
@@ -224,7 +219,7 @@ msgstr ""
 
 #: deposit/hal/protocol.py:143
 msgid "No HAL user credentials provided."
-msgstr "Inga HAL-inloggningsuppgifter uppgavs."
+msgstr ""
 
 #: deposit/hal/protocol.py:211
 msgid "This document is already in HAL. HAL refused the deposit."
@@ -237,7 +232,7 @@ msgstr ""
 
 #: deposit/hal/protocol.py:225
 msgid "HAL returned an invalid XML response"
-msgstr "HAL returnerade ett ogiltigt XML-svar"
+msgstr ""
 
 #: deposit/hal/protocol.py:237
 msgid "This paper already exists in HAL."
@@ -245,48 +240,48 @@ msgstr ""
 
 #: deposit/hal/protocol.py:243
 msgid "HAL rejected the submission."
-msgstr "HAL avvisade inlämningen."
+msgstr ""
 
 #: deposit/hal/protocol.py:253
 msgid "HAL rejected the submission"
-msgstr "HAL avvisade inlämningen."
+msgstr ""
 
 #: deposit/hal/protocol.py:262
 msgid "Password"
-msgstr "Lösenord"
+msgstr "Pasvorto"
 
 #: deposit/hal/protocol.py:290
 msgid "Connection to HAL failed. Please try again later."
-msgstr "Anslutningen till HAL misslyckades. Var god försök igen."
+msgstr ""
 
 #: deposit/models.py:41
 msgid "Failed"
-msgstr "Misslyckades"
+msgstr "Malsukcesis"
 
 #: deposit/models.py:42
 msgid "Faked"
-msgstr ""
+msgstr "Falsita"
 
 #: deposit/models.py:43
 msgid "Pending publication"
-msgstr "Väntande publicering"
+msgstr "Eldonota"
 
 #: deposit/models.py:45
 msgid "Published"
-msgstr "Publicerad"
+msgstr "Eldonita"
 
 #: deposit/models.py:46
 msgid "Refused by the repository"
-msgstr ""
+msgstr "Rifuzita de la deponejo"
 
 #: deposit/models.py:47
 msgid "Deleted"
-msgstr "Raderad"
+msgstr "Forigita"
 
 #: deposit/models.py:169 deposit/templates/deposit/start.html:505
 #: deposit/views.py:105
 msgid "Deposit"
-msgstr ""
+msgstr "Deponi"
 
 #: deposit/models.py:222
 msgid "We will use this email address to notify you when your deposits are accepted."
@@ -298,19 +293,19 @@ msgstr ""
 
 #: deposit/osf/forms.py:35 deposit/osf/forms.py:46
 msgid "Creative Commons CC0 1.0 Universal"
-msgstr "Creative Commons CC0 1.0 Universell"
+msgstr ""
 
 #: deposit/osf/forms.py:37 deposit/osf/forms.py:48
 msgid "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
-msgstr "Creative Commons CC-By Erkännande 4.0 Internationell (CC BY 4.0)"
+msgstr ""
 
 #: deposit/osf/forms.py:40 deposit/osf/forms.py:51
 msgid "No license"
-msgstr "Ingen licens"
+msgstr "Sen permesilo"
 
 #: deposit/osf/forms.py:57 deposit/osf/forms.py:80
 msgid "Architecture"
-msgstr "Arkitektur"
+msgstr "Arkitekturo"
 
 #: deposit/osf/forms.py:59 deposit/osf/forms.py:82
 msgid "Arts and Humanities"
@@ -318,39 +313,39 @@ msgstr ""
 
 #: deposit/osf/forms.py:61 deposit/osf/forms.py:84
 msgid "Business"
-msgstr ""
+msgstr "Negoco"
 
 #: deposit/osf/forms.py:65 deposit/osf/forms.py:88
 msgid "Engineering"
-msgstr ""
+msgstr "Inĝenierio"
 
 #: deposit/osf/forms.py:69 deposit/osf/forms.py:92
 msgid "Life Sciences"
-msgstr "Livsvetenskap"
+msgstr "Vivsciencoj"
 
 #: deposit/osf/forms.py:71 deposit/osf/forms.py:94
 msgid "Medicine and Health Sciences"
-msgstr "Medicin och hälsovetenskap"
+msgstr "Medicino kaj Sansciencoj"
 
 #: deposit/osf/forms.py:73 deposit/osf/forms.py:96
 msgid "Physical Sciences and Mathematics"
-msgstr "Fysisk vetenskap och matematik"
+msgstr "Fizikaj Sciencoj kaj Matematiko"
 
 #: deposit/osf/forms.py:75 deposit/osf/forms.py:98
 msgid "Social and Behavioral Sciences"
-msgstr ""
+msgstr "Sociaj kaj Kondutaj Sciencoj"
 
 #: deposit/osf/forms.py:104 deposit/zenodo/forms.py:49
 msgid "License"
-msgstr "Licens"
+msgstr "Permesilo"
 
 #: deposit/osf/forms.py:150
 msgid "Invalid OSF identifier."
-msgstr "Ogiltigt OSF-identifierare."
+msgstr "Ne valida OSF-identigilo."
 
 #: deposit/osf/models.py:13
 msgid "OSF identifier"
-msgstr "OSF-identifierare"
+msgstr "OSF-identigilo"
 
 #: deposit/osf/models.py:14
 msgid "If set, your deposits will be associated to this OSF account. This identifier is a string of letters and numbers which can be found in your OSF public profile URL."
@@ -358,15 +353,15 @@ msgstr ""
 
 #: deposit/osf/protocol.py:207
 msgid "Unable to create a project on OSF."
-msgstr "Kunde inte skapa ett projekt på OSF."
+msgstr "Ne povis krei projekton ĉe OSF."
 
 #: deposit/osf/protocol.py:221
 msgid "Unable to authenticate to OSF."
-msgstr "Kunde inte autentisera till OSF."
+msgstr "Ne povis konfirmi aŭtenton al OSF."
 
 #: deposit/osf/protocol.py:238
 msgid "Unable to add contributors."
-msgstr "Kunde inte lägga till bidragsgivare."
+msgstr "Ne povis aldoni kontribuinton."
 
 #: deposit/osf/protocol.py:265
 msgid "Unable to update the contributors of the paper."
@@ -374,7 +369,7 @@ msgstr ""
 
 #: deposit/osf/protocol.py:311
 msgid "Unable to update license."
-msgstr "Kunde inte uppdatera licensen."
+msgstr "Ne povis ŝanĝi permesilon."
 
 #: deposit/osf/protocol.py:369
 msgid "Unable to create the preprint."
@@ -390,30 +385,29 @@ msgstr ""
 
 #: deposit/osf/protocol.py:429
 msgid "No OSF token provided."
-msgstr "Inge OSF-nyckel angavs."
+msgstr ""
 
 #: deposit/osf/protocol.py:470
 msgid "Unable to upload the PDF file."
-msgstr "Kunde inte ladda upp PDF-filen."
+msgstr "Ne povis alŝuti PDF-dosieron."
 
 #: deposit/osf/protocol.py:510
 msgid "Unable to delete the project."
-msgstr "Kunde inte radera projektet."
+msgstr "Ne povis forigi projekton."
 
 #: deposit/osf/protocol.py:540 deposit/osf/protocol.py:548
 msgid "Unable to make the project public."
-msgstr "Kunde inte göra projektet offentligt."
+msgstr "Ne povis publikigi projekton."
 
 #: deposit/protocol.py:199
-#, fuzzy
 msgid "Failed to connect to the repository. Please try again later."
-msgstr "Anslutningen till HAL misslyckades. Var god försök igen."
+msgstr "Ne povis konekti deponejon. Bonvolu reprovi poste."
 
 #: deposit/templates/deposit/deposits.html:10
 #: deposit/templates/deposit/deposits.html:14
 #: templates/dissemin/skeleton.html:50
 msgid "My deposits"
-msgstr ""
+msgstr "Miaj deponitoj"
 
 #: deposit/templates/deposit/deposits.html:36
 msgid "Paper"
@@ -421,27 +415,27 @@ msgstr ""
 
 #: deposit/templates/deposit/deposits.html:44
 msgid "Deposit date"
-msgstr ""
+msgstr "Dato de depono"
 
 #: deposit/templates/deposit/deposits.html:48
 msgid "Deposit type"
-msgstr ""
+msgstr "Tipo de deponito"
 
 #: deposit/templates/deposit/deposits.html:52
 msgid "Identifier"
-msgstr "Identifierare"
+msgstr "Identigilo"
 
 #: deposit/templates/deposit/deposits.html:58
 msgid "Meta URL"
-msgstr "Meta-URL"
+msgstr "Metadatena retadreso"
 
 #: deposit/templates/deposit/deposits.html:63
 msgid "PDF URL"
-msgstr "PDF-URL"
+msgstr "Retadreso de PDF-dosiero"
 
 #: deposit/templates/deposit/deposits.html:70
 msgid "Status"
-msgstr "Status"
+msgstr "Stato"
 
 #: deposit/templates/deposit/deposits.html:88
 msgid "You have not made any deposit via Dissemin. What are you waiting for? Liberate your papers today."
@@ -451,43 +445,40 @@ msgstr ""
 #: deposit/templates/deposit/preferences_nav.html:3
 #: templates/dissemin/skeleton.html:49
 msgid "Preferences"
-msgstr "Inställningar"
+msgstr "Agordoj"
 
 #: deposit/templates/deposit/preferences_nav.html:7
 msgid "General"
-msgstr "Allmänt"
+msgstr "Ĝenerale"
 
 #: deposit/templates/deposit/repo_preferences.html:13
 msgid "Repository preferences"
-msgstr ""
+msgstr "Preferoj pri deponejo"
 
 #: deposit/templates/deposit/start.html:11
 #: deposit/templates/deposit/start.html:14
 msgid "Depositing"
-msgstr ""
+msgstr "Deponado"
 
 #: deposit/templates/deposit/start.html:40
 msgid "Trying to fill this field automatically for you..."
-msgstr "Försöker fylla i detta fält åt dig automatiskt..."
+msgstr ""
 
 #: deposit/templates/deposit/start.html:49
 msgid "Sorry, we could not fill this for you."
-msgstr "Tyvärr, vi kunde inte fylla i detta åt dig."
+msgstr ""
 
 #: deposit/templates/deposit/start.html:74
-#, fuzzy
 msgid "Current institutions"
-msgstr "Institutioner"
+msgstr ""
 
 #: deposit/templates/deposit/start.html:75
-#, fuzzy
 msgid "Unverified institutions"
-msgstr "Institutioner"
+msgstr ""
 
 #: deposit/templates/deposit/start.html:76
-#, fuzzy
 msgid "Obsolete institutions"
-msgstr "Institutioner"
+msgstr ""
 
 #: deposit/templates/deposit/start.html:310
 msgid "Dissemin encountered an error, please try again later."
@@ -508,36 +499,36 @@ msgstr ""
 
 #: deposit/templates/deposit/start.html:425
 msgid "Document"
-msgstr "Dokument"
+msgstr "Dokumento"
 
 #: deposit/templates/deposit/start.html:433
 msgid "Options"
-msgstr "Alternativ"
+msgstr ""
 
 #: deposit/templates/deposit/start.html:438
 msgid "Upload type:"
-msgstr "Uppladdningstyp:"
+msgstr "Tipo de alŝuto:"
 
 #: deposit/templates/deposit/start.html:448
 msgid "Repository:"
-msgstr ""
+msgstr "Deponejo:"
 
 #: deposit/templates/deposit/start.html:460
 msgctxt "This repository will be soon available in Dissemin"
 msgid "Coming soon:"
-msgstr "Kommer snart:"
+msgstr ""
 
 #: deposit/templates/deposit/start.html:492
 msgid "Metadata"
-msgstr "Metadata"
+msgstr "Metadateno"
 
 #: deposit/templates/deposit/start.html:507
 msgid "Processing deposit..."
-msgstr ""
+msgstr "Deponanta..."
 
 #: deposit/templates/deposit/start.html:507
 msgid "please wait..."
-msgstr "var god vänta..."
+msgstr "bonvolu atendi..."
 
 #: deposit/views.py:67
 msgid "This repository is not available for this paper."
@@ -557,27 +548,27 @@ msgstr ""
 
 #: deposit/views.py:211
 msgid "Access to the PDF was denied."
-msgstr "Åtkomst till PDF nekades."
+msgstr ""
 
 #: deposit/zenodo/forms.py:31
 msgid "Creative Commons CCZero (CC0)"
-msgstr "Creative Commons CCZero (CC0)"
+msgstr ""
 
 #: deposit/zenodo/forms.py:33
 msgid "Creative Commons Attribution (CC-BY)"
-msgstr "Creative Commons Erkännande (CC-BY)"
+msgstr ""
 
 #: deposit/zenodo/forms.py:35
 msgid "Creative Commons Attribution-ShareAlike (CC-BY-SA)"
-msgstr "Creative Commons Erkännande-DelaLika (CC-BY-SA)"
+msgstr ""
 
 #: deposit/zenodo/forms.py:37
 msgid "Creative Commons Attribution-NonCommercial (CC-BY-NC)"
-msgstr "Creative Commons Erkännande-IckeKommersiell (CC-BY-NC)"
+msgstr ""
 
 #: deposit/zenodo/forms.py:39
 msgid "Creative Commons Attribution-NoDerivatives (CC-BY-ND)"
-msgstr "Creative Commons Attribution-IngaBearbetningar (CC-BY-ND)"
+msgstr ""
 
 #: deposit/zenodo/forms.py:41
 msgid "Free for private use; right holder retains other rights, including distribution"
@@ -585,7 +576,7 @@ msgstr ""
 
 #: deposit/zenodo/forms.py:43
 msgid "Other open license"
-msgstr "Annan öppen licens"
+msgstr "Alia malfermita permesilo"
 
 #: deposit/zenodo/protocol.py:84
 msgid "This document is already in Zenodo. Zenodo refused the deposit."
@@ -593,7 +584,7 @@ msgstr ""
 
 #: deposit/zenodo/protocol.py:118
 msgid "No Zenodo API key provided."
-msgstr "Ingen API-nyckel för Zenodo uppgavs."
+msgstr ""
 
 #: deposit/zenodo/protocol.py:128
 msgid "This happens when Zenodo has hiccups. Please try again in a few minutes or use a different repository in the menu above."
@@ -601,7 +592,7 @@ msgstr ""
 
 #: deposit/zenodo/protocol.py:134
 msgid "Unable to authenticate to Zenodo."
-msgstr ""
+msgstr "Ne povis konfirmi aŭtenton al Zenodo."
 
 #: deposit/zenodo/protocol.py:142
 msgid "Unable to create a new deposition on Zenodo."
@@ -609,7 +600,7 @@ msgstr ""
 
 #: deposit/zenodo/protocol.py:159
 msgid "Unable to transfer the document to Zenodo."
-msgstr ""
+msgstr "Ne povis transdoni dokumenton al Zenodo."
 
 #: deposit/zenodo/protocol.py:170
 msgid "No abstract is available for this paper but Zenodo requires one. Please provide it using the metadata panel."
@@ -617,71 +608,71 @@ msgstr ""
 
 #: deposit/zenodo/protocol.py:182
 msgid "Unable to submit paper metadata to Zenodo."
-msgstr ""
+msgstr "Ne povis sendi metadatenon al Zenodo."
 
 #: deposit/zenodo/protocol.py:200
 msgid "Unable to publish the deposition on Zenodo."
-msgstr ""
+msgstr "Ne povis eldoni la deponiton ĉe Zenodo."
 
 #: dissemin/settings/common.py:282
 msgid "Arabic"
-msgstr ""
+msgstr "araba"
 
 #: dissemin/settings/common.py:283
 msgid "English"
-msgstr "Engelska"
+msgstr "angla"
 
 #: dissemin/settings/common.py:284
 msgid "Finnish"
-msgstr ""
+msgstr "finna"
 
 #: dissemin/settings/common.py:285
 msgid "French"
-msgstr "Franska"
+msgstr "franca"
 
 #: dissemin/settings/common.py:286
 msgid "Korean"
-msgstr "Koreanska"
+msgstr "korea"
 
 #: dissemin/settings/common.py:287
 msgid "Spanish"
-msgstr "Spanska"
+msgstr "hispana"
 
 #: dissemin/settings/common.py:288
 msgid "Simplified Chinese"
-msgstr ""
+msgstr "simpligita ĉina"
 
 #: dissemin/settings/common.py:289
 msgid "Traditional Chinese"
-msgstr ""
+msgstr "tradicia ĉina"
 
 #: dissemin/settings/common.py:290
 msgid "Macedonian"
-msgstr ""
+msgstr "makedona"
 
 #: dissemin/settings/common.py:291
 msgid "German"
-msgstr ""
+msgstr "germana"
 
 #: dissemin/settings/common.py:292
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "Brazil-portugala"
 
 #: dissemin/settings/common.py:293
 msgid "European Portuguese"
-msgstr ""
+msgstr "Eŭrop-portugala"
 
 #: dissemin/settings/common.py:294
 msgid "Swedish"
-msgstr ""
+msgstr "sveda"
 
 #: notification/models.py:62
 msgid "inboxes"
-msgstr "inkorgar"
+msgstr ""
 
 #: papers/baremodels.py:58
 msgid "Journal article"
-msgstr "Journalartikel"
+msgstr ""
 
 #: papers/baremodels.py:59
 msgid "Proceedings article"
@@ -689,11 +680,11 @@ msgstr ""
 
 #: papers/baremodels.py:60
 msgid "Book chapter"
-msgstr "Bokkapitel"
+msgstr "Ĉapitro de libro"
 
 #: papers/baremodels.py:61
 msgid "Book"
-msgstr "Bok"
+msgstr "Libro"
 
 #: papers/baremodels.py:62
 msgid "Journal issue"
@@ -709,19 +700,19 @@ msgstr ""
 
 #: papers/baremodels.py:65
 msgid "Poster"
-msgstr ""
+msgstr "Afiŝo"
 
 #: papers/baremodels.py:66
 msgid "Report"
-msgstr ""
+msgstr "Raporto"
 
 #: papers/baremodels.py:67
 msgid "Thesis"
-msgstr "Avhandling"
+msgstr ""
 
 #: papers/baremodels.py:68
 msgid "Dataset"
-msgstr ""
+msgstr "Datenaro"
 
 #: papers/baremodels.py:69 papers/models.py:99
 msgid "Preprint"
@@ -729,20 +720,20 @@ msgstr ""
 
 #: papers/baremodels.py:70
 msgid "Other document"
-msgstr "Annat dokument"
+msgstr "Alia dokumento"
 
 #: papers/forms.py:50 papers/views.py:73
 msgid "Invalid ORCID identifier."
-msgstr "Ogiltig ORCID-identifierare."
+msgstr ""
 
 #: papers/forms.py:56 papers/templates/papers/department.html:60
 #: papers/templates/papers/search.html:164
 msgid "Department"
-msgstr "Avdelning"
+msgstr ""
 
 #: papers/forms.py:58 papers/templates/papers/search.html:131
 msgid "Researcher"
-msgstr "Forskare"
+msgstr ""
 
 #: papers/forms.py:77
 msgid "newest first"
@@ -754,19 +745,19 @@ msgstr ""
 
 #: papers/forms.py:112 papers/forms.py:119
 msgid "Any"
-msgstr "Alla"
+msgstr "Ajna"
 
 #: papers/forms.py:113
 msgid "Visible"
-msgstr "Synlig"
+msgstr "Videbla"
 
 #: papers/forms.py:114
 msgid "Invisible"
-msgstr "Osynlig"
+msgstr "Nevidebla"
 
 #: papers/forms.py:219
 msgid "Try any author name"
-msgstr "Prova något författarnamn"
+msgstr "Provi alian aŭtornomon"
 
 #: papers/models.py:100
 msgid "Postprint"
@@ -774,39 +765,39 @@ msgstr ""
 
 #: papers/models.py:101
 msgid "Published version"
-msgstr "Publicerad version"
+msgstr "Eldonita versio"
 
 #: papers/models.py:105
 msgid "Preparing profile"
-msgstr "Förbereder profil"
+msgstr "Pretiganta profilon"
 
 #: papers/models.py:106
 msgid "Fetching publications from ORCID"
-msgstr "Hämtar publikationer från ORCID"
+msgstr ""
 
 #: papers/models.py:107
 msgid "Fetching publications from CrossRef"
-msgstr "Hämtar publikationer från CrossRef"
+msgstr ""
 
 #: papers/models.py:108
 msgid "Fetching publications from BASE"
-msgstr "Hämtar publikationer från BASE"
+msgstr ""
 
 #: papers/models.py:109
 msgid "Fetching publications from CORE"
-msgstr "Hämtar publikationer från CORE"
+msgstr ""
 
 #: papers/models.py:110
 msgid "Fetching publications from OAI-PMH"
-msgstr "Hämtar publikationer från OAI-PMH"
+msgstr ""
 
 #: papers/models.py:111
 msgid "Clustering publications"
-msgstr ""
+msgstr "Grupiganta eldonojn"
 
 #: papers/models.py:112
 msgid "Updating statistics"
-msgstr "Uppdaterar statistik"
+msgstr "Ĝisdatiganta statistikojn"
 
 #: papers/models.py:1233 papers/views.py:140 papers/views.py:145
 #: papers/views.py:316 papers/views.py:350
@@ -821,20 +812,18 @@ msgstr ""
 
 #: papers/templates/papers/advanced_search.html:27
 #: papers/templates/papers/search.html:277
-#, fuzzy
 msgid "By title"
-msgstr "titel"
+msgstr ""
 
 #: papers/templates/papers/advanced_search.html:34
 #: papers/templates/papers/search.html:290
-#, fuzzy
 msgid "By co-authors"
-msgstr "Efter författare"
+msgstr ""
 
 #: papers/templates/papers/advanced_search.html:36
 #: papers/templates/papers/search.html:292
 msgid "By authors"
-msgstr "Efter författare"
+msgstr "Laŭ aŭtoroj"
 
 #: papers/templates/papers/advanced_search.html:37
 #: papers/templates/papers/search.html:295
@@ -844,37 +833,37 @@ msgstr ""
 #: papers/templates/papers/advanced_search.html:43
 #: papers/templates/papers/search.html:305
 msgid "By publication date"
-msgstr "Efter publiceringsdatum"
+msgstr "Laŭ dato de eldono"
 
 #: papers/templates/papers/advanced_search.html:46
 #: papers/templates/papers/search.html:309
 msgid "after"
-msgstr "efter"
+msgstr "post"
 
 #: papers/templates/papers/advanced_search.html:53
 #: papers/templates/papers/search.html:316
 msgid "before"
-msgstr "före"
+msgstr "antaŭ"
 
 #: papers/templates/papers/advanced_search.html:60
 #: papers/templates/papers/search.html:324
 msgid "By document type"
-msgstr "Efter dokumenttyp"
+msgstr "Laŭ dokumenta tipo"
 
 #: papers/templates/papers/advanced_search.html:75
 #: papers/templates/papers/search.html:340
 msgid "By visibility"
-msgstr "Efter synlighet"
+msgstr "Laŭ videbleco"
 
 #: papers/templates/papers/advanced_search.html:80
 #: papers/templates/papers/search.html:345
 msgid "By full text availability"
-msgstr ""
+msgstr "Laŭ disponeblo de plena teksto"
 
 #: papers/templates/papers/advanced_search.html:86
 #: papers/templates/papers/search.html:351
 msgid "By publisher policy"
-msgstr "Efter utgivarpolicy"
+msgstr ""
 
 #: papers/templates/papers/advanced_search.html:106
 #: papers/templates/papers/index.html:34
@@ -884,20 +873,20 @@ msgstr "Efter utgivarpolicy"
 #: publishers/templates/publishers/list.html:47
 #: publishers/templates/publishers/list.html:86
 msgid "Search"
-msgstr "Sök"
+msgstr "Serĉi"
 
 #: papers/templates/papers/annotButtons.html:8
 msgid "Right"
-msgstr "Korrekt"
+msgstr "Ĝusta"
 
 #: papers/templates/papers/annotButtons.html:13
 msgid "Wrong"
-msgstr "Fel"
+msgstr "Malĝusta"
 
 #: papers/templates/papers/annotButtons.html:16
 #: papers/templates/papers/paperDetails.html:40
 msgid "Search in Google Scholar"
-msgstr "Sök i Google Scholar"
+msgstr ""
 
 #: papers/templates/papers/authorList.html:17
 msgid "This contributorship is confirmed by ORCID."
@@ -921,7 +910,7 @@ msgstr ""
 #: papers/templates/papers/department.html:49
 #: papers/templates/papers/institution.html:52
 msgid "Delete"
-msgstr "Radera"
+msgstr "Forigi"
 
 #: papers/templates/papers/department.html:62
 msgid "Papers of the members"
@@ -945,26 +934,25 @@ msgstr ""
 #: papers/templates/papers/paper.html:118
 #: papers/templates/papers/publiListItem.html:37
 msgid "Download"
-msgstr "Ladda ned"
+msgstr "Elŝuti"
 
 #: papers/templates/papers/group.html:12
 msgid "Website"
-msgstr "Webbplats"
+msgstr "Retejo"
 
 #: papers/templates/papers/group.html:16
 msgid "Members:"
-msgstr "Medlemmar"
+msgstr "Anoj:"
 
 #: papers/templates/papers/index.html:9
 #: papers/templates/papers/institutions.html:11
 #: templates/dissemin/breadcrumbs.html:3 templates/dissemin/skeleton.html:39
 msgid "Home"
-msgstr "Hem"
+msgstr "Ĉefpaĝo"
 
 #: papers/templates/papers/index.html:21
-#, fuzzy
 msgid "Welcome to Dissemin"
-msgstr "Välkommen till dissemin"
+msgstr ""
 
 #: papers/templates/papers/index.html:24 templates/dissemin/skeleton.html:10
 #: templates/dissemin/skeleton.html:15
@@ -997,38 +985,38 @@ msgstr ""
 
 #: papers/templates/papers/institutions.html:25
 msgid "Institutions"
-msgstr "Institutioner"
+msgstr "Institutoj"
 
 #: papers/templates/papers/itemOrcid.html:16
 #: papers/templates/papers/itemResearcher.html:16
 msgid "Yes"
-msgstr "Ja"
+msgstr "Jes"
 
 #: papers/templates/papers/itemResearcher.html:13
 msgid "(empty profile)"
-msgstr "(tom profil)"
+msgstr ""
 
 #: papers/templates/papers/paper.html:60
-#, fuzzy, python-format
+#, python-format
 msgctxt "as in: _Journal article published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "<span class=\"paperDocType\">%(doctype)s</span> published in %(year)s by"
-msgstr " \n    <span class=\"paperDocType\">%(doctype)s</span> av\n    "
+msgstr ""
 
 #: papers/templates/papers/paper.html:66
-#, fuzzy, python-format
+#, python-format
 msgctxt "as in: _Published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "Published in %(year)s by"
-msgstr "Publicerad i"
+msgstr "Eldonita en %(year)s de"
 
 #: papers/templates/papers/paper.html:74
-#, fuzzy, python-format
+#, python-format
 msgid "and <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s other authors</a>"
-msgstr "\n            och <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s andra författare</a>\n            "
+msgstr ""
 
 #: papers/templates/papers/paper.html:80
-#, fuzzy, python-format
+#, python-format
 msgid "All %(nb_authors)s authors (<a href=\"#\" id=\"show_less_authors\">show less</a>):<br />"
-msgstr "\n            Alla %(nb_authors)s författare (<a href=\"#\" id=\"show_less_authors\">visa mindre</a>):<br />\n            "
+msgstr ""
 
 #: papers/templates/papers/paper.html:91
 msgid "<strong>Congratulations!</strong> This paper was successfully deposited."
@@ -1041,40 +1029,40 @@ msgstr ""
 
 #: papers/templates/papers/paper.html:116
 msgid "Full text:"
-msgstr ""
+msgstr "Plena teksto:"
 
 #: papers/templates/papers/paper.html:120 statistics/models.py:66
 msgid "Unavailable"
-msgstr "Otillgänglig"
+msgstr "Ne disponebla"
 
 #: papers/templates/papers/paper.html:122
 msgid "Ask upload"
-msgstr "Fråga uppladdaren"
+msgstr ""
 
 #: papers/templates/papers/paper.html:126
 msgid "Publisher:"
-msgstr "Utgivare:"
+msgstr "Eldonejo:"
 
 #: papers/templates/papers/paper.html:133
 msgid "Deposited."
-msgstr ""
+msgstr "Deponita."
 
 #: papers/templates/papers/paper.html:135
 msgid "Deposit again"
-msgstr ""
+msgstr "Redeponi"
 
 #: papers/templates/papers/paperDetails.html:10
 msgid "Published in"
-msgstr "Publicerad i"
+msgstr "Eldonita en"
 
 #: papers/templates/papers/paperDetails.html:22
 msgid "Links"
-msgstr "Länkar"
+msgstr "Ligiloj"
 
 #: papers/templates/papers/paperDetails.html:36
 #: papers/templates/papers/search.html:250
 msgid "Tools"
-msgstr "Verktyg"
+msgstr "Iloj"
 
 #: papers/templates/papers/paperDetails.html:42
 msgid "Request with the Open Access Button"
@@ -1091,7 +1079,7 @@ msgstr ""
 #: papers/templates/papers/paperList.html:39
 #, python-format
 msgid "Missing publications? <a href=\"%(matching_papers_url)s\">Search for publications with a matching author name</a>"
-msgstr "Saknade publikationer <a href=\"%(matching_papers_url)s\">Sök för publikationer som matchar författarens namn</a>"
+msgstr ""
 
 #: papers/templates/papers/paperList.html:44
 #, python-format
@@ -1106,22 +1094,22 @@ msgstr ""
 #: papers/templates/papers/publiListItem.html:16
 #, python-format
 msgid "and %(remaining_authors)s other authors"
-msgstr "och %(remaining_authors)s andra författare"
+msgstr ""
 
 #: papers/templates/papers/publiListItem.html:40
 #: publishers/templates/publishers/itemPolicy.html:21
 msgid "Upload"
-msgstr "Ladda upp"
+msgstr "Alŝuti"
 
 #: papers/templates/papers/publiListItem.html:45
 #: papers/templates/papers/search.html:61
 msgid "Exclude from my profile"
-msgstr "Exkludera från min profil"
+msgstr "Ekskluzivi el mia profilo"
 
 #: papers/templates/papers/publiListItem.html:52
 #: papers/templates/papers/search.html:64
 msgid "Include in my profile"
-msgstr "Inkludera i min profil"
+msgstr "Inkluzivi en mia profilo"
 
 #: papers/templates/papers/search.html:46
 msgid "Claiming..."
@@ -1141,15 +1129,15 @@ msgstr ""
 
 #: papers/templates/papers/search.html:98
 msgid "Refreshing results"
-msgstr "Uppdaterar resultat"
+msgstr "Aktualiganta rezultojn"
 
 #: papers/templates/papers/search.html:108
 msgid "Refreshing profile"
-msgstr "Uppdaterar profil"
+msgstr "Aktualiganta profilon"
 
 #: papers/templates/papers/search.html:136
 msgid "Is it you?"
-msgstr "Är detta du?"
+msgstr "Ĉu vi?"
 
 #: papers/templates/papers/search.html:148
 #, python-format
@@ -1158,11 +1146,11 @@ msgstr ""
 
 #: papers/templates/papers/search.html:157
 msgid "Refresh publications"
-msgstr "Uppdaterar publikationer"
+msgstr "Aktualigi eldonojn"
 
 #: papers/templates/papers/search.html:160
 msgid "Address:"
-msgstr "Adress:"
+msgstr "Adreso:"
 
 #: papers/templates/papers/search.html:169
 msgid "Journal"
@@ -1170,7 +1158,7 @@ msgstr ""
 
 #: papers/templates/papers/search.html:172
 msgid "Published by"
-msgstr "Publicerad av"
+msgstr "Eldonita de"
 
 #: papers/templates/papers/search.html:174
 msgid "ISSN:"
@@ -1186,7 +1174,7 @@ msgstr[1] ""
 #: papers/templates/papers/search.html:190
 #: publishers/templates/publishers/policy.html:39
 msgid "Publisher"
-msgstr "Utgivare"
+msgstr "Eldonejo"
 
 #: papers/templates/papers/search.html:199
 #, invalid-plural, python-format
@@ -1196,16 +1184,16 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: papers/templates/papers/search.html:211
-#, fuzzy, python-format
+#, invalid-plural, python-format
 msgid "%(formattedCounter)s paper found"
 msgid_plural "%(formattedCounter)s papers found"
-msgstr[0] "%(formattedCounter)s utgivare hittades"
-msgstr[1] "%(formattedCounter)s utgivare hittades"
+msgstr[0] ""
+msgstr[1] ""
 
 #: papers/templates/papers/search.html:252
 #: publishers/templates/publishers/list.html:73
 msgid "Sort by"
-msgstr "Sortera efter"
+msgstr "Ordigi laŭ"
 
 #: papers/templates/papers/search.html:263
 msgid "Export citations for current page"
@@ -1217,11 +1205,11 @@ msgstr ""
 
 #: papers/templatetags/statuses.py:19 papers/templatetags/statuses.py:79
 msgid "Unknown OA status"
-msgstr "Okänd OA-status"
+msgstr ""
 
 #: papers/templatetags/statuses.py:27
 msgid "Unknown PDF status"
-msgstr "Okänd PDF-status"
+msgstr ""
 
 #: papers/templatetags/statuses.py:33
 msgid "Preprints can be archived."
@@ -1265,68 +1253,68 @@ msgstr ""
 
 #: papers/templatetags/statuses.py:43
 msgid "Final versions can be archived."
-msgstr "Slutgiltiga versioner kan arkiveras."
+msgstr ""
 
 #: papers/templatetags/statuses.py:44
 msgid "Final versions cannot be archived."
-msgstr "Slutgiltiga versioner kan inte arkiveras."
+msgstr ""
 
 #: papers/templatetags/statuses.py:45
 msgid "Under the restrictions below, final versions can be archived."
-msgstr "Under begränsningarna nedan kan slutgiltiga versioner arkiveras."
+msgstr ""
 
 #: papers/templatetags/statuses.py:46
 msgid "Final version archiving policy unclear."
-msgstr "Policy för att arkivera slutgiltiga versioner är oklar."
+msgstr ""
 
 #: papers/templatetags/statuses.py:47
 msgid "Final version archiving policy unknown."
-msgstr "Policy för att arkivera slutgiltiga versioner är okänd."
+msgstr ""
 
 #: papers/templatetags/statuses.py:49
 msgid "Unknown policy"
-msgstr "Okänd policy"
+msgstr ""
 
 #: papers/templatetags/statuses.py:55
 msgid "archiving allowed."
-msgstr "arkivering tillåten."
+msgstr "arkivado permesata."
 
 #: papers/templatetags/statuses.py:56
 msgid "archiving forbidden."
-msgstr "arkivering förbjuden."
+msgstr "arkivado malpermesata."
 
 #: papers/templatetags/statuses.py:57
 msgid "archiving restricted:"
-msgstr "arkivering begränsad:"
+msgstr ""
 
 #: papers/templatetags/statuses.py:58
 msgid "policy unclear."
-msgstr "policy oklar."
+msgstr ""
 
 #: papers/templatetags/statuses.py:59 papers/templatetags/statuses.py:61
 #: papers/templatetags/statuses.py:73
 msgid "policy unknown."
-msgstr "policy okänt."
+msgstr ""
 
 #: papers/templatetags/statuses.py:67
 msgid "archiving allowed"
-msgstr "arkivering tillåten"
+msgstr "arkivado permesata"
 
 #: papers/templatetags/statuses.py:68
 msgid "archiving forbidden"
-msgstr "arkivering förbjuden"
+msgstr "arkivado malpermesata"
 
 #: papers/templatetags/statuses.py:69
 msgid "archiving restricted"
-msgstr "arkivering begränsad"
+msgstr ""
 
 #: papers/templatetags/statuses.py:70
 msgid "policy unclear"
-msgstr "policy oklar"
+msgstr ""
 
 #: papers/templatetags/statuses.py:71
 msgid "policy unknown"
-msgstr "policy okänd"
+msgstr ""
 
 #: papers/views.py:85
 msgid "Dissemin requires access to your ORCID name, which is marked as private in your ORCID profile."
@@ -1337,25 +1325,24 @@ msgid "All papers"
 msgstr ""
 
 #: papers/views.py:250
-#, fuzzy
 msgid "Invalid ORCID profile. Please make sure it includes a public name."
-msgstr "\n                            Ogiltig ORCID-profil.\n                            Se till att den innehåller ett offentligt namn.\n                            "
+msgstr ""
 
 #: papers/views.py:253
 msgid "Invalid ORCID profile."
-msgstr "Ogiltig ORCID-profil."
+msgstr ""
 
 #: papers/views.py:279
 msgid " authored by "
-msgstr " författad av "
+msgstr "verkita de "
 
 #: papers/views.py:330
 msgid " published by "
-msgstr " publicerad av "
+msgstr "eldonita de "
 
 #: papers/views.py:359
 msgid " in "
-msgstr " i "
+msgstr "en "
 
 #: papers/views.py:386
 msgid "Dissemin requires access to your ORCID name."
@@ -1368,44 +1355,43 @@ msgstr ""
 #: papers/views.py:442
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
-msgstr "Ingen %(verbose_name)s hittades som matchade frågan"
+msgstr ""
 
 #: papers/views.py:446
 msgid "This paper has been deleted."
 msgstr ""
 
 #: papers/views.py:488
-#, fuzzy
 msgid "Invalid DOI."
-msgstr "Ogiltigt formulär."
+msgstr "ne valida DOI."
 
 #: publishers/forms.py:10
 msgid "popularity"
-msgstr "popularitet"
+msgstr "populareco"
 
 #: publishers/forms.py:11
 msgid "name"
-msgstr "namn"
+msgstr "nomo"
 
 #: publishers/forms.py:14
 msgid "decreasing"
-msgstr "sjunkande"
+msgstr ""
 
 #: publishers/forms.py:15
 msgid "increasing"
-msgstr "stigande"
+msgstr ""
 
 #: publishers/forms.py:19 publishers/templates/publishers/list.html:52
 msgid "Filter by publisher policy"
-msgstr "Filtrera efter utgivarpolicy"
+msgstr ""
 
 #: publishers/models.py:39
 msgid "Open access"
-msgstr "Öppen åtkomst"
+msgstr ""
 
 #: publishers/models.py:39
 msgid "Freely available from the publisher."
-msgstr "Fritt tillgänglig från utgivaren."
+msgstr ""
 
 #: publishers/models.py:40
 msgid "Allows pre/post prints"
@@ -1425,7 +1411,7 @@ msgstr ""
 
 #: publishers/models.py:44
 msgid "Policy unclear"
-msgstr "Policy oklar"
+msgstr ""
 
 #: publishers/models.py:45
 msgid "For complicated policies, unknown publishers and unpublished documents."
@@ -1433,31 +1419,31 @@ msgstr ""
 
 #: publishers/models.py:48
 msgid "Allowed"
-msgstr "Tillåten"
+msgstr "Permesata"
 
 #: publishers/models.py:49
 msgid "Forbidden"
-msgstr "Förbjuden"
+msgstr "Malpermesata"
 
 #: publishers/models.py:50
 msgid "Restricted"
-msgstr "Begränsad"
+msgstr ""
 
 #: publishers/models.py:51
 msgid "Unclear"
-msgstr "Oklar"
+msgstr "Ne klara"
 
 #: publishers/models.py:52
 msgid "Unknown"
-msgstr "Okänd"
+msgstr "Nekonata"
 
 #: publishers/models.py:71 publishers/views.py:94
 msgid "Publishers"
-msgstr "Utgivare"
+msgstr "Eldonejoj"
 
 #: publishers/models.py:91
 msgid "Unknown publisher"
-msgstr "Okänd utgivare"
+msgstr "Nekonata eldonejo"
 
 #: publishers/templates/publishers/detailsPolicy.html:6
 msgid "Preprint:"
@@ -1485,7 +1471,7 @@ msgstr ""
 
 #: publishers/templates/publishers/detailsPolicy.html:14
 msgid "Published version:"
-msgstr "Publicerad version:"
+msgstr "Eldonita versio:"
 
 #: publishers/templates/publishers/detailsPolicy.html:15
 msgid "The published version is the final version of the paper, as formatted by the publisher."
@@ -1493,31 +1479,31 @@ msgstr ""
 
 #: publishers/templates/publishers/detailsPolicy.html:16
 msgid "published version"
-msgstr "publicerad version"
+msgstr "eldonita versio"
 
 #: publishers/templates/publishers/list.html:35
-#, python-format
+#, invalid-plural, python-format
 msgid "%(counter)s publisher found"
 msgid_plural "%(counter)s publishers found"
-msgstr[0] "%(counter)s utgivare hittades"
-msgstr[1] "%(counter)s utgivare hittades"
+msgstr[0] ""
+msgstr[1] ""
 
 #: publishers/templates/publishers/list.html:81
 #, python-format
 msgid "%(sort_by)s <div>%(increasing)s %(value)s</div>"
-msgstr "%(sort_by)s <div>%(increasing)s %(value)s</div>"
+msgstr ""
 
 #: publishers/templates/publishers/list.html:91
 msgid "Data provided by"
-msgstr "Data tillhandahålls av"
+msgstr "Dateno provizita de"
 
 #: publishers/templates/publishers/list.html:126
 msgid "No publisher found."
-msgstr "Ingen utgivare hittades."
+msgstr "Neniu eldonejo trovita."
 
 #: publishers/templates/publishers/policy.html:56
 msgid "Policy data provided by"
-msgstr "Policydata tillhandahålls av"
+msgstr ""
 
 #: publishers/templates/publishers/policy.html:60
 #, python-format
@@ -1526,23 +1512,23 @@ msgstr ""
 
 #: publishers/templates/publishers/policy.html:64
 msgid "Report any error to them"
-msgstr "Rapportera alla fel till dem"
+msgstr ""
 
 #: publishers/templates/publishers/policy.html:72
 msgid "Policy"
-msgstr "Policy"
+msgstr ""
 
 #: publishers/templates/publishers/policy.html:98
 msgid "Conditions"
-msgstr "Villkor"
+msgstr "Kondiĉoj"
 
 #: publishers/templates/publishers/policy.html:106
 msgid "Policy details"
-msgstr "Policydetaljer"
+msgstr ""
 
 #: publishers/templates/publishers/policy.html:115
 msgid "Publications"
-msgstr "Publikationer"
+msgstr "Eldonoj"
 
 #: publishers/templates/publishers/policy.html:118
 #, python-format
@@ -1559,27 +1545,27 @@ msgstr ""
 
 #: publishers/templates/publishers/policy.html:139
 msgid "None."
-msgstr "Ingen."
+msgstr "Nenio."
 
 #: statistics/models.py:48
 msgid "Available from the publisher"
-msgstr "Tillgänglig från utgivaren"
+msgstr "Disponebla de la eldonejo"
 
 #: statistics/models.py:49
 msgid "Available from the author"
-msgstr "Tillgänglig från författaren"
+msgstr "Disponebla de la aŭtoro"
 
 #: statistics/models.py:50
 msgid "Could be shared by the authors"
-msgstr "Kan delas av författarna"
+msgstr ""
 
 #: statistics/models.py:51
 msgid "Unknown/unclear sharing policy"
-msgstr "Okänd/oklar policy för delning"
+msgstr ""
 
 #: statistics/models.py:52
 msgid "Publisher forbids sharing"
-msgstr "Utgivaren förbjuder delning"
+msgstr ""
 
 #: statistics/models.py:57
 msgid "This paper is made freely available by the publisher."
@@ -1603,7 +1589,7 @@ msgstr ""
 
 #: statistics/models.py:65
 msgid "Available"
-msgstr "Tillgänglig"
+msgstr "Disponebla"
 
 #: statistics/templates/statistics/availabilitypct.html:10
 msgid "of the papers by this publisher are available"
@@ -1612,65 +1598,63 @@ msgstr ""
 #: statistics/templates/statistics/histogram.html:5
 #: templates/dissemin/faq.html:49
 msgid "Open Access"
-msgstr "Öppen åtkomst"
+msgstr ""
 
 #: statistics/templates/statistics/histogram.html:8
 msgid "Publications are available"
-msgstr "Publikationer är tillgängliga"
+msgstr ""
 
 #: statistics/templates/statistics/histogram.html:11
 msgid "Publications could be online"
-msgstr "Publikationer kan vara online"
+msgstr ""
 
 #: statistics/templates/statistics/histogram.html:14
 msgid "Policy unknown"
-msgstr "Policy okänd"
+msgstr ""
 
 #: statistics/templates/statistics/histogram.html:17
 msgid "Upload is forbidden"
-msgstr "Uppladdning är förbjuden"
+msgstr "Alŝutado malpermesata"
 
 #: templates/404.html:6 templates/404.html:12
 msgid "Page not found"
-msgstr "Sidan kunde inte hittas"
+msgstr "Paĝo ne trovita"
 
 #: templates/404.html:13
-#, fuzzy
 msgid "The page you requested could not be found. <a href=\"/\">Go back to the home page.</a>"
-msgstr "\n            Sidan du begärde kunde inte hittas. <a href=\"/\">Gå tillbaka till hemsidan.</a>\n           "
+msgstr "La paĝo por kiu vi petis ne estis trovita. <a href=\"/\">Reiri al ĉefpaĝo.</a>"
 
 #: templates/500.html:6 templates/500.html:12
 msgid "Internal error"
-msgstr "Internt fel"
+msgstr "Interna eraro"
 
 #: templates/500.html:13
-#, fuzzy
 msgid "Your request triggered an internal error. <a href=\"/\">Go back to the home page.</a>"
-msgstr "\n            Din begäran utlöste ett internt fel. <a href=\"/\">Gå tillbaka till hemsidan.</a>\n           "
+msgstr "Via peto kaŭzis internan eraro. <a href=\"/\">Reiri al ĉefpaĝo.</a>"
 
 #: templates/admin/base_site.html:4
 msgid "Dissemin site admin"
-msgstr "Dissemins webbplatsadmin"
+msgstr ""
 
 #: templates/admin/base_site.html:7
 msgid "Dissemin administration"
-msgstr "Dissemins administration"
+msgstr ""
 
 #: templates/dissemin/error.html:6 templates/dissemin/error.html:12
 msgid "Error"
-msgstr ""
+msgstr "Eraro"
 
 #: templates/dissemin/error.html:15
 msgid "<a href=\"/\">Go back to the home page.</a>"
-msgstr ""
+msgstr "<a href=\"/\">Reiri al ĉefpaĝo.</a>"
 
 #: templates/dissemin/faq.html:6 templates/dissemin/faq.html:11
 msgid "Frequently Asked Questions"
-msgstr "Vanliga frågor och svar"
+msgstr "Oftaj Demandoj"
 
 #: templates/dissemin/faq.html:16 templates/dissemin/faq.html:51
 msgid "What is Open Access?"
-msgstr "Vad är öppen åtkomst?"
+msgstr ""
 
 #: templates/dissemin/faq.html:17 templates/dissemin/faq.html:61
 msgid "Why should I upload my papers to a repository?"
@@ -1678,7 +1662,7 @@ msgstr ""
 
 #: templates/dissemin/faq.html:18 templates/dissemin/faq.html:106
 msgid "What repository should I use?"
-msgstr ""
+msgstr "Kiun deponejon mi uzu?"
 
 #: templates/dissemin/faq.html:19 templates/dissemin/faq.html:136
 msgid "Why can't I deposit in my favorite repository yet?"
@@ -1686,19 +1670,19 @@ msgstr ""
 
 #: templates/dissemin/faq.html:22 templates/dissemin/faq.html:188
 msgid "What is dissem.in?"
-msgstr "Vad är dissem.in?"
+msgstr "Kio estas dissem.in?"
 
 #: templates/dissemin/faq.html:23 templates/dissemin/faq.html:199
 msgid "Is dissem.in a repository?"
-msgstr ""
+msgstr "Ĉu dissem.in estas deponejo?"
 
 #: templates/dissemin/faq.html:24 templates/dissemin/faq.html:209
 msgid "Who runs dissem.in?"
-msgstr "Vem driver dissem.in?"
+msgstr ""
 
 #: templates/dissemin/faq.html:25 templates/dissemin/faq.html:216
 msgid "Can I create my profile on dissem.in?"
-msgstr "Kan jag skapa min profil på dissem.in?"
+msgstr "Ĉu mi povas krei mian profilon ĉe dissem.in?"
 
 #: templates/dissemin/faq.html:27 templates/dissemin/faq.html:226
 msgid "Policies and full-text availability"
@@ -1706,7 +1690,7 @@ msgstr ""
 
 #: templates/dissemin/faq.html:28 templates/dissemin/faq.html:227
 msgid "What do your policy classes mean?"
-msgstr "Vad betyder era policyklasser?"
+msgstr ""
 
 #: templates/dissemin/faq.html:29 templates/dissemin/faq.html:280
 msgid "When is a paper considered available?"
@@ -1714,11 +1698,11 @@ msgstr ""
 
 #: templates/dissemin/faq.html:30 templates/dissemin/faq.html:289
 msgid "Should I trust your statistics?"
-msgstr "Kan jag lita på er statistik?"
+msgstr "Ĉu mi fidu viajn statistikojn?"
 
 #: templates/dissemin/faq.html:32 templates/dissemin/faq.html:330
 msgid "Omissions and errors"
-msgstr "Försummelser och fel"
+msgstr ""
 
 #: templates/dissemin/faq.html:33 templates/dissemin/faq.html:331
 msgid "One of my papers is missing. Why?"
@@ -1730,23 +1714,23 @@ msgstr ""
 
 #: templates/dissemin/faq.html:35 templates/dissemin/faq.html:396
 msgid "There is a freely available copy of my article online but dissem.in does not find it."
-msgstr "Det finns en fritt tillgänglig kopia av min artikel på nätet men dissem.in hittar den inte."
+msgstr ""
 
 #: templates/dissemin/faq.html:37 templates/dissemin/faq.html:436
 msgid "Authentication with ORCID"
-msgstr "Autentisering med ORCID"
+msgstr "Aŭtentokontrolo per ORCID"
 
 #: templates/dissemin/faq.html:38 templates/dissemin/faq.html:438
 msgid "Why do you need to authenticate users?"
-msgstr "Varför måste ni autentisera användare?"
+msgstr "Kial vi postulas konfirmi aŭtenton de uzantoj?"
 
 #: templates/dissemin/faq.html:39 templates/dissemin/faq.html:452
 msgid "What will you do to my ORCID profile if I log in?"
-msgstr "Vad gör ni med min ORCID-profil om jag loggar in?"
+msgstr ""
 
 #: templates/dissemin/faq.html:40 templates/dissemin/faq.html:461
 msgid "How do I add publications to my ORCID profile?"
-msgstr "Hur lägger jag till publikationer i min ORCID-profil?"
+msgstr ""
 
 #: templates/dissemin/faq.html:41 templates/dissemin/faq.html:504
 msgid "My ORCID details on Dissemin are outdated."
@@ -1754,23 +1738,23 @@ msgstr ""
 
 #: templates/dissemin/faq.html:43 templates/dissemin/faq.html:517
 msgid "Behind the scenes"
-msgstr "Bakom kulisserna"
+msgstr ""
 
 #: templates/dissemin/faq.html:44 templates/dissemin/faq.html:519
 msgid "Where do you get the data from?"
-msgstr "Var får ni data från?"
+msgstr "De kie vi akiras vian datenon?"
 
 #: templates/dissemin/faq.html:45 templates/dissemin/faq.html:526
 msgid "How can I help?"
-msgstr "Hur kan jag hjälpa till?"
+msgstr "Kiel mi povas helpi?"
 
 #: templates/dissemin/faq.html:46 templates/dissemin/faq.html:566
 msgid "Where is the source code?"
-msgstr "Var är källkoden?"
+msgstr "Kie estas la fontokodo?"
 
 #: templates/dissemin/faq.html:47 templates/dissemin/faq.html:572
 msgid "Can I harvest your data?"
-msgstr ""
+msgstr "Ĉu mi povas rikolti vian datenon?"
 
 #: templates/dissemin/faq.html:53
 msgid "In a nutshell, the Open Access movement promotes free access to the scientific literature. For a more in-depth introduction, we recommend <a href=\"http://www.phdcomics.com/comics.php?f=1533\">this video in English</a> and <a href=\"https://pablo.rauzy.name/openaccess/introduction.html\">this introduction in French</a>."
@@ -1778,7 +1762,7 @@ msgstr ""
 
 #: templates/dissemin/faq.html:63
 msgid "You should do it because:"
-msgstr "Du borde göra det eftersom:"
+msgstr ""
 
 #: templates/dissemin/faq.html:69
 msgid "It makes your research <strong>more accessible</strong> and <strong>more visible</strong>. Many researchers routinely check papers in topic repositories such as arXiv, and it is less likely that these researchers check your homepage regularly."
@@ -2027,7 +2011,7 @@ msgstr ""
 
 #: templates/dissemin/faq.html:581
 msgid "Can I use the Dissemin logo to refer to the project?"
-msgstr ""
+msgstr "Ĉu vi rajtas uzi la emblemon de Dissemin por mencii la projekton?"
 
 #: templates/dissemin/faq.html:583
 msgid "Yes! See <a href=\"https://association.dissem.in/#logos\">here</a> for links to our logos and for explanations about how you can reuse them."
@@ -2035,16 +2019,16 @@ msgstr ""
 
 #: templates/dissemin/faq.html:588 templates/dissemin/tos.html:158
 msgid "Back to top"
-msgstr "Tillbaka till början"
+msgstr "Reiri supren"
 
 #: templates/dissemin/login.html:8 templates/dissemin/login.html:70
 #: templates/dissemin/sandbox.html:8 templates/dissemin/sandbox.html:72
 msgid "Sign In"
-msgstr "Logga in"
+msgstr "Ensaluti"
 
 #: templates/dissemin/login.html:12
 msgid "Sign in"
-msgstr "Logga in"
+msgstr "Ensaluti"
 
 #: templates/dissemin/login.html:19 templates/dissemin/sandbox.html:19
 msgid "Dissemin uses ORCID to authenticate its users. ORCID is an independent non-profit effort to provide an open registry of unique researcher identifiers. It also offers open services to link research activities and organizations to these identifiers. Learn more at <a href=\"https://orcid.org\">orcid.org</a>."
@@ -2053,7 +2037,7 @@ msgstr ""
 #: templates/dissemin/login.html:28 templates/dissemin/login.html:36
 #: templates/dissemin/sandbox.html:30
 msgid "Log in"
-msgstr "Logga in"
+msgstr "Ensaluti"
 
 #: templates/dissemin/login.html:30 templates/dissemin/sandbox.html:32
 msgid "If you already have an ORCID account, you can use it with Dissemin. We will not make any changes to your profile."
@@ -2062,7 +2046,7 @@ msgstr ""
 #: templates/dissemin/login.html:42 templates/dissemin/login.html:51
 #: templates/dissemin/sandbox.html:44
 msgid "Sign up"
-msgstr "Registrera"
+msgstr "Registriĝi"
 
 #: templates/dissemin/login.html:44 templates/dissemin/sandbox.html:46
 msgid "Not an ORCID user yet? Create an account, it is free and takes a few seconds."
@@ -2070,50 +2054,49 @@ msgstr ""
 
 #: templates/dissemin/login.html:59 templates/dissemin/sandbox.html:61
 msgid "Dissemin account"
-msgstr ""
+msgstr "Konto ĉe Dissemin"
 
 #: templates/dissemin/login.html:60 templates/dissemin/sandbox.html:62
 #, python-format
 msgid "If you have not created an account yet, then please\n<a href=\"%(signup_url)s\">sign up</a> first."
-msgstr ""
+msgstr "Se vi ne jam havas konton, bonvolu\n<a href=\"%(signup_url)s\">registri vin</a> unue."
 
 #: templates/dissemin/login.html:69 templates/dissemin/sandbox.html:71
 msgid "Forgot Password?"
-msgstr "Glömt lösenordet?"
+msgstr "Forgesis Pasvorton?"
 
 #: templates/dissemin/partners.html:7 templates/dissemin/partners.html:12
 #: templates/dissemin/skeleton.html:92
 msgid "Partners"
-msgstr ""
+msgstr "Partneroj"
 
 #: templates/dissemin/sandbox.html:12
 msgid "SANDBOX Sign in"
-msgstr ""
+msgstr "Ensaluti al SANDBOX"
 
 #: templates/dissemin/skeleton.html:27
 msgid "Toggle navigation"
-msgstr ""
+msgstr "Baskuligi navigadon"
 
 #: templates/dissemin/skeleton.html:33
-#, fuzzy
 msgid "Logo"
-msgstr "Logga ut"
+msgstr ""
 
 #: templates/dissemin/skeleton.html:41
 msgid "My profile"
-msgstr "Min profil"
+msgstr "Mia profilo"
 
 #: templates/dissemin/skeleton.html:43 templates/dissemin/skeleton.html:83
 msgid "FAQ"
-msgstr "Vanliga frågor"
+msgstr "Oftaj demandoj"
 
 #: templates/dissemin/skeleton.html:59
 msgid "Logout"
-msgstr "Logga ut"
+msgstr "Elsaluti"
 
 #: templates/dissemin/skeleton.html:63
 msgid "Login"
-msgstr "Logga in"
+msgstr "Ensaluti"
 
 #: templates/dissemin/skeleton.html:84
 msgid "API"
@@ -2122,35 +2105,35 @@ msgstr "API"
 #: templates/dissemin/skeleton.html:85 templates/dissemin/tos.html:6
 #: templates/dissemin/tos.html:11
 msgid "Terms of Service"
-msgstr "Användarvillkor"
+msgstr ""
 
 #: templates/dissemin/skeleton.html:90
 msgid "Who are we?"
-msgstr "Vem är vi?"
+msgstr "Kiuj ni estas?"
 
 #: templates/dissemin/skeleton.html:91
 msgid "Donate"
-msgstr "Donera"
+msgstr "Donaci"
 
 #: templates/dissemin/skeleton.html:107
 msgid "Change language"
-msgstr "Byt språk"
+msgstr "Ŝanĝi lingvon"
 
 #: templates/dissemin/skeleton.html:116
 msgid "Apply"
-msgstr "Verkställ"
+msgstr ""
 
 #: templates/dissemin/sources.html:11
 msgid "Data sources"
-msgstr "Datakällor"
+msgstr "Datenaj fontoj"
 
 #: templates/dissemin/sources.html:13
 msgid "Primary sources"
-msgstr "Primära källor"
+msgstr "Primaraj fontoj"
 
 #: templates/dissemin/tos.html:15 templates/dissemin/tos.html:27
 msgid "In short"
-msgstr ""
+msgstr "Koncize"
 
 #: templates/dissemin/tos.html:16 templates/dissemin/tos.html:29
 msgid "Scope of the service"
@@ -2158,27 +2141,27 @@ msgstr ""
 
 #: templates/dissemin/tos.html:17 templates/dissemin/tos.html:42
 msgid "Privacy"
-msgstr "Integritet"
+msgstr "Privateco"
 
 #: templates/dissemin/tos.html:18 templates/dissemin/tos.html:63
 msgid "Deposits through Dissemin"
-msgstr ""
+msgstr "Deponoj per Dissemin"
 
 #: templates/dissemin/tos.html:20 templates/dissemin/tos.html:85
 msgid "In full"
-msgstr ""
+msgstr "Detale"
 
 #: templates/dissemin/tos.html:21 templates/dissemin/tos.html:86
 msgid "Personal data"
-msgstr "Personlig data"
+msgstr "Persona dateno"
 
 #: templates/dissemin/tos.html:22 templates/dissemin/tos.html:109
 msgid "Full text storage"
-msgstr ""
+msgstr "Konservado de plena teksto"
 
 #: templates/dissemin/tos.html:23 templates/dissemin/tos.html:125
 msgid "Reporting misuse"
-msgstr ""
+msgstr "Raporti misuzon"
 
 #: templates/dissemin/tos.html:32
 msgid "This platform offers an analysis of the accessibility of scholarly publications. It can also deposit publications on behalf of their authors in repositories. The accessibility and self-archiving policies of the papers on this platform can be incorrect and should not be relied upon for legal advice. When in doubt, users are advised to check from authoritative sources."
@@ -2194,11 +2177,11 @@ msgstr ""
 
 #: templates/dissemin/tos.html:77
 msgid "Contact"
-msgstr "Kontakt"
+msgstr "Kontakti"
 
 #: templates/dissemin/tos.html:80
 msgid "Please address any inquiry to support@dissem.in."
-msgstr ""
+msgstr "Bonvolu direkti ajnan enketon al support@dissem.in."
 
 #: templates/dissemin/tos.html:89
 msgid "Dissemin uses ORCID's public OAuth interface to authenticate its users. This interface only transmits information marked as public in the user's ORCID profile. This means that ORCID passwords are never transmitted and email addresses are not transmitted when they are marked as private, which is the default setting. When logging in to Dissemin from ORCID, Dissemin acquires the user's ORCID id, as well as all public information attached to the ORCID record. We are using the <a href=\"https://sentry.io/privacy/\">Sentry service</a> for error tracking on this platform. Our webserver configuration stores basic access information (URL requested and IP address) for error monitoring, which are kept for fourteen days. Dissemin can store any information input by its users on the platform. Users can ask for a copy of the personal information Dissemin stores about them by writing an email to support@dissem.in."
@@ -2210,7 +2193,7 @@ msgstr ""
 
 #: templates/dissemin/tos.html:128
 msgid "Misuse can be reported to support@dissem.in."
-msgstr ""
+msgstr "Vi povas raporti misuzon al support@dissem.in."
 
 #: templates/dissemin/tos.html:136
 msgid "The <a href=\"https://dissem.in\">dissem.in</a> website has been registered with <a href=\"https://www.cnil.fr/\">CNIL</a> under declaration n°1895382 v0."
@@ -2223,15 +2206,15 @@ msgstr ""
 #: templates/socialaccount/authentication_error.html:6
 #: templates/socialaccount/authentication_error.html:12
 msgid "Authentication error"
-msgstr ""
+msgstr "Eraro dum kontrolado pri aŭtento"
 
 #: templates/socialaccount/authentication_error.html:16
 msgid "Authentication has failed. <a href=\"/\">Go back to the login page.</a>"
-msgstr ""
+msgstr "Kontrolado pri aŭtento malsukcesis. <a href=\"/\">Reiri al la ensaluta paĝo.</a>"
 
 #: upload/forms.py:33
 msgid "Invalid file format: only PDF files are accepted."
-msgstr ""
+msgstr "Ne valida dosieraranĝo: nur PDF-dosieroj estas akceptataj."
 
 #: upload/forms.py:43
 #, python-format
@@ -2240,7 +2223,7 @@ msgstr ""
 
 #: upload/forms.py:51
 msgid "URL"
-msgstr ""
+msgstr "Reteja adreso"
 
 #: upload/templates/upload/widget.html:4
 msgid "Select here the full text of your article. PDF files only, maximum size:"
@@ -2248,35 +2231,35 @@ msgstr ""
 
 #: upload/templates/upload/widget.html:9
 msgid "Select a file:"
-msgstr "Välj en fil:"
+msgstr "Elekti dosieron:"
 
 #: upload/templates/upload/widget.html:10
 msgid "Browse"
-msgstr "Bläddra"
+msgstr "Foliumi"
 
 #: upload/templates/upload/widget.html:19
 msgid "Or enter an URL:"
-msgstr "Eller ange en URL:"
+msgstr "Aŭ enigi retejan adreson:"
 
 #: upload/templates/upload/widget.html:30
 msgid "Or drop a file here:"
-msgstr "Eller släpp en fil här:"
+msgstr ""
 
 #: upload/views.py:133
 msgid "Invalid PDF file."
-msgstr "Ogiltigt PDF-fil."
+msgstr "Ne valida PDF-dosiero."
 
 #: upload/views.py:167
 msgid "Invalid form."
-msgstr "Ogiltigt formulär."
+msgstr ""
 
 #: upload/views.py:177
 msgid "File too large."
-msgstr "Filen är för stor."
+msgstr "Dosiero estas tro granda."
 
 #: upload/views.py:182
 msgid "Invalid content type: this link points to a web page, we need a direct link to a PDF file."
-msgstr ""
+msgstr "Ne valida tipo de enhavo: tiu ligilo ligas retpaĝon; ni postulas rektan ligilon al PDF-dosiero."
 
 #: upload/views.py:185
 msgid "Invalid SSL certificate on the remote server."
@@ -2288,5 +2271,5 @@ msgstr ""
 
 #: upload/views.py:189 upload/views.py:193
 msgid "Invalid URL."
-msgstr ""
+msgstr "Ne valida reteja adreso."
 

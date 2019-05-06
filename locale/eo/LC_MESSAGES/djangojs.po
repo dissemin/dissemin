@@ -1,65 +1,62 @@
-# Translation of Dissemin papers to Portuguese (português)
+# Translation of Dissemin papers to Esperanto (Esperanto)
 # Exported from translatewiki.net
 #
-# Author: Athena in Wonderland
-# Author: Fitoschido
-# Author: Hamilton Abreu
+# Author: Mirin
 msgid ""
 msgstr ""
 ""
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-25 12:06+0100\n"
-"PO-Revision-Date: 2019-05-06 14:37:42+0000\n"
-"Language: pt\n"
+"PO-Revision-Date: 2019-05-06 14:37:41+0000\n"
+"X-POT-Import-Date: 2019-02-25 13:41:23+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-02-25 13:41:23+0000\n"
+"Language: eo\n"
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: papers/static/papers/refresh.js:35
 msgid "Do not show this message anymore"
-msgstr "Não mostrar esta mensagem novamente"
+msgstr ""
 
 #: papers/static/papers/refresh.js:66
 msgid "No author"
-msgstr "Sem autor"
+msgstr "Sen aŭtoro"
 
 #: papers/static/papers/refresh.js:68
 msgid "No title"
-msgstr "Sem título"
+msgstr "Sen titolo"
 
 #: papers/static/papers/refresh.js:70
 msgid "Invalid publication date"
-msgstr "A data de publicação não é válida"
+msgstr "Ne valida dato de eldono"
 
 #: papers/static/papers/refresh.js:72
 msgid "No publication date"
-msgstr "Não há data de publicação"
+msgstr "Neniu dato de eldono"
 
 #: papers/static/papers/refresh.js:74
 msgid "Paper is invalid"
-msgstr "O documento é inválido"
+msgstr ""
 
 #: papers/static/papers/refresh.js:109
+#, invalid-plural
 msgid "We ignored %(count)s paper from your ORCiD profile."
 msgid_plural "We ignored %(count)s papers from your ORCiD profile."
-msgstr[0] "Ignorámos %(count)s documento do seu perfil ORCiD."
-msgstr[1] "Ignorámos %(count)s documentos do seu perfil ORCiD."
+msgstr[0] ""
+msgstr[1] ""
 
 #: papers/static/papers/refresh.js:119
 msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
-msgstr "\"%(name)s\" foi ignorado pelo seguinte motivo: %(reason)s"
+msgstr ""
 
 #: papers/static/papers/refresh.js:127
 msgid "A paper was ignored, because it has no name"
-msgstr "Um documento foi ignorado, porque não tem nome"
+msgstr ""
 
 #: papers/static/papers/refresh.js:139 papers/static/papers/refresh.js:167
 msgid "Show more information"
-msgstr "Mostrar mais informações"
+msgstr "Montri pli da informo"
 
 #: papers/static/papers/refresh.js:164
 msgid "Show less information"
-msgstr "Mostrar menos informações"
+msgstr "Montri malpli da informo"
 
