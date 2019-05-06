@@ -1157,7 +1157,7 @@ msgstr "هل هذا أنت؟"
 #: papers/templates/papers/search.html:148
 #, python-format
 msgid " %(first_name)s %(last_name)s uses ORCID."
-msgstr " % first_name)s %(last_name)s يستخدم  أورسيد."
+msgstr " %(first_name)s %(last_name)s يستخدم  أورسيد."
 
 #: papers/templates/papers/search.html:157
 msgid "Refresh publications"
