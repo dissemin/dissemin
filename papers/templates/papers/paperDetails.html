@@ -7,7 +7,7 @@
 
 {% for publi in paper.first_publications %}
     {% if forloop.first %}
-        <h3 class="detailsTitle">{% trans "Published in" %}</span>
+        <h3 class="detailsTitle">{% trans "Published in" %}</h3>
         <div class="detailsContent">
     {% endif %}
     <p>{{ publi | publication }}</p>
