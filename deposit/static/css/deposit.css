@@ -105,4 +105,21 @@ label.repositoryItem {
     margin-top:10px;
 }
 
+/* Styling for Hal affiliations */
 
+#select2-id_affiliation-results .select2-results__group {
+  font-size: 120%;
+  font-variant: small-caps;
+  text-align: left;
+}
+
+#select2-id_affiliation-results .VALID {
+}
+
+#select2-id_affiliation-results .INCOMING {
+  opacity: 0.6;
+}
+
+#select2-id_affiliation-results .OLD {
+  opacity: 0.3;
+}

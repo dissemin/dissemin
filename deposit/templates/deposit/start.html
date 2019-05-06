@@ -65,9 +65,24 @@ $(function() {
 
     /* Autocomplete */
     function customTemplateResult(x) {
-	var $result = $('<span>');
-	$result.html(x.result);
-	return $result;
+      if(x.selection) { // Regular item
+        var $result = $('<div>');
+        $result.html(x.result);
+        $result.attr("class",x.valid);
+        return $result;
+      } else { // Option group
+        {% trans "Current institutions" as valid %}
+        {% trans "Unverified institutions" as incoming %}
+        {% trans "Obsolete institutions" as old %}
+        if(x.result=="VALID")
+          return "{{ valid|escapejs }}";
+        else if(x.result=="INCOMING")
+          return "{{ incoming|escapejs }}";
+        else if(x.result=="OLD")
+          return "{{ old|escapejs }}";
+        else
+          return ""; // Case of an empty list
+      } 
     }
     function customTemplateSelection(x) {
 	return x.selection;
@@ -129,7 +144,46 @@ element.attr('data-autocomplete-light-create') &&
                         });
                     }
 
-                    return data;
+                    var groupBy = function(xs, key) {
+                      return xs.reduce(function(rv, x) {
+                        (rv[x[key]] = rv[x[key]] || []).push(x);
+                        return rv;
+                      }, {});
+                    };
+
+                    var grouped = groupBy(data.results,'valid');
+
+                    if(Object.keys(grouped).length==1 && grouped.VALID) {
+                      return data;
+                    }
+                      
+                    var results =
+                        $.map(grouped, function (item,key) {
+                          var children = [];
+                          for(var k in item){
+                              var childItem = item[k];
+                              children.push(childItem);
+                          }
+                          return {
+                              result: key,
+                              children: children,
+                          }
+                      });
+
+                    /* First valid, then incoming, then old */  
+                    return {results: results.sort(
+                      function(a,b) {
+                        if(a.result==b.result)
+                          return 0;
+                        else if(a.result=="VALID")
+                          return -1;
+                        else if(b.result=="VALID")
+                          return 1;
+                        else if(a.result=="INCOMING")
+                          return -1;
+                        else
+                          return 1;
+                      })};
                 },
                 cache: true
             };

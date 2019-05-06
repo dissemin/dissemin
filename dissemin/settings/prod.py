@@ -17,7 +17,7 @@ LOGGING['loggers']['dissemin']['level'] = os.environ.get('DISSEMIN_LOGLEVEL', LO
 
 # They are the domains under which your Dissemin instance should
 # be reachable
-ALLOWED_HOSTS = ['dissem.in', 'www.dissem.in', 'prod.dissem.in']
+ALLOWED_HOSTS = ['dissem.in', 'localhost']
 
 # Cache backend
 # https://docs.djangoproject.com/en/1.8/topics/cache/

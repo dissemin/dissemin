@@ -5,7 +5,8 @@
   <div class="statspie_graph"></div>
   <div class="statspie_caption">
   {% if combined_status_form %}
-  <div class="stats_caption_table hiddenCheckboxes">
+  <fieldset class="stats_caption_table hiddenCheckboxes">
+      <legend class="sr-only">{% trans 'Refine by OA status' %}</legend>
     {{ combined_status.errors }}
   {% else %}
   <div class="stats_caption_table">
@@ -35,7 +36,11 @@
       </a>
       {% endif %}
     {% endfor %}
+  {% if combined_status_form %}
+  </fieldset>
+  {% else %}
   </div>
+  {% endif %}
   </div>
   <script type="text/javascript">
 $(function() {

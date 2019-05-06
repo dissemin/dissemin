@@ -215,6 +215,10 @@ class PaperForm(SearchForm):
 class FrontPageSearchForm(PaperForm):
     def __init__(self, *args, **kwargs):
         super(FrontPageSearchForm, self).__init__(*args, **kwargs)
-        self.fields['authors'].widget.attrs.update({'placeholder':
-        _('Try any author name')})
+        self.fields['authors'].widget.attrs.update({
+            'placeholder': _('Try any author name')
+        })
+        self.fields['authors'].widget.attrs.update({
+            'title': _('Try any author name')
+        })
 

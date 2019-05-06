@@ -8,47 +8,61 @@
 
 {% block content %}
 <div id="fullPage" class="faq">
-    <div id="contentTitle">{% trans "Frequently Asked Questions" %}</div>
+    <h2 id="contentTitle">{% trans "Frequently Asked Questions" %}</h2>
     <div id="actualContent">
 
-	  <div id="faqSummary">
-        <h4>Open Access</h4>
-        <p><a href="#open-access">{% trans "What is Open Access?" %}</a></p>
-        <p><a href="#repositories-rock">{% trans "Why should I upload my papers to a repository?" %}</a></p>
-        <p><a href="#what-repository">{% trans "What repository should I use?" %}</a></p>
-        <p><a href="#why-no-deposit">{% trans "Why can't I deposit in my favorite repository yet?" %}</a></p>
+	  <nav id="faqSummary">
+        <h3>Open Access</h3>
+        <ul>
+            <li><a href="#open-access">{% trans "What is Open Access?" %}</a></li>
+            <li><a href="#repositories-rock">{% trans "Why should I upload my papers to a repository?" %}</a></li>
+            <li><a href="#what-repository">{% trans "What repository should I use?" %}</a></li>
+            <li><a href="#why-no-deposit">{% trans "Why can't I deposit in my favorite repository yet?" %}</a></li>
+        </ul>
 
-        <h4>dissem.in</h4>
-        <p><a href="#what-is-dissemin">{% trans "What is dissem.in?" %}</a></p>
-        <p><a href="#repository">{% trans "Is dissem.in a repository?" %}</a></p>
-        <p><a href="#running">{% trans "Who runs dissem.in?" %}</a></p>
-        <p><a href="#creating-a-profile">{% trans "Can I create my profile on dissem.in?" %}</a></p>
+        <h3>dissem.in</h3>
+        <ul>
+            <li><a href="#what-is-dissemin">{% trans "What is dissem.in?" %}</a></li>
+            <li><a href="#repository">{% trans "Is dissem.in a repository?" %}</a></li>
+            <li><a href="#running">{% trans "Who runs dissem.in?" %}</a></li>
+            <li><a href="#creating-a-profile">{% trans "Can I create my profile on dissem.in?" %}</a></li>
+        </ul>
 
-        <h4>{% trans "Policies and full-text availability" %}</h4>
-        <p><a href="#policy-classes">{% trans "What do your policy classes mean?" %}</a></p>
-        <p><a href="#availability">{% trans "When is a paper considered available?" %}</a></p>
-        <p><a href="#statistics">{% trans "Should I trust your statistics?" %}</a></p>
+        <h3>{% trans "Policies and full-text availability" %}</h3>
+        <ul>
+            <li><a href="#policy-classes">{% trans "What do your policy classes mean?" %}</a></li>
+            <li><a href="#availability">{% trans "When is a paper considered available?" %}</a></li>
+            <li><a href="#statistics">{% trans "Should I trust your statistics?" %}</a></li>
+        </ul>
 
-        <h4>{% trans "Omissions and errors" %}</h4>
-        <p><a href="#missing-paper">{% trans "One of my papers is missing. Why?" %}</a></p>
-        <p><a href="#incorrect-metadata">{% trans "Some details of my paper are incorrect. What can I do?" %}</a></p>
-        <p><a href="#copy-available">{% trans "There is a freely available copy of my article online but dissem.in does not find it." %}</a></p>
+        <h3>{% trans "Omissions and errors" %}</h3>
+        <ul>
+            <li><a href="#missing-paper">{% trans "One of my papers is missing. Why?" %}</a></li>
+            <li><a href="#incorrect-metadata">{% trans "Some details of my paper are incorrect. What can I do?" %}</a></li>
+            <li><a href="#copy-available">{% trans "There is a freely available copy of my article online but dissem.in does not find it." %}</a></li>
+        </ul>
 
-        <h4>{% trans "Authentication with ORCID" %}</h4>
-        <p><a href="#orcid-why">{% trans "Why do you need to authenticate users?" %}</a></p>
-        <p><a href="#orcid-login">{% trans "What will you do to my ORCID profile if I log in?" %}</a></p>
-        <p><a href="#orcid-add-pubs">{% trans "How do I add publications to my ORCID profile?" %}</a></p>
-        <p><a href="#orcid-update">{% trans "My ORCID details on Dissemin are outdated." %}</a></p>
+        <h3>{% trans "Authentication with ORCID" %}</h3>
+        <ul>
+            <li><a href="#orcid-why">{% trans "Why do you need to authenticate users?" %}</a></li>
+            <li><a href="#orcid-login">{% trans "What will you do to my ORCID profile if I log in?" %}</a></li>
+            <li><a href="#orcid-add-pubs">{% trans "How do I add publications to my ORCID profile?" %}</a></li>
+            <li><a href="#orcid-update">{% trans "My ORCID details on Dissemin are outdated." %}</a></li>
+        </ul>
 
-        <h4>{% trans "Behind the scenes" %}</h4>
-        <p><a href="#sources">{% trans "Where do you get the data from?" %}</a></p>
-        <p><a href="#getting-involved">{% trans "How can I help?" %}</a></p>
-        <p><a href="#source-code">{% trans "Where is the source code?" %}</a></p>
-        <p><a href="#oai">{% trans "Can I harvest your data?" %}</a></p>
-      </div>
+        <h3>{% trans "Behind the scenes" %}</h3>
+        <ul>
+            <li><a href="#sources">{% trans "Where do you get the data from?" %}</a></li>
+            <li><a href="#getting-involved">{% trans "How can I help?" %}</a></li>
+            <li><a href="#source-code">{% trans "Where is the source code?" %}</a></li>
+            <li><a href="#oai">{% trans "Can I harvest your data?" %}</a></li>
+            <li><a href="#logos">{% trans "Can I use the Dissemin logo to refer to the project?" %}</a></li>
+        </ul>
+      </nav>
+
         <h3>{% trans "Open Access" %}</h3>
 
-        <h2 id="open-access">{% trans "What is Open Access?" %}</h2>
+        <h4 id="open-access">{% trans "What is Open Access?" %}</h4>
         <p>
         {% blocktrans trimmed %}
         In a nutshell, the Open Access movement promotes free access to the scientific literature. For a
@@ -58,7 +72,7 @@
         <a href="https://pablo.rauzy.name/openaccess/introduction.html">this introduction in French</a>.
         {% endblocktrans %}
         </p>
-        <h2 id="repositories-rock">{% trans "Why should I upload my papers to a repository?" %}</h2>
+        <h4 id="repositories-rock">{% trans "Why should I upload my papers to a repository?" %}</h4>
         <p>
         {% blocktrans trimmed %}
         You should do it because:
@@ -103,7 +117,7 @@
         {% endblocktrans %}
               </li>
           </ul>
-        <h2 id="what-repository">{% trans "What repository should I use?" %}</h2>
+        <h4 id="what-repository">{% trans "What repository should I use?" %}</h4>
         <p>
         {% blocktrans trimmed %}
             There are roughly three types of repositories:
@@ -133,7 +147,7 @@
             If your research community favours a specific repository, using it makes sense as it will increase your visibility. If not, institutional or general-purpose repositories are also good options.
         {% endblocktrans %}
         </p>
-        <h2 id="why-no-deposit">{% trans "Why can't I deposit in my favorite repository yet?" %}</h2>
+        <h4 id="why-no-deposit">{% trans "Why can't I deposit in my favorite repository yet?" %}</h4>
         <p>
         {% blocktrans trimmed %}
             At the moment, you can use Dissemin to deposit in the following repositories:
@@ -185,7 +199,7 @@
 
         <h3>dissem.in</h3>
 
-        <h2 id="what-is-dissemin">{% trans "What is dissem.in?" %}</h2>
+        <h4 id="what-is-dissemin">{% trans "What is dissem.in?" %}</h4>
 
         <p>
         {% url 'sources' as sources_url %}
@@ -196,7 +210,7 @@
         <a href="#repositories-rock">for numerous reasons</a>.
         {% endblocktrans %}
         </p>
-        <h2 id="repository">{% trans "Is dissem.in a repository?" %}</h2>
+        <h4 id="repository">{% trans "Is dissem.in a repository?" %}</h4>
         <p>
         {% blocktrans trimmed %}
         Dissemin is not a repository as it does not store any full text. When the full text of a publication
@@ -206,14 +220,14 @@
         <a href="https://hal.archives-ouvertes.fr/">HAL</a>.
         {% endblocktrans %}
         </p>
-        <h2 id="running">{% trans "Who runs dissem.in?" %}</h2>
+        <h4 id="running">{% trans "Who runs dissem.in?" %}</h4>
         <p>
         {% blocktrans trimmed %}
         Dissemin is brought to you by the <a
           href="https://association.dissem.in/">CAPSH association</a>.
         {% endblocktrans %}
         </p>
-        <h2 id="creating-a-profile">{% trans "Can I create my profile on dissem.in?" %}</h2>
+        <h4 id="creating-a-profile">{% trans "Can I create my profile on dissem.in?" %}</h4>
         <p>
         {% blocktrans trimmed %}
         Yes, you can do it, by first <a
@@ -224,7 +238,7 @@
         </p>
 
         <h3>{% trans "Policies and full-text availability" %}</h3>
-        <h2 id="policy-classes">{% trans "What do your policy classes mean?" %}</h2>
+        <h4 id="policy-classes">{% trans "What do your policy classes mean?" %}</h4>
         <div class="unselectedCriterion">
             <div class="pubLogo">
                 <div class="pubLogoPic-OA"></div>
@@ -277,7 +291,7 @@
                 {% endblocktrans %}
             </div>
         </div>
-        <h2 id="availability">{% trans "When is a paper considered available?" %}</h2>
+        <h4 id="availability">{% trans "When is a paper considered available?" %}</h4>
         <p>
         {% blocktrans trimmed %}
         When we have found it in one of the repositories we harvest. The list of
@@ -286,7 +300,7 @@
         we cover more than 80 millions of preprints.
         {% endblocktrans %}
         </p>
-        <h2 id="statistics">{% trans "Should I trust your statistics?" %}</h2>
+        <h4 id="statistics">{% trans "Should I trust your statistics?" %}</h4>
         <p>
         {% blocktrans trimmed %}
         There are a few caveats concerning our data:
@@ -328,7 +342,7 @@
         </ul>
 
         <h3>{% trans "Omissions and errors" %}</h3>
-        <h2 id="missing-paper">{% trans "One of my papers is missing. Why?" %}</h2>
+        <h4 id="missing-paper">{% trans "One of my papers is missing. Why?" %}</h4>
             <p>
             {% blocktrans trimmed %}
             Please first check whether the paper is available in one of
@@ -366,7 +380,7 @@
             {% endblocktrans %}
             </p>
 
-        <h2 id="incorrect-metadata">{% trans "Some details of my paper are incorrect. What can I do?" %}</h2>
+        <h4 id="incorrect-metadata">{% trans "Some details of my paper are incorrect. What can I do?" %}</h4>
         <p>
         {% blocktrans trimmed %}
             In most cases, the errors that you see on Dissemin have not been
@@ -393,7 +407,7 @@
         {% endblocktrans %}
         </p>
 
-       <h2 id="copy-available">{% trans "There is a freely available copy of my article online but dissem.in does not find it." %}</h2>
+       <h4 id="copy-available">{% trans "There is a freely available copy of my article online but dissem.in does not find it." %}</h4>
        <p>
             {% blocktrans trimmed %}
             First, note that Dissemin does not account for copies of articles
@@ -435,7 +449,7 @@
 
         <h3>{% trans "Authentication with ORCID" %}</h3>
 
-        <h2 id="orcid-why">{% trans "Why do you need to authenticate users?" %}</h2>
+        <h4 id="orcid-why">{% trans "Why do you need to authenticate users?" %}</h4>
         <p>
             {% blocktrans trimmed %}
             Authenticating users is necessary to deposit papers on their behalf in open repositories.
@@ -449,7 +463,7 @@
             {% endblocktrans %}
         </p>
 
-        <h2 id="orcid-login">{% trans "What will you do to my ORCID profile if I log in?" %}</h2>
+        <h4 id="orcid-login">{% trans "What will you do to my ORCID profile if I log in?" %}</h4>
 
         <p>
             {% blocktrans trimmed %}
@@ -458,7 +472,7 @@
             {% endblocktrans %}
         </p>
 
-        <h2 id="orcid-add-pubs">{% trans "How do I add publications to my ORCID profile?" %}</h2>
+        <h4 id="orcid-add-pubs">{% trans "How do I add publications to my ORCID profile?" %}</h4>
 
         <p>
             {% blocktrans trimmed %}
@@ -501,7 +515,7 @@
             {% endblocktrans %}
         </p>
 
-        <h2 id="orcid-update">{% trans "My ORCID details on Dissemin are outdated." %}</h2>
+        <h4 id="orcid-update">{% trans "My ORCID details on Dissemin are outdated." %}</h4>
 
         <p>
             {% blocktrans trimmed %}
@@ -516,14 +530,14 @@
 
         <h3>{% trans "Behind the scenes" %}</h3>
 
-        <h2 id="sources">{% trans "Where do you get the data from?" %}</h2>
+        <h4 id="sources">{% trans "Where do you get the data from?" %}</h4>
         <p>
         {% blocktrans trimmed %}
         Our sources are listed on <a href="{{ sources_url }}">this page</a>.
         {% endblocktrans %}
         </p>
 
-        <h2 id="getting-involved">{% trans "How can I help?" %}</h2>
+        <h4 id="getting-involved">{% trans "How can I help?" %}</h4>
         <p>
         {% blocktrans trimmed %}
         There are many ways to get involved:
@@ -563,13 +577,13 @@
         {% endblocktrans %}
             </li>
         </ul>
-        <h2 id="source-code">{% trans "Where is the source code?" %}</h2>
+        <h4 id="source-code">{% trans "Where is the source code?" %}</h4>
         <p>
         {% blocktrans trimmed %}
         The source code is available <a href="https://github.com/wetneb/dissemin">on GitHub</a>.
         {% endblocktrans %}
         </p>
-        <h2 id="oai">{% trans "Can I harvest your data?" %}</h2>
+        <h4 id="oai">{% trans "Can I harvest your data?" %}</h4>
         <p>
         {% blocktrans trimmed %}
         Yes! We even have <a href="https://dev.dissem.in/api.html">an API</a>.
@@ -578,14 +592,14 @@
               href="mailto:hello@dissem.in">hello@dissem.in</a>
         {% endblocktrans %}
         </p>
-        <h2 id="logos">{% trans "Can I use the Dissemin logo to refer to the project?" %}</h2>
+        <h4 id="logos">{% trans "Can I use the Dissemin logo to refer to the project?" %}</h4>
         <p>
         {% blocktrans trimmed %}
         Yes! See <a href="https://association.dissem.in/#logos">here</a> for
         links to our logos and for explanations about how you can reuse them.
         {% endblocktrans %}
         </p>
-        <p class="hidden-print"><a href="#">{% trans "Back to top" %}</a></p>
+        <p class="hidden-print text-right"><a href="#">{% trans "Back to top" %}</a></p>
     </div>
 </div>
 {% endblock %}

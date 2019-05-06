@@ -7,7 +7,7 @@
 
 {% for publi in paper.first_publications %}
     {% if forloop.first %}
-        <span class="detailsTitle">{% trans "Published in" %}</span>
+        <h3 class="detailsTitle">{% trans "Published in" %}</span>
         <div class="detailsContent">
     {% endif %}
     <p>{{ publi | publication }}</p>
@@ -19,10 +19,10 @@
     {% endif %}
 {% endfor %}
 
-<span class="detailsTitle">{% trans "Links" %}</span>
-<div class="detailsContent">
+<h3 class="detailsTitle">{% trans "Links" %}</h3>
+<ul class="detailsContent">
     {% include 'papers/paperSources.html' with paper=paper %}
-</div>
+</ul>
 
 <!-- Export citation modal -->
 {% capture as citation_url silent %}
@@ -33,16 +33,16 @@
 {% endcapture %}
 {% include 'papers/exportCitationsModal.html' with slug=citation_slug url=citation_url bibtex=paper|bibtex %}
 
-<span class="detailsTitle hidden-print">{% trans "Tools" %}</span>
-<div class="detailsContent hidden-print">
-    <p><a href="#" data-toggle="modal" data-target="#exportCitationModal">{% trans "Export citation" %}</a></p>
+<h3 class="detailsTitle hidden-print">{% trans "Tools" %}</h3>
+<ul class="detailsContent hidden-print">
+    <li><a href="#" data-toggle="modal" data-target="#exportCitationModal">{% trans "Export citation" %}</a></li>
     {% with paper.get_doi as doi %}
-    <p><a href="{{ paper.google_scholar_link }}">{% trans "Search in Google Scholar" %} <img src="/static/extlink.png" alt="[^]"></a></p>
+      <li><a href="{{ paper.google_scholar_link }}">{% trans "Search in Google Scholar" %} <img src="/static/extlink.png" alt="[^]"></a></li>
     {% endwith %}
-</div>
+</ul>
 
 {% if request.user.is_superuser %}
-<span class="detailsTitle">{% trans "Admin zone" %}</span>
+<h3 class="detailsTitle">{% trans "Admin zone" %}</h3>
 <div class="detailsContent">
     <p><strong>Fingerprint:</strong> {{ paper.plain_fingerprint }}</p>
     <p><strong>Fingerprint:</strong> {{ paper.fingerprint }}</p>

@@ -95,7 +95,7 @@ $(function(){
 
 {% block lists %}
  {% if paginator.num_pages > 1 %}
- <div class="searchPages">{% bootstrap_paginate page_obj range=10 %}</div>
+ <nav class="searchPages">{% bootstrap_paginate page_obj range=10 %}</nav>
  {% endif %}
  {% for result in page_obj %}{% with publisher=result.object %}
  {% if forloop.first %}<ul class="withoutTriangles">{% endif %}
@@ -126,7 +126,7 @@ $(function(){
  <p class="notFound">{% trans "No publisher found." %}</p>
  {% endfor %}
  {% if paginator.num_pages > 1 %}
- <div class="searchPages">{% bootstrap_paginate page_obj range=10 %}</div>
+ <nav class="searchPages">{% bootstrap_paginate page_obj range=10 %}</nav>
  {% endif %}
 {% endblock %}
 
