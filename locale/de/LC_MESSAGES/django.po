@@ -1095,11 +1095,6 @@ msgstr "Fehlende Veröffentlichungen? <a href=\"%(matching_papers_url)s\">Suche 
 msgid "Missing publications? Search for additional ones on <a class=\"showHrefPrint\" href=\"%(href)s\">Dissem.in</a>."
 msgstr "Fehlende Veröffentlichungen? Suche nach zusätzlichen auf <a class=\"showHrefPrint\" href=\"%(href)s\">Dissem.in</a>."
 
-#: papers/templates/papers/paperList.html:51
-#, python-format
-msgid "Missing publications? <a class=\"showHrefPrint\" href=\"%(faq_url)s#missing-paper\">Read more about our data sources.</a>"
-msgstr "Fehlende Veröffentlichungen? <a href=\"%(matching_papers_url)s\">Suche nach Veröffentlichungen mit passendem Verfassernamen</a>"
-
 #: papers/templates/papers/publiListItem.html:16
 #, python-format
 msgid "and %(remaining_authors)s other authors"
