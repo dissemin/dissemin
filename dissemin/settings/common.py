@@ -59,7 +59,7 @@ if SENTRY_DSN:
     except ImportError:
         print('Sentry module is not available although a Sentry DSN was set. '
               'Disabling Sentry reporting...')
-    else: 
+    else:
         sentry_sdk.init(dsn=SENTRY_DSN, release=git.revision)
 
 # dirname(__file__) → repo/dissemin/settings/common.py
@@ -120,8 +120,6 @@ PROFILE_REFRESH_ON_LOGIN = timedelta(days=1)
 # You should not have to change anything in this section.
 
 INSTALLED_APPS = (
-    'dal',
-    'dal_select2',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -157,9 +155,13 @@ INSTALLED_APPS = (
     'leaflet',
     'djgeojson',
     'bootstrap_datepicker_plus',
+    'django_select2',
 )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+SELECT2_JS = None
+SELECT2_CSS = None
 
 SITE_ID = 1
 

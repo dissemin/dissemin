@@ -65,8 +65,6 @@ URL_DEPOSIT_DOWNLOAD_TIMEOUT = 10
 PROFILE_REFRESH_ON_LOGIN = timedelta(days=1)
 
 INSTALLED_APPS = (
-    'dal',
-    'dal_select2',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -101,6 +99,7 @@ INSTALLED_APPS = (
     'leaflet',
     'djgeojson',
     'bootstrap_datepicker_plus',
+    'django_select2',
 )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
