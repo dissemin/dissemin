@@ -36,7 +36,7 @@
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
+                        <li class="navbarFlexLast">
                             <form action="{% url 'set_language' %}" method="post" id="change-lang-form" class="navbar-form">
                                 {% csrf_token %}
                                 <label for="set-language" class="sr-only">{% trans "Language" %}</label>

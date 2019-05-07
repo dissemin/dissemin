@@ -2,6 +2,18 @@
 
 #content { min-width: 300px; }
 
+#header .navbar .navbar-nav {
+    flex-direction: column;
+}
+
+#header .navbar .navbar-nav > * {
+    order: 1;
+}
+
+#header .navbar .navbar-nav > .navbarFlexLast {
+    order: 2;
+}
+
 #header #change-lang-form {
     margin: auto;
     border: none;
