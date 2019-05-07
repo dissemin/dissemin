@@ -162,6 +162,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 SELECT2_JS = None
 SELECT2_CSS = None
+SELECT2_I18N_PATH = 'libs/select2/i18n'
 
 SITE_ID = 1
 
