@@ -58,7 +58,25 @@ class DepositResult(object):
         self.oairecord = None
         self.additional_info = []
 
-class RepositoryProtocol(object):
+class RepositoryProtocolMeta(type):
+    """
+    Metaclass for RepositoryProtocol class. This class is used to provice __str__ for the protocol classes (not the objects).
+    The inhterianted classes of RepositoryProtocol inherit this class.
+    """
+
+    def __repr__(cls):
+        """
+        We pass the class again, so that we later need no classmethod
+        """
+        return cls.__repr__(cls)
+
+    def __str__(cls):
+        """
+        We pass the class again, so that we later need no classmethod
+        """
+        return cls.__str__(cls)
+
+class RepositoryProtocol(object, metaclass = RepositoryProtocolMeta):
     """
     The protocol for a repository where papers can be deposited.
     Actual implementations should inherit from this class.
@@ -80,6 +98,18 @@ class RepositoryProtocol(object):
         self._logs = None
         self.paper = None
         self.user = None
+    
+    def __repr__(self):
+        """
+        Return the class name if no other value is set.
+        """
+        return self.__name__
+    
+    def __str__(self):
+        """
+        Return the class name if no other value is set.
+        """
+        return self.__name__ 
 
     def protocol_identifier(self):
         """
