@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="https://dissem.in/deposit/terms/" targetNamespace="https://dissem.in/deposit/terms/" elementFormDefault="qualified">
+
+  <xs:annotation>
+    <xs:documentation xml:lang="en">
+      Dissemin is a web application that lets user research their publications and upload them directly into an open repository. Depending on the repositories different metadata are sent.
+      Metadata can be either bibliographic or non-bibliographic. The latter ones we use are not mandatory in any way, but might support local workflows.
+      Most of the elements in this document are required, but you do not need to evaluate them if you don't want or don't need to.
+      If you are in the situation to need further non-bibliographic metadata for your workflow, please get in contact with us: hello@dissem.in
+    </xs:documentation>
+    <xs:documentation xml:lang="en">
+      This schema follows the Venetian Blind Design.
+    </xs:documentation>
+  </xs:annotation>
+
+  <xs:element name="dissemin" type="disseminType">
+    <xs:annotation>
+      <xs:documentation>
+        This is the root element of each document carrying special dissemin metadata.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+
+  <xs:complexType name="disseminType">
+    <xs:sequence>
+      <xs:element name="depositor" type="depositorType"/>
+      <xs:element name="publication" type="publicationType"/>
+    </xs:sequence>
+    <xs:attribute name="version" type="xs:float"/>
+  </xs:complexType>
+
+  <xs:complexType name="depositorType">
+    <xs:annotation>
+      <xs:documentation>
+        The depositor is a person who deposits a publication and described by his name. He has logged in into Dissemin and was authenticated by some method.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="authentication" type="authenticationType"/>
+      <xs:element name="firstName" type="xs:token">
+        <xs:annotation>
+          <xs:documentation>
+            The first or given name of the depositor.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="lastName" type="xs:token">
+        <xs:annotation>
+          <xs:documentation>
+            The last or family of the depositor.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="email" type="xs:token">
+        <xs:annotation>
+          <xs:documentation>
+            The email address of the depositor. Usually this email is valid but might have expired. This is likely the case for institutional email addresses.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="orcid" type="isniType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            If the depositor has an ORCID this is it.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="isContributor" type="xs:boolean" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            Usually the depositor is also an author or contributor. But it is possible to deposit in the name of another person, both technically and juridically.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="identicalInstitution" type="xs:boolean" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            Typically the depositor is member of an institution. If he chooses to deposit into a repository of his institution, this value evaluates to 'true' and 'false' otherwise. If we cannot for some reason decide, e.g. no institution was found for a depositor, we leave out this field.
+            If the value evaluates to 'true' the person is a currently (on date of depositing) a member of institution he deposits into. This usually means that he is granted to publish in the institutions repository.
+            If the value evaluates to 'false' or missing, this does not mean, that the depositor is not allowed to deposit in the chosen repository. For example he is a former member of the repositories institution, he might, depending on the policy, granted to deposit.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="authenticationType">
+    <xs:annotation>
+      <xs:documentation>
+        Dissemin has several methods of authentication of users. These methods offer different levels of confidence.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="shibboleth">
+        <xs:annotation>
+          <xs:documentation>
+            The depositor was authenticated with shibboleth. The reliability of identification is very high.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="orcid">
+        <xs:annotation>
+          <xs:documentation>
+            The depositor was authenticated with ORCID. The reliability of identification is high.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="publicationType">
+    <xs:annotation>
+      <xs:documentation>
+        This gathers all metadata related to the publication.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="license" type="licenseType"/>
+      <xs:element name="disseminID" type="disseminIDType"/>
+      <xs:element name="romeoID" type="romeoIDType"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="licenseType">
+    <xs:annotation>
+      <xs:documentation>
+        The license for the deposition. There are several values possible. We do not provide a full list of valid licenses here because this is beyond the scope and involves a lot of maintenance. Please get in contact with us if you need a certain license or 
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="licenseName" type="xs:token">
+        <xs:annotation>
+          <xs:documentation>
+            The full qualified name of the license, e.g. Creative Commons Attribution 4.0 International Public License
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="licenseURI" type="xs:anyURI" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            URI of the license e.g. https://creativecommons.org/licenses/by/4.0/
+            A license does not need to have a URI.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="licenseShortName" type="xs:token" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            The short name of the license, e.g. CC BY 4.0
+            A license does need to have a shot name.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="isniType">
+    <xs:annotation>
+      <xs:documentation>
+        ISNI is a ISO 27729 certified 15 digit number plus check digit.
+        In a lot of cases this number is seperated by dashes for better readability. Resolver can handle this quite often. We offer ISNI separated by dashes. You can easily remove them if you need to.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:length value="19"/>
+      <xs:pattern value="[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{3}[0-9X]"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="romeoIDType">
+    <xs:annotation>
+      <xs:documentation>
+        RoMEO ID is an ID that refers to publisher conditions and each journal obtains a unique number. You can find more information at: http://sherpa.ac.uk/romeo/index.php
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:integer">
+      <xs:minInclusive value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="disseminIDType">
+    <xs:annotation>
+      <xs:documentation>
+        This ID refers to the publication in Dissemin. This ID is not persistent. The reason is the internal data model: Merging and unmerging papers might create or delete primary keys in the database. For a 'short' period of time, this id will definelty be valid. You can use the DOI shipped in the bibliographic metadata to get back to the publication in Dissemin.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:integer">
+      <xs:minInclusive value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

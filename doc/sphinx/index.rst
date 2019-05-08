@@ -25,10 +25,10 @@ to the metadata sources.
    deploying
    datasources
    datamodel
+   repositories
    development
    testing
    docs
-   modules/modules
 
 
 Indices and tables

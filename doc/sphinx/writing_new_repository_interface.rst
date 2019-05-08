@@ -1,5 +1,3 @@
-.. _page-repository_interfaces:
-
 Writing an interface for a new repository
 =========================================
 
