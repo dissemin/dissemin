@@ -13,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-03 13:40+0200\n"
-"PO-Revision-Date: 2019-05-06 14:37:44+0000\n"
+"PO-Revision-Date: 2019-05-09 14:55:29+0000\n"
 "Language: pms\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -894,7 +894,7 @@ msgstr "Sërché an Google Scholar"
 
 #: papers/templates/papers/authorList.html:17
 msgid "This contributorship is confirmed by ORCID."
-msgstr ""
+msgstr "Costa contribussion a l'é confirmà da ORCID."
 
 #: papers/templates/papers/department.html:34
 #: papers/templates/papers/institution.html:37
@@ -923,7 +923,7 @@ msgstr "Artìcoj dij mèmber"
 #: papers/templates/papers/exportCitationsModal.html:7
 #: papers/templates/papers/exportCitationsModal.html:33
 msgid "Close"
-msgstr ""
+msgstr "Saré"
 
 #: papers/templates/papers/exportCitationsModal.html:10
 #: papers/templates/papers/paperDetails.html:38
@@ -932,7 +932,7 @@ msgstr "Esporté la sitassion"
 
 #: papers/templates/papers/exportCitationsModal.html:16
 msgid "Format"
-msgstr ""
+msgstr "Formà"
 
 #: papers/templates/papers/exportCitationsModal.html:22
 #: papers/templates/papers/paper.html:118
@@ -1088,12 +1088,12 @@ msgstr "A-i manco dle publicassion? <a href=\"%(matching_papers_url)s\"> Ch'a s�
 #: papers/templates/papers/paperList.html:44
 #, python-format
 msgid "Missing publications? Search for additional ones on <a class=\"showHrefPrint\" href=\"%(href)s\">Dissem.in</a>."
-msgstr ""
+msgstr "A-i manca dle publicassion? Sërchene d'àutre su <a class=\"showHrefPrint\" href=\"%(href)s\">Dissem.in</a>."
 
 #: papers/templates/papers/paperList.html:51
 #, python-format
 msgid "Missing publications? <a class=\"showHrefPrint\" href=\"%(faq_url)s#missing-paper\">Read more about our data sources.</a>"
-msgstr ""
+msgstr "A-i manco dle publicassion? <a class=\"showHrefPrint\" href=\"%(faq_url)s#missing-paper\">Lese ëd pi su nòstre sorgiss ëd dàit.</a>"
 
 #: papers/templates/papers/publiListItem.html:16
 #, python-format
@@ -1146,7 +1146,7 @@ msgstr "É-lo chiel?"
 #: papers/templates/papers/search.html:148
 #, python-format
 msgid " %(first_name)s %(last_name)s uses ORCID."
-msgstr ""
+msgstr " %(first_name)s %(last_name)s a deuvra ORCID."
 
 #: papers/templates/papers/search.html:157
 msgid "Refresh publications"
@@ -1205,7 +1205,7 @@ msgstr "Esporté la sitassion"
 
 #: papers/templates/papers/search.html:266
 msgid "Refine"
-msgstr ""
+msgstr "Rafiné"
 
 #: papers/templatetags/statuses.py:19 papers/templatetags/statuses.py:79
 msgid "Unknown OA status"

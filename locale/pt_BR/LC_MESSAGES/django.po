@@ -13,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-03 13:40+0200\n"
-"PO-Revision-Date: 2019-05-06 14:37:44+0000\n"
+"PO-Revision-Date: 2019-05-09 14:55:29+0000\n"
 "Language: pt_br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -473,19 +473,16 @@ msgid "Sorry, we could not fill this for you."
 msgstr "Desculpe, não conseguimos preenchê-lo."
 
 #: deposit/templates/deposit/start.html:74
-#, fuzzy
 msgid "Current institutions"
-msgstr "Instituições"
+msgstr "Instituições atuais"
 
 #: deposit/templates/deposit/start.html:75
-#, fuzzy
 msgid "Unverified institutions"
-msgstr "Instituições"
+msgstr "Instituições não verificadas"
 
 #: deposit/templates/deposit/start.html:76
-#, fuzzy
 msgid "Obsolete institutions"
-msgstr "Instituições"
+msgstr "Instituições obsoletas"
 
 #: deposit/templates/deposit/start.html:310
 msgid "Dissemin encountered an error, please try again later."
@@ -820,9 +817,8 @@ msgstr "Pesquisa avançada"
 
 #: papers/templates/papers/advanced_search.html:27
 #: papers/templates/papers/search.html:277
-#, fuzzy
 msgid "By title"
-msgstr "título"
+msgstr "Por título"
 
 #: papers/templates/papers/advanced_search.html:34
 #: papers/templates/papers/search.html:290
@@ -961,9 +957,8 @@ msgid "Home"
 msgstr "Início"
 
 #: papers/templates/papers/index.html:21
-#, fuzzy
 msgid "Welcome to Dissemin"
-msgstr "Bem-vindo à dissemin"
+msgstr "Bem-vindo à Dissemin"
 
 #: papers/templates/papers/index.html:24 templates/dissemin/skeleton.html:10
 #: templates/dissemin/skeleton.html:15
@@ -2096,9 +2091,8 @@ msgid "Toggle navigation"
 msgstr "Alternar de navegação"
 
 #: templates/dissemin/skeleton.html:33
-#, fuzzy
 msgid "Logo"
-msgstr "Sair"
+msgstr "Logótipo"
 
 #: templates/dissemin/skeleton.html:41
 msgid "My profile"

@@ -8,7 +8,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 12:06+0100\n"
-"PO-Revision-Date: 2019-03-07 15:08:19+0000\n"
+"PO-Revision-Date: 2019-05-09 14:55:23+0000\n"
 "Language: fi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -39,7 +39,7 @@ msgstr "Virheellinen julkaisupäivä."
 
 #: papers/static/papers/refresh.js:74
 msgid "Paper is invalid"
-msgstr ""
+msgstr "Asiakirja on kelvoton"
 
 #: papers/static/papers/refresh.js:109
 msgid "We ignored %(count)s paper from your ORCiD profile."

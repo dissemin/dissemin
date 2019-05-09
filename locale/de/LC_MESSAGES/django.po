@@ -18,7 +18,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-03 13:40+0200\n"
-"PO-Revision-Date: 2019-05-06 14:37:42+0000\n"
+"PO-Revision-Date: 2019-05-09 14:55:18+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1094,6 +1094,11 @@ msgstr "Fehlende Veröffentlichungen? <a href=\"%(matching_papers_url)s\">Suche 
 #, python-format
 msgid "Missing publications? Search for additional ones on <a class=\"showHrefPrint\" href=\"%(href)s\">Dissem.in</a>."
 msgstr "Fehlende Veröffentlichungen? Suche nach zusätzlichen auf <a class=\"showHrefPrint\" href=\"%(href)s\">Dissem.in</a>."
+
+#: papers/templates/papers/paperList.html:51
+#, python-format
+msgid "Missing publications? <a class=\"showHrefPrint\" href=\"%(faq_url)s#missing-paper\">Read more about our data sources.</a>"
+msgstr "Fehlende Veröffentlichungen? <a href=\"%(matching_papers_url)s\">Suche nach Veröffentlichungen mit passendem Verfassernamen</a>"
 
 #: papers/templates/papers/publiListItem.html:16
 #, python-format

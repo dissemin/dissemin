@@ -14,7 +14,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-03 13:40+0200\n"
-"PO-Revision-Date: 2019-05-06 14:37:44+0000\n"
+"PO-Revision-Date: 2019-05-09 14:55:29+0000\n"
 "Language: pt\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -746,11 +746,11 @@ msgstr "Investigador"
 
 #: papers/forms.py:77
 msgid "newest first"
-msgstr ""
+msgstr "mais recentes primeiro"
 
 #: papers/forms.py:78
 msgid "oldest first"
-msgstr ""
+msgstr "mais antigos primeiro"
 
 #: papers/forms.py:112 papers/forms.py:119
 msgid "Any"
@@ -817,7 +817,7 @@ msgstr "Documentos"
 #: papers/templates/papers/advanced_search.html:24
 #: papers/templates/papers/index.html:41
 msgid "Advanced search"
-msgstr ""
+msgstr "Pesquisa avançada"
 
 #: papers/templates/papers/advanced_search.html:27
 #: papers/templates/papers/search.html:277
@@ -839,7 +839,7 @@ msgstr "Por autores"
 #: papers/templates/papers/advanced_search.html:37
 #: papers/templates/papers/search.html:295
 msgid "<ul><li>Use author names or ORCID identifiers.</li><li>Use commas as name separator.</li><li>Prefix with <code>last:</code> to enforce last name search.</li></ul>"
-msgstr ""
+msgstr "<ul><li>Usar nomes dos autores ou identificadores ORCID.</li><li>Usar vírgulas como separadores de nomes.</li><li>Antepor <code>last:</code> para forçar a pesquisa por sobrenome.</li></ul>"
 
 #: papers/templates/papers/advanced_search.html:43
 #: papers/templates/papers/search.html:305
@@ -901,7 +901,7 @@ msgstr "Procurar no Google Académico"
 
 #: papers/templates/papers/authorList.html:17
 msgid "This contributorship is confirmed by ORCID."
-msgstr ""
+msgstr "Esta contribuição é confirmada por ORCID."
 
 #: papers/templates/papers/department.html:34
 #: papers/templates/papers/institution.html:37
@@ -930,7 +930,7 @@ msgstr "Documentos dos membros"
 #: papers/templates/papers/exportCitationsModal.html:7
 #: papers/templates/papers/exportCitationsModal.html:33
 msgid "Close"
-msgstr ""
+msgstr "Fechar"
 
 #: papers/templates/papers/exportCitationsModal.html:10
 #: papers/templates/papers/paperDetails.html:38
@@ -939,7 +939,7 @@ msgstr "Exportar citação"
 
 #: papers/templates/papers/exportCitationsModal.html:16
 msgid "Format"
-msgstr ""
+msgstr "Formato"
 
 #: papers/templates/papers/exportCitationsModal.html:22
 #: papers/templates/papers/paper.html:118
@@ -1096,12 +1096,12 @@ msgstr "Faltam publicações? <a href=\"%(matching_papers_url)s\"> Procure pelas
 #: papers/templates/papers/paperList.html:44
 #, python-format
 msgid "Missing publications? Search for additional ones on <a class=\"showHrefPrint\" href=\"%(href)s\">Dissem.in</a>."
-msgstr ""
+msgstr "Há publicações em falta? Procure mais em <a class=\"showHrefPrint\" href=\"%(href)s\">Dissem.in</a>."
 
 #: papers/templates/papers/paperList.html:51
 #, python-format
 msgid "Missing publications? <a class=\"showHrefPrint\" href=\"%(faq_url)s#missing-paper\">Read more about our data sources.</a>"
-msgstr ""
+msgstr "Publicações em falta? <a class=\"showHrefPrint\" href=\"%(faq_url)s#missing-paper\">Leia mais sobre as nossas fontes de dados.</a>"
 
 #: papers/templates/papers/publiListItem.html:16
 #, python-format
@@ -1154,7 +1154,7 @@ msgstr "És tu?"
 #: papers/templates/papers/search.html:148
 #, python-format
 msgid " %(first_name)s %(last_name)s uses ORCID."
-msgstr ""
+msgstr " %(first_name)s %(last_name)s usa ORCID."
 
 #: papers/templates/papers/search.html:157
 msgid "Refresh publications"
@@ -1209,11 +1209,11 @@ msgstr "Ordenar por"
 
 #: papers/templates/papers/search.html:263
 msgid "Export citations for current page"
-msgstr ""
+msgstr "Exportar citações para a página corrente"
 
 #: papers/templates/papers/search.html:266
 msgid "Refine"
-msgstr ""
+msgstr "Melhorar"
 
 #: papers/templatetags/statuses.py:19 papers/templatetags/statuses.py:79
 msgid "Unknown OA status"
@@ -1330,7 +1330,7 @@ msgstr "política desconhecida"
 
 #: papers/views.py:85
 msgid "Dissemin requires access to your ORCID name, which is marked as private in your ORCID profile."
-msgstr ""
+msgstr "O Dissemin requer acesso ao seu nome ORCID, que está assinalado como privado no seu perfil ORCID."
 
 #: papers/views.py:144
 msgid "All papers"
@@ -1359,11 +1359,11 @@ msgstr " em "
 
 #: papers/views.py:386
 msgid "Dissemin requires access to your ORCID name."
-msgstr ""
+msgstr "O Dissemin requer acesso ao seu nome ORCID."
 
 #: papers/views.py:435
 msgid "Paper view expects a DOI or a pk"
-msgstr ""
+msgstr "A visualização do documento espera um DOI ou um pk"
 
 #: papers/views.py:442
 #, python-format
@@ -1372,7 +1372,7 @@ msgstr "Não foram encontrados %(verbose_name)s que correspondessem à consulta"
 
 #: papers/views.py:446
 msgid "This paper has been deleted."
-msgstr ""
+msgstr "Este documento foi eliminado."
 
 #: papers/views.py:488
 msgid "Invalid DOI."
@@ -1521,7 +1521,7 @@ msgstr "Política de dados fornecida por"
 #: publishers/templates/publishers/policy.html:60
 #, python-format
 msgid "Last updated on %(last_updated)s, <a href=\"%(feedback_url)s\">report any error to them</a>"
-msgstr ""
+msgstr "Última atualização em %(last_updated)s, <a href=\"%(feedback_url)s\">reporte-lhes todos os erros</a>"
 
 #: publishers/templates/publishers/policy.html:64
 msgid "Report any error to them"
@@ -1657,11 +1657,11 @@ msgstr "Administração do Dissemin"
 
 #: templates/dissemin/error.html:6 templates/dissemin/error.html:12
 msgid "Error"
-msgstr ""
+msgstr "Erro"
 
 #: templates/dissemin/error.html:15
 msgid "<a href=\"/\">Go back to the home page.</a>"
-msgstr ""
+msgstr "<a href=\"/\">Voltar à página principal.</a>"
 
 #: templates/dissemin/faq.html:6 templates/dissemin/faq.html:11
 msgid "Frequently Asked Questions"
@@ -1910,9 +1910,9 @@ msgid "All sorts of other technical issues."
 msgstr "Todos os outros tipos de problemas técnicos."
 
 #: templates/dissemin/faq.html:333
-#, fuzzy, python-format
+#, python-format
 msgid "Please first check whether the paper is available in one of <a href=\"%(sources_url)s\">our sources</a>. If it is not, Dissemin cannot harvest it, and you should report the problem to the source where it should appear. Note that it can take up to a couple of months for our primary sources to discover your latest papers and for Dissemin to harvest it."
-msgstr "Por favor, primeiro verifique se o documento está disponível numa das <a href=\"%(sources_url)s\">nossas fontes</a>. Se não estiver, o Dissemin não pode colhê-lo, e deve comunicar o problema à fonte onde deve aparecer."
+msgstr "Por favor, verifique primeiro se o documento está disponível numa das <a href=\"%(sources_url)s\">nossas fontes</a>. Se não estiver, o Dissemin não pode colhê-lo e deve comunicar o problema à fonte onde ele devia aparecer. Note que pode demorar alguns meses até as nossas fontes principais descobrirem os seus documentos mais recentes e o Dissemin poder colhê-los."
 
 #: templates/dissemin/faq.html:343
 msgid "Now, if your paper does appear in one of the sources but not on Dissemin, please check that your name is not spelt incorrectly on the source, and that the spelling matches your ORCID record. If there is a misspelling, again, you should report the problem to the source that contains the mistake."
@@ -2201,9 +2201,8 @@ msgid "Please address any inquiry to support@dissem.in."
 msgstr "Por favor, envie qualquer solicitação para support@dissem.in."
 
 #: templates/dissemin/tos.html:89
-#, fuzzy
 msgid "Dissemin uses ORCID's public OAuth interface to authenticate its users. This interface only transmits information marked as public in the user's ORCID profile. This means that ORCID passwords are never transmitted and email addresses are not transmitted when they are marked as private, which is the default setting. When logging in to Dissemin from ORCID, Dissemin acquires the user's ORCID id, as well as all public information attached to the ORCID record. We are using the <a href=\"https://sentry.io/privacy/\">Sentry service</a> for error tracking on this platform. Our webserver configuration stores basic access information (URL requested and IP address) for error monitoring, which are kept for fourteen days. Dissemin can store any information input by its users on the platform. Users can ask for a copy of the personal information Dissemin stores about them by writing an email to support@dissem.in."
-msgstr "O Dissemin utiliza a interface pública OAuth do ORCID para autenticar os seus utilizadores. Esta interface apenas transmite as informações marcadas como públicas no perfil ORCID do utilizador. Isto significa que as palavras-passe do ORCID nunca serão transmitidas, nem os endereços de correio eletrónico, quando forem marcados como privados, que é a configuração padrão. Ao iniciar sessão no Dissemin pelo ORCID, o Dissemin adquire a identificação ORCID do utilizador, bem como todas as informações públicas anexadas ao registo ORCID. A Dissemin pode armazenar qualquer informação fornecida pelos utilizadores na plataforma. Os utilizadores podem solicitar uma cópia das informações pessoais dos armazenamentos do Dissemin, enviando um correio eletrónico para support@dissem.in."
+msgstr "O Dissemin utiliza a interface pública OAuth do ORCID para autenticar os seus utilizadores. Esta interface só transmite as informações marcadas como públicas no perfil ORCID do utilizador. Isto significa que as palavras-passe do ORCID nunca serão transmitidas, nem os endereços de correio eletrónico, quando forem marcados como privados, que é a configuração padrão. Ao iniciar sessão no Dissemin pelo ORCID, o Dissemin adquire a identificação ORCID do utilizador, bem como todas as informações públicas anexadas ao registo ORCID. Estamos a usar o <a href=\"https://sentry.io/privacy/\">serviço Sentry</a> para registo de erros nesta plataforma. A configuração do nosso servidor da Internet armazena informação básica de acessos (URL pedido e endereço IP) para monitorização de erros, que é mantida durante quatorze dias. A Dissemin pode armazenar qualquer informação fornecida pelos utilizadores na plataforma. Os utilizadores podem solicitar uma cópia das informações pessoais que o Dissemin armazena sobre eles enviando um correio eletrónico para support@dissem.in."
 
 #: templates/dissemin/tos.html:112
 msgid "Documents deposited in repositories via Dissemin can be stored on the platform, but are not available for download on the platform. They can be stored internally for logging purposes, and to make sure failed deposits can be fixed later. Dissemin does not commit to store any of the files it receives from its users. Users can write to support@dissem.in if they want one of their uploads to be deleted from our internal storage space, or from the repository they have deposited to. Note that deletion policies vary accross repositories: we provide no guarantee that deposits can be deleted from the target repositories."

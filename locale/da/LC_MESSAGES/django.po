@@ -12,7 +12,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-03 13:40+0200\n"
-"PO-Revision-Date: 2019-05-06 14:37:41+0000\n"
+"PO-Revision-Date: 2019-05-09 14:55:17+0000\n"
 "Language: da\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -744,11 +744,11 @@ msgstr "Forsker"
 
 #: papers/forms.py:77
 msgid "newest first"
-msgstr ""
+msgstr "nyeste først"
 
 #: papers/forms.py:78
 msgid "oldest first"
-msgstr ""
+msgstr "ældste først"
 
 #: papers/forms.py:112 papers/forms.py:119
 msgid "Any"
@@ -815,7 +815,7 @@ msgstr "Artikler"
 #: papers/templates/papers/advanced_search.html:24
 #: papers/templates/papers/index.html:41
 msgid "Advanced search"
-msgstr ""
+msgstr "Avanceret søgning"
 
 #: papers/templates/papers/advanced_search.html:27
 #: papers/templates/papers/search.html:277
@@ -937,7 +937,7 @@ msgstr ""
 
 #: papers/templates/papers/exportCitationsModal.html:16
 msgid "Format"
-msgstr ""
+msgstr "Format"
 
 #: papers/templates/papers/exportCitationsModal.html:22
 #: papers/templates/papers/paper.html:118

@@ -11,7 +11,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-03 13:40+0200\n"
-"PO-Revision-Date: 2019-05-06 14:37:45+0000\n"
+"PO-Revision-Date: 2019-05-09 14:55:30+0000\n"
 "Language: skr-Arab\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -925,7 +925,7 @@ msgstr ""
 #: papers/templates/papers/exportCitationsModal.html:7
 #: papers/templates/papers/exportCitationsModal.html:33
 msgid "Close"
-msgstr ""
+msgstr "بند کرو"
 
 #: papers/templates/papers/exportCitationsModal.html:10
 #: papers/templates/papers/paperDetails.html:38
@@ -934,7 +934,7 @@ msgstr ""
 
 #: papers/templates/papers/exportCitationsModal.html:16
 msgid "Format"
-msgstr ""
+msgstr "فارمیٹ"
 
 #: papers/templates/papers/exportCitationsModal.html:22
 #: papers/templates/papers/paper.html:118

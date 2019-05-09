@@ -12,7 +12,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-03 13:40+0200\n"
-"PO-Revision-Date: 2019-05-06 14:37:43+0000\n"
+"PO-Revision-Date: 2019-05-09 14:55:28+0000\n"
 "Language: lb\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -814,7 +814,7 @@ msgstr "Pabeieren"
 #: papers/templates/papers/advanced_search.html:24
 #: papers/templates/papers/index.html:41
 msgid "Advanced search"
-msgstr ""
+msgstr "Erweidert Sich"
 
 #: papers/templates/papers/advanced_search.html:27
 #: papers/templates/papers/search.html:277
@@ -927,7 +927,7 @@ msgstr ""
 #: papers/templates/papers/exportCitationsModal.html:7
 #: papers/templates/papers/exportCitationsModal.html:33
 msgid "Close"
-msgstr ""
+msgstr "Zoumaachen"
 
 #: papers/templates/papers/exportCitationsModal.html:10
 #: papers/templates/papers/paperDetails.html:38
