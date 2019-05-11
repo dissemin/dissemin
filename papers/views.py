@@ -25,6 +25,7 @@ from statistics.models import BareAccessStatistics
 
 from allauth.exceptions import ImmediateHttpResponse
 from allauth.socialaccount.signals import pre_social_login
+from allauth.account.signals import user_logged_in
 from deposit.models import DepositRecord
 from django.contrib.auth.decorators import user_passes_test
 from django.core.exceptions import ObjectDoesNotExist
@@ -63,14 +64,18 @@ from publishers.views import SlugDetailView
 from search import SearchQuerySet
 
 
-def fetch_on_orcid_login(sender, **kwargs):
-    account = kwargs['sociallogin'].account
+def fetch_on_orcid_login(sender, sociallogin, **kwargs):
+    account = sociallogin.account
 
     # Only prefetch if the social login refers to a valid ORCID account
     orcid = validate_orcid(account.uid)
     if not orcid:
         raise ImmediateHttpResponse(
-            render(kwargs['request'], 'dissemin/error.html', {'message':_('Invalid ORCID identifier.')})
+            render(
+                kwargs['request'],
+                'dissemin/error.html',
+                {'message':_('Invalid ORCID identifier.')}
+            )
         )
 
     profile = None # disabled account.extra_data because of API version mismatches
@@ -81,9 +86,19 @@ def fetch_on_orcid_login(sender, **kwargs):
 
     if not r: # invalid ORCID profile (e.g. no name provided)
         raise ImmediateHttpResponse(
-            render(kwargs['request'], 'dissemin/error.html', {'message':
-            _('Dissemin requires access to your ORCID name, which is marked as private in your ORCID profile.')})
+            render(
+                kwargs['request'],
+                'dissemin/error.html',
+                {'message': _(
+                    'Dissemin requires access to your ORCID name, '
+                    'which is marked as private in your ORCID profile.'
+                )}
+            )
         )
+
+def complete_researcher_profile_on_orcid_login(sender, user, **kwargs):
+    orcid = user.socialaccount_set.first().uid
+    r = Researcher.objects.get(orcid=orcid)
 
     if r.user_id is None and user is not None:
         r.user = user
@@ -94,6 +109,7 @@ def fetch_on_orcid_login(sender, **kwargs):
         r.fetch_everything_if_outdated()
 
 pre_social_login.connect(fetch_on_orcid_login)
+user_logged_in.connect(complete_researcher_profile_on_orcid_login)
 
 # Number of papers shown on a search results page
 NB_RESULTS_PER_PAGE = 20
@@ -382,8 +398,14 @@ def myProfileView(request):
                                         slug=r.slug)
     except Researcher.DoesNotExist:
         return HttpResponse(
-            render(request, 'dissemin/error.html', {'message':
-            _('Dissemin requires access to your ORCID name.')})
+            render(
+                request,
+                'dissemin/error.html',
+                {
+                    'message': _(
+                        'Dissemin requires access to your ORCID name.')
+                }
+            )
         )
 
 class DepartmentView(generic.DetailView):
