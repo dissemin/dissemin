@@ -71,6 +71,9 @@ class HALProtocol(RepositoryProtocol):
         self.username = repository.username
         self.password = repository.password
 
+    def __str__(self):
+        return "HAL Protocol (Sword)"
+
     def init_deposit(self, paper, user):
         """
         We reject in advance papers that are already in HAL

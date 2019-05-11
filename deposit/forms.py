@@ -22,6 +22,7 @@
 
 from deposit.models import Repository
 from deposit.models import UserPreferences
+from deposit.registry import protocol_registry
 from django import forms
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
@@ -139,5 +140,22 @@ class UserPreferencesForm(forms.ModelForm):
             Submit('submit', _('Save')),
         )
 
+class RepositoryAdminForm(forms.ModelForm):
+    """
+    Changes widget of the protocol field to a select (dropdown) of AdminView of Repository. This way no free text has to be entered for the protocol to choose.
+    """
+    
+    def __init__(self, *args, **kwargs):
+        """
+        We get the original form, register all repositories, create the list of protocols.
+        If a repo exists, we check that its protocol will be in the list. Otherwise the protocol of a repo with a currently not registered protocol would be overwritten.
+        """
 
-
+        super().__init__(*args, **kwargs)
+        protocol_registry.load()
+        choices = [(key, str(value)) for key, value in protocol_registry.dct.items()]
+        if self.instance.protocol:
+            if self.instance.protocol not in protocol_registry.dct.keys():
+                choices += [(self.instance.protocol,self.instance.protocol)]
+        choices = sorted(choices, key=lambda protocol: protocol[1].lower(),)
+        self.fields['protocol'].widget = forms.Select(choices=choices)

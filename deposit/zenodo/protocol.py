@@ -50,6 +50,9 @@ class ZenodoProtocol(RepositoryProtocol):
         if not self.api_url:
             self.api_url = "https://zenodo.org/api/deposit/depositions"
 
+    def __str__(self):
+        return "Zenodo Protocol"
+
     def log_request(self, r, expected_status_code, error_msg):
         """
         Logs an HTTP request and raises an error if the status code is

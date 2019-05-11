@@ -101,7 +101,7 @@ class Repository(models.Model, CachingMixin):
         bound with this repository. If the class cannot be found
         in the :data:`~deposit.registry.protocol_registry`, `None` is returned.
 
-        :returns: the class corresponding to the value of the `protocol` field.
+        :returns: an instance of the class corresponding to the value of the `protocol` field.
         """
         cls = protocol_registry.get(self.protocol)
         if cls is None:

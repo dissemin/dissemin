@@ -53,6 +53,9 @@ class OSFProtocol(RepositoryProtocol):
         else:
             self.no_license_id = "563c1cf88c5e4a3877f9e965"
 
+    def __str__(self):
+        return "OSF Protocol"
+
     def init_deposit(self, paper, user):
         """
         Refuse deposit when the paper is already on OSF.
