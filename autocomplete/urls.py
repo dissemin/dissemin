@@ -6,6 +6,6 @@ from django.conf.urls import url
 
 urlpatterns = [
     url(r'^autocomplete_affiliations/$',
-        views.AffiliationAutocomplete.as_view(),
+        views.affiliation_autocomplete,
         name='autocomplete_affiliations')
 ]

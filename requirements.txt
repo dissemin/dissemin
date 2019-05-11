@@ -6,7 +6,6 @@ redis
 cryptography
 django>=1.11.20,<2.3.0
 django-allauth
--e git+https://github.com/dissemin/django-autocomplete-light.git@78b587a481ff29bc62145fe04af7e0608b026675#egg=django-autocomplete-light
 django-bootstrap-pagination
 django-bulk-update
 django-bootstrap-datepicker-plus
@@ -51,3 +50,5 @@ sentry-sdk
 python-dateutil # for haystack, as explained here:
 #http://django-haystack.readthedocs.io/en/v2.4.1/management_commands.html
 dealer
+django-select2
+bleach

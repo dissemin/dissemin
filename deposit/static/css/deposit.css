@@ -113,13 +113,13 @@ label.repositoryItem {
   text-align: left;
 }
 
-#select2-id_affiliation-results .VALID {
+#select2-id_affiliation-results .valid {
 }
 
-#select2-id_affiliation-results .INCOMING {
+#select2-id_affiliation-results .incoming {
   opacity: 0.6;
 }
 
-#select2-id_affiliation-results .OLD {
+#select2-id_affiliation-results .old {
   opacity: 0.3;
 }

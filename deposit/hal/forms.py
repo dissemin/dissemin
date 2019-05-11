@@ -29,8 +29,6 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from deposit.hal.models import HALDepositPreferences
 
-class AffiliationSelect2(Select2):
-    autocomplete_function = 'select2-customTemplate'
 
 class HALForm(FormWithAbstract):
 
@@ -53,11 +51,10 @@ class HALForm(FormWithAbstract):
     affiliation = forms.CharField(
         required=True,
         label=_('Affiliation'),
-        widget=AffiliationSelect2(
-            url='autocomplete_affiliations',
+        widget=Select2(
+            data_view='autocomplete_affiliations',
             attrs={
-                #'data-html': 'true',
-                'width': '100%',
+                'style': 'width: 100%',
             },
         )
     )
