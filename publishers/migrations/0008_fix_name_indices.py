@@ -4,6 +4,7 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
+    atomic = False
 
     dependencies = [
         ('publishers', '0007_publisher_romeo_parent_id'),
@@ -26,7 +27,7 @@ class Migration(migrations.Migration):
             """,
             reverse_sql="""
             DROP INDEX CONCURRENTLY papers_journal_title_upper;
-            """
+            """,
         ),
         migrations.RunSQL(
             sql="""
