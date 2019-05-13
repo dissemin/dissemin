@@ -38,6 +38,7 @@ from papers.models import Paper
 from backend.translators import OAIDCTranslator
 from backend.translators import BASEDCTranslator
 from backend.oaireader import base_dc_reader
+from backend.utils import with_speed_report
 
 logger = logging.getLogger('dissemin.' + __name__)
 
@@ -206,23 +207,10 @@ class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSo
             raise ValueError("No OAI translators have been set up: " +
                              "We cannot save any record.")
 
-        last_report = datetime.now()
-        processed_since_report = 0
-
         with ParallelGenerator(listRecords, max_lookahead=max_lookahead) as g:
-            for record in g:
+            for record in with_speed_report(g, name='OAI papers'):
                 header = record[0]
                 metadata = record[1]._map
 
                 self.process_record(header, metadata, format)
 
-                # rate reporting
-                processed_since_report += 1
-                if processed_since_report >= 1000:
-                    td = datetime.now() - last_report
-                    rate = 'infty'
-                    if td.seconds:
-                        rate = str(processed_since_report / td.seconds)
-                    logger.info("current rate: %s records/s" % rate)
-                    processed_since_report = 0
-                    last_report = datetime.now()
