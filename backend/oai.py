@@ -23,8 +23,6 @@ import logging
 import os
 import bz2
 
-from datetime import datetime
-
 from backend.papersource import PaperSource
 
 from django.db import transaction
@@ -35,10 +33,12 @@ from oaipmh.error import NoRecordsMatchError
 from oaipmh.metadata import MetadataRegistry
 from oaipmh.metadata import oai_dc_reader
 from papers.models import Paper
+from papers.models import OaiRecord
 from backend.translators import OAIDCTranslator
 from backend.translators import BASEDCTranslator
 from backend.oaireader import base_dc_reader
 from backend.utils import with_speed_report
+from backend.utils import group_by_batches
 
 logger = logging.getLogger('dissemin.' + __name__)
 
@@ -176,17 +176,24 @@ class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSo
         except NoRecordsMatchError:
             return []
 
-    def process_record(self, header, metadata, format):
+    def translate_record(self, header, metadata, metadata_format):
+        """
+        Translates a record to a BarePaper. Returns None
+        if an invalid format is given, or the record has incomplete metadata.
+        """
+        translator = self.translators.get(metadata_format)
+        if translator is None:
+            logger.warning("Unknown metadata format %s, skipping" % header.format())
+            return
+        return translator.translate(header, metadata)
+
+    def process_record(self, header, metadata, metadata_format):
         """
         Saves the record given by the header and metadata (as returned by
         pyoai) into a Paper, or None if anything failed.
         """
-        translator = self.translators.get(format)
-        if translator is None:
-            logger.warning("Unknown metadata format %s, skipping" % header.format())
-            return
+        paper = self.translate_record(header, metadata, metadata_format)
 
-        paper = translator.translate(header, metadata)
         if paper is not None:
             try:
                 with transaction.atomic():
@@ -195,7 +202,7 @@ class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSo
             except ValueError:
                 logger.exception("Ignoring invalid paper with header %s" % header.identifier())
 
-    def process_records(self, listRecords, format, max_lookahead=1000):
+    def process_records(self, listRecords, metadata_format, max_lookahead=1000):
         """
         Save as :class:`Paper` all the records contained in this list.
         Records are represented as pairs of OaiHeader and OaiRecord, as returned
@@ -208,9 +215,34 @@ class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSo
                              "We cannot save any record.")
 
         with ParallelGenerator(listRecords, max_lookahead=max_lookahead) as g:
-            for record in with_speed_report(g, name='OAI papers'):
-                header = record[0]
-                metadata = record[1]._map
+            for record_group in group_by_batches(with_speed_report(g, name='OAI papers')):
+                oai_ids_to_last_updated = {
+                    record[0].identifier():record[0].datestamp() for record in record_group
+                }
 
-                self.process_record(header, metadata, format)
+                # Fetch the last modified date of all these records in the DB
+                last_modified_in_db = { id : last_modified
+                    for id, last_modified in
+                    OaiRecord.objects.filter(identifier__in=oai_ids_to_last_updated.keys()).values_list('identifier', 'last_update')
+                }
+
+                # Deduce the list of papers to update
+                ids_to_update = set()
+                for id, last_updated_in_base in oai_ids_to_last_updated.items():
+                    if id not in last_modified_in_db or last_modified_in_db[id] < last_updated_in_base:
+                        ids_to_update.add(id)
+
+                bare_papers = [self.translate_record(record[0], record[1]._map, metadata_format)
+                               for record in record_group
+                               if record[0].getIdentifier() in ids_to_update]
+
+                for paper in bare_papers:
+                    if paper is not None:
+                        try:
+                            with transaction.atomic():
+                                saved = Paper.from_bare(paper)
+                            return saved
+                        except ValueError:
+                            logger.exception("Ignoring invalid paper with identifier " + paper.oairecords[0].identifier)
+
 

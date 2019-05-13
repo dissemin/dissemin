@@ -76,6 +76,16 @@ class OaiTest(TestCase):
         titles = [record.getField('title') for _, record, _ in records]
         self.assertEqual(len(records), 20)
         self.assertTrue(['Modularizing the Elimination of r=0 in Kleene Algebra'] in titles)
+        
+    def test_load_dump(self):
+        """
+        Loads up a dump in the DB.
+        """
+        self.oai.load_base_dump(os.path.join(self.testdir, 'data/example_base_dump'))
+        
+        paper = Paper.objects.get(title='Modularizing the Elimination of r=0 in Kleene Algebra')
+        self.assertEqual(paper.splash_url, 'something')
+        
 
     def test_create_no_match(self):
         """

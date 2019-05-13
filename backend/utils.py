@@ -151,3 +151,17 @@ def report_speed(name=None, report_delay=timedelta(seconds=10)):
             return with_speed_report(func(*args, **kwargs), name=logging_name, report_delay=report_delay)
         return wrapped_generator
     return decorator
+
+
+def group_by_batches(generator, batch_size=100):
+    """
+    Given a generator, returns a generator of groups of at most batch_size elements.
+    """
+    current_batch = []
+    for item in generator:
+        current_batch.append(item)
+        if len(current_batch) == batch_size:
+            yield current_batch
+            current_batch = []
+    if len(current_batch) > 0:
+        yield current_batch
