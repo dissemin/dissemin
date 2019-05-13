@@ -65,6 +65,17 @@ class OaiTest(TestCase):
                 p.delete()
         except OaiRecord.DoesNotExist:
             pass
+        
+    def test_read_dump(self):
+        """
+        Reads a small example dump from BASE
+        """
+        records = self.oai.read_base_dump(os.path.join(self.testdir, 'data/example_base_dump'), 'base_dc')
+        # Fetch the records
+        records = list(records)
+        titles = [record.getField('title') for _, record, _ in records]
+        self.assertEqual(len(records), 20)
+        self.assertTrue(['Modularizing the Elimination of r=0 in Kleene Algebra'] in titles)
 
     def test_create_no_match(self):
         """

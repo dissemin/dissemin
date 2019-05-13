@@ -20,6 +20,8 @@
 
 
 import logging
+import os
+import bz2
 
 from datetime import datetime
 
@@ -111,6 +113,40 @@ class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSo
         records = self.client.listRecords(**args)
         self.process_records(records, metadataPrefix)
 
+    def load_base_dump(self, directory_path):
+        """
+        Given a path to a directory, representing an un-tar'ed BASE dump,
+        read all the bz2'ed files in it and save them to the database.
+
+        :param directory_path: the path to the directory where the BASE dump was un-tar'ed
+        """
+        metadata_prefix = 'base_dc'
+        self.process_records(self.read_base_dump(directory_path, metadata_prefix), metadata_prefix)
+
+    def read_base_dump(self, directory_path, metadata_prefix):
+        """
+        Given a path to a directory, representing an un-tar'ed BASE dump,
+        read all the bz2'ed files in it as a generator of OAI records
+
+        :param directory_path: the path to the directory where the BASE dump was un-tar'ed
+        :param metadata_prefix: the metadata prefix to read the records
+        """
+        filenames = os.listdir(directory_path)
+        namespaces = self.client.getNamespaces()
+        metadata_registry = self.client.getMetadataRegistry()
+        for filename in filenames:
+            if not filename.endswith('.bz2'):
+                continue
+            file_path = os.path.join(directory_path, filename)
+            with bz2.open(file_path, 'r') as f:
+                payload = f.read()
+                tree = self.client.parse(payload)
+                records, _ = self.client.buildRecords(
+                        metadata_prefix, namespaces,
+                        metadata_registry, tree)
+                for record in records:
+                    yield record
+
     def create_paper_by_identifier(self, identifier, metadataPrefix):
         """
         Queries the OAI-PMH proxy for a single paper.
@@ -159,7 +195,9 @@ class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSo
 
     def process_records(self, listRecords, format):
         """
-        Save as :class:`Paper` all the records contained in this list
+        Save as :class:`Paper` all the records contained in this list.
+        Records are represented as pairs of OaiHeader and OaiRecord, as returned
+        by pyoai's ListRecords
         """
         # check that we have at least one translator, otherwise
         # it's not really worth trying…
