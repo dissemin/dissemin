@@ -12,7 +12,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-03 13:40+0200\n"
-"PO-Revision-Date: 2019-05-09 14:55:28+0000\n"
+"PO-Revision-Date: 2019-05-13 12:30:13+0000\n"
 "Language: lb\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -743,11 +743,11 @@ msgstr ""
 
 #: papers/forms.py:77
 msgid "newest first"
-msgstr ""
+msgstr "déi Neist fir d'éischt"
 
 #: papers/forms.py:78
 msgid "oldest first"
-msgstr ""
+msgstr "déi Eelst fir d'éischt"
 
 #: papers/forms.py:112 papers/forms.py:119
 msgid "Any"
