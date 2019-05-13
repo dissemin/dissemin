@@ -121,7 +121,8 @@ class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSo
         :param directory_path: the path to the directory where the BASE dump was un-tar'ed
         """
         metadata_prefix = 'base_dc'
-        self.process_records(self.read_base_dump(directory_path, metadata_prefix), metadata_prefix)
+        generator = self.read_base_dump(directory_path, metadata_prefix)
+        self.process_records(generator, metadata_prefix, max_lookahead=10000)
 
     def read_base_dump(self, directory_path, metadata_prefix):
         """
@@ -193,7 +194,7 @@ class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSo
             except ValueError:
                 logger.exception("Ignoring invalid paper with header %s" % header.identifier())
 
-    def process_records(self, listRecords, format):
+    def process_records(self, listRecords, format, max_lookahead=1000):
         """
         Save as :class:`Paper` all the records contained in this list.
         Records are represented as pairs of OaiHeader and OaiRecord, as returned
@@ -208,7 +209,7 @@ class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSo
         last_report = datetime.now()
         processed_since_report = 0
 
-        with ParallelGenerator(listRecords, max_lookahead=1000) as g:
+        with ParallelGenerator(listRecords, max_lookahead=max_lookahead) as g:
             for record in g:
                 header = record[0]
                 metadata = record[1]._map
