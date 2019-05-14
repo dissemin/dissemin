@@ -229,6 +229,9 @@ def submitDeposit(request, pk):
     if submitResult.status == 'failed':
         context['message'] = submitResult.message
         d.save()
+        # Send the failed deposit as error to sentry
+        msg = "Deposit failed for id %n for paper %n \n\n" % (d.pk, paper.pk)
+        logger.error(msg + submitResult.logs)
         return context, 400
 
     d.identifier = submitResult.identifier
