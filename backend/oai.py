@@ -231,7 +231,7 @@ class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSo
                 # Deduce the list of papers to update
                 ids_to_update = set()
                 for id, last_updated_in_base in oai_ids_to_last_updated.items():
-                    if id not in last_modified_in_db or last_modified_in_db[id] < last_updated_in_base:
+                    if id not in last_modified_in_db or last_modified_in_db[id].date() <= last_updated_in_base.date():
                         ids_to_update.add(id)
 
                 bare_papers = [self.translate_record(record[0], record[1]._map, metadata_format)
