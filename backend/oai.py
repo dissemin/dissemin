@@ -44,8 +44,8 @@ logger = logging.getLogger('dissemin.' + __name__)
 
 class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSource
     """
-    A paper source that fetches records from the OAI-PMH proxy
-    (typically: proaixy).
+    A paper source that fetches records from an OAI-PMH source
+    (typically: BASE).
 
     It uses the ListRecord verb to fetch records from the OAI-PMH
     source. Each record is then converted to a :class:`BarePaper`
@@ -146,8 +146,10 @@ class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSo
                 records, _ = self.client.buildRecords(
                         metadata_prefix, namespaces,
                         metadata_registry, tree)
-                for record in records:
-                    yield record
+                for header, metadata, about in records:
+                    header._element = None
+                    metadata._element = None
+                    yield (header, metadata, about)
 
     def create_paper_by_identifier(self, identifier, metadataPrefix):
         """
@@ -234,7 +236,7 @@ class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSo
 
                 bare_papers = [self.translate_record(record[0], record[1]._map, metadata_format)
                                for record in record_group
-                               if record[0].getIdentifier() in ids_to_update]
+                               if record[0].identifier() in ids_to_update]
 
                 for paper in bare_papers:
                     if paper is not None:

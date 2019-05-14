@@ -70,7 +70,7 @@ class OaiTest(TestCase):
         """
         Reads a small example dump from BASE
         """
-        records = self.oai.read_base_dump(os.path.join(self.testdir, 'data/example_base_dump'), 'base_dc')
+        records = self.base_oai.read_base_dump(os.path.join(self.testdir, 'data/example_base_dump'), 'base_dc')
         # Fetch the records
         records = list(records)
         titles = [record.getField('title') for _, record, _ in records]
@@ -81,10 +81,10 @@ class OaiTest(TestCase):
         """
         Loads up a dump in the DB.
         """
-        self.oai.load_base_dump(os.path.join(self.testdir, 'data/example_base_dump'))
+        self.base_oai.load_base_dump(os.path.join(self.testdir, 'data/example_base_dump'))
         
         paper = Paper.objects.get(title='Modularizing the Elimination of r=0 in Kleene Algebra')
-        self.assertEqual(paper.splash_url, 'something')
+        self.assertEqual(paper.pdf_url, 'http://dx.doi.org/10.2168/lmcs-1(3:5)2005')
         
 
     def test_create_no_match(self):

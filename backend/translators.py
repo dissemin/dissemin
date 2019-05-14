@@ -147,7 +147,7 @@ class OAIDCTranslator(OaiTranslator):
             self.add_oai_record(header, metadata, paper)
             return paper
         except ValueError as e:
-            logger.warning("OAI record "+header.identifier()+" skipped:\n", e, exc_info=True)
+            logger.warning("OAI record "+header.identifier()+" skipped:\n%s", e, exc_info=True)
             paper.update_availability()
 
     def add_oai_record(self, header, metadata, paper):
