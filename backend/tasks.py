@@ -80,7 +80,7 @@ def fetch_everything_for_researcher(pk):
     update_researcher_task(r, 'orcid')
 
     try:
-        orcid_paper_source.link_existing_papers()
+        orcid_paper_source.link_existing_papers(r)
         orcid_paper_source.fetch_and_save(r)
         update_researcher_task(r, None)
 
