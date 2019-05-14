@@ -28,7 +28,9 @@ from django.contrib import admin
 
 class DepositRecordAdmin(admin.ModelAdmin):
     list_display = ('identifier', 'paper', 'user')
+    list_filter = ['repository']
     raw_id_fields = ('paper', 'user', 'oairecord')
+    search_fields = ('paper__pk', 'paper__title')
 
 class RepositoryAdmin(admin.ModelAdmin):
     form = RepositoryAdminForm
