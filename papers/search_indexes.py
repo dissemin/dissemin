@@ -63,7 +63,7 @@ class PaperIndex(indexes.SearchIndex, indexes.Indexable):
         return obj.researcher_ids
 
     def prepare_orcids(self, obj):
-        return [orcid for orcid in obj.orcids if orcid]
+        return [orcid for orcid in obj.orcids() if orcid]
 
     def prepare_institutions(self, obj):
         return [x for x in [r.institution_id

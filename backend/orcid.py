@@ -26,6 +26,7 @@ import os
 import os.path as path
 import json
 import logging
+import django
 from backend.crossref import convert_to_name_pair
 from backend.crossref import CrossRefAPI
 from backend.crossref import fetch_dois
@@ -155,15 +156,28 @@ class OrcidPaperSource(PaperSource):
         but which are not linked to the researcher itself, and updates them
         to link to the researcher.
         """
-        queryset = SearchQuerySet().models(Paper).filter(orcids=researcher.orcid)
-        for paper in queryset:
+        queryset = SearchQuerySet().models(Paper).filter(orcids=researcher.orcid).load_all()
+        papers_to_update = []
+        for search_result in queryset:
+            paper = search_result.object
             if researcher.id not in paper.researcher_ids:
                 new_authors = paper.authors
                 for author in new_authors:
                     if author.orcid == researcher.orcid:
                         author.researcher_id = researcher.id
-                paper.update_authors(new_authors)
-                
+                paper.authors_list = [author.serialize() for author in new_authors]
+                papers_to_update.append(paper)
+                paper.update_index()
+        
+        if papers_to_update:
+            if django.VERSION[0] > 2 or (django.VERSION[0] == 2 and django.VERSION[1] >= 2):
+                # In Django 2.2 we can update things efficiently:
+                Paper.objects.bulk_update(papers_to_update, ['authors_list'])
+            else:
+                # Otherwise just do one query per paper
+                for paper in papers_to_update:
+                    paper.save(update_fields=['authors_list'])
+
 
     def fetch_orcid_records(self, orcid_identifier, profile=None, use_doi=True):
         """

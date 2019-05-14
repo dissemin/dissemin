@@ -71,19 +71,17 @@ def init_profile_from_orcid(pk):
 @shared_task(name='fetch_everything_for_researcher')
 @run_only_once('researcher', keys=['pk'], timeout=60*60)
 def fetch_everything_for_researcher(pk):
-    sources = [
-        ('orcid', OrcidPaperSource(max_results=1000)),
-       ]
+    orcid_paper_source = OrcidPaperSource(max_results=1000)
     r = Researcher.objects.get(pk=pk)
 
     # If it is the first time we fetch this researcher
     # if r.stats is None:
     # make sure publications already known are also considered
-    update_researcher_task(r, 'clustering')
+    update_researcher_task(r, 'orcid')
+
     try:
-        for key, source in sources:
-            update_researcher_task(r, key)
-            source.fetch_and_save(r)
+        orcid_paper_source.link_existing_papers()
+        orcid_paper_source.fetch_and_save(r)
         update_researcher_task(r, None)
 
     except MetadataSourceException as e:
