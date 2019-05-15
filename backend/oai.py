@@ -234,7 +234,7 @@ class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSo
                 ids_to_update = {
                     pk
                     for pk, last_updated_in_base in oai_ids_to_last_updated.items()
-                    if pk not in last_modified_in_db or last_modified_in_db[id].date() <= last_updated_in_base.date()
+                    if pk not in last_modified_in_db or last_modified_in_db[pk].date() <= last_updated_in_base.date()
                 }
 
                 bare_papers = [self.translate_record(record[0], record[1]._map, metadata_format)
