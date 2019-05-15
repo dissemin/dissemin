@@ -4,7 +4,7 @@ PyPDF2
 bibtexparser>=1.1.0
 redis<3
 cryptography
-django>=1.11.20,<2.3.0
+django>=2.2.0,<2.3.0
 django-allauth
 -e git+https://github.com/dissemin/django-autocomplete-light.git@78b587a481ff29bc62145fe04af7e0608b026675#egg=django-autocomplete-light
 django-bootstrap-pagination

@@ -26,7 +26,6 @@ import os
 import os.path as path
 import json
 import logging
-import django
 from backend.crossref import convert_to_name_pair
 from backend.crossref import CrossRefAPI
 from backend.crossref import fetch_dois
@@ -51,7 +50,7 @@ logger = logging.getLogger('dissemin.' + __name__)
 ### Paper fetching ####
 
 class OrcidPaperSource(PaperSource):
-    
+
     def __init__(self, *args, **kwargs):
         super(OrcidPaperSource, self).__init__(*args, **kwargs)
         self.oai_source = OaiSource.objects.get(identifier='orcid')
@@ -105,7 +104,7 @@ class OrcidPaperSource(PaperSource):
                     yield False, metadata
             except ValueError:
                 logger.exception("Saving CrossRef record from ORCID with id %s failed" % orcid_id)
-    
+
     def _oai_id_for_doi(self, orcid_id, doi):
         return 'orcid:{}:{}'.format(orcid_id, doi)
 
@@ -149,7 +148,7 @@ class OrcidPaperSource(PaperSource):
                                     notification,
                                     'backend_orcid'
                                     )
-            
+
     def link_existing_papers(self, researcher):
         """
         Search for papers which bear the ORCID id of the researcher,
@@ -168,15 +167,9 @@ class OrcidPaperSource(PaperSource):
                 paper.authors_list = [author.serialize() for author in new_authors]
                 papers_to_update.append(paper)
                 paper.update_index()
-        
+
         if papers_to_update:
-            if django.VERSION[0] > 2 or (django.VERSION[0] == 2 and django.VERSION[1] >= 2):
-                # In Django 2.2 we can update things efficiently:
-                Paper.objects.bulk_update(papers_to_update, ['authors_list'])
-            else:
-                # Otherwise just do one query per paper
-                for paper in papers_to_update:
-                    paper.save(update_fields=['authors_list'])
+            Paper.objects.bulk_update(papers_to_update, ['authors_list'])
 
 
     def fetch_orcid_records(self, orcid_identifier, profile=None, use_doi=True):
