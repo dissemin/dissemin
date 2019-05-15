@@ -223,16 +223,19 @@ class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSo
                 }
 
                 # Fetch the last modified date of all these records in the DB
-                last_modified_in_db = { id : last_modified
-                    for id, last_modified in
-                    OaiRecord.objects.filter(identifier__in=oai_ids_to_last_updated.keys()).values_list('identifier', 'last_update')
+                last_modified_in_db = {
+                    pk : last_modified
+                    for pk, last_modified in OaiRecord.objects.filter(
+                        identifier__in=oai_ids_to_last_updated.keys()
+                    ).values_list('identifier', 'last_update')
                 }
 
                 # Deduce the list of papers to update
-                ids_to_update = set()
-                for id, last_updated_in_base in oai_ids_to_last_updated.items():
-                    if id not in last_modified_in_db or last_modified_in_db[id].date() <= last_updated_in_base.date():
-                        ids_to_update.add(id)
+                ids_to_update = {
+                    pk
+                    for pk, last_updated_in_base in oai_ids_to_last_updated.items()
+                    if pk not in last_modified_in_db or last_modified_in_db[id].date() <= last_updated_in_base.date()
+                }
 
                 bare_papers = [self.translate_record(record[0], record[1]._map, metadata_format)
                                for record in record_group
@@ -245,6 +248,6 @@ class OaiPaperSource(PaperSource):  # TODO: this should not inherit from PaperSo
                                 saved = Paper.from_bare(paper)
                             return saved
                         except ValueError:
-                            logger.exception("Ignoring invalid paper with identifier " + paper.oairecords[0].identifier)
+                            logger.exception("Ignoring invalid paper with identifier ", paper.oairecords[0].identifier)
 
 
