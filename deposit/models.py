@@ -47,6 +47,26 @@ DEPOSIT_STATUS_CHOICES = [
    ('deleted', _('Deleted')), # deleted by the repository
    ]
 
+class License(models.Model):
+    """
+    A model to store licenses. Each repository chooses licenses from this model.
+    """
+    #: Full name of the license as displayed to the user
+    name = models.CharField(max_length=255, blank=False)
+    #: Abbreviation of the license. Usually used for transmission in depositing process
+    identifier = models.CharField(max_length=50, blank=False)
+    #: URI of the license. If no URI is provided, you can use https://dissem.in/deposit/license/ as namespace. Usually used for transmission in depositing process
+    uri = models.URLField(max_length=255)
+
+    def __str__(self):
+        """
+        String representation of license object
+        """
+
+        return "%s (%s)" % (self.name, self.identifier)
+
+
+
 class RepositoryManager(CachingManager):
     pass
 
@@ -94,6 +114,8 @@ class Repository(models.Model, CachingMixin):
 
     #: Setting this to false forbids any deposit in this repository
     enabled = models.BooleanField(default=True)
+    #: Set of licenses the repository supports
+    licenses = models.ManyToManyField(License, through='DefaultLicense')
 
     def get_implementation(self):
         """
@@ -133,6 +155,17 @@ class Repository(models.Model, CachingMixin):
 
     class Meta:
         verbose_name_plural = 'Repositories'
+
+class DefaultLicense(models.Model):
+    """
+    Intermediate model to connect License and Repository Model
+    """
+    #: True if default license for this repository
+    default = models.BooleanField(default=False)
+    #: FK to license
+    license = models.ForeignKey(License, on_delete=models.CASCADE)
+    #: FK to repository
+    repository = models.ForeignKey(Repository, on_delete=models.CASCADE)
 
 
 class DepositRecord(models.Model):

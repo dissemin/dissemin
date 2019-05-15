@@ -20,11 +20,16 @@
 
 
 
+from deposit.models import DefaultLicense
 from deposit.models import DepositRecord
+from deposit.models import License
 from deposit.models import Repository
 from deposit.forms import RepositoryAdminForm
 from django.contrib import admin
 
+class DefaultLicenseInline(admin.TabularInline):
+    model = DefaultLicense
+    extra = 1
 
 class DepositRecordAdmin(admin.ModelAdmin):
     list_display = ('identifier', 'paper', 'user')
@@ -33,8 +38,14 @@ class DepositRecordAdmin(admin.ModelAdmin):
     readonly_fields = ('date', )
     search_fields = ('paper__pk', 'paper__title')
 
+class LicenseAdmin(admin.ModelAdmin):
+    list_display = ('name', 'identifier')
+    search_fields = ('name', 'identifier')
+
 class RepositoryAdmin(admin.ModelAdmin):
     form = RepositoryAdminForm
+    inlines = (DefaultLicenseInline, )
 
 admin.site.register(DepositRecord, DepositRecordAdmin)
 admin.site.register(Repository, RepositoryAdmin)
+admin.site.register(License, LicenseAdmin)
