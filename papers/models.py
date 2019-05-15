@@ -1153,6 +1153,8 @@ class Paper(models.Model, BarePaper):
                 author.affiliation = new_authors[new_idx].affiliation
             if new_idx is not None and new_authors[new_idx].orcid:
                 author.orcid = new_authors[new_idx].orcid
+            if new_idx is not None and new_authors[new_idx].researcher_id:
+                author.researcher_id = new_authors[new_idx].researcher_id
 
             unified_authors.append(author.serialize())
         self.authors_list = unified_authors

@@ -39,16 +39,18 @@ from papers.baremodels import BarePaper
 from papers.errors import MetadataSourceException
 from papers.models import OaiSource
 from papers.models import Researcher
+from papers.models import Paper
 from papers.orcid import OrcidProfile
 from papers.orcid import affiliate_author_with_orcid
 from papers.utils import validate_orcid
+from search import SearchQuerySet
 
 logger = logging.getLogger('dissemin.' + __name__)
 
 ### Paper fetching ####
 
 class OrcidPaperSource(PaperSource):
-    
+
     def __init__(self, *args, **kwargs):
         super(OrcidPaperSource, self).__init__(*args, **kwargs)
         self.oai_source = OaiSource.objects.get(identifier='orcid')
@@ -102,7 +104,7 @@ class OrcidPaperSource(PaperSource):
                     yield False, metadata
             except ValueError:
                 logger.exception("Saving CrossRef record from ORCID with id %s failed" % orcid_id)
-    
+
     def _oai_id_for_doi(self, orcid_id, doi):
         return 'orcid:{}:{}'.format(orcid_id, doi)
 
@@ -146,6 +148,29 @@ class OrcidPaperSource(PaperSource):
                                     notification,
                                     'backend_orcid'
                                     )
+
+    def link_existing_papers(self, researcher):
+        """
+        Search for papers which bear the ORCID id of the researcher,
+        but which are not linked to the researcher itself, and updates them
+        to link to the researcher.
+        """
+        queryset = SearchQuerySet().models(Paper).filter(orcids=researcher.orcid).load_all()
+        papers_to_update = []
+        for search_result in queryset:
+            paper = search_result.object
+            if researcher.id not in paper.researcher_ids:
+                new_authors = paper.authors
+                for author in new_authors:
+                    if author.orcid == researcher.orcid:
+                        author.researcher_id = researcher.id
+                paper.authors_list = [author.serialize() for author in new_authors]
+                papers_to_update.append(paper)
+                paper.update_index()
+
+        if papers_to_update:
+            Paper.objects.bulk_update(papers_to_update, ['authors_list'])
+
 
     def fetch_orcid_records(self, orcid_identifier, profile=None, use_doi=True):
         """
@@ -247,7 +272,7 @@ class OrcidPaperSource(PaperSource):
 
     def bulk_import(self, directory, fetch_papers=True, use_doi=False):
         """
-        Bulk-imports ORCID profiles from a dmup
+        Bulk-imports ORCID profiles from a dump
         (warning: this still uses our DOI cache).
         The directory should contain json versions
         of orcid profiles, as in the official ORCID
