@@ -29,6 +29,7 @@ to the metadata sources.
    development
    testing
    docs
+   administrating_tips
 
 
 Indices and tables
