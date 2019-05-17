@@ -1,6 +1,5 @@
 import pytest
 
-from deposit.models import DefaultLicense
 from deposit.models import License
 from deposit.models import Repository
 
@@ -11,13 +10,13 @@ class TestLicense():
 
     def test_str(self, db):
         """
-        Output of __str__ should be name (identifier)
+        Output of __str__ should be its name
         """
         name = "Test License"
-        identifier = 'tl'
         uri = "https:/dissem.in/deposit/license/test/"
-        license = License.objects.create(name=name, identifier=identifier, uri=uri)
-        assert license.__str__() == name + " (" + identifier + ")"
+        license = License.objects.create(name, uri=uri)
+        assert license.__str__() == name 
+
 
 class TestDefaultLicense():
     """
