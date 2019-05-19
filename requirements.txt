@@ -14,6 +14,7 @@ django-capture-tag
 django-cas-ng
 django-countries
 django-crispy-forms
+django-extensions
 django-geojson
 django-haystack
 django-js-reverse
