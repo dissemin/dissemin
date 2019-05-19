@@ -1,11 +1,13 @@
 .. _page-datamodel:
 
-The data model in Dissemin
-==========================
+Data model
+==========
 
 This section explains how metadata is represented in Dissemin. There are two
 important models: ``OaiRecord`` and ``Paper`` (both defined in
 ``papers/models.py``).
+
+.. image:: oairecord_paper.png
 
 The ``OaiRecord`` model represents an occurence of a paper in some external
 repository (from the publisher or from an open repository). Each ``OaiRecord``

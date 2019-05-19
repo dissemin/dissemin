@@ -24,3 +24,19 @@ Then, compile these RST sources to HTML::
 
 The HTML output is then available in ``doc/sphinx/_build/html/``.
 
+Generating model diagrams
+-------------------------
+
+The UML diagrams for the models are generated using the ``django-extensions`` library.
+When making changes to the models, these diagrams should be updated. They are 
+generated as follows::
+
+    ./manage.py graph_models papers | dot -Tpng -o papers_models.png
+
+It is possible to generate a single graph for multiple apps, using::
+
+    ./manage.py graph_models papers publishers deposit | dot -Tpng many_models.png
+
+
+This relies on the ``graphviz`` package to render the graphs to PNG (``apt-get install graphviz``).
+More documentation about this feature can be found at https://django-extensions.readthedocs.io/en/latest/graph_models.html.
