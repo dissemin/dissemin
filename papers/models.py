@@ -645,7 +645,6 @@ MAX_OAIRECORDS_PER_PAPER = 100
 class Paper(models.Model, BarePaper):
     title = models.CharField(max_length=1024)
     fingerprint = models.CharField(max_length=64, unique=True)
-    date_last_ask = models.DateField(null=True)  # TODO remove (unused)
 
     #: Approximate publication date.
     #: For instance if we only know it is in 2014 we'll put 2014-01-01
@@ -656,7 +655,6 @@ class Paper(models.Model, BarePaper):
 
     last_modified = models.DateTimeField(auto_now=True, db_index=True)
     visible = models.BooleanField(default=True)
-    last_annotation = models.CharField(max_length=32, null=True, blank=True)
 
     doctype = models.CharField(
         max_length=64, null=True, blank=True, choices=PAPER_TYPE_CHOICES)
@@ -1155,6 +1153,8 @@ class Paper(models.Model, BarePaper):
                 author.affiliation = new_authors[new_idx].affiliation
             if new_idx is not None and new_authors[new_idx].orcid:
                 author.orcid = new_authors[new_idx].orcid
+            if new_idx is not None and new_authors[new_idx].researcher_id:
+                author.researcher_id = new_authors[new_idx].researcher_id
 
             unified_authors.append(author.serialize())
         self.authors_list = unified_authors

@@ -13,12 +13,12 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-03 13:40+0200\n"
-"PO-Revision-Date: 2019-05-06 14:37:43+0000\n"
+"PO-Revision-Date: 2019-05-20 11:42:33+0000\n"
 "Language: mk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-POT-Import-Date: 2019-05-05 17:44:21+0000\n"
-"X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
+"X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n == 1 || n%10 == 1) ? 0 : 1;\n"
 
 #: deposit/forms.py:41
@@ -474,19 +474,16 @@ msgid "Sorry, we could not fill this for you."
 msgstr ""
 
 #: deposit/templates/deposit/start.html:74
-#, fuzzy
 msgid "Current institutions"
-msgstr "Установи"
+msgstr "Тековни установи"
 
 #: deposit/templates/deposit/start.html:75
-#, fuzzy
 msgid "Unverified institutions"
-msgstr "Установи"
+msgstr "Непроверени установи"
 
 #: deposit/templates/deposit/start.html:76
-#, fuzzy
 msgid "Obsolete institutions"
-msgstr "Установи"
+msgstr "Застарени установи"
 
 #: deposit/templates/deposit/start.html:310
 msgid "Dissemin encountered an error, please try again later."
@@ -820,15 +817,13 @@ msgstr ""
 
 #: papers/templates/papers/advanced_search.html:27
 #: papers/templates/papers/search.html:277
-#, fuzzy
 msgid "By title"
-msgstr "наслов"
+msgstr "По наслов"
 
 #: papers/templates/papers/advanced_search.html:34
 #: papers/templates/papers/search.html:290
-#, fuzzy
 msgid "By co-authors"
-msgstr "По автори"
+msgstr "По соавтори"
 
 #: papers/templates/papers/advanced_search.html:36
 #: papers/templates/papers/search.html:292
@@ -961,9 +956,8 @@ msgid "Home"
 msgstr "Почетна"
 
 #: papers/templates/papers/index.html:21
-#, fuzzy
 msgid "Welcome to Dissemin"
-msgstr "Добре дојдовте на dissemin"
+msgstr "Добре дојдовте на Dissemin"
 
 #: papers/templates/papers/index.html:24 templates/dissemin/skeleton.html:10
 #: templates/dissemin/skeleton.html:15
@@ -2093,9 +2087,8 @@ msgid "Toggle navigation"
 msgstr "Префрли по содржините"
 
 #: templates/dissemin/skeleton.html:33
-#, fuzzy
 msgid "Logo"
-msgstr "Одјава"
+msgstr "Лого"
 
 #: templates/dissemin/skeleton.html:41
 msgid "My profile"

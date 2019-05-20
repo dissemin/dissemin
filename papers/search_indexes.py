@@ -23,6 +23,9 @@ class PaperIndex(indexes.SearchIndex, indexes.Indexable):
     #: IDs of researchers
     researchers = IntegerMultiValueField()
 
+    #: ORCIDs of researchers
+    orcids = indexes.MultiValueField()
+
     #: IDs of institutions of researchers
     institutions = IntegerMultiValueField()
 
@@ -58,6 +61,9 @@ class PaperIndex(indexes.SearchIndex, indexes.Indexable):
 
     def prepare_researchers(self, obj):
         return obj.researcher_ids
+
+    def prepare_orcids(self, obj):
+        return [orcid for orcid in obj.orcids() if orcid]
 
     def prepare_institutions(self, obj):
         return [x for x in [r.institution_id

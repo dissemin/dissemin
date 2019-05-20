@@ -120,5 +120,32 @@ class OrcidIntegrationTest(PaperSourceTest):
         p1 = Paper.objects.get(title='A Fuzzy Take on Graded Beliefs')
         p2 = Paper.objects.get(title='Information quality and uncertainty')
         self.assertTrue(p1 != p2)
+        
+    def test_link_existing_papers(self):
+        # Fetch papers from a researcher
+        profile_pablo = OrcidProfileStub('0000-0002-6293-3231', instance='orcid.org')
+        pablo = Researcher.get_or_create_by_orcid('0000-0002-6293-3231',
+                profile=profile_pablo)
+        self.source.fetch_and_save(pablo, profile=profile_pablo)
+        papers = list(pablo.papers)
+        nb_papers = len(papers)
+        self.assertEqual(nb_papers, 9)
+        
+        # Remove the researcher_ids from the papers
+        for paper in papers:
+            for author in paper.authors_list:
+                if author.get('researcher_id') == pablo.id:
+                    del author['researcher_id']
+            paper.save()
+        
+        # Now the profile has no papers anymore    
+        self.assertEqual(pablo.papers.count(), 0)
+        
+        # Let's fix that!
+        self.source.link_existing_papers(pablo)
+        
+        # Now it's fine!!
+        self.assertEqual(Researcher.objects.get(id=pablo.id).papers.count(), 9)
+                
 
 

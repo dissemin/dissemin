@@ -106,7 +106,7 @@ class Publisher(models.Model):
     romeo_id = models.CharField(max_length=64, db_index=True)
 
     romeo_parent_id = models.CharField(max_length=64, null=True, blank=True)
-    name = models.CharField(max_length=256, db_index=True)
+    name = models.CharField(max_length=256)
     alias = models.CharField(max_length=256, null=True, blank=True)
     url = models.URLField(null=True, blank=True)
     preprint = models.CharField(
@@ -280,7 +280,7 @@ class Journal(models.Model):
     """
     A journal as represented by SERPA/RoMEO
     """
-    title = models.CharField(max_length=256, db_index=True)
+    title = models.CharField(max_length=256)
     last_updated = models.DateTimeField(auto_now=True)
     issn = models.CharField(max_length=10, blank=True, null=True, unique=True)
     essn = models.CharField(max_length=10, blank=True, null=True, unique=True)

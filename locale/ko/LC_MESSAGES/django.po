@@ -12,12 +12,12 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-03 13:40+0200\n"
-"PO-Revision-Date: 2019-05-09 14:55:28+0000\n"
+"PO-Revision-Date: 2019-05-17 10:13:35+0000\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-POT-Import-Date: 2019-05-05 17:44:21+0000\n"
-"X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-01-17\n"
+"X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: deposit/forms.py:41
@@ -472,19 +472,16 @@ msgid "Sorry, we could not fill this for you."
 msgstr ""
 
 #: deposit/templates/deposit/start.html:74
-#, fuzzy
 msgid "Current institutions"
-msgstr "기관"
+msgstr "현재 기관"
 
 #: deposit/templates/deposit/start.html:75
-#, fuzzy
 msgid "Unverified institutions"
-msgstr "기관"
+msgstr "검증되지 않은 기관"
 
 #: deposit/templates/deposit/start.html:76
-#, fuzzy
 msgid "Obsolete institutions"
-msgstr "기관"
+msgstr "폐지된 기관"
 
 #: deposit/templates/deposit/start.html:310
 msgid "Dissemin encountered an error, please try again later."
@@ -743,11 +740,11 @@ msgstr "연구원"
 
 #: papers/forms.py:77
 msgid "newest first"
-msgstr ""
+msgstr "최신 항목 먼저"
 
 #: papers/forms.py:78
 msgid "oldest first"
-msgstr ""
+msgstr "과거 항목 먼저"
 
 #: papers/forms.py:112 papers/forms.py:119
 msgid "Any"
@@ -818,15 +815,13 @@ msgstr "고급 검색"
 
 #: papers/templates/papers/advanced_search.html:27
 #: papers/templates/papers/search.html:277
-#, fuzzy
 msgid "By title"
-msgstr "제목"
+msgstr "제목별"
 
 #: papers/templates/papers/advanced_search.html:34
 #: papers/templates/papers/search.html:290
-#, fuzzy
 msgid "By co-authors"
-msgstr "저자별"
+msgstr "공동 저자별"
 
 #: papers/templates/papers/advanced_search.html:36
 #: papers/templates/papers/search.html:292
@@ -958,9 +953,8 @@ msgid "Home"
 msgstr "홈"
 
 #: papers/templates/papers/index.html:21
-#, fuzzy
 msgid "Welcome to Dissemin"
-msgstr "dissemin에 오신 것을 환영합니다"
+msgstr "Dissemin에 오신 것을 환영합니다"
 
 #: papers/templates/papers/index.html:24 templates/dissemin/skeleton.html:10
 #: templates/dissemin/skeleton.html:15
@@ -1202,7 +1196,7 @@ msgstr "정렬 기준"
 
 #: papers/templates/papers/search.html:263
 msgid "Export citations for current page"
-msgstr ""
+msgstr "현재 문서의 인용 내보내기"
 
 #: papers/templates/papers/search.html:266
 msgid "Refine"
@@ -2088,9 +2082,8 @@ msgid "Toggle navigation"
 msgstr "토글 내비게이션"
 
 #: templates/dissemin/skeleton.html:33
-#, fuzzy
 msgid "Logo"
-msgstr "로그아웃"
+msgstr "로고"
 
 #: templates/dissemin/skeleton.html:41
 msgid "My profile"

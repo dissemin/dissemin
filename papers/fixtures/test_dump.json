@@ -843,7 +843,6 @@
     "fields": {
       "title": "From Natural Language to RDF Graphs with Pregroups",
       "fingerprint": "cd22776e1456fad0589c67d1ff89ca4d",
-      "date_last_ask": null,
       "pubdate": "2014-01-01",
       "authors_list": [
         {
@@ -869,7 +868,6 @@
       ],
       "last_modified": "2016-07-23T12:48:03.744Z",
       "visible": true,
-      "last_annotation": null,
       "doctype": "proceedings-article",
       "oa_status": "UNK",
       "pdf_url": null,
@@ -882,7 +880,6 @@
     "fields": {
       "title": "Complexity of Grammar Induction for Quantum Types",
       "fingerprint": "6f6639a30a6130fb8e22d48344d70e17",
-      "date_last_ask": null,
       "pubdate": "2014-12-28",
       "authors_list": [
         {
@@ -898,7 +895,6 @@
       ],
       "last_modified": "2016-07-23T12:48:04.826Z",
       "visible": true,
-      "last_annotation": null,
       "doctype": "journal-article",
       "oa_status": "OA",
       "pdf_url": "http://dx.doi.org/10.4204/eptcs.172.16",
@@ -911,7 +907,6 @@
     "fields": {
       "title": "Finite Open-World Query Answering with Number Restrictions",
       "fingerprint": "a42a3ef7eb61176458fef57f3aca00da",
-      "date_last_ask": null,
       "pubdate": "2015-07-01",
       "authors_list": [
         {
@@ -937,7 +932,6 @@
       ],
       "last_modified": "2016-07-23T12:48:06.612Z",
       "visible": true,
-      "last_annotation": null,
       "doctype": "proceedings-article",
       "oa_status": "OK",
       "pdf_url": null,
@@ -950,7 +944,6 @@
     "fields": {
       "title": "Structurally Tractable Uncertain Data",
       "fingerprint": "8cc4a006d0507c3ca971c351d6b19dd2",
-      "date_last_ask": null,
       "pubdate": "2015-01-01",
       "authors_list": [
         {
@@ -966,7 +959,6 @@
       ],
       "last_modified": "2016-07-23T12:48:07.232Z",
       "visible": true,
-      "last_annotation": null,
       "doctype": "proceedings-article",
       "oa_status": "OK",
       "pdf_url": null,
@@ -979,7 +971,6 @@
     "fields": {
       "title": "Provenance Circuits for Trees and Treelike Instances",
       "fingerprint": "48b592ae13109eeb1568d0b158265f6e",
-      "date_last_ask": null,
       "pubdate": "2015-01-01",
       "authors_list": [
         {
@@ -1015,7 +1006,6 @@
       ],
       "last_modified": "2016-07-23T12:48:07.623Z",
       "visible": true,
-      "last_annotation": null,
       "doctype": "book-chapter",
       "oa_status": "OK",
       "pdf_url": null,
@@ -1028,7 +1018,6 @@
     "fields": {
       "title": "Uncertainty in Crowd Data Sourcing Under Structural Constraints",
       "fingerprint": "038278ec0990a1ccc3928cd61b90dcc8",
-      "date_last_ask": null,
       "pubdate": "2014-01-01",
       "authors_list": [
         {
@@ -1064,7 +1053,6 @@
       ],
       "last_modified": "2016-07-23T12:48:07.983Z",
       "visible": true,
-      "last_annotation": null,
       "doctype": "book-chapter",
       "oa_status": "OK",
       "pdf_url": null,
@@ -1077,7 +1065,6 @@
     "fields": {
       "title": "Recent Topics of Research around the YAGO Knowledge Base",
       "fingerprint": "f018f8aa87b090095d804b4df12e5e2e",
-      "date_last_ask": null,
       "pubdate": "2014-01-01",
       "authors_list": [
         {
@@ -1123,7 +1110,6 @@
       ],
       "last_modified": "2016-07-23T12:48:08.315Z",
       "visible": true,
-      "last_annotation": null,
       "doctype": "book-chapter",
       "oa_status": "OK",
       "pdf_url": null,
@@ -1136,7 +1122,6 @@
     "fields": {
       "title": "Get a Sample for a Discount",
       "fingerprint": "0fcfa6d6cebb137cb06a024f634d567a",
-      "date_last_ask": null,
       "pubdate": "2014-01-01",
       "authors_list": [
         {
@@ -1182,7 +1167,6 @@
       ],
       "last_modified": "2016-07-23T12:48:08.669Z",
       "visible": true,
-      "last_annotation": null,
       "doctype": "book-chapter",
       "oa_status": "OK",
       "pdf_url": null,
@@ -1195,7 +1179,6 @@
     "fields": {
       "title": "On the Connections between Relational and XML Probabilistic Data Models",
       "fingerprint": "b53e209057b744561a7912a9b62d76d5",
-      "date_last_ask": null,
       "pubdate": "2013-01-01",
       "authors_list": [
         {
@@ -1221,7 +1204,6 @@
       ],
       "last_modified": "2016-07-23T12:48:09.019Z",
       "visible": true,
-      "last_annotation": null,
       "doctype": "book-chapter",
       "oa_status": "OK",
       "pdf_url": null,
@@ -1234,7 +1216,6 @@
     "fields": {
       "title": "From Rational Number Reconstruction to Set Reconciliation and File Synchronization",
       "fingerprint": "2ec7548775c8aeca3f70a80585ff6ad2",
-      "date_last_ask": null,
       "pubdate": "2013-01-01",
       "authors_list": [
         {
@@ -1300,7 +1281,6 @@
       ],
       "last_modified": "2016-07-23T12:48:09.398Z",
       "visible": true,
-      "last_annotation": null,
       "doctype": "book-chapter",
       "oa_status": "OK",
       "pdf_url": null,
@@ -1313,7 +1293,6 @@
     "fields": {
       "title": "Can Code Polymorphism Limit Information Leakage?",
       "fingerprint": "835417174a9b45def5608bfcc274b910",
-      "date_last_ask": null,
       "pubdate": "2011-01-01",
       "authors_list": [
         {
@@ -1379,7 +1358,6 @@
       ],
       "last_modified": "2016-07-23T12:48:09.779Z",
       "visible": true,
-      "last_annotation": null,
       "doctype": "book-chapter",
       "oa_status": "OK",
       "pdf_url": null,
@@ -1392,7 +1370,6 @@
     "fields": {
       "title": "Can a Program Reverse-Engineer Itself?",
       "fingerprint": "c6a320f69830d25d191ca496e7e727d8",
-      "date_last_ask": null,
       "pubdate": "2011-01-01",
       "authors_list": [
         {
@@ -1438,7 +1415,6 @@
       ],
       "last_modified": "2016-07-23T12:48:10.160Z",
       "visible": true,
-      "last_annotation": null,
       "doctype": "book-chapter",
       "oa_status": "OK",
       "pdf_url": null,
@@ -1451,7 +1427,6 @@
     "fields": {
       "title": "IBEX: Harvesting Entities from the Web Using Unique Identifiers",
       "fingerprint": "33f911f6ef7e69c44e522807b1f89452",
-      "date_last_ask": null,
       "pubdate": "2010-01-01",
       "authors_list": [
         {
@@ -1497,7 +1472,6 @@
       ],
       "last_modified": "2016-07-23T12:48:10.694Z",
       "visible": true,
-      "last_annotation": null,
       "doctype": "proceedings-article",
       "oa_status": "OK",
       "pdf_url": null,
