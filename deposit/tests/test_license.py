@@ -1,5 +1,3 @@
-import pytest
-
 from deposit.models import License
 from deposit.models import Repository
 
