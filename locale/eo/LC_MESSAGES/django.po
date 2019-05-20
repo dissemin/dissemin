@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 ""
-"PO-Revision-Date: 2019-05-17 10:13:34+0000\n"
+"PO-Revision-Date: 2019-05-20 11:42:31+0000\n"
 "X-POT-Import-Date: 2019-05-05 17:44:21+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -31,11 +31,11 @@ msgstr ""
 
 #: deposit/forms.py:105 papers/templates/papers/paper.html:145
 msgid "Abstract"
-msgstr ""
+msgstr "Resumo"
 
 #: deposit/forms.py:118
 msgid "No preferred repository"
-msgstr ""
+msgstr "Neniu preferata deponejo"
 
 #: deposit/forms.py:139 deposit/hal/forms.py:77 deposit/osf/forms.py:143
 msgid "Save"
@@ -232,19 +232,19 @@ msgstr ""
 
 #: deposit/hal/protocol.py:225
 msgid "HAL returned an invalid XML response"
-msgstr ""
+msgstr "HAL liveris ne validan XML-respondon"
 
 #: deposit/hal/protocol.py:237
 msgid "This paper already exists in HAL."
-msgstr ""
+msgstr "Ĉi tiu artikolo jam ekzistas en HAL."
 
 #: deposit/hal/protocol.py:243
 msgid "HAL rejected the submission."
-msgstr ""
+msgstr "HAL malakceptis la senditon."
 
 #: deposit/hal/protocol.py:253
 msgid "HAL rejected the submission"
-msgstr ""
+msgstr "HAL malakceptis la senditon"
 
 #: deposit/hal/protocol.py:262
 msgid "Password"
@@ -252,7 +252,7 @@ msgstr "Pasvorto"
 
 #: deposit/hal/protocol.py:290
 msgid "Connection to HAL failed. Please try again later."
-msgstr ""
+msgstr "Ne povis konekti al HAL. Bonvoli poste reprovi."
 
 #: deposit/models.py:41
 msgid "Failed"
@@ -293,11 +293,11 @@ msgstr ""
 
 #: deposit/osf/forms.py:35 deposit/osf/forms.py:46
 msgid "Creative Commons CC0 1.0 Universal"
-msgstr ""
+msgstr "Permesilo CC0 1.0 Universala de Krea Komunaĵo"
 
 #: deposit/osf/forms.py:37 deposit/osf/forms.py:48
 msgid "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
-msgstr ""
+msgstr "Permesilo Atribuite 4.0 Internacia de Krea Komunaĵo (CC BY 4.0)"
 
 #: deposit/osf/forms.py:40 deposit/osf/forms.py:51
 msgid "No license"
@@ -309,7 +309,7 @@ msgstr "Arkitekturo"
 
 #: deposit/osf/forms.py:59 deposit/osf/forms.py:82
 msgid "Arts and Humanities"
-msgstr ""
+msgstr "Artoj kaj Humanaĵoj"
 
 #: deposit/osf/forms.py:61 deposit/osf/forms.py:84
 msgid "Business"
@@ -411,7 +411,7 @@ msgstr "Miaj deponitoj"
 
 #: deposit/templates/deposit/deposits.html:36
 msgid "Paper"
-msgstr ""
+msgstr "Artikolo"
 
 #: deposit/templates/deposit/deposits.html:44
 msgid "Deposit date"
@@ -470,15 +470,15 @@ msgstr ""
 
 #: deposit/templates/deposit/start.html:74
 msgid "Current institutions"
-msgstr ""
+msgstr "Aktualaj institucioj"
 
 #: deposit/templates/deposit/start.html:75
 msgid "Unverified institutions"
-msgstr ""
+msgstr "Ne konfirmitaj institucioj"
 
 #: deposit/templates/deposit/start.html:76
 msgid "Obsolete institutions"
-msgstr ""
+msgstr "Eksvalidiĝintaj institucioj"
 
 #: deposit/templates/deposit/start.html:310
 msgid "Dissemin encountered an error, please try again later."
@@ -503,7 +503,7 @@ msgstr "Dokumento"
 
 #: deposit/templates/deposit/start.html:433
 msgid "Options"
-msgstr ""
+msgstr "Opcioj"
 
 #: deposit/templates/deposit/start.html:438
 msgid "Upload type:"
@@ -584,7 +584,7 @@ msgstr ""
 
 #: deposit/zenodo/protocol.py:118
 msgid "No Zenodo API key provided."
-msgstr ""
+msgstr "API-ŝlosilo por Zenodo ne proviziĝis."
 
 #: deposit/zenodo/protocol.py:128
 msgid "This happens when Zenodo has hiccups. Please try again in a few minutes or use a different repository in the menu above."
@@ -668,11 +668,11 @@ msgstr "sveda"
 
 #: notification/models.py:62
 msgid "inboxes"
-msgstr ""
+msgstr "enirkestoj"
 
 #: papers/baremodels.py:58
 msgid "Journal article"
-msgstr ""
+msgstr "Revua artikolo"
 
 #: papers/baremodels.py:59
 msgid "Proceedings article"
@@ -688,7 +688,7 @@ msgstr "Libro"
 
 #: papers/baremodels.py:62
 msgid "Journal issue"
-msgstr ""
+msgstr "Numero de revuo"
 
 #: papers/baremodels.py:63
 msgid "Proceedings"
@@ -708,7 +708,7 @@ msgstr "Raporto"
 
 #: papers/baremodels.py:67
 msgid "Thesis"
-msgstr ""
+msgstr "Tezo"
 
 #: papers/baremodels.py:68
 msgid "Dataset"
@@ -802,23 +802,23 @@ msgstr "Ĝisdatiganta statistikojn"
 #: papers/models.py:1233 papers/views.py:140 papers/views.py:145
 #: papers/views.py:316 papers/views.py:350
 msgid "Papers"
-msgstr ""
+msgstr "Artikoloj"
 
 #: papers/templates/papers/advanced_search.html:10
 #: papers/templates/papers/advanced_search.html:24
 #: papers/templates/papers/index.html:41
 msgid "Advanced search"
-msgstr ""
+msgstr "Altnivela serĉado"
 
 #: papers/templates/papers/advanced_search.html:27
 #: papers/templates/papers/search.html:277
 msgid "By title"
-msgstr ""
+msgstr "Laŭ titolo"
 
 #: papers/templates/papers/advanced_search.html:34
 #: papers/templates/papers/search.html:290
 msgid "By co-authors"
-msgstr ""
+msgstr "Laŭ kunaŭtoroj"
 
 #: papers/templates/papers/advanced_search.html:36
 #: papers/templates/papers/search.html:292
@@ -890,17 +890,17 @@ msgstr ""
 
 #: papers/templates/papers/authorList.html:17
 msgid "This contributorship is confirmed by ORCID."
-msgstr ""
+msgstr "ORCID konfirmas ĉi tiun kontribuintecon."
 
 #: papers/templates/papers/department.html:34
 #: papers/templates/papers/institution.html:37
 #: publishers/templates/publishers/list.html:113
 #: publishers/templates/publishers/policy.html:132
-#, invalid-plural, python-format
+#, python-format
 msgid "(%(num_total)s paper)"
 msgid_plural "(%(num_total)s papers)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "(%(num_total)s artikolo)"
+msgstr[1] "(%(num_total)s artikoloj)"
 
 #: papers/templates/papers/department.html:45
 #: papers/templates/papers/institution.html:48
@@ -914,21 +914,21 @@ msgstr "Forigi"
 
 #: papers/templates/papers/department.html:62
 msgid "Papers of the members"
-msgstr ""
+msgstr "Artikoloj de la anoj"
 
 #: papers/templates/papers/exportCitationsModal.html:7
 #: papers/templates/papers/exportCitationsModal.html:33
 msgid "Close"
-msgstr ""
+msgstr "Fermi"
 
 #: papers/templates/papers/exportCitationsModal.html:10
 #: papers/templates/papers/paperDetails.html:38
 msgid "Export citation"
-msgstr ""
+msgstr "Elporti citon"
 
 #: papers/templates/papers/exportCitationsModal.html:16
 msgid "Format"
-msgstr ""
+msgstr "Dosieraranĝo"
 
 #: papers/templates/papers/exportCitationsModal.html:22
 #: papers/templates/papers/paper.html:118
@@ -952,7 +952,7 @@ msgstr "Ĉefpaĝo"
 
 #: papers/templates/papers/index.html:21
 msgid "Welcome to Dissemin"
-msgstr ""
+msgstr "Bonvenon al Dissemin"
 
 #: papers/templates/papers/index.html:24 templates/dissemin/skeleton.html:10
 #: templates/dissemin/skeleton.html:15
@@ -973,7 +973,7 @@ msgstr ""
 
 #: papers/templates/papers/index.html:77
 msgid "Open repositories"
-msgstr ""
+msgstr "Malfermitaj deponejoj"
 
 #: papers/templates/papers/index.html:80
 msgid "Uploading your papers on your own webpage is not enough. Such copies are less stable and harder to find than documents uploaded to well-indexed repositories."
@@ -994,7 +994,7 @@ msgstr "Jes"
 
 #: papers/templates/papers/itemResearcher.html:13
 msgid "(empty profile)"
-msgstr ""
+msgstr "(malplena profilo)"
 
 #: papers/templates/papers/paper.html:60
 #, python-format
@@ -1074,7 +1074,7 @@ msgstr ""
 
 #: papers/templates/papers/paperList.html:28
 msgid "No paper found."
-msgstr ""
+msgstr "Neniu artikolo troviĝis."
 
 #: papers/templates/papers/paperList.html:39
 #, python-format
@@ -1154,7 +1154,7 @@ msgstr "Adreso:"
 
 #: papers/templates/papers/search.html:169
 msgid "Journal"
-msgstr ""
+msgstr "Revuo"
 
 #: papers/templates/papers/search.html:172
 msgid "Published by"
@@ -1322,7 +1322,7 @@ msgstr ""
 
 #: papers/views.py:144
 msgid "All papers"
-msgstr ""
+msgstr "Ĉiuj artikoloj"
 
 #: papers/views.py:250
 msgid "Invalid ORCID profile. Please make sure it includes a public name."
@@ -1375,11 +1375,11 @@ msgstr "nomo"
 
 #: publishers/forms.py:14
 msgid "decreasing"
-msgstr ""
+msgstr "malkreskante"
 
 #: publishers/forms.py:15
 msgid "increasing"
-msgstr ""
+msgstr "kreskante"
 
 #: publishers/forms.py:19 publishers/templates/publishers/list.html:52
 msgid "Filter by publisher policy"
@@ -1537,7 +1537,7 @@ msgstr ""
 
 #: publishers/templates/publishers/policy.html:123
 msgid "Journals"
-msgstr ""
+msgstr "Revuoj"
 
 #: publishers/templates/publishers/policy.html:124
 msgid "Only journals with papers written by our users are listed."
@@ -1762,7 +1762,7 @@ msgstr ""
 
 #: templates/dissemin/faq.html:63
 msgid "You should do it because:"
-msgstr ""
+msgstr "Vi tion faru ĉar:"
 
 #: templates/dissemin/faq.html:69
 msgid "It makes your research <strong>more accessible</strong> and <strong>more visible</strong>. Many researchers routinely check papers in topic repositories such as arXiv, and it is less likely that these researchers check your homepage regularly."
@@ -2080,7 +2080,7 @@ msgstr "Baskuligi navigadon"
 
 #: templates/dissemin/skeleton.html:33
 msgid "Logo"
-msgstr ""
+msgstr "Emblemo"
 
 #: templates/dissemin/skeleton.html:41
 msgid "My profile"
@@ -2219,7 +2219,7 @@ msgstr "Ne valida dosieraranĝo: nur PDF-dosieroj estas akceptataj."
 #: upload/forms.py:43
 #, python-format
 msgid "File too large (%(size)s). Maximum size is %(maxsize)s."
-msgstr ""
+msgstr "Dosiero estas tro granda (%(size)s). Maksimuma grando estas %(maxsize)s."
 
 #: upload/forms.py:51
 msgid "URL"
@@ -2227,7 +2227,7 @@ msgstr "Reteja adreso"
 
 #: upload/templates/upload/widget.html:4
 msgid "Select here the full text of your article. PDF files only, maximum size:"
-msgstr ""
+msgstr "Elekti ĉi tie la plenan tekston de via artikolo. Nur PDF-dosieroj, de maksimuma grando:"
 
 #: upload/templates/upload/widget.html:9
 msgid "Select a file:"
