@@ -156,7 +156,6 @@ INSTALLED_APPS = (
     'djgeojson',
     'bootstrap_datepicker_plus',
     'django_select2',
-    'django_extensions',
 )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
