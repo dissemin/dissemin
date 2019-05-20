@@ -101,7 +101,10 @@ class Publisher(models.Model):
     A publisher, as represented by SHERPA/RoMEO.
     See http://www.sherpa.ac.uk/downloads/ for their data model
     """
+    # Romeo ids are char fields as the API sometimes returns "doaj" as publisher for journals imported from there
+    # TODO reassess if this is still needed now that we ingest them from the dumps, where there are no such publishers
     romeo_id = models.CharField(max_length=64, db_index=True)
+
     romeo_parent_id = models.CharField(max_length=64, null=True, blank=True)
     name = models.CharField(max_length=256, db_index=True)
     alias = models.CharField(max_length=256, null=True, blank=True)
@@ -309,7 +312,7 @@ class Journal(models.Model):
             matches = cls.objects.filter(title__iexact=title.lower())
             if matches:
                 return matches[0]
-            
+
     def change_publisher(self, new_publisher):
         """
         Changing the publisher of a Journal is a heavy task:
