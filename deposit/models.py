@@ -167,6 +167,12 @@ class LicenseChooser(models.Model):
     #: True if default license for this repository
     default = models.BooleanField(default=False)
 
+    def __str__(self):
+        """
+        Returns the license name
+        """
+        return self.license.__str__()
+
 
 class DepositRecord(models.Model):
     """

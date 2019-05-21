@@ -25,6 +25,7 @@ import django.test
 import pytest
 import os
 
+from deposit.models import LicenseChooser
 from deposit.protocol import DepositResult
 from deposit.protocol import RepositoryProtocol
 from deposit.registry import protocol_registry
@@ -123,8 +124,11 @@ class ProtocolTest(django.test.TestCase):
         enabled = self.proto.init_deposit(paper, self.user)
         self.assertTrue(enabled)
 
-        args = self.proto.get_form_initial_data()
+        licenses = LicenseChooser.objects.filter(repository=self.repo)
+        args = self.proto.get_form_initial_data(licenses=licenses)
         args.update(form_fields)
+        # The forms needs the pk of LicenceChooser object
+        args['license'] = self.lc.pk
 
         form = self.proto.get_bound_form(args)
         if not form.is_valid():

@@ -40,7 +40,7 @@ class DepositRecordAdmin(admin.ModelAdmin):
 
 class LicenseAdmin(admin.ModelAdmin):
     list_display = ('name', 'uri')
-    search_fields = ('name', 'uri')
+    search_fields = ('name', 'uri', 'licensechooser__transmit_id')
 
 class RepositoryAdmin(admin.ModelAdmin):
     form = RepositoryAdminForm

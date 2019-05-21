@@ -1,5 +1,4 @@
 from deposit.models import License
-from deposit.models import Repository
 
 class TestLicense():
     """
@@ -12,7 +11,7 @@ class TestLicense():
         """
         name = "Test License"
         uri = "https:/dissem.in/deposit/license/test/"
-        license = License.objects.create(name, uri=uri)
+        license = License.objects.create(name=name, uri=uri)
         assert license.__str__() == name 
 
 
