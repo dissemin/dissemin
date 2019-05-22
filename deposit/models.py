@@ -22,6 +22,7 @@
 
 
 import logging
+import vinaigrette
 from caching.base import CachingManager
 from caching.base import CachingMixin
 from deposit.registry import protocol_registry
@@ -62,6 +63,8 @@ class License(models.Model):
         """
 
         return self.name
+
+vinaigrette.register(License, ['name'])
 
 
 

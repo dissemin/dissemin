@@ -26,6 +26,7 @@ django-solo
 django-ratelimit
 django-widget-tweaks
 django-debug-toolbar
+django-vinaigrette
 djangorestframework
 elasticsearch==6.3.1
 httplib2
