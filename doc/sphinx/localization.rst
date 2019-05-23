@@ -21,6 +21,23 @@ This lets us translate strings in various places:
 
   The ``trimmed`` argument is important as it ensures leading and trailing whitespace and newlines are not included in the translation strings (they mess up the translation system).
 
+Localized Models
+~~~~~~~~~~~~~~~~
+
+Currently the following models use translations:
+
+* License (field ``name``) in ``deposit.models``
+
+For localization we use `django-vinaigrette <https://pypi.org/project/django-vinaigrette/>`_. Please read their documentation for further information. In short: You have to keep in mind that:
+
+* in admin interface you do not see the localized strings,
+* you should add only english in the admin interface,
+* you will have to recreate the ``*.po`` files and add the translation manually (see below),
+* your local translations do not interact with TranslateWiki.
+
+Generating PO files
+~~~~~~~~~~~~~~~~~~~
+
 To generate the PO files, run::
 
     python manage.py makemessages --keep-pot --ignore doc
@@ -43,3 +60,4 @@ Available Languages
 -------------------
 
 You can change the set of available languages for your installation in ``dissemin/settings/common.py`` by changing the ``LANGUAGES`` list, e.g. by commenting or uncommenting the corresponding lines.
+
