@@ -241,3 +241,23 @@ class UserPreferences(models.Model):
         userprefs, _ = cls.objects.get_or_create(user=user)
         return userprefs
 
+    def get_last_repository(self):
+        """
+        Use this function to get the last repository of a user. This function silently sets the ``last_repository`` to ``None`` if it is not enabled.
+        """
+        if self.last_repository and not self.last_repository.enabled:
+            self.last_repository = None
+            self.save()
+        return self.last_repository
+
+    def get_preferred_repository(self):
+        """
+        Use this function to get the preferred repository of a user.
+        This function silently sets ``preferred_repository`` to ``None`` if it is currently not enabled.
+        :return: Repository instance or None
+        """
+        if self.preferred_repository and not self.preferred_repository.enabled:
+            self.preferred_repository = None
+            self.save()
+        return self.preferred_repository
+
