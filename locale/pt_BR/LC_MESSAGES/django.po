@@ -13,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-03 13:40+0200\n"
-"PO-Revision-Date: 2019-05-17 10:13:37+0000\n"
+"PO-Revision-Date: 2019-05-23 12:11:08+0000\n"
 "Language: pt_br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2197,9 +2197,8 @@ msgid "Please address any inquiry to support@dissem.in."
 msgstr "Por favor, envie qualquer consulta para support@dissem.in."
 
 #: templates/dissemin/tos.html:89
-#, fuzzy
 msgid "Dissemin uses ORCID's public OAuth interface to authenticate its users. This interface only transmits information marked as public in the user's ORCID profile. This means that ORCID passwords are never transmitted and email addresses are not transmitted when they are marked as private, which is the default setting. When logging in to Dissemin from ORCID, Dissemin acquires the user's ORCID id, as well as all public information attached to the ORCID record. We are using the <a href=\"https://sentry.io/privacy/\">Sentry service</a> for error tracking on this platform. Our webserver configuration stores basic access information (URL requested and IP address) for error monitoring, which are kept for fourteen days. Dissemin can store any information input by its users on the platform. Users can ask for a copy of the personal information Dissemin stores about them by writing an email to support@dissem.in."
-msgstr "A Dissemin usa a interface OAuth pública da ORCID para autenticar seus usuários. Esta interface apenas transmite informações marcadas como públicas no perfil ORCID do usuário. Isso significa que as senhas ORCID nunca são transmitidas e os endereços de email não são transmitidos quando são marcados como privados, que é a configuração padrão. Ao efetuar o login na Dissemin da ORCID, a Dissemin adquire a ID ORCID do usuário, bem como todas as informações públicas anexadas ao registro ORCID. A Dissemin pode armazenar qualquer informação fornecida pelos usuários na plataforma. Os usuários podem solicitar uma cópia das informações pessoais das lojas da Dissemin, escrevendo um e-mail para support@dissem.in."
+msgstr "O Dissemin utiliza a interface pública OAuth do ORCID para autenticar os seus usuários. Esta interface só transmite as informações marcadas como públicas no perfil ORCID do usuário. Isto significa que as palavras-passe do ORCID nunca serão transmitidas, nem os endereços de correio eletrónico, quando forem marcados como privados, que é a configuração padrão. Ao iniciar sessão no Dissemin pelo ORCID, o Dissemin adquire a identificação ORCID do usuário, bem como todas as informações públicas anexadas ao registo ORCID. Estamos a usar o <a href=\"https://sentry.io/privacy/\">serviço Sentry</a> para registo de erros nesta plataforma. A configuração do nosso servidor da Internet armazena informação básica de acessos (URL pedido e endereço IP) para monitorização de erros, que é mantida durante quatorze dias. A Dissemin pode armazenar qualquer informação fornecida pelos usuários na plataforma. Os usuários podem solicitar uma cópia das informações pessoais que o Dissemin armazena sobre eles enviando um e-mail para support@dissem.in."
 
 #: templates/dissemin/tos.html:112
 msgid "Documents deposited in repositories via Dissemin can be stored on the platform, but are not available for download on the platform. They can be stored internally for logging purposes, and to make sure failed deposits can be fixed later. Dissemin does not commit to store any of the files it receives from its users. Users can write to support@dissem.in if they want one of their uploads to be deleted from our internal storage space, or from the repository they have deposited to. Note that deletion policies vary accross repositories: we provide no guarantee that deposits can be deleted from the target repositories."
