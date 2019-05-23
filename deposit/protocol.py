@@ -139,10 +139,12 @@ class RepositoryProtocol(object, metaclass = RepositoryProtocolMeta):
     # This section defines the form the user sees when
     # depositing a paper.
 
-    def get_form_initial_data(self, licenses=None):
+    def get_form_initial_data(self, **kwargs):
         """
         Returns the form's initial values.
         """
+
+        licenses = kwargs.get('licenses', None)
 
         initial = {
             'paper_id' : self.paper.id,

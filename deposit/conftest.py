@@ -11,9 +11,9 @@ def license_standard(db):
     """
     Returns a standard test license
     """
-    
+
     license = License.objects.get_or_create(
-        name="Standard License", 
+        name="Standard License",
         uri="https://dissem.in/deposit/license/standard"
     )
 

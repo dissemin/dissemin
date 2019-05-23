@@ -91,7 +91,7 @@ class BaseMetadataForm(forms.Form):
         required=False,
         widget=forms.HiddenInput
     )
-    # Abstract field to 
+    # Abstract field to
     abstract = forms.CharField(
             label=_('Abstract'),
             required=True,

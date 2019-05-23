@@ -7,7 +7,7 @@ def create_standard_licenses(apps, schema_editor):
     License = apps.get_model('deposit', 'License')
 
     licenses = [
-        { 
+        {
             'name' : 'Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication',
             'uri' : 'https://creativecommons.org/publicdomain/zero/1.0/',
         },
@@ -43,9 +43,7 @@ def create_standard_licenses(apps, schema_editor):
 
     License.objects.bulk_create([License(**license) for license in licenses])
 
-    """
-    We populate for the existing repos the many2many. That is: Zenodo and OSF
-    """
+    # We populate for the existing repos the many2many. That is: Zenodo and OSF
 
     Repository = apps.get_model('deposit', 'Repository')
     LicenseChooser = apps.get_model('deposit', 'LicenseChooser')
@@ -58,12 +56,12 @@ def create_standard_licenses(apps, schema_editor):
 
         # Non-default licenses
         license_list = [
-            ('https://creativecommons.org/publicdomain/zero/1.0/', 'CC0-1.0'), 
-            ('https://creativecommons.org/licenses/by/4.0/', 'CC-BY-4.0'), 
-            ('https://creativecommons.org/licenses/by-sa/4.0/', 'CC-BY-SA-4.0'), 
-            ('https://creativecommons.org/licenses/by-nc/4.0/', 'CC-BY-NC-4.0'), 
-            ('http://creativecommons.org/licenses/by-nd/4.0/', 'CC-BY-ND-4.0'), 
-            ('https://dissem.in/deposit/license/other-open/', 'other-open'),
+            ('https://creativecommons.org/publicdomain/zero/1.0/', 'CC0-1.0'),
+            ('https://creativecommons.org/licenses/by/4.0/', 'CC-BY-4.0'),
+            ('https://creativecommons.org/licenses/by-sa/4.0/', 'CC-BY-SA-4.0'),
+            ('https://creativecommons.org/licenses/by-nc/4.0/', 'CC-BY-NC-4.0'),
+            ('http://creativecommons.org/licenses/by-nd/4.0/', 'CC-BY-ND-4.0'),
+            ('https://dissem.in/deposit/license/other-open/', 'other-open')
         ]
         for license_item in license_list:
             license = License.objects.get(uri=license_item[0])

@@ -53,7 +53,7 @@ class ZenodoProtocolTest(ProtocolTest, RenderingTest):
         self.testdir = os.path.dirname(os.path.abspath(__file__))
         with open(os.path.join(self.testdir, 'testdata/zenodo_record.xml'), 'r') as f:
             self.zenodo_record = f.read()
-        
+
         self.l = License.objects.get(uri="https://dissem.in/deposit/license/zenodo-freetoread-1.0/")
         self.lc, unused = LicenseChooser.objects.get_or_create(
             license=self.l,
@@ -103,7 +103,7 @@ class ZenodoProtocolTest(ProtocolTest, RenderingTest):
         r = self.deposit(
             p,
             abstract = lorem_ipsum,
-            license = self.lc 
+            license = self.lc,
         )
 
         # Deposit fails: a duplicate is found

@@ -12,7 +12,7 @@ class TestLicense():
         name = "Test License"
         uri = "https:/dissem.in/deposit/license/test/"
         license = License.objects.create(name=name, uri=uri)
-        assert license.__str__() == name 
+        assert license.__str__() == name
 
 
 class TestDefaultLicense():
