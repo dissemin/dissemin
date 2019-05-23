@@ -31,7 +31,7 @@ Currently the following models use translations:
 For localization we use `django-vinaigrette <https://pypi.org/project/django-vinaigrette/>`_. Please read their documentation for further information. In short: You have to keep in mind that:
 
 * in admin interface you do not see the localized strings,
-* you should add only english in the admin interface,
+* you should add only English in the admin interface,
 * you will have to recreate the ``*.po`` files and add the translation manually (see below),
 * your local translations do not interact with TranslateWiki.
 

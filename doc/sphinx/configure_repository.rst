@@ -13,7 +13,7 @@ You have the following options:
 * ``name``: The name of the repository
 * ``description``: The description of the repository. This is shown to the user. You cannot use any markup.
 * ``url``: URL of the repository, ex: https://arXiv.org/
-* ``logo``: A logo of your repository or it's hosting institution. This is hown the the user.
+* ``logo``: A logo of your repository or it's hosting institution. This is shown to the user.
 * ``Protocol``: You can choose a protocol to use for the deposit.
 * ``OAISource``: The source with which the OaiRecords associated with the deposits are created
 * ``username`` and ``password``: If your repository uses password authentication, fill in these values
