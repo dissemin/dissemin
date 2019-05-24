@@ -1,5 +1,7 @@
+import json
 import pytest
 
+from datetime import date
 from io import BytesIO
 
 from django.contrib.auth.models import User
@@ -7,6 +9,7 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 
 from deposit.models import Repository
 from papers.baremodels import PAPER_TYPE_CHOICES
+from papers.models import Paper
 from papers.models import OaiSource
 
 
@@ -106,15 +109,30 @@ def dummy_repository(repository):
 
 
 @pytest.fixture
-def herbert_quain(db):
+def book_god_of_the_labyrinth(db):
     """
-    Returns the user Herbert Quain
+    Returns a paper, type book
+    """
+    Paper.objects.get_or_create(
+        title = "The God of the Labyrinth",
+        fingerprint = 'the-god-of-thy-labyrinth',
+        pubdate = date(year=1933, month=1, day=1),
+        authors_list = '{ "first":"Herbert", "last":"Quain"}',
+        doctype='book',
+    )
+
+
+
+@pytest.fixture
+def user_isaac_newton(db):
+    """
+    Returns the user Isaac Newton
     """
     user = User.objects.create_user(
-        username='quain',
-        first_name='Herbert',
-        last_name='Quain',
-        email='herbert.quain@writers.ir',
+        username='newton',
+        first_name='Isaac',
+        last_name='Newton',
+        email='isaac.newton@scientists.free',
     )
     yield user
     user.delete()

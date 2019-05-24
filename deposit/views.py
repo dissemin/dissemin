@@ -46,7 +46,13 @@ from ratelimit.decorators import ratelimit
 logger = logging.getLogger('dissemin.' + __name__)
 
 def get_all_repositories_and_protocols(paper, user):
-    repositories = Repository.objects.all()
+    """
+    Gets all enabled repositories together with their protocols.
+    :param paper: The paper to be deposited
+    :param user: The user who wnats to deposit
+    :return: List of tupels containing each a pair of a repository and its protocol.
+    """
+    repositories = Repository.objects.filter(enabled=True)
     protocols = []
     for r in repositories:
         implem = r.protocol_for_deposit(paper, user)
