@@ -31,6 +31,7 @@ from deposit.protocol import DepositError
 from deposit.protocol import DepositResult
 from deposit.protocol import RepositoryProtocol
 from deposit.registry import protocol_registry
+from deposit.zenodo.forms import ZenodoForm
 from papers.utils import kill_html
 from papers.utils import extract_domain
 
@@ -39,6 +40,8 @@ class ZenodoProtocol(RepositoryProtocol):
     """
     A protocol to submit using the Zenodo API
     """
+
+    form_class = ZenodoForm
 
     def __init__(self, repository, **kwargs):
         super(ZenodoProtocol, self).__init__(repository, **kwargs)
