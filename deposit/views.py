@@ -64,8 +64,10 @@ def get_all_repositories_and_protocols(paper, user):
 @json_view
 @user_passes_test(is_authenticated)
 def get_metadata_form(request):
-    paper = get_object_or_404(Paper, pk=request.GET.get('paper'))
     repo = get_object_or_404(Repository, pk=request.GET.get('repository'))
+    if not repo.enabled:
+        return HttpResponseForbidden(_('This repository is currently not enabled.'))
+    paper = get_object_or_404(Paper, pk=request.GET.get('paper'))
     protocol = repo.protocol_for_deposit(paper, request.user)
     if protocol is None:
         logger.warning("No protocol")
@@ -125,6 +127,8 @@ def list_deposits(request):
 @user_passes_test(is_authenticated)
 def edit_repo_preferences(request, pk):
     repo = get_object_or_404(Repository, pk=pk)
+    if not repo.enabled:
+        return HttpResponseForbidden(_('This repository is currently not enabled.'))
     protocol = repo.get_implementation()
     context = {
         'repositories': Repository.objects.all(),
@@ -151,7 +155,7 @@ def edit_repo_preferences(request, pk):
 @user_passes_test(is_authenticated)
 def edit_global_preferences(request):
     context = {
-        'repositories': Repository.objects.all(),
+        'repositories': Repository.objects.filter(enabled=True),
     }
     prefs = UserPreferences.get_by_user(request.user)
     if request.method == 'POST':

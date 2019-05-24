@@ -41,7 +41,7 @@ class PaperDepositForm(forms.Form):
     radioUploadType = forms.ChoiceField(
         label=_('Upload type'), choices=UPLOAD_TYPE_CHOICES)
     radioRepository = forms.ModelChoiceField(label=_('Repository'),
-                                             queryset=Repository.objects.all())
+                                             queryset=Repository.objects.filter(enabled=True))
 
     def clean_file_id(self):
         file_id = self.cleaned_data['file_id']
@@ -115,8 +115,10 @@ class FormWithAbstract(BaseMetadataForm):
 ### Form for global preferences ###
 
 class PreferredRepositoryField(forms.ModelChoiceField):
+    queryset = Repository.objects.filter(enabled=True)
     def __init__(self, *args, **kwargs):
         kwargs['empty_label'] = _('No preferred repository')
+        kwargs['queryset'] = Repository.objects.filter(enabled=True)
         super(PreferredRepositoryField, self).__init__(*args, **kwargs)
 
 class UserPreferencesForm(forms.ModelForm):

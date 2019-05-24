@@ -283,11 +283,6 @@ $(function() {
                 {% with repository.1 as proto %}
                 <label class="repositoryItem {% if forloop.first %}firstItem{% endif %} {% if not proto %}disabledRepositoryItem{% endif %}">
 
-                    {% if not repo.enabled %}
-                    <div style="text-align: center">
-                            {% trans "Coming soon:" context "This repository will be soon available in Dissemin" %}
-                    </div>
-                    {% endif %}
                     <div style="display:none">
                         <span id="hiddenInlineRepository-{{ repo.pk }}">
                             <span><strong>{{ repo.name }}</strong>
