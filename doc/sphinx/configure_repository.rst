@@ -23,6 +23,7 @@ You have the following options:
 * ``license choosers``: Here you can add a list of license that your repository accepts. There is no limit, but you should keep your selection moderate. There are the following options:
 
   * ``transmit_id``: Value to identify the license in the metadata.
+  * ``position``: The position in which the corresponding license shall be shown to the user. The behaviour is as for pythons ``list``. The position is per repository. However, using ``-1`` can lead to a higher number. This is kind of a bug, but does no harm. Also some propulated values might not start with a ``0``.
   * ``default``: Check, if you want to use this as default license. In the resulting list on the deposit page, this license is preselected. If you do not set any check, the first license (in alphabetical order) is used. If you check more than one, thie first of the checked license (in alphabetical order) is used. Both cases lead to a warning.
 
 .. note::
