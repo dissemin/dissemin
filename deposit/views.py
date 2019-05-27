@@ -46,7 +46,13 @@ from ratelimit.decorators import ratelimit
 logger = logging.getLogger('dissemin.' + __name__)
 
 def get_all_repositories_and_protocols(paper, user):
-    repositories = Repository.objects.all()
+    """
+    Gets all enabled repositories together with their protocols.
+    :param paper: The paper to be deposited
+    :param user: The user who wnats to deposit
+    :return: List of tupels containing each a pair of a repository and its protocol.
+    """
+    repositories = Repository.objects.filter(enabled=True)
     protocols = []
     for r in repositories:
         implem = r.protocol_for_deposit(paper, user)
@@ -58,8 +64,10 @@ def get_all_repositories_and_protocols(paper, user):
 @json_view
 @user_passes_test(is_authenticated)
 def get_metadata_form(request):
-    paper = get_object_or_404(Paper, pk=request.GET.get('paper'))
     repo = get_object_or_404(Repository, pk=request.GET.get('repository'))
+    if not repo.enabled:
+        return HttpResponseForbidden(_('This repository is currently not enabled.'))
+    paper = get_object_or_404(Paper, pk=request.GET.get('paper'))
     protocol = repo.protocol_for_deposit(paper, request.user)
     if protocol is None:
         logger.warning("No protocol")
@@ -75,31 +83,20 @@ def get_metadata_form(request):
 def start_view(request, pk):
     paper = get_object_or_404(Paper, pk=pk)
     repositories = get_all_repositories_and_protocols(paper, request.user)
-    repositories_protocol = {repo.id :proto for repo, proto in repositories}
-
+    
     # select the most appropriate repository
-    selected_repository = None
-    selected_protocol = None
-
-    # Try to get the preferred one
     userprefs = UserPreferences.get_by_user(request.user)
-    if userprefs.preferred_repository:
-        selected_repository = userprefs.preferred_repository
-        selected_protocol = repositories_protocol.get(selected_repository.id)
-
-    # Try to get the last one used by this user
-    logger.info(userprefs.last_repository)
-    if selected_protocol is None and userprefs.last_repository:
-        selected_repository = userprefs.last_repository
-        selected_protocol = repositories_protocol.get(selected_repository.id)
-
-    # If none of these are available, pick any
-    if selected_protocol is None:
+    preselected_repository = userprefs.get_preferred_or_last_repository()
+    preselected_protocol = None
+    if not preselected_repository:
         for repo, protocol in repositories:
             if protocol is not None:
-                selected_repository = repo
-                selected_protocol = protocol
+                preselected_repository = repo
+                preselected_protocol = protocol
                 break
+    else:
+        repositories_protocol = {repo.id :proto for repo, proto in repositories}
+        preselected_protocol = repositories_protocol.get(preselected_repository.id)
 
     breadcrumbs = paper.breadcrumbs()
     breadcrumbs.append((_('Deposit'), ''))
@@ -107,8 +104,8 @@ def start_view(request, pk):
             'paper': paper,
             'max_file_size': settings.DEPOSIT_MAX_FILE_SIZE,
             'available_repositories': repositories,
-            'selected_repository': selected_repository,
-            'selected_protocol': selected_protocol,
+            'selected_repository': preselected_repository,
+            'selected_protocol': preselected_protocol,
             'is_owner': paper.is_owned_by(request.user, flexible=True),
             'breadcrumbs': breadcrumbs,
             'repositoryForm': None,
@@ -130,6 +127,8 @@ def list_deposits(request):
 @user_passes_test(is_authenticated)
 def edit_repo_preferences(request, pk):
     repo = get_object_or_404(Repository, pk=pk)
+    if not repo.enabled:
+        return HttpResponseForbidden(_('This repository is currently not enabled.'))
     protocol = repo.get_implementation()
     context = {
         'repositories': Repository.objects.all(),
@@ -156,7 +155,7 @@ def edit_repo_preferences(request, pk):
 @user_passes_test(is_authenticated)
 def edit_global_preferences(request):
     context = {
-        'repositories': Repository.objects.all(),
+        'repositories': Repository.objects.filter(enabled=True),
     }
     prefs = UserPreferences.get_by_user(request.user)
     if request.method == 'POST':
