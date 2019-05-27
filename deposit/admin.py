@@ -29,6 +29,7 @@ from django.contrib import admin
 
 class LicenseChooserInline(admin.TabularInline):
     model = LicenseChooser
+    ordering = ('position', )
     extra = 1
 
 class DepositRecordAdmin(admin.ModelAdmin):

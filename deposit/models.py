@@ -25,6 +25,7 @@ import logging
 import vinaigrette
 from caching.base import CachingManager
 from caching.base import CachingMixin
+from positions.fields import PositionField
 from deposit.registry import protocol_registry
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import JSONField
@@ -157,6 +158,22 @@ class Repository(models.Model, CachingMixin):
     class Meta:
         verbose_name_plural = 'Repositories'
 
+
+class LicenseChooserManager(models.Manager):
+    """
+    Manager for LicenseChooser
+    """
+    def by_repository(self, repository):
+        """
+        Fetches the LicenceChooser objects for a given repository in the correct order, i.e. order by position and name
+        :param repository: A repository
+        :return: Queryset
+        """
+        qs = self.filter(repository=repository).select_related('license').order_by('position')
+        return qs
+
+
+
 class LicenseChooser(models.Model):
     """
     Intermediate model to connect License to Repository Model
@@ -169,6 +186,10 @@ class LicenseChooser(models.Model):
     transmit_id = models.CharField(max_length=255, blank=False)
     #: True if default license for this repository
     default = models.BooleanField(default=False)
+    #: The position of the corresponding license as displayed to the user
+    position = PositionField(collection='repository')
+
+    objects = LicenseChooserManager()
 
     def __str__(self):
         """

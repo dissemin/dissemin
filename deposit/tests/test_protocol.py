@@ -124,7 +124,7 @@ class ProtocolTest(django.test.TestCase):
         enabled = self.proto.init_deposit(paper, self.user)
         self.assertTrue(enabled)
 
-        licenses = LicenseChooser.objects.filter(repository=self.repo)
+        licenses = LicenseChooser.objects.by_repository(repository=self.repo)
         args = self.proto.get_form_initial_data(licenses=licenses)
         args.update(form_fields)
         # The forms needs the pk of LicenceChooser object

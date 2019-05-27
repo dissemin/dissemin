@@ -1,3 +1,4 @@
+import pytest
 from deposit.models import License
 
 class TestLicense():
@@ -15,8 +16,11 @@ class TestLicense():
         assert license.__str__() == name
 
 
-class TestDefaultLicense():
+@pytest.mark.skip(reason="Fixtures not yet implemented")
+class TestLicenseChooser():
     """
-    A class to test all default license relevant things
+    A class to test LicenceChooser model
     """
     pass
+
+

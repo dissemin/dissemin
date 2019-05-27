@@ -19,6 +19,7 @@ django-haystack
 django-js-reverse
 django-jsonview
 django-leaflet
+django-positions
 django-memoize
 django-redis-cache
 django-settings-export
