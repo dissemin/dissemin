@@ -6,9 +6,8 @@
 # Author: Hamilton Abreu
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-25 12:06+0100\n"
+"POT-Creation-Date: 2019-05-27 18:48+0200\n"
 "PO-Revision-Date: 2019-05-17 10:13:35+0000\n"
 "Language: pt\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,49 +16,55 @@ msgstr ""
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: papers/static/papers/refresh.js:35
+#: papers/static/papers/refresh.js:63
 msgid "Do not show this message anymore"
 msgstr "Não mostrar esta mensagem novamente"
 
-#: papers/static/papers/refresh.js:66
+#: papers/static/papers/refresh.js:94
 msgid "No author"
 msgstr "Sem autor"
 
-#: papers/static/papers/refresh.js:68
+#: papers/static/papers/refresh.js:96
 msgid "No title"
 msgstr "Sem título"
 
-#: papers/static/papers/refresh.js:70
+#: papers/static/papers/refresh.js:98
 msgid "Invalid publication date"
 msgstr "A data de publicação não é válida"
 
-#: papers/static/papers/refresh.js:72
+#: papers/static/papers/refresh.js:100
 msgid "No publication date"
 msgstr "Não há data de publicação"
 
-#: papers/static/papers/refresh.js:74
+#: papers/static/papers/refresh.js:102
 msgid "Paper is invalid"
 msgstr "O documento é inválido"
 
-#: papers/static/papers/refresh.js:109
+#: papers/static/papers/refresh.js:137
 msgid "We ignored %(count)s paper from your ORCiD profile."
 msgid_plural "We ignored %(count)s papers from your ORCiD profile."
 msgstr[0] "Ignorámos %(count)s documento do seu perfil ORCiD."
 msgstr[1] "Ignorámos %(count)s documentos do seu perfil ORCiD."
 
-#: papers/static/papers/refresh.js:119
+#: papers/static/papers/refresh.js:147
 msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
 msgstr "\"%(name)s\" foi ignorado pelo seguinte motivo: %(reason)s"
 
-#: papers/static/papers/refresh.js:127
+#: papers/static/papers/refresh.js:155
 msgid "A paper was ignored, because it has no name"
 msgstr "Um documento foi ignorado, porque não tem nome"
 
-#: papers/static/papers/refresh.js:139 papers/static/papers/refresh.js:167
+#: papers/static/papers/refresh.js:167 papers/static/papers/refresh.js:195
 msgid "Show more information"
 msgstr "Mostrar mais informações"
 
-#: papers/static/papers/refresh.js:164
+#: papers/static/papers/refresh.js:192
 msgid "Show less information"
 msgstr "Mostrar menos informações"
 
+#: papers/static/papers/refresh.js:206
+#, javascript-format
+msgid "%s paper found"
+msgid_plural "%s papers found"
+msgstr[0] ""
+msgstr[1] ""

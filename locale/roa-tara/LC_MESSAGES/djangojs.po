@@ -4,9 +4,8 @@
 # Author: Joetaras
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-25 12:06+0100\n"
+"POT-Creation-Date: 2019-05-27 18:48+0200\n"
 "PO-Revision-Date: 2019-05-17 10:13:35+0000\n"
 "Language: nap-x-tara\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -15,49 +14,55 @@ msgstr ""
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: papers/static/papers/refresh.js:35
+#: papers/static/papers/refresh.js:63
 msgid "Do not show this message anymore"
 msgstr "Nò ffà 'ndrucà cchiù stu messàgge"
 
-#: papers/static/papers/refresh.js:66
+#: papers/static/papers/refresh.js:94
 msgid "No author"
 msgstr "Nisciune autore"
 
-#: papers/static/papers/refresh.js:68
+#: papers/static/papers/refresh.js:96
 msgid "No title"
 msgstr "Nisciune titole"
 
-#: papers/static/papers/refresh.js:70
+#: papers/static/papers/refresh.js:98
 msgid "Invalid publication date"
 msgstr "Date de pubblecazione invalide"
 
-#: papers/static/papers/refresh.js:72
+#: papers/static/papers/refresh.js:100
 msgid "No publication date"
 msgstr "Nisciuna date de pubblecazione"
 
-#: papers/static/papers/refresh.js:74
+#: papers/static/papers/refresh.js:102
 msgid "Paper is invalid"
 msgstr "'A carte jè invalide"
 
-#: papers/static/papers/refresh.js:109
+#: papers/static/papers/refresh.js:137
 msgid "We ignored %(count)s paper from your ORCiD profile."
 msgid_plural "We ignored %(count)s papers from your ORCiD profile."
 msgstr[0] "%(count)s carte da 'u profile tune de ORCiD."
 msgstr[1] "%(count)s carte da 'u profile tune de ORCiD."
 
-#: papers/static/papers/refresh.js:119
+#: papers/static/papers/refresh.js:147
 msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
 msgstr "\"%(name)s\" onne state cacate pe stu mutive: %(reason)s"
 
-#: papers/static/papers/refresh.js:127
+#: papers/static/papers/refresh.js:155
 msgid "A paper was ignored, because it has no name"
 msgstr "'Na carte ha state cacate, purcé non ge tène 'nu nome"
 
-#: papers/static/papers/refresh.js:139 papers/static/papers/refresh.js:167
+#: papers/static/papers/refresh.js:167 papers/static/papers/refresh.js:195
 msgid "Show more information"
 msgstr "Fà 'ndrucà cchiù 'mbormaziune"
 
-#: papers/static/papers/refresh.js:164
+#: papers/static/papers/refresh.js:192
 msgid "Show less information"
 msgstr "Fà 'ndrucà mene 'mbormaziune"
 
+#: papers/static/papers/refresh.js:206
+#, javascript-format
+msgid "%s paper found"
+msgid_plural "%s papers found"
+msgstr[0] ""
+msgstr[1] ""

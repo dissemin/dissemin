@@ -7,9 +7,8 @@
 # Author: Metalhead64
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-25 12:06+0100\n"
+"POT-Creation-Date: 2019-05-27 18:48+0200\n"
 "PO-Revision-Date: 2019-05-17 10:13:32+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,49 +17,56 @@ msgstr ""
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: papers/static/papers/refresh.js:35
+#: papers/static/papers/refresh.js:63
 msgid "Do not show this message anymore"
 msgstr "Diese Nachricht nicht mehr anzeigen"
 
-#: papers/static/papers/refresh.js:66
+#: papers/static/papers/refresh.js:94
 msgid "No author"
 msgstr "Kein_e Verfasser_in"
 
-#: papers/static/papers/refresh.js:68
+#: papers/static/papers/refresh.js:96
 msgid "No title"
 msgstr "Kein Titel"
 
-#: papers/static/papers/refresh.js:70
+#: papers/static/papers/refresh.js:98
 msgid "Invalid publication date"
 msgstr "Ungültiges Veröffentlichungsdatum"
 
-#: papers/static/papers/refresh.js:72
+#: papers/static/papers/refresh.js:100
 msgid "No publication date"
 msgstr "Kein Veröffentlichungsdatum"
 
-#: papers/static/papers/refresh.js:74
+#: papers/static/papers/refresh.js:102
 msgid "Paper is invalid"
 msgstr "Publikation ist ungültig"
 
-#: papers/static/papers/refresh.js:109
+#: papers/static/papers/refresh.js:137
 msgid "We ignored %(count)s paper from your ORCiD profile."
 msgid_plural "We ignored %(count)s papers from your ORCiD profile."
 msgstr[0] "Wir haben eine Publikation aus Deinem ORCiD-Profil ignoriert."
-msgstr[1] "Wir haben %(count)s Publikationen aus Deinem ORCiD-Profil ignoriert."
+msgstr[1] ""
+"Wir haben %(count)s Publikationen aus Deinem ORCiD-Profil ignoriert."
 
-#: papers/static/papers/refresh.js:119
+#: papers/static/papers/refresh.js:147
 msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
 msgstr "\"%(name)s\" wurde aus folgenden Gründen ignoriert: %(reason)s"
 
-#: papers/static/papers/refresh.js:127
+#: papers/static/papers/refresh.js:155
 msgid "A paper was ignored, because it has no name"
 msgstr "Eine Publikation wurde ignoriert, weil sie keinen Namen hat"
 
-#: papers/static/papers/refresh.js:139 papers/static/papers/refresh.js:167
+#: papers/static/papers/refresh.js:167 papers/static/papers/refresh.js:195
 msgid "Show more information"
 msgstr "Weitere Informationen anzeigen"
 
-#: papers/static/papers/refresh.js:164
+#: papers/static/papers/refresh.js:192
 msgid "Show less information"
 msgstr "Weniger Informationen anzeigen"
 
+#: papers/static/papers/refresh.js:206
+#, javascript-format
+msgid "%s paper found"
+msgid_plural "%s papers found"
+msgstr[0] ""
+msgstr[1] ""

@@ -4,9 +4,8 @@
 # Author: Liuxinyu970226
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-25 12:06+0100\n"
+"POT-Creation-Date: 2019-05-27 18:48+0200\n"
 "PO-Revision-Date: 2019-05-17 10:13:36+0000\n"
 "Language: zh_hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -15,49 +14,54 @@ msgstr ""
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: papers/static/papers/refresh.js:35
+#: papers/static/papers/refresh.js:63
 msgid "Do not show this message anymore"
 msgstr "不要再次显示这条消息"
 
-#: papers/static/papers/refresh.js:66
+#: papers/static/papers/refresh.js:94
 msgid "No author"
 msgstr "没有作者"
 
-#: papers/static/papers/refresh.js:68
+#: papers/static/papers/refresh.js:96
 msgid "No title"
 msgstr "没有标题"
 
-#: papers/static/papers/refresh.js:70
+#: papers/static/papers/refresh.js:98
 msgid "Invalid publication date"
 msgstr "无效的发行日期"
 
-#: papers/static/papers/refresh.js:72
+#: papers/static/papers/refresh.js:100
 #, fuzzy
 msgid "No publication date"
 msgstr "无效的发行日期"
 
-#: papers/static/papers/refresh.js:74
+#: papers/static/papers/refresh.js:102
 msgid "Paper is invalid"
 msgstr ""
 
-#: papers/static/papers/refresh.js:109
+#: papers/static/papers/refresh.js:137
 msgid "We ignored %(count)s paper from your ORCiD profile."
 msgid_plural "We ignored %(count)s papers from your ORCiD profile."
 msgstr[0] "我们从您的ORCiD详情中忽略了%(count)s篇论文。"
 
-#: papers/static/papers/refresh.js:119
+#: papers/static/papers/refresh.js:147
 msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
 msgstr "“%(name)s”因以下原因而被忽略：%(reason)s"
 
-#: papers/static/papers/refresh.js:127
+#: papers/static/papers/refresh.js:155
 msgid "A paper was ignored, because it has no name"
 msgstr "忽略了一篇论文，因为它没有名称"
 
-#: papers/static/papers/refresh.js:139 papers/static/papers/refresh.js:167
+#: papers/static/papers/refresh.js:167 papers/static/papers/refresh.js:195
 msgid "Show more information"
 msgstr "显示更多信息"
 
-#: papers/static/papers/refresh.js:164
+#: papers/static/papers/refresh.js:192
 msgid "Show less information"
 msgstr "显示更少信息"
 
+#: papers/static/papers/refresh.js:206
+#, javascript-format
+msgid "%s paper found"
+msgid_plural "%s papers found"
+msgstr[0] ""

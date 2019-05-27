@@ -10,61 +10,68 @@
 # Author: Wirbel78
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-25 12:06+0100\n"
+"POT-Creation-Date: 2019-05-27 18:48+0200\n"
 "PO-Revision-Date: 2019-05-17 10:13:35+0000\n"
 "Language: ru\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-POT-Import-Date: 2019-02-25 13:41:23+0000\n"
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-04-24\n"
-"Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11) ? 0 : ( (n%10 >= 2 && n%10 <= 4 && (n%100 < 10 || n%100 >= 20)) ? 1 : 2 );\n"
+"Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11) ? 0 : ( (n%10 >= "
+"2 && n%10 <= 4 && (n%100 < 10 || n%100 >= 20)) ? 1 : 2 );\n"
 
-#: papers/static/papers/refresh.js:35
+#: papers/static/papers/refresh.js:63
 msgid "Do not show this message anymore"
 msgstr "Больше не показывать это сообщение"
 
-#: papers/static/papers/refresh.js:66
+#: papers/static/papers/refresh.js:94
 msgid "No author"
 msgstr "Нет автора"
 
-#: papers/static/papers/refresh.js:68
+#: papers/static/papers/refresh.js:96
 msgid "No title"
 msgstr "Без названия"
 
-#: papers/static/papers/refresh.js:70
+#: papers/static/papers/refresh.js:98
 msgid "Invalid publication date"
 msgstr "Недействительная дата публикации"
 
-#: papers/static/papers/refresh.js:72
+#: papers/static/papers/refresh.js:100
 msgid "No publication date"
 msgstr "Отсутствует дата публикации"
 
-#: papers/static/papers/refresh.js:74
+#: papers/static/papers/refresh.js:102
 msgid "Paper is invalid"
 msgstr "Ошибочный документ"
 
-#: papers/static/papers/refresh.js:109
+#: papers/static/papers/refresh.js:137
 msgid "We ignored %(count)s paper from your ORCiD profile."
 msgid_plural "We ignored %(count)s papers from your ORCiD profile."
 msgstr[0] "%(count)s бумагу"
 msgstr[1] "%(count)s бумаги"
 msgstr[2] "%(count)s бумаг"
 
-#: papers/static/papers/refresh.js:119
+#: papers/static/papers/refresh.js:147
 msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
 msgstr "\"%(имя)ена\" был проигнорирован по следующей причине: %(причина)ы"
 
-#: papers/static/papers/refresh.js:127
+#: papers/static/papers/refresh.js:155
 msgid "A paper was ignored, because it has no name"
 msgstr "Документ был проигнорирован, поскольку он не имеет названия"
 
-#: papers/static/papers/refresh.js:139 papers/static/papers/refresh.js:167
+#: papers/static/papers/refresh.js:167 papers/static/papers/refresh.js:195
 msgid "Show more information"
 msgstr "Показать больше информации"
 
-#: papers/static/papers/refresh.js:164
+#: papers/static/papers/refresh.js:192
 msgid "Show less information"
 msgstr "Показать меньше информации"
 
+#: papers/static/papers/refresh.js:206
+#, javascript-format
+msgid "%s paper found"
+msgid_plural "%s papers found"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
