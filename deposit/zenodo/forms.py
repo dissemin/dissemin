@@ -18,36 +18,10 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
+from deposit.forms import BaseMetadataForm
 
-
-from deposit.forms import FormWithAbstract
-from django import forms
-from django.utils.translation import ugettext as _
-
-ZENODO_DEFAULT_LICENSE_CHOICE = 'zenodo-freetoread-1.0'
-
-ZENODO_LICENSES_CHOICES = [
-   ('cc-zero',
-    _('Creative Commons CCZero (CC0)')),
-   ('cc-by',
-    _('Creative Commons Attribution (CC-BY)')),
-   ('cc-by-sa',
-    _('Creative Commons Attribution-ShareAlike (CC-BY-SA)')),
-   ('cc-by-nc-4.0',
-    _('Creative Commons Attribution-NonCommercial (CC-BY-NC)')),
-   ('cc-by-nd-4.0',
-    _('Creative Commons Attribution-NoDerivatives (CC-BY-ND)')),
-   ('zenodo-freetoread-1.0',
-    _('Free for private use; right holder retains other rights, including distribution')),
-   ('other-open',
-    _('Other open license')),
- ]
-
-
-class ZenodoForm(FormWithAbstract):
-    license = forms.ChoiceField(
-            label=_('License'),
-            choices=ZENODO_LICENSES_CHOICES,
-            initial=ZENODO_DEFAULT_LICENSE_CHOICE,
-            widget=forms.RadioSelect(attrs={'class': 'radio-margin'})
-            )
+class ZenodoForm(BaseMetadataForm):
+    """
+    Form for Zenodo repository.
+    """
+    pass

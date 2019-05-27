@@ -21,7 +21,7 @@
 
 
 import re
-from deposit.forms import FormWithAbstract
+from deposit.forms import BaseMetadataForm
 from django import forms
 from django.forms.utils import ValidationError
 from deposit.osf.models import OSFDepositPreferences
@@ -99,12 +99,9 @@ OSF_SUBJECTS_CHOICES = [
 ]
 
 
-class OSFForm(FormWithAbstract):
-    license = forms.ChoiceField(
-        label=_('License'),
-        choices=OSF_SANDBOX_LICENSES_CHOICES,
-        initial='563c1cf88c5e4a3877f9e965',
-        widget=forms.RadioSelect(attrs={'class': 'radio-margin'}))
+class OSFForm(BaseMetadataForm):
+
+    field_order = ['abstract', 'tags', 'subjects', 'license']
 
     abstract = forms.CharField(
         min_length=20,
@@ -119,14 +116,8 @@ class OSFForm(FormWithAbstract):
         choices=OSF_SANDBOX_SUBJECTS_CHOICES
     )
 
-    def __init__(self, paper, endpoint, **kwargs):
-        super(OSFForm, self).__init__(endpoint, **kwargs)
-
-        self.endpoint = endpoint
-
-        if self.endpoint == "https://api.osf.io/":
-            self.fields['license'].choices = OSF_LICENSES_CHOICES
-            self.fields['subjects'].choices = OSF_SUBJECTS_CHOICES
+    def __init__(self, paper, **kwargs):
+        super(OSFForm, self).__init__(paper, **kwargs)
 
 class OSFPreferencesForm(forms.ModelForm):
     class Meta:

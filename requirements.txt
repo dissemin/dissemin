@@ -19,6 +19,7 @@ django-haystack
 django-js-reverse
 django-jsonview
 django-leaflet
+django-positions
 django-memoize
 django-redis-cache
 django-settings-export
@@ -26,6 +27,7 @@ django-solo
 django-ratelimit
 django-widget-tweaks
 django-debug-toolbar
+django-vinaigrette
 djangorestframework
 elasticsearch==6.3.1
 httplib2

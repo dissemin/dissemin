@@ -98,8 +98,10 @@ class HALProtocol(RepositoryProtocol):
         except (requests.exceptions.RequestException, ValueError, KeyError):
             return None
 
-    def get_form_initial_data(self):
-        data = super(HALProtocol, self).get_form_initial_data()
+    def get_form_initial_data(self, **kwargs):
+        # HAL does not use license, we just throw this away
+        kwargs.pop('licenses', None)
+        data = super(HALProtocol, self).get_form_initial_data(**kwargs)
 
         data['first_name'] = self.user.first_name
         data['last_name'] = self.user.last_name

@@ -81,27 +81,17 @@ def wrap_with_prefetch_status(baseWidget, callback, fieldname):
 
 class BaseMetadataForm(forms.Form):
     """
-    Base form for repository-specific options
+    Base form for repository-specific options and metadata. Protocols can subclass this form and add or remove fields.
     """
-    def __init__(self, paper, **kwargs):
-        super(BaseMetadataForm, self).__init__(**kwargs)
-        # Subclasses can reimplement this and do things based on the
-        # paper instance (for instance, initializing choices).
-        # The paper_id field is not filled here, because that should
-        # only happen when filling the form with initial data.
 
-    # Dummy field to store the paper id (required for dynamic fetching of the
-    # abstract)
+    field_order = ['abstract', 'license']
+
+    # Dummy field to store the paper id (required for dynamic fetching of the abstract)
     paper_id = forms.IntegerField(
         required=False,
         widget=forms.HiddenInput
     )
-
-class FormWithAbstract(BaseMetadataForm):
-    """
-    A simple metadata form, only including the abstract.
-    Repositories can subclass this form to add more fields.
-    """
+    # Abstract field to
     abstract = forms.CharField(
             label=_('Abstract'),
             required=True,
@@ -110,6 +100,25 @@ class FormWithAbstract(BaseMetadataForm):
                 reverse_lazy('ajax-waitForConsolidatedField'),
                 'paper_id')(attrs={'class': 'form-control'})
             )
+    
+    # License field to choose license
+    license = forms.ModelChoiceField(
+        queryset=None,
+        empty_label=None,
+        initial=None,
+        widget=forms.RadioSelect,
+    )
+
+    def __init__(self, paper, licenses=None, **kwargs):
+        """
+        Subclasses can reimplement this and do things based on the models passed or generally add or remove fields.
+        The paper_id field is not filled here, because that should only happen when filling the form with initial data.
+        :param paper: paper
+        :param licenses: A (not) evaluated QuerySet of LicenseChooser
+        """
+        super(BaseMetadataForm, self).__init__(**kwargs)
+        
+        self.fields['license'].queryset = licenses
 
 
 ### Form for global preferences ###

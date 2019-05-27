@@ -22,8 +22,10 @@
 
 
 import logging
+import vinaigrette
 from caching.base import CachingManager
 from caching.base import CachingMixin
+from positions.fields import PositionField
 from deposit.registry import protocol_registry
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import JSONField
@@ -46,6 +48,26 @@ DEPOSIT_STATUS_CHOICES = [
    ('refused', _('Refused by the repository')),
    ('deleted', _('Deleted')), # deleted by the repository
    ]
+
+class License(models.Model):
+    """
+    A model to store licenses. Each repository chooses licenses from this model.
+    """
+    #: Full name of the license as displayed to the user
+    name = models.CharField(max_length=255, default=None)
+    #: URI of the license. If no URI is provided, you can use https://dissem.in/deposit/license/ as namespace. Usually used for transmission in depositing process
+    uri = models.URLField(max_length=255, unique=True, default=None)
+
+    def __str__(self):
+        """
+        String representation of license object
+        """
+
+        return self.name
+
+vinaigrette.register(License, ['name'])
+
+
 
 class RepositoryManager(CachingManager):
     pass
@@ -94,6 +116,8 @@ class Repository(models.Model, CachingMixin):
 
     #: Setting this to false forbids any deposit in this repository
     enabled = models.BooleanField(default=True)
+    #: Set of licenses the repository supports
+    licenses = models.ManyToManyField(License, through='LicenseChooser')
 
     def get_implementation(self):
         """
@@ -133,6 +157,45 @@ class Repository(models.Model, CachingMixin):
 
     class Meta:
         verbose_name_plural = 'Repositories'
+
+
+class LicenseChooserManager(models.Manager):
+    """
+    Manager for LicenseChooser
+    """
+    def by_repository(self, repository):
+        """
+        Fetches the LicenceChooser objects for a given repository in the correct order, i.e. order by position and name
+        :param repository: A repository
+        :return: Queryset
+        """
+        qs = self.filter(repository=repository).select_related('license').order_by('position')
+        return qs
+
+
+
+class LicenseChooser(models.Model):
+    """
+    Intermediate model to connect License to Repository Model
+    """
+    #: FK to license
+    license = models.ForeignKey(License, on_delete=models.CASCADE)
+    #: FK to repository
+    repository = models.ForeignKey(Repository, on_delete=models.CASCADE)
+    #: Identifier used for transmission
+    transmit_id = models.CharField(max_length=255, blank=False)
+    #: True if default license for this repository
+    default = models.BooleanField(default=False)
+    #: The position of the corresponding license as displayed to the user
+    position = PositionField(collection='repository')
+
+    objects = LicenseChooserManager()
+
+    def __str__(self):
+        """
+        Returns the license name
+        """
+        return self.license.__str__()
 
 
 class DepositRecord(models.Model):

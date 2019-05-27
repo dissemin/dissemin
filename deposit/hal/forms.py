@@ -21,7 +21,7 @@
 
 
 from autocomplete.widgets import Select2
-from deposit.forms import FormWithAbstract
+from deposit.forms import BaseMetadataForm
 from deposit.hal.metadata import HAL_TOPIC_CHOICES
 from django import forms
 from django.utils.translation import ugettext as _
@@ -30,10 +30,11 @@ from crispy_forms.layout import Submit
 from deposit.hal.models import HALDepositPreferences
 
 
-class HALForm(FormWithAbstract):
+class HALForm(BaseMetadataForm):
 
     def __init__(self, paper, **kwargs):
         super(HALForm, self).__init__(paper, **kwargs)
+        self.fields.pop('license')
         self.fields['depositing_author'].choices = enumerate(
             map(str, paper.authors))
 
