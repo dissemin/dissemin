@@ -24,11 +24,9 @@ def metadata_xml_dc():
     return etree.parse(os.path.join(conftest_dir, 'test_data', 'dc_lesebibliothek_frauenzimmer.xml')).getroot()
 
 
-@pytest.fixture()
+@pytest.fixture(scope='session')
 def mets_xsd():
     """
     Returns a mets xsd as schema ready to validate
     """
-    conftest_dir = os.path.dirname(os.path.abspath(__file__))
-    mets_xsd = etree.parse(os.path.join(conftest_dir, 'test_data', 'mets_1.12.xsd'))
-    return etree.XMLSchema(mets_xsd)
+    return etree.XMLSchema(etree.parse("http://www.loc.gov/standards/mets/version112/mets.xsd"))
