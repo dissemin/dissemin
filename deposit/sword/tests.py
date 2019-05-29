@@ -1,5 +1,8 @@
 import pytest
 
+from lxml import etree
+from deposit.sword.protocol import SWORDMETSProtocol
+
 @pytest.mark.usefixtures('sword_mets_protocol')
 class TestSWORDMETSProtocol(object):
     """
@@ -23,9 +26,9 @@ class TestSWORDMETSProtocol(object):
         """
         A test for creating mets from metadata
         """
-        mets_xml = self.protocol._get_mets(metadata_xml_dc)
-
-        mets_xsd.assertValid(mets_xml)
+        mets_xml = SWORDMETSProtocol._get_mets(metadata_xml_dc)
+        # Because of the xml declaration we have to convert to a bytes object
+        mets_xsd.assertValid(etree.fromstring(bytes(mets_xml, encoding='utf-8')))
 
 
     @pytest.mark.skip(reason="Tests not fully implemented. Fixtures missing. Mocking missing.")

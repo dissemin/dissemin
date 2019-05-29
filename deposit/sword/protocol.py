@@ -18,17 +18,18 @@ class SWORDMETSProtocol(RepositoryProtocol):
         """
         return "SOWRD Protocol (METS)"
 
-    def _get_mets(self, metadata):
+    @staticmethod
+    def _get_mets(metadata):
         """
         Creates a mets xml from metadata
         Policy for creation is: One-time-usage, so keep the document as small as possible. This means
             * Attributes and elements are omitted if not needed
             * There is one and only one dmdSec
             * MDTYPE in dmdSec/mdWrap is always ``OTHER``
-            * One and only file that is named ``dicument.pdf``
+            * One and only file that is named ``document.pdf``
         
         :params metadata: Bibliographic metadata as lxml etree
-        :returns: complete mets lxml etree
+        :returns: complete mets as string
         """
         METS_NAMESPACE = "http://www.loc.gov/METS/"
         XLINK_NAMESPACE = "http://www.w3.org/1999/xlink"
@@ -64,7 +65,7 @@ class SWORDMETSProtocol(RepositoryProtocol):
         mets_div_file = etree.SubElement(mets_div_dmd, METS + 'div')
         etree.SubElement(mets_div_file, METS + 'fptr', FILEID='d_file_1')
 
-        return mets_xml
+        return etree.tostring(mets_xml, pretty_print=True, encoding='utf-8', xml_declaration=True).decode()
 
     def _get_mets_container(self, pdf, mets):
         """

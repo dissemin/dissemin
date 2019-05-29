@@ -21,7 +21,8 @@ def metadata_xml_dc():
     Returns bibliographic metadata as lxml etree. Use this fixture if you just need some metadata in XML format and it's content is not important.
     """
     conftest_dir = os.path.dirname(os.path.abspath(__file__))
-    return etree.parse(os.path.join(conftest_dir, 'test_data', 'dc_lesebibliothek_frauenzimmer.xml')).getroot()
+    parser = etree.XMLParser(remove_blank_text=True)
+    return etree.parse(os.path.join(conftest_dir, 'test_data', 'dc_lesebibliothek_frauenzimmer.xml'), parser).getroot()
 
 
 @pytest.fixture(scope='session')
