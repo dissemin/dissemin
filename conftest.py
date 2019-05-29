@@ -1,4 +1,5 @@
 import json
+import os
 import pytest
 
 from datetime import date
@@ -162,3 +163,16 @@ def user_isaac_newton(db):
     user.delete()
 
 
+@pytest.fixture(scope="class")
+def blank_pdf_path():
+    testdir = os.path.dirname(os.path.abspath(__file__))
+    path = os.path.join(testdir, 'upload', 'tests', 'data', 'blank.pdf')
+    return path
+
+
+@pytest.fixture(scope="class")
+def blank_pdf():
+    testdir = os.path.dirname(os.path.abspath(__file__))
+    with open(blank_pdf_pdf, 'rb') as f:
+            pdf = f.read()
+    return f

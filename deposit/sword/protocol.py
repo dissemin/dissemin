@@ -1,4 +1,6 @@
+from io import BytesIO
 from lxml import etree
+from zipfile import ZipFile
 
 from deposit.protocol import RepositoryProtocol
 
@@ -67,7 +69,9 @@ class SWORDMETSProtocol(RepositoryProtocol):
 
         return etree.tostring(mets_xml, pretty_print=True, encoding='utf-8', xml_declaration=True).decode()
 
-    def _get_mets_container(self, pdf, mets):
+
+    @staticmethod
+    def _get_mets_container(pdf, mets):
         """
         Creates a mets package, i.e. zip for a given file and given schema. The filename in the package is taken from mets.
 
@@ -75,7 +79,12 @@ class SWORDMETSProtocol(RepositoryProtocol):
         :params mets: A mets as lxml etree
         :returns: a zip object
         """
-        pass
+        s = BytesIO()
+        with ZipFile(s, 'w') as zip_file:
+            zip_file.write(pdf, 'document.pdf')
+            zip_file.writestr('mets.xml', mets)
+        return s
+
 
     def submit_deposit(self, pdf, form, metadata):
         """

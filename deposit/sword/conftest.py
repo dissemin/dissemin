@@ -25,6 +25,17 @@ def metadata_xml_dc():
     return etree.parse(os.path.join(conftest_dir, 'test_data', 'dc_lesebibliothek_frauenzimmer.xml'), parser).getroot()
 
 
+@pytest.fixture
+def metadata_xml_mets():
+    """
+    Returns a mets formatted xml with some metadata in dmdSec
+    """
+    conftest_dir = os.path.dirname(os.path.abspath(__file__))
+    with open(os.path.join(conftest_dir, 'test_data', 'mets_dc_lesebibliothek_frauenzimmer.xml'), 'r') as f:
+        xml = f.read()
+    return xml
+
+
 @pytest.fixture(scope='session')
 def mets_xsd():
     """

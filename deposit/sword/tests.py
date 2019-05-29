@@ -1,6 +1,8 @@
 import pytest
 
 from lxml import etree
+from zipfile import ZipFile
+
 from deposit.sword.protocol import SWORDMETSProtocol
 
 @pytest.mark.usefixtures('sword_mets_protocol')
@@ -31,12 +33,18 @@ class TestSWORDMETSProtocol(object):
         mets_xsd.assertValid(etree.fromstring(bytes(mets_xml, encoding='utf-8')))
 
 
-    @pytest.mark.skip(reason="Tests not fully implemented. Fixtures missing. Mocking missing.")
-    def test_get_mets_container(self):
+    def test_get_mets_container(self, blank_pdf_path, metadata_xml_mets):
         """
         A test for creating a mets container
         """
-        pass
+        s = SWORDMETSProtocol._get_mets_container(blank_pdf_path, metadata_xml_mets)
+        with ZipFile(s, 'r') as zip_file:
+            files = zip_file.namelist()
+            for filename in ['mets.xml', 'document.pdf']:
+                assert filename in files
+            assert not zip_file.testzip()
+
+
 
     @pytest.mark.skip(reason="Tests not fully implemented. Fixtures missing. Mocking missing.")
     def test_submit_deposit(self):
