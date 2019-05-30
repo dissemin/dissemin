@@ -1,16 +1,18 @@
 # Translation of Dissemin papers to Zazaki (Zazaki)
 # Exported from translatewiki.net
 #
+# Author: Mirzali
 # Author: Orbot707
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-27 18:48+0200\n"
-"PO-Revision-Date: 2019-05-17 10:13:32+0000\n"
+"PO-Revision-Date: 2019-05-30 17:15:22+0000\n"
 "Language: diq\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-02-25 13:41:23+0000\n"
+"X-POT-Import-Date: 2019-05-27 18:30:52+0000\n"
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -39,6 +41,7 @@ msgid "Paper is invalid"
 msgstr ""
 
 #: papers/static/papers/refresh.js:137
+#, invalid-plural
 msgid "We ignored %(count)s paper from your ORCiD profile."
 msgid_plural "We ignored %(count)s papers from your ORCiD profile."
 msgstr[0] ""
@@ -64,5 +67,6 @@ msgstr "Dehana tay melumati bımocne"
 #, javascript-format
 msgid "%s paper found"
 msgid_plural "%s papers found"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%s pele vêniye"
+msgstr[1] "%s peli vêniyayi"
+

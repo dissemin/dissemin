@@ -5,10 +5,11 @@
 # Author: Wladek92
 msgid ""
 msgstr ""
+""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-27 18:48+0200\n"
-"PO-Revision-Date: 2019-05-17 10:13:33+0000\n"
+"PO-Revision-Date: 2019-05-30 17:15:23+0000\n"
 "Last-Translator: Ryan Lahfa <masterancpp@gmail.com>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-04-24\n"
-"X-POT-Import-Date: 2019-02-25 13:41:23+0000\n"
+"X-POT-Import-Date: 2019-05-27 18:30:52+0000\n"
 
 #: papers/static/papers/refresh.js:63
 msgid "Do not show this message anymore"
@@ -66,8 +67,9 @@ msgid "Show less information"
 msgstr "Montrer moins d'informations"
 
 #: papers/static/papers/refresh.js:206
-#, javascript-format
+#, invalid-plural, javascript-format
 msgid "%s paper found"
 msgid_plural "%s papers found"
 msgstr[0] ""
 msgstr[1] ""
+

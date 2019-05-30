@@ -5,15 +5,17 @@
 # Author: Danielbeerbonn
 # Author: Leslie Neumann
 # Author: Metalhead64
+# Author: Mirzali
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-27 18:48+0200\n"
-"PO-Revision-Date: 2019-05-17 10:13:32+0000\n"
+"PO-Revision-Date: 2019-05-30 17:15:22+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-02-25 13:41:23+0000\n"
+"X-POT-Import-Date: 2019-05-27 18:30:52+0000\n"
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -45,8 +47,7 @@ msgstr "Publikation ist ungültig"
 msgid "We ignored %(count)s paper from your ORCiD profile."
 msgid_plural "We ignored %(count)s papers from your ORCiD profile."
 msgstr[0] "Wir haben eine Publikation aus Deinem ORCiD-Profil ignoriert."
-msgstr[1] ""
-"Wir haben %(count)s Publikationen aus Deinem ORCiD-Profil ignoriert."
+msgstr[1] "Wir haben %(count)s Publikationen aus Deinem ORCiD-Profil ignoriert."
 
 #: papers/static/papers/refresh.js:147
 msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
@@ -68,5 +69,6 @@ msgstr "Weniger Informationen anzeigen"
 #, javascript-format
 msgid "%s paper found"
 msgid_plural "%s papers found"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%s Papier gefunden"
+msgstr[1] "%s Papiere gefunden"
+

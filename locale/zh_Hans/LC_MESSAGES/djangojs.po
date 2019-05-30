@@ -4,13 +4,14 @@
 # Author: Liuxinyu970226
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-27 18:48+0200\n"
-"PO-Revision-Date: 2019-05-17 10:13:36+0000\n"
+"PO-Revision-Date: 2019-05-30 17:15:24+0000\n"
 "Language: zh_hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-02-25 13:41:23+0000\n"
+"X-POT-Import-Date: 2019-05-27 18:30:52+0000\n"
 "X-Generator: MediaWiki 1.33.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
@@ -61,7 +62,8 @@ msgid "Show less information"
 msgstr "显示更少信息"
 
 #: papers/static/papers/refresh.js:206
-#, javascript-format
+#, invalid-plural, javascript-format
 msgid "%s paper found"
 msgid_plural "%s papers found"
 msgstr[0] ""
+
