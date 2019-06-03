@@ -11,7 +11,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-27 18:48+0200\n"
-"PO-Revision-Date: 2019-05-30 17:15:25+0000\n"
+"PO-Revision-Date: 2019-06-03 15:25:47+0000\n"
 "Language: skr-Arab\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2078,7 +2078,7 @@ msgstr "زبان وٹاؤ"
 
 #: templates/dissemin/skeleton.html:51
 msgid "Translate"
-msgstr ""
+msgstr "ترجمہ کرو"
 
 #: templates/dissemin/skeleton.html:56 templates/dissemin/skeleton.html:95
 msgid "FAQ"

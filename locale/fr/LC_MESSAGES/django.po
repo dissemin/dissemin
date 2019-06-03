@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-27 18:48+0200\n"
-"PO-Revision-Date: 2019-05-30 17:15:24+0000\n"
+"PO-Revision-Date: 2019-06-03 15:25:45+0000\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -399,11 +399,11 @@ msgstr "Échec lors de la mise à jour de la licence de la prépublication."
 
 #: deposit/osf/protocol.py:418
 msgid "No Repository endpoint provided."
-msgstr "Aucun point de terminaison n'a été fourni pour la connexion au dépôt."
+msgstr "Aucun point de terminaison n’a été fourni pour la connexion au dépôt."
 
 #: deposit/osf/protocol.py:421
 msgid "No OSF token provided."
-msgstr "Aucun jeton n'a été fourni pour la connexion à OSF."
+msgstr "Aucun jeton OSF n’a été fourni."
 
 #: deposit/osf/protocol.py:462
 msgid "Unable to upload the PDF file."
@@ -1456,7 +1456,7 @@ msgstr "version publiée"
 
 #: publishers/templates/publishers/detailsPolicy.html:30
 msgid "Contact the authors to make this publication freely available. This is a service of the Open Access Button."
-msgstr ""
+msgstr "Contacter les auteurs pour rendre cette publication disponible librement. C’est un service du Bouton d’accès ouvert."
 
 #: publishers/templates/publishers/detailsPolicy.html:30
 msgid "Contact authors"
@@ -2175,9 +2175,8 @@ msgid "Dissemin uses ORCID's public OAuth interface to authenticate its users. T
 msgstr "Dissemin utilise l’interface publique OAuth d’ORCID pour authentifier ses utilisateurs. Cette interface ne permet d’accéder qu’aux informations indiquées comme publiques dans le profil ORCID de l’utilisateur. Ainsi, les mots de passe ORCID ne sont jamais transmis et les adresses de messagerie ne sont pas transmises quand elles sont indiquées comme privées (le réglage par défaut). Lorsqu’un utilisateur se connecte à Dissemin avec ORCID, Dissemin récupère son identifiant ORCID, et toutes les informations publiques attachées à l’enregistrement ORCID. Nous utilisons le <a href=\"https://sentry.io/privacy/\">service Sentry</a> pour tracer els erreurs sur cette plateforme. La configuration de notre serveur web stocke les informations d’accès de base (URL demandée et adresse IP) pour la surveillance des erreurs, et les conserve quatorze jours. Dissemin peut stocker toute information saisie par ses utilisateurs sur la plateforme. Les utilisateurs peuvent demander une copie de leurs informations personnelles que Dissemin stocke sur eux en envoyant un courriel à support@dissem.in."
 
 #: templates/dissemin/tos.html:116
-#, fuzzy
 msgid "Documents deposited in repositories via Dissemin can be stored on the platform, but are not available for download on the platform. They can be stored internally for logging purposes, and to make sure failed deposits can be fixed later. Dissemin does not commit to store any of the files it receives from its users. Users can write to <a href=\"mailto:support@dissem.in\">support@dissem.in</a> if they want one of their uploads to be deleted from our internal storage space, or from the repository they have deposited to. Note that deletion policies vary accross repositories: we provide no guarantee that deposits can be deleted from the target repositories."
-msgstr "Les documents déposés à l’aide de Dissemin peuvent être conservés sur la plateforme, mais ne sont pas disponibles au téléchargement à partir de la plateforme. Ils peuvent être conservés en interne à des fins de journalisation, et pour assurer que le document est effectivement déposé lorsque la première tentative a échoué. Dissemin ne s’engage pas à conserver de façon pérenne chacun des fichiers que ses utilisateurs lui fournissent. Vous pouvez écrire à support@dissem.in si vous souhaitez qu’un de vos documents soit supprimé de notre espace de stockage interne, ou du dépôt auquel vous l’avez envoyé. Notez que chaque dépôt a sa propre politique de suppression : nous ne garantissons pas que votre demande de suppression pourra effectivement être honorée par le dépôt cible."
+msgstr "Les documents déposés à l’aide de Dissemin peuvent être conservés sur la plateforme, mais ne sont pas disponibles au téléchargement à partir de la plateforme. Ils peuvent être conservés en interne à des fins de journalisation, et pour assurer que le document est effectivement déposé lorsque la première tentative a échoué. Dissemin ne s’engage pas à conserver de façon pérenne chacun des fichiers que ses utilisateurs lui fournissent. Vous pouvez écrire à <a href=\"mailto:support@dissem.in\">support@dissem.in</a> si vous souhaitez qu’un de vos documents soit supprimé de notre espace de stockage interne, ou du dépôt auquel vous l’avez envoyé. Notez que chaque dépôt a sa propre politique de suppression : nous ne garantissons pas que votre demande de suppression pourra effectivement être honorée par le dépôt cible."
 
 #: templates/dissemin/tos.html:132
 msgid "Misuse can be reported to <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."

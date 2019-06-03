@@ -12,7 +12,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-27 18:48+0200\n"
-"PO-Revision-Date: 2019-05-30 17:15:24+0000\n"
+"PO-Revision-Date: 2019-06-03 15:25:46+0000\n"
 "Language: lb\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1458,9 +1458,8 @@ msgid "Contact the authors to make this publication freely available. This is a 
 msgstr ""
 
 #: publishers/templates/publishers/detailsPolicy.html:30
-#, fuzzy
 msgid "Contact authors"
-msgstr "No Auteuren"
+msgstr "Auteure kontaktéieren"
 
 #: publishers/templates/publishers/detailsPolicy.html:31
 #: templates/dissemin/tos.html:81
@@ -2074,13 +2073,12 @@ msgid "Logo"
 msgstr "Ausloggen"
 
 #: templates/dissemin/skeleton.html:42
-#, fuzzy
 msgid "Language"
-msgstr "Sprooch wiesselen"
+msgstr "Sprooch"
 
 #: templates/dissemin/skeleton.html:51
 msgid "Translate"
-msgstr ""
+msgstr "Iwwersetzen"
 
 #: templates/dissemin/skeleton.html:56 templates/dissemin/skeleton.html:95
 msgid "FAQ"
@@ -2262,9 +2260,8 @@ msgid "Invalid URL."
 msgstr ""
 
 #: vinaigrette-deleteme.py:2
-#, fuzzy
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
-msgstr "Creative Commons CC0 1.0 Universal"
+msgstr "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
 
 #: vinaigrette-deleteme.py:3
 msgid "Creative Commons Attribution 4.0 International (CC BY 4.0)"

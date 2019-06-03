@@ -16,7 +16,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-27 18:48+0200\n"
-"PO-Revision-Date: 2019-05-30 17:15:23+0000\n"
+"PO-Revision-Date: 2019-06-03 15:25:44+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2190,7 +2190,7 @@ msgstr ""
 
 #: templates/dissemin/tos.html:132
 msgid "Misuse can be reported to <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
-msgstr "Para notificar usos indebidos, utiliza la dirección <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
+msgstr "Para notificar usos indebidos, utiliza la dirección <a href=\"mailto:support@dissem.in\">support@dissem.in</a> (en inglés)."
 
 #: templates/dissemin/tos.html:140
 msgid "The <a href=\"https://dissem.in\">dissem.in</a> website has been registered with <a href=\"https://www.cnil.fr/\">CNIL</a> under declaration n°1895382 v0."

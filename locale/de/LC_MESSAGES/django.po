@@ -18,7 +18,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-27 18:48+0200\n"
-"PO-Revision-Date: 2019-05-30 17:15:23+0000\n"
+"PO-Revision-Date: 2019-06-03 15:25:44+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1456,7 +1456,7 @@ msgstr "veröffentlichte Version"
 
 #: publishers/templates/publishers/detailsPolicy.html:30
 msgid "Contact the authors to make this publication freely available. This is a service of the Open Access Button."
-msgstr ""
+msgstr "Kontaktiere die Autoren dieser Publikation um sie frei verfügbar zu machen. Dieser Service wird durch den Open Access Button ermöglichst."
 
 #: publishers/templates/publishers/detailsPolicy.html:30
 #, fuzzy
@@ -2081,7 +2081,7 @@ msgstr "Sprache wechseln"
 
 #: templates/dissemin/skeleton.html:51
 msgid "Translate"
-msgstr ""
+msgstr "Sprache wechseln"
 
 #: templates/dissemin/skeleton.html:56 templates/dissemin/skeleton.html:95
 msgid "FAQ"
@@ -2174,28 +2174,24 @@ msgid "Please address any inquiry to <a href=\"mailto:support@dissem.in\">suppor
 msgstr "Bitte richte alle Anfragen an support@dissem.in."
 
 #: templates/dissemin/tos.html:93
-#, fuzzy
 msgid "Dissemin uses ORCID's public OAuth interface to authenticate its users. This interface only transmits information marked as public in the user's ORCID profile. This means that ORCID passwords are never transmitted and email addresses are not transmitted when they are marked as private, which is the default setting. When logging in to Dissemin from ORCID, Dissemin acquires the user's ORCID id, as well as all public information attached to the ORCID record. We are using the <a href=\"https://sentry.io/privacy/\">Sentry service</a> for error tracking on this platform. Our webserver configuration stores basic access information (URL requested and IP address) for error monitoring, which are kept for fourteen days. Dissemin can store any information input by its users on the platform. Users can ask for a copy of the personal information Dissemin stores about them by writing an email to <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
-msgstr "Dissemin verwendet die öffentliche OAuth-Schnittstelle von ORCID, um seine Benutzer_innen zu authentifizieren. Diese Schnittstelle übermittelt nur Informationen, die im ORCID-Profil des Benutzers bzw. der Benutzerin als öffentlich markiert wurden. Das bedeutet, dass niemals ORCID-Passwörter übermittelt werden. E-Mail-Adressen werden ebenfalls nicht übermittelt, wenn sie als privat markiert wurden, was der Standardeinstellung entspricht. Bei der Anmeldung bei Dissemin von ORCID erhält Dissemin sowohl die Benutzerkennung von ORCID als auch alle öffentlichen Informationen Deines ORCID-Profils. Wir benutzen den Dienst <a href=\"https://sentry.io/privacy/\">Sentry</a> zum Fehlertracking auf dieser Plattform. Unsere Webserver-Konfiguration speichert Basisinformationen zum Zugriff (die angeforderte URL sowie die IP-Adresse) zur Fehlerüberwachung, die 14 Tage gespeichert werden. Dissemin kann alle Benutzereingaben von Informationen auf der Plattform speichern. Benutzer_innen können um eine Kopie der persönlichen Informationen bitten, die Dissemin über sie speichert, indem sie eine E-Mail an support@dissem.in schreiben."
+msgstr "Dissemin verwendet die öffentliche OAuth-Schnittstelle von ORCID, um seine Benutzer_innen zu authentifizieren. Diese Schnittstelle übermittelt nur Informationen, die im ORCID-Profil des Benutzers bzw. der Benutzerin als öffentlich markiert wurden. Das bedeutet, dass niemals ORCID-Passwörter übermittelt werden. E-Mail-Adressen werden ebenfalls nicht übermittelt, wenn sie als privat markiert wurden, was der Standardeinstellung entspricht. Bei der Anmeldung bei Dissemin von ORCID erhält Dissemin sowohl die Benutzerkennung von ORCID als auch alle öffentlichen Informationen Deines ORCID-Profils. Wir benutzen den Dienst <a href=\"https://sentry.io/privacy/\">Sentry</a> zum Fehlertracking auf dieser Plattform. Unsere Webserver-Konfiguration speichert Basisinformationen zum Zugriff (die angeforderte URL sowie die IP-Adresse) zur Fehlerüberwachung, die 14 Tage gespeichert werden. Dissemin kann alle Benutzereingaben von Informationen auf der Plattform speichern. Benutzer_innen können um eine Kopie der persönlichen Informationen bitten, die Dissemin über sie speichert, indem sie eine E-Mail an <a href=\"mailto:support@dissem.in\">support@dissem.in</a> schreiben."
 
 #: templates/dissemin/tos.html:116
-#, fuzzy
 msgid "Documents deposited in repositories via Dissemin can be stored on the platform, but are not available for download on the platform. They can be stored internally for logging purposes, and to make sure failed deposits can be fixed later. Dissemin does not commit to store any of the files it receives from its users. Users can write to <a href=\"mailto:support@dissem.in\">support@dissem.in</a> if they want one of their uploads to be deleted from our internal storage space, or from the repository they have deposited to. Note that deletion policies vary accross repositories: we provide no guarantee that deposits can be deleted from the target repositories."
-msgstr "In Repositorien über Dissemin abgelegte Dokumente können auf der Plattform gespeichert werden, sind jedoch nicht zum Herunterladen auf der Plattform verfügbar. Sie können intern zu Protokollierungszwecken gespeichert werden und um sicherzustellen, dass fehlgeschlagene Ablagen später korrigiert werden können. Dissemin beabsichtigt keine Dateien zu speichern, die es von seinen Benutzer_innen erhält. Benutzer_innen können an support@dissem.in schreiben, falls sie einen ihrer Uploads von unserem internen Speicherplatz oder dem Repositorium löschen möchten, auf dem sie abgelegt wurden. Beachte, dass Löschrichtlinien auf den Repositorien variieren können: Wir bieten keine Garantie, dass Ablagen von den Ziel-Repositorien gelöscht werden können."
+msgstr "In Repositorien über Dissemin abgelegte Dokumente können auf der Plattform gespeichert werden, sind jedoch nicht zum Herunterladen auf der Plattform verfügbar. Sie können intern zu Protokollierungszwecken gespeichert werden und um sicherzustellen, dass fehlgeschlagene Ablagen später korrigiert werden können. Dissemin beabsichtigt keine Dateien zu speichern, die es von seinen Benutzer_innen erhält. Benutzer_innen können an <a href=\"mailto:support@dissem.in\">support@dissem.in</a> schreiben, falls sie einen ihrer Uploads von unserem internen Speicherplatz oder dem Repositorium löschen möchten, auf dem sie abgelegt wurden. Beachte, dass Löschrichtlinien auf den Repositorien variieren können: Wir bieten keine Garantie, dass Ablagen von den Ziel-Repositorien gelöscht werden können."
 
 #: templates/dissemin/tos.html:132
-#, fuzzy
 msgid "Misuse can be reported to <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
-msgstr "Missbräuchliche Verwendung kann an support@dissem.in gemeldet werden."
+msgstr "Missbräuchliche Verwendung kann an <a href=\"mailto:support@dissem.in\">support@dissem.in</a> gemeldet werden."
 
 #: templates/dissemin/tos.html:140
 msgid "The <a href=\"https://dissem.in\">dissem.in</a> website has been registered with <a href=\"https://www.cnil.fr/\">CNIL</a> under declaration n°1895382 v0."
 msgstr "Die <a href=\"https://dissem.in\">dissem.in</a>-Website wurde bei <a href=\"https://www.cnil.fr/\">CNIL</a> unter der Erklärung n°1895382 v0 registriert."
 
 #: templates/dissemin/tos.html:148
-#, fuzzy
 msgid "You have the right to access, modify, and delete the personal information that we hold about you. To exercise this right, please contact us at <a href=\"mailto:support@dissem.in\">support@dissem.in</a>, or by postal mail at the following addresss:"
-msgstr "Du hast das Recht auf den Zugang, die Veränderung und Löschung der persönlichen Informationen, die wir über Dich erheben. Um dieses Recht auszuüben, kontaktiere uns bitte unter support@dissem.in oder per Post an die folgende Adresse:"
+msgstr "Du hast das Recht auf den Zugang, die Veränderung und Löschung der persönlichen Informationen, die wir über Dich erheben. Um dieses Recht auszuüben, kontaktiere uns bitte unter <a href=\"mailto:support@dissem.in>support@dissem.in</a> oder per Post an die folgende Adresse:"
 
 #: templates/socialaccount/authentication_error.html:6
 #: templates/socialaccount/authentication_error.html:12
