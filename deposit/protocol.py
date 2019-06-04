@@ -100,7 +100,7 @@ class RepositoryProtocol(object, metaclass = RepositoryProtocolMeta):
 
     def __init__(self, repository, **kwargs):
         self.repository = repository
-        self._logs = None
+        self._logs = ''
         self.paper = None
         self.user = None
     

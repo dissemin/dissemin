@@ -113,7 +113,10 @@ def repository(db, simple_logo, oaisource):
                 name='Repository SWORD METS',
                 description='SOWRD METS Test repository',
                 logo=simple_logo,
+                username='dissemin',
+                password='dissemin',
                 protocol='SWORDMETSProtocol',
+                endpoint='https://deposit.dissem.in/sword_mets/',
                 oaisource=oaisource.dummy_oaisource(),
             )
             self.objects.append(repo)

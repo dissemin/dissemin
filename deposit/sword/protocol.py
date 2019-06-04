@@ -1,24 +1,37 @@
+import requests
+import logging
+
 from io import BytesIO
 from lxml import etree
 from zipfile import ZipFile
 
+from django.utils.translation import ugettext as _
+
+from deposit.protocol import DepositError
 from deposit.protocol import RepositoryProtocol
+
+logger = logging.getLogger('dissemin.' + __name__)
+
 
 class SWORDMETSProtocol(RepositoryProtocol):
     """
     A protocol that performs a deposito via SWORDv2 using a METS Container.
     """
-    def __repr__(self):
-        """
-        Return the class name
-        """
-        return self.__name__
 
     def __str__(self):
         """
         Return human readable class name
         """
         return "SOWRD Protocol (METS)"
+
+    
+    @staticmethod
+    def _get_deposit_result(response):
+        """
+        This function returns a Deposit Result in case of a successful deposition. Please override this function in your sub-protocol.
+        """
+        raise NotImplementedError("Function not implemented")
+    
 
     @staticmethod
     def _get_mets(metadata):
@@ -86,19 +99,49 @@ class SWORDMETSProtocol(RepositoryProtocol):
         return s
 
 
-    def submit_deposit(self, pdf, form, metadata):
+    @staticmethod
+    def _get_xml_metadata(form):
         """
-        Submit paper to the repository. This is a wrapper for the subclasses. It creates the METS container and deposits.
+        This function returns metadata as lxml etree object, that is ready to inserted into a mets.xml. Override this function in your subclassed protocol.
+        """
+        raise NotImplementedError("Function not implemented")
+
+
+    def submit_deposit(self, pdf, form):
+        """
+        Submit paper to the repository. This is a wrapper for the subclasses and calls some protocol specific functions. It creates the METS container and deposits.
 
         :param pdf: Filename to dhe PDF file to submit
         :param form: The form returned by get_form and completed by the user
-        :param metadata: Metadata formated as lxml etree, ready to be inserted into METS
 
         :returns: DepositResult object
         """
-        pass
-    
 
+        # Raise error if login credentials are missing. These are not mandatory in Admin UI, since alternatively an API Key can be used, but not for SWORD
+        if not (self.repository.username and self.repository.password):
+            raise DepositError(_("Username or password not provided for this repository. Please contact the Dissemin team."))
 
+        metadata = self._get_xml_metadata(form)
+        mets = self._get_mets(metadata)
 
+        zipfile = self._get_mets_container(pdf, mets)
 
+        # Send request to repository
+        self.log("### Preparing request to repository")
+
+        auth = (self.repository.username, self.repository.password)
+        files = {'file': ('mets.zip', zipfile.getvalue(), 'application/zip')}
+        headers = {'Content-type': 'application/zip'}
+
+        self.log("### Sending request")
+        r = requests.post(self.repository.endpoint, auth=auth, headers=headers, files=files, timeout=20)
+
+        r.raise_for_status()
+
+        self.log("### Status response: %s" % r.status_code)
+
+        # Deposit was successful
+
+        deposit_result = self._get_deposit_result(r.text)
+
+        return deposit_result

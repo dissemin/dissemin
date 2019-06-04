@@ -42,3 +42,25 @@ def mets_xsd():
     Returns a mets xsd as schema ready to validate
     """
     return etree.XMLSchema(etree.parse("http://www.loc.gov/standards/mets/version112/mets.xsd"))
+
+
+@pytest.fixture
+def mock_get_xml_metadata(request, monkeypatch, metadata_xml_dc):
+    """
+    Mocks _get_xml_metadata so that it returns metadata and does not raise exception.
+    """
+    def _get_xml_metadata(*args, **kwargs):
+        return metadata_xml_dc
+
+    monkeypatch.setattr(request.cls.protocol, '_get_xml_metadata', _get_xml_metadata)
+
+
+@pytest.fixture
+def mock_get_deposit_result(request, monkeypatch):
+    """
+    Mocks _get_deposit_reult so that it returns ``None`` and does not raise exception.
+    """
+    def _get_deposit_result(*args, **kwargs):
+        return None
+
+    monkeypatch.setattr(request.cls.protocol, '_get_deposit_result', _get_deposit_result)
