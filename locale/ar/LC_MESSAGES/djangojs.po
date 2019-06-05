@@ -71,7 +71,7 @@ msgstr "عرض معلومات أقل"
 #, javascript-format
 msgid "%s paper found"
 msgid_plural "%s papers found"
-msgstr[0] "تم العثور على % ورقة"
+msgstr[0] "تم العثور على %s ورقة"
 msgstr[1] "تم العثور على%s أوراق"
 msgstr[2] ""
 msgstr[3] ""
