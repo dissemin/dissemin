@@ -66,5 +66,5 @@ msgstr "Fà 'ndrucà mene 'mbormaziune"
 msgid "%s paper found"
 msgid_plural "%s papers found"
 msgstr[0] "%s fogghie acchiate"
-msgstr[1] ""
+msgstr[1] "%s"
 
