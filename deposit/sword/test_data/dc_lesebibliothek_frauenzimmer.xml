@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Use this file if you just need some metadata in XML format and it's content is not important. -->
+<metadata xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <dc:title>Vorschlag einer Lesebibliothek für junge Frauenzimmer</dc:title>
+  <dc:subject>Education</dc:subject>
+  <dc:description>Ein bibliografisches Curiosum vom Jahre 1780. Mit Anmerkungen und einem Verzechnis scherzhafter Kataloge (livres imaginaires)</dc:description>
+  <dc:publisher>Borna</dc:publisher>
+  <dc:contributor>Hugo Hann</dc:contributor>
+  <dc:date>1889</dc:date>
+  <dc:type>Text</dc:type>
+  <dc:format>Book</dc:format>
+  <dc:language>German</dc:language>
+</metadata>

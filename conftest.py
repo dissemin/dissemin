@@ -1,4 +1,5 @@
 import json
+import os
 import pytest
 
 from datetime import date
@@ -42,6 +43,9 @@ def oaisource(db):
         Dummy class to gahter different functions
         """
         def __init__(self):
+            """
+            List of objects that will be deleted after test is done
+            """
             self.objects = []
 
         def dummy_oaisource(self):
@@ -55,6 +59,13 @@ def oaisource(db):
             )
             self.objects.append(oaisource)
             return oaisource
+        
+        @staticmethod
+        def base_oaisource():
+            """
+            Provides BASE OaiSource. It is in the database from a migration. We do not add it to the list of to be deleted OaiSources
+            """
+            return OaiSource.objects.get(identifier='base')
 
     dummy = Dummy()
     yield dummy
@@ -88,8 +99,26 @@ def repository(db, simple_logo, oaisource):
             repo = Repository.objects.create(
                 name='Dummy Test Repository',
                 description='Test repository',
+                logo=simple_logo,
                 protocol='No-Protocol',
-                oaisource=oaisource.dummy_oaisource()
+                oaisource=oaisource.dummy_oaisource(),
+            )
+            self.objects.append(repo)
+            return repo
+
+        def sword_mets_repository(self):
+            """
+            Returns a new SWORD METS repository using SWORDMETSProtocol. SWORDMETSProtocol is an abstract class, so you can't really do anything with it and this repository.
+            """
+            repo = Repository.objects.create(
+                name='Repository SWORD METS',
+                description='SOWRD METS Test repository',
+                logo=simple_logo,
+                username='dissemin',
+                password='dissemin',
+                protocol='SWORDMETSProtocol',
+                endpoint='https://deposit.dissem.in/sword_mets/',
+                oaisource=oaisource.dummy_oaisource(),
             )
             self.objects.append(repo)
             return repo
@@ -138,3 +167,15 @@ def user_isaac_newton(db):
     user.delete()
 
 
+@pytest.fixture(scope="class")
+def blank_pdf_path():
+    testdir = os.path.dirname(os.path.abspath(__file__))
+    path = os.path.join(testdir, 'upload', 'tests', 'data', 'blank.pdf')
+    return path
+
+
+@pytest.fixture(scope="class")
+def blank_pdf(blank_pdf_path):
+    with open(blank_pdf_path, 'rb') as f:
+            pdf = f.read()
+    return pdf
