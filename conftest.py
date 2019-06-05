@@ -60,7 +60,8 @@ def oaisource(db):
             self.objects.append(oaisource)
             return oaisource
         
-        def base_oaisource(self):
+        @staticmethod
+        def base_oaisource():
             """
             Provides BASE OaiSource. It is in the database from a migration. We do not add it to the list of to be deleted OaiSources
             """
@@ -104,7 +105,7 @@ def repository(db, simple_logo, oaisource):
             )
             self.objects.append(repo)
             return repo
-        
+
         def sword_mets_repository(self):
             """
             Returns a new SWORD METS repository using SWORDMETSProtocol. SWORDMETSProtocol is an abstract class, so you can't really do anything with it and this repository.
@@ -174,8 +175,7 @@ def blank_pdf_path():
 
 
 @pytest.fixture(scope="class")
-def blank_pdf():
-    testdir = os.path.dirname(os.path.abspath(__file__))
-    with open(blank_pdf_pdf, 'rb') as f:
+def blank_pdf(blank_pdf_path):
+    with open(blank_pdf_path, 'rb') as f:
             pdf = f.read()
-    return f
+    return pdf

@@ -8,7 +8,7 @@ from zipfile import ZipFile
 from deposit.protocol import DepositError
 from deposit.sword.protocol import SWORDMETSProtocol
 
-data = [(None, None), ('vetinari', None), (None, 'psst')]
+userdata = [(None, None), ('vetinari', None), (None, 'psst')]
 
 @pytest.mark.usefixtures('sword_mets_protocol')
 class TestSWORDMETSProtocol(object):
@@ -22,7 +22,9 @@ class TestSWORDMETSProtocol(object):
         """
         assert self.protocol.__str__() == "SOWRD Protocol (METS)"
 
-    def test_get_mets(self, mets_xsd, metadata_xml_dc):
+
+    @staticmethod
+    def test_get_mets(mets_xsd, metadata_xml_dc):
         """
         A test for creating mets from metadata
         """
@@ -31,14 +33,17 @@ class TestSWORDMETSProtocol(object):
         mets_xsd.assertValid(etree.fromstring(bytes(mets_xml, encoding='utf-8')))
 
 
-    def test_get_xml_metadata(self):
+    @staticmethod
+    def test_get_xml_metadata():
         """
         Function must not be implemented in SWORDMETSProtocol
         """
         with pytest.raises(NotImplementedError):
             SWORDMETSProtocol._get_xml_metadata(None)
 
-    def test_get_deposit_result(self):
+
+    @staticmethod
+    def test_get_deposit_result():
         """
         Function must not be implemented in SWORDMETSProtocol
         """
@@ -46,7 +51,8 @@ class TestSWORDMETSProtocol(object):
             SWORDMETSProtocol._get_deposit_result(None)
 
 
-    def test_get_mets_container(self, blank_pdf_path, metadata_xml_mets):
+    @staticmethod
+    def test_get_mets_container(blank_pdf_path, metadata_xml_mets):
         """
         A test for creating a mets container
         """
@@ -78,20 +84,19 @@ class TestSWORDMETSProtocol(object):
 
         with pytest.raises(RequestException):
             self.protocol.submit_deposit(blank_pdf_path, None)
-            
-    
-    @pytest.mark.parametrize('username,password', data)
+
+
+    @pytest.mark.parametrize('username,password', userdata)
     def test_submit_deposit_login_missing(self, username, password):
         """
         If username or password are missing, an exception must be raised.
         """
         p = self.protocol 
-        for t in data:
-            p.repository.username = username
-            p.repository.password = password
-            p.repository.save()
-            with pytest.raises(DepositError):
-                p.submit_deposit(None, None)
+        p.repository.username = username
+        p.repository.password = password
+        p.repository.save()
+        with pytest.raises(DepositError):
+            p.submit_deposit(None, None)
 
 
         

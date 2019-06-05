@@ -23,14 +23,17 @@ class TestDisseminXML_1_0(object):
     Validates XML against XSD to make sure that XSD validates as intended.
     '''
 
-    def test_all_elements(self, dissemin_xml_1_0, dissemin_xsd_1_0):
+    @staticmethod
+    def test_all_elements(dissemin_xml_1_0, dissemin_xsd_1_0):
         '''
         Tests if the document with all elements and attributes is valid.
         '''
 
         dissemin_xsd_1_0.assertValid(dissemin_xml_1_0)
     
-    def test_optional_fields(self, dissemin_xml_1_0, dissemin_xsd_1_0):
+
+    @staticmethod
+    def test_optional_fields(dissemin_xml_1_0, dissemin_xsd_1_0):
         '''
         The following elements are optional: orcid, isContributor, identicalInstitution, licenseURI, licenseShortName
         '''

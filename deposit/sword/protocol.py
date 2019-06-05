@@ -40,9 +40,9 @@ class SWORDMETSProtocol(RepositoryProtocol):
         Policy for creation is: One-time-usage, so keep the document as small as possible. This means
             * Attributes and elements are omitted if not needed
             * There is one and only one dmdSec
-            * MDTYPE in dmdSec/mdWrap is always ``OTHER``
-            * One and only file that is named ``document.pdf``
-        
+            * MDTYPE in dmdSec/mdWrap is always `OTHER`
+            * One and only file that is named `document.pdf`
+
         :params metadata: Bibliographic metadata as lxml etree
         :returns: complete mets as string
         """
