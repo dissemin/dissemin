@@ -23,8 +23,7 @@ class TestSWORDMETSProtocol(object):
         assert self.protocol.__str__() == "SOWRD Protocol (METS)"
 
 
-    @staticmethod
-    def test_get_mets(mets_xsd, metadata_xml_dc):
+    def test_get_mets(self, mets_xsd, metadata_xml_dc):
         """
         A test for creating mets from metadata
         """
@@ -51,8 +50,7 @@ class TestSWORDMETSProtocol(object):
             SWORDMETSProtocol._get_deposit_result(None)
 
 
-    @staticmethod
-    def test_get_mets_container(blank_pdf_path, metadata_xml_mets):
+    def test_get_mets_container(self, blank_pdf_path, metadata_xml_mets):
         """
         A test for creating a mets container
         """
