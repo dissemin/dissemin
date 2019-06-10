@@ -13,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-27 18:48+0200\n"
-"PO-Revision-Date: 2019-06-06 15:52:52+0000\n"
+"PO-Revision-Date: 2019-06-10 18:18:10+0000\n"
 "Language: fa\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -550,7 +550,7 @@ msgstr ""
 
 #: deposit/views.py:210
 msgid "Access to the PDF was denied."
-msgstr ""
+msgstr "دسترسی به PDF امکان‌پذیر نیست."
 
 #: deposit/zenodo/protocol.py:87
 msgid "This document is already in Zenodo. Zenodo refused the deposit."
@@ -618,11 +618,11 @@ msgstr "چینی ساده"
 
 #: dissemin/settings/common.py:295
 msgid "Traditional Chinese"
-msgstr ""
+msgstr "چینی سنتی"
 
 #: dissemin/settings/common.py:296
 msgid "Macedonian"
-msgstr ""
+msgstr "مقدونیه‌ای"
 
 #: dissemin/settings/common.py:297
 msgid "German"
@@ -694,7 +694,7 @@ msgstr "نسخهٔ پیش از انتشار"
 
 #: papers/baremodels.py:70
 msgid "Other document"
-msgstr ""
+msgstr "مدرک دیگر"
 
 #: papers/forms.py:50 papers/views.py:77
 msgid "Invalid ORCID identifier."
@@ -711,11 +711,11 @@ msgstr "پژوهشگر"
 
 #: papers/forms.py:77
 msgid "newest first"
-msgstr ""
+msgstr "نخست جدیدترین"
 
 #: papers/forms.py:78
 msgid "oldest first"
-msgstr ""
+msgstr "نخست قدیمی‌ترین"
 
 #: papers/forms.py:112 papers/forms.py:119
 msgid "Any"
@@ -731,7 +731,7 @@ msgstr "نامرئی"
 
 #: papers/forms.py:215 papers/forms.py:218
 msgid "Try any author name"
-msgstr ""
+msgstr "نام پدیدآور دیگری را امتحان کنید"
 
 #: papers/models.py:100
 msgid "Postprint"
@@ -767,11 +767,11 @@ msgstr ""
 
 #: papers/models.py:111
 msgid "Clustering publications"
-msgstr ""
+msgstr "خوشه‌بندی انتشارات"
 
 #: papers/models.py:112
 msgid "Updating statistics"
-msgstr ""
+msgstr "در حال روزامدسازی آمار"
 
 #: papers/models.py:1233 papers/views.py:156 papers/views.py:161
 #: papers/views.py:332 papers/views.py:366
@@ -782,7 +782,7 @@ msgstr "مقاله‌ها"
 #: papers/templates/papers/advanced_search.html:24
 #: papers/templates/papers/index.html:41
 msgid "Advanced search"
-msgstr ""
+msgstr "جستجوی پیشرفته"
 
 #: papers/templates/papers/advanced_search.html:27
 #: papers/templates/papers/search.html:277
@@ -793,12 +793,12 @@ msgstr "عنوان"
 #: papers/templates/papers/advanced_search.html:34
 #: papers/templates/papers/search.html:290
 msgid "By co-authors"
-msgstr ""
+msgstr "بر اساس پدیدآوران همکار"
 
 #: papers/templates/papers/advanced_search.html:36
 #: papers/templates/papers/search.html:292
 msgid "By authors"
-msgstr ""
+msgstr "بر اساس پدیدآوران"
 
 #: papers/templates/papers/advanced_search.html:37
 #: papers/templates/papers/search.html:295
@@ -823,7 +823,7 @@ msgstr ""
 #: papers/templates/papers/advanced_search.html:62
 #: papers/templates/papers/search.html:324
 msgid "By document type"
-msgstr ""
+msgstr "بر اساس نوع مدرک"
 
 #: papers/templates/papers/advanced_search.html:77
 #: papers/templates/papers/search.html:340
@@ -871,10 +871,10 @@ msgstr ""
 #: papers/templates/papers/institution.html:37
 #: publishers/templates/publishers/list.html:113
 #: publishers/templates/publishers/policy.html:132
-#, invalid-plural, python-format
+#, python-format
 msgid "(%(num_total)s paper)"
 msgid_plural "(%(num_total)s papers)"
-msgstr[0] ""
+msgstr[0] "(%(num_total)s مقاله)"
 
 #: papers/templates/papers/department.html:45
 #: papers/templates/papers/institution.html:48
@@ -893,7 +893,7 @@ msgstr ""
 #: papers/templates/papers/exportCitationsModal.html:7
 #: papers/templates/papers/exportCitationsModal.html:33
 msgid "Close"
-msgstr ""
+msgstr "بستن"
 
 #: papers/templates/papers/exportCitationsModal.html:10
 #: papers/templates/papers/paperDetails.html:38
@@ -902,7 +902,7 @@ msgstr ""
 
 #: papers/templates/papers/exportCitationsModal.html:16
 msgid "Format"
-msgstr ""
+msgstr "قالب"
 
 #: papers/templates/papers/exportCitationsModal.html:22
 #: papers/templates/papers/paper.html:118
@@ -974,7 +974,7 @@ msgstr ""
 #, python-format
 msgctxt "as in: _Journal article published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "<span class=\"paperDocType\">%(doctype)s</span> published in %(year)s by"
-msgstr ""
+msgstr "<span class=\"paperDocType\">%(doctype)s</span> منتشر شده در %(year)s توسط"
 
 #: papers/templates/papers/paper.html:66
 #, fuzzy, python-format
@@ -1007,7 +1007,7 @@ msgstr "متن کامل:"
 
 #: papers/templates/papers/paper.html:120 statistics/models.py:66
 msgid "Unavailable"
-msgstr ""
+msgstr "ناموجود"
 
 #: papers/templates/papers/paper.html:122
 msgid "Ask upload"
@@ -1152,10 +1152,10 @@ msgid_plural "%(nb_publi)s papers published by %(publisher)s"
 msgstr[0] ""
 
 #: papers/templates/papers/search.html:211
-#, invalid-plural, python-format
+#, python-format
 msgid "%(formattedCounter)s paper found"
 msgid_plural "%(formattedCounter)s papers found"
-msgstr[0] ""
+msgstr[0] "%(formattedCounter)s مقاله یافته شد"
 
 #: papers/templates/papers/search.html:252
 #: publishers/templates/publishers/list.html:73
@@ -1168,7 +1168,7 @@ msgstr ""
 
 #: papers/templates/papers/search.html:266
 msgid "Refine"
-msgstr ""
+msgstr "تصحیح"
 
 #: papers/templatetags/statuses.py:19 papers/templatetags/statuses.py:79
 msgid "Unknown OA status"
@@ -1176,7 +1176,7 @@ msgstr ""
 
 #: papers/templatetags/statuses.py:27
 msgid "Unknown PDF status"
-msgstr ""
+msgstr "وضعیت ناشناختهٔ PDF"
 
 #: papers/templatetags/statuses.py:33
 msgid "Preprints can be archived."
@@ -1305,7 +1305,7 @@ msgstr ""
 
 #: papers/views.py:346
 msgid " published by "
-msgstr ""
+msgstr " منتشر شده توسط "
 
 #: papers/views.py:375
 msgid " in "
@@ -1326,7 +1326,7 @@ msgstr ""
 
 #: papers/views.py:468
 msgid "This paper has been deleted."
-msgstr ""
+msgstr "این مقاله حذف شده است."
 
 #: papers/views.py:510
 #, fuzzy
@@ -1335,11 +1335,11 @@ msgstr "آدرس نامعتبر."
 
 #: publishers/forms.py:10
 msgid "popularity"
-msgstr ""
+msgstr "محبوبیت"
 
 #: publishers/forms.py:11
 msgid "name"
-msgstr ""
+msgstr "نام"
 
 #: publishers/forms.py:14
 msgid "decreasing"
@@ -1355,7 +1355,7 @@ msgstr ""
 
 #: publishers/models.py:39
 msgid "Open access"
-msgstr ""
+msgstr "دسترسی آزاد"
 
 #: publishers/models.py:39
 msgid "Freely available from the publisher."
@@ -1391,7 +1391,7 @@ msgstr "مجاز"
 
 #: publishers/models.py:49
 msgid "Forbidden"
-msgstr ""
+msgstr "ممنوع"
 
 #: publishers/models.py:50
 msgid "Restricted"
@@ -1407,11 +1407,11 @@ msgstr "ناشناس"
 
 #: publishers/models.py:71 publishers/views.py:94
 msgid "Publishers"
-msgstr ""
+msgstr "ناشران"
 
 #: publishers/models.py:91
 msgid "Unknown publisher"
-msgstr ""
+msgstr "ناشر نامعلوم"
 
 #: publishers/templates/publishers/detailsPolicy.html:6
 msgid "Preprint:"
@@ -1447,7 +1447,7 @@ msgstr ""
 
 #: publishers/templates/publishers/detailsPolicy.html:16
 msgid "published version"
-msgstr ""
+msgstr "نسخهٔ منتشر شده"
 
 #: publishers/templates/publishers/detailsPolicy.html:30
 msgid "Contact the authors to make this publication freely available. This is a service of the Open Access Button."
@@ -1480,7 +1480,7 @@ msgstr ""
 
 #: publishers/templates/publishers/list.html:126
 msgid "No publisher found."
-msgstr ""
+msgstr "ناشری یافته نشد."
 
 #: publishers/templates/publishers/policy.html:56
 msgid "Policy data provided by"
@@ -1509,16 +1509,16 @@ msgstr ""
 
 #: publishers/templates/publishers/policy.html:115
 msgid "Publications"
-msgstr ""
+msgstr "انتشارات"
 
 #: publishers/templates/publishers/policy.html:118
 #, python-format
 msgid "All papers published by %(publisher)s"
-msgstr ""
+msgstr "همهٔ مقاله‌های منتشر شده توسط %(publisher)s"
 
 #: publishers/templates/publishers/policy.html:123
 msgid "Journals"
-msgstr ""
+msgstr "مجله‌ها"
 
 #: publishers/templates/publishers/policy.html:124
 msgid "Only journals with papers written by our users are listed."
@@ -1530,11 +1530,11 @@ msgstr "هیچ‌کدام."
 
 #: statistics/models.py:48
 msgid "Available from the publisher"
-msgstr ""
+msgstr "قابل دریافت از ناشر"
 
 #: statistics/models.py:49
 msgid "Available from the author"
-msgstr ""
+msgstr "قابل دریافت از نویسنده"
 
 #: statistics/models.py:50
 msgid "Could be shared by the authors"
@@ -1570,7 +1570,7 @@ msgstr ""
 
 #: statistics/models.py:65
 msgid "Available"
-msgstr ""
+msgstr "موجود"
 
 #: statistics/templates/statistics/availabilitypct.html:10
 msgid "of the papers by this publisher are available"
@@ -1579,11 +1579,11 @@ msgstr ""
 #: statistics/templates/statistics/histogram.html:5
 #: templates/dissemin/faq.html:63
 msgid "Open Access"
-msgstr ""
+msgstr "دسترسی آزاد"
 
 #: statistics/templates/statistics/histogram.html:8
 msgid "Publications are available"
-msgstr ""
+msgstr "انتشارات، موجودند"
 
 #: statistics/templates/statistics/histogram.html:11
 msgid "Publications could be online"
@@ -1627,7 +1627,7 @@ msgstr ""
 
 #: templates/dissemin/error.html:6 templates/dissemin/error.html:12
 msgid "Error"
-msgstr ""
+msgstr "خطا"
 
 #: templates/dissemin/error.html:15
 msgid "<a href=\"/\">Go back to the home page.</a>"
@@ -1731,7 +1731,7 @@ msgstr ""
 
 #: templates/dissemin/faq.html:56 templates/dissemin/faq.html:540
 msgid "How can I help?"
-msgstr ""
+msgstr "چگونه می‌توانم کمک کنم؟"
 
 #: templates/dissemin/faq.html:57 templates/dissemin/faq.html:580
 msgid "Where is the source code?"
@@ -2004,12 +2004,12 @@ msgstr ""
 
 #: templates/dissemin/faq.html:602 templates/dissemin/tos.html:162
 msgid "Back to top"
-msgstr ""
+msgstr "بازگشت به ابتدای صفحه"
 
 #: templates/dissemin/login.html:8 templates/dissemin/login.html:70
 #: templates/dissemin/sandbox.html:8 templates/dissemin/sandbox.html:72
 msgid "Sign In"
-msgstr ""
+msgstr "ورود"
 
 #: templates/dissemin/login.html:12
 msgid "Sign in"
@@ -2048,7 +2048,7 @@ msgstr ""
 
 #: templates/dissemin/login.html:69 templates/dissemin/sandbox.html:71
 msgid "Forgot Password?"
-msgstr ""
+msgstr "آیا گذرواژه‌تان را فراموش کرده‌اید؟"
 
 #: templates/dissemin/partners.html:7 templates/dissemin/partners.html:12
 #: templates/dissemin/skeleton.html:104
@@ -2070,11 +2070,11 @@ msgstr "خروج"
 
 #: templates/dissemin/skeleton.html:42
 msgid "Language"
-msgstr ""
+msgstr "زبان"
 
 #: templates/dissemin/skeleton.html:51
 msgid "Translate"
-msgstr ""
+msgstr "ترجمه"
 
 #: templates/dissemin/skeleton.html:56 templates/dissemin/skeleton.html:95
 msgid "FAQ"
@@ -2135,7 +2135,7 @@ msgstr ""
 
 #: templates/dissemin/tos.html:22 templates/dissemin/tos.html:89
 msgid "In full"
-msgstr ""
+msgstr "به‌طور کامل"
 
 #: templates/dissemin/tos.html:24 templates/dissemin/tos.html:90
 msgid "Personal data"
@@ -2229,7 +2229,7 @@ msgstr ""
 
 #: upload/views.py:133
 msgid "Invalid PDF file."
-msgstr ""
+msgstr "پروندهٔ نامعتبر PDF."
 
 #: upload/views.py:167
 msgid "Invalid form."
