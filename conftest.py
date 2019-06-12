@@ -7,6 +7,7 @@ from io import BytesIO
 
 from django.contrib.auth.models import User
 from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.urls import reverse
 
 from deposit.models import Repository
 from papers.baremodels import PAPER_TYPE_CHOICES
@@ -142,13 +143,14 @@ def book_god_of_the_labyrinth(db):
     """
     Returns a paper, type book
     """
-    Paper.objects.get_or_create(
+    p = Paper.objects.get_or_create(
         title = "The God of the Labyrinth",
         fingerprint = 'the-god-of-thy-labyrinth',
         pubdate = date(year=1933, month=1, day=1),
-        authors_list = '{ "first":"Herbert", "last":"Quain"}',
+        authors_list = [{'name': {'full': 'herbert quain', 'first': 'herbert', 'last': 'quain'}, 'orcid': None, 'affiliation': None, 'researcher_id': None}],
         doctype='book',
-    )
+    )[0]
+    return p
 
 
 
@@ -179,3 +181,35 @@ def blank_pdf(blank_pdf_path):
     with open(blank_pdf_path, 'rb') as f:
             pdf = f.read()
     return pdf
+
+
+@pytest.fixture
+def rendering_authenticated_client(client, django_user_model):
+    """
+    Returns a logged in client
+    """
+    username = "rendering_authenticated_user"
+    password = "secret"
+    u = django_user_model.objects.create_user(username=username, password=password)
+    client.login(username=username, password=password)
+    yield client
+    u.delete()
+
+
+@pytest.fixture
+def rendering_get_page():
+    """
+    Returns a function that gets a page. Call this function with a client that may or may not be logged in.
+    """
+    def f(client, *args, **kwargs):
+        """
+        Gets a page.
+        """
+        urlargs = kwargs.copy()
+        if 'getargs' in kwargs:
+            del urlargs['getargs']
+            return client.get(reverse(*args, **urlargs), kwargs['getargs'])
+        return client.get(reverse(*args, **kwargs))
+
+    return f
+
