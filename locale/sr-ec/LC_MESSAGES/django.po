@@ -15,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-27 18:48+0200\n"
-"PO-Revision-Date: 2019-06-06 15:52:56+0000\n"
+"PO-Revision-Date: 2019-06-13 18:03:01+0000\n"
 "Language: sr-Cyrl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1459,9 +1459,8 @@ msgid "Contact the authors to make this publication freely available. This is a 
 msgstr ""
 
 #: publishers/templates/publishers/detailsPolicy.html:30
-#, fuzzy
 msgid "Contact authors"
-msgstr "Према ауторима"
+msgstr "Обратите се ауторима"
 
 #: publishers/templates/publishers/detailsPolicy.html:31
 #: templates/dissemin/tos.html:81

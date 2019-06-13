@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-27 18:48+0200\n"
-"PO-Revision-Date: 2019-06-06 15:52:53+0000\n"
+"PO-Revision-Date: 2019-06-13 18:02:59+0000\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -2176,7 +2176,7 @@ msgstr "Dissemin utilise l’interface publique OAuth d’ORCID pour authentifie
 
 #: templates/dissemin/tos.html:116
 msgid "Documents deposited in repositories via Dissemin can be stored on the platform, but are not available for download on the platform. They can be stored internally for logging purposes, and to make sure failed deposits can be fixed later. Dissemin does not commit to store any of the files it receives from its users. Users can write to <a href=\"mailto:support@dissem.in\">support@dissem.in</a> if they want one of their uploads to be deleted from our internal storage space, or from the repository they have deposited to. Note that deletion policies vary accross repositories: we provide no guarantee that deposits can be deleted from the target repositories."
-msgstr "Les documents déposés à l’aide de Dissemin peuvent être conservés sur la plateforme, mais ne sont pas disponibles au téléchargement à partir de la plateforme. Ils peuvent être conservés en interne à des fins de journalisation, et pour assurer que le document est effectivement déposé lorsque la première tentative a échoué. Dissemin ne s’engage pas à conserver de façon pérenne chacun des fichiers que ses utilisateurs lui fournissent. Vous pouvez écrire à <a href=\"mailto:support@dissem.in\">support@dissem.in</a> si vous souhaitez qu’un de vos documents soit supprimé de notre espace de stockage interne, ou du dépôt auquel vous l’avez envoyé. Notez que chaque dépôt a sa propre politique de suppression : nous ne garantissons pas que votre demande de suppression pourra effectivement être honorée par le dépôt cible."
+msgstr "Les documents déposés à l’aide de Dissemin peuvent être conservés sur la plateforme, mais ne sont pas disponibles au téléchargement à partir de la plateforme. Ils peuvent être conservés en interne à des fins de journalisation, et pour assurer que le document est effectivement déposé lorsque la première tentative a échoué. Dissemin ne s’engage pas à conserver de façon pérenne chacun des fichiers que ses utilisateurs lui fournissent. Vous pouvez écrire à <a href=\"mailto:support@dissem.in\">support@dissem.in</a> si vous souhaitez qu’un de vos téléversements soit supprimé de notre espace de stockage interne, ou du dépôt sur lequel ils ont été mis. Notez que chaque dépôt a sa propre politique de suppression : nous ne garantissons pas que votre demande de suppression pourra effectivement être honorée par le dépôt cible."
 
 #: templates/dissemin/tos.html:132
 msgid "Misuse can be reported to <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."

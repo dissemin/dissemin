@@ -13,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-27 18:48+0200\n"
-"PO-Revision-Date: 2019-06-06 15:52:55+0000\n"
+"PO-Revision-Date: 2019-06-13 18:03:01+0000\n"
 "Language: pt_br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2183,9 +2183,8 @@ msgid "Dissemin uses ORCID's public OAuth interface to authenticate its users. T
 msgstr "O Dissemin utiliza a interface pública OAuth do ORCID para autenticar os seus usuários. Esta interface só transmite as informações marcadas como públicas no perfil ORCID do usuário. Isto significa que as palavras-passe do ORCID nunca serão transmitidas, nem os endereços de correio eletrónico, quando forem marcados como privados, que é a configuração padrão. Ao iniciar sessão no Dissemin pelo ORCID, o Dissemin adquire a identificação ORCID do usuário, bem como todas as informações públicas anexadas ao registo ORCID. Estamos a usar o <a href=\"https://sentry.io/privacy/\">serviço Sentry</a> para registo de erros nesta plataforma. A configuração do nosso servidor da Internet armazena informação básica de acessos (URL pedido e endereço IP) para monitorização de erros, que é mantida durante quatorze dias. A Dissemin pode armazenar qualquer informação fornecida pelos usuários na plataforma. Os usuários podem solicitar uma cópia das informações pessoais que o Dissemin armazena sobre eles enviando um e-mail para support@dissem.in."
 
 #: templates/dissemin/tos.html:116
-#, fuzzy
 msgid "Documents deposited in repositories via Dissemin can be stored on the platform, but are not available for download on the platform. They can be stored internally for logging purposes, and to make sure failed deposits can be fixed later. Dissemin does not commit to store any of the files it receives from its users. Users can write to <a href=\"mailto:support@dissem.in\">support@dissem.in</a> if they want one of their uploads to be deleted from our internal storage space, or from the repository they have deposited to. Note that deletion policies vary accross repositories: we provide no guarantee that deposits can be deleted from the target repositories."
-msgstr "Os documentos depositados em repositórios via Dissemin podem ser armazenados na plataforma, mas não estão disponíveis para download na plataforma. Eles podem ser armazenados internamente para fins de registro e para garantir que os depósitos com falha possam ser corrigidos posteriormente. Dissemin não se compromete a armazenar nenhum dos arquivos que recebe de seus usuários. Os usuários podem escrever para support@dissem.in se quiserem que um de seus carregamentos seja excluído do nosso espaço de armazenamento interno ou do depósito que depositaram. Observe que as políticas de exclusão variam em relação aos repositórios: não fornecemos garantia de que os depósitos possam ser excluídos dos repositórios de destino."
+msgstr "Os documentos depositados em repositórios via Dissemin podem ser armazenados na plataforma, mas não estão disponíveis para download na plataforma. Eles podem ser armazenados internamente para fins de registro e para garantir que os depósitos com falha possam ser corrigidos posteriormente. Dissemin não se compromete a armazenar nenhum dos arquivos que recebe de seus usuários. Os usuários podem escrever para <a href=\"mailto:support@dissem.in\">support@dissem.in</a> se quiserem que um de seus carregamentos seja excluído do nosso espaço de armazenamento interno ou do depósito que depositaram. Observe que as políticas de exclusão variam em relação aos repositórios: não fornecemos garantia de que os depósitos possam ser excluídos dos repositórios de destino."
 
 #: templates/dissemin/tos.html:132
 msgid "Misuse can be reported to <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
@@ -2196,9 +2195,8 @@ msgid "The <a href=\"https://dissem.in\">dissem.in</a> website has been register
 msgstr "O <a href=\"https://dissem.in\">dissem.in</a> o site foi registrado com <a href=\"https://www.cnil.fr/\">CNIL</a> sob declaração n°1895382 v0."
 
 #: templates/dissemin/tos.html:148
-#, fuzzy
 msgid "You have the right to access, modify, and delete the personal information that we hold about you. To exercise this right, please contact us at <a href=\"mailto:support@dissem.in\">support@dissem.in</a>, or by postal mail at the following addresss:"
-msgstr "Você tem o direito de acessar, modificar e excluir as informações pessoais que possuímos sobre você. Para exercer esse direito, entre em contato conosco no support@dissem.in, ou por correio postal no seguinte endereço:"
+msgstr "Você tem o direito de acessar, modificar e excluir as informações pessoais que possuímos sobre você. Para exercer esse direito, entre em contato conosco no <a href=\"mailto:support@dissem.in\">support@dissem.in</a>, ou por correio postal no seguinte endereço:"
 
 #: templates/socialaccount/authentication_error.html:6
 #: templates/socialaccount/authentication_error.html:12
