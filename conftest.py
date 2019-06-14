@@ -12,7 +12,54 @@ from django.urls import reverse
 from deposit.models import Repository
 from papers.baremodels import PAPER_TYPE_CHOICES
 from papers.models import Paper
+from papers.models import OaiRecord
 from papers.models import OaiSource
+
+from dissemin.settings import BASE_DIR
+
+
+@pytest.fixture
+def load_json(db, oaisource):
+    """
+    This fixture returns an object with which you can load various JSON fixtures
+    """
+    class LoadJSON():
+        """
+        Class that carries the various functions
+        """
+        objects = []
+
+        def load_paper(self, f):
+            """
+            Loads the given Paper
+            """
+            f_name = os.path.join(BASE_DIR, 'test_data', 'paper', f + '.json')
+            with open(f_name, 'r') as json_file:
+                data = json.load(json_file)
+            p = Paper.objects.get_or_create(**data)[0]
+            self.objects.append(p)
+            return p
+
+        def load_oairecord(self, f):
+            """
+            Loads the given OaiRecord and the related paper and returns both
+            """
+            f_name = os.path.join(BASE_DIR, 'test_data', 'oairecord', f + '.json')
+            with open(f_name, 'r') as json_file:
+                data = json.load(json_file)
+            p = self.load_paper(data['about'])
+            data['about'] = p
+            if 'source' not in data:
+                data['source'] = oaisource.base_oaisource()
+            o = OaiRecord.objects.get_or_create(**data)[0]
+            self.objects.append(o)
+            return p, o
+
+
+    l = LoadJSON()
+    yield l
+    for obj in l.objects:
+        obj.delete()
 
 
 @pytest.fixture
@@ -49,17 +96,19 @@ def oaisource(db):
             """
             self.objects = []
 
+
         def dummy_oaisource(self):
             """
             Provides a dummy OaiSource if you just need a OaiSource, but do not do anything with it
             """
             oaisource, unused = OaiSource.objects.get_or_create(
-                identifier='oai:dummy-test',
+                identifier='dummy-test',
                 name='Dummy OaiSource',
                 default_pubtype=PAPER_TYPE_CHOICES[0][0],
             )
             self.objects.append(oaisource)
             return oaisource
+
         
         @staticmethod
         def base_oaisource():
@@ -80,6 +129,7 @@ def dummy_oaisource(oaisource):
     Provides a dummy OaiSource if you just need a OaiSource, but do not do anything with it. Use this, if you need just a single OaiSource.
     """
     return oaisource.dummy_oaisource()
+
 
 @pytest.fixture
 def repository(db, simple_logo, oaisource):
@@ -124,6 +174,24 @@ def repository(db, simple_logo, oaisource):
             self.objects.append(repo)
             return repo
 
+        def sword_mods_repository(self):
+            """
+            Returns a new SWORD METS MODS repository using SWORDMETSMODSProtocol.
+            """
+            repo = Repository.objects.create(
+                name='Repository SWORD MODS',
+                description='SWORD MODS Test Repository',
+                logo=simple_logo,
+                username='dissemin',
+                password='dissemin',
+                protocol='SWORDMETSMODSProtocol',
+                endpoint='https://deposit.dissem.in/sword_mods/',
+                oaisource=oaisource.base_oaisource(),
+            )
+            self.objects.append(repo)
+            return repo
+
+
     dummy = Dummy()
     yield dummy
     for obj in dummy.objects:
@@ -139,17 +207,11 @@ def dummy_repository(repository):
 
 
 @pytest.fixture
-def book_god_of_the_labyrinth(db):
+def book_god_of_the_labyrinth(load_json):
     """
     Returns a paper, type book
     """
-    p = Paper.objects.get_or_create(
-        title = "The God of the Labyrinth",
-        fingerprint = 'the-god-of-thy-labyrinth',
-        pubdate = date(year=1933, month=1, day=1),
-        authors_list = [{'name': {'full': 'herbert quain', 'first': 'herbert', 'last': 'quain'}, 'orcid': None, 'affiliation': None, 'researcher_id': None}],
-        doctype='book',
-    )[0]
+    p = load_json.load_paper('book_god_of_the_labyrinth')
     return p
 
 
