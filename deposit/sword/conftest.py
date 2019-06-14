@@ -4,6 +4,7 @@ import pytest
 from lxml import etree
 
 from deposit.sword.protocol import SWORDMETSProtocol
+from deposit.sword.protocol import SWORDMETSMODSProtocol
 
 
 @pytest.fixture()
@@ -13,6 +14,15 @@ def sword_mets_protocol(request, db, repository):
     """
     sword_mets_repository = repository.sword_mets_repository()
     request.cls.protocol = SWORDMETSProtocol(sword_mets_repository)
+
+
+@pytest.fixture
+def sword_mods_protocol(request, db, repository):
+    """
+    Creates a sword mods repository object
+    """
+    sword_mods_repository = repository.sword_mets_repository()
+    request.cls.protocol = SWORDMETSMODSProtocol(sword_mods_repository)
 
 
 @pytest.fixture()
@@ -42,6 +52,17 @@ def mets_xsd():
     Returns a mets xsd as schema ready to validate
     """
     return etree.XMLSchema(etree.parse("http://www.loc.gov/standards/mets/version112/mets.xsd"))
+
+
+@pytest.fixture(scope="class")
+def mods_3_7_xsd():
+    '''
+    Loads mods 3.7 xsd and prepares it as schema ready for validation.
+    '''
+
+    mods_xsd = etree.parse("http://www.loc.gov/standards/mods/v3/mods-3-7.xsd")
+    return etree.XMLSchema(mods_xsd)
+
 
 
 @pytest.fixture

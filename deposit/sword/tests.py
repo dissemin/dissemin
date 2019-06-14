@@ -5,8 +5,10 @@ from lxml import etree
 from requests.exceptions import RequestException
 from zipfile import ZipFile
 
+from deposit.forms import BaseMetadataForm
 from deposit.protocol import DepositError
 from deposit.sword.protocol import SWORDMETSProtocol
+from deposit.tests.test_protocol import TestProtocol
 
 userdata = [(None, None), ('vetinari', None), (None, 'psst')]
 
@@ -20,7 +22,7 @@ class TestSWORDMETSProtocol(object):
         """
         Tests the string output of class and object
         """
-        assert self.protocol.__str__() == "SOWRD Protocol (METS)"
+        assert self.protocol.__str__() == "SWORD Protocol (METS)"
 
 
     def test_get_mets(self, mets_xsd, metadata_xml_dc):
@@ -97,4 +99,35 @@ class TestSWORDMETSProtocol(object):
             p.submit_deposit(None, None)
 
 
-        
+@pytest.mark.usefixtures('sword_mods_protocol')
+class TestSWORDSMETSMODSProtocol(TestProtocol):
+    """
+    A test class for named protocol
+    """
+
+    def deposit(self):
+        """
+        Manages publication, form and mocking
+        """
+        pass
+
+
+    def test_str(self):
+        """
+        Tests the string output of class and object
+        """
+        assert self.protocol.__str__() == "SWORD Protocol (MODS)"
+
+
+    def test_get_xml_metadata(self, mods_3_7_xsd, book_god_of_the_labyrinth):
+        """
+        Validates against mods 3.7 schema
+        """
+        self.protocol.paper = book_god_of_the_labyrinth
+        data = {
+            'abstract' : 'The abstract',
+        }
+        form = BaseMetadataForm(paper=book_god_of_the_labyrinth, data=data)
+        form.is_valid()
+        xml = self.protocol._get_xml_metadata(form)
+        mods_3_7_xsd.assertValid(xml)

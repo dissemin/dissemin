@@ -22,7 +22,7 @@ class SWORDMETSProtocol(RepositoryProtocol):
         """
         Return human readable class name
         """
-        return "SOWRD Protocol (METS)"
+        return "SWORD Protocol (METS)"
 
     
     @staticmethod
@@ -145,3 +145,69 @@ class SWORDMETSProtocol(RepositoryProtocol):
         deposit_result = self._get_deposit_result(r.text)
 
         return deposit_result
+
+
+class SWORDMETSMODSProtocol(SWORDMETSProtocol):
+    """
+    Protocol that implements MODS metadata with SWORDMETSProtocol
+    """
+
+    def __str__(self):
+        """
+        Return human readable class name
+        """
+        return "SWORD Protocol (MODS)"
+
+
+    def _get_xml_metadata(self, form):
+        """
+        Creates metadata as lxml etree in MODS
+        """
+        MODS_NAMESPACE = "http://www.loc.gov/mods/v3"
+
+        MODS = "{%s}" % MODS_NAMESPACE
+
+        NSMAP = {
+            None: MODS_NAMESPACE,
+        }
+
+        # Creation of root
+        mods_xml = etree.Element(MODS + 'mods', nsmap=NSMAP)
+        mods_xml.set('version', '3.7')
+
+        # Abstract
+        mods_abstract = etree.SubElement(mods_xml, MODS + 'abstract')
+        mods_abstract.text = form.cleaned_data['abstract']
+
+        # Identifier
+        # TODO Fixture
+
+        # Language
+        # TODO Fixture + Routine
+
+        # Name / Authors list
+        for key, author in enumerate(self.paper.authors):
+            mods_name = etree.SubElement(mods_xml, MODS + 'name')
+            mods_name.set('type', 'personal')
+            mods_last_name = etree.SubElement(mods_name, MODS + 'namePart')
+            mods_last_name.set('type', 'family')
+            mods_last_name.text = author.name.last
+            mods_first_name = etree.SubElement(mods_name, MODS + 'namePart')
+            mods_first_name.set('type', 'given')
+            mods_first_name.text = author.name.first
+
+        # Title
+        mods_title_info = etree.SubElement(mods_xml, MODS + 'titleInfo')
+        mods_title = etree.SubElement(mods_title_info, MODS + 'title')
+        mods_title.text = self.paper.title
+
+
+        # Document type
+        mods_type = etree.SubElement(mods_xml, MODS + 'genre')
+        mods_type.text = self.paper.doctype
+
+
+        return mods_xml
+
+
+    
