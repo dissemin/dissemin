@@ -163,6 +163,7 @@ class SWORDMETSMODSProtocol(SWORDMETSProtocol):
         """
         Creates metadata as lxml etree in MODS
         """
+        self.log("### Creating MODS metadata from publication and form")
         MODS_NAMESPACE = "http://www.loc.gov/mods/v3"
 
         MODS = "{%s}" % MODS_NAMESPACE
@@ -179,8 +180,15 @@ class SWORDMETSMODSProtocol(SWORDMETSProtocol):
         mods_abstract = etree.SubElement(mods_xml, MODS + 'abstract')
         mods_abstract.text = form.cleaned_data['abstract']
 
-        # Identifier
-        # TODO Fixture
+        # Identifier / DOI
+        doi = None
+        for publication in self.paper.publications:
+            doi = publication.doi
+        if doi:
+            mods_doi = etree.SubElement(mods_xml, MODS + 'identifier')
+            mods_doi.set('type', 'doi')
+            mods_doi.text = doi
+
 
         # Language
         # TODO Fixture + Routine

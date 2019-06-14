@@ -119,15 +119,15 @@ class TestSWORDSMETSMODSProtocol(TestProtocol):
         assert self.protocol.__str__() == "SWORD Protocol (MODS)"
 
 
-    def test_get_xml_metadata(self, mods_3_7_xsd, book_god_of_the_labyrinth):
+    def test_get_xml_metadata(self, mods_3_7_xsd, publication):
         """
         Validates against mods 3.7 schema
         """
-        self.protocol.paper = book_god_of_the_labyrinth
+        self.protocol.paper = publication
         data = {
             'abstract' : 'The abstract',
         }
-        form = BaseMetadataForm(paper=book_god_of_the_labyrinth, data=data)
+        form = BaseMetadataForm(paper=self.protocol.paper, data=data)
         form.is_valid()
         xml = self.protocol._get_xml_metadata(form)
         mods_3_7_xsd.assertValid(xml)

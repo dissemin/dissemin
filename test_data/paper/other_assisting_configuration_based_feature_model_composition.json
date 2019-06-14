@@ -1,0 +1,48 @@
+{
+    "title": "Assisting Configurations-Based Feature Model Composition",
+    "fingerprint": "assisting_configuration_based_feature_model_composition",
+    "pubdate": "2019-06-13",
+    "authors_list": [
+        {
+            "name":{
+                "full":"jessie carbonnel",
+                "last":"Carbonnel",
+                "first":"Jessie"
+            },
+            "orcid":null,
+            "affiliation":null,
+            "researcher_id":null
+        },
+        {
+            "name":{
+                "full":"marianne huchard",
+                "last":"Huchard",
+                "first":"Marianne"
+            },
+            "orcid":null,
+            "affiliation":null,
+            "researcher_id":null
+        },
+        {
+            "name":{
+                "full":"andre miralles",
+                "last":"Miralles",
+                "first":"André"
+            },
+            "orcid":null,
+            "affiliation":null,
+            "researcher_id":null
+        },
+        {
+            "name":{
+                "full":"clementine nebut",
+                "last":"Nebut",
+                "first":"Clémentine"
+            },
+            "orcid":null,
+            "affiliation":null,
+            "researcher_id":null
+        }
+    ],
+    "doctype": "other"
+}
