@@ -18,7 +18,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-27 18:48+0200\n"
-"PO-Revision-Date: 2019-06-06 15:52:51+0000\n"
+"PO-Revision-Date: 2019-06-17 17:15:28+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -531,9 +531,8 @@ msgid "please wait..."
 msgstr "Bitte warten..."
 
 #: deposit/views.py:69 deposit/views.py:131
-#, fuzzy
 msgid "This repository is currently not enabled."
-msgstr "Das Repositorium konnte nicht gefunden werden."
+msgstr "Das Repositorium ist derzeit nicht in Betrieb."
 
 #: deposit/views.py:75
 msgid "This repository is not available for this paper."
@@ -805,7 +804,7 @@ msgstr "Nach Verfasser_innen"
 #: papers/templates/papers/advanced_search.html:37
 #: papers/templates/papers/search.html:295
 msgid "<ul><li>Use author names or ORCID identifiers.</li><li>Use commas as name separator.</li><li>Prefix with <code>last:</code> to enforce last name search.</li></ul>"
-msgstr "<ul><li>Autorennamen oder ORCID-Identifikatoren verwenden.</li><li>Kommata als Namenstrenner verwenden.</li><li>Präfix mit <code>last:</code>, um die Nachnamensuche zu erzwingen.</li></ul>"
+msgstr "<ul><li>Verwende Autorennamen oder ORCID-Identifikatoren.</li><li>Verwende als Namenstrenner.</li><li>Präfix mit <code>last:</code>, um die Nachnamensuche zu erzwingen.</li></ul>"
 
 #: papers/templates/papers/advanced_search.html:43
 #: papers/templates/papers/search.html:305
@@ -1115,7 +1114,7 @@ msgstr "Bist Du das?"
 #: papers/templates/papers/search.html:148
 #, python-format
 msgid " %(first_name)s %(last_name)s uses ORCID."
-msgstr " %(first_name)s %(last_name)s verwendet ORCID."
+msgstr " %(first_name)s %(last_name)s nutzt ORCID."
 
 #: papers/templates/papers/search.html:157
 msgid "Refresh publications"
@@ -1170,11 +1169,11 @@ msgstr "Sortieren nach"
 
 #: papers/templates/papers/search.html:263
 msgid "Export citations for current page"
-msgstr "Zitate für die aktuelle Seite exportieren"
+msgstr "Zitierungen für die aktuelle Seite exportieren"
 
 #: papers/templates/papers/search.html:266
 msgid "Refine"
-msgstr "Verfeinern"
+msgstr "Filtern"
 
 #: papers/templatetags/statuses.py:19 papers/templatetags/statuses.py:79
 msgid "Unknown OA status"
@@ -1319,7 +1318,7 @@ msgstr "in "
 
 #: papers/views.py:406
 msgid "Dissemin requires access to your ORCID name."
-msgstr "Dissemin benötigt Zugriff auf deinen ORCID-Namen."
+msgstr "Dissemin benötigt Zugriff auf deinen ORCID Namen."
 
 #: papers/views.py:457
 msgid "Paper view expects a DOI or a pk"
@@ -1459,9 +1458,8 @@ msgid "Contact the authors to make this publication freely available. This is a 
 msgstr "Kontaktiere die Autoren dieser Publikation um sie frei verfügbar zu machen. Dieser Service wird durch den Open Access Button ermöglichst."
 
 #: publishers/templates/publishers/detailsPolicy.html:30
-#, fuzzy
 msgid "Contact authors"
-msgstr "Nach Verfasser_innen"
+msgstr "Verfasser_innen kontaktieren"
 
 #: publishers/templates/publishers/detailsPolicy.html:31
 #: templates/dissemin/tos.html:81
@@ -1604,9 +1602,8 @@ msgid "Upload is forbidden"
 msgstr "Hochladen verboten"
 
 #: statistics/templates/statistics/pie_without_object.html:9
-#, fuzzy
 msgid "Refine by OA status"
-msgstr "Unbekannter OA Status"
+msgstr "Filtern nach OA Status"
 
 #: templates/404.html:6 templates/404.html:12
 msgid "Page not found"
@@ -1893,7 +1890,7 @@ msgstr "Alle Arten von weiteren technischen Schwierigkeiten."
 #: templates/dissemin/faq.html:347
 #, python-format
 msgid "Please first check whether the paper is available in one of <a href=\"%(sources_url)s\">our sources</a>. If it is not, Dissemin cannot harvest it, and you should report the problem to the source where it should appear. Note that it can take up to a couple of months for our primary sources to discover your latest papers and for Dissemin to harvest it."
-msgstr "Überprüfe bitte zuerst, ob die Veröffentlichung in <a href=\"%(sources_url)s\">unseren Quellen</a> verzeichnet ist. Ist dies nicht der Fall, kann Dissemin diese nicht verzeichnen und Du solltest der entsprechenden Quelle mitteilen, dass Deine Veröffentlichung nicht verzeichnet ist. Beachte, dass dies bei unseren primären Quellen und für Dissemin bis zu einige Monate dauern kann, die neuesten Veröffentlichungen zu entdecken und zu sammeln."
+msgstr "Überprüfe bitte zuerst, ob die Veröffentlichung in <a href=\"%(sources_url)s\">unseren Quellen</a> verzeichnet ist. Ist dies nicht der Fall, kann Dissemin diese nicht verzeichnen und Du solltest der entsprechenden Quelle mitteilen, dass Deine Veröffentlichung nicht verzeichnet ist. Beachte, dass dies bei unseren primären Quellen bis zu einigen Monaten dauern kann, die neuesten Veröffentlichungen zu entdecken und entsprechend für Dissemin zu sammeln."
 
 #: templates/dissemin/faq.html:357
 msgid "Now, if your paper does appear in one of the sources but not on Dissemin, please check that your name is not spelt incorrectly on the source, and that the spelling matches your ORCID record. If there is a misspelling, again, you should report the problem to the source that contains the mistake."
@@ -2169,9 +2166,8 @@ msgid "The platform can perform mandated publication deposit to repositories. Us
 msgstr "Die Plattform kann auf Veranlassung Publikationen in Repositorien ablegen. Benutzer_innen sind nur dazu berechtigt, Publikationen hochzuladen, die sie selber verfasst haben oder Publikationen, deren Autor_innen der Ablage zugestimmt haben. Über diese Nutzungsbedingungen hinaus müssen Benutzer_innen die Richtlinien der Repositorien einhalten."
 
 #: templates/dissemin/tos.html:84
-#, fuzzy
 msgid "Please address any inquiry to <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
-msgstr "Bitte richte alle Anfragen an support@dissem.in."
+msgstr "Bitte richte alle Anfragen an <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
 
 #: templates/dissemin/tos.html:93
 msgid "Dissemin uses ORCID's public OAuth interface to authenticate its users. This interface only transmits information marked as public in the user's ORCID profile. This means that ORCID passwords are never transmitted and email addresses are not transmitted when they are marked as private, which is the default setting. When logging in to Dissemin from ORCID, Dissemin acquires the user's ORCID id, as well as all public information attached to the ORCID record. We are using the <a href=\"https://sentry.io/privacy/\">Sentry service</a> for error tracking on this platform. Our webserver configuration stores basic access information (URL requested and IP address) for error monitoring, which are kept for fourteen days. Dissemin can store any information input by its users on the platform. Users can ask for a copy of the personal information Dissemin stores about them by writing an email to <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
@@ -2264,29 +2260,24 @@ msgid "Invalid URL."
 msgstr "Ungültige URL"
 
 #: vinaigrette-deleteme.py:2
-#, fuzzy
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
-msgstr "Creative Commons CC0 1.0 Universal"
+msgstr "Creative Commons CC0 1.0 Universell (CC0 1.0) Public Domain Dedication"
 
 #: vinaigrette-deleteme.py:3
-#, fuzzy
 msgid "Creative Commons Attribution 4.0 International (CC BY 4.0)"
-msgstr "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
+msgstr "Creative Commons Attribution 4.0 International (CC BY 4.0)"
 
 #: vinaigrette-deleteme.py:4
-#, fuzzy
 msgid "Creative Commons Attribution-ShareAlike 4.0, International (CC BY-SA 4.0)"
-msgstr "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
+msgstr "Creative Commons Namensnennung - Weitergabe unter gleichen Bedingungen 4.0 International (CC BY-SA 4.0)"
 
 #: vinaigrette-deleteme.py:5
-#, fuzzy
 msgid "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
-msgstr "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
+msgstr "Creative Commons Namensnennung-Nicht kommerziell 4.0 International (CC BY-NC 4.0)"
 
 #: vinaigrette-deleteme.py:6
-#, fuzzy
 msgid "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)"
-msgstr "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
+msgstr "Creative Commons Namensnennung - Keine Bearbeitungen 4.0 International (CC BY-ND 4.0)"
 
 #: vinaigrette-deleteme.py:7
 msgid "Free for private use; right holder retains other rights, including distribution"
