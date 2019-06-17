@@ -1,0 +1,69 @@
+{
+    "authors_list": [
+        {
+            "affiliation": null,
+            "name": {
+                "first": "Elise",
+                "full": "elise huchard",
+                "last": "Huchard"
+            },
+            "orcid": null,
+            "researcher_id": null
+        },
+        {
+            "affiliation": null,
+            "name": {
+                "first": "Michel",
+                "full": "michel raymond",
+                "last": "Raymond"
+            },
+            "orcid": null,
+            "researcher_id": null
+        },
+        {
+            "affiliation": null,
+            "name": {
+                "first": "Julio",
+                "full": "julio benavides",
+                "last": "Benavides"
+            },
+            "orcid": null,
+            "researcher_id": null
+        },
+        {
+            "affiliation": null,
+            "name": {
+                "first": "Harry",
+                "full": "harry marshall",
+                "last": "Marshall"
+            },
+            "orcid": null,
+            "researcher_id": null
+        },
+        {
+            "affiliation": null,
+            "name": {
+                "first": "Leslie A.",
+                "full": "leslie a. knapp",
+                "last": "Knapp"
+            },
+            "orcid": null,
+            "researcher_id": null
+        },
+        {
+            "affiliation": null,
+            "name": {
+                "first": "Guy",
+                "full": "guy cowlishaw",
+                "last": "Cowlishaw"
+            },
+            "orcid": null,
+            "researcher_id": null
+        }
+    ],
+    "doctype": "journal-article",
+    "fingerprint": "542ab735da1dd0076a287649b1f8fc9a",
+    "pdf_url": null,
+    "pubdate": "2010-01-01",
+    "title": "A female signal reflects MHC genotype in a social primate"
+}

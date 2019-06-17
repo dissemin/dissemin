@@ -1,0 +1,39 @@
+{
+    "authors_list": [
+        {
+            "affiliation": null,
+            "name": {
+                "first": "Katja",
+                "full": "katja woeckner",
+                "last": "Woeckner"
+            },
+            "orcid": null,
+            "researcher_id": null
+        },
+        {
+            "affiliation": null,
+            "name": {
+                "first": "Withold",
+                "full": "withold drazyk",
+                "last": "Drazyk"
+            },
+            "orcid": null,
+            "researcher_id": null
+        },
+        {
+            "affiliation": null,
+            "name": {
+                "first": "Thomas",
+                "full": "thomas rung",
+                "last": "Rung"
+            },
+            "orcid": null,
+            "researcher_id": null
+        }
+    ],
+    "doctype": "proceedings-article",
+    "fingerprint": "86c2d0e055cb36587c758611269561e0",
+    "pdf_url": null,
+    "pubdate": "2010-01-01",
+    "title": "An Efficient VOF-Based RANS Method to Capture Complex Sea States"
+}

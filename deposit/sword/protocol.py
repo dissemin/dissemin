@@ -164,6 +164,15 @@ class SWORDMETSMODSProtocol(SWORDMETSProtocol):
         Creates metadata as lxml etree in MODS
         """
         self.log("### Creating MODS metadata from publication and form")
+
+        # Fetch the first OaiRecord with highest OaiSource priority
+        publication = self.paper.oairecord_set.filter(
+            journal_title__isnull=False,
+            publisher_name__isnull=False
+        ).order_by('priority').first()
+
+
+        # Namespaces
         MODS_NAMESPACE = "http://www.loc.gov/mods/v3"
 
         MODS = "{%s}" % MODS_NAMESPACE
@@ -180,15 +189,59 @@ class SWORDMETSMODSProtocol(SWORDMETSProtocol):
         mods_abstract = etree.SubElement(mods_xml, MODS + 'abstract')
         mods_abstract.text = form.cleaned_data['abstract']
 
-        # Identifier / DOI
-        doi = None
-        for publication in self.paper.publications:
-            doi = publication.doi
-        if doi:
-            mods_doi = etree.SubElement(mods_xml, MODS + 'identifier')
-            mods_doi.set('type', 'doi')
-            mods_doi.text = doi
+        # Identifier / DOI and relatedItem
+        if publication:
+            # DOI
+            if publication.doi:
+                mods_doi = etree.SubElement(mods_xml, MODS + 'identifier')
+                mods_doi.set('type', 'doi')
+                mods_doi.text = publication.doi
+            # relatedItem
+            mods_related_item = None
+            if publication.journal_title or publication.journal.container:
+                mods_related_item = etree.SubElement(mods_xml, MODS + 'relatedItem')
+                mods_related_item_title_info = etree.SubElement(mods_related_item, MODS + 'titleInfo')
+                mods_related_item_title = etree.SubElement(mods_related_item_title_info, MODS + 'title')
+                if publication.journal_title:
+                    mods_related_item_title.text = publication.journal_title
+                else:
+                    mods_related_item_title.text = publication.container
+                mods_related_item_part = None
+                if publication.pages:
+                    pages = publication.pages.split('-')
+                    if len(pages) == 1:
+                        mods_related_item_part = etree.SubElement(mods_related_item, MODS + 'part')
+                        mods_related_item_pages = etree.SubElement(mods_related_item_part, MODS + 'extent')
+                        mods_related_item_pages.set('unit', 'pages')
+                        mods_related_item_pages_total= etree.SubElement(mods_related_item_pages, MODS + 'total')
+                        mods_related_item_pages_total.text = publication.pages
+                    elif len(pages) == 2:
+                        start = pages[0]
+                        end = pages[1]
+                        mods_related_item_part = etree.SubElement(mods_related_item, MODS + 'part')
+                        mods_related_item_pages = etree.SubElement(mods_related_item_part, MODS + 'extent')
+                        mods_related_item_pages.set('unit', 'pages')
+                        mods_related_item_pages_start = etree.SubElement(mods_related_item_pages, MODS + 'start')
+                        mods_related_item_pages_start.text = start
+                        mods_related_item_pages_start = etree.SubElement(mods_related_item_pages, MODS + 'end')
+                        mods_related_item_pages_start.text = end
+                if publication.issue:
+                    if mods_related_item_part is None:
+                        mods_related_item_part = etree.SubElement(mods_related_item, MODS + 'part')
+                    mods_related_item_issue = etree.SubElement(mods_related_item_part, MODS + 'detail')
+                    mods_related_item_issue.set('type', 'issue')
+                    mods_related_item_issue_number = etree.SubElement(mods_related_item_issue, MODS + 'number')
+                    mods_related_item_issue_number.text = publication.issue
+                if publication.volume:
+                    if mods_related_item_part is None:
+                        mods_related_item_part = etree.SubElement(mods_related_item, MODS + 'part')
+                    mods_related_item_volume = etree.SubElement(mods_related_item_part, MODS + 'detail')
+                    mods_related_item_volume.set('type', 'volume')
+                    mods_related_item_volume_number = etree.SubElement(mods_related_item_volume, MODS + 'number')
+                    mods_related_item_volume_number.text = publication.volume
 
+
+            
 
         # Language
         # TODO Fixture + Routine

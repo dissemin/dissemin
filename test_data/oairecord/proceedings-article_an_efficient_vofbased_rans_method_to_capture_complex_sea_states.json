@@ -1,0 +1,14 @@
+{
+    "container": null,
+    "description": "Viscous seakeeping and manoeuvring simulations are becoming more important for an investigation of intact and damage conditions of ships exposed to extreme sea-states. The computational effort for RANS-based viscous seaway simulations is still prohibitive and reduces the possible fields of industrial applications. The limitations are associated to cumbersome grid requirements which restrain the flexibility and enhance the computational costs. The requirements follow from the aim to accurately predict the wave propagation towards the floating object and concurrently suppress wave reflections at the outlet boundary. To overcome these difficulties, a simple viscous/inviscid-coupling approach is suggested. Therein, the viscous RANS method is implicitly forced to comply with a prescribed invis-cid solution towards the far-field boundaries. Employing consistent boundary conditions at all far-field boundaries, the method facilitates the use of small domains and allows to investigate the behaviour of floating objects exposed to time-variable wave-field directions. Selected 2D and 3D examples are presented to demonstrate the capabilities of the approach.",
+    "doi": "10.1115/omae2010-20674",
+    "identifier": "oai:crossref.org:10.1115/omae2010-20674",
+    "issue": null,
+    "journal_title": "29th International Conference on Ocean, Offshore and Arctic Engineering: Volume 6",
+    "pages": null,
+    "priority": 20,
+    "publisher_name": "ASME International",
+    "pubtype": "proceedings-article",
+    "about": "proceedings-article_an_efficient_vofbased_rans_method_to_capture_complex_sea_states",
+    "volume": null
+}

@@ -1,0 +1,29 @@
+{
+    "authors_list": [
+        {
+            "affiliation": null,
+            "name": {
+                "first": "Jerome A.",
+                "full": "jerome a. rossert",
+                "last": "Rossert"
+            },
+            "orcid": null,
+            "researcher_id": null
+        },
+        {
+            "affiliation": null,
+            "name": {
+                "first": "Evelyne A.",
+                "full": "evelyne a. fischer",
+                "last": "Fischer"
+            },
+            "orcid": null,
+            "researcher_id": null
+        }
+    ],
+    "doctype": "book-chapter",
+    "fingerprint": "38afd2166b9ecdfb62ce1c8db0efc391",
+    "pdf_url": null,
+    "pubdate": "2010-01-01",
+    "title": "Acute Interstitial Nephritis"
+}

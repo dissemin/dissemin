@@ -1,0 +1,39 @@
+{
+    "authors_list": [
+        {
+            "affiliation": null,
+            "name": {
+                "first": "Jean-Pierre",
+                "full": "jean-pierre mano",
+                "last": "Mano"
+            },
+            "orcid": null,
+            "researcher_id": null
+        },
+        {
+            "affiliation": null,
+            "name": {
+                "first": "Jean-Pierre",
+                "full": "jean-pierre george",
+                "last": "Georg\u00e9"
+            },
+            "orcid": null,
+            "researcher_id": null
+        },
+        {
+            "affiliation": null,
+            "name": {
+                "first": "Marie-Pierre",
+                "full": "marie-pierre gleizes",
+                "last": "Gleizes"
+            },
+            "orcid": null,
+            "researcher_id": null
+        }
+    ],
+    "doctype": "book-chapter",
+    "fingerprint": "b2bebd095ebd5b112568c57c2965c7b2",
+    "pdf_url": null,
+    "pubdate": "2010-01-01",
+    "title": "Adaptive Multi-agent System for Multi-sensor Maritime Surveillance"
+}

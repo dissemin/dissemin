@@ -1,0 +1,39 @@
+{
+    "authors_list": [
+        {
+            "affiliation": null,
+            "name": {
+                "first": "Benedikt",
+                "full": "benedikt schmidt",
+                "last": "Schmidt"
+            },
+            "orcid": null,
+            "researcher_id": null
+        },
+        {
+            "affiliation": null,
+            "name": {
+                "first": "Todor",
+                "full": "todor stoitsev",
+                "last": "Stoitsev"
+            },
+            "orcid": null,
+            "researcher_id": null
+        },
+        {
+            "affiliation": null,
+            "name": {
+                "first": "Max",
+                "full": "max muhlhauser",
+                "last": "M\u00fchlh\u00e4user"
+            },
+            "orcid": null,
+            "researcher_id": null
+        }
+    ],
+    "doctype": "proceedings-article",
+    "fingerprint": "ec8003249ed8ff94e3f49205b54b81c9",
+    "pdf_url": null,
+    "pubdate": "2010-01-01",
+    "title": "Activity-centric support for weakly-structured business processes"
+}
