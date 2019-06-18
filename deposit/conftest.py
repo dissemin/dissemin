@@ -45,10 +45,17 @@ metadata_publications = [
     'journal-article_confrontation_with_heidegger',
     'journal-article_constructing_matrix_geometric_means',
     'journal-article_lobjet_de_la_dpression',
+    'journal-issue_mode_und_gender',
     'other_assisting_configuration_based_feature_model_composition',
+    'poster_development_of_new_gpe_conjugates_with_application_in_neurodegenerative_diseases',
+    'preprint_nikomachische_ethik',
+    'proceedings_sein_und_nichtsein',
     'proceedings-article_activitycentric_support_for_weaklystructured_business_processes',
     'proceedings-article_an_efficient_vofbased_rans_method_to_capture_complex_sea_states',
+    'proceedings-article_cursos_efa',
     'reference-entry_chromatin_interaction_analysis_using_pairedend_tag_sequencing',
+    'report_execution_of_targeted_experiments_to_inform_bison',
+    'thesis_blue_mining_planung_des_abbaus_von_manganknollen_in_der_tiefsee',
 ]
 
 
@@ -57,4 +64,4 @@ def publication(request, load_json):
     """
     Loads the above list of OaiRecords and corresponding Papers one after the other and returns the Paper object
     """
-    return load_json.load_oairecord(request.param)[0]
+    return load_json.load_oairecord(request.param)

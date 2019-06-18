@@ -123,10 +123,15 @@ class TestSWORDSMETSMODSProtocol(TestProtocol):
         """
         Validates against mods 3.7 schema
         """
-        self.protocol.paper = publication
-        data = {
-            'abstract' : 'The abstract',
-        }
+        self.protocol.paper = publication[0]
+
+        # Set POST data for form
+        data = dict()
+        if publication[1].description is not None:
+            data['abstract'] = publication[1].description
+        else:
+            data['abstract'] = 'User filled in abstract'
+
         form = BaseMetadataForm(paper=self.protocol.paper, data=data)
         form.is_valid()
         xml = self.protocol._get_xml_metadata(form)

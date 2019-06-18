@@ -14,6 +14,9 @@ from papers.baremodels import PAPER_TYPE_CHOICES
 from papers.models import Paper
 from papers.models import OaiRecord
 from papers.models import OaiSource
+from publishers.models import Journal
+from publishers.models import Publisher
+
 
 from dissemin.settings import BASE_DIR
 
@@ -43,6 +46,7 @@ def load_json(db, oaisource):
         def load_oairecord(self, f):
             """
             Loads the given OaiRecord and the related paper and returns both
+            If a publisher or journal is given, both are loaded, but not returned
             """
             f_name = os.path.join(BASE_DIR, 'test_data', 'oairecord', f + '.json')
             with open(f_name, 'r') as json_file:
@@ -51,10 +55,41 @@ def load_json(db, oaisource):
             data['about'] = p
             if 'source' not in data:
                 data['source'] = oaisource.base_oaisource()
+            if 'journal' in data:
+                journal = self.load_journal(data['journal'])[0]
+                data['journal'] = journal
+            if 'publisher' in data:
+                publisher = self.load_publisher(data['publisher'])
+                data['publisher'] = publisher
             o = OaiRecord.objects.get_or_create(**data)[0]
             self.objects.append(o)
             return p, o
 
+        def load_publisher(self, f):
+            """
+            Loads the given publisher
+            """
+            f_name = os.path.join(BASE_DIR, 'test_data', 'publisher', f + '.json')
+            with open(f_name, 'r') as json_file:
+                data = json.load(json_file)
+            p = Publisher.objects.get_or_create(**data)[0]
+            self.objects.append(p)
+            return p
+
+        def load_journal(self, f):
+            """
+            Loads the given journal and its publisher and returns both
+            """
+            f_name = os.path.join(BASE_DIR, 'test_data', 'journal', f + '.json')
+            with open(f_name, 'r') as json_file:
+                data = json.load(json_file)
+            p = self.load_publisher(data['publisher'])
+            data['publisher'] = p
+            data['publisher'] = p
+            print(data)
+            j = Journal.objects.get_or_create(**data)[0]
+            self.objects.append(j)
+            return j, p
 
     l = LoadJSON()
     yield l
