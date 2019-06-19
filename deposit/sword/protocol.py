@@ -230,10 +230,6 @@ class SWORDMETSMODSProtocol(SWORDMETSProtocol):
         mods_type = etree.SubElement(mods_xml, MODS + 'genre')
         mods_type.text = self.paper.doctype
 
-        # When using pytest -s, show resulting xml
-        print("")
-        print(etree.tostring(mods_xml, pretty_print=True, encoding='utf-8', xml_declaration=True).decode())
-
         return mods_xml
 
         

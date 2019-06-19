@@ -135,4 +135,9 @@ class TestSWORDSMETSMODSProtocol(TestProtocol):
         form = BaseMetadataForm(paper=self.protocol.paper, data=data)
         form.is_valid()
         xml = self.protocol._get_xml_metadata(form)
+        
+        # When using pytest -s, show resulting xml
+        print("")
+        print(etree.tostring(xml, pretty_print=True, encoding='utf-8', xml_declaration=True).decode())
+
         mods_3_7_xsd.assertValid(xml)
