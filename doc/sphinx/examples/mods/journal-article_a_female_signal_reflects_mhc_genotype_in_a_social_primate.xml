@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mets xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.loc.gov/METS/">
+  <dmdSec ID="d_dmd_1">
+    <mdWrap MDTYPE="OTHER">
+      <xmlData>
+        <mods xmlns="http://www.loc.gov/mods/v3" version="3.7">
+          <relatedItem>
+            <part>
+              <detail type="volume">
+                <number>10</number>
+              </detail>
+              <detail type="issue">
+                <number>1</number>
+              </detail>
+              <extent unit="pages">
+                <total>96</total>
+              </extent>
+            </part>
+            <identifier type="eissn">1471-2148</identifier>
+            <originInfo>
+              <publisher>BMC</publisher>
+            </originInfo>
+            <titleInfo>
+              <title>BMC Evolutionary Biology</title>
+            </titleInfo>
+          </relatedItem>
+          <abstract>Males from many species are believed to advertise their genetic quality through striking ornaments that attract mates. Yet the connections between signal expression, body condition and the genes associated with individual quality are rarely elucidated. This is particularly problematic for the signals of females in species with conventional sex roles, whose evolutionary significance has received little attention and is poorly understood. Here we explore these questions in the sexual swellings of female primates, which are among the most conspicuous of mammalian sexual signals and highly variable in size, shape and colour. We investigated the relationships between two components of sexual swellings (size and shape), body condition, and genes of the Major Histocompatibility Complex (MHC) in a wild baboon population (Papio ursinus) where males prefer large swellings.</abstract>
+          <identifier type="doi">10.1186/1471-2148-10-96</identifier>
+          <name type="personal">
+            <namePart type="family">Huchard</namePart>
+            <namePart type="given">Elise</namePart>
+          </name>
+          <name type="personal">
+            <namePart type="family">Raymond</namePart>
+            <namePart type="given">Michel</namePart>
+          </name>
+          <name type="personal">
+            <namePart type="family">Benavides</namePart>
+            <namePart type="given">Julio</namePart>
+          </name>
+          <name type="personal">
+            <namePart type="family">Marshall</namePart>
+            <namePart type="given">Harry</namePart>
+          </name>
+          <name type="personal">
+            <namePart type="family">Knapp</namePart>
+            <namePart type="given">Leslie A.</namePart>
+          </name>
+          <name type="personal">
+            <namePart type="family">Cowlishaw</namePart>
+            <namePart type="given">Guy</namePart>
+          </name>
+          <titleInfo>
+            <title>A female signal reflects MHC genotype in a social primate</title>
+          </titleInfo>
+          <genre>journal-article</genre>
+        </mods>
+      </xmlData>
+    </mdWrap>
+  </dmdSec>
+  <fileSec>
+    <fileGrp>
+      <file ID="d_file_1">
+        <FLocat xlink:href="document.pdf" LOCTYPE="URL"/>
+      </file>
+    </fileGrp>
+  </fileSec>
+  <structMap>
+    <div DMDID="d_dmd_1">
+      <div>
+        <fptr FILEID="d_file_1"/>
+      </div>
+    </div>
+  </structMap>
+</mets>

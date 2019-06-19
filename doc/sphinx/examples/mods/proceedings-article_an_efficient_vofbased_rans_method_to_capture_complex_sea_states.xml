@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mets xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.loc.gov/METS/">
+  <dmdSec ID="d_dmd_1">
+    <mdWrap MDTYPE="OTHER">
+      <xmlData>
+        <mods xmlns="http://www.loc.gov/mods/v3" version="3.7">
+          <abstract>Viscous seakeeping and manoeuvring simulations are becoming more important for an investigation of intact and damage conditions of ships exposed to extreme sea-states. The computational effort for RANS-based viscous seaway simulations is still prohibitive and reduces the possible fields of industrial applications. The limitations are associated to cumbersome grid requirements which restrain the flexibility and enhance the computational costs. The requirements follow from the aim to accurately predict the wave propagation towards the floating object and concurrently suppress wave reflections at the outlet boundary. To overcome these difficulties, a simple viscous/inviscid-coupling approach is suggested. Therein, the viscous RANS method is implicitly forced to comply with a prescribed invis-cid solution towards the far-field boundaries. Employing consistent boundary conditions at all far-field boundaries, the method facilitates the use of small domains and allows to investigate the behaviour of floating objects exposed to time-variable wave-field directions. Selected 2D and 3D examples are presented to demonstrate the capabilities of the approach.</abstract>
+          <identifier type="doi">10.1115/omae2010-20674</identifier>
+          <name type="personal">
+            <namePart type="family">Woeckner</namePart>
+            <namePart type="given">Katja</namePart>
+          </name>
+          <name type="personal">
+            <namePart type="family">Drazyk</namePart>
+            <namePart type="given">Withold</namePart>
+          </name>
+          <name type="personal">
+            <namePart type="family">Rung</namePart>
+            <namePart type="given">Thomas</namePart>
+          </name>
+          <titleInfo>
+            <title>An Efficient VOF-Based RANS Method to Capture Complex Sea States</title>
+          </titleInfo>
+          <genre>proceedings-article</genre>
+        </mods>
+      </xmlData>
+    </mdWrap>
+  </dmdSec>
+  <fileSec>
+    <fileGrp>
+      <file ID="d_file_1">
+        <FLocat xlink:href="document.pdf" LOCTYPE="URL"/>
+      </file>
+    </fileGrp>
+  </fileSec>
+  <structMap>
+    <div DMDID="d_dmd_1">
+      <div>
+        <fptr FILEID="d_file_1"/>
+      </div>
+    </div>
+  </structMap>
+</mets>

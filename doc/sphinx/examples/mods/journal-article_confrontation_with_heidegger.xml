@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mets xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.loc.gov/METS/">
+  <dmdSec ID="d_dmd_1">
+    <mdWrap MDTYPE="OTHER">
+      <xmlData>
+        <mods xmlns="http://www.loc.gov/mods/v3" version="3.7">
+          <relatedItem>
+            <part>
+              <detail type="volume">
+                <number>43</number>
+              </detail>
+              <detail type="issue">
+                <number>3-4</number>
+              </detail>
+              <extent unit="pages">
+                <start>353</start>
+                <end>368</end>
+              </extent>
+            </part>
+            <identifier type="eissn">2160-0228</identifier>
+            <identifier type="issn">0016-6928</identifier>
+            <titleInfo>
+              <title>Genre</title>
+            </titleInfo>
+          </relatedItem>
+          <abstract>This is a custim user iven abstract</abstract>
+          <identifier type="doi">10.1215/00166928-43-3-4-353</identifier>
+          <name type="personal">
+            <namePart type="family">Cacciari</namePart>
+            <namePart type="given">M.</namePart>
+          </name>
+          <name type="personal">
+            <namePart type="family">Murphy</namePart>
+            <namePart type="given">T. S.</namePart>
+          </name>
+          <titleInfo>
+            <title>Confrontation with Heidegger</title>
+          </titleInfo>
+          <genre>journal-article</genre>
+        </mods>
+      </xmlData>
+    </mdWrap>
+  </dmdSec>
+  <fileSec>
+    <fileGrp>
+      <file ID="d_file_1">
+        <FLocat xlink:href="document.pdf" LOCTYPE="URL"/>
+      </file>
+    </fileGrp>
+  </fileSec>
+  <structMap>
+    <div DMDID="d_dmd_1">
+      <div>
+        <fptr FILEID="d_file_1"/>
+      </div>
+    </div>
+  </structMap>
+</mets>

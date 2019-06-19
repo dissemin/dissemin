@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mets xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.loc.gov/METS/">
+  <dmdSec ID="d_dmd_1">
+    <mdWrap MDTYPE="OTHER">
+      <xmlData>
+        <mods xmlns="http://www.loc.gov/mods/v3" version="3.7">
+          <relatedItem>
+            <part>
+              <detail type="volume">
+                <number>20</number>
+              </detail>
+              <detail type="issue">
+                <number>1</number>
+              </detail>
+            </part>
+          </relatedItem>
+          <abstract>This is a custim user iven abstract</abstract>
+          <identifier type="doi">10.13001/1081-3810.1385</identifier>
+          <name type="personal">
+            <namePart type="family">Poloni</namePart>
+            <namePart type="given">Federico G.</namePart>
+          </name>
+          <titleInfo>
+            <title>Constructing matrix geometric means</title>
+          </titleInfo>
+          <genre>journal-article</genre>
+        </mods>
+      </xmlData>
+    </mdWrap>
+  </dmdSec>
+  <fileSec>
+    <fileGrp>
+      <file ID="d_file_1">
+        <FLocat xlink:href="document.pdf" LOCTYPE="URL"/>
+      </file>
+    </fileGrp>
+  </fileSec>
+  <structMap>
+    <div DMDID="d_dmd_1">
+      <div>
+        <fptr FILEID="d_file_1"/>
+      </div>
+    </div>
+  </structMap>
+</mets>
