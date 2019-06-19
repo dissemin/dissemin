@@ -10,91 +10,27 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.urls import reverse
 
 from deposit.models import Repository
+from dissemin.settings import BASE_DIR
 from papers.baremodels import PAPER_TYPE_CHOICES
 from papers.models import Paper
+from papers.models import OaiSource
 from papers.models import OaiRecord
 from papers.models import OaiSource
 from publishers.models import Journal
 from publishers.models import Publisher
 
 
-from dissemin.settings import BASE_DIR
-
-
 @pytest.fixture
 def load_json(db, oaisource):
     """
-    This fixture returns an object with which you can load various JSON fixtures
+    This fixture returns an object with which you can load various JSON fixtures. It deletes the created objects after test has finished.
     """
-    class LoadJSON():
-        """
-        Class that carries the various functions
-        """
-        objects = []
-
-        def load_paper(self, f):
-            """
-            Loads the given Paper
-            """
-            f_name = os.path.join(BASE_DIR, 'test_data', 'paper', f + '.json')
-            with open(f_name, 'r') as json_file:
-                data = json.load(json_file)
-            p = Paper.objects.get_or_create(**data)[0]
-            self.objects.append(p)
-            return p
-
-        def load_oairecord(self, f):
-            """
-            Loads the given OaiRecord and the related paper and returns both
-            If a publisher or journal is given, both are loaded, but not returned
-            """
-            f_name = os.path.join(BASE_DIR, 'test_data', 'oairecord', f + '.json')
-            with open(f_name, 'r') as json_file:
-                data = json.load(json_file)
-            p = self.load_paper(data['about'])
-            data['about'] = p
-            if 'source' not in data:
-                data['source'] = oaisource.base_oaisource()
-            if 'journal' in data:
-                journal = self.load_journal(data['journal'])[0]
-                data['journal'] = journal
-            if 'publisher' in data:
-                publisher = self.load_publisher(data['publisher'])
-                data['publisher'] = publisher
-            o = OaiRecord.objects.get_or_create(**data)[0]
-            self.objects.append(o)
-            return p, o
-
-        def load_publisher(self, f):
-            """
-            Loads the given publisher
-            """
-            f_name = os.path.join(BASE_DIR, 'test_data', 'publisher', f + '.json')
-            with open(f_name, 'r') as json_file:
-                data = json.load(json_file)
-            p = Publisher.objects.get_or_create(**data)[0]
-            self.objects.append(p)
-            return p
-
-        def load_journal(self, f):
-            """
-            Loads the given journal and its publisher and returns both
-            """
-            f_name = os.path.join(BASE_DIR, 'test_data', 'journal', f + '.json')
-            with open(f_name, 'r') as json_file:
-                data = json.load(json_file)
-            p = self.load_publisher(data['publisher'])
-            data['publisher'] = p
-            data['publisher'] = p
-            print(data)
-            j = Journal.objects.get_or_create(**data)[0]
-            self.objects.append(j)
-            return j, p
 
     l = LoadJSON()
     yield l
     for obj in l.objects:
-        obj.delete()
+        if obj.id is not None:
+            obj.delete()
 
 
 @pytest.fixture
@@ -119,43 +55,14 @@ def simple_logo():
 @pytest.fixture
 def oaisource(db):
     """
-    Returns a class from which you can create several oaisources.
+    Returns a class from which you can create several oaisources. It deletes the created objects after test has finished.
     """
-    class Dummy():
-        """
-        Dummy class to gahter different functions
-        """
-        def __init__(self):
-            """
-            List of objects that will be deleted after test is done
-            """
-            self.objects = []
 
-
-        def dummy_oaisource(self):
-            """
-            Provides a dummy OaiSource if you just need a OaiSource, but do not do anything with it
-            """
-            oaisource, unused = OaiSource.objects.get_or_create(
-                identifier='dummy-test',
-                name='Dummy OaiSource',
-                default_pubtype=PAPER_TYPE_CHOICES[0][0],
-            )
-            self.objects.append(oaisource)
-            return oaisource
-
-        
-        @staticmethod
-        def base_oaisource():
-            """
-            Provides BASE OaiSource. It is in the database from a migration. We do not add it to the list of to be deleted OaiSources
-            """
-            return OaiSource.objects.get(identifier='base')
-
-    dummy = Dummy()
-    yield dummy
-    for obj in dummy.objects:
-        obj.delete()
+    los = LoadOaiSource()
+    yield los
+    for obj in los.objects:
+        if obj.id is not None:
+            obj.delete()
 
 
 @pytest.fixture
@@ -310,3 +217,94 @@ def rendering_get_page():
 
     return f
 
+
+# Helper classes. Do not use them directly in your tests.
+
+class LoadJSON():
+    """
+    Class that carries the various functions. Use the corresponding fixture instead of this class directly.
+    """
+    objects = []
+
+    def load_paper(self, f):
+        """
+        Loads the given Paper
+        """
+        f_name = os.path.join(BASE_DIR, 'test_data', 'paper', f + '.json')
+        with open(f_name, 'r') as json_file:
+            data = json.load(json_file)
+        p = Paper.objects.get_or_create(**data)[0]
+        self.objects.append(p)
+        return p
+
+    def load_oairecord(self, f):
+        """
+        Loads the given OaiRecord and the related paper and returns both
+        If a publisher or journal is given, both are loaded, but not returned
+        """
+        f_name = os.path.join(BASE_DIR, 'test_data', 'oairecord', f + '.json')
+        with open(f_name, 'r') as json_file:
+            data = json.load(json_file)
+        p = self.load_paper(data['about'])
+        data['about'] = p
+        if 'source' not in data:
+            data['source'] = LoadOaiSource.base_oaisource()
+        if 'journal' in data:
+            journal = self.load_journal(data['journal'])[0]
+            data['journal'] = journal
+        if 'publisher' in data:
+            publisher = self.load_publisher(data['publisher'])
+            data['publisher'] = publisher
+        o = OaiRecord.objects.get_or_create(**data)[0]
+        self.objects.append(o)
+        return p, o
+
+    def load_publisher(self, f):
+        """
+        Loads the given publisher
+        """
+        f_name = os.path.join(BASE_DIR, 'test_data', 'publisher', f + '.json')
+        with open(f_name, 'r') as json_file:
+            data = json.load(json_file)
+        p = Publisher.objects.get_or_create(**data)[0]
+        self.objects.append(p)
+        return p
+
+    def load_journal(self, f):
+        """
+        Loads the given journal and its publisher and returns both
+        """
+        f_name = os.path.join(BASE_DIR, 'test_data', 'journal', f + '.json')
+        with open(f_name, 'r') as json_file:
+            data = json.load(json_file)
+        p = self.load_publisher(data['publisher'])
+        data['publisher'] = p
+        j = Journal.objects.get_or_create(**data)[0]
+        self.objects.append(j)
+        return j, p
+
+
+class LoadOaiSource():
+    """
+    Class that has several functions for creation of OaiSources. Use the corresponding fixture instead of this class directly.
+    """
+    objects = []
+
+    def dummy_oaisource(self):
+        """
+        Provides a dummy OaiSource if you just need a OaiSource, but do not do anything with it
+        """
+        oaisource, unused = OaiSource.objects.get_or_create(
+            identifier='dummy-test',
+            name='Dummy OaiSource',
+            default_pubtype=PAPER_TYPE_CHOICES[0][0],
+        )
+        self.objects.append(oaisource)
+        return oaisource
+
+    @staticmethod
+    def base_oaisource():
+        """
+        Provides BASE OaiSource. It is in the database from a migration. We do not add it to the list of to be deleted OaiSources
+        """
+        return OaiSource.objects.get(identifier='base')
