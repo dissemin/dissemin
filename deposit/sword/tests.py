@@ -100,7 +100,7 @@ class TestSWORDMETSProtocol(object):
 
 
 @pytest.mark.usefixtures('sword_mods_protocol')
-class TestSWORDSMETSMODSProtocol(TestProtocol):
+class TestSWORDSMETSMODSProtocol(TestProtocol, TestSWORDMETSProtocol):
     """
     A test class for named protocol
     """
