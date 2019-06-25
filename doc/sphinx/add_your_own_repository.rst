@@ -15,12 +15,53 @@ Metadata
 
 We use the `Metdata Encoding \& Transmission Standard (METS) <https://www.loc.gov/standards/mets/>`_ to ship our metadata and describe what is delivered. Most repositories are able to ingest a METS-package.
 
+We try to keep our METS as simple as possible.
+Currently we populate only ``dmdSec``, ``fileSec`` and ``structSec``.
+We deliver two files per package:
+
+* ``mets.xml`` - containing the metadata
+* ``document.pdf`` - the document to be deposited
+
 Bibliographic Metadata
 ^^^^^^^^^^^^^^^^^^^^^^
 
 Most of our data comes from `CrossRef <https://www.crossref.org>`_ and has thus a certain quality. 
 
-We offer two main formats for our bibliographic data: `Dublin Core (DC) <http://dublincore.org/specifications/dublin-core/>`_ and `Metadata Objects Description Data (MODS) <http://www.loc.gov/standards/mods/>`_.
+We offer currentlry `Metadata Objects Description Data (MODS) <http://www.loc.gov/standards/mods/>`_.
+
+MODS
+''''
+
+Currently we create version ``3.7``. 
+We populate as near as the definitions require as possible.
+You find below our mappings using XPath notation.
+
+.. code::
+
+    abstract => abstract
+    author => name/personal/namePart/given + family
+    document type => genre
+    doi => identifier[@type="doi"]
+    essn => relatedItem/identifier[@type="eissn"]
+    issn => relatedItem/identifier[@type="issn"]
+    issue => relatedItem/part/detail[@type=issue]/number
+    journal => relatedItem/titleInfo/title
+    pages => relatedItem/part/extent[@unit="pages"]/total or start + end
+    publisher => relatedItem/originInfo/publisher
+    title => titleInfo/title
+    volume => relatedItem/part/detail[@type="volume"]
+
+Note that volume, issue and pages are often not arabic numbers, but may contain other literals.
+Although MODS does provide fields for declarations like *No., Vol.* or *p.* we do not use this, because our datasources don't.
+
+Examples
+........
+
+This is our list of examples of MODS metadata created by Dissemin.
+This includes, that they are already contained in a suitable METS container.
+The list is sorted by publications types and covers all publication types that Dissemin uses.
+
+.. include:: examples/mods/examples_mods.rst
 
 Non-Bibliographic Metadata
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
