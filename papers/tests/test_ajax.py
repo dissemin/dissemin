@@ -27,7 +27,6 @@ from backend.tests.test_generic import get_researcher_by_name
 from django.contrib.auth.models import User
 from django.urls import reverse
 import django.test
-import unittest
 from papers.models import Paper
 
 
@@ -93,7 +92,6 @@ class PaperAjaxTest(JsonRenderingTest):
                                     'slug': self.r1.slug})
         self.checkJson(page)
 
-    @unittest.expectedFailure
     def test_consolidate_paper(self):
         p = Paper.create_by_doi('10.1175/jas-d-15-0240.1')
         self.client.login(username='terry', password='yo')
@@ -105,7 +103,6 @@ class PaperAjaxTest(JsonRenderingTest):
         self.assertTrue(result['success'])
         self.assertTrue(len(result['value']) > 10)
 
-    @unittest.expectedFailure
     def test_consolidate_elsevier_paper(self):
         p = Paper.create_by_doi('10.1016/0168-5597(91)90120-m')
         self.client.login(username='terry', password='yo')
