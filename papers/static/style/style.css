@@ -1403,18 +1403,36 @@ a.stats_caption_line:hover {
     width:calc(40% - 10px);
 }
 
-/*
-#globalStats, #statsExplanations {
-    width: 48%;
-    width:calc(50% - 5px);
-}
-*/
-
-#globalStats {
-    float:left;
-    margin-right: 5px;
+/* This is needed for vertical alignment of columns in Bootstrap 3 */
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
 }
 
+#screenGreenOpenAccess {
+    background-color: #C8D638;
+}
+
+#screenOpenRepositories {
+    background-color: #38C8D6;
+}
+
+#screenLatestUploads {
+    background-color: #D638C8;
+}
+
+#screenDisseminData {
+    background-color: #79D638;
+}
+
+#screenDisseminForLibraries {
+    background-color: #3879D6;
+}
+
+#screenPartners {
+    background-color: #D63879;
+}
 
 /* FAQ */
 #faqSummary {

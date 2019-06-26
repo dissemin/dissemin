@@ -37,59 +37,90 @@
         </form>
     </div>
 
-
-  </div>
-
-  <div id="siteSummaries">
-
-  <div class="oaPanel left">
-    <h2>{% trans "Green open access" %}</h2>
-
-    <div id="statsExplanations">
-        <p>
-        {% blocktrans trimmed %}
-        Many researchers do not use their right to
-        make their papers freely available online, in addition
-        to the paywalled version offered by traditional publishers.
-        {% endblocktrans %}
-        </p>
-
-        <p>
-        {% blocktrans trimmed %}
-        This forces libraries to buy overpriced electronic subscriptions
-        to journals, when they can afford them at all.
-        {% endblocktrans %}
-        </p>
-      </div>
-
-    <div id="globalStats">
-        {% get_solo 'papers.PaperWorld' as world %}
-        {% include "statistics/pie.html" with obj=world stats_counter=1 %}
+    <div class="jumbotron" id="screenGreenOpenAccess">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-0 vcenter"><img class="img-responsive" src="/static/img/650x400.png"></div><!-- This comment is a must from a hack to make vcenter work
+                --><div class="col-xs-12 col-sm-8 vcenter">
+                    <h2 class="text-center">Green Open Access</h2>
+                    <p>Many researchers do not use their right to make their papers freely available online, in addition to the paywalled version offered by traditional publishers.</p>
+                    <p>There are two majer advantages of unpaywalling your papers:</p>
+                    <ol>
+                        <li>Your research is available to everyone. This increases your readership and makes your research more acknowledged, because your research better spreads. This effect is measurable with the so called <span class="font-italic">Open Access Citation Advantage.</span></li>
+                        <li>Libraries do need to by overpriced electronic subscriptions to journals, when they can afford them at all.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+    <div class="jumbotron" id="screenOpenRepositories">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-0 col-sm-push-8 vcenter"><img class="img-responsive" src="/static/img/650x400.png"></div><!-- This comment is a must from a hack to make vcenter work
+                --><div class="col-xs-12 col-sm-8 col-sm-pull-4 vcenter">
+                    <h2 class="text-center">Open Repositories</h2>
+                    <p>Uploading your papers on your own webpage is not enough. Such copies are less stable and harder to find than document uploaded to well-indexed repositories such as arXiv, Zenodo and institutional repositories.</p>
+                </div>
+            </div>
+        </div>
     </div>
 
-  </div>
+    <div class="jumbotron" id="screenLatestUploads">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-0 vcenter"><img class="img-responsive" src="/static/img/650x400.png"></div><!-- This comment is a must from a hack to make vcenter work
+                --><div class="col-xs-12 col-sm-8 vcenter">
+                    <h2 class="text-center">Latest Uploads</h2>
+                    <p>These are the five last uploads via Dissemin:</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-  <div class="oaPanel right">
+    <div class="jumbotron" id="screenDisseminData">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-0 col-sm-push-8 vcenter"><img class="img-responsive" src="/static/img/650x400.png"></div><!-- This comment is a must from a hack to make vcenter work
+             --><div class="col-xs-12 col-sm-8 col-sm-pull-4 vcenter">
+                    <h2 class="text-center">Dissemins Data</h2>
+                    <p>Dissemin collects its data from various sources and evaluates if a given publication is freely available.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                        {% get_solo 'papers.PaperWorld' as world %}
+                        {% include "statistics/pie.html" with obj=world stats_counter=1 %}
+                </div>
+            </div>
+        </div>
+    </div>
 
-	<h2>{% trans "Open repositories" %}</h2>
+    <div class="jumbotron" id="screenDisseminForLibraries">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-0 vcenter"><img class="img-responsive" src="/static/img/650x400.png"></div><!-- This comment is a must from a hack to make vcenter work
+                --><div class="col-xs-12 col-sm-8 vcenter">
+                    <h2 class="text-center">Dissemin for Libraries</h2>
+                    <p>As library you can use Dissemin to find publications of your researchers that are behind a paywall. Dissemin can upload publications directly into your institutional repository and tries to support your local worklfow as much as possible.</p>
+                    <p>In addition you can advertise Dissemin to your researchers and show them, how easy it is to liberate their publications!</p>
+                    <p>Benefit from Dissemins capabilities and get in contact with us!</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <p>
-    {% blocktrans trimmed %}
-    Uploading your papers on your own webpage is not enough.
-    Such copies are less stable and harder to find than documents
-    uploaded to well-indexed repositories.
-    {% endblocktrans %}
-    </p>
-
-    <p>
-    {% blocktrans trimmed %}
-    Dissemin searches for copies of your papers in a large collection
-    of open repositories and tells you which ones cannot be accessed.
-    {% endblocktrans %}
-    </p>
-  </div>
-
-  </div>
+    <div class="jumbotron" id="screenPartners">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-0 col-sm-push-8 vcenter"><img class="img-responsive" src="/static/img/650x400.png"></div><!-- This comment is a must from a hack to make vcenter work
+                --><div class="col-xs-12 col-sm-8 col-sm-pull-4 vcenter">
+                    <h2 class="text-center">Partners</h2>
+                    <p>Dissemin has a row of partners. These are</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 {% endblock %}

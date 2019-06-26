@@ -43,7 +43,7 @@
 
 #welcome p { width: 100%; }
 
-.oaPanel.left, .oaPanel.right, .oaPanel.left > *, .oaPanel.right > *, #globalStats, #statsExplanations, .siteSummary.left, .siteSummary.right {
+.oaPanel.left, .oaPanel.right, .oaPanel.left > *, .oaPanel.right > *, #statsExplanations, .siteSummary.left, .siteSummary.right {
   float: none;
   margin: 0;
 }
