@@ -16,7 +16,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-27 18:48+0200\n"
-"PO-Revision-Date: 2019-06-06 15:52:52+0000\n"
+"PO-Revision-Date: 2019-06-27 16:17:04+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2273,7 +2273,7 @@ msgstr "El URL no es válido."
 
 #: vinaigrette-deleteme.py:2
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
-msgstr ""
+msgstr "Dedicación al dominio público universal de Creative Commons (CC0 1.0)"
 
 #: vinaigrette-deleteme.py:3
 #, fuzzy

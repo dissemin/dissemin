@@ -18,7 +18,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-27 18:48+0200\n"
-"PO-Revision-Date: 2019-06-17 17:15:28+0000\n"
+"PO-Revision-Date: 2019-06-27 16:17:03+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2057,7 +2057,7 @@ msgstr "Passwort vergessen?"
 #: templates/dissemin/partners.html:7 templates/dissemin/partners.html:12
 #: templates/dissemin/skeleton.html:104
 msgid "Partners"
-msgstr "Partner_innen"
+msgstr "Partner"
 
 #: templates/dissemin/sandbox.html:12
 msgid "SANDBOX Sign in"
