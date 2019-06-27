@@ -1210,10 +1210,6 @@ a.stats_caption_line:hover {
     background-color: #2A6496;
 	color:white;
 	padding:20px 50px;
-	font-size:1.2em;
-	font-weight:normal;
-	margin:10px 0;
-	overflow:hidden;
 }
 
 #welcome .startButton {
