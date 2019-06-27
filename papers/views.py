@@ -122,8 +122,8 @@ def index(request):
     context = {
         'search_form': FrontPageSearchForm(),
         'combined_status':
-            [{'choice_value': v, 'choice_label': l}
-             for v, l in COMBINED_STATUS_CHOICES]
+            [{'choice_value': v, 'choice_label': l} for v, l in COMBINED_STATUS_CHOICES],
+            'latest_deposits': DepositRecord.objects.select_related().all().order_by('-date')[:5],
         }
     return render(request, 'papers/index.html', context)
 

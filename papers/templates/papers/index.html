@@ -94,9 +94,17 @@
                     <h2 class="text-center">{% trans "Latest Uploads" %}</h2>
                     <p>
                     {% blocktrans trimmed %}
-                    These are the five last uploads via Dissemin:
+                    After uploading to Dissemin into a repository, the publication has to be accepted. See the last accepted publications:
                     {% endblocktrans %}
                     </p>
+                    <div class="list-group">
+                    {% for deposit in latest_deposits %}
+                    <a href="{{ deposit.oairecord.splash_url }}" target="_blank" class="list-group-item">
+                        <h4 class="list-group-item-heading">{{ deposit.paper.title }}</h4>
+                        <span class="list-group-item-text">Published in {{ deposit.repository }} on {{ d.date|date }}</span>
+                    </a>
+                    {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
