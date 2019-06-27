@@ -1411,27 +1411,33 @@ a.stats_caption_line:hover {
 }
 
 #screenGreenOpenAccess {
-    background-color: #C8D638;
+    background-color: #64962A;
+    color:white;
 }
 
 #screenOpenRepositories {
-    background-color: #38C8D6;
+    background-color: #962A64;
+    color:white;
 }
 
 #screenLatestUploads {
-    background-color: #D638C8;
+    background-color: #2A9692;
+    color:white;
 }
 
 #screenDisseminData {
-    background-color: #79D638;
+    background-color: #96922A;
+    color:white;
 }
 
 #screenDisseminForLibraries {
-    background-color: #3879D6;
+    background-color: #922A96;
+    color:white;
 }
 
 #screenPartners {
-    background-color: #D63879;
+    background-color: #2A6496;
+    color:white;
 }
 
 /* FAQ */
