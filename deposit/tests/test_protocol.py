@@ -37,6 +37,70 @@ from papers.models import OaiSource
 from papers.models import Paper
 from deposit.tasks import refresh_deposit_statuses
 
+
+class TestProtocol():
+    """
+    This class contains some tests that every implemented protocol shall pass. The tests are not executed as members of this class, but of any subclass.
+    """
+
+    @pytest.fixture(autouse=True)
+    def skip_if_base(self):
+        """
+        This fixture prevents tests of this class to executed directly.
+        """
+        if type(self) is TestProtocol:
+            pytest.skip("class is not tested for class TestProtocol")
+
+
+    def deposit(self):
+        """
+        Replace this function in your testsubclass with suitable assert statements and so on.
+        """
+        raise NotImplementedError("This function must be overriden by any subclass")
+
+
+    def test_deposit(self):
+        """
+        Tests the deposition. This function calls :meth:`deposit` unless it's not a member of a subclass.
+        Do not override this function. Please override :meth:`deposit`.
+        """
+        self.deposit()
+
+
+    def test_deposit_page(self, rendering_authenticated_client, rendering_get_page, book_god_of_the_labyrinth):
+        """
+        Test the deposit page for HTTP Response 200
+        """
+        r = rendering_get_page(rendering_authenticated_client, 'upload_paper', kwargs={'pk': book_god_of_the_labyrinth.pk})
+        assert r.status_code == 200
+
+
+    def test_get_form_return_type(self, user_isaac_newton, book_god_of_the_labyrinth):
+        """
+        Return type of get_form shall by a form
+        """
+        self.protocol.init_deposit(user_isaac_newton, book_god_of_the_labyrinth)
+        form = self.protocol.get_form()
+        assert isinstance(form, Form)
+
+
+    def test_init_deposit_type(self, user_isaac_newton, book_god_of_the_labyrinth):
+        """
+        init_deposit shall return a bool
+        """
+        retval = self.protocol.init_deposit(user_isaac_newton, book_god_of_the_labyrinth)
+        assert type(retval) == bool
+
+
+    def test_protocol_identifier(self):
+        """
+        Identifier should exist
+        """
+        assert len(self.protocol.protocol_identifier()) > 1
+
+
+
+
 # 1x1 px image used as default logo for the repository
 simple_png_image = b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01\x08\x02\x00\x00\x00\x90wS\xde\x00\x00\x00\tpHYs\x00\x00\x0b\x13\x00\x00\x0b\x13\x01\x00\x9a\x9c\x18\x00\x00\x00\x07tIME\x07\xdf\n\x12\x0c+\x19\x84\x1d/"\x00\x00\x00\x19tEXtComment\x00Created with GIMPW\x81\x0e\x17\x00\x00\x00\x0cIDAT\x08\xd7c\xa8\xa9\xa9\x01\x00\x02\xec\x01u\x90\x90\x1eL\x00\x00\x00\x00IEND\xaeB`\x82'
 
@@ -50,6 +114,7 @@ class DepositTest(django.test.TestCase):
 class ProtocolTest(django.test.TestCase):
     """
     Set of generic tests that any protocol should pass.
+    Note: This class is going to deprecated and is no longer maintained.
     """
 
     def __init__(self, *args, **kwargs):

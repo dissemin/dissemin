@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mets xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.loc.gov/METS/">
+  <dmdSec ID="d_dmd_1">
+    <mdWrap MDTYPE="OTHER">
+      <xmlData>
+        <mods xmlns="http://www.loc.gov/mods/v3" version="3.7">
+          <relatedItem>
+            <part>
+              <extent unit="pages">
+                <start>729</start>
+                <end>737</end>
+              </extent>
+            </part>
+          </relatedItem>
+          <abstract>This is a custim user iven abstract</abstract>
+          <identifier type="doi">10.1016/b978-0-323-05876-6.00060-5</identifier>
+          <name type="personal">
+            <namePart type="family">Rossert</namePart>
+            <namePart type="given">Jerome A.</namePart>
+          </name>
+          <name type="personal">
+            <namePart type="family">Fischer</namePart>
+            <namePart type="given">Evelyne A.</namePart>
+          </name>
+          <titleInfo>
+            <title>Acute Interstitial Nephritis</title>
+          </titleInfo>
+          <genre>book-chapter</genre>
+        </mods>
+      </xmlData>
+    </mdWrap>
+  </dmdSec>
+  <fileSec>
+    <fileGrp>
+      <file ID="d_file_1">
+        <FLocat xlink:href="document.pdf" LOCTYPE="URL"/>
+      </file>
+    </fileGrp>
+  </fileSec>
+  <structMap>
+    <div DMDID="d_dmd_1">
+      <div>
+        <fptr FILEID="d_file_1"/>
+      </div>
+    </div>
+  </structMap>
+</mets>

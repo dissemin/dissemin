@@ -11,6 +11,17 @@ from deposit.protocol import DepositError
 from deposit.protocol import RepositoryProtocol
 
 logger = logging.getLogger('dissemin.' + __name__)
+        
+        
+# Namespaces
+METS_NAMESPACE = "http://www.loc.gov/METS/"
+MODS_NAMESPACE = "http://www.loc.gov/mods/v3"
+XLINK_NAMESPACE = "http://www.w3.org/1999/xlink"
+XSI_NAMESPACE = "http://www.w3.org/2001/XMLSchema-instance"
+
+METS = "{%s}" % METS_NAMESPACE
+MODS = "{%s}" % MODS_NAMESPACE
+XLINK = "{%s}" % XLINK_NAMESPACE
 
 
 class SWORDMETSProtocol(RepositoryProtocol):
@@ -22,7 +33,7 @@ class SWORDMETSProtocol(RepositoryProtocol):
         """
         Return human readable class name
         """
-        return "SOWRD Protocol (METS)"
+        return "SWORD Protocol (METS)"
 
     
     @staticmethod
@@ -46,12 +57,6 @@ class SWORDMETSProtocol(RepositoryProtocol):
         :params metadata: Bibliographic metadata as lxml etree
         :returns: complete mets as string
         """
-        METS_NAMESPACE = "http://www.loc.gov/METS/"
-        XLINK_NAMESPACE = "http://www.w3.org/1999/xlink"
-        XSI_NAMESPACE = "http://www.w3.org/2001/XMLSchema-instance"
-
-        METS = "{%s}" % METS_NAMESPACE
-        XLINK = "{%s}" % XLINK_NAMESPACE
 
         NSMAP = {
             None : METS_NAMESPACE,
@@ -145,3 +150,188 @@ class SWORDMETSProtocol(RepositoryProtocol):
         deposit_result = self._get_deposit_result(r.text)
 
         return deposit_result
+
+
+class SWORDMETSMODSProtocol(SWORDMETSProtocol):
+    """
+    Protocol that implements MODS metadata with SWORDMETSProtocol
+    """
+
+    def __str__(self):
+        """
+        Return human readable class name
+        """
+        return "SWORD Protocol (MODS)"
+
+
+    def _get_xml_metadata(self, form):
+        """
+        Creates metadata as lxml etree in MODS
+        """
+        self.log("### Creating MODS metadata from publication and form")
+
+        # Fetch the first OaiRecord with highest OaiSource priority and journal as well as publisher
+        publication = self.paper.oairecord_set.filter(
+            journal_title__isnull=False,
+            publisher_name__isnull=False
+        ).order_by('priority').first()
+
+        # If this is not available, take the first one
+        if publication is None:
+           publication = self.paper.oairecord_set.order_by('priority').first()
+
+        NSMAP = {
+            None: MODS_NAMESPACE,
+        }
+
+        # Creation of root
+        mods_xml = etree.Element(MODS + 'mods', nsmap=NSMAP)
+        mods_xml.set('version', '3.7')
+
+        # Abstract
+        mods_abstract = etree.SubElement(mods_xml, MODS + 'abstract')
+        mods_abstract.text = form.cleaned_data['abstract']
+
+        # Identifier / DOI and relatedItem
+        if publication:
+            # DOI
+            if publication.doi:
+                mods_doi = etree.SubElement(mods_xml, MODS + 'identifier')
+                mods_doi.set('type', 'doi')
+                mods_doi.text = publication.doi
+            # relatedItem
+            related_item = self._get_xml_metadata_relatedItem(publication)
+            if related_item is not None:
+                mods_xml.insert(0, related_item)
+
+        # Language
+        # TODO Fixture + Routine
+
+        # DDC
+        # TODO Fixture + Routine
+
+        # Name / Authors list
+        for author in self.paper.authors:
+            mods_name = etree.SubElement(mods_xml, MODS + 'name')
+            mods_name.set('type', 'personal')
+            mods_last_name = etree.SubElement(mods_name, MODS + 'namePart')
+            mods_last_name.set('type', 'family')
+            mods_last_name.text = author.name.last
+            mods_first_name = etree.SubElement(mods_name, MODS + 'namePart')
+            mods_first_name.set('type', 'given')
+            mods_first_name.text = author.name.first
+
+        # Title
+        mods_title_info = etree.SubElement(mods_xml, MODS + 'titleInfo')
+        mods_title = etree.SubElement(mods_title_info, MODS + 'title')
+        mods_title.text = self.paper.title
+
+        # Document type
+        mods_type = etree.SubElement(mods_xml, MODS + 'genre')
+        mods_type.text = self.paper.doctype
+
+        return mods_xml
+
+        
+    def _get_xml_metadata_relatedItem(self, publication):
+        """
+        Creates the mods item ``relatedItem`` if available
+        :param publication: A OaiRecord corresponding to the paper
+        :returns: lxml object or ``None``
+        """
+        related_item = None
+        related_item_data = dict()
+
+        # We set the title and publisher, but prefer values from Journal or Publisher object if available
+        journal = publication.journal
+        issn = None
+        eissn = None
+        publisher = publication.publisher
+        if publication.journal is not None:
+            journal = publication.journal.title
+            issn = publication.journal.issn
+            eissn = publication.journal.essn
+        if publication.publisher is not None:
+            publisher = publication.publisher.name
+
+        # Set the title
+        if journal is not None:
+            related_item_title_info = etree.Element(MODS + 'titleInfo')
+            related_item_title = etree.SubElement(related_item_title_info, MODS + 'title')
+            related_item_title.text = journal
+            related_item_data['title'] = related_item_title_info
+
+        # Set the publisher
+        if publisher is not None:
+            related_item_origin_info = etree.Element(MODS + 'originInfo')
+            related_item_publisher = etree.SubElement(related_item_origin_info, MODS + 'publisher')
+            related_item_publisher.text = publisher
+            related_item_data['publisher'] = related_item_origin_info
+
+        # Could be optimized
+        # Set issn
+        if issn is not None:
+            related_item_issn = etree.Element(MODS + 'identifier')
+            related_item_issn.set('type', 'issn')
+            related_item_issn.text = issn
+            related_item_data['issn'] = related_item_issn
+
+        # Set issn
+        if eissn is not None:
+            related_item_eissn = etree.Element(MODS + 'identifier')
+            related_item_eissn.set('type', 'eissn')
+            related_item_eissn.text = eissn
+            related_item_data['eissn'] = related_item_eissn
+
+        # relatedItem - part
+        part = dict()
+
+        # Set pages
+        if publication.pages is not None:
+            pages = publication.pages.split('-', 1)
+            related_item_pages = etree.Element(MODS + 'extent')
+            related_item_pages.set('unit', 'pages')
+            if len(pages) == 1:
+                related_item_pages_total = etree.SubElement(related_item_pages, MODS + 'total')
+                related_item_pages_total.text = publication.pages
+                part['pages'] = related_item_pages
+            else:
+                start = pages[0]
+                end = pages[1]
+                related_item_pages_start = etree.SubElement(related_item_pages, MODS + 'start')
+                related_item_pages_start.text = start
+                related_item_pages_start = etree.SubElement(related_item_pages, MODS + 'end')
+                related_item_pages_start.text = end
+                part['pages'] = related_item_pages
+
+        # Set issue
+        if publication.issue is not None:
+            related_item_issue = etree.Element(MODS + 'detail')
+            related_item_issue.set('type', 'issue')
+            related_item_issue_number = etree.SubElement(related_item_issue, MODS + 'number')
+            related_item_issue_number.text = publication.issue
+            part['issue'] = related_item_issue
+
+        # Set volume
+        if publication.volume is not None:
+            related_item_volume = etree.Element(MODS + 'detail')
+            related_item_volume.set('type', 'volume')
+            related_item_volume_number = etree.SubElement(related_item_volume, MODS + 'number')
+            related_item_volume_number.text = publication.volume
+            part['volume'] = related_item_volume
+
+        # Make parts if existing
+        if len(part) >= 1:
+            related_item_part = etree.Element(MODS + 'part')
+            for item in part.values():
+                related_item_part.insert(0, item)
+            related_item_data['part'] = related_item_part
+
+        # Make relatedItem if existing
+        if len(related_item_data) >= 1:
+            related_item = etree.Element(MODS + 'relatedItem')
+            for item in related_item_data.values():
+                related_item.insert(0, item)
+        
+        return related_item
+

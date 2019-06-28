@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mets xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.loc.gov/METS/">
+  <dmdSec ID="d_dmd_1">
+    <mdWrap MDTYPE="OTHER">
+      <xmlData>
+        <mods xmlns="http://www.loc.gov/mods/v3" version="3.7">
+          <abstract>Knowledge-intensive tasks are a blind spot for business process management systems, as these tasks are executed in an unsupervised, highly individual manner. Hence, individual experience is not disseminated and task execution largely depends on implicit knowledge. In this paper we present a framework, realizing situation-specific and personalized task execution support for knowledge-intensive tasks in business processes. As a core concept we suggest activity scheme: a structure capturing a probabilistic task execution model. Activity schemes seamlessly integrate the organizational business process with the individual task execution process based on personalization and generalization of user interactions in the working applications.</abstract>
+          <identifier type="doi">10.1145/1822018.1822057</identifier>
+          <name type="personal">
+            <namePart type="family">Schmidt</namePart>
+            <namePart type="given">Benedikt</namePart>
+          </name>
+          <name type="personal">
+            <namePart type="family">Stoitsev</namePart>
+            <namePart type="given">Todor</namePart>
+          </name>
+          <name type="personal">
+            <namePart type="family">Mühlhäuser</namePart>
+            <namePart type="given">Max</namePart>
+          </name>
+          <titleInfo>
+            <title>Activity-centric support for weakly-structured business processes</title>
+          </titleInfo>
+          <genre>proceedings-article</genre>
+        </mods>
+      </xmlData>
+    </mdWrap>
+  </dmdSec>
+  <fileSec>
+    <fileGrp>
+      <file ID="d_file_1">
+        <FLocat xlink:href="document.pdf" LOCTYPE="URL"/>
+      </file>
+    </fileGrp>
+  </fileSec>
+  <structMap>
+    <div DMDID="d_dmd_1">
+      <div>
+        <fptr FILEID="d_file_1"/>
+      </div>
+    </div>
+  </structMap>
+</mets>

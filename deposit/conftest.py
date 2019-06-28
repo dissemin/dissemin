@@ -33,3 +33,35 @@ def license_alternative(db):
 
     return license
 
+
+# This is a list of oairecords to be tested
+metadata_publications = [
+    'book-chapter_acute_interstitial_nephritis',
+    'book-chapter_adaptive_multiagent_system_for_multisensor_maritime_surveillance',
+    'book_god_of_the_labyrinth',
+    'dataset_sexuality_assessment_in_older_adults_unique_situations',
+    'journal-article_a_female_signal_reflects_mhc_genotype_in_a_social_primate',
+    'journal-article_altes_und_neues_zum_strafrechtlichen_vorsatzbegriff',
+    'journal-article_confrontation_with_heidegger',
+    'journal-article_constructing_matrix_geometric_means',
+    'journal-article_lobjet_de_la_dpression',
+    'journal-issue_mode_und_gender',
+    'other_assisting_configuration_based_feature_model_composition',
+    'poster_development_of_new_gpe_conjugates_with_application_in_neurodegenerative_diseases',
+    'preprint_nikomachische_ethik',
+    'proceedings_sein_und_nichtsein',
+    'proceedings-article_activitycentric_support_for_weaklystructured_business_processes',
+    'proceedings-article_an_efficient_vofbased_rans_method_to_capture_complex_sea_states',
+    'proceedings-article_cursos_efa',
+    'reference-entry_chromatin_interaction_analysis_using_pairedend_tag_sequencing',
+    'report_execution_of_targeted_experiments_to_inform_bison',
+    'thesis_blue_mining_planung_des_abbaus_von_manganknollen_in_der_tiefsee',
+]
+
+
+@pytest.fixture(params=metadata_publications)
+def publication(request, load_json):
+    """
+    Loads the above list of OaiRecords and corresponding Papers one after the other and returns the Paper object
+    """
+    return load_json.load_oairecord(request.param)

@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mets xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.loc.gov/METS/">
+  <dmdSec ID="d_dmd_1">
+    <mdWrap MDTYPE="OTHER">
+      <xmlData>
+        <mods xmlns="http://www.loc.gov/mods/v3" version="3.7">
+          <abstract>This is a custim user iven abstract</abstract>
+          <name type="personal">
+            <namePart type="family">Silva Reis</namePart>
+            <namePart type="given">Sara C.</namePart>
+          </name>
+          <titleInfo>
+            <title>Development of New GPE Conjugates with Application in Neurodegenerative Diseases</title>
+          </titleInfo>
+          <genre>poster</genre>
+        </mods>
+      </xmlData>
+    </mdWrap>
+  </dmdSec>
+  <fileSec>
+    <fileGrp>
+      <file ID="d_file_1">
+        <FLocat xlink:href="document.pdf" LOCTYPE="URL"/>
+      </file>
+    </fileGrp>
+  </fileSec>
+  <structMap>
+    <div DMDID="d_dmd_1">
+      <div>
+        <fptr FILEID="d_file_1"/>
+      </div>
+    </div>
+  </structMap>
+</mets>

@@ -5,8 +5,10 @@ from lxml import etree
 from requests.exceptions import RequestException
 from zipfile import ZipFile
 
+from deposit.forms import BaseMetadataForm
 from deposit.protocol import DepositError
 from deposit.sword.protocol import SWORDMETSProtocol
+from deposit.tests.test_protocol import TestProtocol
 
 userdata = [(None, None), ('vetinari', None), (None, 'psst')]
 
@@ -20,11 +22,10 @@ class TestSWORDMETSProtocol(object):
         """
         Tests the string output of class and object
         """
-        assert self.protocol.__str__() == "SOWRD Protocol (METS)"
+        assert self.protocol.__str__() == "SWORD Protocol (METS)"
 
 
-    @staticmethod
-    def test_get_mets(mets_xsd, metadata_xml_dc):
+    def test_get_mets(self, mets_xsd, metadata_xml_dc):
         """
         A test for creating mets from metadata
         """
@@ -51,8 +52,7 @@ class TestSWORDMETSProtocol(object):
             SWORDMETSProtocol._get_deposit_result(None)
 
 
-    @staticmethod
-    def test_get_mets_container(blank_pdf_path, metadata_xml_mets):
+    def test_get_mets_container(self, blank_pdf_path, metadata_xml_mets):
         """
         A test for creating a mets container
         """
@@ -99,4 +99,45 @@ class TestSWORDMETSProtocol(object):
             p.submit_deposit(None, None)
 
 
+@pytest.mark.usefixtures('sword_mods_protocol')
+class TestSWORDSMETSMODSProtocol(TestProtocol, TestSWORDMETSProtocol):
+    """
+    A test class for named protocol
+    """
+
+    def deposit(self):
+        """
+        Manages publication, form and mocking
+        """
+        pass
+
+
+    def test_str(self):
+        """
+        Tests the string output of class and object
+        """
+        assert self.protocol.__str__() == "SWORD Protocol (MODS)"
+
+
+    def test_get_xml_metadata(self, mods_3_7_xsd, publication):
+        """
+        Validates against mods 3.7 schema
+        """
+        self.protocol.paper = publication[0]
+
+        # Set POST data for form
+        data = dict()
+        if publication[1].description is not None:
+            data['abstract'] = publication[1].description
+        else:
+            data['abstract'] = 'User filled in abstract'
+
+        form = BaseMetadataForm(paper=self.protocol.paper, data=data)
+        form.is_valid()
+        xml = self.protocol._get_xml_metadata(form)
         
+        # When using pytest -s, show resulting xml
+        print("")
+        print(etree.tostring(xml, pretty_print=True, encoding='utf-8', xml_declaration=True).decode())
+
+        mods_3_7_xsd.assertValid(xml)

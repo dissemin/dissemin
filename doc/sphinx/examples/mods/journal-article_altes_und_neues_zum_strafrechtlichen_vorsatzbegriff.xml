@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mets xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.loc.gov/METS/">
+  <dmdSec ID="d_dmd_1">
+    <mdWrap MDTYPE="OTHER">
+      <xmlData>
+        <mods xmlns="http://www.loc.gov/mods/v3" version="3.7">
+          <relatedItem>
+            <part>
+              <extent unit="pages">
+                <start>283</start>
+                <end>315</end>
+              </extent>
+            </part>
+            <identifier type="issn">1868-8098</identifier>
+            <originInfo>
+              <publisher>Nomos Verlagsgesellschaft</publisher>
+            </originInfo>
+            <titleInfo>
+              <title>Rechtswissenschaft</title>
+            </titleInfo>
+          </relatedItem>
+          <abstract>This is a custim user iven abstract</abstract>
+          <identifier type="doi">10.5771/1868-8098-2010-3-283</identifier>
+          <name type="personal">
+            <namePart type="family">Jakobs</namePart>
+            <namePart type="given">Günther</namePart>
+          </name>
+          <titleInfo>
+            <title>Altes und Neues zum strafrechtlichen Vorsatzbegriff</title>
+          </titleInfo>
+          <genre>journal-article</genre>
+        </mods>
+      </xmlData>
+    </mdWrap>
+  </dmdSec>
+  <fileSec>
+    <fileGrp>
+      <file ID="d_file_1">
+        <FLocat xlink:href="document.pdf" LOCTYPE="URL"/>
+      </file>
+    </fileGrp>
+  </fileSec>
+  <structMap>
+    <div DMDID="d_dmd_1">
+      <div>
+        <fptr FILEID="d_file_1"/>
+      </div>
+    </div>
+  </structMap>
+</mets>
