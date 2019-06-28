@@ -1062,7 +1062,6 @@ input[type=checkbox]:checked ~ .stats_caption_label
 
 .stats_caption_label_text {
     overflow:hidden;
-    white-space:nowrap;
     display:inline-block;
     vertical-align:top;
 }
@@ -1408,32 +1407,41 @@ a.stats_caption_line:hover {
 
 #screenGreenOpenAccess {
     background-color: #64962A;
-    color:white;
+    color: white;
 }
 
 #screenOpenRepositories {
     background-color: #962A64;
-    color:white;
+    color: white;
 }
 
 #screenLatestUploads {
     background-color: #2A9692;
-    color:white;
+    color: white;
 }
 
 #screenDisseminData {
     background-color: #96922A;
-    color:white;
+    color: white;
+}
+
+#screenDisseminData a {
+	color: white;
+	text-decoration: underline;
+}
+
+#screenDisseminData .statsSliceLegend {
+    fill: white;
 }
 
 #screenDisseminForLibraries {
     background-color: #922A96;
-    color:white;
+    color: white;
 }
 
 #screenPartners {
     background-color: #2A6496;
-    color:white;
+    color: white;
 }
 
 /* FAQ */

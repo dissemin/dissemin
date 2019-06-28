@@ -1,0 +1,16 @@
+{% load get_pie_data %}
+
+
+<div class="statspie_graph" id="stats_pie_chart_n{{ stats_counter }}"></div>
+
+<script type="text/javascript">
+    $(function() {
+        var data = {{ stats|get_pie_data }};
+        {% if on_statuses %}
+            data.on_statuses = {{ on_statuses|safe }};
+        {% else %}
+            data.on_statuses = [];
+        {% endif %}
+        updateStats = showStatsPie(data, "stats_pie_chart_n{{ stats_counter }}", "stats_pie_legend_n{{ stats_counter }}");
+    });
+</script>

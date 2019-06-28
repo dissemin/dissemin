@@ -121,12 +121,15 @@
                     Dissemin collects its data from various sources and evaluates if a given publication is freely available.
                     {% endblocktrans %}
                     </p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12">
+                    <div class="row">
                         {% get_solo 'papers.PaperWorld' as world %}
-                        {% include "statistics/pie.html" with obj=world stats_counter=1 %}
+                        <div class="col-xs-12 col-sm-6">
+                            {% include "statistics/pie_chart.html" with stats=world.stats object_id=obj.object_id stats_counter=1 %}
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            {% include "statistics/pie_legend.html" with stats=world.stats object_id=obj.object_id stats_counter=1 %}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

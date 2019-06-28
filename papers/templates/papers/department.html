@@ -61,7 +61,7 @@ $(function(){
 <div class="detailsContent">
     <p><a href="{% url 'department-papers' pk=department.id %}">{% trans "Papers of the members" %}</a></p>
 
-    {% include "statistics/pie.html" with obj=department stats_counter=1 %}
+    {% include "statistics/pie_chart_legend.html" with stats=department.stats object_id=department.object_id stats_counter=1 %}
 </div>
 {% endblock %}
 
