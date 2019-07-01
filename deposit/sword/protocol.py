@@ -220,6 +220,10 @@ class SWORDMETSMODSProtocol(SWORDMETSProtocol):
             mods_first_name = etree.SubElement(mods_name, MODS + 'namePart')
             mods_first_name.set('type', 'given')
             mods_first_name.text = author.name.first
+            if author.orcid is not None:
+                mods_orcid = etree.SubElement(mods_name, MODS + 'nameIdentifier')
+                mods_orcid.set('type', 'orcid')
+                mods_orcid.text = author.orcid
 
         # Title
         mods_title_info = etree.SubElement(mods_xml, MODS + 'titleInfo')
