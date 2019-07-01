@@ -40,6 +40,7 @@ You find below our mappings using XPath notation.
 
     abstract => abstract
     author => name/personal/namePart/given + family
+    date => originInfo/dateIssued[@enconding="w3cdtf"] (YYYY-MM-DD)
     document type => genre
     doi => identifier[@type="doi"]
     essn => relatedItem/identifier[@type="eissn"]
@@ -47,7 +48,7 @@ You find below our mappings using XPath notation.
     issue => relatedItem/part/detail[@type=issue]/number
     journal => relatedItem/titleInfo/title
     pages => relatedItem/part/extent[@unit="pages"]/total or start + end
-    publisher => relatedItem/originInfo/publisher
+    publisher => originInfo/publisher
     title => titleInfo/title
     volume => relatedItem/part/detail[@type="volume"]
 
