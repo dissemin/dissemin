@@ -18,7 +18,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-27 18:48+0200\n"
-"PO-Revision-Date: 2019-06-27 16:17:03+0000\n"
+"PO-Revision-Date: 2019-07-01 07:22:56+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1534,7 +1534,7 @@ msgstr "Keine."
 
 #: statistics/models.py:48
 msgid "Available from the publisher"
-msgstr "Frei verfügbar durch Herausgeber."
+msgstr "Frei verfügbar durch Herausgeber"
 
 #: statistics/models.py:49
 msgid "Available from the author"

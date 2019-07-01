@@ -15,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-27 18:48+0200\n"
-"PO-Revision-Date: 2019-06-06 15:52:53+0000\n"
+"PO-Revision-Date: 2019-07-01 07:22:57+0000\n"
 "Language: fi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2188,9 +2188,8 @@ msgid "Documents deposited in repositories via Dissemin can be stored on the pla
 msgstr ""
 
 #: templates/dissemin/tos.html:132
-#, fuzzy
 msgid "Misuse can be reported to <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
-msgstr "Väärinkäytökset voidaan ilmoittaa osoitteeseen support@dissem.in."
+msgstr "Väärinkäytökset voidaan ilmoittaa osoitteeseen <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
 
 #: templates/dissemin/tos.html:140
 msgid "The <a href=\"https://dissem.in\">dissem.in</a> website has been registered with <a href=\"https://www.cnil.fr/\">CNIL</a> under declaration n°1895382 v0."
