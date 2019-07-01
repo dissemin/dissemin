@@ -32,6 +32,7 @@ djangorestframework
 elasticsearch==6.3.1
 httplib2
 jsonfield
+langdetect
 lxml
 mock
 multiprocessing_generator

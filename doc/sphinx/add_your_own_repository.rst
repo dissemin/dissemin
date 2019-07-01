@@ -54,6 +54,14 @@ You find below our mappings using XPath notation.
 Note that volume, issue and pages are often not arabic numbers, but may contain other literals.
 Although MODS does provide fields for declarations like *No., Vol.* or *p.* we do not use this, because our datasources don't.
 
+Additionally we ship the language as ISO-639-1 determined by `langdetect <https://pypi.org/project/langdetect/>`_.
+We ship the language if both conditions are satisfied:
+
+1. The abstract has a length of at least 256 letters (including whitespaces)
+2. ``langdetect`` gains a confidence of at least 50%
+
+If we cannot determine any language, we omit the field.
+
 Examples
 ........
 
