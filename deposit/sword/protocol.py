@@ -1,3 +1,4 @@
+import langdetect
 import requests
 import logging
 
@@ -192,6 +193,12 @@ class SWORDMETSMODSProtocol(SWORDMETSProtocol):
         mods_abstract = etree.SubElement(mods_xml, MODS + 'abstract')
         mods_abstract.text = form.cleaned_data['abstract']
 
+        # Date
+        mods_origin_info = etree.SubElement(mods_xml, MODS + 'originInfo')
+        mods_date_issued = etree.SubElement(mods_origin_info, MODS + 'dateIssued')
+        mods_date_issued.set('encoding', 'w3cdtf')
+        mods_date_issued.text = str(self.paper.pubdate)
+
         # Identifier / DOI and relatedItem
         if publication:
             # DOI
@@ -199,13 +206,32 @@ class SWORDMETSMODSProtocol(SWORDMETSProtocol):
                 mods_doi = etree.SubElement(mods_xml, MODS + 'identifier')
                 mods_doi.set('type', 'doi')
                 mods_doi.text = publication.doi
+
+            # Publisher
+            publisher = publication.publisher
+            if publication.publisher is not None:
+                publisher = publication.publisher.name
+            else:
+                publisher = publication.publisher_name
+
+            if publisher is not None:
+                mods_publisher = etree.SubElement(mods_origin_info, MODS + 'publisher')
+                mods_publisher.text = publisher
+
             # relatedItem
             related_item = self._get_xml_metadata_relatedItem(publication)
             if related_item is not None:
                 mods_xml.insert(0, related_item)
 
         # Language
-        # TODO Fixture + Routine
+        if len(form.cleaned_data['abstract']) >= 256:
+            language = langdetect.detect_langs(form.cleaned_data['abstract'])[0]
+            if language.prob >= 0.5:
+                mods_language = etree.SubElement(mods_xml, MODS + 'language')
+                mods_language_term = etree.SubElement(mods_language, MODS + 'languageTerm')
+                mods_language_term.set('type', 'code')
+                mods_language_term.set('authority', 'rfc3066')
+                mods_language_term.text = language.lang
 
         # DDC
         # TODO Fixture + Routine
@@ -250,13 +276,12 @@ class SWORDMETSMODSProtocol(SWORDMETSProtocol):
         journal = publication.journal
         issn = None
         eissn = None
-        publisher = publication.publisher
         if publication.journal is not None:
             journal = publication.journal.title
             issn = publication.journal.issn
             eissn = publication.journal.essn
-        if publication.publisher is not None:
-            publisher = publication.publisher.name
+        else:
+            journal = publication.journal_title
 
         # Set the title
         if journal is not None:
@@ -265,14 +290,6 @@ class SWORDMETSMODSProtocol(SWORDMETSProtocol):
             related_item_title.text = journal
             related_item_data['title'] = related_item_title_info
 
-        # Set the publisher
-        if publisher is not None:
-            related_item_origin_info = etree.Element(MODS + 'originInfo')
-            related_item_publisher = etree.SubElement(related_item_origin_info, MODS + 'publisher')
-            related_item_publisher.text = publisher
-            related_item_data['publisher'] = related_item_origin_info
-
-        # Could be optimized
         # Set issn
         if issn is not None:
             related_item_issn = etree.Element(MODS + 'identifier')

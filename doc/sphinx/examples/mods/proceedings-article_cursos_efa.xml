@@ -5,6 +5,9 @@
       <xmlData>
         <mods xmlns="http://www.loc.gov/mods/v3" version="3.7">
           <abstract>This is a custim user iven abstract</abstract>
+          <originInfo>
+            <dateIssued encoding="w3cdtf">2017-01-01</dateIssued>
+          </originInfo>
           <name type="personal">
             <namePart type="family">Seabra</namePart>
             <namePart type="given">Filipa</namePart>

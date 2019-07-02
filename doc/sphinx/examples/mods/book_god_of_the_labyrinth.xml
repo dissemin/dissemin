@@ -5,6 +5,9 @@
       <xmlData>
         <mods xmlns="http://www.loc.gov/mods/v3" version="3.7">
           <abstract>A detective story in which the solution given is wrong, although this fact is not immediately obvious.</abstract>
+          <originInfo>
+            <dateIssued encoding="w3cdtf">1933-01-01</dateIssued>
+          </originInfo>
           <identifier type="doi">10.0123/quain-1933</identifier>
           <name type="personal">
             <namePart type="family">quain</namePart>

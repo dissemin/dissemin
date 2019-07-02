@@ -41,6 +41,7 @@ You find below our mappings using XPath notation.
     abstract => abstract
     author => name[@type="personal"]namePart/given + family + name
     author[orcid] => name/nameIdentifier[@type=orcid]
+    date => originInfo/dateIssued[@enconding="w3cdtf"] (YYYY-MM-DD)
     document type => genre
     doi => identifier[@type="doi"]
     essn => relatedItem/identifier[@type="eissn"]
@@ -48,12 +49,20 @@ You find below our mappings using XPath notation.
     issue => relatedItem/part/detail[@type=issue]/number
     journal => relatedItem/titleInfo/title
     pages => relatedItem/part/extent[@unit="pages"]/total or start + end
-    publisher => relatedItem/originInfo/publisher
+    publisher => originInfo/publisher
     title => titleInfo/title
     volume => relatedItem/part/detail[@type="volume"]
 
 Note that volume, issue and pages are often not arabic numbers, but may contain other literals.
 Although MODS does provide fields for declarations like *No., Vol.* or *p.* we do not use this, because our datasources don't.
+
+Additionally we ship the language as ISO-639-1 determined by `langdetect <https://pypi.org/project/langdetect/>`_.
+We ship the language if both conditions are satisfied:
+
+1. The abstract has a length of at least 256 letters (including whitespaces)
+2. ``langdetect`` gains a confidence of at least 50%
+
+If we cannot determine any language, we omit the field.
 
 Examples
 ........
