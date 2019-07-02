@@ -39,7 +39,8 @@ You find below our mappings using XPath notation.
 .. code::
 
     abstract => abstract
-    author => name/personal/namePart/given + family
+    author => name[@type="personal"]namePart/given + family + name
+    author[orcid] => name/nameIdentifier[@type=orcid]
     date => originInfo/dateIssued[@enconding="w3cdtf"] (YYYY-MM-DD)
     document type => genre
     doi => identifier[@type="doi"]
