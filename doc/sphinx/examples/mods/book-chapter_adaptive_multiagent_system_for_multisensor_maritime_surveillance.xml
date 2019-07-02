@@ -21,6 +21,9 @@
             <publisher>Springer Science + Business Media</publisher>
           </originInfo>
           <identifier type="doi">10.1007/978-3-642-12384-9_34</identifier>
+          <language>
+            <languageTerm type="code" authority="rfc3066">en</languageTerm>
+          </language>
           <name type="personal">
             <namePart type="family">Mano</namePart>
             <namePart type="given">Jean-Pierre</namePart>

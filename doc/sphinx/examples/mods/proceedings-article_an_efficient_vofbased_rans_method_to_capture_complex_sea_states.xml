@@ -15,6 +15,9 @@
             <publisher>ASME International</publisher>
           </originInfo>
           <identifier type="doi">10.1115/omae2010-20674</identifier>
+          <language>
+            <languageTerm type="code" authority="rfc3066">en</languageTerm>
+          </language>
           <name type="personal">
             <namePart type="family">Woeckner</namePart>
             <namePart type="given">Katja</namePart>

@@ -1,3 +1,4 @@
+import langdetect
 import requests
 import logging
 
@@ -223,7 +224,14 @@ class SWORDMETSMODSProtocol(SWORDMETSProtocol):
                 mods_xml.insert(0, related_item)
 
         # Language
-        # TODO Fixture + Routine
+        if len(form.cleaned_data['abstract']) >= 256:
+            language = langdetect.detect_langs(form.cleaned_data['abstract'])[0]
+            if language.prob >= 0.5:
+                mods_language = etree.SubElement(mods_xml, MODS + 'language')
+                mods_language_term = etree.SubElement(mods_language, MODS + 'languageTerm')
+                mods_language_term.set('type', 'code')
+                mods_language_term.set('authority', 'rfc3066')
+                mods_language_term.text = language.lang
 
         # DDC
         # TODO Fixture + Routine

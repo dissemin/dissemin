@@ -27,6 +27,9 @@
             <publisher>BMC</publisher>
           </originInfo>
           <identifier type="doi">10.1186/1471-2148-10-96</identifier>
+          <language>
+            <languageTerm type="code" authority="rfc3066">en</languageTerm>
+          </language>
           <name type="personal">
             <namePart type="family">Huchard</namePart>
             <namePart type="given">Elise</namePart>
