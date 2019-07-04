@@ -65,3 +65,4 @@ def publication(request, load_json):
     Loads the above list of OaiRecords and corresponding Papers one after the other and returns the Paper object
     """
     return load_json.load_oairecord(request.param)
+

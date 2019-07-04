@@ -29,6 +29,7 @@ from positions.fields import PositionField
 from deposit.registry import protocol_registry
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import JSONField
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from papers.models import OaiSource
@@ -49,6 +50,31 @@ DEPOSIT_STATUS_CHOICES = [
    ('deleted', _('Deleted')), # deleted by the repository
    ]
 
+
+class DDC(models.Model):
+    """
+    Class that represents DDC classes of granularity max 3, i.e. from 000-999
+    """
+    #: DDC number
+    number = models.PositiveSmallIntegerField(unique=True, validators=[MinValueValidator(0), MaxValueValidator(999)])
+    #: Human readable name of the DDC subject class
+    name = models.CharField(max_length=255, blank=False)
+    #: Parent for grouping
+    parent = models.ForeignKey('self', null=True, blank=True, on_delete=models.SET_NULL)
+
+    class Meta:
+        ordering = ['number', ]
+
+    def __str__(self):
+        """
+        Takes into account that the DDC number as three digits
+        """
+        return "{:03d} {}".format(self.number, self.name)
+
+# Register DDC as to be translated.
+vinaigrette.register(DDC, ['name'])
+
+
 class License(models.Model):
     """
     A model to store licenses. Each repository chooses licenses from this model.
@@ -66,7 +92,6 @@ class License(models.Model):
         return self.name
 
 vinaigrette.register(License, ['name'])
-
 
 
 class RepositoryManager(CachingManager):
@@ -118,6 +143,8 @@ class Repository(models.Model, CachingMixin):
     enabled = models.BooleanField(default=True)
     #: Set of licenses the repository supports
     licenses = models.ManyToManyField(License, through='LicenseChooser')
+    #: Optionally set DDC. If none selected, form will be omitted
+    ddc = models.ManyToManyField(DDC, blank=True)
 
     def get_implementation(self):
         """
