@@ -139,6 +139,18 @@ class RepositoryProtocol(object, metaclass = RepositoryProtocolMeta):
     # This section defines the form the user sees when
     # depositing a paper.
 
+    def _get_ddcs(self):
+        """
+        Returns the queryset of related DDC classes of repository or ``None``
+        :returns: queryset of DDC or ``None``
+        """
+
+        ddcs = self.repository.ddc.all()
+        if ddcs:
+            return ddcs
+        else:
+            return None
+
     def get_form_initial_data(self, **kwargs):
         """
         Returns the form's initial values.
@@ -173,9 +185,11 @@ class RepositoryProtocol(object, metaclass = RepositoryProtocolMeta):
 
         licenses = LicenseChooser.objects.by_repository(self.repository)
 
+        ddcs = self._get_ddcs()
+
         initial = self.get_form_initial_data(licenses=licenses)
 
-        return self.form_class(paper=self.paper, licenses=licenses, initial=initial)
+        return self.form_class(paper=self.paper, licenses=licenses, ddcs=ddcs, initial=initial)
 
     def get_bound_form(self, data):
         """
@@ -186,7 +200,9 @@ class RepositoryProtocol(object, metaclass = RepositoryProtocolMeta):
         
         licenses = LicenseChooser.objects.by_repository(self.repository)
 
-        return self.form_class(paper=self.paper, licenses=licenses, data=data)
+        ddcs = self._get_ddcs()
+
+        return self.form_class(paper=self.paper, licenses=licenses, ddcs=ddcs, data=data)
 
     def submit_deposit(self, pdf, form, dry_run=False):
         """

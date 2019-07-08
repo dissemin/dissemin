@@ -18,7 +18,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-
+from itertools import groupby
 
 from deposit.models import Repository
 from deposit.models import UserPreferences
@@ -30,6 +30,48 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 from papers.models import UPLOAD_TYPE_CHOICES
 from upload.models import UploadedPDF
+
+
+class ModelGroupedMultipleChoiceField(forms.models.ModelMultipleChoiceField):
+    """
+    Enabled groups for ModelMultipleChoiceField
+    """
+    def __init__(self, group_by_field, group_label=None, *args, **kwargs):
+        """
+        :param group_by_field: name of a field on the model to use for grouping
+        :param group_label: function to return a label for each choice group
+        """
+        super().__init__(*args, **kwargs)
+        self.group_by_field = group_by_field
+        if group_label is None:
+            self.group_label = lambda group: group
+        else:
+            self.group_label = group_label
+
+    def _get_choices(self):
+        """
+        Exactly as per ModelChoiceField except returns new iterator class
+        """
+        if hasattr(self, '_choices'):
+            return self._choices
+        return ModelGroupedChoiceIterator(self)
+
+    choices = property(_get_choices, forms.models.ModelMultipleChoiceField._set_choices)
+
+
+class ModelGroupedChoiceIterator(forms.models.ModelChoiceIterator):
+    """
+    Iterator for ModelGroupedChoiceField
+    """
+    def __iter__(self):
+        if self.field.empty_label is not None:
+            yield self.field.empty_label
+        for group, choices in groupby(
+                self.queryset.all(),
+                key=lambda row: getattr(
+                    row, self.field.group_by_field)):
+            if group is not None:
+                yield (self.field.group_label(group), [self.choice(ch) for ch in choices])
 
 
 class PaperDepositForm(forms.Form):
@@ -84,7 +126,7 @@ class BaseMetadataForm(forms.Form):
     Base form for repository-specific options and metadata. Protocols can subclass this form and add or remove fields.
     """
 
-    field_order = ['abstract', 'license']
+    field_order = ['abstract', 'ddc', 'license']
 
     # Dummy field to store the paper id (required for dynamic fetching of the abstract)
     paper_id = forms.IntegerField(
@@ -101,6 +143,14 @@ class BaseMetadataForm(forms.Form):
                 'paper_id')(attrs={'class': 'form-control'})
             )
     
+    # DDC field to choose DDC classes
+    ddc = ModelGroupedMultipleChoiceField(
+        label=_('Dewey Decimal Class'),
+        queryset=None,
+        group_by_field='parent',
+        widget=forms.SelectMultiple
+    )
+
     # License field to choose license
     license = forms.ModelChoiceField(
         queryset=None,
@@ -116,9 +166,17 @@ class BaseMetadataForm(forms.Form):
         :param paper: paper
         :param licenses: A (not) evaluated QuerySet of LicenseChooser
         """
+        ddcs = kwargs.pop('ddcs', None)
+
         super(BaseMetadataForm, self).__init__(**kwargs)
         
         self.fields['license'].queryset = licenses
+
+        # If no DDC for repository choosen, then delete field from form
+        if ddcs is None:
+            del(self.fields['ddc'])
+        else:
+            self.fields['ddc'].queryset = ddcs
 
 
 ### Form for global preferences ###
