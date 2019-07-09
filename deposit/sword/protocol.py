@@ -30,13 +30,6 @@ class SWORDMETSProtocol(RepositoryProtocol):
     A protocol that performs a deposito via SWORDv2 using a METS Container.
     """
 
-    def __str__(self):
-        """
-        Return human readable class name
-        """
-        return "SWORD Protocol (METS)"
-
-    
     @staticmethod
     def _get_deposit_result(response):
         """

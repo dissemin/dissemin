@@ -38,19 +38,10 @@ from papers.models import Paper
 from deposit.tasks import refresh_deposit_statuses
 
 
-class TestProtocol():
+class MetaTestProtocol():
     """
     This class contains some tests that every implemented protocol shall pass. The tests are not executed as members of this class, but of any subclass.
     """
-
-    @pytest.fixture(autouse=True)
-    def skip_if_base(self):
-        """
-        This fixture prevents tests of this class to executed directly.
-        """
-        if type(self) is TestProtocol:
-            pytest.skip("class is not tested for class TestProtocol")
-
 
     def deposit(self):
         """
