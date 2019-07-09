@@ -18,6 +18,9 @@
           <language>
             <languageTerm type="code" authority="rfc3066">en</languageTerm>
           </language>
+          <classification authority="ddc">330</classification>
+          <classification authority="ddc">550</classification>
+          <classification authority="ddc">620</classification>
           <name type="personal">
             <namePart type="family">Woeckner</namePart>
             <namePart type="given">Katja</namePart>

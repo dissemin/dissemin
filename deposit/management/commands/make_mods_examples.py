@@ -1,8 +1,9 @@
 import os
 from django.core.management.base import BaseCommand
 
-from deposit.forms import BaseMetadataForm
 from deposit.conftest import metadata_publications
+from deposit.forms import BaseMetadataForm
+from deposit.models import DDC
 from deposit.sword.protocol import SWORDMETSMODSProtocol
 from dissemin.settings import BASE_DIR
 from dissemin.settings import DEBUG
@@ -20,6 +21,7 @@ class Command(BaseCommand):
 
         l = LoadJSON()
         s = SWORDMETSMODSProtocol(None)
+        ddcs = DDC.objects.all()
         data = dict()
         
         rst = ''
@@ -27,13 +29,16 @@ class Command(BaseCommand):
         os.makedirs(f_path, exist_ok=True)
 
         for metadata in metadata_publications:
-            p, o = l.load_oairecord(metadata)
+            load = l.load_upload(metadata)
+            p = load['paper']
+            o = load['oairecord']
             s.paper = p
             if o.description is None:
-                data['abstract'] = 'This is a custim user iven abstract'
+                data['abstract'] = load['abstract']
             else:
                 data['abstract'] = o.description
-            f = BaseMetadataForm(paper=p, data=data)
+            data['ddc'] = [ddc for ddc in DDC.objects.filter(number__in=load['ddc'])]
+            f = BaseMetadataForm(paper=p, ddcs=ddcs, data=data)
             f.is_valid()
             mods = s._get_xml_metadata(form=f)
             mets = SWORDMETSMODSProtocol._get_mets(mods)

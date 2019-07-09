@@ -15,12 +15,13 @@
               <title>Comprehensive Clinical Nephrology</title>
             </titleInfo>
           </relatedItem>
-          <abstract>This is a custim user iven abstract</abstract>
+          <abstract>This abstract is pure user input</abstract>
           <originInfo>
             <dateIssued encoding="w3cdtf">2010-01-01</dateIssued>
             <publisher>Elsevier BV</publisher>
           </originInfo>
           <identifier type="doi">10.1016/b978-0-323-05876-6.00060-5</identifier>
+          <classification authority="ddc">610</classification>
           <name type="personal">
             <namePart type="family">Rossert</namePart>
             <namePart type="given">Jerome A.</namePart>

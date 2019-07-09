@@ -4,10 +4,11 @@
     <mdWrap MDTYPE="OTHER">
       <xmlData>
         <mods xmlns="http://www.loc.gov/mods/v3" version="3.7">
-          <abstract>This is a custim user iven abstract</abstract>
+          <abstract>User filled in abstract</abstract>
           <originInfo>
             <dateIssued encoding="w3cdtf">2017-01-01</dateIssued>
           </originInfo>
+          <classification authority="ddc">000</classification>
           <name type="personal">
             <namePart type="family">Seabra</namePart>
             <namePart type="given">Filipa</namePart>

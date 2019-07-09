@@ -18,6 +18,8 @@
           <language>
             <languageTerm type="code" authority="rfc3066">en</languageTerm>
           </language>
+          <classification authority="ddc">570</classification>
+          <classification authority="ddc">610</classification>
           <name type="personal">
             <namePart type="family">Fullwood</namePart>
             <namePart type="given">Melissa J.</namePart>

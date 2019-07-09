@@ -17,11 +17,12 @@
               <title>Sein und Nichtsein</title>
             </titleInfo>
           </relatedItem>
-          <abstract>This is a custim user iven abstract</abstract>
+          <abstract>User filled in abstract</abstract>
           <originInfo>
             <dateIssued encoding="w3cdtf">1610-01-01</dateIssued>
             <publisher>Shakespeare Money Maker Inc.</publisher>
           </originInfo>
+          <classification authority="ddc">700</classification>
           <name type="personal">
             <namePart type="family">Hamlet</namePart>
             <namePart type="given">Ghost</namePart>

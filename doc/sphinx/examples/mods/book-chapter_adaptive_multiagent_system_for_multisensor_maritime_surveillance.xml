@@ -24,6 +24,8 @@
           <language>
             <languageTerm type="code" authority="rfc3066">en</languageTerm>
           </language>
+          <classification authority="ddc">550</classification>
+          <classification authority="ddc">620</classification>
           <name type="personal">
             <namePart type="family">Mano</namePart>
             <namePart type="given">Jean-Pierre</namePart>
