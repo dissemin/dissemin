@@ -42,6 +42,7 @@ You find below our mappings using XPath notation.
     author => name[@type="personal"]namePart/given + family + name
     author[orcid] => name/nameIdentifier[@type=orcid]
     date => originInfo/dateIssued[@enconding="w3cdtf"] (YYYY-MM-DD)
+    ddc => classification[@authority="ddc"]
     document type => genre
     doi => identifier[@type="doi"]
     essn => relatedItem/identifier[@type="eissn"]
@@ -63,6 +64,12 @@ We ship the language if both conditions are satisfied:
 2. ``langdetect`` gains a confidence of at least 50%
 
 If we cannot determine any language, we omit the field.
+
+Optionally we ship the Dewey Decimal Class (DDC).
+We support up to the first 1000 classes, i.e. from ``000`` to ``999``.
+You can freely chose which classes are of interest.
+When presenting the user, we group them with categories ``0...9``.
+We ship the classification number as three-digit-number, i.e. filling up with leading zeros for numbers smaller than 99.
 
 Examples
 ........
