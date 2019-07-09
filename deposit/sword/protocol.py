@@ -227,7 +227,13 @@ class SWORDMETSMODSProtocol(SWORDMETSProtocol):
                 mods_language_term.text = language.lang
 
         # DDC
-        # TODO Fixture + Routine
+        ddcs = form.cleaned_data.get('ddc', None)
+        if ddcs is not None:
+            for ddc in ddcs:
+                mods_classification_ddc = etree.SubElement(mods_xml, MODS + 'classification')
+                mods_classification_ddc.set('authority', 'ddc')
+                mods_classification_ddc.text = ddc.number_as_string
+
 
         # Name / Authors list
         for author in self.paper.authors:

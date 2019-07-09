@@ -6,6 +6,7 @@ from requests.exceptions import RequestException
 from zipfile import ZipFile
 
 from deposit.forms import BaseMetadataForm
+from deposit.models import DDC
 from deposit.protocol import DepositError
 from deposit.sword.protocol import SWORDMETSProtocol
 from deposit.tests.test_protocol import MetaTestProtocol
@@ -115,20 +116,26 @@ class TestSWORDSMETSMODSProtocol(MetaTestSWORDMETSProtocol):
         assert self.protocol.__str__() == "SWORD Protocol (MODS)"
 
 
-    def test_get_xml_metadata(self, mods_3_7_xsd, publication):
+    def test_get_xml_metadata(self, mods_3_7_xsd, upload_data):
         """
         Validates against mods 3.7 schema
         """
-        self.protocol.paper = publication[0]
+        self.protocol.paper = upload_data['paper']
 
         # Set POST data for form
         data = dict()
-        if publication[1].description is not None:
-            data['abstract'] = publication[1].description
+        if upload_data['oairecord'].description is not None:
+            data['abstract'] = upload_data['oairecord'].description
         else:
-            data['abstract'] = 'User filled in abstract'
+            data['abstract'] = upload_data['abstract']
 
-        form = BaseMetadataForm(paper=self.protocol.paper, data=data)
+        if self.ddc is True:
+            data['ddc'] = [ddc for ddc in DDC.objects.filter(number__in=upload_data['ddc'])]
+            ddcs = DDC.objects.all()
+        else:
+            ddcs = None
+
+        form = BaseMetadataForm(paper=self.protocol.paper, ddcs=ddcs, data=data)
         form.is_valid()
         xml = self.protocol._get_xml_metadata(form)
         

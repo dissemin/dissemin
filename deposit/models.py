@@ -71,6 +71,13 @@ class DDC(models.Model):
         """
         return "{:03d} {}".format(self.number, self.name)
 
+    @property
+    def number_as_string(self):
+        """
+        :returns: classification number as formatted string with leading 0 if necessary
+        """
+        return "{:03d}".format(self.number)
+
 # Register DDC as to be translated.
 vinaigrette.register(DDC, ['name'])
 

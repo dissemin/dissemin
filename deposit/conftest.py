@@ -66,3 +66,9 @@ def publication(request, load_json):
     """
     return load_json.load_oairecord(request.param)
 
+@pytest.fixture(params=metadata_publications)
+def upload_data(request, load_json):
+    """
+    Loads the above list of publications and returns form data the user has to fill in.
+    """
+    return load_json.load_upload(request.param)
