@@ -176,6 +176,11 @@ h4
     margin-right: 1em;
 }
 
+#menuItems {
+    max-width: 1030px;
+    margin: auto;
+}
+
 /* Language selector */
 #header #change-lang-form {
     margin-top: 12px;
@@ -231,10 +236,6 @@ h4
 #content {
     padding: 0;
     /* overflow: hidden; */
-}
-
-#subheader {
-    line-height:2em;
 }
 
 .flex
