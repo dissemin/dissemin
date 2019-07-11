@@ -9,6 +9,7 @@
             <dateIssued encoding="w3cdtf">1933-01-01</dateIssued>
           </originInfo>
           <identifier type="doi">10.0123/quain-1933</identifier>
+          <classification authority="ddc">820</classification>
           <name type="personal">
             <namePart type="family">quain</namePart>
             <namePart type="given">herbert</namePart>

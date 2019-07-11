@@ -23,12 +23,13 @@
               <title>Genre</title>
             </titleInfo>
           </relatedItem>
-          <abstract>This is a custim user iven abstract</abstract>
+          <abstract>This abstract was filled in by the user</abstract>
           <originInfo>
             <dateIssued encoding="w3cdtf">2010-01-01</dateIssued>
             <publisher>Duke University Press</publisher>
           </originInfo>
           <identifier type="doi">10.1215/00166928-43-3-4-353</identifier>
+          <classification authority="ddc">100</classification>
           <name type="personal">
             <namePart type="family">Cacciari</namePart>
             <namePart type="given">M.</namePart>

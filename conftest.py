@@ -226,6 +226,18 @@ class LoadJSON():
     """
     objects = []
 
+    def load_upload(self, f):
+        """
+        Loads oairecord, corresponding paper and form data that the user has to fill in
+        """
+        f_name = os.path.join(BASE_DIR, 'test_data', 'form', 'upload',  f + '.json')
+        with open(f_name, 'r') as json_file:
+            data = json.load(json_file)
+        p, o = self.load_oairecord(f)
+        data['paper'] = p
+        data['oairecord'] = o
+        return data
+
     def load_paper(self, f):
         """
         Loads the given Paper

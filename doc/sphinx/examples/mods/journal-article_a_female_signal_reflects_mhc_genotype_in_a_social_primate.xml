@@ -30,6 +30,8 @@
           <language>
             <languageTerm type="code" authority="rfc3066">en</languageTerm>
           </language>
+          <classification authority="ddc">570</classification>
+          <classification authority="ddc">590</classification>
           <name type="personal">
             <namePart type="family">Huchard</namePart>
             <namePart type="given">Elise</namePart>

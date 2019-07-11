@@ -4,10 +4,11 @@
     <mdWrap MDTYPE="OTHER">
       <xmlData>
         <mods xmlns="http://www.loc.gov/mods/v3" version="3.7">
-          <abstract>This is a custim user iven abstract</abstract>
+          <abstract>Beschreibt die Art und Weise zu leben</abstract>
           <originInfo>
             <dateIssued encoding="w3cdtf">0344-01-01</dateIssued>
           </originInfo>
+          <classification authority="ddc">100</classification>
           <name type="personal">
             <namePart type="family"/>
             <namePart type="given">Aristoteles</namePart>

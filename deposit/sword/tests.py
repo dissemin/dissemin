@@ -6,24 +6,17 @@ from requests.exceptions import RequestException
 from zipfile import ZipFile
 
 from deposit.forms import BaseMetadataForm
+from deposit.models import DDC
 from deposit.protocol import DepositError
 from deposit.sword.protocol import SWORDMETSProtocol
-from deposit.tests.test_protocol import TestProtocol
+from deposit.tests.test_protocol import MetaTestProtocol
 
 userdata = [(None, None), ('vetinari', None), (None, 'psst')]
 
-@pytest.mark.usefixtures('sword_mets_protocol')
-class TestSWORDMETSProtocol(object):
+class MetaTestSWORDMETSProtocol(MetaTestProtocol):
     """
-    A test class for named protocol
+    This class contains some tests that every implemented SWORD protocol shall pass. The tests are not executed as members of this class, but of any subclass.
     """
-
-    def test_str(self):
-        """
-        Tests the string output of class and object
-        """
-        assert self.protocol.__str__() == "SWORD Protocol (METS)"
-
 
     def test_get_mets(self, mets_xsd, metadata_xml_dc):
         """
@@ -32,24 +25,6 @@ class TestSWORDMETSProtocol(object):
         mets_xml = SWORDMETSProtocol._get_mets(metadata_xml_dc)
         # Because of the xml declaration we have to convert to a bytes object
         mets_xsd.assertValid(etree.fromstring(bytes(mets_xml, encoding='utf-8')))
-
-
-    @staticmethod
-    def test_get_xml_metadata():
-        """
-        Function must not be implemented in SWORDMETSProtocol
-        """
-        with pytest.raises(NotImplementedError):
-            SWORDMETSProtocol._get_xml_metadata(None)
-
-
-    @staticmethod
-    def test_get_deposit_result():
-        """
-        Function must not be implemented in SWORDMETSProtocol
-        """
-        with pytest.raises(NotImplementedError):
-            SWORDMETSProtocol._get_deposit_result(None)
 
 
     def test_get_mets_container(self, blank_pdf_path, metadata_xml_mets):
@@ -98,9 +73,31 @@ class TestSWORDMETSProtocol(object):
         with pytest.raises(DepositError):
             p.submit_deposit(None, None)
 
+class TestSWORDMETSProtocolNotImplemented():
+    """
+    Tests that certain functions must not be implemented in SWORDMETSProtocol
+    """
+    @staticmethod
+    def test_get_xml_metadata():
+        """
+        Function must not be implemented in SWORDMETSProtocol
+        """
+        with pytest.raises(NotImplementedError):
+            SWORDMETSProtocol._get_xml_metadata(None)
+
+
+    @staticmethod
+    def test_get_deposit_result():
+        """
+        Function must not be implemented in SWORDMETSProtocol
+        """
+        with pytest.raises(NotImplementedError):
+            SWORDMETSProtocol._get_deposit_result(None)
+
+
 
 @pytest.mark.usefixtures('sword_mods_protocol')
-class TestSWORDSMETSMODSProtocol(TestProtocol, TestSWORDMETSProtocol):
+class TestSWORDSMETSMODSProtocol(MetaTestSWORDMETSProtocol):
     """
     A test class for named protocol
     """
@@ -119,20 +116,26 @@ class TestSWORDSMETSMODSProtocol(TestProtocol, TestSWORDMETSProtocol):
         assert self.protocol.__str__() == "SWORD Protocol (MODS)"
 
 
-    def test_get_xml_metadata(self, mods_3_7_xsd, publication):
+    def test_get_xml_metadata(self, mods_3_7_xsd, upload_data):
         """
         Validates against mods 3.7 schema
         """
-        self.protocol.paper = publication[0]
+        self.protocol.paper = upload_data['paper']
 
         # Set POST data for form
         data = dict()
-        if publication[1].description is not None:
-            data['abstract'] = publication[1].description
+        if upload_data['oairecord'].description is not None:
+            data['abstract'] = upload_data['oairecord'].description
         else:
-            data['abstract'] = 'User filled in abstract'
+            data['abstract'] = upload_data['abstract']
 
-        form = BaseMetadataForm(paper=self.protocol.paper, data=data)
+        if self.ddc is True:
+            data['ddc'] = [ddc for ddc in DDC.objects.filter(number__in=upload_data['ddc'])]
+            ddcs = DDC.objects.all()
+        else:
+            ddcs = None
+
+        form = BaseMetadataForm(paper=self.protocol.paper, ddcs=ddcs, data=data)
         form.is_valid()
         xml = self.protocol._get_xml_metadata(form)
         
