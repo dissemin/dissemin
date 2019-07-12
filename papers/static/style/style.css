@@ -1206,31 +1206,6 @@ a.stats_caption_line:hover {
 
 /* Homepage */
 
-#welcome {
-    background-color: #2A6496;
-	color:white;
-	padding:20px 50px;
-}
-
-#welcome .startButton {
-    text-align: center;
-    width: 100%;
-}
-
-#welcome p {
-	width:70%;
-}
-
-#welcome a {
-	color:#fff;
-	text-decoration:underline;
-}
-
-#welcome .startButton a {
-    color: #2A6496;
-    text-decoration: none;
-    margin: 0px 10px;
-}
 
 #lookUpColleague {
     text-align: center;
@@ -1261,9 +1236,6 @@ a.stats_caption_line:hover {
     display: inline-block;
 }
 
-#welcome .active {
-    background-color: #D1D1D1;
-}
 
 #orcidGroup, #orcidGroup .form-group, #id_orcid {
     width: 100%;
@@ -1294,25 +1266,6 @@ a.stats_caption_line:hover {
     background-color: #eee;
 }
 
-#welcome #institutionblock {
-	float:right;
-	width:29%;
-	text-align:center;
-}
-
-#welcome #institution {
-	max-width:100%;
-}
-
-#welcome #advancedSearchP {
-    width: 100%;
-    text-align: right;
-    margin-top: 10px;
-}
-
-#welcome #id_authors {
-    height: 40px;
-}
 
 .btn-search {
     background-color: #a9b502;
@@ -1404,6 +1357,37 @@ a.stats_caption_line:hover {
     display: inline-block;
     vertical-align: middle;
     float: none;
+}
+
+
+#screenWelcome {
+    background-color: #2A6496;
+	  color:white;
+  	padding:20px 50px;
+}
+
+#screenWelcome a {
+	color:#fff;
+	text-decoration:underline;
+}
+
+#screenWelcome p {
+	width:100%;
+}
+
+#screenWelcome .startButton {
+    text-align: center;
+    width: 100%;
+}
+
+#screenWelcome #advancedSearchP {
+    width: 100%;
+    text-align: right;
+    margin-top: 10px;
+}
+
+#screenWelcome .SearchField {
+    height: 40px;
 }
 
 #screenGreenOpenAccess {

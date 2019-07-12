@@ -33,16 +33,6 @@
     text-align: left;
 }
 
-#welcome #institutionblock {
-  float: none;
-  margin: 0 auto;
-  width: 50%;
-}
-
-#welcome .startButton .btn { display: block; }
-
-#welcome p { width: 100%; }
-
 .oaPanel.left, .oaPanel.right, .oaPanel.left > *, .oaPanel.right > *, #statsExplanations, .siteSummary.left, .siteSummary.right {
   float: none;
   margin: 0;
