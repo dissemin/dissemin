@@ -3,7 +3,9 @@ import os
 import pytest
 
 from datetime import date
+from html5validator import Validator as HTML5Validator
 from io import BytesIO
+from tempfile import NamedTemporaryFile
 
 from django.contrib.auth.models import User
 from django.core.files.uploadedfile import InMemoryUploadedFile
@@ -198,6 +200,122 @@ def blank_pdf(blank_pdf_path):
     with open(blank_pdf_path, 'rb') as f:
             pdf = f.read()
     return pdf
+
+
+@pytest.fixture
+def check_page(validator_tools):
+    """
+    Checks status of page and checks html
+    """
+    def checker(status, *args, **kwargs):
+        vt = validator_tools
+        vt.check_page(status, *args, **kwargs)
+
+    return checker
+
+
+@pytest.fixture
+def check_status(validator_tools):
+    """
+    Checks the status of a page
+    """
+    def checker(status, *args, **kwargs):
+        vt = validator_tools
+        vt.check_status(status, *args, **kwargs)
+
+    return checker
+
+
+@pytest.fixture
+def check_permanent_redirect(validator_tools):
+    """
+    Checks for 301 and if 'url' given if redirect url is correct
+    """
+    def checker(*args, **kwargs):
+        vt = validator_tools
+        vt.check_permanent_redirect(*args, **kwargs)
+
+    return checker
+
+
+@pytest.fixture
+def validator_tools(client, settings):
+    class ValidatorTools():
+        """
+        Class that collect tools for validating pages
+        """
+
+        def __init__(self, client, settings):
+            self.client = client
+            # Deactivate Django tool bar, so that it does not interfere with tests
+            settings.DEBUG_TOOLBAR_CONFIG = {'SHOW_TOOLBAR_CALLBACK': lambda r: False}
+            self.validator = HTML5Validator(
+                errors_only=True,
+                # Django Bootstrap DatetimePicker uses this extra attribute which
+                # is considered invalid by W3C validator.
+                ignore_re=['Attribute "dp_config" not allowed on element'],
+            )
+
+        def check_html(self, response, status=None):
+            """
+            Checks if a page returns valid html
+            """
+            if status is not None:
+                assert response.status_code == status
+            with NamedTemporaryFile(delete=False) as fh:
+                fh.write(response.content)
+            assert self.validator.validate([fh.name]) == 0
+            try:
+                os.remove(fh.name)
+            except:
+                pass
+
+        def check_page(self, status, *args, **kwargs):
+            """
+            Fetches and checks page
+            """
+            return self.check_html(self.get_page(*args, **kwargs), status)
+
+        def check_status(self, status, *args, **kwargs):
+            """
+            Checks status
+            """
+            assert self.get_page(*args, **kwargs).status_code == status
+
+        def check_permanent_redirect(self, *args, **kwargs):
+            """
+            Checks permanent redirect, 301 as status and new url
+            """
+            target_url = kwargs.pop('url', None)
+            response = self.get_page(*args, **kwargs)
+            assert response.status_code == 301
+            if target_url is not None:
+                assert response.url == target_url
+
+        def get_page(self, *args, **kwargs):
+            """
+            Gets a page with reverse
+            """
+            urlargs = kwargs.copy()
+            if 'getargs' in kwargs:
+                del urlargs['getargs']
+                return self.client.get(reverse(*args, **urlargs), kwargs['getargs'])
+            return self.client.get(reverse(*args, **kwargs))
+
+    vt = ValidatorTools(client, settings)
+    return vt
+
+
+@pytest.fixture(scope="session")
+def css_validator():
+    """
+    Returns a function that takes a directory and validates all of its css files
+    """
+    def checker(directory):
+        validator = HTML5Validator(errors_only=True)
+        assert validator.validate([f for f in os.listdir(directory) if f.endswith('.css')]) == 0
+
+    return checker
 
 
 @pytest.fixture

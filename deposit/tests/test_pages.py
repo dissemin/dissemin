@@ -18,10 +18,25 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
+import os
 import pytest
+
 from django.contrib.auth.models import User
 
+from dissemin.settings import BASE_DIR
 from papers.tests.test_pages import RenderingTest
+
+
+class TestDepositCSS():
+    """
+    Class that groups CSS tests for upload
+    """
+    def test_deposit_css(self, css_validator):
+        """
+        Tests the css files
+        """
+        css_validator(os.path.join(BASE_DIR, 'deposit', 'static', 'css'))
+
 
 @pytest.mark.usefixtures("load_test_data")
 class DepositPagesTest(RenderingTest):
@@ -40,6 +55,3 @@ class DepositPagesTest(RenderingTest):
         User.objects.create_user('superuser', 'email@domain.com', 'mypass')
         self.client.login(username='superuser', password='mypass')
         self.checkPage('upload_paper', kwargs={'pk': paper.pk})
-
-    def test_css_validity(self):
-        self.checkCss('deposit/static/css')

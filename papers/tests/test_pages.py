@@ -19,8 +19,6 @@
 #
 
 
-
-
 import datetime
 import html5validator
 import os
@@ -30,6 +28,8 @@ from mock import patch
 
 from django.urls import reverse
 import django.test
+
+from dissemin.settings import BASE_DIR
 from papers.baremodels import BareName
 from papers.models import OaiRecord
 from papers.models import Paper
@@ -37,6 +37,37 @@ from papers.models import Researcher
 from papers.utils import overescaped_re
 from django.contrib.auth.models import User
 from papers.doi import doi_to_url
+
+
+class TestMiscPages(object):
+    """
+    Tests various more or less static pages
+    """
+
+    def test_index(self, db, check_page):
+        """
+        Tests the start page, which fetches some data from the DB
+        """
+        check_page(200, 'index')
+
+
+    @pytest.mark.parametrize('page', ['account_login', 'faq', 'partners', 'sources', 'tos'])
+    def test_static(self, page, check_page):
+        """
+        Tests above static pages
+        """
+        check_page(200, page)
+
+
+class TestPaperCSS():
+    """
+    Class that groups CSS tests for papers
+    """
+    def test_paper_css(self, css_validator):
+        """
+        Tests the css files
+        """
+        css_validator(os.path.join(BASE_DIR, 'papers', 'static', 'style'))
 
 
 # TODO TO BE TESTED
@@ -48,6 +79,8 @@ from papers.doi import doi_to_url
 #        # Annotations (to be deleted)
 #        url(r'^annotations/$', views.AnnotationsView.as_view(), name='annotations'),
 
+# Below tests are depricated and no longer maintained.
+# Please use fixture validate_tools and its derivatives for new page tests
 
 class RenderingTest(django.test.TestCase):
     def setUp(self):
@@ -84,16 +117,6 @@ class RenderingTest(django.test.TestCase):
         except OSError:
             pass
 
-    def checkCss(self, directory):
-        self.assertEqual(
-            self.validator.validate([
-                x
-                for x in os.listdir(directory)
-                if x.endswith('.css')
-            ]),
-            0
-        )
-
     def getPage(self, *args, **kwargs):
         urlargs = kwargs.copy()
         if 'getargs' in kwargs:
@@ -127,9 +150,6 @@ class RenderingTest(django.test.TestCase):
 
     def checkUrl(self, url):
         self.checkHtml(self.client.get(url))
-
-    def checkCSSFiles(self):
-        self.checkCss('papers/static/style')
 
 @pytest.mark.usefixtures("load_test_data")
 class InstitutionPagesTest(RenderingTest):
@@ -313,25 +333,3 @@ class DoaiTest(RenderingTest):
     def test_fallback(self):
         self.checkPermanentRedirect('paper-redirect-doi', kwargs={'doi': '10.1385/1592597998'},
             url=doi_to_url('10.1385/1592597998'))
-
-class MiscPagesTest(RenderingTest):
-
-    def test_index(self):
-        self.checkPage('index')
-
-    def test_sources(self):
-        self.checkPage('sources')
-
-    def test_faq(self):
-        self.checkPage('faq')
-
-    def test_tos(self):
-        self.checkPage('tos')
-
-    def test_partners(self):
-        self.checkPage('partners')
-
-    def test_account_login(self):
-        self.checkPage('account_login')
-
-
