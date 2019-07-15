@@ -20,5 +20,5 @@ def dissemin_xml_1_0():
     '''
 
     testdir = os.path.dirname(os.path.abspath(__file__))
-    return etree.parse(os.path.join(testdir, 'fixtures', 'dissemin_v1.0.xml')).getroot()
+    return etree.parse(os.path.join(testdir, 'test_data', 'dissemin_v1.0.xml')).getroot()
 

@@ -13,9 +13,9 @@
     <ds:license>
       <ds:licenseName>Creative Commons Attribution 4.0 International Public License</ds:licenseName>
       <ds:licenseURI>https://creativecommons.org/licenses/by/4.0/</ds:licenseURI>
-      <ds:licenseShortName>CC BY 4.0</ds:licenseShortName>
+      <ds:licenseTransmitId>cc_by_4_0</ds:licenseTransmitId>
     </ds:license>
-    <ds:disseminID>624343</ds:disseminID>
-    <ds:romeoID>234</ds:romeoID>
+    <ds:disseminId>624343</ds:disseminId>
+    <ds:romeoId>234</ds:romeoId>
   </ds:publication>
 </ds:dissemin>

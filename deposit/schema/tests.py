@@ -35,13 +35,13 @@ class TestDisseminXML_1_0(object):
     @staticmethod
     def test_optional_fields(dissemin_xml_1_0, dissemin_xsd_1_0):
         '''
-        The following elements are optional: orcid, isContributor, identicalInstitution, licenseURI, licenseShortName
+        The following elements are optional: orcid, isContributor, identicalInstitution, license, romeoId
         '''
 
         for i in range(3):
             dissemin_xml_1_0[0].remove(dissemin_xml_1_0[0][4])
-        for i in range(2):
-            dissemin_xml_1_0[1][0].remove(dissemin_xml_1_0[1][0][1])
+        dissemin_xml_1_0[1].remove(dissemin_xml_1_0[1][0])
+        dissemin_xml_1_0[1].remove(dissemin_xml_1_0[1][1])
         dissemin_xsd_1_0.assertValid(dissemin_xml_1_0)
 
 
