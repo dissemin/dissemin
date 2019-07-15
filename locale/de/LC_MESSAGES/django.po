@@ -18,7 +18,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-27 18:48+0200\n"
-"PO-Revision-Date: 2019-07-05 05:02:32+0000\n"
+"PO-Revision-Date: 2019-07-15 17:59:20+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -933,7 +933,7 @@ msgstr "Willkommen bei Dissemin"
 #: papers/templates/papers/index.html:24 templates/dissemin/skeleton.html:10
 #: templates/dissemin/skeleton.html:15
 msgid "Dissemin detects papers behind pay-walls and invites their authors to upload them in one click to an open repository."
-msgstr "Dissemin erkennt Publikationen hinter Bezahlschranken (\"Paywall\") und lädt ihre Verfasser_innen dazu ein, sie mit einem Klick in ein freies Repositorium hochzuladen."
+msgstr "Dissemin erkennt Publikationen hinter Bezahlschranken (&quot;Paywall&quot;) und lädt ihre Verfasser_innen dazu ein, sie mit einem Klick in ein freies Repositorium hochzuladen."
 
 #: papers/templates/papers/index.html:49
 msgid "Green open access"
@@ -1844,7 +1844,7 @@ msgstr "<strong>Open Access:</strong><br /> Der Volltext ist durch den Verlag fr
 
 #: templates/dissemin/faq.html:259
 msgid "<strong>Pre/post prints allowed and full text available:</strong><br /> The full text is available in a repository, but might not be freely available from the publisher itself. This is in line with the publishing policy and is called green open access or self-archiving."
-msgstr "<strong>Pre- oder Postprints dürfen frei veröffentlicht werden und sind als Volltext verfügbar:<strong><br /> Der Volltext ist in einem Repositorium frei verfügbar, aber nicht unbedingt bei dem Verlag frei zugänglich. Diese Art der Veröffentlichung heißt Green Open Access und ist durch die Publikationsrichtlinien des Verlags oder des Zweitveröffentlichungsrecht erlaubt."
+msgstr "<strong>Pre- oder Postprints dürfen frei veröffentlicht werden und sind als Volltext verfügbar:</strong><br /> Der Volltext ist in einem Repositorium frei verfügbar, aber nicht unbedingt bei dem Verlag frei zugänglich. Diese Art der Veröffentlichung heißt Green Open Access und ist durch die Publikationsrichtlinien des Verlags oder des Zweitveröffentlichungsrecht erlaubt."
 
 #: templates/dissemin/faq.html:272
 msgid "<strong>Pre/post prints allowed but full text unavailable:</strong><br /> The full text could be made available in a repository (as above) according to the publishing policy. We encourage their authors to do so."
@@ -2187,7 +2187,7 @@ msgstr "Die <a href=\"https://dissem.in\">dissem.in</a>-Website wurde bei <a hre
 
 #: templates/dissemin/tos.html:148
 msgid "You have the right to access, modify, and delete the personal information that we hold about you. To exercise this right, please contact us at <a href=\"mailto:support@dissem.in\">support@dissem.in</a>, or by postal mail at the following addresss:"
-msgstr "Du hast das Recht auf den Zugang, die Veränderung und Löschung der persönlichen Informationen, die wir über Dich erheben. Um dieses Recht auszuüben, kontaktiere uns bitte unter <a href=\"mailto:support@dissem.in>support@dissem.in</a> oder per Post an die folgende Adresse:"
+msgstr "Du hast das Recht auf den Zugang, die Veränderung und Löschung der persönlichen Informationen, die wir über Dich erheben. Um dieses Recht auszuüben, kontaktiere uns bitte unter <a href=\"mailto:support@dissem.in\">support@dissem.in</a> oder per Post an die folgende Adresse:"
 
 #: templates/socialaccount/authentication_error.html:6
 #: templates/socialaccount/authentication_error.html:12
