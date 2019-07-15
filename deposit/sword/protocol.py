@@ -6,6 +6,7 @@ from io import BytesIO
 from lxml import etree
 from zipfile import ZipFile
 
+from django.utils.functional import cached_property
 from django.utils.translation import ugettext as _
 
 from deposit.protocol import DepositError
@@ -105,6 +106,23 @@ class SWORDMETSProtocol(RepositoryProtocol):
         """
         raise NotImplementedError("Function not implemented")
 
+    @cached_property
+    def publication(self):
+        """
+        Sets publication / oairecord for the paper with highest prority.
+        """
+        # Fetch the first OaiRecord with highest OaiSource priority and journal as well as publisher
+        publication = self.paper.oairecord_set.filter(
+            journal_title__isnull=False,
+            publisher_name__isnull=False
+        ).order_by('priority').first()
+
+        # If this is not available, take the first one
+        if publication is None:
+           publication = self.paper.oairecord_set.order_by('priority').first()
+
+        return publication
+
 
     def submit_deposit(self, pdf, form):
         """
@@ -164,16 +182,6 @@ class SWORDMETSMODSProtocol(SWORDMETSProtocol):
         """
         self.log("### Creating MODS metadata from publication and form")
 
-        # Fetch the first OaiRecord with highest OaiSource priority and journal as well as publisher
-        publication = self.paper.oairecord_set.filter(
-            journal_title__isnull=False,
-            publisher_name__isnull=False
-        ).order_by('priority').first()
-
-        # If this is not available, take the first one
-        if publication is None:
-           publication = self.paper.oairecord_set.order_by('priority').first()
-
         NSMAP = {
             None: MODS_NAMESPACE,
         }
@@ -193,26 +201,26 @@ class SWORDMETSMODSProtocol(SWORDMETSProtocol):
         mods_date_issued.text = str(self.paper.pubdate)
 
         # Identifier / DOI and relatedItem
-        if publication:
+        if self.publication:
             # DOI
-            if publication.doi:
+            if self.publication.doi:
                 mods_doi = etree.SubElement(mods_xml, MODS + 'identifier')
                 mods_doi.set('type', 'doi')
-                mods_doi.text = publication.doi
+                mods_doi.text = self.publication.doi
 
             # Publisher
-            publisher = publication.publisher
-            if publication.publisher is not None:
-                publisher = publication.publisher.name
+            publisher = self.publication.publisher
+            if self.publication.publisher is not None:
+                publisher = self.publication.publisher.name
             else:
-                publisher = publication.publisher_name
+                publisher = self.publication.publisher_name
 
             if publisher is not None:
                 mods_publisher = etree.SubElement(mods_origin_info, MODS + 'publisher')
                 mods_publisher.text = publisher
 
             # relatedItem
-            related_item = self._get_xml_metadata_relatedItem(publication)
+            related_item = self._get_xml_metadata_relatedItem()
             if related_item is not None:
                 mods_xml.insert(0, related_item)
 
@@ -262,25 +270,24 @@ class SWORDMETSMODSProtocol(SWORDMETSProtocol):
         return mods_xml
 
         
-    def _get_xml_metadata_relatedItem(self, publication):
+    def _get_xml_metadata_relatedItem(self):
         """
         Creates the mods item ``relatedItem`` if available
-        :param publication: A OaiRecord corresponding to the paper
         :returns: lxml object or ``None``
         """
         related_item = None
         related_item_data = dict()
 
         # We set the title and publisher, but prefer values from Journal or Publisher object if available
-        journal = publication.journal
+        journal = self.publication.journal
         issn = None
         eissn = None
-        if publication.journal is not None:
-            journal = publication.journal.title
-            issn = publication.journal.issn
-            eissn = publication.journal.essn
+        if self.publication.journal is not None:
+            journal = self.publication.journal.title
+            issn = self.publication.journal.issn
+            eissn = self.publication.journal.essn
         else:
-            journal = publication.journal_title
+            journal = self.publication.journal_title
 
         # Set the title
         if journal is not None:
@@ -307,13 +314,13 @@ class SWORDMETSMODSProtocol(SWORDMETSProtocol):
         part = dict()
 
         # Set pages
-        if publication.pages is not None:
-            pages = publication.pages.split('-', 1)
+        if self.publication.pages is not None:
+            pages = self.publication.pages.split('-', 1)
             related_item_pages = etree.Element(MODS + 'extent')
             related_item_pages.set('unit', 'pages')
             if len(pages) == 1:
                 related_item_pages_total = etree.SubElement(related_item_pages, MODS + 'total')
-                related_item_pages_total.text = publication.pages
+                related_item_pages_total.text = self.publication.pages
                 part['pages'] = related_item_pages
             else:
                 start = pages[0]
@@ -325,19 +332,19 @@ class SWORDMETSMODSProtocol(SWORDMETSProtocol):
                 part['pages'] = related_item_pages
 
         # Set issue
-        if publication.issue is not None:
+        if self.publication.issue is not None:
             related_item_issue = etree.Element(MODS + 'detail')
             related_item_issue.set('type', 'issue')
             related_item_issue_number = etree.SubElement(related_item_issue, MODS + 'number')
-            related_item_issue_number.text = publication.issue
+            related_item_issue_number.text = self.publication.issue
             part['issue'] = related_item_issue
 
         # Set volume
-        if publication.volume is not None:
+        if self.publication.volume is not None:
             related_item_volume = etree.Element(MODS + 'detail')
             related_item_volume.set('type', 'volume')
             related_item_volume_number = etree.SubElement(related_item_volume, MODS + 'number')
-            related_item_volume_number.text = publication.volume
+            related_item_volume_number.text = self.publication.volume
             part['volume'] = related_item_volume
 
         # Make parts if existing
