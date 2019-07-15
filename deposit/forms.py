@@ -159,24 +159,28 @@ class BaseMetadataForm(forms.Form):
         widget=forms.RadioSelect,
     )
 
-    def __init__(self, paper, licenses=None, **kwargs):
+    def __init__(self, paper, **kwargs):
         """
         Subclasses can reimplement this and do things based on the models passed or generally add or remove fields.
         The paper_id field is not filled here, because that should only happen when filling the form with initial data.
         :param paper: paper
-        :param licenses: A (not) evaluated QuerySet of LicenseChooser
         """
         ddcs = kwargs.pop('ddcs', None)
+        licenses = kwargs.pop('licenses', None)
 
         super(BaseMetadataForm, self).__init__(**kwargs)
         
-        self.fields['license'].queryset = licenses
-
         # If no DDC for repository choosen, then delete field from form
         if ddcs is None:
             del(self.fields['ddc'])
         else:
             self.fields['ddc'].queryset = ddcs
+
+        # If no licenses for repository choosen, then delete field from form
+        if licenses is None:
+            del(self.fields['license'])
+        else:
+            self.fields['license'].queryset = licenses
 
 
 ### Form for global preferences ###
