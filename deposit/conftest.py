@@ -2,6 +2,7 @@ import pytest
 
 from backend.conftest import load_test_data as papers_load_test_data
 
+from deposit.models import DDC
 from deposit.models import License
 
 load_test_data = papers_load_test_data
@@ -60,15 +61,21 @@ metadata_publications = [
 
 
 @pytest.fixture(params=metadata_publications)
-def publication(request, load_json):
-    """
-    Loads the above list of OaiRecords and corresponding Papers one after the other and returns the Paper object
-    """
-    return load_json.load_oairecord(request.param)
-
-@pytest.fixture(params=metadata_publications)
 def upload_data(request, load_json):
     """
     Loads the above list of publications and returns form data the user has to fill in.
     """
     return load_json.load_upload(request.param)
+
+
+@pytest.fixture(params=[True, False])
+def ddc(request, db):
+    """
+    Run tests for protocol with repository having a DDC and not having a DDC
+    """
+    if request.param:
+        all_ddc = DDC.objects.all()
+        request.cls.protocol.repository.ddc.add(*all_ddc)
+        return all_ddc
+    else:
+        return None

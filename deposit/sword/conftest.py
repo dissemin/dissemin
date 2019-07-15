@@ -3,23 +3,17 @@ import pytest
 
 from lxml import etree
 
-from deposit.models import DDC
 from deposit.sword.protocol import SWORDMETSMODSProtocol
 
 
-@pytest.fixture(params=[None, 'ddc'])
-def sword_mods_protocol(request, db, repository):
+@pytest.fixture
+def sword_mods_protocol(request, repository):
     """
     Creates a sword mods repository object
     """
     sword_mods_repository = repository.sword_mets_repository()
-    if request.param == 'ddc':
-        request.cls.ddc = True
-        sword_mods_repository.ddc.add(*DDC.objects.all())
-    else:
-        request.cls.ddc = False
-
     request.cls.protocol = SWORDMETSMODSProtocol(sword_mods_repository)
+
 
 @pytest.fixture()
 def metadata_xml_dc():

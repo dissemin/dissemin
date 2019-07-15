@@ -116,7 +116,7 @@ class TestSWORDSMETSMODSProtocol(MetaTestSWORDMETSProtocol):
         assert self.protocol.__str__() == "SWORD Protocol (MODS)"
 
 
-    def test_get_xml_metadata(self, mods_3_7_xsd, upload_data):
+    def test_get_xml_metadata(self, mods_3_7_xsd, ddc, upload_data):
         """
         Validates against mods 3.7 schema
         """
@@ -129,13 +129,10 @@ class TestSWORDSMETSMODSProtocol(MetaTestSWORDMETSProtocol):
         else:
             data['abstract'] = upload_data['abstract']
 
-        if self.ddc is True:
+        if ddc is not None:
             data['ddc'] = [ddc for ddc in DDC.objects.filter(number__in=upload_data['ddc'])]
-            ddcs = DDC.objects.all()
-        else:
-            ddcs = None
 
-        form = BaseMetadataForm(paper=self.protocol.paper, ddcs=ddcs, data=data)
+        form = BaseMetadataForm(paper=self.protocol.paper, ddcs=ddc, data=data)
         form.is_valid()
         xml = self.protocol._get_xml_metadata(form)
         
