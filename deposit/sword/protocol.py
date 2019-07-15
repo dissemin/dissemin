@@ -183,7 +183,7 @@ class SWORDMETSMODSProtocol(SWORDMETSProtocol):
         self.log("### Creating MODS metadata from publication and form")
 
         NSMAP = {
-            None: MODS_NAMESPACE,
+            'mods' : MODS_NAMESPACE,
         }
 
         # Creation of root
