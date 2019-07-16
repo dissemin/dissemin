@@ -5,11 +5,16 @@ from lxml import etree
 from requests.exceptions import RequestException
 from zipfile import ZipFile
 
-from deposit.forms import BaseMetadataForm
+from deposit.sword.forms import SWORDMETSForm
 from deposit.models import DDC
+from deposit.models import License
+from deposit.models import LicenseChooser
 from deposit.protocol import DepositError
 from deposit.sword.protocol import SWORDMETSProtocol
 from deposit.tests.test_protocol import MetaTestProtocol
+
+from papers.models import Paper
+from papers.models import Researcher
 
 userdata = [(None, None), ('vetinari', None), (None, 'psst')]
 
@@ -37,6 +42,44 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
             for filename in ['mets.xml', 'document.pdf']:
                 assert filename in files
             assert not zip_file.testzip()
+
+    @pytest.mark.parametrize('is_owned', [True, False])
+    @pytest.mark.parametrize('license', [True, False])
+    @pytest.mark.parametrize('orcid', [None, '2543-2454-2345-234X'])
+    def test_get_xml_dissemin_metadata(self, db, monkeypatch, dissemin_xsd_1_0, user_isaac_newton, is_owned, license, orcid, upload_data):
+        """
+        Tests for dissemin metadata
+        We happily override Paper.is_owned_by and use a non-valid orcid for isaac newton
+        """
+        monkeypatch.setattr(Paper, 'is_owned_by', lambda *args, **kwargs: is_owned)
+        Researcher.create_by_name(first='isaac', last='newton', user=user_isaac_newton, orcid=orcid)
+        if license:
+            l = License.objects.get(uri='https://creativecommons.org/publicdomain/zero/1.0/')
+            lc = LicenseChooser.objects.create(
+                license=l,
+                repository=self.protocol.repository,
+                transmit_id='cc-zero-1.0'
+            )
+
+        self.protocol.paper = upload_data['paper']
+        self.protocol.user = user_isaac_newton
+
+        # Set POST data for form
+        data = dict()
+
+        if license:
+            data['license'] = lc.pk
+        data['email'] = 'isaac.newton@trinity-college.co.uk'
+
+        form  = SWORDMETSForm(paper=self.protocol.paper, licenses=LicenseChooser.objects.by_repository(repository=self.protocol.repository), data=data)
+        form.is_valid()
+
+        xml = self.protocol._get_xml_dissemin_metadata(form)
+
+        print("")
+        print(etree.tostring(xml, pretty_print=True, encoding='utf-8', xml_declaration=True).decode())
+
+        dissemin_xsd_1_0.assertValid(xml)
 
 
     @responses.activate
@@ -73,6 +116,7 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
         with pytest.raises(DepositError):
             p.submit_deposit(None, None)
 
+
 class TestSWORDMETSProtocolNotImplemented():
     """
     Tests that certain functions must not be implemented in SWORDMETSProtocol
@@ -93,7 +137,6 @@ class TestSWORDMETSProtocolNotImplemented():
         """
         with pytest.raises(NotImplementedError):
             SWORDMETSProtocol._get_deposit_result(None)
-
 
 
 @pytest.mark.usefixtures('sword_mods_protocol')
@@ -132,7 +175,7 @@ class TestSWORDSMETSMODSProtocol(MetaTestSWORDMETSProtocol):
         if ddc is not None:
             data['ddc'] = [ddc for ddc in DDC.objects.filter(number__in=upload_data['ddc'])]
 
-        form = BaseMetadataForm(paper=self.protocol.paper, ddcs=ddc, data=data)
+        form = SWORDMETSForm(paper=self.protocol.paper, ddcs=ddc, data=data)
         form.is_valid()
         xml = self.protocol._get_xml_metadata(form)
         

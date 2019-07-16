@@ -13,7 +13,6 @@ from deposit.models import Repository
 from dissemin.settings import BASE_DIR
 from papers.baremodels import PAPER_TYPE_CHOICES
 from papers.models import Paper
-from papers.models import OaiSource
 from papers.models import OaiRecord
 from papers.models import OaiSource
 from publishers.models import Journal

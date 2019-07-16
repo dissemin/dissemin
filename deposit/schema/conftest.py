@@ -3,15 +3,6 @@ import pytest
 
 from lxml import etree
 
-@pytest.fixture(scope="class")
-def dissemin_xsd_1_0():
-    '''
-    Loads dissemin xsd and prepares it as schema ready for validation.
-    '''
-
-    testdir = os.path.dirname(os.path.abspath(__file__))
-    dissemin_xsd = etree.parse(os.path.join(testdir, 'dissemin_v1.0.xsd'))
-    return etree.XMLSchema(dissemin_xsd)
 
 @pytest.fixture
 def dissemin_xml_1_0():

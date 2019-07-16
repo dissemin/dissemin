@@ -1,4 +1,7 @@
+import os
 import pytest
+
+from lxml import etree
 
 from backend.conftest import load_test_data as papers_load_test_data
 
@@ -79,3 +82,14 @@ def ddc(request, db):
         return all_ddc
     else:
         return None
+
+
+@pytest.fixture(scope="class")
+def dissemin_xsd_1_0():
+    '''
+    Loads dissemin xsd and prepares it as schema ready for validation.
+    '''
+
+    testdir = os.path.dirname(os.path.abspath(__file__))
+    dissemin_xsd = etree.parse(os.path.join(testdir, 'schema','dissemin_v1.0.xsd'))
+    return etree.XMLSchema(dissemin_xsd)
