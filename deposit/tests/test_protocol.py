@@ -67,11 +67,11 @@ class MetaTestProtocol():
         assert r.status_code == 200
 
 
-    def test_get_form_return_type(self, user_isaac_newton, book_god_of_the_labyrinth):
+    def test_get_form_return_type(self, book_god_of_the_labyrinth, user_isaac_newton):
         """
         Return type of get_form shall by a form
         """
-        self.protocol.init_deposit(user_isaac_newton, book_god_of_the_labyrinth)
+        self.protocol.init_deposit(book_god_of_the_labyrinth ,user_isaac_newton)
         form = self.protocol.get_form()
         assert isinstance(form, Form)
 
