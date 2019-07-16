@@ -156,6 +156,20 @@ def book_god_of_the_labyrinth(load_json):
     return p
 
 
+@pytest.fixture
+def user_leibniz(django_user_model):
+    """
+    Returns user Gottfried Wilhelm Leibniz
+    """
+    leibnizg = django_user_model.objects.create(
+        username='leibnizg',
+        first_name='Gottfried',
+        last_name='Leibniz',
+        email='gottfried.leibniz@tib.eu'
+    )
+
+    return leibnizg
+
 
 @pytest.fixture
 def user_isaac_newton(db):

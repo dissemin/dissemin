@@ -7,6 +7,9 @@ from backend.conftest import load_test_data as papers_load_test_data
 
 from deposit.models import DDC
 from deposit.models import License
+from deposit.models import LicenseChooser
+from papers.models import Paper
+from papers.models import Researcher
 
 load_test_data = papers_load_test_data
 
@@ -84,7 +87,22 @@ def ddc(request, db):
         return None
 
 
-@pytest.fixture(scope="class")
+@pytest.fixture(params=[None, '2543-2454-2345-234X'])
+def depositing_user(db, request, user_leibniz):
+    """
+    Depositing user with Researcher profile with and without ORCID
+    """
+    Researcher.create_by_name(
+        user=user_leibniz,
+        first=user_leibniz.first_name,
+        last=user_leibniz.last_name,
+        orcid=request.param,
+    )
+
+    return user_leibniz
+
+
+@pytest.fixture(scope="session")
 def dissemin_xsd_1_0():
     '''
     Loads dissemin xsd and prepares it as schema ready for validation.
@@ -93,3 +111,28 @@ def dissemin_xsd_1_0():
     testdir = os.path.dirname(os.path.abspath(__file__))
     dissemin_xsd = etree.parse(os.path.join(testdir, 'schema','dissemin_v1.0.xsd'))
     return etree.XMLSchema(dissemin_xsd)
+
+
+@pytest.fixture(params=[True, False])
+def license_chooser(db, request):
+    """
+    Creates a LicenseChooser object connected to repository and CC 0 license that is available by migration
+    """
+    if request.param:
+        l = License.objects.get(uri='https://creativecommons.org/publicdomain/zero/1.0/')
+        lc = LicenseChooser.objects.create(
+            license=l,
+            repository=request.cls.protocol.repository,
+            transmit_id='cc-zero-1.0'
+        )
+        return lc
+    else:
+        return False
+
+
+@pytest.fixture(params=[True, False])
+def monkeypatch_paper_is_owned(request, monkeypatch):
+    """
+    Mokeypatch this function to have simpler fixtures. Both function values are resembled.
+    """
+    monkeypatch.setattr(Paper, 'is_owned_by', lambda *args, **kwargs: request.param)
