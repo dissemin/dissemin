@@ -29,6 +29,39 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
         mets_xsd.assertValid(etree.fromstring(bytes(mets_xml, encoding='utf-8')))
 
 
+    def test_get_mets_integration(self, mets_xsd, depositing_user, upload_data, ddc, license_chooser):
+        """
+        Integration test running all possible metadata cases and validating against mets schema
+        """
+        self.protocol.paper = upload_data['paper']
+        self.protocol.user = depositing_user
+
+        # Set POST data for form
+        data = dict()
+        data['email'] = depositing_user.email
+        if upload_data['oairecord'].description is not None:
+            data['abstract'] = upload_data['oairecord'].description
+        else:
+            data['abstract'] = upload_data['abstract']
+
+        if ddc is not None:
+            data['ddc'] = [ddc for ddc in DDC.objects.filter(number__in=upload_data['ddc'])]
+
+        if license_chooser:
+            data['license'] = license_chooser.pk
+        licenses = LicenseChooser.objects.by_repository(repository=self.protocol.repository)
+
+        form = SWORDMETSForm(paper=self.protocol.paper, ddcs=ddc, licenses=licenses, data=data)
+        form.is_valid()
+
+        dissemin_xml = self.protocol._get_xml_dissemin_metadata(form)
+        metadata_xml = self.protocol._get_xml_metadata(form)
+        mets_xml = self.protocol._get_mets(dissemin_xml, metadata_xml)
+        
+        # Because of the xml declaration we have to convert to a bytes object
+        mets_xsd.assertValid(etree.fromstring(bytes(mets_xml, encoding='utf-8')))
+
+
     def test_get_mets_container(self, blank_pdf_path, metadata_xml_mets):
         """
         A test for creating a mets container
