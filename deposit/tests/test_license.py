@@ -19,7 +19,7 @@ class TestLicense():
 @pytest.mark.skip(reason="Fixtures not yet implemented")
 class TestLicenseChooser():
     """
-    A class to test LicenceChooser model
+    A class to test LicenseChooser model
     """
     pass
 

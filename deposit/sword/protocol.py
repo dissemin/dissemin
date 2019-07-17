@@ -6,20 +6,29 @@ from io import BytesIO
 from lxml import etree
 from zipfile import ZipFile
 
+from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import MultipleObjectsReturned
+from django.utils.functional import cached_property
 from django.utils.translation import ugettext as _
 
+from deposit.models import UserPreferences
 from deposit.protocol import DepositError
 from deposit.protocol import RepositoryProtocol
+from deposit.sword.forms import SWORDMETSForm
+
+from papers.models import Researcher
 
 logger = logging.getLogger('dissemin.' + __name__)
         
         
 # Namespaces
+DISSEMIN_NAMESPACE = "https://dissem.in/deposit/terms/"
 METS_NAMESPACE = "http://www.loc.gov/METS/"
 MODS_NAMESPACE = "http://www.loc.gov/mods/v3"
 XLINK_NAMESPACE = "http://www.w3.org/1999/xlink"
 XSI_NAMESPACE = "http://www.w3.org/2001/XMLSchema-instance"
 
+DS = "{%s}" % DISSEMIN_NAMESPACE
 METS = "{%s}" % METS_NAMESPACE
 MODS = "{%s}" % MODS_NAMESPACE
 XLINK = "{%s}" % XLINK_NAMESPACE
@@ -30,6 +39,9 @@ class SWORDMETSProtocol(RepositoryProtocol):
     A protocol that performs a deposito via SWORDv2 using a METS Container.
     """
 
+    # The class of the form for the deposit
+    form_class = SWORDMETSForm
+
     @staticmethod
     def _get_deposit_result(response):
         """
@@ -39,7 +51,7 @@ class SWORDMETSProtocol(RepositoryProtocol):
     
 
     @staticmethod
-    def _get_mets(metadata):
+    def _get_mets(metadata, dissemin_metadata):
         """
         Creates a mets xml from metadata
         Policy for creation is: One-time-usage, so keep the document as small as possible. This means
@@ -49,6 +61,7 @@ class SWORDMETSProtocol(RepositoryProtocol):
             * One and only file that is named `document.pdf`
 
         :params metadata: Bibliographic metadata as lxml etree
+        :params dissemin_metadata: Dissemin metadata as lxml etree
         :returns: complete mets as string
         """
 
@@ -58,12 +71,21 @@ class SWORDMETSProtocol(RepositoryProtocol):
             'xsi' : XSI_NAMESPACE
         }
 
-        # Creation of document root and dmdSec
+        # Creation of document root
         mets_xml = etree.Element(METS + 'mets', nsmap=NSMAP)
+
+        #Creation of dmdSec and insertion of metadata
         mets_dmdSec = etree.SubElement(mets_xml, METS + 'dmdSec', ID='d_dmd_1')
         mets_mdWrap = etree.SubElement(mets_dmdSec, METS + 'mdWrap', MDTYPE='OTHER')
         mets_xmlData = etree.SubElement(mets_mdWrap, METS + 'xmlData')
         mets_xmlData.insert(0, metadata)
+
+        # Creation of amdSec and insertion of dissemin metada
+        mets_amdSec = etree.SubElement(mets_xml, METS + 'amdSec', ID='d_amd_1')
+        mets_rightsMD = etree.SubElement(mets_amdSec, METS + 'rightsMD', ID='d_rightsmd_1')
+        mets_mdWrap = etree.SubElement(mets_rightsMD, METS + 'mdWrap', MDTYPE='OTHER')
+        mets_xmlData = etree.SubElement(mets_mdWrap, METS + 'xmlData')
+        mets_xmlData.insert(0, dissemin_metadata)
 
         # Creation of fileSec
         mets_fileSec = etree.SubElement(mets_xml, METS + 'fileSec')
@@ -98,12 +120,121 @@ class SWORDMETSProtocol(RepositoryProtocol):
         return s
 
 
+    def _get_xml_dissemin_metadata(self, form):
+        """
+        This returns the special dissemin metadata as lxml.
+        Currently not all features are supported.
+        :param form: form with user given data
+        :returns: lxml object ready to inserted
+        """
+
+        NSMAP = {
+            'ds' : DISSEMIN_NAMESPACE,
+        }
+
+        ds = etree.Element(DS + 'dissemin', nsmap=NSMAP)
+        ds.set('version', '1.0')
+
+        # Information about the depositor
+
+        ds_depositor = etree.SubElement(ds, DS + 'depositor')
+
+        ds_authentication = etree.SubElement(ds_depositor, DS + 'authentication')
+        # hard-coded since there is currently only one authentication method
+        ds_authentication.text = 'orcid'
+
+        ds_first_name = etree.SubElement(ds_depositor, DS + 'firstName')
+        ds_first_name.text = self.user.first_name
+        ds_last_name = etree.SubElement(ds_depositor, DS + 'lastName')
+        ds_last_name.text = self.user.last_name
+
+        ds_email = etree.SubElement(ds_depositor, DS + 'email')
+        ds_email.text = form.cleaned_data['email']
+
+        r = Researcher.objects.get(user=self.user)
+
+        if r.orcid:
+            ds_orcid = etree.SubElement(ds_depositor, DS + 'orcid')
+            ds_orcid.text = r.orcid
+
+        ds_is_contributor = etree.SubElement(ds_depositor, DS + 'isContributor')
+        if self.paper.is_owned_by(self.user, flexible=True):
+            ds_is_contributor.text = 'true'
+        else:
+            ds_is_contributor.text = 'false'
+
+        # Information about the publication
+
+        ds_publication = etree.SubElement(ds, DS + 'publication')
+
+        license = form.cleaned_data.get('license', None)
+        if license is not None:
+            ds_license = etree.SubElement(ds_publication, DS + 'license')
+            ds_license_name = etree.SubElement(ds_license, DS + 'licenseName')
+            ds_license_name.text = license.license.name
+            ds_license_uri = etree.SubElement(ds_license, DS + 'licenseURI')
+            ds_license_uri.text = license.license.uri
+            ds_license_transmit = etree.SubElement(ds_license, DS + 'licenseTransmitId')
+            ds_license_transmit.text = license.transmit_id
+
+        ds_dissemin = etree.SubElement(ds_publication, DS + 'disseminId')
+        ds_dissemin.text = str(self.paper.pk)
+
+        if self.publication.publisher is not None:
+            ds_romeo = etree.SubElement(ds_publication, DS + 'romeoId')
+            ds_romeo.text = str(self.publication.publisher.romeo_id)
+
+        return ds
+
+
     @staticmethod
     def _get_xml_metadata(form):
         """
         This function returns metadata as lxml etree object, that is ready to inserted into a mets.xml. Override this function in your subclassed protocol.
         """
         raise NotImplementedError("Function not implemented")
+
+
+    def get_form_initial_data(self, **kwargs):
+        """
+        Calls super and returns form's initial values.
+        """
+        data = super().get_form_initial_data(**kwargs)
+
+        # We try to find an email, if we do not succed, that's ok
+        up = UserPreferences.get_by_user(user=self.user)
+        if up.email:
+            data['email'] = up.email
+        else:
+            try:
+                r = Researcher.objects.get(user=self.user)
+            except ObjectDoesNotExist:
+                pass
+            except MultipleObjectsReturned:
+                logger.warning("User with id {} has multiple researcher objects assigned".format(self.user.id))
+            else:
+                if r.email:
+                    data['email'] = r.email
+
+        return data
+
+
+    @cached_property
+    def publication(self):
+        """
+        Sets publication / oairecord for the paper with highest prority.
+        """
+        # Fetch the first OaiRecord with highest OaiSource priority and journal as well as publisher
+        publication = self.paper.oairecord_set.filter(
+            journal_title__isnull=False,
+            publisher_name__isnull=False
+        ).order_by('priority').first()
+
+        # If this is not available, take the first one
+        if publication is None:
+           publication = self.paper.oairecord_set.order_by('priority').first()
+
+        return publication
 
 
     def submit_deposit(self, pdf, form):
@@ -121,7 +252,8 @@ class SWORDMETSProtocol(RepositoryProtocol):
             raise DepositError(_("Username or password not provided for this repository. Please contact the Dissemin team."))
 
         metadata = self._get_xml_metadata(form)
-        mets = self._get_mets(metadata)
+        dissemin_metadata = self._get_xml_dissemin_metadata(form)
+        mets = self._get_mets(metadata, dissemin_metadata)
 
         zipfile = self._get_mets_container(pdf, mets)
 
@@ -164,18 +296,8 @@ class SWORDMETSMODSProtocol(SWORDMETSProtocol):
         """
         self.log("### Creating MODS metadata from publication and form")
 
-        # Fetch the first OaiRecord with highest OaiSource priority and journal as well as publisher
-        publication = self.paper.oairecord_set.filter(
-            journal_title__isnull=False,
-            publisher_name__isnull=False
-        ).order_by('priority').first()
-
-        # If this is not available, take the first one
-        if publication is None:
-           publication = self.paper.oairecord_set.order_by('priority').first()
-
         NSMAP = {
-            None: MODS_NAMESPACE,
+            'mods' : MODS_NAMESPACE,
         }
 
         # Creation of root
@@ -193,26 +315,26 @@ class SWORDMETSMODSProtocol(SWORDMETSProtocol):
         mods_date_issued.text = str(self.paper.pubdate)
 
         # Identifier / DOI and relatedItem
-        if publication:
+        if self.publication:
             # DOI
-            if publication.doi:
+            if self.publication.doi:
                 mods_doi = etree.SubElement(mods_xml, MODS + 'identifier')
                 mods_doi.set('type', 'doi')
-                mods_doi.text = publication.doi
+                mods_doi.text = self.publication.doi
 
             # Publisher
-            publisher = publication.publisher
-            if publication.publisher is not None:
-                publisher = publication.publisher.name
+            publisher = self.publication.publisher
+            if self.publication.publisher is not None:
+                publisher = self.publication.publisher.name
             else:
-                publisher = publication.publisher_name
+                publisher = self.publication.publisher_name
 
             if publisher is not None:
                 mods_publisher = etree.SubElement(mods_origin_info, MODS + 'publisher')
                 mods_publisher.text = publisher
 
             # relatedItem
-            related_item = self._get_xml_metadata_relatedItem(publication)
+            related_item = self._get_xml_metadata_relatedItem()
             if related_item is not None:
                 mods_xml.insert(0, related_item)
 
@@ -262,25 +384,24 @@ class SWORDMETSMODSProtocol(SWORDMETSProtocol):
         return mods_xml
 
         
-    def _get_xml_metadata_relatedItem(self, publication):
+    def _get_xml_metadata_relatedItem(self):
         """
         Creates the mods item ``relatedItem`` if available
-        :param publication: A OaiRecord corresponding to the paper
         :returns: lxml object or ``None``
         """
         related_item = None
         related_item_data = dict()
 
         # We set the title and publisher, but prefer values from Journal or Publisher object if available
-        journal = publication.journal
+        journal = self.publication.journal
         issn = None
         eissn = None
-        if publication.journal is not None:
-            journal = publication.journal.title
-            issn = publication.journal.issn
-            eissn = publication.journal.essn
+        if self.publication.journal is not None:
+            journal = self.publication.journal.title
+            issn = self.publication.journal.issn
+            eissn = self.publication.journal.essn
         else:
-            journal = publication.journal_title
+            journal = self.publication.journal_title
 
         # Set the title
         if journal is not None:
@@ -307,13 +428,13 @@ class SWORDMETSMODSProtocol(SWORDMETSProtocol):
         part = dict()
 
         # Set pages
-        if publication.pages is not None:
-            pages = publication.pages.split('-', 1)
+        if self.publication.pages is not None:
+            pages = self.publication.pages.split('-', 1)
             related_item_pages = etree.Element(MODS + 'extent')
             related_item_pages.set('unit', 'pages')
             if len(pages) == 1:
                 related_item_pages_total = etree.SubElement(related_item_pages, MODS + 'total')
-                related_item_pages_total.text = publication.pages
+                related_item_pages_total.text = self.publication.pages
                 part['pages'] = related_item_pages
             else:
                 start = pages[0]
@@ -325,19 +446,19 @@ class SWORDMETSMODSProtocol(SWORDMETSProtocol):
                 part['pages'] = related_item_pages
 
         # Set issue
-        if publication.issue is not None:
+        if self.publication.issue is not None:
             related_item_issue = etree.Element(MODS + 'detail')
             related_item_issue.set('type', 'issue')
             related_item_issue_number = etree.SubElement(related_item_issue, MODS + 'number')
-            related_item_issue_number.text = publication.issue
+            related_item_issue_number.text = self.publication.issue
             part['issue'] = related_item_issue
 
         # Set volume
-        if publication.volume is not None:
+        if self.publication.volume is not None:
             related_item_volume = etree.Element(MODS + 'detail')
             related_item_volume.set('type', 'volume')
             related_item_volume_number = etree.SubElement(related_item_volume, MODS + 'number')
-            related_item_volume_number.text = publication.volume
+            related_item_volume_number.text = self.publication.volume
             part['volume'] = related_item_volume
 
         # Make parts if existing

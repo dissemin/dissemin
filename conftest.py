@@ -13,7 +13,6 @@ from deposit.models import Repository
 from dissemin.settings import BASE_DIR
 from papers.baremodels import PAPER_TYPE_CHOICES
 from papers.models import Paper
-from papers.models import OaiSource
 from papers.models import OaiRecord
 from papers.models import OaiSource
 from publishers.models import Journal
@@ -156,6 +155,20 @@ def book_god_of_the_labyrinth(load_json):
     p = load_json.load_paper('book_god_of_the_labyrinth')
     return p
 
+
+@pytest.fixture
+def user_leibniz(django_user_model):
+    """
+    Returns user Gottfried Wilhelm Leibniz
+    """
+    leibnizg = django_user_model.objects.create(
+        username='leibnizg',
+        first_name='Gottfried',
+        last_name='Leibniz',
+        email='gottfried.leibniz@tib.eu'
+    )
+
+    return leibnizg
 
 
 @pytest.fixture

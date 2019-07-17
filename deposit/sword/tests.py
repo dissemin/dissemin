@@ -5,11 +5,13 @@ from lxml import etree
 from requests.exceptions import RequestException
 from zipfile import ZipFile
 
-from deposit.forms import BaseMetadataForm
+from deposit.sword.forms import SWORDMETSForm
 from deposit.models import DDC
+from deposit.models import LicenseChooser
 from deposit.protocol import DepositError
 from deposit.sword.protocol import SWORDMETSProtocol
 from deposit.tests.test_protocol import MetaTestProtocol
+
 
 userdata = [(None, None), ('vetinari', None), (None, 'psst')]
 
@@ -18,11 +20,44 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
     This class contains some tests that every implemented SWORD protocol shall pass. The tests are not executed as members of this class, but of any subclass.
     """
 
-    def test_get_mets(self, mets_xsd, metadata_xml_dc):
+    def test_get_mets(self, mets_xsd, metadata_xml_dc, dissemin_xml_1_0):
         """
         A test for creating mets from metadata
         """
-        mets_xml = SWORDMETSProtocol._get_mets(metadata_xml_dc)
+        mets_xml = SWORDMETSProtocol._get_mets(metadata_xml_dc, dissemin_xml_1_0)
+        # Because of the xml declaration we have to convert to a bytes object
+        mets_xsd.assertValid(etree.fromstring(bytes(mets_xml, encoding='utf-8')))
+
+
+    def test_get_mets_integration(self, mets_xsd, depositing_user, upload_data, ddc, license_chooser):
+        """
+        Integration test running all possible metadata cases and validating against mets schema
+        """
+        self.protocol.paper = upload_data['paper']
+        self.protocol.user = depositing_user
+
+        # Set POST data for form
+        data = dict()
+        data['email'] = depositing_user.email
+        if upload_data['oairecord'].description is not None:
+            data['abstract'] = upload_data['oairecord'].description
+        else:
+            data['abstract'] = upload_data['abstract']
+
+        if ddc is not None:
+            data['ddc'] = [ddc for ddc in DDC.objects.filter(number__in=upload_data['ddc'])]
+
+        if license_chooser:
+            data['license'] = license_chooser.pk
+        licenses = LicenseChooser.objects.by_repository(repository=self.protocol.repository)
+
+        form = SWORDMETSForm(paper=self.protocol.paper, ddcs=ddc, licenses=licenses, data=data)
+        form.is_valid()
+
+        dissemin_xml = self.protocol._get_xml_dissemin_metadata(form)
+        metadata_xml = self.protocol._get_xml_metadata(form)
+        mets_xml = self.protocol._get_mets(dissemin_xml, metadata_xml)
+        
         # Because of the xml declaration we have to convert to a bytes object
         mets_xsd.assertValid(etree.fromstring(bytes(mets_xml, encoding='utf-8')))
 
@@ -39,10 +74,42 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
             assert not zip_file.testzip()
 
 
-    @responses.activate
-    def test_submit_deposit(self, blank_pdf_path, mock_get_xml_metadata, mock_get_deposit_result):
+    @pytest.mark.parametrize('oairecord', ['journal-article_a_female_signal_reflects_mhc_genotype_in_a_social_primate', 'book_god_of_the_labyrinth'])
+    def test_get_xml_dissemin_metadata(self, db, monkeypatch_paper_is_owned, dissemin_xsd_1_0, depositing_user, license_chooser, load_json, oairecord):
         """
-        A test for submit deposit. We need to mock a function, that generates metadata depending on the metadata format that is created in a subclass.
+        Tests for dissemin metadata
+        """
+        upload_data = load_json.load_upload(oairecord)
+        self.protocol.paper = upload_data['paper']
+        self.protocol.user = depositing_user
+
+        # Set POST data for form
+        data = dict()
+
+        if license_chooser:
+            data['license'] = license_chooser.pk
+        data['email'] = depositing_user.email
+
+        form  = SWORDMETSForm(
+            paper=self.protocol.paper,
+            licenses=LicenseChooser.objects.by_repository(repository=self.protocol.repository),
+            data=data
+        )
+        form.is_valid()
+
+        xml = self.protocol._get_xml_dissemin_metadata(form)
+
+        # When using pytest -s, show resulting xml
+        print("")
+        print(etree.tostring(xml, pretty_print=True, encoding='utf-8', xml_declaration=True).decode())
+
+        dissemin_xsd_1_0.assertValid(xml)
+
+
+    @responses.activate
+    def test_submit_deposit(self, blank_pdf_path, monkeypatch_metadata_creation, monkeypatch_get_deposit_result):
+        """
+        A test for submit deposit.
         """
         # Mocking requests
         responses.add(responses.POST, self.protocol.repository.endpoint, status=201)
@@ -51,7 +118,7 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
 
 
     @responses.activate
-    def test_submit_deposit_server_error(self, blank_pdf_path, mock_get_xml_metadata):
+    def test_submit_deposit_server_error(self, blank_pdf_path, monkeypatch_metadata_creation):
         """
         A test where the repository is not available. Should raise ``requests.exceptions.RequestException``
         """
@@ -72,6 +139,7 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
         p.repository.save()
         with pytest.raises(DepositError):
             p.submit_deposit(None, None)
+
 
 class TestSWORDMETSProtocolNotImplemented():
     """
@@ -95,7 +163,6 @@ class TestSWORDMETSProtocolNotImplemented():
             SWORDMETSProtocol._get_deposit_result(None)
 
 
-
 @pytest.mark.usefixtures('sword_mods_protocol')
 class TestSWORDSMETSMODSProtocol(MetaTestSWORDMETSProtocol):
     """
@@ -116,7 +183,7 @@ class TestSWORDSMETSMODSProtocol(MetaTestSWORDMETSProtocol):
         assert self.protocol.__str__() == "SWORD Protocol (MODS)"
 
 
-    def test_get_xml_metadata(self, mods_3_7_xsd, upload_data):
+    def test_get_xml_metadata(self, mods_3_7_xsd, ddc, upload_data):
         """
         Validates against mods 3.7 schema
         """
@@ -129,13 +196,10 @@ class TestSWORDSMETSMODSProtocol(MetaTestSWORDMETSProtocol):
         else:
             data['abstract'] = upload_data['abstract']
 
-        if self.ddc is True:
+        if ddc is not None:
             data['ddc'] = [ddc for ddc in DDC.objects.filter(number__in=upload_data['ddc'])]
-            ddcs = DDC.objects.all()
-        else:
-            ddcs = None
 
-        form = BaseMetadataForm(paper=self.protocol.paper, ddcs=ddcs, data=data)
+        form = SWORDMETSForm(paper=self.protocol.paper, ddcs=ddc, data=data)
         form.is_valid()
         xml = self.protocol._get_xml_metadata(form)
         

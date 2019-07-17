@@ -25,6 +25,7 @@ import django.test
 import pytest
 import os
 
+from deposit.models import License
 from deposit.models import LicenseChooser
 from deposit.protocol import DepositResult
 from deposit.protocol import RepositoryProtocol
@@ -66,11 +67,11 @@ class MetaTestProtocol():
         assert r.status_code == 200
 
 
-    def test_get_form_return_type(self, user_isaac_newton, book_god_of_the_labyrinth):
+    def test_get_form_return_type(self, book_god_of_the_labyrinth, user_isaac_newton):
         """
         Return type of get_form shall by a form
         """
-        self.protocol.init_deposit(user_isaac_newton, book_god_of_the_labyrinth)
+        self.protocol.init_deposit(book_god_of_the_labyrinth ,user_isaac_newton)
         form = self.protocol.get_form()
         assert isinstance(form, Form)
 
@@ -81,6 +82,27 @@ class MetaTestProtocol():
         """
         retval = self.protocol.init_deposit(user_isaac_newton, book_god_of_the_labyrinth)
         assert type(retval) == bool
+
+
+    def test_get_licenses(self, db):
+        """
+        Function should return a queryset of of length > 1 of  LicenseChoosers if LicenseChoosers are choosen
+        """
+        for uri in ['https://creativecommons.org/publicdomain/zero/1.0/', 'https://creativecommons.org/licenses/by/4.0/', 'http://creativecommons.org/licenses/by-nd/4.0/']:
+            license = License.objects.get(uri=uri)
+            LicenseChooser.objects.create(
+                license=license,
+                repository=self.protocol.repository,
+            )
+
+        assert len(self.protocol._get_licenses()) == 3
+
+
+    def test_get_licenses_none(self):
+        """
+        Function should return none if no LicenseChooser selected for repository
+        """
+        assert self.protocol._get_licenses() == None
 
 
     def test_protocol_identifier(self):

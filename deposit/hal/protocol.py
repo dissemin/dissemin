@@ -99,8 +99,6 @@ class HALProtocol(RepositoryProtocol):
             return None
 
     def get_form_initial_data(self, **kwargs):
-        # HAL does not use license, we just throw this away
-        kwargs.pop('licenses', None)
         data = super(HALProtocol, self).get_form_initial_data(**kwargs)
 
         data['first_name'] = self.user.first_name

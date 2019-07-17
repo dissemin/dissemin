@@ -151,6 +151,18 @@ class RepositoryProtocol(object, metaclass = RepositoryProtocolMeta):
         else:
             return None
 
+    def _get_licenses(self):
+        """
+        Returns the queryset of related licenses or the repository or ``None``.
+        :returns: queryset of licenses or ``None``
+        """
+
+        licenses = LicenseChooser.objects.by_repository(self.repository)
+        if licenses:
+            return licenses
+        else:
+            return None
+
     def get_form_initial_data(self, **kwargs):
         """
         Returns the form's initial values.
@@ -174,7 +186,6 @@ class RepositoryProtocol(object, metaclass = RepositoryProtocolMeta):
             elif defaults == 2:
                 logger.warning('More than one default license set for repository %s' % self.repository)
 
-
         return initial
 
     def get_form(self):
@@ -183,7 +194,7 @@ class RepositoryProtocol(object, metaclass = RepositoryProtocolMeta):
         It is prefilled with the initial data from `get_form_initial_data`
         """
 
-        licenses = LicenseChooser.objects.by_repository(self.repository)
+        licenses = self._get_licenses()
 
         ddcs = self._get_ddcs()
 
@@ -198,7 +209,7 @@ class RepositoryProtocol(object, metaclass = RepositoryProtocolMeta):
         the user, ready for validation.
         """
         
-        licenses = LicenseChooser.objects.by_repository(self.repository)
+        licenses = self._get_licenses()
 
         ddcs = self._get_ddcs()
 

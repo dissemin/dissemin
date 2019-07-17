@@ -34,7 +34,6 @@ class HALForm(BaseMetadataForm):
 
     def __init__(self, paper, **kwargs):
         super(HALForm, self).__init__(paper, **kwargs)
-        self.fields.pop('license')
         self.fields['depositing_author'].choices = enumerate(
             map(str, paper.authors))
 
