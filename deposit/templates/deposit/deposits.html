@@ -4,94 +4,85 @@
 
 
 {% block extra_head %}
-{% include 'statistics/headers.html' %}
+    {% include 'statistics/headers.html' %}
 {% endblock %}
 
 {% block headTitle %}{% trans "My deposits" %}{% endblock %}
 
 {% block content %}
 <div id="fullPage">
-<h2>{% trans "My deposits" %}</h2>
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-    {% for deposit in deposits %}
-        {% with deposit.paper as paper %}
-        <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="deposit-heading-{{ deposit.id }}">
-            <span class="panel-title">
-                <a role="button" data-toggle="collapse" data-parent="#accordion"
-                    href="#deposit-collapse-{{ deposit.id }}"
-                    aria-expanded="false"
-                    aria-controls="deposit-collapse-{{ deposit.id }}">
-                "{{ paper.title }}" in <strong>{{ deposit.repository }}</strong>
-                </a>
-            </span>
-            </div>
-            <div id="deposit-collapse-{{ deposit.id }}"
-class="panel-collapse collapse"
-            role="tabpanel" aria-labelledby="deposit-heading-{{ deposit.id }}">
-
-                <div class="panel-body no-padding">
-                   <table class="table" style="margin-bottom: 0px">
-                        <tr>
-                            <td>{% trans "Paper" %}</td>
-                            <td><a href="{{ paper.url }}">{{ paper.title }}</a></td>
-                        </tr>
-                        <tr>
-                            <td>{% trans "Repository" %}</td>
-                            <td><a href="{{ deposit.repository.url }}" target="blank">{{ deposit.repository }}</td>
-                        </tr>
-                        <tr>
-                            <td>{% trans "Deposit date" %}</td>
-                            <td>{{ deposit.date }}</td>
-                        </tr>
-                        <tr>
-                            <td>{% trans "Deposit type" %}</td>
-                            <td>{{ deposit.get_upload_type_display }}</td>
-                        </tr>
-                        <tr>
-                            <td>{% trans "Identifier" %}</td>
-                            <td>{{ deposit.identifier }}</td>
-                        </tr>
-                        {% with deposit.oairecord as r %}
-                        {% if r %}
-                        <tr>
-                            <td>{% trans "Meta URL" %}</td>
-                            <td><a href="{{ r.splash_url }}">{{ r.splash_url }}</a></td>
-                        </tr>
-                        {% if r.pdf_url %}
-                        <tr>
-                            <td>{% trans "PDF URL" %}</td>
-                            <td><a href="{{ r.pdf_url }}">{{ r.pdf_url }}</a></td>
-                        </tr>
-                        {% endif %}
-                        {% endif %}
-                        {% endwith %}
-                        <tr>
-                            <td>{% trans "Status" %}</td>
-                            <td>{{ deposit.get_status_display }}</td>
-                        </tr>
-                        {% with deposit.additional_info as info %}
-                        {% for i in info %}
-                        <tr>
-                            <td>{{ i.label }}</td>
-                            <td>{{ i.value }}</td>
-                        </tr>
-                        {% endfor %}
-                        {% endwith %}
-                    </table>
+    <h2>{% trans "My deposits" %}</h2>
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        {% for deposit in deposits %}
+            {% with deposit.paper as paper %}
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="deposit-heading-{{ deposit.id }}">
+                        <span class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#deposit-collapse-{{ deposit.id }}" aria-expanded="false" aria-controls="deposit-collapse-{{ deposit.id }}">"{{ paper.title }}" in <strong>{{ deposit.repository }}</strong></a>
+                        </span>
+                    </div>
+                    <div id="deposit-collapse-{{ deposit.id }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="deposit-heading-{{ deposit.id }}">
+                        <div class="panel-body no-padding">
+                           <table class="table" style="margin-bottom: 0px">
+                                <tr>
+                                    <td>{% trans "Paper" %}</td>
+                                    <td><a href="{{ paper.url }}">{{ paper.title }}</a></td>
+                                </tr>
+                                <tr>
+                                    <td>{% trans "Repository" %}</td>
+                                    <td><a href="{{ deposit.repository.url }}" target="blank">{{ deposit.repository }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{% trans "Deposit date" %}</td>
+                                    <td>{{ deposit.date }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{% trans "Deposit type" %}</td>
+                                    <td>{{ deposit.get_upload_type_display }}</td>
+                                </tr>
+                                <tr>
+                                    <td>{% trans "Identifier" %}</td>
+                                    <td>{{ deposit.identifier }}</td>
+                                </tr>
+                                {% with deposit.oairecord as r %}
+                                    {% if r %}
+                                        <tr>
+                                            <td>{% trans "Meta URL" %}</td>
+                                            <td><a href="{{ r.splash_url }}">{{ r.splash_url }}</a></td>
+                                        </tr>
+                                        {% if r.pdf_url %}
+                                            <tr>
+                                                <td>{% trans "PDF URL" %}</td>
+                                                <td><a href="{{ r.pdf_url }}">{{ r.pdf_url }}</a></td>
+                                            </tr>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endwith %}
+                                <tr>
+                                    <td>{% trans "Status" %}</td>
+                                    <td>{{ deposit.get_status_display }}</td>
+                                </tr>
+                                {% with deposit.additional_info as info %}
+                                    {% for i in info %}
+                                        <tr>
+                                            <td>{{ i.label }}</td>
+                                            <td>{{ i.value }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                {% endwith %}
+                            </table>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    {% endwith %}
-    {% empty %}
-        <p class="notFound">
-        {% blocktrans trimmed %}
-        You have not made any deposit via
-        Dissemin. What are you waiting for?
-        Liberate your papers today.
-        {% endblocktrans %}
-        </p>
-    {% endfor %}
+            {% endwith %}
+        {% empty %}
+            <p class="notFound">
+                {% blocktrans trimmed %} 
+                    You have not made any deposit via Dissemin. What are you waiting for? Liberate your papers today.
+                {% endblocktrans %}
+            </p>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}
 
