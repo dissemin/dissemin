@@ -51,7 +51,7 @@ class SWORDMETSProtocol(RepositoryProtocol):
     
 
     @staticmethod
-    def _get_mets(metadata):
+    def _get_mets(metadata, dissemin_metadata):
         """
         Creates a mets xml from metadata
         Policy for creation is: One-time-usage, so keep the document as small as possible. This means
@@ -61,6 +61,7 @@ class SWORDMETSProtocol(RepositoryProtocol):
             * One and only file that is named `document.pdf`
 
         :params metadata: Bibliographic metadata as lxml etree
+        :params dissemin_metadata: Dissemin metadata as lxml etree
         :returns: complete mets as string
         """
 
@@ -70,12 +71,21 @@ class SWORDMETSProtocol(RepositoryProtocol):
             'xsi' : XSI_NAMESPACE
         }
 
-        # Creation of document root and dmdSec
+        # Creation of document root
         mets_xml = etree.Element(METS + 'mets', nsmap=NSMAP)
+
+        #Creation of dmdSec and insertion of metadata
         mets_dmdSec = etree.SubElement(mets_xml, METS + 'dmdSec', ID='d_dmd_1')
         mets_mdWrap = etree.SubElement(mets_dmdSec, METS + 'mdWrap', MDTYPE='OTHER')
         mets_xmlData = etree.SubElement(mets_mdWrap, METS + 'xmlData')
         mets_xmlData.insert(0, metadata)
+
+        # Creation of amdSec and insertion of dissemin metada
+        mets_amdSec = etree.SubElement(mets_xml, METS + 'amdSec', ID='d_amd_1')
+        mets_rightsMD = etree.SubElement(mets_amdSec, METS + 'rightsMD', ID='d_rightsmd_1')
+        mets_mdWrap = etree.SubElement(mets_rightsMD, METS + 'mdWrap', MDTYPE='OTHER')
+        mets_xmlData = etree.SubElement(mets_mdWrap, METS + 'xmlData')
+        mets_xmlData.insert(0, dissemin_metadata)
 
         # Creation of fileSec
         mets_fileSec = etree.SubElement(mets_xml, METS + 'fileSec')
@@ -242,7 +252,8 @@ class SWORDMETSProtocol(RepositoryProtocol):
             raise DepositError(_("Username or password not provided for this repository. Please contact the Dissemin team."))
 
         metadata = self._get_xml_metadata(form)
-        mets = self._get_mets(metadata)
+        dissemin_metadata = self._get_xml_dissemin_metadata(form)
+        mets = self._get_mets(metadata, dissemin_metadata)
 
         zipfile = self._get_mets_container(pdf, mets)
 

@@ -20,11 +20,11 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
     This class contains some tests that every implemented SWORD protocol shall pass. The tests are not executed as members of this class, but of any subclass.
     """
 
-    def test_get_mets(self, mets_xsd, metadata_xml_dc):
+    def test_get_mets(self, mets_xsd, metadata_xml_dc, dissemin_xml_1_0):
         """
         A test for creating mets from metadata
         """
-        mets_xml = SWORDMETSProtocol._get_mets(metadata_xml_dc)
+        mets_xml = SWORDMETSProtocol._get_mets(metadata_xml_dc, dissemin_xml_1_0)
         # Because of the xml declaration we have to convert to a bytes object
         mets_xsd.assertValid(etree.fromstring(bytes(mets_xml, encoding='utf-8')))
 
@@ -74,9 +74,9 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
 
 
     @responses.activate
-    def test_submit_deposit(self, blank_pdf_path, mock_get_xml_metadata, mock_get_deposit_result):
+    def test_submit_deposit(self, blank_pdf_path, monkeypatch_metadata_creation, monkeypatch_get_deposit_result):
         """
-        A test for submit deposit. We need to mock a function, that generates metadata depending on the metadata format that is created in a subclass.
+        A test for submit deposit.
         """
         # Mocking requests
         responses.add(responses.POST, self.protocol.repository.endpoint, status=201)
@@ -85,7 +85,7 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
 
 
     @responses.activate
-    def test_submit_deposit_server_error(self, blank_pdf_path, mock_get_xml_metadata):
+    def test_submit_deposit_server_error(self, blank_pdf_path, monkeypatch_metadata_creation):
         """
         A test where the repository is not available. Should raise ``requests.exceptions.RequestException``
         """

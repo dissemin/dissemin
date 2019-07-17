@@ -102,6 +102,16 @@ def depositing_user(db, request, user_leibniz):
     return user_leibniz
 
 
+@pytest.fixture
+def dissemin_xml_1_0():
+    '''
+    Loads a dissemin xml document ready to be manipulated and be validated
+    '''
+    directory = os.path.dirname(os.path.abspath(__file__))
+    parser = etree.XMLParser(remove_blank_text=True)
+    return etree.parse(os.path.join(directory, 'schema', 'test_data', 'dissemin_v1.0.xml'), parser).getroot()
+
+
 @pytest.fixture(scope="session")
 def dissemin_xsd_1_0():
     '''

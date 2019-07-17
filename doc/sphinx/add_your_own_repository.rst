@@ -16,11 +16,18 @@ Metadata
 We use the `Metdata Encoding \& Transmission Standard (METS) <https://www.loc.gov/standards/mets/>`_ to ship our metadata and describe what is delivered. Most repositories are able to ingest a METS-package.
 
 We try to keep our METS as simple as possible.
-Currently we populate only ``dmdSec``, ``fileSec`` and ``structSec``.
+Currently we populate only ``dmdSec``, ``amdSec/rightsMD``, ``fileSec`` and ``structSec``.
+
+* ``dmdSec`` contains the bibliographic metadata
+* ``amdSec/rightsMD`` contains information about the depositor, the license and additional dissemin related information. You find the documentation in :ref:`non-bibliographic-metadata-label`.
+
 We deliver two files per package:
 
 * ``mets.xml`` - containing the metadata
 * ``document.pdf`` - the document to be deposited
+
+We provide an :download:`illustrating example <examples/mets.xml>` using Dublin Core.
+
 
 Bibliographic Metadata
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -79,6 +86,8 @@ This includes, that they are already contained in a suitable METS container.
 The list is sorted by publications types and covers all publication types that Dissemin uses.
 
 .. include:: examples/mods/examples_mods.rst
+
+.. _non-bibliographic-metadata-label:
 
 Non-Bibliographic Metadata
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
