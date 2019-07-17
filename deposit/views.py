@@ -117,8 +117,16 @@ def start_view(request, pk):
 
 @user_passes_test(is_authenticated)
 def list_deposits(request):
-    deposits = DepositRecord.objects.filter(user=request.user,
-    identifier__isnull=False).order_by('-date')
+    deposits = DepositRecord.objects.filter(
+        user=request.user,
+        identifier__isnull=False
+    ).order_by(
+        '-date'
+    ).select_related(
+        'paper',
+        'repository',
+        'oairecord',
+    )
     context = {
         'deposits': deposits
     }
