@@ -13,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-27 18:48+0200\n"
-"PO-Revision-Date: 2019-06-06 15:52:52+0000\n"
+"PO-Revision-Date: 2019-07-18 14:20:10+0000\n"
 "Language: eu\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -973,10 +973,10 @@ msgid "(empty profile)"
 msgstr "(profila hutsik)"
 
 #: papers/templates/papers/paper.html:60
-#, fuzzy, python-format
+#, python-format
 msgctxt "as in: _Journal article published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "<span class=\"paperDocType\">%(doctype)s</span> published in %(year)s by"
-msgstr " \n    <span class=\"paperDocType\">%(doctype)s</span> by\n    "
+msgstr "<span class=\"paperDocType\">%(doctype)s</span> argitaratua %(year)s-an"
 
 #: papers/templates/papers/paper.html:66
 #, fuzzy, python-format
@@ -1156,11 +1156,11 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: papers/templates/papers/search.html:211
-#, fuzzy, python-format
+#, python-format
 msgid "%(formattedCounter)s paper found"
 msgid_plural "%(formattedCounter)s papers found"
-msgstr[0] "Artikulu %d aurkitu da"
-msgstr[1] "%d artikulu aurkitu dira"
+msgstr[0] "Artikulu %(formattedCounter)s aurkitu da"
+msgstr[1] "%(formattedCounter)s artikulu aurkitu dira"
 
 #: papers/templates/papers/search.html:252
 #: publishers/templates/publishers/list.html:73
