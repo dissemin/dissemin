@@ -154,6 +154,8 @@ class Repository(models.Model, CachingMixin):
     licenses = models.ManyToManyField(License, through='LicenseChooser')
     #: Optionally set DDC. If none selected, form will be omitted
     ddc = models.ManyToManyField(DDC, blank=True)
+    #: Optionally choose a letter of declaration to finish deposition
+    letter_declaration = models.CharField(max_length=256, blank=True)
 
     def get_implementation(self):
         """
@@ -255,6 +257,8 @@ class DepositRecord(models.Model):
     upload_type = models.CharField(max_length=64,choices=UPLOAD_TYPE_CHOICES)
     status = models.CharField(max_length=64,choices=DEPOSIT_STATUS_CHOICES)
     additional_info = JSONField(null=True, blank=True)
+    #: We store the license mainly for generation of letter of declaration
+    license = models.ForeignKey(License, on_delete=models.SET_NULL, null=True, default=None)
 
     file = models.ForeignKey(UploadedPDF, on_delete=models.CASCADE)
 
