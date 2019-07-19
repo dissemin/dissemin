@@ -293,6 +293,7 @@ def authenticated_client(dissemin_base_client, django_user_model):
     password = "secret"
     u = django_user_model.objects.create_user(username=username, password=password)
     dissemin_base_client.login(username=username, password=password)
+    dissemin_base_client.user = u
     return dissemin_base_client
 
 

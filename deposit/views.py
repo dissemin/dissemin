@@ -24,6 +24,7 @@ import logging
 
 from crispy_forms.templatetags.crispy_forms_filters import as_crispy_form
 from crispy_forms.utils import render_crispy_form
+from deposit.declaration import get_declaration_pdf
 from deposit.forms import PaperDepositForm
 from deposit.forms import UserPreferencesForm
 from deposit.models import DepositRecord
@@ -31,6 +32,8 @@ from deposit.models import Repository
 from deposit.models import UserPreferences
 from django.conf import settings
 from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import FileResponse
 from django.http import HttpResponseForbidden
 from django.http import Http404
 from django.shortcuts import get_object_or_404
@@ -38,6 +41,7 @@ from django.shortcuts import render
 from django.template import RequestContext
 from django.utils.translation import ugettext as _
 from django.views.decorators.http import require_POST
+from django.views.generic import View
 from jsonview.decorators import json_view
 from papers.models import Paper
 from papers.user import is_authenticated
@@ -254,3 +258,25 @@ def submitDeposit(request, pk):
     # TODO change this (we don't need it)
     context['upload_id'] = d.id
     return context
+
+
+class LetterDeclarationView(LoginRequiredMixin, View):
+    """
+    View to return a test file. The user must be logged in and must have access to the deposit.
+    """
+
+    def get(self, request, pk):
+        """
+        We test if the user is the user that own the deposit and return a PDF file if the repository specifies this
+        """
+        dr = get_object_or_404(DepositRecord.objects.select_related('paper', 'repository', 'user', 'license'), pk=pk)
+
+        if dr.user != request.user:
+            return HttpResponseForbidden(_("Access to this ressource not allowed."))
+        # If the repository requires a letter of declaration, we try to create the pdf, otherwise we return 404.
+        if dr.repository.letter_declaration != '' and dr.status == "pending":
+            pdf = get_declaration_pdf(dr)
+            filename = "Erklärung {}.pdf".format(dr.paper.title)
+            return FileResponse(pdf, as_attachment=True, filename=filename)
+        else:
+            raise Http404(_("No pdf found for dr {}".format(dr.pk)))

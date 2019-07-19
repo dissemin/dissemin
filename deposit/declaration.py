@@ -12,14 +12,14 @@ REGISTERED_DECLARATION_FUNCTIONS = {
 }
 
 
-def get_declaration_pdf(deposit):
+def get_declaration_pdf(deposit_record):
     """
     This function creates for a given deposit the letter of declaration. If the does not succeed, it raises an exception.
     :param deposit: DepositRecord containing information for declaration
     :returns: BytesIO containing pdf or raises Exception
     """
-    func = get_declaration_function(deposit.repository.letter_declaration)
-    return func(deposit)
+    func = get_declaration_function(deposit_record.repository.letter_declaration)
+    return func(deposit_record)
 
 
 def get_declaration_function(func_name):
