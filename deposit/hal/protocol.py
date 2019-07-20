@@ -168,7 +168,10 @@ class HALProtocol(RepositoryProtocol):
             host = parsed_endpoint.netloc
             path = parsed_endpoint.path + 'hal'
 
-            conn = http_client.HTTPConnection(host)
+            if self.api_url.startswith('http://'):
+                conn = http_client.HTTPConnection(host)
+            else:
+                conn = http_client.HTTPSConnection(host)
             conn.putrequest('POST', path, True, True)
             zipContent = zipFile.getvalue()
             headers = {
