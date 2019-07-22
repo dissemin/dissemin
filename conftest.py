@@ -13,6 +13,7 @@ from django.urls import reverse
 
 from deposit.models import Repository
 from dissemin.settings import BASE_DIR
+from dissemin.settings import POSSIBLE_LANGUAGE_CODES
 from papers.baremodels import PAPER_TYPE_CHOICES
 from papers.models import Paper
 from papers.models import OaiRecord
@@ -202,14 +203,24 @@ def blank_pdf(blank_pdf_path):
     return pdf
 
 
-@pytest.fixture
-def check_page(validator_tools):
+"""
+Depending on the environment variable DISSEMIN_TEST_ALL_LANGAUAGES sets the languages to be tested. If not set, use english, otherwise all languages from settings.POSSIBLE_LANGUAGE_CODES
+"""
+if 'DISSEMIN_TEST_ALL_LANGUAGES' in os.environ:
+    TEST_LANGUAGES = POSSIBLE_LANGUAGE_CODES
+else:
+    TEST_LANGUAGES = ['en-us']
+
+
+@pytest.fixture(params=TEST_LANGUAGES)
+def check_page(request, validator_tools):
     """
-    Checks status of page and checks html
+    Checks status of page and checks html. 
     """
     def checker(status, *args, **kwargs):
         vt = validator_tools
         vt.check_page(status, *args, **kwargs)
+        vt.client.cookies.load(request.param)
 
     return checker
 
