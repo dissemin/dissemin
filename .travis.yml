@@ -60,10 +60,10 @@ before_script:
   - psql -c "CREATE DATABASE dissemin;" -U postgres
   - if [ $TRAVIS_EVENT_TYPE == 'cron' ]; 
     then
-    echo "Using all languages in tests because this is trigggered by cron";
-    export DISSEMIN_TEST_ALL_LANGUAGES = 'yes';
+    echo ">= Using all languages in tests because this is trigggered by cron <=";
+    export DISSEMIN_TEST_ALL_LANGUAGES="YES";
     else
-    echo "Using only english language in tests because this is not triggered by cron";
+    echo "=> Using only english language in tests because this is not triggered by cron <=";
     fi
 
 script:
