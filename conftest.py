@@ -1,12 +1,15 @@
 import json
 import os
 import pytest
+import sys
+
 
 from datetime import date
 from html5validator import Validator as HTML5Validator
 from io import BytesIO
 from tempfile import NamedTemporaryFile
 
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.urls import reverse
@@ -219,8 +222,8 @@ def check_page(request, validator_tools):
     """
     def checker(status, *args, **kwargs):
         vt = validator_tools
+        vt.client.cookies.load({settings.LANGUAGE_COOKIE_NAME : request.param})
         vt.check_page(status, *args, **kwargs)
-        vt.client.cookies.load(request.param)
 
     return checker
 
@@ -275,7 +278,14 @@ def validator_tools(client, settings):
                 assert response.status_code == status
             with NamedTemporaryFile(delete=False) as fh:
                 fh.write(response.content)
-            assert self.validator.validate([fh.name]) == 0
+            # We fetch the AssertionError and raise it, to print the file with line numbers to stderr, because the written file will be removed
+            try:
+                assert self.validator.validate([fh.name]) == 0
+            except AssertionError:
+                print("THIS IST WHAT {} LOOKS LIKE\n".format(fh.name))
+                for index, item in enumerate(response.content.decode('utf-8').split("\n")[:-1]):
+                    print("{:3d} {}".format(index + 1, item))
+                raise
             try:
                 os.remove(fh.name)
             except:
