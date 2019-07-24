@@ -228,13 +228,27 @@ def check_page(request, validator_tools):
     return checker
 
 
+@pytest.fixture(params=TEST_LANGUAGES)
+def check_url(request, validator_tools):
+    """
+    Checks status and html of a URL
+    """
+
+    def checker(status, url):
+        vt = validator_tools
+        vt.client.cookies.load({settings.LANGUAGE_COOKIE_NAME : request.param})
+        vt.check_url(status, url)
+
+    return checker
+
 @pytest.fixture
-def check_status(validator_tools):
+def check_status(dissemin_base_client, validator_tools):
     """
     Checks the status of a page
     """
-    def checker(status, *args, **kwargs):
+    def checker(status=None, *args, **kwargs):
         vt = validator_tools
+        vt.client = kwargs.pop('client', dissemin_base_client)
         vt.check_status(status, *args, **kwargs)
 
     return checker
@@ -253,7 +267,44 @@ def check_permanent_redirect(validator_tools):
 
 
 @pytest.fixture
-def validator_tools(client, settings):
+def dissemin_base_client(client):
+    """
+    Returns a client which sends HTTP_HOST in headers.
+    This is needed because some pages unfortunately produce internal links with domain
+    """
+    client.defaults = { 'HTTP_HOST' : 'localhost'}
+
+    return client
+
+
+@pytest.fixture
+def authenticated_client(dissemin_base_client, django_user_model):
+    """
+    Returns a logged in client
+    """
+    username = "authenticated_user"
+    password = "secret"
+    u = django_user_model.objects.create_user(username=username, password=password)
+    dissemin_base_client.login(username=username, password=password)
+    return dissemin_base_client
+
+
+@pytest.fixture
+def authenticated_client_su(dissemin_base_client, db, django_user_model):
+    """
+    Returns a logged in client
+    """
+    username = "authenticated_user"
+    password = "secret"
+    u = django_user_model.objects.create_user(username=username, password=password)
+    u.is_superuser = True
+    u.save()
+    dissemin_base_client.login(username=username, password=password)
+    return dissemin_base_client
+
+
+@pytest.fixture
+def validator_tools(dissemin_base_client, settings):
     class ValidatorTools():
         """
         Class that collect tools for validating pages
@@ -303,6 +354,12 @@ def validator_tools(client, settings):
             """
             assert self.get_page(*args, **kwargs).status_code == status
 
+        def check_url(self, status, url):
+            """
+            Fetches and checks url
+            """
+            self.check_html(self.client.get(url))
+
         def check_permanent_redirect(self, *args, **kwargs):
             """
             Checks permanent redirect, 301 as status and new url
@@ -323,7 +380,7 @@ def validator_tools(client, settings):
                 return self.client.get(reverse(*args, **urlargs), kwargs['getargs'])
             return self.client.get(reverse(*args, **kwargs))
 
-    vt = ValidatorTools(client, settings)
+    vt = ValidatorTools(dissemin_base_client, settings)
     return vt
 
 
@@ -337,19 +394,6 @@ def css_validator():
         assert validator.validate([f for f in os.listdir(directory) if f.endswith('.css')]) == 0
 
     return checker
-
-
-@pytest.fixture
-def rendering_authenticated_client(client, django_user_model):
-    """
-    Returns a logged in client
-    """
-    username = "rendering_authenticated_user"
-    password = "secret"
-    u = django_user_model.objects.create_user(username=username, password=password)
-    client.login(username=username, password=password)
-    yield client
-    u.delete()
 
 
 @pytest.fixture

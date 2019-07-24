@@ -7,8 +7,8 @@ from papers.models import Institution
 from backend.tests.test_generic import get_researcher_by_name
 from publishers.models import Journal
 
-@pytest.fixture(scope='class')
-def load_test_data(request, django_db_setup, django_db_blocker):
+@pytest.fixture
+def load_test_data(request, db, django_db_setup, django_db_blocker):
     rebuild_index = (
         lambda: call_command('rebuild_index', interactive=False)
     )

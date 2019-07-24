@@ -59,11 +59,11 @@ class MetaTestProtocol():
         self.deposit()
 
 
-    def test_deposit_page(self, rendering_authenticated_client, rendering_get_page, book_god_of_the_labyrinth):
+    def test_deposit_page(self, authenticated_client, rendering_get_page, book_god_of_the_labyrinth):
         """
         Test the deposit page for HTTP Response 200
         """
-        r = rendering_get_page(rendering_authenticated_client, 'upload_paper', kwargs={'pk': book_god_of_the_labyrinth.pk})
+        r = rendering_get_page(authenticated_client, 'upload_paper', kwargs={'pk': book_god_of_the_labyrinth.pk})
         assert r.status_code == 200
 
 
