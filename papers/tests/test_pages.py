@@ -236,7 +236,7 @@ class TestPaperPages():
         check_page(200, 'paper', kwargs={'pk': p.id, 'slug': p.slug})
 
 
-@pytest.mark.usefixtures('load_test_data')
+@pytest.mark.usefixtures('load_test_data', 'rebuild_index')
 class TestSearchPages():
     """
     Tests concerning the search pages

@@ -44,10 +44,6 @@ TEST_INDEX = {
     },
 }
 
-def get_researcher_by_name(first, last):
-    n = Name.lookup_name((first, last))
-    return Researcher.objects.get(name=n)
-
 
 def check_paper(asserter, paper):
     """

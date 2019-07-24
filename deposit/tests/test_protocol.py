@@ -123,7 +123,7 @@ class DepositTest(django.test.TestCase):
         # so that this task actually does something
         refresh_deposit_statuses()
 
-@pytest.mark.usefixtures("load_test_data")
+@pytest.mark.usefixtures("load_test_data", "rebuild_index")
 class ProtocolTest(django.test.TestCase):
     """
     Set of generic tests that any protocol should pass.

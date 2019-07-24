@@ -3,15 +3,12 @@ import pytest
 
 from lxml import etree
 
-from backend.conftest import load_test_data as papers_load_test_data
-
 from deposit.models import DDC
 from deposit.models import License
 from deposit.models import LicenseChooser
 from papers.models import Paper
 from papers.models import Researcher
 
-load_test_data = papers_load_test_data
 
 @pytest.fixture()
 def license_standard(db):
