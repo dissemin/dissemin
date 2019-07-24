@@ -19,12 +19,8 @@
 #
 
 import os
-import pytest
-
-from django.contrib.auth.models import User
 
 from dissemin.settings import BASE_DIR
-from papers.tests.test_pages import RenderingTest
 
 
 class TestDepositCSS():
@@ -38,20 +34,12 @@ class TestDepositCSS():
         css_validator(os.path.join(BASE_DIR, 'deposit', 'static', 'css'))
 
 
-@pytest.mark.usefixtures("load_test_data")
-class DepositPagesTest(RenderingTest):
+class TestDepositPages():
 
-    @classmethod
-    def setUpClass(self):
-        super(DepositPagesTest, self).setUpClass()
+    def test_start_deposit_unauthenticated(self, book_god_of_the_labyrinth, check_status):
+        paper = book_god_of_the_labyrinth
+        check_status(302, 'upload_paper', kwargs={'pk': paper.pk})
 
-    def test_start_deposit_unauthenticated(self):
-        paper = self.r3.papers[0]
-        r = self.getPage('upload_paper', kwargs={'pk': paper.pk})
-        self.assertEqual(r.status_code, 302)
-
-    def test_start_deposit_authenticated(self):
-        paper = self.r3.papers[0]
-        User.objects.create_user('superuser', 'email@domain.com', 'mypass')
-        self.client.login(username='superuser', password='mypass')
-        self.checkPage('upload_paper', kwargs={'pk': paper.pk})
+    def test_start_deposit_authenticated(self, book_god_of_the_labyrinth, authenticated_client, check_page):
+        paper = book_god_of_the_labyrinth
+        check_page(200, 'upload_paper', kwargs={'pk': paper.pk}, client=authenticated_client)

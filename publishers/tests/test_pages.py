@@ -16,36 +16,27 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-import os
 
-from publishers.tests.test_romeo import RomeoAPIStub
 from papers.models import Paper
-from papers.tests.test_pages import RenderingTest
+from publishers.tests.test_romeo import RomeoAPIStub
 
+class TestJournalPage():
 
-class JournalPageTest(RenderingTest):
-    @classmethod
-    def setUpClass(cls):
-        super(JournalPageTest, cls).setUpClass()
-        cls.testdir = os.path.dirname(os.path.abspath(__file__))
-        cls.api = RomeoAPIStub()
-
-    def test_escaping(self):
+    def test_escaping(self, db, check_page):
         # issue #115
         # in the meantime the journal has been deleted from sherpa
-        journal = self.api.fetch_journal({'issn': '0302-9743'})
+        api = RomeoAPIStub()
+        journal = api.fetch_journal({'issn': '0302-9743'})
         # Small hack to make the journal appear in the publisher's journal list
         journal.update_stats()
         journal.stats.num_tot = 1
         journal.stats.save()
         publisher = journal.publisher
-        r = self.getPage('publisher', kwargs={
-                         'pk': publisher.pk, 'slug': publisher.slug})
-        self.checkHtml(r)
+        check_page(200, 'publisher', kwargs={'pk': publisher.pk, 'slug': publisher.slug})
 
-    def test_publisher_url(self):
-        self.api.fetch_journal({'issn':'1860-949X'})
+    def test_publisher_url(self, db, check_page):
+        api = RomeoAPIStub()
+        api.fetch_journal({'issn':'1860-949X'})
         p = Paper.create_by_doi('10.1007/978-3-642-14363-2_7')
         for publi in p.publications:
-            self.checkPage('publisher', kwargs={
-                           'pk': publi.publisher_id, 'slug': publi.publisher.slug})
+            check_page(200, 'publisher', kwargs={'pk': publi.publisher_id, 'slug': publi.publisher.slug})

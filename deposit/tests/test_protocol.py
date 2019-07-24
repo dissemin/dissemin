@@ -34,6 +34,7 @@ from django.contrib.auth.models import User
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.forms import Form
 from django.test.utils import override_settings
+from django.urls import reverse
 from papers.models import OaiSource
 from papers.models import Paper
 from deposit.tasks import refresh_deposit_statuses
@@ -186,8 +187,9 @@ class ProtocolTest(django.test.TestCase):
 
     def test_deposit_page(self):
         self.assertEqual(self.user.username, self.username)
-        self.assertTrue(self.client.login(username=self.username, password=self.password))
-        r = self.getPage('upload_paper', kwargs={'pk': self.p1.pk})
+        client = django.test.Client(HTTP_HOST='localhost')
+        self.assertTrue(client.login(username=self.username, password=self.password))
+        r = client.get(reverse('upload_paper', kwargs={'pk': self.p1.pk}))
         self.assertEqual(r.status_code, 200)
 
     def dry_deposit(self, paper, **form_fields):

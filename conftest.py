@@ -221,12 +221,13 @@ else:
 
 
 @pytest.fixture(params=TEST_LANGUAGES)
-def check_page(request, validator_tools):
+def check_page(request, dissemin_base_client, validator_tools):
     """
     Checks status of page and checks html. 
     """
     def checker(status, *args, **kwargs):
         vt = validator_tools
+        vt.client = kwargs.pop('client', dissemin_base_client)
         vt.client.cookies.load({settings.LANGUAGE_COOKIE_NAME : request.param})
         vt.check_page(status, *args, **kwargs)
 

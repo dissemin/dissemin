@@ -20,21 +20,16 @@
 
 
 import datetime
-import html5validator
 import os
 import pytest
-import tempfile
-from mock import patch
 
-from django.urls import reverse
-import django.test
+from mock import patch
 
 from dissemin.settings import BASE_DIR
 from papers.baremodels import BareName
 from papers.models import OaiRecord
 from papers.models import Paper
 from papers.models import Researcher
-from papers.utils import overescaped_re
 from papers.doi import doi_to_url
 
 
@@ -259,75 +254,3 @@ class TestSearchPages():
 #        url(r'^researcher/(?P<pk>\d+)/recluster/$', views.reclusterResearcher, name='recluster-researcher'),
 #        # Annotations (to be deleted)
 #        url(r'^annotations/$', views.AnnotationsView.as_view(), name='annotations'),
-
-# Below tests are depricated and no longer maintained.
-# Please use fixture validate_tools and its derivatives for new page tests
-
-class RenderingTest(django.test.TestCase):
-    def setUp(self):
-        super(RenderingTest, self).setUp()
-        # Django test client does not set HTTP_HOST by default, therefore
-        # having an empty request.META.HTTP_HOST variable which is an issue for
-        # some tests (HTML validity of links URLs). We therefore force it to be
-        # "localhost" in tests.
-        self.client = django.test.Client(HTTP_HOST='localhost')
-        self.validator = html5validator.Validator(
-            errors_only=True,
-            # Django Bootstrap DatetimePicker uses this extra attribute which
-            # is considered invalid by W3C validator.
-            ignore_re=['Attribute "dp_config" not allowed on element'],
-        )
-
-    def checkHtml(self, resp):
-        self.assertEqual(resp.status_code, 200)
-        # Check that there are no overescaped HTML strings…
-        self.assertEqual(
-            overescaped_re.findall(resp.content.decode('utf-8')),
-            []
-        )
-        # Check HTML markup with W3C HTML5 validator
-        fh = tempfile.NamedTemporaryFile(delete=False)
-        fh.write(resp.content)
-        fh.close()
-        self.assertEqual(
-            self.validator.validate([fh.name]),
-            0
-        )
-        try:
-            os.remove(fh.name)
-        except OSError:
-            pass
-
-    def getPage(self, *args, **kwargs):
-        urlargs = kwargs.copy()
-        if 'getargs' in kwargs:
-            del urlargs['getargs']
-            return self.client.get(reverse(*args, **urlargs), kwargs['getargs'])
-        return self.client.get(reverse(*args, **kwargs))
-
-    def checkPage(self, *args, **kwargs):
-        # make sure there's no toolbar, as it may break the tests
-        with self.settings(DEBUG_TOOLBAR_CONFIG = {'SHOW_TOOLBAR_CALLBACK':
-                (lambda r: False)}):
-            return self.checkHtml(self.getPage(*args, **kwargs))
-
-    def checkPermanentRedirect(self, *args, **kwargs):
-        target_url = kwargs.get('url')
-        if target_url:
-            del kwargs['url']
-        response = self.getPage(*args, **kwargs)
-        self.assertEqual(response.status_code, 301)
-        if target_url:
-            self.assertEqual(response.url, target_url)
-
-    def checkTemporaryRedirect(self, *args, **kwargs):
-        self.assertEqual(self.getPage(*args, **kwargs).status_code, 302)
-
-    def checkForbidden(self, *args, **kwargs):
-        self.assertEqual(self.getPage(*args, **kwargs).status_code, 403)
-
-    def check404(self, *args, **kwargs):
-        self.assertEqual(self.getPage(*args, **kwargs).status_code, 404)
-
-    def checkUrl(self, url):
-        self.checkHtml(self.client.get(url))

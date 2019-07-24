@@ -35,9 +35,8 @@ from deposit.zenodo.protocol import ZenodoProtocol
 from deposit.models import Repository
 from papers.models import Paper
 from papers.models import OaiSource
-from papers.tests.test_pages import RenderingTest
 
-class ZenodoProtocolTest(ProtocolTest, RenderingTest):
+class ZenodoProtocolTest(ProtocolTest):
 
     def setUp(self):
         super(ZenodoProtocolTest, self).setUp()
