@@ -14,7 +14,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-27 18:48+0200\n"
-"PO-Revision-Date: 2019-06-06 15:52:55+0000\n"
+"PO-Revision-Date: 2019-07-25 08:08:21+0000\n"
 "Language: pt\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,23 +23,20 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: autocomplete/views.py:81
-#, fuzzy
 msgid "Current institutions"
-msgstr "Instituições"
+msgstr "Instituições atuais"
 
 #: autocomplete/views.py:85
-#, fuzzy
 msgid "Unverified institutions"
-msgstr "Instituições"
+msgstr "Instituições não verificadas"
 
 #: autocomplete/views.py:89
-#, fuzzy
 msgid "Obsolete institutions"
-msgstr "Instituições"
+msgstr "Instituições obsoletas"
 
 #: deposit/forms.py:42
 msgid "Upload type"
-msgstr "Tipo de envio"
+msgstr "Tipo de carregamento"
 
 #: deposit/forms.py:43 deposit/templates/deposit/deposits.html:40
 msgid "Repository"
@@ -79,7 +76,7 @@ msgstr "Química"
 
 #: deposit/hal/metadata.py:37
 msgid "Computer science"
-msgstr "Ciência da computação"
+msgstr "Informática"
 
 #: deposit/hal/metadata.py:38
 msgid "Mathematics"
@@ -171,7 +168,7 @@ msgstr "História"
 
 #: deposit/hal/metadata.py:60
 msgid "Library and information sciences"
-msgstr "Biblioteca e ciência da informação"
+msgstr "Biblioteca e ciências da informação"
 
 #: deposit/hal/metadata.py:61
 msgid "Linguistics"
@@ -482,20 +479,20 @@ msgstr "A tentar preencher este campo automaticamente para si..."
 
 #: deposit/templates/deposit/start.html:49
 msgid "Sorry, we could not fill this for you."
-msgstr "Desculpe, não conseguimos preenchê-lo para si."
+msgstr "Desculpe, não conseguimos preenchê-lo por si."
 
 #: deposit/templates/deposit/start.html:138
 msgid "Dissemin encountered an error, please try again later."
 msgstr "O Dissemin encontrou um erro, por favor, tente novamente mais tarde."
 
 #: deposit/templates/deposit/start.html:224
-#, fuzzy, python-format
+#, python-format
 msgid "You can deposit the full text of your article. Dissemin will send it to a repository where it will be made freely available. By depositing your article via Dissemin, you agree to our <a href=\"%(tosurl)s\">terms of service</a>."
-msgstr "\n            Pode depositar o texto completo do seu artigo. O Dissemin o enviará\n            para um repositório onde será disponibilizado gratuitamente.\n            Ao depositar o seu artigo através do Dissemin,\n            concorda com os nossos <a href=\"%(tosurl)s\">termos de serviço</a>.\n        "
+msgstr "Pode depositar o texto completo do seu artigo. O Dissemin irá enviá-lo para um repositório onde ficará livremente disponível. Ao depositar o seu artigo através do Dissemin, concorda com os nossos <a href=\"%(tosurl)s\">termos de serviço</a>."
 
 #: deposit/templates/deposit/start.html:235
 msgid "You do not appear to be one of the authors of this paper. By using this form, you certify that you have the permission to upload it on their behalf."
-msgstr "Não parece ser um dos autores deste documento. Ao usar este formulário, certifique-se de que tem permissão para carregá-lo no seu nome."
+msgstr "Não parece ser um dos autores deste documento. Ao usar este formulário, certifique-se de que tem permissão para carregá-lo em seu nome."
 
 #: deposit/templates/deposit/start.html:245
 msgid "This paper cannot be deposited in any repository supported by Dissemin."
@@ -530,9 +527,8 @@ msgid "please wait..."
 msgstr "aguarde, por favor..."
 
 #: deposit/views.py:69 deposit/views.py:131
-#, fuzzy
 msgid "This repository is currently not enabled."
-msgstr "Este repositório não pôde ser encontrado."
+msgstr "Este repositório não está atualmente ativado."
 
 #: deposit/views.py:75
 msgid "This repository is not available for this paper."
@@ -540,11 +536,11 @@ msgstr "Este repositório não está disponível para este documento."
 
 #: deposit/views.py:139
 msgid "This repository could not be found."
-msgstr "Este repositório não pôde ser encontrado."
+msgstr "Este repositório não foi encontrado."
 
 #: deposit/views.py:144 deposit/views.py:150 deposit/views.py:167
 msgid "This repository does not have any settings."
-msgstr "Este repositório não possui nenhuma configuração."
+msgstr "Este repositório não tem nenhuma configuração."
 
 #: deposit/views.py:191
 msgid "This repository cannot be used for this paper."
@@ -555,21 +551,20 @@ msgid "Access to the PDF was denied."
 msgstr "O acesso ao PDF foi negado."
 
 #: deposit/zenodo/protocol.py:87
-#, fuzzy
 msgid "This document is already in Zenodo. Zenodo refused the deposit."
-msgstr "Este documento já está no HAL. O HAL recusou o depósito."
+msgstr "Este documento já está no Zenodo. O Zenodo recusou o depósito."
 
 #: deposit/zenodo/protocol.py:120
 msgid "No Zenodo API key provided."
-msgstr "Não foi fornecida nenhuma chave API no Zenodo."
+msgstr "Não foi fornecida nenhuma chave API do Zenodo."
 
 #: deposit/zenodo/protocol.py:130
 msgid "This happens when Zenodo has hiccups. Please try again in a few minutes or use a different repository in the menu above."
-msgstr "Isto ocorre quando o Zenodo tem dificuldades. Tente novamente em alguns minutos ou utilize um repositório diferente no menu acima."
+msgstr "Isto ocorre quando o Zenodo tem dificuldades. Tente novamente daqui a alguns minutos ou utilize um repositório diferente no menu acima."
 
 #: deposit/zenodo/protocol.py:136
 msgid "Unable to authenticate to Zenodo."
-msgstr "Não foi possível se autenticar ao Zenodo."
+msgstr "Não foi possível autenticar-se no Zenodo."
 
 #: deposit/zenodo/protocol.py:144
 msgid "Unable to create a new deposition on Zenodo."
@@ -577,7 +572,7 @@ msgstr "Não foi possível criar uma nova deposição no Zenodo."
 
 #: deposit/zenodo/protocol.py:161
 msgid "Unable to transfer the document to Zenodo."
-msgstr "Não foi possível transferir o documento ao Zenodo."
+msgstr "Não foi possível transferir o documento para o Zenodo."
 
 #: deposit/zenodo/protocol.py:172
 msgid "No abstract is available for this paper but Zenodo requires one. Please provide it using the metadata panel."
@@ -1460,12 +1455,11 @@ msgstr "versão publicada"
 
 #: publishers/templates/publishers/detailsPolicy.html:30
 msgid "Contact the authors to make this publication freely available. This is a service of the Open Access Button."
-msgstr ""
+msgstr "Contactar os autores para tornar esta publicação livremente disponível. Este é um serviço do botão Acesso Aberto."
 
 #: publishers/templates/publishers/detailsPolicy.html:30
-#, fuzzy
 msgid "Contact authors"
-msgstr "Por autores"
+msgstr "Contactar os autores"
 
 #: publishers/templates/publishers/detailsPolicy.html:31
 #: templates/dissemin/tos.html:81
@@ -1503,7 +1497,7 @@ msgstr "Última atualização em %(last_updated)s, <a href=\"%(feedback_url)s\">
 
 #: publishers/templates/publishers/policy.html:64
 msgid "Report any error to them"
-msgstr "Comunicar qualquer erro para eles"
+msgstr "Reportar-lhes todos os erros"
 
 #: publishers/templates/publishers/policy.html:72
 msgid "Policy"
@@ -1532,7 +1526,7 @@ msgstr "Revistas"
 
 #: publishers/templates/publishers/policy.html:124
 msgid "Only journals with papers written by our users are listed."
-msgstr "Apenas são publicados os documentos escritos pelos nossos utilizadores."
+msgstr "Só são listadas as revistas com artigos escritos pelos nossos utilizadores."
 
 #: publishers/templates/publishers/policy.html:139
 msgid "None."
@@ -1552,7 +1546,7 @@ msgstr "Poderia ser partilhado pelos autores"
 
 #: statistics/models.py:51
 msgid "Unknown/unclear sharing policy"
-msgstr "A norma de repartição é desconhecida ou não está clara"
+msgstr "A norma de partilha é desconhecida ou não está clara"
 
 #: statistics/models.py:52
 msgid "Publisher forbids sharing"
@@ -1572,7 +1566,7 @@ msgstr "Este documento não foi encontrado em nenhum repositório, mas pode ser 
 
 #: statistics/models.py:60
 msgid "This paper was not found in any repository; the policy of its publisher is unknown or unclear."
-msgstr "Este documento não foi encontrado em nenhum repositório; A norma da sua editora é desconhecida ou não está clara."
+msgstr "Este documento não foi encontrado em nenhum repositório; a norma da sua editora é desconhecida ou não está clara."
 
 #: statistics/models.py:61
 msgid "Distributing this paper is prohibited by the publisher"
@@ -2088,7 +2082,7 @@ msgstr "Alterar língua"
 
 #: templates/dissemin/skeleton.html:51
 msgid "Translate"
-msgstr ""
+msgstr "Traduzir"
 
 #: templates/dissemin/skeleton.html:56 templates/dissemin/skeleton.html:95
 msgid "FAQ"

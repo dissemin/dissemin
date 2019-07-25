@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 #
 # Author: Abijeet Patro
+# Author: Becks
 # Author: Esraa Ismail
 # Author: Kassem7899
 # Author: Meno25
@@ -15,7 +16,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-27 18:48+0200\n"
-"PO-Revision-Date: 2019-06-06 15:52:51+0000\n"
+"PO-Revision-Date: 2019-07-25 08:08:16+0000\n"
 "Language: ar\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1831,15 +1832,15 @@ msgstr "في الوقت الحالي، يمكنك استخدام ديسيمين 
 
 #: templates/dissemin/faq.html:158
 msgid "<strong><a href=\"https://zenodo.org\">Zenodo</a></strong>, an innovative repository backed by the EU."
-msgstr "<ul> <li><strong><a href=\"https://zenodo.org\">زينودو</a></strong>، مستودع مبتكر يدعمه الاتحاد الأوروبي"
+msgstr "<strong><a href=\"https://zenodo.org\">زينودو</a></strong>، مستودع مبتكر يدعمه الاتحاد الأوروبي"
 
 #: templates/dissemin/faq.html:164
 msgid "<strong><a href=\"https://hal.archives-ouvertes.fr/\">HAL</a></strong>, a French repository managed by the <a href=\"https://www.ccsd.cnrs.fr/\">CCSD</a>."
-msgstr "هال</a></strong>، مستودع فرنسي يديره <a href=\"https://www.ccsd.cnrs.fr/\">مركز الاتصال العلمي المباشر</a>."
+msgstr "<strong><a href=\"https://hal.archives-ouvertes.fr/\">هال</a></strong>، مستودع فرنسي يديره <a href=\"https://www.ccsd.cnrs.fr/\">مركز الاتصال العلمي المباشر</a>."
 
 #: templates/dissemin/faq.html:171
 msgid "<strong><a href=\"https://osf.io/preprints/\">OSF preprints</a></strong>, a preprint server run by the <a href=\"https://cos.io/\">Center for Open Science</a> on top of their <a href=\"https://osf.io/\">Open Science Framework</a>."
-msgstr "الإطار الدلالي المفتوح للطباعة المسبقة</a></strong>، ملقم الطباعة المسبقة الذي يديره <a href=\"https://cos.io/\">مركز العلوم المفتوحة</a> على رأسهم <a href=\"https://osf.io/\">إطار العلوم المفتوح</a>."
+msgstr "<strong><a href=\"https://osf.io/preprints/\">الإطار الدلالي المفتوح للطباعة المسبقة</a></strong>: ملقم الطباعة المسبقة الذي يديره <a href=\"https://cos.io/\">مركز العلوم المفتوحة</a> على رأسهم <a href=\"https://osf.io/\">إطار العلوم المفتوح</a>."
 
 #: templates/dissemin/faq.html:179
 msgid "Supporting more repositories requires us to write specific code for each repository. More importantly it requires the repositories to give us permission to deposit papers in bulk. We have been considering integrating the following repositories:"
@@ -1847,7 +1848,7 @@ msgstr "يتطلب دعم المزيد من المستودعات منا كتاب
 
 #: templates/dissemin/faq.html:188
 msgid "<strong><a href=\"https://arxiv.org/\">arXiv</a></strong>, a well-known general-purpose repository. For now, arXiv has declined to allow Dissemin to deposit using their SWORD API, and wants users to deposit in arXiv manually. If you would like to deposit in arXiv with Dissemin, you can let them know that you are interested (email: help AT arxiv.org, and start your message with \"Dear arXiv,\")."
-msgstr "<ul> <li><strong><a href=\"https://arxiv.org/\">أرخايف</a></strong>هو مستودع معروف للأغراض العامة، في الوقت الراهن، لقد رفض أرخايف السماح لديسمين بالإيداع باستخدام SWORD API، ويريد من المستخدمين الإيداع في أرخايف يدويا، إذا كنت ترغب في الإيداع في أرخايف باستخدام ديسيمين، يمكنك أن تجعلهم يعرفون أنك مهتم (أرسل رسالة إلكترونية إلى: help AT arxiv.org وابدأ رسالتك ب\"عزيزي أرخايف، \").</li> </ul>"
+msgstr "<strong><a href=\"https://arxiv.org/\">أرخايف</a></strong>هو مستودع معروف للأغراض العامة، في الوقت الراهن، لقد رفض أرخايف السماح لديسمين بالإيداع باستخدام SWORD API، ويريد من المستخدمين الإيداع في أرخايف يدويا، إذا كنت ترغب في الإيداع في أرخايف باستخدام ديسيمين، يمكنك أن تجعلهم يعرفون أنك مهتم (أرسل رسالة إلكترونية إلى: help AT arxiv.org وابدأ رسالتك ب\"عزيزي أرخايف، \")."
 
 #: templates/dissemin/faq.html:206
 #, python-format
@@ -1885,7 +1886,7 @@ msgstr "<strong>المطبوعات قبل النشر/بعد النشر محظو�
 #: templates/dissemin/faq.html:296
 #, python-format
 msgid "When we have found it in one of the repositories we harvest. The list of these repositories can be found <a href=\"%(sources_url)s\">here</a>. Thanks to the <a href=\"https://www.base-search.net\">BASE</a> search engine, we cover more than 80 millions of preprints."
-msgstr "عندما نجدها في أحد المستودعات التي نحصدها، يمكن العثور على قائمة هذه المستودعات <a href=\"%(sources_url)s\">هنا</a>، بفضل محرك البحث< <a href=\"https://www.base-search.net\">BASE/a>، نغطي أكثر من 80 مليون نسخة مسبقة."
+msgstr "عندما نجدها في أحد المستودعات التي نحصدها، يمكن العثور على قائمة هذه المستودعات <a href=\"%(sources_url)s\">هنا</a>، بفضل محرك البحث< <a href=\"https://www.base-search.net\">BASE</a>، نغطي أكثر من 80 مليون نسخة مسبقة."
 
 #: templates/dissemin/faq.html:305
 msgid "There are a few caveats concerning our data:"

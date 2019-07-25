@@ -11,7 +11,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-27 18:48+0200\n"
-"PO-Revision-Date: 2019-06-06 15:52:56+0000\n"
+"PO-Revision-Date: 2019-07-25 08:08:21+0000\n"
 "Language: skr-Arab\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -588,7 +588,7 @@ msgstr ""
 
 #: dissemin/settings/common.py:288
 msgid "Arabic"
-msgstr ""
+msgstr "عربی"
 
 #: dissemin/settings/common.py:289
 msgid "English"
@@ -596,7 +596,7 @@ msgstr "انگریزی"
 
 #: dissemin/settings/common.py:290
 msgid "Finnish"
-msgstr ""
+msgstr "فینی"
 
 #: dissemin/settings/common.py:291
 msgid "French"
@@ -604,27 +604,27 @@ msgstr "فرانسیسی"
 
 #: dissemin/settings/common.py:292
 msgid "Korean"
-msgstr ""
+msgstr "کوریائی"
 
 #: dissemin/settings/common.py:293
 msgid "Spanish"
-msgstr ""
+msgstr "سپینی"
 
 #: dissemin/settings/common.py:294
 msgid "Simplified Chinese"
-msgstr ""
+msgstr "سادہ چینی"
 
 #: dissemin/settings/common.py:295
 msgid "Traditional Chinese"
-msgstr ""
+msgstr "روایتی چینی"
 
 #: dissemin/settings/common.py:296
 msgid "Macedonian"
-msgstr ""
+msgstr "مقدونی"
 
 #: dissemin/settings/common.py:297
 msgid "German"
-msgstr ""
+msgstr "جرمنی"
 
 #: dissemin/settings/common.py:298
 msgid "Brazilian Portuguese"
@@ -1030,7 +1030,7 @@ msgstr ""
 
 #: papers/templates/papers/paperDetails.html:22
 msgid "Links"
-msgstr ""
+msgstr "لنک"
 
 #: papers/templates/papers/paperDetails.html:36
 #: papers/templates/papers/search.html:250
