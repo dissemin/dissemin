@@ -15,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-27 18:48+0200\n"
-"PO-Revision-Date: 2019-07-01 07:22:57+0000\n"
+"PO-Revision-Date: 2019-07-29 12:21:24+0000\n"
 "Language: fi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -898,7 +898,7 @@ msgstr ""
 #: papers/templates/papers/exportCitationsModal.html:7
 #: papers/templates/papers/exportCitationsModal.html:33
 msgid "Close"
-msgstr ""
+msgstr "Sulje"
 
 #: papers/templates/papers/exportCitationsModal.html:10
 #: papers/templates/papers/paperDetails.html:38
@@ -976,10 +976,10 @@ msgid "(empty profile)"
 msgstr "(tyhjä profiili)"
 
 #: papers/templates/papers/paper.html:60
-#, fuzzy, python-format
+#, python-format
 msgctxt "as in: _Journal article published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "<span class=\"paperDocType\">%(doctype)s</span> published in %(year)s by"
-msgstr " \n<span class=\"paperDocType\">%(doctype)s</span>, tehnyt\n    "
+msgstr "<span class=\"paperDocType\">%(doctype)s</span>, julkaistu vuonna %(year) julkaisijana"
 
 #: papers/templates/papers/paper.html:66
 #, fuzzy, python-format
