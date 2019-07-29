@@ -979,7 +979,7 @@ msgstr "(tyhjä profiili)"
 #, python-format
 msgctxt "as in: _Journal article published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "<span class=\"paperDocType\">%(doctype)s</span> published in %(year)s by"
-msgstr "<span class=\"paperDocType\">%(doctype)s</span>, julkaistu vuonna %(year) julkaisijana"
+msgstr "<span class=\"paperDocType\">%(doctype)s</span>, julkaistu vuonna %(year)s julkaisijana"
 
 #: papers/templates/papers/paper.html:66
 #, fuzzy, python-format
