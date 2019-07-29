@@ -16,7 +16,7 @@ django-countries
 django-crispy-forms
 django-geojson
 # django-haystack, currently a custom fork because of #695
-https://github.com/dissemin/django-haystack/archive/queryset-cache-using-sparse_list-update.tar.gz
+-e git+https://github.com/dissemin/django-haystack.git@queryset-cache-using-sparse_list-update#egg=django-haystack
 django-js-reverse
 django-jsonview
 django-leaflet
