@@ -17,7 +17,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-27 18:48+0200\n"
-"PO-Revision-Date: 2019-07-25 08:08:18+0000\n"
+"PO-Revision-Date: 2019-08-08 18:03:36+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1793,7 +1793,7 @@ msgstr ""
 
 #: templates/dissemin/faq.html:128
 msgid "Subject repositories, restricted to some research fields, such as <a href=\"https://arxiv.org\">arXiv</a>."
-msgstr "Los repositorios de sujetos, limitados a unos campos de busqueda, como <a href=\"https://arxiv.org\">arXIv</a>."
+msgstr "Repositorios por asuntos, limitados a algunos dominios de investigación, como <a href=\"https://arxiv.org\">arXiv</a>."
 
 #: templates/dissemin/faq.html:134
 msgid "Institutional repositories, designated to store the research output of a given institution or country."

@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-27 18:48+0200\n"
-"PO-Revision-Date: 2019-06-06 15:52:51+0000\n"
+"PO-Revision-Date: 2019-08-08 18:03:35+0000\n"
 "Last-Translator: Ryan Lahfa <masterancpp@gmail.com>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -38,7 +38,7 @@ msgstr "Date de publication invalide"
 
 #: papers/static/papers/refresh.js:100
 msgid "No publication date"
-msgstr "Date de publication absente"
+msgstr "Date de publication manquante"
 
 #: papers/static/papers/refresh.js:102
 msgid "Paper is invalid"
