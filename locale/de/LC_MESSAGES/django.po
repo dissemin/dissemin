@@ -18,7 +18,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-27 18:48+0200\n"
-"PO-Revision-Date: 2019-07-15 17:59:20+0000\n"
+"PO-Revision-Date: 2019-08-12 10:09:39+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -804,7 +804,7 @@ msgstr "Nach Verfasser_innen"
 #: papers/templates/papers/advanced_search.html:37
 #: papers/templates/papers/search.html:295
 msgid "<ul><li>Use author names or ORCID identifiers.</li><li>Use commas as name separator.</li><li>Prefix with <code>last:</code> to enforce last name search.</li></ul>"
-msgstr "<ul><li>Verwende Autorennamen oder ORCID-Identifikatoren.</li><li>Verwende als Namenstrenner.</li><li>Präfix mit <code>last:</code>, um die Nachnamensuche zu erzwingen.</li></ul>"
+msgstr "<ul><li>Verwende Autorennamen oder ORCID-Identifikatoren.</li><li>Verwende Kommas als Namenstrenner.</li><li>Präfix mit <code>last:</code>, um die Nachnamensuche zu erzwingen.</li></ul>"
 
 #: papers/templates/papers/advanced_search.html:43
 #: papers/templates/papers/search.html:305
