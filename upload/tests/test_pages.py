@@ -19,13 +19,17 @@
 # USA.
 #
 
-from papers.tests.test_pages import RenderingTest
+import os
+
+from dissemin.settings import BASE_DIR
 
 
-class UploadPagesTest(RenderingTest):
-    @classmethod
-    def setUpClass(self):
-        super(UploadPagesTest, self).setUpClass()
-
-    def test_css_validity(self):
-        self.checkCss('upload/static/css')
+class TestUploadCSS():
+    """
+    Class that groups CSS tests for upload
+    """
+    def test_upload_css(self, css_validator):
+        """
+        Tests the css files
+        """
+        css_validator(os.path.join(BASE_DIR, 'upload', 'static', 'css'))

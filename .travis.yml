@@ -58,10 +58,17 @@ install:
 before_script:
   - psql --version
   - psql -c "CREATE DATABASE dissemin;" -U postgres
+  - if [ $TRAVIS_EVENT_TYPE == 'cron' ]; 
+    then
+    echo ">= Using all languages in tests because this is trigggered by cron <=";
+    export DISSEMIN_TEST_ALL_LANGUAGES="YES";
+    else
+    echo "=> Using only english language in tests because this is not triggered by cron <=";
+    fi
 
 script:
-  - coverage run --source=dissemin,papers,backend,deposit,upload,statistics --omit="*/migrations/*,dissemin/settings/*" -m py.test
   - python manage.py compilemessages
+  - coverage run --source=dissemin,papers,backend,deposit,upload,statistics --omit="*/migrations/*,dissemin/settings/*" -m py.test
 
 after_success:
   - coveralls

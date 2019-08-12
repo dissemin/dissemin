@@ -1,20 +1,31 @@
 import json
 import os
 import pytest
+import sys
+
 
 from datetime import date
+from html5validator import Validator as HTML5Validator
 from io import BytesIO
+from tempfile import NamedTemporaryFile
 
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.core.management import call_command
 from django.urls import reverse
 
 from deposit.models import Repository
 from dissemin.settings import BASE_DIR
+from dissemin.settings import POSSIBLE_LANGUAGE_CODES
 from papers.baremodels import PAPER_TYPE_CHOICES
+from papers.models import Department
+from papers.models import Institution
+from papers.models import Name
 from papers.models import Paper
 from papers.models import OaiRecord
 from papers.models import OaiSource
+from papers.models import Researcher
 from publishers.models import Journal
 from publishers.models import Publisher
 
@@ -200,17 +211,195 @@ def blank_pdf(blank_pdf_path):
     return pdf
 
 
+"""
+Depending on the environment variable DISSEMIN_TEST_ALL_LANGAUAGES sets the languages to be tested. If not set, use english, otherwise all languages from settings.POSSIBLE_LANGUAGE_CODES
+"""
+if 'DISSEMIN_TEST_ALL_LANGUAGES' in os.environ:
+    TEST_LANGUAGES = POSSIBLE_LANGUAGE_CODES
+else:
+    TEST_LANGUAGES = ['en-us']
+
+
+@pytest.fixture(params=TEST_LANGUAGES)
+def check_page(request, dissemin_base_client, validator_tools):
+    """
+    Checks status of page and checks html. 
+    """
+    def checker(status, *args, **kwargs):
+        vt = validator_tools
+        vt.client = kwargs.pop('client', dissemin_base_client)
+        vt.client.cookies.load({settings.LANGUAGE_COOKIE_NAME : request.param})
+        vt.check_page(status, *args, **kwargs)
+
+    return checker
+
+
+@pytest.fixture(params=TEST_LANGUAGES)
+def check_url(request, validator_tools):
+    """
+    Checks status and html of a URL
+    """
+
+    def checker(status, url):
+        vt = validator_tools
+        vt.client.cookies.load({settings.LANGUAGE_COOKIE_NAME : request.param})
+        vt.check_url(status, url)
+
+    return checker
+
 @pytest.fixture
-def rendering_authenticated_client(client, django_user_model):
+def check_status(dissemin_base_client, validator_tools):
+    """
+    Checks the status of a page
+    """
+    def checker(status=None, *args, **kwargs):
+        vt = validator_tools
+        vt.client = kwargs.pop('client', dissemin_base_client)
+        vt.check_status(status, *args, **kwargs)
+
+    return checker
+
+
+@pytest.fixture
+def check_permanent_redirect(validator_tools):
+    """
+    Checks for 301 and if 'url' given if redirect url is correct
+    """
+    def checker(*args, **kwargs):
+        vt = validator_tools
+        vt.check_permanent_redirect(*args, **kwargs)
+
+    return checker
+
+
+@pytest.fixture
+def dissemin_base_client(client):
+    """
+    Returns a client which sends HTTP_HOST in headers.
+    This is needed because some pages unfortunately produce internal links with domain
+    """
+    client.defaults = { 'HTTP_HOST' : 'localhost'}
+
+    return client
+
+
+@pytest.fixture
+def authenticated_client(dissemin_base_client, django_user_model):
     """
     Returns a logged in client
     """
-    username = "rendering_authenticated_user"
+    username = "authenticated_user"
     password = "secret"
     u = django_user_model.objects.create_user(username=username, password=password)
-    client.login(username=username, password=password)
-    yield client
-    u.delete()
+    dissemin_base_client.login(username=username, password=password)
+    return dissemin_base_client
+
+
+@pytest.fixture
+def authenticated_client_su(dissemin_base_client, db, django_user_model):
+    """
+    Returns a logged in client
+    """
+    username = "authenticated_user"
+    password = "secret"
+    u = django_user_model.objects.create_user(username=username, password=password)
+    u.is_superuser = True
+    u.save()
+    dissemin_base_client.login(username=username, password=password)
+    return dissemin_base_client
+
+
+@pytest.fixture
+def validator_tools(dissemin_base_client, settings):
+    class ValidatorTools():
+        """
+        Class that collect tools for validating pages
+        """
+
+        def __init__(self, client, settings):
+            self.client = client
+            # Deactivate Django tool bar, so that it does not interfere with tests
+            settings.DEBUG_TOOLBAR_CONFIG = {'SHOW_TOOLBAR_CALLBACK': lambda r: False}
+            self.validator = HTML5Validator(
+                errors_only=True,
+                # Django Bootstrap DatetimePicker uses this extra attribute which
+                # is considered invalid by W3C validator.
+                ignore_re=['Attribute "dp_config" not allowed on element'],
+            )
+
+        def check_html(self, response, status=None):
+            """
+            Checks if a page returns valid html
+            """
+            if status is not None:
+                assert response.status_code == status
+            with NamedTemporaryFile(delete=False) as fh:
+                fh.write(response.content)
+            # We fetch the AssertionError and raise it, to print the file with line numbers to stderr, because the written file will be removed
+            try:
+                assert self.validator.validate([fh.name]) == 0
+            except AssertionError:
+                print("THIS IST WHAT {} LOOKS LIKE\n".format(fh.name))
+                for index, item in enumerate(response.content.decode('utf-8').split("\n")[:-1]):
+                    print("{:3d} {}".format(index + 1, item))
+                raise
+            try:
+                os.remove(fh.name)
+            except:
+                pass
+
+        def check_page(self, status, *args, **kwargs):
+            """
+            Fetches and checks page
+            """
+            return self.check_html(self.get_page(*args, **kwargs), status)
+
+        def check_status(self, status, *args, **kwargs):
+            """
+            Checks status
+            """
+            assert self.get_page(*args, **kwargs).status_code == status
+
+        def check_url(self, status, url):
+            """
+            Fetches and checks url
+            """
+            self.check_html(self.client.get(url))
+
+        def check_permanent_redirect(self, *args, **kwargs):
+            """
+            Checks permanent redirect, 301 as status and new url
+            """
+            target_url = kwargs.pop('url', None)
+            response = self.get_page(*args, **kwargs)
+            assert response.status_code == 301
+            if target_url is not None:
+                assert response.url == target_url
+
+        def get_page(self, *args, **kwargs):
+            """
+            Gets a page with reverse
+            """
+            urlargs = kwargs.copy()
+            if 'getargs' in kwargs:
+                del urlargs['getargs']
+                return self.client.get(reverse(*args, **urlargs), kwargs['getargs'])
+            return self.client.get(reverse(*args, **kwargs))
+
+    vt = ValidatorTools(dissemin_base_client, settings)
+    return vt
+
+
+@pytest.fixture(scope="session")
+def css_validator():
+    """
+    Returns a function that takes a directory and validates all of its css files
+    """
+    def checker(directory):
+        validator = HTML5Validator(errors_only=True)
+        assert validator.validate([f for f in os.listdir(directory) if f.endswith('.css')]) == 0
+
+    return checker
 
 
 @pytest.fixture
@@ -333,3 +522,38 @@ class LoadOaiSource():
         Provides BASE OaiSource. It is in the database from a migration. We do not add it to the list of to be deleted OaiSources
         """
         return OaiSource.objects.get(identifier='base')
+
+
+# Fixtures and Functions for load_test_data, which should prefereably not be used as it loads a lot of things
+def get_researcher_by_name(first, last):
+    n = Name.lookup_name((first, last))
+    return Researcher.objects.get(name=n)
+
+
+@pytest.fixture
+def load_test_data(request, db, django_db_setup, django_db_blocker):
+    with django_db_blocker.unblock():
+        call_command('loaddata', 'test_dump.json')
+        self = request.cls
+        self.i = Institution.objects.get(name='ENS')
+        self.d = Department.objects.get(name='Chemistry dept')
+        self.di = Department.objects.get(name='Comp sci dept')
+
+        self.r1 = get_researcher_by_name('Isabelle', 'Aujard')
+        self.r2 = get_researcher_by_name('Ludovic', 'Jullien')
+        self.r3 = get_researcher_by_name('Antoine', 'Amarilli')
+        self.r4 = get_researcher_by_name('Antonin', 'Delpeuch')
+        self.r5 = get_researcher_by_name('Terence', 'Tao')
+        self.hal = OaiSource.objects.get(identifier='hal')
+        self.arxiv = OaiSource.objects.get(identifier='arxiv')
+        self.lncs = Journal.objects.get(issn='0302-9743')
+        self.acm = Journal.objects.get(issn='1529-3785').publisher
+
+
+@pytest.fixture
+def rebuild_index(request):
+    rebuild_index = (
+        lambda: call_command('rebuild_index', interactive=False)
+    )
+    rebuild_index()
+    request.addfinalizer(rebuild_index)

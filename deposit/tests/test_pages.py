@@ -18,28 +18,28 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-import pytest
-from django.contrib.auth.models import User
+import os
 
-from papers.tests.test_pages import RenderingTest
+from dissemin.settings import BASE_DIR
 
-@pytest.mark.usefixtures("load_test_data")
-class DepositPagesTest(RenderingTest):
 
-    @classmethod
-    def setUpClass(self):
-        super(DepositPagesTest, self).setUpClass()
+class TestDepositCSS():
+    """
+    Class that groups CSS tests for upload
+    """
+    def test_deposit_css(self, css_validator):
+        """
+        Tests the css files
+        """
+        css_validator(os.path.join(BASE_DIR, 'deposit', 'static', 'css'))
 
-    def test_start_deposit_unauthenticated(self):
-        paper = self.r3.papers[0]
-        r = self.getPage('upload_paper', kwargs={'pk': paper.pk})
-        self.assertEqual(r.status_code, 302)
 
-    def test_start_deposit_authenticated(self):
-        paper = self.r3.papers[0]
-        User.objects.create_user('superuser', 'email@domain.com', 'mypass')
-        self.client.login(username='superuser', password='mypass')
-        self.checkPage('upload_paper', kwargs={'pk': paper.pk})
+class TestDepositPages():
 
-    def test_css_validity(self):
-        self.checkCss('deposit/static/css')
+    def test_start_deposit_unauthenticated(self, book_god_of_the_labyrinth, check_status):
+        paper = book_god_of_the_labyrinth
+        check_status(302, 'upload_paper', kwargs={'pk': paper.pk})
+
+    def test_start_deposit_authenticated(self, book_god_of_the_labyrinth, authenticated_client, check_page):
+        paper = book_god_of_the_labyrinth
+        check_page(200, 'upload_paper', kwargs={'pk': paper.pk}, client=authenticated_client)
