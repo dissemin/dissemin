@@ -93,8 +93,10 @@ class HALProtocol(RepositoryProtocol):
             return
         try:
             r = requests.post(
-                'https://haltopics.dissem.in/predict', data={'text': topic_text}, timeout=10)
-            return r.json()['decision']['code']
+                'https://annif.dissem.in/v1/projects/hal-fasttext/suggest', data={'text': topic_text}, timeout=10)
+            results =  r.json().get('results') or ''
+            if results:
+                return results[0].get('uri', '').split('/')[-1]
         except (requests.exceptions.RequestException, ValueError, KeyError):
             return None
 

@@ -21,6 +21,7 @@
 
 
 import os
+import responses
 from unittest import expectedFailure, skip
 from django.test import TestCase
 
@@ -60,6 +61,40 @@ class AOFRTest(TestCase):
             #    f.write(etree.tostring(rendered, pretty_print=True))
             # XSD validation currently fails
             # self.xsd.assertValid(rendered)
+
+class TopicPredictionTest(TestCase):
+    def setUp(self):
+        self.protocol = HALProtocol(repository=Repository())
+
+    @responses.activate
+    def test_predict_topic(self):
+        text = 'A complete model for faceted dataflow programs'
+        expected_response = {
+            "results": [
+                {
+                "label": "Computer science",
+                "score": 0.8055065870285034,
+                "uri": "https://aurehal.archives-ouvertes.fr/domain/INFO"
+                },
+                {
+                "label": "Cognitive science",
+                "score": 0.09652446210384369,
+                "uri": "https://aurehal.archives-ouvertes.fr/domain/SCCO"
+                },
+                {
+                "label": "Statistics",
+                "score": 0.02962828427553177,
+                "uri": "https://aurehal.archives-ouvertes.fr/domain/STAT"
+                }
+            ]
+        }
+        responses.add(responses.POST, 'https://annif.dissem.in/v1/projects/hal-fasttext/suggest', json=expected_response)
+
+        self.assertEqual(self.protocol.predict_topic(text), 'INFO')
+
+    @responses.activate
+    def test_predict_empty_text(self):
+        self.assertEqual(self.protocol.predict_topic(''), None)
 
 
 @skip("""
@@ -211,15 +246,6 @@ class HALProtocolTest(ProtocolTest):
             'hal-01062241v1')
         enabled = self.proto.init_deposit(p, self.user)
         self.assertFalse(enabled)
-
-    def test_predict_topic(self):
-        cases = [
-                ('IBEX: Harvesting Entities from the Web Using Unique Identifiers', 'INFO'),
-                ('Global climate change entails many threats and challenges for the majority of crops.', 'SDV'),
-                ('', None),
-            ]
-        for text, topic in cases:
-            self.assertEqual(self.proto.predict_topic(text), topic)
 
     def test_refresh_deposit_status(self):
         # This is the identifier of a paper which should
