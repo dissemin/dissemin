@@ -18,7 +18,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-27 18:48+0200\n"
-"PO-Revision-Date: 2019-08-12 10:09:39+0000\n"
+"PO-Revision-Date: 2019-08-15 16:08:35+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1679,7 +1679,7 @@ msgstr "Publikationsrichtlinien und Volltextverfügbarkeit"
 
 #: templates/dissemin/faq.html:33 templates/dissemin/faq.html:241
 msgid "What do your policy classes mean?"
-msgstr "Was bedeuten die Publikationsrichlinien?"
+msgstr "Was bedeuten die Publikationsrichtlinien?"
 
 #: templates/dissemin/faq.html:34 templates/dissemin/faq.html:294
 msgid "When is a paper considered available?"

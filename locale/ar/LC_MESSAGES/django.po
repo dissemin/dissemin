@@ -16,7 +16,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-27 18:48+0200\n"
-"PO-Revision-Date: 2019-07-25 08:08:16+0000\n"
+"PO-Revision-Date: 2019-08-15 16:08:34+0000\n"
 "Language: ar\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1886,7 +1886,7 @@ msgstr "<strong>المطبوعات قبل النشر/بعد النشر محظو�
 #: templates/dissemin/faq.html:296
 #, python-format
 msgid "When we have found it in one of the repositories we harvest. The list of these repositories can be found <a href=\"%(sources_url)s\">here</a>. Thanks to the <a href=\"https://www.base-search.net\">BASE</a> search engine, we cover more than 80 millions of preprints."
-msgstr "عندما نجدها في أحد المستودعات التي نحصدها، يمكن العثور على قائمة هذه المستودعات <a href=\"%(sources_url)s\">هنا</a>، بفضل محرك البحث< <a href=\"https://www.base-search.net\">BASE</a>، نغطي أكثر من 80 مليون نسخة مسبقة."
+msgstr "عندما نجدها في أحد المستودعات التي نحصدها، يمكن العثور على قائمة هذه المستودعات <a href=\"%(sources_url)s\">هنا</a>، بفضل محرك البحث <a href=\"https://www.base-search.net\">BASE</a>، نغطي أكثر من 80 مليون نسخة مسبقة."
 
 #: templates/dissemin/faq.html:305
 msgid "There are a few caveats concerning our data:"

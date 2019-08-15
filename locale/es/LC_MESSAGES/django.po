@@ -17,7 +17,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-27 18:48+0200\n"
-"PO-Revision-Date: 2019-08-08 18:03:36+0000\n"
+"PO-Revision-Date: 2019-08-15 16:08:36+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1821,7 +1821,7 @@ msgstr "<strong><a href=\"https://hal.archives-ouvertes.fr/\">HAL</a></strong>, 
 
 #: templates/dissemin/faq.html:171
 msgid "<strong><a href=\"https://osf.io/preprints/\">OSF preprints</a></strong>, a preprint server run by the <a href=\"https://cos.io/\">Center for Open Science</a> on top of their <a href=\"https://osf.io/\">Open Science Framework</a>."
-msgstr "<strong><a href=\"https://osf.io/preprints/\">OSF preprints</a></strong>, un preprint de servidor que funciona con <a href=\"https://cos.io/\">Cientro de Ciencia Abierta/a> on top of their <a href=\"https://osf.io/\">Margen de Trabajo de Ciencia Abierta</a>."
+msgstr "<strong><a href=\"https://osf.io/preprints/\">OSF preprints</a></strong>, un preprint de servidor que funciona con <a href=\"https://cos.io/\">Cientro de Ciencia Abierta</a> on top of their <a href=\"https://osf.io/\">Margen de Trabajo de Ciencia Abierta</a>."
 
 #: templates/dissemin/faq.html:179
 msgid "Supporting more repositories requires us to write specific code for each repository. More importantly it requires the repositories to give us permission to deposit papers in bulk. We have been considering integrating the following repositories:"
@@ -1925,7 +1925,7 @@ msgstr "Si un error no es presente en unas fuentes y Usted cree que Dissemin ha 
 
 #: templates/dissemin/faq.html:412
 msgid "First, note that Dissemin does not account for copies of articles that are only available on a personal homepage or a similar website. This is deliberate, because we believe that <a href=\"#repositories-rock\">articles should be hosted in repositories</a>."
-msgstr "Primero, notar que Dissemin no es responsable de copias de articulos que son solamente disponibles en una pagina inizial o sito web parecido. Esto es libero a eligir, porque creemos que <a href''#repositories-rock''>articulos debe ser guardado en repositorios."
+msgstr "Primero, notar que Dissemin no es responsable de copias de articulos que son solamente disponibles en una pagina inizial o sito web parecido. Esto es libero a eligir, porque creemos que <a href=\"#repositories-rock\">articulos debe ser guardado en repositorios</a>."
 
 #: templates/dissemin/faq.html:420
 msgid "Second, at the moment, Dissemin only supports repositories with a crawlable API that follows the <a href=\"https://www.openarchives.org/OAI/openarchivesprotocol.html\">OAI-PMH protocol</a>, and is <a href=\"https://www.base-search.net/about/en/suggest.php\">registered</a> in <a href=\"https://www.base-search.net/\">BASE</a>. We have a <a href=\"https://github.com/dissemin/croawl\">long-term project</a> to support more repositories by crawling them, but for the moment, we do not have the resources to support repositories not covered by BASE. Hence, if you are a user of a repository and would like it to be supported by Dissemin, please contact the repository administrator and suggest them to implement OAI-PMH support and to <a href=\"https://www.base-search.net/about/en/suggest.php\">register</a> their repository in BASE."
