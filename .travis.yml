@@ -39,6 +39,8 @@ before_install:
   - sudo apt-get remove libtidy-0.99-0
   - wget https://github.com/htacg/tidy-html5/releases/download/5.4.0/tidy-5.4.0-64bit.deb
   - sudo dpkg -i tidy-5.4.0-64bit.deb
+  # Make imagemagick read pdf
+  - sudo sed -i 's/<policy domain="coder" rights="none" pattern="PDF" \/>/<policy domain="coder" rights="read" pattern="PDF" \/>/' /etc/ImageMagick-6/policy.xml
   # Rest
   - export DJANGO_SETTINGS_MODULE=dissemin.settings
   - export PYTHONPATH=$HOME/builds/dissemin/dissemin
