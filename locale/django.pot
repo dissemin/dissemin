@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-27 18:48+0200\n"
+"POT-Creation-Date: 2019-08-16 09:41+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,43 +30,51 @@ msgstr ""
 msgid "Obsolete institutions"
 msgstr ""
 
-#: deposit/forms.py:42
+#: deposit/forms.py:84
 msgid "Upload type"
 msgstr ""
 
-#: deposit/forms.py:43 deposit/templates/deposit/deposits.html:40
+#: deposit/forms.py:85 deposit/templates/deposit/deposits.html:40
 msgid "Repository"
 msgstr ""
 
-#: deposit/forms.py:52
+#: deposit/forms.py:94
 msgid "Invalid full text identifier."
 msgstr ""
 
-#: deposit/forms.py:96 papers/templates/papers/paper.html:145
+#: deposit/forms.py:138 papers/templates/papers/paper.html:145
 msgid "Abstract"
 msgstr ""
 
-#: deposit/forms.py:129
+#: deposit/forms.py:148
+msgid "Dewey Decimal Class"
+msgstr ""
+
+#: deposit/forms.py:156
+msgid "License"
+msgstr ""
+
+#: deposit/forms.py:192
 msgid "No preferred repository"
 msgstr ""
 
-#: deposit/forms.py:151 deposit/hal/forms.py:75 deposit/osf/forms.py:134
+#: deposit/forms.py:214 deposit/hal/forms.py:74 deposit/osf/forms.py:134
 msgid "Save"
 msgstr ""
 
-#: deposit/hal/forms.py:42
+#: deposit/hal/forms.py:41
 msgid "Scientific field"
 msgstr ""
 
-#: deposit/hal/forms.py:47
+#: deposit/hal/forms.py:46
 msgid "Depositing author"
 msgstr ""
 
-#: deposit/hal/forms.py:54
+#: deposit/hal/forms.py:53
 msgid "Affiliation"
 msgstr ""
 
-#: deposit/hal/metadata.py:36
+#: deposit/hal/metadata.py:36 vinaigrette-deleteme.py:55
 msgid "Chemistry"
 msgstr ""
 
@@ -74,11 +82,11 @@ msgstr ""
 msgid "Computer science"
 msgstr ""
 
-#: deposit/hal/metadata.py:38
+#: deposit/hal/metadata.py:38 vinaigrette-deleteme.py:52
 msgid "Mathematics"
 msgstr ""
 
-#: deposit/hal/metadata.py:39
+#: deposit/hal/metadata.py:39 vinaigrette-deleteme.py:54
 msgid "Physics"
 msgstr ""
 
@@ -127,6 +135,7 @@ msgid "Demography"
 msgstr ""
 
 #: deposit/hal/metadata.py:51 deposit/osf/forms.py:67 deposit/osf/forms.py:90
+#: vinaigrette-deleteme.py:35
 msgid "Law"
 msgstr ""
 
@@ -135,6 +144,7 @@ msgid "Economies and finances"
 msgstr ""
 
 #: deposit/hal/metadata.py:53 deposit/osf/forms.py:63 deposit/osf/forms.py:86
+#: vinaigrette-deleteme.py:38
 msgid "Education"
 msgstr ""
 
@@ -158,7 +168,7 @@ msgstr ""
 msgid "History, Philosophy and Sociology of Sciences"
 msgstr ""
 
-#: deposit/hal/metadata.py:59
+#: deposit/hal/metadata.py:59 vinaigrette-deleteme.py:91
 msgid "History"
 msgstr ""
 
@@ -166,7 +176,7 @@ msgstr ""
 msgid "Library and information sciences"
 msgstr ""
 
-#: deposit/hal/metadata.py:61
+#: deposit/hal/metadata.py:61 vinaigrette-deleteme.py:42
 msgid "Linguistics"
 msgstr ""
 
@@ -182,11 +192,11 @@ msgstr ""
 msgid "Musicology and performing arts"
 msgstr ""
 
-#: deposit/hal/metadata.py:65
+#: deposit/hal/metadata.py:65 vinaigrette-deleteme.py:11
 msgid "Philosophy"
 msgstr ""
 
-#: deposit/hal/metadata.py:66
+#: deposit/hal/metadata.py:66 vinaigrette-deleteme.py:16
 msgid "Psychology"
 msgstr ""
 
@@ -194,7 +204,7 @@ msgstr ""
 msgid "Religions"
 msgstr ""
 
-#: deposit/hal/metadata.py:68
+#: deposit/hal/metadata.py:68 vinaigrette-deleteme.py:33
 msgid "Political science"
 msgstr ""
 
@@ -215,6 +225,7 @@ msgid "Engineering sciences"
 msgstr ""
 
 #: deposit/hal/metadata.py:73 papers/templates/papers/search.html:208
+#: vinaigrette-deleteme.py:32
 msgid "Statistics"
 msgstr ""
 
@@ -234,74 +245,74 @@ msgstr ""
 msgid "No HAL user credentials provided."
 msgstr ""
 
-#: deposit/hal/protocol.py:216
+#: deposit/hal/protocol.py:219
 msgid "This document is already in HAL. HAL refused the deposit."
 msgstr ""
 
-#: deposit/hal/protocol.py:223
+#: deposit/hal/protocol.py:226
 #, python-format
 msgid "HAL refused the deposit (HTTP error %d): %s"
 msgstr ""
 
-#: deposit/hal/protocol.py:230
+#: deposit/hal/protocol.py:233
 msgid "HAL returned an invalid XML response"
 msgstr ""
 
-#: deposit/hal/protocol.py:242
+#: deposit/hal/protocol.py:245
 msgid "This paper already exists in HAL."
 msgstr ""
 
-#: deposit/hal/protocol.py:248
+#: deposit/hal/protocol.py:251
 msgid "HAL rejected the submission."
 msgstr ""
 
-#: deposit/hal/protocol.py:258
+#: deposit/hal/protocol.py:261
 msgid "HAL rejected the submission"
 msgstr ""
 
-#: deposit/hal/protocol.py:267
+#: deposit/hal/protocol.py:270
 msgid "Password"
 msgstr ""
 
-#: deposit/hal/protocol.py:295
+#: deposit/hal/protocol.py:298
 msgid "Connection to HAL failed. Please try again later."
 msgstr ""
 
-#: deposit/models.py:43
+#: deposit/models.py:44
 msgid "Failed"
 msgstr ""
 
-#: deposit/models.py:44
+#: deposit/models.py:45
 msgid "Faked"
 msgstr ""
 
-#: deposit/models.py:45
+#: deposit/models.py:46
 msgid "Pending publication"
 msgstr ""
 
-#: deposit/models.py:47
+#: deposit/models.py:48
 msgid "Published"
 msgstr ""
 
-#: deposit/models.py:48
+#: deposit/models.py:49
 msgid "Refused by the repository"
 msgstr ""
 
-#: deposit/models.py:49
+#: deposit/models.py:50
 msgid "Deleted"
 msgstr ""
 
-#: deposit/models.py:232 deposit/templates/deposit/start.html:328
+#: deposit/models.py:266 deposit/templates/deposit/start.html:328
 #: deposit/views.py:102
 msgid "Deposit"
 msgstr ""
 
-#: deposit/models.py:285
+#: deposit/models.py:319
 msgid ""
 "We will use this email address to notify you when your deposits are accepted."
 msgstr ""
 
-#: deposit/models.py:291
+#: deposit/models.py:325
 msgid "This repository will be used by default for your deposits."
 msgstr ""
 
@@ -313,11 +324,11 @@ msgstr ""
 msgid "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
 msgstr ""
 
-#: deposit/osf/forms.py:40 deposit/osf/forms.py:51 vinaigrette-deleteme.py:9
+#: deposit/osf/forms.py:40 deposit/osf/forms.py:51 vinaigrette-deleteme.py:108
 msgid "No license"
 msgstr ""
 
-#: deposit/osf/forms.py:57 deposit/osf/forms.py:80
+#: deposit/osf/forms.py:57 deposit/osf/forms.py:80 vinaigrette-deleteme.py:73
 msgid "Architecture"
 msgstr ""
 
@@ -329,7 +340,7 @@ msgstr ""
 msgid "Business"
 msgstr ""
 
-#: deposit/osf/forms.py:65 deposit/osf/forms.py:88
+#: deposit/osf/forms.py:65 deposit/osf/forms.py:88 vinaigrette-deleteme.py:63
 msgid "Engineering"
 msgstr ""
 
@@ -412,8 +423,18 @@ msgstr ""
 msgid "Unable to make the project public."
 msgstr ""
 
-#: deposit/protocol.py:262
+#: deposit/protocol.py:289
 msgid "Failed to connect to the repository. Please try again later."
+msgstr ""
+
+#: deposit/sword/forms.py:15
+msgid "E-mail"
+msgstr ""
+
+#: deposit/sword/protocol.py:252
+msgid ""
+"Username or password not provided for this repository. Please contact the "
+"Dissemin team."
 msgstr ""
 
 #: deposit/templates/deposit/deposits.html:10
@@ -1346,7 +1367,7 @@ msgid "Invalid ORCID profile."
 msgstr ""
 
 #: papers/views.py:295
-msgid " authored by "
+msgid "authored by"
 msgstr ""
 
 #: papers/views.py:346
@@ -2335,7 +2356,7 @@ msgstr ""
 msgid "Logo"
 msgstr ""
 
-#: templates/dissemin/skeleton.html:42
+#: templates/dissemin/skeleton.html:42 vinaigrette-deleteme.py:41
 msgid "Language"
 msgstr ""
 
@@ -2580,34 +2601,374 @@ msgid "Invalid URL."
 msgstr ""
 
 #: vinaigrette-deleteme.py:2
-msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
+msgid "Computer science, knowledge & systems"
 msgstr ""
 
 #: vinaigrette-deleteme.py:3
-msgid "Creative Commons Attribution 4.0 International (CC BY 4.0)"
+msgid "Bibliographies"
 msgstr ""
 
 #: vinaigrette-deleteme.py:4
+msgid "Library & information sciences"
+msgstr ""
+
+#: vinaigrette-deleteme.py:5
+msgid "Encyclopedias & books of facts"
+msgstr ""
+
+#: vinaigrette-deleteme.py:6
+msgid "Magazines, journals & serials"
+msgstr ""
+
+#: vinaigrette-deleteme.py:7
+msgid "Associations, organizations & museums"
+msgstr ""
+
+#: vinaigrette-deleteme.py:8
+msgid "News media, journalism & publishing"
+msgstr ""
+
+#: vinaigrette-deleteme.py:9
+msgid "Quotations"
+msgstr ""
+
+#: vinaigrette-deleteme.py:10
+msgid "Manuscripts & rare books"
+msgstr ""
+
+#: vinaigrette-deleteme.py:12
+msgid "Metaphysics"
+msgstr ""
+
+#: vinaigrette-deleteme.py:13
+msgid "Epistemology"
+msgstr ""
+
+#: vinaigrette-deleteme.py:14
+msgid "Parapsychology & occultism"
+msgstr ""
+
+#: vinaigrette-deleteme.py:15
+msgid "Philosophical schools of thought"
+msgstr ""
+
+#: vinaigrette-deleteme.py:17
+msgid "Philosophical logic"
+msgstr ""
+
+#: vinaigrette-deleteme.py:18
+msgid "Ethics"
+msgstr ""
+
+#: vinaigrette-deleteme.py:19
+msgid "Ancient, medieval & eastern philosophy"
+msgstr ""
+
+#: vinaigrette-deleteme.py:20
+msgid "Modern western philosophy"
+msgstr ""
+
+#: vinaigrette-deleteme.py:21
+msgid "Religion"
+msgstr ""
+
+#: vinaigrette-deleteme.py:22
+msgid "Philosophy & theory of religion"
+msgstr ""
+
+#: vinaigrette-deleteme.py:23
+msgid "The Bible"
+msgstr ""
+
+#: vinaigrette-deleteme.py:24
+msgid "Christianity"
+msgstr ""
+
+#: vinaigrette-deleteme.py:25
+msgid "Christian practice & observance"
+msgstr ""
+
+#: vinaigrette-deleteme.py:26
+msgid "Christian pastoral practice & religious orders"
+msgstr ""
+
+#: vinaigrette-deleteme.py:27
+msgid "Christian organization, social work & worship"
+msgstr ""
+
+#: vinaigrette-deleteme.py:28
+msgid "History of Christianity"
+msgstr ""
+
+#: vinaigrette-deleteme.py:29
+msgid "Christian denominations"
+msgstr ""
+
+#: vinaigrette-deleteme.py:30
+msgid "Other religions"
+msgstr ""
+
+#: vinaigrette-deleteme.py:31
+msgid "Social sciences, sociology & anthropology"
+msgstr ""
+
+#: vinaigrette-deleteme.py:34
+msgid "Economics"
+msgstr ""
+
+#: vinaigrette-deleteme.py:36
+msgid "Public administration & military science"
+msgstr ""
+
+#: vinaigrette-deleteme.py:37
+msgid "Social problems & social services"
+msgstr ""
+
+#: vinaigrette-deleteme.py:39
+msgid "Commerce, communications & transportation"
+msgstr ""
+
+#: vinaigrette-deleteme.py:40
+msgid "Customs, etiquette & folklore"
+msgstr ""
+
+#: vinaigrette-deleteme.py:43
+msgid "English & Old English languages"
+msgstr ""
+
+#: vinaigrette-deleteme.py:44
+msgid "German & related languages"
+msgstr ""
+
+#: vinaigrette-deleteme.py:45
+msgid "French & related languages"
+msgstr ""
+
+#: vinaigrette-deleteme.py:46
+msgid "Italian, Romanian & related languages"
+msgstr ""
+
+#: vinaigrette-deleteme.py:47
+msgid "Spanish, Portuguese, Galician"
+msgstr ""
+
+#: vinaigrette-deleteme.py:48
+msgid "Latin & Italic languages"
+msgstr ""
+
+#: vinaigrette-deleteme.py:49
+msgid "Classical & modern Greek languages"
+msgstr ""
+
+#: vinaigrette-deleteme.py:50
+msgid "Other languages"
+msgstr ""
+
+#: vinaigrette-deleteme.py:51
+msgid "Science"
+msgstr ""
+
+#: vinaigrette-deleteme.py:53
+msgid "Astronomy"
+msgstr ""
+
+#: vinaigrette-deleteme.py:56
+msgid "Earth sciences & geology"
+msgstr ""
+
+#: vinaigrette-deleteme.py:57
+msgid "Fossils & prehistoric life"
+msgstr ""
+
+#: vinaigrette-deleteme.py:58
+msgid "Biology"
+msgstr ""
+
+#: vinaigrette-deleteme.py:59
+msgid "Plants (Botany)"
+msgstr ""
+
+#: vinaigrette-deleteme.py:60
+msgid "Animals (Zoology)"
+msgstr ""
+
+#: vinaigrette-deleteme.py:61
+msgid "Technology"
+msgstr ""
+
+#: vinaigrette-deleteme.py:62
+msgid "Medicine & health"
+msgstr ""
+
+#: vinaigrette-deleteme.py:64
+msgid "Agriculture"
+msgstr ""
+
+#: vinaigrette-deleteme.py:65
+msgid "Home & family management"
+msgstr ""
+
+#: vinaigrette-deleteme.py:66
+msgid "Management & public relations"
+msgstr ""
+
+#: vinaigrette-deleteme.py:67
+msgid "Chemical engineering"
+msgstr ""
+
+#: vinaigrette-deleteme.py:68
+msgid "Manufacturing"
+msgstr ""
+
+#: vinaigrette-deleteme.py:69
+msgid "Manufacture for specific uses"
+msgstr ""
+
+#: vinaigrette-deleteme.py:70
+msgid "Construction of buildings"
+msgstr ""
+
+#: vinaigrette-deleteme.py:71
+msgid "Arts"
+msgstr ""
+
+#: vinaigrette-deleteme.py:72
+msgid "Area planning & landscape architecture"
+msgstr ""
+
+#: vinaigrette-deleteme.py:74
+msgid "Sculpture, ceramics & metalwork"
+msgstr ""
+
+#: vinaigrette-deleteme.py:75
+msgid "Graphic arts & decorative arts"
+msgstr ""
+
+#: vinaigrette-deleteme.py:76
+msgid "Painting"
+msgstr ""
+
+#: vinaigrette-deleteme.py:77
+msgid "Printmaking & prints"
+msgstr ""
+
+#: vinaigrette-deleteme.py:78
+msgid "Photography, computer art, film, video"
+msgstr ""
+
+#: vinaigrette-deleteme.py:79
+msgid "Music"
+msgstr ""
+
+#: vinaigrette-deleteme.py:80
+msgid "Sports, games & entertainment"
+msgstr ""
+
+#: vinaigrette-deleteme.py:81
+msgid "Literature, rhetoric & criticism"
+msgstr ""
+
+#: vinaigrette-deleteme.py:82
+msgid "American literature in English"
+msgstr ""
+
+#: vinaigrette-deleteme.py:83
+msgid "English & Old English literatures"
+msgstr ""
+
+#: vinaigrette-deleteme.py:84
+msgid "German & related literatures"
+msgstr ""
+
+#: vinaigrette-deleteme.py:85
+msgid "French & related literatures"
+msgstr ""
+
+#: vinaigrette-deleteme.py:86
+msgid "Italian, Romanian & related literatures"
+msgstr ""
+
+#: vinaigrette-deleteme.py:87
+msgid "Spanish, Portuguese, Galician literatures"
+msgstr ""
+
+#: vinaigrette-deleteme.py:88
+msgid "Latin & Italic literatures"
+msgstr ""
+
+#: vinaigrette-deleteme.py:89
+msgid "Classical & modern Greek literatures"
+msgstr ""
+
+#: vinaigrette-deleteme.py:90
+msgid "Other literatures"
+msgstr ""
+
+#: vinaigrette-deleteme.py:92
+msgid "Geography & travel"
+msgstr ""
+
+#: vinaigrette-deleteme.py:93
+msgid "Biography & genealogy"
+msgstr ""
+
+#: vinaigrette-deleteme.py:94
+msgid "History of ancient world (to ca. 499)"
+msgstr ""
+
+#: vinaigrette-deleteme.py:95
+msgid "History of Europe"
+msgstr ""
+
+#: vinaigrette-deleteme.py:96
+msgid "History of Asia"
+msgstr ""
+
+#: vinaigrette-deleteme.py:97
+msgid "History of Africa"
+msgstr ""
+
+#: vinaigrette-deleteme.py:98
+msgid "History of North America"
+msgstr ""
+
+#: vinaigrette-deleteme.py:99
+msgid "History of South America"
+msgstr ""
+
+#: vinaigrette-deleteme.py:100
+msgid "History of other areas"
+msgstr ""
+
+#: vinaigrette-deleteme.py:101
+msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
+msgstr ""
+
+#: vinaigrette-deleteme.py:102
+msgid "Creative Commons Attribution 4.0 International (CC BY 4.0)"
+msgstr ""
+
+#: vinaigrette-deleteme.py:103
 msgid ""
 "Creative Commons Attribution-ShareAlike 4.0, International (CC BY-SA 4.0)"
 msgstr ""
 
-#: vinaigrette-deleteme.py:5
+#: vinaigrette-deleteme.py:104
 msgid ""
 "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
 msgstr ""
 
-#: vinaigrette-deleteme.py:6
+#: vinaigrette-deleteme.py:105
 msgid ""
 "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)"
 msgstr ""
 
-#: vinaigrette-deleteme.py:7
+#: vinaigrette-deleteme.py:106
 msgid ""
 "Free for private use; right holder retains other rights, including "
 "distribution"
 msgstr ""
 
-#: vinaigrette-deleteme.py:8
+#: vinaigrette-deleteme.py:107
 msgid "Other open license"
 msgstr ""
