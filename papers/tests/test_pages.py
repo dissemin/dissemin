@@ -25,12 +25,14 @@ import pytest
 
 from mock import patch
 
+from deposit.models import DepositRecord
 from dissemin.settings import BASE_DIR
 from papers.baremodels import BareName
 from papers.models import OaiRecord
 from papers.models import Paper
 from papers.models import Researcher
 from papers.doi import doi_to_url
+from upload.models import UploadedPDF
 
 
 @pytest.mark.usefixtures("load_test_data")
@@ -64,10 +66,21 @@ class TestMiscPages(object):
     Tests various more or less static pages
     """
 
-    def test_index(self, db, check_page):
+    def test_index(self, db, check_page, dummy_repository, book_god_of_the_labyrinth, user_leibniz):
         """
         Tests the start page, which fetches some data from the DB
         """
+        pdf = UploadedPDF.objects.create(
+            user=user_leibniz,
+            file='spam.pdf',
+        )
+        DepositRecord.objects.create(
+            paper=book_god_of_the_labyrinth,
+            user=user_leibniz,
+            repository=dummy_repository,
+            status='published',
+            file=pdf,
+        )
         check_page(200, 'index')
 
 
