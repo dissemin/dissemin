@@ -153,6 +153,7 @@ class BaseMetadataForm(forms.Form):
 
     # License field to choose license
     license = forms.ModelChoiceField(
+        label=_('License'),
         queryset=None,
         empty_label=None,
         initial=None,

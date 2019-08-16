@@ -292,7 +292,7 @@ class ResearcherView(PaperSearchView):
             pass # no logged in user
         context['researcher'] = researcher
         context['researcher_id'] = researcher.id
-        context['search_description'] += _(' authored by ')+str(researcher)
+        context['search_description'] += ' ' + _('authored by') + ' ' +str(researcher)
         context['head_search_description'] = str(researcher)
         context['breadcrumbs'] = researcher.breadcrumbs()
         context['ajax_url'] = reverse(
