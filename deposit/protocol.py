@@ -50,8 +50,7 @@ class DepositResult(object):
     status should be one of DEPOSIT_STATUS_CHOICES
     """
 
-    def __init__(self, identifier=None, splash_url=None, pdf_url=None, logs=None,
-                 status='published', message=None):
+    def __init__(self, identifier=None, splash_url=None, pdf_url=None, logs=None, status='published', message=None):
         self.identifier = identifier
         self.splash_url = splash_url
         self.pdf_url = pdf_url
