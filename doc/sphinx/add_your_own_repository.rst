@@ -54,8 +54,9 @@ You find below our mappings using XPath notation.
     doi => identifier[@type="doi"]
     essn => relatedItem/identifier[@type="eissn"]
     issn => relatedItem/identifier[@type="issn"]
-    issue => relatedItem/part/detail[@type=issue]/number
+    issue => relatedItem/part/detail[@type="issue"]/number
     journal => relatedItem/titleInfo/title
+    language => language/languageTerm[@type="code"][@authority="rfc3066"]
     pages => relatedItem/part/extent[@unit="pages"]/total or start + end
     publisher => originInfo/publisher
     title => titleInfo/title
@@ -64,7 +65,7 @@ You find below our mappings using XPath notation.
 Note that volume, issue and pages are often not arabic numbers, but may contain other literals.
 Although MODS does provide fields for declarations like *No., Vol.* or *p.* we do not use this, because our datasources don't.
 
-Additionally we ship the language as ISO-639-1 determined by `langdetect <https://pypi.org/project/langdetect/>`_.
+We ship the language as rfc3066 determined by `langdetect <https://pypi.org/project/langdetect/>`_.
 We ship the language if both conditions are satisfied:
 
 1. The abstract has a length of at least 256 letters (including whitespaces)
