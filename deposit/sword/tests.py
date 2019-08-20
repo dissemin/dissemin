@@ -2,13 +2,13 @@ import pytest
 import responses
 
 from lxml import etree
-from requests.exceptions import RequestException
 from zipfile import ZipFile
 
 from deposit.sword.forms import SWORDMETSForm
 from deposit.models import DDC
 from deposit.models import LicenseChooser
 from deposit.protocol import DepositError
+from deposit.protocol import DepositResult
 from deposit.sword.protocol import SWORDMETSProtocol
 from deposit.tests.test_protocol import MetaTestProtocol
 
@@ -19,6 +19,63 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
     """
     This class contains some tests that every implemented SWORD protocol shall pass. The tests are not executed as members of this class, but of any subclass.
     """
+
+    def test_get_deposit_result(self):
+        """
+        This test the creation of a DepositResult based on the information from a SWORD response.
+        """
+        identifier = '8128'
+        splash_url = "https://repository.dissem.in/item/{}".format(identifier)
+        response = '''<?xml version="1.0" encoding="utf-8" ?>
+            <entry xmlns="http://www.w3.org/2005/Atom" xmlns:sword="http://purl.org/net/sword/">
+                <sword:originalDeposit href="''' + splash_url + '''">
+                    <sword:depositedOn/>
+                    <sword:depositedBy>dissemin</sword:depositedBy>
+                </sword:originalDeposit>
+            </entry>'''
+
+        dr = self.protocol._get_deposit_result(response)
+
+        assert isinstance(dr, DepositResult)
+        assert dr.identifier == identifier
+        assert dr.splash_url == splash_url
+        assert dr.status == 'pending'
+
+
+    def test_get_deposit_result_invalid_xml(self):
+        """
+        If there's invalid XML, we expect a DepositError
+        """
+        response = "This is no XML"
+
+        with pytest.raises(DepositError):
+            self.protocol._get_deposit_result(response)
+
+
+    @pytest.mark.parametrize(
+        'response', [
+            '''<?xml version="1.0" encoding="utf-8" ?>
+                <entry xmlns="http://www.w3.org/2005/Atom" xmlns:sword="http://purl.org/net/sword/">
+                    <sword:originalDeposit>
+                        <sword:depositedOn/>
+                        <sword:depositedBy>dissemin</sword:depositedBy>
+                    </sword:originalDeposit>
+                </entry>''',
+            '''<?xml version="1.0" encoding="utf-8" ?>
+                <entry xmlns="http://www.w3.org/2005/Atom" xmlns:sword="http://purl.org/net/sword/">
+                <sword:spam>Spanish Inquisition</sword:spam>
+                </entry>''']
+    )
+    def test_get_deposit_result_no_splash_url(self, response):
+        """
+        If the splash url cannot be found, splash_url and identifier must be ``None``.
+        """
+        dr = self.protocol._get_deposit_result(response)
+
+        assert dr.identifier == None
+        assert dr.splash_url == None
+        assert dr.status == 'pending'
+ 
 
     def test_get_mets(self, mets_xsd, metadata_xml_dc, dissemin_xml_1_0):
         """
@@ -114,17 +171,17 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
         # Mocking requests
         responses.add(responses.POST, self.protocol.repository.endpoint, status=201)
 
-        assert self.protocol.submit_deposit(blank_pdf_path, None) == None
+        assert isinstance(self.protocol.submit_deposit(blank_pdf_path, None), DepositResult)
 
 
     @responses.activate
     def test_submit_deposit_server_error(self, blank_pdf_path, monkeypatch_metadata_creation):
         """
-        A test where the repository is not available. Should raise ``requests.exceptions.RequestException``
+        A test where the repository is not available. Should raise ``DepositError``
         """
         responses.add(responses.POST, self.protocol.repository.endpoint, status=401)
 
-        with pytest.raises(RequestException):
+        with pytest.raises(DepositError):
             self.protocol.submit_deposit(blank_pdf_path, None)
 
 
@@ -152,15 +209,6 @@ class TestSWORDMETSProtocolNotImplemented():
         """
         with pytest.raises(NotImplementedError):
             SWORDMETSProtocol._get_xml_metadata(None)
-
-
-    @staticmethod
-    def test_get_deposit_result():
-        """
-        Function must not be implemented in SWORDMETSProtocol
-        """
-        with pytest.raises(NotImplementedError):
-            SWORDMETSProtocol._get_deposit_result(None)
 
 
 @pytest.mark.usefixtures('sword_mods_protocol')

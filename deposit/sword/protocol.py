@@ -13,6 +13,7 @@ from django.utils.translation import ugettext as _
 
 from deposit.models import UserPreferences
 from deposit.protocol import DepositError
+from deposit.protocol import DepositResult
 from deposit.protocol import RepositoryProtocol
 from deposit.sword.forms import SWORDMETSForm
 
@@ -42,13 +43,40 @@ class SWORDMETSProtocol(RepositoryProtocol):
     # The class of the form for the deposit
     form_class = SWORDMETSForm
 
-    @staticmethod
-    def _get_deposit_result(response):
+    def _get_deposit_result(self, response):
         """
-        This function returns a Deposit Result in case of a successful deposition. Please override this function in your sub-protocol.
+        Processes the deposit result as presented by sword.
+        We try to set the splash url.
+        We set deposit_status to pending.
+        We do not set a pdf_url because we expect moderation, so a pdf_url would be a dead link (for samoe time).
         """
-        raise NotImplementedError("Function not implemented")
-    
+        try:
+            sword_statement = etree.fromstring(bytes(response, encoding='utf-8'))
+        except etree.XMLSyntaxError:
+            self.log('Invalid XML response from {}'.format(self.repository.name))
+            raise DepositError(_('The repository {} returned invalid XML').format(self.repository.name))
+
+        original_deposit = sword_statement.find('.//sword:originalDeposit', namespaces=sword_statement.nsmap)
+
+        if original_deposit is None:
+            splash_url = None
+        else:
+            splash_url = original_deposit.get('href', None)
+        if splash_url is not None:
+            identifier = splash_url.split('/')[-1]
+        else:
+            identifier = None
+            msg = 'Found no splash url in XML reposonse from repository {}. Either no originalDeposit was present or the href was missing.'.format(self.repository.name)
+            self.log(msg)
+            logger.warning(msg)
+
+        # We expect that SWORD Repos usually have moderation. If this is at some point not the case, we can make this more flexible
+        status = 'pending'
+
+        deposit_result = DepositResult(identifier=identifier, splash_url=splash_url, status=status)
+
+        return deposit_result
+
 
     @staticmethod
     def _get_mets(metadata, dissemin_metadata):
@@ -265,13 +293,15 @@ class SWORDMETSProtocol(RepositoryProtocol):
         headers = {'Content-type': 'application/zip'}
 
         self.log("### Sending request")
+
         r = requests.post(self.repository.endpoint, auth=auth, headers=headers, files=files, timeout=20)
 
-        r.raise_for_status()
+        self.log_request(r, 201, _('Unable to deposit to repository') + self.repository.name) 
 
-        self.log("### Status response: %s" % r.status_code)
+        #Deposit was successful
 
-        # Deposit was successful
+        self.log("This is what the repository yelled back:")
+        self.log(r.text)
 
         deposit_result = self._get_deposit_result(r.text)
 

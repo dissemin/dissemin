@@ -3,6 +3,7 @@ import pytest
 
 from lxml import etree
 
+from deposit.protocol import DepositResult
 from deposit.sword.protocol import SWORDMETSMODSProtocol
 
 
@@ -70,6 +71,7 @@ def monkeypatch_get_deposit_result(request, monkeypatch):
     Mocks _get_deposit_reult so that it returns ``None`` and does not raise exception.
     """
     def _get_deposit_result(*args, **kwargs):
-        return None
+        deposit_result = DepositResult()
+        return deposit_result
 
     monkeypatch.setattr(request.cls.protocol, '_get_deposit_result', _get_deposit_result)
