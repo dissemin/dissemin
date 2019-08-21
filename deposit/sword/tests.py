@@ -77,6 +77,23 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
         assert dr.status == 'pending'
  
 
+    @pytest.mark.parametrize('email', ['isaac.newton@dissem.in', None])
+    def test_get_form_initial_data(self, book_god_of_the_labyrinth, empty_user_preferences, email):
+        """
+        Check the initial data
+        TODO: Licenses
+        """
+        self.protocol.paper = book_god_of_the_labyrinth
+
+        self.protocol.user = empty_user_preferences.user
+        empty_user_preferences.email = email
+        empty_user_preferences.save()
+
+        initial = self.protocol.get_form_initial_data()
+
+        assert initial.get('paper_id') == book_god_of_the_labyrinth.pk
+        assert initial.get('email', None) == email
+
     def test_get_mets(self, mets_xsd, metadata_xml_dc, dissemin_xml_1_0):
         """
         A test for creating mets from metadata
@@ -216,13 +233,6 @@ class TestSWORDSMETSMODSProtocol(MetaTestSWORDMETSProtocol):
     """
     A test class for named protocol
     """
-
-    def deposit(self):
-        """
-        Manages publication, form and mocking
-        """
-        pass
-
 
     def test_str(self):
         """

@@ -6,8 +6,18 @@ from lxml import etree
 from deposit.models import DDC
 from deposit.models import License
 from deposit.models import LicenseChooser
+from deposit.models import UserPreferences
 from papers.models import Paper
 from papers.models import Researcher
+
+
+@pytest.fixture
+def empty_user_preferences(db, user_isaac_newton):
+    """
+    Returns an empty UserPreferences object
+    """
+    user_prefs, unused = UserPreferences.objects.get_or_create(user=user_isaac_newton)
+    return user_prefs
 
 
 @pytest.fixture()
@@ -22,6 +32,7 @@ def license_standard(db):
     )
 
     return license
+
 
 @pytest.fixture()
 def license_alternative(db):
@@ -143,3 +154,16 @@ def monkeypatch_paper_is_owned(request, monkeypatch):
     Mokeypatch this function to have simpler fixtures. Both function values are resembled.
     """
     monkeypatch.setattr(Paper, 'is_owned_by', lambda *args, **kwargs: request.param)
+
+
+@pytest.fixture
+def request_fake_response():
+    class R:
+        pass
+
+    r = R()
+    r.status_code = 200
+    r.text = 'Spanish Inquisition'
+    r.url = 'https://dissem.in'
+
+    return r
