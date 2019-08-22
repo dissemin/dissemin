@@ -106,13 +106,13 @@ class RepositoryProtocol(object, metaclass = RepositoryProtocolMeta):
         """
         Return the class name if no other value is set.
         """
-        return self.__name__
+        return self.__class__.__name__
     
     def __str__(self):
         """
         Return the class name if no other value is set.
         """
-        return self.__name__ 
+        return self.__class__.__name__
 
     def protocol_identifier(self):
         """

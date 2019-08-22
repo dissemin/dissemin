@@ -188,6 +188,14 @@ class MetaTestProtocol():
         assert deposit_result.status == 'failed'
 
 
+    def test_protocol_registered(self):
+        """
+        This test makes sure that each tested protocol is registered. You can temporarly override this function in your corresponding protocol test as long as you do not have it registered.
+        """
+        p = protocol_registry.get(self.protocol.__class__.__name__)
+        assert issubclass(p, RepositoryProtocol) == True
+
+
 # 1x1 px image used as default logo for the repository
 simple_png_image = b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01\x08\x02\x00\x00\x00\x90wS\xde\x00\x00\x00\tpHYs\x00\x00\x0b\x13\x00\x00\x0b\x13\x01\x00\x9a\x9c\x18\x00\x00\x00\x07tIME\x07\xdf\n\x12\x0c+\x19\x84\x1d/"\x00\x00\x00\x19tEXtComment\x00Created with GIMPW\x81\x0e\x17\x00\x00\x00\x0cIDAT\x08\xd7c\xa8\xa9\xa9\x01\x00\x02\xec\x01u\x90\x90\x1eL\x00\x00\x00\x00IEND\xaeB`\x82'
 

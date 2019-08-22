@@ -15,6 +15,7 @@ from deposit.models import UserPreferences
 from deposit.protocol import DepositError
 from deposit.protocol import DepositResult
 from deposit.protocol import RepositoryProtocol
+from deposit.registry import protocol_registry
 from deposit.sword.forms import SWORDMETSForm
 
 from papers.models import Researcher
@@ -506,3 +507,5 @@ class SWORDMETSMODSProtocol(SWORDMETSProtocol):
         
         return related_item
 
+
+protocol_registry.register(SWORDMETSMODSProtocol)
