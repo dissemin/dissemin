@@ -19,7 +19,7 @@
 {% endblock %}
 
 {% block bodyTitle %}
-{{ search_description }}
+    {{ search_description }}
 {% endblock %}
 
 {% block jsScript %}
@@ -117,272 +117,269 @@ $(function(){
 {% endblock %}
 
 {% block details %}
-<!-- Export citations modal -->
-{% capture as citation_url silent %}
-    {% if not researcher %}
-        {% url 'api-paper-search' %}?format=bibtex&amp;{{ request.GET.urlencode }}
-    {% else %}
-        {% url 'api-researcher-id' researcher=researcher.id slug=researcher.slug %}?format=bibtex&amp;{{ request.GET.urlencode }}
-    {% endif %}
-{% endcapture %}
-{% include 'papers/exportCitationsModal.html' with slug='export.bib' url=citation_url bibtex=object_list|bibtex %}
+    <!-- Export citations modal -->
+    {% capture as citation_url silent %}
+        {% if not researcher %}
+            {% url 'api-paper-search' %}?format=bibtex&amp;{{ request.GET.urlencode }}
+        {% else %}
+            {% url 'api-researcher-id' researcher=researcher.id slug=researcher.slug %}?format=bibtex&amp;{{ request.GET.urlencode }}
+        {% endif %}
+    {% endcapture %}
+    
+    {% include 'papers/exportCitationsModal.html' with slug='export.bib' url=citation_url bibtex=object_list|bibtex %}
 
-{% if researcher %}
-<h3 class="detailsTitle">{% trans "Researcher" %}</h3>
-    <div class="detailsContent">
-        <p id="detail-name">{{ researcher }}</p>
-        {% if not request.user.is_authenticated and not researcher.orcid %}
-        <p class="centered">
-        <a href="{% url 'my-profile' %}" class="btn btn-primary"><img src="{% static "img/orcid-small.png" %}" alt="ORCID" /> {% trans "Is it you?" %}</a>
-        </p>
-        {% endif %}
-        {% if researcher.role %}
-        <p><span id="researcher-role"
-        data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}"
-        data-pk="{{ researcher.pk }}">{{ researcher.role }}</span></p>
-        {% endif %}
-        {% if researcher.homepage %}
-        <p><span class="glyphicon glyphicon-home"></span> <a href="{{ researcher.homepage }}">{{ researcher.homepage|domain }}</a></p>
-        {% endif %}
-        {% if researcher.orcid %}
-        <p><a href="{{ researcher.orcid|orcid_to_url }}" target="_blank" data-toggle="tooltip" title="{% blocktrans with first_name=researcher.name.first last_name=researcher.name.last %} {{ first_name }} {{ last_name }} uses ORCID.{% endblocktrans %}"><img src="{% static "img/orcid-small.png" %}" alt="ORCID" /> {{ researcher.orcid }}</a></p>
-        {% endif %}
-        {% if researcher.institution %}
-        <p><span class="glyphicon glyphicon-star"></span> {{ researcher.institution }}</p>
-        {% endif %}
-        {% if researcher.department %}
-        <p><span class="glyphicon glyphicon-star-empty"></span> <a href="{{ researcher.department.url }}">{{ researcher.department }}</a></p>
-        {% endif %}
-	{% if researcher.user == request.user or request.user.is_superuser %}
-	<p><a href="#" id="refetchPubsButton">{% trans "Refresh publications" %}</a></p>
-	{% endif %}
-        {% if request.user.is_superuser and researcher.email %}
-        <p>{% trans "Address:" %} {{ researcher.email }}</p>
-        {% endif %}
-    </div>
-{% elif department %}
-<h3 class="detailsTitle">{% trans "Department" %}</h3>
-    <div class="detailsContent">
-        <p id="detail-name">{{ department }}</p>
-    </div>
-{% elif journal %}
-<h3 class="detailsTitle">{% trans "Journal" %}</h3>
-    <div class="detailsContent">
-        <p id="detail-name">{{ journal }}</p>
-        <p>{% trans "Published by" %} <a href="{{ journal.publisher.canonical_url }}">{{ journal.publisher }}</a></p>
-        {% if journal.issn %}
-        <p>{% trans "ISSN:" %} {{ journal.issn }}</p>
-        {% endif %}
-        <div class="unselectedCriterion">
-        <div class="pubLogo"><div class="pubLogoPic-{{ journal.publisher.oa_status }}"></div></div>
-        <div class="criterionItem">{{ journal.publisher.oa_status |explain_oa_status}}</div>
-    </div>
-
-    <p><span class="glyphicon glyphicon-stats"></span>
-    {% blocktrans trimmed count nb_publi=journal.stats.num_tot|default:0 %}
-    {{ nb_publi }} paper published in {{ journal }}
-    {% plural %}
-    {{ nb_publi }} papers published in {{ journal }}
-    {% endblocktrans %}
-    </p>
-    </div>
-{% elif publisher %}
-<h3 class="detailsTitle">{% trans "Publisher" %}</h3>
-    <div class="detailsContent">
-        <p><a href="{{ publisher.canonical_url }}">{{ publisher }}</a></p>
-        <div class="unselectedCriterion">
-        <div class="pubLogo"><div class="pubLogoPic-{{ publisher.oa_status }}"></div></div>
-        <div class="criterionItem">{{ publisher.oa_status |explain_oa_status}}</div>
-        </div>
-
-    <p><span class="glyphicon glyphicon-stats"></span>
-    {% blocktrans trimmed count nb_publi=publisher.stats.num_tot|default:0 %}
-    {{ nb_publi }} paper published by {{ publisher }}
-    {% plural %}
-    {{ nb_publi }} papers published by {{ publisher }}
-    {% endblocktrans %}
-    </p>
-    </div>
-{% endif %}
-
-<h3 class="detailsTitle">{% trans "Statistics" %}</h3>
-<div class="detailsContent">
-    <p id="nbPapersFound">
-        {% blocktrans trimmed with formattedCounter=nb_results|intcomma count counter=nb_results|default:0 %}
-            {{ formattedCounter }} paper found
-            {% plural %}
-            {{ formattedCounter }} papers found
-        {% endblocktrans %}
-    </p>
-
-    <form method="get" action="." id="searchPapersStatistics" onChange="$(this).submit()">
-        <div class="form-group" id="searchPaperCombinedStatus">
-            <!-- Keep track of external GET parameters -->
-            <input type="hidden" class="getStorage" name="q" value="{{ form.q.value|default:"" }}"/>
-            <input type="hidden" class="getStorage" name="authors" value="{{ form.authors.value|default:""}}"/>
-            <input type="hidden" class="getStorage" name="pub_after" value="{{ form.pub_after.value|default:""}}"/>
-            <input type="hidden" class="getStorage" name="pub_before" value="{{ form.pub_before.value|default:""}}"/>
-            <input type="hidden" class="getStorage" name="sort_by" value="{{ form.sort_by.value|default:"" }}"/>
-            {% for item in form.doctypes %}
-                <input type="hidden" class="getStorage" name="doctypes" value="{% if item.data.value in form.doctypes.value %}{{ item.data.value }}{% endif %}"/>
-            {% endfor %}
-            {% if request.user.is_superuser %}
-                <input type="hidden" class="getStorage" name="visible" value="{{ form.visible.value|default:"" }}"/>
-                <input type="hidden" class="getStorage" name="availability" value="{{ form.availability.value|default:"" }}"/>
-                {% for item in form.oa_status %}
-                    <input type="hidden" class="getStorage" name="oa_status" value="{% if item.data.value in form.oa_status.value %}{{ item.data.value }}{% endif %}"/>
-                {% endfor %}
+    {% if researcher %}
+        <h3 class="detailsTitle">{% trans "Researcher" %}</h3>
+        <div class="detailsContent">
+            <p id="detail-name">{{ researcher }}</p>
+            {% if not request.user.is_authenticated and not researcher.orcid %}
+                <p class="centered"><a href="{% url 'my-profile' %}" class="btn btn-primary"><img src="{% static "img/orcid-small.png" %}" alt="ORCID" /> {% trans "Is it you?" %}</a></p>
             {% endif %}
-            {% with combined_status_form=True %}
-            {% with combined_status=form.status %}
-            {% include "statistics/pie_without_object.html" with stats=search_stats object_id=researcher.object_id stats_counter=1 %}
-            {% endwith %}
-            {% endwith %}
-            <noscript>{# Clarifies the usage of the checkboxes in the caption of the pie. #}
-                <div class="form-group">
-                    <button type="submit" class="btn btn-default" form="searchPapersStatistics">{% trans "Search" %}</button>
-                </div>
-            </noscript>
-        </div>
-    </form>
-</div>
-
-<h3 class="detailsTitle">{% trans "Tools" %}</h3>
-<div class="detailsContent">
-    <p class="display-inline-block">{% trans "Sort by" %}</p>
-    <div class="dropdown display-inline-block sort-by-dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" id="sortByDropdown" data-toggle="dropdown" aria-expanded="false">
-            <span class="btn-label">{{ current_sort_by }}</span> <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="sortByDropdown">
-            {% for option in form.sort_by %}
-            <li><a href="?{{ search_params_without_sort_by }}&amp;sort_by={{ option.data.value }}" data-sort-by="{{ option.data.value }}">{{ option.data.label }}</a></li>
-            {% endfor %}
-        </ul>
-    </div>
-    <p><a href="#" data-toggle="modal" data-target="#exportCitationModal">{% trans "Export citations for current page" %}</a></p>
-</div>
-
-<h3 class="detailsTitle">{% trans "Refine" %}</h3>
-<div class="detailsContent">
-    <form method="get" action="." id="searchPapers" onChange="$(this).submit()">
-        <!-- Keep track of external GET parameters -->
-        {% for item in form.status %}
-            <input type="hidden" class="getStorage" name="status" value="{% if item.data.value in form.status.value %}{{ item.data.value }}{% endif %}"/>
-        {% endfor %}
-        <input type="hidden" class="getStorage" name="sort_by" value="{{ form.sort_by.value|default:"" }}"/>
-        <!-- Actual refine search fields -->
-        <div class="form-group" id="searchPapersName">
-            <label for="{{ form.q.id_for_label }}">
-                <a data-toggle="collapse" href="#{{ form.q.id_for_label }}" role="button" {% if form.q.value %}aria-expanded="true"{% else %}aria-expanded="false"{%endif%} aria-controls="{{ form.q.id_for_label }}">{% trans "By title" %}<span class="caret"></span></a>
-            </label>
-            {{ form.q.errors }}
-            {% if form.q.value %}
-                {% render_field form.q class="form-control collapse in" %}
-            {% else %}
-                {% render_field form.q class="form-control collapse" %}
+            {% if researcher.role %}
+                <p><span id="researcher-role" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}" data-pk="{{ researcher.pk }}">{{ researcher.role }}</span></p>
+            {% endif %}
+            {% if researcher.homepage %}
+                <p><span class="glyphicon glyphicon-home"></span> <a href="{{ researcher.homepage }}">{{ researcher.homepage|domain }}</a></p>
+            {% endif %}
+            {% if researcher.orcid %}
+                <p><a href="{{ researcher.orcid|orcid_to_url }}" target="_blank" data-toggle="tooltip" title="{% blocktrans with first_name=researcher.name.first last_name=researcher.name.last %} {{ first_name }} {{ last_name }} uses ORCID.{% endblocktrans %}"><img src="{% static "img/orcid-small.png" %}" alt="ORCID" /> {{ researcher.orcid }}</a></p>
+            {% endif %}
+            {% if researcher.institution %}
+                <p><span class="glyphicon glyphicon-star"></span> {{ researcher.institution }}</p>
+            {% endif %}
+            {% if researcher.department %}
+                <p><span class="glyphicon glyphicon-star-empty"></span> <a href="{{ researcher.department.url }}">{{ researcher.department }}</a></p>
+            {% endif %}
+            {% if researcher.user == request.user or request.user.is_superuser %}
+                <p><a href="#" id="refetchPubsButton">{% trans "Refresh publications" %}</a></p>
+            {% endif %}
+            {% if request.user.is_superuser and researcher.email %}
+                <p>{% trans "Address:" %} {{ researcher.email }}</p>
             {% endif %}
         </div>
-        <div class="form-group" id="searchAuthorsName">
-            <label for="{{ form.authors.id_for_label }}">
-                <a data-toggle="collapse" href="#{{ form.authors.id_for_label }}" role="button" {% if form.authors.value %}aria-expanded="true"{% else %}aria-expanded="false"{%endif%} aria-controls="{{ form.authors.id_for_label }}">
-                    {% if researcher %}
-                        {% trans "By co-authors" %}
-                    {% else %}
-                        {% trans "By authors" %}
-                    {% endif %}
-                    <span class="caret"></span>
-                </a><span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="bottom" data-html="true"  title="{% filter force_escape %}{% trans "<ul><li>Use author names or ORCID identifiers.</li><li>Use commas as name separator.</li><li>Prefix with <code>last:</code> to enforce last name search.</li></ul>" %}{% endfilter %}" tabindex="0"></span>
-            </label>
-            {{ form.authors.errors }}
-            {% if form.authors.value %}
-                {% render_field form.authors class="form-control collapse in" %}
-            {% else %}
-                {% render_field form.authors class="form-control collapse" %}
-            {% endif %}
+
+    {% elif department %}
+        <h3 class="detailsTitle">{% trans "Department" %}</h3>
+        <div class="detailsContent">
+            <p id="detail-name">{{ department }}</p>
         </div>
-        <div class="form-horizontal">
-            <a class="linkLabel" data-toggle="collapse" href="#searchPaperPubDateGroup" role="button" aria-expanded="{% if form.pub_after.value or form.pub_before.value %}true{% else %}false{% endif %}" aria-controls="searchPaperPubDateGroup">{% trans "By publication date" %}<span class="caret"></span></a>
-            <div class="collapse {% if form.pub_after.value or form.pub_before.value %}in{% endif %}" id="searchPaperPubDateGroup">
-                <div class="form-group" id="searchPaperPubDateAfter">
-                    {{ form.pub_after.errors }}
-                    <label class="col-xs-2 col-sm-3 control-label tightLabel" for="{{ form.pub_after.id_for_label }}">{% trans "after" %}</label>
-                    <div class="col-xs-10 col-sm-9 tightInput">
-                        {% render_field form.pub_after class="form-control" %}
-                    </div>
-                </div>
-                <div class="form-group" id="searchPaperPubDateBefore">
-                    {{ form.pub_before.errors }}
-                    <label class="col-xs-2 col-sm-3 control-label tightLabel" for="{{ form.pub_before.id_for_label }}">{% trans "before" %}</label>
-                    <div class="col-xs-10 col-sm-9 tightInput">
-                        {% render_field form.pub_before class="form-control" %}
-                    </div>
-                </div>
+
+    {% elif journal %}
+        <h3 class="detailsTitle">{% trans "Journal" %}</h3>
+        <div class="detailsContent">
+            <p id="detail-name">{{ journal }}</p>
+            <p>{% trans "Published by" %} <a href="{{ journal.publisher.canonical_url }}">{{ journal.publisher }}</a></p>
+            {% if journal.issn %}
+                <p>{% trans "ISSN:" %} {{ journal.issn }}</p>
+            {% endif %}
+            <div class="unselectedCriterion">
+                <div class="pubLogo"><div class="pubLogoPic-{{ journal.publisher.oa_status }}"></div></div>
+                <div class="criterionItem">{{ journal.publisher.oa_status |explain_oa_status}}</div>
             </div>
+            <p><span class="glyphicon glyphicon-stats"></span>
+                {% blocktrans trimmed count nb_publi=journal.stats.num_tot|default:0 %}
+                    {{ nb_publi }} paper published in {{ journal }}
+                    {% plural %}
+                    {{ nb_publi }} papers published in {{ journal }}
+                {% endblocktrans %}
+           </p>
         </div>
-        <div class="form-group" id="searchPapersDoctype">
-            <label><a data-toggle="collapse" href="#searchPaperDoctypeList" role="button" aria-expanded="{% if form.doctypes.value %}true{% else %}false{% endif %}" aria-controls="searchPaperDoctypeList">{% trans "By document type" %}<span class="caret"></span></a></label>
-            {{ form.doctypes.errors }}
 
-            <ul class="compactList collapse {% if form.doctypes.value %}in{% endif %}" id="searchPaperDoctypeList">
-                {% for checkbox in form.doctypes %}
-                <li class="checkbox">
-                    <label class="doctype">
-                        {{ checkbox.tag }}
-                        {{ checkbox.choice_label }}
-                    </label>
-                </li>
+    {% elif publisher %}
+        <h3 class="detailsTitle">{% trans "Publisher" %}</h3>
+        <div class="detailsContent">
+            <p><a href="{{ publisher.canonical_url }}">{{ publisher }}</a></p>
+            <div class="unselectedCriterion">
+                <div class="pubLogo"><div class="pubLogoPic-{{ publisher.oa_status }}"></div></div>
+                <div class="criterionItem">{{ publisher.oa_status |explain_oa_status}}</div>
+            </div>
+            <p><span class="glyphicon glyphicon-stats"></span>
+                {% blocktrans trimmed count nb_publi=publisher.stats.num_tot|default:0 %}
+                    {{ nb_publi }} paper published by {{ publisher }}
+                    {% plural %}
+                    {{ nb_publi }} papers published by {{ publisher }}
+                {% endblocktrans %}
+            </p>
+        </div>
+    {% endif %}
+
+    <h3 class="detailsTitle">{% trans "Statistics" %}</h3>
+    <div class="detailsContent">
+        <p id="nbPapersFound">
+            {% blocktrans trimmed with formattedCounter=nb_results|intcomma count counter=nb_results|default:0 %}
+                {{ formattedCounter }} paper found
+                {% plural %}
+                {{ formattedCounter }} papers found
+            {% endblocktrans %}
+        </p>
+
+        <form method="get" action="." id="searchPapersStatistics" onChange="$(this).submit()">
+            <div class="form-group" id="searchPaperCombinedStatus">
+                <!-- Keep track of external GET parameters -->
+                <input type="hidden" class="getStorage" name="q" value="{{ form.q.value|default:"" }}"/>
+                <input type="hidden" class="getStorage" name="authors" value="{{ form.authors.value|default:""}}"/>
+                <input type="hidden" class="getStorage" name="pub_after" value="{{ form.pub_after.value|default:""}}"/>
+                <input type="hidden" class="getStorage" name="pub_before" value="{{ form.pub_before.value|default:""}}"/>
+                <input type="hidden" class="getStorage" name="sort_by" value="{{ form.sort_by.value|default:"" }}"/>
+                {% for item in form.doctypes %}
+                    <input type="hidden" class="getStorage" name="doctypes" value="{% if item.data.value in form.doctypes.value %}{{ item.data.value }}{% endif %}"/>
                 {% endfor %}
+                {% if request.user.is_superuser %}
+                    <input type="hidden" class="getStorage" name="visible" value="{{ form.visible.value|default:"" }}"/>
+                    <input type="hidden" class="getStorage" name="availability" value="{{ form.availability.value|default:"" }}"/>
+                    {% for item in form.oa_status %}
+                        <input type="hidden" class="getStorage" name="oa_status" value="{% if item.data.value in form.oa_status.value %}{{ item.data.value }}{% endif %}"/>
+                    {% endfor %}
+                {% endif %}
+                {% with combined_status_form=True %}
+                    {% with combined_status=form.status %}
+                        {% include "statistics/pie_without_object.html" with stats=search_stats object_id=researcher.object_id stats_counter=1 %}
+                    {% endwith %}
+                {% endwith %}
+                <noscript>{# Clarifies the usage of the checkboxes in the caption of the pie. #}
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-default" form="searchPapersStatistics">{% trans "Search" %}</button>
+                    </div>
+                </noscript>
+            </div>
+        </form>
+    </div>
+
+    <h3 class="detailsTitle">{% trans "Tools" %}</h3>
+    <div class="detailsContent">
+        <p class="display-inline-block">{% trans "Sort by" %}</p>
+        <div class="dropdown display-inline-block sort-by-dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="sortByDropdown" data-toggle="dropdown" aria-expanded="false">
+                <span class="btn-label">{{ current_sort_by }}</span> <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="sortByDropdown">
+                {% for option in form.sort_by %}
+                    <li><a href="?{{ search_params_without_sort_by }}&amp;sort_by={{ option.data.value }}" data-sort-by="{{ option.data.value }}">{{ option.data.label }}</a></li>
+            {% endfor %}
             </ul>
         </div>
-        {% if request.user.is_superuser %}
-        <div class="form-group" id="searchPapersVisibility">
-            <label for="{{ form.visible.id_for_label }}">{% trans "By visibility" %}</label>
-            {{ form.visible.errors }}
-            {% render_field form.visible class="form-control" %}
-        </div>
-        <div class="form-group" id="searchPapersPDFAvailability">
-            <label for="{{ form.availability.id_for_label }}">{% trans "By full text availability" %}</label>
-            {{ form.availability.errors }}
-            {% render_field form.availability class="form-control" %}
-        </div>
-        <div class="form-group" id="searchPapersOAStatus">
-            {{ form.oa_status.errors }}
-            <span class="span-label">{% trans "By publisher policy" %}</span>
-            {% for checkbox in form.oa_status %}
-            {% with value=checkbox.data.value %}
-            <div class="logoHelpPopover" data-content="{{ value|helptext_oa_status }}">
-            <div class="checkbox publisherCriterion">
-                {{ checkbox.tag }}
-                <div class="publisherCriterionBox">
-                <label for="{{ checkbox.id_for_label }}">
-                    <img alt="{{ value|helptext_oa_status }}" src="{% static value|logo_oa_status %}" height="70" width="52" class="pubLogo publisherCriterionLogo">
-                    <span class="criterionItem">{{ checkbox.choice_label }}</span>
+        <p><a href="#" data-toggle="modal" data-target="#exportCitationModal">{% trans "Export citations for current page" %}</a></p>
+    </div>
+
+    <h3 class="detailsTitle">{% trans "Refine" %}</h3>
+    <div class="detailsContent">
+        <form method="get" action="." id="searchPapers" onChange="$(this).submit()">
+            <!-- Keep track of external GET parameters -->
+            {% for item in form.status %}
+                <input type="hidden" class="getStorage" name="status" value="{% if item.data.value in form.status.value %}{{ item.data.value }}{% endif %}"/>
+            {% endfor %}
+            <input type="hidden" class="getStorage" name="sort_by" value="{{ form.sort_by.value|default:"" }}"/>
+            <!-- Actual refine search fields -->
+            <div class="form-group" id="searchPapersName">
+                <label for="{{ form.q.id_for_label }}">
+                    <a data-toggle="collapse" href="#{{ form.q.id_for_label }}" role="button" {% if form.q.value %}aria-expanded="true"{% else %}aria-expanded="false"{%endif%} aria-controls="{{ form.q.id_for_label }}">{% trans "By title" %}<span class="caret"></span></a>
                 </label>
+                {{ form.q.errors }}
+                {% if form.q.value %}
+                    {% render_field form.q class="form-control collapse in" %}
+                {% else %}
+                    {% render_field form.q class="form-control collapse" %}
+                {% endif %}
+            </div>
+            <div class="form-group" id="searchAuthorsName">
+                <label for="{{ form.authors.id_for_label }}">
+                    <a data-toggle="collapse" href="#{{ form.authors.id_for_label }}" role="button" {% if form.authors.value %}aria-expanded="true"{% else %}aria-expanded="false"{%endif%} aria-controls="{{ form.authors.id_for_label }}">
+                        {% if researcher %}
+                            {% trans "By co-authors" %}
+                        {% else %}
+                            {% trans "By authors" %}
+                        {% endif %}
+                        <span class="caret"></span>
+                    </a><span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="bottom" data-html="true"  title="{% filter force_escape %}{% trans "<ul><li>Use author names or ORCID identifiers.</li><li>Use commas as name separator.</li><li>Prefix with <code>last:</code> to enforce last name search.</li></ul>" %}{% endfilter %}" tabindex="0"></span>
+                </label>
+                {{ form.authors.errors }}
+                {% if form.authors.value %}
+                    {% render_field form.authors class="form-control collapse in" %}
+                {% else %}
+                    {% render_field form.authors class="form-control collapse" %}
+                {% endif %}
+            </div>
+            <div class="form-horizontal">
+                <a class="linkLabel" data-toggle="collapse" href="#searchPaperPubDateGroup" role="button" aria-expanded="{% if form.pub_after.value or form.pub_before.value %}true{% else %}false{% endif %}" aria-controls="searchPaperPubDateGroup">{% trans "By publication date" %}<span class="caret"></span></a>
+                <div class="collapse {% if form.pub_after.value or form.pub_before.value %}in{% endif %}" id="searchPaperPubDateGroup">
+                    <div class="form-group" id="searchPaperPubDateAfter">
+                        {{ form.pub_after.errors }}
+                        <label class="col-xs-2 col-sm-3 control-label tightLabel" for="{{ form.pub_after.id_for_label }}">{% trans "after" %}</label>
+                        <div class="col-xs-10 col-sm-9 tightInput">
+                            {% render_field form.pub_after class="form-control" %}
+                        </div>
+                    </div>
+                    <div class="form-group" id="searchPaperPubDateBefore">
+                        {{ form.pub_before.errors }}
+                        <label class="col-xs-2 col-sm-3 control-label tightLabel" for="{{ form.pub_before.id_for_label }}">{% trans "before" %}</label>
+                        <div class="col-xs-10 col-sm-9 tightInput">
+                            {% render_field form.pub_before class="form-control" %}
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div class="form-group" id="searchPapersDoctype">
+                <label><a data-toggle="collapse" href="#searchPaperDoctypeList" role="button" aria-expanded="{% if form.doctypes.value %}true{% else %}false{% endif %}" aria-controls="searchPaperDoctypeList">{% trans "By document type" %}<span class="caret"></span></a></label>
+                {{ form.doctypes.errors }}
+                <ul class="compactList collapse {% if form.doctypes.value %}in{% endif %}" id="searchPaperDoctypeList">
+                    {% for checkbox in form.doctypes %}
+                        <li class="checkbox">
+                            <label class="doctype">
+                                {{ checkbox.tag }}
+                                {{ checkbox.choice_label }}
+                            </label>
+                        </li>
+                    {% endfor %}
+                </ul>
             </div>
-            {% endwith %}
-            {% endfor %}
-        </div>
-        {% endif %}
-        <div class="form-group text-center">
-            <button type="submit" class="btn btn-primary btn-search">
-                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;{% trans "Search" %}
-            </button>
-        </div>
-    </form>
-</div>
+
+            {% if request.user.is_superuser %}
+                <div class="form-group" id="searchPapersVisibility">
+                    <label for="{{ form.visible.id_for_label }}">{% trans "By visibility" %}</label>
+                    {{ form.visible.errors }}
+                    {% render_field form.visible class="form-control" %}
+                </div>
+                <div class="form-group" id="searchPapersPDFAvailability">
+                    <label for="{{ form.availability.id_for_label }}">{% trans "By full text availability" %}</label>
+                    {{ form.availability.errors }}
+                    {% render_field form.availability class="form-control" %}
+                </div>
+                <div class="form-group" id="searchPapersOAStatus">
+                    {{ form.oa_status.errors }}
+                    <span class="span-label">{% trans "By publisher policy" %}</span>
+                    {% for checkbox in form.oa_status %}
+                        {% with value=checkbox.data.value %}
+                            <div class="logoHelpPopover" data-content="{{ value|helptext_oa_status }}">
+                                <div class="checkbox publisherCriterion">
+                                    {{ checkbox.tag }}
+                                    <div class="publisherCriterionBox">
+                                        <label for="{{ checkbox.id_for_label }}">
+                                            <img alt="{{ value|helptext_oa_status }}" src="{% static value|logo_oa_status %}" height="70" width="52" class="pubLogo publisherCriterionLogo">
+                                            <span class="criterionItem">{{ checkbox.choice_label }}</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endwith %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-primary btn-search">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;{% trans "Search" %}
+                </button>
+            </div>
+        </form>
+    </div>
 {% endblock %}
 
 {% block lists %}
-<div id="waitingAreaContainer">
-</div>
+    <div id="waitingAreaContainer"></div>
 
- <ul class="messages">
- </ul>
+    <ul class="messages"></ul>
 
- <div id="paperSearchResults">
-     {% include "papers/paperList.html" %}
- </div>
+    <div id="paperSearchResults">
+         {% include "papers/paperList.html" %}
+    </div>
 {% endblock %}
