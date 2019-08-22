@@ -6,8 +6,82 @@ from lxml import etree
 from deposit.models import DDC
 from deposit.models import License
 from deposit.models import LicenseChooser
+from deposit.models import UserPreferences
 from papers.models import Paper
 from papers.models import Researcher
+
+
+@pytest.fixture(params=[None, '2543-2454-2345-234X'])
+def depositing_user(db, request, user_leibniz):
+    """
+    Depositing user with Researcher profile with and without ORCID
+    """
+    Researcher.create_by_name(
+        user=user_leibniz,
+        first=user_leibniz.first_name,
+        last=user_leibniz.last_name,
+        orcid=request.param,
+    )
+
+    return user_leibniz
+
+
+@pytest.fixture(params=[True, False])
+def ddc(request, db):
+    """
+    Run tests for protocol with repository having a DDC and not having a DDC
+    """
+    if request.param:
+        all_ddc = DDC.objects.all()
+        request.cls.protocol.repository.ddc.add(*all_ddc)
+        return all_ddc
+    else:
+        return None
+
+
+@pytest.fixture
+def dissemin_xml_1_0():
+    '''
+    Loads a dissemin xml document ready to be manipulated and be validated
+    '''
+    directory = os.path.dirname(os.path.abspath(__file__))
+    parser = etree.XMLParser(remove_blank_text=True)
+    return etree.parse(os.path.join(directory, 'schema', 'test_data', 'dissemin_v1.0.xml'), parser).getroot()
+
+
+@pytest.fixture(scope="session")
+def dissemin_xsd_1_0():
+    '''
+    Loads dissemin xsd and prepares it as schema ready for validation.
+    '''
+
+    testdir = os.path.dirname(os.path.abspath(__file__))
+    dissemin_xsd = etree.parse(os.path.join(testdir, 'schema','dissemin_v1.0.xsd'))
+    return etree.XMLSchema(dissemin_xsd)
+
+
+@pytest.fixture
+def empty_user_preferences(db, user_isaac_newton):
+    """
+    Returns an empty UserPreferences object
+    """
+    user_prefs, unused = UserPreferences.objects.get_or_create(user=user_isaac_newton)
+    return user_prefs
+
+
+@pytest.fixture()
+def license_alternative(db):
+    """
+    Returns an alternative test license
+    Use this license, if you need two of them
+    """
+
+    license = License.objects.get_or_create(
+        name="Alternative License",
+        uri="https://dissem.in/deposit/license/alternative"
+    )
+
+    return license
 
 
 @pytest.fixture()
@@ -23,19 +97,43 @@ def license_standard(db):
 
     return license
 
-@pytest.fixture()
-def license_alternative(db):
-    """
-    Returns an alternative test license
-    Use this license, if you need two of them
-    """
 
-    license = License.objects.get_or_create(
-        name="Alternative License",
-        uri="https://dissem.in/deposit/license/alternative"
-    )
+@pytest.fixture(params=[True, False])
+def license_chooser(db, request):
+    """
+    Creates a LicenseChooser object connected to repository and CC 0 license that is available by migration
+    """
+    if request.param:
+        l = License.objects.get(uri='https://creativecommons.org/publicdomain/zero/1.0/')
+        lc = LicenseChooser.objects.create(
+            license=l,
+            repository=request.cls.protocol.repository,
+            transmit_id='cc-zero-1.0'
+        )
+        return lc
+    else:
+        return False
 
-    return license
+
+@pytest.fixture(params=[True, False])
+def monkeypatch_paper_is_owned(request, monkeypatch):
+    """
+    Mokeypatch this function to have simpler fixtures. Both function values are resembled.
+    """
+    monkeypatch.setattr(Paper, 'is_owned_by', lambda *args, **kwargs: request.param)
+
+
+@pytest.fixture
+def request_fake_response():
+    class R:
+        pass
+
+    r = R()
+    r.status_code = 200
+    r.text = 'Spanish Inquisition'
+    r.url = 'https://dissem.in'
+
+    return r
 
 
 # This is a list of oairecords to be tested
@@ -69,77 +167,3 @@ def upload_data(request, load_json):
     Loads the above list of publications and returns form data the user has to fill in.
     """
     return load_json.load_upload(request.param)
-
-
-@pytest.fixture(params=[True, False])
-def ddc(request, db):
-    """
-    Run tests for protocol with repository having a DDC and not having a DDC
-    """
-    if request.param:
-        all_ddc = DDC.objects.all()
-        request.cls.protocol.repository.ddc.add(*all_ddc)
-        return all_ddc
-    else:
-        return None
-
-
-@pytest.fixture(params=[None, '2543-2454-2345-234X'])
-def depositing_user(db, request, user_leibniz):
-    """
-    Depositing user with Researcher profile with and without ORCID
-    """
-    Researcher.create_by_name(
-        user=user_leibniz,
-        first=user_leibniz.first_name,
-        last=user_leibniz.last_name,
-        orcid=request.param,
-    )
-
-    return user_leibniz
-
-
-@pytest.fixture
-def dissemin_xml_1_0():
-    '''
-    Loads a dissemin xml document ready to be manipulated and be validated
-    '''
-    directory = os.path.dirname(os.path.abspath(__file__))
-    parser = etree.XMLParser(remove_blank_text=True)
-    return etree.parse(os.path.join(directory, 'schema', 'test_data', 'dissemin_v1.0.xml'), parser).getroot()
-
-
-@pytest.fixture(scope="session")
-def dissemin_xsd_1_0():
-    '''
-    Loads dissemin xsd and prepares it as schema ready for validation.
-    '''
-
-    testdir = os.path.dirname(os.path.abspath(__file__))
-    dissemin_xsd = etree.parse(os.path.join(testdir, 'schema','dissemin_v1.0.xsd'))
-    return etree.XMLSchema(dissemin_xsd)
-
-
-@pytest.fixture(params=[True, False])
-def license_chooser(db, request):
-    """
-    Creates a LicenseChooser object connected to repository and CC 0 license that is available by migration
-    """
-    if request.param:
-        l = License.objects.get(uri='https://creativecommons.org/publicdomain/zero/1.0/')
-        lc = LicenseChooser.objects.create(
-            license=l,
-            repository=request.cls.protocol.repository,
-            transmit_id='cc-zero-1.0'
-        )
-        return lc
-    else:
-        return False
-
-
-@pytest.fixture(params=[True, False])
-def monkeypatch_paper_is_owned(request, monkeypatch):
-    """
-    Mokeypatch this function to have simpler fixtures. Both function values are resembled.
-    """
-    monkeypatch.setattr(Paper, 'is_owned_by', lambda *args, **kwargs: request.param)

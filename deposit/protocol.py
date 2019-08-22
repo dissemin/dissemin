@@ -89,10 +89,9 @@ class RepositoryProtocol(object, metaclass = RepositoryProtocolMeta):
     #. The class of the form for the deposit
     form_class = BaseMetadataForm
 
-    #: The name of the model for the user preferences
+    #: The model for the user preferences
     #: (set to None if no preferences can be set).
-    #: The format should be (app_label, model_name) otherwise.
-    preferences_model_name = None
+    preferences_model = None
 
     #: The class of the form to edit the user preferences
     preferences_form_class = None
@@ -107,13 +106,13 @@ class RepositoryProtocol(object, metaclass = RepositoryProtocolMeta):
         """
         Return the class name if no other value is set.
         """
-        return self.__name__
+        return self.__class__.__name__
     
     def __str__(self):
         """
         Return the class name if no other value is set.
         """
-        return self.__name__ 
+        return self.__class__.__name__
 
     def protocol_identifier(self):
         """

@@ -25,8 +25,10 @@ import django.test
 import pytest
 import os
 
+from deposit.models import DDC
 from deposit.models import License
 from deposit.models import LicenseChooser
+from deposit.protocol import DepositError
 from deposit.protocol import DepositResult
 from deposit.protocol import RepositoryProtocol
 from deposit.registry import protocol_registry
@@ -36,6 +38,7 @@ from django.forms import Form
 from django.test.utils import override_settings
 from django.urls import reverse
 from papers.models import OaiSource
+from papers.models import OaiRecord
 from papers.models import Paper
 from deposit.tasks import refresh_deposit_statuses
 
@@ -43,24 +46,10 @@ from deposit.tasks import refresh_deposit_statuses
 class MetaTestProtocol():
     """
     This class contains some tests that every implemented protocol shall pass. The tests are not executed as members of this class, but of any subclass.
+    If you change one of the tested functions in your subclassed protocol, please override the test in the corresponding test class.
     """
 
-    def deposit(self):
-        """
-        Replace this function in your testsubclass with suitable assert statements and so on.
-        """
-        raise NotImplementedError("This function must be overriden by any subclass")
-
-
-    def test_deposit(self):
-        """
-        Tests the deposition. This function calls :meth:`deposit` unless it's not a member of a subclass.
-        Do not override this function. Please override :meth:`deposit`.
-        """
-        self.deposit()
-
-
-    def test_deposit_page(self, authenticated_client, rendering_get_page, book_god_of_the_labyrinth):
+    def test_deposit_page_status(self, authenticated_client, rendering_get_page, book_god_of_the_labyrinth):
         """
         Test the deposit page for HTTP Response 200
         """
@@ -77,12 +66,32 @@ class MetaTestProtocol():
         assert isinstance(form, Form)
 
 
-    def test_init_deposit_type(self, user_isaac_newton, book_god_of_the_labyrinth):
+    def test_init_deposit(self, user_isaac_newton, book_god_of_the_labyrinth):
         """
         init_deposit shall return a bool
         """
-        retval = self.protocol.init_deposit(user_isaac_newton, book_god_of_the_labyrinth)
-        assert type(retval) == bool
+        result = self.protocol.init_deposit(book_god_of_the_labyrinth, user_isaac_newton)
+        assert self.protocol.paper == book_god_of_the_labyrinth
+        assert self.protocol.user == user_isaac_newton
+        assert self.protocol._logs == ''
+        assert result == True
+
+
+    def test_get_ddcs(self, db):
+        """
+        Function should return a queryset of length > 1 of DDCs if DDCs are choosen
+        """
+        for ddc in DDC.objects.all():
+            self.protocol.repository.ddc.add(ddc)
+
+        assert len(self.protocol._get_ddcs()) == DDC.objects.all().count()
+
+
+    def test_get_ddcs_none(self):
+        """
+        Function should return ``None`` if noe DDS selected for repository
+        """
+        assert self.protocol._get_ddcs() == None
 
 
     def test_get_licenses(self, db):
@@ -106,6 +115,40 @@ class MetaTestProtocol():
         assert self.protocol._get_licenses() == None
 
 
+    def test_get_preferences(self, user_isaac_newton):
+        """
+        If a protocol has preferences, return object, else ``None``
+        """
+        if self.protocol.preferences_model is None:
+            assert self.protocol.get_preferences(user_isaac_newton) == None
+        else:
+            assert isinstance(self.protocol.get_preferences(user_isaac_newton), self.protocol.preferences_model)
+
+
+    def test_log(self):
+        """
+        Simply append a line to self._logs
+        """
+        msg = 'Spanish Inquisition'
+        self.protocol.log(msg)
+        assert self.protocol._logs == msg + "\n"
+
+
+    def test_log_request(self, request_fake_response):
+        """
+        Tests the log request.
+        """
+        assert self.protocol.log_request(request_fake_response, 200, 'Does not serve') == None
+
+
+    def test_log_request_error(self, request_fake_response):
+        """
+        Tests the log request
+        """
+        with pytest.raises(DepositError):
+            self.protocol.log_request(request_fake_response, 201, 'Does not serve')
+
+
     def test_protocol_identifier(self):
         """
         Identifier should exist
@@ -113,6 +156,44 @@ class MetaTestProtocol():
         assert len(self.protocol.protocol_identifier()) > 1
 
 
+    @pytest.mark.parametrize('splash_url, expected_splash_url', [(None, type(None)), ('https://repository.dissem.in/1/spam.pdf', OaiRecord)])
+    def test_submit_deposit_wrapper(self, splash_url, expected_splash_url, book_god_of_the_labyrinth, monkeypatch):
+        """
+        We monkeypatch the submit_deposit to return a DepositResult.
+        """
+        self.protocol.paper = book_god_of_the_labyrinth
+        dr = DepositResult(splash_url=splash_url)
+
+        monkeypatch.setattr(self.protocol, 'submit_deposit', lambda *args, **kwargs: dr)
+
+        deposit_result = self.protocol.submit_deposit_wrapper()
+
+        assert isinstance(deposit_result, DepositResult)
+        assert isinstance(deposit_result.oairecord, expected_splash_url)
+
+    @pytest.mark.parametrize('exc', [DepositError, Exception])
+    def test_submit_deposit_wrapper_exception(self, book_god_of_the_labyrinth, exc, monkeypatch):
+        """
+        Something went wrong when depositing. Exceptions must be fetched and Deposit status status must be "failed". To do that we simply monkeypatch submit_deposit
+        """
+        self.protocol.paper = book_god_of_the_labyrinth
+
+        def submit_deposit(self, *args, **kwargs):
+            raise exc
+
+        monkeypatch.setattr(self.protocol, 'submit_deposit', submit_deposit)
+
+        deposit_result = self.protocol.submit_deposit_wrapper()
+
+        assert deposit_result.status == 'failed'
+
+
+    def test_protocol_registered(self):
+        """
+        This test makes sure that each tested protocol is registered. You can temporarly override this function in your corresponding protocol test as long as you do not have it registered.
+        """
+        p = protocol_registry.get(self.protocol.__class__.__name__)
+        assert issubclass(p, RepositoryProtocol) == True
 
 
 # 1x1 px image used as default logo for the repository
