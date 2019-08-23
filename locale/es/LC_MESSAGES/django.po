@@ -5,6 +5,7 @@
 # Author: Becks
 # Author: Fitoschido
 # Author: Harvest
+# Author: Johny Weissmuller Jr
 # Author: KATRINE1992
 # Author: Macofe
 # Author: Pato
@@ -17,7 +18,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-16 09:41+0200\n"
-"PO-Revision-Date: 2019-08-19 09:17:17+0000\n"
+"PO-Revision-Date: 2019-08-23 04:20:54+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1990,7 +1991,7 @@ msgstr "Puede tambien agregar publicaciones a su perfil  <em>on Dissemin</em>, c
 
 #: templates/dissemin/faq.html:521
 msgid "If you change some details in your ORCID profile (name, homepage, etc.), the changes will not automatically be picked up in your profile on Dissemin. To update your profile on Dissemin accordingly, once you have logged in to Dissemin, you can go to your <a href=\"/my-profile\">profile page</a> and click \"Refresh publications\"."
-msgstr "Si cambia unos detalles en su perfil ORCID (nombre, pagina inizial etc), los cambios no seran cogidos en su perfile de Dissemin. Para actualizar su perfil, despues su conexion en Dissemin, puede ir a su <href=''my-prfile''> pagina de perfil </a> y clicar ''Refresh publications.''"
+msgstr "Si cambia unos detalles en su perfil ORCID (nombre, pagina inizial etc), los cambios no seran cogidos en su perfile de Dissemin. Para actualizar su perfil, despues su conexion en Dissemin, puede ir a su <a href=\"/my-profile\">pagina de perfil </a> y clicar \"Refresh publications\"."
 
 #: templates/dissemin/faq.html:535
 #, python-format
@@ -2347,7 +2348,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:15
 msgid "Philosophical schools of thought"
-msgstr ""
+msgstr "Escuelas filosóficas del pensamiento"
 
 #: vinaigrette-deleteme.py:17
 #, fuzzy
@@ -2389,7 +2390,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:26
 msgid "Christian pastoral practice & religious orders"
-msgstr ""
+msgstr "\nPráctica pastoral cristiana y órdenes religiosas"
 
 #: vinaigrette-deleteme.py:27
 msgid "Christian organization, social work & worship"
@@ -2436,7 +2437,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:43
 msgid "English & Old English languages"
-msgstr ""
+msgstr "Inglés e inglés antiguo"
 
 #: vinaigrette-deleteme.py:44
 msgid "German & related languages"
@@ -2478,7 +2479,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:56
 msgid "Earth sciences & geology"
-msgstr ""
+msgstr "Ciencias de la Tierra y geología"
 
 #: vinaigrette-deleteme.py:57
 msgid "Fossils & prehistoric life"
@@ -2571,11 +2572,11 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:80
 msgid "Sports, games & entertainment"
-msgstr ""
+msgstr "Deportes, juegos y entretenimiento"
 
 #: vinaigrette-deleteme.py:81
 msgid "Literature, rhetoric & criticism"
-msgstr ""
+msgstr "Literatura, retórica y crítica"
 
 #: vinaigrette-deleteme.py:82
 msgid "American literature in English"
@@ -2607,7 +2608,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:89
 msgid "Classical & modern Greek literatures"
-msgstr ""
+msgstr "Literatura griega clásica y moderna"
 
 #: vinaigrette-deleteme.py:90
 #, fuzzy
@@ -2642,7 +2643,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:98
 msgid "History of North America"
-msgstr ""
+msgstr "Historia de América del Norte"
 
 #: vinaigrette-deleteme.py:99
 msgid "History of South America"

@@ -15,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-16 09:41+0200\n"
-"PO-Revision-Date: 2019-08-19 09:17:20+0000\n"
+"PO-Revision-Date: 2019-08-23 04:20:59+0000\n"
 "Language: sr-Cyrl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -56,9 +56,8 @@ msgid "Dewey Decimal Class"
 msgstr ""
 
 #: deposit/forms.py:156
-#, fuzzy
 msgid "License"
-msgstr "Без лиценце"
+msgstr "Лиценца"
 
 #: deposit/forms.py:192
 msgid "No preferred repository"
@@ -2282,9 +2281,8 @@ msgid "Invalid URL."
 msgstr "Неважећа URL адреса"
 
 #: vinaigrette-deleteme.py:2
-#, fuzzy
 msgid "Computer science, knowledge & systems"
-msgstr "Информатика"
+msgstr "Рачунарска наука, знање и системи"
 
 #: vinaigrette-deleteme.py:3
 msgid "Bibliographies"
@@ -2312,18 +2310,16 @@ msgid "News media, journalism & publishing"
 msgstr ""
 
 #: vinaigrette-deleteme.py:9
-#, fuzzy
 msgid "Quotations"
-msgstr "Публикације"
+msgstr "Цитати"
 
 #: vinaigrette-deleteme.py:10
 msgid "Manuscripts & rare books"
 msgstr ""
 
 #: vinaigrette-deleteme.py:12
-#, fuzzy
 msgid "Metaphysics"
-msgstr "Физика"
+msgstr "Метафизика"
 
 #: vinaigrette-deleteme.py:13
 msgid "Epistemology"
@@ -2338,9 +2334,8 @@ msgid "Philosophical schools of thought"
 msgstr ""
 
 #: vinaigrette-deleteme.py:17
-#, fuzzy
 msgid "Philosophical logic"
-msgstr "Филозофија"
+msgstr "Филозофска логика"
 
 #: vinaigrette-deleteme.py:18
 msgid "Ethics"
@@ -2355,9 +2350,8 @@ msgid "Modern western philosophy"
 msgstr ""
 
 #: vinaigrette-deleteme.py:21
-#, fuzzy
 msgid "Religion"
-msgstr "Веронаука"
+msgstr "Религија"
 
 #: vinaigrette-deleteme.py:22
 msgid "Philosophy & theory of religion"
@@ -2392,14 +2386,12 @@ msgid "Christian denominations"
 msgstr ""
 
 #: vinaigrette-deleteme.py:30
-#, fuzzy
 msgid "Other religions"
-msgstr "Веронаука"
+msgstr "Остале религије"
 
 #: vinaigrette-deleteme.py:31
-#, fuzzy
 msgid "Social sciences, sociology & anthropology"
-msgstr "Друштвена антропологија и етнологија"
+msgstr "Друштвене науке, социологија и антропологија"
 
 #: vinaigrette-deleteme.py:34
 msgid "Economics"
@@ -2450,9 +2442,8 @@ msgid "Classical & modern Greek languages"
 msgstr ""
 
 #: vinaigrette-deleteme.py:50
-#, fuzzy
 msgid "Other languages"
-msgstr "Језик"
+msgstr "Остали језици"
 
 #: vinaigrette-deleteme.py:51
 #, fuzzy
@@ -2472,9 +2463,8 @@ msgid "Fossils & prehistoric life"
 msgstr ""
 
 #: vinaigrette-deleteme.py:58
-#, fuzzy
 msgid "Biology"
-msgstr "Социологија"
+msgstr "Биологија"
 
 #: vinaigrette-deleteme.py:59
 msgid "Plants (Botany)"
@@ -2485,19 +2475,16 @@ msgid "Animals (Zoology)"
 msgstr ""
 
 #: vinaigrette-deleteme.py:61
-#, fuzzy
 msgid "Technology"
-msgstr "Психологија"
+msgstr "Технологија"
 
 #: vinaigrette-deleteme.py:62
-#, fuzzy
 msgid "Medicine & health"
-msgstr "Медицина и здравствене науке"
+msgstr "Медицина и здравље"
 
 #: vinaigrette-deleteme.py:64
-#, fuzzy
 msgid "Agriculture"
-msgstr "Архитектура"
+msgstr "Пољопривреда"
 
 #: vinaigrette-deleteme.py:65
 msgid "Home & family management"
@@ -2508,9 +2495,8 @@ msgid "Management & public relations"
 msgstr ""
 
 #: vinaigrette-deleteme.py:67
-#, fuzzy
 msgid "Chemical engineering"
-msgstr "Инжењерство"
+msgstr "Хемијско инжењерство"
 
 #: vinaigrette-deleteme.py:68
 msgid "Manufacturing"
@@ -2597,14 +2583,12 @@ msgid "Classical & modern Greek literatures"
 msgstr ""
 
 #: vinaigrette-deleteme.py:90
-#, fuzzy
 msgid "Other literatures"
-msgstr "Књижевност"
+msgstr "Остала литература"
 
 #: vinaigrette-deleteme.py:92
-#, fuzzy
 msgid "Geography & travel"
-msgstr "Географија"
+msgstr "Географија и туризам"
 
 #: vinaigrette-deleteme.py:93
 msgid "Biography & genealogy"
@@ -2619,9 +2603,8 @@ msgid "History of Europe"
 msgstr ""
 
 #: vinaigrette-deleteme.py:96
-#, fuzzy
 msgid "History of Asia"
-msgstr "Историја"
+msgstr "Историја Азије"
 
 #: vinaigrette-deleteme.py:97
 msgid "History of Africa"

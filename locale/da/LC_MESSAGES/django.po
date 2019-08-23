@@ -1,6 +1,7 @@
 # Translation of Dissemin website to Danish (dansk)
 # Exported from translatewiki.net
 #
+# Author: Fnielsen
 # Author: Joedalton
 # Author: Saederup92
 # --
@@ -12,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-16 09:41+0200\n"
-"PO-Revision-Date: 2019-08-19 09:17:17+0000\n"
+"PO-Revision-Date: 2019-08-23 04:20:53+0000\n"
 "Language: da\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2293,7 +2294,7 @@ msgstr "Computervidenskab"
 
 #: vinaigrette-deleteme.py:3
 msgid "Bibliographies"
-msgstr ""
+msgstr "Bibliografier"
 
 #: vinaigrette-deleteme.py:4
 #, fuzzy
@@ -2370,11 +2371,11 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:23
 msgid "The Bible"
-msgstr ""
+msgstr "Biblen"
 
 #: vinaigrette-deleteme.py:24
 msgid "Christianity"
-msgstr ""
+msgstr "Kristendommen"
 
 #: vinaigrette-deleteme.py:25
 msgid "Christian practice & observance"
@@ -2390,7 +2391,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:28
 msgid "History of Christianity"
-msgstr ""
+msgstr "Kristendommens historie"
 
 #: vinaigrette-deleteme.py:29
 msgid "Christian denominations"
@@ -2408,7 +2409,7 @@ msgstr "Socialantropologi og etnologi"
 
 #: vinaigrette-deleteme.py:34
 msgid "Economics"
-msgstr ""
+msgstr "Økonomi"
 
 #: vinaigrette-deleteme.py:36
 msgid "Public administration & military science"
@@ -2466,7 +2467,7 @@ msgstr "Biovidenskab"
 
 #: vinaigrette-deleteme.py:53
 msgid "Astronomy"
-msgstr ""
+msgstr "Astronomi"
 
 #: vinaigrette-deleteme.py:56
 msgid "Earth sciences & geology"
@@ -2483,11 +2484,11 @@ msgstr "Sociologi"
 
 #: vinaigrette-deleteme.py:59
 msgid "Plants (Botany)"
-msgstr ""
+msgstr "Planter"
 
 #: vinaigrette-deleteme.py:60
 msgid "Animals (Zoology)"
-msgstr ""
+msgstr "Dyr (zoologi)"
 
 #: vinaigrette-deleteme.py:61
 #, fuzzy
@@ -2531,7 +2532,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:71
 msgid "Arts"
-msgstr ""
+msgstr "Kunst"
 
 #: vinaigrette-deleteme.py:72
 msgid "Area planning & landscape architecture"
@@ -2547,7 +2548,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:76
 msgid "Painting"
-msgstr ""
+msgstr "Maleri"
 
 #: vinaigrette-deleteme.py:77
 msgid "Printmaking & prints"
@@ -2559,7 +2560,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:79
 msgid "Music"
-msgstr ""
+msgstr "Musik"
 
 #: vinaigrette-deleteme.py:80
 msgid "Sports, games & entertainment"
@@ -2599,7 +2600,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:89
 msgid "Classical & modern Greek literatures"
-msgstr ""
+msgstr "Klassisk og moderne græsk litteratur"
 
 #: vinaigrette-deleteme.py:90
 #, fuzzy
@@ -2621,7 +2622,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:95
 msgid "History of Europe"
-msgstr ""
+msgstr "Europas historie"
 
 #: vinaigrette-deleteme.py:96
 #, fuzzy
@@ -2630,15 +2631,15 @@ msgstr "Historie"
 
 #: vinaigrette-deleteme.py:97
 msgid "History of Africa"
-msgstr ""
+msgstr "Afrikas historie"
 
 #: vinaigrette-deleteme.py:98
 msgid "History of North America"
-msgstr ""
+msgstr "Nordamerikas historie"
 
 #: vinaigrette-deleteme.py:99
 msgid "History of South America"
-msgstr ""
+msgstr "Sydamerikas historie"
 
 #: vinaigrette-deleteme.py:100
 msgid "History of other areas"

@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-16 09:41+0200\n"
-"PO-Revision-Date: 2019-08-19 09:17:20+0000\n"
+"PO-Revision-Date: 2019-08-23 04:20:59+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: zh_hant\n"
@@ -57,9 +57,8 @@ msgid "Dewey Decimal Class"
 msgstr "杜威十進位分類法"
 
 #: deposit/forms.py:156
-#, fuzzy
 msgid "License"
-msgstr "沒有授權"
+msgstr "授權"
 
 #: deposit/forms.py:192
 msgid "No preferred repository"
@@ -436,7 +435,7 @@ msgstr "電子郵件"
 
 #: deposit/sword/protocol.py:252
 msgid "Username or password not provided for this repository. Please contact the Dissemin team."
-msgstr ""
+msgstr "未提供此知識庫使用者名稱或密碼，請聯絡 Dissemin 團隊。"
 
 #: deposit/templates/deposit/deposits.html:10
 #: deposit/templates/deposit/deposits.html:14
@@ -549,9 +548,8 @@ msgid "please wait..."
 msgstr "請稍等..."
 
 #: deposit/views.py:69 deposit/views.py:131
-#, fuzzy
 msgid "This repository is currently not enabled."
-msgstr "找不到此知識庫。"
+msgstr "此知識庫目前未啟用。"
 
 #: deposit/views.py:75
 msgid "This repository is not available for this paper."
@@ -1320,9 +1318,8 @@ msgid "Invalid ORCID profile."
 msgstr "無效 ORCID 個人檔案。"
 
 #: papers/views.py:295
-#, fuzzy
 msgid "authored by"
-msgstr " 創作由 "
+msgstr "創作出自"
 
 #: papers/views.py:346
 msgid " published by "
@@ -1474,9 +1471,8 @@ msgid "Contact the authors to make this publication freely available. This is a 
 msgstr "聯絡作者來讓此出版物能自由取得。此為開放取用按鈕服務。"
 
 #: publishers/templates/publishers/detailsPolicy.html:30
-#, fuzzy
 msgid "Contact authors"
-msgstr "按作者"
+msgstr "聯絡作者"
 
 #: publishers/templates/publishers/detailsPolicy.html:31
 #: templates/dissemin/tos.html:81
@@ -1618,9 +1614,8 @@ msgid "Upload is forbidden"
 msgstr "禁止上傳"
 
 #: statistics/templates/statistics/pie_without_object.html:9
-#, fuzzy
 msgid "Refine by OA status"
-msgstr "未知 OA 狀態"
+msgstr "根據 OA 狀態改善"
 
 #: templates/404.html:6 templates/404.html:12
 msgid "Page not found"
@@ -1989,7 +1984,7 @@ msgstr "以下有許多方式可以讓您參與："
 
 #: templates/dissemin/faq.html:548
 msgid "Contribute to <a href=\"https://github.com/wetneb/dissemin\">the code</a>."
-msgstr "為<a href=\"https://github.com/wetneb/dissemin\">程式源碼</a>做出貢獻。"
+msgstr "為<a href=\"https://github.com/wetneb/dissemin\">程式原始碼</a>做出貢獻。"
 
 #: templates/dissemin/faq.html:553
 msgid "Fix any of our listed <a href=\"https://github.com/wetneb/dissemin/issues\">issues</a>."
@@ -2089,9 +2084,8 @@ msgid "Logo"
 msgstr "標誌"
 
 #: templates/dissemin/skeleton.html:42 vinaigrette-deleteme.py:41
-#, fuzzy
 msgid "Language"
-msgstr "更改語言"
+msgstr "語言"
 
 #: templates/dissemin/skeleton.html:51
 msgid "Translate"
@@ -2187,9 +2181,8 @@ msgid "Please address any inquiry to <a href=\"mailto:support@dissem.in\">suppor
 msgstr "請向 support@dissem.in 提出詢問。"
 
 #: templates/dissemin/tos.html:93
-#, fuzzy
 msgid "Dissemin uses ORCID's public OAuth interface to authenticate its users. This interface only transmits information marked as public in the user's ORCID profile. This means that ORCID passwords are never transmitted and email addresses are not transmitted when they are marked as private, which is the default setting. When logging in to Dissemin from ORCID, Dissemin acquires the user's ORCID id, as well as all public information attached to the ORCID record. We are using the <a href=\"https://sentry.io/privacy/\">Sentry service</a> for error tracking on this platform. Our webserver configuration stores basic access information (URL requested and IP address) for error monitoring, which are kept for fourteen days. Dissemin can store any information input by its users on the platform. Users can ask for a copy of the personal information Dissemin stores about them by writing an email to <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
-msgstr "Dissemin 使用 ORCID 的公開 OAuth 介面來驗證使用者。此介面僅傳遞在使用者 ORCID 個人資料中被標記為公開的訊息，這代表 ORCID 密碼在過程中絕不會被傳遞，其中電子郵件地址若被標記為隱私內容也會是如此（該預設值設定為隱私）。當從 ORCID 登入到 Dissemin 時，Dissemin 會取得使用者的 ORCID 之 ID，以及其它附加在 ORCID 記錄裡的公開訊息。我們使用 <a href=\"https://sentry.io/privacy/\">Sentry service</a> 來追蹤平台上的錯誤。我們的網頁伺服器設置會儲存保留兩週、用於錯誤監控基本存取資訊（所需要的 URL 和  IP 位址）。Dissemin 會保存使用者在平台上鎖輸入的任何訊息，使用者可以透過寄發要求到 support@dissem.in，來取得 Dissemin 所保存的個人訊息複本。"
+msgstr "Dissemin 使用 ORCID 的公開 OAuth 介面來驗證使用者。此介面僅傳遞在使用者 ORCID 個人資料中被標記為公開的訊息，這代表 ORCID 密碼在過程中絕不會被傳遞，其中電子郵件地址若被標記為隱私內容也會是如此（該預設值設定為隱私）。當從 ORCID 登入到 Dissemin 時，Dissemin 會取得使用者的 ORCID 之 ID，以及其它附加在 ORCID 記錄裡的公開訊息。我們使用 <a href=\"https://sentry.io/privacy/\">Sentry service</a> 來追蹤平台上的錯誤。我們的網頁伺服器設置會儲存保留兩週、用於錯誤監控基本存取資訊（所需要的 URL 和  IP 位址）。Dissemin 會保存使用者在平台上鎖輸入的任何訊息，使用者可以透過寄發要求到 <a href=\"mailto:support@dissem.in\">support@dissem.in</a>，來取得 Dissemin 所保存的個人訊息複本。"
 
 #: templates/dissemin/tos.html:116
 msgid "Documents deposited in repositories via Dissemin can be stored on the platform, but are not available for download on the platform. They can be stored internally for logging purposes, and to make sure failed deposits can be fixed later. Dissemin does not commit to store any of the files it receives from its users. Users can write to <a href=\"mailto:support@dissem.in\">support@dissem.in</a> if they want one of their uploads to be deleted from our internal storage space, or from the repository they have deposited to. Note that deletion policies vary accross repositories: we provide no guarantee that deposits can be deleted from the target repositories."
@@ -2278,48 +2271,44 @@ msgid "Invalid URL."
 msgstr "無效 URL。"
 
 #: vinaigrette-deleteme.py:2
-#, fuzzy
 msgid "Computer science, knowledge & systems"
-msgstr "電腦科學"
+msgstr "電腦科學、知識與系統"
 
 #: vinaigrette-deleteme.py:3
 msgid "Bibliographies"
-msgstr ""
+msgstr "目錄學"
 
 #: vinaigrette-deleteme.py:4
-#, fuzzy
 msgid "Library & information sciences"
-msgstr "圖書館與資訊學"
+msgstr "圖書館與資訊科學"
 
 #: vinaigrette-deleteme.py:5
 msgid "Encyclopedias & books of facts"
-msgstr ""
+msgstr "百科全書與事實書籍"
 
 #: vinaigrette-deleteme.py:6
 msgid "Magazines, journals & serials"
-msgstr ""
+msgstr "雜誌、期刊與連載"
 
 #: vinaigrette-deleteme.py:7
 msgid "Associations, organizations & museums"
-msgstr ""
+msgstr "協會、組織與博物館"
 
 #: vinaigrette-deleteme.py:8
 msgid "News media, journalism & publishing"
-msgstr ""
+msgstr "新聞媒體、新文學與出版"
 
 #: vinaigrette-deleteme.py:9
-#, fuzzy
 msgid "Quotations"
-msgstr "出版項目"
+msgstr "引證"
 
 #: vinaigrette-deleteme.py:10
 msgid "Manuscripts & rare books"
-msgstr ""
+msgstr "手寫本與稀有書籍"
 
 #: vinaigrette-deleteme.py:12
-#, fuzzy
 msgid "Metaphysics"
-msgstr "物理學"
+msgstr "形上學"
 
 #: vinaigrette-deleteme.py:13
 msgid "Epistemology"
@@ -2327,37 +2316,35 @@ msgstr "認識論"
 
 #: vinaigrette-deleteme.py:14
 msgid "Parapsychology & occultism"
-msgstr ""
+msgstr "超心理學與神秘學"
 
 #: vinaigrette-deleteme.py:15
 msgid "Philosophical schools of thought"
-msgstr ""
+msgstr "哲學思想流派"
 
 #: vinaigrette-deleteme.py:17
-#, fuzzy
 msgid "Philosophical logic"
-msgstr "哲學"
+msgstr "哲學邏輯"
 
 #: vinaigrette-deleteme.py:18
 msgid "Ethics"
-msgstr ""
+msgstr "倫理"
 
 #: vinaigrette-deleteme.py:19
 msgid "Ancient, medieval & eastern philosophy"
-msgstr ""
+msgstr "古代、中世紀與東方哲學"
 
 #: vinaigrette-deleteme.py:20
 msgid "Modern western philosophy"
-msgstr ""
+msgstr "現代西方哲學"
 
 #: vinaigrette-deleteme.py:21
-#, fuzzy
 msgid "Religion"
 msgstr "宗教"
 
 #: vinaigrette-deleteme.py:22
 msgid "Philosophy & theory of religion"
-msgstr ""
+msgstr "宗教哲學與理論"
 
 #: vinaigrette-deleteme.py:23
 msgid "The Bible"
@@ -2369,186 +2356,175 @@ msgstr "基督教"
 
 #: vinaigrette-deleteme.py:25
 msgid "Christian practice & observance"
-msgstr ""
+msgstr "基督教實踐與儀式"
 
 #: vinaigrette-deleteme.py:26
 msgid "Christian pastoral practice & religious orders"
-msgstr ""
+msgstr "基督教牧師實踐與宗教秩序"
 
 #: vinaigrette-deleteme.py:27
 msgid "Christian organization, social work & worship"
-msgstr ""
+msgstr "基督教組織、社會工作與禮拜"
 
 #: vinaigrette-deleteme.py:28
 msgid "History of Christianity"
 msgstr "基督教歷史"
 
 #: vinaigrette-deleteme.py:29
-#, fuzzy
 msgid "Christian denominations"
-msgstr "Dissemin 管理"
+msgstr "基督教派系"
 
 #: vinaigrette-deleteme.py:30
-#, fuzzy
 msgid "Other religions"
-msgstr "宗教"
+msgstr "其他宗教"
 
 #: vinaigrette-deleteme.py:31
-#, fuzzy
 msgid "Social sciences, sociology & anthropology"
-msgstr "社會人類學與民族學"
+msgstr "社會科學、社會學與人類學"
 
 #: vinaigrette-deleteme.py:34
 msgid "Economics"
-msgstr ""
+msgstr "經濟學"
 
 #: vinaigrette-deleteme.py:36
 msgid "Public administration & military science"
-msgstr ""
+msgstr "公共行政與軍事學"
 
 #: vinaigrette-deleteme.py:37
 msgid "Social problems & social services"
-msgstr ""
+msgstr "社會問題與社會服務"
 
 #: vinaigrette-deleteme.py:39
 msgid "Commerce, communications & transportation"
-msgstr ""
+msgstr "貿易、通訊與運輸"
 
 #: vinaigrette-deleteme.py:40
 msgid "Customs, etiquette & folklore"
-msgstr ""
+msgstr "習俗、禮節和民俗"
 
 #: vinaigrette-deleteme.py:43
 msgid "English & Old English languages"
-msgstr ""
+msgstr "英語和古英語"
 
 #: vinaigrette-deleteme.py:44
 msgid "German & related languages"
-msgstr ""
+msgstr "德語和相關語言"
 
 #: vinaigrette-deleteme.py:45
 msgid "French & related languages"
-msgstr ""
+msgstr "法語和相關語言"
 
 #: vinaigrette-deleteme.py:46
 msgid "Italian, Romanian & related languages"
-msgstr ""
+msgstr "義大利語、羅馬尼亞語和相關語言"
 
 #: vinaigrette-deleteme.py:47
 msgid "Spanish, Portuguese, Galician"
-msgstr ""
+msgstr "西班牙語、葡萄牙語、加利西亞語"
 
 #: vinaigrette-deleteme.py:48
 msgid "Latin & Italic languages"
-msgstr ""
+msgstr "拉丁語和義大利語"
 
 #: vinaigrette-deleteme.py:49
 msgid "Classical & modern Greek languages"
-msgstr ""
+msgstr "古典與現代希臘語"
 
 #: vinaigrette-deleteme.py:50
-#, fuzzy
 msgid "Other languages"
-msgstr "更改語言"
+msgstr "其它語言"
 
 #: vinaigrette-deleteme.py:51
-#, fuzzy
 msgid "Science"
-msgstr "生命科學"
+msgstr "科學"
 
 #: vinaigrette-deleteme.py:53
 msgid "Astronomy"
-msgstr ""
+msgstr "天文學"
 
 #: vinaigrette-deleteme.py:56
 msgid "Earth sciences & geology"
-msgstr ""
+msgstr "地球科學與地質學"
 
 #: vinaigrette-deleteme.py:57
 msgid "Fossils & prehistoric life"
-msgstr ""
+msgstr "化石與史前生命"
 
 #: vinaigrette-deleteme.py:58
-#, fuzzy
 msgid "Biology"
-msgstr "社會學"
+msgstr "生物學"
 
 #: vinaigrette-deleteme.py:59
 msgid "Plants (Botany)"
-msgstr ""
+msgstr "植物（植物學）"
 
 #: vinaigrette-deleteme.py:60
 msgid "Animals (Zoology)"
 msgstr "動物（動物學）"
 
 #: vinaigrette-deleteme.py:61
-#, fuzzy
 msgid "Technology"
-msgstr "心理學"
+msgstr "應用技術"
 
 #: vinaigrette-deleteme.py:62
-#, fuzzy
 msgid "Medicine & health"
-msgstr "醫學與健康科學"
+msgstr "醫學與衛生學"
 
 #: vinaigrette-deleteme.py:64
-#, fuzzy
 msgid "Agriculture"
-msgstr "建築學"
+msgstr "農業"
 
 #: vinaigrette-deleteme.py:65
 msgid "Home & family management"
-msgstr ""
+msgstr "居家和家庭管理"
 
 #: vinaigrette-deleteme.py:66
-#, fuzzy
 msgid "Management & public relations"
-msgstr "重新整理出版項目"
+msgstr "管理與公共關係"
 
 #: vinaigrette-deleteme.py:67
-#, fuzzy
 msgid "Chemical engineering"
-msgstr "工程"
+msgstr "化學工程"
 
 #: vinaigrette-deleteme.py:68
 msgid "Manufacturing"
-msgstr ""
+msgstr "製造流程"
 
 #: vinaigrette-deleteme.py:69
 msgid "Manufacture for specific uses"
-msgstr ""
+msgstr "特定用途製造"
 
 #: vinaigrette-deleteme.py:70
 msgid "Construction of buildings"
-msgstr ""
+msgstr "建築結構"
 
 #: vinaigrette-deleteme.py:71
 msgid "Arts"
-msgstr ""
+msgstr "藝術"
 
 #: vinaigrette-deleteme.py:72
 msgid "Area planning & landscape architecture"
-msgstr ""
+msgstr "區域規劃與景觀建築"
 
 #: vinaigrette-deleteme.py:74
 msgid "Sculpture, ceramics & metalwork"
-msgstr ""
+msgstr "雕塑、陶瓷和金屬作品"
 
 #: vinaigrette-deleteme.py:75
 msgid "Graphic arts & decorative arts"
-msgstr ""
+msgstr "圖形與裝飾藝術"
 
 #: vinaigrette-deleteme.py:76
 msgid "Painting"
-msgstr ""
+msgstr "繪畫"
 
 #: vinaigrette-deleteme.py:77
 msgid "Printmaking & prints"
-msgstr ""
+msgstr "版畫與印刷"
 
 #: vinaigrette-deleteme.py:78
 msgid "Photography, computer art, film, video"
-msgstr ""
+msgstr "攝影、電腦美術、電影、影片"
 
 #: vinaigrette-deleteme.py:79
 msgid "Music"
@@ -2560,66 +2536,63 @@ msgstr "運動、競賽與娛樂"
 
 #: vinaigrette-deleteme.py:81
 msgid "Literature, rhetoric & criticism"
-msgstr ""
+msgstr "文學、修辭與評論"
 
 #: vinaigrette-deleteme.py:82
 msgid "American literature in English"
-msgstr ""
+msgstr "英語裡的美國文學"
 
 #: vinaigrette-deleteme.py:83
 msgid "English & Old English literatures"
-msgstr ""
+msgstr "英語和古英語文學"
 
 #: vinaigrette-deleteme.py:84
 msgid "German & related literatures"
-msgstr ""
+msgstr "德語與相關文學"
 
 #: vinaigrette-deleteme.py:85
 msgid "French & related literatures"
-msgstr ""
+msgstr "法語和相關文學"
 
 #: vinaigrette-deleteme.py:86
 msgid "Italian, Romanian & related literatures"
-msgstr ""
+msgstr "義大利語、羅馬尼亞語和相關文學"
 
 #: vinaigrette-deleteme.py:87
 msgid "Spanish, Portuguese, Galician literatures"
-msgstr ""
+msgstr "西班牙語、葡萄牙語、加利西亞文學"
 
 #: vinaigrette-deleteme.py:88
 msgid "Latin & Italic literatures"
-msgstr ""
+msgstr "拉丁語和義大利文學"
 
 #: vinaigrette-deleteme.py:89
 msgid "Classical & modern Greek literatures"
-msgstr ""
+msgstr "古典與現代希臘文學"
 
 #: vinaigrette-deleteme.py:90
-#, fuzzy
 msgid "Other literatures"
-msgstr "文獻"
+msgstr "其它文獻"
 
 #: vinaigrette-deleteme.py:92
-#, fuzzy
 msgid "Geography & travel"
-msgstr "地理學"
+msgstr "地理與遊記"
 
 #: vinaigrette-deleteme.py:93
 msgid "Biography & genealogy"
-msgstr ""
+msgstr "傳記和家譜"
 
 #: vinaigrette-deleteme.py:94
 msgid "History of ancient world (to ca. 499)"
-msgstr ""
+msgstr "古代史（至 499 年左右）"
 
 #: vinaigrette-deleteme.py:95
 msgid "History of Europe"
 msgstr "歐洲歷史"
 
 #: vinaigrette-deleteme.py:96
-#, fuzzy
 msgid "History of Asia"
-msgstr "歷史"
+msgstr "亞洲歷史"
 
 #: vinaigrette-deleteme.py:97
 msgid "History of Africa"
@@ -2638,29 +2611,24 @@ msgid "History of other areas"
 msgstr "其它地區歷史"
 
 #: vinaigrette-deleteme.py:101
-#, fuzzy
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
-msgstr "創用 CC — CC0 1.0 通用"
+msgstr "創用 CC — CC0 1.0 通用公眾領域貢獻"
 
 #: vinaigrette-deleteme.py:102
-#, fuzzy
 msgid "Creative Commons Attribution 4.0 International (CC BY 4.0)"
 msgstr "創用 CC 姓名標示 4.0 國際（CC BY 4.0）"
 
 #: vinaigrette-deleteme.py:103
-#, fuzzy
 msgid "Creative Commons Attribution-ShareAlike 4.0, International (CC BY-SA 4.0)"
-msgstr "創用 CC 姓名標示 4.0 國際（CC BY 4.0）"
+msgstr "創用 CC 姓名標示相同方式分享 4.0 國際（CC BY 4.0）"
 
 #: vinaigrette-deleteme.py:104
-#, fuzzy
 msgid "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
-msgstr "創用 CC 姓名標示 4.0 國際（CC BY 4.0）"
+msgstr "創用 CC 姓名標示非商業性使用 4.0 國際（CC BY 4.0）"
 
 #: vinaigrette-deleteme.py:105
-#, fuzzy
 msgid "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)"
-msgstr "創用 CC 姓名標示 4.0 國際（CC BY 4.0）"
+msgstr "創用 CC 姓名標示禁止改作 4.0 國際（CC BY 4.0）"
 
 #: vinaigrette-deleteme.py:106
 msgid "Free for private use; right holder retains other rights, including distribution"
