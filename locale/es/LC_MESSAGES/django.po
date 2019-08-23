@@ -2390,7 +2390,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:26
 msgid "Christian pastoral practice & religious orders"
-msgstr "\nPráctica pastoral cristiana y órdenes religiosas"
+msgstr "Práctica pastoral cristiana y órdenes religiosas"
 
 #: vinaigrette-deleteme.py:27
 msgid "Christian organization, social work & worship"
