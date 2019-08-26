@@ -12,7 +12,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-16 09:41+0200\n"
-"PO-Revision-Date: 2019-08-23 04:20:56+0000\n"
+"PO-Revision-Date: 2019-08-26 10:10:56+0000\n"
 "Language: lb\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2475,11 +2475,11 @@ msgstr "Soziologie"
 
 #: vinaigrette-deleteme.py:59
 msgid "Plants (Botany)"
-msgstr ""
+msgstr "Planzen (Botanik)"
 
 #: vinaigrette-deleteme.py:60
 msgid "Animals (Zoology)"
-msgstr ""
+msgstr "Déieren (Zoologie)"
 
 #: vinaigrette-deleteme.py:61
 #, fuzzy

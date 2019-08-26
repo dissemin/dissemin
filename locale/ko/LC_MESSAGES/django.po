@@ -12,7 +12,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-16 09:41+0200\n"
-"PO-Revision-Date: 2019-08-23 04:20:56+0000\n"
+"PO-Revision-Date: 2019-08-26 10:10:56+0000\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -431,7 +431,7 @@ msgstr "이메일"
 
 #: deposit/sword/protocol.py:252
 msgid "Username or password not provided for this repository. Please contact the Dissemin team."
-msgstr ""
+msgstr "사용자 이름 또는 비밀번호가 이 저장소에 제공되지 않았습니다. Dissemin 팅메 문의해 주십시오."
 
 #: deposit/templates/deposit/deposits.html:10
 #: deposit/templates/deposit/deposits.html:14
@@ -2277,7 +2277,7 @@ msgstr "컴퓨터 과학, 지식 및 시스템"
 
 #: vinaigrette-deleteme.py:3
 msgid "Bibliographies"
-msgstr ""
+msgstr "참고 문헌"
 
 #: vinaigrette-deleteme.py:4
 #, fuzzy
@@ -2290,15 +2290,15 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:6
 msgid "Magazines, journals & serials"
-msgstr ""
+msgstr "잡지, 저널, 연재물"
 
 #: vinaigrette-deleteme.py:7
 msgid "Associations, organizations & museums"
-msgstr ""
+msgstr "협회, 단체, 박물관"
 
 #: vinaigrette-deleteme.py:8
 msgid "News media, journalism & publishing"
-msgstr ""
+msgstr "뉴스 미디어, 저널리즘, 출판"
 
 #: vinaigrette-deleteme.py:9
 #, fuzzy
@@ -2315,7 +2315,7 @@ msgstr "형이상학"
 
 #: vinaigrette-deleteme.py:13
 msgid "Epistemology"
-msgstr ""
+msgstr "인식론"
 
 #: vinaigrette-deleteme.py:14
 msgid "Parapsychology & occultism"
@@ -2331,15 +2331,15 @@ msgstr "철학적 논리학"
 
 #: vinaigrette-deleteme.py:18
 msgid "Ethics"
-msgstr ""
+msgstr "윤리학"
 
 #: vinaigrette-deleteme.py:19
 msgid "Ancient, medieval & eastern philosophy"
-msgstr ""
+msgstr "고대, 중세, 동양철학"
 
 #: vinaigrette-deleteme.py:20
 msgid "Modern western philosophy"
-msgstr ""
+msgstr "현대 서양 철학"
 
 #: vinaigrette-deleteme.py:21
 #, fuzzy
@@ -2348,15 +2348,15 @@ msgstr "종교"
 
 #: vinaigrette-deleteme.py:22
 msgid "Philosophy & theory of religion"
-msgstr ""
+msgstr "철학, 종교 이론"
 
 #: vinaigrette-deleteme.py:23
 msgid "The Bible"
-msgstr ""
+msgstr "성경"
 
 #: vinaigrette-deleteme.py:24
 msgid "Christianity"
-msgstr ""
+msgstr "기독교"
 
 #: vinaigrette-deleteme.py:25
 msgid "Christian practice & observance"
@@ -2376,7 +2376,7 @@ msgstr "기독교의 역사"
 
 #: vinaigrette-deleteme.py:29
 msgid "Christian denominations"
-msgstr ""
+msgstr "기독교 교파"
 
 #: vinaigrette-deleteme.py:30
 msgid "Other religions"
@@ -2384,11 +2384,11 @@ msgstr "다른 종교"
 
 #: vinaigrette-deleteme.py:31
 msgid "Social sciences, sociology & anthropology"
-msgstr ""
+msgstr "사회과학, 사회학, 인류학"
 
 #: vinaigrette-deleteme.py:34
 msgid "Economics"
-msgstr ""
+msgstr "경제학"
 
 #: vinaigrette-deleteme.py:36
 msgid "Public administration & military science"
@@ -2396,7 +2396,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:37
 msgid "Social problems & social services"
-msgstr ""
+msgstr "사회 문제 및 사회 서비스"
 
 #: vinaigrette-deleteme.py:39
 msgid "Commerce, communications & transportation"
@@ -2408,7 +2408,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:43
 msgid "English & Old English languages"
-msgstr ""
+msgstr "영어 및 고대 영어"
 
 #: vinaigrette-deleteme.py:44
 msgid "German & related languages"
@@ -2420,15 +2420,15 @@ msgstr "프랑스어 및 관련 언어"
 
 #: vinaigrette-deleteme.py:46
 msgid "Italian, Romanian & related languages"
-msgstr ""
+msgstr "이탈리아어, 루마니아어 및 관련 언어"
 
 #: vinaigrette-deleteme.py:47
 msgid "Spanish, Portuguese, Galician"
-msgstr ""
+msgstr "스페인어, 포르투갈어, 갈리시아어"
 
 #: vinaigrette-deleteme.py:48
 msgid "Latin & Italic languages"
-msgstr ""
+msgstr "라틴어 및 이탈리아계 언어"
 
 #: vinaigrette-deleteme.py:49
 msgid "Classical & modern Greek languages"
@@ -2444,15 +2444,15 @@ msgstr "과학"
 
 #: vinaigrette-deleteme.py:53
 msgid "Astronomy"
-msgstr ""
+msgstr "천문학"
 
 #: vinaigrette-deleteme.py:56
 msgid "Earth sciences & geology"
-msgstr ""
+msgstr "지구과학 및 지질학"
 
 #: vinaigrette-deleteme.py:57
 msgid "Fossils & prehistoric life"
-msgstr ""
+msgstr "화석 및 선사시대 생활"
 
 #: vinaigrette-deleteme.py:58
 msgid "Biology"
@@ -2460,11 +2460,11 @@ msgstr "생물학"
 
 #: vinaigrette-deleteme.py:59
 msgid "Plants (Botany)"
-msgstr ""
+msgstr "식물 (식물학)"
 
 #: vinaigrette-deleteme.py:60
 msgid "Animals (Zoology)"
-msgstr ""
+msgstr "동물 (동물학)"
 
 #: vinaigrette-deleteme.py:61
 msgid "Technology"
@@ -2492,7 +2492,7 @@ msgstr "화학공학"
 
 #: vinaigrette-deleteme.py:68
 msgid "Manufacturing"
-msgstr ""
+msgstr "제조"
 
 #: vinaigrette-deleteme.py:69
 msgid "Manufacture for specific uses"
@@ -2500,7 +2500,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:70
 msgid "Construction of buildings"
-msgstr ""
+msgstr "건물 건축"
 
 #: vinaigrette-deleteme.py:71
 msgid "Arts"
@@ -2516,11 +2516,11 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:75
 msgid "Graphic arts & decorative arts"
-msgstr ""
+msgstr "그래픽 아트 및 장식 미술"
 
 #: vinaigrette-deleteme.py:76
 msgid "Painting"
-msgstr ""
+msgstr "회화"
 
 #: vinaigrette-deleteme.py:77
 msgid "Printmaking & prints"
@@ -2528,7 +2528,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:78
 msgid "Photography, computer art, film, video"
-msgstr ""
+msgstr "철학, 컴퓨터 예술, 영화, 동영상"
 
 #: vinaigrette-deleteme.py:79
 msgid "Music"
@@ -2536,7 +2536,7 @@ msgstr "음악"
 
 #: vinaigrette-deleteme.py:80
 msgid "Sports, games & entertainment"
-msgstr ""
+msgstr "스포츠, 게임, 엔터테인먼트"
 
 #: vinaigrette-deleteme.py:81
 msgid "Literature, rhetoric & criticism"
@@ -2548,15 +2548,15 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:83
 msgid "English & Old English literatures"
-msgstr ""
+msgstr "영어 및 고대 영어 문학"
 
 #: vinaigrette-deleteme.py:84
 msgid "German & related literatures"
-msgstr ""
+msgstr "독일어 및 관련 문학"
 
 #: vinaigrette-deleteme.py:85
 msgid "French & related literatures"
-msgstr ""
+msgstr "프랑스어 및 관련 문헌"
 
 #: vinaigrette-deleteme.py:86
 msgid "Italian, Romanian & related literatures"
@@ -2564,11 +2564,11 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:87
 msgid "Spanish, Portuguese, Galician literatures"
-msgstr ""
+msgstr "스페인어, 포르투갈어, 갈리시아어 문학"
 
 #: vinaigrette-deleteme.py:88
 msgid "Latin & Italic literatures"
-msgstr ""
+msgstr "라틴어, 이탈리아어 문학"
 
 #: vinaigrette-deleteme.py:89
 msgid "Classical & modern Greek literatures"
@@ -2588,7 +2588,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:94
 msgid "History of ancient world (to ca. 499)"
-msgstr ""
+msgstr "고대 세계의 역사 (499년 경까지)"
 
 #: vinaigrette-deleteme.py:95
 msgid "History of Europe"
@@ -2601,19 +2601,19 @@ msgstr "역사"
 
 #: vinaigrette-deleteme.py:97
 msgid "History of Africa"
-msgstr ""
+msgstr "아프리카의 역사"
 
 #: vinaigrette-deleteme.py:98
 msgid "History of North America"
-msgstr ""
+msgstr "북아메리카의 역사"
 
 #: vinaigrette-deleteme.py:99
 msgid "History of South America"
-msgstr ""
+msgstr "남아메리카의 역사"
 
 #: vinaigrette-deleteme.py:100
 msgid "History of other areas"
-msgstr ""
+msgstr "기타 분야의 역사"
 
 #: vinaigrette-deleteme.py:101
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
