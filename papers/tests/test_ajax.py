@@ -41,6 +41,136 @@ from papers.models import Paper
 #)
 
 
+class TestTodoList():
+    """
+    Groups test for Ajax todo list function
+    """
+
+    @staticmethod
+    def valid_json(json_data):
+        """
+        Serialzes given json and evaluates for success
+        """
+        try:
+            json.loads(json_data)
+        except ValueError:
+            return False
+        else:
+            return True
+
+
+    def valid_response(self, response, status):
+        """
+        Validates the response of AJAX request
+        """
+        assert response.status_code == status
+        assert self.valid_json(response.content) == True
+        for key in ['success_msg', 'error_msg', 'data-action']:
+            assert key in json.loads(response.content)
+
+
+    @pytest.fixture(params=['ajax-todolist-add', 'ajax-todolist-remove'])
+    def todolist_helper(self, request, monkeypatch, authenticated_client, book_god_of_the_labyrinth):
+        """
+        Helper to make AJAX requests and assertions on results
+        """
+        class MonkeypatchTodoList:
+            """
+            Helper class to monkeypatch for a Many2Many add/remove error
+            """
+            def add(self, *args, **kwargs):
+                raise Exception("This is an anonymous exception")
+
+            def remove(self, *args, **kwargs):
+                raise Exception("This is an anonymous exception")
+
+
+        def todolist_assert(data, status, add, remove, monkeypatched=False):
+            """
+            Make the POST request and does assertions
+            """
+            if request.param == 'ajax-todolist-add':
+                expected_result= add
+            else:
+                expected_result = remove
+                book_god_of_the_labyrinth.todolist.add(authenticated_client.user)
+
+            if monkeypatched:
+                monkeypatch.setattr(Paper, 'todolist', MonkeypatchTodoList() , False)
+
+            response = authenticated_client.post(reverse(request.param), data, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+
+            assert response.status_code == status
+            assert TestTodoList.valid_json(response.content) == True
+            for key in ['success_msg', 'error_msg']:
+                assert key in json.loads(response.content)
+            monkeypatch.undo()
+            assert book_god_of_the_labyrinth.todolist.filter(pk=authenticated_client.user.pk).exists() == expected_result
+
+        helper = {
+            'asserts': todolist_assert,
+            'paper_pk': book_god_of_the_labyrinth.pk
+        }
+        return helper
+
+
+    def test_todo_list_success(self, todolist_helper):
+        """
+        Paper successfully added / removed from todolist
+        """
+        data = {
+            'paper_pk': todolist_helper['paper_pk']
+        }
+        todolist_helper['asserts'](data, 200, True, False)
+
+
+    def test_todo_list_no_paper_pk(self, todolist_helper):
+        """
+        No paper PK provided. Nothing happens
+        """
+        data = {
+            'spam': 'eggs'
+        }
+        todolist_helper['asserts'](data, 400, False, True)
+
+
+    def test_todo_list_no_paper_found(self, todolist_helper):
+        """
+        Paper PK not in DB. Nothing happens.
+        """
+        data = {
+            'paper_pk': 'spanish inquisition'
+        }
+        todolist_helper['asserts'](data, 404, False, True)
+
+
+    def test_todo_list_failed(self, todolist_helper, monkeypatch):
+        """
+        Problem with adding / removing paper from users todo list.
+        """
+        data = {
+            'paper_pk': todolist_helper['paper_pk']
+        }
+        todolist_helper['asserts'](data, 500, False, True, monkeypatched=True)
+
+    @pytest.mark.parametrize('url_name', ['ajax-todolist-add', 'ajax-todolist-remove'])
+    def test_todo_list_unauthenticated(self, dissemin_base_client, url_name):
+        """
+        If client not logged in, expect 401
+        """
+        response = dissemin_base_client.post(reverse(url_name), HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        assert response.status_code == 401
+
+
+    @pytest.mark.parametrize('url_name', ['ajax-todolist-add', 'ajax-todolist-remove'])
+    def test_todo_list_no_ajax(self, authenticated_client, url_name):
+        """
+        If client does not send XMLHttpRequest, send bad request
+        """
+        response = authenticated_client.post(reverse(url_name))
+        assert response.status_code == 400
+
+
 class JsonRenderingTest(django.test.TestCase):
 
     def setUp(self):
