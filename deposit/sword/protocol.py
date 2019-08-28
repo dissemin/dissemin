@@ -293,12 +293,15 @@ class SWORDMETSProtocol(RepositoryProtocol):
         self.log("### Preparing request to repository")
 
         auth = (self.repository.username, self.repository.password)
-        files = {'file': ('mets.zip', zipfile.getvalue(), 'application/zip')}
-        headers = {'Content-type': 'application/zip'}
+        headers = {
+                'Content-Type': 'application/zip',
+                'Content-Disposition': 'filename=mets.zip',
+                'Packaging': 'http://purl.org/net/sword/package/METSMODS',
+        }
 
         self.log("### Sending request")
 
-        r = requests.post(self.repository.endpoint, auth=auth, headers=headers, files=files, timeout=20)
+        r = requests.post(self.repository.endpoint, auth=auth, headers=headers, data=zipfile.getvalue(), timeout=20)
 
         self.log_request(r, 201, _('Unable to deposit to repository') + self.repository.name) 
 
