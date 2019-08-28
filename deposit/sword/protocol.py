@@ -283,6 +283,9 @@ class SWORDMETSProtocol(RepositoryProtocol):
         metadata = self._get_xml_metadata(form)
         dissemin_metadata = self._get_xml_dissemin_metadata(form)
         mets = self._get_mets(metadata, dissemin_metadata)
+        # Logging Metadata
+        self.log('Metadata looks like:')
+        self.log(mets)
 
         zipfile = self._get_mets_container(pdf, mets)
 
