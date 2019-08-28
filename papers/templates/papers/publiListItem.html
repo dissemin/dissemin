@@ -3,6 +3,7 @@
 {% load cache %}
 {% load canclaim %}
 {% load domain %}
+{% load todolist %}
 {% get_current_language as LANGUAGE_CODE %}
 
 <div class="pubLogo logoHelpPopover" data-content="{{ paper.status_helptext }}" data-placement="bottom">
@@ -47,6 +48,15 @@
                 {% canclaim request.user paper as can_claim %}
                 {% if can_claim %}
                     <a class="btn btn-default btn-xs claim-button" data-pk="{{ paper.id }}" data-action="claim">{% trans "Include in my profile" %}</a>
+                {% endif %}
+            {% endif %}
+
+            {% if request.user.is_authenticated %}
+                {% todolist request.user paper as on_todolist %}
+                {% if on_todolist %}
+                   <a class="btn btn-default btn-xs todolist-button" data-pk="{{ paper.id }}" data-action="unmark">{% trans "Remove from to-do list" %}</a>
+                {% else %}
+                  <a class="btn btn-default btn-xs todolist-button" data-pk="{{ paper.id }}" data-action="mark">{% trans "Mark for later upload" %}</a>
                 {% endif %}
             {% endif %}
         </p>

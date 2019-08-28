@@ -23,96 +23,96 @@
 {% endblock %}
 
 {% block jsScript %}
-$(function(){
-    $('[data-toggle="tooltip"]').tooltip();
-    // Trigger onChange events on the date pickers
-    $('#id_pub_after').on('dp.change', function (ev) {
-        $('#searchPapers').change();
-    });
-    $('#id_pub_before').on('dp.change', function (ev) {
-        $('#searchPapers').change();
-    });
+    // Setting variables for called functions
+    var csrf_token = '{{csrf_token}}';
 
-       function claim_unclaim (evt) {
-         var obj = $(evt.target);
-         var pk = obj.attr("data-pk");
-         var action = obj.attr("data-action");
-         if (action != "claim" && action != "unclaim") {
-           // action currently ongoing
-           return;
-         }
-         var my_url = "";
-         if (action == "claim") {
-           obj.text("{% trans "Claiming..." %}");
-           my_url = "{% url "ajax-claimPaper" %}";
-         } else {
-           obj.text("{% trans "Unclaiming..." %}");
-           my_url = "{% url "ajax-unclaimPaper" %}";
-         }
-         obj.toggleClass("disabled");
-         $.ajax({
-           method: "post",
-           url: my_url,
-           data: {"pk": pk,
-             "csrfmiddlewaretoken": '{{csrf_token}}'},
-           cache: false,
-           success: function (data) {
-             if (action == "claim") {
-               obj.text("{% trans "Exclude from my profile" %}");
-               obj.attr("data-action", "unclaim");
-             } else {
-               obj.text("{% trans "Include in my profile" %}");
-               obj.attr("data-action", "claim");
-{% if user_researcher == researcher %}
-               // user_researcher is only defined on profile views
-               // in which case it is equal to the researcher of the currently
-               // logged in user; if it is the profile currently being viewed,
-               // we must remove the paper entirely
-               $("#paper-" + pk).fadeOut(300, function() { $(this).remove(); });
-{% endif %}
-             }
-             obj.toggleClass("claim-button");
-             obj.toggleClass("unclaim-button");
-             obj.toggleClass("disabled");
-           },
-           error: function(data) {
-             if (action == "claim") {
-               obj.text("{% trans "Claiming failed!" %}");
-             } else {
-               obj.text("{% trans "Unclaiming failed!" %}");
-             }
-             obj.toggleClass("disabled");
-           }
-           });
-       }
+    // Function handels claiming and unclaiming
+    function claim_unclaim (evt) {
+        var obj = $(evt.target);
+        var pk = obj.attr("data-pk");
+        var action = obj.attr("data-action");
+        if (action != "claim" && action != "unclaim") {
+            // action currently ongoing
+            return;
+        }
+        var my_url = "";
+        if (action == "claim") {
+            obj.text("{% trans "Claiming..." %}");
+            my_url = "{% url "ajax-claimPaper" %}";
+        } 
+        else {
+            obj.text("{% trans "Unclaiming..." %}");
+            my_url = "{% url "ajax-unclaimPaper" %}";
+        }
+        obj.toggleClass("disabled");
+        $.ajax({
+            method: "post",
+            url: my_url,
+            data: {"pk": pk,
+            "csrfmiddlewaretoken": '{{csrf_token}}'},
+            cache: false,
+            success: function (data) {
+                if (action == "claim") {
+                    obj.text("{% trans "Exclude from my profile" %}");
+                    obj.attr("data-action", "unclaim");
+                } 
+                else {
+                    obj.text("{% trans "Include in my profile" %}");
+                    obj.attr("data-action", "claim");
+                    {% if user_researcher == researcher %}
+                        // user_researcher is only defined on profile in which case it is equal to the researcher of the currently logged in user; if it is the profile currently being viewed, we must remove the paper entirely
+                        $("#paper-" + pk).fadeOut(300, function() { $(this).remove(); });
+                    {% endif %}
+                }
+                obj.toggleClass("claim-button");
+                obj.toggleClass("unclaim-button");
+                obj.toggleClass("disabled");
+            },
+            error: function(data) {
+                if (action == "claim") {
+                    obj.text("{% trans "Claiming failed!" %}");
+                } 
+                else {
+                    obj.text("{% trans "Unclaiming failed!" %}");
+                }
+                obj.toggleClass("disabled");
+            }
+        });
+    }
 
-       function add_claim_unclaim_handlers () {
-         $(".unclaim-button").click(claim_unclaim);
-         $(".claim-button").click(claim_unclaim);
-       }
+    $(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+        // Trigger onChange events on the date pickers
+        $('#id_pub_after').on('dp.change', function (ev) {
+            $('#searchPapers').change();
+        });
+        $('#id_pub_before').on('dp.change', function (ev) {
+            $('#searchPapers').change();
+        });
 
-       add_claim_unclaim_handlers();
+        add_claim_mark_handlers();
 
-       var config = {
-         refreshURL: "{{ ajax_url }}",
-         refreshMessage: "{% trans "Refreshing results" %}",
-         logoHelpNode: $('.logoHelpPopover'),
-         refetchButtonNode: $('#refetchPubsButton'),
-         hook: add_claim_unclaim_handlers,
-         waitingAreaContainerNode: $('#waitingAreaContainer'),
-         paperSearchResultsNode: $('#paperSearchResults'),
-         nbPapersFoundNode: $('#nbPapersFound'),
-         animatedBirdGIF: "{% static "img/animated-bird.gif" %}",
-{% if researcher %}
-         refetchURL: "{% url "refetch-researcher" researcher.pk %}",
-         refetchMessage: "{% trans "Refreshing profile" %}",
-         currentTask: {% if researcher.current_task %}"{{ researcher.get_current_task_display }}"{% else %} null {% endif %},
-         setResearcherDepartmentURL: "{% url 'ajax-setResearcherDepartment' %}",
-{% endif %}
-         isSuperUser: {{ request.user.is_superuser|yesno:"true,false,false" }},
-         initialMessages: {{ messages | safe }}
-       }
-       init_paper_module(config);
+        var config = {
+            refreshURL: "{{ ajax_url }}",
+            refreshMessage: "{% trans "Refreshing results" %}",
+            logoHelpNode: $('.logoHelpPopover'),
+            refetchButtonNode: $('#refetchPubsButton'),
+            hook: add_claim_mark_handlers,
+            waitingAreaContainerNode: $('#waitingAreaContainer'),
+            paperSearchResultsNode: $('#paperSearchResults'),
+            nbPapersFoundNode: $('#nbPapersFound'),
+            animatedBirdGIF: "{% static "img/animated-bird.gif" %}",
+            {% if researcher %}
+                refetchURL: "{% url "refetch-researcher" researcher.pk %}",
+                refetchMessage: "{% trans "Refreshing profile" %}",
+                currentTask: {% if researcher.current_task %}"{{ researcher.get_current_task_display }}"{% else %} null {% endif %},
+                setResearcherDepartmentURL: "{% url 'ajax-setResearcherDepartment' %}",
+            {% endif %}
+            isSuperUser: {{ request.user.is_superuser|yesno:"true,false,false" }},
+            initialMessages: {{ messages | safe }}
+        }
+
+        init_paper_module(config);
     });
 {% endblock %}
 

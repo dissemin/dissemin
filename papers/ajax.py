@@ -233,7 +233,7 @@ def todo_list_add(request):
     Adds a paper from a users todolist
     """
     body = {
-        'success_msg' : _('Remove from todo list'),
+        'success_msg' : _('Remove from to-do list'),
         'error_msg' : _('Marking failed'),
         'data-action': 'unmark',
     }

@@ -960,6 +960,14 @@ class Paper(models.Model, BarePaper):
         # paper cannot be claimed by user
         raise ValueError
 
+
+    def on_todolist(self, user):
+        """
+        Checks if this paper is on the user todo list
+        """
+        return self.todolist.filter(pk=user.pk).exists()
+
+
     def is_owned_by(self, user, flexible=False):
         """
         Is this user one of the owners of that paper?
