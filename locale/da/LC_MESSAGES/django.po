@@ -13,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-16 09:41+0200\n"
-"PO-Revision-Date: 2019-08-23 04:20:53+0000\n"
+"PO-Revision-Date: 2019-08-29 18:04:49+0000\n"
 "Language: da\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2491,9 +2491,8 @@ msgid "Animals (Zoology)"
 msgstr "Dyr (zoologi)"
 
 #: vinaigrette-deleteme.py:61
-#, fuzzy
 msgid "Technology"
-msgstr "Psykologi"
+msgstr "Teknologi"
 
 #: vinaigrette-deleteme.py:62
 #, fuzzy
@@ -2501,9 +2500,8 @@ msgid "Medicine & health"
 msgstr "Medicin og helbredvidenskab"
 
 #: vinaigrette-deleteme.py:64
-#, fuzzy
 msgid "Agriculture"
-msgstr "Arkitektur"
+msgstr "Landbrug"
 
 #: vinaigrette-deleteme.py:65
 msgid "Home & family management"

@@ -13,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-16 09:41+0200\n"
-"PO-Revision-Date: 2019-08-19 09:17:19+0000\n"
+"PO-Revision-Date: 2019-08-29 18:04:54+0000\n"
 "Language: pms\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -51,7 +51,7 @@ msgstr "Resumé"
 
 #: deposit/forms.py:148
 msgid "Dewey Decimal Class"
-msgstr ""
+msgstr "Classa dessimal Dewey"
 
 #: deposit/forms.py:156
 msgid "License"
@@ -428,7 +428,7 @@ msgstr "Falì a coleghesse al depòsit. Për piasì, ch'a preuva torna pi tard."
 
 #: deposit/sword/forms.py:15
 msgid "E-mail"
-msgstr ""
+msgstr "Pòsta eletrònica"
 
 #: deposit/sword/protocol.py:252
 msgid "Username or password not provided for this repository. Please contact the Dissemin team."

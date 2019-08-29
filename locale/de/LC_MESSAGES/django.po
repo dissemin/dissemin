@@ -18,7 +18,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-16 09:41+0200\n"
-"PO-Revision-Date: 2019-08-23 04:20:53+0000\n"
+"PO-Revision-Date: 2019-08-29 18:04:49+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2625,7 +2625,7 @@ msgstr "Creative Commons CC0 1.0 Universell (CC0 1.0) Public Domain Dedication"
 
 #: vinaigrette-deleteme.py:102
 msgid "Creative Commons Attribution 4.0 International (CC BY 4.0)"
-msgstr "Creative Commons Attribution 4.0 International (CC BY 4.0)"
+msgstr "Creative Commons Namensnennung 4.0 International (CC BY 4.0)"
 
 #: vinaigrette-deleteme.py:103
 msgid "Creative Commons Attribution-ShareAlike 4.0, International (CC BY-SA 4.0)"
@@ -2633,7 +2633,7 @@ msgstr "Creative Commons Namensnennung - Weitergabe unter gleichen Bedingungen 4
 
 #: vinaigrette-deleteme.py:104
 msgid "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
-msgstr "Creative Commons Namensnennung-Nicht kommerziell 4.0 International (CC BY-NC 4.0)"
+msgstr "Creative Commons Namensnennung - Nicht kommerziell 4.0 International (CC BY-NC 4.0)"
 
 #: vinaigrette-deleteme.py:105
 msgid "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)"
