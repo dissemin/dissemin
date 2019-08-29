@@ -125,7 +125,7 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
             data['license'] = license_chooser.pk
         licenses = LicenseChooser.objects.by_repository(repository=self.protocol.repository)
 
-        form = SWORDMETSForm(paper=self.protocol.paper, ddcs=ddc, licenses=licenses, data=data)
+        form = SWORDMETSForm(ddcs=ddc, licenses=licenses, data=data)
         form.is_valid()
 
         dissemin_xml = self.protocol._get_xml_dissemin_metadata(form)
@@ -165,7 +165,6 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
         data['email'] = depositing_user.email
 
         form  = SWORDMETSForm(
-            paper=self.protocol.paper,
             licenses=LicenseChooser.objects.by_repository(repository=self.protocol.repository),
             data=data
         )
@@ -257,7 +256,7 @@ class TestSWORDSMETSMODSProtocol(MetaTestSWORDMETSProtocol):
         if ddc is not None:
             data['ddc'] = [ddc for ddc in DDC.objects.filter(number__in=upload_data['ddc'])]
 
-        form = SWORDMETSForm(paper=self.protocol.paper, ddcs=ddc, data=data)
+        form = SWORDMETSForm(ddcs=ddc, data=data)
         form.is_valid()
         xml = self.protocol._get_xml_metadata(form)
         

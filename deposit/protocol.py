@@ -198,7 +198,7 @@ class RepositoryProtocol(object, metaclass = RepositoryProtocolMeta):
 
         initial = self.get_form_initial_data(licenses=licenses)
 
-        return self.form_class(paper=self.paper, licenses=licenses, ddcs=ddcs, initial=initial)
+        return self.form_class(licenses=licenses, ddcs=ddcs, initial=initial)
 
     def get_bound_form(self, data):
         """
@@ -211,7 +211,7 @@ class RepositoryProtocol(object, metaclass = RepositoryProtocolMeta):
 
         ddcs = self._get_ddcs()
 
-        return self.form_class(paper=self.paper, licenses=licenses, ddcs=ddcs, data=data)
+        return self.form_class(licenses=licenses, ddcs=ddcs, data=data)
 
     def submit_deposit(self, pdf, form, dry_run=False):
         """

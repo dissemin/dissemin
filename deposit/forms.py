@@ -160,11 +160,10 @@ class BaseMetadataForm(forms.Form):
         widget=forms.RadioSelect,
     )
 
-    def __init__(self, paper, **kwargs):
+    def __init__(self, **kwargs):
         """
         Subclasses can reimplement this and do things based on the models passed or generally add or remove fields.
         The paper_id field is not filled here, because that should only happen when filling the form with initial data.
-        :param paper: paper
         """
         ddcs = kwargs.pop('ddcs', None)
         licenses = kwargs.pop('licenses', None)
