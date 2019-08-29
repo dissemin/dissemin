@@ -189,6 +189,14 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
         responses.add(responses.POST, self.protocol.repository.endpoint, status=201)
 
         assert isinstance(self.protocol.submit_deposit(blank_pdf_path, None), DepositResult)
+        headers = responses.calls[0].request.headers
+        expected_headers = {
+                'Content-Type': 'application/zip', 
+                'Content-Disposition': 'filename=mets.zip', 
+                'Packaging': 'http://purl.org/net/sword/package/METSMODS'
+        }
+        for key, value in expected_headers.items():
+            assert headers[key] == value
 
 
     @responses.activate
