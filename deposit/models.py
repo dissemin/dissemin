@@ -148,6 +148,8 @@ class Repository(models.Model, CachingMixin):
 
     #: Setting this to false forbids any deposit in this repository
     enabled = models.BooleanField(default=True)
+    #: Set if abstract is required or not
+    abstract_required = models.BooleanField(default=True)
     #: Set of licenses the repository supports
     licenses = models.ManyToManyField(License, through='LicenseChooser')
     #: Optionally set DDC. If none selected, form will be omitted

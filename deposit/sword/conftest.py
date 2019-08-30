@@ -12,7 +12,7 @@ def sword_mods_protocol(request, repository):
     """
     Creates a sword mods repository object
     """
-    sword_mods_repository = repository.sword_mets_repository()
+    sword_mods_repository = repository.sword_mods_repository()
     request.cls.protocol = SWORDMETSMODSProtocol(sword_mods_repository)
 
 

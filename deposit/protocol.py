@@ -196,9 +196,11 @@ class RepositoryProtocol(object, metaclass = RepositoryProtocolMeta):
 
         ddcs = self._get_ddcs()
 
+        abstract_required = self.repository.abstract_required
+
         initial = self.get_form_initial_data(licenses=licenses)
 
-        return self.form_class(licenses=licenses, ddcs=ddcs, initial=initial)
+        return self.form_class(licenses=licenses, ddcs=ddcs, abstract_required=abstract_required, initial=initial)
 
     def get_bound_form(self, data):
         """
