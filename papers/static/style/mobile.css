@@ -47,3 +47,9 @@
 
 #subfooter { min-width: 300px; }
 #subfooter p { margin: 10px 0; }
+
+#sidebar {
+    border-left: 1px solid rgba(192,188,206,1);
+    border-right: 1px solid rgba(192,188,206,1);
+    border-bottom: 1px solid rgba(192,188,206,1);
+}

@@ -43,7 +43,6 @@ body
     font-family:"Open Sans", "sans-serif", sans;
     font-size:14.5px;
     font-weight:300;
-    background-color: #2A6496;
 }
 
 .pointer {
@@ -131,6 +130,8 @@ h4
     margin: 5px;
     margin: 0px;
     font-size:1em;
+    border-left: 1px solid rgba(192,188,206,1);
+    border-right: 1px solid rgba(192,188,206,1);
 }
 
 #header a {
@@ -225,11 +226,15 @@ h4
     padding-right: 1em;
 }
 
-#content, #subfooter
+#header, #content, #subfooter, #footer
 {
     max-width: 1030px;
     min-width: 630px;
     margin: auto;
+}
+
+#content, #subfooter
+{
     padding: 0 10px;
 }
 
@@ -247,30 +252,23 @@ h4
 #sidebar
 {
     border-right: 1px solid rgba(192,188,206,1);
-    border-bottom: 1px solid rgba(192,188,206,1);
     padding: 15px;
     padding-left: 5px;
     padding-top: 7px;
     bottom: 0px;
     margin-left: 10px;
-    margin-bottom: 30px;
     flex: 3 1 30%;
     order: 3;
+    align-self: stretch;
 }
 
 #fullPage, #summaryLists
 {
     min-height: 500px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
     height: auto !important;
     height:100%;
-    border-top: 1px solid transparent;
     border-left: 1px solid rgba(192,188,206,1);
     border-right: 1px solid rgba(192,188,206,1);
-    border-bottom: 1px solid transparent;
 }
 
 #summaryLists
@@ -279,6 +277,10 @@ h4
     order: 1;
     align-self: stretch;
     max-width: 750px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 #wrapper
@@ -869,12 +871,12 @@ input[type=checkbox]:checked ~ .stats_caption_label
 
 #footer
 {
-    width: 100%;
     background-color: #2A6496;
     padding: 30px;
     font-size: 1em;
-    margin:0;
     color: white;
+    border-left: 1px solid rgba(192,188,206,1);
+    border-right: 1px solid rgba(192,188,206,1);
 }
 
 #footer a {
@@ -1359,20 +1361,33 @@ a.stats_caption_line:hover {
     float: none;
 }
 
+.jumbotron {
+    margin-bottom: 0;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.jumbotron p {
+    font-size: 1.1em;
+    font-weight: 300;
+}
 
 #screenWelcome {
     background-color: #2A6496;
-	  color:white;
-  	padding:20px 50px;
+    color: white;
+  	padding: 20px 50px;
 }
 
 #screenWelcome a {
-	color:#fff;
-	text-decoration:underline;
+	color: #fff;
+	text-decoration: underline;
 }
 
 #screenWelcome p {
-	width:100%;
+	width: 100%;
+    font-size: 1.2em;
 }
 
 #screenWelcome .startButton {
@@ -1391,22 +1406,22 @@ a.stats_caption_line:hover {
 }
 
 #screenGreenOpenAccess {
-    background-color: #64962A;
+    background-color: #71AF33;
     color: white;
 }
 
 #screenOpenRepositories {
-    background-color: #962A64;
+    background-color: #2A6496;
     color: white;
 }
 
 #screenLatestUploads {
-    background-color: #2A9692;
+    background-color: #5F8BB0;
     color: white;
 }
 
 #screenDisseminData {
-    background-color: #96922A;
+    background-color: #2A6496;
     color: white;
 }
 
@@ -1415,17 +1430,22 @@ a.stats_caption_line:hover {
 	text-decoration: underline;
 }
 
+#screenDisseminData .dataRow {
+    padding: 30px;
+    text-align: center;
+}
+
 #screenDisseminData .statsSliceLegend {
     fill: white;
 }
 
 #screenDisseminForLibraries {
-    background-color: #922A96;
+    background-color: #5F8BB0;
     color: white;
 }
 
 #screenPartners {
-    background-color: #2A6496;
+    background-color: #71AF33;
     color: white;
 }
 
