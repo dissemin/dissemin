@@ -53,6 +53,10 @@
         Missing publications? Search for additional ones on <a class="showHrefPrint" href="{{ href }}">Dissem.in</a>.
     {% endblocktrans %}
     </p>
+
+{% elif view == "my-todolist" %}
+{% comment "Just to omit any remark about missing publications, sinsce to-do list is not really a search" %}{% endcomment %}
+
 {% else %}
     <p class="notFound">
         {% url 'faq' as faq_url %}

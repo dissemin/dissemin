@@ -25,6 +25,9 @@
 {% block jsScript %}
     // Setting variables for called functions
     var csrf_token = '{{csrf_token}}';
+    {% if view == 'my-todolist' %}
+        var todolist_fadeout = true
+    {% endif %}
 
     // Function handels claiming and unclaiming
     function claim_unclaim (evt) {

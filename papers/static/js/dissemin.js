@@ -13,6 +13,9 @@ function add_claim_mark_handlers () {
 }
 
 /* Add or remove paper from todolist */
+
+var todolist_fadeout = false
+
 function todolist (evt) {
     var obj = $(evt.target);
     var pk = obj.attr('data-pk');
@@ -42,7 +45,12 @@ function todolist (evt) {
         cache: false,
         success: function (data) {
             obj.text(data['success_msg']);
-            obj.attr('data-action', data['data-action']);
+            action = data['data-action'];
+            /* If object was removed, i.e. server returned 'mark' and fadeout is true, do fadeout */
+            if (action == 'mark' && todolist_fadeout == true) {
+                $("#paper-" + pk).fadeOut(300, function() { $(this).remove(); });
+            }
+            obj.attr('data-action', action);
         },
         error: function (data) {
             obj.text(data['error_msg']);

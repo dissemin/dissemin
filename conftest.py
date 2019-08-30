@@ -235,6 +235,19 @@ def check_page(request, dissemin_base_client, validator_tools):
 
 
 @pytest.fixture(params=TEST_LANGUAGES)
+def check_html(request, validator_tools):
+    """
+    Checks html
+    """
+    def checker(response):
+        vt = validator_tools
+        vt.check_html(response)
+
+    return checker
+
+
+
+@pytest.fixture(params=TEST_LANGUAGES)
 def check_url(request, validator_tools):
     """
     Checks status and html of a URL

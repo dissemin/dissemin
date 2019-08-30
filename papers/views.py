@@ -28,6 +28,7 @@ from allauth.socialaccount.signals import pre_social_login
 from allauth.account.signals import user_logged_in
 from deposit.models import DepositRecord
 from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
 from django.urls import reverse
 from django.http import Http404
@@ -245,6 +246,33 @@ class PaperSearchView(SearchView):
         if query_string:
             url += '?' + query_string
         return url
+
+
+class MyTodoListView(LoginRequiredMixin, PaperSearchView):
+
+    def get(self, request, *args, **kwargs):
+        """
+        Fetch pk of the papers on users todo list und put them into ES, then pass to PaperSearchView as this handles everything for us
+        """
+        papers = Paper.objects.filter(todolist=request.user).values_list('pk', flat=True)
+        self.queryset = self.queryset.filter(id__in=papers)
+
+        return super().get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        """
+        Prepare the context, i.e. set ajax_url, breadcrums etc.
+        We use view for fadeout and minor change in template
+        """
+        context = super().get_context_data(**kwargs)
+
+        context['ajax_url'] = reverse('ajax-todolist')
+
+        context['breadcrumbs'] = [(_('To-do list'), None)]
+        context['head_search_description'] = context['search_description'] = _('Papers on your to-do list')
+        context['view'] = 'my-todolist'
+
+        return context
 
 
 class ResearcherView(PaperSearchView):
