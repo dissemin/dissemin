@@ -1,6 +1,7 @@
 {% load statuses %}
 {% load i18n %}
 {% load static %}
+{% load todolist %}
 
 <div class="policyList">
     {% trans "Preprint:" as type_text %}
@@ -22,7 +23,25 @@
         </div>
     {% endif %}
     {% if mode == "link" %}
-        {% if paper.get_doi and not paper.pdf_url %}
+        {% if request.user.is_authenticated %}
+            {% todolist request.user paper as on_todolist %}
+            {% if not on_todolist %}
+                <div class="policyItem"></div>
+                <div class="policyPic policyPic-todolist"></div>
+                <div class="policyText">
+                    <p>
+                    <span class="helpPopover" data-content="{% trans "Mark this publication for later upload" %}" data-placement="bottom">{% trans "Mark for later upload" %}</span>
+                    <span class="policyDetailUpload"><span class="hidden" id="todolist-marked"><span class="glyphicon glyphicon-ok"></span> {% trans "Marked" %}</span><a class="btn btn-primary btn-xs todolist-button" data-pk="{{ paper.id }}" data-action="mark"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;{% trans "Mark" %}</a></span>
+                    </p>
+                </div>
+                <!-- Slightly hacky -->
+                <script>
+                    $(".todolist-button").click(todolist_detail);
+                    var csrf_token = "{{ csrf_token }}";
+                </script>
+            {% endif %}
+        {% endif %}
+        {% if paper.get_doi and not paper.pdf_url or not on_todolist %}
             <div class="policyItem"></div>
             <div class="policyPic policyPic-ask"></div>
             <div class="policyText">

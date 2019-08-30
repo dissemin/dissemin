@@ -57,3 +57,28 @@ function todolist (evt) {
         }
     });
 }
+
+function todolist_detail (evt) {
+    var obj = $(evt.target);
+    var pk = obj.attr('data-pk');
+    var ajax_url = '/ajax/todolist-add';
+
+    $.ajax({
+        method: 'post',
+        url: ajax_url,
+        data: {
+            "paper_pk": pk,
+            "csrfmiddlewaretoken": csrf_token
+        },
+        dataType: 'json',
+        cache: false,
+        success: function (data) {
+            $('#todolist-marked').toggleClass('hidden');
+            obj.remove();
+        },
+        error: function (data) {
+            obj.text(data['error_msg']);
+        }
+    });
+
+}

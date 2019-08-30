@@ -259,7 +259,7 @@ class TestTodoList():
         """
         check_status(302, 'my-todolist')
 
-    def test_todolist_view(self, check_html, authenticated_client, book_god_of_the_labyrinth):
+    def test_todolist_view(self, check_html, authenticated_client, book_god_of_the_labyrinth, rebuild_index):
         """
         Test of the to-do list view with items
         """
