@@ -11,6 +11,18 @@ from papers.models import Paper
 from papers.models import Researcher
 
 
+@pytest.fixture(params=[True, False])
+def abstract_required(db, request):
+    """
+    Sets abstract as required or not and returns value.
+    """
+    request.cls.protocol.repository.abstract_required=request.param
+    request.cls.protocol.repository.save()
+
+    return request.param
+
+
+
 @pytest.fixture(params=[None, '2543-2454-2345-234X'])
 def depositing_user(db, request, user_leibniz):
     """

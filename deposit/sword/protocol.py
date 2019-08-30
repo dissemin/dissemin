@@ -342,8 +342,9 @@ class SWORDMETSMODSProtocol(SWORDMETSProtocol):
         mods_xml.set('version', '3.7')
 
         # Abstract
-        mods_abstract = etree.SubElement(mods_xml, MODS + 'abstract')
-        mods_abstract.text = form.cleaned_data['abstract']
+        if form.cleaned_data['abstract']:
+            mods_abstract = etree.SubElement(mods_xml, MODS + 'abstract')
+            mods_abstract.text = form.cleaned_data['abstract']
 
         # Date
         mods_origin_info = etree.SubElement(mods_xml, MODS + 'originInfo')

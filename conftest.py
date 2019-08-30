@@ -139,6 +139,7 @@ def repository(db, simple_logo, oaisource):
                 protocol='SWORDMETSMODSProtocol',
                 endpoint='https://deposit.dissem.in/sword_mods/',
                 oaisource=oaisource.base_oaisource(),
+                abstract_required=False,
             )
             self.objects.append(repo)
             return repo
