@@ -46,29 +46,6 @@ class TestTodoList():
     Groups test for Ajax todo list function
     """
 
-    @staticmethod
-    def valid_json(json_data):
-        """
-        Serialzes given json and evaluates for success
-        """
-        try:
-            json.loads(json_data)
-        except ValueError:
-            return False
-        else:
-            return True
-
-
-    def valid_response(self, response, status):
-        """
-        Validates the response of AJAX request
-        """
-        assert response.status_code == status
-        assert self.valid_json(response.content) == True
-        for key in ['success_msg', 'error_msg', 'data-action']:
-            assert key in json.loads(response.content)
-
-
     @pytest.fixture(params=['ajax-todolist-add', 'ajax-todolist-remove'])
     def todolist_helper(self, request, monkeypatch, authenticated_client, book_god_of_the_labyrinth):
         """
@@ -101,9 +78,9 @@ class TestTodoList():
             response = authenticated_client.post(reverse(request.param), data, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
             assert response.status_code == status
-            assert TestTodoList.valid_json(response.content) == True
-            for key in ['success_msg', 'error_msg']:
-                assert key in json.loads(response.content)
+            json_resp = response.json()
+            for key in ['success_msg', 'error_msg', 'data-action']:
+                assert key in json_resp
             monkeypatch.undo()
             assert book_god_of_the_labyrinth.todolist.filter(pk=authenticated_client.user.pk).exists() == expected_result
 
