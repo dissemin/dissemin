@@ -5,6 +5,7 @@
 # Author: Becks
 # Author: Duckson32
 # Author: Elroy
+# Author: Fitoschido
 # Author: RadioAzureus
 # Author: Siebrand
 # --
@@ -16,7 +17,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-16 09:41+0200\n"
-"PO-Revision-Date: 2019-08-29 18:04:53+0000\n"
+"PO-Revision-Date: 2019-09-03 07:06:57+0000\n"
 "Language: nl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2639,7 +2640,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:98
 msgid "History of North America"
-msgstr ""
+msgstr "Geschiedenis van Noord-Amerika"
 
 #: vinaigrette-deleteme.py:99
 msgid "History of South America"

@@ -18,7 +18,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-16 09:41+0200\n"
-"PO-Revision-Date: 2019-08-23 04:20:54+0000\n"
+"PO-Revision-Date: 2019-09-03 07:06:55+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -59,7 +59,7 @@ msgstr "Resumen"
 
 #: deposit/forms.py:148
 msgid "Dewey Decimal Class"
-msgstr ""
+msgstr "Clase del sistema de Dewey"
 
 #: deposit/forms.py:156
 #, fuzzy
@@ -437,7 +437,7 @@ msgstr "Falló la conexión con el repositorio. Inténtalo de nuevo más tarde."
 
 #: deposit/sword/forms.py:15
 msgid "E-mail"
-msgstr ""
+msgstr "Correo electrónico"
 
 #: deposit/sword/protocol.py:252
 msgid "Username or password not provided for this repository. Please contact the Dissemin team."
@@ -2301,37 +2301,35 @@ msgstr "Informática"
 
 #: vinaigrette-deleteme.py:3
 msgid "Bibliographies"
-msgstr ""
+msgstr "Bibliografías"
 
 #: vinaigrette-deleteme.py:4
-#, fuzzy
 msgid "Library & information sciences"
-msgstr "Ciencias de la información y biblioteconomía"
+msgstr "Biblioteconomía y ciencias de la información"
 
 #: vinaigrette-deleteme.py:5
 msgid "Encyclopedias & books of facts"
-msgstr ""
+msgstr "Enciclopedias y compendios de datos"
 
 #: vinaigrette-deleteme.py:6
 msgid "Magazines, journals & serials"
-msgstr ""
+msgstr "Revistas, periódicos y publicaciones seriadas"
 
 #: vinaigrette-deleteme.py:7
 msgid "Associations, organizations & museums"
-msgstr ""
+msgstr "Asociaciones, organizaciones y museos"
 
 #: vinaigrette-deleteme.py:8
 msgid "News media, journalism & publishing"
-msgstr ""
+msgstr "Prensa, periodismo e industria editorial"
 
 #: vinaigrette-deleteme.py:9
-#, fuzzy
 msgid "Quotations"
-msgstr "Publicaciones"
+msgstr "Paremiología"
 
 #: vinaigrette-deleteme.py:10
 msgid "Manuscripts & rare books"
-msgstr ""
+msgstr "Manuscritos y libros raros"
 
 #: vinaigrette-deleteme.py:12
 #, fuzzy
@@ -2340,11 +2338,11 @@ msgstr "Física"
 
 #: vinaigrette-deleteme.py:13
 msgid "Epistemology"
-msgstr ""
+msgstr "Epistemología"
 
 #: vinaigrette-deleteme.py:14
 msgid "Parapsychology & occultism"
-msgstr ""
+msgstr "Parapsicología y ocultismo"
 
 #: vinaigrette-deleteme.py:15
 msgid "Philosophical schools of thought"
@@ -2357,15 +2355,15 @@ msgstr "Filosofía"
 
 #: vinaigrette-deleteme.py:18
 msgid "Ethics"
-msgstr ""
+msgstr "Ética"
 
 #: vinaigrette-deleteme.py:19
 msgid "Ancient, medieval & eastern philosophy"
-msgstr ""
+msgstr "Filosofías antigua, medieval y oriental"
 
 #: vinaigrette-deleteme.py:20
 msgid "Modern western philosophy"
-msgstr ""
+msgstr "Filosofía moderna occidental"
 
 #: vinaigrette-deleteme.py:21
 #, fuzzy
@@ -2374,19 +2372,19 @@ msgstr "Religiones"
 
 #: vinaigrette-deleteme.py:22
 msgid "Philosophy & theory of religion"
-msgstr ""
+msgstr "Filosofía y teoría de la religión"
 
 #: vinaigrette-deleteme.py:23
 msgid "The Bible"
-msgstr ""
+msgstr "La Biblia"
 
 #: vinaigrette-deleteme.py:24
 msgid "Christianity"
-msgstr ""
+msgstr "Cristianismo"
 
 #: vinaigrette-deleteme.py:25
 msgid "Christian practice & observance"
-msgstr ""
+msgstr "Praxis y observancia cristianas"
 
 #: vinaigrette-deleteme.py:26
 msgid "Christian pastoral practice & religious orders"
@@ -2394,11 +2392,11 @@ msgstr "Práctica pastoral cristiana y órdenes religiosas"
 
 #: vinaigrette-deleteme.py:27
 msgid "Christian organization, social work & worship"
-msgstr ""
+msgstr "Organización, trabajo social y culto cristianos"
 
 #: vinaigrette-deleteme.py:28
 msgid "History of Christianity"
-msgstr ""
+msgstr "Historia del cristianismo"
 
 #: vinaigrette-deleteme.py:29
 #, fuzzy
@@ -2417,51 +2415,51 @@ msgstr "Socioantropología y etnología"
 
 #: vinaigrette-deleteme.py:34
 msgid "Economics"
-msgstr ""
+msgstr "Economía"
 
 #: vinaigrette-deleteme.py:36
 msgid "Public administration & military science"
-msgstr ""
+msgstr "Administración pública y ciencia militar"
 
 #: vinaigrette-deleteme.py:37
 msgid "Social problems & social services"
-msgstr ""
+msgstr "Problemas y servicios sociales"
 
 #: vinaigrette-deleteme.py:39
 msgid "Commerce, communications & transportation"
-msgstr ""
+msgstr "Comercio, comunicaciones y transportes"
 
 #: vinaigrette-deleteme.py:40
 msgid "Customs, etiquette & folklore"
-msgstr ""
+msgstr "Costumbres, etiqueta y folclor"
 
 #: vinaigrette-deleteme.py:43
 msgid "English & Old English languages"
-msgstr "Inglés e inglés antiguo"
+msgstr "Lenguas inglesa y anglosajona"
 
 #: vinaigrette-deleteme.py:44
 msgid "German & related languages"
-msgstr ""
+msgstr "Lenguas alemana y relacionadas"
 
 #: vinaigrette-deleteme.py:45
 msgid "French & related languages"
-msgstr ""
+msgstr "Lenguas francesa y relacionadas"
 
 #: vinaigrette-deleteme.py:46
 msgid "Italian, Romanian & related languages"
-msgstr ""
+msgstr "Lenguas italiana, rumana y retorromana"
 
 #: vinaigrette-deleteme.py:47
 msgid "Spanish, Portuguese, Galician"
-msgstr ""
+msgstr "Castellano, portugués y gallego"
 
 #: vinaigrette-deleteme.py:48
 msgid "Latin & Italic languages"
-msgstr ""
+msgstr "Latín y lenguas itálicas"
 
 #: vinaigrette-deleteme.py:49
 msgid "Classical & modern Greek languages"
-msgstr ""
+msgstr "Lenguas griegas clásica y moderna"
 
 #: vinaigrette-deleteme.py:50
 #, fuzzy
@@ -2475,7 +2473,7 @@ msgstr "Biociencias"
 
 #: vinaigrette-deleteme.py:53
 msgid "Astronomy"
-msgstr ""
+msgstr "Astronomía"
 
 #: vinaigrette-deleteme.py:56
 msgid "Earth sciences & geology"
@@ -2483,7 +2481,7 @@ msgstr "Ciencias de la Tierra y geología"
 
 #: vinaigrette-deleteme.py:57
 msgid "Fossils & prehistoric life"
-msgstr ""
+msgstr "Fósiles y vida prehistórica"
 
 #: vinaigrette-deleteme.py:58
 #, fuzzy
@@ -2492,11 +2490,11 @@ msgstr "Sociología"
 
 #: vinaigrette-deleteme.py:59
 msgid "Plants (Botany)"
-msgstr ""
+msgstr "Plantas (botánica)"
 
 #: vinaigrette-deleteme.py:60
 msgid "Animals (Zoology)"
-msgstr ""
+msgstr "Animales (zoología)"
 
 #: vinaigrette-deleteme.py:61
 #, fuzzy
@@ -2515,11 +2513,11 @@ msgstr "Arquitectura"
 
 #: vinaigrette-deleteme.py:65
 msgid "Home & family management"
-msgstr ""
+msgstr "Administración familiar y del hogar"
 
 #: vinaigrette-deleteme.py:66
 msgid "Management & public relations"
-msgstr ""
+msgstr "Administración y relaciones públicas"
 
 #: vinaigrette-deleteme.py:67
 #, fuzzy
@@ -2528,47 +2526,47 @@ msgstr "Ingeniería"
 
 #: vinaigrette-deleteme.py:68
 msgid "Manufacturing"
-msgstr ""
+msgstr "Manufactura"
 
 #: vinaigrette-deleteme.py:69
 msgid "Manufacture for specific uses"
-msgstr ""
+msgstr "Manufactura para usos concretos"
 
 #: vinaigrette-deleteme.py:70
 msgid "Construction of buildings"
-msgstr ""
+msgstr "Construcción de edificios"
 
 #: vinaigrette-deleteme.py:71
 msgid "Arts"
-msgstr ""
+msgstr "Artes"
 
 #: vinaigrette-deleteme.py:72
 msgid "Area planning & landscape architecture"
-msgstr ""
+msgstr "Planificación territorial y arquitectura paisajista"
 
 #: vinaigrette-deleteme.py:74
 msgid "Sculpture, ceramics & metalwork"
-msgstr ""
+msgstr "Escultura, cerámica y metalistería"
 
 #: vinaigrette-deleteme.py:75
 msgid "Graphic arts & decorative arts"
-msgstr ""
+msgstr "Artes gráficas y decorativas"
 
 #: vinaigrette-deleteme.py:76
 msgid "Painting"
-msgstr ""
+msgstr "Pintura"
 
 #: vinaigrette-deleteme.py:77
 msgid "Printmaking & prints"
-msgstr ""
+msgstr "Grabado e impresión"
 
 #: vinaigrette-deleteme.py:78
 msgid "Photography, computer art, film, video"
-msgstr ""
+msgstr "Fotografía, artes computarizadas, cine y vídeo"
 
 #: vinaigrette-deleteme.py:79
 msgid "Music"
-msgstr ""
+msgstr "Música"
 
 #: vinaigrette-deleteme.py:80
 msgid "Sports, games & entertainment"
@@ -2580,31 +2578,31 @@ msgstr "Literatura, retórica y crítica"
 
 #: vinaigrette-deleteme.py:82
 msgid "American literature in English"
-msgstr ""
+msgstr "Literatura estadounidense en inglés"
 
 #: vinaigrette-deleteme.py:83
 msgid "English & Old English literatures"
-msgstr ""
+msgstr "Literaturas inglesa y anglosajona"
 
 #: vinaigrette-deleteme.py:84
 msgid "German & related literatures"
-msgstr ""
+msgstr "Literaturas alemana y relacionadas"
 
 #: vinaigrette-deleteme.py:85
 msgid "French & related literatures"
-msgstr ""
+msgstr "Literaturas francesa y relacionadas"
 
 #: vinaigrette-deleteme.py:86
 msgid "Italian, Romanian & related literatures"
-msgstr ""
+msgstr "Literaturas italiana, rumana y retorromana"
 
 #: vinaigrette-deleteme.py:87
 msgid "Spanish, Portuguese, Galician literatures"
-msgstr ""
+msgstr "Literaturas castellana, portuguesa y gallega"
 
 #: vinaigrette-deleteme.py:88
 msgid "Latin & Italic literatures"
-msgstr ""
+msgstr "Literaturas latina e itálica"
 
 #: vinaigrette-deleteme.py:89
 msgid "Classical & modern Greek literatures"
@@ -2622,15 +2620,15 @@ msgstr "Geografía"
 
 #: vinaigrette-deleteme.py:93
 msgid "Biography & genealogy"
-msgstr ""
+msgstr "Biografía y genealogía"
 
 #: vinaigrette-deleteme.py:94
 msgid "History of ancient world (to ca. 499)"
-msgstr ""
+msgstr "Historia del mundo antiguo (hasta ca. 499)"
 
 #: vinaigrette-deleteme.py:95
 msgid "History of Europe"
-msgstr ""
+msgstr "Historia de Europa"
 
 #: vinaigrette-deleteme.py:96
 #, fuzzy
@@ -2639,19 +2637,19 @@ msgstr "Historia"
 
 #: vinaigrette-deleteme.py:97
 msgid "History of Africa"
-msgstr ""
+msgstr "Historia de África"
 
 #: vinaigrette-deleteme.py:98
 msgid "History of North America"
-msgstr "Historia de América del Norte"
+msgstr "Historia de Norteamérica"
 
 #: vinaigrette-deleteme.py:99
 msgid "History of South America"
-msgstr ""
+msgstr "Historia de Sudamérica"
 
 #: vinaigrette-deleteme.py:100
 msgid "History of other areas"
-msgstr ""
+msgstr "Historias de otras áreas"
 
 #: vinaigrette-deleteme.py:101
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"

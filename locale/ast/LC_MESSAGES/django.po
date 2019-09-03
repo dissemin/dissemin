@@ -12,7 +12,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-16 09:41+0200\n"
-"PO-Revision-Date: 2019-08-19 09:17:16+0000\n"
+"PO-Revision-Date: 2019-09-03 07:06:53+0000\n"
 "Language: ast\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2313,9 +2313,8 @@ msgid "News media, journalism & publishing"
 msgstr ""
 
 #: vinaigrette-deleteme.py:9
-#, fuzzy
 msgid "Quotations"
-msgstr "Educación"
+msgstr "Paremioloxía"
 
 #: vinaigrette-deleteme.py:10
 msgid "Manuscripts & rare books"

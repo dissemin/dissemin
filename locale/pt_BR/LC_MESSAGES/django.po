@@ -13,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-16 09:41+0200\n"
-"PO-Revision-Date: 2019-08-23 04:20:58+0000\n"
+"PO-Revision-Date: 2019-09-03 07:06:59+0000\n"
 "Language: pt_br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -47,7 +47,7 @@ msgstr "Identificador de texto completo inválido."
 
 #: deposit/forms.py:138 papers/templates/papers/paper.html:145
 msgid "Abstract"
-msgstr "Abstrato"
+msgstr "Resumo"
 
 #: deposit/forms.py:148
 msgid "Dewey Decimal Class"
@@ -2303,11 +2303,11 @@ msgstr "Biblioteca e ciências da informação"
 
 #: vinaigrette-deleteme.py:5
 msgid "Encyclopedias & books of facts"
-msgstr "Enciclopédias e livros de fatos"
+msgstr "Enciclopédias e obras de referência"
 
 #: vinaigrette-deleteme.py:6
 msgid "Magazines, journals & serials"
-msgstr "Revistas, revistas e seriados"
+msgstr "Revistas, jornais e publicações periódicas"
 
 #: vinaigrette-deleteme.py:7
 msgid "Associations, organizations & museums"
