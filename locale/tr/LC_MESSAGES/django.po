@@ -4,6 +4,7 @@
 # Author: BaRaN6161 TURK
 # Author: Chansey
 # Author: Incelemeelemani
+# Author: Suvarioglu
 # Author: TmY e12
 # Author: ToprakM
 # --
@@ -15,7 +16,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-16 09:41+0200\n"
-"PO-Revision-Date: 2019-08-19 09:17:20+0000\n"
+"PO-Revision-Date: 2019-08-26 10:10:58+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -56,9 +57,8 @@ msgid "Dewey Decimal Class"
 msgstr ""
 
 #: deposit/forms.py:156
-#, fuzzy
 msgid "License"
-msgstr "Lisanssız"
+msgstr "Lisans"
 
 #: deposit/forms.py:192
 msgid "No preferred repository"
@@ -2314,9 +2314,8 @@ msgid "Manuscripts & rare books"
 msgstr ""
 
 #: vinaigrette-deleteme.py:12
-#, fuzzy
 msgid "Metaphysics"
-msgstr "Fizik"
+msgstr "Metafizik"
 
 #: vinaigrette-deleteme.py:13
 msgid "Epistemology"
@@ -2521,7 +2520,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:72
 msgid "Area planning & landscape architecture"
-msgstr ""
+msgstr "Bölge planlama & peyzaj mimarisi"
 
 #: vinaigrette-deleteme.py:74
 msgid "Sculpture, ceramics & metalwork"
@@ -2593,9 +2592,8 @@ msgid "Other literatures"
 msgstr "Edebiyat"
 
 #: vinaigrette-deleteme.py:92
-#, fuzzy
 msgid "Geography & travel"
-msgstr "Coğrafya"
+msgstr "Coğrafya & seyahat"
 
 #: vinaigrette-deleteme.py:93
 msgid "Biography & genealogy"
@@ -2607,12 +2605,11 @@ msgstr "Antik dünyanın tarihi (yaklaşık 499)"
 
 #: vinaigrette-deleteme.py:95
 msgid "History of Europe"
-msgstr ""
+msgstr "Avrupa'nın Tarihi"
 
 #: vinaigrette-deleteme.py:96
-#, fuzzy
 msgid "History of Asia"
-msgstr "Tarih"
+msgstr "Asya'nın Tarihi"
 
 #: vinaigrette-deleteme.py:97
 msgid "History of Africa"

@@ -4,12 +4,16 @@
 # Author: Athena in Wonderland
 # Author: Fitoschido
 # Author: Hamilton Abreu
+# --
+# This file is part of the Dissemin Project
+# This file is distributed under the same license as the Dissemin package.
+#
 msgid ""
 msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-27 18:48+0200\n"
-"PO-Revision-Date: 2019-07-25 08:08:17+0000\n"
+"PO-Revision-Date: 2019-09-03 07:06:55+0000\n"
 "Language: pt\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"

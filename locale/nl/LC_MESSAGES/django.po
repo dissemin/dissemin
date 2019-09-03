@@ -5,6 +5,9 @@
 # Author: Becks
 # Author: Duckson32
 # Author: Elroy
+# Author: Fitoschido
+# Author: RadioAzureus
+# Author: Siebrand
 # --
 # This file is part of the Dissemin Project
 # This file is distributed under the same license as the Dissemin package.
@@ -14,7 +17,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-16 09:41+0200\n"
-"PO-Revision-Date: 2019-08-19 09:17:19+0000\n"
+"PO-Revision-Date: 2019-09-03 07:06:57+0000\n"
 "Language: nl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -58,9 +61,8 @@ msgid "Dewey Decimal Class"
 msgstr ""
 
 #: deposit/forms.py:156
-#, fuzzy
 msgid "License"
-msgstr "Geen vergunning"
+msgstr "Licentie"
 
 #: deposit/forms.py:192
 msgid "No preferred repository"
@@ -433,7 +435,7 @@ msgstr "Kan geen verbinding met de opslagplaats maken. Probeer het later opnieuw
 
 #: deposit/sword/forms.py:15
 msgid "E-mail"
-msgstr ""
+msgstr "E-mail"
 
 #: deposit/sword/protocol.py:252
 msgid "Username or password not provided for this repository. Please contact the Dissemin team."
@@ -2299,7 +2301,7 @@ msgstr "Informatica"
 
 #: vinaigrette-deleteme.py:3
 msgid "Bibliographies"
-msgstr ""
+msgstr "Bibliografieën"
 
 #: vinaigrette-deleteme.py:4
 #, fuzzy
@@ -2308,7 +2310,7 @@ msgstr "Bibliotheek en informatiekunde"
 
 #: vinaigrette-deleteme.py:5
 msgid "Encyclopedias & books of facts"
-msgstr ""
+msgstr "Encyclopedieën en boeken met feiten"
 
 #: vinaigrette-deleteme.py:6
 msgid "Magazines, journals & serials"
@@ -2329,7 +2331,7 @@ msgstr "Publicaties"
 
 #: vinaigrette-deleteme.py:10
 msgid "Manuscripts & rare books"
-msgstr ""
+msgstr "Manuscripten en zeldzame boeken"
 
 #: vinaigrette-deleteme.py:12
 #, fuzzy
@@ -2342,7 +2344,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:14
 msgid "Parapsychology & occultism"
-msgstr ""
+msgstr "Parapsychologie en occultisme"
 
 #: vinaigrette-deleteme.py:15
 msgid "Philosophical schools of thought"
@@ -2355,7 +2357,7 @@ msgstr "Wijsbegeerte"
 
 #: vinaigrette-deleteme.py:18
 msgid "Ethics"
-msgstr ""
+msgstr "Ethiek"
 
 #: vinaigrette-deleteme.py:19
 msgid "Ancient, medieval & eastern philosophy"
@@ -2363,7 +2365,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:20
 msgid "Modern western philosophy"
-msgstr ""
+msgstr "Moderne westerse filosofie"
 
 #: vinaigrette-deleteme.py:21
 #, fuzzy
@@ -2376,11 +2378,11 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:23
 msgid "The Bible"
-msgstr ""
+msgstr "De Bijbel"
 
 #: vinaigrette-deleteme.py:24
 msgid "Christianity"
-msgstr ""
+msgstr "Christendom"
 
 #: vinaigrette-deleteme.py:25
 msgid "Christian practice & observance"
@@ -2399,9 +2401,8 @@ msgid "History of Christianity"
 msgstr ""
 
 #: vinaigrette-deleteme.py:29
-#, fuzzy
 msgid "Christian denominations"
-msgstr "Dissemin-beheer"
+msgstr "Christelijke stromingen"
 
 #: vinaigrette-deleteme.py:30
 #, fuzzy
@@ -2439,7 +2440,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:44
 msgid "German & related languages"
-msgstr ""
+msgstr "Duits en gerelateerde talen"
 
 #: vinaigrette-deleteme.py:45
 msgid "French & related languages"
@@ -2462,9 +2463,8 @@ msgid "Classical & modern Greek languages"
 msgstr ""
 
 #: vinaigrette-deleteme.py:50
-#, fuzzy
 msgid "Other languages"
-msgstr "Taal wijzigen"
+msgstr "Andere talen"
 
 #: vinaigrette-deleteme.py:51
 #, fuzzy
@@ -2473,7 +2473,7 @@ msgstr "Levenswetenschappen"
 
 #: vinaigrette-deleteme.py:53
 msgid "Astronomy"
-msgstr ""
+msgstr "Astronomie"
 
 #: vinaigrette-deleteme.py:56
 msgid "Earth sciences & geology"
@@ -2481,7 +2481,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:57
 msgid "Fossils & prehistoric life"
-msgstr ""
+msgstr "Fossielen en prehistorisch leven"
 
 #: vinaigrette-deleteme.py:58
 #, fuzzy
@@ -2521,13 +2521,12 @@ msgid "Management & public relations"
 msgstr "Publicaties vernieuwen"
 
 #: vinaigrette-deleteme.py:67
-#, fuzzy
 msgid "Chemical engineering"
-msgstr "Techniek"
+msgstr "Toegepaste scheikunde"
 
 #: vinaigrette-deleteme.py:68
 msgid "Manufacturing"
-msgstr ""
+msgstr "Fabricage"
 
 #: vinaigrette-deleteme.py:69
 msgid "Manufacture for specific uses"
@@ -2539,7 +2538,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:71
 msgid "Arts"
-msgstr ""
+msgstr "Letteren"
 
 #: vinaigrette-deleteme.py:72
 msgid "Area planning & landscape architecture"
@@ -2567,11 +2566,11 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:79
 msgid "Music"
-msgstr ""
+msgstr "Muziek"
 
 #: vinaigrette-deleteme.py:80
 msgid "Sports, games & entertainment"
-msgstr ""
+msgstr "Sport en Spel"
 
 #: vinaigrette-deleteme.py:81
 msgid "Literature, rhetoric & criticism"
@@ -2587,7 +2586,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:84
 msgid "German & related literatures"
-msgstr ""
+msgstr "Duits en gerelateerde literatuur"
 
 #: vinaigrette-deleteme.py:85
 msgid "French & related literatures"
@@ -2629,12 +2628,11 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:95
 msgid "History of Europe"
-msgstr ""
+msgstr "Geschiedenis van Europa"
 
 #: vinaigrette-deleteme.py:96
-#, fuzzy
 msgid "History of Asia"
-msgstr "Geschiedenis"
+msgstr "Geschiedenis van Azië"
 
 #: vinaigrette-deleteme.py:97
 msgid "History of Africa"
@@ -2642,15 +2640,15 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:98
 msgid "History of North America"
-msgstr ""
+msgstr "Geschiedenis van Noord-Amerika"
 
 #: vinaigrette-deleteme.py:99
 msgid "History of South America"
-msgstr ""
+msgstr "Geschiedenis van Zuid-Amerika"
 
 #: vinaigrette-deleteme.py:100
 msgid "History of other areas"
-msgstr ""
+msgstr "Geschiedenis van andere gebieden"
 
 #: vinaigrette-deleteme.py:101
 #, fuzzy

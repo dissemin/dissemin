@@ -15,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-16 09:41+0200\n"
-"PO-Revision-Date: 2019-08-19 09:17:20+0000\n"
+"PO-Revision-Date: 2019-08-29 18:04:57+0000\n"
 "Language: sv\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -435,7 +435,7 @@ msgstr "Anslutningen till HAL misslyckades. Var god försök igen."
 
 #: deposit/sword/forms.py:15
 msgid "E-mail"
-msgstr ""
+msgstr "E-post"
 
 #: deposit/sword/protocol.py:252
 msgid "Username or password not provided for this repository. Please contact the Dissemin team."
@@ -2393,7 +2393,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:28
 msgid "History of Christianity"
-msgstr ""
+msgstr "Kristendomens historia"
 
 #: vinaigrette-deleteme.py:29
 #, fuzzy
@@ -2412,7 +2412,7 @@ msgstr "Socialantropologi och etnologi"
 
 #: vinaigrette-deleteme.py:34
 msgid "Economics"
-msgstr ""
+msgstr "Ekonomi"
 
 #: vinaigrette-deleteme.py:36
 msgid "Public administration & military science"
@@ -2436,11 +2436,11 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:44
 msgid "German & related languages"
-msgstr ""
+msgstr "Tyska och relaterade språk"
 
 #: vinaigrette-deleteme.py:45
 msgid "French & related languages"
-msgstr ""
+msgstr "Franska och relaterade språk"
 
 #: vinaigrette-deleteme.py:46
 msgid "Italian, Romanian & related languages"
@@ -2470,7 +2470,7 @@ msgstr "Livsvetenskap"
 
 #: vinaigrette-deleteme.py:53
 msgid "Astronomy"
-msgstr ""
+msgstr "Astronomi"
 
 #: vinaigrette-deleteme.py:56
 msgid "Earth sciences & geology"
@@ -2491,7 +2491,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:60
 msgid "Animals (Zoology)"
-msgstr ""
+msgstr "Djur (zoologi)"
 
 #: vinaigrette-deleteme.py:61
 #, fuzzy
@@ -2535,7 +2535,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:71
 msgid "Arts"
-msgstr ""
+msgstr "Konst"
 
 #: vinaigrette-deleteme.py:72
 msgid "Area planning & landscape architecture"
@@ -2543,7 +2543,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:74
 msgid "Sculpture, ceramics & metalwork"
-msgstr ""
+msgstr "Skulptur, keramik och metalljobb"
 
 #: vinaigrette-deleteme.py:75
 msgid "Graphic arts & decorative arts"
@@ -2563,7 +2563,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:79
 msgid "Music"
-msgstr ""
+msgstr "Musik"
 
 #: vinaigrette-deleteme.py:80
 msgid "Sports, games & entertainment"
@@ -2583,7 +2583,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:84
 msgid "German & related literatures"
-msgstr ""
+msgstr "Tysk och relaterad litteratur"
 
 #: vinaigrette-deleteme.py:85
 msgid "French & related literatures"
@@ -2634,7 +2634,7 @@ msgstr "Historia"
 
 #: vinaigrette-deleteme.py:97
 msgid "History of Africa"
-msgstr ""
+msgstr "Afrikas historia"
 
 #: vinaigrette-deleteme.py:98
 msgid "History of North America"

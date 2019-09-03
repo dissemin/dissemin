@@ -12,7 +12,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-16 09:41+0200\n"
-"PO-Revision-Date: 2019-08-19 09:17:19+0000\n"
+"PO-Revision-Date: 2019-09-03 07:06:56+0000\n"
 "Language: lb\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2287,7 +2287,7 @@ msgstr "Informatik"
 
 #: vinaigrette-deleteme.py:3
 msgid "Bibliographies"
-msgstr ""
+msgstr "Bibliographien"
 
 #: vinaigrette-deleteme.py:4
 msgid "Library & information sciences"
@@ -2303,7 +2303,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:7
 msgid "Associations, organizations & museums"
-msgstr ""
+msgstr "Associatiounen, Organisatiounen & Muséeën"
 
 #: vinaigrette-deleteme.py:8
 msgid "News media, journalism & publishing"
@@ -2325,7 +2325,7 @@ msgstr "Physik"
 
 #: vinaigrette-deleteme.py:13
 msgid "Epistemology"
-msgstr ""
+msgstr "Episteemologie"
 
 #: vinaigrette-deleteme.py:14
 msgid "Parapsychology & occultism"
@@ -2400,7 +2400,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:34
 msgid "Economics"
-msgstr ""
+msgstr "Ekonomie"
 
 #: vinaigrette-deleteme.py:36
 msgid "Public administration & military science"
@@ -2420,7 +2420,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:43
 msgid "English & Old English languages"
-msgstr ""
+msgstr "Englesch an Al-Englesch Sproochen"
 
 #: vinaigrette-deleteme.py:44
 msgid "German & related languages"
@@ -2475,11 +2475,11 @@ msgstr "Soziologie"
 
 #: vinaigrette-deleteme.py:59
 msgid "Plants (Botany)"
-msgstr ""
+msgstr "Planzen (Botanik)"
 
 #: vinaigrette-deleteme.py:60
 msgid "Animals (Zoology)"
-msgstr ""
+msgstr "Déieren (Zoologie)"
 
 #: vinaigrette-deleteme.py:61
 #, fuzzy
@@ -2605,7 +2605,7 @@ msgstr "Geographie"
 
 #: vinaigrette-deleteme.py:93
 msgid "Biography & genealogy"
-msgstr ""
+msgstr "Biografie & Genealogie"
 
 #: vinaigrette-deleteme.py:94
 msgid "History of ancient world (to ca. 499)"

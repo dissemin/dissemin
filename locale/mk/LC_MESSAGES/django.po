@@ -13,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-16 09:41+0200\n"
-"PO-Revision-Date: 2019-08-19 09:17:19+0000\n"
+"PO-Revision-Date: 2019-09-03 07:06:57+0000\n"
 "Language: mk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -239,11 +239,11 @@ msgstr "Економија и квантитативни финансии"
 
 #: deposit/hal/models.py:14
 msgid "HAL username"
-msgstr ""
+msgstr "HAL корисничко име"
 
 #: deposit/hal/models.py:15
 msgid "If set, deposits will be associated to this HAL account."
-msgstr ""
+msgstr "Ако е зададено, депозитите ќе се придружат кон оваа сметка на HAL."
 
 #: deposit/hal/protocol.py:148
 msgid "No HAL user credentials provided."
@@ -430,7 +430,7 @@ msgstr "Не успеав да се поврзам со HAL. Обидете се
 
 #: deposit/sword/forms.py:15
 msgid "E-mail"
-msgstr ""
+msgstr "Е-пошта"
 
 #: deposit/sword/protocol.py:252
 msgid "Username or password not provided for this repository. Please contact the Dissemin team."
@@ -478,20 +478,20 @@ msgstr ""
 #: deposit/templates/deposit/preferences_nav.html:3
 #: templates/dissemin/skeleton.html:62
 msgid "Preferences"
-msgstr ""
+msgstr "Нагодувања"
 
 #: deposit/templates/deposit/preferences_nav.html:7
 msgid "General"
-msgstr ""
+msgstr "Општи"
 
 #: deposit/templates/deposit/repo_preferences.html:13
 msgid "Repository preferences"
-msgstr ""
+msgstr "Нагодувања на складиштето"
 
 #: deposit/templates/deposit/start.html:11
 #: deposit/templates/deposit/start.html:14
 msgid "Depositing"
-msgstr ""
+msgstr "Складиштење"
 
 #: deposit/templates/deposit/start.html:40
 msgid "Trying to fill this field automatically for you..."
@@ -730,11 +730,11 @@ msgstr "Истражувач"
 
 #: papers/forms.py:77
 msgid "newest first"
-msgstr ""
+msgstr "прво најнови"
 
 #: papers/forms.py:78
 msgid "oldest first"
-msgstr ""
+msgstr "прво најстари"
 
 #: papers/forms.py:112 papers/forms.py:119
 msgid "Any"
@@ -801,7 +801,7 @@ msgstr "Написи"
 #: papers/templates/papers/advanced_search.html:24
 #: papers/templates/papers/index.html:41
 msgid "Advanced search"
-msgstr ""
+msgstr "Напредно пребарување"
 
 #: papers/templates/papers/advanced_search.html:27
 #: papers/templates/papers/search.html:277
@@ -912,7 +912,7 @@ msgstr "Написи на членовите"
 #: papers/templates/papers/exportCitationsModal.html:7
 #: papers/templates/papers/exportCitationsModal.html:33
 msgid "Close"
-msgstr ""
+msgstr "Затвори"
 
 #: papers/templates/papers/exportCitationsModal.html:10
 #: papers/templates/papers/paperDetails.html:38
@@ -921,7 +921,7 @@ msgstr ""
 
 #: papers/templates/papers/exportCitationsModal.html:16
 msgid "Format"
-msgstr ""
+msgstr "Формат"
 
 #: papers/templates/papers/exportCitationsModal.html:22
 #: papers/templates/papers/paper.html:118
@@ -1083,7 +1083,7 @@ msgstr ""
 #: papers/templates/papers/publiListItem.html:16
 #, python-format
 msgid "and %(remaining_authors)s other authors"
-msgstr ""
+msgstr "и %(remaining_authors)s други автори"
 
 #: papers/templates/papers/publiListItem.html:40
 #: publishers/templates/publishers/itemPolicy.html:21
@@ -1131,7 +1131,7 @@ msgstr "Дали сте вие?"
 #: papers/templates/papers/search.html:148
 #, python-format
 msgid " %(first_name)s %(last_name)s uses ORCID."
-msgstr ""
+msgstr " %(first_name)s %(last_name)s го користат ORCID."
 
 #: papers/templates/papers/search.html:157
 msgid "Refresh publications"
@@ -1190,7 +1190,7 @@ msgstr ""
 
 #: papers/templates/papers/search.html:266
 msgid "Refine"
-msgstr ""
+msgstr "Уточни"
 
 #: papers/templatetags/statuses.py:19 papers/templatetags/statuses.py:79
 msgid "Unknown OA status"
@@ -1594,7 +1594,7 @@ msgstr ""
 
 #: statistics/models.py:65
 msgid "Available"
-msgstr ""
+msgstr "Достапно"
 
 #: statistics/templates/statistics/availabilitypct.html:10
 msgid "of the papers by this publisher are available"
@@ -1654,7 +1654,7 @@ msgstr "Администрација на Dissemin"
 
 #: templates/dissemin/error.html:6 templates/dissemin/error.html:12
 msgid "Error"
-msgstr ""
+msgstr "Грешка"
 
 #: templates/dissemin/error.html:15
 msgid "<a href=\"/\">Go back to the home page.</a>"
@@ -1730,7 +1730,7 @@ msgstr ""
 
 #: templates/dissemin/faq.html:45 templates/dissemin/faq.html:450
 msgid "Authentication with ORCID"
-msgstr ""
+msgstr "Заверка со ORCID"
 
 #: templates/dissemin/faq.html:47 templates/dissemin/faq.html:452
 msgid "Why do you need to authenticate users?"
@@ -2031,16 +2031,16 @@ msgstr ""
 
 #: templates/dissemin/faq.html:602 templates/dissemin/tos.html:162
 msgid "Back to top"
-msgstr ""
+msgstr "Најгоре"
 
 #: templates/dissemin/login.html:8 templates/dissemin/login.html:70
 #: templates/dissemin/sandbox.html:8 templates/dissemin/sandbox.html:72
 msgid "Sign In"
-msgstr ""
+msgstr "Најава"
 
 #: templates/dissemin/login.html:12
 msgid "Sign in"
-msgstr ""
+msgstr "Најава"
 
 #: templates/dissemin/login.html:19 templates/dissemin/sandbox.html:19
 msgid "Dissemin uses ORCID to authenticate its users. ORCID is an independent non-profit effort to provide an open registry of unique researcher identifiers. It also offers open services to link research activities and organizations to these identifiers. Learn more at <a href=\"https://orcid.org\">orcid.org</a>."
@@ -2049,7 +2049,7 @@ msgstr ""
 #: templates/dissemin/login.html:28 templates/dissemin/login.html:36
 #: templates/dissemin/sandbox.html:30
 msgid "Log in"
-msgstr ""
+msgstr "Најава"
 
 #: templates/dissemin/login.html:30 templates/dissemin/sandbox.html:32
 msgid "If you already have an ORCID account, you can use it with Dissemin. We will not make any changes to your profile."
@@ -2058,7 +2058,7 @@ msgstr ""
 #: templates/dissemin/login.html:42 templates/dissemin/login.html:51
 #: templates/dissemin/sandbox.html:44
 msgid "Sign up"
-msgstr ""
+msgstr "Регистрација"
 
 #: templates/dissemin/login.html:44 templates/dissemin/sandbox.html:46
 msgid "Not an ORCID user yet? Create an account, it is free and takes a few seconds."
@@ -2066,7 +2066,7 @@ msgstr ""
 
 #: templates/dissemin/login.html:59 templates/dissemin/sandbox.html:61
 msgid "Dissemin account"
-msgstr ""
+msgstr "Сметка на Dissemin"
 
 #: templates/dissemin/login.html:60 templates/dissemin/sandbox.html:62
 #, python-format
@@ -2075,12 +2075,12 @@ msgstr ""
 
 #: templates/dissemin/login.html:69 templates/dissemin/sandbox.html:71
 msgid "Forgot Password?"
-msgstr ""
+msgstr "Ја заборавивте лозинката?"
 
 #: templates/dissemin/partners.html:7 templates/dissemin/partners.html:12
 #: templates/dissemin/skeleton.html:104
 msgid "Partners"
-msgstr ""
+msgstr "Партнери"
 
 #: templates/dissemin/sandbox.html:12
 msgid "SANDBOX Sign in"
@@ -2101,7 +2101,7 @@ msgstr "Сменете јазик"
 
 #: templates/dissemin/skeleton.html:51
 msgid "Translate"
-msgstr ""
+msgstr "Преведување"
 
 #: templates/dissemin/skeleton.html:56 templates/dissemin/skeleton.html:95
 msgid "FAQ"
@@ -2201,9 +2201,8 @@ msgid "Documents deposited in repositories via Dissemin can be stored on the pla
 msgstr ""
 
 #: templates/dissemin/tos.html:132
-#, fuzzy
 msgid "Misuse can be reported to <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
-msgstr "Злоупотребите пријавувајте ги на support@dissem.in."
+msgstr "Злоупотребите пријавувајте ги на <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
 
 #: templates/dissemin/tos.html:140
 msgid "The <a href=\"https://dissem.in\">dissem.in</a> website has been registered with <a href=\"https://www.cnil.fr/\">CNIL</a> under declaration n°1895382 v0."
@@ -2216,7 +2215,7 @@ msgstr ""
 #: templates/socialaccount/authentication_error.html:6
 #: templates/socialaccount/authentication_error.html:12
 msgid "Authentication error"
-msgstr ""
+msgstr "Грешка при заверката"
 
 #: templates/socialaccount/authentication_error.html:16
 msgid "Authentication has failed. <a href=\"/\">Go back to the login page.</a>"
@@ -2290,7 +2289,7 @@ msgstr "Информатика"
 
 #: vinaigrette-deleteme.py:3
 msgid "Bibliographies"
-msgstr ""
+msgstr "Библиографии"
 
 #: vinaigrette-deleteme.py:4
 #, fuzzy

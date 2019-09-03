@@ -136,7 +136,6 @@ class BaseMetadataForm(forms.Form):
     # Abstract field to
     abstract = forms.CharField(
             label=_('Abstract'),
-            required=True,
             widget=wrap_with_prefetch_status(
                 forms.Textarea,
                 reverse_lazy('ajax-waitForConsolidatedField'),
@@ -160,16 +159,19 @@ class BaseMetadataForm(forms.Form):
         widget=forms.RadioSelect,
     )
 
-    def __init__(self, paper, **kwargs):
+    def __init__(self, **kwargs):
         """
         Subclasses can reimplement this and do things based on the models passed or generally add or remove fields.
         The paper_id field is not filled here, because that should only happen when filling the form with initial data.
-        :param paper: paper
         """
+        abstract_required = kwargs.pop('abstract_required', True)
         ddcs = kwargs.pop('ddcs', None)
         licenses = kwargs.pop('licenses', None)
 
         super(BaseMetadataForm, self).__init__(**kwargs)
+
+        # Mark abstract as required or not
+        self.fields['abstract'].required = abstract_required
         
         # If no DDC for repository choosen, then delete field from form
         if ddcs is None:

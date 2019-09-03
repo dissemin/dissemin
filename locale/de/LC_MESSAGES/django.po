@@ -18,7 +18,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-16 09:41+0200\n"
-"PO-Revision-Date: 2019-08-19 09:17:17+0000\n"
+"PO-Revision-Date: 2019-08-29 18:04:49+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1770,11 +1770,11 @@ msgstr "Kann ich das Dissemin-Logo zu Werbezwecken nutzen?"
 
 #: templates/dissemin/faq.html:67
 msgid "In a nutshell, the Open Access movement promotes free access to the scientific literature. For a more in-depth introduction, we recommend <a href=\"http://www.phdcomics.com/comics.php?f=1533\">this video in English</a> and <a href=\"https://pablo.rauzy.name/openaccess/introduction.html\">this introduction in French</a>."
-msgstr "Kur zusammengefasst setzt sich die Open Access Bewegung für den freien Zugang zu Wissen ein. Für eine tiefer gehende Einführung empfehlen wir das Video <a href=\"http://www.phdcomics.com/comics.php?f=1533\">What is Open Access?</a>."
+msgstr "Kurz zusammengefasst setzt sich die Open Access Bewegung für den freien Zugang zu Wissen ein. Für eine tiefer gehende Einführung empfehlen wir das Video <a href=\"http://www.phdcomics.com/comics.php?f=1533\">What is Open Access?</a>."
 
 #: templates/dissemin/faq.html:77
 msgid "You should do it because:"
-msgstr "Du solltest es tun, da:"
+msgstr "Ja, das solltest Du aus folgenden Gründen tun:"
 
 #: templates/dissemin/faq.html:83
 msgid "It makes your research <strong>more accessible</strong> and <strong>more visible</strong>. Many researchers routinely check papers in topic repositories such as arXiv, and it is less likely that these researchers check your homepage regularly."
@@ -1810,7 +1810,7 @@ msgstr "Institutionelle Repositorien für die Wissenschaftler_innen des zugehör
 
 #: templates/dissemin/faq.html:139
 msgid "General-purpose academic repositories such as <a href=\"https://zenodo.org\">Zenodo</a>, not limited to a particular scope."
-msgstr "Allgemeine Repositorien wie <a href=\"https://zenodo.org\">Zenodo</a>, die nicht auf ein bestimmten Bereich eingeschränkt sind."
+msgstr "Allgemeine Repositorien wie <a href=\"https://zenodo.org\">Zenodo</a>, die nicht auf einen bestimmten Bereich eingeschränkt sind."
 
 #: templates/dissemin/faq.html:146
 msgid "If your research community favours a specific repository, using it makes sense as it will increase your visibility. If not, institutional or general-purpose repositories are also good options."
@@ -1843,7 +1843,7 @@ msgstr "<strong><a href=\"https://arxiv.org/\">arXiv</a></strong>, ein bekanntes
 #: templates/dissemin/faq.html:206
 #, python-format
 msgid "Dissemin is a web platform gathering metadata from <a href=\"%(sources_url)s\">many sources</a> and analyzing the full text availability of publications of researchers. It has been designed to foster the use of repositories (rather than preprints posted on personal homepages), <a href=\"#repositories-rock\">for numerous reasons</a>."
-msgstr "Dissemin ist eine Web-Service, der Metadaten aus <a href=\"%(sources_url)s\">verschiedenen Quellen</a> zusammenführt und die Volltextverfügbarkeit von Publikationen prüft. Dissemin wurde entwickelt, um die Nutzung von Repositorien (statt privaten Websiten) zu fördern. Siehe hierzu auch <a href=\"#repositories-rock\">Warum sollte ich meine Publikationen in ein Repositorium hochladen?</a>"
+msgstr "Dissemin ist ein Web-Service, der Metadaten aus <a href=\"%(sources_url)s\">verschiedenen Quellen</a> zusammenführt und die Volltextverfügbarkeit von Publikationen prüft. Dissemin wurde entwickelt, um die Nutzung von Repositorien (statt privaten Websiten) zu fördern. Siehe hierzu auch <a href=\"#repositories-rock\">Warum sollte ich meine Publikationen in ein Repositorium hochladen?</a>"
 
 #: templates/dissemin/faq.html:215
 msgid "Dissemin is not a repository as it does not store any full text. When the full text of a publication is available, a link to the relevant page is provided. The full texts deposited through Dissemin are stored in third-party repositories such as <a href=\"https://zenodo.org\">Zenodo</a> or <a href=\"https://hal.archives-ouvertes.fr/\">HAL</a>."
@@ -2373,7 +2373,7 @@ msgstr "Christliche Orden und Ortskirchen"
 
 #: vinaigrette-deleteme.py:27
 msgid "Christian organization, social work & worship"
-msgstr ""
+msgstr "Kirchenorganisation, Sozialarbeit und Religionsausübung"
 
 #: vinaigrette-deleteme.py:28
 msgid "History of Christianity"
@@ -2480,23 +2480,20 @@ msgid "Medicine & health"
 msgstr "Medizin und Gesundheit"
 
 #: vinaigrette-deleteme.py:64
-#, fuzzy
 msgid "Agriculture"
-msgstr "Architektur"
+msgstr "Landwirtschaft"
 
 #: vinaigrette-deleteme.py:65
 msgid "Home & family management"
 msgstr "HAuswirtschaft"
 
 #: vinaigrette-deleteme.py:66
-#, fuzzy
 msgid "Management & public relations"
-msgstr "Veröffentlichungen auffrischen"
+msgstr "Management"
 
 #: vinaigrette-deleteme.py:67
-#, fuzzy
 msgid "Chemical engineering"
-msgstr "Ingenieurwesen"
+msgstr "Chemische Verfahrenstechnik"
 
 #: vinaigrette-deleteme.py:68
 msgid "Manufacturing"
@@ -2583,14 +2580,12 @@ msgid "Classical & modern Greek literatures"
 msgstr "Griechische LiteraturGriechische Literatur"
 
 #: vinaigrette-deleteme.py:90
-#, fuzzy
 msgid "Other literatures"
-msgstr "Literaturwissenschaft"
+msgstr "Literaturen anderer Sprachen"
 
 #: vinaigrette-deleteme.py:92
-#, fuzzy
 msgid "Geography & travel"
-msgstr "Geografie"
+msgstr "Geografie und Reisen"
 
 #: vinaigrette-deleteme.py:93
 msgid "Biography & genealogy"
@@ -2605,9 +2600,8 @@ msgid "History of Europe"
 msgstr "Geschichte Europas"
 
 #: vinaigrette-deleteme.py:96
-#, fuzzy
 msgid "History of Asia"
-msgstr "Geschichte"
+msgstr "Geschichte Asiens"
 
 #: vinaigrette-deleteme.py:97
 msgid "History of Africa"
@@ -2631,7 +2625,7 @@ msgstr "Creative Commons CC0 1.0 Universell (CC0 1.0) Public Domain Dedication"
 
 #: vinaigrette-deleteme.py:102
 msgid "Creative Commons Attribution 4.0 International (CC BY 4.0)"
-msgstr "Creative Commons Attribution 4.0 International (CC BY 4.0)"
+msgstr "Creative Commons Namensnennung 4.0 International (CC BY 4.0)"
 
 #: vinaigrette-deleteme.py:103
 msgid "Creative Commons Attribution-ShareAlike 4.0, International (CC BY-SA 4.0)"
@@ -2639,7 +2633,7 @@ msgstr "Creative Commons Namensnennung - Weitergabe unter gleichen Bedingungen 4
 
 #: vinaigrette-deleteme.py:104
 msgid "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
-msgstr "Creative Commons Namensnennung-Nicht kommerziell 4.0 International (CC BY-NC 4.0)"
+msgstr "Creative Commons Namensnennung - Nicht kommerziell 4.0 International (CC BY-NC 4.0)"
 
 #: vinaigrette-deleteme.py:105
 msgid "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)"

@@ -283,6 +283,9 @@ class SWORDMETSProtocol(RepositoryProtocol):
         metadata = self._get_xml_metadata(form)
         dissemin_metadata = self._get_xml_dissemin_metadata(form)
         mets = self._get_mets(metadata, dissemin_metadata)
+        # Logging Metadata
+        self.log('Metadata looks like:')
+        self.log(mets)
 
         zipfile = self._get_mets_container(pdf, mets)
 
@@ -290,12 +293,15 @@ class SWORDMETSProtocol(RepositoryProtocol):
         self.log("### Preparing request to repository")
 
         auth = (self.repository.username, self.repository.password)
-        files = {'file': ('mets.zip', zipfile.getvalue(), 'application/zip')}
-        headers = {'Content-type': 'application/zip'}
+        headers = {
+                'Content-Type': 'application/zip',
+                'Content-Disposition': 'filename=mets.zip',
+                'Packaging': 'http://purl.org/net/sword/package/METSMODS',
+        }
 
         self.log("### Sending request")
 
-        r = requests.post(self.repository.endpoint, auth=auth, headers=headers, files=files, timeout=20)
+        r = requests.post(self.repository.endpoint, auth=auth, headers=headers, data=zipfile.getvalue(), timeout=20)
 
         self.log_request(r, 201, _('Unable to deposit to repository') + self.repository.name) 
 
@@ -336,8 +342,9 @@ class SWORDMETSMODSProtocol(SWORDMETSProtocol):
         mods_xml.set('version', '3.7')
 
         # Abstract
-        mods_abstract = etree.SubElement(mods_xml, MODS + 'abstract')
-        mods_abstract.text = form.cleaned_data['abstract']
+        if form.cleaned_data['abstract']:
+            mods_abstract = etree.SubElement(mods_xml, MODS + 'abstract')
+            mods_abstract.text = form.cleaned_data['abstract']
 
         # Date
         mods_origin_info = etree.SubElement(mods_xml, MODS + 'originInfo')

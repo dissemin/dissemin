@@ -103,7 +103,7 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
         mets_xsd.assertValid(etree.fromstring(bytes(mets_xml, encoding='utf-8')))
 
 
-    def test_get_mets_integration(self, mets_xsd, depositing_user, upload_data, ddc, license_chooser):
+    def test_get_mets_integration(self, mets_xsd, depositing_user, upload_data, ddc, license_chooser, abstract_required):
         """
         Integration test running all possible metadata cases and validating against mets schema
         """
@@ -115,18 +115,22 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
         data['email'] = depositing_user.email
         if upload_data['oairecord'].description is not None:
             data['abstract'] = upload_data['oairecord'].description
-        else:
+        elif abstract_required:
             data['abstract'] = upload_data['abstract']
 
         if ddc is not None:
             data['ddc'] = [ddc for ddc in DDC.objects.filter(number__in=upload_data['ddc'])]
 
+        licenses = None
         if license_chooser:
             data['license'] = license_chooser.pk
-        licenses = LicenseChooser.objects.by_repository(repository=self.protocol.repository)
+            licenses = LicenseChooser.objects.by_repository(repository=self.protocol.repository)
 
-        form = SWORDMETSForm(paper=self.protocol.paper, ddcs=ddc, licenses=licenses, data=data)
-        form.is_valid()
+        form = SWORDMETSForm(ddcs=ddc, licenses=licenses, abstract_required=abstract_required, data=data)
+        valid_form = form.is_valid()
+        if not valid_form:
+            print(form.errors)
+        assert valid_form == True
 
         dissemin_xml = self.protocol._get_xml_dissemin_metadata(form)
         metadata_xml = self.protocol._get_xml_metadata(form)
@@ -165,7 +169,6 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
         data['email'] = depositing_user.email
 
         form  = SWORDMETSForm(
-            paper=self.protocol.paper,
             licenses=LicenseChooser.objects.by_repository(repository=self.protocol.repository),
             data=data
         )
@@ -189,6 +192,14 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
         responses.add(responses.POST, self.protocol.repository.endpoint, status=201)
 
         assert isinstance(self.protocol.submit_deposit(blank_pdf_path, None), DepositResult)
+        headers = responses.calls[0].request.headers
+        expected_headers = {
+                'Content-Type': 'application/zip', 
+                'Content-Disposition': 'filename=mets.zip', 
+                'Packaging': 'http://purl.org/net/sword/package/METSMODS'
+        }
+        for key, value in expected_headers.items():
+            assert headers[key] == value
 
 
     @responses.activate
@@ -241,7 +252,7 @@ class TestSWORDSMETSMODSProtocol(MetaTestSWORDMETSProtocol):
         assert self.protocol.__str__() == "SWORD Protocol (MODS)"
 
 
-    def test_get_xml_metadata(self, mods_3_7_xsd, ddc, upload_data):
+    def test_get_xml_metadata(self, mods_3_7_xsd, ddc, abstract_required, upload_data):
         """
         Validates against mods 3.7 schema
         """
@@ -251,14 +262,15 @@ class TestSWORDSMETSMODSProtocol(MetaTestSWORDMETSProtocol):
         data = dict()
         if upload_data['oairecord'].description is not None:
             data['abstract'] = upload_data['oairecord'].description
-        else:
+        elif abstract_required:
             data['abstract'] = upload_data['abstract']
 
         if ddc is not None:
             data['ddc'] = [ddc for ddc in DDC.objects.filter(number__in=upload_data['ddc'])]
 
-        form = SWORDMETSForm(paper=self.protocol.paper, ddcs=ddc, data=data)
+        form = SWORDMETSForm(ddcs=ddc, abstract_required=abstract_required, data=data)
         form.is_valid()
+
         xml = self.protocol._get_xml_metadata(form)
         
         # When using pytest -s, show resulting xml

@@ -3,6 +3,7 @@
 #
 # Author: A3nm
 # Author: Abijeet Patro
+# Author: Fitoschido
 # Author: Gomoko
 # Author: Lyokoï
 # Author: Urhixidur
@@ -17,7 +18,7 @@ msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-16 09:41+0200\n"
-"PO-Revision-Date: 2019-08-19 09:17:18+0000\n"
+"PO-Revision-Date: 2019-09-03 07:06:56+0000\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -2373,7 +2374,7 @@ msgstr "Pratique pastorale chrétienne et ordres religieux"
 
 #: vinaigrette-deleteme.py:27
 msgid "Christian organization, social work & worship"
-msgstr "Organisation chrétienne, travail social et culte"
+msgstr "Organisation, travail social et culte chrétiens"
 
 #: vinaigrette-deleteme.py:28
 msgid "History of Christianity"

@@ -1,6 +1,7 @@
 # Translation of Dissemin website to Simplified Chinese (中文（简体）‎)
 # Exported from translatewiki.net
 #
+# Author: A Chinese Wikipedian
 # Author: Abijeet Patro
 # Author: Deathkon
 # Author: Liuxinyu970226
@@ -14,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-16 09:41+0200\n"
-"PO-Revision-Date: 2019-08-19 09:17:20+0000\n"
+"PO-Revision-Date: 2019-09-03 07:07:00+0000\n"
 "Language: zh_hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -433,7 +434,7 @@ msgstr "无法连接到存储库。请稍后重试。"
 
 #: deposit/sword/forms.py:15
 msgid "E-mail"
-msgstr ""
+msgstr "邮箱"
 
 #: deposit/sword/protocol.py:252
 msgid "Username or password not provided for this repository. Please contact the Dissemin team."
@@ -2568,7 +2569,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:79
 msgid "Music"
-msgstr ""
+msgstr "音乐"
 
 #: vinaigrette-deleteme.py:80
 msgid "Sports, games & entertainment"

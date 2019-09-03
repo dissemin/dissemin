@@ -16,7 +16,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-16 09:41+0200\n"
-"PO-Revision-Date: 2019-08-19 09:17:16+0000\n"
+"PO-Revision-Date: 2019-08-23 04:20:52+0000\n"
 "Language: ar\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1347,9 +1347,8 @@ msgid "Invalid ORCID profile."
 msgstr "ملف تعريف ORCID غير صالح."
 
 #: papers/views.py:295
-#, fuzzy
 msgid "authored by"
-msgstr "تأليف/"
+msgstr "تأليف"
 
 #: papers/views.py:346
 msgid " published by "

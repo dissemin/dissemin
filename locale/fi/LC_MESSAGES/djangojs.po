@@ -3,12 +3,16 @@
 #
 # Author: Kly
 # Author: Pyscowicz
+# --
+# This file is part of the Dissemin Project
+# This file is distributed under the same license as the Dissemin package.
+#
 msgid ""
 msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-27 18:48+0200\n"
-"PO-Revision-Date: 2019-08-01 16:17:55+0000\n"
+"PO-Revision-Date: 2019-09-03 07:06:53+0000\n"
 "Language: fi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
