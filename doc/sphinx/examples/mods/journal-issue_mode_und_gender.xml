@@ -10,27 +10,95 @@
                 <mods:number>10</mods:number>
               </mods:detail>
               <mods:detail type="issue">
-                <mods:number>1-1610</mods:number>
+                <mods:number>3-2018</mods:number>
               </mods:detail>
             </mods:part>
             <mods:titleInfo>
-              <mods:title>Sein und Nichtsein</mods:title>
+              <mods:title>GENDER – Zeitschrift für Geschlecht, Kultur und Gesellschaft</mods:title>
             </mods:titleInfo>
           </mods:relatedItem>
           <mods:abstract>User filled in abstract</mods:abstract>
           <mods:originInfo>
-            <mods:dateIssued encoding="w3cdtf">1610-01-01</mods:dateIssued>
-            <mods:publisher>Shakespeare Money Maker Inc.</mods:publisher>
+            <mods:dateIssued encoding="w3cdtf">2018-09-17</mods:dateIssued>
+            <mods:publisher>Barbara Budrich Publishers</mods:publisher>
           </mods:originInfo>
           <mods:classification authority="ddc">700</mods:classification>
           <mods:name type="personal">
-            <mods:namePart type="family">Hamlet</mods:namePart>
-            <mods:namePart type="given">Ghost</mods:namePart>
+            <mods:namePart type="family">Lehnert</mods:namePart>
+            <mods:namePart type="given">Gertrud</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Bünnig</mods:namePart>
+            <mods:namePart type="given">Jenny</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">von Maydell</mods:namePart>
+            <mods:namePart type="given">Miriam</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Weilandt</mods:namePart>
+            <mods:namePart type="given">Maria</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Hahmann</mods:namePart>
+            <mods:namePart type="given">Julia</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Amsler</mods:namePart>
+            <mods:namePart type="given">Claudia</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Giannone</mods:namePart>
+            <mods:namePart type="given">Antonella</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Leutner</mods:namePart>
+            <mods:namePart type="given">Petra</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Brodersen</mods:namePart>
+            <mods:namePart type="given">Folke</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Motakef</mods:namePart>
+            <mods:namePart type="given">Mona</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Bringmann</mods:namePart>
+            <mods:namePart type="given">Julia</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Wimbauer</mods:namePart>
+            <mods:namePart type="given">Christine</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">de Nève</mods:namePart>
+            <mods:namePart type="given">Dorothée</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Ferch</mods:namePart>
+            <mods:namePart type="given">Niklas</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Braunmühl</mods:namePart>
+            <mods:namePart type="given">Carolin</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Richter</mods:namePart>
+            <mods:namePart type="given">Susanne</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Scholz</mods:namePart>
+            <mods:namePart type="given">Janina</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Binder</mods:namePart>
+            <mods:namePart type="given">Charlotte</mods:namePart>
           </mods:name>
           <mods:titleInfo>
-            <mods:title>Sein und Nichtsein</mods:title>
+            <mods:title>Mode und Gender</mods:title>
           </mods:titleInfo>
-          <mods:genre>proceedings</mods:genre>
+          <mods:genre>journal-issue</mods:genre>
         </mods:mods>
       </xmlData>
     </mdWrap>
