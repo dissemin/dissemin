@@ -1,51 +1,77 @@
 <?xml version='1.0' encoding='utf-8'?>
-<mets xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.loc.gov/METS/">
+<mets xmlns="http://www.loc.gov/METS/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <dmdSec ID="d_dmd_1">
     <mdWrap MDTYPE="OTHER">
       <xmlData>
-        <mods xmlns="http://www.loc.gov/mods/v3" version="3.7">
-          <relatedItem>
-            <part>
-              <detail type="volume">
-                <number>43</number>
-              </detail>
-              <detail type="issue">
-                <number>3-4</number>
-              </detail>
-              <extent unit="pages">
-                <start>353</start>
-                <end>368</end>
-              </extent>
-            </part>
-            <identifier type="eissn">2160-0228</identifier>
-            <identifier type="issn">0016-6928</identifier>
-            <titleInfo>
-              <title>Genre</title>
-            </titleInfo>
-          </relatedItem>
-          <abstract>This abstract was filled in by the user</abstract>
-          <originInfo>
-            <dateIssued encoding="w3cdtf">2010-01-01</dateIssued>
-            <publisher>Duke University Press</publisher>
-          </originInfo>
-          <identifier type="doi">10.1215/00166928-43-3-4-353</identifier>
-          <classification authority="ddc">100</classification>
-          <name type="personal">
-            <namePart type="family">Cacciari</namePart>
-            <namePart type="given">M.</namePart>
-          </name>
-          <name type="personal">
-            <namePart type="family">Murphy</namePart>
-            <namePart type="given">T. S.</namePart>
-          </name>
-          <titleInfo>
-            <title>Confrontation with Heidegger</title>
-          </titleInfo>
-          <genre>journal-article</genre>
-        </mods>
+        <mods:mods xmlns:mods="http://www.loc.gov/mods/v3" version="3.7">
+          <mods:relatedItem>
+            <mods:part>
+              <mods:detail type="volume">
+                <mods:number>43</mods:number>
+              </mods:detail>
+              <mods:detail type="issue">
+                <mods:number>3-4</mods:number>
+              </mods:detail>
+              <mods:extent unit="pages">
+                <mods:start>353</mods:start>
+                <mods:end>368</mods:end>
+              </mods:extent>
+            </mods:part>
+            <mods:identifier type="eissn">2160-0228</mods:identifier>
+            <mods:identifier type="issn">0016-6928</mods:identifier>
+            <mods:titleInfo>
+              <mods:title>Genre</mods:title>
+            </mods:titleInfo>
+          </mods:relatedItem>
+          <mods:abstract>This abstract was filled in by the user</mods:abstract>
+          <mods:originInfo>
+            <mods:dateIssued encoding="w3cdtf">2010-01-01</mods:dateIssued>
+            <mods:publisher>Duke University Press</mods:publisher>
+          </mods:originInfo>
+          <mods:identifier type="doi">10.1215/00166928-43-3-4-353</mods:identifier>
+          <mods:classification authority="ddc">100</mods:classification>
+          <mods:name type="personal">
+            <mods:namePart type="family">Cacciari</mods:namePart>
+            <mods:namePart type="given">M.</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Murphy</mods:namePart>
+            <mods:namePart type="given">T. S.</mods:namePart>
+          </mods:name>
+          <mods:titleInfo>
+            <mods:title>Confrontation with Heidegger</mods:title>
+          </mods:titleInfo>
+          <mods:genre>journal-article</mods:genre>
+        </mods:mods>
       </xmlData>
     </mdWrap>
   </dmdSec>
+  <amdSec ID="d_amd_1">
+    <rightsMD ID="d_rightsmd_1">
+      <mdWrap MDTYPE="OTHER">
+        <xmlData>
+          <ds:dissemin xmlns:ds="https://dissem.in/deposit/terms/" version="1.0">
+            <ds:depositor>
+              <ds:authentication>orcid</ds:authentication>
+              <ds:firstName>Gottfried</ds:firstName>
+              <ds:lastName>Leibniz</ds:lastName>
+              <ds:email>gottfried.leibniz@tib.eu</ds:email>
+              <ds:orcid>2543-2454-2345-234X</ds:orcid>
+              <ds:isContributor>false</ds:isContributor>
+            </ds:depositor>
+            <ds:publication>
+              <ds:license>
+                <ds:licenseName>Creative Commons Attribution 4.0 International (CC BY 4.0)</ds:licenseName>
+                <ds:licenseURI>https://creativecommons.org/licenses/by/4.0/</ds:licenseURI>
+                <ds:licenseTransmitId>cc_by-40</ds:licenseTransmitId>
+              </ds:license>
+              <ds:disseminId>7</ds:disseminId>
+            </ds:publication>
+          </ds:dissemin>
+        </xmlData>
+      </mdWrap>
+    </rightsMD>
+  </amdSec>
   <fileSec>
     <fileGrp>
       <file ID="d_file_1">

@@ -1,44 +1,70 @@
 <?xml version='1.0' encoding='utf-8'?>
-<mets xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.loc.gov/METS/">
+<mets xmlns="http://www.loc.gov/METS/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <dmdSec ID="d_dmd_1">
     <mdWrap MDTYPE="OTHER">
       <xmlData>
-        <mods xmlns="http://www.loc.gov/mods/v3" version="3.7">
-          <relatedItem>
-            <part>
-              <detail type="volume">
-                <number>20</number>
-              </detail>
-              <detail type="issue">
-                <number>1</number>
-              </detail>
-            </part>
-            <titleInfo>
-              <title>Electronic Journal of Linear Algebra</title>
-            </titleInfo>
-          </relatedItem>
-          <abstract>In this paper, we analyze the process of assembling new matrix geometric means from existing ones, through function composition or limit processes. We show that for n a new matrix mean exists which is simpler to compute than the existing ones. Moreover, we show that for n the existing proving strategies cannot provide a mean computationally simpler than the existing ones.</abstract>
-          <originInfo>
-            <dateIssued encoding="w3cdtf">2010-01-01</dateIssued>
-            <publisher>University of Wyoming Libraries</publisher>
-          </originInfo>
-          <identifier type="doi">10.13001/1081-3810.1385</identifier>
-          <language>
-            <languageTerm type="code" authority="rfc3066">en</languageTerm>
-          </language>
-          <classification authority="ddc">510</classification>
-          <name type="personal">
-            <namePart type="family">Poloni</namePart>
-            <namePart type="given">Federico G.</namePart>
-          </name>
-          <titleInfo>
-            <title>Constructing matrix geometric means</title>
-          </titleInfo>
-          <genre>journal-article</genre>
-        </mods>
+        <mods:mods xmlns:mods="http://www.loc.gov/mods/v3" version="3.7">
+          <mods:relatedItem>
+            <mods:part>
+              <mods:detail type="volume">
+                <mods:number>20</mods:number>
+              </mods:detail>
+              <mods:detail type="issue">
+                <mods:number>1</mods:number>
+              </mods:detail>
+            </mods:part>
+            <mods:titleInfo>
+              <mods:title>Electronic Journal of Linear Algebra</mods:title>
+            </mods:titleInfo>
+          </mods:relatedItem>
+          <mods:abstract>In this paper, we analyze the process of assembling new matrix geometric means from existing ones, through function composition or limit processes. We show that for n a new matrix mean exists which is simpler to compute than the existing ones. Moreover, we show that for n the existing proving strategies cannot provide a mean computationally simpler than the existing ones.</mods:abstract>
+          <mods:originInfo>
+            <mods:dateIssued encoding="w3cdtf">2010-01-01</mods:dateIssued>
+            <mods:publisher>University of Wyoming Libraries</mods:publisher>
+          </mods:originInfo>
+          <mods:identifier type="doi">10.13001/1081-3810.1385</mods:identifier>
+          <mods:language>
+            <mods:languageTerm type="code" authority="rfc3066">en</mods:languageTerm>
+          </mods:language>
+          <mods:classification authority="ddc">510</mods:classification>
+          <mods:name type="personal">
+            <mods:namePart type="family">Poloni</mods:namePart>
+            <mods:namePart type="given">Federico G.</mods:namePart>
+          </mods:name>
+          <mods:titleInfo>
+            <mods:title>Constructing matrix geometric means</mods:title>
+          </mods:titleInfo>
+          <mods:genre>journal-article</mods:genre>
+        </mods:mods>
       </xmlData>
     </mdWrap>
   </dmdSec>
+  <amdSec ID="d_amd_1">
+    <rightsMD ID="d_rightsmd_1">
+      <mdWrap MDTYPE="OTHER">
+        <xmlData>
+          <ds:dissemin xmlns:ds="https://dissem.in/deposit/terms/" version="1.0">
+            <ds:depositor>
+              <ds:authentication>orcid</ds:authentication>
+              <ds:firstName>Gottfried</ds:firstName>
+              <ds:lastName>Leibniz</ds:lastName>
+              <ds:email>gottfried.leibniz@tib.eu</ds:email>
+              <ds:orcid>2543-2454-2345-234X</ds:orcid>
+              <ds:isContributor>false</ds:isContributor>
+            </ds:depositor>
+            <ds:publication>
+              <ds:license>
+                <ds:licenseName>Creative Commons Attribution 4.0 International (CC BY 4.0)</ds:licenseName>
+                <ds:licenseURI>https://creativecommons.org/licenses/by/4.0/</ds:licenseURI>
+                <ds:licenseTransmitId>cc_by-40</ds:licenseTransmitId>
+              </ds:license>
+              <ds:disseminId>8</ds:disseminId>
+            </ds:publication>
+          </ds:dissemin>
+        </xmlData>
+      </mdWrap>
+    </rightsMD>
+  </amdSec>
   <fileSec>
     <fileGrp>
       <file ID="d_file_1">

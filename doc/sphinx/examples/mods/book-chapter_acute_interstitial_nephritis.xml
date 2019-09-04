@@ -1,43 +1,69 @@
 <?xml version='1.0' encoding='utf-8'?>
-<mets xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.loc.gov/METS/">
+<mets xmlns="http://www.loc.gov/METS/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <dmdSec ID="d_dmd_1">
     <mdWrap MDTYPE="OTHER">
       <xmlData>
-        <mods xmlns="http://www.loc.gov/mods/v3" version="3.7">
-          <relatedItem>
-            <part>
-              <extent unit="pages">
-                <start>729</start>
-                <end>737</end>
-              </extent>
-            </part>
-            <titleInfo>
-              <title>Comprehensive Clinical Nephrology</title>
-            </titleInfo>
-          </relatedItem>
-          <abstract>This abstract is pure user input</abstract>
-          <originInfo>
-            <dateIssued encoding="w3cdtf">2010-01-01</dateIssued>
-            <publisher>Elsevier BV</publisher>
-          </originInfo>
-          <identifier type="doi">10.1016/b978-0-323-05876-6.00060-5</identifier>
-          <classification authority="ddc">610</classification>
-          <name type="personal">
-            <namePart type="family">Rossert</namePart>
-            <namePart type="given">Jerome A.</namePart>
-          </name>
-          <name type="personal">
-            <namePart type="family">Fischer</namePart>
-            <namePart type="given">Evelyne A.</namePart>
-          </name>
-          <titleInfo>
-            <title>Acute Interstitial Nephritis</title>
-          </titleInfo>
-          <genre>book-chapter</genre>
-        </mods>
+        <mods:mods xmlns:mods="http://www.loc.gov/mods/v3" version="3.7">
+          <mods:relatedItem>
+            <mods:part>
+              <mods:extent unit="pages">
+                <mods:start>729</mods:start>
+                <mods:end>737</mods:end>
+              </mods:extent>
+            </mods:part>
+            <mods:titleInfo>
+              <mods:title>Comprehensive Clinical Nephrology</mods:title>
+            </mods:titleInfo>
+          </mods:relatedItem>
+          <mods:abstract>This abstract is pure user input</mods:abstract>
+          <mods:originInfo>
+            <mods:dateIssued encoding="w3cdtf">2010-01-01</mods:dateIssued>
+            <mods:publisher>Elsevier BV</mods:publisher>
+          </mods:originInfo>
+          <mods:identifier type="doi">10.1016/b978-0-323-05876-6.00060-5</mods:identifier>
+          <mods:classification authority="ddc">610</mods:classification>
+          <mods:name type="personal">
+            <mods:namePart type="family">Rossert</mods:namePart>
+            <mods:namePart type="given">Jerome A.</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Fischer</mods:namePart>
+            <mods:namePart type="given">Evelyne A.</mods:namePart>
+          </mods:name>
+          <mods:titleInfo>
+            <mods:title>Acute Interstitial Nephritis</mods:title>
+          </mods:titleInfo>
+          <mods:genre>book-chapter</mods:genre>
+        </mods:mods>
       </xmlData>
     </mdWrap>
   </dmdSec>
+  <amdSec ID="d_amd_1">
+    <rightsMD ID="d_rightsmd_1">
+      <mdWrap MDTYPE="OTHER">
+        <xmlData>
+          <ds:dissemin xmlns:ds="https://dissem.in/deposit/terms/" version="1.0">
+            <ds:depositor>
+              <ds:authentication>orcid</ds:authentication>
+              <ds:firstName>Gottfried</ds:firstName>
+              <ds:lastName>Leibniz</ds:lastName>
+              <ds:email>gottfried.leibniz@tib.eu</ds:email>
+              <ds:orcid>2543-2454-2345-234X</ds:orcid>
+              <ds:isContributor>false</ds:isContributor>
+            </ds:depositor>
+            <ds:publication>
+              <ds:license>
+                <ds:licenseName>Creative Commons Attribution 4.0 International (CC BY 4.0)</ds:licenseName>
+                <ds:licenseURI>https://creativecommons.org/licenses/by/4.0/</ds:licenseURI>
+                <ds:licenseTransmitId>cc_by-40</ds:licenseTransmitId>
+              </ds:license>
+              <ds:disseminId>1</ds:disseminId>
+            </ds:publication>
+          </ds:dissemin>
+        </xmlData>
+      </mdWrap>
+    </rightsMD>
+  </amdSec>
   <fileSec>
     <fileGrp>
       <file ID="d_file_1">
