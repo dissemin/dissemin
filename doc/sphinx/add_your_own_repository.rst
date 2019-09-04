@@ -42,6 +42,17 @@ If you require for your ingest a different packaging name or packaging format, p
 
 The body is the named file. All values won't change between different uploads to the same repository.
 
+Script for Tests
+''''''''''''''''
+
+To support you in your local implementation we have some examples (grouped by document type, see below).
+This is authentic metadata, i.e. this metadata was created by Dissemin and represents how the metadata documents will loke like.
+
+You can download our :download:`script <examples/upload_mets.zip>` for testing your implementations.
+The HTTP-requests are identical to those in Dissemin.
+You find usage instructions in the README.md inside of the packaging.
+
+
 Metadata
 --------
 
