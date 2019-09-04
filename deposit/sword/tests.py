@@ -134,7 +134,7 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
 
         dissemin_xml = self.protocol._get_xml_dissemin_metadata(form)
         metadata_xml = self.protocol._get_xml_metadata(form)
-        mets_xml = self.protocol._get_mets(dissemin_xml, metadata_xml)
+        mets_xml = self.protocol._get_mets(metadata_xml, dissemin_xml)
         
         # Because of the xml declaration we have to convert to a bytes object
         mets_xsd.assertValid(etree.fromstring(bytes(mets_xml, encoding='utf-8')))
