@@ -27,7 +27,10 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
     @pytest.mark.write_mets_examples
     def test_write_mets_metadata_examples(self, db, upload_data, user_leibniz):
         """
-        tbd
+        This is not really a test. It just outputs metadata examples that the protocol generates.
+        Ususally this test is omitted, you can run it explicetely with "-m write_mets_examples".
+        For any subclass, make sure to set ``path_metadata_examples``. This is the place where the file will created. You can then include them in the documentation.
+        In case of changes of the protocol or repository, you should run this function, but make sure it's up to date
         """
         self.protocol.paper = upload_data['paper']
         self.protocol.user = user_leibniz
