@@ -249,6 +249,7 @@ def submitDeposit(request, pk):
     d.additional_info = submitResult.additional_info
     d.status = submitResult.status
     d.oairecord = submitResult.oairecord
+    d.license = submitResult.license
     d.save()
     paper.update_availability()
     paper.save()

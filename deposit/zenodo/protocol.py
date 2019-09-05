@@ -122,6 +122,8 @@ class ZenodoProtocol(RepositoryProtocol):
         api_url_with_key = self.api_url+'?access_token='+api_key
 
         deposit_result = DepositResult()
+        # Set the license for the deposit result if delivered
+        deposit_result = self._add_license_to_deposit_result(deposit_result, form)
 
         # Checking the access token
         self.log("### Checking the access token")

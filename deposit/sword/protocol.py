@@ -312,6 +312,9 @@ class SWORDMETSProtocol(RepositoryProtocol):
 
         deposit_result = self._get_deposit_result(r.text)
 
+        # Set the license for the deposit result if delivered
+        deposit_result = self._add_license_to_deposit_result(deposit_result, form)
+
         return deposit_result
 
 
