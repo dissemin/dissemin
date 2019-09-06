@@ -7,6 +7,7 @@
 # Author: Gomoko
 # Author: Lyokoï
 # Author: Urhixidur
+# Author: Verdy p
 # Author: Wladek92
 # --
 # This file is part of the Dissemin Project
@@ -18,7 +19,7 @@ msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-16 09:41+0200\n"
-"PO-Revision-Date: 2019-09-03 07:06:56+0000\n"
+"PO-Revision-Date: 2019-09-06 04:46:40+0000\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -440,7 +441,7 @@ msgstr "Courriel"
 
 #: deposit/sword/protocol.py:252
 msgid "Username or password not provided for this repository. Please contact the Dissemin team."
-msgstr "Nom d'utilisateur ou mot de passe non fourni pour ce dépôt. Veuillez contacter l'équipe Dissemin."
+msgstr "Nom d’utilisateur ou mot de passe non fourni pour ce dépôt. Veuillez contacter l’équipe ''Dissemin''."
 
 #: deposit/templates/deposit/deposits.html:10
 #: deposit/templates/deposit/deposits.html:14
@@ -2290,7 +2291,7 @@ msgstr "Bibliographies"
 
 #: vinaigrette-deleteme.py:4
 msgid "Library & information sciences"
-msgstr "Bibliothèque et sciences de l'information"
+msgstr "Bibliothèques et sciences de l’information"
 
 #: vinaigrette-deleteme.py:5
 msgid "Encyclopedias & books of facts"
@@ -2306,7 +2307,7 @@ msgstr "Associations, organisations et musées"
 
 #: vinaigrette-deleteme.py:8
 msgid "News media, journalism & publishing"
-msgstr "Médias d'information, journalisme et édition"
+msgstr "Médias d’information, journalisme et édition"
 
 #: vinaigrette-deleteme.py:9
 msgid "Quotations"
@@ -2366,7 +2367,7 @@ msgstr "Chrétienté"
 
 #: vinaigrette-deleteme.py:25
 msgid "Christian practice & observance"
-msgstr "Pratique chrétienne et observance"
+msgstr "Pratiques et célébrations chrétiennes"
 
 #: vinaigrette-deleteme.py:26
 msgid "Christian pastoral practice & religious orders"
@@ -2414,7 +2415,7 @@ msgstr "Coutumes, étiquette et folklore"
 
 #: vinaigrette-deleteme.py:43
 msgid "English & Old English languages"
-msgstr "Anglais et ancien anglais"
+msgstr "Langue anglaise et ancien anglais"
 
 #: vinaigrette-deleteme.py:44
 msgid "German & related languages"
@@ -2430,7 +2431,7 @@ msgstr "Italien, roumain et langues apparentées"
 
 #: vinaigrette-deleteme.py:47
 msgid "Spanish, Portuguese, Galician"
-msgstr "Espagnol, portugais, galicien"
+msgstr "Langues latines ibériques (espagnol, portugais, galicien)"
 
 #: vinaigrette-deleteme.py:48
 msgid "Latin & Italic languages"
@@ -2458,7 +2459,7 @@ msgstr "Sciences de la terre et géologie"
 
 #: vinaigrette-deleteme.py:57
 msgid "Fossils & prehistoric life"
-msgstr "Les fossiles et la vie préhistorique"
+msgstr "Fossiles et vie préhistorique"
 
 #: vinaigrette-deleteme.py:58
 msgid "Biology"
@@ -2466,7 +2467,7 @@ msgstr "Biologie"
 
 #: vinaigrette-deleteme.py:59
 msgid "Plants (Botany)"
-msgstr "Plantes (Botanique)"
+msgstr "Plantes (botanique)"
 
 #: vinaigrette-deleteme.py:60
 msgid "Animals (Zoology)"
@@ -2491,7 +2492,7 @@ msgstr "Gestion de la maison et de la famille"
 
 #: vinaigrette-deleteme.py:66
 msgid "Management & public relations"
-msgstr "Management et relations publiques"
+msgstr "Gestion et relations publiques"
 
 #: vinaigrette-deleteme.py:67
 msgid "Chemical engineering"
@@ -2507,7 +2508,7 @@ msgstr "Fabrication pour usages spécifiques"
 
 #: vinaigrette-deleteme.py:70
 msgid "Construction of buildings"
-msgstr "Construction de batiments"
+msgstr "Construction de bâtiments"
 
 #: vinaigrette-deleteme.py:71
 msgid "Arts"
@@ -2571,7 +2572,7 @@ msgstr "Littératures italienne, roumaine et connexes"
 
 #: vinaigrette-deleteme.py:87
 msgid "Spanish, Portuguese, Galician literatures"
-msgstr "Littératures espagnoles, portugaises et galiciennes."
+msgstr "Littératures latines ibériques (espagnole, portugaise, galicienne)."
 
 #: vinaigrette-deleteme.py:88
 msgid "Latin & Italic literatures"
@@ -2595,27 +2596,27 @@ msgstr "Biographie et généalogie"
 
 #: vinaigrette-deleteme.py:94
 msgid "History of ancient world (to ca. 499)"
-msgstr "Histoire du monde antique (jusqu'à l'an 499 environ)"
+msgstr "Histoire du monde antique (jusqu'à l’an 499 environ)"
 
 #: vinaigrette-deleteme.py:95
 msgid "History of Europe"
-msgstr "Histoire de l'Europe"
+msgstr "Histoire de l’Europe"
 
 #: vinaigrette-deleteme.py:96
 msgid "History of Asia"
-msgstr "Histoire de l'Asie"
+msgstr "Histoire de l’Asie"
 
 #: vinaigrette-deleteme.py:97
 msgid "History of Africa"
-msgstr "Histoire de l'Afrique"
+msgstr "Histoire de l’Afrique"
 
 #: vinaigrette-deleteme.py:98
 msgid "History of North America"
-msgstr "Histoire de l'Amérique du Nord"
+msgstr "Histoire de l’Amérique du Nord"
 
 #: vinaigrette-deleteme.py:99
 msgid "History of South America"
-msgstr "Histoire de l'Amérique du Sud"
+msgstr "Histoire de l’Amérique du Sud"
 
 #: vinaigrette-deleteme.py:100
 msgid "History of other areas"

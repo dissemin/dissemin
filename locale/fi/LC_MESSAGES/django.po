@@ -15,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-16 09:41+0200\n"
-"PO-Revision-Date: 2019-08-19 09:17:18+0000\n"
+"PO-Revision-Date: 2019-09-06 04:46:40+0000\n"
 "Language: fi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2373,11 +2373,11 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:23
 msgid "The Bible"
-msgstr ""
+msgstr "Raamattu"
 
 #: vinaigrette-deleteme.py:24
 msgid "Christianity"
-msgstr ""
+msgstr "Kristinusko"
 
 #: vinaigrette-deleteme.py:25
 msgid "Christian practice & observance"
@@ -2393,7 +2393,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:28
 msgid "History of Christianity"
-msgstr ""
+msgstr "Kristinuskon historia"
 
 #: vinaigrette-deleteme.py:29
 #, fuzzy
@@ -2468,7 +2468,7 @@ msgstr "Tiede"
 
 #: vinaigrette-deleteme.py:53
 msgid "Astronomy"
-msgstr ""
+msgstr "Tähtitiede"
 
 #: vinaigrette-deleteme.py:56
 msgid "Earth sciences & geology"
@@ -2560,7 +2560,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:79
 msgid "Music"
-msgstr ""
+msgstr "Musiikki"
 
 #: vinaigrette-deleteme.py:80
 msgid "Sports, games & entertainment"
@@ -2622,7 +2622,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:95
 msgid "History of Europe"
-msgstr ""
+msgstr "Euroopan historia"
 
 #: vinaigrette-deleteme.py:96
 #, fuzzy
@@ -2631,15 +2631,15 @@ msgstr "Historia"
 
 #: vinaigrette-deleteme.py:97
 msgid "History of Africa"
-msgstr ""
+msgstr "Afrikan historia"
 
 #: vinaigrette-deleteme.py:98
 msgid "History of North America"
-msgstr ""
+msgstr "Pohjois-Amerikan historia"
 
 #: vinaigrette-deleteme.py:99
 msgid "History of South America"
-msgstr ""
+msgstr "Etelä-Amerikan historia"
 
 #: vinaigrette-deleteme.py:100
 msgid "History of other areas"
