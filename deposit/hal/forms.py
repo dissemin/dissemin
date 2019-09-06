@@ -33,7 +33,7 @@ from deposit.hal.models import HALDepositPreferences
 class HALForm(BaseMetadataForm):
 
     def __init__(self, paper, **kwargs):
-        super(HALForm, self).__init__(paper, **kwargs)
+        super(HALForm, self).__init__(**kwargs)
         self.fields['depositing_author'].choices = enumerate(
             map(str, paper.authors))
 
