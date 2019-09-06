@@ -57,6 +57,39 @@ class MetaTestProtocol():
         assert r.status_code == 200
 
 
+    def test_get_form(self, book_god_of_the_labyrinth, abstract_required, ddc, license_chooser):
+        self.protocol.paper = book_god_of_the_labyrinth
+        form = self.protocol.get_form()
+        assert 'abstract' in form.fields
+        assert 'paper_id' in form.fields
+        if ddc:
+            assert 'ddc' in form.fields
+        else:
+            assert 'ddc' not in form.fields
+        if license_chooser:
+            assert 'license' in form.fields
+        else:
+            assert 'license' not in form.fields
+
+
+    def test_get_bound_form(self, book_god_of_the_labyrinth, abstract_required, ddc, license_chooser):
+        self.protocol.paper = book_god_of_the_labyrinth
+        data = {
+            'paper_pk' : book_god_of_the_labyrinth.pk
+        }
+        if abstract_required:
+            data['abstract'] = 'Simple abstract'
+        if ddc:
+            data['ddc'] = ddc
+        if license_chooser:
+            data['license'] = license_chooser.pk
+
+        form = self.protocol.get_bound_form()
+        if not form.is_valid():
+            print(form.errors)
+            raise AssertionError("Form not valid")
+
+
     def test_get_form_return_type(self, book_god_of_the_labyrinth, user_isaac_newton):
         """
         Return type of get_form shall by a form
