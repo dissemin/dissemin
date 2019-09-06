@@ -472,20 +472,25 @@ class PaperView(SlugDetailView):
     def get_context_data(self, **kwargs):
         context = super(PaperView, self).get_context_data(**kwargs)
         context['breadcrumbs'] = self.object.breadcrumbs()
+
+        context['deposit'] = None
         if 'deposit' in self.request.GET:
             try:
                 pk = int(self.request.GET['deposit'])
-                dep = DepositRecord.objects.get(pk=pk)
-                if dep.paper_id == self.object.id:
-                    context['deposit'] = dep
+                dr = DepositRecord.objects.select_related('repository', 'oairecord').get(pk=pk)
+                print(dr.status)
+                if dr.paper_id == self.object.id and dr.status in ['pending', 'published']:
+                    if self.request.user.is_authenticated and self.request.user == dr.user and dr.repository.letter_declaration:
+                        dr.letter = True
+                    context['deposit'] = dr
             except (TypeError, ValueError, DepositRecord.DoesNotExist):
                 pass
-        context['can_be_deposited'] = (not self.request.user.is_authenticated
-                    or self.object.can_be_deposited(self.request.user))
+
+        context['can_be_deposited'] = (not self.request.user.is_authenticated or self.object.can_be_deposited(self.request.user))
 
         # Pending deposits
-        context['pending_deposits'] = self.object.depositrecord_set.filter(
-            status='pending')
+        if not context['deposit']:
+            context['pending_deposits'] = self.object.depositrecord_set.filter(status='pending')
 
         return context
 
