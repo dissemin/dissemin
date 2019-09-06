@@ -269,7 +269,7 @@ class MyTodoListView(LoginRequiredMixin, PaperSearchView):
         context['ajax_url'] = reverse('ajax-todolist')
 
         context['breadcrumbs'] = [(_('To-do list'), None)]
-        context['head_search_description'] = context['search_description'] = _('Papers on your to-do list')
+        context['head_search_description'] = context['search_description'] = _('Papers on my to-do list')
         context['view'] = 'my-todolist'
 
         return context
