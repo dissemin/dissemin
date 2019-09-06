@@ -258,7 +258,7 @@ class DepositRecord(models.Model):
     status = models.CharField(max_length=64,choices=DEPOSIT_STATUS_CHOICES)
     additional_info = JSONField(null=True, blank=True)
     #: We store the license mainly for generation of letter of declaration
-    license = models.ForeignKey(License, on_delete=models.SET_NULL, null=True, default=None)
+    license = models.ForeignKey(License, on_delete=models.SET_NULL, null=True, blank=True, default=None)
 
     file = models.ForeignKey(UploadedPDF, on_delete=models.CASCADE)
 
