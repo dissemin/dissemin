@@ -20,6 +20,7 @@ You have the following options:
 * ``ap_key``: If your repository uses an API key, fill it in here
 * ``endpoint``: URL to call when depositing
 * ``enabled``: Here you can enable or disable the repository. Disabling means that the repository refuses to deposit and is not shown to the user.
+* ``abstracts_required``: Define wether the user must enter an abstract. Usually abstracts can be fetched from Zotero. Default is: Yes.
 * ``ddc``: Here you can choose some DDC for the repository. If no DDC is selected, the user won't be bothered at all.
 * ``license choosers``: Here you can add a list of license that your repository accepts. There is no limit, but you should keep your selection moderate. There are the following options:
 

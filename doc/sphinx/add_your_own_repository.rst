@@ -1,19 +1,23 @@
 Add your own Repository
 =======================
 
-If you like to add your (institutional) repository, please get in contact with us. On this page we offer you some information about our services and what has to be done on your side.
+If you like to add your (institutional) repository, please get in contact with us.
+On this page we offer you some information about our services and what has to be done on your side.
 
 Currently we work on implementations for EPrints, MyCore and DSpace.
 
 Deposition Protocol
 -------------------
 
-Currently we support the `SWORDv2 protocol <http://swordapp.org/sword-v2/sword-v2-specifications/>`_. However, this protocol offers a lot of options about how to deposit and how to organize the metadata and should be seen as a framework. Technically we can offer different depositing methods, e.g. via some REST API or similar.
+Currently we support the `SWORDv2 protocol <http://swordapp.org/sword-v2/sword-v2-specifications/>`_.
+However, this protocol offers a lot of options about how to deposit and how to organize the metadata and should be seen as a framework. 
+Technically we can offer different depositing methods, e.g. via some REST API or similar.
 
-Metadata
---------
+Shipping with SWORDv2
+^^^^^^^^^^^^^^^^^^^^^
 
-We use the `Metdata Encoding \& Transmission Standard (METS) <https://www.loc.gov/standards/mets/>`_ to ship our metadata and describe what is delivered. Most repositories are able to ingest a METS-package.
+We use the `Metdata Encoding \& Transmission Standard (METS) <https://www.loc.gov/standards/mets/>`_ to ship our metadata and describe what is delivered.
+Most repositories are able to ingest a METS-package.
 
 We try to keep our METS as simple as possible.
 Currently we populate only ``dmdSec``, ``amdSec/rightsMD``, ``fileSec`` and ``structSec``.
@@ -28,6 +32,29 @@ We deliver two files per package:
 
 We provide an :download:`illustrating example <examples/mets.xml>` using Dublin Core.
 
+We set the following headers::
+
+    Content-Type: application/zip
+    Content-Disposition: filename=mets.zip
+    Packaging: http://purl.org/net/sword/package/METSMODS
+
+If you require for your ingest a different packaging name or packaging format, please let us know.
+
+The body is the named file. All values won't change between different uploads to the same repository.
+
+Script for Tests
+''''''''''''''''
+
+To support you in your local implementation we have some examples (grouped by document type, see below).
+This is authentic metadata, i.e. this metadata was created by Dissemin and represents how the metadata documents will loke like.
+
+You can download our :download:`script <examples/upload_mets.zip>` for testing your implementations.
+The HTTP-requests are identical to those in Dissemin.
+You find usage instructions in the README.md inside of the packaging.
+
+
+Metadata
+--------
 
 Bibliographic Metadata
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -90,10 +117,11 @@ The list is sorted by publications types and covers all publication types that D
 
 .. _non-bibliographic-metadata-label:
 
-Non-Bibliographic Metadata
+Dissemin Metadata
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In addition to our bibliographic metadata we ship non-bibliographic metadata. This metadata is meant to support publication workflows in institutional repositories, for example helping in the moderation process.
+In addition to our bibliographic metadata we ship special dissemin metadata.
+This metadata is meant to support publication workflows in institutional repositories, for example helping in the moderation process.
 
 We ship the following data:
 

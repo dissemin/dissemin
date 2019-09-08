@@ -1,13 +1,13 @@
 {
-    "identifier":"oai:crossref.org:sein",
-    "pubtype":"proceedings",
-    "journal_title":"Sein und Nichtsein",
+    "identifier":"oai:crossref.org:10.3224/gender.v10i3",
+    "pubtype":"journal-issue",
+    "journal_title":"GENDER – Zeitschrift für Geschlecht, Kultur und Gesellschaft",
     "container":null,
-    "publisher_name":"Shakespeare Money Maker Inc.",
-    "issue":"1-1610",
+    "publisher_name":"Barbara Budrich Publishers",
+    "issue":"3-2018",
     "volume":"10",
     "pages":null,
     "pubdate":null,
     "priority":20,
-    "about":"proceedings_sein_und_nichtsein"
+    "about":"journal-issue_mode_und_gender"
 }

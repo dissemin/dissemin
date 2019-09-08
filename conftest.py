@@ -436,6 +436,7 @@ class LoadJSON():
         f_name = os.path.join(BASE_DIR, 'test_data', 'form', 'upload',  f + '.json')
         with open(f_name, 'r') as json_file:
             data = json.load(json_file)
+        data['load_name'] = f
         p, o = self.load_oairecord(f)
         data['paper'] = p
         data['oairecord'] = o
