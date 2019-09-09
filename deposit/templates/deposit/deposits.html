@@ -40,6 +40,12 @@
                                     <td>{% trans "Deposit type" %}</td>
                                     <td>{{ deposit.get_upload_type_display }}</td>
                                 </tr>
+                                {% if deposit.license %}
+                                    <tr>
+                                        <td>{% trans "License" %}</td>
+                                        <td>{{ deposit.license.name }}</td>
+                                    </tr>
+                                {% endif %}
                                 <tr>
                                     <td>{% trans "Identifier" %}</td>
                                     <td>{{ deposit.identifier }}</td>
@@ -62,6 +68,13 @@
                                     <td>{% trans "Status" %}</td>
                                     <td>{{ deposit.get_status_display }}</td>
                                 </tr>
+                                {% if deposit.status == 'pending' and deposit.repository.letter_declaration %}
+                                    {% url 'letter-of-declaration' deposit.pk as letter_url%}
+                                    <tr>
+                                        <td>{% trans "Letter of Declaration" %}</td>
+                                        <td><a href="{{ letter_url }}">{% trans "Show" %}</a></td>
+                                    </tr>
+                                {% endif %}
                                 {% with deposit.additional_info as info %}
                                     {% for i in info %}
                                         <tr>

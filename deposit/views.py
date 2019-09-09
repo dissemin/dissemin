@@ -127,9 +127,10 @@ def list_deposits(request):
     ).order_by(
         '-date'
     ).select_related(
+        'license',
+        'oairecord',
         'paper',
         'repository',
-        'oairecord',
     )
     context = {
         'deposits': deposits
