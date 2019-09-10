@@ -21,23 +21,42 @@
 
 
 import datetime
-from datetime import date
 import doctest
 import os
+import pytest
+
+from datetime import date
 from mock import patch
 
 import django.test
-from papers.baremodels import BareName
-import papers.doi
+
+
 from django.contrib.auth.models import User
+
+import papers.doi
+
+from oaipmh.client import Client
+from papers.baremodels import BareName
 from papers.models import Name
 from papers.models import OaiRecord
 from papers.models import OaiSource
 from papers.models import Paper
 from papers.models import Researcher
 from papers.models import Institution
-from oaipmh.client import Client
 from publishers.tests.test_romeo import RomeoAPIStub
+
+
+class TestPaper():
+    """
+    Class that groups tests for Paper class
+    """
+
+    @pytest.mark.parametrize('on_list', [True, False])
+    def test_on_todolist(self, book_god_of_the_labyrinth, user_isaac_newton, on_list):
+        if on_list:
+            book_god_of_the_labyrinth.todolist.add(user_isaac_newton)
+        assert book_god_of_the_labyrinth.on_todolist(user_isaac_newton) == on_list
+
 
 class InstitutionTest(django.test.TestCase):
     def test_valid(self):

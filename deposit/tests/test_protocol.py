@@ -189,27 +189,38 @@ class MetaTestProtocol():
         assert len(self.protocol.protocol_identifier()) > 1
 
 
+    @pytest.mark.parametrize('on_todolist', [True, False])
     @pytest.mark.parametrize('splash_url, expected_splash_url', [(None, type(None)), ('https://repository.dissem.in/1/spam.pdf', OaiRecord)])
-    def test_submit_deposit_wrapper(self, splash_url, expected_splash_url, book_god_of_the_labyrinth, monkeypatch):
+    def test_submit_deposit_wrapper(self, splash_url, expected_splash_url, on_todolist, book_god_of_the_labyrinth, depositing_user, monkeypatch):
         """
         We monkeypatch the submit_deposit to return a DepositResult.
         """
         self.protocol.paper = book_god_of_the_labyrinth
-        dr = DepositResult(splash_url=splash_url)
+        self.protocol.user = depositing_user
 
+        if on_todolist:
+            book_god_of_the_labyrinth.todolist.add(self.protocol.user)
+
+        dr = DepositResult(splash_url=splash_url)
         monkeypatch.setattr(self.protocol, 'submit_deposit', lambda *args, **kwargs: dr)
 
         deposit_result = self.protocol.submit_deposit_wrapper()
 
         assert isinstance(deposit_result, DepositResult)
         assert isinstance(deposit_result.oairecord, expected_splash_url)
+        assert book_god_of_the_labyrinth.todolist.filter(pk=self.protocol.user.pk).exists() == False
 
+    @pytest.mark.parametrize('on_todolist', [True, False])
     @pytest.mark.parametrize('exc', [DepositError, Exception])
-    def test_submit_deposit_wrapper_exception(self, book_god_of_the_labyrinth, exc, monkeypatch):
+    def test_submit_deposit_wrapper_exception(self, book_god_of_the_labyrinth, depositing_user, on_todolist, exc, monkeypatch):
         """
         Something went wrong when depositing. Exceptions must be fetched and Deposit status status must be "failed". To do that we simply monkeypatch submit_deposit
         """
         self.protocol.paper = book_god_of_the_labyrinth
+        self.protocol.user = depositing_user
+
+        if on_todolist:
+            book_god_of_the_labyrinth.todolist.add(self.protocol.user)
 
         def submit_deposit(self, *args, **kwargs):
             raise exc
@@ -219,6 +230,7 @@ class MetaTestProtocol():
         deposit_result = self.protocol.submit_deposit_wrapper()
 
         assert deposit_result.status == 'failed'
+        assert book_god_of_the_labyrinth.todolist.filter(pk=self.protocol.user.pk).exists() == on_todolist
 
 
     def test_protocol_registered(self):

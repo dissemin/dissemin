@@ -668,6 +668,9 @@ class Paper(models.Model, BarePaper):
     # Task id of the current task updating the metadata of this article (if any)
     task = models.CharField(max_length=512, null=True, blank=True)
 
+    # A todo list to mark the paper for later deposition
+    todolist = models.ManyToManyField(User)
+
     def __init__(self, *args, **kwargs):
         super(Paper, self).__init__(*args, **kwargs)
         self.just_created = False
@@ -956,6 +959,14 @@ class Paper(models.Model, BarePaper):
             return True
         # paper cannot be claimed by user
         raise ValueError
+
+
+    def on_todolist(self, user):
+        """
+        Checks if this paper is on the user todo list
+        """
+        return self.todolist.filter(pk=user.pk).exists()
+
 
     def is_owned_by(self, user, flexible=False):
         """

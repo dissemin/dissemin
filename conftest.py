@@ -236,6 +236,19 @@ def check_page(request, dissemin_base_client, validator_tools):
 
 
 @pytest.fixture(params=TEST_LANGUAGES)
+def check_html(request, validator_tools):
+    """
+    Checks html
+    """
+    def checker(response):
+        vt = validator_tools
+        vt.check_html(response)
+
+    return checker
+
+
+
+@pytest.fixture(params=TEST_LANGUAGES)
 def check_url(request, validator_tools):
     """
     Checks status and html of a URL
@@ -293,6 +306,7 @@ def authenticated_client(dissemin_base_client, django_user_model):
     password = "secret"
     u = django_user_model.objects.create_user(username=username, password=password)
     dissemin_base_client.login(username=username, password=password)
+    dissemin_base_client.user = u
     return dissemin_base_client
 
 

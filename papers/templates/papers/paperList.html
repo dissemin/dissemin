@@ -8,26 +8,34 @@
 
 
 {% if page_obj.paginator.num_pages > 1 %}
-<nav class="searchPages">{% bootstrap_paginate page_obj range=10 %}</nav>
+    <nav class="searchPages">{% bootstrap_paginate page_obj range=10 %}</nav>
 {% endif %}
- {% for result in object_list %}{% with paper=result.object %}
- {% ifchanged paper.year %}
- {% if not forloop.first %}</ul></div>{% endif %}
-    <div class="ulContainer">
-    <div class="listYear">{{ paper.year }}</div>
-    <ul class="withoutTriangles">
- {% endifchanged %}
-    <li class="pubItem" id="paper-{{ paper.id }}">
-	{% if paper.pk %}
-        {% include "papers/publiListItem.html" with paper=paper with_buttons=request.user.is_authenticated %}
-    </li>
-	{% endif %}
-        {% if forloop.last %}</ul></div>{% endif %}
- {% endwith %}{% empty %}
+
+{% for result in object_list %}
+    {% with paper=result.object %}
+        {% ifchanged paper.year %}
+            {% if not forloop.first %}
+                </ul></div>
+            {% endif %}
+                <div class="ulContainer">
+                    <div class="listYear">{{ paper.year }}</div>
+                    <ul class="withoutTriangles">
+        {% endifchanged %}
+        <li class="pubItem" id="paper-{{ paper.id }}">
+        {% if paper.pk %}
+            {% include "papers/publiListItem.html" with paper=paper with_buttons=request.user.is_authenticated %}
+            </li>
+	    {% endif %}
+        {% if forloop.last %}
+            </ul></div>
+        {% endif %}
+    {% endwith %}
+
+    {% empty %}
     {% if not researcher.current_task %}
-    <p class="notFound">{% trans "No paper found." %}</p>
+        <p class="notFound">{% trans "No paper found." %}</p>
     {% endif %}
- {% endfor %}
+{% endfor %}
 
 {% if page_obj.paginator.num_pages > 1 %}
     <nav class="searchPages">{% bootstrap_paginate page_obj range=10 %}</nav>
@@ -45,6 +53,10 @@
         Missing publications? Search for additional ones on <a class="showHrefPrint" href="{{ href }}">Dissem.in</a>.
     {% endblocktrans %}
     </p>
+
+{% elif view == "my-todolist" %}
+{% comment "Just to omit any remark about missing publications, sinsce to-do list is not really a search" %}{% endcomment %}
+
 {% else %}
     <p class="notFound">
         {% url 'faq' as faq_url %}

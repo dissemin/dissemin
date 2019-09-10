@@ -272,6 +272,10 @@ class RepositoryProtocol(object, metaclass = RepositoryProtocolMeta):
 
             settings.DEPOSIT_NOTIFICATION_CALLBACK(notification_payload)
 
+            # In case that the paper is on user todo list, remove it
+            # If it's not on the list, nothing happens here, since m2m field
+            self.paper.todolist.remove(self.user)
+
             return result
         except DepositError as e:
             self.log('Message: '+e.args[0])

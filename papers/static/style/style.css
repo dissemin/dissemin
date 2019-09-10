@@ -584,6 +584,12 @@ li
     background-image: url('../blue-circle.png');
 }
 
+.policyPic-todolist
+{
+    background-image: url('../blue-circle.png');
+}
+
+
 @media print {
     .policyPic-can
     {
