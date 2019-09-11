@@ -1,51 +1,77 @@
 <?xml version='1.0' encoding='utf-8'?>
-<mets xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.loc.gov/METS/">
+<mets xmlns="http://www.loc.gov/METS/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <dmdSec ID="d_dmd_1">
     <mdWrap MDTYPE="OTHER">
       <xmlData>
-        <mods xmlns="http://www.loc.gov/mods/v3" version="3.7">
-          <relatedItem>
-            <part>
-              <extent unit="pages">
-                <start>285</start>
-                <end>290</end>
-              </extent>
-            </part>
-            <titleInfo>
-              <title>Advances in Intelligent and Soft Computing</title>
-            </titleInfo>
-          </relatedItem>
-          <abstract>Maritime surveillance is a difficult task as its aim is to detect any threatening event in a dynamic, complex and hugely distributed system. As there are many different types of vessels, behaviours, situations, and because the system is constantly evolving, classical automated surveillance approaches are unrealistic. We propose an adaptive multi-agent system in which each agent is responsible for a vessel. This agent perceives local anomalies and combines them to maintain a criticality value, used to decide when an alert is appropriate. The importance of the anomalies and how they are combined emerges from a cooperative selfadjusting process taking user feedback into account. This software is currently under development in ScanMaris, a project supported by the French National Research Agency.</abstract>
-          <originInfo>
-            <dateIssued encoding="w3cdtf">2010-01-01</dateIssued>
-            <publisher>Springer Science + Business Media</publisher>
-          </originInfo>
-          <identifier type="doi">10.1007/978-3-642-12384-9_34</identifier>
-          <language>
-            <languageTerm type="code" authority="rfc3066">en</languageTerm>
-          </language>
-          <classification authority="ddc">550</classification>
-          <classification authority="ddc">620</classification>
-          <name type="personal">
-            <namePart type="family">Mano</namePart>
-            <namePart type="given">Jean-Pierre</namePart>
-          </name>
-          <name type="personal">
-            <namePart type="family">Georgé</namePart>
-            <namePart type="given">Jean-Pierre</namePart>
-          </name>
-          <name type="personal">
-            <namePart type="family">Gleizes</namePart>
-            <namePart type="given">Marie-Pierre</namePart>
-          </name>
-          <titleInfo>
-            <title>Adaptive Multi-agent System for Multi-sensor Maritime Surveillance</title>
-          </titleInfo>
-          <genre>book-chapter</genre>
-        </mods>
+        <mods:mods xmlns:mods="http://www.loc.gov/mods/v3" version="3.7">
+          <mods:relatedItem>
+            <mods:part>
+              <mods:extent unit="pages">
+                <mods:start>285</mods:start>
+                <mods:end>290</mods:end>
+              </mods:extent>
+            </mods:part>
+            <mods:titleInfo>
+              <mods:title>Advances in Intelligent and Soft Computing</mods:title>
+            </mods:titleInfo>
+          </mods:relatedItem>
+          <mods:abstract>Maritime surveillance is a difficult task as its aim is to detect any threatening event in a dynamic, complex and hugely distributed system. As there are many different types of vessels, behaviours, situations, and because the system is constantly evolving, classical automated surveillance approaches are unrealistic. We propose an adaptive multi-agent system in which each agent is responsible for a vessel. This agent perceives local anomalies and combines them to maintain a criticality value, used to decide when an alert is appropriate. The importance of the anomalies and how they are combined emerges from a cooperative selfadjusting process taking user feedback into account. This software is currently under development in ScanMaris, a project supported by the French National Research Agency.</mods:abstract>
+          <mods:originInfo>
+            <mods:dateIssued encoding="w3cdtf">2010-01-01</mods:dateIssued>
+            <mods:publisher>Springer Science + Business Media</mods:publisher>
+          </mods:originInfo>
+          <mods:identifier type="doi">10.1007/978-3-642-12384-9_34</mods:identifier>
+          <mods:language>
+            <mods:languageTerm type="code" authority="rfc3066">en</mods:languageTerm>
+          </mods:language>
+          <mods:classification authority="ddc">550</mods:classification>
+          <mods:classification authority="ddc">620</mods:classification>
+          <mods:name type="personal">
+            <mods:namePart type="family">Mano</mods:namePart>
+            <mods:namePart type="given">Jean-Pierre</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Georgé</mods:namePart>
+            <mods:namePart type="given">Jean-Pierre</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Gleizes</mods:namePart>
+            <mods:namePart type="given">Marie-Pierre</mods:namePart>
+          </mods:name>
+          <mods:titleInfo>
+            <mods:title>Adaptive Multi-agent System for Multi-sensor Maritime Surveillance</mods:title>
+          </mods:titleInfo>
+          <mods:genre>book-chapter</mods:genre>
+        </mods:mods>
       </xmlData>
     </mdWrap>
   </dmdSec>
+  <amdSec ID="d_amd_1">
+    <rightsMD ID="d_rightsmd_1">
+      <mdWrap MDTYPE="OTHER">
+        <xmlData>
+          <ds:dissemin xmlns:ds="https://dissem.in/deposit/terms/" version="1.0">
+            <ds:depositor>
+              <ds:authentication>orcid</ds:authentication>
+              <ds:firstName>Gottfried</ds:firstName>
+              <ds:lastName>Leibniz</ds:lastName>
+              <ds:email>gottfried.leibniz@tib.eu</ds:email>
+              <ds:orcid>2543-2454-2345-234X</ds:orcid>
+              <ds:isContributor>false</ds:isContributor>
+            </ds:depositor>
+            <ds:publication>
+              <ds:license>
+                <ds:licenseName>Creative Commons Attribution 4.0 International (CC BY 4.0)</ds:licenseName>
+                <ds:licenseURI>https://creativecommons.org/licenses/by/4.0/</ds:licenseURI>
+                <ds:licenseTransmitId>cc_by-40</ds:licenseTransmitId>
+              </ds:license>
+              <ds:disseminId>2</ds:disseminId>
+            </ds:publication>
+          </ds:dissemin>
+        </xmlData>
+      </mdWrap>
+    </rightsMD>
+  </amdSec>
   <fileSec>
     <fileGrp>
       <file ID="d_file_1">

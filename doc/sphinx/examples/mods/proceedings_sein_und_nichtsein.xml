@@ -1,40 +1,52 @@
 <?xml version='1.0' encoding='utf-8'?>
-<mets xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.loc.gov/METS/">
+<mets xmlns="http://www.loc.gov/METS/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <dmdSec ID="d_dmd_1">
     <mdWrap MDTYPE="OTHER">
       <xmlData>
-        <mods xmlns="http://www.loc.gov/mods/v3" version="3.7">
-          <relatedItem>
-            <part>
-              <detail type="volume">
-                <number>10</number>
-              </detail>
-              <detail type="issue">
-                <number>1-1610</number>
-              </detail>
-            </part>
-            <titleInfo>
-              <title>Sein und Nichtsein</title>
-            </titleInfo>
-          </relatedItem>
-          <abstract>Hamlets Weisheiten</abstract>
-          <originInfo>
-            <dateIssued encoding="w3cdtf">1610-01-01</dateIssued>
-            <publisher>Shakespeare Money Maker Inc.</publisher>
-          </originInfo>
-          <classification authority="ddc">100</classification>
-          <name type="personal">
-            <namePart type="family">Hamlet</namePart>
-            <namePart type="given">Ghost</namePart>
-          </name>
-          <titleInfo>
-            <title>Sein und Nichtsein</title>
-          </titleInfo>
-          <genre>proceedings</genre>
-        </mods>
+        <mods:mods xmlns:mods="http://www.loc.gov/mods/v3" version="3.7">
+          <mods:abstract>Hamlets Weisheiten</mods:abstract>
+          <mods:originInfo>
+            <mods:dateIssued encoding="w3cdtf">1610-01-01</mods:dateIssued>
+          </mods:originInfo>
+          <mods:classification authority="ddc">100</mods:classification>
+          <mods:name type="personal">
+            <mods:namePart type="family">Hamlet</mods:namePart>
+            <mods:namePart type="given">Ghost</mods:namePart>
+          </mods:name>
+          <mods:titleInfo>
+            <mods:title>Sein und Nichtsein</mods:title>
+          </mods:titleInfo>
+          <mods:genre>proceedings</mods:genre>
+        </mods:mods>
       </xmlData>
     </mdWrap>
   </dmdSec>
+  <amdSec ID="d_amd_1">
+    <rightsMD ID="d_rightsmd_1">
+      <mdWrap MDTYPE="OTHER">
+        <xmlData>
+          <ds:dissemin xmlns:ds="https://dissem.in/deposit/terms/" version="1.0">
+            <ds:depositor>
+              <ds:authentication>orcid</ds:authentication>
+              <ds:firstName>Gottfried</ds:firstName>
+              <ds:lastName>Leibniz</ds:lastName>
+              <ds:email>gottfried.leibniz@tib.eu</ds:email>
+              <ds:orcid>2543-2454-2345-234X</ds:orcid>
+              <ds:isContributor>false</ds:isContributor>
+            </ds:depositor>
+            <ds:publication>
+              <ds:license>
+                <ds:licenseName>Creative Commons Attribution 4.0 International (CC BY 4.0)</ds:licenseName>
+                <ds:licenseURI>https://creativecommons.org/licenses/by/4.0/</ds:licenseURI>
+                <ds:licenseTransmitId>cc_by-40</ds:licenseTransmitId>
+              </ds:license>
+              <ds:disseminId>14</ds:disseminId>
+            </ds:publication>
+          </ds:dissemin>
+        </xmlData>
+      </mdWrap>
+    </rightsMD>
+  </amdSec>
   <fileSec>
     <fileGrp>
       <file ID="d_file_1">

@@ -132,6 +132,26 @@ class HALProtocol(RepositoryProtocol):
 
         return data
 
+    def get_form(self):
+        """
+        Returns the form where the user will fill in additional metadata
+        HAL just needs a paper
+        """
+
+        initial = self.get_form_initial_data()
+
+        return self.form_class(paper=self.paper, initial=initial)
+
+
+    def get_bound_form(self, data):
+        """
+        Returns a bound version of the form, with the given data.
+        HAL just needs a paper
+        """
+
+        return self.form_class(self.paper, data=data)
+
+
     def create_zip(self, pdf, metadata):
         s = BytesIO()
         with ZipFile(s, 'w') as zipFile:

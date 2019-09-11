@@ -1,42 +1,68 @@
 <?xml version='1.0' encoding='utf-8'?>
-<mets xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.loc.gov/METS/">
+<mets xmlns="http://www.loc.gov/METS/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <dmdSec ID="d_dmd_1">
     <mdWrap MDTYPE="OTHER">
       <xmlData>
-        <mods xmlns="http://www.loc.gov/mods/v3" version="3.7">
-          <relatedItem>
-            <part>
-              <detail type="volume">
-                <number>RWTH Aachen University</number>
-              </detail>
-              <extent unit="pages">
-                <start>2018</start>
-                <end></end>
-              </extent>
-            </part>
-            <titleInfo>
-              <title>Dissertation</title>
-            </titleInfo>
-          </relatedItem>
-          <abstract>Please my theses about blue mining</abstract>
-          <originInfo>
-            <dateIssued encoding="w3cdtf">2018-01-01</dateIssued>
-            <publisher>RWTH Aachen University</publisher>
-          </originInfo>
-          <identifier type="doi">10.18154/rwth-2018-230772</identifier>
-          <classification authority="ddc">550</classification>
-          <name type="personal">
-            <namePart type="family">Volkmann</namePart>
-            <namePart type="given">Sebastian Ernst</namePart>
-          </name>
-          <titleInfo>
-            <title>Blue Mining—Planung des Abbaus von Manganknollen in der Tiefsee</title>
-          </titleInfo>
-          <genre>thesis</genre>
-        </mods>
+        <mods:mods xmlns:mods="http://www.loc.gov/mods/v3" version="3.7">
+          <mods:relatedItem>
+            <mods:part>
+              <mods:detail type="volume">
+                <mods:number>RWTH Aachen University</mods:number>
+              </mods:detail>
+              <mods:extent unit="pages">
+                <mods:start>2018</mods:start>
+                <mods:end></mods:end>
+              </mods:extent>
+            </mods:part>
+            <mods:titleInfo>
+              <mods:title>Dissertation</mods:title>
+            </mods:titleInfo>
+          </mods:relatedItem>
+          <mods:abstract>Please my theses about blue mining</mods:abstract>
+          <mods:originInfo>
+            <mods:dateIssued encoding="w3cdtf">2018-01-01</mods:dateIssued>
+            <mods:publisher>RWTH Aachen University</mods:publisher>
+          </mods:originInfo>
+          <mods:identifier type="doi">10.18154/rwth-2018-230772</mods:identifier>
+          <mods:classification authority="ddc">550</mods:classification>
+          <mods:name type="personal">
+            <mods:namePart type="family">Volkmann</mods:namePart>
+            <mods:namePart type="given">Sebastian Ernst</mods:namePart>
+          </mods:name>
+          <mods:titleInfo>
+            <mods:title>Blue Mining—Planung des Abbaus von Manganknollen in der Tiefsee</mods:title>
+          </mods:titleInfo>
+          <mods:genre>thesis</mods:genre>
+        </mods:mods>
       </xmlData>
     </mdWrap>
   </dmdSec>
+  <amdSec ID="d_amd_1">
+    <rightsMD ID="d_rightsmd_1">
+      <mdWrap MDTYPE="OTHER">
+        <xmlData>
+          <ds:dissemin xmlns:ds="https://dissem.in/deposit/terms/" version="1.0">
+            <ds:depositor>
+              <ds:authentication>orcid</ds:authentication>
+              <ds:firstName>Gottfried</ds:firstName>
+              <ds:lastName>Leibniz</ds:lastName>
+              <ds:email>gottfried.leibniz@tib.eu</ds:email>
+              <ds:orcid>2543-2454-2345-234X</ds:orcid>
+              <ds:isContributor>false</ds:isContributor>
+            </ds:depositor>
+            <ds:publication>
+              <ds:license>
+                <ds:licenseName>Creative Commons Attribution 4.0 International (CC BY 4.0)</ds:licenseName>
+                <ds:licenseURI>https://creativecommons.org/licenses/by/4.0/</ds:licenseURI>
+                <ds:licenseTransmitId>cc_by-40</ds:licenseTransmitId>
+              </ds:license>
+              <ds:disseminId>20</ds:disseminId>
+            </ds:publication>
+          </ds:dissemin>
+        </xmlData>
+      </mdWrap>
+    </rightsMD>
+  </amdSec>
   <fileSec>
     <fileGrp>
       <file ID="d_file_1">

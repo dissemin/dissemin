@@ -1,44 +1,70 @@
 <?xml version='1.0' encoding='utf-8'?>
-<mets xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.loc.gov/METS/">
+<mets xmlns="http://www.loc.gov/METS/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <dmdSec ID="d_dmd_1">
     <mdWrap MDTYPE="OTHER">
       <xmlData>
-        <mods xmlns="http://www.loc.gov/mods/v3" version="3.7">
-          <relatedItem>
-            <titleInfo>
-              <title>Proceedings of the 2nd ACM SIGCHI symposium on Engineering interactive computing systems - EICS '10</title>
-            </titleInfo>
-          </relatedItem>
-          <abstract>Knowledge-intensive tasks are a blind spot for business process management systems, as these tasks are executed in an unsupervised, highly individual manner. Hence, individual experience is not disseminated and task execution largely depends on implicit knowledge. In this paper we present a framework, realizing situation-specific and personalized task execution support for knowledge-intensive tasks in business processes. As a core concept we suggest activity scheme: a structure capturing a probabilistic task execution model. Activity schemes seamlessly integrate the organizational business process with the individual task execution process based on personalization and generalization of user interactions in the working applications.</abstract>
-          <originInfo>
-            <dateIssued encoding="w3cdtf">2010-01-01</dateIssued>
-            <publisher>Association for Computing Machinery (ACM)</publisher>
-          </originInfo>
-          <identifier type="doi">10.1145/1822018.1822057</identifier>
-          <language>
-            <languageTerm type="code" authority="rfc3066">en</languageTerm>
-          </language>
-          <classification authority="ddc">330</classification>
-          <name type="personal">
-            <namePart type="family">Schmidt</namePart>
-            <namePart type="given">Benedikt</namePart>
-          </name>
-          <name type="personal">
-            <namePart type="family">Stoitsev</namePart>
-            <namePart type="given">Todor</namePart>
-          </name>
-          <name type="personal">
-            <namePart type="family">Mühlhäuser</namePart>
-            <namePart type="given">Max</namePart>
-          </name>
-          <titleInfo>
-            <title>Activity-centric support for weakly-structured business processes</title>
-          </titleInfo>
-          <genre>proceedings-article</genre>
-        </mods>
+        <mods:mods xmlns:mods="http://www.loc.gov/mods/v3" version="3.7">
+          <mods:relatedItem>
+            <mods:titleInfo>
+              <mods:title>Proceedings of the 2nd ACM SIGCHI symposium on Engineering interactive computing systems - EICS '10</mods:title>
+            </mods:titleInfo>
+          </mods:relatedItem>
+          <mods:abstract>Knowledge-intensive tasks are a blind spot for business process management systems, as these tasks are executed in an unsupervised, highly individual manner. Hence, individual experience is not disseminated and task execution largely depends on implicit knowledge. In this paper we present a framework, realizing situation-specific and personalized task execution support for knowledge-intensive tasks in business processes. As a core concept we suggest activity scheme: a structure capturing a probabilistic task execution model. Activity schemes seamlessly integrate the organizational business process with the individual task execution process based on personalization and generalization of user interactions in the working applications.</mods:abstract>
+          <mods:originInfo>
+            <mods:dateIssued encoding="w3cdtf">2010-01-01</mods:dateIssued>
+            <mods:publisher>Association for Computing Machinery (ACM)</mods:publisher>
+          </mods:originInfo>
+          <mods:identifier type="doi">10.1145/1822018.1822057</mods:identifier>
+          <mods:language>
+            <mods:languageTerm type="code" authority="rfc3066">en</mods:languageTerm>
+          </mods:language>
+          <mods:classification authority="ddc">330</mods:classification>
+          <mods:name type="personal">
+            <mods:namePart type="family">Schmidt</mods:namePart>
+            <mods:namePart type="given">Benedikt</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Stoitsev</mods:namePart>
+            <mods:namePart type="given">Todor</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Mühlhäuser</mods:namePart>
+            <mods:namePart type="given">Max</mods:namePart>
+          </mods:name>
+          <mods:titleInfo>
+            <mods:title>Activity-centric support for weakly-structured business processes</mods:title>
+          </mods:titleInfo>
+          <mods:genre>proceedings-article</mods:genre>
+        </mods:mods>
       </xmlData>
     </mdWrap>
   </dmdSec>
+  <amdSec ID="d_amd_1">
+    <rightsMD ID="d_rightsmd_1">
+      <mdWrap MDTYPE="OTHER">
+        <xmlData>
+          <ds:dissemin xmlns:ds="https://dissem.in/deposit/terms/" version="1.0">
+            <ds:depositor>
+              <ds:authentication>orcid</ds:authentication>
+              <ds:firstName>Gottfried</ds:firstName>
+              <ds:lastName>Leibniz</ds:lastName>
+              <ds:email>gottfried.leibniz@tib.eu</ds:email>
+              <ds:orcid>2543-2454-2345-234X</ds:orcid>
+              <ds:isContributor>false</ds:isContributor>
+            </ds:depositor>
+            <ds:publication>
+              <ds:license>
+                <ds:licenseName>Creative Commons Attribution 4.0 International (CC BY 4.0)</ds:licenseName>
+                <ds:licenseURI>https://creativecommons.org/licenses/by/4.0/</ds:licenseURI>
+                <ds:licenseTransmitId>cc_by-40</ds:licenseTransmitId>
+              </ds:license>
+              <ds:disseminId>15</ds:disseminId>
+            </ds:publication>
+          </ds:dissemin>
+        </xmlData>
+      </mdWrap>
+    </rightsMD>
+  </amdSec>
   <fileSec>
     <fileGrp>
       <file ID="d_file_1">

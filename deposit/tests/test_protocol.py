@@ -74,6 +74,39 @@ class MetaTestProtocol():
         assert r.status_code == 200
 
 
+    def test_get_form(self, book_god_of_the_labyrinth, abstract_required, ddc, license_chooser):
+        self.protocol.paper = book_god_of_the_labyrinth
+        form = self.protocol.get_form()
+        assert 'abstract' in form.fields
+        assert 'paper_id' in form.fields
+        if ddc:
+            assert 'ddc' in form.fields
+        else:
+            assert 'ddc' not in form.fields
+        if license_chooser:
+            assert 'license' in form.fields
+        else:
+            assert 'license' not in form.fields
+
+
+    def test_get_bound_form(self, book_god_of_the_labyrinth, abstract_required, ddc, license_chooser):
+        self.protocol.paper = book_god_of_the_labyrinth
+        data = {
+            'paper_pk' : book_god_of_the_labyrinth.pk
+        }
+        if abstract_required:
+            data['abstract'] = 'Simple abstract'
+        if ddc:
+            data['ddc'] = ddc
+        if license_chooser:
+            data['license'] = license_chooser.pk
+
+        form = self.protocol.get_bound_form()
+        if not form.is_valid():
+            print(form.errors)
+            raise AssertionError("Form not valid")
+
+
     def test_get_form_return_type(self, book_god_of_the_labyrinth, user_isaac_newton):
         """
         Return type of get_form shall by a form
@@ -173,27 +206,39 @@ class MetaTestProtocol():
         assert len(self.protocol.protocol_identifier()) > 1
 
 
-    @pytest.mark.parametrize('splash_url, expected_type', [(None, type(None)), ('https://repository.dissem.in/1/spam.pdf', OaiRecord)])
-    def test_submit_deposit_wrapper(self, splash_url, expected_type, book_god_of_the_labyrinth, monkeypatch):
+    @pytest.mark.parametrize('on_todolist', [True, False])
+    @pytest.mark.parametrize('splash_url, expected_splash_url', [(None, type(None)), ('https://repository.dissem.in/1/spam.pdf', OaiRecord)])
+    def test_submit_deposit_wrapper(self, splash_url, expected_splash_url, on_todolist, book_god_of_the_labyrinth, depositing_user, monkeypatch):
         """
         We monkeypatch the submit_deposit to return a DepositResult.
         """
         self.protocol.paper = book_god_of_the_labyrinth
-        dr = DepositResult(splash_url=splash_url)
+        self.protocol.user = depositing_user
 
+        if on_todolist:
+            book_god_of_the_labyrinth.todolist.add(self.protocol.user)
+
+        dr = DepositResult(splash_url=splash_url)
         monkeypatch.setattr(self.protocol, 'submit_deposit', lambda *args, **kwargs: dr)
 
         deposit_result = self.protocol.submit_deposit_wrapper()
 
         assert isinstance(deposit_result, DepositResult)
-        assert isinstance(deposit_result.oairecord, expected_type)
+        assert isinstance(deposit_result.oairecord, expected_splash_url)
+        assert book_god_of_the_labyrinth.todolist.filter(pk=self.protocol.user.pk).exists() == False
 
+
+    @pytest.mark.parametrize('on_todolist', [True, False])
     @pytest.mark.parametrize('exc', [DepositError, Exception])
-    def test_submit_deposit_wrapper_exception(self, book_god_of_the_labyrinth, exc, monkeypatch):
+    def test_submit_deposit_wrapper_exception(self, book_god_of_the_labyrinth, depositing_user, on_todolist, exc, monkeypatch):
         """
         Something went wrong when depositing. Exceptions must be fetched and Deposit status status must be "failed". To do that we simply monkeypatch submit_deposit
         """
         self.protocol.paper = book_god_of_the_labyrinth
+        self.protocol.user = depositing_user
+
+        if on_todolist:
+            book_god_of_the_labyrinth.todolist.add(self.protocol.user)
 
         def submit_deposit(self, *args, **kwargs):
             raise exc
@@ -203,6 +248,7 @@ class MetaTestProtocol():
         deposit_result = self.protocol.submit_deposit_wrapper()
 
         assert deposit_result.status == 'failed'
+        assert book_god_of_the_labyrinth.todolist.filter(pk=self.protocol.user.pk).exists() == on_todolist
 
 
     def test_protocol_registered(self):

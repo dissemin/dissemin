@@ -18,7 +18,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-16 09:41+0200\n"
-"PO-Revision-Date: 2019-08-29 18:04:49+0000\n"
+"PO-Revision-Date: 2019-09-06 04:46:36+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -313,7 +313,7 @@ msgstr "Gelöscht"
 #: deposit/models.py:266 deposit/templates/deposit/start.html:328
 #: deposit/views.py:102
 msgid "Deposit"
-msgstr "Ablegen"
+msgstr "Hochladen"
 
 #: deposit/models.py:319
 msgid "We will use this email address to notify you when your deposits are accepted."

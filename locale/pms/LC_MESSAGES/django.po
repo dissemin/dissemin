@@ -13,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-16 09:41+0200\n"
-"PO-Revision-Date: 2019-09-03 07:06:58+0000\n"
+"PO-Revision-Date: 2019-09-06 04:46:46+0000\n"
 "Language: pms\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2598,19 +2598,19 @@ msgstr "Stòria dl'Asia"
 
 #: vinaigrette-deleteme.py:97
 msgid "History of Africa"
-msgstr ""
+msgstr "Stòria dl'Àfrica"
 
 #: vinaigrette-deleteme.py:98
 msgid "History of North America"
-msgstr ""
+msgstr "Stòria dla Mérica dël nòrd"
 
 #: vinaigrette-deleteme.py:99
 msgid "History of South America"
-msgstr ""
+msgstr "Stòria dla Mérica dël sud"
 
 #: vinaigrette-deleteme.py:100
 msgid "History of other areas"
-msgstr ""
+msgstr "Stòria d'àutre àree"
 
 #: vinaigrette-deleteme.py:101
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"

@@ -25,6 +25,8 @@ import pytest
 
 from mock import patch
 
+from django.urls import reverse
+
 from dissemin.settings import BASE_DIR
 from papers.baremodels import BareName
 from papers.models import OaiRecord
@@ -244,6 +246,34 @@ class TestSearchPages():
 
     def test_search_by_author(self, check_page):
         check_page(200, 'search', getargs={'authors': self.r3.name})
+
+
+class TestTodoList():
+    """
+    Test concerning TodoListView
+    """
+
+    def test_login_required(self, check_status):
+        """
+        Login required
+        """
+        check_status(302, 'my-todolist')
+
+    def test_todolist_view(self, check_html, authenticated_client, book_god_of_the_labyrinth, rebuild_index):
+        """
+        Test of the to-do list view with items
+        """
+        book_god_of_the_labyrinth.todolist.add(authenticated_client.user)
+        response = authenticated_client.get(reverse('my-todolist'))
+
+        assert response.status_code == 200
+
+        check_html(response)
+
+        assert len(response.context['object_list']) == 1
+        assert book_god_of_the_labyrinth.pk in [paper.pk for paper in response.context['object_list']]
+        assert response.context['view'] == 'my-todolist'
+        assert response.context['ajax_url'] == reverse('ajax-todolist')
 
 
 # TODO TO BE TESTED

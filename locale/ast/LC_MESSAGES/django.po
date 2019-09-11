@@ -12,7 +12,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-16 09:41+0200\n"
-"PO-Revision-Date: 2019-09-03 07:06:53+0000\n"
+"PO-Revision-Date: 2019-09-06 04:46:33+0000\n"
 "Language: ast\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2566,7 +2566,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:82
 msgid "American literature in English"
-msgstr ""
+msgstr "Lliteratura de los Estaos Xuníos n’inglés"
 
 #: vinaigrette-deleteme.py:83
 msgid "English & Old English literatures"

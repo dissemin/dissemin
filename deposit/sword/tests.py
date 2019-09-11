@@ -1,3 +1,4 @@
+import os
 import pytest
 import responses
 
@@ -6,11 +7,14 @@ from zipfile import ZipFile
 
 from deposit.sword.forms import SWORDMETSForm
 from deposit.models import DDC
+from deposit.models import License
 from deposit.models import LicenseChooser
 from deposit.protocol import DepositError
 from deposit.protocol import DepositResult
 from deposit.sword.protocol import SWORDMETSProtocol
 from deposit.tests.test_protocol import MetaTestProtocol
+from dissemin.settings import BASE_DIR
+from papers.models import Researcher
 
 
 userdata = [(None, None), ('vetinari', None), (None, 'psst')]
@@ -19,6 +23,63 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
     """
     This class contains some tests that every implemented SWORD protocol shall pass. The tests are not executed as members of this class, but of any subclass.
     """
+
+    @pytest.mark.write_mets_examples
+    def test_write_mets_metadata_examples(self, db, upload_data, user_leibniz):
+        """
+        This is not really a test. It just outputs metadata examples that the protocol generates.
+        Ususally this test is omitted, you can run it explicetely with "-m write_mets_examples".
+        For any subclass, make sure to set ``path_metadata_examples``. This is the place where the file will created. You can then include them in the documentation.
+        In case of changes of the protocol or repository, you should run this function, but make sure it's up to date
+        """
+        self.protocol.paper = upload_data['paper']
+        self.protocol.user = user_leibniz
+
+        Researcher.create_by_name(
+            user=user_leibniz,
+            first=user_leibniz.first_name,
+            last=user_leibniz.last_name,
+            orcid="2543-2454-2345-234X",
+        )
+
+        data = dict()
+        data['email'] = user_leibniz.email
+
+        if upload_data['oairecord'].description is not None:
+            data['abstract'] = upload_data['oairecord'].description
+        else:
+            data['abstract'] = upload_data['abstract']
+
+        ddcs = DDC.objects.all()
+        data['ddc'] = [ddc for ddc in ddcs.filter(number__in=upload_data['ddc'])]
+
+        l = License.objects.get(uri="https://creativecommons.org/licenses/by/4.0/")
+        lc = LicenseChooser.objects.create(
+            license=l,
+            repository=self.protocol.repository,
+            transmit_id='cc_by-40'
+        )
+        licenses = LicenseChooser.objects.by_repository(repository=self.protocol.repository)
+        data['license'] = lc.pk
+
+        form = SWORDMETSForm(ddcs=ddcs, licenses=licenses, data=data)
+
+        valid_form = form.is_valid()
+        if not valid_form:
+            print(form.errors)
+        assert valid_form == True
+
+        dissemin_xml = self.protocol._get_xml_dissemin_metadata(form)
+        metadata_xml = self.protocol._get_xml_metadata(form)
+        mets_xml = self.protocol._get_mets(metadata_xml, dissemin_xml)
+
+        # Here we write the file. We take the base path, extend with protocl specific path and write it out
+        f_path = os.path.join(BASE_DIR, 'doc', 'sphinx', 'examples', self.path_metadata_examples)
+        f_name = os.path.join(f_path, upload_data['load_name'] + '.xml')
+        os.makedirs(f_path, exist_ok=True)
+        with open(f_name, 'w') as fout:
+            fout.write(mets_xml)
+
 
     def test_get_deposit_result(self):
         """
@@ -77,6 +138,43 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
         assert dr.status == 'pending'
  
 
+    def test_get_form(self, book_god_of_the_labyrinth, empty_user_preferences, abstract_required, ddc, license_chooser):
+        self.protocol.paper = book_god_of_the_labyrinth
+        self.protocol.user = empty_user_preferences.user
+        form = self.protocol.get_form()
+        assert 'abstract' in form.fields
+        assert 'email' in form.fields
+        assert 'paper_id' in form.fields
+        if ddc:
+            assert 'ddc' in form.fields
+        else:
+            assert 'ddc' not in form.fields
+        if license_chooser:
+            assert 'license' in form.fields
+        else:
+            assert 'license' not in form.fields
+
+
+    def test_get_bound_form(self, book_god_of_the_labyrinth, empty_user_preferences, abstract_required, ddc, license_chooser):
+        self.protocol.paper = book_god_of_the_labyrinth
+        self.protocol.user = empty_user_preferences.user
+        data = {
+            'paper_pk' : book_god_of_the_labyrinth.pk,
+            'email' : 'spam@ham.co.uk',
+        }
+        if abstract_required:
+            data['abstract'] = 'Simple abstract'
+        if ddc:
+            data['ddc'] = ddc
+        if license_chooser:
+            data['license'] = license_chooser.pk
+
+        form = self.protocol.get_bound_form(data=data)
+        if not form.is_valid():
+            print(form.errors)
+            raise AssertionError("Form not valid")
+
+
     @pytest.mark.parametrize('email', ['isaac.newton@dissem.in', None])
     def test_get_form_initial_data(self, book_god_of_the_labyrinth, empty_user_preferences, email):
         """
@@ -134,7 +232,7 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
 
         dissemin_xml = self.protocol._get_xml_dissemin_metadata(form)
         metadata_xml = self.protocol._get_xml_metadata(form)
-        mets_xml = self.protocol._get_mets(dissemin_xml, metadata_xml)
+        mets_xml = self.protocol._get_mets(metadata_xml, dissemin_xml)
         
         # Because of the xml declaration we have to convert to a bytes object
         mets_xsd.assertValid(etree.fromstring(bytes(mets_xml, encoding='utf-8')))
@@ -247,6 +345,8 @@ class TestSWORDSMETSMODSProtocol(MetaTestSWORDMETSProtocol):
     """
     A test class for named protocol
     """
+    #Path in doc/sphinx/examples where to deposit example files
+    path_metadata_examples = 'mods'
 
     def test_str(self):
         """

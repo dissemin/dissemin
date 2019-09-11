@@ -1,40 +1,134 @@
 <?xml version='1.0' encoding='utf-8'?>
-<mets xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.loc.gov/METS/">
+<mets xmlns="http://www.loc.gov/METS/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <dmdSec ID="d_dmd_1">
     <mdWrap MDTYPE="OTHER">
       <xmlData>
-        <mods xmlns="http://www.loc.gov/mods/v3" version="3.7">
-          <relatedItem>
-            <part>
-              <detail type="volume">
-                <number>10</number>
-              </detail>
-              <detail type="issue">
-                <number>1-1610</number>
-              </detail>
-            </part>
-            <titleInfo>
-              <title>Sein und Nichtsein</title>
-            </titleInfo>
-          </relatedItem>
-          <abstract>User filled in abstract</abstract>
-          <originInfo>
-            <dateIssued encoding="w3cdtf">1610-01-01</dateIssued>
-            <publisher>Shakespeare Money Maker Inc.</publisher>
-          </originInfo>
-          <classification authority="ddc">700</classification>
-          <name type="personal">
-            <namePart type="family">Hamlet</namePart>
-            <namePart type="given">Ghost</namePart>
-          </name>
-          <titleInfo>
-            <title>Sein und Nichtsein</title>
-          </titleInfo>
-          <genre>proceedings</genre>
-        </mods>
+        <mods:mods xmlns:mods="http://www.loc.gov/mods/v3" version="3.7">
+          <mods:relatedItem>
+            <mods:part>
+              <mods:detail type="volume">
+                <mods:number>10</mods:number>
+              </mods:detail>
+              <mods:detail type="issue">
+                <mods:number>3-2018</mods:number>
+              </mods:detail>
+            </mods:part>
+            <mods:titleInfo>
+              <mods:title>GENDER – Zeitschrift für Geschlecht, Kultur und Gesellschaft</mods:title>
+            </mods:titleInfo>
+          </mods:relatedItem>
+          <mods:abstract>User filled in abstract</mods:abstract>
+          <mods:originInfo>
+            <mods:dateIssued encoding="w3cdtf">2018-09-17</mods:dateIssued>
+            <mods:publisher>Barbara Budrich Publishers</mods:publisher>
+          </mods:originInfo>
+          <mods:classification authority="ddc">700</mods:classification>
+          <mods:name type="personal">
+            <mods:namePart type="family">Lehnert</mods:namePart>
+            <mods:namePart type="given">Gertrud</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Bünnig</mods:namePart>
+            <mods:namePart type="given">Jenny</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">von Maydell</mods:namePart>
+            <mods:namePart type="given">Miriam</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Weilandt</mods:namePart>
+            <mods:namePart type="given">Maria</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Hahmann</mods:namePart>
+            <mods:namePart type="given">Julia</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Amsler</mods:namePart>
+            <mods:namePart type="given">Claudia</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Giannone</mods:namePart>
+            <mods:namePart type="given">Antonella</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Leutner</mods:namePart>
+            <mods:namePart type="given">Petra</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Brodersen</mods:namePart>
+            <mods:namePart type="given">Folke</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Motakef</mods:namePart>
+            <mods:namePart type="given">Mona</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Bringmann</mods:namePart>
+            <mods:namePart type="given">Julia</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Wimbauer</mods:namePart>
+            <mods:namePart type="given">Christine</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">de Nève</mods:namePart>
+            <mods:namePart type="given">Dorothée</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Ferch</mods:namePart>
+            <mods:namePart type="given">Niklas</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Braunmühl</mods:namePart>
+            <mods:namePart type="given">Carolin</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Richter</mods:namePart>
+            <mods:namePart type="given">Susanne</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Scholz</mods:namePart>
+            <mods:namePart type="given">Janina</mods:namePart>
+          </mods:name>
+          <mods:name type="personal">
+            <mods:namePart type="family">Binder</mods:namePart>
+            <mods:namePart type="given">Charlotte</mods:namePart>
+          </mods:name>
+          <mods:titleInfo>
+            <mods:title>Mode und Gender</mods:title>
+          </mods:titleInfo>
+          <mods:genre>journal-issue</mods:genre>
+        </mods:mods>
       </xmlData>
     </mdWrap>
   </dmdSec>
+  <amdSec ID="d_amd_1">
+    <rightsMD ID="d_rightsmd_1">
+      <mdWrap MDTYPE="OTHER">
+        <xmlData>
+          <ds:dissemin xmlns:ds="https://dissem.in/deposit/terms/" version="1.0">
+            <ds:depositor>
+              <ds:authentication>orcid</ds:authentication>
+              <ds:firstName>Gottfried</ds:firstName>
+              <ds:lastName>Leibniz</ds:lastName>
+              <ds:email>gottfried.leibniz@tib.eu</ds:email>
+              <ds:orcid>2543-2454-2345-234X</ds:orcid>
+              <ds:isContributor>false</ds:isContributor>
+            </ds:depositor>
+            <ds:publication>
+              <ds:license>
+                <ds:licenseName>Creative Commons Attribution 4.0 International (CC BY 4.0)</ds:licenseName>
+                <ds:licenseURI>https://creativecommons.org/licenses/by/4.0/</ds:licenseURI>
+                <ds:licenseTransmitId>cc_by-40</ds:licenseTransmitId>
+              </ds:license>
+              <ds:disseminId>10</ds:disseminId>
+            </ds:publication>
+          </ds:dissemin>
+        </xmlData>
+      </mdWrap>
+    </rightsMD>
+  </amdSec>
   <fileSec>
     <fileGrp>
       <file ID="d_file_1">

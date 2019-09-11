@@ -18,7 +18,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-16 09:41+0200\n"
-"PO-Revision-Date: 2019-09-03 07:06:55+0000\n"
+"PO-Revision-Date: 2019-09-06 04:46:38+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -62,9 +62,8 @@ msgid "Dewey Decimal Class"
 msgstr "Clase del sistema de Dewey"
 
 #: deposit/forms.py:156
-#, fuzzy
 msgid "License"
-msgstr "Ninguna licencia"
+msgstr "Licencia"
 
 #: deposit/forms.py:192
 msgid "No preferred repository"
@@ -2295,9 +2294,8 @@ msgid "Invalid URL."
 msgstr "El URL no es válido."
 
 #: vinaigrette-deleteme.py:2
-#, fuzzy
 msgid "Computer science, knowledge & systems"
-msgstr "Informática"
+msgstr "Ciencias de la computación, el conocimiento y los sistemas"
 
 #: vinaigrette-deleteme.py:3
 msgid "Bibliographies"
@@ -2332,9 +2330,8 @@ msgid "Manuscripts & rare books"
 msgstr "Manuscritos y libros raros"
 
 #: vinaigrette-deleteme.py:12
-#, fuzzy
 msgid "Metaphysics"
-msgstr "Física"
+msgstr "Metafísica"
 
 #: vinaigrette-deleteme.py:13
 msgid "Epistemology"
@@ -2349,9 +2346,8 @@ msgid "Philosophical schools of thought"
 msgstr "Escuelas filosóficas del pensamiento"
 
 #: vinaigrette-deleteme.py:17
-#, fuzzy
 msgid "Philosophical logic"
-msgstr "Filosofía"
+msgstr "Lógica filosófica"
 
 #: vinaigrette-deleteme.py:18
 msgid "Ethics"
@@ -2366,9 +2362,8 @@ msgid "Modern western philosophy"
 msgstr "Filosofía moderna occidental"
 
 #: vinaigrette-deleteme.py:21
-#, fuzzy
 msgid "Religion"
-msgstr "Religiones"
+msgstr "Religión"
 
 #: vinaigrette-deleteme.py:22
 msgid "Philosophy & theory of religion"
@@ -2399,19 +2394,16 @@ msgid "History of Christianity"
 msgstr "Historia del cristianismo"
 
 #: vinaigrette-deleteme.py:29
-#, fuzzy
 msgid "Christian denominations"
-msgstr "Administración de Dissemin"
+msgstr "Denominaciones cristianas"
 
 #: vinaigrette-deleteme.py:30
-#, fuzzy
 msgid "Other religions"
-msgstr "Religiones"
+msgstr "Otras religiones"
 
 #: vinaigrette-deleteme.py:31
-#, fuzzy
 msgid "Social sciences, sociology & anthropology"
-msgstr "Socioantropología y etnología"
+msgstr "Ciencias sociales, sociología y antropología"
 
 #: vinaigrette-deleteme.py:34
 msgid "Economics"
@@ -2462,14 +2454,12 @@ msgid "Classical & modern Greek languages"
 msgstr "Lenguas griegas clásica y moderna"
 
 #: vinaigrette-deleteme.py:50
-#, fuzzy
 msgid "Other languages"
-msgstr "Cambiar de idioma"
+msgstr "Otras lenguas"
 
 #: vinaigrette-deleteme.py:51
-#, fuzzy
 msgid "Science"
-msgstr "Biociencias"
+msgstr "Ciencia"
 
 #: vinaigrette-deleteme.py:53
 msgid "Astronomy"
@@ -2484,9 +2474,8 @@ msgid "Fossils & prehistoric life"
 msgstr "Fósiles y vida prehistórica"
 
 #: vinaigrette-deleteme.py:58
-#, fuzzy
 msgid "Biology"
-msgstr "Sociología"
+msgstr "Biología"
 
 #: vinaigrette-deleteme.py:59
 msgid "Plants (Botany)"
@@ -2497,19 +2486,16 @@ msgid "Animals (Zoology)"
 msgstr "Animales (zoología)"
 
 #: vinaigrette-deleteme.py:61
-#, fuzzy
 msgid "Technology"
-msgstr "Psicología"
+msgstr "Tecnología"
 
 #: vinaigrette-deleteme.py:62
-#, fuzzy
 msgid "Medicine & health"
-msgstr "Medicina y ciencias de la salud"
+msgstr "Medicina y salud"
 
 #: vinaigrette-deleteme.py:64
-#, fuzzy
 msgid "Agriculture"
-msgstr "Arquitectura"
+msgstr "Agricultura"
 
 #: vinaigrette-deleteme.py:65
 msgid "Home & family management"
@@ -2520,9 +2506,8 @@ msgid "Management & public relations"
 msgstr "Administración y relaciones públicas"
 
 #: vinaigrette-deleteme.py:67
-#, fuzzy
 msgid "Chemical engineering"
-msgstr "Ingeniería"
+msgstr "Ingeniería química"
 
 #: vinaigrette-deleteme.py:68
 msgid "Manufacturing"
@@ -2609,14 +2594,12 @@ msgid "Classical & modern Greek literatures"
 msgstr "Literatura griega clásica y moderna"
 
 #: vinaigrette-deleteme.py:90
-#, fuzzy
 msgid "Other literatures"
-msgstr "Literatura"
+msgstr "Otras literaturas"
 
 #: vinaigrette-deleteme.py:92
-#, fuzzy
 msgid "Geography & travel"
-msgstr "Geografía"
+msgstr "Geografía y viajes"
 
 #: vinaigrette-deleteme.py:93
 msgid "Biography & genealogy"
@@ -2631,9 +2614,8 @@ msgid "History of Europe"
 msgstr "Historia de Europa"
 
 #: vinaigrette-deleteme.py:96
-#, fuzzy
 msgid "History of Asia"
-msgstr "Historia"
+msgstr "Historia de Asia"
 
 #: vinaigrette-deleteme.py:97
 msgid "History of Africa"
