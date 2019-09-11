@@ -3,6 +3,7 @@ import pytest
 
 from deposit.declaration import REGISTERED_DECLARATION_FUNCTIONS
 from deposit.declaration import get_declaration_function
+from deposit.models import License
 
 
 
@@ -28,3 +29,26 @@ class TestDeclarations():
         """
         with pytest.raises(AttributeError):
             get_declaration_function('spam')
+
+@pytest.mark.usefixtures('deposit_record')
+class TestDeclarationLetters():
+    """
+    Class that groups test for generating letter of deposits.
+    """
+    def test_declaration_ulb_darmststadt(self):
+        """
+        This tests the letter of declaration for ULB Darmstadt.
+        """
+        self.dr.repository.letter_declaration = 'declaration_ulb_darmstadt'
+        self.dr.repository.save()
+
+        self.dr.license = License.objects.all().first()
+        self.dr.identifier = '5732'
+        self.dr.save()
+
+        self.client.user.first_name = 'Jose'
+        self.client.user.last_name = 'Saramago'
+
+        func = get_declaration_function(self.dr.repository.letter_declaration)
+
+        func(self.dr, self.client.user)

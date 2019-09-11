@@ -60,7 +60,7 @@ class TestLetterDeclarationView():
         If deposit record is found, user correct, repository requires letter and deposit is pending, return a pdf.
         We mock here the function to generate the pdf.
         """
-        monkeypatch.setattr(deposit.views, 'get_declaration_pdf', lambda x: io.BytesIO(blank_pdf))
+        monkeypatch.setattr(deposit.views, 'get_declaration_pdf', lambda *args, **kwargs: io.BytesIO(blank_pdf))
         response = self.client.get(reverse('letter-of-declaration', args=[self.dr.pk]))
 
         assert response.status_code == 200
