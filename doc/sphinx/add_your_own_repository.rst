@@ -116,4 +116,14 @@ If you need more information for your workflow, please contact us. We can add ad
 You can find our schema for :download:`download <../../deposit/schema/dissemin_v1.0.xsd>` in Version 1.0.
 
 
+Letter of Declaration
+---------------------
 
+To finally publish a document or resource in your repository, you might require some kind of letter of declaration of the depositor, in which the depositors sign that he accepts certain conditions etc. pp.
+
+Dissemin can generate these type of letters individually per repository, i.e. you can define the content and look of this document.
+Additionally it is prefilled with all necessary data, so that the depositor just has to sign and send you the letter.
+
+After the deposit the depositor is informed that he has to fill in such a letter and send it to your repository administration. He can directly download this letter. En plus he can regenerate this letter at any point in time as long you haven't published the resource.
+
+We provide an :download:`example letter of declaratio n<examples/letter_of_declaration_ulb_darmstadt.pdf>` of ULB Darmstadt, so you have some imagination how it finally looks like.
