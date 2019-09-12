@@ -5,6 +5,7 @@
 # Author: Becks
 # Author: Danielbeerbonn
 # Author: FF11
+# Author: Kapidaehn
 # Author: Kly
 # Author: Leslie Neumann
 # Author: Metalhead64
@@ -18,7 +19,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-16 09:41+0200\n"
-"PO-Revision-Date: 2019-09-06 04:46:36+0000\n"
+"PO-Revision-Date: 2019-09-12 13:54:46+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -28,11 +29,11 @@ msgstr ""
 
 #: autocomplete/views.py:81
 msgid "Current institutions"
-msgstr "Derzeitige Einrichtungen"
+msgstr "Bestehende Einrichtungen"
 
 #: autocomplete/views.py:85
 msgid "Unverified institutions"
-msgstr "Unverifizierte Einrichtungen"
+msgstr "nicht geprüfte Einrichtungen"
 
 #: autocomplete/views.py:89
 msgid "Obsolete institutions"
@@ -40,7 +41,7 @@ msgstr "Veraltete Einrichtungen"
 
 #: deposit/forms.py:84
 msgid "Upload type"
-msgstr "Hochladetyp"
+msgstr "Art des Hochladens"
 
 #: deposit/forms.py:85 deposit/templates/deposit/deposits.html:40
 msgid "Repository"
@@ -56,7 +57,7 @@ msgstr "Zusammenfassung"
 
 #: deposit/forms.py:148
 msgid "Dewey Decimal Class"
-msgstr "Dewey Dezimalklassifikation"
+msgstr "Dewey-Dezimalklassifikation"
 
 #: deposit/forms.py:156
 msgid "License"
@@ -296,7 +297,7 @@ msgstr "Gefälscht"
 
 #: deposit/models.py:46
 msgid "Pending publication"
-msgstr "Anstehende Veröffentlichung"
+msgstr "Ausstehende Veröffentlichung"
 
 #: deposit/models.py:48
 msgid "Published"
@@ -317,7 +318,7 @@ msgstr "Hochladen"
 
 #: deposit/models.py:319
 msgid "We will use this email address to notify you when your deposits are accepted."
-msgstr "Wir werden diese E-Mail-Adresse verwenden, um Dir mitzuteilen, wenn dein Upload akzeptiert wurde."
+msgstr "Wir werden diese E-Mail-Adresse verwenden, um Dir mitzuteilen, wenn deine Uploads akzeptiert wurden."
 
 #: deposit/models.py:325
 msgid "This repository will be used by default for your deposits."
@@ -555,7 +556,7 @@ msgstr "Das Repositorium ist derzeit nicht in Betrieb."
 
 #: deposit/views.py:75
 msgid "This repository is not available for this paper."
-msgstr "Das Repositorium ist für die Publikation nicht verfügbar."
+msgstr "Dieses Repositorium ist für diese Publikation nicht verfügbar."
 
 #: deposit/views.py:139
 msgid "This repository could not be found."
@@ -1382,7 +1383,7 @@ msgstr "Open Access"
 
 #: publishers/models.py:39
 msgid "Freely available from the publisher."
-msgstr "Frei verfügbar durch den Herausgeber."
+msgstr "Frei verfügbar durch Herausgeber."
 
 #: publishers/models.py:40
 msgid "Allows pre/post prints"
@@ -1553,19 +1554,19 @@ msgstr "Keine."
 
 #: statistics/models.py:48
 msgid "Available from the publisher"
-msgstr "Frei verfügbar durch Herausgeber"
+msgstr "Goldener Open Access, die Publikation ist durch den Verlag frei verfügbar."
 
 #: statistics/models.py:49
 msgid "Available from the author"
-msgstr "Verfügbar durch Verfasser_in"
+msgstr "Grüner Open Access, die Publikation ist bereits in einem Repository frei verfügbar"
 
 #: statistics/models.py:50
 msgid "Could be shared by the authors"
-msgstr "Könnte von den Verfasser_innen geteilt werden"
+msgstr "Publikation kann laut Verlagspolicy Open Access veröffentlicht werden"
 
 #: statistics/models.py:51
 msgid "Unknown/unclear sharing policy"
-msgstr "Unbekannte/unklare Weitergaberichtlinie"
+msgstr "Publikationen mit unbekannten/unklaren Zweitveröffentlichungsrichtlinien"
 
 #: statistics/models.py:52
 msgid "Publisher forbids sharing"
