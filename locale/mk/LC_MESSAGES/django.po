@@ -13,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-16 09:41+0200\n"
-"PO-Revision-Date: 2019-09-12 13:54:53+0000\n"
+"PO-Revision-Date: 2019-09-16 16:47:43+0000\n"
 "Language: mk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2451,9 +2451,8 @@ msgid "Classical & modern Greek languages"
 msgstr ""
 
 #: vinaigrette-deleteme.py:50
-#, fuzzy
 msgid "Other languages"
-msgstr "Сменете јазик"
+msgstr "Други јазици"
 
 #: vinaigrette-deleteme.py:51
 #, fuzzy

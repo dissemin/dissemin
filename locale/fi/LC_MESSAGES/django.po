@@ -15,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-16 09:41+0200\n"
-"PO-Revision-Date: 2019-09-06 04:46:40+0000\n"
+"PO-Revision-Date: 2019-09-16 16:47:39+0000\n"
 "Language: fi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -433,7 +433,7 @@ msgstr "Yhteyden muodostaminen koodivarantoon epäonnistui. Yritä myöhemmin uu
 
 #: deposit/sword/forms.py:15
 msgid "E-mail"
-msgstr ""
+msgstr "Sähköpostiosoite"
 
 #: deposit/sword/protocol.py:252
 msgid "Username or password not provided for this repository. Please contact the Dissemin team."
@@ -926,7 +926,7 @@ msgstr ""
 
 #: papers/templates/papers/exportCitationsModal.html:16
 msgid "Format"
-msgstr ""
+msgstr "Muoto"
 
 #: papers/templates/papers/exportCitationsModal.html:22
 #: papers/templates/papers/paper.html:118
@@ -1663,7 +1663,7 @@ msgstr "Virhe"
 
 #: templates/dissemin/error.html:15
 msgid "<a href=\"/\">Go back to the home page.</a>"
-msgstr ""
+msgstr "<a href=\"/\">Takaisin kotisivulle.</a>"
 
 #: templates/dissemin/faq.html:6 templates/dissemin/faq.html:11
 msgid "Frequently Asked Questions"
@@ -2297,7 +2297,7 @@ msgstr "Tietojenkäsittelytiede"
 
 #: vinaigrette-deleteme.py:3
 msgid "Bibliographies"
-msgstr ""
+msgstr "Bibliografiat"
 
 #: vinaigrette-deleteme.py:4
 #, fuzzy
@@ -2335,7 +2335,7 @@ msgstr "Fysiikka"
 
 #: vinaigrette-deleteme.py:13
 msgid "Epistemology"
-msgstr ""
+msgstr "Tietoteoria"
 
 #: vinaigrette-deleteme.py:14
 msgid "Parapsychology & occultism"
@@ -2352,7 +2352,7 @@ msgstr "Filosofia"
 
 #: vinaigrette-deleteme.py:18
 msgid "Ethics"
-msgstr ""
+msgstr "Etiikka"
 
 #: vinaigrette-deleteme.py:19
 msgid "Ancient, medieval & eastern philosophy"
@@ -2411,7 +2411,7 @@ msgstr "Sosiaaliantropologia ja etnologia"
 
 #: vinaigrette-deleteme.py:34
 msgid "Economics"
-msgstr ""
+msgstr "Ekonomia"
 
 #: vinaigrette-deleteme.py:36
 msgid "Public administration & military science"
@@ -2532,7 +2532,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:71
 msgid "Arts"
-msgstr ""
+msgstr "Taiteet"
 
 #: vinaigrette-deleteme.py:72
 msgid "Area planning & landscape architecture"
@@ -2548,7 +2548,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:76
 msgid "Painting"
-msgstr ""
+msgstr "Maalaus"
 
 #: vinaigrette-deleteme.py:77
 msgid "Printmaking & prints"
