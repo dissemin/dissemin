@@ -17,13 +17,13 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-16 09:41+0200\n"
-"PO-Revision-Date: 2019-09-19 09:35:08+0000\n"
+"PO-Revision-Date: 2019-09-19 12:20:18+0000\n"
 "Language: qqq\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-POT-Import-Date: 2019-08-17 07:19:09+0000\n"
 "X-Generator: MediaWiki 1.34.0-alpha; Translate 2019-04-24\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: autocomplete/views.py:81
 msgid "Current institutions"
@@ -894,7 +894,6 @@ msgstr ""
 msgid "(%(num_total)s paper)"
 msgid_plural "(%(num_total)s papers)"
 msgstr[0] "{{Identical|Paper}}"
-msgstr[1] "{{Identical|Paper}}"
 
 #: papers/templates/papers/department.html:45
 #: papers/templates/papers/institution.html:48
@@ -1159,7 +1158,6 @@ msgstr ""
 msgid "%(nb_publi)s paper published in %(journal)s"
 msgid_plural "%(nb_publi)s papers published in %(journal)s"
 msgstr[0] ""
-msgstr[1] ""
 
 #: papers/templates/papers/search.html:190
 #: publishers/templates/publishers/policy.html:39
@@ -1171,14 +1169,12 @@ msgstr ""
 msgid "%(nb_publi)s paper published by %(publisher)s"
 msgid_plural "%(nb_publi)s papers published by %(publisher)s"
 msgstr[0] ""
-msgstr[1] ""
 
 #: papers/templates/papers/search.html:211
 #, python-format
 msgid "%(formattedCounter)s paper found"
 msgid_plural "%(formattedCounter)s papers found"
 msgstr[0] ""
-msgstr[1] ""
 
 #: papers/templates/papers/search.html:252
 #: publishers/templates/publishers/list.html:73
@@ -1489,7 +1485,6 @@ msgstr ""
 msgid "%(counter)s publisher found"
 msgid_plural "%(counter)s publishers found"
 msgstr[0] ""
-msgstr[1] ""
 
 #: publishers/templates/publishers/list.html:81
 #, python-format
