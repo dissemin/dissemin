@@ -11,7 +11,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-27 18:48+0200\n"
-"PO-Revision-Date: 2019-09-03 07:06:54+0000\n"
+"PO-Revision-Date: 2019-09-19 09:34:53+0000\n"
 "Language: ia\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -67,7 +67,7 @@ msgid "Show less information"
 msgstr "Monstrar minus information"
 
 #: papers/static/papers/refresh.js:206
-#, invalid-plural, javascript-format
+#, javascript-format
 msgid "%s paper found"
 msgid_plural "%s papers found"
 msgstr[0] ""

@@ -13,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-16 09:41+0200\n"
-"PO-Revision-Date: 2019-08-19 09:17:18+0000\n"
+"PO-Revision-Date: 2019-09-19 09:34:54+0000\n"
 "Language: fa\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1153,7 +1153,7 @@ msgid "ISSN:"
 msgstr "شاپا:"
 
 #: papers/templates/papers/search.html:182
-#, invalid-plural, python-format
+#, python-format
 msgid "%(nb_publi)s paper published in %(journal)s"
 msgid_plural "%(nb_publi)s papers published in %(journal)s"
 msgstr[0] ""
@@ -1164,7 +1164,7 @@ msgid "Publisher"
 msgstr "ناشر"
 
 #: papers/templates/papers/search.html:199
-#, invalid-plural, python-format
+#, python-format
 msgid "%(nb_publi)s paper published by %(publisher)s"
 msgid_plural "%(nb_publi)s papers published by %(publisher)s"
 msgstr[0] ""
@@ -1482,7 +1482,7 @@ msgid "Contact"
 msgstr "تماس"
 
 #: publishers/templates/publishers/list.html:35
-#, invalid-plural, python-format
+#, python-format
 msgid "%(counter)s publisher found"
 msgid_plural "%(counter)s publishers found"
 msgstr[0] ""
