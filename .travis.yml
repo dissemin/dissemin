@@ -69,7 +69,7 @@ before_script:
     fi
 
 script:
-  - python manage.py compilemessages
+  - python manage.py compilemessages --exclude qqq
   - coverage run --source=dissemin,papers,backend,deposit,upload,statistics --omit="*/migrations/*,dissemin/settings/*" -m py.test
 
 after_success:
