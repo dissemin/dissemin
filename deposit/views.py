@@ -83,20 +83,21 @@ def get_metadata_form(request):
 def start_view(request, pk):
     paper = get_object_or_404(Paper, pk=pk)
     repositories = get_all_repositories_and_protocols(paper, request.user)
+    repositories_protocol = {repo.id :proto for repo, proto in repositories}
     
     # select the most appropriate repository
     userprefs = UserPreferences.get_by_user(request.user)
     preselected_repository = userprefs.get_preferred_or_last_repository()
     preselected_protocol = None
-    if not preselected_repository:
+    if preselected_repository:
+        preselected_protocol = repositories_protocol.get(preselected_repository.id)
+    # If the preferred repository is not available for this paper, pick any
+    if not preselected_protocol:
         for repo, protocol in repositories:
             if protocol is not None:
                 preselected_repository = repo
                 preselected_protocol = protocol
                 break
-    else:
-        repositories_protocol = {repo.id :proto for repo, proto in repositories}
-        preselected_protocol = repositories_protocol.get(preselected_repository.id)
 
     breadcrumbs = paper.breadcrumbs()
     breadcrumbs.append((_('Deposit'), ''))
