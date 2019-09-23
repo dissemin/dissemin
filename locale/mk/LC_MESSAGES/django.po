@@ -13,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-16 09:41+0200\n"
-"PO-Revision-Date: 2019-09-09 17:12:38+0000\n"
+"PO-Revision-Date: 2019-09-16 16:47:43+0000\n"
 "Language: mk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -413,15 +413,15 @@ msgstr ""
 
 #: deposit/osf/protocol.py:462
 msgid "Unable to upload the PDF file."
-msgstr ""
+msgstr "Не можам да ја подигнам PDF-податотеката."
 
 #: deposit/osf/protocol.py:502
 msgid "Unable to delete the project."
-msgstr ""
+msgstr "Не можам да го избришам проектот."
 
 #: deposit/osf/protocol.py:532 deposit/osf/protocol.py:540
 msgid "Unable to make the project public."
-msgstr ""
+msgstr "Не можам да го направам проектот како јавен."
 
 #: deposit/protocol.py:289
 #, fuzzy
@@ -883,7 +883,7 @@ msgstr "Пребаран во Google Scholar"
 
 #: papers/templates/papers/authorList.html:17
 msgid "This contributorship is confirmed by ORCID."
-msgstr ""
+msgstr "Ова придонесување се потврдува од ORCID."
 
 #: papers/templates/papers/department.html:34
 #: papers/templates/papers/institution.html:37
@@ -1349,7 +1349,7 @@ msgstr "Не пронајдов %(verbose_name)s што одговара на б
 
 #: papers/views.py:468
 msgid "This paper has been deleted."
-msgstr ""
+msgstr "Овој напис е избришан."
 
 #: papers/views.py:510
 #, fuzzy
@@ -2084,7 +2084,7 @@ msgstr "Партнери"
 
 #: templates/dissemin/sandbox.html:12
 msgid "SANDBOX Sign in"
-msgstr "ПЕСОЧНИЧКА Најава"
+msgstr "ПЕСОЧНИК Најава"
 
 #: templates/dissemin/skeleton.html:27
 msgid "Toggle navigation"
@@ -2095,9 +2095,8 @@ msgid "Logo"
 msgstr "Лого"
 
 #: templates/dissemin/skeleton.html:42 vinaigrette-deleteme.py:41
-#, fuzzy
 msgid "Language"
-msgstr "Сменете јазик"
+msgstr "Јазик"
 
 #: templates/dissemin/skeleton.html:51
 msgid "Translate"
@@ -2236,7 +2235,7 @@ msgstr "URL"
 
 #: upload/templates/upload/widget.html:4
 msgid "Select here the full text of your article. PDF files only, maximum size:"
-msgstr ""
+msgstr "Изберете тука го целосниот текст на вашата статија. Само PDF-податотеки, максималната големина:"
 
 #: upload/templates/upload/widget.html:9
 msgid "Select a file:"
@@ -2452,9 +2451,8 @@ msgid "Classical & modern Greek languages"
 msgstr ""
 
 #: vinaigrette-deleteme.py:50
-#, fuzzy
 msgid "Other languages"
-msgstr "Сменете јазик"
+msgstr "Други јазици"
 
 #: vinaigrette-deleteme.py:51
 #, fuzzy
