@@ -51,10 +51,11 @@ It is also necessary to generate separate PO files for JavaScript translations::
 
 You can then compile all the PO files into MO files so that they can be displayed on the website::
 
-    python manage.py compilemessages
+    python manage.py compilemessages --exclude qqq
 
 That's it! The translations should show up in your browser if it indicates
-the target language as your preferred one.
+the target language as your preferred one. Locale `qqq` contains instructions for translators
+and therefore does not require compiling (which is worth avoiding since it can contain errors).
 
 Available Languages
 -------------------
