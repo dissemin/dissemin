@@ -33,17 +33,7 @@
     text-align: left;
 }
 
-#welcome #institutionblock {
-  float: none;
-  margin: 0 auto;
-  width: 50%;
-}
-
-#welcome .startButton .btn { display: block; }
-
-#welcome p { width: 100%; }
-
-.oaPanel.left, .oaPanel.right, .oaPanel.left > *, .oaPanel.right > *, #globalStats, #statsExplanations, .siteSummary.left, .siteSummary.right {
+.oaPanel.left, .oaPanel.right, .oaPanel.left > *, .oaPanel.right > *, #statsExplanations, .siteSummary.left, .siteSummary.right {
   float: none;
   margin: 0;
 }
@@ -57,3 +47,9 @@
 
 #subfooter { min-width: 300px; }
 #subfooter p { margin: 10px 0; }
+
+#sidebar {
+    border-left: 1px solid rgba(192,188,206,1);
+    border-right: 1px solid rgba(192,188,206,1);
+    border-bottom: 1px solid rgba(192,188,206,1);
+}

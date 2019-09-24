@@ -22,7 +22,7 @@
   {% for dept in institution.sorted_departments %}
     <li>
          <h2><a href="{% url 'department' dept.id %}">{{ dept }}</a></h2>
-         {% include 'statistics/pie.html' with obj=dept stats_counter=forloop.counter %}
+         {% include 'statistics/pie_chart_legend.html' with stats=dept.stats object_id=dept.object_id stats_counter=forloop.counter %}
     </li>
   {% endfor %}
   </ul>

@@ -43,7 +43,6 @@ body
     font-family:"Open Sans", "sans-serif", sans;
     font-size:14.5px;
     font-weight:300;
-    background-color: #2A6496;
 }
 
 .pointer {
@@ -131,6 +130,8 @@ h4
     margin: 5px;
     margin: 0px;
     font-size:1em;
+    border-left: 1px solid rgba(192,188,206,1);
+    border-right: 1px solid rgba(192,188,206,1);
 }
 
 #header a {
@@ -174,6 +175,11 @@ h4
     display: inline-block;
     height: 25px;
     margin-right: 1em;
+}
+
+#menuItems {
+    max-width: 1030px;
+    margin: auto;
 }
 
 /* Language selector */
@@ -220,21 +226,21 @@ h4
     padding-right: 1em;
 }
 
-#content, #subfooter
+#header, #content, #subfooter, #footer
 {
     max-width: 1030px;
     min-width: 630px;
     margin: auto;
+}
+
+#content, #subfooter
+{
     padding: 0 10px;
 }
 
 #content {
     padding: 0;
     /* overflow: hidden; */
-}
-
-#subheader {
-    line-height:2em;
 }
 
 .flex
@@ -246,30 +252,23 @@ h4
 #sidebar
 {
     border-right: 1px solid rgba(192,188,206,1);
-    border-bottom: 1px solid rgba(192,188,206,1);
     padding: 15px;
     padding-left: 5px;
     padding-top: 7px;
     bottom: 0px;
     margin-left: 10px;
-    margin-bottom: 30px;
     flex: 3 1 30%;
     order: 3;
+    align-self: stretch;
 }
 
 #fullPage, #summaryLists
 {
     min-height: 500px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
     height: auto !important;
     height:100%;
-    border-top: 1px solid transparent;
     border-left: 1px solid rgba(192,188,206,1);
     border-right: 1px solid rgba(192,188,206,1);
-    border-bottom: 1px solid transparent;
 }
 
 #summaryLists
@@ -278,6 +277,10 @@ h4
     order: 1;
     align-self: stretch;
     max-width: 750px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 #wrapper
@@ -874,12 +877,12 @@ input[type=checkbox]:checked ~ .stats_caption_label
 
 #footer
 {
-    width: 100%;
     background-color: #2A6496;
     padding: 30px;
     font-size: 1em;
-    margin:0;
     color: white;
+    border-left: 1px solid rgba(192,188,206,1);
+    border-right: 1px solid rgba(192,188,206,1);
 }
 
 #footer a {
@@ -1068,7 +1071,6 @@ input[type=checkbox]:checked ~ .stats_caption_label
 
 .stats_caption_label_text {
     overflow:hidden;
-    white-space:nowrap;
     display:inline-block;
     vertical-align:top;
 }
@@ -1212,35 +1214,6 @@ a.stats_caption_line:hover {
 
 /* Homepage */
 
-#welcome {
-    background-color: #2A6496;
-	color:white;
-	padding:20px 50px;
-	font-size:1.2em;
-	font-weight:normal;
-	margin:10px 0;
-	overflow:hidden;
-}
-
-#welcome .startButton {
-    text-align: center;
-    width: 100%;
-}
-
-#welcome p {
-	width:70%;
-}
-
-#welcome a {
-	color:#fff;
-	text-decoration:underline;
-}
-
-#welcome .startButton a {
-    color: #2A6496;
-    text-decoration: none;
-    margin: 0px 10px;
-}
 
 #lookUpColleague {
     text-align: center;
@@ -1271,9 +1244,6 @@ a.stats_caption_line:hover {
     display: inline-block;
 }
 
-#welcome .active {
-    background-color: #D1D1D1;
-}
 
 #orcidGroup, #orcidGroup .form-group, #id_orcid {
     width: 100%;
@@ -1304,25 +1274,6 @@ a.stats_caption_line:hover {
     background-color: #eee;
 }
 
-#welcome #institutionblock {
-	float:right;
-	width:29%;
-	text-align:center;
-}
-
-#welcome #institution {
-	max-width:100%;
-}
-
-#welcome #advancedSearchP {
-    width: 100%;
-    text-align: right;
-    margin-top: 10px;
-}
-
-#welcome #id_authors {
-    height: 40px;
-}
 
 .btn-search {
     background-color: #a9b502;
@@ -1409,18 +1360,100 @@ a.stats_caption_line:hover {
     width:calc(40% - 10px);
 }
 
-/*
-#globalStats, #statsExplanations {
-    width: 48%;
-    width:calc(50% - 5px);
-}
-*/
-
-#globalStats {
-    float:left;
-    margin-right: 5px;
+/* This is needed for vertical alignment of columns in Bootstrap 3 */
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
 }
 
+.jumbotron {
+    margin-bottom: 0;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.jumbotron p {
+    font-size: 1.1em;
+    font-weight: 300;
+}
+
+#screenWelcome {
+    background-color: #2A6496;
+    color: white;
+  	padding: 20px 50px;
+}
+
+#screenWelcome a {
+	color: #fff;
+	text-decoration: underline;
+}
+
+#screenWelcome p {
+	width: 100%;
+    font-size: 1.2em;
+}
+
+#screenWelcome .startButton {
+    text-align: center;
+    width: 100%;
+}
+
+#screenWelcome #advancedSearchP {
+    width: 100%;
+    text-align: right;
+    margin-top: 10px;
+}
+
+#screenWelcome .SearchField {
+    height: 40px;
+}
+
+#screenGreenOpenAccess {
+    background-color: #71AF33;
+    color: white;
+}
+
+#screenOpenRepositories {
+    background-color: #2A6496;
+    color: white;
+}
+
+#screenLatestUploads {
+    background-color: #5F8BB0;
+    color: white;
+}
+
+#screenDisseminData {
+    background-color: #2A6496;
+    color: white;
+}
+
+#screenDisseminData a {
+	color: white;
+	text-decoration: underline;
+}
+
+#screenDisseminData .dataRow {
+    padding: 30px;
+    text-align: center;
+}
+
+#screenDisseminData .statsSliceLegend {
+    fill: white;
+}
+
+#screenDisseminForLibraries {
+    background-color: #5F8BB0;
+    color: white;
+}
+
+#screenPartners {
+    background-color: #71AF33;
+    color: white;
+}
 
 /* FAQ */
 #faqSummary {

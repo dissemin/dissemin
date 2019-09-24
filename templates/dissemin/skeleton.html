@@ -20,65 +20,66 @@
 {% block body %}
 <div id="wrapper">
     <div id="header">
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
-                        <span class="sr-only">{% trans "Toggle navigation" %}</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <h1><a class="navbar-brand" href="/">
-                        <img src="{% static "favicon/android-icon-192x192.png" %}" alt={% trans "Logo" %}/>
-                        Dissemin
-                    </a></h1>
-                </div>
-                <div class="collapse navbar-collapse" id="navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="navbarFlexLast">
-                            <form action="{% url 'set_language' %}" method="post" id="change-lang-form" class="navbar-form">
-                                {% csrf_token %}
-                                <label for="set-language" class="sr-only">{% trans "Language" %}</label>
-                                <select name="language" id="set-language" class="form-control">
-                                    {% get_available_languages as LANGUAGES %}
-                                    {% get_language_info_list for LANGUAGES as languages %}
-                                    {% for language in languages %}
-                                        <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>{{ language.name_local.title }}</option>
-                                    {% endfor %}
-                                </select>
-                                <noscript>
-                                    <input type="submit" value="{% trans "Translate" %}"/>
-                                </noscript>
-                            </form>
-                        </li>
-
-                        <li><a href="{% url 'faq' %}">{% trans "FAQ" %}</a></li>
-                        {% if request.user.is_authenticated %}
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span>&nbsp; {{ request.user|fullname }} <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="{% url 'my-profile' %}">{% trans "My profile" %}</a></li>
-                                    <li><a href="{% url "list_deposits" %}">{% trans "My deposits" %}</a></li>
-                                    <li><a href="{% url "my-todolist" %}">{% trans "My to-do list" %}</a></li>
-                                    <li><a href="{% url "edit-global-preferences" %}">{% trans "Preferences" %}</a></li>
-                                    <li><a href="#" onclick="$.ajax({ url: 'https://{{ ORCID_BASE_DOMAIN }}/userStatus.json?logUserOut=true', dataType: 'jsonp',
-            success: function(result,status,xhr) {
-                window.location.href = '{% url "account_logout" %}';
-            },
-            error: function (xhr, status, error) {
-                window.location.href = '{% url "account_logout" %}';
-            }
-            })">{% trans "Logout" %}</a></li>
-                                </ul>
+        <div id="menuItems">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+                            <span class="sr-only">{% trans "Toggle navigation" %}</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <h1><a class="navbar-brand" href="/">
+                            <img src="{% static "favicon/android-icon-192x192.png" %}" alt={% trans "Logo" %}/>
+                            Dissemin
+                        </a></h1>
+                    </div>
+                    <div class="collapse navbar-collapse" id="navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="navbarFlexLast">
+                                <form action="{% url 'set_language' %}" method="post" id="change-lang-form" class="navbar-form">
+                                    {% csrf_token %}
+                                    <label for="set-language" class="sr-only">{% trans "Language" %}</label>
+                                    <select name="language" id="set-language" class="form-control">
+                                        {% get_available_languages as LANGUAGES %}
+                                        {% get_language_info_list for LANGUAGES as languages %}
+                                        {% for language in languages %}
+                                            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>{{ language.name_local.title }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <noscript>
+                                        <input type="submit" value="{% trans "Translate" %}"/>
+                                    </noscript>
+                                </form>
                             </li>
-                        {% else %}
-                            <li><a href="{% url "account_login" %}?next={{ request.get_full_path |urlencode}}" rel="nofollow">{% trans "Login" %}</a></li>
-                        {% endif %}
-                    </ul>
+
+                            <li><a href="{% url 'faq' %}">{% trans "FAQ" %}</a></li>
+                            {% if request.user.is_authenticated %}
+                                <li><a href="{% url 'my-profile' %}">{% trans "My profile" %}</a></li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span>&nbsp; {{ request.user|fullname }} <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{% url "edit-global-preferences" %}">{% trans "Preferences" %}</a></li>
+                                        <li><a href="{% url "list_deposits" %}">{% trans "My deposits" %}</a></li>
+                                        <li><a href="#" onclick="$.ajax({ url: 'https://{{ ORCID_BASE_DOMAIN }}/userStatus.json?logUserOut=true', dataType: 'jsonp',
+                success: function(result,status,xhr) {
+                    window.location.href = '{% url "account_logout" %}';
+                },
+                error: function (xhr, status, error) {
+                    window.location.href = '{% url "account_logout" %}';
+                }
+                })">{% trans "Logout" %}</a></li>
+                                    </ul>
+                                </li>
+                            {% else %}
+                                <li><a href="{% url "account_login" %}?next={{ request.get_full_path |urlencode}}" rel="nofollow">{% trans "Login" %}</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
+        </div>
     </div>
     <div id="content">
         {% if breadcrumbs %}
@@ -86,7 +87,7 @@
         {% endif %}
         {% block content %}
         {% endblock %}
-    <div class="push"></div>
+        <div class="push"></div>
     </div>
 </div>
 <div id="footer" class="container">

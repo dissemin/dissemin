@@ -28,7 +28,7 @@ function preProcessData(data) {
     }
 }
 
-function showStatsPie (data, target_id) {
+function showStatsPie (data, chart_id, legend_id) {
     preProcessData(data)
 
     var detailed_data = data.detailed
@@ -40,7 +40,7 @@ function showStatsPie (data, target_id) {
 
 	// Create the svg element
 
-    var vis = d3.select("#"+target_id).select(".statspie_graph")
+    var vis = d3.select("#"+chart_id)
         .append("svg:svg")
             .attr("width", w)
             .attr("height", h)
@@ -87,11 +87,11 @@ function showStatsPie (data, target_id) {
     function textForLabel(d, i) {
          return (d.data.graph_value === 0 ? "" : readablizeNumber(d.data.graph_value));
     }
-	var arcs_text = d3.select(parts[0][0]).selectAll("g.slicetext")
+	var arcs_text = d3.select(parts[0][0]).selectAll()
         .data(pie)
         .enter()
-            .append("svg:g")
-                .attr("class", "slicetext");
+        .append("svg:g")
+        .attr("class", "statsSliceNumber");
 
     arcs_text.append("svg:text")                                     //add a label to each slice
             .attr("transform", function(d) { return translateText(arc,d); })
@@ -115,11 +115,11 @@ function showStatsPie (data, target_id) {
             .attr("d", arc2);
 
 
-	var arcs2_text = d3.select(parts[0][1]).selectAll("g.slicetext")
+	var arcs2_text = d3.select(parts[0][1]).selectAll()
         .data(pie)
         .enter()
         .append("svg:g")
-        .attr("class", "slicetext");
+        .attr("class", "statsSliceLegend");
 
     function lineX(d,i) {
         return arc2.centroid(d)[0];
@@ -152,7 +152,7 @@ function showStatsPie (data, target_id) {
         .attr("text-anchor", "middle")
         .text(function(d, i) { return aggregated_data[i].label });
 
-	var captions = d3.select("#"+target_id).select(".statspie_caption");
+	var captions = d3.select("#"+legend_id)
 
     function updatePie(data) {
         preProcessData(data)
@@ -167,7 +167,7 @@ function showStatsPie (data, target_id) {
         selectArcs("text")
           .attr("transform",function(d) { return translateText(arc,d) })
           .text(textForLabel);
-        selectArcs2("g.slicetext").style("display", hideZero)
+        selectArcs2("g.statsSliceLegend").style("display", hideZero)
         selectArcs2("path")
          .attr("d", arc2)
         selectArcs2("line")
