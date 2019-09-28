@@ -244,7 +244,7 @@ class RepositoryAdminForm(forms.ModelForm):
         self.fields['protocol'].widget = forms.Select(choices=choices)
 
         # Letter of Declaration
-        # Get the list with names of functions that generate declarations
-        choices = [(key, value) for key, value in REGISTERED_DECLARATION_FUNCTIONS.items()]
+        # Get the list of user friendly names of the generating functions. We need them as tuple for djangos choices
+        choices = [(value, value) for value in REGISTERED_DECLARATION_FUNCTIONS]
         choices = [('', None)] + sorted(choices, key=lambda item: item[1])
         self.fields['letter_declaration'].widget = forms.Select(choices=choices)

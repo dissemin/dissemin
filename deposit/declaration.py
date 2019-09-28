@@ -36,17 +36,9 @@ def get_declaration_pdf(deposit_record, user):
     :param deposit: DepositRecord containing information for declaration
     :returns: BytesIO containing pdf or raises Exception
     """
-    func = get_declaration_function(deposit_record.repository.letter_declaration)
-    return func(deposit_record, user)
-
-
-def get_declaration_function(func_name):
-    """
-    This function gets the function to generate a letter of declaration. If no function can be found, we raise AttributeError.
-    :param func_name: Name of the function that is requested
-    :returns: function or raises AttributeError
-    """
-    return getattr(current_module, func_name)
+    declaration_name = deposit_record.repository.letter_declaration
+    pdf_io = REGISTERED_DECLARATION_FUNCTIONS[declaration_name](deposit_record, user)
+    return pdf_io
 
 
 def declaration_ulb_darmstadt(deposit_record, user):
@@ -254,3 +246,8 @@ def declaration_ulb_darmstadt(deposit_record, user):
     c.showPage()
     c.save()
     return pdf_buffer
+
+
+REGISTERED_DECLARATION_FUNCTIONS = {
+        'ULB Darmstadt' : declaration_ulb_darmstadt,
+}
