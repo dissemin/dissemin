@@ -506,7 +506,6 @@ class PaperView(SlugDetailView):
             try:
                 pk = int(self.request.GET['deposit'])
                 dr = DepositRecord.objects.select_related('repository', 'oairecord').get(pk=pk)
-                print(dr.status)
                 if dr.paper_id == self.object.id and dr.status in ['pending', 'published']:
                     if self.request.user.is_authenticated and self.request.user == dr.user and dr.repository.letter_declaration:
                         dr.letter = True
@@ -514,7 +513,10 @@ class PaperView(SlugDetailView):
             except (TypeError, ValueError, DepositRecord.DoesNotExist):
                 pass
 
-        context['can_be_deposited'] = (not self.request.user.is_authenticated or self.object.can_be_deposited(self.request.user))
+        context['can_be_deposited'] = (
+            not self.request.user.is_authenticated or 
+            self.object.can_be_deposited(self.request.user)
+        )
 
         # Pending deposits
         if not context['deposit']:

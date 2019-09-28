@@ -32,7 +32,7 @@ REGISTERED_DECLARATION_FUNCTIONS = {
 
 def get_declaration_pdf(deposit_record, user):
     """
-    This function creates for a given deposit the letter of declaration. If the does not succeed, it raises an exception.
+    This function creates for a given deposit the letter of declaration. If this does not succeed, it raises an exception.
     :param deposit: DepositRecord containing information for declaration
     :returns: BytesIO containing pdf or raises Exception
     """
@@ -53,7 +53,7 @@ def declaration_ulb_darmstadt(deposit_record, user):
     """
     Takes a deposit and creates authors declaration for ULB Darmstadt and returns that.
     This function follows the corporate design of TUDA.
-    As this is my first approach with reportlab, the way placing things is not really good
+    As this is my (Stefans) first approach with reportlab, the way thingys are placed is not really good
     """
 
     pdf_buffer = io.BytesIO()
@@ -128,7 +128,7 @@ def declaration_ulb_darmstadt(deposit_record, user):
     used_width, used_height = subject_p.wrap(available_width, available_height)
     subject_p.drawOn(c, 15*mm, page_height - 74.4*mm - used_height)
 
-    # Main text of the declaration. It's top is going the an arbitrary set point and remaining height from dynamic generated content is referenced to this height
+    # Main text of the declaration. It's top is going the an arbitrary set point and the remaining height for dynamic generated content is referenced to this point
     available_width = page_width - 30*mm
     available_height = page_height - 20*mm - 95*mm
 

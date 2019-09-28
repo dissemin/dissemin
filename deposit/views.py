@@ -279,7 +279,7 @@ class LetterDeclarationView(LoginRequiredMixin, View):
         if dr.repository.letter_declaration != '' and dr.status == "pending":
             pdf = get_declaration_pdf(dr, request.user)
             pdf.seek(0)
-            filename = "Erklärung {}.pdf".format(dr.paper.title)
+            filename = _("Declaration {}.pdf").format(dr.paper.title)
             return FileResponse(pdf, as_attachment=True, filename=filename)
         else:
             raise Http404(_("No pdf found for dr {}".format(dr.pk)))
