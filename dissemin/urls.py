@@ -88,7 +88,6 @@ urlpatterns = [
     path('sources', temp('dissemin/sources.html'), name='sources'),
     path('faq', temp('dissemin/faq.html'), name='faq'),
     path('tos', temp('dissemin/tos.html'), name='tos'),
-    path('partners', temp('dissemin/partners.html'), name='partners'),
     # Admin interface
     path('admin/', admin.site.urls),
     # Apps

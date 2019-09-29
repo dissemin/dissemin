@@ -86,7 +86,7 @@ class TestMiscPages(object):
         check_page(200, 'index')
 
 
-    @pytest.mark.parametrize('page', ['account_login', 'faq', 'partners', 'sources', 'tos'])
+    @pytest.mark.parametrize('page', ['account_login', 'faq', 'sources', 'tos'])
     def test_static(self, page, check_page):
         """
         Tests above static pages
