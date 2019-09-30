@@ -42,6 +42,7 @@ pillow
 psycopg2-binary
 pyasn1
 pyopenssl>=0.14
+reportlab
 requests[security]
 requests_mock
 titlecase

@@ -22,7 +22,6 @@ def abstract_required(db, request):
     return request.param
 
 
-
 @pytest.fixture(params=[None, '2543-2454-2345-234X'])
 def depositing_user(db, request, user_leibniz):
     """

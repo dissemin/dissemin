@@ -283,32 +283,6 @@
                     <input type="hidden" class="getStorage" name="oa_status" value="{% if item.data.value in form.oa_status.value %}{{ item.data.value }}{% endif %}"/>
                 {% endfor %}
             {% endif %}
-            {% with combined_status_form=True %}
-            {% with combined_status=form.status %}
-            {% include "statistics/pie_chart_legend.html" with stats=search_stats object_id=researcher.object_id stats_counter=1 %}
-            {% endwith %}
-            {% endwith %}
-            <noscript>{# Clarifies the usage of the checkboxes in the caption of the pie. #}
-                <div class="form-group">
-                    <button type="submit" class="btn btn-default" form="searchPapersStatistics">{% trans "Search" %}</button>
-                </div>
-            </noscript>
-        </div>
-    </form>
-</div>
-
-<h3 class="detailsTitle">{% trans "Tools" %}</h3>
-<div class="detailsContent">
-    <p class="display-inline-block">{% trans "Sort by" %}</p>
-    <div class="dropdown display-inline-block sort-by-dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" id="sortByDropdown" data-toggle="dropdown" aria-expanded="false">
-            <span class="btn-label">{{ current_sort_by }}</span> <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="sortByDropdown">
-            {% for option in form.sort_by %}
-            <li><a href="?{{ search_params_without_sort_by }}&amp;sort_by={{ option.data.value }}" data-sort-by="{{ option.data.value }}">{{ option.data.label }}</a></li>
-            {% endfor %}
-            <input type="hidden" class="getStorage" name="sort_by" value="{{ form.sort_by.value|default:"" }}"/>
             <!-- Actual refine search fields -->
             <div class="form-group" id="searchPapersName">
                 <label for="{{ form.q.id_for_label }}">

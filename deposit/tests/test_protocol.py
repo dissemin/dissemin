@@ -49,6 +49,23 @@ class MetaTestProtocol():
     If you change one of the tested functions in your subclassed protocol, please override the test in the corresponding test class.
     """
 
+    def test_add_license_to_deposit_result(self, license_chooser):
+        """
+        If a license is selected, add to deposit record, otherwise not
+        """
+        # We just set the cleaned data directly
+        f = Form()
+        f.cleaned_data = dict()
+        if license_chooser:
+            f.cleaned_data['license'] = license_chooser
+        dr = DepositResult(status='pending')
+        dr = self.protocol._add_license_to_deposit_result(dr, f)
+        if license_chooser:
+            assert dr.license == license_chooser.license
+        else:
+            assert dr.license == None
+
+
     def test_deposit_page_status(self, authenticated_client, rendering_get_page, book_god_of_the_labyrinth):
         """
         Test the deposit page for HTTP Response 200
@@ -209,6 +226,7 @@ class MetaTestProtocol():
         assert isinstance(deposit_result, DepositResult)
         assert isinstance(deposit_result.oairecord, expected_splash_url)
         assert book_god_of_the_labyrinth.todolist.filter(pk=self.protocol.user.pk).exists() == False
+
 
     @pytest.mark.parametrize('on_todolist', [True, False])
     @pytest.mark.parametrize('exc', [DepositError, Exception])

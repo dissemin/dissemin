@@ -50,15 +50,16 @@ class DepositResult(object):
     status should be one of DEPOSIT_STATUS_CHOICES
     """
 
-    def __init__(self, identifier=None, splash_url=None, pdf_url=None, logs=None, status='published', message=None):
+    def __init__(self, identifier=None, splash_url=None, pdf_url=None, logs=None, status='published', license = None, message=None):
         self.identifier = identifier
         self.splash_url = splash_url
         self.pdf_url = pdf_url
         self.logs = logs
-        if status not in [x for x,y in DEPOSIT_STATUS_CHOICES]:
+        if status not in [x[0] for x in DEPOSIT_STATUS_CHOICES]:
             raise ValueError('invalid status '+str(status))
         self.status = status
         self.message = message
+        self.license = None
         self.oairecord = None
         self.additional_info = []
 
@@ -132,6 +133,19 @@ class RepositoryProtocol(object, metaclass = RepositoryProtocolMeta):
         self.user = user
         self._logs = ''
         return True
+
+    @staticmethod
+    def _add_license_to_deposit_result(deposit_result, form):
+        """
+        If a license does exist, add it to the deposit record
+        :param deposit_result: DepositResult
+        :param form: valid Form
+        :returns: DepositResult
+        """
+        lc = form.cleaned_data.get('license', None)
+        if lc:
+            deposit_result.license = lc.license
+        return deposit_result
 
     ### Deposit form ###
     # This section defines the form the user sees when
