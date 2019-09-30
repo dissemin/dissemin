@@ -1,6 +1,9 @@
 /* small screen fixes */
 
-#content { min-width: 300px; }
+
+#header, #content, #subfooter, #footer {
+    min-width: 300px;
+}
 
 #header .navbar .navbar-nav {
     flex-direction: column;
