@@ -282,12 +282,15 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
 
 
     @responses.activate
-    def test_submit_deposit(self, blank_pdf_path, monkeypatch_metadata_creation, monkeypatch_get_deposit_result):
+    def test_submit_deposit(self, blank_pdf_path, monkeypatch, monkeypatch_metadata_creation, monkeypatch_get_deposit_result):
         """
         A test for submit deposit.
         """
         # Mocking requests
         responses.add(responses.POST, self.protocol.repository.endpoint, status=201)
+
+        # Monkeypatch _dd_license_to_deposit
+        monkeypatch.setattr(self.protocol, '_add_license_to_deposit_result', lambda x, y: x)
 
         assert isinstance(self.protocol.submit_deposit(blank_pdf_path, None), DepositResult)
         headers = responses.calls[0].request.headers

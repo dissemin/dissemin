@@ -22,6 +22,7 @@ from itertools import groupby
 
 from deposit.models import Repository
 from deposit.models import UserPreferences
+from deposit.declaration import REGISTERED_DECLARATION_FUNCTIONS
 from deposit.registry import protocol_registry
 from django import forms
 from django.urls import reverse_lazy
@@ -218,20 +219,32 @@ class UserPreferencesForm(forms.ModelForm):
 
 class RepositoryAdminForm(forms.ModelForm):
     """
-    Changes widget of the protocol field to a select (dropdown) of AdminView of Repository. This way no free text has to be entered for the protocol to choose.
+    We change here to widgets for chosing the Protocol and the Declaration.
+    Instead of free text we provide a dropdown.
     """
     
     def __init__(self, *args, **kwargs):
         """
+        We change the widget of the fields
         We get the original form, register all repositories, create the list of protocols.
         If a repo exists, we check that its protocol will be in the list. Otherwise the protocol of a repo with a currently not registered protocol would be overwritten.
         """
-
         super().__init__(*args, **kwargs)
+
+        # Protocol
+        # Get the list with names of protocols
         protocol_registry.load()
         choices = [(key, str(value)) for key, value in protocol_registry.dct.items()]
+        # If the repo uses a protocol not in the list, we add this value, otherwise it is overriden on saving
         if self.instance.protocol:
             if self.instance.protocol not in protocol_registry.dct.keys():
                 choices += [(self.instance.protocol,self.instance.protocol)]
+        # Sort and populate the form
         choices = sorted(choices, key=lambda protocol: protocol[1].lower(),)
         self.fields['protocol'].widget = forms.Select(choices=choices)
+
+        # Letter of Declaration
+        # Get the list of user friendly names of the generating functions. We need them as tuple for djangos choices
+        choices = [(value, value) for value in REGISTERED_DECLARATION_FUNCTIONS]
+        choices = [('', None)] + sorted(choices, key=lambda item: item[1])
+        self.fields['letter_declaration'].widget = forms.Select(choices=choices)
