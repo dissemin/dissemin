@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-24 10:59+0200\n"
+"POT-Creation-Date: 2019-09-30 10:01+0200\n"
 "PO-Revision-Date: 2019-06-06 15:52:56+0000\n"
 "Language: sr-Latn\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,37 +36,37 @@ msgstr "Institucije"
 msgid "Obsolete institutions"
 msgstr "Institucije"
 
-#: deposit/forms.py:84
+#: deposit/forms.py:85
 msgid "Upload type"
 msgstr "Vrsta otpremanja"
 
-#: deposit/forms.py:85 deposit/templates/deposit/deposits.html:40
+#: deposit/forms.py:86 deposit/templates/deposit/deposits.html:32
 msgid "Repository"
 msgstr "Repozitorijum"
 
-#: deposit/forms.py:94
+#: deposit/forms.py:95
 msgid "Invalid full text identifier."
 msgstr ""
 
-#: deposit/forms.py:138 papers/templates/papers/paper.html:145
+#: deposit/forms.py:139 papers/templates/papers/paper.html:172
 msgid "Abstract"
 msgstr ""
 
-#: deposit/forms.py:147
+#: deposit/forms.py:148
 msgid "Dewey Decimal Class"
 msgstr ""
 
-#: deposit/forms.py:155
+#: deposit/forms.py:156 deposit/templates/deposit/deposits.html:45
 #, fuzzy
 #| msgid "No license"
 msgid "License"
 msgstr "Bez licence"
 
-#: deposit/forms.py:194
+#: deposit/forms.py:195
 msgid "No preferred repository"
 msgstr ""
 
-#: deposit/forms.py:216 deposit/hal/forms.py:74 deposit/osf/forms.py:134
+#: deposit/forms.py:217 deposit/hal/forms.py:74 deposit/osf/forms.py:134
 msgid "Save"
 msgstr "Sačuvaj"
 
@@ -310,17 +310,17 @@ msgstr ""
 msgid "Deleted"
 msgstr "Obrisano"
 
-#: deposit/models.py:268 deposit/templates/deposit/start.html:329
-#: deposit/views.py:103
+#: deposit/models.py:272 deposit/templates/deposit/start.html:329
+#: deposit/views.py:107
 msgid "Deposit"
 msgstr ""
 
-#: deposit/models.py:321
+#: deposit/models.py:325
 msgid ""
 "We will use this email address to notify you when your deposits are accepted."
 msgstr ""
 
-#: deposit/models.py:327
+#: deposit/models.py:331
 msgid "This repository will be used by default for your deposits."
 msgstr ""
 
@@ -431,7 +431,7 @@ msgstr ""
 msgid "Unable to make the project public."
 msgstr ""
 
-#: deposit/protocol.py:289
+#: deposit/protocol.py:303
 msgid "Failed to connect to the repository. Please try again later."
 msgstr ""
 
@@ -459,35 +459,43 @@ msgstr ""
 msgid "My deposits"
 msgstr ""
 
-#: deposit/templates/deposit/deposits.html:36
+#: deposit/templates/deposit/deposits.html:28
 msgid "Paper"
 msgstr "Papir"
 
-#: deposit/templates/deposit/deposits.html:44
+#: deposit/templates/deposit/deposits.html:36
 msgid "Deposit date"
 msgstr ""
 
-#: deposit/templates/deposit/deposits.html:48
+#: deposit/templates/deposit/deposits.html:40
 msgid "Deposit type"
 msgstr ""
 
-#: deposit/templates/deposit/deposits.html:52
+#: deposit/templates/deposit/deposits.html:50
 msgid "Identifier"
 msgstr "Identifikator"
 
-#: deposit/templates/deposit/deposits.html:58
+#: deposit/templates/deposit/deposits.html:56
 msgid "Meta URL"
 msgstr ""
 
-#: deposit/templates/deposit/deposits.html:63
+#: deposit/templates/deposit/deposits.html:61
 msgid "PDF URL"
 msgstr ""
 
-#: deposit/templates/deposit/deposits.html:70
+#: deposit/templates/deposit/deposits.html:68
 msgid "Status"
 msgstr "Status"
 
-#: deposit/templates/deposit/deposits.html:88
+#: deposit/templates/deposit/deposits.html:74
+msgid "Letter of Declaration"
+msgstr ""
+
+#: deposit/templates/deposit/deposits.html:75
+msgid "Show"
+msgstr ""
+
+#: deposit/templates/deposit/deposits.html:93
 msgid ""
 "You have not made any deposit via Dissemin. What are you waiting for? "
 "Liberate your papers today."
@@ -571,28 +579,40 @@ msgstr ""
 msgid "please wait..."
 msgstr "sačekajte…"
 
-#: deposit/views.py:69 deposit/views.py:132
+#: deposit/views.py:73 deposit/views.py:145
 msgid "This repository is currently not enabled."
 msgstr ""
 
-#: deposit/views.py:75
+#: deposit/views.py:79
 msgid "This repository is not available for this paper."
 msgstr ""
 
-#: deposit/views.py:140
+#: deposit/views.py:153
 msgid "This repository could not be found."
 msgstr ""
 
-#: deposit/views.py:145 deposit/views.py:151 deposit/views.py:168
+#: deposit/views.py:158 deposit/views.py:164 deposit/views.py:181
 msgid "This repository does not have any settings."
 msgstr ""
 
-#: deposit/views.py:192
+#: deposit/views.py:205
 msgid "This repository cannot be used for this paper."
 msgstr ""
 
-#: deposit/views.py:211
+#: deposit/views.py:224
 msgid "Access to the PDF was denied."
+msgstr ""
+
+#: deposit/views.py:278
+msgid "Access to this ressource not allowed."
+msgstr ""
+
+#: deposit/views.py:283
+msgid "Declaration {}.pdf"
+msgstr ""
+
+#: deposit/views.py:286
+msgid "No pdf found for dr {}"
 msgstr ""
 
 #: deposit/zenodo/protocol.py:87
@@ -603,35 +623,35 @@ msgstr ""
 msgid "No Zenodo API key provided."
 msgstr ""
 
-#: deposit/zenodo/protocol.py:130
+#: deposit/zenodo/protocol.py:132
 msgid ""
 "This happens when Zenodo has hiccups. Please try again in a few minutes or "
 "use a different repository in the menu above."
 msgstr ""
 
-#: deposit/zenodo/protocol.py:136
+#: deposit/zenodo/protocol.py:138
 msgid "Unable to authenticate to Zenodo."
 msgstr ""
 
-#: deposit/zenodo/protocol.py:144
+#: deposit/zenodo/protocol.py:146
 msgid "Unable to create a new deposition on Zenodo."
 msgstr ""
 
-#: deposit/zenodo/protocol.py:161
+#: deposit/zenodo/protocol.py:163
 msgid "Unable to transfer the document to Zenodo."
 msgstr ""
 
-#: deposit/zenodo/protocol.py:172
+#: deposit/zenodo/protocol.py:174
 msgid ""
 "No abstract is available for this paper but Zenodo requires one. Please "
 "provide it using the metadata panel."
 msgstr ""
 
-#: deposit/zenodo/protocol.py:184
+#: deposit/zenodo/protocol.py:186
 msgid "Unable to submit paper metadata to Zenodo."
 msgstr ""
 
-#: deposit/zenodo/protocol.py:202
+#: deposit/zenodo/protocol.py:204
 msgid "Unable to publish the deposition on Zenodo."
 msgstr ""
 
@@ -685,6 +705,14 @@ msgstr ""
 
 #: dissemin/settings/common.py:301
 msgid "Swedish"
+msgstr ""
+
+#: doc/sphinx/_build/html/_sources/localization.rst.txt:15
+msgid "some translatable text"
+msgstr ""
+
+#: doc/sphinx/_build/html/_sources/localization.rst.txt:17
+msgid "My longer translatable text."
 msgstr ""
 
 #: notification/models.py:62
@@ -849,24 +877,24 @@ msgid "Advanced search"
 msgstr ""
 
 #: papers/templates/papers/advanced_search.html:27
-#: papers/templates/papers/search.html:315
+#: papers/templates/papers/search.html:289
 #, fuzzy
 msgid "By title"
 msgstr "naslov"
 
 #: papers/templates/papers/advanced_search.html:34
-#: papers/templates/papers/search.html:328
+#: papers/templates/papers/search.html:302
 #, fuzzy
 msgid "By co-authors"
 msgstr "Prema autorima"
 
 #: papers/templates/papers/advanced_search.html:36
-#: papers/templates/papers/search.html:330
+#: papers/templates/papers/search.html:304
 msgid "By authors"
 msgstr "Prema autorima"
 
 #: papers/templates/papers/advanced_search.html:37
-#: papers/templates/papers/search.html:333
+#: papers/templates/papers/search.html:307
 msgid ""
 "<ul><li>Use author names or ORCID identifiers.</li><li>Use commas as name "
 "separator.</li><li>Prefix with <code>last:</code> to enforce last name "
@@ -874,45 +902,44 @@ msgid ""
 msgstr ""
 
 #: papers/templates/papers/advanced_search.html:43
-#: papers/templates/papers/search.html:343
+#: papers/templates/papers/search.html:317
 msgid "By publication date"
 msgstr "Prema datumu objavljivanja"
 
 #: papers/templates/papers/advanced_search.html:46
-#: papers/templates/papers/search.html:347
+#: papers/templates/papers/search.html:321
 msgid "after"
 msgstr "posle"
 
 #: papers/templates/papers/advanced_search.html:53
-#: papers/templates/papers/search.html:354
+#: papers/templates/papers/search.html:328
 msgid "before"
 msgstr "pre"
 
 #: papers/templates/papers/advanced_search.html:62
-#: papers/templates/papers/search.html:362
+#: papers/templates/papers/search.html:336
 msgid "By document type"
 msgstr "Prema tipu dokumenta"
 
 #: papers/templates/papers/advanced_search.html:77
-#: papers/templates/papers/search.html:378
+#: papers/templates/papers/search.html:352
 msgid "By visibility"
 msgstr ""
 
 #: papers/templates/papers/advanced_search.html:82
-#: papers/templates/papers/search.html:383
+#: papers/templates/papers/search.html:357
 msgid "By full text availability"
 msgstr ""
 
 #: papers/templates/papers/advanced_search.html:88
-#: papers/templates/papers/search.html:389
+#: papers/templates/papers/search.html:363
 msgid "By publisher policy"
 msgstr ""
 
 #: papers/templates/papers/advanced_search.html:108
 #: papers/templates/papers/index.html:31
 #: papers/templates/papers/search.html:244
-#: papers/templates/papers/search.html:293
-#: papers/templates/papers/search.html:410
+#: papers/templates/papers/search.html:384
 #: publishers/templates/publishers/list.html:31
 #: publishers/templates/publishers/list.html:47
 #: publishers/templates/publishers/list.html:86
@@ -976,7 +1003,7 @@ msgid "Format"
 msgstr ""
 
 #: papers/templates/papers/exportCitationsModal.html:22
-#: papers/templates/papers/paper.html:118
+#: papers/templates/papers/paper.html:145
 #: papers/templates/papers/publiListItem.html:39
 msgid "Download"
 msgstr "Preuzmi"
@@ -999,10 +1026,9 @@ msgstr "Početna"
 msgid "Welcome to Dissemin"
 msgstr ""
 
-#: papers/templates/papers/index.html:23 templates/dissemin/skeleton.html:10
-#: templates/dissemin/skeleton.html:15
+#: papers/templates/papers/index.html:23
 msgid ""
-"Dissemin detects papers behind pay-walls and invites their authors to upload "
+"Dissemin detects papers behind paywalls and helps their authors to upload "
 "them in one click to an open repository."
 msgstr ""
 
@@ -1013,26 +1039,22 @@ msgstr ""
 #: papers/templates/papers/index.html:47
 msgid ""
 "Many researchers do not use their right to make their papers freely "
-"available online, in addition to the paywalled version offered by "
-"traditional publishers."
+"available online, in addition to the paywalled version of traditional "
+"publishers."
 msgstr ""
 
 #: papers/templates/papers/index.html:52
-msgid ""
-"By uploading your papers to open repositories, you are making sure that:"
+msgid "Uploading your papers to open repositories has significant advantages:"
 msgstr ""
 
 #: papers/templates/papers/index.html:58
 msgid ""
-"Your research is available to everyone. This increases your readership and "
-"makes your research more acknowledged. This effect is measurable with the so "
-"called <span class=\"font-italic\">Open Access Citation Advantage</span>."
+"Your research is available to everyone, increasing your readership and "
+"impact."
 msgstr ""
 
 #: papers/templates/papers/index.html:63
-msgid ""
-"You help libraries abandon overpriced electronic subscriptions to journals "
-"which they cannot afford."
+msgid "You help universities abandon overpriced journal subscriptions."
 msgstr ""
 
 #: papers/templates/papers/index.html:78
@@ -1043,9 +1065,9 @@ msgstr "Repozitorijum"
 
 #: papers/templates/papers/index.html:80
 msgid ""
-"Uploading your papers on your own webpage is not enough. Such copies are "
-"less stable and harder to find than document uploaded to well-indexed "
-"repositories such as arXiv, Zenodo or institutional repositories."
+"Uploading your papers on your own webpage is not enough. Your papers are "
+"easier to find and more secure in the long-term when uploaded to arXiv, "
+"Zenodo or institutional repositories."
 msgstr ""
 
 #: papers/templates/papers/index.html:94
@@ -1079,26 +1101,23 @@ msgstr ""
 #: papers/templates/papers/index.html:147
 msgid ""
 "As a library you can use Dissemin to find publications of your researchers "
-"that are behind a paywall. Dissemin can upload publications directly into "
+"that are behind paywalls. Dissemin can upload publications directly into "
 "your institutional repository and tries to support your local worklfow as "
 "much as possible."
 msgstr ""
 
 #: papers/templates/papers/index.html:152
 msgid ""
-"You can advertise Dissemin to your researchers and show them, how easy it is "
+"You can advertise Dissemin to your researchers and show them how easy it is "
 "to liberate their publications!"
 msgstr ""
 
-#: papers/templates/papers/index.html:166 templates/dissemin/partners.html:7
-#: templates/dissemin/partners.html:12 templates/dissemin/skeleton.html:106
+#: papers/templates/papers/index.html:166
 msgid "Partners"
 msgstr "Partneri"
 
 #: papers/templates/papers/index.html:168
-msgid ""
-"Dissemin would not be possible without the support of our network of "
-"partners:"
+msgid "Dissemin would not be possible without the support of our partners:"
 msgstr ""
 
 #: papers/templates/papers/institutions.html:25
@@ -1141,41 +1160,74 @@ msgid ""
 "less</a>):<br />"
 msgstr ""
 
-#: papers/templates/papers/paper.html:91
-msgid ""
-"<strong>Congratulations!</strong> This paper was successfully deposited."
+#: papers/templates/papers/paper.html:93
+msgid "Deposit accomplished!"
 msgstr ""
 
-#: papers/templates/papers/paper.html:98
+#: papers/templates/papers/paper.html:94
 #, python-format
 msgid ""
-"<strong>Almost there!</strong> This paper has been deposited in <a href="
+"<p>This paper was successfully deposited and is now freely available at <a "
+"class=\"alert-link\" href=\"%(splash_url)s\">this address.</a></p>"
+msgstr ""
+
+#: papers/templates/papers/paper.html:101
+#: papers/templates/papers/paper.html:125
+msgid "Deposit almost accomplished!"
+msgstr ""
+
+#: papers/templates/papers/paper.html:103
+#, python-format
+msgid ""
+"<p>This paper has been deposited in <a class=\"alert-link\" href="
 "\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a "
-"href=\"%(deposit_url)s\">this address</a> after validation by the repository "
-"administrators."
+"class=\"alert-link\" href=\"%(splash_url)s\">this address</a> after "
+"validation by the repository administrators.</p>"
 msgstr ""
 
-#: papers/templates/papers/paper.html:116
-msgid "Full text:"
+#: papers/templates/papers/paper.html:110
+msgid "Letter of Declaration needed!"
 msgstr ""
 
-#: papers/templates/papers/paper.html:120 statistics/models.py:66
-msgid "Unavailable"
-msgstr "Nedostupno"
-
-#: papers/templates/papers/paper.html:122
-msgid "Ask upload"
+#: papers/templates/papers/paper.html:113
+#, python-format
+msgid ""
+"<p>The repository %(deposit.repository.name)s requires a letter of "
+"declaration to publish this publication. Please <a class=\"alert-link\" href="
+"\"%(letter_url)s\">download</a> the letter, sign it and send it to the "
+"repository administration.</p>"
 msgstr ""
 
 #: papers/templates/papers/paper.html:126
+#, python-format
+msgid ""
+"This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s"
+"\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-"
+"link\" href=\"%(deposit_url)s\">this address</a> after validation by the "
+"repository administrators."
+msgstr ""
+
+#: papers/templates/papers/paper.html:143
+msgid "Full text:"
+msgstr ""
+
+#: papers/templates/papers/paper.html:147 statistics/models.py:66
+msgid "Unavailable"
+msgstr "Nedostupno"
+
+#: papers/templates/papers/paper.html:149
+msgid "Ask upload"
+msgstr ""
+
+#: papers/templates/papers/paper.html:153
 msgid "Publisher:"
 msgstr "Izdavač:"
 
-#: papers/templates/papers/paper.html:133
+#: papers/templates/papers/paper.html:160
 msgid "Deposited."
 msgstr ""
 
-#: papers/templates/papers/paper.html:135
+#: papers/templates/papers/paper.html:162
 msgid "Deposit again"
 msgstr ""
 
@@ -1189,7 +1241,6 @@ msgstr "Veze"
 
 #: papers/templates/papers/paperDetails.html:36
 #: papers/templates/papers/search.html:251
-#: papers/templates/papers/search.html:300
 msgid "Tools"
 msgstr "Alatke"
 
@@ -1325,7 +1376,6 @@ msgstr[1] ""
 msgstr[2] ""
 
 #: papers/templates/papers/search.html:253
-#: papers/templates/papers/search.html:302
 #: publishers/templates/publishers/list.html:73
 msgid "Sort by"
 msgstr "Sortiraj po"
@@ -1506,7 +1556,7 @@ msgstr ""
 msgid "This paper has been deleted."
 msgstr ""
 
-#: papers/views.py:538
+#: papers/views.py:545
 #, fuzzy
 msgid "Invalid DOI."
 msgstr "Nevalidan URL"
@@ -2471,6 +2521,12 @@ msgstr "Zaboravili ste lozinku?"
 msgid "SANDBOX Sign in"
 msgstr ""
 
+#: templates/dissemin/skeleton.html:10 templates/dissemin/skeleton.html:15
+msgid ""
+"Dissemin detects papers behind pay-walls and invites their authors to upload "
+"them in one click to an open repository."
+msgstr ""
+
 #: templates/dissemin/skeleton.html:28
 msgid "Toggle navigation"
 msgstr ""
@@ -2521,6 +2577,10 @@ msgstr "Ko smo mi?"
 #: templates/dissemin/skeleton.html:105
 msgid "Donate"
 msgstr "Doniraj"
+
+#: templates/dissemin/skeleton.html:106
+msgid "Blog"
+msgstr ""
 
 #: templates/dissemin/sources.html:11
 msgid "Data sources"
