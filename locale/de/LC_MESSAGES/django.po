@@ -17,7 +17,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-30 10:01+0200\n"
+"POT-Creation-Date: 2019-09-30 15:27+0200\n"
 "PO-Revision-Date: 2019-09-26 18:25:33+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -736,14 +736,6 @@ msgstr "Europäisches Portugiesisch"
 msgid "Swedish"
 msgstr "Schwedisch"
 
-#: doc/sphinx/_build/html/_sources/localization.rst.txt:15
-msgid "some translatable text"
-msgstr ""
-
-#: doc/sphinx/_build/html/_sources/localization.rst.txt:17
-msgid "My longer translatable text."
-msgstr ""
-
 #: notification/models.py:62
 msgid "inboxes"
 msgstr "Posteingänge"
@@ -1058,9 +1050,6 @@ msgid "Welcome to Dissemin"
 msgstr "Willkommen bei Dissemin"
 
 #: papers/templates/papers/index.html:23
-#| msgid ""
-#| "Dissemin detects papers behind pay-walls and invites their authors to "
-#| "upload them in one click to an open repository."
 msgid ""
 "Dissemin detects papers behind paywalls and helps their authors to upload "
 "them in one click to an open repository."
@@ -1074,10 +1063,6 @@ msgid "Green Open Access"
 msgstr "Green Open Access"
 
 #: papers/templates/papers/index.html:47
-#| msgid ""
-#| "Many researchers do not use their right to make their papers freely "
-#| "available online, in addition to the paywalled version offered by "
-#| "traditional publishers."
 msgid ""
 "Many researchers do not use their right to make their papers freely "
 "available online, in addition to the paywalled version of traditional "
@@ -1210,7 +1195,6 @@ msgstr ""
 "\">weniger anzeigen</a>):<br />"
 
 #: papers/templates/papers/paper.html:93
-#| msgid "Deposit date"
 msgid "Deposit accomplished!"
 msgstr "Ablagedatum"
 

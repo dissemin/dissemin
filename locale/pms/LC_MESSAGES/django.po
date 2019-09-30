@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-30 10:01+0200\n"
+"POT-Creation-Date: 2019-09-30 15:27+0200\n"
 "PO-Revision-Date: 2019-09-26 18:25:41+0000\n"
 "Language: pms\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -721,14 +721,6 @@ msgstr "Portughèis europengh"
 #: dissemin/settings/common.py:301
 msgid "Swedish"
 msgstr "Svedèis"
-
-#: doc/sphinx/_build/html/_sources/localization.rst.txt:15
-msgid "some translatable text"
-msgstr ""
-
-#: doc/sphinx/_build/html/_sources/localization.rst.txt:17
-msgid "My longer translatable text."
-msgstr ""
 
 #: notification/models.py:62
 msgid "inboxes"

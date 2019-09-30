@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-27 18:48+0200\n"
+"POT-Creation-Date: 2019-09-30 15:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: papers/static/js/dissemin.js:25
+msgid "Adding to todolist"
+msgstr ""
+
+#: papers/static/js/dissemin.js:29
+msgid "Removing from todolist"
+msgstr ""
 
 #: papers/static/papers/refresh.js:63
 msgid "Do not show this message anymore"

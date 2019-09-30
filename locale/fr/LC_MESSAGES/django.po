@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-30 10:01+0200\n"
+"POT-Creation-Date: 2019-09-30 15:27+0200\n"
 "PO-Revision-Date: 2019-09-26 18:25:36+0000\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
@@ -734,14 +734,6 @@ msgstr "portugais européen"
 #: dissemin/settings/common.py:301
 msgid "Swedish"
 msgstr "suédois"
-
-#: doc/sphinx/_build/html/_sources/localization.rst.txt:15
-msgid "some translatable text"
-msgstr ""
-
-#: doc/sphinx/_build/html/_sources/localization.rst.txt:17
-msgid "My longer translatable text."
-msgstr ""
 
 #: notification/models.py:62
 msgid "inboxes"
