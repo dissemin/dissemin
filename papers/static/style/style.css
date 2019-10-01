@@ -1455,6 +1455,12 @@ a.stats_caption_line:hover {
     color: white;
 }
 
+#screenPartners .partnersIcons img {
+    background-color: white;
+    padding: 5px;
+    margin: 10px;
+}
+
 /* FAQ */
 #faqSummary {
 	margin:20px;
