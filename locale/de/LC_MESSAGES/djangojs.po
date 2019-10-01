@@ -12,13 +12,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-09-30 15:27+0200\n"
-"PO-Revision-Date: 2019-09-03 07:06:53+0000\n"
+"PO-Revision-Date: 2019-10-01 14:27:09+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-05-27 18:30:52+0000\n"
+"X-POT-Import-Date: 2019-10-01 08:31:19+0000\n"
 "X-Generator: MediaWiki 1.34.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -58,8 +59,7 @@ msgstr "Publikation ist ungültig"
 msgid "We ignored %(count)s paper from your ORCiD profile."
 msgid_plural "We ignored %(count)s papers from your ORCiD profile."
 msgstr[0] "Wir haben eine Publikation aus Deinem ORCiD-Profil ignoriert."
-msgstr[1] ""
-"Wir haben %(count)s Publikationen aus Deinem ORCiD-Profil ignoriert."
+msgstr[1] "Wir haben %(count)s Publikationen aus Deinem ORCiD-Profil ignoriert."
 
 #: papers/static/papers/refresh.js:147
 msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
@@ -83,3 +83,4 @@ msgid "%s paper found"
 msgid_plural "%s papers found"
 msgstr[0] "%s Publikation gefunden"
 msgstr[1] "%s Publikationen gefunden"
+
