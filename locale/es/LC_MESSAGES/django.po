@@ -18,7 +18,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-09-30 15:27+0200\n"
-"PO-Revision-Date: 2019-10-01 14:27:11+0000\n"
+"PO-Revision-Date: 2019-10-03 17:34:47+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -488,11 +488,11 @@ msgstr "Estado"
 
 #: deposit/templates/deposit/deposits.html:74
 msgid "Letter of Declaration"
-msgstr ""
+msgstr "Carta de declaración"
 
 #: deposit/templates/deposit/deposits.html:75
 msgid "Show"
-msgstr ""
+msgstr "Mostrar"
 
 #: deposit/templates/deposit/deposits.html:93
 msgid "You have not made any deposit via Dissemin. What are you waiting for? Liberate your papers today."
@@ -601,7 +601,7 @@ msgstr ""
 
 #: deposit/views.py:283
 msgid "Declaration {}.pdf"
-msgstr ""
+msgstr "Declaración {}.pdf"
 
 #: deposit/views.py:286
 msgid "No pdf found for dr {}"
@@ -1078,7 +1078,7 @@ msgstr "Socios"
 
 #: papers/templates/papers/index.html:168
 msgid "Dissemin would not be possible without the support of our partners:"
-msgstr ""
+msgstr "Dissemin no sería posible sin el apoyo de nuestros socios:"
 
 #: papers/templates/papers/institutions.html:25
 msgid "Institutions"
@@ -1136,7 +1136,7 @@ msgstr ""
 
 #: papers/templates/papers/paper.html:110
 msgid "Letter of Declaration needed!"
-msgstr ""
+msgstr "Se necesita una carta de declaración."
 
 #: papers/templates/papers/paper.html:113
 #, python-format
@@ -1444,7 +1444,7 @@ msgstr "Todos los documentos"
 
 #: papers/views.py:271
 msgid "To-do list"
-msgstr ""
+msgstr "Lista de pendientes"
 
 #: papers/views.py:272
 msgid "Papers on my to-do list"
@@ -2284,7 +2284,7 @@ msgstr "Donar"
 
 #: templates/dissemin/skeleton.html:106
 msgid "Blog"
-msgstr ""
+msgstr "Blog"
 
 #: templates/dissemin/sources.html:11
 msgid "Data sources"

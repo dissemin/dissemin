@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 #
 # Author: DmitTrix
+# Author: Katunchik
 # Author: Mouse21
 # Author: Movses
 # Author: Okras
@@ -17,7 +18,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-09-30 15:27+0200\n"
-"PO-Revision-Date: 2019-10-01 14:27:19+0000\n"
+"PO-Revision-Date: 2019-10-03 17:34:54+0000\n"
 "Language: ru\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -27,11 +28,11 @@ msgstr ""
 
 #: papers/static/js/dissemin.js:25
 msgid "Adding to todolist"
-msgstr ""
+msgstr "Добавление в список работ"
 
 #: papers/static/js/dissemin.js:29
 msgid "Removing from todolist"
-msgstr ""
+msgstr "Удаление из списка работ"
 
 #: papers/static/papers/refresh.js:63
 msgid "Do not show this message anymore"

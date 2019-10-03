@@ -16,7 +16,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-09-30 15:27+0200\n"
-"PO-Revision-Date: 2019-10-01 14:27:07+0000\n"
+"PO-Revision-Date: 2019-10-03 17:34:42+0000\n"
 "Language: ar\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -487,11 +487,11 @@ msgstr "الحالة"
 
 #: deposit/templates/deposit/deposits.html:74
 msgid "Letter of Declaration"
-msgstr ""
+msgstr "خطاب الإعلان"
 
 #: deposit/templates/deposit/deposits.html:75
 msgid "Show"
-msgstr ""
+msgstr "عرض"
 
 #: deposit/templates/deposit/deposits.html:93
 msgid "You have not made any deposit via Dissemin. What are you waiting for? Liberate your papers today."
@@ -596,15 +596,15 @@ msgstr "تم رفض الوصول إلى PDF."
 
 #: deposit/views.py:278
 msgid "Access to this ressource not allowed."
-msgstr ""
+msgstr "الوصول إلى هذا المورد غير مسموح به."
 
 #: deposit/views.py:283
 msgid "Declaration {}.pdf"
-msgstr ""
+msgstr "الإعلان {}.pdf"
 
 #: deposit/views.py:286
 msgid "No pdf found for dr {}"
-msgstr ""
+msgstr "لم يتم العثور على pdf لـdr {}"
 
 #: deposit/zenodo/protocol.py:87
 msgid "This document is already in Zenodo. Zenodo refused the deposit."
@@ -1010,7 +1010,7 @@ msgstr "مرحبا بكم في ديسيمين"
 
 #: papers/templates/papers/index.html:23
 msgid "Dissemin detects papers behind paywalls and helps their authors to upload them in one click to an open repository."
-msgstr ""
+msgstr "ديسيمين يكشف عن الأوراق الموجودة خلف paywalls ويساعد مؤلفيها في رفعها بنقرة واحدة لمستودع مفتوح."
 
 #: papers/templates/papers/index.html:45
 #, fuzzy
@@ -1018,22 +1018,20 @@ msgid "Green Open Access"
 msgstr "الوصول المفتوح الأخضر"
 
 #: papers/templates/papers/index.html:47
-#, fuzzy
 msgid "Many researchers do not use their right to make their papers freely available online, in addition to the paywalled version of traditional publishers."
-msgstr "العديد من الباحثين لا يستخدمون حقهم في جعل أوراقهم متاحة على الإنترنت مجانا، بالإضافة إلى النسخة المدفوعة من قبل الناشرين التقليديين."
+msgstr "العديد من الباحثين لا يستخدمون حقهم في جعل أوراقهم متاحة على الإنترنت مجانا، بالإضافة إلى نسخة الناشرين التقليديين."
 
 #: papers/templates/papers/index.html:52
 msgid "Uploading your papers to open repositories has significant advantages:"
-msgstr ""
+msgstr "لرفع أوراقك ل مستودعات مفتوحة مزايا هامة:"
 
 #: papers/templates/papers/index.html:58
 msgid "Your research is available to everyone, increasing your readership and impact."
-msgstr ""
+msgstr "بحثك متاح للجميع، مما يزيد من قرائك وتأثيرك."
 
 #: papers/templates/papers/index.html:63
-#, fuzzy
 msgid "You help universities abandon overpriced journal subscriptions."
-msgstr "وهذا يجبر المكتبات على شراء اشتراكات إلكترونية مبالغ فيها في المجلات، عندما تكون قادرة على تحملها تقريبا."
+msgstr "أنت تساعد الجامعات على التخلي عن اشتراكات مجلة مبالغ فيها."
 
 #: papers/templates/papers/index.html:78
 #, fuzzy
@@ -1041,9 +1039,8 @@ msgid "Open Repositories"
 msgstr "المستودعات المفتوحة"
 
 #: papers/templates/papers/index.html:80
-#, fuzzy
 msgid "Uploading your papers on your own webpage is not enough. Your papers are easier to find and more secure in the long-term when uploaded to arXiv, Zenodo or institutional repositories."
-msgstr "لا يكفي تحميل أوراقك على صفحتك على الويب، وهذه النسخ أقل استقرارا وأصعب في العثور عليها من الوثائق التي يتم تحميلها على مستودعات مفهرسة جيدا."
+msgstr "لا يكفي رفع أوراقك على صفحة الويب الخاصة بك، سيسهل العثور على أوراقك وستصبح أكثر أمانا على المدى الطويل عند رفعها إلى أرخايف أو زينودو أو المستودعات المؤسسية."
 
 #: papers/templates/papers/index.html:94
 #, fuzzy
@@ -1068,12 +1065,10 @@ msgid "Dissemin for Libraries"
 msgstr "ديسيمين للمكتبات"
 
 #: papers/templates/papers/index.html:147
-#, fuzzy
 msgid "As a library you can use Dissemin to find publications of your researchers that are behind paywalls. Dissemin can upload publications directly into your institutional repository and tries to support your local worklfow as much as possible."
-msgstr "كمكتبة، يمكنك استخدام ديسيمين للعثور على منشورات الباحثين الخاصة بك التي تقف وراء paywall، يمكن لديسيمين رفع المنشورات مباشرةً في مستودع مؤسستك ويحاول دعم سير العمل المحلي قدر الإمكان."
+msgstr "كمكتبة، يمكنك استخدام ديسيمين للعثور على منشورات الباحثين الخاصة بك التي تقف وراء paywalls، يمكن لديسيمين رفع المنشورات مباشرةً في مستودع مؤسستك ويحاول دعم سير العمل المحلي قدر الإمكان."
 
 #: papers/templates/papers/index.html:152
-#, fuzzy
 msgid "You can advertise Dissemin to your researchers and show them how easy it is to liberate their publications!"
 msgstr "يمكنك الإعلان عن ديسيمين للباحثين وإظهاره لهم، كم هو سهل تحرير منشوراتهم!"
 
@@ -1082,9 +1077,8 @@ msgid "Partners"
 msgstr "الشركاء"
 
 #: papers/templates/papers/index.html:168
-#, fuzzy
 msgid "Dissemin would not be possible without the support of our partners:"
-msgstr "لن يكون ديسيمين ممكنا دون دعم شبكة شركائنا:"
+msgstr "لن يكون ديسيمين ممكنا دون دعم شركائنا:"
 
 #: papers/templates/papers/institutions.html:25
 msgid "Institutions"
@@ -1123,36 +1117,36 @@ msgstr "جميع المؤلفين %(nb_authors)s authors (<a href=\"#\" id=\"sho
 
 #: papers/templates/papers/paper.html:93
 msgid "Deposit accomplished!"
-msgstr ""
+msgstr "أُنجِز الإيداع!"
 
 #: papers/templates/papers/paper.html:94
 #, python-format
 msgid "<p>This paper was successfully deposited and is now freely available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address.</a></p>"
-msgstr ""
+msgstr "<p>تم إيداع هذه الورقة بنجاح وهي الآن متاحة مجانا في <a class=\"alert-link\" href=\"%(splash_url)s\">هذا العنوان.</a></p>"
 
 #: papers/templates/papers/paper.html:101
 #: papers/templates/papers/paper.html:125
 msgid "Deposit almost accomplished!"
-msgstr ""
+msgstr "الإيداع أُنجِز تقريبا!"
 
 #: papers/templates/papers/paper.html:103
 #, python-format
 msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> after validation by the repository administrators.</p>"
-msgstr ""
+msgstr "<p>تم إيداع هذه الورقة في <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>، سيتوفر النص الكامل في <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> بعد التحقق بواسطة إداريي المستودع."
 
 #: papers/templates/papers/paper.html:110
 msgid "Letter of Declaration needed!"
-msgstr ""
+msgstr "خطاب الإعلان مطلوب!"
 
 #: papers/templates/papers/paper.html:113
 #, python-format
 msgid "<p>The repository %(deposit.repository.name)s requires a letter of declaration to publish this publication. Please <a class=\"alert-link\" href=\"%(letter_url)s\">download</a> the letter, sign it and send it to the repository administration.</p>"
-msgstr ""
+msgstr "<p> يتطلب المستودع %(deposit.repository.name)s خطاب إعلان لنشر هذا المنشور؛ الرجاء <a class=\"alert-link\" href=\"%(letter_url)s\">تنزيل</a> الخطاب وتوقيعه وإرساله إلى إدارة المستودع.</p>"
 
 #: papers/templates/papers/paper.html:126
-#, fuzzy, python-format
+#, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> after validation by the repository administrators."
-msgstr "<strong>غالبا هناك!</strong>تم إيداع هذه الورقة في <a href=\"%(repo_url)s\">%(repo_name)s</a>. سيتوفر النص الكامل في <a href=\"%(deposit_url)s\">هذا العنوان</a> بعد التحقق بواسطة إداريي المستودع."
+msgstr "تم إيداع هذه الورقة في <a href=\"%(repo_url)s\">%(repo_name)s</a>، سيتوفر النص الكامل في class=\"alert-link\" <a href=\"%(deposit_url)s\">هذا العنوان</a> بعد التحقق بواسطة إداريي المستودع."
 
 #: papers/templates/papers/paper.html:143
 msgid "Full text:"
@@ -2306,7 +2300,7 @@ msgstr "تبرع"
 
 #: templates/dissemin/skeleton.html:106
 msgid "Blog"
-msgstr ""
+msgstr "مدونة"
 
 #: templates/dissemin/sources.html:11
 msgid "Data sources"

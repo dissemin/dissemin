@@ -16,7 +16,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-09-30 15:27+0200\n"
-"PO-Revision-Date: 2019-10-01 14:27:20+0000\n"
+"PO-Revision-Date: 2019-10-03 17:34:57+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1018,27 +1018,24 @@ msgid "You help universities abandon overpriced journal subscriptions."
 msgstr ""
 
 #: papers/templates/papers/index.html:78
-#, fuzzy
 msgid "Open Repositories"
-msgstr "Depo"
+msgstr "Depoları Aç"
 
 #: papers/templates/papers/index.html:80
 msgid "Uploading your papers on your own webpage is not enough. Your papers are easier to find and more secure in the long-term when uploaded to arXiv, Zenodo or institutional repositories."
 msgstr ""
 
 #: papers/templates/papers/index.html:94
-#, fuzzy
 msgid "Latest Uploads"
-msgstr "Yükle"
+msgstr "YükleEn Son Yüklenenler"
 
 #: papers/templates/papers/index.html:96
 msgid "Researchers use Dissemin to make sure all their publications can be accessed freely. Have a look at their latest uploads:"
 msgstr ""
 
 #: papers/templates/papers/index.html:118
-#, fuzzy
 msgid "Access statistics"
-msgstr "Yöntemler ve istatistikler"
+msgstr "Erişim istatistikleri"
 
 #: papers/templates/papers/index.html:120
 msgid "Dissemin collects its data from various sources and evaluates if a given publication is freely available."

@@ -12,7 +12,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-09-30 15:27+0200\n"
-"PO-Revision-Date: 2019-10-01 14:27:14+0000\n"
+"PO-Revision-Date: 2019-10-03 17:34:51+0000\n"
 "Language: lb\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -485,7 +485,7 @@ msgstr ""
 
 #: deposit/templates/deposit/deposits.html:75
 msgid "Show"
-msgstr ""
+msgstr "Weisen"
 
 #: deposit/templates/deposit/deposits.html:93
 msgid "You have not made any deposit via Dissemin. What are you waiting for? Liberate your papers today."

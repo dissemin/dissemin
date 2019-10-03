@@ -13,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-09-30 15:27+0200\n"
-"PO-Revision-Date: 2019-10-01 14:27:18+0000\n"
+"PO-Revision-Date: 2019-10-03 17:34:55+0000\n"
 "Language: pt_br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -479,11 +479,11 @@ msgstr "Status"
 
 #: deposit/templates/deposit/deposits.html:74
 msgid "Letter of Declaration"
-msgstr ""
+msgstr "Carta de declaração"
 
 #: deposit/templates/deposit/deposits.html:75
 msgid "Show"
-msgstr ""
+msgstr "Exibir"
 
 #: deposit/templates/deposit/deposits.html:93
 msgid "You have not made any deposit via Dissemin. What are you waiting for? Liberate your papers today."
@@ -588,7 +588,7 @@ msgstr "O acesso ao PDF foi negado."
 
 #: deposit/views.py:278
 msgid "Access to this ressource not allowed."
-msgstr ""
+msgstr "O acesso a este recurso não é permitido."
 
 #: deposit/views.py:283
 msgid "Declaration {}.pdf"
@@ -995,7 +995,7 @@ msgstr "Bem-vindo à Dissemin"
 
 #: papers/templates/papers/index.html:23
 msgid "Dissemin detects papers behind paywalls and helps their authors to upload them in one click to an open repository."
-msgstr ""
+msgstr "Dissemin detecta papéis por trás de paywalls e ajuda seus autores a carregá-los com um clique em um repositório aberto."
 
 #: papers/templates/papers/index.html:45
 msgid "Green Open Access"
@@ -1008,25 +1008,23 @@ msgstr "Muitos pesquisadores não usam seu direito de disponibilizar gratuitamen
 
 #: papers/templates/papers/index.html:52
 msgid "Uploading your papers to open repositories has significant advantages:"
-msgstr ""
+msgstr "Carregar seus documentos para abrir repositórios tem vantagens significativas:"
 
 #: papers/templates/papers/index.html:58
 msgid "Your research is available to everyone, increasing your readership and impact."
-msgstr ""
+msgstr "Sua pesquisa está disponível para todos, aumentando o número de leitores e o impacto."
 
 #: papers/templates/papers/index.html:63
-#, fuzzy
 msgid "You help universities abandon overpriced journal subscriptions."
-msgstr "Você ajuda as bibliotecas a abandonar assinaturas eletrônicas muito caras em periódicos que elas não podem pagar."
+msgstr "Você ajuda as universidades a abandonar as assinaturas de periódicos muito caras."
 
 #: papers/templates/papers/index.html:78
 msgid "Open Repositories"
 msgstr "Repositórios abertos"
 
 #: papers/templates/papers/index.html:80
-#, fuzzy
 msgid "Uploading your papers on your own webpage is not enough. Your papers are easier to find and more secure in the long-term when uploaded to arXiv, Zenodo or institutional repositories."
-msgstr "Carregar seus documentos em sua própria página da web não é suficiente. Essas cópias são menos estáveis e mais difíceis de encontrar do que o documento carregado em repositórios bem indexados, como arXiv, Zenodo ou repositórios institucionais."
+msgstr "Carregar seus documentos em sua própria página da web não é suficiente. Seus documentos são mais fáceis de encontrar e mais seguros a longo prazo, quando enviados para os repositórios arXiv, Zenodo ou institucionais."
 
 #: papers/templates/papers/index.html:94
 msgid "Latest Uploads"
@@ -1054,7 +1052,6 @@ msgid "As a library you can use Dissemin to find publications of your researcher
 msgstr "Como biblioteca, você pode usar o Dissemin para encontrar publicações de seus pesquisadores que estão por trás de um paywall. O Dissemin pode fazer upload de publicações diretamente no seu repositório institucional e tentar dar suporte ao fluxo de trabalho local o máximo possível."
 
 #: papers/templates/papers/index.html:152
-#, fuzzy
 msgid "You can advertise Dissemin to your researchers and show them how easy it is to liberate their publications!"
 msgstr "Você pode anunciar o Dissemin para seus pesquisadores e mostrar a eles como é fácil liberar suas publicações!"
 
@@ -1104,7 +1101,7 @@ msgstr "\n            All %(nb_authors)s authors (<a href=\"#\" id=\"show_less_a
 
 #: papers/templates/papers/paper.html:93
 msgid "Deposit accomplished!"
-msgstr ""
+msgstr "Depósito realizado!"
 
 #: papers/templates/papers/paper.html:94
 #, python-format
@@ -2274,7 +2271,7 @@ msgstr "Doar"
 
 #: templates/dissemin/skeleton.html:106
 msgid "Blog"
-msgstr ""
+msgstr "Blog"
 
 #: templates/dissemin/sources.html:11
 msgid "Data sources"
