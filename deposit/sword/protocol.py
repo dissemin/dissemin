@@ -103,7 +103,7 @@ class SWORDMETSProtocol(RepositoryProtocol):
         # Creation of document root
         mets_xml = etree.Element(METS + 'mets', nsmap=NSMAP)
 
-        #Creation of dmdSec and insertion of metadata
+        # Creation of dmdSec and insertion of metadata
         mets_dmdSec = etree.SubElement(mets_xml, METS + 'dmdSec', ID='d_dmd_1')
         mets_mdWrap = etree.SubElement(mets_dmdSec, METS + 'mdWrap', MDTYPE='OTHER')
         mets_xmlData = etree.SubElement(mets_mdWrap, METS + 'xmlData')
