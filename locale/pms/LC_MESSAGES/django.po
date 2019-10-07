@@ -13,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-09-30 15:27+0200\n"
-"PO-Revision-Date: 2019-10-03 17:34:54+0000\n"
+"PO-Revision-Date: 2019-10-07 17:42:48+0000\n"
 "Language: pms\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -590,11 +590,11 @@ msgstr "Acess a l'arsorsa vietà."
 
 #: deposit/views.py:283
 msgid "Declaration {}.pdf"
-msgstr ""
+msgstr "Diciaraission {}.pdf"
 
 #: deposit/views.py:286
 msgid "No pdf found for dr {}"
-msgstr ""
+msgstr "Gnun pdf trovà për dr {}"
 
 #: deposit/zenodo/protocol.py:87
 msgid "This document is already in Zenodo. Zenodo refused the deposit."
@@ -991,38 +991,35 @@ msgstr "Bin-ëvnù su dissemin"
 
 #: papers/templates/papers/index.html:23
 msgid "Dissemin detects papers behind paywalls and helps their authors to upload them in one click to an open repository."
-msgstr ""
+msgstr "Dissemin a treuva j'artìcoj a acess a pagament e a giuta ij sò autor a carieje con në sgnacament ant un depòsit duvert."
 
 #: papers/templates/papers/index.html:45
 msgid "Green Open Access"
 msgstr "Acess lìber verd"
 
 #: papers/templates/papers/index.html:47
-#, fuzzy
 msgid "Many researchers do not use their right to make their papers freely available online, in addition to the paywalled version of traditional publishers."
-msgstr "Tanti arsercador a deuvro nen sò drit ëd buté ij sò artìcoj an acess lìber an sl'aragnà, an dzorpì dla version a pagament proponùa da j'editor tradissionaj."
+msgstr "Tanti arsercador a deuvro nen sò drit ëd buté ij sò artìcoj an acess lìber an sl'aragnà, an dzorpì dla version a pagament dj'editor tradissionaj."
 
 #: papers/templates/papers/index.html:52
 msgid "Uploading your papers to open repositories has significant advantages:"
-msgstr ""
+msgstr "Carié ij sò artìcoj an s'dij depòsit duvert a l'ha ëd vantagi significativ:"
 
 #: papers/templates/papers/index.html:58
 msgid "Your research is available to everyone, increasing your readership and impact."
-msgstr ""
+msgstr "Soa arserca a l'é disponìbil a tuti, aumentand ij sò letor e soa eficassità."
 
 #: papers/templates/papers/index.html:63
-#, fuzzy
 msgid "You help universities abandon overpriced journal subscriptions."
-msgstr "A giuta le biblioteche a liberesse da j'abonament eletrònich tròp car a dij giornaj ch'a peulo nen përmëtt-se."
+msgstr "A giuta a j'università a stralassé j'abonament tròp car ai giornaj."
 
 #: papers/templates/papers/index.html:78
 msgid "Open Repositories"
 msgstr "Depòsit duvert"
 
 #: papers/templates/papers/index.html:80
-#, fuzzy
 msgid "Uploading your papers on your own webpage is not enough. Your papers are easier to find and more secure in the long-term when uploaded to arXiv, Zenodo or institutional repositories."
-msgstr "Carié ij sò artìcoj ansima a soa pàgina an sl'aragnà a basta nen. Coste còpie a son meno stàbij e pi difìcij da trové che ij document carià an s'dij depòsit bin andicisà tanme arXiv, Zenodo o d'àutri depòsit anstitussionaj."
+msgstr "Carié ij sò artìcoj ansima a soa pàgina an sl'aragnà a basta nen. Ij sò artìcoj a son pi belfé trové e pi sigur ant ël longh perìod cand a son carià su arXiv, Zenodo o dij depòsit anstitussionaj."
 
 #: papers/templates/papers/index.html:94
 msgid "Latest Uploads"
@@ -1045,12 +1042,10 @@ msgid "Dissemin for Libraries"
 msgstr "Dissemin për le biblioteche"
 
 #: papers/templates/papers/index.html:147
-#, fuzzy
 msgid "As a library you can use Dissemin to find publications of your researchers that are behind paywalls. Dissemin can upload publications directly into your institutional repository and tries to support your local worklfow as much as possible."
 msgstr "Tanme biblioteca, a peul dovré Dissemin për trové dle publicassion dij sò arsercador che a son sotponù a dij drit ëd pagament. Dissemin a peul carié le publicassion diretaman an sò depòsit anstitussional e a sërca ëd sosten-e sò process local ëd travaj mej ch'as peul."
 
 #: papers/templates/papers/index.html:152
-#, fuzzy
 msgid "You can advertise Dissemin to your researchers and show them how easy it is to liberate their publications!"
 msgstr "A peul feje dl'areclam a Dissemin ai sò arsercador e mostreje coma a l'é belfé liberé soe publicassion!"
 
@@ -1059,9 +1054,8 @@ msgid "Partners"
 msgstr "Cambrada"
 
 #: papers/templates/papers/index.html:168
-#, fuzzy
 msgid "Dissemin would not be possible without the support of our partners:"
-msgstr "Dissemin a sarìa pa possìbil sensa ël sostegn ëd nòstra rej ëd cambrada:"
+msgstr "Dissemin a sarìa pa possìbil sensa ël sostegn dij nòstri cambrada:"
 
 #: papers/templates/papers/institutions.html:25
 msgid "Institutions"
@@ -1100,36 +1094,36 @@ msgstr "Tuti ij %(nb_authors)s autor (<a href=\"#\" id=\"show_less_authors\">smo
 
 #: papers/templates/papers/paper.html:93
 msgid "Deposit accomplished!"
-msgstr ""
+msgstr "Depòsit fàit!"
 
 #: papers/templates/papers/paper.html:94
 #, python-format
 msgid "<p>This paper was successfully deposited and is now freely available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address.</a></p>"
-msgstr ""
+msgstr "<p>S'artìcol a l'é stàit deposità con sucess e a l'é adess disponìbil a gràtis a <a class=\"alert-link\" href=\"%(splash_url)s\">costa adrëssa.</a></p>"
 
 #: papers/templates/papers/paper.html:101
 #: papers/templates/papers/paper.html:125
 msgid "Deposit almost accomplished!"
-msgstr ""
+msgstr "Depòsit quasi fàit!"
 
 #: papers/templates/papers/paper.html:103
 #, python-format
 msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> after validation by the repository administrators.</p>"
-msgstr ""
+msgstr "<p>S'artìcol a l'é stàit deposità an <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. Ël test complet a sarà disponìbil a <a class=\"alert-link\" href=\"%(splash_url)s\">costa adrëssa</a> apress esse convalidà da j'aministrator dël depòsit.</p>"
 
 #: papers/templates/papers/paper.html:110
 msgid "Letter of Declaration needed!"
-msgstr ""
+msgstr "Litra ëd diciairassion necessaria!"
 
 #: papers/templates/papers/paper.html:113
 #, python-format
 msgid "<p>The repository %(deposit.repository.name)s requires a letter of declaration to publish this publication. Please <a class=\"alert-link\" href=\"%(letter_url)s\">download</a> the letter, sign it and send it to the repository administration.</p>"
-msgstr ""
+msgstr "<p>Ël depòsit %(deposit.repository.name)s a ciama na litra ëd diciairassion për publiché sa publicassion. Për piasì <a class=\"alert-link\" href=\"%(letter_url)s\">ch'a dëscaria</a> la litra, ch'a la sot-signa e ch'a la manda a l'aministrassion dël depòsit.</p>"
 
 #: papers/templates/papers/paper.html:126
-#, fuzzy, python-format
+#, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> after validation by the repository administrators."
-msgstr "<strong>I-i soma scasi!</strong> S'artìcol a l'é stàit deposità an <a href=\"%(repo_url)s\">%(repo_name)s</a>. Ël test complet a sarà disponìbil a <a href=\"%(deposit_url)s\">cost'adrëssa</a> na vira convalidà da j'aministrator dël depòsit."
+msgstr "S'artìcol a l'é stàit deposità an <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. Ël test complet a sarà disponìbil a <a class=\"alert-link\" href=\"%(deposit_url)s\">cost'adrëssa</a> na vira convalidà da j'aministrator dël depòsit."
 
 #: papers/templates/papers/paper.html:143
 msgid "Full text:"
@@ -2261,7 +2255,7 @@ msgstr "Doné"
 
 #: templates/dissemin/skeleton.html:106
 msgid "Blog"
-msgstr ""
+msgstr "Scartari"
 
 #: templates/dissemin/sources.html:11
 msgid "Data sources"

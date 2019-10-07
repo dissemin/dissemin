@@ -15,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-09-30 15:27+0200\n"
-"PO-Revision-Date: 2019-10-01 14:27:19+0000\n"
+"PO-Revision-Date: 2019-10-07 17:42:51+0000\n"
 "Language: sv\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -490,7 +490,7 @@ msgstr ""
 
 #: deposit/templates/deposit/deposits.html:75
 msgid "Show"
-msgstr ""
+msgstr "Visa"
 
 #: deposit/templates/deposit/deposits.html:93
 msgid "You have not made any deposit via Dissemin. What are you waiting for? Liberate your papers today."
@@ -698,7 +698,7 @@ msgstr "inkorgar"
 
 #: papers/ajax.py:236 papers/templates/papers/publiListItem.html:57
 msgid "Remove from to-do list"
-msgstr ""
+msgstr "Ta bort från att göra-listan"
 
 #: papers/ajax.py:237
 #, fuzzy
@@ -2279,7 +2279,7 @@ msgstr "Donera"
 
 #: templates/dissemin/skeleton.html:106
 msgid "Blog"
-msgstr ""
+msgstr "Blogg"
 
 #: templates/dissemin/sources.html:11
 msgid "Data sources"

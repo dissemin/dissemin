@@ -15,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-09-30 15:27+0200\n"
-"PO-Revision-Date: 2019-10-01 14:27:09+0000\n"
+"PO-Revision-Date: 2019-10-07 17:42:36+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,11 +25,11 @@ msgstr ""
 
 #: papers/static/js/dissemin.js:25
 msgid "Adding to todolist"
-msgstr ""
+msgstr "Zur Merkliste hinzufügen"
 
 #: papers/static/js/dissemin.js:29
 msgid "Removing from todolist"
-msgstr ""
+msgstr "Von Merkliste entfernen"
 
 #: papers/static/papers/refresh.js:63
 msgid "Do not show this message anymore"

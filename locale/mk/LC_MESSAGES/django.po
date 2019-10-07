@@ -13,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-09-30 15:27+0200\n"
-"PO-Revision-Date: 2019-10-01 14:27:15+0000\n"
+"PO-Revision-Date: 2019-10-07 17:42:46+0000\n"
 "Language: mk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -486,7 +486,7 @@ msgstr ""
 
 #: deposit/templates/deposit/deposits.html:75
 msgid "Show"
-msgstr ""
+msgstr "Прикажи"
 
 #: deposit/templates/deposit/deposits.html:93
 msgid "You have not made any deposit via Dissemin. What are you waiting for? Liberate your papers today."
@@ -591,11 +591,11 @@ msgstr "Одбиен пристапот до PDF."
 
 #: deposit/views.py:278
 msgid "Access to this ressource not allowed."
-msgstr ""
+msgstr "Пристапот до овој ресурс не е дозволен."
 
 #: deposit/views.py:283
 msgid "Declaration {}.pdf"
-msgstr ""
+msgstr "Изјава {}.pdf"
 
 #: deposit/views.py:286
 msgid "No pdf found for dr {}"
@@ -998,7 +998,7 @@ msgstr "Добре дојдовте на Dissemin"
 
 #: papers/templates/papers/index.html:23
 msgid "Dissemin detects papers behind paywalls and helps their authors to upload them in one click to an open repository."
-msgstr ""
+msgstr "Dissemin пронаоѓа написи со наплатен пристап и им помага на нивните автори да ги подигнат во отворено складиште со едно стискање."
 
 #: papers/templates/papers/index.html:45
 #, fuzzy
@@ -1006,9 +1006,8 @@ msgid "Green Open Access"
 msgstr "Зелен отворен пристап"
 
 #: papers/templates/papers/index.html:47
-#, fuzzy
 msgid "Many researchers do not use their right to make their papers freely available online, in addition to the paywalled version of traditional publishers."
-msgstr "Многу истражувачи не го искористуваат нивното право да ги стават нивните написи на слободно располагање на семрежјето, покрај наплатната верзија која ја нудат традиционалните издавачи."
+msgstr "Многу истражувачи не го искористуваат нивното право да ги стават нивните написи на слободно располагање на семрежјето, покрај наплатната верзија од традиционалните издавачи."
 
 #: papers/templates/papers/index.html:52
 msgid "Uploading your papers to open repositories has significant advantages:"
@@ -1019,9 +1018,8 @@ msgid "Your research is available to everyone, increasing your readership and im
 msgstr ""
 
 #: papers/templates/papers/index.html:63
-#, fuzzy
 msgid "You help universities abandon overpriced journal subscriptions."
-msgstr "Со ова библиотеките се приморани да се претплаќаат на прескапи електронски научни часописи, кога воопшто можат да си ги дозволат."
+msgstr "Вие им помагате на универзитетите да бидат приморани да се претплаќаат на прескапи научни часописи."
 
 #: papers/templates/papers/index.html:78
 #, fuzzy
@@ -1134,9 +1132,9 @@ msgid "<p>The repository %(deposit.repository.name)s requires a letter of declar
 msgstr ""
 
 #: papers/templates/papers/paper.html:126
-#, fuzzy, python-format
+#, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> after validation by the repository administrators."
-msgstr "<strong>Речиси сте готови!</strong> Овој напис е поднесен во <a href=\"%(repo_url)s\">%(repo_name)s</a>. Целосниот текст ќе биде достапен на <a href=\"%(deposit_url)s\">оваа адреса</a> откако ќе добиете потврда од раководителите на складиштето."
+msgstr "Овој напис е поднесен во <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. Целосниот текст ќе биде достапен на <a class=\"alert-link\" href=\"%(deposit_url)s\">оваа адреса</a> откако ќе биде потврден од раководителите на складиштето."
 
 #: papers/templates/papers/paper.html:143
 msgid "Full text:"
@@ -2274,7 +2272,7 @@ msgstr "Дарувајте"
 
 #: templates/dissemin/skeleton.html:106
 msgid "Blog"
-msgstr ""
+msgstr "Блог"
 
 #: templates/dissemin/sources.html:11
 msgid "Data sources"

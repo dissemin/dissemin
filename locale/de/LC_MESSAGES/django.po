@@ -19,7 +19,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-09-30 15:27+0200\n"
-"PO-Revision-Date: 2019-10-01 14:27:10+0000\n"
+"PO-Revision-Date: 2019-10-07 17:42:38+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -486,11 +486,11 @@ msgstr "Status"
 
 #: deposit/templates/deposit/deposits.html:74
 msgid "Letter of Declaration"
-msgstr ""
+msgstr "Autorenerklärung"
 
 #: deposit/templates/deposit/deposits.html:75
 msgid "Show"
-msgstr ""
+msgstr "Zeigen"
 
 #: deposit/templates/deposit/deposits.html:93
 msgid "You have not made any deposit via Dissemin. What are you waiting for? Liberate your papers today."
@@ -594,15 +594,15 @@ msgstr "Zugriff auf das PDF wurde verweigert."
 
 #: deposit/views.py:278
 msgid "Access to this ressource not allowed."
-msgstr ""
+msgstr "Der Zugriff auf diese Seite ist nicht erlaubt."
 
 #: deposit/views.py:283
 msgid "Declaration {}.pdf"
-msgstr ""
+msgstr "Erklärung {}.pdf"
 
 #: deposit/views.py:286
 msgid "No pdf found for dr {}"
-msgstr ""
+msgstr "Kein PDF für dr {} gefunden"
 
 #: deposit/zenodo/protocol.py:87
 msgid "This document is already in Zenodo. Zenodo refused the deposit."
@@ -1001,7 +1001,7 @@ msgstr "Willkommen bei Dissemin"
 
 #: papers/templates/papers/index.html:23
 msgid "Dissemin detects papers behind paywalls and helps their authors to upload them in one click to an open repository."
-msgstr ""
+msgstr "Dissemin erkennt Publikationen hinter Bezahlschranken (&quot;Paywall&quot;) und lädt ihre Verfasser_innen dazu ein, sie mit einem Klick in ein offenes Repositorium hochzuladen."
 
 #: papers/templates/papers/index.html:45
 #, fuzzy
@@ -1009,22 +1009,20 @@ msgid "Green Open Access"
 msgstr "Green Open Access"
 
 #: papers/templates/papers/index.html:47
-#, fuzzy
 msgid "Many researchers do not use their right to make their papers freely available online, in addition to the paywalled version of traditional publishers."
-msgstr "Viele Wissenschaftler_innen nutzen nicht ihr Recht, ihre Publikationen zusätzlich zu den Bezahlversionen der traditionellen Herausgeber frei verfügbar anzubieten."
+msgstr "Viele Wissenschaftler_innen nutzen ihr Recht nicht, ihre Publikationen zusätzlich zu den Bezahlversionen der traditionellen Herausgeber frei verfügbar anzubieten."
 
 #: papers/templates/papers/index.html:52
 msgid "Uploading your papers to open repositories has significant advantages:"
-msgstr ""
+msgstr "Das Hochladen deiner Publikationen in ein offenes Repositorium hat folgende Vorteile:"
 
 #: papers/templates/papers/index.html:58
 msgid "Your research is available to everyone, increasing your readership and impact."
-msgstr ""
+msgstr "Deine Forschung ist für jeden zugänglich, was deine Leserschaft und Impact erhöht."
 
 #: papers/templates/papers/index.html:63
-#, fuzzy
 msgid "You help universities abandon overpriced journal subscriptions."
-msgstr "Dies zwingt Bibliotheken überteuerte Zeitschriftenabonnements zu kaufen, sofern sie sich diese überhaupt leisten können."
+msgstr "Du hilfst Universitäten dabei, überhöhte Subskriptionsgebühren zu vermeiden."
 
 #: papers/templates/papers/index.html:78
 #, fuzzy
@@ -1032,9 +1030,8 @@ msgid "Open Repositories"
 msgstr "Offene Repositorien"
 
 #: papers/templates/papers/index.html:80
-#, fuzzy
 msgid "Uploading your papers on your own webpage is not enough. Your papers are easier to find and more secure in the long-term when uploaded to arXiv, Zenodo or institutional repositories."
-msgstr "Das Hochladen Deiner Publikationen auf Deiner eigenen Webseite ist nicht ausreichend. Solche Kopien sind weniger stabil und schwerer zu finden als Dokumente in gut indizierten Repositorien."
+msgstr "Das Hochladen Deiner Publikationen auf Deiner eigenen Webseite ist nicht ausreichend. Solche Kopien sind weniger stabil und schwerer zu finden als Dokumente in gut indizierten Repositorien wie arXiv, Zenodo oder institutionellen Repositorien."
 
 #: papers/templates/papers/index.html:94
 #, fuzzy
@@ -1059,12 +1056,10 @@ msgid "Dissemin for Libraries"
 msgstr "Dissemin für Bibliotheken"
 
 #: papers/templates/papers/index.html:147
-#, fuzzy
 msgid "As a library you can use Dissemin to find publications of your researchers that are behind paywalls. Dissemin can upload publications directly into your institutional repository and tries to support your local worklfow as much as possible."
 msgstr "Als Bibliothek könnt ihr Dissemin einsetzen, um Publikationen der Wissenschaftler deiner Institution zu finden, die sich hinter einer Paywall (Bezahlschranke) befinden. Dissemin kann Publikationen direkt in euer institutionelles Repositorium hochladen und dabei euren lokalen Workflow bestmöglich unterstützen."
 
 #: papers/templates/papers/index.html:152
-#, fuzzy
 msgid "You can advertise Dissemin to your researchers and show them how easy it is to liberate their publications!"
 msgstr "Ihr könnt Dissemin bei den Wissenschaftlern eurer Institution bewerben und ihn zeigen, wie einfach sie ihre Publikationen frei verfügbar machen können."
 
@@ -1073,7 +1068,6 @@ msgid "Partners"
 msgstr "Partner"
 
 #: papers/templates/papers/index.html:168
-#, fuzzy
 msgid "Dissemin would not be possible without the support of our partners:"
 msgstr "Dissemin wäre nicht möglich ohne die Unterstützung unseres Netzwerks:"
 
@@ -1114,36 +1108,36 @@ msgstr "Alle Autoren von %(nb_authors)s (<a href=\"#\" id=\"show_less_authors\">
 
 #: papers/templates/papers/paper.html:93
 msgid "Deposit accomplished!"
-msgstr ""
+msgstr "Upload erledigt!"
 
 #: papers/templates/papers/paper.html:94
 #, python-format
 msgid "<p>This paper was successfully deposited and is now freely available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address.</a></p>"
-msgstr ""
+msgstr "<p>Die Publikation wurde erfolgreich hochgeladen und ist jetzt <a class=\"alert-link\" href=\"%(splash_url)s\">hier</a> frei verfügbar.</p>"
 
 #: papers/templates/papers/paper.html:101
 #: papers/templates/papers/paper.html:125
 msgid "Deposit almost accomplished!"
-msgstr ""
+msgstr "Upload fast erledigt!"
 
 #: papers/templates/papers/paper.html:103
 #, python-format
 msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> after validation by the repository administrators.</p>"
-msgstr ""
+msgstr "<p>Die Publikation wurde hochgeladen auf <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. Der Volltest wird unter <a class=\"alert-link\" href=\"%(splash_url)s\">dieser Adresse</a> verfügbar sein, wenn er den Moderationsprozess des Repositoriums absolviert hat.</p>"
 
 #: papers/templates/papers/paper.html:110
 msgid "Letter of Declaration needed!"
-msgstr ""
+msgstr "Autorenerkläarung nötig!"
 
 #: papers/templates/papers/paper.html:113
 #, python-format
 msgid "<p>The repository %(deposit.repository.name)s requires a letter of declaration to publish this publication. Please <a class=\"alert-link\" href=\"%(letter_url)s\">download</a> the letter, sign it and send it to the repository administration.</p>"
-msgstr ""
+msgstr "<p>Für das Veröffentlichen im Repositorium %(deposit.repository.name)s ist eine Autorenerklärung notwendig. <a class=\"alert-link\" href=\"%(letter_url)s\">Lade</a> ihn bitte herunter, unterschreibe ihn und schicke ihn an den Repositoriumsbetreiber."
 
 #: papers/templates/papers/paper.html:126
-#, fuzzy, python-format
+#, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> after validation by the repository administrators."
-msgstr "<strong>Fast geschafft!</strong> Die Publikation wurde erfolgreich bei <a href=\"%(repo_url)s\">%(repo_name)s</a> eingereicht. Der Volltext wird nach Überprüfung durch die Repositoriumsverwaltung unter <a href=\"%(deposit_url)s\">dieser Adresse</a> verfügbar sein."
+msgstr "<strong>Fast geschafft!</strong> Die Publikation wurde erfolgreich bei <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> eingereicht. Der Volltext wird nach Überprüfung durch die Repositoriumsverwaltung unter <a class=\"alert-link\" href=\"%(deposit_url)s\">dieser Adresse</a> verfügbar sein."
 
 #: papers/templates/papers/paper.html:143
 msgid "Full text:"
@@ -2276,7 +2270,7 @@ msgstr "Spenden"
 
 #: templates/dissemin/skeleton.html:106
 msgid "Blog"
-msgstr ""
+msgstr "Blog"
 
 #: templates/dissemin/sources.html:11
 msgid "Data sources"

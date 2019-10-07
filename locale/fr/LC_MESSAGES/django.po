@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-09-30 15:27+0200\n"
-"PO-Revision-Date: 2019-10-03 17:34:49+0000\n"
+"PO-Revision-Date: 2019-10-07 17:42:43+0000\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -604,7 +604,7 @@ msgstr "Déclaration {}.pdf"
 
 #: deposit/views.py:286
 msgid "No pdf found for dr {}"
-msgstr "Aucun pdf trouvé pour dr {}"
+msgstr "Aucun PDF trouvé pour dr {}"
 
 #: deposit/zenodo/protocol.py:87
 msgid "This document is already in Zenodo. Zenodo refused the deposit."
@@ -1014,7 +1014,7 @@ msgstr "Les chercheurs ont souvent le droit de mettre leurs articles en accès l
 
 #: papers/templates/papers/index.html:52
 msgid "Uploading your papers to open repositories has significant advantages:"
-msgstr "Télécharger vos articles vers des dépôts ouverts a d’importants avantages :"
+msgstr "Télécharger vos articles vers des dépôts ouverts a d’importants avantages :"
 
 #: papers/templates/papers/index.html:58
 msgid "Your research is available to everyone, increasing your readership and impact."
@@ -1031,7 +1031,7 @@ msgstr "Dépôts ouverts"
 
 #: papers/templates/papers/index.html:80
 msgid "Uploading your papers on your own webpage is not enough. Your papers are easier to find and more secure in the long-term when uploaded to arXiv, Zenodo or institutional repositories."
-msgstr "C'est déjà bien de mettre vos articles en ligne sur votre page Web, mais ce n’est pas suffisant ! Vos articles sont plus faciles à trouver et plus sécurisés sur le long terme quand elles sont déposées dans des dépôts comme arXiv, Zenodo ou des dépôts institutionnels."
+msgstr "C’est déjà bien de mettre vos articles en ligne sur votre page Web, mais ce n’est pas suffisant ! Vos articles sont plus faciles à trouver et plus sécurisés sur le long terme quand elles sont déposées dans des dépôts comme arXiv, Zenodo ou des dépôts institutionnels."
 
 #: papers/templates/papers/index.html:94
 msgid "Latest Uploads"
@@ -1116,7 +1116,7 @@ msgstr "<p>Cet article a bien été déposé et est maintenant librement disponi
 #: papers/templates/papers/paper.html:101
 #: papers/templates/papers/paper.html:125
 msgid "Deposit almost accomplished!"
-msgstr "Dépôt déjà effectué !"
+msgstr "Dépôt quasiment effectué !"
 
 #: papers/templates/papers/paper.html:103
 #, python-format
@@ -2267,7 +2267,7 @@ msgstr "Faire un don"
 
 #: templates/dissemin/skeleton.html:106
 msgid "Blog"
-msgstr "Blog"
+msgstr "Blogue"
 
 #: templates/dissemin/sources.html:11
 msgid "Data sources"

@@ -2,19 +2,21 @@
 # Exported from translatewiki.net
 #
 # Author: Beta16
+# Author: JackLantern
 # --
 # This file is part of the Dissemin Project
 # This file is distributed under the same license as the Dissemin package.
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-09-30 15:27+0200\n"
-"PO-Revision-Date: 2019-09-19 09:34:54+0000\n"
+"PO-Revision-Date: 2019-10-07 17:42:43+0000\n"
 "Language: it\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-05-27 18:30:52+0000\n"
+"X-POT-Import-Date: 2019-10-01 08:31:19+0000\n"
 "X-Generator: MediaWiki 1.34.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -24,7 +26,7 @@ msgstr ""
 
 #: papers/static/js/dissemin.js:29
 msgid "Removing from todolist"
-msgstr ""
+msgstr "Rimuovi dalla lista di cose da fare"
 
 #: papers/static/papers/refresh.js:63
 msgid "Do not show this message anymore"
@@ -78,3 +80,4 @@ msgid "%s paper found"
 msgid_plural "%s papers found"
 msgstr[0] ""
 msgstr[1] ""
+
