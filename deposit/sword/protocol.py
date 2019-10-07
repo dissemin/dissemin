@@ -103,6 +103,13 @@ class SWORDMETSProtocol(RepositoryProtocol):
         # Creation of document root
         mets_xml = etree.Element(METS + 'mets', nsmap=NSMAP)
 
+        # Creation of metsHdr
+        # We use this to make the mets itself distingushable from e.g. DeppGreen
+        mets_hdr = etree.SubElement(mets_xml, METS + 'metsHdr')
+        mets_agent = etree.SubElement(mets_hdr, METS + 'agent', ROLE='CREATOR', TYPE='ORGANIZATION')
+        mets_name = etree.SubElement(mets_agent, METS + 'name')
+        mets_name.text = 'Dissemin'
+
         # Creation of dmdSec and insertion of metadata
         mets_dmdSec = etree.SubElement(mets_xml, METS + 'dmdSec', ID='d_dmd_1')
         mets_mdWrap = etree.SubElement(mets_dmdSec, METS + 'mdWrap', MDTYPE='OTHER')
