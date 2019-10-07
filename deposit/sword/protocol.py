@@ -1,3 +1,4 @@
+import copy
 import langdetect
 import requests
 import logging
@@ -34,6 +35,13 @@ DS = "{%s}" % DISSEMIN_NAMESPACE
 METS = "{%s}" % METS_NAMESPACE
 MODS = "{%s}" % MODS_NAMESPACE
 XLINK = "{%s}" % XLINK_NAMESPACE
+
+NSMAP = {
+    None : METS_NAMESPACE,
+    'ds' : DISSEMIN_NAMESPACE,
+    'xlink' : XLINK_NAMESPACE,
+    'xsi' : XSI_NAMESPACE
+}
 
 
 class SWORDMETSProtocol(RepositoryProtocol):
@@ -79,8 +87,7 @@ class SWORDMETSProtocol(RepositoryProtocol):
         return deposit_result
 
 
-    @staticmethod
-    def _get_mets(metadata, dissemin_metadata):
+    def _get_mets(self, metadata, dissemin_metadata):
         """
         Creates a mets xml from metadata
         Policy for creation is: One-time-usage, so keep the document as small as possible. This means
@@ -94,14 +101,8 @@ class SWORDMETSProtocol(RepositoryProtocol):
         :returns: complete mets as string
         """
 
-        NSMAP = {
-            None : METS_NAMESPACE,
-            'xlink' : XLINK_NAMESPACE,
-            'xsi' : XSI_NAMESPACE
-        }
-
         # Creation of document root
-        mets_xml = etree.Element(METS + 'mets', nsmap=NSMAP)
+        mets_xml = etree.Element(METS + 'mets', nsmap=self.NSMAP)
 
         # Creation of metsHdr
         # We use this to make the mets itself distingushable from e.g. DeppGreen
@@ -164,11 +165,7 @@ class SWORDMETSProtocol(RepositoryProtocol):
         :returns: lxml object ready to inserted
         """
 
-        NSMAP = {
-            'ds' : DISSEMIN_NAMESPACE,
-        }
-
-        ds = etree.Element(DS + 'dissemin', nsmap=NSMAP)
+        ds = etree.Element(DS + 'dissemin')
         ds.set('version', '1.0')
 
         # Information about the depositor
@@ -330,6 +327,11 @@ class SWORDMETSMODSProtocol(SWORDMETSProtocol):
     Protocol that implements MODS metadata with SWORDMETSProtocol
     """
 
+    # We copy the namespace and add MODS namespace, to have all namespaces in METS root element
+    NSMAP = copy.copy(NSMAP)
+    NSMAP['mods'] = MODS_NAMESPACE
+
+
     def __str__(self):
         """
         Return human readable class name
@@ -343,12 +345,8 @@ class SWORDMETSMODSProtocol(SWORDMETSProtocol):
         """
         self.log("### Creating MODS metadata from publication and form")
 
-        NSMAP = {
-            'mods' : MODS_NAMESPACE,
-        }
-
         # Creation of root
-        mods_xml = etree.Element(MODS + 'mods', nsmap=NSMAP)
+        mods_xml = etree.Element(MODS + 'mods')
         mods_xml.set('version', '3.7')
 
         # Abstract

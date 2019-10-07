@@ -196,7 +196,7 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
         """
         A test for creating mets from metadata
         """
-        mets_xml = SWORDMETSProtocol._get_mets(metadata_xml_dc, dissemin_xml_1_0)
+        mets_xml = self.protocol._get_mets(metadata_xml_dc, dissemin_xml_1_0)
         # Because of the xml declaration we have to convert to a bytes object
         mets_xsd.assertValid(etree.fromstring(bytes(mets_xml, encoding='utf-8')))
 
