@@ -183,11 +183,11 @@ class SWORDMETSProtocol(RepositoryProtocol):
         ds_email = etree.SubElement(ds_depositor, DS + 'email')
         ds_email.text = form.cleaned_data['email']
 
-        r = Researcher.objects.get(user=self.user)
+        orcid = self._get_depositor_orcid()
 
-        if r.orcid:
+        if orcid is not None:
             ds_orcid = etree.SubElement(ds_depositor, DS + 'orcid')
-            ds_orcid.text = r.orcid
+            ds_orcid.text = orcid
 
         ds_is_contributor = etree.SubElement(ds_depositor, DS + 'isContributor')
         if self.paper.is_owned_by(self.user, flexible=True):
@@ -217,7 +217,9 @@ class SWORDMETSProtocol(RepositoryProtocol):
             ds_embargo = etree.SubElement(ds_publication, DS + 'embargoDate')
             ds_embargo.text = embargo.isoformat()
 
-        if self.publication.publisher is not None:
+        romeo_id = self._get_sherpa_romeo_id()
+
+        if romeo_id is not None:
             ds_romeo = etree.SubElement(ds_publication, DS + 'romeoId')
             ds_romeo.text = str(self.publication.publisher.romeo_id)
 
@@ -358,11 +360,7 @@ class SWORDMETSMODSProtocol(SWORDMETSProtocol):
                 mods_doi.text = self.publication.doi
 
             # Publisher
-            publisher = self.publication.publisher
-            if self.publication.publisher is not None:
-                publisher = self.publication.publisher.name
-            else:
-                publisher = self.publication.publisher_name
+            publisher = self._get_publisher_name()
 
             if publisher is not None:
                 mods_publisher = etree.SubElement(mods_origin_info, MODS + 'publisher')

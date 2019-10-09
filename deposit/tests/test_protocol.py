@@ -90,6 +90,15 @@ class MetaTestProtocol():
         assert r.status_code == 200
 
 
+    def test_get_depositor_orcid(self, depositing_user):
+        """
+        Tested function returns the ORCID of the depositing user if available
+        """
+        self.protocol.user = depositing_user
+
+        assert self.protocol._get_depositor_orcid() == depositing_user.orcid
+
+
     def test_get_form(self, book_god_of_the_labyrinth, abstract_required, ddc, embargo, license_chooser):
         self.protocol.paper = book_god_of_the_labyrinth
         form = self.protocol.get_form()
@@ -138,6 +147,53 @@ class MetaTestProtocol():
         self.protocol.init_deposit(book_god_of_the_labyrinth ,user_isaac_newton)
         form = self.protocol.get_form()
         assert isinstance(form, Form)
+
+
+    @pytest.mark.parametrize('pub_name', [None, 'BMC'])
+    def test_get_publisher_name_from_oairecord(self, dummy_oairecord, pub_name):
+        """
+        Tests if the publisher name is returned or if not available: None
+        """
+        dummy_oairecord.publisher_name = pub_name
+        self.protocol.publication = dummy_oairecord
+
+        assert self.protocol._get_publisher_name() == pub_name
+
+
+    def test_get_publisher_name_from_publisher(self, dummy_oairecord, dummy_publisher):
+        """
+        Tests if the publisher name is returned from the publisher object
+        """
+        dummy_publisher.name = 'BMC'
+        dummy_publisher.save()
+        dummy_oairecord.publisher = dummy_publisher
+        dummy_oairecord.save()
+        self.protocol.publication = dummy_oairecord
+
+        assert self.protocol._get_publisher_name() == dummy_publisher.name
+
+
+    def test_get_sherpa_romeo_id(self, dummy_oairecord, dummy_publisher):
+        """
+        Tests if the SHERPA/RoMEO id is returned from the publisher object
+        """
+        romeo_id = 1
+        dummy_publisher.romeo_id = romeo_id
+        dummy_publisher.save()
+        dummy_oairecord.publisher = dummy_publisher
+        dummy_oairecord.save()
+        self.protocol.publication = dummy_oairecord
+
+        assert self.protocol._get_sherpa_romeo_id() == romeo_id
+
+
+    def test_get_sherpa_romeo_id_no_publisher(self, dummy_oairecord):
+        """
+        If no publisher for OaiRecord if found, expect ``None``.
+        """
+        self.protocol.publication = dummy_oairecord
+
+        assert self.protocol._get_sherpa_romeo_id() == None
 
 
     def test_init_deposit(self, user_isaac_newton, book_god_of_the_labyrinth):
