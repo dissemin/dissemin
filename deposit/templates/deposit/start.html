@@ -299,7 +299,7 @@ $(function() {
                             {% if repo == selected_repository %}checked="checked"{% endif %} />
                     </div>
                     <p>
-                        {{ repository.0.description }}
+                        {{ repository.0.description|safe }}
                     </p>
 
                     <div style="clear:left"></div>
