@@ -85,7 +85,12 @@ def get_metadata_form(request):
 
 @user_passes_test(is_authenticated)
 def start_view(request, pk):
-    paper = get_object_or_404(Paper, pk=pk)
+    paper = get_object_or_404(
+        Paper.objects.prefetch_related(
+            'oairecord_set'
+        ), 
+        pk=pk
+    )
     repositories = get_all_repositories_and_protocols(paper, request.user)
     repositories_protocol = {repo.id :proto for repo, proto in repositories}
     
