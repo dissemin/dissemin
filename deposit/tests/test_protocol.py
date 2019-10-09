@@ -134,7 +134,7 @@ class MetaTestProtocol():
         if embargo == 'required':
             data['embargo'] = '2019-10-10'
 
-        form = self.protocol.get_bound_form()
+        form = self.protocol.get_bound_form(data=data)
         if not form.is_valid():
             print(form.errors)
             raise AssertionError("Form not valid")

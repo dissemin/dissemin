@@ -80,9 +80,6 @@ class TestDarkArchiveProtocol(MetaTestProtocol):
         with open(f_name, 'w') as fout:
             json.dump(md, fout, indent=4)
 
-    @pytest.mark.xfail
-    def test_get_bound_form(self):
-        pass
 
     @pytest.mark.xfail
     def test_protocol_registered(self):
