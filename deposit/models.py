@@ -196,6 +196,9 @@ class Repository(models.Model, CachingMixin):
     class Meta:
         verbose_name_plural = 'Repositories'
 
+# Register Repository as to be translated.
+vinaigrette.register(Repository, ['name', 'description'])
+
 
 class LicenseChooserManager(models.Manager):
     """
