@@ -110,8 +110,9 @@ Examples
 ........
 
 This is our list of examples of MODS metadata created by Dissemin.
-This includes, that they are already contained in a suitable METS container.
+This means, that they are already contained in a suitable METS container.
 The list is sorted by publications types and covers all publication types that Dissemin uses.
+Additionally you download the example as :download:`bundle <examples/mods.zip>`.
 
 .. include:: examples/mods/examples_mods.rst
 

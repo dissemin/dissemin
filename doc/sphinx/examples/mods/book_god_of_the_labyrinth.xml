@@ -1,9 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
-<mets xmlns="http://www.loc.gov/METS/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<mets xmlns="http://www.loc.gov/METS/" xmlns:ds="https://dissem.in/deposit/terms/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mods="http://www.loc.gov/mods/v3">
+  <metsHdr>
+    <agent ROLE="CREATOR" TYPE="ORGANIZATION">
+      <name>Dissemin</name>
+    </agent>
+  </metsHdr>
   <dmdSec ID="d_dmd_1">
     <mdWrap MDTYPE="OTHER">
       <xmlData>
-        <mods:mods xmlns:mods="http://www.loc.gov/mods/v3" version="3.7">
+        <mods:mods version="3.7">
           <mods:abstract>A detective story in which the solution given is wrong, although this fact is not immediately obvious.</mods:abstract>
           <mods:originInfo>
             <mods:dateIssued encoding="w3cdtf">1933-01-01</mods:dateIssued>
@@ -11,8 +16,8 @@
           <mods:identifier type="doi">10.0123/quain-1933</mods:identifier>
           <mods:classification authority="ddc">820</mods:classification>
           <mods:name type="personal">
-            <mods:namePart type="family">quain</mods:namePart>
-            <mods:namePart type="given">herbert</mods:namePart>
+            <mods:namePart type="family">Quain</mods:namePart>
+            <mods:namePart type="given">Herbert</mods:namePart>
           </mods:name>
           <mods:titleInfo>
             <mods:title>The God of the Labyrinth</mods:title>
@@ -26,7 +31,7 @@
     <rightsMD ID="d_rightsmd_1">
       <mdWrap MDTYPE="OTHER">
         <xmlData>
-          <ds:dissemin xmlns:ds="https://dissem.in/deposit/terms/" version="1.0">
+          <ds:dissemin version="1.0">
             <ds:depositor>
               <ds:authentication>orcid</ds:authentication>
               <ds:firstName>Gottfried</ds:firstName>
