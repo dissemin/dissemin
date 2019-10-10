@@ -22,6 +22,8 @@
 import os
 import logging
 
+from datetime import date
+
 from crispy_forms.templatetags.crispy_forms_filters import as_crispy_form
 from crispy_forms.utils import render_crispy_form
 from deposit.declaration import get_declaration_pdf
@@ -252,6 +254,9 @@ def submitDeposit(request, pk):
     d.status = submitResult.status
     d.oairecord = submitResult.oairecord
     d.license = submitResult.license
+    d.pub_date = submitResult.embargo_date
+    if d.pub_date is None and d.status == 'published':
+        d.pub_date = date.today()
     d.save()
     paper.update_availability()
     paper.save()

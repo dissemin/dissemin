@@ -301,8 +301,10 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
         # Mocking requests
         responses.add(responses.POST, self.protocol.repository.endpoint, status=201)
 
-        # Monkeypatch _dd_license_to_deposit
+        # Monkeypatch _add_license_to_deposit
         monkeypatch.setattr(self.protocol, '_add_license_to_deposit_result', lambda x, y: x)
+        # Monkeypatch _add_embargo_date_to_deposit
+        monkeypatch.setattr(self.protocol, '_add_embargo_date_to_deposit_result', lambda x, y: x)
 
         assert isinstance(self.protocol.submit_deposit(blank_pdf_path, None), DepositResult)
         headers = responses.calls[0].request.headers

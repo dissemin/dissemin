@@ -50,7 +50,7 @@ class DepositResult(object):
     status should be one of DEPOSIT_STATUS_CHOICES
     """
 
-    def __init__(self, identifier=None, splash_url=None, pdf_url=None, logs=None, status='published', license = None, message=None):
+    def __init__(self, identifier=None, splash_url=None, pdf_url=None, logs=None, status='published', license = None, embargo_date=None, message=None):
         self.identifier = identifier
         self.splash_url = splash_url
         self.pdf_url = pdf_url
@@ -61,6 +61,7 @@ class DepositResult(object):
         self.message = message
         self.license = None
         self.oairecord = None
+        self.embargo_date = None
         self.additional_info = []
 
 class RepositoryProtocolMeta(type):
@@ -134,6 +135,20 @@ class RepositoryProtocol(object, metaclass = RepositoryProtocolMeta):
         self._logs = ''
         return True
 
+
+    @staticmethod
+    def _add_embargo_date_to_deposit_result(deposit_result, form):
+        """
+        If an embargo date does exist, add it to the deposit record
+        :param deposit_result: DepositResult
+        :param form: valid Form
+        :returns: DepositResult
+        """
+        deposit_result.embargo_date = form.cleaned_data.get('embargo', None)
+
+        return deposit_result
+
+
     @staticmethod
     def _add_license_to_deposit_result(deposit_result, form):
         """
@@ -146,6 +161,7 @@ class RepositoryProtocol(object, metaclass = RepositoryProtocolMeta):
         if lc:
             deposit_result.license = lc.license
         return deposit_result
+
 
     ### Deposit form ###
     # This section defines the form the user sees when

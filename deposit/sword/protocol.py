@@ -324,6 +324,9 @@ class SWORDMETSProtocol(RepositoryProtocol):
         # Set the license for the deposit result if delivered
         deposit_result = self._add_license_to_deposit_result(deposit_result, form)
 
+        # Set the embargo_date for the deposit result if delivered
+        deposit_result = self._add_embargo_date_to_deposit_result(deposit_result, form)
+
         return deposit_result
 
 

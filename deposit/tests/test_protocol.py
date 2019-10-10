@@ -49,6 +49,21 @@ class MetaTestProtocol():
     If you change one of the tested functions in your subclassed protocol, please override the test in the corresponding test class.
     """
 
+    @pytest.mark.parametrize('embargo', [None, date.today()])
+    def test_add_embargo_date_to_deposit_result(self, embargo):
+        """
+        If an embargo is set, add to deposit record, otherwise not
+        """
+        # We just set cleaned data directly
+        f = Form()
+        f.cleaned_data = dict()
+        if embargo is not None:
+            f.cleaned_data['embargo'] = embargo
+        dr = DepositResult(status='pending')
+        dr = self.protocol._add_embargo_date_to_deposit_result(dr, f)
+        assert dr.embargo_date == embargo
+
+
     def test_add_license_to_deposit_result(self, license_chooser):
         """
         If a license is selected, add to deposit record, otherwise not

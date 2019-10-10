@@ -29,8 +29,8 @@ class TestDepositResult():
             'message',
             'license',
             'oairecord',
+            'embargo_date',
             'additional_info',
         ]
-        assert len(d.__dict__) == len(attributes)
-        for attribute in attributes:
-            assert hasattr(d, attribute)
+
+        assert set(attributes) == set(d.__dict__)
