@@ -138,21 +138,25 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
         assert dr.status == 'pending'
  
 
-    def test_get_form(self, book_god_of_the_labyrinth, empty_user_preferences, abstract_required, ddc, license_chooser):
+    def test_get_form(self, book_god_of_the_labyrinth, empty_user_preferences, abstract_required, ddc, embargo, license_chooser):
         self.protocol.paper = book_god_of_the_labyrinth
         self.protocol.user = empty_user_preferences.user
         form = self.protocol.get_form()
-        assert 'abstract' in form.fields
+        assert form.fields['abstract'].required == abstract_required
         assert 'email' in form.fields
-        assert 'paper_id' in form.fields
         if ddc:
             assert 'ddc' in form.fields
         else:
             assert 'ddc' not in form.fields
+        if embargo == 'required':
+            assert form.fields['embargo'].required == True
+        elif embargo == 'optional':
+            assert form.fields['embargo'].required == False
         if license_chooser:
             assert 'license' in form.fields
         else:
             assert 'license' not in form.fields
+        assert 'paper_id' in form.fields
 
 
     def test_get_bound_form(self, book_god_of_the_labyrinth, empty_user_preferences, abstract_required, ddc, license_chooser):
