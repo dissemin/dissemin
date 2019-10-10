@@ -50,6 +50,13 @@ DEPOSIT_STATUS_CHOICES = [
    ('deleted', _('Deleted')), # deleted by the repository
    ]
 
+# Options for certain metadatafields of repository that are going to be a form field
+FORM_FIELD_CHOICES = [
+    ('none', 'None'), # Field is not going to be used
+    ('optional', 'Optional'), # Field is shown, but may not be filled in
+    ('required', 'Required'), # Field ist shown and must be filled in
+]
+
 
 class DDC(models.Model):
     """
@@ -156,6 +163,8 @@ class Repository(models.Model, CachingMixin):
     ddc = models.ManyToManyField(DDC, blank=True)
     #: Optionally choose a letter of declaration to finish deposition
     letter_declaration = models.CharField(max_length=256, blank=True)
+    #: Embargo
+    embargo = models.CharField(max_length=24, blank=False, choices=FORM_FIELD_CHOICES, default='none')
 
     def get_implementation(self):
         """
@@ -259,6 +268,7 @@ class DepositRecord(models.Model):
     additional_info = JSONField(null=True, blank=True)
     #: We store the license mainly for generation of letter of declaration
     license = models.ForeignKey(License, on_delete=models.SET_NULL, null=True, blank=True, default=None)
+    pub_date = models.DateField(null=True)
 
     file = models.ForeignKey(UploadedPDF, on_delete=models.CASCADE)
 
