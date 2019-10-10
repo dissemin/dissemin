@@ -43,8 +43,8 @@ logger = logging.getLogger('dissemin.' + __name__)
 DEPOSIT_STATUS_CHOICES = [
    ('failed', _('Failed')), # we failed to deposit the paper
    ('faked', _('Faked')), # the deposit was faked (for tests)
-   ('pending', _('Pending publication')), # the deposit has been
-    # submitted but is not publicly visible yet
+   ('pending', _('Pending publication')), # the deposit has been submitted but is not publicly visible yet
+   ('embargoed', _('Embargo')), # the publication will be published, but only after a certain date
    ('published', _('Published')), # the deposit is visible on the repo
    ('refused', _('Refused by the repository')),
    ('deleted', _('Deleted')), # deleted by the repository

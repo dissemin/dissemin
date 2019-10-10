@@ -521,6 +521,7 @@ class PaperView(SlugDetailView):
         # Pending deposits
         if not context['deposit']:
             context['pending_deposits'] = self.object.depositrecord_set.filter(status='pending')
+            context['embargoed_deposits'] = self.object.depositrecord_set.filter(status='embargoed')
 
         return context
 
