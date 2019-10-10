@@ -255,7 +255,7 @@ class DepositRecord(models.Model):
     oairecord = models.ForeignKey(OaiRecord, null=True, blank=True, on_delete=models.SET_NULL)
     date = models.DateTimeField(auto_now=True)  # deposit date
     upload_type = models.CharField(max_length=64,choices=UPLOAD_TYPE_CHOICES)
-    status = models.CharField(max_length=64,choices=DEPOSIT_STATUS_CHOICES)
+    status = models.CharField(max_length=64,choices=DEPOSIT_STATUS_CHOICES, default='failed')
     additional_info = JSONField(null=True, blank=True)
     #: We store the license mainly for generation of letter of declaration
     license = models.ForeignKey(License, on_delete=models.SET_NULL, null=True, blank=True, default=None)
