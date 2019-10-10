@@ -213,6 +213,11 @@ class SWORDMETSProtocol(RepositoryProtocol):
         ds_dissemin = etree.SubElement(ds_publication, DS + 'disseminId')
         ds_dissemin.text = str(self.paper.pk)
 
+        embargo = form.cleaned_data.get('embargo', None)
+        if embargo is not None:
+            ds_embargo = etree.SubElement(ds_publication, DS + 'embargoDate')
+            ds_embargo.text = embargo.isoformat()
+
         if self.publication.publisher is not None:
             ds_romeo = etree.SubElement(ds_publication, DS + 'romeoId')
             ds_romeo.text = str(self.publication.publisher.romeo_id)
