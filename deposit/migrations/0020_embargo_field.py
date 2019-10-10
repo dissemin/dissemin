@@ -23,7 +23,7 @@ def do_nothing(*args, **kwargs):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('deposit', '0018_letter_of_declaration'),
+        ('deposit', '0019_default_for_deposit_record_status'),
     ]
 
     operations = [
