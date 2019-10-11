@@ -17,7 +17,7 @@ from reportlab.pdfbase.ttfonts import TTFont
 
 from reportlab.pdfgen import canvas
 
-from dissemin.settings import BASE_DIR
+from django.conf import settings
 
 logger = logging.getLogger('dissemin.' + __name__)
 
@@ -52,12 +52,12 @@ def declaration_ulb_darmstadt(deposit_record, user):
 
     page_width, page_height = A4
     
-    font_path = os.path.join(BASE_DIR, 'deposit', 'declarations', 'fonts')
+    font_path = os.path.join(settings.BASE_DIR, 'deposit', 'declarations', 'fonts')
 
     pdfmetrics.registerFont(TTFont("Charter Regular", os.path.join(font_path, 'Charter-Regular.ttf')))
     pdfmetrics.registerFont(TTFont("Front Page Regular", os.path.join(font_path, 'FrontPage-Pro-Regular.ttf')))
     
-    logo_path = os.path.join(BASE_DIR, 'deposit', 'declarations', 'logos')
+    logo_path = os.path.join(settings.BASE_DIR, 'deposit', 'declarations', 'logos')
     tu_logo = os.path.join(logo_path, 'tud_logo.png')
     ulb_logo = os.path.join(logo_path, 'tud_ulb_logo.png')
 
