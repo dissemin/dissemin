@@ -19,10 +19,10 @@
 #
 
 
-import datetime
 import os
 import pytest
 
+from datetime import date
 from mock import patch
 
 from django.urls import reverse
@@ -81,6 +81,7 @@ class TestMiscPages(object):
             user=user_leibniz,
             repository=dummy_repository,
             status='published',
+            pub_date=date.today(),
             file=pdf,
         )
         check_page(200, 'index')
@@ -177,7 +178,7 @@ class TestPaperPages():
         p = Paper.get_or_create(
             '!@#$%^*()',
             [BareName.create('Jean', 'Saisrien')],
-            datetime.date(2016, 7, 2))
+            date(2016, 7, 2))
         p.visible = True # Force paper to be visible even if it an orphan
         p.save()
         assert p.slug == ''
