@@ -25,6 +25,7 @@ services:
   - postgresql
   - redis
   - elasticsearch
+  - docker
 
 env:
   global:
@@ -33,6 +34,7 @@ env:
       # Zenodo Sandbox API key
     - secure: "KjRrTKrNyhv1xVl2UBtJ/qH0uFGItvxw7/pGFfPrcwxD5YAB5daePDaIGe/tlVy+lrQi0D9x1CA8MB2vm+Lf4jrfO+3ZHCkmb4ecbumPV7DxEbgFsralBx65PRRVUiDW1Oy0RyigxXNNdtNLvTVr1PYrZYD407HZnP6LrJP0ONM="
     - PIP_DOWNLOAD_CACHE=$HOME/.pip-cache
+    - USE_VNU_SERVER='YES'
 
 before_install:
   # Install latest tidy-html5
@@ -47,6 +49,7 @@ before_install:
   - export PIP_USE_MIRRORS=true
   - echo "from .travis import *" > dissemin/settings/__init__.py
   - cp dissemin/settings/secret_template.py dissemin/settings/secret.py
+  - docker run -d -it --rm -p 8888:8888 validator/validator:latest
 
 install:
   - pip install setuptools --upgrade
