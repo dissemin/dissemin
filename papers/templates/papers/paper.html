@@ -134,15 +134,16 @@
             </div>
         {% endfor %}
         {% for deposit in embargoed_deposits %}
-            {% with repo_name=deposit.repository.name repo_url=deposit.repository.url pub_date=deposit.pub_date, splash_url=deposit.oairecord.splash_url %}
-            <div class="alert alert-info">
-                <p>
-                    {% blocktrans trimmed %}
-                        This paper has been deposited in <a class="alert-link" href="{{ repo_url }}">{{ repo_name }}</a>.
-                        The full text will be available at <a class="alert-link" href="{{ deposit_url }}">this address</a> from <strong>{{ pub_date|localize }}</strong> on due to an embargo.
-                    {% endblocktrans %}
-                </p>
-            </div>
+            {% with repo_name=deposit.repository.name repo_url=deposit.repository.url pub_date=deposit.pub_date splash_url=deposit.oairecord.splash_url %}
+                <div class="alert alert-info">
+                    <p>
+                        {% blocktrans trimmed %}
+                            This paper has been deposited in <a class="alert-link" href="{{ repo_url }}">{{ repo_name }}</a>.
+                            The full text will be available at <a class="alert-link" href="{{ deposit_url }}">this address</a> from <strong>{{ pub_date|localize }}</strong> on due to an embargo.
+                        {% endblocktrans %}
+                    </p>
+                </div>
+            {% endwith %}
         {% endfor %}
     {% endif %}
 
