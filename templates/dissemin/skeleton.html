@@ -56,12 +56,13 @@
 
                             <li><a href="{% url 'faq' %}">{% trans "FAQ" %}</a></li>
                             {% if request.user.is_authenticated %}
-                                <li><a href="{% url 'my-profile' %}">{% trans "My profile" %}</a></li>
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span>&nbsp; {{ request.user|fullname }} <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="{% url "edit-global-preferences" %}">{% trans "Preferences" %}</a></li>
                                         <li><a href="{% url "list_deposits" %}">{% trans "My deposits" %}</a></li>
+                                        <li><a href="{% url 'my-profile' %}">{% trans "My profile" %}</a></li>
+                                        <li><a href="{% url 'my-todolist' %}">{% trans "My to-do list" %}</a></li>
                                         <li><a href="#" onclick="$.ajax({ url: 'https://{{ ORCID_BASE_DOMAIN }}/userStatus.json?logUserOut=true', dataType: 'jsonp',
                 success: function(result,status,xhr) {
                     window.location.href = '{% url "account_logout" %}';
