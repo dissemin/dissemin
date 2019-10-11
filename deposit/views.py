@@ -88,7 +88,7 @@ def start_view(request, pk):
     paper = get_object_or_404(
         Paper.objects.prefetch_related(
             'oairecord_set'
-        ), 
+        ),
         pk=pk
     )
     repositories = get_all_repositories_and_protocols(paper, request.user)
