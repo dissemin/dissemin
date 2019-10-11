@@ -9,7 +9,7 @@ class TestChangeEmbargoedToPublished:
     """
     Class that groups tests for change_embargoed_to_published
     """
-    
+
     @pytest.mark.parametrize('status,pub_date,expected', [('embargoed', date.today(), 'published'), ('embargoed', date.today() - timedelta(days=1), 'published'), ('embargoed', date.today() + timedelta(days=1), 'embargoed')])
     def test_changed_embargoed_to_published(self,  dummy_deposit_record, status, pub_date, expected):
         """
@@ -24,5 +24,3 @@ class TestChangeEmbargoedToPublished:
         dummy_deposit_record.refresh_from_db()
 
         assert dummy_deposit_record.status == expected
-
-
