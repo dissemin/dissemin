@@ -12,12 +12,12 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-09-30 15:27+0200\n"
-"PO-Revision-Date: 2019-10-03 17:34:51+0000\n"
+"PO-Revision-Date: 2019-10-14 15:19:23+0000\n"
 "Language: lb\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-POT-Import-Date: 2019-10-01 14:19:16+0000\n"
-"X-Generator: MediaWiki 1.34.0-alpha; Translate 2019-04-24\n"
+"X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: autocomplete/views.py:81
@@ -1019,27 +1019,24 @@ msgid "You help universities abandon overpriced journal subscriptions."
 msgstr ""
 
 #: papers/templates/papers/index.html:78
-#, fuzzy
 msgid "Open Repositories"
-msgstr "Dossier"
+msgstr "Zougänglech Dossieren"
 
 #: papers/templates/papers/index.html:80
 msgid "Uploading your papers on your own webpage is not enough. Your papers are easier to find and more secure in the long-term when uploaded to arXiv, Zenodo or institutional repositories."
 msgstr ""
 
 #: papers/templates/papers/index.html:94
-#, fuzzy
 msgid "Latest Uploads"
-msgstr "Eroplueden"
+msgstr "Rezent eropgelueden"
 
 #: papers/templates/papers/index.html:96
 msgid "Researchers use Dissemin to make sure all their publications can be accessed freely. Have a look at their latest uploads:"
 msgstr ""
 
 #: papers/templates/papers/index.html:118
-#, fuzzy
 msgid "Access statistics"
-msgstr "Methoden a Statistiken"
+msgstr "Zougrëffs-Statistiken"
 
 #: papers/templates/papers/index.html:120
 msgid "Dissemin collects its data from various sources and evaluates if a given publication is freely available."

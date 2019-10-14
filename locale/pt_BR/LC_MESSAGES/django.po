@@ -13,12 +13,12 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-09-30 15:27+0200\n"
-"PO-Revision-Date: 2019-10-03 17:34:55+0000\n"
+"PO-Revision-Date: 2019-10-14 15:19:31+0000\n"
 "Language: pt_br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-POT-Import-Date: 2019-10-01 14:19:16+0000\n"
-"X-Generator: MediaWiki 1.34.0-alpha; Translate 2019-04-24\n"
+"X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: autocomplete/views.py:81
@@ -592,11 +592,11 @@ msgstr "O acesso a este recurso não é permitido."
 
 #: deposit/views.py:283
 msgid "Declaration {}.pdf"
-msgstr ""
+msgstr "Declaração {}.pdf"
 
 #: deposit/views.py:286
 msgid "No pdf found for dr {}"
-msgstr ""
+msgstr "Nenhum pdf encontrado para dr {}"
 
 #: deposit/zenodo/protocol.py:87
 #, fuzzy
@@ -1002,9 +1002,8 @@ msgid "Green Open Access"
 msgstr "Acesso Aberto Verde"
 
 #: papers/templates/papers/index.html:47
-#, fuzzy
 msgid "Many researchers do not use their right to make their papers freely available online, in addition to the paywalled version of traditional publishers."
-msgstr "Muitos pesquisadores não usam seu direito de disponibilizar gratuitamente seus papéis em linha, além da versão paywalled oferecida pelos editores tradicionais."
+msgstr "Muitos pesquisadores não usam seu direito de disponibilizar seus artigos gratuitamente on-line, além da versão paga dos editores tradicionais."
 
 #: papers/templates/papers/index.html:52
 msgid "Uploading your papers to open repositories has significant advantages:"
@@ -1047,9 +1046,8 @@ msgid "Dissemin for Libraries"
 msgstr "Dissemin para bibliotecas"
 
 #: papers/templates/papers/index.html:147
-#, fuzzy
 msgid "As a library you can use Dissemin to find publications of your researchers that are behind paywalls. Dissemin can upload publications directly into your institutional repository and tries to support your local worklfow as much as possible."
-msgstr "Como biblioteca, você pode usar o Dissemin para encontrar publicações de seus pesquisadores que estão por trás de um paywall. O Dissemin pode fazer upload de publicações diretamente no seu repositório institucional e tentar dar suporte ao fluxo de trabalho local o máximo possível."
+msgstr "Como biblioteca, você pode usar o Dissemin para encontrar publicações de seus pesquisadores que estão por trás de paywalls. O Dissemin pode fazer upload de publicações diretamente no seu repositório institucional e tentar dar suporte ao fluxo de trabalho local o máximo possível."
 
 #: papers/templates/papers/index.html:152
 msgid "You can advertise Dissemin to your researchers and show them how easy it is to liberate their publications!"
@@ -1060,9 +1058,8 @@ msgid "Partners"
 msgstr "Parceiros"
 
 #: papers/templates/papers/index.html:168
-#, fuzzy
 msgid "Dissemin would not be possible without the support of our partners:"
-msgstr "Dissemin não seria possível sem o apoio de nossa rede de parceiros:"
+msgstr "Dissemin não seria possível sem o apoio de nossos parceiros:"
 
 #: papers/templates/papers/institutions.html:25
 msgid "Institutions"
@@ -1106,12 +1103,12 @@ msgstr "Depósito realizado!"
 #: papers/templates/papers/paper.html:94
 #, python-format
 msgid "<p>This paper was successfully deposited and is now freely available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address.</a></p>"
-msgstr ""
+msgstr "<p>Este documento foi depositado com sucesso e agora está disponível gratuitamente <a class=\"alert-link\" href=\"%(splash_url)s\">nesse endereço.</a></p>"
 
 #: papers/templates/papers/paper.html:101
 #: papers/templates/papers/paper.html:125
 msgid "Deposit almost accomplished!"
-msgstr ""
+msgstr "Depósito quase realizado!"
 
 #: papers/templates/papers/paper.html:103
 #, python-format
@@ -1120,7 +1117,7 @@ msgstr ""
 
 #: papers/templates/papers/paper.html:110
 msgid "Letter of Declaration needed!"
-msgstr ""
+msgstr "Carta de declaração necessária!"
 
 #: papers/templates/papers/paper.html:113
 #, python-format

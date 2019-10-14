@@ -19,12 +19,12 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-09-30 15:27+0200\n"
-"PO-Revision-Date: 2019-10-07 17:42:38+0000\n"
+"PO-Revision-Date: 2019-10-14 15:19:16+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-POT-Import-Date: 2019-10-01 14:19:16+0000\n"
-"X-Generator: MediaWiki 1.34.0-alpha; Translate 2019-04-24\n"
+"X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: autocomplete/views.py:81
@@ -33,7 +33,7 @@ msgstr "Bestehende Einrichtungen"
 
 #: autocomplete/views.py:85
 msgid "Unverified institutions"
-msgstr "nicht geprüfte Einrichtungen"
+msgstr "Nicht geprüfte Einrichtungen"
 
 #: autocomplete/views.py:89
 msgid "Obsolete institutions"
@@ -41,7 +41,7 @@ msgstr "Veraltete Einrichtungen"
 
 #: deposit/forms.py:85
 msgid "Upload type"
-msgstr "Art des Hochladens"
+msgstr "Hochladetyp"
 
 #: deposit/forms.py:86 deposit/templates/deposit/deposits.html:32
 msgid "Repository"
@@ -437,18 +437,16 @@ msgid "E-mail"
 msgstr "E-Mail"
 
 #: deposit/sword/protocol.py:58
-#, fuzzy
 msgid "The repository {} returned invalid XML"
-msgstr "Das Repositorium ist derzeit nicht in Betrieb."
+msgstr "Das Repositorium {} antwortete mit invalidem XML"
 
 #: deposit/sword/protocol.py:281
 msgid "Username or password not provided for this repository. Please contact the Dissemin team."
 msgstr "Anmeldename oder Passwort sind für dieses Repositorium nicht hinterlegt. Bitte kontaktiere das Dissemin Team."
 
 #: deposit/sword/protocol.py:306
-#, fuzzy
 msgid "Unable to deposit to repository"
-msgstr "Erstellung des Preprints nicht möglich."
+msgstr "Hochladen in Repositorium ist fehlgeschlagen"
 
 #: deposit/templates/deposit/deposits.html:10
 #: deposit/templates/deposit/deposits.html:14
@@ -574,7 +572,7 @@ msgstr "Das Repositorium ist derzeit nicht in Betrieb."
 
 #: deposit/views.py:79
 msgid "This repository is not available for this paper."
-msgstr "Dieses Repositorium ist für diese Publikation nicht verfügbar."
+msgstr "Das Repositorium ist für diese Publikation nicht verfügbar."
 
 #: deposit/views.py:153
 msgid "This repository could not be found."
@@ -701,9 +699,8 @@ msgid "Remove from to-do list"
 msgstr "Von Merkliste entfernen"
 
 #: papers/ajax.py:237
-#, fuzzy
 msgid "Marking failed"
-msgstr "Beanspruchung fehlgeschlagen!"
+msgstr "Merken fehlgeschlagen"
 
 #: papers/ajax.py:266 papers/templates/papers/publiListItem.html:59
 #: publishers/templates/publishers/detailsPolicy.html:33
@@ -711,9 +708,8 @@ msgid "Mark for later upload"
 msgstr "Für späteren Upload merken"
 
 #: papers/ajax.py:267
-#, fuzzy
 msgid "Removing failed"
-msgstr "Beanspruchung fehlgeschlagen!"
+msgstr "Entfernen fehlgeschlagen"
 
 #: papers/baremodels.py:58
 msgid "Journal article"
@@ -1034,18 +1030,16 @@ msgid "Uploading your papers on your own webpage is not enough. Your papers are 
 msgstr "Das Hochladen Deiner Publikationen auf Deiner eigenen Webseite ist nicht ausreichend. Solche Kopien sind weniger stabil und schwerer zu finden als Dokumente in gut indizierten Repositorien wie arXiv, Zenodo oder institutionellen Repositorien."
 
 #: papers/templates/papers/index.html:94
-#, fuzzy
 msgid "Latest Uploads"
-msgstr "Hochladen"
+msgstr "Vor kurzem Hochgeladen"
 
 #: papers/templates/papers/index.html:96
 msgid "Researchers use Dissemin to make sure all their publications can be accessed freely. Have a look at their latest uploads:"
 msgstr "Wissenschaftler_innen nutzen Dissemin um ihre Publikationen frei verfügbar zu machen. Hier sind die letzten Uploads:"
 
 #: papers/templates/papers/index.html:118
-#, fuzzy
 msgid "Access statistics"
-msgstr "Methoden und Statistik"
+msgstr "Statistik"
 
 #: papers/templates/papers/index.html:120
 msgid "Dissemin collects its data from various sources and evaluates if a given publication is freely available."
@@ -1061,7 +1055,7 @@ msgstr "Als Bibliothek könnt ihr Dissemin einsetzen, um Publikationen der Wisse
 
 #: papers/templates/papers/index.html:152
 msgid "You can advertise Dissemin to your researchers and show them how easy it is to liberate their publications!"
-msgstr "Ihr könnt Dissemin bei den Wissenschaftlern eurer Institution bewerben und ihn zeigen, wie einfach sie ihre Publikationen frei verfügbar machen können."
+msgstr "Ihr könnt Dissemin bei den Wissenschaftlern eurer Institution bewerben und ihnen zeigen, wie einfach sie ihre Publikationen frei verfügbar machen können."
 
 #: papers/templates/papers/index.html:166
 msgid "Partners"

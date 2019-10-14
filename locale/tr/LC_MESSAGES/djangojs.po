@@ -1,7 +1,8 @@
-# Translation of Dissemin papers to Polish (polski)
+# Translation of Dissemin papers to Turkish (Türkçe)
 # Exported from translatewiki.net
 #
-# Author: DeRudySoulStorm
+# Author: Grkn gll
+# Author: Mirzali
 # --
 # This file is part of the Dissemin Project
 # This file is distributed under the same license as the Dissemin package.
@@ -9,44 +10,41 @@
 msgid ""
 msgstr ""
 ""
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-30 15:27+0200\n"
-"PO-Revision-Date: 2019-10-14 15:19:29+0000\n"
-"Language: pl\n"
+"PO-Revision-Date: 2019-10-14 15:19:35+0000\n"
+"X-POT-Import-Date: 2019-10-01 08:31:19+0000\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-10-01 08:31:19+0000\n"
+"Language: tr\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
-"Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ( (n%10 >= 2 && n%10 <= 4 && (n%100 < 10 || n%100 >= 20)) ? 1 : 2 );\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: papers/static/js/dissemin.js:25
 msgid "Adding to todolist"
-msgstr ""
+msgstr "Yapılacaklar listesine ekleniyor"
 
 #: papers/static/js/dissemin.js:29
 msgid "Removing from todolist"
-msgstr ""
+msgstr "Yapılacaklar listesinden kaldırılıyor"
 
 #: papers/static/papers/refresh.js:63
 msgid "Do not show this message anymore"
-msgstr "Nie pokazuj ponownie tego komunikatu"
+msgstr "Bu mesajı artık gösterme"
 
 #: papers/static/papers/refresh.js:94
 msgid "No author"
-msgstr "Brak autorów"
+msgstr "Yazar yok"
 
 #: papers/static/papers/refresh.js:96
 msgid "No title"
-msgstr "Brak tytułu"
+msgstr "Başlık yok"
 
 #: papers/static/papers/refresh.js:98
 msgid "Invalid publication date"
-msgstr "Nieprawidłowa data publikacji"
+msgstr "Geçersiz yayın tarihi"
 
 #: papers/static/papers/refresh.js:100
-#, fuzzy
 msgid "No publication date"
-msgstr "Nieprawidłowa data publikacji"
+msgstr "Yayın tarihi yok"
 
 #: papers/static/papers/refresh.js:102
 msgid "Paper is invalid"
@@ -56,8 +54,6 @@ msgstr ""
 msgid "We ignored %(count)s paper from your ORCiD profile."
 msgid_plural "We ignored %(count)s papers from your ORCiD profile."
 msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
 
 #: papers/static/papers/refresh.js:147
 msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
@@ -69,17 +65,15 @@ msgstr ""
 
 #: papers/static/papers/refresh.js:167 papers/static/papers/refresh.js:195
 msgid "Show more information"
-msgstr "Pokaż więcej informacji"
+msgstr "Daha fazla bilgi göster"
 
 #: papers/static/papers/refresh.js:192
 msgid "Show less information"
-msgstr "Pokaż mniej informacji"
+msgstr "Daha az bilgi göster"
 
 #: papers/static/papers/refresh.js:206
 #, javascript-format
 msgid "%s paper found"
 msgid_plural "%s papers found"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%s kağıt bulundu"
 

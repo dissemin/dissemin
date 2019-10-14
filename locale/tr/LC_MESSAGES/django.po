@@ -3,6 +3,7 @@
 #
 # Author: BaRaN6161 TURK
 # Author: Chansey
+# Author: Grkn gll
 # Author: Incelemeelemani
 # Author: Suvarioglu
 # Author: TmY e12
@@ -16,12 +17,12 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-09-30 15:27+0200\n"
-"PO-Revision-Date: 2019-10-03 17:34:57+0000\n"
+"PO-Revision-Date: 2019-10-14 15:19:35+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-POT-Import-Date: 2019-10-01 14:19:16+0000\n"
-"X-Generator: MediaWiki 1.34.0-alpha; Translate 2019-04-24\n"
+"X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: autocomplete/views.py:81
@@ -172,7 +173,7 @@ msgstr "İşletme yönetimi"
 
 #: deposit/hal/metadata.py:58
 msgid "History, Philosophy and Sociology of Sciences"
-msgstr "Tarih, Felsefe ve Bilimler Sosyolojisi"
+msgstr "Bilim Tarihi, Felsefesi ve Sosyolojisi"
 
 #: deposit/hal/metadata.py:59 vinaigrette-deleteme.py:91
 msgid "History"
@@ -1027,7 +1028,7 @@ msgstr ""
 
 #: papers/templates/papers/index.html:94
 msgid "Latest Uploads"
-msgstr "YükleEn Son Yüklenenler"
+msgstr "En Son Yüklenenler"
 
 #: papers/templates/papers/index.html:96
 msgid "Researchers use Dissemin to make sure all their publications can be accessed freely. Have a look at their latest uploads:"
@@ -2210,9 +2211,8 @@ msgid "Toggle navigation"
 msgstr ""
 
 #: templates/dissemin/skeleton.html:34
-#, fuzzy
 msgid "Logo"
-msgstr "Çıkış"
+msgstr "Logo"
 
 #: templates/dissemin/skeleton.html:43 vinaigrette-deleteme.py:41
 msgid "Language"
@@ -2399,7 +2399,7 @@ msgstr ""
 
 #: upload/views.py:187 upload/views.py:191
 msgid "Invalid URL (server timed out)."
-msgstr "Geçersiz URL (zaman aşımına uğradı)."
+msgstr "Geçersiz URL (sunucu zaman aşımına uğradı)."
 
 #: upload/views.py:189 upload/views.py:193
 msgid "Invalid URL."
@@ -2425,7 +2425,7 @@ msgstr "Ansiklopediler ve gerçekler kitapları"
 
 #: vinaigrette-deleteme.py:6
 msgid "Magazines, journals & serials"
-msgstr "Magazinler, dergiler ve diziler"
+msgstr "Dergiler, gazeteler ve diziler"
 
 #: vinaigrette-deleteme.py:7
 msgid "Associations, organizations & museums"
@@ -2461,9 +2461,8 @@ msgid "Philosophical schools of thought"
 msgstr "Felsefi düşünce okulları"
 
 #: vinaigrette-deleteme.py:17
-#, fuzzy
 msgid "Philosophical logic"
-msgstr "Felsefe"
+msgstr "Felsefi mantık"
 
 #: vinaigrette-deleteme.py:18
 msgid "Ethics"
@@ -2515,18 +2514,16 @@ msgid "Christian denominations"
 msgstr "Hristiyan mezhepleri"
 
 #: vinaigrette-deleteme.py:30
-#, fuzzy
 msgid "Other religions"
-msgstr "Dinler"
+msgstr "Diğer dinler"
 
 #: vinaigrette-deleteme.py:31
-#, fuzzy
 msgid "Social sciences, sociology & anthropology"
-msgstr "Sosyal Antropoloji ve Etnoloji"
+msgstr "Sosyal bilimler, sosyoloji ve antropoloji"
 
 #: vinaigrette-deleteme.py:34
 msgid "Economics"
-msgstr "Ekonomikler"
+msgstr "Ekonomi"
 
 #: vinaigrette-deleteme.py:36
 msgid "Public administration & military science"
@@ -2558,7 +2555,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:46
 msgid "Italian, Romanian & related languages"
-msgstr "İtalyanca, Romence ve ilgili diller"
+msgstr "İtalyanca, Rumence ve ilgili diller"
 
 #: vinaigrette-deleteme.py:47
 msgid "Spanish, Portuguese, Galician"
@@ -2594,9 +2591,8 @@ msgid "Fossils & prehistoric life"
 msgstr ""
 
 #: vinaigrette-deleteme.py:58
-#, fuzzy
 msgid "Biology"
-msgstr "Sosyoloji"
+msgstr "Biyoloji"
 
 #: vinaigrette-deleteme.py:59
 msgid "Plants (Botany)"
@@ -2607,18 +2603,16 @@ msgid "Animals (Zoology)"
 msgstr "Hayvanlar (Zooloji)"
 
 #: vinaigrette-deleteme.py:61
-#, fuzzy
 msgid "Technology"
-msgstr "Psikoloji"
+msgstr "Teknoloji"
 
 #: vinaigrette-deleteme.py:62
 msgid "Medicine & health"
 msgstr ""
 
 #: vinaigrette-deleteme.py:64
-#, fuzzy
 msgid "Agriculture"
-msgstr "Mimari"
+msgstr "Tarım"
 
 #: vinaigrette-deleteme.py:65
 msgid "Home & family management"
@@ -2629,9 +2623,8 @@ msgid "Management & public relations"
 msgstr "Yönetim ve halkla ilişkiler"
 
 #: vinaigrette-deleteme.py:67
-#, fuzzy
 msgid "Chemical engineering"
-msgstr "Mühendislik"
+msgstr "Kimya Mühendisliği"
 
 #: vinaigrette-deleteme.py:68
 msgid "Manufacturing"
@@ -2671,7 +2664,7 @@ msgstr "Baskı resim ve baskılar"
 
 #: vinaigrette-deleteme.py:78
 msgid "Photography, computer art, film, video"
-msgstr "Fotoğraf, bilgisayar sanatı, film, video"
+msgstr "Fotoğrafçılık, bilgisayar sanatı, film, video"
 
 #: vinaigrette-deleteme.py:79
 msgid "Music"
@@ -2679,7 +2672,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:80
 msgid "Sports, games & entertainment"
-msgstr "Spor, oyunlar ve eğlence"
+msgstr "Sporlar, oyunlar ve eğlence"
 
 #: vinaigrette-deleteme.py:81
 msgid "Literature, rhetoric & criticism"
@@ -2718,9 +2711,8 @@ msgid "Classical & modern Greek literatures"
 msgstr "Klasik ve modern Yunan edebiyatları"
 
 #: vinaigrette-deleteme.py:90
-#, fuzzy
 msgid "Other literatures"
-msgstr "Edebiyat"
+msgstr "Diğer edebiyatlar"
 
 #: vinaigrette-deleteme.py:92
 msgid "Geography & travel"
@@ -2728,11 +2720,11 @@ msgstr "Coğrafya & seyahat"
 
 #: vinaigrette-deleteme.py:93
 msgid "Biography & genealogy"
-msgstr "Biyografi ve şecere"
+msgstr "Biyografi ve soybilim"
 
 #: vinaigrette-deleteme.py:94
 msgid "History of ancient world (to ca. 499)"
-msgstr "Antik dünyanın tarihi (yaklaşık 499)"
+msgstr "Antik dünya tarihi (yaklaşık 499)"
 
 #: vinaigrette-deleteme.py:95
 msgid "History of Europe"
@@ -2744,7 +2736,7 @@ msgstr "Asya'nın Tarihi"
 
 #: vinaigrette-deleteme.py:97
 msgid "History of Africa"
-msgstr "Afrika tarihi"
+msgstr "Afrika'nın Tarihi"
 
 #: vinaigrette-deleteme.py:98
 msgid "History of North America"
