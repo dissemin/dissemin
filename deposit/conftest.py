@@ -7,8 +7,11 @@ from deposit.models import DDC
 from deposit.models import License
 from deposit.models import LicenseChooser
 from deposit.models import UserPreferences
+from papers.models import OaiRecord
 from papers.models import Paper
 from papers.models import Researcher
+from publishers.models import Journal
+from publishers.models import Publisher
 
 
 @pytest.fixture(params=[True, False])
@@ -69,6 +72,54 @@ def dissemin_xsd_1_0():
     testdir = os.path.dirname(os.path.abspath(__file__))
     dissemin_xsd = etree.parse(os.path.join(testdir, 'schema','dissemin_v1.0.xsd'))
     return etree.XMLSchema(dissemin_xsd)
+
+
+@pytest.fixture
+def dummy_journal(dummy_publisher):
+    """
+    Empty Journal with FK to Publisher
+    """
+    j = Journal.objects.create(
+        publisher=dummy_publisher,
+    )
+
+    return j
+
+
+@pytest.fixture
+def dummy_oairecord(dummy_paper, dummy_oaisource):
+    """
+    Empty OaiRecord with FK to empty_paper and empty OaiSource
+    """
+    o = OaiRecord.objects.create(
+        source=dummy_oaisource,
+        about=dummy_paper,
+        identifier='dummy',
+    )
+
+    return o
+
+
+@pytest.fixture
+def dummy_paper():
+    """
+    Just an empty paper
+    """
+    p =  Paper.objects.create(
+        pubdate='2019-10-08',
+    )
+
+    return p
+
+
+@pytest.fixture
+def dummy_publisher():
+    """
+    Empty Publisher
+    """
+    p = Publisher.objects.create()
+
+    return p
 
 
 @pytest.fixture

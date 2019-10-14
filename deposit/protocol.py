@@ -25,6 +25,8 @@ import traceback
 import logging
 
 from django.conf import settings
+from django.db.models import Q
+from django.utils.functional import cached_property
 from django.utils.translation import ugettext as _
 from papers.baremodels import BareOaiRecord
 from deposit.forms import BaseMetadataForm
@@ -121,6 +123,44 @@ class RepositoryProtocol(object, metaclass = RepositoryProtocolMeta):
         """
         return type(self).__name__
 
+    @cached_property
+    def publication(self):
+        """
+        Sets publication / oairecord for the paper with highest prority.
+        """
+        # Fetch the first OaiRecord with highest OaiSource priority and journal as well as publisher
+        publication = self.paper.oairecord_set.filter(
+                journal__isnull=False,
+                publisher__isnull=False
+            ).select_related(
+                'journal',
+                'publisher'
+            ).order_by(
+                '-priority'
+            ).first()
+
+        # If not available, fetch the first OaiRecord with highest OaiSource priority and journal_title as well as publisher_name
+        if publication is None:
+            publication = self.paper.oairecord_set.exclude(
+                    Q(journal_title='') | Q(publisher_name='')
+                ).select_related(
+                    'journal',
+                    'publisher'
+                ).order_by(
+                    '-priority'
+                ).first()
+
+        # If none is available, take the first one ordered by priority
+        if publication is None:
+           publication = self.paper.oairecord_set.select_related(
+                    'journal',
+                    'publisher'
+                ).order_by(
+                    '-priority'
+                ).first()
+
+        return publication
+
     def init_deposit(self, paper, user):
         """
         Called when a user starts considering depositing a paper to a repository.
@@ -146,6 +186,7 @@ class RepositoryProtocol(object, metaclass = RepositoryProtocolMeta):
         if lc:
             deposit_result.license = lc.license
         return deposit_result
+
 
     ### Deposit form ###
     # This section defines the form the user sees when
