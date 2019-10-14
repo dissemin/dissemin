@@ -14,9 +14,10 @@ for tests, and where Django's settings are located.
 Some tests rely on remote services. Some of them require API keys, they will fetch them
 from the following environment variables (or be skipped if these environment variables are
 not defined):
+
 * ``ROMEO_API_KEY`` 
-* ``ZENODO_SANDBOX_API_KEY`` required for tests of the Zenodo interface. This can be obtained
-  by creating an account on sandbox.zenodo.org and creating a "Personal Access Token" from there.
+* ``ZENODO_SANDBOX_API_KEY`` required for tests of the Zenodo interface.
+  This can be obtained by creating an account on sandbox.zenodo.org and creating a "Personal Access Token" from there.
 
 Fixtures
 --------
@@ -38,3 +39,24 @@ Mocking
 -------
 
 Currently we partially use mocking. If you write any new test, please use a proper mocking.
+
+
+Other
+-----
+
+HTML-Validation
+~~~~~~~~~~~~~~~
+
+Dissemin hast test for HTML validation. 
+Usually this validation is done for the English language, but we check for all available languages on Tuesday with Travis CI.
+For this we use the Nu Markup Checker (VNU).
+There are two possibilities to have the HTML checked:
+
+1. Using ``html5validator``-package
+2. Using server validation
+
+Per default we use the ``html5validator``, but it uses ``subprocess`` which tends to be slow for unknown reasons.
+(This really matters only if there are a lot of HTML validation tests, which is for standard development not the case.)
+To use this, you have to do nothing.
+
+To use the server validation, make sure you have a vnu-server running at ``localhost:8888`` and set the ``SHELL``-Variable ``USE_VNU_SERVER``.
