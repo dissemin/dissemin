@@ -37,7 +37,7 @@ MODS = "{%s}" % MODS_NAMESPACE
 XLINK = "{%s}" % XLINK_NAMESPACE
 
 NSMAP = {
-    None : METS_NAMESPACE,
+    'mets' : METS_NAMESPACE,
     'ds' : DISSEMIN_NAMESPACE,
     'xlink' : XLINK_NAMESPACE,
     'xsi' : XSI_NAMESPACE
