@@ -1,13 +1,13 @@
 <?xml version='1.0' encoding='utf-8'?>
-<mets xmlns="http://www.loc.gov/METS/" xmlns:ds="https://dissem.in/deposit/terms/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mods="http://www.loc.gov/mods/v3">
-  <metsHdr>
-    <agent ROLE="CREATOR" TYPE="ORGANIZATION">
-      <name>Dissemin</name>
-    </agent>
-  </metsHdr>
-  <dmdSec ID="d_dmd_1">
-    <mdWrap MDTYPE="OTHER">
-      <xmlData>
+<mets:mets xmlns:mets="http://www.loc.gov/METS/" xmlns:ds="https://dissem.in/deposit/terms/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mods="http://www.loc.gov/mods/v3">
+  <mets:metsHdr>
+    <mets:agent ROLE="CREATOR" TYPE="ORGANIZATION">
+      <mets:name>Dissemin</mets:name>
+    </mets:agent>
+  </mets:metsHdr>
+  <mets:dmdSec ID="d_dmd_1">
+    <mets:mdWrap MDTYPE="OTHER">
+      <mets:xmlData>
         <mods:mods version="3.7">
           <mods:relatedItem>
             <mods:titleInfo>
@@ -41,13 +41,13 @@
           </mods:titleInfo>
           <mods:genre>proceedings-article</mods:genre>
         </mods:mods>
-      </xmlData>
-    </mdWrap>
-  </dmdSec>
-  <amdSec ID="d_amd_1">
-    <rightsMD ID="d_rightsmd_1">
-      <mdWrap MDTYPE="OTHER">
-        <xmlData>
+      </mets:xmlData>
+    </mets:mdWrap>
+  </mets:dmdSec>
+  <mets:amdSec ID="d_amd_1">
+    <mets:rightsMD ID="d_rightsmd_1">
+      <mets:mdWrap MDTYPE="OTHER">
+        <mets:xmlData>
           <ds:dissemin version="1.0">
             <ds:depositor>
               <ds:authentication>orcid</ds:authentication>
@@ -66,22 +66,22 @@
               <ds:disseminId>15</ds:disseminId>
             </ds:publication>
           </ds:dissemin>
-        </xmlData>
-      </mdWrap>
-    </rightsMD>
-  </amdSec>
-  <fileSec>
-    <fileGrp>
-      <file ID="d_file_1">
-        <FLocat xlink:href="document.pdf" LOCTYPE="URL"/>
-      </file>
-    </fileGrp>
-  </fileSec>
-  <structMap>
-    <div DMDID="d_dmd_1">
-      <div>
-        <fptr FILEID="d_file_1"/>
-      </div>
-    </div>
-  </structMap>
-</mets>
+        </mets:xmlData>
+      </mets:mdWrap>
+    </mets:rightsMD>
+  </mets:amdSec>
+  <mets:fileSec>
+    <mets:fileGrp>
+      <mets:file ID="d_file_1">
+        <mets:FLocat xlink:href="document.pdf" LOCTYPE="URL"/>
+      </mets:file>
+    </mets:fileGrp>
+  </mets:fileSec>
+  <mets:structMap>
+    <mets:div DMDID="d_dmd_1">
+      <mets:div>
+        <mets:fptr FILEID="d_file_1"/>
+      </mets:div>
+    </mets:div>
+  </mets:structMap>
+</mets:mets>
