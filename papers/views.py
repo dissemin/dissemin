@@ -20,7 +20,6 @@
 
 
 import json
-from statistics.models import COMBINED_STATUS_CHOICES
 from statistics.models import BareAccessStatistics
 
 from allauth.exceptions import ImmediateHttpResponse
@@ -51,7 +50,6 @@ from papers.doi import to_doi
 from papers.doi import doi_to_url
 from papers.errors import MetadataSourceException
 from papers.forms import PaperForm
-from papers.forms import FrontPageSearchForm
 from papers.models import Department
 from papers.models import Institution
 from papers.models import Paper
@@ -114,19 +112,6 @@ user_logged_in.connect(complete_researcher_profile_on_orcid_login)
 
 # Number of papers shown on a search results page
 NB_RESULTS_PER_PAGE = 20
-
-
-def index(request):
-    """
-    View for the home page
-    """
-    context = {
-        'search_form': FrontPageSearchForm(),
-        'combined_status':
-            [{'choice_value': v, 'choice_label': l} for v, l in COMBINED_STATUS_CHOICES],
-            'latest_deposits': DepositRecord.objects.filter(status='published').select_related('oairecord', 'paper', 'repository').order_by('-pub_date')[:5],
-        }
-    return render(request, 'papers/index.html', context)
 
 
 class AdvancedPaperSearchView(FormView):

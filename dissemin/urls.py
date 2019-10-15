@@ -20,7 +20,10 @@
 
 
 import allauth.account.views
+import django_js_reverse.views
+
 from allauth.socialaccount import providers
+
 from django.conf import settings
 from django.urls import include
 from django.urls import path
@@ -31,7 +34,8 @@ from django.shortcuts import redirect
 from django.shortcuts import render
 from django.views import generic
 from django.views.i18n import JavaScriptCatalog
-import django_js_reverse.views
+
+from dissemin.views import StartPageView
 
 try:
     import importlib
@@ -79,6 +83,8 @@ js_info_dict = {
 }
 
 urlpatterns = [
+    # Start page
+    path('', StartPageView.as_view(), name='start-page'),
     # Errors
     path('404-error', temp('404.html')),
     path('500-error', temp('500.html')),

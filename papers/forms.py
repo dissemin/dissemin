@@ -207,14 +207,3 @@ class PaperForm(SearchForm):
 
     def no_query_found(self):
         return self.searchqueryset.all()
-
-class FrontPageSearchForm(PaperForm):
-    def __init__(self, *args, **kwargs):
-        super(FrontPageSearchForm, self).__init__(*args, **kwargs)
-        self.fields['authors'].widget.attrs.update({
-            'placeholder': _('Try any author name')
-        })
-        self.fields['authors'].widget.attrs.update({
-            'title': _('Try any author name')
-        })
-
