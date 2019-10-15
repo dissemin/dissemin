@@ -33,8 +33,6 @@ from django.views import generic
 from django.views.i18n import JavaScriptCatalog
 import django_js_reverse.views
 
-admin.autodiscover()
-
 try:
     import importlib
 except ImportError:
