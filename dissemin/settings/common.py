@@ -225,8 +225,10 @@ WSGI_APPLICATION = 'dissemin.wsgi.application'
 
 ### Static files (CSS, JavaScript, Images) ###
 # This defines how static files are stored and accessed.
-# https://docs.djangoproject.com/en/1.8/howto/static-files/
+# https://docs.djangoproject.com/en/2.2/howto/static-files/
 #
+# We add /static as place to look for static files
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 # Relative URL where static files are accessed (you don't have to change this).
 STATIC_URL = '/static/'
 # Relative URL where user uploads are accessed (you don't have to change this).

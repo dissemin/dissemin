@@ -1,0 +1,29 @@
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE }}" prefix="og: http://ogp.me/ns#">
+    <head>
+        <!-- Meta content -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/dissemin.css' %}" />
+
+        <!-- JavaScript -->
+        <script src="{% static 'js/jquery.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'js/dissemin.js' %}"></script>
+
+    </head>
+
+    <body>
+        <div class="container">
+            {% include 'navbar.html' %}
+        </div>
+    </body>
+
+</html>
