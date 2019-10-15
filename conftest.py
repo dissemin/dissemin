@@ -1,6 +1,8 @@
 import json
 import os
 import pytest
+import re
+import requests
 import sys
 
 
@@ -331,16 +333,14 @@ def validator_tools(dissemin_base_client, settings):
         Class that collect tools for validating pages
         """
 
+        ignore_re = [
+            'Attribute "dp_config" not allowed on element', # Django Bootstrap DatetimePicker uses this extra attribute which is considered invalid by W3C validator. We filter that out.
+        ]
+
         def __init__(self, client, settings):
             self.client = client
             # Deactivate Django tool bar, so that it does not interfere with tests
             settings.DEBUG_TOOLBAR_CONFIG = {'SHOW_TOOLBAR_CALLBACK': lambda r: False}
-            self.validator = HTML5Validator(
-                errors_only=True,
-                # Django Bootstrap DatetimePicker uses this extra attribute which
-                # is considered invalid by W3C validator.
-                ignore_re=['Attribute "dp_config" not allowed on element'],
-            )
 
         def check_html(self, response, status=None):
             """
@@ -348,20 +348,21 @@ def validator_tools(dissemin_base_client, settings):
             """
             if status is not None:
                 assert response.status_code == status
-            with NamedTemporaryFile(delete=False) as fh:
-                fh.write(response.content)
+            # If USE_VNU_SERVER is in os.environ, we use the VNU server for validation, otherwise we use html5validator / subprocess
+            # html5validator is very slow due to invoked subprocess
+            if 'USE_VNU_SERVER' in os.environ:
+                validation_result = self.validation_vnu_server(response.content)
+            else:
+                validation_result = self.validation_subprocess(response.content)
+
             # We fetch the AssertionError and raise it, to print the file with line numbers to stderr, because the written file will be removed
             try:
-                assert self.validator.validate([fh.name]) == 0
+                assert validation_result == 0
             except AssertionError:
-                print("THIS IST WHAT {} LOOKS LIKE\n".format(fh.name))
+                print("THIS IST WHAT THE HTML LOOKS LIKE")
                 for index, item in enumerate(response.content.decode('utf-8').split("\n")[:-1]):
                     print("{:3d} {}".format(index + 1, item))
                 raise
-            try:
-                os.remove(fh.name)
-            except:
-                pass
 
         def check_page(self, status, *args, **kwargs):
             """
@@ -400,6 +401,53 @@ def validator_tools(dissemin_base_client, settings):
                 del urlargs['getargs']
                 return self.client.get(reverse(*args, **urlargs), kwargs['getargs'])
             return self.client.get(reverse(*args, **kwargs))
+
+
+        def validation_vnu_server(self, html):
+            """
+            Does html validation via vnu server. The postprocessing is taken from html5validator to have same output
+            :param html: html
+            :returns: string of errors
+            """
+            # Getting the errors
+            headers = {
+                'Content-Type' : 'text/html; charset=utf-8'
+            }
+            r = requests.post('http://localhost:8888/?out=gnu&level=error', data=html, headers=headers).text
+            # Convert fancy quotes into normal quotes
+            r = r.replace('“', '"')
+            r = r.replace('”', '"')
+            r = r.splitlines()
+            # Filter results by regexp
+            for i in self.ignore_re:
+                regex = re.compile(i)
+                r = [l for l in r if not regex.search(l)]
+            # Send errors to stderr
+            if r:
+                print("\n".join(r), file=sys.stderr)
+
+            return len(r)
+
+        def validation_subprocess(self, html):
+            """
+            Does html validation via subprocess and returns a string of errors
+            :param html: html
+            :returns: string of errors
+            """
+            # We need a temporary file
+            with NamedTemporaryFile(delete=False) as fh:
+                fh.write(html)
+            validator = HTML5Validator(
+                errors_only=True,
+                ignore_re=self.ignore_re,
+            )
+            result = validator.validate([fh.name])
+            # tidy up the temporary file (mainly for local usage, not Travis)
+            try:
+                os.remove(fh.name)
+            except:
+                pass
+            return result
 
     vt = ValidatorTools(dissemin_base_client, settings)
     return vt
