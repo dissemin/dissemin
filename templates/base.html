@@ -18,6 +18,12 @@
         <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
         <script src="{% static 'js/dissemin.js' %}"></script>
 
+        <!-- Title -->
+        {% comment %}
+            Set a title with block title
+        {% endcomment %}
+        <title>{% block title %}{% endblock %} - Dissemin</title>
+
     </head>
 
     <body>
