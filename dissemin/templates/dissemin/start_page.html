@@ -32,16 +32,30 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md-4 my-auto">
-                    <img class="img-fluid" src="{% static 'dissemin/img/open_access.png' %}" alt="Green Open Access">
+                    <img class="img-fluid" src="{% static 'dissemin/img/open_access.png' %}" alt="{% trans 'Green Open Access' %}">
                 </div>
-                <div class="col-12 col-md-8">
-                    <h2 class="text-center">{% trans "Green Open Access" %}</h2>
+                <div class="col-12 col-md-8 my-auto">
+                    <h2 class="text-center">{% trans 'Green Open Access' %}</h2>
                     <p>{% trans 'Many researchers do not use their right to make their papers freely available online, in addition to the paywalled version of traditional publishers.' %}</p>
                     <p>{% trans 'Uploading your papers to open repositories has significant advantages:' %}</p>
                     <ol>
                         <li>{% trans 'Your research is available to everyone, increasing your readership and impact.' %}</li>
                         <li>{% trans 'You help universities abandon overpriced journal subscriptions.' %}</li>
                     </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="jumbotron jumbotron-fluid text-light mb-0" id="screenOpenRepositories">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-4 order-md-last my-auto">
+                    <img class="img-fluid" src="{% static 'dissemin/img/open_repositories.png' %}" alt="{% trans 'Open Repositories' %}">
+                </div>
+                <div class="col-12 col-md-8 my-auto">
+                    <h2 class="text-center">{% trans 'Open Repositories' %}</h2>
+                    <p>{% trans 'Uploading your papers on your own webpage is not enough. Your papers are easier to find and more secure in the long-term when uploaded to arXiv, Zenodo or institutional repositories.' %}</p>
                 </div>
             </div>
         </div>
