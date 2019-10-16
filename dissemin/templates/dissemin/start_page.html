@@ -1,11 +1,17 @@
 {% extends 'base.html' %}
 
 {% load i18n %}
+{% load solo_tags %}
 {% load static %}
 {% load widget_tweaks %}
 
 {% block title %}
     {% trans 'Home' %}
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'd3.min.js' %}"></script>
+    <script src="{% static 'showStats.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -77,6 +83,28 @@
                                 <p class="mb-1">Published in {{ deposit.repository }} on {{ deposit.pub_date }}</p>
                             </a>
                         {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="jumbotron jumbotron-fluid text-light mb-0" id="screenDisseminData">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-6 my-auto">
+                    <h2 class="text-center">{% trans 'Access statistics' %}</h2>
+                    <p>{% trans 'Dissemin collects its data from various sources and evaluates if a given publication is freely available.' %}</p>
+                </div>
+                <div class="col-12 col-md-6 my-auto">
+                    <div class="row">
+                        {% get_solo 'papers.PaperWorld' as world %}
+                        <div class="col-xs-12 col-sm-6">
+                            {% include "statistics/pie_chart.html" with stats=world.stats object_id=obj.object_id stats_counter=1 %}
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            {% include "statistics/pie_legend.html" with stats=world.stats object_id=obj.object_id stats_counter=1 %}
+                        </div>
                     </div>
                 </div>
             </div>

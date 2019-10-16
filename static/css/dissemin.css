@@ -8,6 +8,43 @@
 
 
 /* ***
+ * Statistic Pie
+ * *** */
+
+.stats_caption_box {
+	display:table-cell;
+	vertical-align:middle;
+}
+
+.stats_caption_color {
+	display:inline-block;
+	width:20px;
+	height:1em;
+	margin:0;
+	vertical-align:middle;
+}
+
+.stats_caption_label {
+	display:table-cell;
+	vertical-align:middle;
+	padding:1px;
+	padding-left:7px;
+	width:99%;
+}
+
+.stats_caption_label_text {
+    overflow:hidden;
+    display:inline-block;
+    vertical-align:top;
+}
+
+.stats_caption_table {
+    display:table;
+    text-align:left;
+}
+
+
+/* ***
  * Startpage
  * *** */
 
@@ -25,4 +62,16 @@
 
 #screenLatestUploads {
     background-color: #5F8BB0;
+}
+
+#screenDisseminData {
+    background-color: #2A6496;
+}
+
+#screenDisseminData a {
+    color: white;
+}
+
+#screenDisseminData .statsSliceLegend {
+    fill: white;
 }
