@@ -28,7 +28,7 @@ class StartPageView(TemplateView):
             'paper',
             'repository'
         ).order_by(
-            '-date'
+            '-pub_date'
         )[:5]
 
         return context

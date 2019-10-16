@@ -60,4 +60,26 @@
             </div>
         </div>
     </div>
+
+    <div class="jumbotron jumbotron-fluid text-light mb-0" id="screenLatestUploads">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-4 my-auto">
+                    <img class="img-fluid" src="{% static 'dissemin/img/latest_uploads.png' %}" alt="{% trans 'Latest Uploads' %}">
+                </div>
+                <div class="col-12 col-md-8 my-auto">
+                    <h2 class="text-center">{% trans "Latest Uploads" %}</h2>
+                    <p>{% trans 'Researchers use Dissemin to make sure all their publications can be accessed freely. Have a look at their latest uploads:' %}</p>
+                    <div class="list-group">
+                        {% for deposit in latest_deposits %}
+                            <a href="{{ deposit.oairecord.splash_url }}" target="_blank" class="list-group-item list-group-item-action">
+                                <h5 class="mb-1">{{ deposit.paper.title }}</h5>
+                                <p class="mb-1">Published in {{ deposit.repository }} on {{ deposit.pub_date }}</p>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock content %}

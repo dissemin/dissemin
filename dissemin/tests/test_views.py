@@ -1,3 +1,4 @@
+from datetime import date
 from django.urls import reverse
 
 from deposit.models import DepositRecord
@@ -22,6 +23,7 @@ class TestStartPageView():
             user=user_leibniz,
             repository=dummy_repository,
             status='published',
+            pub_date=date.today(),
             file=pdf,
         )
         check_page(200, 'start-page')
@@ -39,6 +41,7 @@ class TestStartPageView():
             user=user_leibniz,
             repository=dummy_repository,
             status='published',
+            pub_date=date.today(),
             file=pdf,
         )
 
