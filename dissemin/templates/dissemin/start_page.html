@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load i18n %}
+{% load static %}
 {% load widget_tweaks %}
 
 {% block title %}
@@ -22,6 +23,25 @@
                             </div>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="jumbotron jumbotron-fluid text-light" id="screenGreenOpenAccess">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-4">
+                    <img class="img-fluid" src="{% static 'dissemin/img/open_access.png' %}" alt="Green Open Access">
+                </div>
+                <div class="col-12 col-md-8">
+                    <h2 class="text-center">{% trans "Green Open Access" %}</h2>
+                    <p>{% trans 'Many researchers do not use their right to make their papers freely available online, in addition to the paywalled version of traditional publishers.' %}</p>
+                    <p>{% trans 'Uploading your papers to open repositories has significant advantages:' %}</p>
+                    <ol>
+                        <li>{% trans 'Your research is available to everyone, increasing your readership and impact.' %}</li>
+                        <li>{% trans 'You help universities abandon overpriced journal subscriptions.' %}</li>
+                    </ol>
                 </div>
             </div>
         </div>
