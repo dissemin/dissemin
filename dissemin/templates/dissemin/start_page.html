@@ -1,1 +1,29 @@
 {% extends 'base.html' %}
+
+{% load i18n %}
+{% load widget_tweaks %}
+
+{% block title %}
+    {% trans 'Home' %}
+{% endblock %}
+
+{% block content %}
+    <div class="jumbotron jumbotron-fluid text-light text-center" id="screenWelcome">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h1>{% trans 'Welcome to Dissemin' %}</h1>
+                    <p>{% trans 'Dissemin detects papers behind paywalls and helps their authors to upload them in one click to an open repository.' %}</p>
+                    <form method="get" action="{% url 'search' %}" >
+                        <div class="input-group">
+                            {% render_field search_form.authors class="form-control justify-content-center" %}
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-success" aria-label="{% trans 'Search' %}"><span class="oi oi-magnifying-glass" aria-hidden="true"></span></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
