@@ -33,6 +33,12 @@
             {% include 'navbar.html' %}
             {% block content %}{% endblock %}
             {% include 'footer.html' %}
+            {% comment %}
+                This is the beta ribbon, indicating, that it's not a production instance
+            {% endcomment %}
+            {% if settings.DISPLAY_BETA_RIBBON %}
+                <img style="position:absolute; top:0; left:0; border:0; opacity: 0.8; pointer-events: none;" src="{% static "img/beta-ribbon.png" %}" alt="Beta version" />
+            {% endif %}
         </div>
     </body>
 
