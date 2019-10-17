@@ -12,9 +12,9 @@
         {% endif %}
         {% for status in combined_status %}
             {% if combined_status_form %}
-                <label class="stats_caption_line">{{ status.tag }}
+                <label>{{ status.tag }}
             {% else %}
-                <a class="stats_caption_line" href="{% url 'search' %}?status={{ status.choice_value }}">
+                <a href="{% url 'search' %}?status={{ status.choice_value }}">
             {% endif %}
             <span class="stats_caption_box">
                 <span class="stats_caption_color" style="background-color:{% cycle "#FCD206" "#B9C909" "#419BE8" "#dddddd" "#122B52" %} !important"></span>
@@ -29,7 +29,7 @@
                 </span>
             </span>
             {% if combined_status_form %}
-                <span class="checkbox-x glyphicon glyphicon-ok"></span>
+                <span class="checkbox-x oi oi-check"></span>
                 </label>
             {% else %}
                 </a>

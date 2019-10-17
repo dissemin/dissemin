@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block scripts %}
-    <script src="{% static 'd3.min.js' %}"></script>
+    <script src="{% static 'css/d3.min.js' %}"></script>
     <script src="{% static 'showStats.js' %}"></script>
 {% endblock %}
 
@@ -97,7 +97,7 @@
                     <p>{% trans 'Dissemin collects its data from various sources and evaluates if a given publication is freely available.' %}</p>
                 </div>
                 <div class="col-12 col-md-6 my-auto">
-                    <div class="row">
+                    <div class="row text-center px-5">
                         {% get_solo 'papers.PaperWorld' as world %}
                         <div class="col-xs-12 col-sm-6">
                             {% include "statistics/pie_chart.html" with stats=world.stats object_id=obj.object_id stats_counter=1 %}

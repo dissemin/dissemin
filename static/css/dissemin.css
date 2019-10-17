@@ -38,6 +38,10 @@
     vertical-align:top;
 }
 
+.stats_caption_label_text:hover {
+    text-decoration: underline;
+}
+
 .stats_caption_table {
     display:table;
     text-align:left;
