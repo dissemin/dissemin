@@ -1,15 +1,15 @@
 {% load humanize %}
 {% load i18n %}
 
-<small>
-    <div class="statspie_caption" id="stats_pie_legend_n{{ stats_counter }}">
-        {% if combined_status_form %}
-            <fieldset class="stats_caption_table hiddenCheckboxes">
-            <legend class="sr-only">{% trans 'Refine by OA status' %}</legend>
-            {{ combined_status.errors }}
-        {% else %}
-            <div class="stats_caption_table">
-        {% endif %}
+<div class="statspie_caption" id="stats_pie_legend_n{{ stats_counter }}">
+    {% if combined_status_form %}
+        <fieldset class="stats_caption_table hiddenCheckboxes">
+        <legend class="sr-only">{% trans 'Refine by OA status' %}</legend>
+        {{ combined_status.errors }}
+    {% else %}
+        <div class="stats_caption_table">
+    {% endif %}
+    <small>
         {% for status in combined_status %}
             {% if combined_status_form %}
                 <label>{{ status.tag }}
@@ -35,10 +35,10 @@
                 </a>
             {% endif %}
         {% endfor %}
-        {% if combined_status_form %}
-            </fieldset>
-        {% else %}
-            </div>
-        {% endif %}
-    </div>
-</small>
+    </small>
+    {% if combined_status_form %}
+        </fieldset>
+    {% else %}
+        </div>
+    {% endif %}
+</div>
