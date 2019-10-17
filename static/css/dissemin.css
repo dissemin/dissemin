@@ -5,6 +5,14 @@
 .bg-blue {
     background-color: #2A6496;
 }
+/* ***
+ * Navigation bar
+ * *** */
+
+/* We remove the background image to have no arrows in this select*/
+#set-language {
+    background-image: none;
+}
 
 
 /* ***

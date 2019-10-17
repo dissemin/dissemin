@@ -10,10 +10,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown">
-                <form class="form-inline" action="{% url 'set_language' %}" method="post" id="select-language">
+                <form class="form-inline" id="select-language" action="{% url 'set_language' %}" method="post">
                     {% csrf_token %}
                     <label class="sr-only" for="set-language">{% trans 'Language' %}</label>
-                    <select name="language" id="set-language" class="custom-select">
+                    <select name="language" id="set-language" class="custom-select text-light text-md-right bg-transparent border-0 shadow-none">
                         {% get_available_languages as LANGUAGES %}
                         {% get_language_info_list for LANGUAGES as languages %}
                         {% for language in languages %}
