@@ -13,6 +13,19 @@ $(function() {
     });
 });
 
+/* This is the ORCID Logout. Pass the orcid_base_domain as parameter */
+function orcidLogout (orcid_base_domain) {
+    $.ajax({ url: 'https://' + orcid_base_domaon + '/userStatus.json?logUserOut=true',
+        dataType: 'jsonp',
+        success: function(result,status,xhr) {
+                    window.location.href = '{% url "account_logout" %}';
+                },
+        error: function (xhr, status, error) {
+                    window.location.href = '{% url "account_logout" %}';
+                }
+    })
+}
+
 
 /* ***
  * Statistic
