@@ -79,3 +79,7 @@
 #screenDisseminData .statsSliceLegend {
     fill: white;
 }
+
+#screenDisseminForLibraries {
+    background-color: #5F8BB0;
+}
