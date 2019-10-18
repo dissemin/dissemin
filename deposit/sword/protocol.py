@@ -9,7 +9,6 @@ from zipfile import ZipFile
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.exceptions import MultipleObjectsReturned
-from django.utils.functional import cached_property
 from django.utils.translation import ugettext as _
 
 from deposit.models import UserPreferences
@@ -255,24 +254,6 @@ class SWORDMETSProtocol(RepositoryProtocol):
                     data['email'] = r.email
 
         return data
-
-
-    @cached_property
-    def publication(self):
-        """
-        Sets publication / oairecord for the paper with highest prority.
-        """
-        # Fetch the first OaiRecord with highest OaiSource priority and journal as well as publisher
-        publication = self.paper.oairecord_set.filter(
-            journal_title__isnull=False,
-            publisher_name__isnull=False
-        ).order_by('priority').first()
-
-        # If this is not available, take the first one
-        if publication is None:
-           publication = self.paper.oairecord_set.order_by('priority').first()
-
-        return publication
 
 
     def submit_deposit(self, pdf, form):

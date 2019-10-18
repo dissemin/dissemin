@@ -22,6 +22,7 @@ from datetime import date
 from io import BytesIO
 import unittest
 import django.test
+import copy
 import pytest
 import os
 
@@ -227,6 +228,90 @@ class MetaTestProtocol():
         Identifier should exist
         """
         assert len(self.protocol.protocol_identifier()) > 1
+
+
+    def test_publication_with_fk(self, db, dummy_oairecord, dummy_journal, dummy_publisher):
+        """
+        If journal and publisher are linked, this OaiRecord should be first. We add necessary data and then add another OaiRecord that should not be fetched.
+        """
+        self.protocol.paper = dummy_oairecord.about
+
+        dummy_oairecord.journal = dummy_journal
+        dummy_oairecord.publisher = dummy_publisher
+        dummy_oairecord.priority = 10
+        dummy_oairecord.save()
+
+        second_oairecord = copy.copy(dummy_oairecord)
+        second_oairecord.pk = None
+        second_oairecord.priority = 9
+        second_oairecord.identifier += '_2'
+        second_oairecord.save()
+
+        third_oairecord = copy.copy(dummy_oairecord)
+        third_oairecord.pk = None
+        third_oairecord.identifier += '_3'
+        third_oairecord.journal = None
+        third_oairecord.save()
+
+        assert self.protocol.publication.pk == dummy_oairecord.pk
+
+
+    def test_publication_with_names(self, db, dummy_oairecord):
+        """
+        If no journal or publisher are linked, the OaiRecord with journal_title and publisher_name should be first. We add necessary data and then add a second OaiRecord that should not be fetched.
+        """
+        self.protocol.paper = dummy_oairecord.about
+
+        dummy_oairecord.journal_title = 'Journal Title'
+        dummy_oairecord.publisher_name = 'Publisher Name'
+        dummy_oairecord.priority = 10
+        dummy_oairecord.save()
+
+        second_oairecord = copy.copy(dummy_oairecord)
+        second_oairecord.pk = None
+        second_oairecord.priority = 9
+        second_oairecord.identifier += '_2'
+        second_oairecord.save()
+
+        third_oairecord = copy.copy(dummy_oairecord)
+        third_oairecord.pk = None
+        third_oairecord.identifier += '_3'
+        third_oairecord.journal_title = ''
+        third_oairecord.save()
+
+        assert self.protocol.publication.pk == dummy_oairecord.pk
+
+
+    def test_publication_only_priority(self, db, dummy_oairecord):
+        """
+        If no OaiRecord has any information about journal or publisher, just give first
+        """
+        self.protocol.paper = dummy_oairecord.about
+
+        dummy_oairecord.priority = 10
+        dummy_oairecord.save()
+
+        second_oairecord = copy.copy(dummy_oairecord)
+        second_oairecord.pk = None
+        second_oairecord.priority = 9
+        second_oairecord.identifier += '_2'
+        second_oairecord.save()
+
+        assert self.protocol.publication.pk == dummy_oairecord.pk
+
+
+    def test_publication_no_result(self, dummy_paper):
+        """
+        If no OaiRecord can be found, we expect ``None``. Should in practice not happen.
+        """
+        self.protocol.paper = dummy_paper
+
+        assert self.protocol.publication == None
+
+
+
+
+
 
 
     @pytest.mark.parametrize('on_todolist', [True, False])
