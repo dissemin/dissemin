@@ -64,6 +64,7 @@
                 <ds:licenseTransmitId>cc_by-40</ds:licenseTransmitId>
               </ds:license>
               <ds:disseminId>8</ds:disseminId>
+              <ds:embargoDate>2020-10-10</ds:embargoDate>
             </ds:publication>
           </ds:dissemin>
         </mets:xmlData>

@@ -60,6 +60,7 @@
                 <ds:licenseTransmitId>cc_by-40</ds:licenseTransmitId>
               </ds:license>
               <ds:disseminId>6</ds:disseminId>
+              <ds:embargoDate>2020-12-31</ds:embargoDate>
               <ds:romeoId>1423</ds:romeoId>
             </ds:publication>
           </ds:dissemin>
