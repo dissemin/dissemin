@@ -53,6 +53,8 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
         ddcs = DDC.objects.all()
         data['ddc'] = [ddc for ddc in ddcs.filter(number__in=upload_data['ddc'])]
 
+        data['embargo'] = upload_data.get('embargo', None)
+
         l = License.objects.get(uri="https://creativecommons.org/licenses/by/4.0/")
         lc = LicenseChooser.objects.create(
             license=l,
@@ -62,7 +64,7 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
         licenses = LicenseChooser.objects.by_repository(repository=self.protocol.repository)
         data['license'] = lc.pk
 
-        form = SWORDMETSForm(ddcs=ddcs, licenses=licenses, data=data)
+        form = SWORDMETSForm(ddcs=ddcs, embargo='optional', licenses=licenses, data=data)
 
         valid_form = form.is_valid()
         if not valid_form:
