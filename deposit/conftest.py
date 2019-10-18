@@ -71,6 +71,17 @@ def dissemin_xsd_1_0():
     return etree.XMLSchema(dissemin_xsd)
 
 
+@pytest.fixture(params=['none', 'optional', 'required'])
+def embargo(request):
+    """
+    Embargo with three simple values
+    """
+    request.cls.protocol.repository.embargo=request.param
+    request.cls.protocol.repository.save()
+
+    return request.param
+
+
 @pytest.fixture
 def empty_user_preferences(db, user_isaac_newton):
     """

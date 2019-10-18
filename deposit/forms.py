@@ -18,6 +18,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
+from bootstrap_datepicker_plus import DatePickerInput
 from itertools import groupby
 
 from deposit.models import Repository
@@ -151,6 +152,13 @@ class BaseMetadataForm(forms.Form):
         widget=forms.SelectMultiple
     )
 
+    embargo = forms.DateField(
+        label=_('Do not publish before'),
+        widget=DatePickerInput(
+            format='%Y-%m-%d',
+        ),
+    )
+
     # License field to choose license
     license = forms.ModelChoiceField(
         label=_('License'),
@@ -167,6 +175,7 @@ class BaseMetadataForm(forms.Form):
         """
         abstract_required = kwargs.pop('abstract_required', True)
         ddcs = kwargs.pop('ddcs', None)
+        embargo = kwargs.pop('embargo', None)
         licenses = kwargs.pop('licenses', None)
 
         super(BaseMetadataForm, self).__init__(**kwargs)
@@ -179,6 +188,15 @@ class BaseMetadataForm(forms.Form):
             del(self.fields['ddc'])
         else:
             self.fields['ddc'].queryset = ddcs
+
+        # Handle embargo field
+        if embargo == 'required':
+            self.fields['embargo'].required = True
+        elif embargo == 'optional':
+            self.fields['embargo'].required = False
+        else:
+            del(self.fields['embargo'])
+
 
         # If no licenses for repository choosen, then delete field from form
         if licenses is None:

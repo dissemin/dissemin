@@ -1,4 +1,5 @@
 {
     "abstract": "In this paper, we analyze the process of assembling new matrix geometric means from existing ones, through function composition or limit processes. We show that for n a new matrix mean exists which is simpler to compute than the existing ones. Moreover, we show that for n the existing proving strategies cannot provide a mean computationally simpler than the existing ones.",
-    "ddc": [510]
+    "ddc": [510],
+    "embargo": "2020-10-10"
 }

@@ -117,6 +117,13 @@
     <xs:sequence>
       <xs:element name="license" type="licenseType" minOccurs="0"/>
       <xs:element name="disseminId" type="disseminIDType"/>
+      <xs:element name="embargoDate" type="xs:date" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            The publication must not be published before given date. Publishing on given date is fine.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
       <xs:element name="romeoId" type="romeoIDType" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>

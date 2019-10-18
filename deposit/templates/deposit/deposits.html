@@ -36,6 +36,12 @@
                                     <td>{% trans "Deposit date" %}</td>
                                     <td>{{ deposit.date }}</td>
                                 </tr>
+                                {% if deposit.pub_date %}
+                                    <tr>
+                                        <td>{% trans "Publication date" %}</td>
+                                        <td>{{ deposit.pub_date }}</td>
+                                    </tr>
+                                {% endif %}
                                 <tr>
                                     <td>{% trans "Deposit type" %}</td>
                                     <td>{{ deposit.get_upload_type_display }}</td>

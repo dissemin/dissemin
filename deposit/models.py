@@ -43,12 +43,19 @@ logger = logging.getLogger('dissemin.' + __name__)
 DEPOSIT_STATUS_CHOICES = [
    ('failed', _('Failed')), # we failed to deposit the paper
    ('faked', _('Faked')), # the deposit was faked (for tests)
-   ('pending', _('Pending publication')), # the deposit has been
-    # submitted but is not publicly visible yet
+   ('pending', _('Pending publication')), # the deposit has been submitted but is not publicly visible yet
+   ('embargoed', _('Embargo')), # the publication will be published, but only after a certain date
    ('published', _('Published')), # the deposit is visible on the repo
    ('refused', _('Refused by the repository')),
    ('deleted', _('Deleted')), # deleted by the repository
    ]
+
+# Options for certain metadatafields of repository that are going to be a form field
+FORM_FIELD_CHOICES = [
+    ('none', 'None'), # Field is not going to be used
+    ('optional', 'Optional'), # Field is shown, but may not be filled in
+    ('required', 'Required'), # Field ist shown and must be filled in
+]
 
 
 class DDC(models.Model):
@@ -156,6 +163,8 @@ class Repository(models.Model, CachingMixin):
     ddc = models.ManyToManyField(DDC, blank=True)
     #: Optionally choose a letter of declaration to finish deposition
     letter_declaration = models.CharField(max_length=256, blank=True)
+    #: Embargo
+    embargo = models.CharField(max_length=24, blank=False, choices=FORM_FIELD_CHOICES, default='none')
 
     def get_implementation(self):
         """
@@ -253,12 +262,13 @@ class DepositRecord(models.Model):
     request = models.TextField(null=True, blank=True)
     identifier = models.CharField(max_length=512, null=True, blank=True)
     oairecord = models.ForeignKey(OaiRecord, null=True, blank=True, on_delete=models.SET_NULL)
-    date = models.DateTimeField(auto_now=True)  # deposit date
+    date = models.DateTimeField(auto_now_add=True)  # deposit date
     upload_type = models.CharField(max_length=64,choices=UPLOAD_TYPE_CHOICES)
     status = models.CharField(max_length=64,choices=DEPOSIT_STATUS_CHOICES, default='failed')
     additional_info = JSONField(null=True, blank=True)
     #: We store the license mainly for generation of letter of declaration
     license = models.ForeignKey(License, on_delete=models.SET_NULL, null=True, blank=True, default=None)
+    pub_date = models.DateField(blank=True, null=True)
 
     file = models.ForeignKey(UploadedPDF, on_delete=models.CASCADE)
 

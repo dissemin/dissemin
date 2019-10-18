@@ -53,6 +53,8 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
         ddcs = DDC.objects.all()
         data['ddc'] = [ddc for ddc in ddcs.filter(number__in=upload_data['ddc'])]
 
+        data['embargo'] = upload_data.get('embargo', None)
+
         l = License.objects.get(uri="https://creativecommons.org/licenses/by/4.0/")
         lc = LicenseChooser.objects.create(
             license=l,
@@ -62,7 +64,7 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
         licenses = LicenseChooser.objects.by_repository(repository=self.protocol.repository)
         data['license'] = lc.pk
 
-        form = SWORDMETSForm(ddcs=ddcs, licenses=licenses, data=data)
+        form = SWORDMETSForm(ddcs=ddcs, embargo='optional', licenses=licenses, data=data)
 
         valid_form = form.is_valid()
         if not valid_form:
@@ -138,21 +140,25 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
         assert dr.status == 'pending'
  
 
-    def test_get_form(self, book_god_of_the_labyrinth, empty_user_preferences, abstract_required, ddc, license_chooser):
+    def test_get_form(self, book_god_of_the_labyrinth, empty_user_preferences, abstract_required, ddc, embargo, license_chooser):
         self.protocol.paper = book_god_of_the_labyrinth
         self.protocol.user = empty_user_preferences.user
         form = self.protocol.get_form()
-        assert 'abstract' in form.fields
+        assert form.fields['abstract'].required == abstract_required
         assert 'email' in form.fields
-        assert 'paper_id' in form.fields
         if ddc:
             assert 'ddc' in form.fields
         else:
             assert 'ddc' not in form.fields
+        if embargo == 'required':
+            assert form.fields['embargo'].required == True
+        elif embargo == 'optional':
+            assert form.fields['embargo'].required == False
         if license_chooser:
             assert 'license' in form.fields
         else:
             assert 'license' not in form.fields
+        assert 'paper_id' in form.fields
 
 
     def test_get_bound_form(self, book_god_of_the_labyrinth, empty_user_preferences, abstract_required, ddc, license_chooser):
@@ -201,7 +207,7 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
         mets_xsd.assertValid(etree.fromstring(bytes(mets_xml, encoding='utf-8')))
 
 
-    def test_get_mets_integration(self, mets_xsd, depositing_user, upload_data, ddc, license_chooser, abstract_required):
+    def test_get_mets_integration(self, mets_xsd, depositing_user, upload_data, ddc, license_chooser, abstract_required, embargo):
         """
         Integration test running all possible metadata cases and validating against mets schema
         """
@@ -219,12 +225,17 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
         if ddc is not None:
             data['ddc'] = [ddc for ddc in DDC.objects.filter(number__in=upload_data['ddc'])]
 
+        if embargo == 'optional':
+            data['embargo'] = upload_data.get('embargo', None)
+        if embargo == 'required':
+            data['embargo'] = '2019-10-10'
+
         licenses = None
         if license_chooser:
             data['license'] = license_chooser.pk
             licenses = LicenseChooser.objects.by_repository(repository=self.protocol.repository)
 
-        form = SWORDMETSForm(ddcs=ddc, licenses=licenses, abstract_required=abstract_required, data=data)
+        form = SWORDMETSForm(ddcs=ddc, licenses=licenses, abstract_required=abstract_required, embargo=embargo, data=data)
         valid_form = form.is_valid()
         if not valid_form:
             print(form.errors)
@@ -251,7 +262,7 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
 
 
     @pytest.mark.parametrize('oairecord', ['journal-article_a_female_signal_reflects_mhc_genotype_in_a_social_primate', 'book_god_of_the_labyrinth'])
-    def test_get_xml_dissemin_metadata(self, db, monkeypatch_paper_is_owned, dissemin_xsd_1_0, depositing_user, license_chooser, load_json, oairecord):
+    def test_get_xml_dissemin_metadata(self, db, monkeypatch_paper_is_owned, dissemin_xsd_1_0, depositing_user, embargo, license_chooser, load_json, oairecord):
         """
         Tests for dissemin metadata
         """
@@ -265,10 +276,13 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
         if license_chooser:
             data['license'] = license_chooser.pk
         data['email'] = depositing_user.email
+        if embargo == 'required':
+            data['embargo'] = '2019-10-10'
 
         form  = SWORDMETSForm(
+            embargo=embargo,
             licenses=LicenseChooser.objects.by_repository(repository=self.protocol.repository),
-            data=data
+            data=data,
         )
         form.is_valid()
 
@@ -289,8 +303,10 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
         # Mocking requests
         responses.add(responses.POST, self.protocol.repository.endpoint, status=201)
 
-        # Monkeypatch _dd_license_to_deposit
+        # Monkeypatch _add_license_to_deposit
         monkeypatch.setattr(self.protocol, '_add_license_to_deposit_result', lambda x, y: x)
+        # Monkeypatch _add_embargo_date_to_deposit
+        monkeypatch.setattr(self.protocol, '_add_embargo_date_to_deposit_result', lambda x, y: x)
 
         assert isinstance(self.protocol.submit_deposit(blank_pdf_path, None), DepositResult)
         headers = responses.calls[0].request.headers

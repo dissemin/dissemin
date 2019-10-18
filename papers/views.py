@@ -124,7 +124,7 @@ def index(request):
         'search_form': FrontPageSearchForm(),
         'combined_status':
             [{'choice_value': v, 'choice_label': l} for v, l in COMBINED_STATUS_CHOICES],
-            'latest_deposits': DepositRecord.objects.filter(status='published').select_related('oairecord', 'paper', 'repository').order_by('-date')[:5],
+            'latest_deposits': DepositRecord.objects.filter(status='published').select_related('oairecord', 'paper', 'repository').order_by('-pub_date')[:5],
         }
     return render(request, 'papers/index.html', context)
 
@@ -521,6 +521,7 @@ class PaperView(SlugDetailView):
         # Pending deposits
         if not context['deposit']:
             context['pending_deposits'] = self.object.depositrecord_set.filter(status='pending')
+            context['embargoed_deposits'] = self.object.depositrecord_set.filter(status='embargoed')
 
         return context
 

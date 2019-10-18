@@ -21,6 +21,7 @@
 
 
 from io import BytesIO
+from datetime import date
 import json
 import traceback
 from zipfile import ZipFile
@@ -336,7 +337,8 @@ class HALProtocol(RepositoryProtocol):
             new_status = self.get_new_status(deposit_record.identifier)
             if new_status != deposit_record.status:
                 deposit_record.status = new_status
-                deposit_record.save(update_fields=['status'])
+                deposit_record.pub_date = date.today()
+                deposit_record.save(update_fields=['status', 'pub_date'])
                 oairecord = deposit_record.oairecord
                 if new_status == 'published':
                     oairecord.pdf_url = oairecord.splash_url + '/document'

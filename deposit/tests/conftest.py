@@ -32,3 +32,19 @@ def deposit_record(request, db, book_god_of_the_labyrinth, authenticated_client,
 
     request.cls.dr = dr
     request.cls.client = authenticated_client
+
+
+@pytest.fixture
+def dummy_deposit_record(book_god_of_the_labyrinth, user_leibniz, dummy_repository, uploaded_pdf):
+    """
+    Dummy deposit record with minimal information
+    """
+
+    dr = DepositRecord.objects.create(
+        paper=book_god_of_the_labyrinth,
+        user=user_leibniz,
+        repository=dummy_repository,
+        file=uploaded_pdf
+    )
+
+    return dr

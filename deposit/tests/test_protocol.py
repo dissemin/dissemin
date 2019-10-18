@@ -49,6 +49,21 @@ class MetaTestProtocol():
     If you change one of the tested functions in your subclassed protocol, please override the test in the corresponding test class.
     """
 
+    @pytest.mark.parametrize('embargo', [None, date.today()])
+    def test_add_embargo_date_to_deposit_result(self, embargo):
+        """
+        If an embargo is set, add to deposit record, otherwise not
+        """
+        # We just set cleaned data directly
+        f = Form()
+        f.cleaned_data = dict()
+        if embargo is not None:
+            f.cleaned_data['embargo'] = embargo
+        dr = DepositResult(status='pending')
+        dr = self.protocol._add_embargo_date_to_deposit_result(dr, f)
+        assert dr.embargo_date == embargo
+
+
     def test_add_license_to_deposit_result(self, license_chooser):
         """
         If a license is selected, add to deposit record, otherwise not
@@ -74,22 +89,28 @@ class MetaTestProtocol():
         assert r.status_code == 200
 
 
-    def test_get_form(self, book_god_of_the_labyrinth, abstract_required, ddc, license_chooser):
+    def test_get_form(self, book_god_of_the_labyrinth, abstract_required, ddc, embargo, license_chooser):
         self.protocol.paper = book_god_of_the_labyrinth
         form = self.protocol.get_form()
-        assert 'abstract' in form.fields
-        assert 'paper_id' in form.fields
+        assert form.fields['abstract'].required == abstract_required
         if ddc:
             assert 'ddc' in form.fields
         else:
             assert 'ddc' not in form.fields
+        if embargo == 'required':
+            assert form.fields['embargo'].required == True
+        elif embargo == 'optional':
+            assert form.fields['embargo'].required == False
+        else:
+            assert 'embargo' not in form.fields
         if license_chooser:
             assert 'license' in form.fields
         else:
             assert 'license' not in form.fields
+        assert 'paper_id' in form.fields
 
 
-    def test_get_bound_form(self, book_god_of_the_labyrinth, abstract_required, ddc, license_chooser):
+    def test_get_bound_form(self, book_god_of_the_labyrinth, abstract_required, ddc, embargo, license_chooser):
         self.protocol.paper = book_god_of_the_labyrinth
         data = {
             'paper_pk' : book_god_of_the_labyrinth.pk
@@ -100,6 +121,8 @@ class MetaTestProtocol():
             data['ddc'] = ddc
         if license_chooser:
             data['license'] = license_chooser.pk
+        if embargo == 'required':
+            data['embargo'] = '2019-10-10'
 
         form = self.protocol.get_bound_form()
         if not form.is_valid():
