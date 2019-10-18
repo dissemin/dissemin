@@ -33,6 +33,7 @@ from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.views import generic
+from django.views.generic.base import TemplateView
 from django.views.i18n import JavaScriptCatalog
 
 from dissemin.views import StartPageView
@@ -85,12 +86,12 @@ js_info_dict = {
 urlpatterns = [
     # Start page
     path('', StartPageView.as_view(), name='start-page'),
+    path('faq', TemplateView.as_view(template_name='dissemin/faq.html'), name='faq'),
     # Errors
     path('404-error', temp('404.html')),
     path('500-error', temp('500.html')),
     # Static views
     path('sources', temp('dissemin/sources.html'), name='sources'),
-    path('faq', temp('dissemin/faq.html'), name='faq'),
     path('tos', temp('dissemin/tos.html'), name='tos'),
     # Admin interface
     path('admin/', admin.site.urls),
