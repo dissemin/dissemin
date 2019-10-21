@@ -36,6 +36,7 @@ from django.views import generic
 from django.views.i18n import JavaScriptCatalog
 
 from dissemin.views import StartPageView
+from papers.views import AdvancedPaperSearchView
 
 try:
     import importlib
@@ -85,6 +86,8 @@ js_info_dict = {
 urlpatterns = [
     # Start page
     path('', StartPageView.as_view(), name='start-page'),
+    # Paper related pages
+    path('advanced-search', AdvancedPaperSearchView.as_view(), name='advanced-search'),
     # Errors
     path('404-error', temp('404.html')),
     path('500-error', temp('500.html')),
