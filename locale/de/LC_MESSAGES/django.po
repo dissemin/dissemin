@@ -19,7 +19,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-09-30 15:27+0200\n"
-"PO-Revision-Date: 2019-10-14 15:19:16+0000\n"
+"PO-Revision-Date: 2019-10-21 14:57:08+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1905,7 +1905,7 @@ msgstr "Kurz zusammengefasst setzt sich die Open Access Bewegung für den freien
 
 #: templates/dissemin/faq.html:77
 msgid "You should do it because:"
-msgstr "Ja, das solltest Du aus folgenden Gründen tun:"
+msgstr "Du solltest das aus folgenden Gründen tun:"
 
 #: templates/dissemin/faq.html:83
 msgid "It makes your research <strong>more accessible</strong> and <strong>more visible</strong>. Many researchers routinely check papers in topic repositories such as arXiv, and it is less likely that these researchers check your homepage regularly."
