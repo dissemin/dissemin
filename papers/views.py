@@ -18,18 +18,16 @@
 #
 
 
-
 import json
-from statistics.models import BareAccessStatistics
 
 from allauth.exceptions import ImmediateHttpResponse
 from allauth.socialaccount.signals import pre_social_login
 from allauth.account.signals import user_logged_in
-from deposit.models import DepositRecord
+from haystack.generic_views import SearchView
+
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
-from django.urls import reverse
 from django.http import Http404
 from django.http import HttpResponse
 from django.http import HttpResponseForbidden
@@ -38,13 +36,15 @@ from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.template import loader
+from django.urls import reverse
 from django.utils.encoding import escape_uri_path
 from django.utils.translation import ugettext as _
 from django.utils.http import urlencode
 from django.utils.six.moves.urllib.parse import unquote
 from django.views import generic
 from django.views.generic.edit import FormView
-from haystack.generic_views import SearchView
+
+from deposit.models import DepositRecord
 from notification.api import get_notifications
 from papers.doi import to_doi
 from papers.doi import doi_to_url
@@ -61,6 +61,7 @@ from publishers.models import Journal
 from publishers.models import Publisher
 from publishers.views import SlugDetailView
 from search import SearchQuerySet
+from statistics.models import BareAccessStatistics
 
 
 def fetch_on_orcid_login(sender, sociallogin, **kwargs):
