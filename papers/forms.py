@@ -65,13 +65,7 @@ class Sloppy(inputs.Exact):
         return "%s~%d" % (exact, self.kwargs['slop'])
 
 
-def aggregate_combined_status(queryset):
-    return queryset.aggregations({
-        "status": {"terms": {"field": "combined_status_exact"}},
-    })
-
-
-class PaperForm(SearchForm):
+class PaperSearchForm(SearchForm):
     SORT_CHOICES = [
         ('', _('newest first')),
         ('pubdate', _('oldest first')),
@@ -183,7 +177,9 @@ class PaperForm(SearchForm):
                 sq.add(SQ(authors_full=Sloppy(reversed_name, slop=1)), SQ.OR)
                 self.queryset = self.queryset.filter(sq)
 
-        self.queryset = aggregate_combined_status(self.queryset)
+        self.queryset = self.queryset.aggregations({
+            "status": {"terms": {"field": "combined_status_exact"}},
+        })
 
         status = self.cleaned_data['status']
         if status:

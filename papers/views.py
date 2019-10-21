@@ -49,7 +49,7 @@ from notification.api import get_notifications
 from papers.doi import to_doi
 from papers.doi import doi_to_url
 from papers.errors import MetadataSourceException
-from papers.forms import PaperForm
+from papers.forms import PaperSearchForm
 from papers.models import Department
 from papers.models import Institution
 from papers.models import Paper
@@ -118,7 +118,7 @@ NB_RESULTS_PER_PAGE = 20
 class AdvancedPaperSearchView(FormView):
     """Displays the full search form."""
     template_name = 'papers/advanced_search.html'
-    form_class = PaperForm
+    form_class = PaperSearchForm
 
 
 class PaperSearchView(SearchView):
@@ -126,7 +126,7 @@ class PaperSearchView(SearchView):
 
     paginate_by = NB_RESULTS_PER_PAGE
     template_name = 'papers/search.html'
-    form_class = PaperForm
+    form_class = PaperSearchForm
     queryset = SearchQuerySet().models(Paper)
 
     def get(self, request, *args, **kwargs):

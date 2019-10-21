@@ -1,9 +1,9 @@
 from django.utils.translation import ugettext as _
 
-from papers.forms import PaperForm
+from papers.forms import PaperSearchForm
 
 
-class StartPageSearchForm(PaperForm):
+class StartPageSearchForm(PaperSearchForm):
     """
     Simple form for the start page to start searching
     """
