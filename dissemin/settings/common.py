@@ -159,9 +159,12 @@ INSTALLED_APPS = (
     'bootstrap_datepicker_plus',
     'django_select2',
     'vinaigrette',
+    'tempus_dominus',
 )
 
-CRISPY_TEMPLATE_PACK = 'bootstrap3'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+TEMPUS_DOMINUS_INCLUDE_ASSETS = False
 
 SELECT2_JS = None
 SELECT2_CSS = None
