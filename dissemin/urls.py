@@ -59,10 +59,6 @@ class LoginView(generic.TemplateView):
     template_name = 'dissemin/login.html'
 
 
-class SandboxLoginView(allauth.account.views.LoginView):
-    template_name = 'dissemin/sandbox.html'
-
-
 def logoutView(request):
     logout(request)
     if 'HTTP_REFERER' in request.META:
@@ -104,8 +100,6 @@ urlpatterns = [
     path('jsreverse/', django_js_reverse.views.urls_js, name='js_reverse'),
     # Social auth
     path('accounts/login/', LoginView.as_view(), name='account_login'),
-    path('accounts/sandbox_login/',
-        SandboxLoginView.as_view(), name='sandbox-login'),
     path('accounts/logout/', logoutView, name='account_logout'),
     path('accounts/social/', include('allauth.socialaccount.urls')),
     # JavaScript i18n
