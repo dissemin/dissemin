@@ -32,3 +32,8 @@ class StartPageView(TemplateView):
         )[:5]
 
         return context
+
+
+class LoginView(TemplateView):
+
+    template_name = 'dissemin/login.html'

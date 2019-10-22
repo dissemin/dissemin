@@ -35,6 +35,7 @@ from django.shortcuts import render
 from django.views import generic
 from django.views.i18n import JavaScriptCatalog
 
+from dissemin.views import LoginView
 from dissemin.views import StartPageView
 
 try:
@@ -53,10 +54,6 @@ def handler500(request, exception=None):
     response = render(request, '500.html', {'exception':exception})
     response.status_code = 500
     return response
-
-
-class LoginView(generic.TemplateView):
-    template_name = 'dissemin/login.html'
 
 
 def logoutView(request):
