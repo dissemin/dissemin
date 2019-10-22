@@ -35,6 +35,18 @@ from papers.models import Researcher
 from papers.doi import doi_to_url
 
 
+class TestAdvancedSearchView():
+    """
+    Test for the AdvancedSearchView
+    """
+
+    def test_advanced_search(self, check_page):
+        """
+        Checks the html of the advanced search
+        """
+        check_page(200, 'advanced-search')
+
+
 @pytest.mark.usefixtures("load_test_data")
 class TestDoai():
     def test_redirect_pdf(self, check_permanent_redirect):
