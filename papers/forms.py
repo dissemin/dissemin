@@ -19,7 +19,7 @@
 #
 
 
-from bootstrap_datepicker_plus import DatePickerInput
+
 from haystack import inputs
 from haystack.forms import SearchForm
 from haystack.query import SQ
@@ -27,6 +27,7 @@ from haystack.query import SQ
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
+from dissemin.widgets import OIDatePicker
 from papers.baremodels import PAPER_TYPE_CHOICES
 from papers.models import Department
 from papers.models import Paper
@@ -78,23 +79,17 @@ class PaperSearchForm(SearchForm):
     DATE_FORMATS = ['%Y-%m-%d', '%Y-%m', '%Y']
     pub_after = forms.DateField(
         input_formats=DATE_FORMATS,
-        widget=DatePickerInput(
-            format=DATE_FORMATS[0],
-            options={'useCurrent': False}
-        ),
+        widget=OIDatePicker,
         required=False
     )
     pub_before = forms.DateField(
         input_formats=DATE_FORMATS,
-        widget=DatePickerInput(
-            format=DATE_FORMATS[0],
-            options={'useCurrent': False}
-        ),
+        widget=OIDatePicker(),
         required=False
     )
     doctypes = forms.MultipleChoiceField(
         choices=PAPER_TYPE_CHOICES,
-        widget=forms.CheckboxSelectMultiple,
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'form-check-input'}),
         required=False)
     authors = forms.CharField(max_length=200, required=False)
     sort_by = forms.ChoiceField(choices=SORT_CHOICES, required=False)
