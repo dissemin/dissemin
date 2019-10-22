@@ -38,7 +38,7 @@
                 </li>
             {% else %}
                 <li class="nav-item">
-                    <a class="nav-link active" href="{% url 'account_login' %}?next={{ request.get_full_path |urlencode}}" rel="nofollow">{% trans 'Login' %}</a>
+                    <a class="nav-link active" href="{% url 'account-login' %}?next={{ request.get_full_path |urlencode}}" rel="nofollow">{% trans 'Login' %}</a>
                 </li>
             {% endif %}
         </ul>

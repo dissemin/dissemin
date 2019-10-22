@@ -96,8 +96,8 @@ urlpatterns = [
     path('', include('autocomplete.urls')),
     path('jsreverse/', django_js_reverse.views.urls_js, name='js_reverse'),
     # Social auth
-    path('accounts/login/', LoginView.as_view(), name='account_login'),
-    path('accounts/logout/', logoutView, name='account_logout'),
+    path('accounts/login/', LoginView.as_view(), name='account-login'),
+    path('accounts/logout/', logoutView, name='account-logout'),
     path('accounts/social/', include('allauth.socialaccount.urls')),
     # JavaScript i18n
     path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
