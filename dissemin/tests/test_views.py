@@ -14,7 +14,7 @@ class TestMiscPages():
     Tests various more or less static pages
     """
 
-    @pytest.mark.parametrize('page', ['faq', 'tos', ])
+    @pytest.mark.parametrize('page', ['faq', 'tos', 'sources',])
     def test_static(self, page, check_page):
         """
         Tests above static pages

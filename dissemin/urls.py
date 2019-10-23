@@ -86,13 +86,13 @@ js_info_dict = {
 urlpatterns = [
     # Start page
     path('', StartPageView.as_view(), name='start-page'),
+    # Static pages
     path('faq', TemplateView.as_view(template_name='dissemin/faq.html'), name='faq'),
+    path('sources', TemplateView.as_view(template_name='dissemin/sources.html'), name='sources'),
     path('tos', TemplateView.as_view(template_name='dissemin/tos.html'), name='tos'),
     # Errors
     path('404-error', temp('404.html')),
     path('500-error', temp('500.html')),
-    # Static views
-    path('sources', temp('dissemin/sources.html'), name='sources'),
     # Admin interface
     path('admin/', admin.site.urls),
     # Apps
