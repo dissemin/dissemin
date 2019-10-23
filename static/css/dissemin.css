@@ -5,6 +5,20 @@
 .bg-blue {
     background-color: #2A6496;
 }
+
+.bg-light-blue {
+    background-color: #5F8BB0;
+}
+
+
+/* ***
+ * Images
+ * *** */
+
+.statusImage {
+    max-height: 4rem;
+}
+
 /* ***
  * Navigation bar
  * *** */
