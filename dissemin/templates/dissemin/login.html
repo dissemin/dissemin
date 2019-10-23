@@ -31,7 +31,7 @@
                             If you already have an ORCID account, you can use it with Dissemin. We will not make any changes to your profile.
                         {% endblocktrans %}
                     </p>
-                    <a class="btn btn-success" href="{% provider_login_url "orcid" auth_params="show_login=True" %}">{% trans "Log in" %}</a>
+                    <a class="btn btn-orcid" href="{% provider_login_url "orcid" auth_params="show_login=True" %}">{% trans "Log in" %}</a>
                 </div>
             </div>
             <div class="col-12 col-lg-6 d-lg-flex">
@@ -42,7 +42,7 @@
                             Not an ORCID user yet? Create an account, it is free and takes just a few seconds.
                         {% endblocktrans %}
                     </p>
-                    <a class="btn btn-success" href="{% provider_login_url "orcid" auth_params="show_login=False" %}">{% trans "Sign up" %}</a>
+                    <a class="btn btn-orcid" href="{% provider_login_url "orcid" auth_params="show_login=False" %}">{% trans "Sign up" %}</a>
                 </div>
             </div>
         </div>
