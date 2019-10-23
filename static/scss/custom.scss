@@ -4,15 +4,23 @@
 //@import "bootstrap/bootstrap";
 
 // Colors we define
-$primary: #2A6496 !default; // Dissemin dark blue
-$secondary: #5F8BB0 !default; // Dissemin light blue
-$tertiary: #71AF33 !default; // Dissemin green
+$dark-blue: #2A6496; // Dissemin dark blue
+$dark-green: #71AF33; // Dissemin green
+$light-blue: #5F8BB0; // Dissemin light blue
 
 $theme-colors: (
-  "primary": $primary,
-  "secondary": $secondary,
-  "tertiary": $tertiary,
+  "primary": $dark-blue,
+  "secondary": $light-blue,
+  "tertiary": $dark-green,
 );
 
 // We compile entire bootstrap
 @import "bootstrap/bootstrap";
+
+/* Custom mixins */
+
+/* Buttons */
+
+.btn-search {
+  @include button-variant($dark-green, $dark-green);
+}
