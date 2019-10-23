@@ -87,12 +87,12 @@ urlpatterns = [
     # Start page
     path('', StartPageView.as_view(), name='start-page'),
     path('faq', TemplateView.as_view(template_name='dissemin/faq.html'), name='faq'),
+    path('tos', TemplateView.as_view(template_name='dissemin/tos.html'), name='tos'),
     # Errors
     path('404-error', temp('404.html')),
     path('500-error', temp('500.html')),
     # Static views
     path('sources', temp('dissemin/sources.html'), name='sources'),
-    path('tos', temp('dissemin/tos.html'), name='tos'),
     # Admin interface
     path('admin/', admin.site.urls),
     # Apps
