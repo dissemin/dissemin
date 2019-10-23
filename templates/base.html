@@ -37,7 +37,7 @@
         {% comment %}
             We use flex, to make the container use screen height or more. Below we use a div, that uses rest of the available space.
         {% endcomment %}
-        <div class="container border-left border-right p-0 d-flex flex-column vh-100" >
+        <div class="container border-left border-right p-0 d-flex flex-column min-vh-100" >
             {% include 'navbar.html' %}
             {% block content %}{% endblock %}
             {% comment %}
