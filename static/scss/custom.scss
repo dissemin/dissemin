@@ -1,0 +1,18 @@
+// Required
+// We import bootstrap.min.css to get the vendor prefixes. Including them not, would require us to use autoprefixer, which is a node package (but it is integrated in django-sass-processor)
+@import "../css/bootstrap.min.css";
+//@import "bootstrap/bootstrap";
+
+// Colors we define
+$primary: #2A6496 !default; // Dissemin dark blue
+$secondary: #5F8BB0 !default; // Dissemin light blue
+$tertiary: #71AF33 !default; // Dissemin green
+
+$theme-colors: (
+  "primary": $primary,
+  "secondary": $secondary,
+  "tertiary": $tertiary,
+);
+
+// We compile entire bootstrap
+@import "bootstrap/bootstrap";
