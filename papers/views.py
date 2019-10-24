@@ -125,7 +125,7 @@ class PaperSearchView(SearchView):
     """Displays a list of papers and a search form."""
 
     paginate_by = NB_RESULTS_PER_PAGE
-    template_name = 'papers/search.html'
+    template_name = 'papers/search_new.html'
     form_class = PaperSearchForm
     queryset = SearchQuerySet().models(Paper)
 
@@ -150,7 +150,7 @@ class PaperSearchView(SearchView):
         query_string = self.request.META.get('QUERY_STRING', '')
         context['breadcrumbs'] = [(search_description, '')]
         context['search_description'] = search_description if query_string else _('All papers')
-        context['head_search_description'] = _('Papers')
+        context['search_description_title'] = _('Papers')
         context['nb_results'] = self.queryset.count()
         context['search_stats'] = BareAccessStatistics.from_search_queryset(self.queryset)
         context['on_statuses'] = json.dumps(context['form'].on_statuses())
@@ -260,7 +260,7 @@ class MyTodoListView(LoginRequiredMixin, PaperSearchView):
         context['ajax_url'] = reverse('ajax-todolist')
 
         context['breadcrumbs'] = [(_('To-do list'), None)]
-        context['head_search_description'] = context['search_description'] = _('Papers on my to-do list')
+        context['search_description_title'] = context['search_description'] = _('Papers on my to-do list')
         context['view'] = 'my-todolist'
 
         return context
@@ -312,7 +312,7 @@ class ResearcherView(PaperSearchView):
         context['researcher'] = researcher
         context['researcher_id'] = researcher.id
         context['search_description'] += ' ' + _('authored by') + ' ' +str(researcher)
-        context['head_search_description'] = str(researcher)
+        context['search_description_title'] = str(researcher)
         context['breadcrumbs'] = researcher.breadcrumbs()
         context['ajax_url'] = reverse(
             'ajax-researcher',
@@ -346,7 +346,7 @@ class DepartmentPapersView(PaperSearchView):
     def get_context_data(self, **kwargs):
         context = super(DepartmentPapersView, self).get_context_data(**kwargs)
         context['department'] = self.dept
-        context['search_description'] = context['head_search_description'] = (
+        context['search_description'] = context['search_description_title'] = (
             str(self.dept))
         context['breadcrumbs'] = self.dept.breadcrumbs()+[(_('Papers'), '')]
         return context
@@ -381,7 +381,7 @@ class PublisherPapersView(PaperSearchView):
             .get_context_data(**kwargs)
         context[self.publisher_key] = publisher
         context['search_description'] += self.published_by+str(publisher)
-        context['head_search_description'] = str(publisher)
+        context['search_description_title'] = str(publisher)
         context['breadcrumbs'] = publisher.breadcrumbs()+[(_('Papers'), '')]
         return context
 
