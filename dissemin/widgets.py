@@ -37,6 +37,5 @@ class OIDatePicker(DatePicker):
             options = {**self.oi_options, **options}
         else:
             options = self.oi_options
-        print(options)
 
         super().__init__(attrs, options)
