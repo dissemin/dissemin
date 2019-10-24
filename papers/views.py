@@ -130,21 +130,26 @@ class PaperSearchView(SearchView):
     queryset = SearchQuerySet().models(Paper)
 
     def get(self, request, *args, **kwargs):
+        """
+        If the user is no admin, we remove visivle, availability and oa_status GET statements
+        """
         if not is_admin(request.user):
             request.GET = request.GET.copy()
             request.GET.pop('visible', None)
             request.GET.pop('availability', None)
             request.GET.pop('oa_status', None)
 
-        return super(PaperSearchView, self).get(request, *args, **kwargs)
+        return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(PaperSearchView, self).get_context_data(**kwargs)
+        """
+        We add some context data.
+        """
+        context = super().get_context_data(**kwargs)
         search_description = _('Papers')
         query_string = self.request.META.get('QUERY_STRING', '')
         context['breadcrumbs'] = [(search_description, '')]
-        context['search_description'] = (
-            search_description if query_string else _('All papers'))
+        context['search_description'] = search_description if query_string else _('All papers')
         context['head_search_description'] = _('Papers')
         context['nb_results'] = self.queryset.count()
         context['search_stats'] = BareAccessStatistics.from_search_queryset(self.queryset)
@@ -157,24 +162,17 @@ class PaperSearchView(SearchView):
             del search_params_without_sort_by['sort_by']
         except KeyError:
             pass
+
         # Make a clean URL with useless GET params
         for key in list(search_params_without_sort_by.keys()):
             if not search_params_without_sort_by[key]:
                 del search_params_without_sort_by[key]
-        context['search_params_without_sort_by'] = (
-            search_params_without_sort_by.urlencode()
-        )
+        context['search_params_without_sort_by'] = search_params_without_sort_by.urlencode()
+
         # Get current sort_by value
-        current_sort_by_value = self.request.GET.get(
-            'sort_by',
-            None
-        )
+        current_sort_by_value = self.request.GET.get('sort_by', None)
         try:
-            current_sort_by = next(
-                v
-                for k, v in self.form_class.SORT_CHOICES
-                if k == current_sort_by_value
-            )
+            current_sort_by = next(v for k, v in self.form_class.SORT_CHOICES if k == current_sort_by_value)
         except StopIteration:
             current_sort_by = self.form_class.SORT_CHOICES[0][1]
         context['current_sort_by'] = current_sort_by
@@ -193,7 +191,7 @@ class PaperSearchView(SearchView):
         was passed, in which case we add a default empty query.
         Otherwise the search form is not bound and search fails.
         """
-        args = super(PaperSearchView, self).get_form_kwargs()
+        args = super().get_form_kwargs()
 
         if 'data' not in args:
             args['data'] = {self.search_field: ''}
@@ -201,14 +199,21 @@ class PaperSearchView(SearchView):
         return args
 
     def render_to_response(self, context, **kwargs):
+        """
+        If JSON is requested, we deliver JSON, else normal HTML
+        """
         if self.request.META.get('CONTENT_TYPE') == 'application/json':
             response = self.raw_response(context, **kwargs)
-            return HttpResponse(json.dumps(response),
-                                content_type='application/json')
-        return super(PaperSearchView, self)\
-            .render_to_response(context, **kwargs)
+            return HttpResponse(
+                json.dumps(response),
+                content_type='application/json'
+            )
+        return super().render_to_response(context, **kwargs)
 
     def raw_response(self, context, **kwargs):
+        """
+        A raw response, containing meta information and some HTML
+        """
         context['request'] = self.request
         listPapers = loader.render_to_string('papers/paperList.html', context)
         stats = context['search_stats'].pie_data()
