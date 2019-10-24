@@ -113,7 +113,7 @@
     {% include 'breadcrumbs.html' %}
     <div class="container">
         <div class="row">
-            <div class="col-12 col-md-3">
+            <div class="col-12 col-md-4">
                 <h3 class="border-bottom">{% trans "Statistics" %}</h3>
                 <p>
                     {% blocktrans trimmed with formattedCounter=nb_results|intcomma count counter=nb_results|default:0 %}
@@ -165,7 +165,7 @@
                 </div>
 
             </div>
-            <div class="col-12 col-md-9 order-md-first">
+            <div class="col-12 col-md-8 order-md-first">
                 {% for result in object_list %}
                     {% with paper=result.object %}
                         <p>{{ paper.title }}</p>
