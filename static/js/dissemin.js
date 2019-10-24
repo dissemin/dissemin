@@ -28,6 +28,18 @@ function orcidLogout (orcid_base_domain) {
 
 
 /* ***
+ * Search
+ * *** */
+
+
+function add_claim_mark_handlers () {
+    // Claiming
+    $(".unclaim-button").click(claim_unclaim);
+    $(".claim-button").click(claim_unclaim);
+    // Todolist
+}
+
+/* ***
  * Statistic
  * *** */
 

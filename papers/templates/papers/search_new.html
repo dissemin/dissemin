@@ -6,6 +6,109 @@
 
 {% block title %}{{ search_description_title }}{% endblock %}
 
+{% block scripts %}
+    <script src="{% static 'js/d3.min.js' %}"></script>
+    <script src="{% static 'papers/refresh.js' %}"></script>
+    <script>
+    // Setting variables for called functions
+    var csrf_token = '{{csrf_token}}';
+    {% if view == 'my-todolist' %}
+        var todolist_fadeout = true
+    {% endif %}
+
+    // Function handels claiming and unclaiming
+    function claim_unclaim (evt) {
+        var obj = $(evt.target);
+        var pk = obj.attr("data-pk");
+        var action = obj.attr("data-action");
+        if (action != "claim" && action != "unclaim") {
+            // action currently ongoing
+            return;
+        }
+        var my_url = "";
+        if (action == "claim") {
+            obj.text("{% trans "Claiming..." %}");
+            my_url = "{% url "ajax-claimPaper" %}";
+        }
+        else {
+            obj.text("{% trans "Unclaiming..." %}");
+            my_url = "{% url "ajax-unclaimPaper" %}";
+        }
+        obj.toggleClass("disabled");
+        $.ajax({
+            method: "post",
+            url: my_url,
+            data: {"pk": pk,
+            "csrfmiddlewaretoken": '{{csrf_token}}'},
+            cache: false,
+            success: function (data) {
+                if (action == "claim") {
+                    obj.text("{% trans "Exclude from my profile" %}");
+                    obj.attr("data-action", "unclaim");
+                }
+                else {
+                    obj.text("{% trans "Include in my profile" %}");
+                    obj.attr("data-action", "claim");
+                    {% if user_researcher == researcher %}
+                        // user_researcher is only defined on profile in which case it is equal to the researcher of the currently logged in user; if it is the profile currently being viewed, we must remove the paper entirely
+                        $("#paper-" + pk).fadeOut(300, function() { $(this).remove(); });
+                    {% endif %}
+                }
+                obj.toggleClass("claim-button");
+                obj.toggleClass("unclaim-button");
+                obj.toggleClass("disabled");
+            },
+            error: function(data) {
+                if (action == "claim") {
+                    obj.text("{% trans "Claiming failed!" %}");
+                }
+                else {
+                    obj.text("{% trans "Unclaiming failed!" %}");
+                }
+                obj.toggleClass("disabled");
+            }
+        });
+    }
+
+    $(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+        // Trigger onChange events on the date pickers
+        $('#id_pub_after').on('dp.change', function (ev) {
+            $('#searchPapers').change();
+        });
+        $('#id_pub_before').on('dp.change', function (ev) {
+            $('#searchPapers').change();
+        });
+
+        add_claim_mark_handlers();
+
+        var config = {
+            refreshURL: "{{ ajax_url }}",
+            refreshMessage: "{% trans "Refreshing results" %}",
+            logoHelpNode: $('.logoHelpPopover'),
+            refetchButtonNode: $('#refetchPubsButton'),
+            hook: add_claim_mark_handlers,
+            waitingAreaContainerNode: $('#waitingAreaContainer'),
+            paperSearchResultsNode: $('#paperSearchResults'),
+            nbPapersFoundNode: $('#nbPapersFound'),
+            animatedBirdGIF: "{% static "img/animated-bird.gif" %}",
+            {% if researcher %}
+                refetchURL: "{% url "refetch-researcher" researcher.pk %}",
+                refetchMessage: "{% trans "Refreshing profile" %}",
+                currentTask: {% if researcher.current_task %}"{{ researcher.get_current_task_display }}"{% else %} null {% endif %},
+                setResearcherDepartmentURL: "{% url 'ajax-setResearcherDepartment' %}",
+            {% endif %}
+            isSuperUser: {{ request.user.is_superuser|yesno:"true,false,false" }},
+            initialMessages: {{ messages | safe }}
+        }
+
+        init_paper_module(config);
+    });
+
+
+</script>
+{% endblock %}
+
 {% block content %}
     {% include 'breadcrumbs.html' %}
     <div class="container">
@@ -19,9 +122,43 @@
                         {{ formattedCounter }} papers found
                     {% endblocktrans %}
                 </p>
+                <form method="get" action="." id="searchPapersStatistics" onChange="$(this).submit()">
+                    <div class="form-group" id="searchPaperCombinedStatus">
+                        <!-- Keep track of external GET parameters -->
+                        <input type="hidden" class="getStorage" name="q" value="{{ form.q.value|default:"" }}"/>
+                        <input type="hidden" class="getStorage" name="authors" value="{{ form.authors.value|default:""}}"/>
+                        <input type="hidden" class="getStorage" name="pub_after" value="{{ form.pub_after.value|default:""}}"/>
+                        <input type="hidden" class="getStorage" name="pub_before" value="{{ form.pub_before.value|default:""}}"/>
+                        <input type="hidden" class="getStorage" name="sort_by" value="{{ form.sort_by.value|default:"" }}"/>
+                        {% for item in form.doctypes %}
+                            <input type="hidden" class="getStorage" name="doctypes" value="{% if item.data.value in form.doctypes.value %}{{ item.data.value }}{% endif %}"/>
+                        {% endfor %}
+                        {% if request.user.is_superuser %}
+                            <input type="hidden" class="getStorage" name="visible" value="{{ form.visible.value|default:"" }}"/>
+                            <input type="hidden" class="getStorage" name="availability" value="{{ form.availability.value|default:"" }}"/>
+                            {% for item in form.oa_status %}
+                                <input type="hidden" class="getStorage" name="oa_status" value="{% if item.data.value in form.oa_status.value %}{{ item.data.value }}{% endif %}"/>
+                            {% endfor %}
+                        {% endif %}
+                        {% with combined_status_form=True %}
+                            {% with combined_status=form.status %}
+                                {% include "statistics/pie_chart_legend.html" with stats=search_stats object_id=researcher.object_id stats_counter=1 %}
+                            {% endwith %}
+                        {% endwith %}
+                        <noscript>{# Clarifies the usage of the checkboxes in the caption of the pie. #}
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-default" form="searchPapersStatistics">{% trans "Search" %}</button>
+                            </div>
+                        </noscript>
+                    </div>
+                </form>
             </div>
             <div class="col-12 col-md-9 order-md-first">
-                spam
+                {% for result in object_list %}
+                    {% with paper=result.object %}
+                        <p>{{ paper.title }}</p>
+                    {% endwith %}
+                {% endfor %}
             </div>
         </div>
     </div>

@@ -12,6 +12,17 @@
 
 
 /* ***
+ * Forms
+ * *** */
+
+/* In case we do no want to show check boxes */
+.hiddenCheckboxes input[type=checkbox]
+{
+    display: none;
+}
+
+
+/* ***
  * Images
  * *** */
 
@@ -36,6 +47,19 @@
 .stats_caption_box {
 	display:table-cell;
 	vertical-align:middle;
+}
+
+/* Custom checkmark only visible if checked and last column*/
+.statsCaptionCheckmark
+{
+    display: table-cell;
+    text-align: right;
+    visibility: hidden;
+}
+
+input[type=checkbox]:checked ~ .statsCaptionCheckmark
+{
+    visibility: visible;
 }
 
 .stats_caption_color {
@@ -67,6 +91,11 @@
 .stats_caption_table {
     display:table;
     text-align:left;
+}
+
+.stats_caption_table label {
+    margin: -0.2rem;
+    width: 100%;
 }
 
 
