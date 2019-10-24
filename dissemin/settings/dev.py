@@ -66,4 +66,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'dissemin_media')
 del TEMPLATES[0]['OPTIONS']['loaders']
 TEMPLATES[0]['APP_DIRS'] = True
 
-
+# Set to tmp_static, so it does not pollute normal static folders
+SASS_PROCESSOR_ROOT = os.path.join(BASE_DIR, 'tmp_static')

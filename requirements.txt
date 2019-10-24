@@ -12,6 +12,7 @@ django-bootstrap-datepicker-plus
 django-cache-machine
 django-capture-tag
 django-cas-ng
+django-compressor
 django-countries
 django-crispy-forms
 django-geojson
@@ -22,6 +23,7 @@ django-leaflet
 django-positions
 django-memoize
 django-redis-cache
+django-sass-processor
 django-settings-export
 django-solo
 django-ratelimit
@@ -34,6 +36,7 @@ elasticsearch==6.3.1
 httplib2
 jsonfield
 langdetect
+libsass
 lxml
 mock
 multiprocessing_generator

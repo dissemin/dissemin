@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Data sources" %}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="jumbotron mt-3">
+        <h1 class="text-center">{% trans "Data Sources" %}</h1>
+    </div>
+    <ul>
+        <li>
+            {% trans '<a href="https://www.crossref.org">CrossRef.org</a> for traditional academic papers' %}
+        </li>
+        <li>
+            {% trans '<a href="https://www.base-search.net">BASE (Bielefeld Academic Search Engine)</a> for other papers, including preprints' %}
+        </li>
+        <li>
+            {% trans '<a href="https://www.sherpa.ac.uk/romeo/">SHERPA/RoMEO</a> for publisher policies' %}
+        </li>
+        <li>
+            {% trans '<a href="https://www.zotero.org/">Zotero</a> for metadata associated to DOIs' %}
+        </li>
+    </ul>
+</div>
+{% endblock content %}

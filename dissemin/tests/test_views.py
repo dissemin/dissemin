@@ -1,9 +1,26 @@
+import pytest
+
 from datetime import date
+
 from django.urls import reverse
 
 from deposit.models import DepositRecord
 from dissemin.forms import StartPageSearchForm
 from upload.models import UploadedPDF
+
+
+class TestMiscPages():
+    """
+    Tests various more or less static pages
+    """
+
+    @pytest.mark.parametrize('page', ['faq', 'tos', 'sources',])
+    def test_static(self, page, check_page):
+        """
+        Tests above static pages
+        """
+        check_page(200, page)
+
 
 
 class TestStartPageView():
@@ -54,11 +71,3 @@ class TestStartPageView():
         assert len(latest_deposits) <= 5
         for d in latest_deposits:
             assert d.status == 'published'
-
-
-
-        
-
-
-
-        

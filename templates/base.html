@@ -1,5 +1,6 @@
 {% load static %}
 {% load i18n %}
+{% load sass_tags %}
 
 <!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}
@@ -10,7 +11,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
         <!-- CSS -->
-        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+        {% comment %}
+            Our custom style that extends/changes bootstrap styles.
+            It contains bootstrap, so we do not need to link bootstrap css
+        {% endcomment %}
+        <link rel="stylesheet" href="{% sass_src 'scss/custom.scss' %}" />
         <link rel="stylesheet" href="{% static 'css/open-iconic-bootstrap.css' %}" />
         <link rel="stylesheet" href="{% static 'css/dissemin.css' %}" />
         <link rel="stylesheet" href="{% static 'css/tempusdominus-bootstrap-4.min.css' %}" />
@@ -32,9 +37,16 @@
     </head>
 
     <body>
-        <div class="container border-left border-right p-0">
+        {% comment %}
+            We use flex, to make the container use screen height or more. Below we use a div, that uses rest of the available space.
+        {% endcomment %}
+        <div class="container border-left border-right p-0 d-flex flex-column min-vh-100" >
             {% include 'navbar.html' %}
             {% block content %}{% endblock %}
+            {% comment %}
+                The box above the footer uses all vertical space if any is available. Thus, the footer is moved down, if there is few content on the screen.
+            {% endcomment %}
+            <div class="flex-fill"></div>
             {% include 'footer.html' %}
             {% comment %}
                 This is the beta ribbon, indicating, that it's not a production instance

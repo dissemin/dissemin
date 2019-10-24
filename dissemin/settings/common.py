@@ -160,6 +160,7 @@ INSTALLED_APPS = (
     'django_select2',
     'vinaigrette',
     'tempus_dominus',
+    'sass_processor',
 )
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -236,6 +237,20 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), os.path.join(BASE_DIR, 'di
 STATIC_URL = '/static/'
 # Relative URL where user uploads are accessed (you don't have to change this).
 MEDIA_URL = '/media/'
+
+# SASS options
+# Precision is required by bootstrap
+SASS_PRECISION = 6
+
+SASS_PROCESSOR_INCLUDE_DIRS = [
+    os.path.join(BASE_DIR, 'templates/scss'),
+]
+
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'sass_processor.finders.CssFinder',
+]
 
 ### Celery config ###
 # Celery runs asynchronous tasks such as metadata harvesting or
