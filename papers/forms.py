@@ -20,16 +20,14 @@
 
 
 
-from statistics.models import COMBINED_STATUS_CHOICES
-from statistics.models import PDF_STATUS_CHOICES
-
-from bootstrap_datepicker_plus import DatePickerInput
-from django import forms
-from django.utils.translation import ugettext_lazy as _
 from haystack import inputs
 from haystack.forms import SearchForm
 from haystack.query import SQ
 
+from django import forms
+from django.utils.translation import ugettext_lazy as _
+
+from dissemin.widgets import OIDatePicker
 from papers.baremodels import PAPER_TYPE_CHOICES
 from papers.models import Department
 from papers.models import Paper
@@ -37,6 +35,8 @@ from papers.models import Researcher
 from papers.utils import remove_diacritics
 from papers.utils import validate_orcid
 from publishers.models import OA_STATUS_CHOICES_WITHOUT_HELPTEXT
+from statistics.models import COMBINED_STATUS_CHOICES
+from statistics.models import PDF_STATUS_CHOICES
 
 
 class OrcidField(forms.CharField):
@@ -66,13 +66,7 @@ class Sloppy(inputs.Exact):
         return "%s~%d" % (exact, self.kwargs['slop'])
 
 
-def aggregate_combined_status(queryset):
-    return queryset.aggregations({
-        "status": {"terms": {"field": "combined_status_exact"}},
-    })
-
-
-class PaperForm(SearchForm):
+class PaperSearchForm(SearchForm):
     SORT_CHOICES = [
         ('', _('newest first')),
         ('pubdate', _('oldest first')),
@@ -85,23 +79,17 @@ class PaperForm(SearchForm):
     DATE_FORMATS = ['%Y-%m-%d', '%Y-%m', '%Y']
     pub_after = forms.DateField(
         input_formats=DATE_FORMATS,
-        widget=DatePickerInput(
-            format=DATE_FORMATS[0],
-            options={'useCurrent': False}
-        ),
+        widget=OIDatePicker,
         required=False
     )
     pub_before = forms.DateField(
         input_formats=DATE_FORMATS,
-        widget=DatePickerInput(
-            format=DATE_FORMATS[0],
-            options={'useCurrent': False}
-        ),
+        widget=OIDatePicker(),
         required=False
     )
     doctypes = forms.MultipleChoiceField(
         choices=PAPER_TYPE_CHOICES,
-        widget=forms.CheckboxSelectMultiple,
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'form-check-input'}),
         required=False)
     authors = forms.CharField(max_length=200, required=False)
     sort_by = forms.ChoiceField(choices=SORT_CHOICES, required=False)
@@ -184,7 +172,9 @@ class PaperForm(SearchForm):
                 sq.add(SQ(authors_full=Sloppy(reversed_name, slop=1)), SQ.OR)
                 self.queryset = self.queryset.filter(sq)
 
-        self.queryset = aggregate_combined_status(self.queryset)
+        self.queryset = self.queryset.aggregations({
+            "status": {"terms": {"field": "combined_status_exact"}},
+        })
 
         status = self.cleaned_data['status']
         if status:

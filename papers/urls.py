@@ -29,8 +29,6 @@ from papers import views
 urlpatterns = [
     # Paper views
     url(r'^search/$', views.PaperSearchView.as_view(), name='search'),
-    url(r'^search/advanced$', views.AdvancedPaperSearchView.as_view(),
-        name='advanced-search'),
     url(r'^r/(?P<researcher>\d+)/(?P<slug>[\w-]*)$',
         views.ResearcherView.as_view(), name='researcher'),
     url(r'^researcher/(?P<researcher>\d+)$',
