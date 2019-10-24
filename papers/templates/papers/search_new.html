@@ -152,6 +152,18 @@
                         </noscript>
                     </div>
                 </form>
+
+                <h3 class="border-bottom">{% trans "Tools" %}</h3>
+                <div class="dropdown">
+                    <p class="d-inline">{% trans 'Sort by' %}</p>
+                    <button class="btn btn-outline-dark  btn-sm dropdown-toggle align-baseline " type="button" id="sortByDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ current_sort_by }}</button>
+                    <div class="dropdown-menu" aria-labelledby="sortByDropdown">
+                        {% for option in form.sort_by %}
+                            <a class="dropdown-item" href="?{{ search_params_without_sort_by }}&amp;sort_by={{ option.data.value }}" data-sort-by="{{ option.data.value }}">{{ option.data.label }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+
             </div>
             <div class="col-12 col-md-9 order-md-first">
                 {% for result in object_list %}
