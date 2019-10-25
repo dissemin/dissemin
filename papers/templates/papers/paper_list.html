@@ -1,6 +1,10 @@
 {% load bootstrap_pagination %}
+{% load cache %}
+{% load domain %}
 {% load i18n %}
 {% load static %}
+
+{% get_current_language as LANGUAGE_CODE %}
 
 <h1 class="border-bottom pb-3">{{ search_description }}</h1>
 
@@ -32,7 +36,18 @@
                         and {{ remaining_authors }} other authors
                     {% endblocktrans %}
                 {% endif %}
-                <h5 class="card-title">{{ paper.title }}</h5>
+                {% comment %}
+                {% cache 60000 paper_list paper.pk LANGUAGE_CODE researcher_id %}
+                {% endcomment %}
+                    <h4><a href="{{ paper.url }}" data-pk="{{ paper.id }}" data-params="{csrfmiddlewaretoken:'{{ csrf_token }}'">{% autoescape off %}{{ paper.title }}{% endautoescape %}</a></h4>
+                    {% if paper.pdf_url %}
+                        <a href="{{ paper.pdf_url }}" class="btn btn-outline-dark btn-sm" rel="nofollow"><span class="oi oi-data-transfer-download" aria-hidden="true"></span> {{ paper.pdf_url|domain }}</a>
+                    {% else %}
+                    <a href="{% url 'upload_paper' paper.pk %}" class="btn btn-outline-dark btn-sm" rel="nofollow"><span class="oi oi-data-transfer-upload"></span> {% trans "Upload" %}</a>
+                    {% endif %}
+                {% comment %}
+                {% endcache %}
+                {% endcomment %}
             </div>
         </div>
     {% endwith %}
