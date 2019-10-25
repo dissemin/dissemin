@@ -269,6 +269,7 @@
                     {% endcomment %}
 
                     {% if request.user.is_superuser %}
+                        <h4 class="border-bottom">{% trans 'Refine for superusers' %}</h4>
                         <div class="form-group">
                             <label for="{{ form.visible.id_for_label }}">{% trans "By visibility" %}</label>
                             {% render_field form.visible class="form-control" %}

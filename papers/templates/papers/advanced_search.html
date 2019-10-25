@@ -57,6 +57,7 @@
                 {% comment %}
                     We do not care to much about (responsive) design in case of super users. They are rare.
                 {% endcomment %}
+                <h4>{% trans "Fields for superusers" %}</h4>
                 <div class="form-group">
                     <label for="{{ form.visible.id_for_label }}">{% trans "By visibility" %}</label>
                     {% render_field form.visible class="form-control" %}
