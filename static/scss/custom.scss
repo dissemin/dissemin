@@ -20,6 +20,27 @@ $theme-colors: (
 
 /* Custom mixins */
 
+/* Borders */
+
+/* We want additional border sizes */
+
+$border-width-custom-1: 1px !default;
+$border-width-custom-2: 2px !default;
+$border-width-custom-3: 3px !default;
+$border-width-custom-4: 4px !default;
+$border-width-custom-5: 5px !default;
+$border-width-custom-6: 6px !default;
+$border-width-custom-7: 7px !default;
+$border-width-custom-8: 8px !default;
+
+$border-width-customs: ("1": $border-width-custom-1, "2": $border-width-custom-2, "3": $border-width-custom-3, "4": $border-width-custom-4, "5": $border-width-custom-5, "6": $border-width-custom-6, "7": $border-width-custom-7, "8": $border-width-custom-8);
+
+@each $name, $size in $border-width-customs {
+    @each $var in '', 'top-', 'right-', 'bottom-', 'left-' {
+        .border-#{$var}#{$name} { border-#{$var}width: $size !important; border-#{$var}style: solid; border-#{$var}color: $border-color;}
+    }
+}
+
 /* Buttons */
 
 .btn-search {
