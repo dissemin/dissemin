@@ -19,21 +19,21 @@
                 <h2 class="text-right">{{ paper.year }}</h2>
             </div>
         {% endifchanged %}
-            <div class="row pb-4">
-                <div class="col-2 border-right border-tertiary">
-                    {% with status_image='img/status_'|add:paper.combined_status_as_color|add:'.png' %}
-                        <img data-toggle="tooltip" title="{{ paper.status_helptext }}" data-placement="bottom" class="img-fluid" alt="{{ paper.status_helptext }}" src="{% static status_image %}"/>
-                    {% endwith %}
-                </div>
-                <div class="col-10">
-                    {% include 'papers/author_list.html' with author_list=paper.displayed_authors %}
-                    {% if paper.has_many_authors %}
-                        {% blocktrans trimmed with remaining_authors=paper.nb_remaining_authors %}
-                            and {{ remaining_authors }} other authors
-                        {% endblocktrans %}
-                    {% endif %}
-                    <h5 class="card-title">{{ paper.title }}</h5>
-                </div>
+        <div class="row pb-4">
+            <div class="col-2 border-right border-tertiary">
+                {% with status_image='img/status_'|add:paper.combined_status_as_color|add:'.png' %}
+                    <img data-toggle="tooltip" title="{{ paper.status_helptext }}" data-placement="bottom" class="img-fluid" alt="{{ paper.status_helptext }}" src="{% static status_image %}"/>
+                {% endwith %}
+            </div>
+            <div class="col-10">
+                {% include 'papers/author_list.html' with author_list=paper.displayed_authors %}
+                {% if paper.has_many_authors %}
+                    {% blocktrans trimmed with remaining_authors=paper.nb_remaining_authors %}
+                        and {{ remaining_authors }} other authors
+                    {% endblocktrans %}
+                {% endif %}
+                <h5 class="card-title">{{ paper.title }}</h5>
+            </div>
         </div>
     {% endwith %}
 {% endfor %}
