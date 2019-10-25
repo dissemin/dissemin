@@ -3,6 +3,7 @@
 {% load humanize %}
 {% load i18n %}
 {% load static %}
+{% load widget_tweaks %}
 
 {% block title %}{{ search_description_title }}{% endblock %}
 
@@ -113,7 +114,7 @@
     {% include 'breadcrumbs.html' %}
     <div class="container">
         <div class="row">
-            <div class="col-12 col-md-4">
+            <div class="col-12 col-md-4 pb-3">
                 <h3 class="border-bottom">{% trans "Statistics" %}</h3>
                 <p>
                     {% blocktrans trimmed with formattedCounter=nb_results|intcomma count counter=nb_results|default:0 %}
@@ -153,7 +154,10 @@
                     </div>
                 </form>
 
+                <!-- Tools -->
                 <h3 class="border-bottom">{% trans "Tools" %}</h3>
+
+                <!-- Sort by -->
                 <div class="dropdown">
                     <p class="d-inline">{% trans 'Sort by' %}</p>
                     <button class="btn btn-outline-dark dropdown-toggle align-baseline " type="button" id="sortByDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ current_sort_by }}</button>
@@ -164,7 +168,136 @@
                     </div>
                 </div>
 
+                <!-- Export as citations -->
+                <p><a href="#" data-toggle="modal" data-target="#exportCitationModal">{% trans "Export citations for current page" %}</a></p>
+
+                <h3 class="border-bottom">{% trans "Refine" %}</h3>
+                <form method="get" action="." id="searchPapers" onChange="$(this).submit()">
+                    <!-- Keep track of external GET parameters -->
+                    <input type="hidden" class="getStorage" name="q" value="{{ form.q.value|default:"" }}"/>
+                    <input type="hidden" class="getStorage" name="authors" value="{{ form.authors.value|default:""}}"/>
+                    <input type="hidden" class="getStorage" name="pub_after" value="{{ form.pub_after.value|default:""}}"/>
+                    <input type="hidden" class="getStorage" name="pub_before" value="{{ form.pub_before.value|default:""}}"/>
+                    <input type="hidden" class="getStorage" name="sort_by" value="{{ form.sort_by.value|default:"" }}"/>
+                    {% for item in form.doctypes %}
+                        <input type="hidden" class="getStorage" name="doctypes" value="{% if item.data.value in form.doctypes.value %}{{ item.data.value }}{% endif %}"/>
+                    {% endfor %}
+                    {% if request.user.is_superuser %}
+                        <input type="hidden" class="getStorage" name="visible" value="{{ form.visible.value|default:"" }}"/>
+                        <input type="hidden" class="getStorage" name="availability" value="{{ form.availability.value|default:"" }}"/>
+                        {% for item in form.oa_status %}
+                            <input type="hidden" class="getStorage" name="oa_status" value="{% if item.data.value in form.oa_status.value %}{{ item.data.value }}{% endif %}"/>
+                        {% endfor %}
+                    {% endif %}
+
+                    <!-- Actual refine search fields -->
+
+                    <!-- Title -->
+                    <div class="form-group" id="searchPapersName">
+                        <label for="{{ form.q.id_for_label }}">
+                            <a data-toggle="collapse" href="#{{ form.q.id_for_label }}" role="button" {% if form.q.value %}aria-expanded="true"{% else %}aria-expanded="false"{%endif%} aria-controls="{{ form.q.id_for_label }}">{% trans "By title" %} <small><span class="oi oi-caret-bottom"></span></small></a>
+                        </label>
+                        {% if form.q.value %}
+                            {% render_field form.q class="form-control collapse show" %}
+                        {% else %}
+                            {% render_field form.q class="form-control collapse" %}
+                        {% endif %}
+                    </div>
+
+                    <!-- Authors -->
+                    <div class="form-group" id="searchAuthorsName">
+                        <label for="{{ form.authors.id_for_label }}">
+                            <a data-toggle="collapse" href="#{{ form.authors.id_for_label }}" role="button" {% if form.authors.value %}aria-expanded="true"{% else %}aria-expanded="false"{%endif%} aria-controls="{{ form.authors.id_for_label }}">
+                                {% if researcher %}
+                                    {% trans "By co-authors" %}
+                                {% else %}
+                                    {% trans "By authors" %}
+                                {% endif %}
+                                <small><span class="oi oi-caret-bottom"></span></small>
+                            </a>
+                        </label>
+                        {% if form.authors.value %}
+                            {% render_field form.authors class="form-control collapse show" %}
+                        {% else %}
+                            {% render_field form.authors class="form-control collapse" %}
+                        {% endif %}
+                    </div>
+
+                    <!-- Publication date -->
+                        <a class="linkLabel" data-toggle="collapse" href="#searchPaperPubDateGroup" role="button" aria-expanded="{% if form.pub_after.value or form.pub_before.value %}true{% else %}false{% endif %}" aria-controls="searchPaperPubDateGroup">{% trans "By publication date" %} <small><span class="oi oi-caret-bottom"></span></small></a>
+                        <div class="collapse {% if form.pub_after.value or form.pub_before.value %}show{% endif %} pt-2" id="searchPaperPubDateGroup">
+                            <div class="form-group row" id="searchPaperPubDateAfter">
+                                <label class="col-2 col-form-label" for="{{ form.pub_after.id_for_label }}">{% trans "after" %}</label>
+                                <div class="col-10">
+                                    {% render_field form.pub_after class="form-control" %}
+                                </div>
+                            </div>
+                            <div class="form-group row" id="searchPaperPubDateBefore">
+                                <label class="col-2 col-form-label" for="{{ form.pub_before.id_for_label }}">{% trans "before" %}</label>
+                                <div class="col-10">
+                                    {% render_field form.pub_before class="form-control" %}
+                                </div>
+                            </div>
+                        </div>
+
+                    <!-- Document type -->
+                    <div class="form-group" id="searchPapersDoctype">
+                        <label><a data-toggle="collapse" href="#searchPaperDoctypeList" role="button" aria-expanded="{% if form.doctypes.value %}true{% else %}false{% endif %}" aria-controls="searchPaperDoctypeList">{% trans "By document type" %} <small><span class="oi oi-caret-bottom"></span></small></a></label>
+                        <div class="collapse {% if form.doctypes.value %}show{% endif %}" id="searchPaperDoctypeList">
+                            {% comment %}
+                                There are currently 13 doctypes, we place 7 in first column, then 6 in second. This is not really save on changing the number of doctypes.
+                            {% endcomment %}
+                            <div class="row">
+                                {% for checkbox in form.doctypes %}
+                                    {% if forloop.first or forloop.counter0 == 7 %}
+                                        <div class="col 12 col-md-6">
+                                    {% endif %}
+                                        <div class="form-check">
+                                            {{ checkbox.tag }}
+                                            <label class="form-check-label" for="{{ checkbox.id_for_label }}">{{ checkbox.choice_label }}</label>
+                                        </div>
+                                    {% if forloop.counter0 == 6 or forloop.last %}
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                    {% comment %}
+                        Fields for super user only. We do not care to much about look and feel, since this is not public.
+                    {% endcomment %}
+
+                    {% if request.user.is_superuser %}
+                        <div class="form-group">
+                            <label for="{{ form.visible.id_for_label }}">{% trans "By visibility" %}</label>
+                            {% render_field form.visible class="form-control" %}
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.availability.id_for_label }}">{% trans "By full text availability" %}</label>
+                        {% render_field form.availability class="form-control" %}
+                        </div>
+                        <div class="form-group">
+                            <label>{% trans "By publisher policy" %}</label>
+                            {% for checkbox in form.oa_status %}
+                                <div class="form-check">
+                                    {{ checkbox.tag }}
+                                    {{ checkbox.choice_label }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <!-- The button to trigger search -->
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-success text-center">
+                            <span class="oi oi-magnifying-glass" aria-hidden="true"></span> Search
+                        </button>
+                    </div>
+                </form>
             </div>
+
+            <!-- Content for results -->
             <div class="col-12 col-md-8 order-md-first">
                 {% for result in object_list %}
                     {% with paper=result.object %}
