@@ -1,0 +1,24 @@
+{% load author %}
+{% load i18n %}
+{% load orcid %}
+{% load static %}
+
+{% spaceless %}
+    {% for author in author_list %}
+    <span>{% if not forloop.first %},{% endif %}
+        <span data-pk="{{ author.pk }}" data-first="{{ author.name.first }}" data-last="{{ author.name.last }}" data-params="{csrfmiddlewaretoken:'{{ csrf_token }}'}">
+            {% if author.reseacher_id and author_researcher_id == researcher_id %}
+                <strong>{{ author }}</strong>
+            {% else %}
+                {{ author | authorlink }}
+            {% endif %}
+        </span>
+        {% if author.orcid %}
+            {% comment %}
+                We sset an ORCID Badge. If we have the ORCID in our system, then we link to our own researcher page, else to ORCID
+            {% endcomment %}
+            <a href={% if author.researcher_id %}"/{{ author.orcid }}"{% else %}"{{ author.orcid|orcid_to_url }}" target="blank"{% endif %} rel="nofollow" data.toggle="tooltip" title="{% trans "This contributorship is confirmed by ORCID."%}"> <img class="orcidInlineBadge" src="{% static "dissemin/img/orcid-big.png" %}" alt="ORCID" /></a>
+        {% endif %}
+    </span>
+    {% endfor %}
+{% endspaceless %}

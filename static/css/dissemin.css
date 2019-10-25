@@ -26,6 +26,10 @@
  * Images
  * *** */
 
+.orcidInlineBadge {
+    height: 1em;
+}
+
 .statusImage {
     max-height: 4rem;
 }

@@ -300,11 +300,7 @@
 
             <!-- Content for results -->
             <div class="col-12 col-md-8 order-md-first">
-                {% for result in object_list %}
-                    {% with paper=result.object %}
-                        <p>{{ paper.title }}</p>
-                    {% endwith %}
-                {% endfor %}
+                {% include "papers/paper_list.html" %}
             </div>
         </div>
     </div>
