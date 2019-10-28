@@ -381,7 +381,7 @@ function init_paper_module (config) {
     disableEmptyInputs(false)
   });
 
-  $('.sort-by-dropdown a').on('click', function (e) {
+  $('.sortBy').on('click', function (e) {
     e.preventDefault();
     notifyWaitingArea(config.refreshMessage)
     var href = $(this).attr('href');
