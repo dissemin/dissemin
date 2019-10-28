@@ -1,15 +1,17 @@
 {% load bootstrap_pagination %}
 {% load cache %}
+{% load canclaim %}
 {% load domain %}
 {% load i18n %}
 {% load static %}
+{% load todolist %}
 
 {% get_current_language as LANGUAGE_CODE %}
 
 <h1 class="border-bottom pb-3">{{ search_description }}</h1>
 
 {% if page_obj.paginator.num_pages > 1 %}
-    <nav class="searchPages pt-2">{% bootstrap_paginate page_obj range=10 extra_pagination_classes="justify-content-center"%}</nav>
+    <nav class="searchPages pt-2">{% bootstrap_paginate page_obj range=10 extra_pagination_classes="justify-content-center border-bottom"%}</nav>
 {% endif %}
 
 {% comment %}
@@ -19,7 +21,7 @@
 {% for result in object_list %}
     {% with paper=result.object %}
         {% ifchanged paper.year %}
-            <div class="container-fluid border-top p-0">
+            <div class="container-fluid p-0">
                 <h2 class="text-right">{{ paper.year }}</h2>
             </div>
         {% endifchanged %}
