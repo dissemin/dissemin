@@ -42,14 +42,40 @@
                 {% cache 60000 paper_list paper.pk LANGUAGE_CODE researcher_id %}
                 {% endcomment %}
                     <h4><a href="{{ paper.url }}" data-pk="{{ paper.id }}" data-params="{csrfmiddlewaretoken:'{{ csrf_token }}'">{% autoescape off %}{{ paper.title }}{% endautoescape %}</a></h4>
-                    {% if paper.pdf_url %}
-                        <a href="{{ paper.pdf_url }}" class="btn btn-outline-dark btn-sm" rel="nofollow"><span class="oi oi-data-transfer-download" aria-hidden="true"></span> {{ paper.pdf_url|domain }}</a>
-                    {% else %}
-                    <a href="{% url 'upload_paper' paper.pk %}" class="btn btn-outline-dark btn-sm" rel="nofollow"><span class="oi oi-data-transfer-upload"></span> {% trans "Upload" %}</a>
-                    {% endif %}
                 {% comment %}
                 {% endcache %}
                 {% endcomment %}
+
+                {% comment %}
+                    Paper Download
+                {% endcomment %}
+                {% if paper.pdf_url %}
+                    <a href="{{ paper.pdf_url }}" class="btn btn-outline-dark btn-sm" rel="nofollow"><span class="oi oi-data-transfer-download" aria-hidden="true"></span> {% trans "Download" %}</a> <span class="text-black-50">{{ paper.pdf_url|domain }}</span>
+                {% else %}
+                    <a href="{% url 'upload_paper' paper.pk %}" class="btn btn-outline-dark btn-sm" rel="nofollow"><span class="oi oi-data-transfer-upload"></span> {% trans "Upload" %}</a>
+                {% endif %}
+
+                {% comment %}
+                    Claim and unclaim paper
+                {% endcomment %}
+                {% if request.user in paper.owner %}
+                    <a class="btn btn-sm btn-outline-dark" data-pk="{{ paper.pk }}" data-action="unclaim">{% trans "Exclude from my profile" %}</a>
+                {% else %}
+                    {% canclaim request.user paper as can_claim %}
+                    {% if can_claim %}
+                        <a class="btn btn-sm btn-outline-dark" data-pk="{{ paper.pk }}" data-action="claim">{% trans "Include in my profile" %}</a>
+                    {% endif %}
+                {% endif %}
+            {% if request.user.is_authenticated %}
+                {% todolist request.user paper as on_todolist %}
+                {% if on_todolist %}
+                   <a class="btn btn-default btn-xs todolist-button" data-pk="{{ paper.id }}" data-action="unmark">{% trans "Remove from to-do list" %}</a>
+                {% else %}
+                  <a class="btn btn-default btn-xs todolist-button" data-pk="{{ paper.id }}" data-action="mark">{% trans "Mark for later upload" %}</a>
+                {% endif %}
+            {% endif %}
+
+
             </div>
         </div>
     {% endwith %}
