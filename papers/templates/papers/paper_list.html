@@ -28,7 +28,7 @@
         <div class="row pb-4">
             <div class="col-2 border-right-3 border-tertiary">
                 {% with status_image='img/status_'|add:paper.combined_status_as_color|add:'.png' %}
-                    <img data-toggle="tooltip" title="{{ paper.status_helptext }}" data-placement="bottom" class="img-fluid" alt="{{ paper.status_helptext }}" src="{% static status_image %}"/>
+                    <img data-toggle="tooltip" title="{{ paper.status_helptext }}" data-placement="bottom" class="img-fluid" style="max-height: 6rem;" alt="{{ paper.status_helptext }}" src="{% static status_image %}"/>
                 {% endwith %}
             </div>
             <div class="col-10">

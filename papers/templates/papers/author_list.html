@@ -17,7 +17,7 @@
             {% comment %}
                 We sset an ORCID Badge. If we have the ORCID in our system, then we link to our own researcher page, else to ORCID
             {% endcomment %}
-            <a href={% if author.researcher_id %}"/{{ author.orcid }}"{% else %}"{{ author.orcid|orcid_to_url }}" target="blank"{% endif %} rel="nofollow" data.toggle="tooltip" title="{% trans "This contributorship is confirmed by ORCID."%}"> <img class="orcidInlineBadge" src="{% static "dissemin/img/orcid-big.png" %}" alt="ORCID" /></a>
+            <a href={% if author.researcher_id %}"/{{ author.orcid }}"{% else %}"{{ author.orcid|orcid_to_url }}" target="blank"{% endif %} rel="nofollow" data-toggle="tooltip" title="{% trans "This contributorship is confirmed by ORCID."%}"> <img class="orcidInlineBadge" src="{% static "dissemin/img/orcid-big.png" %}" alt="ORCID" /></a>
         {% endif %}
     </span>
     {% endfor %}
