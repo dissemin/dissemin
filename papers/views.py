@@ -215,7 +215,7 @@ class PaperSearchView(SearchView):
         A raw response, containing meta information and some HTML
         """
         context['request'] = self.request
-        listPapers = loader.render_to_string('papers/paperList.html', context)
+        listPapers = loader.render_to_string('papers/paper_list.html', context)
         stats = context['search_stats'].pie_data()
         stats['on_statuses'] = context['form'].on_statuses()
         return {

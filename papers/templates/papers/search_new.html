@@ -300,7 +300,10 @@
 
             <!-- Content for results -->
             <div class="col-12 col-md-8 order-md-first">
-                {% include "papers/paper_list.html" %}
+                <div id="waitingAreaContainer"></div>
+                <div id="paperSearchResults">
+                    {% include "papers/paper_list.html" %}
+                </div>
             </div>
         </div>
     </div>
