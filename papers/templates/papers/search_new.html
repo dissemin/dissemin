@@ -9,13 +9,6 @@
 
 {% block scripts %}
     <script src="{% static 'js/d3.min.js' %}"></script>
-    <script src="{% static 'papers/refresh.js' %}"></script>
-    <script>
-        // Setting variables for called functions
-        {% if view == 'my-todolist' %}
-            var todolist_fadeout = true
-        {% endif %}
-    </script>
 {% endblock %}
 
 {% block content %}
