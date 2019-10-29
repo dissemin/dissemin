@@ -26,6 +26,11 @@
         <script src="{% static 'js/dissemin.js' %}"></script>
         <script src="{% static 'js/moment.min.js' %}"></script>
         <script src="{% static 'js/tempusdominus-bootstrap-4.min.js' %}"></script>
+        {% if settings.SENTRY_DSN %}
+            <script type="text/javascript" src="{% static "js/sentry.min.js" %}"></script>
+            <script>Sentry.init({ dsn: '{{ settings.SENTRY_DSN }}'})</script>
+        {% endif %}
+
         {% block scripts %}{% endblock %}
 
         <!-- Title -->
