@@ -82,8 +82,12 @@ $(function () {
     $('#searchPapers').submit(function (e) {
         e.preventDefault();
 
+        // slighty fade current results that are going to be replaced
         $('#paperSearchResults').css('opacity', '0.5');
+        // turn bird on
+        $('#paperSearchWaitingArea').toggleClass('d-none d-flex');
 
+        // call with ajax. it's easy
         $.ajax ({
             contentType : 'application/json',
             data : $(this).serializeArray(),
@@ -91,7 +95,9 @@ $(function () {
             method : 'GET',
             success : function (result) {
                 $('#paperSearchResults').html(result.listPapers);
+                // update pie
                 updateStats(result.stats);
+                // update number of search results
                 $('#nbPapersFound').text(
                     interpolate(
                         ngettext(
@@ -106,6 +112,8 @@ $(function () {
             timeout : 5000, // 5 seconds
         });
 
+        // turn bird off
+        $('#paperSearchWaitingArea').toggleClass('d-none d-flex');
         $('#paperSearchResults').css('opacity', '');
 
     });

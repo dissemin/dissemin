@@ -173,8 +173,15 @@
 
             <!-- Content for results -->
             <div class="col-12 col-md-8 order-md-first">
-                <div id="paperSearchWaitingArea"></div>
                 <h1 class="border-bottom pb-3">{{ search_description }}</h1>
+
+                <div class="justify-content-center d-none" id="paperSearchWaitingArea">
+                    <div>
+                        <img class="rounded-circle bg-secondary m-2" style="max-height: 8rem;" src ="{% static 'img/animated-bird.gif' %}" alt="{% trans 'Paper animated bird' %}" />
+                        <p class="text-center font-italic">{% trans 'Refreshing results' %}…</p>
+                    </div>
+                </div>
+
                 <div id="paperSearchResults">
                     {% include "papers/paper_list.html" %}
                 </div>
