@@ -24,7 +24,7 @@
         <div class="row">
             <div class="col-12 col-md-4 pb-3">
                 <h3 class="border-bottom">{% trans "Statistics" %}</h3>
-                <p>
+                <p id="nbPapersFound">
                     {% blocktrans trimmed with formattedCounter=nb_results|intcomma count counter=nb_results|default:0 %}
                         {{ formattedCounter }} paper found
                         {% plural %}

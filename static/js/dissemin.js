@@ -92,6 +92,16 @@ $(function () {
             success : function (result) {
                 $('#paperSearchResults').html(result.listPapers);
                 updateStats(result.stats);
+                $('#nbPapersFound').text(
+                    interpolate(
+                        ngettext(
+                            '%s paper found',
+                            '%s papers found',
+                            result.nb_results
+                        ),
+                        [formatNumbersThousands(result.nb_results)]
+                    )
+                );
             },
             timeout : 5000, // 5 seconds
         });
