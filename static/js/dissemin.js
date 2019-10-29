@@ -3,8 +3,29 @@
 
 
 /* ***
- * CSRF
+ * Miscellaneous
  * *** */
+
+/* On AJAX errors, we like to be informed via Sentry */
+$(document).ajaxError( function (event, jqXHR, ajaxSettings, thrownError) {
+    try {
+        Sentry.captureMessage(thrownError || jqXHR.statusText, {
+            extra: {
+                type: ajaxSettings.type,
+                url: ajaxSettings.url,
+                data: ajaxSettings.data,
+                status: jqXHR.status,
+                error: thrownError || jqXHR.statusText,
+                response: jqXHR.responseText.substring(0, 100)
+            }
+        });
+    }
+    catch (e)
+    {
+        console.log(thrownError);
+        console.log(ajaxSettings);
+    }
+});
 
 /* Returns the current csrf token from the cookie. This is the recommend method by django: https://docs.djangoproject.com/en/2.2/ref/csrf/#ajax */
 function getCookie(name) {
@@ -67,9 +88,6 @@ $(function () {
             contentType : 'application/json',
             data : $(this).serializeArray(),
             dataType : 'json',
-            error : function () {
-                console.log('spam');
-            },
             method : 'GET',
             success : function (result) {
                 $('#paperSearchResults').html(result.listPapers);
