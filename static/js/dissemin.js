@@ -126,8 +126,7 @@ $(function () {
         var obj = $(this)
         var action = $(this).attr('data-action');
         var paper_pk = $(this).attr('data-pk');
-        var fadeout = $(this).attr('data-fade-out');
-        console.log(fadeout)
+        var fadeout = $(this).attr('data-fadeout');
 
         if (action == 'mark') {
             obj.text(gettext('Adding to todolist'));

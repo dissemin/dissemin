@@ -70,9 +70,9 @@
                 {% if request.user.is_authenticated %}
                     {% todolist request.user paper as on_todolist %}
                     {% if on_todolist %}
-                        <button type="button" class="buttonTodoList btn btn-outline-secondary btn-sm" data-pk="{{ paper.id }}" data-action="unmark" data-fade-out="{{ todolist_fadeout|yesno:"true,false,false" }}" onClick="$(this).submit()" >{% trans "Remove from to-do list" %}</button>
+                        <button type="button" class="buttonTodoList btn btn-outline-secondary btn-sm" data-pk="{{ paper.id }}" data-action="unmark" data-fadeout="{{ todolist_fadeout|yesno:"true,false,false" }}" onClick="$(this).submit()" >{% trans "Remove from to-do list" %}</button>
                     {% else %}
-                        <button type="button" class="buttonTodoList btn btn-outline-secondary btn-sm" data-pk="{{ paper.id }}" data-action="mark" data-fade-out="{{ todolist_fadeout|yesno:"true,false,false" }}" onClick="$(this).submit()">{% trans "Mark for later upload" %}</button>
+                        <button type="button" class="buttonTodoList btn btn-outline-secondary btn-sm" data-pk="{{ paper.id }}" data-action="mark" data-fadeout="{{ todolist_fadeout|yesno:"true,false,false" }}" onClick="$(this).submit()">{% trans "Mark for later upload" %}</button>
                     {% endif %}
                 {% endif %}
             </div>
