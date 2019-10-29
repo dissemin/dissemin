@@ -36,6 +36,7 @@ from django.views import generic
 from django.views.generic.base import TemplateView
 from django.views.i18n import JavaScriptCatalog
 
+from dissemin.views import LoginView
 from dissemin.views import StartPageView
 from papers.views import AdvancedPaperSearchView
 
@@ -55,14 +56,6 @@ def handler500(request, exception=None):
     response = render(request, '500.html', {'exception':exception})
     response.status_code = 500
     return response
-
-
-class LoginView(generic.TemplateView):
-    template_name = 'dissemin/login.html'
-
-
-class SandboxLoginView(allauth.account.views.LoginView):
-    template_name = 'dissemin/sandbox.html'
 
 
 def logoutView(request):
@@ -107,10 +100,8 @@ urlpatterns = [
     path('', include('autocomplete.urls')),
     path('jsreverse/', django_js_reverse.views.urls_js, name='js_reverse'),
     # Social auth
-    path('accounts/login/', LoginView.as_view(), name='account_login'),
-    path('accounts/sandbox_login/',
-        SandboxLoginView.as_view(), name='sandbox-login'),
-    path('accounts/logout/', logoutView, name='account_logout'),
+    path('accounts/login/', LoginView.as_view(), name='account-login'),
+    path('accounts/logout/', logoutView, name='account-logout'),
     path('accounts/social/', include('allauth.socialaccount.urls')),
     # JavaScript i18n
     path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),

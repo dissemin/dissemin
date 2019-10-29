@@ -7,6 +7,7 @@
 $dark-blue: #2A6496; // Dissemin dark blue
 $dark-green: #71AF33; // Dissemin green
 $light-blue: #5F8BB0; // Dissemin light blue
+$orcid-green: #A6CE39; // ORCID-Green
 
 $theme-colors: (
   "primary": $dark-blue,
@@ -23,4 +24,14 @@ $theme-colors: (
 
 .btn-search {
   @include button-variant($dark-green, $dark-green);
+}
+
+// The color should be white, as this is used with orcid, however, the color is bright, so bootstrap decides for dark text
+.btn-orcid {
+  @include button-variant($orcid-green, $orcid-green);
+  color: $light;
+}
+
+.btn-orcid:hover, .btn-orcid:focus {
+  color: $light;
 }
