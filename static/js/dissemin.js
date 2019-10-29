@@ -91,6 +91,7 @@ $(function () {
             method : 'GET',
             success : function (result) {
                 $('#paperSearchResults').html(result.listPapers);
+                updateStats(result.stats);
             },
             timeout : 5000, // 5 seconds
         });
