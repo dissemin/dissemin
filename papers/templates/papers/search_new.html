@@ -38,11 +38,6 @@
                                 {% include "statistics/pie_chart_legend.html" with stats=search_stats object_id=researcher.object_id stats_counter=1 %}
                             {% endwith %}
                         {% endwith %}
-                        <noscript>{# Clarifies the usage of the checkboxes in the caption of the pie. #}
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-default" form="searchPapersStatistics">{% trans "Search" %}</button>
-                            </div>
-                        </noscript>
                     </div>
 
                     <!-- Tools -->
@@ -162,12 +157,6 @@
                         </div>
                     {% endif %}
 
-                    <!-- The button to trigger search -->
-                    <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn btn-success text-center">
-                            <span class="oi oi-magnifying-glass" aria-hidden="true"></span> Search
-                        </button>
-                    </div>
                 </form>
             </div>
 
