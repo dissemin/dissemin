@@ -119,6 +119,53 @@ $(function () {
     });
 });
 
+/* Add and remove items to or from the to-do list 
+ * This function is here, because it is related to the search */
+$(function () {
+    $('.buttonTodoList').submit(function () {
+        var obj = $(this)
+        var action = $(this).attr('data-action');
+        var paper_pk = $(this).attr('data-pk');
+        var fadeout = $(this).attr('data-fade-out');
+        console.log(fadeout)
+
+        if (action == 'mark') {
+            obj.text(gettext('Adding to todolist'));
+            var ajax_url = Urls['ajax-todolist-add']();
+        }
+        else if (action == 'unmark') {
+            obj.text(gettext('Removing from todolist'));
+            var ajax_url = Urls['ajax-todolist-remove']();
+        }
+        else {
+            // action currently ongoing
+            return
+        }
+
+        $.ajax({
+            method: 'post',
+            url: ajax_url,
+            data: {
+                "paper_pk": paper_pk,
+                "csrfmiddlewaretoken": getCookie('csrftoken')
+            },
+            dataType: 'json',
+            success: function (data) {
+                obj.text(data['success_msg']);
+                action = data['data-action'];
+                /* If object was removed, i.e. server returned 'mark' and fadeout is true, do fadeout */
+                if (action == 'mark' && fadeout == 'true') {
+                    $("#paper-" + paper_pk).fadeOut(300, function() { obj.remove(); });
+                }
+                obj.attr('data-action', action);
+            },
+            error: function (data) {
+                obj.text(data['error_msg']);
+            }
+        });
+    });
+});
+
 
 /* ***
  * Statistic
@@ -322,53 +369,3 @@ function formatNumbersThousands(value) {
     // https://stackoverflow.com/a/2901298
     return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, thousandSeparator);
 }
-
-
-/* ***
- * to-do list
- * *** */
-
-$(function () {
-    $('.buttonTodoList').submit(function () {
-        var obj = $(this)
-        var action = $(this).attr('data-action');
-        var paper_pk = $(this).attr('data-pk');
-        var fadeout = $(this).attr('data-fade-out');
-        console.log(fadeout)
-
-        if (action == 'mark') {
-            obj.text(gettext('Adding to todolist'));
-            var ajax_url = Urls['ajax-todolist-add']();
-        }
-        else if (action == 'unmark') {
-            obj.text(gettext('Removing from todolist'));
-            var ajax_url = Urls['ajax-todolist-remove']();
-        }
-        else {
-            // action currently ongoing
-            return
-        }
-
-        $.ajax({
-            method: 'post',
-            url: ajax_url,
-            data: {
-                "paper_pk": paper_pk,
-                "csrfmiddlewaretoken": getCookie('csrftoken')
-            },
-            dataType: 'json',
-            success: function (data) {
-                obj.text(data['success_msg']);
-                action = data['data-action'];
-                /* If object was removed, i.e. server returned 'mark' and fadeout is true, do fadeout */
-                if (action == 'mark' && fadeout == 'true') {
-                    $("#paper-" + paper_pk).fadeOut(300, function() { obj.remove(); });
-                }
-                obj.attr('data-action', action);
-            },
-            error: function (data) {
-                obj.text(data['error_msg']);
-            }
-        });
-    });
-});
