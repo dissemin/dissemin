@@ -24,7 +24,7 @@
                 <h2 class="text-right">{{ paper.year }}</h2>
             </div>
         {% endifchanged %}
-        <div class="row pb-4">
+        <div class="row pb-4" id="paper-{{ paper.pk }}">
             <div class="col-auto border-right-3 border-tertiary">
                 {% with status_image='img/status_'|add:paper.combined_status_as_color|add:'.png' %}
                     <img data-toggle="tooltip" title="{{ paper.status_helptext }}" data-placement="bottom" class="img-fluid" style="max-height: 4rem;" alt="{{ paper.status_helptext }}" src="{% static status_image %}"/>
@@ -65,16 +65,16 @@
                         <a class="btn btn-sm btn-outline-dark" data-pk="{{ paper.pk }}" data-action="claim">{% trans "Include in my profile" %}</a>
                     {% endif %}
                 {% endif %}
-            {% if request.user.is_authenticated %}
-                {% todolist request.user paper as on_todolist %}
-                {% if on_todolist %}
-                   <a class="btn btn-default btn-xs todolist-button" data-pk="{{ paper.id }}" data-action="unmark">{% trans "Remove from to-do list" %}</a>
-                {% else %}
-                  <a class="btn btn-default btn-xs todolist-button" data-pk="{{ paper.id }}" data-action="mark">{% trans "Mark for later upload" %}</a>
+
+                <!-- to-do list -->
+                {% if request.user.is_authenticated %}
+                    {% todolist request.user paper as on_todolist %}
+                    {% if on_todolist %}
+                        <button type="button" class="buttonTodoList btn btn-outline-secondary btn-sm" data-pk="{{ paper.id }}" data-action="unmark" data-fade-out="{{ todolist_fadeout|yesno:"true,false,false" }}" onClick="$(this).submit()" >{% trans "Remove from to-do list" %}</button>
+                    {% else %}
+                        <button type="button" class="buttonTodoList btn btn-outline-secondary btn-sm" data-pk="{{ paper.id }}" data-action="mark" data-fade-out="{{ todolist_fadeout|yesno:"true,false,false" }}" onClick="$(this).submit()">{% trans "Mark for later upload" %}</button>
+                    {% endif %}
                 {% endif %}
-            {% endif %}
-
-
             </div>
         </div>
     {% endwith %}

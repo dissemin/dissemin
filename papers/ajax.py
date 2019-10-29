@@ -352,6 +352,4 @@ urlpatterns = [
         claimPaper, name='ajax-claimPaper'),
     url(r'^unclaim-paper$',
         unclaimPaper, name='ajax-unclaimPaper'),
-    url(r'^todolist-add$', todo_list_add, name='ajax-todolist-add'),
-    url(r'^todolist-remove$', todo_list_remove, name='ajax-todolist-remove'),
 ]

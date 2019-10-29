@@ -261,7 +261,7 @@ class MyTodoListView(LoginRequiredMixin, PaperSearchView):
 
         context['breadcrumbs'] = [(_('To-do list'), None)]
         context['search_description_title'] = context['search_description'] = _('Papers on my to-do list')
-        context['view'] = 'my-todolist'
+        context['todolist_fadeout'] = True
 
         return context
 

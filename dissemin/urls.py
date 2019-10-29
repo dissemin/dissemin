@@ -38,6 +38,8 @@ from django.views.i18n import JavaScriptCatalog
 
 from dissemin.views import LoginView
 from dissemin.views import StartPageView
+from papers.ajax import todo_list_add
+from papers.ajax import todo_list_remove
 from papers.views import AdvancedPaperSearchView
 
 try:
@@ -86,6 +88,10 @@ urlpatterns = [
     path('faq', TemplateView.as_view(template_name='dissemin/faq.html'), name='faq'),
     path('sources', TemplateView.as_view(template_name='dissemin/sources.html'), name='sources'),
     path('tos', TemplateView.as_view(template_name='dissemin/tos.html'), name='tos'),
+    # AJAX
+    path('todolist-add', todo_list_add, name='ajax-todolist-add'),
+    path('todolist-remove', todo_list_remove, name='ajax-todolist-remove'),
+
     # Errors
     path('404-error', temp('404.html')),
     path('500-error', temp('500.html')),
