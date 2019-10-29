@@ -31,7 +31,7 @@
                         {{ formattedCounter }} papers found
                     {% endblocktrans %}
                 </p>
-                <form method="get" action="." id="searchPapersStatistics" onChange="$(this).submit()">
+                <form method="get" action="." id="searchPapers" onChange="$(this).submit()">
                     <div class="form-group" id="searchPaperCombinedStatus">
                         {% with combined_status_form=True %}
                             {% with combined_status=form.status %}
@@ -173,7 +173,8 @@
 
             <!-- Content for results -->
             <div class="col-12 col-md-8 order-md-first">
-                <div id="waitingAreaContainer"></div>
+                <div id="paperSearchWaitingArea"></div>
+                <h1 class="border-bottom pb-3">{{ search_description }}</h1>
                 <div id="paperSearchResults">
                     {% include "papers/paper_list.html" %}
                 </div>

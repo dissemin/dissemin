@@ -53,6 +53,35 @@ function orcidLogout (orcid_base_domain) {
  * Search
  * *** */
 
+/* Our strategy is: Reload a part of the page and process any messages that get delivered */
+
+/* Prevent standard behaviour of form and execute some JS */
+
+$(function () {
+    $('#searchPapers').submit(function (e) {
+        e.preventDefault();
+
+        $('#paperSearchResults').css('opacity', '0.5');
+
+        $.ajax ({
+            contentType : 'application/json',
+            data : $(this).serializeArray(),
+            dataType : 'json',
+            error : function () {
+                console.log('spam');
+            },
+            method : 'GET',
+            success : function (result) {
+                $('#paperSearchResults').html(result.listPapers);
+            },
+            timeout : 5000, // 5 seconds
+        });
+
+        $('#paperSearchResults').css('opacity', '');
+
+    });
+});
+
 
 /* ***
  * Statistic

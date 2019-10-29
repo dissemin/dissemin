@@ -8,7 +8,6 @@
 
 {% get_current_language as LANGUAGE_CODE %}
 
-<h1 class="border-bottom pb-3">{{ search_description }}</h1>
 
 {% if page_obj.paginator.num_pages > 1 %}
     <nav class="searchPages pt-2">{% bootstrap_paginate page_obj range=10 extra_pagination_classes="justify-content-center border-bottom pb-3"%}</nav>
