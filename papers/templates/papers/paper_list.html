@@ -58,11 +58,11 @@
                     Claim and unclaim paper
                 {% endcomment %}
                 {% if request.user in paper.owner %}
-                    <button type="button" class="buttonClaimUnclaim btn btn-outline-secondary btn-sm" data-pk="{{ paper.pk }}" data-action="unclaim" data-fadeout="{{ profile_fadeout|yesno:"true,false,false" }}" onClick="$(this).submit()">{% trans "Exclude from my profile" %}</a>
+                    <button type="button" class="buttonClaimUnclaim btn btn-outline-secondary btn-sm ml-1 mr-1" data-pk="{{ paper.pk }}" data-action="unclaim" data-fadeout="{{ profile_fadeout|yesno:"true,false,false" }}" onClick="$(this).submit()">{% trans "Exclude from my profile" %}</a>
                 {% else %}
                     {% canclaim request.user paper as can_claim %}
                     {% if can_claim %}
-                        <button type="button" class="buttonClaimUnclaim btn btn-outline-secondary btn-sm" data-pk="{{ paper.pk }}" data-action="claim" data-fadeout="{{ profile_fadeout|yesno:"true,false,false" }}" onClick="$(this).submit()">{% trans "Include in my profile" %}</a>
+                        <button type="button" class="buttonClaimUnclaim btn btn-outline-secondary btn-sm ml-1 mr-1" data-pk="{{ paper.pk }}" data-action="claim" data-fadeout="{{ profile_fadeout|yesno:"true,false,false" }}" onClick="$(this).submit()">{% trans "Include in my profile" %}</a>
                     {% endif %}
                 {% endif %}
 
@@ -70,9 +70,9 @@
                 {% if request.user.is_authenticated %}
                     {% todolist request.user paper as on_todolist %}
                     {% if on_todolist %}
-                        <button type="button" class="buttonTodoList btn btn-outline-secondary btn-sm" data-pk="{{ paper.id }}" data-action="unmark" data-fadeout="{{ todolist_fadeout|yesno:"true,false,false" }}" onClick="$(this).submit()" >{% trans "Remove from to-do list" %}</button>
+                        <button type="button" class="buttonTodoList btn btn-outline-secondary btn-sm ml-1 mr-1" data-pk="{{ paper.id }}" data-action="unmark" data-fadeout="{{ todolist_fadeout|yesno:"true,false,false" }}" onClick="$(this).submit()" >{% trans "Remove from to-do list" %}</button>
                     {% else %}
-                        <button type="button" class="buttonTodoList btn btn-outline-secondary btn-sm" data-pk="{{ paper.id }}" data-action="mark" data-fadeout="{{ todolist_fadeout|yesno:"true,false,false" }}" onClick="$(this).submit()">{% trans "Mark for later upload" %}</button>
+                        <button type="button" class="buttonTodoList btn btn-outline-secondary btn-sm ml-1 mr-1" data-pk="{{ paper.id }}" data-action="mark" data-fadeout="{{ todolist_fadeout|yesno:"true,false,false" }}" onClick="$(this).submit()">{% trans "Mark for later upload" %}</button>
                     {% endif %}
                 {% endif %}
             </div>
