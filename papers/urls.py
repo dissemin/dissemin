@@ -42,10 +42,6 @@ urlpatterns = [
         views.PaperView.as_view(), name='paper'),
     url(r'^(?P<doi>10\..*)', views.PaperView.as_view(), name='paper-doi'),
     url(r'^p/direct/(?P<doi>10\..*)', views.redirect_by_doi, name='paper-redirect-doi'),
-    url(r'^search/b/(?P<publisher>\d+)/(?P<slug>[\w-]*)$',
-        views.PublisherPapersView.as_view(), name='publisher-papers'),
-    url(r'^journal/(?P<journal>\d+)/$',
-        views.JournalPapersView.as_view(), name='journal'),
     # These AJAX views are a trick to avoid displaying JSON output in browser
     # when going backwards, see #198.
     url(r'^ajax/search$', views.PaperSearchView.as_view(), name='ajax-search'),

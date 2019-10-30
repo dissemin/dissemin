@@ -122,11 +122,6 @@ class TestPaperPages():
         p.save()
         check_status(404, 'paper', kwargs={'pk': p.id, 'slug': p.slug})
 
-    def test_journal(self, check_status):
-        # TODO checkPage when logged in as superuser.
-        # Move to publisher app?
-        check_status(404, 'journal', kwargs={'journal': self.lncs.pk})
-
     def test_missing_info_in_pub(self, db, check_page):
         p = Paper.create_by_doi('10.1007/978-3-642-14363-2_7')
         check_page(200, 'paper', kwargs={'pk': p.id, 'slug': p.slug})
@@ -174,11 +169,6 @@ class TestPaperPages():
         p.save()
         assert p.slug == ''
         check_page(200, 'paper', args=[p.pk, p.slug])
-
-    def test_publisher_papers(self, check_status):
-        # TODO checkPage when logged in as superuser.
-        # Move to publisher app?
-        check_status(404, 'publisher-papers', args=[self.acm.pk, self.acm.slug])
 
     def test_researcher(self, check_page):
         for r in [self.r1, self.r2, self.r3, self.r4]:
