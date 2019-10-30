@@ -119,11 +119,56 @@ $(function () {
     });
 });
 
+
+/* Refreshes to profil of a user from ORCID.
+ * This function is here, because it is related to the search */
+
+$(function () {
+    $('#refetchPublications').submit( function () {
+        var obj = $(this);
+        var researcher_pk = obj.attr('data-researcher-pk');
+        var ajax_url = Urls['refetch-researcher'](researcher_pk);
+
+        // slighty fade current results that are going to be replaced
+        $('#paperSearchResults').css('opacity', '0.5');
+        // turn bird on
+        $('#paperSearchWaitingArea').toggleClass('d-none d-flex');
+
+        $.ajax({
+            contentType : 'application/json',
+            data : null,
+            dataType : 'json',
+            success : function (result) {
+                $('#paperSearchResults').html(result.listPapers);
+                // update pie
+                updateStats(result.stats);
+                // update number of search results
+                $('#nbPapersFound').text(
+                    interpolate(
+                        ngettext(
+                            '%s paper found',
+                            '%s papers found',
+                            result.nb_results
+                        ),
+                        [formatNumbersThousands(result.nb_results)]
+                    )
+                );
+            },
+            timeout : 5000 // 5 seconds
+        });
+
+        // turn bird off
+        $('#paperSearchWaitingArea').toggleClass('d-none d-flex');
+        $('#paperSearchResults').css('opacity', '');
+
+    });
+});
+
 /* Claim and unclaim items to or from profile
  * This function is here, because it is related to the search */
 
 $(function () {
-    $('.buttonClaimUnclaim').submit( function (spam) {
+    $('.buttonClaimUnclaim').submit( function () {
         var obj = $(this);
         var paper_pk = obj.attr('data-pk');
         var action = obj.attr('data-action');

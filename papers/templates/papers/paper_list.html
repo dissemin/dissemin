@@ -57,7 +57,7 @@
                 {% comment %}
                     Claim and unclaim paper
                 {% endcomment %}
-                {% if request.user in paper.owner %}
+                {% if request.user in paper.owners %}
                     <button type="button" class="buttonClaimUnclaim btn btn-outline-secondary btn-sm ml-1 mr-1" data-pk="{{ paper.pk }}" data-action="unclaim" data-fadeout="{{ profile_fadeout|yesno:"true,false,false" }}" onClick="$(this).submit()">{% trans "Exclude from my profile" %}</a>
                 {% else %}
                     {% canclaim request.user paper as can_claim %}

@@ -7,7 +7,7 @@
     {% for author in author_list %}
     <span>{% if not forloop.first %},{% endif %}
         <span data-pk="{{ author.pk }}" data-first="{{ author.name.first }}" data-last="{{ author.name.last }}" data-params="{csrfmiddlewaretoken:'{{ csrf_token }}'}">
-            {% if author.reseacher_id and author_researcher_id == researcher_id %}
+            {% if author.researcher_id and author.researcher_id == researcher_id %}
                 <strong>{{ author }}</strong>
             {% else %}
                 {{ author | authorlink }}

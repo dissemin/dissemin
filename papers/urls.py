@@ -65,8 +65,6 @@ urlpatterns = [
         views.InstitutionsMapView.as_view(), name='institutions-map'),
     # Tasks, AJAX
     url(r'^ajax/', include('papers.ajax')),
-    url(r'^researcher/(?P<pk>\d+)/update/$',
-        views.refetch_researcher, name='refetch-researcher'),
     # API
     url(r'^api/', include('papers.api')),
     # robots.txt

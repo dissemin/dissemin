@@ -43,6 +43,7 @@ from papers.ajax import unclaimPaper
 from papers.ajax import todo_list_add
 from papers.ajax import todo_list_remove
 from papers.views import AdvancedPaperSearchView
+from papers.views import refetch_researcher
 
 try:
     import importlib
@@ -93,6 +94,7 @@ urlpatterns = [
     # AJAX
     path('ajax/claim-paper', claimPaper, name='ajax-claimPaper'),
     path('ajax/unclaim-paper', unclaimPaper, name='ajax-unclaimPaper'),
+    path('ajax/researcher/<int:pk>/update/', refetch_researcher, name='refetch-researcher'),
     path('ajax/todolist-add', todo_list_add, name='ajax-todolist-add'),
     path('ajax/todolist-remove', todo_list_remove, name='ajax-todolist-remove'),
 

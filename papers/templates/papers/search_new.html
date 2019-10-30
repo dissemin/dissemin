@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 
+{% load domain %}
 {% load humanize %}
 {% load i18n %}
+{% load orcid %}
 {% load static %}
 {% load widget_tweaks %}
 
@@ -16,6 +18,48 @@
     <div class="container">
         <div class="row">
             <div class="col-12 col-md-4 pb-3">
+
+                <!-- Researcher -->
+                {% if researcher %}
+                    <h3 class="border-bottom">{% trans 'Researcher' %}</h3>
+
+                    <p class="font-weight-bold">{{ researcher }}</p>
+
+                    {% if not request.user.is_authenticated and not researcher.orcid %}
+                        <p><a class="btn btn-primary" href="{% url 'my-profile' %}"><img class="orcidInlineBadge" src="{% static "dissemin/img/orcid-big.png" %}" alt="ORCID" /> {% trans 'Is it you?' %}</a></p>
+                    {% endif %}
+
+                    {% if researcher.role %}
+                        <p>{{ researcher.role }}</p>
+                    {% endif %}
+
+                    {% if researcher.homepage %}
+                        <p><span class="oi oi-home" aria-hidden="true"> <a href="{{ researcher.homepage }}" target="_blank">{{ researcher.homepage|domain }}</a></span></p>
+                    {% endif %}
+
+                    {% if researcher.orcid %}
+                        <p><a href="{{ researcher.orcid|orcid_to_url }}" target="_blank" data-toggle="tooltip" title="{% blocktrans with first_name=researcher.name.first last_name=researcher.name.last %} {{ first_name }} {{ last_name }} uses ORCID.{% endblocktrans %}"><img class="orcidInlineBadge" src="{% static "dissemin/img/orcid-big.png" %}" als="ORCID" /> {{ researcher.orcid }}</a></p>
+                    {% endif %}
+
+                    {% if researcher.institution %}
+                        <p><span class="oi oi-star"></span> {{ researcher.institution }}</p>
+                    {% endif %}
+
+                    {% if researcher.department %}
+                        <p><span class="oi oi-sun"></span> <a href="{{ researcher.department.url }}">{{ researcher.department }}</a></p>
+                    {% endif %}
+
+                    {% if researcher.user == request.user or request.user.is_superuser %}
+                        <p><button type="button" class="btn btn-tertiary" id="refetchPublications" data-researcher-pk="{{ researcher.pk }}" onClick="$(this).submit()">{% trans "Refresh Publications" %}</button></p>
+                    {% endif %}
+
+                    {% if request.user.is_superuser and researcher.email %}
+                        <p><{% trans "Address:" %} {{ researcher.email }}</p>
+                    {% endif %}
+
+                {% endif %}
+
+                <!-- Statistics -->
                 <h3 class="border-bottom">{% trans "Statistics" %}</h3>
                 <p id="nbPapersFound">
                     {% blocktrans trimmed with formattedCounter=nb_results|intcomma count counter=nb_results|default:0 %}
