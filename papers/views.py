@@ -306,9 +306,11 @@ class ResearcherView(PaperSearchView):
         researcher = self.researcher
         # researcher corresponding to the currently logged in user
         try:
-            context['user_researcher'] = Researcher.objects.get(user=self.request.user)
+            Researcher.objects.get(user=self.request.user)
         except (Researcher.DoesNotExist, TypeError):
             pass # no logged in user
+        else:
+            context['profile_fadeout'] = True
         context['researcher'] = researcher
         context['researcher_id'] = researcher.id
         context['search_description'] += ' ' + _('authored by') + ' ' +str(researcher)

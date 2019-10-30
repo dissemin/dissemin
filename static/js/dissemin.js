@@ -119,6 +119,63 @@ $(function () {
     });
 });
 
+/* Claim and unclaim items to or from profile
+ * This function is here, because it is related to the search */
+
+$(function () {
+    $('.buttonClaimUnclaim').submit( function (spam) {
+        var obj = $(this);
+        var paper_pk = obj.attr('data-pk');
+        var action = obj.attr('data-action');
+        var fadeout = obj.attr('data-fadeout');
+
+        if (action == 'claim') {
+            obj.text(gettext('Claiming...'));
+            ajax_url = Urls['ajax-claimPaper']();
+        }
+        else if (action == 'unclaim') {
+            obj.text(gettext('Unclaiming...'));
+            ajax_url = Urls['ajax-unclaimPaper']();
+        }
+        else {
+            // action currently ongoing
+            return
+        }
+
+        $.ajax({
+            method : 'post',
+            data : {
+                'pk' : paper_pk,
+                "csrfmiddlewaretoken": getCookie('csrftoken')
+            },
+            dataType : 'json',
+            error : function (data) {
+                if (action == "claim") {
+                    obj.text(gettext('Claiming failed!'));
+                }
+                else {
+                    obj.text(gettext('Unclaiming failed!'));
+                }
+            },
+            success : function (data) {
+                if (action == 'claim') {
+                    obj.text(gettext('Exclude from my profile'));
+                    obj.attr('data-action', 'unclaim');
+                }
+                else {
+                    obj.text(gettext('Include in my profile'));
+                    obj.attr('data-action', 'claim');
+                    if (fadeout == 'true') {
+                        $("#paper-" + paper_pk).fadeOut(300, function() { obj.remove(); });
+                    }
+                }
+            },
+            url : ajax_url
+        });
+
+    });
+});
+
 /* Add and remove items to or from the to-do list 
  * This function is here, because it is related to the search */
 $(function () {

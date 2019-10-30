@@ -38,6 +38,8 @@ from django.views.i18n import JavaScriptCatalog
 
 from dissemin.views import LoginView
 from dissemin.views import StartPageView
+from papers.ajax import claimPaper
+from papers.ajax import unclaimPaper
 from papers.ajax import todo_list_add
 from papers.ajax import todo_list_remove
 from papers.views import AdvancedPaperSearchView
@@ -89,8 +91,10 @@ urlpatterns = [
     path('sources', TemplateView.as_view(template_name='dissemin/sources.html'), name='sources'),
     path('tos', TemplateView.as_view(template_name='dissemin/tos.html'), name='tos'),
     # AJAX
-    path('todolist-add', todo_list_add, name='ajax-todolist-add'),
-    path('todolist-remove', todo_list_remove, name='ajax-todolist-remove'),
+    path('ajax/claim-paper', claimPaper, name='ajax-claimPaper'),
+    path('ajax/unclaim-paper', unclaimPaper, name='ajax-unclaimPaper'),
+    path('ajax/todolist-add', todo_list_add, name='ajax-todolist-add'),
+    path('ajax/todolist-remove', todo_list_remove, name='ajax-todolist-remove'),
 
     # Errors
     path('404-error', temp('404.html')),
