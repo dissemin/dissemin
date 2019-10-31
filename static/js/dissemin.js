@@ -95,6 +95,7 @@ $(function () {
             method : 'GET',
             success : function (result) {
                 $('#paperSearchResults').html(result.listPapers);
+                $('#searchNotifications').html(result.messages);
                 // update pie
                 updateStats(result.stats);
                 // update number of search results
@@ -140,6 +141,7 @@ $(function () {
             dataType : 'json',
             success : function (result) {
                 $('#paperSearchResults').html(result.listPapers);
+                $('#searchNotifications').html(result.messages);
                 // update pie
                 updateStats(result.stats);
                 // update number of search results
@@ -154,13 +156,32 @@ $(function () {
                     )
                 );
             },
-            timeout : 5000 // 5 seconds
+            timeout : 5000, // 5 seconds
+            url : ajax_url
         });
 
         // turn bird off
         $('#paperSearchWaitingArea').toggleClass('d-none d-flex');
         $('#paperSearchResults').css('opacity', '');
 
+    });
+});
+
+/* When a message on search is closed, move it from inbox toarchive to not display it again
+ * This function is here, because it is related to the search */
+$(function () {
+    $('.messageAlert').on('closed.bs.alert', function () {
+        var obj = $(this);
+        var message_pk = obj.attr('data-message-pk');
+        var url = Urls['inbox-read'](message_pk);
+
+        $.ajax({
+            data: {
+                "csrfmiddlewaretoken": getCookie('csrftoken')
+            },
+            method : 'POST',
+            url : url
+        });
     });
 });
 

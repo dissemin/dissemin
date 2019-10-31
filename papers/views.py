@@ -45,7 +45,7 @@ from django.views import generic
 from django.views.generic.edit import FormView
 
 from deposit.models import DepositRecord
-from notification.api import get_notifications
+from notification.models import Notification
 from papers.doi import to_doi
 from papers.doi import doi_to_url
 from papers.errors import MetadataSourceException
@@ -176,10 +176,7 @@ class PaperSearchView(SearchView):
         context['current_sort_by'] = current_sort_by
 
         # Notifications
-        # TODO: unefficient query.
-        notifications = get_notifications(self.request)
-        selected_messages = [n.serialize_to_json() for n in sorted(notifications, key=lambda msg: msg.level)[:3]]
-        context['messages'] = selected_messages
+        context['messages'] = Notification.objects.filter(inbox__user=self.request.user).order_by('-date')[:3]
 
         return context
 
@@ -214,11 +211,12 @@ class PaperSearchView(SearchView):
         """
         context['request'] = self.request
         listPapers = loader.render_to_string('papers/paper_list.html', context)
+        messages = loader.render_to_string('papers/messages.html', context)
         stats = context['search_stats'].pie_data()
         stats['on_statuses'] = context['form'].on_statuses()
         return {
             'listPapers': listPapers,
-            'messages': context['messages'],
+            'messages' : messages,
             'stats': stats,
             'nb_results': context['nb_results'],
         }
