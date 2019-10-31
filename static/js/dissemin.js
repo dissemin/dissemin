@@ -74,96 +74,69 @@ function orcidLogout (orcid_base_domain) {
  * Search
  * *** */
 
-/* Our strategy is: Reload a part of the page and process any messages that get delivered */
+/* Our strategy is: Reload a part of the page and insert any messages that get delivered */
+
+function updateSearch (ajax_url, data) {
+    // slighty fade current results that are going to be replaced
+    $('#paperSearchResults').css('opacity', '0.5');
+    // turn bird on
+    $('#paperSearchWaitingArea').toggleClass('d-none d-flex');
+
+    // call with ajax. it's easy
+    $.ajax ({
+        contentType : 'application/json',
+        data : data,
+        dataType : 'json',
+        method : 'GET',
+        success : function (result) {
+            $('#paperSearchResults').html(result.listPapers);
+            $('#searchNotifications').html(result.messages);
+            // update pie
+            updateStats(result.stats);
+            // update number of search results
+            $('#nbPapersFound').text(
+                interpolate(
+                    ngettext(
+                        '%s paper found',
+                        '%s papers found',
+                        result.nb_results
+                    ),
+                    [formatNumbersThousands(result.nb_results)]
+                )
+            );
+        },
+        timeout : 5000, // 5 seconds
+        url : ajax_url
+    });
+
+    // turn bird off
+    $('#paperSearchWaitingArea').toggleClass('d-none d-flex');
+    // remove opacity
+    $('#paperSearchResults').css('opacity', '');
+}
 
 /* Prevent standard behaviour of form and execute some JS */
-
 $(function () {
     $('#searchPapers').submit(function (e) {
         e.preventDefault();
 
-        // slighty fade current results that are going to be replaced
-        $('#paperSearchResults').css('opacity', '0.5');
-        // turn bird on
-        $('#paperSearchWaitingArea').toggleClass('d-none d-flex');
+        var ajax_url =  null // We pass just null, to keep the view we currently use
+        var data = $(this).serializeArray();
 
-        // call with ajax. it's easy
-        $.ajax ({
-            contentType : 'application/json',
-            data : $(this).serializeArray(),
-            dataType : 'json',
-            method : 'GET',
-            success : function (result) {
-                $('#paperSearchResults').html(result.listPapers);
-                $('#searchNotifications').html(result.messages);
-                // update pie
-                updateStats(result.stats);
-                // update number of search results
-                $('#nbPapersFound').text(
-                    interpolate(
-                        ngettext(
-                            '%s paper found',
-                            '%s papers found',
-                            result.nb_results
-                        ),
-                        [formatNumbersThousands(result.nb_results)]
-                    )
-                );
-            },
-            timeout : 5000, // 5 seconds
-        });
-
-        // turn bird off
-        $('#paperSearchWaitingArea').toggleClass('d-none d-flex');
-        $('#paperSearchResults').css('opacity', '');
-
+        updateSearch(ajax_url, data);
     });
 });
 
 
 /* Refreshes to profil of a user from ORCID.
  * This function is here, because it is related to the search */
-
 $(function () {
     $('#refetchPublications').submit( function () {
         var obj = $(this);
         var researcher_pk = obj.attr('data-researcher-pk');
         var ajax_url = Urls['refetch-researcher'](researcher_pk);
 
-        // slighty fade current results that are going to be replaced
-        $('#paperSearchResults').css('opacity', '0.5');
-        // turn bird on
-        $('#paperSearchWaitingArea').toggleClass('d-none d-flex');
-
-        $.ajax({
-            contentType : 'application/json',
-            data : null,
-            dataType : 'json',
-            success : function (result) {
-                $('#paperSearchResults').html(result.listPapers);
-                $('#searchNotifications').html(result.messages);
-                // update pie
-                updateStats(result.stats);
-                // update number of search results
-                $('#nbPapersFound').text(
-                    interpolate(
-                        ngettext(
-                            '%s paper found',
-                            '%s papers found',
-                            result.nb_results
-                        ),
-                        [formatNumbersThousands(result.nb_results)]
-                    )
-                );
-            },
-            timeout : 5000, // 5 seconds
-            url : ajax_url
-        });
-
-        // turn bird off
-        $('#paperSearchWaitingArea').toggleClass('d-none d-flex');
-        $('#paperSearchResults').css('opacity', '');
-
+        updateSearch(ajax_url);
     });
 });
 
