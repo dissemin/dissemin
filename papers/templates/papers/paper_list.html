@@ -21,7 +21,7 @@
     {% with paper=result.object %}
         {% ifchanged paper.year %}
             <div class="container-fluid p-0">
-                <h2 class="text-right">{{ paper.year }}</h2>
+                <h3 class="text-right">{{ paper.year }}</h3>
             </div>
         {% endifchanged %}
         <div class="row pb-4" id="paper-{{ paper.pk }}">
