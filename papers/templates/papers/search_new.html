@@ -68,7 +68,7 @@
                         {{ formattedCounter }} papers found
                     {% endblocktrans %}
                 </p>
-                <form method="get" action="." id="searchPapers" onChange="$(this).submit()">
+                <form method="get" action="." id="searchPapers">
                     <div class="form-group" id="searchPaperCombinedStatus">
                         {% with combined_status_form=True %}
                             {% with combined_status=form.status %}
@@ -176,6 +176,10 @@
                             {% endfor %}
                         </div>
                     {% endif %}
+
+                    <div class="form-group d-flex justify-content-center">
+                        <button class="btn btn-search"><span class="oi oi-magnifying-glass" aria-hidden="true"></span> Refine</button>
+                    </div>
 
                 </form>
 

@@ -120,7 +120,7 @@ $(function () {
     $('#searchPapers').submit(function (e) {
         e.preventDefault();
 
-        var ajax_url =  null // We pass just null, to keep the view we currently use
+        var ajax_url =  window.location.toString().split('?')[0]; // We just take the current url, as we do not know on which view we refine, but remove GET parameters, because we have new ones
         var data = $(this).serializeArray();
 
         updateSearch(ajax_url, data);
