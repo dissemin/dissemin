@@ -9,11 +9,19 @@ $dark-green: #71AF33; // Dissemin green
 $light-blue: #5F8BB0; // Dissemin light blue
 $orcid-green: #A6CE39; // ORCID-Green
 
+// We change the primary color
+$primary: $dark-blue;
+$secondary: $light-blue;
+
+@import "bootstrap/functions";
+@import "bootstrap/variables";
+
+// We add a green as tertiary color
 $theme-colors: (
-  "primary": $dark-blue,
-  "secondary": $light-blue,
   "tertiary": $dark-green,
+  "gray": $gray-600,
 );
+
 
 // We compile entire bootstrap
 @import "bootstrap/bootstrap";

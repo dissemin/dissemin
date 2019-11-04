@@ -10,7 +10,7 @@
 
 
 {% if page_obj.paginator.num_pages > 1 %}
-    <nav class="searchPages pt-2">{% bootstrap_paginate page_obj range=10 extra_pagination_classes="justify-content-center border-bottom pb-3"%}</nav>
+    <nav class="pt-2">{% bootstrap_paginate page_obj range=10 extra_pagination_classes="justify-content-center"%}</nav>
 {% endif %}
 
 {% comment %}
@@ -20,9 +20,7 @@
 {% for result in object_list %}
     {% with paper=result.object %}
         {% ifchanged paper.year %}
-            <div class="container-fluid p-0">
-                <h3 class="text-right">{{ paper.year }}</h3>
-            </div>
+            <div class="pb-2 border-top"></div>
         {% endifchanged %}
         <div class="row pb-4" id="paper-{{ paper.pk }}">
             <div class="col-auto border-right-3 border-tertiary">
@@ -31,6 +29,9 @@
                 {% endwith %}
             </div>
             <div class="col">
+                {% ifchanged paper.year %}
+                    <h2 class="text-gray float-right mt-n2">{{ paper.year }}</h2>
+                {% endifchanged %}
                 {% include 'papers/author_list.html' with author_list=paper.displayed_authors %}
                 {% if paper.has_many_authors %}
                     {% blocktrans trimmed with remaining_authors=paper.nb_remaining_authors %}
