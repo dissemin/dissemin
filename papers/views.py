@@ -176,7 +176,8 @@ class PaperSearchView(SearchView):
         context['current_sort_by'] = current_sort_by
 
         # Notifications
-        context['messages'] = Notification.objects.filter(inbox__user=self.request.user).order_by('-date')[:3]
+        if self.request.user.is_authenticated:
+            context['messages'] = Notification.objects.filter(inbox__user=self.request.user).order_by('-date')[:3]
 
         return context
 
