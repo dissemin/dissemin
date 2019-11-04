@@ -82,57 +82,45 @@
                     <h3 class="border-bottom">{% trans "Refine" %}</h3>
 
                     <!-- Title -->
-                    <div class="form-group" id="searchPapersName">
-                        <label for="{{ form.q.id_for_label }}">
-                            <a data-toggle="collapse" href="#{{ form.q.id_for_label }}" role="button" {% if form.q.value %}aria-expanded="true"{% else %}aria-expanded="false"{%endif%} aria-controls="{{ form.q.id_for_label }}">{% trans "By title" %} <small><span class="oi oi-caret-bottom"></span></small></a>
-                        </label>
-                        {% if form.q.value %}
-                            {% render_field form.q class="form-control collapse show" %}
-                        {% else %}
-                            {% render_field form.q class="form-control collapse" %}
-                        {% endif %}
+                    <div class="form-group">
+                        <label for="{{ form.q.id_for_label }}"><strong>{% trans "By title" %}</strong></label>
+                        {% render_field form.q class="form-control" %}
                     </div>
 
                     <!-- Authors -->
-                    <div class="form-group" id="searchAuthorsName">
+                    <div class="form-group">
                         <label for="{{ form.authors.id_for_label }}">
-                            <a data-toggle="collapse" href="#{{ form.authors.id_for_label }}" role="button" {% if form.authors.value %}aria-expanded="true"{% else %}aria-expanded="false"{%endif%} aria-controls="{{ form.authors.id_for_label }}">
+                            <strong>
                                 {% if researcher %}
                                     {% trans "By co-authors" %}
                                 {% else %}
                                     {% trans "By authors" %}
                                 {% endif %}
-                                <small><span class="oi oi-caret-bottom"></span></small>
-                            </a>
+                            </strong>
                         </label>
-                        {% if form.authors.value %}
-                            {% render_field form.authors class="form-control collapse show" %}
-                        {% else %}
-                            {% render_field form.authors class="form-control collapse" %}
-                        {% endif %}
+                            {% render_field form.authors class="form-control" %}
                     </div>
 
                     <!-- Publication date -->
-                        <a class="linkLabel" data-toggle="collapse" href="#searchPaperPubDateGroup" role="button" aria-expanded="{% if form.pub_after.value or form.pub_before.value %}true{% else %}false{% endif %}" aria-controls="searchPaperPubDateGroup">{% trans "By publication date" %} <small><span class="oi oi-caret-bottom"></span></small></a>
-                        <div class="collapse {% if form.pub_after.value or form.pub_before.value %}show{% endif %} pt-2" id="searchPaperPubDateGroup">
-                            <div class="form-group row" id="searchPaperPubDateAfter">
-                                <label class="col-2 col-form-label" for="{{ form.pub_after.id_for_label }}">{% trans "after" %}</label>
-                                <div class="col-10">
-                                    {% render_field form.pub_after class="form-control" %}
-                                </div>
-                            </div>
-                            <div class="form-group row" id="searchPaperPubDateBefore">
-                                <label class="col-2 col-form-label" for="{{ form.pub_before.id_for_label }}">{% trans "before" %}</label>
-                                <div class="col-10">
-                                    {% render_field form.pub_before class="form-control" %}
-                                </div>
-                            </div>
+
+                    <label><strong>{% trans "By publication date" %}</strong></label>
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label" for="{{ form.pub_after.id_for_label }}">{% trans "after" %}</label>
+                        <div class="col-10">
+                            {% render_field form.pub_after class="form-control" %}
                         </div>
+                    </div>
+                    <div class="form-group row" id="searchPaperPubDateBefore">
+                        <label class="col-2 col-form-label" for="{{ form.pub_before.id_for_label }}">{% trans "before" %}</label>
+                        <div class="col-10">
+                            {% render_field form.pub_before class="form-control" %}
+                        </div>
+                    </div>
 
                     <!-- Document type -->
-                    <div class="form-group" id="searchPapersDoctype">
-                        <label><a data-toggle="collapse" href="#searchPaperDoctypeList" role="button" aria-expanded="{% if form.doctypes.value %}true{% else %}false{% endif %}" aria-controls="searchPaperDoctypeList">{% trans "By document type" %} <small><span class="oi oi-caret-bottom"></span></small></a></label>
-                        <div class="collapse {% if form.doctypes.value %}show{% endif %}" id="searchPaperDoctypeList">
+                    <div class="form-group">
+                        <label><strong>{% trans "By document type" %}</strong></label>
+                        <div>
                             {% comment %}
                                 There are currently 13 doctypes, we place 7 in first column, then 6 in second. This is not really save on changing the number of doctypes.
                             {% endcomment %}
@@ -155,7 +143,7 @@
 
                     <!-- Sort by -->
                     <div class="form-group">
-                        <label>{% trans 'Sort by' %}</label>
+                        <label><strong>{% trans 'Sort by' %}</strong></label>
                         {% for radioitem in form.sort_by %}
                             <div class="form-check">
                                 {{ radioitem.tag }}
