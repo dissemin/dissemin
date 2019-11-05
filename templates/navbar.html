@@ -30,7 +30,7 @@
                     <a class="nav-link dropdown-toggle text-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><span class="oi oi-person" aria-hidden="true"></span> {{ request.user|fullname }}</a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a class="dropdown-item" href="{% url 'edit-global-preferences' %}">{% trans 'Preferences' %}</a>
-                        <a class="dropdown-item" href="{% url 'list_deposits' %}">{% trans 'My deposits' %}</a>
+                        <a class="dropdown-item" href="{% url 'my-deposits' %}">{% trans 'My deposits' %}</a>
                         <a class="dropdown-item" href="{% url 'my-profile' %}">{% trans 'My profile' %}</a>
                         <a class="dropdown-item" href="{% url 'my-todolist' %}">{% trans 'My to-do list' %}</a>
                         <a class="dropdown-item" href="#" onclick="orcidLogout('{{ ORCID_BASE_DOMAIN }}')">{% trans 'Logout' %}</a>
