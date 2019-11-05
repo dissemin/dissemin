@@ -168,6 +168,9 @@
                 <div id="paperSearchResults">
                     {% include "papers/paper_list.html" %}
                 </div>
+
+                {% block missing_publications %}
+                {% endblock missing_publications %}
             </div>
         </div>
     </div>
