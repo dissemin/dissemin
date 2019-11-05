@@ -10,7 +10,7 @@
 
 
 {% if page_obj.paginator.num_pages > 1 %}
-    <nav class="pt-2">{% bootstrap_paginate page_obj range=8 extra_pagination_classes="justify-content-center"%}</nav>
+    <nav class="pt-2 border-bottom">{% bootstrap_paginate page_obj range=8 extra_pagination_classes="justify-content-center"%}</nav>
 {% endif %}
 
 {% comment %}
@@ -20,7 +20,7 @@
 {% for result in object_list %}
     {% with paper=result.object %}
         {% ifchanged paper.year %}
-            <div class="pb-2 border-top"></div>
+        <div class="pb-2 {% if not forloop.first %}border-top{% endif %}"></div>
         {% endifchanged %}
         <div class="row pb-4" id="paper-{{ paper.pk }}">
             <div class="col-auto border-right-3 border-tertiary">
