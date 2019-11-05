@@ -47,6 +47,12 @@ except ImportError:
 
 
 def handler404(request, exception=None):
+    response = render(request, '403.html', {'exception':exception})
+    response.status_code = 404
+    return response
+
+
+def handler404(request, exception=None):
     response = render(request, '404.html', {'exception':exception})
     response.status_code = 404
     return response
