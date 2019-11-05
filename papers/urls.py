@@ -51,8 +51,6 @@ urlpatterns = [
     # Institution-specific views
     url(r'^department/(?P<pk>\d+)/$',
         views.DepartmentView.as_view(), name='department'),
-    url(r'^search/department/(?P<pk>\d+)/$',
-        views.DepartmentPapersView.as_view(), name='department-papers'),
     url(r'^institution/(?P<pk>\d+)/$',
         views.InstitutionView.as_view()), # Deprecated URL
     url(r'^i/(?P<pk>\d+)/(?P<slug>[\w-]*)$',

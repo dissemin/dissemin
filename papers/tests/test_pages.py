@@ -104,9 +104,6 @@ class TestPaperPages():
     The tests could be improved / more explicit, because they rely on load_test_data, which loads a lot of things, but noone knows what.
     """
 
-    def test_department_papers(self, check_page):
-        check_page(200, 'department-papers', kwargs={'pk': self.di.pk})
-
     def test_invalid_doi(self, check_status):
         check_status(404, 'paper-doi', kwargs={'doi':'10.1blabla'})
 
