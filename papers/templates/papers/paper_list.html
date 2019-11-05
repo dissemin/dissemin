@@ -30,7 +30,7 @@
             </div>
             <div class="col">
                 {% ifchanged paper.year %}
-                    <h2 class="text-gray float-right mt-n2">{{ paper.year }}</h2>
+                    <h2 class="text-gray float-right mt-n2 ml-1">{{ paper.year }}</h2>
                 {% endifchanged %}
                 {% include 'papers/author_list.html' with author_list=paper.displayed_authors %}
                 {% if paper.has_many_authors %}
