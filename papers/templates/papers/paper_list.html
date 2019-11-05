@@ -81,4 +81,6 @@
     {% endwith %}
 {% endfor %}
 
-
+{% if page_obj.paginator.num_pages > 1 %}
+    <nav class="pt-3 mb-2 border-bottom border-top">{% bootstrap_paginate page_obj range=8 extra_pagination_classes="justify-content-center"%}</nav>
+{% endif %}
