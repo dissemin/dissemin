@@ -152,7 +152,6 @@ class PaperSearchView(SearchView):
         context['nb_results'] = self.queryset.count()
         context['search_stats'] = BareAccessStatistics.from_search_queryset(self.queryset)
         context['on_statuses'] = json.dumps(context['form'].on_statuses())
-        context['ajax_url'] = reverse('ajax-search')
 
         # Eventually remove sort by parameter
         search_params_without_sort_by = self.request.GET.copy()
