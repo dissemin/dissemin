@@ -27,7 +27,7 @@ urlpatterns = [
         url(r'^deposit_paper/(?P<pk>\d+)/$',
             views.start_view, name='upload_paper'),
         url(r'^deposits$',
-            views.list_deposits, name='list_deposits'),
+            views.MyDepositsView.as_view(), name='list_deposits'),
         url(r'^deposits/letter-of-declaration/(?P<pk>\d+)/$',
             views.LetterDeclarationView.as_view(), name='letter-of-declaration'),
         url(r'^ajax/submit-deposit-(?P<pk>\d+)$',
