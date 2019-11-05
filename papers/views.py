@@ -123,7 +123,7 @@ class PaperSearchView(SearchView):
     """Displays a list of papers and a search form."""
 
     paginate_by = NB_RESULTS_PER_PAGE
-    template_name = 'papers/search_new.html'
+    template_name = 'papers/search.html'
     form_class = PaperSearchForm
     queryset = SearchQuerySet().models(Paper)
 
@@ -268,6 +268,8 @@ class ResearcherView(PaperSearchView):
     Displays the papers of a given researcher.
     """
 
+    template_name = 'papers/researcher.html'
+
     def get(self, request, *args, **kwargs):
         if 'researcher' in kwargs:
             researcher = get_object_or_404(Researcher, pk=kwargs['researcher'])
@@ -313,13 +315,7 @@ class ResearcherView(PaperSearchView):
         context['search_description'] += ' ' + _('authored by') + ' ' +str(researcher)
         context['search_description_title'] = str(researcher)
         context['breadcrumbs'] = researcher.breadcrumbs()
-        context['ajax_url'] = reverse(
-            'ajax-researcher',
-            kwargs={
-                'researcher': researcher.id,
-                'slug': researcher.slug
-            }
-        )
+
         return context
 
     def raw_response(self, context, **kwargs):
@@ -329,6 +325,23 @@ class ResearcherView(PaperSearchView):
             response['status'] = researcher.current_task
             response['display'] = researcher.get_current_task_display()
         return response
+
+
+class MyProfileView(LoginRequiredMixin, ResearcherView):
+    """
+    View for my profile. It is basically a researcher view
+    """
+
+    template_name = 'papers/profile.html'
+
+    def get(self, request, *args, **kwargs):
+        """
+        We fetch the researcher, set a queryset and then pass to super of ResearcherView, as we don't want ResearcherViews get in this case
+        """
+        self.researcher = Researcher.objects.get(user=request.user)
+        self.queryset = self.queryset.filter(researchers=self.researcher.id)
+
+        return super(ResearcherView, self).get(request, *args, **kwargs)
 
 
 class DepartmentPapersView(PaperSearchView):
@@ -364,25 +377,6 @@ def refetch_researcher(request, pk):
     view_args = {'researcher': researcher.id, 'slug': researcher.slug}
     return redirect(reverse('researcher', kwargs=view_args))
 
-
-@user_passes_test(is_authenticated)
-def myProfileView(request):
-    try:
-        r = Researcher.objects.get(user=request.user)
-        return ResearcherView.as_view()(request,
-                                        researcher=r.pk,
-                                        slug=r.slug)
-    except Researcher.DoesNotExist:
-        return HttpResponse(
-            render(
-                request,
-                'dissemin/error.html',
-                {
-                    'message': _(
-                        'Dissemin requires access to your ORCID name.')
-                }
-            )
-        )
 
 class DepartmentView(generic.DetailView):
     model = Department

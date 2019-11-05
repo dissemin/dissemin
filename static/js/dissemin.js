@@ -120,8 +120,10 @@ $(function () {
     $('#searchPapers').submit(function (e) {
         e.preventDefault();
 
-        var ajax_url =  window.location.toString().split('?')[0]; // We just take the current url, as we do not know on which view we refine, but remove GET parameters, because we have new ones
-        var data = $(this).serializeArray();
+        var obj = $(this);
+
+        var ajax_url =  obj.attr('data-ajax-url'); // We take the url from data-ajax-url since it depends on the view
+        var data = obj.serializeArray();
 
         updateSearch(ajax_url, data);
     });
