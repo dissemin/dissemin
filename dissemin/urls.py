@@ -65,12 +65,6 @@ def logoutView(request):
     else:
         return redirect('/')
 
-
-def temp(name):
-    def handler(request, *args, **kwargs):
-        return render(request, name, {})
-    return handler
-
 js_info_dict = {
     'packages': (
         'dissemin'
@@ -86,9 +80,6 @@ urlpatterns = [
     path('faq', TemplateView.as_view(template_name='dissemin/faq.html'), name='faq'),
     path('sources', TemplateView.as_view(template_name='dissemin/sources.html'), name='sources'),
     path('tos', TemplateView.as_view(template_name='dissemin/tos.html'), name='tos'),
-    # Errors
-    path('404-error', temp('404.html')),
-    path('500-error', temp('500.html')),
     # Admin interface
     path('admin/', admin.site.urls),
     # Apps
