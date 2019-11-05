@@ -27,6 +27,7 @@ from allauth.socialaccount import providers
 from django.conf import settings
 from django.urls import include
 from django.urls import path
+from django.urls import re_path
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import logout
@@ -43,6 +44,10 @@ from papers.ajax import unclaimPaper
 from papers.ajax import todo_list_add
 from papers.ajax import todo_list_remove
 from papers.views import AdvancedPaperSearchView
+from papers.views import MyProfileView
+from papers.views import MyTodoListView
+from papers.views import PaperSearchView
+from papers.views import ResearcherView
 from papers.views import refetch_researcher
 
 try:
@@ -86,17 +91,24 @@ urlpatterns = [
     # Start page
     path('', StartPageView.as_view(), name='start-page'),
     # Paper related pages
-    path('advanced-search', AdvancedPaperSearchView.as_view(), name='advanced-search'),
+    path('search/', PaperSearchView.as_view(), name='search'),
+    path('advanced-search/', AdvancedPaperSearchView.as_view(), name='advanced-search'),
+    # Researcher realted pages
+    path('r/<int:researcher>/<slug:slug>/', ResearcherView.as_view(), name='researcher'),
+    re_path(r'^(?P<orcid>[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{3}[X0-9])/$', ResearcherView.as_view(), name='researcher-by-orcid'),
+    # User related pages
+    path('my-profile/', MyProfileView.as_view(), name='my-profile'),
+    path('my-todolist/', MyTodoListView.as_view(), name='my-todolist'),
     # Static pages
-    path('faq', TemplateView.as_view(template_name='dissemin/faq.html'), name='faq'),
-    path('sources', TemplateView.as_view(template_name='dissemin/sources.html'), name='sources'),
-    path('tos', TemplateView.as_view(template_name='dissemin/tos.html'), name='tos'),
+    path('faq/', TemplateView.as_view(template_name='dissemin/faq.html'), name='faq'),
+    path('sources/', TemplateView.as_view(template_name='dissemin/sources.html'), name='sources'),
+    path('tos/', TemplateView.as_view(template_name='dissemin/tos.html'), name='tos'),
     # AJAX
-    path('ajax/claim-paper', claimPaper, name='ajax-claimPaper'),
-    path('ajax/unclaim-paper', unclaimPaper, name='ajax-unclaimPaper'),
+    path('ajax/claim-paper/', claimPaper, name='ajax-claimPaper'),
+    path('ajax/unclaim-paper/', unclaimPaper, name='ajax-unclaimPaper'),
     path('ajax/researcher/<int:pk>/update/', refetch_researcher, name='refetch-researcher'),
-    path('ajax/todolist-add', todo_list_add, name='ajax-todolist-add'),
-    path('ajax/todolist-remove', todo_list_remove, name='ajax-todolist-remove'),
+    path('ajax/todolist-add/', todo_list_add, name='ajax-todolist-add'),
+    path('ajax/todolist-remove/', todo_list_remove, name='ajax-todolist-remove'),
 
     # Errors
     path('404-error', temp('404.html')),

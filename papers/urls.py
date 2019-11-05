@@ -28,26 +28,11 @@ from papers import views
 
 urlpatterns = [
     # Paper views
-    url(r'^search/$', views.PaperSearchView.as_view(), name='search'),
-    url(r'^r/(?P<researcher>\d+)/(?P<slug>[\w-]*)$',
-        views.ResearcherView.as_view(), name='researcher'),
-    url(r'^researcher/(?P<researcher>\d+)$',
-        views.ResearcherView.as_view()),  # Deprecated URL
-    url(r'^(?P<orcid>[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{3}[X0-9])/$',
-        views.ResearcherView.as_view(), name='researcher-by-orcid'),
-    url(r'^my-profile', views.MyProfileView.as_view(), name='my-profile'),
-    url(r'^my-todolist', views.MyTodoListView.as_view(), name='my-todolist'),
     url(r'^paper/(?P<pk>\d+)/$', views.PaperView.as_view()),  # Deprecated URL
     url(r'^p/(?P<pk>\d+)/(?P<slug>[\w-]*)$',
         views.PaperView.as_view(), name='paper'),
     url(r'^(?P<doi>10\..*)', views.PaperView.as_view(), name='paper-doi'),
     url(r'^p/direct/(?P<doi>10\..*)', views.redirect_by_doi, name='paper-redirect-doi'),
-    # These AJAX views are a trick to avoid displaying JSON output in browser
-    # when going backwards, see #198.
-    url(r'^ajax/search$', views.PaperSearchView.as_view(), name='ajax-search'),
-    url(r'^ajax/r/(?P<researcher>\d+)/(?P<slug>[\w-]*)$', views.ResearcherView.as_view(),
-        name='ajax-researcher'),
-    url(r'^ajax/my-todolist$', views.MyTodoListView.as_view(), name='ajax-todolist'),
     # Institution-specific views
     url(r'^department/(?P<pk>\d+)/$',
         views.DepartmentView.as_view(), name='department'),
