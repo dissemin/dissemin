@@ -229,7 +229,7 @@ class RepositoryPreferencesView(FormView):
         return form_kwargs
 
     def get_success_url(self):
-        return reverse('edit-repo-preferences', args=[self.repository.pk, ])
+        return reverse('preferences-repository', args=[self.repository.pk, ])
 
 
 @require_POST

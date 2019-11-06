@@ -13,7 +13,7 @@
             {% for repo in repositories %}
                 {% if repo.get_implementation.preferences_model %}
                     <li class="nav-item">
-                        <a class="nav-link {% if repo.id == repository.id %}active{% endif %}" href="{% url 'edit-repo-preferences' repo.id %}">{{ repo }}</a>
+                        <a class="nav-link {% if repo.id == repository.id %}active{% endif %}" href="{% url 'preferences-repository' repo.id %}">{{ repo }}</a>
                     </li>
                 {% endif %}
             {% endfor %}

@@ -6,7 +6,7 @@
 {% block title %}{% trans "Repository preferences" %}{% endblock title %}
 
 {% block preferences_content %}
-    <form method="POST" action="{% url 'edit-repo-preferences' repository.id %}" id="repositoryPreferencesForm">
+    <form method="POST" action="{% url 'preferences-repository' repository.id %}" id="repositoryPreferencesForm">
         {% crispy form  %}
     </form>
 {% endblock %}
