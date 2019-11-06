@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+
+<div class="container">
+    <h1 class="text-center">{% trans "Preferences" %}</h1>
+
+    {% block preferences_nav %}
+    {% endblock preferences_nav %}
+
+    <div class="container">
+    {% block preferences_content %}
+    {% endblock preferences_content %}
+    </div>
+
+
+
+</div>
+
+{% endblock content %}
+
+
+<ul class="nav nav-tabs">
+  <li role="presentation" {% if not repository %}class="active"{% endif %}>
+	<a href="{% url 'edit-global-preferences' %}">{% trans "General" %}</a></li>
+  {% for repo in repositories %}
+	{% if repo.get_implementation.preferences_model %}
+	   <li role="presentation" {% if repository == repo %}class="active"{%endif%}>
+		<a href="{% url 'edit-repo-preferences' repo.pk %}">{{ repo }}</a></li>
+        {% endif %}
+  {% endfor %}
+</ul>
