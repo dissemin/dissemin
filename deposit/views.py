@@ -174,7 +174,7 @@ def edit_repo_preferences(request, pk):
             raise Http404(_('This repository does not have any settings.'))
 
     context['preferences_form'] = pref_form
-    return render(request, 'deposit/repo_preferences.html', context)
+    return render(request, 'deposit/preferences_repository.html', context)
 
 
 class GlobalPreferencesView(FormView):
