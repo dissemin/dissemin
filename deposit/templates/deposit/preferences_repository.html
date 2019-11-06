@@ -7,6 +7,6 @@
 
 {% block preferences_content %}
     <form method="POST" action="{% url 'edit-repo-preferences' repository.id %}" id="repositoryPreferencesForm">
-        {% crispy preferences_form  %}
+        {% crispy form  %}
     </form>
 {% endblock %}
