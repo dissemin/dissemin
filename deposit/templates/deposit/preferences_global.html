@@ -6,19 +6,6 @@
 
 {% block title %}{% trans "Preferences" %}{% endblock title %}o
 
-{% block preferences_nav %}
-    <ul class="nav nav-tabs">
-        <li class="nav-item">
-            <a class="nav-link active" href="{% url 'preferences-global' %}">{% trans "General" %}</a>
-        </li>
-        {% for repository in repositories %}
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'edit-repo-preferences' repository.id %}">{{ repository }}</a>
-        </li>
-        {% endfor %}
-    </ul>
-{% endblock preferences_nav %}
-
 {% block preferences_content %}
     <form method="POST" action="{% url 'preferences-global' %}" id="repositoryPreferencesForm">
 	    {% crispy form %}
