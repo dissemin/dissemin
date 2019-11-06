@@ -36,6 +36,7 @@ from django.views import generic
 from django.views.generic.base import TemplateView
 from django.views.i18n import JavaScriptCatalog
 
+from deposit.views import GlobalPreferencesView
 from dissemin.views import LoginView
 from dissemin.views import StartPageView
 from papers.views import AdvancedPaperSearchView
@@ -86,6 +87,8 @@ urlpatterns = [
     path('faq', TemplateView.as_view(template_name='dissemin/faq.html'), name='faq'),
     path('sources', TemplateView.as_view(template_name='dissemin/sources.html'), name='sources'),
     path('tos', TemplateView.as_view(template_name='dissemin/tos.html'), name='tos'),
+    # User related pages
+    path('preferences/global/', GlobalPreferencesView.as_view(), name='preferences-global'),
     # Admin interface
     path('admin/', admin.site.urls),
     # Apps

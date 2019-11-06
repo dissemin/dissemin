@@ -9,7 +9,7 @@
 {% block preferences_nav %}
     <ul class="nav nav-tabs">
         <li class="nav-item">
-            <a class="nav-link active" href="{% url 'edit-global-preferences' %}">{% trans "General" %}</a>
+            <a class="nav-link active" href="{% url 'preferences-global' %}">{% trans "General" %}</a>
         </li>
         {% for repository in repositories %}
         <li class="nav-item">
@@ -20,7 +20,7 @@
 {% endblock preferences_nav %}
 
 {% block preferences_content %}
-    <form method="POST" action="{% url 'edit-global-preferences' %}" id="repositoryPreferencesForm">
+    <form method="POST" action="{% url 'preferences-global' %}" id="repositoryPreferencesForm">
 	    {% crispy form %}
     </form>
 {% endblock preferences_content %}

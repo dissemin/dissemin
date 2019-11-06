@@ -184,7 +184,7 @@ class GlobalPreferencesView(FormView):
 
     form_class = UserPreferencesForm
     model = UserPreferences
-    succes = reverse_lazy('edit-global-preferences')
+    success_url = reverse_lazy('preferences-global')
     template_name = 'deposit/preferences_global.html'
 
     def form_valid(self, form):
