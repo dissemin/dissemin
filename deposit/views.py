@@ -19,19 +19,15 @@
 
 
 
-import os
 import logging
-
-from datetime import date
+import os
 
 from crispy_forms.templatetags.crispy_forms_filters import as_crispy_form
 from crispy_forms.utils import render_crispy_form
-from deposit.declaration import get_declaration_pdf
-from deposit.forms import PaperDepositForm
-from deposit.forms import UserPreferencesForm
-from deposit.models import DepositRecord
-from deposit.models import Repository
-from deposit.models import UserPreferences
+from datetime import date
+from jsonview.decorators import json_view
+from ratelimit.decorators import ratelimit
+
 from django.conf import settings
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -44,10 +40,15 @@ from django.template import RequestContext
 from django.utils.translation import ugettext as _
 from django.views.decorators.http import require_POST
 from django.views.generic import View
-from jsonview.decorators import json_view
+
+from deposit.declaration import get_declaration_pdf
+from deposit.forms import PaperDepositForm
+from deposit.forms import UserPreferencesForm
+from deposit.models import DepositRecord
+from deposit.models import Repository
+from deposit.models import UserPreferences
 from papers.models import Paper
 from papers.user import is_authenticated
-from ratelimit.decorators import ratelimit
 
 logger = logging.getLogger('dissemin.' + __name__)
 
