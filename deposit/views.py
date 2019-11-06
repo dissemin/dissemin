@@ -37,9 +37,11 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from django.template import RequestContext
+from django.urls import reverse_lazy
 from django.utils.translation import ugettext as _
 from django.views.decorators.http import require_POST
 from django.views.generic import View
+from django.views.generic.edit import FormView
 
 from deposit.declaration import get_declaration_pdf
 from deposit.forms import PaperDepositForm
@@ -174,22 +176,41 @@ def edit_repo_preferences(request, pk):
     context['preferences_form'] = pref_form
     return render(request, 'deposit/repo_preferences.html', context)
 
-@user_passes_test(is_authenticated)
-def edit_global_preferences(request):
-    context = {
-        'repositories': Repository.objects.filter(enabled=True),
-    }
-    prefs = UserPreferences.get_by_user(request.user)
-    if request.method == 'POST':
-        pref_form = UserPreferencesForm(request.POST, instance=prefs)
-        pref_form.save()
 
-    pref_form = UserPreferencesForm(instance=prefs)
-    if not pref_form:
-        raise Http404(_('This repository does not have any settings.'))
+class GlobalPreferencesView(FormView):
+    """
+    View to handle the form with global repository settings
+    """
 
-    context['preferences_form'] = pref_form
-    return render(request, 'deposit/global_preferences.html', context)
+    form_class = UserPreferencesForm
+    model = UserPreferences
+    succes = reverse_lazy('edit-global-preferences')
+    template_name = 'deposit/global_preferences.html'
+
+    def form_valid(self, form):
+        """
+        If the form is valid, save it and return to success page
+        """
+        form.save()
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        """
+        For the navbar, we add the enabled repositories as context
+        """
+        context = super().get_context_data(**kwargs)
+        context['repositories'] = Repository.objects.filter(enabled=True)
+
+        return context
+
+    def get_form_kwargs(self):
+        """
+        We pass an instance of the model
+        """
+        form_kwargs = super().get_form_kwargs()
+        form_kwargs['instance'] = UserPreferences.get_by_user(self.request.user)
+
+        return form_kwargs
 
 
 @require_POST

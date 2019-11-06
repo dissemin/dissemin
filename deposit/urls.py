@@ -37,5 +37,5 @@ urlpatterns = [
         url(r'^repository-preferences/(?P<pk>\d+)/$',
             views.edit_repo_preferences, name='edit-repo-preferences'),
         url(r'^preferences$',
-            views.edit_global_preferences, name='edit-global-preferences'),
+            views.GlobalPreferencesView.as_view(), name='edit-global-preferences'),
 ]
