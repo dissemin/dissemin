@@ -417,6 +417,8 @@ class PaperView(SlugDetailView):
         if not paper.visible:
             raise Http404(_("This paper has been deleted."))
 
+        paper = queryset.prefetch_related('oairecord_set').get(pk=paper.pk)
+
         return paper
 
     def get_context_data(self, **kwargs):

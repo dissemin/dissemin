@@ -23,6 +23,20 @@
 
 {% block title %}{{ paper.title }} - {{ paper.interesting_authors | join:', ' }}{% endblock title %}
 
+{% block content %}
+    {% include "breadcrumbs.html" %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-4 pb-3">
+                {% include "papers/paper_panel.html" %}
+            </div>
+            <div class="col-12 col-md-8 order-md-first">
+                <h2 class="border-bottom">{{ paper.title }}</h2>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
 {% block bodyTitle %}
 <span id="paperTitle" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}" data-pk="{{ paper.pk }}">
     {% autoescape off %}
