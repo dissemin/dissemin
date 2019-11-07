@@ -1,0 +1,74 @@
+{% load i18n %}
+{% load static %}
+{% load statuses %}
+
+<div class="container">
+    <!-- Preprint -->
+    <div class="row border-top py-2">
+        <div class="col-auto px-0">
+            <img class="img-fluid policyCircle" src="{% static publisher.preprint|policy_circle %}" alt="{{ publisher.preprint|policy_circle_alt }}" />
+        </div>
+        <div class="col">
+            <span class="border-bottom-dotted border-primary" data-toggle="tooltip" title="{% trans "A preprint is a document produced by the authors without any interaction with the peer-reviewing process." %}">
+{% trans "Preprint" %}</span>:
+            {{ publisher.preprint|explain_policy_short_no_punc }}
+
+            {% if publisher.preprint_conditions %}
+                <ul class="my-0">
+                    {% for restriction in publisher.preprint_conditions %}
+                        <li>
+                            {{ restriction|striptags }}
+                        </li>
+                    {% endfor %}
+                 </ul>
+             {% endif %}
+        </div>
+        <div class="col-auto"></div>
+    </div>
+
+    <!-- Postprint -->
+    <div class="row border-top py-2">
+        <div class="col-auto px-0">
+            <img class="img-fluid policyCircle" src="{% static publisher.postprint|policy_circle %}" />
+        </div>
+        <div class="col">
+            <span class="border-bottom-dotted border-primary" data-toggle="tooltip" title="{% trans "Postprints differ from preprints in that they include the changes suggested by the reviewers. They are not edited by the publisher." %}">
+{% trans "Preprint" %}</span>:
+            {{ publisher.postprint|explain_policy_short_no_punc }}
+
+            {% if publisher.postprint_conditions %}
+                <ul class="my-0">
+                    {% for restriction in publisher.preprint_conditions %}
+                        <li>
+                            {{ restriction|striptags }}
+                        </li>
+                    {% endfor %}
+                 </ul>
+             {% endif %}
+        </div>
+        <div class="col-auto"></div>
+    </div>
+
+    <!-- Published version -->
+    <div class="row border-top border-bottom py-2">
+        <div class="col-auto px-0">
+            <img class="img-fluid policyCircle" src="{% static publisher.pdfversion|policy_circle %}" />
+        </div>
+        <div class="col">
+            <span class="border-bottom-dotted border-primary" data-toggle="tooltip" title="{% trans "The published version is the final version of the paper, as formatted by the publisher." %}">
+{% trans "Preprint" %}</span>:
+            {{ publisher.pdfversion|explain_policy_short_no_punc }}
+
+            {% if publisher.pdfversion_conditions %}
+                <ul class="my-0">
+                    {% for restriction in publisher.preprint_conditions %}
+                        <li>
+                            {{ restriction|striptags }}
+                        </li>
+                    {% endfor %}
+                 </ul>
+             {% endif %}
+        </div>
+        <div class="col-auto"></div>
+    </div>
+</div>

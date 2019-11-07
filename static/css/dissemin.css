@@ -45,6 +45,15 @@
 
 
 /* ***
+ * Publishers
+ * *** */
+
+.policyCircle {
+    max-height: 1.5rem;
+}
+
+
+/* ***
  * Statistic Pie
  * *** */
 

@@ -27,6 +27,11 @@ $(document).ajaxError( function (event, jqXHR, ajaxSettings, thrownError) {
     }
 });
 
+/* Enable bootstrap tooltip */
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+});
+
 /* Returns the current csrf token from the cookie. This is the recommend method by django: https://docs.djangoproject.com/en/2.2/ref/csrf/#ajax */
 function getCookie(name) {
     var cookieValue = null;
