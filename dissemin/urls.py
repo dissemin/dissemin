@@ -124,7 +124,6 @@ urlpatterns = [
     # Apps
     path('ajax-upload/', include('upload.urls')),
     path('', include('papers.urls')),
-    path('', include('publishers.urls')),
     path('', include('deposit.urls')),
     path('', include('notification.urls')),
     path('', include('autocomplete.urls')),
