@@ -59,9 +59,9 @@ except ImportError:
     from django.utils import importlib
 
 
-def handler404(request, exception=None):
+def handler403(request, exception=None):
     response = render(request, '403.html', {'exception':exception})
-    response.status_code = 404
+    response.status_code = 403
     return response
 
 
