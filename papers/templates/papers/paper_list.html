@@ -1,0 +1,86 @@
+{% load bootstrap_pagination %}
+{% load cache %}
+{% load canclaim %}
+{% load domain %}
+{% load i18n %}
+{% load static %}
+{% load todolist %}
+
+{% get_current_language as LANGUAGE_CODE %}
+
+
+{% if page_obj.paginator.num_pages > 1 %}
+    <nav class="pt-2 border-bottom">{% bootstrap_paginate page_obj range=8 extra_pagination_classes="justify-content-center"%}</nav>
+{% endif %}
+
+{% comment %}
+    We simply run over the results and put them out.
+{% endcomment %}
+
+{% for result in object_list %}
+    {% with paper=result.object %}
+        {% ifchanged paper.year %}
+        <div class="pb-2 {% if not forloop.first %}border-top{% endif %}"></div>
+        {% endifchanged %}
+        <div class="row pb-4" id="paper-{{ paper.pk }}">
+            <div class="col-auto border-right-3 border-tertiary">
+                {% with status_image='img/status_'|add:paper.combined_status_as_color|add:'.png' %}
+                    <img data-toggle="tooltip" title="{{ paper.status_helptext }}" data-placement="bottom" class="img-fluid" style="max-height: 4rem;" alt="{{ paper.status_helptext }}" src="{% static status_image %}"/>
+                {% endwith %}
+            </div>
+            <div class="col">
+                {% ifchanged paper.year %}
+                    <h2 class="text-gray float-right mt-n2 ml-1">{{ paper.year }}</h2>
+                {% endifchanged %}
+                {% include 'papers/author_list.html' with author_list=paper.displayed_authors %}
+                {% if paper.has_many_authors %}
+                    {% blocktrans trimmed with remaining_authors=paper.nb_remaining_authors %}
+                        and {{ remaining_authors }} other authors
+                    {% endblocktrans %}
+                {% endif %}
+                {% comment %}
+                {% cache 60000 paper_list paper.pk LANGUAGE_CODE researcher_id %}
+                {% endcomment %}
+                    <h4><a href="{{ paper.url }}" data-pk="{{ paper.id }}" data-params="{csrfmiddlewaretoken:'{{ csrf_token }}'">{% autoescape off %}{{ paper.title }}{% endautoescape %}</a></h4>
+                {% comment %}
+                {% endcache %}
+                {% endcomment %}
+
+                {% comment %}
+                    Paper Download
+                {% endcomment %}
+                {% if paper.pdf_url %}
+                    <a href="{{ paper.pdf_url }}" class="btn btn-outline-secondary btn-sm" rel="nofollow"><span class="oi oi-data-transfer-download" aria-hidden="true"></span> {% trans "Download" %}</a> <span class="text-black-50">{{ paper.pdf_url|domain }}</span>
+                {% else %}
+                    <a href="{% url 'upload_paper' paper.pk %}" class="btn btn-outline-secondary btn-sm" rel="nofollow"><span class="oi oi-data-transfer-upload"></span> {% trans "Upload" %}</a>
+                {% endif %}
+
+                {% comment %}
+                    Claim and unclaim paper
+                {% endcomment %}
+                {% if request.user in paper.owners %}
+                    <button type="button" class="buttonClaimUnclaim btn btn-outline-secondary btn-sm ml-1 mr-1" data-pk="{{ paper.pk }}" data-action="unclaim" data-fadeout="{{ profile_fadeout|yesno:"true,false,false" }}" onClick="$(this).submit()">{% trans "Exclude from my profile" %}</a>
+                {% else %}
+                    {% canclaim request.user paper as can_claim %}
+                    {% if can_claim %}
+                        <button type="button" class="buttonClaimUnclaim btn btn-outline-secondary btn-sm ml-1 mr-1" data-pk="{{ paper.pk }}" data-action="claim" data-fadeout="{{ profile_fadeout|yesno:"true,false,false" }}" onClick="$(this).submit()">{% trans "Include in my profile" %}</a>
+                    {% endif %}
+                {% endif %}
+
+                <!-- to-do list -->
+                {% if request.user.is_authenticated %}
+                    {% todolist request.user paper as on_todolist %}
+                    {% if on_todolist %}
+                        <button type="button" class="buttonTodoList btn btn-outline-secondary btn-sm ml-1 mr-1" data-pk="{{ paper.id }}" data-action="unmark" data-fadeout="{{ todolist_fadeout|yesno:"true,false,false" }}" onClick="$(this).submit()" >{% trans "Remove from to-do list" %}</button>
+                    {% else %}
+                        <button type="button" class="buttonTodoList btn btn-outline-secondary btn-sm ml-1 mr-1" data-pk="{{ paper.id }}" data-action="mark" data-fadeout="{{ todolist_fadeout|yesno:"true,false,false" }}" onClick="$(this).submit()">{% trans "Mark for later upload" %}</button>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    {% endwith %}
+{% endfor %}
+
+{% if page_obj.paginator.num_pages > 1 %}
+    <nav class="pt-3 mb-2 border-bottom border-top">{% bootstrap_paginate page_obj range=8 extra_pagination_classes="justify-content-center"%}</nav>
+{% endif %}

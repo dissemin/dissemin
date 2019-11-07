@@ -92,7 +92,7 @@ class PaperSearchForm(SearchForm):
         widget=forms.CheckboxSelectMultiple(attrs={'class': 'form-check-input'}),
         required=False)
     authors = forms.CharField(max_length=200, required=False)
-    sort_by = forms.ChoiceField(choices=SORT_CHOICES, required=False)
+    sort_by = forms.ChoiceField(choices=SORT_CHOICES, widget=forms.RadioSelect, required=False)
 
     # Superuser only
     visible = forms.ChoiceField(

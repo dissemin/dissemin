@@ -3,6 +3,49 @@
 
 
 /* ***
+ * Miscellaneous
+ * *** */
+
+/* On AJAX errors, we like to be informed via Sentry */
+$(document).ajaxError( function (event, jqXHR, ajaxSettings, thrownError) {
+    try {
+        Sentry.captureMessage(thrownError || jqXHR.statusText, {
+            extra: {
+                type: ajaxSettings.type,
+                url: ajaxSettings.url,
+                data: ajaxSettings.data,
+                status: jqXHR.status,
+                error: thrownError || jqXHR.statusText,
+                response: jqXHR.responseText.substring(0, 100)
+            }
+        });
+    }
+    catch (e)
+    {
+        console.log(thrownError);
+        console.log(ajaxSettings);
+    }
+});
+
+/* Returns the current csrf token from the cookie. This is the recommend method by django: https://docs.djangoproject.com/en/2.2/ref/csrf/#ajax */
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+
+/* ***
  * Navigation
  * *** */
 
@@ -25,6 +68,200 @@ function orcidLogout (orcid_base_domain) {
                 }
     })
 }
+
+
+/* ***
+ * Search
+ * *** */
+
+/* Our strategy is: Reload a part of the page and insert any messages that get delivered */
+
+function updateSearch (ajax_url, data) {
+    // slighty fade current results that are going to be replaced
+    $('#paperSearchResults').css('opacity', '0.5');
+    // turn bird on
+    $('#paperSearchWaitingArea').toggleClass('d-none d-flex');
+
+    // call with ajax. it's easy
+    $.ajax ({
+        contentType : 'application/json',
+        data : data,
+        dataType : 'json',
+        method : 'GET',
+        success : function (result) {
+            $('#paperSearchResults').html(result.listPapers);
+            $('#searchNotifications').html(result.messages);
+            // update pie
+            updateStats(result.stats);
+            // update number of search results
+            $('#nbPapersFound').text(
+                interpolate(
+                    ngettext(
+                        '%s paper found',
+                        '%s papers found',
+                        result.nb_results
+                    ),
+                    [formatNumbersThousands(result.nb_results)]
+                )
+            );
+        },
+        timeout : 5000, // 5 seconds
+        url : ajax_url
+    });
+
+    // turn bird off
+    $('#paperSearchWaitingArea').toggleClass('d-none d-flex');
+    // remove opacity
+    $('#paperSearchResults').css('opacity', '');
+}
+
+/* Prevent standard behaviour of form and execute some JS */
+$(function () {
+    $('#searchPapers').submit(function (e) {
+        e.preventDefault();
+
+        var obj = $(this);
+
+        var ajax_url =  obj.attr('data-ajax-url'); // We take the url from data-ajax-url since it depends on the view
+        var data = obj.serializeArray();
+
+        updateSearch(ajax_url, data);
+    });
+});
+
+
+/* Refreshes to profil of a user from ORCID.
+ * This function is here, because it is related to the search */
+$(function () {
+    $('#refetchPublications').submit( function () {
+        var obj = $(this);
+        var researcher_pk = obj.attr('data-researcher-pk');
+        var ajax_url = Urls['refetch-researcher'](researcher_pk);
+
+        updateSearch(ajax_url);
+    });
+});
+
+/* When a message on search is closed, move it from inbox toarchive to not display it again
+ * This function is here, because it is related to the search */
+$(function () {
+    $('.messageAlert').on('closed.bs.alert', function () {
+        var obj = $(this);
+        var message_pk = obj.attr('data-message-pk');
+        var url = Urls['inbox-read'](message_pk);
+
+        $.ajax({
+            data: {
+                "csrfmiddlewaretoken": getCookie('csrftoken')
+            },
+            method : 'POST',
+            url : url
+        });
+    });
+});
+
+/* Claim and unclaim items to or from profile
+ * This function is here, because it is related to the search */
+
+$(function () {
+    $('.buttonClaimUnclaim').submit( function () {
+        var obj = $(this);
+        var paper_pk = obj.attr('data-pk');
+        var action = obj.attr('data-action');
+        var fadeout = obj.attr('data-fadeout');
+
+        if (action == 'claim') {
+            obj.text(gettext('Claiming...'));
+            ajax_url = Urls['ajax-claimPaper']();
+        }
+        else if (action == 'unclaim') {
+            obj.text(gettext('Unclaiming...'));
+            ajax_url = Urls['ajax-unclaimPaper']();
+        }
+        else {
+            // action currently ongoing
+            return
+        }
+
+        $.ajax({
+            method : 'post',
+            data : {
+                'pk' : paper_pk,
+                "csrfmiddlewaretoken": getCookie('csrftoken')
+            },
+            dataType : 'json',
+            error : function (data) {
+                if (action == "claim") {
+                    obj.text(gettext('Claiming failed!'));
+                }
+                else {
+                    obj.text(gettext('Unclaiming failed!'));
+                }
+            },
+            success : function (data) {
+                if (action == 'claim') {
+                    obj.text(gettext('Exclude from my profile'));
+                    obj.attr('data-action', 'unclaim');
+                }
+                else {
+                    obj.text(gettext('Include in my profile'));
+                    obj.attr('data-action', 'claim');
+                    if (fadeout == 'true') {
+                        $("#paper-" + paper_pk).fadeOut(300, function() { obj.remove(); });
+                    }
+                }
+            },
+            url : ajax_url
+        });
+
+    });
+});
+
+/* Add and remove items to or from the to-do list 
+ * This function is here, because it is related to the search */
+$(function () {
+    $('.buttonTodoList').submit(function () {
+        var obj = $(this)
+        var action = $(this).attr('data-action');
+        var paper_pk = $(this).attr('data-pk');
+        var fadeout = $(this).attr('data-fadeout');
+
+        if (action == 'mark') {
+            obj.text(gettext('Adding to todolist'));
+            var ajax_url = Urls['ajax-todolist-add']();
+        }
+        else if (action == 'unmark') {
+            obj.text(gettext('Removing from todolist'));
+            var ajax_url = Urls['ajax-todolist-remove']();
+        }
+        else {
+            // action currently ongoing
+            return
+        }
+
+        $.ajax({
+            method: 'post',
+            url: ajax_url,
+            data: {
+                "paper_pk": paper_pk,
+                "csrfmiddlewaretoken": getCookie('csrftoken')
+            },
+            dataType: 'json',
+            success: function (data) {
+                obj.text(data['success_msg']);
+                action = data['data-action'];
+                /* If object was removed, i.e. server returned 'mark' and fadeout is true, do fadeout */
+                if (action == 'mark' && fadeout == 'true') {
+                    $("#paper-" + paper_pk).fadeOut(300, function() { obj.remove(); });
+                }
+                obj.attr('data-action', action);
+            },
+            error: function (data) {
+                obj.text(data['error_msg']);
+            }
+        });
+    });
+});
 
 
 /* ***
