@@ -1,4 +1,4 @@
-{% extends "dissemin/details.html" %}
+{% extends "base.html" %}
 
 {% load author %}
 {% load i18n %}
@@ -7,137 +7,89 @@
 {% load bootstrap_pagination %}
 {% load static %}
 
-{% block headTitle %}{{ publisher }}{% endblock %}
+{% block title %}{{ publisher }}{% endblock title%}
 
-{% block bodyTitle %}
-{{ publisher }}
-{% endblock %}
+{% block content %}
+    {% include "breadcrumbs.html" %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-4 pb-3">
+                <h3 class="border-bottom">{% trans "Publisher" %}</h3>
+                <p class="font-weight-bold">{{ publisher.name }}</p>
+                {% if publisher.url %}
+                <p>
+                    <span class="oi oi-star" aria-hidden="true"></span> <a href="{{ publisher.url }}" target="_blank">{{ publisher.url|domain }}</a>
+                </p>
+                {% endif %}
+                {% if not request.user.is_superuser %}
+                    {% with status_image='img/status_'|add:publisher.oa_status_as_color|add:'.png' %}
+                        <img class="img-fluid statusImage" src="{% static status_image %}" alt="{{ publisher.oa_status_as_color }}"/>
+                    {% endwith %}
+                    {{ publisher.oa_status|explain_oa_status}}
+                {% endif %}
 
-{% block jsScript %}
-   {% if request.user.is_superuser %}
-   var current_status = '{{ publisher.oa_status }}';
-    function changeOaStatus(new_status) {
-       $.post('/ajax/change-publisher-status',
-       'pk={{ publisher.pk }}&amp;csrfmiddlewaretoken={{csrf_token}}&amp;status='+new_status
-       ).done( function () {
-         $('#criterion-'+current_status).toggleClass('selectedCriterion unselectedCriterion');
-         $('#criterion-'+new_status).toggleClass('selectedCriterion unselectedCriterion');
-         current_status = new_status;
-       }).fail(
-       function(message) {
-       console.log(message);
-         alert('Error: '+message);
-       });
-    }
-    {% endif %}
-  $(function(){
-  $('.helpPopover').popover({trigger: "hover"});
-  });
-{% endblock %}
+                <h3 class="border-bottom">{% trans "Else" %}</h3>
+                <p>{% trans "Data provided by" %}</p>
+                <p class="d-flex justify-content-center">
+                    <a href="http://www.sherpa.ac.uk/romeo/">
+                        <img src="{% static "img/sherpa-romeo.gif" %}" width="210px" alt="SHERPA/RoMEO" />
+                    </a>
+                </p>
+                <p>
+                    {% with "http://www.sherpa.ac.uk/romeo/feedback.php?la=en&amp;fIDnum=%7C&amp;mode=simple&amp;type=jpnew" as feedback_url %}
+                        {% if publisher.last_updated %}
+                            {% blocktrans trimmed with last_updated=publisher.last_updated|date:"SHORT_DATE_FORMAT" %}
+                            Last updated on {{ last_updated }}, <a href="{{ feedback_url }}">report any error to them</a>.
+                            {% endblocktrans %}
+                        {% else %}
+                            <a href="{{ feedback_url }}">{% trans "Report any error to them." %}</a>
+                        {% endif %}
+                    {% endwith %}
+                </p>
 
-{% block details %}
-<h3 class="detailsTitle">{% trans "Publisher" %}</h3>
-<div class="detailsContent">
-<p id="detail-name">{{ publisher.name }}</p>
-{% if publisher.url %}
-<p>
-    <span class="glyphicon glyphicon-home"></span>
-    <a href="{{ publisher.url }}">{{ publisher.url|domain }}</a>
-</p>
-{% endif %}
+                {% if request.user.is_superuser %}
+                <form role="form" id="changePublisherOAStatus" data-ajax-url="ajax-changePublisherStatus" data-publisher-pk="{{ publisher.pk }}">
+                    <div class="form-group">
+                        <label>{% trans "Change open access status" %}</label>
+                        {% for status in oa_status_choices %}
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="radioOAStatus" id="status-{{ status.0 }}" value="{{ status.0 }}" checked>
+                                <label class="form-check-label" for="status-{{ status.0 }}">
+                                    {{ status.1 }}
+                                </label>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </form>
+                {% endif %}
 
-{% if not request.user.is_superuser %}
-    <div class="unselectedCriterion">
-        <div class="pubLogo"><div class="pubLogoPic-{{ publisher.oa_status }}"></div></div>
-        <div class="criterionItem">{{ publisher.oa_status |explain_oa_status }}</div>
+            </div>
+            <div class="col-12 col-md-8 order-md-first">
+                <h1 class="border-bottom">{{ publisher.name }}</h1>
+                <h2 class="border-bottom">{% trans "Green open access summary" %}</h2>
+                <p>
+                    {% blocktrans trimmed with publisher_name=publisher.name %}
+                        This is a short summary of the green open access policy of {{ publisher_name }}.
+                    {% endblocktrans %}
+                </p>
+                {% include "publishers/details_simple.html" %}
+                {% if publisher.has_conditions %}
+                    <h2 class="border-bottom mt-2">{% trans "Conditions" %}</h2>
+                    <ul>
+                        {% for condition in publisher.publishercondition_set.all %}
+                            <li>{{ condition|striptags }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                {% if publisher.has_copyrightlinks %}
+                    <h2 class="border-bottom">{% trans "Policy details" %}</h4>
+                    <ul>
+                        {% for link in publisher.publishercopyrightlink_set.all %}
+                            <li><a href="{{ link.url }}">{{ link.text }}</a></li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
     </div>
-{% endif %}
-
-<p class="sherpaAcknowledgement">{% trans "Policy data provided by" %}<br />
-    <a href="http://www.sherpa.ac.uk/romeo/"><img src="{% static "img/sherpa-romeo.gif" %}" width="210" alt="SHERPA/RoMEO" /></a><br/>
-    {% with "http://www.sherpa.ac.uk/romeo/feedback.php?la=en&amp;fIDnum=%7C&amp;mode=simple&amp;type=jpnew" as feedback_url %}
-    {% if publisher.last_updated %}
-        {% blocktrans trimmed with last_updated=publisher.last_updated|date:"SHORT_DATE_FORMAT" %}
-        Last updated on {{ last_updated }}, <a href="{{ feedback_url }}">report any error to them</a>
-        {% endblocktrans %}
-    {% else %}
-        <a href="{{ feedback_url }}">{% trans "Report any error to them" %}</a>
-    {% endif %}
-</p>
-<p>
-{% endwith %}
-
-{% if request.user.is_superuser %}
-</div>
-<h3 class="detailsTitle">{% trans "Policy" %}</h3>
-<div class="detailsContent">
- <br />
-{% for st in oa_status_choices %}
-<div class="{% if st.0 == publisher.oa_status %}selectedCriterion{% else %}unselectedCriterion{% endif %}" id="criterion-{{ st.0 }}">
-    <div class="pubLogo"><div class="pubLogoPic-{{ st.0 }}">
-            <a href="javascript:changeOaStatus('{{ st.0 }}');" class="filldiv"></a>
-    </div></div>
-    <div class="criterionItem">
-    <a href="javascript:changeOaStatus('{{ st.0 }}');">{{ st.1 }}</a>
-    </div>
-</div>
-{% endfor %}
-
-{% endif %}
-
-</div>
-{% endblock %}
-
-{% block lists %}
-{% with publisher.preprint as policy %}
-<div class="publisher-policy">
-{% include "publishers/detailsPolicy.html" with mode="none" %}
-</div>
-{% endwith %}
-{% if publisher.has_conditions %}
-    <h4>{% trans "Conditions" %}</h4>
-    <ul>
-    {% for condition in publisher.publishercondition_set.all %}
-        <li>{{ condition|striptags }}</li>
-    {% endfor %}
-    </ul>
-{% endif %}
-{% if publisher.has_copyrightlinks %}
-    <h4>{% trans "Policy details" %}</h4>
-    <ul>
-        {% for link in publisher.publishercopyrightlink_set.all %}
-            <li><a href="{{ link.url }}">{{ link.text }}</a></li>
-        {% endfor %}
-    </ul>
-{% endif %}
-
-{% if request.user.is_superuser %}
-<h4>{% trans "Publications" %}</h4>
-<ul>
-    <li><a href="{% url 'publisher-papers' publisher.id publisher.slug %}">
-        {% blocktrans trimmed with publisher=publisher.name %}
-        All papers published by {{ publisher }}
-        {% endblocktrans %}
-    </a></li>
-</ul>
-<h4>{% trans "Journals" %}</h4>
-<p>{% trans "Only journals with papers written by our users are listed." %}</p>
-{% if journals.paginator.num_pages > 1 %}
- <nav class="searchPages">{% bootstrap_paginate journals range=10 %}</nav>
- {% endif %}
-<ul class="withoutTriangles">
-    {% for journal in journals %}
-        <li><a href="{% url 'journal' journal.id %}">{{ journal }}</a>
-           <span class="numPapers">
-               {% blocktrans trimmed count num_total=journal.stats.num_tot %}
-               ({{ num_total }} paper)
-               {% plural %}
-               ({{ num_total }} papers)
-               {% endblocktrans %}
-           </span></li>
-    {% empty %}
-    <p>{% trans "None." %}</p>
-    {% endfor %}
-</ul>
-{% endif %}
-{% endblock %}
+{% endblock content %}

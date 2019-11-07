@@ -20,9 +20,6 @@
 
 from haystack.generic_views import SearchView
 
-from django.core.paginator import EmptyPage
-from django.core.paginator import PageNotAnInteger
-from django.core.paginator import Paginator
 from django.shortcuts import redirect
 from django.views import generic
 
@@ -105,19 +102,8 @@ class PublisherView(SlugDetailView):
     def get_context_data(self, **kwargs):
         context = super(PublisherView, self).get_context_data(**kwargs)
         context['oa_status_choices'] = OA_STATUS_CHOICES
-        # Build the paginator
-        publisher = context['publisher']
-        paginator = Paginator(publisher.sorted_journals, NB_JOURNALS_PER_PAGE)
-        page = self.request.GET.get('page')
-        try:
-            current_journals = paginator.page(page)
-        except PageNotAnInteger:
-            current_journals = paginator.page(1)
-        except EmptyPage:
-            current_journals = paginator.page(paginator.num_pages)
-        context['journals'] = current_journals
-
         # Breadcrumbs
+        publisher = context['publisher']
         context['breadcrumbs'] = publisher.breadcrumbs()
 
         return context
