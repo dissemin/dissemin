@@ -1,132 +1,83 @@
-{% extends "dissemin/details.html" %}
+{% extends "base.html" %}
 
 {% load static %}
 {% load bootstrap_pagination %}
-{% load statuses %}
 {% load i18n %}
-{% load widget_tweaks %}
-{% load capture_tags %}
+{% load crispy_forms_tags %}
 
-{% block headTitle %}{{ search_description }}{% endblock %}
+{% block title %}{% trans "Publishers" %}{% endblock title %}
 
-{% block bodyTitle %}
-{{ search_description }}
-{% endblock %}
+{% block content %}
+    {% include "breadcrumbs.html" %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-4 pb-3">
+                <h3 class="border-bottom">{% trans "Statistics" %}</h3>
 
-{% block jsScript %}
-$(function(){
-    $('.logoHelpPopover').popover({
-        trigger:"hover",
-        placement: function(){
-            return $(window).width() < 768 ? 'bottom' : 'left'
-        }
-    });
-});
-{% endblock %}
+                <p>
+                    {% blocktrans trimmed count counter=nb_results %}
+                        {{ counter }} publisher found
+                        {% plural %}
+                        {{ counter }} publishers found
+                    {% endblocktrans %}
+                </p>
 
-{% block details %}
+                <h3 class="border-bottom">{% trans "Search" %}</h3>
+                <form method="get" action="{% url 'publishers' %}">
+                    {{ form|crispy }}
+                    <div class="form-group d-flex justify-content-center">
+                        <button class="btn btn-search" type="submit"><span class="oi oi-magnifying-glass" aria-hidden="true"></span> {% trans "Search" %}</button>
+                    </div>
+                </form>
 
-{% if not journal %}
-<div class="detailsTitle">
-    {% trans "Search" %}
-</div>
-<div class="detailsContent">
-<p>
-{% blocktrans trimmed count counter=nb_results %}
-    {{ counter }} publisher found
-    {% plural %}
-    {{ counter }} publishers found
-{% endblocktrans %}
-</p>
+                <h3 class="border-bottom">{% trans "Else" %}</h3>
+                <p>{% trans "Data provided by" %}</p>
+                <p class="d-flex justify-content-center">
+                    <a href="http://www.sherpa.ac.uk/romeo/">
+                        <img src="{% static "img/sherpa-romeo.gif" %}" width="210px" alt="SHERPA/RoMEO" />
+                    </a>
+                </p>
 
-    <form method="get" action="{% url 'publishers' %}" id="searchPublishers">
-        <div class="form-group" id="searchPublishersName"><div class="input-group">
-            {{ form.q.errors }}
-            {% render_field form.q class="form-control" %}
-            <label class="input-group-btn">
-                <button type="submit" class="btn btn-default">{% trans "Search" %}</button>
-            </label>
-        </div></div>
-        <div class="form-group" id="searchPublishersOAStatus">
-            {{ form.oa_status.errors }}
-            <label for="{{ form.oa_status.id_for_label }}">{% trans "Filter by publisher policy" %}</label>
-            {% for checkbox in form.oa_status %}
-            {% with value=checkbox.data.value %}
-            <div class="logoHelpPopover" data-content="{{ value|helptext_oa_status }}">
-            <div class="checkbox publisherCriterion">
-                {{ checkbox.tag }}
-                <div class="publisherCriterionBox">
-                <label for="{{ checkbox.id_for_label }}">
-                    <img alt="" src="{% static value|logo_oa_status %}" height="70" width="52" class="pubLogo publisherCriterionLogo">
-                    <span class="criterionItem">{{ checkbox.choice_label }}</span>
-                </label>
-                </div>
             </div>
+            <div class="col-12 col-md-8 order-md-first">
+                <h1 class="border-bottom">{% trans "Publishers" %}</h1>
+
+                {% if paginator.num_pages > 1 %}
+                    <nav class="pt-2">{% bootstrap_paginate page_obj range=8 extra_pagination_classes="justify-content-center"%}</nav>
+                {% endif %}
+
+                {% for result in object_list %}
+                    {% with publisher=result.object %}
+                    <div class="row my-1">
+                        <div class="col-auto">
+                            {% with status_image='img/status_'|add:publisher.oa_status_as_color|add:'.png' %}
+                                <img class="img-fluid" style="max-height: 4rem;" alt="{{ publisher.oa_status_as_color }}" src="{% static status_image %}" />
+                            {% endwith %}
+                        </div>
+                        <div class="col align-self-center">
+                            <a class="h5" href="{{ publisher.canonical_url }}">{{ publisher }}</a>
+                            <span class="text-gray">
+                                {% if publisher.stats %}
+                                   {% blocktrans trimmed count num_total=publisher.stats.num_tot %}
+                                       ({{ num_total }} paper)
+                                   {% plural %}
+                                       ({{ num_total }} papers)
+                                   {% endblocktrans %}
+                                {% endif  %}
+                            </span>
+                        </div>
+
+                    </div>
+                    {% endwith %}
+                {% empty %}
+                    <p class="h4">{% trans "No publishers found" %}</p>
+                {% endfor %}
+
+                {% if paginator.num_pages > 1 %}
+                    <nav class="pt-2">{% bootstrap_paginate page_obj range=8 extra_pagination_classes="justify-content-center"%}</nav>
+                {% endif %}
             </div>
-            {% endwith %}
-            {% endfor %}
         </div>
-        <div class="form-group form-inline" id="searchPublishersSortBy">
-            {{ form.reverse_order.errors }}
-            {{ form.sort_by.errors }}
-            {% capture as sort_by silent %}
-            <label for="{{ form.sort_by.id_for_label }}">{% trans "Sort by" %}</label>
-            {% endcapture %}
-            {% capture as increasing silent %}
-            {% render_field form.reverse_order class="form-control" onchange="submit()" %}
-            {% endcapture %}
-            {% capture as value silent %}
-            {% render_field form.sort_by class="form-control" onchange="submit()" %}
-            {% endcapture %}
-            {% blocktrans trimmed %}
-            {{ sort_by }} <div>{{ increasing }} {{ value }}</div>
-            {% endblocktrans %}
-        </div>
-        <noscript>
-            <div class="form-group"><button type="submit" class="btn btn-default">{% trans "Search" %}</button></div>
-        </noscript>
-    </form>
-{% endif %}
+    </div>
 
-<p class="sherpaAcknowledgement">{% trans "Data provided by" %}<br />
-<a href="http://www.sherpa.ac.uk/romeo/"><img src="{% static "img/sherpa-romeo.gif" %}" width="210px" alt="SHERPA/RoMEO" /></a></p>
-</div>
-{% endblock %}
-
-{% block lists %}
- {% if paginator.num_pages > 1 %}
- <nav class="searchPages">{% bootstrap_paginate page_obj range=10 %}</nav>
- {% endif %}
- {% for result in page_obj %}{% with publisher=result.object %}
- {% if forloop.first %}<ul class="withoutTriangles">{% endif %}
-    <li>
-        <div class="publisher">
-           <div class="pubLogo">
-               <div class="pubLogoPic-{{ publisher.oa_status }}">
-               </div>
-           </div>
-           <div class="criterionItem">
-               <span class="paperTitle">
-                   <a href="{{ publisher.canonical_url }}">{{ publisher }}</a>
-                       {% if publisher.stats %}
-                           <span class="numPapers">
-                               {% blocktrans trimmed count num_total=publisher.stats.num_tot %}
-                               ({{ num_total }} paper)
-                               {% plural %}
-                               ({{ num_total }} papers)
-                               {% endblocktrans %}
-                           </span>
-                       {% endif %}
-               </span>
-           </div>
-        </div>
-    </li>
-        {% if forloop.last %}</ul>{% endif %}
- {% endwith %}{% empty %}
- <p class="notFound">{% trans "No publisher found." %}</p>
- {% endfor %}
- {% if paginator.num_pages > 1 %}
- <nav class="searchPages">{% bootstrap_paginate page_obj range=10 %}</nav>
- {% endif %}
-{% endblock %}
-
+{% endblock content %}
