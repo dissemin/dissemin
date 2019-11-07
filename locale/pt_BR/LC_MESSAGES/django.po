@@ -13,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-09-30 15:27+0200\n"
-"PO-Revision-Date: 2019-10-14 15:19:31+0000\n"
+"PO-Revision-Date: 2019-11-07 15:07:43+0000\n"
 "Language: pt_br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -521,9 +521,9 @@ msgid "Dissemin encountered an error, please try again later."
 msgstr "Dissemin encontrou um erro, tente novamente mais tarde."
 
 #: deposit/templates/deposit/start.html:225
-#, fuzzy, python-format
+#, python-format
 msgid "You can deposit the full text of your article. Dissemin will send it to a repository where it will be made freely available. By depositing your article via Dissemin, you agree to our <a href=\"%(tosurl)s\">terms of service</a>."
-msgstr "\n            Você pode depositar o texto completo do seu artigo. Dissemin irá\n             envie-o para um repositório onde será disponibilizado gratuitamente.\n             Ao depositar seu artigo via Dissemin,\n            você concorda com o nosso <a href=\"%(tosurl)s\">termos de serviço</a>.\n        "
+msgstr "Pode depositar o texto completo do seu artigo. O Dissemin irá enviá-lo para um repositório onde ficará livremente disponível. Ao depositar o seu artigo através do Dissemin, concorda com os nossos <a href=\"%(tosurl)s\">termos de serviço</a>."
 
 #: deposit/templates/deposit/start.html:236
 msgid "You do not appear to be one of the authors of this paper. By using this form, you certify that you have the permission to upload it on their behalf."
@@ -562,9 +562,8 @@ msgid "please wait..."
 msgstr "por favor, espere..."
 
 #: deposit/views.py:73 deposit/views.py:145
-#, fuzzy
 msgid "This repository is currently not enabled."
-msgstr "Este repositório não pôde ser encontrado."
+msgstr "Este repositório não está atualmente ativado."
 
 #: deposit/views.py:79
 msgid "This repository is not available for this paper."
@@ -599,9 +598,8 @@ msgid "No pdf found for dr {}"
 msgstr "Nenhum pdf encontrado para dr {}"
 
 #: deposit/zenodo/protocol.py:87
-#, fuzzy
 msgid "This document is already in Zenodo. Zenodo refused the deposit."
-msgstr "Este documento já está em HAL. HAL recusou o depósito."
+msgstr "Este documento já está no Zenodo. O Zenodo recusou o depósito."
 
 #: deposit/zenodo/protocol.py:120
 msgid "No Zenodo API key provided."
@@ -855,9 +853,8 @@ msgstr "Por título"
 
 #: papers/templates/papers/advanced_search.html:34
 #: papers/templates/papers/search.html:302
-#, fuzzy
 msgid "By co-authors"
-msgstr "Por autor"
+msgstr "Por co-autores"
 
 #: papers/templates/papers/advanced_search.html:36
 #: papers/templates/papers/search.html:304
@@ -1075,26 +1072,26 @@ msgid "(empty profile)"
 msgstr "(perfil vazio)"
 
 #: papers/templates/papers/paper.html:60
-#, fuzzy, python-format
+#, python-format
 msgctxt "as in: _Journal article published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "<span class=\"paperDocType\">%(doctype)s</span> published in %(year)s by"
-msgstr "<span class=\"paperDocType\">%(doctype)s</span> por"
+msgstr "<span class=\"paperDocType\">%(doctype)s</span> publicado em %(year)s por"
 
 #: papers/templates/papers/paper.html:66
-#, fuzzy, python-format
+#, python-format
 msgctxt "as in: _Published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "Published in %(year)s by"
-msgstr "Publicado em"
+msgstr "Publicado em %(year)s por"
 
 #: papers/templates/papers/paper.html:74
-#, fuzzy, python-format
+#, python-format
 msgid "and <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s other authors</a>"
-msgstr "\n            and <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s outros autores</a>\n            "
+msgstr "e <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s outros autores</a>"
 
 #: papers/templates/papers/paper.html:80
-#, fuzzy, python-format
+#, python-format
 msgid "All %(nb_authors)s authors (<a href=\"#\" id=\"show_less_authors\">show less</a>):<br />"
-msgstr "\n            All %(nb_authors)s authors (<a href=\"#\" id=\"show_less_authors\">mostre menos</a>):<br />\n            "
+msgstr "E %(nb_authors)s autores (<a href=\"#\" id=\"show_less_authors\">mostre menos</a>):<br />"
 
 #: papers/templates/papers/paper.html:93
 msgid "Deposit accomplished!"
@@ -1294,9 +1291,8 @@ msgid "Sort by"
 msgstr "Ordenar por"
 
 #: papers/templates/papers/search.html:264
-#, fuzzy
 msgid "Export citations for current page"
-msgstr "Exportar citação"
+msgstr "Exportar citações para a página atual"
 
 #: papers/templates/papers/search.html:267
 msgid "Refine"
@@ -1432,9 +1428,8 @@ msgid "Papers on my to-do list"
 msgstr "Artigos na minha lista de tarefas"
 
 #: papers/views.py:294
-#, fuzzy
 msgid "Invalid ORCID profile. Please make sure it includes a public name."
-msgstr "\n                            Perfil ORCID inválido.\n                             Certifique-se de que inclui um nome público.\n                            "
+msgstr "Perfil ORCID inválido. Certifique-se de que inclui um nome público."
 
 #: papers/views.py:297
 msgid "Invalid ORCID profile."
@@ -1453,9 +1448,8 @@ msgid " in "
 msgstr " em "
 
 #: papers/views.py:434
-#, fuzzy
 msgid "Dissemin requires access to your ORCID name."
-msgstr "Dissemin requer acesso ao seu nome ORCID, que é marcado como privado em seu perfil ORCID."
+msgstr "Dissemin requer acesso ao seu nome ORCID."
 
 #: papers/views.py:485
 msgid "Paper view expects a DOI or a pk"
@@ -1471,9 +1465,8 @@ msgid "This paper has been deleted."
 msgstr "Este documento foi eliminado."
 
 #: papers/views.py:545
-#, fuzzy
 msgid "Invalid DOI."
-msgstr "URL Inválido."
+msgstr "DOI inválido."
 
 #: publishers/forms.py:10
 msgid "popularity"
@@ -1608,9 +1601,8 @@ msgid "Contact the authors to make this publication freely available. This is a 
 msgstr "Entre em contato com os autores para tornar esta publicação disponível gratuitamente. Este é um serviço do botão de acesso aberto."
 
 #: publishers/templates/publishers/detailsPolicy.html:49
-#, fuzzy
 msgid "Contact authors"
-msgstr "Por autor"
+msgstr "Contactar os autores"
 
 #: publishers/templates/publishers/detailsPolicy.html:50
 #: templates/dissemin/tos.html:81
@@ -1753,27 +1745,24 @@ msgid "Upload is forbidden"
 msgstr "O carregamento está proibido"
 
 #: statistics/templates/statistics/pie_legend.html:7
-#, fuzzy
 msgid "Refine by OA status"
-msgstr "Status OA desconhecido"
+msgstr "Refinar pelo status do OA"
 
 #: templates/404.html:6 templates/404.html:12
 msgid "Page not found"
 msgstr "Página não encontrada"
 
 #: templates/404.html:13
-#, fuzzy
 msgid "The page you requested could not be found. <a href=\"/\">Go back to the home page.</a>"
-msgstr "\n            A página solicitada não pôde ser encontrada. <a href=\"/\">Volte para a página inicial.</a>\n           "
+msgstr "A página solicitada não pôde ser encontrada. <a href=\"/\">Volte para a página inicial.</a>"
 
 #: templates/500.html:6 templates/500.html:12
 msgid "Internal error"
 msgstr "Erro interno"
 
 #: templates/500.html:13
-#, fuzzy
 msgid "Your request triggered an internal error. <a href=\"/\">Go back to the home page.</a>"
-msgstr "\n            O seu pedido provocou um erro interno. <a href=\"/\">Go Voltar a página inicial.</a>\n           "
+msgstr "Sua solicitação acionou um erro interno. <a href=\"/\">Volte para a página inicial.</a>"
 
 #: templates/admin/base_site.html:4
 msgid "Dissemin site admin"
@@ -2225,9 +2214,8 @@ msgid "Logo"
 msgstr "Logótipo"
 
 #: templates/dissemin/skeleton.html:43 vinaigrette-deleteme.py:41
-#, fuzzy
 msgid "Language"
-msgstr "Alterar idioma"
+msgstr "Idioma"
 
 #: templates/dissemin/skeleton.html:52
 msgid "Translate"
@@ -2324,9 +2312,8 @@ msgid "The platform can perform mandated publication deposit to repositories. Us
 msgstr "A plataforma pode executar depósito de publicação obrigatório em repositórios. Os usuários só podem enviar papéis que eles mesmos criaram, ou papéis cujos autores concordaram com o depósito. Além desses termos de serviço, os usuários devem cumprir as políticas desses repositórios."
 
 #: templates/dissemin/tos.html:84
-#, fuzzy
 msgid "Please address any inquiry to <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
-msgstr "Por favor, envie qualquer consulta para support@dissem.in."
+msgstr "Envie qualquer pergunta para <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
 
 #: templates/dissemin/tos.html:93
 #, fuzzy
@@ -2355,9 +2342,8 @@ msgid "Authentication error"
 msgstr "Erro de autenticação"
 
 #: templates/socialaccount/authentication_error.html:16
-#, fuzzy
 msgid "Authentication has failed. <a href=\"/\">Go back to the login page.</a>"
-msgstr "\n            A autenticação falhou. <a href=\"/\">Volte para a página de login.</a>\n           "
+msgstr "A autenticação falhou. <a href=\"/\">Volte para a página de entrar.</a>"
 
 #: upload/forms.py:33
 msgid "Invalid file format: only PDF files are accepted."
@@ -2429,7 +2415,6 @@ msgid "Bibliographies"
 msgstr "Bibliografias"
 
 #: vinaigrette-deleteme.py:4
-#, fuzzy
 msgid "Library & information sciences"
 msgstr "Biblioteca e ciências da informação"
 
@@ -2526,9 +2511,8 @@ msgid "Christian denominations"
 msgstr "Denominações cristãs"
 
 #: vinaigrette-deleteme.py:30
-#, fuzzy
 msgid "Other religions"
-msgstr "Religiões"
+msgstr "Outras religiões"
 
 #: vinaigrette-deleteme.py:31
 msgid "Social sciences, sociology & anthropology"
@@ -2763,27 +2747,22 @@ msgid "History of other areas"
 msgstr "História de outras áreas"
 
 #: vinaigrette-deleteme.py:101
-#, fuzzy
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
-msgstr "Creative Commons CC0 1.0 Universal"
+msgstr "Dedicação ao domínio público de Creative Commons 1.0 Universal (CC0 1.0)"
 
 #: vinaigrette-deleteme.py:102
-#, fuzzy
 msgid "Creative Commons Attribution 4.0 International (CC BY 4.0)"
-msgstr "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
+msgstr "Creative Commons Attribution 4.0 International (CC BY 4.0)"
 
 #: vinaigrette-deleteme.py:103
-#, fuzzy
 msgid "Creative Commons Attribution-ShareAlike 4.0, International (CC BY-SA 4.0)"
-msgstr "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
+msgstr "Creative Commons Attribution-ShareAlike 4.0, International (CC BY-SA 4.0)"
 
 #: vinaigrette-deleteme.py:104
-#, fuzzy
 msgid "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
-msgstr "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
+msgstr "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
 
 #: vinaigrette-deleteme.py:105
-#, fuzzy
 msgid "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)"
 msgstr "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
 

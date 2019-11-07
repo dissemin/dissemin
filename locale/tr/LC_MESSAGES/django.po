@@ -17,7 +17,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-09-30 15:27+0200\n"
-"PO-Revision-Date: 2019-10-14 15:19:35+0000\n"
+"PO-Revision-Date: 2019-11-07 15:07:45+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -27,15 +27,15 @@ msgstr ""
 
 #: autocomplete/views.py:81
 msgid "Current institutions"
-msgstr ""
+msgstr "Mevcut kurumlar"
 
 #: autocomplete/views.py:85
 msgid "Unverified institutions"
-msgstr ""
+msgstr "Doğrulanmamış kurumlar"
 
 #: autocomplete/views.py:89
 msgid "Obsolete institutions"
-msgstr ""
+msgstr "Eski kurumlar"
 
 #: deposit/forms.py:85
 msgid "Upload type"
@@ -316,7 +316,7 @@ msgstr ""
 
 #: deposit/models.py:325
 msgid "We will use this email address to notify you when your deposits are accepted."
-msgstr ""
+msgstr "Bu e-posta adresini, mevduatlarınız kabul edildiğinde sizi bilgilendirmek için kullanacağız."
 
 #: deposit/models.py:331
 msgid "This repository will be used by default for your deposits."
@@ -432,7 +432,7 @@ msgstr ""
 
 #: deposit/sword/forms.py:15
 msgid "E-mail"
-msgstr ""
+msgstr "E-posta"
 
 #: deposit/sword/protocol.py:58
 msgid "The repository {} returned invalid XML"
@@ -486,7 +486,7 @@ msgstr ""
 
 #: deposit/templates/deposit/deposits.html:75
 msgid "Show"
-msgstr ""
+msgstr "Göster"
 
 #: deposit/templates/deposit/deposits.html:93
 msgid "You have not made any deposit via Dissemin. What are you waiting for? Liberate your papers today."
@@ -538,7 +538,7 @@ msgstr ""
 
 #: deposit/templates/deposit/start.html:254
 msgid "Document"
-msgstr ""
+msgstr "Belge"
 
 #: deposit/templates/deposit/start.html:262
 msgid "Options"
@@ -639,7 +639,7 @@ msgstr ""
 
 #: dissemin/settings/common.py:289
 msgid "Arabic"
-msgstr ""
+msgstr "Arapça"
 
 #: dissemin/settings/common.py:290
 msgid "English"
@@ -647,7 +647,7 @@ msgstr "İngilizce"
 
 #: dissemin/settings/common.py:291
 msgid "Finnish"
-msgstr ""
+msgstr "Fince"
 
 #: dissemin/settings/common.py:292
 msgid "French"
@@ -655,11 +655,11 @@ msgstr "Fransızca"
 
 #: dissemin/settings/common.py:293
 msgid "Korean"
-msgstr ""
+msgstr "Korece"
 
 #: dissemin/settings/common.py:294
 msgid "Spanish"
-msgstr ""
+msgstr "İspanyolca"
 
 #: dissemin/settings/common.py:295
 msgid "Simplified Chinese"
@@ -667,7 +667,7 @@ msgstr "Basitleştirilmiş Çince"
 
 #: dissemin/settings/common.py:296
 msgid "Traditional Chinese"
-msgstr ""
+msgstr "Geleneksel Çince"
 
 #: dissemin/settings/common.py:297
 msgid "Macedonian"
@@ -675,19 +675,19 @@ msgstr "Makedonca"
 
 #: dissemin/settings/common.py:298
 msgid "German"
-msgstr ""
+msgstr "Almanca"
 
 #: dissemin/settings/common.py:299
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "Brezilya Portekizcesi"
 
 #: dissemin/settings/common.py:300
 msgid "European Portuguese"
-msgstr ""
+msgstr "Avrupa Portekizcesi"
 
 #: dissemin/settings/common.py:301
 msgid "Swedish"
-msgstr ""
+msgstr "İsveççe"
 
 #: notification/models.py:62
 msgid "inboxes"
