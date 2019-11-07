@@ -14,13 +14,31 @@ class PublisherForm(SearchForm):
         ('dec', _('decreasing')),
         ('inc', _('increasing')),
     ]
+    q = forms.CharField(
+        label=_("By publisher"),
+        required=False,
+    )
     oa_status = forms.MultipleChoiceField(
         choices=OA_STATUS,
-        label=_('Filter by publisher policy'),
-        widget=forms.CheckboxSelectMultiple(attrs={'onchange': 'submit()'}),
-        required=False)
-    sort_by = forms.ChoiceField(choices=SORT_CHOICES, required=False)
-    reverse_order = forms.ChoiceField(choices=ORDER_CHOICES, required=False)
+        label=_('By publisher policy'),
+        widget=forms.CheckboxSelectMultiple(
+            attrs={'class': 'form-check-input'}),
+            required=False
+        )
+    sort_by = forms.ChoiceField(
+        choices=SORT_CHOICES,
+        label=_("Sort by"),
+        required=False,
+        widget=forms.Select(
+            attrs={'class': 'custom-select'}),
+    )
+    reverse_order = forms.ChoiceField(
+        choices=ORDER_CHOICES,
+        label=_("Order"),
+        required=False,
+        widget=forms.Select(
+            attrs={'class': 'custom-select'}),
+    )
 
     def search(self):
         queryset = self.searchqueryset.models(Publisher).load_all()

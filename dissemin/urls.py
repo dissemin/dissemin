@@ -49,6 +49,9 @@ from papers.views import MyTodoListView
 from papers.views import PaperSearchView
 from papers.views import ResearcherView
 from papers.views import refetch_researcher
+from publishers.ajax import change_publisher_status
+from publishers.views import PublisherView
+from publishers.views import PublishersView
 
 try:
     import importlib
@@ -93,6 +96,9 @@ urlpatterns = [
     # Paper related pages
     path('search/', PaperSearchView.as_view(), name='search'),
     path('advanced-search/', AdvancedPaperSearchView.as_view(), name='advanced-search'),
+    # Publisher related pages
+    path('publishers/', PublishersView.as_view(), name='publishers'),
+    path('b/<int:pk>/<slug:slug>/', PublisherView.as_view(), name='publisher'),
     # Researcher realted pages
     path('r/<int:researcher>/<slug:slug>/', ResearcherView.as_view(), name='researcher'),
     re_path(r'^(?P<orcid>[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{3}[X0-9])/$', ResearcherView.as_view(), name='researcher-by-orcid'),
@@ -104,6 +110,7 @@ urlpatterns = [
     path('sources/', TemplateView.as_view(template_name='dissemin/sources.html'), name='sources'),
     path('tos/', TemplateView.as_view(template_name='dissemin/tos.html'), name='tos'),
     # AJAX
+    path('ajax/change_publisher_status/', change_publisher_status, name='ajax_change_publisher_status'),
     path('ajax/claim-paper/', claimPaper, name='ajax-claimPaper'),
     path('ajax/unclaim-paper/', unclaimPaper, name='ajax-unclaimPaper'),
     path('ajax/researcher/<int:pk>/update/', refetch_researcher, name='refetch-researcher'),
@@ -117,7 +124,6 @@ urlpatterns = [
     # Apps
     path('ajax-upload/', include('upload.urls')),
     path('', include('papers.urls')),
-    path('', include('publishers.urls')),
     path('', include('deposit.urls')),
     path('', include('notification.urls')),
     path('', include('autocomplete.urls')),

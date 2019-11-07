@@ -27,6 +27,11 @@ $(document).ajaxError( function (event, jqXHR, ajaxSettings, thrownError) {
     }
 });
 
+/* Enable bootstrap tooltip */
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+});
+
 /* Returns the current csrf token from the cookie. This is the recommend method by django: https://docs.djangoproject.com/en/2.2/ref/csrf/#ajax */
 function getCookie(name) {
     var cookieValue = null;
@@ -68,6 +73,38 @@ function orcidLogout (orcid_base_domain) {
                 }
     })
 }
+
+
+/* ***
+ * Publishers
+ * *** */
+
+/* Change the OA status of a publisher */
+$(function() {
+    $('#changePublisherOAStatus input').change(function() {
+        var form = $('#changePublisherOAStatus');
+
+        ajax_url = Urls[form.attr('data-ajax-url')]();
+        publisher_pk = form.attr('data-publisher-pk');
+        new_status = $('input[name=radioOAStatus]:checked', '#changePublisherOAStatus').val();
+        data = {
+            'csrfmiddlewaretoken': getCookie('csrftoken'),
+            'pk' : publisher_pk,
+            'status' : new_status
+        };
+
+        $.ajax({
+            data : data,
+            dataType : 'text',
+            error : function( message ) {
+                alert('Error: ' + message);
+            },
+            method : 'POST',
+            timeout : 5000,
+            url : ajax_url
+        });
+    });
+});
 
 
 /* ***
