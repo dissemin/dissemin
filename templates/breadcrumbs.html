@@ -1,11 +1,11 @@
 <nav aria-label="breadcrumb">
      <ol class="breadcrumb rounded-0">
          <li class="breadcrumb-item"><a href="{% url 'start-page' %}">Dissemin</a></li>
-         {% for breadcrumd in breadcrumbs %}
+         {% for breadcrumb in breadcrumbs %}
             {% if not forloop.last %}
-                <li class="breadcrumb-item"><a href="{{ breadcrumb.1 }}">{{ breadcrum.0 }}</a></li>
+                <li class="breadcrumb-item"><a href="{{ breadcrumb.1 }}">{{ breadcrumb.0 }}</a></li>
             {% else %}
-                <li class="breadcrumb-item active" aria-current="page">{{ breadcrumd.0 }}</li>
+                <li class="breadcrumb-item active" aria-current="page">{{ breadcrumb.0 }}</li>
             {% endif %}
         {% endfor %}
     </ol>
