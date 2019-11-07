@@ -48,7 +48,7 @@
                 </p>
 
                 {% if request.user.is_superuser %}
-                <form role="form" id="changePublisherOAStatus" data-ajax-url="ajax-changePublisherStatus" data-publisher-pk="{{ publisher.pk }}">
+                <form role="form" id="changePublisherOAStatus" data-ajax-url="ajax_change_publisher_status" data-publisher-pk="{{ publisher.pk }}">
                     <div class="form-group">
                         <label>{% trans "Change open access status" %}</label>
                         {% for status in oa_status_choices %}
