@@ -7,7 +7,7 @@
 {% load i18n %}
 {% load l10n %}
 
-{% block metaTags %}
+{% block meta %}
     <meta name="citation_title" content="{{ paper.title }}" />
     {% for author in paper.authors %}
         <meta name="citation_author" content="{{ author.name.last }}, {{ author.name.first }}" />
@@ -19,7 +19,7 @@
     {% if paper.pdf_url %}
         <meta name="citation_pdf_url" content="{{ paper.pdf_url }}" />
     {% endif %}
-{% endblock %}
+{% endblock meta %}
 
 {% block headTitle %}{{ paper.title }} - {{ paper.interesting_authors | join:', ' }}{% endblock %}
 
