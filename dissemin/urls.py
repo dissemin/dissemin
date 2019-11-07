@@ -57,6 +57,12 @@ except ImportError:
 
 
 def handler404(request, exception=None):
+    response = render(request, '403.html', {'exception':exception})
+    response.status_code = 404
+    return response
+
+
+def handler404(request, exception=None):
     response = render(request, '404.html', {'exception':exception})
     response.status_code = 404
     return response
@@ -74,12 +80,6 @@ def logoutView(request):
         return redirect(request.META['HTTP_REFERER'])
     else:
         return redirect('/')
-
-
-def temp(name):
-    def handler(request, *args, **kwargs):
-        return render(request, name, {})
-    return handler
 
 js_info_dict = {
     'packages': (
@@ -109,10 +109,9 @@ urlpatterns = [
     path('ajax/researcher/<int:pk>/update/', refetch_researcher, name='refetch-researcher'),
     path('ajax/todolist-add/', todo_list_add, name='ajax-todolist-add'),
     path('ajax/todolist-remove/', todo_list_remove, name='ajax-todolist-remove'),
-
-    # Errors
-    path('404-error', temp('404.html')),
-    path('500-error', temp('500.html')),
+    path('faq', TemplateView.as_view(template_name='dissemin/faq.html'), name='faq'),
+    path('sources', TemplateView.as_view(template_name='dissemin/sources.html'), name='sources'),
+    path('tos', TemplateView.as_view(template_name='dissemin/tos.html'), name='tos'),
     # Admin interface
     path('admin/', admin.site.urls),
     # Apps
