@@ -21,7 +21,7 @@
     {% endif %}
 {% endblock meta %}
 
-{% block headTitle %}{{ paper.title }} - {{ paper.interesting_authors | join:', ' }}{% endblock %}
+{% block title %}{{ paper.title }} - {{ paper.interesting_authors | join:', ' }}{% endblock title %}
 
 {% block bodyTitle %}
 <span id="paperTitle" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}" data-pk="{{ paper.pk }}">
