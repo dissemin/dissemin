@@ -1,4 +1,5 @@
 {% load author %}
+{% load capture_tags %}
 {% load citation %}
 {% load doi %}
 {% load domain %}
@@ -46,6 +47,19 @@
 <!-- Tools -->
 <h3 class="border-bottom">{% trans "Tools" %}</h3>
 
+<!-- Export citation modal -->
+{% capture as citation_url silent %}
+    {% url 'api-paper-pk' pk=paper.id %}?format=bibtex
+{% endcapture %}
+{% capture as citation_slug silent %}
+    {{ paper.slug }}.bib
+{% endcapture %}
+{% include 'papers/export_citation_modal.html' with slug=citation_slug url=citation_url bibtex=paper|bibtex %}
+<p>
+    <a href="#" data-toggle="modal" data-target="#exportCitationModal">{% trans "Export citation" %}</a>
+</p>
+
+<!-- Google scholar link -->
 <p>
     <a href="{{ paper.google_scholar_link }}">{% trans "Search in Google Scholar" %} <small><span class="oi oi-external-link" aria-hidden="true"></span></small></a>
 </p>
