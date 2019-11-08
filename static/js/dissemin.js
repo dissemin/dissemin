@@ -76,6 +76,31 @@ function orcidLogout (orcid_base_domain) {
 
 
 /* ***
+ * Paper
+ * *** */
+
+/* A paper can have many authors. This functions shows or hides all authors using flex and aria-hidden */
+$(function() {
+    $("#showAllAuthors").click(function() {
+        $('#authorListInteresting').addClass("d-none"); // Hide from screen
+        $('#authorListInteresting').attr("aria-hidden", "true"); // Hide from screenreader
+
+        $('#authorListFull').removeClass("d-none"); // Show
+        $('#authorListFull').attr("aria-hidden", "false"); // Hide no longer from screenreader
+    });
+
+    $("#showInterestingAuthors").click(function() {
+        $('#authorListFull').addClass("d-none"); // Hide from screen
+        $('#authorListFull').attr("aria-hidden", "true"); // Hide from screenreader
+
+        $('#authorListInteresting').removeClass("d-none"); // Show
+        $('#authorListInteresting').attr("aria-hidden", "false"); // Hide no longer from screenreader
+    });
+
+});
+
+
+/* ***
  * Publishers
  * *** */
 

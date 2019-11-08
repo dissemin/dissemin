@@ -32,75 +32,43 @@
             </div>
             <div class="col-12 col-md-8 order-md-first">
                 <h2 class="border-bottom">{{ paper.title }}</h2>
+
+                <!-- Doctype and year -->
+                {% if paper.doctype != "other" %}
+                    {% with doctype=paper.get_doctype_display year=paper.year %}
+                        {% blocktrans context "as in: _Journal article published in 2017 by_ Tom Smith, Nicole Allen" trimmed %}
+                            {{ doctype }} published in {{ year }} by
+                        {% endblocktrans %}
+                    {% endwith %}
+                {% else %}
+                    {% with year=paper.year %}
+                      {% blocktrans context "as in: _Published in 2017 by_ Tom Smith, Nicole Allen" trimmed %}
+                            Published in {{ year }} by
+                        {% endblocktrans %}
+                    {% endwith %}
+                {% endif %}
+
+                <!-- Authos list. If many authors, hide some of them. -->
+                {% if paper.has_many_authors %}
+                <span id="authorListInteresting">
+                    {% include "papers/author_list.html" with author_list=paper.interesting_authors %}
+                    {% blocktrans trimmed %}
+                        and <a href="#" id="showAllAuthors">{{ nb_remaining_authors }} other authors.</a>
+                    {% endblocktrans %}
+                </span>
+                <span class="d-none" aria-hidden="true" id="authorListFull">
+                    {% include "papers/author_list.html" with author_list=paper.authors %}
+                    <p><a href="#" id="showInterestingAuthors">{% trans "Show less" %}</a></p>
+                </span>
+                {% else %}
+                    {% include "papers/author_list.html" with author_list=paper.authors %}
+                {% endif %}
             </div>
         </div>
     </div>
 {% endblock content %}
 
-{% block bodyTitle %}
-<span id="paperTitle" data-params="{csrfmiddlewaretoken:'{{csrf_token}}'}" data-pk="{{ paper.pk }}">
-    {% autoescape off %}
-        {{ paper.title }}
-    {% endautoescape %}
-</span>
-{% endblock %}
-
-{% block jsScript %}
-    $(function(){
-        $('.helpPopover').popover({trigger: "hover"});
-    });
-    {% if paper.has_many_authors %}
-        $(function(){
-            var summary = $('#authorSummary').clone();
-            var full = $('#authorFull').detach();
-            var setup_links = function(){
-            $('#show_all_authors').click(function(){
-                $('#authorSummary').replaceWith(full);
-                setup_links();
-              });
-            $('#show_less_authors').click(function(){
-                $('#authorFull').replaceWith(summary);
-                setup_links();
-             });
-            };
-            setup_links();
-        });
-    {% endif %}
-{% endblock %}
-
 {% block lists %}
-    <div id="authorSummary">
-        {% if paper.doctype != "other" %}
-            {% with doctype=paper.get_doctype_display year=paper.year %}
-                {% blocktrans context "as in: _Journal article published in 2017 by_ Tom Smith, Nicole Allen" trimmed %}
-                    <span class="paperDocType">{{ doctype }}</span> published in {{ year }} by
-                {% endblocktrans %}
-            {% endwith %}
-        {% else %}
-            {% with year=paper.year %}
-              {% blocktrans context "as in: _Published in 2017 by_ Tom Smith, Nicole Allen" trimmed %}
-                    Published in {{ year }} by
-                {% endblocktrans %}
-            {% endwith %}
-        {% endif %}
-        {% if paper.has_many_authors %}
-            {% include "papers/authorList.html" with author_list=paper.interesting_authors %}
-            {% with paper.nb_remaining_authors as nb_remaining_authors %}
-                {% blocktrans trimmed %}
-                    and <a href="#" id="show_all_authors">{{ nb_remaining_authors }} other authors</a>
-                {% endblocktrans %}
-            {% endwith %}
-            </div><div id="authorFull">
-            {% with paper.author_count as nb_authors %}
-                {% blocktrans trimmed %}
-                All {{ nb_authors }} authors (<a href="#" id="show_less_authors">show less</a>):<br />
-                {% endblocktrans %}
-            {% endwith %}
-            {% include "papers/authorList.html" with author_list=paper.authors %}
-        {% else %}
-            {% include "papers/authorList.html" with author_list=paper.authors %}
-        {% endif %}
-    </div>
 
     {% if deposit.status == 'published' %}
         <div class="alert alert-success">
