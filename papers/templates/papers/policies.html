@@ -53,7 +53,7 @@
     {% if publisher.pk %}
         <div class="row border-top border-bottom-2 border-gray-5 py-1">
             <div class="col-auto mr-auto">
-                <a href="{% url "publisher" publisher.pk publisher.slug %}" target="_blank">{% trans "Policy details" %}</a> ({% trans "opens in a new window" %})
+                <a href="{% url "publisher" publisher.pk publisher.slug %}">{% trans "Policy details" %}</a>
             </div>
             <div class="col-auto">
                 Data provided by <a href="http://www.sherpa.ac.uk/romeo/"><img src="{% static "img/sherpa-romeo.gif" %}" alt="SHERPA/RoMEO" style="max-height: 1.5rem;" /></a>

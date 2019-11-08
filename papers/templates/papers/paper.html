@@ -127,7 +127,7 @@
                 <!-- Paper availability -->
                 <div class="jumbotron mt-2">
                     <div class="row">
-                        <div class="d-none col-md-auto">
+                        <div class="d-none d-md-flex col-auto">
                             <img data-toggle="tooltip" title="{{ paper.status_helptext }}" data-placement="bottom" class="img-fluid statusImage-4" alt="{{ paper.status_helptext }}" src="{% static paper.combined_status|status_to_img %}"/>
                         </div>
                         <div class="col">
