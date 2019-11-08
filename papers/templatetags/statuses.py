@@ -1,12 +1,13 @@
 # -*- encoding: utf-8 -*-
 
-
-from statistics.models import PDF_STATUS_CHOICES
-
 from django import template
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
+
 from publishers.models import OA_STATUS_CHOICES
+from statistics.models import PDF_STATUS_CHOICES
+from statistics.models import STATUS_TO_COLOR
+
 
 register = template.Library()
 
@@ -113,3 +114,8 @@ def policy_circle_alt(policy):
         ("unknown"): _('Question mark in circle'),
     }
     return POLICY_TO_CIRCLE_ALT.get(policy)
+
+
+@register.filter(is_safe=True)
+def status_to_img(status):
+    return "img/status_{}.png".format(STATUS_TO_COLOR.get(status, ''))

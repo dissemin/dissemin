@@ -23,7 +23,7 @@
                 {% endif %}
                 {% if not request.user.is_superuser %}
                     {% with status_image='img/status_'|add:publisher.oa_status_as_color|add:'.png' %}
-                        <img class="img-fluid statusImage" src="{% static status_image %}" alt="{{ publisher.oa_status_as_color }}"/>
+                        <img class="img-fluid statusImage-4" src="{% static status_image %}" alt="{{ publisher.oa_status_as_color }}"/>
                     {% endwith %}
                     {{ publisher.oa_status|explain_oa_status}}
                 {% endif %}

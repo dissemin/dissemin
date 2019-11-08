@@ -24,9 +24,7 @@
         {% endifchanged %}
         <div class="row pb-4" id="paper-{{ paper.pk }}">
             <div class="col-auto border-right-3 border-tertiary">
-                {% with status_image='img/status_'|add:paper.combined_status_as_color|add:'.png' %}
-                    <img data-toggle="tooltip" title="{{ paper.status_helptext }}" data-placement="bottom" class="img-fluid" style="max-height: 4rem;" alt="{{ paper.status_helptext }}" src="{% static status_image %}"/>
-                {% endwith %}
+                <img data-toggle="tooltip" title="{{ paper.status_helptext }}" data-placement="bottom" class="img-fluid statusImage-4"  alt="{{ paper.status_helptext }}" src="{% static paper.combined_status|status_to_img %}"/>
             </div>
             <div class="col">
                 {% ifchanged paper.year %}
