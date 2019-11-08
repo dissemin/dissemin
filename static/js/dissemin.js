@@ -99,6 +99,36 @@ $(function() {
 
 });
 
+/* Add item to the to-do list and change UI accordingly
+ * This function is here, because it is related to the search */
+$(function() {
+    $('#paperButtonTodoList').click(function() {
+        obj = $(this);
+        var paper_pk = obj.attr("data-paper-pk");
+        var ajax_url = Urls['ajax-todolist-add']();
+
+        $.ajax({
+            data: {
+                "paper_pk": paper_pk,
+                "csrfmiddlewaretoken": getCookie('csrftoken')
+            },
+            dataType: 'json',
+            error: function (data) {
+                obj.text(data['error_msg']);
+            },
+            method : 'post',
+            success: function (data) {
+                obj.remove();
+                $('#paperTodoListAdded').removeClass("d-none"); // Show
+                $('#paperTodoListAdded').attr("aria-hidden", "false"); // Hide no longer from screenreader
+            },
+            timeout : 5000,
+            url : ajax_url
+        });
+
+    });
+});
+
 
 /* ***
  * Publishers

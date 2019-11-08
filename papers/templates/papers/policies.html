@@ -1,6 +1,7 @@
 {% load i18n %}
 {% load static %}
 {% load statuses %}
+{% load todolist %}
 
 <div class="container">
     <!-- Preprint -->
@@ -58,5 +59,24 @@
                 Data provided by <a href="http://www.sherpa.ac.uk/romeo/"><img src="{% static "img/sherpa-romeo.gif" %}" alt="SHERPA/RoMEO" style="max-height: 1.5rem;" /></a>
             </div>
         </div>
+    {% endif %}
+
+    {% if request.user.is_authenticated %}
+        <!-- If user logged in and paper not on his/her to-do list, add button -->
+        {% todolist request.user paper as on_todolist %}
+        {% if not on_todolist %}
+            <div class="row border-bottom border-gray-5 py-2">
+                <div class="col-auto pr-0">
+                    <img class="img-fluid policyCircle" src="{% static "img/blue-circle.png" %}" alt="{% trans "Blue circle" %}" />
+                </div>
+                <div class="col">
+                    <span class="border-bottom-dotted border-primary" data-toggle="tooltip" title="{% trans "Mark this publication for later upload." %}">{% trans "Mark for later upload" %}</span>
+                </div>
+                <div class="col-auto">
+                    <button role="button" class="btn btn-primary btn-sm" id="paperButtonTodoList" data-paper-pk="{{ paper.pk }}"><span class="oi oi-pencil" aria-hidden="true"></span> {% trans "Mark" %}</button>
+                    <span id="paperTodoListAdded" class="d-none" aria-hidden="true"><span class="oi oi-check" aria-hidden="true"></span> {% trans "Marked" %}</span>
+                </div>
+            </div>
+        {% endif %}
     {% endif %}
 </div>
