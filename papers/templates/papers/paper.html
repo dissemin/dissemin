@@ -142,21 +142,21 @@
                             {% with publisher=paper.publisher %}
                                 {% include "papers/policies.html" %}
                             {% endwith %}
-                            <p>
-                            </p>
                         </div>
                     </div>
                 </div>
+
+                <!-- Abstract (if we have one ) -->
+                {% if paper.abstract %}
+                <h4 class="border-bottom">{% trans "Abstract" %}</h4>
+
+                <div class="container mb-3">
+                    <p style="text-align: justify;">
+                        {% autoescape off %}{{ paper.abstract }}{% endautoescape %}
+                    </p>
+                </div>
+                {% endif %}
             </div>
         </div>
     </div>
 {% endblock content %}
-
-{% block lists %}
-
-    {% if paper.abstract %}
-        <span class="detailsTitle">{% trans "Abstract" %}</span>
-        <div class="detailsContent"><div class="abstract">{% autoescape off %}{{ paper.abstract }}{% endautoescape %}</div></div>
-    {% endif %}
-
-{% endblock %}
