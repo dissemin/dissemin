@@ -123,6 +123,30 @@
                         {% endwith %}
                     {% endfor %}
                 {% endif %}
+
+                <!-- Paper availability -->
+                <div class="jumbotron mt-2 pt-4">
+                    <div class="row">
+                        <div class="d-none col-md-auto">
+                            <img data-toggle="tooltip" title="{{ paper.status_helptext }}" data-placement="bottom" class="img-fluid statusImage-4" alt="{{ paper.status_helptext }}" src="{% static paper.combined_status|status_to_img %}"/>
+                        </div>
+                        <div class="col">
+                            <p>
+                                <strong>{% trans "Full text:" %}</strong>
+                                {% if paper.pdf_url %}
+                                    <a href="{{ paper.pdf_url }}" class="btn btn-primary btn-sm"><span class="oi oi-datatransfer-download" aria-hidden="true"> {% trans "Download" %}</span></a>
+                                {% else %}
+                                    {% trans "Unavailable" %}
+                                {% endif %}
+                            </p>
+                            {% with publisher=paper.publisher %}
+                                {% include "papers/policies.html" %}
+                            {% endwith %}
+                            <p>
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -130,49 +154,9 @@
 
 {% block lists %}
 
-
-    <div id="paperAvailability">
-        <div id="paperAvailabilityLogo">
-            <img src="{% static "img/logos/" %}{{ paper.combined_status }}.png" width="52" height="70" alt="Paper" />
-        </div>
-
-        <div id="paperDetails">
-            <p><strong>{% trans "Full text:" %}</strong>
-            {% if paper.pdf_url %}
-                <a class="showHrefPrint" href="{{ paper.pdf_url }}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-save"></span> {% trans "Download" %}</a>
-            {% else %}
-                {% trans "Unavailable" %}
-                {% if paper.can_be_asked_for_upload and request.user.is_authenticated %}
-                    <!-- <span><a href="{% url 'mail_paper' paper.pk %}" class="btn btn-default btn-xs">{% trans "Ask upload" %}</a></span> -->
-                {% endif %}
-            {% endif %}</p>
-            {% with paper.publisher as psh %}
-                <p><strong>{% trans "Publisher:" %}</strong>
-                {% if psh.pk %}
-                    <a href="{{ psh.canonical_url }}">{{ psh }}</a></p>
-                {% else %}
-                    {{ psh }}</p>
-                {% endif %}
-                {% if paper.is_deposited %}
-                    <strong>{% trans "Deposited." %}</strong>
-                    {% if can_be_deposited %}
-                        <a href="{% url 'upload_paper' paper.pk %}" class="btn btn-default btn-xs">{% trans "Deposit again" %}</a>
-                    {% endif %}
-                {% else %}
-                    {% include "publishers/detailsPolicy.html" with publisher=psh mode="link" %}
-                {% endif %}
-            {% endwith %}
-        </div>
-    </div>
-
     {% if paper.abstract %}
         <span class="detailsTitle">{% trans "Abstract" %}</span>
         <div class="detailsContent"><div class="abstract">{% autoescape off %}{{ paper.abstract }}{% endautoescape %}</div></div>
     {% endif %}
 
-{% endblock %}
-
-
-{% block details %}
-    {% include "papers/paperDetails.html" with paper=paper %}
 {% endblock %}

@@ -5,7 +5,7 @@
 {% block ajax_url %}{% url 'search' %}{% endblock ajax_url %}
 
 {% block missing_publications %}
-    <p class="text-center h4 text-gray">
+    <p class="text-center h4 text-gray-6">
         {% url 'faq' as faq_url %}
         {% blocktrans trimmed %}
             Missing publications? <a class="showHrefPrint" href="{{ faq_url }}#missingPaper">Read more about our data sources.</a>

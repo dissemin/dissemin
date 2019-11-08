@@ -46,7 +46,7 @@
 {% block ajax_url %}{% url 'researcher' researcher.pk researcher.slug %}{% endblock ajax_url %}
 
 {% block missing_publications %}
-    <p class="text-center h4 text-gray">
+    <p class="text-center h4 text-gray-6">
         {% with researcher.matching_papers_url as matching_papers_url %}
             {% blocktrans trimmed %}
                 Missing publications? <a href="{{ matching_papers_url }}">Search for publications with a matching author name.</a>
