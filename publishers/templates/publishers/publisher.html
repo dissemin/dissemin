@@ -66,13 +66,17 @@
             </div>
             <div class="col-12 col-md-8 order-md-first">
                 <h1 class="border-bottom">{{ publisher.name }}</h1>
+
+                <!-- Policies -->
                 <h2 class="border-bottom">{% trans "Green open access summary" %}</h2>
                 <p>
                     {% blocktrans trimmed with publisher_name=publisher.name %}
                         This is a short summary of the green open access policy of {{ publisher_name }}.
                     {% endblocktrans %}
                 </p>
-                {% include "publishers/details_simple.html" %}
+                {% include "publishers/policies.html" %}
+
+                <!-- Conditions -->
                 {% if publisher.has_conditions %}
                     <h2 class="border-bottom mt-2">{% trans "Conditions" %}</h2>
                     <ul>
@@ -81,6 +85,8 @@
                         {% endfor %}
                     </ul>
                 {% endif %}
+
+                <!-- Policy details -->
                 {% if publisher.has_copyrightlinks %}
                     <h2 class="border-bottom">{% trans "Policy details" %}</h4>
                     <ul>
