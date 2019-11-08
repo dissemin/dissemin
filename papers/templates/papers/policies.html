@@ -78,5 +78,20 @@
                 </div>
             </div>
         {% endif %}
+
+        <!-- If user logged in and paper not liberated and has doi add open access button -->
+        {% if paper.get_doi and not paper.pdf_url %}
+            <div class="row border-bottom border-gray-5 py-2">
+                <div class="col-auto pr-0">
+                    <img class="img-fluid policyCircle" src="{% static "img/blue-circle.png" %}" alt="{% trans "Blue circle" %}" />
+                </div>
+                <div class="col">
+                    <span class="border-bottom-dotted border-primary" data-toggle="tooltip" title="{% trans "Contact the authors to make this publication freely available. This is a service of the Open Access Button." %}">{% trans "Contact authors" %}</span>
+                </div>
+                <div class="col-auto">
+                    <a href="https://openaccessbutton.org/request?doi={{ paper.get_doi }}" class="btn btn-primary btn-sm"><span class="oi oi-envelope-closed"></span> {% trans "Contact" %}</a>
+                </div>
+            </div>
+        {% endif %}
     {% endif %}
 </div>
