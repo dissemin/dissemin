@@ -63,6 +63,66 @@
                 {% else %}
                     {% include "papers/author_list.html" with author_list=paper.authors %}
                 {% endif %}
+
+                <!-- Possible alerts about deposits -->
+                {% if deposit.status == 'published' %}
+                    <div class="alert alert-success" role="alert">
+                        {% with splash_url=deposit.oairecord.splash_url %}
+                            <p><center><strong>{% trans "Deposit accomplished!" %}</strong></center></p>
+                            {% blocktrans trimmed %}
+                                <p>This paper was successfully deposited and is now freely available at <a class="alert-link" href="{{ splash_url }}">this address.</a></p>
+                            {% endblocktrans %}
+                        {% endwith %}
+                    </div>
+                {% elif deposit.status == 'pending' %}
+                    <div class="alert alert-success" role="alert">
+                        <p><center><strong>{% trans "Deposit almost accomplished!" %}</strong></center></p>
+                        {% with repo_name=deposit.repository.name repo_url=deposit.repository.url splash_url=deposit.oairecord.splash_url %}
+                            {% blocktrans trimmed %}
+                                <p>This paper has been deposited in <a class="alert-link" href="{{ repo_url }}">{{ repo_name }}</a>. The full text will be available at <a class="alert-link" href="{{ splash_url }}">this address</a> after validation by the repository administrators.</p>
+                            {% endblocktrans %}
+                        {% endwith %}
+                    </div>
+                    {% if deposit.letter %}
+                    <div class="alert alert-info" role="alert">
+                        <p><center><strong>{% trans "Letter of Declaration needed!" %}</strong></center></p>
+                        {% url 'letter-of-declaration' deposit.pk as letter_url%}
+                        {% with repo_name=deposit.repository.name %}
+                            {% blocktrans trimmed %}
+                            <p>The repository {{ deposit.repository.name }} requires a letter of declaration to publish this publication. Please <a class="alert-link" href="{{ letter_url }}">download</a> the letter, sign it and send it to the repository administration.</p>
+                            {% endblocktrans %}
+                        {% endwith %}
+                    </div>
+                    {% endif %}
+                {% else %}
+                    {% for deposit in pending_deposits %}
+                        <div class="alert alert-success" role="alert">
+                            {% with deposit.repository.name as repo_name %}
+                                {% with deposit.repository.url as repo_url %}
+                                    {% with deposit.oairecord.splash_url as deposit_url %}
+                                        <p><center><strong>{% trans "Deposit almost accomplished!" %}</strong></center></p>
+                                        {% blocktrans trimmed %}
+                                            This paper has been deposited in <a class="alert-link" href="{{ repo_url }}">{{ repo_name }}</a>.
+                                            The full text will be available at <a class="alert-link" href="{{ deposit_url }}">this address</a> after validation by the repository administrators.
+                                        {% endblocktrans %}
+                                    {% endwith %}
+                                {% endwith %}
+                            {% endwith %}
+                        </div>
+                    {% endfor %}
+                    {% for deposit in embargoed_deposits %}
+                        {% with repo_name=deposit.repository.name repo_url=deposit.repository.url pub_date=deposit.pub_date splash_url=deposit.oairecord.splash_url %}
+                            <div class="alert alert-info" role="alert">
+                                <p>
+                                    {% blocktrans trimmed %}
+                                        This paper has been deposited in <a class="alert-link" href="{{ repo_url }}">{{ repo_name }}</a>.
+                                        The full text will be available at <a class="alert-link" href="{{ deposit_url }}">this address</a> from <strong>{{ pub_date|localize }}</strong> on due to an embargo.
+                                    {% endblocktrans %}
+                                </p>
+                            </div>
+                        {% endwith %}
+                    {% endfor %}
+                {% endif %}
             </div>
         </div>
     </div>
@@ -70,64 +130,6 @@
 
 {% block lists %}
 
-    {% if deposit.status == 'published' %}
-        <div class="alert alert-success">
-            {% with splash_url=deposit.oairecord.splash_url %}
-                <p><center><strong>{% trans "Deposit accomplished!" %}</strong></center></p>
-                {% blocktrans trimmed %}
-                    <p>This paper was successfully deposited and is now freely available at <a class="alert-link" href="{{ splash_url }}">this address.</a></p>
-                {% endblocktrans %}
-            {% endwith %}
-        </div>
-    {% elif deposit.status == 'pending' %}
-        <div class="alert alert-success">
-            <p><center><strong>{% trans "Deposit almost accomplished!" %}</strong></center></p>
-            {% with repo_name=deposit.repository.name repo_url=deposit.repository.url splash_url=deposit.oairecord.splash_url %}
-                {% blocktrans trimmed %}
-                    <p>This paper has been deposited in <a class="alert-link" href="{{ repo_url }}">{{ repo_name }}</a>. The full text will be available at <a class="alert-link" href="{{ splash_url }}">this address</a> after validation by the repository administrators.</p>
-                {% endblocktrans %}
-            {% endwith %}
-        </div>
-        {% if deposit.letter %}
-        <div class="alert alert-info">
-            <p><center><strong>{% trans "Letter of Declaration needed!" %}</strong></center></p>
-            {% url 'letter-of-declaration' deposit.pk as letter_url%}
-            {% with repo_name=deposit.repository.name %}
-                {% blocktrans trimmed %}
-                <p>The repository {{ deposit.repository.name }} requires a letter of declaration to publish this publication. Please <a class="alert-link" href="{{ letter_url }}">download</a> the letter, sign it and send it to the repository administration.</p>
-                {% endblocktrans %}
-            {% endwith %}
-        </div>
-        {% endif %}
-    {% else %}
-        {% for deposit in pending_deposits %}
-            <div class="alert alert-success">
-                {% with deposit.repository.name as repo_name %}
-                    {% with deposit.repository.url as repo_url %}
-                        {% with deposit.oairecord.splash_url as deposit_url %}
-                            <p><center><strong>{% trans "Deposit almost accomplished!" %}</strong></center></p>
-                            {% blocktrans trimmed %}
-                                This paper has been deposited in <a class="alert-link" href="{{ repo_url }}">{{ repo_name }}</a>.
-                                The full text will be available at <a class="alert-link" href="{{ deposit_url }}">this address</a> after validation by the repository administrators.
-                            {% endblocktrans %}
-                        {% endwith %}
-                    {% endwith %}
-                {% endwith %}
-            </div>
-        {% endfor %}
-        {% for deposit in embargoed_deposits %}
-            {% with repo_name=deposit.repository.name repo_url=deposit.repository.url pub_date=deposit.pub_date splash_url=deposit.oairecord.splash_url %}
-                <div class="alert alert-info">
-                    <p>
-                        {% blocktrans trimmed %}
-                            This paper has been deposited in <a class="alert-link" href="{{ repo_url }}">{{ repo_name }}</a>.
-                            The full text will be available at <a class="alert-link" href="{{ deposit_url }}">this address</a> from <strong>{{ pub_date|localize }}</strong> on due to an embargo.
-                        {% endblocktrans %}
-                    </p>
-                </div>
-            {% endwith %}
-        {% endfor %}
-    {% endif %}
 
     <div id="paperAvailability">
         <div id="paperAvailabilityLogo">
