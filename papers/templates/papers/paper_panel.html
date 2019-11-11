@@ -1,0 +1,72 @@
+{% load author %}
+{% load capture_tags %}
+{% load citation %}
+{% load doi %}
+{% load domain %}
+{% load i18n %}
+
+<!-- Published in -->
+{% if paper.first_publications %}
+    <h3 class="border-bottom">{% trans "Published in" %}</h3>
+
+    {% for publication in paper.first_publications %}
+        <p>{{ publication | publication }}</p>
+        <p>DOI: <a href="{{ publication | doi_to_url }}" target="_blank">{{ publication.doi }}</a></p>
+    {% endfor %}
+{% endif %}
+
+<!-- Links -->
+<h3 class="border-bottom">{% trans "Links" %}</h3>
+
+<ul class="list-unstyled">
+    {% for record in paper.sorted_oai_records %}
+        <li>
+            {% if record.splash_url %}
+                <a href="{{ record.splash_url }}">
+            {% endif %}
+            {% if record.priority > 0 %}
+                {{ record.source_or_publisher }}
+            {% else %}
+                {% if record.splash_url %}
+                    [{{ record.splash_url |domain }}]
+                {% elif record.pdf_url %}
+                    [{{ record.pdf_url |domain }}]
+                {% endif %}
+            {% endif %}
+            {% if record.splash_url %}
+                <small><span class="oi oi-external-link" aria-hidden="true"></span></small>
+                </a>{% if record.pdf_url %} | {% endif %}
+            {% endif %}
+            {% if record.pdf_url %}
+                <a class="showHrefPrint" href="{{ record.pdf_url }}" class="btn btn-xs btn-danger"><span class="oi oi-datatransfer-download"></span> PDF</a>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+
+<!-- Tools -->
+<h3 class="border-bottom">{% trans "Tools" %}</h3>
+
+<!-- Export citation modal -->
+{% capture as citation_url silent %}
+    {% url 'api-paper-pk' pk=paper.id %}?format=bibtex
+{% endcapture %}
+{% capture as citation_slug silent %}
+    {{ paper.slug }}.bib
+{% endcapture %}
+{% include 'papers/export_citation_modal.html' with slug=citation_slug url=citation_url bibtex=paper|bibtex %}
+<p>
+    <a href="#" data-toggle="modal" data-target="#exportCitationModal">{% trans "Export citation" %}</a>
+</p>
+
+<!-- Google scholar link -->
+<p>
+    <a href="{{ paper.google_scholar_link }}">{% trans "Search in Google Scholar" %} <small><span class="oi oi-external-link" aria-hidden="true"></span></small></a>
+</p>
+
+<!-- For superusers -->
+{% if request.user.is_superuser %}
+    <h3 class="border-bottom">{% trans "Admin zone" %}</h3>
+    <p style="word-wrap: break-word;"><strong>Fingerprint:</strong> {{ paper.plain_fingerprint }}</p>
+    <p style="word-wrap: break-word;"><strong>Fingerprint:</strong> {{ paper.fingerprint }}</p>
+{% endif %}

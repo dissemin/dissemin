@@ -18,14 +18,11 @@
 #
 
 
-
-from django.core.paginator import EmptyPage
-from django.core.paginator import PageNotAnInteger
-from django.core.paginator import Paginator
-from django.shortcuts import redirect
-from django.utils.translation import ugettext as _
-from django.views import generic
 from haystack.generic_views import SearchView
+
+from django.shortcuts import redirect
+from django.views import generic
+
 from publishers.forms import PublisherForm
 from publishers.models import OA_STATUS_CHOICES
 from publishers.models import Publisher
@@ -91,35 +88,22 @@ class PublishersView(SearchView):
     def get_context_data(self, **kwargs):
         context = super(PublishersView, self).get_context_data(**kwargs)
 
-        context['search_description'] = _('Publishers')
         context['nb_results'] = self.queryset.count()
         context['breadcrumbs'] = publishers_breadcrumbs()
-        context['oa_desc'] = dict([(s[0], s[2]) for s in OA_STATUS_CHOICES])
 
         return context
 
 
 class PublisherView(SlugDetailView):
     model = Publisher
-    template_name = 'publishers/policy.html'
+    template_name = 'publishers/publisher.html'
     view_name = 'publisher'
 
     def get_context_data(self, **kwargs):
         context = super(PublisherView, self).get_context_data(**kwargs)
         context['oa_status_choices'] = OA_STATUS_CHOICES
-        # Build the paginator
-        publisher = context['publisher']
-        paginator = Paginator(publisher.sorted_journals, NB_JOURNALS_PER_PAGE)
-        page = self.request.GET.get('page')
-        try:
-            current_journals = paginator.page(page)
-        except PageNotAnInteger:
-            current_journals = paginator.page(1)
-        except EmptyPage:
-            current_journals = paginator.page(paginator.num_pages)
-        context['journals'] = current_journals
-
         # Breadcrumbs
+        publisher = context['publisher']
         context['breadcrumbs'] = publisher.breadcrumbs()
 
         return context

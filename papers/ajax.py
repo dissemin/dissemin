@@ -348,10 +348,4 @@ urlpatterns = [
         name='ajax-setResearcherDepartment'),
     url(r'^institutions.geojson', InstitutionsMapView.as_view(),
         name='ajax-institutions-geojson'),
-    url(r'^claim-paper$',
-        claimPaper, name='ajax-claimPaper'),
-    url(r'^unclaim-paper$',
-        unclaimPaper, name='ajax-unclaimPaper'),
-    url(r'^todolist-add$', todo_list_add, name='ajax-todolist-add'),
-    url(r'^todolist-remove$', todo_list_remove, name='ajax-todolist-remove'),
 ]

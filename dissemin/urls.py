@@ -27,6 +27,7 @@ from allauth.socialaccount import providers
 from django.conf import settings
 from django.urls import include
 from django.urls import path
+from django.urls import re_path
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import logout
@@ -37,9 +38,23 @@ from django.views.generic.base import TemplateView
 from django.views.i18n import JavaScriptCatalog
 
 from deposit.views import MyDepositsView
+from deposit.views import GlobalPreferencesView
+from deposit.views import RepositoryPreferencesView
 from dissemin.views import LoginView
 from dissemin.views import StartPageView
+from papers.ajax import claimPaper
+from papers.ajax import unclaimPaper
+from papers.ajax import todo_list_add
+from papers.ajax import todo_list_remove
 from papers.views import AdvancedPaperSearchView
+from papers.views import MyProfileView
+from papers.views import MyTodoListView
+from papers.views import PaperSearchView
+from papers.views import ResearcherView
+from papers.views import refetch_researcher
+from publishers.ajax import change_publisher_status
+from publishers.views import PublisherView
+from publishers.views import PublishersView
 
 try:
     import importlib
@@ -47,9 +62,9 @@ except ImportError:
     from django.utils import importlib
 
 
-def handler404(request, exception=None):
+def handler403(request, exception=None):
     response = render(request, '403.html', {'exception':exception})
-    response.status_code = 404
+    response.status_code = 403
     return response
 
 
@@ -82,19 +97,40 @@ urlpatterns = [
     # Start page
     path('', StartPageView.as_view(), name='start-page'),
     # Paper related pages
-    path('advanced-search', AdvancedPaperSearchView.as_view(), name='advanced-search'),
+    path('search/', PaperSearchView.as_view(), name='search'),
+    path('advanced-search/', AdvancedPaperSearchView.as_view(), name='advanced-search'),
+    # Publisher related pages
+    path('publishers/', PublishersView.as_view(), name='publishers'),
+    path('b/<int:pk>/<slug:slug>/', PublisherView.as_view(), name='publisher'),
+    # Researcher realted pages
+    path('r/<int:researcher>/<slug:slug>/', ResearcherView.as_view(), name='researcher'),
+    re_path(r'^(?P<orcid>[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{3}[X0-9])/$', ResearcherView.as_view(), name='researcher-by-orcid'),
+    # User related pages
+    path('my-profile/', MyProfileView.as_view(), name='my-profile'),
+    path('my-todolist/', MyTodoListView.as_view(), name='my-todolist'),
     # Static pages
+    path('faq/', TemplateView.as_view(template_name='dissemin/faq.html'), name='faq'),
+    path('sources/', TemplateView.as_view(template_name='dissemin/sources.html'), name='sources'),
+    path('tos/', TemplateView.as_view(template_name='dissemin/tos.html'), name='tos'),
+    # AJAX
+    path('ajax/change_publisher_status/', change_publisher_status, name='ajax_change_publisher_status'),
+    path('ajax/claim-paper/', claimPaper, name='ajax-claimPaper'),
+    path('ajax/unclaim-paper/', unclaimPaper, name='ajax-unclaimPaper'),
+    path('ajax/researcher/<int:pk>/update/', refetch_researcher, name='refetch-researcher'),
+    path('ajax/todolist-add/', todo_list_add, name='ajax-todolist-add'),
+    path('ajax/todolist-remove/', todo_list_remove, name='ajax-todolist-remove'),
     path('faq', TemplateView.as_view(template_name='dissemin/faq.html'), name='faq'),
     path('sources', TemplateView.as_view(template_name='dissemin/sources.html'), name='sources'),
     path('tos', TemplateView.as_view(template_name='dissemin/tos.html'), name='tos'),
     # Use related pages
     path('my-deposits', MyDepositsView.as_view(), name='my-deposits'),
+    path('preferences/global/', GlobalPreferencesView.as_view(), name='preferences-global'),
+    path('preferences/repository/<int:pk>/', RepositoryPreferencesView.as_view(), name='preferences-repository'),
     # Admin interface
     path('admin/', admin.site.urls),
     # Apps
     path('ajax-upload/', include('upload.urls')),
     path('', include('papers.urls')),
-    path('', include('publishers.urls')),
     path('', include('deposit.urls')),
     path('', include('notification.urls')),
     path('', include('autocomplete.urls')),

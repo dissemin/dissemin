@@ -9,6 +9,7 @@
         <!-- Meta content -->
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        {% block meta %}{% endblock meta %}
 
         <!-- CSS -->
         {% comment %}
@@ -17,12 +18,14 @@
         {% endcomment %}
         <link rel="stylesheet" href="{% sass_src 'scss/custom.scss' %}" />
         <link rel="stylesheet" href="{% static 'css/open-iconic-bootstrap.css' %}" />
-        <link rel="stylesheet" href="{% static 'css/dissemin.css' %}" />
+        <link rel="stylesheet" href="{% sass_src 'scss/dissemin.scss' %}" />
         <link rel="stylesheet" href="{% static 'css/tempusdominus-bootstrap-4.min.css' %}" />
 
         <!-- JavaScript -->
+        <script src="{% url 'javascript-catalog' %}"></script>
         <script src="{% static 'js/jquery.min.js' %}"></script>
         <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% url 'js_reverse' %}" type="text/javascript"></script>
         <script src="{% static 'js/dissemin.js' %}"></script>
         <script src="{% static 'js/moment.min.js' %}"></script>
         <script src="{% static 'js/tempusdominus-bootstrap-4.min.js' %}"></script>

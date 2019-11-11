@@ -4,7 +4,6 @@ Created on 21 févr. 2019
 @author: antonin
 '''
 
-from django.conf.urls import url
 from django.contrib.auth.decorators import user_passes_test
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
@@ -31,8 +30,3 @@ def change_publisher_status(request):
             raise ObjectDoesNotExist
     except ObjectDoesNotExist:
         return HttpResponseNotFound('NOK', content_type='text/plain')
-    
-urlpatterns = [
-    url(r'^change-publisher-status$', change_publisher_status,
-        name='ajax-changePublisherStatus'),
-]

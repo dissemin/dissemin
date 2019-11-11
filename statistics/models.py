@@ -76,6 +76,14 @@ STATUS_QUERYSET_FILTER = {
     'closed': lambda q: q.filter(pdf_url__isnull=True, oa_status='NOK'),
     }
 
+STATUS_TO_COLOR = {
+    'oa' : 'gold',
+    'ok' : 'green',
+    'couldbe' : 'blue',
+    'unk' : 'gray',
+    'closed' : 'black',
+}
+
 
 def combined_status_for_instance(paper):
     """

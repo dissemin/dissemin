@@ -1,0 +1,15 @@
+{% load i18n %}
+{% load statuses %}
+
+<span class="border-bottom-dotted border-primary" data-toggle="tooltip" title="{% trans "A preprint is a document produced by the authors without any interaction with the peer-reviewing process." %}">
+{% trans "Preprint" %}</span>: {{ publisher.preprint|explain_policy_short_no_punc }}
+
+{% if publisher.preprint_conditions %}
+    <ul class="my-0">
+        {% for restriction in publisher.preprint_conditions %}
+            <li>
+                {{ restriction|striptags }}
+            </li>
+        {% endfor %}
+     </ul>
+ {% endif %}

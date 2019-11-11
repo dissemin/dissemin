@@ -35,7 +35,6 @@ from papers.models import Paper
 ##    url(r'^annotate-paper-(?P<pk>\d+)-(?P<status>\d+)$', annotatePaper, name='ajax-annotatePaper'),
 ##    url(r'^delete-researcher-(?P<pk>\d+)$', deleteResearcher, name='ajax-deleteResearcher'),
 #    url(r'^add-researcher$', addResearcher, name='ajax-addResearcher'),
-#    url(r'^change-publisher-status$', changePublisherStatus, name='ajax-changePublisherStatus'),
 ##    url(r'^harvesting-status-(?P<pk>\d+)$', harvestingStatus, name='ajax-harvestingStatus'),
 #    url(r'^wait-for-consolidated-field$', waitForConsolidatedField, name='ajax-waitForConsolidatedField'),
 #)

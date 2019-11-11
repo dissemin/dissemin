@@ -32,14 +32,14 @@ class PublisherAjaxTest(JsonRenderingTest):
 
     def test_logged_out(self):
         self.client.logout()
-        req = self.postPage('ajax-changePublisherStatus',
+        req = self.postPage('ajax_change_publisher_status',
                             postargs={'pk': self.publisher.pk, 'status': 'OA'})
         self.assertEqual(req.status_code, 302)
 
     def test_change_publisher_status(self):
         self.client.login(username='patrick', password='yo')
         self.assertEqual('OK', self.publisher.oa_status)
-        p = self.postPage('ajax-changePublisherStatus',
+        p = self.postPage('ajax_change_publisher_status',
                           postargs={'pk': self.publisher.pk,
                                     'status': 'OA'})
         self.assertEqual(p.status_code, 200)

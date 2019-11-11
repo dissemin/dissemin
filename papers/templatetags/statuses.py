@@ -1,12 +1,13 @@
 # -*- encoding: utf-8 -*-
 
-
-from statistics.models import PDF_STATUS_CHOICES
-
 from django import template
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
+
 from publishers.models import OA_STATUS_CHOICES
+from statistics.models import PDF_STATUS_CHOICES
+from statistics.models import STATUS_TO_COLOR
+
 
 register = template.Library()
 
@@ -90,3 +91,31 @@ def logo_oa_status(status):
     if status in OA_STATUS_IMG:
         return 'img/logos/' + OA_STATUS_IMG[status] + '.png'
     return ''
+
+
+@register.filter(is_safe=True)
+def policy_circle(policy):
+    POLICY_TO_COLOR = {
+        ("can"): 'green',
+        ("cannot"): 'red',
+        ("restricted"): 'orange',
+        ("unclear"): 'white',
+        ("unknown"): 'question',
+    }
+    return "img/{}-circle.png".format(POLICY_TO_COLOR.get(policy, ''))
+
+@register.filter(is_safe=True)
+def policy_circle_alt(policy):
+    POLICY_TO_CIRCLE_ALT = {
+        ("can"): _('Green circle'),
+        ("cannot"): _('Red circle'),
+        ("restricted"): _('Orange circle'),
+        ("unclear"): _('White circle'),
+        ("unknown"): _('Question mark in circle'),
+    }
+    return POLICY_TO_CIRCLE_ALT.get(policy)
+
+
+@register.filter(is_safe=True)
+def status_to_img(status):
+    return "img/status_{}.png".format(STATUS_TO_COLOR.get(status, ''))

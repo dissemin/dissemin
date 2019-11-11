@@ -37,10 +37,13 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from django.template import RequestContext
+from django.urls import reverse
+from django.urls import reverse_lazy
 from django.utils.translation import ugettext as _
 from django.views.decorators.http import require_POST
 from django.views.generic import View
 from django.views.generic import ListView
+from django.views.generic.edit import FormView
 
 from deposit.declaration import get_declaration_pdf
 from deposit.forms import PaperDepositForm
@@ -156,50 +159,87 @@ class MyDepositsView(LoginRequiredMixin, ListView):
         return deposits
 
 
-@user_passes_test(is_authenticated)
-def edit_repo_preferences(request, pk):
-    repo = get_object_or_404(Repository, pk=pk)
-    if not repo.enabled:
-        return HttpResponseForbidden(_('This repository is currently not enabled.'))
-    protocol = repo.get_implementation()
-    context = {
-        'repositories': Repository.objects.all(),
-        'repository': repo,
-        'protocol': protocol,
-    }
-    if not protocol:
-        raise Http404(_('This repository could not be found.'))
 
-    if request.method == 'POST':
-        pref_form = protocol.get_preferences_form(request.user, request.POST)
-        if not pref_form:
-            raise Http404(_('This repository does not have any settings.'))
-        if pref_form.is_valid():
-            pref_form.save()
-    else:
-        pref_form = protocol.get_preferences_form(request.user)
-        if not pref_form:
-            raise Http404(_('This repository does not have any settings.'))
+class GlobalPreferencesView(FormView):
+    """
+    View to handle the form with global repository settings
+    """
 
-    context['preferences_form'] = pref_form
-    return render(request, 'deposit/repo_preferences.html', context)
+    form_class = UserPreferencesForm
+    model = UserPreferences
+    success_url = reverse_lazy('preferences-global')
+    template_name = 'deposit/preferences_global.html'
 
-@user_passes_test(is_authenticated)
-def edit_global_preferences(request):
-    context = {
-        'repositories': Repository.objects.filter(enabled=True),
-    }
-    prefs = UserPreferences.get_by_user(request.user)
-    if request.method == 'POST':
-        pref_form = UserPreferencesForm(request.POST, instance=prefs)
-        pref_form.save()
+    def form_valid(self, form):
+        """
+        If the form is valid, save it and return to success page
+        """
+        form.save()
+        return super().form_valid(form)
 
-    pref_form = UserPreferencesForm(instance=prefs)
-    if not pref_form:
-        raise Http404(_('This repository does not have any settings.'))
+    def get_context_data(self, **kwargs):
+        """
+        For the navbar, we add the enabled repositories as context
+        """
+        context = super().get_context_data(**kwargs)
+        context['repositories'] = Repository.objects.filter(enabled=True)
 
-    context['preferences_form'] = pref_form
-    return render(request, 'deposit/global_preferences.html', context)
+        return context
+
+    def get_form_kwargs(self):
+        """
+        We pass an instance of the model
+        """
+        form_kwargs = super().get_form_kwargs()
+        form_kwargs['instance'] = UserPreferences.get_by_user(self.request.user)
+
+        return form_kwargs
+
+
+class RepositoryPreferencesView(FormView):
+    """
+    View to handle form of each repository having such
+    """
+
+    template_name = 'deposit/preferences_repository.html'
+
+    def setup(self, request, *args, **kwargs):
+        super().setup(request, *args, **kwargs)
+
+        self.repository = get_object_or_404(Repository, pk=kwargs.get('pk'))
+        self.protocol = self.repository.get_implementation()
+        if not self.protocol:
+            raise Http404(_('This repository could not be found.'))
+
+    def form_valid(self, form):
+        """
+        If the form is valid, save it and return to success page
+        """
+        form.save()
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        """
+        For the navbar, we add the enabled repositories as context
+        """
+        print(self.kwargs)
+        context = super().get_context_data(**kwargs)
+        context['repository'] = self.repository
+        context['repositories'] = Repository.objects.filter(enabled=True)
+
+        return context
+
+    def get_form_class(self):
+        return self.protocol.preferences_form_class
+
+    def get_form_kwargs(self):
+        form_kwargs = super().get_form_kwargs()
+        form_kwargs['instance'] = self.protocol.get_preferences(self.request.user)
+
+        return form_kwargs
+
+    def get_success_url(self):
+        return reverse('preferences-repository', args=[self.repository.pk, ])
 
 
 @require_POST
