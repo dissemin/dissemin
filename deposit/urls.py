@@ -20,8 +20,8 @@
 
 
 
-from deposit import views
 from django.conf.urls import url
+from deposit import views
 
 urlpatterns = [
         url(r'^deposit_paper/(?P<pk>\d+)/$',
@@ -34,8 +34,4 @@ urlpatterns = [
             views.submitDeposit, name='ajax-submitDeposit'),
         url(r'^ajax/get-metadata-form$',
             views.get_metadata_form, name='ajax-getMetadataForm'),
-        url(r'^repository-preferences/(?P<pk>\d+)/$',
-            views.edit_repo_preferences, name='edit-repo-preferences'),
-        url(r'^preferences$',
-            views.edit_global_preferences, name='edit-global-preferences'),
 ]
