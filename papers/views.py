@@ -417,6 +417,8 @@ class PaperView(SlugDetailView):
         if not paper.visible:
             raise Http404(_("This paper has been deleted."))
 
+        paper = queryset.prefetch_related('oairecord_set').get(pk=paper.pk)
+
         return paper
 
     def get_context_data(self, **kwargs):
@@ -434,11 +436,6 @@ class PaperView(SlugDetailView):
                     context['deposit'] = dr
             except (TypeError, ValueError, DepositRecord.DoesNotExist):
                 pass
-
-        context['can_be_deposited'] = (
-            not self.request.user.is_authenticated or 
-            self.object.can_be_deposited(self.request.user)
-        )
 
         # Pending deposits
         if not context['deposit']:

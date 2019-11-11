@@ -51,12 +51,12 @@
                     <div class="row my-1">
                         <div class="col-auto">
                             {% with status_image='img/status_'|add:publisher.oa_status_as_color|add:'.png' %}
-                                <img class="img-fluid" style="max-height: 4rem;" alt="{{ publisher.oa_status_as_color }}" src="{% static status_image %}" />
+                                <img class="img-fluid statusImage-4" alt="{{ publisher.oa_status_as_color }}" src="{% static status_image %}" />
                             {% endwith %}
                         </div>
                         <div class="col align-self-center">
                             <a class="h5" href="{{ publisher.canonical_url }}">{{ publisher }}</a>
-                            <span class="text-gray">
+                            <span class="text-gray-6">
                                 {% if publisher.stats %}
                                    {% blocktrans trimmed count num_total=publisher.stats.num_tot %}
                                        ({{ num_total }} paper)

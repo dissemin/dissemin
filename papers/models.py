@@ -51,7 +51,6 @@ import logging
 from statistics.models import AccessStatistics
 from statistics.models import combined_status_for_instance
 from statistics.models import STATUS_CHOICES_HELPTEXT
-from statistics.models import STATUS_TO_COLOR
 
 from caching.base import CachingManager
 from caching.base import CachingMixin
@@ -1016,15 +1015,6 @@ class Paper(models.Model, BarePaper):
         """
         return combined_status_for_instance(self)
 
-    @property
-    def combined_status_as_color(self):
-        """
-        Use color to describe OA status. This is in align with our graphics
-        """
-
-        return STATUS_TO_COLOR.get(self.combined_status)
-
-
     def consolidate_metadata(self, wait=True):
         """
         Tries to find an abstract for the paper, if none is available yet,
@@ -1260,16 +1250,6 @@ class Paper(models.Model, BarePaper):
     @property
     def url(self):
         return reverse('paper', args=[self.pk, self.slug])
-
-    def can_be_deposited(self, user):
-        """
-        Returns true when this paper can be deposited
-        in at least one repository configured on this
-        Dissemin instance.
-        """
-        from deposit.views import get_all_repositories_and_protocols
-        l = get_all_repositories_and_protocols(self, user)
-        return any([proto for _, proto in l])
 
     def remove_from_index(self):
         """

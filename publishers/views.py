@@ -96,7 +96,7 @@ class PublishersView(SearchView):
 
 class PublisherView(SlugDetailView):
     model = Publisher
-    template_name = 'publishers/policy.html'
+    template_name = 'publishers/publisher.html'
     view_name = 'publisher'
 
     def get_context_data(self, **kwargs):

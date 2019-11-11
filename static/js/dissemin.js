@@ -76,6 +76,61 @@ function orcidLogout (orcid_base_domain) {
 
 
 /* ***
+ * Paper
+ * *** */
+
+/* A paper can have many authors. This functions shows or hides all authors using flex and aria-hidden */
+$(function() {
+    $("#showAllAuthors").click(function() {
+        $('#authorListInteresting').addClass("d-none"); // Hide from screen
+        $('#authorListInteresting').attr("aria-hidden", "true"); // Hide from screenreader
+
+        $('#authorListFull').removeClass("d-none"); // Show
+        $('#authorListFull').attr("aria-hidden", "false"); // Hide no longer from screenreader
+    });
+
+    $("#showInterestingAuthors").click(function() {
+        $('#authorListFull').addClass("d-none"); // Hide from screen
+        $('#authorListFull').attr("aria-hidden", "true"); // Hide from screenreader
+
+        $('#authorListInteresting').removeClass("d-none"); // Show
+        $('#authorListInteresting').attr("aria-hidden", "false"); // Hide no longer from screenreader
+    });
+
+});
+
+/* Add item to the to-do list and change UI accordingly
+ * This function is here, because it is related to the search */
+$(function() {
+    $('#paperButtonTodoList').click(function() {
+        obj = $(this);
+        var paper_pk = obj.attr("data-paper-pk");
+        var ajax_url = Urls['ajax-todolist-add']();
+
+        $.ajax({
+            data: {
+                "paper_pk": paper_pk,
+                "csrfmiddlewaretoken": getCookie('csrftoken')
+            },
+            dataType: 'json',
+            error: function (data) {
+                obj.text(data['error_msg']);
+            },
+            method : 'post',
+            success: function (data) {
+                obj.remove();
+                $('#paperTodoListAdded').removeClass("d-none"); // Show
+                $('#paperTodoListAdded').attr("aria-hidden", "false"); // Hide no longer from screenreader
+            },
+            timeout : 5000,
+            url : ajax_url
+        });
+
+    });
+});
+
+
+/* ***
  * Publishers
  * *** */
 

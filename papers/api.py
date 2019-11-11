@@ -40,7 +40,9 @@ from ratelimit.decorators import ratelimit
 
 def api_paper_common(request, paper):
     if 'format' in request.GET and request.GET['format'] == 'bibtex':
-        return HttpResponse(paper.bibtex(), content_type='application/x-bibtex')
+        response = HttpResponse(paper.bibtex(), content_type='application/x-bibtex')
+        response['Content-Disposition'] = 'attachement; filename={}.bib'.format(paper.slug)
+        return response
     else:
         return JsonResponse({
             'status': 'ok',
