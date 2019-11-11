@@ -13,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-09-30 15:27+0200\n"
-"PO-Revision-Date: 2019-10-14 15:19:13+0000\n"
+"PO-Revision-Date: 2019-11-11 15:51:08+0000\n"
 "Language: ast\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -22,19 +22,16 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: autocomplete/views.py:81
-#, fuzzy
 msgid "Current institutions"
-msgstr "Instituciones"
+msgstr "Instituciones actuales"
 
 #: autocomplete/views.py:85
-#, fuzzy
 msgid "Unverified institutions"
-msgstr "Instituciones"
+msgstr "Instituciones ensin verificar"
 
 #: autocomplete/views.py:89
-#, fuzzy
 msgid "Obsolete institutions"
-msgstr "Instituciones"
+msgstr "Instituciones anticuaes"
 
 #: deposit/forms.py:85
 msgid "Upload type"
@@ -54,12 +51,11 @@ msgstr "Resume"
 
 #: deposit/forms.py:148
 msgid "Dewey Decimal Class"
-msgstr ""
+msgstr "Clase Decimal Dewey"
 
 #: deposit/forms.py:156 deposit/templates/deposit/deposits.html:45
-#, fuzzy
 msgid "License"
-msgstr "Ensin llicencia"
+msgstr "Llicencia"
 
 #: deposit/forms.py:195
 msgid "No preferred repository"
@@ -246,7 +242,7 @@ msgstr "Nome d'usuariu de HAL"
 
 #: deposit/hal/models.py:15
 msgid "If set, deposits will be associated to this HAL account."
-msgstr ""
+msgstr "Si ta configurao, los depósitos van asociase a esta cuenta HAL."
 
 #: deposit/hal/protocol.py:168
 msgid "No HAL user credentials provided."
@@ -320,7 +316,7 @@ msgstr "Emplegaremos esta dirección de corréu p'avisate cuando s'acepten los t
 
 #: deposit/models.py:331
 msgid "This repository will be used by default for your deposits."
-msgstr ""
+msgstr "Esti repositoriu va utilizase de manera predeterminada para los tos depósitos."
 
 #: deposit/osf/forms.py:35 deposit/osf/forms.py:46
 msgid "Creative Commons CC0 1.0 Universal"
@@ -380,31 +376,31 @@ msgstr ""
 
 #: deposit/osf/protocol.py:199
 msgid "Unable to create a project on OSF."
-msgstr ""
+msgstr "Nun pudo crease un proyeutu en OSF."
 
 #: deposit/osf/protocol.py:213
 msgid "Unable to authenticate to OSF."
-msgstr ""
+msgstr "Nun se pudo autenticar en OSF."
 
 #: deposit/osf/protocol.py:230
 msgid "Unable to add contributors."
-msgstr ""
+msgstr "Nun pudieron añadise collaboradores."
 
 #: deposit/osf/protocol.py:257
 msgid "Unable to update the contributors of the paper."
-msgstr ""
+msgstr "Nun pudieron anovase los collaboradores del documentu."
 
 #: deposit/osf/protocol.py:303
 msgid "Unable to update license."
-msgstr ""
+msgstr "Nun pudo actualizase la llicencia."
 
 #: deposit/osf/protocol.py:361
 msgid "Unable to create the preprint."
-msgstr ""
+msgstr "Nun pudo crease la preimpresión."
 
 #: deposit/osf/protocol.py:410
 msgid "Unable to update the preprint license."
-msgstr ""
+msgstr "Nun pudo actualizase la llicencia de la preimpresión."
 
 #: deposit/osf/protocol.py:418
 msgid "No Repository endpoint provided."
@@ -432,11 +428,11 @@ msgstr ""
 
 #: deposit/sword/forms.py:15
 msgid "E-mail"
-msgstr ""
+msgstr "Corréu electrónicu"
 
 #: deposit/sword/protocol.py:58
 msgid "The repository {} returned invalid XML"
-msgstr ""
+msgstr "El repositoriu {} devolvió XML inválidu"
 
 #: deposit/sword/protocol.py:281
 msgid "Username or password not provided for this repository. Please contact the Dissemin team."
@@ -483,11 +479,11 @@ msgstr "Estáu"
 
 #: deposit/templates/deposit/deposits.html:74
 msgid "Letter of Declaration"
-msgstr ""
+msgstr "Carta de declaración"
 
 #: deposit/templates/deposit/deposits.html:75
 msgid "Show"
-msgstr ""
+msgstr "Amosar"
 
 #: deposit/templates/deposit/deposits.html:93
 msgid "You have not made any deposit via Dissemin. What are you waiting for? Liberate your papers today."
@@ -602,9 +598,8 @@ msgid "No pdf found for dr {}"
 msgstr ""
 
 #: deposit/zenodo/protocol.py:87
-#, fuzzy
 msgid "This document is already in Zenodo. Zenodo refused the deposit."
-msgstr "Esti documentu yá ta en HAL. HAL refugó'l depósitu."
+msgstr "Esti documentu yá ta en Zenodo. Zenodo refugó'l depósitu."
 
 #: deposit/zenodo/protocol.py:120
 msgid "No Zenodo API key provided."
@@ -640,7 +635,7 @@ msgstr ""
 
 #: dissemin/settings/common.py:289
 msgid "Arabic"
-msgstr ""
+msgstr "Árabe"
 
 #: dissemin/settings/common.py:290
 msgid "English"
@@ -648,7 +643,7 @@ msgstr "Inglés"
 
 #: dissemin/settings/common.py:291
 msgid "Finnish"
-msgstr ""
+msgstr "Finés"
 
 #: dissemin/settings/common.py:292
 msgid "French"
@@ -656,11 +651,11 @@ msgstr "Francés"
 
 #: dissemin/settings/common.py:293
 msgid "Korean"
-msgstr ""
+msgstr "Coreanu"
 
 #: dissemin/settings/common.py:294
 msgid "Spanish"
-msgstr ""
+msgstr "Castellanu"
 
 #: dissemin/settings/common.py:295
 msgid "Simplified Chinese"
@@ -668,7 +663,7 @@ msgstr "Chinu simplificáu"
 
 #: dissemin/settings/common.py:296
 msgid "Traditional Chinese"
-msgstr ""
+msgstr "Chinu tradicional"
 
 #: dissemin/settings/common.py:297
 msgid "Macedonian"
@@ -676,19 +671,19 @@ msgstr "Macedoniu"
 
 #: dissemin/settings/common.py:298
 msgid "German"
-msgstr ""
+msgstr "Alemán"
 
 #: dissemin/settings/common.py:299
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "Portugués brasileñu"
 
 #: dissemin/settings/common.py:300
 msgid "European Portuguese"
-msgstr ""
+msgstr "Portugués européu"
 
 #: dissemin/settings/common.py:301
 msgid "Swedish"
-msgstr ""
+msgstr "Suecu"
 
 #: notification/models.py:62
 msgid "inboxes"
@@ -855,15 +850,13 @@ msgstr ""
 
 #: papers/templates/papers/advanced_search.html:27
 #: papers/templates/papers/search.html:289
-#, fuzzy
 msgid "By title"
-msgstr "títulu"
+msgstr "Por títulu"
 
 #: papers/templates/papers/advanced_search.html:34
 #: papers/templates/papers/search.html:302
-#, fuzzy
 msgid "By co-authors"
-msgstr "Por autores"
+msgstr "Por co-autores"
 
 #: papers/templates/papers/advanced_search.html:36
 #: papers/templates/papers/search.html:304
@@ -973,7 +966,7 @@ msgstr ""
 
 #: papers/templates/papers/exportCitationsModal.html:16
 msgid "Format"
-msgstr ""
+msgstr "Formatu"
 
 #: papers/templates/papers/exportCitationsModal.html:22
 #: papers/templates/papers/paper.html:145
@@ -996,9 +989,8 @@ msgid "Home"
 msgstr "Entamu"
 
 #: papers/templates/papers/index.html:21
-#, fuzzy
 msgid "Welcome to Dissemin"
-msgstr "Afáyate'n dissemin"
+msgstr "Afáyate'n Dissemin"
 
 #: papers/templates/papers/index.html:23
 msgid "Dissemin detects papers behind paywalls and helps their authors to upload them in one click to an open repository."
@@ -1010,9 +1002,8 @@ msgid "Green Open Access"
 msgstr "Accesu abiertu verde"
 
 #: papers/templates/papers/index.html:47
-#, fuzzy
 msgid "Many researchers do not use their right to make their papers freely available online, in addition to the paywalled version of traditional publishers."
-msgstr "Munchos investigadores nun utilicen el so derechu de facer disponibles llibremente en llinia los sos artículos, amás de la versión de pagu ufiertada poles editoriales tradicionales."
+msgstr "Munchos investigadores nun utilicen el so derechu de facer disponibles llibremente en llinia los sos artículos, amás de la versión de pagu de les editoriales tradicionales."
 
 #: papers/templates/papers/index.html:52
 msgid "Uploading your papers to open repositories has significant advantages:"
@@ -1023,9 +1014,8 @@ msgid "Your research is available to everyone, increasing your readership and im
 msgstr ""
 
 #: papers/templates/papers/index.html:63
-#, fuzzy
 msgid "You help universities abandon overpriced journal subscriptions."
-msgstr "Esto fuerza a les biblioteques a mercar suscripciones electróniques sobrevaloraes a revistes, si acasu pueden permitíselo."
+msgstr "Ayudes a les universidaes a abandonar suscripciones sobrevaloraes a revistes."
 
 #: papers/templates/papers/index.html:78
 #, fuzzy
@@ -1033,9 +1023,8 @@ msgid "Open Repositories"
 msgstr "Repositorios abiertos"
 
 #: papers/templates/papers/index.html:80
-#, fuzzy
 msgid "Uploading your papers on your own webpage is not enough. Your papers are easier to find and more secure in the long-term when uploaded to arXiv, Zenodo or institutional repositories."
-msgstr "Publicar los artículos na to propia páxina web nun ye abondu. Tales copies son menos estables y más abegoses d'alcontrar que los documentos publicaos en repositorios bien clasificaos."
+msgstr "Publicar los artículos na to propia páxina web nun ye abondo. Estos son más fáciles d'alcontrar y tán más seguros a llargu plazu cuando se xuben a arXiv, Zenodo o repositorios institucionales."
 
 #: papers/templates/papers/index.html:94
 #, fuzzy
@@ -1089,26 +1078,26 @@ msgid "(empty profile)"
 msgstr "(perfil vacíu)"
 
 #: papers/templates/papers/paper.html:60
-#, fuzzy, python-format
+#, python-format
 msgctxt "as in: _Journal article published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "<span class=\"paperDocType\">%(doctype)s</span> published in %(year)s by"
-msgstr "<span class=\"paperDocType\">%(doctype)s</span> por"
+msgstr "<span class=\"paperDocType\">%(doctype)s</span> publicáu en %(year)s por"
 
 #: papers/templates/papers/paper.html:66
-#, fuzzy, python-format
+#, python-format
 msgctxt "as in: _Published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "Published in %(year)s by"
-msgstr "Publicáu en"
+msgstr "Publicáu en %(year)s por"
 
 #: papers/templates/papers/paper.html:74
-#, fuzzy, python-format
+#, python-format
 msgid "and <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s other authors</a>"
-msgstr "\n            y <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s autores más</a>\n            "
+msgstr "y <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s autores más</a>"
 
 #: papers/templates/papers/paper.html:80
-#, fuzzy, python-format
+#, python-format
 msgid "All %(nb_authors)s authors (<a href=\"#\" id=\"show_less_authors\">show less</a>):<br />"
-msgstr "\n            Tolos %(nb_authors)s autores (<a href=\"#\" id=\"show_less_authors\">ver menos</a>):<br />\n            "
+msgstr "Tolos %(nb_authors)s autores (<a href=\"#\" id=\"show_less_authors\">ver menos</a>):<br />"
 
 #: papers/templates/papers/paper.html:93
 msgid "Deposit accomplished!"
@@ -1254,7 +1243,7 @@ msgstr "¿Yes tu?"
 #: papers/templates/papers/search.html:148
 #, python-format
 msgid " %(first_name)s %(last_name)s uses ORCID."
-msgstr ""
+msgstr " %(first_name)s %(last_name)s usa ORCID."
 
 #: papers/templates/papers/search.html:157
 msgid "Refresh publications"
@@ -1453,9 +1442,8 @@ msgid "Invalid ORCID profile."
 msgstr ""
 
 #: papers/views.py:323
-#, fuzzy
 msgid "authored by"
-msgstr "Publicáu por"
+msgstr "publicáu por"
 
 #: papers/views.py:374
 msgid " published by "
@@ -1488,11 +1476,11 @@ msgstr ""
 
 #: publishers/forms.py:10
 msgid "popularity"
-msgstr ""
+msgstr "popularidá"
 
 #: publishers/forms.py:11
 msgid "name"
-msgstr ""
+msgstr "nome"
 
 #: publishers/forms.py:14
 msgid "decreasing"
@@ -1508,7 +1496,7 @@ msgstr ""
 
 #: publishers/models.py:39
 msgid "Open access"
-msgstr ""
+msgstr "Accesu abiertu"
 
 #: publishers/models.py:39
 msgid "Freely available from the publisher."
@@ -1568,39 +1556,39 @@ msgstr ""
 
 #: publishers/templates/publishers/detailsPolicy.html:7
 msgid "Preprint:"
-msgstr ""
+msgstr "Preimpresión:"
 
 #: publishers/templates/publishers/detailsPolicy.html:8
 msgid "A preprint is a document produced by the authors without any interaction with the peer-reviewing process."
-msgstr ""
+msgstr "Una preimpresión ye un documentu producíu polos autores ensin interacción nenguna col procesu de revisión por pares."
 
 #: publishers/templates/publishers/detailsPolicy.html:9
 msgid "preprint"
-msgstr ""
+msgstr "preimpresión"
 
 #: publishers/templates/publishers/detailsPolicy.html:11
 msgid "Postprint:"
-msgstr ""
+msgstr "Versión revisada:"
 
 #: publishers/templates/publishers/detailsPolicy.html:12
 msgid "Postprints differ from preprints in that they include the changes suggested by the reviewers. They are not edited by the publisher."
-msgstr ""
+msgstr "Les versiones revisaes difieren de les preimpresiones porque incluyen los cambeos suxeríos polos pares. Nun les edita quien les publicó."
 
 #: publishers/templates/publishers/detailsPolicy.html:13
 msgid "postprint"
-msgstr ""
+msgstr "versión revisada"
 
 #: publishers/templates/publishers/detailsPolicy.html:15
 msgid "Published version:"
-msgstr ""
+msgstr "Versión publicada:"
 
 #: publishers/templates/publishers/detailsPolicy.html:16
 msgid "The published version is the final version of the paper, as formatted by the publisher."
-msgstr ""
+msgstr "La version publicada ye la version final del documentu, col formatu de quien les publica."
 
 #: publishers/templates/publishers/detailsPolicy.html:17
 msgid "published version"
-msgstr ""
+msgstr "versión publicada"
 
 #: publishers/templates/publishers/detailsPolicy.html:33
 msgid "Mark this publication for later upload"
@@ -1619,9 +1607,8 @@ msgid "Contact the authors to make this publication freely available. This is a 
 msgstr ""
 
 #: publishers/templates/publishers/detailsPolicy.html:49
-#, fuzzy
 msgid "Contact authors"
-msgstr "Por autores"
+msgstr "Comunicase colos autores"
 
 #: publishers/templates/publishers/detailsPolicy.html:50
 #: templates/dissemin/tos.html:81
@@ -1764,9 +1751,8 @@ msgid "Upload is forbidden"
 msgstr ""
 
 #: statistics/templates/statistics/pie_legend.html:7
-#, fuzzy
 msgid "Refine by OA status"
-msgstr "Estáu d'OA desconocíu"
+msgstr "Refinar por estáu d'OA"
 
 #: templates/404.html:6 templates/404.html:12
 msgid "Page not found"
@@ -2425,18 +2411,16 @@ msgid "Invalid URL."
 msgstr ""
 
 #: vinaigrette-deleteme.py:2
-#, fuzzy
 msgid "Computer science, knowledge & systems"
-msgstr "Ciencies informátiques"
+msgstr "Ciencies, conocimientu y sistemes informáticos"
 
 #: vinaigrette-deleteme.py:3
 msgid "Bibliographies"
 msgstr ""
 
 #: vinaigrette-deleteme.py:4
-#, fuzzy
 msgid "Library & information sciences"
-msgstr "Ciencies bibliotecaries y d'información"
+msgstr "Biblioteconomía y ciencies de la información"
 
 #: vinaigrette-deleteme.py:5
 msgid "Encyclopedias & books of facts"
@@ -2463,9 +2447,8 @@ msgid "Manuscripts & rare books"
 msgstr ""
 
 #: vinaigrette-deleteme.py:12
-#, fuzzy
 msgid "Metaphysics"
-msgstr "Física"
+msgstr "Metafísica"
 
 #: vinaigrette-deleteme.py:13
 msgid "Epistemology"
@@ -2480,9 +2463,8 @@ msgid "Philosophical schools of thought"
 msgstr ""
 
 #: vinaigrette-deleteme.py:17
-#, fuzzy
 msgid "Philosophical logic"
-msgstr "Filosofía"
+msgstr "Lóxica filosófica"
 
 #: vinaigrette-deleteme.py:18
 msgid "Ethics"
@@ -2497,9 +2479,8 @@ msgid "Modern western philosophy"
 msgstr ""
 
 #: vinaigrette-deleteme.py:21
-#, fuzzy
 msgid "Religion"
-msgstr "Relixones"
+msgstr "Relixón"
 
 #: vinaigrette-deleteme.py:22
 msgid "Philosophy & theory of religion"
@@ -2534,14 +2515,12 @@ msgid "Christian denominations"
 msgstr ""
 
 #: vinaigrette-deleteme.py:30
-#, fuzzy
 msgid "Other religions"
-msgstr "Relixones"
+msgstr "Otres relixones"
 
 #: vinaigrette-deleteme.py:31
-#, fuzzy
 msgid "Social sciences, sociology & anthropology"
-msgstr "Antropoloxía social y etnoloxía"
+msgstr "Ciencies sociales, socioloxía y antropoloxía"
 
 #: vinaigrette-deleteme.py:34
 msgid "Economics"
@@ -2596,9 +2575,8 @@ msgid "Other languages"
 msgstr ""
 
 #: vinaigrette-deleteme.py:51
-#, fuzzy
 msgid "Science"
-msgstr "Ciencies de la vida"
+msgstr "Ciencia"
 
 #: vinaigrette-deleteme.py:53
 msgid "Astronomy"
@@ -2613,9 +2591,8 @@ msgid "Fossils & prehistoric life"
 msgstr ""
 
 #: vinaigrette-deleteme.py:58
-#, fuzzy
 msgid "Biology"
-msgstr "Socioloxía"
+msgstr "Bioloxía"
 
 #: vinaigrette-deleteme.py:59
 msgid "Plants (Botany)"
@@ -2626,33 +2603,28 @@ msgid "Animals (Zoology)"
 msgstr ""
 
 #: vinaigrette-deleteme.py:61
-#, fuzzy
 msgid "Technology"
-msgstr "Psicoloxía"
+msgstr "Teunoloxía"
 
 #: vinaigrette-deleteme.py:62
-#, fuzzy
 msgid "Medicine & health"
-msgstr "Medicina y ciencies de la salú"
+msgstr "Medicina y salú"
 
 #: vinaigrette-deleteme.py:64
-#, fuzzy
 msgid "Agriculture"
-msgstr "Arquitectura"
+msgstr "Agricultura"
 
 #: vinaigrette-deleteme.py:65
 msgid "Home & family management"
 msgstr ""
 
 #: vinaigrette-deleteme.py:66
-#, fuzzy
 msgid "Management & public relations"
-msgstr "Recargar les publicaciones"
+msgstr "Alministración y rellaciones públiques"
 
 #: vinaigrette-deleteme.py:67
-#, fuzzy
 msgid "Chemical engineering"
-msgstr "Inxeniería"
+msgstr "Inxeniería química"
 
 #: vinaigrette-deleteme.py:68
 msgid "Manufacturing"
@@ -2739,14 +2711,12 @@ msgid "Classical & modern Greek literatures"
 msgstr ""
 
 #: vinaigrette-deleteme.py:90
-#, fuzzy
 msgid "Other literatures"
-msgstr "Lliteratura"
+msgstr "Otres lliteratures"
 
 #: vinaigrette-deleteme.py:92
-#, fuzzy
 msgid "Geography & travel"
-msgstr "Xeografía"
+msgstr "Xeografía y viaxes"
 
 #: vinaigrette-deleteme.py:93
 msgid "Biography & genealogy"
@@ -2761,9 +2731,8 @@ msgid "History of Europe"
 msgstr ""
 
 #: vinaigrette-deleteme.py:96
-#, fuzzy
 msgid "History of Asia"
-msgstr "Historia"
+msgstr "Historia d'Asia"
 
 #: vinaigrette-deleteme.py:97
 msgid "History of Africa"
@@ -2782,29 +2751,24 @@ msgid "History of other areas"
 msgstr ""
 
 #: vinaigrette-deleteme.py:101
-#, fuzzy
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
-msgstr "Creative Commons CC0 1.0 Universal"
+msgstr "Creative Commons 1.0 Universal (CC0 1.0) Dedicación al dominiu públicu"
 
 #: vinaigrette-deleteme.py:102
-#, fuzzy
 msgid "Creative Commons Attribution 4.0 International (CC BY 4.0)"
-msgstr "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
+msgstr "Creative Commons Attribution 4.0 Internacional (CC BY 4.0)"
 
 #: vinaigrette-deleteme.py:103
-#, fuzzy
 msgid "Creative Commons Attribution-ShareAlike 4.0, International (CC BY-SA 4.0)"
-msgstr "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
+msgstr "Creative Commons Attribution-ShareAlike 4.0, Internacional (CC BY-SA 4.0)"
 
 #: vinaigrette-deleteme.py:104
-#, fuzzy
 msgid "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
-msgstr "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
+msgstr "Creative Commons Attribution-NonCommerical 4.0 Internacional (CC BY-NC 4.0)"
 
 #: vinaigrette-deleteme.py:105
-#, fuzzy
 msgid "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)"
-msgstr "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
+msgstr "Creative Commons Attribution-NoDerivatives 4.0 Internacional (CC BY-ND 4.0)"
 
 #: vinaigrette-deleteme.py:106
 msgid "Free for private use; right holder retains other rights, including distribution"

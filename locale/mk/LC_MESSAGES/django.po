@@ -13,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-09-30 15:27+0200\n"
-"PO-Revision-Date: 2019-10-14 15:19:24+0000\n"
+"PO-Revision-Date: 2019-11-11 15:51:18+0000\n"
 "Language: mk\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -54,9 +54,8 @@ msgid "Dewey Decimal Class"
 msgstr ""
 
 #: deposit/forms.py:156 deposit/templates/deposit/deposits.html:45
-#, fuzzy
 msgid "License"
-msgstr "Нема лиценца"
+msgstr "Лиценца"
 
 #: deposit/forms.py:195
 msgid "No preferred repository"
@@ -424,9 +423,8 @@ msgid "Unable to make the project public."
 msgstr "Не можам да го направам проектот како јавен."
 
 #: deposit/protocol.py:303
-#, fuzzy
 msgid "Failed to connect to the repository. Please try again later."
-msgstr "Не успеав да се поврзам со HAL. Обидете се подоцна."
+msgstr "Не успеав да се поврзам со складиштето. Обидете се подоцна."
 
 #: deposit/sword/forms.py:15
 msgid "E-mail"
@@ -565,9 +563,8 @@ msgid "please wait..."
 msgstr "почекајте..."
 
 #: deposit/views.py:73 deposit/views.py:145
-#, fuzzy
 msgid "This repository is currently not enabled."
-msgstr "Не можев да го пронајдам складиштето."
+msgstr "Ова складиште во моментов не е овозможено."
 
 #: deposit/views.py:79
 msgid "This repository is not available for this paper."
@@ -1082,26 +1079,26 @@ msgid "(empty profile)"
 msgstr "(празен профил)"
 
 #: papers/templates/papers/paper.html:60
-#, fuzzy, python-format
+#, python-format
 msgctxt "as in: _Journal article published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "<span class=\"paperDocType\">%(doctype)s</span> published in %(year)s by"
-msgstr " \n    <span class=\"paperDocType\">%(doctype)s</span> од\n    "
+msgstr "<span class=\"paperDocType\">%(doctype)s</span> објавено во %(year)s од"
 
 #: papers/templates/papers/paper.html:66
-#, fuzzy, python-format
+#, python-format
 msgctxt "as in: _Published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "Published in %(year)s by"
-msgstr "Објавено во"
+msgstr "Објавено во %(year)s од"
 
 #: papers/templates/papers/paper.html:74
-#, fuzzy, python-format
+#, python-format
 msgid "and <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s other authors</a>"
-msgstr "\n            и <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s други автори</a>\n            "
+msgstr "и <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s други автори</a>"
 
 #: papers/templates/papers/paper.html:80
-#, fuzzy, python-format
+#, python-format
 msgid "All %(nb_authors)s authors (<a href=\"#\" id=\"show_less_authors\">show less</a>):<br />"
-msgstr "\n            Сите %(nb_authors)s автори (<a href=\"#\" id=\"show_less_authors\">покажи помалку</a>):<br />\n            "
+msgstr "Сите %(nb_authors)s автори (<a href=\"#\" id=\"show_less_authors\">прикажи помалку</a>):<br />"
 
 #: papers/templates/papers/paper.html:93
 msgid "Deposit accomplished!"
@@ -1120,7 +1117,7 @@ msgstr ""
 #: papers/templates/papers/paper.html:103
 #, python-format
 msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> after validation by the repository administrators.</p>"
-msgstr ""
+msgstr "<p>Овој напис е поднесен во <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. Целосниот текст ќе биде достапен на <a class=\"alert-link\" href=\"%(splash_url)s\">оваа адреса</a> после потврдување од раководителите на складиштето.</p>"
 
 #: papers/templates/papers/paper.html:110
 msgid "Letter of Declaration needed!"
@@ -1446,9 +1443,8 @@ msgid "Invalid ORCID profile."
 msgstr "Неважечки профил на ORCID."
 
 #: papers/views.py:323
-#, fuzzy
 msgid "authored by"
-msgstr " во авторство на "
+msgstr "во авторство на"
 
 #: papers/views.py:374
 msgid " published by "
@@ -1476,9 +1472,8 @@ msgid "This paper has been deleted."
 msgstr "Овој напис е избришан."
 
 #: papers/views.py:545
-#, fuzzy
 msgid "Invalid DOI."
-msgstr "Неважечки URL."
+msgstr "Неважечки DOI."
 
 #: publishers/forms.py:10
 msgid "popularity"
@@ -1767,18 +1762,16 @@ msgid "Page not found"
 msgstr "Страницата не е пронајдена"
 
 #: templates/404.html:13
-#, fuzzy
 msgid "The page you requested could not be found. <a href=\"/\">Go back to the home page.</a>"
-msgstr "\n            Бараната страница не е пронајдена. <a href=\"/\">Назад на почетната страница.</a>\n           "
+msgstr "Бараната страница не е пронајдена. <a href=\"/\">Назад на почетната страница.</a>"
 
 #: templates/500.html:6 templates/500.html:12
 msgid "Internal error"
 msgstr "Внатрешна грешка"
 
 #: templates/500.html:13
-#, fuzzy
 msgid "Your request triggered an internal error. <a href=\"/\">Go back to the home page.</a>"
-msgstr "\n            Вашето барање предизвика внатрешна грешка. <a href=\"/\">Назад на почетната страница.</a>\n           "
+msgstr "Вашето барање предизвика внатрешна грешка. <a href=\"/\">Назад на почетната страница.</a>"
 
 #: templates/admin/base_site.html:4
 msgid "Dissemin site admin"
@@ -1794,7 +1787,7 @@ msgstr "Грешка"
 
 #: templates/dissemin/error.html:15
 msgid "<a href=\"/\">Go back to the home page.</a>"
-msgstr ""
+msgstr "<a href=\"/\">Назад на почетната страница.</a>"
 
 #: templates/dissemin/faq.html:6 templates/dissemin/faq.html:11
 msgid "Frequently Asked Questions"
@@ -2460,9 +2453,8 @@ msgid "Manuscripts & rare books"
 msgstr ""
 
 #: vinaigrette-deleteme.py:12
-#, fuzzy
 msgid "Metaphysics"
-msgstr "Физика"
+msgstr "Метафизика"
 
 #: vinaigrette-deleteme.py:13
 msgid "Epistemology"
