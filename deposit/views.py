@@ -42,6 +42,7 @@ from django.urls import reverse_lazy
 from django.utils.translation import ugettext as _
 from django.views.decorators.http import require_POST
 from django.views.generic import View
+from django.views.generic import ListView
 from django.views.generic.edit import FormView
 
 from deposit.declaration import get_declaration_pdf
@@ -131,23 +132,32 @@ def start_view(request, pk):
     return render(request, 'deposit/start.html', context)
 
 
-@user_passes_test(is_authenticated)
-def list_deposits(request):
-    deposits = DepositRecord.objects.filter(
-        user=request.user,
-        identifier__isnull=False
-    ).order_by(
-        '-date'
-    ).select_related(
-        'license',
-        'oairecord',
-        'paper',
-        'repository',
-    )
-    context = {
-        'deposits': deposits
-    }
-    return render(request, 'deposit/deposits.html', context)
+class MyDepositsView(LoginRequiredMixin, ListView):
+    """
+    A few to list all publications of a given user
+    """
+
+    context_object_name = 'deposits'
+    template_name = 'deposit/deposits.html'
+
+    def get_queryset(self):
+        """
+        Fetch all deposition of the user, with depending objects
+        """
+        deposits = DepositRecord.objects.filter(
+            user=self.request.user,
+            identifier__isnull=False
+        ).order_by(
+            '-date'
+        ).select_related(
+            'license',
+            'oairecord',
+            'paper',
+            'repository',
+        )
+
+        return deposits
+
 
 
 class GlobalPreferencesView(FormView):
