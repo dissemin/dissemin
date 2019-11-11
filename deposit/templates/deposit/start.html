@@ -1,4 +1,4 @@
-{% extends "dissemin/details.html" %}
+{% extends "base.html" %}
 
 {% load author %}
 {% load domain %}
@@ -8,11 +8,55 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
-{% block headTitle %}{% trans "Depositing" %} "{{ paper.title }}"{% endblock %}
+{% block title %}{% trans "Depositing" %} "{{ paper.title }}"{% endblock %}
 
-{% block bodyTitle %}
-{% trans "Depositing" %} "{{ paper.title }}"
+{% block bodyTitle %}{% trans "Depositing" %} "{{ paper.title }}"
 {% endblock %}
+
+{% block content %}
+    {% include "breadcrumbs.html" %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-4 pb-3">
+                {% include "papers/paper_panel.html" %}
+            </div>
+            <div class="col-12 col-md-8 order-md-first">
+                <h2 class="border-bottom">{% trans "Depositing" %} &quot;{{ paper.title }}&quot;</h2>
+                <!-- Terms of Service reminder -->
+                <p>
+                    {% url 'tos' as tosurl %}
+                    {% blocktrans trimmed %}
+                        You can deposit the full text of your article. Dissemin will
+                        send it to a repository where it will be made freely available.
+                        By depositing your article via Dissemin,
+                        you agree to our <a href="{{ tosurl }}">terms of service</a>.
+                    {% endblocktrans %}
+                </p>
+
+                <!-- Alert about authorship -->
+                {% if not is_owner %}
+                    <div class="alert alert-danger" role="alert">
+                        <p class="text-center"><strong>Authorship</strong></p>
+                        {% blocktrans trimmed %}
+                            You do not appear to be one of the authors of this paper. By using this form, you certify that you have the permission to upload it on their behalf.
+                        {% endblocktrans %}
+                    </div>
+                {% endif %}
+
+                <!-- Alert about deposition possibilities, not realy needed -->
+                {% if not selected_protocol %}
+                    <div class="alert alert-danger" role="alert">
+                        <p class="text-center"><strong>Deposition not possible</strong></p>
+                        {% blocktrans trimmed %}
+                            This paper cannot be deposited in any repository supported by Dissemin.
+                        {% endblocktrans %}
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}
 
 {% block extra_head %}
     <script src="{% static "libs/jquery.ui.widget.js" %}"></script>
