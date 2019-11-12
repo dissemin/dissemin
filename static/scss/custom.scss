@@ -52,7 +52,7 @@ $border-width-customs: ("1": $border-width-custom-1, "2": $border-width-custom-2
 
 /* We want dotted borders */
 
-@each $var in in '', 'top-', 'right-', 'bottom-', 'left-' {
+@each $var in '', 'top-', 'right-', 'bottom-', 'left-' {
     .border-#{$var}dotted { border-#{$var}width: 2px; border-#{$var}style: dotted; border-#{$var}color: $border-color;};
 }
 
