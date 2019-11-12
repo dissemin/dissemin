@@ -30,10 +30,7 @@
                 <p>
                     {% url 'tos' as tosurl %}
                     {% blocktrans trimmed %}
-                        You can deposit the full text of your article. Dissemin will
-                        send it to a repository where it will be made freely available.
-                        By depositing your article via Dissemin,
-                        you agree to our <a href="{{ tosurl }}">terms of service</a>.
+                        You can deposit the full text of your article. Dissemin will send it to a repository where it will be made freely available. By depositing your article via Dissemin, you agree to our <a href="{{ tosurl }}">terms of service</a>.
                     {% endblocktrans %}
                 </p>
 
@@ -270,42 +267,6 @@ $(function() {
 {% endblock %}
 
 {% block lists %}
-<div id="uploadIntro">
-    <p>
-        {% url 'tos' as tosurl %}
-        {% blocktrans trimmed %}
-            You can deposit the full text of your article. Dissemin will
-            send it to a repository where it will be made freely available.
-            By depositing your article via Dissemin,
-            you agree to our <a href="{{ tosurl }}">terms of service</a>.
-        {% endblocktrans %}
-    </p>
-
-    {% if not is_owner %}
-    <div class="alert alert-danger" role="alert">
-        <span class="glyphicon glyphicon-exclamation-sign"></span>
-        {% blocktrans trimmed %}
-        You do not appear to be one of the authors of this paper.
-        By using this form, you certify that you have the permission to
-        upload it on their behalf.
-        {% endblocktrans %}
-    </div>
-    {% endif %}
-    {% if not selected_protocol %}
-    <div class="alert alert-danger" role="alert">
-        <span class="glyphicon glyphicon-exclamation-sign"></span>
-        {% blocktrans trimmed %}
-        This paper cannot be deposited in any repository supported by
-        Dissemin.
-        {% endblocktrans %}
-    </div>
-    {% endif %}
-</div>
-
-<span class="detailsTitle">{% trans "Document" %}</span>
-<div class="detailsContent uploadSection">
-    {% include "upload/widget.html" %}
-</div>
 
 <form method="POST" action="javascript:depositPaper()" id="depositForm">
 {% csrf_token %}
