@@ -10,8 +10,12 @@
 
 {% block title %}{% trans "Depositing" %} "{{ paper.title }}"{% endblock %}
 
-{% block bodyTitle %}{% trans "Depositing" %} "{{ paper.title }}"
-{% endblock %}
+{% block scripts %}
+    <script src="{% static "js/dropzone.js" %}"></script>
+    <script>
+        Dropzone.autoDiscover = false;
+    </script>
+{% endblock scripts %}
 
 {% block content %}
     {% include "breadcrumbs.html" %}
@@ -52,6 +56,9 @@
                         {% endblocktrans %}
                     </div>
                 {% endif %}
+
+                <h4 class="border-bottom">{% trans "Document" %}</h4>
+                {% include "upload/widget.html" %}
 
             </div>
         </div>
