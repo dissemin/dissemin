@@ -73,6 +73,8 @@
                     <!-- Hidden field to store the internal file id of previously uploaded file -->
                     <input type="hidden" id="uploadFileId" name="file_id" />
                     <div class="accordion">
+
+                        <!-- Document type -->
                         <div class="card">
                             <a class="text-dark" data-toggle="collapse" href="#collapseDocType" aria-expaneded="true" aria-controls="collapseDocType">
                                 <div class="card-header" id="headingDocType">
@@ -131,9 +133,36 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Repository -->
+                        <div class="card">
+                            <a class="text-dark" data-toggle="collapse" href="#collapseRepository" aria-expaneded="true" aria-controls="collapseRepository">
+                                <div class="card-header" id="headingRepository">
+                                    {% trans "Repository:" %} <span id="choosenRepository"><strong>{{ selected_repository.name }}</strong></span>
+                                </div>
+                            </a>
+                            <div class="collapse show" id="collapseRepository" aria-labelledby="headingRepository">
+                                <div class="container">
+                                    {% for repository in available_repositories %}
+                                    <span class="d-none" aria-hidden="true" id="choosenRepository-{{ repository.pk }}"><strong>{{ repository.name }}</strong></span>
+                                        <div class="row border-bottom py-2">
+                                            <div class="col-3 px-0">
+                                                <img class="img-fluid" style="max-height: 4rem" src="{{ repository.logo.url }}" alt="{{ repository.name }}" />
+                                            </div>
+                                            <div class="col">
+                                                {{ repository.description | safe }}
+                                            </div>
+                                            <div class="col-auto">
+                                                <input type="radio" value="{{ repository.pk }}" name="radioRepository" {% if repository == selected_repository %}checked="checked"{% endif %} />
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                        </div>
+
                     </div>
-
-
                 </form>
 
             </div>
@@ -211,37 +240,6 @@ $(function() {
                 });
         }
     }
-
-    $('.helpPopover').popover({trigger: "hover"});
-
-    /* Panels */
-    function collapseWithInline(input_name, callback) {
-        $('#option'+input_name).collapse({
-            parent:$('#'+input_name+'Options'),
-            toggle:false,
-            }).on('show.bs.collapse', function () {
-            $('#'+input_name+'Inline').empty();
-        }).on('hidden.bs.collapse', function () {
-            var selected = $("input[type='radio'][name='radio"+input_name+"']:checked");
-            if(selected.length > 0) {
-            $('#'+input_name+'Inline').append($('#hiddenInline'+input_name+'-'+selected.val()).clone());
-            }
-            if(callback != null) {
-                callback(selected);
-            }
-        });
-        $("input[type='radio'][name='radio"+input_name+"']").click(function(){
-            $('#option'+input_name).collapse('hide');
-            $('#error-radio'+input_name).removeClass('error').empty();
-        });
-    }
-
-    collapseWithInline('UploadType', null);
-    collapseWithInline('Repository', updateMetadataForm);
-
-    {% if request.GET.type %}
-        $('#optionUploadType').collapse('hide');
-    {% endif %}
 });
 
     /* Submitting the deposit */
@@ -344,17 +342,6 @@ $(function() {
 <input type="hidden" id="uploadFileId" name="file_id" />
 <span class="detailsTitle">{% trans "Options" %}</span>
 <div id="uploadOptions" class="panel-group detailsContent" role="tablist" aria-multiselectable="true">
-    <div id="error-radioUploadType"></div>
-    <div class="panel panel-default">
-        <div class="panel-heading pointer" role="tab" id="headingUploadType" data-toggle="collapse" data-target="#optionUploadType" data-parent="uploadTypeOptions">
-            {% trans "Upload type:" %}<span id="UploadTypeInline"></span>
-        </div>
-        <div id="optionUploadType" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingUploadType">
-            <div class="panel-body">
-                {% include "publishers/detailsPolicy.html" with publisher=paper.publisher mode="radio" %}
-            </div>
-        </div>
-    </div>
     <div class="panel panel-default">
         <div class="panel-heading pointer" role="tab" id="headingRepository" data-toggle="collapse" data-target="#optionRepository" data-parent="uploadOptions">
             {% trans "Repository:" %}<span id="RepositoryInline"></span>

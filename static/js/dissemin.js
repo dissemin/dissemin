@@ -632,12 +632,19 @@ $(function() {
     $("#collapseDocType").on('hidden.bs.collapse', function() {
         var selected = $("input[type='radio'][name='radioUploadType']:checked");
         $("#choosenUploadType").html($("#choosenUploadType-" + selected.val()).html())
-        $("#collapseDocType").collapse('hide')
+    });
+});
+
+/* When radio change on Repository, collapse card and change card header and load metadataform of the repository */
+$(function() {
+    /* collapses */
+    $("input[type='radio'][name='radioRepository']").click(function(){
+        $("#collapseRepository").collapse('hide');
     });
 
     /* changes header */
-    $("#collapseDocType").on('hidden.bs.collapse', function() {
-        var selected = $("input[type='radio'][name='radioUploadType']:checked");
-        $("#choosenUploadType").html($("#choosenUploadType-" + selected.val()).html())
+    $("#collapseRepository").on('hidden.bs.collapse', function() {
+        var selected = $("input[type='radio'][name='radioRepository']:checked");
+        $("#choosenRepository").html($("#choosenRepository-" + selected.val()).html())
     });
 });

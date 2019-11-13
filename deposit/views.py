@@ -67,8 +67,8 @@ def get_all_repositories_and_protocols(paper, user):
     protocols = []
     for r in repositories:
         implem = r.protocol_for_deposit(paper, user)
-        # if implem is not None:
-        protocols.append((r, implem))
+        if implem is not None:
+            protocols.append((r, implem))
     return protocols
 
 
@@ -98,18 +98,18 @@ def start_view(request, pk):
         ),
         pk=pk
     )
-    repositories = get_all_repositories_and_protocols(paper, request.user)
-    repositories_protocol = {repo.id :proto for repo, proto in repositories}
+    repositories_protocol = get_all_repositories_and_protocols(paper, request.user)
+    available_repositories = sorted([repo for repo, proto in repositories_protocol], key=lambda r: r.name.lower())
     
     # select the most appropriate repository
     userprefs = UserPreferences.get_by_user(request.user)
     preselected_repository = userprefs.get_preferred_or_last_repository()
     preselected_protocol = None
     if preselected_repository:
-        preselected_protocol = repositories_protocol.get(preselected_repository.id)
+        preselected_protocol = {repo.id : proto for repo, proto in repositories_protocol}.get(preselected_repository.id, None)
     # If the preferred repository is not available for this paper, pick any
     if not preselected_protocol:
-        for repo, protocol in repositories:
+        for repo, protocol in repositories_protocol:
             if protocol is not None:
                 preselected_repository = repo
                 preselected_protocol = protocol
@@ -120,7 +120,7 @@ def start_view(request, pk):
     context = {
         'paper': paper,
         'max_file_size': settings.DEPOSIT_MAX_FILE_SIZE,
-        'available_repositories': repositories,
+        'available_repositories': available_repositories,
         'selected_repository': preselected_repository,
         'selected_protocol': preselected_protocol,
         'is_owner': paper.is_owned_by(request.user, flexible=True),
