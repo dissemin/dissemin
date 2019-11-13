@@ -640,6 +640,23 @@ $(function() {
     /* collapses */
     $("input[type='radio'][name='radioRepository']").click(function(){
         $("#collapseRepository").collapse('hide');
+        var selected = $("input[type='radio'][name='radioRepository']:checked");
+        var paper_pk = $("#depositForm").attr("data-paper-pk");
+        $.ajax({
+            data : {
+                'paper' : paper_pk,
+                'repository' : selected.val()
+            },
+            error : function(data) {
+                console.log(data);
+                $("#repositoryMetadataForm").html(data['message']);
+            },
+            method : 'get',
+            success : function(data) {
+                $("#repositoryMetadataForm").html(data["form"]);
+            },
+            url : Urls['ajax-getMetadataForm']()
+        });
     });
 
     /* changes header */

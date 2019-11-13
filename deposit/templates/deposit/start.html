@@ -69,14 +69,14 @@
                 <h4 class="border-bottom">{% trans "Options" %}</h4>
 
                 <!-- Huge form -->
-                <form method="POST" action="javascript:depositPaper()" id="depositForm">
+                <form method="POST" action="javascript:depositPaper()" id="depositForm" data-paper-pk="{{ paper.pk }}">
                     <!-- Hidden field to store the internal file id of previously uploaded file -->
                     <input type="hidden" id="uploadFileId" name="file_id" />
                     <div class="accordion">
 
                         <!-- Document type -->
                         <div class="card">
-                            <a class="text-dark" data-toggle="collapse" href="#collapseDocType" aria-expaneded="true" aria-controls="collapseDocType">
+                            <a class="text-dark" data-toggle="collapse" href="#collapseDocType" aria-expanded="true" aria-controls="collapseDocType">
                                 <div class="card-header" id="headingDocType">
                                     {% trans "Upload type:" %} <span id="choosenUploadType"></span>
                                 </div>
@@ -136,7 +136,7 @@
 
                         <!-- Repository -->
                         <div class="card">
-                            <a class="text-dark" data-toggle="collapse" href="#collapseRepository" aria-expaneded="true" aria-controls="collapseRepository">
+                            <a class="text-dark" data-toggle="collapse" href="#collapseRepository" aria-expanded="true" aria-controls="collapseRepository">
                                 <div class="card-header" id="headingRepository">
                                     {% trans "Repository:" %} <span id="choosenRepository"><strong>{{ selected_repository.name }}</strong></span>
                                 </div>
@@ -159,7 +159,20 @@
                                     {% endfor %}
                                 </div>
                             </div>
+                        </div>
 
+                        <!-- Metadata of repository / its protocol -->
+                        <div class="card">
+                            <a class="text-dark" data-toggle"collapse" href="#collapseMetadata" aria-expanded="true" aria-controls="collapseMetadata">
+                                <div class="card-header" id="headingMetadata">
+                                    {% trans "Metadata:" %}
+                                </div>
+                            </a>
+                            <div class="collapse show" id="collapseMetadata" aria-labelledby="headingMetadata">
+                                <div class="container" id="repositoryMetadataForm">
+                                    {{ selected_protocol.get_form | crispy }}
+                                </div>
+                            </div>
                         </div>
 
                     </div>
@@ -340,60 +353,6 @@ $(function() {
 <form method="POST" action="javascript:depositPaper()" id="depositForm">
 {% csrf_token %}
 <input type="hidden" id="uploadFileId" name="file_id" />
-<span class="detailsTitle">{% trans "Options" %}</span>
-<div id="uploadOptions" class="panel-group detailsContent" role="tablist" aria-multiselectable="true">
-    <div class="panel panel-default">
-        <div class="panel-heading pointer" role="tab" id="headingRepository" data-toggle="collapse" data-target="#optionRepository" data-parent="uploadOptions">
-            {% trans "Repository:" %}<span id="RepositoryInline"></span>
-        </div>
-        <div id="optionRepository" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingRepository">
-            <div class="panel-body">
-                <div class="repositoryList">
-                {% for repository in available_repositories %}
-                {% with repository.0 as repo %}
-                {% with repository.1 as proto %}
-                <label class="repositoryItem {% if forloop.first %}firstItem{% endif %} {% if not proto %}disabledRepositoryItem{% endif %}">
-
-                    <div style="display:none">
-                        <span id="hiddenInlineRepository-{{ repo.pk }}">
-                            <span><strong>{{ repo.name }}</strong>
-                            </span>
-                        </span>
-                    </div>
-                    <div class="repositoryLogo">
-                        <img src="{{ repo.logo.url }}" alt="{{ repo.name }}" />
-                    </div>
-                    <div class="repositoryChoiceRadio">
-                        <input id="radiorepo{{ repository.pk}}" type="radio" value="{{repo.pk}}"
-                            name="radioRepository" {% if not proto %}disabled="disabled"{% endif %}
-                            {% if repo == selected_repository %}checked="checked"{% endif %} />
-                    </div>
-                    <p>
-                        {{ repository.0.description|safe }}
-                    </p>
-
-                    <div style="clear:left"></div>
-                </label>
-                {% endwith %}
-                {% endwith %}
-                {% endfor %}
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="panel panel-default">
-        <div class="panel-heading pointer" role="tab" id="headingMetadata" data-toggle="collapse" data-target="#optionMetadata" data-parent="uploadOptions">
-            {% trans "Metadata" %}
-        </div>
-        <div id="optionMetadata" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingMetadata">
-            <div class="panel-body">
-                <div id="repositoryMetadataForm">
-                    {{ selected_protocol.get_form|crispy }}
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 <div id="depositError"></div>
 <div id="uploadSubmitSection">
     <p class="submitDeposit"><button type="submit" id="submitDeposit" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-circle-arrow-up"></span> {% trans "Deposit" %}</button></p>
