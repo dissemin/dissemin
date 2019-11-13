@@ -1,4 +1,6 @@
-{% load static %}
-{% load statuses %}
+{% spaceless %}
+    {% load static %}
+    {% load statuses %}
 
-<img class="img-fluid policyCircle" src="{% static policy|policy_circle %}" alt="{{ policy|policy_circle_alt }}" />
+    <img class="img-fluid policyCircle" src="{% static policy|policy_circle %}" alt="{{ policy|policy_circle_alt }}" />
+{% endspaceless %}

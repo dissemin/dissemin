@@ -118,19 +118,21 @@ def start_view(request, pk):
     breadcrumbs = paper.breadcrumbs()
     breadcrumbs.append((_('Deposit'), ''))
     context = {
-            'paper': paper,
-            'max_file_size': settings.DEPOSIT_MAX_FILE_SIZE,
-            'available_repositories': repositories,
-            'selected_repository': preselected_repository,
-            'selected_protocol': preselected_protocol,
-            'is_owner': paper.is_owned_by(request.user, flexible=True),
-            'breadcrumbs': breadcrumbs,
-            'repositoryForm': None,
-            'paper_form': PaperDepositForm(
-                initial={
-                    'radioUploadType' : request.GET.get('type')
-                }),
+        'paper': paper,
+        'max_file_size': settings.DEPOSIT_MAX_FILE_SIZE,
+        'available_repositories': repositories,
+        'selected_repository': preselected_repository,
+        'selected_protocol': preselected_protocol,
+        'is_owner': paper.is_owned_by(request.user, flexible=True),
+        'breadcrumbs': breadcrumbs,
+        'repositoryForm': None,
+        'paper_form': PaperDepositForm(
+            initial={
+                'radioUploadType' : request.GET.get('type')
             }
+        ),
+        'collapse_doctype' : request.GET.get('type') in ['preprint', 'postprint', 'pdfversion']
+    }
     return render(request, 'deposit/start.html', context)
 
 

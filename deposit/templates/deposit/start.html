@@ -14,7 +14,15 @@
 {% block scripts %}
     <script src="{% static "js/dropzone.js" %}"></script>
     <script>
+        // Disable auto discover of dropzone
         Dropzone.autoDiscover = false;
+
+        // Collapse Doctype card if choosen per GET
+        {% if collapse_doctype %}
+            $(function() {
+                $("#collapseDocType").collapse('hide')
+            });
+            {% endif %}
     </script>
 {% endblock scripts %}
 
@@ -66,16 +74,19 @@
                     <input type="hidden" id="uploadFileId" name="file_id" />
                     <div class="accordion">
                         <div class="card">
-                            <div class="card-header" id="headingDocType">
-                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseDocType" aria-expaneded="true" aria-controls="collapseDocType">{% trans "Upload type" %}</button>
-                            </div>
+                            <a class="text-dark" data-toggle="collapse" href="#collapseDocType" aria-expaneded="true" aria-controls="collapseDocType">
+                                <div class="card-header" id="headingDocType">
+                                    {% trans "Upload type:" %} <span id="choosenUploadType"></span>
+                                </div>
+                            </a>
                             <div class="collapse show" id="collapseDocType" aria-labelledby="headingDocType">
                                 <div class="container">
                                     <!-- Preprint -->
-                                    {% with radio_preprint=paper_form.radioUploadType.0 %}
+                                    {% with radio_preprint=paper_form.radioUploadType.0 policy=paper.publisher.preprint %}
+                                        <span class="d-none" aria-hidden="true" id="choosenUploadType-preprint"><strong>{% trans "preprint" %}</strong> ({% include "publishers/policy_img.html" with policy=policy %} {{ policy | explain_policy_short_no_punc}})</span>
                                         <div class="row border-bottom py-2">
                                             <div class="col-auto">
-                                                {% include "publishers/policy_img.html" with policy=paper.publisher.preprint %}
+                                                {% include "publishers/policy_img.html" with policy=policy %}
                                             </div>
                                             <div class="form-check col d-flex">
                                                 <label class="form-check-label mr-auto" for="{{ radio_preprint.id_for_label }}">
@@ -87,10 +98,11 @@
                                     {% endwith %}
 
                                     <!-- Postprint -->
-                                    {% with radio_postprint=paper_form.radioUploadType.1 %}
+                                    {% with radio_postprint=paper_form.radioUploadType.1 policy=paper.publisher.postprint %}
+                                        <span class="d-none" aria-hidden="true" id="choosenUploadType-postprint"><strong>{% trans "postprint" %}</strong> ({% include "publishers/policy_img.html" with policy=policy%} {{ policy | explain_policy_short_no_punc}})</span>
                                         <div class="row border-bottom py-2">
                                             <div class="col-auto">
-                                                {% include "publishers/policy_img.html" with policy=paper.publisher.postprint %}
+                                                {% include "publishers/policy_img.html" with policy=policy %}
                                             </div>
                                             <div class="form-check col d-flex">
                                                 <label class="form-check-label mr-auto" for="{{ radio_postprint.id_for_label }}">
@@ -102,10 +114,11 @@
                                     {% endwith %}
 
                                     <!-- PDF version -->
-                                    {% with radio_pdfversion=paper_form.radioUploadType.2 %}
+                                    {% with radio_pdfversion=paper_form.radioUploadType.2 policy=paper.publisher.pdfversion %}
+                                        <span class="d-none" aria-hidden="true" id="choosenUploadType-pdfversion"><strong>{% trans "pdfversion" %}</strong> ({% include "publishers/policy_img.html" with policy=policy %} {{ policy | explain_policy_short_no_punc}})</span>
                                         <div class="row border-bottom py-2">
                                             <div class="col-auto">
-                                                {% include "publishers/policy_img.html" with policy=paper.publisher.pdfversion%}
+                                                {% include "publishers/policy_img.html" with policy=policy %}
                                             </div>
                                             <div class="form-check col d-flex">
                                                 <label class="form-check-label mr-auto" for="{{ radio_pdfversion.id_for_label }}">
@@ -115,7 +128,6 @@
                                             </div>
                                         </div>
                                     {% endwith %}
-
                                 </div>
                             </div>
                         </div>

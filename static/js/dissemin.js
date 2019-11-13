@@ -620,3 +620,24 @@ $(function() {
         $("#fileUploadRow").removeClass("d-none");
     });
 });
+
+/* When radio change on documentype, collapse card and change card header */
+$(function() {
+    /* collapses */
+    $("input[type='radio'][name='radioUploadType']").click(function(){
+        $("#collapseDocType").collapse('hide');
+    });
+
+    /* changes header */
+    $("#collapseDocType").on('hidden.bs.collapse', function() {
+        var selected = $("input[type='radio'][name='radioUploadType']:checked");
+        $("#choosenUploadType").html($("#choosenUploadType-" + selected.val()).html())
+        $("#collapseDocType").collapse('hide')
+    });
+
+    /* changes header */
+    $("#collapseDocType").on('hidden.bs.collapse', function() {
+        var selected = $("input[type='radio'][name='radioUploadType']:checked");
+        $("#choosenUploadType").html($("#choosenUploadType-" + selected.val()).html())
+    });
+});
