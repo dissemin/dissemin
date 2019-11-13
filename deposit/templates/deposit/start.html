@@ -1,12 +1,13 @@
 {% extends "base.html" %}
 
 {% load author %}
-{% load domain %}
-{% load statuses %}
+{% load crispy_forms_tags %}
 {% load doi %}
+{% load domain %}
 {% load i18n %}
 {% load static %}
-{% load crispy_forms_tags %}
+{% load statuses %}
+{% load widget_tweaks %}
 
 {% block title %}{% trans "Depositing" %} "{{ paper.title }}"{% endblock %}
 
@@ -57,20 +58,78 @@
                 <h4 class="border-bottom">{% trans "Document" %}</h4>
                 {% include "upload/widget.html" %}
 
+                <h4 class="border-bottom">{% trans "Options" %}</h4>
+
+                <!-- Huge form -->
+                <form method="POST" action="javascript:depositPaper()" id="depositForm">
+                    <!-- Hidden field to store the internal file id of previously uploaded file -->
+                    <input type="hidden" id="uploadFileId" name="file_id" />
+                    <div class="accordion">
+                        <div class="card">
+                            <div class="card-header" id="headingDocType">
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseDocType" aria-expaneded="true" aria-controls="collapseDocType">{% trans "Upload type" %}</button>
+                            </div>
+                            <div class="collapse show" id="collapseDocType" aria-labelledby="headingDocType">
+                                <div class="container">
+                                    <!-- Preprint -->
+                                    {% with radio_preprint=paper_form.radioUploadType.0 %}
+                                        <div class="row border-bottom py-2">
+                                            <div class="col-auto">
+                                                {% include "publishers/policy_img.html" with policy=paper.publisher.preprint %}
+                                            </div>
+                                            <div class="form-check col d-flex">
+                                                <label class="form-check-label mr-auto" for="{{ radio_preprint.id_for_label }}">
+                                                    {% include "publishers/policy_preprint.html" %}
+                                                </label>
+                                                {{ radio_preprint.tag }}
+                                            </div>
+                                        </div>
+                                    {% endwith %}
+
+                                    <!-- Postprint -->
+                                    {% with radio_postprint=paper_form.radioUploadType.1 %}
+                                        <div class="row border-bottom py-2">
+                                            <div class="col-auto">
+                                                {% include "publishers/policy_img.html" with policy=paper.publisher.postprint %}
+                                            </div>
+                                            <div class="form-check col d-flex">
+                                                <label class="form-check-label mr-auto" for="{{ radio_postprint.id_for_label }}">
+                                                    {% include "publishers/policy_postprint.html" %}
+                                                </label>
+                                                {{ radio_postprint.tag }}
+                                            </div>
+                                        </div>
+                                    {% endwith %}
+
+                                    <!-- PDF version -->
+                                    {% with radio_pdfversion=paper_form.radioUploadType.2 %}
+                                        <div class="row border-bottom py-2">
+                                            <div class="col-auto">
+                                                {% include "publishers/policy_img.html" with policy=paper.publisher.pdfversion%}
+                                            </div>
+                                            <div class="form-check col d-flex">
+                                                <label class="form-check-label mr-auto" for="{{ radio_pdfversion.id_for_label }}">
+                                                    {% include "publishers/policy_pdfversion.html" %}
+                                                </label>
+                                                {{ radio_pdfversion.tag }}
+                                            </div>
+                                        </div>
+                                    {% endwith %}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </form>
+
             </div>
         </div>
     </div>
 {% endblock content %}
 
 {% block extra_head %}
-    <script src="{% static "libs/jquery.ui.widget.js" %}"></script>
-    <script src="{% static "libs/jquery.iframe-transport.js" %}"></script>
-    <script src="{% static "libs/jquery.fileupload.js" %}"></script>
-    <script src="{% static "libs/upload.js" %}"></script>
-
-    <link rel="stylesheet" href="{% static "css/upload.css" %}" />
-    <link rel="stylesheet" href="{% static "css/deposit.css" %}" />
-    <!-- repository-specific JS and CSS -->
     {% for repo_proto in available_repositories %}
         {{ repo_proto.1.get_form.media }}
     {% endfor %}

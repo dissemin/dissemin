@@ -126,9 +126,11 @@ def start_view(request, pk):
             'is_owner': paper.is_owned_by(request.user, flexible=True),
             'breadcrumbs': breadcrumbs,
             'repositoryForm': None,
+            'paper_form': PaperDepositForm(
+                initial={
+                    'radioUploadType' : request.GET.get('type')
+                }),
             }
-    if request.GET.get('type') not in [None, 'preprint', 'postprint', 'pdfversion']:
-        return HttpResponseForbidden()
     return render(request, 'deposit/start.html', context)
 
 

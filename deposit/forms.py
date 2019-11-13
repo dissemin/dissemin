@@ -83,7 +83,10 @@ class PaperDepositForm(forms.Form):
     """
     file_id = forms.IntegerField()
     radioUploadType = forms.ChoiceField(
-        label=_('Upload type'), choices=UPLOAD_TYPE_CHOICES)
+        choices=UPLOAD_TYPE_CHOICES,
+        label=_('Upload type'),
+        widget=forms.RadioSelect,
+    )
     radioRepository = forms.ModelChoiceField(label=_('Repository'),
                                              queryset=Repository.objects.filter(enabled=True))
 
