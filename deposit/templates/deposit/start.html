@@ -253,50 +253,6 @@ $(function() {
             });
     }
 
-    /* Submit button disable / enable */
-    function isFormValid() {
-        if (!$('#uploadFileId').val()) {
-            return false;
-        }
-        if (!$('#optionUploadType input:checked').val()) {
-            return false;
-        }
-        if (!$('#optionRepository input:checked').val()) {
-            return false;
-        }
-        var repositoryMetadataFormOk = true;
-        $('#repositoryMetadataForm .form-group').filter(function(index, item) {
-            return $('.asteriskField', item).length > 0;
-        }).each(function(index, item) {
-            if (!(
-                $('input[type=radio]:checked', item).val()
-                || $('input[type=checkbox]:checked', item).val()
-                || $('input[type=email]', item).val()
-                || $('input[type=text]', item).val()
-                || $('textarea', item).val()
-                || $('select', item).val()
-            )) {
-                repositoryMetadataFormOk = false;
-            }
-        });
-        return repositoryMetadataFormOk;
-    }
-    $(document).ready(function() {
-        if (isFormValid()) {
-            $('#submitDeposit').prop('disabled', false);
-        }
-        else {
-            $('#submitDeposit').prop('disabled', true);
-        }
-        $('#depositForm').on('change keyup paste', ':input', function(e) {
-            if (isFormValid()) {
-                $('#submitDeposit').prop('disabled', false);
-                return false;
-            }
-            else {
-                $('#submitDeposit').prop('disabled', true);
-            }
-        });
     });
 {% endblock %}
 
