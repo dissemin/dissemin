@@ -656,6 +656,10 @@ $(function() {
             method : 'get',
             success : function(data) {
                 $("#repositoryMetadataForm").html(data["form"]);
+                $('.prefetchingFieldStatus').each(function(i,prefetch) {
+	                initPrefetch($(prefetch));
+	            });
+
             },
             url : Urls['ajax-getMetadataForm']()
         });
@@ -667,3 +671,36 @@ $(function() {
         $("#choosenRepository").html($("#choosenRepository-" + selected.val()).html())
     });
 });
+
+/* This functions tries to automatically fill in some fields */
+function initPrefetch(p) {
+    var sorry_text = gettext("Sorry, we could not fill this for you.");
+    p.text(gettext("Trying to fill this field automatically for you..."));
+    field = $("#"+p.data("fieldid"));
+    obj_id = $("input[name="+p.data("objfieldname")+"]").val();
+    field.prop('disabled', true);
+
+    $.ajax({
+        data : {
+            "field" : p.data("fieldname"),
+            "id" : obj_id
+        },
+        error : function () {
+            p.text(sorry_text);
+            field.prop('disabled', false);
+        },
+        method : 'get',
+        success : function(data) {
+            if(!data['success']) {
+                p.text(gettext(sorry_text));
+            }
+            else {
+                p.text('');
+            }
+            field.prop('disabled', false);
+            field.val(data['value']);
+        },
+        url : p.data("callback")
+
+    });
+}

@@ -17,12 +17,19 @@
         // Disable auto discover of dropzone
         Dropzone.autoDiscover = false;
 
+        // Prefetch fields when document is ready
+        $(function() {
+            $('.prefetchingFieldStatus').each(function(i,prefetch) {
+                initPrefetch($(prefetch));
+            });
+        });
+
         // Collapse Doctype card if choosen per GET
         {% if collapse_doctype %}
             $(function() {
                 $("#collapseDocType").collapse('hide')
             });
-            {% endif %}
+        {% endif %}
     </script>
 {% endblock scripts %}
 
@@ -196,64 +203,9 @@ $(function() {
     $('#waitingArea').hide();
     $('#uploadFileId').val('');
 
-    /* Prefetched fields */
-    function initPrefetch(p) {
-        {% trans "Trying to fill this field automatically for you..." as trying_fill %}
-        p.text("{{ trying_fill|escapejs }}");
-        field = $("#"+p.data("fieldid"));
-        objid = $("input[name="+p.data("objfieldname")+"]").val();
-        field.prop('disabled', true);
-        $.get(p.data("callback"),
-            {"field":p.data("fieldname"),
-            "id":objid}, null, 'json').fail(
-            function(data) {
-                {% trans "Sorry, we could not fill this for you." as sorry %}
-                p.text('{{ sorry|escapejs }}');
-                field.prop('disabled', false);
-            }
-        ).done(
-            function(data) {
-                if(!data['success']) {
-                p.text('{{ sorry|escapejs }}');
-                } else {
-                    p.text('');
-                }
-                field.prop('disabled', false);
-                field.val(data['value']);
-            }
-        );
-    }
-
-    /* Dynamic selection of repositories */
-
-    // functions that should be run every time we replace the form
-    function init() {
-	$('.prefetchingFieldStatus').each(function(i,prefetch) {
-	    initPrefetch($(prefetch));
-	});
 	$('[data-autocomplete-light-function=select2-customTemplate]').trigger('autocompleteLightInitialize');
     }
-    init(); // for the initial repository
-
-    function updateMetadataForm(selected) {
-        if(selected.val()) {
-        $.get("{% url 'ajax-getMetadataForm' %}", data={'paper':{{ paper.id }},'repository':selected.val()}
-            ).done(
-                function(data) {
-                    $("#repositoryMetadataForm").empty();
-                    if('status' in data && data['status'] == 'success') {
-                        $("#repositoryMetadataForm").append(data['form']);
-			init();
-                    } else if ('message' in data) {
-                        $("#repositoryMetadataForm").append("<p>"+data["message"]+"</p>");
-                    }
-                }
-            ).fail(
-                function(data) {
-                });
-        }
-    }
-});
+    });
 
     /* Submitting the deposit */
     function depositPaper() {
