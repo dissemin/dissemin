@@ -603,6 +603,7 @@ $(function() {
                 $("#fileUploadRow").addClass("d-none");
                 $("#uploadProgress").addClass("d-none");
 
+                $("#uploadFileId").val(response['file_id'])
             },
             uploadprogress: function(file, progress, bytesSent) {
                 console.log(progress);
