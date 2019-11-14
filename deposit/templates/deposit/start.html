@@ -17,6 +17,11 @@
         // Disable auto discover of dropzone
         Dropzone.autoDiscover = false;
 
+        // For HAL that uses select2
+        $(function() {
+	    $('[data-autocomplete-light-function=select2-customTemplate]').trigger('autocompleteLightInitialize');
+        });
+
         // Prefetch fields when document is ready
         $(function() {
             $('.prefetchingFieldStatus').each(function(i,prefetch) {
@@ -31,6 +36,12 @@
             });
         {% endif %}
     </script>
+
+    <!-- Addiotonal JS for special repository forms -->
+    {% for protocol in used_protocols %}
+        {{ protocol.get_form.media }}
+    {% endfor %}
+
 {% endblock scripts %}
 
 {% block content %}
@@ -203,50 +214,3 @@
         </div>
     </div>
 {% endblock content %}
-
-{% block extra_head %}
-    {% for repo_proto in available_repositories %}
-        {{ repo_proto.1.get_form.media }}
-    {% endfor %}
-{% endblock %}
-
-{% block jsScript %}
-yl = {};
-yl.jQuery = $;
-$(function() {
-    $('#waitingArea').hide();
-    $('#uploadFileId').val('');
-
-	$('[data-autocomplete-light-function=select2-customTemplate]').trigger('autocompleteLightInitialize');
-    }
-    });
-
-    /* Submitting the deposit */
-    function depositPaper() {
-       var data = $('#depositForm').serialize();
-       $('.error').removeClass('error').empty()
-       $('#waitingArea,.submitDeposit').toggle();
-
-    });
-{% endblock %}
-
-{% block lists %}
-
-<form method="POST" action="javascript:depositPaper()" id="depositForm">
-{% csrf_token %}
-<input type="hidden" id="uploadFileId" name="file_id" />
-<div id="depositError"></div>
-<div id="uploadSubmitSection">
-    <p class="submitDeposit"><button type="submit" id="submitDeposit" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-circle-arrow-up"></span> {% trans "Deposit" %}</button></p>
-    <div id="waitingArea">
-        <span>{% trans "Processing deposit..." %}</span> <span class="waitingBird"><img src="{% static "img/animated-bird.gif" %}" alt="Paper animated bird" /></span> <span>{% trans "please wait..." %}</span>
-    </div>
-</div>
-</form>
-{% endblock %}
-
-{% block details %}
-{% include "papers/paperDetails.html" with paper=paper %}
-
-{% endblock %}
-

@@ -99,6 +99,7 @@ def start_view(request, pk):
         pk=pk
     )
     repositories_protocol = get_all_repositories_and_protocols(paper, request.user)
+    used_protocols = set([proto for repo, proto in repositories_protocol])
     available_repositories = sorted([repo for repo, proto in repositories_protocol], key=lambda r: r.name.lower())
     
     # select the most appropriate repository
@@ -131,7 +132,8 @@ def start_view(request, pk):
                 'radioUploadType' : request.GET.get('type')
             }
         ),
-        'collapse_doctype' : request.GET.get('type') in ['preprint', 'postprint', 'pdfversion']
+        'collapse_doctype' : request.GET.get('type') in ['preprint', 'postprint', 'pdfversion'],
+        'used_protocols' : used_protocols,
     }
     return render(request, 'deposit/start.html', context)
 
