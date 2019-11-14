@@ -11,8 +11,13 @@
 
 {% block title %}{% trans "Depositing" %} "{{ paper.title }}"{% endblock %}
 
+{% block css %}
+    <link rel="stylesheet" href="{% static "css/select2.min.css" %}" />
+{% endblock css %}
+
 {% block scripts %}
     <script src="{% static "js/dropzone.js" %}"></script>
+    <script src="{% static "js/select2.min.js"%}"></script>
     <script>
         // Disable auto discover of dropzone
         Dropzone.autoDiscover = false;
