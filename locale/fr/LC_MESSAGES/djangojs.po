@@ -3,6 +3,7 @@
 #
 # Author: A3nm
 # Author: Gomoko
+# Author: Verdy p
 # Author: Wladek92
 # --
 # This file is part of the Dissemin Project
@@ -14,7 +15,7 @@ msgstr ""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-09-30 15:27+0200\n"
-"PO-Revision-Date: 2019-10-14 15:19:19+0000\n"
+"PO-Revision-Date: 2019-11-14 16:11:15+0000\n"
 "Last-Translator: Ryan Lahfa <masterancpp@gmail.com>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -39,23 +40,23 @@ msgstr "Ne plus montrer ce message"
 
 #: papers/static/papers/refresh.js:94
 msgid "No author"
-msgstr "Pas d'auteur"
+msgstr "Aucun auteur"
 
 #: papers/static/papers/refresh.js:96
 msgid "No title"
-msgstr "Pas de titre"
+msgstr "Aucun titre"
 
 #: papers/static/papers/refresh.js:98
 msgid "Invalid publication date"
-msgstr "Date de publication invalide"
+msgstr "Date de publication non valide"
 
 #: papers/static/papers/refresh.js:100
 msgid "No publication date"
-msgstr "Date de publication manquante"
+msgstr "Aucune date de publication"
 
 #: papers/static/papers/refresh.js:102
 msgid "Paper is invalid"
-msgstr "L'article est invalide"
+msgstr "Papier non invalide"
 
 #: papers/static/papers/refresh.js:137
 msgid "We ignored %(count)s paper from your ORCiD profile."
@@ -65,19 +66,19 @@ msgstr[1] "Nous avons ignoré %(count)s publications de votre profil ORCiD."
 
 #: papers/static/papers/refresh.js:147
 msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
-msgstr "« %(name)s » a été ignoré pour la raison suivante : %(reason)s"
+msgstr "« %(name)s » a été ignoré pour la raison suivante : %(reason)s"
 
 #: papers/static/papers/refresh.js:155
 msgid "A paper was ignored, because it has no name"
-msgstr "Un article a été ignoré, car il n'a pas de titre"
+msgstr "Un article a été ignoré, car il n’a pas de titre"
 
 #: papers/static/papers/refresh.js:167 papers/static/papers/refresh.js:195
 msgid "Show more information"
-msgstr "Montrer plus d'informations"
+msgstr "Montrer plus d’informations"
 
 #: papers/static/papers/refresh.js:192
 msgid "Show less information"
-msgstr "Montrer moins d'informations"
+msgstr "Montrer moins d’informations"
 
 #: papers/static/papers/refresh.js:206
 #, javascript-format
