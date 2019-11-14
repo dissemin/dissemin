@@ -704,3 +704,87 @@ function initPrefetch(p) {
 
     });
 }
+
+/* This does the actual deposit of the paper */
+function depositPaper() {
+    var data = $("#depositForm").serializeArray();
+    var paper_pk = $("#depositForm").attr("data-paper-pk");
+    var no_file = gettext("You have not selected a file for upload.")
+
+    // If no file id is present, we say, that a file is missing. Rest of the form is covered by browser validation
+    if (!data['file_id']) {
+        $("#errorGeneral").append(
+            makeAlert(no_file)
+        );
+        return
+    }
+
+    // Show the waiting paper bird
+    $("#paperSubmitWaitingArea").removeClass("d-none");
+    $("#paperSubmitWaitingArea").addClass("d-flex");
+
+    $.post({
+        beforeSend : function(jqXHR) {
+            jqXHR.setRequestHeader('X-CSRFToken', getCookie('csrftoken'));
+        },
+        data : data,
+        url : Urls['ajax-submitDeposit'](paper_pk)
+    })
+    .done(function (response) {
+        var upload_id = response['upload_id'];
+        var paper_slug = $("#depositForm").attr("data-paper-slug");
+
+        window.location.replace(Urls['paper'](paper_pk, paper_slug) + "deposit=" + upload_id);
+    })
+    .fail(function (xhr) {
+        var error_text = "";
+        if (!xhr.responseJSON) {
+            error_text = gettext("Dissemin encountered an error, please try again later.");
+        }
+        else {
+            // Since we have form valdation, we need only to llok for the file. However, the metadatafields are relatively anonymous in this version as the standard text from django ist "This fiel is required" and we would need to place it suitably.
+            var response = JSON.parse(xhr.responseText);
+            if ('message' in response) {
+                error_text = response['message'];
+            }
+            if ('form' in response) {
+                form_errors = response['form'];
+                if ('file_id' in form_errors) {
+                    $("#errorMissingFile").append(
+                        makeAlert(no_file)
+                    );
+                }
+            }
+        }
+        if (error_text) {
+            $("#errorGeneral").append(
+                makeAlert(error_text)
+            );
+        }
+    })
+    .always(function() {
+        // Hide the waiting paper bird
+        $("#paperSubmitWaitingArea").removeClass("d-flex");
+        $("#paperSubmitWaitingArea").addClass("d-none");
+    })
+    ;
+}
+
+function makeAlert(text) {
+    var alert_box = $("<div>",{
+        'class' : "alert alert-warning alert-dismissible fade show uploadError",
+        "role" : "alert",
+        "text" : text
+    }).append($("<button>", {
+        "aria-label" : "Close",
+        "class" : "close",
+        "data-dismiss" : "alert",
+        "type" : "button",
+        }).append($("<span>", {
+            "aria-hidden" : "true",
+            "html" : "&times;"
+        }))
+    );
+
+    return alert_box
+};

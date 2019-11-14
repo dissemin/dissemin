@@ -71,12 +71,13 @@
                 {% endif %}
 
                 <h4 class="border-bottom">{% trans "Document" %}</h4>
+                <div id="errorMissingFile"></div>
                 {% include "upload/widget.html" %}
 
                 <h4 class="border-bottom">{% trans "Options" %}</h4>
 
                 <!-- Huge form -->
-                <form method="POST" action="javascript:depositPaper()" id="depositForm" data-paper-pk="{{ paper.pk }}">
+                <form method="POST" action="javascript:depositPaper()" id="depositForm" data-paper-pk="{{ paper.pk }}" data-paper-slug="{{ paper.slug }}">
                     <!-- Hidden field to store the internal file id of previously uploaded file -->
                     <input type="hidden" id="uploadFileId" name="file_id" />
                     <div class="accordion">
@@ -175,16 +176,29 @@
                                     {% trans "Metadata:" %}
                                 </div>
                             </a>
+                            <div id="errorMetadata"></div>
                             <div class="collapse show" id="collapseMetadata" aria-labelledby="headingMetadata">
                                 <div class="container" id="repositoryMetadataForm">
                                     {{ selected_protocol.get_form | crispy }}
                                 </div>
                             </div>
                         </div>
-
                     </div>
-                </form>
 
+                    <div class="d-flex justify-content-center">
+                        <button class="btn btn-primary" type="submit">{% trans "Upload" %}</button>
+                    </div>
+
+                    <div id="errorGeneral"></div>
+
+                    <div class="justify-content-center d-none" id="paperSubmitWaitingArea">
+                        <div>
+                            <img class="rounded-circle bg-secondary m-2" style="max-height: 8rem;" src ="{% static 'img/animated-bird.gif' %}" alt="{% trans 'Paper animated bird' %}" />
+                            <p class="text-center font-italic">{% trans 'Submitting paper to repository' %}…</p>
+                        </div>
+                    </div>
+
+                </form>
             </div>
         </div>
     </div>
@@ -212,46 +226,6 @@ $(function() {
        var data = $('#depositForm').serialize();
        $('.error').removeClass('error').empty()
        $('#waitingArea,.submitDeposit').toggle();
-
-       $.post('{% url 'ajax-submitDeposit' paper.pk %}', data, null, 'json').fail(
-            function(data) {
-                var errorText = '';
-                if(!data.responseJSON) {
-                    {% trans "Dissemin encountered an error, please try again later." as errormsg %}
-                    errorText = "{{ errormsg|escapejs }}";
-                } else {
-                    error = data.responseJSON;
-                    if('message' in error) {
-                        errorText = error['message']
-                    }
-                    if('form' in error) {
-                        errors = error['form']
-                        if('file_id' in errors) {
-                            $('#globalError').addClass('error').text(errors['file_id'][0]);
-                            $('html, body').scrollTop($('#globalError').first().offset().top);
-                        }
-                        if('radioUploadType' in errors) {
-                            $('#error-radioUploadType').addClass('error').text(errors['radioUploadType'][0]);
-                            $('html, body').scrollTop($('#error-radioUploadType').first().offset().top);
-                            $('#optionUploadType').collapse('show');
-                        }
-                    }
-                    if('form_html' in error) {
-                        $('#repositoryMetadataForm').html(error['form_html']);
-                        $('html, body').scrollTop($('#repositoryMetadataForm').first().offset().top);
-                        $('#optionMetadata').collapse('show');
-                    }
-                }
-                if(errorText) {
-                    $('#depositError').addClass('error').text(errorText);
-                    $('html, body').scrollTop($('#depositError').first().offset().top);
-                }
-                $('#waitingArea,.submitDeposit').toggle();
-            }).done(function(data) {
-                var uploadId = data['upload_id'];
-                window.location.replace('{% url 'paper' paper.pk paper.slug %}?deposit='+uploadId);
-            });
-    }
 
     });
 {% endblock %}

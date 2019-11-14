@@ -256,6 +256,7 @@ def submitDeposit(request, pk):
     form = PaperDepositForm(data=request.POST)
     if not form.is_valid():
         context['form'] = form.errors
+        context['message'] = _("Not all fields have been filled correctly.")
         return context, 400
 
     # This validation could take place in the form (but we need access to the
