@@ -566,49 +566,51 @@ function formatNumbersThousands(value) {
 
 /* Configures the dropzone file upload area. We don't use the template as we want to present different information. */
 $(function() {
-    $("#fileUploadArea").dropzone({
-        addedfile : function(file) {
-            $("#uploadError").addClass("d-none");
-            $("#uploadProgress").removeClass("d-none");
-        },
-        error : function(file, response, status) {
-            $("#uploadProgress").removeClass("d-none");
-            var format = gettext("While uploading %(file)s the following error occured:");
-            var standard_text = interpolate(format, { "file" : file["name"] }, true);
-            if ("upl" in response) {
-                $("#uploadErrorText").text(standard_text + " " + response["upl"]);
-            }
-            else if ("message" in response) {
-                $("#uploadErrorText").text(standard_text + " " + response["message"]);
-            }
-            else {
-                $("#uploadErrorText").text(standard_text + " " + gettext("Unknown error"));
-            }
-            $("#uploadError").addClass("d-none");
-        },
-        headers : {
-            'X-CSRFTOKEN' : getCookie('csrftoken')
-        },
-        paramName: 'upl',
-        previewsContainer: false,
-        success : function(file, response) {
-            // Show upload row with content
-            $("#uploadedFileThumbnail").attr('src', response.thumbnail)
-            $("#uploadedFilePages").text(gettext("Pages" + ": " + response.num_pages));
-            $("#uploadedFileSize").text(gettext("Size" + ": " + response.size));
-            $("#uploadedFileSummary").removeClass("d-none");
+    if(jQuery().dropzone) {
+        $("#fileUploadArea").dropzone({
+            addedfile : function(file) {
+                $("#uploadError").addClass("d-none");
+                $("#uploadProgress").removeClass("d-none");
+            },
+            error : function(file, response, status) {
+                $("#uploadProgress").removeClass("d-none");
+                var format = gettext("While uploading %(file)s the following error occured:");
+                var standard_text = interpolate(format, { "file" : file["name"] }, true);
+                if ("upl" in response) {
+                    $("#uploadErrorText").text(standard_text + " " + response["upl"]);
+                }
+                else if ("message" in response) {
+                    $("#uploadErrorText").text(standard_text + " " + response["message"]);
+                }
+                else {
+                    $("#uploadErrorText").text(standard_text + " " + gettext("Unknown error"));
+                }
+                $("#uploadError").addClass("d-none");
+            },
+            headers : {
+                'X-CSRFTOKEN' : getCookie('csrftoken')
+            },
+            paramName: 'upl',
+            previewsContainer: false,
+            success : function(file, response) {
+                // Show upload row with content
+                $("#uploadedFileThumbnail").attr('src', response.thumbnail)
+                $("#uploadedFilePages").text(gettext("Pages" + ": " + response.num_pages));
+                $("#uploadedFileSize").text(gettext("Size" + ": " + response.size));
+                $("#uploadedFileSummary").removeClass("d-none");
 
-            // Hide dropzone and progress
-            $("#fileUploadRow").addClass("d-none");
-            $("#uploadProgress").addClass("d-none");
+                // Hide dropzone and progress
+                $("#fileUploadRow").addClass("d-none");
+                $("#uploadProgress").addClass("d-none");
 
-        },
-        uploadprogress: function(file, progress, bytesSent) {
-            console.log(progress);
-            $("#uploadProgressBar").css("width", progress + "%")
-        },
-        url : Urls['ajax-uploadFulltext']()
-    });
+            },
+            uploadprogress: function(file, progress, bytesSent) {
+                console.log(progress);
+                $("#uploadProgressBar").css("width", progress + "%")
+            },
+            url : Urls['ajax-uploadFulltext']()
+        });
+    }
 });
 
 
