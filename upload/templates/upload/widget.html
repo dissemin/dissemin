@@ -2,10 +2,33 @@
 
 <p>{% trans "Select here the full text of your article. PDF files only, maximum size:" %} {{ max_file_size|filesizeformat }}.</p>
 
-<div class="row justify-content-center pb-3" id="fileUploadRow">
+<div id="uploadErrorText"></div>
+
+<div class="row pb-3" id="fileUploadRow">
     <div class="col-12 col-md-6">
-        <div class=" container btn btn-tertiary py-4" id="fileUploadArea">
+        <div class="container btn btn-tertiary py-4" id="fileUploadArea">
             Click or drop here
+        </div>
+    </div>
+    <div class="col-12 col-md-6">
+        <form method="post" action="javascript:fileUpload()" id="urlForm">
+            <label for="uploadURL">{% trans "Or enter a URL:" %}</label>
+            <div class="input-group">
+                <input id="uploadUrl" type="text" class="form-control" name="url" placeholder="http://"/>
+                <div class="input-group-append">
+                    <button class="btn btn-search" aria-label="{% trans "Upload from URL" %}"><span class="oi oi-cloud-download" aria-hidden="true"/></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="d-none" id="urlDownloadWaiter">
+    {% trans "Fetching file and generating preview..." as fetching %}
+    <p class="text-center">{{ fetching }}</p>
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">{{ fetching }}</span>
         </div>
     </div>
 </div>
@@ -25,9 +48,4 @@
             <li><a href="#" id="changeFile">{% trans "Choose another file" %}</a></li>
         </ul>
     </div>
-</div>
-
-<div class="alert alert-danger d-none" role="alert" id="uploadError">
-    <p class="text-center">{% trans "Error" %}</p>
-    <p id="uploadErrorText"></p>
 </div>

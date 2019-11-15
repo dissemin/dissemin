@@ -23,7 +23,21 @@ $(document).ajaxError( function (event, jqXHR, ajaxSettings, thrownError) {
     catch (e)
     {
         console.log(thrownError);
+        console.log(jqXHR.responseText);
         console.log(ajaxSettings);
+    }
+});
+
+/* Filter methods that need no csrf protection */
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+
+/* For certain requests like POST we need an csrf token. We insert it */
+$(document).ajaxSend( function(event, xhr, settings) {
+    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+        xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
     }
 });
 
@@ -613,6 +627,51 @@ $(function() {
         });
     }
 });
+
+/* If the user uploads via URL, send ajax with url and show some ongoing signs */
+function fileUpload() {
+    var data = $("#urlForm").serialize();
+    console.log($("#uploadUrl").val());
+    var url = Urls['ajax-downloadUrl']();
+
+    // Show the spinner
+    $("#urlDownloadWaiter").removeClass("d-none");
+
+    $.post(url, data)
+    .done( function (response) {
+        $("#uploadFileId").val(response['file_id'])
+        // Show upload row with content
+        $("#uploadedFileThumbnail").attr('src', response.thumbnail)
+        $("#uploadedFilePages").text(gettext("Pages" + ": " + response.num_pages));
+        $("#uploadedFileSize").text(gettext("Size" + ": " + response.size));
+        $("#uploadedFileSummary").removeClass("d-none");
+    })
+    .fail( function (xhr) {
+        var format = gettext("While fetching file from %(url)s the following error occured:");
+        var standard_text = interpolate(format, { "url" : $("#uploadUrl").val() }, true);
+        if (xhr.responseJSON) {
+            if ("message" in xhr.responseJSON) {
+                $("#uploadErrorText").append(
+                    makeAlert(standard_text + " " + xhr.responseJSON["message"])
+                );
+            }
+            else {
+                $("#uploadErrorText").append(
+                    makeAlert(standard_text + " " + gettext("Unknown error"))
+                );
+            }
+        }
+        else {
+            $("#uploadErrorText").append(
+                makeAlert(standard_text + " " + gettext("Unknown error"))
+            );
+        }
+    })
+    .always( function() {
+        // Hide the spinner
+        $("#urlDownloadWaiter").addClass("d-none");
+    });
+}
 
 
 /* Offers option to upload another file. This is done by simply toggling the correspondings divs */
