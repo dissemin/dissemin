@@ -48,9 +48,15 @@
         {% comment %}
             We use flex, to make the container use screen height or more. Below we use a div, that uses rest of the available space.
         {% endcomment %}
-        <div class="container border-left border-right p-0 d-flex flex-column min-vh-100" >
+        <div class="container p-0 d-flex flex-column min-vh-100" >
             {% include 'navbar.html' %}
-            {% block content %}{% endblock %}
+            {% comment %}
+                Most pages should be equipped with a left or right border, however, some shall not have a border, like the start page, so there are two content blocks. Please fill either one of them.
+            {% endcomment %}
+            <div class="border-left border-right">
+                {% block content %}{% endblock content %}
+            </div>
+            {% block content_no_border %}{% endblock content_no_border %}
             {% comment %}
                 The box above the footer uses all vertical space if any is available. Thus, the footer is moved down, if there is few content on the screen.
             {% endcomment %}

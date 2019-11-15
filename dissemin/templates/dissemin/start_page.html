@@ -13,7 +13,7 @@
     <script src="{% static 'js/d3.min.js' %}"></script>
 {% endblock %}
 
-{% block content %}
+{% block content_no_border %}
     <div class="jumbotron jumbotron-fluid text-light text-center mb-0" id="screenWelcome">
         <div class="container">
             <h1>{% trans 'Welcome to Dissemin' %}</h1>
@@ -143,4 +143,4 @@
             </div>
         </div>
     </div>
-{% endblock content %}
+{% endblock content_no_border %}
