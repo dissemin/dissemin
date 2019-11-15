@@ -28,6 +28,8 @@ from django.conf import settings
 from django.urls import include
 from django.urls import path
 from django.urls import re_path
+from django.urls import register_converter
+from django.urls.converters import StringConverter
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import logout
@@ -60,6 +62,12 @@ try:
     import importlib
 except ImportError:
     from django.utils import importlib
+
+# We define our own slug converter, since we want to allow empty slugs
+class SlugConverter(StringConverter):
+    regex = '[-a-zA-Z0-9_]*'
+
+register_converter(SlugConverter, 'slug')
 
 
 def handler403(request, exception=None):
