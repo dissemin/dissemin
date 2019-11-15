@@ -251,8 +251,6 @@ class TestTodoList():
 
         assert len(response.context['object_list']) == 1
         assert book_god_of_the_labyrinth.pk in [paper.pk for paper in response.context['object_list']]
-        assert response.context['view'] == 'my-todolist'
-        assert response.context['ajax_url'] == reverse('ajax-todolist')
 
 
 # TODO TO BE TESTED

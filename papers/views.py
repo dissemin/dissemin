@@ -253,8 +253,6 @@ class MyTodoListView(LoginRequiredMixin, PaperSearchView):
         """
         context = super().get_context_data(**kwargs)
 
-        context['ajax_url'] = reverse('ajax-todolist')
-
         context['breadcrumbs'] = [(_('To-do list'), None)]
         context['search_description_title'] = context['search_description'] = _('Papers on my to-do list')
         context['todolist_fadeout'] = True
