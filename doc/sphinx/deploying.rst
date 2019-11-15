@@ -23,14 +23,18 @@ As any Django website, Dissemin can be served by various web servers.
 These settings are not specific to dissemin itself so you should refer
 to `the relevant Django documentation <https://docs.djangoproject.com/en/2.2/howto/deployment/>`_.
 
-No matter what web server you use,
-you need to run ``python manage.py collectstatic`` to copy the static files from
-the git repository to the desired location for your installation (in the example below,
-``/home/dissemin/www/static``), as well as ``python manage.py compilemessages`` to compile
-the translation files.
+There are some deployment steps that you always have to do in case of deployment (which includes rolling out updates).
+You should keep this order.
+Make sure to have the virtual environment activated.
 
-Make sure that your `media/` directory is writable by the user under which the application will run
-(`www-data` on Debian).
+#. Apply migrations with ``./manage migrate``
+#. Compile scss files with ``./manage compilescc``
+#. Collect static files with ``./manage collectstatic``
+#. Compile translations with ``./manage compilemessages``
+#. Tell WSGI to reload with ``touch dissemin/wsgi.py``
+#. Restart celery with ``systemctl``
+
+Make sure that your `media/` directory is writable by the user under which the application will run (`www-data` on Debian).
 
 Self-hosting MathJax
 --------------------
@@ -63,39 +67,3 @@ A sample VirtualHost, assuming that the root of the Dissemin source code is at `
 
 
 You should only have to change the path to the application and the domain name of the service.
-
-
-lighttpd with FastCGI (deprecated)
-----------------------------------
-
-We describe here how to set up the server with lighttpd, a lightweight
-web server, with FastCGI. This has been deprecated by Django, as support
-for FastCGI will be discontinued: use WSGI instead.
-
-Add this to your lighttpd config::
-
-   $HTTP["host"] =~ "^myhostname.com$" {
-       accesslog.filename   = "/var/log/lighttpd/dissemin-$INSTANCE.log"
-       server.document-root = "$SOURCE_PATH/www/"
-       $HTTP["url"] =~ "^(?!((/static/)|(/robots\.txt)))" {
-           fastcgi.server = (
-               "/" => (
-                   "/" => (
-                       "socket" => "/tmp/django-dissemin-$INSTANCE.sock",
-                       "check-local" => "disable",
-                       "fix-root-scriptname" => "enable",
-                   )
-               ),
-           )
-       }
-       alias.url = (
-           "/static/" => "$SOURCE_PATH/www/static/",
-           "/robots.txt" => "$SOURCE_PATH/www/static/robots.txt",
-       )
-   }
-
-where ``$INSTANCE`` is the name of your instance and ``$SOURCE_PATH`` is
-the path to the root of the git repository of dissemin.
-
-You can create the ``.sock`` file with
-``touch /tmp/django-dissemin-$INSTANCE.sock``.
