@@ -1,3 +1,4 @@
+{% load capture_tags %}
 {% load static %}
 {% load i18n %}
 {% load sass_tags %}
@@ -40,7 +41,19 @@
         {% comment %}
             Set a title with block title
         {% endcomment %}
-        <title>{% block title %}{% endblock %} - Dissemin</title>
+        <title>{% capture as title %}{% block title %}{% endblock %} - Dissemin{% endcapture %}</title>
+
+        <!-- Some more meta information -->
+        <meta name="description" content="{% trans "Dissemin detects papers behind pay-walls and invites their authors to upload them in one click to an open repository." %}">
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:creator" content="@disseminOA" />
+
+        <!-- Some informations for opengraph -->
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content='{{ title }}' />
+        <meta property="og:description" content="{% trans "Dissemin detects papers behind pay-walls and invites their authors to upload them in one click to an open repository." %}" />
+        <meta property="og:url" content="{{ request.get_full_path }}" />
+        <meta property="og:image" content="{% static "favicon/apple-icon-57x57.png" %}" />
 
     </head>
 
