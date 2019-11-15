@@ -30,11 +30,26 @@
         <script src="{% static 'js/dissemin.js' %}"></script>
         <script src="{% static 'js/moment.min.js' %}"></script>
         <script src="{% static 'js/tempusdominus-bootstrap-4.min.js' %}"></script>
+        <!-- Errors shall send to Sentry -->
         {% if settings.SENTRY_DSN %}
             <script type="text/javascript" src="{% static "js/sentry.min.js" %}"></script>
             <script>Sentry.init({ dsn: '{{ settings.SENTRY_DSN }}'})</script>
         {% endif %}
 
+        <!-- MathJAX support -->
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({
+              tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+            });
+        </script>
+        {% if settings.MATHJAX_SELFHOST_URL %}
+            <script type="text/javascript" src="{{ settings.MATHJAX_SELFHOST_URL }}" async>
+        {% else %}
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async>
+        {% endif %}
+        </script>
+
+        <!-- Additional scripts, that individual pages / templates need -->
         {% block scripts %}{% endblock %}
 
         <!-- Title -->
