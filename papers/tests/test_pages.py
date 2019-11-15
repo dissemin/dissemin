@@ -195,7 +195,7 @@ class TestPaperPages():
         with patch.object(fetch_everything_for_researcher, 'delay') as task_mock:
             check_status(302, 'refetch-researcher', kwargs={'pk':self.r4.id}, client=authenticated_client_su)
 
-            task_mock.assert_called_once_with(pk=str(self.r4.id))
+            task_mock.assert_called_once_with(pk=self.r4.id)
 
     def test_update_researcher_wrong_user(self, check_status, authenticated_client):
         """
