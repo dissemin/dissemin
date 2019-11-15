@@ -613,7 +613,7 @@ $(function() {
                 $("#uploadedFileSize").text(gettext("Size" + ": " + response.size));
                 $("#uploadedFileSummary").removeClass("d-none");
 
-                // Hide dropzone and progress
+                // Hide upload row and progress
                 $("#fileUploadRow").addClass("d-none");
                 $("#uploadProgress").addClass("d-none");
 
@@ -645,6 +645,9 @@ function fileUpload() {
         $("#uploadedFilePages").text(gettext("Pages" + ": " + response.num_pages));
         $("#uploadedFileSize").text(gettext("Size" + ": " + response.size));
         $("#uploadedFileSummary").removeClass("d-none");
+
+        // Hide upload row
+        $("#fileUploadRow").addClass("d-none");
     })
     .fail( function (xhr) {
         var format = gettext("While fetching file from %(url)s the following error occured:");
