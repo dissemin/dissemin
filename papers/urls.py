@@ -33,15 +33,6 @@ urlpatterns = [
         views.PaperView.as_view(), name='paper'),
     url(r'^(?P<doi>10\..*)', views.PaperView.as_view(), name='paper-doi'),
     url(r'^p/direct/(?P<doi>10\..*)', views.redirect_by_doi, name='paper-redirect-doi'),
-    # Institution-specific views
-    url(r'^department/(?P<pk>\d+)/$',
-        views.DepartmentView.as_view(), name='department'),
-    url(r'^institution/(?P<pk>\d+)/$',
-        views.InstitutionView.as_view()), # Deprecated URL
-    url(r'^i/(?P<pk>\d+)/(?P<slug>[\w-]*)$',
-        views.InstitutionView.as_view(), name='institution'),
-    url(r'^institutions$',
-        views.InstitutionsMapView.as_view(), name='institutions-map'),
     # Tasks, AJAX
     url(r'^ajax/', include('papers.ajax')),
     # API

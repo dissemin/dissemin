@@ -41,7 +41,6 @@ from django.utils.encoding import escape_uri_path
 from django.utils.translation import ugettext as _
 from django.utils.http import urlencode
 from django.utils.six.moves.urllib.parse import unquote
-from django.views import generic
 from django.views.generic.edit import FormView
 
 from deposit.models import DepositRecord
@@ -50,8 +49,6 @@ from papers.doi import to_doi
 from papers.doi import doi_to_url
 from papers.errors import MetadataSourceException
 from papers.forms import PaperSearchForm
-from papers.models import Department
-from papers.models import Institution
 from papers.models import Paper
 from papers.models import Researcher
 from papers.user import is_admin
@@ -356,35 +353,10 @@ def refetch_researcher(request, pk):
     return redirect(reverse('researcher', kwargs=view_args))
 
 
-class DepartmentView(generic.DetailView):
-    model = Department
-    template_name = 'papers/department.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(DepartmentView, self).get_context_data(**kwargs)
-        context['breadcrumbs'] = self.object.breadcrumbs()
-        return context
-
-
-class InstitutionView(SlugDetailView):
-    model = Institution
-    template_name = 'papers/institution.html'
-    view_name = 'institution'
-
-    def get_context_data(self, **kwargs):
-        context = super(InstitutionView, self).get_context_data(**kwargs)
-        context['breadcrumbs'] = self.object.breadcrumbs()
-        return context
-
-
 class PaperView(SlugDetailView):
     model = Paper
     template_name = 'papers/paper.html'
     view_name = 'paper'
-
-    def departments(self):
-        paper = self.object
-        return Department.objects.filter(researcher__author__paper=paper).distinct()
 
     def get_object(self, queryset=None):
         if queryset is None:
@@ -448,8 +420,6 @@ class PaperView(SlugDetailView):
             kwargs['pk'] = self.object.pk
         return super(PaperView, self).redirect(**kwargs)
 
-class InstitutionsMapView(generic.base.TemplateView):
-    template_name = 'papers/institutions.html'
 
 def redirect_by_doi(request, doi):
     """

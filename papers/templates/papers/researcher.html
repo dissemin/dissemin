@@ -31,7 +31,7 @@
     {% endif %}
 
     {% if researcher.department %}
-        <p><span class="oi oi-sun"></span> <a href="{{ researcher.department.url }}">{{ researcher.department }}</a></p>
+        <p><span class="oi oi-sun"></span> {{ researcher.department }}</p>
     {% endif %}
 
     {% if researcher.user == request.user or request.user.is_superuser %}

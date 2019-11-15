@@ -62,17 +62,6 @@ class TestDoai():
         check_permanent_redirect('paper-redirect-doi', kwargs={'doi': '10.1385/1592597998'}, url=doi_to_url('10.1385/1592597998'))
 
 
-@pytest.mark.usefixtures("load_test_data")
-class TestInstitutionPages():
-
-    def test_dept(self, check_url):
-        check_url(200, self.d.url)
-        check_url(200, self.di.url)
-
-    def test_univ(self, check_url):
-        check_url(200, self.i.url)
-
-
 class TestPaperCSS():
     """
     Class that groups CSS tests for papers
