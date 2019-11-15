@@ -156,7 +156,6 @@ INSTALLED_APPS = (
     'django_countries',
     'leaflet',
     'djgeojson',
-    'bootstrap_datepicker_plus',
     'django_select2',
     'vinaigrette',
     'tempus_dominus',

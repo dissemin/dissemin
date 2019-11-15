@@ -18,18 +18,19 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-from bootstrap_datepicker_plus import DatePickerInput
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
 from itertools import groupby
+
+from django import forms
+from django.urls import reverse_lazy
+from django.utils.translation import ugettext_lazy as _
 
 from deposit.models import Repository
 from deposit.models import UserPreferences
 from deposit.declaration import REGISTERED_DECLARATION_FUNCTIONS
 from deposit.registry import protocol_registry
-from django import forms
-from django.urls import reverse_lazy
-from django.utils.translation import ugettext_lazy as _
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
+from dissemin.widgets import OIDatePicker
 from papers.models import UPLOAD_TYPE_CHOICES
 from upload.models import UploadedPDF
 
@@ -154,9 +155,7 @@ class BaseMetadataForm(forms.Form):
 
     embargo = forms.DateField(
         label=_('Do not publish before'),
-        widget=DatePickerInput(
-            format='%Y-%m-%d',
-        ),
+        widget=OIDatePicker(),
     )
 
     # License field to choose license

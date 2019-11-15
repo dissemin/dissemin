@@ -8,7 +8,6 @@ django>=2.2.0,<2.3.0
 django-allauth
 django-bootstrap-pagination
 django-bulk-update
-django-bootstrap-datepicker-plus
 django-cache-machine
 django-capture-tag
 django-cas-ng

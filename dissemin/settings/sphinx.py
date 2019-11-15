@@ -98,11 +98,10 @@ INSTALLED_APPS = (
     'django_countries',
     'leaflet',
     'djgeojson',
-    'bootstrap_datepicker_plus',
     'django_select2',
 )
 
-CRISPY_TEMPLATE_PACK = 'bootstrap3'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 SITE_ID = 1
 
