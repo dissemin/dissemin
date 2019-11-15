@@ -23,7 +23,21 @@ $(document).ajaxError( function (event, jqXHR, ajaxSettings, thrownError) {
     catch (e)
     {
         console.log(thrownError);
+        console.log(jqXHR.responseText);
         console.log(ajaxSettings);
+    }
+});
+
+/* Filter methods that need no csrf protection */
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+
+/* For certain requests like POST we need an csrf token. We insert it */
+$(document).ajaxSend( function(event, xhr, settings) {
+    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+        xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
     }
 });
 
@@ -558,3 +572,282 @@ function formatNumbersThousands(value) {
     // https://stackoverflow.com/a/2901298
     return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, thousandSeparator);
 }
+
+
+/* ***
+ * Uploads
+ * *** */
+
+/* Configures the dropzone file upload area. We don't use the template as we want to present different information. */
+$(function() {
+    if(jQuery().dropzone) {
+        $("#fileUploadArea").dropzone({
+            addedfile : function(file) {
+                $("#uploadError").addClass("d-none");
+                $("#uploadProgress").removeClass("d-none");
+            },
+            error : function(file, response, status) {
+                $("#uploadProgress").removeClass("d-none");
+                var format = gettext("While uploading %(file)s the following error occured:");
+                var standard_text = interpolate(format, { "file" : file["name"] }, true);
+                if ("upl" in response) {
+                    $("#uploadErrorText").text(standard_text + " " + response["upl"]);
+                }
+                else if ("message" in response) {
+                    $("#uploadErrorText").text(standard_text + " " + response["message"]);
+                }
+                else {
+                    $("#uploadErrorText").text(standard_text + " " + gettext("Unknown error"));
+                }
+                $("#uploadError").addClass("d-none");
+            },
+            headers : {
+                'X-CSRFTOKEN' : getCookie('csrftoken')
+            },
+            paramName: 'upl',
+            previewsContainer: false,
+            success : function(file, response) {
+                // Show upload row with content
+                $("#uploadedFileThumbnail").attr('src', response.thumbnail)
+                $("#uploadedFilePages").text(gettext("Pages" + ": " + response.num_pages));
+                $("#uploadedFileSize").text(gettext("Size" + ": " + response.size));
+                $("#uploadedFileSummary").removeClass("d-none");
+
+                // Hide upload row and progress
+                $("#fileUploadRow").addClass("d-none");
+                $("#uploadProgress").addClass("d-none");
+
+                $("#uploadFileId").val(response['file_id'])
+            },
+            uploadprogress: function(file, progress, bytesSent) {
+                console.log(progress);
+                $("#uploadProgressBar").css("width", progress + "%")
+            },
+            url : Urls['ajax-uploadFulltext']()
+        });
+    }
+});
+
+/* If the user uploads via URL, send ajax with url and show some ongoing signs */
+function fileUpload() {
+    var data = $("#urlForm").serialize();
+    console.log($("#uploadUrl").val());
+    var url = Urls['ajax-downloadUrl']();
+
+    // Show the spinner
+    $("#urlDownloadWaiter").removeClass("d-none");
+
+    $.post(url, data)
+    .done( function (response) {
+        $("#uploadFileId").val(response['file_id'])
+        // Show upload row with content
+        $("#uploadedFileThumbnail").attr('src', response.thumbnail)
+        $("#uploadedFilePages").text(gettext("Pages" + ": " + response.num_pages));
+        $("#uploadedFileSize").text(gettext("Size" + ": " + response.size));
+        $("#uploadedFileSummary").removeClass("d-none");
+
+        // Hide upload row
+        $("#fileUploadRow").addClass("d-none");
+    })
+    .fail( function (xhr) {
+        var format = gettext("While fetching file from %(url)s the following error occured:");
+        var standard_text = interpolate(format, { "url" : $("#uploadUrl").val() }, true);
+        if (xhr.responseJSON) {
+            if ("message" in xhr.responseJSON) {
+                $("#uploadErrorText").append(
+                    makeAlert(standard_text + " " + xhr.responseJSON["message"])
+                );
+            }
+            else {
+                $("#uploadErrorText").append(
+                    makeAlert(standard_text + " " + gettext("Unknown error"))
+                );
+            }
+        }
+        else {
+            $("#uploadErrorText").append(
+                makeAlert(standard_text + " " + gettext("Unknown error"))
+            );
+        }
+    })
+    .always( function() {
+        // Hide the spinner
+        $("#urlDownloadWaiter").addClass("d-none");
+    });
+}
+
+
+/* Offers option to upload another file. This is done by simply toggling the correspondings divs */
+$(function() {
+    $("#changeFile").click(function(evt) {
+        evt.preventDefault();
+        $("#uploadedFileSummary").addClass("d-none");
+        $("#fileUploadRow").removeClass("d-none");
+    });
+});
+
+/* When radio change on documentype, collapse card and change card header */
+$(function() {
+    /* collapses */
+    $("input[type='radio'][name='radioUploadType']").click(function(){
+        $("#collapseDocType").collapse('hide');
+    });
+
+    /* changes header */
+    $("#collapseDocType").on('hidden.bs.collapse', function() {
+        var selected = $("input[type='radio'][name='radioUploadType']:checked");
+        $("#choosenUploadType").html($("#choosenUploadType-" + selected.val()).html())
+    });
+});
+
+/* When radio change on Repository, collapse card and change card header and load metadataform of the repository */
+$(function() {
+    /* collapses */
+    $("input[type='radio'][name='radioRepository']").click(function(){
+        $("#collapseRepository").collapse('hide');
+        var selected = $("input[type='radio'][name='radioRepository']:checked");
+        var paper_pk = $("#depositForm").attr("data-paper-pk");
+        $.ajax({
+            data : {
+                'paper' : paper_pk,
+                'repository' : selected.val()
+            },
+            error : function(data) {
+                console.log(data);
+                $("#repositoryMetadataForm").html(data['message']);
+            },
+            method : 'get',
+            success : function(data) {
+                $("#repositoryMetadataForm").html(data["form"]);
+                $('.prefetchingFieldStatus').each(function(i,prefetch) {
+	                initPrefetch($(prefetch));
+	            });
+
+            },
+            url : Urls['ajax-getMetadataForm']()
+        });
+    });
+
+    /* changes header */
+    $("#collapseRepository").on('hidden.bs.collapse', function() {
+        var selected = $("input[type='radio'][name='radioRepository']:checked");
+        $("#choosenRepository").html($("#choosenRepository-" + selected.val()).html())
+    });
+});
+
+/* This functions tries to automatically fill in some fields */
+function initPrefetch(p) {
+    var sorry_text = gettext("Sorry, we could not fill this for you.");
+    p.text(gettext("Trying to fill this field automatically for you..."));
+    field = $("#"+p.data("fieldid"));
+    obj_id = $("input[name="+p.data("objfieldname")+"]").val();
+    field.prop('disabled', true);
+
+    $.ajax({
+        data : {
+            "field" : p.data("fieldname"),
+            "id" : obj_id
+        },
+        error : function () {
+            p.text(sorry_text);
+            field.prop('disabled', false);
+        },
+        method : 'get',
+        success : function(data) {
+            if(!data['success']) {
+                p.text(gettext(sorry_text));
+            }
+            else {
+                p.text('');
+            }
+            field.prop('disabled', false);
+            field.val(data['value']);
+        },
+        url : p.data("callback")
+
+    });
+}
+
+/* This does the actual deposit of the paper */
+function depositPaper() {
+    var data = $("#depositForm").serializeArray();
+    var paper_pk = $("#depositForm").attr("data-paper-pk");
+    var no_file = gettext("You have not selected a file for upload.")
+
+    // If no file id is present, we say, that a file is missing. Rest of the form is covered by browser validation
+    if (!data['file_id']) {
+        $("#errorGeneral").append(
+            makeAlert(no_file)
+        );
+        return
+    }
+
+    // Show the waiting paper bird
+    $("#paperSubmitWaitingArea").removeClass("d-none");
+    $("#paperSubmitWaitingArea").addClass("d-flex");
+
+    $.post({
+        beforeSend : function(jqXHR) {
+            jqXHR.setRequestHeader('X-CSRFToken', getCookie('csrftoken'));
+        },
+        data : data,
+        url : Urls['ajax-submitDeposit'](paper_pk)
+    })
+    .done(function (response) {
+        var upload_id = response['upload_id'];
+        var paper_slug = $("#depositForm").attr("data-paper-slug");
+
+        window.location.replace(Urls['paper'](paper_pk, paper_slug) + "deposit=" + upload_id);
+    })
+    .fail(function (xhr) {
+        var error_text = "";
+        if (!xhr.responseJSON) {
+            error_text = gettext("Dissemin encountered an error, please try again later.");
+        }
+        else {
+            // Since we have form valdation, we need only to llok for the file. However, the metadatafields are relatively anonymous in this version as the standard text from django ist "This fiel is required" and we would need to place it suitably.
+            var response = JSON.parse(xhr.responseText);
+            if ('message' in response) {
+                error_text = response['message'];
+            }
+            if ('form' in response) {
+                form_errors = response['form'];
+                if ('file_id' in form_errors) {
+                    $("#errorMissingFile").append(
+                        makeAlert(no_file)
+                    );
+                }
+            }
+        }
+        if (error_text) {
+            $("#errorGeneral").append(
+                makeAlert(error_text)
+            );
+        }
+    })
+    .always(function() {
+        // Hide the waiting paper bird
+        $("#paperSubmitWaitingArea").removeClass("d-flex");
+        $("#paperSubmitWaitingArea").addClass("d-none");
+    })
+    ;
+}
+
+function makeAlert(text) {
+    var alert_box = $("<div>",{
+        'class' : "alert alert-warning alert-dismissible fade show uploadError",
+        "role" : "alert",
+        "text" : text
+    }).append($("<button>", {
+        "aria-label" : "Close",
+        "class" : "close",
+        "data-dismiss" : "alert",
+        "type" : "button",
+        }).append($("<span>", {
+            "aria-hidden" : "true",
+            "html" : "&times;"
+        }))
+    );
+
+    return alert_box
+};
