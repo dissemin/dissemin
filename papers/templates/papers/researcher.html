@@ -23,7 +23,7 @@
     {% endif %}
 
     {% if researcher.orcid %}
-        <p><a href="{{ researcher.orcid|orcid_to_url }}" target="_blank" data-toggle="tooltip" title="{% blocktrans with first_name=researcher.name.first last_name=researcher.name.last %} {{ first_name }} {{ last_name }} uses ORCID.{% endblocktrans %}"><img class="orcidInlineBadge" src="{% static "dissemin/img/orcid-big.png" %}" als="ORCID" /> {{ researcher.orcid }}</a></p>
+        <p><a href="{{ researcher.orcid|orcid_to_url }}" target="_blank" data-toggle="tooltip" title="{% blocktrans with first_name=researcher.name.first last_name=researcher.name.last %} {{ first_name }} {{ last_name }} uses ORCID.{% endblocktrans %}"><img class="orcidInlineBadge" src="{% static "dissemin/img/orcid-big.png" %}" alt="ORCID" /> {{ researcher.orcid }}</a></p>
     {% endif %}
 
     {% if researcher.institution %}
