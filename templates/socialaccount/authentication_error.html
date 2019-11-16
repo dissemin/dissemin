@@ -7,14 +7,15 @@
 {% endblock %}
 
 {% block content %}
-<div class="container-fluid">
-    <div class="jumbotron mt-3">
-        <h1>{% trans "Authentication error" %}</h1>
-        <p>
-            {% blocktrans trimmed %}
-                Authentication has failed. <a href="{% url "account-login" %}">Go back to the login page.</a>
-            {% endblocktrans %}
-        </p>
+    <div class="container-fluid">
+        <div class="jumbotron mt-3">
+            <h1>{% trans "Authentication error" %}</h1>
+            <p>
+                {% url "account-login" as account-login %}
+                {% blocktrans trimmed %}
+                Authentication has failed. <a href="{{ account-login }}">Go back to the login page.</a>
+                {% endblocktrans %}
+            </p>
+        </div>
     </div>
-</div>
 {% endblock %}
