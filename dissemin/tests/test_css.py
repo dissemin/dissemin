@@ -10,7 +10,7 @@ class TestCSS():
     Class that tests our (two) css files
     """
     @pytest.mark.parametrize('scss_file', ['custom.scss', 'dissemin.scss',])
-    def test_scss(self, scss_file, check_css, settings):
+    def test_scss(self, scss_file, check_css):
         """
         Tests the css files.
         """
