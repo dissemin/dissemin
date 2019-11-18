@@ -21,6 +21,9 @@ class TestMiscPages():
         """
         check_page(200, page)
 
+    @pytest.mark.urls('dissemin.test_urls')
+    def test_error(self, check_page):
+        check_page(200, 'error')
 
 
 class TestStartPageView():
