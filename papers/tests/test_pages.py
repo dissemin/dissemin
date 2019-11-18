@@ -19,7 +19,6 @@
 #
 
 
-import os
 import pytest
 
 from datetime import date
@@ -27,7 +26,6 @@ from mock import patch
 
 from django.urls import reverse
 
-from dissemin.settings import BASE_DIR
 from papers.baremodels import BareName
 from papers.models import OaiRecord
 from papers.models import Paper
@@ -60,17 +58,6 @@ class TestDoai():
 
     def test_fallback(self, check_permanent_redirect):
         check_permanent_redirect('paper-redirect-doi', kwargs={'doi': '10.1385/1592597998'}, url=doi_to_url('10.1385/1592597998'))
-
-
-class TestPaperCSS():
-    """
-    Class that groups CSS tests for papers
-    """
-    def test_paper_css(self, css_validator):
-        """
-        Tests the css files
-        """
-        css_validator(os.path.join(BASE_DIR, 'papers', 'static', 'style'))
 
 
 @pytest.mark.usefixtures("load_test_data")
