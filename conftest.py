@@ -345,7 +345,6 @@ def validator_tools(dissemin_base_client, settings):
         """
 
         ignore_re = [
-            'Attribute "dp_config" not allowed on element', # Django Bootstrap DatetimePicker uses this extra attribute which is considered invalid by W3C validator. We filter that out.
             'Property "text-decoration-skip-ink" doesn.t exist', # Bootstrap uses this, which is in W3C draft, but not in VNU
             'Property "backdrop-filter" doesn\'t exist', # Bootstrap uses this, which is in W3C draft, but not in VNU
         ]
