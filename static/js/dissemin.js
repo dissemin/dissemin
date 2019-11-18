@@ -123,7 +123,6 @@ $(function() {
         $.ajax({
             data: {
                 "paper_pk": paper_pk,
-                "csrfmiddlewaretoken": getCookie('csrftoken')
             },
             dataType: 'json',
             error: function (xhr) {
@@ -156,7 +155,6 @@ $(function() {
         publisher_pk = form.attr('data-publisher-pk');
         new_status = $('input[name=radioOAStatus]:checked', '#changePublisherOAStatus').val();
         data = {
-            'csrfmiddlewaretoken': getCookie('csrftoken'),
             'pk' : publisher_pk,
             'status' : new_status
         };
@@ -256,9 +254,6 @@ $(function () {
         var url = Urls['inbox-read'](message_pk);
 
         $.ajax({
-            data: {
-                "csrfmiddlewaretoken": getCookie('csrftoken')
-            },
             method : 'POST',
             url : url
         });
@@ -292,7 +287,6 @@ $(function () {
             method : 'post',
             data : {
                 'pk' : paper_pk,
-                "csrfmiddlewaretoken": getCookie('csrftoken')
             },
             dataType : 'json',
             error : function () {
@@ -349,7 +343,6 @@ $(function () {
             url: ajax_url,
             data: {
                 "paper_pk": paper_pk,
-                "csrfmiddlewaretoken": getCookie('csrftoken')
             },
             dataType: 'json',
             success: function (data) {
@@ -785,9 +778,6 @@ function depositPaper() {
     $("#paperSubmitWaitingArea").addClass("d-flex");
 
     $.post({
-        beforeSend : function(jqXHR) {
-            jqXHR.setRequestHeader('X-CSRFToken', getCookie('csrftoken'));
-        },
         data : data,
         url : Urls['ajax-submitDeposit'](paper_pk)
     })
