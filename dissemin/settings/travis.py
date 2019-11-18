@@ -70,3 +70,4 @@ urllib3.contrib.pyopenssl.inject_into_urllib3()
 # Set to tmp_static, so that test on CI find compiled static files
 SASS_PROCESSOR_ROOT = os.path.join(BASE_DIR, 'tmp_static')
 SASS_PROCESSOR_ENABLED = True
+SASS_OUTPUT_STYLE = 'nested'
