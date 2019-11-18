@@ -5,7 +5,7 @@ from datetime import date
 from django.urls import reverse
 
 from deposit.models import DepositRecord
-from dissemin.forms import StartPageSearchForm
+from website.forms import StartPageSearchForm
 from upload.models import UploadedPDF
 
 
@@ -21,7 +21,7 @@ class TestMiscPages():
         """
         check_page(200, page)
 
-    @pytest.mark.urls('dissemin.test_urls')
+    @pytest.mark.urls('website.tests.urls')
     def test_error(self, check_page):
         check_page(200, 'error')
 

@@ -19,7 +19,6 @@
 #
 
 
-import allauth.account.views
 import django_js_reverse.views
 
 from allauth.socialaccount import providers
@@ -35,15 +34,12 @@ from django.contrib import admin
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.shortcuts import render
-from django.views import generic
 from django.views.generic.base import TemplateView
 from django.views.i18n import JavaScriptCatalog
 
 from deposit.views import MyDepositsView
 from deposit.views import GlobalPreferencesView
 from deposit.views import RepositoryPreferencesView
-from dissemin.views import LoginView
-from dissemin.views import StartPageView
 from papers.ajax import claimPaper
 from papers.ajax import unclaimPaper
 from papers.ajax import todo_list_add
@@ -57,6 +53,7 @@ from papers.views import refetch_researcher
 from publishers.ajax import change_publisher_status
 from publishers.views import PublisherView
 from publishers.views import PublishersView
+from website.views import StartPageView
 
 try:
     import importlib
@@ -144,7 +141,7 @@ urlpatterns = [
     path('', include('autocomplete.urls')),
     path('jsreverse/', django_js_reverse.views.urls_js, name='js_reverse'),
     # Social auth
-    path('accounts/login/', LoginView.as_view(), name='account-login'),
+    path('accounts/login/', TemplateView.as_view(template_name='dissemin/login.html'), name='account-login'),
     path('accounts/logout/', logoutView, name='account-logout'),
     path('accounts/social/', include('allauth.socialaccount.urls')),
     # JavaScript i18n

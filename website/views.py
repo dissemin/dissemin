@@ -1,7 +1,7 @@
 from django.views.generic.base import TemplateView
 
 from deposit.models import DepositRecord
-from dissemin.forms import StartPageSearchForm
+from website.forms import StartPageSearchForm
 from statistics.models import COMBINED_STATUS_CHOICES
 
 class StartPageView(TemplateView):
@@ -32,8 +32,3 @@ class StartPageView(TemplateView):
         )[:5]
 
         return context
-
-
-class LoginView(TemplateView):
-
-    template_name = 'dissemin/login.html'

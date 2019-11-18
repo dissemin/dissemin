@@ -30,7 +30,7 @@ from deposit.models import Repository
 from deposit.models import UserPreferences
 from deposit.declaration import REGISTERED_DECLARATION_FUNCTIONS
 from deposit.registry import protocol_registry
-from dissemin.widgets import OIDatePicker
+from website.widgets import OIDatePicker
 from papers.models import UPLOAD_TYPE_CHOICES
 from upload.models import UploadedPDF
 

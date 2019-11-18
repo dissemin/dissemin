@@ -27,7 +27,7 @@ from haystack.query import SQ
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from dissemin.widgets import OIDatePicker
+from website.widgets import OIDatePicker
 from papers.baremodels import PAPER_TYPE_CHOICES
 from papers.models import Department
 from papers.models import Paper

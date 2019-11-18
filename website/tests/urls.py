@@ -3,6 +3,6 @@ from django.urls import path
 from django.views.generic.base import TemplateView
 
 urlpatterns = [
-    path('', include('dissemin.urls')),
+    path('', include('website.urls')),
     path('error/', TemplateView.as_view(template_name='dissemin/error.html'), name='error'),
 ]

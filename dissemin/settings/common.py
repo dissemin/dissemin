@@ -130,6 +130,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'rest_framework',
     'crispy_forms',
+    'website',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -192,10 +193,6 @@ AUTHENTICATION_BACKENDS = (
 TEMPLATES = [
         {
             'BACKEND': 'django.template.backends.django.DjangoTemplates',
-            'DIRS': [
-                os.path.join(BASE_DIR, 'dissemin', 'templates'),
-                os.path.join(BASE_DIR, 'templates')
-            ],
             'APP_DIRS' : True,
             'OPTIONS': {
                 'context_processors': (
@@ -215,7 +212,7 @@ TEMPLATES = [
         }
 ]
 
-ROOT_URLCONF = 'dissemin.urls'
+ROOT_URLCONF = 'website.urls'
 
 WSGI_APPLICATION = 'dissemin.wsgi.application'
 
