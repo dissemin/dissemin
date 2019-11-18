@@ -29,7 +29,7 @@ Make sure to have the virtual environment activated.
 
 #. Apply migrations with ``./manage migrate``
 #. Compile scss files with ``./manage compilescc``
-#. Collect static files with ``./manage collectstatic``
+#. Collect static files with ``./manage collectstatic --ignore=*.scss``
 #. Compile translations with ``./manage compilemessages``
 #. Tell WSGI to reload with ``touch dissemin/wsgi.py``
 #. Restart celery with ``systemctl``
