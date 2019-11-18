@@ -18,22 +18,6 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
-import os
-
-from dissemin.settings import BASE_DIR
-
-
-class TestDepositCSS():
-    """
-    Class that groups CSS tests for upload
-    """
-    def test_deposit_css(self, css_validator):
-        """
-        Tests the css files
-        """
-        css_validator(os.path.join(BASE_DIR, 'deposit', 'static', 'css'))
-
-
 class TestDepositPages():
 
     def test_start_deposit_unauthenticated(self, book_god_of_the_labyrinth, check_status):

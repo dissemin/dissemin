@@ -578,6 +578,21 @@ function formatNumbersThousands(value) {
  * Uploads
  * *** */
 
+/* Show uploaded file summary */
+function showUploadedFileSummary(response) {
+    $("#uploadedFileThumbnail").html(
+        $("<img>", {
+            "class" : "img-fluid",
+            "src" : response.thumbnail,
+            "alt" : gettext("Preview of uploaded file")
+        })
+    );
+    $("#uploadedFilePages").text(gettext("Pages" + ": " + response.num_pages));
+    $("#uploadedFileSize").text(gettext("Size" + ": " + response.size));
+    $("#uploadedFileSummary").removeClass("d-none");
+}
+
+
 /* Configures the dropzone file upload area. We don't use the template as we want to present different information. */
 $(function() {
     if(jQuery().dropzone) {
@@ -608,10 +623,7 @@ $(function() {
             previewsContainer: false,
             success : function(file, response) {
                 // Show upload row with content
-                $("#uploadedFileThumbnail").attr('src', response.thumbnail)
-                $("#uploadedFilePages").text(gettext("Pages" + ": " + response.num_pages));
-                $("#uploadedFileSize").text(gettext("Size" + ": " + response.size));
-                $("#uploadedFileSummary").removeClass("d-none");
+                showUploadedFileSummary(response);
 
                 // Hide upload row and progress
                 $("#fileUploadRow").addClass("d-none");
@@ -639,12 +651,9 @@ function fileUpload() {
 
     $.post(url, data)
     .done( function (response) {
-        $("#uploadFileId").val(response['file_id'])
+        $("#uploadFileId").val(response['file_id']);
         // Show upload row with content
-        $("#uploadedFileThumbnail").attr('src', response.thumbnail)
-        $("#uploadedFilePages").text(gettext("Pages" + ": " + response.num_pages));
-        $("#uploadedFileSize").text(gettext("Size" + ": " + response.size));
-        $("#uploadedFileSummary").removeClass("d-none");
+        showUploadedFileSummary(response);
 
         // Hide upload row
         $("#fileUploadRow").addClass("d-none");

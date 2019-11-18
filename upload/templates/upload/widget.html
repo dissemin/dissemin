@@ -12,11 +12,11 @@
     </div>
     <div class="col-12 col-md-6">
         <form method="post" action="javascript:fileUpload()" id="urlForm">
-            <label for="uploadURL">{% trans "Or enter a URL:" %}</label>
+            <label for="uploadUrl">{% trans "Or enter a URL:" %}</label>
             <div class="input-group">
                 <input id="uploadUrl" type="text" class="form-control" name="url" placeholder="http://"/>
                 <div class="input-group-append">
-                    <button class="btn btn-search" aria-label="{% trans "Upload from URL" %}"><span class="oi oi-cloud-download" aria-hidden="true"/></button>
+                    <button class="btn btn-search" aria-label="{% trans "Upload from URL" %}"><span class="oi oi-cloud-download" aria-hidden="true"></span></button>
                 </div>
             </div>
         </form>
@@ -38,8 +38,7 @@
 </div>
 
 <div class="row d-none" id="uploadedFileSummary">
-    <div class="col-auto">
-        <img class="img-fluid" alt="{% trans "Preview of uploaded file"%}" id="uploadedFileThumbnail" />
+    <div class="col-auto" id="uploadedFileThumbnail">
     </div>
     <div class="col-6">
         <ul class="list-unstyled">
