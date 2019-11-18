@@ -7,23 +7,23 @@
  * *** */
 
 /* On AJAX errors, we like to be informed via Sentry */
-$(document).ajaxError( function (event, jqXHR, ajaxSettings, thrownError) {
+$(document).ajaxError( function (event, xhr, ajaxSettings, thrownError) {
     try {
         Sentry.captureMessage(thrownError || jqXHR.statusText, {
             extra: {
                 type: ajaxSettings.type,
                 url: ajaxSettings.url,
                 data: ajaxSettings.data,
-                status: jqXHR.status,
+                status: xhr.status,
                 error: thrownError || jqXHR.statusText,
-                response: jqXHR.responseText.substring(0, 100)
+                response: xhr.responseText.substring(0, 100)
             }
         });
     }
     catch (e)
     {
         console.log(thrownError);
-        console.log(jqXHR.responseText);
+        console.log(xhr.responseText);
         console.log(ajaxSettings);
     }
 });
@@ -53,8 +53,7 @@ function getCookie(name) {
         var cookies = document.cookie.split(';');
         for (var i = 0; i < cookies.length; i++) {
             var cookie = cookies[i].trim();
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+            // Does this cookie string begin with the name we want?  if (cookie.substring(0, name.length + 1) === (name + '=')) {
                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
                 break;
             }
@@ -127,8 +126,8 @@ $(function() {
                 "csrfmiddlewaretoken": getCookie('csrftoken')
             },
             dataType: 'json',
-            error: function (data) {
-                obj.text(data['error_msg']);
+            error: function (xhr) {
+                obj.text(xhr.responseJSON['error_msg']);
             },
             method : 'post',
             success: function (data) {
@@ -165,8 +164,8 @@ $(function() {
         $.ajax({
             data : data,
             dataType : 'text',
-            error : function( message ) {
-                alert('Error: ' + message);
+            error : function( xhr) {
+                alert('Error: ' + xhr.responseText);
             },
             method : 'POST',
             timeout : 5000,
@@ -296,7 +295,7 @@ $(function () {
                 "csrfmiddlewaretoken": getCookie('csrftoken')
             },
             dataType : 'json',
-            error : function (data) {
+            error : function () {
                 if (action == "claim") {
                     obj.text(gettext('Claiming failed!'));
                 }
@@ -362,8 +361,8 @@ $(function () {
                 }
                 obj.attr('data-action', action);
             },
-            error: function (data) {
-                obj.text(data['error_msg']);
+            error: function (xhr) {
+                obj.text(xhr.responseJSON['error_msg']);
             }
         });
     });
@@ -712,9 +711,8 @@ $(function() {
                 'paper' : paper_pk,
                 'repository' : selected.val()
             },
-            error : function(data) {
-                console.log(data);
-                $("#repositoryMetadataForm").html(data['message']);
+            error : function(xhr) {
+                $("#repositoryMetadataForm").html(xhr.responseJSON['message']);
             },
             method : 'get',
             success : function(data) {
