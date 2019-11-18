@@ -347,6 +347,7 @@ def validator_tools(dissemin_base_client, settings):
         ignore_re = [
             'Property "text-decoration-skip-ink" doesn.t exist', # Bootstrap uses this, which is in W3C draft, but not in VNU
             'Property "backdrop-filter" doesn\'t exist', # Bootstrap uses this, which is in W3C draft, but not in VNU
+            'The value "break-word" is deprecated', # Used by Bootstrap 4
         ]
 
         def __init__(self, client, settings):
