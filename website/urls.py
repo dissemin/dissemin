@@ -67,6 +67,8 @@ from papers.views import refetch_researcher
 from publishers.ajax import change_publisher_status
 from publishers.views import PublisherView
 from publishers.views import PublishersView
+from upload.views import handleAjaxUpload
+from upload.views import handleUrlDownload
 from website.views import StartPageView
 
 try:
@@ -145,8 +147,9 @@ urlpatterns = [
     path('api/search/', PaperSearchAPI.as_view(), name='api-paper-search'),
     re_path(r'^api/(?P<doi>10\..*)$', api_paper_doi, name='api-paper-doi'),
     # AJAX
-    path('ajax/delete-researcher/<int:pk>/', deleteResearcher, name='ajax-delete-researcher'),
     path('ajax/change_publisher_status/', change_publisher_status, name='ajax_change_publisher_status'),
+    path('ajax/delete-researcher/<int:pk>/', deleteResearcher, name='ajax-delete-researcher'),
+    path('ajax/download-url/', handleUrlDownload, name='ajax-downloadUrl'),
     path('ajax/get-metadata.form/', get_metadata_form, name='ajax-get-metadata-form'),
     path('ajax/paper-claim/', claimPaper, name='ajax-claimPaper'),
     path('ajax/paper-unclaim/', unclaimPaper, name='ajax-unclaimPaper'),
@@ -154,6 +157,7 @@ urlpatterns = [
     path('ajax/submit-deposit/<int:pk>/', submitDeposit, name='ajax-submit-deposit'),
     path('ajax/todolist-add/', todo_list_add, name='ajax-todolist-add'),
     path('ajax/todolist-remove/', todo_list_remove, name='ajax-todolist-remove'),
+    path('ajax/upload-fulltext/', handleAjaxUpload, name='ajax-uploadFulltext'),
     path('ajax/wait-for-consolidated-field/', waitForConsolidatedField, name='ajax-waitForConsolidatedField'),
     # Use related pages
     path('my-deposits', MyDepositsView.as_view(), name='my-deposits'),
@@ -161,8 +165,6 @@ urlpatterns = [
     path('preferences/repository/<int:pk>/', RepositoryPreferencesView.as_view(), name='preferences-repository'),
     # Admin interface
     path('admin/', admin.site.urls),
-    # Apps
-    path('ajax-upload/', include('upload.urls')),
     # We keep notification urls, because the app is rather opaque
     path('', include('notification.urls')),
     path('jsreverse/', django_js_reverse.views.urls_js, name='js_reverse'),
