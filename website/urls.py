@@ -38,9 +38,13 @@ from django.views.generic.base import TemplateView
 from django.views.i18n import JavaScriptCatalog
 
 from autocomplete.views import affiliation_autocomplete
-from deposit.views import MyDepositsView
+from deposit.views import get_metadata_form
 from deposit.views import GlobalPreferencesView
+from deposit.views import LetterDeclarationView
+from deposit.views import MyDepositsView
 from deposit.views import RepositoryPreferencesView
+from deposit.views import start_view
+from deposit.views import submitDeposit
 from papers.ajax import claimPaper
 from papers.ajax import unclaimPaper
 from papers.ajax import todo_list_add
@@ -113,6 +117,8 @@ urlpatterns = [
     re_path(r'^(?P<orcid>[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{3}[X0-9])/$', ResearcherView.as_view(), name='researcher-by-orcid'),
     # Upload related pages
     path('autocomplete/hal/affiliation/', affiliation_autocomplete, name='autocomplete-hal-affiliations'),
+    path('deposit/letter-of-declaration/<int:pk>/', LetterDeclarationView.as_view(), name='letter-of-declaration'),
+    path('deposit/paper/<int:pk>/', start_view, name='upload-paper'),
     # User related pages
     path('my-profile/', MyProfileView.as_view(), name='my-profile'),
     path('my-todolist/', MyTodoListView.as_view(), name='my-todolist'),
@@ -122,9 +128,11 @@ urlpatterns = [
     path('tos/', TemplateView.as_view(template_name='dissemin/tos.html'), name='tos'),
     # AJAX
     path('ajax/change_publisher_status/', change_publisher_status, name='ajax_change_publisher_status'),
-    path('ajax/claim-paper/', claimPaper, name='ajax-claimPaper'),
-    path('ajax/unclaim-paper/', unclaimPaper, name='ajax-unclaimPaper'),
+    path('ajax/get-metadata.form/', get_metadata_form, name='ajax-get-metadata-form'),
+    path('ajax/paper-claim/', claimPaper, name='ajax-claimPaper'),
+    path('ajax/paper-unclaim/', unclaimPaper, name='ajax-unclaimPaper'),
     path('ajax/researcher/<int:pk>/update/', refetch_researcher, name='refetch-researcher'),
+    path('ajax/submit-deposit/<int:pk>/', submitDeposit, name='ajax-submit-deposit'),
     path('ajax/todolist-add/', todo_list_add, name='ajax-todolist-add'),
     path('ajax/todolist-remove/', todo_list_remove, name='ajax-todolist-remove'),
     path('faq', TemplateView.as_view(template_name='dissemin/faq.html'), name='faq'),
@@ -139,7 +147,6 @@ urlpatterns = [
     # Apps
     path('ajax-upload/', include('upload.urls')),
     path('', include('papers.urls')),
-    path('', include('deposit.urls')),
     path('', include('notification.urls')),
     path('jsreverse/', django_js_reverse.views.urls_js, name='js_reverse'),
     # Social auth

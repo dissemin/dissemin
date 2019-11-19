@@ -14,7 +14,7 @@
         </div>
         {% if publisher.preprint != "cannot" %}
             <div class="col-auto">
-                <a href="{% url 'upload_paper' paper.pk %}?type=preprint" class="btn btn-primary btn-sm"><span class="oi oi-data-transfer-upload" aria-hidden="true"></span> {% trans "Upload" %}</a>
+                <a href="{% url 'upload-paper' paper.pk %}?type=preprint" class="btn btn-primary btn-sm"><span class="oi oi-data-transfer-upload" aria-hidden="true"></span> {% trans "Upload" %}</a>
             </div>
         {% endif %}
     </div>
@@ -29,7 +29,7 @@
         </div>
         {% if publisher.postprint != "cannot" %}
             <div class="col-auto">
-                <a href="{% url 'upload_paper' paper.pk %}?type=postprint" class="btn btn-primary btn-sm"><span class="oi oi-data-transfer-upload" aria-hidden="true"></span> {% trans "Upload" %}</a>
+                <a href="{% url 'upload-paper' paper.pk %}?type=postprint" class="btn btn-primary btn-sm"><span class="oi oi-data-transfer-upload" aria-hidden="true"></span> {% trans "Upload" %}</a>
             </div>
         {% endif %}
     </div>
@@ -44,7 +44,7 @@
         </div>
         {% if publisher.pdfversion != "cannot" %}
             <div class="col-auto">
-                <a href="{% url 'upload_paper' paper.pk %}?type=pdfversion" class="btn btn-primary btn-sm"><span class="oi oi-data-transfer-upload" aria-hidden="true"></span> {% trans "Upload" %}</a>
+                <a href="{% url 'upload-paper' paper.pk %}?type=pdfversion" class="btn btn-primary btn-sm"><span class="oi oi-data-transfer-upload" aria-hidden="true"></span> {% trans "Upload" %}</a>
             </div>
         {% endif %}
     </div>

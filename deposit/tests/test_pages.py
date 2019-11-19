@@ -22,8 +22,8 @@ class TestDepositPages():
 
     def test_start_deposit_unauthenticated(self, book_god_of_the_labyrinth, check_status):
         paper = book_god_of_the_labyrinth
-        check_status(302, 'upload_paper', kwargs={'pk': paper.pk})
+        check_status(302, 'upload-paper', kwargs={'pk': paper.pk})
 
     def test_start_deposit_authenticated(self, book_god_of_the_labyrinth, authenticated_client, check_page):
         paper = book_god_of_the_labyrinth
-        check_page(200, 'upload_paper', kwargs={'pk': paper.pk}, client=authenticated_client)
+        check_page(200, 'upload-paper', kwargs={'pk': paper.pk}, client=authenticated_client)
