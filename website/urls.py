@@ -135,9 +135,6 @@ urlpatterns = [
     path('ajax/submit-deposit/<int:pk>/', submitDeposit, name='ajax-submit-deposit'),
     path('ajax/todolist-add/', todo_list_add, name='ajax-todolist-add'),
     path('ajax/todolist-remove/', todo_list_remove, name='ajax-todolist-remove'),
-    path('faq', TemplateView.as_view(template_name='dissemin/faq.html'), name='faq'),
-    path('sources', TemplateView.as_view(template_name='dissemin/sources.html'), name='sources'),
-    path('tos', TemplateView.as_view(template_name='dissemin/tos.html'), name='tos'),
     # Use related pages
     path('my-deposits', MyDepositsView.as_view(), name='my-deposits'),
     path('preferences/global/', GlobalPreferencesView.as_view(), name='preferences-global'),
