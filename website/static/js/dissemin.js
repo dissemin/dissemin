@@ -623,7 +623,6 @@ $(function() {
                 $("#uploadFileId").val(response['file_id'])
             },
             uploadprogress: function(file, progress, bytesSent) {
-                console.log(progress);
                 $("#uploadProgressBar").css("width", progress + "%")
             },
             url : Urls['ajax-uploadFulltext']()
@@ -634,7 +633,6 @@ $(function() {
 /* If the user uploads via URL, send ajax with url and show some ongoing signs */
 function fileUpload() {
     var data = $("#urlForm").serialize();
-    console.log($("#uploadUrl").val());
     var url = Urls['ajax-downloadUrl']();
 
     // Show the spinner
@@ -681,6 +679,7 @@ function fileUpload() {
 $(function() {
     $("#changeFile").click(function(evt) {
         evt.preventDefault();
+        $("#uploadFileId").val("");
         $("#uploadedFileSummary").addClass("d-none");
         $("#fileUploadRow").removeClass("d-none");
     });
@@ -774,7 +773,7 @@ function depositPaper() {
     var no_file = gettext("You have not selected a file for upload.")
 
     // If no file id is present, we say, that a file is missing. Rest of the form is covered by browser validation
-    if (!data['file_id']) {
+    if (!$("#uploadFileId").val()) {
         $("#errorGeneral").append(
             makeAlert(no_file)
         );
@@ -793,7 +792,7 @@ function depositPaper() {
         var upload_id = response['upload_id'];
         var paper_slug = $("#depositForm").attr("data-paper-slug");
 
-        window.location.replace(Urls['paper'](paper_pk, paper_slug) + "deposit=" + upload_id);
+        window.location.replace(Urls['paper'](paper_pk, paper_slug) + "?deposit=" + upload_id);
     })
     .fail(function (xhr) {
         var error_text = "";
