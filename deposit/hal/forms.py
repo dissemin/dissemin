@@ -52,7 +52,7 @@ class HALForm(BaseMetadataForm):
         required=True,
         label=_('Affiliation'),
         widget=Select2(
-            data_view='autocomplete_affiliations',
+            data_view='autocomplete-hal-affiliations',
             attrs={
                 'style': 'width: 100%',
             },

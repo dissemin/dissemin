@@ -37,6 +37,7 @@ from django.shortcuts import render
 from django.views.generic.base import TemplateView
 from django.views.i18n import JavaScriptCatalog
 
+from autocomplete.views import affiliation_autocomplete
 from deposit.views import MyDepositsView
 from deposit.views import GlobalPreferencesView
 from deposit.views import RepositoryPreferencesView
@@ -110,6 +111,8 @@ urlpatterns = [
     # Researcher realted pages
     path('r/<int:researcher>/<slug:slug>/', ResearcherView.as_view(), name='researcher'),
     re_path(r'^(?P<orcid>[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{3}[X0-9])/$', ResearcherView.as_view(), name='researcher-by-orcid'),
+    # Upload related pages
+    path('autocomplete/hal/affiliation/', affiliation_autocomplete, name='autocomplete-hal-affiliations'),
     # User related pages
     path('my-profile/', MyProfileView.as_view(), name='my-profile'),
     path('my-todolist/', MyTodoListView.as_view(), name='my-todolist'),
@@ -138,7 +141,6 @@ urlpatterns = [
     path('', include('papers.urls')),
     path('', include('deposit.urls')),
     path('', include('notification.urls')),
-    path('', include('autocomplete.urls')),
     path('jsreverse/', django_js_reverse.views.urls_js, name='js_reverse'),
     # Social auth
     path('accounts/login/', TemplateView.as_view(template_name='dissemin/login.html'), name='account-login'),
