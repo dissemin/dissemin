@@ -33,7 +33,7 @@ from papers.models import Paper
 # TODO TO BE TESTED
 # urlpatterns = patterns('',
 ##    url(r'^annotate-paper-(?P<pk>\d+)-(?P<status>\d+)$', annotatePaper, name='ajax-annotatePaper'),
-##    url(r'^delete-researcher-(?P<pk>\d+)$', deleteResearcher, name='ajax-deleteResearcher'),
+##    url(r'^delete-researcher-(?P<pk>\d+)$', deleteResearcher, name='ajax-delete-researcher'),
 #    url(r'^add-researcher$', addResearcher, name='ajax-addResearcher'),
 ##    url(r'^harvesting-status-(?P<pk>\d+)$', harvestingStatus, name='ajax-harvestingStatus'),
 #    url(r'^wait-for-consolidated-field$', waitForConsolidatedField, name='ajax-waitForConsolidatedField'),

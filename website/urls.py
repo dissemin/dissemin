@@ -47,13 +47,22 @@ from deposit.views import start_view
 from deposit.views import submitDeposit
 from papers.ajax import claimPaper
 from papers.ajax import unclaimPaper
+from papers.ajax import deleteResearcher
 from papers.ajax import todo_list_add
 from papers.ajax import todo_list_remove
+from papers.ajax import waitForConsolidatedField
+from papers.api import api_paper_doi
+from papers.api import api_paper_pk
+from papers.api import api_paper_query
+from papers.api import PaperSearchAPI
+from papers.api import ResearcherAPI
 from papers.views import AdvancedPaperSearchView
 from papers.views import MyProfileView
 from papers.views import MyTodoListView
 from papers.views import PaperSearchView
+from papers.views import PaperView
 from papers.views import ResearcherView
+from papers.views import redirect_by_doi
 from papers.views import refetch_researcher
 from publishers.ajax import change_publisher_status
 from publishers.views import PublisherView
@@ -107,8 +116,11 @@ urlpatterns = [
     # Start page
     path('', StartPageView.as_view(), name='start-page'),
     # Paper related pages
-    path('search/', PaperSearchView.as_view(), name='search'),
     path('advanced-search/', AdvancedPaperSearchView.as_view(), name='advanced-search'),
+    path('p/<int:pk>/<slug:slug>/', PaperView.as_view(), name='paper'),
+    re_path(r'^(?P<doi>10\..*)', PaperView.as_view(), name='paper-doi'),
+    re_path(r'p/direct/(?P<doi>10\..*)', redirect_by_doi, name='paper-redirect-doi'),
+    path('search/', PaperSearchView.as_view(), name='search'),
     # Publisher related pages
     path('publishers/', PublishersView.as_view(), name='publishers'),
     path('b/<int:pk>/<slug:slug>/', PublisherView.as_view(), name='publisher'),
@@ -126,7 +138,14 @@ urlpatterns = [
     path('faq/', TemplateView.as_view(template_name='dissemin/faq.html'), name='faq'),
     path('sources/', TemplateView.as_view(template_name='dissemin/sources.html'), name='sources'),
     path('tos/', TemplateView.as_view(template_name='dissemin/tos.html'), name='tos'),
+    # API
+    path('api/p/<int:pk>', api_paper_pk, name='api-paper-pk'),
+    path('api/r/<int:researcher>/<slug:slug>/', ResearcherAPI.as_view(), name='api-researcher-id'),
+    path('api/query/', api_paper_query, name='api-paper-query'),
+    path('api/search/', PaperSearchAPI.as_view(), name='api-paper-search'),
+    re_path(r'^api/(?P<doi>10\..*)$', api_paper_doi, name='api-paper-doi'),
     # AJAX
+    path('ajax/delete-researcher/<int:pk>/', deleteResearcher, name='ajax-delete-researcher'),
     path('ajax/change_publisher_status/', change_publisher_status, name='ajax_change_publisher_status'),
     path('ajax/get-metadata.form/', get_metadata_form, name='ajax-get-metadata-form'),
     path('ajax/paper-claim/', claimPaper, name='ajax-claimPaper'),
@@ -135,6 +154,7 @@ urlpatterns = [
     path('ajax/submit-deposit/<int:pk>/', submitDeposit, name='ajax-submit-deposit'),
     path('ajax/todolist-add/', todo_list_add, name='ajax-todolist-add'),
     path('ajax/todolist-remove/', todo_list_remove, name='ajax-todolist-remove'),
+    path('ajax/wait-for-consolidated-field/', waitForConsolidatedField, name='ajax-waitForConsolidatedField'),
     # Use related pages
     path('my-deposits', MyDepositsView.as_view(), name='my-deposits'),
     path('preferences/global/', GlobalPreferencesView.as_view(), name='preferences-global'),
@@ -143,7 +163,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # Apps
     path('ajax-upload/', include('upload.urls')),
-    path('', include('papers.urls')),
     # We keep notification urls, because the app is rather opaque
     path('', include('notification.urls')),
     path('jsreverse/', django_js_reverse.views.urls_js, name='js_reverse'),
