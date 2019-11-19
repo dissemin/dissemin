@@ -40,7 +40,7 @@
                 {% comment %}
                 {% cache 60000 paper_list paper.pk LANGUAGE_CODE researcher_id %}
                 {% endcomment %}
-                    <h4><a href="{{ paper.url }}" data-pk="{{ paper.id }}" data-params="{csrfmiddlewaretoken:'{{ csrf_token }}'">{% autoescape off %}{{ paper.title }}{% endautoescape %}</a></h4>
+                    <p class="h4"><a href="{{ paper.url }}" data-pk="{{ paper.id }}" data-params="{csrfmiddlewaretoken:'{{ csrf_token }}'">{% autoescape off %}{{ paper.title }}{% endautoescape %}</a></p>
                 {% comment %}
                 {% endcache %}
                 {% endcomment %}
