@@ -144,6 +144,7 @@ urlpatterns = [
     # Apps
     path('ajax-upload/', include('upload.urls')),
     path('', include('papers.urls')),
+    # We keep notification urls, because the app is rather opaque
     path('', include('notification.urls')),
     path('jsreverse/', django_js_reverse.views.urls_js, name='js_reverse'),
     # Social auth
