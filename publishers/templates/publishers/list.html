@@ -12,7 +12,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12 col-md-4 pb-3">
-                <h3 class="border-bottom">{% trans "Statistics" %}</h3>
+                <h3 class="h-border">{% trans "Statistics" %}</h3>
 
                 <p>
                     {% blocktrans trimmed count counter=nb_results %}
@@ -22,7 +22,7 @@
                     {% endblocktrans %}
                 </p>
 
-                <h3 class="border-bottom">{% trans "Search" %}</h3>
+                <h3 class="h-border">{% trans "Search" %}</h3>
                 <form method="get" action="{% url 'publishers' %}">
                     {{ form|crispy }}
                     <div class="form-group d-flex justify-content-center">
@@ -30,7 +30,7 @@
                     </div>
                 </form>
 
-                <h3 class="border-bottom">{% trans "Else" %}</h3>
+                <h3 class="h-border">{% trans "Else" %}</h3>
                 <p>{% trans "Data provided by" %}</p>
                 <div class="row justify-content-center">
                     <a class="col-8" href="http://www.sherpa.ac.uk/romeo/">
@@ -40,7 +40,7 @@
 
             </div>
             <div class="col-12 col-md-8 order-md-first">
-                <h1 class="border-bottom">{% trans "Publishers" %}</h1>
+                <h1 class="h-border">{% trans "Publishers" %}</h1>
 
                 {% if paginator.num_pages > 1 %}
                     <nav class="pt-2">{% bootstrap_paginate page_obj range=8 extra_pagination_classes="justify-content-center"%}</nav>

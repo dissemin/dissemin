@@ -20,7 +20,7 @@
                 {% block additional_information %}
                 {% endblock additional_information %}
                 <!-- Statistics -->
-                <h3 class="border-bottom">{% trans "Statistics" %}</h3>
+                <h3 class="h-border">{% trans "Statistics" %}</h3>
                 <p id="nbPapersFound">
                     {% blocktrans trimmed with formattedCounter=nb_results|intcomma count counter=nb_results|default:0 %}
                         {{ formattedCounter }} paper found
@@ -39,7 +39,7 @@
 
 
                     <!-- Refine -->
-                    <h3 class="border-bottom">{% trans "Refine" %}</h3>
+                    <h3 class="h-border">{% trans "Refine" %}</h3>
 
                     <!-- Title -->
                     <div class="form-group">
@@ -117,7 +117,7 @@
                     {% endcomment %}
 
                     {% if request.user.is_superuser %}
-                        <h4 class="border-bottom">{% trans 'Refine for superusers' %}</h4>
+                        <h4 class="h-border">{% trans 'Refine for superusers' %}</h4>
                         <div class="form-group">
                             <label for="{{ form.visible.id_for_label }}">{% trans "By visibility" %}</label>
                             {% render_field form.visible class="form-control" %}
@@ -144,7 +144,7 @@
                 </form>
 
                 <!-- Tools -->
-                <h3 class="border-bottom">{% trans "Tools" %}</h3>
+                <h3 class="h-border">{% trans "Tools" %}</h3>
 
                 <!-- Export as citations -->
                 <p><a href="#" data-toggle="modal" data-target="#exportCitationModal">{% trans "Export citations for current page" %}</a></p>
@@ -152,7 +152,7 @@
 
             <!-- Content for results -->
             <div class="col-12 col-md-8 order-md-first">
-                <h2 class="border-bottom pb-3">{{ search_description }}</h2>
+                <h2 class="h-border pb-3">{{ search_description }}</h2>
 
                 <div class="justify-content-center d-none" id="paperSearchWaitingArea">
                     <div>

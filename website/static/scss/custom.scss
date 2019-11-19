@@ -71,3 +71,22 @@ $border-width-customs: ("1": $border-width-custom-1, "2": $border-width-custom-2
 .btn-orcid:hover, .btn-orcid:focus {
   color: $light;
 }
+
+/* To make our bottom-border life under headings easier, we define suitable classes */
+
+h1.h-border, h2.h-border {
+    @extend .border-bottom-3;
+    @extend .border-primary;
+    @extend .pb-1;
+}
+h3.h-border, h4.h-border {
+    @extend .border-bottom-2;
+    @extend .border-primary;
+    @extend .pb-1;
+}
+
+h5.h-border, h6.h-border {
+    @extend .border-bottom;
+    @extend .border-primary;
+    @extend .pb-1;
+}

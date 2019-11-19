@@ -57,7 +57,7 @@
                 {% include "papers/paper_panel.html" %}
             </div>
             <div class="col-12 col-md-8 order-md-first">
-                <h2 class="border-bottom">{% trans "Depositing" %} &quot;{{ paper.title }}&quot;</h2>
+                <h2 class="h-border">{% trans "Depositing" %} &quot;{{ paper.title }}&quot;</h2>
                 <!-- Terms of Service reminder -->
                 <p>
                     {% url 'tos' as tosurl %}
@@ -86,11 +86,11 @@
                     </div>
                 {% endif %}
 
-                <h4 class="border-bottom">{% trans "Document" %}</h4>
+                <h4 class="h-border">{% trans "Document" %}</h4>
                 <div id="errorMissingFile"></div>
                 {% include "upload/widget.html" %}
 
-                <h4 class="border-bottom">{% trans "Options" %}</h4>
+                <h4 class="h-border">{% trans "Options" %}</h4>
 
                 <!-- Huge form -->
                 <form method="POST" action="javascript:depositPaper()" id="depositForm" data-paper-pk="{{ paper.pk }}" data-paper-slug="{{ paper.slug }}">

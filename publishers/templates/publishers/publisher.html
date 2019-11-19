@@ -14,7 +14,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12 col-md-4 pb-3">
-                <h3 class="border-bottom">{% trans "Publisher" %}</h3>
+                <h3 class="h-border">{% trans "Publisher" %}</h3>
                 <p class="font-weight-bold">{{ publisher.name }}</p>
                 {% if publisher.url %}
                 <p>
@@ -28,7 +28,7 @@
                     {{ publisher.oa_status|explain_oa_status}}
                 {% endif %}
 
-                <h3 class="border-bottom">{% trans "Else" %}</h3>
+                <h3 class="h-border">{% trans "Else" %}</h3>
                 <p>{% trans "Data provided by" %}</p>
                 <div class="row justify-content-center">
                     <a class="col-8" href="http://www.sherpa.ac.uk/romeo/">
@@ -65,10 +65,10 @@
 
             </div>
             <div class="col-12 col-md-8 order-md-first">
-                <h1 class="border-bottom">{{ publisher.name }}</h1>
+                <h1 class="h-border">{{ publisher.name }}</h1>
 
                 <!-- Policies -->
-                <h2 class="border-bottom">{% trans "Green open access summary" %}</h2>
+                <h2 class="h-border">{% trans "Green open access summary" %}</h2>
                 <p>
                     {% blocktrans trimmed with publisher_name=publisher.name %}
                         This is a short summary of the green open access policy of {{ publisher_name }}.
@@ -78,7 +78,7 @@
 
                 <!-- Conditions -->
                 {% if publisher.has_conditions %}
-                    <h2 class="border-bottom mt-2">{% trans "Conditions" %}</h2>
+                    <h2 class="h-border mt-2">{% trans "Conditions" %}</h2>
                     <ul>
                         {% for condition in publisher.publishercondition_set.all %}
                             <li>{{ condition|striptags }}</li>
@@ -88,7 +88,7 @@
 
                 <!-- Policy details -->
                 {% if publisher.has_copyrightlinks %}
-                    <h2 class="border-bottom">{% trans "Policy details" %}</h2>
+                    <h2 class="h-border">{% trans "Policy details" %}</h2>
                     <ul>
                         {% for link in publisher.publishercopyrightlink_set.all %}
                             <li><a href="{{ link.url }}">{{ link.text }}</a></li>

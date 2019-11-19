@@ -31,7 +31,7 @@
                 {% include "papers/paper_panel.html" %}
             </div>
             <div class="col-12 col-md-8 order-md-first">
-                <h2 class="border-bottom">{{ paper.title }}</h2>
+                <h2 class="h-border">{{ paper.title }}</h2>
 
                 <!-- Doctype and year -->
                 {% if paper.doctype != "other" %}
@@ -155,7 +155,7 @@
 
                 <!-- Abstract (if we have one ) -->
                 {% if paper.abstract %}
-                <h4 class="border-bottom">{% trans "Abstract" %}</h4>
+                <h4 class="h-border">{% trans "Abstract" %}</h4>
 
                 <div class="container mb-3">
                     <p style="text-align: justify;">
