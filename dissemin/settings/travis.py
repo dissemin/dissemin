@@ -67,7 +67,13 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 urllib3.contrib.pyopenssl.inject_into_urllib3()
 
+# Some settings for SASS
 # Set to tmp_static, so that test on CI find compiled static files
 SASS_PROCESSOR_ROOT = os.path.join(BASE_DIR, 'tmp_static')
+# Enable SASS processor to on the fly compile scss; mainly to have same test for dev and CI
 SASS_PROCESSOR_ENABLED = True
+# Output should be readable
 SASS_OUTPUT_STYLE = 'nested'
+# Static root must be set to have scss compile correctly
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
