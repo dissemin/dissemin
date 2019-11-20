@@ -93,6 +93,7 @@ class DarkArchiveProtocol(RepositoryProtocol):
             'doctype' : self.paper.doctype,
             'doi' : self.publication.doi,
             'eissn' : self._get_eissn(),
+            'embargo' : form.cleaned_data.get('embargo', None),
             'issn' : self._get_issn(),
             'issue' : self.publication.issue,
             'journal' : self.publication.full_journal_title(),

@@ -60,6 +60,8 @@ class TestDarkArchiveProtocol(MetaTestProtocol):
         else:
             data['abstract'] = upload_data['abstract']
 
+        data['embargo'] = upload_data.get('embargo', None)
+
         l = License.objects.get(uri="https://creativecommons.org/licenses/by/4.0/")
         lc = LicenseChooser.objects.create(
             license=l,
@@ -168,7 +170,7 @@ class TestDarkArchiveProtocol(MetaTestProtocol):
         assert l.get('transmit_id') == transmit_id
 
 
-    def test_get_metadata(self, upload_data, license_chooser, depositing_user):
+    def test_get_metadata(self, upload_data, license_chooser, embargo, depositing_user):
         """
         Test if the metadata is correctly generated
         """
@@ -185,12 +187,15 @@ class TestDarkArchiveProtocol(MetaTestProtocol):
         if license_chooser:
             data['license'] = license_chooser.pk
 
+        if embargo is not 'none':
+            data['embargo'] = upload_data.get('embargo', None)
+
         form = self.protocol.form_class(data=data)
         form.is_valid()
 
         md = self.protocol._get_metadata(form)
 
-        md_fields = ['abstract', 'authors', 'date', 'depositor', 'doctype', 'doi', 'eissn', 'issn', 'issue', 'journal', 'page', 'publisher', 'title', 'volume', ]
+        md_fields = ['abstract', 'authors', 'date', 'depositor', 'doctype', 'doi', 'eissn', 'embargo', 'issn', 'issue', 'journal', 'page', 'publisher', 'title', 'volume', ]
 
         assert all(k in md for k in md_fields) == True
 
