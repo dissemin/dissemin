@@ -87,7 +87,7 @@ class TestDarkArchiveProtocol(MetaTestProtocol):
 
 
     @pytest.mark.parametrize('authors_list', [author_one, author_one + author_two])
-    def test_get_authors_single_author(self, authors_list):
+    def test_get_authors(self, authors_list):
         """
         Tests if authors are generated accordingly
         """
