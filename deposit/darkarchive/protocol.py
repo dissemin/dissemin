@@ -1,3 +1,4 @@
+from deposit.darkarchive.forms import DarkArchiveForm
 from deposit.protocol import RepositoryProtocol
 
 
@@ -5,6 +6,9 @@ class DarkArchiveProtocol(RepositoryProtocol):
     """
     A protocol that does does directly sends data to a repository, but to an intermediata database
     """
+
+    # The class of the form the protocol uses
+    form_class = DarkArchiveForm
 
     def __str__(self):
         """
@@ -86,6 +90,7 @@ class DarkArchiveProtocol(RepositoryProtocol):
             'depositor' : {
                 'first' : self.user.first_name,
                 'last' : self.user.last_name,
+                'email' : form.cleaned_data.get('email', None),
                 'orcid' : self._get_depositor_orcid(),
                 'is_contributor' : self.paper.is_owned_by(self.user, flexible=True),
             },

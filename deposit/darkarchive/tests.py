@@ -55,6 +55,8 @@ class TestDarkArchiveProtocol(MetaTestProtocol):
 
         # Set form data
         data = dict()
+        data['email'] = user_leibniz.email
+
         if upload_data['oairecord'].description is not None:
             data['abstract'] = upload_data['oairecord'].description
         else:
@@ -103,6 +105,24 @@ class TestDarkArchiveProtocol(MetaTestProtocol):
             assert author['first'] == authors_list[idx]['name']['first']
             assert author['last'] == authors_list[idx]['name']['last']
             assert author['orcid'] == authors_list[idx]['orcid']
+
+
+    def test_get_bound_form(self, book_god_of_the_labyrinth, empty_user_preferences, abstract_required, license_chooser):
+        self.protocol.paper = book_god_of_the_labyrinth
+        self.protocol.user = empty_user_preferences.user
+        data = {
+            'paper_pk' : book_god_of_the_labyrinth.pk,
+            'email' : 'spam@ham.co.uk',
+        }
+        if abstract_required:
+            data['abstract'] = 'Simple abstract'
+        if license_chooser:
+            data['license'] = license_chooser.pk
+
+        form = self.protocol.get_bound_form(data=data)
+        if not form.is_valid():
+            print(form.errors)
+            raise AssertionError("Form not valid")
 
 
     @pytest.mark.parametrize('eissn', [None, '2343-2345'])
@@ -189,6 +209,8 @@ class TestDarkArchiveProtocol(MetaTestProtocol):
 
         if embargo is not 'none':
             data['embargo'] = upload_data.get('embargo', None)
+
+        data['email'] = depositing_user.email
 
         form = self.protocol.form_class(data=data)
         form.is_valid()
