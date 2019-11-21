@@ -33,15 +33,17 @@ from deposit.protocol import DepositError
 from deposit.protocol import DepositResult
 from deposit.protocol import RepositoryProtocol
 from deposit.registry import protocol_registry
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.core.files.base import ContentFile
 from django.forms import Form
-from django.test.utils import override_settings
 from django.urls import reverse
 from papers.models import OaiSource
 from papers.models import OaiRecord
 from papers.models import Paper
 from deposit.tasks import refresh_deposit_statuses
+from upload.models import UploadedPDF
 
 
 class MetaTestProtocol():
@@ -442,7 +444,6 @@ class ProtocolTest(django.test.TestCase):
     def __init__(self, *args, **kwargs):
         super(ProtocolTest, self).__init__(*args, **kwargs)
 
-    @override_settings(MEDIA_ROOT='mediatest/')
     def setUp(self):
         if type(self) is ProtocolTest:
             raise unittest.SkipTest("Base test")
@@ -454,8 +455,15 @@ class ProtocolTest(django.test.TestCase):
         self.username = 'mydepositinguser'
         self.password = 'supersecret'
         self.user = User.objects.create_user(username=self.username, email="my@email.com", password=self.password)
-        self.testdir = os.path.dirname(os.path.abspath(__file__))
-        self.pdfpath = os.path.join(self.testdir, 'data/blank.pdf')
+        path = os.path.join(settings.BASE_DIR, 'upload', 'tests', 'data', 'blank.pdf')
+        with open(path, 'rb') as f:
+            blank_pdf = f.read()
+
+        self.pdf = UploadedPDF.objects.create(
+            user=self.user,
+        )
+        self.pdf.file.save('blank.pdf', ContentFile(blank_pdf))
+
 
     def setUpForProtocol(self, protocol_class, repository):
 
@@ -522,7 +530,7 @@ class ProtocolTest(django.test.TestCase):
         if not form.is_valid():
             print(form.errors)
         self.assertTrue(form.is_valid())
-        pdf = self.pdfpath
+        pdf = self.pdf
         deposit_result = self.proto.submit_deposit_wrapper(pdf,
                                                            form, dry_run=dry_run)
         self.assertIsInstance(deposit_result, DepositResult)

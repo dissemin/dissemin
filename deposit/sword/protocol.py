@@ -151,7 +151,7 @@ class SWORDMETSProtocol(RepositoryProtocol):
         """
         s = BytesIO()
         with ZipFile(s, 'w') as zip_file:
-            zip_file.write(pdf, 'document.pdf')
+            zip_file.write(pdf.absolute_path, 'document.pdf')
             zip_file.writestr('mets.xml', mets)
         return s
 
@@ -262,7 +262,7 @@ class SWORDMETSProtocol(RepositoryProtocol):
         """
         Submit paper to the repository. This is a wrapper for the subclasses and calls some protocol specific functions. It creates the METS container and deposits.
 
-        :param pdf: Filename to dhe PDF file to submit
+        :param pdf: UploadedPDF object
         :param form: The form returned by get_form and completed by the user
 
         :returns: DepositResult object

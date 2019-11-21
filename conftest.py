@@ -223,7 +223,7 @@ def uploaded_pdf(user_leibniz, blank_pdf):
     pdf = UploadedPDF.objects.create(
         user=user_leibniz,
     )
-    pdf.file.save('spam.pdf', ContentFile(blank_pdf))
+    pdf.file.save('blank.pdf', ContentFile(blank_pdf))
     return pdf
 
 """

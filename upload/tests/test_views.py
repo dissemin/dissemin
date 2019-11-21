@@ -52,7 +52,7 @@ class TestFileDownload():
         """
         If everything is fine, we expect 200 and a pdf
         """
-        response = dissemin_base_client.get(uploaded_pdf.get_object_url())
+        response = dissemin_base_client.get(uploaded_pdf.get_absolute_url())
         assert response.status_code == 200
         assert response.as_attachment == True
         assert response._headers['content-type'][0] == "Content-Type"

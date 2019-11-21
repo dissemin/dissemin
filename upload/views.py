@@ -228,7 +228,3 @@ class FileDownloadView(View):
         path = os.path.join(settings.MEDIA_ROOT, pdf.file.name)
 
         return FileResponse(open(path, 'rb'), as_attachment=True)
-
-        
-
-

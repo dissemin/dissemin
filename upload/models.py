@@ -18,8 +18,11 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #
 
+import os
+
 from secrets import token_urlsafe
 
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
@@ -60,8 +63,17 @@ class UploadedPDF(models.Model):
     class Meta:
         verbose_name = 'Uploaded PDF'
 
-    def get_object_url(self):
+    def get_absolute_url(self):
         """
         Returns the url to object
+        :returns: object url
         """
         return reverse('file-download', args=[self.pk, self.token])
+
+    @property
+    def absolute_path(self):
+        """
+        Returns the full path to the file as property
+        :returns: full path to file
+        """
+        return os.path.join(settings.MEDIA_ROOT, self.file.name)
