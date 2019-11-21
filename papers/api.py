@@ -22,7 +22,6 @@
 
 import json
 
-from django.conf.urls import url
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
@@ -224,13 +223,3 @@ def api_paper_query(request):
         return {'status': 'ok', 'paper': model_paper.json()}
     except Paper.DoesNotExist:
         return {'status': 'not found'}, 404
-
-
-urlpatterns = [
-    url(r'^p/(?P<pk>\d+)$', api_paper_pk, name='api-paper-pk'),
-    url(r'^r/(?P<researcher>\d+)/(?P<slug>[\w-]*)$', ResearcherAPI.as_view(),
-        name='api-researcher-id'),
-    url(r'^(?P<doi>10\..*)$', api_paper_doi, name='api-paper-doi'),
-    url(r'^query/?$', api_paper_query, name='api-paper-query'),
-    url(r'^search/?$', PaperSearchAPI.as_view(), name='api-paper-search'),
-]

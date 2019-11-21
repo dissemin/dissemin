@@ -25,7 +25,6 @@ from djgeojson.views import GeoJSONLayerView
 from functools import wraps
 from jsonview.decorators import json_view
 
-from django.conf.urls import url
 from django.contrib.auth.decorators import user_passes_test
 from django.core.exceptions import MultipleObjectsReturned
 from django.core.exceptions import ObjectDoesNotExist
@@ -332,20 +331,3 @@ class InstitutionsMapView(GeoJSONLayerView):
 
     def get_queryset(self):
         return Institution.objects.filter(coords__isnull=False)
-
-urlpatterns = [
-    #    url(r'^annotate-paper-(?P<pk>\d+)-(?P<status>\d+)$', annotatePaper, name='ajax-annotatePaper'),
-    url(r'^delete-researcher-(?P<pk>\d+)$',
-        deleteResearcher, name='ajax-deleteResearcher'),
-    #    url(r'^change-department$', changeDepartment, name='ajax-changeDepartment'),
-    #    url(r'^change-paper$', changePaper, name='ajax-changePaper'),
-    #    url(r'^change-researcher$', changeResearcher, name='ajax-changeResearcher'),
-    #    url(r'^change-author$', changeAuthor, name='ajax-changeAuthor'),
-    #    url(r'^harvesting-status-(?P<pk>\d+)$', harvestingStatus, name='ajax-harvestingStatus'),
-    url(r'^wait-for-consolidated-field$', waitForConsolidatedField,
-        name='ajax-waitForConsolidatedField'),
-    url(r'^set-researcher-department$', setResearcherDepartment,
-        name='ajax-setResearcherDepartment'),
-    url(r'^institutions.geojson', InstitutionsMapView.as_view(),
-        name='ajax-institutions-geojson'),
-]

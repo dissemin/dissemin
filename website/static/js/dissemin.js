@@ -722,7 +722,7 @@ $(function() {
 	            });
 
             },
-            url : Urls['ajax-getMetadataForm']()
+            url : Urls['ajax-get-metadata-form']()
         });
     });
 
@@ -786,7 +786,7 @@ function depositPaper() {
 
     $.post({
         data : data,
-        url : Urls['ajax-submitDeposit'](paper_pk)
+        url : Urls['ajax-submit-deposit'](paper_pk)
     })
     .done(function (response) {
         var upload_id = response['upload_id'];

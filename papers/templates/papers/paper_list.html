@@ -51,7 +51,7 @@
                 {% if paper.pdf_url %}
                     <a href="{{ paper.pdf_url }}" class="btn btn-outline-secondary btn-sm" rel="nofollow"><span class="oi oi-data-transfer-download" aria-hidden="true"></span> {% trans "Download" %}</a> <span class="text-black-50">{{ paper.pdf_url|domain }}</span>
                 {% else %}
-                    <a href="{% url 'upload_paper' paper.pk %}" class="btn btn-outline-secondary btn-sm" rel="nofollow"><span class="oi oi-data-transfer-upload"></span> {% trans "Upload" %}</a>
+                    <a href="{% url 'upload-paper' paper.pk %}" class="btn btn-outline-secondary btn-sm" rel="nofollow"><span class="oi oi-data-transfer-upload"></span> {% trans "Upload" %}</a>
                 {% endif %}
 
                 {% comment %}
