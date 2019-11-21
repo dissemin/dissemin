@@ -1,3 +1,5 @@
+from django.contrib.sites.models import Site
+
 from deposit.darkarchive.forms import DarkArchiveForm
 from deposit.protocol import RepositoryProtocol
 
@@ -56,6 +58,18 @@ class DarkArchiveProtocol(RepositoryProtocol):
             return self.publication.journal.essn
 
 
+    def _get_embargo(self, form):
+        """
+        Takes the embargo date from the form and returns it as isoformatted string or None
+        :param form: django form (BaseMetadataForm)
+        :returns: string
+        """
+        embargo = form.cleaned_data.get('embargo', None)
+        if embargo is not None:
+            embargo = embargo.isoformat()
+        return embargo
+
+
     def _get_issn(self):
         """
         Returns the issn if available or `None`
@@ -77,7 +91,7 @@ class DarkArchiveProtocol(RepositoryProtocol):
             return d
 
 
-    def _get_metadata(self, form):
+    def _get_metadata(self, form, pdf):
         """
         Creates metadata ready to be converted into JSON.
         Mainly we create a dictionary with some types as content that serialize well into JSON
@@ -98,7 +112,8 @@ class DarkArchiveProtocol(RepositoryProtocol):
             'doctype' : self.paper.doctype,
             'doi' : self.publication.doi,
             'eissn' : self._get_eissn(),
-            'embargo' : form.cleaned_data.get('embargo', None),
+            'embargo' : self._get_embargo(form),
+            'file_url' : 'https://{}{}'.format(Site.objects.get_current(), pdf.get_absolute_url()),
             'issn' : self._get_issn(),
             'issue' : self.publication.issue,
             'journal' : self.publication.full_journal_title(),

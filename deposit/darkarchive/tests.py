@@ -2,6 +2,7 @@ import json
 import os
 import pytest
 
+from django import forms
 
 from deposit.models import License
 from deposit.models import LicenseChooser
@@ -37,7 +38,7 @@ class TestDarkArchiveProtocol(MetaTestProtocol):
     """
 
     @pytest.mark.write_darkarchive_examples
-    def test_write_dark_archive_examples(self, db, upload_data, user_leibniz):
+    def test_write_dark_archive_examples(self, db, upload_data, user_leibniz, uploaded_pdf):
         """
         This is not really a test. It just outputs metadata examples that the protocol generates.
         Ususally this test is omitted, you can run it explicetely with "-m write_darkarchive_examples".
@@ -73,10 +74,10 @@ class TestDarkArchiveProtocol(MetaTestProtocol):
         licenses = LicenseChooser.objects.by_repository(repository=self.protocol.repository)
         data['license'] = lc.pk
 
-        form = self.protocol.form_class(licenses=licenses, data=data)
+        form = self.protocol.form_class(licenses=licenses, embargo='optional', data=data)
         form.is_valid()
 
-        md = self.protocol._get_metadata(form)
+        md = self.protocol._get_metadata(form, uploaded_pdf)
 
         f_path = os.path.join(BASE_DIR, 'doc', 'sphinx', 'examples', 'darkarchive')
         f_name = os.path.join(f_path, upload_data['load_name'] + '.json')
@@ -148,6 +149,24 @@ class TestDarkArchiveProtocol(MetaTestProtocol):
         assert self.protocol._get_eissn() == None
 
 
+    @pytest.mark.parametrize('value', [None, '2019-01-01'])
+    def test_get_embargo(self, value):
+        class test_form(forms.Form):
+            embargo = forms.DateField(
+                required=False
+            )
+
+        data = {
+            'embargo' : value
+        }
+        form = test_form(data=data)
+        valid = form.is_valid()
+        if not valid:
+            raise AssertionError("Form not valid")
+        assert self.protocol._get_embargo(form) == value
+
+
+
     @pytest.mark.parametrize('issn', [None, '2343-2345'])
     def test_get_issn(self, dummy_oairecord, dummy_journal, issn):
         """
@@ -190,7 +209,7 @@ class TestDarkArchiveProtocol(MetaTestProtocol):
         assert l.get('transmit_id') == transmit_id
 
 
-    def test_get_metadata(self, upload_data, license_chooser, embargo, depositing_user):
+    def test_get_metadata(self, upload_data, uploaded_pdf, license_chooser, embargo, depositing_user):
         """
         Test if the metadata is correctly generated
         """
@@ -204,22 +223,36 @@ class TestDarkArchiveProtocol(MetaTestProtocol):
         else:
             data['abstract'] = upload_data['abstract']
 
+        licenses = None
         if license_chooser:
             data['license'] = license_chooser.pk
+            licenses = LicenseChooser.objects.by_repository(repository=self.protocol.repository)
 
         if embargo is not 'none':
             data['embargo'] = upload_data.get('embargo', None)
+        if embargo == 'required':
+            data['embargo'] = '2019-10-10'
 
         data['email'] = depositing_user.email
 
-        form = self.protocol.form_class(data=data)
-        form.is_valid()
+        form = self.protocol.form_class(licenses=licenses, embargo=embargo, data=data)
+        valid = form.is_valid()
+        if not valid:
+            raise AssertionError("Form not valid")
 
-        md = self.protocol._get_metadata(form)
+        md = self.protocol._get_metadata(form, uploaded_pdf)
 
-        md_fields = ['abstract', 'authors', 'date', 'depositor', 'doctype', 'doi', 'eissn', 'embargo', 'issn', 'issue', 'journal', 'page', 'publisher', 'title', 'volume', ]
+        md_fields = ['abstract', 'authors', 'date', 'depositor', 'doctype', 'doi', 'eissn', 'embargo', 'file_url', 'issn', 'issue', 'journal', 'page', 'publisher', 'title', 'volume', ]
 
         assert all(k in md for k in md_fields) == True
+
+        # Assertion for some fields
+        if license_chooser:
+            assert md.get('license') != None
+        if embargo is 'optional':
+            assert md.get('embargo') == upload_data.get('embargo')
+        elif embargo is 'required':
+            assert md.get('embargo') == '2019-10-10'
 
 
     def test_str(self):
