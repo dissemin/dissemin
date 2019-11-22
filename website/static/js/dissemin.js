@@ -6,10 +6,10 @@
  * Miscellaneous
  * *** */
 
-/* On AJAX errors, we like to be informed via Sentry */
+/* On AJAX errors, we like to be informed via Sentry. If Sentry is not configured, we error to the console */
 $(document).ajaxError( function (event, xhr, ajaxSettings, thrownError) {
     try {
-        Sentry.captureMessage(thrownError || jqXHR.statusText, {
+        Sentry.captureMessage(thrownError || xhr.statusText, {
             extra: {
                 type: ajaxSettings.type,
                 url: ajaxSettings.url,
@@ -22,9 +22,9 @@ $(document).ajaxError( function (event, xhr, ajaxSettings, thrownError) {
     }
     catch (e)
     {
-        console.log(thrownError);
-        console.log(xhr.responseText);
-        console.log(ajaxSettings);
+        console.error(thrownError);
+        console.error(xhr.responseText);
+        console.error(ajaxSettings);
     }
 });
 
@@ -37,7 +37,7 @@ function csrfSafeMethod(method) {
 /* For certain requests like POST we need an csrf token. We insert it */
 $(document).ajaxSend( function(event, xhr, settings) {
     if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-        xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+        xhr.setRequestHeader("X-CSRFToken", getCookie("csrftoken"));
     }
 });
 
@@ -49,7 +49,7 @@ $(function () {
 /* Returns the current csrf token from the cookie. This is the recommend method by django: https://docs.djangoproject.com/en/2.2/ref/csrf/#ajax */
 function getCookie(name) {
     var cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
+    if (document.cookie && document.cookie !== "") {
         var cookies = document.cookie.split(';');
         for (var i = 0; i < cookies.length; i++) {
             var cookie = cookies[i].trim();
@@ -74,14 +74,14 @@ $(function() {
 });
 
 /* This is the ORCID Logout. Pass the orcid_base_domain as parameter */
-function orcidLogout (orcid_base_domain) {
-    $.ajax({ url: 'https://' + orcid_base_domaon + '/userStatus.json?logUserOut=true',
+function orcidLogout (orcidBaseDomain) {
+    $.ajax({ url: "https://" + orcidBaseDomain + "/userStatus.json?logUserOut=true",
         dataType: 'jsonp',
         success: function(result,status,xhr) {
-                    window.location.href = '{% url "account_logout" %}';
+                    window.location.href = Urls["account_logout"]();
                 },
         error: function (xhr, status, error) {
-                    window.location.href = '{% url "account_logout" %}';
+                    window.location.href = Urls["account_logout"]();
                 }
     })
 }
@@ -94,19 +94,19 @@ function orcidLogout (orcid_base_domain) {
 /* A paper can have many authors. This functions shows or hides all authors using flex and aria-hidden */
 $(function() {
     $("#showAllAuthors").click(function() {
-        $('#authorListInteresting').addClass("d-none"); // Hide from screen
-        $('#authorListInteresting').attr("aria-hidden", "true"); // Hide from screenreader
+        $("#authorListInteresting").addClass("d-none"); // Hide from screen
+        $("#authorListInteresting").attr("aria-hidden", "true"); // Hide from screenreader
 
-        $('#authorListFull').removeClass("d-none"); // Show
-        $('#authorListFull').attr("aria-hidden", "false"); // Hide no longer from screenreader
+        $("#authorListFull").removeClass("d-none"); // Show
+        $("#authorListFull").attr("aria-hidden", "false"); // Hide no longer from screenreader
     });
 
     $("#showInterestingAuthors").click(function() {
-        $('#authorListFull').addClass("d-none"); // Hide from screen
-        $('#authorListFull').attr("aria-hidden", "true"); // Hide from screenreader
+        $("#authorListFull").addClass("d-none"); // Hide from screen
+        $("#authorListFull").attr("aria-hidden", "true"); // Hide from screenreader
 
-        $('#authorListInteresting').removeClass("d-none"); // Show
-        $('#authorListInteresting').attr("aria-hidden", "false"); // Hide no longer from screenreader
+        $("#authorListInteresting").removeClass("d-none"); // Show
+        $("#authorListInteresting").attr("aria-hidden", "false"); // Hide no longer from screenreader
     });
 
 });
@@ -114,24 +114,24 @@ $(function() {
 /* Add item to the to-do list and change UI accordingly
  * This function is here, because it is related to the search */
 $(function() {
-    $('#paperButtonTodoList').click(function() {
-        obj = $(this);
+    $("#paperButtonTodoList").click(function() {
+        var obj = $(this);
         var paper_pk = obj.attr("data-paper-pk");
-        var ajax_url = Urls['ajax-todolist-add']();
+        var ajax_url = Urls["ajax-todolist-add"]();
 
         $.ajax({
             data: {
                 "paper_pk": paper_pk,
             },
-            dataType: 'json',
+            dataType: "json",
             error: function (xhr) {
                 obj.text(xhr.responseJSON['error_msg']);
             },
             method : 'post',
             success: function (data) {
                 obj.remove();
-                $('#paperTodoListAdded').removeClass("d-none"); // Show
-                $('#paperTodoListAdded').attr("aria-hidden", "false"); // Hide no longer from screenreader
+                $("#paperTodoListAdded").removeClass("d-none"); // Show
+                $("#paperTodoListAdded").attr("aria-hidden", "false"); // Hide no longer from screenreader
             },
             timeout : 5000,
             url : ajax_url
@@ -147,24 +147,24 @@ $(function() {
 
 /* Change the OA status of a publisher */
 $(function() {
-    $('#changePublisherOAStatus input').change(function() {
-        var form = $('#changePublisherOAStatus');
+    $("#changePublisherOAStatus input").change(function() {
+        var form = $("#changePublisherOAStatus");
 
-        ajax_url = Urls[form.attr('data-ajax-url')]();
-        publisher_pk = form.attr('data-publisher-pk');
-        new_status = $('input[name=radioOAStatus]:checked', '#changePublisherOAStatus').val();
-        data = {
-            'pk' : publisher_pk,
-            'status' : new_status
+        var ajax_url = Urls[form.attr("data-ajax-url")]();
+        var publisher_pk = form.attr("data-publisher-pk");
+        var new_status = $("input[name=radioOAStatus]:checked", "#changePublisherOAStatus").val();
+        var data = {
+            "pk" : publisher_pk,
+            "status" : new_status
         };
 
         $.ajax({
             data : data,
-            dataType : 'text',
+            dataType : "text",
             error : function( xhr) {
                 alert('Error: ' + xhr.responseText);
             },
-            method : 'POST',
+            method : "POST",
             timeout : 5000,
             url : ajax_url
         });
@@ -180,27 +180,27 @@ $(function() {
 
 function updateSearch (ajax_url, data) {
     // slighty fade current results that are going to be replaced
-    $('#paperSearchResults').css('opacity', '0.5');
+    $("#paperSearchResults").css("opacity", "0.5");
     // turn bird on
-    $('#paperSearchWaitingArea').toggleClass('d-none d-flex');
+    $("#paperSearchWaitingArea").toggleClass("d-none d-flex");
 
     // call with ajax. it's easy
     $.ajax ({
-        contentType : 'application/json',
+        contentType : "application/json",
         data : data,
-        dataType : 'json',
-        method : 'GET',
+        dataType : "json",
+        method : "GET",
         success : function (result) {
-            $('#paperSearchResults').html(result.listPapers);
-            $('#searchNotifications').html(result.messages);
+            $("#paperSearchResults").html(result.listPapers);
+            $("#searchNotifications").html(result.messages);
             // update pie
             updateStats(result.stats);
             // update number of search results
-            $('#nbPapersFound').text(
+            $("#nbPapersFound").text(
                 interpolate(
                     ngettext(
-                        '%s paper found',
-                        '%s papers found',
+                        "%s paper found",
+                        "%s papers found",
                         result.nb_results
                     ),
                     [formatNumbersThousands(result.nb_results)]
@@ -212,19 +212,19 @@ function updateSearch (ajax_url, data) {
     });
 
     // turn bird off
-    $('#paperSearchWaitingArea').toggleClass('d-none d-flex');
+    $("#paperSearchWaitingArea").toggleClass("d-none d-flex");
     // remove opacity
-    $('#paperSearchResults').css('opacity', '');
+    $("#paperSearchResults").css("opacity", "");
 }
 
 /* Prevent standard behaviour of form and execute some JS */
 $(function () {
-    $('#searchPapers').submit(function (e) {
+    $("#searchPapers").submit(function (e) {
         e.preventDefault();
 
         var obj = $(this);
 
-        var ajax_url =  obj.attr('data-ajax-url'); // We take the url from data-ajax-url since it depends on the view
+        var ajax_url =  obj.attr("data-ajax-url"); // We take the url from data-ajax-url since it depends on the view
         var data = obj.serializeArray();
 
         updateSearch(ajax_url, data);
@@ -235,10 +235,10 @@ $(function () {
 /* Refreshes to profil of a user from ORCID.
  * This function is here, because it is related to the search */
 $(function () {
-    $('#refetchPublications').submit( function () {
+    $("#refetchPublications").submit( function () {
         var obj = $(this);
-        var researcher_pk = obj.attr('data-researcher-pk');
-        var ajax_url = Urls['refetch-researcher'](researcher_pk);
+        var researcher_pk = obj.attr("data-researcher-pk");
+        var ajax_url = Urls["refetch-researcher"](researcher_pk);
 
         updateSearch(ajax_url);
     });
@@ -247,13 +247,13 @@ $(function () {
 /* When a message on search is closed, move it from inbox toarchive to not display it again
  * This function is here, because it is related to the search */
 $(function () {
-    $('.messageAlert').on('closed.bs.alert', function () {
+    $(".messageAlert").on("closed.bs.alert", function () {
         var obj = $(this);
-        var message_pk = obj.attr('data-message-pk');
-        var url = Urls['inbox-read'](message_pk);
+        var message_pk = obj.attr("data-message-pk");
+        var url = Urls["inbox-read"](message_pk);
 
         $.ajax({
-            method : 'POST',
+            method : "POST",
             url : url
         });
     });
@@ -263,19 +263,19 @@ $(function () {
  * This function is here, because it is related to the search */
 
 $(function () {
-    $('.buttonClaimUnclaim').submit( function () {
+    $(".buttonClaimUnclaim").submit( function () {
         var obj = $(this);
-        var paper_pk = obj.attr('data-pk');
-        var action = obj.attr('data-action');
-        var fadeout = obj.attr('data-fadeout');
+        var paper_pk = obj.attr("data-pk");
+        var action = obj.attr("data-action");
+        var fadeout = obj.attr("data-fadeout");
 
-        if (action == 'claim') {
-            obj.text(gettext('Claiming...'));
-            ajax_url = Urls['ajax-claimPaper']();
+        if (action == "claim") {
+            obj.text(gettext("Claiming..."));
+            ajax_url = Urls["ajax-claimPaper"]();
         }
-        else if (action == 'unclaim') {
-            obj.text(gettext('Unclaiming...'));
-            ajax_url = Urls['ajax-unclaimPaper']();
+        else if (action == "unclaim") {
+            obj.text(gettext("Unclaiming..."));
+            ajax_url = Urls["ajax-unclaimPaper"]();
         }
         else {
             // action currently ongoing
@@ -283,28 +283,28 @@ $(function () {
         }
 
         $.ajax({
-            method : 'post',
+            method : "post",
             data : {
-                'pk' : paper_pk,
+                "pk" : paper_pk,
             },
-            dataType : 'json',
+            dataType : "json",
             error : function () {
                 if (action == "claim") {
-                    obj.text(gettext('Claiming failed!'));
+                    obj.text(gettext("Claiming failed!"));
                 }
                 else {
-                    obj.text(gettext('Unclaiming failed!'));
+                    obj.text(gettext("Unclaiming failed!"));
                 }
             },
             success : function (data) {
-                if (action == 'claim') {
-                    obj.text(gettext('Exclude from my profile'));
-                    obj.attr('data-action', 'unclaim');
+                if (action == "claim") {
+                    obj.text(gettext("Exclude from my profile"));
+                    obj.attr("data-action", "unclaim");
                 }
                 else {
-                    obj.text(gettext('Include in my profile'));
-                    obj.attr('data-action', 'claim');
-                    if (fadeout == 'true') {
+                    obj.text(gettext("Include in my profile"));
+                    obj.attr("data-action", "claim");
+                    if (fadeout == "true") {
                         $("#paper-" + paper_pk).fadeOut(300, function() { obj.remove(); });
                     }
                 }
@@ -318,19 +318,19 @@ $(function () {
 /* Add and remove items to or from the to-do list 
  * This function is here, because it is related to the search */
 $(function () {
-    $('.buttonTodoList').submit(function () {
+    $(".buttonTodoList").submit(function () {
         var obj = $(this)
-        var action = $(this).attr('data-action');
-        var paper_pk = $(this).attr('data-pk');
-        var fadeout = $(this).attr('data-fadeout');
+        var action = $(this).attr("data-action");
+        var paper_pk = $(this).attr("data-pk");
+        var fadeout = $(this).attr("data-fadeout");
 
-        if (action == 'mark') {
-            obj.text(gettext('Adding to todolist'));
-            var ajax_url = Urls['ajax-todolist-add']();
+        if (action == "mark") {
+            obj.text(gettext("Adding to todolist"));
+            var ajax_url = Urls["ajax-todolist-add"]();
         }
-        else if (action == 'unmark') {
-            obj.text(gettext('Removing from todolist'));
-            var ajax_url = Urls['ajax-todolist-remove']();
+        else if (action == "unmark") {
+            obj.text(gettext("Removing from todolist"));
+            var ajax_url = Urls["ajax-todolist-remove"]();
         }
         else {
             // action currently ongoing
@@ -338,23 +338,23 @@ $(function () {
         }
 
         $.ajax({
-            method: 'post',
+            method: "post",
             url: ajax_url,
             data: {
                 "paper_pk": paper_pk,
             },
-            dataType: 'json',
+            dataType: "json",
             success: function (data) {
-                obj.text(data['success_msg']);
-                action = data['data-action'];
+                obj.text(data["success_msg"]);
+                action = data["data-action"];
                 /* If object was removed, i.e. server returned 'mark' and fadeout is true, do fadeout */
-                if (action == 'mark' && fadeout == 'true') {
+                if (action == "mark" && fadeout == "true") {
                     $("#paper-" + paper_pk).fadeOut(300, function() { obj.remove(); });
                 }
-                obj.attr('data-action', action);
+                obj.attr("data-action", action);
             },
             error: function (xhr) {
-                obj.text(xhr.responseJSON['error_msg']);
+                obj.text(xhr.responseJSON["error_msg"]);
             }
         });
     });
@@ -608,9 +608,9 @@ $(function() {
                 $("#uploadError").addClass("d-none");
             },
             headers : {
-                'X-CSRFTOKEN' : getCookie('csrftoken')
+                "X-CSRFTOKEN" : getCookie("csrftoken")
             },
-            paramName: 'upl',
+            paramName: "upl",
             previewsContainer: false,
             success : function(file, response) {
                 // Show upload row with content
@@ -620,12 +620,12 @@ $(function() {
                 $("#fileUploadRow").addClass("d-none");
                 $("#uploadProgress").addClass("d-none");
 
-                $("#uploadFileId").val(response['file_id'])
+                $("#uploadFileId").val(response["file_id"])
             },
             uploadprogress: function(file, progress, bytesSent) {
                 $("#uploadProgressBar").css("width", progress + "%")
             },
-            url : Urls['ajax-uploadFulltext']()
+            url : Urls["ajax-uploadFulltext"]()
         });
     }
 });
@@ -633,14 +633,14 @@ $(function() {
 /* If the user uploads via URL, send ajax with url and show some ongoing signs */
 function fileUpload() {
     var data = $("#urlForm").serialize();
-    var url = Urls['ajax-downloadUrl']();
+    var url = Urls["ajax-downloadUrl"]();
 
     // Show the spinner
     $("#urlDownloadWaiter").removeClass("d-none");
 
     $.post(url, data)
     .done( function (response) {
-        $("#uploadFileId").val(response['file_id']);
+        $("#uploadFileId").val(response["file_id"]);
         // Show upload row with content
         showUploadedFileSummary(response);
 
@@ -689,7 +689,7 @@ $(function() {
 $(function() {
     /* collapses */
     $("input[type='radio'][name='radioUploadType']").click(function(){
-        $("#collapseDocType").collapse('hide');
+        $("#collapseDocType").collapse("hide");
     });
 
     /* changes header */
@@ -703,31 +703,31 @@ $(function() {
 $(function() {
     /* collapses */
     $("input[type='radio'][name='radioRepository']").click(function(){
-        $("#collapseRepository").collapse('hide');
+        $("#collapseRepository").collapse("hide");
         var selected = $("input[type='radio'][name='radioRepository']:checked");
         var paper_pk = $("#depositForm").attr("data-paper-pk");
         $.ajax({
             data : {
-                'paper' : paper_pk,
-                'repository' : selected.val()
+                "paper" : paper_pk,
+                "repository" : selected.val()
             },
             error : function(xhr) {
-                $("#repositoryMetadataForm").html(xhr.responseJSON['message']);
+                $("#repositoryMetadataForm").html(xhr.responseJSON["message"]);
             },
-            method : 'get',
+            method : "get",
             success : function(data) {
                 $("#repositoryMetadataForm").html(data["form"]);
-                $('.prefetchingFieldStatus').each(function(i,prefetch) {
+                $(".prefetchingFieldStatus").each(function(i,prefetch) {
 	                initPrefetch($(prefetch));
 	            });
 
             },
-            url : Urls['ajax-get-metadata-form']()
+            url : Urls["ajax-get-metadata-form"]()
         });
     });
 
     /* changes header */
-    $("#collapseRepository").on('hidden.bs.collapse', function() {
+    $("#collapseRepository").on("hidden.bs.collapse", function() {
         var selected = $("input[type='radio'][name='radioRepository']:checked");
         $("#choosenRepository").html($("#choosenRepository-" + selected.val()).html())
     });
@@ -739,7 +739,7 @@ function initPrefetch(p) {
     p.text(gettext("Trying to fill this field automatically for you..."));
     field = $("#"+p.data("fieldid"));
     obj_id = $("input[name="+p.data("objfieldname")+"]").val();
-    field.prop('disabled', true);
+    field.prop("disabled", true);
 
     $.ajax({
         data : {
@@ -748,18 +748,18 @@ function initPrefetch(p) {
         },
         error : function () {
             p.text(sorry_text);
-            field.prop('disabled', false);
+            field.prop("disabled", false);
         },
-        method : 'get',
+        method : "get",
         success : function(data) {
-            if(!data['success']) {
+            if(!data["success"]) {
                 p.text(gettext(sorry_text));
             }
             else {
-                p.text('');
+                p.text("");
             }
-            field.prop('disabled', false);
-            field.val(data['value']);
+            field.prop("disabled", false);
+            field.val(data["value"]);
         },
         url : p.data("callback")
 
@@ -786,13 +786,13 @@ function depositPaper() {
 
     $.post({
         data : data,
-        url : Urls['ajax-submit-deposit'](paper_pk)
+        url : Urls["ajax-submit-deposit"](paper_pk)
     })
     .done(function (response) {
-        var upload_id = response['upload_id'];
+        var upload_id = response["upload_id"];
         var paper_slug = $("#depositForm").attr("data-paper-slug");
 
-        window.location.replace(Urls['paper'](paper_pk, paper_slug) + "?deposit=" + upload_id);
+        window.location.replace(Urls["paper"](paper_pk, paper_slug) + "?deposit=" + upload_id);
     })
     .fail(function (xhr) {
         var error_text = "";
@@ -803,11 +803,11 @@ function depositPaper() {
             // Since we have form valdation, we need only to llok for the file. However, the metadatafields are relatively anonymous in this version as the standard text from django ist "This fiel is required" and we would need to place it suitably.
             var response = JSON.parse(xhr.responseText);
             if ('message' in response) {
-                error_text = response['message'];
+                error_text = response["message"];
             }
-            if ('form' in response) {
+            if ("form" in response) {
                 form_errors = response['form'];
-                if ('file_id' in form_errors) {
+                if ("file_id" in form_errors) {
                     $("#errorMissingFile").append(
                         makeAlert(no_file)
                     );
@@ -830,7 +830,7 @@ function depositPaper() {
 
 function makeAlert(text) {
     var alert_box = $("<div>",{
-        'class' : "alert alert-warning alert-dismissible fade show uploadError",
+        "class" : "alert alert-warning alert-dismissible fade show uploadError",
         "role" : "alert",
         "text" : text
     }).append($("<button>", {

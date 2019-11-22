@@ -67,8 +67,8 @@ class TestStartPageView():
 
         r = dissemin_base_client.get(reverse('start-page'))
 
-        assert isinstance(r.context.get('search_form'), StartPageSearchForm) == True
-        assert isinstance(r.context.get('combined_status'), list) == True
+        assert isinstance(r.context.get('search_form'), StartPageSearchForm)
+        assert isinstance(r.context.get('combined_status'), list)
 
         latest_deposits = r.context.get('latest_deposits')
         assert len(latest_deposits) <= 5
