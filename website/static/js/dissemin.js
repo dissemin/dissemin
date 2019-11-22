@@ -15,7 +15,7 @@ $(document).ajaxError( function (event, xhr, ajaxSettings, thrownError) {
                 url: ajaxSettings.url,
                 data: ajaxSettings.data,
                 status: xhr.status,
-                error: thrownError || jqXHR.statusText,
+                error: thrownError || xhr.statusText,
                 response: xhr.responseText.substring(0, 100)
             }
         });
@@ -43,14 +43,14 @@ $(document).ajaxSend( function(event, xhr, settings) {
 
 /* Enable bootstrap tooltip */
 $(function () {
-    $('[data-toggle="tooltip"]').tooltip();
+    $("[data-toggle='tooltip']").tooltip();
 });
 
 /* Returns the current csrf token from the cookie. This is the recommend method by django: https://docs.djangoproject.com/en/2.2/ref/csrf/#ajax */
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie !== "") {
-        var cookies = document.cookie.split(';');
+        var cookies = document.cookie.split(";");
         for (var i = 0; i < cookies.length; i++) {
             var cookie = cookies[i].trim();
             // Does this cookie string begin with the name we want?  if (cookie.substring(0, name.length + 1) === (name + '=')) {
@@ -76,14 +76,14 @@ $(function() {
 /* This is the ORCID Logout. Pass the orcid_base_domain as parameter */
 function orcidLogout (orcidBaseDomain) {
     $.ajax({ url: "https://" + orcidBaseDomain + "/userStatus.json?logUserOut=true",
-        dataType: 'jsonp',
+        dataType: "jsonp",
         success: function(result,status,xhr) {
                     window.location.href = Urls["account_logout"]();
                 },
         error: function (xhr, status, error) {
                     window.location.href = Urls["account_logout"]();
                 }
-    })
+    });
 }
 
 
@@ -125,7 +125,7 @@ $(function() {
             },
             dataType: "json",
             error: function (xhr) {
-                obj.text(xhr.responseJSON['error_msg']);
+                obj.text(xhr.responseJSON["error_msg"]);
             },
             method : 'post',
             success: function (data) {
@@ -150,23 +150,23 @@ $(function() {
     $("#changePublisherOAStatus input").change(function() {
         var form = $("#changePublisherOAStatus");
 
-        var ajax_url = Urls[form.attr("data-ajax-url")]();
-        var publisher_pk = form.attr("data-publisher-pk");
-        var new_status = $("input[name=radioOAStatus]:checked", "#changePublisherOAStatus").val();
+        var ajaxUrl= Urls[form.attr("data-ajax-url")]();
+        var publisherPk = form.attr("data-publisher-pk");
+        var newStatus = $("input[name=radioOAStatus]:checked", "#changePublisherOAStatus").val();
         var data = {
-            "pk" : publisher_pk,
-            "status" : new_status
+            "pk" : publisherPk,
+            "status" : newStatus
         };
 
         $.ajax({
             data : data,
             dataType : "text",
             error : function( xhr) {
-                alert('Error: ' + xhr.responseText);
+                alert("Error: " + xhr.responseText);
             },
             method : "POST",
             timeout : 5000,
-            url : ajax_url
+            url : ajaxUrl
         });
     });
 });
@@ -246,10 +246,10 @@ $(function () {
 $(function () {
     $("#refetchPublications").submit( function () {
         var obj = $(this);
-        var researcher_pk = obj.attr("data-researcher-pk");
-        var ajax_url = Urls["refetch-researcher"](researcher_pk);
+        var researcherPk = obj.attr("data-researcher-pk");
+        var ajaxUrl = Urls["refetch-researcher"](researcherPk);
 
-        updateSearch(ajax_url);
+        updateSearch(ajaxUrl);
     });
 });
 
@@ -258,8 +258,8 @@ $(function () {
 $(function () {
     $(".messageAlert").on("closed.bs.alert", function () {
         var obj = $(this);
-        var message_pk = obj.attr("data-message-pk");
-        var url = Urls["inbox-read"](message_pk);
+        var messagePk = obj.attr("data-message-pk");
+        var url = Urls["inbox-read"](messagePk);
 
         $.ajax({
             method : "POST",
@@ -274,17 +274,17 @@ $(function () {
 $(function () {
     $(".buttonClaimUnclaim").submit( function () {
         var obj = $(this);
-        var paper_pk = obj.attr("data-pk");
+        var paperPk = obj.attr("data-pk");
         var action = obj.attr("data-action");
         var fadeout = obj.attr("data-fadeout");
 
         if (action == "claim") {
             obj.text(gettext("Claiming..."));
-            ajax_url = Urls["ajax-claimPaper"]();
+            ajaxUrl = Urls["ajax-claimPaper"]();
         }
         else if (action == "unclaim") {
             obj.text(gettext("Unclaiming..."));
-            ajax_url = Urls["ajax-unclaimPaper"]();
+            ajaxUrl = Urls["ajax-unclaimPaper"]();
         }
         else {
             // action currently ongoing
@@ -294,7 +294,7 @@ $(function () {
         $.ajax({
             method : "post",
             data : {
-                "pk" : paper_pk,
+                "pk" : paperPk,
             },
             dataType : "json",
             error : function () {
@@ -318,7 +318,7 @@ $(function () {
                     }
                 }
             },
-            url : ajax_url
+            url : ajaxUrl
         });
 
     });
@@ -330,7 +330,7 @@ $(function () {
     $(".buttonTodoList").submit(function () {
         var obj = $(this)
         var action = $(this).attr("data-action");
-        var paper_pk = $(this).attr("data-pk");
+        var paperPk = $(this).attr("data-pk");
         var fadeout = $(this).attr("data-fadeout");
 
         if (action == "mark") {
@@ -348,9 +348,9 @@ $(function () {
 
         $.ajax({
             method: "post",
-            url: ajax_url,
+            url: ajaxUrl,
             data: {
-                "paper_pk": paper_pk,
+                "paper_pk": paperPk,
             },
             dataType: "json",
             success: function (data) {
