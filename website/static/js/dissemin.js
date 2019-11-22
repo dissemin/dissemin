@@ -116,12 +116,12 @@ $(function() {
 $(function() {
     $("#paperButtonTodoList").click(function() {
         var obj = $(this);
-        var paper_pk = obj.attr("data-paper-pk");
-        var ajax_url = Urls["ajax-todolist-add"]();
+        var paperPk = obj.attr("data-paper-pk");
+        var ajaxUrl = Urls["ajax-todolist-add"]();
 
         $.ajax({
             data: {
-                "paper_pk": paper_pk,
+                "paper_pk": paperPk,
             },
             dataType: "json",
             error: function (xhr) {
@@ -134,7 +134,7 @@ $(function() {
                 $("#paperTodoListAdded").attr("aria-hidden", "false"); // Hide no longer from screenreader
             },
             timeout : 5000,
-            url : ajax_url
+            url : ajaxUrl
         });
 
     });
@@ -226,9 +226,9 @@ function updateSearch () {
 /* If filter by OA status, we immediately refresh the results, otherwise the user needs to confirm */
 /* Instant filtering */
 $(function () {
-    $("#searchByStatus").on('change', function(e) {
+    $("#searchByStatus").on("change", function(e) {
         e.preventDefault();
-        updateSearch()
+        updateSearch();
     });
 });
 
@@ -277,6 +277,8 @@ $(function () {
         var paperPk = obj.attr("data-pk");
         var action = obj.attr("data-action");
         var fadeout = obj.attr("data-fadeout");
+
+        var ajaxUrl;
 
         if (action == "claim") {
             obj.text(gettext("Claiming..."));
@@ -328,18 +330,20 @@ $(function () {
  * This function is here, because it is related to the search */
 $(function () {
     $(".buttonTodoList").submit(function () {
-        var obj = $(this)
+        var obj = $(this);
         var action = $(this).attr("data-action");
         var paperPk = $(this).attr("data-pk");
         var fadeout = $(this).attr("data-fadeout");
 
+        var ajaxUrl;
+
         if (action == "mark") {
             obj.text(gettext("Adding to todolist"));
-            var ajax_url = Urls["ajax-todolist-add"]();
+            ajaxUrl = Urls["ajax-todolist-add"]();
         }
         else if (action == "unmark") {
             obj.text(gettext("Removing from todolist"));
-            var ajax_url = Urls["ajax-todolist-remove"]();
+            ajaxUrl = Urls["ajax-todolist-remove"]();
         }
         else {
             // action currently ongoing
