@@ -3,7 +3,7 @@
 
 <div class="statspie_caption" id="stats_pie_legend_n{{ stats_counter }}">
     {% if combined_status_form %}
-        <fieldset class="stats_caption_table hiddenCheckboxes">
+        <fieldset class="stats_caption_table hiddenCheckboxes" id="searchByStatus">
         <legend class="sr-only">{% trans 'Refine by OA status' %}</legend>
         {{ combined_status.errors }}
     {% else %}

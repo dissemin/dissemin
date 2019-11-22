@@ -178,7 +178,13 @@ $(function() {
 
 /* Our strategy is: Reload a part of the page and insert any messages that get delivered */
 
-function updateSearch (ajax_url, data) {
+function updateSearch () {
+    // Fetch necessary data
+    var obj = $("#searchPapers");
+
+    var ajaxUrl =  obj.attr("data-ajax-url"); // We take the url from data-ajax-url since it depends on the view
+    var data = obj.serializeArray();
+
     // slighty fade current results that are going to be replaced
     $("#paperSearchResults").css("opacity", "0.5");
     // turn bird on
@@ -208,7 +214,7 @@ function updateSearch (ajax_url, data) {
             );
         },
         timeout : 5000, // 5 seconds
-        url : ajax_url
+        url : ajaxUrl
     });
 
     // turn bird off
@@ -217,17 +223,20 @@ function updateSearch (ajax_url, data) {
     $("#paperSearchResults").css("opacity", "");
 }
 
+/* If filter by OA status, we immediately refresh the results, otherwise the user needs to confirm */
+/* Instant filtering */
+$(function () {
+    $("#searchByStatus").on('change', function(e) {
+        e.preventDefault();
+        updateSearch()
+    });
+});
+
 /* Prevent standard behaviour of form and execute some JS */
 $(function () {
     $("#searchPapers").submit(function (e) {
         e.preventDefault();
-
-        var obj = $(this);
-
-        var ajax_url =  obj.attr("data-ajax-url"); // We take the url from data-ajax-url since it depends on the view
-        var data = obj.serializeArray();
-
-        updateSearch(ajax_url, data);
+        updateSearch();
     });
 });
 
