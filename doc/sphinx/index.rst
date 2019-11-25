@@ -19,15 +19,15 @@ to the metadata sources.
 .. toctree::
    :maxdepth: 2
 
+   repositories
    api
+   datasources
+   development
+   testing
    install
    apikeys
    deploying
-   datasources
    datamodel
-   repositories
-   development
-   testing
    docs
    administrating_tips
 
