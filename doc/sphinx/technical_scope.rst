@@ -115,7 +115,7 @@ The metadata is authentic, i.e. it is created with Dissemin and represents how t
 For earch document type there is one or more example.
 They cover different cases like dewey decimal class or embargo.
 
-* :download:`MODS <examples/mods.zip>`
+* :download:`mods.zip <examples/mods.zip>`
 
 
 Upload scripts
