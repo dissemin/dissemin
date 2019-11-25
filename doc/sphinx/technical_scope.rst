@@ -124,3 +124,28 @@ Upload scripts
 You can download our :download:`script <examples/upload_mets.zip>` for testing your implementations.
 The HTTP-request is identical to that in Dissemin.
 You find usage instructions in the README.md inside of the packaging.
+
+
+Repository Helpers
+==================
+
+We cannot support any direct support for necessary implementations or configurations on the repository that is going to be connected.
+
+But we like to support any repository administrator with at least some documentation.
+
+EPrints 3
+---------
+
+EPrints 3 has been successfully be connected to Dissemin.
+
+Zaharina Stoynova from ULB Darmstadt has worked on a plugin to ingest Dissemins metadata.
+As it is probably not possible to use it directly, please make the necessary changes as you require.
+
+:download:`broker_eprints_3.zip <examples/broker_eprints_3.zip>`
+
+The package consists of two files:
+
+1. `METSMODS_Broker.pm`
+2. `METSMODS_Brokder_mods_parser.pm`
+
+The first file deals with some general things like data integrity and ingests the Dissemin metadata, while the other file deals with the MODS metadata itself.
