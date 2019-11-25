@@ -8,8 +8,37 @@ Near the big repositories Zenodo and HAL, they can deposit publications in insti
 This and the following pages will give you some information at hand how you can add your institutional repository to Dissemin.
 
 As you will learn, this involves not to much effort.
-First, we explain our metadata, services and give an outline of how we guide you through the integration process.
-In a second step we dive into more technical topics, giving precise descriptions of the metadata encoding and how to transfer the file with its metadata.
+First, we describe the workflow and how the document finds it way into your repository.
+Then we explain our metadata, services and give an outline of how we guide you through the integration process.
+In a last step we dive into more technical topics, giving precise descriptions of the metadata encoding and how to transfer the file with its metadata.
+
+How a deposit works
+===================
+
+Let us assume, that Max Mustermann, a new scientist in your institution, wants to deposit one of his publications in your repository.
+He starts by searching for his publications on Dissemin and finds in the list an article namend *A modern view on `God of the Labyrinth`*.
+Quickly he finds, that this publicaton is not yet freely available.
+Luckily the publisher allows depositing a preprint version into open repositories.
+Max decides to make this publication freely available by uploading it in his institutions repository.
+He clicks on *Upload*, chooses the right file from his local storage, gives a short subject classification and choose a Creative Commons license and hits the final upload button.
+Dissemin creates a package of metadata and the file Max uploaded and ships it into your repository.
+Your repository receives the package, extracts the metadata and the document and creates a new entry in your repository.
+
+Max does not know anything about this, but is happy as he reads, that his publication will soon be available for everyone!
+He also reads that he has to sign a letter of declaration.
+
+Meanwhile the repository tells the repository staff that someone created a new entry.
+The staff checks the entry.
+Everything is fine, except that Max still has to deliver the letter of declaration.
+So far, the publication is not yet published, since the repository declared the availability of the document as 'in moderation'.
+
+Max downloads the letter directly from Dissemin.
+He reads it carefully and then signs it, as all important information has been filled already.
+
+Some few days pass and the letter arives at the repositories staff.
+The staff checks the letter, then navigates to the corresponding entry in the repository and changes the availability to 'published'.
+The repository sends Max an e-mail that his article *A modern view on `God of the Labyrinth`* is now freely available.
+
 
 Metadata
 ========
