@@ -1,10 +1,18 @@
+=======================
 Add your own Repository
 =======================
 
-If you like to add your (institutional) repository, please get in contact with us.
-On this page we offer you some information about our services and what has to be done on your side.
+Dissemin not just detects papers behind a paywall, it offers solutions to liberate them.
+To achieve this goal with few effort for scientists, they can directly upload a publication into an open repository.
+Near the big repositories Zenodo and HAL, they can deposit publications in institutional repositories.
+This and the following pages will give you some information at hand how you can add your institutional repository to Dissemin.
 
-Currently we work on implementations for EPrints, MyCore and DSpace.
+As you will learn, this involves not to much effort.
+First, we explain our metadata, services and give an outline of how we guide you through the integration process.
+In a second step we dive into more technical topics, giving precise descriptions of the metadata encoding and how to transfer the file with its metadata.
+
+Metadata
+========
 
 Deposition Protocol
 -------------------
