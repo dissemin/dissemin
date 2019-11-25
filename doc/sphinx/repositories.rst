@@ -9,5 +9,6 @@ Dissemin offers the deposition of publications into a repository. These pages de
    :maxdepth: 2
    
    add_your_own_repository
+   technical_scope
    configure_repository
    writing_new_repository_interface
