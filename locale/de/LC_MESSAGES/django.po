@@ -19,7 +19,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-09-30 15:27+0200\n"
-"PO-Revision-Date: 2019-10-21 14:57:08+0000\n"
+"PO-Revision-Date: 2019-11-25 14:30:31+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -314,7 +314,7 @@ msgstr "Gelöscht"
 #: deposit/models.py:272 deposit/templates/deposit/start.html:329
 #: deposit/views.py:107
 msgid "Deposit"
-msgstr "Hochladen"
+msgstr "Absenden"
 
 #: deposit/models.py:325
 msgid "We will use this email address to notify you when your deposits are accepted."
@@ -1000,17 +1000,16 @@ msgid "Dissemin detects papers behind paywalls and helps their authors to upload
 msgstr "Dissemin erkennt Publikationen hinter Bezahlschranken (&quot;Paywall&quot;) und lädt ihre Verfasser_innen dazu ein, sie mit einem Klick in ein offenes Repositorium hochzuladen."
 
 #: papers/templates/papers/index.html:45
-#, fuzzy
 msgid "Green Open Access"
-msgstr "Green Open Access"
+msgstr "Grüner Open Access"
 
 #: papers/templates/papers/index.html:47
 msgid "Many researchers do not use their right to make their papers freely available online, in addition to the paywalled version of traditional publishers."
-msgstr "Viele Wissenschaftler_innen nutzen ihr Recht nicht, ihre Publikationen zusätzlich zu den Bezahlversionen der traditionellen Herausgeber frei verfügbar anzubieten."
+msgstr "Nutze Dein Recht auf Zweitveröffentlichung und biete deine Publikationen zusätzlich zu den Bezahlversionen der traditionellen Herausgeber frei verfügbar an."
 
 #: papers/templates/papers/index.html:52
 msgid "Uploading your papers to open repositories has significant advantages:"
-msgstr "Das Hochladen deiner Publikationen in ein offenes Repositorium hat folgende Vorteile:"
+msgstr "Das Hochladen Deiner Publikationen in ein offenes Repositorium hat folgende Vorteile:"
 
 #: papers/templates/papers/index.html:58
 msgid "Your research is available to everyone, increasing your readership and impact."
@@ -1027,7 +1026,7 @@ msgstr "Offene Repositorien"
 
 #: papers/templates/papers/index.html:80
 msgid "Uploading your papers on your own webpage is not enough. Your papers are easier to find and more secure in the long-term when uploaded to arXiv, Zenodo or institutional repositories."
-msgstr "Das Hochladen Deiner Publikationen auf Deiner eigenen Webseite ist nicht ausreichend. Solche Kopien sind weniger stabil und schwerer zu finden als Dokumente in gut indizierten Repositorien wie arXiv, Zenodo oder institutionellen Repositorien."
+msgstr "Deine Dokumente sind in gut indizierten Repositorien wie arXiv, Zenodo oder institutionellen Repositorien leichter zu finden. Das Hochladen deiner Publikation auf einer eigenen Website ist weniger stabil."
 
 #: papers/templates/papers/index.html:94
 msgid "Latest Uploads"
@@ -1035,11 +1034,11 @@ msgstr "Vor kurzem Hochgeladen"
 
 #: papers/templates/papers/index.html:96
 msgid "Researchers use Dissemin to make sure all their publications can be accessed freely. Have a look at their latest uploads:"
-msgstr "Wissenschaftler_innen nutzen Dissemin um ihre Publikationen frei verfügbar zu machen. Hier sind die letzten Uploads:"
+msgstr "Wissenschaftler_innen nutzen Dissemin um ihre Publikationen frei verfügbar zu machen. Hier sind die letzten Veröffentlichungen:"
 
 #: papers/templates/papers/index.html:118
 msgid "Access statistics"
-msgstr "Statistik"
+msgstr "Open Access Verfügbarkeit"
 
 #: papers/templates/papers/index.html:120
 msgid "Dissemin collects its data from various sources and evaluates if a given publication is freely available."
@@ -1051,11 +1050,11 @@ msgstr "Dissemin für Bibliotheken"
 
 #: papers/templates/papers/index.html:147
 msgid "As a library you can use Dissemin to find publications of your researchers that are behind paywalls. Dissemin can upload publications directly into your institutional repository and tries to support your local worklfow as much as possible."
-msgstr "Als Bibliothek könnt ihr Dissemin einsetzen, um Publikationen der Wissenschaftler deiner Institution zu finden, die sich hinter einer Paywall (Bezahlschranke) befinden. Dissemin kann Publikationen direkt in euer institutionelles Repositorium hochladen und dabei euren lokalen Workflow bestmöglich unterstützen."
+msgstr "Bibliotheken können Dissemin einsetzen, um Publikationen der Wissenschaftler_innen der eigenen Institution zu finden, die sich hinter einer Paywall (Bezahlschranke) befinden. Dissemin kann Publikationen direkt in das institutionelle Repositorium hochladen und dabei den lokalen Workflow bestmöglich unterstützen."
 
 #: papers/templates/papers/index.html:152
 msgid "You can advertise Dissemin to your researchers and show them how easy it is to liberate their publications!"
-msgstr "Ihr könnt Dissemin bei den Wissenschaftlern eurer Institution bewerben und ihnen zeigen, wie einfach sie ihre Publikationen frei verfügbar machen können."
+msgstr "Ihr könnt Dissemin bei den Wissenschaftler_innen eurer Institution bewerben und ihnen zeigen, wie einfach sie ihre Publikationen frei verfügbar machen können."
 
 #: papers/templates/papers/index.html:166
 msgid "Partners"
@@ -1684,23 +1683,23 @@ msgstr "Keine."
 
 #: statistics/models.py:48
 msgid "Available from the publisher"
-msgstr "Verfügbar durch den Verlag"
+msgstr "Goldener Open Access, der Artikel ist durch den Verlag / Herausgeber frei verfügbar"
 
 #: statistics/models.py:49
 msgid "Available from the author"
-msgstr "Verfügbar durch Verfasser_in"
+msgstr "Gründer Open Access, die Publikation ist bereits in einem Repositorium frei verfügbar"
 
 #: statistics/models.py:50
 msgid "Could be shared by the authors"
-msgstr "Könnte von den Verfasser_innen geteilt werden"
+msgstr "Publikation kann laut Verlagspolicy Open Access veröffentlicht werden"
 
 #: statistics/models.py:51
 msgid "Unknown/unclear sharing policy"
-msgstr "Unbekannte/unklare Zweitveröffentlichungsrichtlinie"
+msgstr "Publikation mit unbekannten / unklaren Zweitveröffentlichungsrichtlinien"
 
 #: statistics/models.py:52
 msgid "Publisher forbids sharing"
-msgstr "Verlag verbietet Zweitveröffentlichung"
+msgstr "Der Verlag / Herausgeber verbietet Zweitveröffentlichungen"
 
 #: statistics/models.py:57
 msgid "This paper is made freely available by the publisher."
