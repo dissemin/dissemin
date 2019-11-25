@@ -25,6 +25,7 @@ Basic Metadata
 For a publication we store the following metadata.
 
 .. code::
+
     abstract
     authors
     date (YYYY-MM-DD)
@@ -49,6 +50,7 @@ Document types
 We have the following document types:
 
 .. code::
+
     book
     book-chapter
     dataset
@@ -71,6 +73,7 @@ Additional Metadata
 In addition to the above metadata we can ship out of the box the following:
 
 .. code::
+
     depositor information (name, email, orcid)
     dewey decimal class
     embargo
