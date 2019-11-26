@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 
-{% load static %}
 {% load bootstrap_pagination %}
-{% load i18n %}
 {% load crispy_forms_tags %}
+{% load i18n %}
+{% load static %}
+{% load statuses %}
 
 {% block title %}{% trans "Publishers" %}{% endblock title %}
 
@@ -24,7 +25,29 @@
 
                 <h3 class="h-border">{% trans "Search" %}</h3>
                 <form method="get" action="{% url 'publishers' %}">
-                    {{ form|crispy }}
+                    {{ form.q|as_crispy_field }}
+                    {{ form.sort_by|as_crispy_field }}
+
+                    <label for="{{ form.oa_status.id_for_label }}">{{ form.oa_status.label }}</label>
+                    {% for checkbox in form.oa_status %}
+                        {% with value=checkbox.data.value %}
+                            <div class="hiddenCheckboxes">
+                                {{ checkbox.tag }}
+                                <div class="row mx-0 publisherCriterionBox">
+                                    <label class="col-auto pr-0" for="{{ checkbox.id_for_label }}">
+                                        <img class="img-fluid statusImage-4" src="{% static value|logo_oa_status %}"/>
+                                    </label>
+                                    <label class="col d-flex" for="{{ checkbox.id_for_label }}">
+                                        <div class="align-self-center">
+                                        {{ checkbox.choice_label }}
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        {% endwith %}
+                    {% endfor %}
+
+                    {{ form.reverse_order|as_crispy_field }}
                     <div class="form-group d-flex justify-content-center">
                         <button class="btn btn-search" type="submit"><span class="oi oi-magnifying-glass" aria-hidden="true"></span> {% trans "Search" %}</button>
                     </div>
