@@ -178,13 +178,7 @@ $(function() {
 
 /* Our strategy is: Reload a part of the page and insert any messages that get delivered */
 
-function updateSearch () {
-    // Fetch necessary data
-    var obj = $("#searchPapers");
-
-    var ajaxUrl =  obj.attr("data-ajax-url"); // We take the url from data-ajax-url since it depends on the view
-    var data = obj.serializeArray();
-
+function updateSearch (ajaxUrl, data=null) {
     // slighty fade current results that are going to be replaced
     $("#paperSearchResults").css("opacity", "0.5");
     // turn bird on
@@ -228,7 +222,12 @@ function updateSearch () {
 $(function () {
     $("#searchByStatus").on("change", function(e) {
         e.preventDefault();
-        updateSearch();
+        // Fetch necessary data
+        var obj = $("#searchPapers");
+        var ajaxUrl =  obj.attr("data-ajax-url"); // We take the url from data-ajax-url since it depends on the view
+        var data = obj.serializeArray();
+
+        updateSearch(ajaxUrl, data);
     });
 });
 
@@ -236,12 +235,17 @@ $(function () {
 $(function () {
     $("#searchPapers").submit(function (e) {
         e.preventDefault();
-        updateSearch();
+        // Fetch necessary data
+        var obj = $("#searchPapers");
+        var ajaxUrl =  obj.attr("data-ajax-url"); // We take the url from data-ajax-url since it depends on the view
+        var data = obj.serializeArray();
+
+        updateSearchajaxUrl, data();
     });
 });
 
 
-/* Refreshes to profil of a user from ORCID.
+/* Refreshes the profil of a user from ORCID.
  * This function is here, because it is related to the search */
 $(function () {
     $("#refetchPublications").submit( function () {
