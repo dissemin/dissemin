@@ -29,7 +29,7 @@
             </div>
             <div class="col">
                 {% ifchanged paper.year %}
-                    <h2 class="text-gray-6 float-right mt-n2 ml-1">{{ paper.year }}</h2>
+                    <span class="h4 text-gray-6 float-right mt-n2 ml-1">{{ paper.year }}</span>
                 {% endifchanged %}
                 {% include 'papers/author_list.html' with author_list=paper.displayed_authors %}
                 {% if paper.has_many_authors %}
@@ -40,7 +40,7 @@
                 {% comment %}
                 {% cache 60000 paper_list paper.pk LANGUAGE_CODE researcher_id %}
                 {% endcomment %}
-                    <p class="h4"><a href="{{ paper.url }}" data-pk="{{ paper.id }}" data-params="{csrfmiddlewaretoken:'{{ csrf_token }}'">{% autoescape off %}{{ paper.title }}{% endautoescape %}</a></p>
+                    <p class="h5"><a href="{{ paper.url }}" data-pk="{{ paper.id }}" data-params="{csrfmiddlewaretoken:'{{ csrf_token }}'">{% autoescape off %}{{ paper.title }}{% endautoescape %}</a></p>
                 {% comment %}
                 {% endcache %}
                 {% endcomment %}
@@ -49,7 +49,7 @@
                     Paper Download
                 {% endcomment %}
                 {% if paper.pdf_url %}
-                    <a href="{{ paper.pdf_url }}" class="btn btn-outline-secondary btn-sm" rel="nofollow"><span class="oi oi-data-transfer-download" aria-hidden="true"></span> {% trans "Download" %}</a> <span class="text-black-50">{{ paper.pdf_url|domain }}</span>
+                <a href="{{ paper.pdf_url }}" class="btn btn-outline-secondary btn-sm" rel="nofollow"><span class="oi oi-data-transfer-download" aria-hidden="true"></span> {% trans "Download" %}</a> <span class="text-black-50">{%trans "from" %} {{ paper.pdf_url|domain }}</span>
                 {% else %}
                     <a href="{% url 'upload-paper' paper.pk %}" class="btn btn-outline-secondary btn-sm" rel="nofollow"><span class="oi oi-data-transfer-upload"></span> {% trans "Upload" %}</a>
                 {% endif %}

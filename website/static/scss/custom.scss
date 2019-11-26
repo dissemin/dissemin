@@ -90,3 +90,20 @@ h5.h-border, h6.h-border {
     @extend .border-primary;
     @extend .pb-1;
 }
+
+/* ***
+ * Forms
+ * *** */
+
+/* In case we do no want to show check boxes */
+.hiddenCheckboxes input[type=checkbox]
+{
+    display: none;
+}
+
+input[type=checkbox]:checked + div.publisherCriterionBox
+{
+    @extend .border-2;
+    @extend .rounded;
+    @extend .border-tertiary;
+}

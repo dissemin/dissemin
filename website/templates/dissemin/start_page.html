@@ -17,7 +17,7 @@
     <div class="jumbotron jumbotron-fluid text-light text-center mb-0" id="screenWelcome">
         <div class="container">
             <h1>{% trans 'Welcome to Dissemin' %}</h1>
-            <p>{% trans 'Dissemin detects papers behind paywalls and helps their authors to upload them in one click to an open repository.' %}</p>
+            <p style="font-size: 1.2rem;">{% trans 'Dissemin detects papers behind paywalls and helps their authors to upload them in one click to an open repository.' %}</p>
             <form method="get" action="{% url 'search' %}" >
                 <div class="input-group">
                     {% render_field search_form.authors class="form-control justify-content-center" %}

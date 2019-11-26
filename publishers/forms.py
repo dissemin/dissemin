@@ -22,8 +22,8 @@ class PublisherForm(SearchForm):
         choices=OA_STATUS,
         label=_('By publisher policy'),
         widget=forms.CheckboxSelectMultiple(
-            attrs={'class': 'form-check-input'}
-            ),
+            attrs={'onchange': 'submit()'}
+        ),
         required=False
         )
     sort_by = forms.ChoiceField(

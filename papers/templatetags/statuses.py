@@ -83,13 +83,13 @@ def helptext_oa_status(status):
 @register.filter(is_safe=True)
 def logo_oa_status(status):
     OA_STATUS_IMG = {
-        'OA': 'oa',
-        'OK': 'couldbe',
-        'NOK': 'closed',
-        'UNK': 'unk',
+        'OA': 'gold',
+        'OK': 'blue',
+        'NOK': 'black',
+        'UNK': 'gray',
     }
     if status in OA_STATUS_IMG:
-        return 'img/logos/' + OA_STATUS_IMG[status] + '.png'
+        return 'img/status_' + OA_STATUS_IMG[status] + '.png'
     return ''
 
 
