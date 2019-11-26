@@ -127,3 +127,20 @@ They can directly download this letter.
 Of course they can regenerate this letter at any point in time as long you haven't published the resource.
 
 We provide an :download:`example letter of declaratio n<examples/letter_of_declaration_ulb_darmstadt.pdf>` of ULB Darmstadt, so you have some imagination how it finally looks like.
+
+
+How to add your repository
+==========================
+
+If you finally want to connect your repository to Dissemin, then please get in contact with under `team@dissem.in <mailto:team@dissem.in>`_.
+
+There are a few steps to accomplish this task.
+
+Given our documentation, it is up to you which data you finally ingest in your repository.
+Aside from the question which data you ingest, there is also the question how you ingest the data.
+For example, your repository has probably a different granularity when it comes to document types.
+
+We have created a `Workflow <https://github.com/dissemin/dissemin/wiki/Checklist---Add-New-Repository>` in our GitHub-Wiki.
+It covers the essential steps and is meant to be a guide.
+From the template we create an issue that we finally close once the repository has been successfully connected.
+In case of need, we add further steps or remove unnessary steps.
