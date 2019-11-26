@@ -236,7 +236,6 @@ class Publisher(models.Model):
 
     @property
     def oa_status_as_color(self):
-        print(OA_STATUS_TO_COLOR)
         return OA_STATUS_TO_COLOR.get(self.oa_status)
 
     def change_oa_status(self, new_oa_status):
