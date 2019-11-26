@@ -111,7 +111,7 @@ To support you in your local implementation we have some examples and scripts.
 
 Examples
 ~~~~~~~~
-The metadata is authentic, i.e. it is created with Dissemin and represents how the metadata documents will loke like.
+The examples res authentic, i.e. they are created with Dissemin and represent how the metadata documents will loke like.
 For earch document type there is one or more example.
 They cover different cases like dewey decimal class or embargo.
 
@@ -129,7 +129,7 @@ You find usage instructions in the README.md inside of the packaging.
 Repository Helpers
 ==================
 
-We cannot support any direct support for necessary implementations or configurations on the repository that is going to be connected.
+We cannot directly support for necessary implementations or configurations on the repository that is going to be connected.
 
 But we like to support any repository administrator with at least some documentation.
 

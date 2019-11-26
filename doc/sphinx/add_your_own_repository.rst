@@ -2,7 +2,7 @@
 Add your own Repository
 =======================
 
-Dissemin not just detects papers behind a paywall, it offers solutions to liberate them.
+Dissemin not just detects papers behind paywalls, it offers solutions to liberate them.
 To achieve this goal with few effort for scientists, they can directly upload a publication into an open repository.
 Near the big repositories Zenodo and HAL, they can deposit publications in institutional repositories.
 This and the following pages will give you some information at hand how you can add your institutional repository to Dissemin.
@@ -15,12 +15,12 @@ In a last step we dive into more technical topics, giving precise descriptions o
 How a deposit works
 ===================
 
-Let us assume, that Max Mustermann, a new scientist in your institution, wants to deposit one of his publications in your repository.
+Let us assume, that Max Mustermann, a new scientist at your institution, wants to deposit one of his publications in your repository.
 He starts by searching for his publications on Dissemin and finds in the list an article namend *A modern view on `God of the Labyrinth`*.
 Quickly he finds, that this publicaton is not yet freely available.
 Luckily the publisher allows depositing a preprint version into open repositories.
 Max decides to make this publication freely available by uploading it in his institutions repository.
-He clicks on *Upload*, chooses the right file from his local storage, gives a short subject classification and choose a Creative Commons license and hits the final upload button.
+He clicks on *Upload*, chooses the right file from his local storage, gives a short subject classification, selects a Creative Commons license and hits finally the upload button.
 Dissemin creates a package of metadata and the file Max uploaded and ships it into your repository.
 Your repository receives the package, extracts the metadata and the document and creates a new entry in your repository.
 
@@ -35,18 +35,22 @@ So far, the publication is not yet published, since the repository declared the 
 Max downloads the letter directly from Dissemin.
 He reads it carefully and then signs it, as all important information has been filled already.
 
-Some few days pass and the letter arives at the repositories staff.
+Some few days pass and the letter arives at the repositoriy staff.
 The staff checks the letter, then navigates to the corresponding entry in the repository and changes the availability to 'published'.
 The repository sends Max an e-mail that his article *A modern view on `God of the Labyrinth`* is now freely available.
+
+Of course this is just an example with some arbitrary assumptions.
+Your local workflow may vary, but we see that you still decide what you publish and what you do not publish.
+And it's still you, who defines the requirements.
 
 
 Metadata
 ========
 
-Our main data sources are BASE and CrossRef.
-Our own data scheme is relatively close to Citeproc and CrossRef.
+Our main data sources are CrossRef and BASE.
+Our own data scheme is relatively close to Citeproc / CrossRef.
 This gives us the advantage, that---in general---we do not need to ask the user for metadata.
-This makes a deposition very little effort.
+This makes a deposit very little effort.
 
 Basic Metadata
 --------------
@@ -94,7 +98,7 @@ We have the following document types:
     thesis
     other
 
-Almost 90 per cent of our depositions are journal articles.
+Almost 90 per cent of our deposits are journal articles.
 
 Additional Metadata
 --------------------
@@ -120,9 +124,9 @@ With this letter the scientists declare certain legal statements about the publi
 
 Dissemin does generate these type of letters individually per repositor.
 This way the letter fits your needs in terms of design, content and legal character.
-We prefill the letter with all necessary data, so that the depositor just has to sign and send you the letter.
+We can prefill the letter with all necessary data, so that the depositor just has to sign and send you the letter.
 
-After the deposit the depositors are informed that heey need to fill in such a letter and send it to your repository administration.
+After the deposit the depositors are informed that they need to fill in such a letter and send it to your repository administration.
 They can directly download this letter.
 Of course they can regenerate this letter at any point in time as long you haven't published the resource.
 
@@ -132,12 +136,12 @@ We provide an :download:`example letter of declaratio n<examples/letter_of_decla
 How to add your repository
 ==========================
 
-If you finally want to connect your repository to Dissemin, then please get in contact with under `team@dissem.in <mailto:team@dissem.in>`_.
+If you finally want to connect your repository to Dissemin, then please get in contact with us under `team@dissem.in <mailto:team@dissem.in>`_.
 
 There are a few steps to accomplish this task.
 
 Given our documentation, it is up to you which data you finally ingest in your repository.
-Aside from the question which data you ingest, there is also the question how you ingest the data.
+Aside from the question, which data you ingest, there is also the question how you ingest the data.
 For example, your repository has probably a different granularity when it comes to document types.
 
 We have created a `Workflow <https://github.com/dissemin/dissemin/wiki/Checklist---Add-New-Repository>` in our GitHub-Wiki.
