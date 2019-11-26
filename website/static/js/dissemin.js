@@ -178,7 +178,7 @@ $(function() {
 
 /* Our strategy is: Reload a part of the page and insert any messages that get delivered */
 
-function updateSearch (ajaxUrl, data=null) {
+function updateSearch (ajaxUrl, data=null, new_browser_url=false) {
     // slighty fade current results that are going to be replaced
     $("#paperSearchResults").css("opacity", "0.5");
     // turn bird on
@@ -206,6 +206,11 @@ function updateSearch (ajaxUrl, data=null) {
                     [formatNumbersThousands(result.nb_results)]
                 )
             );
+            if (new_browser_url === true) {
+                console.log("spam");
+                console.log(data);
+                window.history.pushState(result, "", "?" + jQuery.param(data));
+            }
         },
         timeout : 5000, // 5 seconds
         url : ajaxUrl
@@ -227,7 +232,7 @@ $(function () {
         var ajaxUrl =  obj.attr("data-ajax-url"); // We take the url from data-ajax-url since it depends on the view
         var data = obj.serializeArray();
 
-        updateSearch(ajaxUrl, data);
+        updateSearch(ajaxUrl, data, true);
     });
 });
 
@@ -240,7 +245,7 @@ $(function () {
         var ajaxUrl =  obj.attr("data-ajax-url"); // We take the url from data-ajax-url since it depends on the view
         var data = obj.serializeArray();
 
-        updateSearchajaxUrl, data();
+        updateSearch(ajaxUrl, data, true);
     });
 });
 
