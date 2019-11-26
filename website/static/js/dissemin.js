@@ -342,11 +342,11 @@ $(function () {
         var ajaxUrl;
 
         if (action == "mark") {
-            obj.text(gettext("Adding to todolist"));
+            obj.text(gettext("Adding to to-do list"));
             ajaxUrl = Urls["ajax-todolist-add"]();
         }
         else if (action == "unmark") {
-            obj.text(gettext("Removing from todolist"));
+            obj.text(gettext("Removing from to-do list"));
             ajaxUrl = Urls["ajax-todolist-remove"]();
         }
         else {
