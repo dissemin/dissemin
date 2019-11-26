@@ -65,10 +65,10 @@
 
             </div>
             <div class="col-12 col-md-8 order-md-first">
-                <h1 class="h-border">{{ publisher.name }}</h1>
+                <h2 class="h-border">{{ publisher.name }}</h2>
 
                 <!-- Policies -->
-                <h2 class="h-border">{% trans "Green open access summary" %}</h2>
+                <h4 class="h-border">{% trans "Green open access summary" %}</h4>
                 <p>
                     {% blocktrans trimmed with publisher_name=publisher.name %}
                         This is a short summary of the green open access policy of {{ publisher_name }}.
@@ -78,7 +78,7 @@
 
                 <!-- Conditions -->
                 {% if publisher.has_conditions %}
-                    <h2 class="h-border mt-2">{% trans "Conditions" %}</h2>
+                    <h4 class="h-border mt-2">{% trans "Conditions" %}</h4>
                     <ul>
                         {% for condition in publisher.publishercondition_set.all %}
                             <li>{{ condition|striptags }}</li>
@@ -88,7 +88,7 @@
 
                 <!-- Policy details -->
                 {% if publisher.has_copyrightlinks %}
-                    <h2 class="h-border">{% trans "Policy details" %}</h2>
+                    <h4 class="h-border">{% trans "Policy details" %}</h4>
                     <ul>
                         {% for link in publisher.publishercopyrightlink_set.all %}
                             <li><a href="{{ link.url }}">{{ link.text }}</a></li>
