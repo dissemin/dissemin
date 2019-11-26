@@ -48,6 +48,7 @@
                 </p>
 
                 {% if request.user.is_superuser %}
+                <h3 class="h-border">{% trans "For superusers" %}</h3>
                 <form role="form" id="changePublisherOAStatus" data-ajax-url="ajax_change_publisher_status" data-publisher-pk="{{ publisher.pk }}">
                     <div class="form-group">
                         <label>{% trans "Change open access status" %}</label>
