@@ -27,6 +27,7 @@ from datetime import date
 
 from backend.utils import run_only_once
 from deposit.models import DepositRecord
+from deposit.models import Repository
 
 logger = logging.getLogger('dissemin.' + __name__)
 
@@ -47,9 +48,6 @@ def change_embargoed_to_published():
 def refresh_deposit_statuses():
     # only run it on DepositRecords that have initially succeeded:
     # ignore 'failed' and 'faked' statuses
-    for d in DepositRecord.objects.filter(status__in=
-            ['pending','published','refused','deleted']).select_related('repository'):
-        logger.info(d.status)
-        protocol = d.repository.get_implementation()
-        if protocol:
-            protocol.refresh_deposit_status(d)
+    for repository in Repository.object.all():
+        protocol = repository.get_implementation()
+        protocol.refresh_deposit_status()

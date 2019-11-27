@@ -34,6 +34,7 @@ from urllib.parse import urlparse
 from deposit.hal.forms import HALForm
 from deposit.hal.forms import HALPreferencesForm
 from deposit.hal.metadata import AOFRFormatter
+from deposit.models import DepositRecord
 from deposit.protocol import DepositError
 from deposit.protocol import DepositResult
 from deposit.protocol import RepositoryProtocol
@@ -326,14 +327,14 @@ class HALProtocol(RepositoryProtocol):
                                       form, pretty=True)
         return metadata
 
-    def refresh_deposit_status(self, deposit_record):
+    def refresh_deposit_status(self):
         """
         Only refresh the status if we don't already know that
         the paper is published - in that case we trust HAL not
         to delete it. This is to reduce the number of requests
         on their side.
         """
-        if deposit_record.status != 'published':
+        for deposit_record in DepositRecord.objects.filter(status='published').select_related('oairecord', 'oairecord__about'):
             new_status = self.get_new_status(deposit_record.identifier)
             if new_status != deposit_record.status:
                 deposit_record.status = new_status
