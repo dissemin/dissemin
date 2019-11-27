@@ -1,159 +1,150 @@
+=======================
 Add your own Repository
 =======================
 
-If you like to add your (institutional) repository, please get in contact with us.
-On this page we offer you some information about our services and what has to be done on your side.
+Dissemin not just detects papers behind paywalls, it offers solutions to liberate them.
+To achieve this goal with few effort for scientists, they can directly upload a publication into an open repository.
+Near the big repositories Zenodo and HAL, they can deposit publications in institutional repositories.
+This and the following pages will give you some information at hand how you can add your institutional repository to Dissemin.
 
-Currently we work on implementations for EPrints, MyCore and DSpace.
+As you will learn, this involves not to much effort.
+First, we describe the workflow and how the document finds it way into your repository.
+Then we explain our metadata, services and give an outline of how we guide you through the integration process.
+In a last step we dive into more technical topics, giving precise descriptions of the metadata encoding and how to transfer the file with its metadata.
 
-Deposition Protocol
--------------------
+How a deposit works
+===================
 
-Currently we support the `SWORDv2 protocol <http://swordapp.org/sword-v2/sword-v2-specifications/>`_.
-However, this protocol offers a lot of options about how to deposit and how to organize the metadata and should be seen as a framework. 
-Technically we can offer different depositing methods, e.g. via some REST API or similar.
+Let us assume, that Max Mustermann, a new scientist at your institution, wants to deposit one of his publications in your repository.
+He starts by searching for his publications on Dissemin and finds in the list an article namend *A modern view on `God of the Labyrinth`*.
+Quickly he finds, that this publicaton is not yet freely available.
+Luckily the publisher allows depositing a preprint version into open repositories.
+Max decides to make this publication freely available by uploading it in his institutions repository.
+He clicks on *Upload*, chooses the right file from his local storage, gives a short subject classification, selects a Creative Commons license and hits finally the upload button.
+Dissemin creates a package of metadata and the file Max uploaded and ships it into your repository.
+Your repository receives the package, extracts the metadata and the document and creates a new entry in your repository.
 
-Shipping with SWORDv2
-^^^^^^^^^^^^^^^^^^^^^
+Max does not know anything about this, but is happy as he reads, that his publication will soon be available for everyone!
+He also reads that he has to sign a letter of declaration.
 
-We use the `Metdata Encoding \& Transmission Standard (METS) <https://www.loc.gov/standards/mets/>`_ to ship our metadata and describe what is delivered.
-Most repositories are able to ingest a METS-package.
+Meanwhile the repository tells the repository staff that someone created a new entry.
+The staff checks the entry.
+Everything is fine, except that Max still has to deliver the letter of declaration.
+So far, the publication is not yet published, since the repository declared the availability of the document as 'in moderation'.
 
-We try to keep our METS as simple as possible.
-Currently we populate only ``dmdSec``, ``amdSec/rightsMD``, ``fileSec`` and ``structSec``.
+Max downloads the letter directly from Dissemin.
+He reads it carefully and then signs it, as all important information has been filled already.
 
-* ``dmdSec`` contains the bibliographic metadata
-* ``amdSec/rightsMD`` contains information about the depositor, the license and additional dissemin related information. You find the documentation in :ref:`non-bibliographic-metadata-label`.
+Some few days pass and the letter arives at the repositoriy staff.
+The staff checks the letter, then navigates to the corresponding entry in the repository and changes the availability to 'published'.
+The repository sends Max an e-mail that his article *A modern view on `God of the Labyrinth`* is now freely available.
 
-We deliver two files per package:
-
-* ``mets.xml`` - containing the metadata
-* ``document.pdf`` - the document to be deposited
-
-We provide an :download:`illustrating example <examples/mets.xml>` using Dublin Core.
-
-We set the following headers::
-
-    Content-Type: application/zip
-    Content-Disposition: filename=mets.zip
-    Packaging: http://purl.org/net/sword/package/METSMODS
-
-If you require for your ingest a different packaging name or packaging format, please let us know.
-
-The body is the named file. All values won't change between different uploads to the same repository.
-
-Script for Tests
-''''''''''''''''
-
-To support you in your local implementation we have some examples (grouped by document type, see below).
-This is authentic metadata, i.e. this metadata was created by Dissemin and represents how the metadata documents will loke like.
-
-You can download our :download:`script <examples/upload_mets.zip>` for testing your implementations.
-The HTTP-requests are identical to those in Dissemin.
-You find usage instructions in the README.md inside of the packaging.
+Of course this is just an example with some arbitrary assumptions.
+Your local workflow may vary, but we see that you still decide what you publish and what you do not publish.
+And it's still you, who defines the requirements.
 
 
 Metadata
---------
+========
 
-Bibliographic Metadata
-^^^^^^^^^^^^^^^^^^^^^^
+Our main data sources are CrossRef and BASE.
+Our own data scheme is relatively close to Citeproc / CrossRef.
+This gives us the advantage, that---in general---we do not need to ask the user for metadata.
+This makes a deposit very little effort.
 
-Most of our data comes from `CrossRef <https://www.crossref.org>`_ and has thus a certain quality. 
+Basic Metadata
+--------------
 
-We offer currentlry `Metadata Objects Description Data (MODS) <http://www.loc.gov/standards/mods/>`_.
-
-MODS
-''''
-
-Currently we create version ``3.7``. 
-We populate as near as the definitions require as possible.
-You find below our mappings using XPath notation.
+For a publication we store the following metadata.
 
 .. code::
 
-    abstract => abstract
-    author => name[@type="personal"]namePart/given + family + name
-    author[orcid] => name/nameIdentifier[@type=orcid]
-    date => originInfo/dateIssued[@enconding="w3cdtf"] (YYYY-MM-DD)
-    ddc => classification[@authority="ddc"]
-    document type => genre
-    doi => identifier[@type="doi"]
-    essn => relatedItem/identifier[@type="eissn"]
-    issn => relatedItem/identifier[@type="issn"]
-    issue => relatedItem/part/detail[@type="issue"]/number
-    journal => relatedItem/titleInfo/title
-    language => language/languageTerm[@type="code"][@authority="rfc3066"]
-    pages => relatedItem/part/extent[@unit="pages"]/total or start + end
-    publisher => originInfo/publisher
-    title => titleInfo/title
-    volume => relatedItem/part/detail[@type="volume"]
+    abstract
+    authors
+    date (YYYY-MM-DD)
+    document type
+    doi
+    eissn
+    issn
+    issue
+    journal
+    language
+    pages
+    publisher
+    title
+    volume
 
-Note that volume, issue and pages are often not arabic numbers, but may contain other literals.
-Although MODS does provide fields for declarations like *No., Vol.* or *p.* we do not use this, because our datasources don't.
+Note however, that we have renamed Citeprocs `container-title` into `journal`.
+This has a historical reason, aiming at first at journal articles.
 
-We ship the language as rfc3066 determined by `langdetect <https://pypi.org/project/langdetect/>`_.
-We ship the language if both conditions are satisfied:
+Document types
+--------------
 
-1. The abstract has a length of at least 256 letters (including whitespaces)
-2. ``langdetect`` gains a confidence of at least 50%
+We have the following document types:
 
-If we cannot determine any language, we omit the field.
+.. code::
 
-Optionally we ship the Dewey Decimal Class (DDC).
-We support up to the first 1000 classes, i.e. from ``000`` to ``999``.
-You can freely chose which classes are of interest.
-When presenting the user, we group them with categories ``0...9``.
-We ship the classification number as three-digit-number, i.e. filling up with leading zeros for numbers smaller than 99.
+    book
+    book-chapter
+    dataset
+    journal-article
+    journal-issue
+    poster
+    preprint
+    proceedings
+    proceedings-article
+    reference-entry
+    report
+    thesis
+    other
 
-Examples
-........
+Almost 90 per cent of our deposits are journal articles.
 
-This is our list of examples of MODS metadata created by Dissemin.
-This means, that they are already contained in a suitable METS container.
-The list is sorted by publications types and covers all publication types that Dissemin uses.
-Additionally you download the example as :download:`bundle <examples/mods.zip>`.
+Additional Metadata
+--------------------
 
-.. include:: examples/mods/examples_mods.rst
+In addition to the above metadata we can ship out of the box the following:
 
-.. _non-bibliographic-metadata-label:
+.. code::
 
-Dissemin Metadata
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+    depositor information (name, email, orcid)
+    dewey decimal class
+    embargo
+    language (with langdetect)
+    license
+    sherpa romeo id
 
-In addition to our bibliographic metadata we ship special dissemin metadata.
-This metadata is meant to support publication workflows in institutional repositories, for example helping in the moderation process.
-
-We ship the following data:
-
-===================== =====
-Data                  Explanation
-===================== =====
-authentication method The method of authentication. This is currently shibboleth and orcid.
-name                  The first and last name of the depositor. Note that the depositor does not need to be a contributor of the publication.
-email                 E-Mail address of the depositor in case you need to contact them.
-orcid                 ORCID if the depositor has one.
-is contributor        ``true/false`` and states if the depositor is one of the contributors or if deposits on behalf
-identical institution ``true/false`` and states if the depositors institution is identical with the institution of the repository.
-license               The license. Most likely Creative Commons, but different licenses are possible. We happily add new licenses for your repository. We deliver the name and if existing URI and a transmit id.
-embargoDate           The publication must not be published before this date. It may be published on this date.
-SHERPA/RomeoID        ID of the journal from `SHERPA/RoMEO <http://sherpa.ac.uk/romeo/index.php>`_. Using their API or web interface you can quickly obtain publishers conditions.
-DisseminID            This ID refers to the publication in Dissemin. This ID is not persistent. The reason is the internal data model: Merging and unmerging papers might create or delete primary keys in the database. For a 'short' period of time, this id will definetely be valid. You can use the DOI shipped in the bibliographic metadata to get back to the publication in Dissemin.
-===================== =====
-
-If you need more information for your workflow, please contact us. We can add additional fields.
-
-You can find our schema for :download:`download <../../deposit/schema/dissemin_v1.0.xsd>` in Version 1.0.
-
+Services
+========
 
 Letter of Declaration
 ---------------------
+Usually institutional repositores require some kind of a letter of declaration from their scientists.
+With this letter the scientists declare certain legal statements about the publication and its deposition.
 
-To finally publish a document or resource in your repository, you might require some kind of letter of declaration of the depositor, in which the depositors sign that he accepts certain conditions etc. pp.
+Dissemin does generate these type of letters individually per repositor.
+This way the letter fits your needs in terms of design, content and legal character.
+We can prefill the letter with all necessary data, so that the depositor just has to sign and send you the letter.
 
-Dissemin can generate these type of letters individually per repository, i.e. you can define the content and look of this document.
-Additionally it is prefilled with all necessary data, so that the depositor just has to sign and send you the letter.
-
-After the deposit the depositor is informed that he has to fill in such a letter and send it to your repository administration. He can directly download this letter. En plus he can regenerate this letter at any point in time as long you haven't published the resource.
+After the deposit the depositors are informed that they need to fill in such a letter and send it to your repository administration.
+They can directly download this letter.
+Of course they can regenerate this letter at any point in time as long you haven't published the resource.
 
 We provide an :download:`example letter of declaratio n<examples/letter_of_declaration_ulb_darmstadt.pdf>` of ULB Darmstadt, so you have some imagination how it finally looks like.
+
+
+How to add your repository
+==========================
+
+If you finally want to connect your repository to Dissemin, then please get in contact with us under `team@dissem.in <mailto:team@dissem.in>`_.
+
+There are a few steps to accomplish this task.
+
+Given our documentation, it is up to you which data you finally ingest in your repository.
+Aside from the question, which data you ingest, there is also the question how you ingest the data.
+For example, your repository has probably a different granularity when it comes to document types.
+
+We have created a `Workflow <https://github.com/dissemin/dissemin/wiki/Checklist---Add-New-Repository>` in our GitHub-Wiki.
+It covers the essential steps and is meant to be a guide.
+From the template we create an issue that we finally close once the repository has been successfully connected.
+In case of need, we add further steps or remove unnessary steps.
