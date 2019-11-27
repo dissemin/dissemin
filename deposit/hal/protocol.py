@@ -338,13 +338,13 @@ class HALProtocol(RepositoryProtocol):
             new_status = self.get_new_status(deposit_record.identifier)
             if new_status != deposit_record.status:
                 deposit_record.status = new_status
-                deposit_record.pub_date = date.today()
-                deposit_record.save(update_fields=['status', 'pub_date'])
                 oairecord = deposit_record.oairecord
                 if new_status == 'published':
                     oairecord.pdf_url = oairecord.splash_url + '/document'
+                    deposit_record.pub_date = date.today()
                 else:
                     oairecord.pdf_url = None
+                deposit_record.save(update_fields=['status', 'pub_date'])
                 oairecord.save(update_fields=['pdf_url'])
                 oairecord.about.update_availability()
                 oairecord.about.update_index()
