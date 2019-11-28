@@ -8,6 +8,16 @@ def citeproc():
     """
     d = {
         'title' : 'The God of the Labyrinth',
+        'author' : [
+            {
+                'given' : 'Herbert',
+                'family' : 'Quain',
+            },
+            {
+                'given' : 'Jorge Luis',
+                'family' : 'Borges',
+            },
+        ]
     }
 
     return d

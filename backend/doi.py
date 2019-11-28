@@ -5,12 +5,19 @@
 # The strategy in the first case will be to check wether we have the DOI in our system and if the last update is not to long ago, we just skip.
 # This has the reason, that a users might wait if they refresh their profile.
 
+from backend.crossref import convert_to_name_pair
+from papers.baremodels import BareName
+
 
 class CiteprocError(Exception):
     pass
 
-class CiteprocTitleError(Exception):
+class CiteprocAuthorError(CiteprocError):
     pass
+
+class CiteprocTitleError(CiteprocError):
+    pass
+
 
 class Citeproc():
     """
@@ -33,6 +40,22 @@ class Citeproc():
 
 
     @classmethod
+    def _get_authors(cls, data):
+        """
+        :param data: citeproc metadata
+        :returns: List of barenames
+        :raises: CiteprocAuthorError
+        """
+        authors = data.get('author')
+        if not isinstance(authors, list):
+            raise CiteprocAuthorError('No list of authors in metadata')
+        name_pairs = list(map(convert_to_name_pair, authors))
+        if None in name_pairs:
+            raise CiteprocAuthorError('Author list compromised')
+        return [BareName.create_bare(first, last) for first, last in name_pairs]
+
+
+    @classmethod
     def _get_paper_data(cls, data):
         """
         :param data: citeproc metadata
@@ -40,7 +63,8 @@ class Citeproc():
         :raises: CiteprocError
         """
         bare_paper_data = {
-            'title' : cls._title()
+            'authors' : cls._get_authors(),
+            'title' : cls._get_title(),
         }
         
         return bare_paper_data
