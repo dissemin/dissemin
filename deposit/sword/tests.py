@@ -1,7 +1,9 @@
+import json
 import os
 import pytest
 import responses
 
+from datetime import date
 from lxml import etree
 from zipfile import ZipFile
 
@@ -9,12 +11,14 @@ from deposit.sword.forms import SWORDMETSForm
 from deposit.models import DDC
 from deposit.models import License
 from deposit.models import LicenseChooser
+from deposit.models import DepositRecord
 from deposit.protocol import DepositError
 from deposit.protocol import DepositResult
 from deposit.sword.protocol import SWORDMETSProtocol
 from deposit.tests.test_protocol import MetaTestProtocol
 from dissemin.settings import BASE_DIR
 from papers.models import Researcher
+from upload.models import UploadedPDF
 
 
 userdata = [(None, None), ('vetinari', None), (None, 'psst')]
@@ -23,6 +27,27 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
     """
     This class contains some tests that every implemented SWORD protocol shall pass. The tests are not executed as members of this class, but of any subclass.
     """
+
+    @pytest.fixture
+    def pending_deposit_record(self, dummy_oairecord, user_leibniz):
+        """
+        Empty DepositRecord with FK to dummy oairecord
+        """
+        pdf = UploadedPDF.objects.create(
+            user=user_leibniz,
+            file='spam.pdf',
+        )
+        dr = DepositRecord.objects.create(
+            paper=dummy_oairecord.about,
+            user=user_leibniz,
+            repository=self.protocol.repository,
+            identifier = 'spanish-inquisition',
+            oairecord = dummy_oairecord,
+            status = 'pending',
+            file=pdf,
+        )
+
+        return dr
 
     @pytest.mark.write_mets_examples
     def test_write_mets_metadata_examples(self, db, upload_data, user_leibniz):
@@ -296,6 +321,37 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
 
 
     @responses.activate
+    def test_refresh_deposit_status(self, pending_deposit_record):
+        """
+        Test if status is updated
+        """
+        update_status_url = 'https://repository.dissem.in/update_status'
+        body = {
+            'status' : 'refused'
+        }
+        responses.add(responses.GET, update_status_url, status=200, body=json.dumps(body))
+        self.protocol.repository.update_status_url = update_status_url
+        self.protocol.refresh_deposit_status()
+        pending_deposit_record.refresh_from_db()
+        assert pending_deposit_record.status == body.get('status')
+
+
+    def test_refresh_deposit_status_invalid_data(self, pending_deposit_record):
+        """
+        With invalid data, status must not be updated
+        """
+        update_status_url = 'https://repository.dissem.in/update_status'
+        body = {
+            'status' : 'embargoed'
+        }
+        responses.add(responses.GET, update_status_url, status=200, body=json.dumps(body))
+        self.protocol.repository.update_status_url = update_status_url
+        self.protocol.refresh_deposit_status()
+        pending_deposit_record.refresh_from_db()
+        assert pending_deposit_record.status == 'pending'
+
+
+    @responses.activate
     def test_submit_deposit(self, blank_pdf_path, monkeypatch, monkeypatch_metadata_creation, monkeypatch_get_deposit_result):
         """
         A test for submit deposit.
@@ -341,6 +397,88 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
         p.repository.save()
         with pytest.raises(DepositError):
             p.submit_deposit(None, None)
+
+
+    def test_update_deposit_record_status_arbitrary(self, pending_deposit_record):
+        """
+        If new status not in ['refused', 'embargoed', 'published'], nothing must happen
+        """
+        s = pending_deposit_record.status
+        self.protocol._update_deposit_record_status(pending_deposit_record, 'spam', None, None)
+        pending_deposit_record.refresh_from_db()
+        assert pending_deposit_record.status == s
+
+
+    def test_update_deposit_record_status_refused(self, pending_deposit_record):
+        """
+        If new status is 'refused', do have this status
+        """
+        self.protocol._update_deposit_record_status(pending_deposit_record, 'refused', None, None)
+        pending_deposit_record.refresh_from_db()
+        assert pending_deposit_record.status == 'refused'
+
+
+    @pytest.mark.parametrize('status', ['embargoed', 'published'])
+    def test_update_deposit_record_status_embargoed_published(self, pending_deposit_record, status):
+        """
+        If new status is 'embargoed' or 'published', change status and set date and pdf url
+        """
+        pub_date = date(2020,10,3)
+        pdf_url = 'https://repository.example.org/entry/3234/document.pdf'
+        self.protocol._update_deposit_record_status(pending_deposit_record, status, pub_date, pdf_url)
+        pending_deposit_record.refresh_from_db()
+        assert pending_deposit_record.status == status
+        assert pending_deposit_record.pub_date == pub_date
+        assert pending_deposit_record.oairecord.pdf_url == pdf_url
+        assert pending_deposit_record.oairecord.about.pdf_url == pdf_url
+
+
+    @pytest.mark.parametrize('data', [{'status' : 'embargoed'}, {'status' : 'embargoed'}])
+    def test_validate_status_data_embargoed_published(self, data):
+        """
+        Returns a tuple of status, pub_date and pdf_url
+        """
+        d = date(2020, 10, 10)
+        data['publication_date'] = d.isoformat()
+        pdf = 'https://repository.example.org/3234/document.pdf'
+        data['pdf_url'] = 'https://repository.example.org/3234/document.pdf'
+        status, pub_date, pdf_url = self.protocol._validate_deposit_status_data(data)
+        assert status == data.get('status')
+        assert pub_date == d
+        assert pdf_url == pdf
+
+
+    @pytest.mark.parametrize('data', [{'status' : 'pending'}, {'status' : 'refused'}, ])
+    def test_validate_status_data_pending_refused(self, data):
+        """
+        Returns a tuple of status, pub_date and pdf_url. The latter one shall be empty.
+        """
+        status, pub_date, pdf_url = self.protocol._validate_deposit_status_data(data)
+        assert status == data.get('status')
+        assert pub_date == None
+        assert pdf_url == ''
+
+
+    @pytest.mark.parametrize('data', [{'status' : 'embargoed'}, {'status' : 'published'}])
+    @pytest.mark.parametrize('pub_date', ['325-342-3', None])
+    def test_validate_status_data_invalid_pub_date(self, data, pub_date):
+        """
+        If no suitable pubdate, must raise exception
+        """
+        data['publication_date'] = pub_date
+        data['pdf_url'] = 'https://repository.example.org/3234/document.pdf'
+        with pytest.raises(Exception):
+             self.protocol._validate_deposit_status_data(data)
+
+
+    @pytest.mark.parametrize('data', [{'status' : 'embargoed'}, {'status' : 'published'}])
+    def test_validate_status_data_invalid_pdf_url(self, data):
+        """
+        If no pdf_url, raise exception
+        """
+        data['publication_data'] = '2020-10-10'
+        with pytest.raises(Exception):
+             self.protocol._validate_deposit_status_data(data)
 
 
 class TestSWORDMETSProtocolNotImplemented():
