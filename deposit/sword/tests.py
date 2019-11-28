@@ -455,7 +455,7 @@ class MetaTestSWORDMETSProtocol(MetaTestProtocol):
         """
         status, pub_date, pdf_url = self.protocol._validate_deposit_status_data(data)
         assert status == data.get('status')
-        assert pub_date == None
+        assert pub_date is None
         assert pdf_url == ''
 
 
