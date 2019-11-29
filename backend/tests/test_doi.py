@@ -12,6 +12,7 @@ from backend.doi import CiteprocTitleError
 from backend.doi import Citeproc
 from backend.doi import CrossRef
 from papers.baremodels import BareName
+from papers.doi import doi_to_url
 
 
 class TestCiteproc():
@@ -144,6 +145,8 @@ class TestCiteproc():
         assert r['pages'] == citeproc['pages']
         assert r['publisher_name'] == citeproc['publisher_name']
         assert r['pubtype'] == citeproc['type']
+        assert r['splash_url'] == doi_to_url(citeproc['DOI'])
+        assert r['pdf_url'] == '' # Is not OA
         assert r['volume'] == citeproc['volume']
 
 
@@ -195,6 +198,22 @@ class TestCiteproc():
         assert r['orcids'] == orcids
         assert r['pubdate'] == date(*citeproc['issued']['date-parts'])
         assert r['title'] == title
+
+
+    @pytest.mark.parametrize('doi', [True, False])
+    @pytest.mark.parametrize('license', [True, False])
+    def test_get_pdf_url(self, monkeypatch, doi, license):
+        """
+        Must return true or false
+        """
+        monkeypatch.setattr(self.test_class, '_is_oa_by_doi', lambda x: doi)
+        monkeypatch.setattr(self.test_class, '_is_oa_by_license', lambda x: license)
+        url = 'https://repository.dissem.in/entry/3242/document.pdf'
+        r = self.test_class._get_pdf_url(doi, license, url)
+        if doi or license:
+            assert r == url
+        else:
+            assert r == ''
 
 
     def test_get_pubdate_issued(self, citeproc):
@@ -259,7 +278,6 @@ class TestCiteproc():
         with pytest.raises(CiteprocPubtypeError):
             self.test_class._get_pubtype(dict())
 
-
     def test_get_title(self, citeproc):
         r = self.test_class._get_title(citeproc)
         assert r == citeproc['title']
@@ -271,6 +289,21 @@ class TestCiteproc():
         del citeproc['title']
         with pytest.raises(CiteprocTitleError):
             self.test_class._get_title(citeproc)
+
+
+    @pytest.mark.parametrize('doi, expected', [('10.2195/spam', True), ('10.15122/spam', False)])
+    def test_is_oa_by_doi(self, doi, expected):
+        """
+        Must be true or false
+        """
+        assert self.test_class._is_oa_by_doi(doi) == expected
+
+    @pytest.mark.parametrize('licenses, expected', [([{'URL' : 'creativecommons.org/licenses/'}], True), ([{'URL' : 'https://dissem.in/not_free'}], False), ([{}], False), ([], False)])
+    def test_is_oa_by_license(self, licenses, expected):
+        """
+        Must be true or false
+        """
+        assert self.test_class._is_oa_by_license(licenses) == expected
 
 
     @pytest.mark.parametrize('data, expected', [({'date-parts' : [2019, 10, 10]}, date(2019, 10, 10)), ({'raw' : '2019-10-10'}, date(2019, 10, 10)), (None, None), ({'spam' : 'ham'}, None)])

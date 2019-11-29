@@ -10,8 +10,11 @@ import logging
 from datetime import datetime
 
 from backend.crossref import convert_to_name_pair
+from backend.crossref import is_oa_license
+from backend.doiprefixes import free_doi_prefixes
 from backend.pubtype_translations import CITEPROC_PUBTYPE_TRANSLATION
 from papers.baremodels import BareName
+from papers.doi import doi_to_url
 from papers.doi import to_doi
 from papers.utils import tolerant_datestamp_to_datetime
 from papers.utils import validate_orcid
@@ -153,15 +156,21 @@ class Citeproc():
         :raises: CiteprocError
         """
         doi = cls._get_doi(data)
+        splash_url = doi_to_url(doi)
+        licenses = data.get('licenses', [])
+        pdf_url = cls._get_pdf_url(doi, licenses, splash_url)
+
         bare_oairecord_data = {
             'doi' : doi,
             'issn' : cls._get_issn(data),
             'issue' : data.get('issue', ''),
             'journal_title' : cls._get_container(data),
             'pages' : data.get('pages', ''),
+            'pdf_url' : pdf_url,
             'pubdate' : cls._get_pubdate(data),
             'publisher_name' : data.get('publisher_name', '')[:512],
             'pubtype' : cls._get_pubtype(data),
+            'splash_url' : splash_url,
             'volume' : data.get('volume', ''),
         }
 
@@ -210,6 +219,17 @@ class Citeproc():
 
 
     @classmethod
+    def _get_pdf_url(cls, doi, licenses, url):
+        """
+        Tries to fgiure out, if the publication is OA by inspecting metadata, if so, sets url
+        """
+        if cls._is_oa_by_doi(doi) or cls._is_oa_by_license(licenses):
+            return url
+        else:
+            return ''
+
+
+    @classmethod
     def _get_pubdate(cls, data):
         """
         Get the publication date out of a record. If 'issued' is not present
@@ -226,6 +246,7 @@ class Citeproc():
         if pubdate is None:
             raise CiteprocDateError('No valid date found in metadata')
         return pubdate
+
 
     @staticmethod
     def _get_pubtype(data):
@@ -244,7 +265,6 @@ class Citeproc():
         return pubtype
 
 
-
     @classmethod
     def _get_title(cls, data):
         """
@@ -257,6 +277,27 @@ class Citeproc():
         if title is None:
             raise CiteprocTitleError('No title in metadata')
         return title
+
+
+    @staticmethod
+    def _is_oa_by_doi(doi):
+        """
+        Tries to figure by doi if publication is open access
+        :param data: citeproc metadata
+        :returns: True if is open access, else False
+        """
+        doi_prefix = doi.split('/')[0]
+        return doi_prefix in free_doi_prefixes
+
+    @staticmethod
+    def _is_oa_by_license(licenses):
+        """
+        Tries to figure out by license if publication is open access
+        :param data: citeproc metadata
+        :returns: True if is open access, else False
+        """
+        found_licenses = set([(license or {}).get('URL', '') for license in licenses])
+        return any(map(is_oa_license, found_licenses))
 
 
     @classmethod
