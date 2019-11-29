@@ -20,6 +20,9 @@ class CiteprocError(Exception):
 class CiteprocAuthorError(CiteprocError):
     pass
 
+class CiteprocContainerTitleError(CiteprocError):
+    pass
+
 class CiteprocDateError(CiteprocError):
     pass
 
@@ -87,6 +90,34 @@ class Citeproc():
         if None in name_pairs:
             raise CiteprocAuthorError('Author list compromised')
         return [BareName.create_bare(first, last) for first, last in name_pairs]
+
+
+    @staticmethod
+    def _get_container(data):
+        """
+        :param data: citeproc metadata
+        :returns: Container title
+        :raises: CiteprocContainerTitleError
+        """
+        container = data.get('container-title')
+        if not container:
+            raise CiteprocContainerTitleError('No container-title in metadata')
+        return container[:512]
+
+
+    @classmethod
+    def _get_oairecord_data(cls, data):
+        """
+        :param data: citeproc metadata
+        :returns: Returns a dict, ready to passed to a BarePaper instance
+        :raises: CiteprocError
+        """
+        bare_oairecord_data = {
+            'journal_title' : cls._get_container(data),
+            'pubdate' : cls._get_pubdate(data),
+        }
+
+        return bare_oairecord_data
 
 
     @staticmethod
@@ -208,6 +239,14 @@ class CrossRef(Citeproc):
     """
     This class can parse CrossRef metadata, which is similar to citeproc and has functionality to fetch from CrossRef API
     """
+
+    @staticmethod
+    def _get_container(data):
+        container_title = data.get('container-title')
+        if not isinstance(container_title, list):
+            raise CiteprocContainerTitleError('container-title in metadata invalid')
+        return container_title[0][:512]
+
 
     @classmethod
     def _get_title(cls, data):

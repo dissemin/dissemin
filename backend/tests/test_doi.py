@@ -4,6 +4,7 @@ from datetime import date
 
 from backend.doi import CiteprocError
 from backend.doi import CiteprocAuthorError
+from backend.doi import CiteprocContainerTitleError
 from backend.doi import CiteprocDateError
 from backend.doi import CiteprocTitleError
 from backend.doi import Citeproc
@@ -76,6 +77,20 @@ class TestCiteproc():
         monkeypatch.setattr('backend.doi.convert_to_name_pair', lambda x: None)
         with pytest.raises(CiteprocAuthorError):
             self.test_class._get_authors(citeproc)
+
+
+    def test_get_container(self, container_title, citeproc):
+        """
+        Must return container title
+        """
+        assert self.test_class._get_container(citeproc) == container_title
+
+    def test_get_container_missing(self):
+        """
+        Must return exception
+        """
+        with pytest.raises(CiteprocContainerTitleError):
+            self.test_class._get_container(dict())
 
 
     @pytest.mark.parametrize('orcid, expected', [({'ORCID' : '0000-0001-8187-9704'}, '0000-0001-8187-9704'), ({'ORCID' : '0000-0001-8187-9705'}, None), ({}, None)])
@@ -197,12 +212,15 @@ class TestCrossRef(TestCiteproc):
     test_class = CrossRef
 
     @pytest.fixture
-    def citeproc(self, title, citeproc):
+    def citeproc(self, container_title, title, citeproc):
         """
         In general, the CrossRef is identical to citeproc, but there are some differences.
         We change the fixture accordingly
+        title is a list
+        container-title is a list
         """
         citeproc['title'] = [title, ]
+        citeproc['container-title'] = [container_title, ]
 
         return citeproc
 

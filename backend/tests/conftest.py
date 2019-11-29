@@ -8,6 +8,14 @@ def affiliations():
     return ['University of Dublin', 'College Calvin']
 
 @pytest.fixture
+def container_title():
+    """
+    Returns the title. Main reason is simpler test handling for CrossRef
+    """
+    return 'The Infinite Library'
+
+
+@pytest.fixture
 def orcids():
     """
     Returns a simple of ORCIDs used in citeproc
@@ -22,13 +30,12 @@ def title():
     return 'The God of the Labyrinth'
 
 @pytest.fixture
-def citeproc(affiliations, orcids, title):
+def citeproc(affiliations, container_title, orcids, title):
     """
     Imaginary, yet complete citeproc example.
     Use this, to check different behaviour, by adding, deleting or modifying content.
     """
     d = {
-        'title' : title,
         'author' : [
             {
                 'given' : 'Herbert',
@@ -51,6 +58,7 @@ def citeproc(affiliations, orcids, title):
                 'ORCID' : orcids[1]
             },
         ],
+        'container-title' : container_title,
         'issued' : {
             'date-parts' : [
                 2019,
@@ -58,6 +66,7 @@ def citeproc(affiliations, orcids, title):
                 10
             ],
         },
+        'title' : title,
     }
 
     return d
