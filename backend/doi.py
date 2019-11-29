@@ -46,6 +46,32 @@ class Citeproc():
             raise CiteprocError('Invalid metadaformat, expecting dict')
 
 
+    @staticmethod
+    def _get_affiliation(author_elem):
+        """
+        Affiliations come as a list of dict.
+        We return the first affiliation if any
+        :param author_elem: citeproc author element
+        :returns: affiliation name or None
+        """
+        for dct in author_elem.get('affiliation', []):
+            if 'name' in dct:
+                return dct['name']
+
+
+    @classmethod
+    def _get_affiliations(cls, data):
+        """
+        :param data: citeproc data
+        :returns: list of affiliations, of length author elements
+        :raises: CiteprocAuthorError
+        """
+        authors = data.get('author')
+        if not isinstance(authors, list):
+            raise CiteprocAuthorError('No list of authors in metadata')
+        return list(map(cls._get_affiliation, authors))
+
+
     @classmethod
     def _get_authors(cls, data):
         """
@@ -70,6 +96,7 @@ class Citeproc():
         :raises: CiteprocError
         """
         bare_paper_data = {
+            'affiliation' : cls._get_affiliations(),
             'authors' : cls._get_authors(),
             'pubdate' : cls._get_pubdate(),
             'title' : cls._get_title(),

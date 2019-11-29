@@ -26,6 +26,32 @@ class TestCiteproc():
             self.test_class.to_paper(None)
 
 
+    @pytest.mark.parametrize('author_elem, expected', [(dict(), None), ({'affiliation' : [{'name' : 'Porto'}]}, 'Porto'), ({'affiliation' : [{'name' : 'Porto'}, {'name' : 'Lissabon'}]}, 'Porto')])
+    def test_get_affiliation(self, author_elem, expected):
+        """
+        Must return the first affiliation if any
+        """
+        assert self.test_class._get_affiliation(author_elem) == expected
+
+
+    def test_get_affiliations(self, affiliation, citeproc):
+        """
+        Must have the same length as citeproc['author'] and identical to list of affiliation
+        """
+        r = self.test_class._get_affiliations(citeproc)
+        assert len(r) == len(citeproc.get('author'))
+        assert r == affiliation
+
+    def test_get_affiliations_no_authors(self, citeproc):
+        """
+        Must rais exception
+        """
+        del citeproc['author']
+        with pytest.raises(CiteprocAuthorError):
+            self.test_class._get_affiliations(citeproc)
+
+
+
     def test_get_authors(self, citeproc):
         """
         The list of authors shall be a list of BareNames
