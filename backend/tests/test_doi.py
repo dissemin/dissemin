@@ -114,6 +114,23 @@ class TestCiteproc():
         with pytest.raises(CiteprocDOIError):
             self.test_class._get_doi(dict())
 
+
+    @pytest.mark.parametrize('issn, expected', [('1234-5675', '1234-5675'), (['1234-5675', ], '1234-5675'), ([], '')])
+    def test_get_issn(self, citeproc, issn, expected):
+        """
+        Must return the issn or ''
+        """
+        citeproc['ISSN'] = issn
+        assert self.test_class._get_issn(citeproc) == expected
+
+    def test_get_issn_missing(self, citeproc):
+        """
+        Must return ''
+        """
+        del citeproc['ISSN']
+        assert self.test_class._get_issn(citeproc) == ''
+
+
     @pytest.mark.parametrize('orcid, expected', [({'ORCID' : '0000-0001-8187-9704'}, '0000-0001-8187-9704'), ({'ORCID' : '0000-0001-8187-9705'}, None), ({}, None)])
     def test_get_orcid(self, orcid, expected):
         """

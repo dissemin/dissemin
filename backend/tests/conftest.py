@@ -14,6 +14,12 @@ def container_title():
     """
     return 'The Infinite Library'
 
+@pytest.fixture
+def issn():
+    """
+    Returns a (valid) ISSN
+    """
+    return '1234-5675'
 
 @pytest.fixture
 def orcids():
@@ -60,6 +66,9 @@ def citeproc(affiliations, container_title, orcids, title):
         ],
         'container-title' : container_title,
         'DOI' : '10.0123/quain-1933',
+        'ISSN' : [
+            issn,
+        ],
         'issued' : {
             'date-parts' : [
                 2019,

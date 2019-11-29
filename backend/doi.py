@@ -121,6 +121,21 @@ class Citeproc():
         return doi
 
 
+    @staticmethod
+    def _get_issn(data):
+        """
+        :param data: citeproc metadata
+        :returns: ISSN or ''
+        """
+        issn = data.get('ISSN', '')
+        if isinstance(issn, list):
+            try:
+                issn = issn[0]
+            except IndexError:
+                issn = ''
+        return issn
+
+
     @classmethod
     def _get_oairecord_data(cls, data):
         """
@@ -131,6 +146,7 @@ class Citeproc():
         doi = cls._get_doi(data)
         bare_oairecord_data = {
             'doi' : doi,
+            'issn' : cls._get_issn(data),
             'journal_title' : cls._get_container(data),
             'pubdate' : cls._get_pubdate(data),
         }
