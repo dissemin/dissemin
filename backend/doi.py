@@ -122,6 +122,7 @@ class Citeproc():
         bare_paper_data = {
             'affiliation' : cls._get_affiliations(),
             'authors' : cls._get_authors(),
+            'orcids' : cls._get_orcids(),
             'pubdate' : cls._get_pubdate(),
             'title' : cls._get_title(),
         }
