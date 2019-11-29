@@ -143,6 +143,7 @@ class TestCiteproc():
         assert r['issue'] == citeproc['issue']
         assert r['pages'] == citeproc['pages']
         assert r['publisher_name'] == citeproc['publisher_name']
+        assert r['pubtype'] == citeproc['type']
         assert r['volume'] == citeproc['volume']
 
 
@@ -193,7 +194,6 @@ class TestCiteproc():
             assert isinstance(a, BareName)
         assert r['orcids'] == orcids
         assert r['pubdate'] == date(*citeproc['issued']['date-parts'])
-        assert r['pubtype'] == citeproc['type']
         assert r['title'] == title
 
 
