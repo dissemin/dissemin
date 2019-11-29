@@ -1,7 +1,10 @@
 import pytest
 
+from datetime import date
+
 from backend.doi import CiteprocError
 from backend.doi import CiteprocAuthorError
+from backend.doi import CiteprocDateError
 from backend.doi import CiteprocTitleError
 from backend.doi import Citeproc
 from backend.doi import CrossRef
@@ -50,6 +53,48 @@ class TestCiteproc():
             self.test_class._get_authors(citeproc)
 
 
+    def test_get_pubdate_issued(self, citeproc):
+        """
+        If contains issued, take this
+        """
+        citeproc['created'] = {'date-parts' : [2019, 10, 11]}
+        citeproc['deposited'] = {'date-parts' : [2019, 10, 12]}
+        assert self.test_class._get_pubdate(citeproc) == date(*citeproc['issued']['date-parts'])
+
+    def test_get_pubdate_created(self, citeproc):
+        """
+        If contains no issued, take created
+        """
+        del citeproc['issued']
+        citeproc['created'] = {'date-parts' : [2019, 10, 11]}
+        citeproc['deposited'] = {'date-parts' : [2019, 10, 12]}
+        assert self.test_class._get_pubdate(citeproc) == date(*citeproc['created']['date-parts'])
+
+    def test_get_pubdate_deposited(self, citeproc):
+        """
+        If contains no issued and created, take deposited
+        """
+        del citeproc['issued']
+        citeproc['deposited'] = {'date-parts' : [2019, 10, 12]}
+        assert self.test_class._get_pubdate(citeproc) == date(*citeproc['deposited']['date-parts'])
+
+    def test_get_pubdate_no_date(self, citeproc):
+        """
+        If contains no date, raise exception
+        """
+        del citeproc['issued']
+        with pytest.raises(CiteprocDateError):
+            self.test_class._get_pubdate(citeproc)
+
+    def test_get_pubdate_received_none(self, monkeypatch):
+        """
+        If no valid date is found, raise exception
+        """
+        monkeypatch.setattr(self.test_class, '_parse_date', lambda x: None)
+        with pytest.raises(CiteprocDateError):
+            self.test_class._get_pubdate(dict())
+
+
     def test_get_title(self, citeproc):
         r = self.test_class._get_title(citeproc)
         assert r == citeproc['title']
@@ -61,6 +106,24 @@ class TestCiteproc():
         del citeproc['title']
         with pytest.raises(CiteprocTitleError):
             self.test_class._get_title(citeproc)
+
+
+    @pytest.mark.parametrize('data, expected', [({'date-parts' : [2019, 10, 10]}, date(2019, 10, 10)), ({'raw' : '2019-10-10'}, date(2019, 10, 10)), (None, None), ({'spam' : 'ham'}, None)])
+    def test_parse_date(self, data, expected):
+        """
+        Must return a valid date or None
+        """
+        assert self.test_class._parse_date(data) == expected
+
+
+
+    @pytest.mark.parametrize('date_parts, expected', [([2019, ], date(2019, 1, 1)), ([2019, 10, ], date(2019, 10, 1)), ([2019, 10, 10], date(2019, 10, 10))])
+    def test_parse_date_parts(self, date_parts, expected):
+        """
+        Must parse the date list
+        """
+        assert self.test_class._parse_date_parts(date_parts) == expected
+
 
 
 

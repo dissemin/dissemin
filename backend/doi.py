@@ -5,14 +5,21 @@
 # The strategy in the first case will be to check wether we have the DOI in our system and if the last update is not to long ago, we just skip.
 # This has the reason, that a users might wait if they refresh their profile.
 
+from datetime import datetime
+
 from backend.crossref import convert_to_name_pair
 from papers.baremodels import BareName
+from papers.utils import tolerant_datestamp_to_datetime
+from papers.utils import valid_publication_date
 
 
 class CiteprocError(Exception):
     pass
 
 class CiteprocAuthorError(CiteprocError):
+    pass
+
+class CiteprocDateError(CiteprocError):
     pass
 
 class CiteprocTitleError(CiteprocError):
@@ -64,10 +71,31 @@ class Citeproc():
         """
         bare_paper_data = {
             'authors' : cls._get_authors(),
+            'pubdate' : cls._get_pubdate(),
             'title' : cls._get_title(),
         }
         
         return bare_paper_data
+
+
+    @classmethod
+    def _get_pubdate(cls, data):
+        """
+        Get the publication date out of a record. If 'issued' is not present
+        we default to 'deposited' although this might be quite inaccurate.
+        But this case is rare anyway.
+        """
+        pubdate = None
+        if 'issued' in data:
+            pubdate = cls._parse_date(data['issued'])
+        if pubdate is None and 'created' in data:
+            pubdate = cls._parse_date(data['created'])
+        if pubdate is None and 'deposited' in data:
+            pubdate = cls._parse_date(data['deposited'])
+        if pubdate is None:
+            raise CiteprocDateError('No valid date found in metadata')
+        return pubdate
+
 
     @classmethod
     def _get_title(cls, data):
@@ -81,6 +109,47 @@ class Citeproc():
         if title is None:
             raise CiteprocTitleError('No title in metadata')
         return title
+
+
+    @classmethod
+    def _parse_date(cls, data):
+        """
+        Parse the date representation from citeproc to a date object
+        :param data: date extracted from citeproc
+        :returns: date object or None
+        """
+        if not isinstance(data, dict):
+            return None
+        d = None
+        # First we try with date parts
+        try:
+            d = cls._parse_date_parts(data.get('date-parts'))
+        except Exception:
+            pass
+
+        # If this has no success, we try with raw date
+        if d is None and data.get('raw') is not None:
+            d = tolerant_datestamp_to_datetime(data['raw']).date()
+
+        # We validate, if bad, then set to None
+        if not valid_publication_date(d):
+            d = None
+
+        return d
+
+    @classmethod
+    def _parse_date_parts(cls, date_parts):
+        """
+        :param date_parts: date-parts as in citeproc, i.e. a list of integers
+        :returns: date object
+        :raises: Exception if something went wrong
+        """
+        d = "-".join([
+            str(date_parts[0]),
+            str(date_parts[1]).zfill(2) if len(date_parts) >= 2 else "01",
+            str(date_parts[2]).zfill(2) if len(date_parts) >= 3 else "01",
+        ])
+        return datetime.strptime(d, "%Y-%m-%d").date()
         
         
 class CrossRef(Citeproc):

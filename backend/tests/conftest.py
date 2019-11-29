@@ -17,7 +17,14 @@ def citeproc():
                 'given' : 'Jorge Luis',
                 'family' : 'Borges',
             },
-        ]
+        ],
+        'issued' : {
+            'date-parts' : [
+                2019,
+                10,
+                10
+            ],
+        },
     }
 
     return d
