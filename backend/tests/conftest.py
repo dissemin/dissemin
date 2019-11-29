@@ -1,5 +1,9 @@
 import pytest
 
+from publishers.models import AliasPublisher
+from publishers.models import Journal
+from publishers.models import Publisher
+
 @pytest.fixture
 def affiliations():
     """
@@ -85,3 +89,24 @@ def citeproc(affiliations, container_title, issn, orcids, title):
     }
 
     return d
+
+@pytest.fixture
+def mock_journal_find(monkeypatch):
+    """
+    Mocks Publisher to return no object on calling find
+    """
+    monkeypatch.setattr(Journal, 'find', lambda issn, title: None)
+
+@pytest.fixture
+def mock_publisher_find(monkeypatch):
+    """
+    Mocks Publisher to return no object on calling find
+    """
+    monkeypatch.setattr(Publisher, 'find', lambda x: None)
+
+@pytest.fixture
+def mock_alias_publisher_increment(monkeypatch):
+    """
+    Monkeypatch this function to mit DB access
+    """
+    monkeypatch.setattr(AliasPublisher, 'increment', lambda x,y: True)

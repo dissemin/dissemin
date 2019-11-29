@@ -19,7 +19,9 @@ from papers.doi import to_doi
 from papers.utils import tolerant_datestamp_to_datetime
 from papers.utils import validate_orcid
 from papers.utils import valid_publication_date
+from publishers.models import AliasPublisher
 from publishers.models import Journal
+from publishers.models import Publisher
 
 
 logger = logging.getLogger('dissemin.' + __name__)
@@ -165,6 +167,9 @@ class Citeproc():
         issn = cls._get_issn(data)
         journal = Journal.find(issn=issn, title=journal_title)
 
+        publisher_name = data.get('publisher_name', '')[:512]
+        publisher = cls._get_publisher(publisher_name, journal)
+
         bare_oairecord_data = {
             'doi' : doi,
             'issn' : issn,
@@ -174,7 +179,8 @@ class Citeproc():
             'pages' : data.get('pages', ''),
             'pdf_url' : pdf_url,
             'pubdate' : cls._get_pubdate(data),
-            'publisher_name' : data.get('publisher_name', '')[:512],
+            'publisher' : publisher,
+            'publisher_name' : publisher_name,
             'pubtype' : cls._get_pubtype(data),
             'splash_url' : splash_url,
             'volume' : data.get('volume', ''),
@@ -252,6 +258,21 @@ class Citeproc():
         if pubdate is None:
             raise CiteprocDateError('No valid date found in metadata')
         return pubdate
+
+
+    @staticmethod
+    def _get_publisher(name, journal):
+        """
+        Tries to find a publisher PK, based on journal or name
+        :param name: Name of the publisher
+        :param journal: Journal object
+        """
+        if journal is not None:
+            publisher = journal.publisher
+            AliasPublisher.increment(name, publisher)
+        else:
+            publisher = Publisher.find(name)
+        return publisher
 
 
     @staticmethod

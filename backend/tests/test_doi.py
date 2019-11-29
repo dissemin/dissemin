@@ -14,6 +14,7 @@ from backend.doi import CrossRef
 from papers.baremodels import BareName
 from papers.doi import doi_to_url
 from publishers.models import Journal
+from publishers.models import Publisher
 
 
 class TestCiteproc():
@@ -134,17 +135,18 @@ class TestCiteproc():
         assert self.test_class._get_issn(citeproc) == ''
 
 
-    @pytest.mark.parametrize('journal_fk', [1, None])
-    def test_get_oairecord_data(self, monkeypatch, container_title, issn, citeproc, journal_fk):
+    @pytest.mark.usefixtures('mock_alias_publisher_increment', 'mock_journal_find', 'mock_publisher_find')
+    @pytest.mark.parametrize('journal', [Journal(publisher=Publisher()), None])
+    def test_get_oairecord_data(self, monkeypatch, container_title, issn, citeproc, journal):
         """
         We do some assertions on the results, but relatively lax, as we test the called functions, too
         """
-        monkeypatch.setattr(Journal, 'find', lambda issn, title: journal_fk)
+        monkeypatch.setattr(Journal, 'find', lambda issn, title: journal)
         r = self.test_class._get_oairecord_data(citeproc)
         assert r['doi'] == citeproc['DOI']
         assert r['issn'] == issn
         assert r['issue'] == citeproc['issue']
-        assert r['journal'] == journal_fk
+        assert r['journal'] == journal
         assert r['journal_title'] == container_title
         assert r['pages'] == citeproc['pages']
         assert r['publisher_name'] == citeproc['publisher_name']
@@ -153,20 +155,17 @@ class TestCiteproc():
         assert r['pdf_url'] == '' # Is not OA
         assert r['volume'] == citeproc['volume']
 
-
-    @pytest.mark.parametrize('journal_fk', [1, None])
-    def test_get_oairecord_data_missing(self, monkeypatch, container_title, issn, citeproc, journal_fk):
+    @pytest.mark.usefixtures('mock_journal_find', 'mock_publisher_find')
+    def test_get_oairecord_data_missing(self, monkeypatch, container_title, issn, citeproc):
         """
         Some fields must be empty, namely those with a direct get call
         """
-        monkeypatch.setattr(Journal, 'find', lambda issn, title: journal_fk)
         keys = ['issue', 'publisher_name', 'pages', 'volume']
         for k in keys:
             del citeproc[k]
         r = self.test_class._get_oairecord_data(citeproc)
         for k in keys:
             assert r[k] == ''
-
 
 
     @pytest.mark.parametrize('orcid, expected', [({'ORCID' : '0000-0001-8187-9704'}, '0000-0001-8187-9704'), ({'ORCID' : '0000-0001-8187-9705'}, None), ({}, None)])
@@ -262,6 +261,26 @@ class TestCiteproc():
         monkeypatch.setattr(self.test_class, '_parse_date', lambda x: None)
         with pytest.raises(CiteprocDateError):
             self.test_class._get_pubdate(dict())
+
+
+    @pytest.mark.usefixtures('mock_alias_publisher_increment')
+    def test_get_publisher_by_journal(self):
+        """
+        Must return Publisher object
+        """
+        publisher = Publisher()
+        journal = Journal(
+            publisher=publisher
+        )
+        assert self.test_class._get_publisher('p_name', journal) == publisher
+
+    def test_get_publisher_by_name(self, monkeypatch):
+        """
+        Must return publisher object
+        """
+        publisher = Publisher()
+        monkeypatch.setattr(Publisher, 'find', lambda x: publisher)
+        assert self.test_class._get_publisher('p_name', None) == publisher
 
 
     def test_get_pubtype(self):
