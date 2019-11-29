@@ -19,6 +19,7 @@ from papers.doi import to_doi
 from papers.utils import tolerant_datestamp_to_datetime
 from papers.utils import validate_orcid
 from papers.utils import valid_publication_date
+from publishers.models import Journal
 
 
 logger = logging.getLogger('dissemin.' + __name__)
@@ -160,11 +161,16 @@ class Citeproc():
         licenses = data.get('licenses', [])
         pdf_url = cls._get_pdf_url(doi, licenses, splash_url)
 
+        journal_title = cls._get_container(data)
+        issn = cls._get_issn(data)
+        journal = Journal.find(issn=issn, title=journal_title)
+
         bare_oairecord_data = {
             'doi' : doi,
-            'issn' : cls._get_issn(data),
+            'issn' : issn,
             'issue' : data.get('issue', ''),
-            'journal_title' : cls._get_container(data),
+            'journal' : journal,
+            'journal_title' : journal_title,
             'pages' : data.get('pages', ''),
             'pdf_url' : pdf_url,
             'pubdate' : cls._get_pubdate(data),

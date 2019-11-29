@@ -13,6 +13,7 @@ from backend.doi import Citeproc
 from backend.doi import CrossRef
 from papers.baremodels import BareName
 from papers.doi import doi_to_url
+from publishers.models import Journal
 
 
 class TestCiteproc():
@@ -133,15 +134,18 @@ class TestCiteproc():
         assert self.test_class._get_issn(citeproc) == ''
 
 
-    def test_get_oairecord_data(self, container_title, issn, citeproc):
+    @pytest.mark.parametrize('journal_fk', [1, None])
+    def test_get_oairecord_data(self, monkeypatch, container_title, issn, citeproc, journal_fk):
         """
         We do some assertions on the results, but relatively lax, as we test the called functions, too
         """
+        monkeypatch.setattr(Journal, 'find', lambda issn, title: journal_fk)
         r = self.test_class._get_oairecord_data(citeproc)
-        assert r['journal_title'] == container_title
         assert r['doi'] == citeproc['DOI']
         assert r['issn'] == issn
         assert r['issue'] == citeproc['issue']
+        assert r['journal'] == journal_fk
+        assert r['journal_title'] == container_title
         assert r['pages'] == citeproc['pages']
         assert r['publisher_name'] == citeproc['publisher_name']
         assert r['pubtype'] == citeproc['type']
@@ -150,10 +154,12 @@ class TestCiteproc():
         assert r['volume'] == citeproc['volume']
 
 
-    def test_get_oairecord_data_missing(self, container_title, issn, citeproc):
+    @pytest.mark.parametrize('journal_fk', [1, None])
+    def test_get_oairecord_data_missing(self, monkeypatch, container_title, issn, citeproc, journal_fk):
         """
         Some fields must be empty, namely those with a direct get call
         """
+        monkeypatch.setattr(Journal, 'find', lambda issn, title: journal_fk)
         keys = ['issue', 'publisher_name', 'pages', 'volume']
         for k in keys:
             del citeproc[k]
