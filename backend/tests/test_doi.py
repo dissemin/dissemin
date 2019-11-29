@@ -34,13 +34,13 @@ class TestCiteproc():
         assert self.test_class._get_affiliation(author_elem) == expected
 
 
-    def test_get_affiliations(self, affiliation, citeproc):
+    def test_get_affiliations(self, affiliations, citeproc):
         """
-        Must have the same length as citeproc['author'] and identical to list of affiliation
+        Must have the same length as citeproc['author'] and identical to list of affiliations
         """
         r = self.test_class._get_affiliations(citeproc)
         assert len(r) == len(citeproc.get('author'))
-        assert r == affiliation
+        assert r == affiliations
 
     def test_get_affiliations_no_authors(self, citeproc):
         """
@@ -85,13 +85,13 @@ class TestCiteproc():
         """
         assert self.test_class._get_orcid(orcid) == expected
 
-    def test_get_orcids(self, orcid, citeproc):
+    def test_get_orcids(self, orcids, citeproc):
         """
         Must have the same length as citeproc['author'] and identical to list of  orcid
         """
         r = self.test_class._get_orcids(citeproc)
         assert len(r) == len(citeproc.get('author'))
-        assert r == orcid
+        assert r == orcids
 
     def test_get_orcid_no_authors(self, citeproc):
         """
@@ -100,6 +100,19 @@ class TestCiteproc():
         del citeproc['author']
         with pytest.raises(CiteprocAuthorError):
             self.test_class._get_orcids(citeproc)
+
+
+    def test_get_paper_data(self, affiliations, orcids, title, citeproc):
+        """
+        We do some assertions on the results, but relatively lax, as we test the called functions, too
+        """
+        r = self.test_class._get_paper_data(citeproc)
+        assert r['affiliations'] == affiliations
+        for a in r['authors']:
+            assert isinstance(a, BareName)
+        assert r['orcids'] == orcids
+        assert r['pubdate'] == date(*citeproc['issued']['date-parts'])
+        assert r['title'] == title
 
 
     def test_get_pubdate_issued(self, citeproc):
@@ -184,12 +197,11 @@ class TestCrossRef(TestCiteproc):
     test_class = CrossRef
 
     @pytest.fixture
-    def citeproc(self, citeproc):
+    def citeproc(self, title, citeproc):
         """
         In general, the CrossRef is identical to citeproc, but there are some differences.
         We change the fixture accordingly
         """
-        title = citeproc['title']
         citeproc['title'] = [title, ]
 
         return citeproc

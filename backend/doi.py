@@ -120,11 +120,11 @@ class Citeproc():
         :raises: CiteprocError
         """
         bare_paper_data = {
-            'affiliation' : cls._get_affiliations(),
-            'authors' : cls._get_authors(),
-            'orcids' : cls._get_orcids(),
-            'pubdate' : cls._get_pubdate(),
-            'title' : cls._get_title(),
+            'affiliations' : cls._get_affiliations(data),
+            'authors' : cls._get_authors(data),
+            'orcids' : cls._get_orcids(data),
+            'pubdate' : cls._get_pubdate(data),
+            'title' : cls._get_title(data),
         }
         
         return bare_paper_data
