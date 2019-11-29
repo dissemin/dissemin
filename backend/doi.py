@@ -160,6 +160,7 @@ class Citeproc():
             'journal_title' : cls._get_container(data),
             'pages' : data.get('pages', ''),
             'pubdate' : cls._get_pubdate(data),
+            'publisher_name' : data.get('publisher_name', '')[:512],
             'pubtype' : cls._get_pubtype(data),
             'volume' : data.get('volume', ''),
         }

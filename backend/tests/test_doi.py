@@ -142,6 +142,7 @@ class TestCiteproc():
         assert r['issn'] == issn
         assert r['issue'] == citeproc['issue']
         assert r['pages'] == citeproc['pages']
+        assert r['publisher_name'] == citeproc['publisher_name']
         assert r['volume'] == citeproc['volume']
 
 
@@ -149,7 +150,7 @@ class TestCiteproc():
         """
         Some fields must be empty, namely those with a direct get call
         """
-        keys = ['issue', 'pages', 'volume']
+        keys = ['issue', 'publisher_name', 'pages', 'volume']
         for k in keys:
             del citeproc[k]
         r = self.test_class._get_oairecord_data(citeproc)
