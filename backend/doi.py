@@ -5,14 +5,20 @@
 # The strategy in the first case will be to check wether we have the DOI in our system and if the last update is not to long ago, we just skip.
 # This has the reason, that a users might wait if they refresh their profile.
 
+import logging
+
 from datetime import datetime
 
 from backend.crossref import convert_to_name_pair
+from backend.pubtype_translations import CITEPROC_PUBTYPE_TRANSLATION
 from papers.baremodels import BareName
 from papers.doi import to_doi
 from papers.utils import tolerant_datestamp_to_datetime
 from papers.utils import validate_orcid
 from papers.utils import valid_publication_date
+
+
+logger = logging.getLogger('dissemin.' + __name__)
 
 
 class CiteprocError(Exception):
@@ -28,6 +34,9 @@ class CiteprocDateError(CiteprocError):
     pass
 
 class CiteprocDOIError(CiteprocError):
+    pass
+
+class CiteprocPubtypeError(CiteprocError):
     pass
 
 class CiteprocTitleError(CiteprocError):
@@ -151,6 +160,7 @@ class Citeproc():
             'journal_title' : cls._get_container(data),
             'pages' : data.get('pages', ''),
             'pubdate' : cls._get_pubdate(data),
+            'pubtype' : cls._get_pubtype(data),
             'volume' : data.get('volume', ''),
         }
 
@@ -215,6 +225,23 @@ class Citeproc():
         if pubdate is None:
             raise CiteprocDateError('No valid date found in metadata')
         return pubdate
+
+    @staticmethod
+    def _get_pubtype(data):
+        """
+        Returns the pub type
+        """
+        p = data.get('type')
+        if p is None:
+            raise CiteprocPubtypeError('No publication type in metadata')
+        # We do some logging on pubtypes that occur
+        try:
+            pubtype = CITEPROC_PUBTYPE_TRANSLATION[p]
+        except KeyError:
+            logger.error('Unknown pubtype: {} - This is data: {}'.format(p, data))
+            pubtype = 'other'
+        return pubtype
+
 
 
     @classmethod

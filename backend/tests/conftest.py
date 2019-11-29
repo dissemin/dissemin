@@ -79,6 +79,7 @@ def citeproc(affiliations, container_title, issn, orcids, title):
         },
         'pages' : 'p. 327',
         'title' : title,
+        'type' : 'book',
         'volume' : '1',
     }
 

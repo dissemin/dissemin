@@ -7,6 +7,7 @@ from backend.doi import CiteprocAuthorError
 from backend.doi import CiteprocContainerTitleError
 from backend.doi import CiteprocDateError
 from backend.doi import CiteprocDOIError
+from backend.doi import CiteprocPubtypeError
 from backend.doi import CiteprocTitleError
 from backend.doi import Citeproc
 from backend.doi import CrossRef
@@ -191,6 +192,7 @@ class TestCiteproc():
             assert isinstance(a, BareName)
         assert r['orcids'] == orcids
         assert r['pubdate'] == date(*citeproc['issued']['date-parts'])
+        assert r['pubtype'] == citeproc['type']
         assert r['title'] == title
 
 
@@ -234,6 +236,27 @@ class TestCiteproc():
         monkeypatch.setattr(self.test_class, '_parse_date', lambda x: None)
         with pytest.raises(CiteprocDateError):
             self.test_class._get_pubdate(dict())
+
+
+    def test_get_pubtype(self):
+        """
+        Must return something from PAPER_TYPES
+        """
+        pubtype = 'book'
+        assert self.test_class._get_pubtype({'type' : pubtype}) == pubtype
+
+    def test_get_pubtype_strange(self):
+        """
+        Must return other
+        """
+        assert self.test_class._get_pubtype({'type' : 'spanish inquisition'}) == 'other'
+
+    def test_get_pubtype_missing(self):
+        """
+        Must raise exception
+        """
+        with pytest.raises(CiteprocPubtypeError):
+            self.test_class._get_pubtype(dict())
 
 
     def test_get_title(self, citeproc):
