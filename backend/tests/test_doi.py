@@ -51,7 +51,6 @@ class TestCiteproc():
             self.test_class._get_affiliations(citeproc)
 
 
-
     def test_get_authors(self, citeproc):
         """
         The list of authors shall be a list of BareNames
@@ -77,6 +76,30 @@ class TestCiteproc():
         monkeypatch.setattr('backend.doi.convert_to_name_pair', lambda x: None)
         with pytest.raises(CiteprocAuthorError):
             self.test_class._get_authors(citeproc)
+
+
+    @pytest.mark.parametrize('orcid, expected', [({'ORCID' : '0000-0001-8187-9704'}, '0000-0001-8187-9704'), ({'ORCID' : '0000-0001-8187-9705'}, None), ({}, None)])
+    def test_get_orcid(self, orcid, expected):
+        """
+        Must be valid or None
+        """
+        assert self.test_class._get_orcid(orcid) == expected
+
+    def test_get_orcids(self, orcid, citeproc):
+        """
+        Must have the same length as citeproc['author'] and identical to list of  orcid
+        """
+        r = self.test_class._get_orcids(citeproc)
+        assert len(r) == len(citeproc.get('author'))
+        assert r == orcid
+
+    def test_get_orcid_no_authors(self, citeproc):
+        """
+        Must rais exception
+        """
+        del citeproc['author']
+        with pytest.raises(CiteprocAuthorError):
+            self.test_class._get_orcids(citeproc)
 
 
     def test_get_pubdate_issued(self, citeproc):

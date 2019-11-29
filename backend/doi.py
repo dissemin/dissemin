@@ -10,6 +10,7 @@ from datetime import datetime
 from backend.crossref import convert_to_name_pair
 from papers.baremodels import BareName
 from papers.utils import tolerant_datestamp_to_datetime
+from papers.utils import validate_orcid
 from papers.utils import valid_publication_date
 
 
@@ -63,7 +64,7 @@ class Citeproc():
     def _get_affiliations(cls, data):
         """
         :param data: citeproc data
-        :returns: list of affiliations, of length author elements
+        :returns: list of affiliations, of length author
         :raises: CiteprocAuthorError
         """
         authors = data.get('author')
@@ -86,6 +87,29 @@ class Citeproc():
         if None in name_pairs:
             raise CiteprocAuthorError('Author list compromised')
         return [BareName.create_bare(first, last) for first, last in name_pairs]
+
+
+    @staticmethod
+    def _get_orcid(author_elem):
+        """
+        Return a validated orcid or None
+        :param author_elem: author as in citeproc
+        :returns: orcid or None
+        """
+        return validate_orcid(author_elem.get('ORCID'))
+
+
+    @classmethod
+    def _get_orcids(cls, data):
+        """
+        :param data: citeproc metadata
+        :returns: list of orcids, of length author
+        :raises: CiteprocAuthorError
+        """
+        authors = data.get('author')
+        if not isinstance(authors, list):
+            raise CiteprocAuthorError('No list of authors in metadata')
+        return list(map(cls._get_orcid, authors))
 
 
     @classmethod

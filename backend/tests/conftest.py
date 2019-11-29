@@ -8,7 +8,14 @@ def affiliation():
     return ['University of Dublin', 'College Calvin']
 
 @pytest.fixture
-def citeproc(affiliation):
+def orcid():
+    """
+    Returns a simple of ORCIDs used in citeproc
+    """
+    return ['0000-0001-8187-9704', None]
+
+@pytest.fixture
+def citeproc(affiliation, orcid):
     """
     Imaginary, yet complete citeproc example.
     Use this, to check different behaviour, by adding, deleting or modifying content.
@@ -23,7 +30,8 @@ def citeproc(affiliation):
                     {
                         'name' : affiliation[0]
                     }
-                ]
+                ],
+                'ORCID' : orcid[0]
             },
             {
                 'given' : 'Jorge Luis',
@@ -32,7 +40,8 @@ def citeproc(affiliation):
                     {
                         'name' : affiliation[1]
                     }
-                ]
+                ],
+                'ORCID' : orcid[1]
             },
         ],
         'issued' : {
