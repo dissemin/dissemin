@@ -131,6 +131,32 @@ class TestCiteproc():
         assert self.test_class._get_issn(citeproc) == ''
 
 
+    def test_get_oairecord_data(self, container_title, issn, citeproc):
+        """
+        We do some assertions on the results, but relatively lax, as we test the called functions, too
+        """
+        r = self.test_class._get_oairecord_data(citeproc)
+        assert r['journal_title'] == container_title
+        assert r['doi'] == citeproc['DOI']
+        assert r['issn'] == issn
+        assert r['issue'] == citeproc['issue']
+        assert r['pages'] == citeproc['pages']
+        assert r['volume'] == citeproc['volume']
+
+
+    def test_get_oairecord_data_missing(self, container_title, issn, citeproc):
+        """
+        Some fields must be empty, namely those with a direct get call
+        """
+        keys = ['issue', 'pages', 'volume']
+        for k in keys:
+            del citeproc[k]
+        r = self.test_class._get_oairecord_data(citeproc)
+        for k in keys:
+            assert r[k] == ''
+
+
+
     @pytest.mark.parametrize('orcid, expected', [({'ORCID' : '0000-0001-8187-9704'}, '0000-0001-8187-9704'), ({'ORCID' : '0000-0001-8187-9705'}, None), ({}, None)])
     def test_get_orcid(self, orcid, expected):
         """

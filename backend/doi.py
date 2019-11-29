@@ -147,8 +147,11 @@ class Citeproc():
         bare_oairecord_data = {
             'doi' : doi,
             'issn' : cls._get_issn(data),
+            'issue' : data.get('issue', ''),
             'journal_title' : cls._get_container(data),
+            'pages' : data.get('pages', ''),
             'pubdate' : cls._get_pubdate(data),
+            'volume' : data.get('volume', ''),
         }
 
         return bare_oairecord_data

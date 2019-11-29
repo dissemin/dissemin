@@ -36,7 +36,7 @@ def title():
     return 'The God of the Labyrinth'
 
 @pytest.fixture
-def citeproc(affiliations, container_title, orcids, title):
+def citeproc(affiliations, container_title, issn, orcids, title):
     """
     Imaginary, yet complete citeproc example.
     Use this, to check different behaviour, by adding, deleting or modifying content.
@@ -69,6 +69,7 @@ def citeproc(affiliations, container_title, orcids, title):
         'ISSN' : [
             issn,
         ],
+        'issue' : '1',
         'issued' : {
             'date-parts' : [
                 2019,
@@ -76,7 +77,9 @@ def citeproc(affiliations, container_title, orcids, title):
                 10
             ],
         },
+        'pages' : 'p. 327',
         'title' : title,
+        'volume' : '1',
     }
 
     return d
