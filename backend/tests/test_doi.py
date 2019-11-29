@@ -6,6 +6,7 @@ from backend.doi import CiteprocError
 from backend.doi import CiteprocAuthorError
 from backend.doi import CiteprocContainerTitleError
 from backend.doi import CiteprocDateError
+from backend.doi import CiteprocDOIError
 from backend.doi import CiteprocTitleError
 from backend.doi import Citeproc
 from backend.doi import CrossRef
@@ -92,6 +93,26 @@ class TestCiteproc():
         with pytest.raises(CiteprocContainerTitleError):
             self.test_class._get_container(dict())
 
+
+    def test_get_doi(self, citeproc):
+        """
+        Must return the DOI
+        """
+        assert self.test_class._get_doi(citeproc) == citeproc['DOI']
+
+    def test_get_doi_invalid(self):
+        """
+        Must raise exception
+        """
+        with pytest.raises(CiteprocDOIError):
+            self.test_class._get_doi({'DOI' : 'spanish inquisition'})
+
+    def test_get_doi_missing(self):
+        """
+        Must raise exception
+        """
+        with pytest.raises(CiteprocDOIError):
+            self.test_class._get_doi(dict())
 
     @pytest.mark.parametrize('orcid, expected', [({'ORCID' : '0000-0001-8187-9704'}, '0000-0001-8187-9704'), ({'ORCID' : '0000-0001-8187-9705'}, None), ({}, None)])
     def test_get_orcid(self, orcid, expected):

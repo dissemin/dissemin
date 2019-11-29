@@ -9,6 +9,7 @@ from datetime import datetime
 
 from backend.crossref import convert_to_name_pair
 from papers.baremodels import BareName
+from papers.doi import to_doi
 from papers.utils import tolerant_datestamp_to_datetime
 from papers.utils import validate_orcid
 from papers.utils import valid_publication_date
@@ -24,6 +25,9 @@ class CiteprocContainerTitleError(CiteprocError):
     pass
 
 class CiteprocDateError(CiteprocError):
+    pass
+
+class CiteprocDOIError(CiteprocError):
     pass
 
 class CiteprocTitleError(CiteprocError):
@@ -105,6 +109,18 @@ class Citeproc():
         return container[:512]
 
 
+    @staticmethod
+    def _get_doi(data):
+        """
+        :param data: citeproc metadata
+        :returns: doi or None
+        """
+        doi = to_doi(data.get('DOI', ''))
+        if doi is None:
+            raise CiteprocDOIError('Invalid DOI in metadata')
+        return doi
+
+
     @classmethod
     def _get_oairecord_data(cls, data):
         """
@@ -112,7 +128,9 @@ class Citeproc():
         :returns: Returns a dict, ready to passed to a BarePaper instance
         :raises: CiteprocError
         """
+        doi = cls._get_doi(data)
         bare_oairecord_data = {
+            'doi' : doi,
             'journal_title' : cls._get_container(data),
             'pubdate' : cls._get_pubdate(data),
         }

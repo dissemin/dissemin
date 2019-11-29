@@ -59,6 +59,7 @@ def citeproc(affiliations, container_title, orcids, title):
             },
         ],
         'container-title' : container_title,
+        'DOI' : '10.0123/quain-1933',
         'issued' : {
             'date-parts' : [
                 2019,
