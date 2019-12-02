@@ -16,6 +16,7 @@ from backend.pubtype_translations import CITEPROC_PUBTYPE_TRANSLATION
 from papers.baremodels import BareName
 from papers.doi import doi_to_url
 from papers.doi import to_doi
+from papers.models import OaiSource
 from papers.utils import tolerant_datestamp_to_datetime
 from papers.utils import validate_orcid
 from papers.utils import valid_publication_date
@@ -182,6 +183,7 @@ class Citeproc():
             'publisher' : publisher,
             'publisher_name' : publisher_name,
             'pubtype' : cls._get_pubtype(data),
+            'source' : OaiSource.objects.get(identifier='crossref'),
             'splash_url' : splash_url,
             'volume' : data.get('volume', ''),
         }

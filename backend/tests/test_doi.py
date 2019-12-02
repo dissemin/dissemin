@@ -13,6 +13,7 @@ from backend.doi import Citeproc
 from backend.doi import CrossRef
 from papers.baremodels import BareName
 from papers.doi import doi_to_url
+from papers.models import OaiSource
 from publishers.models import Journal
 from publishers.models import Publisher
 
@@ -137,7 +138,7 @@ class TestCiteproc():
 
     @pytest.mark.usefixtures('mock_alias_publisher_increment', 'mock_journal_find', 'mock_publisher_find')
     @pytest.mark.parametrize('journal', [Journal(publisher=Publisher()), None])
-    def test_get_oairecord_data(self, monkeypatch, container_title, issn, citeproc, journal):
+    def test_get_oairecord_data(self, db, monkeypatch, container_title, issn, citeproc, journal):
         """
         We do some assertions on the results, but relatively lax, as we test the called functions, too
         """
@@ -149,10 +150,11 @@ class TestCiteproc():
         assert r['journal'] == journal
         assert r['journal_title'] == container_title
         assert r['pages'] == citeproc['pages']
+        assert r['pdf_url'] == '' # Is not OA
         assert r['publisher_name'] == citeproc['publisher_name']
         assert r['pubtype'] == citeproc['type']
+        assert r['source'] == OaiSource.objects.get(identifier='crossref')
         assert r['splash_url'] == doi_to_url(citeproc['DOI'])
-        assert r['pdf_url'] == '' # Is not OA
         assert r['volume'] == citeproc['volume']
 
     @pytest.mark.usefixtures('mock_journal_find', 'mock_publisher_find')
