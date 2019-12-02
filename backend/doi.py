@@ -14,6 +14,7 @@ from backend.crossref import is_oa_license
 from backend.doiprefixes import free_doi_prefixes
 from backend.pubtype_translations import CITEPROC_PUBTYPE_TRANSLATION
 from papers.baremodels import BareName
+from papers.doi import doi_to_crossref_identifier
 from papers.doi import doi_to_url
 from papers.doi import to_doi
 from papers.models import OaiSource
@@ -173,6 +174,7 @@ class Citeproc():
 
         bare_oairecord_data = {
             'doi' : doi,
+            'identifier' : doi_to_crossref_identifier(doi),
             'issn' : issn,
             'issue' : data.get('issue', ''),
             'journal' : journal,

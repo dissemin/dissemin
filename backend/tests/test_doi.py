@@ -12,6 +12,7 @@ from backend.doi import CiteprocTitleError
 from backend.doi import Citeproc
 from backend.doi import CrossRef
 from papers.baremodels import BareName
+from papers.doi import doi_to_crossref_identifier
 from papers.doi import doi_to_url
 from papers.models import OaiSource
 from publishers.models import Journal
@@ -145,6 +146,7 @@ class TestCiteproc():
         monkeypatch.setattr(Journal, 'find', lambda issn, title: journal)
         r = self.test_class._get_oairecord_data(citeproc)
         assert r['doi'] == citeproc['DOI']
+        assert r['identifier'] == doi_to_crossref_identifier(citeproc['DOI'])
         assert r['issn'] == issn
         assert r['issue'] == citeproc['issue']
         assert r['journal'] == journal
