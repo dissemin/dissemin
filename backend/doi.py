@@ -14,10 +14,13 @@ from backend.crossref import is_oa_license
 from backend.doiprefixes import free_doi_prefixes
 from backend.pubtype_translations import CITEPROC_PUBTYPE_TRANSLATION
 from papers.baremodels import BareName
+from papers.baremodels import BareOaiRecord
+from papers.baremodels import BarePaper
 from papers.doi import doi_to_crossref_identifier
 from papers.doi import doi_to_url
 from papers.doi import to_doi
 from papers.models import OaiSource
+from papers.models import Paper
 from papers.utils import tolerant_datestamp_to_datetime
 from papers.utils import validate_orcid
 from papers.utils import valid_publication_date
@@ -56,19 +59,32 @@ class Citeproc():
     This class is a citeproc parser.
     """
 
-    @staticmethod
-    def to_paper(data):
+    @classmethod
+    def to_paper(cls, data):
         """
         Call this function to convert citeproc metadata into a paper object
         Our strategy is as follows:
         We collect first all data necessary, if me miss something, then we raise CiteprocError.
         If we have collected everything, we pass that to the corresponding baremodels.
         :param data: citeproc metadata. Note that CrossRef does put its citeproc into a message block
-        :returns: Paper object or None if no paper was created
+        :returns: Paper object
         :raises: CiteprocError
         """
         if not isinstance(data, dict):
             raise CiteprocError('Invalid metadaformat, expecting dict')
+        bare_paper_data = cls._get_paper_data(data)
+        bare_oairecord_data = cls._get_oairecord_data(data)
+
+        bare_paper = BarePaper.create(**bare_paper_data)
+        bare_oairecord = BareOaiRecord(paper=bare_paper, **bare_oairecord_data)
+        bare_paper.add_oairecord(bare_oairecord)
+        bare_paper.update_availability()
+
+        paper = Paper.from_bare(bare_paper)
+        paper.update_index()
+        return paper
+
+
 
 
     @staticmethod
@@ -225,7 +241,7 @@ class Citeproc():
         """
         bare_paper_data = {
             'affiliations' : cls._get_affiliations(data),
-            'authors' : cls._get_authors(data),
+            'author_names' : cls._get_authors(data),
             'orcids' : cls._get_orcids(data),
             'pubdate' : cls._get_pubdate(data),
             'title' : cls._get_title(data),

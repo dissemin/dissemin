@@ -1454,6 +1454,7 @@ class OaiRecord(models.Model, BareOaiRecord):
                     doi=kwargs.get('doi'),
                     publisher=kwargs.get('publisher'),
                     journal=kwargs.get('journal'),
+                    pubdate=kwargs.get('pubdate'),
                     )
             # with transaction.atomic():
             record.save()

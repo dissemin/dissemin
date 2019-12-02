@@ -14,6 +14,7 @@ from backend.doi import CrossRef
 from papers.baremodels import BareName
 from papers.doi import doi_to_crossref_identifier
 from papers.doi import doi_to_url
+from papers.models import OaiRecord
 from papers.models import OaiSource
 from publishers.models import Journal
 from publishers.models import Publisher
@@ -25,6 +26,45 @@ class TestCiteproc():
     """
 
     test_class = Citeproc
+
+    @pytest.mark.usefixtures('db')
+    def test_to_paper(self, container_title, title, citeproc):
+        p = self.test_class.to_paper(citeproc)
+        # Ensure that paper is in database (i.e. created)
+        assert p.pk >= 1
+        # Check paper fields
+        for author_p, author_c in zip(p.authors_list, citeproc['author']):
+            assert author_p['name']['first'] == author_c['given']
+            assert author_p['name']['last'] == author_c['family']
+            assert author_p['affiliation'] == author_c['affiliation'][0]['name']
+            assert author_p['orcid'] == author_c['ORCID']
+        assert p.pubdate == date(*citeproc['issued']['date-parts'])
+        assert p.title == title
+        # Ensure that oairecord is in database (i.e. created)
+        r = OaiRecord.objects.get(about=p)
+        # Check oairecord fields
+        assert r.doi == citeproc['DOI']
+        assert r.identifier == doi_to_crossref_identifier(citeproc['DOI'])
+        assert r.issue == citeproc['issue']
+        assert r.journal_title == container_title
+        assert r.pages == citeproc['pages']
+        assert r.pubdate == date(*citeproc['issued']['date-parts'])
+        assert r.publisher_name == citeproc['publisher_name']
+        assert r.source == OaiSource.objects.get(identifier='crossref')
+        assert r.splash_url == doi_to_url(citeproc['DOI'])
+        assert r.volume == citeproc['volume']
+
+
+    @pytest.mark.parametrize('mock_function', ['_get_oairecord_data', '_get_paper_data'])
+    def test_to_paper_invalid_data(self, monkeypatch, mock_function, citeproc):
+        """
+        If data is invalid, i.e. metadata is corrupted, somethings missing or so, must raise exception
+        """
+        def raise_citeproc_error(*args, **kwargs):
+            raise CiteprocError
+        monkeypatch.setattr(self.test_class, mock_function, raise_citeproc_error)
+        with pytest.raises(CiteprocError):
+            self.test_class.to_paper(citeproc)
 
     def test_to_paper_no_data(self):
         """
@@ -153,6 +193,7 @@ class TestCiteproc():
         assert r['journal_title'] == container_title
         assert r['pages'] == citeproc['pages']
         assert r['pdf_url'] == '' # Is not OA
+        assert r['pubdate'] == date(*citeproc['issued']['date-parts'])
         assert r['publisher_name'] == citeproc['publisher_name']
         assert r['pubtype'] == citeproc['type']
         assert r['source'] == OaiSource.objects.get(identifier='crossref')
@@ -202,7 +243,7 @@ class TestCiteproc():
         """
         r = self.test_class._get_paper_data(citeproc)
         assert r['affiliations'] == affiliations
-        for a in r['authors']:
+        for a in r['author_names']:
             assert isinstance(a, BareName)
         assert r['orcids'] == orcids
         assert r['pubdate'] == date(*citeproc['issued']['date-parts'])
