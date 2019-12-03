@@ -1,0 +1,216 @@
+{
+    "indexed":{
+        "date-parts":[
+            [
+                2019,
+                11,
+                13
+            ]
+        ],
+        "date-time":"2019-11-13T01:03:16Z",
+        "timestamp":1573606996676
+    },
+    "reference-count":62,
+    "publisher":"Elsevier BV",
+    "license":[
+        {
+            "URL":"https:\/\/www.elsevier.com\/tdm\/userlicense\/1.0\/",
+            "start":{
+                "date-parts":[
+                    [
+                        2019,
+                        4,
+                        1
+                    ]
+                ],
+                "date-time":"2019-04-01T00:00:00Z",
+                "timestamp":1554076800000
+            },
+            "delay-in-days":0,
+            "content-version":"tdm"
+        }
+    ],
+    "funder":[
+        {
+            "DOI":"10.13039\/501100003593",
+            "name":"Conselho Nacional de Desenvolvimento Cient\u00edfico e Tecnol\u00f3gico",
+            "doi-asserted-by":"publisher",
+            "award":[
+
+            ]
+        },
+        {
+            "name":"Coordination for the Improvement of Higher Education (CAPES)",
+            "award":[
+
+            ]
+        }
+    ],
+    "content-domain":{
+        "domain":[
+            "elsevier.com",
+            "sciencedirect.com"
+        ],
+        "crossmark-restriction":true
+    },
+    "published-print":{
+        "date-parts":[
+            [
+                2019,
+                4
+            ]
+        ]
+    },
+    "DOI":"10.1016\/j.gsd.2018.08.007",
+    "type":"article-journal",
+    "created":{
+        "date-parts":[
+            [
+                2018,
+                9,
+                1
+            ]
+        ],
+        "date-time":"2018-09-01T16:47:05Z",
+        "timestamp":1535820425000
+    },
+    "page":"10-23",
+    "update-policy":"http:\/\/dx.doi.org\/10.1016\/elsevier_cm_policy",
+    "source":"Crossref",
+    "is-referenced-by-count":1,
+    "title":"Potential for aquifer contamination of anthropogenic activity in the recharge area of the Guarani Aquifer System, southeast of Brazil",
+    "prefix":"10.1016",
+    "volume":"8",
+    "author":[
+        {
+            "ORCID":"http:\/\/orcid.org\/0000-0002-3148-0030",
+            "authenticated-orcid":false,
+            "given":"Carlos Wilmer",
+            "family":"Costa",
+            "sequence":"first",
+            "affiliation":[
+
+            ]
+        },
+        {
+            "given":"Reinaldo",
+            "family":"Lorandi",
+            "sequence":"additional",
+            "affiliation":[
+
+            ]
+        },
+        {
+            "given":"Jos\u00e9 Augusto",
+            "family":"Lollo",
+            "sequence":"additional",
+            "affiliation":[
+
+            ]
+        },
+        {
+            "given":"Vanderley Severino",
+            "family":"Santos",
+            "sequence":"additional",
+            "affiliation":[
+
+            ]
+        }
+    ],
+    "member":"78",
+    "container-title":"Groundwater for Sustainable Development",
+    "original-title":[
+
+    ],
+    "language":"en",
+    "link":[
+        {
+            "URL":"https:\/\/api.elsevier.com\/content\/article\/PII:S2352801X18300274?httpAccept=text\/xml",
+            "content-type":"text\/xml",
+            "content-version":"vor",
+            "intended-application":"text-mining"
+        },
+        {
+            "URL":"https:\/\/api.elsevier.com\/content\/article\/PII:S2352801X18300274?httpAccept=text\/plain",
+            "content-type":"text\/plain",
+            "content-version":"vor",
+            "intended-application":"text-mining"
+        }
+    ],
+    "deposited":{
+        "date-parts":[
+            [
+                2019,
+                8,
+                8
+            ]
+        ],
+        "date-time":"2019-08-08T19:41:05Z",
+        "timestamp":1565293265000
+    },
+    "score":1.0,
+    "subtitle":[
+
+    ],
+    "short-title":[
+
+    ],
+    "issued":{
+        "date-parts":[
+            [
+                2019,
+                4
+            ]
+        ]
+    },
+    "references-count":62,
+    "alternative-id":[
+        "S2352801X18300274"
+    ],
+    "URL":"http:\/\/dx.doi.org\/10.1016\/j.gsd.2018.08.007",
+    "relation":{
+
+    },
+    "ISSN":[
+        "2352-801X"
+    ],
+    "subject":[
+        "Geography, Planning and Development",
+        "Environmental Engineering",
+        "Water Science and Technology",
+        "Environmental Chemistry"
+    ],
+    "container-title-short":"Groundwater for Sustainable Development",
+    "assertion":[
+        {
+            "value":"Elsevier",
+            "name":"publisher",
+            "label":"This article is maintained by"
+        },
+        {
+            "value":"Potential for aquifer contamination of anthropogenic activity in the recharge area of the Guarani Aquifer System, southeast of Brazil",
+            "name":"articletitle",
+            "label":"Article Title"
+        },
+        {
+            "value":"Groundwater for Sustainable Development",
+            "name":"journaltitle",
+            "label":"Journal Title"
+        },
+        {
+            "value":"https:\/\/doi.org\/10.1016\/j.gsd.2018.08.007",
+            "name":"articlelink",
+            "label":"CrossRef DOI link to publisher maintained version"
+        },
+        {
+            "value":"article",
+            "name":"content_type",
+            "label":"Content Type"
+        },
+        {
+            "value":"\u00a9 2018 Published by Elsevier B.V.",
+            "name":"copyright",
+            "label":"Copyright"
+        }
+    ]
+}

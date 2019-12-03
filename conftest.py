@@ -78,11 +78,59 @@ def oaisource(db):
 
 
 @pytest.fixture
+def dummy_journal(dummy_publisher):
+    """
+    Empty Journal with FK to Publisher
+    """
+    j = Journal.objects.create(
+        publisher=dummy_publisher,
+    )
+
+    return j
+
+
+@pytest.fixture
 def dummy_oaisource(oaisource):
     """
     Provides a dummy OaiSource if you just need a OaiSource, but do not do anything with it. Use this, if you need just a single OaiSource.
     """
     return oaisource.dummy_oaisource()
+
+
+@pytest.fixture
+def dummy_oairecord(dummy_paper, dummy_oaisource):
+    """
+    Empty OaiRecord with FK to empty_paper and empty OaiSource
+    """
+    o = OaiRecord.objects.create(
+        source=dummy_oaisource,
+        about=dummy_paper,
+        identifier='dummy',
+    )
+
+    return o
+
+
+@pytest.fixture
+def dummy_paper(db):
+    """
+    Just an empty paper
+    """
+    p =  Paper.objects.create(
+        pubdate='2019-10-08',
+    )
+
+    return p
+
+
+@pytest.fixture
+def dummy_publisher():
+    """
+    Empty Publisher
+    """
+    p = Publisher.objects.create()
+
+    return p
 
 
 @pytest.fixture

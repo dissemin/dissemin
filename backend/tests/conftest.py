@@ -1,4 +1,10 @@
+import os
 import pytest
+import re
+import responses
+
+from django.conf import settings
+from django.utils.text import slugify
 
 from publishers.models import AliasPublisher
 from publishers.models import Journal
@@ -76,9 +82,11 @@ def citeproc(affiliations, container_title, issn, orcids, title):
         'issue' : '1',
         'issued' : {
             'date-parts' : [
-                2019,
-                10,
-                10
+                [
+                    2019,
+                    10,
+                    10
+                ]
             ],
         },
         'pages' : 'p. 327',
@@ -110,3 +118,25 @@ def mock_alias_publisher_increment(monkeypatch):
     Monkeypatch this function to mit DB access
     """
     monkeypatch.setattr(AliasPublisher, 'increment', lambda x,y: True)
+
+
+@pytest.fixture
+def mock_doi(citeproc):
+    def request_callback(request):
+        doi = request.path_url[1:]
+        f_name = '{}.json'.format(slugify(doi))
+        f_path = os.path.join(settings.BASE_DIR, 'test_data', 'citeproc', 'doi', f_name)
+        headers = {
+            'Content-Type' : 'application/citeproc+json'
+        }
+        with open(f_path, 'r') as f:
+            body = f.read()
+            return (200, headers, body)
+
+    with responses.RequestsMock() as rsps:
+        rsps.add_callback(
+            responses.GET,
+            re.compile('{}(.*)'.format(settings.DOI_RESOLVER_ENDPOINT)),
+            callback=request_callback
+        )
+        yield rsps

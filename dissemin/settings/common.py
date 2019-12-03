@@ -94,6 +94,11 @@ DOI_PROXY_SUPPORTS_BATCH = True
 #DOI_PROXY_DOMAIN =  'doi.org'
 #DOI_PROXY_SUPPORTS_BATCH = False
 
+DOI_OUTDATED_DURATION = timedelta(days=180)
+# Endpoint to fetch DOI from
+DOI_RESOLVER_ENDPOINT= 'https://dx.doi.org/'
+
+
 ### CrossRef politeness options ###
 # These options determine how we identify ourselves to CrossRef.
 # It is not mandatory to provide them but it helps get a better service.

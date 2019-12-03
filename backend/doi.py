@@ -6,8 +6,12 @@
 # This has the reason, that a users might wait if they refresh their profile.
 
 import logging
+import requests
 
+from datetime import date
 from datetime import datetime
+
+from django.conf import settings
 
 from backend.crossref import convert_to_name_pair
 from backend.crossref import is_oa_license
@@ -20,6 +24,7 @@ from papers.doi import doi_to_crossref_identifier
 from papers.doi import doi_to_url
 from papers.doi import to_doi
 from papers.models import OaiSource
+from papers.models import OaiRecord
 from papers.models import Paper
 from papers.utils import tolerant_datestamp_to_datetime
 from papers.utils import validate_orcid
@@ -359,7 +364,7 @@ class Citeproc():
         d = None
         # First we try with date parts
         try:
-            d = cls._parse_date_parts(data.get('date-parts'))
+            d = cls._parse_date_parts(data.get('date-parts')[0])
         except Exception:
             pass
 
@@ -414,3 +419,58 @@ class CrossRef(Citeproc):
             return title[0]
         except IndexError:
             raise CiteprocTitleError('No title in metadata')
+
+
+class DOI(Citeproc):
+    """
+    This class fetches citeproc metadata with content negotiation via DOI resolver.
+    The main strategy here is to accelerate the ingest by checking if we already have an OaiRecord and update it only if the entry is rather old
+    """
+
+    headers = {
+        'Accept' : 'application/citeproc+json',
+    }
+    timeout = 0.500 # half a second as timeout, the might user waiting
+
+
+    @staticmethod
+    def _is_up_to_date(doi):
+        """
+        Checks if doi is already in the database and wheter it is up to date
+        :param doi: DOI to check
+        :returns: True/False
+        """
+        try:
+            return OaiRecord.objects.select_related('about').get(
+                doi=doi,
+                source__identifier='crossref',
+                last_update__gte=date.today() - settings.DOI_OUTDATED_DURATION
+            )
+        except OaiRecord.DoesNotExist:
+            return None
+
+
+    @classmethod
+    def save_doi(cls, doi):
+        """
+        Fetches a single DOI and updates if necessary
+        :param doi: A (valid) DOI
+        :returns: Paper object
+        :raises: CiteprocError or RequestException
+        """
+        record = cls._is_up_to_date(doi)
+        if record is not None:
+            return record.about
+
+        url = '{}{}'.format(settings.DOI_RESOLVER_ENDPOINT, doi)
+        r = requests.get(
+            url=url,
+            headers=cls.headers,
+            timeout=cls.timeout,
+        )
+
+        r.raise_for_status()
+
+        p = cls.to_paper(r.json())
+
+        return p

@@ -11,6 +11,7 @@ from backend.doi import CiteprocPubtypeError
 from backend.doi import CiteprocTitleError
 from backend.doi import Citeproc
 from backend.doi import CrossRef
+from backend.doi import DOI
 from papers.baremodels import BareName
 from papers.doi import doi_to_crossref_identifier
 from papers.doi import doi_to_url
@@ -38,7 +39,7 @@ class TestCiteproc():
             assert author_p['name']['last'] == author_c['family']
             assert author_p['affiliation'] == author_c['affiliation'][0]['name']
             assert author_p['orcid'] == author_c['ORCID']
-        assert p.pubdate == date(*citeproc['issued']['date-parts'])
+        assert p.pubdate == date(*citeproc['issued']['date-parts'][0])
         assert p.title == title
         # Ensure that oairecord is in database (i.e. created)
         r = OaiRecord.objects.get(about=p)
@@ -48,7 +49,7 @@ class TestCiteproc():
         assert r.issue == citeproc['issue']
         assert r.journal_title == container_title
         assert r.pages == citeproc['pages']
-        assert r.pubdate == date(*citeproc['issued']['date-parts'])
+        assert r.pubdate == date(*citeproc['issued']['date-parts'][0])
         assert r.publisher_name == citeproc['publisher_name']
         assert r.source == OaiSource.objects.get(identifier='crossref')
         assert r.splash_url == doi_to_url(citeproc['DOI'])
@@ -193,7 +194,7 @@ class TestCiteproc():
         assert r['journal_title'] == container_title
         assert r['pages'] == citeproc['pages']
         assert r['pdf_url'] == '' # Is not OA
-        assert r['pubdate'] == date(*citeproc['issued']['date-parts'])
+        assert r['pubdate'] == date(*citeproc['issued']['date-parts'][0])
         assert r['publisher_name'] == citeproc['publisher_name']
         assert r['pubtype'] == citeproc['type']
         assert r['source'] == OaiSource.objects.get(identifier='crossref')
@@ -246,7 +247,7 @@ class TestCiteproc():
         for a in r['author_names']:
             assert isinstance(a, BareName)
         assert r['orcids'] == orcids
-        assert r['pubdate'] == date(*citeproc['issued']['date-parts'])
+        assert r['pubdate'] == date(*citeproc['issued']['date-parts'][0])
         assert r['title'] == title
 
 
@@ -270,26 +271,26 @@ class TestCiteproc():
         """
         If contains issued, take this
         """
-        citeproc['created'] = {'date-parts' : [2019, 10, 11]}
-        citeproc['deposited'] = {'date-parts' : [2019, 10, 12]}
-        assert self.test_class._get_pubdate(citeproc) == date(*citeproc['issued']['date-parts'])
+        citeproc['created'] = {'date-parts' : [[2019, 10, 11]]}
+        citeproc['deposited'] = {'date-parts' : [[2019, 10, 12]]}
+        assert self.test_class._get_pubdate(citeproc) == date(*citeproc['issued']['date-parts'][0])
 
     def test_get_pubdate_created(self, citeproc):
         """
         If contains no issued, take created
         """
         del citeproc['issued']
-        citeproc['created'] = {'date-parts' : [2019, 10, 11]}
-        citeproc['deposited'] = {'date-parts' : [2019, 10, 12]}
-        assert self.test_class._get_pubdate(citeproc) == date(*citeproc['created']['date-parts'])
+        citeproc['created'] = {'date-parts' : [[2019, 10, 11]]}
+        citeproc['deposited'] = {'date-parts' : [[2019, 10, 12]]}
+        assert self.test_class._get_pubdate(citeproc) == date(*citeproc['created']['date-parts'][0])
 
     def test_get_pubdate_deposited(self, citeproc):
         """
         If contains no issued and created, take deposited
         """
         del citeproc['issued']
-        citeproc['deposited'] = {'date-parts' : [2019, 10, 12]}
-        assert self.test_class._get_pubdate(citeproc) == date(*citeproc['deposited']['date-parts'])
+        citeproc['deposited'] = {'date-parts' : [[2019, 10, 12]]}
+        assert self.test_class._get_pubdate(citeproc) == date(*citeproc['deposited']['date-parts'][0])
 
     def test_get_pubdate_no_date(self, citeproc):
         """
@@ -376,7 +377,7 @@ class TestCiteproc():
         assert self.test_class._is_oa_by_license(licenses) == expected
 
 
-    @pytest.mark.parametrize('data, expected', [({'date-parts' : [2019, 10, 10]}, date(2019, 10, 10)), ({'raw' : '2019-10-10'}, date(2019, 10, 10)), (None, None), ({'spam' : 'ham'}, None)])
+    @pytest.mark.parametrize('data, expected', [({'date-parts' : [[2019, 10, 10]]}, date(2019, 10, 10)), ({'raw' : '2019-10-10'}, date(2019, 10, 10)), (None, None), ({'spam' : 'ham'}, None)])
     def test_parse_date(self, data, expected):
         """
         Must return a valid date or None
@@ -431,3 +432,33 @@ class TestCrossRef(TestCiteproc):
         citeproc['title'] = list()
         with pytest.raises(CiteprocTitleError):
             self.test_class._get_title(citeproc)
+
+
+class TestDOI(TestCiteproc):
+    """
+    This class groups tests about the DOI class
+    """
+
+    test_class = DOI
+
+    def test_save_doi(self, db, mock_doi):
+        """
+        Must save the paper
+        """
+        doi = '10.1016/j.gsd.2018.08.007'
+        p = self.test_class.save_doi(doi)
+        # Header must be set
+        assert mock_doi.calls[0].request.headers.get('Accept') == 'application/citeproc+json'
+        # Check if paper is created
+        assert p.pk >= 1
+
+
+    def test_save_doi_existing(self, db, mock_doi):
+        """
+        If DOI is already in system, expect not a new paper, but the one from the database
+        """
+        doi = '10.1016/j.gsd.2018.08.007'
+        p = self.test_class.save_doi(doi)
+        q = self.test_class.save_doi(doi)
+
+        assert p == q
