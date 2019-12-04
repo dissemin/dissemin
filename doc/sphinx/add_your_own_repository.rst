@@ -144,7 +144,7 @@ Given our documentation, it is up to you which data you finally ingest in your r
 Aside from the question, which data you ingest, there is also the question how you ingest the data.
 For example, your repository has probably a different granularity when it comes to document types.
 
-We have created a `Workflow <https://github.com/dissemin/dissemin/wiki/Checklist---Add-New-Repository>` in our GitHub-Wiki.
+We have created a `Workflow <https://github.com/dissemin/dissemin/wiki/Checklist---Add-New-Repository>`_ in our GitHub-Wiki.
 It covers the essential steps and is meant to be a guide.
 From the template we create an issue that we finally close once the repository has been successfully connected.
 In case of need, we add further steps or remove unnessary steps.
