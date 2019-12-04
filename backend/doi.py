@@ -475,7 +475,7 @@ class CrossRef(Citeproc):
         source = OaiSource.objects.get(identifier='crossref')
         update_date = source.last_update + timedelta(days=1)
         today = date.today()
-        while update_date < today:
+        while update_date.date() < today:
             try:
                 cls._fetch_day(update_date)
             except requests.exceptions.RequestException as e:

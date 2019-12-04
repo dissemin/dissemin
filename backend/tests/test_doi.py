@@ -4,6 +4,8 @@ import responses
 import zipfile
 
 from datetime import date
+from datetime import datetime
+from datetime import timedelta
 from urllib.parse import parse_qs
 from urllib.parse import urlparse
 
@@ -433,6 +435,19 @@ class TestCrossRef(TestCiteproc):
         citeproc['container-title'] = [container_title, ]
 
         return citeproc
+
+
+    def test_fetch_latest_records(self, db, monkeypatch):
+        """
+        Essentially, we test if source date is updated
+        """
+        monkeypatch.setattr(self.test_class, '_fetch_day', lambda x: None)
+        source = OaiSource.objects.get(identifier='crossref')
+        source.last_update = datetime.now() - timedelta(days=10)
+        source.save()
+        self.test_class.fetch_latest_records()
+        source.refresh_from_db()
+        assert source.last_update.date() == date.today() - timedelta(days=1)
 
 
     @responses.activate
