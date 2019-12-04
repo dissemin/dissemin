@@ -362,7 +362,7 @@ class TestCiteproc():
         assert r == citeproc['title'][:1024]
         assert len(r) <= 1024
 
-    def test_get_titke(self, citeproc):
+    def test_get_title_length(self, citeproc):
         """
         Title must no be longer than 1024 chars
         """
