@@ -328,8 +328,8 @@ class Citeproc():
         :raises: CiteprocError
         """
         # Check for a title
-        title = data.get('title')
-        if title is None:
+        title = data.get('title', '')[:1024]
+        if title is '':
             raise CiteprocTitleError('No title in metadata')
         return title
 
@@ -462,7 +462,7 @@ class CrossRef(Citeproc):
         """
         title = data.get('title', [])
         try:
-            return title[0]
+            return title[0][:1024]
         except IndexError:
             raise CiteprocTitleError('No title in metadata')
 

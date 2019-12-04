@@ -359,7 +359,17 @@ class TestCiteproc():
 
     def test_get_title(self, citeproc):
         r = self.test_class._get_title(citeproc)
-        assert r == citeproc['title']
+        assert r == citeproc['title'][:1024]
+        assert len(r) <= 1024
+
+    def test_get_titke(self, citeproc):
+        """
+        Title must no be longer than 1024 chars
+        """
+        citeproc['title'] = 'x' * 2000
+        r = self.test_class._get_title(citeproc)
+        assert r == citeproc['title'][:1024]
+        assert len(r) <= 2014
 
     def test_get_title_no_title(self, citeproc):
         """
@@ -469,8 +479,18 @@ class TestCrossRef(TestCiteproc):
         CrossRef does serve the title in a list
         """
         r = self.test_class._get_title(citeproc)
-        assert r == citeproc.get('title')[0]
+        assert r == citeproc.get('title')[0][:1024]
+        assert len(r) <= 1024
     
+    def test_get_title_length(self, citeproc):
+        """
+        CrossRef does serve the title in a list. Must not be longer than 1024 chars
+        """
+        citeproc['title'] = ['x' * 2000, ]
+        r = self.test_class._get_title(citeproc)
+        assert r == citeproc.get('title')[0][:1024]
+        assert len(r) <= 1024
+
     def test_get_title_list_error(self, citeproc):
         """
         CrossRef does serve the title in a list
