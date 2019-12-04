@@ -1,6 +1,14 @@
+import os
 import pytest
+import responses
+import zipfile
 
 from datetime import date
+from urllib.parse import parse_qs
+from urllib.parse import urlparse
+
+
+from django.conf import settings
 
 from backend.doi import CiteprocError
 from backend.doi import CiteprocAuthorError
@@ -415,6 +423,45 @@ class TestCrossRef(TestCiteproc):
         citeproc['container-title'] = [container_title, ]
 
         return citeproc
+
+
+    @responses.activate
+    def test_fetch_day(self, db):
+        """
+        Here we imitate the CrossRef API in a very simple version.
+        We mock the request and inspect the params.
+        Then we return a result that we have gotten from CrossRef
+        """
+        # Open zipfile with fixtures
+        f_path = os.path.join(settings.BASE_DIR, 'backend', 'tests', 'data', 'crossref.zip')
+        zf = zipfile.ZipFile(f_path)
+
+        # Dynamic callback, response only depends on cursor
+        def request_callback(request):
+            called_url = request.url
+            query = parse_qs(urlparse(called_url).query)
+            cursor = query['cursor'][0]
+            if cursor == '*':
+                cursor = 'initial'
+            f_name = '{}.json'.format(cursor)
+            body = zf.read(f_name)
+            return (200, {}, body)
+        # Mocking the requests
+        mock_url = 'https://api.crossref.org/works'
+        responses.add_callback(
+            responses.GET,
+            mock_url,
+            callback=request_callback,
+        )
+
+        day = date.today()
+        self.test_class._fetch_day(day)
+        # Some assertions
+        called_url = responses.calls[0].request.url
+        query = parse_qs(urlparse(called_url).query)
+        assert query['filter'][0] == 'from-update-date:{},until-update-date:{}'.format(day, day)
+        assert query['rows'][0] == str(self.test_class.rows)
+        assert query['mailto'][0] == settings.CROSSREF_MAILTO
 
 
     def test_get_title(self, citeproc):

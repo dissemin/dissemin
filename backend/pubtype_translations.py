@@ -31,6 +31,7 @@ CITEPROC_PUBTYPE_TRANSLATION = {
     'article-newspaper' : 'other',
     'bill' : 'other',
     'book' : 'book',
+    'book-chapter' : 'book-chapter',
     'book-part' : 'book-chapter',
     'book-section' : 'book-chapter',
     'book-series' : 'other',

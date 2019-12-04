@@ -10,6 +10,7 @@ import requests
 
 from datetime import date
 from datetime import datetime
+from datetime import timedelta
 
 from django.conf import settings
 
@@ -17,6 +18,7 @@ from backend.crossref import convert_to_name_pair
 from backend.crossref import is_oa_license
 from backend.doiprefixes import free_doi_prefixes
 from backend.pubtype_translations import CITEPROC_PUBTYPE_TRANSLATION
+from backend.utils import request_retry
 from papers.baremodels import BareName
 from papers.baremodels import BareOaiRecord
 from papers.baremodels import BarePaper
@@ -26,6 +28,7 @@ from papers.doi import to_doi
 from papers.models import OaiSource
 from papers.models import OaiRecord
 from papers.models import Paper
+from papers.utils import jpath
 from papers.utils import tolerant_datestamp_to_datetime
 from papers.utils import validate_orcid
 from papers.utils import valid_publication_date
@@ -398,6 +401,49 @@ class CrossRef(Citeproc):
     This class can parse CrossRef metadata, which is similar to citeproc and has functionality to fetch from CrossRef API
     """
 
+    rows = 500
+
+    @classmethod
+    def _fetch_day(cls, day):
+        """
+        Fetches a whole day from CrossRef
+        """
+        filters = {
+            'from-update-date' : day.isoformat(),
+            'until-update-date' : day.isoformat(),
+        }
+        params = {
+                'filter' : ','.join('{}:{}'.format(key, value) for key, value in filters.items()),
+                'rows' : cls.rows,
+                'mailto' : settings.CROSSREF_MAILTO,
+        }
+        url = 'https://api.crossref.org/works'
+        headers = {
+            'User-Agent':  settings.CROSSREF_USER_AGENT,
+        }
+
+        s = requests.Session()
+        cursor = '*'
+        while cursor:
+            params['cursor'] = cursor
+            r = request_retry(
+                url,
+                params=params,
+                headers=headers,
+                session=s,
+            )
+            cursor = jpath('message/next-cursor', r.json())
+            items = jpath('message/items', r.json(), [])
+            if len(items) == 0:
+                cursor = False
+            else:
+                for item in items:
+                    try:
+                        cls.to_paper(item)
+                    except CiteprocError:
+                        logger.debug(item)
+
+
     @staticmethod
     def _get_container(data):
         container_title = data.get('container-title')
@@ -414,11 +460,32 @@ class CrossRef(Citeproc):
         :returns: title
         :raises: CiteprocError
         """
-        title = super()._get_title(data)
+        title = data.get('title', [])
         try:
             return title[0]
         except IndexError:
             raise CiteprocTitleError('No title in metadata')
+
+
+    @classmethod
+    def fetch_latest_records(cls):
+        """
+        Fetches the latest records from CrossRef API
+        """
+        source = OaiSource.objects.get(identifier='crossref')
+        update_date = source.last_update + timedelta(days=1)
+        today = date.today()
+        while update_date < today:
+            try:
+                cls._fetch_day(update_date)
+            except requests.exceptions.RequestException as e:
+                logger.exception(e)
+                break
+            else:
+                source.last_update = update_date
+                source.save()
+                logger.info("Updated up to {}".format(update_date))
+                update_date += timedelta(days=1)
 
 
 class DOI(Citeproc):
