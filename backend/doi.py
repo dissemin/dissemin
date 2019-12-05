@@ -193,7 +193,7 @@ class Citeproc():
         issn = cls._get_issn(data)
         journal = Journal.find(issn=issn, title=journal_title)
 
-        publisher_name = data.get('publisher_name', '')[:512]
+        publisher_name = data.get('publisher', '')[:512]
         publisher = cls._get_publisher(publisher_name, journal)
 
         bare_oairecord_data = {

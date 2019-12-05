@@ -60,7 +60,7 @@ class TestCiteproc():
         assert r.journal_title == container_title
         assert r.pages == citeproc['pages']
         assert r.pubdate == date(*citeproc['issued']['date-parts'][0])
-        assert r.publisher_name == citeproc['publisher_name']
+        assert r.publisher_name == citeproc['publisher']
         assert r.source == OaiSource.objects.get(identifier='crossref')
         assert r.splash_url == doi_to_url(citeproc['DOI'])
         assert r.volume == citeproc['volume']
@@ -205,7 +205,7 @@ class TestCiteproc():
         assert r['pages'] == citeproc['pages']
         assert r['pdf_url'] == '' # Is not OA
         assert r['pubdate'] == date(*citeproc['issued']['date-parts'][0])
-        assert r['publisher_name'] == citeproc['publisher_name']
+        assert r['publisher_name'] == citeproc['publisher']
         assert r['pubtype'] == citeproc['type']
         assert r['source'] == OaiSource.objects.get(identifier='crossref')
         assert r['splash_url'] == doi_to_url(citeproc['DOI'])
@@ -216,10 +216,11 @@ class TestCiteproc():
         """
         Some fields must be empty, namely those with a direct get call
         """
-        keys = ['issue', 'publisher_name', 'pages', 'volume']
+        keys = ['issue', 'publisher', 'pages', 'volume']
         for k in keys:
             del citeproc[k]
         r = self.test_class._get_oairecord_data(citeproc)
+        keys = ['issue', 'publisher_name', 'pages', 'volume']
         for k in keys:
             assert r[k] == ''
 
@@ -523,16 +524,19 @@ class TestDOI(TestCiteproc):
 
     test_class = DOI
 
-    def test_save_doi(self, db, mock_doi):
+    @pytest.mark.parametrize('doi', ['10.1016/j.gsd.2018.08.007', '10.1109/sYnAsc.2010.88'])
+    def test_save_doi(self, db, mock_doi, doi):
         """
         Must save the paper
         """
-        doi = '10.1016/j.gsd.2018.08.007'
         p = self.test_class.save_doi(doi)
         # Header must be set
         assert mock_doi.calls[0].request.headers.get('Accept') == 'application/citeproc+json'
         # Check if paper is created
         assert p.pk >= 1
+        r = OaiRecord.objects.get(about=p)
+        assert r.journal_title is not ''
+        assert r.publisher_name is not ''
 
 
     def test_save_doi_existing(self, db, mock_doi):

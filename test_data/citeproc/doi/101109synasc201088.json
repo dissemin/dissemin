@@ -1,0 +1,126 @@
+{
+    "indexed":{
+        "date-parts":[
+            [
+                2019,
+                11,
+                5
+            ]
+        ],
+        "date-time":"2019-11-05T08:12:55Z",
+        "timestamp":1572941575960
+    },
+    "reference-count":6,
+    "publisher":"IEEE",
+    "isbn-type":[
+        {
+            "value":"9781424498161",
+            "type":"print"
+        }
+    ],
+    "content-domain":{
+        "domain":[
+
+        ],
+        "crossmark-restriction":false
+    },
+    "published-print":{
+        "date-parts":[
+            [
+                2010,
+                9
+            ]
+        ]
+    },
+    "DOI":"10.1109\/synasc.2010.88",
+    "type":"paper-conference",
+    "created":{
+        "date-parts":[
+            [
+                2011,
+                2,
+                18
+            ]
+        ],
+        "date-time":"2011-02-18T19:12:11Z",
+        "timestamp":1298056331000
+    },
+    "source":"Crossref",
+    "is-referenced-by-count":0,
+    "title":"Monitoring and Support of Unreliable Services",
+    "prefix":"10.1109",
+    "author":[
+        {
+            "given":"Jaroslav",
+            "family":"Swswnka",
+            "sequence":"first",
+            "affiliation":[
+
+            ]
+        },
+        {
+            "given":"Matej",
+            "family":"Bosak",
+            "sequence":"additional",
+            "affiliation":[
+
+            ]
+        },
+        {
+            "given":"Tomas",
+            "family":"Pitner",
+            "sequence":"additional",
+            "affiliation":[
+
+            ]
+        }
+    ],
+    "member":"263",
+    "event":"12th International Symposium on Symbolic and Numeric Algorithms for Scientific Computing (SYNASC 2010)",
+    "container-title":"2010 12th International Symposium on Symbolic and Numeric Algorithms for Scientific Computing",
+    "original-title":[
+
+    ],
+    "link":[
+        {
+            "URL":"http:\/\/xplorestaging.ieee.org\/ielx5\/5714592\/5715259\/05715340.pdf?arnumber=5715340",
+            "content-type":"unspecified",
+            "content-version":"vor",
+            "intended-application":"similarity-checking"
+        }
+    ],
+    "deposited":{
+        "date-parts":[
+            [
+                2019,
+                11,
+                5
+            ]
+        ],
+        "date-time":"2019-11-05T07:35:00Z",
+        "timestamp":1572939300000
+    },
+    "score":1.0,
+    "subtitle":[
+
+    ],
+    "short-title":[
+
+    ],
+    "issued":{
+        "date-parts":[
+            [
+                2010,
+                9
+            ]
+        ]
+    },
+    "ISBN":[
+        "9781424498161"
+    ],
+    "references-count":6,
+    "URL":"http:\/\/dx.doi.org\/10.1109\/sYnAsc.2010.88",
+    "relation":{
+
+    }
+}

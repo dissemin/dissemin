@@ -90,7 +90,7 @@ def citeproc(affiliations, container_title, issn, orcids, title):
             ],
         },
         'pages' : 'p. 327',
-        'publisher_name' : 'Editorial Sur',
+        'publisher' : 'Editorial Sur',
         'title' : title,
         'type' : 'book',
         'volume' : '1',
