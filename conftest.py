@@ -3,6 +3,7 @@ import os
 import pytest
 import re
 import requests
+import responses
 import sys
 
 
@@ -16,6 +17,7 @@ from django.contrib.auth.models import User
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.core.management import call_command
 from django.urls import reverse
+from django.utils.text import slugify
 
 from deposit.models import Repository
 from dissemin.settings import BASE_DIR
@@ -207,6 +209,28 @@ def dummy_repository(repository):
     Returns a dummy_repository with a faked dummy-protocol where you need only the repository, but do not anything with it. Use this if you need a single dummy repository.
     """
     return repository.dummy_repository()
+
+
+@pytest.fixture
+def mock_doi():
+    def request_callback(request):
+        doi = request.path_url[1:]
+        f_name = '{}.json'.format(slugify(doi))
+        f_path = os.path.join(settings.BASE_DIR, 'test_data', 'citeproc', 'doi', f_name)
+        headers = {
+            'Content-Type' : 'application/citeproc+json'
+        }
+        with open(f_path, 'r') as f:
+            body = f.read()
+            return (200, headers, body)
+
+    with responses.RequestsMock() as rsps:
+        rsps.add_callback(
+            responses.GET,
+            re.compile('{}(.*)'.format(settings.DOI_RESOLVER_ENDPOINT)),
+            callback=request_callback
+        )
+        yield rsps
 
 
 @pytest.fixture

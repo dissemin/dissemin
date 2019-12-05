@@ -48,6 +48,7 @@ import re
 import haystack
 import pytz
 import logging
+import requests
 from statistics.models import AccessStatistics
 from statistics.models import combined_status_for_instance
 from statistics.models import STATUS_CHOICES_HELPTEXT
@@ -1036,17 +1037,24 @@ class Paper(models.Model, BarePaper):
                 self.save(update_fields=['task'])
 
     @classmethod
-    def create_by_doi(self, doi, bare=False):
+    def create_by_doi(self, doi):
         """
         Creates a paper given a DOI
+        :param DOI: DOI to return
+        :returns: A paper instance or None if no paper was created
         """
-        import backend.crossref as crossref
-        cr_api = crossref.CrossRefAPI()
-        bare_paper = cr_api.create_paper_by_doi(doi)
-        if bare:
-            return bare_paper
-        elif bare_paper:
-            return Paper.from_bare(bare_paper)  # TODO index it?
+
+        from backend.doi import DOI
+        from backend.doi import CiteprocError
+        try:
+            return DOI.save_doi(doi)
+        except CiteprocError as e:
+            logger.info('Could not create paper')
+            logger.info(e)
+        except requests.exceptions.RequestException as e:
+            logger.exception(e)
+        return None
+
 
     @classmethod
     def get_by_doi(cls, doi):

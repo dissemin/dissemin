@@ -51,6 +51,39 @@ class TestPaper():
     Class that groups tests for Paper class
     """
 
+    @pytest.mark.usefixtures('db', 'mock_doi')
+    def test_create_by_doi(self):
+        # we recapitalize the DOI to make sure it is treated in a
+        # case-insensitive way internally
+        p = Paper.create_by_doi('10.1109/sYnAsc.2010.88')
+        assert p.title == 'Monitoring and Support of Unreliable Services'
+        assert p.publications[0].doi == '10.1109/synasc.2010.88'
+
+    def test_create_by_doi_metadata_error(self, monkeypatch):
+        """
+        If CiteprocError is raised inside called function, expect a silent None
+        """
+        from backend.doi import DOI
+        from backend.doi import CiteprocError
+        def raise_citeproc(*args, **kwargs):
+            raise CiteprocError
+        monkeypatch.setattr(DOI, 'save_doi', raise_citeproc)
+        p = Paper.create_by_doi('not_important')
+        assert p is None
+
+    def test_create_by_doi_requests_error(self, monkeypatch):
+        """
+        If RequestException is raised inside called function, expect a silent None
+        """
+        from backend.doi import DOI
+        from requests.exceptions import RequestException
+        def raise_citeproc(*args, **kwargs):
+            raise RequestException
+        monkeypatch.setattr(DOI, 'save_doi', raise_citeproc)
+        p = Paper.create_by_doi('not_important')
+        assert p is None
+
+
     @pytest.mark.parametrize('on_list', [True, False])
     def test_on_todolist(self, book_god_of_the_labyrinth, user_isaac_newton, on_list):
         if on_list:
@@ -203,15 +236,6 @@ class PaperTest(django.test.TestCase):
             self.pmc_record = f.read()
         with open(os.path.join(self.testdir, 'data/hal_record.xml'), 'r') as f:
             self.hal_record = f.read()
-
-    def test_create_by_doi(self):
-        # we recapitalize the DOI to make sure it is treated in a
-        # case-insensitive way internally
-        p = Paper.create_by_doi('10.1109/sYnAsc.2010.88')
-        p = Paper.from_bare(p)
-        self.assertEqual(
-            p.title, 'Monitoring and Support of Unreliable Services')
-        self.assertEqual(p.publications[0].doi, '10.1109/synasc.2010.88')
 
     @patch.object(Client, 'makeRequest')
     def test_create_by_identifier_no_pubdate(self, mock_makeRequest):
