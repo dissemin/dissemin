@@ -24,6 +24,7 @@ import datetime
 import doctest
 import os
 import pytest
+import responses
 
 from datetime import date
 from mock import patch
@@ -31,6 +32,7 @@ from mock import patch
 import django.test
 
 
+from django.conf import settings
 from django.contrib.auth.models import User
 
 import papers.doi
@@ -45,19 +47,10 @@ from papers.models import Researcher
 from papers.models import Institution
 from publishers.tests.test_romeo import RomeoAPIStub
 
-
 class TestPaper():
     """
     Class that groups tests for Paper class
     """
-
-    @pytest.mark.usefixtures('db', 'mock_doi')
-    def test_create_by_doi(self):
-        # we recapitalize the DOI to make sure it is treated in a
-        # case-insensitive way internally
-        p = Paper.create_by_doi('10.1109/sYnAsc.2010.88')
-        assert p.title == 'Monitoring and Support of Unreliable Services'
-        assert p.publications[0].doi == '10.1109/synasc.2010.88'
 
     def test_create_by_doi_metadata_error(self, monkeypatch):
         """
@@ -69,6 +62,18 @@ class TestPaper():
             raise CiteprocError
         monkeypatch.setattr(DOI, 'save_doi', raise_citeproc)
         p = Paper.create_by_doi('not_important')
+        assert p is None
+
+    @responses.activate
+    @pytest.mark.usefixtures('db')
+    def test_create_by_doi_invalid_doi(self):
+        responses.add(
+            responses.GET,
+            '{}10.1021/eiaeuiebop134223cen-v043n050.p033'.format(settings.DOI_RESOLVER_ENDPOINT),
+            status=404
+        )
+
+        p = Paper.create_by_doi('10.1021/eiaeuiebop134223cen-v043n050.p033')
         assert p is None
 
     def test_create_by_doi_requests_error(self, monkeypatch):
@@ -89,6 +94,119 @@ class TestPaper():
         if on_list:
             book_god_of_the_labyrinth.todolist.add(user_isaac_newton)
         assert book_god_of_the_labyrinth.on_todolist(user_isaac_newton) == on_list
+
+
+@pytest.mark.usefixtures('db', 'mock_doi')
+class TestPaperDOIUsage():
+    """
+    Class that groups tests for Paper class that do calls to doi.org
+    """
+
+    def test_create_by_doi(self):
+        # we recapitalize the DOI to make sure it is treated in a
+        # case-insensitive way internally
+        p = Paper.create_by_doi('10.1109/sYnAsc.2010.88')
+        assert p.title == 'Monitoring and Support of Unreliable Services'
+        assert p.publications[0].doi == '10.1109/synasc.2010.88'
+        print(p.publications[0].last_update)
+
+
+    def test_create_by_doi_no_authors(self):
+        p = Paper.create_by_doi('10.1021/cen-v043n050.p033')
+        assert p is None
+
+    def test_create_by_doi_publication_pdf_url(self):
+        # This journal is open access
+        romeo = RomeoAPIStub()
+        journal = romeo.fetch_journal({'issn':'0250-6335'})
+        # Therefore any paper in it is available from the publisher
+        p = Paper.create_by_doi('10.1007/BF02702259')
+        assert p.publications[0].journal == journal
+        # so the pdf_url of the publication should be set
+        p.publications[0].pdf_url.lower() == 'https://doi.org/10.1007/BF02702259'.lower()
+
+
+    def test_merge(self):
+        # Get a paper with metadata
+        p = Paper.create_by_doi('10.1111/j.1744-6570.1953.tb01038.x')
+        p = Paper.from_bare(p)
+        # Create a copy with slight variations
+        names = [BareName.create_bare(f, l) for (f, l) in
+                 [('M. H.', 'Jones'), ('R. H.', 'Haase'), ('S. F.', 'Hulbert')]]
+        p2 = Paper.get_or_create(
+                'A Survey of the Literature on Technical Positions', names,
+                date(year=2011, month=0o1, day=0o1))
+        # The two are not merged because of the difference in the title
+        assert p != p2
+        # Fix the title of the second one
+        p2.title = 'A Survey of the Literature on Job Analysis of Technical Positions'
+        p2.save()
+        # Check that the new fingerprint is equal to that of the first paper
+        assert p2.new_fingerprint() == p.fingerprint
+        # and that the new fingerprint and the current differ
+        assert p2.new_fingerprint() != p2.fingerprint
+        # and that the first paper matches its own shit
+        assert Paper.objects.filter(fingerprint=p.fingerprint).first() == p
+        # The two papers should hence be merged together
+        new_paper = p2.recompute_fingerprint_and_merge_if_needed()
+        assert new_paper.pk == p.pk
+
+    def test_merge_attributions_preserved(self):
+        """
+        If papers merged, researchers must preserve
+        """
+        p1 = Paper.create_by_doi('10.4049/jimmunol.167.12.6786')
+        r1 = Researcher.create_by_name('Stephan', 'Hauschildt')
+        p1.set_researcher(4, r1.id)
+        p2 = Paper.create_by_doi('10.1016/j.chemgeo.2015.03.025')
+        r2 = Researcher.create_by_name('Priscille', 'Lesne')
+        p2.set_researcher(0, r2.id)
+
+        # merge them ! even if they actually don't have anything
+        # to do together
+        p1.merge(p2)
+
+        p1.check_authors()
+
+        assert p1.researchers == [r2, r1]
+
+
+    def test_owned_by(self):
+        """
+        Checks on paper owning
+        """
+        p = Paper.create_by_doi('10.4049/jimmunol.167.12.6786')
+        r = Researcher.create_by_name('Stephan', 'Hauschildt')
+        r.user, _ = User.objects.get_or_create(username='stephan')
+        r.save()
+        p.set_researcher(4, r.pk)
+        # The user is associated to the author in the model,
+        # so it is considered an owner.
+        assert p.is_owned_by(r.user)
+        other_user, _ = User.objects.get_or_create(
+            username='AndreaThiele',
+            first_name='Andrea',
+            last_name='Thiele')
+        # This other user is not associated to any researcher,
+        # so it isn't associated to the paper.
+        assert not p.is_owned_by(other_user)
+        # But if we ask for a flexible check, as her name matches
+        # one of the author names of the paper, she is recognized.
+        assert p.is_owned_by(other_user, flexible=True)
+
+
+    def test_set_researcher(self):
+        """
+        Test setting (adding and removing) the researcher
+        """
+        p = Paper.create_by_doi('10.4049/jimmunol.167.12.6786')
+        r = Researcher.create_by_name('Stephan', 'Hauschildt')
+        # Add the researcher
+        p.set_researcher(4, r.pk)
+        assert set(p.researchers) == {r}
+        # Remove the researcher
+        p.set_researcher(4, None)
+        assert set(p.researchers) == set()
 
 
 class InstitutionTest(django.test.TestCase):
@@ -261,98 +379,4 @@ class PaperTest(django.test.TestCase):
 
         p = Paper.create_by_hal_id('hal-00830421')
         self.assertEqual(p.oairecords[0].splash_url, 'https://hal.archives-ouvertes.fr/hal-00830421')
-
-    def test_publication_pdf_url(self):
-        # This journal is open access
-        romeo = RomeoAPIStub()
-        journal = romeo.fetch_journal({'issn':'0250-6335'})
-        # Therefore any paper in it is available from the publisher
-        p = Paper.create_by_doi('10.1007/BF02702259')
-        p = Paper.from_bare(p)
-        self.assertEqual(p.publications[0].journal, journal)
-        # so the pdf_url of the publication should be set
-        self.assertEqual(p.publications[0].pdf_url.lower(
-            ), 'https://doi.org/10.1007/BF02702259'.lower())
-
-    def test_create_no_authors(self):
-        p = Paper.create_by_doi('10.1021/cen-v043n050.p033')
-        self.assertEqual(p, None)
-
-    def test_create_invalid_doi(self):
-        p = Paper.create_by_doi('10.1021/eiaeuiebop134223cen-v043n050.p033')
-        self.assertEqual(p, None)
-
-    def test_merge(self):
-        # Get a paper with CrossRef metadata
-        p = Paper.create_by_doi('10.1111/j.1744-6570.1953.tb01038.x')
-        p = Paper.from_bare(p)
-        # Create a copy with slight variations
-        names = [BareName.create_bare(f, l) for (f, l) in
-                 [('M. H.', 'Jones'), ('R. H.', 'Haase'), ('S. F.', 'Hulbert')]]
-        p2 = Paper.get_or_create(
-                'A Survey of the Literature on Technical Positions', names,
-                date(year=2011, month=0o1, day=0o1))
-        # The two are not merged because of the difference in the title
-        self.assertNotEqual(p, p2)
-        # Fix the title of the second one
-        p2.title = 'A Survey of the Literature on Job Analysis of Technical Positions'
-        p2.save()
-        # Check that the new fingerprint is equal to that of the first paper
-        self.assertEqual(p2.new_fingerprint(), p.fingerprint)
-        # and that the new fingerprint and the current differ
-        self.assertNotEqual(p2.new_fingerprint(), p2.fingerprint)
-        # and that the first paper matches its own shit
-        self.assertEqual(Paper.objects.filter(
-            fingerprint=p.fingerprint).first(), p)
-        # The two papers should hence be merged together
-        new_paper = p2.recompute_fingerprint_and_merge_if_needed()
-        self.assertEqual(new_paper.pk, p.pk)
-
-    def test_attributions_preserved_by_merge(self):
-        p1 = Paper.create_by_doi('10.4049/jimmunol.167.12.6786')
-        r1 = Researcher.create_by_name('Stephan', 'Hauschildt')
-        p1.set_researcher(4, r1.id)
-        p2 = Paper.create_by_doi('10.1016/j.chemgeo.2015.03.025')
-        r2 = Researcher.create_by_name('Priscille', 'Lesne')
-        p2.set_researcher(0, r2.id)
-
-        # merge them ! even if they actually don't have anything
-        # to do together
-        p1.merge(p2)
-
-        p1.check_authors()
-
-        self.assertEqual(p1.researchers,
-                         [r2, r1])
-
-    def test_set_researcher(self):
-        p1 = Paper.create_by_doi('10.4049/jimmunol.167.12.6786')
-        r1 = Researcher.create_by_name('Stephan', 'Hauschildt')
-        # Add the researcher
-        p1.set_researcher(4, r1.id)
-        self.assertEqual(set(p1.researchers), {r1})
-        # Remove the researcher
-        p1.set_researcher(4, None)
-        self.assertEqual(set(p1.researchers), set())
-
-    def test_owned_by(self):
-        p1 = Paper.create_by_doi('10.4049/jimmunol.167.12.6786')
-        r1 = Researcher.create_by_name('Stephan', 'Hauschildt')
-        r1.user, _ = User.objects.get_or_create(username='stephan')
-        r1.save()
-        p1.set_researcher(4, r1.id)
-        # The user is associated to the author in the model,
-        # so it is considered an owner.
-        self.assertTrue(p1.is_owned_by(r1.user))
-        other_user, _ = User.objects.get_or_create(
-            username='AndreaThiele',
-            first_name='Andrea',
-            last_name='Thiele')
-        # This other user is not associated to any researcher,
-        # so it isn't associated to the paper.
-        self.assertFalse(p1.is_owned_by(other_user))
-        # But if we ask for a flexible check, as her name matches
-        # one of the author names of the paper, she is recognized.
-        self.assertTrue(p1.is_owned_by(other_user, flexible=True))
-
 
