@@ -19,18 +19,16 @@
 #
 
 
-
-#from requests.exceptions import RequestException
-#import json, requests
-import os
-import os.path as path
-import json
 import logging
+import json
+import os
+
+from django.conf import settings
+
 from backend.crossref import convert_to_name_pair
 from backend.crossref import CrossRefAPI
 from backend.crossref import fetch_dois
 from backend.papersource import PaperSource
-from django.conf import settings
 from notification.api import add_notification_for
 from notification.api import delete_notification_per_tag
 import notification.levels as notification_levels
@@ -286,7 +284,7 @@ class OrcidPaperSource(PaperSource):
                 #if not seen:
                 #    continue
 
-                with open(path.join(root, fname), 'r') as f:
+                with open(os.path.join(root, fname), 'r') as f:
                     try:
                         profile = json.load(f)
                         orcid = profile['orcid-profile'][

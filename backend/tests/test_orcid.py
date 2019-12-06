@@ -1,13 +1,14 @@
 # -*- encoding: utf-8 -*-
 
 
-import unittest
 import pytest
+import unittest
+
 from backend.orcid import affiliate_author_with_orcid
 from backend.orcid import OrcidPaperSource
+from backend.tests.test_generic import PaperSourceTest
 from papers.models import Paper
 from papers.models import Researcher
-from backend.tests.test_generic import PaperSourceTest
 from papers.tests.test_orcid import OrcidProfileStub
 
 class OrcidUnitTest(unittest.TestCase):
