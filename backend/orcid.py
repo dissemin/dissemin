@@ -86,23 +86,6 @@ class OrcidPaperSource(PaperSource):
 
         return paper
 
-    def fetch_crossref_incrementally(self, cr_api, orcid_id):
-        # If we are using the ORCID sandbox, then do not look for papers from CrossRef
-        # as the ORCID ids they contain are production ORCID ids (not fake
-        # ones).
-        if settings.ORCID_BASE_DOMAIN != 'orcid.org':
-            return
-
-        for metadata in cr_api.fetch_all_papers({'orcid': orcid_id}):
-            try:
-                paper = cr_api.save_doi_metadata(metadata)
-                if paper:
-                    yield True, paper
-                else:
-                    yield False, metadata
-            except ValueError:
-                logger.exception("Saving CrossRef record from ORCID with id %s failed" % orcid_id)
-
     def _oai_id_for_doi(self, orcid_id, doi):
         return 'orcid:{}:{}'.format(orcid_id, doi)
 
