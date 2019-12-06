@@ -1,32 +1,29 @@
 import pytest
+
+from unittest.mock import patch
+
 from django.test import TestCase
-from backend.crossref import CrossRefAPI
+
 from backend.orcid import OrcidPaperSource
-from backend.maintenance import update_paper_statuses, unmerge_paper_by_dois,\
-    unmerge_orcid_nones
+from backend.maintenance import update_paper_statuses, unmerge_paper_by_dois, unmerge_orcid_nones
 from papers.models import OaiRecord
 from papers.models import Paper
 from papers.models import Researcher
-from unittest.mock import patch
 from papers.tests.test_orcid import OrcidProfileStub
 
 @pytest.mark.usefixtures("load_test_data")
 class MaintenanceTest(TestCase):
 
-    @classmethod
-    def setUpClass(self):
-        super(MaintenanceTest, self).setUpClass()
-        self.cr_api = CrossRefAPI()
-
+    @pytest.mark.usefixtures('mock_doi')
     def test_name_initial(self):
         n = self.r2.name
         p = Paper.create_by_doi("10.1002/ange.19941062339")
         n1 = p.authors[0].name
         self.assertEqual((n1.first, n1.last), (n.first, n.last))
 
+    @pytest.mark.usefixtures('mock_doi')
     def test_update_paper_statuses(self):
-        p = self.cr_api.create_paper_by_doi("10.1016/j.bmc.2005.06.035")
-        p = Paper.from_bare(p)
+        p = Paper.create_by_doi('10.1016/j.bmc.2005.06.035')
         self.assertEqual(p.pdf_url, None)
         pdf_url = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
         OaiRecord.new(source=self.arxiv,
@@ -37,6 +34,7 @@ class MaintenanceTest(TestCase):
         update_paper_statuses()
         self.assertEqual(Paper.objects.get(pk=p.pk).pdf_url, pdf_url)
 
+    @pytest.mark.usefixtures('mock_doi')
     def test_unmerge_paper(self):
         # First we merge two unrelated papers
         p1 = Paper.create_by_doi("10.1016/j.bmc.2005.06.035")
@@ -55,6 +53,7 @@ class MaintenanceTest(TestCase):
         self.assertTrue(p4.id != p3.id)
         self.assertEqual(p4.title, title2)
 
+    @pytest.mark.usefixtures('mock_doi')
     def test_unmerge_orcid_nones(self):
         # First, fetch a few DOIs
         dois = [

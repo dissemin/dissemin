@@ -1,0 +1,195 @@
+{
+    "indexed":{
+        "date-parts":[
+            [
+                2019,
+                11,
+                19
+            ]
+        ],
+        "date-time":"2019-11-19T07:06:44Z",
+        "timestamp":1574147204775
+    },
+    "reference-count":22,
+    "publisher":"Elsevier BV",
+    "issue":"22",
+    "license":[
+        {
+            "URL":"https:\/\/www.elsevier.com\/tdm\/userlicense\/1.0\/",
+            "start":{
+                "date-parts":[
+                    [
+                        2005,
+                        11,
+                        1
+                    ]
+                ],
+                "date-time":"2005-11-01T00:00:00Z",
+                "timestamp":1130803200000
+            },
+            "delay-in-days":0,
+            "content-version":"tdm"
+        }
+    ],
+    "content-domain":{
+        "domain":[
+
+        ],
+        "crossmark-restriction":false
+    },
+    "published-print":{
+        "date-parts":[
+            [
+                2005,
+                11
+            ]
+        ]
+    },
+    "DOI":"10.1016\/j.bmc.2005.06.035",
+    "type":"article-journal",
+    "created":{
+        "date-parts":[
+            [
+                2005,
+                8,
+                3
+            ]
+        ],
+        "date-time":"2005-08-03T20:49:16Z",
+        "timestamp":1123102156000
+    },
+    "page":"6145-6150",
+    "source":"Crossref",
+    "is-referenced-by-count":15,
+    "title":"Tridemethylisovelleral, a potent cytotoxic agent",
+    "prefix":"10.1016",
+    "volume":"13",
+    "author":[
+        {
+            "given":"Isabelle",
+            "family":"Aujard",
+            "sequence":"first",
+            "affiliation":[
+
+            ]
+        },
+        {
+            "given":"Daniel",
+            "family":"R\u00f6me",
+            "sequence":"additional",
+            "affiliation":[
+
+            ]
+        },
+        {
+            "given":"Erwan",
+            "family":"Arzel",
+            "sequence":"additional",
+            "affiliation":[
+
+            ]
+        },
+        {
+            "given":"Martin",
+            "family":"Johansson",
+            "sequence":"additional",
+            "affiliation":[
+
+            ]
+        },
+        {
+            "given":"Dick",
+            "family":"de Vos",
+            "sequence":"additional",
+            "affiliation":[
+
+            ]
+        },
+        {
+            "given":"Olov",
+            "family":"Sterner",
+            "sequence":"additional",
+            "affiliation":[
+
+            ]
+        }
+    ],
+    "member":"78",
+    "container-title":"Bioorganic & Medicinal Chemistry",
+    "original-title":[
+
+    ],
+    "language":"en",
+    "link":[
+        {
+            "URL":"https:\/\/api.elsevier.com\/content\/article\/PII:S0968089605005596?httpAccept=text\/xml",
+            "content-type":"text\/xml",
+            "content-version":"vor",
+            "intended-application":"text-mining"
+        },
+        {
+            "URL":"https:\/\/api.elsevier.com\/content\/article\/PII:S0968089605005596?httpAccept=text\/plain",
+            "content-type":"text\/plain",
+            "content-version":"vor",
+            "intended-application":"text-mining"
+        }
+    ],
+    "deposited":{
+        "date-parts":[
+            [
+                2019,
+                1,
+                24
+            ]
+        ],
+        "date-time":"2019-01-24T02:25:04Z",
+        "timestamp":1548296704000
+    },
+    "score":1.0,
+    "subtitle":[
+
+    ],
+    "short-title":[
+
+    ],
+    "issued":{
+        "date-parts":[
+            [
+                2005,
+                11
+            ]
+        ]
+    },
+    "references-count":22,
+    "journal-issue":{
+        "published-print":{
+            "date-parts":[
+                [
+                    2005,
+                    11
+                ]
+            ]
+        },
+        "issue":"22"
+    },
+    "alternative-id":[
+        "S0968089605005596"
+    ],
+    "URL":"http:\/\/dx.doi.org\/10.1016\/j.bmc.2005.06.035",
+    "relation":{
+
+    },
+    "ISSN":[
+        "0968-0896"
+    ],
+    "subject":[
+        "Organic Chemistry",
+        "Clinical Biochemistry",
+        "Molecular Medicine",
+        "Biochemistry",
+        "Molecular Biology",
+        "Drug Discovery",
+        "Pharmaceutical Science"
+    ],
+    "container-title-short":"Bioorganic & Medicinal Chemistry"
+}

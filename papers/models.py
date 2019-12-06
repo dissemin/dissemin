@@ -1208,6 +1208,7 @@ class Paper(models.Model, BarePaper):
         copied.delete()
 
         paper.id = self.id
+        self.cache_oairecords()
         self.update_availability()
 
     def recompute_fingerprint_and_merge_if_needed(self):

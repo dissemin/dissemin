@@ -253,10 +253,7 @@ def unmerge_paper_by_dois(paper):
     dois = [record.doi for record in paper.oairecords if record.doi]
     paper.delete()
     for doi in dois:
-        try:
-            Paper.create_by_doi(doi)
-        except ValueError:
-            continue
+        Paper.create_by_doi(doi)
 
 def unmerge_orcid_nones():
     """
