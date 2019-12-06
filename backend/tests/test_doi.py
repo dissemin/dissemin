@@ -4,13 +4,13 @@ import responses
 import zipfile
 
 from datetime import date
-from datetime import datetime
 from datetime import timedelta
 from urllib.parse import parse_qs
 from urllib.parse import urlparse
 
 
 from django.conf import settings
+from django.utils import timezone
 
 from backend.doi import CiteprocError
 from backend.doi import CiteprocAuthorError
@@ -444,11 +444,12 @@ class TestCrossRef(TestCiteproc):
         """
         monkeypatch.setattr(self.test_class, '_fetch_day', lambda x: None)
         source = OaiSource.objects.get(identifier='crossref')
-        source.last_update = datetime.now() - timedelta(days=10)
+        # For some reason, last_update ist not 1970
+        source.last_update = timezone.now() - timedelta(days=10)
         source.save()
         self.test_class.fetch_latest_records()
         source.refresh_from_db()
-        assert source.last_update.date() == date.today() - timedelta(days=1)
+        assert source.last_update.date() == timezone.now().date() - timedelta(days=1)
 
 
     @responses.activate

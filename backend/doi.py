@@ -13,6 +13,8 @@ from datetime import datetime
 from datetime import timedelta
 
 from django.conf import settings
+from django.utils import timezone
+
 
 from backend.crossref import convert_to_name_pair
 from backend.crossref import is_oa_license
@@ -511,7 +513,7 @@ class DOI(Citeproc):
             return OaiRecord.objects.select_related('about').get(
                 doi=doi,
                 source__identifier='crossref',
-                last_update__gte=date.today() - settings.DOI_OUTDATED_DURATION
+                last_update__gte=timezone.now() - settings.DOI_OUTDATED_DURATION
             )
         except OaiRecord.DoesNotExist:
             return None
