@@ -58,7 +58,7 @@ class TestCiteproc():
         assert r.identifier == doi_to_crossref_identifier(citeproc['DOI'])
         assert r.issue == citeproc['issue']
         assert r.journal_title == container_title
-        assert r.page == citeproc['page']
+        assert r.pages == citeproc['page']
         assert r.pubdate == date(*citeproc['issued']['date-parts'][0])
         assert r.publisher_name == citeproc['publisher']
         assert r.source == OaiSource.objects.get(identifier='crossref')
@@ -202,7 +202,7 @@ class TestCiteproc():
         assert r['issue'] == citeproc['issue']
         assert r['journal'] == journal
         assert r['journal_title'] == container_title
-        assert r['page'] == citeproc['page']
+        assert r['pages'] == citeproc['page']
         assert r['pdf_url'] == '' # Is not OA
         assert r['pubdate'] == date(*citeproc['issued']['date-parts'][0])
         assert r['publisher_name'] == citeproc['publisher']
@@ -220,7 +220,7 @@ class TestCiteproc():
         for k in keys:
             del citeproc[k]
         r = self.test_class._get_oairecord_data(citeproc)
-        keys = ['issue', 'publisher_name', 'page', 'volume']
+        keys = ['issue', 'publisher_name', 'pages', 'volume']
         for k in keys:
             assert r[k] == ''
 
