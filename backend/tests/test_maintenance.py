@@ -6,17 +6,15 @@ from backend.maintenance import update_paper_statuses, unmerge_paper_by_dois
 from papers.models import OaiRecord
 from papers.models import Paper
 
-@pytest.mark.usefixtures("load_test_data")
+@pytest.mark.usefixtures("load_test_data", 'mock_doi')
 class MaintenanceTest(TestCase):
 
-    @pytest.mark.usefixtures('mock_doi')
     def test_name_initial(self):
         n = self.r2.name
         p = Paper.create_by_doi("10.1002/ange.19941062339")
         n1 = p.authors[0].name
         self.assertEqual((n1.first, n1.last), (n.first, n.last))
 
-    @pytest.mark.usefixtures('mock_doi')
     def test_update_paper_statuses(self):
         p = Paper.create_by_doi('10.1016/j.bmc.2005.06.035')
         self.assertEqual(p.pdf_url, None)
@@ -29,7 +27,6 @@ class MaintenanceTest(TestCase):
         update_paper_statuses()
         self.assertEqual(Paper.objects.get(pk=p.pk).pdf_url, pdf_url)
 
-    @pytest.mark.usefixtures('mock_doi')
     def test_unmerge_paper(self):
         # First we merge two unrelated papers
         p1 = Paper.create_by_doi("10.1016/j.bmc.2005.06.035")

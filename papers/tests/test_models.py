@@ -24,7 +24,6 @@ import datetime
 import doctest
 import os
 import pytest
-import responses
 
 from datetime import date
 from mock import patch
@@ -32,7 +31,6 @@ from mock import patch
 import django.test
 
 
-from django.conf import settings
 from django.contrib.auth.models import User
 
 import papers.doi
@@ -64,15 +62,8 @@ class TestPaper():
         p = Paper.create_by_doi('not_important')
         assert p is None
 
-    @responses.activate
-    @pytest.mark.usefixtures('db')
+    @pytest.mark.usefixtures('db', 'mock_doi')
     def test_create_by_doi_invalid_doi(self):
-        responses.add(
-            responses.GET,
-            '{}10.1021/eiaeuiebop134223cen-v043n050.p033'.format(settings.DOI_RESOLVER_ENDPOINT),
-            status=404
-        )
-
         p = Paper.create_by_doi('10.1021/eiaeuiebop134223cen-v043n050.p033')
         assert p is None
 
