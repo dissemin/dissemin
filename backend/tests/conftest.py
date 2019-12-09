@@ -84,7 +84,7 @@ def citeproc(affiliations, container_title, issn, orcids, title):
                 ]
             ],
         },
-        'pages' : 'p. 327',
+        'page' : 'p. 327',
         'publisher' : 'Editorial Sur',
         'title' : title,
         'type' : 'book',

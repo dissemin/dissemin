@@ -205,7 +205,7 @@ class Citeproc():
             'issue' : data.get('issue', ''),
             'journal' : journal,
             'journal_title' : journal_title,
-            'pages' : data.get('pages', ''),
+            'pages' : data.get('page', ''),
             'pdf_url' : pdf_url,
             'pubdate' : cls._get_pubdate(data),
             'publisher' : publisher,
