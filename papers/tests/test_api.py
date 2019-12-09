@@ -25,11 +25,13 @@ from papers.models import Paper, Researcher
 class PaperApiTest(JsonRenderingTest):
     maxDiff = None  # Full BibTeX diff output
 
+    @pytest.mark.usefixtures('mock_doi')
     def test_valid_doi(self):
         Paper.create_by_doi('10.1016/0379-6779(91)91572-r')
         self.checkJson(self.getPage('api-paper-doi',
                                     args=['10.1016/0379-6779(91)91572-r']))
 
+    @pytest.mark.usefixtures('mock_doi')
     def test_valid_pk(self):
         paper = Paper.create_by_doi('10.1016/0379-6779(91)91572-r')
         self.checkJson(self.getPage('api-paper-pk',
@@ -43,6 +45,7 @@ class PaperApiTest(JsonRenderingTest):
         self.checkJson(self.getPage('api-paper-pk',
                                     args=['999999999']), 404)
 
+    @pytest.mark.usefixtures('mock_doi')
     def test_query(self):
         invalid_payloads = [
             'test', '{}',
@@ -74,6 +77,7 @@ class PaperApiTest(JsonRenderingTest):
         self.checkJson(self.postPage('api-paper-query', postargs='{"doi":"10.1016/j.paid.2009.02.013"}',
                                         postkwargs={'content_type': 'application/json'}), 200)
 
+    @pytest.mark.usefixtures('mock_doi')
     def test_bibtex_formatting(self):
         dois_bibtex = {
             '10.1007/978-3-662-49214-7_4': '''@incollection{Tang2016,
@@ -86,12 +90,12 @@ class PaperApiTest(JsonRenderingTest):
   url = {https://oadoi.org/10.1007/978-3-662-49214-7_4},
   year = {2016}
 }''',
-            '10.1145/3034786.3056121': '''@misc{Amarilli2017,
+            '10.1145/3034786.3056121': '''@inproceedings{Amarilli2017,
   author = {Amarilli, Antoine and Monet, Mikaël and Senellart, Pierre},
   doi = {10.1145/3034786.3056121},
-  journal = {Proceedings of the 36th ACM SIGMOD-SIGACT-SIGAI Symposium on Principles of Database Systems  - PODS '17},
+  journal = {Proceedings of the 36th ACM SIGMOD-SIGACT-SIGAI Symposium on Principles of Database Systems - PODS '17},
   month = {jan},
-  title = {Conjunctive Queries on Probabilistic Graphs: Combined Complexity},
+  title = {Conjunctive Queries on Probabilistic Graphs},
   url = {https://oadoi.org/10.1145/3034786.3056121},
   year = {2017}
 }''',
@@ -105,7 +109,7 @@ class PaperApiTest(JsonRenderingTest):
   url = {https://oadoi.org/10.1007/978-3-319-45856-4_22},
   year = {2016}
 }''',
-            '10.1103/physrevapplied.11.024003': '''@misc{Verney2019,
+            '10.1103/physrevapplied.11.024003': '''@article{Verney2019,
   author = {Verney, Lucas and Lescanne, Raphaël and Devoret, Michel H. and Leghtas, Zaki and Mirrahimi, Mazyar},
   doi = {10.1103/physrevapplied.11.024003},
   journal = {Physical Review Applied},
@@ -132,7 +136,7 @@ class PaperApiTest(JsonRenderingTest):
             self.assertEqual(resp.content.decode('utf-8').strip(),
                              bibtex.strip())
 
-    @pytest.mark.usefixtures("rebuild_index")
+    @pytest.mark.usefixtures("rebuild_index", "mock_doi")
     def test_bibtex_formatting_researcher(self):
         bibtex_output = """@inproceedings{Amarilli2015,
   author = {Amarilli, Antoine},
@@ -171,7 +175,7 @@ class PaperApiTest(JsonRenderingTest):
             bibtex_output.strip()
         )
 
-    @pytest.mark.usefixtures("rebuild_index")
+    @pytest.mark.usefixtures("rebuild_index", "mock_doi")
     def test_bibtex_formatting_search(self):
         bibtex_output = """@inproceedings{Amarilli2015,
   author = {Amarilli, Antoine},
