@@ -1,0 +1,25 @@
+{
+  "type": "article-journal",
+  "id": "https://doi.org/10.5281/zenodo.814227",
+  "author": [
+    {
+      "family": "Gunjal",
+      "given": "Bhojaraju"
+    }
+  ],
+  "issued": {
+    "date-parts": [
+      [
+        2016,
+        1,
+        1
+      ]
+    ]
+  },
+  "abstract": "The advent of new technologies along with the development of several Research Data Management (RDM) tools has led to a great revolution in the automation and digitization in libraries which aim to provide innovative added value services to their patrons. At the same time, the adoption of various policy frameworks for managing the data and workflow systems along with other Knowledge Organisation Systems such as metadata, taxonomies, ontologies etc. that enable the interoperability of research data and enhance information retrieval, pose challenges to the information professionals within the library context. The importance of RDM is increasingly recognized from several organizations and institutions around the world, as it plays a crucial role in the documentation, curation and preservation of research data. Therefore, it is natural that libraries can be considered as a critical stakeholder in the RDM landscape. Their role is highly related to the following: RDM policy development, advocacy and awareness, patrons training, advisory services, data repository development etc.\n\nThe paper will first present a brief overview of RDM and a detailed literature review regarding the RDM aspects adopted in libraries globally. It will also describe several tendencies concerning the management of repository tools for research data, as well as the challenges in implementing the RDM. The proper planned training and skill development for all stakeholders by mentors to train both staff and users are some of the issues that need to be considered to enhance the RDM process. An attempt will be also made to present the suitable policies and workflows along with the adoption of best practices in RDM, so as to boost the research process in an organisation. This study will showcase the implementation &amp; use of RDM and the processes adopted at the Central Library at NIT Rourkela, India.",
+  "container-title": "Zenodo",
+  "DOI": "10.5281/ZENODO.814227",
+  "publisher": "Zenodo",
+  "title": "Research Data Management - A Practical Approach To Overcome Challenges To Boost Research",
+  "URL": "https://zenodo.org/record/814227"
+}

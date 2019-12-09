@@ -220,9 +220,14 @@ def mock_doi():
         headers = {
             'Content-Type' : 'application/citeproc+json'
         }
-        with open(f_path, 'r') as f:
-            body = f.read()
-            return (200, headers, body)
+        try:
+            with open(f_path, 'r') as f:
+                body = f.read()
+                return (200, headers, body)
+        except FileNotFoundError as e:
+            print('File not found: {} - Returning 404'.format(f_path))
+            return (404, {}, None)
+
 
     with responses.RequestsMock() as rsps:
         rsps.add_callback(
@@ -230,6 +235,7 @@ def mock_doi():
             re.compile('{}(.*)'.format(settings.DOI_RESOLVER_ENDPOINT)),
             callback=request_callback
         )
+        rsps.add_passthru('https://pub.orcid.org/')
         yield rsps
 
 

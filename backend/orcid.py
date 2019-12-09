@@ -25,9 +25,6 @@ import os
 
 from django.conf import settings
 
-from backend.crossref import convert_to_name_pair
-from backend.crossref import CrossRefAPI
-from backend.crossref import fetch_dois
 from backend.papersource import PaperSource
 from notification.api import add_notification_for
 from notification.api import delete_notification_per_tag
@@ -36,6 +33,7 @@ from papers.baremodels import BareOaiRecord
 from papers.baremodels import BarePaper
 from papers.errors import MetadataSourceException
 from papers.models import OaiSource
+from papers.models import OaiRecord
 from papers.models import Researcher
 from papers.models import Paper
 from papers.orcid import OrcidProfile
@@ -84,33 +82,54 @@ class OrcidPaperSource(PaperSource):
 
         paper.add_oairecord(record)
 
-        return paper
+        try:
+            p = Paper.from_bare(paper)
+            p = self.associate_researchers(p)
+            p.save()
+            p.update_index()
+        except ValueError:
+            p = None
+
+        return p
 
     def _oai_id_for_doi(self, orcid_id, doi):
         return 'orcid:{}:{}'.format(orcid_id, doi)
 
-    def fetch_metadata_from_dois(self, cr_api, ref_name, orcid_id, dois):
-        doi_metadata = fetch_dois(dois)
-        for metadata in doi_metadata:
-            try:
-                authors = list(map(convert_to_name_pair, metadata['author']))
-                orcids = affiliate_author_with_orcid(
-                    ref_name, orcid_id, authors)
-                paper = cr_api.save_doi_metadata(metadata, orcids)
-                if not paper:
-                    yield False, metadata
-                    continue
+    def fetch_metadata_from_dois(self, ref_name, orcid_id, dois):
+        for doi in dois:
+            # This functions does check first on our database if we have an entry
+            p = Paper.create_by_doi(doi)
+            if p is not None:
+                # We try to find the author of the given orcid_id
+                # If this changes the orcid list of the paper, we do change, else not
+                orcids = affiliate_author_with_orcid(ref_name, orcid_id, p.author_name_pairs())
+                for author in p.authors_list:
+                    if author['orcid'] == orcid_id:
+                        author['orcid'] = None
+                        author['researcher_id'] = None
 
-                record = BareOaiRecord(
+                orcids = [new or old for (new, old) in zip(orcids, p.orcids())]
+                if orcids != p.orcids:
+                    for author, orcid in zip(p.authors_list, orcids):
+                        author['orcid'] = orcid
+                    p = self.associate_researchers(p)
+                    p.save()
+                    p.update_index()
+
+                try:
+                    OaiRecord.objects.get(
+                        identifier=self._oai_id_for_doi(orcid_id, doi.lower()),
                         source=self.oai_source,
-                        identifier=self._oai_id_for_doi(orcid_id, metadata['DOI']),
-                        splash_url='https://%s/%s' % (
-                            settings.ORCID_BASE_DOMAIN, orcid_id),
-                        pubtype=paper.doctype)
-                paper.add_oairecord(record)
-                yield True, paper
-            except (KeyError, ValueError, TypeError):
-                yield False, metadata
+                    )
+                except OaiRecord.DoesNotExist:
+                    OaiRecord.objects.create(
+                        about=p,
+                        identifier=self._oai_id_for_doi(orcid_id, doi.lower()),
+                        pubtype=p.doctype,
+                        splash_url='https://{}/{}'.format(settings.ORCID_BASE_DOMAIN, orcid_id),
+                        source=self.oai_source,
+                    )
+            yield p
 
     def warn_user_of_ignored_papers(self, ignored_papers):
         if self.researcher is None:
@@ -163,8 +182,6 @@ class OrcidPaperSource(PaperSource):
         :returns: a generator, where all the papers found are yielded. (some of them could be in
                 free form, hence not imported)
         """
-        cr_api = CrossRefAPI()
-
         # Cleanup iD:
         orcid_id = validate_orcid(orcid_identifier)
         if orcid_id is None:
@@ -200,13 +217,13 @@ class OrcidPaperSource(PaperSource):
             else:
                 put_codes.append(summary.put_code)
 
-        # 1st attempt with DOIs and CrossRef
+        # 1st attempt with DOIs
         if use_doi:
             # Let's grab papers with DOIs found in our ORCiD profile.
             dois = [doi for doi, put_code in dois_and_putcodes]
-            for idx, (success, paper_or_metadata) in enumerate(self.fetch_metadata_from_dois(cr_api, ref_name, orcid_id, dois)):
-                if success:
-                    yield paper_or_metadata # We know that this is a paper
+            for idx, paper in enumerate(self.fetch_metadata_from_dois(ref_name, orcid_id, dois)):
+                if paper is not None:
+                    yield paper
                 else:
                     put_codes.append(dois_and_putcodes[idx][1])
 
@@ -234,21 +251,19 @@ class OrcidPaperSource(PaperSource):
     def fetch_and_save(self, researcher, profile=None):
         """
         Fetch papers and save them to the database.
-
-        :param incremental: When set to true, papers are clustered
-            and commited one after the other. This is useful when
-            papers are fetched on the fly for an user.
         """
         count = 0
-        for p in self.fetch_papers(researcher, profile=profile):
-            try:
-                self.save_paper(p, researcher)
-            except ValueError:
-                continue
-            if self.max_results is not None and count >= self.max_results:
-                break
+        if not researcher:
+            return
+        if researcher.orcid:
+            if researcher.empty_orcid_profile == None:
+                self.update_empty_orcid(researcher, True)
 
-            count += 1
+            for p in self.fetch_orcid_records(researcher.orcid, profile=profile):
+                if self.max_results is not None and count >= self.max_results:
+                    break
+
+                count += 1
 
 
     def bulk_import(self, directory, fetch_papers=True, use_doi=False):

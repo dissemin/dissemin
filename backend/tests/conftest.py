@@ -1,5 +1,6 @@
 import pytest
 
+from papers.models import Researcher
 from publishers.models import AliasPublisher
 from publishers.models import Journal
 from publishers.models import Publisher
@@ -112,3 +113,24 @@ def mock_alias_publisher_increment(monkeypatch):
     Monkeypatch this function to mit DB access
     """
     monkeypatch.setattr(AliasPublisher, 'increment', lambda x,y: True)
+
+
+@pytest.fixture
+def researcher_lesot(django_user_model):
+    """
+    The Researcher Marie-Jeanne Lesot from doi 10.1016/j.ijar.2017.06.011
+    """
+    u = django_user_model.objects.create(
+        username='lisotm',
+        first_name='Marie-Jeanne',
+        last_name='Lesot',
+    )
+
+    r = Researcher.create_by_name(
+        first=u.first_name,
+        last=u.last_name,
+        user=u,
+        orcid='0000-0002-3604-6647',
+    )
+
+    return r

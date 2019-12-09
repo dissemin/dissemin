@@ -6,10 +6,61 @@ import unittest
 
 from backend.orcid import affiliate_author_with_orcid
 from backend.orcid import OrcidPaperSource
-from backend.tests.test_generic import PaperSourceTest
 from papers.models import Paper
 from papers.models import Researcher
 from papers.tests.test_orcid import OrcidProfileStub
+
+
+class TestOrcid():
+    """
+    Class to group some ORCID tests
+    """
+
+    @pytest.mark.usefixtures('mock_doi')
+    def test_fetch_metadata_from_dois(self, researcher_lesot):
+        """
+        Fetch metadata from doi
+        """
+        dois = ['10.1016/j.ijar.2017.06.011']
+        o = OrcidPaperSource()
+        ref_name = (researcher_lesot.name.first, researcher_lesot.name.last)
+        papers = list(o.fetch_metadata_from_dois(ref_name, researcher_lesot.orcid, dois))
+        assert len(papers) == 1
+        p = papers[0]
+        # Lesot is now a researcher of the paper
+        assert p.authors_list[1]['researcher_id'] == researcher_lesot.pk
+        # There must be a second OaiRecord
+        p.cache_oairecords() # Cache is not up to date
+        assert len(p.oairecords) == 2
+
+    @pytest.mark.usefixtures('mock_doi')
+    def test_fetch_metadata_from_dois_orcid_oai_exists(self, researcher_lesot):
+        """
+        If source exists, nothing must happen
+        """
+        dois = ['10.1016/j.ijar.2017.06.011']
+        Paper.create_by_doi(dois[0])
+        o = OrcidPaperSource()
+        ref_name = (researcher_lesot.name.first, researcher_lesot.name.last)
+        papers = list(o.fetch_metadata_from_dois(ref_name, researcher_lesot.orcid, dois))
+        assert len(papers) == 1
+        p = papers[0]
+        # Lesot is now a researcher of the paper
+        assert p.authors_list[1]['researcher_id'] == researcher_lesot.pk
+        # There must be a second OaiRecord
+        p.cache_oairecords() # Cache is not up to date
+        assert len(p.oairecords) == 2
+
+    def test_fetch_metadata_from_dois_no_paper(self, monkeypatch):
+        """
+        If no paper created, expect None
+        """
+        monkeypatch.setattr(Paper, 'create_by_doi', lambda x: None)
+        o = OrcidPaperSource()
+        papers = list(o.fetch_metadata_from_dois('spam', 'ham', ['any_doi']))
+        assert len(papers) == 1
+        assert papers[0] is None
+
 
 class OrcidUnitTest(unittest.TestCase):
 
@@ -27,18 +78,16 @@ class OrcidUnitTest(unittest.TestCase):
                     [('Antonin', 'Delpeuch'), ('Anne', 'Preller')]),
                 ['0000-0002-8612-8827', None])
 
-@pytest.mark.usefixtures("load_test_data")
-class OrcidIntegrationTest(PaperSourceTest):
+@pytest.mark.usefixtures("load_test_data", 'mock_doi')
+class OrcidIntegrationTest(unittest.TestCase):
 
     def setUp(self):
-        super(OrcidIntegrationTest, self).setUp()
         self.source = OrcidPaperSource()
+        self.researcher = self.r4
 
-    def test_fetch(self):
+    def test_fetch_orcid_records(self):
         profile = OrcidProfileStub('0000-0002-8612-8827', instance='orcid.org')
-        papers = list(self.source.fetch_papers(self.researcher, profile=profile))
-        for paper in papers:
-            paper = Paper.from_bare(paper)
+        papers = list(self.source.fetch_orcid_records(self.researcher.orcid, profile=profile))
         self.assertTrue(len(papers) > 1)
         self.check_papers(papers)
 
@@ -76,17 +125,6 @@ class OrcidIntegrationTest(PaperSourceTest):
         self.assertEqual(p.authors[0].orcid, antoine.orcid)
         self.assertEqual(p.authors[2].orcid, pablo.orcid)
 
-    def test_fetch_dois(self):
-        profile = OrcidProfileStub('0000-0001-6723-6833', instance='orcid.org')
-        pboesu = Researcher.get_or_create_by_orcid('0000-0001-6723-6833',
-                    profile=profile)
-        self.source.fetch_and_save(pboesu, profile=profile)
-
-        doi = '10.3354/meps09890'
-        p = Paper.get_by_doi(doi)
-        dois_in_paper = [r.doi for r in p.oairecords]
-        self.assertTrue(doi in dois_in_paper)
-
     def test_orcid_affiliation(self):
         # this used to raise an error.
         # a more focused test might be preferable (focused on the said
@@ -95,6 +133,7 @@ class OrcidIntegrationTest(PaperSourceTest):
                         OrcidProfileStub('0000-0002-9658-1473')))
         self.assertTrue(len(papers) > 30)
 
+    @pytest.mark.skip(reason="Test does not test bibtex fallback as DOI is imported via DOI backend")
     def test_bibtex_fallback(self):
         papers = list(self.source.fetch_orcid_records('0000-0002-1900-3901',
                   profile=OrcidProfileStub('0000-0002-1900-3901')))
