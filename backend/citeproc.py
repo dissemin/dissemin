@@ -526,7 +526,7 @@ class CrossRef(Citeproc):
                 update_date += timedelta(days=1)
 
 
-class DOI(Citeproc):
+class DOIResolver(Citeproc):
     """
     This class fetches citeproc metadata with content negotiation via DOI resolver.
     The main strategy here is to accelerate the ingest by checking if we already have an OaiRecord and update it only if the entry is rather old

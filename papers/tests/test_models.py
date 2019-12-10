@@ -54,11 +54,11 @@ class TestPaper():
         """
         If CiteprocError is raised inside called function, expect a silent None
         """
-        from backend.doi import DOI
-        from backend.doi import CiteprocError
+        from backend.citeproc import DOIResolver
+        from backend.citeproc import CiteprocError
         def raise_citeproc(*args, **kwargs):
             raise CiteprocError
-        monkeypatch.setattr(DOI, 'save_doi', raise_citeproc)
+        monkeypatch.setattr(DOIResolver, 'save_doi', raise_citeproc)
         p = Paper.create_by_doi('not_important')
         assert p is None
 
@@ -71,11 +71,11 @@ class TestPaper():
         """
         If RequestException is raised inside called function, expect a silent None
         """
-        from backend.doi import DOI
+        from backend.citeproc import DOIResolver
         from requests.exceptions import RequestException
         def raise_citeproc(*args, **kwargs):
             raise RequestException
-        monkeypatch.setattr(DOI, 'save_doi', raise_citeproc)
+        monkeypatch.setattr(DOIResolver, 'save_doi', raise_citeproc)
         p = Paper.create_by_doi('not_important')
         assert p is None
 

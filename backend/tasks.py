@@ -27,7 +27,7 @@ from datetime import timedelta
 
 from django.utils import timezone
 
-from backend.doi import CrossRef
+from backend.citeproc import CrossRef
 from backend.oai import OaiPaperSource
 from backend.orcid import OrcidPaperSource
 from backend.utils import run_only_once

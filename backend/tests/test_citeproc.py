@@ -12,16 +12,16 @@ from urllib.parse import urlparse
 from django.conf import settings
 from django.utils import timezone
 
-from backend.doi import CiteprocError
-from backend.doi import CiteprocAuthorError
-from backend.doi import CiteprocContainerTitleError
-from backend.doi import CiteprocDateError
-from backend.doi import CiteprocDOIError
-from backend.doi import CiteprocPubtypeError
-from backend.doi import CiteprocTitleError
-from backend.doi import Citeproc
-from backend.doi import CrossRef
-from backend.doi import DOI
+from backend.citeproc import CiteprocError
+from backend.citeproc import CiteprocAuthorError
+from backend.citeproc import CiteprocContainerTitleError
+from backend.citeproc import CiteprocDateError
+from backend.citeproc import CiteprocDOIError
+from backend.citeproc import CiteprocPubtypeError
+from backend.citeproc import CiteprocTitleError
+from backend.citeproc import Citeproc
+from backend.citeproc import CrossRef
+from backend.citeproc import DOIResolver
 from papers.baremodels import BareName
 from papers.doi import doi_to_crossref_identifier
 from papers.doi import doi_to_url
@@ -559,7 +559,7 @@ class TestDOI(TestCiteproc):
     This class groups tests about the DOI class
     """
 
-    test_class = DOI
+    test_class = DOIResolver
 
     @pytest.mark.parametrize('doi', ['10.1016/j.gsd.2018.08.007', '10.1109/sYnAsc.2010.88'])
     def test_save_doi(self, db, mock_doi, doi):

@@ -1044,10 +1044,10 @@ class Paper(models.Model, BarePaper):
         :returns: A paper instance or None if no paper was created
         """
 
-        from backend.doi import DOI
-        from backend.doi import CiteprocError
+        from backend.citeproc import DOIResolver
+        from backend.citeproc import CiteprocError
         try:
-            return DOI.save_doi(doi)
+            return DOIResolver.save_doi(doi)
         except CiteprocError as e:
             logger.info('Could not create paper')
             logger.info(e)
