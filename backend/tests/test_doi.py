@@ -31,12 +31,38 @@ from publishers.models import Journal
 from publishers.models import Publisher
 
 
+convert_to_name_pair_list = [
+    ({'family': 'Farge', 'given': 'Marie'}, ('Marie', 'Farge')),
+    ({'literal': 'Marie Farge'}, ('Marie', 'Farge')),
+    ({'literal': 'Farge, Marie'}, ('Marie', 'Farge')),
+    ({'family': 'Arvind'}, ('', 'Arvind')),
+]
+
+is_oai_license_params = [
+    # CC
+    ('http://creativecommons.org/licenses/by-nc-nd/2.5/co/', True),
+    ('http://creativecommons.org/licenses/by-nc/3.10/', True),
+    ('https://creativecommons.org/licenses/by-nc-sa/4.0/', True),
+    # Other open license
+    ('http://www.elsevier.com/open-access/userlicense/1.0/', True),
+    # Closed license
+    ('http://link.aps.org/licenses/aps-default-license', False),
+    ('http://www.acs.org/content/acs/en/copyright.html', False),
+    ('http://www.elsevier.com/tdm/userlicense/1.0/', False),
+]
+
+
 class TestCiteproc():
     """
     This class groups tests about the Citeproc class
     """
 
     test_class = Citeproc
+
+
+    @pytest.mark.parametrize('url, expected', is_oai_license_params)
+    def test_is_oa_license(self, url, expected):
+        assert self.test_class.is_oa_license(url) == expected
 
     @pytest.mark.usefixtures('db')
     def test_to_paper(self, container_title, title, citeproc):
@@ -83,6 +109,14 @@ class TestCiteproc():
         """
         with pytest.raises(CiteprocError):
             self.test_class.to_paper(None)
+
+
+    @pytest.mark.parametrize('name, expected', convert_to_name_pair_list)
+    def test_convert_to_name_pair(self, name, expected):
+        """
+        Test if name pairing works
+        """
+        assert self.test_class._convert_to_name_pair(name) == expected
 
 
     @pytest.mark.parametrize('author_elem, expected', [(dict(), None), ({'affiliation' : [{'name' : 'Porto'}]}, 'Porto'), ({'affiliation' : [{'name' : 'Porto'}, {'name' : 'Lissabon'}]}, 'Porto')])
@@ -132,7 +166,7 @@ class TestCiteproc():
         If 'None' is an entry, raise exception
         """
         # We mock the function and let it return None, so that name_pairs is a list of None
-        monkeypatch.setattr('backend.doi.convert_to_name_pair', lambda x: None)
+        monkeypatch.setattr(self.test_class, '_convert_to_name_pair', lambda x: None)
         with pytest.raises(CiteprocAuthorError):
             self.test_class._get_authors(citeproc)
 

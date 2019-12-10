@@ -16,8 +16,6 @@ from django.conf import settings
 from django.utils import timezone
 
 
-from backend.crossref import convert_to_name_pair
-from backend.crossref import is_oa_license
 from backend.doiprefixes import free_doi_prefixes
 from backend.pubtype_translations import CITEPROC_PUBTYPE_TRANSLATION
 from backend.utils import request_retry
@@ -30,6 +28,8 @@ from papers.doi import to_doi
 from papers.models import OaiSource
 from papers.models import OaiRecord
 from papers.models import Paper
+from papers.name import normalize_name_words
+from papers.name import parse_comma_name
 from papers.utils import jpath
 from papers.utils import tolerant_datestamp_to_datetime
 from papers.utils import validate_orcid
@@ -69,6 +69,28 @@ class Citeproc():
     This class is a citeproc parser.
     """
 
+
+    @staticmethod
+    def is_oa_license(license_url):
+        """
+        This function returns whether we expect a publication under a given license
+        to be freely available from the publisher.
+
+        Licenses are as expressed in CrossRef: see http://api.crossref.org/licenses
+        """
+        if "creativecommons.org/licenses/" in license_url:
+            return True
+        oa_licenses = set([
+                "http://koreanjpathol.org/authors/access.php",
+                "http://olabout.wiley.com/WileyCDA/Section/id-815641.html",
+                "http://pubs.acs.org/page/policy/authorchoice_ccby_termsofuse.html",
+                "http://pubs.acs.org/page/policy/authorchoice_ccbyncnd_termsofuse.html",
+                "http://pubs.acs.org/page/policy/authorchoice_termsofuse.html",
+                "http://www.elsevier.com/open-access/userlicense/1.0/",
+                ])
+        return license_url in oa_licenses
+
+
     @classmethod
     def to_paper(cls, data):
         """
@@ -95,6 +117,20 @@ class Citeproc():
         return paper
 
 
+    @staticmethod
+    def _convert_to_name_pair(dct):
+        """ Converts a dictionary {'family':'Last','given':'First'} to ('First','Last') """
+        result = None
+        if 'family' in dct and 'given' in dct:
+            result = (dct['given'], dct['family'])
+        elif 'family' in dct:  # The 'Arvind' case
+            result = ('', dct['family'])
+        elif 'literal' in dct:
+            result = parse_comma_name(dct['literal'])
+        if result:
+            result = (normalize_name_words(
+                result[0]), normalize_name_words(result[1]))
+        return result
 
 
     @staticmethod
@@ -133,7 +169,7 @@ class Citeproc():
         authors = data.get('author')
         if not isinstance(authors, list):
             raise CiteprocAuthorError('No list of authors in metadata')
-        name_pairs = list(map(convert_to_name_pair, authors))
+        name_pairs = list(map(cls._convert_to_name_pair, authors))
         if None in name_pairs:
             raise CiteprocAuthorError('Author list compromised')
         return [BareName.create_bare(first, last) for first, last in name_pairs]
@@ -346,15 +382,15 @@ class Citeproc():
         doi_prefix = doi.split('/')[0]
         return doi_prefix in free_doi_prefixes
 
-    @staticmethod
-    def _is_oa_by_license(licenses):
+    @classmethod
+    def _is_oa_by_license(cls, licenses):
         """
         Tries to figure out by license if publication is open access
         :param data: citeproc metadata
         :returns: True if is open access, else False
         """
         found_licenses = set([(license or {}).get('URL', '') for license in licenses])
-        return any(map(is_oa_license, found_licenses))
+        return any(map(cls.is_oa_license, found_licenses))
 
 
     @classmethod
