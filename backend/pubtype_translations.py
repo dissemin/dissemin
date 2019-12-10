@@ -66,6 +66,7 @@ CITEPROC_PUBTYPE_TRANSLATION = {
     'patent' : 'other',
     'peer-review' : 'reference-entry',
     'personal_communication' : 'other',
+    'preprint' : 'preprint',
     'post' : 'other',
     'post-weblog' : 'other',
     'proceedings' : 'proceedings',
@@ -83,6 +84,7 @@ CITEPROC_PUBTYPE_TRANSLATION = {
     'speech' : 'other',
     'thesis' : 'thesis',
     'treaty' : 'other',
+    'unknown' : 'other',
     'webpage' : 'other',
 }
 
