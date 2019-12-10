@@ -238,6 +238,7 @@ def mock_doi():
         rsps.add_passthru('https://pub.orcid.org/')
         rsps.add_passthru('http://doi-cache.dissem.in/zotero/')
         rsps.add_passthru('https://sandbox.zenodo.org/')
+        rsps.add_passthru('http://localhost') # Our VNU server runs on localhost
         yield rsps
 
 
