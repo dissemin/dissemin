@@ -236,6 +236,8 @@ def mock_doi():
             callback=request_callback
         )
         rsps.add_passthru('https://pub.orcid.org/')
+        rsps.add_passthru('http://doi-cache.dissem.in/zotero/')
+        rsps.add_passthru('https://sandbox.zenodo.org/')
         yield rsps
 
 

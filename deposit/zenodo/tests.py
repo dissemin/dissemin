@@ -24,6 +24,7 @@ import os
 import re
 import unittest
 import requests_mock
+import pytest
 from mock import patch
 from oaipmh.client import Client
 
@@ -61,6 +62,7 @@ class ZenodoProtocolTest(ProtocolTest):
             default=True,
         )
 
+    @pytest.mark.usefixtures('mock_doi')
     def test_lncs(self):
         p = Paper.create_by_doi('10.1007/978-3-662-47666-6_5')
 
