@@ -520,7 +520,9 @@ class TestCrossRef(TestCiteproc):
         # Some assertions
         called_url = responses.calls[0].request.url
         query = parse_qs(urlparse(called_url).query)
-        assert query['filter'][0] == 'from-update-date:{},until-update-date:{}'.format(day, day)
+        query_f = query['filter'][0].split(',')
+        for date_filter in ['from-update-date', 'until-update-date']:
+            assert date_filter + ':{}'.format(day) in query_f
         assert query['rows'][0] == str(self.test_class.rows)
         assert query['mailto'][0] == settings.CROSSREF_MAILTO
 
