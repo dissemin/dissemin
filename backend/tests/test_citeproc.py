@@ -146,7 +146,7 @@ class TestCiteproc():
         """
         # We wrap the current abstract into some jats
         expected = citeproc['abstract']
-        citeproc['abstract'] = '<jats:p>{}<\/jats:p>'.format(expected)
+        citeproc['abstract'] = r'<jats:p>{}<\/jats:p>'.format(expected)
         assert self.test_class._get_abstract(citeproc) == expected
 
     def test_get_affiliations(self, affiliations, citeproc):
