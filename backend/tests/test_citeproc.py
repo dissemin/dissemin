@@ -127,6 +127,28 @@ class TestCiteproc():
         assert self.test_class._get_affiliation(author_elem) == expected
 
 
+    def test_get_abstract(self, citeproc):
+        """
+        Abstract must be set
+        """
+        assert self.test_class._get_abstract(citeproc) == citeproc['abstract']
+
+    def test_get_abstact_missing(self, citeproc):
+        """
+        If no abstract, assert blank
+        """
+        del citeproc['abstract']
+        assert self.test_class._get_abstract(citeproc) == ''
+
+    def test_get_abstract_escaping(self, citeproc):
+        """
+        Must do some escaping, e.g. we sometimes get some jats tags
+        """
+        # We wrap the current abstract into some jats
+        expected = citeproc['abstract']
+        citeproc['abstract'] = '<jats:p>{}<\/jats:p>'.format(expected)
+        assert self.test_class._get_abstract(citeproc) == expected
+
     def test_get_affiliations(self, affiliations, citeproc):
         """
         Must have the same length as citeproc['author'] and identical to list of affiliations
@@ -231,6 +253,7 @@ class TestCiteproc():
         monkeypatch.setattr(Journal, 'find', lambda issn, title: journal)
         r = self.test_class._get_oairecord_data(citeproc)
         assert r['doi'] == citeproc['DOI']
+        assert r['description'] == citeproc['abstract']
         assert r['identifier'] == doi_to_crossref_identifier(citeproc['DOI'])
         assert r['issn'] == issn
         assert r['issue'] == citeproc['issue']
@@ -248,13 +271,13 @@ class TestCiteproc():
     @pytest.mark.usefixtures('mock_journal_find', 'mock_publisher_find')
     def test_get_oairecord_data_missing(self, monkeypatch, container_title, issn, citeproc):
         """
-        Some fields must be empty, namely those with a direct get call
+        Some fields may be empty, namely those with a direct get call
         """
-        keys = ['issue', 'publisher', 'page', 'volume']
+        keys = ['abstract', 'issue', 'publisher', 'page', 'volume']
         for k in keys:
             del citeproc[k]
         r = self.test_class._get_oairecord_data(citeproc)
-        keys = ['issue', 'publisher_name', 'pages', 'volume']
+        keys = ['description', 'issue', 'publisher_name', 'pages', 'volume']
         for k in keys:
             assert r[k] == ''
 

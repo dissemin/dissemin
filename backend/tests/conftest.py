@@ -47,6 +47,7 @@ def citeproc(affiliations, container_title, issn, orcids, title):
     Use this, to check different behaviour, by adding, deleting or modifying content.
     """
     d = {
+        'abstract' : 'A detective story',
         'author' : [
             {
                 'given' : 'Herbert',

@@ -31,6 +31,7 @@ from papers.models import Paper
 from papers.name import normalize_name_words
 from papers.name import parse_comma_name
 from papers.utils import jpath
+from papers.utils import sanitize_html
 from papers.utils import tolerant_datestamp_to_datetime
 from papers.utils import validate_orcid
 from papers.utils import valid_publication_date
@@ -131,6 +132,16 @@ class Citeproc():
             result = (normalize_name_words(
                 result[0]), normalize_name_words(result[1]))
         return result
+
+
+    @staticmethod
+    def _get_abstract(data):
+        """
+        Tries to get the abstract an sanitize it
+        """
+        abstract = data.get('abstract', '')
+        abstract = sanitize_html(abstract)
+        return abstract
 
 
     @staticmethod
@@ -236,6 +247,7 @@ class Citeproc():
 
         bare_oairecord_data = {
             'doi' : doi,
+            'description' : cls._get_abstract(data),
             'identifier' : doi_to_crossref_identifier(doi),
             'issn' : issn,
             'issue' : data.get('issue', ''),
