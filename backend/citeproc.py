@@ -445,7 +445,7 @@ class Citeproc():
         ])
         return datetime.strptime(d, "%Y-%m-%d").date()
         
-        
+
 class CrossRef(Citeproc):
     """
     This class can parse CrossRef metadata, which is similar to citeproc and has functionality to fetch from CrossRef API

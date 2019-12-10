@@ -224,7 +224,7 @@ def mock_doi():
             with open(f_path, 'r') as f:
                 body = f.read()
                 return (200, headers, body)
-        except FileNotFoundError as e:
+        except FileNotFoundError:
             print('File not found: {} - Returning 404'.format(f_path))
             return (404, {}, None)
 

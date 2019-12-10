@@ -557,7 +557,7 @@ class TestCrossRef(TestCiteproc):
         r = self.test_class._get_title(citeproc)
         assert r == citeproc.get('title')[0][:1024]
         assert len(r) <= 1024
-    
+
     def test_get_title_length(self, citeproc):
         """
         CrossRef does serve the title in a list. Must not be longer than 1024 chars
