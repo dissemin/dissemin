@@ -152,6 +152,8 @@ class Repository(models.Model, CachingMixin):
     api_key = models.CharField(max_length=256, null=True, blank=True)
     #: The API's endpoint
     endpoint = models.CharField(max_length=256, null=True, blank=True)
+    #: Endpoint for update deposit status
+    update_status_url = models.CharField(max_length=256, blank=True)
 
     #: Setting this to false forbids any deposit in this repository
     enabled = models.BooleanField(default=True)
