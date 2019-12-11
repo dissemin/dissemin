@@ -126,6 +126,43 @@ The HTTP-request is identical to that in Dissemin.
 You find usage instructions in the README.md inside of the packaging.
 
 
+Update Deposit Status
+=====================
+
+Unless a document is directly published in a repository, the internal publication status inside Dissemin will be ``pending``.
+
+Dissemin does know the following status:
+
+.. code::
+
+   ('failed', _('Failed')), # we failed to deposit the paper
+   ('pending', _('Pending publication')), # the deposit has been submitted but is not publicly visible yet
+   ('embargoed', _('Embargo')), # the publication will be published, but only after a certain date
+   ('published', _('Published')), # the deposit is visible on the repo
+   ('refused', _('Refused by the repository')),
+   ('deleted', _('Deleted')), # deleted by the repository
+
+In order to keep the status up to date and inform the user, when his publication is freely available, we ask the repository about the status on a daily basis as long as the status is ``pending``. This requires some extra work as we cannot use OAI-PMH, as this won't inform us about declined deposits or embargos.
+
+Given an endpoint, put a little script that does the job. From the SWORDv2 response we extract the entry id in your repository and pass that id as GET-parameter, like so
+
+.. code::
+
+    https://repository.example.org/scripts/status?id=3243
+
+As response we expect simple JSON containing ``status, publication_date, pdf_url`` where status is one of ``pending, embargoes, published, refused``. In case of ``embargoed`` and ``published`` we like to have publication date, i.e. when the resource is publicly available, as ``YYYY-MM-DD`` and the direct link to the pdf if possible. Below we have a simple example.
+
+.. code::
+
+    {
+        "status" : "published",
+        "publication_date" : "2020-03-12",
+        "pdf_url" : "https://repository.example.org/documents/3234/document.pdf"
+    }
+
+We do not have plans to support any batch processing at the moment.
+   
+
 Repository Helpers
 ==================
 

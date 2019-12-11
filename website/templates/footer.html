@@ -1,0 +1,28 @@
+{% load i18n %}
+<footer>
+    <div class="container bg-blue p-4">
+        <div class="row">
+            <div class="col-xs-12 col-md-4">
+                <ul class="list-unstyled">
+                    <li><a class="text-light" href="{% url 'faq' %}">{% trans 'FAQ' %}</a></li>
+                    <li><a class="text-light" href="https://dissemin.readthedocs.io/en/latest/api.html">{% trans 'API' %}</a></li>
+                    <li><a class="text-light" href="{% url 'tos' %}">{% trans 'Terms of Service' %}</a></li>
+                </ul>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <ul class="list-unstyled">
+                    <li><a class="text-light" href="http://association.dissem.in/">{% trans "Who are we?" %}</a></li>
+                    <li><a class="text-light" href="http://association.dissem.in/#dons">{% trans "Donate" %}</a></li>
+                    <li><a class="text-light" href="https://blog.dissem.in/">{% trans "Blog" %}</a></li>
+                </ul>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <ul class="list-unstyled">
+                    <li><a class="text-light" href="mailto:hello@dissem.in">hello@dissem.in</a></li>
+                    <li><a class="text-light" href="https://twitter.com/disseminOA">@disseminOA</a></li>
+                    <li><a class="text-light" href="https://github.com/dissemin/dissemin" >GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>

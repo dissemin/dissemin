@@ -41,7 +41,6 @@ from django.urls import reverse
 from papers.models import OaiSource
 from papers.models import OaiRecord
 from papers.models import Paper
-from deposit.tasks import refresh_deposit_statuses
 
 
 class MetaTestProtocol():
@@ -86,7 +85,7 @@ class MetaTestProtocol():
         """
         Test the deposit page for HTTP Response 200
         """
-        r = rendering_get_page(authenticated_client, 'upload_paper', kwargs={'pk': book_god_of_the_labyrinth.pk})
+        r = rendering_get_page(authenticated_client, 'upload-paper', kwargs={'pk': book_god_of_the_labyrinth.pk})
         assert r.status_code == 200
 
 
@@ -309,11 +308,6 @@ class MetaTestProtocol():
         assert self.protocol.publication == None
 
 
-
-
-
-
-
     @pytest.mark.parametrize('on_todolist', [True, False])
     @pytest.mark.parametrize('splash_url, expected_splash_url', [(None, type(None)), ('https://repository.dissem.in/1/spam.pdf', OaiRecord)])
     def test_submit_deposit_wrapper(self, splash_url, expected_splash_url, on_todolist, book_god_of_the_labyrinth, depositing_user, monkeypatch):
@@ -369,12 +363,6 @@ class MetaTestProtocol():
 
 # 1x1 px image used as default logo for the repository
 simple_png_image = b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01\x08\x02\x00\x00\x00\x90wS\xde\x00\x00\x00\tpHYs\x00\x00\x0b\x13\x00\x00\x0b\x13\x01\x00\x9a\x9c\x18\x00\x00\x00\x07tIME\x07\xdf\n\x12\x0c+\x19\x84\x1d/"\x00\x00\x00\x19tEXtComment\x00Created with GIMPW\x81\x0e\x17\x00\x00\x00\x0cIDAT\x08\xd7c\xa8\xa9\xa9\x01\x00\x02\xec\x01u\x90\x90\x1eL\x00\x00\x00\x00IEND\xaeB`\x82'
-
-class DepositTest(django.test.TestCase):
-    def test_refresh_deposit_statuses(self):
-        # TODO: set up some DepositRecords + repository and protocol, to
-        # so that this task actually does something
-        refresh_deposit_statuses()
 
 @pytest.mark.usefixtures("load_test_data", "rebuild_index")
 class ProtocolTest(django.test.TestCase):
@@ -441,7 +429,7 @@ class ProtocolTest(django.test.TestCase):
         self.assertEqual(self.user.username, self.username)
         client = django.test.Client(HTTP_HOST='localhost')
         self.assertTrue(client.login(username=self.username, password=self.password))
-        r = client.get(reverse('upload_paper', kwargs={'pk': self.p1.pk}))
+        r = client.get(reverse('upload-paper', kwargs={'pk': self.p1.pk}))
         self.assertEqual(r.status_code, 200)
 
     def dry_deposit(self, paper, **form_fields):

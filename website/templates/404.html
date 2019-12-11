@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}
+{% trans "Page not found" %}
+{% endblock title %}
+
+{% block content %}
+    <h1 class="text-center pt-5">{% trans "Page not found" %}</h1>
+    {% url "index" as index %}
+    <p class="text-center">
+        {% blocktrans trimmed %}
+            The page you requested could not be found. <a href="{{ index }}">Go back to the home page.</a>
+        {% endblocktrans %}
+    </p>
+{% endblock content %}

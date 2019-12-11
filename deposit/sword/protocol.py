@@ -3,6 +3,7 @@ import langdetect
 import requests
 import logging
 
+from datetime import datetime
 from io import BytesIO
 from lxml import etree
 from zipfile import ZipFile
@@ -11,6 +12,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.exceptions import MultipleObjectsReturned
 from django.utils.translation import ugettext as _
 
+from deposit.models import DepositRecord
 from deposit.models import UserPreferences
 from deposit.protocol import DepositError
 from deposit.protocol import DepositResult
@@ -256,6 +258,28 @@ class SWORDMETSProtocol(RepositoryProtocol):
         return data
 
 
+    def refresh_deposit_status(self):
+        """
+        We refresh all DepositRecords that have the status 'pending'
+        """
+        s = requests.Session()
+        for deposit_record in DepositRecord.objects.filter(status='pending').select_related('oairecord', 'oairecord__about'):
+            params = {
+                "id" : deposit_record.identifier
+            }
+            try:
+                data = s.get(self.repository.update_status_url, params=params).json()
+            except Exception as e:
+                logger.exception(e)
+            else:
+                try:
+                    status, pub_date, pdf_url = self._validate_deposit_status_data(data)
+                except Exception:
+                    logger.error("Invalid deposit data when updating record {} with {}".format(deposit_record.pk, data))
+                else:
+                    self._update_deposit_record_status(deposit_record, status, pub_date, pdf_url)
+
+
     def submit_deposit(self, pdf, form):
         """
         Submit paper to the repository. This is a wrapper for the subclasses and calls some protocol specific functions. It creates the METS container and deposits.
@@ -309,6 +333,53 @@ class SWORDMETSProtocol(RepositoryProtocol):
         deposit_result = self._add_embargo_date_to_deposit_result(deposit_result, form)
 
         return deposit_result
+
+    @staticmethod
+    def _update_deposit_record_status(deposit_record, status, pub_date, pdf_url):
+        """
+        Updates the status of a deposit record unless it is
+        :param deposit_record: DepositRecord to update
+        :param status: new status, must be in ['refused', 'embargoed', 'published']
+        :param pub_date: date object, pub_date, only set if status not 'refused'
+        :param pdf_url: string, only set if status not 'refused'
+        """
+
+        if status == 'refused':
+            deposit_record.status = status
+            deposit_record.save(update_fields=['status', ])
+        elif status in ['embargoed', 'published']:
+            deposit_record.status = status
+            deposit_record.pub_date = pub_date
+            deposit_record.save(update_fields=['pub_date', 'status'])
+            deposit_record.oairecord.pdf_url = pdf_url
+            deposit_record.oairecord.save(update_fields=['pdf_url'])
+            deposit_record.oairecord.about.update_availability()
+            deposit_record.oairecord.about.update_index()
+
+
+    @staticmethod
+    def _validate_deposit_status_data(data):
+        """
+        Validates the data and raises Exception if data not valid
+        :param data: Dictonary
+        :returns status, pub_date, pdf_url
+        """
+        status = data.get('status')
+        pdf_url = data.get('pdf_url', '')
+        if status not in ['pending', 'embargoed', 'published', 'refused']:
+            raise
+        if status in ['embargoed', 'published']:
+            try:
+                pub_date = datetime.strptime(data.get('publication_date'), "%Y-%m-%d").date()
+            except Exception:
+                raise
+            if pdf_url is '':
+                raise
+        else:
+            pub_date = None
+            pdf_url = ''
+
+        return status, pub_date, pdf_url
 
 
 class SWORDMETSMODSProtocol(SWORDMETSProtocol):

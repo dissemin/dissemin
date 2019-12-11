@@ -1,0 +1,593 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+    {% trans 'Frequently Asked Questions' %}
+{% endblock %}
+
+
+{% block content %}
+
+{% url 'sources' as sources_url %}
+
+{% comment %}
+    We define all headings here and fetch them as variable later since we use them twice
+{% endcomment %}
+
+{% trans "Open Access" as open_access %}
+{% trans "What is Open Access?" as open_access_what %}
+{% trans "Why should I upload my papers to a repository?" as open_access_why %}
+{% trans "What repository should I use?" as open_access_repository %}
+{% trans "Why can't I deposit in my favorite repository yet?" as open_access_why_no_deposit %}
+
+{% trans "What is dissem.in?" as ds_what%}
+{% trans "Is dissem.in a repository?" as ds_repository %}
+{% trans "Who runs dissem.in?" as ds_runs %}
+{% trans "Can I create a profile on dissem.in?" as ds_profile %}
+
+{% trans "Policies and Full-text Availability" as policies %}
+{% trans "What do our policy classes mean?"  as policies_what %}
+{% trans "When is a paper considered available?" as policies_availability %}
+{% trans "Should I trust your statistics?" as policies_statistics %}
+
+{% trans "Omissions and errors" as omission %}
+{% trans "One of my papers is missing. Why?" as omission_missing %}
+{% trans "Some details of my paper are incorrect. What can I do?" as omission_detail %}
+{% trans "There is a freely available copy of my article online but dissem.in does not find it." as omission_available %}
+
+{% trans "Authentication with ORCID" as auth%}
+{% trans "Why do you need to authenticate users?" as auth_why %}
+{% trans "What will you do to my ORCID profile if I log in?" as auth_happen %}
+{% trans "How do I add publications to my ORCID profile?" as auth_add_pubs %}
+{% trans "My ORCID details on Dissemin are outdated." as auth_outdated %}
+
+{% trans "Behind the scenes" as behind %}
+{% trans "Where do you get the data from?" as behind_sources %}
+{% trans "How can I help?" as behind_help %}
+{% trans "Where is the source code?" as behind_source_code %}
+{% trans "Can I harvest your data?" as behind_api %}
+{% trans "Can I use the Dissemin logo to refer to the project?" as behind_logos %}
+
+
+<div class="container-fluid">
+    <div class="jumbotron my-3">
+        <h1 class="text-center">{% trans 'Frequently Asked Questions' %}</h1>
+    </div>
+
+    <nav>
+        <div class="accordion">
+            <div class="card">
+                <div class="card-header bg-secondary text-light">
+                    <h2 class="mb-0">{{ open_access }}</h2>
+                </div>
+                <div class="card-body">
+                    <a class="nav-link py-0" href="#openAccess">{{ open_access_what }}</a>
+                    <a class="nav-link py-0" href="#repositoriesRock">{{ open_access_why }}</a>
+                    <a class="nav-link py-0" href="#whatRepository">{{ open_access_repository }}</a>
+                    <a class="nav-link py-0" href="#whyNoDeposit">{{ open_access_why_no_deposit }}</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header bg-secondary text-light">
+                    <h2 class="mb-0">dissem.in</h2>
+                </div>
+                <div class="card-body">
+                    <a class="nav-link py-0" href="#whatIsDissemin">{{ ds_what }}</a>
+                    <a class="nav-link py-0" href="#repository">{{ ds_repository }}</a>
+                    <a class="nav-link py-0" href="#running">{{ ds_runs }}</a>
+                    <a class="nav-link py-0" href="#createAProfile">{{ ds_profile }}</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header bg-secondary text-light">
+                    <h2 class="mb-0">{{ policies }}</h2>
+                </div>
+                <div class="card-body">
+                    <a class="nav-link py-0" href="#policyClasses">{{ policies_what }}</a>
+                    <a class="nav-link py-0" href="#availability">{{ policies_availability }}</a>
+                    <a class="nav-link py-0" href="#statistics">{{ policies_statistics }}</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header bg-secondary text-light">
+                    <h2 class="mb-0">{{ omission }}</h2>
+                </div>
+                <div class="card-body">
+                    <a class="nav-link py-0" href="#missingPaper">{{ omission_missing }}</a>
+                    <a class="nav-link py-0" href="#incorrectMetadata">{{ omission_detail }}</a>
+                    <a class="nav-link py-0" href="#copyAvailable">{{ omission_available }}</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header bg-secondary text-light">
+                    <h2 class="mb-0">{{ auth }}</h2>
+                </div>
+                <div class="card-body">
+                    <a class="nav-link py-0" href="#orcidWhy">{{ auth_why }}</a>
+                    <a class="nav-link py-0" href="#orcidLogin">{{ auth_happen }}</a>
+                    <a class="nav-link py-0" href="#orcidAddPubs">{{ auth_add_pubs }}</a>
+                    <a class="nav-link py-0" href="#orcidUpdate">{{ auth_outdated }}</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header bg-secondary text-light">
+                    <h2 class="mb-0">{{ behind }}</h2>
+                </div>
+                <div class="card-body">
+                    <a class="nav-link py-0" href="#sources">{{ behind_sources }}</a>
+                    <a class="nav-link py-0" href="#gettingInvolved">{{ behind_help }}</a>
+                    <a class="nav-link py-0" href="#sourceCode">{{ behind_source_code }}</a>
+                    <a class="nav-link py-0" href="#OAI">{{ behind_api }}</a>
+                    <a class="nav-link py-0" href="#logos">{{ behind_logos }}</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="card my-3">
+        <div class="card-header bg-light-blue text-white">
+            <h2>{{ open_access }}</h2>
+        </div>
+        <div class="card-body">
+            <h3 id="openAccess">{{ open_access_what }}</h3>
+            <p>
+                {% blocktrans trimmed %}
+                    In a nutshell, the Open Access movement promotes free access to the scientific literature. For a more in-depth introduction, we recommend <a href="http://www.phdcomics.com/comics.php?f=1533">this video in English</a> and <a href="https://pablo.rauzy.name/openaccess/introduction.html">this introduction in French</a>.
+                {% endblocktrans %}
+            </p>
+
+            <h3 id="repositoriesRock">{{ open_access_why }}</h3>
+            <p>{% trans 'You should do it because:' %}</p>
+            <ul>
+                <li>
+                    {% blocktrans trimmed %}
+                        It makes your research <strong>more accessible</strong> and <strong>more visible</strong>. Many researchers routinely check papers in topic repositories such as arXiv, and it is less likely that these researchers check your homepage regularly.
+                    {% endblocktrans %}
+                </li>
+                <li>
+                    {% blocktrans trimmed %}
+                        You can even do it before publication. You can get <strong>valuable feedback</strong> to improve your paper before the actual peer-reviewing process.
+It may also be useful to establish priority if it takes a long time for your paper to get published.
+                    {% endblocktrans %}
+                </li>
+                <li>
+                    {% blocktrans trimmed %}
+                        It provides you a <strong>durable storage</strong>. Your homepage is likely to change or to disappear, for instance if you leave your current institution.
+                    {% endblocktrans %}
+                </li>
+                <li>
+                    {% blocktrans trimmed %}
+                       Librarians around the world cannot check whether all the papers in a given journal are available on homepages: in doubt, they subscribe to this journal to make sure their researchers have access to it. This costs a lot of money for research institutions. Papers stored in repositories are <strong>easier to detect</strong> and can help academia save money.
+                    {% endblocktrans %}
+                </li>
+                <li>
+                    {% blocktrans trimmed %}
+                        Finally, for all these reasons, an increasing number of <strong>funding bodies</strong> require the outcomes of their projects to be made available in a repository.
+                    {% endblocktrans %}
+                </li>
+            </ul>
+
+            <h3 id="whatRepository">{{ open_access_repository }}</h3>
+            <p>{% trans 'There are roughly three types of repositories:' %}</p>
+            <ul>
+                <li>
+                    {% blocktrans trimmed %}
+                        Subject repositories, restricted to some research fields, such as <a href="https://arxiv.org">arXiv</a>.
+                    {% endblocktrans %}
+                </li>
+                <li>
+                    {% blocktrans trimmed %}
+                        Institutional repositories, designated to store the research output of a given institution or country.
+                    {% endblocktrans %}
+                </li>
+                <li>
+                    {% blocktrans trimmed %}
+                        General-purpose academic repositories such as <a href="https://zenodo.org">Zenodo</a>, not limited to a particular scope.
+                    {% endblocktrans %}
+                </li>
+            </ul>
+            <p>
+                {% blocktrans trimmed %}
+                    If your research community favours a specific repository, using it makes sense as it will increase your visibility. If not, institutional or general-purpose repositories are also good options.
+                {% endblocktrans %}
+            </p>
+
+            <h3 id="whyNoDeposit">{{ open_access_why_no_deposit }}</h3>
+            <p>
+                {% blocktrans trimmed %}
+                    At the moment, you can use Dissemin to deposit in the following repositories:
+                {% endblocktrans %}
+            </p>
+            <ul>
+                <li>
+                    {% blocktrans trimmed %}
+                        <strong><a href="https://zenodo.org">Zenodo</a></strong>, an innovative repository backed by the EU.
+                    {% endblocktrans %}
+                </li>
+                <li>
+                    {% blocktrans trimmed %}
+                        <strong><a href="https://hal.archives-ouvertes.fr/">HAL</a></strong>, a French repository managed by the <a href="https://www.ccsd.cnrs.fr/">CCSD</a>.
+                    {% endblocktrans %}
+                </li>
+                {% comment %}
+    	        <li>
+                    {% blocktrans trimmed %}
+                        <strong><a href="https://osf.io/preprints/">OSF preprints</a></strong>, a preprint server run by the <a href="https://cos.io/">Center for Open Science</a> on top of their <a href="https://osf.io/">Open Science Framework</a>.
+                    {% endblocktrans %}
+                </li>
+                {% endcomment %}
+            </ul>
+            <p>
+                {% blocktrans trimmed %}
+                    Supporting more repositories requires us to write specific code for each repository. More importantly it requires the repositories to give us permission to deposit papers in bulk. We have been considering integrating the following repositories:
+                {% endblocktrans %}
+            </p>
+            <ul>
+                <li>
+                    {% blocktrans trimmed %}
+                        <strong><a href="https://arxiv.org/">arXiv</a></strong>, a well-known general-purpose repository. For now, arXiv has declined to allow Dissemin to deposit using their SWORD API, and wants users to deposit in arXiv manually. If you would like to deposit in arXiv with Dissemin, you can let them know that you are interested (email: help AT arxiv.org, and start your message with "Dear arXiv,").
+                      {% endblocktrans %}
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header bg-light-blue text-light">
+            <h2>dissem.in</h2>
+        </div>
+        <div class="card-body">
+            <h3 id="whatIsDissemin">{{ ds_what }}</h3>
+            <p>
+                {% blocktrans trimmed %}
+                    Dissemin is a web platform gathering metadata from <a href="{{ sources_url }}">many sources</a>
+and analyzing the full text availability of publications of researchers. It has been designed to foster the use of repositories (rather than preprints posted on personal homepages), <a href="#repositoriesRock">for numerous reasons</a>.
+                {% endblocktrans %}
+            </p>
+
+            <h3 id="repository">{{ ds_repository }}</h3>
+            <p>
+                {% blocktrans trimmed %}
+                    Dissemin is not a repository as it does not store any full text. When the full text of a publication is available, a link to the relevant page is provided. The full texts deposited through Dissemin are stored in third-party repositories such as <a href="https://zenodo.org">Zenodo</a> or <a href="https://hal.archives-ouvertes.fr/">HAL</a>.
+                {% endblocktrans %}
+            </p>
+
+            <h3 id="running">{{ ds_runs }}</h3>
+            <p>
+                {% blocktrans trimmed %}
+                    Dissemin is brought to you by the <a href="https://association.dissem.in/">CAPSH association</a>.
+                {% endblocktrans %}
+            </p>
+
+            <h3 id="createAProfile">{{ ds_profile }}</h3>
+            <p>
+                {% blocktrans trimmed %}
+                    Yes, you can do it, by first <a
+href="https://orcid.org/register">registering on ORCID</a> if you do not have an ORCID identifier yet. This only takes a few seconds, and you can then use your ORCID identifier to log into Dissemin.
+                {% endblocktrans %}
+            </p>
+        </div>
+    </div>
+    
+    <div class="card mb-3">
+        <div class="card-header bg-light-blue text-light">
+            <h2>{{ policies }}</h2>
+        </div>
+        <div class="card-body">
+            <h3 id="policyClasses">{{ policies_what }}</h3>
+            <p>{% trans "We have the following five policy classes:" %}</p>
+            <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">{% trans "Class" %}</th>
+                            <th scope="col">{% trans "Description" %}</th>
+                        </tr>
+                    </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <img class="statusImage-4" src="{% static "img/status_gold.png" %}" alt="{% trans 'Open access' %}">
+                        </td>
+                        <td>
+                            {% blocktrans trimmed %}
+                                <strong>Open access:</strong><br />
+                                The full text is made freely available by the publisher (in a fully open access or hybrid journal).
+                            {% endblocktrans %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img class="statusImage-4" src="{% static "img/status_green.png" %}" alt="{% trans 'Pre/post prints allowed and full text available' %}">
+                        </td>
+                        <td>
+                            {% blocktrans trimmed %}
+                                <strong>Pre/post prints allowed and full text available:</strong><br />
+                                The full text is available in a repository, but might not be freely available from the publisher itself. This is in line with the publishing policy and is called green open access or self-archiving.
+                            {% endblocktrans %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img class="statusImage-4" src="{% static "img/status_blue.png" %}" alt="{% trans 'Pre/post prints allowed but full text unavailable' %}">
+                        </td>
+                        <td>
+                            {% blocktrans trimmed %}
+                                <strong>Pre/post prints allowed but full text unavailable:</strong><br />
+The full text could be made available in a repository (as above) according to the publishing policy. We encourage their authors to do so.
+                            {% endblocktrans %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img class="statusImage-4" src="{% static "img/status_gray.png" %}" alt="{% trans 'Policy unknown' %}">
+                        </td>
+                        <td>
+                            {% blocktrans trimmed %}
+                                <strong>Policy unknown:</strong><br />
+                                The full text is not available and dissem.in could not evaluate if the publishers policy allows making the full text freely available.
+                            {% endblocktrans %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img class="statusImage-4" src="{% static "img/status_black.png" %}" alt="{% trans 'Pre/post prints forbidden' %}">
+                        </td>
+                        <td>
+                            {% blocktrans trimmed %}
+                                <strong>Pre/post prints forbidden:</strong><br />
+                                The publisher forbids deposits in repositories, in general. Authors might still be allowed to deposit their works after some embargo period or if their funder has an agreement with this publisher.
+                            {% endblocktrans %}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3 id="availability">{{ policies_availability }}</h3>
+            <p>
+                {% blocktrans trimmed %}
+                 When we have found it in one of the repositories we harvest. The list of these repositories can be found <a href="{{ sources_url }}">here</a>. Thanks to the <a href="https://www.base-search.net">BASE</a> search engine, we cover more than 80 millions of preprints.
+              {% endblocktrans %}
+            </p>
+
+            <h3 id="statistics">{{ policies_statistics }}</h3>
+            <p>
+                {% blocktrans trimmed %}
+                    There are a few caveats concerning our data:
+                {% endblocktrans %}
+            </p>
+            <ul>
+                <li>
+                    {% blocktrans trimmed %}
+                          Some papers are not present in any of our metadata sources, so they are not counted at all.
+                    {% endblocktrans %}
+                </li>
+                <li>
+                    {% blocktrans trimmed %}
+                          Some entries in our system do not correspond to proper research papers.
+                    {% endblocktrans %}
+                </li>
+                <li>
+                    {% blocktrans trimmed %}
+                        Because there are many researchers with the same name, some papers may be misattributed to a homonym.
+                    {% endblocktrans %}
+                </li>
+                <li>
+                    {% blocktrans trimmed %}
+                        Some repositories might not be covered by any of our sources, so a paper might be marked as unavailable while it is available.
+                    {% endblocktrans %}
+                </li>
+                <li>
+                    {% blocktrans trimmed %}
+                        Some papers might be marked as available but actually are not, for instance because they have been deleted.
+                    {% endblocktrans %}
+                </li>
+                <li>
+                    {% blocktrans trimmed %}
+                        All sorts of other technical issues.
+                    {% endblocktrans %}
+                </li>
+            </ul>
+
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header bg-light-blue text-light">
+            <h2>{{ omission }}</h2>
+        </div>
+        <div class="card-body">
+            <h3 id="missingPaper">{{ omission_missing }}</h3>
+            <p>
+                {% blocktrans trimmed %}
+                    Please first check whether the paper is available in one of <a href="{{ sources_url }}">our sources</a>. If it is not, Dissemin cannot harvest it, and you should report the problem to the source where it should appear. Note that it can take up to a couple of months for our primary sources to discover your latest papers and for Dissemin to harvest it.
+                {% endblocktrans %}
+            </p>
+            <p>
+                {% blocktrans trimmed %}
+                    Now, if your paper does appear in one of the sources but not on Dissemin, please check that your name is not spelt incorrectly on the source, and that the spelling matches your ORCID record. If there is a misspelling, again, you should report the problem to the source that contains the mistake.
+                {% endblocktrans %}
+            </p>
+            <p>
+                {% blocktrans trimmed %}
+                    If the name matches but the paper is not in Dissemin, then maybe one of your co-authors asked us to delete it? Or it may be a bug. In this case, please file an <a href="https://github.com/dissemin/dissemin/issues">issue</a> describing the problem, or send a message to <a href="mailto:bugs@dissem.in">bugs@dissem.in</a>.
+              {% endblocktrans %}
+            </p>
+            <p>
+                {% blocktrans trimmed %}
+                    Note that, in the longer term, we hope to design a way for our users to edit their profiles on Dissemin to add missing papers and fix these problems; but we do not have such a system yet.
+                {% endblocktrans %}
+            </p>
+
+            <h3 id="incorrectMetadata">{{ omission_detail }}</h3>
+            <p>
+                {% blocktrans trimmed %}
+                    In most cases, the errors that you see on Dissemin have not been introduced by Dissemin, but are already present in the <a href="{{ sources_url }}">public sources</a> that Dissemin harvests. Hence, please first check if the error that you have seen is already present in our data sources, by looking at the "Links" section in the top right of the page. If one of these pages contain the error, you should report the problem to them and not to us, otherwise the mistake will persist in the source.
+                {% endblocktrans %}
+            </p>
+            <p>
+                {% blocktrans trimmed %}
+                    If the error is not present in any of the sources and you believe that Dissemin may have introduced the problem, please file an <a href="https://github.com/dissemin/dissemin/issues">issue</a> with details of the problem, or send a message to <a href="mailto:bugs@dissem.in">bugs@dissem.in</a>. Note that yo cannot yet fix the problem yourself, although we hope in the longer term to develop a system to allow our users to edit details of their papers themselves.
+                {% endblocktrans %}
+            </p>
+
+            <h3 id="copyAvailable">{{ omission_available }}</h3>
+            <p>
+                {% blocktrans trimmed %}
+                    First, note that Dissemin does not account for copies of articles that are only available on a personal homepage or a similar website. This is deliberate, because we believe that <a href="#repositoriesRock">articles should be hosted in repositories</a>.
+                {% endblocktrans %}
+            </p>
+            <p>
+                {% blocktrans trimmed %}
+                    Second, at the moment, Dissemin only supports repositories with a crawlable API that follows the <a href="https://www.openarchives.org/OAI/openarchivesprotocol.html">OAI-PMH protocol</a>, and is <a href="https://www.base-search.net/about/en/suggest.php">registered</a> in <a href="https://www.base-search.net/">BASE</a>. We have a <a href="https://github.com/dissemin/croawl">long-term project</a> to support more repositories by crawling them, but for the moment, we do not have the resources to support repositories not covered by BASE. Hence, if you are a user of a repository and would like it to be supported by Dissemin, please contact the repository administrator and suggest them to implement OAI-PMH support and to <a href="https://www.base-search.net/about/en/suggest.php">register</a> their repository in BASE.
+                {% endblocktrans %}
+            </p>
+            <p>
+                {% blocktrans trimmed %}
+                    If the repository is registered in BASE, please <a href="https://www.base-search.net/">search in BASE</a> to check that your article is there. If it is, then this may be a bug of Dissemin; please file an <a href="https://github.com/dissemin/dissemin/issues">issue</a> describing the problem, or send a message to <a href="mailto:bugs@dissem.in">bugs@dissem.in</a>.
+                {% endblocktrans %}
+           </p>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header bg-light-blue text-light">
+            <h2>{{ auth }}</h2>
+        </div>
+        <div class="card-body">
+            <h3 id="orcidWhy">{{ auth }}</h3>
+            <p>
+                {% blocktrans trimmed %}
+                    Authenticating users is necessary to deposit papers on their behalf in open repositories. Besides, knowing a user's ORCID id helps us find its publications, avoiding articles authored by namesakes for instance. Logging in via ORCID will not expose any private information to Dissemin: we only have access to the public part of your ORCID record. For instance, unless you have explicitly marked your email address as public, we do not even know your email address when you log in to Dissemin via ORCID.
+                {% endblocktrans %}
+            </p>
+
+            <h3 id="orcidLogin">{{ auth_happen }}</h3>
+            <p>
+                {% blocktrans trimmed %}
+                    Nothing. When you log in via ORCID to Dissemin, this does not grant us any permission to change anything in your ORCID record.
+                {% endblocktrans %}
+            </p>
+
+            <h3 id="orcidAddPubs">{{ auth_add_pubs }}</h3>
+            <p>
+                {% blocktrans trimmed %}
+                    ORCID supports various methods to claim publications. Our preferred one is via CrossRef's search interface. Here is how to use it:
+                {% endblocktrans %}
+            </p>
+            <ul>
+                <li>
+                    {% blocktrans trimmed %}
+                        Go to <a href="https://search.crossref.org/">CrossRef Metadata Search</a>;
+                    {% endblocktrans %}
+                </li>
+                <li>
+                    {% blocktrans trimmed %}
+                        Click "Log in" in the top right corner and go through the ORCID login process;
+                    {% endblocktrans %}
+                </li>
+                <li>
+                    {% blocktrans trimmed %}
+                        Search for your publications, for instance by typing your name in CrossRef's search interface;
+                    {% endblocktrans %}
+                </li>
+                <li>
+                    {% blocktrans trimmed %}
+                        Add publications that are yours to your ORCID record by clicking "Add to ORCID".
+                    {% endblocktrans %}
+                </li>
+            </ul>
+            <p>
+                {% blocktrans trimmed %}
+                    You can also add publications to your profile <em>on Dissemin</em>, by clicking the button "Include in my profile" in search results on Dissemin. (This button is only visible when you are logged in, and next to papers that Dissemin thinks you have authored.) You can also exclude articles from your profile in this way. Please note that these changes are local to Dissemin and are <em>not</em> propagated to your ORCID profile, because ORCID does not have a free API allowing us to propagate them.
+                {% endblocktrans %}
+            </p>
+
+            <h3 id="orcidUpdate">{{ auth_outdated }}</h3>
+
+            <p>
+                {% url "my-profile" as profile_url %}
+                {% blocktrans trimmed %}
+                If you change some details in your ORCID profile (name, homepage, etc.), the changes will not automatically be picked up in your profile on Dissemin. To update your profile on Dissemin accordingly, once you have logged in to Dissemin, you can go to your <a href="{{ profile_url }}">profile page</a> and click "Refresh publications".
+                {% endblocktrans %}
+            </p>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header bg-light-blue text-white">
+            <h2>{{ behind }}</h2>
+        </div>
+        <div class="card-body">
+            <h4 id="sources">{{ behind_sources }}</h4>
+            <p>
+                {% blocktrans trimmed %}
+                    Our sources are listed on <a href="{{ sources_url }}">this page</a>.
+                {% endblocktrans %}
+            </p>
+
+            <h4 id="gettingInvolved">{{ behind_help }}</h4>
+            <p>
+                {% blocktrans trimmed %}
+                    There are many ways to get involved:
+                {% endblocktrans %}
+            </p>
+            <ul>
+                <li>
+                    {% blocktrans trimmed %}
+                          Contribute to <a href="https://github.com/dissemin/dissemin">the code</a>.
+                    {% endblocktrans %}
+                </li>
+                <li>
+                    {% blocktrans trimmed %}
+                          Fix any of our listed <a href="https://github.com/dissemin/dissemin/issues">issues</a>.
+                    {% endblocktrans %}
+                </li>
+                <li>
+                    {% blocktrans trimmed %}
+                        Help us <a href="https://translatewiki.net/wiki/Translating:Dissemin">translate</a> the interface in your language.
+                    {% endblocktrans %}
+                </li>
+                <li>
+                    {% blocktrans trimmed %}
+                          Encourage researchers to use this service.
+                    {% endblocktrans %}
+                </li>
+                <li>
+                    {% blocktrans trimmed %}
+                        Star <a href="https://github.com/dissemin/dissemin">our GitHub project</a>!
+                    {% endblocktrans %}
+                </li>
+                <li>
+                    {% blocktrans trimmed %}
+                        <a href="https://association.dissem.in/#dons">Donations are accepted</a>.
+                    {% endblocktrans %}
+                </li>
+            </ul>
+
+            <h3 id="sourceCode">{{ behind_source_code }}</h3>
+            <p>
+                {% blocktrans trimmed %}
+                    The source code is available <a href="https://github.com/dissemin/dissemin">on GitHub</a>.
+                {% endblocktrans %}
+            </p>
+
+            <h4 id="OAI">{{ behind_api }}</h4>
+            <p>
+                {% blocktrans trimmed %}
+                    Yes! We even have <a href="https://dissemin.readthedocs.io/en/latest/api.html">an API</a>. If it does not suit your needs, please don't hesitate to get in touch by writing to <a href="mailto:hello@dissem.in">hello@dissem.in</a>.
+                {% endblocktrans %}
+            </p>
+
+            <h3 id="logos">{{ behind_logos }}</h3>
+            <p>
+                {% blocktrans trimmed %}
+                    Yes! See <a href="https://association.dissem.in/#logos">here</a> for links to our logos and for explanations about how you can reuse them.
+                {% endblocktrans %}
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+

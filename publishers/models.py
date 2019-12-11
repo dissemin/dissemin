@@ -45,6 +45,13 @@ OA_STATUS_CHOICES = (
             'For complicated policies, unknown publishers and unpublished documents.')),
    )
 
+OA_STATUS_TO_COLOR = {
+    'OA' : 'gold',
+    'OK' : 'blue',
+    'NOK' : 'black',
+    'UNK' : 'gray',
+}
+
 POLICY_CHOICES = [('can', _('Allowed')),
                   ('cannot', _('Forbidden')),
                   ('restricted', _('Restricted')),
@@ -226,6 +233,10 @@ class Publisher(models.Model):
     @property
     def has_copyrightlinks(self):
         return len(self.copyrightlinks) > 0
+
+    @property
+    def oa_status_as_color(self):
+        return OA_STATUS_TO_COLOR.get(self.oa_status)
 
     def change_oa_status(self, new_oa_status):
         if self.oa_status == new_oa_status:

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load static %}
+{% load socialaccount %}
+
+{% block title %}{% trans "Sign in" %}{% endblock %}
+
+{% block content %}
+    <div class="container pt-3 pb-3">
+        <h1 class="text-center">{% trans "Sign in" %}</h1>
+        <div class="row">
+            <div class="col-12 col-md-10">
+                <p>
+                    {% blocktrans trimmed %}
+                        Dissemin uses ORCID to authenticate its users. ORCID is an independent non-profit effort to provide an open registry of unique researcher identifiers. It also offers open services to link research activities and organizations to these identifiers. Learn more at <a href="https://orcid.org" target="_blank">orcid.org</a>.
+                    {% endblocktrans %}
+                </p>
+            </div>
+            <div class="d-none d-md-inline col-md-2">
+                <img class="img-fluid" src="{% static "dissemin/img/orcid-big.png" %}" alt="ORCID"/>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-lg-6 d-lg-flex">
+                <div class="bg-light border rounded p-4">
+                    <h2>{% trans "Log in" %}</h2>
+                    <p>
+                        {% blocktrans trimmed %}
+                            If you already have an ORCID account, you can use it with Dissemin. We will not make any changes to your profile.
+                        {% endblocktrans %}
+                    </p>
+                    <a class="btn btn-orcid" href="{% provider_login_url "orcid" auth_params="show_login=True" %}">{% trans "Log in" %}</a>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6 d-lg-flex">
+                <div class="bg-light border rounded p-4">
+                    <h2>{% trans "Sign up" %}</h2>
+                    <p>
+                        {% blocktrans trimmed %}
+                            Not an ORCID user yet? Create an account, it is free and takes just a few seconds.
+                        {% endblocktrans %}
+                    </p>
+                    <a class="btn btn-orcid" href="{% provider_login_url "orcid" auth_params="show_login=False" %}">{% trans "Sign up" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
