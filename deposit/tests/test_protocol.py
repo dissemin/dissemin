@@ -85,7 +85,7 @@ class MetaTestProtocol():
         """
         Test the deposit page for HTTP Response 200
         """
-        r = rendering_get_page(authenticated_client, 'upload_paper', kwargs={'pk': book_god_of_the_labyrinth.pk})
+        r = rendering_get_page(authenticated_client, 'upload-paper', kwargs={'pk': book_god_of_the_labyrinth.pk})
         assert r.status_code == 200
 
 
@@ -429,7 +429,7 @@ class ProtocolTest(django.test.TestCase):
         self.assertEqual(self.user.username, self.username)
         client = django.test.Client(HTTP_HOST='localhost')
         self.assertTrue(client.login(username=self.username, password=self.password))
-        r = client.get(reverse('upload_paper', kwargs={'pk': self.p1.pk}))
+        r = client.get(reverse('upload-paper', kwargs={'pk': self.p1.pk}))
         self.assertEqual(r.status_code, 200)
 
     def dry_deposit(self, paper, **form_fields):

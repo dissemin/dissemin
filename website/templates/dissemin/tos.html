@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+    {% trans 'Terms of Service' %}
+{% endblock %}
+
+
+{% block content %}
+<div class="container-fluid">
+    <div class="jumbotron mt-3">
+        <h1 class="text-center">{% trans "Terms of Service" %}</h1>
+    </div>
+    <div class="card mb-3">
+        <div class="card-header bg-light-blue text-white">
+            <h2>{% trans "In short" %}</h2>
+        </div>
+        <div class="card-body">
+            <h3 id="scope">{% trans "Scope of the service" %}</h3>
+            <p>
+                {% blocktrans trimmed %} 
+                    This platform offers an analysis of the accessibility of scholarly publications. It can also deposit publications on behalf of their authors in repositories. The accessibility and self-archiving policies of the papers on this platform can be incorrect and should not be relied upon for legal advice. When in doubt, users are advised to check from authoritative sources.
+                {% endblocktrans %}
+            </p>
+
+            <h3 id="privacy">{% trans "Privacy" %}</h3>
+            <p>
+                {% blocktrans trimmed %}
+                    The platform does not include any analytics, advertisement or tracking services. We are however using the <a href="https://sentry.io/privacy/">Sentry service</a> for error tracking on this platform. Our webserver configuration stores basic access information (URL requested and IP address) for error monitoring, which are kept for fourteen days.
+
+Authenticated users are logged-in via ORCID, a third-party service.
+The platform has no access to the
+private information they provide to ORCID. In particular, we do
+not store any ORCID passwords, and we do not have access to email addresses that are marked as private in the ORCID record.
+
+We need to set cookies to authenticate our users, therefore by logging in on this platform, users accept these cookies.
+            {% endblocktrans %}
+            </p>
+
+            <h4 id="deposits">{% trans "Deposits through Dissemin" %}</h4>
+            <p>
+                {% blocktrans trimmed %}
+                    The platform can perform mandated publication deposit to repositories. Users are only allowed to upload papers that they have authored themselves, or papers whose authors have consented to the deposit. In addition to these terms of service, users are required to abide by the policies of these repositories.
+                {% endblocktrans %}
+            </p>
+
+            <h4 id="contact">{% trans "Contact" %}</h4>
+            <p>
+                {% blocktrans trimmed %}
+                    Please address any inquiry to <a href="mailto:support@dissem.in">support@dissem.in</a>.
+                {% endblocktrans %}
+            </p>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header bg-light-blue text-white">
+            <h2>{% trans "In full" %}</h2>
+        </div>
+        <div class="card-body">
+            <h3 id="personelData">{% trans "Personal data" %}</h3>
+            <p>
+                {% blocktrans trimmed %}
+                    Dissemin uses ORCID's public OAuth interface to authenticate its users. This interface only transmits information marked as public in the user's ORCID profile. This means that ORCID passwords are never transmitted and email addresses are not transmitted when they are marked as private, which is the default setting.
+            
+                    When logging in to Dissemin from ORCID, Dissemin acquires the user's ORCID id, as well as all public information attached to the ORCID record.
+
+                    We are using the <a href="https://sentry.io/privacy/">Sentry service</a> for error tracking on this platform. Our webserver configuration stores basic access information (URL requested and IP address) for error monitoring, which are kept for fourteen days.
+
+            Dissemin can store any information input by its users on the platform. Users can ask for a copy of the personal information Dissemin stores about them by writing an email to <a href="mailto:support@dissem.in">support@dissem.in</a>.
+                {% endblocktrans %}
+            </p>
+
+            <h3 id="fullTextStorage">{% trans "Full text storage" %}</h3>
+            <p>
+                {% blocktrans trimmed %}
+                    Documents deposited in repositories via Dissemin can be stored on the platform, but are not available for download on the platform. They can be stored internally for logging purposes, and to make sure failed deposits can be fixed later. Dissemin does not commit to store any of the files it receives from its users.
+
+                    Users can write to <a href="mailto:support@dissem.in">support@dissem.in</a> if they want one of their uploads to be deleted from our internal storage space, or from the repository they have deposited to. Note that deletion policies vary accross repositories: we provide no guarantee that deposits can be deleted from the target repositories.
+                {% endblocktrans %}
+            </p>
+
+            <h3 id="reportingMisuse">{% trans "Reporting misuse" %}</h3>
+            <p>
+                {% blocktrans trimmed %}
+                    Misuse can be reported to <a href="mailto:support@dissem.in">support@dissem.in</a>.
+                {% endblocktrans %}
+            </p>
+
+            <h3 id="CNIL">Déclaration CNIL</h3>
+
+            <p>
+                {% blocktrans trimmed %}
+                    The <a href="https://dissem.in">dissem.in</a> website has been registered with <a href="https://www.cnil.fr/">CNIL</a> under declaration n°1895382 v0.
+                {% endblocktrans %}
+            </p>
+
+            <p>
+                {% blocktrans trimmed %}
+                    You have the right to access, modify, and delete the personal information that we hold about you. To exercise this right, please contact us at <a href="mailto:support@dissem.in">support@dissem.in</a>, or by postal mail at the following addresss:
+                {% endblocktrans %}
+            </p>
+
+            <p>
+                Association CAPSH<br />
+                34 rue de la Chanaise<br />
+                71250 Cluny<br />
+                France
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock content %}

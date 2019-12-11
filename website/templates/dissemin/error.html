@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block  title%}
+    {% trans "Error" %}
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="jumbotron mt-3">
+        <h1>{% trans "Error" %}</h1>
+        <p>{{ message }}</p>
+        <p><a href="{% url "start-page" %}">{% trans "Go back to the start page." %}</a></p>
+    </div>
+</div>
+{% endblock %}

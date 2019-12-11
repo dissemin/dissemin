@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load solo_tags %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+    {% trans 'Home' %}
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/d3.min.js' %}"></script>
+{% endblock %}
+
+{% block content_no_border %}
+    <div class="jumbotron jumbotron-fluid text-light text-center mb-0" id="screenWelcome">
+        <div class="container">
+            <h1>{% trans 'Welcome to Dissemin' %}</h1>
+            <p style="font-size: 1.2rem;">{% trans 'Dissemin detects papers behind paywalls and helps their authors to upload them in one click to an open repository.' %}</p>
+            <form method="get" action="{% url 'search' %}" >
+                <div class="input-group">
+                    {% render_field search_form.authors class="form-control justify-content-center" %}
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-search" aria-label="{% trans 'Search' %}"><span class="oi oi-magnifying-glass" aria-hidden="true"></span></button>
+                    </div>
+                </div>
+            </form>
+            <div class="text-right mt-3">
+                <a class="text-light" href="{% url 'advanced-search' %}">{% trans "Advanced search" %}</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="jumbotron jumbotron-fluid text-light mb-0" id="screenGreenOpenAccess">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-4 my-auto">
+                    <img class="img-fluid" src="{% static 'dissemin/img/open_access.png' %}" alt="{% trans 'Green Open Access' %}">
+                </div>
+                <div class="col-12 col-md-8 my-auto">
+                    <h2 class="text-center">{% trans 'Green Open Access' %}</h2>
+                    <p>{% trans 'Many researchers do not use their right to make their papers freely available online, in addition to the paywalled version of traditional publishers.' %}</p>
+                    <p>{% trans 'Uploading your papers to open repositories has significant advantages:' %}</p>
+                    <ol>
+                        <li>{% trans 'Your research is available to everyone, increasing your readership and impact.' %}</li>
+                        <li>{% trans 'You help universities abandon overpriced journal subscriptions.' %}</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="jumbotron jumbotron-fluid text-light mb-0" id="screenOpenRepositories">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-4 order-md-last my-auto">
+                    <img class="img-fluid" src="{% static 'dissemin/img/open_repositories.png' %}" alt="{% trans 'Open Repositories' %}">
+                </div>
+                <div class="col-12 col-md-8 my-auto">
+                    <h2 class="text-center">{% trans 'Open Repositories' %}</h2>
+                    <p>{% trans 'Uploading your papers on your own webpage is not enough. Your papers are easier to find and more secure in the long-term when uploaded to arXiv, Zenodo or institutional repositories.' %}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="jumbotron jumbotron-fluid text-light mb-0" id="screenLatestUploads">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-4 my-auto">
+                    <img class="img-fluid" src="{% static 'dissemin/img/latest_uploads.png' %}" alt="{% trans 'Latest Uploads' %}">
+                </div>
+                <div class="col-12 col-md-8 my-auto">
+                    <h2 class="text-center">{% trans "Latest Uploads" %}</h2>
+                    <p>{% trans 'Researchers use Dissemin to make sure all their publications can be accessed freely. Have a look at their latest uploads:' %}</p>
+                    <div class="list-group">
+                        {% for deposit in latest_deposits %}
+                            <a href="{{ deposit.oairecord.splash_url }}" target="_blank" class="list-group-item list-group-item-action">
+                                <h5 class="mb-1">{{ deposit.paper.title }}</h5>
+                                <p class="mb-1">Published in {{ deposit.repository }} on {{ deposit.pub_date }}</p>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="jumbotron jumbotron-fluid text-light mb-0" id="screenDisseminData">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-6 my-auto">
+                    <h2 class="text-center">{% trans 'Access statistics' %}</h2>
+                    <p>{% trans 'Dissemin collects its data from various sources and evaluates if a given publication is freely available.' %}</p>
+                </div>
+                <div class="col-12 col-md-6 my-auto">
+                    <div class="row text-center px-5">
+                        {% get_solo 'papers.PaperWorld' as world %}
+                        <div class="col-xs-12 col-sm-6">
+                            {% include "statistics/pie_chart.html" with stats=world.stats object_id=obj.object_id stats_counter=1 %}
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            {% include "statistics/pie_legend.html" with stats=world.stats object_id=obj.object_id stats_counter=1 %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="jumbotron jumbotron-fluid text-light mb-0" id="screenDisseminForLibraries">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-4 my-auto">
+                    <img class="img-fluid" src="{% static 'dissemin/img/dissemin_libraries.png' %}" alt="{% trans 'Dissemin for Libraries' %}">
+                </div>
+                <div class="col-12 col-md-8 my-auto">
+                    <h2 class="text-center">{% trans "Dissemin for Libraries" %}</h2>
+                    <p>{% trans 'As a library you can use Dissemin to find publications of your researchers that are behind paywalls. Dissemin can upload publications directly into your institutional repository and tries to support your local worklfow as much as possible.' %}</p>
+                    <p>{% trans 'You can advertise Dissemin to your researchers and show them how easy it is to liberate their publications!' %}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="jumbotron jumbotron-fluid text-light mb-0" id="screenPartners">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-4 order-md-last my-auto">
+                    <img class="img-fluid" src="{% static 'dissemin/img/partners.png' %}" alt="{% trans 'Network of Partners' %}">
+                </div>
+                <div class="col-12 col-md-8 my-auto">
+                    <h2 class="text-center">{%trans "Partners" %}</h2>
+                    <p>{% trans 'Dissemin would not be possible without the support of our partners:' %}</p>
+                    <div class="row">
+                        <div class="col-6 col-md-3"><a href="http://www.couperin.org/"><img class="img-fluid" alt="Consortium Couperin" src="{% static "dissemin/img/partners/couperin.png" %}" /></a></div>
+                        <div class="col-6 col-md-3"><a href="http://www.ens.fr/"><img class="img-fluid p-1 mb-2 mb-md-0 bg-white" alt="ENS - PSL" src="{% static "dissemin/img/partners/ens-psl.svg" %}" /></a></div>
+                        <div class="col-6 col-md-3"><a href="http://www.opening-projekt.de/"><img class="img-fluid p-1 bg-white" alt="Project OpenIng" src="{% static "dissemin/img/partners/opening.png" %}" /></a></div>
+                        <div class="col-6 col-md-3"><a href="https://www.base-search.net/"><img class="img-fluid bg-white" alt="Bielefeld Academic Search Engine (BASE)" src="{% static "dissemin/img/partners/base-search.svg" %}" /></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content_no_border %}

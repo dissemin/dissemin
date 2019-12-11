@@ -52,7 +52,7 @@ class HALForm(BaseMetadataForm):
         required=True,
         label=_('Affiliation'),
         widget=Select2(
-            data_view='autocomplete_affiliations',
+            data_view='autocomplete-hal-affiliations',
             attrs={
                 'style': 'width: 100%',
             },
@@ -67,9 +67,6 @@ class HALPreferencesForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(HALPreferencesForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
-        self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-lg-2'
-        self.helper.field_class = 'col-lg-8'
         self.helper.add_input(
             Submit('submit', _('Save')),
         )

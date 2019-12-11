@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+
+{% load humanize %}
+{% load i18n %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}{{ search_description_title }}{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/d3.min.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    {% include 'breadcrumbs.html' %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-4 pb-3">
+
+                {% block additional_information %}
+                {% endblock additional_information %}
+                <!-- Statistics -->
+                <h4 class="h-border">{% trans "Statistics" %}</h4>
+                <p id="nbPapersFound">
+                    {% blocktrans trimmed with formattedCounter=nb_results|intcomma count counter=nb_results|default:0 %}
+                        {{ formattedCounter }} paper found
+                        {% plural %}
+                        {{ formattedCounter }} papers found
+                    {% endblocktrans %}
+                </p>
+                <form method="get" action="." id="searchPapers" data-ajax-url="{% block ajax_url %}{% endblock ajax_url %}">
+                    <div class="form-group" id="searchPaperCombinedStatus">
+                        {% with combined_status_form=True %}
+                            {% with combined_status=form.status %}
+                                {% include "statistics/pie_chart_legend.html" with stats=search_stats object_id=researcher.object_id stats_counter=1 %}
+                            {% endwith %}
+                        {% endwith %}
+                    </div>
+
+
+                    <!-- Refine -->
+                    <h4 class="h-border">{% trans "Refine" %}</h4>
+
+                    <!-- Title -->
+                    <div class="form-group">
+                        <label for="{{ form.q.id_for_label }}"><strong>{% trans "By title" %}</strong></label>
+                        {% render_field form.q class="form-control" %}
+                    </div>
+
+                    <!-- Authors -->
+                    <div class="form-group">
+                        <label for="{{ form.authors.id_for_label }}">
+                            <strong>
+                                {% if researcher %}
+                                    {% trans "By co-authors" %}
+                                {% else %}
+                                    {% trans "By authors" %}
+                                {% endif %}
+                            </strong>
+                        </label>
+                            {% render_field form.authors class="form-control" %}
+                    </div>
+
+                    <!-- Publication date -->
+
+                    <label><strong>{% trans "By publication date" %}</strong></label>
+                    <div class="form-group row">
+                        <label class="col-2 col-form-label" for="{{ form.pub_after.id_for_label }}">{% trans "after" %}</label>
+                        <div class="col-10">
+                            {% render_field form.pub_after class="form-control" %}
+                        </div>
+                    </div>
+                    <div class="form-group row" id="searchPaperPubDateBefore">
+                        <label class="col-2 col-form-label" for="{{ form.pub_before.id_for_label }}">{% trans "before" %}</label>
+                        <div class="col-10">
+                            {% render_field form.pub_before class="form-control" %}
+                        </div>
+                    </div>
+
+                    <!-- Document type -->
+                    <div class="form-group">
+                        <label><strong>{% trans "By document type" %}</strong></label>
+                        <div>
+                            {% comment %}
+                                There are currently 13 doctypes, we place 7 in first column, then 6 in second. This is not really save on changing the number of doctypes.
+                            {% endcomment %}
+                            <div class="row">
+                                {% for checkbox in form.doctypes %}
+                                    {% if forloop.first or forloop.counter0 == 7 %}
+                                        <div class="col 12 col-md-6">
+                                    {% endif %}
+                                        <div class="form-check">
+                                            {{ checkbox.tag }}
+                                            <label class="form-check-label" for="{{ checkbox.id_for_label }}">{{ checkbox.choice_label }}</label>
+                                        </div>
+                                    {% if forloop.counter0 == 6 or forloop.last %}
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sort by -->
+                    <div class="form-group">
+                        <label><strong>{% trans 'Sort by' %}</strong></label>
+                        {% for radioitem in form.sort_by %}
+                            <div class="form-check">
+                                {{ radioitem.tag }}
+                                <label class="form-check-label" for="{{ radioitem.id_for_label }}">{{ radioitem.choice_label }}</label>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    {% comment %}
+                        Fields for super user only. We do not care to much about look and feel, since this is not public.
+                    {% endcomment %}
+
+                    {% if request.user.is_superuser %}
+                        <h5 class="h-border">{% trans 'Refine for superusers' %}</h5>
+                        <div class="form-group">
+                            <label for="{{ form.visible.id_for_label }}">{% trans "By visibility" %}</label>
+                            {% render_field form.visible class="form-control" %}
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.availability.id_for_label }}">{% trans "By full text availability" %}</label>
+                        {% render_field form.availability class="form-control" %}
+                        </div>
+                        <div class="form-group">
+                            <label>{% trans "By publisher policy" %}</label>
+                            {% for checkbox in form.oa_status %}
+                                <div class="form-check">
+                                    {{ checkbox.tag }}
+                                    {{ checkbox.choice_label }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <div class="form-group d-flex justify-content-center">
+                        <button class="btn btn-search"><span class="oi oi-magnifying-glass" aria-hidden="true"></span> Refine</button>
+                    </div>
+
+                </form>
+
+                {% comment %}
+                    Currently disabled, due to Issue #851
+                <!-- Tools -->
+                <h4 class="h-border">{% trans "Tools" %}</h4>
+
+                <!-- Export as citations -->
+                <p><a href="#" data-toggle="modal" data-target="#exportCitationModal">{% trans "Export citations for current page" %}</a></p>
+                {% endcomment %}
+            </div>
+
+            <!-- Content for results -->
+            <div class="col-12 col-md-8 order-md-first">
+                <h2 class="h-border pb-3">{{ search_description }}</h2>
+
+                <div class="justify-content-center d-none" id="paperSearchWaitingArea">
+                    <div>
+                        <img class="rounded-circle bg-secondary m-2" style="max-height: 8rem;" src ="{% static 'img/animated-bird.gif' %}" alt="{% trans 'Paper animated bird' %}" />
+                        <p class="text-center font-italic">{% trans 'Refreshing results' %}…</p>
+                    </div>
+                </div>
+
+                <div id="searchNotifications">
+                    {% include "papers/messages.html" %}
+                </div>
+
+                <div id="paperSearchResults">
+                    {% include "papers/paper_list.html" %}
+                </div>
+
+                {% block missing_publications %}
+                {% endblock missing_publications %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}

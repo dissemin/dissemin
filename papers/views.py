@@ -18,19 +18,16 @@
 #
 
 
-
 import json
-from statistics.models import COMBINED_STATUS_CHOICES
-from statistics.models import BareAccessStatistics
 
 from allauth.exceptions import ImmediateHttpResponse
 from allauth.socialaccount.signals import pre_social_login
 from allauth.account.signals import user_logged_in
-from deposit.models import DepositRecord
+from haystack.generic_views import SearchView
+
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
-from django.urls import reverse
 from django.http import Http404
 from django.http import HttpResponse
 from django.http import HttpResponseForbidden
@@ -39,30 +36,27 @@ from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.template import loader
+from django.urls import reverse
 from django.utils.encoding import escape_uri_path
 from django.utils.translation import ugettext as _
 from django.utils.http import urlencode
 from django.utils.six.moves.urllib.parse import unquote
-from django.views import generic
 from django.views.generic.edit import FormView
-from haystack.generic_views import SearchView
-from notification.api import get_notifications
+
+from deposit.models import DepositRecord
+from notification.models import Notification
 from papers.doi import to_doi
 from papers.doi import doi_to_url
 from papers.errors import MetadataSourceException
-from papers.forms import PaperForm
-from papers.forms import FrontPageSearchForm
-from papers.models import Department
-from papers.models import Institution
+from papers.forms import PaperSearchForm
 from papers.models import Paper
 from papers.models import Researcher
 from papers.user import is_admin
 from papers.user import is_authenticated
 from papers.utils import validate_orcid
-from publishers.models import Journal
-from publishers.models import Publisher
 from publishers.views import SlugDetailView
 from search import SearchQuerySet
+from statistics.models import BareAccessStatistics
 
 
 def fetch_on_orcid_login(sender, sociallogin, **kwargs):
@@ -116,23 +110,10 @@ user_logged_in.connect(complete_researcher_profile_on_orcid_login)
 NB_RESULTS_PER_PAGE = 20
 
 
-def index(request):
-    """
-    View for the home page
-    """
-    context = {
-        'search_form': FrontPageSearchForm(),
-        'combined_status':
-            [{'choice_value': v, 'choice_label': l} for v, l in COMBINED_STATUS_CHOICES],
-            'latest_deposits': DepositRecord.objects.filter(status='published').select_related('oairecord', 'paper', 'repository').order_by('-pub_date')[:5],
-        }
-    return render(request, 'papers/index.html', context)
-
-
 class AdvancedPaperSearchView(FormView):
     """Displays the full search form."""
     template_name = 'papers/advanced_search.html'
-    form_class = PaperForm
+    form_class = PaperSearchForm
 
 
 class PaperSearchView(SearchView):
@@ -140,30 +121,34 @@ class PaperSearchView(SearchView):
 
     paginate_by = NB_RESULTS_PER_PAGE
     template_name = 'papers/search.html'
-    form_class = PaperForm
+    form_class = PaperSearchForm
     queryset = SearchQuerySet().models(Paper)
 
     def get(self, request, *args, **kwargs):
+        """
+        If the user is no admin, we remove visivle, availability and oa_status GET statements
+        """
         if not is_admin(request.user):
             request.GET = request.GET.copy()
             request.GET.pop('visible', None)
             request.GET.pop('availability', None)
             request.GET.pop('oa_status', None)
 
-        return super(PaperSearchView, self).get(request, *args, **kwargs)
+        return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(PaperSearchView, self).get_context_data(**kwargs)
+        """
+        We add some context data.
+        """
+        context = super().get_context_data(**kwargs)
         search_description = _('Papers')
         query_string = self.request.META.get('QUERY_STRING', '')
         context['breadcrumbs'] = [(search_description, '')]
-        context['search_description'] = (
-            search_description if query_string else _('All papers'))
-        context['head_search_description'] = _('Papers')
+        context['search_description'] = search_description if query_string else _('All papers')
+        context['search_description_title'] = _('Papers')
         context['nb_results'] = self.queryset.count()
         context['search_stats'] = BareAccessStatistics.from_search_queryset(self.queryset)
         context['on_statuses'] = json.dumps(context['form'].on_statuses())
-        context['ajax_url'] = reverse('ajax-search')
 
         # Eventually remove sort by parameter
         search_params_without_sort_by = self.request.GET.copy()
@@ -171,33 +156,24 @@ class PaperSearchView(SearchView):
             del search_params_without_sort_by['sort_by']
         except KeyError:
             pass
+
         # Make a clean URL with useless GET params
         for key in list(search_params_without_sort_by.keys()):
             if not search_params_without_sort_by[key]:
                 del search_params_without_sort_by[key]
-        context['search_params_without_sort_by'] = (
-            search_params_without_sort_by.urlencode()
-        )
+        context['search_params_without_sort_by'] = search_params_without_sort_by.urlencode()
+
         # Get current sort_by value
-        current_sort_by_value = self.request.GET.get(
-            'sort_by',
-            None
-        )
+        current_sort_by_value = self.request.GET.get('sort_by', None)
         try:
-            current_sort_by = next(
-                v
-                for k, v in self.form_class.SORT_CHOICES
-                if k == current_sort_by_value
-            )
+            current_sort_by = next(v for k, v in self.form_class.SORT_CHOICES if k == current_sort_by_value)
         except StopIteration:
             current_sort_by = self.form_class.SORT_CHOICES[0][1]
         context['current_sort_by'] = current_sort_by
 
         # Notifications
-        # TODO: unefficient query.
-        notifications = get_notifications(self.request)
-        selected_messages = [n.serialize_to_json() for n in sorted(notifications, key=lambda msg: msg.level)[:3]]
-        context['messages'] = selected_messages
+        if self.request.user.is_authenticated:
+            context['messages'] = Notification.objects.filter(inbox__user=self.request.user).order_by('-date')[:3]
 
         return context
 
@@ -207,7 +183,7 @@ class PaperSearchView(SearchView):
         was passed, in which case we add a default empty query.
         Otherwise the search form is not bound and search fails.
         """
-        args = super(PaperSearchView, self).get_form_kwargs()
+        args = super().get_form_kwargs()
 
         if 'data' not in args:
             args['data'] = {self.search_field: ''}
@@ -215,21 +191,29 @@ class PaperSearchView(SearchView):
         return args
 
     def render_to_response(self, context, **kwargs):
+        """
+        If JSON is requested, we deliver JSON, else normal HTML
+        """
         if self.request.META.get('CONTENT_TYPE') == 'application/json':
             response = self.raw_response(context, **kwargs)
-            return HttpResponse(json.dumps(response),
-                                content_type='application/json')
-        return super(PaperSearchView, self)\
-            .render_to_response(context, **kwargs)
+            return HttpResponse(
+                json.dumps(response),
+                content_type='application/json'
+            )
+        return super().render_to_response(context, **kwargs)
 
     def raw_response(self, context, **kwargs):
+        """
+        A raw response, containing meta information and some HTML
+        """
         context['request'] = self.request
-        listPapers = loader.render_to_string('papers/paperList.html', context)
+        listPapers = loader.render_to_string('papers/paper_list.html', context)
+        messages = loader.render_to_string('papers/messages.html', context)
         stats = context['search_stats'].pie_data()
         stats['on_statuses'] = context['form'].on_statuses()
         return {
             'listPapers': listPapers,
-            'messages': context['messages'],
+            'messages' : messages,
             'stats': stats,
             'nb_results': context['nb_results'],
         }
@@ -266,11 +250,9 @@ class MyTodoListView(LoginRequiredMixin, PaperSearchView):
         """
         context = super().get_context_data(**kwargs)
 
-        context['ajax_url'] = reverse('ajax-todolist')
-
         context['breadcrumbs'] = [(_('To-do list'), None)]
-        context['head_search_description'] = context['search_description'] = _('Papers on my to-do list')
-        context['view'] = 'my-todolist'
+        context['search_description_title'] = context['search_description'] = _('Papers on my to-do list')
+        context['todolist_fadeout'] = True
 
         return context
 
@@ -279,6 +261,8 @@ class ResearcherView(PaperSearchView):
     """
     Displays the papers of a given researcher.
     """
+
+    template_name = 'papers/researcher.html'
 
     def get(self, request, *args, **kwargs):
         if 'researcher' in kwargs:
@@ -315,21 +299,17 @@ class ResearcherView(PaperSearchView):
         researcher = self.researcher
         # researcher corresponding to the currently logged in user
         try:
-            context['user_researcher'] = Researcher.objects.get(user=self.request.user)
+            Researcher.objects.get(user=self.request.user)
         except (Researcher.DoesNotExist, TypeError):
             pass # no logged in user
+        else:
+            context['profile_fadeout'] = True
         context['researcher'] = researcher
         context['researcher_id'] = researcher.id
         context['search_description'] += ' ' + _('authored by') + ' ' +str(researcher)
-        context['head_search_description'] = str(researcher)
+        context['search_description_title'] = str(researcher)
         context['breadcrumbs'] = researcher.breadcrumbs()
-        context['ajax_url'] = reverse(
-            'ajax-researcher',
-            kwargs={
-                'researcher': researcher.id,
-                'slug': researcher.slug
-            }
-        )
+
         return context
 
     def raw_response(self, context, **kwargs):
@@ -341,66 +321,22 @@ class ResearcherView(PaperSearchView):
         return response
 
 
-class DepartmentPapersView(PaperSearchView):
+class MyProfileView(LoginRequiredMixin, ResearcherView):
     """
-    Displays the papers of researchers from a given department in an
-    institution.
+    View for my profile. It is basically a researcher view
     """
+
+    template_name = 'papers/profile.html'
 
     def get(self, request, *args, **kwargs):
-        self.dept = get_object_or_404(Department, pk=kwargs.get('pk'))
-        self.queryset = self.queryset.filter(departments=self.dept.id)
-        return super(DepartmentPapersView, self).get(request, *args, **kwargs)
+        """
+        We fetch the researcher, set a queryset and then pass to super of ResearcherView, as we don't want ResearcherViews get in this case
+        """
+        self.researcher = Researcher.objects.get(user=request.user)
+        self.queryset = self.queryset.filter(researchers=self.researcher.id)
 
-    def get_context_data(self, **kwargs):
-        context = super(DepartmentPapersView, self).get_context_data(**kwargs)
-        context['department'] = self.dept
-        context['search_description'] = context['head_search_description'] = (
-            str(self.dept))
-        context['breadcrumbs'] = self.dept.breadcrumbs()+[(_('Papers'), '')]
-        return context
+        return super(ResearcherView, self).get(request, *args, **kwargs)
 
-
-class PublisherPapersView(PaperSearchView):
-    """
-    Displays the papers of a given publisher.
-
-    :class:`PublisherPapersView` is subclassed by :class:`JournalPapersView`,
-    which simply overrides a couple of variables.
-    """
-
-    publisher_key = 'publisher'
-    publisher_cls = Publisher
-    published_by = _(' published by ')
-
-    def get(self, request, *args, **kwargs):
-        if not is_admin(request.user):
-            raise Http404()
-        publisher = get_object_or_404(
-            self.publisher_cls, pk=kwargs[self.publisher_key])
-        self.publisher = publisher
-        self.queryset = self.queryset.filter(
-            **{self.publisher_key: publisher.id})
-        return super(PublisherPapersView, self)\
-            .get(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        publisher = self.publisher
-        context = super(PublisherPapersView, self)\
-            .get_context_data(**kwargs)
-        context[self.publisher_key] = publisher
-        context['search_description'] += self.published_by+str(publisher)
-        context['head_search_description'] = str(publisher)
-        context['breadcrumbs'] = publisher.breadcrumbs()+[(_('Papers'), '')]
-        return context
-
-
-class JournalPapersView(PublisherPapersView):
-    """Displays the papers in a given journal."""
-
-    publisher_key = 'journal'
-    publisher_cls = Journal
-    published_by = _(' in ')
 
 # TODO: this should be moved to /ajax/
 
@@ -417,54 +353,10 @@ def refetch_researcher(request, pk):
     return redirect(reverse('researcher', kwargs=view_args))
 
 
-@user_passes_test(is_authenticated)
-def myProfileView(request):
-    try:
-        r = Researcher.objects.get(user=request.user)
-        return ResearcherView.as_view()(request,
-                                        researcher=r.pk,
-                                        slug=r.slug)
-    except Researcher.DoesNotExist:
-        return HttpResponse(
-            render(
-                request,
-                'dissemin/error.html',
-                {
-                    'message': _(
-                        'Dissemin requires access to your ORCID name.')
-                }
-            )
-        )
-
-class DepartmentView(generic.DetailView):
-    model = Department
-    template_name = 'papers/department.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(DepartmentView, self).get_context_data(**kwargs)
-        context['breadcrumbs'] = self.object.breadcrumbs()
-        return context
-
-
-class InstitutionView(SlugDetailView):
-    model = Institution
-    template_name = 'papers/institution.html'
-    view_name = 'institution'
-
-    def get_context_data(self, **kwargs):
-        context = super(InstitutionView, self).get_context_data(**kwargs)
-        context['breadcrumbs'] = self.object.breadcrumbs()
-        return context
-
-
 class PaperView(SlugDetailView):
     model = Paper
     template_name = 'papers/paper.html'
     view_name = 'paper'
-
-    def departments(self):
-        paper = self.object
-        return Department.objects.filter(researcher__author__paper=paper).distinct()
 
     def get_object(self, queryset=None):
         if queryset is None:
@@ -495,6 +387,8 @@ class PaperView(SlugDetailView):
         if not paper.visible:
             raise Http404(_("This paper has been deleted."))
 
+        paper = queryset.prefetch_related('oairecord_set').get(pk=paper.pk)
+
         return paper
 
     def get_context_data(self, **kwargs):
@@ -513,11 +407,6 @@ class PaperView(SlugDetailView):
             except (TypeError, ValueError, DepositRecord.DoesNotExist):
                 pass
 
-        context['can_be_deposited'] = (
-            not self.request.user.is_authenticated or 
-            self.object.can_be_deposited(self.request.user)
-        )
-
         # Pending deposits
         if not context['deposit']:
             context['pending_deposits'] = self.object.depositrecord_set.filter(status='pending')
@@ -531,8 +420,6 @@ class PaperView(SlugDetailView):
             kwargs['pk'] = self.object.pk
         return super(PaperView, self).redirect(**kwargs)
 
-class InstitutionsMapView(generic.base.TemplateView):
-    template_name = 'papers/institutions.html'
 
 def redirect_by_doi(request, doi):
     """

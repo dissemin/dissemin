@@ -1,0 +1,143 @@
+/* ***
+ * Colors
+ * *** */
+
+.bg-blue {
+    background-color: #2A6496;
+}
+
+.bg-light-blue {
+    background-color: #5F8BB0;
+}
+
+
+/* ***
+ * Images
+ * *** */
+
+.orcidInlineBadge {
+    height: 1em;
+}
+
+/* Status images should have a max-height when used in responsive areas */
+@each $var in '1', '2', '3', '4', '5', '6', '7', '8' {
+  .statusImage-#{$var} { max-height: #{$var}rem; };
+}
+
+/* ***
+ * Navigation bar
+ * *** */
+
+/* We remove the background image to have no arrows in this select*/
+#set-language {
+    background-image: none;
+}
+
+
+/* ***
+ * Publishers
+ * *** */
+
+.policyCircle {
+    max-height: 1.5rem;
+}
+
+
+/* ***
+ * Statistic Pie
+ * *** */
+
+.stats_caption_box {
+	display:table-cell;
+	vertical-align:middle;
+}
+
+/* Custom checkmark only visible if checked and last column*/
+.statsCaptionCheckmark
+{
+    display: table-cell;
+    text-align: right;
+    visibility: hidden;
+}
+
+input[type=checkbox]:checked ~ .statsCaptionCheckmark
+{
+    visibility: visible;
+}
+
+.stats_caption_color {
+	display:inline-block;
+	width:20px;
+	height:1em;
+	margin:0;
+	vertical-align:middle;
+}
+
+.stats_caption_label {
+	display:table-cell;
+	vertical-align:middle;
+	padding:1px;
+	padding-left:7px;
+	width:99%;
+}
+
+.stats_caption_label_text {
+    overflow:hidden;
+    display:inline-block;
+    vertical-align:top;
+}
+
+.stats_caption_label_text:hover {
+    text-decoration: underline;
+}
+
+.stats_caption_table {
+    display:table;
+    text-align:left;
+}
+
+.stats_caption_table label {
+    margin: -0.2rem;
+    width: 100%;
+}
+
+
+/* ***
+ * Startpage
+ * *** */
+
+#screenWelcome {
+    background-color: #2A6496;
+}
+
+#screenGreenOpenAccess {
+    background-color: #71AF33;
+}
+
+#screenOpenRepositories {
+    background-color: #2A6496;
+}
+
+#screenLatestUploads {
+    background-color: #5F8BB0;
+}
+
+#screenDisseminData {
+    background-color: #2A6496;
+}
+
+#screenDisseminData a {
+    color: white;
+}
+
+#screenDisseminData .statsSliceLegend {
+    fill: white;
+}
+
+#screenDisseminForLibraries {
+    background-color: #5F8BB0;
+}
+
+#screenPartners {
+    background-color: #71AF33;
+}

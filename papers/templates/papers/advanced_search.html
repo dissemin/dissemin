@@ -1,113 +1,84 @@
-{% extends "dissemin/skeleton.html" %}
+{% extends "base.html" %}
 
+{% load crispy_forms_tags %}
 {% load i18n %}
 {% load static %}
-
-{% load statuses %}
 {% load widget_tweaks %}
-{% load capture_tags %}
 
-{% block headTitle %}{% trans "Advanced search" %}{% endblock %}
+{% block title %}{% trans "Advanced Search" %}{% endblock %}
 
-{% block extra_head %}
-{{ form.media }}
-{% endblock %}
-
-{% block jsScript %}
-$(function(){
-    $('[data-toggle="tooltip"]').tooltip();
-});
-{% endblock %}
 
 {% block content %}
-<div id="fullPage">
-    <h2 class="text-center">{% trans "Advanced search" %}</h2>
-    <form method="get" action="{% url "search" %}" id="advancedSearchPapers">
-        <div class="form-group" id="searchPapersName">
-            <label for="{{ form.q.id_for_label}}">{% trans "By title" %}</label>
-                {{ form.q.errors }}
+    <div class="container pb-3">
+        <h1 class="text-center pt-3">{% trans "Advanced search" %}</h1>
+        {% comment %}
+            We do not use crispy forms here, since we want to arrange some things very individually.
+        {% endcomment %}
+        <form method="get" action="{% url "search" %}">
+            <div class="form-group">
+                <label for="{{ form.q.id_for_label }}">{% trans "Title" %}</label>
                 {% render_field form.q class="form-control" %}
             </div>
-            <div class="form-group" id="searchAuthorsName">
-                <label for="{{ form.authors.id_for_label }}">
-                    {% if researcher %}
-                        {% trans "By co-authors" %}
-                    {% else %}
-                        {% trans "By authors" %}
-                    {% endif %}&nbsp;<span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="bottom" data-html="true"  title="{% trans "<ul><li>Use author names or ORCID identifiers.</li><li>Use commas as name separator.</li><li>Prefix with <code>last:</code> to enforce last name search.</li></ul>" %}" tabindex="0"></span>
-                </label>
-                {{ form.authors.errors }}
-                {% render_field form.authors class="form-control" %}
+            <div class="form-group">
+                <label for="{{ form.authors.id_for_label }}">{% trans "Authors" %}</label>
+                {% render_field form.authors class="form-control" aria-describedby="authorsHelpBlock" %}
+                <small id="authorsHelpBlock" class="form-text text-muted">{% trans "Search by names or ORCIDs. Separate with commas and prefix with <code>last:</code> to enforce last name search." %}</small>
             </div>
-            <div class="form-horizontal">
-                <p class="labelP">{% trans "By publication date" %}</p>
-                <div class="form-group" id="searchPaperPubDateAfter">
-                    {{ form.pub_after.errors }}
-                    <label class="col-xs-2 col-sm-3 control-label tightLabel" for="{{ form.pub_after.id_for_label }}">{% trans "after" %}</label>
-                    <div class="col-xs-10 col-sm-9 tightInput">
-                        {% render_field form.pub_after class="form-control" %}
-                    </div>
+            <div class="row">
+                <div class="form-group col-12 col-md-6">
+                    <label for="{{ form.pub_before.id_for_label }}">Published before</label>
+                    {% render_field form.pub_before class="form-control" %}
                 </div>
-                <div class="form-group" id="searchPaperPubDateBefore">
-                    {{ form.pub_before.errors }}
-                    <label class="col-xs-2 col-sm-3 control-label tightLabel" for="{{ form.pub_before.id_for_label }}">{% trans "before" %}</label>
-                    <div class="col-xs-10 col-sm-9 tightInput">
-                        {% render_field form.pub_before class="form-control" %}
-                    </div>
+                <div class="form-group col-12 col-md-6">
+                    <label for="{{ form.pub_after.id_for_label }}">Published after</label>
+                    {% render_field form.pub_after class="form-control" %}
                 </div>
             </div>
-            <div class="form-group" id="searchPapersDoctype">
-                {{ form.doctypes.errors }}
-                <fieldset>
-                    <legend class="labelP">{% trans "By document type" %}</legend>
-                    <ul class="compactList">
-                        {% for checkbox in form.doctypes %}
-                        <li class="checkbox">
-                            <label class="doctype">
-                                {{ checkbox.tag }}
-                                {{ checkbox.choice_label }}
-                            </label>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </fieldset>
+            <div class="form-group">
+                <label>{% trans "Document type" %}</label>
+                <div class="row">
+                    {% for checkbox in form.doctypes %}
+                        {% if forloop.counter0|divisibleby:"3" %}
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                        {% endif %}
+                        <div class="form-check ">
+                            {{ checkbox.tag }}
+                            <label class="form-check-label" for="{{ checkbox.id_for_label }}">{{ checkbox.choice_label}}</label>
+                        </div>
+                        {% if forloop.counter0|add:"-2"|divisibleby:"3" or forloop.last %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
             </div>
             {% if request.user.is_superuser %}
-            <div class="form-group" id="searchPapersVisibility">
-                <label for="{{ form.visible.id_for_label }}">{% trans "By visibility" %}</label>
-                {{ form.visible.errors }}
-                {% render_field form.visible class="form-control" %}
-            </div>
-            <div class="form-group" id="searchPapersPDFAvailability">
-                <label for="{{ form.availability.id_for_label }}">{% trans "By full text availability" %}</label>
-                {{ form.availability.errors }}
+                {% comment %}
+                    We do not care to much about (responsive) design in case of super users. They are rare.
+                {% endcomment %}
+                <h4>{% trans "Fields for superusers" %}</h4>
+                <div class="form-group">
+                    <label for="{{ form.visible.id_for_label }}">{% trans "By visibility" %}</label>
+                    {% render_field form.visible class="form-control" %}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.availability.id_for_label }}">{% trans "By full text availability" %}</label>
                 {% render_field form.availability class="form-control" %}
-            </div>
-            <div class="form-group" id="searchPapersOAStatus">
-                {{ form.oa_status.errors }}
-                <span class="span-label">{% trans "By publisher policy" %}</span>
-                {% for checkbox in form.oa_status %}
-                {% with value=checkbox.data.value %}
-                <div class="logoHelpPopover" data-content="{{ value|helptext_oa_status }}">
-                <div class="checkbox publisherCriterion">
-                    {{ checkbox.tag }}
-                    <div class="publisherCriterionBox">
-                    <label for="{{ checkbox.id_for_label }}">
-                        <img alt="{{ value|helptext_oa_status }}" src="{% static value|logo_oa_status %}" height="70" width="52" class="pubLogo publisherCriterionLogo">
-                        <span class="criterionItem">{{ checkbox.choice_label }}</span>
-                    </label>
-                    </div>
                 </div>
+                <div class="form-group">
+                    <label>{% trans "By publisher policy" %}</label>
+                    {% for checkbox in form.oa_status %}
+                        <div class="form-check">
+                            {{ checkbox.tag }}
+                            {{ checkbox.choice_label }}
+                        </div>
+                    {% endfor %}
                 </div>
-                {% endwith %}
-                {% endfor %}
-            </div>
             {% endif %}
-            <div class="form-group text-center">
-                <button type="submit" class="btn btn-primary btn-search">
-                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;{% trans "Search" %}
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-success text-center">
+                    <span class="oi oi-magnifying-glass"></span> Search
                 </button>
-        </div>
-    </form>
-</div>
+            </div>
+        </form>
+    </div>
 {% endblock %}

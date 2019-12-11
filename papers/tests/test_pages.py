@@ -19,7 +19,6 @@
 #
 
 
-import os
 import pytest
 
 from datetime import date
@@ -27,14 +26,23 @@ from mock import patch
 
 from django.urls import reverse
 
-from deposit.models import DepositRecord
-from dissemin.settings import BASE_DIR
 from papers.baremodels import BareName
 from papers.models import OaiRecord
 from papers.models import Paper
 from papers.models import Researcher
 from papers.doi import doi_to_url
-from upload.models import UploadedPDF
+
+
+class TestAdvancedSearchView():
+    """
+    Test for the AdvancedSearchView
+    """
+
+    def test_advanced_search(self, check_page):
+        """
+        Checks the html of the advanced search
+        """
+        check_page(200, 'advanced-search')
 
 
 @pytest.mark.usefixtures("load_test_data")
@@ -53,68 +61,11 @@ class TestDoai():
 
 
 @pytest.mark.usefixtures("load_test_data")
-class TestInstitutionPages():
-
-    def test_dept(self, check_url):
-        check_url(200, self.d.url)
-        check_url(200, self.di.url)
-
-    def test_univ(self, check_url):
-        check_url(200, self.i.url)
-
-
-class TestMiscPages(object):
-    """
-    Tests various more or less static pages
-    """
-
-    def test_index(self, db, check_page, dummy_repository, book_god_of_the_labyrinth, user_leibniz):
-        """
-        Tests the start page, which fetches some data from the DB
-        """
-        pdf = UploadedPDF.objects.create(
-            user=user_leibniz,
-            file='spam.pdf',
-        )
-        DepositRecord.objects.create(
-            paper=book_god_of_the_labyrinth,
-            user=user_leibniz,
-            repository=dummy_repository,
-            status='published',
-            pub_date=date.today(),
-            file=pdf,
-        )
-        check_page(200, 'index')
-
-
-    @pytest.mark.parametrize('page', ['account_login', 'faq', 'sources', 'tos'])
-    def test_static(self, page, check_page):
-        """
-        Tests above static pages
-        """
-        check_page(200, page)
-
-
-class TestPaperCSS():
-    """
-    Class that groups CSS tests for papers
-    """
-    def test_paper_css(self, css_validator):
-        """
-        Tests the css files
-        """
-        css_validator(os.path.join(BASE_DIR, 'papers', 'static', 'style'))
-
-
-@pytest.mark.usefixtures("load_test_data")
 class TestPaperPages():
     """
     Test class to test various paper related pages
     The tests could be improved / more explicit, because they rely on load_test_data, which loads a lot of things, but noone knows what.
     """
-
-    def test_department_papers(self, check_page):
-        check_page(200, 'department-papers', kwargs={'pk': self.di.pk})
 
     def test_invalid_doi(self, check_status):
         check_status(404, 'paper-doi', kwargs={'doi':'10.1blabla'})
@@ -130,11 +81,6 @@ class TestPaperPages():
         p.visible = False
         p.save()
         check_status(404, 'paper', kwargs={'pk': p.id, 'slug': p.slug})
-
-    def test_journal(self, check_status):
-        # TODO checkPage when logged in as superuser.
-        # Move to publisher app?
-        check_status(404, 'journal', kwargs={'journal': self.lncs.pk})
 
     def test_missing_info_in_pub(self, db, check_page):
         p = Paper.create_by_doi('10.1007/978-3-642-14363-2_7')
@@ -184,11 +130,6 @@ class TestPaperPages():
         assert p.slug == ''
         check_page(200, 'paper', args=[p.pk, p.slug])
 
-    def test_publisher_papers(self, check_status):
-        # TODO checkPage when logged in as superuser.
-        # Move to publisher app?
-        check_status(404, 'publisher-papers', args=[self.acm.pk, self.acm.slug])
-
     def test_researcher(self, check_page):
         for r in [self.r1, self.r2, self.r3, self.r4]:
             check_page(200, 'researcher', kwargs={'researcher': r.pk, 'slug': r.slug})
@@ -230,7 +171,7 @@ class TestPaperPages():
         with patch.object(fetch_everything_for_researcher, 'delay') as task_mock:
             check_status(302, 'refetch-researcher', kwargs={'pk':self.r4.id}, client=authenticated_client_su)
 
-            task_mock.assert_called_once_with(pk=str(self.r4.id))
+            task_mock.assert_called_once_with(pk=self.r4.id)
 
     def test_update_researcher_wrong_user(self, check_status, authenticated_client):
         """
@@ -286,8 +227,6 @@ class TestTodoList():
 
         assert len(response.context['object_list']) == 1
         assert book_god_of_the_labyrinth.pk in [paper.pk for paper in response.context['object_list']]
-        assert response.context['view'] == 'my-todolist'
-        assert response.context['ajax_url'] == reverse('ajax-todolist')
 
 
 # TODO TO BE TESTED

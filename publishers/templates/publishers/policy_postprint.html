@@ -1,0 +1,17 @@
+{% load i18n %}
+{% load statuses %}
+
+
+<span class="border-bottom-dotted border-primary" data-toggle="tooltip" title="{% trans "Postprints differ from preprints in that they include the changes suggested by the reviewers. They are not edited by the publisher." %}">
+{% trans "Postprint" %}</span>:
+{{ publisher.postprint|explain_policy_short_no_punc }}
+
+{% if publisher.postprint_conditions %}
+    <ul class="my-0">
+        {% for restriction in publisher.preprint_conditions %}
+            <li>
+                {{ restriction|striptags }}
+            </li>
+        {% endfor %}
+     </ul>
+ {% endif %}

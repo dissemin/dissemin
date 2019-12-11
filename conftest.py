@@ -237,6 +237,18 @@ def check_page(request, dissemin_base_client, validator_tools):
     return checker
 
 
+@pytest.fixture
+def check_css(validator_tools):
+    """
+    Checks CSS
+    """
+    def checker(file_path):
+        vt = validator_tools
+        vt.check_css(file_path)
+
+    return checker
+
+
 @pytest.fixture(params=TEST_LANGUAGES)
 def check_html(request, validator_tools):
     """
@@ -247,7 +259,6 @@ def check_html(request, validator_tools):
         vt.check_html(response)
 
     return checker
-
 
 
 @pytest.fixture(params=TEST_LANGUAGES)
@@ -334,13 +345,41 @@ def validator_tools(dissemin_base_client, settings):
         """
 
         ignore_re = [
-            'Attribute "dp_config" not allowed on element', # Django Bootstrap DatetimePicker uses this extra attribute which is considered invalid by W3C validator. We filter that out.
+            'Property "text-decoration-skip-ink" doesn.t exist', # Bootstrap uses this, which is in W3C draft, but not in VNU
+            'Property "backdrop-filter" doesn\'t exist', # Bootstrap uses this, which is in W3C draft, but not in VNU
+            'The value "break-word" is deprecated', # Used by Bootstrap 4
         ]
 
         def __init__(self, client, settings):
             self.client = client
             # Deactivate Django tool bar, so that it does not interfere with tests
             settings.DEBUG_TOOLBAR_CONFIG = {'SHOW_TOOLBAR_CALLBACK': lambda r: False}
+
+        def check_css(self, file_path):
+            """
+            Chechs if a file is valid css
+            """
+            with open(file_path, 'rb') as fin:
+                content = fin.read()
+            if 'USE_VNU_SERVER' in os.environ:
+                validation_result = self.validation_vnu_server(content, 'text/css')
+            else:
+                validator = HTML5Validator(
+                    errors_only=True,
+                    ignore_re=self.ignore_re,
+                    vnu_args=["--css"],
+                )
+                validation_result = validator.validate([file_path])
+
+            # We fetch the AssertionError and raise it, to print the file with line numbers to stderr, because the written file will be removed
+            try:
+                assert validation_result == 0
+            except AssertionError:
+                print("THIS IST WHAT THE CSS LOOKS LIKE")
+                for index, item in enumerate(content.decode('utf-8').split("\n")[:-1]):
+                    print("{:3d} {}".format(index + 1, item))
+                raise
+
 
         def check_html(self, response, status=None):
             """
@@ -403,17 +442,18 @@ def validator_tools(dissemin_base_client, settings):
             return self.client.get(reverse(*args, **kwargs))
 
 
-        def validation_vnu_server(self, html):
+        def validation_vnu_server(self, content, mime='text/html'):
             """
-            Does html validation via vnu server. The postprocessing is taken from html5validator to have same output
-            :param html: html
+            Does validation via vnu server. The postprocessing is taken from html5validator to have same output
+            :param content: content to be validated
+            :param mime: MIME type
             :returns: string of errors
             """
             # Getting the errors
             headers = {
-                'Content-Type' : 'text/html; charset=utf-8'
+                'Content-Type' : '{}; charset=utf-8'.format(mime)
             }
-            r = requests.post('http://localhost:8888/?out=gnu&level=error', data=html, headers=headers).text
+            r = requests.post('http://localhost:8888/?out=gnu&level=error', data=content, headers=headers).text
             # Convert fancy quotes into normal quotes
             r = r.replace('“', '"')
             r = r.replace('”', '"')
@@ -428,15 +468,15 @@ def validator_tools(dissemin_base_client, settings):
 
             return len(r)
 
-        def validation_subprocess(self, html):
+        def validation_subprocess(self, content):
             """
-            Does html validation via subprocess and returns a string of errors
-            :param html: html
+            Does content validation via subprocess and returns a string of errors
+            :param content: content
             :returns: string of errors
             """
             # We need a temporary file
             with NamedTemporaryFile(delete=False) as fh:
-                fh.write(html)
+                fh.write(content)
             validator = HTML5Validator(
                 errors_only=True,
                 ignore_re=self.ignore_re,
@@ -451,18 +491,6 @@ def validator_tools(dissemin_base_client, settings):
 
     vt = ValidatorTools(dissemin_base_client, settings)
     return vt
-
-
-@pytest.fixture(scope="session")
-def css_validator():
-    """
-    Returns a function that takes a directory and validates all of its css files
-    """
-    def checker(directory):
-        validator = HTML5Validator(errors_only=True)
-        assert validator.validate([f for f in os.listdir(directory) if f.endswith('.css')]) == 0
-
-    return checker
 
 
 @pytest.fixture

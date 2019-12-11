@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}
+    {% trans "Internal server error" %}
+{% endblock title %}
+
+{% block content %}
+    <h1 class="text-center pt-5">{% trans "Internal server error" %}</h1>
+    {% url "index" as index %}
+    <p class="text-center">
+        {% blocktrans trimmed %}
+            Your request triggered an internal server error. <a href="{{ index }}">Go back to the home page.</a>
+        {% endblocktrans %}
+    </p>
+{% endblock content %}

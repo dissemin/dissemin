@@ -1,0 +1,46 @@
+{% load i18n %}
+{% load static %}
+{% load users %}
+
+<nav class="navbar navbar-expand-md navbar-dark bg-blue">
+    <a class="navbar-brand" href="{% url 'start-page' %}"><img src="{% static 'img/brand.png' %}" alt="{% trans 'Logo' %}" style="max-height:30px;" /> Dissemin</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <form class="form-inline" id="select-language" action="{% url 'set_language' %}" method="post">
+                    {% csrf_token %}
+                    <label class="sr-only" for="set-language">{% trans 'Language' %}</label>
+                    <select name="language" id="set-language" class="custom-select text-light text-md-right bg-transparent border-0 shadow-none">
+                        {% get_available_languages as LANGUAGES %}
+                        {% get_language_info_list for LANGUAGES as languages %}
+                        {% for language in languages %}
+                            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>{{ language.name_local.title }}</option>
+                        {% endfor %}
+                    </select>
+                    <noscript>
+                        <input type="submit" value="{% trans 'Translate' %}"/>
+                    </noscript>
+                </form>
+            </li>
+            {% if request.user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><span class="oi oi-person" aria-hidden="true"></span> {{ request.user|fullname }}</a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="{% url 'preferences-global' %}">{% trans 'Preferences' %}</a>
+                        <a class="dropdown-item" href="{% url 'my-deposits' %}">{% trans 'My deposits' %}</a>
+                        <a class="dropdown-item" href="{% url 'my-profile' %}">{% trans 'My profile' %}</a>
+                        <a class="dropdown-item" href="{% url 'my-todolist' %}">{% trans 'My to-do list' %}</a>
+                        <a class="dropdown-item" href="#" onclick="orcidLogout('{{ ORCID_BASE_DOMAIN }}')">{% trans 'Logout' %}</a>
+                    </div>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'account-login' %}?next={{ request.get_full_path |urlencode}}" rel="nofollow">{% trans 'Login' %}</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>

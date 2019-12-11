@@ -1,0 +1,97 @@
+{% load i18n %}
+{% load static %}
+{% load statuses %}
+{% load todolist %}
+
+<div class="container">
+    <!-- Preprint -->
+    <div class="row border-top border-gray-5 py-2">
+        <div class="col-auto pr-0">
+            {% include "publishers/policy_img.html" with policy=publisher.preprint %}
+        </div>
+        <div class="col">
+            {% include "publishers/policy_preprint.html" %}
+        </div>
+        {% if publisher.preprint != "cannot" %}
+            <div class="col-auto">
+                <a href="{% url 'upload-paper' paper.pk %}?type=preprint" class="btn btn-primary btn-sm"><span class="oi oi-data-transfer-upload" aria-hidden="true"></span> {% trans "Upload" %}</a>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Postprint -->
+    <div class="row border-top border-gray-5 py-2">
+        <div class="col-auto pr-0">
+            {% include "publishers/policy_img.html" with policy=publisher.postprint %}
+        </div>
+        <div class="col">
+            {% include "publishers/policy_postprint.html" %}
+        </div>
+        {% if publisher.postprint != "cannot" %}
+            <div class="col-auto">
+                <a href="{% url 'upload-paper' paper.pk %}?type=postprint" class="btn btn-primary btn-sm"><span class="oi oi-data-transfer-upload" aria-hidden="true"></span> {% trans "Upload" %}</a>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Published version -->
+    <div class="row border-top border-bottom border-gray-5 py-2">
+        <div class="col-auto pr-0">
+            {% include "publishers/policy_img.html" with policy=publisher.pdfversion %}
+        </div>
+        <div class="col">
+            {% include "publishers/policy_pdfversion.html" %}
+        </div>
+        {% if publisher.pdfversion != "cannot" %}
+            <div class="col-auto">
+                <a href="{% url 'upload-paper' paper.pk %}?type=pdfversion" class="btn btn-primary btn-sm"><span class="oi oi-data-transfer-upload" aria-hidden="true"></span> {% trans "Upload" %}</a>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- If publisher is known, include publisher link + sherpa / romeo acknowledgement -->
+    {% if publisher.pk %}
+        <div class="row border-top border-bottom-2 border-gray-5 py-1">
+            <div class="col-auto mr-auto">
+                <a href="{% url "publisher" publisher.pk publisher.slug %}">{% trans "Policy details" %}</a>
+            </div>
+            <div class="col-auto">
+                Data provided by <a href="http://www.sherpa.ac.uk/romeo/"><img src="{% static "img/sherpa-romeo.gif" %}" alt="SHERPA/RoMEO" style="max-height: 1.5rem;" /></a>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if request.user.is_authenticated %}
+        <!-- If user logged in and paper not on his/her to-do list, add button -->
+        {% todolist request.user paper as on_todolist %}
+        {% if not on_todolist %}
+            <div class="row border-bottom border-gray-5 py-2">
+                <div class="col-auto pr-0">
+                    <img class="img-fluid policyCircle" src="{% static "img/blue-circle.png" %}" alt="{% trans "Blue circle" %}" />
+                </div>
+                <div class="col">
+                    <span class="border-bottom-dotted border-primary" data-toggle="tooltip" title="{% trans "Mark this publication for later upload." %}">{% trans "Mark for later upload" %}</span>
+                </div>
+                <div class="col-auto">
+                    <button role="button" class="btn btn-primary btn-sm" id="paperButtonTodoList" data-paper-pk="{{ paper.pk }}"><span class="oi oi-pencil" aria-hidden="true"></span> {% trans "Mark" %}</button>
+                    <span id="paperTodoListAdded" class="d-none" aria-hidden="true"><span class="oi oi-check" aria-hidden="true"></span> {% trans "Marked" %}</span>
+                </div>
+            </div>
+        {% endif %}
+
+        <!-- If user logged in and paper not liberated and has doi add open access button -->
+        {% if paper.get_doi and not paper.pdf_url %}
+            <div class="row border-bottom border-gray-5 py-2">
+                <div class="col-auto pr-0">
+                    <img class="img-fluid policyCircle" src="{% static "img/blue-circle.png" %}" alt="{% trans "Blue circle" %}" />
+                </div>
+                <div class="col">
+                    <span class="border-bottom-dotted border-primary" data-toggle="tooltip" title="{% trans "Contact the authors to make this publication freely available. This is a service of the Open Access Button." %}">{% trans "Contact authors" %}</span>
+                </div>
+                <div class="col-auto">
+                    <a href="https://openaccessbutton.org/request?doi={{ paper.get_doi }}" class="btn btn-primary btn-sm"><span class="oi oi-envelope-closed"></span> {% trans "Contact" %}</a>
+                </div>
+            </div>
+        {% endif %}
+    {% endif %}
+</div>

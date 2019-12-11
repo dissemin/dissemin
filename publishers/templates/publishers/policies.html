@@ -1,0 +1,35 @@
+{% load i18n %}
+{% load static %}
+{% load statuses %}
+
+<div class="container">
+    <!-- Preprint -->
+    <div class="row py-2">
+        <div class="col-auto px-0">
+            {% include "publishers/policy_img.html" with policy=publisher.preprint %}
+        </div>
+        <div class="col">
+            {% include "publishers/policy_preprint.html" %}
+        </div>
+    </div>
+
+    <!-- Postprint -->
+    <div class="row py-2">
+        <div class="col-auto px-0">
+            {% include "publishers/policy_img.html" with policy=publisher.postprint %}
+        </div>
+        <div class="col">
+            {% include "publishers/policy_postprint.html" %}
+        </div>
+    </div>
+
+    <!-- Published version -->
+    <div class="row py-2">
+        <div class="col-auto px-0">
+            {% include "publishers/policy_img.html" with policy=publisher.pdfversion %}
+        </div>
+        <div class="col">
+            {% include "publishers/policy_pdfversion.html" %}
+        </div>
+    </div>
+</div>
