@@ -27,10 +27,10 @@ There are some deployment steps that you always have to do in case of deployment
 You should keep this order.
 Make sure to have the virtual environment activated.
 
-#. Apply migrations with ``./manage migrate``
-#. Compile scss files with ``./manage compilescc``
-#. Collect static files with ``./manage collectstatic --ignore=*.scss``
-#. Compile translations with ``./manage compilemessages``
+#. Apply migrations with ``./manage.py migrate``
+#. Compile scss files with ``./manage.py compilescss``
+#. Collect static files with ``./manage.py collectstatic --ignore=*.scss``
+#. Compile translations with ``./manage.py compilemessages``
 #. Tell WSGI to reload with ``touch dissemin/wsgi.py``
 #. Restart celery with ``systemctl``
 
