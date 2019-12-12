@@ -8,9 +8,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-30 15:27+0200\n"
+"POT-Creation-Date: 2019-12-12 10:33+0100\n"
 "PO-Revision-Date: 2019-10-14 15:19:16+0000\n"
 "Language: eu\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,65 +18,111 @@ msgstr ""
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: papers/static/js/dissemin.js:25
-msgid "Adding to todolist"
-msgstr ""
-
-#: papers/static/js/dissemin.js:29
-msgid "Removing from todolist"
-msgstr ""
-
-#: papers/static/papers/refresh.js:63
-msgid "Do not show this message anymore"
-msgstr "Ez erakutsi mezu hau berriro"
-
-#: papers/static/papers/refresh.js:94
-msgid "No author"
-msgstr "Egilerik gabe"
-
-#: papers/static/papers/refresh.js:96
-msgid "No title"
-msgstr "Izenbururik gabe"
-
-#: papers/static/papers/refresh.js:98
-msgid "Invalid publication date"
-msgstr "Argitalpen data okerra."
-
-#: papers/static/papers/refresh.js:100
-#, fuzzy
-msgid "No publication date"
-msgstr "Argitalpen data okerra."
-
-#: papers/static/papers/refresh.js:102
-msgid "Paper is invalid"
-msgstr ""
-
-#: papers/static/papers/refresh.js:137
-msgid "We ignored %(count)s paper from your ORCiD profile."
-msgid_plural "We ignored %(count)s papers from your ORCiD profile."
-msgstr[0] ""
-msgstr[1] ""
-
-#: papers/static/papers/refresh.js:147
-msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
-msgstr ""
-
-#: papers/static/papers/refresh.js:155
-msgid "A paper was ignored, because it has no name"
-msgstr "Ezikusiarena egin dugu dokumentu batekin, ez daukalako izenik"
-
-#: papers/static/papers/refresh.js:167 papers/static/papers/refresh.js:195
-msgid "Show more information"
-msgstr "Informazio gehiago erakutsi"
-
-#: papers/static/papers/refresh.js:192
-msgid "Show less information"
-msgstr "Informazio gutxiago erakutsi"
-
-#: papers/static/papers/refresh.js:206
+#: website/static/js/dissemin.js:202
 #, javascript-format
 msgid "%s paper found"
 msgid_plural "%s papers found"
 msgstr[0] ""
 msgstr[1] ""
 
+#: website/static/js/dissemin.js:293
+msgid "Claiming..."
+msgstr ""
+
+#: website/static/js/dissemin.js:297
+msgid "Unclaiming..."
+msgstr ""
+
+#: website/static/js/dissemin.js:313
+msgid "Claiming failed!"
+msgstr ""
+
+#: website/static/js/dissemin.js:316
+msgid "Unclaiming failed!"
+msgstr ""
+
+#: website/static/js/dissemin.js:321
+msgid "Exclude from my profile"
+msgstr ""
+
+#: website/static/js/dissemin.js:325
+msgid "Include in my profile"
+msgstr ""
+
+#: website/static/js/dissemin.js:350
+msgid "Adding to to-do list"
+msgstr ""
+
+#: website/static/js/dissemin.js:354
+msgid "Removing from to-do list"
+msgstr ""
+
+#: website/static/js/dissemin.js:600
+msgid "Preview of uploaded file"
+msgstr ""
+
+#: website/static/js/dissemin.js:603
+msgid "Pages: "
+msgstr ""
+
+#: website/static/js/dissemin.js:604
+msgid "Size: "
+msgstr ""
+
+#: website/static/js/dissemin.js:619
+msgid "While uploading %(file)s the following error occured:"
+msgstr ""
+
+#: website/static/js/dissemin.js:628 website/static/js/dissemin.js:683
+#: website/static/js/dissemin.js:689
+msgid "Unknown error"
+msgstr ""
+
+#: website/static/js/dissemin.js:673
+msgid "While fetching file from %(url)s the following error occured:"
+msgstr ""
+
+#: website/static/js/dissemin.js:760
+msgid "Sorry, we could not fill this for you."
+msgstr ""
+
+#: website/static/js/dissemin.js:761
+msgid "Trying to fill this field automatically for you..."
+msgstr ""
+
+#: website/static/js/dissemin.js:795
+msgid "You have not selected a file for upload."
+msgstr ""
+
+#: website/static/js/dissemin.js:822
+msgid "Dissemin encountered an error, please try again later."
+msgstr ""
+
+#: website/static/js/moment.min.js:1
+msgid ": "
+msgstr ""
+
+#~ msgid "Do not show this message anymore"
+#~ msgstr "Ez erakutsi mezu hau berriro"
+
+#~ msgid "No author"
+#~ msgstr "Egilerik gabe"
+
+#~ msgid "No title"
+#~ msgstr "Izenbururik gabe"
+
+#~ msgid "Invalid publication date"
+#~ msgstr "Argitalpen data okerra."
+
+#, fuzzy
+#~ msgid "No publication date"
+#~ msgstr "Argitalpen data okerra."
+
+#~ msgid "A paper was ignored, because it has no name"
+#~ msgstr "Ezikusiarena egin dugu dokumentu batekin, ez daukalako izenik"
+
+#~ msgid "Show more information"
+#~ msgstr "Informazio gehiago erakutsi"
+
+#~ msgid "Show less information"
+#~ msgstr "Informazio gutxiago erakutsi"

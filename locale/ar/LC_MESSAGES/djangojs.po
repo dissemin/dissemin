@@ -9,77 +9,19 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-30 15:27+0200\n"
+"POT-Creation-Date: 2019-12-12 10:33+0100\n"
 "PO-Revision-Date: 2019-10-14 15:19:11+0000\n"
 "Language: ar\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-POT-Import-Date: 2019-10-01 08:31:19+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
-"Plural-Forms: nplurals=6; plural=(n == 0) ? 0 : ( (n == 1) ? 1 : ( (n == 2) ? 2 : ( (n%100 >= 3 && n%100 <= 10) ? 3 : ( (n%100 >= 11 && n%100 <= 99) ? 4 : 5 ) ) ) );\n"
+"Plural-Forms: nplurals=6; plural=(n == 0) ? 0 : ( (n == 1) ? 1 : ( (n == "
+"2) ? 2 : ( (n%100 >= 3 && n%100 <= 10) ? 3 : ( (n%100 >= 11 && n%100 <= "
+"99) ? 4 : 5 ) ) ) );\n"
 
-#: papers/static/js/dissemin.js:25
-msgid "Adding to todolist"
-msgstr "الإضافة إلى قائمة العمل"
-
-#: papers/static/js/dissemin.js:29
-msgid "Removing from todolist"
-msgstr "الإزالة من قائمة المهام"
-
-#: papers/static/papers/refresh.js:63
-msgid "Do not show this message anymore"
-msgstr "لا تظهر هذه الرسالة بعد الآن"
-
-#: papers/static/papers/refresh.js:94
-msgid "No author"
-msgstr "بلا مؤلف"
-
-#: papers/static/papers/refresh.js:96
-msgid "No title"
-msgstr "بلا عنوان"
-
-#: papers/static/papers/refresh.js:98
-msgid "Invalid publication date"
-msgstr "تاريخ النشر غير صالح"
-
-#: papers/static/papers/refresh.js:100
-#, fuzzy
-msgid "No publication date"
-msgstr "تاريخ النشر غير صالح"
-
-#: papers/static/papers/refresh.js:102
-msgid "Paper is invalid"
-msgstr "الورقة غير صالحة"
-
-#: papers/static/papers/refresh.js:137
-msgid "We ignored %(count)s paper from your ORCiD profile."
-msgid_plural "We ignored %(count)s papers from your ORCiD profile."
-msgstr[0] "تجاهلنا %(count)s ورقة من الملف الشخصي الخاص بك في ORCiD."
-msgstr[1] "%(count)"
-msgstr[2] "%(count)"
-msgstr[3] "%(count)"
-msgstr[4] "%(count)"
-msgstr[5] "%(count)"
-
-#: papers/static/papers/refresh.js:147
-msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
-msgstr "تم تجاهل \"%(name)s\" للسبب التالي: %(reason)s"
-
-#: papers/static/papers/refresh.js:155
-msgid "A paper was ignored, because it has no name"
-msgstr "تم تجاهل ورقة; لأنه ليس لها اسم"
-
-#: papers/static/papers/refresh.js:167 papers/static/papers/refresh.js:195
-msgid "Show more information"
-msgstr "عرض معلومات اكثر"
-
-#: papers/static/papers/refresh.js:192
-msgid "Show less information"
-msgstr "عرض معلومات أقل"
-
-#: papers/static/papers/refresh.js:206
+#: website/static/js/dissemin.js:202
 #, javascript-format
 msgid "%s paper found"
 msgid_plural "%s papers found"
@@ -90,3 +32,123 @@ msgstr[3] "%s"
 msgstr[4] "%s"
 msgstr[5] "%s"
 
+#: website/static/js/dissemin.js:293
+msgid "Claiming..."
+msgstr ""
+
+#: website/static/js/dissemin.js:297
+msgid "Unclaiming..."
+msgstr ""
+
+#: website/static/js/dissemin.js:313
+msgid "Claiming failed!"
+msgstr ""
+
+#: website/static/js/dissemin.js:316
+msgid "Unclaiming failed!"
+msgstr ""
+
+#: website/static/js/dissemin.js:321
+msgid "Exclude from my profile"
+msgstr ""
+
+#: website/static/js/dissemin.js:325
+msgid "Include in my profile"
+msgstr ""
+
+#: website/static/js/dissemin.js:350
+#, fuzzy
+#| msgid "Adding to todolist"
+msgid "Adding to to-do list"
+msgstr "الإضافة إلى قائمة العمل"
+
+#: website/static/js/dissemin.js:354
+#, fuzzy
+#| msgid "Removing from todolist"
+msgid "Removing from to-do list"
+msgstr "الإزالة من قائمة المهام"
+
+#: website/static/js/dissemin.js:600
+msgid "Preview of uploaded file"
+msgstr ""
+
+#: website/static/js/dissemin.js:603
+msgid "Pages: "
+msgstr ""
+
+#: website/static/js/dissemin.js:604
+msgid "Size: "
+msgstr ""
+
+#: website/static/js/dissemin.js:619
+msgid "While uploading %(file)s the following error occured:"
+msgstr ""
+
+#: website/static/js/dissemin.js:628 website/static/js/dissemin.js:683
+#: website/static/js/dissemin.js:689
+msgid "Unknown error"
+msgstr ""
+
+#: website/static/js/dissemin.js:673
+msgid "While fetching file from %(url)s the following error occured:"
+msgstr ""
+
+#: website/static/js/dissemin.js:760
+msgid "Sorry, we could not fill this for you."
+msgstr ""
+
+#: website/static/js/dissemin.js:761
+msgid "Trying to fill this field automatically for you..."
+msgstr ""
+
+#: website/static/js/dissemin.js:795
+msgid "You have not selected a file for upload."
+msgstr ""
+
+#: website/static/js/dissemin.js:822
+msgid "Dissemin encountered an error, please try again later."
+msgstr ""
+
+#: website/static/js/moment.min.js:1
+msgid ": "
+msgstr ""
+
+#~ msgid "Do not show this message anymore"
+#~ msgstr "لا تظهر هذه الرسالة بعد الآن"
+
+#~ msgid "No author"
+#~ msgstr "بلا مؤلف"
+
+#~ msgid "No title"
+#~ msgstr "بلا عنوان"
+
+#~ msgid "Invalid publication date"
+#~ msgstr "تاريخ النشر غير صالح"
+
+#, fuzzy
+#~ msgid "No publication date"
+#~ msgstr "تاريخ النشر غير صالح"
+
+#~ msgid "Paper is invalid"
+#~ msgstr "الورقة غير صالحة"
+
+#~ msgid "We ignored %(count)s paper from your ORCiD profile."
+#~ msgid_plural "We ignored %(count)s papers from your ORCiD profile."
+#~ msgstr[0] "تجاهلنا %(count)s ورقة من الملف الشخصي الخاص بك في ORCiD."
+#~ msgstr[1] "%(count)"
+#~ msgstr[2] "%(count)"
+#~ msgstr[3] "%(count)"
+#~ msgstr[4] "%(count)"
+#~ msgstr[5] "%(count)"
+
+#~ msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
+#~ msgstr "تم تجاهل \"%(name)s\" للسبب التالي: %(reason)s"
+
+#~ msgid "A paper was ignored, because it has no name"
+#~ msgstr "تم تجاهل ورقة; لأنه ليس لها اسم"
+
+#~ msgid "Show more information"
+#~ msgstr "عرض معلومات اكثر"
+
+#~ msgid "Show less information"
+#~ msgstr "عرض معلومات أقل"

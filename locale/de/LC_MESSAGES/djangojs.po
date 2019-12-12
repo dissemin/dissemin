@@ -12,9 +12,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-30 15:27+0200\n"
+"POT-Creation-Date: 2019-12-12 10:33+0100\n"
 "PO-Revision-Date: 2019-10-14 15:19:14+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,64 +22,126 @@ msgstr ""
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: papers/static/js/dissemin.js:25
-msgid "Adding to todolist"
-msgstr "Zur Merkliste hinzufügen"
-
-#: papers/static/js/dissemin.js:29
-msgid "Removing from todolist"
-msgstr "Von Merkliste entfernen"
-
-#: papers/static/papers/refresh.js:63
-msgid "Do not show this message anymore"
-msgstr "Diese Nachricht nicht mehr anzeigen"
-
-#: papers/static/papers/refresh.js:94
-msgid "No author"
-msgstr "Kein_e Verfasser_in"
-
-#: papers/static/papers/refresh.js:96
-msgid "No title"
-msgstr "Kein Titel"
-
-#: papers/static/papers/refresh.js:98
-msgid "Invalid publication date"
-msgstr "Ungültiges Veröffentlichungsdatum"
-
-#: papers/static/papers/refresh.js:100
-msgid "No publication date"
-msgstr "Kein Veröffentlichungsdatum"
-
-#: papers/static/papers/refresh.js:102
-msgid "Paper is invalid"
-msgstr "Publikation ist ungültig"
-
-#: papers/static/papers/refresh.js:137
-msgid "We ignored %(count)s paper from your ORCiD profile."
-msgid_plural "We ignored %(count)s papers from your ORCiD profile."
-msgstr[0] "Wir haben eine Publikation aus Deinem ORCiD-Profil ignoriert."
-msgstr[1] "Wir haben %(count)s Publikationen aus Deinem ORCiD-Profil ignoriert."
-
-#: papers/static/papers/refresh.js:147
-msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
-msgstr "\"%(name)s\" wurde aus folgenden Gründen ignoriert: %(reason)s"
-
-#: papers/static/papers/refresh.js:155
-msgid "A paper was ignored, because it has no name"
-msgstr "Eine Publikation wurde ignoriert, weil sie keinen Namen hat"
-
-#: papers/static/papers/refresh.js:167 papers/static/papers/refresh.js:195
-msgid "Show more information"
-msgstr "Weitere Informationen anzeigen"
-
-#: papers/static/papers/refresh.js:192
-msgid "Show less information"
-msgstr "Weniger Informationen anzeigen"
-
-#: papers/static/papers/refresh.js:206
+#: website/static/js/dissemin.js:202
 #, javascript-format
 msgid "%s paper found"
 msgid_plural "%s papers found"
 msgstr[0] "%s Publikation gefunden"
 msgstr[1] "%s Publikationen gefunden"
 
+#: website/static/js/dissemin.js:293
+msgid "Claiming..."
+msgstr ""
+
+#: website/static/js/dissemin.js:297
+msgid "Unclaiming..."
+msgstr ""
+
+#: website/static/js/dissemin.js:313
+msgid "Claiming failed!"
+msgstr ""
+
+#: website/static/js/dissemin.js:316
+msgid "Unclaiming failed!"
+msgstr ""
+
+#: website/static/js/dissemin.js:321
+msgid "Exclude from my profile"
+msgstr ""
+
+#: website/static/js/dissemin.js:325
+msgid "Include in my profile"
+msgstr ""
+
+#: website/static/js/dissemin.js:350
+#, fuzzy
+#| msgid "Adding to todolist"
+msgid "Adding to to-do list"
+msgstr "Zur Merkliste hinzufügen"
+
+#: website/static/js/dissemin.js:354
+#, fuzzy
+#| msgid "Removing from todolist"
+msgid "Removing from to-do list"
+msgstr "Von Merkliste entfernen"
+
+#: website/static/js/dissemin.js:600
+msgid "Preview of uploaded file"
+msgstr ""
+
+#: website/static/js/dissemin.js:603
+msgid "Pages: "
+msgstr ""
+
+#: website/static/js/dissemin.js:604
+msgid "Size: "
+msgstr ""
+
+#: website/static/js/dissemin.js:619
+msgid "While uploading %(file)s the following error occured:"
+msgstr ""
+
+#: website/static/js/dissemin.js:628 website/static/js/dissemin.js:683
+#: website/static/js/dissemin.js:689
+msgid "Unknown error"
+msgstr ""
+
+#: website/static/js/dissemin.js:673
+msgid "While fetching file from %(url)s the following error occured:"
+msgstr ""
+
+#: website/static/js/dissemin.js:760
+msgid "Sorry, we could not fill this for you."
+msgstr ""
+
+#: website/static/js/dissemin.js:761
+msgid "Trying to fill this field automatically for you..."
+msgstr ""
+
+#: website/static/js/dissemin.js:795
+msgid "You have not selected a file for upload."
+msgstr ""
+
+#: website/static/js/dissemin.js:822
+msgid "Dissemin encountered an error, please try again later."
+msgstr ""
+
+#: website/static/js/moment.min.js:1
+msgid ": "
+msgstr ""
+
+#~ msgid "Do not show this message anymore"
+#~ msgstr "Diese Nachricht nicht mehr anzeigen"
+
+#~ msgid "No author"
+#~ msgstr "Kein_e Verfasser_in"
+
+#~ msgid "No title"
+#~ msgstr "Kein Titel"
+
+#~ msgid "Invalid publication date"
+#~ msgstr "Ungültiges Veröffentlichungsdatum"
+
+#~ msgid "No publication date"
+#~ msgstr "Kein Veröffentlichungsdatum"
+
+#~ msgid "Paper is invalid"
+#~ msgstr "Publikation ist ungültig"
+
+#~ msgid "We ignored %(count)s paper from your ORCiD profile."
+#~ msgid_plural "We ignored %(count)s papers from your ORCiD profile."
+#~ msgstr[0] "Wir haben eine Publikation aus Deinem ORCiD-Profil ignoriert."
+#~ msgstr[1] ""
+#~ "Wir haben %(count)s Publikationen aus Deinem ORCiD-Profil ignoriert."
+
+#~ msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
+#~ msgstr "\"%(name)s\" wurde aus folgenden Gründen ignoriert: %(reason)s"
+
+#~ msgid "A paper was ignored, because it has no name"
+#~ msgstr "Eine Publikation wurde ignoriert, weil sie keinen Namen hat"
+
+#~ msgid "Show more information"
+#~ msgstr "Weitere Informationen anzeigen"
+
+#~ msgid "Show less information"
+#~ msgstr "Weniger Informationen anzeigen"
