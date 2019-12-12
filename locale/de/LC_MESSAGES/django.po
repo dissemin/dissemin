@@ -16,9 +16,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-12 10:31+0100\n"
+"POT-Creation-Date: 2019-12-12 16:17+0100\n"
 "PO-Revision-Date: 2019-12-12 14:21:08+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -937,8 +936,14 @@ msgstr "Herunterladen"
 
 #: papers/templates/papers/messages.html:8
 #, python-format
-msgid "\n                        We ignored %(papers)s paper from your ORCiD profile.\n                    "
-msgid_plural "\n                        We ignored %(papers)s papers from your ORCiD profile.\n                    "
+msgid ""
+"\n"
+"                        We ignored %(papers)s paper from your ORCiD profile.\n"
+"                    "
+msgid_plural ""
+"\n"
+"                        We ignored %(papers)s papers from your ORCiD profile.\n"
+"                    "
 msgstr[0] ""
 msgstr[1] ""
 
@@ -2032,19 +2037,31 @@ msgid "Other open license"
 msgstr "Andere freie Lizenz"
 
 #: vinaigrette-deleteme.py:109
-msgid "zenodo"
+#, fuzzy
+#| msgid "zenodo"
+msgid "Zenodo"
 msgstr "Zenodo"
 
 #: vinaigrette-deleteme.py:110
-msgid "hal"
-msgstr "HAL"
+msgid "Zenodo is a general-purpose open repository hosted by CERN. If the document does not have a DOI yet, Zenodo will create one."
+msgstr ""
 
 #: vinaigrette-deleteme.py:111
-msgid "TUPrints Demo"
-msgstr "TUPrints Demo"
+msgid "HAL"
+msgstr ""
 
 #: vinaigrette-deleteme.py:112
-msgid "TUPrints Demo<br/>Spam\nDiese Beschreibung muss länger sein.\nDiese Beschreibung muss länger sein.\nDiese Beschreibung muss länger sein.\nDiese Beschreibung muss länger sein.\nDiese Beschreibung muss länger sein.\nDiese Beschreibung muss länger sein.\nDiese Beschreibung muss länger sein."
+msgid "HAL is a  multidisciplinary open archive, sustained by the French Research Ministry."
+msgstr ""
+
+#: vinaigrette-deleteme.py:113
+#, fuzzy
+#| msgid "preprint"
+msgid "OSF preprints"
+msgstr "Preprint"
+
+#: vinaigrette-deleteme.py:114
+msgid "Run by the Center for Open Science, OSF lets you share your preprints openly. You can also share supplemental data, materials or code associated with your article."
 msgstr ""
 
 #: website/forms.py:16 website/forms.py:19
@@ -2405,7 +2422,7 @@ msgstr "In den meisten Fällen handelt es sich um Fehler, die bereits in den <a 
 
 #: website/templates/dissemin/faq.html:431
 #, fuzzy
-msgid "If the error is not present in any of the sources and you believe that Dissemin may have introduced the problem, please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> with details of the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. Note that yo cannot yet fix the problem yourself, although we hope in the longer term to develop a system to allow our users to edit details of their papers themselves."
+msgid "If the error is not present in any of the sources and you believe that Dissemin may have introduced the problem, please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> with details of the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. Note that you cannot yet fix the problem yourself, although we hope in the longer term to develop a system to allow our users to edit details of their papers themselves."
 msgstr "Ist der Fehler in keiner Quelle zu finden, verfasse bitte einen detaillierten <a href=\"https://github.com/dissemin/dissemin/issues\">Bud Report</a> oder sende uns eine E-Mail an <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. Derzeit kannst Du falsche Angaben nicht selbst korrigieren, wir hoffen aber, diese Möglichkeit in Zukunft anbieten zu können."
 
 #: website/templates/dissemin/faq.html:438
@@ -2776,3 +2793,8 @@ msgstr "Authentifizierungsfehler"
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "Authentifizierung fehlgeschlagen. <a href=\"/\">Zurück zur Anmeldeseite gehen.</a>"
 
+#~ msgid "hal"
+#~ msgstr "HAL"
+
+#~ msgid "TUPrints Demo"
+#~ msgstr "TUPrints Demo"

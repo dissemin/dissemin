@@ -14,9 +14,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-12 10:31+0100\n"
+"POT-Creation-Date: 2019-12-12 16:17+0100\n"
 "PO-Revision-Date: 2019-12-12 14:21:19+0000\n"
 "Language: zh_hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -543,7 +542,10 @@ msgstr "存放"
 #: deposit/templates/deposit/start.html:64
 #, fuzzy, python-format
 msgid "You can deposit the full text of your article. Dissemin will send it to a repository where it will be made freely available. By depositing your article via Dissemin, you agree to our <a href=\"%(tosurl)s\">terms of service</a>."
-msgstr "\n            您可以存放您的文章全文。Dissemin将发送它到其能够自由展示的存储库。通过使用Dissemin存放您的文章，您同意我们的<a href=\"%(tosurl)s\">服务条款</a>。\n        "
+msgstr ""
+"\n"
+"            您可以存放您的文章全文。Dissemin将发送它到其能够自由展示的存储库。通过使用Dissemin存放您的文章，您同意我们的<a href=\"%(tosurl)s\">服务条款</a>。\n"
+"        "
 
 #: deposit/templates/deposit/start.html:73
 msgid "You do not appear to be one of the authors of this paper. By using this form, you certify that you have the permission to upload it on their behalf."
@@ -949,8 +951,14 @@ msgstr "下载"
 
 #: papers/templates/papers/messages.html:8
 #, python-format
-msgid "\n                        We ignored %(papers)s paper from your ORCiD profile.\n                    "
-msgid_plural "\n                        We ignored %(papers)s papers from your ORCiD profile.\n                    "
+msgid ""
+"\n"
+"                        We ignored %(papers)s paper from your ORCiD profile.\n"
+"                    "
+msgid_plural ""
+"\n"
+"                        We ignored %(papers)s papers from your ORCiD profile.\n"
+"                    "
 msgstr[0] ""
 
 #: papers/templates/papers/messages.html:14
@@ -1004,7 +1012,10 @@ msgstr "出版于"
 #: papers/templates/papers/paper.html:55
 #, fuzzy, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
-msgstr "\n            以及<a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s位其他作者</a>\n            "
+msgstr ""
+"\n"
+"            以及<a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s位其他作者</a>\n"
+"            "
 
 #: papers/templates/papers/paper.html:61
 #, fuzzy
@@ -1367,7 +1378,10 @@ msgstr ""
 #: papers/views.py:278
 #, fuzzy
 msgid "Invalid ORCID profile. Please make sure it includes a public name."
-msgstr "\n                            无效的ORCID详情。请确保它包含公开名称。\n                            "
+msgstr ""
+"\n"
+"                            无效的ORCID详情。请确保它包含公开名称。\n"
+"                            "
 
 #: papers/views.py:281
 msgid "Invalid ORCID profile."
@@ -2072,19 +2086,29 @@ msgid "Other open license"
 msgstr "其他开放许可协议"
 
 #: vinaigrette-deleteme.py:109
-msgid "zenodo"
+msgid "Zenodo"
 msgstr ""
 
 #: vinaigrette-deleteme.py:110
-msgid "hal"
+msgid "Zenodo is a general-purpose open repository hosted by CERN. If the document does not have a DOI yet, Zenodo will create one."
 msgstr ""
 
 #: vinaigrette-deleteme.py:111
-msgid "TUPrints Demo"
+msgid "HAL"
 msgstr ""
 
 #: vinaigrette-deleteme.py:112
-msgid "TUPrints Demo<br/>Spam\nDiese Beschreibung muss länger sein.\nDiese Beschreibung muss länger sein.\nDiese Beschreibung muss länger sein.\nDiese Beschreibung muss länger sein.\nDiese Beschreibung muss länger sein.\nDiese Beschreibung muss länger sein.\nDiese Beschreibung muss länger sein."
+msgid "HAL is a  multidisciplinary open archive, sustained by the French Research Ministry."
+msgstr ""
+
+#: vinaigrette-deleteme.py:113
+#, fuzzy
+#| msgid "preprint"
+msgid "OSF preprints"
+msgstr "预印本"
+
+#: vinaigrette-deleteme.py:114
+msgid "Run by the Center for Open Science, OSF lets you share your preprints openly. You can also share supplemental data, materials or code associated with your article."
 msgstr ""
 
 #: website/forms.py:16 website/forms.py:19
@@ -2099,7 +2123,10 @@ msgstr "访问PDF被拒绝。"
 #: website/templates/403.html:13
 #, fuzzy, python-format
 msgid "The access to the requested page has been denied. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "\n            找不到您请求的页面。<a href=\"/\">返回首页。</a>\n           "
+msgstr ""
+"\n"
+"            找不到您请求的页面。<a href=\"/\">返回首页。</a>\n"
+"           "
 
 #: website/templates/404.html:6 website/templates/404.html:10
 msgid "Page not found"
@@ -2108,7 +2135,10 @@ msgstr "找不到页面"
 #: website/templates/404.html:13
 #, fuzzy, python-format
 msgid "The page you requested could not be found. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "\n            找不到您请求的页面。<a href=\"/\">返回首页。</a>\n           "
+msgstr ""
+"\n"
+"            找不到您请求的页面。<a href=\"/\">返回首页。</a>\n"
+"           "
 
 #: website/templates/500.html:6 website/templates/500.html:10
 #, fuzzy
@@ -2118,7 +2148,10 @@ msgstr "内部错误"
 #: website/templates/500.html:13
 #, fuzzy, python-format
 msgid "Your request triggered an internal server error. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "\n            您的请求触发了内部错误。<a href=\"/\">返回首页。</a>\n           "
+msgstr ""
+"\n"
+"            您的请求触发了内部错误。<a href=\"/\">返回首页。</a>\n"
+"           "
 
 #: website/templates/admin/base_site.html:5
 #: website/templates/admin/base_site.html:8
@@ -2448,7 +2481,9 @@ msgid "In most cases, the errors that you see on Dissemin have not been introduc
 msgstr "在大多数情况下，您在Dissemin上看到的错误并非由Dissemin造成，而是已在Dissemin收录的<a href=\"{{ sources_url }}\">公开资源</a>中产生。因此，请先查看页面右上角的“链接”，检查您所看到的错误是否已经存在于我们的数据来源中。如果其中一个页面包含错误，您应该向他们报告问题，而不是向我们报告，否则错误会一直存在。"
 
 #: website/templates/dissemin/faq.html:431
-msgid "If the error is not present in any of the sources and you believe that Dissemin may have introduced the problem, please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> with details of the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. Note that yo cannot yet fix the problem yourself, although we hope in the longer term to develop a system to allow our users to edit details of their papers themselves."
+#, fuzzy
+#| msgid "If the error is not present in any of the sources and you believe that Dissemin may have introduced the problem, please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> with details of the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. Note that yo cannot yet fix the problem yourself, although we hope in the longer term to develop a system to allow our users to edit details of their papers themselves."
+msgid "If the error is not present in any of the sources and you believe that Dissemin may have introduced the problem, please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> with details of the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. Note that you cannot yet fix the problem yourself, although we hope in the longer term to develop a system to allow our users to edit details of their papers themselves."
 msgstr "如果错误不在任何来源中，并且您认为Dissemin可能造成了该问题，请提交<a href=\"https://github.com/dissemin/dissemin/issues\">问题说明</a> 并详细描述问题，或发送邮件至<a href=\"mailto:bugs@dissem.in\"> bugs@dissem.in </a>。请注意，虽然我们希望能够在未来开发一个系统，以便我们的用户自己编辑他们的论文的详细信息，但您目前仍然无法自己解决这些问题。"
 
 #: website/templates/dissemin/faq.html:438
@@ -2829,5 +2864,7 @@ msgstr "验证错误"
 #: website/templates/socialaccount/authentication_error.html:15
 #, fuzzy, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
-msgstr "\n            验证失败。<a href=\"/\">返回登录页面。</a>\n           "
-
+msgstr ""
+"\n"
+"            验证失败。<a href=\"/\">返回登录页面。</a>\n"
+"           "

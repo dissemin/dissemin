@@ -14,9 +14,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-12 10:31+0100\n"
+"POT-Creation-Date: 2019-12-12 16:17+0100\n"
 "PO-Revision-Date: 2019-12-12 14:21:14+0000\n"
 "Language: nl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -543,7 +542,12 @@ msgstr "Overboeken"
 #: deposit/templates/deposit/start.html:64
 #, fuzzy, python-format
 msgid "You can deposit the full text of your article. Dissemin will send it to a repository where it will be made freely available. By depositing your article via Dissemin, you agree to our <a href=\"%(tosurl)s\">terms of service</a>."
-msgstr "\n            Je kunt het artikel met volledige inhoud overboeken. Dissemin verzendt het artikel naar een opslagplaats en maakt 'm kosteloos beschikbaar.\n            Door je artikel via Dissemin over te boeken,\n            ga je akkoord met onze <a href=\"%(tosurl)s\">dienstvoorwaarden</a>.\n        "
+msgstr ""
+"\n"
+"            Je kunt het artikel met volledige inhoud overboeken. Dissemin verzendt het artikel naar een opslagplaats en maakt 'm kosteloos beschikbaar.\n"
+"            Door je artikel via Dissemin over te boeken,\n"
+"            ga je akkoord met onze <a href=\"%(tosurl)s\">dienstvoorwaarden</a>.\n"
+"        "
 
 #: deposit/templates/deposit/start.html:73
 msgid "You do not appear to be one of the authors of this paper. By using this form, you certify that you have the permission to upload it on their behalf."
@@ -948,8 +952,14 @@ msgstr "Ophalen"
 
 #: papers/templates/papers/messages.html:8
 #, python-format
-msgid "\n                        We ignored %(papers)s paper from your ORCiD profile.\n                    "
-msgid_plural "\n                        We ignored %(papers)s papers from your ORCiD profile.\n                    "
+msgid ""
+"\n"
+"                        We ignored %(papers)s paper from your ORCiD profile.\n"
+"                    "
+msgid_plural ""
+"\n"
+"                        We ignored %(papers)s papers from your ORCiD profile.\n"
+"                    "
 msgstr[0] ""
 msgstr[1] ""
 
@@ -1004,7 +1014,10 @@ msgstr "Gepubliceerd op"
 #: papers/templates/papers/paper.html:55
 #, fuzzy, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
-msgstr "\n            en <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s andere auteurs</a>\n            "
+msgstr ""
+"\n"
+"            en <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s andere auteurs</a>\n"
+"            "
 
 #: papers/templates/papers/paper.html:61
 msgid "Show less"
@@ -1369,7 +1382,11 @@ msgstr ""
 #: papers/views.py:278
 #, fuzzy
 msgid "Invalid ORCID profile. Please make sure it includes a public name."
-msgstr "\n                            Ongeldig ORCID-profiel.\n                            Zorg ervoor dat het profiel een openbare naam bevat.\n                            "
+msgstr ""
+"\n"
+"                            Ongeldig ORCID-profiel.\n"
+"                            Zorg ervoor dat het profiel een openbare naam bevat.\n"
+"                            "
 
 #: papers/views.py:281
 msgid "Invalid ORCID profile."
@@ -2074,19 +2091,29 @@ msgid "Other open license"
 msgstr "Overige openvergunning"
 
 #: vinaigrette-deleteme.py:109
-msgid "zenodo"
+msgid "Zenodo"
 msgstr ""
 
 #: vinaigrette-deleteme.py:110
-msgid "hal"
+msgid "Zenodo is a general-purpose open repository hosted by CERN. If the document does not have a DOI yet, Zenodo will create one."
 msgstr ""
 
 #: vinaigrette-deleteme.py:111
-msgid "TUPrints Demo"
+msgid "HAL"
 msgstr ""
 
 #: vinaigrette-deleteme.py:112
-msgid "TUPrints Demo<br/>Spam\nDiese Beschreibung muss länger sein.\nDiese Beschreibung muss länger sein.\nDiese Beschreibung muss länger sein.\nDiese Beschreibung muss länger sein.\nDiese Beschreibung muss länger sein.\nDiese Beschreibung muss länger sein.\nDiese Beschreibung muss länger sein."
+msgid "HAL is a  multidisciplinary open archive, sustained by the French Research Ministry."
+msgstr ""
+
+#: vinaigrette-deleteme.py:113
+#, fuzzy
+#| msgid "preprint"
+msgid "OSF preprints"
+msgstr "voordruk"
+
+#: vinaigrette-deleteme.py:114
+msgid "Run by the Center for Open Science, OSF lets you share your preprints openly. You can also share supplemental data, materials or code associated with your article."
 msgstr ""
 
 #: website/forms.py:16 website/forms.py:19
@@ -2101,7 +2128,9 @@ msgstr "Toegangsaanvraag voor de pdf is geweigerd."
 #: website/templates/403.html:13
 #, fuzzy, python-format
 msgid "The access to the requested page has been denied. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "Kan de aangevraagde pagina niet vinden. <a href=\"/\">Terug naar de startpagina.</a>\n           "
+msgstr ""
+"Kan de aangevraagde pagina niet vinden. <a href=\"/\">Terug naar de startpagina.</a>\n"
+"           "
 
 #: website/templates/404.html:6 website/templates/404.html:10
 msgid "Page not found"
@@ -2110,7 +2139,9 @@ msgstr "Pagina niet gevonden"
 #: website/templates/404.html:13
 #, fuzzy, python-format
 msgid "The page you requested could not be found. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "Kan de aangevraagde pagina niet vinden. <a href=\"/\">Terug naar de startpagina.</a>\n           "
+msgstr ""
+"Kan de aangevraagde pagina niet vinden. <a href=\"/\">Terug naar de startpagina.</a>\n"
+"           "
 
 #: website/templates/500.html:6 website/templates/500.html:10
 #, fuzzy
@@ -2120,7 +2151,9 @@ msgstr "Interne fout"
 #: website/templates/500.html:13
 #, fuzzy, python-format
 msgid "Your request triggered an internal server error. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "Je verzoek heeft een interne fout veroorzaakt. <a href=\"/\">Terug naar de startpagina.</a>\n           "
+msgstr ""
+"Je verzoek heeft een interne fout veroorzaakt. <a href=\"/\">Terug naar de startpagina.</a>\n"
+"           "
 
 #: website/templates/admin/base_site.html:5
 #: website/templates/admin/base_site.html:8
@@ -2450,7 +2483,7 @@ msgid "In most cases, the errors that you see on Dissemin have not been introduc
 msgstr ""
 
 #: website/templates/dissemin/faq.html:431
-msgid "If the error is not present in any of the sources and you believe that Dissemin may have introduced the problem, please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> with details of the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. Note that yo cannot yet fix the problem yourself, although we hope in the longer term to develop a system to allow our users to edit details of their papers themselves."
+msgid "If the error is not present in any of the sources and you believe that Dissemin may have introduced the problem, please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> with details of the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. Note that you cannot yet fix the problem yourself, although we hope in the longer term to develop a system to allow our users to edit details of their papers themselves."
 msgstr ""
 
 #: website/templates/dissemin/faq.html:438
@@ -2821,5 +2854,7 @@ msgstr "Verifiëringsfout"
 #: website/templates/socialaccount/authentication_error.html:15
 #, fuzzy, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
-msgstr "\n            Verifiëren is mislukt. <a href=\"/\">Terug naar de aanmeldpagina.</a>\n           "
-
+msgstr ""
+"\n"
+"            Verifiëren is mislukt. <a href=\"/\">Terug naar de aanmeldpagina.</a>\n"
+"           "

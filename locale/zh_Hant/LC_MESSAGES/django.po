@@ -10,10 +10,9 @@
 #
 msgid ""
 msgstr ""
-""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-12 10:31+0100\n"
+"POT-Creation-Date: 2019-12-12 16:17+0100\n"
 "PO-Revision-Date: 2019-12-12 14:21:20+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -941,8 +940,14 @@ msgstr "下載"
 
 #: papers/templates/papers/messages.html:8
 #, python-format
-msgid "\n                        We ignored %(papers)s paper from your ORCiD profile.\n                    "
-msgid_plural "\n                        We ignored %(papers)s papers from your ORCiD profile.\n                    "
+msgid ""
+"\n"
+"                        We ignored %(papers)s paper from your ORCiD profile.\n"
+"                    "
+msgid_plural ""
+"\n"
+"                        We ignored %(papers)s papers from your ORCiD profile.\n"
+"                    "
 msgstr[0] ""
 
 #: papers/templates/papers/messages.html:14
@@ -2036,19 +2041,29 @@ msgid "Other open license"
 msgstr "其它開放授權"
 
 #: vinaigrette-deleteme.py:109
-msgid "zenodo"
+msgid "Zenodo"
 msgstr ""
 
 #: vinaigrette-deleteme.py:110
-msgid "hal"
+msgid "Zenodo is a general-purpose open repository hosted by CERN. If the document does not have a DOI yet, Zenodo will create one."
 msgstr ""
 
 #: vinaigrette-deleteme.py:111
-msgid "TUPrints Demo"
+msgid "HAL"
 msgstr ""
 
 #: vinaigrette-deleteme.py:112
-msgid "TUPrints Demo<br/>Spam\nDiese Beschreibung muss länger sein.\nDiese Beschreibung muss länger sein.\nDiese Beschreibung muss länger sein.\nDiese Beschreibung muss länger sein.\nDiese Beschreibung muss länger sein.\nDiese Beschreibung muss länger sein.\nDiese Beschreibung muss länger sein."
+msgid "HAL is a  multidisciplinary open archive, sustained by the French Research Ministry."
+msgstr ""
+
+#: vinaigrette-deleteme.py:113
+#, fuzzy
+#| msgid "preprint"
+msgid "OSF preprints"
+msgstr "預印本"
+
+#: vinaigrette-deleteme.py:114
+msgid "Run by the Center for Open Science, OSF lets you share your preprints openly. You can also share supplemental data, materials or code associated with your article."
 msgstr ""
 
 #: website/forms.py:16 website/forms.py:19
@@ -2413,7 +2428,9 @@ msgid "In most cases, the errors that you see on Dissemin have not been introduc
 msgstr "在多數情況下，您在 Dissemin 上看到這樣的錯誤並不是由 Dissemin 所引起，而是發生在 Dissemin 所取得的<a href=\"%(sources_url)s\">各公開來源</a>裡。因此，首先先透過在頁面右上方的「連結」部份來查看，檢查在我們的資料來源裡是否真的有出現您所看到的錯誤。如果在這些頁面裡確實有包含錯誤，您應該要向資料來源一方回報問題而不是對我們通知，不然錯誤會一直出現在來源上。"
 
 #: website/templates/dissemin/faq.html:431
-msgid "If the error is not present in any of the sources and you believe that Dissemin may have introduced the problem, please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> with details of the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. Note that yo cannot yet fix the problem yourself, although we hope in the longer term to develop a system to allow our users to edit details of their papers themselves."
+#, fuzzy
+#| msgid "If the error is not present in any of the sources and you believe that Dissemin may have introduced the problem, please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> with details of the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. Note that yo cannot yet fix the problem yourself, although we hope in the longer term to develop a system to allow our users to edit details of their papers themselves."
+msgid "If the error is not present in any of the sources and you believe that Dissemin may have introduced the problem, please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> with details of the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. Note that you cannot yet fix the problem yourself, although we hope in the longer term to develop a system to allow our users to edit details of their papers themselves."
 msgstr "如果錯誤並非出現在任一來源裡，而且您認為可能是 Dissemin 導致出問題，請<a href=\"https://github.com/dissemin/dissemin/issues\">在此</a>提出關於問題的詳情，或寄送訊息到 <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a> 裡。另外就長遠目標來看，我們希望開發出可以讓我們的使用者能夠自已編輯論文細節的系統，但目前為止還沒有能讓您親自修正問題的功能。"
 
 #: website/templates/dissemin/faq.html:438
@@ -2427,7 +2444,9 @@ msgstr "然後，目前 Dissemin 僅支援遵循<a href=\"https://www.openarchiv
 
 #: website/templates/dissemin/faq.html:448
 msgid "If the repository is registered in BASE, please <a href=\"https://www.base-search.net/\">search in BASE</a> to check that your article is there. If it is, then this may be a bug of Dissemin; please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> describing the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
-msgstr "如果知識庫已經註冊到 BASE，請<a href=\"https://www.base-search.net/\">在 BASE 裡搜尋</a>來查看您的文章是否有出現。如果有找到的話，這可能是\n Dissemin 有程式錯誤，請在<a href=\"https://github.com/dissemin/dissemin/issues\">這裡</a>提出來描述問題，或是寄送訊息到 <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>。"
+msgstr ""
+"如果知識庫已經註冊到 BASE，請<a href=\"https://www.base-search.net/\">在 BASE 裡搜尋</a>來查看您的文章是否有出現。如果有找到的話，這可能是\n"
+" Dissemin 有程式錯誤，請在<a href=\"https://github.com/dissemin/dissemin/issues\">這裡</a>提出來描述問題，或是寄送訊息到 <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>。"
 
 #: website/templates/dissemin/faq.html:462
 msgid "Authenticating users is necessary to deposit papers on their behalf in open repositories. Besides, knowing a user's ORCID id helps us find its publications, avoiding articles authored by namesakes for instance. Logging in via ORCID will not expose any private information to Dissemin: we only have access to the public part of your ORCID record. For instance, unless you have explicitly marked your email address as public, we do not even know your email address when you log in to Dissemin via ORCID."
@@ -2459,7 +2478,9 @@ msgstr "點擊「新增至 ORCID」（Add to ORCID）來新增您的出版項目
 
 #: website/templates/dissemin/faq.html:503
 msgid "You can also add publications to your profile <em>on Dissemin</em>, by clicking the button \"Include in my profile\" in search results on Dissemin. (This button is only visible when you are logged in, and next to papers that Dissemin thinks you have authored.) You can also exclude articles from your profile in this way. Please note that these changes are local to Dissemin and are <em>not</em> propagated to your ORCID profile, because ORCID does not have a free API allowing us to propagate them."
-msgstr "您也可以<em>在 Dissemin</em> 來新增出版項目道您的個人檔案，透過在 Dissemin 搜尋結果中點擊「包含在我的個人檔案」按鍵即可。（此按鍵是要您已經有登入，而且只顯示在有被 Dissemin 判斷出是由您所編寫之論文的一旁。）您也可以用此方式在您個人檔案裡排除不需要的文章。請注意這些變動僅侷限於\nDissemin 而<em>不會</em>影響到您的 ORCID 個人檔案，因為 ORCID 並沒有可以讓我們自由使用來更改它們內容的 API。"
+msgstr ""
+"您也可以<em>在 Dissemin</em> 來新增出版項目道您的個人檔案，透過在 Dissemin 搜尋結果中點擊「包含在我的個人檔案」按鍵即可。（此按鍵是要您已經有登入，而且只顯示在有被 Dissemin 判斷出是由您所編寫之論文的一旁。）您也可以用此方式在您個人檔案裡排除不需要的文章。請注意這些變動僅侷限於\n"
+"Dissemin 而<em>不會</em>影響到您的 ORCID 個人檔案，因為 ORCID 並沒有可以讓我們自由使用來更改它們內容的 API。"
 
 #: website/templates/dissemin/faq.html:512
 #, fuzzy, python-format
@@ -2782,4 +2803,3 @@ msgstr "驗證錯誤"
 #, fuzzy, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "驗證失敗。<a href=\"/\">返回登入頁面。</a>"
-

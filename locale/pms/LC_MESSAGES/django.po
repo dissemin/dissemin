@@ -10,9 +10,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-12 10:31+0100\n"
+"POT-Creation-Date: 2019-12-12 16:17+0100\n"
 "PO-Revision-Date: 2019-12-12 14:21:15+0000\n"
 "Language: pms\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -937,8 +936,14 @@ msgstr "Dëscarié"
 
 #: papers/templates/papers/messages.html:8
 #, python-format
-msgid "\n                        We ignored %(papers)s paper from your ORCiD profile.\n                    "
-msgid_plural "\n                        We ignored %(papers)s papers from your ORCiD profile.\n                    "
+msgid ""
+"\n"
+"                        We ignored %(papers)s paper from your ORCiD profile.\n"
+"                    "
+msgid_plural ""
+"\n"
+"                        We ignored %(papers)s papers from your ORCiD profile.\n"
+"                    "
 msgstr[0] ""
 msgstr[1] ""
 
@@ -2036,19 +2041,29 @@ msgid "Other open license"
 msgstr "Àutra licensa lìbera"
 
 #: vinaigrette-deleteme.py:109
-msgid "zenodo"
+msgid "Zenodo"
 msgstr ""
 
 #: vinaigrette-deleteme.py:110
-msgid "hal"
+msgid "Zenodo is a general-purpose open repository hosted by CERN. If the document does not have a DOI yet, Zenodo will create one."
 msgstr ""
 
 #: vinaigrette-deleteme.py:111
-msgid "TUPrints Demo"
+msgid "HAL"
 msgstr ""
 
 #: vinaigrette-deleteme.py:112
-msgid "TUPrints Demo<br/>Spam\nDiese Beschreibung muss länger sein.\nDiese Beschreibung muss länger sein.\nDiese Beschreibung muss länger sein.\nDiese Beschreibung muss länger sein.\nDiese Beschreibung muss länger sein.\nDiese Beschreibung muss länger sein.\nDiese Beschreibung muss länger sein."
+msgid "HAL is a  multidisciplinary open archive, sustained by the French Research Ministry."
+msgstr ""
+
+#: vinaigrette-deleteme.py:113
+#, fuzzy
+#| msgid "preprint"
+msgid "OSF preprints"
+msgstr "prepublicassion"
+
+#: vinaigrette-deleteme.py:114
+msgid "Run by the Center for Open Science, OSF lets you share your preprints openly. You can also share supplemental data, materials or code associated with your article."
 msgstr ""
 
 #: website/forms.py:16 website/forms.py:19
@@ -2413,7 +2428,9 @@ msgid "In most cases, the errors that you see on Dissemin have not been introduc
 msgstr "Ant la pipart dij cas, j'eror ch'a s-ciàira su Dissemin a son nen ëstàit antroduvù da Dissemin, ma a son già present ant le <a href=\"%(sources_url)s\">sorgiss pùbliche</a> che Dissemin a cheuj. Antlora, për piasì ch'a contròla si l'eror ch'a sciàira a l'é già present an nòstre sorgiss ëd dàit, an dasend n'ociada a la session \"Liure\" an àut a drita dla pàgina. Si un-a ëd coste pàgine a conten l'eror, a dovrìa signalé ël problema a lor e nen a noi, dësnò l'eror a seghitrà a esse an sla pàgina sorgiss."
 
 #: website/templates/dissemin/faq.html:431
-msgid "If the error is not present in any of the sources and you believe that Dissemin may have introduced the problem, please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> with details of the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. Note that yo cannot yet fix the problem yourself, although we hope in the longer term to develop a system to allow our users to edit details of their papers themselves."
+#, fuzzy
+#| msgid "If the error is not present in any of the sources and you believe that Dissemin may have introduced the problem, please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> with details of the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. Note that yo cannot yet fix the problem yourself, although we hope in the longer term to develop a system to allow our users to edit details of their papers themselves."
+msgid "If the error is not present in any of the sources and you believe that Dissemin may have introduced the problem, please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> with details of the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. Note that you cannot yet fix the problem yourself, although we hope in the longer term to develop a system to allow our users to edit details of their papers themselves."
 msgstr "Si l'eror a l'é present an gnun-a dle sorgiss e a chërd che Dissemin a peula avèj antroduvù ël problema, për piasì ch'a arpòrta l'<a href=\"https://github.com/dissemin/dissemin/issues\">eror</a> con ij detaj dël problema, o ch'a manda un mëssagi a <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. Ch'a ten-a da ment che a peul ancor nen arzòlve ël problema daspërchiel, bele che nojàutri i speroma a la longa ëd dësvlupé un sistema për përmëtte ai nòstri utent ëd modifiché daspërlor ij detaj dij sò artìcoj."
 
 #: website/templates/dissemin/faq.html:438
@@ -2782,4 +2799,3 @@ msgstr "Eror d'autentificassion"
 #, fuzzy, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "L'autentificassion a l'ha falì. <a href=\"/\">Torné a la pàgina d'intrada.</a>"
-
