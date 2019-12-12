@@ -63,7 +63,7 @@ to load MathJax from. In the example below, this would be
 Apache with WSGI
 ----------------
 
-A sample VirtualHost, assuming that the root of the Dissemin source code is at ``/home/dissemin/prod`` and you use a ``python3.5`` virtualenv is available in the `Dissemin Git repository <https://github.com/dissemin/dissemin/blob/master/provisioning/apache2-vhost.conf` (under ``provisioning/apache2-vhost.conf``).
+A sample VirtualHost, assuming that the root of the Dissemin source code is at ``/home/dissemin/prod`` and you use a ``python3.5`` virtualenv is available in the `Dissemin Git repository <https://github.com/dissemin/dissemin/blob/master/provisioning/apache2-vhost.conf>`_.
 
 
 You should only have to change the path to the application and the domain name of the service.
