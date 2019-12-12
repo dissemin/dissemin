@@ -48,6 +48,6 @@ def change_embargoed_to_published():
 def refresh_deposit_statuses():
     # only run it on DepositRecords that have initially succeeded:
     # ignore 'failed' and 'faked' statuses
-    for repository in Repository.object.all():
+    for repository in Repository.objects.all():
         protocol = repository.get_implementation()
         protocol.refresh_deposit_status()
