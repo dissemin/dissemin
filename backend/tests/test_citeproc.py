@@ -27,6 +27,7 @@ from papers.doi import doi_to_crossref_identifier
 from papers.doi import doi_to_url
 from papers.models import OaiRecord
 from papers.models import OaiSource
+from papers.models import Paper
 from publishers.models import Journal
 from publishers.models import Publisher
 
@@ -508,6 +509,67 @@ class TestCrossRef(TestCiteproc):
         source.refresh_from_db()
         assert source.last_update.date() == timezone.now().date() - timedelta(days=1)
 
+    @responses.activate
+    @pytest.mark.usefixtures('db')
+    def test_fetch_batch(self):
+        dois = ['10.1016/j.gsd.2018.08.007', '10.1109/sYnAsc.2010.88']
+        f_path = os.path.join(settings.BASE_DIR, 'backend', 'tests', 'data', 'crossref_batch.json')
+        with open(f_path, 'r') as f:
+            body = f.read()
+        responses.add(
+            responses.GET,
+            url='https://api.crossref.org/works',
+            body=body,
+            status=200,
+        )
+
+        papers = self.test_class.fetch_batch(dois)
+        for doi in dois:
+            assert doi.lower() in papers.keys()
+        for paper in papers.values():
+            assert isinstance(paper, Paper)
+
+    @responses.activate
+    @pytest.mark.usefixtures('db')
+    def test_fetch_batch_doi_not_found(self):
+        """
+        If doi is not in result list, entry must be none
+        """
+        f_path = os.path.join(settings.BASE_DIR, 'backend', 'tests', 'data', 'crossref_batch.json')
+        with open(f_path, 'r') as f:
+            body = f.read()
+        responses.add(
+            responses.GET,
+            url='https://api.crossref.org/works',
+            body=body,
+            status=200,
+        )
+        dois = ['10.1016/j.gsd.2018.08.007', '10.1109/sYnAsc.2010.88']
+        doi_invalid = '10.spanish/inquisition'
+        dois.append(doi_invalid)
+        papers = self.test_class.fetch_batch(dois)
+        assert papers[doi_invalid] is None
+
+    @responses.activate
+    @pytest.mark.usefixtures('db')
+    def test_fetch_batch_doi_with_comma(self):
+        """
+        If doi has comma, entry must be none
+        """
+        f_path = os.path.join(settings.BASE_DIR, 'backend', 'tests', 'data', 'crossref_batch.json')
+        with open(f_path, 'r') as f:
+            body = f.read()
+        responses.add(
+            responses.GET,
+            url='https://api.crossref.org/works',
+            body=body,
+            status=200,
+        )
+        dois = ['10.1016/j.gsd.2018.08.007', '10.1109/sYnAsc.2010.88']
+        doi_comma= '10.spanish,inquisition'
+        dois.append(doi_comma)
+        papers = self.test_class.fetch_batch(dois)
+        assert papers[doi_comma] is None
 
     @responses.activate
     def test_fetch_day(self, db):
@@ -548,6 +610,16 @@ class TestCrossRef(TestCiteproc):
             assert date_filter + ':{}'.format(day) in query_f
         assert query['rows'][0] == str(self.test_class.rows)
         assert query['mailto'][0] == settings.CROSSREF_MAILTO
+
+
+    def test_filter_dois_by_comma(self):
+        """
+        Tests filtering of DOIs wheter they have a ',' or not
+        """
+        doi = '10.a'
+        doi_comma = '10.a,b'
+        dois = [doi, doi_comma]
+        assert self.test_class._filter_dois_by_comma(dois) == [doi]
 
 
     def test_get_title(self, citeproc):

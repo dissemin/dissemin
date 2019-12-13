@@ -452,6 +452,7 @@ class CrossRef(Citeproc):
     """
 
     rows = 500
+    batch_length = 30
 
     @classmethod
     def _fetch_day(cls, day):
@@ -536,6 +537,67 @@ class CrossRef(Citeproc):
                 source.save()
                 logger.info("Updated up to {}".format(update_date))
                 update_date += timedelta(days=1)
+
+    @staticmethod
+    def _filter_dois_by_comma(dois):
+        """
+        For a given list of DOIs this, splits all DOIs containing a ','
+        :param dois: List of DOIs
+        :returns: DOI list with only DOI that have no comma
+        """
+        dois = [doi for doi in dois if ',' not in doi]
+        return dois
+
+    @classmethod
+    def fetch_batch(cls, dois):
+        """
+        Given a list of DOIs, return for each DOI a paper
+        :params dois: List of DOIS
+        :returns: Dict with Paper (or None) and DOI as key. Note that the key is lowered!
+        """
+        # We create a dict and populate with `None`s and then override with paper objects
+        papers = dict()
+        for doi in dois:
+            papers[doi.lower()] = None
+        # We filter DOIs with comma, we do not batch them, but return them as `None`
+        dois = cls._filter_dois_by_comma(dois)
+
+        headers = {
+            'User-Agent' : settings.CROSSREF_USER_AGENT
+        }
+        url = 'https://api.crossref.org/works'
+        s = requests.Session()
+
+        while len(dois):
+            dois_to_fetch = dois[:cls.batch_length]
+            dois = dois[cls.batch_length:]
+            params = {
+                'filter' : ','.join(['doi:{}'.format(doi) for doi in dois_to_fetch]),
+                'mailto' : settings.CROSSREF_MAILTO,
+                'rows' : cls.batch_length,
+            }
+            try:
+                r = request_retry(
+                    url,
+                    params=params,
+                    headers=headers,
+                    session=s,
+                    retries=0, # There is probably a user waiting
+                )
+            except requests.exceptions.RequestException as e:
+                # We skip the DOIs since we could not reach
+                logger.info(e)
+                continue
+            items = jpath('message/items', r.json(), [])
+            for item in items:
+                try:
+                    p = cls.to_paper(item)
+                except CiteprocError:
+                    logger.debug(item)
+                else:
+                    papers[p.get_doi()] = p
+
+        return papers
 
 
 class DOIResolver(Citeproc):
