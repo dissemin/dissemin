@@ -524,10 +524,15 @@ class TestCrossRef(TestCiteproc):
         )
 
         papers = self.test_class.fetch_batch(dois)
-        for doi in dois:
-            assert doi.lower() in papers.keys()
-        for paper in papers.values():
+        called_url = responses.calls[0].request.url
+        query = parse_qs(urlparse(called_url).query)
+        query_f = query['filter'][0].split(',')
+        for doi, filter_doi in zip(dois, query_f):
+            assert doi == filter_doi.split(':')[1]
+        for paper in papers:
             assert isinstance(paper, Paper)
+        for paper, doi in zip(papers, dois):
+            assert paper.get_doi() == doi.lower()
 
     @responses.activate
     @pytest.mark.usefixtures('db')
@@ -548,7 +553,7 @@ class TestCrossRef(TestCiteproc):
         doi_invalid = '10.spanish/inquisition'
         dois.append(doi_invalid)
         papers = self.test_class.fetch_batch(dois)
-        assert papers[doi_invalid] is None
+        assert papers[2] is None
 
     @responses.activate
     @pytest.mark.usefixtures('db')
@@ -569,7 +574,7 @@ class TestCrossRef(TestCiteproc):
         doi_comma= '10.spanish,inquisition'
         dois.append(doi_comma)
         papers = self.test_class.fetch_batch(dois)
-        assert papers[doi_comma] is None
+        assert papers[2] is None
 
     @responses.activate
     def test_fetch_day(self, db):

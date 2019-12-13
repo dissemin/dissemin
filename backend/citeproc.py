@@ -553,14 +553,14 @@ class CrossRef(Citeproc):
         """
         Given a list of DOIs, return for each DOI a paper
         :params dois: List of DOIS
-        :returns: Dict with Paper (or None) and DOI as key. Note that the key is lowered!
+        :returns: list with Paper (or None) and DOI as key. Note that the key is lowered!
         """
         # We create a dict and populate with `None`s and then override with paper objects
         papers = dict()
         for doi in dois:
             papers[doi.lower()] = None
         # We filter DOIs with comma, we do not batch them, but return them as `None`
-        dois = cls._filter_dois_by_comma(dois)
+        dois_to_fetch = cls._filter_dois_by_comma(dois)
 
         headers = {
             'User-Agent' : settings.CROSSREF_USER_AGENT
@@ -568,11 +568,11 @@ class CrossRef(Citeproc):
         url = 'https://api.crossref.org/works'
         s = requests.Session()
 
-        while len(dois):
-            dois_to_fetch = dois[:cls.batch_length]
-            dois = dois[cls.batch_length:]
+        while len(dois_to_fetch):
+            dois_batch = dois_to_fetch[:cls.batch_length]
+            dois_to_fetch = dois_to_fetch[cls.batch_length:]
             params = {
-                'filter' : ','.join(['doi:{}'.format(doi) for doi in dois_to_fetch]),
+                'filter' : ','.join(['doi:{}'.format(doi) for doi in dois_batch]),
                 'mailto' : settings.CROSSREF_MAILTO,
                 'rows' : cls.batch_length,
             }
@@ -597,7 +597,9 @@ class CrossRef(Citeproc):
                 else:
                     papers[p.get_doi()] = p
 
-        return papers
+        p = [papers.get(doi.lower(), None) for doi in dois]
+
+        return p
 
 
 class DOIResolver(Citeproc):
