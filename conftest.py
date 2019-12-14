@@ -11,6 +11,8 @@ from datetime import date
 from html5validator import Validator as HTML5Validator
 from io import BytesIO
 from tempfile import NamedTemporaryFile
+from urllib.parse import parse_qs
+from urllib.parse import urlparse
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -210,9 +212,13 @@ def dummy_repository(repository):
     """
     return repository.dummy_repository()
 
+@pytest.fixture
+def requests_mocker():
+    with responses.RequestsMock() as rsps:
+        yield rsps
 
 @pytest.fixture
-def mock_doi():
+def mock_doi(requests_mocker):
     def request_callback(request):
         doi = request.path_url[1:]
         f_name = '{}.json'.format(slugify(doi))
@@ -228,18 +234,39 @@ def mock_doi():
             print('File not found: {} - Returning 404'.format(f_path))
             return (404, {}, None)
 
+    requests_mocker.add_callback(
+        requests_mocker.GET,
+        re.compile('{}(.*)'.format(settings.DOI_RESOLVER_ENDPOINT)),
+        callback=request_callback
+    )
+    requests_mocker.add_passthru('http://doi-cache.dissem.in/zotero/')
+    requests_mocker.add_passthru('http://localhost') # Our VNU server runs on localhost
+    requests_mocker.add_passthru('https://pub.orcid.org/')
+    requests_mocker.add_passthru('https://sandbox.zenodo.org/')
 
-    with responses.RequestsMock() as rsps:
-        rsps.add_callback(
-            responses.GET,
-            re.compile('{}(.*)'.format(settings.DOI_RESOLVER_ENDPOINT)),
-            callback=request_callback
-        )
-        rsps.add_passthru('https://pub.orcid.org/')
-        rsps.add_passthru('http://doi-cache.dissem.in/zotero/')
-        rsps.add_passthru('https://sandbox.zenodo.org/')
-        rsps.add_passthru('http://localhost') # Our VNU server runs on localhost
-        yield rsps
+@pytest.fixture
+def mock_crossref(requests_mocker):
+    def request_callback(request):
+        query = parse_qs(urlparse(request.url).query)
+        query_f = query['filter'][0].split(',')
+        slugified_dois = [slugify(item.split(':')[1]) for item in query_f]
+        f_name = '{}.json'.format("-".join(slugified_dois))
+        f_path = os.path.join(settings.BASE_DIR, 'test_data', 'citeproc', 'crossref', f_name)
+        with open(f_path, 'r') as f:
+            body = f.read()
+            return (200, {}, body)
+
+    requests_mocker.add_callback(
+        requests_mocker.GET,
+        re.compile(r'https://api.crossref.org/works'),
+        callback=request_callback
+    )
+    requests_mocker.add_passthru(settings.DOI_RESOLVER_ENDPOINT)
+    requests_mocker.add_passthru('http://doi-cache.dissem.in/zotero/')
+    requests_mocker.add_passthru('http://localhost') # Our VNU server runs on localhost
+    requests_mocker.add_passthru('https://pub.orcid.org/')
+    requests_mocker.add_passthru('https://sandbox.zenodo.org/')
+    requests_mocker.add_passthru('')
 
 
 @pytest.fixture
