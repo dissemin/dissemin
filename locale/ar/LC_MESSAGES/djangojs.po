@@ -9,17 +9,16 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-12 10:33+0100\n"
-"PO-Revision-Date: 2019-10-14 15:19:11+0000\n"
+"PO-Revision-Date: 2019-12-16 14:53:34+0000\n"
 "Language: ar\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-10-01 08:31:19+0000\n"
+"X-POT-Import-Date: 2019-12-12 14:04:05+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
-"Plural-Forms: nplurals=6; plural=(n == 0) ? 0 : ( (n == 1) ? 1 : ( (n == "
-"2) ? 2 : ( (n%100 >= 3 && n%100 <= 10) ? 3 : ( (n%100 >= 11 && n%100 <= "
-"99) ? 4 : 5 ) ) ) );\n"
+"Plural-Forms: nplurals=6; plural=(n == 0) ? 0 : ( (n == 1) ? 1 : ( (n == 2) ? 2 : ( (n%100 >= 3 && n%100 <= 10) ? 3 : ( (n%100 >= 11 && n%100 <= 99) ? 4 : 5 ) ) ) );\n"
 
 #: website/static/js/dissemin.js:202
 #, javascript-format
@@ -34,121 +33,80 @@ msgstr[5] "%s"
 
 #: website/static/js/dissemin.js:293
 msgid "Claiming..."
-msgstr ""
+msgstr "جارٍ الادعاء..."
 
 #: website/static/js/dissemin.js:297
 msgid "Unclaiming..."
-msgstr ""
+msgstr "جارٍ إلغاء الادعاء..."
 
 #: website/static/js/dissemin.js:313
 msgid "Claiming failed!"
-msgstr ""
+msgstr "فشل الادعاء!"
 
 #: website/static/js/dissemin.js:316
 msgid "Unclaiming failed!"
-msgstr ""
+msgstr "فشل إلغاء الادعاء!"
 
 #: website/static/js/dissemin.js:321
 msgid "Exclude from my profile"
-msgstr ""
+msgstr "استبعاد من ملفي الشخصي"
 
 #: website/static/js/dissemin.js:325
 msgid "Include in my profile"
-msgstr ""
+msgstr "تضمين في ملفي الشخصي"
 
 #: website/static/js/dissemin.js:350
 #, fuzzy
-#| msgid "Adding to todolist"
 msgid "Adding to to-do list"
 msgstr "الإضافة إلى قائمة العمل"
 
 #: website/static/js/dissemin.js:354
 #, fuzzy
-#| msgid "Removing from todolist"
 msgid "Removing from to-do list"
 msgstr "الإزالة من قائمة المهام"
 
 #: website/static/js/dissemin.js:600
 msgid "Preview of uploaded file"
-msgstr ""
+msgstr "معاينة الملف المرفوع"
 
 #: website/static/js/dissemin.js:603
 msgid "Pages: "
-msgstr ""
+msgstr "صفحات: "
 
 #: website/static/js/dissemin.js:604
 msgid "Size: "
-msgstr ""
+msgstr "الحجم: "
 
 #: website/static/js/dissemin.js:619
 msgid "While uploading %(file)s the following error occured:"
-msgstr ""
+msgstr "أثناء رفع %(file)s، حدث الخطأ التالي:"
 
 #: website/static/js/dissemin.js:628 website/static/js/dissemin.js:683
 #: website/static/js/dissemin.js:689
 msgid "Unknown error"
-msgstr ""
+msgstr "خطأ غير معروف"
 
 #: website/static/js/dissemin.js:673
 msgid "While fetching file from %(url)s the following error occured:"
-msgstr ""
+msgstr "أثناء جلب الملف من %(url)s، حدث الخطأ التالي:"
 
 #: website/static/js/dissemin.js:760
 msgid "Sorry, we could not fill this for you."
-msgstr ""
+msgstr "عذرا، لم نتمكن من ملء هذا لأجلك."
 
 #: website/static/js/dissemin.js:761
 msgid "Trying to fill this field automatically for you..."
-msgstr ""
+msgstr "تجري محاولة ملء هذا الحقل تلقائيا لأجلك..."
 
 #: website/static/js/dissemin.js:795
 msgid "You have not selected a file for upload."
-msgstr ""
+msgstr "لم تقم بتحديد ملف للرافعه."
 
 #: website/static/js/dissemin.js:822
 msgid "Dissemin encountered an error, please try again later."
-msgstr ""
+msgstr "واجه ديسمين؛ الرجاء إعادة المحاولة لاحقا."
 
 #: website/static/js/moment.min.js:1
 msgid ": "
-msgstr ""
+msgstr ": "
 
-#~ msgid "Do not show this message anymore"
-#~ msgstr "لا تظهر هذه الرسالة بعد الآن"
-
-#~ msgid "No author"
-#~ msgstr "بلا مؤلف"
-
-#~ msgid "No title"
-#~ msgstr "بلا عنوان"
-
-#~ msgid "Invalid publication date"
-#~ msgstr "تاريخ النشر غير صالح"
-
-#, fuzzy
-#~ msgid "No publication date"
-#~ msgstr "تاريخ النشر غير صالح"
-
-#~ msgid "Paper is invalid"
-#~ msgstr "الورقة غير صالحة"
-
-#~ msgid "We ignored %(count)s paper from your ORCiD profile."
-#~ msgid_plural "We ignored %(count)s papers from your ORCiD profile."
-#~ msgstr[0] "تجاهلنا %(count)s ورقة من الملف الشخصي الخاص بك في ORCiD."
-#~ msgstr[1] "%(count)"
-#~ msgstr[2] "%(count)"
-#~ msgstr[3] "%(count)"
-#~ msgstr[4] "%(count)"
-#~ msgstr[5] "%(count)"
-
-#~ msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
-#~ msgstr "تم تجاهل \"%(name)s\" للسبب التالي: %(reason)s"
-
-#~ msgid "A paper was ignored, because it has no name"
-#~ msgstr "تم تجاهل ورقة; لأنه ليس لها اسم"
-
-#~ msgid "Show more information"
-#~ msgstr "عرض معلومات اكثر"
-
-#~ msgid "Show less information"
-#~ msgstr "عرض معلومات أقل"

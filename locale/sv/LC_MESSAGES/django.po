@@ -3,6 +3,7 @@
 #
 # Author: Abijeet Patro
 # Author: Dan Koehl
+# Author: ProletariatetsBefrielseOrkester
 # Author: Pyscowicz
 # Author: Sturban
 # Author: WikiPhoenix
@@ -12,13 +13,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-12 16:17+0100\n"
-"PO-Revision-Date: 2019-12-12 14:21:18+0000\n"
+"PO-Revision-Date: 2019-12-16 14:53:48+0000\n"
 "Language: sv\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-12-12 13:58:10+0000\n"
+"X-POT-Import-Date: 2019-12-13 05:38:35+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -498,7 +500,6 @@ msgid "PDF URL"
 msgstr "PDF-URL"
 
 #: deposit/templates/deposit/deposits.html:134
-#, fuzzy
 msgid "Status:"
 msgstr "Status"
 
@@ -571,16 +572,14 @@ msgid "postprint"
 msgstr ""
 
 #: deposit/templates/deposit/start.html:144
-#, fuzzy
 msgid "pdfversion"
-msgstr "publicerad version"
+msgstr "pdfversion"
 
 #: deposit/templates/deposit/start.html:165
 msgid "Repository:"
 msgstr ""
 
 #: deposit/templates/deposit/start.html:192
-#, fuzzy
 msgid "Metadata:"
 msgstr "Metadata"
 
@@ -607,7 +606,7 @@ msgstr ""
 
 #: deposit/views.py:261
 msgid "Not all fields have been filled correctly."
-msgstr ""
+msgstr "Alla fält har inte ifyllts korrekt."
 
 #: deposit/views.py:270
 msgid "This repository cannot be used for this paper."
@@ -872,7 +871,7 @@ msgstr ""
 
 #: papers/templates/papers/advanced_search.html:8
 msgid "Advanced Search"
-msgstr ""
+msgstr "Avancerad sökning"
 
 #: papers/templates/papers/advanced_search.html:13
 #: website/templates/dissemin/start_page.html:30
@@ -943,20 +942,14 @@ msgstr "Ladda ned"
 
 #: papers/templates/papers/messages.html:8
 #, python-format
-msgid ""
-"\n"
-"                        We ignored %(papers)s paper from your ORCiD profile.\n"
-"                    "
-msgid_plural ""
-"\n"
-"                        We ignored %(papers)s papers from your ORCiD profile.\n"
-"                    "
+msgid "\n                        We ignored %(papers)s paper from your ORCiD profile.\n                    "
+msgid_plural "\n                        We ignored %(papers)s papers from your ORCiD profile.\n                    "
 msgstr[0] ""
 msgstr[1] ""
 
 #: papers/templates/papers/messages.html:14
 msgid "Details:"
-msgstr ""
+msgstr "Detaljer:"
 
 #: papers/templates/papers/messages.html:21
 #, fuzzy
@@ -991,10 +984,10 @@ msgid "A paper was ignored, because is has no title."
 msgstr ""
 
 #: papers/templates/papers/paper.html:39
-#, fuzzy, python-format
+#, python-format
 msgctxt "as in: _Journal article published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "%(doctype)s published in %(year)s by"
-msgstr "Publicerad i"
+msgstr "%(doctype)s publicerad i %(year)s av"
 
 #: papers/templates/papers/paper.html:45
 #, fuzzy, python-format
@@ -1005,10 +998,7 @@ msgstr "Publicerad i"
 #: papers/templates/papers/paper.html:55
 #, fuzzy, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
-msgstr ""
-"\n"
-"            och <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s andra författare</a>\n"
-"            "
+msgstr "\n            och <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s andra författare</a>\n            "
 
 #: papers/templates/papers/paper.html:61
 #, fuzzy
@@ -1067,7 +1057,7 @@ msgstr "och %(remaining_authors)s andra författare"
 
 #: papers/templates/papers/paper_list.html:55
 msgid "from"
-msgstr ""
+msgstr "från"
 
 #: papers/templates/papers/paper_list.html:57
 #: papers/templates/papers/policies.html:17
@@ -1112,11 +1102,11 @@ msgstr "Policydetaljer"
 #: papers/templates/papers/policies.html:70
 #: papers/templates/papers/policies.html:86
 msgid "Blue circle"
-msgstr ""
+msgstr "Blå cirkel"
 
 #: papers/templates/papers/policies.html:73
 msgid "Mark this publication for later upload."
-msgstr ""
+msgstr "Markera den här publikationen för en senare uppladdning."
 
 #: papers/templates/papers/policies.html:76
 msgid "Mark"
@@ -1150,9 +1140,8 @@ msgid " %(first_name)s %(last_name)s uses ORCID."
 msgstr ""
 
 #: papers/templates/papers/researcher.html:38
-#, fuzzy
 msgid "Refresh Publications"
-msgstr "Uppdaterar publikationer"
+msgstr "Uppdatera publikationer"
 
 #: papers/templates/papers/researcher.html:42
 msgid "Address:"
@@ -1345,15 +1334,15 @@ msgstr ""
 
 #: papers/templatetags/statuses.py:112
 msgid "Orange circle"
-msgstr ""
+msgstr "Orange cirkel"
 
 #: papers/templatetags/statuses.py:113
 msgid "White circle"
-msgstr ""
+msgstr "Vit cirkel"
 
 #: papers/templatetags/statuses.py:114
 msgid "Question mark in circle"
-msgstr ""
+msgstr "Frågetecken i cirkel"
 
 #: papers/views.py:88
 msgid "Dissemin requires access to your ORCID name, which is marked as private in your ORCID profile."
@@ -1374,11 +1363,7 @@ msgstr ""
 #: papers/views.py:278
 #, fuzzy
 msgid "Invalid ORCID profile. Please make sure it includes a public name."
-msgstr ""
-"\n"
-"                            Ogiltig ORCID-profil.\n"
-"                            Se till att den innehåller ett offentligt namn.\n"
-"                            "
+msgstr "\n                            Ogiltig ORCID-profil.\n                            Se till att den innehåller ett offentligt namn.\n                            "
 
 #: papers/views.py:281
 msgid "Invalid ORCID profile."
@@ -1525,7 +1510,6 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: publishers/templates/publishers/list.html:96
-#, fuzzy
 msgid "No publishers found"
 msgstr "Ingen utgivare hittades."
 
@@ -1650,7 +1634,7 @@ msgstr "Eller ange en URL:"
 
 #: upload/templates/upload/widget.html:19
 msgid "Upload from URL"
-msgstr ""
+msgstr "Ladda upp från URL"
 
 #: upload/templates/upload/widget.html:27
 msgid "Fetching file and generating preview..."
@@ -1658,7 +1642,7 @@ msgstr ""
 
 #: upload/templates/upload/widget.html:47
 msgid "Choose another file"
-msgstr ""
+msgstr "Välj en annan fil"
 
 #: upload/views.py:133
 msgid "Invalid PDF file."
@@ -2120,22 +2104,16 @@ msgstr "Åtkomst till PDF nekades."
 #: website/templates/403.html:13
 #, fuzzy, python-format
 msgid "The access to the requested page has been denied. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr ""
-"\n"
-"            Sidan du begärde kunde inte hittas. <a href=\"/\">Gå tillbaka till hemsidan.</a>\n"
-"           "
+msgstr "\n            Sidan du begärde kunde inte hittas. <a href=\"/\">Gå tillbaka till hemsidan.</a>\n           "
 
 #: website/templates/404.html:6 website/templates/404.html:10
 msgid "Page not found"
 msgstr "Sidan kunde inte hittas"
 
 #: website/templates/404.html:13
-#, fuzzy, python-format
+#, python-format
 msgid "The page you requested could not be found. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr ""
-"\n"
-"            Sidan du begärde kunde inte hittas. <a href=\"/\">Gå tillbaka till hemsidan.</a>\n"
-"           "
+msgstr "Sidan du begärde kunde inte hittas. <a href=\"%(index)s\">Gå tillbaka till hemsidan.</a>"
 
 #: website/templates/500.html:6 website/templates/500.html:10
 #, fuzzy
@@ -2145,10 +2123,7 @@ msgstr "Internt fel"
 #: website/templates/500.html:13
 #, fuzzy, python-format
 msgid "Your request triggered an internal server error. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr ""
-"\n"
-"            Din begäran utlöste ett internt fel. <a href=\"/\">Gå tillbaka till hemsidan.</a>\n"
-"           "
+msgstr "\n            Din begäran utlöste ett internt fel. <a href=\"/\">Gå tillbaka till hemsidan.</a>\n           "
 
 #: website/templates/admin/base_site.html:5
 #: website/templates/admin/base_site.html:8
@@ -2205,7 +2180,6 @@ msgid "Who runs dissem.in?"
 msgstr "Vem driver dissem.in?"
 
 #: website/templates/dissemin/faq.html:28
-#, fuzzy
 msgid "Can I create a profile on dissem.in?"
 msgstr "Kan jag skapa min profil på dissem.in?"
 
@@ -2214,9 +2188,8 @@ msgid "Policies and Full-text Availability"
 msgstr ""
 
 #: website/templates/dissemin/faq.html:31
-#, fuzzy
 msgid "What do our policy classes mean?"
-msgstr "Vad betyder era policyklasser?"
+msgstr "Vad betyder våra policyklasser?"
 
 #: website/templates/dissemin/faq.html:32
 msgid "When is a paper considered available?"
@@ -2377,7 +2350,7 @@ msgstr ""
 
 #: website/templates/dissemin/faq.html:285
 msgid "Class"
-msgstr ""
+msgstr "Klass"
 
 #: website/templates/dissemin/faq.html:286
 msgid "Description"
@@ -2840,3 +2813,4 @@ msgstr ""
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
+

@@ -4,19 +4,21 @@
 # Author: Abijeet Patro
 # Author: Amaia
 # Author: An13sa
+# Author: Fitoschido
 # --
 # This file is part of the Dissemin Project
 # This file is distributed under the same license as the Dissemin package.
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-12 16:17+0100\n"
-"PO-Revision-Date: 2019-10-14 15:19:18+0000\n"
+"PO-Revision-Date: 2019-12-16 14:53:39+0000\n"
 "Language: eu\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-10-01 14:19:16+0000\n"
+"X-POT-Import-Date: 2019-12-13 05:38:35+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -57,7 +59,6 @@ msgstr ""
 
 #: deposit/forms.py:160
 #, fuzzy
-#| msgid "Unknown publisher"
 msgid "Do not publish before"
 msgstr "Argitaratzaile ezezaguna"
 
@@ -476,7 +477,6 @@ msgstr ""
 
 #: deposit/templates/deposit/deposits.html:67
 #, fuzzy
-#| msgid "By publication date"
 msgid "Publication date"
 msgstr "argitalpen-datagatik"
 
@@ -498,7 +498,6 @@ msgstr "PDFaren URLa"
 
 #: deposit/templates/deposit/deposits.html:134
 #, fuzzy
-#| msgid "Status"
 msgid "Status:"
 msgstr "Egoera"
 
@@ -572,7 +571,6 @@ msgstr "berrikusitako bertsioa"
 
 #: deposit/templates/deposit/start.html:144
 #, fuzzy
-#| msgid "published version"
 msgid "pdfversion"
 msgstr "argitaratutako bertsioa"
 
@@ -581,10 +579,8 @@ msgid "Repository:"
 msgstr ""
 
 #: deposit/templates/deposit/start.html:192
-#, fuzzy
-#| msgid "Metadata"
 msgid "Metadata:"
-msgstr "Metadatuak"
+msgstr "Metadatuak:"
 
 #: deposit/templates/deposit/start.html:212
 #: papers/templates/papers/search_base.html:165
@@ -895,7 +891,6 @@ msgstr ""
 
 #: papers/templates/papers/advanced_search.html:39
 #, fuzzy
-#| msgid "By document type"
 msgid "Document type"
 msgstr "Dokumentu motagatik"
 
@@ -944,14 +939,8 @@ msgstr "Jaitsi"
 
 #: papers/templates/papers/messages.html:8
 #, python-format
-msgid ""
-"\n"
-"                        We ignored %(papers)s paper from your ORCiD profile.\n"
-"                    "
-msgid_plural ""
-"\n"
-"                        We ignored %(papers)s papers from your ORCiD profile.\n"
-"                    "
+msgid "\n                        We ignored %(papers)s paper from your ORCiD profile.\n                    "
+msgid_plural "\n                        We ignored %(papers)s papers from your ORCiD profile.\n                    "
 msgstr[0] ""
 msgstr[1] ""
 
@@ -971,13 +960,11 @@ msgstr "izenburua"
 
 #: papers/templates/papers/messages.html:25
 #, fuzzy
-#| msgid "By publication date"
 msgid "Invalid publication date"
 msgstr "argitalpen-datagatik"
 
 #: papers/templates/papers/messages.html:27
 #, fuzzy
-#| msgid "By publication date"
 msgid "No publication date"
 msgstr "argitalpen-datagatik"
 
@@ -1149,7 +1136,6 @@ msgstr ""
 
 #: papers/templates/papers/researcher.html:38
 #, fuzzy
-#| msgid "Publications"
 msgid "Refresh Publications"
 msgstr "Argitalpeak"
 
@@ -1417,7 +1403,6 @@ msgstr ""
 
 #: publishers/forms.py:18
 #, fuzzy
-#| msgid "Publisher:"
 msgid "By publisher"
 msgstr "Argitaletxea:"
 
@@ -1518,7 +1503,6 @@ msgstr[1] ""
 
 #: publishers/templates/publishers/list.html:96
 #, fuzzy
-#| msgid "No publisher found."
 msgid "No publishers found"
 msgstr "Ez da argitalpenik aurkitu"
 
@@ -1637,7 +1621,6 @@ msgstr ""
 
 #: upload/templates/upload/widget.html:15
 #, fuzzy
-#| msgid "Or enter an URL:"
 msgid "Or enter a URL:"
 msgstr "Edo eman URL bat:"
 
@@ -2087,7 +2070,6 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:113
 #, fuzzy
-#| msgid "preprint"
 msgid "OSF preprints"
 msgstr "bertsio originala"
 
@@ -2101,7 +2083,6 @@ msgstr ""
 
 #: website/templates/403.html:6 website/templates/403.html:10
 #, fuzzy
-#| msgid "Access to the PDF was denied."
 msgid "Access denied"
 msgstr "PDFrako sarrera ukatu da."
 
@@ -2121,7 +2102,6 @@ msgstr ""
 
 #: website/templates/500.html:6 website/templates/500.html:10
 #, fuzzy
-#| msgid "Internal error"
 msgid "Internal server error"
 msgstr "Barne errorea"
 
@@ -2391,7 +2371,6 @@ msgstr ""
 
 #: website/templates/dissemin/faq.html:336
 #, fuzzy
-#| msgid "Upload is forbidden"
 msgid "Pre/post prints forbidden"
 msgstr "Igotzea debekatuta dago"
 
@@ -2518,13 +2497,10 @@ msgstr "Parte hartzeko modu asko daude:"
 
 #: website/templates/dissemin/faq.html:539
 #, fuzzy
-#| msgid "Star <a href=\"https://github.com/wetneb/dissemin\">our GitHub project</a>!"
 msgid "Contribute to <a href=\"https://github.com/dissemin/dissemin\">the code</a>."
 msgstr "Jarraitu <a href=\"https://github.com/wetneb/dissemin\">gure GitHub proiektua</a>!"
 
 #: website/templates/dissemin/faq.html:544
-#, fuzzy
-#| msgid "The source code is available <a href=\"https://github.com/wetneb/dissemin\">on GitHub</a>."
 msgid "Fix any of our listed <a href=\"https://github.com/dissemin/dissemin/issues\">issues</a>."
 msgstr "Iturburu-kodea eskuragarri dago <a href=\"https://github.com/wetneb/dissemin\">GitHub-en</a>."
 
@@ -2538,7 +2514,6 @@ msgstr "Animatu ikertzaileak zerbitzu hau erabiltzeko."
 
 #: website/templates/dissemin/faq.html:559
 #, fuzzy
-#| msgid "Star <a href=\"https://github.com/wetneb/dissemin\">our GitHub project</a>!"
 msgid "Star <a href=\"https://github.com/dissemin/dissemin\">our GitHub project</a>!"
 msgstr "Jarraitu <a href=\"https://github.com/wetneb/dissemin\">gure GitHub proiektua</a>!"
 
@@ -2548,7 +2523,6 @@ msgstr "<a href=\"https://association.dissem.in/#dons\">Dohaintzak onartzen dira
 
 #: website/templates/dissemin/faq.html:572
 #, fuzzy
-#| msgid "The source code is available <a href=\"https://github.com/wetneb/dissemin\">on GitHub</a>."
 msgid "The source code is available <a href=\"https://github.com/dissemin/dissemin\">on GitHub</a>."
 msgstr "Iturburu-kodea eskuragarri dago <a href=\"https://github.com/wetneb/dissemin\">GitHub-en</a>."
 
@@ -2827,93 +2801,3 @@ msgstr ""
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
 
-#~ msgid "Dissemin encountered an error, please try again later."
-#~ msgstr "Arazo bat egon da Dissemin-en, mesedez saiatu berriro beranduago."
-
-#~ msgid "please wait..."
-#~ msgstr "itxaron mesedez..."
-
-#~ msgid "Right"
-#~ msgstr "Zuzena"
-
-#~ msgid "Wrong"
-#~ msgstr "Okerra"
-
-#~ msgid "Researcher deleted. "
-#~ msgstr "Ikertzaile bat ezabatu da. "
-
-#~ msgid "Delete"
-#~ msgstr "Ezabatu"
-
-#~ msgid "Papers of the members"
-#~ msgstr "Kideen artikuluak"
-
-#~ msgid "Website"
-#~ msgstr "Webgunea"
-
-#~ msgid "Members:"
-#~ msgstr "Kideak:"
-
-#~ msgid "Institutions"
-#~ msgstr "Erakundeak"
-
-#~ msgid "Yes"
-#~ msgstr "Bai"
-
-#~ msgid "(empty profile)"
-#~ msgstr "(profila hutsik)"
-
-#~ msgctxt "as in: _Journal article published in 2017 by_ Tom Smith, Nicole Allen"
-#~ msgid "<span class=\"paperDocType\">%(doctype)s</span> published in %(year)s by"
-#~ msgstr "<span class=\"paperDocType\">%(doctype)s</span> argitaratua %(year)s-an"
-
-#~ msgid "Journal"
-#~ msgstr "Aldizkaria"
-
-#~ msgid "Published by"
-#~ msgstr "Honek argitaratua"
-
-#~ msgid "ISSN:"
-#~ msgstr "ISSN:"
-
-#~ msgid " published by "
-#~ msgstr "honek argitaratua "
-
-#~ msgid "Preprint:"
-#~ msgstr "Bertsio originala:"
-
-#~ msgid "Postprint:"
-#~ msgstr "Berrikusitako bertsioa:"
-
-#~ msgid "Published version:"
-#~ msgstr "Argitaratutako bertsioa:"
-
-#~ msgid "%(sort_by)s <div>%(increasing)s %(value)s</div>"
-#~ msgstr "%(sort_by)s <div>%(increasing)s %(value)s</div>"
-
-#~ msgid "Journals"
-#~ msgstr "Aldizkariak"
-
-#~ msgid "Only journals with papers written by our users are listed."
-#~ msgstr "Gure erabiltzaileek idatzitako dokumentuak dituzten aldizkariak bakarrik zerrendatzen dira."
-
-#~ msgid "None."
-#~ msgstr "Bat ere ez."
-
-#~ msgid "Publications are available"
-#~ msgstr "Argitalpenak erabilgarri daude"
-
-#~ msgid "Back to top"
-#~ msgstr "Gora itzuli"
-
-#~ msgid "Sign In"
-#~ msgstr "Saioa hasi"
-
-#~ msgid "Dissemin account"
-#~ msgstr "Dissemin kontua"
-
-#~ msgid "Forgot Password?"
-#~ msgstr "Pasahitza ahaztu duzu?"
-
-#~ msgid "Browse"
-#~ msgstr "Arakatu"

@@ -8,13 +8,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-12 16:17+0100\n"
-"PO-Revision-Date: 2019-10-14 15:19:33+0000\n"
+"PO-Revision-Date: 2019-12-16 14:53:47+0000\n"
 "Language: skr-Arab\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-10-01 14:19:16+0000\n"
+"X-POT-Import-Date: 2019-12-13 05:38:35+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -491,7 +492,6 @@ msgstr "پی ڈی ایف یوآرایل"
 
 #: deposit/templates/deposit/deposits.html:134
 #, fuzzy
-#| msgid "Status"
 msgid "Status:"
 msgstr "حیثیت"
 
@@ -572,10 +572,8 @@ msgid "Repository:"
 msgstr "مخزن"
 
 #: deposit/templates/deposit/start.html:192
-#, fuzzy
-#| msgid "Metadata"
 msgid "Metadata:"
-msgstr "میٹا ڈیٹا"
+msgstr "میٹا ڈیٹا:"
 
 #: deposit/templates/deposit/start.html:212
 #: papers/templates/papers/search_base.html:165
@@ -887,7 +885,6 @@ msgstr ""
 
 #: papers/templates/papers/advanced_search.html:39
 #, fuzzy
-#| msgid "Document"
 msgid "Document type"
 msgstr "دستاویز"
 
@@ -936,20 +933,14 @@ msgstr "ڈاؤن لوڈ"
 
 #: papers/templates/papers/messages.html:8
 #, python-format
-msgid ""
-"\n"
-"                        We ignored %(papers)s paper from your ORCiD profile.\n"
-"                    "
-msgid_plural ""
-"\n"
-"                        We ignored %(papers)s papers from your ORCiD profile.\n"
-"                    "
+msgid "\n                        We ignored %(papers)s paper from your ORCiD profile.\n                    "
+msgid_plural "\n                        We ignored %(papers)s papers from your ORCiD profile.\n                    "
 msgstr[0] ""
 msgstr[1] ""
 
 #: papers/templates/papers/messages.html:14
 msgid "Details:"
-msgstr ""
+msgstr "تفصیلاں:"
 
 #: papers/templates/papers/messages.html:21
 #, fuzzy
@@ -1000,7 +991,6 @@ msgstr ""
 
 #: papers/templates/papers/paper.html:61
 #, fuzzy
-#| msgid "Show"
 msgid "Show less"
 msgstr "ݙِکھاؤ"
 
@@ -1056,7 +1046,7 @@ msgstr ""
 
 #: papers/templates/papers/paper_list.html:55
 msgid "from"
-msgstr ""
+msgstr "کنوں"
 
 #: papers/templates/papers/paper_list.html:57
 #: papers/templates/papers/policies.html:17
@@ -1101,7 +1091,7 @@ msgstr "پالیسی دی تفصیل"
 #: papers/templates/papers/policies.html:70
 #: papers/templates/papers/policies.html:86
 msgid "Blue circle"
-msgstr ""
+msgstr "نیلا پِڑ"
 
 #: papers/templates/papers/policies.html:73
 msgid "Mark this publication for later upload."
@@ -1335,7 +1325,7 @@ msgstr ""
 
 #: papers/templatetags/statuses.py:113
 msgid "White circle"
-msgstr ""
+msgstr "چٹا دائرہ"
 
 #: papers/templatetags/statuses.py:114
 msgid "Question mark in circle"
@@ -1405,7 +1395,6 @@ msgstr "ودھدا پئے"
 
 #: publishers/forms.py:18
 #, fuzzy
-#| msgid "Publisher"
 msgid "By publisher"
 msgstr "ناشر"
 
@@ -1506,7 +1495,6 @@ msgstr[1] ""
 
 #: publishers/templates/publishers/list.html:96
 #, fuzzy
-#| msgid "Publishers"
 msgid "No publishers found"
 msgstr "ناشر"
 
@@ -1623,7 +1611,6 @@ msgstr ""
 
 #: upload/templates/upload/widget.html:15
 #, fuzzy
-#| msgid "Or enter an URL:"
 msgid "Or enter a URL:"
 msgstr "یا ہک یوآرایل درج کرو:"
 
@@ -2073,7 +2060,6 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:113
 #, fuzzy
-#| msgid "preprint"
 msgid "OSF preprints"
 msgstr "چھپݨ کنے پہلے"
 
@@ -2105,7 +2091,6 @@ msgstr ""
 
 #: website/templates/500.html:6 website/templates/500.html:10
 #, fuzzy
-#| msgid "Internal error"
 msgid "Internal server error"
 msgstr "اندر دی غلطی"
 
@@ -2339,7 +2324,7 @@ msgstr ""
 
 #: website/templates/dissemin/faq.html:285
 msgid "Class"
-msgstr ""
+msgstr "جماعت"
 
 #: website/templates/dissemin/faq.html:286
 msgid "Description"
@@ -2375,7 +2360,6 @@ msgstr ""
 
 #: website/templates/dissemin/faq.html:336
 #, fuzzy
-#| msgid "Upload is forbidden"
 msgid "Pre/post prints forbidden"
 msgstr "اپ لوڈ منع ہے"
 
@@ -2802,89 +2786,3 @@ msgstr ""
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
 
-#~ msgid "please wait..."
-#~ msgstr "انتظار کرو۔۔۔"
-
-#~ msgid "Right"
-#~ msgstr "درست"
-
-#~ msgid "Wrong"
-#~ msgstr "غلط"
-
-#~ msgid "Delete"
-#~ msgstr "مٹاؤ"
-
-#~ msgid "Website"
-#~ msgstr "ویب سائٹ"
-
-#~ msgid "Members:"
-#~ msgstr "ممبران:"
-
-#~ msgid "Institutions"
-#~ msgstr "ادارے"
-
-#~ msgid "Yes"
-#~ msgstr "جیا"
-
-#~ msgid "(empty profile)"
-#~ msgstr "(خالی پروفائل)"
-
-#~ msgid "Ask upload"
-#~ msgstr "اپ لوڈ دا پُچھو"
-
-#~ msgid "Publisher:"
-#~ msgstr "ناشر:"
-
-#~ msgid "Deposited."
-#~ msgstr "جمع تھی ڳئے۔"
-
-#~ msgid "Deposit again"
-#~ msgstr "ولدا جمع کرواؤ"
-
-#~ msgid "Claiming..."
-#~ msgstr "دعویٰ کریندا پئے۔۔۔"
-
-#~ msgid "Unclaiming..."
-#~ msgstr "دعویٰ کائنی کریندا پیا۔۔۔"
-
-#~ msgid "Claiming failed!"
-#~ msgstr "دعویٰ پورا کائنی تھیا!"
-
-#~ msgid "Journal"
-#~ msgstr "جریدہ"
-
-#~ msgid "ISSN:"
-#~ msgstr "آئی ایس ایس این:"
-
-#~ msgid " in "
-#~ msgstr "وچ/"
-
-#~ msgid "Preprint:"
-#~ msgstr "چھپݨ کنے پہلے:"
-
-#~ msgid "Postprint:"
-#~ msgstr "چھپݨ دے بعد:"
-
-#~ msgid "Policy"
-#~ msgstr "پالیسی"
-
-#~ msgid "Journals"
-#~ msgstr "جریدے"
-
-#~ msgid "None."
-#~ msgstr "کوئی وی کائنی۔"
-
-#~ msgid "Sign In"
-#~ msgstr "سائن ان"
-
-#~ msgid "Primary sources"
-#~ msgstr "بنیادی ماخذ"
-
-#~ msgid "Select a file:"
-#~ msgstr "فائل چݨو:"
-
-#~ msgid "Browse"
-#~ msgstr "براؤز"
-
-#~ msgid "Or drop a file here:"
-#~ msgstr "یا اتھ ہک فائل پاؤ:"

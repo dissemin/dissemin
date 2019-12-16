@@ -11,13 +11,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-12 16:17+0100\n"
-"PO-Revision-Date: 2019-12-12 14:21:16+0000\n"
+"PO-Revision-Date: 2019-12-16 14:53:46+0000\n"
 "Language: pt\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-12-12 13:58:10+0000\n"
+"X-POT-Import-Date: 2019-12-13 05:38:35+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -494,9 +495,8 @@ msgid "PDF URL"
 msgstr "URL do PDF"
 
 #: deposit/templates/deposit/deposits.html:134
-#, fuzzy
 msgid "Status:"
-msgstr "Estado"
+msgstr "Estado:"
 
 #: deposit/templates/deposit/deposits.html:145
 msgid "Letter of Declaration"
@@ -577,9 +577,8 @@ msgid "Repository:"
 msgstr "Repositório:"
 
 #: deposit/templates/deposit/start.html:192
-#, fuzzy
 msgid "Metadata:"
-msgstr "Metadados"
+msgstr "Metadados:"
 
 #: deposit/templates/deposit/start.html:212
 #: papers/templates/papers/search_base.html:165
@@ -942,14 +941,8 @@ msgstr "Descarregar"
 
 #: papers/templates/papers/messages.html:8
 #, python-format
-msgid ""
-"\n"
-"                        We ignored %(papers)s paper from your ORCiD profile.\n"
-"                    "
-msgid_plural ""
-"\n"
-"                        We ignored %(papers)s papers from your ORCiD profile.\n"
-"                    "
+msgid "\n                        We ignored %(papers)s paper from your ORCiD profile.\n                    "
+msgid_plural "\n                        We ignored %(papers)s papers from your ORCiD profile.\n                    "
 msgstr[0] ""
 msgstr[1] ""
 
@@ -990,10 +983,10 @@ msgid "A paper was ignored, because is has no title."
 msgstr ""
 
 #: papers/templates/papers/paper.html:39
-#, fuzzy, python-format
+#, python-format
 msgctxt "as in: _Journal article published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "%(doctype)s published in %(year)s by"
-msgstr "Publicado em %(year)s por"
+msgstr "%(doctype)s publicado em %(year)s por"
 
 #: papers/templates/papers/paper.html:45
 #, python-format
@@ -1004,10 +997,7 @@ msgstr "Publicado em %(year)s por"
 #: papers/templates/papers/paper.html:55
 #, fuzzy, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
-msgstr ""
-"\n"
-"            and <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s outros autores</a>\n"
-"            "
+msgstr "\n            and <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s outros autores</a>\n            "
 
 #: papers/templates/papers/paper.html:61
 msgid "Show less"
@@ -1371,11 +1361,7 @@ msgstr ""
 #: papers/views.py:278
 #, fuzzy
 msgid "Invalid ORCID profile. Please make sure it includes a public name."
-msgstr ""
-"\n"
-"                            Perfil ORCID inválido.\n"
-"                            Por favor, certifique-se se incluiu um nome público.\n"
-"                            "
+msgstr "\n                            Perfil ORCID inválido.\n                            Por favor, certifique-se se incluiu um nome público.\n                            "
 
 #: papers/views.py:281
 msgid "Invalid ORCID profile."
@@ -1640,7 +1626,6 @@ msgid "Select here the full text of your article. PDF files only, maximum size:"
 msgstr "Selecione aqui o texto completo do seu artigo. Apenas os ficheiros PDF, tamanho máximo:"
 
 #: upload/templates/upload/widget.html:15
-#, fuzzy
 msgid "Or enter a URL:"
 msgstr "Ou introduza um URL:"
 
@@ -2100,7 +2085,6 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:113
 #, fuzzy
-#| msgid "preprint"
 msgid "OSF preprints"
 msgstr "pré-publicação"
 
@@ -2120,10 +2104,7 @@ msgstr "O acesso ao PDF foi negado."
 #: website/templates/403.html:13
 #, fuzzy, python-format
 msgid "The access to the requested page has been denied. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr ""
-"\n"
-"            Não foi possível encontrar a página solicitada. <a href=\"/\">Volte para a página inicial.</a>\n"
-"           "
+msgstr "\n            Não foi possível encontrar a página solicitada. <a href=\"/\">Volte para a página inicial.</a>\n           "
 
 #: website/templates/404.html:6 website/templates/404.html:10
 msgid "Page not found"
@@ -2132,10 +2113,7 @@ msgstr "Página não encontrada"
 #: website/templates/404.html:13
 #, fuzzy, python-format
 msgid "The page you requested could not be found. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr ""
-"\n"
-"            Não foi possível encontrar a página solicitada. <a href=\"/\">Volte para a página inicial.</a>\n"
-"           "
+msgstr "\n            Não foi possível encontrar a página solicitada. <a href=\"/\">Volte para a página inicial.</a>\n           "
 
 #: website/templates/500.html:6 website/templates/500.html:10
 #, fuzzy
@@ -2145,10 +2123,7 @@ msgstr "Erro interno"
 #: website/templates/500.html:13
 #, fuzzy, python-format
 msgid "Your request triggered an internal server error. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr ""
-"\n"
-"            O seu pedido provocou um erro interno. <a href=\"/\">Volte para a página inicial.</a>\n"
-"           "
+msgstr "\n            O seu pedido provocou um erro interno. <a href=\"/\">Volte para a página inicial.</a>\n           "
 
 #: website/templates/admin/base_site.html:5
 #: website/templates/admin/base_site.html:8
@@ -2480,7 +2455,6 @@ msgstr "Na maioria dos casos, os erros que encontrar no Dissemin não foram intr
 
 #: website/templates/dissemin/faq.html:431
 #, fuzzy
-#| msgid "If the error is not present in any of the sources and you believe that Dissemin may have introduced the problem, please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> with details of the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. Note that yo cannot yet fix the problem yourself, although we hope in the longer term to develop a system to allow our users to edit details of their papers themselves."
 msgid "If the error is not present in any of the sources and you believe that Dissemin may have introduced the problem, please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> with details of the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. Note that you cannot yet fix the problem yourself, although we hope in the longer term to develop a system to allow our users to edit details of their papers themselves."
 msgstr "Se o erro não estiver presente em nenhuma das fontes e acredita que o Dissemin pode ter apresentado o problema, por favor envie uma <a href=\"https://github.com/dissemin/dissemin/issues\">incidência</a> com os detalhes do problema, ou envie uma mensagem para <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. Observe que ainda não pode corrigir o problema sozinho, embora esperemos, a longo prazo, programar um sistema que permita aos nossos utilizadores editar os detalhes dos seus próprios documentos."
 
@@ -2863,7 +2837,5 @@ msgstr "Erro de autenticação"
 #: website/templates/socialaccount/authentication_error.html:15
 #, fuzzy, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
-msgstr ""
-"\n"
-"            Ocorreu um erro na autenticação. <a href=\"/\">Volte para a página de iniciar sessão.</a>\n"
-"           "
+msgstr "\n            Ocorreu um erro na autenticação. <a href=\"/\">Volte para a página de iniciar sessão.</a>\n           "
+

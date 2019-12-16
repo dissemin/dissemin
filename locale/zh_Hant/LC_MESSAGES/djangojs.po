@@ -8,13 +8,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-12 10:33+0100\n"
-"PO-Revision-Date: 2019-10-14 15:19:36+0000\n"
+"PO-Revision-Date: 2019-12-16 14:53:36+0000\n"
 "Language: zh_hant\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-10-01 08:31:19+0000\n"
+"X-POT-Import-Date: 2019-12-12 14:04:05+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
@@ -26,115 +27,80 @@ msgstr[0] "找到 %s 篇論文"
 
 #: website/static/js/dissemin.js:293
 msgid "Claiming..."
-msgstr ""
+msgstr "正在索取…"
 
 #: website/static/js/dissemin.js:297
 msgid "Unclaiming..."
-msgstr ""
+msgstr "正在取消索取…"
 
 #: website/static/js/dissemin.js:313
 msgid "Claiming failed!"
-msgstr ""
+msgstr "索取失敗！"
 
 #: website/static/js/dissemin.js:316
 msgid "Unclaiming failed!"
-msgstr ""
+msgstr "取消索取失敗！"
 
 #: website/static/js/dissemin.js:321
 msgid "Exclude from my profile"
-msgstr ""
+msgstr "從我的個人資料排除"
 
 #: website/static/js/dissemin.js:325
 msgid "Include in my profile"
-msgstr ""
+msgstr "包含在我的個人資料"
 
 #: website/static/js/dissemin.js:350
 #, fuzzy
-#| msgid "Adding to todolist"
 msgid "Adding to to-do list"
 msgstr "添加到待辦清單"
 
 #: website/static/js/dissemin.js:354
 #, fuzzy
-#| msgid "Removing from todolist"
 msgid "Removing from to-do list"
 msgstr "從待辦清單中移除"
 
 #: website/static/js/dissemin.js:600
 msgid "Preview of uploaded file"
-msgstr ""
+msgstr "上傳檔案預覽"
 
 #: website/static/js/dissemin.js:603
 msgid "Pages: "
-msgstr ""
+msgstr "頁面：\\"
 
 #: website/static/js/dissemin.js:604
 msgid "Size: "
-msgstr ""
+msgstr "大小：\\"
 
 #: website/static/js/dissemin.js:619
 msgid "While uploading %(file)s the following error occured:"
-msgstr ""
+msgstr "當上傳%(file)s時發生以下錯誤："
 
 #: website/static/js/dissemin.js:628 website/static/js/dissemin.js:683
 #: website/static/js/dissemin.js:689
 msgid "Unknown error"
-msgstr ""
+msgstr "不明錯誤"
 
 #: website/static/js/dissemin.js:673
 msgid "While fetching file from %(url)s the following error occured:"
-msgstr ""
+msgstr "從 %(url)s 取得檔案時發生以下錯誤："
 
 #: website/static/js/dissemin.js:760
 msgid "Sorry, we could not fill this for you."
-msgstr ""
+msgstr "很抱歉，我們無法替您填寫此欄位。"
 
 #: website/static/js/dissemin.js:761
 msgid "Trying to fill this field automatically for you..."
-msgstr ""
+msgstr "正在嘗試替您自動填寫欄位…"
 
 #: website/static/js/dissemin.js:795
 msgid "You have not selected a file for upload."
-msgstr ""
+msgstr "您尚未選擇要上傳的檔案。"
 
 #: website/static/js/dissemin.js:822
 msgid "Dissemin encountered an error, please try again later."
-msgstr ""
+msgstr "Dissemin 出現錯誤，請稍後再試。"
 
 #: website/static/js/moment.min.js:1
 msgid ": "
-msgstr ""
+msgstr ": "
 
-#~ msgid "Do not show this message anymore"
-#~ msgstr "不再顯示此訊息"
-
-#~ msgid "No author"
-#~ msgstr "沒有作者"
-
-#~ msgid "No title"
-#~ msgstr "沒有標題"
-
-#~ msgid "Invalid publication date"
-#~ msgstr "無效出版日期"
-
-#~ msgid "No publication date"
-#~ msgstr "無出版日期"
-
-#~ msgid "Paper is invalid"
-#~ msgstr "論文無效"
-
-#~ msgid "We ignored %(count)s paper from your ORCiD profile."
-#~ msgid_plural "We ignored %(count)s papers from your ORCiD profile."
-#~ msgstr[0] "我們從您的 ORCiD 個人檔案裡忽略了 %(count)s 篇論文。"
-
-#~ msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
-#~ msgstr "「%(name)s」因為下列原因被忽略掉：%(reason)s"
-
-#~ msgid "A paper was ignored, because it has no name"
-#~ msgstr "有論文被忽略掉，因為沒有名稱"
-
-#~ msgid "Show more information"
-#~ msgstr "顯示更多資訊"
-
-#~ msgid "Show less information"
-#~ msgstr "顯示較少資訊"

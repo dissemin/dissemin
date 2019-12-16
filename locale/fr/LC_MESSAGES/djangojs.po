@@ -3,6 +3,7 @@
 #
 # Author: A3nm
 # Author: Gomoko
+# Author: Thibaut120094
 # Author: Verdy p
 # Author: Wladek92
 # --
@@ -11,10 +12,11 @@
 #
 msgid ""
 msgstr ""
+""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-12 10:33+0100\n"
-"PO-Revision-Date: 2019-11-14 16:11:15+0000\n"
+"PO-Revision-Date: 2019-12-16 14:53:35+0000\n"
 "Last-Translator: Ryan Lahfa <masterancpp@gmail.com>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -23,7 +25,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
-"X-POT-Import-Date: 2019-10-01 08:31:19+0000\n"
+"X-POT-Import-Date: 2019-12-12 14:04:05+0000\n"
 
 #: website/static/js/dissemin.js:202
 #, javascript-format
@@ -34,116 +36,80 @@ msgstr[1] "%s articles trouvés"
 
 #: website/static/js/dissemin.js:293
 msgid "Claiming..."
-msgstr ""
+msgstr "Inclusion en cours..."
 
 #: website/static/js/dissemin.js:297
 msgid "Unclaiming..."
-msgstr ""
+msgstr "Retrait en cours..."
 
 #: website/static/js/dissemin.js:313
 msgid "Claiming failed!"
-msgstr ""
+msgstr "Échec de l’inclusion !"
 
 #: website/static/js/dissemin.js:316
 msgid "Unclaiming failed!"
-msgstr ""
+msgstr "Échec du retrait !"
 
 #: website/static/js/dissemin.js:321
 msgid "Exclude from my profile"
-msgstr ""
+msgstr "Retirer de mon profil"
 
 #: website/static/js/dissemin.js:325
 msgid "Include in my profile"
-msgstr ""
+msgstr "Inclure dans mon profil"
 
 #: website/static/js/dissemin.js:350
 #, fuzzy
-#| msgid "Adding to todolist"
 msgid "Adding to to-do list"
 msgstr "Ajouter à la liste à faire"
 
 #: website/static/js/dissemin.js:354
 #, fuzzy
-#| msgid "Removing from todolist"
 msgid "Removing from to-do list"
 msgstr "Supprimer de la liste à faire"
 
 #: website/static/js/dissemin.js:600
 msgid "Preview of uploaded file"
-msgstr ""
+msgstr "Prévisualisation du fichier téléversé"
 
 #: website/static/js/dissemin.js:603
 msgid "Pages: "
-msgstr ""
+msgstr "Pages : "
 
 #: website/static/js/dissemin.js:604
 msgid "Size: "
-msgstr ""
+msgstr "Taille : "
 
 #: website/static/js/dissemin.js:619
 msgid "While uploading %(file)s the following error occured:"
-msgstr ""
+msgstr "Lors du téléversement du %(file)s, l’erreur suivante est survenue :"
 
 #: website/static/js/dissemin.js:628 website/static/js/dissemin.js:683
 #: website/static/js/dissemin.js:689
 msgid "Unknown error"
-msgstr ""
+msgstr "Erreur inconnue"
 
 #: website/static/js/dissemin.js:673
 msgid "While fetching file from %(url)s the following error occured:"
-msgstr ""
+msgstr "Lors de la récupération du fichier depuis %(url)s, l’erreur suivante s’est produite :"
 
 #: website/static/js/dissemin.js:760
 msgid "Sorry, we could not fill this for you."
-msgstr ""
+msgstr "Désolé, nous n’avons pas pu remplir ceci pour vous."
 
 #: website/static/js/dissemin.js:761
 msgid "Trying to fill this field automatically for you..."
-msgstr ""
+msgstr "Essai de remplissage automatique pour vous de ce champ en cours..."
 
 #: website/static/js/dissemin.js:795
 msgid "You have not selected a file for upload."
-msgstr ""
+msgstr "Vous n’avez sélectionné aucun fichier à téléverser."
 
 #: website/static/js/dissemin.js:822
 msgid "Dissemin encountered an error, please try again later."
-msgstr ""
+msgstr "Dissemin a rencontré une erreur, veuillez essayer à nouveau plus tard."
 
 #: website/static/js/moment.min.js:1
 msgid ": "
-msgstr ""
+msgstr ": "
 
-#~ msgid "Do not show this message anymore"
-#~ msgstr "Ne plus montrer ce message"
-
-#~ msgid "No author"
-#~ msgstr "Aucun auteur"
-
-#~ msgid "No title"
-#~ msgstr "Aucun titre"
-
-#~ msgid "Invalid publication date"
-#~ msgstr "Date de publication non valide"
-
-#~ msgid "No publication date"
-#~ msgstr "Aucune date de publication"
-
-#~ msgid "Paper is invalid"
-#~ msgstr "Papier non invalide"
-
-#~ msgid "We ignored %(count)s paper from your ORCiD profile."
-#~ msgid_plural "We ignored %(count)s papers from your ORCiD profile."
-#~ msgstr[0] "Nous avons ignoré %(count)s publication de votre profil ORCiD."
-#~ msgstr[1] "Nous avons ignoré %(count)s publications de votre profil ORCiD."
-
-#~ msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
-#~ msgstr "« %(name)s » a été ignoré pour la raison suivante : %(reason)s"
-
-#~ msgid "A paper was ignored, because it has no name"
-#~ msgstr "Un article a été ignoré, car il n’a pas de titre"
-
-#~ msgid "Show more information"
-#~ msgstr "Montrer plus d’informations"
-
-#~ msgid "Show less information"
-#~ msgstr "Montrer moins d’informations"

@@ -10,13 +10,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-12 16:17+0100\n"
-"PO-Revision-Date: 2019-12-12 14:21:07+0000\n"
+"PO-Revision-Date: 2019-12-16 14:53:36+0000\n"
 "Language: da\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-12-12 13:58:10+0000\n"
+"X-POT-Import-Date: 2019-12-13 05:38:35+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -496,9 +497,8 @@ msgid "PDF URL"
 msgstr "PDF-adresse"
 
 #: deposit/templates/deposit/deposits.html:134
-#, fuzzy
 msgid "Status:"
-msgstr "Status"
+msgstr "Status:"
 
 #: deposit/templates/deposit/deposits.html:145
 msgid "Letter of Declaration"
@@ -578,9 +578,8 @@ msgid "Repository:"
 msgstr "Arkiv:"
 
 #: deposit/templates/deposit/start.html:192
-#, fuzzy
 msgid "Metadata:"
-msgstr "Metadata"
+msgstr "Metadata:"
 
 #: deposit/templates/deposit/start.html:212
 #: papers/templates/papers/search_base.html:165
@@ -943,20 +942,14 @@ msgstr "Hent"
 
 #: papers/templates/papers/messages.html:8
 #, python-format
-msgid ""
-"\n"
-"                        We ignored %(papers)s paper from your ORCiD profile.\n"
-"                    "
-msgid_plural ""
-"\n"
-"                        We ignored %(papers)s papers from your ORCiD profile.\n"
-"                    "
+msgid "\n                        We ignored %(papers)s paper from your ORCiD profile.\n                    "
+msgid_plural "\n                        We ignored %(papers)s papers from your ORCiD profile.\n                    "
 msgstr[0] ""
 msgstr[1] ""
 
 #: papers/templates/papers/messages.html:14
 msgid "Details:"
-msgstr ""
+msgstr "Detaljer:"
 
 #: papers/templates/papers/messages.html:21
 #, fuzzy
@@ -1009,7 +1002,7 @@ msgstr ""
 
 #: papers/templates/papers/paper.html:61
 msgid "Show less"
-msgstr ""
+msgstr "Vis mindre"
 
 #: papers/templates/papers/paper.html:71
 #, fuzzy
@@ -1064,7 +1057,7 @@ msgstr ""
 
 #: papers/templates/papers/paper_list.html:55
 msgid "from"
-msgstr ""
+msgstr "fra"
 
 #: papers/templates/papers/paper_list.html:57
 #: papers/templates/papers/policies.html:17
@@ -1109,7 +1102,7 @@ msgstr ""
 #: papers/templates/papers/policies.html:70
 #: papers/templates/papers/policies.html:86
 msgid "Blue circle"
-msgstr ""
+msgstr "Blå cirkel"
 
 #: papers/templates/papers/policies.html:73
 msgid "Mark this publication for later upload."
@@ -1332,25 +1325,24 @@ msgid "policy unknown"
 msgstr "politik ukendt"
 
 #: papers/templatetags/statuses.py:110
-#, fuzzy
 msgid "Green circle"
-msgstr "Grøn åben adgang"
+msgstr "Grøn cirkel"
 
 #: papers/templatetags/statuses.py:111
 msgid "Red circle"
-msgstr ""
+msgstr "Rød cirkel"
 
 #: papers/templatetags/statuses.py:112
 msgid "Orange circle"
-msgstr ""
+msgstr "Orange cirkel"
 
 #: papers/templatetags/statuses.py:113
 msgid "White circle"
-msgstr ""
+msgstr "Hvid cirkel"
 
 #: papers/templatetags/statuses.py:114
 msgid "Question mark in circle"
-msgstr ""
+msgstr "Spørgsmålstegn i cirkel"
 
 #: papers/views.py:88
 msgid "Dissemin requires access to your ORCID name, which is marked as private in your ORCID profile."
@@ -1649,7 +1641,7 @@ msgstr ""
 
 #: upload/templates/upload/widget.html:47
 msgid "Choose another file"
-msgstr ""
+msgstr "Vælg en anden fil"
 
 #: upload/views.py:133
 msgid "Invalid PDF file."
@@ -2146,7 +2138,7 @@ msgstr "Fejl"
 
 #: website/templates/dissemin/error.html:14
 msgid "Go back to the start page."
-msgstr ""
+msgstr "Gå tilbage til startsiden."
 
 #: website/templates/dissemin/faq.html:7 website/templates/dissemin/faq.html:56
 msgid "Frequently Asked Questions"
@@ -2357,11 +2349,11 @@ msgstr ""
 
 #: website/templates/dissemin/faq.html:285
 msgid "Class"
-msgstr ""
+msgstr "Klasse"
 
 #: website/templates/dissemin/faq.html:286
 msgid "Description"
-msgstr ""
+msgstr "Beskrivelse"
 
 #: website/templates/dissemin/faq.html:295
 msgid "<strong>Open access:</strong><br /> The full text is made freely available by the publisher (in a fully open access or hybrid journal)."
@@ -2821,3 +2813,4 @@ msgstr ""
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
+

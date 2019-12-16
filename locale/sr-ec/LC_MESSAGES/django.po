@@ -12,13 +12,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-12 16:17+0100\n"
-"PO-Revision-Date: 2019-12-12 14:21:18+0000\n"
+"PO-Revision-Date: 2019-12-16 14:53:48+0000\n"
 "Language: sr-Cyrl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-12-12 13:58:10+0000\n"
+"X-POT-Import-Date: 2019-12-13 05:38:35+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11) ? 0 : ( (n%10 >= 2 && n%10 <= 4 && (n%100 < 10 || n%100 >= 20)) ? 1 : 2 );\n"
 
@@ -493,9 +494,8 @@ msgid "PDF URL"
 msgstr "URL адреса PDF-а"
 
 #: deposit/templates/deposit/deposits.html:134
-#, fuzzy
 msgid "Status:"
-msgstr "Статус"
+msgstr "Статус:"
 
 #: deposit/templates/deposit/deposits.html:145
 msgid "Letter of Declaration"
@@ -575,9 +575,8 @@ msgid "Repository:"
 msgstr "Складиште:"
 
 #: deposit/templates/deposit/start.html:192
-#, fuzzy
 msgid "Metadata:"
-msgstr "Метаподаци"
+msgstr "Метаподаци:"
 
 #: deposit/templates/deposit/start.html:212
 #: papers/templates/papers/search_base.html:165
@@ -937,14 +936,8 @@ msgstr "Преузми"
 
 #: papers/templates/papers/messages.html:8
 #, python-format
-msgid ""
-"\n"
-"                        We ignored %(papers)s paper from your ORCiD profile.\n"
-"                    "
-msgid_plural ""
-"\n"
-"                        We ignored %(papers)s papers from your ORCiD profile.\n"
-"                    "
+msgid "\n                        We ignored %(papers)s paper from your ORCiD profile.\n                    "
+msgid_plural "\n                        We ignored %(papers)s papers from your ORCiD profile.\n                    "
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
@@ -986,10 +979,10 @@ msgid "A paper was ignored, because is has no title."
 msgstr ""
 
 #: papers/templates/papers/paper.html:39
-#, fuzzy, python-format
+#, python-format
 msgctxt "as in: _Journal article published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "%(doctype)s published in %(year)s by"
-msgstr "Објављено у"
+msgstr "%(doctype)s је објављен %(year)s; аутор(и):"
 
 #: papers/templates/papers/paper.html:45
 #, fuzzy, python-format
@@ -1626,7 +1619,6 @@ msgid "Select here the full text of your article. PDF files only, maximum size:"
 msgstr ""
 
 #: upload/templates/upload/widget.html:15
-#, fuzzy
 msgid "Or enter a URL:"
 msgstr "Или унесите URL адресу:"
 
@@ -2066,7 +2058,6 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:113
 #, fuzzy
-#| msgid "preprint"
 msgid "OSF preprints"
 msgstr "предштампа"
 
@@ -2160,9 +2151,8 @@ msgid "Who runs dissem.in?"
 msgstr ""
 
 #: website/templates/dissemin/faq.html:28
-#, fuzzy
 msgid "Can I create a profile on dissem.in?"
-msgstr "Није могуће направити пројекат на OSF-у."
+msgstr "Могу ли да направим профил на веб-сајту dissem.in?"
 
 #: website/templates/dissemin/faq.html:30
 msgid "Policies and Full-text Availability"
@@ -2792,3 +2782,4 @@ msgstr "Грешка при потврди идентитета"
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
+

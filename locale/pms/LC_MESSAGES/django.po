@@ -10,13 +10,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-12 16:17+0100\n"
-"PO-Revision-Date: 2019-12-12 14:21:15+0000\n"
+"PO-Revision-Date: 2019-12-16 14:53:45+0000\n"
 "Language: pms\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-12-12 13:58:10+0000\n"
+"X-POT-Import-Date: 2019-12-13 05:38:35+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -53,9 +54,8 @@ msgid "Dewey Decimal Class"
 msgstr "Classa dessimal Dewey"
 
 #: deposit/forms.py:160
-#, fuzzy
 msgid "Do not publish before"
-msgstr "Ca editris ësconossùa"
+msgstr "Nen publiché prima ëd"
 
 #: deposit/forms.py:166 deposit/templates/deposit/deposits.html:89
 msgid "License"
@@ -299,7 +299,7 @@ msgstr "Publicassion an atèisa"
 
 #: deposit/models.py:47
 msgid "Embargo"
-msgstr ""
+msgstr "Embargo"
 
 #: deposit/models.py:48
 msgid "Published"
@@ -458,7 +458,7 @@ msgstr "Ij mè depòsit"
 #: deposit/templates/deposit/deposits.html:24
 #, python-format
 msgid "&lsquo;%(paper_title)s&rsquo; in <strong>%(repository)s</strong>"
-msgstr ""
+msgstr "&lsquo;%(paper_title)s&rsquo; an <strong>%(repository)s</strong>"
 
 #: deposit/templates/deposit/deposits.html:36
 msgid "Paper"
@@ -469,9 +469,8 @@ msgid "Deposit date"
 msgstr "Dàita ëd depòsit"
 
 #: deposit/templates/deposit/deposits.html:67
-#, fuzzy
 msgid "Publication date"
-msgstr "Për dàita ëd publicassion"
+msgstr "Dàita ëd publicassion"
 
 #: deposit/templates/deposit/deposits.html:78
 msgid "Deposit type"
@@ -490,9 +489,8 @@ msgid "PDF URL"
 msgstr "Adrëssa dël PDF"
 
 #: deposit/templates/deposit/deposits.html:134
-#, fuzzy
 msgid "Status:"
-msgstr "Stat"
+msgstr "Stat:"
 
 #: deposit/templates/deposit/deposits.html:145
 msgid "Letter of Declaration"
@@ -503,9 +501,8 @@ msgid "Show"
 msgstr "Smon-e"
 
 #: deposit/templates/deposit/deposits.html:176
-#, fuzzy
 msgid "No deposits yet!"
-msgstr "Ij mè depòsit"
+msgstr "Ancor gnun depòsit!"
 
 #: deposit/templates/deposit/deposits.html:177
 msgid "You have not made any deposit via Dissemin. What are you waiting for? Liberate your papers today."
@@ -564,27 +561,25 @@ msgid "postprint"
 msgstr "pòst-publicassion"
 
 #: deposit/templates/deposit/start.html:144
-#, fuzzy
 msgid "pdfversion"
-msgstr "version publicà"
+msgstr "version PDF"
 
 #: deposit/templates/deposit/start.html:165
 msgid "Repository:"
 msgstr "Depòsit:"
 
 #: deposit/templates/deposit/start.html:192
-#, fuzzy
 msgid "Metadata:"
-msgstr "Metadàit"
+msgstr "Metadàit:"
 
 #: deposit/templates/deposit/start.html:212
 #: papers/templates/papers/search_base.html:165
 msgid "Paper animated bird"
-msgstr ""
+msgstr "Osel ëd papé animà"
 
 #: deposit/templates/deposit/start.html:213
 msgid "Submitting paper to repository"
-msgstr ""
+msgstr "Spedission an cors ëd l'artìcol al depòsit"
 
 #: deposit/views.py:80
 msgid "This repository is currently not enabled."
@@ -600,7 +595,7 @@ msgstr "Ës depòsit a l'é introvàbil."
 
 #: deposit/views.py:261
 msgid "Not all fields have been filled correctly."
-msgstr ""
+msgstr "Nen tuti ij camp a son ëstàit compilà për da bin."
 
 #: deposit/views.py:270
 msgid "This repository cannot be used for this paper."
@@ -862,7 +857,6 @@ msgid "Papers"
 msgstr "Artìcoj"
 
 #: papers/templates/papers/advanced_search.html:8
-#, fuzzy
 msgid "Advanced Search"
 msgstr "Arserca avansà"
 
@@ -872,28 +866,24 @@ msgid "Advanced search"
 msgstr "Arserca avansà"
 
 #: papers/templates/papers/advanced_search.html:20
-#, fuzzy
 msgid "Title"
-msgstr "tìtol"
+msgstr "Tìtol"
 
 #: papers/templates/papers/advanced_search.html:24
-#, fuzzy
 msgid "Authors"
-msgstr "Për autor"
+msgstr "Autor"
 
 #: papers/templates/papers/advanced_search.html:26
-#, fuzzy
 msgid "Search by names or ORCIDs. Separate with commas and prefix with <code>last:</code> to enforce last name search."
-msgstr "<ul><li>Dovré ij nòm dj'autor o j'identificativ ORCID.</li><li>Dovré dle còme tanme separator.</li><li>Buté ël prefiss <code>last:</code> për forsé a l'arserca dël cognòm.</li></ul>"
+msgstr "Arserca për nòm o ORCID. Separé con dle còme e buteje <code>last:</code> tanme prefiss për forsé l'arserca an sël cognòm."
 
 #: papers/templates/papers/advanced_search.html:39
-#, fuzzy
 msgid "Document type"
-msgstr "Për sòrt ëd document"
+msgstr "Sòrt ëd document"
 
 #: papers/templates/papers/advanced_search.html:60
 msgid "Fields for superusers"
-msgstr ""
+msgstr "Camp për i sùper-utent"
 
 #: papers/templates/papers/advanced_search.html:62
 #: papers/templates/papers/search_base.html:124
@@ -936,58 +926,48 @@ msgstr "Dëscarié"
 
 #: papers/templates/papers/messages.html:8
 #, python-format
-msgid ""
-"\n"
-"                        We ignored %(papers)s paper from your ORCiD profile.\n"
-"                    "
-msgid_plural ""
-"\n"
-"                        We ignored %(papers)s papers from your ORCiD profile.\n"
-"                    "
-msgstr[0] ""
-msgstr[1] ""
+msgid "\n                        We ignored %(papers)s paper from your ORCiD profile.\n                    "
+msgid_plural "\n                        We ignored %(papers)s papers from your ORCiD profile.\n                    "
+msgstr[0] "\n                        I l'oma ignorà l'artìcol %(papers)s ëd sò profil ORCiD.\n                    "
+msgstr[1] "\n                        I l'oma ignorà j'artìcoj %(papers)s ëd sò profil ORCiD.\n                    "
 
 #: papers/templates/papers/messages.html:14
 msgid "Details:"
-msgstr ""
+msgstr "Detaj:"
 
 #: papers/templates/papers/messages.html:21
-#, fuzzy
 msgid "No author"
-msgstr "Për autor"
+msgstr "Gnun autor"
 
 #: papers/templates/papers/messages.html:23
-#, fuzzy
 msgid "No title"
-msgstr "tìtol"
+msgstr "Gnun tìtol"
 
 #: papers/templates/papers/messages.html:25
-#, fuzzy
 msgid "Invalid publication date"
-msgstr "Për dàita ëd publicassion"
+msgstr "Dàita ëd publicassion nen bon-a"
 
 #: papers/templates/papers/messages.html:27
-#, fuzzy
 msgid "No publication date"
-msgstr "Për dàita ëd publicassion"
+msgstr "Gnun-a dàita ëd publicassion"
 
 #: papers/templates/papers/messages.html:29
 msgid "Paper is invalid"
-msgstr ""
+msgstr "L'artìcol a l'é nen vàlid"
 
 #: papers/templates/papers/messages.html:32
 msgid "{{ title }} was ignored for the following reason:"
-msgstr ""
+msgstr "{{ title }} a l'é stàit ignorà për costa rason-sì:"
 
 #: papers/templates/papers/messages.html:36
 msgid "A paper was ignored, because is has no title."
-msgstr ""
+msgstr "N'artìcol a l'é stàit ignorà, përchè a l'ha gnun tìtol."
 
 #: papers/templates/papers/paper.html:39
-#, fuzzy, python-format
+#, python-format
 msgctxt "as in: _Journal article published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "%(doctype)s published in %(year)s by"
-msgstr "Publicà an %(year)s da"
+msgstr "%(doctype)s publicà an %(year)s da"
 
 #: papers/templates/papers/paper.html:45
 #, python-format
@@ -996,14 +976,13 @@ msgid "Published in %(year)s by"
 msgstr "Publicà an %(year)s da"
 
 #: papers/templates/papers/paper.html:55
-#, fuzzy, python-format
+#, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
-msgstr "e <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s d'àutri autor</a>"
+msgstr "e <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s d'àutri autor</a>"
 
 #: papers/templates/papers/paper.html:61
-#, fuzzy
 msgid "Show less"
-msgstr "Smon-e"
+msgstr "Smon-e ëd men"
 
 #: papers/templates/papers/paper.html:71
 msgid "Deposit accomplished!"
@@ -1038,9 +1017,9 @@ msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_ur
 msgstr "S'artìcol a l'é stàit deposità an <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. Ël test complet a sarà disponìbil a <a class=\"alert-link\" href=\"%(deposit_url)s\">cost'adrëssa</a> na vira convalidà da j'aministrator dël depòsit."
 
 #: papers/templates/papers/paper.html:117
-#, fuzzy, python-format
+#, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> from <strong>%(pub_date|localize)s</strong> on due to an embargo."
-msgstr "S'artìcol a l'é stàit deposità an <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. Ël test complet a sarà disponìbil a <a class=\"alert-link\" href=\"%(deposit_url)s\">cost'adrëssa</a> na vira convalidà da j'aministrator dël depòsit."
+msgstr "S'artìcol a l'é stàit deposità an <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. Ël test complet a sarà disponìbil a <a class=\"alert-link\" href=\"%(deposit_url)s\">cost'adrëssa</a> da <strong>%(pub_date|localize)s</strong> për via ëd n'embargo."
 
 #: papers/templates/papers/paper.html:142
 msgid "Full text:"
@@ -1057,7 +1036,7 @@ msgstr "e %(remaining_authors)s d'àutri autor"
 
 #: papers/templates/papers/paper_list.html:55
 msgid "from"
-msgstr ""
+msgstr "da"
 
 #: papers/templates/papers/paper_list.html:57
 #: papers/templates/papers/policies.html:17
@@ -1102,12 +1081,11 @@ msgstr "Detaj dle régole"
 #: papers/templates/papers/policies.html:70
 #: papers/templates/papers/policies.html:86
 msgid "Blue circle"
-msgstr ""
+msgstr "Sercc bleu"
 
 #: papers/templates/papers/policies.html:73
-#, fuzzy
 msgid "Mark this publication for later upload."
-msgstr "Marché sa publicassion për cariela pi tard"
+msgstr "Marché sa publicassion për cariela pi tard."
 
 #: papers/templates/papers/policies.html:76
 msgid "Mark"
@@ -1140,23 +1118,22 @@ msgid " %(first_name)s %(last_name)s uses ORCID."
 msgstr " %(first_name)s %(last_name)s a deuvra ORCID."
 
 #: papers/templates/papers/researcher.html:38
-#, fuzzy
 msgid "Refresh Publications"
-msgstr "Agiorné le publicassion"
+msgstr "Rinfrësché le publicassion"
 
 #: papers/templates/papers/researcher.html:42
 msgid "Address:"
 msgstr "Adrëssa:"
 
 #: papers/templates/papers/researcher.html:51
-#, fuzzy, python-format
+#, python-format
 msgid "Missing publications? <a href=\"%(matching_papers_url)s\">Search for publications with a matching author name.</a>"
-msgstr "A-i manco dle publicassion? <a href=\"%(matching_papers_url)s\"> Ch'a sërca dle publicassion a parte d'un nòm d'autor </a>"
+msgstr "A-i manco dle publicassion? <a href=\"%(matching_papers_url)s\"> Ch'a sërca dle publicassion a parte d'un nòm d'autor </a>."
 
 #: papers/templates/papers/search.html:10
-#, fuzzy, python-format
+#, python-format
 msgid "Missing publications? <a class=\"showHrefPrint\" href=\"%(faq_url)s#missingPaper\">Read more about our data sources.</a>"
-msgstr "A-i manco dle publicassion? <a class=\"showHrefPrint\" href=\"%(faq_url)s#missing-paper\">Lese ëd pi su nòstre sorgiss ëd dàit.</a>"
+msgstr "A-i manco dle publicassion? <a class=\"showHrefPrint\" href=\"%(faq_url)s#missingPaper\">Lese ëd pi su nòstre sorgiss ëd dàit.</a>"
 
 #: papers/templates/papers/search_base.html:25
 #, python-format
@@ -1203,7 +1180,7 @@ msgstr "Ordiné për"
 
 #: papers/templates/papers/search_base.html:122
 msgid "Refine for superusers"
-msgstr ""
+msgstr "Arfiné për ij sùper-utent"
 
 #: papers/templates/papers/search_base.html:166
 msgid "Refreshing results"
@@ -1323,25 +1300,24 @@ msgid "policy unknown"
 msgstr "régole sconossùe"
 
 #: papers/templatetags/statuses.py:110
-#, fuzzy
 msgid "Green circle"
-msgstr "Acess lìber verd"
+msgstr "Sercc verd"
 
 #: papers/templatetags/statuses.py:111
 msgid "Red circle"
-msgstr ""
+msgstr "Sercc ross"
 
 #: papers/templatetags/statuses.py:112
 msgid "Orange circle"
-msgstr ""
+msgstr "Sercc groson"
 
 #: papers/templatetags/statuses.py:113
 msgid "White circle"
-msgstr ""
+msgstr "Sercc bianch"
 
 #: papers/templatetags/statuses.py:114
 msgid "Question mark in circle"
-msgstr ""
+msgstr "Pont d'anterogassion ant un sercc"
 
 #: papers/views.py:88
 msgid "Dissemin requires access to your ORCID name, which is marked as private in your ORCID profile."
@@ -1405,13 +1381,12 @@ msgid "increasing"
 msgstr "chërsent"
 
 #: publishers/forms.py:18
-#, fuzzy
 msgid "By publisher"
-msgstr "Për régole ëd publicassion"
+msgstr "Për ca editris"
 
 #: publishers/forms.py:38
 msgid "Order"
-msgstr ""
+msgstr "Órdin"
 
 #: publishers/models.py:39 website/templates/dissemin/faq.html:292
 msgid "Open access"
@@ -1489,9 +1464,8 @@ msgstr "Arserca"
 
 #: publishers/templates/publishers/list.html:56
 #: publishers/templates/publishers/publisher.html:31
-#, fuzzy
 msgid "Sources"
-msgstr "Sorgiss ëd dàit"
+msgstr "Sorgiss"
 
 #: publishers/templates/publishers/list.html:57
 #: publishers/templates/publishers/publisher.html:32
@@ -1506,9 +1480,8 @@ msgstr[0] "(%(num_total)s artìcol)"
 msgstr[1] "(%(num_total)s artìcoj)"
 
 #: publishers/templates/publishers/list.html:96
-#, fuzzy
 msgid "No publishers found"
-msgstr "Gnun-a ca editris trovà."
+msgstr "Gnun-e ca editris trovà."
 
 #: publishers/templates/publishers/policy_pdfversion.html:5
 msgid "The published version is the final version of the paper, as formatted by the publisher."
@@ -1527,32 +1500,30 @@ msgid "Publisher"
 msgstr "Ca editris"
 
 #: publishers/templates/publishers/publisher.html:41
-#, fuzzy, python-format
+#, python-format
 msgid "Last updated on %(last_updated)s, <a href=\"%(feedback_url)s\">report any error to them</a>."
 msgstr "Agiornà la dariera vira ai %(last_updated)s, <a href=\"%(feedback_url)s\">signaleje tut eror</a>"
 
 #: publishers/templates/publishers/publisher.html:45
-#, fuzzy
 msgid "Report any error to them."
-msgstr "Ch'a signala s'a-i é d'eror"
+msgstr "Signaleje tut eror."
 
 #: publishers/templates/publishers/publisher.html:51
 msgid "For superusers"
-msgstr ""
+msgstr "Për ij sùper-utent"
 
 #: publishers/templates/publishers/publisher.html:54
 msgid "Change open access status"
-msgstr ""
+msgstr "Modifiché lë stat d'acess duvert"
 
 #: publishers/templates/publishers/publisher.html:72
-#, fuzzy
 msgid "Green open access summary"
-msgstr "Acess lìber verd"
+msgstr "Resumé dl'acess lìber verd"
 
 #: publishers/templates/publishers/publisher.html:74
 #, python-format
 msgid "This is a short summary of the green open access policy of %(publisher_name)s."
-msgstr ""
+msgstr "Cost-sì a l'é un curt resumé dle régole vërde d'acess duvert ëd %(publisher_name)s."
 
 #: publishers/templates/publishers/publisher.html:82
 msgid "Conditions"
@@ -1624,21 +1595,20 @@ msgid "Select here the full text of your article. PDF files only, maximum size:"
 msgstr "Ch'a selession-a ambelessì ël test complet ëd sò artìcol. Mach j'archivi PDF a son acetà, taja màssima:"
 
 #: upload/templates/upload/widget.html:15
-#, fuzzy
 msgid "Or enter a URL:"
-msgstr "Dësnò, ch'a buta na liura an sl'aragnà:"
+msgstr "Dësnò, ch'a buta na liura dl'aragnà:"
 
 #: upload/templates/upload/widget.html:19
 msgid "Upload from URL"
-msgstr ""
+msgstr "Carié da n'adrëssa an sl'aragnà"
 
 #: upload/templates/upload/widget.html:27
 msgid "Fetching file and generating preview..."
-msgstr ""
+msgstr "Arcuperassion ëd l'archivi e generassion ëd la previsualisassion..."
 
 #: upload/templates/upload/widget.html:47
 msgid "Choose another file"
-msgstr ""
+msgstr "Serne n'àutr archivi"
 
 #: upload/views.py:133
 msgid "Invalid PDF file."
@@ -2042,25 +2012,23 @@ msgstr "Àutra licensa lìbera"
 
 #: vinaigrette-deleteme.py:109
 msgid "Zenodo"
-msgstr ""
+msgstr "Zenodo"
 
 #: vinaigrette-deleteme.py:110
 msgid "Zenodo is a general-purpose open repository hosted by CERN. If the document does not have a DOI yet, Zenodo will create one."
-msgstr ""
+msgstr "Zenodo a l'é un depòsit duvert ëd but general ospità dal CERN. Si ël document a l'ha ancor nen un DOI, Zenodo a na creerà un."
 
 #: vinaigrette-deleteme.py:111
 msgid "HAL"
-msgstr ""
+msgstr "HAL"
 
 #: vinaigrette-deleteme.py:112
 msgid "HAL is a  multidisciplinary open archive, sustained by the French Research Ministry."
-msgstr ""
+msgstr "HAL a l'é n'archivi duvert multi-dissiplinar, sostnù dal Ministé dl'arserca fransèis."
 
 #: vinaigrette-deleteme.py:113
-#, fuzzy
-#| msgid "preprint"
 msgid "OSF preprints"
-msgstr "prepublicassion"
+msgstr "prepublicassion OSF"
 
 #: vinaigrette-deleteme.py:114
 msgid "Run by the Center for Open Science, OSF lets you share your preprints openly. You can also share supplemental data, materials or code associated with your article."
@@ -2071,9 +2039,8 @@ msgid "Try any author name"
 msgstr "Prové un nòm d'autor qualsëssìa"
 
 #: website/templates/403.html:6 website/templates/403.html:10
-#, fuzzy
 msgid "Access denied"
-msgstr "L'acess al PDF a l'é stàit arfudà"
+msgstr "Acess arfudà"
 
 #: website/templates/403.html:13
 #, fuzzy, python-format
@@ -2090,9 +2057,8 @@ msgid "The page you requested could not be found. <a href=\"%(index)s\">Go back 
 msgstr "La pàgina ch'a l'ha ciamà as treuva nen. <a href=\"/\">Torné a la pàgina d'intrada.</a>"
 
 #: website/templates/500.html:6 website/templates/500.html:10
-#, fuzzy
 msgid "Internal server error"
-msgstr "Eror antern"
+msgstr "Eror antern dël servent"
 
 #: website/templates/500.html:13
 #, fuzzy, python-format
@@ -2155,7 +2121,6 @@ msgid "Who runs dissem.in?"
 msgstr "Chi a masenta dissem.in?"
 
 #: website/templates/dissemin/faq.html:28
-#, fuzzy
 msgid "Can I create a profile on dissem.in?"
 msgstr "Peuss-ne creé nè profil su dissem.in?"
 
@@ -2339,9 +2304,8 @@ msgid "<strong>Open access:</strong><br /> The full text is made freely availabl
 msgstr "<strong>Acess lìber:</strong><br /> Ël test complet a l'é butà a disposission a gràtis da l'editor (ant un giornal a acess d'autut lìber o ìbrid)."
 
 #: website/templates/dissemin/faq.html:303
-#, fuzzy
 msgid "Pre/post prints allowed and full text available"
-msgstr "Régole e disponibilità dël test complet"
+msgstr "Pre-publicassion e pòst-publicassion autorisà e test complet disponìbil"
 
 #: website/templates/dissemin/faq.html:306
 msgid "<strong>Pre/post prints allowed and full text available:</strong><br /> The full text is available in a repository, but might not be freely available from the publisher itself. This is in line with the publishing policy and is called green open access or self-archiving."
@@ -2364,9 +2328,8 @@ msgid "<strong>Policy unknown:</strong><br /> The full text is not available and
 msgstr ""
 
 #: website/templates/dissemin/faq.html:336
-#, fuzzy
 msgid "Pre/post prints forbidden"
-msgstr "Ël cariament a l'é vietà"
+msgstr "Pre-publicassion e pòst-publicassion vietà"
 
 #: website/templates/dissemin/faq.html:339
 msgid "<strong>Pre/post prints forbidden:</strong><br /> The publisher forbids deposits in repositories, in general. Authors might still be allowed to deposit their works after some embargo period or if their funder has an agreement with this publisher."
@@ -2428,8 +2391,6 @@ msgid "In most cases, the errors that you see on Dissemin have not been introduc
 msgstr "Ant la pipart dij cas, j'eror ch'a s-ciàira su Dissemin a son nen ëstàit antroduvù da Dissemin, ma a son già present ant le <a href=\"%(sources_url)s\">sorgiss pùbliche</a> che Dissemin a cheuj. Antlora, për piasì ch'a contròla si l'eror ch'a sciàira a l'é già present an nòstre sorgiss ëd dàit, an dasend n'ociada a la session \"Liure\" an àut a drita dla pàgina. Si un-a ëd coste pàgine a conten l'eror, a dovrìa signalé ël problema a lor e nen a noi, dësnò l'eror a seghitrà a esse an sla pàgina sorgiss."
 
 #: website/templates/dissemin/faq.html:431
-#, fuzzy
-#| msgid "If the error is not present in any of the sources and you believe that Dissemin may have introduced the problem, please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> with details of the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. Note that yo cannot yet fix the problem yourself, although we hope in the longer term to develop a system to allow our users to edit details of their papers themselves."
 msgid "If the error is not present in any of the sources and you believe that Dissemin may have introduced the problem, please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> with details of the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. Note that you cannot yet fix the problem yourself, although we hope in the longer term to develop a system to allow our users to edit details of their papers themselves."
 msgstr "Si l'eror a l'é present an gnun-a dle sorgiss e a chërd che Dissemin a peula avèj antroduvù ël problema, për piasì ch'a arpòrta l'<a href=\"https://github.com/dissemin/dissemin/issues\">eror</a> con ij detaj dël problema, o ch'a manda un mëssagi a <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. Ch'a ten-a da ment che a peul ancor nen arzòlve ël problema daspërchiel, bele che nojàutri i speroma a la longa ëd dësvlupé un sistema për përmëtte ai nòstri utent ëd modifiché daspërlor ij detaj dij sò artìcoj."
 
@@ -2493,12 +2454,10 @@ msgid "There are many ways to get involved:"
 msgstr "A-i é vàire manere për amplichesse:"
 
 #: website/templates/dissemin/faq.html:539
-#, fuzzy
 msgid "Contribute to <a href=\"https://github.com/dissemin/dissemin\">the code</a>."
 msgstr "Ch'a contribuissa <a href=\"https://github.com/wetneb/dissemin\">al còdes</a>."
 
 #: website/templates/dissemin/faq.html:544
-#, fuzzy
 msgid "Fix any of our listed <a href=\"https://github.com/dissemin/dissemin/issues\">issues</a>."
 msgstr "Ch'a coregia cheidun ëd nòstra lista d'<a href=\"https://github.com/wetneb/dissemin/issues\">eror</a>."
 
@@ -2511,7 +2470,6 @@ msgid "Encourage researchers to use this service."
 msgstr "Ch'a ancoragia j'arsercador a dovré ës servissi."
 
 #: website/templates/dissemin/faq.html:559
-#, fuzzy
 msgid "Star <a href=\"https://github.com/dissemin/dissemin\">our GitHub project</a>!"
 msgstr "Ch'a valuta <a href=\"https://github.com/wetneb/dissemin\">nòstr proget GitHub</a>!"
 
@@ -2567,14 +2525,12 @@ msgid "Data sources"
 msgstr "Sorgiss ëd dàit"
 
 #: website/templates/dissemin/sources.html:10
-#, fuzzy
 msgid "Data Sources"
 msgstr "Sorgiss ëd dàit"
 
 #: website/templates/dissemin/sources.html:14
-#, fuzzy
 msgid "<a href=\"https://www.crossref.org\">CrossRef.org</a> for traditional academic papers"
-msgstr "Andé a l'<a href=\"https://search.crossref.org/\">arserca ancrosià dij metadàit</a>;"
+msgstr "<a href=\"https://www.crossref.org\">CrossRef.org</a> për j'artìcoj académich tradissionaj"
 
 #: website/templates/dissemin/sources.html:17
 msgid "<a href=\"https://www.base-search.net\">BASE (Bielefeld Academic Search Engine)</a> for other papers, including preprints"
@@ -2778,9 +2734,8 @@ msgid "My profile"
 msgstr "Mè profil"
 
 #: website/templates/navbar.html:35
-#, fuzzy
 msgid "My to-do list"
-msgstr "Lista dle còse da fé"
+msgstr "Mia lista dle còse da fé"
 
 #: website/templates/navbar.html:36
 msgid "Logout"
@@ -2799,3 +2754,4 @@ msgstr "Eror d'autentificassion"
 #, fuzzy, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "L'autentificassion a l'ha falì. <a href=\"/\">Torné a la pàgina d'intrada.</a>"
+

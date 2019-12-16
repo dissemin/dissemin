@@ -9,13 +9,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-12 16:17+0100\n"
-"PO-Revision-Date: 2019-12-12 14:21:17+0000\n"
+"PO-Revision-Date: 2019-12-16 14:53:47+0000\n"
 "Language: ro\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-12-12 13:58:10+0000\n"
+"X-POT-Import-Date: 2019-12-13 05:38:35+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ( (n == 0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2 );\n"
 
@@ -538,11 +539,7 @@ msgstr "Depozitare"
 #: deposit/templates/deposit/start.html:64
 #, fuzzy, python-format
 msgid "You can deposit the full text of your article. Dissemin will send it to a repository where it will be made freely available. By depositing your article via Dissemin, you agree to our <a href=\"%(tosurl)s\">terms of service</a>."
-msgstr ""
-"Puteți depune textul integral al articolului dvs. Dissemin îl va\n"
-"             trimite într-un depozit în care va fi disponibil gratuit.\n"
-"Prin depunerea articolului prin Dissemin,\n"
-"             sunteți de acord cu noi <a href=\"%(tosurl)s\">terms of service</a>."
+msgstr "Puteți depune textul integral al articolului dvs. Dissemin îl va\n             trimite într-un depozit în care va fi disponibil gratuit.\nPrin depunerea articolului prin Dissemin,\n             sunteți de acord cu noi <a href=\"%(tosurl)s\">terms of service</a>."
 
 #: deposit/templates/deposit/start.html:73
 msgid "You do not appear to be one of the authors of this paper. By using this form, you certify that you have the permission to upload it on their behalf."
@@ -946,14 +943,8 @@ msgstr "Descărcare"
 
 #: papers/templates/papers/messages.html:8
 #, python-format
-msgid ""
-"\n"
-"                        We ignored %(papers)s paper from your ORCiD profile.\n"
-"                    "
-msgid_plural ""
-"\n"
-"                        We ignored %(papers)s papers from your ORCiD profile.\n"
-"                    "
+msgid "\n                        We ignored %(papers)s paper from your ORCiD profile.\n                    "
+msgid_plural "\n                        We ignored %(papers)s papers from your ORCiD profile.\n                    "
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
@@ -1375,9 +1366,7 @@ msgstr ""
 #: papers/views.py:278
 #, fuzzy
 msgid "Invalid ORCID profile. Please make sure it includes a public name."
-msgstr ""
-"Profilul ORCID este nevalid.\n"
-"Asigurați-vă că include un nume public."
+msgstr "Profilul ORCID este nevalid.\nAsigurați-vă că include un nume public."
 
 #: papers/views.py:281
 msgid "Invalid ORCID profile."
@@ -2100,7 +2089,6 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:113
 #, fuzzy
-#| msgid "preprint"
 msgid "OSF preprints"
 msgstr "Înainte de imprimare"
 
@@ -2830,3 +2818,4 @@ msgstr ""
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
+

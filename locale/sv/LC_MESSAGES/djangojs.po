@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 #
 # Author: Dan Koehl
+# Author: ProletariatetsBefrielseOrkester
 # Author: WikiPhoenix
 # --
 # This file is part of the Dissemin Project
@@ -9,13 +10,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-12 10:33+0100\n"
-"PO-Revision-Date: 2019-10-14 15:19:35+0000\n"
+"PO-Revision-Date: 2019-12-16 14:53:36+0000\n"
 "Language: sv\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-10-01 08:31:19+0000\n"
+"X-POT-Import-Date: 2019-12-12 14:04:05+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -44,21 +46,19 @@ msgstr ""
 
 #: website/static/js/dissemin.js:321
 msgid "Exclude from my profile"
-msgstr ""
+msgstr "Exkludera från min profil"
 
 #: website/static/js/dissemin.js:325
 msgid "Include in my profile"
-msgstr ""
+msgstr "Inkludera i min profil"
 
 #: website/static/js/dissemin.js:350
 #, fuzzy
-#| msgid "Adding to todolist"
 msgid "Adding to to-do list"
 msgstr "Lägger till i att göra-lista"
 
 #: website/static/js/dissemin.js:354
 #, fuzzy
-#| msgid "Adding to todolist"
 msgid "Removing from to-do list"
 msgstr "Lägger till i att göra-lista"
 
@@ -68,7 +68,7 @@ msgstr ""
 
 #: website/static/js/dissemin.js:603
 msgid "Pages: "
-msgstr ""
+msgstr "Sidor: "
 
 #: website/static/js/dissemin.js:604
 msgid "Size: "
@@ -97,7 +97,7 @@ msgstr ""
 
 #: website/static/js/dissemin.js:795
 msgid "You have not selected a file for upload."
-msgstr ""
+msgstr "Du har inte valt en fil att ladda upp."
 
 #: website/static/js/dissemin.js:822
 msgid "Dissemin encountered an error, please try again later."
@@ -105,29 +105,5 @@ msgstr ""
 
 #: website/static/js/moment.min.js:1
 msgid ": "
-msgstr ""
+msgstr ": "
 
-#~ msgid "Do not show this message anymore"
-#~ msgstr "Visa inte detta meddelande igen"
-
-#~ msgid "No author"
-#~ msgstr "Ingen författare"
-
-#~ msgid "No title"
-#~ msgstr "Ingen titel"
-
-#~ msgid "Invalid publication date"
-#~ msgstr "Ogiltigt publiceringsdatum"
-
-#, fuzzy
-#~ msgid "No publication date"
-#~ msgstr "Ogiltigt publiceringsdatum"
-
-#~ msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
-#~ msgstr "\"%(name)s\" ignorerades av följande anledning: %(reason)s"
-
-#~ msgid "Show more information"
-#~ msgstr "Visa mer information"
-
-#~ msgid "Show less information"
-#~ msgstr "Visa mindre information"

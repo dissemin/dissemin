@@ -13,30 +13,28 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-12 16:17+0100\n"
-"PO-Revision-Date: 2019-12-12 14:21:05+0000\n"
+"PO-Revision-Date: 2019-12-16 14:53:34+0000\n"
 "Language: ar\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-12-12 13:58:10+0000\n"
+"X-POT-Import-Date: 2019-12-13 05:38:35+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=6; plural=(n == 0) ? 0 : ( (n == 1) ? 1 : ( (n == 2) ? 2 : ( (n%100 >= 3 && n%100 <= 10) ? 3 : ( (n%100 >= 11 && n%100 <= 99) ? 4 : 5 ) ) ) );\n"
 
 #: autocomplete/views.py:81
-#, fuzzy
 msgid "Current institutions"
-msgstr "المؤسسات"
+msgstr "المؤسسات الحالية"
 
 #: autocomplete/views.py:85
-#, fuzzy
 msgid "Unverified institutions"
-msgstr "المؤسسات"
+msgstr "مؤسسات لم يتم التحقق منها"
 
 #: autocomplete/views.py:89
-#, fuzzy
 msgid "Obsolete institutions"
-msgstr "المؤسسات"
+msgstr "مؤسسات عفا عليها الزمن"
 
 #: deposit/forms.py:88
 msgid "Upload type"
@@ -64,9 +62,8 @@ msgid "Do not publish before"
 msgstr "ناشر مغمور"
 
 #: deposit/forms.py:166 deposit/templates/deposit/deposits.html:89
-#, fuzzy
 msgid "License"
-msgstr "لا ترخيص"
+msgstr "الترخيص"
 
 #: deposit/forms.py:215
 msgid "No preferred repository"
@@ -306,7 +303,7 @@ msgstr "في انتظار النشر"
 
 #: deposit/models.py:47
 msgid "Embargo"
-msgstr ""
+msgstr "حظر"
 
 #: deposit/models.py:48
 msgid "Published"
@@ -467,7 +464,7 @@ msgstr "ودائعي"
 #: deposit/templates/deposit/deposits.html:24
 #, python-format
 msgid "&lsquo;%(paper_title)s&rsquo; in <strong>%(repository)s</strong>"
-msgstr ""
+msgstr "&lsquo;%(paper_title)s&rsquo; في <strong>%(repository)s</strong>"
 
 #: deposit/templates/deposit/deposits.html:36
 msgid "Paper"
@@ -499,9 +496,8 @@ msgid "PDF URL"
 msgstr "مسار PDF"
 
 #: deposit/templates/deposit/deposits.html:134
-#, fuzzy
 msgid "Status:"
-msgstr "الحالة"
+msgstr "الحالة:"
 
 #: deposit/templates/deposit/deposits.html:145
 msgid "Letter of Declaration"
@@ -542,9 +538,7 @@ msgstr "إيداع"
 #: deposit/templates/deposit/start.html:64
 #, python-format
 msgid "You can deposit the full text of your article. Dissemin will send it to a repository where it will be made freely available. By depositing your article via Dissemin, you agree to our <a href=\"%(tosurl)s\">terms of service</a>."
-msgstr ""
-"يمكنك إيداع النص الكامل لمقالتك، وسوف يرسله ديسمين إلى مستودع حيث سيُتَاح بحرية،\n"
-"            ، من خلال إيداع مقالتك عبر ديسيمين، فإنك توافق على <a href=\"%(tosurl)s\">شروط الخدمة</a>."
+msgstr "يمكنك إيداع النص الكامل لمقالتك، وسوف يرسله ديسمين إلى مستودع حيث سيُتَاح بحرية،\n            ، من خلال إيداع مقالتك عبر ديسيمين، فإنك توافق على <a href=\"%(tosurl)s\">شروط الخدمة</a>."
 
 #: deposit/templates/deposit/start.html:73
 msgid "You do not appear to be one of the authors of this paper. By using this form, you certify that you have the permission to upload it on their behalf."
@@ -584,9 +578,8 @@ msgid "Repository:"
 msgstr "المستودع:"
 
 #: deposit/templates/deposit/start.html:192
-#, fuzzy
 msgid "Metadata:"
-msgstr "البيانات الوصفية"
+msgstr "البيانات الوصفية:"
 
 #: deposit/templates/deposit/start.html:212
 #: papers/templates/papers/search_base.html:165
@@ -595,12 +588,11 @@ msgstr ""
 
 #: deposit/templates/deposit/start.html:213
 msgid "Submitting paper to repository"
-msgstr ""
+msgstr "جارٍ تقديم ورقة إلى المستودع"
 
 #: deposit/views.py:80
-#, fuzzy
 msgid "This repository is currently not enabled."
-msgstr "تعذر العثور على هذا المستودع."
+msgstr "هذا المستودع غير ممكن حاليا."
 
 #: deposit/views.py:86
 msgid "This repository is not available for this paper."
@@ -612,7 +604,7 @@ msgstr "تعذر العثور على هذا المستودع."
 
 #: deposit/views.py:261
 msgid "Not all fields have been filled correctly."
-msgstr ""
+msgstr "لم يتم ملء جميع الحقول بشكل صحيح."
 
 #: deposit/views.py:270
 msgid "This repository cannot be used for this paper."
@@ -896,9 +888,8 @@ msgid "Authors"
 msgstr "حسب المؤلفين"
 
 #: papers/templates/papers/advanced_search.html:26
-#, fuzzy
 msgid "Search by names or ORCIDs. Separate with commas and prefix with <code>last:</code> to enforce last name search."
-msgstr "<ul><li>استخدم أسماء المؤلفين أو معرفات أورسيد.</li><li>استخدم الفواصل كفاصل للاسم.</li><li> بادئة بـ<code>last:</code> لفرض البحث عن اسم العائلة l.</li></ul>"
+msgstr "البحث عن طريق الأسماء أو ORCIDs، افصل بينها بفواصل وبادئة بـ<code>الأخير:</code> لفرض البحث عن اسم العائلة."
 
 #: papers/templates/papers/advanced_search.html:39
 #, fuzzy
@@ -907,7 +898,7 @@ msgstr "حسب نوع المستند"
 
 #: papers/templates/papers/advanced_search.html:60
 msgid "Fields for superusers"
-msgstr ""
+msgstr "حقول للمستخدمين الخارقين"
 
 #: papers/templates/papers/advanced_search.html:62
 #: papers/templates/papers/search_base.html:124
@@ -950,14 +941,8 @@ msgstr "تنزيل"
 
 #: papers/templates/papers/messages.html:8
 #, python-format
-msgid ""
-"\n"
-"                        We ignored %(papers)s paper from your ORCiD profile.\n"
-"                    "
-msgid_plural ""
-"\n"
-"                        We ignored %(papers)s papers from your ORCiD profile.\n"
-"                    "
+msgid "\n                        We ignored %(papers)s paper from your ORCiD profile.\n                    "
+msgid_plural "\n                        We ignored %(papers)s papers from your ORCiD profile.\n                    "
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
@@ -967,7 +952,7 @@ msgstr[5] ""
 
 #: papers/templates/papers/messages.html:14
 msgid "Details:"
-msgstr ""
+msgstr "التفاصيل:"
 
 #: papers/templates/papers/messages.html:21
 #, fuzzy
@@ -991,32 +976,32 @@ msgstr "حسب تاريخ النشر"
 
 #: papers/templates/papers/messages.html:29
 msgid "Paper is invalid"
-msgstr ""
+msgstr "الورقة غير صالحة"
 
 #: papers/templates/papers/messages.html:32
 msgid "{{ title }} was ignored for the following reason:"
-msgstr ""
+msgstr "{{ title }} تم تجاهله للسبب التالي::"
 
 #: papers/templates/papers/messages.html:36
 msgid "A paper was ignored, because is has no title."
-msgstr ""
+msgstr "تم تجاهل ورقة؛ لأنه ليس لها عنوان."
 
 #: papers/templates/papers/paper.html:39
-#, fuzzy, python-format
+#, python-format
 msgctxt "as in: _Journal article published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "%(doctype)s published in %(year)s by"
-msgstr "نُشِر في"
+msgstr "%(doctype)s نُشِر في %(year)s بواسطة"
 
 #: papers/templates/papers/paper.html:45
-#, fuzzy, python-format
+#, python-format
 msgctxt "as in: _Published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "Published in %(year)s by"
-msgstr "نُشِر في"
+msgstr "تم النشر في %(year)s بواسطة"
 
 #: papers/templates/papers/paper.html:55
-#, fuzzy, python-format
+#, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
-msgstr "and <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s مؤلفين آخرين</a>"
+msgstr "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s مؤلفين آخرين.</a>"
 
 #: papers/templates/papers/paper.html:61
 #, fuzzy
@@ -1075,7 +1060,7 @@ msgstr "و%(remaining_authors)s مؤلفين آخرين"
 
 #: papers/templates/papers/paper_list.html:55
 msgid "from"
-msgstr ""
+msgstr "من"
 
 #: papers/templates/papers/paper_list.html:57
 #: papers/templates/papers/policies.html:17
@@ -1120,12 +1105,11 @@ msgstr "تفاصيل السياسة"
 #: papers/templates/papers/policies.html:70
 #: papers/templates/papers/policies.html:86
 msgid "Blue circle"
-msgstr ""
+msgstr "دائرة زرقاء"
 
 #: papers/templates/papers/policies.html:73
-#, fuzzy
 msgid "Mark this publication for later upload."
-msgstr "تعليم هذا المنشور للرفع لاحقا"
+msgstr "تعليم هذا المنشور للرفع لاحقا."
 
 #: papers/templates/papers/policies.html:76
 msgid "Mark"
@@ -1158,7 +1142,6 @@ msgid " %(first_name)s %(last_name)s uses ORCID."
 msgstr " %(first_name)s %(last_name)s يستخدم  أورسيد."
 
 #: papers/templates/papers/researcher.html:38
-#, fuzzy
 msgid "Refresh Publications"
 msgstr "تحديث المنشورات"
 
@@ -1167,14 +1150,14 @@ msgid "Address:"
 msgstr "العنوان:"
 
 #: papers/templates/papers/researcher.html:51
-#, fuzzy, python-format
+#, python-format
 msgid "Missing publications? <a href=\"%(matching_papers_url)s\">Search for publications with a matching author name.</a>"
-msgstr "المنشورات مفقودة؟ <a href=\"%(matching_papers_url)s\"> ابحث عن المنشورات التي تحمل اسم مؤلف مطابق</a>"
+msgstr "المنشورات مفقودة؟ <a href=\"%(matching_papers_url)s\"> ابحث عن المنشورات التي تحمل اسم مؤلف مطابق.</a>"
 
 #: papers/templates/papers/search.html:10
-#, fuzzy, python-format
+#, python-format
 msgid "Missing publications? <a class=\"showHrefPrint\" href=\"%(faq_url)s#missingPaper\">Read more about our data sources.</a>"
-msgstr "المنشورات مفقودة؟ <a class=\"showHrefPrint\" href=\"%(faq_url)s#missing-paper\">، اقرأ المزيد حول مصادر بياناتنا.</a>"
+msgstr "المنشورات مفقودة؟ <a class=\"showHrefPrint\" href=\"%(faq_url)s#missingPaper\">، اقرأ المزيد حول مصادر بياناتنا.</a>"
 
 #: papers/templates/papers/search_base.html:25
 #, python-format
@@ -1192,14 +1175,12 @@ msgid "Refine"
 msgstr "صقل"
 
 #: papers/templates/papers/search_base.html:46
-#, fuzzy
 msgid "By title"
-msgstr "العنوان"
+msgstr "حسب العنوان"
 
 #: papers/templates/papers/search_base.html:55
-#, fuzzy
 msgid "By co-authors"
-msgstr "حسب المؤلفين"
+msgstr "حسب المؤلفين المشاركين"
 
 #: papers/templates/papers/search_base.html:57
 msgid "By authors"
@@ -1227,7 +1208,7 @@ msgstr "رتب حسب"
 
 #: papers/templates/papers/search_base.html:122
 msgid "Refine for superusers"
-msgstr ""
+msgstr "صقل للمستخدمين الخارقين"
 
 #: papers/templates/papers/search_base.html:166
 msgid "Refreshing results"
@@ -1353,19 +1334,19 @@ msgstr "الوصول المفتوح الأخضر"
 
 #: papers/templatetags/statuses.py:111
 msgid "Red circle"
-msgstr ""
+msgstr "دائرة حمراء"
 
 #: papers/templatetags/statuses.py:112
 msgid "Orange circle"
-msgstr ""
+msgstr "دائرة برتقالية"
 
 #: papers/templatetags/statuses.py:113
 msgid "White circle"
-msgstr ""
+msgstr "دائرة بيضاء"
 
 #: papers/templatetags/statuses.py:114
 msgid "Question mark in circle"
-msgstr ""
+msgstr "علامة استفهام في دائرة"
 
 #: papers/views.py:88
 msgid "Dissemin requires access to your ORCID name, which is marked as private in your ORCID profile."
@@ -1436,7 +1417,7 @@ msgstr "حسب سياسة الناشر"
 
 #: publishers/forms.py:38
 msgid "Order"
-msgstr ""
+msgstr "الترتيب"
 
 #: publishers/models.py:39 website/templates/dissemin/faq.html:292
 msgid "Open access"
@@ -1539,9 +1520,8 @@ msgstr[4] ""
 msgstr[5] ""
 
 #: publishers/templates/publishers/list.html:96
-#, fuzzy
 msgid "No publishers found"
-msgstr "لم يتم العثور على أي ناشر."
+msgstr "لم يتم العثور على ناشرين"
 
 #: publishers/templates/publishers/policy_pdfversion.html:5
 msgid "The published version is the final version of the paper, as formatted by the publisher."
@@ -1571,11 +1551,11 @@ msgstr "الإبلاغ عن أي خطأ لهم"
 
 #: publishers/templates/publishers/publisher.html:51
 msgid "For superusers"
-msgstr ""
+msgstr "للمستخدمين الخارقين"
 
 #: publishers/templates/publishers/publisher.html:54
 msgid "Change open access status"
-msgstr ""
+msgstr "تغيير حالة الوصول المفتوح"
 
 #: publishers/templates/publishers/publisher.html:72
 #, fuzzy
@@ -1585,7 +1565,7 @@ msgstr "الوصول المفتوح الأخضر"
 #: publishers/templates/publishers/publisher.html:74
 #, python-format
 msgid "This is a short summary of the green open access policy of %(publisher_name)s."
-msgstr ""
+msgstr "هذا ملخص قصير لسياسة الوصول المفتوح الأخضر لـ%(publisher_name)s."
 
 #: publishers/templates/publishers/publisher.html:82
 msgid "Conditions"
@@ -1658,21 +1638,20 @@ msgid "Select here the full text of your article. PDF files only, maximum size:"
 msgstr "حدد هنا النص الكامل لمقالتك، ملفات PDF فقط، الحد الأقصى للحجم:"
 
 #: upload/templates/upload/widget.html:15
-#, fuzzy
 msgid "Or enter a URL:"
 msgstr "أو أدخل مسارا:"
 
 #: upload/templates/upload/widget.html:19
 msgid "Upload from URL"
-msgstr ""
+msgstr "رفع من مسار"
 
 #: upload/templates/upload/widget.html:27
 msgid "Fetching file and generating preview..."
-msgstr ""
+msgstr "جارٍ جلب الملف وإنشاء المعاينة..."
 
 #: upload/templates/upload/widget.html:47
 msgid "Choose another file"
-msgstr ""
+msgstr "اختيار ملف آخر"
 
 #: upload/views.py:133
 msgid "Invalid PDF file."
@@ -1703,16 +1682,14 @@ msgid "Invalid URL."
 msgstr "مسار غير صالح."
 
 #: vinaigrette-deleteme.py:2
-#, fuzzy
 msgid "Computer science, knowledge & systems"
-msgstr "علم الحاسوب"
+msgstr "علوم الحاسب والمعرفة والنظم"
 
 #: vinaigrette-deleteme.py:3
 msgid "Bibliographies"
 msgstr "قوائم المراجع"
 
 #: vinaigrette-deleteme.py:4
-#, fuzzy
 msgid "Library & information sciences"
 msgstr "علوم المكتبات والمعلومات"
 
@@ -1733,18 +1710,16 @@ msgid "News media, journalism & publishing"
 msgstr "وسائل إعلام الأخبار والصحافة والنشر"
 
 #: vinaigrette-deleteme.py:9
-#, fuzzy
 msgid "Quotations"
-msgstr "المنشورات"
+msgstr "الاقتباسات"
 
 #: vinaigrette-deleteme.py:10
 msgid "Manuscripts & rare books"
 msgstr "المخطوطات والكتب النادرة"
 
 #: vinaigrette-deleteme.py:12
-#, fuzzy
 msgid "Metaphysics"
-msgstr "الفيزياء"
+msgstr "ما وراء الطبيعة"
 
 #: vinaigrette-deleteme.py:13
 msgid "Epistemology"
@@ -1759,9 +1734,8 @@ msgid "Philosophical schools of thought"
 msgstr "المدارس الفلسفية للفكر"
 
 #: vinaigrette-deleteme.py:17
-#, fuzzy
 msgid "Philosophical logic"
-msgstr "فلسفة"
+msgstr "المنطق الفلسفي"
 
 #: vinaigrette-deleteme.py:18
 msgid "Ethics"
@@ -1776,7 +1750,6 @@ msgid "Modern western philosophy"
 msgstr "الفلسفة الغربية الحديثة"
 
 #: vinaigrette-deleteme.py:21
-#, fuzzy
 msgid "Religion"
 msgstr "الأديان"
 
@@ -1809,19 +1782,16 @@ msgid "History of Christianity"
 msgstr "تاريخ المسيحية"
 
 #: vinaigrette-deleteme.py:29
-#, fuzzy
 msgid "Christian denominations"
-msgstr "إدارة ديسيمين"
+msgstr "الطوائف المسيحية"
 
 #: vinaigrette-deleteme.py:30
-#, fuzzy
 msgid "Other religions"
-msgstr "الأديان"
+msgstr "الأديان الأخرى"
 
 #: vinaigrette-deleteme.py:31
-#, fuzzy
 msgid "Social sciences, sociology & anthropology"
-msgstr "علم الإنسان الاجتماعي وعلم الأعراق"
+msgstr "العلوم الاجتماعية وعلم الاجتماع والأنثروبولوجيا وعلم الإنسان"
 
 #: vinaigrette-deleteme.py:34
 msgid "Economics"
@@ -1844,9 +1814,8 @@ msgid "Customs, etiquette & folklore"
 msgstr "العادات والآداب والفولكلور"
 
 #: vinaigrette-deleteme.py:41 website/templates/navbar.html:15
-#, fuzzy
 msgid "Language"
-msgstr "تغيير اللغة"
+msgstr "اللغة"
 
 #: vinaigrette-deleteme.py:43
 msgid "English & Old English languages"
@@ -1877,14 +1846,12 @@ msgid "Classical & modern Greek languages"
 msgstr "اللغات اليونانية الكلاسيكية والحديثة"
 
 #: vinaigrette-deleteme.py:50
-#, fuzzy
 msgid "Other languages"
-msgstr "تغيير اللغة"
+msgstr "لغات أخرى"
 
 #: vinaigrette-deleteme.py:51
-#, fuzzy
 msgid "Science"
-msgstr "علوم الحياة"
+msgstr "علم"
 
 #: vinaigrette-deleteme.py:53
 msgid "Astronomy"
@@ -1899,9 +1866,8 @@ msgid "Fossils & prehistoric life"
 msgstr "الحفريات وحياة ما قبل التاريخ"
 
 #: vinaigrette-deleteme.py:58
-#, fuzzy
 msgid "Biology"
-msgstr "علم الاجتماع"
+msgstr "الأحياء"
 
 #: vinaigrette-deleteme.py:59
 msgid "Plants (Botany)"
@@ -1912,17 +1878,14 @@ msgid "Animals (Zoology)"
 msgstr "الحيوانات (علم الحيوان)"
 
 #: vinaigrette-deleteme.py:61
-#, fuzzy
 msgid "Technology"
-msgstr "علم النفس"
+msgstr "التكنولوجيا"
 
 #: vinaigrette-deleteme.py:62
-#, fuzzy
 msgid "Medicine & health"
-msgstr "الطب والعلوم الصحية"
+msgstr "الطب والصحة"
 
 #: vinaigrette-deleteme.py:64
-#, fuzzy
 msgid "Agriculture"
 msgstr "الهندسة المعمارية"
 
@@ -1931,14 +1894,12 @@ msgid "Home & family management"
 msgstr "إدارة المنزل والأسرة"
 
 #: vinaigrette-deleteme.py:66
-#, fuzzy
 msgid "Management & public relations"
-msgstr "تحديث المنشورات"
+msgstr "الإدارة والعلاقات العامة"
 
 #: vinaigrette-deleteme.py:67
-#, fuzzy
 msgid "Chemical engineering"
-msgstr "الهندسة"
+msgstr "الهندسة الكيميائية"
 
 #: vinaigrette-deleteme.py:68
 msgid "Manufacturing"
@@ -2025,14 +1986,12 @@ msgid "Classical & modern Greek literatures"
 msgstr "الأدب اليوناني الكلاسيكي والحديث"
 
 #: vinaigrette-deleteme.py:90
-#, fuzzy
 msgid "Other literatures"
-msgstr "الأدب"
+msgstr "آداب أخرى"
 
 #: vinaigrette-deleteme.py:92
-#, fuzzy
 msgid "Geography & travel"
-msgstr "جغرافيا"
+msgstr "الجغرافيا والسفر"
 
 #: vinaigrette-deleteme.py:93
 msgid "Biography & genealogy"
@@ -2047,9 +2006,8 @@ msgid "History of Europe"
 msgstr "تاريخ أوروبا"
 
 #: vinaigrette-deleteme.py:96
-#, fuzzy
 msgid "History of Asia"
-msgstr "التاريخ"
+msgstr "تاريخ آسيا"
 
 #: vinaigrette-deleteme.py:97
 msgid "History of Africa"
@@ -2073,22 +2031,18 @@ msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
 msgstr "المشاع الإبداعي CC0 1.0 العالمي"
 
 #: vinaigrette-deleteme.py:102
-#, fuzzy
 msgid "Creative Commons Attribution 4.0 International (CC BY 4.0)"
 msgstr "المشاع الإبداعي النسبة 4.0 (CC BY 4.0)"
 
 #: vinaigrette-deleteme.py:103
-#, fuzzy
 msgid "Creative Commons Attribution-ShareAlike 4.0, International (CC BY-SA 4.0)"
 msgstr "المشاع الإبداعي النسبة 4.0 (CC BY 4.0)"
 
 #: vinaigrette-deleteme.py:104
-#, fuzzy
 msgid "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
 msgstr "المشاع الإبداعي النسبة 4.0 (CC BY 4.0)"
 
 #: vinaigrette-deleteme.py:105
-#, fuzzy
 msgid "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)"
 msgstr "المشاع الإبداعي النسبة 4.0 (CC BY 4.0)"
 
@@ -2102,7 +2056,7 @@ msgstr "ترخيص مفتوح آخر"
 
 #: vinaigrette-deleteme.py:109
 msgid "Zenodo"
-msgstr ""
+msgstr "زينودو"
 
 #: vinaigrette-deleteme.py:110
 msgid "Zenodo is a general-purpose open repository hosted by CERN. If the document does not have a DOI yet, Zenodo will create one."
@@ -2118,7 +2072,6 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:113
 #, fuzzy
-#| msgid "preprint"
 msgid "OSF preprints"
 msgstr "ما قبل الطباعة"
 
@@ -2155,9 +2108,9 @@ msgid "Internal server error"
 msgstr "خطأ داخلي"
 
 #: website/templates/500.html:13
-#, fuzzy, python-format
+#, python-format
 msgid "Your request triggered an internal server error. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "أدى طلبك إلى حدوث خطأ داخلي; <a href=\"/\">الرجوع إلى الصفحة الرئيسية.</a>"
+msgstr "أدى طلبك إلى حدوث خطأ داخلي في الخادم؛ <a href=\"%(index)s\">الرجوع إلى الصفحة الرئيسية.</a>"
 
 #: website/templates/admin/base_site.html:5
 #: website/templates/admin/base_site.html:8
@@ -2174,9 +2127,8 @@ msgid "Error"
 msgstr "خطأ"
 
 #: website/templates/dissemin/error.html:14
-#, fuzzy
 msgid "Go back to the start page."
-msgstr "<a href=\"/\">رجوع إلى الصفحة الرئيسية.</a>"
+msgstr "العودة إلى صفحة البداية."
 
 #: website/templates/dissemin/faq.html:7 website/templates/dissemin/faq.html:56
 msgid "Frequently Asked Questions"
@@ -2215,19 +2167,16 @@ msgid "Who runs dissem.in?"
 msgstr "من الذي يدير publish.in؟"
 
 #: website/templates/dissemin/faq.html:28
-#, fuzzy
 msgid "Can I create a profile on dissem.in?"
-msgstr "هل يمكنني إنشاء ملف تعريف خاص بي على spread.in؟"
+msgstr "هل يمكنني إنشاء ملف تعريف على spread.in؟"
 
 #: website/templates/dissemin/faq.html:30
-#, fuzzy
 msgid "Policies and Full-text Availability"
 msgstr "السياسات وتوافر النص الكامل"
 
 #: website/templates/dissemin/faq.html:31
-#, fuzzy
 msgid "What do our policy classes mean?"
-msgstr "ماذا تعني فئات سياستكم؟"
+msgstr "ماذا تعني فئات سياستنا؟"
 
 #: website/templates/dissemin/faq.html:32
 msgid "When is a paper considered available?"
@@ -2366,9 +2315,9 @@ msgid "<strong><a href=\"https://arxiv.org/\">arXiv</a></strong>, a well-known g
 msgstr "<strong><a href=\"https://arxiv.org/\">أرخايف</a></strong>هو مستودع معروف للأغراض العامة، في الوقت الراهن، لقد رفض أرخايف السماح لديسمين بالإيداع باستخدام SWORD API، ويريد من المستخدمين الإيداع في أرخايف يدويا، إذا كنت ترغب في الإيداع في أرخايف باستخدام ديسيمين، يمكنك أن تجعلهم يعرفون أنك مهتم (أرسل رسالة إلكترونية إلى: help AT arxiv.org وابدأ رسالتك ب\"عزيزي أرخايف، \")."
 
 #: website/templates/dissemin/faq.html:245
-#, fuzzy, python-format
+#, python-format
 msgid "Dissemin is a web platform gathering metadata from <a href=\"%(sources_url)s\">many sources</a> and analyzing the full text availability of publications of researchers. It has been designed to foster the use of repositories (rather than preprints posted on personal homepages), <a href=\"#repositoriesRock\">for numerous reasons</a>."
-msgstr "ديسيمين عبارة عن بيانات تعريفية لجمع البيانات على الإنترنت من <a href=\"%(sources_url)s\">العديد من المصادر</a> وتحليل النص الكامل لمطبوعات الباحثين، وقد تم تصميمه لتعزيز استخدام المستودعات (بدلا من المطبوعات التي تم نشرها على الصفحات الرئيسية الشخصية); <a href=\"#repositories-rock\">لأسباب عديدة</a>."
+msgstr "ديسيمين عبارة عن بيانات تعريفية لجمع البيانات على الإنترنت من <a href=\"%(sources_url)s\">العديد من المصادر</a> وتحليل النص الكامل لمطبوعات الباحثين، وقد تم تصميمه لتعزيز استخدام المستودعات (بدلا من المطبوعات التي تم نشرها على الصفحات الرئيسية الشخصية); <a href=\"#repositoriesRock\">لأسباب عديدة</a>."
 
 #: website/templates/dissemin/faq.html:253
 msgid "Dissemin is not a repository as it does not store any full text. When the full text of a publication is available, a link to the relevant page is provided. The full texts deposited through Dissemin are stored in third-party repositories such as <a href=\"https://zenodo.org\">Zenodo</a> or <a href=\"https://hal.archives-ouvertes.fr/\">HAL</a>."
@@ -2384,15 +2333,15 @@ msgstr "نعم، يمكنك القيام بذلك، من خلال <a href=\"http
 
 #: website/templates/dissemin/faq.html:281
 msgid "We have the following five policy classes:"
-msgstr ""
+msgstr "لدينا فئات السياسة الخمسة التالية:"
 
 #: website/templates/dissemin/faq.html:285
 msgid "Class"
-msgstr ""
+msgstr "الرتبة"
 
 #: website/templates/dissemin/faq.html:286
 msgid "Description"
-msgstr ""
+msgstr "الوصف"
 
 #: website/templates/dissemin/faq.html:295
 msgid "<strong>Open access:</strong><br /> The full text is made freely available by the publisher (in a fully open access or hybrid journal)."
@@ -2409,7 +2358,7 @@ msgstr "<strong>مسموح بالمطبوعات قبل النشر/بعد الن�
 
 #: website/templates/dissemin/faq.html:314
 msgid "Pre/post prints allowed but full text unavailable"
-msgstr ""
+msgstr "قبل/بعد المطبوعات المسموح بها ولكن النص الكامل غير متوفر"
 
 #: website/templates/dissemin/faq.html:317
 msgid "<strong>Pre/post prints allowed but full text unavailable:</strong><br /> The full text could be made available in a repository (as above) according to the publishing policy. We encourage their authors to do so."
@@ -2421,7 +2370,7 @@ msgstr "السياسة غير معروفة"
 
 #: website/templates/dissemin/faq.html:328
 msgid "<strong>Policy unknown:</strong><br /> The full text is not available and dissem.in could not evaluate if the publishers policy allows making the full text freely available."
-msgstr ""
+msgstr "<strong>السياسة غير معروفة:</strong><br /> النص الكامل غير متاح ولا يمكن لـdissem.in تقييم ما إذا كانت سياسة الناشرين تتيح إتاحة النص الكامل مجانا."
 
 #: website/templates/dissemin/faq.html:336
 #, fuzzy
@@ -2483,25 +2432,21 @@ msgid "Note that, in the longer term, we hope to design a way for our users to e
 msgstr "لاحظ أنه، على المدى الطويل، نحن نأمل في تصميم وسيلة لمستخدمينا لتحرير ملفاتهم الشخصية على ديسمين لإضافة الأوراق المفقودة وإصلاح هذه المشاكل، ولكن ليس لدينا مثل هذا النظام حتى الآن."
 
 #: website/templates/dissemin/faq.html:426
-#, fuzzy, python-format
+#, python-format
 msgid "In most cases, the errors that you see on Dissemin have not been introduced by Dissemin, but are already present in the <a href=\"%(sources_url)s\">public sources</a> that Dissemin harvests. Hence, please first check if the error that you have seen is already present in our data sources, by looking at the \"Links\" section in the top right of the page. If one of these pages contain the error, you should report the problem to them and not to us, otherwise the mistake will persist in the source."
-msgstr "في معظم الحالات، لم يتم عرض الأخطاء التي تراها على ديسيمين بواسطة ديسيمين، ولكنها موجودة بالفعل في <a href=\"{{ sources_url }}\"> المصادر العامة</a> التي يحصدها ديسمين، وبالتالي، يُرجَى التحقق أولا من وجود الخطأ الذي شاهدته بالفعل في مصادر البيانات، من خلال الاطلاع على قسم \"الروابط\" في أعلى يمين الصفحة، إذا كان أحد هذه الصفحات يحتوي على الخطأ، يجب الإبلاغ عن المشكلة لهم وليس لنا، وإلا فإن الخطأ سيستمر في المصدر."
+msgstr "في معظم الحالات، لم يتم عرض الأخطاء التي تراها على ديسيمين بواسطة ديسيمين، ولكنها موجودة بالفعل في  <a href=\"%(sources_url)s\"> المصادر العامة</a> التي يحصدها ديسمين، وبالتالي، يُرجَى التحقق أولا من وجود الخطأ الذي شاهدته بالفعل في مصادر البيانات، من خلال الاطلاع على قسم \"الروابط\" في أعلى يمين الصفحة، إذا كان أحد هذه الصفحات يحتوي على الخطأ، يجب الإبلاغ عن المشكلة لهم وليس لنا، وإلا فإن الخطأ سيستمر في المصدر."
 
 #: website/templates/dissemin/faq.html:431
-#, fuzzy
 msgid "If the error is not present in any of the sources and you believe that Dissemin may have introduced the problem, please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> with details of the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. Note that you cannot yet fix the problem yourself, although we hope in the longer term to develop a system to allow our users to edit details of their papers themselves."
 msgstr "إذا كان الخطأ غير موجود في أي من المصادر وكنت تعتقد أن ديسمين قد أدخل المشكلة، يُرجَى تقديم <a href=\"https://github.com/dissemin/dissemin/issues\">المشكلة</a> مع تفاصيل المشكلة، أو إرسال رسالة إلى <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>، لاحظ أنه لا يمكنك بعد حل المشكلة بنفسك، على الرغم من أننا نأمل على المدى الطويل في تطوير نظام للسماح للمستخدمين بتعديل تفاصيل أوراقهم بأنفسهم."
 
 #: website/templates/dissemin/faq.html:438
-#, fuzzy
 msgid "First, note that Dissemin does not account for copies of articles that are only available on a personal homepage or a similar website. This is deliberate, because we believe that <a href=\"#repositoriesRock\">articles should be hosted in repositories</a>."
-msgstr "أولا، لاحظ أن ديسمين لا يمثل نسخا من المقالات التي لا تتوفر إلا على الصفحة الرئيسية الشخصية أو موقع ويب مماثل، هذا متعمد; لأننا نعتقد أنه <a href=\"#repositories-rock\">تنبغي استضافة المقالات في مستودعات</a>."
+msgstr "أولا، لاحظ أن ديسمين لا يمثل نسخا من المقالات التي لا تتوفر إلا على الصفحة الرئيسية الشخصية أو موقع ويب مماثل، هذا متعمد; لأننا نعتقد أنه <a href=\"#repositoriesRock\">تنبغي استضافة المقالات في مستودعات</a>."
 
 #: website/templates/dissemin/faq.html:443
 msgid "Second, at the moment, Dissemin only supports repositories with a crawlable API that follows the <a href=\"https://www.openarchives.org/OAI/openarchivesprotocol.html\">OAI-PMH protocol</a>, and is <a href=\"https://www.base-search.net/about/en/suggest.php\">registered</a> in <a href=\"https://www.base-search.net/\">BASE</a>. We have a <a href=\"https://github.com/dissemin/croawl\">long-term project</a> to support more repositories by crawling them, but for the moment, we do not have the resources to support repositories not covered by BASE. Hence, if you are a user of a repository and would like it to be supported by Dissemin, please contact the repository administrator and suggest them to implement OAI-PMH support and to <a href=\"https://www.base-search.net/about/en/suggest.php\">register</a> their repository in BASE."
-msgstr ""
-"ثانيا، في الوقت الحالي، يدعم ديسيمين فقط المستودعات مع واجهة برمجة تطبيقات الزاحف التي تتبع <a href=\"https://www.openarchives.org/OAI/openarchivesprotocol.html\">بروتوكول\n"
-"OAI-PMH</a>، و<a href=\"https://www.base-search.net/about/en/suggest.php\">المسجل</a> في <a href=\"https://www.base-search.net/\">بيس</a>. لدينا <a href=\"https://github.com/dissemin/croawl\">مشروع طويل الأجل</a> لدعم المزيد من المستودعات من خلال الزحف إليها، ولكن في الوقت الحالي، لا تتوفر لدينا الموارد اللازمة لدعم المستودعات التي لا يغطيها بيس، وبالتالي، إذا كنت مستخدما للمستودع وترغب في أن يكون مدعوما من قبل ديسيمين، يُرجَى الاتصال بمسؤول المستودع واقتراح تنفيذ دعم OAI-PMH <a href=\"https://www.base-search.net/about/en/suggest.php\">تسجيل</a> مستودعهم في بيس"
+msgstr "ثانيا، في الوقت الحالي، يدعم ديسيمين فقط المستودعات مع واجهة برمجة تطبيقات الزاحف التي تتبع <a href=\"https://www.openarchives.org/OAI/openarchivesprotocol.html\">بروتوكول\nOAI-PMH</a>، و<a href=\"https://www.base-search.net/about/en/suggest.php\">المسجل</a> في <a href=\"https://www.base-search.net/\">بيس</a>. لدينا <a href=\"https://github.com/dissemin/croawl\">مشروع طويل الأجل</a> لدعم المزيد من المستودعات من خلال الزحف إليها، ولكن في الوقت الحالي، لا تتوفر لدينا الموارد اللازمة لدعم المستودعات التي لا يغطيها بيس، وبالتالي، إذا كنت مستخدما للمستودع وترغب في أن يكون مدعوما من قبل ديسيمين، يُرجَى الاتصال بمسؤول المستودع واقتراح تنفيذ دعم OAI-PMH <a href=\"https://www.base-search.net/about/en/suggest.php\">تسجيل</a> مستودعهم في بيس"
 
 #: website/templates/dissemin/faq.html:448
 msgid "If the repository is registered in BASE, please <a href=\"https://www.base-search.net/\">search in BASE</a> to check that your article is there. If it is, then this may be a bug of Dissemin; please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> describing the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
@@ -2540,9 +2485,9 @@ msgid "You can also add publications to your profile <em>on Dissemin</em>, by cl
 msgstr "يمكنك أيضا إضافة منشورات إلى ملفك الشخصي <em>في ديسيمين</em>، بالنقر على الزر \"تضمين في ملفي الشخصي\" في نتائج البحث على ديسيمين (هذا الزر مرئي فقط عند تسجيل الدخول، وبجانب الأوراق التي يعتقد ديسمين أنك قد ألفتها.) يمكنك أيضا استبعاد المقالات من ملفك الشخصي بهذه الطريقة، الرجاء ملاحظة أن هذه التغييرات محلية لديسيمين و<em>لا</em> يتم نشرها إلى ملف تعريف أورسيد; لأن أورسيد لا يمتلك واجهة برمجة تطبيقات حرة تسمح لنا بنشرها."
 
 #: website/templates/dissemin/faq.html:512
-#, fuzzy, python-format
+#, python-format
 msgid "If you change some details in your ORCID profile (name, homepage, etc.), the changes will not automatically be picked up in your profile on Dissemin. To update your profile on Dissemin accordingly, once you have logged in to Dissemin, you can go to your <a href=\"%(profile_url)s\">profile page</a> and click \"Refresh publications\"."
-msgstr "إذا قمت بتغيير بعض التفاصيل في ملف تعريف أورسيد (الاسم، أو الصفحة الرئيسية، وما إلى ذلك)، لن يتم التقاط التغييرات تلقائيا في ملفك الشخصي على ديسيمين، لتحديث ملفك الشخصي على ديسيمين وفقا لذلك، بمجرد تسجيل الدخول إلى ديسيمين؛ يمكنك الانتقال إلى <a href=\"/my-profile\">صفحة الملف الشخصي</a> والنقر على \"تحديث المنشورات\"."
+msgstr "إذا قمت بتغيير بعض التفاصيل في ملف تعريف أورسيد (الاسم، أو الصفحة الرئيسية، وما إلى ذلك)، لن يتم التقاط التغييرات تلقائيا في ملفك الشخصي على ديسيمين، لتحديث ملفك الشخصي على ديسيمين وفقا لذلك، بمجرد تسجيل الدخول إلى ديسيمين؛ يمكنك الانتقال إلى <a href=\"%(profile_url)s\">صفحة الملف الشخصي</a> والنقر على \"تحديث المنشورات\"."
 
 #: website/templates/dissemin/faq.html:526
 #, python-format
@@ -2554,14 +2499,12 @@ msgid "There are many ways to get involved:"
 msgstr "يوجد العديد من الطرق حتى تشارك"
 
 #: website/templates/dissemin/faq.html:539
-#, fuzzy
 msgid "Contribute to <a href=\"https://github.com/dissemin/dissemin\">the code</a>."
-msgstr "ساهم في <a href=\"https://github.com/wetneb/dissemin\">الكود</a>."
+msgstr "ساهم في <a href=\"https://github.com/dissemin/dissemin\">الكود</a>."
 
 #: website/templates/dissemin/faq.html:544
-#, fuzzy
 msgid "Fix any of our listed <a href=\"https://github.com/dissemin/dissemin/issues\">issues</a>."
-msgstr "إصلاح أي من <a href=\"https://github.com/wetneb/dissemin/issues\">المشكلات</a> المدرجة لدينا."
+msgstr "إصلاح أي من <a href=\"https://github.com/dissemin/dissemin/issues\">المشكلات</a> المدرجة لدينا."
 
 #: website/templates/dissemin/faq.html:549
 msgid "Help us <a href=\"https://translatewiki.net/wiki/Translating:Dissemin\">translate</a> the interface in your language."
@@ -2572,25 +2515,20 @@ msgid "Encourage researchers to use this service."
 msgstr "تشجيع الباحثين على استخدام هذه الخدمة."
 
 #: website/templates/dissemin/faq.html:559
-#, fuzzy
 msgid "Star <a href=\"https://github.com/dissemin/dissemin\">our GitHub project</a>!"
-msgstr "أشر بنجمة <a href=\"https://github.com/wetneb/dissemin\">لمشروعنا في جيت هب</a>!"
+msgstr "أشر بنجمة <a href=\"https://github.com/dissemin/dissemin\">لمشروعنا في جيت هب</a>!"
 
 #: website/templates/dissemin/faq.html:564
 msgid "<a href=\"https://association.dissem.in/#dons\">Donations are accepted</a>."
 msgstr "<a href=\"https://association.dissem.in/#dons\">يتم قبول التبرعات</a>."
 
 #: website/templates/dissemin/faq.html:572
-#, fuzzy
 msgid "The source code is available <a href=\"https://github.com/dissemin/dissemin\">on GitHub</a>."
-msgstr ""
-"شفرة المصدر متاحة <a href=\"https://github.com/wetneb/dissemin\">في\n"
-"جيت هب</a>."
+msgstr "شفرة المصدر متاحة <a href=\"https://github.com/dissemin/dissemin\">في\nجيت هب</a>."
 
 #: website/templates/dissemin/faq.html:579
-#, fuzzy
 msgid "Yes! We even have <a href=\"https://dissemin.readthedocs.io/en/latest/api.html\">an API</a>. If it does not suit your needs, please don't hesitate to get in touch by writing to <a href=\"mailto:hello@dissem.in\">hello@dissem.in</a>."
-msgstr "نعم! لدينا حتى <a href=\"https://dev.dissem.in/api.html\">واجهة برمجة تطبيقات</a>، إذا كانت لا تناسب احتياجاتك، فيٌرجَى عدم التردد في الاتصال بنا عن طريق الكتابة إلى <a href=\"mailto:hello@dissem.in\">hello@dissem.in</a>."
+msgstr "نعم! لدينا حتى <a href=\"https://dissemin.readthedocs.io/en/latest/api.html\">an API</a>واجهة برمجة تطبيقات</a>، إذا كانت لا تناسب احتياجاتك، فيٌرجَى عدم التردد في الاتصال بنا عن طريق الكتابة إلى <a href=\"mailto:hello@dissem.in\">hello@dissem.in</a>."
 
 #: website/templates/dissemin/faq.html:586
 msgid "Yes! See <a href=\"https://association.dissem.in/#logos\">here</a> for links to our logos and for explanations about how you can reuse them."
@@ -2602,9 +2540,8 @@ msgid "Sign in"
 msgstr "تسجيل الدخول"
 
 #: website/templates/dissemin/login.html:15
-#, fuzzy
 msgid "Dissemin uses ORCID to authenticate its users. ORCID is an independent non-profit effort to provide an open registry of unique researcher identifiers. It also offers open services to link research activities and organizations to these identifiers. Learn more at <a href=\"https://orcid.org\" target=\"_blank\">orcid.org</a>."
-msgstr "يستخدم ديسيمين ORCID لمصادقة مستخدميه، ORCID جهد مستقل غير هادف للربح لتوفير سجل مفتوح لمعرفات باحث فريدة، كما يقدم خدمات مفتوحة لربط أنشطة البحث والمنظمات بهذه المعرفات، المزيد من المعلومات في <a href=\"https://orcid.org\">orcid.org</a>."
+msgstr "يستخدم ديسيمين ORCID لمصادقة مستخدميه، ORCID جهد مستقل غير هادف للربح لتوفير سجل مفتوح لمعرفات باحث فريدة، كما يقدم خدمات مفتوحة لربط أنشطة البحث والمنظمات بهذه المعرفات، المزيد من المعلومات في <a href=\"https://orcid.org\" target=\"_blank\">orcid.org</a>.."
 
 #: website/templates/dissemin/login.html:28
 #: website/templates/dissemin/login.html:34
@@ -2621,9 +2558,8 @@ msgid "Sign up"
 msgstr "أنشئ حسابًا"
 
 #: website/templates/dissemin/login.html:41
-#, fuzzy
 msgid "Not an ORCID user yet? Create an account, it is free and takes just a few seconds."
-msgstr "لست مستخدم ORCID حتى الآن؟ أنشئ حسابًا، وهو مجاني ويستغرق بضع ثوانٍ."
+msgstr "لست مستخدم ORCID حتى الآن؟ أنشئ حسابًا، وهو مجاني ويستغرق بضع ثوانٍ فقط."
 
 #: website/templates/dissemin/sources.html:5
 msgid "Data sources"
@@ -2641,11 +2577,11 @@ msgstr "انتقل إلى <a href=\"https://search.crossref.org/\">بحث كرو
 
 #: website/templates/dissemin/sources.html:17
 msgid "<a href=\"https://www.base-search.net\">BASE (Bielefeld Academic Search Engine)</a> for other papers, including preprints"
-msgstr ""
+msgstr "<a href=\"https://www.base-search.net\">BASE (محرك البحث الأكاديمي بيليفيلد)</a> لأوراق أخرى، بما في ذلك المطبوعات"
 
 #: website/templates/dissemin/sources.html:20
 msgid "<a href=\"https://www.sherpa.ac.uk/romeo/\">SHERPA/RoMEO</a> for publisher policies"
-msgstr ""
+msgstr "<a href=\"https://www.sherpa.ac.uk/romeo/\">SHERPA/RoMEO</a> لسياسات الناشر"
 
 #: website/templates/dissemin/sources.html:23
 msgid "<a href=\"https://www.zotero.org/\">Zotero</a> for metadata associated to DOIs"
@@ -2656,7 +2592,6 @@ msgid "Home"
 msgstr "الصفحة الرئيسية"
 
 #: website/templates/dissemin/start_page.html:19
-#, fuzzy
 msgid "Welcome to Dissemin"
 msgstr "مرحبا بكم في ديسيمين"
 
@@ -2730,7 +2665,7 @@ msgstr "يمكنك الإعلان عن ديسيمين للباحثين وإظه�
 
 #: website/templates/dissemin/start_page.html:131
 msgid "Network of Partners"
-msgstr ""
+msgstr "شبكة الشركاء"
 
 #: website/templates/dissemin/start_page.html:134
 msgid "Partners"
@@ -2762,7 +2697,6 @@ msgid "Privacy"
 msgstr "خصوصية"
 
 #: website/templates/dissemin/tos.html:30
-#, fuzzy
 msgid "The platform does not include any analytics, advertisement or tracking services. We are however using the <a href=\"https://sentry.io/privacy/\">Sentry service</a> for error tracking on this platform. Our webserver configuration stores basic access information (URL requested and IP address) for error monitoring, which are kept for fourteen days. Authenticated users are logged-in via ORCID, a third-party service. The platform has no access to the private information they provide to ORCID. In particular, we do not store any ORCID passwords, and we do not have access to email addresses that are marked as private in the ORCID record. We need to set cookies to authenticate our users, therefore by logging in on this platform, users accept these cookies."
 msgstr "لا يتم تتبع المستخدمين غير المصادقين لأن النظام الأساسي لا يتضمن أي تحليلات أو خدمات إعلانات من جهة خارجية. يتم تسجيل المستخدمين الذين تم مصادقتهم عبر أورسيد، وهي خدمة تابعة لجهة خارجية. لا يمكن للمنصة الوصول إلى المعلومات الخاصة التي تقدمها إلى أورسيد، على وجه الخصوص، لا نقوم بتخزين أي كلمات مرور من أورسيد، ونحن لا نملك حق الوصول إلى عناوين البريد الإلكتروني التي تم وضع علامة على أنها خاصة في سجل أورسيد. نحن بحاجة إلى تعيين ملفات تعريف الارتباط لمصادقة مستخدمينا، وبالتالي عن طريق تسجيل الدخول على هذا النظام الأساسي، يقبل المستخدمون هذه الكوكيز."
 
@@ -2775,9 +2709,8 @@ msgid "The platform can perform mandated publication deposit to repositories. Us
 msgstr "يمكن للمنصة أداء إيداع نشر الصادر إلى المستودعات، ويُسمَح للمستخدمين بتحميل الأوراق التي ألفوها بأنفسهم فقط، أو الأوراق التي وافق المؤلفون على إيداعها، بالإضافة إلى شروط الخدمة هذه، يتعين على المستخدمين الالتزام بسياسات هذه المستودعات."
 
 #: website/templates/dissemin/tos.html:51
-#, fuzzy
 msgid "Please address any inquiry to <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
-msgstr "يُرجَى توجيه أي استفسار إلى support@dissem.in."
+msgstr "يُرجَى توجيه أي استفسار إلى <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
 
 #: website/templates/dissemin/tos.html:60
 msgid "In full"
@@ -2788,18 +2721,16 @@ msgid "Personal data"
 msgstr "بيانات شخصية"
 
 #: website/templates/dissemin/tos.html:65
-#, fuzzy
 msgid "Dissemin uses ORCID's public OAuth interface to authenticate its users. This interface only transmits information marked as public in the user's ORCID profile. This means that ORCID passwords are never transmitted and email addresses are not transmitted when they are marked as private, which is the default setting. When logging in to Dissemin from ORCID, Dissemin acquires the user's ORCID id, as well as all public information attached to the ORCID record. We are using the <a href=\"https://sentry.io/privacy/\">Sentry service</a> for error tracking on this platform. Our webserver configuration stores basic access information (URL requested and IP address) for error monitoring, which are kept for fourteen days. Dissemin can store any information input by its users on the platform. Users can ask for a copy of the personal information Dissemin stores about them by writing an email to <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
-msgstr "يستخدم ديسيمين واجهة أووث العامة لأورسيد لمصادقة مستخدميه، تقوم هذه الواجهة بنقل المعلومات التي تم وضع علامة عليها كعامة فقط في ملف تعريف أورسيد للمستخدم: وهذا يعني أن كلمات مرور أورسيد لا تنتقل أبدا ولا يتم إرسال عناوين البريد الإلكتروني عندما يتم وضع علامة عليها كخاصة، وهو الإعداد الافتراضي. عند تسجيل الدخول إلى ديسيمين من أورسيد، يكتسب ديسمين معرف أورسيد للمستخدم، وكذلك جميع المعلومات العامة التي ترتبط بسجل أورسيد. نحن نستخدم <a href=\"https://sentry.io/privacy/\">خدمة ترقب</a> لتتبع الأخطاء على هذه المنصة. يقوم تكوين خادم الويب الخاص بنا بتخزين معلومات الوصول الأساسية (المسار المطلوب وعنوان الآيبي) لمراقبة الخطأ، والتي يتم الاحتفاظ بها لمدة أربعة عشر يوما. يمكن لديسيمين تخزين أي معلومات مدخلة من قبل مستخدميها على المنصة. يمكن للمستخدمين طلب نسخة من المعلومات الشخصية في مخازن ديسيمين عنهم عن طريق إرسال بريد إلكتروني إلى support@dissem.in."
+msgstr "يستخدم ديسيمين واجهة أووث العامة لأورسيد لمصادقة مستخدميه، تقوم هذه الواجهة بنقل المعلومات التي تم وضع علامة عليها كعامة فقط في ملف تعريف أورسيد للمستخدم: وهذا يعني أن كلمات مرور أورسيد لا تنتقل أبدا ولا يتم إرسال عناوين البريد الإلكتروني عندما يتم وضع علامة عليها كخاصة، وهو الإعداد الافتراضي. عند تسجيل الدخول إلى ديسيمين من أورسيد، يكتسب ديسمين معرف أورسيد للمستخدم، وكذلك جميع المعلومات العامة التي ترتبط بسجل أورسيد. نحن نستخدم <a href=\"https://sentry.io/privacy/\">خدمة ترقب</a> لتتبع الأخطاء على هذه المنصة. يقوم تكوين خادم الويب الخاص بنا بتخزين معلومات الوصول الأساسية (المسار المطلوب وعنوان الآيبي) لمراقبة الخطأ، والتي يتم الاحتفاظ بها لمدة أربعة عشر يوما. يمكن لديسيمين تخزين أي معلومات مدخلة من قبل مستخدميها على المنصة. يمكن للمستخدمين طلب نسخة من المعلومات الشخصية في مخازن ديسيمين عنهم عن طريق إرسال بريد إلكتروني إلى <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
 
 #: website/templates/dissemin/tos.html:76
 msgid "Full text storage"
 msgstr "تخزين النص الكامل"
 
 #: website/templates/dissemin/tos.html:78
-#, fuzzy
 msgid "Documents deposited in repositories via Dissemin can be stored on the platform, but are not available for download on the platform. They can be stored internally for logging purposes, and to make sure failed deposits can be fixed later. Dissemin does not commit to store any of the files it receives from its users. Users can write to <a href=\"mailto:support@dissem.in\">support@dissem.in</a> if they want one of their uploads to be deleted from our internal storage space, or from the repository they have deposited to. Note that deletion policies vary accross repositories: we provide no guarantee that deposits can be deleted from the target repositories."
-msgstr "الوثائق المودعة في المستودعات عبر ديسيمين يمكن تخزينها على المنصة، ولكنها غير متوفرة للتنزيل على المنصة، ويمكن تخزينها داخليا لأغراض التسجيل، وللتأكد من إمكانية إصلاح الودائع الفاشلة لاحقا. لا يلتزم ديسيمين بتخزين أي من الملفات التي يتلقاها من مستخدميه. يمكن للمستخدمين الكتابة إلى support@dissem.in إذا كانوا يريدون حذف أحد التحميلات من مساحة التخزين الداخلية لدينا، أو من المستودع الذي أُودِع له، لاحظ أن سياسات الحذف تختلف عبر المستودعات: نحن لا نقدم أي ضمان بأن الودائع يمكن حذفها من مستودعات الهدف."
+msgstr "الوثائق المودعة في المستودعات عبر ديسيمين يمكن تخزينها على المنصة، ولكنها غير متوفرة للتنزيل على المنصة، ويمكن تخزينها داخليا لأغراض التسجيل، وللتأكد من إمكانية إصلاح الودائع الفاشلة لاحقا. لا يلتزم ديسيمين بتخزين أي من الملفات التي يتلقاها من مستخدميه. يمكن للمستخدمين الكتابة إلى <a href=\"mailto:support@dissem.in\">support@dissem.in</a> إذا كانوا يريدون حذف أحد التحميلات من مساحة التخزين الداخلية لدينا، أو من المستودع الذي أُودِع له، لاحظ أن سياسات الحذف تختلف عبر المستودعات: نحن لا نقدم أي ضمان بأن الودائع يمكن حذفها من مستودعات الهدف."
 
 #: website/templates/dissemin/tos.html:85
 msgid "Reporting misuse"
@@ -2807,9 +2738,7 @@ msgstr "الإبلاغ عن إساءة استخدام"
 
 #: website/templates/dissemin/tos.html:87
 msgid "Misuse can be reported to <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
-msgstr ""
-"يمكن الإبلاغ عن أي سوء استخدام إلى: \n"
-"<a href=\"mailto:support@dissem.in\">support@dissem.in</a>"
+msgstr "يمكن الإبلاغ عن أي سوء استخدام إلى: \n<a href=\"mailto:support@dissem.in\">support@dissem.in</a>"
 
 #: website/templates/dissemin/tos.html:95
 msgid "The <a href=\"https://dissem.in\">dissem.in</a> website has been registered with <a href=\"https://www.cnil.fr/\">CNIL</a> under declaration n°1895382 v0."
@@ -2840,9 +2769,8 @@ msgid "Blog"
 msgstr "مدونة"
 
 #: website/templates/navbar.html:6
-#, fuzzy
 msgid "Logo"
-msgstr "خروج"
+msgstr "الشعار"
 
 #: website/templates/navbar.html:24
 msgid "Translate"
@@ -2871,6 +2799,7 @@ msgid "Authentication error"
 msgstr "خطأ مصادقة"
 
 #: website/templates/socialaccount/authentication_error.html:15
-#, fuzzy, python-format
+#, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
-msgstr "فشلت المصادقة; <a href=\"/\">الرجوع إلى صفحة تسجيل الدخول.</a>"
+msgstr "فشلت المصادقة; <a href=\"%(account-login)s\">الرجوع إلى صفحة تسجيل الدخول.</a>"
+

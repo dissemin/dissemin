@@ -1,6 +1,7 @@
 # Translation of Dissemin website to Esperanto (Esperanto)
 # Exported from translatewiki.net
 #
+# Author: Fitoschido
 # Author: Mirin
 # --
 # This file is part of the Dissemin Project
@@ -8,13 +9,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-12 16:17+0100\n"
-"PO-Revision-Date: 2019-12-12 14:21:09+0000\n"
+"PO-Revision-Date: 2019-12-16 14:53:38+0000\n"
 "Language: eo\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-12-12 13:58:10+0000\n"
+"X-POT-Import-Date: 2019-12-13 05:38:35+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -490,9 +492,8 @@ msgid "PDF URL"
 msgstr "Retadreso de PDF-dosiero"
 
 #: deposit/templates/deposit/deposits.html:134
-#, fuzzy
 msgid "Status:"
-msgstr "Stato"
+msgstr "Stato:"
 
 #: deposit/templates/deposit/deposits.html:145
 msgid "Letter of Declaration"
@@ -937,14 +938,8 @@ msgstr "Elŝuti"
 
 #: papers/templates/papers/messages.html:8
 #, python-format
-msgid ""
-"\n"
-"                        We ignored %(papers)s paper from your ORCiD profile.\n"
-"                    "
-msgid_plural ""
-"\n"
-"                        We ignored %(papers)s papers from your ORCiD profile.\n"
-"                    "
+msgid "\n                        We ignored %(papers)s paper from your ORCiD profile.\n                    "
+msgid_plural "\n                        We ignored %(papers)s papers from your ORCiD profile.\n                    "
 msgstr[0] ""
 msgstr[1] ""
 
@@ -985,10 +980,10 @@ msgid "A paper was ignored, because is has no title."
 msgstr ""
 
 #: papers/templates/papers/paper.html:39
-#, fuzzy, python-format
+#, python-format
 msgctxt "as in: _Journal article published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "%(doctype)s published in %(year)s by"
-msgstr "Eldonita en %(year)s de"
+msgstr "%(doctype)s eldonita en %(year)s de"
 
 #: papers/templates/papers/paper.html:45
 #, python-format
@@ -2811,3 +2806,4 @@ msgstr "Eraro dum kontrolado pri aŭtento"
 #, fuzzy, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "Kontrolado pri aŭtento malsukcesis. <a href=\"/\">Reiri al la ensaluta paĝo.</a>"
+

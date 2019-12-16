@@ -3,19 +3,21 @@
 #
 # Author: Abijeet Patro
 # Author: Cedric31
+# Author: Fitoschido
 # --
 # This file is part of the Dissemin Project
 # This file is distributed under the same license as the Dissemin package.
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-12 16:17+0100\n"
-"PO-Revision-Date: 2019-12-12 14:21:14+0000\n"
+"PO-Revision-Date: 2019-12-16 14:53:45+0000\n"
 "Language: oc\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-12-12 13:58:10+0000\n"
+"X-POT-Import-Date: 2019-12-13 05:38:35+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
@@ -576,9 +578,8 @@ msgid "Repository:"
 msgstr "Depaus :"
 
 #: deposit/templates/deposit/start.html:192
-#, fuzzy
 msgid "Metadata:"
-msgstr "Metadonadas"
+msgstr "Metadonadas :"
 
 #: deposit/templates/deposit/start.html:212
 #: papers/templates/papers/search_base.html:165
@@ -939,14 +940,8 @@ msgstr "Telecargar"
 
 #: papers/templates/papers/messages.html:8
 #, python-format
-msgid ""
-"\n"
-"                        We ignored %(papers)s paper from your ORCiD profile.\n"
-"                    "
-msgid_plural ""
-"\n"
-"                        We ignored %(papers)s papers from your ORCiD profile.\n"
-"                    "
+msgid "\n                        We ignored %(papers)s paper from your ORCiD profile.\n                    "
+msgid_plural "\n                        We ignored %(papers)s papers from your ORCiD profile.\n                    "
 msgstr[0] ""
 msgstr[1] ""
 
@@ -1001,10 +996,7 @@ msgstr "Publicat dins"
 #: papers/templates/papers/paper.html:55
 #, fuzzy, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
-msgstr ""
-"\n"
-"            et <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s autres autors</a>\n"
-"            "
+msgstr "\n            et <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s autres autors</a>\n            "
 
 #: papers/templates/papers/paper.html:61
 msgid "Show less"
@@ -2090,7 +2082,6 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:113
 #, fuzzy
-#| msgid "preprint"
 msgid "OSF preprints"
 msgstr "prepublicacion"
 
@@ -2818,3 +2809,4 @@ msgstr ""
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
+

@@ -13,13 +13,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-12 16:17+0100\n"
-"PO-Revision-Date: 2019-12-12 14:21:06+0000\n"
+"PO-Revision-Date: 2019-12-16 14:53:35+0000\n"
 "Language: bn\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-12-12 13:58:10+0000\n"
+"X-POT-Import-Date: 2019-12-13 05:38:35+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -475,9 +476,8 @@ msgid "Deposit date"
 msgstr "জমার তারিখ"
 
 #: deposit/templates/deposit/deposits.html:67
-#, fuzzy
 msgid "Publication date"
-msgstr "প্রকাশনা"
+msgstr "প্রকাশনার তারিখ"
 
 #: deposit/templates/deposit/deposits.html:78
 msgid "Deposit type"
@@ -496,9 +496,8 @@ msgid "PDF URL"
 msgstr "PDF URL"
 
 #: deposit/templates/deposit/deposits.html:134
-#, fuzzy
 msgid "Status:"
-msgstr "অবস্থা"
+msgstr "অবস্থা:"
 
 #: deposit/templates/deposit/deposits.html:145
 msgid "Letter of Declaration"
@@ -941,14 +940,8 @@ msgstr ""
 
 #: papers/templates/papers/messages.html:8
 #, python-format
-msgid ""
-"\n"
-"                        We ignored %(papers)s paper from your ORCiD profile.\n"
-"                    "
-msgid_plural ""
-"\n"
-"                        We ignored %(papers)s papers from your ORCiD profile.\n"
-"                    "
+msgid "\n                        We ignored %(papers)s paper from your ORCiD profile.\n                    "
+msgid_plural "\n                        We ignored %(papers)s papers from your ORCiD profile.\n                    "
 msgstr[0] ""
 msgstr[1] ""
 
@@ -957,9 +950,8 @@ msgid "Details:"
 msgstr ""
 
 #: papers/templates/papers/messages.html:21
-#, fuzzy
 msgid "No author"
-msgstr "অবদানকারী লেখক"
+msgstr "কোন লেখক নেই"
 
 #: papers/templates/papers/messages.html:23
 #, fuzzy
@@ -1327,9 +1319,8 @@ msgid "policy unknown"
 msgstr ""
 
 #: papers/templatetags/statuses.py:110
-#, fuzzy
 msgid "Green circle"
-msgstr "প্রবেশাধিকার উন্মুক্ত"
+msgstr "সবুজ বৃত্ত"
 
 #: papers/templatetags/statuses.py:111
 msgid "Red circle"
@@ -1415,7 +1406,7 @@ msgstr "প্রকাশকবৃন্দ"
 
 #: publishers/forms.py:38
 msgid "Order"
-msgstr ""
+msgstr "ক্রম"
 
 #: publishers/models.py:39 website/templates/dissemin/faq.html:292
 msgid "Open access"
@@ -1493,9 +1484,8 @@ msgstr "অনুসন্ধান"
 
 #: publishers/templates/publishers/list.html:56
 #: publishers/templates/publishers/publisher.html:31
-#, fuzzy
 msgid "Sources"
-msgstr "উপাত্তের উৎস"
+msgstr "উৎস"
 
 #: publishers/templates/publishers/list.html:57
 #: publishers/templates/publishers/publisher.html:32
@@ -1549,9 +1539,8 @@ msgid "Change open access status"
 msgstr ""
 
 #: publishers/templates/publishers/publisher.html:72
-#, fuzzy
 msgid "Green open access summary"
-msgstr "প্রবেশাধিকার উন্মুক্ত"
+msgstr "সবুজ উন্মুক্ত প্রবেশাধিকারের সারাংশ"
 
 #: publishers/templates/publishers/publisher.html:74
 #, python-format
@@ -2080,7 +2069,6 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:113
 #, fuzzy
-#| msgid "preprint"
 msgid "OSF preprints"
 msgstr "প্রাকমুদ্রণ"
 
@@ -2093,17 +2081,13 @@ msgid "Try any author name"
 msgstr "অন্য কোন নামে চেষ্টা করুন"
 
 #: website/templates/403.html:6 website/templates/403.html:10
-#, fuzzy
 msgid "Access denied"
-msgstr "PDF-এ প্রবেশ প্রত্যাখ্যাত।"
+msgstr "প্রবেশ প্রত্যাখ্যাত"
 
 #: website/templates/403.html:13
 #, fuzzy, python-format
 msgid "The access to the requested page has been denied. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr ""
-"\n"
-"            আপনার অনুরোধকৃত পাতাটি পাওয়া গেল না। <a href=\"/\">মূল পাতায় ফিরে যান।</a>\n"
-"           "
+msgstr "\n            আপনার অনুরোধকৃত পাতাটি পাওয়া গেল না। <a href=\"/\">মূল পাতায় ফিরে যান।</a>\n           "
 
 #: website/templates/404.html:6 website/templates/404.html:10
 msgid "Page not found"
@@ -2112,10 +2096,7 @@ msgstr "পাতাটি পাওয়া যাচ্ছেনা"
 #: website/templates/404.html:13
 #, fuzzy, python-format
 msgid "The page you requested could not be found. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr ""
-"\n"
-"            আপনার অনুরোধকৃত পাতাটি পাওয়া গেল না। <a href=\"/\">মূল পাতায় ফিরে যান।</a>\n"
-"           "
+msgstr "\n            আপনার অনুরোধকৃত পাতাটি পাওয়া গেল না। <a href=\"/\">মূল পাতায় ফিরে যান।</a>\n           "
 
 #: website/templates/500.html:6 website/templates/500.html:10
 #, fuzzy
@@ -2125,10 +2106,7 @@ msgstr "অভ্যন্তরীণ ত্রুটি"
 #: website/templates/500.html:13
 #, fuzzy, python-format
 msgid "Your request triggered an internal server error. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr ""
-"\n"
-"            আপনার অনুরোধকৃত পাতাটি পাওয়া গেল না। <a href=\"/\">মূল পাতায় ফিরে যান।</a>\n"
-"           "
+msgstr "\n            আপনার অনুরোধকৃত পাতাটি পাওয়া গেল না। <a href=\"/\">মূল পাতায় ফিরে যান।</a>\n           "
 
 #: website/templates/admin/base_site.html:5
 #: website/templates/admin/base_site.html:8
@@ -2824,3 +2802,4 @@ msgstr ""
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
+
