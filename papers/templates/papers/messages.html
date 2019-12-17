@@ -5,7 +5,7 @@
         {% with papers=message.payload.papers %}
         <div class="alert alert-warning alert-dismissible fade show messageAlert" data-message-pk="{{ message.pk }}">
                 <h5 class="text-center">
-                    {% blocktrans count papers=papers|length %}
+                    {% blocktrans trimmed count papers=papers|length %}
                         We ignored {{ papers }} paper from your ORCiD profile.
                     {% plural %}
                         We ignored {{ papers }} papers from your ORCiD profile.
