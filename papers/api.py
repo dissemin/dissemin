@@ -101,7 +101,7 @@ class PaperSearchAPI(PaperSearchView):
                 for result in context['object_list']
             ]
             response = {
-                'messages': context['messages'],
+                'messages': context.get('messages'),
                 'stats': stats,
                 'nb_results': context['nb_results'],
                 'papers': papers,
