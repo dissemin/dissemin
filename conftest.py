@@ -1,3 +1,4 @@
+import hashlib
 import json
 import os
 import pytest
@@ -252,8 +253,12 @@ def mock_crossref(requests_mocker):
         query = parse_qs(urlparse(request.url).query)
         query_f = query['filter'][0].split(',')
         slugified_dois = [slugify(item.split(':')[1]) for item in query_f]
-        f_name = '{}.json'.format("-".join(slugified_dois))
+        # Since the file name might be to long if a lot of DOIs are requested, we hash them
+        m = hashlib.sha256()
+        m.update("-".join(slugified_dois).encode('utf-8'))
+        f_name = '{}.json'.format(m.hexdigest())
         f_path = os.path.join(settings.BASE_DIR, 'test_data', 'citeproc', 'crossref', f_name)
+        print("curl \"{}\" > {}".format(request.url, f_path))
         with open(f_path, 'r') as f:
             body = f.read()
             return (200, {}, body)
@@ -263,12 +268,10 @@ def mock_crossref(requests_mocker):
         re.compile(r'https://api.crossref.org/works'),
         callback=request_callback
     )
-    requests_mocker.add_passthru(settings.DOI_RESOLVER_ENDPOINT)
     requests_mocker.add_passthru('http://doi-cache.dissem.in/zotero/')
     requests_mocker.add_passthru('http://localhost') # Our VNU server runs on localhost
     requests_mocker.add_passthru('https://pub.orcid.org/')
     requests_mocker.add_passthru('https://sandbox.zenodo.org/')
-    requests_mocker.add_passthru('')
 
     return requests_mocker
 

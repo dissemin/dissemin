@@ -4,6 +4,7 @@
 import pytest
 import unittest
 
+from backend.citeproc import CrossRef
 from backend.orcid import affiliate_author_with_orcid
 from backend.orcid import OrcidPaperSource
 from papers.models import Paper
@@ -17,6 +18,39 @@ class TestOrcid():
     """
 
     @pytest.mark.usefixtures('mock_doi')
+    def test_enhance_paper(self, researcher_lesot):
+        """
+        Enhances paper with ORCID data
+        """
+        doi = '10.1016/j.ijar.2017.06.011'
+        p = Paper.create_by_doi(doi)
+        o = OrcidPaperSource()
+        ref_name = (researcher_lesot.name.first, researcher_lesot.name.last)
+        p = o._enhance_paper(p, ref_name, researcher_lesot.orcid)
+        # Lesot is now a researcher of the paper
+        assert p.authors_list[1]['researcher_id'] == researcher_lesot.pk
+        # There must be a second OaiRecord
+        p.cache_oairecords() # Cache is not up to date
+        assert len(p.oairecords) == 2
+
+    @pytest.mark.usefixtures('mock_doi')
+    def test_enhance_paper_orcid_oai_exists(self, researcher_lesot):
+        """
+        If source exists, nothing must happen
+        """
+        doi = '10.1016/j.ijar.2017.06.011'
+        p = Paper.create_by_doi(doi)
+        o = OrcidPaperSource()
+        ref_name = (researcher_lesot.name.first, researcher_lesot.name.last)
+        p = o._enhance_paper(p, ref_name, researcher_lesot.orcid)
+        # Lesot is now a researcher of the paper
+        assert p.authors_list[1]['researcher_id'] == researcher_lesot.pk
+        # There must be a second OaiRecord
+        p.cache_oairecords() # Cache is not up to date
+        assert len(p.oairecords) == 2
+
+
+    @pytest.mark.usefixtures('mock_crossref')
     def test_fetch_metadata_from_dois(self, researcher_lesot):
         """
         Fetch metadata from doi
@@ -33,7 +67,7 @@ class TestOrcid():
         p.cache_oairecords() # Cache is not up to date
         assert len(p.oairecords) == 2
 
-    @pytest.mark.usefixtures('mock_doi')
+    @pytest.mark.usefixtures('mock_crossref', 'mock_doi')
     def test_fetch_metadata_from_dois_orcid_oai_exists(self, researcher_lesot):
         """
         If source exists, nothing must happen
@@ -56,6 +90,7 @@ class TestOrcid():
         If no paper created, expect None
         """
         monkeypatch.setattr(Paper, 'create_by_doi', lambda x: None)
+        monkeypatch.setattr(CrossRef, 'fetch_batch', lambda x: [None])
         o = OrcidPaperSource()
         papers = list(o.fetch_metadata_from_dois('spam', 'ham', ['any_doi']))
         assert len(papers) == 1
@@ -78,19 +113,21 @@ class OrcidUnitTest(unittest.TestCase):
                     [('Antonin', 'Delpeuch'), ('Anne', 'Preller')]),
                 ['0000-0002-8612-8827', None])
 
-@pytest.mark.usefixtures("load_test_data", 'mock_doi')
+@pytest.mark.usefixtures("load_test_data")
 class OrcidIntegrationTest(unittest.TestCase):
 
     def setUp(self):
         self.source = OrcidPaperSource()
         self.researcher = self.r4
 
+    @pytest.mark.usefixtures('mock_crossref', 'mock_doi')
     def test_fetch_orcid_records(self):
         profile = OrcidProfileStub('0000-0002-8612-8827', instance='orcid.org')
         papers = list(self.source.fetch_orcid_records(self.researcher.orcid, profile=profile))
         self.assertTrue(len(papers) > 1)
         self.check_papers(papers)
 
+    @pytest.mark.usefixtures('mock_doi')
     def check_papers(self, papers):
         p = Paper.objects.get(
             title='From Natural Language to RDF Graphs with Pregroups')
@@ -103,6 +140,7 @@ class OrcidIntegrationTest(unittest.TestCase):
         author = p.authors[0]
         self.assertEqual(author.orcid, self.r4.orcid)
 
+    @pytest.mark.usefixtures('mock_crossref')
     def test_previously_present_papers_are_attributed(self):
         # Fetch papers from a researcher
         profile_pablo = OrcidProfileStub('0000-0002-6293-3231', instance='orcid.org')
@@ -125,6 +163,7 @@ class OrcidIntegrationTest(unittest.TestCase):
         self.assertEqual(p.authors[0].orcid, antoine.orcid)
         self.assertEqual(p.authors[2].orcid, pablo.orcid)
 
+    @pytest.mark.usefixtures('mock_crossref', 'mock_doi')
     def test_orcid_affiliation(self):
         # this used to raise an error.
         # a more focused test might be preferable (focused on the said
@@ -140,6 +179,7 @@ class OrcidIntegrationTest(unittest.TestCase):
         titles = [paper.title for paper in papers]
         self.assertTrue('Company-Coq: Taking Proof General one step closer to a real IDE' in titles)
 
+    @pytest.mark.usefixtures('mock_crossref', 'mock_doi')
     def test_import_with_crossref_error(self):
         profile = OrcidProfileStub('0000-0001-9232-4042', instance='orcid.org')
         stergios = Researcher.get_or_create_by_orcid('0000-0001-9232-4042',
@@ -153,6 +193,7 @@ class OrcidIntegrationTest(unittest.TestCase):
         self.assertEqual(p.authors[0].researcher_id, stergios.id)
         self.assertEqual(p.authors[2].researcher_id, None)
 
+    @pytest.mark.usefixtures('mock_crossref')
     def test_bibtex_not_ignored(self):
         profile = OrcidProfileStub('0000-0003-2888-1770', instance='orcid.org')
         adrien = Researcher.get_or_create_by_orcid('0000-0003-2888-1770', profile=profile)
@@ -161,6 +202,7 @@ class OrcidIntegrationTest(unittest.TestCase):
         p2 = Paper.objects.get(title='Information quality and uncertainty')
         self.assertTrue(p1 != p2)
         
+    @pytest.mark.usefixtures('mock_crossref')
     def test_link_existing_papers(self):
         # Fetch papers from a researcher
         profile_pablo = OrcidProfileStub('0000-0002-6293-3231', instance='orcid.org')

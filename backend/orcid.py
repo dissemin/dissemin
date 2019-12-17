@@ -25,6 +25,7 @@ import os
 
 from django.conf import settings
 
+from backend.citeproc import CrossRef
 from backend.papersource import PaperSource
 from notification.api import add_notification_for
 from notification.api import delete_notification_per_tag
@@ -50,6 +51,46 @@ class OrcidPaperSource(PaperSource):
     def __init__(self, *args, **kwargs):
         super(OrcidPaperSource, self).__init__(*args, **kwargs)
         self.oai_source = OaiSource.objects.get(identifier='orcid')
+
+    def _enhance_paper(self, paper, ref_name, orcid_id):
+        """
+        Enahnces a paper if possible
+        This means: Adding researcher and OaiRecord
+        :params paper: The paper
+        :params ref_name: Reference name to associate orcid
+        :params orcid_id: orcid
+        """
+        if paper is not None:
+            # We try to find the author of the given orcid_id
+            # If this changes the orcid list of the paper, we do change, else not
+            orcids = affiliate_author_with_orcid(ref_name, orcid_id, paper.author_name_pairs())
+            for author in paper.authors_list:
+                if author['orcid'] == orcid_id:
+                    author['orcid'] = None
+                    author['researcher_id'] = None
+
+            orcids = [new or old for (new, old) in zip(orcids, paper.orcids())]
+            if orcids != paper.orcids:
+                for author, orcid in zip(paper.authors_list, orcids):
+                    author['orcid'] = orcid
+                paper = self.associate_researchers(paper)
+                paper.save()
+                paper.update_index()
+
+            try:
+                OaiRecord.objects.get(
+                    identifier=self._oai_id_for_doi(orcid_id, paper.get_doi().lower()),
+                    source=self.oai_source,
+                )
+            except OaiRecord.DoesNotExist:
+                OaiRecord.objects.create(
+                    about=paper,
+                    identifier=self._oai_id_for_doi(orcid_id, paper.get_doi().lower()),
+                    pubtype=paper.doctype,
+                    splash_url='https://{}/{}'.format(settings.ORCID_BASE_DOMAIN, orcid_id),
+                    source=self.oai_source,
+                )
+        return paper
 
     def fetch_papers(self, researcher, profile=None):
         if not researcher:
@@ -96,40 +137,13 @@ class OrcidPaperSource(PaperSource):
         return 'orcid:{}:{}'.format(orcid_id, doi)
 
     def fetch_metadata_from_dois(self, ref_name, orcid_id, dois):
-        for doi in dois:
-            # This functions does check first on our database if we have an entry
-            p = Paper.create_by_doi(doi)
-            if p is not None:
-                # We try to find the author of the given orcid_id
-                # If this changes the orcid list of the paper, we do change, else not
-                orcids = affiliate_author_with_orcid(ref_name, orcid_id, p.author_name_pairs())
-                for author in p.authors_list:
-                    if author['orcid'] == orcid_id:
-                        author['orcid'] = None
-                        author['researcher_id'] = None
-
-                orcids = [new or old for (new, old) in zip(orcids, p.orcids())]
-                if orcids != p.orcids:
-                    for author, orcid in zip(p.authors_list, orcids):
-                        author['orcid'] = orcid
-                    p = self.associate_researchers(p)
-                    p.save()
-                    p.update_index()
-
-                try:
-                    OaiRecord.objects.get(
-                        identifier=self._oai_id_for_doi(orcid_id, doi.lower()),
-                        source=self.oai_source,
-                    )
-                except OaiRecord.DoesNotExist:
-                    OaiRecord.objects.create(
-                        about=p,
-                        identifier=self._oai_id_for_doi(orcid_id, doi.lower()),
-                        pubtype=p.doctype,
-                        splash_url='https://{}/{}'.format(settings.ORCID_BASE_DOMAIN, orcid_id),
-                        source=self.oai_source,
-                    )
-            yield p
+        crossref_papers = CrossRef.fetch_batch(dois)
+        for paper, doi in zip(crossref_papers, dois):
+            if paper is None:
+                # We try with DOI resolver
+                # This functions does check first on our database if we have an entry
+                Paper.create_by_doi(doi)
+            yield self._enhance_paper(paper, ref_name, orcid_id)
 
     def warn_user_of_ignored_papers(self, ignored_papers):
         if self.researcher is None:
@@ -213,7 +227,7 @@ class OrcidPaperSource(PaperSource):
         put_codes = []
         for summary in profile.work_summaries:
             if summary.doi and use_doi:
-                dois_and_putcodes.append((summary.doi, summary.put_code))
+                dois_and_putcodes.append((summary.doi.lower(), summary.put_code))
             else:
                 put_codes.append(summary.put_code)
 
