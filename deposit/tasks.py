@@ -32,8 +32,8 @@ from deposit.models import Repository
 logger = logging.getLogger('dissemin.' + __name__)
 
 
-@shared_task(name='refresh_deposit_statuses')
-@run_only_once('refresh_deposit_statuses')
+@shared_task(name='change_embargoed_to_published')
+@run_only_once('change_embargoed_to_published')
 def change_embargoed_to_published():
     """
     This function changes all DepositRecord with status ``embargoed`` to ``published`` with today ``publication_date``
