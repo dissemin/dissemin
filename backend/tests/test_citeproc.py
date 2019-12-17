@@ -576,6 +576,15 @@ class TestCrossRef(TestCiteproc):
         papers = self.test_class.fetch_batch(dois)
         assert papers[2] is None
 
+    @pytest.mark.usefixtures('db')
+    def test_fetch_batch_doi_with_backslash(self):
+        """
+        CrossRef just drops backslash in search, so that such a DOI is not present in return list, while ingested correctly into the system
+        """
+        dois = [r'10.1007/978-3-319-66824-6\_35']
+        r = self.test_class.fetch_batch(dois)
+        assert isinstance(r[0], Paper)
+
     @responses.activate
     def test_fetch_day(self, db):
         """
@@ -652,6 +661,12 @@ class TestCrossRef(TestCiteproc):
         citeproc['title'] = list()
         with pytest.raises(CiteprocTitleError):
             self.test_class._get_title(citeproc)
+
+    def test_remove_unapproved_characters(self):
+        """
+        Must return only keep "a-z", "A-Z", "0-9" and "-._;()/"
+        """
+        assert self.test_class.remove_unapproved_characters(r'10.1007/978-3-319-66824-6\_35') == '10.1007/978-3-319-66824-6_35'
 
 
 class TestDOI(TestCiteproc):

@@ -6,6 +6,7 @@
 # This has the reason, that a users might wait if they refresh their profile.
 
 import logging
+import re
 import requests
 
 from datetime import date
@@ -555,6 +556,8 @@ class CrossRef(Citeproc):
         :params dois: List of DOIS
         :returns: list with Paper (or None) and DOI as key. Note that the key is lowered!
         """
+        # CrossRef allows only certain characters in doi, we just remove them to get better matching
+        dois = list(map(cls.remove_unapproved_characters, dois))
         # We create a dict and populate with `None`s and then override with paper objects
         papers = dict()
         for doi in dois:
@@ -600,6 +603,18 @@ class CrossRef(Citeproc):
         p = [papers.get(doi.lower(), None) for doi in dois]
 
         return p
+
+
+    @staticmethod
+    def remove_unapproved_characters(doi):
+        """
+        CrossRef does allow only certain characters in a DOI: https://support.crossref.org/hc/en-us/articles/214669823-Constructing-your-identifiers
+        The API seems to just drop the characters not allowed - making matching of asked an returns dois difficult
+        :param doi: A doi (string) "a-z", "A-Z", "0-9" and "-._;()/"
+        :returns: A doi containing only
+        """
+        valid_characters = r'[^a-zA-Z0-9-\._;\(\)/]'
+        return re.sub(valid_characters, '', doi)
 
 
 class DOIResolver(Citeproc):
