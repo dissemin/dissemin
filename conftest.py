@@ -244,6 +244,8 @@ def mock_doi(requests_mocker):
     requests_mocker.add_passthru('https://pub.orcid.org/')
     requests_mocker.add_passthru('https://sandbox.zenodo.org/')
 
+    return requests_mocker
+
 @pytest.fixture
 def mock_crossref(requests_mocker):
     def request_callback(request):
@@ -267,6 +269,8 @@ def mock_crossref(requests_mocker):
     requests_mocker.add_passthru('https://pub.orcid.org/')
     requests_mocker.add_passthru('https://sandbox.zenodo.org/')
     requests_mocker.add_passthru('')
+
+    return requests_mocker
 
 
 @pytest.fixture
