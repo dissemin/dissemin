@@ -576,7 +576,7 @@ class TestCrossRef(TestCiteproc):
         papers = self.test_class.fetch_batch(dois)
         assert papers[2] is None
 
-    @pytest.mark.usefixtures('db')
+    @pytest.mark.usefixtures('db', 'mock_crossref')
     def test_fetch_batch_doi_with_backslash(self):
         """
         CrossRef just drops backslash in search, so that such a DOI is not present in return list, while ingested correctly into the system
