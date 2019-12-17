@@ -241,6 +241,7 @@ def mock_doi(requests_mocker):
         callback=request_callback
     )
     requests_mocker.add_passthru('http://doi-cache.dissem.in/zotero/')
+    requests_mocker.add_passthru('https://doi-cache.dissem.in/zotero/')
     requests_mocker.add_passthru('http://localhost') # Our VNU server runs on localhost
     requests_mocker.add_passthru('https://pub.orcid.org/')
     requests_mocker.add_passthru('https://sandbox.zenodo.org/')
