@@ -100,8 +100,9 @@ class PaperSearchAPI(PaperSearchView):
                 result.object.json()
                 for result in context['object_list']
             ]
+            messages = [m.serialize_to_json() for m in context.get('messages', [])]
             response = {
-                'messages': context.get('messages'),
+                'messages': messages,
                 'stats': stats,
                 'nb_results': context['nb_results'],
                 'papers': papers,
