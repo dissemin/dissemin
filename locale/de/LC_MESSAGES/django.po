@@ -16,9 +16,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-12 16:17+0100\n"
+"POT-Creation-Date: 2019-12-18 09:51+0100\n"
 "PO-Revision-Date: 2019-12-16 14:53:37+0000\n"
 "Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -932,11 +931,25 @@ msgid "Download"
 msgstr "Herunterladen"
 
 #: papers/templates/papers/messages.html:8
-#, python-format
-msgid "\n                        We ignored %(papers)s paper from your ORCiD profile.\n                    "
-msgid_plural "\n                        We ignored %(papers)s papers from your ORCiD profile.\n                    "
-msgstr[0] "\n                        Wir haben %(papers)s Publikation deines ORCID Profils ignoriert.\n                    "
-msgstr[1] "\n                        Wir haben %(papers)s Publikationen deines ORCID Profils ignoriert.\n                    "
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                        We ignored %(papers)s paper from your ORCiD profile.\n"
+#| "                    "
+#| msgid_plural ""
+#| "\n"
+#| "                        We ignored %(papers)s papers from your ORCiD profile.\n"
+#| "                    "
+msgid "We ignored %(papers)s paper from your ORCiD profile."
+msgid_plural "We ignored %(papers)s papers from your ORCiD profile."
+msgstr[0] ""
+"\n"
+"                        Wir haben %(papers)s Publikation deines ORCID Profils ignoriert.\n"
+"                    "
+msgstr[1] ""
+"\n"
+"                        Wir haben %(papers)s Publikationen deines ORCID Profils ignoriert.\n"
+"                    "
 
 #: papers/templates/papers/messages.html:14
 msgid "Details:"
@@ -2757,4 +2770,3 @@ msgstr "Authentifizierungsfehler"
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "Authentifizierung fehlgeschlagen. <a href=\"%(account-login)s\">Zurück zur Anmeldeseite gehen.</a>"
-

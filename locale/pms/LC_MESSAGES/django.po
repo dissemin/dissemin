@@ -10,9 +10,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-12 16:17+0100\n"
+"POT-Creation-Date: 2019-12-18 09:51+0100\n"
 "PO-Revision-Date: 2019-12-16 14:53:45+0000\n"
 "Language: pms\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -925,11 +924,25 @@ msgid "Download"
 msgstr "Dëscarié"
 
 #: papers/templates/papers/messages.html:8
-#, python-format
-msgid "\n                        We ignored %(papers)s paper from your ORCiD profile.\n                    "
-msgid_plural "\n                        We ignored %(papers)s papers from your ORCiD profile.\n                    "
-msgstr[0] "\n                        I l'oma ignorà l'artìcol %(papers)s ëd sò profil ORCiD.\n                    "
-msgstr[1] "\n                        I l'oma ignorà j'artìcoj %(papers)s ëd sò profil ORCiD.\n                    "
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                        We ignored %(papers)s paper from your ORCiD profile.\n"
+#| "                    "
+#| msgid_plural ""
+#| "\n"
+#| "                        We ignored %(papers)s papers from your ORCiD profile.\n"
+#| "                    "
+msgid "We ignored %(papers)s paper from your ORCiD profile."
+msgid_plural "We ignored %(papers)s papers from your ORCiD profile."
+msgstr[0] ""
+"\n"
+"                        I l'oma ignorà l'artìcol %(papers)s ëd sò profil ORCiD.\n"
+"                    "
+msgstr[1] ""
+"\n"
+"                        I l'oma ignorà j'artìcoj %(papers)s ëd sò profil ORCiD.\n"
+"                    "
 
 #: papers/templates/papers/messages.html:14
 msgid "Details:"
@@ -2754,4 +2767,3 @@ msgstr "Eror d'autentificassion"
 #, fuzzy, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "L'autentificassion a l'ha falì. <a href=\"/\">Torné a la pàgina d'intrada.</a>"
-

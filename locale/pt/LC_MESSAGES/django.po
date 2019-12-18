@@ -11,9 +11,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-12 16:17+0100\n"
+"POT-Creation-Date: 2019-12-18 09:51+0100\n"
 "PO-Revision-Date: 2019-12-16 14:53:46+0000\n"
 "Language: pt\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -941,8 +940,8 @@ msgstr "Descarregar"
 
 #: papers/templates/papers/messages.html:8
 #, python-format
-msgid "\n                        We ignored %(papers)s paper from your ORCiD profile.\n                    "
-msgid_plural "\n                        We ignored %(papers)s papers from your ORCiD profile.\n                    "
+msgid "We ignored %(papers)s paper from your ORCiD profile."
+msgid_plural "We ignored %(papers)s papers from your ORCiD profile."
 msgstr[0] ""
 msgstr[1] ""
 
@@ -997,7 +996,10 @@ msgstr "Publicado em %(year)s por"
 #: papers/templates/papers/paper.html:55
 #, fuzzy, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
-msgstr "\n            and <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s outros autores</a>\n            "
+msgstr ""
+"\n"
+"            and <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s outros autores</a>\n"
+"            "
 
 #: papers/templates/papers/paper.html:61
 msgid "Show less"
@@ -1361,7 +1363,11 @@ msgstr ""
 #: papers/views.py:278
 #, fuzzy
 msgid "Invalid ORCID profile. Please make sure it includes a public name."
-msgstr "\n                            Perfil ORCID inválido.\n                            Por favor, certifique-se se incluiu um nome público.\n                            "
+msgstr ""
+"\n"
+"                            Perfil ORCID inválido.\n"
+"                            Por favor, certifique-se se incluiu um nome público.\n"
+"                            "
 
 #: papers/views.py:281
 msgid "Invalid ORCID profile."
@@ -1714,16 +1720,18 @@ msgid "Metaphysics"
 msgstr "Física"
 
 #: vinaigrette-deleteme.py:13
+#, fuzzy
 msgid "Epistemology"
-msgstr ""
+msgstr "Sociologia"
 
 #: vinaigrette-deleteme.py:14
 msgid "Parapsychology & occultism"
 msgstr ""
 
 #: vinaigrette-deleteme.py:15
+#, fuzzy
 msgid "Philosophical schools of thought"
-msgstr ""
+msgstr "Filosofia"
 
 #: vinaigrette-deleteme.py:17
 #, fuzzy
@@ -1756,8 +1764,9 @@ msgid "The Bible"
 msgstr ""
 
 #: vinaigrette-deleteme.py:24
+#, fuzzy
 msgid "Christianity"
-msgstr ""
+msgstr "Administração do Dissemin"
 
 #: vinaigrette-deleteme.py:25
 msgid "Christian practice & observance"
@@ -1772,8 +1781,9 @@ msgid "Christian organization, social work & worship"
 msgstr ""
 
 #: vinaigrette-deleteme.py:28
+#, fuzzy
 msgid "History of Christianity"
-msgstr ""
+msgstr "História"
 
 #: vinaigrette-deleteme.py:29
 #, fuzzy
@@ -1968,12 +1978,14 @@ msgid "English & Old English literatures"
 msgstr ""
 
 #: vinaigrette-deleteme.py:84
+#, fuzzy
 msgid "German & related literatures"
-msgstr ""
+msgstr "Literatura"
 
 #: vinaigrette-deleteme.py:85
+#, fuzzy
 msgid "French & related literatures"
-msgstr ""
+msgstr "Literatura"
 
 #: vinaigrette-deleteme.py:86
 msgid "Italian, Romanian & related literatures"
@@ -1984,8 +1996,9 @@ msgid "Spanish, Portuguese, Galician literatures"
 msgstr ""
 
 #: vinaigrette-deleteme.py:88
+#, fuzzy
 msgid "Latin & Italic literatures"
-msgstr ""
+msgstr "Literatura"
 
 #: vinaigrette-deleteme.py:89
 msgid "Classical & modern Greek literatures"
@@ -2002,16 +2015,18 @@ msgid "Geography & travel"
 msgstr "Geografia"
 
 #: vinaigrette-deleteme.py:93
+#, fuzzy
 msgid "Biography & genealogy"
-msgstr ""
+msgstr "Geografia"
 
 #: vinaigrette-deleteme.py:94
 msgid "History of ancient world (to ca. 499)"
 msgstr ""
 
 #: vinaigrette-deleteme.py:95
+#, fuzzy
 msgid "History of Europe"
-msgstr ""
+msgstr "História"
 
 #: vinaigrette-deleteme.py:96
 #, fuzzy
@@ -2019,20 +2034,24 @@ msgid "History of Asia"
 msgstr "História"
 
 #: vinaigrette-deleteme.py:97
+#, fuzzy
 msgid "History of Africa"
-msgstr ""
+msgstr "História"
 
 #: vinaigrette-deleteme.py:98
+#, fuzzy
 msgid "History of North America"
-msgstr ""
+msgstr "História"
 
 #: vinaigrette-deleteme.py:99
+#, fuzzy
 msgid "History of South America"
-msgstr ""
+msgstr "História"
 
 #: vinaigrette-deleteme.py:100
+#, fuzzy
 msgid "History of other areas"
-msgstr ""
+msgstr "História"
 
 #: vinaigrette-deleteme.py:101
 #, fuzzy
@@ -2104,7 +2123,10 @@ msgstr "O acesso ao PDF foi negado."
 #: website/templates/403.html:13
 #, fuzzy, python-format
 msgid "The access to the requested page has been denied. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "\n            Não foi possível encontrar a página solicitada. <a href=\"/\">Volte para a página inicial.</a>\n           "
+msgstr ""
+"\n"
+"            Não foi possível encontrar a página solicitada. <a href=\"/\">Volte para a página inicial.</a>\n"
+"           "
 
 #: website/templates/404.html:6 website/templates/404.html:10
 msgid "Page not found"
@@ -2113,7 +2135,10 @@ msgstr "Página não encontrada"
 #: website/templates/404.html:13
 #, fuzzy, python-format
 msgid "The page you requested could not be found. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "\n            Não foi possível encontrar a página solicitada. <a href=\"/\">Volte para a página inicial.</a>\n           "
+msgstr ""
+"\n"
+"            Não foi possível encontrar a página solicitada. <a href=\"/\">Volte para a página inicial.</a>\n"
+"           "
 
 #: website/templates/500.html:6 website/templates/500.html:10
 #, fuzzy
@@ -2123,7 +2148,10 @@ msgstr "Erro interno"
 #: website/templates/500.html:13
 #, fuzzy, python-format
 msgid "Your request triggered an internal server error. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "\n            O seu pedido provocou um erro interno. <a href=\"/\">Volte para a página inicial.</a>\n           "
+msgstr ""
+"\n"
+"            O seu pedido provocou um erro interno. <a href=\"/\">Volte para a página inicial.</a>\n"
+"           "
 
 #: website/templates/admin/base_site.html:5
 #: website/templates/admin/base_site.html:8
@@ -2837,5 +2865,7 @@ msgstr "Erro de autenticação"
 #: website/templates/socialaccount/authentication_error.html:15
 #, fuzzy, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
-msgstr "\n            Ocorreu um erro na autenticação. <a href=\"/\">Volte para a página de iniciar sessão.</a>\n           "
-
+msgstr ""
+"\n"
+"            Ocorreu um erro na autenticação. <a href=\"/\">Volte para a página de iniciar sessão.</a>\n"
+"           "

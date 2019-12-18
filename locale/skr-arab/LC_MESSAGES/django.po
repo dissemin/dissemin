@@ -8,9 +8,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-12 16:17+0100\n"
+"POT-Creation-Date: 2019-12-18 09:51+0100\n"
 "PO-Revision-Date: 2019-12-16 14:53:47+0000\n"
 "Language: skr-Arab\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -933,8 +932,8 @@ msgstr "ڈاؤن لوڈ"
 
 #: papers/templates/papers/messages.html:8
 #, python-format
-msgid "\n                        We ignored %(papers)s paper from your ORCiD profile.\n                    "
-msgid_plural "\n                        We ignored %(papers)s papers from your ORCiD profile.\n                    "
+msgid "We ignored %(papers)s paper from your ORCiD profile."
+msgid_plural "We ignored %(papers)s papers from your ORCiD profile."
 msgstr[0] ""
 msgstr[1] ""
 
@@ -1698,16 +1697,18 @@ msgid "Metaphysics"
 msgstr "فزکس"
 
 #: vinaigrette-deleteme.py:13
+#, fuzzy
 msgid "Epistemology"
-msgstr ""
+msgstr "سماجیات"
 
 #: vinaigrette-deleteme.py:14
 msgid "Parapsychology & occultism"
 msgstr ""
 
 #: vinaigrette-deleteme.py:15
+#, fuzzy
 msgid "Philosophical schools of thought"
-msgstr ""
+msgstr "فلسفہ"
 
 #: vinaigrette-deleteme.py:17
 #, fuzzy
@@ -1756,8 +1757,9 @@ msgid "Christian organization, social work & worship"
 msgstr ""
 
 #: vinaigrette-deleteme.py:28
+#, fuzzy
 msgid "History of Christianity"
-msgstr ""
+msgstr "تاریخ"
 
 #: vinaigrette-deleteme.py:29
 msgid "Christian denominations"
@@ -1948,12 +1950,14 @@ msgid "English & Old English literatures"
 msgstr ""
 
 #: vinaigrette-deleteme.py:84
+#, fuzzy
 msgid "German & related literatures"
-msgstr ""
+msgstr "ادب"
 
 #: vinaigrette-deleteme.py:85
+#, fuzzy
 msgid "French & related literatures"
-msgstr ""
+msgstr "ادب"
 
 #: vinaigrette-deleteme.py:86
 msgid "Italian, Romanian & related literatures"
@@ -1964,8 +1968,9 @@ msgid "Spanish, Portuguese, Galician literatures"
 msgstr ""
 
 #: vinaigrette-deleteme.py:88
+#, fuzzy
 msgid "Latin & Italic literatures"
-msgstr ""
+msgstr "ادب"
 
 #: vinaigrette-deleteme.py:89
 msgid "Classical & modern Greek literatures"
@@ -1982,16 +1987,18 @@ msgid "Geography & travel"
 msgstr "جغرافیہ"
 
 #: vinaigrette-deleteme.py:93
+#, fuzzy
 msgid "Biography & genealogy"
-msgstr ""
+msgstr "جغرافیہ"
 
 #: vinaigrette-deleteme.py:94
 msgid "History of ancient world (to ca. 499)"
 msgstr ""
 
 #: vinaigrette-deleteme.py:95
+#, fuzzy
 msgid "History of Europe"
-msgstr ""
+msgstr "تاریخ"
 
 #: vinaigrette-deleteme.py:96
 #, fuzzy
@@ -1999,20 +2006,24 @@ msgid "History of Asia"
 msgstr "تاریخ"
 
 #: vinaigrette-deleteme.py:97
+#, fuzzy
 msgid "History of Africa"
-msgstr ""
+msgstr "تاریخ"
 
 #: vinaigrette-deleteme.py:98
+#, fuzzy
 msgid "History of North America"
-msgstr ""
+msgstr "تاریخ"
 
 #: vinaigrette-deleteme.py:99
+#, fuzzy
 msgid "History of South America"
-msgstr ""
+msgstr "تاریخ"
 
 #: vinaigrette-deleteme.py:100
+#, fuzzy
 msgid "History of other areas"
-msgstr ""
+msgstr "تاریخ"
 
 #: vinaigrette-deleteme.py:101
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
@@ -2039,8 +2050,9 @@ msgid "Free for private use; right holder retains other rights, including distri
 msgstr ""
 
 #: vinaigrette-deleteme.py:107
+#, fuzzy
 msgid "Other open license"
-msgstr ""
+msgstr "مزہبیات"
 
 #: vinaigrette-deleteme.py:109
 msgid "Zenodo"
@@ -2785,4 +2797,3 @@ msgstr ""
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
-

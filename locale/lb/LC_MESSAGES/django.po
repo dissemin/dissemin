@@ -9,9 +9,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-12 16:17+0100\n"
+"POT-Creation-Date: 2019-12-18 09:51+0100\n"
 "PO-Revision-Date: 2019-12-16 14:53:43+0000\n"
 "Language: lb\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -936,8 +935,8 @@ msgstr "Eroflueden"
 
 #: papers/templates/papers/messages.html:8
 #, python-format
-msgid "\n                        We ignored %(papers)s paper from your ORCiD profile.\n                    "
-msgid_plural "\n                        We ignored %(papers)s papers from your ORCiD profile.\n                    "
+msgid "We ignored %(papers)s paper from your ORCiD profile."
+msgid_plural "We ignored %(papers)s papers from your ORCiD profile."
 msgstr[0] ""
 msgstr[1] ""
 
@@ -1711,8 +1710,9 @@ msgid "Parapsychology & occultism"
 msgstr ""
 
 #: vinaigrette-deleteme.py:15
+#, fuzzy
 msgid "Philosophical schools of thought"
-msgstr ""
+msgstr "Philosophie"
 
 #: vinaigrette-deleteme.py:17
 #, fuzzy
@@ -1765,8 +1765,10 @@ msgid "History of Christianity"
 msgstr "Geschicht vun der Chrëschtenheet"
 
 #: vinaigrette-deleteme.py:29
+#, fuzzy
+#| msgid "Christianity"
 msgid "Christian denominations"
-msgstr ""
+msgstr "Chrëschtenheet"
 
 #: vinaigrette-deleteme.py:30
 #, fuzzy
@@ -1949,16 +1951,20 @@ msgid "American literature in English"
 msgstr ""
 
 #: vinaigrette-deleteme.py:83
+#, fuzzy
+#| msgid "English & Old English languages"
 msgid "English & Old English literatures"
-msgstr ""
+msgstr "Englesch an Al-Englesch Sproochen"
 
 #: vinaigrette-deleteme.py:84
+#, fuzzy
 msgid "German & related literatures"
-msgstr ""
+msgstr "Literatur"
 
 #: vinaigrette-deleteme.py:85
+#, fuzzy
 msgid "French & related literatures"
-msgstr ""
+msgstr "Literatur"
 
 #: vinaigrette-deleteme.py:86
 msgid "Italian, Romanian & related literatures"
@@ -1969,8 +1975,9 @@ msgid "Spanish, Portuguese, Galician literatures"
 msgstr ""
 
 #: vinaigrette-deleteme.py:88
+#, fuzzy
 msgid "Latin & Italic literatures"
-msgstr ""
+msgstr "Literatur"
 
 #: vinaigrette-deleteme.py:89
 msgid "Classical & modern Greek literatures"
@@ -2016,8 +2023,10 @@ msgid "History of South America"
 msgstr "Geschicht vu Südamerika"
 
 #: vinaigrette-deleteme.py:100
+#, fuzzy
+#| msgid "History of North America"
 msgid "History of other areas"
-msgstr ""
+msgstr "Geschicht vun Nordamerika"
 
 #: vinaigrette-deleteme.py:101
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
@@ -2786,4 +2795,3 @@ msgstr ""
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
-

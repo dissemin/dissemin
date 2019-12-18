@@ -15,9 +15,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-12 16:17+0100\n"
+"POT-Creation-Date: 2019-12-18 09:51+0100\n"
 "PO-Revision-Date: 2019-12-16 14:53:39+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -543,7 +542,9 @@ msgstr "Depósitos"
 #: deposit/templates/deposit/start.html:64
 #, fuzzy, python-format
 msgid "You can deposit the full text of your article. Dissemin will send it to a repository where it will be made freely available. By depositing your article via Dissemin, you agree to our <a href=\"%(tosurl)s\">terms of service</a>."
-msgstr "\n             Puede depositar el texto entero de su articulo. Dissemin va enviarlo a un repositorio donde sera disponible gratuido. Depositar su articulo via Dissemin, sera de acuerdo con nuestro <a href=\"%(tosurl)s\">termes de servicio</a>"
+msgstr ""
+"\n"
+"             Puede depositar el texto entero de su articulo. Dissemin va enviarlo a un repositorio donde sera disponible gratuido. Depositar su articulo via Dissemin, sera de acuerdo con nuestro <a href=\"%(tosurl)s\">termes de servicio</a>"
 
 #: deposit/templates/deposit/start.html:73
 msgid "You do not appear to be one of the authors of this paper. By using this form, you certify that you have the permission to upload it on their behalf."
@@ -946,8 +947,8 @@ msgstr "Descargar"
 
 #: papers/templates/papers/messages.html:8
 #, python-format
-msgid "\n                        We ignored %(papers)s paper from your ORCiD profile.\n                    "
-msgid_plural "\n                        We ignored %(papers)s papers from your ORCiD profile.\n                    "
+msgid "We ignored %(papers)s paper from your ORCiD profile."
+msgid_plural "We ignored %(papers)s papers from your ORCiD profile."
 msgstr[0] ""
 msgstr[1] ""
 
@@ -1002,7 +1003,10 @@ msgstr "Publicado en"
 #: papers/templates/papers/paper.html:55
 #, fuzzy, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
-msgstr "\n            y <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s otros autores</a>\n            "
+msgstr ""
+"\n"
+"            y <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s otros autores</a>\n"
+"            "
 
 #: papers/templates/papers/paper.html:61
 #, fuzzy
@@ -2088,7 +2092,10 @@ msgstr "Se denegó el acceso al PDF."
 #: website/templates/403.html:13
 #, fuzzy, python-format
 msgid "The access to the requested page has been denied. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "\n            Falló la autenticación. <a href=\"/\">Volver a la página de acceso.</a>\n           "
+msgstr ""
+"\n"
+"            Falló la autenticación. <a href=\"/\">Volver a la página de acceso.</a>\n"
+"           "
 
 #: website/templates/404.html:6 website/templates/404.html:10
 msgid "Page not found"
@@ -2097,7 +2104,10 @@ msgstr "No se encuentra la página"
 #: website/templates/404.html:13
 #, fuzzy, python-format
 msgid "The page you requested could not be found. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "\n            Falló la autenticación. <a href=\"/\">Volver a la página de acceso.</a>\n           "
+msgstr ""
+"\n"
+"            Falló la autenticación. <a href=\"/\">Volver a la página de acceso.</a>\n"
+"           "
 
 #: website/templates/500.html:6 website/templates/500.html:10
 #, fuzzy
@@ -2808,5 +2818,7 @@ msgstr "Error de autenticación"
 #: website/templates/socialaccount/authentication_error.html:15
 #, fuzzy, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
-msgstr "\n            Falló la autenticación. <a href=\"/\">Volver a la página de acceso.</a>\n           "
-
+msgstr ""
+"\n"
+"            Falló la autenticación. <a href=\"/\">Volver a la página de acceso.</a>\n"
+"           "

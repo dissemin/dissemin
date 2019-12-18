@@ -14,9 +14,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-12 16:17+0100\n"
+"POT-Creation-Date: 2019-12-18 09:51+0100\n"
 "PO-Revision-Date: 2019-12-16 14:53:44+0000\n"
 "Language: nl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -543,7 +542,12 @@ msgstr "Overboeken"
 #: deposit/templates/deposit/start.html:64
 #, fuzzy, python-format
 msgid "You can deposit the full text of your article. Dissemin will send it to a repository where it will be made freely available. By depositing your article via Dissemin, you agree to our <a href=\"%(tosurl)s\">terms of service</a>."
-msgstr "\n            Je kunt het artikel met volledige inhoud overboeken. Dissemin verzendt het artikel naar een opslagplaats en maakt 'm kosteloos beschikbaar.\n            Door je artikel via Dissemin over te boeken,\n            ga je akkoord met onze <a href=\"%(tosurl)s\">dienstvoorwaarden</a>.\n        "
+msgstr ""
+"\n"
+"            Je kunt het artikel met volledige inhoud overboeken. Dissemin verzendt het artikel naar een opslagplaats en maakt 'm kosteloos beschikbaar.\n"
+"            Door je artikel via Dissemin over te boeken,\n"
+"            ga je akkoord met onze <a href=\"%(tosurl)s\">dienstvoorwaarden</a>.\n"
+"        "
 
 #: deposit/templates/deposit/start.html:73
 msgid "You do not appear to be one of the authors of this paper. By using this form, you certify that you have the permission to upload it on their behalf."
@@ -948,8 +952,8 @@ msgstr "Ophalen"
 
 #: papers/templates/papers/messages.html:8
 #, python-format
-msgid "\n                        We ignored %(papers)s paper from your ORCiD profile.\n                    "
-msgid_plural "\n                        We ignored %(papers)s papers from your ORCiD profile.\n                    "
+msgid "We ignored %(papers)s paper from your ORCiD profile."
+msgid_plural "We ignored %(papers)s papers from your ORCiD profile."
 msgstr[0] ""
 msgstr[1] ""
 
@@ -1004,7 +1008,10 @@ msgstr "Gepubliceerd op"
 #: papers/templates/papers/paper.html:55
 #, fuzzy, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
-msgstr "\n            en <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s andere auteurs</a>\n            "
+msgstr ""
+"\n"
+"            en <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s andere auteurs</a>\n"
+"            "
 
 #: papers/templates/papers/paper.html:61
 msgid "Show less"
@@ -1369,7 +1376,11 @@ msgstr ""
 #: papers/views.py:278
 #, fuzzy
 msgid "Invalid ORCID profile. Please make sure it includes a public name."
-msgstr "\n                            Ongeldig ORCID-profiel.\n                            Zorg ervoor dat het profiel een openbare naam bevat.\n                            "
+msgstr ""
+"\n"
+"                            Ongeldig ORCID-profiel.\n"
+"                            Zorg ervoor dat het profiel een openbare naam bevat.\n"
+"                            "
 
 #: papers/views.py:281
 msgid "Invalid ORCID profile."
@@ -1724,16 +1735,18 @@ msgid "Metaphysics"
 msgstr "Natuurkunde"
 
 #: vinaigrette-deleteme.py:13
+#, fuzzy
 msgid "Epistemology"
-msgstr ""
+msgstr "Omgangskunde"
 
 #: vinaigrette-deleteme.py:14
 msgid "Parapsychology & occultism"
 msgstr "Parapsychologie en occultisme"
 
 #: vinaigrette-deleteme.py:15
+#, fuzzy
 msgid "Philosophical schools of thought"
-msgstr ""
+msgstr "Wijsbegeerte"
 
 #: vinaigrette-deleteme.py:17
 #, fuzzy
@@ -1745,8 +1758,10 @@ msgid "Ethics"
 msgstr "Ethiek"
 
 #: vinaigrette-deleteme.py:19
+#, fuzzy
+#| msgid "Modern western philosophy"
 msgid "Ancient, medieval & eastern philosophy"
-msgstr ""
+msgstr "Moderne westerse filosofie"
 
 #: vinaigrette-deleteme.py:20
 msgid "Modern western philosophy"
@@ -1782,8 +1797,10 @@ msgid "Christian organization, social work & worship"
 msgstr ""
 
 #: vinaigrette-deleteme.py:28
+#, fuzzy
+#| msgid "History of Asia"
 msgid "History of Christianity"
-msgstr ""
+msgstr "Geschiedenis van Azië"
 
 #: vinaigrette-deleteme.py:29
 msgid "Christian denominations"
@@ -1833,20 +1850,26 @@ msgid "German & related languages"
 msgstr "Duits en gerelateerde talen"
 
 #: vinaigrette-deleteme.py:45
+#, fuzzy
+#| msgid "German & related languages"
 msgid "French & related languages"
-msgstr ""
+msgstr "Duits en gerelateerde talen"
 
 #: vinaigrette-deleteme.py:46
+#, fuzzy
+#| msgid "German & related languages"
 msgid "Italian, Romanian & related languages"
-msgstr ""
+msgstr "Duits en gerelateerde talen"
 
 #: vinaigrette-deleteme.py:47
 msgid "Spanish, Portuguese, Galician"
 msgstr ""
 
 #: vinaigrette-deleteme.py:48
+#, fuzzy
+#| msgid "German & related languages"
 msgid "Latin & Italic languages"
-msgstr ""
+msgstr "Duits en gerelateerde talen"
 
 #: vinaigrette-deleteme.py:49
 msgid "Classical & modern Greek languages"
@@ -1979,20 +2002,26 @@ msgid "German & related literatures"
 msgstr "Duits en gerelateerde literatuur"
 
 #: vinaigrette-deleteme.py:85
+#, fuzzy
+#| msgid "German & related literatures"
 msgid "French & related literatures"
-msgstr ""
+msgstr "Duits en gerelateerde literatuur"
 
 #: vinaigrette-deleteme.py:86
+#, fuzzy
+#| msgid "German & related literatures"
 msgid "Italian, Romanian & related literatures"
-msgstr ""
+msgstr "Duits en gerelateerde literatuur"
 
 #: vinaigrette-deleteme.py:87
 msgid "Spanish, Portuguese, Galician literatures"
 msgstr ""
 
 #: vinaigrette-deleteme.py:88
+#, fuzzy
+#| msgid "German & related literatures"
 msgid "Latin & Italic literatures"
-msgstr ""
+msgstr "Duits en gerelateerde literatuur"
 
 #: vinaigrette-deleteme.py:89
 msgid "Classical & modern Greek literatures"
@@ -2009,8 +2038,9 @@ msgid "Geography & travel"
 msgstr "Aardrijkskunde"
 
 #: vinaigrette-deleteme.py:93
+#, fuzzy
 msgid "Biography & genealogy"
-msgstr ""
+msgstr "Aardrijkskunde"
 
 #: vinaigrette-deleteme.py:94
 msgid "History of ancient world (to ca. 499)"
@@ -2025,8 +2055,10 @@ msgid "History of Asia"
 msgstr "Geschiedenis van Azië"
 
 #: vinaigrette-deleteme.py:97
+#, fuzzy
+#| msgid "History of Asia"
 msgid "History of Africa"
-msgstr ""
+msgstr "Geschiedenis van Azië"
 
 #: vinaigrette-deleteme.py:98
 msgid "History of North America"
@@ -2110,7 +2142,9 @@ msgstr "Toegangsaanvraag voor de pdf is geweigerd."
 #: website/templates/403.html:13
 #, fuzzy, python-format
 msgid "The access to the requested page has been denied. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "Kan de aangevraagde pagina niet vinden. <a href=\"/\">Terug naar de startpagina.</a>\n           "
+msgstr ""
+"Kan de aangevraagde pagina niet vinden. <a href=\"/\">Terug naar de startpagina.</a>\n"
+"           "
 
 #: website/templates/404.html:6 website/templates/404.html:10
 msgid "Page not found"
@@ -2119,7 +2153,9 @@ msgstr "Pagina niet gevonden"
 #: website/templates/404.html:13
 #, fuzzy, python-format
 msgid "The page you requested could not be found. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "Kan de aangevraagde pagina niet vinden. <a href=\"/\">Terug naar de startpagina.</a>\n           "
+msgstr ""
+"Kan de aangevraagde pagina niet vinden. <a href=\"/\">Terug naar de startpagina.</a>\n"
+"           "
 
 #: website/templates/500.html:6 website/templates/500.html:10
 #, fuzzy
@@ -2129,7 +2165,9 @@ msgstr "Interne fout"
 #: website/templates/500.html:13
 #, fuzzy, python-format
 msgid "Your request triggered an internal server error. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "Je verzoek heeft een interne fout veroorzaakt. <a href=\"/\">Terug naar de startpagina.</a>\n           "
+msgstr ""
+"Je verzoek heeft een interne fout veroorzaakt. <a href=\"/\">Terug naar de startpagina.</a>\n"
+"           "
 
 #: website/templates/admin/base_site.html:5
 #: website/templates/admin/base_site.html:8
@@ -2830,5 +2868,7 @@ msgstr "Verifiëringsfout"
 #: website/templates/socialaccount/authentication_error.html:15
 #, fuzzy, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
-msgstr "\n            Verifiëren is mislukt. <a href=\"/\">Terug naar de aanmeldpagina.</a>\n           "
-
+msgstr ""
+"\n"
+"            Verifiëren is mislukt. <a href=\"/\">Terug naar de aanmeldpagina.</a>\n"
+"           "

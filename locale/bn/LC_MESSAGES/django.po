@@ -13,9 +13,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-12 16:17+0100\n"
+"POT-Creation-Date: 2019-12-18 09:51+0100\n"
 "PO-Revision-Date: 2019-12-16 14:53:35+0000\n"
 "Language: bn\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -940,8 +939,8 @@ msgstr ""
 
 #: papers/templates/papers/messages.html:8
 #, python-format
-msgid "\n                        We ignored %(papers)s paper from your ORCiD profile.\n                    "
-msgid_plural "\n                        We ignored %(papers)s papers from your ORCiD profile.\n                    "
+msgid "We ignored %(papers)s paper from your ORCiD profile."
+msgid_plural "We ignored %(papers)s papers from your ORCiD profile."
 msgstr[0] ""
 msgstr[1] ""
 
@@ -1705,16 +1704,18 @@ msgid "Metaphysics"
 msgstr "পদার্থবিদ্যা"
 
 #: vinaigrette-deleteme.py:13
+#, fuzzy
 msgid "Epistemology"
-msgstr ""
+msgstr "সমাজ বিজ্ঞান"
 
 #: vinaigrette-deleteme.py:14
 msgid "Parapsychology & occultism"
 msgstr ""
 
 #: vinaigrette-deleteme.py:15
+#, fuzzy
 msgid "Philosophical schools of thought"
-msgstr ""
+msgstr "দর্শণ"
 
 #: vinaigrette-deleteme.py:17
 #, fuzzy
@@ -1747,8 +1748,9 @@ msgid "The Bible"
 msgstr ""
 
 #: vinaigrette-deleteme.py:24
+#, fuzzy
 msgid "Christianity"
-msgstr ""
+msgstr "Dissemin প্রশাসন"
 
 #: vinaigrette-deleteme.py:25
 msgid "Christian practice & observance"
@@ -1763,8 +1765,9 @@ msgid "Christian organization, social work & worship"
 msgstr ""
 
 #: vinaigrette-deleteme.py:28
+#, fuzzy
 msgid "History of Christianity"
-msgstr ""
+msgstr "ইতিহাস"
 
 #: vinaigrette-deleteme.py:29
 #, fuzzy
@@ -1957,12 +1960,14 @@ msgid "English & Old English literatures"
 msgstr ""
 
 #: vinaigrette-deleteme.py:84
+#, fuzzy
 msgid "German & related literatures"
-msgstr ""
+msgstr "সাহিত্য"
 
 #: vinaigrette-deleteme.py:85
+#, fuzzy
 msgid "French & related literatures"
-msgstr ""
+msgstr "সাহিত্য"
 
 #: vinaigrette-deleteme.py:86
 msgid "Italian, Romanian & related literatures"
@@ -1973,8 +1978,9 @@ msgid "Spanish, Portuguese, Galician literatures"
 msgstr ""
 
 #: vinaigrette-deleteme.py:88
+#, fuzzy
 msgid "Latin & Italic literatures"
-msgstr ""
+msgstr "সাহিত্য"
 
 #: vinaigrette-deleteme.py:89
 msgid "Classical & modern Greek literatures"
@@ -1991,16 +1997,18 @@ msgid "Geography & travel"
 msgstr "ভূগোল"
 
 #: vinaigrette-deleteme.py:93
+#, fuzzy
 msgid "Biography & genealogy"
-msgstr ""
+msgstr "ভূগোল"
 
 #: vinaigrette-deleteme.py:94
 msgid "History of ancient world (to ca. 499)"
 msgstr ""
 
 #: vinaigrette-deleteme.py:95
+#, fuzzy
 msgid "History of Europe"
-msgstr ""
+msgstr "ইতিহাস"
 
 #: vinaigrette-deleteme.py:96
 #, fuzzy
@@ -2008,20 +2016,24 @@ msgid "History of Asia"
 msgstr "ইতিহাস"
 
 #: vinaigrette-deleteme.py:97
+#, fuzzy
 msgid "History of Africa"
-msgstr ""
+msgstr "ইতিহাস"
 
 #: vinaigrette-deleteme.py:98
+#, fuzzy
 msgid "History of North America"
-msgstr ""
+msgstr "ইতিহাস"
 
 #: vinaigrette-deleteme.py:99
+#, fuzzy
 msgid "History of South America"
-msgstr ""
+msgstr "ইতিহাস"
 
 #: vinaigrette-deleteme.py:100
+#, fuzzy
 msgid "History of other areas"
-msgstr ""
+msgstr "ইতিহাস"
 
 #: vinaigrette-deleteme.py:101
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
@@ -2048,8 +2060,9 @@ msgid "Free for private use; right holder retains other rights, including distri
 msgstr ""
 
 #: vinaigrette-deleteme.py:107
+#, fuzzy
 msgid "Other open license"
-msgstr ""
+msgstr "ধর্ম সমূহ"
 
 #: vinaigrette-deleteme.py:109
 msgid "Zenodo"
@@ -2087,7 +2100,10 @@ msgstr "প্রবেশ প্রত্যাখ্যাত"
 #: website/templates/403.html:13
 #, fuzzy, python-format
 msgid "The access to the requested page has been denied. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "\n            আপনার অনুরোধকৃত পাতাটি পাওয়া গেল না। <a href=\"/\">মূল পাতায় ফিরে যান।</a>\n           "
+msgstr ""
+"\n"
+"            আপনার অনুরোধকৃত পাতাটি পাওয়া গেল না। <a href=\"/\">মূল পাতায় ফিরে যান।</a>\n"
+"           "
 
 #: website/templates/404.html:6 website/templates/404.html:10
 msgid "Page not found"
@@ -2096,7 +2112,10 @@ msgstr "পাতাটি পাওয়া যাচ্ছেনা"
 #: website/templates/404.html:13
 #, fuzzy, python-format
 msgid "The page you requested could not be found. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "\n            আপনার অনুরোধকৃত পাতাটি পাওয়া গেল না। <a href=\"/\">মূল পাতায় ফিরে যান।</a>\n           "
+msgstr ""
+"\n"
+"            আপনার অনুরোধকৃত পাতাটি পাওয়া গেল না। <a href=\"/\">মূল পাতায় ফিরে যান।</a>\n"
+"           "
 
 #: website/templates/500.html:6 website/templates/500.html:10
 #, fuzzy
@@ -2106,7 +2125,10 @@ msgstr "অভ্যন্তরীণ ত্রুটি"
 #: website/templates/500.html:13
 #, fuzzy, python-format
 msgid "Your request triggered an internal server error. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "\n            আপনার অনুরোধকৃত পাতাটি পাওয়া গেল না। <a href=\"/\">মূল পাতায় ফিরে যান।</a>\n           "
+msgstr ""
+"\n"
+"            আপনার অনুরোধকৃত পাতাটি পাওয়া গেল না। <a href=\"/\">মূল পাতায় ফিরে যান।</a>\n"
+"           "
 
 #: website/templates/admin/base_site.html:5
 #: website/templates/admin/base_site.html:8
@@ -2802,4 +2824,3 @@ msgstr ""
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
-

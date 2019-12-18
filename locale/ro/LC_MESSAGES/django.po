@@ -9,9 +9,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-12 16:17+0100\n"
+"POT-Creation-Date: 2019-12-18 09:51+0100\n"
 "PO-Revision-Date: 2019-12-16 14:53:47+0000\n"
 "Language: ro\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -539,7 +538,11 @@ msgstr "Depozitare"
 #: deposit/templates/deposit/start.html:64
 #, fuzzy, python-format
 msgid "You can deposit the full text of your article. Dissemin will send it to a repository where it will be made freely available. By depositing your article via Dissemin, you agree to our <a href=\"%(tosurl)s\">terms of service</a>."
-msgstr "Puteți depune textul integral al articolului dvs. Dissemin îl va\n             trimite într-un depozit în care va fi disponibil gratuit.\nPrin depunerea articolului prin Dissemin,\n             sunteți de acord cu noi <a href=\"%(tosurl)s\">terms of service</a>."
+msgstr ""
+"Puteți depune textul integral al articolului dvs. Dissemin îl va\n"
+"             trimite într-un depozit în care va fi disponibil gratuit.\n"
+"Prin depunerea articolului prin Dissemin,\n"
+"             sunteți de acord cu noi <a href=\"%(tosurl)s\">terms of service</a>."
 
 #: deposit/templates/deposit/start.html:73
 msgid "You do not appear to be one of the authors of this paper. By using this form, you certify that you have the permission to upload it on their behalf."
@@ -943,8 +946,8 @@ msgstr "Descărcare"
 
 #: papers/templates/papers/messages.html:8
 #, python-format
-msgid "\n                        We ignored %(papers)s paper from your ORCiD profile.\n                    "
-msgid_plural "\n                        We ignored %(papers)s papers from your ORCiD profile.\n                    "
+msgid "We ignored %(papers)s paper from your ORCiD profile."
+msgid_plural "We ignored %(papers)s papers from your ORCiD profile."
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
@@ -1366,7 +1369,9 @@ msgstr ""
 #: papers/views.py:278
 #, fuzzy
 msgid "Invalid ORCID profile. Please make sure it includes a public name."
-msgstr "Profilul ORCID este nevalid.\nAsigurați-vă că include un nume public."
+msgstr ""
+"Profilul ORCID este nevalid.\n"
+"Asigurați-vă că include un nume public."
 
 #: papers/views.py:281
 msgid "Invalid ORCID profile."
@@ -1721,16 +1726,18 @@ msgid "Metaphysics"
 msgstr "Fizică"
 
 #: vinaigrette-deleteme.py:13
+#, fuzzy
 msgid "Epistemology"
-msgstr ""
+msgstr "Sociologie"
 
 #: vinaigrette-deleteme.py:14
 msgid "Parapsychology & occultism"
 msgstr ""
 
 #: vinaigrette-deleteme.py:15
+#, fuzzy
 msgid "Philosophical schools of thought"
-msgstr ""
+msgstr "Filozofie"
 
 #: vinaigrette-deleteme.py:17
 #, fuzzy
@@ -1779,8 +1786,9 @@ msgid "Christian organization, social work & worship"
 msgstr ""
 
 #: vinaigrette-deleteme.py:28
+#, fuzzy
 msgid "History of Christianity"
-msgstr ""
+msgstr "Istorie"
 
 #: vinaigrette-deleteme.py:29
 msgid "Christian denominations"
@@ -1849,8 +1857,9 @@ msgid "Classical & modern Greek languages"
 msgstr ""
 
 #: vinaigrette-deleteme.py:50
+#, fuzzy
 msgid "Other languages"
-msgstr ""
+msgstr "Literatură"
 
 #: vinaigrette-deleteme.py:51
 #, fuzzy
@@ -1972,12 +1981,14 @@ msgid "English & Old English literatures"
 msgstr ""
 
 #: vinaigrette-deleteme.py:84
+#, fuzzy
 msgid "German & related literatures"
-msgstr ""
+msgstr "Literatură"
 
 #: vinaigrette-deleteme.py:85
+#, fuzzy
 msgid "French & related literatures"
-msgstr ""
+msgstr "Literatură"
 
 #: vinaigrette-deleteme.py:86
 msgid "Italian, Romanian & related literatures"
@@ -1988,8 +1999,9 @@ msgid "Spanish, Portuguese, Galician literatures"
 msgstr ""
 
 #: vinaigrette-deleteme.py:88
+#, fuzzy
 msgid "Latin & Italic literatures"
-msgstr ""
+msgstr "Literatură"
 
 #: vinaigrette-deleteme.py:89
 msgid "Classical & modern Greek literatures"
@@ -2006,16 +2018,18 @@ msgid "Geography & travel"
 msgstr "Geografie"
 
 #: vinaigrette-deleteme.py:93
+#, fuzzy
 msgid "Biography & genealogy"
-msgstr ""
+msgstr "Geografie"
 
 #: vinaigrette-deleteme.py:94
 msgid "History of ancient world (to ca. 499)"
 msgstr ""
 
 #: vinaigrette-deleteme.py:95
+#, fuzzy
 msgid "History of Europe"
-msgstr ""
+msgstr "Istorie"
 
 #: vinaigrette-deleteme.py:96
 #, fuzzy
@@ -2023,20 +2037,24 @@ msgid "History of Asia"
 msgstr "Istorie"
 
 #: vinaigrette-deleteme.py:97
+#, fuzzy
 msgid "History of Africa"
-msgstr ""
+msgstr "Istorie"
 
 #: vinaigrette-deleteme.py:98
+#, fuzzy
 msgid "History of North America"
-msgstr ""
+msgstr "Istorie"
 
 #: vinaigrette-deleteme.py:99
+#, fuzzy
 msgid "History of South America"
-msgstr ""
+msgstr "Istorie"
 
 #: vinaigrette-deleteme.py:100
+#, fuzzy
 msgid "History of other areas"
-msgstr ""
+msgstr "Istorie"
 
 #: vinaigrette-deleteme.py:101
 #, fuzzy
@@ -2818,4 +2836,3 @@ msgstr ""
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
-

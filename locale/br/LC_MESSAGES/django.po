@@ -11,9 +11,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-12 16:17+0100\n"
+"POT-Creation-Date: 2019-12-18 09:51+0100\n"
 "PO-Revision-Date: 2019-12-16 14:53:36+0000\n"
 "Language: br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -942,8 +941,8 @@ msgstr "Pellgargañ"
 
 #: papers/templates/papers/messages.html:8
 #, python-format
-msgid "\n                        We ignored %(papers)s paper from your ORCiD profile.\n                    "
-msgid_plural "\n                        We ignored %(papers)s papers from your ORCiD profile.\n                    "
+msgid "We ignored %(papers)s paper from your ORCiD profile."
+msgid_plural "We ignored %(papers)s papers from your ORCiD profile."
 msgstr[0] ""
 msgstr[1] ""
 
@@ -998,7 +997,10 @@ msgstr "Embannet e"
 #: papers/templates/papers/paper.html:55
 #, fuzzy, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
-msgstr "\n            et <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s aozerien all</a>\n            "
+msgstr ""
+"\n"
+"            et <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s aozerien all</a>\n"
+"            "
 
 #: papers/templates/papers/paper.html:61
 msgid "Show less"
@@ -1711,16 +1713,19 @@ msgid "Metaphysics"
 msgstr "Metafizik"
 
 #: vinaigrette-deleteme.py:13
+#, fuzzy
+#| msgid "Biology"
 msgid "Epistemology"
-msgstr ""
+msgstr "Bevoniezh"
 
 #: vinaigrette-deleteme.py:14
 msgid "Parapsychology & occultism"
 msgstr ""
 
 #: vinaigrette-deleteme.py:15
+#, fuzzy
 msgid "Philosophical schools of thought"
-msgstr ""
+msgstr "Prederouriezh"
 
 #: vinaigrette-deleteme.py:17
 #, fuzzy
@@ -1753,8 +1758,10 @@ msgid "The Bible"
 msgstr ""
 
 #: vinaigrette-deleteme.py:24
+#, fuzzy
+#| msgid "Christian denominations"
 msgid "Christianity"
-msgstr ""
+msgstr "Anvadurioù kristen"
 
 #: vinaigrette-deleteme.py:25
 msgid "Christian practice & observance"
@@ -1769,8 +1776,10 @@ msgid "Christian organization, social work & worship"
 msgstr ""
 
 #: vinaigrette-deleteme.py:28
+#, fuzzy
+#| msgid "History of Asia"
 msgid "History of Christianity"
-msgstr ""
+msgstr "Istor Azia"
 
 #: vinaigrette-deleteme.py:29
 msgid "Christian denominations"
@@ -1957,12 +1966,16 @@ msgid "English & Old English literatures"
 msgstr ""
 
 #: vinaigrette-deleteme.py:84
+#, fuzzy
+#| msgid "Other literatures"
 msgid "German & related literatures"
-msgstr ""
+msgstr "Lennegezhioù all"
 
 #: vinaigrette-deleteme.py:85
+#, fuzzy
+#| msgid "Other literatures"
 msgid "French & related literatures"
-msgstr ""
+msgstr "Lennegezhioù all"
 
 #: vinaigrette-deleteme.py:86
 msgid "Italian, Romanian & related literatures"
@@ -1973,8 +1986,10 @@ msgid "Spanish, Portuguese, Galician literatures"
 msgstr ""
 
 #: vinaigrette-deleteme.py:88
+#, fuzzy
+#| msgid "Other literatures"
 msgid "Latin & Italic literatures"
-msgstr ""
+msgstr "Lennegezhioù all"
 
 #: vinaigrette-deleteme.py:89
 msgid "Classical & modern Greek literatures"
@@ -1990,36 +2005,47 @@ msgid "Geography & travel"
 msgstr "Douaroniezh"
 
 #: vinaigrette-deleteme.py:93
+#, fuzzy
 msgid "Biography & genealogy"
-msgstr ""
+msgstr "Douaroniezh"
 
 #: vinaigrette-deleteme.py:94
 msgid "History of ancient world (to ca. 499)"
 msgstr ""
 
 #: vinaigrette-deleteme.py:95
+#, fuzzy
+#| msgid "History of Asia"
 msgid "History of Europe"
-msgstr ""
+msgstr "Istor Azia"
 
 #: vinaigrette-deleteme.py:96
 msgid "History of Asia"
 msgstr "Istor Azia"
 
 #: vinaigrette-deleteme.py:97
+#, fuzzy
+#| msgid "History of Asia"
 msgid "History of Africa"
-msgstr ""
+msgstr "Istor Azia"
 
 #: vinaigrette-deleteme.py:98
+#, fuzzy
+#| msgid "History of Asia"
 msgid "History of North America"
-msgstr ""
+msgstr "Istor Azia"
 
 #: vinaigrette-deleteme.py:99
+#, fuzzy
+#| msgid "History of Asia"
 msgid "History of South America"
-msgstr ""
+msgstr "Istor Azia"
 
 #: vinaigrette-deleteme.py:100
+#, fuzzy
+#| msgid "History of Asia"
 msgid "History of other areas"
-msgstr ""
+msgstr "Istor Azia"
 
 #: vinaigrette-deleteme.py:101
 #, fuzzy
@@ -2051,8 +2077,10 @@ msgid "Free for private use; right holder retains other rights, including distri
 msgstr ""
 
 #: vinaigrette-deleteme.py:107
+#, fuzzy
+#| msgid "Other religions"
 msgid "Other open license"
-msgstr ""
+msgstr "Relijionoù all"
 
 #: vinaigrette-deleteme.py:109
 msgid "Zenodo"
@@ -2799,4 +2827,3 @@ msgstr ""
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
-

@@ -11,9 +11,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-12 16:17+0100\n"
+"POT-Creation-Date: 2019-12-18 09:51+0100\n"
 "PO-Revision-Date: 2019-12-16 14:53:42+0000\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -932,8 +931,8 @@ msgstr "다운로드"
 
 #: papers/templates/papers/messages.html:8
 #, python-format
-msgid "\n                        We ignored %(papers)s paper from your ORCiD profile.\n                    "
-msgid_plural "\n                        We ignored %(papers)s papers from your ORCiD profile.\n                    "
+msgid "We ignored %(papers)s paper from your ORCiD profile."
+msgid_plural "We ignored %(papers)s papers from your ORCiD profile."
 msgstr[0] ""
 
 #: papers/templates/papers/messages.html:14
@@ -1698,8 +1697,10 @@ msgid "Parapsychology & occultism"
 msgstr ""
 
 #: vinaigrette-deleteme.py:15
+#, fuzzy
+#| msgid "Philosophical logic"
 msgid "Philosophical schools of thought"
-msgstr ""
+msgstr "철학적 논리학"
 
 #: vinaigrette-deleteme.py:17
 msgid "Philosophical logic"
@@ -1939,8 +1940,10 @@ msgid "French & related literatures"
 msgstr "프랑스어 및 관련 문헌"
 
 #: vinaigrette-deleteme.py:86
+#, fuzzy
+#| msgid "Italian, Romanian & related languages"
 msgid "Italian, Romanian & related literatures"
-msgstr ""
+msgstr "이탈리아어, 루마니아어 및 관련 언어"
 
 #: vinaigrette-deleteme.py:87
 msgid "Spanish, Portuguese, Galician literatures"
@@ -1963,8 +1966,10 @@ msgid "Geography & travel"
 msgstr "지리학 및 여행"
 
 #: vinaigrette-deleteme.py:93
+#, fuzzy
+#| msgid "Geography & travel"
 msgid "Biography & genealogy"
-msgstr ""
+msgstr "지리학 및 여행"
 
 #: vinaigrette-deleteme.py:94
 msgid "History of ancient world (to ca. 499)"
@@ -2771,4 +2776,3 @@ msgstr "인증 오류"
 #, fuzzy, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "인증을 실패했습니다.<a href=\"/\">로그인 페이지로 돌아갑니다.</a>"
-

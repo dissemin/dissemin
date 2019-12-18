@@ -12,9 +12,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-12 16:17+0100\n"
+"POT-Creation-Date: 2019-12-18 09:51+0100\n"
 "PO-Revision-Date: 2019-12-16 14:53:40+0000\n"
 "Language: fi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -946,8 +945,8 @@ msgstr "Lataa"
 
 #: papers/templates/papers/messages.html:8
 #, python-format
-msgid "\n                        We ignored %(papers)s paper from your ORCiD profile.\n                    "
-msgid_plural "\n                        We ignored %(papers)s papers from your ORCiD profile.\n                    "
+msgid "We ignored %(papers)s paper from your ORCiD profile."
+msgid_plural "We ignored %(papers)s papers from your ORCiD profile."
 msgstr[0] ""
 msgstr[1] ""
 
@@ -1728,8 +1727,9 @@ msgid "Parapsychology & occultism"
 msgstr ""
 
 #: vinaigrette-deleteme.py:15
+#, fuzzy
 msgid "Philosophical schools of thought"
-msgstr ""
+msgstr "Filosofia"
 
 #: vinaigrette-deleteme.py:17
 #, fuzzy
@@ -1970,12 +1970,14 @@ msgid "English & Old English literatures"
 msgstr ""
 
 #: vinaigrette-deleteme.py:84
+#, fuzzy
 msgid "German & related literatures"
-msgstr ""
+msgstr "Kirjallisuustiede"
 
 #: vinaigrette-deleteme.py:85
+#, fuzzy
 msgid "French & related literatures"
-msgstr ""
+msgstr "Kirjallisuustiede"
 
 #: vinaigrette-deleteme.py:86
 msgid "Italian, Romanian & related literatures"
@@ -1986,8 +1988,9 @@ msgid "Spanish, Portuguese, Galician literatures"
 msgstr ""
 
 #: vinaigrette-deleteme.py:88
+#, fuzzy
 msgid "Latin & Italic literatures"
-msgstr ""
+msgstr "Kirjallisuustiede"
 
 #: vinaigrette-deleteme.py:89
 msgid "Classical & modern Greek literatures"
@@ -2004,8 +2007,9 @@ msgid "Geography & travel"
 msgstr "Maantiede"
 
 #: vinaigrette-deleteme.py:93
+#, fuzzy
 msgid "Biography & genealogy"
-msgstr ""
+msgstr "Maantiede"
 
 #: vinaigrette-deleteme.py:94
 msgid "History of ancient world (to ca. 499)"
@@ -2033,8 +2037,10 @@ msgid "History of South America"
 msgstr "Etelä-Amerikan historia"
 
 #: vinaigrette-deleteme.py:100
+#, fuzzy
+#| msgid "History of North America"
 msgid "History of other areas"
-msgstr ""
+msgstr "Pohjois-Amerikan historia"
 
 #: vinaigrette-deleteme.py:101
 #, fuzzy
@@ -2106,7 +2112,10 @@ msgstr "Pääsy PDF-tiedostoon kiellettiin."
 #: website/templates/403.html:13
 #, fuzzy, python-format
 msgid "The access to the requested page has been denied. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "\n            Pyytämääsi sivua ei löytynyt. <a href=\"/\">Palaa kotisivulle.</a>\n           "
+msgstr ""
+"\n"
+"            Pyytämääsi sivua ei löytynyt. <a href=\"/\">Palaa kotisivulle.</a>\n"
+"           "
 
 #: website/templates/404.html:6 website/templates/404.html:10
 msgid "Page not found"
@@ -2115,7 +2124,10 @@ msgstr "Sivua ei löytynyt"
 #: website/templates/404.html:13
 #, fuzzy, python-format
 msgid "The page you requested could not be found. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "\n            Pyytämääsi sivua ei löytynyt. <a href=\"/\">Palaa kotisivulle.</a>\n           "
+msgstr ""
+"\n"
+"            Pyytämääsi sivua ei löytynyt. <a href=\"/\">Palaa kotisivulle.</a>\n"
+"           "
 
 #: website/templates/500.html:6 website/templates/500.html:10
 #, fuzzy
@@ -2125,7 +2137,10 @@ msgstr "Sisäinen virhe"
 #: website/templates/500.html:13
 #, fuzzy, python-format
 msgid "Your request triggered an internal server error. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "\n            Pyyntösi laukaisi sisäisen virheen. <a href=\"/\">Takaisin etusivulle</a>\n           "
+msgstr ""
+"\n"
+"            Pyyntösi laukaisi sisäisen virheen. <a href=\"/\">Takaisin etusivulle</a>\n"
+"           "
 
 #: website/templates/admin/base_site.html:5
 #: website/templates/admin/base_site.html:8
@@ -2828,5 +2843,7 @@ msgstr "Todennusvirhe"
 #: website/templates/socialaccount/authentication_error.html:15
 #, fuzzy, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
-msgstr "\n            Todennus epäonnistui. <a href=\"/\">Palaa kirjautumissivulle.</a>\n           "
-
+msgstr ""
+"\n"
+"            Todennus epäonnistui. <a href=\"/\">Palaa kirjautumissivulle.</a>\n"
+"           "
