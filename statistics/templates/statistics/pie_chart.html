@@ -6,13 +6,34 @@
 </div>
 
 <script type="text/javascript">
-    $(function() {
+    {% comment %}
+        Due to async, the the DOM might be ready before the scripts from dissemin.js are loaded completely
+        We try for some short time (50ms) to draw the graph, then give finally up
+    {% endcomment %}
+
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    $(async function() {
+        // Preparing data
         var data = {{ stats|get_pie_data }};
         {% if on_statuses %}
             data.on_statuses = {{ on_statuses|safe }};
         {% else %}
             data.on_statuses = [];
         {% endif %}
-        updateStats = showStatsPie(data, "stats_pie_chart_n{{ stats_counter }}", "stats_pie_legend_n{{ stats_counter }}");
+        // Retry up to 10 time, if showStatsPie not yet defined
+        var pie_load_tries = 10;
+        while (pie_load_tries > 0) {
+            try {
+                updateStats = showStatsPie(data, "stats_pie_chart_n1", "stats_pie_legend_n1");
+                pie_load_tries = -1;
+            }
+            catch (err) {
+                await sleep(5);
+                pie_load_tries -= 1;
+            }
+        }
     });
 </script>
