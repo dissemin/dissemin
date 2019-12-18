@@ -279,6 +279,9 @@ class DepositRecord(models.Model):
 
     class Meta:
         db_table = 'papers_depositrecord'
+        indexes = [
+            models.Index(fields=['status', '-pub_date'])
+        ]
 
     def __str__(self):
         if self.identifier:
