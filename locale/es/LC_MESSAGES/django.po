@@ -15,13 +15,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-18 09:51+0100\n"
-"PO-Revision-Date: 2019-12-16 14:53:39+0000\n"
+"PO-Revision-Date: 2019-12-19 14:06:22+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-12-13 05:38:35+0000\n"
+"X-POT-Import-Date: 2019-12-18 15:15:00+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -61,9 +62,8 @@ msgid "Dewey Decimal Class"
 msgstr "Clase del sistema de Dewey"
 
 #: deposit/forms.py:160
-#, fuzzy
 msgid "Do not publish before"
-msgstr "Editor desconocido"
+msgstr "No publicar anticipadamente"
 
 #: deposit/forms.py:166 deposit/templates/deposit/deposits.html:89
 msgid "License"
@@ -307,7 +307,7 @@ msgstr "Pendiente de publicación"
 
 #: deposit/models.py:47
 msgid "Embargo"
-msgstr ""
+msgstr "Restricción de difusión pública"
 
 #: deposit/models.py:48
 msgid "Published"
@@ -479,9 +479,8 @@ msgid "Deposit date"
 msgstr "Fecha de depósito"
 
 #: deposit/templates/deposit/deposits.html:67
-#, fuzzy
 msgid "Publication date"
-msgstr "Por fecha de publicación"
+msgstr "Fecha de publicación"
 
 #: deposit/templates/deposit/deposits.html:78
 msgid "Deposit type"
@@ -542,9 +541,7 @@ msgstr "Depósitos"
 #: deposit/templates/deposit/start.html:64
 #, fuzzy, python-format
 msgid "You can deposit the full text of your article. Dissemin will send it to a repository where it will be made freely available. By depositing your article via Dissemin, you agree to our <a href=\"%(tosurl)s\">terms of service</a>."
-msgstr ""
-"\n"
-"             Puede depositar el texto entero de su articulo. Dissemin va enviarlo a un repositorio donde sera disponible gratuido. Depositar su articulo via Dissemin, sera de acuerdo con nuestro <a href=\"%(tosurl)s\">termes de servicio</a>"
+msgstr "\n             Puede depositar el texto entero de su articulo. Dissemin va enviarlo a un repositorio donde sera disponible gratuido. Depositar su articulo via Dissemin, sera de acuerdo con nuestro <a href=\"%(tosurl)s\">termes de servicio</a>"
 
 #: deposit/templates/deposit/start.html:73
 msgid "You do not appear to be one of the authors of this paper. By using this form, you certify that you have the permission to upload it on their behalf."
@@ -575,9 +572,8 @@ msgid "postprint"
 msgstr "versión revisada"
 
 #: deposit/templates/deposit/start.html:144
-#, fuzzy
 msgid "pdfversion"
-msgstr "versión publicada"
+msgstr "versión en PDF"
 
 #: deposit/templates/deposit/start.html:165
 msgid "Repository:"
@@ -876,7 +872,7 @@ msgstr "Documentos"
 
 #: papers/templates/papers/advanced_search.html:8
 msgid "Advanced Search"
-msgstr ""
+msgstr "Búsqueda avanzada"
 
 #: papers/templates/papers/advanced_search.html:13
 #: website/templates/dissemin/start_page.html:30
@@ -884,23 +880,20 @@ msgid "Advanced search"
 msgstr ""
 
 #: papers/templates/papers/advanced_search.html:20
-#, fuzzy
 msgid "Title"
-msgstr "título"
+msgstr "Título"
 
 #: papers/templates/papers/advanced_search.html:24
-#, fuzzy
 msgid "Authors"
-msgstr "Por autores"
+msgstr "Autores"
 
 #: papers/templates/papers/advanced_search.html:26
 msgid "Search by names or ORCIDs. Separate with commas and prefix with <code>last:</code> to enforce last name search."
 msgstr ""
 
 #: papers/templates/papers/advanced_search.html:39
-#, fuzzy
 msgid "Document type"
-msgstr "Por tipo de documento"
+msgstr "Tipo de documento"
 
 #: papers/templates/papers/advanced_search.html:60
 msgid "Fields for superusers"
@@ -954,27 +947,23 @@ msgstr[1] ""
 
 #: papers/templates/papers/messages.html:14
 msgid "Details:"
-msgstr ""
+msgstr "Detalles:"
 
 #: papers/templates/papers/messages.html:21
-#, fuzzy
 msgid "No author"
-msgstr "Por autores"
+msgstr "Sin autor"
 
 #: papers/templates/papers/messages.html:23
-#, fuzzy
 msgid "No title"
-msgstr "título"
+msgstr "Sin título"
 
 #: papers/templates/papers/messages.html:25
-#, fuzzy
 msgid "Invalid publication date"
-msgstr "Por fecha de publicación"
+msgstr "La fecha de publicación no es válida"
 
 #: papers/templates/papers/messages.html:27
-#, fuzzy
 msgid "No publication date"
-msgstr "Por fecha de publicación"
+msgstr "Sin fecha de publicación"
 
 #: papers/templates/papers/messages.html:29
 msgid "Paper is invalid"
@@ -1003,15 +992,11 @@ msgstr "Publicado en"
 #: papers/templates/papers/paper.html:55
 #, fuzzy, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
-msgstr ""
-"\n"
-"            y <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s otros autores</a>\n"
-"            "
+msgstr "\n            y <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s otros autores</a>\n            "
 
 #: papers/templates/papers/paper.html:61
-#, fuzzy
 msgid "Show less"
-msgstr "Mostrar"
+msgstr "Mostrar menos"
 
 #: papers/templates/papers/paper.html:71
 msgid "Deposit accomplished!"
@@ -1110,7 +1095,7 @@ msgstr "Detalles de la normativa"
 #: papers/templates/papers/policies.html:70
 #: papers/templates/papers/policies.html:86
 msgid "Blue circle"
-msgstr ""
+msgstr "Círculo azul"
 
 #: papers/templates/papers/policies.html:73
 msgid "Mark this publication for later upload."
@@ -1332,21 +1317,20 @@ msgid "policy unknown"
 msgstr "normativa desconocida"
 
 #: papers/templatetags/statuses.py:110
-#, fuzzy
 msgid "Green circle"
-msgstr "Acceso abierto"
+msgstr "Círculo verde"
 
 #: papers/templatetags/statuses.py:111
 msgid "Red circle"
-msgstr ""
+msgstr "Círculo rojo"
 
 #: papers/templatetags/statuses.py:112
 msgid "Orange circle"
-msgstr ""
+msgstr "Círculo naranja"
 
 #: papers/templatetags/statuses.py:113
 msgid "White circle"
-msgstr ""
+msgstr "Círculo blanco"
 
 #: papers/templatetags/statuses.py:114
 msgid "Question mark in circle"
@@ -1415,9 +1399,8 @@ msgid "increasing"
 msgstr "ascendente"
 
 #: publishers/forms.py:18
-#, fuzzy
 msgid "By publisher"
-msgstr "Por normativa de editorial"
+msgstr "Por editorial"
 
 #: publishers/forms.py:38
 msgid "Order"
@@ -1500,9 +1483,8 @@ msgstr "Buscar"
 
 #: publishers/templates/publishers/list.html:56
 #: publishers/templates/publishers/publisher.html:31
-#, fuzzy
 msgid "Sources"
-msgstr "Orígenes de datos"
+msgstr "Fuentes"
 
 #: publishers/templates/publishers/list.html:57
 #: publishers/templates/publishers/publisher.html:32
@@ -2085,17 +2067,13 @@ msgid "Try any author name"
 msgstr "Prueba con cualquier nombre de autor"
 
 #: website/templates/403.html:6 website/templates/403.html:10
-#, fuzzy
 msgid "Access denied"
-msgstr "Se denegó el acceso al PDF."
+msgstr "Se denegó el acceso"
 
 #: website/templates/403.html:13
-#, fuzzy, python-format
+#, python-format
 msgid "The access to the requested page has been denied. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr ""
-"\n"
-"            Falló la autenticación. <a href=\"/\">Volver a la página de acceso.</a>\n"
-"           "
+msgstr "Se ha denegado el acceso a la página solicitada. <a href=\"%(index)s\">Volver a la página de inicio.</a>"
 
 #: website/templates/404.html:6 website/templates/404.html:10
 msgid "Page not found"
@@ -2104,15 +2082,11 @@ msgstr "No se encuentra la página"
 #: website/templates/404.html:13
 #, fuzzy, python-format
 msgid "The page you requested could not be found. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr ""
-"\n"
-"            Falló la autenticación. <a href=\"/\">Volver a la página de acceso.</a>\n"
-"           "
+msgstr "\n            Falló la autenticación. <a href=\"/\">Volver a la página de acceso.</a>\n           "
 
 #: website/templates/500.html:6 website/templates/500.html:10
-#, fuzzy
 msgid "Internal server error"
-msgstr "Error interno"
+msgstr "Error interno del servidor"
 
 #: website/templates/500.html:13
 #, python-format
@@ -2345,11 +2319,11 @@ msgstr ""
 
 #: website/templates/dissemin/faq.html:285
 msgid "Class"
-msgstr ""
+msgstr "Clase"
 
 #: website/templates/dissemin/faq.html:286
 msgid "Description"
-msgstr ""
+msgstr "Descripción"
 
 #: website/templates/dissemin/faq.html:295
 msgid "<strong>Open access:</strong><br /> The full text is made freely available by the publisher (in a fully open access or hybrid journal)."
@@ -2680,7 +2654,7 @@ msgstr ""
 
 #: website/templates/dissemin/start_page.html:131
 msgid "Network of Partners"
-msgstr ""
+msgstr "Red de socios"
 
 #: website/templates/dissemin/start_page.html:134
 msgid "Partners"
@@ -2798,9 +2772,8 @@ msgid "My profile"
 msgstr "Mi perfil"
 
 #: website/templates/navbar.html:35
-#, fuzzy
 msgid "My to-do list"
-msgstr "Lista de pendientes"
+msgstr "Mi lista de pendientes"
 
 #: website/templates/navbar.html:36
 msgid "Logout"
@@ -2818,7 +2791,5 @@ msgstr "Error de autenticación"
 #: website/templates/socialaccount/authentication_error.html:15
 #, fuzzy, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
-msgstr ""
-"\n"
-"            Falló la autenticación. <a href=\"/\">Volver a la página de acceso.</a>\n"
-"           "
+msgstr "\n            Falló la autenticación. <a href=\"/\">Volver a la página de acceso.</a>\n           "
+

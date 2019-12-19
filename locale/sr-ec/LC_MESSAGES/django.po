@@ -12,13 +12,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-18 09:51+0100\n"
-"PO-Revision-Date: 2019-12-16 14:53:48+0000\n"
+"PO-Revision-Date: 2019-12-19 14:06:30+0000\n"
 "Language: sr-Cyrl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-12-13 05:38:35+0000\n"
+"X-POT-Import-Date: 2019-12-18 15:15:00+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=3; plural=(n%10 == 1 && n%100 != 11) ? 0 : ( (n%10 >= 2 && n%10 <= 4 && (n%100 < 10 || n%100 >= 20)) ? 1 : 2 );\n"
 
@@ -1704,7 +1705,6 @@ msgstr "Метафизика"
 
 #: vinaigrette-deleteme.py:13
 #, fuzzy
-#| msgid "Biology"
 msgid "Epistemology"
 msgstr "Биологија"
 
@@ -1714,7 +1714,6 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:15
 #, fuzzy
-#| msgid "Philosophical logic"
 msgid "Philosophical schools of thought"
 msgstr "Филозофска логика"
 
@@ -1764,7 +1763,6 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:28
 #, fuzzy
-#| msgid "History of Asia"
 msgid "History of Christianity"
 msgstr "Историја Азије"
 
@@ -1951,13 +1949,11 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:84
 #, fuzzy
-#| msgid "Other literatures"
 msgid "German & related literatures"
 msgstr "Остала литература"
 
 #: vinaigrette-deleteme.py:85
 #, fuzzy
-#| msgid "Other literatures"
 msgid "French & related literatures"
 msgstr "Остала литература"
 
@@ -1971,7 +1967,6 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:88
 #, fuzzy
-#| msgid "Other literatures"
 msgid "Latin & Italic literatures"
 msgstr "Остала литература"
 
@@ -1989,7 +1984,6 @@ msgstr "Географија и туризам"
 
 #: vinaigrette-deleteme.py:93
 #, fuzzy
-#| msgid "Geography & travel"
 msgid "Biography & genealogy"
 msgstr "Географија и туризам"
 
@@ -1999,7 +1993,6 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:95
 #, fuzzy
-#| msgid "History of Asia"
 msgid "History of Europe"
 msgstr "Историја Азије"
 
@@ -2009,25 +2002,21 @@ msgstr "Историја Азије"
 
 #: vinaigrette-deleteme.py:97
 #, fuzzy
-#| msgid "History of Asia"
 msgid "History of Africa"
 msgstr "Историја Азије"
 
 #: vinaigrette-deleteme.py:98
 #, fuzzy
-#| msgid "History of Asia"
 msgid "History of North America"
 msgstr "Историја Азије"
 
 #: vinaigrette-deleteme.py:99
 #, fuzzy
-#| msgid "History of Asia"
 msgid "History of South America"
 msgstr "Историја Азије"
 
 #: vinaigrette-deleteme.py:100
 #, fuzzy
-#| msgid "History of Asia"
 msgid "History of other areas"
 msgstr "Историја Азије"
 
@@ -2805,3 +2794,4 @@ msgstr "Грешка при потврди идентитета"
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
+

@@ -11,13 +11,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-18 09:51+0100\n"
-"PO-Revision-Date: 2019-10-14 15:19:22+0000\n"
+"PO-Revision-Date: 2019-12-19 14:06:25+0000\n"
 "Language: kab\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-10-01 14:19:16+0000\n"
+"X-POT-Import-Date: 2019-12-18 15:15:00+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -475,7 +476,6 @@ msgstr "Azemz n trusi"
 
 #: deposit/templates/deposit/deposits.html:67
 #, fuzzy
-#| msgid "By publication date"
 msgid "Publication date"
 msgstr "S wazemz n tuffɣa"
 
@@ -497,7 +497,6 @@ msgstr "URL n PDF"
 
 #: deposit/templates/deposit/deposits.html:134
 #, fuzzy
-#| msgid "Status"
 msgid "Status:"
 msgstr "Addad"
 
@@ -511,7 +510,6 @@ msgstr ""
 
 #: deposit/templates/deposit/deposits.html:176
 #, fuzzy
-#| msgid "Deposit type"
 msgid "No deposits yet!"
 msgstr "Anaw n trusi"
 
@@ -884,7 +882,6 @@ msgstr "azwel"
 
 #: papers/templates/papers/advanced_search.html:24
 #, fuzzy
-#| msgid "By authors"
 msgid "Authors"
 msgstr "S yimeskaren"
 
@@ -894,7 +891,6 @@ msgstr ""
 
 #: papers/templates/papers/advanced_search.html:39
 #, fuzzy
-#| msgid "By document type"
 msgid "Document type"
 msgstr "S wanaw n yisemli"
 
@@ -954,7 +950,6 @@ msgstr ""
 
 #: papers/templates/papers/messages.html:21
 #, fuzzy
-#| msgid "By authors"
 msgid "No author"
 msgstr "S yimeskaren"
 
@@ -965,13 +960,11 @@ msgstr "azwel"
 
 #: papers/templates/papers/messages.html:25
 #, fuzzy
-#| msgid "By publication date"
 msgid "Invalid publication date"
 msgstr "S wazemz n tuffɣa"
 
 #: papers/templates/papers/messages.html:27
 #, fuzzy
-#| msgid "By publication date"
 msgid "No publication date"
 msgstr "S wazemz n tuffɣa"
 
@@ -1002,10 +995,7 @@ msgstr "Yeffeɣ-d"
 #: papers/templates/papers/paper.html:55
 #, fuzzy, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
-msgstr ""
-"\n"
-"            akked <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s n yimeskaren-nniḍen</a>\n"
-"            "
+msgstr "\n            akked <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s n yimeskaren-nniḍen</a>\n            "
 
 #: papers/templates/papers/paper.html:61
 msgid "Show less"
@@ -1147,7 +1137,6 @@ msgstr ""
 
 #: papers/templates/papers/researcher.html:38
 #, fuzzy
-#| msgid "Refresh publications"
 msgid "Refresh Publications"
 msgstr "Smiren tiẓrigin"
 
@@ -1417,7 +1406,6 @@ msgstr "igemmen"
 
 #: publishers/forms.py:18
 #, fuzzy
-#| msgid "Publisher"
 msgid "By publisher"
 msgstr "Amaẓrag"
 
@@ -1518,7 +1506,6 @@ msgstr[1] ""
 
 #: publishers/templates/publishers/list.html:96
 #, fuzzy
-#| msgid "No paper found."
 msgid "No publishers found"
 msgstr "Ulac tizrawin."
 
@@ -1637,7 +1624,6 @@ msgstr ""
 
 #: upload/templates/upload/widget.html:15
 #, fuzzy
-#| msgid "Or enter an URL:"
 msgid "Or enter a URL:"
 msgstr "Neɣ, sekcem tansan URL:"
 
@@ -2103,7 +2089,6 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:113
 #, fuzzy
-#| msgid "Preprint"
 msgid "OSF preprints"
 msgstr "Taẓrigt tuzwirt"
 
@@ -2198,7 +2183,6 @@ msgstr ""
 
 #: website/templates/dissemin/faq.html:28
 #, fuzzy
-#| msgid "Unable to create a project on OSF."
 msgid "Can I create a profile on dissem.in?"
 msgstr "Ur izmir ara ad yernu asenfaṛ di OSF."
 
@@ -2831,92 +2815,3 @@ msgstr ""
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
 
-#~ msgid "Sorry, we could not fill this for you."
-#~ msgstr "Suref-aɣ, ur nezmir ara ad neččar aya i kečč."
-
-#~ msgid "Dissemin encountered an error, please try again later."
-#~ msgstr "Dessimin yemmugerd ugur, ɛreḍ tikelt-nniḍen ticki."
-
-#~ msgid "Right"
-#~ msgstr "Ameɣtu"
-
-#~ msgid "Wrong"
-#~ msgstr "Arameɣtu"
-
-#~ msgid "Delete"
-#~ msgstr "Kkes"
-
-#~ msgid "Website"
-#~ msgstr "Asmel web"
-
-#~ msgid "Members:"
-#~ msgstr "Iɛeggalen:"
-
-#~ msgid "Institutions"
-#~ msgstr "Isuda"
-
-#~ msgid "Yes"
-#~ msgstr "Ih"
-
-#~ msgid "(empty profile)"
-#~ msgstr "(amaɣnu ilem)"
-
-#, fuzzy
-#~ msgctxt "as in: _Journal article published in 2017 by_ Tom Smith, Nicole Allen"
-#~ msgid "<span class=\"paperDocType\">%(doctype)s</span> published in %(year)s by"
-#~ msgstr ""
-#~ " \n"
-#~ "    <span class=\"paperDocType\">%(doctype)s</span> sɣur\n"
-#~ "    "
-
-#, fuzzy
-#~ msgid "All %(nb_authors)s authors (<a href=\"#\" id=\"show_less_authors\">show less</a>):<br />"
-#~ msgstr ""
-#~ "\n"
-#~ "            Akk %(nb_authors)s n yimeskaren(<a href=\"#\" id=\"show_less_authors\">sken drus</a>):<br />\n"
-#~ "            "
-
-#~ msgid "Ask upload"
-#~ msgstr "Suter asali"
-
-#~ msgid "Publisher:"
-#~ msgstr "Amaẓrag:"
-
-#~ msgid "Deposited."
-#~ msgstr "Yers:"
-
-#~ msgid "Deposit again"
-#~ msgstr "Sers tikelt-nniḍen"
-
-#~ msgid "Journal"
-#~ msgstr "Aɣmis"
-
-#~ msgid "Published by"
-#~ msgstr "Yessuf̣f̣eɣ-it-id"
-
-#~ msgid "ISSN:"
-#~ msgstr "ISSN :"
-
-#~ msgid "%(sort_by)s <div>%(increasing)s %(value)s</div>"
-#~ msgstr "%(sort_by)s <div>%(increasing)s %(value)s</div>"
-
-#~ msgid "Policy"
-#~ msgstr "Tasertit"
-
-#~ msgid "Publications"
-#~ msgstr "Tiɣrigin"
-
-#~ msgid "Journals"
-#~ msgstr "Tisɣunin"
-
-#~ msgid "None."
-#~ msgstr "Ulac."
-
-#~ msgid "Select a file:"
-#~ msgstr "Fren afaylu:"
-
-#~ msgid "Browse"
-#~ msgstr "Snirem"
-
-#~ msgid "Or drop a file here:"
-#~ msgstr "Neɣ, zuɣer-sers afaylu dagi:"

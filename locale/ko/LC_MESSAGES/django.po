@@ -11,13 +11,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-18 09:51+0100\n"
-"PO-Revision-Date: 2019-12-16 14:53:42+0000\n"
+"PO-Revision-Date: 2019-12-19 14:06:25+0000\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-12-13 05:38:35+0000\n"
+"X-POT-Import-Date: 2019-12-18 15:15:00+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
@@ -1698,7 +1699,6 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:15
 #, fuzzy
-#| msgid "Philosophical logic"
 msgid "Philosophical schools of thought"
 msgstr "철학적 논리학"
 
@@ -1941,7 +1941,6 @@ msgstr "프랑스어 및 관련 문헌"
 
 #: vinaigrette-deleteme.py:86
 #, fuzzy
-#| msgid "Italian, Romanian & related languages"
 msgid "Italian, Romanian & related literatures"
 msgstr "이탈리아어, 루마니아어 및 관련 언어"
 
@@ -1967,7 +1966,6 @@ msgstr "지리학 및 여행"
 
 #: vinaigrette-deleteme.py:93
 #, fuzzy
-#| msgid "Geography & travel"
 msgid "Biography & genealogy"
 msgstr "지리학 및 여행"
 
@@ -2776,3 +2774,4 @@ msgstr "인증 오류"
 #, fuzzy, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "인증을 실패했습니다.<a href=\"/\">로그인 페이지로 돌아갑니다.</a>"
+

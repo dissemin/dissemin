@@ -10,13 +10,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-18 09:51+0100\n"
-"PO-Revision-Date: 2019-12-16 14:53:45+0000\n"
+"PO-Revision-Date: 2019-12-19 14:06:28+0000\n"
 "Language: oc\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-12-13 05:38:35+0000\n"
+"X-POT-Import-Date: 2019-12-18 15:15:00+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
@@ -494,9 +495,8 @@ msgid "PDF URL"
 msgstr "URL del PDF"
 
 #: deposit/templates/deposit/deposits.html:134
-#, fuzzy
 msgid "Status:"
-msgstr "Estatut"
+msgstr "Estatut :"
 
 #: deposit/templates/deposit/deposits.html:145
 msgid "Letter of Declaration"
@@ -995,10 +995,7 @@ msgstr "Publicat dins"
 #: papers/templates/papers/paper.html:55
 #, fuzzy, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
-msgstr ""
-"\n"
-"            et <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s autres autors</a>\n"
-"            "
+msgstr "\n            et <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s autres autors</a>\n            "
 
 #: papers/templates/papers/paper.html:61
 msgid "Show less"
@@ -2823,3 +2820,4 @@ msgstr ""
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
+

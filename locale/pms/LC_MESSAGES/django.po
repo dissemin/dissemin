@@ -10,13 +10,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-18 09:51+0100\n"
-"PO-Revision-Date: 2019-12-16 14:53:45+0000\n"
+"PO-Revision-Date: 2019-12-19 14:06:28+0000\n"
 "Language: pms\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-12-13 05:38:35+0000\n"
+"X-POT-Import-Date: 2019-12-18 15:15:00+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -924,25 +925,11 @@ msgid "Download"
 msgstr "Dëscarié"
 
 #: papers/templates/papers/messages.html:8
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                        We ignored %(papers)s paper from your ORCiD profile.\n"
-#| "                    "
-#| msgid_plural ""
-#| "\n"
-#| "                        We ignored %(papers)s papers from your ORCiD profile.\n"
-#| "                    "
+#, python-format
 msgid "We ignored %(papers)s paper from your ORCiD profile."
 msgid_plural "We ignored %(papers)s papers from your ORCiD profile."
-msgstr[0] ""
-"\n"
-"                        I l'oma ignorà l'artìcol %(papers)s ëd sò profil ORCiD.\n"
-"                    "
-msgstr[1] ""
-"\n"
-"                        I l'oma ignorà j'artìcoj %(papers)s ëd sò profil ORCiD.\n"
-"                    "
+msgstr[0] "I l'oma ignorà l'artìcol %(papers)s ëd s`p profil ORCiD."
+msgstr[1] "I l'oma ignorà j'artìcoj %(papers)s ëd sò profil ORCiD."
 
 #: papers/templates/papers/messages.html:14
 msgid "Details:"
@@ -2045,7 +2032,7 @@ msgstr "prepublicassion OSF"
 
 #: vinaigrette-deleteme.py:114
 msgid "Run by the Center for Open Science, OSF lets you share your preprints openly. You can also share supplemental data, materials or code associated with your article."
-msgstr ""
+msgstr "Masentà dal Sènter për na Siensa Duverta, OSF a-j lassa partagé liberaman soe prepublicassion. A peul ëdcò partagé dij dàit adissionaj, dij materiaj o dël còdes associà a sò artìcol."
 
 #: website/forms.py:16 website/forms.py:19
 msgid "Try any author name"
@@ -2074,9 +2061,9 @@ msgid "Internal server error"
 msgstr "Eror antern dël servent"
 
 #: website/templates/500.html:13
-#, fuzzy, python-format
+#, python-format
 msgid "Your request triggered an internal server error. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "Soa arcesta a l'ha causà n'eror antern. <a href=\"/\">Torné a la pàgina d'intrada.</a>"
+msgstr "Soa arcesta a l'ha causà n'eror antern. <a href=\"%(index)s\">Torné a la pàgina d'intrada.</a>"
 
 #: website/templates/admin/base_site.html:5
 #: website/templates/admin/base_site.html:8
@@ -2093,9 +2080,8 @@ msgid "Error"
 msgstr "Eror"
 
 #: website/templates/dissemin/error.html:14
-#, fuzzy
 msgid "Go back to the start page."
-msgstr "<a href=\"/\">Torné andré a la pàgina d'intrada.</a>"
+msgstr "Torné andré a la pàgina d'intrada."
 
 #: website/templates/dissemin/faq.html:7 website/templates/dissemin/faq.html:56
 msgid "Frequently Asked Questions"
@@ -2138,14 +2124,12 @@ msgid "Can I create a profile on dissem.in?"
 msgstr "Peuss-ne creé nè profil su dissem.in?"
 
 #: website/templates/dissemin/faq.html:30
-#, fuzzy
 msgid "Policies and Full-text Availability"
 msgstr "Régole e disponibilità dël test complet"
 
 #: website/templates/dissemin/faq.html:31
-#, fuzzy
 msgid "What do our policy classes mean?"
-msgstr "Lòn ch'a veulo dì le vàire régole ch'i l'eve?"
+msgstr "Lòn ch'a veulo dì le vàire régole ch'a-i son?"
 
 #: website/templates/dissemin/faq.html:32
 msgid "When is a paper considered available?"
@@ -2284,9 +2268,9 @@ msgid "<strong><a href=\"https://arxiv.org/\">arXiv</a></strong>, a well-known g
 msgstr "<strong><a href=\"https://arxiv.org/\">arXiv</a></strong>, un depòsit generalista bin conossù. Për adess, arXiv a l'ha nen autorisà Dissemin a deposité dovrand sò API SWORD, e a veul che j'utent a depòsito an arXiv a man. Si chiel a veul deposité an arXiv con Dissemin, a peul feje savèj che a l'é anteressà (pòsta eletrònica: help AT arxiv.org, e ch'a ancamin-a so mësssagi con \"Dear arXiv,\")."
 
 #: website/templates/dissemin/faq.html:245
-#, fuzzy, python-format
+#, python-format
 msgid "Dissemin is a web platform gathering metadata from <a href=\"%(sources_url)s\">many sources</a> and analyzing the full text availability of publications of researchers. It has been designed to foster the use of repositories (rather than preprints posted on personal homepages), <a href=\"#repositoriesRock\">for numerous reasons</a>."
-msgstr "Dissemin a l'é na piataforma an sl'aragnà ch'a cheuj dij metadàit a parte da <a href=\"%(sources_url)s\">vàire sorgiss</a> e ch'a analisa la disponibilità dël test complet dle publicassion dj'arsercador. A l'é stàit progetà për ancoragé l'usagi dij depòsit (pitòst che la divulgassion dle prepublicassion an sle pàgine përsonaj), <a href=\"#repositories-rock\">për vàire rason</a>."
+msgstr "Dissemin a l'é na piataforma an sl'aragnà ch'a cheuj dij metadàit a parte da <a href=\"%(sources_url)s\">vàire sorgiss</a> e ch'a analisa la disponibilità dël test complet dle publicassion dj'arsercador. A l'é stàit progetà për ancoragé l'usagi dij depòsit (pitòst che la divulgassion dle prepublicassion an sle pàgine përsonaj), <a href=\"#repositoriesRock\">për vàire rason</a>."
 
 #: website/templates/dissemin/faq.html:253
 msgid "Dissemin is not a repository as it does not store any full text. When the full text of a publication is available, a link to the relevant page is provided. The full texts deposited through Dissemin are stored in third-party repositories such as <a href=\"https://zenodo.org\">Zenodo</a> or <a href=\"https://hal.archives-ouvertes.fr/\">HAL</a>."
@@ -2302,15 +2286,15 @@ msgstr "É, a peul felo, an ancaminand a <a href=\"https://orcid.org/register\">
 
 #: website/templates/dissemin/faq.html:281
 msgid "We have the following five policy classes:"
-msgstr ""
+msgstr "I l'oma coste sinch classe ëd régole-sì:"
 
 #: website/templates/dissemin/faq.html:285
 msgid "Class"
-msgstr ""
+msgstr "Classa"
 
 #: website/templates/dissemin/faq.html:286
 msgid "Description"
-msgstr ""
+msgstr "Descrission"
 
 #: website/templates/dissemin/faq.html:295
 msgid "<strong>Open access:</strong><br /> The full text is made freely available by the publisher (in a fully open access or hybrid journal)."
@@ -2326,7 +2310,7 @@ msgstr "<strong>Prepublicassion e pòst-publicassion autorisà e test complet di
 
 #: website/templates/dissemin/faq.html:314
 msgid "Pre/post prints allowed but full text unavailable"
-msgstr ""
+msgstr "Pre-publicassion e pòst-publicassion autorisà ma test complet nen disponìbil"
 
 #: website/templates/dissemin/faq.html:317
 msgid "<strong>Pre/post prints allowed but full text unavailable:</strong><br /> The full text could be made available in a repository (as above) according to the publishing policy. We encourage their authors to do so."
@@ -2767,3 +2751,4 @@ msgstr "Eror d'autentificassion"
 #, fuzzy, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "L'autentificassion a l'ha falì. <a href=\"/\">Torné a la pàgina d'intrada.</a>"
+

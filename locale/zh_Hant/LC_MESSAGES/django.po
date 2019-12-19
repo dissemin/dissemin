@@ -10,10 +10,11 @@
 #
 msgid ""
 msgstr ""
+""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-18 09:51+0100\n"
-"PO-Revision-Date: 2019-12-16 14:53:50+0000\n"
+"PO-Revision-Date: 2019-12-19 14:06:33+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: zh_hant\n"
@@ -21,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-POT-Import-Date: 2019-12-13 05:38:35+0000\n"
+"X-POT-Import-Date: 2019-12-18 15:15:00+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 
 #: autocomplete/views.py:81
@@ -57,9 +58,8 @@ msgid "Dewey Decimal Class"
 msgstr "杜威十進位分類法"
 
 #: deposit/forms.py:160
-#, fuzzy
 msgid "Do not publish before"
-msgstr "未知出版者"
+msgstr "請勿出版之前"
 
 #: deposit/forms.py:166 deposit/templates/deposit/deposits.html:89
 msgid "License"
@@ -303,7 +303,7 @@ msgstr "待出版"
 
 #: deposit/models.py:47
 msgid "Embargo"
-msgstr "Embargo"
+msgstr "限制"
 
 #: deposit/models.py:48
 msgid "Published"
@@ -473,9 +473,8 @@ msgid "Deposit date"
 msgstr "存放日期"
 
 #: deposit/templates/deposit/deposits.html:67
-#, fuzzy
 msgid "Publication date"
-msgstr "按出版日期"
+msgstr "出版日期"
 
 #: deposit/templates/deposit/deposits.html:78
 msgid "Deposit type"
@@ -506,9 +505,8 @@ msgid "Show"
 msgstr "顯示"
 
 #: deposit/templates/deposit/deposits.html:176
-#, fuzzy
 msgid "No deposits yet!"
-msgstr "我的存放"
+msgstr "尚未有存放！"
 
 #: deposit/templates/deposit/deposits.html:177
 msgid "You have not made any deposit via Dissemin. What are you waiting for? Liberate your papers today."
@@ -567,9 +565,8 @@ msgid "postprint"
 msgstr "後刊本"
 
 #: deposit/templates/deposit/start.html:144
-#, fuzzy
 msgid "pdfversion"
-msgstr "出版版本"
+msgstr "PDF 版本"
 
 #: deposit/templates/deposit/start.html:165
 msgid "Repository:"
@@ -874,23 +871,20 @@ msgid "Advanced search"
 msgstr "進階搜尋"
 
 #: papers/templates/papers/advanced_search.html:20
-#, fuzzy
 msgid "Title"
-msgstr "按標題"
+msgstr "標題"
 
 #: papers/templates/papers/advanced_search.html:24
-#, fuzzy
 msgid "Authors"
-msgstr "按作者"
+msgstr "作者"
 
 #: papers/templates/papers/advanced_search.html:26
 msgid "Search by names or ORCIDs. Separate with commas and prefix with <code>last:</code> to enforce last name search."
 msgstr "按名稱或 ORCID 識別碼來搜尋。以逗號和帶有 <code>last:</code> 的字首區分來強制進行姓氏搜尋。"
 
 #: papers/templates/papers/advanced_search.html:39
-#, fuzzy
 msgid "Document type"
-msgstr "按文件類型"
+msgstr "文件類型"
 
 #: papers/templates/papers/advanced_search.html:60
 msgid "Fields for superusers"
@@ -936,45 +930,30 @@ msgid "Download"
 msgstr "下載"
 
 #: papers/templates/papers/messages.html:8
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                        We ignored %(papers)s paper from your ORCiD profile.\n"
-#| "                    "
-#| msgid_plural ""
-#| "\n"
-#| "                        We ignored %(papers)s papers from your ORCiD profile.\n"
-#| "                    "
+#, python-format
 msgid "We ignored %(papers)s paper from your ORCiD profile."
 msgid_plural "We ignored %(papers)s papers from your ORCiD profile."
-msgstr[0] ""
-"\n"
-"                        我們已忽略從您 ORCID 個人資料上的 %(papers)s 篇論文。\n"
-"                    "
+msgstr[0] "我們已忽略從您 ORCID 個人資料上的 %(papers)s 篇論文。"
 
 #: papers/templates/papers/messages.html:14
 msgid "Details:"
 msgstr "詳情："
 
 #: papers/templates/papers/messages.html:21
-#, fuzzy
 msgid "No author"
-msgstr "按作者"
+msgstr "無作者"
 
 #: papers/templates/papers/messages.html:23
-#, fuzzy
 msgid "No title"
-msgstr "按標題"
+msgstr "無標題"
 
 #: papers/templates/papers/messages.html:25
-#, fuzzy
 msgid "Invalid publication date"
-msgstr "按出版日期"
+msgstr "無效出版日期"
 
 #: papers/templates/papers/messages.html:27
-#, fuzzy
 msgid "No publication date"
-msgstr "按出版日期"
+msgstr "無出版日期"
 
 #: papers/templates/papers/messages.html:29
 msgid "Paper is invalid"
@@ -1006,9 +985,8 @@ msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other au
 msgstr "以及 <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s 位其他作者</a>"
 
 #: papers/templates/papers/paper.html:61
-#, fuzzy
 msgid "Show less"
-msgstr "顯示"
+msgstr "顯示較少"
 
 #: papers/templates/papers/paper.html:71
 msgid "Deposit accomplished!"
@@ -1043,9 +1021,9 @@ msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_ur
 msgstr "此論文已被存放在 <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> 裡。由知識庫管理員給確認後，全文內容將在<a class=\"alert-link\" href=\"%(deposit_url)s\">此位址</a>可用。"
 
 #: papers/templates/papers/paper.html:117
-#, fuzzy, python-format
+#, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> from <strong>%(pub_date|localize)s</strong> on due to an embargo."
-msgstr "此論文已被存放在 <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> 裡。由知識庫管理員給確認後，全文內容將在<a class=\"alert-link\" href=\"%(deposit_url)s\">此位址</a>可用。"
+msgstr "此論文已被存放在 <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> 裡。出於限制緣故，全文內容是從<strong>%(pub_date|localize)s</strong>開始在<a class=\"alert-link\" href=\"%(deposit_url)s\">此位址</a>可用。"
 
 #: papers/templates/papers/paper.html:142
 msgid "Full text:"
@@ -1325,9 +1303,8 @@ msgid "policy unknown"
 msgstr "方針未知"
 
 #: papers/templatetags/statuses.py:110
-#, fuzzy
 msgid "Green circle"
-msgstr "綠色開放取用"
+msgstr "綠色循環"
 
 #: papers/templatetags/statuses.py:111
 msgid "Red circle"
@@ -1407,9 +1384,8 @@ msgid "increasing"
 msgstr "遞增"
 
 #: publishers/forms.py:18
-#, fuzzy
 msgid "By publisher"
-msgstr "按出版者方針"
+msgstr "按出版者"
 
 #: publishers/forms.py:38
 msgid "Order"
@@ -1490,9 +1466,8 @@ msgstr "搜尋"
 
 #: publishers/templates/publishers/list.html:56
 #: publishers/templates/publishers/publisher.html:31
-#, fuzzy
 msgid "Sources"
-msgstr "資料來源"
+msgstr "來源"
 
 #: publishers/templates/publishers/list.html:57
 #: publishers/templates/publishers/publisher.html:32
@@ -1526,14 +1501,13 @@ msgid "Publisher"
 msgstr "出版者"
 
 #: publishers/templates/publishers/publisher.html:41
-#, fuzzy, python-format
+#, python-format
 msgid "Last updated on %(last_updated)s, <a href=\"%(feedback_url)s\">report any error to them</a>."
-msgstr "於 %(last_updated)s 的上一次更新，<a href=\"%(feedback_url)s\">向他們回報任何錯誤</a>"
+msgstr "於 %(last_updated)s 的上一次更新，<a href=\"%(feedback_url)s\">向他們回報任何錯誤</a>。"
 
 #: publishers/templates/publishers/publisher.html:45
-#, fuzzy
 msgid "Report any error to them."
-msgstr "向他們回報任何錯誤"
+msgstr "向他們回報任何錯誤。"
 
 #: publishers/templates/publishers/publisher.html:51
 msgid "For superusers"
@@ -1544,9 +1518,8 @@ msgid "Change open access status"
 msgstr "更改開放取用狀態"
 
 #: publishers/templates/publishers/publisher.html:72
-#, fuzzy
 msgid "Green open access summary"
-msgstr "綠色開放取用"
+msgstr "綠色開放取用摘要"
 
 #: publishers/templates/publishers/publisher.html:74
 #, python-format
@@ -2056,9 +2029,8 @@ msgid "HAL is a  multidisciplinary open archive, sustained by the French Researc
 msgstr "HAL 是多學科的開放存檔，由法國研究部（French Research Ministry）所提供。"
 
 #: vinaigrette-deleteme.py:113
-#, fuzzy
 msgid "OSF preprints"
-msgstr "預印本"
+msgstr "OSF 預印本"
 
 #: vinaigrette-deleteme.py:114
 msgid "Run by the Center for Open Science, OSF lets you share your preprints openly. You can also share supplemental data, materials or code associated with your article."
@@ -2069,28 +2041,26 @@ msgid "Try any author name"
 msgstr "嘗試任一作者名稱"
 
 #: website/templates/403.html:6 website/templates/403.html:10
-#, fuzzy
 msgid "Access denied"
-msgstr "獲取 PDF 被拒絕。"
+msgstr "拒絕存取"
 
 #: website/templates/403.html:13
-#, fuzzy, python-format
+#, python-format
 msgid "The access to the requested page has been denied. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "找不到您請求的頁面。<a href=\"/\">返回首頁。</a>"
+msgstr "存取請求的頁面被拒絕。<a href=\"%(index)s\">返回首頁。</a>"
 
 #: website/templates/404.html:6 website/templates/404.html:10
 msgid "Page not found"
 msgstr "找不到頁面"
 
 #: website/templates/404.html:13
-#, fuzzy, python-format
+#, python-format
 msgid "The page you requested could not be found. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "找不到您請求的頁面。<a href=\"/\">返回首頁。</a>"
+msgstr "找不到您請求的頁面。<a href=\"%(index)s\">返回首頁。</a>"
 
 #: website/templates/500.html:6 website/templates/500.html:10
-#, fuzzy
 msgid "Internal server error"
-msgstr "內部錯誤"
+msgstr "內部伺服器錯誤"
 
 #: website/templates/500.html:13
 #, python-format
@@ -2152,9 +2122,8 @@ msgid "Who runs dissem.in?"
 msgstr "dissem.in 由誰運作？"
 
 #: website/templates/dissemin/faq.html:28
-#, fuzzy
 msgid "Can I create a profile on dissem.in?"
-msgstr "我能在 dissem.in 上建立我的個人資料嗎？"
+msgstr "我能在 dissem.in 上建立個人資料嗎？"
 
 #: website/templates/dissemin/faq.html:30
 msgid "Policies and Full-text Availability"
@@ -2334,9 +2303,8 @@ msgid "<strong>Open access:</strong><br /> The full text is made freely availabl
 msgstr "<strong>開放取用：</strong><br />由出版者讓全文可自由取得（在一個完全開放取用或混合型的期刊）。"
 
 #: website/templates/dissemin/faq.html:303
-#, fuzzy
 msgid "Pre/post prints allowed and full text available"
-msgstr "方針與全文可用性"
+msgstr "允許預刊/後刊本，且全文可用"
 
 #: website/templates/dissemin/faq.html:306
 msgid "<strong>Pre/post prints allowed and full text available:</strong><br /> The full text is available in a repository, but might not be freely available from the publisher itself. This is in line with the publishing policy and is called green open access or self-archiving."
@@ -2359,13 +2327,12 @@ msgid "<strong>Policy unknown:</strong><br /> The full text is not available and
 msgstr "<strong>方針未知：</strong><br />全文不可用，且 dissem.in 無法評估出版者方針是否允許讓全文可自由使用。"
 
 #: website/templates/dissemin/faq.html:336
-#, fuzzy
 msgid "Pre/post prints forbidden"
-msgstr "禁止上傳"
+msgstr "預刊/後刊本禁止"
 
 #: website/templates/dissemin/faq.html:339
 msgid "<strong>Pre/post prints forbidden:</strong><br /> The publisher forbids deposits in repositories, in general. Authors might still be allowed to deposit their works after some embargo period or if their funder has an agreement with this publisher."
-msgstr "<strong>禁止預/後刊本：</strong><br />在通常情況下，出版者會禁止存放到知識庫上。但作者在禁止期限過後、或是他們的資助者有與出版者達成協議時，有可能被允許存放他們的作品。"
+msgstr "<strong>禁止預/後刊本：</strong><br />在通常情況下，出版者會禁止存放到知識庫上。但作者在限制期限過後、或是他們的資助者有與出版者達成協議時，有可能被允許存放他們的作品。"
 
 #: website/templates/dissemin/faq.html:350
 #, python-format
@@ -2436,9 +2403,7 @@ msgstr "然後，目前 Dissemin 僅支援遵循<a href=\"https://www.openarchiv
 
 #: website/templates/dissemin/faq.html:448
 msgid "If the repository is registered in BASE, please <a href=\"https://www.base-search.net/\">search in BASE</a> to check that your article is there. If it is, then this may be a bug of Dissemin; please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> describing the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>."
-msgstr ""
-"如果知識庫已經註冊到 BASE，請<a href=\"https://www.base-search.net/\">在 BASE 裡搜尋</a>來查看您的文章是否有出現。如果有找到的話，這可能是\n"
-" Dissemin 有程式錯誤，請在<a href=\"https://github.com/dissemin/dissemin/issues\">這裡</a>提出來描述問題，或是寄送訊息到 <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>。"
+msgstr "如果知識庫已經註冊到 BASE，請<a href=\"https://www.base-search.net/\">在 BASE 裡搜尋</a>來查看您的文章是否有出現。如果有找到的話，這可能是\n Dissemin 有程式錯誤，請在<a href=\"https://github.com/dissemin/dissemin/issues\">這裡</a>提出來描述問題，或是寄送訊息到 <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>。"
 
 #: website/templates/dissemin/faq.html:462
 msgid "Authenticating users is necessary to deposit papers on their behalf in open repositories. Besides, knowing a user's ORCID id helps us find its publications, avoiding articles authored by namesakes for instance. Logging in via ORCID will not expose any private information to Dissemin: we only have access to the public part of your ORCID record. For instance, unless you have explicitly marked your email address as public, we do not even know your email address when you log in to Dissemin via ORCID."
@@ -2454,7 +2419,7 @@ msgstr "ORCID 支援多種方法來索取出版項目。我們推薦的是透過
 
 #: website/templates/dissemin/faq.html:482
 msgid "Go to <a href=\"https://search.crossref.org/\">CrossRef Metadata Search</a>;"
-msgstr "前往<a href=\"https://search.crossref.org/\">CrossRef 詮釋資料搜尋</a>；"
+msgstr "前往<a href=\"https://search.crossref.org/\"> CrossRef 詮釋資料搜尋</a>；"
 
 #: website/templates/dissemin/faq.html:487
 msgid "Click \"Log in\" in the top right corner and go through the ORCID login process;"
@@ -2470,9 +2435,7 @@ msgstr "點擊「新增至 ORCID」（Add to ORCID）來新增您的出版項目
 
 #: website/templates/dissemin/faq.html:503
 msgid "You can also add publications to your profile <em>on Dissemin</em>, by clicking the button \"Include in my profile\" in search results on Dissemin. (This button is only visible when you are logged in, and next to papers that Dissemin thinks you have authored.) You can also exclude articles from your profile in this way. Please note that these changes are local to Dissemin and are <em>not</em> propagated to your ORCID profile, because ORCID does not have a free API allowing us to propagate them."
-msgstr ""
-"您也可以<em>在 Dissemin</em> 來新增出版項目道您的個人檔案，透過在 Dissemin 搜尋結果中點擊「包含在我的個人檔案」按鍵即可。（此按鍵是要您已經有登入，而且只顯示在有被 Dissemin 判斷出是由您所編寫之論文的一旁。）您也可以用此方式在您個人檔案裡排除不需要的文章。請注意這些變動僅侷限於\n"
-"Dissemin 而<em>不會</em>影響到您的 ORCID 個人檔案，因為 ORCID 並沒有可以讓我們自由使用來更改它們內容的 API。"
+msgstr "您也可以<em>在 Dissemin</em> 來新增出版項目道您的個人檔案，透過在 Dissemin 搜尋結果中點擊「包含在我的個人檔案」按鍵即可。（此按鍵是要您已經有登入，而且只顯示在有被 Dissemin 判斷出是由您所編寫之論文的一旁。）您也可以用此方式在您個人檔案裡排除不需要的文章。請注意這些變動僅侷限於\nDissemin 而<em>不會</em>影響到您的 ORCID 個人檔案，因為 ORCID 並沒有可以讓我們自由使用來更改它們內容的 API。"
 
 #: website/templates/dissemin/faq.html:512
 #, python-format
@@ -2489,14 +2452,12 @@ msgid "There are many ways to get involved:"
 msgstr "以下有許多方式可以讓您參與："
 
 #: website/templates/dissemin/faq.html:539
-#, fuzzy
 msgid "Contribute to <a href=\"https://github.com/dissemin/dissemin\">the code</a>."
-msgstr "為<a href=\"https://github.com/wetneb/dissemin\">程式原始碼</a>做出貢獻。"
+msgstr "為<a href=\"https://github.com/dissemin/dissemin\">程式原始碼</a>做出貢獻。"
 
 #: website/templates/dissemin/faq.html:544
-#, fuzzy
 msgid "Fix any of our listed <a href=\"https://github.com/dissemin/dissemin/issues\">issues</a>."
-msgstr "修正我們所列出的任一<a href=\"https://github.com/wetneb/dissemin/issues\">問題</a>。"
+msgstr "修正我們所列出的任一<a href=\"https://github.com/dissemin/dissemin/issues\">問題</a>。"
 
 #: website/templates/dissemin/faq.html:549
 msgid "Help us <a href=\"https://translatewiki.net/wiki/Translating:Dissemin\">translate</a> the interface in your language."
@@ -2563,9 +2524,8 @@ msgid "Data Sources"
 msgstr "資料來源"
 
 #: website/templates/dissemin/sources.html:14
-#, fuzzy
 msgid "<a href=\"https://www.crossref.org\">CrossRef.org</a> for traditional academic papers"
-msgstr "前往<a href=\"https://search.crossref.org/\">CrossRef 詮釋資料搜尋</a>；"
+msgstr "<a href=\"https://www.crossref.org\">CrossRef.org</a> 適用於傳統學術論文"
 
 #: website/templates/dissemin/sources.html:17
 msgid "<a href=\"https://www.base-search.net\">BASE (Bielefeld Academic Search Engine)</a> for other papers, including preprints"
@@ -2769,9 +2729,8 @@ msgid "My profile"
 msgstr "我的個人資料"
 
 #: website/templates/navbar.html:35
-#, fuzzy
 msgid "My to-do list"
-msgstr "待辦清單"
+msgstr "我的待辦清單"
 
 #: website/templates/navbar.html:36
 msgid "Logout"
@@ -2790,3 +2749,4 @@ msgstr "驗證錯誤"
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "驗證失敗。<a href=\"%(account-login)s\">返回登入頁面。</a>"
+

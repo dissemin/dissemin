@@ -12,13 +12,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-18 09:51+0100\n"
-"PO-Revision-Date: 2019-12-16 14:53:40+0000\n"
+"PO-Revision-Date: 2019-12-19 14:06:23+0000\n"
 "Language: fi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-12-13 05:38:35+0000\n"
+"X-POT-Import-Date: 2019-12-18 15:15:00+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -2038,7 +2039,6 @@ msgstr "Etelä-Amerikan historia"
 
 #: vinaigrette-deleteme.py:100
 #, fuzzy
-#| msgid "History of North America"
 msgid "History of other areas"
 msgstr "Pohjois-Amerikan historia"
 
@@ -2112,10 +2112,7 @@ msgstr "Pääsy PDF-tiedostoon kiellettiin."
 #: website/templates/403.html:13
 #, fuzzy, python-format
 msgid "The access to the requested page has been denied. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr ""
-"\n"
-"            Pyytämääsi sivua ei löytynyt. <a href=\"/\">Palaa kotisivulle.</a>\n"
-"           "
+msgstr "\n            Pyytämääsi sivua ei löytynyt. <a href=\"/\">Palaa kotisivulle.</a>\n           "
 
 #: website/templates/404.html:6 website/templates/404.html:10
 msgid "Page not found"
@@ -2124,10 +2121,7 @@ msgstr "Sivua ei löytynyt"
 #: website/templates/404.html:13
 #, fuzzy, python-format
 msgid "The page you requested could not be found. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr ""
-"\n"
-"            Pyytämääsi sivua ei löytynyt. <a href=\"/\">Palaa kotisivulle.</a>\n"
-"           "
+msgstr "\n            Pyytämääsi sivua ei löytynyt. <a href=\"/\">Palaa kotisivulle.</a>\n           "
 
 #: website/templates/500.html:6 website/templates/500.html:10
 #, fuzzy
@@ -2137,10 +2131,7 @@ msgstr "Sisäinen virhe"
 #: website/templates/500.html:13
 #, fuzzy, python-format
 msgid "Your request triggered an internal server error. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr ""
-"\n"
-"            Pyyntösi laukaisi sisäisen virheen. <a href=\"/\">Takaisin etusivulle</a>\n"
-"           "
+msgstr "\n            Pyyntösi laukaisi sisäisen virheen. <a href=\"/\">Takaisin etusivulle</a>\n           "
 
 #: website/templates/admin/base_site.html:5
 #: website/templates/admin/base_site.html:8
@@ -2843,7 +2834,5 @@ msgstr "Todennusvirhe"
 #: website/templates/socialaccount/authentication_error.html:15
 #, fuzzy, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
-msgstr ""
-"\n"
-"            Todennus epäonnistui. <a href=\"/\">Palaa kirjautumissivulle.</a>\n"
-"           "
+msgstr "\n            Todennus epäonnistui. <a href=\"/\">Palaa kirjautumissivulle.</a>\n           "
+

@@ -11,13 +11,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-12 10:33+0100\n"
-"PO-Revision-Date: 2019-10-14 15:19:16+0000\n"
+"PO-Revision-Date: 2019-12-19 14:06:19+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-10-01 08:31:19+0000\n"
+"X-POT-Import-Date: 2019-12-12 14:04:05+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -58,7 +59,7 @@ msgstr ""
 
 #: website/static/js/dissemin.js:354
 msgid "Removing from to-do list"
-msgstr ""
+msgstr "Quitando de la lista de pendientes"
 
 #: website/static/js/dissemin.js:600
 msgid "Preview of uploaded file"
@@ -66,11 +67,11 @@ msgstr ""
 
 #: website/static/js/dissemin.js:603
 msgid "Pages: "
-msgstr ""
+msgstr "Páginas: "
 
 #: website/static/js/dissemin.js:604
 msgid "Size: "
-msgstr ""
+msgstr "Tamaño: "
 
 #: website/static/js/dissemin.js:619
 msgid "While uploading %(file)s the following error occured:"
@@ -79,7 +80,7 @@ msgstr ""
 #: website/static/js/dissemin.js:628 website/static/js/dissemin.js:683
 #: website/static/js/dissemin.js:689
 msgid "Unknown error"
-msgstr ""
+msgstr "Error desconocido"
 
 #: website/static/js/dissemin.js:673
 msgid "While fetching file from %(url)s the following error occured:"
@@ -105,34 +106,3 @@ msgstr ""
 msgid ": "
 msgstr ""
 
-#~ msgid "Do not show this message anymore"
-#~ msgstr "No volver a mostrar este mensaje"
-
-#~ msgid "No author"
-#~ msgstr "Sin autor"
-
-#~ msgid "No title"
-#~ msgstr "Sin título"
-
-#~ msgid "Invalid publication date"
-#~ msgstr "La fecha de publicación no es válida"
-
-#~ msgid "No publication date"
-#~ msgstr "No hay fecha de publicación"
-
-#~ msgid "We ignored %(count)s paper from your ORCiD profile."
-#~ msgid_plural "We ignored %(count)s papers from your ORCiD profile."
-#~ msgstr[0] "Ignoramos %(count)s papel de su perfil ORCiD."
-#~ msgstr[1] "Ignoramos %(count)s papeles de su perfil ORCiD."
-
-#~ msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
-#~ msgstr "Se ignoró «%(name)s» por el motivo siguiente: %(reason)s"
-
-#~ msgid "A paper was ignored, because it has no name"
-#~ msgstr "Hemos ignorado un documento, porque no tiene nombre"
-
-#~ msgid "Show more information"
-#~ msgstr "Mostrar más información"
-
-#~ msgid "Show less information"
-#~ msgstr "Mostrar menos información"

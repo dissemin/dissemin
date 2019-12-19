@@ -9,13 +9,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-18 09:51+0100\n"
-"PO-Revision-Date: 2019-12-16 14:53:43+0000\n"
+"PO-Revision-Date: 2019-12-19 14:06:26+0000\n"
 "Language: lb\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-12-13 05:38:35+0000\n"
+"X-POT-Import-Date: 2019-12-18 15:15:00+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -492,9 +493,8 @@ msgid "PDF URL"
 msgstr "URL vum PDF"
 
 #: deposit/templates/deposit/deposits.html:134
-#, fuzzy
 msgid "Status:"
-msgstr "Status"
+msgstr "Status:"
 
 #: deposit/templates/deposit/deposits.html:145
 msgid "Letter of Declaration"
@@ -1325,11 +1325,11 @@ msgstr "Roude Krees"
 
 #: papers/templatetags/statuses.py:112
 msgid "Orange circle"
-msgstr ""
+msgstr "Orange Krees"
 
 #: papers/templatetags/statuses.py:113
 msgid "White circle"
-msgstr ""
+msgstr "Wäisse Krees"
 
 #: papers/templatetags/statuses.py:114
 msgid "Question mark in circle"
@@ -1766,7 +1766,6 @@ msgstr "Geschicht vun der Chrëschtenheet"
 
 #: vinaigrette-deleteme.py:29
 #, fuzzy
-#| msgid "Christianity"
 msgid "Christian denominations"
 msgstr "Chrëschtenheet"
 
@@ -1952,7 +1951,6 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:83
 #, fuzzy
-#| msgid "English & Old English languages"
 msgid "English & Old English literatures"
 msgstr "Englesch an Al-Englesch Sproochen"
 
@@ -2024,7 +2022,6 @@ msgstr "Geschicht vu Südamerika"
 
 #: vinaigrette-deleteme.py:100
 #, fuzzy
-#| msgid "History of North America"
 msgid "History of other areas"
 msgstr "Geschicht vun Nordamerika"
 
@@ -2795,3 +2792,4 @@ msgstr ""
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
+

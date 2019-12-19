@@ -16,10 +16,11 @@
 #
 msgid ""
 msgstr ""
+""
 "Project-Id-Version: dissem.in\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-18 09:51+0100\n"
-"PO-Revision-Date: 2019-12-16 14:53:41+0000\n"
+"PO-Revision-Date: 2019-12-19 14:06:24+0000\n"
 "Last-Translator: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language-Team: Antoine Amarilli <a3nm@a3nm.net>\n"
 "Language: fr\n"
@@ -28,7 +29,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
-"X-POT-Import-Date: 2019-12-13 05:38:35+0000\n"
+"X-POT-Import-Date: 2019-12-18 15:15:00+0000\n"
 
 #: autocomplete/views.py:81
 msgid "Current institutions"
@@ -936,25 +937,11 @@ msgid "Download"
 msgstr "Télécharger"
 
 #: papers/templates/papers/messages.html:8
-#, fuzzy, python-format
-#| msgid ""
-#| "\n"
-#| "                        We ignored %(papers)s paper from your ORCiD profile.\n"
-#| "                    "
-#| msgid_plural ""
-#| "\n"
-#| "                        We ignored %(papers)s papers from your ORCiD profile.\n"
-#| "                    "
+#, python-format
 msgid "We ignored %(papers)s paper from your ORCiD profile."
 msgid_plural "We ignored %(papers)s papers from your ORCiD profile."
-msgstr[0] ""
-"\n"
-"                        Nous avons ignoré le papier %(papers)s de votre profil ORCiD.\n"
-"                    "
-msgstr[1] ""
-"\n"
-"                        Nous avons ignoré les papiers %(papers)s de votre profil ORCiD.\n"
-"                    "
+msgstr[0] "Nous avons ignoré le papier %(papers)s de votre profil ORCiD."
+msgstr[1] "Nous avons ignoré les papiers %(papers)s de votre profil ORCiD."
 
 #: papers/templates/papers/messages.html:14
 msgid "Details:"
@@ -2049,7 +2036,7 @@ msgstr "HAL"
 
 #: vinaigrette-deleteme.py:112
 msgid "HAL is a  multidisciplinary open archive, sustained by the French Research Ministry."
-msgstr "HAL est une archive ouverte multidisciplinaire, soutenue par le ministre français de la recherche."
+msgstr "HAL est une archive ouverte multidisciplinaire, soutenue par le Ministère français de la Recherche."
 
 #: vinaigrette-deleteme.py:113
 msgid "OSF preprints"
@@ -2057,7 +2044,7 @@ msgstr "prépublications OSF"
 
 #: vinaigrette-deleteme.py:114
 msgid "Run by the Center for Open Science, OSF lets you share your preprints openly. You can also share supplemental data, materials or code associated with your article."
-msgstr "Exécuté par le Centre pour une science ouverte, OSF vous laisse partager librement vos prépublications. Vous pouvez aussi partager des données supplémentaires, des matériaux ou du code associé à votre article."
+msgstr "Exécuté par le Center for Open Science (« centre pour une science ouverte »), l’OSF vous laisse partager librement vos prépublications. Vous pouvez aussi partager des données supplémentaires, des matériaux ou du code associé à votre article."
 
 #: website/forms.py:16 website/forms.py:19
 msgid "Try any author name"
@@ -2418,7 +2405,7 @@ msgstr "Si l’erreur n’est présente dans aucune des sources et que vous pens
 
 #: website/templates/dissemin/faq.html:438
 msgid "First, note that Dissemin does not account for copies of articles that are only available on a personal homepage or a similar website. This is deliberate, because we believe that <a href=\"#repositoriesRock\">articles should be hosted in repositories</a>."
-msgstr "Notez en premier lieu que Dissemin ne prend pas en considération les copies d’articles qui ne sont disponibles que sur une page personnelle ou sur un site Web similaire. Ce choix est délibéré, car nous pensons que <a href=\"#repositoriesRock\">les articles doivent être hébergés dans des dépôts pérennes</a>."
+msgstr "Notez en premier lieu que Dissemin ne prend pas en considération les copies d’articles qui ne sont disponibles que sur une page personnelle ou sur un site web similaire. Ce choix est délibéré, car nous pensons que <a href=\"#repositoriesRock\">les articles doivent être hébergés dans des dépôts</a>."
 
 #: website/templates/dissemin/faq.html:443
 msgid "Second, at the moment, Dissemin only supports repositories with a crawlable API that follows the <a href=\"https://www.openarchives.org/OAI/openarchivesprotocol.html\">OAI-PMH protocol</a>, and is <a href=\"https://www.base-search.net/about/en/suggest.php\">registered</a> in <a href=\"https://www.base-search.net/\">BASE</a>. We have a <a href=\"https://github.com/dissemin/croawl\">long-term project</a> to support more repositories by crawling them, but for the moment, we do not have the resources to support repositories not covered by BASE. Hence, if you are a user of a repository and would like it to be supported by Dissemin, please contact the repository administrator and suggest them to implement OAI-PMH support and to <a href=\"https://www.base-search.net/about/en/suggest.php\">register</a> their repository in BASE."
@@ -2774,3 +2761,4 @@ msgstr "Erreur d’authentification"
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "L’authentification a échoué. <a href=\"%(account-login)s\">Revenir à la page de connexion.</a>"
+

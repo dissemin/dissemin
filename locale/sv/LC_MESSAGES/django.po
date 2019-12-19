@@ -13,13 +13,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-18 09:51+0100\n"
-"PO-Revision-Date: 2019-12-16 14:53:48+0000\n"
+"PO-Revision-Date: 2019-12-19 14:06:31+0000\n"
 "Language: sv\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-12-13 05:38:35+0000\n"
+"X-POT-Import-Date: 2019-12-18 15:15:00+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -997,10 +998,7 @@ msgstr "Publicerad i"
 #: papers/templates/papers/paper.html:55
 #, fuzzy, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
-msgstr ""
-"\n"
-"            och <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s andra författare</a>\n"
-"            "
+msgstr "\n            och <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s andra författare</a>\n            "
 
 #: papers/templates/papers/paper.html:61
 #, fuzzy
@@ -1365,11 +1363,7 @@ msgstr ""
 #: papers/views.py:278
 #, fuzzy
 msgid "Invalid ORCID profile. Please make sure it includes a public name."
-msgstr ""
-"\n"
-"                            Ogiltig ORCID-profil.\n"
-"                            Se till att den innehåller ett offentligt namn.\n"
-"                            "
+msgstr "\n                            Ogiltig ORCID-profil.\n                            Se till att den innehåller ett offentligt namn.\n                            "
 
 #: papers/views.py:281
 msgid "Invalid ORCID profile."
@@ -1767,7 +1761,6 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:24
 #, fuzzy
-#| msgid "History of Christianity"
 msgid "Christianity"
 msgstr "Kristendomens historia"
 
@@ -1841,7 +1834,6 @@ msgstr "Franska och relaterade språk"
 
 #: vinaigrette-deleteme.py:46
 #, fuzzy
-#| msgid "German & related languages"
 msgid "Italian, Romanian & related languages"
 msgstr "Tyska och relaterade språk"
 
@@ -1851,7 +1843,6 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:48
 #, fuzzy
-#| msgid "German & related languages"
 msgid "Latin & Italic languages"
 msgstr "Tyska och relaterade språk"
 
@@ -1988,13 +1979,11 @@ msgstr "Tysk och relaterad litteratur"
 
 #: vinaigrette-deleteme.py:85
 #, fuzzy
-#| msgid "German & related literatures"
 msgid "French & related literatures"
 msgstr "Tysk och relaterad litteratur"
 
 #: vinaigrette-deleteme.py:86
 #, fuzzy
-#| msgid "German & related literatures"
 msgid "Italian, Romanian & related literatures"
 msgstr "Tysk och relaterad litteratur"
 
@@ -2004,7 +1993,6 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:88
 #, fuzzy
-#| msgid "German & related literatures"
 msgid "Latin & Italic literatures"
 msgstr "Tysk och relaterad litteratur"
 
@@ -2033,7 +2021,6 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:95
 #, fuzzy
-#| msgid "History of Africa"
 msgid "History of Europe"
 msgstr "Afrikas historia"
 
@@ -2048,19 +2035,16 @@ msgstr "Afrikas historia"
 
 #: vinaigrette-deleteme.py:98
 #, fuzzy
-#| msgid "History of Africa"
 msgid "History of North America"
 msgstr "Afrikas historia"
 
 #: vinaigrette-deleteme.py:99
 #, fuzzy
-#| msgid "History of Africa"
 msgid "History of South America"
 msgstr "Afrikas historia"
 
 #: vinaigrette-deleteme.py:100
 #, fuzzy
-#| msgid "History of Africa"
 msgid "History of other areas"
 msgstr "Afrikas historia"
 
@@ -2133,10 +2117,7 @@ msgstr "Åtkomst till PDF nekades."
 #: website/templates/403.html:13
 #, fuzzy, python-format
 msgid "The access to the requested page has been denied. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr ""
-"\n"
-"            Sidan du begärde kunde inte hittas. <a href=\"/\">Gå tillbaka till hemsidan.</a>\n"
-"           "
+msgstr "\n            Sidan du begärde kunde inte hittas. <a href=\"/\">Gå tillbaka till hemsidan.</a>\n           "
 
 #: website/templates/404.html:6 website/templates/404.html:10
 msgid "Page not found"
@@ -2155,10 +2136,7 @@ msgstr "Internt fel"
 #: website/templates/500.html:13
 #, fuzzy, python-format
 msgid "Your request triggered an internal server error. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr ""
-"\n"
-"            Din begäran utlöste ett internt fel. <a href=\"/\">Gå tillbaka till hemsidan.</a>\n"
-"           "
+msgstr "\n            Din begäran utlöste ett internt fel. <a href=\"/\">Gå tillbaka till hemsidan.</a>\n           "
 
 #: website/templates/admin/base_site.html:5
 #: website/templates/admin/base_site.html:8
@@ -2848,3 +2826,4 @@ msgstr ""
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
+

@@ -10,13 +10,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-18 09:51+0100\n"
-"PO-Revision-Date: 2019-12-16 14:53:44+0000\n"
+"PO-Revision-Date: 2019-12-19 14:06:27+0000\n"
 "Language: nb\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-12-13 05:38:35+0000\n"
+"X-POT-Import-Date: 2019-12-18 15:15:00+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -1992,7 +1993,6 @@ msgstr "Litteratur"
 
 #: vinaigrette-deleteme.py:89
 #, fuzzy
-#| msgid "Classical & modern Greek languages"
 msgid "Classical & modern Greek literatures"
 msgstr "Klassisk og moderne greske språk"
 
@@ -2030,13 +2030,11 @@ msgstr "Afrikas historie"
 
 #: vinaigrette-deleteme.py:98
 #, fuzzy
-#| msgid "History of Africa"
 msgid "History of North America"
 msgstr "Afrikas historie"
 
 #: vinaigrette-deleteme.py:99
 #, fuzzy
-#| msgid "History of Africa"
 msgid "History of South America"
 msgstr "Afrikas historie"
 
@@ -2824,3 +2822,4 @@ msgstr ""
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
+

@@ -14,13 +14,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-18 09:51+0100\n"
-"PO-Revision-Date: 2019-12-16 14:53:49+0000\n"
+"PO-Revision-Date: 2019-12-19 14:06:31+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-12-13 05:38:35+0000\n"
+"X-POT-Import-Date: 2019-12-18 15:15:00+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
@@ -1720,7 +1721,6 @@ msgstr "Eski, orta çağ ve doğu felsefesi"
 
 #: vinaigrette-deleteme.py:20
 #, fuzzy
-#| msgid "Ancient, medieval & eastern philosophy"
 msgid "Modern western philosophy"
 msgstr "Eski, orta çağ ve doğu felsefesi"
 
@@ -1743,7 +1743,6 @@ msgstr "Hristiyanlık"
 
 #: vinaigrette-deleteme.py:25
 #, fuzzy
-#| msgid "Christian pastoral practice & religious orders"
 msgid "Christian practice & observance"
 msgstr "Hristiyan pastoral pratiği ve dini düzen"
 
@@ -1801,13 +1800,11 @@ msgstr "İngilizce ve Eski İngilizce dilleri"
 
 #: vinaigrette-deleteme.py:44
 #, fuzzy
-#| msgid "Italian, Romanian & related languages"
 msgid "German & related languages"
 msgstr "İtalyanca, Rumence ve ilgili diller"
 
 #: vinaigrette-deleteme.py:45
 #, fuzzy
-#| msgid "French & related literatures"
 msgid "French & related languages"
 msgstr "Fransızca ve ilgili edebiyatlar"
 
@@ -1817,7 +1814,6 @@ msgstr "İtalyanca, Rumence ve ilgili diller"
 
 #: vinaigrette-deleteme.py:47
 #, fuzzy
-#| msgid "Spanish, Portuguese, Galician literatures"
 msgid "Spanish, Portuguese, Galician"
 msgstr "İspanyolca, Portekizce, Galiçyaca edebiyatları"
 
@@ -1831,7 +1827,6 @@ msgstr "Klasik ve modern Yunan dilleri"
 
 #: vinaigrette-deleteme.py:50
 #, fuzzy
-#| msgid "Other literatures"
 msgid "Other languages"
 msgstr "Diğer edebiyatlar"
 
@@ -1946,13 +1941,11 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:83
 #, fuzzy
-#| msgid "English & Old English languages"
 msgid "English & Old English literatures"
 msgstr "İngilizce ve Eski İngilizce dilleri"
 
 #: vinaigrette-deleteme.py:84
 #, fuzzy
-#| msgid "French & related literatures"
 msgid "German & related literatures"
 msgstr "Fransızca ve ilgili edebiyatlar"
 
@@ -1962,7 +1955,6 @@ msgstr "Fransızca ve ilgili edebiyatlar"
 
 #: vinaigrette-deleteme.py:86
 #, fuzzy
-#| msgid "Italian, Romanian & related languages"
 msgid "Italian, Romanian & related literatures"
 msgstr "İtalyanca, Rumence ve ilgili diller"
 
@@ -2016,7 +2008,6 @@ msgstr "Güney Amerika Tarihi"
 
 #: vinaigrette-deleteme.py:100
 #, fuzzy
-#| msgid "History of North America"
 msgid "History of other areas"
 msgstr "Kuzey Amerika Tarihi"
 
@@ -2791,3 +2782,4 @@ msgstr ""
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
+
