@@ -441,6 +441,14 @@ class TestCiteproc():
         with pytest.raises(CiteprocTitleError):
             self.test_class._get_title(citeproc)
 
+    def test_get_title_emtpy_string(self, citeproc):
+        """
+        If no title is found, expect CiteprocTitleError
+        """
+        citeproc['title'] = ''
+        with pytest.raises(CiteprocTitleError):
+            self.test_class._get_title(citeproc)
+
 
     @pytest.mark.parametrize('doi, expected', [('10.2195/spam', True), ('10.15122/spam', False)])
     def test_is_oa_by_doi(self, doi, expected):
@@ -651,7 +659,7 @@ class TestCrossRef(TestCiteproc):
         CrossRef does serve the title in a list
         """
         r = self.test_class._get_title(citeproc)
-        assert r == citeproc.get('title')[0][:1024]
+        assert r == citeproc.get('title')[:1024]
         assert len(r) <= 1024
 
     def test_get_title_length(self, citeproc):
@@ -660,7 +668,7 @@ class TestCrossRef(TestCiteproc):
         """
         citeproc['title'] = ['x' * 2000, ]
         r = self.test_class._get_title(citeproc)
-        assert r == citeproc.get('title')[0][:1024]
+        assert r == citeproc.get('title')[:1024]
         assert len(r) <= 1024
 
     def test_get_title_list_error(self, citeproc):
@@ -671,6 +679,15 @@ class TestCrossRef(TestCiteproc):
         citeproc['title'] = list()
         with pytest.raises(CiteprocTitleError):
             self.test_class._get_title(citeproc)
+
+    def test_get_title_emtpy_string(self, citeproc):
+        """
+        If no title is found, expect CiteprocTitleError
+        """
+        citeproc['title'] = ['',]
+        with pytest.raises(CiteprocTitleError):
+            self.test_class._get_title(citeproc)
+
 
     def test_remove_unapproved_characters(self):
         """

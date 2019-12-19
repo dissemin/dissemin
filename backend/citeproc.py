@@ -527,9 +527,9 @@ class CrossRef(Citeproc):
         :returns: title
         :raises: CiteprocError
         """
-        title = data.get('title', [])
         try:
-            return title[0][:1024]
+            data['title'] = data.get('title', [])[0]
+            return super()._get_title(data)
         except IndexError:
             raise CiteprocTitleError('No title in metadata')
 
