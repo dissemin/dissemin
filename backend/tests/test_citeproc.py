@@ -4,6 +4,7 @@ import responses
 import zipfile
 
 from datetime import date
+from datetime import datetime
 from datetime import timedelta
 from urllib.parse import parse_qs
 from urllib.parse import urlparse
@@ -500,7 +501,14 @@ class TestCrossRef(TestCiteproc):
         """
         Essentially, we test if source date is updated
         """
-        monkeypatch.setattr(self.test_class, '_fetch_day', lambda x: None)
+        def ret_func(day):
+            # Datetime objects are date objects
+            assert isinstance(day, date)
+            assert not isinstance(day, datetime)
+            return None
+
+        monkeypatch.setattr(self.test_class, '_fetch_day', ret_func)
+
         source = OaiSource.objects.get(identifier='crossref')
         # For some reason, last_update ist not 1970
         source.last_update = timezone.now() - timedelta(days=10)

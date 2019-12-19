@@ -544,7 +544,7 @@ class CrossRef(Citeproc):
         today = date.today()
         while update_date.date() < today:
             try:
-                cls._fetch_day(update_date)
+                cls._fetch_day(update_date.date())
             except requests.exceptions.RequestException as e:
                 logger.exception(e)
                 break
