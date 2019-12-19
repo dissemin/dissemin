@@ -592,6 +592,8 @@ class TestCrossRef(TestCiteproc):
         We mock the request and inspect the params.
         Then we return a result that we have gotten from CrossRef
         """
+        self.test_class.rows = 30
+        self.test_class.emit_status_every = 3
         # Open zipfile with fixtures
         f_path = os.path.join(settings.BASE_DIR, 'backend', 'tests', 'data', 'crossref.zip')
         zf = zipfile.ZipFile(f_path)

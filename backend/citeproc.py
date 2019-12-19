@@ -452,8 +452,9 @@ class CrossRef(Citeproc):
     This class can parse CrossRef metadata, which is similar to citeproc and has functionality to fetch from CrossRef API
     """
 
-    rows = 500
     batch_length = 30
+    emit_status_every = 10
+    rows = 500
 
     @classmethod
     def _fetch_day(cls, day):
@@ -476,6 +477,9 @@ class CrossRef(Citeproc):
 
         s = requests.Session()
         cursor = '*'
+        total_results = 0
+        loop_runs = 0
+        new_papers = 0
         while cursor:
             params['cursor'] = cursor
             r = request_retry(
@@ -484,6 +488,9 @@ class CrossRef(Citeproc):
                 headers=headers,
                 session=s,
             )
+            if cursor == '*':
+                total_results = jpath('message/total-results', r.json(), 0)
+                logger.info('Fetch for day: {}, number results: {}'.format(day.isoformat(), total_results))
             cursor = jpath('message/next-cursor', r.json())
             items = jpath('message/items', r.json(), [])
             if len(items) == 0:
@@ -494,6 +501,14 @@ class CrossRef(Citeproc):
                         cls.to_paper(item)
                     except CiteprocError:
                         logger.debug(item)
+                    else:
+                        new_papers += 1
+            # After running ten times
+            loop_runs += 1
+            if loop_runs % cls.emit_status_every == 0:
+                logger.info('Parsed another {} papers. {} more to go'.format(cls.rows*cls.emit_status_every, total_results-loop_runs*cls.rows))
+
+        logger.info('For day {} have {} paper been added or updated out of {}.'.format(day.isoformat(), new_papers, total_results))
 
 
     @staticmethod
