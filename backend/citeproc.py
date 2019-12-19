@@ -184,7 +184,11 @@ class Citeproc():
         name_pairs = list(map(cls._convert_to_name_pair, authors))
         if None in name_pairs:
             raise CiteprocAuthorError('Author list compromised')
-        return [BareName.create_bare(first, last) for first, last in name_pairs]
+        authors = [BareName.create_bare(first, last) for first, last in name_pairs]
+        if not authors:
+            raise CiteprocAuthorError('No list of authors in metadata')
+
+        return authors
 
 
     @staticmethod

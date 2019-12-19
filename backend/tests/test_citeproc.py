@@ -177,6 +177,14 @@ class TestCiteproc():
         for barename in r:
             assert isinstance(barename, BareName)
 
+    def test_get_authors_empty_list(self, citeproc):
+        """
+        The list of authors must not be empty
+        """
+        citeproc['author'] = []
+        with pytest.raises(CiteprocAuthorError):
+            self.test_class._get_authors(citeproc)
+
     def test_get_authors_no_list(self, citeproc):
         """
         author in citeproc must be a list
