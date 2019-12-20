@@ -25,6 +25,7 @@ apt-get install -y build-essential curl screen libxml2-dev libxslt1-dev gettext 
         libjpeg-dev liblapack-dev gfortran libopenblas-dev libmagickwand-dev \
         default-jre-headless libffi-dev \
         pwgen git
+apt-get install -y pdftk
 
 # We install Python
 apt-get install -y python3 python3-dev python3-venv

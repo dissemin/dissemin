@@ -1,10 +1,13 @@
 import io
 import logging
 import os
+import subprocess
 import sys
 
 from copy import copy
 from datetime import date
+from fdfgen import forge_fdf
+from tempfile import NamedTemporaryFile
 
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import ParagraphStyle
@@ -39,6 +42,50 @@ def get_declaration_pdf(deposit_record, user):
     declaration_name = deposit_record.repository.letter_declaration
     pdf_io = REGISTERED_DECLARATION_FUNCTIONS[declaration_name](deposit_record, user)
     return pdf_io
+
+
+def fill_forms(pdf_path, fields, flatten=True):
+    """
+    Call this to fill in the form values into the document
+    :param pdf_path: Path to the pdf that will be filled in
+    :param fdf_values: Prepared form value, ready to be inserted
+    :returns: PDF as IO
+    """
+    fdf = forge_fdf("",fields,[],[],[])
+
+    # We cannot use /tmp, because on ubuntu, pdftk is delivered with snap
+    # snap has no access to /tmp
+    tmp_dir = os.path.join(settings.BASE_DIR, 'deposit', 'tmp', 'declarations')
+    try:
+        os.makedirs(tmp_dir)
+    except OSError as e:
+        logger.debug(e)
+
+    with NamedTemporaryFile(mode='wb', delete=False, dir=tmp_dir) as fdf_file:
+        fdf_file.write(fdf)
+
+    with NamedTemporaryFile(delete=False, dir=tmp_dir, suffix='.pdf') as pdf_file:
+        pass
+
+    # Call the conversion
+    command = ['pdftk', pdf_path, 'fill_form', fdf_file.name, 'output', pdf_file.name]
+    if flatten:
+        command.append('flatten')
+
+    subprocess.run(command)
+
+    # Get the pdf as BytesIO
+    with open(pdf_file.name, 'rb') as f:
+        pdf = io.BytesIO(f.read())
+
+    # Clean temp files
+    try:
+        os.remove(fdf_file.name)
+        os.remove(pdf_file.name)
+    except Exception as e:
+        logger.exception(e)
+
+    return pdf
 
 
 def declaration_ulb_darmstadt(deposit_record, user):

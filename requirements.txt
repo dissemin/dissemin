@@ -32,6 +32,7 @@ django-tempus-dominus
 django-vinaigrette
 djangorestframework
 elasticsearch==6.3.1
+fdfgen
 httplib2
 jsonfield
 langdetect

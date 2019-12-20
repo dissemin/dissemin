@@ -20,6 +20,8 @@ addons:
        - libffi-dev
        - libssl-dev
        - ghostscript
+    snaps:
+      - pdftk
 
 services:
   - postgresql
