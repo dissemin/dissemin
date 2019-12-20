@@ -48,7 +48,8 @@ def fill_forms(pdf_path, fields, flatten=True):
     """
     Call this to fill in the form values into the document
     :param pdf_path: Path to the pdf that will be filled in
-    :param fdf_values: Prepared form value, ready to be inserted
+    :param fields: list of (Field name, Value) to be used to fill the form
+    :param flatten: Set to false if you want to keep the forms
     :returns: PDF as IO
     """
     fdf = forge_fdf("",fields,[],[],[])
