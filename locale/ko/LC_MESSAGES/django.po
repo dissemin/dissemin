@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 #
 # Author: Abijeet Patro
+# Author: Gongsoonyee
 # Author: Revi
 # Author: SeoJeongHo
 # Author: Ykhwong
@@ -14,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-18 09:51+0100\n"
-"PO-Revision-Date: 2019-12-19 14:06:25+0000\n"
+"PO-Revision-Date: 2019-12-23 14:46:33+0000\n"
 "Language: ko\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -472,7 +473,7 @@ msgstr ""
 
 #: deposit/templates/deposit/deposits.html:67
 msgid "Publication date"
-msgstr ""
+msgstr "출판일"
 
 #: deposit/templates/deposit/deposits.html:78
 msgid "Deposit type"
@@ -577,7 +578,7 @@ msgstr "메타데이터:"
 #: deposit/templates/deposit/start.html:212
 #: papers/templates/papers/search_base.html:165
 msgid "Paper animated bird"
-msgstr ""
+msgstr "종이로 만든 움직이는 새"
 
 #: deposit/templates/deposit/start.html:213
 msgid "Submitting paper to repository"
@@ -874,9 +875,8 @@ msgid "Title"
 msgstr "제목별"
 
 #: papers/templates/papers/advanced_search.html:24
-#, fuzzy
 msgid "Authors"
-msgstr "저자별"
+msgstr "저자"
 
 #: papers/templates/papers/advanced_search.html:26
 msgid "Search by names or ORCIDs. Separate with commas and prefix with <code>last:</code> to enforce last name search."
@@ -938,12 +938,11 @@ msgstr[0] ""
 
 #: papers/templates/papers/messages.html:14
 msgid "Details:"
-msgstr ""
+msgstr "자세한 사항"
 
 #: papers/templates/papers/messages.html:21
-#, fuzzy
 msgid "No author"
-msgstr "저자별"
+msgstr "저자 없음"
 
 #: papers/templates/papers/messages.html:23
 #, fuzzy
@@ -952,29 +951,29 @@ msgstr "제목별"
 
 #: papers/templates/papers/messages.html:25
 msgid "Invalid publication date"
-msgstr ""
+msgstr "유효하지 않은 출판날짜입니다."
 
 #: papers/templates/papers/messages.html:27
 msgid "No publication date"
-msgstr ""
+msgstr "출판일이 없습니다"
 
 #: papers/templates/papers/messages.html:29
 msgid "Paper is invalid"
-msgstr ""
+msgstr "이 글은 유효하지 않습니다."
 
 #: papers/templates/papers/messages.html:32
 msgid "{{ title }} was ignored for the following reason:"
-msgstr ""
+msgstr "{{ title }}은 다음과 같은 이유로 무시되었습니다."
 
 #: papers/templates/papers/messages.html:36
 msgid "A paper was ignored, because is has no title."
-msgstr ""
+msgstr "글은 제목이 없어 무시되었습니다."
 
 #: papers/templates/papers/paper.html:39
-#, fuzzy, python-format
+#, python-format
 msgctxt "as in: _Journal article published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "%(doctype)s published in %(year)s by"
-msgstr "게시 위치"
+msgstr "%(doctype)s는 %(year)s년에 만들어졌습니다. by"
 
 #: papers/templates/papers/paper.html:45
 #, fuzzy, python-format
@@ -988,9 +987,8 @@ msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other au
 msgstr ""
 
 #: papers/templates/papers/paper.html:61
-#, fuzzy
 msgid "Show less"
-msgstr "보기"
+msgstr "덜 보기"
 
 #: papers/templates/papers/paper.html:71
 msgid "Deposit accomplished!"
@@ -1093,7 +1091,7 @@ msgstr "파랑색 원"
 
 #: papers/templates/papers/policies.html:73
 msgid "Mark this publication for later upload."
-msgstr ""
+msgstr "이 출판을 나중에 올리는 것으로 표시하기"
 
 #: papers/templates/papers/policies.html:76
 msgid "Mark"
@@ -1127,7 +1125,7 @@ msgstr ""
 
 #: papers/templates/papers/researcher.html:38
 msgid "Refresh Publications"
-msgstr ""
+msgstr "기한 수정하기"
 
 #: papers/templates/papers/researcher.html:42
 msgid "Address:"
@@ -1325,7 +1323,7 @@ msgstr "흰색 원"
 
 #: papers/templatetags/statuses.py:114
 msgid "Question mark in circle"
-msgstr ""
+msgstr "동그라미 안에 있는 질문 표시"
 
 #: papers/views.py:88
 msgid "Dissemin requires access to your ORCID name, which is marked as private in your ORCID profile."
@@ -1395,7 +1393,7 @@ msgstr "게시자"
 
 #: publishers/forms.py:38
 msgid "Order"
-msgstr ""
+msgstr "순서"
 
 #: publishers/models.py:39 website/templates/dissemin/faq.html:292
 msgid "Open access"
@@ -1472,9 +1470,8 @@ msgstr "검색"
 
 #: publishers/templates/publishers/list.html:56
 #: publishers/templates/publishers/publisher.html:31
-#, fuzzy
 msgid "Sources"
-msgstr "데이터 원본"
+msgstr "원본"
 
 #: publishers/templates/publishers/list.html:57
 #: publishers/templates/publishers/publisher.html:32
@@ -1525,9 +1522,8 @@ msgid "Change open access status"
 msgstr ""
 
 #: publishers/templates/publishers/publisher.html:72
-#, fuzzy
 msgid "Green open access summary"
-msgstr "그린 오픈 액세스"
+msgstr "그린 오픈 액세스 요약"
 
 #: publishers/templates/publishers/publisher.html:74
 #, python-format
@@ -1618,7 +1614,7 @@ msgstr ""
 
 #: upload/templates/upload/widget.html:47
 msgid "Choose another file"
-msgstr ""
+msgstr "다른 파일 선택하기"
 
 #: upload/views.py:133
 msgid "Invalid PDF file."
@@ -2035,7 +2031,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:111
 msgid "HAL"
-msgstr ""
+msgstr "HAL"
 
 #: vinaigrette-deleteme.py:112
 msgid "HAL is a  multidisciplinary open archive, sustained by the French Research Ministry."
@@ -2054,9 +2050,8 @@ msgid "Try any author name"
 msgstr ""
 
 #: website/templates/403.html:6 website/templates/403.html:10
-#, fuzzy
 msgid "Access denied"
-msgstr "PDF로의 접근이 거부되었습니다."
+msgstr "접근이 거부되었습니다"
 
 #: website/templates/403.html:13
 #, fuzzy, python-format
@@ -2073,9 +2068,8 @@ msgid "The page you requested could not be found. <a href=\"%(index)s\">Go back 
 msgstr "인증을 실패했습니다.<a href=\"/\">로그인 페이지로 돌아갑니다.</a>"
 
 #: website/templates/500.html:6 website/templates/500.html:10
-#, fuzzy
 msgid "Internal server error"
-msgstr "내부 오류"
+msgstr "내부 서버 오류"
 
 #: website/templates/500.html:13
 #, python-format
@@ -2137,9 +2131,8 @@ msgid "Who runs dissem.in?"
 msgstr "dissem.in의 운영자는 누구입니까?"
 
 #: website/templates/dissemin/faq.html:28
-#, fuzzy
 msgid "Can I create a profile on dissem.in?"
-msgstr "dissem.in에 제 프로필을 만들 수 있나요?"
+msgstr "dissem.in에 프로필을 만들 수 있나요?"
 
 #: website/templates/dissemin/faq.html:30
 msgid "Policies and Full-text Availability"
@@ -2147,7 +2140,7 @@ msgstr ""
 
 #: website/templates/dissemin/faq.html:31
 msgid "What do our policy classes mean?"
-msgstr ""
+msgstr "우리의 정책 클래스는 어떤 의미를 가지나고요?"
 
 #: website/templates/dissemin/faq.html:32
 msgid "When is a paper considered available?"
@@ -2304,15 +2297,15 @@ msgstr ""
 
 #: website/templates/dissemin/faq.html:281
 msgid "We have the following five policy classes:"
-msgstr ""
+msgstr "우리는 다음의 5가지 정책이 있습니다."
 
 #: website/templates/dissemin/faq.html:285
 msgid "Class"
-msgstr ""
+msgstr "클래스"
 
 #: website/templates/dissemin/faq.html:286
 msgid "Description"
-msgstr ""
+msgstr "설명"
 
 #: website/templates/dissemin/faq.html:295
 msgid "<strong>Open access:</strong><br /> The full text is made freely available by the publisher (in a fully open access or hybrid journal)."
@@ -2328,7 +2321,7 @@ msgstr ""
 
 #: website/templates/dissemin/faq.html:314
 msgid "Pre/post prints allowed but full text unavailable"
-msgstr ""
+msgstr "미리보기, 나중에 보기는 허락되지만, 전체 텍스트는 보여드릴 수 없습니다."
 
 #: website/templates/dissemin/faq.html:317
 msgid "<strong>Pre/post prints allowed but full text unavailable:</strong><br /> The full text could be made available in a repository (as above) according to the publishing policy. We encourage their authors to do so."
@@ -2637,7 +2630,7 @@ msgstr ""
 
 #: website/templates/dissemin/start_page.html:131
 msgid "Network of Partners"
-msgstr ""
+msgstr "파트너의 네트워크"
 
 #: website/templates/dissemin/start_page.html:134
 msgid "Partners"
@@ -2753,9 +2746,8 @@ msgid "My profile"
 msgstr "내 프로필"
 
 #: website/templates/navbar.html:35
-#, fuzzy
 msgid "My to-do list"
-msgstr "할 일 목록"
+msgstr "내 할 일 목록"
 
 #: website/templates/navbar.html:36
 msgid "Logout"

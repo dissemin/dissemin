@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 #
 # Author: Abijeet Patro
+# Author: Bdijkstra
 # Author: Becks
 # Author: Duckson32
 # Author: Elroy
@@ -17,7 +18,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-18 09:51+0100\n"
-"PO-Revision-Date: 2019-12-19 14:06:27+0000\n"
+"PO-Revision-Date: 2019-12-23 14:46:34+0000\n"
 "Language: nl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1516,7 +1517,6 @@ msgstr[0] "(%(num_total)s document)"
 msgstr[1] "(%(num_total)s documenten)"
 
 #: publishers/templates/publishers/list.html:96
-#, fuzzy
 msgid "No publishers found"
 msgstr "Geen uitgever gevonden."
 

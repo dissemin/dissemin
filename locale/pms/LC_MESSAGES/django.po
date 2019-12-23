@@ -13,7 +13,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-18 09:51+0100\n"
-"PO-Revision-Date: 2019-12-19 14:06:28+0000\n"
+"PO-Revision-Date: 2019-12-23 14:46:34+0000\n"
 "Language: pms\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2322,7 +2322,7 @@ msgstr "Régole sconossùe"
 
 #: website/templates/dissemin/faq.html:328
 msgid "<strong>Policy unknown:</strong><br /> The full text is not available and dissem.in could not evaluate if the publishers policy allows making the full text freely available."
-msgstr ""
+msgstr "<strong>Régole sconossùe:</strong><br /> Ël test complet a l'é nen disponìbil e dissem.in a l'ha nen podù valuté si le ca editris a përmëtto ëd rende ël test complet disponìbil liberaman."
 
 #: website/templates/dissemin/faq.html:336
 msgid "Pre/post prints forbidden"
@@ -2392,9 +2392,8 @@ msgid "If the error is not present in any of the sources and you believe that Di
 msgstr "Si l'eror a l'é present an gnun-a dle sorgiss e a chërd che Dissemin a peula avèj antroduvù ël problema, për piasì ch'a arpòrta l'<a href=\"https://github.com/dissemin/dissemin/issues\">eror</a> con ij detaj dël problema, o ch'a manda un mëssagi a <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. Ch'a ten-a da ment che a peul ancor nen arzòlve ël problema daspërchiel, bele che nojàutri i speroma a la longa ëd dësvlupé un sistema për përmëtte ai nòstri utent ëd modifiché daspërlor ij detaj dij sò artìcoj."
 
 #: website/templates/dissemin/faq.html:438
-#, fuzzy
 msgid "First, note that Dissemin does not account for copies of articles that are only available on a personal homepage or a similar website. This is deliberate, because we believe that <a href=\"#repositoriesRock\">articles should be hosted in repositories</a>."
-msgstr "Ch'a nòta, për ancaminé, che Dissemin a pija nen an considerassion le còpie d'artìcoj che a son mach disponìbij an s'na pàgina përsonal o un sit similar. Sòn a l'é fàit a pòsta, përchè i chërdoma che <a href=\"#repositories-rock\">j'artìcoj a dovrìo esse goernà an dij depòsit</a>."
+msgstr "Ch'a nòta, për ancaminé, che Dissemin a pija nen an considerassion le còpie d'artìcoj che a son mach disponìbij an s'na pàgina përsonal o un sit similar. Sòn a l'é fàit a pòsta, përchè i chërdoma che <a href=\"#repositoriesRock\">j'artìcoj a dovrìo esse goernà an dij depòsit</a>."
 
 #: website/templates/dissemin/faq.html:443
 msgid "Second, at the moment, Dissemin only supports repositories with a crawlable API that follows the <a href=\"https://www.openarchives.org/OAI/openarchivesprotocol.html\">OAI-PMH protocol</a>, and is <a href=\"https://www.base-search.net/about/en/suggest.php\">registered</a> in <a href=\"https://www.base-search.net/\">BASE</a>. We have a <a href=\"https://github.com/dissemin/croawl\">long-term project</a> to support more repositories by crawling them, but for the moment, we do not have the resources to support repositories not covered by BASE. Hence, if you are a user of a repository and would like it to be supported by Dissemin, please contact the repository administrator and suggest them to implement OAI-PMH support and to <a href=\"https://www.base-search.net/about/en/suggest.php\">register</a> their repository in BASE."
@@ -2437,9 +2436,9 @@ msgid "You can also add publications to your profile <em>on Dissemin</em>, by cl
 msgstr "A peul ëdcò gionté dle publicassion a sò profil <em>su Dissemin</em>, an ësgnacand an sël boton «Anclude su mè profil» ant j'arzultà d'arserca su Dissemin. (Ës boton a l'é visìbil mach cand a l'é ant ël sistema, davzin a j'artìcoj che Dissemin a pensa che chiel a l'ha scrivù.) A peul ëdcò esclude parèj d'artìcoj da sò profil. Ch'a ten-a da ment che se modìfiche a son locaj su Dissemin e a son <em>nen</em> esportà su sò profil ORCID, përchè ORCID a l'ha pa d'API lìber ch'a përmëtta d'esporteje."
 
 #: website/templates/dissemin/faq.html:512
-#, fuzzy, python-format
+#, python-format
 msgid "If you change some details in your ORCID profile (name, homepage, etc.), the changes will not automatically be picked up in your profile on Dissemin. To update your profile on Dissemin accordingly, once you have logged in to Dissemin, you can go to your <a href=\"%(profile_url)s\">profile page</a> and click \"Refresh publications\"."
-msgstr "Si chiel a modìfica chèich detaj an sò profil ORCID (nòm, pàgina përsonal e via fòrt), se modìfiche a saran nen arcuperà an automàtich an sò profil su Dissemin. Për agiorné sò profil su Dissemin, na vira ch'a l'é intraje, a peul andé su soa <a href=\"/my-profile\">pàgina ëd profil</a> e sgnaché su \"Rinfrësché le publicassion\"."
+msgstr "Si chiel a modìfica chèich detaj an sò profil ORCID (nòm, pàgina përsonal e via fòrt), se modìfiche a saran nen arcuperà an automàtich an sò profil su Dissemin. Për agiorné sò profil su Dissemin, na vira ch'a l'é intraje, a peul andé su soa <a href=\"%(profile_url)s\">pàgina ëd profil</a> e sgnaché su «Rinfrësché le publicassion»."
 
 #: website/templates/dissemin/faq.html:526
 #, python-format
@@ -2475,14 +2474,12 @@ msgid "<a href=\"https://association.dissem.in/#dons\">Donations are accepted</a
 msgstr "<a href=\"https://association.dissem.in/#dons\">Le donassion a son acetà</a>."
 
 #: website/templates/dissemin/faq.html:572
-#, fuzzy
 msgid "The source code is available <a href=\"https://github.com/dissemin/dissemin\">on GitHub</a>."
-msgstr "Ël còdes sorgiss a l'é disponìbil <a href=\"https://github.com/wetneb/dissemin\">su GitHub</a>."
+msgstr "Ël còdes sorgiss a l'é disponìbil <a href=\"https://github.com/dissemin/dissemin\">su GitHub</a>."
 
 #: website/templates/dissemin/faq.html:579
-#, fuzzy
 msgid "Yes! We even have <a href=\"https://dissemin.readthedocs.io/en/latest/api.html\">an API</a>. If it does not suit your needs, please don't hesitate to get in touch by writing to <a href=\"mailto:hello@dissem.in\">hello@dissem.in</a>."
-msgstr "Bò! I l'oma ëdcò <a href=\"https://dev.dissem.in/api.html\">n'API</a>. S'a fà nen për chiel, ch'as gena nen a contatene an ëscrivend-ne a <a href=\"mailto:hello@dissem.in\">hello@dissem.in</a>"
+msgstr "Bò! I l'oma ëdcò <a href=\"https://dissemin.readthedocs.io/en/latest/api.html\">n'API</a>. S'a fà nen për chiel, ch'as gena nen a contatene an ëscrivend-ne a <a href=\"mailto:hello@dissem.in\">hello@dissem.in</a>."
 
 #: website/templates/dissemin/faq.html:586
 msgid "Yes! See <a href=\"https://association.dissem.in/#logos\">here</a> for links to our logos and for explanations about how you can reuse them."
@@ -2494,9 +2491,8 @@ msgid "Sign in"
 msgstr "Rintré ant ël sistema"
 
 #: website/templates/dissemin/login.html:15
-#, fuzzy
 msgid "Dissemin uses ORCID to authenticate its users. ORCID is an independent non-profit effort to provide an open registry of unique researcher identifiers. It also offers open services to link research activities and organizations to these identifiers. Learn more at <a href=\"https://orcid.org\" target=\"_blank\">orcid.org</a>."
-msgstr "Dissemin a deuvra ORCID për autentiché sò utent. ORCID a l'é në sfòrs indipendent sensa but lucrativ për fornì n'argistr duvert d'identificativ ùnich për j'arsercador. A eufr ëdcò dij servissi duvert për lijé j'atività e j'organisassion d'arserca a costi identificativ. Për savèjne 'd pi, <a href=\"https://orcid.org\">orcid.org</a>."
+msgstr "Dissemin a deuvra ORCID për autentiché sò utent. ORCID a l'é në sfòrs indipendent sensa but lucrativ për fornì n'argistr duvert d'identificativ ùnich për j'arsercador. A eufr ëdcò dij servissi duvert për lijé j'atività e j'organisassion d'arserca a costi identificativ. Për savèjne 'd pi, <a href=\"https://orcid.org\"target=\"_blank\">orcid.org</a>."
 
 #: website/templates/dissemin/login.html:28
 #: website/templates/dissemin/login.html:34
@@ -2513,7 +2509,6 @@ msgid "Sign up"
 msgstr "Anscrission"
 
 #: website/templates/dissemin/login.html:41
-#, fuzzy
 msgid "Not an ORCID user yet? Create an account, it is free and takes just a few seconds."
 msgstr "Ancor nen n'utent d'ORCID? Ch'a crea un cont, a l'é a gràtis e a-i va mach chèich second."
 
@@ -2531,15 +2526,15 @@ msgstr "<a href=\"https://www.crossref.org\">CrossRef.org</a> për j'artìcoj ac
 
 #: website/templates/dissemin/sources.html:17
 msgid "<a href=\"https://www.base-search.net\">BASE (Bielefeld Academic Search Engine)</a> for other papers, including preprints"
-msgstr ""
+msgstr "<a href=\"https://www.base-search.net\">BASE (Bielefeld Academic Search Engine)</a> për j'àutri artìcoj, comprèise le prepublicassion"
 
 #: website/templates/dissemin/sources.html:20
 msgid "<a href=\"https://www.sherpa.ac.uk/romeo/\">SHERPA/RoMEO</a> for publisher policies"
-msgstr ""
+msgstr "<a href=\"https://www.sherpa.ac.uk/romeo/\">SHERPA/RoMEO</a> për le régole dle ca editris"
 
 #: website/templates/dissemin/sources.html:23
 msgid "<a href=\"https://www.zotero.org/\">Zotero</a> for metadata associated to DOIs"
-msgstr ""
+msgstr "<a href=\"https://www.zotero.org/\">Zotero</a> për ij metadàit associà a DOI"
 
 #: website/templates/dissemin/start_page.html:9
 msgid "Home"
@@ -2615,7 +2610,7 @@ msgstr "A peul feje dl'areclam a Dissemin ai sò arsercador e mostreje coma a l'
 
 #: website/templates/dissemin/start_page.html:131
 msgid "Network of Partners"
-msgstr ""
+msgstr "Rej ëd cambrada"
 
 #: website/templates/dissemin/start_page.html:134
 msgid "Partners"
@@ -2748,7 +2743,7 @@ msgid "Authentication error"
 msgstr "Eror d'autentificassion"
 
 #: website/templates/socialaccount/authentication_error.html:15
-#, fuzzy, python-format
+#, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
-msgstr "L'autentificassion a l'ha falì. <a href=\"/\">Torné a la pàgina d'intrada.</a>"
+msgstr "L'autentificassion a l'ha falì. <a href=\"%(account-login)s\">Torné a la pàgina d'intrada.</a>"
 

@@ -16,7 +16,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-18 09:51+0100\n"
-"PO-Revision-Date: 2019-12-19 14:06:31+0000\n"
+"PO-Revision-Date: 2019-12-23 14:46:35+0000\n"
 "Language: sv\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -977,7 +977,7 @@ msgstr ""
 
 #: papers/templates/papers/messages.html:32
 msgid "{{ title }} was ignored for the following reason:"
-msgstr ""
+msgstr "{{ title }} ignorerades av följande anledning:"
 
 #: papers/templates/papers/messages.html:36
 msgid "A paper was ignored, because is has no title."
@@ -996,9 +996,9 @@ msgid "Published in %(year)s by"
 msgstr "Publicerad i"
 
 #: papers/templates/papers/paper.html:55
-#, fuzzy, python-format
+#, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
-msgstr "\n            och <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s andra författare</a>\n            "
+msgstr "och <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s andra författare</a>"
 
 #: papers/templates/papers/paper.html:61
 #, fuzzy
@@ -1330,7 +1330,7 @@ msgstr "Öppen åtkomst"
 
 #: papers/templatetags/statuses.py:111
 msgid "Red circle"
-msgstr ""
+msgstr "Röd cirkel"
 
 #: papers/templatetags/statuses.py:112
 msgid "Orange circle"
@@ -1541,7 +1541,7 @@ msgstr "Rapportera alla fel till dem"
 
 #: publishers/templates/publishers/publisher.html:51
 msgid "For superusers"
-msgstr ""
+msgstr "För avancerade användare"
 
 #: publishers/templates/publishers/publisher.html:54
 msgid "Change open access status"
@@ -2134,9 +2134,9 @@ msgid "Internal server error"
 msgstr "Internt fel"
 
 #: website/templates/500.html:13
-#, fuzzy, python-format
+#, python-format
 msgid "Your request triggered an internal server error. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "\n            Din begäran utlöste ett internt fel. <a href=\"/\">Gå tillbaka till hemsidan.</a>\n           "
+msgstr "Din begäran utlöste ett internt serverfel. <a href=\"%(index)s\">Gå tillbaka till hemsidan.</a>"
 
 #: website/templates/admin/base_site.html:5
 #: website/templates/admin/base_site.html:8
@@ -2154,7 +2154,7 @@ msgstr ""
 
 #: website/templates/dissemin/error.html:14
 msgid "Go back to the start page."
-msgstr ""
+msgstr "Gå tillbaka till startsidan."
 
 #: website/templates/dissemin/faq.html:7 website/templates/dissemin/faq.html:56
 msgid "Frequently Asked Questions"
@@ -2359,7 +2359,7 @@ msgstr ""
 
 #: website/templates/dissemin/faq.html:281
 msgid "We have the following five policy classes:"
-msgstr ""
+msgstr "Vi har följande fem policyklasser:"
 
 #: website/templates/dissemin/faq.html:285
 msgid "Class"
@@ -2367,7 +2367,7 @@ msgstr "Klass"
 
 #: website/templates/dissemin/faq.html:286
 msgid "Description"
-msgstr ""
+msgstr "Beskrivning"
 
 #: website/templates/dissemin/faq.html:295
 msgid "<strong>Open access:</strong><br /> The full text is made freely available by the publisher (in a fully open access or hybrid journal)."

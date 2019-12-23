@@ -15,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-18 09:51+0100\n"
-"PO-Revision-Date: 2019-12-19 14:06:30+0000\n"
+"PO-Revision-Date: 2019-12-23 14:46:35+0000\n"
 "Language: sr-Cyrl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1704,18 +1704,16 @@ msgid "Metaphysics"
 msgstr "Метафизика"
 
 #: vinaigrette-deleteme.py:13
-#, fuzzy
 msgid "Epistemology"
-msgstr "Биологија"
+msgstr "Епистемологија"
 
 #: vinaigrette-deleteme.py:14
 msgid "Parapsychology & occultism"
 msgstr ""
 
 #: vinaigrette-deleteme.py:15
-#, fuzzy
 msgid "Philosophical schools of thought"
-msgstr "Филозофска логика"
+msgstr "Филозофске школе мисли"
 
 #: vinaigrette-deleteme.py:17
 msgid "Philosophical logic"
@@ -1762,9 +1760,8 @@ msgid "Christian organization, social work & worship"
 msgstr ""
 
 #: vinaigrette-deleteme.py:28
-#, fuzzy
 msgid "History of Christianity"
-msgstr "Историја Азије"
+msgstr "Историја хришћанства"
 
 #: vinaigrette-deleteme.py:29
 msgid "Christian denominations"
@@ -1983,42 +1980,36 @@ msgid "Geography & travel"
 msgstr "Географија и туризам"
 
 #: vinaigrette-deleteme.py:93
-#, fuzzy
 msgid "Biography & genealogy"
-msgstr "Географија и туризам"
+msgstr "Биографија и генеалогија"
 
 #: vinaigrette-deleteme.py:94
 msgid "History of ancient world (to ca. 499)"
 msgstr ""
 
 #: vinaigrette-deleteme.py:95
-#, fuzzy
 msgid "History of Europe"
-msgstr "Историја Азије"
+msgstr "Историја Европе"
 
 #: vinaigrette-deleteme.py:96
 msgid "History of Asia"
 msgstr "Историја Азије"
 
 #: vinaigrette-deleteme.py:97
-#, fuzzy
 msgid "History of Africa"
-msgstr "Историја Азије"
+msgstr "Историја Африке"
 
 #: vinaigrette-deleteme.py:98
-#, fuzzy
 msgid "History of North America"
-msgstr "Историја Азије"
+msgstr "Историја Северне Америке"
 
 #: vinaigrette-deleteme.py:99
-#, fuzzy
 msgid "History of South America"
-msgstr "Историја Азије"
+msgstr "Историја Јужне Америке"
 
 #: vinaigrette-deleteme.py:100
-#, fuzzy
 msgid "History of other areas"
-msgstr "Историја Азије"
+msgstr "Историја других области"
 
 #: vinaigrette-deleteme.py:101
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
