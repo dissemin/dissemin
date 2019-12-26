@@ -8,13 +8,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-12 10:33+0100\n"
-"PO-Revision-Date: 2019-10-14 15:19:29+0000\n"
+"PO-Revision-Date: 2019-12-26 11:32:37+0000\n"
 "Language: pms\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-10-01 08:31:19+0000\n"
+"X-POT-Import-Date: 2019-12-12 14:04:05+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -27,116 +28,78 @@ msgstr[1] "%s artìcoj trovà"
 
 #: website/static/js/dissemin.js:293
 msgid "Claiming..."
-msgstr ""
+msgstr "Anclusion an cors..."
 
 #: website/static/js/dissemin.js:297
 msgid "Unclaiming..."
-msgstr ""
+msgstr "Esclusion an cors..."
 
 #: website/static/js/dissemin.js:313
 msgid "Claiming failed!"
-msgstr ""
+msgstr "Anclusion falìa!"
 
 #: website/static/js/dissemin.js:316
 msgid "Unclaiming failed!"
-msgstr ""
+msgstr "Esclusion falìa!"
 
 #: website/static/js/dissemin.js:321
 msgid "Exclude from my profile"
-msgstr ""
+msgstr "Gavé da mè profil"
 
 #: website/static/js/dissemin.js:325
 msgid "Include in my profile"
-msgstr ""
+msgstr "Buté an mè profil"
 
 #: website/static/js/dissemin.js:350
-#, fuzzy
-#| msgid "Adding to todolist"
 msgid "Adding to to-do list"
 msgstr "Gionté a la lista dle còse da fé"
 
 #: website/static/js/dissemin.js:354
-#, fuzzy
-#| msgid "Removing from todolist"
 msgid "Removing from to-do list"
 msgstr "Gavé da la lista dle còse da fé"
 
 #: website/static/js/dissemin.js:600
 msgid "Preview of uploaded file"
-msgstr ""
+msgstr "Previsualisassion ëd l'archivi carià"
 
 #: website/static/js/dissemin.js:603
 msgid "Pages: "
-msgstr ""
+msgstr "Pàgine: "
 
 #: website/static/js/dissemin.js:604
 msgid "Size: "
-msgstr ""
+msgstr "Taja: "
 
 #: website/static/js/dissemin.js:619
 msgid "While uploading %(file)s the following error occured:"
-msgstr ""
+msgstr "Durant ëd cariament ëd %(file)s, a l'é rivaje cost eror-sì:"
 
 #: website/static/js/dissemin.js:628 website/static/js/dissemin.js:683
 #: website/static/js/dissemin.js:689
 msgid "Unknown error"
-msgstr ""
+msgstr "Eror dësconossù"
 
 #: website/static/js/dissemin.js:673
 msgid "While fetching file from %(url)s the following error occured:"
-msgstr ""
+msgstr "Durant l'arcuperassion ëd l'archivi da %(url)s a l'é suceduje cost eror-sì:"
 
 #: website/static/js/dissemin.js:760
 msgid "Sorry, we could not fill this for you."
-msgstr ""
+msgstr "An dëspias, i l'oma nen podù compilé sòn për chiel."
 
 #: website/static/js/dissemin.js:761
 msgid "Trying to fill this field automatically for you..."
-msgstr ""
+msgstr "I provoma a compile 's camp-sì për chiel an automàtich..."
 
 #: website/static/js/dissemin.js:795
 msgid "You have not selected a file for upload."
-msgstr ""
+msgstr "A l'ha selessionà gnun archivi da carié."
 
 #: website/static/js/dissemin.js:822
 msgid "Dissemin encountered an error, please try again later."
-msgstr ""
+msgstr "Dissemin a l'ha rancontrà n'eror, për piasì ch'a preuva torna pi tard."
 
 #: website/static/js/moment.min.js:1
 msgid ": "
-msgstr ""
+msgstr ": "
 
-#~ msgid "Do not show this message anymore"
-#~ msgstr "Pi nen ësmon-e 's mëssagi"
-
-#~ msgid "No author"
-#~ msgstr "Gnun autor"
-
-#~ msgid "No title"
-#~ msgstr "Gnun tìtol"
-
-#~ msgid "Invalid publication date"
-#~ msgstr "Dàita ëd publicassion nen bon-a"
-
-#~ msgid "No publication date"
-#~ msgstr "Gnun-a dàita ëd publicassion"
-
-#~ msgid "Paper is invalid"
-#~ msgstr "L'artìcol a l'é nen vàlid"
-
-#~ msgid "We ignored %(count)s paper from your ORCiD profile."
-#~ msgid_plural "We ignored %(count)s papers from your ORCiD profile."
-#~ msgstr[0] "I l'oma ignorà %(count)s artìcol da sò profil ORCiD."
-#~ msgstr[1] "I l'oma ignorà %(count)s artìcoj da sò profil ORCiD."
-
-#~ msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
-#~ msgstr "«%(name)s» a l'é stàit ignorà për costa rason: %(reason)s"
-
-#~ msgid "A paper was ignored, because it has no name"
-#~ msgstr "N'artìcol a l'é stàit ignorà, përchè a l'ha gnun tìtol"
-
-#~ msgid "Show more information"
-#~ msgstr "Smon-e pi d'anformassion"
-
-#~ msgid "Show less information"
-#~ msgstr "Smon-e men anformassion"

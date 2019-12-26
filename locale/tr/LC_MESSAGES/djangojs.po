@@ -10,13 +10,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-12 10:33+0100\n"
-"PO-Revision-Date: 2019-12-05 14:19:06+0000\n"
+"PO-Revision-Date: 2019-12-26 11:32:38+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-10-01 08:31:19+0000\n"
+"X-POT-Import-Date: 2019-12-12 14:04:05+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
@@ -28,115 +29,80 @@ msgstr[0] "%s kağıt bulundu"
 
 #: website/static/js/dissemin.js:293
 msgid "Claiming..."
-msgstr ""
+msgstr "Talep ediliyor..."
 
 #: website/static/js/dissemin.js:297
 msgid "Unclaiming..."
-msgstr ""
+msgstr "Talebin iptal ediliyor..."
 
 #: website/static/js/dissemin.js:313
 msgid "Claiming failed!"
-msgstr ""
+msgstr "Talep başarısız oldu!"
 
 #: website/static/js/dissemin.js:316
 msgid "Unclaiming failed!"
-msgstr ""
+msgstr "Talep iptali başarısız oldu!"
 
 #: website/static/js/dissemin.js:321
 msgid "Exclude from my profile"
-msgstr ""
+msgstr "Profilimden hariç tut"
 
 #: website/static/js/dissemin.js:325
 msgid "Include in my profile"
-msgstr ""
+msgstr "Profilime dahil tut"
 
 #: website/static/js/dissemin.js:350
 #, fuzzy
-#| msgid "Adding to todolist"
 msgid "Adding to to-do list"
 msgstr "Yapılacaklar listesine ekleniyor"
 
 #: website/static/js/dissemin.js:354
 #, fuzzy
-#| msgid "Removing from todolist"
 msgid "Removing from to-do list"
 msgstr "Yapılacaklar listesinden kaldırılıyor"
 
 #: website/static/js/dissemin.js:600
 msgid "Preview of uploaded file"
-msgstr ""
+msgstr "Yüklenen dosyanın önizlemesi"
 
 #: website/static/js/dissemin.js:603
 msgid "Pages: "
-msgstr ""
+msgstr "Sayfalar: "
 
 #: website/static/js/dissemin.js:604
 msgid "Size: "
-msgstr ""
+msgstr "Boyut: "
 
 #: website/static/js/dissemin.js:619
 msgid "While uploading %(file)s the following error occured:"
-msgstr ""
+msgstr "%(file)s yüklenirken aşağıdaki hata oluştu:"
 
 #: website/static/js/dissemin.js:628 website/static/js/dissemin.js:683
 #: website/static/js/dissemin.js:689
 msgid "Unknown error"
-msgstr ""
+msgstr "Bilinmeyen hata"
 
 #: website/static/js/dissemin.js:673
 msgid "While fetching file from %(url)s the following error occured:"
-msgstr ""
+msgstr "%(url)s dosyasından dosya getirilirken aşağıdaki hata oluştu:"
 
 #: website/static/js/dissemin.js:760
 msgid "Sorry, we could not fill this for you."
-msgstr ""
+msgstr "Üzgünüz, bunu sizin için dolduramadık."
 
 #: website/static/js/dissemin.js:761
 msgid "Trying to fill this field automatically for you..."
-msgstr ""
+msgstr "Bu alanı sizin için otomatik olarak doldurmaya çalışıyor..."
 
 #: website/static/js/dissemin.js:795
 msgid "You have not selected a file for upload."
-msgstr ""
+msgstr "Yüklemek için bir dosya seçmediniz."
 
 #: website/static/js/dissemin.js:822
 msgid "Dissemin encountered an error, please try again later."
-msgstr ""
+msgstr "Dissemin bir hatayla karşılaştı, lütfen daha sonra tekrar deneyin."
 
 #: website/static/js/moment.min.js:1
 msgid ": "
-msgstr ""
+msgstr ": "
 
-#~ msgid "Do not show this message anymore"
-#~ msgstr "Bu mesajı artık gösterme"
-
-#~ msgid "No author"
-#~ msgstr "Yazar yok"
-
-#~ msgid "No title"
-#~ msgstr "Başlık yok"
-
-#~ msgid "Invalid publication date"
-#~ msgstr "Geçersiz yayın tarihi"
-
-#~ msgid "No publication date"
-#~ msgstr "Yayın tarihi yok"
-
-#~ msgid "Paper is invalid"
-#~ msgstr "Kağıt geçersiz"
-
-#~ msgid "We ignored %(count)s paper from your ORCiD profile."
-#~ msgid_plural "We ignored %(count)s papers from your ORCiD profile."
-#~ msgstr[0] "ORCiD profilinizden %(count)s kağıdını görmezden geldik."
-
-#~ msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
-#~ msgstr "\"%(name)s\" aşağıdaki nedenle göz ardı edildi: %(reason)s"
-
-#~ msgid "A paper was ignored, because it has no name"
-#~ msgstr "Bir kağıt görmezden gelindi, çünkü adı yok."
-
-#~ msgid "Show more information"
-#~ msgstr "Daha fazla bilgi göster"
-
-#~ msgid "Show less information"
-#~ msgstr "Daha az bilgi göster"

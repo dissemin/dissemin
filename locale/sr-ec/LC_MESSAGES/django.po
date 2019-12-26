@@ -15,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-18 09:51+0100\n"
-"PO-Revision-Date: 2019-12-23 14:46:35+0000\n"
+"PO-Revision-Date: 2019-12-26 11:32:41+0000\n"
 "Language: sr-Cyrl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -985,10 +985,10 @@ msgid "%(doctype)s published in %(year)s by"
 msgstr "%(doctype)s је објављен %(year)s; аутор(и):"
 
 #: papers/templates/papers/paper.html:45
-#, fuzzy, python-format
+#, python-format
 msgctxt "as in: _Published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "Published in %(year)s by"
-msgstr "Објављено у"
+msgstr "Објављено у %(year)s —"
 
 #: papers/templates/papers/paper.html:55
 #, python-format
@@ -1832,9 +1832,8 @@ msgid "Other languages"
 msgstr "Остали језици"
 
 #: vinaigrette-deleteme.py:51
-#, fuzzy
 msgid "Science"
-msgstr "Природне науке"
+msgstr "Наука"
 
 #: vinaigrette-deleteme.py:53
 msgid "Astronomy"
@@ -2016,9 +2015,8 @@ msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
 msgstr ""
 
 #: vinaigrette-deleteme.py:102
-#, fuzzy
 msgid "Creative Commons Attribution 4.0 International (CC BY 4.0)"
-msgstr "Ауторство Creative Commons (CC-BY)"
+msgstr "Кријејтив комонс ауторство 4.0 међународна (CC BY 4.0)"
 
 #: vinaigrette-deleteme.py:103
 #, fuzzy
