@@ -12,7 +12,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-18 09:51+0100\n"
-"PO-Revision-Date: 2019-12-23 14:46:33+0000\n"
+"PO-Revision-Date: 2019-12-31 06:25:07+0000\n"
 "Language: lb\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1405,7 +1405,7 @@ msgstr "publizéiert vun "
 
 #: publishers/forms.py:38
 msgid "Order"
-msgstr ""
+msgstr "Reiefolleg"
 
 #: publishers/models.py:39 website/templates/dissemin/faq.html:292
 msgid "Open access"
@@ -1616,7 +1616,7 @@ msgstr ""
 
 #: upload/templates/upload/widget.html:15
 msgid "Or enter a URL:"
-msgstr ""
+msgstr "Oder eng URL aginn:"
 
 #: upload/templates/upload/widget.html:19
 msgid "Upload from URL"

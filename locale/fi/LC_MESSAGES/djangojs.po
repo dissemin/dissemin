@@ -9,13 +9,14 @@
 #
 msgid ""
 msgstr ""
+""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-12 10:33+0100\n"
-"PO-Revision-Date: 2019-10-14 15:19:18+0000\n"
+"PO-Revision-Date: 2019-12-31 06:25:05+0000\n"
 "Language: fi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-POT-Import-Date: 2019-10-01 08:31:19+0000\n"
+"X-POT-Import-Date: 2019-12-12 14:04:05+0000\n"
 "X-Generator: MediaWiki 1.35.0-alpha; Translate 2019-04-24\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -64,11 +65,11 @@ msgstr ""
 
 #: website/static/js/dissemin.js:603
 msgid "Pages: "
-msgstr ""
+msgstr "Sivut: "
 
 #: website/static/js/dissemin.js:604
 msgid "Size: "
-msgstr ""
+msgstr "Koko: "
 
 #: website/static/js/dissemin.js:619
 msgid "While uploading %(file)s the following error occured:"
@@ -77,7 +78,7 @@ msgstr ""
 #: website/static/js/dissemin.js:628 website/static/js/dissemin.js:683
 #: website/static/js/dissemin.js:689
 msgid "Unknown error"
-msgstr ""
+msgstr "Tuntematon virhe"
 
 #: website/static/js/dissemin.js:673
 msgid "While fetching file from %(url)s the following error occured:"
@@ -101,40 +102,5 @@ msgstr ""
 
 #: website/static/js/moment.min.js:1
 msgid ": "
-msgstr ""
+msgstr ": "
 
-#~ msgid "Do not show this message anymore"
-#~ msgstr "Älä näytä tätä viestiä uudelleen"
-
-#~ msgid "No author"
-#~ msgstr "Ei kirjoittajaa"
-
-#~ msgid "No title"
-#~ msgstr "Ei otsikkoa"
-
-#~ msgid "Invalid publication date"
-#~ msgstr "Virheellinen julkaisupäivä."
-
-#, fuzzy
-#~ msgid "No publication date"
-#~ msgstr "Virheellinen julkaisupäivä."
-
-#~ msgid "Paper is invalid"
-#~ msgstr "Asiakirja on kelvoton"
-
-#~ msgid "We ignored %(count)s paper from your ORCiD profile."
-#~ msgid_plural "We ignored %(count)s papers from your ORCiD profile."
-#~ msgstr[0] "Emme huomioineet %(count)s artikkelia ORCiD-profiilistasi."
-#~ msgstr[1] "Emme huomioineet %(count)s artikkelia ORCiD-profiilistasi."
-
-#~ msgid "\"%(name)s\" was ignored for the following reason: %(reason)s"
-#~ msgstr "\"%(name)s\" jätettiin huomiotta seuraavasta syystä: %(reason)s"
-
-#~ msgid "A paper was ignored, because it has no name"
-#~ msgstr "Asiakirjaa ei otettu huomioon, koska sillä ei ole nimeä"
-
-#~ msgid "Show more information"
-#~ msgstr "Näytä lisää tietoja"
-
-#~ msgid "Show less information"
-#~ msgstr "Näytä vähemmän tietoja"

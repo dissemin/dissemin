@@ -19,7 +19,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-18 09:51+0100\n"
-"PO-Revision-Date: 2019-12-23 14:46:32+0000\n"
+"PO-Revision-Date: 2019-12-31 06:25:06+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1051,7 +1051,7 @@ msgstr "y %(remaining_authors)s autores más"
 
 #: papers/templates/papers/paper_list.html:55
 msgid "from"
-msgstr ""
+msgstr "de"
 
 #: papers/templates/papers/paper_list.html:57
 #: papers/templates/papers/policies.html:17
@@ -1133,9 +1133,8 @@ msgid " %(first_name)s %(last_name)s uses ORCID."
 msgstr ""
 
 #: papers/templates/papers/researcher.html:38
-#, fuzzy
 msgid "Refresh Publications"
-msgstr "Publicaciones"
+msgstr "Actualizar publicaciones"
 
 #: papers/templates/papers/researcher.html:42
 msgid "Address:"
@@ -1335,7 +1334,7 @@ msgstr "Círculo blanco"
 
 #: papers/templatetags/statuses.py:114
 msgid "Question mark in circle"
-msgstr ""
+msgstr "Signo de interrogación rodeado por un círculo"
 
 #: papers/views.py:88
 msgid "Dissemin requires access to your ORCID name, which is marked as private in your ORCID profile."
@@ -2153,7 +2152,6 @@ msgid "Can I create a profile on dissem.in?"
 msgstr "¿Puedo crearme un perfil en dissem.in?"
 
 #: website/templates/dissemin/faq.html:30
-#, fuzzy
 msgid "Policies and Full-text Availability"
 msgstr "Normativas y disponibilidad de texto completo"
 
@@ -2507,9 +2505,8 @@ msgid "<a href=\"https://association.dissem.in/#dons\">Donations are accepted</a
 msgstr "<a href=\"https://association.dissem.in/#dons\">Se aceptan donativos</a>."
 
 #: website/templates/dissemin/faq.html:572
-#, fuzzy
 msgid "The source code is available <a href=\"https://github.com/dissemin/dissemin\">on GitHub</a>."
-msgstr "El código fuente está disponible <a href=\"https://github.com/wetneb/dissemin\">en GitHub</a>."
+msgstr "El código fuente está disponible <a href=\"https://github.com/dissemin/dissemin\">en GitHub</a>."
 
 #: website/templates/dissemin/faq.html:579
 #, fuzzy
@@ -2790,7 +2787,7 @@ msgid "Authentication error"
 msgstr "Error de autenticación"
 
 #: website/templates/socialaccount/authentication_error.html:15
-#, fuzzy, python-format
+#, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
-msgstr "\n            Falló la autenticación. <a href=\"/\">Volver a la página de acceso.</a>\n           "
+msgstr "Falló la autenticación. <a href=\"%(account-login)s\">Volver a la página de acceso.</a>"
 

@@ -15,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-18 09:51+0100\n"
-"PO-Revision-Date: 2019-12-19 14:06:23+0000\n"
+"PO-Revision-Date: 2019-12-31 06:25:06+0000\n"
 "Language: fi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,19 +24,16 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: autocomplete/views.py:81
-#, fuzzy
 msgid "Current institutions"
-msgstr "Instituutiot"
+msgstr "Nykyiset instituutiot"
 
 #: autocomplete/views.py:85
-#, fuzzy
 msgid "Unverified institutions"
-msgstr "Instituutiot"
+msgstr "Varmentamattomat laitokset"
 
 #: autocomplete/views.py:89
-#, fuzzy
 msgid "Obsolete institutions"
-msgstr "Instituutiot"
+msgstr "Vanhentuneet laitokset"
 
 #: deposit/forms.py:88
 msgid "Upload type"
@@ -305,7 +302,7 @@ msgstr "Odottaa julkaisemista"
 
 #: deposit/models.py:47
 msgid "Embargo"
-msgstr ""
+msgstr "Embargo"
 
 #: deposit/models.py:48
 msgid "Published"
@@ -451,7 +448,7 @@ msgstr "Tämä koodivaranto ei ole käytettävissä tälle asiakirjalle."
 
 #: deposit/sword/protocol.py:295
 msgid "Username or password not provided for this repository. Please contact the Dissemin team."
-msgstr ""
+msgstr "Käyttäjänimeä tai salasanaa ei ole annettu tälle koodivarannolle. Ota yhteyttä Dissemin-tiimiin."
 
 #: deposit/sword/protocol.py:320
 #, fuzzy
@@ -498,9 +495,8 @@ msgid "PDF URL"
 msgstr "PDF-URL"
 
 #: deposit/templates/deposit/deposits.html:134
-#, fuzzy
 msgid "Status:"
-msgstr "Tila"
+msgstr "Tila:"
 
 #: deposit/templates/deposit/deposits.html:145
 msgid "Letter of Declaration"
@@ -581,9 +577,8 @@ msgid "Repository:"
 msgstr "Koodivaranto:"
 
 #: deposit/templates/deposit/start.html:192
-#, fuzzy
 msgid "Metadata:"
-msgstr "Metatieto"
+msgstr "Metatieto:"
 
 #: deposit/templates/deposit/start.html:212
 #: papers/templates/papers/search_base.html:165
@@ -595,9 +590,8 @@ msgid "Submitting paper to repository"
 msgstr ""
 
 #: deposit/views.py:80
-#, fuzzy
 msgid "This repository is currently not enabled."
-msgstr "Tämä koodivaranto ei ole käytettävissä tälle asiakirjalle."
+msgstr "Tämä koodivaranto ei ole tällä hetkellä käytettävissä."
 
 #: deposit/views.py:86
 msgid "This repository is not available for this paper."
@@ -883,23 +877,20 @@ msgid "Advanced search"
 msgstr "Laajennettu haku"
 
 #: papers/templates/papers/advanced_search.html:20
-#, fuzzy
 msgid "Title"
-msgstr "otsikko"
+msgstr "Otsikko"
 
 #: papers/templates/papers/advanced_search.html:24
-#, fuzzy
 msgid "Authors"
-msgstr "Tekijöiden mukaan"
+msgstr "Tekijät"
 
 #: papers/templates/papers/advanced_search.html:26
 msgid "Search by names or ORCIDs. Separate with commas and prefix with <code>last:</code> to enforce last name search."
 msgstr ""
 
 #: papers/templates/papers/advanced_search.html:39
-#, fuzzy
 msgid "Document type"
-msgstr "Asiakirjatyypin mukaan"
+msgstr "Asiakirjan tyyppi"
 
 #: papers/templates/papers/advanced_search.html:60
 msgid "Fields for superusers"
@@ -953,7 +944,7 @@ msgstr[1] ""
 
 #: papers/templates/papers/messages.html:14
 msgid "Details:"
-msgstr ""
+msgstr "Tiedot:"
 
 #: papers/templates/papers/messages.html:21
 #, fuzzy
@@ -961,9 +952,8 @@ msgid "No author"
 msgstr "Tekijöiden mukaan"
 
 #: papers/templates/papers/messages.html:23
-#, fuzzy
 msgid "No title"
-msgstr "otsikko"
+msgstr "Ei otsikkoa"
 
 #: papers/templates/papers/messages.html:25
 #, fuzzy
@@ -988,21 +978,21 @@ msgid "A paper was ignored, because is has no title."
 msgstr ""
 
 #: papers/templates/papers/paper.html:39
-#, fuzzy, python-format
+#, python-format
 msgctxt "as in: _Journal article published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "%(doctype)s published in %(year)s by"
-msgstr "Julkaistu paikassa"
+msgstr "%(doctype)s julkaistu vuonna %(year)s julkaisijoinaan"
 
 #: papers/templates/papers/paper.html:45
-#, fuzzy, python-format
+#, python-format
 msgctxt "as in: _Published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "Published in %(year)s by"
-msgstr "Julkaistu paikassa"
+msgstr "Julkaistu vuonna %(year)s julkaisijoinaan"
 
 #: papers/templates/papers/paper.html:55
-#, fuzzy, python-format
+#, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
-msgstr "ja <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s muuta tekijää</a>"
+msgstr "ja <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s muuta tekijää.</a>"
 
 #: papers/templates/papers/paper.html:61
 #, fuzzy
@@ -1080,7 +1070,7 @@ msgstr "Sisällytä profiiliini"
 
 #: papers/templates/papers/paper_panel.html:10
 msgid "Published in"
-msgstr "Julkaistu paikassa"
+msgstr "Julkaistu palvelussa"
 
 #: papers/templates/papers/paper_panel.html:19
 msgid "Links"
@@ -1106,7 +1096,7 @@ msgstr ""
 #: papers/templates/papers/policies.html:70
 #: papers/templates/papers/policies.html:86
 msgid "Blue circle"
-msgstr ""
+msgstr "Sininen ympyrä"
 
 #: papers/templates/papers/policies.html:73
 msgid "Mark this publication for later upload."
@@ -1125,9 +1115,8 @@ msgid "Contact the authors to make this publication freely available. This is a 
 msgstr ""
 
 #: papers/templates/papers/policies.html:89
-#, fuzzy
 msgid "Contact authors"
-msgstr "Tekijöiden mukaan"
+msgstr "Ota yhteyttä tekijöihin"
 
 #: papers/templates/papers/policies.html:92
 #: website/templates/dissemin/tos.html:49
@@ -1144,7 +1133,6 @@ msgid " %(first_name)s %(last_name)s uses ORCID."
 msgstr ""
 
 #: papers/templates/papers/researcher.html:38
-#, fuzzy
 msgid "Refresh Publications"
 msgstr "Päivitä julkaisut"
 
@@ -1153,9 +1141,9 @@ msgid "Address:"
 msgstr "Osoite:"
 
 #: papers/templates/papers/researcher.html:51
-#, fuzzy, python-format
+#, python-format
 msgid "Missing publications? <a href=\"%(matching_papers_url)s\">Search for publications with a matching author name.</a>"
-msgstr "Puuttuvia julkaisuja? <a href=\"%(matching_papers_url)s\"> Hae julkaisuja vastaavan tekijän nimellä </a>"
+msgstr "Puuttuvia julkaisuja?<a href=\"%(matching_papers_url)s\">Hae julkaisuja vastaavan tekijän nimellä.</a>"
 
 #: papers/templates/papers/search.html:10
 #, python-format
@@ -1174,12 +1162,10 @@ msgid "Refine"
 msgstr ""
 
 #: papers/templates/papers/search_base.html:46
-#, fuzzy
 msgid "By title"
-msgstr "otsikko"
+msgstr "Otsikon mukaan"
 
 #: papers/templates/papers/search_base.html:55
-#, fuzzy
 msgid "By co-authors"
 msgstr "Tekijöiden mukaan"
 
@@ -1329,25 +1315,24 @@ msgid "policy unknown"
 msgstr "käytäntö tuntematon"
 
 #: papers/templatetags/statuses.py:110
-#, fuzzy
 msgid "Green circle"
-msgstr "Vihreä open access"
+msgstr "Vihreä ympyrä"
 
 #: papers/templatetags/statuses.py:111
 msgid "Red circle"
-msgstr ""
+msgstr "Punainen ympyrä"
 
 #: papers/templatetags/statuses.py:112
 msgid "Orange circle"
-msgstr ""
+msgstr "Oranssi ympyrä"
 
 #: papers/templatetags/statuses.py:113
 msgid "White circle"
-msgstr ""
+msgstr "Valkoinen ympyrä"
 
 #: papers/templatetags/statuses.py:114
 msgid "Question mark in circle"
-msgstr ""
+msgstr "Kysymysmerkki ympyrässä"
 
 #: papers/views.py:88
 msgid "Dissemin requires access to your ORCID name, which is marked as private in your ORCID profile."
@@ -1359,7 +1344,7 @@ msgstr "Kaikki artikkelit"
 
 #: papers/views.py:253
 msgid "To-do list"
-msgstr ""
+msgstr "Tehtävälista"
 
 #: papers/views.py:254
 msgid "Papers on my to-do list"
@@ -1374,9 +1359,8 @@ msgid "Invalid ORCID profile."
 msgstr "Virheellinen ORCID-profiili."
 
 #: papers/views.py:309
-#, fuzzy
 msgid "authored by"
-msgstr "kirjoittanut "
+msgstr "kirjoittanut"
 
 #: papers/views.py:377
 msgid "Paper view expects a DOI or a pk"
@@ -1392,9 +1376,8 @@ msgid "This paper has been deleted."
 msgstr ""
 
 #: papers/views.py:433
-#, fuzzy
 msgid "Invalid DOI."
-msgstr "Virheellinen URL"
+msgstr "Virheellinen DOI."
 
 #: publishers/forms.py:10
 msgid "popularity"
@@ -1419,7 +1402,7 @@ msgstr "Julkaisijan käytännön mukaan"
 
 #: publishers/forms.py:38
 msgid "Order"
-msgstr ""
+msgstr "Järjestys"
 
 #: publishers/models.py:39 website/templates/dissemin/faq.html:292
 msgid "Open access"
@@ -1514,9 +1497,8 @@ msgstr[0] "(%(num_total)s artikkeli)"
 msgstr[1] "(%(num_total)s artikkelia)"
 
 #: publishers/templates/publishers/list.html:96
-#, fuzzy
 msgid "No publishers found"
-msgstr "Julkaisijaa ei löytynyt."
+msgstr "Julkaisijoita ei löytynyt"
 
 #: publishers/templates/publishers/policy_pdfversion.html:5
 msgid "The published version is the final version of the paper, as formatted by the publisher."
@@ -1552,9 +1534,8 @@ msgid "Change open access status"
 msgstr ""
 
 #: publishers/templates/publishers/publisher.html:72
-#, fuzzy
 msgid "Green open access summary"
-msgstr "Vihreä open access"
+msgstr "Vihreän open accessin yhteenveto"
 
 #: publishers/templates/publishers/publisher.html:74
 #, python-format
@@ -1610,9 +1591,8 @@ msgid "Available"
 msgstr "Käytettävissä"
 
 #: statistics/templates/statistics/pie_legend.html:7
-#, fuzzy
 msgid "Refine by OA status"
-msgstr "Tuntematon OA-tila"
+msgstr "Tarkenna OA-tilan mukaan"
 
 #: upload/forms.py:33
 msgid "Invalid file format: only PDF files are accepted."
@@ -1646,7 +1626,7 @@ msgstr ""
 
 #: upload/templates/upload/widget.html:47
 msgid "Choose another file"
-msgstr ""
+msgstr "Valitse toinen tiedosto"
 
 #: upload/views.py:133
 msgid "Invalid PDF file."
@@ -1677,22 +1657,20 @@ msgid "Invalid URL."
 msgstr "Virheellinen URL"
 
 #: vinaigrette-deleteme.py:2
-#, fuzzy
 msgid "Computer science, knowledge & systems"
-msgstr "Tietojenkäsittelytiede"
+msgstr "Tietojenkäsittely, tieto ja järjestelmät"
 
 #: vinaigrette-deleteme.py:3
 msgid "Bibliographies"
 msgstr "Bibliografiat"
 
 #: vinaigrette-deleteme.py:4
-#, fuzzy
 msgid "Library & information sciences"
-msgstr "Kirjastotiede ja informatiikkaa"
+msgstr "Kirjasto- ja informaatiotieteet"
 
 #: vinaigrette-deleteme.py:5
 msgid "Encyclopedias & books of facts"
-msgstr ""
+msgstr "Tietosanakirjat ja tosikirjat"
 
 #: vinaigrette-deleteme.py:6
 msgid "Magazines, journals & serials"
@@ -1715,9 +1693,8 @@ msgid "Manuscripts & rare books"
 msgstr ""
 
 #: vinaigrette-deleteme.py:12
-#, fuzzy
 msgid "Metaphysics"
-msgstr "Fysiikka"
+msgstr "Metafysiikka"
 
 #: vinaigrette-deleteme.py:13
 msgid "Epistemology"
@@ -1733,9 +1710,8 @@ msgid "Philosophical schools of thought"
 msgstr "Filosofia"
 
 #: vinaigrette-deleteme.py:17
-#, fuzzy
 msgid "Philosophical logic"
-msgstr "Filosofia"
+msgstr "Filosofinen logiikka"
 
 #: vinaigrette-deleteme.py:18
 msgid "Ethics"
@@ -1750,9 +1726,8 @@ msgid "Modern western philosophy"
 msgstr ""
 
 #: vinaigrette-deleteme.py:21
-#, fuzzy
 msgid "Religion"
-msgstr "Uskontotiede"
+msgstr "Uskonto"
 
 #: vinaigrette-deleteme.py:22
 msgid "Philosophy & theory of religion"
@@ -1783,18 +1758,16 @@ msgid "History of Christianity"
 msgstr "Kristinuskon historia"
 
 #: vinaigrette-deleteme.py:29
-#, fuzzy
 msgid "Christian denominations"
-msgstr "Dissemin ylläpitäjä"
+msgstr "Kristilliset uskonnot"
 
 #: vinaigrette-deleteme.py:30
 msgid "Other religions"
 msgstr "Muut uskonnot"
 
 #: vinaigrette-deleteme.py:31
-#, fuzzy
 msgid "Social sciences, sociology & anthropology"
-msgstr "Sosiaaliantropologia ja etnologia"
+msgstr "Yhteiskuntatieteet, sosiologia ja antropologia"
 
 #: vinaigrette-deleteme.py:34
 msgid "Economics"
@@ -1817,9 +1790,8 @@ msgid "Customs, etiquette & folklore"
 msgstr ""
 
 #: vinaigrette-deleteme.py:41 website/templates/navbar.html:15
-#, fuzzy
 msgid "Language"
-msgstr "Vaihda kieli"
+msgstr "Kieli"
 
 #: vinaigrette-deleteme.py:43
 msgid "English & Old English languages"
@@ -1827,19 +1799,19 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:44
 msgid "German & related languages"
-msgstr ""
+msgstr "Saksa ja siihen liittyvät kielet"
 
 #: vinaigrette-deleteme.py:45
 msgid "French & related languages"
-msgstr ""
+msgstr "Ranska ja siihen liittyvät kielet"
 
 #: vinaigrette-deleteme.py:46
 msgid "Italian, Romanian & related languages"
-msgstr ""
+msgstr "Italia, romania ja niihin liittyvät kielet"
 
 #: vinaigrette-deleteme.py:47
 msgid "Spanish, Portuguese, Galician"
-msgstr ""
+msgstr "Espanja, portugali, galicia"
 
 #: vinaigrette-deleteme.py:48
 msgid "Latin & Italic languages"
@@ -1847,12 +1819,11 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:49
 msgid "Classical & modern Greek languages"
-msgstr ""
+msgstr "Klassiset ja modernit kreikan kielet"
 
 #: vinaigrette-deleteme.py:50
-#, fuzzy
 msgid "Other languages"
-msgstr "Vaihda kieli"
+msgstr "Muut kielet"
 
 #: vinaigrette-deleteme.py:51
 msgid "Science"
@@ -1864,11 +1835,11 @@ msgstr "Tähtitiede"
 
 #: vinaigrette-deleteme.py:56
 msgid "Earth sciences & geology"
-msgstr ""
+msgstr "Maatieteet ja geologia"
 
 #: vinaigrette-deleteme.py:57
 msgid "Fossils & prehistoric life"
-msgstr ""
+msgstr "Fossiilit ja esihistoriallinen elämä"
 
 #: vinaigrette-deleteme.py:58
 msgid "Biology"
@@ -1876,21 +1847,19 @@ msgstr "Biologia"
 
 #: vinaigrette-deleteme.py:59
 msgid "Plants (Botany)"
-msgstr ""
+msgstr "Kasvit (kasvitiede)"
 
 #: vinaigrette-deleteme.py:60
 msgid "Animals (Zoology)"
-msgstr ""
+msgstr "Eläimet (eläintiede)"
 
 #: vinaigrette-deleteme.py:61
-#, fuzzy
 msgid "Technology"
-msgstr "Psykologia"
+msgstr "Teknologia"
 
 #: vinaigrette-deleteme.py:62
-#, fuzzy
 msgid "Medicine & health"
-msgstr "Lääketiede ja terveystieteet"
+msgstr "Lääketiede ja terveys"
 
 #: vinaigrette-deleteme.py:64
 msgid "Agriculture"
@@ -1898,29 +1867,27 @@ msgstr "Maanviljely"
 
 #: vinaigrette-deleteme.py:65
 msgid "Home & family management"
-msgstr ""
+msgstr "Koti- ja perhehoito"
 
 #: vinaigrette-deleteme.py:66
-#, fuzzy
 msgid "Management & public relations"
-msgstr "Päivitä julkaisut"
+msgstr "Johtaminen ja suhdetoiminta"
 
 #: vinaigrette-deleteme.py:67
-#, fuzzy
 msgid "Chemical engineering"
-msgstr "Insinöörityö"
+msgstr "Kemian tekniikka"
 
 #: vinaigrette-deleteme.py:68
 msgid "Manufacturing"
-msgstr ""
+msgstr "Teollisuus"
 
 #: vinaigrette-deleteme.py:69
 msgid "Manufacture for specific uses"
-msgstr ""
+msgstr "Valmistus erityiskäyttöön"
 
 #: vinaigrette-deleteme.py:70
 msgid "Construction of buildings"
-msgstr ""
+msgstr "Rakennusten rakentaminen"
 
 #: vinaigrette-deleteme.py:71
 msgid "Arts"
@@ -1928,15 +1895,15 @@ msgstr "Taiteet"
 
 #: vinaigrette-deleteme.py:72
 msgid "Area planning & landscape architecture"
-msgstr ""
+msgstr "Alueiden suunnittelu ja maisema-arkkitehtuuri"
 
 #: vinaigrette-deleteme.py:74
 msgid "Sculpture, ceramics & metalwork"
-msgstr ""
+msgstr "Kuvanveisto, keramiikka ja metallityöt"
 
 #: vinaigrette-deleteme.py:75
 msgid "Graphic arts & decorative arts"
-msgstr ""
+msgstr "Graafinen taide ja koristetaiteet"
 
 #: vinaigrette-deleteme.py:76
 msgid "Painting"
@@ -1944,11 +1911,11 @@ msgstr "Maalaus"
 
 #: vinaigrette-deleteme.py:77
 msgid "Printmaking & prints"
-msgstr ""
+msgstr "Tulostaminen ja tulosteet"
 
 #: vinaigrette-deleteme.py:78
 msgid "Photography, computer art, film, video"
-msgstr ""
+msgstr "Valokuvaus, tietokonetaite, elokuva, video"
 
 #: vinaigrette-deleteme.py:79
 msgid "Music"
@@ -1956,19 +1923,19 @@ msgstr "Musiikki"
 
 #: vinaigrette-deleteme.py:80
 msgid "Sports, games & entertainment"
-msgstr ""
+msgstr "Urheilu, pelit ja viihde"
 
 #: vinaigrette-deleteme.py:81
 msgid "Literature, rhetoric & criticism"
-msgstr ""
+msgstr "Kirjallisuus, retoriikka ja kritiikki"
 
 #: vinaigrette-deleteme.py:82
 msgid "American literature in English"
-msgstr ""
+msgstr "Amerikkalainen englanninkielinen kirjallisuus"
 
 #: vinaigrette-deleteme.py:83
 msgid "English & Old English literatures"
-msgstr ""
+msgstr "Englanninkielinen ja muinaisenglanninkielinen kirjallisuus"
 
 #: vinaigrette-deleteme.py:84
 #, fuzzy
@@ -1982,11 +1949,11 @@ msgstr "Kirjallisuustiede"
 
 #: vinaigrette-deleteme.py:86
 msgid "Italian, Romanian & related literatures"
-msgstr ""
+msgstr "Italialainen, romanialainen ja niihin liittyvä kirjallisuus"
 
 #: vinaigrette-deleteme.py:87
 msgid "Spanish, Portuguese, Galician literatures"
-msgstr ""
+msgstr "Espanjan, portugalin ja galiciankielinen kirjallisuus"
 
 #: vinaigrette-deleteme.py:88
 #, fuzzy
@@ -1995,17 +1962,15 @@ msgstr "Kirjallisuustiede"
 
 #: vinaigrette-deleteme.py:89
 msgid "Classical & modern Greek literatures"
-msgstr ""
+msgstr "Klassinen ja moderni kreikkalainen kirjallisuus"
 
 #: vinaigrette-deleteme.py:90
-#, fuzzy
 msgid "Other literatures"
-msgstr "Kirjallisuustiede"
+msgstr "Muu kirjallisuus"
 
 #: vinaigrette-deleteme.py:92
-#, fuzzy
 msgid "Geography & travel"
-msgstr "Maantiede"
+msgstr "Maantiede & matkailu"
 
 #: vinaigrette-deleteme.py:93
 #, fuzzy
@@ -2014,16 +1979,15 @@ msgstr "Maantiede"
 
 #: vinaigrette-deleteme.py:94
 msgid "History of ancient world (to ca. 499)"
-msgstr ""
+msgstr "Muinaismaailman historia (noin 499)"
 
 #: vinaigrette-deleteme.py:95
 msgid "History of Europe"
 msgstr "Euroopan historia"
 
 #: vinaigrette-deleteme.py:96
-#, fuzzy
 msgid "History of Asia"
-msgstr "Historia"
+msgstr "Aasian historia"
 
 #: vinaigrette-deleteme.py:97
 msgid "History of Africa"
@@ -2043,33 +2007,28 @@ msgid "History of other areas"
 msgstr "Pohjois-Amerikan historia"
 
 #: vinaigrette-deleteme.py:101
-#, fuzzy
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
-msgstr "Creative Commons CC0 1.0 Yleismaailmallinen"
+msgstr "Creative Commons 1.0 Yleismaailmallinen (CC0 1.0) Public Domain -lausuma"
 
 #: vinaigrette-deleteme.py:102
-#, fuzzy
 msgid "Creative Commons Attribution 4.0 International (CC BY 4.0)"
-msgstr "Creative Commons CC-By Nimeä 4.0 Kansainvälinen (CC BY 4.0)"
+msgstr "Creative Commons Nimeä 4.0 Kansainvälinen (CC BY 4.0)"
 
 #: vinaigrette-deleteme.py:103
-#, fuzzy
 msgid "Creative Commons Attribution-ShareAlike 4.0, International (CC BY-SA 4.0)"
-msgstr "Creative Commons CC-By Nimeä 4.0 Kansainvälinen (CC BY 4.0)"
+msgstr "Creative Commons Nimeä-JaaSamoin 4.0 Kansainvälinen (CC BY-SA 4.0)"
 
 #: vinaigrette-deleteme.py:104
-#, fuzzy
 msgid "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
-msgstr "Creative Commons CC-By Nimeä 4.0 Kansainvälinen (CC BY 4.0)"
+msgstr "Creative Commons Nimeä-EiKaupallinen 4.0 Kansainvälinen (CC BY-NC 4.0)"
 
 #: vinaigrette-deleteme.py:105
-#, fuzzy
 msgid "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)"
-msgstr "Creative Commons CC-By Nimeä 4.0 Kansainvälinen (CC BY 4.0)"
+msgstr "Creative Commons Nimeä-EiMuutoksia 4.0 Kansainvälinen (CC BY-ND 4.0)"
 
 #: vinaigrette-deleteme.py:106
 msgid "Free for private use; right holder retains other rights, including distribution"
-msgstr ""
+msgstr "Ilmaiseksi yksityiskäyttöön; oikeudenhaltija säilyttää muut oikeudet, mukaan lukien jakelu"
 
 #: vinaigrette-deleteme.py:107
 msgid "Other open license"
@@ -2077,7 +2036,7 @@ msgstr "Muu avoin lisenssi"
 
 #: vinaigrette-deleteme.py:109
 msgid "Zenodo"
-msgstr ""
+msgstr "Zenodo"
 
 #: vinaigrette-deleteme.py:110
 msgid "Zenodo is a general-purpose open repository hosted by CERN. If the document does not have a DOI yet, Zenodo will create one."
@@ -2085,7 +2044,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:111
 msgid "HAL"
-msgstr ""
+msgstr "HAL"
 
 #: vinaigrette-deleteme.py:112
 msgid "HAL is a  multidisciplinary open archive, sustained by the French Research Ministry."
@@ -2119,9 +2078,9 @@ msgid "Page not found"
 msgstr "Sivua ei löytynyt"
 
 #: website/templates/404.html:13
-#, fuzzy, python-format
+#, python-format
 msgid "The page you requested could not be found. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "\n            Pyytämääsi sivua ei löytynyt. <a href=\"/\">Palaa kotisivulle.</a>\n           "
+msgstr "Pyytämääsi sivua ei löytynyt. <a href=\"%(index)s\">Palaa takaisin kotisivulle.</a>"
 
 #: website/templates/500.html:6 website/templates/500.html:10
 #, fuzzy
@@ -2129,9 +2088,9 @@ msgid "Internal server error"
 msgstr "Sisäinen virhe"
 
 #: website/templates/500.html:13
-#, fuzzy, python-format
+#, python-format
 msgid "Your request triggered an internal server error. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "\n            Pyyntösi laukaisi sisäisen virheen. <a href=\"/\">Takaisin etusivulle</a>\n           "
+msgstr "Pyyntösi laukaisi sisäisen virheen. <a href=\"%(index)s\">Siirry takaisin etusivulle.</a>"
 
 #: website/templates/admin/base_site.html:5
 #: website/templates/admin/base_site.html:8
@@ -2148,9 +2107,8 @@ msgid "Error"
 msgstr "Virhe"
 
 #: website/templates/dissemin/error.html:14
-#, fuzzy
 msgid "Go back to the start page."
-msgstr "<a href=\"/\">Takaisin kotisivulle.</a>"
+msgstr "Siirry takaisin aloitussivulle."
 
 #: website/templates/dissemin/faq.html:7 website/templates/dissemin/faq.html:56
 msgid "Frequently Asked Questions"
@@ -2189,19 +2147,16 @@ msgid "Who runs dissem.in?"
 msgstr "Kuka ajaa dissem.in -sivustoa?"
 
 #: website/templates/dissemin/faq.html:28
-#, fuzzy
 msgid "Can I create a profile on dissem.in?"
-msgstr "Voinko luoda profiilini dissem.in:issä?"
+msgstr "Voinko luoda profiilin dissem.in:issä?"
 
 #: website/templates/dissemin/faq.html:30
-#, fuzzy
 msgid "Policies and Full-text Availability"
 msgstr "Käytännöt ja koko tekstin saatavuus"
 
 #: website/templates/dissemin/faq.html:31
-#, fuzzy
 msgid "What do our policy classes mean?"
-msgstr "Mitä käytäntöluokkasi tarkoittavat?"
+msgstr "Mitä käytäntöluokkamme tarkoittavat?"
 
 #: website/templates/dissemin/faq.html:32
 msgid "When is a paper considered available?"
@@ -2221,7 +2176,7 @@ msgstr "Yksi artikkeleistani puuttuu. Miksi?"
 
 #: website/templates/dissemin/faq.html:37
 msgid "Some details of my paper are incorrect. What can I do?"
-msgstr "Jotkin artikelini tiedot ovat virheellisiä. Mitä voin tehdä?"
+msgstr "Jotkin artikkelini tiedot ovat virheellisiä. Mitä voin tehdä?"
 
 #: website/templates/dissemin/faq.html:38
 msgid "There is a freely available copy of my article online but dissem.in does not find it."
@@ -2362,11 +2317,11 @@ msgstr ""
 
 #: website/templates/dissemin/faq.html:285
 msgid "Class"
-msgstr ""
+msgstr "Luokka"
 
 #: website/templates/dissemin/faq.html:286
 msgid "Description"
-msgstr ""
+msgstr "Kuvaus"
 
 #: website/templates/dissemin/faq.html:295
 msgid "<strong>Open access:</strong><br /> The full text is made freely available by the publisher (in a fully open access or hybrid journal)."
@@ -2510,9 +2465,9 @@ msgid "You can also add publications to your profile <em>on Dissemin</em>, by cl
 msgstr ""
 
 #: website/templates/dissemin/faq.html:512
-#, fuzzy, python-format
+#, python-format
 msgid "If you change some details in your ORCID profile (name, homepage, etc.), the changes will not automatically be picked up in your profile on Dissemin. To update your profile on Dissemin accordingly, once you have logged in to Dissemin, you can go to your <a href=\"%(profile_url)s\">profile page</a> and click \"Refresh publications\"."
-msgstr "Jos muutat joitakin ORCID-profiilisi tietoja (nimi, kotisivu, yms.) muutoksia ei automaattisesti oteta profiiliisi Disseminissä. Päivittääksesi profiilisi Disseminissä sen mukaisesti, kun olet kirjautunut sisään Disseminiin, voit mennä <a href=\"/my-profile\">profiilisivullesi</a> ja klikata \"Päivitä julkaisut\"."
+msgstr "Jos muutat joitakin ORCID-profiilisi tietoja (nimi, kotisivu, yms.) muutoksia ei automaattisesti oteta profiiliisi Disseminissä. Päivittääksesi profiilisi Disseminissä sen mukaisesti, kun olet kirjautunut sisään Disseminiin, voit siirtyä <a href=\"%(profile_url)s\">profiilisivullesi</a> ja klikata \"Päivitä julkaisut\"."
 
 #: website/templates/dissemin/faq.html:526
 #, python-format
@@ -2529,9 +2484,8 @@ msgid "Contribute to <a href=\"https://github.com/dissemin/dissemin\">the code</
 msgstr "Edistä <a href=\"https://github.com/wetneb/dissemin\">koodia</a>."
 
 #: website/templates/dissemin/faq.html:544
-#, fuzzy
 msgid "Fix any of our listed <a href=\"https://github.com/dissemin/dissemin/issues\">issues</a>."
-msgstr "Korjaa mikä tahansa listatuista <a href=\"https://github.com/wetneb/dissemin/issues\">ongelmistamme</a>."
+msgstr "Korjaa mikä tahansa listatuista <a href=\"https://github.com/dissemin/dissemin/issues\">ongelmistamme</a>."
 
 #: website/templates/dissemin/faq.html:549
 msgid "Help us <a href=\"https://translatewiki.net/wiki/Translating:Dissemin\">translate</a> the interface in your language."
@@ -2542,18 +2496,16 @@ msgid "Encourage researchers to use this service."
 msgstr "Kannusta tutkijoita käyttämään tätä palvelua."
 
 #: website/templates/dissemin/faq.html:559
-#, fuzzy
 msgid "Star <a href=\"https://github.com/dissemin/dissemin\">our GitHub project</a>!"
-msgstr "Tähditä <a href=\"https://github.com/wetneb/dissemin\">GitHub-projektimme</a>!"
+msgstr "Tähditä <a href=\"https://github.com/dissemin/dissemin\">GitHub-projektimme</a>!"
 
 #: website/templates/dissemin/faq.html:564
 msgid "<a href=\"https://association.dissem.in/#dons\">Donations are accepted</a>."
 msgstr "<a href=\"https://association.dissem.in/#dons\">Lahjoitukset hyväksytään</a>."
 
 #: website/templates/dissemin/faq.html:572
-#, fuzzy
 msgid "The source code is available <a href=\"https://github.com/dissemin/dissemin\">on GitHub</a>."
-msgstr "Lähdekoodi on saatavissa <a href=\"https://github.com/wetneb/dissemin\">GitHubissa</a>."
+msgstr "Lähdekoodi on saatavissa <a href=\"https://github.com/dissemin/dissemin\">GitHubissa</a>."
 
 #: website/templates/dissemin/faq.html:579
 msgid "Yes! We even have <a href=\"https://dissemin.readthedocs.io/en/latest/api.html\">an API</a>. If it does not suit your needs, please don't hesitate to get in touch by writing to <a href=\"mailto:hello@dissem.in\">hello@dissem.in</a>."
@@ -2587,9 +2539,8 @@ msgid "Sign up"
 msgstr "Rekisteröidy"
 
 #: website/templates/dissemin/login.html:41
-#, fuzzy
 msgid "Not an ORCID user yet? Create an account, it is free and takes just a few seconds."
-msgstr "Ei ORCID-käyttäjä vielä? Luo tili, se on ilmaista ja kestää muutaman sekunnin."
+msgstr "Ei ORCID-käyttäjä vielä? Luo tili, se on ilmaista ja kestää vain muutaman sekunnin."
 
 #: website/templates/dissemin/sources.html:5
 msgid "Data sources"
@@ -2630,14 +2581,12 @@ msgstr ""
 
 #: website/templates/dissemin/start_page.html:39
 #: website/templates/dissemin/start_page.html:42
-#, fuzzy
 msgid "Green Open Access"
 msgstr "Vihreä open access"
 
 #: website/templates/dissemin/start_page.html:43
-#, fuzzy
 msgid "Many researchers do not use their right to make their papers freely available online, in addition to the paywalled version of traditional publishers."
-msgstr "Monet tutkijat eivät käytä oikeuttaan tehdä asiakirjoistaan vapaasti verkossa saatavia, perinteisten kustantajien tarjoaman paywalled-version lisäksi."
+msgstr "Monet tutkijat eivät käytä oikeuttaan tehdä asiakirjoistaan vapaasti verkossa saatavia, perinteisten kustantajien paywalled-version lisäksi."
 
 #: website/templates/dissemin/start_page.html:44
 msgid "Uploading your papers to open repositories has significant advantages:"
@@ -2648,30 +2597,26 @@ msgid "Your research is available to everyone, increasing your readership and im
 msgstr ""
 
 #: website/templates/dissemin/start_page.html:47
-#, fuzzy
 msgid "You help universities abandon overpriced journal subscriptions."
-msgstr "Tämä pakottaa kirjastoja ostamaan ylihinnoiteltuja sähköisiä lehtien tilauksia, jos heillä on varaa niihin."
+msgstr "Autat yliopistoja luopumaan ylihinnoitelluista lehtitilauksista."
 
 #: website/templates/dissemin/start_page.html:58
 #: website/templates/dissemin/start_page.html:61
-#, fuzzy
 msgid "Open Repositories"
 msgstr "Avoimet koodivarannot"
 
 #: website/templates/dissemin/start_page.html:62
-#, fuzzy
 msgid "Uploading your papers on your own webpage is not enough. Your papers are easier to find and more secure in the long-term when uploaded to arXiv, Zenodo or institutional repositories."
-msgstr "Artikkeliesi tallentaminen omalla verkkosivullasi ei riitä. Sellaiset kopiot ovat vähemmän vakaita ja vaikeampia löytää, kuin artikkelit jotka on tallennettu hyvin indeksoituihin koodivarantoihin."
+msgstr "Omien artikkelien tallentaminen omille verkkosivuille ei riitä. Artikkelisi ovat helpommin löydettävissä ja pitkällä tähtäimellä turvallisempia kun ne tallennetaan arXiviin, Xenodoon tai institutionaalisiin koodivarantoihin."
 
 #: website/templates/dissemin/start_page.html:72
 #: website/templates/dissemin/start_page.html:75
-#, fuzzy
 msgid "Latest Uploads"
-msgstr "Tallenna"
+msgstr "Viimeisimmät tallennukset"
 
 #: website/templates/dissemin/start_page.html:76
 msgid "Researchers use Dissemin to make sure all their publications can be accessed freely. Have a look at their latest uploads:"
-msgstr ""
+msgstr "Tutkijat käyttävät Disseminiä varmistaakseen, että kaikki heidän julkaisunsa ovat vapaasti saatavilla. Katso heidän viimeisimmät tallennuksensa:"
 
 #: website/templates/dissemin/start_page.html:94
 #, fuzzy
@@ -2701,11 +2646,11 @@ msgstr ""
 
 #: website/templates/dissemin/start_page.html:134
 msgid "Partners"
-msgstr "Kumppanit"
+msgstr "Yhteistyökumppanit"
 
 #: website/templates/dissemin/start_page.html:135
 msgid "Dissemin would not be possible without the support of our partners:"
-msgstr ""
+msgstr "Dissemin ei olisi olemassa ilman yhteistyökumppaneidemme tukea:"
 
 #: website/templates/dissemin/tos.html:7 website/templates/dissemin/tos.html:14
 #: website/templates/footer.html:9
@@ -2741,9 +2686,8 @@ msgid "The platform can perform mandated publication deposit to repositories. Us
 msgstr ""
 
 #: website/templates/dissemin/tos.html:51
-#, fuzzy
 msgid "Please address any inquiry to <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
-msgstr "Kohdista kaikki kyselyt osoitteeseen support@dissem.in."
+msgstr "Kohdista kaikki kyselyt osoitteeseen <a href=\"mailto:support@dissem.in\">support@dissem.in</a>."
 
 #: website/templates/dissemin/tos.html:60
 msgid "In full"
@@ -2802,9 +2746,8 @@ msgid "Blog"
 msgstr "Blogi"
 
 #: website/templates/navbar.html:6
-#, fuzzy
 msgid "Logo"
-msgstr "Kirjaudu ulos"
+msgstr "Logo"
 
 #: website/templates/navbar.html:24
 msgid "Translate"
@@ -2816,7 +2759,7 @@ msgstr "Oma profiili"
 
 #: website/templates/navbar.html:35
 msgid "My to-do list"
-msgstr ""
+msgstr "Oma tehtävälista"
 
 #: website/templates/navbar.html:36
 msgid "Logout"
@@ -2832,7 +2775,7 @@ msgid "Authentication error"
 msgstr "Todennusvirhe"
 
 #: website/templates/socialaccount/authentication_error.html:15
-#, fuzzy, python-format
+#, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
-msgstr "\n            Todennus epäonnistui. <a href=\"/\">Palaa kirjautumissivulle.</a>\n           "
+msgstr "Todennus epäonnistui. <a href=\"%(account-login)s\">Palaa kirjautumissivulle.</a>"
 

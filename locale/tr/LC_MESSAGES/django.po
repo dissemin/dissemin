@@ -17,7 +17,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-18 09:51+0100\n"
-"PO-Revision-Date: 2019-12-19 14:06:31+0000\n"
+"PO-Revision-Date: 2019-12-31 06:25:08+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -55,11 +55,11 @@ msgstr "Özet"
 
 #: deposit/forms.py:153
 msgid "Dewey Decimal Class"
-msgstr ""
+msgstr "Dewey Ondalık Sınıfı"
 
 #: deposit/forms.py:160
 msgid "Do not publish before"
-msgstr ""
+msgstr "Daha önce yayınlama"
 
 #: deposit/forms.py:166 deposit/templates/deposit/deposits.html:89
 msgid "License"
@@ -275,11 +275,11 @@ msgstr "Bu yazı zaten HAL içinde bulunmaktadır."
 
 #: deposit/hal/protocol.py:273
 msgid "HAL rejected the submission."
-msgstr ""
+msgstr "HAL başvuruyu reddetti."
 
 #: deposit/hal/protocol.py:283
 msgid "HAL rejected the submission"
-msgstr ""
+msgstr "HAL başvuruyu reddetti"
 
 #: deposit/hal/protocol.py:292
 msgid "Password"
@@ -287,7 +287,7 @@ msgstr "Parola"
 
 #: deposit/hal/protocol.py:320
 msgid "Connection to HAL failed. Please try again later."
-msgstr ""
+msgstr "HAL bağlantısı başarısız oldu. Lütfen daha sonra tekrar deneyiniz."
 
 #: deposit/models.py:44
 msgid "Failed"
@@ -303,7 +303,7 @@ msgstr "Yayınlama bekleniyor"
 
 #: deposit/models.py:47
 msgid "Embargo"
-msgstr ""
+msgstr "Ambargo"
 
 #: deposit/models.py:48
 msgid "Published"
@@ -311,7 +311,7 @@ msgstr "Yayınlandı"
 
 #: deposit/models.py:49
 msgid "Refused by the repository"
-msgstr ""
+msgstr "Depo tarafından reddedildi"
 
 #: deposit/models.py:50
 msgid "Deleted"
@@ -320,7 +320,7 @@ msgstr "Silindi"
 #: deposit/models.py:287 deposit/templates/deposit/start.html:205
 #: deposit/views.py:120
 msgid "Deposit"
-msgstr ""
+msgstr "Depozito"
 
 #: deposit/models.py:340
 msgid "We will use this email address to notify you when your deposits are accepted."
@@ -328,15 +328,15 @@ msgstr "Bu e-posta adresini, mevduatlarınız kabul edildiğinde sizi bilgilendi
 
 #: deposit/models.py:346
 msgid "This repository will be used by default for your deposits."
-msgstr ""
+msgstr "Bu depo, depozitolarınız için varsayılan olarak kullanılacaktır."
 
 #: deposit/osf/forms.py:35 deposit/osf/forms.py:46
 msgid "Creative Commons CC0 1.0 Universal"
-msgstr ""
+msgstr "Creative Commons CC0 1.0 Evrensel"
 
 #: deposit/osf/forms.py:37 deposit/osf/forms.py:48
 msgid "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
-msgstr ""
+msgstr "Creative Commons CC-Atıf 4.0 Uluslararası (CC BY 4.0)"
 
 #: deposit/osf/forms.py:40 deposit/osf/forms.py:51 vinaigrette-deleteme.py:108
 msgid "No license"
@@ -348,7 +348,7 @@ msgstr "Mimari"
 
 #: deposit/osf/forms.py:59 deposit/osf/forms.py:82
 msgid "Arts and Humanities"
-msgstr ""
+msgstr "Sanat ve Beşeri Bilimler"
 
 #: deposit/osf/forms.py:61 deposit/osf/forms.py:84
 msgid "Business"
@@ -360,83 +360,83 @@ msgstr "Mühendislik"
 
 #: deposit/osf/forms.py:69 deposit/osf/forms.py:92
 msgid "Life Sciences"
-msgstr ""
+msgstr "Yaşam Bilimleri"
 
 #: deposit/osf/forms.py:71 deposit/osf/forms.py:94
 msgid "Medicine and Health Sciences"
-msgstr ""
+msgstr "Tıp ve Sağlık Bilimleri"
 
 #: deposit/osf/forms.py:73 deposit/osf/forms.py:96
 msgid "Physical Sciences and Mathematics"
-msgstr ""
+msgstr "Fizik Bilimleri ve Matematik"
 
 #: deposit/osf/forms.py:75 deposit/osf/forms.py:98
 msgid "Social and Behavioral Sciences"
-msgstr ""
+msgstr "Sosyal ve Davranış Bilimleri"
 
 #: deposit/osf/forms.py:141
 msgid "Invalid OSF identifier."
-msgstr ""
+msgstr "Geçersiz OSF tanımlayıcısı."
 
 #: deposit/osf/models.py:13
 msgid "OSF identifier"
-msgstr ""
+msgstr "OSF tanımlayıcısı"
 
 #: deposit/osf/models.py:14
 msgid "If set, your deposits will be associated to this OSF account. This identifier is a string of letters and numbers which can be found in your OSF public profile URL."
-msgstr ""
+msgstr "Ayarlanırsa, para yatırma işlemleriniz bu OSF hesabıyla ilişkilendirilir. Bu tanımlayıcı, OSF genel profil URL'nizde bulunabilen bir harf ve rakam dizesidir."
 
 #: deposit/osf/protocol.py:199
 msgid "Unable to create a project on OSF."
-msgstr ""
+msgstr "OSF'de proje oluşturulamıyor."
 
 #: deposit/osf/protocol.py:213
 msgid "Unable to authenticate to OSF."
-msgstr ""
+msgstr "OSF'de kimlik doğrulaması yapılamıyor."
 
 #: deposit/osf/protocol.py:230
 msgid "Unable to add contributors."
-msgstr ""
+msgstr "Katkıda bulunanlar eklenemedi."
 
 #: deposit/osf/protocol.py:257
 msgid "Unable to update the contributors of the paper."
-msgstr ""
+msgstr "Makaleye katkıda bulunanlar güncellenemedi."
 
 #: deposit/osf/protocol.py:303
 msgid "Unable to update license."
-msgstr ""
+msgstr "Lisans güncellenemiyor."
 
 #: deposit/osf/protocol.py:361
 msgid "Unable to create the preprint."
-msgstr ""
+msgstr "Ön baskı oluşturulamıyor."
 
 #: deposit/osf/protocol.py:410
 msgid "Unable to update the preprint license."
-msgstr ""
+msgstr "Baskı öncesi lisansı güncellenemiyor."
 
 #: deposit/osf/protocol.py:418
 msgid "No Repository endpoint provided."
-msgstr ""
+msgstr "Havuz uç noktası sağlanmadı."
 
 #: deposit/osf/protocol.py:421
 msgid "No OSF token provided."
-msgstr ""
+msgstr "OSF belirteci sağlanmadı."
 
 #: deposit/osf/protocol.py:462
 msgid "Unable to upload the PDF file."
-msgstr ""
+msgstr "PDF dosyası yüklenemedi."
 
 #: deposit/osf/protocol.py:502
 msgid "Unable to delete the project."
-msgstr ""
+msgstr "Proje silinemedi."
 
 #: deposit/osf/protocol.py:532 deposit/osf/protocol.py:540
 msgid "Unable to make the project public."
-msgstr ""
+msgstr "Proje herkese açık hale getirilemiyor."
 
 #: deposit/protocol.py:368
 msgid "Failed to connect to the repository. Please try again later."
-msgstr ""
+msgstr "Depoya bağlanılamadı. Lütfen daha sonra tekrar deneyiniz."
 
 #: deposit/sword/forms.py:15
 msgid "E-mail"
@@ -444,33 +444,33 @@ msgstr "E-posta"
 
 #: deposit/sword/protocol.py:67
 msgid "The repository {} returned invalid XML"
-msgstr ""
+msgstr "{} Deposu geçersiz XML döndürdü"
 
 #: deposit/sword/protocol.py:295
 msgid "Username or password not provided for this repository. Please contact the Dissemin team."
-msgstr ""
+msgstr "Bu depo için kullanıcı adı veya şifre sağlanmadı. Lütfen Dissemin ekibiyle iletişime geçin."
 
 #: deposit/sword/protocol.py:320
 msgid "Unable to deposit to repository"
-msgstr ""
+msgstr "Depoya oluşturamıyor"
 
 #: deposit/templates/deposit/deposits.html:6
 #: deposit/templates/deposit/deposits.html:12 website/templates/navbar.html:33
 msgid "My deposits"
-msgstr ""
+msgstr "Depolarım"
 
 #: deposit/templates/deposit/deposits.html:24
 #, python-format
 msgid "&lsquo;%(paper_title)s&rsquo; in <strong>%(repository)s</strong>"
-msgstr ""
+msgstr "&lsquo;%(paper_title)s&rsquo; içinde <strong>%(repository)s</strong>"
 
 #: deposit/templates/deposit/deposits.html:36
 msgid "Paper"
-msgstr ""
+msgstr "Kağıt"
 
 #: deposit/templates/deposit/deposits.html:56
 msgid "Deposit date"
-msgstr ""
+msgstr "Para yatırma tarihi"
 
 #: deposit/templates/deposit/deposits.html:67
 #, fuzzy
@@ -479,28 +479,27 @@ msgstr "Yayınlama bekleniyor"
 
 #: deposit/templates/deposit/deposits.html:78
 msgid "Deposit type"
-msgstr ""
+msgstr "Para yatırma türü"
 
 #: deposit/templates/deposit/deposits.html:100
 msgid "Identifier"
-msgstr ""
+msgstr "Tanımlayıcı"
 
 #: deposit/templates/deposit/deposits.html:112
 msgid "Meta URL"
-msgstr ""
+msgstr "Meta URL"
 
 #: deposit/templates/deposit/deposits.html:121
 msgid "PDF URL"
 msgstr "PDF URL"
 
 #: deposit/templates/deposit/deposits.html:134
-#, fuzzy
 msgid "Status:"
-msgstr "Durum"
+msgstr "Durum:"
 
 #: deposit/templates/deposit/deposits.html:145
 msgid "Letter of Declaration"
-msgstr ""
+msgstr "Beyanname Mektubu"
 
 #: deposit/templates/deposit/deposits.html:148
 msgid "Show"
@@ -508,11 +507,11 @@ msgstr "Göster"
 
 #: deposit/templates/deposit/deposits.html:176
 msgid "No deposits yet!"
-msgstr ""
+msgstr "Henüz para yatırma yok!"
 
 #: deposit/templates/deposit/deposits.html:177
 msgid "You have not made any deposit via Dissemin. What are you waiting for? Liberate your papers today."
-msgstr ""
+msgstr "Dissemin aracılığıyla herhangi bir ödeme yapmadınız. Ne için bekliyorsun? Bugün gazetelerinizi özgürleştirin."
 
 #: deposit/templates/deposit/preferences_base.html:7
 #: deposit/templates/deposit/preferences_global.html:7
@@ -536,15 +535,15 @@ msgstr "Depolama"
 #: deposit/templates/deposit/start.html:64
 #, python-format
 msgid "You can deposit the full text of your article. Dissemin will send it to a repository where it will be made freely available. By depositing your article via Dissemin, you agree to our <a href=\"%(tosurl)s\">terms of service</a>."
-msgstr ""
+msgstr "Makalenizin tam metnini yatırabilirsiniz. Dissemin, serbestçe sunulacağı bir depoya gönderecektir. Makalenizi Dissemin aracılığıyla yatırarak <a href=\"%(tosurl)s\">hizmet şartlarımızı</a> kabul etmiş olursunuz."
 
 #: deposit/templates/deposit/start.html:73
 msgid "You do not appear to be one of the authors of this paper. By using this form, you certify that you have the permission to upload it on their behalf."
-msgstr ""
+msgstr "Bu makalenin yazarlarından biri gibi görünmüyorsunuz. Bu formu kullanarak, kendi adına yükleme iznine sahip olduğunuzu onaylamış olursunuz."
 
 #: deposit/templates/deposit/start.html:83
 msgid "This paper cannot be deposited in any repository supported by Dissemin."
-msgstr ""
+msgstr "Bu makale Dissemin tarafından desteklenen hiçbir depoya yerleştirilemez."
 
 #: deposit/templates/deposit/start.html:89
 msgid "Document"
@@ -560,15 +559,15 @@ msgstr "Yükleme tipi:"
 
 #: deposit/templates/deposit/start.html:112
 msgid "preprint"
-msgstr ""
+msgstr "ön baskı"
 
 #: deposit/templates/deposit/start.html:128
 msgid "postprint"
-msgstr ""
+msgstr "baskı sonrası"
 
 #: deposit/templates/deposit/start.html:144
 msgid "pdfversion"
-msgstr ""
+msgstr "pdfversion"
 
 #: deposit/templates/deposit/start.html:165
 msgid "Repository:"
@@ -576,36 +575,36 @@ msgstr "Depo:"
 
 #: deposit/templates/deposit/start.html:192
 msgid "Metadata:"
-msgstr ""
+msgstr "Meta veri:"
 
 #: deposit/templates/deposit/start.html:212
 #: papers/templates/papers/search_base.html:165
 msgid "Paper animated bird"
-msgstr ""
+msgstr "Kağıt animasyonlu kuş"
 
 #: deposit/templates/deposit/start.html:213
 msgid "Submitting paper to repository"
-msgstr ""
+msgstr "Depoya kağıt gönderiliyor"
 
 #: deposit/views.py:80
 msgid "This repository is currently not enabled."
-msgstr ""
+msgstr "Bu depo şu anda etkin değil."
 
 #: deposit/views.py:86
 msgid "This repository is not available for this paper."
-msgstr ""
+msgstr "Bu veri deposu bu makale için mevcut değil."
 
 #: deposit/views.py:218
 msgid "This repository could not be found."
-msgstr ""
+msgstr "Bu depo bulunamadı."
 
 #: deposit/views.py:261
 msgid "Not all fields have been filled correctly."
-msgstr ""
+msgstr "Tüm alanlar doğru şekilde doldurulmamış."
 
 #: deposit/views.py:270
 msgid "This repository cannot be used for this paper."
-msgstr ""
+msgstr "Bu veri deposu bu kağıt için kullanılamaz."
 
 #: deposit/views.py:289
 msgid "Access to the PDF was denied."
@@ -613,52 +612,51 @@ msgstr "PDF’ye erişim reddedildi."
 
 #: deposit/views.py:346
 msgid "Access to this ressource not allowed."
-msgstr ""
+msgstr "Bu kaynağa erişime izin verilmiyor."
 
 #: deposit/views.py:351
 msgid "Declaration {}.pdf"
-msgstr ""
+msgstr "Beyan {}.pdf"
 
 #: deposit/views.py:354
 msgid "No pdf found for dr {}"
-msgstr ""
+msgstr "Dr {} için pdf bulunamadı"
 
 #: deposit/zenodo/protocol.py:87
-#, fuzzy
 msgid "This document is already in Zenodo. Zenodo refused the deposit."
-msgstr "Bu belge zaten HAL içinde. HAL depozitoyu reddetti."
+msgstr "Bu belge zaten Zenodo'da. Zenodo depozitoyu reddetti."
 
 #: deposit/zenodo/protocol.py:120
 msgid "No Zenodo API key provided."
-msgstr ""
+msgstr "Zenodo API anahtarı sağlanmadı."
 
 #: deposit/zenodo/protocol.py:132
 msgid "This happens when Zenodo has hiccups. Please try again in a few minutes or use a different repository in the menu above."
-msgstr ""
+msgstr "Bu Zenodo'da hıçkırık olduğunda olur. Lütfen birkaç dakika sonra tekrar deneyin veya yukarıdaki menüde farklı bir depo kullanın."
 
 #: deposit/zenodo/protocol.py:138
 msgid "Unable to authenticate to Zenodo."
-msgstr ""
+msgstr "Zenodo'da kimlik doğrulaması yapılamıyor."
 
 #: deposit/zenodo/protocol.py:146
 msgid "Unable to create a new deposition on Zenodo."
-msgstr ""
+msgstr "Zenodo'da yeni bir biriktirme oluşturulamıyor."
 
 #: deposit/zenodo/protocol.py:163
 msgid "Unable to transfer the document to Zenodo."
-msgstr ""
+msgstr "Doküman Zenodo'ya aktarılamıyor."
 
 #: deposit/zenodo/protocol.py:174
 msgid "No abstract is available for this paper but Zenodo requires one. Please provide it using the metadata panel."
-msgstr ""
+msgstr "Bu yazı için özet yok, ancak Zenodo bir tane gerektiriyor. Lütfen meta veri panelini kullanarak sağlayın."
 
 #: deposit/zenodo/protocol.py:186
 msgid "Unable to submit paper metadata to Zenodo."
-msgstr ""
+msgstr "Zenodo'ya kağıt meta verileri gönderilemiyor."
 
 #: deposit/zenodo/protocol.py:204
 msgid "Unable to publish the deposition on Zenodo."
-msgstr ""
+msgstr "Zenodo'da birikim yayınlanamıyor."
 
 #: dissemin/settings/common.py:303
 msgid "Arabic"
@@ -714,56 +712,56 @@ msgstr "İsveççe"
 
 #: notification/models.py:62
 msgid "inboxes"
-msgstr ""
+msgstr "gelen kutuları"
 
 #: papers/ajax.py:235 papers/templates/papers/paper_list.html:77
 msgid "Remove from to-do list"
-msgstr ""
+msgstr "Yapılacaklar listesinden kaldır"
 
 #: papers/ajax.py:236
 msgid "Marking failed"
-msgstr ""
+msgstr "İşaretleme başarısız"
 
 #: papers/ajax.py:265 papers/templates/papers/paper_list.html:79
 #: papers/templates/papers/policies.html:73
 msgid "Mark for later upload"
-msgstr ""
+msgstr "Daha sonra yüklemek için işaretle"
 
 #: papers/ajax.py:266
 msgid "Removing failed"
-msgstr ""
+msgstr "Kaldırma başarısız oldu"
 
 #: papers/baremodels.py:58
 msgid "Journal article"
-msgstr ""
+msgstr "Dergi makalesi"
 
 #: papers/baremodels.py:59
 msgid "Proceedings article"
-msgstr ""
+msgstr "Bildiriler makalesi"
 
 #: papers/baremodels.py:60
 msgid "Book chapter"
-msgstr ""
+msgstr "Kitap bölümü"
 
 #: papers/baremodels.py:61
 msgid "Book"
-msgstr ""
+msgstr "Kitap"
 
 #: papers/baremodels.py:62
 msgid "Journal issue"
-msgstr ""
+msgstr "Dergi sorunu"
 
 #: papers/baremodels.py:63
 msgid "Proceedings"
-msgstr ""
+msgstr "Kovuşturmalar"
 
 #: papers/baremodels.py:64
 msgid "Entry"
-msgstr ""
+msgstr "Giriş"
 
 #: papers/baremodels.py:65
 msgid "Poster"
-msgstr ""
+msgstr "Afiş"
 
 #: papers/baremodels.py:66
 msgid "Report"
@@ -771,40 +769,40 @@ msgstr "Rapor"
 
 #: papers/baremodels.py:67
 msgid "Thesis"
-msgstr ""
+msgstr "Tez"
 
 #: papers/baremodels.py:68
 msgid "Dataset"
-msgstr ""
+msgstr "Veri kümesi"
 
 #: papers/baremodels.py:69 papers/models.py:99
 #: publishers/templates/publishers/policy_preprint.html:5
 msgid "Preprint"
-msgstr ""
+msgstr "Ön baskı"
 
 #: papers/baremodels.py:70
 msgid "Other document"
-msgstr ""
+msgstr "Diğer belge"
 
 #: papers/forms.py:50 papers/views.py:72
 msgid "Invalid ORCID identifier."
-msgstr ""
+msgstr "Geçersiz ORCID tanımlayıcısı."
 
 #: papers/forms.py:56
 msgid "Department"
-msgstr ""
+msgstr "Bölüm"
 
 #: papers/forms.py:58 papers/templates/papers/researcher.html:9
 msgid "Researcher"
-msgstr ""
+msgstr "Araştırmacı"
 
 #: papers/forms.py:71
 msgid "newest first"
-msgstr ""
+msgstr "en yeni ilk"
 
 #: papers/forms.py:72
 msgid "oldest first"
-msgstr ""
+msgstr "en eski ilk"
 
 #: papers/forms.py:100 papers/forms.py:107
 msgid "Any"
@@ -820,57 +818,57 @@ msgstr "Görünmez"
 
 #: papers/models.py:100 publishers/templates/publishers/policy_postprint.html:6
 msgid "Postprint"
-msgstr ""
+msgstr "Baskı sonrası"
 
 #: papers/models.py:101
 #: publishers/templates/publishers/policy_pdfversion.html:6
 msgid "Published version"
-msgstr ""
+msgstr "Yayınlanan sürüm"
 
 #: papers/models.py:105
 msgid "Preparing profile"
-msgstr ""
+msgstr "Profil hazırlanıyor"
 
 #: papers/models.py:106
 msgid "Fetching publications from ORCID"
-msgstr ""
+msgstr "ORCID'den yayınlar getiriliyor"
 
 #: papers/models.py:107
 msgid "Fetching publications from CrossRef"
-msgstr ""
+msgstr "CrossRef'ten yayınlar getiriliyor"
 
 #: papers/models.py:108
 msgid "Fetching publications from BASE"
-msgstr ""
+msgstr "BASE'ten yayınlar getiriliyor"
 
 #: papers/models.py:109
 msgid "Fetching publications from CORE"
-msgstr ""
+msgstr "CORE'dan yayın getiriliyor"
 
 #: papers/models.py:110
 msgid "Fetching publications from OAI-PMH"
-msgstr ""
+msgstr "OAI-PMH'den yayın getiriliyor"
 
 #: papers/models.py:111
 msgid "Clustering publications"
-msgstr ""
+msgstr "Kümeleme yayınları"
 
 #: papers/models.py:112
 msgid "Updating statistics"
-msgstr ""
+msgstr "İstatistikleri güncelleme"
 
 #: papers/models.py:1244 papers/views.py:144 papers/views.py:148
 msgid "Papers"
-msgstr ""
+msgstr "Kağıtlar"
 
 #: papers/templates/papers/advanced_search.html:8
 msgid "Advanced Search"
-msgstr ""
+msgstr "Gelişmiş Arama"
 
 #: papers/templates/papers/advanced_search.html:13
 #: website/templates/dissemin/start_page.html:30
 msgid "Advanced search"
-msgstr ""
+msgstr "Gelişmiş arama"
 
 #: papers/templates/papers/advanced_search.html:20
 #, fuzzy
@@ -879,11 +877,11 @@ msgstr "başlık"
 
 #: papers/templates/papers/advanced_search.html:24
 msgid "Authors"
-msgstr ""
+msgstr "Yazarlar"
 
 #: papers/templates/papers/advanced_search.html:26
 msgid "Search by names or ORCIDs. Separate with commas and prefix with <code>last:</code> to enforce last name search."
-msgstr ""
+msgstr "İsimlere veya ORCID'lere göre arama yapın. Soyadı aramasını zorunlu kılmak için virgülle ayırın ve <code>last:</code> ile önek ekleyin."
 
 #: papers/templates/papers/advanced_search.html:39
 #, fuzzy
@@ -892,40 +890,40 @@ msgstr "Belge"
 
 #: papers/templates/papers/advanced_search.html:60
 msgid "Fields for superusers"
-msgstr ""
+msgstr "Süper kullanıcılar için alanlar"
 
 #: papers/templates/papers/advanced_search.html:62
 #: papers/templates/papers/search_base.html:124
 msgid "By visibility"
-msgstr ""
+msgstr "Görünürlük göre"
 
 #: papers/templates/papers/advanced_search.html:66
 #: papers/templates/papers/search_base.html:128
 msgid "By full text availability"
-msgstr ""
+msgstr "Tam metin kullanılabilirliğine göre"
 
 #: papers/templates/papers/advanced_search.html:70
 #: papers/templates/papers/search_base.html:132 publishers/forms.py:23
 msgid "By publisher policy"
-msgstr ""
+msgstr "Yayıncı politikasına göre"
 
 #: papers/templates/papers/author_list.html:21
 msgid "This contributorship is confirmed by ORCID."
-msgstr ""
+msgstr "Bu katkı ORCID tarafından onaylanmıştır."
 
 #: papers/templates/papers/export_citation_modal.html:7
 #: papers/templates/papers/paper_panel.html:59
 msgid "Export citation"
-msgstr ""
+msgstr "Alıntıyı dışa aktar"
 
 #: papers/templates/papers/export_citation_modal.html:8
 #: papers/templates/papers/export_citation_modal.html:30
 msgid "Close"
-msgstr ""
+msgstr "Kapat"
 
 #: papers/templates/papers/export_citation_modal.html:15
 msgid "Format"
-msgstr ""
+msgstr "Biçim"
 
 #: papers/templates/papers/export_citation_modal.html:31
 #: papers/templates/papers/paper.html:144
@@ -937,11 +935,11 @@ msgstr "İndir"
 #, python-format
 msgid "We ignored %(papers)s paper from your ORCiD profile."
 msgid_plural "We ignored %(papers)s papers from your ORCiD profile."
-msgstr[0] ""
+msgstr[0] "%(papers)s adlı makaleyi ORCiD profilinizden yoksaydık."
 
 #: papers/templates/papers/messages.html:14
 msgid "Details:"
-msgstr ""
+msgstr "Ayrıntılar"
 
 #: papers/templates/papers/messages.html:21
 #, fuzzy
@@ -965,32 +963,32 @@ msgstr "Yayınlama bekleniyor"
 
 #: papers/templates/papers/messages.html:29
 msgid "Paper is invalid"
-msgstr ""
+msgstr "Kağıt geçersiz"
 
 #: papers/templates/papers/messages.html:32
 msgid "{{ title }} was ignored for the following reason:"
-msgstr ""
+msgstr "{{ title }}, şu nedenle yok sayıldı:"
 
 #: papers/templates/papers/messages.html:36
 msgid "A paper was ignored, because is has no title."
-msgstr ""
+msgstr "Makalesi yok çünkü başlık yok."
 
 #: papers/templates/papers/paper.html:39
 #, python-format
 msgctxt "as in: _Journal article published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "%(doctype)s published in %(year)s by"
-msgstr ""
+msgstr "%(year)s içinde %(doctype)s yayınlandı"
 
 #: papers/templates/papers/paper.html:45
 #, python-format
 msgctxt "as in: _Published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "Published in %(year)s by"
-msgstr ""
+msgstr "%(year)s içinde yayınlayan"
 
 #: papers/templates/papers/paper.html:55
 #, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
-msgstr ""
+msgstr "ve <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s diğer yazarlar.</a>"
 
 #: papers/templates/papers/paper.html:61
 #, fuzzy
@@ -999,40 +997,40 @@ msgstr "Göster"
 
 #: papers/templates/papers/paper.html:71
 msgid "Deposit accomplished!"
-msgstr ""
+msgstr "Para yatırma işlemi tamamlandı!"
 
 #: papers/templates/papers/paper.html:72
 #, python-format
 msgid "<p>This paper was successfully deposited and is now freely available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address.</a></p>"
-msgstr ""
+msgstr "<p>Bu makale başarıyla yatırıldı ve artık <a class=\"alert-link\" href=\"%(splash_url)s\">bu adresten ücretsiz olarak erişilebilir.</a></p>"
 
 #: papers/templates/papers/paper.html:79 papers/templates/papers/paper.html:103
 msgid "Deposit almost accomplished!"
-msgstr ""
+msgstr "Depozito neredeyse tamamlandı!"
 
 #: papers/templates/papers/paper.html:81
 #, python-format
 msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> after validation by the repository administrators.</p>"
-msgstr ""
+msgstr "<p> Bu makale <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> içine yerleştirilmiştir. Tam metin, depo yöneticileri tarafından onaylandıktan sonra <a class=\"alert-link\" href=\"%(splash_url)s\">bu adresinde</a> bulunabilir.</p>"
 
 #: papers/templates/papers/paper.html:88
 msgid "Letter of Declaration needed!"
-msgstr ""
+msgstr "Beyanname gerekli!"
 
 #: papers/templates/papers/paper.html:91
 #, python-format
 msgid "<p>The repository %(deposit.repository.name)s requires a letter of declaration to publish this publication. Please <a class=\"alert-link\" href=\"%(letter_url)s\">download</a> the letter, sign it and send it to the repository administration.</p>"
-msgstr ""
+msgstr "<p>%(deposit.repository.name)s deposu, bu yayını yayımlamak için bir bildiri mektubu gerektirir. Lütfen mektubu <a class=\"alert-link\" href=\"%(letter_url)s\">indirin</a>, imzalayın ve depo yönetimine gönderin.</p>"
 
 #: papers/templates/papers/paper.html:104
 #, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> after validation by the repository administrators."
-msgstr ""
+msgstr "Bu makale <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> içine yerleştirilmiştir. Tam metin, depo yöneticileri tarafından onaylandıktan sonra <a class=\"alert-link\" href=\"%(deposit_url)s\">bu adresinde </a> bulunabilir."
 
 #: papers/templates/papers/paper.html:117
 #, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> from <strong>%(pub_date|localize)s</strong> on due to an embargo."
-msgstr ""
+msgstr "Bu makale <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a> içine yerleştirilmiştir. Tam metin şu adresten <a class=\"alert-link\" href=%(pub_date|localize)s</strong> adresinden bir ambargo <a class=\"alert-link\" href=\"%(deposit_url)s\">burada</a> bulunabilir."
 
 #: papers/templates/papers/paper.html:142
 msgid "Full text:"
@@ -1045,11 +1043,11 @@ msgstr "Müsait değil"
 #: papers/templates/papers/paper_list.html:36
 #, python-format
 msgid "and %(remaining_authors)s other authors"
-msgstr ""
+msgstr "ve %(remaining_authors)s diğer yazalar"
 
 #: papers/templates/papers/paper_list.html:55
 msgid "from"
-msgstr ""
+msgstr "gönderen"
 
 #: papers/templates/papers/paper_list.html:57
 #: papers/templates/papers/policies.html:17
@@ -1060,15 +1058,15 @@ msgstr "Yükle"
 
 #: papers/templates/papers/paper_list.html:65
 msgid "Exclude from my profile"
-msgstr ""
+msgstr "Profilimden hariç tut"
 
 #: papers/templates/papers/paper_list.html:69
 msgid "Include in my profile"
-msgstr ""
+msgstr "Profilime dahil tut"
 
 #: papers/templates/papers/paper_panel.html:10
 msgid "Published in"
-msgstr ""
+msgstr "Yayınlanan"
 
 #: papers/templates/papers/paper_panel.html:19
 msgid "Links"
@@ -1080,7 +1078,7 @@ msgstr "Araçlar"
 
 #: papers/templates/papers/paper_panel.html:64
 msgid "Search in Google Scholar"
-msgstr ""
+msgstr "Google Akademik'te ara"
 
 #: papers/templates/papers/paper_panel.html:69
 msgid "Admin zone"
@@ -1089,37 +1087,37 @@ msgstr "Yönetici alanı"
 #: papers/templates/papers/policies.html:56
 #: publishers/templates/publishers/publisher.html:92
 msgid "Policy details"
-msgstr ""
+msgstr "Politika ayrıntıları"
 
 #: papers/templates/papers/policies.html:70
 #: papers/templates/papers/policies.html:86
 msgid "Blue circle"
-msgstr ""
+msgstr "Mavi daire"
 
 #: papers/templates/papers/policies.html:73
 msgid "Mark this publication for later upload."
-msgstr ""
+msgstr "Daha sonra yüklemek için bu yayını işaretleyin."
 
 #: papers/templates/papers/policies.html:76
 msgid "Mark"
-msgstr ""
+msgstr "İşaretle"
 
 #: papers/templates/papers/policies.html:77
 msgid "Marked"
-msgstr ""
+msgstr "İşaretlendi"
 
 #: papers/templates/papers/policies.html:89
 msgid "Contact the authors to make this publication freely available. This is a service of the Open Access Button."
-msgstr ""
+msgstr "Bu yayını ücretsiz olarak sunmak için yazarlarla iletişime geçin. Bu, Açık Erişim Düğmesinin bir hizmetidir."
 
 #: papers/templates/papers/policies.html:89
 msgid "Contact authors"
-msgstr ""
+msgstr "Yazarlarla iletişim kurun"
 
 #: papers/templates/papers/policies.html:92
 #: website/templates/dissemin/tos.html:49
 msgid "Contact"
-msgstr ""
+msgstr "İletişim"
 
 #: papers/templates/papers/researcher.html:14
 msgid "Is it you?"
@@ -1128,11 +1126,11 @@ msgstr "Siz misiniz?"
 #: papers/templates/papers/researcher.html:26
 #, python-format
 msgid " %(first_name)s %(last_name)s uses ORCID."
-msgstr ""
+msgstr " %(first_name)s %(last_name)s, ORCID kullanır."
 
 #: papers/templates/papers/researcher.html:38
 msgid "Refresh Publications"
-msgstr ""
+msgstr "Yayınları Yenile"
 
 #: papers/templates/papers/researcher.html:42
 msgid "Address:"
@@ -1159,9 +1157,8 @@ msgid "Refine"
 msgstr ""
 
 #: papers/templates/papers/search_base.html:46
-#, fuzzy
 msgid "By title"
-msgstr "başlık"
+msgstr "Başlığa göre"
 
 #: papers/templates/papers/search_base.html:55
 msgid "By co-authors"
@@ -1374,9 +1371,8 @@ msgid "This paper has been deleted."
 msgstr ""
 
 #: papers/views.py:433
-#, fuzzy
 msgid "Invalid DOI."
-msgstr "Geçersiz URL."
+msgstr "Geçersiz DOI."
 
 #: publishers/forms.py:10
 msgid "popularity"

@@ -2,6 +2,8 @@
 # Exported from translatewiki.net
 #
 # Author: Becks
+# Author: Geraki
+# Author: GhotuoIncubator
 # Author: KATRINE1992
 # Author: Nikosgranturismogt
 # --
@@ -13,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-18 09:51+0100\n"
-"PO-Revision-Date: 2019-12-19 14:06:21+0000\n"
+"PO-Revision-Date: 2019-12-31 06:25:06+0000\n"
 "Language: el\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -497,9 +499,8 @@ msgid "PDF URL"
 msgstr "Διεύθυνση URL του PDF"
 
 #: deposit/templates/deposit/deposits.html:134
-#, fuzzy
 msgid "Status:"
-msgstr "Κατάσταση"
+msgstr "Κατάσταση:"
 
 #: deposit/templates/deposit/deposits.html:145
 msgid "Letter of Declaration"
@@ -579,9 +580,8 @@ msgid "Repository:"
 msgstr "Αποθηκευτήριο:"
 
 #: deposit/templates/deposit/start.html:192
-#, fuzzy
 msgid "Metadata:"
-msgstr "Μεταδεδομένα"
+msgstr "Μεταδεδομένα:"
 
 #: deposit/templates/deposit/start.html:212
 #: papers/templates/papers/search_base.html:165
@@ -985,10 +985,10 @@ msgid "A paper was ignored, because is has no title."
 msgstr ""
 
 #: papers/templates/papers/paper.html:39
-#, fuzzy, python-format
+#, python-format
 msgctxt "as in: _Journal article published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "%(doctype)s published in %(year)s by"
-msgstr "Δημοσιεύθηκε την"
+msgstr "%(doctype)s δημοσιεύθηκε το %(year)s"
 
 #: papers/templates/papers/paper.html:45
 #, fuzzy, python-format
@@ -1140,9 +1140,8 @@ msgid " %(first_name)s %(last_name)s uses ORCID."
 msgstr ""
 
 #: papers/templates/papers/researcher.html:38
-#, fuzzy
 msgid "Refresh Publications"
-msgstr "Ανανέωση εκδόσεων"
+msgstr "Ανανέωση Eκδόσεων"
 
 #: papers/templates/papers/researcher.html:42
 msgid "Address:"
@@ -1510,9 +1509,8 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: publishers/templates/publishers/list.html:96
-#, fuzzy
 msgid "No publishers found"
-msgstr "Δεν βρέθηκε εκδότης."
+msgstr "Δεν βρeθlhkane εκδότeς."
 
 #: publishers/templates/publishers/policy_pdfversion.html:5
 msgid "The published version is the final version of the paper, as formatted by the publisher."
@@ -1629,9 +1627,8 @@ msgid "Select here the full text of your article. PDF files only, maximum size:"
 msgstr ""
 
 #: upload/templates/upload/widget.html:15
-#, fuzzy
 msgid "Or enter a URL:"
-msgstr "Ή εισαγάγετε μια διεύθυνση URL:"
+msgstr "Ή εισαγάγετε ένα URL:"
 
 #: upload/templates/upload/widget.html:19
 msgid "Upload from URL"
@@ -2550,9 +2547,8 @@ msgid "Encourage researchers to use this service."
 msgstr "Ενθαρρύνετε τους ερευνητές να χρησιμοποιήσουν αυτήν την υπηρεσία"
 
 #: website/templates/dissemin/faq.html:559
-#, fuzzy
 msgid "Star <a href=\"https://github.com/dissemin/dissemin\">our GitHub project</a>!"
-msgstr "Βαθμολογήστε με αστέρια <a href=\"https://github.com/wetneb/dissemin\">το πρότζεκτ μας  GitHub </a>!"
+msgstr "Βαθμολογήστε με αστέρια <a href=\"https://github.com/dissemin/dissemin\">το πρότζεκτ μας στο GitHub</a>!"
 
 #: website/templates/dissemin/faq.html:564
 msgid "<a href=\"https://association.dissem.in/#dons\">Donations are accepted</a>."
