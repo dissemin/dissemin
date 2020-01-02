@@ -19,7 +19,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-18 09:51+0100\n"
-"PO-Revision-Date: 2019-12-31 06:25:06+0000\n"
+"PO-Revision-Date: 2020-01-02 13:32:00+0000\n"
 "Language: es\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2509,9 +2509,8 @@ msgid "The source code is available <a href=\"https://github.com/dissemin/dissem
 msgstr "El código fuente está disponible <a href=\"https://github.com/dissemin/dissemin\">en GitHub</a>."
 
 #: website/templates/dissemin/faq.html:579
-#, fuzzy
 msgid "Yes! We even have <a href=\"https://dissemin.readthedocs.io/en/latest/api.html\">an API</a>. If it does not suit your needs, please don't hesitate to get in touch by writing to <a href=\"mailto:hello@dissem.in\">hello@dissem.in</a>."
-msgstr "Si! Tenemos tambien <a href=\"https://dev.dissem.in/api.html\">uno API</a>. Si no conviene a sus necesitos, no hesite de contactarnos escribiendo to <a href=\"mailto:hello@dissem.in\">hello@dissem.in</a>"
+msgstr "¡Sí! Incluso contamos con <a href=\"https://dissemin.readthedocs.io/en/latest/api.html\">una API</a>. Si no se ajusta a tus necesidades, no dudes en contactarnos a <a href=\"mailto:hello@dissem.in\">hello@dissem.in</a> (en inglés)."
 
 #: website/templates/dissemin/faq.html:586
 msgid "Yes! See <a href=\"https://association.dissem.in/#logos\">here</a> for links to our logos and for explanations about how you can reuse them."

@@ -15,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-18 09:51+0100\n"
-"PO-Revision-Date: 2019-12-31 06:25:06+0000\n"
+"PO-Revision-Date: 2020-01-02 13:32:00+0000\n"
 "Language: fi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -671,7 +671,7 @@ msgstr "Englanti"
 
 #: dissemin/settings/common.py:305
 msgid "Finnish"
-msgstr "Suomi"
+msgstr "suomi"
 
 #: dissemin/settings/common.py:306
 msgid "French"
@@ -2002,9 +2002,8 @@ msgid "History of South America"
 msgstr "Etelä-Amerikan historia"
 
 #: vinaigrette-deleteme.py:100
-#, fuzzy
 msgid "History of other areas"
-msgstr "Pohjois-Amerikan historia"
+msgstr "Muiden alueiden historia"
 
 #: vinaigrette-deleteme.py:101
 msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"

@@ -12,7 +12,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-12 10:33+0100\n"
-"PO-Revision-Date: 2019-12-16 14:53:35+0000\n"
+"PO-Revision-Date: 2020-01-02 13:31:59+0000\n"
 "Language: pt_br\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -63,7 +63,7 @@ msgstr "Remover da lista de tarefas"
 
 #: website/static/js/dissemin.js:600
 msgid "Preview of uploaded file"
-msgstr ""
+msgstr "Visualização do arquivo enviado"
 
 #: website/static/js/dissemin.js:603
 msgid "Pages: "
