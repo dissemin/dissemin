@@ -1,4 +1,12 @@
+import os
 import pytest
+import responses
+import zipfile
+
+from urllib.parse import parse_qs
+from urllib.parse import urlparse
+
+from django.conf import settings
 
 from papers.models import Researcher
 from publishers.models import AliasPublisher
@@ -114,6 +122,37 @@ def mock_alias_publisher_increment(monkeypatch):
     Monkeypatch this function to mit DB access
     """
     monkeypatch.setattr(AliasPublisher, 'increment', lambda x,y: True)
+
+
+@pytest.fixture
+def rsps_fetch_day(requests_mocker):
+    """
+    Mocks the fetching of a day from CrossRef
+    """
+    # Open zipfile with fixtures
+    f_path = os.path.join(settings.BASE_DIR, 'backend', 'tests', 'data', 'crossref.zip')
+    zf = zipfile.ZipFile(f_path)
+
+    # Dynamic callback, response only depends on cursor
+    def request_callback(request):
+        called_url = request.url
+        query = parse_qs(urlparse(called_url).query)
+        cursor = query['cursor'][0]
+        if cursor == '*':
+            cursor = 'initial'
+        f_name = '{}.json'.format(cursor)
+        body = zf.read(f_name)
+        return (200, {}, body)
+
+    mock_url = 'https://api.crossref.org/works'
+
+    # Mocking the requests
+    requests_mocker.add_callback(
+        responses.GET,
+        mock_url,
+        callback=request_callback,
+    )
+    return requests_mocker
 
 
 @pytest.fixture

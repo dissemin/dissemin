@@ -1,7 +1,6 @@
 import os
 import pytest
 import responses
-import zipfile
 
 from datetime import date
 from datetime import datetime
@@ -615,8 +614,7 @@ class TestCrossRef(TestCiteproc):
         r = self.test_class.fetch_batch(dois)
         assert isinstance(r[0], Paper)
 
-    @responses.activate
-    def test_fetch_day(self, db):
+    def test_fetch_day(self, db, rsps_fetch_day):
         """
         Here we imitate the CrossRef API in a very simple version.
         We mock the request and inspect the params.
@@ -624,38 +622,37 @@ class TestCrossRef(TestCiteproc):
         """
         self.test_class.rows = 30
         self.test_class.emit_status_every = 3
-        # Open zipfile with fixtures
-        f_path = os.path.join(settings.BASE_DIR, 'backend', 'tests', 'data', 'crossref.zip')
-        zf = zipfile.ZipFile(f_path)
-
-        # Dynamic callback, response only depends on cursor
-        def request_callback(request):
-            called_url = request.url
-            query = parse_qs(urlparse(called_url).query)
-            cursor = query['cursor'][0]
-            if cursor == '*':
-                cursor = 'initial'
-            f_name = '{}.json'.format(cursor)
-            body = zf.read(f_name)
-            return (200, {}, body)
-        # Mocking the requests
-        mock_url = 'https://api.crossref.org/works'
-        responses.add_callback(
-            responses.GET,
-            mock_url,
-            callback=request_callback,
-        )
 
         day = date.today()
         self.test_class._fetch_day(day)
         # Some assertions
-        called_url = responses.calls[0].request.url
+        called_url = rsps_fetch_day.calls[0].request.url
         query = parse_qs(urlparse(called_url).query)
         query_f = query['filter'][0].split(',')
         for date_filter in ['from-update-date', 'until-update-date']:
             assert date_filter + ':{}'.format(day) in query_f
         assert query['rows'][0] == str(self.test_class.rows)
         assert query['mailto'][0] == settings.CROSSREF_MAILTO
+
+    def test_fetch_day_citeproc_error(self, db, monkeypatch, rsps_fetch_day):
+        """
+        If a CiteprocError raises, do not starve
+        """
+        def callback(*args, **kwargs):
+            raise CiteprocError('Error')
+        monkeypatch.setattr(self.test_class, 'to_paper', callback)
+        day = date.today()
+        self.test_class._fetch_day(day)
+
+    def test_fetch_day_value_error(self, db, monkeypatch, rsps_fetch_day):
+        """
+        If a ValueError raises, do not starve
+        """
+        def callback(*args, **kwargs):
+            raise ValueError('Error')
+        monkeypatch.setattr(self.test_class, 'to_paper', callback)
+        day = date.today()
+        self.test_class._fetch_day(day)
 
 
     def test_filter_dois_by_comma(self):
