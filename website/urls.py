@@ -120,14 +120,17 @@ urlpatterns = [
     # Paper related pages
     path('advanced-search/', AdvancedPaperSearchView.as_view(), name='advanced-search'),
     path('p/<int:pk>/<slug:slug>/', PaperView.as_view(), name='paper'),
+    path('p/<int:pk>/', PaperView.as_view(), name='paper'),
     re_path(r'^(?P<doi>10\..*)', PaperView.as_view(), name='paper-doi'),
     re_path(r'p/direct/(?P<doi>10\..*)', redirect_by_doi, name='paper-redirect-doi'),
     path('search/', PaperSearchView.as_view(), name='search'),
     # Publisher related pages
     path('publishers/', PublishersView.as_view(), name='publishers'),
     path('b/<int:pk>/<slug:slug>/', PublisherView.as_view(), name='publisher'),
+    path('b/<int:pk>/', PublisherView.as_view(), name='publisher'),
     # Researcher realted pages
     path('r/<int:researcher>/<slug:slug>/', ResearcherView.as_view(), name='researcher'),
+    path('r/<int:researcher>/', ResearcherView.as_view(), name='researcher'),
     re_path(r'^(?P<orcid>[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{3}[X0-9])/$', ResearcherView.as_view(), name='researcher-by-orcid'),
     # Upload related pages
     path('autocomplete/hal/affiliation/', affiliation_autocomplete, name='autocomplete-hal-affiliations'),
@@ -143,6 +146,7 @@ urlpatterns = [
     # API
     path('api/p/<int:pk>', api_paper_pk, name='api-paper-pk'),
     path('api/r/<int:researcher>/<slug:slug>/', ResearcherAPI.as_view(), name='api-researcher-id'),
+    path('api/r/<int:researcher>/', ResearcherAPI.as_view(), name='api-researcher-id'),
     path('api/query/', api_paper_query, name='api-paper-query'),
     path('api/search/', PaperSearchAPI.as_view(), name='api-paper-search'),
     re_path(r'^api/(?P<doi>10\..*)$', api_paper_doi, name='api-paper-doi'),

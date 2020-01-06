@@ -60,6 +60,14 @@ class TestDoai():
         check_permanent_redirect('paper-redirect-doi', kwargs={'doi': '10.1385/1592597998'}, url=doi_to_url('10.1385/1592597998'))
 
 
+class TestPaperView():
+
+    def test_no_slug_in_request(self, dissemin_base_client, book_god_of_the_labyrinth):
+        url = reverse('paper', args=[book_god_of_the_labyrinth.pk])
+        r = dissemin_base_client.get(url)
+        assert r.status_code == 301
+        assert r.url == reverse('paper', args=[book_god_of_the_labyrinth.pk, book_god_of_the_labyrinth.slug])
+
 @pytest.mark.usefixtures("load_test_data")
 class TestPaperPages():
     """
