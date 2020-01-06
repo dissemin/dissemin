@@ -5,6 +5,7 @@
 # Author: Athena in Wonderland
 # Author: Fitoschido
 # Author: Hamilton Abreu
+# Author: Mansil
 # --
 # This file is part of the Dissemin Project
 # This file is distributed under the same license as the Dissemin package.
@@ -14,7 +15,7 @@ msgstr ""
 ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-18 09:51+0100\n"
-"PO-Revision-Date: 2019-12-31 06:25:08+0000\n"
+"PO-Revision-Date: 2020-01-06 16:41:08+0000\n"
 "Language: pt\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -863,9 +864,8 @@ msgid "Papers"
 msgstr "Documentos"
 
 #: papers/templates/papers/advanced_search.html:8
-#, fuzzy
 msgid "Advanced Search"
-msgstr "Pesquisa avançada"
+msgstr "Pesquisa Avançada"
 
 #: papers/templates/papers/advanced_search.html:13
 #: website/templates/dissemin/start_page.html:30
@@ -961,15 +961,15 @@ msgstr "Sem data de publicação"
 
 #: papers/templates/papers/messages.html:29
 msgid "Paper is invalid"
-msgstr ""
+msgstr "O papel é inválido"
 
 #: papers/templates/papers/messages.html:32
 msgid "{{ title }} was ignored for the following reason:"
-msgstr ""
+msgstr "{{ title }} foi ignorado pelo seguinte motivo:"
 
 #: papers/templates/papers/messages.html:36
 msgid "A paper was ignored, because is has no title."
-msgstr ""
+msgstr "Um papel foi ignorado, porque não tinha título."
 
 #: papers/templates/papers/paper.html:39
 #, python-format
@@ -984,9 +984,9 @@ msgid "Published in %(year)s by"
 msgstr "Publicado em %(year)s por"
 
 #: papers/templates/papers/paper.html:55
-#, fuzzy, python-format
+#, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
-msgstr "\n            and <a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s outros autores</a>\n            "
+msgstr "e <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s outros autores</a>"
 
 #: papers/templates/papers/paper.html:61
 msgid "Show less"
@@ -1089,7 +1089,7 @@ msgstr "Detalhes das normas"
 #: papers/templates/papers/policies.html:70
 #: papers/templates/papers/policies.html:86
 msgid "Blue circle"
-msgstr ""
+msgstr "Círculo azul"
 
 #: papers/templates/papers/policies.html:73
 msgid "Mark this publication for later upload."
@@ -1316,7 +1316,7 @@ msgstr "Círculo verde"
 
 #: papers/templatetags/statuses.py:111
 msgid "Red circle"
-msgstr ""
+msgstr "Círculo vermelho"
 
 #: papers/templatetags/statuses.py:112
 msgid "Orange circle"
@@ -1399,7 +1399,7 @@ msgstr "Pela editora"
 
 #: publishers/forms.py:38
 msgid "Order"
-msgstr ""
+msgstr "Ordenação"
 
 #: publishers/models.py:39 website/templates/dissemin/faq.html:292
 msgid "Open access"
@@ -1493,9 +1493,8 @@ msgstr[0] "(%(num_total)s documento)"
 msgstr[1] "(%(num_total)s documentos)"
 
 #: publishers/templates/publishers/list.html:96
-#, fuzzy
 msgid "No publishers found"
-msgstr "Não foi encontrada nenhuma editora."
+msgstr "Não foi encontrada nenhuma editora"
 
 #: publishers/templates/publishers/policy_pdfversion.html:5
 msgid "The published version is the final version of the paper, as formatted by the publisher."
@@ -1524,7 +1523,7 @@ msgstr "Reportar-lhes todos os erros."
 
 #: publishers/templates/publishers/publisher.html:51
 msgid "For superusers"
-msgstr ""
+msgstr "Para super utilizadores"
 
 #: publishers/templates/publishers/publisher.html:54
 msgid "Change open access status"
@@ -1611,11 +1610,11 @@ msgstr "Selecione aqui o texto completo do seu artigo. Apenas os ficheiros PDF, 
 
 #: upload/templates/upload/widget.html:15
 msgid "Or enter a URL:"
-msgstr "Ou introduza um URL:"
+msgstr "Ou insira um URL:"
 
 #: upload/templates/upload/widget.html:19
 msgid "Upload from URL"
-msgstr ""
+msgstr "Carregar de um URL"
 
 #: upload/templates/upload/widget.html:27
 msgid "Fetching file and generating preview..."
@@ -2053,7 +2052,7 @@ msgstr "Outra licença aberta"
 
 #: vinaigrette-deleteme.py:109
 msgid "Zenodo"
-msgstr ""
+msgstr "Zenodo"
 
 #: vinaigrette-deleteme.py:110
 msgid "Zenodo is a general-purpose open repository hosted by CERN. If the document does not have a DOI yet, Zenodo will create one."
@@ -2061,7 +2060,7 @@ msgstr ""
 
 #: vinaigrette-deleteme.py:111
 msgid "HAL"
-msgstr ""
+msgstr "HAL"
 
 #: vinaigrette-deleteme.py:112
 msgid "HAL is a  multidisciplinary open archive, sustained by the French Research Ministry."
@@ -2102,9 +2101,9 @@ msgid "Internal server error"
 msgstr "Erro interno do servidor"
 
 #: website/templates/500.html:13
-#, fuzzy, python-format
+#, python-format
 msgid "Your request triggered an internal server error. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "\n            O seu pedido provocou um erro interno. <a href=\"/\">Volte para a página inicial.</a>\n           "
+msgstr "O seu pedido provocou um erro interno do servidor. <a href=\"%(index)s\">Volte para a página inicial.</a>"
 
 #: website/templates/admin/base_site.html:5
 #: website/templates/admin/base_site.html:8
@@ -2338,7 +2337,7 @@ msgstr ""
 
 #: website/templates/dissemin/faq.html:286
 msgid "Description"
-msgstr ""
+msgstr "Descrição"
 
 #: website/templates/dissemin/faq.html:295
 msgid "<strong>Open access:</strong><br /> The full text is made freely available by the publisher (in a fully open access or hybrid journal)."
@@ -2432,9 +2431,8 @@ msgid "In most cases, the errors that you see on Dissemin have not been introduc
 msgstr "Na maioria dos casos, os erros que encontrar no Dissemin não foram introduzidas pelo Dissemin, mas já estão presentes nas <a href=\"{{ sources_url }}\">fontes públicas</a> que o Dissemin colhe. Portanto, primeiro verifique se o erro que encontrou já está presente nas nossas fontes de dados, consultando a secção de \"Ligações\" na parte superior direita da página. Se uma destas páginas conter o erro, deve comunicar o problema para eles, e não para nós, caso contrário o erro persistirá na fonte."
 
 #: website/templates/dissemin/faq.html:431
-#, fuzzy
 msgid "If the error is not present in any of the sources and you believe that Dissemin may have introduced the problem, please file an <a href=\"https://github.com/dissemin/dissemin/issues\">issue</a> with details of the problem, or send a message to <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. Note that you cannot yet fix the problem yourself, although we hope in the longer term to develop a system to allow our users to edit details of their papers themselves."
-msgstr "Se o erro não estiver presente em nenhuma das fontes e acredita que o Dissemin pode ter apresentado o problema, por favor envie uma <a href=\"https://github.com/dissemin/dissemin/issues\">incidência</a> com os detalhes do problema, ou envie uma mensagem para <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. Observe que ainda não pode corrigir o problema sozinho, embora esperemos, a longo prazo, programar um sistema que permita aos nossos utilizadores editar os detalhes dos seus próprios documentos."
+msgstr "Se o erro não estiver presente em nenhuma das fontes e acredita que Dissemin possa ter introduzido o problema, por favor, envie o <a href=\"https://github.com/dissemin/dissemin/issues\">problema</a> com os detalhes do problema, ou envie uma mensagem para <a href=\"mailto:bugs@dissem.in\">bugs@dissem.in</a>. Note que ainda não pode corrigir o problema sozinho, embora nós esperamos, a longo prazo, desenvolver um sistema para permitir que os nossos utilizadores editem os detalhes dos seus próprios documentos."
 
 #: website/templates/dissemin/faq.html:438
 #, fuzzy
@@ -2512,7 +2510,6 @@ msgid "Encourage researchers to use this service."
 msgstr "Incentive os investigadores a utilizar este serviço."
 
 #: website/templates/dissemin/faq.html:559
-#, fuzzy
 msgid "Star <a href=\"https://github.com/dissemin/dissemin\">our GitHub project</a>!"
 msgstr "Siga o <a href=\"https://github.com/wetneb/dissemin\">o nosso projeto no GitHub</a>!"
 
@@ -2559,18 +2556,16 @@ msgid "Sign up"
 msgstr "Registe-se"
 
 #: website/templates/dissemin/login.html:41
-#, fuzzy
 msgid "Not an ORCID user yet? Create an account, it is free and takes just a few seconds."
-msgstr "Ainda não é um utilizador do ORCID? Crie uma conta, é grátis e leva apenas alguns segundos."
+msgstr "Ainda não é um utilizador de ORCID? Crie uma conta, é grátis e leva apenas alguns segundos."
 
 #: website/templates/dissemin/sources.html:5
 msgid "Data sources"
 msgstr "Fontes de dados"
 
 #: website/templates/dissemin/sources.html:10
-#, fuzzy
 msgid "Data Sources"
-msgstr "Fontes de dados"
+msgstr "Fontes de Dados"
 
 #: website/templates/dissemin/sources.html:14
 msgid "<a href=\"https://www.crossref.org\">CrossRef.org</a> for traditional academic papers"
@@ -2586,7 +2581,7 @@ msgstr ""
 
 #: website/templates/dissemin/sources.html:23
 msgid "<a href=\"https://www.zotero.org/\">Zotero</a> for metadata associated to DOIs"
-msgstr ""
+msgstr "<a href=\"https://www.zotero.org/\">Zotero</a> para metadados associados com DOIs"
 
 #: website/templates/dissemin/start_page.html:9
 msgid "Home"
@@ -2670,7 +2665,7 @@ msgstr ""
 
 #: website/templates/dissemin/start_page.html:131
 msgid "Network of Partners"
-msgstr ""
+msgstr "Rede de Parceiros"
 
 #: website/templates/dissemin/start_page.html:134
 msgid "Partners"
