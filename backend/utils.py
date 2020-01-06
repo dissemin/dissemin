@@ -79,7 +79,7 @@ def request_retry(url, **kwargs):
     """
     params = kwargs.get('params', None)
     timeout = kwargs.get('timeout', 10)
-    retries = kwargs.get('retries', 0)
+    retries = kwargs.get('retries', 5)
     delay = kwargs.get('delay', 5)
     backoff = kwargs.get('backoff', 2)
     headers = kwargs.get('headers', {})
