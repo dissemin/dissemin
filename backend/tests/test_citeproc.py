@@ -439,7 +439,13 @@ class TestCiteproc():
         citeproc['title'] = 'x' * 2000
         r = self.test_class._get_title(citeproc)
         assert r == citeproc['title'][:1024]
-        assert len(r) <= 2014
+        assert len(r) <= 1024
+
+    def test_get_title_length_with_unicode(self, citeproc):
+        citeproc['title'] = '–' * 1024
+        r = self.test_class._get_title(citeproc)
+        assert r == citeproc['title'][:341]
+        assert len(r) <= 1024
 
     def test_get_title_no_title(self, citeproc):
         """

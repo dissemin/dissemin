@@ -79,7 +79,7 @@ def request_retry(url, **kwargs):
     """
     params = kwargs.get('params', None)
     timeout = kwargs.get('timeout', 10)
-    retries = kwargs.get('retries', 5)
+    retries = kwargs.get('retries', 0)
     delay = kwargs.get('delay', 5)
     backoff = kwargs.get('backoff', 2)
     headers = kwargs.get('headers', {})
@@ -112,6 +112,24 @@ def urlopen_retry(url, **kwargs):
 @memoize(timeout=86400)  # 1 day
 def cached_urlopen_retry(*args, **kwargs):
     return urlopen_retry(*args, **kwargs)
+
+
+def utf8_truncate(s, length=1024):
+    """
+    Truncates a string to given length when converted to utf8.
+    :param s: string to truncate
+    :param length: Desired length, default 1024
+    :returns: String of utf8-length with at most 1024
+
+    We cannot convert to utf8 and slice, since this might yield incomplete characters when decoding back.
+    """
+    s = s[:1024]
+
+    while len(s.encode('utf-8')) > length:
+        s = s[:-1]
+
+    return s
+
 
 def with_speed_report(generator, name=None, report_delay=timedelta(seconds=10)):
     """

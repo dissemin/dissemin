@@ -16,10 +16,10 @@ from datetime import timedelta
 from django.conf import settings
 from django.utils import timezone
 
-
 from backend.doiprefixes import free_doi_prefixes
 from backend.pubtype_translations import CITEPROC_PUBTYPE_TRANSLATION
 from backend.utils import request_retry
+from backend.utils import utf8_truncate
 from papers.baremodels import BareName
 from papers.baremodels import BareOaiRecord
 from papers.baremodels import BarePaper
@@ -383,7 +383,7 @@ class Citeproc():
         :raises: CiteprocError
         """
         # Check for a title
-        title = data.get('title', '')[:1024]
+        title = utf8_truncate(data.get('title', ''), 1024)
         if title is '':
             raise CiteprocTitleError('No title in metadata')
         return title
@@ -505,6 +505,9 @@ class CrossRef(Citeproc):
                         cls.to_paper(item)
                     except CiteprocError:
                         logger.debug(item)
+                    except ValueError as e:
+                        logger.exception(e)
+                        logger.error(item)
                     else:
                         new_papers += 1
             # After running ten times
