@@ -10,9 +10,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-12 10:33+0100\n"
+"POT-Creation-Date: 2020-01-07 14:39+0100\n"
 "PO-Revision-Date: 2019-12-26 11:32:38+0000\n"
 "Language: tr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -105,4 +104,3 @@ msgstr "Dissemin bir hatayla karşılaştı, lütfen daha sonra tekrar deneyin."
 #: website/static/js/moment.min.js:1
 msgid ": "
 msgstr ": "
-

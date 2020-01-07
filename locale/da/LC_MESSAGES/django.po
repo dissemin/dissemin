@@ -10,9 +10,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-18 09:51+0100\n"
+"POT-Creation-Date: 2020-01-07 14:39+0100\n"
 "PO-Revision-Date: 2019-12-19 14:06:20+0000\n"
 "Language: da\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -48,7 +47,7 @@ msgstr "Arkiv"
 msgid "Invalid full text identifier."
 msgstr "Ugyldig fuldtekstidentifikator."
 
-#: deposit/forms.py:144 papers/templates/papers/paper.html:158
+#: deposit/forms.py:144 papers/templates/papers/paper.html:160
 msgid "Abstract"
 msgstr "Sammendrag"
 
@@ -86,7 +85,7 @@ msgstr "Indskyderforfatter"
 msgid "Affiliation"
 msgstr "Tilknytning"
 
-#: deposit/hal/metadata.py:36 vinaigrette-deleteme.py:55
+#: deposit/hal/metadata.py:36 model-gettext.py:55
 msgid "Chemistry"
 msgstr "Kemi"
 
@@ -94,11 +93,11 @@ msgstr "Kemi"
 msgid "Computer science"
 msgstr "Computervidenskab"
 
-#: deposit/hal/metadata.py:38 vinaigrette-deleteme.py:52
+#: deposit/hal/metadata.py:38 model-gettext.py:52
 msgid "Mathematics"
 msgstr "Matematik"
 
-#: deposit/hal/metadata.py:39 vinaigrette-deleteme.py:54
+#: deposit/hal/metadata.py:39 model-gettext.py:54
 msgid "Physics"
 msgstr "Fysik"
 
@@ -147,7 +146,7 @@ msgid "Demography"
 msgstr "Demografi"
 
 #: deposit/hal/metadata.py:51 deposit/osf/forms.py:67 deposit/osf/forms.py:90
-#: vinaigrette-deleteme.py:35
+#: model-gettext.py:35
 msgid "Law"
 msgstr "Jura"
 
@@ -156,7 +155,7 @@ msgid "Economies and finances"
 msgstr "Økonomi og finans"
 
 #: deposit/hal/metadata.py:53 deposit/osf/forms.py:63 deposit/osf/forms.py:86
-#: vinaigrette-deleteme.py:38
+#: model-gettext.py:38
 msgid "Education"
 msgstr "Uddannelse"
 
@@ -180,7 +179,7 @@ msgstr "Forretningsadministration"
 msgid "History, Philosophy and Sociology of Sciences"
 msgstr "Historie, filosofi og sociologi"
 
-#: deposit/hal/metadata.py:59 vinaigrette-deleteme.py:91
+#: deposit/hal/metadata.py:59 model-gettext.py:91
 msgid "History"
 msgstr "Historie"
 
@@ -188,7 +187,7 @@ msgstr "Historie"
 msgid "Library and information sciences"
 msgstr "Biblioteks- og informationsvidenskaber"
 
-#: deposit/hal/metadata.py:61 vinaigrette-deleteme.py:42
+#: deposit/hal/metadata.py:61 model-gettext.py:42
 msgid "Linguistics"
 msgstr "Lingvistik"
 
@@ -204,11 +203,11 @@ msgstr "Kulturarv og museologi"
 msgid "Musicology and performing arts"
 msgstr "Musikvidenskab og scenekunst"
 
-#: deposit/hal/metadata.py:65 vinaigrette-deleteme.py:11
+#: deposit/hal/metadata.py:65 model-gettext.py:11
 msgid "Philosophy"
 msgstr "Filosofi"
 
-#: deposit/hal/metadata.py:66 vinaigrette-deleteme.py:16
+#: deposit/hal/metadata.py:66 model-gettext.py:16
 msgid "Psychology"
 msgstr "Psykologi"
 
@@ -216,7 +215,7 @@ msgstr "Psykologi"
 msgid "Religions"
 msgstr "Religioner"
 
-#: deposit/hal/metadata.py:68 vinaigrette-deleteme.py:33
+#: deposit/hal/metadata.py:68 model-gettext.py:33
 msgid "Political science"
 msgstr "Statsvidenskab"
 
@@ -236,8 +235,9 @@ msgstr "Biovidenskab"
 msgid "Engineering sciences"
 msgstr "Ingeniørvidenskab"
 
-#: deposit/hal/metadata.py:73 papers/templates/papers/search_base.html:23
-#: publishers/templates/publishers/list.html:16 vinaigrette-deleteme.py:32
+#: deposit/hal/metadata.py:73 model-gettext.py:32
+#: papers/templates/papers/search_base.html:23
+#: publishers/templates/publishers/list.html:16
 msgid "Statistics"
 msgstr "Statistik"
 
@@ -318,16 +318,16 @@ msgstr "Afvist af arkivet"
 msgid "Deleted"
 msgstr "Slettet"
 
-#: deposit/models.py:287 deposit/templates/deposit/start.html:205
+#: deposit/models.py:290 deposit/templates/deposit/start.html:205
 #: deposit/views.py:120
 msgid "Deposit"
 msgstr "Depositum"
 
-#: deposit/models.py:340
+#: deposit/models.py:343
 msgid "We will use this email address to notify you when your deposits are accepted."
 msgstr "Vi vil bruge denne e-postadresse til at give dig besked, når dit depositum accepteres."
 
-#: deposit/models.py:346
+#: deposit/models.py:349
 msgid "This repository will be used by default for your deposits."
 msgstr "Dette arkiv vil blive brugt til dine deposita."
 
@@ -339,11 +339,11 @@ msgstr "Creative Commons CC0 1.0 Universal"
 msgid "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
 msgstr "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
 
-#: deposit/osf/forms.py:40 deposit/osf/forms.py:51 vinaigrette-deleteme.py:108
+#: deposit/osf/forms.py:40 deposit/osf/forms.py:51 model-gettext.py:117
 msgid "No license"
 msgstr "Ingen licens"
 
-#: deposit/osf/forms.py:57 deposit/osf/forms.py:80 vinaigrette-deleteme.py:73
+#: deposit/osf/forms.py:57 deposit/osf/forms.py:80 model-gettext.py:73
 msgid "Architecture"
 msgstr "Arkitektur"
 
@@ -355,7 +355,7 @@ msgstr "Kunst og humaniora"
 msgid "Business"
 msgstr "Forretning"
 
-#: deposit/osf/forms.py:65 deposit/osf/forms.py:88 vinaigrette-deleteme.py:63
+#: deposit/osf/forms.py:65 deposit/osf/forms.py:88 model-gettext.py:63
 msgid "Engineering"
 msgstr "Ingeniørarbejde"
 
@@ -664,57 +664,544 @@ msgstr ""
 msgid "Unable to publish the deposition on Zenodo."
 msgstr ""
 
-#: dissemin/settings/common.py:303
+#: dissemin/settings/common.py:308
 msgid "Arabic"
 msgstr "Arabisk"
 
-#: dissemin/settings/common.py:304
+#: dissemin/settings/common.py:309
 msgid "English"
 msgstr "Engelsk"
 
-#: dissemin/settings/common.py:305
+#: dissemin/settings/common.py:310
 msgid "Finnish"
 msgstr "Finsk"
 
-#: dissemin/settings/common.py:306
+#: dissemin/settings/common.py:311
 msgid "French"
 msgstr "Fransk"
 
-#: dissemin/settings/common.py:307
+#: dissemin/settings/common.py:312
 msgid "Korean"
 msgstr "Koreansk"
 
-#: dissemin/settings/common.py:308
+#: dissemin/settings/common.py:313
 msgid "Spanish"
 msgstr "Spansk"
 
-#: dissemin/settings/common.py:309
+#: dissemin/settings/common.py:314
 msgid "Simplified Chinese"
 msgstr "Forenklet kinesisk"
 
-#: dissemin/settings/common.py:310
+#: dissemin/settings/common.py:315
 msgid "Traditional Chinese"
 msgstr "Traditionelt kinesisk"
 
-#: dissemin/settings/common.py:311
+#: dissemin/settings/common.py:316
 msgid "Macedonian"
 msgstr "Makedonsk"
 
-#: dissemin/settings/common.py:312
+#: dissemin/settings/common.py:317
 msgid "German"
 msgstr "Tysk"
 
-#: dissemin/settings/common.py:313
+#: dissemin/settings/common.py:318
 msgid "Brazilian Portuguese"
 msgstr ""
 
-#: dissemin/settings/common.py:314
+#: dissemin/settings/common.py:319
 msgid "European Portuguese"
 msgstr ""
 
-#: dissemin/settings/common.py:315
+#: dissemin/settings/common.py:320
 msgid "Swedish"
 msgstr "Svensk"
+
+#: model-gettext.py:2
+#, fuzzy
+msgid "Computer science, knowledge & systems"
+msgstr "Computervidenskab"
+
+#: model-gettext.py:3
+msgid "Bibliographies"
+msgstr "Bibliografier"
+
+#: model-gettext.py:4
+#, fuzzy
+msgid "Library & information sciences"
+msgstr "Biblioteks- og informationsvidenskaber"
+
+#: model-gettext.py:5
+msgid "Encyclopedias & books of facts"
+msgstr ""
+
+#: model-gettext.py:6
+msgid "Magazines, journals & serials"
+msgstr ""
+
+#: model-gettext.py:7
+msgid "Associations, organizations & museums"
+msgstr ""
+
+#: model-gettext.py:8
+msgid "News media, journalism & publishing"
+msgstr ""
+
+#: model-gettext.py:9
+#, fuzzy
+msgid "Quotations"
+msgstr "Uddannelse"
+
+#: model-gettext.py:10
+msgid "Manuscripts & rare books"
+msgstr ""
+
+#: model-gettext.py:12
+#, fuzzy
+msgid "Metaphysics"
+msgstr "Fysik"
+
+#: model-gettext.py:13
+#, fuzzy
+msgid "Epistemology"
+msgstr "Sociologi"
+
+#: model-gettext.py:14
+msgid "Parapsychology & occultism"
+msgstr ""
+
+#: model-gettext.py:15
+#, fuzzy
+msgid "Philosophical schools of thought"
+msgstr "Filosofi"
+
+#: model-gettext.py:17
+#, fuzzy
+msgid "Philosophical logic"
+msgstr "Filosofi"
+
+#: model-gettext.py:18
+msgid "Ethics"
+msgstr ""
+
+#: model-gettext.py:19
+msgid "Ancient, medieval & eastern philosophy"
+msgstr ""
+
+#: model-gettext.py:20
+msgid "Modern western philosophy"
+msgstr ""
+
+#: model-gettext.py:21
+#, fuzzy
+msgid "Religion"
+msgstr "Religioner"
+
+#: model-gettext.py:22
+msgid "Philosophy & theory of religion"
+msgstr ""
+
+#: model-gettext.py:23
+msgid "The Bible"
+msgstr "Biblen"
+
+#: model-gettext.py:24
+msgid "Christianity"
+msgstr "Kristendommen"
+
+#: model-gettext.py:25
+msgid "Christian practice & observance"
+msgstr ""
+
+#: model-gettext.py:26
+msgid "Christian pastoral practice & religious orders"
+msgstr ""
+
+#: model-gettext.py:27
+msgid "Christian organization, social work & worship"
+msgstr ""
+
+#: model-gettext.py:28
+msgid "History of Christianity"
+msgstr "Kristendommens historie"
+
+#: model-gettext.py:29
+#, fuzzy
+msgid "Christian denominations"
+msgstr "Kristendommen"
+
+#: model-gettext.py:30
+#, fuzzy
+msgid "Other religions"
+msgstr "Religioner"
+
+#: model-gettext.py:31
+#, fuzzy
+msgid "Social sciences, sociology & anthropology"
+msgstr "Socialantropologi og etnologi"
+
+#: model-gettext.py:34
+msgid "Economics"
+msgstr "Økonomi"
+
+#: model-gettext.py:36
+msgid "Public administration & military science"
+msgstr ""
+
+#: model-gettext.py:37
+msgid "Social problems & social services"
+msgstr ""
+
+#: model-gettext.py:39
+msgid "Commerce, communications & transportation"
+msgstr ""
+
+#: model-gettext.py:40
+msgid "Customs, etiquette & folklore"
+msgstr ""
+
+#: model-gettext.py:41 website/templates/navbar.html:15
+#, fuzzy
+msgid "Language"
+msgstr "Skift sprog"
+
+#: model-gettext.py:43
+msgid "English & Old English languages"
+msgstr ""
+
+#: model-gettext.py:44
+msgid "German & related languages"
+msgstr ""
+
+#: model-gettext.py:45
+msgid "French & related languages"
+msgstr ""
+
+#: model-gettext.py:46
+msgid "Italian, Romanian & related languages"
+msgstr ""
+
+#: model-gettext.py:47
+msgid "Spanish, Portuguese, Galician"
+msgstr ""
+
+#: model-gettext.py:48
+msgid "Latin & Italic languages"
+msgstr ""
+
+#: model-gettext.py:49
+#, fuzzy
+msgid "Classical & modern Greek languages"
+msgstr "Klassisk og moderne græsk litteratur"
+
+#: model-gettext.py:50
+#, fuzzy
+msgid "Other languages"
+msgstr "Skift sprog"
+
+#: model-gettext.py:51
+#, fuzzy
+msgid "Science"
+msgstr "Biovidenskab"
+
+#: model-gettext.py:53
+msgid "Astronomy"
+msgstr "Astronomi"
+
+#: model-gettext.py:56
+msgid "Earth sciences & geology"
+msgstr ""
+
+#: model-gettext.py:57
+msgid "Fossils & prehistoric life"
+msgstr ""
+
+#: model-gettext.py:58
+#, fuzzy
+msgid "Biology"
+msgstr "Sociologi"
+
+#: model-gettext.py:59
+msgid "Plants (Botany)"
+msgstr "Planter"
+
+#: model-gettext.py:60
+msgid "Animals (Zoology)"
+msgstr "Dyr (zoologi)"
+
+#: model-gettext.py:61
+msgid "Technology"
+msgstr "Teknologi"
+
+#: model-gettext.py:62
+#, fuzzy
+msgid "Medicine & health"
+msgstr "Medicin og helbredvidenskab"
+
+#: model-gettext.py:64
+msgid "Agriculture"
+msgstr "Landbrug"
+
+#: model-gettext.py:65
+msgid "Home & family management"
+msgstr ""
+
+#: model-gettext.py:66
+msgid "Management & public relations"
+msgstr ""
+
+#: model-gettext.py:67
+#, fuzzy
+msgid "Chemical engineering"
+msgstr "Ingeniørarbejde"
+
+#: model-gettext.py:68
+msgid "Manufacturing"
+msgstr ""
+
+#: model-gettext.py:69
+msgid "Manufacture for specific uses"
+msgstr ""
+
+#: model-gettext.py:70
+msgid "Construction of buildings"
+msgstr ""
+
+#: model-gettext.py:71
+msgid "Arts"
+msgstr "Kunst"
+
+#: model-gettext.py:72
+msgid "Area planning & landscape architecture"
+msgstr ""
+
+#: model-gettext.py:74
+msgid "Sculpture, ceramics & metalwork"
+msgstr ""
+
+#: model-gettext.py:75
+msgid "Graphic arts & decorative arts"
+msgstr ""
+
+#: model-gettext.py:76
+msgid "Painting"
+msgstr "Maleri"
+
+#: model-gettext.py:77
+msgid "Printmaking & prints"
+msgstr ""
+
+#: model-gettext.py:78
+msgid "Photography, computer art, film, video"
+msgstr ""
+
+#: model-gettext.py:79
+msgid "Music"
+msgstr "Musik"
+
+#: model-gettext.py:80
+msgid "Sports, games & entertainment"
+msgstr ""
+
+#: model-gettext.py:81
+msgid "Literature, rhetoric & criticism"
+msgstr ""
+
+#: model-gettext.py:82
+msgid "American literature in English"
+msgstr ""
+
+#: model-gettext.py:83
+msgid "English & Old English literatures"
+msgstr ""
+
+#: model-gettext.py:84
+#, fuzzy
+msgid "German & related literatures"
+msgstr "Litteratur"
+
+#: model-gettext.py:85
+#, fuzzy
+msgid "French & related literatures"
+msgstr "Litteratur"
+
+#: model-gettext.py:86
+msgid "Italian, Romanian & related literatures"
+msgstr ""
+
+#: model-gettext.py:87
+msgid "Spanish, Portuguese, Galician literatures"
+msgstr ""
+
+#: model-gettext.py:88
+#, fuzzy
+msgid "Latin & Italic literatures"
+msgstr "Litteratur"
+
+#: model-gettext.py:89
+msgid "Classical & modern Greek literatures"
+msgstr "Klassisk og moderne græsk litteratur"
+
+#: model-gettext.py:90
+#, fuzzy
+msgid "Other literatures"
+msgstr "Litteratur"
+
+#: model-gettext.py:92
+#, fuzzy
+msgid "Geography & travel"
+msgstr "Geografi"
+
+#: model-gettext.py:93
+#, fuzzy
+msgid "Biography & genealogy"
+msgstr "Geografi"
+
+#: model-gettext.py:94
+msgid "History of ancient world (to ca. 499)"
+msgstr ""
+
+#: model-gettext.py:95
+msgid "History of Europe"
+msgstr "Europas historie"
+
+#: model-gettext.py:96
+#, fuzzy
+msgid "History of Asia"
+msgstr "Historie"
+
+#: model-gettext.py:97
+msgid "History of Africa"
+msgstr "Afrikas historie"
+
+#: model-gettext.py:98
+msgid "History of North America"
+msgstr "Nordamerikas historie"
+
+#: model-gettext.py:99
+msgid "History of South America"
+msgstr "Sydamerikas historie"
+
+#: model-gettext.py:100
+#, fuzzy
+msgid "History of other areas"
+msgstr "Nordamerikas historie"
+
+#: model-gettext.py:101
+#, fuzzy
+#| msgid "Computer science"
+msgid "Data processing & computer science"
+msgstr "Computervidenskab"
+
+#: model-gettext.py:102
+#, fuzzy
+#| msgid "Political science"
+msgid "Military science"
+msgstr "Statsvidenskab"
+
+#: model-gettext.py:103
+#, fuzzy
+msgid "Other Germanic languages"
+msgstr "Skift sprog"
+
+#: model-gettext.py:104
+msgid "Public performances"
+msgstr ""
+
+#: model-gettext.py:105
+msgid "Stage presentations"
+msgstr ""
+
+#: model-gettext.py:106
+msgid "Indoor games & amusements"
+msgstr ""
+
+#: model-gettext.py:107
+msgid "Athletic & outdoor sports & games"
+msgstr ""
+
+#: model-gettext.py:108
+#, fuzzy
+msgid "Other Germanic literatures"
+msgstr "Litteratur"
+
+#: model-gettext.py:109
+msgid "Germany & neighboring central European countries"
+msgstr ""
+
+#: model-gettext.py:110
+#, fuzzy
+msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
+msgstr "Creative Commons CC0 1.0 Universal"
+
+#: model-gettext.py:111
+#, fuzzy
+msgid "Creative Commons Attribution 4.0 International (CC BY 4.0)"
+msgstr "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
+
+#: model-gettext.py:112
+#, fuzzy
+msgid "Creative Commons Attribution-ShareAlike 4.0, International (CC BY-SA 4.0)"
+msgstr "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
+
+#: model-gettext.py:113
+#, fuzzy
+msgid "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
+msgstr "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
+
+#: model-gettext.py:114
+#, fuzzy
+msgid "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)"
+msgstr "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
+
+#: model-gettext.py:115
+msgid "Free for private use; right holder retains other rights, including distribution"
+msgstr ""
+
+#: model-gettext.py:116
+msgid "Other open license"
+msgstr "Anden åben licens"
+
+#: model-gettext.py:118
+#, fuzzy
+msgid "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)"
+msgstr "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
+
+#: model-gettext.py:119
+#, fuzzy
+msgid "Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)"
+msgstr "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
+
+#: model-gettext.py:120
+msgid "Zenodo"
+msgstr ""
+
+#: model-gettext.py:121
+msgid "Zenodo is a general-purpose open repository hosted by CERN. If the document does not have a DOI yet, Zenodo will create one."
+msgstr ""
+
+#: model-gettext.py:122
+msgid "HAL"
+msgstr ""
+
+#: model-gettext.py:123
+msgid "HAL is a  multidisciplinary open archive, sustained by the French Research Ministry."
+msgstr ""
+
+#: model-gettext.py:124
+msgid "OSF preprints"
+msgstr ""
+
+#: model-gettext.py:125
+msgid "Run by the Center for Open Science, OSF lets you share your preprints openly. You can also share supplemental data, materials or code associated with your article."
+msgstr ""
+
+#: model-gettext.py:126
+msgid "TUprints"
+msgstr ""
+
+#: model-gettext.py:127
+msgid "TUprints is the open access repository for all current and former members of the Technical University Darmstadt."
+msgstr ""
 
 #: notification/models.py:62
 msgid "inboxes"
@@ -782,7 +1269,7 @@ msgstr "Afhandling"
 msgid "Dataset"
 msgstr "Datasæt"
 
-#: papers/baremodels.py:69 papers/models.py:99
+#: papers/baremodels.py:69 papers/models.py:100
 #: publishers/templates/publishers/policy_preprint.html:5
 msgid "Preprint"
 msgstr ""
@@ -823,48 +1310,48 @@ msgstr "Synlig"
 msgid "Invisible"
 msgstr "Usynlig"
 
-#: papers/models.py:100 publishers/templates/publishers/policy_postprint.html:6
+#: papers/models.py:101 publishers/templates/publishers/policy_postprint.html:6
 msgid "Postprint"
 msgstr ""
 
-#: papers/models.py:101
+#: papers/models.py:102
 #: publishers/templates/publishers/policy_pdfversion.html:6
 msgid "Published version"
 msgstr "Udgivet version"
 
-#: papers/models.py:105
+#: papers/models.py:106
 msgid "Preparing profile"
 msgstr "Forbereder profil"
 
-#: papers/models.py:106
+#: papers/models.py:107
 msgid "Fetching publications from ORCID"
 msgstr "Henter publikationer fra ORCID"
 
-#: papers/models.py:107
+#: papers/models.py:108
 msgid "Fetching publications from CrossRef"
 msgstr "Henter publikationer fra CrossRef"
 
-#: papers/models.py:108
+#: papers/models.py:109
 msgid "Fetching publications from BASE"
 msgstr "Henter publikationer fra BASE"
 
-#: papers/models.py:109
+#: papers/models.py:110
 msgid "Fetching publications from CORE"
 msgstr "Henter publikationer fra CORE"
 
-#: papers/models.py:110
+#: papers/models.py:111
 msgid "Fetching publications from OAI-PMH"
 msgstr "Henter publikationer fra OAI-PMH"
 
-#: papers/models.py:111
+#: papers/models.py:112
 msgid "Clustering publications"
 msgstr ""
 
-#: papers/models.py:112
+#: papers/models.py:113
 msgid "Updating statistics"
 msgstr "Opdaterer statistik"
 
-#: papers/models.py:1244 papers/views.py:144 papers/views.py:148
+#: papers/models.py:1253 papers/views.py:144 papers/views.py:148
 msgid "Papers"
 msgstr "Artikler"
 
@@ -935,7 +1422,7 @@ msgid "Format"
 msgstr "Format"
 
 #: papers/templates/papers/export_citation_modal.html:31
-#: papers/templates/papers/paper.html:144
+#: papers/templates/papers/paper.html:146
 #: papers/templates/papers/paper_list.html:55
 msgid "Download"
 msgstr "Hent"
@@ -983,70 +1470,70 @@ msgstr ""
 msgid "A paper was ignored, because is has no title."
 msgstr ""
 
-#: papers/templates/papers/paper.html:39
+#: papers/templates/papers/paper.html:40
 #, fuzzy, python-format
 msgctxt "as in: _Journal article published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "%(doctype)s published in %(year)s by"
 msgstr "Udgivet i"
 
-#: papers/templates/papers/paper.html:45
+#: papers/templates/papers/paper.html:46
 #, fuzzy, python-format
 msgctxt "as in: _Published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "Published in %(year)s by"
 msgstr "Udgivet i"
 
-#: papers/templates/papers/paper.html:55
+#: papers/templates/papers/paper.html:56
 #, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
 msgstr ""
 
-#: papers/templates/papers/paper.html:61
+#: papers/templates/papers/paper.html:62
 msgid "Show less"
 msgstr "Vis mindre"
 
-#: papers/templates/papers/paper.html:71
+#: papers/templates/papers/paper.html:73
 #, fuzzy
 msgid "Deposit accomplished!"
 msgstr "Depositumdato"
 
-#: papers/templates/papers/paper.html:72
+#: papers/templates/papers/paper.html:74
 #, python-format
 msgid "<p>This paper was successfully deposited and is now freely available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address.</a></p>"
 msgstr ""
 
-#: papers/templates/papers/paper.html:79 papers/templates/papers/paper.html:103
+#: papers/templates/papers/paper.html:81 papers/templates/papers/paper.html:105
 msgid "Deposit almost accomplished!"
 msgstr ""
 
-#: papers/templates/papers/paper.html:81
+#: papers/templates/papers/paper.html:83
 #, python-format
 msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> after validation by the repository administrators.</p>"
 msgstr ""
 
-#: papers/templates/papers/paper.html:88
+#: papers/templates/papers/paper.html:90
 msgid "Letter of Declaration needed!"
 msgstr ""
 
-#: papers/templates/papers/paper.html:91
+#: papers/templates/papers/paper.html:93
 #, python-format
 msgid "<p>The repository %(deposit.repository.name)s requires a letter of declaration to publish this publication. Please <a class=\"alert-link\" href=\"%(letter_url)s\">download</a> the letter, sign it and send it to the repository administration.</p>"
 msgstr ""
 
-#: papers/templates/papers/paper.html:104
+#: papers/templates/papers/paper.html:106
 #, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> after validation by the repository administrators."
 msgstr ""
 
-#: papers/templates/papers/paper.html:117
+#: papers/templates/papers/paper.html:119
 #, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> from <strong>%(pub_date|localize)s</strong> on due to an embargo."
 msgstr ""
 
-#: papers/templates/papers/paper.html:142
+#: papers/templates/papers/paper.html:144
 msgid "Full text:"
 msgstr "Fuld tekst:"
 
-#: papers/templates/papers/paper.html:146 statistics/models.py:66
+#: papers/templates/papers/paper.html:148 statistics/models.py:66
 msgid "Unavailable"
 msgstr "Utilgængelig"
 
@@ -1669,433 +2156,6 @@ msgstr ""
 
 #: upload/views.py:189 upload/views.py:193
 msgid "Invalid URL."
-msgstr ""
-
-#: vinaigrette-deleteme.py:2
-#, fuzzy
-msgid "Computer science, knowledge & systems"
-msgstr "Computervidenskab"
-
-#: vinaigrette-deleteme.py:3
-msgid "Bibliographies"
-msgstr "Bibliografier"
-
-#: vinaigrette-deleteme.py:4
-#, fuzzy
-msgid "Library & information sciences"
-msgstr "Biblioteks- og informationsvidenskaber"
-
-#: vinaigrette-deleteme.py:5
-msgid "Encyclopedias & books of facts"
-msgstr ""
-
-#: vinaigrette-deleteme.py:6
-msgid "Magazines, journals & serials"
-msgstr ""
-
-#: vinaigrette-deleteme.py:7
-msgid "Associations, organizations & museums"
-msgstr ""
-
-#: vinaigrette-deleteme.py:8
-msgid "News media, journalism & publishing"
-msgstr ""
-
-#: vinaigrette-deleteme.py:9
-#, fuzzy
-msgid "Quotations"
-msgstr "Uddannelse"
-
-#: vinaigrette-deleteme.py:10
-msgid "Manuscripts & rare books"
-msgstr ""
-
-#: vinaigrette-deleteme.py:12
-#, fuzzy
-msgid "Metaphysics"
-msgstr "Fysik"
-
-#: vinaigrette-deleteme.py:13
-#, fuzzy
-msgid "Epistemology"
-msgstr "Sociologi"
-
-#: vinaigrette-deleteme.py:14
-msgid "Parapsychology & occultism"
-msgstr ""
-
-#: vinaigrette-deleteme.py:15
-#, fuzzy
-msgid "Philosophical schools of thought"
-msgstr "Filosofi"
-
-#: vinaigrette-deleteme.py:17
-#, fuzzy
-msgid "Philosophical logic"
-msgstr "Filosofi"
-
-#: vinaigrette-deleteme.py:18
-msgid "Ethics"
-msgstr ""
-
-#: vinaigrette-deleteme.py:19
-msgid "Ancient, medieval & eastern philosophy"
-msgstr ""
-
-#: vinaigrette-deleteme.py:20
-msgid "Modern western philosophy"
-msgstr ""
-
-#: vinaigrette-deleteme.py:21
-#, fuzzy
-msgid "Religion"
-msgstr "Religioner"
-
-#: vinaigrette-deleteme.py:22
-msgid "Philosophy & theory of religion"
-msgstr ""
-
-#: vinaigrette-deleteme.py:23
-msgid "The Bible"
-msgstr "Biblen"
-
-#: vinaigrette-deleteme.py:24
-msgid "Christianity"
-msgstr "Kristendommen"
-
-#: vinaigrette-deleteme.py:25
-msgid "Christian practice & observance"
-msgstr ""
-
-#: vinaigrette-deleteme.py:26
-msgid "Christian pastoral practice & religious orders"
-msgstr ""
-
-#: vinaigrette-deleteme.py:27
-msgid "Christian organization, social work & worship"
-msgstr ""
-
-#: vinaigrette-deleteme.py:28
-msgid "History of Christianity"
-msgstr "Kristendommens historie"
-
-#: vinaigrette-deleteme.py:29
-#, fuzzy
-msgid "Christian denominations"
-msgstr "Kristendommen"
-
-#: vinaigrette-deleteme.py:30
-#, fuzzy
-msgid "Other religions"
-msgstr "Religioner"
-
-#: vinaigrette-deleteme.py:31
-#, fuzzy
-msgid "Social sciences, sociology & anthropology"
-msgstr "Socialantropologi og etnologi"
-
-#: vinaigrette-deleteme.py:34
-msgid "Economics"
-msgstr "Økonomi"
-
-#: vinaigrette-deleteme.py:36
-msgid "Public administration & military science"
-msgstr ""
-
-#: vinaigrette-deleteme.py:37
-msgid "Social problems & social services"
-msgstr ""
-
-#: vinaigrette-deleteme.py:39
-msgid "Commerce, communications & transportation"
-msgstr ""
-
-#: vinaigrette-deleteme.py:40
-msgid "Customs, etiquette & folklore"
-msgstr ""
-
-#: vinaigrette-deleteme.py:41 website/templates/navbar.html:15
-#, fuzzy
-msgid "Language"
-msgstr "Skift sprog"
-
-#: vinaigrette-deleteme.py:43
-msgid "English & Old English languages"
-msgstr ""
-
-#: vinaigrette-deleteme.py:44
-msgid "German & related languages"
-msgstr ""
-
-#: vinaigrette-deleteme.py:45
-msgid "French & related languages"
-msgstr ""
-
-#: vinaigrette-deleteme.py:46
-msgid "Italian, Romanian & related languages"
-msgstr ""
-
-#: vinaigrette-deleteme.py:47
-msgid "Spanish, Portuguese, Galician"
-msgstr ""
-
-#: vinaigrette-deleteme.py:48
-msgid "Latin & Italic languages"
-msgstr ""
-
-#: vinaigrette-deleteme.py:49
-#, fuzzy
-msgid "Classical & modern Greek languages"
-msgstr "Klassisk og moderne græsk litteratur"
-
-#: vinaigrette-deleteme.py:50
-#, fuzzy
-msgid "Other languages"
-msgstr "Skift sprog"
-
-#: vinaigrette-deleteme.py:51
-#, fuzzy
-msgid "Science"
-msgstr "Biovidenskab"
-
-#: vinaigrette-deleteme.py:53
-msgid "Astronomy"
-msgstr "Astronomi"
-
-#: vinaigrette-deleteme.py:56
-msgid "Earth sciences & geology"
-msgstr ""
-
-#: vinaigrette-deleteme.py:57
-msgid "Fossils & prehistoric life"
-msgstr ""
-
-#: vinaigrette-deleteme.py:58
-#, fuzzy
-msgid "Biology"
-msgstr "Sociologi"
-
-#: vinaigrette-deleteme.py:59
-msgid "Plants (Botany)"
-msgstr "Planter"
-
-#: vinaigrette-deleteme.py:60
-msgid "Animals (Zoology)"
-msgstr "Dyr (zoologi)"
-
-#: vinaigrette-deleteme.py:61
-msgid "Technology"
-msgstr "Teknologi"
-
-#: vinaigrette-deleteme.py:62
-#, fuzzy
-msgid "Medicine & health"
-msgstr "Medicin og helbredvidenskab"
-
-#: vinaigrette-deleteme.py:64
-msgid "Agriculture"
-msgstr "Landbrug"
-
-#: vinaigrette-deleteme.py:65
-msgid "Home & family management"
-msgstr ""
-
-#: vinaigrette-deleteme.py:66
-msgid "Management & public relations"
-msgstr ""
-
-#: vinaigrette-deleteme.py:67
-#, fuzzy
-msgid "Chemical engineering"
-msgstr "Ingeniørarbejde"
-
-#: vinaigrette-deleteme.py:68
-msgid "Manufacturing"
-msgstr ""
-
-#: vinaigrette-deleteme.py:69
-msgid "Manufacture for specific uses"
-msgstr ""
-
-#: vinaigrette-deleteme.py:70
-msgid "Construction of buildings"
-msgstr ""
-
-#: vinaigrette-deleteme.py:71
-msgid "Arts"
-msgstr "Kunst"
-
-#: vinaigrette-deleteme.py:72
-msgid "Area planning & landscape architecture"
-msgstr ""
-
-#: vinaigrette-deleteme.py:74
-msgid "Sculpture, ceramics & metalwork"
-msgstr ""
-
-#: vinaigrette-deleteme.py:75
-msgid "Graphic arts & decorative arts"
-msgstr ""
-
-#: vinaigrette-deleteme.py:76
-msgid "Painting"
-msgstr "Maleri"
-
-#: vinaigrette-deleteme.py:77
-msgid "Printmaking & prints"
-msgstr ""
-
-#: vinaigrette-deleteme.py:78
-msgid "Photography, computer art, film, video"
-msgstr ""
-
-#: vinaigrette-deleteme.py:79
-msgid "Music"
-msgstr "Musik"
-
-#: vinaigrette-deleteme.py:80
-msgid "Sports, games & entertainment"
-msgstr ""
-
-#: vinaigrette-deleteme.py:81
-msgid "Literature, rhetoric & criticism"
-msgstr ""
-
-#: vinaigrette-deleteme.py:82
-msgid "American literature in English"
-msgstr ""
-
-#: vinaigrette-deleteme.py:83
-msgid "English & Old English literatures"
-msgstr ""
-
-#: vinaigrette-deleteme.py:84
-#, fuzzy
-msgid "German & related literatures"
-msgstr "Litteratur"
-
-#: vinaigrette-deleteme.py:85
-#, fuzzy
-msgid "French & related literatures"
-msgstr "Litteratur"
-
-#: vinaigrette-deleteme.py:86
-msgid "Italian, Romanian & related literatures"
-msgstr ""
-
-#: vinaigrette-deleteme.py:87
-msgid "Spanish, Portuguese, Galician literatures"
-msgstr ""
-
-#: vinaigrette-deleteme.py:88
-#, fuzzy
-msgid "Latin & Italic literatures"
-msgstr "Litteratur"
-
-#: vinaigrette-deleteme.py:89
-msgid "Classical & modern Greek literatures"
-msgstr "Klassisk og moderne græsk litteratur"
-
-#: vinaigrette-deleteme.py:90
-#, fuzzy
-msgid "Other literatures"
-msgstr "Litteratur"
-
-#: vinaigrette-deleteme.py:92
-#, fuzzy
-msgid "Geography & travel"
-msgstr "Geografi"
-
-#: vinaigrette-deleteme.py:93
-#, fuzzy
-msgid "Biography & genealogy"
-msgstr "Geografi"
-
-#: vinaigrette-deleteme.py:94
-msgid "History of ancient world (to ca. 499)"
-msgstr ""
-
-#: vinaigrette-deleteme.py:95
-msgid "History of Europe"
-msgstr "Europas historie"
-
-#: vinaigrette-deleteme.py:96
-#, fuzzy
-msgid "History of Asia"
-msgstr "Historie"
-
-#: vinaigrette-deleteme.py:97
-msgid "History of Africa"
-msgstr "Afrikas historie"
-
-#: vinaigrette-deleteme.py:98
-msgid "History of North America"
-msgstr "Nordamerikas historie"
-
-#: vinaigrette-deleteme.py:99
-msgid "History of South America"
-msgstr "Sydamerikas historie"
-
-#: vinaigrette-deleteme.py:100
-#, fuzzy
-msgid "History of other areas"
-msgstr "Nordamerikas historie"
-
-#: vinaigrette-deleteme.py:101
-#, fuzzy
-msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
-msgstr "Creative Commons CC0 1.0 Universal"
-
-#: vinaigrette-deleteme.py:102
-#, fuzzy
-msgid "Creative Commons Attribution 4.0 International (CC BY 4.0)"
-msgstr "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
-
-#: vinaigrette-deleteme.py:103
-#, fuzzy
-msgid "Creative Commons Attribution-ShareAlike 4.0, International (CC BY-SA 4.0)"
-msgstr "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
-
-#: vinaigrette-deleteme.py:104
-#, fuzzy
-msgid "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
-msgstr "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
-
-#: vinaigrette-deleteme.py:105
-#, fuzzy
-msgid "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)"
-msgstr "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
-
-#: vinaigrette-deleteme.py:106
-msgid "Free for private use; right holder retains other rights, including distribution"
-msgstr ""
-
-#: vinaigrette-deleteme.py:107
-msgid "Other open license"
-msgstr "Anden åben licens"
-
-#: vinaigrette-deleteme.py:109
-msgid "Zenodo"
-msgstr ""
-
-#: vinaigrette-deleteme.py:110
-msgid "Zenodo is a general-purpose open repository hosted by CERN. If the document does not have a DOI yet, Zenodo will create one."
-msgstr ""
-
-#: vinaigrette-deleteme.py:111
-msgid "HAL"
-msgstr ""
-
-#: vinaigrette-deleteme.py:112
-msgid "HAL is a  multidisciplinary open archive, sustained by the French Research Ministry."
-msgstr ""
-
-#: vinaigrette-deleteme.py:113
-msgid "OSF preprints"
-msgstr ""
-
-#: vinaigrette-deleteme.py:114
-msgid "Run by the Center for Open Science, OSF lets you share your preprints openly. You can also share supplemental data, materials or code associated with your article."
 msgstr ""
 
 #: website/forms.py:16 website/forms.py:19
@@ -2822,4 +2882,3 @@ msgstr ""
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr ""
-

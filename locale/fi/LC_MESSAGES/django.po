@@ -12,9 +12,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-18 09:51+0100\n"
+"POT-Creation-Date: 2020-01-07 14:39+0100\n"
 "PO-Revision-Date: 2020-01-02 13:32:00+0000\n"
 "Language: fi\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -47,7 +46,7 @@ msgstr "Koodivaranto"
 msgid "Invalid full text identifier."
 msgstr "Kokotekstitunniste ei kelpaa."
 
-#: deposit/forms.py:144 papers/templates/papers/paper.html:158
+#: deposit/forms.py:144 papers/templates/papers/paper.html:160
 msgid "Abstract"
 msgstr "Tiivistelmä"
 
@@ -84,7 +83,7 @@ msgstr "Talteen paneva kirjoittaja"
 msgid "Affiliation"
 msgstr "Affiliaatio"
 
-#: deposit/hal/metadata.py:36 vinaigrette-deleteme.py:55
+#: deposit/hal/metadata.py:36 model-gettext.py:55
 msgid "Chemistry"
 msgstr "Kemia"
 
@@ -92,11 +91,11 @@ msgstr "Kemia"
 msgid "Computer science"
 msgstr "Tietojenkäsittelytiede"
 
-#: deposit/hal/metadata.py:38 vinaigrette-deleteme.py:52
+#: deposit/hal/metadata.py:38 model-gettext.py:52
 msgid "Mathematics"
 msgstr "Matematiikka"
 
-#: deposit/hal/metadata.py:39 vinaigrette-deleteme.py:54
+#: deposit/hal/metadata.py:39 model-gettext.py:54
 msgid "Physics"
 msgstr "Fysiikka"
 
@@ -145,7 +144,7 @@ msgid "Demography"
 msgstr "Väestötiede"
 
 #: deposit/hal/metadata.py:51 deposit/osf/forms.py:67 deposit/osf/forms.py:90
-#: vinaigrette-deleteme.py:35
+#: model-gettext.py:35
 msgid "Law"
 msgstr "Laki"
 
@@ -154,7 +153,7 @@ msgid "Economies and finances"
 msgstr "Talous- ja rahoitustiede"
 
 #: deposit/hal/metadata.py:53 deposit/osf/forms.py:63 deposit/osf/forms.py:86
-#: vinaigrette-deleteme.py:38
+#: model-gettext.py:38
 msgid "Education"
 msgstr "Koulutus"
 
@@ -178,7 +177,7 @@ msgstr "Liikehallinto"
 msgid "History, Philosophy and Sociology of Sciences"
 msgstr "Historia, filosofia ja tieteen sosiologia"
 
-#: deposit/hal/metadata.py:59 vinaigrette-deleteme.py:91
+#: deposit/hal/metadata.py:59 model-gettext.py:91
 msgid "History"
 msgstr "Historia"
 
@@ -186,7 +185,7 @@ msgstr "Historia"
 msgid "Library and information sciences"
 msgstr "Kirjastotiede ja informatiikkaa"
 
-#: deposit/hal/metadata.py:61 vinaigrette-deleteme.py:42
+#: deposit/hal/metadata.py:61 model-gettext.py:42
 msgid "Linguistics"
 msgstr "Kielitiede"
 
@@ -202,11 +201,11 @@ msgstr "Kulttuuriperintö ja museologia"
 msgid "Musicology and performing arts"
 msgstr "Musiikkitiede ja esittävä taide"
 
-#: deposit/hal/metadata.py:65 vinaigrette-deleteme.py:11
+#: deposit/hal/metadata.py:65 model-gettext.py:11
 msgid "Philosophy"
 msgstr "Filosofia"
 
-#: deposit/hal/metadata.py:66 vinaigrette-deleteme.py:16
+#: deposit/hal/metadata.py:66 model-gettext.py:16
 msgid "Psychology"
 msgstr "Psykologia"
 
@@ -214,7 +213,7 @@ msgstr "Psykologia"
 msgid "Religions"
 msgstr "Uskontotiede"
 
-#: deposit/hal/metadata.py:68 vinaigrette-deleteme.py:33
+#: deposit/hal/metadata.py:68 model-gettext.py:33
 msgid "Political science"
 msgstr "Valtiotiede"
 
@@ -234,8 +233,9 @@ msgstr "Biotieteet"
 msgid "Engineering sciences"
 msgstr "Insinööritieteet"
 
-#: deposit/hal/metadata.py:73 papers/templates/papers/search_base.html:23
-#: publishers/templates/publishers/list.html:16 vinaigrette-deleteme.py:32
+#: deposit/hal/metadata.py:73 model-gettext.py:32
+#: papers/templates/papers/search_base.html:23
+#: publishers/templates/publishers/list.html:16
 msgid "Statistics"
 msgstr "Tilastot"
 
@@ -316,16 +316,16 @@ msgstr "Koodivarannon hylkäämä"
 msgid "Deleted"
 msgstr "Poistettu"
 
-#: deposit/models.py:287 deposit/templates/deposit/start.html:205
+#: deposit/models.py:290 deposit/templates/deposit/start.html:205
 #: deposit/views.py:120
 msgid "Deposit"
 msgstr "Tallenna"
 
-#: deposit/models.py:340
+#: deposit/models.py:343
 msgid "We will use this email address to notify you when your deposits are accepted."
 msgstr "Käytämme tätä sähköpostiosoitetta ilmoittaaksemme sinulle, kun talletuksesi on hyväksytty."
 
-#: deposit/models.py:346
+#: deposit/models.py:349
 msgid "This repository will be used by default for your deposits."
 msgstr "Tätä koodivarantoa käytetään oletuksena talletuksillesi."
 
@@ -337,11 +337,11 @@ msgstr "Creative Commons CC0 1.0 Yleismaailmallinen"
 msgid "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
 msgstr "Creative Commons CC-By Nimeä 4.0 Kansainvälinen (CC BY 4.0)"
 
-#: deposit/osf/forms.py:40 deposit/osf/forms.py:51 vinaigrette-deleteme.py:108
+#: deposit/osf/forms.py:40 deposit/osf/forms.py:51 model-gettext.py:117
 msgid "No license"
 msgstr "Ei lisenssiä"
 
-#: deposit/osf/forms.py:57 deposit/osf/forms.py:80 vinaigrette-deleteme.py:73
+#: deposit/osf/forms.py:57 deposit/osf/forms.py:80 model-gettext.py:73
 msgid "Architecture"
 msgstr "Arkkitehtuuri"
 
@@ -353,7 +353,7 @@ msgstr "Taiteet ja humanismi"
 msgid "Business"
 msgstr "Liiketoiminta"
 
-#: deposit/osf/forms.py:65 deposit/osf/forms.py:88 vinaigrette-deleteme.py:63
+#: deposit/osf/forms.py:65 deposit/osf/forms.py:88 model-gettext.py:63
 msgid "Engineering"
 msgstr "Insinöörityö"
 
@@ -661,57 +661,525 @@ msgstr ""
 msgid "Unable to publish the deposition on Zenodo."
 msgstr ""
 
-#: dissemin/settings/common.py:303
+#: dissemin/settings/common.py:308
 msgid "Arabic"
 msgstr "Arabia"
 
-#: dissemin/settings/common.py:304
+#: dissemin/settings/common.py:309
 msgid "English"
 msgstr "Englanti"
 
-#: dissemin/settings/common.py:305
+#: dissemin/settings/common.py:310
 msgid "Finnish"
 msgstr "suomi"
 
-#: dissemin/settings/common.py:306
+#: dissemin/settings/common.py:311
 msgid "French"
 msgstr "Ranska"
 
-#: dissemin/settings/common.py:307
+#: dissemin/settings/common.py:312
 msgid "Korean"
 msgstr "Korea"
 
-#: dissemin/settings/common.py:308
+#: dissemin/settings/common.py:313
 msgid "Spanish"
 msgstr "Espanja"
 
-#: dissemin/settings/common.py:309
+#: dissemin/settings/common.py:314
 msgid "Simplified Chinese"
 msgstr "Yksinkertainen kiina"
 
-#: dissemin/settings/common.py:310
+#: dissemin/settings/common.py:315
 msgid "Traditional Chinese"
 msgstr "Perinteinen Kiina"
 
-#: dissemin/settings/common.py:311
+#: dissemin/settings/common.py:316
 msgid "Macedonian"
 msgstr "Makedonia"
 
-#: dissemin/settings/common.py:312
+#: dissemin/settings/common.py:317
 msgid "German"
 msgstr "Saksa"
 
-#: dissemin/settings/common.py:313
+#: dissemin/settings/common.py:318
 msgid "Brazilian Portuguese"
 msgstr "Brasilianportugali"
 
-#: dissemin/settings/common.py:314
+#: dissemin/settings/common.py:319
 msgid "European Portuguese"
 msgstr "Euroopanportugali"
 
-#: dissemin/settings/common.py:315
+#: dissemin/settings/common.py:320
 msgid "Swedish"
 msgstr "Ruotsi"
+
+#: model-gettext.py:2
+msgid "Computer science, knowledge & systems"
+msgstr "Tietojenkäsittely, tieto ja järjestelmät"
+
+#: model-gettext.py:3
+msgid "Bibliographies"
+msgstr "Bibliografiat"
+
+#: model-gettext.py:4
+msgid "Library & information sciences"
+msgstr "Kirjasto- ja informaatiotieteet"
+
+#: model-gettext.py:5
+msgid "Encyclopedias & books of facts"
+msgstr "Tietosanakirjat ja tosikirjat"
+
+#: model-gettext.py:6
+msgid "Magazines, journals & serials"
+msgstr ""
+
+#: model-gettext.py:7
+msgid "Associations, organizations & museums"
+msgstr ""
+
+#: model-gettext.py:8
+msgid "News media, journalism & publishing"
+msgstr ""
+
+#: model-gettext.py:9
+msgid "Quotations"
+msgstr "Lainaukset"
+
+#: model-gettext.py:10
+msgid "Manuscripts & rare books"
+msgstr ""
+
+#: model-gettext.py:12
+msgid "Metaphysics"
+msgstr "Metafysiikka"
+
+#: model-gettext.py:13
+msgid "Epistemology"
+msgstr "Tietoteoria"
+
+#: model-gettext.py:14
+msgid "Parapsychology & occultism"
+msgstr ""
+
+#: model-gettext.py:15
+#, fuzzy
+msgid "Philosophical schools of thought"
+msgstr "Filosofia"
+
+#: model-gettext.py:17
+msgid "Philosophical logic"
+msgstr "Filosofinen logiikka"
+
+#: model-gettext.py:18
+msgid "Ethics"
+msgstr "Etiikka"
+
+#: model-gettext.py:19
+msgid "Ancient, medieval & eastern philosophy"
+msgstr ""
+
+#: model-gettext.py:20
+msgid "Modern western philosophy"
+msgstr ""
+
+#: model-gettext.py:21
+msgid "Religion"
+msgstr "Uskonto"
+
+#: model-gettext.py:22
+msgid "Philosophy & theory of religion"
+msgstr ""
+
+#: model-gettext.py:23
+msgid "The Bible"
+msgstr "Raamattu"
+
+#: model-gettext.py:24
+msgid "Christianity"
+msgstr "Kristinusko"
+
+#: model-gettext.py:25
+msgid "Christian practice & observance"
+msgstr ""
+
+#: model-gettext.py:26
+msgid "Christian pastoral practice & religious orders"
+msgstr ""
+
+#: model-gettext.py:27
+msgid "Christian organization, social work & worship"
+msgstr ""
+
+#: model-gettext.py:28
+msgid "History of Christianity"
+msgstr "Kristinuskon historia"
+
+#: model-gettext.py:29
+msgid "Christian denominations"
+msgstr "Kristilliset uskonnot"
+
+#: model-gettext.py:30
+msgid "Other religions"
+msgstr "Muut uskonnot"
+
+#: model-gettext.py:31
+msgid "Social sciences, sociology & anthropology"
+msgstr "Yhteiskuntatieteet, sosiologia ja antropologia"
+
+#: model-gettext.py:34
+msgid "Economics"
+msgstr "Ekonomia"
+
+#: model-gettext.py:36
+msgid "Public administration & military science"
+msgstr ""
+
+#: model-gettext.py:37
+msgid "Social problems & social services"
+msgstr ""
+
+#: model-gettext.py:39
+msgid "Commerce, communications & transportation"
+msgstr ""
+
+#: model-gettext.py:40
+msgid "Customs, etiquette & folklore"
+msgstr ""
+
+#: model-gettext.py:41 website/templates/navbar.html:15
+msgid "Language"
+msgstr "Kieli"
+
+#: model-gettext.py:43
+msgid "English & Old English languages"
+msgstr ""
+
+#: model-gettext.py:44
+msgid "German & related languages"
+msgstr "Saksa ja siihen liittyvät kielet"
+
+#: model-gettext.py:45
+msgid "French & related languages"
+msgstr "Ranska ja siihen liittyvät kielet"
+
+#: model-gettext.py:46
+msgid "Italian, Romanian & related languages"
+msgstr "Italia, romania ja niihin liittyvät kielet"
+
+#: model-gettext.py:47
+msgid "Spanish, Portuguese, Galician"
+msgstr "Espanja, portugali, galicia"
+
+#: model-gettext.py:48
+msgid "Latin & Italic languages"
+msgstr ""
+
+#: model-gettext.py:49
+msgid "Classical & modern Greek languages"
+msgstr "Klassiset ja modernit kreikan kielet"
+
+#: model-gettext.py:50
+msgid "Other languages"
+msgstr "Muut kielet"
+
+#: model-gettext.py:51
+msgid "Science"
+msgstr "Tiede"
+
+#: model-gettext.py:53
+msgid "Astronomy"
+msgstr "Tähtitiede"
+
+#: model-gettext.py:56
+msgid "Earth sciences & geology"
+msgstr "Maatieteet ja geologia"
+
+#: model-gettext.py:57
+msgid "Fossils & prehistoric life"
+msgstr "Fossiilit ja esihistoriallinen elämä"
+
+#: model-gettext.py:58
+msgid "Biology"
+msgstr "Biologia"
+
+#: model-gettext.py:59
+msgid "Plants (Botany)"
+msgstr "Kasvit (kasvitiede)"
+
+#: model-gettext.py:60
+msgid "Animals (Zoology)"
+msgstr "Eläimet (eläintiede)"
+
+#: model-gettext.py:61
+msgid "Technology"
+msgstr "Teknologia"
+
+#: model-gettext.py:62
+msgid "Medicine & health"
+msgstr "Lääketiede ja terveys"
+
+#: model-gettext.py:64
+msgid "Agriculture"
+msgstr "Maanviljely"
+
+#: model-gettext.py:65
+msgid "Home & family management"
+msgstr "Koti- ja perhehoito"
+
+#: model-gettext.py:66
+msgid "Management & public relations"
+msgstr "Johtaminen ja suhdetoiminta"
+
+#: model-gettext.py:67
+msgid "Chemical engineering"
+msgstr "Kemian tekniikka"
+
+#: model-gettext.py:68
+msgid "Manufacturing"
+msgstr "Teollisuus"
+
+#: model-gettext.py:69
+msgid "Manufacture for specific uses"
+msgstr "Valmistus erityiskäyttöön"
+
+#: model-gettext.py:70
+msgid "Construction of buildings"
+msgstr "Rakennusten rakentaminen"
+
+#: model-gettext.py:71
+msgid "Arts"
+msgstr "Taiteet"
+
+#: model-gettext.py:72
+msgid "Area planning & landscape architecture"
+msgstr "Alueiden suunnittelu ja maisema-arkkitehtuuri"
+
+#: model-gettext.py:74
+msgid "Sculpture, ceramics & metalwork"
+msgstr "Kuvanveisto, keramiikka ja metallityöt"
+
+#: model-gettext.py:75
+msgid "Graphic arts & decorative arts"
+msgstr "Graafinen taide ja koristetaiteet"
+
+#: model-gettext.py:76
+msgid "Painting"
+msgstr "Maalaus"
+
+#: model-gettext.py:77
+msgid "Printmaking & prints"
+msgstr "Tulostaminen ja tulosteet"
+
+#: model-gettext.py:78
+msgid "Photography, computer art, film, video"
+msgstr "Valokuvaus, tietokonetaite, elokuva, video"
+
+#: model-gettext.py:79
+msgid "Music"
+msgstr "Musiikki"
+
+#: model-gettext.py:80
+msgid "Sports, games & entertainment"
+msgstr "Urheilu, pelit ja viihde"
+
+#: model-gettext.py:81
+msgid "Literature, rhetoric & criticism"
+msgstr "Kirjallisuus, retoriikka ja kritiikki"
+
+#: model-gettext.py:82
+msgid "American literature in English"
+msgstr "Amerikkalainen englanninkielinen kirjallisuus"
+
+#: model-gettext.py:83
+msgid "English & Old English literatures"
+msgstr "Englanninkielinen ja muinaisenglanninkielinen kirjallisuus"
+
+#: model-gettext.py:84
+#, fuzzy
+msgid "German & related literatures"
+msgstr "Kirjallisuustiede"
+
+#: model-gettext.py:85
+#, fuzzy
+msgid "French & related literatures"
+msgstr "Kirjallisuustiede"
+
+#: model-gettext.py:86
+msgid "Italian, Romanian & related literatures"
+msgstr "Italialainen, romanialainen ja niihin liittyvä kirjallisuus"
+
+#: model-gettext.py:87
+msgid "Spanish, Portuguese, Galician literatures"
+msgstr "Espanjan, portugalin ja galiciankielinen kirjallisuus"
+
+#: model-gettext.py:88
+#, fuzzy
+msgid "Latin & Italic literatures"
+msgstr "Kirjallisuustiede"
+
+#: model-gettext.py:89
+msgid "Classical & modern Greek literatures"
+msgstr "Klassinen ja moderni kreikkalainen kirjallisuus"
+
+#: model-gettext.py:90
+msgid "Other literatures"
+msgstr "Muu kirjallisuus"
+
+#: model-gettext.py:92
+msgid "Geography & travel"
+msgstr "Maantiede & matkailu"
+
+#: model-gettext.py:93
+#, fuzzy
+msgid "Biography & genealogy"
+msgstr "Maantiede"
+
+#: model-gettext.py:94
+msgid "History of ancient world (to ca. 499)"
+msgstr "Muinaismaailman historia (noin 499)"
+
+#: model-gettext.py:95
+msgid "History of Europe"
+msgstr "Euroopan historia"
+
+#: model-gettext.py:96
+msgid "History of Asia"
+msgstr "Aasian historia"
+
+#: model-gettext.py:97
+msgid "History of Africa"
+msgstr "Afrikan historia"
+
+#: model-gettext.py:98
+msgid "History of North America"
+msgstr "Pohjois-Amerikan historia"
+
+#: model-gettext.py:99
+msgid "History of South America"
+msgstr "Etelä-Amerikan historia"
+
+#: model-gettext.py:100
+msgid "History of other areas"
+msgstr "Muiden alueiden historia"
+
+#: model-gettext.py:101
+#, fuzzy
+#| msgid "Computer science"
+msgid "Data processing & computer science"
+msgstr "Tietojenkäsittelytiede"
+
+#: model-gettext.py:102
+#, fuzzy
+#| msgid "Political science"
+msgid "Military science"
+msgstr "Valtiotiede"
+
+#: model-gettext.py:103
+#, fuzzy
+#| msgid "Other languages"
+msgid "Other Germanic languages"
+msgstr "Muut kielet"
+
+#: model-gettext.py:104
+msgid "Public performances"
+msgstr ""
+
+#: model-gettext.py:105
+msgid "Stage presentations"
+msgstr ""
+
+#: model-gettext.py:106
+msgid "Indoor games & amusements"
+msgstr ""
+
+#: model-gettext.py:107
+msgid "Athletic & outdoor sports & games"
+msgstr ""
+
+#: model-gettext.py:108
+#, fuzzy
+#| msgid "Other literatures"
+msgid "Other Germanic literatures"
+msgstr "Muu kirjallisuus"
+
+#: model-gettext.py:109
+msgid "Germany & neighboring central European countries"
+msgstr ""
+
+#: model-gettext.py:110
+msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
+msgstr "Creative Commons 1.0 Yleismaailmallinen (CC0 1.0) Public Domain -lausuma"
+
+#: model-gettext.py:111
+msgid "Creative Commons Attribution 4.0 International (CC BY 4.0)"
+msgstr "Creative Commons Nimeä 4.0 Kansainvälinen (CC BY 4.0)"
+
+#: model-gettext.py:112
+msgid "Creative Commons Attribution-ShareAlike 4.0, International (CC BY-SA 4.0)"
+msgstr "Creative Commons Nimeä-JaaSamoin 4.0 Kansainvälinen (CC BY-SA 4.0)"
+
+#: model-gettext.py:113
+msgid "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
+msgstr "Creative Commons Nimeä-EiKaupallinen 4.0 Kansainvälinen (CC BY-NC 4.0)"
+
+#: model-gettext.py:114
+msgid "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)"
+msgstr "Creative Commons Nimeä-EiMuutoksia 4.0 Kansainvälinen (CC BY-ND 4.0)"
+
+#: model-gettext.py:115
+msgid "Free for private use; right holder retains other rights, including distribution"
+msgstr "Ilmaiseksi yksityiskäyttöön; oikeudenhaltija säilyttää muut oikeudet, mukaan lukien jakelu"
+
+#: model-gettext.py:116
+msgid "Other open license"
+msgstr "Muu avoin lisenssi"
+
+#: model-gettext.py:118
+#, fuzzy
+#| msgid "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
+msgid "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)"
+msgstr "Creative Commons Nimeä-EiKaupallinen 4.0 Kansainvälinen (CC BY-NC 4.0)"
+
+#: model-gettext.py:119
+#, fuzzy
+#| msgid "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)"
+msgid "Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)"
+msgstr "Creative Commons Nimeä-EiMuutoksia 4.0 Kansainvälinen (CC BY-ND 4.0)"
+
+#: model-gettext.py:120
+msgid "Zenodo"
+msgstr "Zenodo"
+
+#: model-gettext.py:121
+msgid "Zenodo is a general-purpose open repository hosted by CERN. If the document does not have a DOI yet, Zenodo will create one."
+msgstr ""
+
+#: model-gettext.py:122
+msgid "HAL"
+msgstr "HAL"
+
+#: model-gettext.py:123
+msgid "HAL is a  multidisciplinary open archive, sustained by the French Research Ministry."
+msgstr ""
+
+#: model-gettext.py:124
+#, fuzzy
+msgid "OSF preprints"
+msgstr "koevedos"
+
+#: model-gettext.py:125
+msgid "Run by the Center for Open Science, OSF lets you share your preprints openly. You can also share supplemental data, materials or code associated with your article."
+msgstr ""
+
+#: model-gettext.py:126
+#, fuzzy
+#| msgid "preprint"
+msgid "TUprints"
+msgstr "koevedos"
+
+#: model-gettext.py:127
+msgid "TUprints is the open access repository for all current and former members of the Technical University Darmstadt."
+msgstr ""
 
 #: notification/models.py:62
 msgid "inboxes"
@@ -780,7 +1248,7 @@ msgstr "Teesi"
 msgid "Dataset"
 msgstr "Aineisto"
 
-#: papers/baremodels.py:69 papers/models.py:99
+#: papers/baremodels.py:69 papers/models.py:100
 #: publishers/templates/publishers/policy_preprint.html:5
 msgid "Preprint"
 msgstr "Koevedos"
@@ -821,48 +1289,48 @@ msgstr "Näkyvä"
 msgid "Invisible"
 msgstr "Näkymätön"
 
-#: papers/models.py:100 publishers/templates/publishers/policy_postprint.html:6
+#: papers/models.py:101 publishers/templates/publishers/policy_postprint.html:6
 msgid "Postprint"
 msgstr ""
 
-#: papers/models.py:101
+#: papers/models.py:102
 #: publishers/templates/publishers/policy_pdfversion.html:6
 msgid "Published version"
 msgstr "Julkaistu versio"
 
-#: papers/models.py:105
+#: papers/models.py:106
 msgid "Preparing profile"
 msgstr ""
 
-#: papers/models.py:106
+#: papers/models.py:107
 msgid "Fetching publications from ORCID"
 msgstr ""
 
-#: papers/models.py:107
+#: papers/models.py:108
 msgid "Fetching publications from CrossRef"
 msgstr ""
 
-#: papers/models.py:108
+#: papers/models.py:109
 msgid "Fetching publications from BASE"
 msgstr ""
 
-#: papers/models.py:109
+#: papers/models.py:110
 msgid "Fetching publications from CORE"
 msgstr ""
 
-#: papers/models.py:110
+#: papers/models.py:111
 msgid "Fetching publications from OAI-PMH"
 msgstr ""
 
-#: papers/models.py:111
+#: papers/models.py:112
 msgid "Clustering publications"
 msgstr ""
 
-#: papers/models.py:112
+#: papers/models.py:113
 msgid "Updating statistics"
 msgstr "Päivitetään tilastoja"
 
-#: papers/models.py:1244 papers/views.py:144 papers/views.py:148
+#: papers/models.py:1253 papers/views.py:144 papers/views.py:148
 msgid "Papers"
 msgstr "Artikkelit"
 
@@ -930,7 +1398,7 @@ msgid "Format"
 msgstr "Muoto"
 
 #: papers/templates/papers/export_citation_modal.html:31
-#: papers/templates/papers/paper.html:144
+#: papers/templates/papers/paper.html:146
 #: papers/templates/papers/paper_list.html:55
 msgid "Download"
 msgstr "Lataa"
@@ -977,70 +1445,70 @@ msgstr ""
 msgid "A paper was ignored, because is has no title."
 msgstr ""
 
-#: papers/templates/papers/paper.html:39
+#: papers/templates/papers/paper.html:40
 #, python-format
 msgctxt "as in: _Journal article published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "%(doctype)s published in %(year)s by"
 msgstr "%(doctype)s julkaistu vuonna %(year)s julkaisijoinaan"
 
-#: papers/templates/papers/paper.html:45
+#: papers/templates/papers/paper.html:46
 #, python-format
 msgctxt "as in: _Published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "Published in %(year)s by"
 msgstr "Julkaistu vuonna %(year)s julkaisijoinaan"
 
-#: papers/templates/papers/paper.html:55
+#: papers/templates/papers/paper.html:56
 #, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
 msgstr "ja <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s muuta tekijää.</a>"
 
-#: papers/templates/papers/paper.html:61
+#: papers/templates/papers/paper.html:62
 #, fuzzy
 msgid "Show less"
 msgstr "Näytä"
 
-#: papers/templates/papers/paper.html:71
+#: papers/templates/papers/paper.html:73
 msgid "Deposit accomplished!"
 msgstr ""
 
-#: papers/templates/papers/paper.html:72
+#: papers/templates/papers/paper.html:74
 #, python-format
 msgid "<p>This paper was successfully deposited and is now freely available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address.</a></p>"
 msgstr ""
 
-#: papers/templates/papers/paper.html:79 papers/templates/papers/paper.html:103
+#: papers/templates/papers/paper.html:81 papers/templates/papers/paper.html:105
 msgid "Deposit almost accomplished!"
 msgstr ""
 
-#: papers/templates/papers/paper.html:81
+#: papers/templates/papers/paper.html:83
 #, python-format
 msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> after validation by the repository administrators.</p>"
 msgstr ""
 
-#: papers/templates/papers/paper.html:88
+#: papers/templates/papers/paper.html:90
 msgid "Letter of Declaration needed!"
 msgstr ""
 
-#: papers/templates/papers/paper.html:91
+#: papers/templates/papers/paper.html:93
 #, python-format
 msgid "<p>The repository %(deposit.repository.name)s requires a letter of declaration to publish this publication. Please <a class=\"alert-link\" href=\"%(letter_url)s\">download</a> the letter, sign it and send it to the repository administration.</p>"
 msgstr ""
 
-#: papers/templates/papers/paper.html:104
+#: papers/templates/papers/paper.html:106
 #, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> after validation by the repository administrators."
 msgstr ""
 
-#: papers/templates/papers/paper.html:117
+#: papers/templates/papers/paper.html:119
 #, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> from <strong>%(pub_date|localize)s</strong> on due to an embargo."
 msgstr ""
 
-#: papers/templates/papers/paper.html:142
+#: papers/templates/papers/paper.html:144
 msgid "Full text:"
 msgstr "Koko teksti:"
 
-#: papers/templates/papers/paper.html:146 statistics/models.py:66
+#: papers/templates/papers/paper.html:148 statistics/models.py:66
 msgid "Unavailable"
 msgstr "Ei saatavissa"
 
@@ -1656,408 +2124,6 @@ msgstr "Virheellinen URL (palvelimen aikakatkaisu)"
 msgid "Invalid URL."
 msgstr "Virheellinen URL"
 
-#: vinaigrette-deleteme.py:2
-msgid "Computer science, knowledge & systems"
-msgstr "Tietojenkäsittely, tieto ja järjestelmät"
-
-#: vinaigrette-deleteme.py:3
-msgid "Bibliographies"
-msgstr "Bibliografiat"
-
-#: vinaigrette-deleteme.py:4
-msgid "Library & information sciences"
-msgstr "Kirjasto- ja informaatiotieteet"
-
-#: vinaigrette-deleteme.py:5
-msgid "Encyclopedias & books of facts"
-msgstr "Tietosanakirjat ja tosikirjat"
-
-#: vinaigrette-deleteme.py:6
-msgid "Magazines, journals & serials"
-msgstr ""
-
-#: vinaigrette-deleteme.py:7
-msgid "Associations, organizations & museums"
-msgstr ""
-
-#: vinaigrette-deleteme.py:8
-msgid "News media, journalism & publishing"
-msgstr ""
-
-#: vinaigrette-deleteme.py:9
-msgid "Quotations"
-msgstr "Lainaukset"
-
-#: vinaigrette-deleteme.py:10
-msgid "Manuscripts & rare books"
-msgstr ""
-
-#: vinaigrette-deleteme.py:12
-msgid "Metaphysics"
-msgstr "Metafysiikka"
-
-#: vinaigrette-deleteme.py:13
-msgid "Epistemology"
-msgstr "Tietoteoria"
-
-#: vinaigrette-deleteme.py:14
-msgid "Parapsychology & occultism"
-msgstr ""
-
-#: vinaigrette-deleteme.py:15
-#, fuzzy
-msgid "Philosophical schools of thought"
-msgstr "Filosofia"
-
-#: vinaigrette-deleteme.py:17
-msgid "Philosophical logic"
-msgstr "Filosofinen logiikka"
-
-#: vinaigrette-deleteme.py:18
-msgid "Ethics"
-msgstr "Etiikka"
-
-#: vinaigrette-deleteme.py:19
-msgid "Ancient, medieval & eastern philosophy"
-msgstr ""
-
-#: vinaigrette-deleteme.py:20
-msgid "Modern western philosophy"
-msgstr ""
-
-#: vinaigrette-deleteme.py:21
-msgid "Religion"
-msgstr "Uskonto"
-
-#: vinaigrette-deleteme.py:22
-msgid "Philosophy & theory of religion"
-msgstr ""
-
-#: vinaigrette-deleteme.py:23
-msgid "The Bible"
-msgstr "Raamattu"
-
-#: vinaigrette-deleteme.py:24
-msgid "Christianity"
-msgstr "Kristinusko"
-
-#: vinaigrette-deleteme.py:25
-msgid "Christian practice & observance"
-msgstr ""
-
-#: vinaigrette-deleteme.py:26
-msgid "Christian pastoral practice & religious orders"
-msgstr ""
-
-#: vinaigrette-deleteme.py:27
-msgid "Christian organization, social work & worship"
-msgstr ""
-
-#: vinaigrette-deleteme.py:28
-msgid "History of Christianity"
-msgstr "Kristinuskon historia"
-
-#: vinaigrette-deleteme.py:29
-msgid "Christian denominations"
-msgstr "Kristilliset uskonnot"
-
-#: vinaigrette-deleteme.py:30
-msgid "Other religions"
-msgstr "Muut uskonnot"
-
-#: vinaigrette-deleteme.py:31
-msgid "Social sciences, sociology & anthropology"
-msgstr "Yhteiskuntatieteet, sosiologia ja antropologia"
-
-#: vinaigrette-deleteme.py:34
-msgid "Economics"
-msgstr "Ekonomia"
-
-#: vinaigrette-deleteme.py:36
-msgid "Public administration & military science"
-msgstr ""
-
-#: vinaigrette-deleteme.py:37
-msgid "Social problems & social services"
-msgstr ""
-
-#: vinaigrette-deleteme.py:39
-msgid "Commerce, communications & transportation"
-msgstr ""
-
-#: vinaigrette-deleteme.py:40
-msgid "Customs, etiquette & folklore"
-msgstr ""
-
-#: vinaigrette-deleteme.py:41 website/templates/navbar.html:15
-msgid "Language"
-msgstr "Kieli"
-
-#: vinaigrette-deleteme.py:43
-msgid "English & Old English languages"
-msgstr ""
-
-#: vinaigrette-deleteme.py:44
-msgid "German & related languages"
-msgstr "Saksa ja siihen liittyvät kielet"
-
-#: vinaigrette-deleteme.py:45
-msgid "French & related languages"
-msgstr "Ranska ja siihen liittyvät kielet"
-
-#: vinaigrette-deleteme.py:46
-msgid "Italian, Romanian & related languages"
-msgstr "Italia, romania ja niihin liittyvät kielet"
-
-#: vinaigrette-deleteme.py:47
-msgid "Spanish, Portuguese, Galician"
-msgstr "Espanja, portugali, galicia"
-
-#: vinaigrette-deleteme.py:48
-msgid "Latin & Italic languages"
-msgstr ""
-
-#: vinaigrette-deleteme.py:49
-msgid "Classical & modern Greek languages"
-msgstr "Klassiset ja modernit kreikan kielet"
-
-#: vinaigrette-deleteme.py:50
-msgid "Other languages"
-msgstr "Muut kielet"
-
-#: vinaigrette-deleteme.py:51
-msgid "Science"
-msgstr "Tiede"
-
-#: vinaigrette-deleteme.py:53
-msgid "Astronomy"
-msgstr "Tähtitiede"
-
-#: vinaigrette-deleteme.py:56
-msgid "Earth sciences & geology"
-msgstr "Maatieteet ja geologia"
-
-#: vinaigrette-deleteme.py:57
-msgid "Fossils & prehistoric life"
-msgstr "Fossiilit ja esihistoriallinen elämä"
-
-#: vinaigrette-deleteme.py:58
-msgid "Biology"
-msgstr "Biologia"
-
-#: vinaigrette-deleteme.py:59
-msgid "Plants (Botany)"
-msgstr "Kasvit (kasvitiede)"
-
-#: vinaigrette-deleteme.py:60
-msgid "Animals (Zoology)"
-msgstr "Eläimet (eläintiede)"
-
-#: vinaigrette-deleteme.py:61
-msgid "Technology"
-msgstr "Teknologia"
-
-#: vinaigrette-deleteme.py:62
-msgid "Medicine & health"
-msgstr "Lääketiede ja terveys"
-
-#: vinaigrette-deleteme.py:64
-msgid "Agriculture"
-msgstr "Maanviljely"
-
-#: vinaigrette-deleteme.py:65
-msgid "Home & family management"
-msgstr "Koti- ja perhehoito"
-
-#: vinaigrette-deleteme.py:66
-msgid "Management & public relations"
-msgstr "Johtaminen ja suhdetoiminta"
-
-#: vinaigrette-deleteme.py:67
-msgid "Chemical engineering"
-msgstr "Kemian tekniikka"
-
-#: vinaigrette-deleteme.py:68
-msgid "Manufacturing"
-msgstr "Teollisuus"
-
-#: vinaigrette-deleteme.py:69
-msgid "Manufacture for specific uses"
-msgstr "Valmistus erityiskäyttöön"
-
-#: vinaigrette-deleteme.py:70
-msgid "Construction of buildings"
-msgstr "Rakennusten rakentaminen"
-
-#: vinaigrette-deleteme.py:71
-msgid "Arts"
-msgstr "Taiteet"
-
-#: vinaigrette-deleteme.py:72
-msgid "Area planning & landscape architecture"
-msgstr "Alueiden suunnittelu ja maisema-arkkitehtuuri"
-
-#: vinaigrette-deleteme.py:74
-msgid "Sculpture, ceramics & metalwork"
-msgstr "Kuvanveisto, keramiikka ja metallityöt"
-
-#: vinaigrette-deleteme.py:75
-msgid "Graphic arts & decorative arts"
-msgstr "Graafinen taide ja koristetaiteet"
-
-#: vinaigrette-deleteme.py:76
-msgid "Painting"
-msgstr "Maalaus"
-
-#: vinaigrette-deleteme.py:77
-msgid "Printmaking & prints"
-msgstr "Tulostaminen ja tulosteet"
-
-#: vinaigrette-deleteme.py:78
-msgid "Photography, computer art, film, video"
-msgstr "Valokuvaus, tietokonetaite, elokuva, video"
-
-#: vinaigrette-deleteme.py:79
-msgid "Music"
-msgstr "Musiikki"
-
-#: vinaigrette-deleteme.py:80
-msgid "Sports, games & entertainment"
-msgstr "Urheilu, pelit ja viihde"
-
-#: vinaigrette-deleteme.py:81
-msgid "Literature, rhetoric & criticism"
-msgstr "Kirjallisuus, retoriikka ja kritiikki"
-
-#: vinaigrette-deleteme.py:82
-msgid "American literature in English"
-msgstr "Amerikkalainen englanninkielinen kirjallisuus"
-
-#: vinaigrette-deleteme.py:83
-msgid "English & Old English literatures"
-msgstr "Englanninkielinen ja muinaisenglanninkielinen kirjallisuus"
-
-#: vinaigrette-deleteme.py:84
-#, fuzzy
-msgid "German & related literatures"
-msgstr "Kirjallisuustiede"
-
-#: vinaigrette-deleteme.py:85
-#, fuzzy
-msgid "French & related literatures"
-msgstr "Kirjallisuustiede"
-
-#: vinaigrette-deleteme.py:86
-msgid "Italian, Romanian & related literatures"
-msgstr "Italialainen, romanialainen ja niihin liittyvä kirjallisuus"
-
-#: vinaigrette-deleteme.py:87
-msgid "Spanish, Portuguese, Galician literatures"
-msgstr "Espanjan, portugalin ja galiciankielinen kirjallisuus"
-
-#: vinaigrette-deleteme.py:88
-#, fuzzy
-msgid "Latin & Italic literatures"
-msgstr "Kirjallisuustiede"
-
-#: vinaigrette-deleteme.py:89
-msgid "Classical & modern Greek literatures"
-msgstr "Klassinen ja moderni kreikkalainen kirjallisuus"
-
-#: vinaigrette-deleteme.py:90
-msgid "Other literatures"
-msgstr "Muu kirjallisuus"
-
-#: vinaigrette-deleteme.py:92
-msgid "Geography & travel"
-msgstr "Maantiede & matkailu"
-
-#: vinaigrette-deleteme.py:93
-#, fuzzy
-msgid "Biography & genealogy"
-msgstr "Maantiede"
-
-#: vinaigrette-deleteme.py:94
-msgid "History of ancient world (to ca. 499)"
-msgstr "Muinaismaailman historia (noin 499)"
-
-#: vinaigrette-deleteme.py:95
-msgid "History of Europe"
-msgstr "Euroopan historia"
-
-#: vinaigrette-deleteme.py:96
-msgid "History of Asia"
-msgstr "Aasian historia"
-
-#: vinaigrette-deleteme.py:97
-msgid "History of Africa"
-msgstr "Afrikan historia"
-
-#: vinaigrette-deleteme.py:98
-msgid "History of North America"
-msgstr "Pohjois-Amerikan historia"
-
-#: vinaigrette-deleteme.py:99
-msgid "History of South America"
-msgstr "Etelä-Amerikan historia"
-
-#: vinaigrette-deleteme.py:100
-msgid "History of other areas"
-msgstr "Muiden alueiden historia"
-
-#: vinaigrette-deleteme.py:101
-msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
-msgstr "Creative Commons 1.0 Yleismaailmallinen (CC0 1.0) Public Domain -lausuma"
-
-#: vinaigrette-deleteme.py:102
-msgid "Creative Commons Attribution 4.0 International (CC BY 4.0)"
-msgstr "Creative Commons Nimeä 4.0 Kansainvälinen (CC BY 4.0)"
-
-#: vinaigrette-deleteme.py:103
-msgid "Creative Commons Attribution-ShareAlike 4.0, International (CC BY-SA 4.0)"
-msgstr "Creative Commons Nimeä-JaaSamoin 4.0 Kansainvälinen (CC BY-SA 4.0)"
-
-#: vinaigrette-deleteme.py:104
-msgid "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
-msgstr "Creative Commons Nimeä-EiKaupallinen 4.0 Kansainvälinen (CC BY-NC 4.0)"
-
-#: vinaigrette-deleteme.py:105
-msgid "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)"
-msgstr "Creative Commons Nimeä-EiMuutoksia 4.0 Kansainvälinen (CC BY-ND 4.0)"
-
-#: vinaigrette-deleteme.py:106
-msgid "Free for private use; right holder retains other rights, including distribution"
-msgstr "Ilmaiseksi yksityiskäyttöön; oikeudenhaltija säilyttää muut oikeudet, mukaan lukien jakelu"
-
-#: vinaigrette-deleteme.py:107
-msgid "Other open license"
-msgstr "Muu avoin lisenssi"
-
-#: vinaigrette-deleteme.py:109
-msgid "Zenodo"
-msgstr "Zenodo"
-
-#: vinaigrette-deleteme.py:110
-msgid "Zenodo is a general-purpose open repository hosted by CERN. If the document does not have a DOI yet, Zenodo will create one."
-msgstr ""
-
-#: vinaigrette-deleteme.py:111
-msgid "HAL"
-msgstr "HAL"
-
-#: vinaigrette-deleteme.py:112
-msgid "HAL is a  multidisciplinary open archive, sustained by the French Research Ministry."
-msgstr ""
-
-#: vinaigrette-deleteme.py:113
-#, fuzzy
-msgid "OSF preprints"
-msgstr "koevedos"
-
-#: vinaigrette-deleteme.py:114
-msgid "Run by the Center for Open Science, OSF lets you share your preprints openly. You can also share supplemental data, materials or code associated with your article."
-msgstr ""
-
 #: website/forms.py:16 website/forms.py:19
 msgid "Try any author name"
 msgstr "Kokeile minkä tahansa tekijän nimeä"
@@ -2070,7 +2136,10 @@ msgstr "Pääsy PDF-tiedostoon kiellettiin."
 #: website/templates/403.html:13
 #, fuzzy, python-format
 msgid "The access to the requested page has been denied. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "\n            Pyytämääsi sivua ei löytynyt. <a href=\"/\">Palaa kotisivulle.</a>\n           "
+msgstr ""
+"\n"
+"            Pyytämääsi sivua ei löytynyt. <a href=\"/\">Palaa kotisivulle.</a>\n"
+"           "
 
 #: website/templates/404.html:6 website/templates/404.html:10
 msgid "Page not found"
@@ -2777,4 +2846,3 @@ msgstr "Todennusvirhe"
 #, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
 msgstr "Todennus epäonnistui. <a href=\"%(account-login)s\">Palaa kirjautumissivulle.</a>"
-

@@ -14,9 +14,8 @@
 #
 msgid ""
 msgstr ""
-""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-18 09:51+0100\n"
+"POT-Creation-Date: 2020-01-07 14:39+0100\n"
 "PO-Revision-Date: 2019-12-19 14:06:33+0000\n"
 "Language: zh_hans\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -52,7 +51,7 @@ msgstr "存储库"
 msgid "Invalid full text identifier."
 msgstr "无效的全文标识符。"
 
-#: deposit/forms.py:144 papers/templates/papers/paper.html:158
+#: deposit/forms.py:144 papers/templates/papers/paper.html:160
 msgid "Abstract"
 msgstr "摘要"
 
@@ -89,7 +88,7 @@ msgstr "存放作者"
 msgid "Affiliation"
 msgstr "附属机构"
 
-#: deposit/hal/metadata.py:36 vinaigrette-deleteme.py:55
+#: deposit/hal/metadata.py:36 model-gettext.py:55
 msgid "Chemistry"
 msgstr "化学"
 
@@ -97,11 +96,11 @@ msgstr "化学"
 msgid "Computer science"
 msgstr "计算机科学"
 
-#: deposit/hal/metadata.py:38 vinaigrette-deleteme.py:52
+#: deposit/hal/metadata.py:38 model-gettext.py:52
 msgid "Mathematics"
 msgstr "数学"
 
-#: deposit/hal/metadata.py:39 vinaigrette-deleteme.py:54
+#: deposit/hal/metadata.py:39 model-gettext.py:54
 msgid "Physics"
 msgstr "物理学"
 
@@ -150,7 +149,7 @@ msgid "Demography"
 msgstr "人口学"
 
 #: deposit/hal/metadata.py:51 deposit/osf/forms.py:67 deposit/osf/forms.py:90
-#: vinaigrette-deleteme.py:35
+#: model-gettext.py:35
 msgid "Law"
 msgstr "法律"
 
@@ -159,7 +158,7 @@ msgid "Economies and finances"
 msgstr "经济与金融"
 
 #: deposit/hal/metadata.py:53 deposit/osf/forms.py:63 deposit/osf/forms.py:86
-#: vinaigrette-deleteme.py:38
+#: model-gettext.py:38
 msgid "Education"
 msgstr "教育"
 
@@ -183,7 +182,7 @@ msgstr "企业管理"
 msgid "History, Philosophy and Sociology of Sciences"
 msgstr "历史、哲学与科学社会学"
 
-#: deposit/hal/metadata.py:59 vinaigrette-deleteme.py:91
+#: deposit/hal/metadata.py:59 model-gettext.py:91
 msgid "History"
 msgstr "历史"
 
@@ -191,7 +190,7 @@ msgstr "历史"
 msgid "Library and information sciences"
 msgstr "图书馆与信息科学"
 
-#: deposit/hal/metadata.py:61 vinaigrette-deleteme.py:42
+#: deposit/hal/metadata.py:61 model-gettext.py:42
 msgid "Linguistics"
 msgstr "语言学"
 
@@ -207,11 +206,11 @@ msgstr "文化遗产与博物馆学"
 msgid "Musicology and performing arts"
 msgstr "音乐学与表演艺术"
 
-#: deposit/hal/metadata.py:65 vinaigrette-deleteme.py:11
+#: deposit/hal/metadata.py:65 model-gettext.py:11
 msgid "Philosophy"
 msgstr "哲学"
 
-#: deposit/hal/metadata.py:66 vinaigrette-deleteme.py:16
+#: deposit/hal/metadata.py:66 model-gettext.py:16
 msgid "Psychology"
 msgstr "心理学"
 
@@ -219,7 +218,7 @@ msgstr "心理学"
 msgid "Religions"
 msgstr "宗教"
 
-#: deposit/hal/metadata.py:68 vinaigrette-deleteme.py:33
+#: deposit/hal/metadata.py:68 model-gettext.py:33
 msgid "Political science"
 msgstr "政治学"
 
@@ -239,8 +238,9 @@ msgstr "生命科学"
 msgid "Engineering sciences"
 msgstr "工程学"
 
-#: deposit/hal/metadata.py:73 papers/templates/papers/search_base.html:23
-#: publishers/templates/publishers/list.html:16 vinaigrette-deleteme.py:32
+#: deposit/hal/metadata.py:73 model-gettext.py:32
+#: papers/templates/papers/search_base.html:23
+#: publishers/templates/publishers/list.html:16
 msgid "Statistics"
 msgstr "统计"
 
@@ -321,16 +321,16 @@ msgstr "被存储库拒绝"
 msgid "Deleted"
 msgstr "已删除"
 
-#: deposit/models.py:287 deposit/templates/deposit/start.html:205
+#: deposit/models.py:290 deposit/templates/deposit/start.html:205
 #: deposit/views.py:120
 msgid "Deposit"
 msgstr "存放"
 
-#: deposit/models.py:340
+#: deposit/models.py:343
 msgid "We will use this email address to notify you when your deposits are accepted."
 msgstr "当您的存放内容被接受时，我们将使用该电子邮件地址通知您。"
 
-#: deposit/models.py:346
+#: deposit/models.py:349
 msgid "This repository will be used by default for your deposits."
 msgstr "该存储库将默认用作您存放材料的存储库。"
 
@@ -342,11 +342,11 @@ msgstr "知识共享CC0 1.0通用"
 msgid "Creative Commons CC-By Attribution 4.0 International (CC BY 4.0)"
 msgstr "知识共享署名-相同方式共享4.0国际（CC BY 4.0）"
 
-#: deposit/osf/forms.py:40 deposit/osf/forms.py:51 vinaigrette-deleteme.py:108
+#: deposit/osf/forms.py:40 deposit/osf/forms.py:51 model-gettext.py:117
 msgid "No license"
 msgstr "无许可协议"
 
-#: deposit/osf/forms.py:57 deposit/osf/forms.py:80 vinaigrette-deleteme.py:73
+#: deposit/osf/forms.py:57 deposit/osf/forms.py:80 model-gettext.py:73
 msgid "Architecture"
 msgstr "建筑学"
 
@@ -358,7 +358,7 @@ msgstr "艺术与人文学"
 msgid "Business"
 msgstr "商务"
 
-#: deposit/osf/forms.py:65 deposit/osf/forms.py:88 vinaigrette-deleteme.py:63
+#: deposit/osf/forms.py:65 deposit/osf/forms.py:88 model-gettext.py:63
 msgid "Engineering"
 msgstr "工程"
 
@@ -543,7 +543,10 @@ msgstr "存放"
 #: deposit/templates/deposit/start.html:64
 #, fuzzy, python-format
 msgid "You can deposit the full text of your article. Dissemin will send it to a repository where it will be made freely available. By depositing your article via Dissemin, you agree to our <a href=\"%(tosurl)s\">terms of service</a>."
-msgstr "\n            您可以存放您的文章全文。Dissemin将发送它到其能够自由展示的存储库。通过使用Dissemin存放您的文章，您同意我们的<a href=\"%(tosurl)s\">服务条款</a>。\n        "
+msgstr ""
+"\n"
+"            您可以存放您的文章全文。Dissemin将发送它到其能够自由展示的存储库。通过使用Dissemin存放您的文章，您同意我们的<a href=\"%(tosurl)s\">服务条款</a>。\n"
+"        "
 
 #: deposit/templates/deposit/start.html:73
 msgid "You do not appear to be one of the authors of this paper. By using this form, you certify that you have the permission to upload it on their behalf."
@@ -670,57 +673,554 @@ msgstr "无法提交论文元数据至Zenodo。"
 msgid "Unable to publish the deposition on Zenodo."
 msgstr "无法在Zenodo发布存放。"
 
-#: dissemin/settings/common.py:303
+#: dissemin/settings/common.py:308
 msgid "Arabic"
 msgstr "阿拉伯语"
 
-#: dissemin/settings/common.py:304
+#: dissemin/settings/common.py:309
 msgid "English"
 msgstr "英语"
 
-#: dissemin/settings/common.py:305
+#: dissemin/settings/common.py:310
 msgid "Finnish"
 msgstr "芬兰语"
 
-#: dissemin/settings/common.py:306
+#: dissemin/settings/common.py:311
 msgid "French"
 msgstr "法语"
 
-#: dissemin/settings/common.py:307
+#: dissemin/settings/common.py:312
 msgid "Korean"
 msgstr "韩语"
 
-#: dissemin/settings/common.py:308
+#: dissemin/settings/common.py:313
 msgid "Spanish"
 msgstr "西班牙语"
 
-#: dissemin/settings/common.py:309
+#: dissemin/settings/common.py:314
 msgid "Simplified Chinese"
 msgstr "简体中文"
 
-#: dissemin/settings/common.py:310
+#: dissemin/settings/common.py:315
 msgid "Traditional Chinese"
 msgstr "繁体中文"
 
-#: dissemin/settings/common.py:311
+#: dissemin/settings/common.py:316
 msgid "Macedonian"
 msgstr "马其顿语"
 
-#: dissemin/settings/common.py:312
+#: dissemin/settings/common.py:317
 msgid "German"
 msgstr "德语"
 
-#: dissemin/settings/common.py:313
+#: dissemin/settings/common.py:318
 msgid "Brazilian Portuguese"
 msgstr "巴西葡萄牙语"
 
-#: dissemin/settings/common.py:314
+#: dissemin/settings/common.py:319
 msgid "European Portuguese"
 msgstr "欧洲葡萄牙语"
 
-#: dissemin/settings/common.py:315
+#: dissemin/settings/common.py:320
 msgid "Swedish"
 msgstr "瑞典语"
+
+#: model-gettext.py:2
+#, fuzzy
+msgid "Computer science, knowledge & systems"
+msgstr "计算机科学"
+
+#: model-gettext.py:3
+msgid "Bibliographies"
+msgstr ""
+
+#: model-gettext.py:4
+#, fuzzy
+msgid "Library & information sciences"
+msgstr "图书馆与信息科学"
+
+#: model-gettext.py:5
+msgid "Encyclopedias & books of facts"
+msgstr ""
+
+#: model-gettext.py:6
+msgid "Magazines, journals & serials"
+msgstr ""
+
+#: model-gettext.py:7
+msgid "Associations, organizations & museums"
+msgstr ""
+
+#: model-gettext.py:8
+msgid "News media, journalism & publishing"
+msgstr ""
+
+#: model-gettext.py:9
+#, fuzzy
+msgid "Quotations"
+msgstr "出版物"
+
+#: model-gettext.py:10
+msgid "Manuscripts & rare books"
+msgstr ""
+
+#: model-gettext.py:12
+#, fuzzy
+msgid "Metaphysics"
+msgstr "物理学"
+
+#: model-gettext.py:13
+#, fuzzy
+msgid "Epistemology"
+msgstr "社会学"
+
+#: model-gettext.py:14
+msgid "Parapsychology & occultism"
+msgstr ""
+
+#: model-gettext.py:15
+#, fuzzy
+msgid "Philosophical schools of thought"
+msgstr "哲学"
+
+#: model-gettext.py:17
+#, fuzzy
+msgid "Philosophical logic"
+msgstr "哲学"
+
+#: model-gettext.py:18
+msgid "Ethics"
+msgstr ""
+
+#: model-gettext.py:19
+msgid "Ancient, medieval & eastern philosophy"
+msgstr ""
+
+#: model-gettext.py:20
+msgid "Modern western philosophy"
+msgstr ""
+
+#: model-gettext.py:21
+#, fuzzy
+msgid "Religion"
+msgstr "宗教"
+
+#: model-gettext.py:22
+msgid "Philosophy & theory of religion"
+msgstr ""
+
+#: model-gettext.py:23
+msgid "The Bible"
+msgstr ""
+
+#: model-gettext.py:24
+#, fuzzy
+msgid "Christianity"
+msgstr "Dissemin管理"
+
+#: model-gettext.py:25
+msgid "Christian practice & observance"
+msgstr ""
+
+#: model-gettext.py:26
+msgid "Christian pastoral practice & religious orders"
+msgstr ""
+
+#: model-gettext.py:27
+msgid "Christian organization, social work & worship"
+msgstr ""
+
+#: model-gettext.py:28
+#, fuzzy
+msgid "History of Christianity"
+msgstr "历史"
+
+#: model-gettext.py:29
+#, fuzzy
+msgid "Christian denominations"
+msgstr "Dissemin管理"
+
+#: model-gettext.py:30
+#, fuzzy
+msgid "Other religions"
+msgstr "宗教"
+
+#: model-gettext.py:31
+#, fuzzy
+msgid "Social sciences, sociology & anthropology"
+msgstr "社会人类学与民族学"
+
+#: model-gettext.py:34
+msgid "Economics"
+msgstr ""
+
+#: model-gettext.py:36
+msgid "Public administration & military science"
+msgstr ""
+
+#: model-gettext.py:37
+msgid "Social problems & social services"
+msgstr ""
+
+#: model-gettext.py:39
+msgid "Commerce, communications & transportation"
+msgstr ""
+
+#: model-gettext.py:40
+msgid "Customs, etiquette & folklore"
+msgstr ""
+
+#: model-gettext.py:41 website/templates/navbar.html:15
+msgid "Language"
+msgstr "语言"
+
+#: model-gettext.py:43
+msgid "English & Old English languages"
+msgstr ""
+
+#: model-gettext.py:44
+msgid "German & related languages"
+msgstr ""
+
+#: model-gettext.py:45
+msgid "French & related languages"
+msgstr ""
+
+#: model-gettext.py:46
+msgid "Italian, Romanian & related languages"
+msgstr ""
+
+#: model-gettext.py:47
+msgid "Spanish, Portuguese, Galician"
+msgstr ""
+
+#: model-gettext.py:48
+msgid "Latin & Italic languages"
+msgstr ""
+
+#: model-gettext.py:49
+msgid "Classical & modern Greek languages"
+msgstr ""
+
+#: model-gettext.py:50
+#, fuzzy
+msgid "Other languages"
+msgstr "更改语言"
+
+#: model-gettext.py:51
+#, fuzzy
+msgid "Science"
+msgstr "生命科学"
+
+#: model-gettext.py:53
+msgid "Astronomy"
+msgstr ""
+
+#: model-gettext.py:56
+msgid "Earth sciences & geology"
+msgstr ""
+
+#: model-gettext.py:57
+msgid "Fossils & prehistoric life"
+msgstr ""
+
+#: model-gettext.py:58
+#, fuzzy
+msgid "Biology"
+msgstr "社会学"
+
+#: model-gettext.py:59
+msgid "Plants (Botany)"
+msgstr ""
+
+#: model-gettext.py:60
+msgid "Animals (Zoology)"
+msgstr ""
+
+#: model-gettext.py:61
+#, fuzzy
+msgid "Technology"
+msgstr "心理学"
+
+#: model-gettext.py:62
+#, fuzzy
+msgid "Medicine & health"
+msgstr "医学与健康科学"
+
+#: model-gettext.py:64
+#, fuzzy
+msgid "Agriculture"
+msgstr "建筑学"
+
+#: model-gettext.py:65
+msgid "Home & family management"
+msgstr ""
+
+#: model-gettext.py:66
+#, fuzzy
+msgid "Management & public relations"
+msgstr "刷新出版物"
+
+#: model-gettext.py:67
+#, fuzzy
+msgid "Chemical engineering"
+msgstr "工程"
+
+#: model-gettext.py:68
+msgid "Manufacturing"
+msgstr ""
+
+#: model-gettext.py:69
+msgid "Manufacture for specific uses"
+msgstr ""
+
+#: model-gettext.py:70
+msgid "Construction of buildings"
+msgstr ""
+
+#: model-gettext.py:71
+msgid "Arts"
+msgstr ""
+
+#: model-gettext.py:72
+msgid "Area planning & landscape architecture"
+msgstr ""
+
+#: model-gettext.py:74
+msgid "Sculpture, ceramics & metalwork"
+msgstr ""
+
+#: model-gettext.py:75
+msgid "Graphic arts & decorative arts"
+msgstr ""
+
+#: model-gettext.py:76
+msgid "Painting"
+msgstr ""
+
+#: model-gettext.py:77
+msgid "Printmaking & prints"
+msgstr ""
+
+#: model-gettext.py:78
+msgid "Photography, computer art, film, video"
+msgstr ""
+
+#: model-gettext.py:79
+msgid "Music"
+msgstr "音乐"
+
+#: model-gettext.py:80
+msgid "Sports, games & entertainment"
+msgstr ""
+
+#: model-gettext.py:81
+msgid "Literature, rhetoric & criticism"
+msgstr ""
+
+#: model-gettext.py:82
+msgid "American literature in English"
+msgstr ""
+
+#: model-gettext.py:83
+msgid "English & Old English literatures"
+msgstr ""
+
+#: model-gettext.py:84
+#, fuzzy
+msgid "German & related literatures"
+msgstr "文献"
+
+#: model-gettext.py:85
+#, fuzzy
+msgid "French & related literatures"
+msgstr "文献"
+
+#: model-gettext.py:86
+msgid "Italian, Romanian & related literatures"
+msgstr ""
+
+#: model-gettext.py:87
+msgid "Spanish, Portuguese, Galician literatures"
+msgstr ""
+
+#: model-gettext.py:88
+#, fuzzy
+msgid "Latin & Italic literatures"
+msgstr "文献"
+
+#: model-gettext.py:89
+msgid "Classical & modern Greek literatures"
+msgstr ""
+
+#: model-gettext.py:90
+#, fuzzy
+msgid "Other literatures"
+msgstr "文献"
+
+#: model-gettext.py:92
+#, fuzzy
+msgid "Geography & travel"
+msgstr "地理"
+
+#: model-gettext.py:93
+#, fuzzy
+msgid "Biography & genealogy"
+msgstr "地理"
+
+#: model-gettext.py:94
+msgid "History of ancient world (to ca. 499)"
+msgstr ""
+
+#: model-gettext.py:95
+#, fuzzy
+msgid "History of Europe"
+msgstr "历史"
+
+#: model-gettext.py:96
+#, fuzzy
+msgid "History of Asia"
+msgstr "历史"
+
+#: model-gettext.py:97
+#, fuzzy
+msgid "History of Africa"
+msgstr "历史"
+
+#: model-gettext.py:98
+#, fuzzy
+msgid "History of North America"
+msgstr "历史"
+
+#: model-gettext.py:99
+#, fuzzy
+msgid "History of South America"
+msgstr "历史"
+
+#: model-gettext.py:100
+#, fuzzy
+msgid "History of other areas"
+msgstr "历史"
+
+#: model-gettext.py:101
+#, fuzzy
+#| msgid "Computer science"
+msgid "Data processing & computer science"
+msgstr "计算机科学"
+
+#: model-gettext.py:102
+#, fuzzy
+#| msgid "Political science"
+msgid "Military science"
+msgstr "政治学"
+
+#: model-gettext.py:103
+#, fuzzy
+msgid "Other Germanic languages"
+msgstr "更改语言"
+
+#: model-gettext.py:104
+msgid "Public performances"
+msgstr ""
+
+#: model-gettext.py:105
+msgid "Stage presentations"
+msgstr ""
+
+#: model-gettext.py:106
+msgid "Indoor games & amusements"
+msgstr ""
+
+#: model-gettext.py:107
+msgid "Athletic & outdoor sports & games"
+msgstr ""
+
+#: model-gettext.py:108
+#, fuzzy
+msgid "Other Germanic literatures"
+msgstr "文献"
+
+#: model-gettext.py:109
+msgid "Germany & neighboring central European countries"
+msgstr ""
+
+#: model-gettext.py:110
+#, fuzzy
+msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
+msgstr "知识共享CC0 1.0通用"
+
+#: model-gettext.py:111
+#, fuzzy
+msgid "Creative Commons Attribution 4.0 International (CC BY 4.0)"
+msgstr "知识共享署名-相同方式共享4.0国际（CC BY 4.0）"
+
+#: model-gettext.py:112
+#, fuzzy
+msgid "Creative Commons Attribution-ShareAlike 4.0, International (CC BY-SA 4.0)"
+msgstr "知识共享署名-相同方式共享4.0国际（CC BY 4.0）"
+
+#: model-gettext.py:113
+#, fuzzy
+msgid "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
+msgstr "知识共享署名-相同方式共享4.0国际（CC BY 4.0）"
+
+#: model-gettext.py:114
+#, fuzzy
+msgid "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)"
+msgstr "知识共享署名-相同方式共享4.0国际（CC BY 4.0）"
+
+#: model-gettext.py:115
+msgid "Free for private use; right holder retains other rights, including distribution"
+msgstr ""
+
+#: model-gettext.py:116
+msgid "Other open license"
+msgstr "其他开放许可协议"
+
+#: model-gettext.py:118
+#, fuzzy
+msgid "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)"
+msgstr "知识共享署名-相同方式共享4.0国际（CC BY 4.0）"
+
+#: model-gettext.py:119
+#, fuzzy
+msgid "Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)"
+msgstr "知识共享署名-相同方式共享4.0国际（CC BY 4.0）"
+
+#: model-gettext.py:120
+msgid "Zenodo"
+msgstr ""
+
+#: model-gettext.py:121
+msgid "Zenodo is a general-purpose open repository hosted by CERN. If the document does not have a DOI yet, Zenodo will create one."
+msgstr ""
+
+#: model-gettext.py:122
+msgid "HAL"
+msgstr ""
+
+#: model-gettext.py:123
+msgid "HAL is a  multidisciplinary open archive, sustained by the French Research Ministry."
+msgstr ""
+
+#: model-gettext.py:124
+#, fuzzy
+msgid "OSF preprints"
+msgstr "预印本"
+
+#: model-gettext.py:125
+msgid "Run by the Center for Open Science, OSF lets you share your preprints openly. You can also share supplemental data, materials or code associated with your article."
+msgstr ""
+
+#: model-gettext.py:126
+#, fuzzy
+#| msgid "preprint"
+msgid "TUprints"
+msgstr "预印本"
+
+#: model-gettext.py:127
+msgid "TUprints is the open access repository for all current and former members of the Technical University Darmstadt."
+msgstr ""
 
 #: notification/models.py:62
 msgid "inboxes"
@@ -789,7 +1289,7 @@ msgstr "论题"
 msgid "Dataset"
 msgstr "数据集"
 
-#: papers/baremodels.py:69 papers/models.py:99
+#: papers/baremodels.py:69 papers/models.py:100
 #: publishers/templates/publishers/policy_preprint.html:5
 msgid "Preprint"
 msgstr "预印本"
@@ -830,48 +1330,48 @@ msgstr "可见"
 msgid "Invisible"
 msgstr "不可见"
 
-#: papers/models.py:100 publishers/templates/publishers/policy_postprint.html:6
+#: papers/models.py:101 publishers/templates/publishers/policy_postprint.html:6
 msgid "Postprint"
 msgstr "后印本"
 
-#: papers/models.py:101
+#: papers/models.py:102
 #: publishers/templates/publishers/policy_pdfversion.html:6
 msgid "Published version"
 msgstr "发行版本"
 
-#: papers/models.py:105
+#: papers/models.py:106
 msgid "Preparing profile"
 msgstr "发行详情"
 
-#: papers/models.py:106
+#: papers/models.py:107
 msgid "Fetching publications from ORCID"
 msgstr "正在从ORCID检索出版物"
 
-#: papers/models.py:107
+#: papers/models.py:108
 msgid "Fetching publications from CrossRef"
 msgstr "正在从CrossRef检索出版物"
 
-#: papers/models.py:108
+#: papers/models.py:109
 msgid "Fetching publications from BASE"
 msgstr "正在从BASE检索出版物"
 
-#: papers/models.py:109
+#: papers/models.py:110
 msgid "Fetching publications from CORE"
 msgstr "正在从CORE检索出版物"
 
-#: papers/models.py:110
+#: papers/models.py:111
 msgid "Fetching publications from OAI-PMH"
 msgstr "正在从OAI-PMH检索出版物"
 
-#: papers/models.py:111
+#: papers/models.py:112
 msgid "Clustering publications"
 msgstr "正在聚集出版物"
 
-#: papers/models.py:112
+#: papers/models.py:113
 msgid "Updating statistics"
 msgstr "正在更新统计"
 
-#: papers/models.py:1244 papers/views.py:144 papers/views.py:148
+#: papers/models.py:1253 papers/views.py:144 papers/views.py:148
 msgid "Papers"
 msgstr "论文"
 
@@ -942,7 +1442,7 @@ msgid "Format"
 msgstr "格式"
 
 #: papers/templates/papers/export_citation_modal.html:31
-#: papers/templates/papers/paper.html:144
+#: papers/templates/papers/paper.html:146
 #: papers/templates/papers/paper_list.html:55
 msgid "Download"
 msgstr "下载"
@@ -989,70 +1489,73 @@ msgstr ""
 msgid "A paper was ignored, because is has no title."
 msgstr ""
 
-#: papers/templates/papers/paper.html:39
+#: papers/templates/papers/paper.html:40
 #, fuzzy, python-format
 msgctxt "as in: _Journal article published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "%(doctype)s published in %(year)s by"
 msgstr "出版于"
 
-#: papers/templates/papers/paper.html:45
+#: papers/templates/papers/paper.html:46
 #, fuzzy, python-format
 msgctxt "as in: _Published in 2017 by_ Tom Smith, Nicole Allen"
 msgid "Published in %(year)s by"
 msgstr "出版于"
 
-#: papers/templates/papers/paper.html:55
+#: papers/templates/papers/paper.html:56
 #, fuzzy, python-format
 msgid "and <a href=\"#\" id=\"showAllAuthors\">%(nb_remaining_authors)s other authors.</a>"
-msgstr "\n            以及<a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s位其他作者</a>\n            "
+msgstr ""
+"\n"
+"            以及<a href=\"#\" id=\"show_all_authors\">%(nb_remaining_authors)s位其他作者</a>\n"
+"            "
 
-#: papers/templates/papers/paper.html:61
+#: papers/templates/papers/paper.html:62
 #, fuzzy
 msgid "Show less"
 msgstr "显示"
 
-#: papers/templates/papers/paper.html:71
+#: papers/templates/papers/paper.html:73
 msgid "Deposit accomplished!"
 msgstr ""
 
-#: papers/templates/papers/paper.html:72
+#: papers/templates/papers/paper.html:74
 #, python-format
 msgid "<p>This paper was successfully deposited and is now freely available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address.</a></p>"
 msgstr ""
 
-#: papers/templates/papers/paper.html:79 papers/templates/papers/paper.html:103
+#: papers/templates/papers/paper.html:81 papers/templates/papers/paper.html:105
 msgid "Deposit almost accomplished!"
 msgstr ""
 
-#: papers/templates/papers/paper.html:81
+#: papers/templates/papers/paper.html:83
 #, python-format
 msgid "<p>This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(splash_url)s\">this address</a> after validation by the repository administrators.</p>"
 msgstr ""
 
-#: papers/templates/papers/paper.html:88
+#: papers/templates/papers/paper.html:90
 msgid "Letter of Declaration needed!"
 msgstr ""
 
-#: papers/templates/papers/paper.html:91
+#: papers/templates/papers/paper.html:93
 #, python-format
 msgid "<p>The repository %(deposit.repository.name)s requires a letter of declaration to publish this publication. Please <a class=\"alert-link\" href=\"%(letter_url)s\">download</a> the letter, sign it and send it to the repository administration.</p>"
 msgstr ""
 
-#: papers/templates/papers/paper.html:104
+#: papers/templates/papers/paper.html:106
 #, fuzzy, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> after validation by the repository administrators."
 msgstr "<strong>就快完成了！</strong>这篇论文已存放于<a href=\"%(repo_url)s\">%(repo_name)s</a>。在存储库的管理员验证后，全文将在<a href=\"%(deposit_url)s\">此地址</a>提供。"
 
-#: papers/templates/papers/paper.html:117
+#: papers/templates/papers/paper.html:119
 #, fuzzy, python-format
 msgid "This paper has been deposited in <a class=\"alert-link\" href=\"%(repo_url)s\">%(repo_name)s</a>. The full text will be available at <a class=\"alert-link\" href=\"%(deposit_url)s\">this address</a> from <strong>%(pub_date|localize)s</strong> on due to an embargo."
 msgstr "<strong>就快完成了！</strong>这篇论文已存放于<a href=\"%(repo_url)s\">%(repo_name)s</a>。在存储库的管理员验证后，全文将在<a href=\"%(deposit_url)s\">此地址</a>提供。"
 
-#: papers/templates/papers/paper.html:142
+#: papers/templates/papers/paper.html:144
 msgid "Full text:"
 msgstr "全文："
 
-#: papers/templates/papers/paper.html:146 statistics/models.py:66
+#: papers/templates/papers/paper.html:148 statistics/models.py:66
 msgid "Unavailable"
 msgstr "不可用"
 
@@ -1367,7 +1870,10 @@ msgstr ""
 #: papers/views.py:278
 #, fuzzy
 msgid "Invalid ORCID profile. Please make sure it includes a public name."
-msgstr "\n                            无效的ORCID详情。请确保它包含公开名称。\n                            "
+msgstr ""
+"\n"
+"                            无效的ORCID详情。请确保它包含公开名称。\n"
+"                            "
 
 #: papers/views.py:281
 msgid "Invalid ORCID profile."
@@ -1674,441 +2180,6 @@ msgstr "无效的URL（服务器超时）。"
 msgid "Invalid URL."
 msgstr "无效的URL。"
 
-#: vinaigrette-deleteme.py:2
-#, fuzzy
-msgid "Computer science, knowledge & systems"
-msgstr "计算机科学"
-
-#: vinaigrette-deleteme.py:3
-msgid "Bibliographies"
-msgstr ""
-
-#: vinaigrette-deleteme.py:4
-#, fuzzy
-msgid "Library & information sciences"
-msgstr "图书馆与信息科学"
-
-#: vinaigrette-deleteme.py:5
-msgid "Encyclopedias & books of facts"
-msgstr ""
-
-#: vinaigrette-deleteme.py:6
-msgid "Magazines, journals & serials"
-msgstr ""
-
-#: vinaigrette-deleteme.py:7
-msgid "Associations, organizations & museums"
-msgstr ""
-
-#: vinaigrette-deleteme.py:8
-msgid "News media, journalism & publishing"
-msgstr ""
-
-#: vinaigrette-deleteme.py:9
-#, fuzzy
-msgid "Quotations"
-msgstr "出版物"
-
-#: vinaigrette-deleteme.py:10
-msgid "Manuscripts & rare books"
-msgstr ""
-
-#: vinaigrette-deleteme.py:12
-#, fuzzy
-msgid "Metaphysics"
-msgstr "物理学"
-
-#: vinaigrette-deleteme.py:13
-#, fuzzy
-msgid "Epistemology"
-msgstr "社会学"
-
-#: vinaigrette-deleteme.py:14
-msgid "Parapsychology & occultism"
-msgstr ""
-
-#: vinaigrette-deleteme.py:15
-#, fuzzy
-msgid "Philosophical schools of thought"
-msgstr "哲学"
-
-#: vinaigrette-deleteme.py:17
-#, fuzzy
-msgid "Philosophical logic"
-msgstr "哲学"
-
-#: vinaigrette-deleteme.py:18
-msgid "Ethics"
-msgstr ""
-
-#: vinaigrette-deleteme.py:19
-msgid "Ancient, medieval & eastern philosophy"
-msgstr ""
-
-#: vinaigrette-deleteme.py:20
-msgid "Modern western philosophy"
-msgstr ""
-
-#: vinaigrette-deleteme.py:21
-#, fuzzy
-msgid "Religion"
-msgstr "宗教"
-
-#: vinaigrette-deleteme.py:22
-msgid "Philosophy & theory of religion"
-msgstr ""
-
-#: vinaigrette-deleteme.py:23
-msgid "The Bible"
-msgstr ""
-
-#: vinaigrette-deleteme.py:24
-#, fuzzy
-msgid "Christianity"
-msgstr "Dissemin管理"
-
-#: vinaigrette-deleteme.py:25
-msgid "Christian practice & observance"
-msgstr ""
-
-#: vinaigrette-deleteme.py:26
-msgid "Christian pastoral practice & religious orders"
-msgstr ""
-
-#: vinaigrette-deleteme.py:27
-msgid "Christian organization, social work & worship"
-msgstr ""
-
-#: vinaigrette-deleteme.py:28
-#, fuzzy
-msgid "History of Christianity"
-msgstr "历史"
-
-#: vinaigrette-deleteme.py:29
-#, fuzzy
-msgid "Christian denominations"
-msgstr "Dissemin管理"
-
-#: vinaigrette-deleteme.py:30
-#, fuzzy
-msgid "Other religions"
-msgstr "宗教"
-
-#: vinaigrette-deleteme.py:31
-#, fuzzy
-msgid "Social sciences, sociology & anthropology"
-msgstr "社会人类学与民族学"
-
-#: vinaigrette-deleteme.py:34
-msgid "Economics"
-msgstr ""
-
-#: vinaigrette-deleteme.py:36
-msgid "Public administration & military science"
-msgstr ""
-
-#: vinaigrette-deleteme.py:37
-msgid "Social problems & social services"
-msgstr ""
-
-#: vinaigrette-deleteme.py:39
-msgid "Commerce, communications & transportation"
-msgstr ""
-
-#: vinaigrette-deleteme.py:40
-msgid "Customs, etiquette & folklore"
-msgstr ""
-
-#: vinaigrette-deleteme.py:41 website/templates/navbar.html:15
-msgid "Language"
-msgstr "语言"
-
-#: vinaigrette-deleteme.py:43
-msgid "English & Old English languages"
-msgstr ""
-
-#: vinaigrette-deleteme.py:44
-msgid "German & related languages"
-msgstr ""
-
-#: vinaigrette-deleteme.py:45
-msgid "French & related languages"
-msgstr ""
-
-#: vinaigrette-deleteme.py:46
-msgid "Italian, Romanian & related languages"
-msgstr ""
-
-#: vinaigrette-deleteme.py:47
-msgid "Spanish, Portuguese, Galician"
-msgstr ""
-
-#: vinaigrette-deleteme.py:48
-msgid "Latin & Italic languages"
-msgstr ""
-
-#: vinaigrette-deleteme.py:49
-msgid "Classical & modern Greek languages"
-msgstr ""
-
-#: vinaigrette-deleteme.py:50
-#, fuzzy
-msgid "Other languages"
-msgstr "更改语言"
-
-#: vinaigrette-deleteme.py:51
-#, fuzzy
-msgid "Science"
-msgstr "生命科学"
-
-#: vinaigrette-deleteme.py:53
-msgid "Astronomy"
-msgstr ""
-
-#: vinaigrette-deleteme.py:56
-msgid "Earth sciences & geology"
-msgstr ""
-
-#: vinaigrette-deleteme.py:57
-msgid "Fossils & prehistoric life"
-msgstr ""
-
-#: vinaigrette-deleteme.py:58
-#, fuzzy
-msgid "Biology"
-msgstr "社会学"
-
-#: vinaigrette-deleteme.py:59
-msgid "Plants (Botany)"
-msgstr ""
-
-#: vinaigrette-deleteme.py:60
-msgid "Animals (Zoology)"
-msgstr ""
-
-#: vinaigrette-deleteme.py:61
-#, fuzzy
-msgid "Technology"
-msgstr "心理学"
-
-#: vinaigrette-deleteme.py:62
-#, fuzzy
-msgid "Medicine & health"
-msgstr "医学与健康科学"
-
-#: vinaigrette-deleteme.py:64
-#, fuzzy
-msgid "Agriculture"
-msgstr "建筑学"
-
-#: vinaigrette-deleteme.py:65
-msgid "Home & family management"
-msgstr ""
-
-#: vinaigrette-deleteme.py:66
-#, fuzzy
-msgid "Management & public relations"
-msgstr "刷新出版物"
-
-#: vinaigrette-deleteme.py:67
-#, fuzzy
-msgid "Chemical engineering"
-msgstr "工程"
-
-#: vinaigrette-deleteme.py:68
-msgid "Manufacturing"
-msgstr ""
-
-#: vinaigrette-deleteme.py:69
-msgid "Manufacture for specific uses"
-msgstr ""
-
-#: vinaigrette-deleteme.py:70
-msgid "Construction of buildings"
-msgstr ""
-
-#: vinaigrette-deleteme.py:71
-msgid "Arts"
-msgstr ""
-
-#: vinaigrette-deleteme.py:72
-msgid "Area planning & landscape architecture"
-msgstr ""
-
-#: vinaigrette-deleteme.py:74
-msgid "Sculpture, ceramics & metalwork"
-msgstr ""
-
-#: vinaigrette-deleteme.py:75
-msgid "Graphic arts & decorative arts"
-msgstr ""
-
-#: vinaigrette-deleteme.py:76
-msgid "Painting"
-msgstr ""
-
-#: vinaigrette-deleteme.py:77
-msgid "Printmaking & prints"
-msgstr ""
-
-#: vinaigrette-deleteme.py:78
-msgid "Photography, computer art, film, video"
-msgstr ""
-
-#: vinaigrette-deleteme.py:79
-msgid "Music"
-msgstr "音乐"
-
-#: vinaigrette-deleteme.py:80
-msgid "Sports, games & entertainment"
-msgstr ""
-
-#: vinaigrette-deleteme.py:81
-msgid "Literature, rhetoric & criticism"
-msgstr ""
-
-#: vinaigrette-deleteme.py:82
-msgid "American literature in English"
-msgstr ""
-
-#: vinaigrette-deleteme.py:83
-msgid "English & Old English literatures"
-msgstr ""
-
-#: vinaigrette-deleteme.py:84
-#, fuzzy
-msgid "German & related literatures"
-msgstr "文献"
-
-#: vinaigrette-deleteme.py:85
-#, fuzzy
-msgid "French & related literatures"
-msgstr "文献"
-
-#: vinaigrette-deleteme.py:86
-msgid "Italian, Romanian & related literatures"
-msgstr ""
-
-#: vinaigrette-deleteme.py:87
-msgid "Spanish, Portuguese, Galician literatures"
-msgstr ""
-
-#: vinaigrette-deleteme.py:88
-#, fuzzy
-msgid "Latin & Italic literatures"
-msgstr "文献"
-
-#: vinaigrette-deleteme.py:89
-msgid "Classical & modern Greek literatures"
-msgstr ""
-
-#: vinaigrette-deleteme.py:90
-#, fuzzy
-msgid "Other literatures"
-msgstr "文献"
-
-#: vinaigrette-deleteme.py:92
-#, fuzzy
-msgid "Geography & travel"
-msgstr "地理"
-
-#: vinaigrette-deleteme.py:93
-#, fuzzy
-msgid "Biography & genealogy"
-msgstr "地理"
-
-#: vinaigrette-deleteme.py:94
-msgid "History of ancient world (to ca. 499)"
-msgstr ""
-
-#: vinaigrette-deleteme.py:95
-#, fuzzy
-msgid "History of Europe"
-msgstr "历史"
-
-#: vinaigrette-deleteme.py:96
-#, fuzzy
-msgid "History of Asia"
-msgstr "历史"
-
-#: vinaigrette-deleteme.py:97
-#, fuzzy
-msgid "History of Africa"
-msgstr "历史"
-
-#: vinaigrette-deleteme.py:98
-#, fuzzy
-msgid "History of North America"
-msgstr "历史"
-
-#: vinaigrette-deleteme.py:99
-#, fuzzy
-msgid "History of South America"
-msgstr "历史"
-
-#: vinaigrette-deleteme.py:100
-#, fuzzy
-msgid "History of other areas"
-msgstr "历史"
-
-#: vinaigrette-deleteme.py:101
-#, fuzzy
-msgid "Creative Commons 1.0 Universal (CC0 1.0) Public Domain Dedication"
-msgstr "知识共享CC0 1.0通用"
-
-#: vinaigrette-deleteme.py:102
-#, fuzzy
-msgid "Creative Commons Attribution 4.0 International (CC BY 4.0)"
-msgstr "知识共享署名-相同方式共享4.0国际（CC BY 4.0）"
-
-#: vinaigrette-deleteme.py:103
-#, fuzzy
-msgid "Creative Commons Attribution-ShareAlike 4.0, International (CC BY-SA 4.0)"
-msgstr "知识共享署名-相同方式共享4.0国际（CC BY 4.0）"
-
-#: vinaigrette-deleteme.py:104
-#, fuzzy
-msgid "Creative Commons Attribution-NonCommerical 4.0 International (CC BY-NC 4.0)"
-msgstr "知识共享署名-相同方式共享4.0国际（CC BY 4.0）"
-
-#: vinaigrette-deleteme.py:105
-#, fuzzy
-msgid "Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)"
-msgstr "知识共享署名-相同方式共享4.0国际（CC BY 4.0）"
-
-#: vinaigrette-deleteme.py:106
-msgid "Free for private use; right holder retains other rights, including distribution"
-msgstr ""
-
-#: vinaigrette-deleteme.py:107
-msgid "Other open license"
-msgstr "其他开放许可协议"
-
-#: vinaigrette-deleteme.py:109
-msgid "Zenodo"
-msgstr ""
-
-#: vinaigrette-deleteme.py:110
-msgid "Zenodo is a general-purpose open repository hosted by CERN. If the document does not have a DOI yet, Zenodo will create one."
-msgstr ""
-
-#: vinaigrette-deleteme.py:111
-msgid "HAL"
-msgstr ""
-
-#: vinaigrette-deleteme.py:112
-msgid "HAL is a  multidisciplinary open archive, sustained by the French Research Ministry."
-msgstr ""
-
-#: vinaigrette-deleteme.py:113
-#, fuzzy
-msgid "OSF preprints"
-msgstr "预印本"
-
-#: vinaigrette-deleteme.py:114
-msgid "Run by the Center for Open Science, OSF lets you share your preprints openly. You can also share supplemental data, materials or code associated with your article."
-msgstr ""
-
 #: website/forms.py:16 website/forms.py:19
 msgid "Try any author name"
 msgstr "尝试另一作者名"
@@ -2121,7 +2192,10 @@ msgstr "访问PDF被拒绝。"
 #: website/templates/403.html:13
 #, fuzzy, python-format
 msgid "The access to the requested page has been denied. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "\n            找不到您请求的页面。<a href=\"/\">返回首页。</a>\n           "
+msgstr ""
+"\n"
+"            找不到您请求的页面。<a href=\"/\">返回首页。</a>\n"
+"           "
 
 #: website/templates/404.html:6 website/templates/404.html:10
 msgid "Page not found"
@@ -2130,7 +2204,10 @@ msgstr "找不到页面"
 #: website/templates/404.html:13
 #, fuzzy, python-format
 msgid "The page you requested could not be found. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "\n            找不到您请求的页面。<a href=\"/\">返回首页。</a>\n           "
+msgstr ""
+"\n"
+"            找不到您请求的页面。<a href=\"/\">返回首页。</a>\n"
+"           "
 
 #: website/templates/500.html:6 website/templates/500.html:10
 #, fuzzy
@@ -2140,7 +2217,10 @@ msgstr "内部错误"
 #: website/templates/500.html:13
 #, fuzzy, python-format
 msgid "Your request triggered an internal server error. <a href=\"%(index)s\">Go back to the home page.</a>"
-msgstr "\n            您的请求触发了内部错误。<a href=\"/\">返回首页。</a>\n           "
+msgstr ""
+"\n"
+"            您的请求触发了内部错误。<a href=\"/\">返回首页。</a>\n"
+"           "
 
 #: website/templates/admin/base_site.html:5
 #: website/templates/admin/base_site.html:8
@@ -2852,5 +2932,7 @@ msgstr "验证错误"
 #: website/templates/socialaccount/authentication_error.html:15
 #, fuzzy, python-format
 msgid "Authentication has failed. <a href=\"%(account-login)s\">Go back to the login page.</a>"
-msgstr "\n            验证失败。<a href=\"/\">返回登录页面。</a>\n           "
-
+msgstr ""
+"\n"
+"            验证失败。<a href=\"/\">返回登录页面。</a>\n"
+"           "
