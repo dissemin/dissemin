@@ -1,10 +1,11 @@
+========================
 Configuring Repositories
 ========================
 
 If a repositories and a suitable protocol is programmed, adding is easy.
 
 Repositories
-------------
+============
 
 On the admin site in the section ``Deposit`` you find your repositories. You can add and modify them.
 
@@ -34,7 +35,7 @@ You have the following options:
 
 
 DDC
----
+===
 
 On this site you can define DDC classes.
 You can choose any of the classes from ``000`` to ``999``.
@@ -47,8 +48,22 @@ This groups the DDC when displayed to the user.
     You can localize your DDC name, see :doc:`localization` for further information.
 
 
+Green Open Access Service
+=========================
+Under ``goa_service`` you can add some information about a possible green open access service. Leave this empty if you do not want a message shown to the user.
+
+The GOAS object requires
+
+* ``heading`` - Heading, i.e. the name of the service.
+* ``text`` - A short text displayed to the user.
+* ``learn_more_url`` - URL to the webpage with more information about this service
+
+.. note::
+    You can localize your DDC name, see :doc:`localization` for further information.
+
+
 Licenses
---------
+========
 
 On the admin site in the section ``Deposit`` you find your licenses. You can add and modify them.
 
