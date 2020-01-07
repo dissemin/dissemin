@@ -33,36 +33,38 @@
             <div class="col-12 col-md-8 order-md-first">
                 <h2 class="h-border">{{ paper.title }}</h2>
 
-                <!-- Doctype and year -->
-                {% if paper.doctype != "other" %}
-                    {% with doctype=paper.get_doctype_display year=paper.year %}
-                        {% blocktrans context "as in: _Journal article published in 2017 by_ Tom Smith, Nicole Allen" trimmed %}
-                            {{ doctype }} published in {{ year }} by
-                        {% endblocktrans %}
-                    {% endwith %}
-                {% else %}
-                    {% with year=paper.year %}
-                      {% blocktrans context "as in: _Published in 2017 by_ Tom Smith, Nicole Allen" trimmed %}
-                            Published in {{ year }} by
-                        {% endblocktrans %}
-                    {% endwith %}
-                {% endif %}
+                <div class="container-fluid p-0 mb-2">
+                    <!-- Doctype and year -->
+                    {% if paper.doctype != "other" %}
+                        {% with doctype=paper.get_doctype_display year=paper.year %}
+                            {% blocktrans context "as in: _Journal article published in 2017 by_ Tom Smith, Nicole Allen" trimmed %}
+                                {{ doctype }} published in {{ year }} by
+                            {% endblocktrans %}
+                        {% endwith %}
+                    {% else %}
+                        {% with year=paper.year %}
+                          {% blocktrans context "as in: _Published in 2017 by_ Tom Smith, Nicole Allen" trimmed %}
+                                Published in {{ year }} by
+                            {% endblocktrans %}
+                        {% endwith %}
+                    {% endif %}
 
-                <!-- Authos list. If many authors, hide some of them. -->
-                {% if paper.has_many_authors %}
-                <span id="authorListInteresting">
-                    {% include "papers/author_list.html" with author_list=paper.interesting_authors %}
-                    {% blocktrans trimmed %}
-                        and <a href="#" id="showAllAuthors">{{ nb_remaining_authors }} other authors.</a>
-                    {% endblocktrans %}
-                </span>
-                <span class="d-none" aria-hidden="true" id="authorListFull">
-                    {% include "papers/author_list.html" with author_list=paper.authors %}
-                    <p><a href="#" id="showInterestingAuthors">{% trans "Show less" %}</a></p>
-                </span>
-                {% else %}
-                    {% include "papers/author_list.html" with author_list=paper.authors %}
-                {% endif %}
+                    <!-- Authos list. If many authors, hide some of them. -->
+                    {% if paper.has_many_authors %}
+                    <span id="authorListInteresting">
+                        {% include "papers/author_list.html" with author_list=paper.interesting_authors %}
+                        {% blocktrans trimmed %}
+                            and <a href="#" id="showAllAuthors">{{ nb_remaining_authors }} other authors.</a>
+                        {% endblocktrans %}
+                    </span>
+                    <span class="d-none" aria-hidden="true" id="authorListFull">
+                        {% include "papers/author_list.html" with author_list=paper.authors %}
+                        <p><a href="#" id="showInterestingAuthors">{% trans "Show less" %}</a></p>
+                    </span>
+                    {% else %}
+                        {% include "papers/author_list.html" with author_list=paper.authors %}
+                    {% endif %}
+                </div>
 
                 <!-- Possible alerts about deposits -->
                 {% if deposit.status == 'published' %}
